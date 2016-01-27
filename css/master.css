@@ -141,13 +141,14 @@ input, textarea{
   font-size:2rem;
   margin:0 auto 1.5em auto;
   padding:.5em;
+  width: 65%;
 }
 input:active, textarea:active {
   border: 3px 0 3px 0 #eee solid;
 }
 textarea {
   resize: none;
-  width:100%;
+  
 height: auto;
 }
 /* hidden nav bar */
