@@ -146,9 +146,8 @@ input:active, textarea:active {
   border: 3px 0 3px 0 #eee solid;
 }
 textarea {
-  resize: none;
-height: 165px;
-overflow:scroll;
+  resize: auto;
+height: 350px;
 }
 /* hidden nav bar */
 .toggle {
