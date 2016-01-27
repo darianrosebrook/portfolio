@@ -131,7 +131,7 @@ ul li {
     text-align:center;
 }
 
-input {
+input, textarea{
   display:block;
   border: 0;
   border-left:3px #eee solid;
@@ -142,7 +142,7 @@ input {
   margin:0 auto 1.5em auto;
   padding:.5em;
 }
-input:focus {
+input:active, textarea:active {
   border: 3px 0 3px 0 #eee solid;
 }
 textarea {
