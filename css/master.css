@@ -146,7 +146,7 @@ input:active, textarea:active {
   border: 3px 0 3px 0 #eee solid;
 }
 textarea {
-  resize: auto;
+  resize: none;
 height: 350px;
 }
 /* hidden nav bar */
