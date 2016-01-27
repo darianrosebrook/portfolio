@@ -134,15 +134,18 @@ ul li {
 input {
   display:block;
   border: 0;
-  border-left:2px #eee solid;
-  border-right:2px #333 solid;
+  height: 1.5em;
+  border-left:3px #eee solid;
+  border-right:3px #eee solid;
   background-color:inherit;
   color:#eee;
-  font-size:1.2rem;
+  font-size:2rem;
   margin:0 auto 1.5em auto;
   padding:.5rem;
 }
-
+input:focus {
+  border: 3px 0 3px 0 #eee solid;
+}
 /* hidden nav bar */
 .toggle {
   position: fixed;
