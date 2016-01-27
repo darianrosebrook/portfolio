@@ -133,9 +133,10 @@ ul li {
 
 input {
   display:block;
-  border: 0 2px #eee solid;
+  border: 0 2px 0 2px #eee solid;
   background-color:inherit;
   color:#eee;
+  font-size:1.2rem;
   margin:0 auto;
   padding:.5rem;
 }
