@@ -134,14 +134,13 @@ ul li {
 input {
   display:block;
   border: 0;
-  height: 1.5em;
   border-left:3px #eee solid;
   border-right:3px #eee solid;
   background-color:inherit;
   color:#eee;
   font-size:2rem;
   margin:0 auto 1.5em auto;
-  padding:.5rem;
+  padding:.5em;
 }
 input:focus {
   border: 3px 0 3px 0 #eee solid;
