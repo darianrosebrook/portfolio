@@ -131,7 +131,7 @@ ul li {
     text-align:center;
 }
 
-input, textarea{
+input.enter, textarea.enter{
   display:block;
   border: 0;
   border-left:3px #eee solid;
