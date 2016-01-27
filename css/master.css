@@ -149,7 +149,7 @@ input:active, textarea:active {
 textarea {
   resize: none;
   
-height: auto;
+height: 300px;
 }
 /* hidden nav bar */
 .toggle {
