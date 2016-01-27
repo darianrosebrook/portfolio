@@ -78,10 +78,10 @@ h1 {
   background-color: rgba(33, 33, 033, 0.87);
 }
 h2{
-    font-size:230%
+    font-size:230%;
 }
 h3 {
-    font-size:160%
+    font-size:160%;
 }
 h4 {
     font-size:105%;
@@ -137,7 +137,7 @@ input {
   background-color:inherit;
   color:#eee;
   font-size:1.2rem;
-  margin:0 auto;
+  margin:0 auto 1.5em auto;
   padding:.5rem;
 }
 
