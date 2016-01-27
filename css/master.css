@@ -145,6 +145,11 @@ input {
 input:focus {
   border: 3px 0 3px 0 #eee solid;
 }
+textarea {
+  resize: none;
+height: 165px;
+overflow:scroll;
+}
 /* hidden nav bar */
 .toggle {
   position: fixed;
