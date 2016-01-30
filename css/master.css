@@ -113,9 +113,8 @@ p {
   height: 100%;
   background-color: hsla(92, 11%, 10%, 1);
 }
-section{
-  width: 70%;
-  margin: 10px auto;
+.row, .container{
+  margin: 0 2em auto;
 }
 /* articles */
 
