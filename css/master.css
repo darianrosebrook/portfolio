@@ -114,7 +114,8 @@ p {
   background-color: hsla(92, 11%, 10%, 1);
 }
 .row, .container{
-  margin: 0 2em auto;
+  width:85%;
+  margin: 0 auto 2em auto;
 }
 /* articles */
 
