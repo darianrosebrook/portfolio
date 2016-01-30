@@ -96,7 +96,8 @@ q {
 }
 p {
     margin-bottom:.5em;
-    line-height:1.35;
+    line-height:1.45;
+    letter-spacing:.033em;
 }
 #greeting {
      color:  #c0f6f4;
