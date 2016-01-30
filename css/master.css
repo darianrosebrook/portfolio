@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Homemade+Apple|Reenie+Beanie');
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400italic');
+@import url(https://fonts.googleapis.com/css?family=Merriweather+Sans:300);
 /* color base -- #e1f6f4 #7db9b3 #166678 #2e3837  */
 
 *, *::before, *::after {
@@ -13,7 +12,7 @@ html {
 
 }
 body {
-  font-family: "Open Sans", arial, sans-serif;
+  font-family: "Merriweather Sans", verdana, sans-serif;
   line-height: 1.3;
   font-size: 2rem;
   color: #e1f6f4;
