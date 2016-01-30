@@ -113,6 +113,10 @@ p {
   height: 100%;
   background-color: hsla(92, 11%, 10%, 1);
 }
+section {
+  width:85%;
+  margin-bottom:2em;
+}
 .row, .container{
   width:85%;
   margin: 0 auto 2em auto;
