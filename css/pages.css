@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400italic');
+
+html {
+  background-image: url('https://unsplash.com/photos/8I8GZG5bNx4/download');
+  height: 100vh;
+  background-size: cover;
+  font-family: "open sans", helvetica, "helvetica nue", verdana, sans-serif;
+}
+
+div {
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+
+}
+img {
+  height: 75%;
+  width: 75%;
+}
+
+h5{
+  margin-bottom:4em;
+}
+.bounce {
+
+ animation: bounce 3s infinite;
+ -webkit-animation: bounce 3s infinite;
+ -moz-animation: bounce 3s infinite;
+ -o-animation: bounce 3s infinite;
+}
+
+@-webkit-keyframes bounce {
+ 0%, 20%, 50%, 80%, 100% {-webkit-transform: translateY(0);}
+ 40% {-webkit-transform: translateY(-30px);}
+ 60% {-webkit-transform: translateY(-15px);}
+}
+
+@-moz-keyframes bounce {
+ 0%, 20%, 50%, 80%, 100% {-moz-transform: translateY(0);}
+ 40% {-moz-transform: translateY(-30px);}
+ 60% {-moz-transform: translateY(-15px);}
+}
+
+@-o-keyframes bounce {
+ 0%, 20%, 50%, 80%, 100% {-o-transform: translateY(0);}
+ 40% {-o-transform: translateY(-30px);}
+ 60% {-o-transform: translateY(-15px);}
+}
+@keyframes bounce {
+ 0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+ 40% {transform: translateY(-30px);}
+ 60% {transform: translateY(-15px);}
+}
