@@ -1,10 +1,20 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400italic');
 
 html {
-  background-image: url('https://unsplash.com/photos/8I8GZG5bNx4/download');
+  background-image: url('https://unsplash.com/photos/8I8GZG5bNx4/download' );
+  background-position: bottom;
+  background-repeat: no-repeat;
   height: 100vh;
+  width: 100vw;
   background-size: cover;
   font-family: "open sans", helvetica, "helvetica nue", verdana, sans-serif;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+a {
+  text-decoration: none;
+  color:#fff;
+  size: 3em;
 }
 body.bush {
   background:none;
@@ -16,12 +26,23 @@ section.bush {
 
 }
 img {
-  height: 75%;
-  width: 75%;
+  height: 50%;
+  width: 50%;
 }
-
+h1 {
+  margin: 0;
+  margin-bottom:.8em;
+  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+  color:#fff;
+  font-size: 3em;
+  margin-bottom:.2em;
+}
 h5{
-  margin-bottom:4em;
+  margin: 0;
+  margin-bottom:.8em;
+  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+  color:#fff;
+  font-size: 2em;
 }
 .bounce {
 
