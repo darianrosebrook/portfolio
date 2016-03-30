@@ -6,8 +6,10 @@ html {
   background-size: cover;
   font-family: "open sans", helvetica, "helvetica nue", verdana, sans-serif;
 }
-
-section {
+body.bush {
+  background:none;
+}
+section.bush {
   width: 50%;
   margin: 0 auto;
   text-align: center;
