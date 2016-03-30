@@ -8,14 +8,13 @@ html {
   width: 100vw;
   background-size: cover;
   font-family: "open sans", helvetica, "helvetica nue", verdana, sans-serif;
-  font-size: 1.5rem;
+  font-size: 16px;
   font-weight: bold;
 }
 a {
   text-decoration: none;
   color:#fff;
-  size: 3rem;
-}
+  }
 body.bush {
   background:none;
 }
@@ -34,7 +33,7 @@ h1 {
   margin-bottom:.8rem;
   text-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
   color:#fff;
-  font-size: 3rem;
+
   margin-bottom:.2rem;
 }
 h5{
@@ -42,7 +41,7 @@ h5{
   margin-bottom:.8rem;
   text-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
   color:#fff;
-  font-size: 2rem;
+
 }
 .bounce {
 
@@ -75,12 +74,28 @@ h5{
  60% {transform: translateY(-15px);}
 }
 
-@media screen
-  and (device-width: 360px)
-  and (device-height: 640px)
-  and (-webkit-device-pixel-ratio: 3)
-  and (orientation: portrait) {
- html {
-   font-size: .5em;
+@media only screen and (max-width: 600px){
+ body {
+   font-size: 90%
+ }
+ h1 {
+   font-size:125%;
+   margin-bottom:1.8rem;
+ }
+ h5 {
+   font-size: 110%;
+   margin-bottom:2.8rem;
  }
 }
+@media only screen and (min-width: 600px) {
+  body { font-size:200%;}
+  h1 {
+    font-size:125%;
+    margin-bottom:1.8rem;
+  }
+  h5 {
+    font-size: 110%;
+    margin-bottom:2.8rem;
+  }
+
+        }
