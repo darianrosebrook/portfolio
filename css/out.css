@@ -140,4 +140,27 @@ footer a{
     width: 80vw;
     height: auto;
   }
+}@media only screen and (max-width:800px) {
+  html {
+    font-size: .8em;
+  }
+  .container:nth-of-type(1n) {
+    margin-top:1em;
+  }
+  div.activity {
+    display:block;
+    width: 80vw;
+    height: auto;
+  }
+  #out-logo {
+    width: 35vw;
+  }
+  .right {
+    float:none;
+    text-align:center;
+    font-size: .5em;
+  }
+  .right a {
+    padding: 0.5em;
+  }
 }
