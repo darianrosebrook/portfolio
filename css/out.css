@@ -1,0 +1,131 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
+*, *:before, *:after {
+ box-sizing: border-box;
+ margin:0;
+ padding:0;
+}
+html {
+ background-color:#e0e0e0;
+ font-family: "open sans", sans-serif;
+ color:#333;
+}
+/* links */
+a {
+ text-decoration:none;
+ color:#333;
+}
+/*-- navigation --*/
+
+nav {
+ padding: 1em 2em 0 2em;
+ font-size:1.5em;
+ text-transform:uppercase;
+ margin-bottom:.8em;
+}
+nav li {
+ display:inline-block;
+ transition:all ease .3s;
+}
+nav li:nth-child(n+2):hover, nav li:hover a {
+ transform:translate(0, -5px);
+ color:#51525B;
+}
+.right {
+ float:right;
+ margin-top: .7em;
+}
+.right a {
+ padding-left:2rem;
+}
+nav img {
+ width:25%;
+
+}
+
+/* hero image */
+header {
+ background: url('https://41.media.tumblr.com/14b146e73c875519c78b846db2928184/tumblr_o52gks7vtF1sjuzg6o1_1280.jpg') no-repeat center;
+ background-size:100vw;
+ height:40%;
+ font-size:1.4rem;
+ text-shadow: 0 2px 4px rgba(20, 20, 20, .8);
+ text-align: center;
+ padding:2em;
+ color:#e0e2e3;
+}
+
+#out-logo {
+ width:15%;
+ opacity:.95;
+ transition:all ease-in-out .52s;
+}
+header:hover #out-logo {
+ transform:translate(0, -.5em);
+}
+header h2 {
+ transition:all ease-in-out .52s;
+ text-transform:uppercase;
+}
+header:hover  h2 {
+ transform:translate(0, .5em );
+}
+
+/* 1st section */
+section {
+ background:#5a605b;
+}
+section div.container {
+ margin: 0 auto;
+ width:80%;
+}
+
+/* activity icons */
+div.activity {
+/*   background:#efefef; */
+ width:30%;
+ height: 30vh;
+ display:inline-block;
+ text-align:center;
+ padding:1rem;
+ margin:2em .5%;
+ background-color:#fff;
+ border-radius: 7px;
+ transition:all ease .4s;
+}
+.activity h2 {
+ font-size:1.5em;
+ font-weight:normal;
+ text-transform:uppercase;
+ letter-spacing:.25em;
+}
+.activity:hover {
+ box-shadow:0px 0 30px rgba(0, 0, 0, .9);
+}
+.activity p img {
+ height: 7.5vmax;
+ transition: all ease .5s;
+ margin-bottom:1.5em;
+}
+.activity:hover p img{
+ position: relative;
+ transform: translate(.81rem, -2rem);
+}
+
+/* footer */
+footer {
+ background-color:#3B323F;
+ text-align:center;
+ padding:15vh;
+ color:#eee;
+}
+footer a{
+ color:#eee;
+}
+/* clearfix */
+.cf:before, .cf:after {
+ display:table;
+ content:'';
+}
+.cf:after {
+ clear:both;
+}
