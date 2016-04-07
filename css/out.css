@@ -87,6 +87,7 @@ div.activity {
   height: 30vh;
   display:inline-block;
   text-align:center;
+  vertical-align: top;
   padding:1rem;
   margin:2em .5%;
   background-color:#fff;
@@ -102,7 +103,7 @@ div.activity {
 .activity:hover {
   box-shadow:0px 0 30px rgba(0, 0, 0, .9);
 }
-.activity p img {
+.activity img {
   height: 7.5vmax;
   transition: all ease .5s;
   margin-bottom:1.5em;
@@ -111,7 +112,23 @@ div.activity {
   position: relative;
   transform: translate(.81rem, -2rem);
 }
+div.article {
+  height: auto;
+}
 
+div.article p {
+  margin-top: .5em;
+  text-align: left !important;
+
+}
+section.secondary {
+  background-color: #3B323F;
+}
+.section-title {
+  color: #eee;
+  text-align: center;
+  font-size: 3em;
+}
 /* footer */
 footer {
   background-color:#3B323F;
@@ -132,15 +149,6 @@ footer a{
 }
 
 @media only screen and (max-width:800px) {
-  .container:nth-of-type(1n) {
-    margin-top:1em;
-  }
-  div.activity {
-    display:block;
-    width: 80vw;
-    height: auto;
-  }
-}@media only screen and (max-width:800px) {
   html {
     font-size: .8em;
   }
@@ -148,8 +156,13 @@ footer a{
     margin-top:1em;
   }
   div.activity {
+/*     display:flex;
+    flex-direction:column;
+    align-items:center; */
     display:block;
-    width: 80vw;
+    text-align:center;
+    width: 90%;
+    margin: 2em auto;
     height: auto;
   }
   #out-logo {
@@ -163,4 +176,7 @@ footer a{
   .right a {
     padding: 0.5em;
   }
+}
+@media only screen and (min-width:800px) {
+
 }
