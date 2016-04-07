@@ -108,7 +108,7 @@ div.activity {
   transition: all ease .5s;
   margin-bottom:1.5em;
 }
-.activity:hover p img{
+.activity:hover img{
   position: relative;
   transform: translate(.81rem, -2rem);
 }
