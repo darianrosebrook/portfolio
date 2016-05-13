@@ -71,9 +71,7 @@ function smoothSroll(event) {
 for (var i = 0; i < contactBtn.length; i++){
 contactBtn[i].addEventListener('click', function(event) {
   smoothSroll(event);
-  if (event.target.id === 'btn-primary'&& toggler.checked) {
-    toggler.checked = false;
-  }
+
 
 }, false);
 
