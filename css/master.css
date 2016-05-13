@@ -272,17 +272,6 @@ background-color: #b7b7b7;
   margin-top: 1em;
   transition: all ease .3s;
 }
-.btn:hover {
-  background-color: #90d8cd;
-}
-.btn.highlight:hover {
-
-    background-color: #fee197;
-}
-.btn:active {
-  box-shadow: 0 0 12px 25px rgba(0, 0, 0, .3) inset;
-  transition-duration: .05s;
-}
 
 /*-- typography --*/
 h1 {
@@ -428,6 +417,18 @@ header h2 {
   #nav-toggler:checked + .page-wrap .main-content {
     padding-left: 0;
     transform: scale(.7);
+  }
+
+  .btn:hover {
+    background-color: #90d8cd;
+  }
+  .btn.highlight:hover {
+
+      background-color: #fee197;
+  }
+  .btn:active {
+    box-shadow: 0 0 12px 25px rgba(0, 0, 0, .3) inset;
+    transition-duration: .05s;
   }
   .btn:hover {
     transform:translateY(-.1em);
