@@ -47,7 +47,12 @@ function getPageScroll() {
   return yScroll;
 }
 function smoothSroll(event) {
-  targetOffset = document.getElementById(event.target.hash.substr(1)).offsetTop;
+  if(!event) {
+    event = window.event;
+  }
+  console.log(event);
+  var target = event.target;
+  targetOffset = document.getElementById(target.hash.substr(1)).offsetTop;
   currentPosition = getPageScroll(); // uses yScroll's value
   console.log(toggler.checked);
   // accounting for hidden-nav
@@ -57,7 +62,10 @@ function smoothSroll(event) {
 
   }
   body.classList.add('in-transition');
+  body.style.WebitTransform = "translate(0, -" + (targetOffset - currentPosition) + "px)";
+  body.style.MozTransform = "translate(0, -" + (targetOffset - currentPosition) + "px)";
   body.style.transform = "translate(0, -" + (targetOffset - currentPosition) + "px)";
+
 
   window.setTimeout(function () {
     body.classList.remove('in-transition');
