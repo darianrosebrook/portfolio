@@ -52,7 +52,7 @@ function smoothSroll(event) {
   }
   console.log(event);
   var target = event.target;
-  targetOffset = document.getElementById(target.hash.substr(1)).offsetTop;
+  targetOffset = document.getElementById('form').offsetTop;
   currentPosition = getPageScroll(); // uses yScroll's value
   console.log(toggler.checked);
   // accounting for hidden-nav
