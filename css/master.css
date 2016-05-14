@@ -89,8 +89,9 @@ header h1 {
   ie-color:#f0f0f0;
   mix-blend-mode:difference;
   font-weight: 100;
+  font-family: "brandon-grotesque", lato, sans-serif ;
   text-transform: uppercase;
-  letter-spacing: .44em;
+  letter-spacing: .24em;
 }
 .angle {
   width:300%;
