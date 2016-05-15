@@ -180,10 +180,12 @@ header h1 {
 /*-- Articles --*/
 div.featured:nth-of-type(3) {
   background-color:#ebffff;
-  background-image: url('../assets/street.JPG');
+  color: #152121;
+}
+#articlelist {
+  background-image: url('../assets/street.jpg');
   background-size: cover;
   background-attachment: fixed;
-  color: #152121;
 }
 .articles {
   color: #152121;
@@ -201,6 +203,9 @@ div.featured:nth-of-type(3) {
   position: relative;
   box-shadow: 0px 14px 22.04px 6.96px rgba(0, 0, 0, 0.9);
   top: 48%;
+}
+.articles h2 {
+  margin-bottom: .5em;
 }
 
 
