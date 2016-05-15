@@ -34,7 +34,8 @@ var toggler = document.getElementById('nav-toggler'),
     targetOffset, currentPosition,
     body = document.body,
     animateTime = 000;
-    if(navigator.userAgent.indexOf("Chrome") != -1 )
+var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+    if(!!window.chrome && !isOpera )
     { animateTime = 900;
     }
 
@@ -59,7 +60,7 @@ function smoothSroll(event) {
   currentPosition = getPageScroll(); // uses yScroll's value
 
   // accounting for hidden-nav
-  if (toggler.checked && window.innerWidth < 740){
+  if (toggler.checked && window.innerWidth < 750){
     targetOffset = targetOffset ;
     currentPosition = currentPosition;
   } else if(toggler.checked){
