@@ -5,7 +5,7 @@
  /*-- 1a Smooth Scroll --*/
 
 body.in-transition {
-  transition: transform 700ms cubic-bezier(0.65, 0.01, 0.19, 1.01);
+  transition: transform 500ms cubic-bezier(0.65, 0.01, 0.19, 1.01);
 }
 
 
@@ -180,6 +180,9 @@ header h1 {
 /*-- Articles --*/
 div.featured:nth-of-type(3) {
   background-color:#ebffff;
+  background-image: url('../assets/street.JPG');
+  background-size: cover;
+  background-attachment: fixed;
   color: #152121;
 }
 .articles {

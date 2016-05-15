@@ -33,7 +33,11 @@ var toggler = document.getElementById('nav-toggler'),
     contactBtn = document.getElementsByClassName('contactBtn'),
     targetOffset, currentPosition,
     body = document.body,
-    animateTime = 700;
+    animateTime = 000;
+    if(navigator.userAgent.indexOf("Chrome") != -1 )
+    { animateTime = 900;
+    }
+
 // get the y offset
 function getPageScroll() {
   var yScroll;
@@ -50,16 +54,17 @@ function smoothSroll(event) {
   if(!event) {
     event = window.event;
   }
-  console.log(event);
   var target = event.target;
-  targetOffset = document.getElementById('form').offsetTop;
+  targetOffset = document.getElementById(target.dataset.href.substr(1)).offsetTop;
   currentPosition = getPageScroll(); // uses yScroll's value
-  console.log(toggler.checked);
+
   // accounting for hidden-nav
-  if (toggler.checked){
+  if (toggler.checked && window.innerWidth < 740){
+    targetOffset = targetOffset ;
+    currentPosition = currentPosition;
+  } else if(toggler.checked){
     targetOffset = targetOffset  / 1.65;
     currentPosition = currentPosition /1.65;
-
   }
   body.classList.add('in-transition');
   body.style.WebitTransform = "translate(0, -" + (targetOffset - currentPosition) + "px)";
@@ -74,12 +79,10 @@ function smoothSroll(event) {
   }, animateTime);
 
   event.preventDefault();
-    console.log(targetOffset)
 }
 for (var i = 0; i < contactBtn.length; i++){
 contactBtn[i].addEventListener('click', function(event) {
   smoothSroll(event);
-
 
 }, false);
 
