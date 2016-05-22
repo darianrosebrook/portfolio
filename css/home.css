@@ -215,25 +215,7 @@ footer {
   }
 
 @media only screen and (min-width: 1025px)  {
-  #nav-toggler:checked + .page-wrap .main-content {
-    padding-left: 0;
-    transform: scale(.7);
-  }
 
-  .btn:hover {
-    background-color: #90d8cd;
-  }
-  .btn.highlight:hover {
-
-      background-color: #fee197;
-  }
-  .btn:active {
-    background-color: #60a69a;
-    transition-duration: .05s;
-  }
-  .btn:hover, #contact i:hover {
-    transform:translateY(-.1em);
-  }
 
   header h1 {
     font-size: 270%;

@@ -1,65 +1,126 @@
+/* Webdesign Specific */
+
 #hero {
   background: #152121 url('C:/Users/Darian/desDev/Legacy/Live/portfolio/assets/Web-Design.jpg') no-repeat center ;
   background-size: cover;
   height: 65vh;
-}
-
-#process {
-
-}
-
-.case-study-one {
-  background: url('../assets/web-port.jpg') no-repeat center;
-}
-.case-study-two {
-    background: url('../assets/web-out.jpg') no-repeat center;
-    color: #152121;
-}
-.case-study-three {
-  background: url('../assets/web-landing.jpg') no-repeat center;
-}
-.case-study {
-	height: 100vh;
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center center;
-	background-attachment: fixed;
-  padding: 0 10%;
+  color: #fafafa;
+  text-align: center;
   position: relative;
 
 }
-.case-content {
-  width: 40%;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+#hero div {
+  margin: 0 auto;
+  padding: 2em 0;
+
 }
-hr {
-  display: inline-block;
-  width: 40%;
+#hero h2 {
+  font-family: "brandon-grotesque", "proxima-nova", lato, helvetica, verdana, sans-serif;
+  font-weight: 300;
+  font-size: 1.3em;
 }
+#hero h1 {
+  font-weight: 200;
+  letter-spacing: .3em;
+  font-size: 2em;
+}
+
+
+
+#process {
+  padding: 1em;
+  background-color:#fafafa;
+}
+
+.card {
+  background-color: #152121;
+}
+.card:hover {
+  background-color: #90d8cd;
+  color: #152121;
+}
+.card:hover .btn{
+  background-color: #fee197;
+}
+
 
 @media only screen and (min-width: 1025px)  {
-  #nav-toggler:checked + .page-wrap .main-content {
-    padding-left: 0;
-    transform: scale(.7);
+  #hero div {
+    width: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -70%);
+    left: 50%;
   }
-    #nav-toggler:checked + .page-wrap .main-content .case-study {
-      background-attachment: inherit;
-    }
+  #hero h2 {
+    font-family: "brandon-grotesque", "proxima-nova", lato, helvetica, verdana, sans-serif;
+    font-weight: 300;
+    font-size:1.8em;
+  }
+  #hero h1 {
+    font-weight: 200;
+    letter-spacing: .3em;
+    font-size: 3em;
+  }
+  #process {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    height: 55vh;
+  }
+  .card {
+    position: relative;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 20%;
+    min-height: 70vh;
+    vertical-align: top;
+    top: -20vh;
+    font-size: 1.3em;
+    padding:1em;
+    transition: all ease .3s;
+  }
+  .card p {
+    margin-bottom: 2em;
+  }
+  .card .btn {
+    position: absolute;
+    bottom: 2em;
+    transform: translateX(-50%);
+    left: 50%;
+  }
+  .card:hover {
+    top:-23vh;
+  }
 
-  .btn:hover {
-    background-color: #90d8cd;
+    .case-study-one {
+    background: url('../assets/web-port.jpg') no-repeat center;
   }
-  .btn.highlight:hover {
+  .case-study-two {
+      background: url('../assets/web-out.jpg') no-repeat center;
+      color: #152121;
+  }
+  .case-study-three {
+    background: url('../assets/web-landing.jpg') no-repeat center;
+  }
+  .case-study {
+  	height: 100vh;
+  	background-repeat: no-repeat;
+  	background-size: cover;
+  	background-position: center center;
+  	background-attachment: fixed;
+    padding: 0 10%;
+    position: relative;
 
-      background-color: #fee197;
   }
-  .btn:active {
-    background-color: #60a69a;
-    transition-duration: .05s;
+  .case-content {
+    width: 40%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
   }
-  .btn:hover, #contact i:hover {
-    transform:translateY(-.1em);
+  hr {
+    display: inline-block;
+    width: 40%;
   }
 }
