@@ -1,0 +1,365 @@
+/*-- Header --*/
+header {
+  position: relative;
+  text-align: center;
+  background-size:cover;
+  background-color: #90d8cd;
+  height:100vh;
+  padding: 1em;
+  overflow: hidden;
+}
+header h1 {
+  margin-top: 4.5em;
+  color:  #90d8cd;
+  font-size: 1.5em;
+  ie-color:#f0f0f0;
+  mix-blend-mode:difference;
+  font-weight: 100;
+  font-family: "brandon-grotesque", lato, sans-serif ;
+  text-transform: uppercase;
+  letter-spacing: .24em;
+}
+.angle {
+  width:300%;
+  height: 100%;
+  background-color: #152121;
+  transform: rotate(-60deg);
+  transform-origin: center ;
+  position: absolute;
+  left:0;
+  top: 1em;
+}
+
+/*-- targeted --*/
+header h2 {
+  color:  #90d8cd;
+  mix-blend-mode:difference;
+  font-size: 4em;
+  font-weight: 900;
+}
+#deer {
+  display: none;
+  mix-blend-mode:difference;
+}
+/*-- Icons --*/
+.icons {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  margin: 1em auto;
+  text-align: center;
+}
+.icons img {
+  height: 10vh;
+  margin-bottom: 1em;
+  transition: all ease .3s;
+  cursor: pointer;
+}
+
+.logo {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+#descriptions {
+  display:block;
+  background-color: #fafafa;
+  color:#152121;
+}
+.icon-description {
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  padding: 1em;
+}
+
+
+/*-- Case Studies --*/
+#case-studies {
+  color: #152121;
+  text-align: center;
+  padding: 2em;
+}
+#case-studies img {
+  width: 100%;
+}
+
+/*-- Articles --*/
+div.featured:nth-of-type(3) {
+  background-color:#ebffff;
+  color: #152121;
+}
+.articlelist {
+  background-image: url('../assets/street.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+}
+.articles {
+  color: #152121;
+  padding: 2em;
+}
+.articles .card img {
+  position: relative;
+  width: 100%;
+  top:-25%;
+}
+.articles .card {
+  overflow: hidden;
+}
+.articles .card:hover {
+  position: relative;
+  box-shadow: 0px 14px 22.04px 6.96px rgba(0, 0, 0, 0.9);
+  top: 48%;
+}
+.articles h2 {
+  margin-bottom: .5em;
+}
+
+
+/*--Ender --*/
+#contact {
+  text-align: center;
+}
+#contact h3, #contact h2 {
+  color:#90d8dc;
+}
+#contact h2 a {
+  padding: 0 1em;
+}
+.about img {
+  width: 100%;
+}
+
+.contact *:nth-child(1n +0) {
+  margin: 1.5em auto;
+}
+input, textarea {
+  border: 0;
+  border-left:2px solid #eee;
+  border-right: 2px solid #eee;
+  background-color:inherit;
+  color:#eee;
+  margin: auto;
+  padding: 1rem;
+  display: block;
+}
+.enter:hover, .enter:focus {
+  border-left:10px solid #fee197;
+  border-right:10px solid #fee197;
+  outline: none;
+}
+#contact input.enter, #contact textarea {
+  width: 90%;
+  margin: 2em auto;
+}
+textarea {
+  overflow: visible;
+  resize: none;
+  height: 15rem;
+}
+
+footer {
+  background-color: #ebffff;
+  color: #152121;
+  text-align: center;
+  margin-top: 2em;
+  padding:2em;
+}
+
+/*-- Exceptions --*/
+@media only screen and (min-width: 720px) {
+  header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  header h2 {
+    position:absolute;
+    bottom:50%;
+    right: 10%;
+  }
+  .angle {
+    width:300%;
+    height: 100%;
+    transform: rotate(-60deg);
+    left:-20em;
+    top: 28em;
+  }
+  #deer {
+    display: block;
+    position: absolute;
+    vertical-align: baseline;
+    left: -.5em;
+    bottom:-.5em;
+    height: 40%;
+    z-index: 0;
+  }
+
+  /*-- Structure --*/
+  /*-- Buttons --*/
+  .btn ~ .btn {
+    margin-left: 1em;
+    margin-right:0;
+  }
+  /*-- 4 column --*/
+  .autowide .module {
+  	width: 25%;
+  }
+  .autowide .module:nth-child(3n+0) {
+  	/*margin-right: 2.564102564102564%;*/
+  }
+  .autowide .module:last-of-type {
+  	margin-right: 0;
+  }
+
+@media only screen and (min-width: 1025px)  {
+  #nav-toggler:checked + .page-wrap .main-content {
+    padding-left: 0;
+    transform: scale(.7);
+  }
+
+  .btn:hover {
+    background-color: #90d8cd;
+  }
+  .btn.highlight:hover {
+
+      background-color: #fee197;
+  }
+  .btn:active {
+    background-color: #60a69a;
+    transition-duration: .05s;
+  }
+  .btn:hover, #contact i:hover {
+    transform:translateY(-.1em);
+  }
+
+  header h1 {
+    font-size: 270%;
+  }
+
+  .angle {
+    width:300%;
+    height: 100%;
+    transform: rotate(-30deg);
+    left:-60em;
+    top: 18em;
+  }
+  #deer {
+    height: 80%;
+  }
+  .main {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: stretch;
+  }
+  .icons img {
+    position: relative;
+    height: 10vw;
+    left: -.81em;
+  }
+  .logo:hover img {
+    position: relative;
+    transform: translate(0, -1rem);
+  }
+  .icon-description.active {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    flex: 1;
+    background-color: #fafafa;
+    opacity: 0;
+    animation: fadeIn .5s ease-in 1 forwards;
+    animation-play-state: running;
+  }
+  .clicked {
+    margin-left:auto;
+    margin-right: auto;
+    width: 25%;
+
+  }
+  .clicked .module {
+    float: none;
+    width: 100%;
+  }
+  .icon-description {
+    display: none;
+    opacity: 0;
+    transition: all ease .3s;
+    transition-delay: 1s;
+
+    animation-play-state: paused;
+  }
+  .hidden {
+    display: none;
+  }
+  #descriptions {
+    background-color: #152121;
+    display: inline-flex;
+    width: 74.3%;
+    flex-direction: column;
+    flex: 1;
+    align-items: stretch;
+    vertical-align: baseline;
+    position:relative;
+  }
+  #case-studies {
+    display: flex;
+    height: 100vh;
+  }
+
+  .featured .card {
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 30%;
+  }
+  #card-1 {
+    transform: translate(40%, -42%);
+    height: 60vh;
+  }
+  #card-3 {
+    transform: translate(-40%, -42%);
+    height: 60vh;
+  }
+  #case-studies .card-main {
+    z-index: 2;
+    height: 70vh;
+  }
+  /*#case-studies .card img {
+    width: 100%;
+  }*/
+  #case-studies:hover #card-1, #case-studies:hover #card-2, #case-studies:hover #card-3 {
+    transform: translate(0, -50%);
+    height:65vh;
+  }
+  .articles {
+    height: 100vh;
+    display: flex;
+  }
+  .articles .card *:not(img):not(a):not(em) {
+    position: relative;
+    bottom: 2em;
+  }
+  .about {
+    float:right;
+    width: 40%;
+  }
+  .articles .card {
+    height: 60vh;
+  }
+  #contact input.enter, #contact textarea {
+    text-align: center;
+    margin:auto;
+    width: 40%;
+  }
+  #contact i:hover {
+    color: #fee197;
+  }
+}

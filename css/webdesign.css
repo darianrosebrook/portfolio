@@ -1,0 +1,65 @@
+#hero {
+  background: #152121 url('C:/Users/Darian/desDev/Legacy/Live/portfolio/assets/Web-Design.jpg') no-repeat center ;
+  background-size: cover;
+  height: 65vh;
+}
+
+#process {
+
+}
+
+.case-study-one {
+  background: url('../assets/web-port.jpg') no-repeat center;
+}
+.case-study-two {
+    background: url('../assets/web-out.jpg') no-repeat center;
+    color: #152121;
+}
+.case-study-three {
+  background: url('../assets/web-landing.jpg') no-repeat center;
+}
+.case-study {
+	height: 100vh;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+	background-attachment: fixed;
+  padding: 0 10%;
+  position: relative;
+
+}
+.case-content {
+  width: 40%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+hr {
+  display: inline-block;
+  width: 40%;
+}
+
+@media only screen and (min-width: 1025px)  {
+  #nav-toggler:checked + .page-wrap .main-content {
+    padding-left: 0;
+    transform: scale(.7);
+  }
+    #nav-toggler:checked + .page-wrap .main-content .case-study {
+      background-attachment: inherit;
+    }
+
+  .btn:hover {
+    background-color: #90d8cd;
+  }
+  .btn.highlight:hover {
+
+      background-color: #fee197;
+  }
+  .btn:active {
+    background-color: #60a69a;
+    transition-duration: .05s;
+  }
+  .btn:hover, #contact i:hover {
+    transform:translateY(-.1em);
+  }
+}
