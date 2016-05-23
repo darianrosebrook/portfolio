@@ -1,0 +1,71 @@
+.toggle
+  position:fixed
+  top:20px
+  left:20px
+  z-index: 3
+  text-decoration: none
+  font-size: 3rem
+  color: inherit
+  text-shadow: 1px 1px 10px hsla(30, 30%, 30%, 1)
+  transition: $short
+  cursor: pointer
+#nav-toggler
+  display: none
+
+  &:checked + .page-wrap
+    .hidden-nav
+      left: 0px
+    .toggle
+      left:180px
+    .main-content
+      padding-left: 0
+      box-shadow: $shadow
+  .main-content
+    position: relative
+    z-index: 0
+    transition: $transition
+    transform-origin: top
+.hidden-nav
+  position: fixed
+  top: 0
+  left: -190px
+  z-index: 30
+  width: 160px
+  padding: 20px
+  background-color: $dark
+  transition: $short
+  text-align: center
+  height: 100vh
+  ul
+    list-style-type: none
+    font-size: 1.6em
+  li
+    margin-bottom: 1em
+    &, a
+      color: $secondary
+      text-decoration: none
+      transition: $transition
+  a:hover
+    color:$highlight
+  img
+    width: 100%
+  .btn
+    width:8em
+    min-width: 3em
+    font-size: 1.4rem
+@media only screen and (min-width: 1025)
+  #nav-toggler:checked + .page-wrap
+    .main-content
+      padding-left: 0
+      transform: scale(.7)
+    .case-study
+      background-attachment: inherit
+  .btn:hover
+    background-color: $main
+    &, #contact i:hover
+      transform: translateY(-.2em)
+  .btn.highlight:hover
+    background-color:$highlight
+  .btn:active
+    background-color: #60a69a
+    transition-duration: .1s

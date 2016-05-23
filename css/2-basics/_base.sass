@@ -1,0 +1,95 @@
+.transition
+  transition: all ease .3s
+body.in-transition
+  transition: transform .5s cubic-bezier(.65, .01, .19, 1.01)
+
+// keyframes
+@keyframes fadeIn
+  to
+    opacity: 1
+
+// Global
+*, *::before, *::after
+  box-sizing: border-box
+  margin: 0
+  padding: 0
+
+html
+  font-family: "proxima-nova", lato, helvetica, vedana, sans-serif
+  backgound-color: $dark
+  color: $section
+  font-size: 62.5%
+
+body
+    font-size: 2rem
+    scroll-behavior:smooth
+a, a:link, a:visited, a:hover, a:focus
+  text-decoration: none
+  color:inherit
+.cf::before, .cf::after
+  display: table
+.cf::after
+  content: ' '
+  visibility: hidden
+  display: block
+  height: 0
+  clear: both
+
+// Structure
+// 2 column
+.autowide
+  .module
+    width: 50%
+
+// Cards & featured
+.featured
+  width: 100%
+  text-align: center
+  padding: 2em 0
+.featured + h2
+  margin-top: 2em
+  font-weight: 300
+.card
+  position: relative
+  top: 50%
+  display: inline-block
+  width: 100%
+  background-color: $light
+  border-radius: $border
+  margin: 0 1em auto
+  padding: 1em
+  box-shadow: $shadow
+  text-align: center
+  z-index: 1
+  transition: $transition
+
+// Buttons
+.btn
+  display: inline
+  border: 0px
+  border-radius: $border
+  padding: .5em 1em
+  color: $dark
+  min-width: 8em
+  max-width: auto
+  margin-top: 1em
+  transition: $transition
+
+  .primary
+    background-color: $highlight
+    color: $dark
+  .secondary
+    background-color: $secondary
+  .highlight
+    background-color: $highlight
+@media only screen and (min-width: 1025)
+
+  .btn:hover
+    background-color: $main
+    &, #contact i:hover
+      transform: translateY(-.2em)
+  .btn.highlight:hover
+    background-color:$highlight
+  .btn:active
+    background-color: #60a69a
+    transition-duration: .1s
