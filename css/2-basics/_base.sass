@@ -35,6 +35,36 @@ a, a:link, a:visited, a:hover, a:focus
   height: 0
   clear: both
 
+//typography
+p
+  font-family: "brandon-grotesque", lato, sans-serif
+
+em[class|="type"]
+  font-style: normal
+
+.type-life
+  color: #4aa3ba
+
+.type-brand
+  color: #ff2e63
+
+.type-logo
+  color: #1e6262
+
+.type-ux
+  color: #5a37c3
+
+.type-web
+  color: #e7a117
+
+h1
+  font-size: 3.5rem
+  span.hide
+    display: none
+
+h3
+  color: #fee197
+  
 // Structure
 // 2 column
 .autowide
@@ -75,21 +105,25 @@ a, a:link, a:visited, a:hover, a:focus
   margin-top: 1em
   transition: $transition
 
-  .primary
-    background-color: $highlight
-    color: $dark
-  .secondary
-    background-color: $secondary
-  .highlight
-    background-color: $highlight
-@media only screen and (min-width: 1025)
-
-  .btn:hover
-    background-color: $main
-    &, #contact i:hover
-      transform: translateY(-.2em)
-  .btn.highlight:hover
-    background-color:$highlight
-  .btn:active
-    background-color: #60a69a
-    transition-duration: .1s
+.primary
+  background-color: $highlight
+  color: $dark
+.secondary
+  background-color: $secondary
+.highlight
+  background-color: $highlight
+@media only screen and (min-width: 1025px)
+  .btn
+    &:hover
+      background-color: $main
+    &.primary:hover, &.primary:active
+      background-color: $highlight
+    &.primary:hover
+      background-color: $main
+    &:active
+      background-color: #60a69a
+      transition-duration: .05s
+    &:hover
+      transform: translateY(-0.3em)
+  #contact i:hover
+    transform: translateY(-0.3em)
