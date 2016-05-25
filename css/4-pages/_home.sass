@@ -1,3 +1,90 @@
 #home
   background-color: $dark
-  
+  header
+    position: relative
+    text-align: center
+    background-size: cover
+    background-color: $main
+    height: 100vh
+    padding: 1em
+    overflow: hidden
+
+    h1
+      position: absolute
+      transform: translateX(-50%)
+      left: 50%
+      bottom: 1em
+      color: $main
+      font-size: 1.5em
+      mix-blend-mode: difference
+      font-weight: 100
+      font-family: "brandon-grotesque", helvetica, lato, sans-serif
+      text-transform: uppercase
+      letter-spacing: .25em
+    h2
+      color: $main
+      mix-blend-mode: difference
+      font-size: 4em
+      font-weight: 900
+  .angle
+    width: 300%
+    height: 100%
+    background-color: $dark
+    transform: rotate(-60deg)
+    transform-origin: center
+    position: absolute
+    left: 0
+    top: 1em
+  #deer
+    display: none
+    mix-blend-mode: difference
+  .icons
+    display: inline-flex
+    flex-wrap: wrap
+    justify-content: center
+    width: 100%
+    margin: 1em auto
+    text-align: center
+
+    img
+      height: 10vh
+      margin-bottom: 1em
+      transition: $transition
+      cursor: pointer
+  .logo
+    display: inline-flex
+    flex-direction: column
+    justify-content: space-between
+    text-align: center
+  #descriptions
+    display: block
+    background-color: $light
+    color: $dark
+  .icon-description
+    display: flex
+    flex-direction: column
+    align-content: space-between
+    padding: 1em
+
+  #case-studies
+    color: $dark
+    text-align: center
+    padding: 2em
+
+    img
+      width: 100%
+  div.featured:nth-of-type(3)
+    background-color: $section
+    color: $dark
+  .articlelist
+    background-image: url('../assets/street.jpg')
+    background-size: cover
+    background-attachment: fixed
+  .articles
+    color: $dark
+    padding: 2em
+    card
+      overflow: hidden
+    img
+      position: relative
+      top: -20%

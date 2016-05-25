@@ -21,20 +21,20 @@ html
   font-size: 62.5%
 
 body
-    font-size: 2rem
-    scroll-behavior:smooth
+  font-size: 2rem
+  scroll-behavior: smooth
 a, a:link, a:visited, a:hover, a:focus
   text-decoration: none
-  color:inherit
-.cf::before, .cf::after
-  display: table
+  color: inherit
+
 .cf::after
   content: ' '
   visibility: hidden
   display: block
   height: 0
   clear: both
-
+.cf::after, cf::before
+  display: block
 //typography
 p
   font-family: "brandon-grotesque", lato, sans-serif
@@ -64,7 +64,7 @@ h1
 
 h3
   color: #fee197
-  
+
 // Structure
 // 2 column
 .autowide
@@ -93,6 +93,8 @@ h3
   z-index: 1
   transition: $transition
 
+  img
+    width: 100%
 // Buttons
 .btn
   display: inline

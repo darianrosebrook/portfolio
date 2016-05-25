@@ -1,5 +1,5 @@
 /*-- Header --*/
-header {
+/*header {
   position: relative;
   text-align: center;
   background-size:cover;
@@ -18,8 +18,8 @@ header h1 {
   font-family: "brandon-grotesque", lato, sans-serif ;
   text-transform: uppercase;
   letter-spacing: .24em;
-}
-.angle {
+}*/
+/*.angle {
   width:300%;
   height: 100%;
   background-color: #152121;
@@ -28,15 +28,15 @@ header h1 {
   position: absolute;
   left:0;
   top: 1em;
-}
+}*/
 
 /*-- targeted --*/
-header h2 {
+/*header h2 {
   color:  #90d8cd;
   mix-blend-mode:difference;
   font-size: 4em;
   font-weight: 900;
-}
+}*/
 #deer {
   display: none;
   mix-blend-mode:difference;
