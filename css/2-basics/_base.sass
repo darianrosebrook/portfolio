@@ -86,7 +86,7 @@ h3
   width: 100%
   background-color: $light
   border-radius: $border
-  margin: 0 1em auto
+  margin: 0 auto 1em auto
   padding: 1em
   box-shadow: $shadow
   text-align: center
@@ -103,9 +103,15 @@ h3
   padding: .5em 1em
   color: $dark
   min-width: 8em
-  max-width: auto
+  width: auto
+  max-width: 100%
   margin-top: 1em
   transition: $transition
+.btn ~ .btn
+  margin-left: 2em
+  margin-right: 0
+.hidden-nav .btn
+  font-size: 1.3rem
 
 .primary
   background-color: $highlight
@@ -129,3 +135,4 @@ h3
       transform: translateY(-0.3em)
   #contact i:hover
     transform: translateY(-0.3em)
+    color: $highlight

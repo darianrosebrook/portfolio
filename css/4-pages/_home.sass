@@ -83,8 +83,167 @@
   .articles
     color: $dark
     padding: 2em
-    card
+    .card
       overflow: hidden
+      &:hover
+        position: relative
+        box-shadow: $shadow
+        top: 48%
     img
       position: relative
       top: -20%
+    h2
+      margin-bottom: .5em
+  #contact
+    text-align: center
+    h2  a
+      padding: 0 1em
+    &, h3
+      color: $main
+    .about  img
+      width: 100%
+    .contact
+      *:nth-child(1n + 0)
+        margin: 1.5em auto
+      textarea
+        overflow: visible
+        resize: none
+        height: 15rem
+      .enter
+        width: 90%
+        margin: 2em auto
+        border: 0
+        border-left:2px solid $secondary
+        border-right: 2px solid $secondary
+        background-color:inherit
+        color:$secondary
+        padding: 1rem
+        display: block
+        &:hover, &:focus
+          border-left: 10px solid $highlight
+          border-right: 10px solid $highlight
+          outline: none
+    footer
+      background-color: $section
+      color: $dark
+      text-align: center
+      margin-top: 2em
+      padding: 2em
+// Media queries //
+@media only screen and (min-width: 720px)
+  #home
+    header
+      display: flex
+      justify-content: center
+      align-items: center
+
+      h2
+        position: absolute
+        bottom: 50%
+        right: 10%
+      .angle
+        transform: rotate(-60deg)matrix()
+        left: -1em
+        top: -8em
+      #deer
+        display: block
+        position: absolute
+        left: -.5em
+        bottom: -.5em
+        height: 40%
+        z-index: 0
+@media only screen and (min-width: 1025px)
+  #home
+    header
+      h1
+        font-size: 270%
+      .angle
+        transform: rotate(-33deg)
+        left: -78%
+        top: 55%
+      #deer
+        height: 80%
+    .main
+      display: flex
+      flex-direction: row
+      flex: 1
+      justify-content: flex-start
+      align-items: stretch
+      align-content: stretch
+    .icons
+      flex-wrap: nowrap
+      img
+        position: relative
+        height: 10vw
+        left: -.81em
+      .logo:hover img
+        position: relative
+        transform: translate(0, -1rem)
+    .icon-description.active
+      display: flex
+      flex-direction: column
+      justify-content: space-around
+      flex: 1
+      background-color: $light
+      opacity: 0
+      animation: fadeIn .5s ease-in 1 forwards
+      animation-play-state: running
+    .clicked
+      margin: inherit auto
+      width: 25%
+
+      .module
+        float: none
+        width: 100%
+    .icon-description
+      display: none
+      opacity: 0
+      transition: $transition
+      transition-delay: 1s
+      animation-play-state: paused
+    .hidden
+      display: none
+    #descriptions
+      background-color: $dark
+      display: inline-flex
+      width: 74.3%
+      flex-direction: column
+      flex: 1
+      align-items: stretch
+      vertical-align: baseline
+      position: relative
+    #case-studies
+      display: flex
+      height: 100vh
+      &:hover
+        #card-1, #card-2, #card-3
+          transform: translate(0, -50%)
+          height: 65vh
+    .featured .card
+        transform: translateY(-50%)
+        display: flex
+        flex-direction: column
+        justify-content: space-between
+        align-items: center
+        width: 30%
+    #card-1
+      transform: translate(40%, -42%)
+      height: 60vh
+
+    #card-3
+      transform: translate(-40%, -42%)
+      height: 60vh
+
+    #case-studies .card-main
+      z-index: 2
+      height: 70vh
+    .articles
+      height: 100vh
+      display: flex
+      .card
+        height: 60vh
+    #contact .contact .enter
+        width: 40%
+    .about
+      float: right
+      width: 40%
