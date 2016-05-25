@@ -505,9 +505,12 @@ h3 {
         position: relative;
         box-shadow: 0px 14px 22.04px 6.96px rgba(0, 0, 0, 0.73);
         top: 48%; }
-    #home .articles img {
-      position: relative;
-      top: -20%; }
+      #home .articles .card img {
+        position: relative;
+        width: 120%;
+        top: -3vw; }
+    #home .articles *:not(img), #home .articles *:not(em), #home .articles *:not(a) {
+      margin-top: -6em; }
     #home .articles h2 {
       margin-bottom: .5em; }
   #home #contact {
@@ -533,7 +536,8 @@ h3 {
       background-color: inherit;
       color: #b7b7b7;
       padding: 1rem;
-      display: block; }
+      display: block;
+      text-align: center; }
       #home #contact .contact .enter:hover, #home #contact .contact .enter:focus {
         border-left: 10px solid #fee197;
         border-right: 10px solid #fee197;

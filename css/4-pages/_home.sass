@@ -89,9 +89,13 @@
         position: relative
         box-shadow: $shadow
         top: 48%
-    img
-      position: relative
-      top: -20%
+      img
+        position: relative
+        width: 120%
+        top: -3vw
+    &
+      *:not(img), *:not(em), *:not(a)
+        margin-top: -6em
     h2
       margin-bottom: .5em
   #contact
@@ -119,6 +123,7 @@
         color:$secondary
         padding: 1rem
         display: block
+        text-align: center
         &:hover, &:focus
           border-left: 10px solid $highlight
           border-right: 10px solid $highlight
