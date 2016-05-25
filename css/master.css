@@ -505,12 +505,6 @@ h3 {
         position: relative;
         box-shadow: 0px 14px 22.04px 6.96px rgba(0, 0, 0, 0.73);
         top: 48%; }
-      #home .articles .card img {
-        position: relative;
-        width: 120%;
-        top: -3vw; }
-    #home .articles *:not(img), #home .articles *:not(em), #home .articles *:not(a) {
-      margin-top: -6em; }
     #home .articles h2 {
       margin-bottom: .5em; }
   #home #contact {
@@ -719,6 +713,21 @@ h3 {
     display: flex; }
     #home .articles .card {
       height: 60vh; }
+      #home .articles .card img {
+        width: 120%;
+        top: -8vw;
+        position: absolute;
+        -webkit-transform: translateX(-50%);
+            -ms-transform: translateX(-50%);
+                transform: translateX(-50%);
+        left: 50%; }
+      #home .articles .card .artcont {
+        position: absolute;
+        bottom: 1em;
+        -webkit-transform: translateX(-50%);
+            -ms-transform: translateX(-50%);
+                transform: translateX(-50%);
+        left: 50%; }
   #home #contact .contact .enter {
     width: 40%; }
   #home .about {

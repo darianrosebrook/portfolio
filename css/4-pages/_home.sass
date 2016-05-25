@@ -89,13 +89,7 @@
         position: relative
         box-shadow: $shadow
         top: 48%
-      img
-        position: relative
-        width: 120%
-        top: -3vw
-    &
-      *:not(img), *:not(em), *:not(a)
-        margin-top: -6em
+
     h2
       margin-bottom: .5em
   #contact
@@ -105,6 +99,7 @@
     &, h3
       color: $main
     .about  img
+
       width: 100%
     .contact
       *:nth-child(1n + 0)
@@ -247,6 +242,17 @@
       display: flex
       .card
         height: 60vh
+        img
+          width: 120%
+          top: -8vw
+          position: absolute
+          transform: translateX(-50%)
+          left: 50%
+        .artcont
+          position: absolute
+          bottom: 1em
+          transform: translateX(-50%)
+          left: 50%
     #contact .contact .enter
         width: 40%
     .about
