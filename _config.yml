@@ -1,0 +1,2 @@
+markdown: redcarpet
+exclude: ['readme.md', 'readme.html']

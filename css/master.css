@@ -278,6 +278,9 @@ h3 {
   .card img {
     width: 100%; }
 
+a.button {
+  display: block; }
+
 .btn {
   display: inline;
   border: 0px;
@@ -298,7 +301,7 @@ h3 {
   font-size: 1.3rem; }
 
 .primary {
-  background-color: #fee197;
+  background-color: #90d8cd;
   color: #152121; }
 
 .secondary {
@@ -312,7 +315,7 @@ h3 {
     background-color: #90d8cd; }
   .btn.primary:hover, .btn.primary:active {
     background-color: #fee197; }
-  .btn.primary:hover {
+  .btn.secondary:hover {
     background-color: #90d8cd; }
   .btn:active {
     background-color: #60a69a;
