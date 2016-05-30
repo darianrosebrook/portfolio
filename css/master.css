@@ -242,6 +242,10 @@ em[class|="type"] {
 .type-web {
   color: #e7a117; }
 
+#home article .metaDesc {
+  color: #b7b7b7;
+  font-size: 1.5rem; }
+
 h1 {
   font-size: 3.5rem; }
   h1 span.hide {
@@ -278,9 +282,6 @@ h3 {
   .card img {
     width: 100%; }
 
-a.button {
-  display: block; }
-
 .btn {
   display: inline;
   border: 0px;
@@ -301,7 +302,7 @@ a.button {
   font-size: 1.3rem; }
 
 .primary {
-  background-color: #90d8cd;
+  background-color: #fee197;
   color: #152121; }
 
 .secondary {
@@ -315,7 +316,7 @@ a.button {
     background-color: #90d8cd; }
   .btn.primary:hover, .btn.primary:active {
     background-color: #fee197; }
-  .btn.secondary:hover {
+  .btn.primary:hover {
     background-color: #90d8cd; }
   .btn:active {
     background-color: #60a69a;
@@ -373,6 +374,8 @@ a.button {
   background-color: #152121;
   transition: all ease 0.15s;
   text-align: center; }
+  .hidden-nav a.current {
+    color: #90d8cd; }
   .hidden-nav ul {
     list-style-type: none; }
   .hidden-nav li {
@@ -508,8 +511,6 @@ a.button {
         position: relative;
         box-shadow: 0px 14px 22.04px 6.96px rgba(0, 0, 0, 0.73);
         top: 48%; }
-    #home .articles h2 {
-      margin-bottom: .5em; }
   #home #contact {
     text-align: center; }
     #home #contact h2 a {
@@ -710,12 +711,12 @@ a.button {
     z-index: 2;
     height: 70vh; }
   #home .articles {
-    height: 100vh;
+    height: 80vh;
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex; }
     #home .articles .card {
-      height: 60vh; }
+      height: 70vh; }
       #home .articles .card img {
         width: 120%;
         top: -8vw;
