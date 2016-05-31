@@ -58,10 +58,10 @@
             <li><a href="#hero"><img src="https://67.media.tumblr.com/93baeee0cfc72abc3f68460cc51d045f/tumblr_o0jbv1dYsU1ujvdipo8_r1_400.png" alt="" class="" /></a></li>
             <li id="greeting"></li>
             <li><a href="{{site.baseurl}}/" class="{%if page.url == '' %}current{% endif %}" >Home</a></li>
-            <li><a href="{{site.baseurl}}/web-design" class="{%if page.url == 'web-design' %}current{% endif %}" >Web Design</a></li>
-            <li><a href="{{site.baseurl}}/soon.html" class="{%if page.url == '/graphic-design' %}current{% endif %}" >Graphic Design</a></li>
-            <li><a href="{{site.baseurl}}/soon.html" class="{%if page.url == '/about' %}current{% endif %}" >About</a></li>
-            <li><a href="{{site.baseurl}}/soon.html"  class="{%if page.url == '/articles' %}current{% endif %}" target="_blank">Articles</a></li>
+            <li><a href="{{site.baseurl}}/web-design" class="{%if page.url contains 'web-design' %}current{% endif %}" >Web Design</a></li>
+            <li><a href="{{site.baseurl}}/soon.html" class="{%if page.url contains '/graphic-design' %}current{% endif %}" >Graphic Design</a></li>
+            <li><a href="{{site.baseurl}}/soon.html" class="{%if page.url contains '/about' %}current{% endif %}" >About</a></li>
+            <li><a href="{{site.baseurl}}/soon.html"  class="{%if page.url contains '/articles' %}current{% endif %}" target="_blank">Articles</a></li>
            <li><a href="https://drive.google.com/file/d/0B6JwGHRMHsnTdGFUOGFLdEFZOGM/view?usp=sharing">Resum&eacute;</a></li>
             <li><a href="http://twitter.com/d_evyn" target="_blank"><i class="fa fa-twitter"></i></a> |
              <a href="http://linkedin.com/in/darianrosebrook" target="_blank"><i class="fa fa-linkedin"></i></a></li>
