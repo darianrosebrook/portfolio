@@ -407,6 +407,43 @@ footer {
     #nav-toggler:checked + .page-wrap .main-content .case-study {
       background-attachment: scroll; } }
 
+#contact {
+  text-align: center; }
+  #contact h2 a {
+    padding: 0 1em; }
+  #contact, #contact h3 {
+    color: #90d8cd; }
+  #contact .about img {
+    width: 100%; }
+  #contact .contact *:nth-child(1n + 0) {
+    margin: 1.5em auto; }
+  #contact .contact textarea {
+    overflow: visible;
+    resize: none;
+    height: 15rem; }
+  #contact .contact .enter {
+    width: 90%;
+    margin: 2em auto;
+    border: 0;
+    border-left: 2px solid #b7b7b7;
+    border-right: 2px solid #b7b7b7;
+    background-color: inherit;
+    color: #b7b7b7;
+    padding: 1rem;
+    display: block;
+    text-align: center; }
+    #contact .contact .enter:hover, #contact .contact .enter:focus {
+      border-left: 10px solid #fee197;
+      border-right: 10px solid #fee197;
+      outline: none; }
+
+@media only screen and (min-width: 1025px) {
+  #contact .contact .enter {
+    width: 40%; }
+  .about {
+    float: right;
+    width: 40%; } }
+
 #home {
   background-color: #152121; }
   #home header {
@@ -524,35 +561,6 @@ footer {
         margin-bottom: 1.5em; }
       #home .articles .card p:last-of-type {
         margin-bottom: 2em; }
-  #home #contact {
-    text-align: center; }
-    #home #contact h2 a {
-      padding: 0 1em; }
-    #home #contact, #home #contact h3 {
-      color: #90d8cd; }
-    #home #contact .about img {
-      width: 100%; }
-    #home #contact .contact *:nth-child(1n + 0) {
-      margin: 1.5em auto; }
-    #home #contact .contact textarea {
-      overflow: visible;
-      resize: none;
-      height: 15rem; }
-    #home #contact .contact .enter {
-      width: 90%;
-      margin: 2em auto;
-      border: 0;
-      border-left: 2px solid #b7b7b7;
-      border-right: 2px solid #b7b7b7;
-      background-color: inherit;
-      color: #b7b7b7;
-      padding: 1rem;
-      display: block;
-      text-align: center; }
-      #home #contact .contact .enter:hover, #home #contact .contact .enter:focus {
-        border-left: 10px solid #fee197;
-        border-right: 10px solid #fee197;
-        outline: none; }
 
 @media only screen and (min-width: 720px) {
   #home header {
@@ -746,12 +754,7 @@ footer {
         -webkit-transform: translateX(-50%);
             -ms-transform: translateX(-50%);
                 transform: translateX(-50%);
-        left: 50%; }
-  #home #contact .contact .enter {
-    width: 40%; }
-  #home .about {
-    float: right;
-    width: 40%; } }
+        left: 50%; } }
 
 #article-post .main-content {
   background-color: #fafafa;
@@ -763,8 +766,11 @@ footer {
     padding: 3em; }
     #article-post .main-content .article-content p {
       margin-bottom: 1.5em; }
-      #article-post .main-content .article-content p:nth-of-type(1n+1)::first-line {
-        margin-left: 1em; }
 
 #article-post #nav-toggler:checked + .page-wrap .main-content {
   position: relative; }
+
+#article-post header {
+  height: 35vh;
+  background: url("../assets/expectational-debt.jpg") no-repeat center;
+  background-size: cover; }

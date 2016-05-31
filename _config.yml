@@ -1,2 +1,3 @@
 markdown: redcarpet
 exclude: ['readme.md', 'readme.html']
+permalink: pretty
