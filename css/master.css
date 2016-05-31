@@ -184,6 +184,9 @@ body.in-transition {
   transition: transform 0.5s cubic-bezier(0.65, 0.01, 0.19, 1.01);
   transition: transform 0.5s cubic-bezier(0.65, 0.01, 0.19, 1.01), -webkit-transform 0.5s cubic-bezier(0.65, 0.01, 0.19, 1.01); }
 
+.hidden {
+  display: none; }
+
 @-webkit-keyframes fadeIn {
   to {
     opacity: 1; } }
@@ -670,8 +673,6 @@ footer {
     transition-delay: 1s;
     -webkit-animation-play-state: paused;
             animation-play-state: paused; }
-  #home .hidden {
-    display: none; }
   #home #descriptions {
     background-color: #152121;
     display: -webkit-inline-flex;
