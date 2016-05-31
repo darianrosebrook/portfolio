@@ -17,6 +17,7 @@ title: Darian Rosebrook | Web Design, Logo Design, User Experience, Articles
 
         <div class='main'>
           <section id="icons" class="icons autowide cf">
+            <h2 class="hidden">Design Services</h2>
             <article class='logo module'>
               <img id="iconWeb"   src='assets/icon-webdesign.svg' alt="Web design service" />
               <h3>Web Design</h3>
@@ -35,13 +36,14 @@ title: Darian Rosebrook | Web Design, Logo Design, User Experience, Articles
             </article>
           </section>
           <section id="descriptions">
+            <h2 class="hidden">Descriptions of services offered</h2>
 
             <article id="web" class="icon-description web">
               <!-- <img src='assets/icon-webdesign.svg' alt="Web design service" /> -->
               <div class="description">
                 <h2>Web Design</h2>
                 <p>Web design that focuses on improving the user’s experience. Designed for mobile devices and scalable for many screen sizes.</p>
-                <a href="soon.html"><button type="button" name="button" class="secondary btn">View More</button></a>
+                <a href="soon.html" class="secondary btn">View More</a>
                 <button data-href="#form" id="contactBtn" type="button" name="button" class="contactBtn primary btn">Hire Me</button>
               </div>
             </article>
@@ -50,7 +52,7 @@ title: Darian Rosebrook | Web Design, Logo Design, User Experience, Articles
               <div class="description">
                 <h2>Logo Design &amp; Branding</h2>
                 <p>Professional, creative logos that give your brand or company a face. Help your brand stand out among the others in your industry.</p>
-                <a href="soon.html"><button type="button" name="button" class="secondary btn">View More</button></a>
+                <a href="soon.html" class="secondary btn">View More</a>
                 <button data-href="#form" type="button" name="button" class="contactBtn primary btn">Hire Me</button>
               </div>
             </article>
@@ -59,7 +61,7 @@ title: Darian Rosebrook | Web Design, Logo Design, User Experience, Articles
               <div class="description">
                 <h2>UX Consultation</h2>
                 <p>If you have an existing project or idea, let’s work on making sure your idea starts with the user in mind.</p>
-                <a href="soon.html"><button type="button" name="button" class="secondary btn">View More</button></a>
+                <a href="soon.html" class="secondary btn">View More</a>
                 <button data-href="#form" type="button" name="button" class="contactBtn primary btn">Hire Me</button>
               </div>
             </article>
@@ -68,7 +70,7 @@ title: Darian Rosebrook | Web Design, Logo Design, User Experience, Articles
               <div class="description">
                 <h2>Articles</h2>
                 <p>I write articles based around different things going on in life and the design industry.</p>
-                <a href="soon.html"><button type="button" name="button" class="secondary btn">View More</button></a>
+                <a href="soon.html" class="secondary btn">View More</a>
               </div>
             </article>
           </section>
@@ -77,6 +79,7 @@ title: Darian Rosebrook | Web Design, Logo Design, User Experience, Articles
       <div class="featured">
         <h2 class="first">Recent Projects</h2>
         <section id="case-studies" class="case-studies">
+          <h2 class="hidden">These are case studies from some of my most recent design work</h2>
           {% for post in site.categories.case-study limit: 3 %}
           <article id="card-{{forloop.index}}" class="card {% if forloop.index == 2 %}card-main{% endif %}">
             <img src="{{post.img}}" alt="{{post.metaDesc}}" />
@@ -84,7 +87,7 @@ title: Darian Rosebrook | Web Design, Logo Design, User Experience, Articles
             <p>
               <small>{{post.date | date_to_long_string}} | <em class="{{post.class}}" >{{post.type}}</em></small>
             </p>
-            <a href="soon.html"><button type="button" name="button" class="btn highlight">View Case-Study</button></a>
+            <a href="soon.html" class="btn highlight">View Case-Study</a>
 
           </article>
           {% endfor %}
@@ -95,8 +98,9 @@ title: Darian Rosebrook | Web Design, Logo Design, User Experience, Articles
       <div class="featured articlelist">
         <h2 class="first">Articles</h2>
         <section id="articles-list" class="articles">
+          <h2 class="hidden">A collection of articles written on design, life, and business</h2>
           {% for post in site.categories.article limit:3 %}
-          <article id="card-" class="card">
+          <article id="card{{forloop.index}}" class="card">
             <img src="{{post.img}}" alt="{{post.title}}" />
             <div class="artcont">
               <h2>{{post.title}}</h2>
@@ -108,13 +112,13 @@ title: Darian Rosebrook | Web Design, Logo Design, User Experience, Articles
                 {{post.metaDesc | turncate: 170}}&ldquo;</small>
               </p>
             </div>
-            <a href="{{post.url}}"><button type="button" name="button" class="btn highlight">View Article</button></a>
+            <a href="{{post.url}}" class="btn highlight">View Article</a>
           </article>
           {% endfor %}
 
 
         </section>
-        <button class="btn">View All</a></button>
+        <button class="btn">View All</button>
       </div>
 
         {% include contact.html %}

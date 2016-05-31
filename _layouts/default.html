@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie-edge">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{{page.title}}</title>
     <meta name="description" content="{{page.metaDesc}}">
@@ -11,23 +11,21 @@
     <link rel=”author” href="https://plus.google.com/106679625106063278529" />
     <meta name="theme-color" content="90d8cd">
     <!-- twitter -->
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:description" content="{{page.metaDesc}}" />
-    <meta name="twitter:title" content="{{page.title}}" />
-    <meta name="twitter:site" content="@d_evyn" />
-    <meta name="twitter:image" content="http://darianrosebrook.com/assets/hero-responsive.gif" />
-    <meta name="twitter:creator" content="@d_evyn" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@d_evyn">
+    <meta name="twitter:creator" content="@d_evyn">
+    <meta name="twitter:url" content="http://darianrosebrook.com">
+    <meta name="twitter:title" content="{{page.title}}">
+    <meta name="twitter:description" content="{{page.metaDesc | turncate: 196}} ...">
+    <meta name="twitter:image" content="http://darianrosebrook.com/assets/hero-responsive.gif">
 
     <!-- google plus -->
-    <meta itemprop="name" content="{{page.title}}"/>
-    <meta itemprop="description" content="{{page.metadesc}}"/>
-    <meta itemprop="audience" content="Marketers, designers, Branding Marketers, Small Business"/>
+    <link href="https://plus.google.com/106679625106063278529" rel="publisher" />
+    <meta itemprop="name" content="{{page.title}}" />
+    <meta itemprop="description" content="{{page.metaDesc | turncate: 196}} ..." />
     <meta itemprop="image" content="https://pbs.twimg.com/profile_images/728050194760105984/vMdqe2oE_normal.jpg"/>
+    <meta itemprop="audience" content="Marketers, designers, Branding Marketers, Small Business"/>
     <meta itemprop="alternativeHeadline" content="{{page.title}}"/>
-
-    <link rel="publisher" href="https://plus.google.com/106679625106063278529"/>
-    <link rel="icon" type="image/png" href="">
 
     <!-- s t y l e s  a n d  s c r i p t s -->
     {% if page.url contains 'article' %}
@@ -36,12 +34,12 @@
     <link rel="stylesheet" href="{{site.baseurl}}/css/master.css" media="screen" type="text/css" />
     {% endif %}
     <meta name="robots" content="index, follow">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"type="text/css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" type="text/css" />
     <script src="https://use.typekit.net/dvy7vvc.js"></script>
     <script>try{Typekit.load({ async: true });}catch(e){}</script>
   </head>
   <body id="{{page.bodyId}}">
-    <input type="checkbox" id="nav-toggler" name="" value="" >
+    <input type="checkbox" id="nav-toggler" name="nav-toggler" value="true" >
     <div class="page-wrap">
       <label for="nav-toggler" class="toggle">☰</label>
       <div class="main-content">
@@ -63,9 +61,9 @@
             <li><a href="{{site.baseurl}}/soon.html" class="{%if page.url contains '/about' %}current{% endif %}" >About</a></li>
             <li><a href="{{site.baseurl}}/soon.html"  class="{%if page.url contains '/articles' %}current{% endif %}" target="_blank">Articles</a></li>
            <li><a href="https://drive.google.com/file/d/0B6JwGHRMHsnTdGFUOGFLdEFZOGM/view?usp=sharing">Resum&eacute;</a></li>
-            <li><a href="http://twitter.com/d_evyn" target="_blank"><i class="fa fa-twitter"></i></a> |
-             <a href="http://linkedin.com/in/darianrosebrook" target="_blank"><i class="fa fa-linkedin"></i></a></li>
-           <li><button data-href="#form" class="contactBtn btn btn-primary" role="button">Contact <i class="fa fa-paper-plane"></i></button></li>
+            <li><a href="http://twitter.com/d_evyn" target="_blank"><i class="fa fa-twitter"><span>twitter</span></i></a> |
+             <a href="http://linkedin.com/in/darianrosebrook" target="_blank"><i class="fa fa-linkedin"><span>linkedin</span></i></a></li>
+           <li><button data-href="#form" class="contactBtn btn btn-primary" role="button">Contact <i class="fa fa-paper-plane"><span>contact</span></i></button></li>
             </ul>
           </div>
 
@@ -82,3 +80,5 @@ ga('create', 'UA-74665762-1', 'auto');
 ga('send', 'pageview');
 
 </script>
+</body>
+</html>

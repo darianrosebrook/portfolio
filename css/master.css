@@ -254,6 +254,9 @@ h1 {
 h3 {
   color: #fee197; }
 
+i span {
+  display: none; }
+
 .autowide .module {
   width: 50%; }
 
@@ -283,11 +286,12 @@ h3 {
     width: 100%; }
 
 .btn {
-  display: inline;
+  display: inline-block;
   border: 0px;
   border-radius: 7px;
   padding: .5em 1em;
   color: #152121;
+  text-align: center;
   min-width: 8em;
   width: auto;
   max-width: 100%;
@@ -755,22 +759,3 @@ footer {
             -ms-transform: translateX(-50%);
                 transform: translateX(-50%);
         left: 50%; } }
-
-#article-post .main-content {
-  background-color: #fafafa;
-  color: #152121;
-  width: 65%;
-  margin: 0 auto; }
-  #article-post .main-content .article-content {
-    line-height: 1.35em;
-    padding: 3em; }
-    #article-post .main-content .article-content p {
-      margin-bottom: 1.5em; }
-
-#article-post #nav-toggler:checked + .page-wrap .main-content {
-  position: relative; }
-
-#article-post header {
-  height: 35vh;
-  background: url("../assets/expectational-debt.jpg") no-repeat center;
-  background-size: cover; }

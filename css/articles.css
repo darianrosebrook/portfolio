@@ -313,6 +313,10 @@ h3 {
   color: #fee197;
 }
 
+i span {
+  display: none;
+}
+
 .autowide .module {
   width: 50%;
 }
