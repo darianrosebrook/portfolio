@@ -199,7 +199,7 @@ body.in-transition {
 
 html {
   font-family: "proxima-nova", lato, helvetica, vedana, sans-serif;
-  backgound-color: #152121;
+  background-color: #152121;
   color: #ebffff;
   font-size: 62.5%; }
 
@@ -275,7 +275,7 @@ h3 {
   border-radius: 7px;
   margin: 0 auto 1em auto;
   padding: 1em;
-  box-shadow: 0px 14px 22.04px 6.96px rgba(0, 0, 0, 0.73);
+  box-shadow: 0px 14px 22.04px 6.96px rgba(0, 0, 0, 0.5);
   text-align: center;
   z-index: 1;
   transition: all ease 0.4s; }
@@ -310,6 +310,13 @@ h3 {
 
 .highlight {
   background-color: #fee197; }
+
+footer {
+  background-color: #ebffff;
+  color: #152121;
+  text-align: center;
+  margin-top: 2em;
+  padding: 2em; }
 
 @media only screen and (min-width: 1025px) {
   .btn:hover {
@@ -493,6 +500,8 @@ h3 {
     color: #152121;
     text-align: center;
     padding: 2em; }
+    #home #case-studies p:last-of-type {
+      margin-bottom: 2em; }
     #home #case-studies img {
       width: 100%; }
   #home div.featured:nth-of-type(3) {
@@ -509,8 +518,12 @@ h3 {
       overflow: hidden; }
       #home .articles .card:hover {
         position: relative;
-        box-shadow: 0px 14px 22.04px 6.96px rgba(0, 0, 0, 0.73);
+        box-shadow: 0px 14px 22.04px 6.96px rgba(0, 0, 0, 0.5);
         top: 48%; }
+      #home .articles .card h2 {
+        margin-bottom: 1.5em; }
+      #home .articles .card p:last-of-type {
+        margin-bottom: 2em; }
   #home #contact {
     text-align: center; }
     #home #contact h2 a {
@@ -540,12 +553,6 @@ h3 {
         border-left: 10px solid #fee197;
         border-right: 10px solid #fee197;
         outline: none; }
-    #home #contact footer {
-      background-color: #ebffff;
-      color: #152121;
-      text-align: center;
-      margin-top: 2em;
-      padding: 2em; }
 
 @media only screen and (min-width: 720px) {
   #home header {
@@ -727,7 +734,15 @@ h3 {
         left: 50%; }
       #home .articles .card .artcont {
         position: absolute;
-        bottom: 1em;
+        width: 90%;
+        top: 18vw;
+        -webkit-transform: translateX(-50%);
+            -ms-transform: translateX(-50%);
+                transform: translateX(-50%);
+        left: 50%; }
+      #home .articles .card .btn {
+        position: absolute;
+        bottom: 2em;
         -webkit-transform: translateX(-50%);
             -ms-transform: translateX(-50%);
                 transform: translateX(-50%);
@@ -737,3 +752,19 @@ h3 {
   #home .about {
     float: right;
     width: 40%; } }
+
+#article-post .main-content {
+  background-color: #fafafa;
+  color: #152121;
+  width: 65%;
+  margin: 0 auto; }
+  #article-post .main-content .article-content {
+    line-height: 1.35em;
+    padding: 3em; }
+    #article-post .main-content .article-content p {
+      margin-bottom: 1.5em; }
+      #article-post .main-content .article-content p:nth-of-type(1n+1)::first-line {
+        margin-left: 1em; }
+
+#article-post #nav-toggler:checked + .page-wrap .main-content {
+  position: relative; }

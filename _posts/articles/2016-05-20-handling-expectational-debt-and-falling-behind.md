@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: article
 category: article
 title: Handling Expectational Debt And Falling Behind.
 metaDesc: Why are we all given the same 24 hours? A lot of people seem to get more done than I can, and yet no one has more time during the day ...
@@ -7,6 +7,7 @@ type: Life-Hacks
 class: type-life  
 date: May 20, 2016
 img: assets/expectational-debt.jpg
+bodyId: article-post
 ---
 # Handling expectational debt and falling behind.
 

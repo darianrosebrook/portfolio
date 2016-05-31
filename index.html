@@ -2,6 +2,7 @@
 layout: default
 bodyId: "home"
 metaDesc: I am Darian Rosebrook, a designer north of Seattle. I specialize in helping people and businesses define their brand with web design, logo design, and user experience.
+title: Darian Rosebrook | Web Design, Logo Design, User Experience, Articles
 ---
 
         <header id="hero">
@@ -76,34 +77,18 @@ metaDesc: I am Darian Rosebrook, a designer north of Seattle. I specialize in he
       <div class="featured">
         <h2 class="first">Recent Projects</h2>
         <section id="case-studies" class="case-studies">
-
-          <article id="card-1" class="card">
-            <img src="assets/grow-your-code.svg" alt="The logo that was designed for a podcast about design and coding websites" />
-            <h2>Grow Your Code Logo</h2>
+          {% for post in site.categories.case-study limit: 3 %}
+          <article id="card-{{forloop.index}}" class="card {% if forloop.index == 2 %}card-main{% endif %}">
+            <img src="{{post.img}}" alt="{{post.metaDesc}}" />
+            <h2>{{post.title}}</h2>
             <p>
-              <small>1 May, 2016 | <em class="type-logo" >Logo Design</em></small>
+              <small>{{post.date | date_to_long_string}} | <em class="{{post.class}}" >{{post.type}}</em></small>
             </p>
             <a href="soon.html"><button type="button" name="button" class="btn highlight">View Case-Study</button></a>
 
           </article>
-          <article id="card-2" class="card card-main">
-            <img src="assets/out-branding.png" alt="The series of icons and logo done for an outdoor activity center." />
-            <h2>Out: Branding</h2>
-            <p>
-              <small>8 May, 2016 | <em class="type-brand" >Branding</em></small>
-            </p>
-            <a href="soon.html"><button type="button" name="button" class="btn highlight">View Case-Study</button></a>
+          {% endfor %}
 
-          </article>
-          <article id="card-3" class="card">
-            <img src="assets/ux.png" alt="The UX design of the new portfolio for darianrosebrook.com" />
-            <h2>Portfolio Redesign</h2>
-            <p>
-              <small>10 May, 2016 | <em class="type-ux" >User Experience</em></small>
-            </p>
-            <a href="soon.html"><button type="button" name="button" class="btn highlight">View Case-Study</button></a>
-
-          </article>
         </section>
       </div>
 
@@ -111,7 +96,7 @@ metaDesc: I am Darian Rosebrook, a designer north of Seattle. I specialize in he
         <h2 class="first">Articles</h2>
         <section id="articles-list" class="articles">
           {% for post in site.categories.article limit:3 %}
-          <article class="card">
+          <article id="card-" class="card">
             <img src="{{post.img}}" alt="{{post.title}}" />
             <div class="artcont">
               <h2>{{post.title}}</h2>
@@ -122,8 +107,8 @@ metaDesc: I am Darian Rosebrook, a designer north of Seattle. I specialize in he
                 <small class="metaDesc">&rdquo;
                 {{post.metaDesc}}&ldquo;</small>
               </p>
-              <a href="{{site.baseurl}}"><button type="button" name="button" class="btn highlight">View Article</button></a>
             </div>
+            <a href="{{post.url}}"><button type="button" name="button" class="btn highlight">View Article</button></a>
           </article>
           {% endfor %}
 
