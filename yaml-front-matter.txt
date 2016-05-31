@@ -1,0 +1,19 @@
+paage
+
+layout:
+title:
+metaDesc:
+bodyId:
+twitterCardSize: summary_large_image || Summary
+
+
+pages
+layout:
+category: article || case-study
+title:
+metaDesc:
+type:
+class:
+date:
+img:
+bodyId:
