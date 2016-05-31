@@ -27,6 +27,16 @@
     <meta itemprop="audience" content="Marketers, designers, Branding Marketers, Small Business"/>
     <meta itemprop="alternativeHeadline" content="{{page.title}}"/>
 
+    <!-- facebook -->
+    <meta property="fb:app_id" content="1076166062457470">
+    <meta property="og:url" content="{{site.baseurl}}{{page.url}}">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{page.title}}">
+    <meta property="og:image" content="http://darianrosebrook.com/assets/hero-responsive.gif">
+    <meta property="og:description" content="{{metaDesc | turncate: 170}} ...">
+    <meta property="og:site_name" content="Darian Rosebrook">
+    <meta property="og:locale" content="en_US">
+
     <!-- s t y l e s  a n d  s c r i p t s -->
     {% if page.url contains 'article' %}
     <link rel="stylesheet" href="{{site.baseurl}}/css/articles.css" media="screen" type="text/css" />
@@ -39,6 +49,23 @@
     <script>try{Typekit.load({ async: true });}catch(e){}</script>
   </head>
   <body id="{{page.bodyId}}">
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '1076166062457470',
+          xfbml      : true,
+          version    : 'v2.6'
+        });
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+    </script>
     <input type="checkbox" id="nav-toggler" name="nav-toggler" value="true" >
     <div class="page-wrap">
       <label for="nav-toggler" class="toggle">☰</label>
@@ -63,7 +90,7 @@
            <li><a href="https://drive.google.com/file/d/0B6JwGHRMHsnTdGFUOGFLdEFZOGM/view?usp=sharing">Resum&eacute;</a></li>
             <li><a href="http://twitter.com/d_evyn" target="_blank"><i class="fa fa-twitter"><span>twitter</span></i></a> |
              <a href="http://linkedin.com/in/darianrosebrook" target="_blank"><i class="fa fa-linkedin"><span>linkedin</span></i></a></li>
-           <li><button data-href="#form" class="contactBtn btn btn-primary" role="button">Contact <i class="fa fa-paper-plane"><span>contact</span></i></button></li>
+           <li><button data-href="#form" class="contactBtn btn btn-primary">Contact <i class="fa fa-paper-plane"><span>contact</span></i></button></li>
             </ul>
           </div>
 
