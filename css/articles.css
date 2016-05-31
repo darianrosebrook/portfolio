@@ -598,17 +598,36 @@ html {
   padding: 2em 0;
 }
 
-#article-post header h2 {
-  font-family: "brandon-grotesque", "proxima-nova", lato, helvetica, verdana, sans-serif;
-  font-weight: 300;
-}
-
 #article-post header h1 {
-  font-weight: 200;
   letter-spacing: .3em;
-  text-shadow: 0px 14px 22.04px 6.96px rgba(0, 0, 0, 0.5);
 }
 
 #article-post #contact {
   background-color: #152121;
+}
+
+#article-post img {
+  width: 100%;
+  margin: 2em 0;
+}
+
+#article-post img.float {
+  width: 50%;
+  float: left;
+  margin: 1em 2em 1em 0;
+}
+
+#article-post .article-content h1 {
+  font-weight: 200;
+  text-shadow: 0px 14px 22.04px 6.96px rgba(0, 0, 0, 0.5);
+}
+
+#article-post .article-content h2 {
+  font-family: "brandon-grotesque", "proxima-nova", lato, helvetica, verdana, sans-serif;
+  font-weight: 300;
+  color: #b7b7b7;
+}
+
+#article-post .article-content h3 {
+  color: #90d8cd;
 }

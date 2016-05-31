@@ -20,6 +20,7 @@ Why are we all given the same 24 hours? A lot of people seem to get more done th
 Time is a commodity. It is both finite and infinite. We only have 24 hours to use and it does not replenish until the following day. We have to protect our use of that time just as much as we protect the use of our money. When we say yes and commit to things, we are spending some of the expectations held for that day. So when you overspend your time on those expectations, it is akin to blowing apart your spending budget. _You get into debt from your expectations._ You have to be mindful about the areas you choose to spend your hours. So if you don’t have enough time, it’s because you already spent that time on something else.
 
 ## How I found myself falling behind
+<img src="https://cdn-images-1.medium.com/max/600/1*WjvFA3wtFd0FvpDoqFsyJg.jpeg" alt="The stagnant problem" class="float" />
 
 
 
@@ -42,6 +43,7 @@ Every day. (except Sunday and Tuesday: that is my family time)
 It seems manageable. It looks like all of the steps are there. So why is it I feel exhausted? Why is it I keep falling behind?
 
 ## You have to put the big rocks in first, say no to some fine sand.
+<img src="https://cdn-images-1.medium.com/max/800/1*7MXO4Q75Ymx94JSo10aMug.jpeg" alt="The big rocks"  />
 
 
 
@@ -54,6 +56,7 @@ Is what you’re doing right now going to impact where you’ll be 3 – 5 yea
 I started taking charge of the time I spend, cutting those unnecessary things out and re-purposing that time towards building my family’s quality of life. I choose my commitments carefully now.
 
 ## The solution
+<img src="https://cdn-images-1.medium.com/max/800/1*ZfWeFbSv0xE_ym4N1kFsvQ.jpeg" alt="The Solution"  />
 
 
 
@@ -69,4 +72,4 @@ I am designing my life to be fulfilling and productive at the same time. I start
 
 
 
-### *How will your life improve by cutting out the unnecessary and unproductive things?
+### How will your life improve by cutting out the unnecessary and unproductive things?

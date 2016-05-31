@@ -14,6 +14,7 @@ html
   #nav-toggler:checked + .page-wrap
     .main-content
       position: relative
+
   header
     height: 35vh
     background:  linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url('../assets/expectational-debt.jpg') no-repeat center
@@ -24,12 +25,24 @@ html
     div
       margin: 0 auto
       padding: 2em 0
+    h1
+      letter-spacing: .3em
+  #contact
+    background-color: $dark
+  img
+    width: 100%
+    margin: 2em 0
+  img.float
+    width: 50%
+    float: left
+    margin: 1em 2em 1em 0
+  .article-content
+    h1
+      font-weight: 200
+      text-shadow: $shadow
     h2
       font-family: "brandon-grotesque", "proxima-nova", lato, helvetica, verdana, sans-serif
       font-weight: 300
-    h1
-      font-weight: 200
-      letter-spacing: .3em
-      text-shadow: $shadow
-  #contact
-    background-color: $dark
+      color: $secondary
+    h3
+      color: $main
