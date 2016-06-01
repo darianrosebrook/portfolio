@@ -69,7 +69,6 @@
   #case-studies
     color: $dark
     text-align: center
-    padding: 2em
     p:last-of-type
       margin-bottom: 2em
 
@@ -84,7 +83,6 @@
     background-attachment: fixed
   .articles
     color: $dark
-    padding: 2em
     .card
       overflow: hidden
       &:hover
@@ -93,8 +91,6 @@
         top: 48%
       h2
         margin-bottom: 1.5em
-      p:last-of-type
-        margin-bottom: 2em
 
 
 
@@ -170,7 +166,7 @@
       transition: $transition
       transition-delay: 1s
       animation-play-state: paused
-    
+
     #descriptions
       background-color: $dark
       display: inline-flex
@@ -216,14 +212,16 @@
           position: absolute
           transform: translateX(-50%)
           left: 50%
+        h2
+          margin-top: 60%
         .artcont
           position: absolute
           width: 90%
-          top: 18vw
           transform: translateX(-50%)
           left: 50%
-        .btn
           position: absolute
           bottom: 2em
           transform: translateX(-50%)
           left: 50%
+    #case-studies, .articles
+      padding: 2em

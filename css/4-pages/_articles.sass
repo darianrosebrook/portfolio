@@ -1,11 +1,11 @@
 html
-  background-color: $secondary
+  background-color: $light
 #article-post
-  .main-content
+  .article-content
     background-color: $light
     color: $dark
-    width: 65%
     margin: 0 auto
+    padding: 1em
     .article-content
       line-height: 1.35em
       padding: 5em
@@ -27,18 +27,20 @@ html
       padding: 2em 0
     h1
       letter-spacing: .3em
+      font-weight: 300
   #contact
     background-color: $dark
-  img
-    width: 100%
-    margin: 2em 0
-  img.float
-    width: 50%
-    float: left
-    margin: 1em 2em 1em 0
+  .article-content
+    img
+      width: 100%
+      margin: 2em 0
+    img.float
+      width: 50%
+      float: left
+      margin: 1em 2em 1em 0
   .article-content
     h1
-      font-weight: 200
+      font-weight: 400
       text-shadow: $shadow
     h2
       font-family: "brandon-grotesque", "proxima-nova", lato, helvetica, verdana, sans-serif
@@ -46,3 +48,10 @@ html
       color: $secondary
     h3
       color: $main
+
+  header#webdes
+    background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url('../assets/office.jpg') no-repeat bottom
+    background-size: cover
+@media screen and (min-width: 1024px)
+  .article-content
+    width: 65%

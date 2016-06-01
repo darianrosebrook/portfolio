@@ -2,12 +2,13 @@
 layout: article
 category: article
 title: Handling Expectational Debt And Falling Behind.
-metaDesc: Why are we all given the same 24 hours? A lot of people seem to get more done than I can, and yet no one has more time during the day ...
+metaDesc: Why are we all given the same 24 hours? A lot of people seem to get more done than I can, and yet no one has more time during the day than others. Even since I started working 6 years ago, I have not earned any extra time in my life. Why do I feel more exhausted than my earlier self?
 type: Life-Hacks
 class: type-life  
 date: May 20, 2016
 img: assets/expectational-debt.jpg
 bodyId: article-post
+head: expectational-debt
 ---
 # Handling expectational debt and falling behind.
 
@@ -20,7 +21,7 @@ Why are we all given the same 24 hours? A lot of people seem to get more done th
 Time is a commodity. It is both finite and infinite. We only have 24 hours to use and it does not replenish until the following day. We have to protect our use of that time just as much as we protect the use of our money. When we say yes and commit to things, we are spending some of the expectations held for that day. So when you overspend your time on those expectations, it is akin to blowing apart your spending budget. _You get into debt from your expectations._ You have to be mindful about the areas you choose to spend your hours. So if you don’t have enough time, it’s because you already spent that time on something else.
 
 ## How I found myself falling behind
-<img src="https://cdn-images-1.medium.com/max/600/1*WjvFA3wtFd0FvpDoqFsyJg.jpeg" alt="The stagnant problem" class="float" />
+<img src="https://cdn-images-1.medium.com/max/600/1*WjvFA3wtFd0FvpDoqFsyJg.jpeg" alt="The stagnant problem" class="float cf" />
 
 
 

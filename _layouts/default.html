@@ -16,13 +16,13 @@
     <meta name="twitter:creator" content="@d_evyn">
     <meta name="twitter:url" content="http://darianrosebrook.com">
     <meta name="twitter:title" content="{{page.title}}">
-    <meta name="twitter:description" content="{{page.metaDesc | turncate: 196}} ...">
+    <meta name="twitter:description" content="{{page.metaDesc | truncate: 196}}">
     <meta name="twitter:image" content="http://darianrosebrook.com/assets/hero-responsive.gif">
 
     <!-- google plus -->
     <link href="https://plus.google.com/106679625106063278529" rel="publisher" />
     <meta itemprop="name" content="{{page.title}}" />
-    <meta itemprop="description" content="{{page.metaDesc | turncate: 196}} ..." />
+    <meta itemprop="description" content="{{page.metaDesc | truncate: 196}}" />
     <meta itemprop="image" content="https://pbs.twimg.com/profile_images/728050194760105984/vMdqe2oE_normal.jpg"/>
     <meta itemprop="audience" content="Marketers, designers, Branding Marketers, Small Business"/>
     <meta itemprop="alternativeHeadline" content="{{page.title}}"/>
@@ -33,7 +33,7 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="{{page.title}}">
     <meta property="og:image" content="http://darianrosebrook.com/assets/hero-responsive.gif">
-    <meta property="og:description" content="{{metaDesc | turncate: 170}} ...">
+    <meta property="og:description" content="{{metaDesc | truncate: 167}}">
     <meta property="og:site_name" content="Darian Rosebrook">
     <meta property="og:locale" content="en_US">
 
@@ -88,9 +88,9 @@
             <li id="greeting"></li>
             <li><a href="{{site.baseurl}}/" class="{%if page.url == '' %}current{% endif %}" >Home</a></li>
             <li><a href="{{site.baseurl}}/web-design" class="{%if page.url contains 'web-design' %}current{% endif %}" >Web Design</a></li>
-            <li><a href="{{site.baseurl}}/{{site.baseurl}}/soon" class="{%if page.url contains '/graphic-design' %}current{% endif %}" >Graphic Design</a></li>
-            <li><a href="{{site.baseurl}}/{{site.baseurl}}/soon" class="{%if page.url contains '/about' %}current{% endif %}" >About</a></li>
-            <li><a href="{{site.baseurl}}/{{site.baseurl}}/soon"  class="{%if page.url contains '/articles' %}current{% endif %}" target="_blank">Articles</a></li>
+            <li><a href="{{site.baseurl}}/soon" class="{%if page.url contains '/graphic-design' %}current{% endif %}" >Graphic Design</a></li>
+            <li><a href="{{site.baseurl}}/soon" class="{%if page.url contains '/about' %}current{% endif %}" >About</a></li>
+            <li><a href="{{site.baseurl}}/soon"  class="{%if page.url contains '/articles' %}current{% endif %}" target="_blank">Articles</a></li>
            <li><a href="https://drive.google.com/file/d/0B6JwGHRMHsnTdGFUOGFLdEFZOGM/view?usp=sharing">Resum&eacute;</a></li>
             <li><a href="http://twitter.com/d_evyn" target="_blank"><i class="fa fa-twitter"><span>twitter</span></i></a> |
              <a href="http://linkedin.com/in/darianrosebrook" target="_blank"><i class="fa fa-linkedin"><span>linkedin</span></i></a></li>

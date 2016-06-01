@@ -1,4 +1,5 @@
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
+@import url(https://fonts.googleapis.com/css?family=Lato:400,100,300,700);
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -228,7 +229,7 @@ body.in-transition {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 @keyframes fadeIn {
@@ -328,7 +329,7 @@ i span {
 .featured {
   width: 100%;
   text-align: center;
-  padding: 2em 0;
+  padding: .5em .5em;
 }
 
 .featured + h2 {
@@ -369,13 +370,12 @@ i span {
   transition: all ease 0.4s;
 }
 
-.btn ~ .btn {
-  margin-left: 2em;
-  margin-right: 0;
-}
-
 .hidden-nav .btn {
   font-size: 1.3rem;
+}
+
+.about .btn {
+  color: #152121;
 }
 
 .primary {
@@ -400,6 +400,9 @@ footer {
 }
 
 @media only screen and (min-width: 1025px) {
+  .featured {
+    margin: inherit 2em inherit 2em;
+  }
   .btn:hover {
     background-color: #90d8cd;
   }
@@ -415,6 +418,10 @@ footer {
   }
   .btn:hover {
     transform: translateY(-0.3em);
+  }
+  .btn ~ .btn {
+    margin-left: 2em;
+    margin-right: 0;
   }
   #contact i:hover {
     transform: translateY(-0.3em);
@@ -570,22 +577,22 @@ footer {
 }
 
 html {
-  background-color: #b7b7b7;
+  background-color: #fafafa;
 }
 
-#article-post .main-content {
+#article-post .article-content {
   background-color: #fafafa;
   color: #152121;
-  width: 65%;
   margin: 0 auto;
+  padding: 1em;
 }
 
-#article-post .main-content .article-content {
+#article-post .article-content .article-content {
   line-height: 1.35em;
   padding: 5em;
 }
 
-#article-post .main-content .article-content p {
+#article-post .article-content .article-content p {
   margin-bottom: 1.5em;
 }
 
@@ -609,25 +616,26 @@ html {
 
 #article-post header h1 {
   letter-spacing: .3em;
+  font-weight: 300;
 }
 
 #article-post #contact {
   background-color: #152121;
 }
 
-#article-post img {
+#article-post .article-content img {
   width: 100%;
   margin: 2em 0;
 }
 
-#article-post img.float {
+#article-post .article-content img.float {
   width: 50%;
   float: left;
   margin: 1em 2em 1em 0;
 }
 
 #article-post .article-content h1 {
-  font-weight: 200;
+  font-weight: 400;
   text-shadow: 0px 14px 22.04px 6.96px rgba(0, 0, 0, 0.5);
 }
 
@@ -639,4 +647,15 @@ html {
 
 #article-post .article-content h3 {
   color: #90d8cd;
+}
+
+#article-post header#webdes {
+  background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url("../assets/office.jpg") no-repeat bottom;
+  background-size: cover;
+}
+
+@media screen and (min-width: 1024px) {
+  .article-content {
+    width: 65%;
+  }
 }

@@ -17,3 +17,4 @@ class:
 date:
 img:
 bodyId:
+head: 

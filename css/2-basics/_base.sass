@@ -3,7 +3,7 @@
 body.in-transition
   transition: transform .5s cubic-bezier(.65, .01, .19, 1.01)
 .hidden
-  display: none
+  display: none !important
 // keyframes
 @keyframes fadeIn
   to
@@ -82,7 +82,7 @@ i
 .featured
   width: 100%
   text-align: center
-  padding: 2em 0
+  padding: .5em .5em
 .featured + h2
   margin-top: 2em
   font-weight: 300
@@ -115,11 +115,10 @@ i
   max-width: 100%
   margin-top: 1em
   transition: $transition
-.btn ~ .btn
-  margin-left: 2em
-  margin-right: 0
 .hidden-nav .btn
   font-size: 1.3rem
+.about .btn
+  color: $dark
 
 .primary
   background-color: $highlight
@@ -138,6 +137,8 @@ footer
 
 
 @media only screen and (min-width: 1025px)
+  .featured
+    margin: inherit 2em inherit 2em
   .btn
     &:hover
       background-color: $main
@@ -150,6 +151,10 @@ footer
       transition-duration: .05s
     &:hover
       transform: translateY(-0.3em)
+
+  .btn ~ .btn
+    margin-left: 2em
+    margin-right: 0
   #contact i:hover
     transform: translateY(-0.3em)
     color: $highlight

@@ -17,7 +17,6 @@ title: Darian Rosebrook | Web Design, Logo Design, User Experience, Articles
 
         <div class='main'>
           <section id="icons" class="icons autowide cf">
-            <h2 class="hidden">Design Services</h2>
             <article class='logo module'>
               <img id="iconWeb"   src='assets/icon-webdesign.svg' alt="Web design service" />
               <h3>Web Design</h3>
@@ -82,7 +81,7 @@ title: Darian Rosebrook | Web Design, Logo Design, User Experience, Articles
           <h2 class="hidden">These are case studies from some of my most recent design work</h2>
           {% for post in site.categories.case-study limit: 3 %}
           <article id="card-{{forloop.index}}" class="card {% if forloop.index == 2 %}card-main{% endif %}">
-            <img src="{{post.img}}" alt="{{post.metaDesc}}" />
+            <img src="{{post.img}}" alt="{{post.metaDesc | truncate: 200}} " />
             <h2>{{post.title}}</h2>
             <p>
               <small>{{post.date | date_to_long_string}} | <em class="{{post.class}}" >{{post.type}}</em></small>
@@ -102,17 +101,17 @@ title: Darian Rosebrook | Web Design, Logo Design, User Experience, Articles
           {% for post in site.categories.article limit:3 %}
           <article id="card{{forloop.index}}" class="card">
             <img src="{{post.img}}" alt="{{post.title}}" />
+            <h2>{{post.title}}</h2>
             <div class="artcont">
-              <h2>{{post.title}}</h2>
               <p>
                 <small>11 Apr, 2016 | <em class="{{post.class}}" >{{post.type}}</em></small>
               </p>
               <p>
-                <small class="metaDesc">&rdquo;
-                {{post.metaDesc | turncate: 170}}&ldquo;</small>
+                <small class="metaDesc">&ldquo;
+                {{post.metaDesc | truncate: 170}}&rdquo;</small>
               </p>
+              <a href="{{post.url}}" class="btn highlight">View Article</a>
             </div>
-            <a href="{{post.url}}" class="btn highlight">View Article</a>
           </article>
           {% endfor %}
 
