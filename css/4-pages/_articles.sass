@@ -1,7 +1,10 @@
 html
   background-color: $light
 #article-post
-
+  ul.share
+    li
+      display: inline-block
+      list-style-type: none
 
   header
     height: 35vh
@@ -10,9 +13,6 @@ html
     color: $light
     text-align: center
     position: relative
-  div
-    margin: 0 auto
-    padding: 2em 0
   h1
     letter-spacing: .3em
     font-weight: 300
@@ -29,6 +29,7 @@ html
       text-shadow: $shadow
       margin-bottom: 1em
       line-height: inherit
+      letter-spacing: normal
     h2
       font-family: "brandon-grotesque", "proxima-nova", lato, helvetica, verdana, sans-serif
       font-weight: 300
@@ -68,6 +69,10 @@ html
       transform: translate(-50%, -50%)
       top: 50%
       left: 50%
+      color: $light
+      &::before
+        content: open-quote
+        font-size: 68px
     & + p
       margin-top: 28vh
 

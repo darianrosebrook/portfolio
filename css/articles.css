@@ -580,6 +580,11 @@ html {
   background-color: #fafafa;
 }
 
+#article-post ul.share li {
+  display: inline-block;
+  list-style-type: none;
+}
+
 #article-post header {
   height: 35vh;
   background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url("../assets/expectational-debt.jpg") no-repeat center;
@@ -587,11 +592,6 @@ html {
   color: #fafafa;
   text-align: center;
   position: relative;
-}
-
-#article-post div {
-  margin: 0 auto;
-  padding: 2em 0;
 }
 
 #article-post h1 {
@@ -613,6 +613,7 @@ html {
   text-shadow: 0px 14px 22.04px 6.96px rgba(0, 0, 0, 0.5);
   margin-bottom: 1em;
   line-height: inherit;
+  letter-spacing: normal;
 }
 
 #article-post .article-content h2 {
@@ -665,6 +666,12 @@ html {
   transform: translate(-50%, -50%);
   top: 50%;
   left: 50%;
+  color: #fafafa;
+}
+
+#article-post .callout h2::before {
+  content: open-quote;
+  font-size: 68px;
 }
 
 #article-post .callout + p {

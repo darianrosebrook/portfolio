@@ -10,7 +10,6 @@ img: assets/expectational-debt.jpg
 bodyId: article-post
 head: expectational-debt
 ---
-# Handling expectational debt and falling behind.
 
 
 
@@ -44,6 +43,8 @@ Every day. (except Sunday and Tuesday: that is my family time)
 It seems manageable. It looks like all of the steps are there. So why is it I feel exhausted? Why is it I keep falling behind?
 
 <div class="callout"> <h2> You have to put the big rocks in first, say no to some fine sand.</h2></div>
+
+<img src="{{site.baseurl}}/assets/rocks-hands.jpg" alt="The big rock goes first"  />
 
 
 
