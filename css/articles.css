@@ -580,26 +580,6 @@ html {
   background-color: #fafafa;
 }
 
-#article-post .article-content {
-  background-color: #fafafa;
-  color: #152121;
-  margin: 0 auto;
-  padding: 1em;
-}
-
-#article-post .article-content .article-content {
-  line-height: 1.35em;
-  padding: 5em;
-}
-
-#article-post .article-content .article-content p {
-  margin-bottom: 1.5em;
-}
-
-#article-post #nav-toggler:checked + .page-wrap .main-content {
-  position: relative;
-}
-
 #article-post header {
   height: 35vh;
   background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url("../assets/expectational-debt.jpg") no-repeat center;
@@ -609,18 +589,47 @@ html {
   position: relative;
 }
 
-#article-post header div {
+#article-post div {
   margin: 0 auto;
   padding: 2em 0;
 }
 
-#article-post header h1 {
+#article-post h1 {
   letter-spacing: .3em;
   font-weight: 300;
 }
 
-#article-post #contact {
-  background-color: #152121;
+#article-post .article-content {
+  background-color: #fafafa;
+  color: #152121;
+  margin: 0 auto;
+  padding: 1em;
+  line-height: 1.35em;
+  padding: 3em;
+}
+
+#article-post .article-content h1 {
+  font-weight: 400;
+  text-shadow: 0px 14px 22.04px 6.96px rgba(0, 0, 0, 0.5);
+  margin-bottom: 1em;
+  line-height: inherit;
+}
+
+#article-post .article-content h2 {
+  font-family: "brandon-grotesque", "proxima-nova", lato, helvetica, verdana, sans-serif;
+  font-weight: 300;
+  color: #b7b7b7;
+  margin-bottom: 1em;
+  line-height: inherit;
+}
+
+#article-post .article-content h3 {
+  color: #90d8cd;
+  margin-bottom: 1em;
+}
+
+#article-post .article-content p {
+  margin-bottom: 1.5em;
 }
 
 #article-post .article-content img {
@@ -634,23 +643,52 @@ html {
   margin: 1em 2em 1em 0;
 }
 
-#article-post .article-content h1 {
-  font-weight: 400;
-  text-shadow: 0px 14px 22.04px 6.96px rgba(0, 0, 0, 0.5);
+#article-post #nav-toggler:checked + .page-wrap .main-content {
+  position: relative;
 }
 
-#article-post .article-content h2 {
-  font-family: "brandon-grotesque", "proxima-nova", lato, helvetica, verdana, sans-serif;
-  font-weight: 300;
-  color: #b7b7b7;
+#article-post #contact {
+  background-color: #152121;
 }
 
-#article-post .article-content h3 {
-  color: #90d8cd;
+#article-post .callout {
+  position: absolute;
+  height: 20vh;
+  width: 100vw;
+  left: 0;
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+#article-post .callout h2 {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+}
+
+#article-post .callout + p {
+  margin-top: 28vh;
 }
 
 #article-post header#webdes {
-  background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url("../assets/office.jpg") no-repeat bottom;
+  background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url("../assets/expectational-debt.jpg") no-repeat bottom;
+  background-size: cover;
+}
+
+#article-post .webdes .callout {
+  background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url("../assets/expectational-debt.jpg") no-repeat bottom;
+  background-size: cover;
+}
+
+#article-post header#expectational-debt {
+  background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url("../assets/expectational-debt.jpg") no-repeat bottom;
+  background-size: cover;
+}
+
+#article-post .expectational-debt .callout {
+  position: absolute;
+  background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url("../assets/expectational-debt.jpg") no-repeat bottom;
   background-size: cover;
 }
 

@@ -1,19 +1,7 @@
 html
   background-color: $light
 #article-post
-  .article-content
-    background-color: $light
-    color: $dark
-    margin: 0 auto
-    padding: 1em
-    .article-content
-      line-height: 1.35em
-      padding: 5em
-      p
-        margin-bottom: 1.5em
-  #nav-toggler:checked + .page-wrap
-    .main-content
-      position: relative
+
 
   header
     height: 35vh
@@ -22,15 +10,39 @@ html
     color: $light
     text-align: center
     position: relative
-    div
-      margin: 0 auto
-      padding: 2em 0
-    h1
-      letter-spacing: .3em
-      font-weight: 300
-  #contact
-    background-color: $dark
+  div
+    margin: 0 auto
+    padding: 2em 0
+  h1
+    letter-spacing: .3em
+    font-weight: 300
   .article-content
+    background-color: $light
+    color: $dark
+    margin: 0 auto
+    padding: 1em
+    line-height: 1.35em
+    padding: 3em
+
+    h1
+      font-weight: 400
+      text-shadow: $shadow
+      margin-bottom: 1em
+      line-height: inherit
+    h2
+      font-family: "brandon-grotesque", "proxima-nova", lato, helvetica, verdana, sans-serif
+      font-weight: 300
+      color: $secondary
+      margin-bottom: 1em
+      line-height: inherit
+
+    h3
+      color: $main
+      margin-bottom: 1em
+
+    p
+      margin-bottom: 1.5em
+
     img
       width: 100%
       margin: 2em 0
@@ -38,20 +50,42 @@ html
       width: 50%
       float: left
       margin: 1em 2em 1em 0
-  .article-content
-    h1
-      font-weight: 400
-      text-shadow: $shadow
+  #nav-toggler:checked + .page-wrap
+    .main-content
+      position: relative
+  #contact
+    background-color: $dark
+  .callout
+    position: absolute
+    height: 20vh
+    width: 100vw
+    left: 0
+    text-align: center
+    margin-bottom: 1em
+
     h2
-      font-family: "brandon-grotesque", "proxima-nova", lato, helvetica, verdana, sans-serif
-      font-weight: 300
-      color: $secondary
-    h3
-      color: $main
+      position: absolute
+      transform: translate(-50%, -50%)
+      top: 50%
+      left: 50%
+    & + p
+      margin-top: 28vh
 
   header#webdes
-    background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url('../assets/office.jpg') no-repeat bottom
+    background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url('../assets/expectational-debt.jpg') no-repeat bottom
     background-size: cover
+  .webdes
+    .callout
+      background:  linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url('../assets/expectational-debt.jpg') no-repeat bottom
+      background-size: cover
+  header#expectational-debt
+    background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url('../assets/expectational-debt.jpg') no-repeat bottom
+    background-size: cover
+  .expectational-debt
+    .callout
+      position: absolute
+      background:  linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url('../assets/expectational-debt.jpg') no-repeat bottom
+      background-size: cover
 @media screen and (min-width: 1024px)
   .article-content
     width: 65%

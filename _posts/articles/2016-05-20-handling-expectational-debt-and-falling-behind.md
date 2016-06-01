@@ -43,8 +43,7 @@ Every day. (except Sunday and Tuesday: that is my family time)
 
 It seems manageable. It looks like all of the steps are there. So why is it I feel exhausted? Why is it I keep falling behind?
 
-## You have to put the big rocks in first, say no to some fine sand.
-<img src="https://cdn-images-1.medium.com/max/800/1*7MXO4Q75Ymx94JSo10aMug.jpeg" alt="The big rocks"  />
+<div class="callout"> <h2> You have to put the big rocks in first, say no to some fine sand.</h2></div>
 
 
 
