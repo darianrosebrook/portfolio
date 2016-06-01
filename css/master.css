@@ -202,7 +202,7 @@ body.in-transition {
   padding: 0; }
 
 html {
-  font-family: "proxima-nova", lato, helvetica, vedana, sans-serif;
+  font-family: "lato", "helvetica", vedana, sans-serif;
   background-color: #152121;
   color: #ebffff;
   font-size: 62.5%; }
