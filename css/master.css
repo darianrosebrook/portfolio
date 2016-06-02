@@ -763,3 +763,121 @@ footer {
         left: 50%; }
   #home #case-studies, #home .articles {
     padding: 2em; } }
+
+#webdesign #hero {
+  background: #152121 url("../assets/Web-Design.jpg") no-repeat center;
+  background-size: cover;
+  height: 65vh;
+  color: #fafafa;
+  text-align: center;
+  position: relative; }
+
+#webdesign #hero div {
+  margin: 0 auto;
+  padding: 2em 0; }
+
+#webdesign #hero h2 {
+  font-family: "brandon-grotesque", "proxima-nova", lato, helvetica, verdana, sans-serif;
+  font-weight: 300;
+  font-size: 1.3em; }
+
+#webdesign #hero h1 {
+  font-weight: 200;
+  letter-spacing: .3em;
+  font-size: 2em; }
+
+#webdesign #process {
+  padding: 1em;
+  background-color: #fafafa; }
+
+#webdesign .card {
+  background-color: #152121; }
+
+#webdesign .card:hover {
+  background-color: #90d8cd;
+  color: #152121; }
+
+#webdesign .card:hover .btn {
+  background-color: #fee197; }
+
+#webdesign .card h2 {
+  margin-bottom: 1.5em; }
+
+@media only screen and (min-width: 1025px) {
+  #webdesign #hero div {
+    width: 50%;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translate(-50%, -70%);
+        -ms-transform: translate(-50%, -70%);
+            transform: translate(-50%, -70%);
+    left: 50%; }
+  #webdesign #hero h2 {
+    font-family: "brandon-grotesque", "proxima-nova", lato, helvetica, verdana, sans-serif;
+    font-weight: 300;
+    font-size: 1.8em; }
+  #webdesign #hero h1 {
+    font-weight: 200;
+    letter-spacing: .3em;
+    font-size: 3em; }
+  #webdesign #process {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    position: relative;
+    height: 55vh1qw; }
+  #webdesign .card {
+    position: relative;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    width: 20%;
+    min-height: 70vh;
+    height: auto;
+    vertical-align: top;
+    top: -20vh;
+    font-size: 1.3em;
+    padding: 1em;
+    transition: all ease .3s; }
+  #webdesign .card p {
+    margin-bottom: 2em; }
+  #webdesign .card .btn {
+    position: absolute;
+    bottom: 2em;
+    -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+            transform: translateX(-50%);
+    left: 50%; }
+  #webdesign .card:hover {
+    top: -23vh; }
+  #webdesign .case-study-one {
+    background: url("../assets/web-port.jpg") no-repeat center; }
+  #webdesign .case-study-two {
+    background: url("../assets/web-out.jpg") no-repeat center;
+    color: #152121; }
+  #webdesign .case-study-three {
+    background: url("../assets/web-landing.jpg") no-repeat center; }
+  #webdesign .case-study {
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+      background-attachment-padding: 0 10%;
+      background-attachment-position: relative; }
+  #webdesign .case-content {
+    width: 40%;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+            transform: translateY(-50%); }
+  #webdesign hr {
+    display: inline-block;
+    width: 40%; } }

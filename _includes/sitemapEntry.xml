@@ -1,0 +1,18 @@
+<url>
+  <loc>http://darianrosebrook.com{{site.baseurl}}{{include.entry.url}}</loc>
+    {% if entry=post %}
+      {% if include.entry.lastmod == null %}
+        <lastmod>{{ include.entry.date | date_to_xmlschema }}</lastmod>
+      {% else %}
+        <lastmod>{{ include.entry.lastmod | date_to_xmlschema}}</lastmod>
+      {% endif %}
+    {% endif %}
+    {% if include.entry.changefreq %}
+      <changefreq>{{include.entry.changefreq}}</changefreq>
+    {% endif %}
+    {% if include.entry.priority %}
+      <priority>{{include.priority}}</priority>
+    {% endif %}
+  <lastmod>2016-05-18T20:32:08+00:00</lastmod>
+
+</url>

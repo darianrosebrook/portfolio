@@ -619,7 +619,7 @@ html {
 #article-post .article-content h2 {
   font-family: "brandon-grotesque", "proxima-nova", lato, helvetica, verdana, sans-serif;
   font-weight: 300;
-  color: #b7b7b7;
+  color: #9f9f9f;
   margin-bottom: 1em;
   line-height: inherit;
 }
@@ -654,7 +654,7 @@ html {
 
 #article-post .callout {
   position: absolute;
-  height: 20vh;
+  height: 30vh;
   width: 100vw;
   left: 0;
   text-align: center;
@@ -674,8 +674,8 @@ html {
   font-size: 68px;
 }
 
-#article-post .callout + p {
-  margin-top: 28vh;
+#article-post .callout + h2 {
+  margin-top: 38vh;
 }
 
 #article-post header#webdes {
@@ -702,5 +702,11 @@ html {
 @media screen and (min-width: 1024px) {
   .article-content {
     width: 65%;
+  }
+  .callout {
+    height: 20vh;
+  }
+  .callout + h2 {
+    margin-top: 38vh;
   }
 }

@@ -33,7 +33,7 @@ html
     h2
       font-family: "brandon-grotesque", "proxima-nova", lato, helvetica, verdana, sans-serif
       font-weight: 300
-      color: $secondary
+      color: #9f9f9f
       margin-bottom: 1em
       line-height: inherit
 
@@ -58,7 +58,7 @@ html
     background-color: $dark
   .callout
     position: absolute
-    height: 20vh
+    height: 30vh
     width: 100vw
     left: 0
     text-align: center
@@ -73,8 +73,8 @@ html
       &::before
         content: open-quote
         font-size: 68px
-    & + p
-      margin-top: 28vh
+    & + h2
+      margin-top: 38vh
 
   header#webdes
     background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url('../assets/expectational-debt.jpg') no-repeat bottom
@@ -94,3 +94,7 @@ html
 @media screen and (min-width: 1024px)
   .article-content
     width: 65%
+  .callout
+    height: 20vh
+    & + h2
+      margin-top: 38vh

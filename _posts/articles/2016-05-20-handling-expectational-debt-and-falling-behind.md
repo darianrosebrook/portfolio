@@ -5,7 +5,6 @@ title: Handling Expectational Debt And Falling Behind.
 metaDesc: Why are we all given the same 24 hours? A lot of people seem to get more done than I can, and yet no one has more time during the day than others. Even since I started working 6 years ago, I have not earned any extra time in my life. Why do I feel more exhausted than my earlier self?
 type: Life-Hacks
 class: type-life  
-date: May 20, 2016
 img: assets/expectational-debt.jpg
 bodyId: article-post
 head: expectational-debt

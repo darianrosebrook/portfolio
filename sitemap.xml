@@ -1,3 +1,6 @@
+---
+---
+
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset
       xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
@@ -5,13 +8,15 @@
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
-<url>
-  <loc>http://darianrosebrook.com/</loc>
-  <lastmod>2016-05-18T20:32:08+00:00</lastmod>
-</url>
-<url>
-  <loc>http://darianrosebrook.com/soon.html</loc>
-  <lastmod>2016-05-15T20:32:08+00:00</lastmod>
-</url>
+    {% for post in site.posts %}
+      {% include sitemapEntry.xml entry=post %}
+    {% endfor %}
+
+    {% for page in site.pages %}
+      {% if page.layout %}
+        {% include sitemapEntry.xml entry=page %}
+      {% endif %}
+    {% endfor %}
+
 
 </urlset>
