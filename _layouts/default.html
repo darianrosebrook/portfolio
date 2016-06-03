@@ -5,19 +5,25 @@
     <meta http-equiv="x-ua-compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{{page.title}}</title>
-    <meta name="description" content="{{page.metaDesc}}">
+    <meta name="description" content="{{page.metaDesc | truncate: 152}}">
+    <script type="text/javascript">
+      var host = "yoursite.com";
+      if ((host == window.location.host) && (window.location.protocol != "https:"))
+          window.location.protocol = "https";
+    </script>
 
     <!--m e t a c o n t e n t -->
-    <link rel=”author” href="https://plus.google.com/106679625106063278529" />
+    <link rel="author" href="https://plus.google.com/106679625106063278529" />
     <meta name="theme-color" content="90d8cd">
+    <link rel="canonical" href=" { { site.url } }{ { page.url } }" />
     <!-- twitter -->
     <meta name="twitter:card" content="{{twitterCardSize}}">
     <meta name="twitter:site" content="@d_evyn">
     <meta name="twitter:creator" content="@d_evyn">
-    <meta name="twitter:url" content="http://darianrosebrook.com">
+    <meta name="twitter:url" content="https://darianrosebrook.com">
     <meta name="twitter:title" content="{{page.title}}">
     <meta name="twitter:description" content="{{page.metaDesc | truncate: 196}}">
-    <meta name="twitter:image" content="http://darianrosebrook.com/assets/hero-responsive.gif">
+    <meta name="twitter:image" content="https://darianrosebrook.com/assets/hero-responsive.gif">
 
     <!-- google plus -->
     <link itemscope href="https://plus.google.com/106679625106063278529" rel="publisher" />
@@ -32,7 +38,7 @@
     <meta property="og:url" content="{{site.baseurl}}{{page.url}}">
     <meta property="og:type" content="website">
     <meta property="og:title" content="{{page.title}}">
-    <meta property="og:image" content="http://darianrosebrook.com/assets/hero-responsive.gif">
+    <meta property="og:image" content="https://darianrosebrook.com/assets/hero-responsive.gif">
     <meta property="og:description" content="{{metaDesc | truncate: 167}}">
     <meta property="og:site_name" content="Darian Rosebrook">
     <meta property="og:locale" content="en_US">
@@ -53,23 +59,7 @@
     <script>try{Typekit.load({ async: true });}catch(e){}</script>
   </head>
   <body id="{{page.bodyId}}">
-    <script>
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId      : '1076166062457470',
-          xfbml      : true,
-          version    : 'v2.6'
-        });
-      };
 
-      (function(d, s, id){
-         var js, fjs = d.getElementsByTagName(s)[0];
-         if (d.getElementById(id)) {return;}
-         js = d.createElement(s); js.id = id;
-         js.src = "//connect.facebook.net/en_US/sdk.js";
-         fjs.parentNode.insertBefore(js, fjs);
-       }(document, 'script', 'facebook-jssdk'));
-    </script>
     <input type="checkbox" id="nav-toggler" name="nav-toggler" value="true" >
     <div class="page-wrap">
       <label for="nav-toggler" class="toggle">☰</label>
@@ -94,8 +84,8 @@
             <li><a href="{{site.baseurl}}/soon" class="{%if page.url contains 'about' %}current{% endif %}" >About</a></li>
             <li><a href="{{site.baseurl}}/soon"  class="{%if page.url contains 'articles' %}current{% endif %}" target="_blank">Articles</a></li>
            <li><a href="https://drive.google.com/file/d/0B6JwGHRMHsnTdGFUOGFLdEFZOGM/view?usp=sharing">Resum&eacute;</a></li>
-            <li><a href="http://twitter.com/d_evyn" target="_blank"><i class="fa fa-twitter"><span>twitter</span></i></a> |
-             <a href="http://linkedin.com/in/darianrosebrook" target="_blank"><i class="fa fa-linkedin"><span>linkedin</span></i></a></li>
+            <li><a href="https://twitter.com/d_evyn" target="_blank"><i class="fa fa-twitter"><span>twitter</span></i></a> |
+             <a href="https://linkedin.com/in/darianrosebrook" target="_blank"><i class="fa fa-linkedin"><span>linkedin</span></i></a></li>
            <li><button data-href="#form" class="contactBtn btn btn-primary">Contact <i class="fa fa-paper-plane"><span>contact</span></i></button></li>
             </ul>
           </div>
@@ -112,6 +102,23 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 ga('create', 'UA-74665762-1', 'auto');
 ga('send', 'pageview');
 
+</script>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1076166062457470',
+      xfbml      : true,
+      version    : 'v2.6'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
 </script>
 </body>
 </html>

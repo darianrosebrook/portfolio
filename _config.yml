@@ -1,3 +1,7 @@
+url: https://darianrosebrook.com   # with the https protocol
+enforce_ssl: darianrosebrook.com   # without any protocol
+
+
 markdown: kramdown
 exclude: ['readme.md', 'readme.html']
 permalink: pretty
