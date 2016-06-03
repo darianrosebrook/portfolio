@@ -6,43 +6,29 @@
     color: #fafafa
     text-align: center
     position: relative
-
-
-  #hero div
-    margin: 0 auto
-    padding: 2em 0
-
-
-  #hero h2
-    font-family: "brandon-grotesque", "proxima-nova", lato, helvetica, verdana, sans-serif
-    font-weight: 300
-    font-size: 1.3em
-
-  #hero h1
-    font-weight: 200
-    letter-spacing: .3em
-    font-size: 2em
-
-
-
-
+    div
+      margin: 0 auto
+      padding: 2em 0
+    h2
+      font-family: "brandon-grotesque", "proxima-nova", lato, helvetica, verdana, sans-serif
+      font-weight: 300
+      font-size: 1.3em
+    h1
+      font-weight: 200
+      letter-spacing: .3em
+      font-size: 2em
   #process
     padding: 1em
     background-color:#fafafa
-
-
-  .card
-    background-color: #152121
-
-  .card:hover
-    background-color: #90d8cd
-    color: #152121
-
-  .card:hover .btn
-    background-color: #fee197
-
-  .card h2
-    margin-bottom: 1.5em
+    .card
+      background-color: #152121
+      &:hover
+        background-color: #90d8cd
+        color: #152121
+        .btn
+          background-color: #fee197
+    h2
+      margin-bottom: 1.5em
 
 
 
@@ -54,47 +40,41 @@
       top: 50%
       transform: translate(-50%, -70%)
       left: 50%
-
-    #hero h2
-      font-family: "brandon-grotesque", "proxima-nova", lato, helvetica, verdana, sans-serif
-      font-weight: 300
-      font-size:1.8em
-
-    #hero h1
-      font-weight: 200
-      letter-spacing: .3em
-      font-size: 3em
+      h2
+        font-family: "brandon-grotesque", "proxima-nova", lato, helvetica, verdana, sans-serif
+        font-weight: 300
+        font-size:1.8em
+      h1
+        font-weight: 200
+        letter-spacing: .3em
+        font-size: 3em
 
     #process
       display: flex
       justify-content: center
       position: relative
-      height: 55vh1qw
-
-    .card
-      position: relative
-      flex-direction: column
-      justify-content: space-between
-      width: 20%
-      min-height: 70vh
-      height: auto
-      vertical-align: top
-      top: -20vh
-      font-size: 1.3em
-      padding:1em
-      transition: all ease .3s
-
-    .card p
-      margin-bottom: 2em
-
-    .card .btn
-      position: absolute
-      bottom: 2em
-      transform: translateX(-50%)
-      left: 50%
-
-    .card:hover
-      top:-23vh
+      height: 55vh
+      .card
+        position: relative
+        flex-direction: column
+        justify-content: space-between
+        width: 20%
+        min-height: 70vh
+        height: auto
+        vertical-align: top
+        top: -20vh
+        font-size: 1.3em
+        padding:1em
+        transition: all ease .3s
+        p
+          margin-bottom: 2em
+        .btn
+          position: absolute
+          bottom: 2em
+          transform: translateX(-50%)
+          left: 50%
+        &:hover
+          top:-23vh
 
 
     .case-study-one
@@ -111,10 +91,8 @@
     	height: 100vh
     	background-repeat: no-repeat
     	background-size: cover
-    	background-position: center center
+    	background-position: center
     	background-attachment: fixed
-      padding: 0 10%
-      position: relative
 
 
     .case-content
