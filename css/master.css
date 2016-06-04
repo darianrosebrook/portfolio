@@ -563,10 +563,6 @@ footer {
     color: #152121; }
     #home .articles .card {
       overflow: hidden; }
-      #home .articles .card:hover {
-        position: relative;
-        box-shadow: 0px 14px 22.04px 6.96px rgba(0, 0, 0, 0.5);
-        top: 48%; }
       #home .articles .card h2 {
         margin-bottom: 1.5em; }
 
@@ -761,6 +757,10 @@ footer {
             -ms-transform: translateX(-50%);
                 transform: translateX(-50%);
         left: 50%; }
+      #home .articles .card:hover {
+        position: relative;
+        box-shadow: 0px 14px 22.04px 6.96px rgba(0, 0, 0, 0.5);
+        top: 48%; }
   #home #case-studies, #home .articles {
     padding: 2em; } }
 
@@ -830,7 +830,7 @@ footer {
       -webkit-justify-content: space-between;
           -ms-flex-pack: justify;
               justify-content: space-between;
-      width: 20%;
+      width: 24%;
       min-height: 70vh;
       height: auto;
       vertical-align: top;
@@ -856,19 +856,21 @@ footer {
     color: #152121; }
   #webdesign .case-study-three {
     background: url("../assets/web-landing.jpg") no-repeat center; }
-  #webdesign .case-study {
-    height: 100vh;
-    background-repeat: no-repeat;
+  #webdesign section[class|='case-study'] {
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; }
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    position: relative;
+    height: 100vh; }
   #webdesign .case-content {
     width: 40%;
     position: absolute;
     top: 50%;
     -webkit-transform: translateY(-50%);
         -ms-transform: translateY(-50%);
-            transform: translateY(-50%); }
+            transform: translateY(-50%);
+    padding: 0 10%; }
   #webdesign hr {
     display: inline-block;
     width: 40%; } }

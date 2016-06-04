@@ -85,10 +85,6 @@
     color: $dark
     .card
       overflow: hidden
-      &:hover
-        position: relative
-        box-shadow: $shadow
-        top: 48%
       h2
         margin-bottom: 1.5em
 
@@ -222,6 +218,10 @@
           position: absolute
           bottom: 2em
           transform: translateX(-50%)
-          left: 50%
+          left: 50%        
+        &:hover
+          position: relative
+          box-shadow: $shadow
+          top: 48%
     #case-studies, .articles
       padding: 2em
