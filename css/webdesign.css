@@ -405,11 +405,11 @@ footer {
 
 .construction .btn {
   color: #152121;
-  margin-bottom: .25em;
+  margin-bottom: .5em;
 }
 
 .construction p {
-  margin-bottom: .4em;
+  margin-bottom: .25em;
 }
 
 @media only screen and (min-width: 1025px) {
