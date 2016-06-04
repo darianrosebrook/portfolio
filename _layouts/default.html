@@ -42,6 +42,8 @@
     <!-- s t y l e s  a n d  s c r i p t s -->
     {% if page.url contains 'article' %}
     <link rel="stylesheet" href="{{site.baseurl}}/css/articles.css" media="screen" type="text/css" />
+    {% elsif page.url contains 'web-design' %}
+    <link rel="stylesheet" href="{{site.baseurl}}/css/webdesign.css" media="screen" type="text/css" />
     {% else %}
     <link rel="stylesheet" href="{{site.baseurl}}/css/master.css" media="screen" type="text/css" />
     {% endif %}
@@ -69,11 +71,11 @@
     </script>
   </head>
   <body id="{{page.bodyId}}">
-
     <input type="checkbox" id="nav-toggler" name="nav-toggler" value="true" >
     <div class="page-wrap">
       <label for="nav-toggler" class="toggle">☰</label>
       <div class="main-content">
+        <div class="construction"><p>This site is under construction.<p><p> <small>Over the course of the next month, more and more content will be added. To view the progress, check out the coming soon page</small></p><a href="{{site.baseurl}}/soon" class="btn primary">Coming Soon</a></div>
 
     {{content}}
 

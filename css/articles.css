@@ -399,6 +399,19 @@ footer {
   padding: 2em;
 }
 
+.construction {
+  text-align: center;
+}
+
+.construction .btn {
+  color: #152121;
+  margin-bottom: .25em;
+}
+
+.construction p {
+  margin-bottom: .4em;
+}
+
 @media only screen and (min-width: 1025px) {
   .featured {
     margin: inherit 2em inherit 2em;
@@ -674,7 +687,7 @@ html {
   font-size: 68px;
 }
 
-#article-post .callout + h2 {
+#article-post .callout + * {
   margin-top: 38vh;
 }
 

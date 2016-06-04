@@ -29,5 +29,4 @@ Your brand has a goal in mind and I want to help that goal be realized through d
 We need to understand the scope of the project. Utilizing a process of asking solid, fact finding questions will help us get to the core of what needs to be done. _What role does a website have within your brand's goals?_
 
 
-
 <div class="callout"><h2>It all starts with questions</h2></div>
