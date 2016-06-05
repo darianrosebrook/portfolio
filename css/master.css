@@ -267,7 +267,8 @@ i span {
 .featured {
   width: 100%;
   text-align: center;
-  padding: .5em .5em; }
+  padding: .5em .5em;
+  background-color: #152121; }
 
 .featured + h2 {
   margin-top: 2em;
@@ -326,7 +327,8 @@ footer {
   padding: 2em; }
 
 .construction {
-  text-align: center; }
+  text-align: center;
+  background-color: #152121; }
   .construction .btn {
     color: #152121;
     margin-bottom: .5em; }
@@ -560,7 +562,7 @@ footer {
       margin-bottom: 2em; }
     #home #case-studies img {
       width: 100%; }
-  #home div.featured:nth-of-type(3) {
+  #home div.featured:nth-of-type(4) {
     background-color: #ebffff;
     color: #152121; }
   #home .articlelist {

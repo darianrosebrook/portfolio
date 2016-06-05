@@ -330,6 +330,7 @@ i span {
   width: 100%;
   text-align: center;
   padding: .5em .5em;
+  background-color: #152121;
 }
 
 .featured + h2 {
@@ -401,6 +402,7 @@ footer {
 
 .construction {
   text-align: center;
+  background-color: #152121;
 }
 
 .construction .btn {
