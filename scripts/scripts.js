@@ -1,3 +1,4 @@
+
 // writing function to make writing this easier
 var icons = document.getElementsByClassName('logo'),
     desc = document.getElementsByClassName('icon-description'),
@@ -26,7 +27,10 @@ function toggleDescription(e) {
   container.classList.toggle('clicked');
 }
 
-container.addEventListener('click', toggleDescription);
+if (container) {
+  container.addEventListener('click', toggleDescription);
+}
+
 
 //smooth scroll-behavior
 var toggler = document.getElementById('nav-toggler'),

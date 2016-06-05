@@ -593,6 +593,7 @@ footer {
 
 html {
   background-color: #fafafa;
+  font-size: 50%;
 }
 
 #article-post ul.share li {
@@ -609,17 +610,21 @@ html {
   position: relative;
 }
 
-#article-post h1 {
+#article-post header h1 {
   letter-spacing: .3em;
   font-weight: 300;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
 }
 
 #article-post .article-content {
   background-color: #fafafa;
   color: #152121;
   margin: 0 auto;
-  padding: 1em;
-  line-height: 1.35em;
+  padding: .5em;
+  line-height: 1.8;
   padding: 3em;
 }
 
@@ -646,6 +651,12 @@ html {
 
 #article-post .article-content p {
   margin-bottom: 1.5em;
+  font-size: 1.3em;
+}
+
+#article-post .article-content p + p {
+  margin-top: -1.5em;
+  text-indent: 2em;
 }
 
 #article-post .article-content img {
@@ -669,7 +680,7 @@ html {
 
 #article-post .callout {
   position: absolute;
-  height: 30vh;
+  height: 25vh;
   width: 100vw;
   left: 0;
   text-align: center;
@@ -682,11 +693,15 @@ html {
   top: 50%;
   left: 50%;
   color: #fafafa;
+  font-size: 1.2em;
 }
 
 #article-post .callout h2::before {
   content: open-quote;
-  font-size: 68px;
+}
+
+#article-post .callout h2::after {
+  content: close-quote;
 }
 
 #article-post .callout + * {
@@ -694,12 +709,12 @@ html {
 }
 
 #article-post header#webdes {
-  background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url("../assets/expectational-debt.jpg") no-repeat bottom;
+  background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url("../assets/office.jpg") no-repeat bottom;
   background-size: cover;
 }
 
 #article-post .webdes .callout {
-  background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url("../assets/expectational-debt.jpg") no-repeat bottom;
+  background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url("../assets/coffee.jpg") no-repeat bottom;
   background-size: cover;
 }
 
@@ -715,13 +730,19 @@ html {
 }
 
 @media screen and (min-width: 1024px) {
-  .article-content {
+  #article-post .article-content {
     width: 65%;
   }
-  .callout {
-    height: 20vh;
+  #article-post .article-content p {
+    font-size: 1.3em;
   }
-  .callout + h2 {
+  #article-post .article-content h2 {
+    font-size: 1.9em;
+  }
+  #article-post .callout {
+    height: 25vh;
+  }
+  #article-post .callout + h2 {
     margin-top: 38vh;
   }
 }

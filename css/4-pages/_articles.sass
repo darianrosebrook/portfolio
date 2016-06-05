@@ -1,5 +1,6 @@
 html
   background-color: $light
+  font-size: 50%
 #article-post
   ul.share
     li
@@ -13,15 +14,19 @@ html
     color: $light
     text-align: center
     position: relative
-  h1
-    letter-spacing: .3em
-    font-weight: 300
+    h1
+      letter-spacing: .3em
+      font-weight: 300
+      position: absolute
+      transform: translate(-50%, -50%)
+      top: 50%
+      left: 50%
   .article-content
     background-color: $light
     color: $dark
     margin: 0 auto
-    padding: 1em
-    line-height: 1.35em
+    padding: .5em
+    line-height: 1.8
     padding: 3em
 
     h1
@@ -43,6 +48,10 @@ html
 
     p
       margin-bottom: 1.5em
+      font-size: 1.3em
+      & + p
+        margin-top: -1.5em
+        text-indent: 2em
 
     img
       width: 100%
@@ -58,7 +67,7 @@ html
     background-color: $dark
   .callout
     position: absolute
-    height: 30vh
+    height: 25vh
     width: 100vw
     left: 0
     text-align: center
@@ -70,18 +79,22 @@ html
       top: 50%
       left: 50%
       color: $light
+      font-size: 1.2em
       &::before
         content: open-quote
-        font-size: 68px
+
+      &::after
+        content: close-quote
+
     & + *
       margin-top: 38vh
 
   header#webdes
-    background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url('../assets/expectational-debt.jpg') no-repeat bottom
+    background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url('../assets/office.jpg') no-repeat bottom
     background-size: cover
   .webdes
     .callout
-      background:  linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url('../assets/expectational-debt.jpg') no-repeat bottom
+      background:  linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url('../assets/coffee.jpg') no-repeat bottom
       background-size: cover
   header#expectational-debt
     background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url('../assets/expectational-debt.jpg') no-repeat bottom
@@ -92,9 +105,14 @@ html
       background:  linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url('../assets/expectational-debt.jpg') no-repeat bottom
       background-size: cover
 @media screen and (min-width: 1024px)
-  .article-content
-    width: 65%
-  .callout
-    height: 20vh
-    & + h2
-      margin-top: 38vh
+  #article-post
+    .article-content
+      width: 65%
+      p
+        font-size: 1.3em
+      h2
+        font-size: 1.9em
+    .callout
+      height: 25vh
+      & + h2
+        margin-top: 38vh
