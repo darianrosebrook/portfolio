@@ -1,18 +1,12 @@
 ---
-layout: article
-category: article
 title: Web Design Work Flow for 2016
 metaDesc: Designing websites is so much more than throwing together some layout and fonts. The process dives much deeper than that. What web design has become is an iterative process of discovery and problem solving.
 type: Web Design
 class: type-web
 date: May 10, 2016
 img: assets/office.jpg
-bodyId: article-post
 head: webdes
-sitemap:
-    priority: 0.7
-    changefreq: 'monthly'
-    lastmod: 2013-03-29T12:49:30-05:00x
+
 
 ---
 
@@ -32,7 +26,7 @@ Your brand has a goal in mind and I want to help that goal be realized through d
 * Give a great presentation on the work and decisions and handing over the keys
 
 
-<div class="stop-markdown from indenting buttons"><button data-href="#form" type="button" name="button" class="contactBtn primary btn">Hire Me</button></div>
+<div class="stop-markdown-from-indenting-buttons"><button data-href="#form" type="button" name="button" class="contactBtn primary btn">Hire Me</button></div>
 
 
 ##  Questions are the building blocks and the center of focus on doing a site design

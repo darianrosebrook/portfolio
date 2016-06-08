@@ -5,3 +5,17 @@ enforce_ssl: darianrosebrook.com   # without any protocol
 markdown: kramdown
 exclude: ['readme.md', 'readme.html']
 permalink: pretty
+defaults:
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: article
+      category: article
+      bodyId: article-post
+      sitemap:
+          priority: 0.7
+          changefreq: 'monthly'
+          lastmod: 2013-03-29T12:49:30-05:00
+permalink: article/:title
