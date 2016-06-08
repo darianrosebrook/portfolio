@@ -789,7 +789,7 @@ footer {
     font-weight: 300;
     font-size: 1.3em; }
   #webdesign #hero h1 {
-    font-weight: 200;
+    font-weight: 300;
     letter-spacing: .3em;
     font-size: 2em; }
 
@@ -820,6 +820,15 @@ footer {
 #webdesign .case-study .case-content *:not(img) {
   margin-bottom: 2em; }
 
+#webdesign .case-study::after {
+  background: url("https://codyhouse.co/demo/fixed-background-effect/img/img-mobile-1.jpg");
+  background-size: 100% auto;
+  content: '';
+  display: block;
+  width: 100%;
+  padding: 60% 0;
+  margin: 2em auto 0; }
+
 @media only screen and (min-width: 1025px) {
   #webdesign #hero div {
     width: 50%;
@@ -834,7 +843,6 @@ footer {
       font-weight: 300;
       font-size: 1.8em; }
     #webdesign #hero div h1 {
-      font-weight: 200;
       letter-spacing: .3em;
       font-size: 3em; }
   #webdesign #process {
@@ -873,6 +881,10 @@ footer {
         left: 50%; }
       #webdesign #process .card:hover {
         top: -23vh; }
+  #webdesign .case-study::after {
+    background: none;
+    content: '';
+    display: none; }
   #webdesign .case-study-one {
     background: url("../assets/web-port.jpg") no-repeat center; }
   #webdesign .case-study-two {

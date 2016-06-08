@@ -14,7 +14,7 @@
       font-weight: 300
       font-size: 1.3em
     h1
-      font-weight: 200
+      font-weight: 300
       letter-spacing: .3em
       font-size: 2em
   #process
@@ -43,6 +43,15 @@
         color: $light
     .case-content *:not(img)
       margin-bottom: 2em
+    &::after
+      background: url('https://codyhouse.co/demo/fixed-background-effect/img/img-mobile-1.jpg')
+      background-size: 100% auto
+      content: ''
+      display: block
+      width: 100%
+      padding: 60% 0
+      margin: 2em auto 0
+
 
 
 @media only screen and (min-width: 1025px )
@@ -58,7 +67,6 @@
         font-weight: 300
         font-size:1.8em
       h1
-        font-weight: 200
         letter-spacing: .3em
         font-size: 3em
 
@@ -90,6 +98,11 @@
           top:-23vh
 
 
+    .case-study::after
+      background: none
+      content: ''
+      display: none
+
     .case-study-one
       background: url('../assets/web-port.jpg') no-repeat center
 
@@ -106,7 +119,6 @@
       background-attachment: fixed
       position: relative
       height: 100vh
-
 
     .case-content
       width: 80%

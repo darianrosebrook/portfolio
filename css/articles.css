@@ -668,12 +668,6 @@ html {
   margin: 2em 0;
 }
 
-#article-post .article-content img.float {
-  width: 50%;
-  float: left;
-  margin: 1em 2em 1em 0;
-}
-
 #article-post #nav-toggler:checked + .page-wrap .main-content {
   position: relative;
 }
@@ -742,6 +736,11 @@ html {
   }
   #article-post .article-content h2 {
     font-size: 1.9em;
+  }
+  #article-post .article-content img.float {
+    width: 50%;
+    float: left;
+    margin: 1em 2em 1em 0;
   }
   #article-post .callout {
     height: 25vh;

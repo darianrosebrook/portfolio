@@ -14,8 +14,9 @@ layout: default
   {{content}}
   <div class="share">
         <h1>If you found this article helpful, consider sharing with your friends: </h1>
-        <a href="https://twitter.com/share" class="twitter-share-button" data-via="d_evyn" data-hashtags="webdesign,design">Tweet</a>
-        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        <a href="https://twitter.com/intent/tweet?text={{ page.title }}&amp;url={{ site.url }}{{ page.url }}&amp;via=d_evyn&amp;related=d_evyn" rel="nofollow" target="_blank" title="Share on Twitter" class="btn secondary"><i class="fa fa-twitter"></i> Twitter</a>
+        <a href="https://facebook.com/sharer.php?u={{ site.url }}{{ page.url }}" rel="nofollow" target="_blank" title="Share on Facebook" class="btn secondary"><i class="fa fa-facebook"></i> Facebook</a>
+        <a href="https://plus.google.com/share?url={{ site.url }}{{ page.url }}" rel="nofollow" target="_blank" title="Share on Google+" class="btn secondary"><i class="fa fa-google"></i> Google+</a>
     </div>
 </div>
 
