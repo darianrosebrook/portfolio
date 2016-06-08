@@ -30,6 +30,20 @@
     h2
       margin-bottom: 1.5em
 
+  .case-study
+    img
+      display: inline-block
+      height: 40px
+      margin-right: 2%
+      & + h3
+        width: 70%
+        display: inline
+        position: relative
+        top: -.4em
+        color: $light
+    .case-content *:not(img)
+      margin-bottom: 2em
+
 
 @media only screen and (min-width: 1025px )
   #webdesign
@@ -95,7 +109,7 @@
 
 
     .case-content
-      width: 40%
+      width: 80%
       position: absolute
       top: 50%
       transform: translateY(-50%)

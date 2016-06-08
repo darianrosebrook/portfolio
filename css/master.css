@@ -806,6 +806,20 @@ footer {
   #webdesign #process h2 {
     margin-bottom: 1.5em; }
 
+#webdesign .case-study img {
+  display: inline-block;
+  height: 40px;
+  margin-right: 2%; }
+  #webdesign .case-study img + h3 {
+    width: 70%;
+    display: inline;
+    position: relative;
+    top: -.4em;
+    color: #fafafa; }
+
+#webdesign .case-study .case-content *:not(img) {
+  margin-bottom: 2em; }
+
 @media only screen and (min-width: 1025px) {
   #webdesign #hero div {
     width: 50%;
@@ -874,7 +888,7 @@ footer {
     position: relative;
     height: 100vh; }
   #webdesign .case-content {
-    width: 40%;
+    width: 80%;
     position: absolute;
     top: 50%;
     -webkit-transform: translateY(-50%);
