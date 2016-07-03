@@ -246,7 +246,7 @@ body.in-transition {
 }
 
 html {
-  font-family: "HK Compakt", "lato", "helvetica", vedana, sans-serif;
+  font-family: "lato", "helvetica", vedana, sans-serif;
   background-color: #152121;
   color: #ebffff;
   font-size: 62.5%;
@@ -275,7 +275,7 @@ a, a:link, a:visited, a:hover, a:focus {
 }
 
 p {
-  font-family: "hk compakt", lato, sans-serif;
+  font-family: lato, sans-serif;
 }
 
 em[class|="type"] {

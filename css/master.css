@@ -203,7 +203,7 @@ body.in-transition {
   padding: 0; }
 
 html {
-  font-family: "HK Compakt", "lato", "helvetica", vedana, sans-serif;
+  font-family: "lato", "helvetica", vedana, sans-serif;
   background-color: #152121;
   color: #ebffff;
   font-size: 62.5%; }
@@ -227,7 +227,7 @@ a, a:link, a:visited, a:hover, a:focus {
   display: block; }
 
 p {
-  font-family: "hk compakt", lato, sans-serif; }
+  font-family: lato, sans-serif; }
 
 em[class|="type"] {
   font-style: normal; }
@@ -488,7 +488,7 @@ footer {
       font-size: 1.5em;
       mix-blend-mode: difference;
       font-weight: 100;
-      font-family: "HK compakt", lato, sans-serif;
+      font-family: lato, sans-serif;
       text-transform: uppercase;
       letter-spacing: .25em; }
     #home header h2 {
