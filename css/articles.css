@@ -1,4 +1,5 @@
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
+@import url(../../assets/fonts/HKCompakt-Regular.woff);
 @import url(https://fonts.googleapis.com/css?family=Lato:400,100,300,700);
 html {
   font-family: sans-serif;
@@ -245,7 +246,7 @@ body.in-transition {
 }
 
 html {
-  font-family: "lato", "helvetica", vedana, sans-serif;
+  font-family: "HK Compakt", "lato", "helvetica", vedana, sans-serif;
   background-color: #152121;
   color: #ebffff;
   font-size: 62.5%;
@@ -274,7 +275,7 @@ a, a:link, a:visited, a:hover, a:focus {
 }
 
 p {
-  font-family: "brandon-grotesque", lato, sans-serif;
+  font-family: lato, sans-serif;
 }
 
 em[class|="type"] {
