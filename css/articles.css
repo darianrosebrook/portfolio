@@ -396,7 +396,6 @@ footer {
   background-color: #ebffff;
   color: #152121;
   text-align: center;
-  margin-top: 2em;
   padding: 2em;
 }
 
@@ -628,6 +627,11 @@ html {
   padding: 3em;
 }
 
+#article-post .article-content a:not(.btn) {
+  color: #90d8cd;
+  font-weight: 500;
+}
+
 #article-post .article-content h1 {
   font-weight: 400;
   text-shadow: 0px 14px 22.04px 6.96px rgba(0, 0, 0, 0.5);
@@ -704,6 +708,16 @@ html {
 
 #article-post .callout + * {
   margin-top: 38vh;
+}
+
+#article-post header#goals {
+  background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url("../assets/goals.jpg") no-repeat bottom;
+  background-size: cover;
+}
+
+#article-post .goals .callout {
+  background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url("../assets/goals.jpg") no-repeat bottom;
+  background-size: cover;
 }
 
 #article-post header#webdes {

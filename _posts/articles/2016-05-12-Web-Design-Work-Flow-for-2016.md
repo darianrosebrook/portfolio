@@ -1,5 +1,5 @@
 ---
-title: Web Design Work Flow for 2016
+title: A Work Flow Process for Creating Better Websites
 metaDesc: Designing websites is so much more than throwing together some layout and fonts. The process dives much deeper than that. What web design has become is an iterative process of discovery and problem solving.
 type: Web Design
 class: type-web
@@ -25,8 +25,6 @@ Your brand has a goal in mind and I want to help that goal be realized through d
 * Utilize my process of quality assurance to ensure the design is the best solution
 * Give a great presentation on the work and decisions and handing over the keys
 
-
-<div class="stop-markdown-from-indenting-buttons"><button data-href="#form" type="button" name="button" class="contactBtn primary btn">Hire Me</button></div>
 
 
 ##  Questions are the building blocks and the center of focus on doing a site design

@@ -28,7 +28,9 @@ html
     padding: .5em
     line-height: 1.8
     padding: 3em
-
+    a:not(.btn)
+      color: $main
+      font-weight: 500
     h1
       font-weight: 400
       text-shadow: $shadow
@@ -87,7 +89,13 @@ html
 
     & + *
       margin-top: 38vh
-
+  header#goals
+    background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url('../assets/goals.jpg') no-repeat bottom
+    background-size: cover
+  .goals
+    .callout
+      background:  linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url('../assets/goals.jpg') no-repeat bottom
+      background-size: cover
   header#webdes
     background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url('../assets/office.jpg') no-repeat bottom
     background-size: cover
