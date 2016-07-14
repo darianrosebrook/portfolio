@@ -39,6 +39,10 @@ I can gladly say that I know how to make websites for other people.
 ## What is my goal?
 I want to help other people out and their businesses by offering my services as a designer and developer to achieve their goals. I want to be able to teach what I know as efficiently and widespread as I know how, helping others who have similar interests do the same. I wanted to be able to provide for my family in a way that allows me to be around when they need me to be and watch their hearts grow. I've started burning my boat and am stepping onto shore of a grand possibility. People say that it isn't as glamourous as everything said. I disagree. This is what I love to do. I want to eventually turn this into a larger organization of designers and get them on board, but for now, my one man show is going to be enough.
 
+I started here with this goal of getting everthing on this list done. I am about halfway there. I'll have the two languages learned by the end of the year and finish out this year strong with those branding projects pushed to this portfolio site. 
+
+<img src="../../assets/2016-objectives.jpg " alt="my 2016 goals" class="float cf" />
+
 If you want to set foot on the same path, you can checkout a fellow developer's post [on how to become a web developer](http://christopherpound.com/so-you-want-to-be-a-web-developer) for a good learning path. And for design, a great resource would be [hackdesign.org](http://hackdesign.org) for some great resources on learning design.
 
 It takes a while to get used to this. I've literally spent as much time as a full time job learning and getting my skills up to par. I work 40hrs a week at work and an extra 25 - 35 hours at home on design. As soon as there's enough income to step into it full time. _It's game on, baby...._
