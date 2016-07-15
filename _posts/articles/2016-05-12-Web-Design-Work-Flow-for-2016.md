@@ -6,7 +6,7 @@ class: type-web
 when: May 12, 2016
 img: assets/office.jpg
 head: webdes
-
+metaimg: https://darianrosebrook.com/assets/hero-responsive.gif
 
 ---
 

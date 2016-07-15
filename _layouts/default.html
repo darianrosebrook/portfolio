@@ -24,7 +24,11 @@
     <meta name="twitter:url" content="https://darianrosebrook.com">
     <meta name="twitter:title" content="{{page.title}}">
     <meta name="twitter:description" content="{{page.metaDesc | truncate: 196}}">
+    {% if page.url contains 'article' %}
+    <meta name="twitter:image" content="{{page.metaimg}}">
+    {% else %}
     <meta name="twitter:image" content="https://darianrosebrook.com/assets/hero-responsive.gif">
+    {% endif%}
 
     <!-- google plus -->
     <link itemscope href="https://plus.google.com/106679625106063278529" rel="publisher" />
@@ -39,7 +43,7 @@
     <meta property="og:url" content="{{site.baseurl}}{{page.url}}">
     <meta property="og:type" content="website">
     <meta property="og:title" content="{{page.title}}">
-    <meta property="og:image" content="https://darianrosebrook.com/assets/hero-responsive.gif">
+    <meta property="og:image" content="{{page.metaimg}}">
     <meta property="og:description" content="{{metaDesc | truncate: 167}}">
     <meta property="og:site_name" content="Darian Rosebrook">
     <meta property="og:locale" content="en_US">

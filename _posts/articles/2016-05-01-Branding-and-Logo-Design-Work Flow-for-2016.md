@@ -8,4 +8,5 @@ class: type-brand
 when: May 20, 2016
 img: assets/rocks-hands.jpg
 bodyId: article-post
+metaimg: https://darianrosebrook.com/assets/hero-responsive.gif
 ---

@@ -5,6 +5,7 @@ type: Life Stuff
 class: type-life
 when: Jul 15, 2016
 img: assets/torch.jpg
+metaimg: https://darianrosebrook.com/assets/metaboats.jpg
 head: goals
 
 
