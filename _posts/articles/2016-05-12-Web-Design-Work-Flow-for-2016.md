@@ -3,7 +3,7 @@ title: A Work Flow Process for Creating Better Websites
 metaDesc: Designing websites is so much more than throwing together some layout and fonts. The process dives much deeper than that. What web design has become is an iterative process of discovery and problem solving.
 type: Web Design
 class: type-web
-date: May 10, 2016
+when: May 12, 2016
 img: assets/office.jpg
 head: webdes
 
