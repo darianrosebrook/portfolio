@@ -601,7 +601,7 @@ html {
 }
 
 #article-post header {
-  height: 35vh;
+  height: 85vh;
   background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url("../assets/expectational-debt.jpg") no-repeat center;
   background-size: cover;
   color: #fafafa;
@@ -711,12 +711,12 @@ html {
 }
 
 #article-post header#goals {
-  background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url("../assets/goals.jpg") no-repeat bottom;
+  background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url("../assets/torch.jpg") no-repeat center;
   background-size: cover;
 }
 
 #article-post .goals .callout {
-  background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url("../assets/goals.jpg") no-repeat bottom;
+  background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url("../assets/torch.jpg") no-repeat center;
   background-size: cover;
 }
 
@@ -742,6 +742,9 @@ html {
 }
 
 @media screen and (min-width: 1024px) {
+  #article-post header {
+    height: 35vh;
+  }
   #article-post .article-content {
     width: 65%;
   }

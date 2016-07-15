@@ -8,7 +8,7 @@ html
       list-style-type: none
 
   header
-    height: 35vh
+    height: 85vh
     background:  linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url('../assets/expectational-debt.jpg') no-repeat center
     background-size: cover
     color: $light
@@ -90,11 +90,11 @@ html
     & + *
       margin-top: 38vh
   header#goals
-    background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url('../assets/goals.jpg') no-repeat bottom
+    background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url('../assets/torch.jpg') no-repeat center
     background-size: cover
   .goals
     .callout
-      background:  linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url('../assets/goals.jpg') no-repeat bottom
+      background:  linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url('../assets/torch.jpg') no-repeat center
       background-size: cover
   header#webdes
     background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url('../assets/office.jpg') no-repeat bottom
@@ -113,9 +113,11 @@ html
       background-size: cover
 @media screen and (min-width: 1024px)
   #article-post
+    header
+      height: 35vh
     .article-content
       width: 65%
-      p
+      p 
         font-size: 1.3em
       h2
         font-size: 1.9em
