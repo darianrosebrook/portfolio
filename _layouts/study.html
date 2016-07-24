@@ -1,0 +1,20 @@
+---
+layout: default
+---
+  {% include header.html %}
+<div class="article-content {{page.head}}">
+
+  <h1>{{page.title}}</h1>
+  <p>
+    <small>{{page.date | date_to_long_string}} | <em class="{{page.class}}" >{{page.type}}</em></small>
+  </p>
+  {{content}}
+  <div class="share">
+        <h1>If you found this study helpful, consider sharing to have a hand in helping others too: </h1>
+        <a href="https://twitter.com/intent/tweet?text={{ page.title }}&amp;url={{ site.url }}{{ page.url }}&amp;via=d_evyn&amp;related=d_evyn" rel="nofollow" target="_blank" title="Share on Twitter" class="btn secondary"><i class="fa fa-twitter"></i> Twitter</a>
+        <a href="https://facebook.com/sharer.php?u={{ site.url }}{{ page.url }}" rel="nofollow" target="_blank" title="Share on Facebook" class="btn secondary"><i class="fa fa-facebook"></i> Facebook</a>
+        <a href="https://plus.google.com/share?url={{ site.url }}{{ page.url }}" rel="nofollow" target="_blank" title="Share on Google+" class="btn secondary"><i class="fa fa-google"></i> Google+</a>
+    </div>
+</div>
+
+{% include contact.html %}

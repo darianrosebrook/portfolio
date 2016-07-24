@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: study
 category: case-study
 title: Portfolio Redesign
 metaDesc:  The UX design of the new portfolio for darianrosebrook.com ...
@@ -8,3 +8,4 @@ class: type-ux
 date: May 20, 2016
 img: assets/ux.png
 ---
+## testing out this post
