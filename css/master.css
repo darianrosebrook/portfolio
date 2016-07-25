@@ -818,7 +818,8 @@ footer {
       position: relative;
       top: -.4em; }
   #webdesign .case-study .case-content *:not(img) {
-    margin-bottom: 2em;
+    margin-bottom: 3em; }
+  #webdesign .case-study .case-content {
     margin: 1em auto;
     width: 80%; }
   #webdesign .case-study::after {
@@ -922,4 +923,27 @@ footer {
     padding: 0 10%; }
   #webdesign hr {
     display: inline-block;
-    width: 40%; } }
+    width: 40%; }
+  #more-work {
+    width: 80%;
+    margin: 0 auto; }
+    #more-work .mw-square {
+      position: relative;
+      display: inline-block;
+      height: 23%;
+      width: 23%;
+      margin: 1em auto; }
+      #more-work .mw-square img {
+        width: 100%; }
+      #more-work .mw-square h5 {
+        display: none;
+        position: absolute;
+        -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%; }
+      #more-work .mw-square:hover h5 {
+        display: block; }
+      #more-work .mw-square:hover img {
+        opacity: .25; } }

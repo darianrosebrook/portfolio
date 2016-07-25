@@ -43,7 +43,8 @@
         position: relative
         top: -.4em
     .case-content *:not(img)
-      margin-bottom: 2em
+      margin-bottom: 3em
+    .case-content
       margin: 1em auto
       width: 80%
     &::after
@@ -142,3 +143,25 @@
     hr
       display: inline-block
       width: 40%
+  #more-work
+    width:80%
+    margin: 0 auto
+    .mw-square
+      position: relative
+      display:inline-block
+      height: 23%
+      width: 23%
+      margin:1em auto
+      img
+        width: 100%
+      h5
+        display: none
+        position: absolute
+        transform: translate(-50%, -50%)
+        top: 50%
+        left: 50%
+      &:hover
+        h5
+          display: block
+        img
+          opacity: .25
