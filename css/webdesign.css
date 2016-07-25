@@ -638,6 +638,11 @@ footer {
   margin-bottom: 1.5em;
 }
 
+#webdesign .case-study {
+  background-color: #fafafa;
+  color: #152121;
+}
+
 #webdesign .case-study img {
   display: inline-block;
   height: 40px;
@@ -649,21 +654,35 @@ footer {
   display: inline;
   position: relative;
   top: -.4em;
-  color: #fafafa;
 }
 
 #webdesign .case-study .case-content *:not(img) {
   margin-bottom: 2em;
+  margin: 1em auto;
+  width: 80%;
 }
 
 #webdesign .case-study::after {
-  background: url("https://codyhouse.co/demo/fixed-background-effect/img/img-mobile-1.jpg");
-  background-size: 100% auto;
   content: '';
   display: block;
   width: 100%;
   padding: 60% 0;
   margin: 2em auto 0;
+}
+
+#webdesign .case-study-one::after {
+  background: url("../assets/web-ks-m.jpg");
+  background-size: 100% auto;
+}
+
+#webdesign .case-study-two::after {
+  background: url("../assets/web-port-m.jpg");
+  background-size: 100% auto;
+}
+
+#webdesign .case-study-three::after {
+  background: url("../assets/web-out-m.jpg");
+  background-size: 100% auto;
 }
 
 @media only screen and (min-width: 1025px) {
@@ -714,20 +733,23 @@ footer {
   #webdesign #process .card:hover {
     top: -23vh;
   }
+  #webdesign .case-study {
+    color: #fafafa;
+  }
   #webdesign .case-study::after {
     background: none;
     content: '';
     display: none;
   }
   #webdesign .case-study-one {
-    background: url("../assets/web-port.jpg") no-repeat center;
+    background: url("../assets/web-ks.jpg") no-repeat center;
   }
   #webdesign .case-study-two {
-    background: url("../assets/web-out.jpg") no-repeat center;
-    color: #152121;
+    background: url("../assets/web-port.jpg") no-repeat center;
   }
   #webdesign .case-study-three {
-    background: url("../assets/web-landing.jpg") no-repeat center;
+    background: url("../assets/web-out.jpg") no-repeat center;
+    color: #152121;
   }
   #webdesign section[class|='case-study'] {
     background-size: cover;
