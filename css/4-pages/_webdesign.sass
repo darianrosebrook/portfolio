@@ -62,8 +62,23 @@
   .case-study-three::after
     background: url('../assets/web-out-m.jpg')
     background-size: 100% auto
-
-
+  section ~ h2
+    text-align: center
+  #testimony
+    display: flex
+    justify-content: space-between
+    background-color: $light
+    color: $dark
+    text-align: center
+    padding: 2em 0
+  .person
+    display: inline-block
+    width: 27%
+    margin-left: auto
+    margin-right: auto
+  .circle
+    border-radius: 50%
+    width: 80%
 
 @media only screen and (min-width: 1025px )
   #webdesign
@@ -144,8 +159,11 @@
       display: inline-block
       width: 40%
   #more-work
+    display: flex
     width:80%
     margin: 0 auto
+    justify-content: space-between
+    flex-wrap: wrap
     .mw-square
       position: relative
       display:inline-block
@@ -164,4 +182,4 @@
         h5
           display: block
         img
-          opacity: .25
+          opacity: .15

@@ -396,7 +396,7 @@ footer {
   top: 0;
   bottom: 0;
   left: -190px;
-  z-index: 0;
+  z-index: 3;
   width: 160px;
   padding: 20px;
   background-color: #152121;
@@ -743,29 +743,6 @@ footer {
     display: flex; }
     #home .articles .card {
       height: 70vh; }
-      #home .articles .card img {
-        width: 120%;
-        top: -8vw;
-        position: absolute;
-        -webkit-transform: translateX(-50%);
-            -ms-transform: translateX(-50%);
-                transform: translateX(-50%);
-        left: 50%; }
-      #home .articles .card h2 {
-        margin-top: 60%; }
-      #home .articles .card .artcont {
-        position: absolute;
-        width: 90%;
-        -webkit-transform: translateX(-50%);
-            -ms-transform: translateX(-50%);
-                transform: translateX(-50%);
-        left: 50%;
-        position: absolute;
-        bottom: 2em;
-        -webkit-transform: translateX(-50%);
-            -ms-transform: translateX(-50%);
-                transform: translateX(-50%);
-        left: 50%; }
       #home .articles .card:hover {
         position: relative;
         box-shadow: 0px 14px 22.04px 6.96px rgba(0, 0, 0, 0.5);
@@ -840,6 +817,31 @@ footer {
 #webdesign .case-study-three::after {
   background: url("../assets/web-out-m.jpg");
   background-size: 100% auto; }
+
+#webdesign section ~ h2 {
+  text-align: center; }
+
+#webdesign #testimony {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  background-color: #fafafa;
+  color: #152121;
+  text-align: center;
+  padding: 2em 0; }
+
+#webdesign .person {
+  display: inline-block;
+  width: 27%;
+  margin-left: auto;
+  margin-right: auto; }
+
+#webdesign .circle {
+  border-radius: 50%;
+  width: 80%; }
 
 @media only screen and (min-width: 1025px) {
   #webdesign #hero div {
@@ -925,8 +927,17 @@ footer {
     display: inline-block;
     width: 40%; }
   #more-work {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
     width: 80%;
-    margin: 0 auto; }
+    margin: 0 auto;
+    -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap; }
     #more-work .mw-square {
       position: relative;
       display: inline-block;
@@ -946,4 +957,4 @@ footer {
       #more-work .mw-square:hover h5 {
         display: block; }
       #more-work .mw-square:hover img {
-        opacity: .25; } }
+        opacity: .15; } }
