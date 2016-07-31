@@ -385,7 +385,7 @@ i span {
 }
 
 .primary {
-  background-color: #fee197;
+  background-color: #90d8cd;
   color: #152121;
 }
 
@@ -596,6 +596,7 @@ footer {
 }
 
 .mw-square {
+  color: #152121;
   position: relative;
   display: inline-block;
   height: 49%;
@@ -628,11 +629,11 @@ footer {
   opacity: 0;
   transition: all ease .5s;
   position: absolute;
-  top: 30px;
-  right: 30px;
-  bottom: 30px;
-  left: 30px;
-  border: 1px solid #fff;
+  top: 50px;
+  right: 50px;
+  bottom: 50px;
+  left: 50px;
+  border: 3px solid #90d8cd;
   content: '';
 }
 
@@ -646,6 +647,12 @@ footer {
     height: 23.55%;
     width: 23.55%;
   }
+}
+
+.list-item {
+  display: inline-block;
+  width: 49.7%;
+  margin: auto;
 }
 
 html {

@@ -100,32 +100,40 @@ contactBtn[i].addEventListener('click', function(event) {
   }, false);
 }
 
-// Web Design Page process checkoff
 
-var checks = byClass('process-checkbox'),
-    workButton = byClass('process-checkoff'),
-    parentProcess = byId('process'),
-    checkMark = '<i class="fa fa-check"></i>';
-function toggleCheckbox(i){
-  checks[i].checked = !checks[i].checked;
-  console.log(workButton[i]);
-  workButton[i].innerHTML = checkMark;
-}
-function isNodeType(node) {
-  if(node.nodeType === 1){
-    return node;
+// // via Timo
+// // new function for looping over nodeLists
+// // this is probably one of my favorite frontend js functions
+function forEach(list, callback) {
+  // reverse loop for fun, ease and speed
+  for (var i = list.length; i--;) {
+    callback(list[i], i, list);
   }
 }
-function checkboxEvent(e) {
-  var target = e.target,
-      parent = target.parentNode,
-      parentList = Array.prototype.slice.call(target.parentNode.parentNode.childNodes).filter(isNodeType),
-      targetIndex = Array.prototype.indexOf.call(parentList, parent);
-      toggleCheckbox(targetIndex);
-  if(!parent.classList.contains('logo')) {
-      return;
-    }
+
+
+var parentProcess = byId('process');
+var checks = byClass('process-checkbox');
+var workButtons = byClass('process-checkoff');
+var checkMark = '<i class="fa fa-check"></i>';
+
+function toggleCheckbox(i) {
+  checks[i].checked = true;
+  workButtons[i].innerHTML = checkMark;
+  workButtons[i].classList.remove('highlight');
 }
+
+function checkboxEvent(e) {
+  var target = e.target;
+  var parent = target.parentElement;
+  var parentList = Array.prototype.slice.call(parentProcess.children); // fix: no more filter!
+  var targetIndex = Array.prototype.indexOf.call(parentList, parent);
+  toggleCheckbox(targetIndex);
+
+}
+
 if(parentProcess) {
-  parentProcess.addEventListener('click', checkboxEvent);
+  forEach(workButtons, function(button) {
+    button.addEventListener('click', checkboxEvent);
+  });
 }
