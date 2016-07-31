@@ -653,6 +653,7 @@ footer {
   display: inline-block;
   width: 49.7%;
   margin: auto;
+  color: #152121;
 }
 
 html {
@@ -806,6 +807,11 @@ html {
 #article-post .expectational-debt .callout {
   position: absolute;
   background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url("../assets/expectational-debt.jpg") no-repeat bottom;
+  background-size: cover;
+}
+
+#article-post header#darian {
+  background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url("../assets/notebook.jpg") no-repeat center;
   background-size: cover;
 }
 

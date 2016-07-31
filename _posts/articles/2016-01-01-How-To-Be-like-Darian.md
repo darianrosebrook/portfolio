@@ -6,7 +6,7 @@ class: type-life
 when: Jan 1, 2016
 img: assets/notebook.jpg
 metaimg: https://darianrosebrook.com/assets/metaboats.jpg
-head: goals
+head: darian
 
 
 ---
