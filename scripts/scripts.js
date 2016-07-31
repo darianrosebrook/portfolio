@@ -1,8 +1,17 @@
 
 // writing function to make writing this easier
-var icons = document.getElementsByClassName('logo'),
-    desc = document.getElementsByClassName('icon-description'),
-    container = document.getElementById('icons');
+function byId(id) {
+  return document.getElementById(id);
+}
+function byClass(className) {
+  return document.getElementsByClassName(className);
+
+}
+
+
+var icons = byClass('logo'),
+    desc = byClass('icon-description'),
+    container = byId('icons');
 
 
 // solution via Timo, thank you
@@ -33,8 +42,8 @@ if (container) {
 
 
 //smooth scroll-behavior
-var toggler = document.getElementById('nav-toggler'),
-    contactBtn = document.getElementsByClassName('contactBtn'),
+var toggler = byId('nav-toggler'),
+    contactBtn = byClass('contactBtn'),
     targetOffset, currentPosition,
     body = document.body,
     animateTime = 000;
@@ -60,7 +69,7 @@ function smoothSroll(event) {
     event = window.event;
   }
   var target = event.target;
-  targetOffset = document.getElementById(target.dataset.href.substr(1)).offsetTop;
+  targetOffset = byId(target.dataset.href.substr(1)).offsetTop;
   currentPosition = getPageScroll(); // uses yScroll's value
 
   // accounting for hidden-nav
@@ -87,5 +96,36 @@ function smoothSroll(event) {
 }
 for (var i = 0; i < contactBtn.length; i++){
 contactBtn[i].addEventListener('click', function(event) {
-  smoothSroll(event);}, false);
+    smoothSroll(event);
+  }, false);
+}
+
+// Web Design Page process checkoff
+
+var checks = byClass('process-checkbox'),
+    workButton = byClass('process-checkoff'),
+    parentProcess = byId('process'),
+    checkMark = '<i class="fa fa-check"></i>';
+function toggleCheckbox(i){
+  checks[i].checked = !checks[i].checked;
+  console.log(workButton[i]);
+  workButton[i].innerHTML = checkMark;
+}
+function isNodeType(node) {
+  if(node.nodeType === 1){
+    return node;
+  }
+}
+function checkboxEvent(e) {
+  var target = e.target,
+      parent = target.parentNode,
+      parentList = Array.prototype.slice.call(target.parentNode.parentNode.childNodes).filter(isNodeType),
+      targetIndex = Array.prototype.indexOf.call(parentList, parent);
+      toggleCheckbox(targetIndex);
+  if(!parent.classList.contains('logo')) {
+      return;
+    }
+}
+if(parentProcess) {
+  parentProcess.addEventListener('click', checkboxEvent);
 }

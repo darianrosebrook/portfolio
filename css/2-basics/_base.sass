@@ -25,9 +25,11 @@ body
   font-size: 2rem
   scroll-behavior: smooth
 a, a:link, a:visited, a:hover, a:focus
+  transition: $transition
   text-decoration: none
   color: inherit
-
+a:hover:not(.btn)
+  color: $main
 .cf::after
   content: ' '
   visibility: hidden
