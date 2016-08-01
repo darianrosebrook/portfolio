@@ -313,15 +313,22 @@ i span {
 .about .btn {
   color: #152121; }
 
+a.btn {
+  display: inline-block; }
+
 .primary {
   background-color: #90d8cd;
   color: #152121; }
 
 .secondary {
-  background-color: #b7b7b7; }
+  background-color: #b7b7b7;
+  color: #152121; }
 
 .highlight {
   background-color: #fee197; }
+
+#contact {
+  background-color: #152121; }
 
 footer {
   background-color: #ebffff;
@@ -346,7 +353,7 @@ footer {
   .btn.primary:hover, .btn.primary:active {
     background-color: #fee197; }
   .btn.primary:hover {
-    background-color: #90d8cd; }
+    background-color: #fee197; }
   .btn:active {
     background-color: #60a69a;
     transition-duration: .05s; }
@@ -478,7 +485,7 @@ footer {
   margin: 1em auto; }
   .mw-square img {
     width: 100%; }
-  .mw-square h5 {
+  .mw-square .btn {
     display: none;
     position: absolute;
     -webkit-transform: translate(-50%, -50%);
@@ -486,8 +493,8 @@ footer {
             transform: translate(-50%, -50%);
     top: 50%;
     left: 50%; }
-  .mw-square:hover h5 {
-    display: block; }
+  .mw-square:hover .btn {
+    display: inline-block; }
   .mw-square:hover img {
     opacity: .15; }
 
@@ -512,10 +519,68 @@ footer {
     height: 23.55%;
     width: 23.55%; } }
 
+#post-list {
+  background-color: #fafafa; }
+
+#articles-hero {
+  background: url("../assets/img/articles-page.gif") no-repeat center;
+  background-size: cover;
+  height: 75vh;
+  content: " "; }
+
 .list-item {
+  position: relative;
+  display: block;
+  margin: 2em auto;
+  z-index: 1; }
+
+.list {
+  position: relative;
+  margin: 0 auto;
+  padding: 2em;
+  background: #fafafa;
+  color: #152121;
+  z-index: 1;
+  width: 70%; }
+  .list::after {
+    content: " ";
+    width: 2px;
+    background: 2px #b7b7b7;
+    height: 70%;
+    position: absolute;
+    top: 10em;
+    left: 7em;
+    z-index: 0; }
+  .list h1 {
+    display: inline-block;
+    width: 50%; }
+  .list select {
+    display: inline-block;
+    position: relative;
+    float: right;
+    margin-right: 0;
+    border: 2px #b7b7b7;
+    border-radius: 5px;
+    padding: .5em;
+    margin: .67em 0; }
+  .list img {
+    height: 100%; }
+  .list .artcont {
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+    width: 70%;
+    display: inline-block; }
+
+.circle {
   display: inline-block;
-  width: 49.7%;
-  margin: auto; }
+  border-radius: 50%;
+  width: 10vw;
+  height: 10vw;
+  overflow: hidden;
+  margin-right: 5vw; }
 
 #home {
   background-color: #152121; }

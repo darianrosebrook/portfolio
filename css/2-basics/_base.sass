@@ -122,15 +122,19 @@ i
   font-size: 1.3rem
 .about .btn
   color: $dark
-
+a.btn
+  display: inline-block
 .primary
   background-color: $main
   color: $dark
 .secondary
   background-color: $secondary
+  color: $dark
 .highlight
   background-color: $highlight
 
+#contact
+  background-color: $dark
 footer
   background-color: $section
   color: $dark
@@ -154,7 +158,7 @@ footer
     &.primary:hover, &.primary:active
       background-color: $highlight
     &.primary:hover
-      background-color: $main
+      background-color: $highlight
     &:active
       background-color: #60a69a
       transition-duration: .05s
