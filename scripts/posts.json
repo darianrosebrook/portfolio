@@ -1,0 +1,13 @@
+---
+---
+[
+  {% for post in site.categories.article  %}
+    {
+      "title": "{{post.title}}",
+      "url": "{{site.baseurl}}{{post.url}}",
+      "date": "{{post.when}}",
+      "content": "{{post.metaDesc | escape}}"
+    } {% if forloop.last %}{% else %}, {% endif %}
+  {% endfor %}
+
+];
