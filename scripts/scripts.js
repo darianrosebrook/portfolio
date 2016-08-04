@@ -168,7 +168,7 @@ function init() {
   )
 };
 function addTo(){
-  for ( i < actual_JSON.length; i++;) {
+  for ( i; i < actual_JSON.length; i++;) {
     newContent += '<article class=\"list-item\">\n\t<div class=\"circle\">';
     newContent += '<img src=\"https://darianrosebrook.com/' + actual_JSON.posts[i].img + '\" alt=\"' + actual_JSON.posts[i].title + '\" /></div>\n';
     newContent += '<div class=\"artcont\">\n\t<h2><a href=\"' + actual_JSON.posts[i].url + '\">' + actual_JSON.posts[i].title + '</a></h2>\n\t';
