@@ -163,6 +163,7 @@ function init() {
  loadJSON(function(response) {
   // Parse JSON string into object
     actual_JSON = JSON.parse(response);
+    addTo();
     }
   )
 };
@@ -176,9 +177,9 @@ function addTo(){
   }
   i += 10;
   console.log(i);
-  list.innerHTML = oldContent + newContent;
+  list.innerHTML += newContent;
+  newContent = '';
 }
 loadMore.addEventListener('click', function (){
   init();
-  addTo();
 }, false);
