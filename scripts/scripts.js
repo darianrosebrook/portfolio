@@ -170,11 +170,11 @@ function init() {
 function addTo(){
   for ( i < actual_JSON.length; i++) {
     newContent += '<article class=\"list-item\">\n\t<div class=\"circle\">';
-      newContent += '<img src=\"https://darianrosebrook.com/' + actual_JSON.posts[i].img + '\" alt=\"' + actual_JSON.posts[i].title + '\" /></div>\n';
+    newContent += '<img src=\"https://darianrosebrook.com/' + actual_JSON.posts[i].img + '\" alt=\"' + actual_JSON.posts[i].title + '\" /></div>\n';
     newContent += '<div class=\"artcont\">\n\t<h2><a href=\"' + actual_JSON.posts[i].url + '\">' + actual_JSON.posts[i].title + '</a></h2>\n\t';
     newContent += '<p><small>' + actual_JSON.posts[i].date + ' | <em class=\"' + actual_JSON.posts[i].class + '\">' + actual_JSON.posts[i].type + '</em></small>\n';
     newContent += '</p><p><small class=\"metaDesc\">&ldquo;' + actual_JSON.posts[i].content + '&rdquo;</small></p></div></article><br>';
-  }
+  };
   i += 10;
   console.log(i);
   list.innerHTML += newContent;
