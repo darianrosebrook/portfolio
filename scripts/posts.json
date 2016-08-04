@@ -14,5 +14,5 @@
       } {% if forloop.last %}{% else %}, {% endif %}
     {% endfor %}
 
-  ];
+  ]
 }
