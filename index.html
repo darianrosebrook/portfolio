@@ -102,7 +102,7 @@ custom_css: master
           <h2 class="hidden">A collection of articles written on design, life, and business</h2>
           {% for post in site.categories.article limit:3 %}
           <article id="card{{forloop.index}}" class="card">
-            <img src="{{post.img}}" alt="{{post.title}}" />
+            <a href="{{post.url}}"><img src="{{post.img}}" alt="{{post.title}}" /></a>
             <h2><a href="{{post.url}}">{{post.title}}</a></h2>
             <div class="artcont">
               <p>
@@ -118,7 +118,7 @@ custom_css: master
 
 
         </section>
-        <button class="btn">View All</button>
+        <a href="archive" class="btn secondary">View Archive</a>
       </div>
 
         {% include contact.html %}

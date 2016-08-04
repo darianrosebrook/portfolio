@@ -155,12 +155,18 @@ function init() {
  loadJSON(function(response) {
   // Parse JSON string into object
     var actual_JSON = JSON.parse(response);
-
+    for (var i = 0; i < actual_JSON.posts.length; i++) {
+      newContent += '<article class=\"list-item\">\n\t<div class=\"circle\">';
+        newContent += '<img src=\"https://darianrosebrook.com/' + actual_JSON.posts[i].img + '\" alt=\"' + actual_JSON.posts[i].title + '\" /></div>\n';
+      newContent += '<div class=\"artcont\">\n\t<h2><a href=\"' + actual_JSON.posts[i].url + '\">' + actual_JSON.posts[i].title + '</a></h2>\n\t';
+      newContent += '<p><small>' + actual_JSON.posts[i].date + ' | <em class=\"' + actual_JSON.posts[i].class + '\">' + actual_JSON.posts[i].type + '</em></small>\n';
+      newContent += '</p><p><small class=\"metaDesc\">&ldquo;' + actual_JSON.posts[i].content + '&rdquo;</small></p></div></article><br>';
+    }
  });
 }
 var list = byId('list');
 var oldContent = list.innerHTML;
-var xobj ={
+var xobj = {
   "posts": [
 
       {
@@ -220,7 +226,7 @@ var xobj ={
 var newContent = '';
 for (var i = 0; i < xobj.posts.length; i++) {
   newContent += '<article class=\"list-item\">\n\t<div class=\"circle\">';
-  newContent += '<img src=\"https://darianrosebrook.com' + xobj.posts[i].img + '\" alt=\"' + xobj.posts[i].title + '\" /></div>\n';
+    newContent += '<img src=\"https://darianrosebrook.com/' + xobj.posts[i].img + '\" alt=\"' + xobj.posts[i].title + '\" /></div>\n';
   newContent += '<div class=\"artcont\">\n\t<h2><a href=\"' + xobj.posts[i].url + '\">' + xobj.posts[i].title + '</a></h2>\n\t';
-  newContent += '<p><small>' + xobj.posts[i].when + '<em class=\"' + xobj.posts[i].class + " \>" + xobj.posts[i].type + '</em></small>\n';
-  newContent += '<small class=\"metaDesc\">&ldquo;' + xobj.posts[i].metaDesc + '&rdquo;</small></p></div></article>'; }
+  newContent += '<p><small>' + xobj.posts[i].date + ' | <em class=\"' + xobj.posts[i].class + '\">' + xobj.posts[i].type + '</em></small>\n';
+  newContent += '</p><p><small class=\"metaDesc\">&ldquo;' + xobj.posts[i].content + '&rdquo;</small></p></div></article><br>'; }
