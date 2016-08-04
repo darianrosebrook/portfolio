@@ -5,7 +5,7 @@ custom_css: master
 ---
 <header id="articles-hero">
 </header>
-<section class="list">
+<section class="list" id="list">
   <h1>Articles</h1>
   <select class="filter cf" name="filter">
     <option value="Filter All">Filter All</option>
@@ -33,6 +33,7 @@ custom_css: master
 
 
   {% endfor %}
-  <button type="button" name="button" class="btn highlight" id="load-more">Load More</button>
+
 </section>
+<button type="button" name="button" class="btn highlight" id="load-more">Load More</button>
 {% include contact.html %}
