@@ -7,7 +7,7 @@ when: Jan 1, 2016
 img: assets/notebook.jpg
 metaimg: https://darianrosebrook.com/assets/metaboats.jpg
 head: darian
-
+custom_css: articles
 
 ---
 

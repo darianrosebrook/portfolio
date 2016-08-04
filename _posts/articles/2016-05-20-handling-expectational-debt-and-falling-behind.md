@@ -7,6 +7,7 @@ img: assets/expectational-debt.jpg
 head: expectational-debt
 when: May 20, 2016
 metaimg: https://darianrosebrook.com/assets/hero-responsive.gif
+custom_css: articles
 ---
 
 

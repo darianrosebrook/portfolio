@@ -8,7 +8,7 @@ img: assets/torch.jpg
 metaimg: https://darianrosebrook.com/assets/metaboats.jpg
 head: goals
 
-
+custom_css: articles
 ---
 ## Burn the boats... a brutal but fitting metaphor
 What I love about phrases like these is that though they are removed from any part of what we do now in our time, their message is reused and _repurposed_ into something that fits our current situations. I am not the only person to have thought moving forward means we need to burn our boats and bridges.
