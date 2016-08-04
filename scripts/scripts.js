@@ -180,4 +180,4 @@ for ( i < actual_JSON.length; i++) {
 loadMore.addEventListener('click', function (){
   init();
   addTo();
-});
+}, false);
