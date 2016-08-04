@@ -15,7 +15,7 @@ custom_css: master
     <option value="User Experience">User Experience</option>
     <option value="Life Experience">Life Experience</option>
   </select>
-  {% for post in site.categories.article | limit 2 %}
+  {% for post in site.categories.article | limit: 2 %}
   <article class="list-item">
     <div class="circle"><img src="../{{post.img}}" alt="{{post.title}}" /></div>
 
