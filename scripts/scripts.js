@@ -164,8 +164,8 @@ function init() {
   // Parse JSON string into object
     actual_JSON = JSON.parse(response);
     }
- });
-}
+  )
+};
 function addTo(){
   for ( i < actual_JSON.length; i++) {
     newContent += '<article class=\"list-item\">\n\t<div class=\"circle\">';
@@ -179,6 +179,6 @@ function addTo(){
   list.innerHTML = oldContent + newContent;
 }
 loadMore.addEventListener('click', function (){
-  init(); 
+  init();
   addTo();
 }, false);
