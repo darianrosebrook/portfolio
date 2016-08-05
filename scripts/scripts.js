@@ -146,12 +146,12 @@ var newContent = '';
 var actual_JSON;
 var loadMore = byId('load-more');
 var i = 0;
-var b = actual_JSON.length;
+var b;
 
 function loadJSON(callback) {
   var jsonStuff = new XMLHttpRequest();
   jsonStuff.overrideMimeType("application/json");
-  jsonStuff.open('GET', 'https://darianrosebrook.com/scripts/posts.json', true);
+  jsonStuff.open('GET', '../scripts/posts.json', true);
   jsonStuff.onreadystatechange = function () {
     if (jsonStuff.readyState == 4 && jsonStuff.status == "200") { // when it's done... do this
       callback(jsonStuff.responseText);
@@ -163,20 +163,20 @@ function init() {
  loadJSON(function(response) {
   // Parse JSON string into object
     actual_JSON = JSON.parse(response);
-    addTo();
+    b = actual_JSON.posts.length;
+    addTo(actual_JSON);
     }
   )
 };
-function addTo(){
-  for ( i; i < actual_JSON.length; i++) {
+function addTo(obj){
+  for ( i; i < b; i++) {
     newContent += '<article class=\"list-item\">\n\t<div class=\"circle\">';
-    newContent += '<img src=\"https://darianrosebrook.com/' + actual_JSON.posts[i].img + '\" alt=\"' + actual_JSON.posts[i].title + '\" /></div>\n';
-    newContent += '<div class=\"artcont\">\n\t<h2><a href=\"' + actual_JSON.posts[i].url + '\">' + actual_JSON.posts[i].title + '</a></h2>\n\t';
-    newContent += '<p><small>' + actual_JSON.posts[i].date + ' | <em class=\"' + actual_JSON.posts[i].class + '\">' + actual_JSON.posts[i].type + '</em></small>\n';
-    newContent += '</p><p><small class=\"metaDesc\">&ldquo;' + actual_JSON.posts[i].content + '&rdquo;</small></p></div></article><br>';
+    newContent += '<img src=\"https://darianrosebrook.com/' + obj.posts[i].img + '\" alt=\"' + obj.posts[i].title + '\" /></div>\n';
+    newContent += '<div class=\"artcont\">\n\t<h2><a href=\"' + obj.posts[i].url + '\">' + obj.posts[i].title + '</a></h2>\n\t';
+    newContent += '<p><small>' + obj.posts[i].date + ' | <em class=\"' + obj.posts[i].class + '\">' + obj.posts[i].type + '</em></small>\n';
+    newContent += '</p><p><small class=\"metaDesc\">&ldquo;' + obj.posts[i].content + '&rdquo;</small></p></div></article><br>';
   }
-  i += 10;
-  console.log(i);
+  console.log(newContent);
   list.innerHTML += newContent;
   newContent = '';
 }
