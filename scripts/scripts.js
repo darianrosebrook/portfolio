@@ -174,7 +174,7 @@ function addTo(obj){
     newContent += '<img src=\"https://darianrosebrook.com/' + obj.posts[i].img + '\" alt=\"' + obj.posts[i].title + '\" /></div>\n';
     newContent += '<div class=\"artcont\">\n\t<h2><a href=\"' + obj.posts[i].url + '\">' + obj.posts[i].title + '</a></h2>\n\t';
     newContent += '<p><small>' + obj.posts[i].date + ' | <em class=\"' + obj.posts[i].class + '\">' + obj.posts[i].type + '</em></small>\n';
-    newContent += '</p><p><small class=\"metaDesc\">&ldquo;' + obj.posts[i].content + '&rdquo;</small></p></div></article><br>';
+    newContent += '</p><p><small class=\"metaDesc\">&ldquo;' + obj.posts[i].content + '&rdquo;</small></p></div></article>';
   }
   console.log(newContent);
   list.innerHTML += newContent;

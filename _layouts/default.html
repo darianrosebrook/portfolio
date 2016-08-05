@@ -29,7 +29,7 @@
     <meta name="twitter:url" content="https://darianrosebrook.com" />
     <meta name="twitter:title" content="{{page.title}}" />
     <meta name="twitter:description" content="{{page.metaDesc | truncate: 196}}" />
-    {% if page.url contains 'article' %}
+    {% if page.metaimg %}
     <meta name="twitter:image" content="{{page.metaimg}}" />
     {% else %}
     <meta name="twitter:image" content="https://darianrosebrook.com/assets/hero-responsive.gif" />
