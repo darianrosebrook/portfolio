@@ -547,8 +547,13 @@ footer {
     padding: .5em;
     margin: .67em 0; }
   .list img {
+    position: absolute;
     display: block;
-    width: 100%; }
+    width: 100%;
+    -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+            transform: translateX(-50%);
+    left: 50%; }
 
 .list-item {
   position: relative;
@@ -557,6 +562,7 @@ footer {
   z-index: 1; }
 
 .circle {
+  position: relative;
   display: inline-block;
   height: 30vw;
   overflow: hidden;
