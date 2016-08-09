@@ -6,7 +6,7 @@ class: type-life
 img: assets/img/post-devtips/devtips.png
 head: devtips
 when: Aug 09, 2016
-metaimg: https://darianrosebrook.com/assets/hero-responsive.gif
+metaimg: https://darianrosebrook.com/assets/img/articles-page.gif
 custom_css: articles
 ---
 Here we unpackage why engaging in communities is important for developers and designers, especially for those starting out a an entrepreneur. Along with going over what the different communities like Seanwes and the DevTips Community have to offer and why they're a gold mine for new creatives.
