@@ -864,7 +864,7 @@ html {
 
 #article-post .callout {
   position: absolute;
-  height: 25vh;
+  height: 80vh;
   width: 100vw;
   left: 0;
   text-align: center;
@@ -972,4 +972,8 @@ html {
   #article-post .callout + h2 {
     margin-top: 38vh;
   }
+}
+
+.callout {
+  height: 25vh;
 }
