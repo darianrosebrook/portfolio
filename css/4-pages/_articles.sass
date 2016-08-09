@@ -31,6 +31,11 @@ html
     a:not(.btn)
       color: $main
       font-weight: 500
+      transition: $transition
+      border-bottom: 3px solid rgba(0, 0, 0, 0)
+      &:hover
+        color: $secondary
+        border-bottom: 3px solid $main
     h1
       font-weight: 400
       text-shadow: $shadow
@@ -121,6 +126,13 @@ html
     .callout
       background:  linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url('../assets/img/post-devtips/devtips.png') no-repeat center
       background-size: cover
+    .megamaker
+      background:  linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url('../assets/img/post-devtips/megamaker.jpg') no-repeat center
+      background-size: cover
+    .seanwes
+      background:  linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url('../assets/img/post-devtips/seanwes.gif') no-repeat center
+      background-size: cover
+
 @media screen and (min-width: 1024px)
   #article-post
     header
