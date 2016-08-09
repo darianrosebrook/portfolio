@@ -717,6 +717,13 @@ footer {
   margin-right: 5vw;
 }
 
+.circle img {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+}
+
 #load-more {
   position: absolute;
   transform: translate(-50%, -2em);
@@ -864,10 +871,11 @@ html {
 }
 
 #article-post .callout {
-  position: absolute;
+  position: relative;
+  transform: translateX(-50%);
   height: 80vh;
   width: 100vw;
-  left: 0;
+  left: 50%;
   text-align: center;
   margin-bottom: 1em;
 }
@@ -890,7 +898,7 @@ html {
 }
 
 #article-post .callout + * {
-  margin-top: 38vh;
+  margin-top: 4em;
 }
 
 #article-post header#goals {
@@ -899,7 +907,7 @@ html {
 }
 
 #article-post .goals .callout {
-  background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url("../assets/torch.jpg") no-repeat center;
+  background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.6)), url("../assets/torch.jpg") no-repeat center;
   background-size: cover;
 }
 
@@ -909,7 +917,7 @@ html {
 }
 
 #article-post .webdes .callout {
-  background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url("../assets/coffee.jpg") no-repeat bottom;
+  background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.6)), url("../assets/coffee.jpg") no-repeat bottom;
   background-size: cover;
 }
 
@@ -920,7 +928,7 @@ html {
 
 #article-post .expectational-debt .callout {
   position: absolute;
-  background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url("../assets/expectational-debt.jpg") no-repeat bottom;
+  background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.6)), url("../assets/expectational-debt.jpg") no-repeat bottom;
   background-size: cover;
 }
 
@@ -935,17 +943,17 @@ html {
 }
 
 #article-post .devtips .callout {
-  background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url("../assets/img/post-devtips/devtips.png") no-repeat center;
+  background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.6)), url("../assets/img/post-devtips/devtips.png") no-repeat center;
   background-size: cover;
 }
 
 #article-post .devtips .megamaker {
-  background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url("../assets/img/post-devtips/megamaker.jpg") no-repeat center;
+  background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.6)), url("../assets/img/post-devtips/megamaker.jpg") no-repeat center;
   background-size: cover;
 }
 
 #article-post .devtips .seanwes {
-  background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.45)), url("../assets/img/post-devtips/seanwes.gif") no-repeat center;
+  background: linear-gradient(rgba(0, 0, 14, 0.45), rgba(0, 0, 14, 0.6)), url("../assets/img/post-devtips/seanwes.gif") no-repeat center;
   background-size: cover;
 }
 
