@@ -294,7 +294,7 @@ i span {
   .card img {
     width: 100%; }
 
-.btn {
+.btn, .featured .btn {
   display: inline-block;
   border: 0px;
   border-radius: 7px;
@@ -719,13 +719,12 @@ footer {
   #home .articlelist {
     background-image: url("../assets/street.jpg");
     background-size: cover;
-    background-attachment: fixed; }
-  #home .articles {
+    background-attachment: fixed;
     color: #152121; }
-    #home .articles .card {
-      overflow: hidden; }
-      #home .articles .card h2 {
-        margin-bottom: 1.5em; }
+  #home .articles .card {
+    overflow: hidden; }
+    #home .articles .card h2 {
+      margin-bottom: 1.5em; }
 
 @media only screen and (min-width: 720px) {
   #home header {

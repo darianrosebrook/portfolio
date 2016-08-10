@@ -362,7 +362,7 @@ i span {
   width: 100%;
 }
 
-.btn {
+.btn, .featured .btn {
   display: inline-block;
   border: 0px;
   border-radius: 7px;

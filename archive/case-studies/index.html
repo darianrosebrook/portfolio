@@ -3,24 +3,23 @@ layout: default
 bodyId: post-list
 custom_css: master
 metaimg: http://darianrosebrook.com/assets/img/articles-page.gif
-title: Darian Rosebrook | Archive of past articles
+title: Darian Rosebrook | Archive of Case Studies
 metaDesc: This is the archive of past articles that I have written regarding the industry of web design and branding for businesses
 ---
 <header id="articles-hero">
 </header>
 <section class="list" id="list">
-  <h1>Articles</h1>
+  <h1>Case Studies</h1>
   <select class="filter cf" name="filter">
     <option value="Filter All">Filter All</option>
     <option value="Web Design">Web Design</option>
     <option value="Branding">Branding</option>
     <option value="Logo">Logo</option>
     <option value="User Experience">User Experience</option>
-    <option value="Life Experience">Life Experience</option>
   </select>
-  {% for post in site.categories.article %}
+  {% for post in site.categories.case-studies %}
   <article class="list-item">
-    <div class="circle"><a href="{{post.url}}"><img src="../{{post.img}}" alt="{{post.title}}" /></a></div>
+    <div class="circle"><a href="{{post.url}}"><img src="../../{{post.img}}" alt="{{post.title}}" /></a></div>
 
     <div class="artcont">
       <h2><a href="{{post.url}}">{{post.title}}</a></h2>
@@ -40,5 +39,4 @@ metaDesc: This is the archive of past articles that I have written regarding the
   {% endfor %}
 
 </section>
-<button type="button" name="button" class="btn highlight" id="load-more">Load More</button>
 {% include contact.html %}

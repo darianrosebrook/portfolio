@@ -1,5 +1,5 @@
 ---
-title: How To Be Like Darian
+title: How To Be Like Violet
 metaDesc: Be Awesome. Nuff Said.
 type: Life Stuff
 class: type-life

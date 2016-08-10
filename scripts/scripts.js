@@ -148,10 +148,10 @@ var loadMore = byId('load-more');
 var i = 0;
 var b;
 
-function loadJSON(callback) {
+if(list){function loadJSON(callback) {
   var jsonStuff = new XMLHttpRequest();
   jsonStuff.overrideMimeType("application/json");
-  jsonStuff.open('GET', '../scripts/posts.json', true);
+  jsonStuff.open('GET', '../../scripts/posts.json', true);
   jsonStuff.onreadystatechange = function () {
     if (jsonStuff.readyState == 4 && jsonStuff.status == "200") { // when it's done... do this
       callback(jsonStuff.responseText);
@@ -183,3 +183,4 @@ function addTo(obj){
 loadMore.addEventListener('click', function (){
   init();
 }, false);
+}
