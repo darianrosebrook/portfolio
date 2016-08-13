@@ -11,6 +11,8 @@
       {% for stylesheet in page.custom_css %}
         <link rel="stylesheet" href="{{site.baseurl}}/css/{{ stylesheet }}.css" media="screen" type="text/css">
       {% endfor %}
+      {% else %}
+        <link rel="stylesheet" href="{{site.baseurl}}/css/master.css" media="screen" type="text/css">
     {% endif %}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" type="text/css" />
     <!--m e t a c o n t e n t -->

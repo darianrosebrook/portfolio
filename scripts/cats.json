@@ -1,0 +1,8 @@
+{
+  "posts": [
+      { "name": "cat-one",
+        "url": "assets/expectational-debt",
+        "title": "this is a cat photo"
+      }
+  ]
+}

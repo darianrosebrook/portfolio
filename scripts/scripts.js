@@ -1,4 +1,3 @@
-
 // writing function to make writing this easier
 function byId(id) {
   return document.getElementById(id);
@@ -141,14 +140,20 @@ if(parentProcess) {
 // Load more posts functionality ajax request
 // capture the other variables i'll need
 var list = byId('list');
-var oldContent = list.innerHTML;
-var newContent = '';
+var oldContent;
+var newContent;
 var actual_JSON;
-var loadMore = byId('load-more');
-var i = 0;
+var loadMore;
+var i;
 var b;
 
-if(list){function loadJSON(callback) {
+if(list){
+  oldContent = list.innerHTML,
+  newContent = '',
+  loadMore = byId('load-more'),
+  i = 0;
+
+  function loadJSON(callback) {
   var jsonStuff = new XMLHttpRequest();
   jsonStuff.overrideMimeType("application/json");
   jsonStuff.open('GET', '../../scripts/posts.json', true);
@@ -184,3 +189,40 @@ loadMore.addEventListener('click', function (){
   init();
 }, false);
 }
+
+// filter for archive sites.
+
+var filter = byId('filter');
+var posts = byClass('list-item');
+
+function togglePosts(check) {
+  for(var c = 0; c < posts.length; c++) {
+      posts[c].classList.add('hidden');
+      if (posts[c].dataset.type == check) {
+        posts[c].classList.remove('hidden');
+      }
+      if (check == null || undefined) {
+        posts[c].classList.remove('hidden');
+      }
+
+  }
+
+
+}
+filter.addEventListener('change', function() {
+
+  switch (filter.selectedIndex) {
+  case 1: togglePosts('type-web');
+    break;
+  case 2: togglePosts('type-brand');
+    break;
+  case 3: togglePosts('type-logo');
+    break;
+  case 4: togglePosts('type-ux');
+    break;
+  case 5: togglePosts('type-life');
+    break;
+  default:  togglePosts();
+}
+
+});
