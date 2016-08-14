@@ -5,6 +5,7 @@ custom_css: master
 metaimg: http://darianrosebrook.com/assets/img/articles-page.gif
 title: Darian Rosebrook | Archive of past articles
 metaDesc: This is the archive of past articles that I have written regarding the industry of web design and branding for businesses
+category: article
 ---
 <header id="articles-hero">
 </header>
@@ -38,7 +39,13 @@ metaDesc: This is the archive of past articles that I have written regarding the
 
 
   {% endfor %}
+  {% if page.paginator %}
+{% assign paginator = page.paginator %}
+{% endif %}
+{% for post in paginator.posts %}
 
+  <h2> hi</h2>
+  {% endfor %}
 </section>
 <button type="button" name="button" class="btn highlight" id="load-more">Load More</button>
 {% include contact.html %}

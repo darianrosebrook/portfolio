@@ -1,4 +1,5 @@
 ---
+category: article
 title: Burn the Boats&#58; An Update On My Current 2016 Goals
 metaDesc: What I love about phrases like these is that though they are removed from any part of what we do now in our time, their message is reused and repurposed into something that fits our current situations.
 type: Life Stuff

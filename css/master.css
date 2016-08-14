@@ -440,6 +440,8 @@ footer {
       background-attachment: scroll; } }
 
 #contact {
+  background: url("../assets/img/darkicons.png") no-repeat center;
+  background-size: cover;
   text-align: center; }
   #contact h2 a {
     padding: 0 1em; }
@@ -468,6 +470,9 @@ footer {
       border-left: 10px solid #fee197;
       border-right: 10px solid #fee197;
       outline: none; }
+
+#contact.done {
+  height: 100vh; }
 
 @media only screen and (min-width: 1025px) {
   #contact .contact .enter {
@@ -565,7 +570,7 @@ footer {
   position: relative;
   display: inline-block;
   height: 30vw;
-  width: 100%;
+  width: 30vw;
   overflow: hidden;
   margin-right: 5vw; }
   .circle img {
@@ -574,7 +579,8 @@ footer {
         -ms-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
     top: 50%;
-    left: 50%; }
+    left: 50%;
+    height: 100%; }
 
 #load-more {
   position: absolute;
@@ -591,7 +597,7 @@ footer {
       content: " ";
       width: 2px;
       background: 2px #b7b7b7;
-      height: 70%;
+      height: 90%;
       position: absolute;
       top: 10em;
       left: 10.5%;
@@ -991,8 +997,12 @@ footer {
   margin-right: auto; }
 
 #webdesign .circle {
-  border-radius: 50%;
-  width: 80%; }
+  position: relative;
+  -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+          transform: translateX(-50%);
+  left: 50%;
+  display: block; }
 
 @media only screen and (min-width: 1025px) {
   #webdesign #hero div {

@@ -175,18 +175,36 @@ function init() {
 };
 function addTo(obj){
   for ( i; i < b; i++) {
-    newContent += '<article class=\"list-item\">\n\t<div class=\"circle\">';
+    newContent += '<article data-type=\"' + obj.posts[i].class + '\" class=\"list-item\">\n\t<div class=\"circle\">';
     newContent += '<img src=\"https://darianrosebrook.com/' + obj.posts[i].img + '\" alt=\"' + obj.posts[i].title + '\" /></div>\n';
     newContent += '<div class=\"artcont\">\n\t<h2><a href=\"' + obj.posts[i].url + '\">' + obj.posts[i].title + '</a></h2>\n\t';
     newContent += '<p><small>' + obj.posts[i].date + ' | <em class=\"' + obj.posts[i].class + '\">' + obj.posts[i].type + '</em></small>\n';
     newContent += '</p><p><small class=\"metaDesc\">&ldquo;' + obj.posts[i].content + '&rdquo;</small></p></div></article>';
   }
   console.log(newContent);
-  list.innerHTML += newContent;
+  list.insertAdjacentHTML('beforeend',  newContent);
   newContent = '';
 }
 loadMore.addEventListener('click', function (){
   init();
+  if(filter) {
+    filter.addEventListener('change', function() {
+
+      switch (filter.selectedIndex) {
+        case 1: togglePosts('type-web');
+          break;
+        case 2: togglePosts('type-brand');
+          break;
+        case 3: togglePosts('type-logo');
+          break;
+        case 4: togglePosts('type-ux');
+          break;
+        case 5: togglePosts('type-life');
+          break;
+        default:  togglePosts();
+      }
+    });
+  }
 }, false);
 }
 
@@ -204,25 +222,23 @@ function togglePosts(check) {
       if (check == null || undefined) {
         posts[c].classList.remove('hidden');
       }
-
   }
-
-
 }
-filter.addEventListener('change', function() {
+if(filter) {
+  filter.addEventListener('change', function() {
 
-  switch (filter.selectedIndex) {
-  case 1: togglePosts('type-web');
-    break;
-  case 2: togglePosts('type-brand');
-    break;
-  case 3: togglePosts('type-logo');
-    break;
-  case 4: togglePosts('type-ux');
-    break;
-  case 5: togglePosts('type-life');
-    break;
-  default:  togglePosts();
+    switch (filter.selectedIndex) {
+      case 1: togglePosts('type-web');
+        break;
+      case 2: togglePosts('type-brand');
+        break;
+      case 3: togglePosts('type-logo');
+        break;
+      case 4: togglePosts('type-ux');
+        break;
+      case 5: togglePosts('type-life');
+        break;
+      default:  togglePosts();
+    }
+  });
 }
-
-});

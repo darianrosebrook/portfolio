@@ -1,4 +1,5 @@
 ---
+category: article
 title: How To Be Like Darian
 metaDesc: Be Awesome. Nuff Said.
 type: Life Stuff

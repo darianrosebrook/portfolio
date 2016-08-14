@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: study
 category: case-study
 title: Grow Your Code Logo
 metaDesc:  logo design for the grow-your-code podcast ...

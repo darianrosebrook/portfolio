@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: study
 category: case-study
 title: Out- Branding
 metaDesc:  The series of icons and logo done for an outdoor activity center. ...
