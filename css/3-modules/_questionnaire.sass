@@ -1,0 +1,28 @@
+#contact
+  .contact
+    label
+      padding: .5em
+      width: 24%
+      display: inline-block
+      border: 2px dashed $secondary
+      img
+        width: 5vw
+        margin: 0
+      p
+        margin: 0
+      &:hover
+        border: 2px dashed $highlight
+    input[name$="-webdesign"]:checked ~ label[for$="-webdesign"]
+      background-color: rgba(233, 233, 233, .4)
+    input[name$="-branding"]:checked ~ label[for$="-branding"]
+      background-color: rgba(233, 233, 233, .4)
+    input[name$="-ux"]:checked ~ label[for$="-ux"]
+      background-color: rgba(233, 233, 233, .4)
+    input[name$="-hello"]:checked ~ label[for$="-hello"]
+      background-color: rgba(233, 233, 233, .4)
+    .continue
+      display: none
+    input[data-continue="true"]:checked ~ .continue.project
+      display: block
+    input[name$="-hello"]:checked ~ .continue.message
+      display: block

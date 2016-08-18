@@ -1,5 +1,6 @@
 #contact
-  background: url('../assets/img/darkicons.png') no-repeat center
+  display: flex
+  background: url('../assets/img/darkicons.png') no-repeat top
   background-size: cover
   text-align: center
   h2  a
@@ -10,8 +11,6 @@
 
     width: 100%
   .contact
-    *:nth-child(1n + 0)
-      margin: 1.5em auto
     textarea
       overflow: visible
       resize: none
@@ -30,12 +29,24 @@
       &:hover, &:focus
         border-left: 10px solid $highlight
         border-right: 10px solid $highlight
-        outline: none
-#contact.done  
+          outline: none
+    form input, form input ~ *
+      margin: 2em auto
+#contact.done
   height: 100vh
 @media only screen and (min-width: 1025px)
   #contact .contact .enter
-    width: 40%
+    width: 60%
   .about
-    float: right
+    display: inline-flex
+    flex-direction: column
+    align-items: center
     width: 40%
+    vertical-align: top
+    order: 2
+  .contact
+    display: inline-flex
+    width: 59%
+    flex-direction: column
+    justify-content: space-between
+    order: 1

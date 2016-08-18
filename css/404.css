@@ -220,6 +220,26 @@ th {
   padding: 0;
 }
 
+@keyframes scaleIn {
+  from {
+    transform: translateY(-50%) scale(0);
+  }
+  to {
+    transform: translateY(-50%) scale(1);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 .transition {
   transition: all ease .3s;
 }
@@ -276,10 +296,6 @@ a:hover:not(.btn) {
 
 .cf::after, cf::before {
   display: block;
-}
-
-p {
-  font-family: lato, sans-serif;
 }
 
 em[class|="type"] {
@@ -371,7 +387,7 @@ i span {
   text-align: center;
   min-width: 8em;
   width: auto;
-  max-width: 100%;
+  max-width: 10em;
   margin-top: 1em;
   transition: all ease 0.4s;
 }
@@ -550,7 +566,8 @@ footer {
 }
 
 #contact {
-  background: url("../assets/img/darkicons.png") no-repeat center;
+  display: flex;
+  background: url("../assets/img/darkicons.png") no-repeat top;
   background-size: cover;
   text-align: center;
 }
@@ -565,10 +582,6 @@ footer {
 
 #contact .about img {
   width: 100%;
-}
-
-#contact .contact *:nth-child(1n + 0) {
-  margin: 1.5em auto;
 }
 
 #contact .contact textarea {
@@ -593,7 +606,11 @@ footer {
 #contact .contact .enter:hover, #contact .contact .enter:focus {
   border-left: 10px solid #fee197;
   border-right: 10px solid #fee197;
-  outline: none;
+  border-right-outline: none;
+}
+
+#contact .contact form input, #contact .contact form input ~ * {
+  margin: 2em auto;
 }
 
 #contact.done {
@@ -602,11 +619,22 @@ footer {
 
 @media only screen and (min-width: 1025px) {
   #contact .contact .enter {
-    width: 40%;
+    width: 60%;
   }
   .about {
-    float: right;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
     width: 40%;
+    vertical-align: top;
+    order: 2;
+  }
+  .contact {
+    display: inline-flex;
+    width: 59%;
+    flex-direction: column;
+    justify-content: space-between;
+    order: 1;
   }
 }
 
@@ -775,6 +803,54 @@ footer {
     height: 100%;
     width: auto;
   }
+}
+
+#contact .contact label {
+  padding: .5em;
+  width: 24%;
+  display: inline-block;
+  border: 2px dashed #b7b7b7;
+}
+
+#contact .contact label img {
+  width: 5vw;
+  margin: 0;
+}
+
+#contact .contact label p {
+  margin: 0;
+}
+
+#contact .contact label:hover {
+  border: 2px dashed #fee197;
+}
+
+#contact .contact input[name$="-webdesign"]:checked ~ label[for$="-webdesign"] {
+  background-color: rgba(233, 233, 233, 0.4);
+}
+
+#contact .contact input[name$="-branding"]:checked ~ label[for$="-branding"] {
+  background-color: rgba(233, 233, 233, 0.4);
+}
+
+#contact .contact input[name$="-ux"]:checked ~ label[for$="-ux"] {
+  background-color: rgba(233, 233, 233, 0.4);
+}
+
+#contact .contact input[name$="-hello"]:checked ~ label[for$="-hello"] {
+  background-color: rgba(233, 233, 233, 0.4);
+}
+
+#contact .contact .continue {
+  display: none;
+}
+
+#contact .contact input[data-continue="true"]:checked ~ .continue.project {
+  display: block;
+}
+
+#contact .contact input[name$="-hello"]:checked ~ .continue.message {
+  display: block;
 }
 
 .catphotos {

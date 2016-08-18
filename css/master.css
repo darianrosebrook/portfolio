@@ -177,6 +177,42 @@ td,
 th {
   padding: 0; }
 
+@-webkit-keyframes scaleIn {
+  from {
+    -webkit-transform: translateY(-50%) scale(0);
+            transform: translateY(-50%) scale(0); }
+  to {
+    -webkit-transform: translateY(-50%) scale(1);
+            transform: translateY(-50%) scale(1); } }
+
+@keyframes scaleIn {
+  from {
+    -webkit-transform: translateY(-50%) scale(0);
+            transform: translateY(-50%) scale(0); }
+  to {
+    -webkit-transform: translateY(-50%) scale(1);
+            transform: translateY(-50%) scale(1); } }
+
+@-webkit-keyframes slideIn {
+  from {
+    opacity: 0;
+    -webkit-transform: translateX(-25px);
+            transform: translateX(-25px); }
+  to {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+            transform: translateX(0); } }
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    -webkit-transform: translateX(-25px);
+            transform: translateX(-25px); }
+  to {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+            transform: translateX(0); } }
+
 .transition {
   transition: all ease .3s; }
 
@@ -228,9 +264,6 @@ a:hover:not(.btn) {
 
 .cf::after, cf::before {
   display: block; }
-
-p {
-  font-family: lato, sans-serif; }
 
 em[class|="type"] {
   font-style: normal; }
@@ -303,7 +336,7 @@ i span {
   text-align: center;
   min-width: 8em;
   width: auto;
-  max-width: 100%;
+  max-width: 10em;
   margin-top: 1em;
   transition: all ease 0.4s; }
 
@@ -440,7 +473,10 @@ footer {
       background-attachment: scroll; } }
 
 #contact {
-  background: url("../assets/img/darkicons.png") no-repeat center;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  background: url("../assets/img/darkicons.png") no-repeat top;
   background-size: cover;
   text-align: center; }
   #contact h2 a {
@@ -449,8 +485,6 @@ footer {
     color: #90d8cd; }
   #contact .about img {
     width: 100%; }
-  #contact .contact *:nth-child(1n + 0) {
-    margin: 1.5em auto; }
   #contact .contact textarea {
     overflow: visible;
     resize: none;
@@ -469,17 +503,45 @@ footer {
     #contact .contact .enter:hover, #contact .contact .enter:focus {
       border-left: 10px solid #fee197;
       border-right: 10px solid #fee197;
-      outline: none; }
+        border-right-outline: none; }
+  #contact .contact form input, #contact .contact form input ~ * {
+    margin: 2em auto; }
 
 #contact.done {
   height: 100vh; }
 
 @media only screen and (min-width: 1025px) {
   #contact .contact .enter {
-    width: 40%; }
+    width: 60%; }
   .about {
-    float: right;
-    width: 40%; } }
+    display: -webkit-inline-flex;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    width: 40%;
+    vertical-align: top;
+    -webkit-order: 2;
+        -ms-flex-order: 2;
+            order: 2; }
+  .contact {
+    display: -webkit-inline-flex;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    width: 59%;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-order: 1;
+        -ms-flex-order: 1;
+            order: 1; } }
 
 .mw-square {
   color: #152121;
@@ -622,6 +684,40 @@ footer {
     .circle img {
       height: 100%;
       width: auto; } }
+
+#contact .contact label {
+  padding: .5em;
+  width: 24%;
+  display: inline-block;
+  border: 2px dashed #b7b7b7; }
+  #contact .contact label img {
+    width: 5vw;
+    margin: 0; }
+  #contact .contact label p {
+    margin: 0; }
+  #contact .contact label:hover {
+    border: 2px dashed #fee197; }
+
+#contact .contact input[name$="-webdesign"]:checked ~ label[for$="-webdesign"] {
+  background-color: rgba(233, 233, 233, 0.4); }
+
+#contact .contact input[name$="-branding"]:checked ~ label[for$="-branding"] {
+  background-color: rgba(233, 233, 233, 0.4); }
+
+#contact .contact input[name$="-ux"]:checked ~ label[for$="-ux"] {
+  background-color: rgba(233, 233, 233, 0.4); }
+
+#contact .contact input[name$="-hello"]:checked ~ label[for$="-hello"] {
+  background-color: rgba(233, 233, 233, 0.4); }
+
+#contact .contact .continue {
+  display: none; }
+
+#contact .contact input[data-continue="true"]:checked ~ .continue.project {
+  display: block; }
+
+#contact .contact input[name$="-hello"]:checked ~ .continue.message {
+  display: block; }
 
 #home {
   background-color: #152121; }

@@ -1,7 +1,7 @@
 <section id="contact" class="ender">
   <div class="about">
-  <img src="https://36.media.tumblr.com/ac28738f8ab075042aa116888043db43/tumblr_o0mznhkNPo1ujvdipo4_r2_1280.jpg" alt="A picture of Darian, Sara and their son Atlas. Taken on a really awesome hike to Mt Rainer">
-  <p>I'm Darian Rosebrook, a designer north of Seattle. I specialize in helping people and businesses define their brand with web design, logo design, and user experience.</p>
+  <img src="{{site.baseurl}}/assets/family.jpg" alt="A picture of Darian, Sara and their son Atlas. Taken on a really awesome hike to Mt Rainer">
+  <p>I'm Darian Rosebrook, a designer north of Seattle where me and my fiance, Sara, make our home. I specialize in helping people and businesses define their brand with web design, logo design, and user experience.</p>
   <a href="{{site.baseurl}}/soon" class="secondary btn">View More</a>
 </div>
 <div class="contact cf" id="form">
@@ -10,8 +10,12 @@
     method="POST">
     <input type="text" name="name" placeholder="Your Name..." class="transition enter text-center" required>
     <input type="email" name="_replyto" placeholder="Your Email..." class="transition enter text-center" required>
-    <textarea name="message" placeholder="Your Message..." class="transition enter text-center" required></textarea>
+    {% include questionnaire.html %}
+    <p class="continue more-info">Is there any other things I should know about the project?</p>
+    <p class="continue message">What would you like to say?</p>
+    <textarea name="message" placeholder="Your Message..." class="transition enter text-center continue message project" required></textarea>
     <input type="text" name="_gotcha" class="hidden" />
+    <p class="continue project"> Thank you! This filled form here will help me keep your organization's goals and audience in the forefront of the design.</p>
     <input type="submit" class="btn highlight" value="Submit!">
   </form>
   <h2>Or find me here:</h2>
