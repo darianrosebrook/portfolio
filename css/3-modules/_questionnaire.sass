@@ -1,3 +1,4 @@
+
 #contact
   .contact
     label
@@ -22,7 +23,15 @@
       background-color: rgba(233, 233, 233, .4)
     .continue
       display: none
+      animation: slideIn 0.3s backwards
     input[data-continue="true"]:checked ~ .continue.project
       display: block
+      transform: translateX(0)
     input[name$="-hello"]:checked ~ .continue.message
       display: block
+      transform: translateX(0)
+$class-slug: for !default
+
+@for $i from 1 through 9
+  #contact .contact .continue.questionnaire-part-#{$i}
+    animation-delay: ($i/5)+s

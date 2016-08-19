@@ -232,7 +232,7 @@ th {
 @keyframes slideIn {
   from {
     opacity: 0;
-    transform: translateX(-25px);
+    transform: translateX(-50%);
   }
   to {
     opacity: 1;
@@ -631,7 +631,8 @@ footer {
   }
   .contact {
     display: inline-flex;
-    width: 59%;
+    width: 80%;
+    margin: 4em auto;
     flex-direction: column;
     justify-content: space-between;
     order: 1;
@@ -843,14 +844,53 @@ footer {
 
 #contact .contact .continue {
   display: none;
+  animation: slideIn 0.3s backwards;
 }
 
 #contact .contact input[data-continue="true"]:checked ~ .continue.project {
   display: block;
+  transform: translateX(0);
 }
 
 #contact .contact input[name$="-hello"]:checked ~ .continue.message {
   display: block;
+  transform: translateX(0);
+}
+
+#contact .contact .continue.questionnaire-part-1 {
+  animation-delay: 0.2s;
+}
+
+#contact .contact .continue.questionnaire-part-2 {
+  animation-delay: 0.4s;
+}
+
+#contact .contact .continue.questionnaire-part-3 {
+  animation-delay: 0.6s;
+}
+
+#contact .contact .continue.questionnaire-part-4 {
+  animation-delay: 0.8s;
+}
+
+#contact .contact .continue.questionnaire-part-5 {
+  animation-delay: 1s;
+}
+
+#contact .contact .continue.questionnaire-part-6 {
+  animation-delay: 1.2s;
+}
+
+#contact .contact .continue.questionnaire-part-7 {
+  animation-delay: 1.4s;
+}
+
+#contact .contact .continue.questionnaire-part-8 {
+  animation-delay: 1.6s;
+}
+
+#contact .contact .continue.questionnaire-part-9 {
+  animation-delay: 1.8s;
 }
 
 .catphotos {
