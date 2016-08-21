@@ -235,7 +235,7 @@ th {
     transform: translateX(-50%);
   }
   to {
-    opacity: 1;
+    opacity: .3;
     transform: translateX(0);
   }
 }
@@ -566,7 +566,7 @@ footer {
 }
 
 #contact {
-  display: flex;
+  display: block;
   background: url("../assets/img/darkicons.png") no-repeat top;
   background-size: cover;
   text-align: center;
@@ -596,7 +596,7 @@ footer {
   border: 0;
   border-left: 2px solid #b7b7b7;
   border-right: 2px solid #b7b7b7;
-  background-color: inherit;
+  background-color: transparent;
   color: #b7b7b7;
   padding: 1rem;
   display: block;
@@ -622,20 +622,15 @@ footer {
     width: 60%;
   }
   .about {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    width: 40%;
+    display: block;
+    margin: 4em auto;
+    width: 60%;
     vertical-align: top;
-    order: 2;
   }
   .contact {
-    display: inline-flex;
+    display: block;
     width: 80%;
     margin: 4em auto;
-    flex-direction: column;
-    justify-content: space-between;
-    order: 1;
   }
 }
 
@@ -806,6 +801,19 @@ footer {
   }
 }
 
+#contact .contact div[class*="quest"] {
+  height: 30vh;
+  margin-bottom: .3em;
+  padding: .5em;
+  opacity: .3;
+  transition: all ease 0.4s;
+}
+
+#contact .contact div.awesome {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.2);
+}
+
 #contact .contact label {
   padding: .5em;
   width: 24%;
@@ -852,7 +860,7 @@ footer {
   transform: translateX(0);
 }
 
-#contact .contact input[name$="-hello"]:checked ~ .continue.message {
+#contact .contact input[name$="-hello"]:checked ~ .continue.message, #contact .contact input[name$="-hello"]:checked ~ div .continue.message {
   display: block;
   transform: translateX(0);
 }

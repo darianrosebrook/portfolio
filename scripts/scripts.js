@@ -7,13 +7,11 @@ function byClass(className) {
 
 }
 
-
+// icon toggle for homepage
 var icons = byClass('logo'),
     desc = byClass('icon-description'),
     container = byId('icons');
 
-
-// solution via Timo, thank you
 function toggleAllIcons() {
   for(var i = 0; i < icons.length; i++) {
     icons[i].classList.toggle('hidden');
@@ -242,3 +240,64 @@ if(filter) {
     }
   });
 }
+
+//questionnaire
+var question = byClass('continue');
+var wHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
+var wScroll;
+var rect = [];
+var continueBox = [];
+var checkboxes = document.getElementsByTagName('input');
+for(var i = 0; i < checkboxes.length; i++) {
+  if(checkboxes[i].dataset.continue) {
+    continueBox.push(checkboxes[i]);
+  }
+}
+for (var i = 0; i < continueBox.length; i++) {
+  continueBox[i].addEventListener('change', checked, false)
+}
+function passesCenter(a) {
+   return !(a.bottom - (wHeight / 2) < 0 || a.top - (wHeight / 2) >= 0);
+}
+
+function checked() {
+  if (this.checked) {
+
+    rect = [];
+    for (var i = 0; i < question.length; i++) {
+      rect.push(question[i].getBoundingClientRect());
+    }
+    console.log(rect);
+    window.addEventListener('scroll', function(){
+      wScroll = window.pageYOffset;
+      for (var i = 0; i < question.length; i++) {
+        if(passesCenter(question[i].getBoundingClientRect())) {
+          question[i].classList.add('awesome');
+        } else {
+          question[i].classList.remove('awesome');
+        }
+      }
+      }
+    )
+  }
+}
+
+
+
+
+/*
+window.addEventListener('scroll', function(){
+  wScroll = window.pageYOffset;
+    console.log(wScroll);
+  if (wScroll < (question.offsetTop - (wHeight / 1.5))) {
+    question.classList.remove('awesome');
+  }
+  if(wScroll > (question.offsetTop - (wHeight / 1.5))){
+    question.classList.add('awesome');
+  }
+  if(wScroll > (question.offsetTop - (wHeight / 3))){
+    question.classList.remove('awesome');
+  }
+}) */
+
+// event listener, class list for "continue", check element is in target, if so take it's siblings and remove the class that is active

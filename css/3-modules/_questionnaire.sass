@@ -1,6 +1,15 @@
 
 #contact
   .contact
+    div[class*="quest"]
+      height: 30vh
+      margin-bottom: .3em
+      padding: .5em
+      opacity: .3
+      transition: $transition
+    div.awesome
+      opacity: 1
+      background: rgba(255, 255, 255, .2)
     label
       padding: .5em
       width: 24%
@@ -27,11 +36,9 @@
     input[data-continue="true"]:checked ~ .continue.project
       display: block
       transform: translateX(0)
-    input[name$="-hello"]:checked ~ .continue.message
+    input[name$="-hello"]:checked ~ .continue.message, input[name$="-hello"]:checked ~ div .continue.message
       display: block
       transform: translateX(0)
-$class-slug: for !default
-
 @for $i from 1 through 9
   #contact .contact .continue.questionnaire-part-#{$i}
     animation-delay: ($i/5)+s

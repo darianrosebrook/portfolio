@@ -199,7 +199,7 @@ th {
     -webkit-transform: translateX(-50%);
             transform: translateX(-50%); }
   to {
-    opacity: 1;
+    opacity: .3;
     -webkit-transform: translateX(0);
             transform: translateX(0); } }
 
@@ -209,7 +209,7 @@ th {
     -webkit-transform: translateX(-50%);
             transform: translateX(-50%); }
   to {
-    opacity: 1;
+    opacity: .3;
     -webkit-transform: translateX(0);
             transform: translateX(0); } }
 
@@ -473,9 +473,7 @@ footer {
       background-attachment: scroll; } }
 
 #contact {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+  display: block;
   background: url("../assets/img/darkicons.png") no-repeat top;
   background-size: cover;
   text-align: center; }
@@ -495,7 +493,7 @@ footer {
     border: 0;
     border-left: 2px solid #b7b7b7;
     border-right: 2px solid #b7b7b7;
-    background-color: inherit;
+    background-color: transparent;
     color: #b7b7b7;
     padding: 1rem;
     display: block;
@@ -514,35 +512,14 @@ footer {
   #contact .contact .enter {
     width: 60%; }
   .about {
-    display: -webkit-inline-flex;
-    display: -ms-inline-flexbox;
-    display: inline-flex;
-    -webkit-flex-direction: column;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-align-items: center;
-        -ms-flex-align: center;
-            align-items: center;
-    width: 40%;
-    vertical-align: top;
-    -webkit-order: 2;
-        -ms-flex-order: 2;
-            order: 2; }
-  .contact {
-    display: -webkit-inline-flex;
-    display: -ms-inline-flexbox;
-    display: inline-flex;
-    width: 80%;
+    display: block;
     margin: 4em auto;
-    -webkit-flex-direction: column;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-justify-content: space-between;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
-    -webkit-order: 1;
-        -ms-flex-order: 1;
-            order: 1; } }
+    width: 60%;
+    vertical-align: top; }
+  .contact {
+    display: block;
+    width: 80%;
+    margin: 4em auto; } }
 
 .mw-square {
   color: #152121;
@@ -686,6 +663,17 @@ footer {
       height: 100%;
       width: auto; } }
 
+#contact .contact div[class*="quest"] {
+  height: 30vh;
+  margin-bottom: .3em;
+  padding: .5em;
+  opacity: .3;
+  transition: all ease 0.4s; }
+
+#contact .contact div.awesome {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.2); }
+
 #contact .contact label {
   padding: .5em;
   width: 24%;
@@ -722,7 +710,7 @@ footer {
       -ms-transform: translateX(0);
           transform: translateX(0); }
 
-#contact .contact input[name$="-hello"]:checked ~ .continue.message {
+#contact .contact input[name$="-hello"]:checked ~ .continue.message, #contact .contact input[name$="-hello"]:checked ~ div .continue.message {
   display: block;
   -webkit-transform: translateX(0);
       -ms-transform: translateX(0);

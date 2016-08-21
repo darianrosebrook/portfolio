@@ -1,9 +1,9 @@
 <p>What kind of project would you like to work on?</p>
 <p><small>(Yes, you can select more than one.)</small></p>
-<input type="checkbox" class="hidden" data-continue="true" id="checkbox-webdesign" name="checkbox-webdesign" value="">
-<input type="checkbox" class="hidden" data-continue="true" id="checkbox-branding" name="checkbox-branding" value="">
-<input type="checkbox" class="hidden" data-continue="true" id="checkbox-ux" name="checkbox-ux" value="">
-<input type="checkbox" class="hidden" id="checkbox-hello" name="checkbox-hello" value=""><br>
+<input type="checkbox" class="hidden" data-continue="true" id="checkbox-webdesign" name="checkbox-webdesign" value="" required>
+<input type="checkbox" class="hidden" data-continue="true" id="checkbox-branding" name="checkbox-branding" value="" required>
+<input type="checkbox" class="hidden" data-continue="true" id="checkbox-ux" name="checkbox-ux" value="" required>
+<input type="checkbox" class="hidden" id="checkbox-hello" name="checkbox-hello" value="" required><br>
 <label class="transition" for="checkbox-webdesign"><img src="{{site.baseurl}}/assets/icon-webdesign.svg" alt="" /><p>
   Web Design
 </p></label>
@@ -26,27 +26,33 @@ and begin our conversation about your organization's goals.
 </p>
 <div class="continue project questionnaire-part-2">
   <p> What is the name of your business or the company you work for?</p>
+  <input type="text" name="name" class="transition enter text-center"value="" placeholder="e.g. (Barney's Smoked Cheddar)">
 </div>
-<input type="text" name="name" class="transition enter text-center continue project"value="">
 <div class="continue project questionnaire-part-3">
   <p> What is a good phone number to reach you at?</p>
+  <input type="text" name="name" class="transition enter text-center"value="" placeholder="e.g (+1 360 555 555)">
 </div>
 <div class="continue project questionnaire-part-4">
-  <p> Do you have an existing website? I&lsquo;d love to see it!</p>
-  <input type="text" name="name"class="transition enter text-center continue project" value="">
+  <p>Does your organization have a website? I'd love to see it!</p>
+  <input type="text" name="name" class="transition enter text-center"value="" placeholder="http://...">
 </div>
-<div class="continue project questionnaire-part-5">
-<p> What is it that your organization does and what excites you most about it?</p>
+<div id="special" class="continue project questionnaire-part-5">
+<p> What does your organization do and what excites you most about it?</p>
+<textarea name="message" class="transition enter text-center " required placeholder="What makes you guys unique?"></textarea>
 </div>
 <div class="continue project questionnaire-part-6">
   <p> What are some of the important goals your organization has over the next few years?</p>
+  <textarea name="message" class="transition enter text-center " required placeholder="What is important to you?"></textarea>
 </div>
 <div class="continue project questionnaire-part-7">
   <p> How will design help accomplish those goals as an organization?</p>
+  <textarea name="message" class="transition enter text-center " required placeholder="What looks like success for you?"></textarea>
 </div>
 <div class="continue project questionnaire-part-8">
   <p> Who is the audience you are trying to reach?</p>
+  <input type="text" name="name" class="transition enter text-center"value="" placeholder="e.g. (middle aged adults who haven't given up being a teenager)">
 </div>
-<div class="continue project questionnaire-part-">
+<div class="continue project questionnaire-part-9">
   <p> How do you currently establish your organization's relationship with those people?</p>
+  <input type="text" name="name" class="transition enter text-center"value="" placeholder="e.g. (Twitter, Facebook, Website, Forums ...)">
 </div>
