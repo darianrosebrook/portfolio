@@ -638,6 +638,9 @@ footer {
     width: 100%;
     margin: 4em auto;
   }
+  .contact div[class*="quest"] {
+    height: 30vh;
+  }
 }
 
 .mw-square {
@@ -810,7 +813,6 @@ footer {
 #contact .contact div[class*="quest"] {
   flex-direction: column;
   justify-content: center;
-  height: 30vh;
   margin-bottom: .3em;
   padding: .5em;
   transition: all ease 0.4s;

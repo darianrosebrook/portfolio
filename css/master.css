@@ -523,7 +523,9 @@ footer {
   .contact {
     display: block;
     width: 100%;
-    margin: 4em auto; } }
+    margin: 4em auto; }
+    .contact div[class*="quest"] {
+      height: 30vh; } }
 
 .mw-square {
   color: #152121;
@@ -674,7 +676,6 @@ footer {
   -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
-  height: 30vh;
   margin-bottom: .3em;
   padding: .5em;
   transition: all ease 0.4s; }
