@@ -584,6 +584,10 @@ footer {
   width: 100%;
 }
 
+#contact .contact {
+  width: 100%;
+}
+
 #contact .contact textarea {
   overflow: visible;
   resize: none;
@@ -606,7 +610,9 @@ footer {
 #contact .contact .enter:hover, #contact .contact .enter:focus {
   border-left: 10px solid #fee197;
   border-right: 10px solid #fee197;
-  border-right-outline: none;
+  outline: none;
+  opacity: 1;
+  background-color: rgba(200, 200, 200, 0.1);
 }
 
 #contact .contact form input, #contact .contact form input ~ * {
@@ -629,7 +635,7 @@ footer {
   }
   .contact {
     display: block;
-    width: 80%;
+    width: 100%;
     margin: 4em auto;
   }
 }
@@ -802,16 +808,24 @@ footer {
 }
 
 #contact .contact div[class*="quest"] {
+  flex-direction: column;
+  justify-content: center;
   height: 30vh;
   margin-bottom: .3em;
   padding: .5em;
-  opacity: .3;
   transition: all ease 0.4s;
 }
 
-#contact .contact div.awesome {
+#contact .contact div[class*="quest"] * {
+  opacity: .3;
+}
+
+#contact .contact div.awesome * {
   opacity: 1;
-  background: rgba(255, 255, 255, 0.2);
+}
+
+#contact .contact div.awesome input, #contact .contact div.awesome textarea {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 #contact .contact label {
@@ -856,13 +870,34 @@ footer {
 }
 
 #contact .contact input[data-continue="true"]:checked ~ .continue.project {
+  display: flex;
+  transform: translateX(0);
+}
+
+#contact .contact input[data-continue="true"]:checked ~ div span.hidden {
+  display: inline !important;
+}
+
+#contact .contact input[data-continue="true"]:checked ~ div span.message {
+  display: none !important;
+}
+
+#contact .contact input[name$="-hello"]:checked ~ .continue.message, #contact .contact input[name$="-hello"]:checked input[name$="-hello"]:checked ~ div .continue.message {
   display: block;
   transform: translateX(0);
 }
 
-#contact .contact input[name$="-hello"]:checked ~ .continue.message, #contact .contact input[name$="-hello"]:checked ~ div .continue.message {
-  display: block;
-  transform: translateX(0);
+#contact .contact input[name$="-hello"]:checked ~ div span.message {
+  display: inline !important;
+}
+
+#contact .contact input[name$="-hello"]:checked ~ div span.project {
+  display: none !important;
+}
+
+#contact .contact .questionnaire-part-1 {
+  width: 65%;
+  color: #fee197;
 }
 
 #contact .contact .continue.questionnaire-part-1 {

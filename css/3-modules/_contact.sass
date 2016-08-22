@@ -11,6 +11,7 @@
 
     width: 100%
   .contact
+    width: 100%
     textarea
       overflow: visible
       resize: none
@@ -29,7 +30,9 @@
       &:hover, &:focus
         border-left: 10px solid $highlight
         border-right: 10px solid $highlight
-          outline: none
+        outline: none
+        opacity: 1
+        background-color: rgba(200, 200, 200, .1)
     form input, form input ~ *
       margin: 2em auto
 #contact.done
@@ -44,5 +47,5 @@
     vertical-align: top
   .contact
     display: block
-    width: 80%
+    width: 100%
     margin: 4em auto

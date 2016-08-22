@@ -2,14 +2,19 @@
 #contact
   .contact
     div[class*="quest"]
+      flex-direction: column
+      justify-content: center
       height: 30vh
       margin-bottom: .3em
       padding: .5em
-      opacity: .3
       transition: $transition
+      & *
+        opacity: .3
     div.awesome
-      opacity: 1
-      background: rgba(255, 255, 255, .2)
+      *
+        opacity: 1
+      input, textarea
+        background: rgba(255, 255, 255, .1)
     label
       padding: .5em
       width: 24%
@@ -33,12 +38,26 @@
     .continue
       display: none
       animation: slideIn 0.3s backwards
-    input[data-continue="true"]:checked ~ .continue.project
-      display: block
-      transform: translateX(0)
-    input[name$="-hello"]:checked ~ .continue.message, input[name$="-hello"]:checked ~ div .continue.message
-      display: block
-      transform: translateX(0)
+    input[data-continue="true"]:checked
+      ~ .continue.project
+        display: flex
+        transform: translateX(0)
+      ~ div span.hidden
+        display: inline !important
+      ~ div span.message
+        display:none !important
+
+    input[name$="-hello"]:checked
+      ~ .continue.message, input[name$="-hello"]:checked ~ div .continue.message
+        display: block
+        transform: translateX(0)
+      ~ div span.message
+        display: inline !important
+      ~ div span.project
+        display: none !important
+    .questionnaire-part-1
+      width: 65%
+      color: $highlight
 @for $i from 1 through 9
   #contact .contact .continue.questionnaire-part-#{$i}
     animation-delay: ($i/5)+s
