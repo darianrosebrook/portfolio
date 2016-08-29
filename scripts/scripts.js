@@ -249,8 +249,11 @@ var rect = [];
 var continueBox = [];
 var checkboxes = document.getElementsByTagName('input');
 for(var i = 0; i < checkboxes.length; i++) {
+  console.log(checkboxes[i].dataset.continue);
   if(checkboxes[i].dataset.continue) {
     continueBox.push(checkboxes[i]);
+  } else {
+    checkboxes[i].addEventListener('change', checked, false);
   }
 }
 for (var i = 0; i < continueBox.length; i++) {
