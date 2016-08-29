@@ -74,9 +74,13 @@ i
     display: none
 // Structure
 // 2 column
-.autowide
+.auto-wide
+  display: flex
+  flex-wrap: wrap
+  justify-content: center
   .module
-    width: 50%
+    display: inline-block
+    width: 48%
 
 // Cards & featured
 .featured
@@ -100,6 +104,8 @@ i
   text-align: center
   z-index: 1
   transition: $transition
+  & h2
+    margin-bottom: 1.5em
 
   img
     width: 100%
@@ -169,3 +175,7 @@ footer
   #contact i:hover
     transform: translateY(-0.3em)
     color: $highlight
+  .auto-wide
+    .module
+      display: inline-block
+      width: 24%

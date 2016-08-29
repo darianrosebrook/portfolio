@@ -298,8 +298,19 @@ h3 {
 i span {
   display: none; }
 
-.autowide .module {
-  width: 50%; }
+.auto-wide {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
+  .auto-wide .module {
+    display: inline-block;
+    width: 48%; }
 
 .featured {
   width: 100%;
@@ -324,6 +335,8 @@ i span {
   text-align: center;
   z-index: 1;
   transition: all ease 0.4s; }
+  .card h2 {
+    margin-bottom: 1.5em; }
   .card img {
     width: 100%; }
 
@@ -401,7 +414,10 @@ footer {
     -webkit-transform: translateY(-0.3em);
         -ms-transform: translateY(-0.3em);
             transform: translateY(-0.3em);
-    color: #fee197; } }
+    color: #fee197; }
+  .auto-wide .module {
+    display: inline-block;
+    width: 24%; } }
 
 .toggle {
   position: fixed;
@@ -690,7 +706,6 @@ footer {
 
 #contact .contact label {
   padding: .5em;
-  width: 24%;
   display: inline-block;
   border: 2px dashed #b7b7b7; }
   #contact .contact label img {
