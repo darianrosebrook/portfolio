@@ -343,8 +343,15 @@ i span {
   display: none;
 }
 
-.autowide .module {
-  width: 50%;
+.auto-wide {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.auto-wide .module {
+  display: inline-block;
+  width: 48%;
 }
 
 .featured {
@@ -372,6 +379,10 @@ i span {
   text-align: center;
   z-index: 1;
   transition: all ease 0.4s;
+}
+
+.card h2 {
+  margin-bottom: 1.5em;
 }
 
 .card img {
@@ -470,6 +481,10 @@ footer {
   #contact i:hover {
     transform: translateY(-0.3em);
     color: #fee197;
+  }
+  .auto-wide .module {
+    display: inline-block;
+    width: 24%;
   }
 }
 
@@ -832,7 +847,6 @@ footer {
 
 #contact .contact label {
   padding: .5em;
-  width: 24%;
   display: inline-block;
   border: 2px dashed #b7b7b7;
 }
@@ -942,4 +956,13 @@ footer {
   width: 70%;
   margin: 0 auto;
   text-align: center;
+}
+
+.catphotos article {
+  display: inline-block;
+  width: 32%;
+}
+
+.catphotos article img {
+  width: 100%;
 }

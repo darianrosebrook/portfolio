@@ -1,7 +1,23 @@
 {
   "posts": [
       { "name": "cat-one",
-        "url": "assets/expectational-debt.jpg",
+        "url": "https://placekitten.com/500/300",
+        "title": "this is a cat photo"
+      },
+      { "name": "cat-two",
+        "url": "https://placekitten.com/250/500",
+        "title": "this is a cat photo"
+      },
+      { "name": "cat-three",
+        "url": "https://placekitten.com/500/900",
+        "title": "this is a cat photo"
+      },
+      { "name": "cat-four",
+        "url": "https://placekitten.com/700/600",
+        "title": "this is a cat photo"
+      },
+      { "name": "cat-five",
+        "url": "https://placekitten.com/450/600",
         "title": "this is a cat photo"
       }
   ]

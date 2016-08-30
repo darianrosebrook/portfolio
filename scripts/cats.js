@@ -42,7 +42,7 @@ function addCats(obj){
   for ( q; q < f; q++) {
     newCats += '<article class=\"cat-list-item\"' + obj.posts[q].name + ' >\n\t';
     // newCats += '<img src=\"https://darianrosebrook.com/' + obj.posts[q].url + '\" alt=\"' + obj.posts[q].title + '\" />\n';
-    newCats += '<img src=\"/' + obj.posts[q].url + '\" alt=\"' + obj.posts[q].title + '\" />\n';
+    newCats += '<img src=\"' + obj.posts[q].url + '\" alt=\"' + obj.posts[q].title + '\" />\n';
     newCats += '</article>\n';
   }
   console.log(newCats);
