@@ -864,20 +864,20 @@ footer {
   border: 2px dashed #fee197;
 }
 
-#contact .contact input[name$="-webdesign"]:checked ~ label[for$="-webdesign"] {
+#contact .contact input[name$="-webdesign"]:checked ~ .auto-wide label[for$="-webdesign"] {
   background-color: rgba(233, 233, 233, 0.4);
 }
 
-#contact .contact input[name$="-branding"]:checked ~ label[for$="-branding"] {
+#contact .contact input[name$="-branding"]:checked ~ .auto-wide label[for$="-branding"] {
   background-color: rgba(233, 233, 233, 0.4);
 }
 
-#contact .contact input[name$="-ux"]:checked ~ label[for$="-ux"] {
+#contact .contact input[name$="-ux"]:checked ~ .auto-wide label[for$="-ux"] {
   background-color: rgba(233, 233, 233, 0.4);
 }
 
-#contact .contact input[name$="-hello"]:checked ~ label[for$="-hello"] {
-  background-color: rgba(233, 233, 233, 0.4);
+#contact .contact input[name$="-hello"]:checked ~ .auto-wide label[for$="-hello"] {
+  background-color: blue;
 }
 
 #contact .contact .continue {
