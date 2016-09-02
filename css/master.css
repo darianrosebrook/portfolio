@@ -980,6 +980,8 @@ footer {
       -webkit-transform: translate(0, -1rem);
           -ms-transform: translate(0, -1rem);
               transform: translate(0, -1rem); }
+    #home .icons .logo {
+      width: 25%; }
   #home .icon-description.active {
     display: -webkit-flex;
     display: -ms-flexbox;
