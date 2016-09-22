@@ -634,6 +634,12 @@ footer {
   margin: 2em auto;
 }
 
+#contact .contact #form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 #contact.done {
   height: 100vh;
 }
@@ -877,7 +883,7 @@ footer {
 }
 
 #contact .contact input[name$="-hello"]:checked ~ .auto-wide label[for$="-hello"] {
-  background-color: blue;
+  background-color: rgba(233, 233, 233, 0.4);
 }
 
 #contact .contact .continue {
@@ -956,6 +962,7 @@ footer {
   width: 70%;
   margin: 0 auto;
   text-align: center;
+  font-family: "comic sans ms";
 }
 
 .catphotos article {

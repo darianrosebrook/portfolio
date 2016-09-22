@@ -524,6 +524,16 @@ footer {
         background-color: rgba(200, 200, 200, 0.1); }
     #contact .contact form input, #contact .contact form input ~ * {
       margin: 2em auto; }
+    #contact .contact #form {
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-justify-content: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+      -webkit-align-items: center;
+          -ms-flex-align: center;
+              align-items: center; }
 
 #contact.done {
   height: 100vh; }
