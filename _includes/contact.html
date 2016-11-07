@@ -1,30 +1,67 @@
+<section id="contact" class="container">
+  <div class="row">
+    <h2>Let's Get in Contact</h2>
+    <form action="//formspree.io/darian@darianrosebrook.com" method="POST">
+      <input type="text" name="name" placeholder="Your Name..." class="transition enter text-center" required>
+      <input type="email" name="_replyto" placeholder="Your Email..." class="transition enter text-center" required>
+      <p>What kind of project would you like to work on?</p>
+      <p><small>(Yes, you can select more than one.)</small></p>
+      <input type="checkbox" class="hidden" data-continue="true" id="checkbox-webdesign" name="checkbox-webdesign" value="" >
+      <input type="checkbox" class="hidden" data-continue="true" id="checkbox-branding" name="checkbox-branding" value="" >
+      <input type="checkbox" class="hidden" data-continue="false" id="checkbox-hello" name="checkbox-hello" value="" ><br>
+      <div class="container">
+        <label class="transition module " for="checkbox-webdesign">
+          <img src="{{site.baseurl}}/assets/img/icon-web.svg" alt="" />
+          <br />
+          Web Design
+        </label>
+        <label class="transition module " for="checkbox-branding">
+          <img src="{{site.baseurl}}/assets/img/icon-branding.svg" alt="" />
+          <br />
+          Let's do some Branding!
+        </label>
+        <label class="transition module " for="checkbox-hello">
+          <img src="{{site.baseurl}}/assets/img/icon-smile.svg" alt="" />
+          <br />
+          I'm just saying hello!
+        </label>
+      </div>
+      <p class="questionnaire-part-1 continue project">
+        Alright! In order for me to focus and deliver
+      the best possible solution for you and your organization, I just need a little more information. This takes a very short amount of time and allows me to keep your organization's audience and goals at the forefront of the design.
+      </p>
+      <div class="continue project questionnaire-part-2">
+        <p> What is the name of your business or the company you work for?</p>
+        <input type="text" name="message" class="transition enter text-center" value="" placeholder="e.g. (Avenue Editorial, Inc.)">
+      </div>
+      <div class="continue project questionnaire-part-3">
+        <p> What is a good phone number to reach you at?</p>
+        <input type="text" name="message" class="transition enter text-center" value="" placeholder="e.g (+1 360 555 555)">
+      </div>
+      <div class="continue project questionnaire-part-4">
+        <p>Does your organization have a website? I'd love to see it!</p>
+        <input type="text" name="message" class="transition enter text-center" value="" placeholder="http://...">
+      </div>
+      <div id="special" class="continue project questionnaire-part-5">
+      <p> What does your organization do and what excites you most about it?</p>
+      <textarea name="message" class="transition enter text-center " required placeholder="What makes you guys unique?"></textarea>
+      </div>
+      <div class="continue project questionnaire-part-6">
+        <p> How will design help accomplish your goals as an organization?</p>
+        <textarea name="message" class="transition enter text-center " required placeholder="What looks like success for you?"></textarea>
+      </div>
+      <div class="continue project questionnaire-part-7">
+        <p> Who is the audience you are trying to reach?</p>
+        <input type="text" name="message" class="transition enter text-center" value="" placeholder="e.g. (middle aged adults who haven't given up being a teenager)">
+      </div>
 
-
-<section id="contact" class="ender">
-
-<div class="contact cf" id="form">
-  <h2>Let's Get in Contact</h2>
-  <form action="//formspree.io/darian@darianrosebrook.com" method="POST">
-    <input type="text" name="name" placeholder="Your Name..." class="transition enter text-center" required>
-    <input type="email" name="_replyto" placeholder="Your Email..." class="transition enter text-center" required>
-    {% include questionnaire.html %}
-    <div class="questionnaire-part-1 continue message project" >
-      <p class="message"><span class="hidden project">Is there anything else I need to know about the project?</span><span class="hidden message">How's it going? :D</p>
+      <div class="questionnaire-part-1 continue message project" >
+      <p class="message"><span class="hidden project">Is there anything else I need to know about the project?</span><span class="hidden message">How's it going? :D</span></p>
       <textarea name="message" placeholder="Your Message..." class="transition enter text-center " required></textarea>
-    </div>
-    <input type="text" name="_gotcha" class="hidden" />
-    <p class="continue project"> Thank you! This filled form here will help me keep your organization's goals and audience in the forefront of the design.</p>
-    <input type="submit" class="btn highlight continue project message" value="Submit!">
-  </form>
-  <h2>Or find me here:</h2>
-  <h2><a href="http://twitter.com/d_evyn" target="_blank"><i class="fa fa-twitter transition"><span>twitter</span></i></a> |
-   <a href="http://linkedin.com/in/darianrosebrook" target="_blank"><i class="fa fa-linkedin transition"><span>linkedin</span></i></a> |
-   <a href="http://dribbble.com/d_evyn" target="_blank"><i class="fa fa-dribbble transition"><span>dribbble</span></i></a><a href="http://www.facebook.com/DarianRosebrookDesign/" class="hidden">facebook page</a><a href="https://plus.google.com/u/1/106679625106063278529" class="hidden">Google page</a></h2>
-
-</div>
-<div class="about">
-<img src="{{site.baseurl}}/assets/family.jpg" alt="A picture of Darian, Sara and their son Atlas. Taken on a really awesome hike to Mt Rainer">
-<p>I'm Darian Rosebrook, a designer north of Seattle where me and my fiance, Sara, make our home. I specialize in helping people and businesses define their brand with web design, logo design, and user experience.</p>
-<a href="{{site.baseurl}}/soon" class="secondary btn">View More</a>
-</div>
+      </div>
+      <input type="text" name="_gotcha" class="hidden" />
+      <p class="continue project"> Thank you! This filled form here will help me keep your organization's goals and audience in the forefront of the design.</p>
+      <input type="submit" class="button continue project message" value="Submit!">
+    </form>
+   </div>
 </section>

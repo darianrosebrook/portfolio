@@ -1,182 +1,255 @@
-.transition
-  transition: all ease .3s
-body.in-transition
-  transition: transform .5s cubic-bezier(.65, .01, .19, 1.01)
-.hidden
-  display: none !important
-  opacity: 0
-// keyframes
-@keyframes fadeIn
-  to
-    opacity: 1
-
 // Global
 *, *::before, *::after
   box-sizing: border-box
   margin: 0
   padding: 0
-
 html
-  font-family:  "lato", "helvetica", vedana, sans-serif
-  background-color: $dark
-  color: $section
+  background: $light
+  font-family: "Proxima Nova", "lato", "helvetica", verdana, sans-serif
   font-size: 62.5%
-
+  color: $grey
 body
-  font-size: 2rem
-  scroll-behavior: smooth
-a, a:link, a:visited, a:hover, a:focus
-  transition: $transition
-  text-decoration: none
-  color: inherit
-a:hover:not(.btn)
-  color: $main
+  font-size: 1.2em
+  line-height: 1.5
+@media only screen and (min-width: 200px)
+  body
+    font-size: 1.6rem
+@media only screen and (min-width: 600px)
+  body
+    font-size: 1.8rem
+.hidden
+  display: none !important
+  opacity: 0
+.mobile
+  display: block
+  opacity: 1
+  @media only screen and (min-width: 800px)
+    display: none
+    opacity: 0
+.desktop
+  display: none
+  opacity: 0
+  @media only screen and (min-width: 800px)
+    display: block
+    opacity: 1
 .cf::after
   content: ' '
   visibility: hidden
   display: block
   height: 0
   clear: both
-.cf::after, cf::before
+.cf::after, .cf::before
   display: block
-//typography
+
+// Animations
+.transition
+  transition: all ease .3s
+@keyframes fadeIn
+  to
+    opacity: 1
+
+// Typography
+p
+  margin-bottom: $margin
+a, a:link, a:visited, a:hover, a:focus
+  transition: $transition
+  text-decoration: none
+  color: $main
+hr
+  margin-bottom: $margin
+  @media only screen and (max-width: 800px)
+    & ~ .module
+      margin-top: $margin
+h6
+  font-size: 1.8rem
+  font-weight: 400
+  margin-bottom: $margin
+h5
+  font-size: 2rem
+  font-weight: 400
+  margin-bottom: $margin
+h4
+  font-size: 2.3rem
+  font-weight: 300
+  margin-bottom: $margin
+h3
+  font-size: 2.9rem
+  font-weight: 300
+  color: $main
+  margin-bottom: $margin
+h2
+  font-size: 3.2rem
+  font-weight: 300
+  margin-bottom: $margin
+  color: $main
+h1
+  margin: 0 0 $margin 0
+  font-size: 4rem
+  font-weight: 500
+  color: $main
+
+i
+  margin-right: 1em
+  margin-left: 1em
+  span
+    display: none
 
 em[class|="type"]
   font-style: normal
-
 .type-life
   color: #4aa3ba
-
 .type-brand
   color: #ff2e63
-
 .type-logo
   color: #1e6262
-
-.type-ux
+.type-ux
   color: #5a37c3
-
 .type-web
   color: #e7a117
-#home article
-  .metaDesc
-    color: $secondary
-    font-size: 1.5rem
-h1
-  font-size: 3.5rem
-  span.hide
-    display: none
+.meta_description a
+  color: $grey
 
-h3
-  color: #fee197
+// Buttons
+.button, a.button
+  transition: $transition
+  display: inline-block
+  min-width: 8em
+  background: $main
+  font-size: 1.8rem
+  color: $light
+  border: none
+  padding: 1em
+  @include center(true, false)
+  &.secondary
+    background: $grey
+  &.tertiary
+    background: $dark
+.button:active, .button:focus,a.button:active, a.button:focus
+  background-color: darken($main, 45%)
+.button:hover, a.button:hover
+  background-color: darken($main, 25%)
+.button ~ .button,a.button ~ a.button
+  margin-left: 2em
+  margin-right: 0
 
-i
-  span
-    display: none
-// Structure
-// 2 column
-.auto-wide
-  display: flex
-  flex-wrap: wrap
-  justify-content: center
+// Scaffolding
+header
+  position: relative
+  height: 100vh
+section
+  margin-top: 4rem
+  & ~ section
+    margin-top: 0
+    margin-bottom: 4rem
+img
+  width: 50%
+footer
+  padding: 2em 0
+  position: relative
+  background-color: $dark
+  color: $light
+  @media only screen and (min-width: 800px)
+    height: 30vh
+    .row
+      text-align: center
+      @include center(true, true)
+// Columns
+.container
+  position: relative
+  padding: 3rem 5%
+  @include row()
+  img
+    position: relative
+    @include center(true, false)
+  .col
+    position: inherit
+    display: inline-block
+    font-size: 1.8rem
+@media only screen and (min-width: 200px)
+  .container .col
+    @include col(1, 1)
+@media only screen and (min-width: 300px)
+  .container .col
+    @include col(1, 2)
+    width: calc(50% - 2em)
+@media only screen and (min-width: 800px)
+  .container .col
+    @include col(1, 4)
+    width: calc(25% - 2em)
+.container .row
+  position: inherit
+  display: inline-block
+  font-size: 1.8rem
+  @include col(1, 1, 0)
+.container .col-2
+  position: inherit
+  display: inline-block
+  font-size: 1.8rem
+  @include col(1, 2, 0)
+.container .col-4
+  position: inherit
+  display: inline-block
+  font-size: 1.8rem
+  @include col(1, 4, 0)
+.module
+  display: block
+  vertical-align: top
+  position: inherit
+  font-size: 1.8rem
+  padding: 0 0 1.5rem 0
+  @media only screen and (min-width: 800px)
+    & ~ .module
+      padding-bottom: 0
+      margin-left: 1em
+
+
+// Forms
+form
+  input:not(.button), textarea,
+    width: 100%
+    margin-bottom: 1.2em
+    padding: .5em 2em
+    background: none
+    border: 2px solid $grey
+    border-top: 0
+    border-bottom: 0
+    transition: $transition
+    outline: none
+    text-align: center
+    @include center(true, false)
+    &:focus, &:active
+      border-width: 10px
+      border-color: $main
+  label.module
+    position: relative
+    padding: 0
+    width: calc(33.333% - .1em)
+    text-align: center
+    border: 2px dashed $grey
+    img
+      position: static
+      transform: none
+      left: auto
+    &:hover
+      border: 2px dashed $main
+    & ~ label.module
+      margin-left: .2em
+  input[name$="-webdesign"]:checked ~ .container label[for$="-webdesign"]
+    background-color: rgba(33, 33, 33, .4)
+  input[name$="-branding"]:checked ~ .container label[for$="-branding"]
+    background-color: rgba(33, 33, 33, .4)
+  input[name$="-ux"]:checked ~ .container label[for$="-ux"]
+    background-color: rgba(33, 33, 33, .4)
+  input[name$="-hello"]:checked ~ .container label[for$="-hello"]
+    background-color: rgba(33, 33, 33, .4)
+  .container
+    display: flex
+@media only screen and (min-width: 800px)
   .module
     display: inline-block
-    width: 48%
-
-// Cards & featured
-.featured
-  width: 100%
-  text-align: center
-  padding: .5em .5em
-  background-color: $dark
-.featured + h2
-  margin-top: 2em
-  font-weight: 300
-.card
-  position: relative
-  top: 50%
-  display: inline-block
-  width: 100%
-  background-color: $light
-  border-radius: $border
-  margin: 0 auto 1em auto
-  padding: 1em
-  box-shadow: $shadow
-  text-align: center
-  z-index: 1
-  transition: $transition
-  & h2
-    margin-bottom: 1.5em
-
-  img
-    width: 100%
-// Buttons
-.btn, .featured .btn
-  display: inline-block
-  border: 0px
-  border-radius: $border
-  padding: .5em 1em
-  color: $dark
-  text-align: center
-  min-width: 8em
-  width: auto
-  max-width: 10em
-  margin-top: 1em
-  transition: $transition
-.hidden-nav .btn
-  font-size: 1.3rem
-.about .btn
-  color: $dark
-a.btn
-  display: inline-block
-.primary
-  background-color: $main
-  color: $dark
-.secondary
-  background-color: $secondary
-  color: $dark
-.highlight
-  background-color: $highlight
-
-#contact
-  background-color: $dark
-footer
-  background-color: $section
-  color: $dark
-  text-align: center
-  padding: 2em
-
-.construction
-  text-align: center
-  background-color: $dark
-  .btn
-    color: $dark
-    margin-bottom: .5em
-  p
-    margin-bottom: .25em
-@media only screen and (min-width: 1025px)
-  .featured
-    margin: inherit 2em inherit 2em
-  .btn
-    &:hover
-      background-color: $main
-    &.primary:hover, &.primary:active
-      background-color: $highlight
-    &.primary:hover
-      background-color: $highlight
-    &:active
-      background-color: #60a69a
-      transition-duration: .05s
-    &:hover
-      transform: translateY(-0.3em)
-
-  .btn ~ .btn
-    margin-left: 2em
-    margin-right: 0
-  #contact i:hover
-    transform: translateY(-0.3em)
-    color: $highlight
-  .auto-wide
-    .module
-      display: inline-block
-      width: 24%
+  form
+    label.module
+      width: calc(33.333% - .6em)
+      padding: 1em
+    & ~ label.module
+      margin-left: 1em

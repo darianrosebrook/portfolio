@@ -1,15 +1,10 @@
 ---
 category: article
 title: Burn the Boats&#58; An Update On My Current 2016 Goals
-metaDesc: What I love about phrases like these is that though they are removed from any part of what we do now in our time, their message is reused and repurposed into something that fits our current situations.
-type: Life Stuff
-class: type-life
-when: Jul 15, 2016
-img: assets/torch.jpg
-metaimg: https://darianrosebrook.com/assets/metaboats.jpg
-head: goals
+description: What I love about phrases like these is that though they are removed from any part of what we do now in our time, their message is reused and repurposed into something that fits our current situations.
+index_image: /assets/img/posts/articles/update-on-goals/update-on-goals.jpg
 
-custom_css: articles
+
 ---
 ## Burn the boats... a brutal but fitting metaphor
 What I love about phrases like these is that though they are removed from any part of what we do now in our time, their message is reused and _repurposed_ into something that fits our current situations. I am not the only person to have thought moving forward means we need to burn our boats and bridges.

@@ -1,0 +1,165 @@
+.index-header
+  padding: 5% 5% 0 5%
+  background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,1)),url(/assets/img/icon-star.png)
+  background-repeat: repeat
+  img
+    width: 90%
+    position: absolute
+    bottom: 0
+  .button
+    position: static
+    transform: none
+  h1
+    line-height: 1.1em
+    margin-bottom: 1em
+  h2
+    color: $dark
+    line-height: .8
+    & ~ h2
+      margin-bottom: 4rem
+.sub-nav
+  background-color: $dark
+  text-align: center
+  h4
+    color: $light
+  img
+    position: static
+    transform: none
+    left: auto
+.work
+  padding-bottom: .5em
+  transition: $transition
+  cursor: pointer
+  img
+    transition: $transition
+    filter: grayscale(1)
+    width: 55%
+  .data
+    padding: 1em
+  h4
+    padding: 0 .5em
+    font-weight: bold
+    display: inline-block
+    position: absolute
+    z-index: 2
+    &.work-branding
+      background-color: $main
+      color: $light
+    &.work-web
+      background-color: $dark
+      color: $light
+  &:hover
+    background-color: rgba(0, 0, 0, 0)
+    img
+      filter: grayscale(0)
+      opacity: .2
+    .data
+      top: 0
+      display: block
+      opacity: 1
+    h4
+      opacity: 0
+  & ~ .work
+    padding-bottom: .5em
+.testimony-container
+  background-color: $dark
+  color: $light
+  blockquote
+    line-height: 1.9
+.article
+  img
+    width: 100%
+#mailchimp
+  background: $dark
+  color: $light
+  img
+    width: 25vw
+  .email-signup
+    display: block
+    @include center(true, false)
+    &:not(.button)
+      border-color: $light
+@media only screen and (min-width: 800px)
+  .icons.active
+    display: inline-flex
+    flex-wrap: wrap
+    justify-content: center
+    width: 100%
+    margin: 1em auto
+    text-align: center
+  .icon-description
+    display: block
+    opacity: 1
+    transition: $transition
+    transition-delay: 1s
+    animation-play-state: paused
+    & ~ .icon-description
+      margin-left: 0
+    &.active
+      display: flex
+      flex-direction: column
+      justify-content: space-around
+      flex: 1
+      background-color: $light
+      opacity: 0
+      animation: fadeIn .5s ease-in 1 forwards
+      animation-play-state: running
+  .mobile-separator
+    display: none
+  .work, .article
+    vertical-align: top
+    display: inline-block
+    width: calc(33.333% - .9em)
+    margin-bottom: $margin
+    & ~ .work, & ~ .article
+      margin-right: 0
+      margin-left: 1em
+  .work
+    background-color: rgba(33, 33, 33, .1)
+    .data
+      position: absolute
+      opacity: 0
+      display: none
+  .index-header
+    height: 70vh
+    img
+      width: 40vw
+      position: absolute
+      right: 2em
+      bottom: 0
+  .sub-nav
+    margin-top: 0
+    height: 30vh
+  .testimony-container
+    text-align: center
+    div
+      width: calc(33.33% - .5%)
+      display: inline-block
+      vertical-align: middle
+  .person
+    display: inline-block
+    margin: 0 auto
+    text-align: center
+    img
+      width: 100%
+      border-radius: 50%
+      transform: none
+      left: auto
+    blockquote
+      width: 90%
+      font-size: 1.6rem
+  #mailchimp
+    padding: 3rem 15%
+    & > .row
+      display: flex
+      justify-content: space-around
+    .email-signup
+      width: calc(33.333% - 1em)
+    img
+      display: inline-block
+      transform: none
+      position: static
+    form
+      text-align: center
+      display: inline-block
+      width: 55vw

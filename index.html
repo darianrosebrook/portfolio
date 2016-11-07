@@ -1,125 +1,156 @@
 ---
 layout: default
-bodyId: "home"
-metaDesc: I am Darian Rosebrook, a designer north of Seattle. I specialize in helping people and businesses define their brand with web design, logo design, and user experience.
-title: Darian Rosebrook | Web Design, Logo Design, User Experience, Articles
-metaimg: https://darianrosebrook.com/assets/hero-responsive.gif
-custom_css: master
+title: Brand Identity and Web Design | Darian Rosebrook
 ---
-
-        <header id="hero">
-          <div id="angle" class="angle transition">
-
-          </div>
-           <h2>design <br> &amp; <br /> code</h2>
-           <img id="deer" src="assets/deer.svg" alt="deer for the hero image" />
-           <h1>Darian Rosebrook</h1>
-        </header>
-
-
-        <div class='main'>
-          <section id="icons" class="icons autowide cf">
-            <article class='logo module'>
-              <img id="iconWeb"   src='assets/icon-webdesign.svg' alt="Web design service" />
-              <h3>Web Design</h3>
-            </article>
-            <article class='logo module'>
-              <img id="iconLogo" src='assets/icon-logodesign.svg' alt="Logo design and branding as a service" />
-              <h3>Branding</h3>
-            </article>
-            <article class='logo module'>
-              <img id="iconUx" src='assets/icon-ux.svg' alt="ux consulting as a service" />
-              <h3>UX Consultation</h3>
-            </article>
-            <article class='logo module'>
-              <img id="iconArticle" src='assets/icon-articles.svg' alt="Articles that have been written by Darian Rosebrook" />
-              <h3>Articles</h3>
-            </article>
-          </section>
-          <section id="descriptions">
-            <h2 class="hidden">Descriptions of services offered</h2>
-
-            <article id="web" class="icon-description web">
-              <!-- <img src='assets/icon-webdesign.svg' alt="Web design service" /> -->
-              <div class="description">
-                <h2>Web Design</h2>
-                <p>Web design that focuses on improving the user’s experience. Designed for mobile devices and scalable for many screen sizes.</p>
-                <a href="{{site.baseurl}}/web-design" class="secondary btn">View More</a>
-                <button data-href="#form" id="contactBtn" type="button" name="button" class="contactBtn primary btn">Hire Me</button>
-              </div>
-            </article>
-            <article id="branding" class="icon-description branding">
-              <!-- <img src='assets/icon-logodesign.svg' alt="Logo design and branding as a service" /> -->
-              <div class="description">
-                <h2>Logo Design &amp; Branding</h2>
-                <p>Professional, creative logos that give your brand or company a face. Help your brand stand out among the others in your industry.</p>
-                <a href="{{site.baseurl}}/soon" class="secondary btn">View More</a>
-                <button data-href="#form" type="button" name="button" class="contactBtn primary btn">Hire Me</button>
-              </div>
-            </article>
-            <article id="ux" class="icon-description ux">
-              <!-- <img src='assets/icon-ux.svg' alt="ux consulting as a service" /> -->
-              <div class="description">
-                <h2>UX Consultation</h2>
-                <p>If you have an existing project or idea, let’s work on making sure your idea starts with the user in mind.</p>
-                <a href="{{site.baseurl}}/soon" class="secondary btn">View More</a>
-                <button data-href="#form" type="button" name="button" class="contactBtn primary btn">Hire Me</button>
-              </div>
-            </article>
-            <article id="articles" class="icon-description writing">
-              <!-- <img src='assets/icon-articles.svg' alt="Articles that have been written by Darian Rosebrook" /> -->
-              <div class="description">
-                <h2>Articles</h2>
-                <p>I write articles based around different things going on in life and the design industry.</p>
-                <a href="{{site.baseurl}}/archive/articles" class="secondary btn">View More</a>
-              </div>
-            </article>
-          </section>
-        </div>
-
-      <div class="featured ">
-        <h2 class="first">Recent Projects</h2>
-        <section id="case-studies" class="case-studies">
-          <h2 class="hidden">These are case studies from some of my most recent design work</h2>
-          {% for post in site.categories.case-study limit: 3 %}
-          <article id="card-{{forloop.index}}" class="card {% if forloop.index == 2 %}card-main{% endif %}">
-            <img src="{{post.img}}" alt="{{post.metaDesc | truncate: 200}} " />
-            <h2>{{post.title}}</h2>
-            <p>
-              <small>{{post.date | date_to_long_string}} | <em class="{{post.class}}" >{{post.type}}</em></small>
-            </p>
-            <a href="{{site.baseurl}}/soon" class="btn highlight">View Case-Study</a>
-
-          </article>
-          {% endfor %}
-
-        </section>
-        <a href="archive/case-studies" class="btn secondary">View Archive</a>
+<header class="index-header">
+  <div class="info">
+      <h1 class="name">DARIAN <br>ROSEBROOK</h1>
+      <h2 class="position">Branding Consultant</h2>
+      <h2 class="position">Web Designer</h2>
+      <a class="button" href="#contact">For Hire</a>
+  </div>
+  <img src="/assets/img/profile-alpha.png" alt="Darian Rosebrook, a designer who focuses on websites and branding projects for companies." />
+</header>
+<section class="sub-nav desktop container">
+  <h3 class="hidden">Services</h3>
+  <article class="icon col">
+    <img src="/assets/img/icon-branding.svg" alt="Icon specifically for the topic of branding" />
+    <h4>Branding</h4>
+  </article>
+  <article class="icon col">
+    <img src="/assets/img/icon-web.svg" alt="Icon specifically for the topic of Web Design" />
+    <h4>Web Design</h4>
+  </article>
+  <article class="icon col">
+    <img src="/assets/img/icon-process.svg" alt="Icon specifically for the topic of Process" />
+    <h4>My Process</h4>
+  </article>
+  <article class="icon col">
+    <img src="/assets/img/icon-writing.svg" alt="Icon specifically for the topic of Articles" />
+    <h4>Articles</h4>
+  </article>
+</section>
+<section class="descriptions container">
+  <h3 class="mobile">What I am known for:</h3>
+  <article class="icon-description module">
+    <img src="/assets/img/icon-branding.svg" alt="Icon specifically for the topic of branding" class="mobile" />
+    <h4><a href="{{site.baseurl}}/branding">Brand Identity and Design</a></h4>
+    <p>Make your brand stand out in the industry with professional branding services. </p>
+    <a href="{{site.baseurl}}/branding">View Branding Projects</a>
+  </article>
+  <hr class="mobile-separator" />
+  <article class="icon-description module">
+    <img src="/assets/img/icon-web.svg" alt="Icon specifically for the topic of Web Design" class="mobile" />
+    <h4><a href="{{site.baseurl}}/web">Website Design and Development</a></h4>
+    <p>Make a space to showcase your brand online. Let's work together to make it as effective as possible.</p>
+    <a href="{{site.baseurl}}/web">View Web Design Projects</a>
+  </article>
+  <hr class="mobile-separator" />
+  <article class="icon-description module">
+    <img src="/assets/img/icon-process.svg" alt="Icon specifically for the topic of Process" class="mobile" />
+    <h4><a href="{{site.baseurl}}/process">The Design Process</a></h4>
+    <p>An effective design starts with an effective process. I use careful research and questions that center around the goals of both the brand and the target audience. </p>
+    <a href="{{site.baseurl}}/process">View the Design Process</a>
+  </article>
+  <hr class="mobile-separator" />
+  <article class="icon-description module">
+    <img src="/assets/img/icon-writing.svg" alt="Icon specifically for the topic of Articles" class="mobile" />
+    <h4><a href="{{site.baseurl}}/archive/articles">Articles on Creative Business</a></h4>
+    <p>When building a brand, there is a lot of research that can be put to good use. Here are my quantified notes and experiences written around the creative industry.</p>
+    <a href="{{site.baseurl}}/archive/articles">View the Articles Archive</a>
+  </article>
+</section>
+<section id="past-work" class="container">
+  <div class="row">
+    <h2>Previous Work:</h2>
+  </div>
+  <div class="row">
+    {% for post in site.categories.case-study limit:6 %}
+    {% if forloop.index == 4 %}
+  </div>
+  <div class="row">
+    <article class="work module">
+      {% if post.type == 'Branding' %}<h4 class="work-branding">{% elsif post.type == 'Web' %}<h4 class="web">{% else %}<h4>{% endif %}{{post.type}}</h4>
+      <a href="{{site.baseurl}}/{{post.url}}"><img src="{{post.index_image}}" alt="{{post.description | truncate: 120}}" /></a>
+      <div class="data">
+        <h5><a href="{{site.baseurl}}/{{post.url}}">{{post.title}}</a></h5>
+        <small><a href="/archive/case-study/">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.type}}</em></a></small>
+        <p class="meta_description"><a href="{{site.baseurl}}/{{post.url}}">&ldquo;{{post.description | truncate: 170}}&rdquo;</a></p>
       </div>
-
-      <div class="featured articlelist">
-        <h2 class="first">Articles</h2>
-        <section id="articles-list" class="articles">
-          <h2 class="hidden">A collection of articles written on design, life, and business</h2>
-          {% for post in site.categories.article limit:3 %}
-          <article id="card{{forloop.index}}" class="card">
-            <a href="{{post.url}}"><img src="{{post.img}}" alt="{{post.title}}" /></a>
-            <h2><a href="{{post.url}}">{{post.title}}</a></h2>
-            <div class="artcont">
-              <p>
-                <small>{{post.when | %b %d, %Y}} | <em class="{{post.class}}" >{{post.type}}</em></small>
-              </p>
-              <p>
-                <small class="metaDesc">&ldquo;
-                {{post.metaDesc | truncate: 170}}&rdquo;</small>
-              </p>
-            </div>
-          </article>
-          {% endfor %}
-
-
-        </section>
-        <a href="archive/articles" class="btn secondary">View Archive</a>
+    </article>
+    {% elsif forloop.index == 7 %}
+  </div>
+  <div class="row">
+    <article class="work module">
+      {% if post.type == 'Branding' %}<h4 class="work-branding">{% elsif post.type == 'Web' %}<h4 class="web">{% else %}<h4>{% endif %}{{post.type}}</h4>
+      <a href="{{site.baseurl}}/{{post.url}}"><img src="{{post.index_image}}" alt="{{post.description | truncate: 120}}" /></a>
+      <div class="data">
+        <h5><a href="{{site.baseurl}}/{{post.url}}">{{post.title}}</a></h5>
+        <small><a href="/archive/case-study/">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.type}}</em></a></small>
+        <p class="meta_description"><a href="{{site.baseurl}}/{{post.url}}">&ldquo;{{post.description | truncate: 170}}&rdquo;</a></p>
       </div>
-
-        {% include contact.html %}
+    </article>
+    {% else %}
+    <article class="work module">
+      {% if post.type == 'Branding' %}<h4 class="work-branding">{% elsif post.type == 'Web' %}<h4 class="web">{% else %}<h4>{% endif %}{{post.type}}</h4>
+      <a href="{{site.baseurl}}/{{post.url}}"><img src="{{post.index_image}}" alt="{{post.description | truncate: 120}}" /></a>
+      <div class="data">
+        <h5><a href="{{site.baseurl}}/{{post.url}}">{{post.title}}</a></h5>
+        <small><a href="/archive/case-study/">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.type}}</em></a></small>
+        <p class="meta_description"><a href="{{site.baseurl}}/{{post.url}}">&ldquo;{{post.description | truncate: 170}}&rdquo;</a></p>
+      </div>
+    </article>
+    {% endif %}
+    {% endfor %}
+  </div>
+  <a href="/archive/case-studies" class="button">View All Work</a>
+</section>
+{% include testimony.html %}
+<section id="articles" class="container">
+  <div class="row">
+    <h2>Writing</h2>
+    <h4>Experience to thought, thought to writing</h4>
+  </div>
+  <div class="row">
+    {% for post in site.categories.article limit: 9 %}
+    {% if forloop.index == 4 %}
+  </div>
+  <div class="row">
+    <article class="{{post.class}} article module">
+      <a href="{{site.baseurl}}/{{post.url}}"><img src="{{post.index_image}}" alt="{{post.description}}" /></a>
+      <h5><a href="/{{post.url}}">{{post.title}}</a></h5>
+      <small><a href="/archive/articles">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.type}}</em></a></small>
+      <p class="meta_description"><a href="{{site.baseurl}}/{{post.url}}">&ldquo;{{post.description | truncate: 170}}&rdquo;</a></p>
+    </article>
+    {% elsif forloop.index == 7 %}
+  </div>
+  <div class="row">
+    <article class="{{post.class}} article module">
+      <a href="{{site.baseurl}}/{{post.url}}"><img src="{{post.index_image}}" alt="{{post.description}}" /></a>
+      <h5><a href="/{{post.url}}">{{post.title}}</a></h5>
+      <small><a href="/archive/articles">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.type}}</em></a></small>
+      <p class="meta_description"><a href="{{site.baseurl}}/{{post.url}}">&ldquo;{{post.description | truncate: 170}}&rdquo;</a></p>
+    </article>
+    {% else %}
+    <article class="{{post.class}} article module">
+      <a href="{{site.baseurl}}/{{post.url}}"><img src="{{post.index_image}}" alt="{{post.description}}" /></a>
+      <h5><a href="/{{post.url}}">{{post.title}}</a></h5>
+      <small><a href="/archive/articles">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.type}}</em></a></small>
+      <p class="meta_description"><a href="{{site.baseurl}}/{{post.url}}">&ldquo;{{post.description | truncate: 170}}&rdquo;</a></p>
+    </article>
+    {% endif %}
+    {% endfor %}
+  </div>
+  <a href="/archive/articles" class="button secondary">View All Articles</a>
+</section>
+<section id="mailchimp" class="container">
+  <div class="row">
+    <img src="/assets/img/icon-writing.svg" alt="Icon specifically for the topic of Articles" />
+    <form action="//darianrosebrook.us13.list-manage.com/subscribe/post?u=a07a903f524e927147f352cce&amp;id=c3c042d588" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate row" target="_blank" novalidate>
+      <h4><label for="mce-EMAIL">Get early access to the articles and other branding tips directly sent to you!</label></h4>
+      <input type="email" value="" name="EMAIL" class="email-signup" id="mce-EMAIL" placeholder="email address" required>
+      <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_a07a903f524e927147f352cce_c3c042d588" tabindex="-1" value=""></div>
+      <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button email-signup">
+    </form>
+  </div>
+</section>
