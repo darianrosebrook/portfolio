@@ -1,12 +1,51 @@
 #contact
   position: relative
-  .externals
-    text-align: center
-    @include center(true, false)
+  div[class*="quest"]
+    flex-direction: column
+    justify-content: center
+    margin-bottom: .3em
+    padding: .5em
+    transition: $transition
+    & *
+      opacity: .3
+  div.in-center
+    *
+      opacity: 1
   label
     cursor: pointer
-  .continue:not(.button)
-    height: 30vh
+  .continue
+    display: none
+    animation: slideIn 0.3s backwards
+    &:not(.button)
+      height: 30vh
+  input[data-continue="true"]:checked
+    & ~ .continue.project
+      display: flex
+    & ~ div span.hidden
+      display: inline !important
+    & ~ div span.message
+      display: none !important
+  input[name$="-hello"]:checked
+    & ~ .continue.message, input[name$="-hello"]:checked ~ div .continue.message
+      display: block
+    & ~ div span.message
+      display: inline !important
+    & ~ div span.project
+      display: none !important
+  .continue.questionnaire-part-1
+    height: auto
+    color: $main
+  .project
+    .enter
+      &:focus, &:hover
+        opacity: 1
+        & + h6
+          opacity: 1
+      &:last-child
+        order: -1
+@for $i from 1 through 9
+  #contact .contact .continue.questionnaire-part-#{$i}
+    animation-delay: ($i/5)+s
 @media only screen and (min-width: 800px)
   #contact
     @include center(true, false)

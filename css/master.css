@@ -268,7 +268,8 @@ hr {
 h6 {
   font-size: 1.8rem;
   font-weight: 400;
-  margin-bottom: 1.5rem; }
+  margin-bottom: 1.5rem;
+  color: #e74b4c; }
 
 h5 {
   font-size: 2rem;
@@ -479,7 +480,7 @@ form input:not(.button), form textarea {
   position: relative;
   transform: translate(-50%, 0);
   left: 50%; }
-  form input:not(.button):focus, form input:not(.button):active, form textarea:focus, form textarea:active {
+  form input:not(.button):focus, form input:not(.button):active, form input:not(.button):hover, form textarea:focus, form textarea:active, form textarea:hover {
     border-width: 10px;
     border-color: #e74b4c; }
 form label.module {
@@ -518,15 +519,71 @@ form .container {
     margin-left: 1em; } }
 #contact {
   position: relative; }
-  #contact .externals {
-    text-align: center;
-    position: relative;
-    transform: translate(-50%, 0);
-    left: 50%; }
+  #contact div[class*="quest"] {
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 0.3em;
+    padding: 0.5em;
+    transition: all ease 0.25s; }
+    #contact div[class*="quest"] * {
+      opacity: 0.3; }
+  #contact div.in-center * {
+    opacity: 1; }
   #contact label {
     cursor: pointer; }
-  #contact .continue:not(.button) {
-    height: 30vh; }
+  #contact .continue {
+    display: none;
+    animation: slideIn 0.3s backwards; }
+    #contact .continue:not(.button) {
+      height: 30vh; }
+  #contact input[data-continue="true"]:checked ~ .continue.project {
+    display: flex; }
+  #contact input[data-continue="true"]:checked ~ div span.hidden {
+    display: inline !important; }
+  #contact input[data-continue="true"]:checked ~ div span.message {
+    display: none !important; }
+  #contact input[name$="-hello"]:checked ~ .continue.message, #contact input[name$="-hello"]:checked input[name$="-hello"]:checked ~ div .continue.message {
+    display: block; }
+  #contact input[name$="-hello"]:checked ~ div span.message {
+    display: inline !important; }
+  #contact input[name$="-hello"]:checked ~ div span.project {
+    display: none !important; }
+  #contact .continue.questionnaire-part-1 {
+    height: auto;
+    color: #e74b4c; }
+  #contact .project .enter:focus, #contact .project .enter:hover {
+    opacity: 1; }
+    #contact .project .enter:focus + h6, #contact .project .enter:hover + h6 {
+      opacity: 1; }
+  #contact .project .enter:last-child {
+    order: -1; }
+
+#contact .contact .continue.questionnaire-part-1 {
+  animation-delay: 0.2s; }
+
+#contact .contact .continue.questionnaire-part-2 {
+  animation-delay: 0.4s; }
+
+#contact .contact .continue.questionnaire-part-3 {
+  animation-delay: 0.6s; }
+
+#contact .contact .continue.questionnaire-part-4 {
+  animation-delay: 0.8s; }
+
+#contact .contact .continue.questionnaire-part-5 {
+  animation-delay: 1s; }
+
+#contact .contact .continue.questionnaire-part-6 {
+  animation-delay: 1.2s; }
+
+#contact .contact .continue.questionnaire-part-7 {
+  animation-delay: 1.4s; }
+
+#contact .contact .continue.questionnaire-part-8 {
+  animation-delay: 1.6s; }
+
+#contact .contact .continue.questionnaire-part-9 {
+  animation-delay: 1.8s; }
 
 @media only screen and (min-width: 800px) {
   #contact {
@@ -586,25 +643,22 @@ form .container {
     .work h4.work-web {
       background-color: #261924;
       color: #f2f2f2; }
-  .work:hover {
-    background-color: transparent; }
-    .work:hover img {
-      filter: grayscale(0);
-      opacity: 0.2; }
-    .work:hover .data {
-      top: 0;
-      display: block;
-      opacity: 1; }
-    .work:hover h4 {
+    .work h4 h4 {
       opacity: 0; }
   .work ~ .work {
     padding-bottom: 0.5em; }
 
 .testimony-container {
   background-color: #261924;
-  color: #f2f2f2; }
+  color: #f2f2f2;
+  text-align: center; }
   .testimony-container blockquote {
+    text-align: left;
     line-height: 1.9; }
+  .testimony-container img {
+    border-radius: 50%;
+    transform: none;
+    left: auto; }
 
 .article img {
   width: 100%; }
@@ -631,14 +685,20 @@ form .container {
     margin: 1em auto;
     text-align: center; }
 
+  .descriptions {
+    background-color: #261924;
+    color: #f2f2f2; }
+
   .icon-description {
-    display: block;
+    display: flex;
+    justify-content: space-between;
     opacity: 1;
     transition: all ease 0.25s;
     transition-delay: 1s;
     animation-play-state: paused; }
     .icon-description ~ .icon-description {
-      margin-left: 0; }
+      margin-left: 0;
+      padding-bottom: 1em; }
     .icon-description.active {
       display: flex;
       flex-direction: column;
@@ -648,6 +708,14 @@ form .container {
       opacity: 0;
       animation: fadeIn 0.5s ease-in 1 forwards;
       animation-play-state: running; }
+    .icon-description img {
+      width: calc(25% - 1em);
+      position: static;
+      transform: none; }
+    .icon-description div {
+      display: inline-block;
+      width: calc(75% - 1em);
+      vertical-align: middle; }
 
   .mobile-separator {
     display: none; }
@@ -667,11 +735,20 @@ form .container {
       position: absolute;
       opacity: 0;
       display: none; }
+    .work:hover {
+      background-color: transparent; }
+      .work:hover img {
+        filter: grayscale(0);
+        opacity: 0.2; }
+      .work:hover .data {
+        top: 0;
+        display: block;
+        opacity: 1; }
 
   .index-header {
     height: 70vh; }
     .index-header img {
-      width: 40vw;
+      width: 35vw;
       position: absolute;
       right: 2em;
       bottom: 0; }
@@ -680,22 +757,17 @@ form .container {
     margin-top: 0;
     height: 30vh; }
 
-  .testimony-container {
-    text-align: center; }
-    .testimony-container div {
-      width: calc(33.33% - .5%);
-      display: inline-block;
-      vertical-align: middle; }
+  .testimony-container div {
+    width: calc(33.33% - .5%);
+    display: inline-block;
+    vertical-align: middle; }
 
   .person {
     display: inline-block;
     margin: 0 auto;
     text-align: center; }
     .person img {
-      width: 100%;
-      border-radius: 50%;
-      transform: none;
-      left: auto; }
+      width: 100%; }
     .person blockquote {
       width: 90%;
       font-size: 1.6rem; }

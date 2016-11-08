@@ -48,15 +48,6 @@
     &.work-web
       background-color: $dark
       color: $light
-  &:hover
-    background-color: rgba(0, 0, 0, 0)
-    img
-      filter: grayscale(0)
-      opacity: .2
-    .data
-      top: 0
-      display: block
-      opacity: 1
     h4
       opacity: 0
   & ~ .work
@@ -64,8 +55,15 @@
 .testimony-container
   background-color: $dark
   color: $light
+  text-align: center
   blockquote
+    text-align: left
     line-height: 1.9
+  img
+    border-radius: 50%
+    transform: none
+    left: auto
+
 .article
   img
     width: 100%
@@ -87,14 +85,19 @@
     width: 100%
     margin: 1em auto
     text-align: center
+  .descriptions
+    background-color: $dark
+    color: $light
   .icon-description
-    display: block
+    display: flex
+    justify-content: space-between
     opacity: 1
     transition: $transition
     transition-delay: 1s
     animation-play-state: paused
     & ~ .icon-description
       margin-left: 0
+      padding-bottom: 1em
     &.active
       display: flex
       flex-direction: column
@@ -104,6 +107,14 @@
       opacity: 0
       animation: fadeIn .5s ease-in 1 forwards
       animation-play-state: running
+    img
+      width: calc(25% - 1em)
+      position: static
+      transform: none
+    div
+      display: inline-block
+      width: calc(75% - 1em)
+      vertical-align: middle
   .mobile-separator
     display: none
   .work, .article
@@ -120,10 +131,19 @@
       position: absolute
       opacity: 0
       display: none
+    &:hover
+      background-color: rgba(0, 0, 0, 0)
+      img
+        filter: grayscale(0)
+        opacity: .2
+      .data
+        top: 0
+        display: block
+        opacity: 1
   .index-header
     height: 70vh
     img
-      width: 40vw
+      width: 35vw
       position: absolute
       right: 2em
       bottom: 0
@@ -131,7 +151,6 @@
     margin-top: 0
     height: 30vh
   .testimony-container
-    text-align: center
     div
       width: calc(33.33% - .5%)
       display: inline-block
@@ -142,9 +161,6 @@
     text-align: center
     img
       width: 100%
-      border-radius: 50%
-      transform: none
-      left: auto
     blockquote
       width: 90%
       font-size: 1.6rem
