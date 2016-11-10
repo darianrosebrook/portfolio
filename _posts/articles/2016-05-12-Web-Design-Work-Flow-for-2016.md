@@ -1,4 +1,5 @@
 ---
+layout: article
 category: article
 title: A Work Flow Process for Creating Better Websites
 description: Designing websites is so much more than throwing together some layout and fonts. The process dives much deeper than that. What web design has become is an iterative process of discovery and problem solving.

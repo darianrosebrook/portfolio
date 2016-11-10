@@ -1,4 +1,5 @@
 ---
+layout: article
 category: article
 title: Burn the Boats&#58; An Update On My Current 2016 Goals
 description: What I love about phrases like these is that though they are removed from any part of what we do now in our time, their message is reused and repurposed into something that fits our current situations.
@@ -23,7 +24,7 @@ I totally applied. Took a refresher course on HTML and CSS using [CodeCademy](ht
 ## So many cross roads... So little time
 
 
-<img src="../../assets/goals.jpg" alt="a watch counting down the time I have left"  />
+<img src="../../assets/img/posts/articles/update-on-goals/update-on-goals.jpg" alt="a watch counting down the time I have left"  />
 After that luck ran out, I had a lot of thinking to do. I can either keep looking for conventional jobs or choose to do something else. I spent a good time researching my criteria for jobs that allow me to do what I wanted to be able to do and applied to about 30-35 jobs, about 8 which called back for interviews. I wasn't sure what my goals were but I knew that I needed more and more information in about making websites.
 
 Armed now with the idea that I know HTML and CSS _since I just took a refresher course of some language I learned for a month in high school_, why wouldn't I think now that the world is at my fingertips. I looked into web development and what it would take to get a job in tech. There were a lot of hoops but the goal was to provide for my family...
@@ -41,7 +42,7 @@ I am now confident in my ability for creating websites and designs to take on mo
 At the beginning of 2016, I had sat down and had a conversation with a few people and came up with a circle of friends who decided to make goals for the year. I hadn't done this in many years myself but with each person came a challenging task for each.
 I thought mine looked pretty reasonable.
 
-<img src="../assets/2016-objectives.jpg " alt="my 2016 goals" class="float cf" />
+<!-- <img src="../assets/2016-objectives.jpg " alt="my 2016 goals" class="float cf" /> -->
 I want to help other people out and their businesses by offering my services as a designer and developer to achieve their goals. I want to be able to teach what I know as efficiently and widespread as I know how, helping others who have similar interests do the same. I wanted to be able to provide for my family in a way that allows me to be around when they need me to be and watch their hearts grow. I've started burning my boat and am stepping onto shore of a grand possibility. People say that it isn't as glamourous as everything said. I disagree. This is what I love to do. I want to eventually turn this into a larger organization of designers and get them on board, but for now, my one man show is going to be enough.
 
 I started here with this goal of getting everything on this list done just before the year's end. I can say I'm about halfway there. I have half of the full stack completed for freeCodeCamp, started learning Ruby, I have gotten a job as a remote worker doing front end design and branding, as well as opened up for freelancing. I have half of my branding projects done as well as half of my portfolio site branded and finished. The only thing I need to work on is the projects, the freelance clients and putting some savings away to switch over to design full time.

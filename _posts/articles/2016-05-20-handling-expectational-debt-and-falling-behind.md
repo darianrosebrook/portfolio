@@ -1,4 +1,5 @@
 ---
+layout: article
 category: article
 title: Handling Expectational Debt And Falling Behind.
 description: Why are we all given the same 24 hours? A lot of people seem to get more done than I can, and yet no one has more time during the day than others. Even since I started working 6 years ago, I have not earned any extra time in my life. Why do I feel more exhausted than my earlier self?
@@ -38,7 +39,7 @@ It seems manageable. It looks like all of the steps are there. So why is it I fe
 
 <div class="callout"> <h2> You have to put the big rocks in first, say no to some fine sand.</h2></div>
 
-<img src="{{site.baseurl}}/assets/rocks-hands.jpg" alt="The big rock goes first"  />
+<!-- <img src="{{site.baseurl}}/assets/rocks-hands.jpg" alt="The big rock goes first"  /> -->
 
 
 

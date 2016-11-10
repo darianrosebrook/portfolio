@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Brand Identity and Web Design | Darian Rosebrook
-description:
-
+description: Darian Rosebrook is a Brand Identity Designer with skills based around digital products and website design. Specializing in professional branding for companies, he works globally just north of Seattle in the Pacific North West (PNW).
+img: 
 ---
 <header class="index-header">
   <div class="info">
@@ -37,36 +37,36 @@ description:
   <article class="icon-description module">
     <img src="/assets/img/icon-branding.svg" alt="Icon specifically for the topic of branding" class="" />
     <div>
-      <h4><a href="{{site.baseurl}}/branding">Brand Identity and Design</a></h4>
+      <h4><a href="{{site.baseurl}}branding">Brand Identity and Design</a></h4>
       <p>Make your brand stand out in the industry with professional branding services. </p>
-      <a href="{{site.baseurl}}/branding">View Branding Projects</a>
+      <a href="{{site.baseurl}}branding">View Branding Projects</a>
     </div>
   </article>
   <hr class="mobile-separator" />
   <article class="icon-description module">
     <img src="/assets/img/icon-web.svg" alt="Icon specifically for the topic of Web Design" class="" />
     <div>
-      <h4><a href="{{site.baseurl}}/web">Website Design and Development</a></h4>
+      <h4><a href="{{site.baseurl}}web">Website Design and Development</a></h4>
       <p>Make a space to showcase your brand online. Let's work together to make it as effective as possible.</p>
-      <a href="{{site.baseurl}}/web">View Web Design Projects</a>
+      <a href="{{site.baseurl}}web">View Web Design Projects</a>
     </div>
   </article>
   <hr class="mobile-separator" />
   <article class="icon-description module">
     <img src="/assets/img/icon-process.svg" alt="Icon specifically for the topic of Process" class="" />
     <div>
-      <h4><a href="{{site.baseurl}}/process">The Design Process</a></h4>
+      <h4><a href="{{site.baseurl}}process">The Design Process</a></h4>
       <p>An effective design starts with an effective process. I use careful research and questions that center around the goals of both the brand and the target audience. </p>
-      <a href="{{site.baseurl}}/process">View the Design Process</a>
+      <a href="{{site.baseurl}}process">View the Design Process</a>
     </div>
   </article>
   <hr class="mobile-separator" />
   <article class="icon-description module">
     <img src="/assets/img/icon-writing.svg" alt="Icon specifically for the topic of Articles" class="" />
     <div>
-      <h4><a href="{{site.baseurl}}/archive/articles">Articles on Creative Business</a></h4>
+      <h4><a href="{{site.baseurl}}archive/articles">Articles on Creative Business</a></h4>
       <p>When building a brand, there is a lot of research that can still be put to good use. Here are the quantified notes and experiences edited to fit the creative industry.</p>
-      <a href="{{site.baseurl}}/archive/articles">View the Articles Archive</a>
+      <a href="{{site.baseurl}}archive/articles">View the Articles Archive</a>
     </div>
   </article>
 </section>
@@ -81,11 +81,11 @@ description:
   <div class="row">
     <article class="work module">
       {% if post.type == 'Branding' %}<h4 class="work-branding">{% elsif post.type == 'Web' %}<h4 class="web">{% else %}<h4>{% endif %}{{post.type}}</h4>
-      <a href="{{site.baseurl}}/{{post.url}}"><img src="{{post.index_image}}" alt="{{post.description | truncate: 120}}" /></a>
+      <a href="{{site.baseurl}}{{post.url}}"><img src="{{post.index_image}}" alt="{{post.description | truncate: 120}}" /></a>
       <div class="data">
-        <h5><a href="{{site.baseurl}}/{{post.url}}">{{post.title}}</a></h5>
-        <small><a href="/archive/case-study/">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.type}}</em></a></small>
-        <p class="meta_description"><a href="{{site.baseurl}}/{{post.url}}">&ldquo;{{post.description | truncate: 170}}&rdquo;</a></p>
+        <h5><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h5>
+        <small><a href="{{site.baseurl}}archive/case-study/">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.type}}</em></a></small>
+        <p class="meta_description"><a href="{{site.baseurl}}{{post.url}}">&ldquo;{{post.description | truncate: 170}}&rdquo;</a></p>
       </div>
     </article>
     {% elsif forloop.index == 7 %}
@@ -93,27 +93,27 @@ description:
   <div class="row">
     <article class="work module">
       {% if post.type == 'Branding' %}<h4 class="work-branding">{% elsif post.type == 'Web' %}<h4 class="web">{% else %}<h4>{% endif %}{{post.type}}</h4>
-      <a href="{{site.baseurl}}/{{post.url}}"><img src="{{post.index_image}}" alt="{{post.description | truncate: 120}}" /></a>
+      <a href="{{site.baseurl}}{{post.url}}"><img src="{{post.index_image}}" alt="{{post.description | truncate: 120}}" /></a>
       <div class="data">
-        <h5><a href="{{site.baseurl}}/{{post.url}}">{{post.title}}</a></h5>
-        <small><a href="/archive/case-study/">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.type}}</em></a></small>
-        <p class="meta_description"><a href="{{site.baseurl}}/{{post.url}}">&ldquo;{{post.description | truncate: 170}}&rdquo;</a></p>
+        <h5><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h5>
+        <small><a href="{{site.baseurl}}archive/case-study/">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.type}}</em></a></small>
+        <p class="meta_description"><a href="{{site.baseurl}}{{post.url}}">&ldquo;{{post.description | truncate: 170}}&rdquo;</a></p>
       </div>
     </article>
     {% else %}
     <article class="work module">
       {% if post.type == 'Branding' %}<h4 class="work-branding">{% elsif post.type == 'Web' %}<h4 class="web">{% else %}<h4>{% endif %}{{post.type}}</h4>
-      <a href="{{site.baseurl}}/{{post.url}}"><img src="{{post.index_image}}" alt="{{post.description | truncate: 120}}" /></a>
+      <a href="{{site.baseurl}}{{post.url}}"><img src="{{post.index_image}}" alt="{{post.description | truncate: 120}}" /></a>
       <div class="data">
-        <h5><a href="{{site.baseurl}}/{{post.url}}">{{post.title}}</a></h5>
-        <small><a href="/archive/case-study/">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.type}}</em></a></small>
-        <p class="meta_description"><a href="{{site.baseurl}}/{{post.url}}">&ldquo;{{post.description | truncate: 170}}&rdquo;</a></p>
+        <h5><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h5>
+        <small><a href="{{site.baseurl}}archive/case-study/">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.type}}</em></a></small>
+        <p class="meta_description"><a href="{{site.baseurl}}{{post.url}}">&ldquo;{{post.description | truncate: 170}}&rdquo;</a></p>
       </div>
     </article>
     {% endif %}
     {% endfor %}
   </div>
-  <a href="/archive/case-studies" class="button">View All Work</a>
+  <a href="{{site.baseurl}}archive/case-studies" class="button">View All Work</a>
 </section>
 {% include testimony.html %}
 <section id="articles" class="container">
@@ -127,31 +127,31 @@ description:
   </div>
   <div class="row">
     <article class="{{post.class}} article module">
-      <a href="{{site.baseurl}}/{{post.url}}"><img src="{{post.index_image}}" alt="{{post.description}}" /></a>
-      <h5><a href="/{{post.url}}">{{post.title}}</a></h5>
-      <small><a href="/archive/articles">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.type}}</em></a></small>
-      <p class="meta_description"><a href="{{site.baseurl}}/{{post.url}}">&ldquo;{{post.description | truncate: 170}}&rdquo;</a></p>
+      <a href="{{site.baseurl}}{{post.url}}"><img src="{{post.index_image}}" alt="{{post.description}}" /></a>
+      <h5><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h5>
+      <small><a href="{{site.baseurl}}archive/articles">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.type}}</em></a></small>
+      <p class="meta_description"><a href="{{site.baseurl}}{{post.url}}">&ldquo;{{post.description | truncate: 170}}&rdquo;</a></p>
     </article>
     {% elsif forloop.index == 7 %}
   </div>
   <div class="row">
     <article class="{{post.class}} article module">
-      <a href="{{site.baseurl}}/{{post.url}}"><img src="{{post.index_image}}" alt="{{post.description}}" /></a>
-      <h5><a href="/{{post.url}}">{{post.title}}</a></h5>
-      <small><a href="/archive/articles">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.type}}</em></a></small>
-      <p class="meta_description"><a href="{{site.baseurl}}/{{post.url}}">&ldquo;{{post.description | truncate: 170}}&rdquo;</a></p>
+      <a href="{{site.baseurl}}{{post.url}}"><img src="{{post.index_image}}" alt="{{post.description}}" /></a>
+      <h5><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h5>
+      <small><a href="{{site.baseurl}}archive/articles">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.type}}</em></a></small>
+      <p class="meta_description"><a href="{{site.baseurl}}{{post.url}}">&ldquo;{{post.description | truncate: 170}}&rdquo;</a></p>
     </article>
     {% else %}
     <article class="{{post.class}} article module">
-      <a href="{{site.baseurl}}/{{post.url}}"><img src="{{post.index_image}}" alt="{{post.description}}" /></a>
-      <h5><a href="/{{post.url}}">{{post.title}}</a></h5>
-      <small><a href="/archive/articles">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.type}}</em></a></small>
-      <p class="meta_description"><a href="{{site.baseurl}}/{{post.url}}">&ldquo;{{post.description | truncate: 170}}&rdquo;</a></p>
+      <a href="{{site.baseurl}}{{post.url}}"><img src="{{post.index_image}}" alt="{{post.description}}" /></a>
+      <h5><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h5>
+      <small><a href="{{site.baseurl}}archive/articles">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.type}}</em></a></small>
+      <p class="meta_description"><a href="{{site.baseurl}}{{post.url}}">&ldquo;{{post.description | truncate: 170}}&rdquo;</a></p>
     </article>
     {% endif %}
     {% endfor %}
   </div>
-  <a href="/archive/articles" class="button secondary">View All Articles</a>
+  <a href="{{site.baseurl}}archive/articles" class="button secondary">View All Articles</a>
 </section>
 <section id="mailchimp" class="container">
   <div class="row">
