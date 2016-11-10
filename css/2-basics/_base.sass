@@ -75,6 +75,10 @@ body
     width: 35px
     @media only screen and (min-width: 800px)
       width: 50px
+    &.closed
+      display: inline
+    &.open
+      display: none
 
 #nav-toggler
   display: none
@@ -84,6 +88,12 @@ body
       left: 0px
     .toggle
       left: 160px
+      height: 100vh
+      width: 100%
+      img.open
+        display: inline
+      img.closed
+        display: none
     .main-content
       padding-left: 0
       box-shadow: 0px 18px 25px -5px hsla(0, 0, 0, 0.9)
@@ -106,13 +116,13 @@ body
   transition: $transition
   text-align: center
   a.current
-    color: $main
+    color: $highlight
   ul
     list-style-type: none
   li
     margin-bottom: 1em
     &, a
-      color: $main
+      color: lighten($grey, 25%)
       text-decoration: none
       transition: $transition
   a:hover
@@ -190,7 +200,6 @@ em[class|="type"]
   color: #e7a117
 .meta_description a
   color: $grey
-
 // Buttons
 .button, a.button
   transition: $transition
