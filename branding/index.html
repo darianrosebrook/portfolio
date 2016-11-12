@@ -8,7 +8,7 @@ img:
   <h1>Branding</h1>
   <div class="row featured">
     <h2>Featured Work</h2>
-    {% for post in site.categories.case-study limit:3 %}
+    {% for post in site.categories.brand limit:1 %}
       {% if post.type == 'Branding' %}
       <article class="featured-item">
         <h3><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h3>
@@ -21,12 +21,12 @@ img:
   <div class="row">
   </div>
   <div class="row">
-    {% for post in site.categories.case-study limit:6 %}
-    {% if forloop.index == 4 %}
+    {% for post in site.categories.brand limit:6 %}
+    {% if forloop.index == 4 and post.type == "Branding" %}
   </div>
   <div class="row">
     <article class="work module">
-      {% if post.type == 'Branding' %}<h4 class="work-branding">{% elsif post.type == 'Web' %}<h4 class="web">{% else %}<h4>{% endif %}{{post.type}}</h4>
+      {% if post.type == 'Branding' %}<h4 class="work-branding">{% elsif post.type == 'Web Design' %}<h4 class="work-web">{% else %}<h4>{% endif %}{{post.type}}</h4>
       <a href="{{site.baseurl}}{{post.url}}"><img src="{{post.index_image}}" alt="{{post.description | truncate: 120}}" /></a>
       <div class="data">
         <h5><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h5>
@@ -34,11 +34,11 @@ img:
         <p class="meta_description"><a href="{{site.baseurl}}{{post.url}}">&ldquo;{{post.description | truncate: 170}}&rdquo;</a></p>
       </div>
     </article>
-    {% elsif forloop.index == 7 %}
+    {% elsif forloop.index == 7 and post.type == "Branding" %}
   </div>
   <div class="row">
     <article class="work module">
-      {% if post.type == 'Branding' %}<h4 class="work-branding">{% elsif post.type == 'Web' %}<h4 class="web">{% else %}<h4>{% endif %}{{post.type}}</h4>
+      {% if post.type == 'Branding' %}<h4 class="work-branding">{% elsif post.type == 'Web Design' %}<h4 class="work-web">{% else %}<h4>{% endif %}{{post.type}}</h4>
       <a href="{{site.baseurl}}{{post.url}}"><img src="{{post.index_image}}" alt="{{post.description | truncate: 120}}" /></a>
       <div class="data">
         <h5><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h5>
@@ -46,9 +46,9 @@ img:
         <p class="meta_description"><a href="{{site.baseurl}}{{post.url}}">&ldquo;{{post.description | truncate: 170}}&rdquo;</a></p>
       </div>
     </article>
-    {% else %}
+    {% elsif post.type == "Branding" %}
     <article class="work module">
-      {% if post.type == 'Branding' %}<h4 class="work-branding">{% elsif post.type == 'Web' %}<h4 class="web">{% else %}<h4>{% endif %}{{post.type}}</h4>
+      {% if post.type == 'Branding' %}<h4 class="work-branding">{% elsif post.type == 'Web Design' %}<h4 class="work-web">{% else %}<h4>{% endif %}{{post.type}}</h4>
       <a href="{{site.baseurl}}{{post.url}}"><img src="{{post.index_image}}" alt="{{post.description | truncate: 120}}" /></a>
       <div class="data">
         <h5><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h5>

@@ -40,7 +40,6 @@
     padding: 0 .5em
     font-weight: bold
     display: inline-block
-    position: absolute
     z-index: 2
     &.work-branding
       background-color: $main
@@ -48,8 +47,6 @@
     &.work-web
       background-color: $dark
       color: $light
-    h4
-      opacity: 0
   & ~ .work
     padding-bottom: .5em
 .testimony-container
@@ -140,6 +137,9 @@
         top: 0
         display: block
         opacity: 1
+    h4
+      position: absolute
+      margin-right: 20%
   .index-header
     height: calc(80vw / 1.777)
     img

@@ -1,3 +1,52 @@
 ---
 layout: default
 ---
+<header class="container">
+  <div class="row featured">
+    <h2>Featured Article</h2>
+    {% for post in site.categories.article limit:1 %}
+      <article class="featured-item">
+        <h3><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h3>
+      </article>
+    {% endfor %}
+  </div>
+</header>
+<section id="info" class="container list">
+  <div class="row">
+    <h1>Articles</h1>
+    <select class="filter cf" name="filter" id="filter">
+      <option value="Filter All">Filter All</option>
+      <option value="Web Design">Web Design</option>
+      <option value="Branding">Branding</option>
+      <option value="Logo">Logo</option>
+      <option value="User Experience">User Experience</option>
+      <option value="Life Experience">Life Experience</option>
+    </select>
+  </div>
+  <div class="row">
+    {% for post in site.categories.article limit: 9 %}
+    <article class="{{post.class}} list-item">
+      <div class="post-img"><a href="{{site.baseurl}}{{post.url}}"><img src="{{post.index_image}}" alt="{{post.description}}" /></a></div>
+      <div class="artcont">
+        <h5><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h5>
+        <p>{% assign words = post.content | number_of_words %}{% if words < 360 %}1 min read{% else %}{{ words | divided_by:180 }} min read{% endif %}</p>
+        <small><a href="{{site.baseurl}}archive/articles">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.type}}</em></a></small>
+        <p class="meta_description"><a href="{{site.baseurl}}{{post.url}}">&ldquo;{{post.description | truncate: 280}}&rdquo;</a></p>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+
+</section>
+<section id="mailchimp" class="container">
+  <div class="row">
+    <img src="/assets/img/icon-writing.svg" alt="Icon specifically for the topic of Articles" />
+    <form action="//darianrosebrook.us13.list-manage.com/subscribe/post?u=a07a903f524e927147f352cce&amp;id=26c10fe3eb" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate row" target="_blank" novalidate>
+      <h4><label for="mce-EMAIL">Get early access to the articles and other branding tips from the [brand newsletter title]!</label></h4>
+      <p>Every Thursday I send out a newsletter with thoughts and links to the research for upcoming articles. I cover topics such as: growth hacking, brand improvement, and web design.</p>
+      <input type="email" value="" name="EMAIL" class="email-signup" id="mce-EMAIL" placeholder="email address" required>
+      <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_a07a903f524e927147f352cce_c3c042d588" tabindex="-1" value=""></div>
+      <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button email-signup">
+    </form>
+  </div>
+</section>

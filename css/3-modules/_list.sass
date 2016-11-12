@@ -1,0 +1,51 @@
+.list
+  position: relative
+  color: $dark
+  z-index: 1
+  h1
+    display: inline-block
+    width: 50%
+  select
+    display:block
+    position: relative
+    margin-right: 0
+    border: 2px $grey solid
+    border-radius: 5px
+    padding: .5em
+    margin: .67em 0
+.list-item
+  position: relative
+  display: block
+  margin: 2em auto
+  z-index: 1
+  &:hover
+    .post-img img
+      filter: grayscale(0)
+.post-img
+  position: relative
+  display: inline-block
+  overflow: hidden
+  margin-right: 5vw
+  img
+    transition: $transition
+    filter: grayscale(1)
+    width: 100%
+@media screen and (min-width: 800px)
+  .list
+    .post-img
+      width: 25%
+    img
+      display: inline-block
+    .artcont
+      position: absolute
+      top: 50%
+      transform: translateY(-50%)
+      width: 70%
+      display: inline-block
+    select
+      display: inline-block
+      float: right
+    .circle
+      border-radius: 50%
+      width: 10vw
+      height: 10vw
