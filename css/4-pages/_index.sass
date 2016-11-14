@@ -33,13 +33,12 @@
   img
     transition: $transition
     filter: grayscale(1)
-    width: 55%
   .data
     padding: 1em
   h4
     padding: 0 .5em
     font-weight: bold
-    display: inline-block
+    display: block
     z-index: 2
     &.work-branding
       background-color: $main
@@ -64,6 +63,8 @@
 .article
   img
     width: 100%
+    transition: $transition
+    filter: grayscale(1)
 #mailchimp
   background: $dark
   color: $light
@@ -125,19 +126,22 @@
   .work
     background-color: rgba(33, 33, 33, .1)
     .data
+      top: 10%
       position: absolute
       opacity: 0
       display: none
+    img
+      width: 100%
     &:hover
       background-color: rgba(0, 0, 0, 0)
       img
         filter: grayscale(0)
-        opacity: .2
+        opacity: 0
       .data
-        top: 0
         display: block
         opacity: 1
     h4
+      display: block
       position: absolute
       margin-right: 20%
   .index-header
@@ -164,6 +168,10 @@
     blockquote
       width: 90%
       font-size: 1.6rem
+  .article
+    &:hover
+      img
+        filter: grayscale(0)
   #mailchimp
     padding: 3rem 15%
     & > .row

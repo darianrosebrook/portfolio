@@ -94,6 +94,8 @@ body
         display: inline
       img.closed
         display: none
+      @media only screen and (max-width: 799px)
+        background-color: rgba(230, 230, 230, .85)
     .main-content
       padding-left: 0
       box-shadow: 0px 18px 25px -5px hsla(0, 0, 0, 0.9)
@@ -181,8 +183,8 @@ h1
   color: $main
 
 i
-  margin-right: 1em
-  margin-left: 1em
+  margin-right: 2rem
+  margin-left: 2rem
   span
     display: none
 
@@ -245,10 +247,10 @@ footer
   position: relative
   background-color: $dark
   color: $light
+  text-align: center
   @media only screen and (min-width: 800px)
     height: calc(30vw / 1.777)
     .row
-      text-align: center
       @include center(true, true)
 // Columns
 .container

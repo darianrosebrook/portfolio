@@ -296,6 +296,9 @@ body {
       display: inline; }
     #nav-toggler:checked + .page-wrap .toggle img.closed {
       display: none; }
+    @media only screen and (max-width: 799px) {
+      #nav-toggler:checked + .page-wrap .toggle {
+        background-color: rgba(230, 230, 230, 0.85); } }
   #nav-toggler:checked + .page-wrap .main-content {
     padding-left: 0;
     box-shadow: 0px 18px 25px -5px rgba(0, 0, 0, 0.9);
@@ -391,8 +394,8 @@ h1 {
   color: #e74b4c; }
 
 i {
-  margin-right: 1em;
-  margin-left: 1em; }
+  margin-right: 2rem;
+  margin-left: 2rem; }
   i span {
     display: none; }
 
@@ -469,12 +472,12 @@ footer {
   padding: 2em 0;
   position: relative;
   background-color: #261924;
-  color: #f2f2f2; }
+  color: #f2f2f2;
+  text-align: center; }
   @media only screen and (min-width: 800px) {
     footer {
       height: calc(30vw / 1.777); }
       footer .row {
-        text-align: center;
         position: absolute;
         transform: translate(-50%, -50%);
         left: 50%;
@@ -777,14 +780,13 @@ form .container {
   cursor: pointer; }
   .work img {
     transition: all ease 0.25s;
-    filter: grayscale(1);
-    width: 55%; }
+    filter: grayscale(1); }
   .work .data {
     padding: 1em; }
   .work h4 {
     padding: 0 0.5em;
     font-weight: bold;
-    display: inline-block;
+    display: block;
     z-index: 2; }
     .work h4.work-branding {
       background-color: #e74b4c;
@@ -808,7 +810,9 @@ form .container {
     left: auto; }
 
 .article img {
-  width: 100%; }
+  width: 100%;
+  transition: all ease 0.25s;
+  filter: grayscale(1); }
 
 #mailchimp {
   background: #261924;
@@ -879,19 +883,22 @@ form .container {
   .work {
     background-color: rgba(33, 33, 33, 0.1); }
     .work .data {
+      top: 10%;
       position: absolute;
       opacity: 0;
       display: none; }
+    .work img {
+      width: 100%; }
     .work:hover {
       background-color: transparent; }
       .work:hover img {
         filter: grayscale(0);
-        opacity: 0.2; }
+        opacity: 0; }
       .work:hover .data {
-        top: 0;
         display: block;
         opacity: 1; }
     .work h4 {
+      display: block;
       position: absolute;
       margin-right: 20%; }
 
@@ -922,6 +929,9 @@ form .container {
       width: 90%;
       font-size: 1.6rem; }
 
+  .article:hover img {
+    filter: grayscale(0); }
+
   #mailchimp {
     padding: 3rem 15%; }
     #mailchimp > .row {
@@ -938,10 +948,39 @@ form .container {
       display: inline-block;
       width: 55vw; } }
 .container .article-content {
-  width: 60%;
   position: relative;
   transform: translateX(-50%);
   left: 50%;
   line-height: 1.8; }
+
+@media only screen and (min-width: 800px) {
+  .container .article-content {
+    width: 60%; } }
+.featured-item {
+  background-size: cover;
+  margin-bottom: 80vh; }
+  .featured-item:after {
+    display: block;
+    height: 50vh;
+    width: 100%;
+    content: ""; }
+  .featured-item.featured-keyspark:after {
+    background: url(../assets/img/posts/keyspark/featured-mobile-keyspark.jpg) no-repeat center center;
+    background-size: cover; }
+  .featured-item .info h2 {
+    color: #261924;
+    font-weight: 400; }
+
+@media only screen and (min-width: 800px) {
+  .featured-item {
+    height: calc(65vw / 1.77);
+    margin-bottom: 1.5rem; }
+    .featured-item.featured-keyspark {
+      background: url(../assets/img/posts/keyspark/featured-desktop-keyspark.jpg) no-repeat right center;
+      background-size: cover; }
+    .featured-item .info {
+      width: 30%; }
+    .featured-item::after {
+      display: none; } }
 
 /*# sourceMappingURL=master.css.map */

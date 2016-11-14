@@ -1,0 +1,27 @@
+.featured-item
+  background-size: cover
+  margin-bottom: 80vh
+  &:after
+    display: block
+    height: 50vh
+    width: 100%
+    content: ''
+  &.featured-keyspark
+    &:after
+      background: url(../assets/img/posts/keyspark/featured-mobile-keyspark.jpg) no-repeat center center
+      background-size: cover
+  .info
+    h2
+      color: $dark
+      font-weight: 400
+@media only screen and (min-width: 800px)
+  .featured-item
+    height: calc(65vw / 1.77)
+    margin-bottom: $margin
+    &.featured-keyspark
+      background: url(../assets/img/posts/keyspark/featured-desktop-keyspark.jpg) no-repeat right center
+      background-size: cover
+    .info
+      width: 30%
+    &::after
+      display: none

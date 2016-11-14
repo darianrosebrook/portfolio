@@ -4,14 +4,17 @@ title: Curated Web Design Case Studies | Darian Rosebrook
 description: A collection of curated case studies for Darian Rosebrook's web design projects
 img:
 ---
-<header class="container">
-  <h1>Branding</h1>
-  <div class="row featured">
-    <h2>Featured Work</h2>
-    {% for post in site.categories.web limit:1 %}
-      {% if post.type == 'web' %}
-      <article class="featured-item">
+
+{% for post in site.categories.web limit:1 %}
+<header class="container featured-item featured-{{post.class}}">
+  <h1>Web Design</h1>
+  <div class="row info featured">
+    <h2>Featured Case Study</h2>
+      {% if post.type == 'Web Design' %}
+      <article class="feature-{{forloop.index}}">
         <h3><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h3>
+        <p>{{post.description}}</p>
+        <a href="{{site.baseurl}}{{post.url}}" class="">View Project</a>
       </article>
       {% endif %}
     {% endfor %}
@@ -19,6 +22,9 @@ img:
 </header>
 <section id="info" class="container">
   <div class="row">
+    <h2>Responsive Web Design that fits your brand</h2>
+    <p>There's no templating here. We'll customize the experience your audience receives by letting content strategy drive the project. Your website should be as unique as you are.</p>
+    <img src="/assets/img/icon-web.svg" alt="Web design for scalability" />
   </div>
   <div class="row">
     {% for post in site.categories.web limit:6 %}
