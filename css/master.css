@@ -953,17 +953,17 @@ form .container {
   left: 50%;
   line-height: 1.8; }
 
-.featured-item.featured-community:after {
-  background: url("../assets/img/posts/articles/community/community.png") no-repeat center center;
+.featured-item.featured-external:after {
+  background: url("../assets/img/posts/articles/engagement/mountainwall.png") no-repeat center center;
   background-size: cover; }
 
 @media only screen and (min-width: 800px) {
   .container .article-content {
     width: 60%; }
 
-  .featured-item.featured-community {
+  .featured-item.featured-external {
     background: no-repeat right center;
-    background-image: linear-gradient(to left, rgba(230, 230, 230, 0.7), rgba(230, 230, 230, 0.7)), url("../assets/img/posts/articles/community/community.png");
+    background-image: linear-gradient(to left, rgba(230, 230, 230, 0.7) 10%, #e6e6e6), url("../assets/img/posts/articles/engagement/mountainwall.png");
     background-size: cover; } }
 .featured-item {
   background-size: cover;
