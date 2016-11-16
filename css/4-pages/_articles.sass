@@ -4,6 +4,10 @@
     transform: translateX(-50%)
     left: 50%
     line-height: 1.8
+.publications
+  div
+    img
+      filter: drop-shadow(1px 3px 10px #333)
 .featured-item
   &.featured-external
     &:after
@@ -19,3 +23,21 @@
       background: no-repeat right center
       background-image: linear-gradient(to left, rgba(230, 230, 230, .7) 10%, rgba(230, 230, 230, 1)), url('../assets/img/posts/articles/engagement/mountainwall.png')
       background-size: cover
+  .publications
+    justify-content: space-between
+    div
+      width: 48%
+      & ~ div
+        display: flex
+        align-items: center
+        align-content: center
+        justify-content: space-between
+        flex-wrap: wrap
+        a
+          display: inline-block
+          width: 45%
+          & ~ a
+            margin-left: 1em
+        img
+          filter: grayscale(1)
+          width: 100%
