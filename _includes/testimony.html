@@ -3,19 +3,19 @@
     <h3 class="hidden">Testimonies</h3>
     <article class="person">
       <h3>Who I've worked with&#8230;</h3>
+      {% for post in site.categories.testimony %}
       <div>
-        <div class="circle"><img src="{{site.baseurl}}/assets/img/testimonials/tyrel.jpg" alt="Tyrel" /></div>
-        <h4><a href="https://twitter.com/chambers43">Tyrel Chambers</a></h4>
-        <p class="Occupation">
-          Developer, Podcaster
-        </p>
-        <a href="https://twitter.com/growyourcode"><i class="fa fa-twitter"><span class="hidden">Twitter</span></i></a> &#124; <a href="http://growyourcode.com"><i class="fa fa-globe"><span class="hidden">Podcast</span></i></a> &#124; <a href="http://keyspark.io"><i class="fa fa-globe"><span class="hidden">twitter</span></i></a>
+        <div class="circle"><img src="{{site.baseurl}}/assets/img/testimonials/{{post.img}}" alt="{{post.who}}" /></div>
+        <h4><a href="{{post.where}}">{{post.who}}</a></h4>
+        <p class="Occupation">{{post.occupation}}</p>
+        {{post.content}}
       </div>
       <div>
         <blockquote cite="">
-          &ldquo; I started a podcast called "Grow Your Code" and approached Darian about making me some branding. Working with Darian has been and continues to be an absolute delight. He is courteous, professional, respectful, and he responds very quickly to messages, questions, and design revisions. Darian has the professionalism you need to help develop an amazing brand. His thorough process will make sure you get the best branding possible. &rdquo;
+          &ldquo; {{post.testimony}} &rdquo;
         </blockquote>
       </div>
+      {% endfor %}
     </article>
   </div>
 </section>

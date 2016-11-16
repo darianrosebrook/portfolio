@@ -4,17 +4,19 @@ title: Brand Identity and Web Design | Darian Rosebrook
 description: Darian Rosebrook is a Brand Identity Designer specializing in professional branding for digital products and website design. He works globally and locally from north of Seattle in the Pacific North West (PNW).
 img:
 ---
-<header class="container">
+{% for post in site.categories.brand limit:1 %}
+<header class="container featured-item featured-{{post.class}}">
   <h1>Branding</h1>
-  <div class="row featured">
+  <div class="row featured info">
     <h2>Featured Work</h2>
-    {% for post in site.categories.brand limit:1 %}
       {% if post.type == 'Branding' %}
       <article class="featured-item">
         <h3><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h3>
+        <p>{{post.description}}</p>
+        <a href="{{site.baseurl}}{{post.url}}" class="">View Project</a>
       </article>
       {% endif %}
-    {% endfor %} 
+    {% endfor %}
   </div>
 </header>
 <section id="info" class="container">

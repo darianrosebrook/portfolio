@@ -701,6 +701,7 @@ form .container {
     display: inline-block;
     width: 50%; }
   .list select {
+    display: block;
     position: relative;
     margin-right: 0;
     border: 2px #3c3c3c solid;
@@ -738,8 +739,7 @@ form .container {
     width: 70%;
     display: inline-block; }
   .list select {
-    display: inline-block;
-    float: right; }
+    display: inline-block; }
   .list .circle {
     border-radius: 50%;
     width: 10vw;
@@ -953,9 +953,18 @@ form .container {
   left: 50%;
   line-height: 1.8; }
 
+.featured-item.featured-community:after {
+  background: url("../assets/img/posts/articles/community/community.png") no-repeat center center;
+  background-size: cover; }
+
 @media only screen and (min-width: 800px) {
   .container .article-content {
-    width: 60%; } }
+    width: 60%; }
+
+  .featured-item.featured-community {
+    background: no-repeat right center;
+    background-image: linear-gradient(to left, rgba(230, 230, 230, 0.7), rgba(230, 230, 230, 0.7)), url("../assets/img/posts/articles/community/community.png");
+    background-size: cover; } }
 .featured-item {
   background-size: cover;
   margin-bottom: 80vh; }
@@ -963,7 +972,7 @@ form .container {
     display: block;
     height: 50vh;
     width: 100%;
-    content: ""; }
+    content: " "; }
   .featured-item.featured-keyspark:after {
     background: url(../assets/img/posts/keyspark/featured-mobile-keyspark.jpg) no-repeat center center;
     background-size: cover; }
@@ -982,5 +991,14 @@ form .container {
       width: 30%; }
     .featured-item::after {
       display: none; } }
+.featured-item.featured-keyspark-brand:after {
+  background: url("../assets/img/posts/articles/keyspark/ksseattle.jpg") no-repeat center center;
+  background-size: cover; }
+
+@media only screen and (min-width: 800px) {
+  .featured-item.featured-keyspark-brand {
+    background: no-repeat right center;
+    background-image: linear-gradient(to left, rgba(230, 230, 230, 0.7), rgba(230, 230, 230, 0.7)), url("../assets/img/posts/keyspark/ksseattle.jpg");
+    background-size: cover; } }
 
 /*# sourceMappingURL=master.css.map */

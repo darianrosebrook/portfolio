@@ -20,12 +20,18 @@ img:
     {% endfor %}
   </div>
 </header>
-<section id="info" class="container">
-  <div class="row">
-    <h2>Responsive Web Design that fits your brand</h2>
-    <p>There's no templating here. We'll customize the experience your audience receives by letting content strategy drive the project. Your website should be as unique as you are.</p>
+<section id="info" class="descriptions container">
+  <div class="icon-description module">
     <img src="/assets/img/icon-web.svg" alt="Web design for scalability" />
+    <div>
+      <h2>Responsive Web Design that fits your brand</h2>
+      <p>There's a paradigm shift in the way that people access their favorite sites. As all traffic goes towards the tiny computers we carry in our pocket every day, your site needs to be natively <em>mobile first</em>.</p>
+      <p>We don't sell the same site twice. We'll customize the experience your audience receives by working with your content, designing from the ground up. Your website should be as unique as you are.</p>
+    </div>
   </div>
+</section>
+<section id="list" class="container">
+  <h2>Web Design Projects</h2>
   <div class="row">
     {% for post in site.categories.web limit:6 %}
     {% if forloop.index == 4 and post.type == "Web Design" %}

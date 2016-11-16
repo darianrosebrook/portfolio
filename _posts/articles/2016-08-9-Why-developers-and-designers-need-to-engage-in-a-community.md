@@ -1,6 +1,7 @@
 ---
 layout: article
 category: article
+class: community
 title: Why Developers and Designers need to engage with a Community
 description: Here we unpackage why engaging in communities is important for developers and designers, especially for those starting out a an entrepreneur. Along with going over what the different communities like Seanwes and the DevTips Community have to offer and why they're a gold mine for new creatives.
 index_image: /assets/img/posts/articles/community/community.png
