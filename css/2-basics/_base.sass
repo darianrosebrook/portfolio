@@ -104,6 +104,7 @@ body
 .main-content
   position: relative
   z-index: 0
+  width: 100%
   transition: $transition
   transform-origin: top
 .hidden-nav
@@ -136,7 +137,8 @@ body
 @media only screen and (min-width: 800px)
   #nav-toggler:checked + .page-wrap .main-content
     padding-left: 0
-    transform: scale(.7)
+    width: 65%
+    left: 20%
     .case-study
       background-attachment: scroll
 
@@ -148,7 +150,22 @@ a, a:link, a:visited, a:hover, a:focus
   transition: $transition
   text-decoration: none
   color: $main
-
+h2, h3, h4, h5, h6
+  position: relative
+  width: fit-content
+  a:before
+    content: ""
+    position: absolute
+    width: 0%
+    height: 2px
+    background-color: $main
+    bottom: 2px
+    left: 0
+    transition: $transition
+  a:hover:before
+    width: 100%
+.person h4
+  position: static
 hr
   margin-bottom: $margin
   @media only screen and (max-width: 800px)
@@ -234,6 +251,9 @@ header
   @media only screen and (min-width: 800px)
     margin-top: 0
     height: calc(40vw / 1.777)
+    margin-bottom: 0
+    & + section
+      margin-top: 0
 .index-header
   height: calc(90vw * 1.777)
 section
@@ -253,6 +273,10 @@ footer
     height: calc(30vw / 1.777)
     .row
       @include center(true, true)
+  h2, h4
+    width: 100%
+    a::before
+      display: none
 // Columns
 .container
   padding: 3rem 10%

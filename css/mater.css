@@ -343,8 +343,7 @@ body {
 @media only screen and (min-width: 800px) {
   #nav-toggler:checked + .page-wrap .main-content {
     padding-left: 0;
-    width: 65%;
-    left: 20%; }
+    width: 40%; }
     #nav-toggler:checked + .page-wrap .main-content .case-study {
       background-attachment: scroll; } }
 p {
@@ -369,9 +368,6 @@ h2, h3, h4, h5, h6 {
     transition: all ease 0.25s; }
   h2 a:hover:before, h3 a:hover:before, h4 a:hover:before, h5 a:hover:before, h6 a:hover:before {
     width: 100%; }
-
-.person h4 {
-  position: static; }
 
 hr {
   margin-bottom: 1.5rem; }
@@ -505,10 +501,6 @@ footer {
         transform: translate(-50%, -50%);
         left: 50%;
         top: 50%; } }
-  footer h2, footer h4 {
-    width: 100%; }
-    footer h2 a::before, footer h4 a::before {
-      display: none; }
 
 .container {
   padding: 3rem 10%;
@@ -936,8 +928,6 @@ form .container {
       position: absolute;
       right: 2em;
       bottom: 0; }
-    .index-header .info {
-      width: 40%; }
 
   .sub-nav {
     height: calc(30vw / 1.777); }
@@ -956,10 +946,6 @@ form .container {
     .person blockquote {
       width: 90%;
       font-size: 1.6rem; }
-    .person h4 {
-      width: 100%; }
-      .person h4 a::before {
-        display: none; }
 
   .article:hover img {
     filter: grayscale(0); }
@@ -1055,4 +1041,4 @@ form .container {
     background-image: linear-gradient(to left, rgba(230, 230, 230, 0) 10%, #e6e6e6), url("../assets/img/posts/keyspark/ksseattle.jpg");
     background-size: cover; } }
 
-/*# sourceMappingURL=master.css.map */
+/*# sourceMappingURL=mater.css.map */

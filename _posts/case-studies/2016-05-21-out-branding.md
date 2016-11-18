@@ -1,4 +1,5 @@
 ---
+layout: case-study
 category:
   - case-study
   - brand
