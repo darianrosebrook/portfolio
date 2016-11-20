@@ -207,7 +207,7 @@ html {
 
 body {
   font-size: 1.2em;
-  line-height: 1.5; }
+  line-height: 1.8; }
 
 @media only screen and (min-width: 200px) {
   body {
@@ -510,6 +510,10 @@ footer {
     footer h2 a::before, footer h4 a::before {
       display: none; }
 
+.blurb {
+  display: flex;
+  justify-content: space-around; }
+
 .container {
   padding: 3rem 10%;
   font-size: 0;
@@ -582,6 +586,8 @@ footer {
   vertical-align: top; }
   .container .col-4.fluid {
     width: 25%; }
+  .container .col-4 ~ .col-4 {
+    margin-left: 0.3em; }
 
 .module {
   display: block;
@@ -767,7 +773,8 @@ form .container {
     display: inline-block; }
   .list select {
     display: inline-block; }
-  .list .circle {
+
+  .circle {
     border-radius: 50%;
     width: 10vw;
     height: 10vw; } }
@@ -809,7 +816,8 @@ form .container {
     transition: all ease 0.25s;
     filter: grayscale(1); }
   .work .data {
-    padding: 1em; }
+    padding: 1em;
+    transition-delay: 0.8s; }
   .work h4 {
     padding: 0 0.5em;
     font-weight: bold;
@@ -867,17 +875,18 @@ form .container {
     background-color: #261924;
     color: #f2f2f2; }
 
-  .icon-description {
+  .blurb-container {
     display: flex;
     justify-content: space-between;
+    align-items: stretch;
     opacity: 1;
     transition: all ease 0.25s;
     transition-delay: 1s;
     animation-play-state: paused; }
-    .icon-description ~ .icon-description {
+    .blurb-container ~ .blurb-container {
       margin-left: 0;
       padding-bottom: 1em; }
-    .icon-description.active {
+    .blurb-container.active {
       display: flex;
       flex-direction: column;
       justify-content: space-around;
@@ -886,14 +895,19 @@ form .container {
       opacity: 0;
       animation: fadeIn 0.5s ease-in 1 forwards;
       animation-play-state: running; }
-    .icon-description img {
+    .blurb-container img {
       width: calc(25% - 1em);
       position: static;
       transform: none; }
-    .icon-description div {
+    .blurb-container div {
       display: inline-block;
       width: calc(75% - 1em);
       vertical-align: middle; }
+    .blurb-container .circle {
+      width: 25%; }
+      .blurb-container .circle img {
+        width: 100%;
+        filter: grayscale(1); }
 
   .mobile-separator {
     display: none; }
@@ -920,10 +934,10 @@ form .container {
       background-color: transparent; }
       .work:hover img {
         filter: grayscale(0);
-        opacity: 0; }
+        opacity: 0.08; }
       .work:hover .data {
-        display: block;
-        opacity: 1; }
+        opacity: 1;
+        display: block; }
     .work h4 {
       display: block;
       position: absolute;
@@ -1032,7 +1046,7 @@ form .container {
     width: 100%;
     content: " "; }
   .featured-item.featured-keyspark:after {
-    background: url(../assets/img/posts/keyspark/featured-mobile-keyspark.jpg) no-repeat center center;
+    background: url(../assets/img/posts/study/keyspark/featured-mobile-keyspark.jpg) no-repeat center center;
     background-size: cover; }
   .featured-item .info h2 {
     color: #261924;
@@ -1043,20 +1057,20 @@ form .container {
     height: calc(65vw / 1.77);
     margin-bottom: 0; }
     .featured-item.featured-keyspark {
-      background: url(../assets/img/posts/keyspark/featured-desktop-keyspark.jpg) no-repeat right center;
+      background: url(../assets/img/posts/study/keyspark/featured-desktop-keyspark.jpg) no-repeat right center;
       background-size: cover; }
     .featured-item .info {
       width: 30%; }
     .featured-item::after {
       display: none; } }
 .featured-item.featured-keyspark-brand:after {
-  background: url("../assets/img/posts/articles/keyspark/ksseattle.jpg") no-repeat center center;
+  background: url("../assets/img/posts/study/articles/keyspark/ksseattle.jpg") no-repeat center center;
   background-size: cover; }
 
 @media only screen and (min-width: 800px) {
   .featured-item.featured-keyspark-brand {
     background: no-repeat right center;
-    background-image: linear-gradient(to left, rgba(230, 230, 230, 0) 10%, #e6e6e6), url("../assets/img/posts/keyspark/ksseattle.jpg");
+    background-image: linear-gradient(to left, rgba(230, 230, 230, 0) 10%, #e6e6e6), url("../assets/img/posts/study/keyspark/ksseattle.jpg");
     background-size: cover; } }
 
 /*# sourceMappingURL=master.css.map */

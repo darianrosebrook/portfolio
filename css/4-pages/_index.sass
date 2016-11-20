@@ -35,6 +35,7 @@
     filter: grayscale(1)
   .data
     padding: 1em
+    transition-delay: .8s
   h4
     padding: 0 .5em
     font-weight: bold
@@ -86,14 +87,15 @@
   .descriptions
     background-color: $dark
     color: $light
-  .icon-description
+  .blurb-container
     display: flex
     justify-content: space-between
+    align-items: stretch
     opacity: 1
     transition: $transition
     transition-delay: 1s
     animation-play-state: paused
-    & ~ .icon-description
+    & ~ .blurb-container
       margin-left: 0
       padding-bottom: 1em
     &.active
@@ -113,6 +115,11 @@
       display: inline-block
       width: calc(75% - 1em)
       vertical-align: middle
+    .circle
+      width: 25%
+      img
+        width: 100%
+        filter: grayscale(1)
   .mobile-separator
     display: none
   .work, .article
@@ -136,10 +143,10 @@
       background-color: rgba(0, 0, 0, 0)
       img
         filter: grayscale(0)
-        opacity: 0
+        opacity: .08
       .data
-        display: block
         opacity: 1
+        display: block
     h4
       display: block
       position: absolute

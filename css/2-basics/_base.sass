@@ -10,7 +10,7 @@ html
   color: $grey
 body
   font-size: 1.2em
-  line-height: 1.5
+  line-height: 1.8
 @media only screen and (min-width: 200px)
   body
     font-size: 1.6rem
@@ -277,6 +277,10 @@ footer
     width: 100%
     a::before
       display: none
+.blurb
+  display: flex
+  justify-content: space-around
+
 // Columns
 .container
   padding: 3rem 10%
@@ -314,6 +318,8 @@ footer
   display: inline-block
   font-size: 1.8rem
   @include col(1, 4, 0)
+  & ~ .col-4
+    margin-left: .3em
 .module
   display: block
   vertical-align: top
