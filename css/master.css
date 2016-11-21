@@ -798,6 +798,42 @@ form .container {
     .index-header h2 ~ h2 {
       margin-bottom: 4rem; }
 
+.featured-item.featured-keyspark-brand:after {
+  background: url("../assets/img/posts/study/articles/keyspark/ksseattle.jpg") no-repeat center center;
+  background-size: cover; }
+
+.featured-item.featured-external:after {
+  background: url("../assets/img/posts/articles/engagement/mountainwall.png") no-repeat center center;
+  background-size: cover; }
+
+.process {
+  height: 80vh;
+  background: no-repeat right center;
+  background-image: url("../assets/img/process.gif");
+  background-size: cover; }
+
+@media only screen and (min-width: 800px) {
+  .index-header {
+    height: calc(80vw / 1.777); }
+    .index-header img {
+      width: 35vw;
+      position: absolute;
+      right: 2em;
+      bottom: 0; }
+    .index-header .info {
+      width: 40%; }
+    .index-header .beta {
+      width: 50vw; }
+
+  .featured-item.featured-keyspark-brand {
+    background: no-repeat right center;
+    background-image: linear-gradient(to left, rgba(230, 230, 230, 0) 10%, #e6e6e6), url("../assets/img/posts/study/keyspark/ksseattle.jpg");
+    background-size: cover; }
+
+  .featured-item.featured-external {
+    background: no-repeat right center;
+    background-image: linear-gradient(to left, rgba(230, 230, 230, 0.7) 10%, #e6e6e6), url("../assets/img/posts/articles/engagement/mountainwall.png");
+    background-size: cover; } }
 .sub-nav {
   background-color: #261924;
   text-align: center; }
@@ -943,18 +979,6 @@ form .container {
       position: absolute;
       margin-right: 20%; }
 
-  .index-header {
-    height: calc(80vw / 1.777); }
-    .index-header img {
-      width: 35vw;
-      position: absolute;
-      right: 2em;
-      bottom: 0; }
-    .index-header .info {
-      width: 40%; }
-    .index-header .beta {
-      width: 50vw; }
-
   .sub-nav {
     height: calc(30vw / 1.777); }
 
@@ -1006,18 +1030,9 @@ form .container {
 .publications div img {
   filter: drop-shadow(1px 3px 10px #333); }
 
-.featured-item.featured-external:after {
-  background: url("../assets/img/posts/articles/engagement/mountainwall.png") no-repeat center center;
-  background-size: cover; }
-
 @media only screen and (min-width: 800px) {
   .container .article-content {
     width: 60%; }
-
-  .featured-item.featured-external {
-    background: no-repeat right center;
-    background-image: linear-gradient(to left, rgba(230, 230, 230, 0.7) 10%, #e6e6e6), url("../assets/img/posts/articles/engagement/mountainwall.png");
-    background-size: cover; }
 
   .publications {
     justify-content: space-between; }
@@ -1063,14 +1078,5 @@ form .container {
       width: 30%; }
     .featured-item::after {
       display: none; } }
-.featured-item.featured-keyspark-brand:after {
-  background: url("../assets/img/posts/study/articles/keyspark/ksseattle.jpg") no-repeat center center;
-  background-size: cover; }
-
-@media only screen and (min-width: 800px) {
-  .featured-item.featured-keyspark-brand {
-    background: no-repeat right center;
-    background-image: linear-gradient(to left, rgba(230, 230, 230, 0) 10%, #e6e6e6), url("../assets/img/posts/study/keyspark/ksseattle.jpg");
-    background-size: cover; } }
 
 /*# sourceMappingURL=master.css.map */
