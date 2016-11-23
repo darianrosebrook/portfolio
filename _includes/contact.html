@@ -6,6 +6,7 @@
       <input type="email" name="_replyto" placeholder="Your Email..." class="transition enter text-center" required>
       <p>What kind of project would you like to work on?</p>
       <p><small>(Yes, you can select more than one.)</small></p>
+      {% if page.url contains 'process' %}{% else %}<p><small>If you need to check out <a href="{{site.baseurl}}/process">The Design Process</a>, feel free to do so.</p>{% endif %}
       <input type="checkbox" class="hidden" data-continue="true" id="checkbox-webdesign" name="checkbox-webdesign" value="" >
       <input type="checkbox" class="hidden" data-continue="true" id="checkbox-branding" name="checkbox-branding" value="" >
       <input type="checkbox" class="hidden" data-continue="false" id="checkbox-hello" name="checkbox-hello" value="" ><br>

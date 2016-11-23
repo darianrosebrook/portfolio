@@ -4,7 +4,7 @@ category:
   - case-study
   - brand
 title: Out- Branding
-type: Branding
+type: Concept
 class: brand
 description:  The series of icons and logo done for an outdoor activity center. ...
 index_image: /assets/img/posts/study/out-branding/out-branding.png

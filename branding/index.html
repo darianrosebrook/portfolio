@@ -5,7 +5,7 @@ description: Darian Rosebrook is a Brand Identity Designer specializing in profe
 img:
 ---
 {% for post in site.categories.brand limit:1 %}
-<header class="container featured-item featured-{{post.class}}">
+<header class="container hero featured-{{post.class}}">
   <h1>Branding</h1>
   <div class="row featured info">
     <h2>Featured Work</h2>
@@ -23,9 +23,9 @@ img:
   <div class="blurb-container module">
     <img src="/assets/img/icon-branding.svg" alt="Web design for scalability" />
     <div>
-      <h2>Responsive Web Design that fits your brand</h2>
-      <p>There's a paradigm shift in the way that people access their favorite sites. As all traffic goes towards the tiny computers we carry in our pocket every day, your site needs to be natively <em>mobile first</em>.</p>
-      <p>We don't sell the same site twice. We'll customize the experience your audience receives by working with your content, designing from the ground up. Your website should be as unique as you are.</p>
+      <h2>The Brand Effect</h2>
+      <p>The logo you choose for your company is just a child of a bigger system. Branding is <q cite="Seth Godin" title="Seth Godin">"the set of expectations, memories, stories and relationships that, taken together, account for a consumer's decision to choose one product or service over another."</q> This is what makes the difference of wearing a pair of running shoes and wearing Converse.</p>
+      <p>Everything about your brand has to be fluid within the world you are trying to serve. <strong>The goal</strong> of branding is to make a company unique and recognisable, and to project a desired image. <strong>The challenge</strong> is keeping the brand different in a world of parroting products and services, and keeping the brand relevant to those who are seeking it. This is a service I provide and have continued to provide throughout my career as a designer.</p>
     </div>
   </div>
 </section>
@@ -38,6 +38,7 @@ img:
   </div>
   <div class="row">
     <article class="work module">
+      {% if post.type == 'Branding' %}<h4 class="work-branding">{% elsif post.type == 'Web Design' %}<h4 class="work-web">{% elsif post.type == 'Concept' %}<h4 class="work-concept">{% else %}<h4>{% endif %}{{post.type}}</h4>
       <a href="{{site.baseurl}}{{post.url}}"><img src="{{post.index_image}}" alt="{{post.description | truncate: 120}}" /></a>
       <div class="data">
         <h5><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h5>
@@ -49,7 +50,7 @@ img:
   </div>
   <div class="row">
     <article class="work module">
-      {% if post.type == 'Branding' %}<h4 class="work-branding">{% elsif post.type == 'Web Design' %}<h4 class="work-web">{% else %}<h4>{% endif %}{{post.type}}</h4>
+      {% if post.type == 'Branding' %}<h4 class="work-branding">{% elsif post.type == 'Web Design' %}<h4 class="work-web">{% elsif post.type == 'Concept' %}<h4 class="work-concept">{% else %}<h4>{% endif %}{{post.type}}</h4>
       <a href="{{site.baseurl}}{{post.url}}"><img src="{{post.index_image}}" alt="{{post.description | truncate: 120}}" /></a>
       <div class="data">
         <h5><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h5>
@@ -59,7 +60,7 @@ img:
     </article>
     {% elsif post.type == "Branding" %}
     <article class="work module">
-      {% if post.type == 'Branding' %}<h4 class="work-branding">{% elsif post.type == 'Web Design' %}<h4 class="work-web">{% else %}<h4>{% endif %}{{post.type}}</h4>
+      {% if post.type == 'Branding' %}<h4 class="work-branding">{% elsif post.type == 'Web Design' %}<h4 class="work-web">{% elsif post.type == 'Concept' %}<h4 class="work-concept">{% else %}<h4>{% endif %}{{post.type}}</h4>
       <a href="{{site.baseurl}}{{post.url}}"><img src="{{post.index_image}}" alt="{{post.description | truncate: 120}}" /></a>
       <div class="data">
         <h5><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h5>

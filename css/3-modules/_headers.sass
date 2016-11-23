@@ -1,7 +1,7 @@
 //Index
 .index-header
   padding: 5% 10% 0 10%
-  background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,1)),url(/assets/img/icon-star.png)
+  background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,1)),url('/assets/img/icon-star.png')
   background-repeat: repeat
   img
     width: 80%
@@ -19,26 +19,24 @@
     & ~ h2
       margin-bottom: 4rem
 
-// Case Studies
-.featured-item
-  &.featured-keyspark-brand
+// Other Pages
+.hero
+  &.featured-branding // Branding
     &:after
       background: url('../assets/img/posts/study/articles/keyspark/ksseattle.jpg') no-repeat center center
       background-size: cover
-
-// Articles
-.featured-item
-  &.featured-external
+  &.featured-web // Web Design
+    &:after
+      background: url('../assets/img/posts/study/keyspark/featured-mobile-keyspark.jpg') no-repeat center center
+      background-size: cover
+  &.featured-article // Articles
     &:after
       background: url('../assets/img/posts/articles/engagement/mountainwall.png') no-repeat center center
       background-size: cover
-// Process
-.process
-  height: 80vh
-  background: no-repeat right center
-  background-image: url('../assets/img/process.gif')
-  background-size: cover
-
+  &.process // Process
+    &:after
+      background: url('../assets/img/process.gif') no-repeat center center
+      background-size: cover
 
 
 
@@ -55,19 +53,18 @@
       width: 40%
     .beta
       width: 50vw
-
-  // Case Studies
-  .featured-item
-    &.featured-keyspark-brand
+  // Other Pages
+  .hero
+    &.featured-branding // Case Studies
       background: no-repeat right center
       background-image: linear-gradient(to left, rgba(230, 230, 230, 0) 10%, rgba(230, 230, 230, 1)), url('../assets/img/posts/study/keyspark/ksseattle.jpg')
       background-size: cover
-
-  // Articles
-  .featured-item
-    &.featured-external
+    &.featured-articles  // Articles
       background: no-repeat right center
       background-image: linear-gradient(to left, rgba(230, 230, 230, .7) 10%, rgba(230, 230, 230, 1)), url('../assets/img/posts/articles/engagement/mountainwall.png')
       background-size: cover
-
-  // Process
+    &.process // Process
+      height: 80vh
+      background: no-repeat center center
+      background-image: url('../assets/img/process.gif')
+      background-size: cover

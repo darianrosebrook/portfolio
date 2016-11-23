@@ -2,10 +2,11 @@
   font-size: 0
   position: relative
 @mixin col ($col, $sum, $gap: 1em, $align: top, $first: false, $last: false)
-  margin-left: if($first, 0, $gap)
-  margin-right: if($last, 0, $gap)
   width: percentage($col/$sum)
   vertical-align: $align
+  @media only screen and (min-width: 800px)
+    margin-left: if($first, 0, $gap)
+    margin-right: if($last, 0, $gap)
   &.fluid
     width: percentage($col/$sum)
 @mixin center($x: true, $y: true)

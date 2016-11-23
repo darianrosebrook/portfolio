@@ -14,7 +14,7 @@ body
 @media only screen and (min-width: 200px)
   body
     font-size: 1.6rem
-@media only screen and (min-width: 600px)
+@media only screen and (min-width: 800px)
   body
     font-size: 1.8rem
 .hidden
@@ -144,6 +144,10 @@ body
 
 
 // Typography
+p, h1, h2, h3, h4, h5, h6, q, a, blockquote, i, strong, small, em, input, textarea, label, img
+  &::selection
+    color: $light
+    background-color: $main
 p
   margin-bottom: $margin
 a, a:link, a:visited, a:hover, a:focus
@@ -286,16 +290,24 @@ footer
   padding: 3rem 10%
   @include row()
   img
-    position: relative
     @include center(true, false)
   .col
     position: inherit
     display: inline-block
     font-size: 1.8rem
+    img
+      @include center(false, false)
+      left: auto
+    &.steps
+      text-align: center
+      h3
+        width: auto
+    
+
 @media only screen and (min-width: 200px)
   .container .col
     @include col(1, 1)
-@media only screen and (min-width: 300px)
+@media only screen and (min-width: 600px)
   .container .col
     @include col(1, 2)
     width: calc(50% - 2em)

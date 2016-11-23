@@ -4,7 +4,7 @@ category:
   - case-study
   - web
 title: Travelight
-type: Web Design
+type: Concept
 class: web
 description:  A landing page for Travelight, an app that lets you find the shortest route to your destination.
 index_image: /assets/img/posts/study/travelight/landing.jpg
