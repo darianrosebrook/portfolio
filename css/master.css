@@ -1,4 +1,3 @@
-@charset "UTF-8";
 @import url(https://fonts.googleapis.com/css?family=Lato:400,100,300,700);
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 html {
@@ -208,6 +207,8 @@ html {
 body {
   font-size: 1.2em;
   line-height: 1.8; }
+  body.in-transition {
+    transition: transform 0.5s cubic-bezier(0.65, 0.01, 0.19, 1.01); }
 
 @media only screen and (min-width: 200px) {
   body {
@@ -251,6 +252,9 @@ body {
 @keyframes fadeIn {
   to {
     opacity: 1; } }
+.scrollBtn {
+  cursor: pointer; }
+
 .toggle {
   position: fixed;
   top: 20px;
@@ -424,22 +428,9 @@ i {
     display: none; }
 
 em[class|="type"] {
-  font-style: normal; }
-
-.type-life {
-  color: #4aa3ba; }
-
-.type-brand {
-  color: #ff2e63; }
-
-.type-logo {
-  color: #1e6262; }
-
-┬¥.type-ux {
-  color: #5a37c3; }
-
-.type-web {
-  color: #e7a117; }
+  font-style: normal;
+  padding: 0.5em;
+  color: grey; }
 
 .meta_description a {
   color: #3c3c3c; }
@@ -830,7 +821,7 @@ form .container {
 .hero.featured-web:after {
   background: url("../assets/img/posts/study/keyspark/featured-mobile-keyspark.jpg") no-repeat center center;
   background-size: cover; }
-.hero.featured-article:after {
+.hero.featured-external:after {
   background: url("../assets/img/posts/articles/engagement/mountainwall.png") no-repeat center center;
   background-size: cover; }
 .hero.process:after {
@@ -854,7 +845,7 @@ form .container {
     background: no-repeat right center;
     background-image: linear-gradient(to left, rgba(230, 230, 230, 0) 10%, #e6e6e6), url("../assets/img/posts/study/keyspark/ksseattle.jpg");
     background-size: cover; }
-  .hero.featured-articles {
+  .hero.featured-external {
     background: no-repeat right center;
     background-image: linear-gradient(to left, rgba(230, 230, 230, 0.7) 10%, #e6e6e6), url("../assets/img/posts/articles/engagement/mountainwall.png");
     background-size: cover; }
@@ -911,6 +902,8 @@ form .container {
     border-radius: 50%;
     transform: none;
     left: auto; }
+  .testimony-container h3 {
+    width: auto; }
 
 .article img {
   width: 100%;
@@ -1061,6 +1054,9 @@ form .container {
 
 .publications div img {
   filter: drop-shadow(1px 3px 10px #333); }
+
+.list-item {
+  animation: slideIn 0.4s backwards; }
 
 @media only screen and (min-width: 800px) {
   .container .article-content {

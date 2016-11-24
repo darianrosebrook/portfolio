@@ -1,6 +1,6 @@
 ---
 category: article
-class: external
+type: external
 topic: KeySpark
 title: Stop saying 'Yes' to Everything
 external: https://smallbusinessforum.co/stop-saying-yes-to-everything-103876fe124#.vm8gfe7az

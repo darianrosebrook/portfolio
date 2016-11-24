@@ -11,6 +11,8 @@ html
 body
   font-size: 1.2em
   line-height: 1.8
+  &.in-transition
+    transition: transform .5s cubic-bezier(.65, .01, .19, 1.01)
 @media only screen and (min-width: 200px)
   body
     font-size: 1.6rem
@@ -47,7 +49,8 @@ body
 @keyframes fadeIn
   to
     opacity: 1
-
+.scrollBtn
+  cursor: pointer
 // Logo & nav
 .toggle
   position: fixed
@@ -212,16 +215,8 @@ i
 
 em[class|="type"]
   font-style: normal
-.type-life
-  color: #4aa3ba
-.type-brand
-  color: #ff2e63
-.type-logo
-  color: #1e6262
-.type-ux
-  color: #5a37c3
-.type-web
-  color: #e7a117
+  padding: .5em
+  color: grey
 .meta_description a
   color: $grey
 // Buttons
@@ -302,7 +297,7 @@ footer
       text-align: center
       h3
         width: auto
-    
+
 
 @media only screen and (min-width: 200px)
   .container .col

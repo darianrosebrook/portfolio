@@ -2,13 +2,13 @@
 layout: default
 ---
 {% for post in site.categories.article limit:1 %}
-<header class="container hero featured-{{post.class}}">
+<header id="hero" class="container hero featured-{{post.type}}">
   <div class="row featured info">
     <h1>Articles</h1>
     <h2>Featured Article</h2>
       <article class="featured">
         <h3><a href="{% if post.external %}{{post.external}}{% else %}{{site.baseurl}}{{post.url}}{% endif %}">{{post.title}}</a></h3>
-        <small><a href="{{site.baseurl}}archive/articles">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.topic}}</em></a></small>
+        <small><a href="{{site.baseurl}}archive/articles">{{post.date | date_to_long_string}} &#124; <em class="type-{{post.type}}" >{{post.topic}}</em></a></small>
         <p class="meta_description"><a href="{% if post.external %}{{post.external}}{% else %}{{site.baseurl}}{{post.url}}{% endif %}">&ldquo;{{post.description | truncate: 300}}&rdquo;</a></p>
       </article>
     {% endfor %}
@@ -29,26 +29,26 @@ layout: default
     </div>
   </div>
 </section>
-<section id="info" class="container list">
+<section id="posts" class="container list">
   <div class="row">
     <select class="filter cf" name="filter" id="filter">
       <option value="Filter All">Filter All</option>
       <option value="Web Design">Web Design</option>
       <option value="Branding">Branding</option>
-      <option value="Logo">Logo</option>
-      <option value="User Experience">User Experience</option>
-      <option value="Life Experience">Life Experience</option>
+      <option value="Productivity">Productivity</option>
+      <option value="Life">Life Experience</option>
+      <option value="External">External Posts</option>
     </select>
   </div>
   <div class="row">
     {% for post in site.categories.article%}
-    <article class="{{post.class}} list-item">
+    <article data-type="{{post.type}}" class="list-item">
       <div class="post-img"><a href="{% if post.external %}{{post.external}}{% else %}{{site.baseurl}}{{post.url}}{% endif %}"><img src="{{post.index_image}}" alt="{{post.description}}" /></a></div>
       <div class="artcont">
         <h5><a href="{% if post.external %}{{post.external}}{% else %}{{site.baseurl}}{{post.url}}{% endif %}">{{post.title}}</a></h5>
         <p>{% assign words = post.content | number_of_words %}{% if words < 360 %}1 min read{% else %}{{ words | divided_by:180 }} min read{% endif %}</p>
-        <small><a href="{{site.baseurl}}archive/articles">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.topic}}</em></a></small>
-        <p class="meta_description"><a href="{% if post.external %}{{post.external}}{% else %}{{site.baseurl}}{{post.url}}{% endif %}">&ldquo;{{post.description | truncate: 280}}&rdquo;</a></p>
+        <small><a href="{{site.baseurl}}archive/articles">{{post.date | date_to_long_string}} &#124; <em class="type-{{post.type}}" >{{post.topic}}</em></a></small>
+        <p class="meta_description">&ldquo;{{post.description | truncate: 280}}&rdquo;</p>
       </div>
     </article>
     {% endfor %}

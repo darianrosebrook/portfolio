@@ -2,6 +2,7 @@
 category: article
 class: external
 topic: KeySpark
+type: external
 title: Great designs are measured by the questions asked before the work.
 external: https://medium.com/@keySpark/great-designs-great-questions-415d061c84ac#.nrkvdtxvh
 description: Congratulations! You have a new project in the pipeline. It may have been a while or it may have been a short amount of time since your last work as a designer, but one thing we all know about design is that you have to understand what is really going on inside the project.

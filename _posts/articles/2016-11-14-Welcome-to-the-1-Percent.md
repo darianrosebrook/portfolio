@@ -1,6 +1,6 @@
 ---
 category: article
-class: external
+type: external
 topic: KeySpark
 title: Welcome to the 1%
 external: https://medium.com/@keySpark/welcome-to-the-1-of-the-internet-a18c8a72f0bc#.t7a9szpfv

@@ -1,6 +1,6 @@
 ---
 category: article
-class: external
+type: external
 topic: KeySpark
 title: 4 Ways to Guide Your Brand Towards Success
 external: https://medium.com/@keySpark/4-ways-to-guide-your-brand-to-success-24adf2a3bac6#.w9nk7yubz
