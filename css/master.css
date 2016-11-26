@@ -826,11 +826,11 @@ form .container {
     height: 50vh;
     width: 100%;
     content: " "; }
-  .hero.featured-branding:after {
+  .hero.featured-darian-brand:after {
     background: url("../assets/img/posts/study/articles/keyspark/ksseattle.jpg") no-repeat center center;
     background-size: cover; }
   .hero.featured-web:after {
-    background: url("../assets/img/posts/study/keyspark/featured-mobile-keyspark.jpg") no-repeat center center;
+    background: url("../assets/img/posts/study/portfolio-img/brand-mobile-darian.png") no-repeat center center;
     background-size: cover; }
   .hero.featured-external:after {
     background: url("../assets/img/posts/articles/engagement/mountainwall.png") no-repeat center center;
@@ -840,6 +840,9 @@ form .container {
     .hero.process:after {
       background: url("../assets/img/process.gif") no-repeat center center;
       background-size: cover; }
+  .hero.featured-darian:after {
+    background: url("../assets/img/posts/study/portfolio-img/web-mobile-darian.jpg") no-repeat center center;
+    background-size: cover; }
 
 @media only screen and (min-width: 800px) {
   .index-header {
@@ -861,9 +864,9 @@ form .container {
       width: 30%; }
     .hero::after {
       display: none; }
-    .hero.featured-branding {
+    .hero.featured-darian-brand {
       background: no-repeat right center;
-      background-image: linear-gradient(to left, rgba(230, 230, 230, 0) 10%, #e6e6e6), url("../assets/img/posts/study/keyspark/ksseattle.jpg");
+      background-image: linear-gradient(to left, rgba(230, 230, 230, 0) 10%, #e6e6e6), url("../assets/img/posts/study/portfolio-img/brand-desktop-darian.png");
       background-size: cover; }
     .hero.featured-external {
       background: no-repeat right center;
@@ -875,8 +878,8 @@ form .container {
       background: no-repeat center center;
       background-image: url("../assets/img/process.gif");
       background-size: cover; }
-    .hero.featured-keyspark {
-      background: url(../assets/img/posts/study/keyspark/featured-desktop-keyspark.jpg) no-repeat right center;
+    .hero.featured-darian {
+      background: url("../assets/img/posts/study/portfolio-img/web-desktop-darian.jpg") no-repeat right center;
       background-size: cover; } }
 .sub-nav {
   background-color: #261924;

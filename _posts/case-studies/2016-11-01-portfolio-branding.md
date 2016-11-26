@@ -5,7 +5,7 @@ categories:
   - brand
 title: Darian Rosebrook Portfolio Branding
 type: Branding
-class: darian
+class: darian-brand
 description: I have updated and unified the brand image for my portfolio site.
 index_image: /assets/img/posts/study/portfolio-img/icon-simple.png
 company: KeySpark.io
