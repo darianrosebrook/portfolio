@@ -132,7 +132,7 @@ sitemap:
   </div>
   <div class="row">
     <article class="{{post.class}} article module">
-      <a href="{% if post.external %}{{post.external}}"{% else %}{{site.baseurl}}{{post.url}}"{% endif%}><img src="{{post.index_image}}" alt="{{post.description}}" /></a>
+      <a href="{% if post.external %}{{post.external}}"{% else %}{{site.baseurl}}{{post.url}}"{% endif%}><img src="{{post.index_image}}" alt="{{post.title}}" /></a>
       <h5><a href="{% if post.external %}{{post.external}}"{% else %}{{site.baseurl}}{{post.url}}"{% endif%}>{{post.title}}</a></h5>
       <small><a href="{{site.baseurl}}archive/articles">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.topic}}</em></a></small>
       <p class="meta_description">&ldquo;{{post.description | truncate: 170}}&rdquo;</p>
@@ -141,14 +141,14 @@ sitemap:
   </div>
   <div class="row">
     <article class="{{post.class}} article module">
-      <a href="{% if post.external %}{{post.external}}"{% else %}{{site.baseurl}}{{post.url}}"{% endif%}><img src="{{post.index_image}}" alt="{{post.description}}" /></a>
+      <a href="{% if post.external %}{{post.external}}"{% else %}{{site.baseurl}}{{post.url}}"{% endif%}><img src="{{post.index_image}}" alt="{{post.title}}" /></a>
       <h5><a href="{% if post.external %}{{post.external}}"{% else %}{{site.baseurl}}{{post.url}}"{% endif%}>{{post.title}}</a></h5>
       <small><a href="{{site.baseurl}}archive/articles">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.topic}}</em></a></small>
       <p class="meta_description">&ldquo;{{post.description | truncate: 170}}&rdquo;</p>
     </article>
     {% else %}
     <article class="{{post.class}} article module">
-      <a href="{% if post.external %}{{post.external}}"{% else %}{{site.baseurl}}{{post.url}}"{% endif%}><img src="{{post.index_image}}" alt="{{post.description}}" /></a>
+      <a href="{% if post.external %}{{post.external}}"{% else %}{{site.baseurl}}{{post.url}}"{% endif%}><img src="{{post.index_image}}" alt="{{post.title}}" /></a>
       <h5><a href="{% if post.external %}{{post.external}}"{% else %}{{site.baseurl}}{{post.url}}"{% endif%}>{{post.title}}</a></h5>
       <small><a href="{{site.baseurl}}archive/articles">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.topic}}</em></a></small>
       <p class="meta_description">&ldquo;{{post.description | truncate: 170}}&rdquo;</p>
