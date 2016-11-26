@@ -49,7 +49,7 @@ sitemap:
       <div class="data">
         <h5><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h5>
         <small><a href="{{site.baseurl}}archive/case-study/">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.type}}</em></a></small>
-        <p class="meta_description"><a href="{{site.baseurl}}{{post.url}}">&ldquo;{{post.description | truncate: 170}}&rdquo;</a></p>
+        <p class="meta_description">&ldquo;{{post.description | truncate: 170}}&rdquo;</p>
       </div>
     </article>
     {% elsif forloop.index == 7 and post.type == "Branding" %}
@@ -61,7 +61,7 @@ sitemap:
       <div class="data">
         <h5><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h5>
         <small><a href="{{site.baseurl}}archive/case-study/">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.type}}</em></a></small>
-        <p class="meta_description"><a href="{{site.baseurl}}{{post.url}}">&ldquo;{{post.description | truncate: 170}}&rdquo;</a></p>
+        <p class="meta_description">&ldquo;{{post.description | truncate: 170}}&rdquo;</p>
       </div>
     </article>
     {% elsif post.type == "Branding" %}
@@ -71,7 +71,7 @@ sitemap:
       <div class="data">
         <h5><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h5>
         <small><a href="{{site.baseurl}}archive/case-study/">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.type}}</em></a></small>
-        <p class="meta_description"><a href="{{site.baseurl}}{{post.url}}">&ldquo;{{post.description | truncate: 170}}&rdquo;</a></p>
+        <p class="meta_description">&ldquo;{{post.description | truncate: 170}}&rdquo;</p>
       </div>
     </article>
     {% endif %}

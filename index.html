@@ -90,7 +90,7 @@ sitemap:
       <div class="data">
         <h5><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h5>
         <small><a href="{{site.baseurl}}archive/articles">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.topic}}</em></a></small>
-        <p class="meta_description"><a href="{{site.baseurl}}{{post.url}}">&ldquo;{{post.description | truncate: 170}}&rdquo;</a></p>
+        <p class="meta_description">&ldquo;{{post.description | truncate: 170}}&rdquo;</p>
       </div>
     </article>
     {% elsif forloop.index == 7 %}
@@ -102,7 +102,7 @@ sitemap:
       <div class="data">
         <h5><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h5>
         <small><a href="{{site.baseurl}}archive/articles">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.topic}}</em></a></small>
-        <p class="meta_description"><a href="{{site.baseurl}}{{post.url}}">&ldquo;{{post.description | truncate: 170}}&rdquo;</a></p>
+        <p class="meta_description">&ldquo;{{post.description | truncate: 170}}&rdquo;</p>
       </div>
     </article>
     {% else %}
@@ -112,7 +112,7 @@ sitemap:
       <div class="data">
         <h5><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h5>
         <small><a href="{{site.baseurl}}archive/articles">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.topic}}</em></a></small>
-        <p class="meta_description"><a href="{{site.baseurl}}{{post.url}}">&ldquo;{{post.description | truncate: 170}}&rdquo;</a></p>
+        <p class="meta_description">&ldquo;{{post.description | truncate: 170}}&rdquo;</p>
       </div>
     </article>
     {% endif %}
@@ -135,7 +135,7 @@ sitemap:
       <a href="{% if post.external %}{{post.external}}"{% else %}{{site.baseurl}}{{post.url}}"{% endif%}><img src="{{post.index_image}}" alt="{{post.description}}" /></a>
       <h5><a href="{% if post.external %}{{post.external}}"{% else %}{{site.baseurl}}{{post.url}}"{% endif%}>{{post.title}}</a></h5>
       <small><a href="{{site.baseurl}}archive/articles">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.topic}}</em></a></small>
-      <p class="meta_description"><a href="{% if post.external %}{{post.external}}"{% else %}{{site.baseurl}}{{post.url}}"{% endif%}>&ldquo;{{post.description | truncate: 170}}&rdquo;</a></p>
+      <p class="meta_description">&ldquo;{{post.description | truncate: 170}}&rdquo;</p>
     </article>
     {% elsif forloop.index == 7 %}
   </div>
@@ -144,14 +144,14 @@ sitemap:
       <a href="{% if post.external %}{{post.external}}"{% else %}{{site.baseurl}}{{post.url}}"{% endif%}><img src="{{post.index_image}}" alt="{{post.description}}" /></a>
       <h5><a href="{% if post.external %}{{post.external}}"{% else %}{{site.baseurl}}{{post.url}}"{% endif%}>{{post.title}}</a></h5>
       <small><a href="{{site.baseurl}}archive/articles">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.topic}}</em></a></small>
-      <p class="meta_description"><a href="{% if post.external %}{{post.external}}"{% else %}{{site.baseurl}}{{post.url}}"{% endif%}>&ldquo;{{post.description | truncate: 170}}&rdquo;</a></p>
+      <p class="meta_description">&ldquo;{{post.description | truncate: 170}}&rdquo;</p>
     </article>
     {% else %}
     <article class="{{post.class}} article module">
       <a href="{% if post.external %}{{post.external}}"{% else %}{{site.baseurl}}{{post.url}}"{% endif%}><img src="{{post.index_image}}" alt="{{post.description}}" /></a>
       <h5><a href="{% if post.external %}{{post.external}}"{% else %}{{site.baseurl}}{{post.url}}"{% endif%}>{{post.title}}</a></h5>
       <small><a href="{{site.baseurl}}archive/articles">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.topic}}</em></a></small>
-      <p class="meta_description"><a href="{% if post.external %}{{post.external}}"{% else %}{{site.baseurl}}{{post.url}}"{% endif%}>&ldquo;{{post.description | truncate: 170}}&rdquo;</a></p>
+      <p class="meta_description">&ldquo;{{post.description | truncate: 170}}&rdquo;</p>
     </article>
     {% endif %}
     {% endfor %}

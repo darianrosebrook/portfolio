@@ -20,7 +20,7 @@ sitemap:
       <div class="data">
         <h5><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h5>
         <small><a href="{{site.baseurl}}archive/articles">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.topic}}</em></a></small>
-        <p class="meta_description"><a href="{{site.baseurl}}{{post.url}}">&ldquo;{{post.description | truncate: 170}}&rdquo;</a></p>
+        <p class="meta_description">&ldquo;{{post.description | truncate: 170}}&rdquo;</p>
       </div>
     </article>
   {% if thecycle == '3' or forloop.last %}</div>{% endif %}

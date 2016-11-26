@@ -14,7 +14,7 @@ sitemap:
       <article class="featured">
         <h3><a href="{% if post.external %}{{post.external}}{% else %}{{site.baseurl}}{{post.url}}{% endif %}">{{post.title}}</a></h3>
         <small><a href="{{site.baseurl}}archive/articles">{{post.date | date_to_long_string}} &#124; <em class="type-{{post.type}}" >{{post.topic}}</em></a></small>
-        <p class="meta_description"><a href="{% if post.external %}{{post.external}}{% else %}{{site.baseurl}}{{post.url}}{% endif %}">&ldquo;{{post.description | truncate: 300}}&rdquo;</a></p>
+        <p class="meta_description">&ldquo;{{post.description | truncate: 300}}&rdquo;</p>
       </article>
     {% endfor %}
   </div>
