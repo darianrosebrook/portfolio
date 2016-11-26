@@ -48,7 +48,7 @@ sitemap:
   <div class="row">
     {% for post in site.categories.article%}
     <article data-type="{{post.type}}" class="list-item">
-      <div class="post-img"><a href="{% if post.external %}{{post.external}}{% else %}{{site.baseurl}}{{post.url}}{% endif %}"><img src="{{post.index_image}}" alt="{{post.description}}" /></a></div>
+      <div class="post-img"><a href="{% if post.external %}{{post.external}}{% else %}{{site.baseurl}}{{post.url}}{% endif %}"><img src="{{post.index_image}}" alt="{{post.title}}" /></a></div>
       <div class="artcont">
         <h5><a href="{% if post.external %}{{post.external}}{% else %}{{site.baseurl}}{{post.url}}{% endif %}">{{post.title}}</a></h5>
         <p>{% assign words = post.content | number_of_words %}{% if words < 360 %}1 min read{% else %}{{ words | divided_by:180 }} min read{% endif %}</p>
