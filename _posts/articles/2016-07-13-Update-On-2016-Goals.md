@@ -6,6 +6,11 @@ type: life
 title: Burn the Boats&#58; An Update On My Current 2016 Goals
 description: What I love about phrases like these is that though they are removed from any part of what we do now in our time, their message is reused and repurposed into something that fits our current situations.
 index_image: /assets/img/posts/articles/update-on-goals/update-on-goals.jpg
+sitemap:
+  lastmod: 2016-07-13
+  priority: 0.7
+  changefreq: 'monthly'
+  exclude: 'no'
 
 
 ---

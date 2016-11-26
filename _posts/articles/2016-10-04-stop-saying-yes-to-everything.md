@@ -6,6 +6,11 @@ title: Stop saying 'Yes' to Everything
 external: https://smallbusinessforum.co/stop-saying-yes-to-everything-103876fe124#.vm8gfe7az
 description: Did you agree to have lunch this week with your aunt again? Maybe your “best friend” just bought tickets to see the next EDM concert going on, begging you to go with. Something about this post made you click on it. Maybe something had created too much of a “Yes Man” in you and may be saying yes to doing too many things.
 index_image: /assets/img/posts/articles/stop-saying-yes/stop-saying-yes.png
+sitemap:
+  lastmod: 2016-10-04
+  priority: 0.7
+  changefreq: 'monthly'
+  exclude: 'no'
 ---
 The internet is a powerful tool for getting information. There are tens of millions of articles being consumed every day across the globe. Nearly 5 billion videos are watched on YouTube every day. It has never been easier than now to start creating things to put on the internet; yet, nearly 99% of the internet never do. Here’s where you come in.
 The 1% rule of internet culture

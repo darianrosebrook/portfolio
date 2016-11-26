@@ -12,5 +12,10 @@ company: Grow Your Code Podcast
 logo: /assets/img/posts/study/grow-your-code/grow-your-code.svg
 header:
 callout:
+sitemap:
+  lastmod: 2016-03-22
+  priority: 0.7
+  changefreq: 'monthly'
+  exclude: 'no'
 
 ---

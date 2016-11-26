@@ -11,4 +11,9 @@ index_image: /assets/img/posts/study/timos-tacos/taco.png
 company: Burning Meter
 logo: /assets/img/posts/study/timos-tacos/taco.png
 header:
+sitemap:
+  lastmod: 2016-09-13
+  priority: 0.7
+  changefreq: 'monthly'
+  exclude: 'no'
 ---

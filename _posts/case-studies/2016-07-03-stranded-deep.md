@@ -10,4 +10,9 @@ index_image: /assets/img/posts/study/stranded-deep/stranded-deep.jpg
 company: KeySpark.io
 logo: /assets/img/posts/study/stranded-deep/stranded-deep.jpg
 header:
+sitemap:
+  lastmod: 2016-07-03
+  priority: 0.7
+  changefreq: 'monthly'
+  exclude: 'no'
 ---

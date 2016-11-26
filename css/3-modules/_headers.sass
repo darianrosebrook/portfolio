@@ -21,6 +21,17 @@
 
 // Other Pages
 .hero
+  background-size: cover
+  margin-bottom: 80vh
+  .info
+    h2
+      color: $dark
+      font-weight: 400
+  &:after
+    display: block
+    height: 50vh
+    width: 100%
+    content: ' '
   &.featured-branding // Branding
     &:after
       background: url('../assets/img/posts/study/articles/keyspark/ksseattle.jpg') no-repeat center center
@@ -34,6 +45,7 @@
       background: url('../assets/img/posts/articles/engagement/mountainwall.png') no-repeat center center
       background-size: cover
   &.process // Process
+    margin-bottom: 0
     &:after
       background: url('../assets/img/process.gif') no-repeat center center
       background-size: cover
@@ -55,6 +67,12 @@
       width: 50vw
   // Other Pages
   .hero
+    height: calc(65vw / 1.77)
+    margin-bottom: 0
+    .info
+      width: 30%
+    &::after
+      display: none
     &.featured-branding // Case Studies
       background: no-repeat right center
       background-image: linear-gradient(to left, rgba(230, 230, 230, 0) 10%, rgba(230, 230, 230, 1)), url('../assets/img/posts/study/keyspark/ksseattle.jpg')
@@ -65,6 +83,10 @@
       background-size: cover
     &.process // Process
       height: 80vh
+      margin-bottom: 80vh
       background: no-repeat center center
       background-image: url('../assets/img/process.gif')
+      background-size: cover
+    &.featured-keyspark
+      background: url(../assets/img/posts/study/keyspark/featured-desktop-keyspark.jpg) no-repeat right center
       background-size: cover

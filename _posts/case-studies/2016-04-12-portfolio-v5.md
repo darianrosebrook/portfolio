@@ -12,4 +12,9 @@ company: Darian Rosebrook
 logo: /assets/img/posts/study/portfolio-img/portfolio-v5.jpg
 header:
 callout:
+sitemap:
+  lastmod: 2016-04-12
+  priority: 0.7
+  changefreq: 'monthly'
+  exclude: 'no'
 ---

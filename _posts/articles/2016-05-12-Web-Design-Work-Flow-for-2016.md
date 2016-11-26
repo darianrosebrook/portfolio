@@ -6,6 +6,11 @@ type: web
 title: A Work Flow Process for Creating Better Websites
 description: Designing websites is so much more than throwing together some layout and fonts. The process dives much deeper than that. What web design has become is an iterative process of discovery and problem solving.
 index_image: /assets/img/posts/articles/web-design-workflow/web-design-workflow.jpg
+sitemap:
+  lastmod: 2016-05-12
+  priority: 0.7
+  changefreq: 'monthly'
+  exclude: 'no'
 
 ---
 

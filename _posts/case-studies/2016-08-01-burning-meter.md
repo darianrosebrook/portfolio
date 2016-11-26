@@ -10,4 +10,9 @@ index_image: /assets/img/posts/study/burning-meter/burning-meter.jpg
 company: Burning Meter
 logo: /assets/img/posts/study/burning-meter/burning-meter.jpg
 header:
+sitemap:
+  lastmod: 2016-08-01
+  priority: 0.7
+  changefreq: 'monthly'
+  exclude: 'no'
 ---

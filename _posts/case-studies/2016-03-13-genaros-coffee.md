@@ -12,5 +12,10 @@ company: Genaro's Coffee House
 logo: /assets/img/posts/study/genaros/genaros.gif
 header:
 callout:
+sitemap:
+  lastmod: 2016-03-13
+  priority: 0.7
+  changefreq: 'monthly'
+  exclude: 'no'
 
 ---

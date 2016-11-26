@@ -6,6 +6,11 @@ title: 4 Ways to Guide Your Brand Towards Success
 external: https://medium.com/@keySpark/4-ways-to-guide-your-brand-to-success-24adf2a3bac6#.w9nk7yubz
 description: Of course, for many people, running a business itself is a scary concept. But knowing that your brand message and purpose is unified, there is no reason you should worry about how your brand is received by your customers.
 index_image: /assets/img/posts/articles/brand-success/brand-success.png
+sitemap:
+  lastmod: 2016-10-24
+  priority: 0.7
+  changefreq: 'monthly'
+  exclude: 'no'
 ---
 Setting your brand in motion can be scary.
 

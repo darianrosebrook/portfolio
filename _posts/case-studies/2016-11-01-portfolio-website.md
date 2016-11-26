@@ -11,4 +11,9 @@ index_image: /assets/img/posts/study/portfolio-img/portfolio-v6.png
 company: KeySpark.io
 logo: /assets/img/posts/study/portfolio-img/portfolio-v6.png
 header:
+sitemap:
+  lastmod: 2016-11-01
+  priority: 0.7
+  changefreq: 'monthly'
+  exclude: 'no'
 ---

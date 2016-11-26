@@ -6,6 +6,11 @@ title: Welcome to the 1%
 external: https://medium.com/@keySpark/welcome-to-the-1-of-the-internet-a18c8a72f0bc#.t7a9szpfv
 description: The internet is a powerful tool for getting information. There are tens of millions of articles being consumed every day across the globe. Nearly 5 billion videos are watched on YouTube every day. It has never been easier than now to start creating things to put on the internet; yet, nearly 99% of the internet never do. Here’s where you come in.
 index_image: /assets/img/posts/articles/engagement/mountainwall.png
+sitemap:
+  lastmod: 2016-11-14
+  priority: 0.7
+  changefreq: 'monthly'
+  exclude: 'no'
 ---
 The internet is a powerful tool for getting information. There are tens of millions of articles being consumed every day across the globe. Nearly 5 billion videos are watched on YouTube every day. It has never been easier than now to start creating things to put on the internet; yet, nearly 99% of the internet never do. Here’s where you come in.
 The 1% rule of internet culture

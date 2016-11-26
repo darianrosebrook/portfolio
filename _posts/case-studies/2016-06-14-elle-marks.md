@@ -11,4 +11,9 @@ index_image: /assets/img/posts/study/elle-marks/elle-marks.gif
 company: KeySpark.io
 logo: /assets/img/posts/study/elle-marks/elle-marks.gif
 header:
+sitemap:
+  lastmod: 2016-06-14
+  priority: 0.7
+  changefreq: 'monthly'
+  exclude: 'no'
 ---

@@ -1,5 +1,10 @@
 ---
 layout: default
+sitemap:
+  lastmod: 2016-11-25
+  priority: 0.7
+  changefreq: 'weekly'
+  exclude: 'no'
 ---
 {% for post in site.categories.article limit:1 %}
 <header id="hero" class="container hero featured-{{post.type}}">
@@ -14,7 +19,7 @@ layout: default
     {% endfor %}
   </div>
 </header>
-<section id="info" class="descriptions container">
+<section id="info" class="descriptions container article-descriptions">
   <div class="blurb-container module publications">
     <div>
       <h2>Research, Thoughts, State of the Union of the creative work that I do.</h2>

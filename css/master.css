@@ -815,18 +815,31 @@ form .container {
     .index-header h2 ~ h2 {
       margin-bottom: 4rem; }
 
-.hero.featured-branding:after {
-  background: url("../assets/img/posts/study/articles/keyspark/ksseattle.jpg") no-repeat center center;
-  background-size: cover; }
-.hero.featured-web:after {
-  background: url("../assets/img/posts/study/keyspark/featured-mobile-keyspark.jpg") no-repeat center center;
-  background-size: cover; }
-.hero.featured-external:after {
-  background: url("../assets/img/posts/articles/engagement/mountainwall.png") no-repeat center center;
-  background-size: cover; }
-.hero.process:after {
-  background: url("../assets/img/process.gif") no-repeat center center;
-  background-size: cover; }
+.hero {
+  background-size: cover;
+  margin-bottom: 80vh; }
+  .hero .info h2 {
+    color: #261924;
+    font-weight: 400; }
+  .hero:after {
+    display: block;
+    height: 50vh;
+    width: 100%;
+    content: " "; }
+  .hero.featured-branding:after {
+    background: url("../assets/img/posts/study/articles/keyspark/ksseattle.jpg") no-repeat center center;
+    background-size: cover; }
+  .hero.featured-web:after {
+    background: url("../assets/img/posts/study/keyspark/featured-mobile-keyspark.jpg") no-repeat center center;
+    background-size: cover; }
+  .hero.featured-external:after {
+    background: url("../assets/img/posts/articles/engagement/mountainwall.png") no-repeat center center;
+    background-size: cover; }
+  .hero.process {
+    margin-bottom: 0; }
+    .hero.process:after {
+      background: url("../assets/img/process.gif") no-repeat center center;
+      background-size: cover; }
 
 @media only screen and (min-width: 800px) {
   .index-header {
@@ -841,19 +854,30 @@ form .container {
     .index-header .beta {
       width: 50vw; }
 
-  .hero.featured-branding {
-    background: no-repeat right center;
-    background-image: linear-gradient(to left, rgba(230, 230, 230, 0) 10%, #e6e6e6), url("../assets/img/posts/study/keyspark/ksseattle.jpg");
-    background-size: cover; }
-  .hero.featured-external {
-    background: no-repeat right center;
-    background-image: linear-gradient(to left, rgba(230, 230, 230, 0.7) 10%, #e6e6e6), url("../assets/img/posts/articles/engagement/mountainwall.png");
-    background-size: cover; }
-  .hero.process {
-    height: 80vh;
-    background: no-repeat center center;
-    background-image: url("../assets/img/process.gif");
-    background-size: cover; } }
+  .hero {
+    height: calc(65vw / 1.77);
+    margin-bottom: 0; }
+    .hero .info {
+      width: 30%; }
+    .hero::after {
+      display: none; }
+    .hero.featured-branding {
+      background: no-repeat right center;
+      background-image: linear-gradient(to left, rgba(230, 230, 230, 0) 10%, #e6e6e6), url("../assets/img/posts/study/keyspark/ksseattle.jpg");
+      background-size: cover; }
+    .hero.featured-external {
+      background: no-repeat right center;
+      background-image: linear-gradient(to left, rgba(230, 230, 230, 0.7) 10%, #e6e6e6), url("../assets/img/posts/articles/engagement/mountainwall.png");
+      background-size: cover; }
+    .hero.process {
+      height: 80vh;
+      margin-bottom: 80vh;
+      background: no-repeat center center;
+      background-image: url("../assets/img/process.gif");
+      background-size: cover; }
+    .hero.featured-keyspark {
+      background: url(../assets/img/posts/study/keyspark/featured-desktop-keyspark.jpg) no-repeat right center;
+      background-size: cover; } }
 .sub-nav {
   background-color: #261924;
   text-align: center; }
@@ -1051,9 +1075,9 @@ form .container {
   transform: translateX(-50%);
   left: 50%;
   line-height: 1.8; }
-
-.publications div img {
-  filter: drop-shadow(1px 3px 10px #333); }
+.container.article-descriptions {
+  background-color: #261924;
+  color: #f2f2f2; }
 
 .list-item {
   animation: slideIn 0.4s backwards; }
@@ -1080,31 +1104,5 @@ form .container {
         .publications div ~ div img {
           filter: grayscale(1);
           width: 100%; } }
-.hero {
-  background-size: cover;
-  margin-bottom: 80vh; }
-  .hero:after {
-    display: block;
-    height: 50vh;
-    width: 100%;
-    content: " "; }
-  .hero.featured-keyspark:after {
-    background: url(../assets/img/posts/study/keyspark/featured-mobile-keyspark.jpg) no-repeat center center;
-    background-size: cover; }
-  .hero .info h2 {
-    color: #261924;
-    font-weight: 400; }
-
-@media only screen and (min-width: 800px) {
-  .hero {
-    height: calc(65vw / 1.77);
-    margin-bottom: 0; }
-    .hero.featured-keyspark {
-      background: url(../assets/img/posts/study/keyspark/featured-desktop-keyspark.jpg) no-repeat right center;
-      background-size: cover; }
-    .hero .info {
-      width: 30%; }
-    .hero::after {
-      display: none; } }
 
 /*# sourceMappingURL=master.css.map */

@@ -12,4 +12,9 @@ company: KeySpark.io
 logo: /assets/img/posts/study/keyspark/logo-red-dark.svg
 header:
 callout:
+sitemap:
+  lastmod: 2016-06-01
+  priority: 0.7
+  changefreq: 'monthly'
+  exclude: 'no'
 ---
