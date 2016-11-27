@@ -88,4 +88,4 @@ So that means unless you're a designer looking up another process to glean from,
 (p.s. if you're a designer or developer as well, I'd love to hear from you too. Shoot me a message and I'll read it too.)
 
 
-<div class="stop-markdown from indenting buttons"><button data-href="#form" type="button" name="button" class="contactBtn primary btn">Hire Me</button></div>
+<div class="stop-markdown from indenting buttons"><button data-href="#form" type="button" name="button" class="contactBtn button">Hire Me</button></div>
