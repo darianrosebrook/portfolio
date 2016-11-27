@@ -822,7 +822,7 @@ form .container {
     font-weight: 400; }
   .hero:after {
     display: block;
-    height: 50vh;
+    height: calc(50vw * 1.77);
     width: 100%;
     content: " "; }
   .hero.featured-darian-brand {
