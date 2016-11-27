@@ -32,4 +32,4 @@ exclude:
   - Gemfile
   - Gemfile.lock
 
-permalink: article/:title
+permalink: archive/:title

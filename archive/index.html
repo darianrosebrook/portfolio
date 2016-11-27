@@ -1,0 +1,49 @@
+---
+layout: default
+title: The Archive | Darian Rosebrook
+description: A collection of curated case studies and Articles by Darian Rosebrook
+img:
+sitemap:
+  lastmod: 2016-11-25
+  priority: 0.7
+  changefreq: 'weekly'
+  exclude: 'no'
+---
+<section id="past-work" class="container">
+  <h1>Archive</h1>
+  <div id="hero" class="row">
+    <h2>Previous Work:</h2>
+  </div>
+
+{% for post in site.categories.case-study limit: 12 %}
+{% capture thecycle %}{% cycle '1', '2', '3' %}{% endcapture %}
+{% if thecycle == '1' %}<div class="row">{% endif %}
+    <article class="work module">
+      {% if post.type == 'Branding' %}<h4 class="work-branding">{% elsif post.type == 'Web Design' %}<h4 class="work-web">{% elsif post.type == 'Concept' %}<h4 class="work-concept">{% else %}<h4>{% endif %}{{post.type}}</h4>
+      <a href="{{site.baseurl}}{{post.url}}"><img src="{{post.index_image}}" alt="{{post.title | truncate: 120}}" /></a>
+      <div class="data">
+        <h5><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h5>
+        <small><a href="{{site.baseurl}}archive/articles">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.topic}}</em></a></small>
+        <p class="meta_description">&ldquo;{{post.description | truncate: 170}}&rdquo;</p>
+      </div>
+    </article>
+  {% if thecycle == '3' or forloop.last %}</div>{% endif %}
+  {% endfor %}
+</section>
+<section id="articles" class="container">
+  <div class="row">
+    <h2>Writing</h2>
+  </div>
+
+{% for post in site.categories.article limit: 12%}
+{% capture article %}{% cycle '1', '2', '3' %}{% endcapture %}
+{% if article == '1' %}<div class="row">{% endif %}
+  <article class="{{post.class}} article module">
+    <a href="{% if post.external %}{{post.external}}"{% else %}{{site.baseurl}}{{post.url}}"{% endif%}><img src="{{post.index_image}}" alt="{{post.title}}" /></a>
+    <h5><a href="{% if post.external %}{{post.external}}"{% else %}{{site.baseurl}}{{post.url}}"{% endif%}>{{post.title}}</a></h5>
+    <small><a href="{{site.baseurl}}archive/articles">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.topic}}</em></a></small>
+    <p class="meta_description">&ldquo;{{post.description | truncate: 170}}&rdquo;</p>
+  </article>
+  {% if article == '3' or forloop.last %}</div>{% endif %}
+  {% endfor %}
+</section>
