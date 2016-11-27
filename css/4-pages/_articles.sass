@@ -26,6 +26,8 @@
   left: 50%
   text-align: center
   margin-bottom: 1em
+  & + *
+    margin-top: 80vh
 
   h2
     position: absolute
@@ -40,34 +42,42 @@
 
     &::after
       content: close-quote
-
+.share
+  .button
+    display: block
+    transform: none
+    left: auto
+  .button ~ .button,a.button ~ a.button
+    display: block
+    margin-top: 1.2rem
+    margin-left: 0
 
   & + *
     margin-top: 4em
 header#goals
-  background: linear-gradient(to left, rgba(230, 230, 230, .8) 10%, rgba(230, 230, 230, .8)), url('../assets/torch.jpg') no-repeat center
+  background: linear-gradient(to left, rgba(230, 230, 230, .8) 10%, rgba(230, 230, 230, .8)), url('../assets/img/posts/articles/update-on-goals/update-on-goals.jpg') no-repeat center
   background-size: cover
 .goals
   .callout
-    background:  linear-gradient(to left, rgba(230, 230, 230, .8) 10%, rgba(230, 230, 230, .8)), url('../assets/torch.jpg') no-repeat center
+    background:  linear-gradient(to left, rgba(230, 230, 230, .8) 10%, rgba(230, 230, 230, .8)), url('../assets/img/posts/articles/update-on-goals/update-on-goals.jpg') no-repeat center
     background-size: cover
 header#webdes
-  background: linear-gradient(to left, rgba(230, 230, 230, .8) 10%, rgba(230, 230, 230, .8)), url('../assets/office.jpg') no-repeat bottom
+  background: linear-gradient(to left, rgba(230, 230, 230, .8) 10%, rgba(230, 230, 230, .8)), url('../assets/img/posts/articles/web-design-workflow/web-design-workflow.jpg') no-repeat bottom
   background-size: cover
 .webdes
   .callout
-    background:  linear-gradient(to left, rgba(230, 230, 230, .8) 10%, rgba(230, 230, 230, .8)), url('../assets/coffee.jpg') no-repeat bottom
+    background:  linear-gradient(to left, rgba(230, 230, 230, .8) 10%, rgba(230, 230, 230, .8)), url('../assets/img/posts/articles/web-design-workflow/web-design-workflow.jpg') no-repeat bottom
     background-size: cover
 header#expectational-debt
-  background: linear-gradient(to left, rgba(230, 230, 230, .8) 10%, rgba(230, 230, 230, .8)), url('../assets/expectational-debt.jpg') no-repeat bottom
+  background: linear-gradient(to left, rgba(230, 230, 230, .8) 10%, rgba(230, 230, 230, .8)), url('../assets/img/posts/articles/expectational-debt/expectational-debt.jpg') no-repeat bottom
   background-size: cover
 .expectational-debt
   .callout
     position: absolute
-    background:  linear-gradient(to left, rgba(230, 230, 230, .8) 10%, rgba(230, 230, 230, .8)), url('../assets/expectational-debt.jpg') no-repeat bottom
+    background:  linear-gradient(to left, rgba(230, 230, 230, .8) 10%, rgba(230, 230, 230, .8)), url('../assets/img/posts/articles/expectational-debt/expectational-debt.jpg') no-repeat bottom
     background-size: cover
-header#darian
-  background: linear-gradient(to left, rgba(230, 230, 230, .8) 10%, rgba(230, 230, 230, .8)), url('../assets/notebook.jpg') no-repeat center
+header#brand
+  background: linear-gradient(to left, rgba(230, 230, 230, .8) 10%, rgba(230, 230, 230, .8)), url('../assets/img/posts/articles/branding-and-logo-design/branding-and-logo-design.jpg') no-repeat center
   background-size: cover
 header#devtips
   background: linear-gradient(to left, rgba(230, 230, 230, .8) 10%, rgba(230, 230, 230, .8)), url('../assets/img/posts/articles/community/community.png') no-repeat center
@@ -89,8 +99,15 @@ header#devtips
       width: 60%
     .callout
       height: 25vh
-      & + h2
-        margin-top: 38vh
+      & + *
+        margin-top: 30vh
+    img.float
+      float: left
+      width: 60%
+      transform: translateX(-40%)
+      margin-right: -20%
+      left: auto
+
   .publications
     justify-content: space-between
     div

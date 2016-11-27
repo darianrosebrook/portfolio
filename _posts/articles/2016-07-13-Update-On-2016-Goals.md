@@ -6,6 +6,7 @@ type: life
 title: Burn the Boats&#58; An Update On My Current 2016 Goals
 description: What I love about phrases like these is that though they are removed from any part of what we do now in our time, their message is reused and repurposed into something that fits our current situations.
 index_image: /assets/img/posts/articles/update-on-goals/update-on-goals.jpg
+header: goals
 sitemap:
   lastmod: 2016-07-13
   priority: 0.7
@@ -49,7 +50,7 @@ I am now confident in my ability for creating websites and designs to take on mo
 At the beginning of 2016, I had sat down and had a conversation with a few people and came up with a circle of friends who decided to make goals for the year. I hadn't done this in many years myself but with each person came a challenging task for each.
 I thought mine looked pretty reasonable.
 
-<!-- <img src="../assets/2016-objectives.jpg " alt="my 2016 goals" class="float cf" /> -->
+<img src="../assets/img/posts/articles/update-on-goals/2016-objectives.jpg " alt="my 2016 goals" class="float cf" />
 I want to help other people out and their businesses by offering my services as a designer and developer to achieve their goals. I want to be able to teach what I know as efficiently and widespread as I know how, helping others who have similar interests do the same. I wanted to be able to provide for my family in a way that allows me to be around when they need me to be and watch their hearts grow. I've started burning my boat and am stepping onto shore of a grand possibility. People say that it isn't as glamourous as everything said. I disagree. This is what I love to do. I want to eventually turn this into a larger organization of designers and get them on board, but for now, my one man show is going to be enough.
 
 I started here with this goal of getting everything on this list done just before the year's end. I can say I'm about halfway there. I have half of the full stack completed for freeCodeCamp, started learning Ruby, I have gotten a job as a remote worker doing front end design and branding, as well as opened up for freelancing. I have half of my branding projects done as well as half of my portfolio site branded and finished. The only thing I need to work on is the projects, the freelance clients and putting some savings away to switch over to design full time.

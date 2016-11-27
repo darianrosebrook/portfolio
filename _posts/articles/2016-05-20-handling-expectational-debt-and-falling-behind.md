@@ -6,6 +6,7 @@ type: life
 title: Handling Expectational Debt And Falling Behind.
 description: Why are we all given the same 24 hours? A lot of people seem to get more done than I can, and yet no one has more time during the day than others. Even since I started working 6 years ago, I have not earned any extra time in my life. Why do I feel more exhausted than my earlier self?
 index_image: /assets/img/posts/articles/expectational-debt/expectational-debt.jpg
+header: expectational-debt
 sitemap:
   lastmod: 2016-05-20
   priority: 0.7
@@ -23,11 +24,6 @@ Time is a commodity. It is both finite and infinite. We only have 24 hours to us
 
 ## How I found myself falling behind
 <img src="https://cdn-images-1.medium.com/max/600/1*WjvFA3wtFd0FvpDoqFsyJg.jpeg" alt="The stagnant problem" class="float cf" />
-
-
-
-
-
 I carry a lot of responsibility. I am a father, I am a lover, and I am the main provider of my household. My time is spent trying to improve the quality of my family’s life and our relationships. And by working on that, my time has been spread pretty thin.
 
 I love my family more than anything in the world. They are a big factor in why I do what I do. So it is no surprise that I am willing to do what I can for us to make a living. I had to say no to a lot of things over the past year. That meant putting my skateboard on the shelf, my music on hold, and I put drawing on the back–burner. I spent my sole focus on working at the bank for 40 hours a week and in my business another 15. But with all of that effort were still falling behind financially. So I decided it was time to pursue a different path.
@@ -44,12 +40,7 @@ Every day. (except Sunday and Tuesday: that is my family time)
 
 It seems manageable. It looks like all of the steps are there. So why is it I feel exhausted? Why is it I keep falling behind?
 
-<div class="callout"> <h2> You have to put the big rocks in first, say no to some fine sand.</h2></div>
-
-<!-- <img src="{{site.baseurl}}/assets/rocks-hands.jpg" alt="The big rock goes first"  /> -->
-
-
-
+<div class="callout"> <h2><a href="https://twitter.com/intent/tweet?text=%E2%80%9CYou%20have%20to%20put%20the%20big%20rocks%20in%20first,%20say%20no%20to%20some%20fine%20sand.%E2%80%9D%0A%E2%80%94%20%40d_evyn&amp;url={{ site.url }}{{ page.url }}&amp;related=d_evyn" rel="nofollow" target="_blank" title="Share on Twitter">  You have to put the big rocks in first, say no to some fine sand.</a><i class="fa fa-twitter"></i></h2></div>
 
 
 That schedule is manageable if I don’t do anything outside of that list. But somewhere in there is my family’s time, driving to and from work, building my personal brand, keeping my portfolio projects going, keeping up on my public and personal commitments, eating — It is an exhaustive list that keeps me exhausted too. The spare change (or the fine sand) has to be put towards the things that matter.

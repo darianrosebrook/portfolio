@@ -740,8 +740,7 @@ form .container {
 @media only screen and (min-width: 800px) {
   #contact {
     position: relative;
-    transform: translate(-50%, 0);
-    left: 50%;
+    margin: 0 auto;
     width: 66%; } }
 .list {
   position: relative;
@@ -833,9 +832,11 @@ form .container {
   .hero.featured-web:after {
     background: url("../assets/img/posts/study/portfolio-img/brand-mobile-darian.png") no-repeat center center;
     background-size: cover; }
-  .hero.featured-external:after {
-    background: url("../assets/img/posts/articles/engagement/mountainwall.png") no-repeat center center;
-    background-size: cover; }
+  .hero.featured-external {
+    margin-bottom: calc(50vw * 1.77); }
+    .hero.featured-external:after {
+      background: url("../assets/img/posts/articles/engagement/mountainwall.png") no-repeat center center;
+      background-size: contain; }
   .hero.process:after {
     background: url("../assets/img/process.gif") no-repeat center center;
     background-size: cover; }
@@ -868,6 +869,7 @@ form .container {
       background-image: linear-gradient(to left, rgba(230, 230, 230, 0) 10%, #e6e6e6), url("../assets/img/posts/study/portfolio-img/brand-desktop-darian.png");
       background-size: cover; }
     .hero.featured-external {
+      margin-bottom: 0;
       background: no-repeat right center;
       background-image: linear-gradient(to left, rgba(230, 230, 230, 0.7) 10%, #e6e6e6), url("../assets/img/posts/articles/engagement/mountainwall.png");
       background-size: cover; }
@@ -1101,6 +1103,8 @@ form .container {
   left: 50%;
   text-align: center;
   margin-bottom: 1em; }
+  .callout + * {
+    margin-top: 80vh; }
   .callout h2 {
     position: absolute;
     transform: translate(-50%, -50%);
@@ -1113,36 +1117,45 @@ form .container {
       content: open-quote; }
     .callout h2::after {
       content: close-quote; }
-  .callout + * {
-    margin-top: 4em; }
+
+.share .button {
+  display: block;
+  transform: none;
+  left: auto; }
+.share .button ~ .button, .share a.button ~ a.button {
+  display: block;
+  margin-top: 1.2rem;
+  margin-left: 0; }
+.share + * {
+  margin-top: 4em; }
 
 header#goals {
-  background: linear-gradient(to left, rgba(230, 230, 230, 0.8) 10%, rgba(230, 230, 230, 0.8)), url("../assets/torch.jpg") no-repeat center;
+  background: linear-gradient(to left, rgba(230, 230, 230, 0.8) 10%, rgba(230, 230, 230, 0.8)), url("../assets/img/posts/articles/update-on-goals/update-on-goals.jpg") no-repeat center;
   background-size: cover; }
 
 .goals .callout {
-  background: linear-gradient(to left, rgba(230, 230, 230, 0.8) 10%, rgba(230, 230, 230, 0.8)), url("../assets/torch.jpg") no-repeat center;
+  background: linear-gradient(to left, rgba(230, 230, 230, 0.8) 10%, rgba(230, 230, 230, 0.8)), url("../assets/img/posts/articles/update-on-goals/update-on-goals.jpg") no-repeat center;
   background-size: cover; }
 
 header#webdes {
-  background: linear-gradient(to left, rgba(230, 230, 230, 0.8) 10%, rgba(230, 230, 230, 0.8)), url("../assets/office.jpg") no-repeat bottom;
+  background: linear-gradient(to left, rgba(230, 230, 230, 0.8) 10%, rgba(230, 230, 230, 0.8)), url("../assets/img/posts/articles/web-design-workflow/web-design-workflow.jpg") no-repeat bottom;
   background-size: cover; }
 
 .webdes .callout {
-  background: linear-gradient(to left, rgba(230, 230, 230, 0.8) 10%, rgba(230, 230, 230, 0.8)), url("../assets/coffee.jpg") no-repeat bottom;
+  background: linear-gradient(to left, rgba(230, 230, 230, 0.8) 10%, rgba(230, 230, 230, 0.8)), url("../assets/img/posts/articles/web-design-workflow/web-design-workflow.jpg") no-repeat bottom;
   background-size: cover; }
 
 header#expectational-debt {
-  background: linear-gradient(to left, rgba(230, 230, 230, 0.8) 10%, rgba(230, 230, 230, 0.8)), url("../assets/expectational-debt.jpg") no-repeat bottom;
+  background: linear-gradient(to left, rgba(230, 230, 230, 0.8) 10%, rgba(230, 230, 230, 0.8)), url("../assets/img/posts/articles/expectational-debt/expectational-debt.jpg") no-repeat bottom;
   background-size: cover; }
 
 .expectational-debt .callout {
   position: absolute;
-  background: linear-gradient(to left, rgba(230, 230, 230, 0.8) 10%, rgba(230, 230, 230, 0.8)), url("../assets/expectational-debt.jpg") no-repeat bottom;
+  background: linear-gradient(to left, rgba(230, 230, 230, 0.8) 10%, rgba(230, 230, 230, 0.8)), url("../assets/img/posts/articles/expectational-debt/expectational-debt.jpg") no-repeat bottom;
   background-size: cover; }
 
-header#darian {
-  background: linear-gradient(to left, rgba(230, 230, 230, 0.8) 10%, rgba(230, 230, 230, 0.8)), url("../assets/notebook.jpg") no-repeat center;
+header#brand {
+  background: linear-gradient(to left, rgba(230, 230, 230, 0.8) 10%, rgba(230, 230, 230, 0.8)), url("../assets/img/posts/articles/branding-and-logo-design/branding-and-logo-design.jpg") no-repeat center;
   background-size: cover; }
 
 header#devtips {
@@ -1166,8 +1179,14 @@ header#devtips {
     width: 60%; }
   .container .callout {
     height: 25vh; }
-    .container .callout + h2 {
-      margin-top: 38vh; }
+    .container .callout + * {
+      margin-top: 30vh; }
+  .container img.float {
+    float: left;
+    width: 60%;
+    transform: translateX(-40%);
+    margin-right: -20%;
+    left: auto; }
 
   .publications {
     justify-content: space-between; }

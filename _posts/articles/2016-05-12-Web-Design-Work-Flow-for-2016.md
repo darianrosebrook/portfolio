@@ -6,6 +6,7 @@ type: web
 title: A Work Flow Process for Creating Better Websites
 description: Designing websites is so much more than throwing together some layout and fonts. The process dives much deeper than that. What web design has become is an iterative process of discovery and problem solving.
 index_image: /assets/img/posts/articles/web-design-workflow/web-design-workflow.jpg
+header: webdes
 sitemap:
   lastmod: 2016-05-12
   priority: 0.7
@@ -15,7 +16,7 @@ sitemap:
 ---
 
 
-## Web design is so much more than layout and fonts
+<div class="callout"> <h2><a href="https://twitter.com/intent/tweet?text=%E2%80%9CDesigning%20websites%20is%20so%20much%20more%20than%20throwing%20together%20some%20layout%20and%20fonts%E2%80%9D%0A%E2%80%94%20%40d_evyn&amp;url={{ site.url }}{{ page.url }}&amp;related=d_evyn" rel="nofollow" target="_blank" title="Share on Twitter">Designing websites is so much more than throwing together some layout and fonts</a><i class="fa fa-twitter"></i></h2></div>
 
 Designing websites is so much more than throwing together some layout and fonts. The process dives much deeper than that. What web design has become is an iterative process of discovery and problem solving.
 
