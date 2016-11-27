@@ -817,7 +817,7 @@ form .container {
 
 .hero {
   background-size: cover;
-  margin-bottom: 80vh; }
+  margin-bottom: calc(80vw * 1.77); }
   .hero .info h2 {
     color: #261924;
     font-weight: 400; }
@@ -827,7 +827,7 @@ form .container {
     width: 100%;
     content: " "; }
   .hero.featured-darian-brand:after {
-    background: url("../assets/img/posts/study/articles/keyspark/ksseattle.jpg") no-repeat center center;
+    background: url("../assets/img/posts/study/portfolio-img/brand-mobile-darian.png") no-repeat center center;
     background-size: cover; }
   .hero.featured-web:after {
     background: url("../assets/img/posts/study/portfolio-img/brand-mobile-darian.png") no-repeat center center;
@@ -835,11 +835,9 @@ form .container {
   .hero.featured-external:after {
     background: url("../assets/img/posts/articles/engagement/mountainwall.png") no-repeat center center;
     background-size: cover; }
-  .hero.process {
-    margin-bottom: 0; }
-    .hero.process:after {
-      background: url("../assets/img/process.gif") no-repeat center center;
-      background-size: cover; }
+  .hero.process:after {
+    background: url("../assets/img/process.gif") no-repeat center center;
+    background-size: cover; }
   .hero.featured-darian:after {
     background: url("../assets/img/posts/study/portfolio-img/web-mobile-darian.jpg") no-repeat center center;
     background-size: cover; }
@@ -1108,7 +1106,8 @@ form .container {
     top: 50%;
     left: 50%;
     color: #e74b4c;
-    font-size: 1.2em; }
+    font-size: 1.2em;
+    font-weight: 400; }
     .callout h2::before {
       content: open-quote; }
     .callout h2::after {
