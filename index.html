@@ -75,51 +75,6 @@ sitemap:
     </div>
   </article>
 </section>
-<section id="past-work" class="container">
-  <div class="row">
-    <h2>Previous Work:</h2>
-  </div>
-  <div class="row">
-    {% for post in site.categories.case-study limit: 6 %}
-    {% if forloop.index == 4 %}
-  </div>
-  <div class="row">
-    <article class="work module">
-      {% if post.type == 'Branding' %}<h4 class="work-branding">{% elsif post.type == 'Web Design' %}<h4 class="work-web">{% elsif post.type == 'Concept' %}<h4 class="work-concept">{% else %}<h4>{% endif %}{{post.type}}</h4>
-      <a href="{{site.baseurl}}{{post.url}}"><img src="{{post.index_image}}" alt="{{post.title | truncate: 120}}" /></a>
-      <div class="data">
-        <h5><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h5>
-        <small><a href="{{site.baseurl}}archive/articles">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.topic}}</em></a></small>
-        <p class="meta_description">&ldquo;{{post.description | truncate: 170}}&rdquo;</p>
-      </div>
-    </article>
-    {% elsif forloop.index == 7 %}
-  </div>
-  <div class="row">
-    <article class="work module">
-      {% if post.type == 'Branding' %}<h4 class="work-branding">{% elsif post.type == 'Web Design' %}<h4 class="work-web">{% elsif post.type == 'Concept' %}<h4 class="work-concept">{% else %}<h4>{% endif %}{{post.type}}</h4>
-      <a href="{{site.baseurl}}{{post.url}}"><img src="{{post.index_image}}" alt="{{post.title | truncate: 120}}" /></a>
-      <div class="data">
-        <h5><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h5>
-        <small><a href="{{site.baseurl}}archive/articles">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.topic}}</em></a></small>
-        <p class="meta_description">&ldquo;{{post.description | truncate: 170}}&rdquo;</p>
-      </div>
-    </article>
-    {% else %}
-    <article class="work module">
-      {% if post.type == 'Branding' %}<h4 class="work-branding">{% elsif post.type == 'Web Design' %}<h4 class="work-web">{% elsif post.type == 'Concept' %}<h4 class="work-concept">{% else %}<h4>{% endif %}{{post.type}}</h4>
-      <a href="{{site.baseurl}}{{post.url}}"><img src="{{post.index_image}}" alt="{{post.title | truncate: 120}}" /></a>
-      <div class="data">
-        <h5><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h5>
-        <small><a href="{{site.baseurl}}archive/articles">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.topic}}</em></a></small>
-        <p class="meta_description">&ldquo;{{post.description | truncate: 170}}&rdquo;</p>
-      </div>
-    </article>
-    {% endif %}
-    {% endfor %}
-  </div>
-  <a href="{{site.baseurl}}archive/case-studies" class="button">View All Work</a>
-</section>
 {% include testimony.html %}
 <section id="articles" class="container">
   <div class="row">
