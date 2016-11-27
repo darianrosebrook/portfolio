@@ -816,7 +816,9 @@ form .container {
       margin-bottom: 4rem; }
 
 .hero {
-  background-size: cover; }
+  background-size: cover;
+  height: calc(100vw * 1.777);
+  margin-bottom: calc(30vw * 1.77); }
   .hero .info h2 {
     color: #261924;
     font-weight: 400; }
@@ -825,31 +827,21 @@ form .container {
     height: calc(50vw * 1.77);
     width: 100%;
     content: " "; }
-  .hero.featured-darian-brand {
-    margin-bottom: calc(50vw * 1.77); }
-    .hero.featured-darian-brand:after {
-      background: url("../assets/img/posts/study/portfolio-img/brand-mobile-darian.png") no-repeat center center;
-      background-size: cover; }
-  .hero.featured-web {
-    margin-bottom: calc(50vw * 1.77); }
-    .hero.featured-web:after {
-      background: url("../assets/img/posts/study/portfolio-img/brand-mobile-darian.png") no-repeat center center;
-      background-size: cover; }
-  .hero.featured-external {
-    margin-bottom: calc(50vw * 1.77); }
-    .hero.featured-external:after {
-      background: url("../assets/img/posts/articles/engagement/mountainwall.png") no-repeat center center;
-      background-size: cover; }
-  .hero.process {
-    margin-bottom: calc(50vw * 1.77); }
-    .hero.process:after {
-      background: url("../assets/img/process.gif") no-repeat center center;
-      background-size: cover; }
-  .hero.featured-darian {
-    margin-bottom: calc(50vw * 1.77); }
-    .hero.featured-darian:after {
-      background: url("../assets/img/posts/study/portfolio-img/web-mobile-darian.jpg") no-repeat center center;
-      background-size: cover; }
+  .hero.featured-darian-brand:after {
+    background: url("../assets/img/posts/study/portfolio-img/brand-mobile-darian.png") no-repeat center center;
+    background-size: cover; }
+  .hero.featured-web:after {
+    background: url("../assets/img/posts/study/portfolio-img/brand-mobile-darian.png") no-repeat center center;
+    background-size: cover; }
+  .hero.featured-external:after {
+    background: url("../assets/img/posts/articles/engagement/mountainwall.png") no-repeat center center;
+    background-size: cover; }
+  .hero.process:after {
+    background: url("../assets/img/process.gif") no-repeat center center;
+    background-size: cover; }
+  .hero.featured-darian:after {
+    background: url("../assets/img/posts/study/portfolio-img/web-mobile-darian.jpg") no-repeat center center;
+    background-size: cover; }
 
 @media only screen and (min-width: 800px) {
   .index-header {
