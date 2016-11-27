@@ -817,7 +817,7 @@ form .container {
 
 .hero {
   background-size: cover;
-  margin-bottom: calc(80vw * 1.77); }
+  margin-bottom: calc(50vw * 1.77); }
   .hero .info h2 {
     color: #261924;
     font-weight: 400; }
