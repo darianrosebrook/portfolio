@@ -1077,6 +1077,8 @@ form .container {
   justify-content: center;
   align-items: center;
   text-align: center; }
+  .article-header::after {
+    display: none; }
 
 .list-item {
   animation: slideIn 0.4s backwards; }
