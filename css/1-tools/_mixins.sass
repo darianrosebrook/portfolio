@@ -7,8 +7,6 @@
   @media only screen and (min-width: 800px)
     margin-left: if($first, 0, $gap)
     margin-right: if($last, 0, $gap)
-  &.fluid
-    width: percentage($col/$sum)
 @mixin center($x: true, $y: true)
   position: if($y, absolute, relative)
   transform: translate(if($x, -50%, 0), if($y, -50%, 0) )

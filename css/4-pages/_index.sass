@@ -10,7 +10,6 @@
 .work
   padding-bottom: .5em
   transition: $transition
-  cursor: pointer
   img
     transition: $transition
     filter: grayscale(1)
@@ -22,6 +21,9 @@
     font-weight: bold
     display: block
     z-index: 2
+    &.work-featured
+      background-color: $highlight
+      color: $dark
     &.work-branding
       background-color: $main
       color: $light
@@ -142,7 +144,7 @@
     height: calc(30vw / 1.777)
   .testimony-container
     div
-      width: calc(33.33% - .5%)
+      width: 29.85%
       display: inline-block
       vertical-align: middle
   .person

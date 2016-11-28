@@ -2,6 +2,7 @@
 layout: case-study
 category:
   - case-study
+  - public
   - brand
 title: Genaro's Coffee Logo
 type: Concept

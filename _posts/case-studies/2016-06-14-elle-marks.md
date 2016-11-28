@@ -1,7 +1,8 @@
 ---
 layout: case-study
-categories:
+category:
   - case-study
+  - public
   - brand
 title: Elle Marks Photography Logo
 type: Branding

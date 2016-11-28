@@ -2,6 +2,7 @@
 layout: case-study
 category:
   - case-study
+  - public
   - web
 title: Travelight
 type: Concept

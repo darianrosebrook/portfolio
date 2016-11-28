@@ -2,6 +2,7 @@
 layout: case-study
 category:
   - case-study
+  - public
   - brand
 title: keySpark Branding Update
 type: Branding

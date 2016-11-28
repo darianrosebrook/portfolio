@@ -87,5 +87,6 @@ It's like getting a new haircut and storing pictures of the last one. We'll blas
 So that means unless you're a designer looking up another process to glean from, you and I really need to connect and talk about doing some great work together. A brand's project to me is an investment in that brand's future. I hope you treat that the same way.
 (p.s. if you're a designer or developer as well, I'd love to hear from you too. Shoot me a message and I'll read it too.)
 
+I go over the whole [Design Process]({{site.baseurl}}/process) again in a broader scope here
 
 <div class="stop-markdown from indenting buttons"><button data-href="#form" type="button" name="button" class="contactBtn button">Hire Me</button></div>

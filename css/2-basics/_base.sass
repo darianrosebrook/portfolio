@@ -290,6 +290,7 @@ footer
     position: inherit
     display: inline-block
     font-size: 1.8rem
+    @include col(1, 1)
     img
       @include center(false, false)
       left: auto
@@ -299,9 +300,6 @@ footer
         width: auto
 
 
-@media only screen and (min-width: 200px)
-  .container .col
-    @include col(1, 1)
 @media only screen and (min-width: 600px)
   .container .col
     @include col(1, 2)

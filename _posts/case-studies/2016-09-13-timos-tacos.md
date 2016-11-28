@@ -1,7 +1,8 @@
 ---
 layout: case-study
-categories:
+category:
   - case-study
+  - public
   - Branding
 title: Timo's Tacos Concept
 type: Concept

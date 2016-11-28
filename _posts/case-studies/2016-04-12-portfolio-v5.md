@@ -2,6 +2,7 @@
 layout: case-study
 category:
   - case-study
+  - public
   - web
 title: Darian Rosebrook Portfolio V5
 type: Web Design

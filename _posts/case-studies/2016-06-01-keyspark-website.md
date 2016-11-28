@@ -1,7 +1,8 @@
 ---
 layout: case-study
-categories:
+category:
   - case-study
+  - public
   - web
 title: KeySpark Website Redesign
 type: Web Design

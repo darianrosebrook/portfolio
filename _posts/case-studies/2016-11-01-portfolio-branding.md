@@ -1,7 +1,8 @@
 ---
 layout: case-study
-categories:
+category:
   - case-study
+  - public
   - brand
 title: Darian Rosebrook Portfolio Branding
 type: Branding

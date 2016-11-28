@@ -1,22 +1,20 @@
 ---
 layout: default
-title: Archive of Past Case Studies
-sitemap:
-  lastmod: 2016-11-25
-  priority: 0.7
-  changefreq: 'weekly'
-  exclude: 'no'
 ---
+<header class="container ">
+  <h1>All projects: Including Outside Projects</h1>
+</header>
 <section id="past-work" class="container">
+  <h1>Archive</h1>
   <div id="hero" class="row">
     <h2>Previous Work:</h2>
+    <p>This includes projects that I've done with other teams, that may not necessarily have a place to be publicly displayed with the rest of my work</p>
   </div>
-
-{% for post in site.categories.public %}
+{% for post in site.categories.case-study%}
 {% capture thecycle %}{% cycle '1', '2', '3' %}{% endcapture %}
 {% if thecycle == '1' %}<div class="row">{% endif %}
     <article class="work module">
-      {% if post.type == 'Branding' %}<h4 class="work-branding">{% elsif post.type == 'Web Design' %}<h4 class="work-web">{% elsif post.type == 'Concept' %}<h4 class="work-concept">{% else %}<h4>{% endif %}{{post.type}}</h4>
+      {% if post.type == 'Hidden' %}<h4 class="work-featured">Hidden</h4>{% else %}{% if post.type == 'Branding' %}<h4 class="work-branding">{% elsif post.type == 'Web Design' %}<h4 class="work-web">{% elsif post.type == 'Concept' %}<h4 class="work-concept">{% else %}<h4>{% endif %}{{post.type}}</h4>{% endif %}
       <a href="{{site.baseurl}}{{post.url}}"><img src="{{post.index_image}}" alt="{{post.title | truncate: 120}}" /></a>
       <div class="data">
         <h5><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h5>
@@ -25,5 +23,5 @@ sitemap:
       </div>
     </article>
   {% if thecycle == '3' or forloop.last %}</div>{% endif %}
-  {% endfor %}]
+  {% endfor %}
 </section>

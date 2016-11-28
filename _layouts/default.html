@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" type="text/css" />
     <link rel="author" href="https://plus.google.com/106679625106063278529" /><link rel="author" href="https://plus.google.com/106679625106063278529" />
     <meta name="theme-color" content="#261924" />
-    {% if page.url contains 'soon' %}
+    {% if page.url contains 'hidden' %}
     <meta name="robots" content="noindex, follow" />
     {% else %}
     <meta name="robots" content="index, follow" />
@@ -69,14 +69,6 @@
     <input type="checkbox" class="hidden" id="nav-toggler" name="nav-toggler" value="true" />
     <div class="page-wrap">
       <label for="nav-toggler" class="toggle"><img class="closed" src="{{site.baseurl}}/assets/img/menu.svg" alt="Darian's menu icon" /><img src="{{site.baseurl}}/assets/img/close.svg" class="open" alt="Darian's close icon" /></label>
-      <!-- <nav class="container nav">
-        <div class="row">
-          <div class="logo"><img src="{{site.baseurl}}/assets/img/logo.svg" alt="Darian's logo" /></div>
-          <a href="{{site.baseurl}}/branding">Branding</a>
-          <a href="{{stie.baseurl}}/web">Web Design</a>
-          <a href="{{site.baseurl}}/archive/articles">Articles</a>
-        </div>
-      </nav> -->
       <div class="main-content">
         {{content}}
         {% include contact.html %}

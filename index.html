@@ -80,7 +80,7 @@ sitemap:
   <div id="hero" class="row">
     <h2>Previous Work:</h2>
   </div>
-{% for post in site.categories.case-study limit: 6 %}
+{% for post in site.categories.public limit: 6 %}
 {% capture thecycle %}{% cycle '1', '2', '3' %}{% endcapture %}
 {% if thecycle == '1' %}<div class="row">{% endif %}
     <article class="work module">
