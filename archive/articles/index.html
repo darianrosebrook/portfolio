@@ -14,7 +14,7 @@ sitemap:
     <h2>Featured Article</h2>
       <article class="featured">
         <h3><a href="{% if post.external %}{{post.external}}{% else %}{{site.baseurl}}{{post.url}}{% endif %}">{{post.title}}</a></h3>
-        <small><a href="{{site.baseurl}}archive/articles">{{post.date | date_to_long_string}} &#124; <em class="type-{{post.type}}" >{{post.topic}}</em></a></small>
+        <small><a href="{{site.baseurl}}/archive/articles">{{post.date | date_to_long_string}} &#124; <em class="type-{{post.type}}" >{{post.topic}}</em></a></small>
         <p class="meta_description">&ldquo;{{post.description | truncate: 300}}&rdquo;</p>
       </article>
     {% endfor %}
@@ -53,7 +53,7 @@ sitemap:
       <div class="artcont">
         <h5><a href="{% if post.external %}{{post.external}}{% else %}{{site.baseurl}}{{post.url}}{% endif %}">{{post.title}}</a></h5>
         <p>{% assign words = post.content | number_of_words %}{% if words < 360 %}1 min read{% else %}{{ words | divided_by:180 }} min read{% endif %}</p>
-        <small><a href="{{site.baseurl}}archive/articles">{{post.date | date_to_long_string}} &#124; <em class="type-{{post.type}}" >{{post.topic}}</em></a></small>
+        <small><a href="{{site.baseurl}}/archive/articles">{{post.date | date_to_long_string}} &#124; <em class="type-{{post.type}}" >{{post.topic}}</em></a></small>
         <p class="meta_description">&ldquo;{{post.description | truncate: 280}}&rdquo;</p>
       </div>
     </article>
