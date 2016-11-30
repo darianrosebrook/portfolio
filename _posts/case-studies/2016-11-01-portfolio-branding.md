@@ -19,7 +19,9 @@ sitemap:
   exclude: 'no'
 ---
 ### Introduction
+
 #### A portfolio website to showcase my featured articles and case studies
+
 It has been exactly a year since I started my journey as a Web Designer and Brand Identity Designer. So it's only fitting that I settle on a final brand style for my personal brand. I have iterated and iterated until I had a style that I wanted. When I recently reviewed my personal brand in terms of professionalism, I figured since my skillset has increased that it was time to revisit and rebrand.
 
 This case study is the first half to the [rebranding of my personal portfolio site. ]({{site.baseurl}}/archive/portfolio-website) All of the site is personally designed, strategized, and coded by myself, so it really is with pride that I present my own brand.
