@@ -1,0 +1,16 @@
+@mixin row()
+  font-size: 0
+  position: relative
+@mixin col ($col, $sum, $gap: 1em, $align: top, $first: false, $last: false)
+  width: percentage($col/$sum)
+  vertical-align: $align
+  @media only screen and (min-width: 800px)
+    margin-left: if($first, 0, $gap)
+    margin-right: if($last, 0, $gap)
+@mixin center($x: true, $y: true)
+  position: if($y, absolute, relative)
+  transform: translate(if($x, -50%, 0), if($y, -50%, 0) )
+  @if $x
+    left: 50%
+  @if $y
+    top: 50%

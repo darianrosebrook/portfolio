@@ -1,0 +1,57 @@
+---
+layout: default
+title: Curated Web Design Case Studies | Darian Rosebrook
+description: A collection of curated case studies for Darian Rosebrook's web design projects
+img:
+sitemap:
+  lastmod: 2016-11-25
+  priority: 0.7
+  changefreq: 'weekly'
+  exclude: 'no'
+---
+
+{% for post in site.categories.web limit:1 %}
+<header id="hero" class="container hero featured-{{post.class}}">
+  <h1>Web Design</h1>
+  <div class="row info featured">
+    <h2>Featured Case Study</h2>
+      {% if post.type == 'Web Design' %}
+      <article class="feature-{{forloop.index}}">
+        <h3><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h3>
+        <p>{{post.description}}</p>
+        <a href="{{site.baseurl}}{{post.url}}" class="">View Project</a>
+      </article>
+      {% endif %}
+    {% endfor %}
+  </div>
+</header>
+<section id="info" class="descriptions container">
+  <div class="blurb-container module">
+    <img src="/assets/img/icon-web.svg" alt="Web design for scalability" />
+    <div>
+      <h2>Responsive Web Design that fits your brand</h2>
+      <p>There's a paradigm shift in the way that people access their favorite sites. As all traffic goes towards the tiny computers we carry in our pocket every day, your site needs to be natively <em>mobile first</em>.</p>
+      <p>We don't sell the same site twice. We'll customize the experience your audience receives by working with your content, designing from the ground up. Your website should be as unique as you are.</p>
+      <h4><a href="{{site.baseurl}}/archive/Web-Design-Work-Flow-for-2016">Check out the website design process</a></h4>
+    </div>
+  </div>
+</section>
+<section id="list" class="container">
+  <h2>Web Design Projects</h2>
+  {% for post in site.categories.web %}
+  {% capture thecycle %}{% cycle '1', '2', '3' %}{% endcapture %}
+  {% if thecycle == '1' %}<div class="row">{% endif %}
+      <article class="work module">
+        {% if forloop.index == 1 %}<h4 class="work-featured">Featured</h4>{% else %}{% if post.type == 'Branding' %}<h4 class="work-branding">{% elsif post.type == 'Web Design' %}<h4 class="work-web">{% elsif post.type == 'Concept' %}<h4 class="work-concept">{% else %}<h4>{% endif %}{{post.type}}</h4><{% endif %}
+        <a href="{{site.baseurl}}{{post.url}}"><img src="{{post.index_image}}" alt="{{post.title | truncate: 120}}" /></a>
+        <div class="data">
+          <h5><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h5>
+          <small><a href="{{site.baseurl}}/archive/articles">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.topic}}</em></a></small>
+          <p class="meta_description">&ldquo;{{post.description | truncate: 170}}&rdquo;</p>
+        </div>
+      </article>
+    {% if thecycle == '3' or forloop.last %}</div>{% endif %}
+    {% endfor %}
+
+
+</section>
