@@ -20,7 +20,7 @@ sitemap:
 ---
 ### Introduction
 
-#### A portfolio website to showcase my featured articles and case studies
+#### A personal touch with a flavor of red and dark purple
 
 It has been exactly a year since I started my journey as a Web Designer and Brand Identity Designer. So it's only fitting that I settle on a final design for my portfolio site. It has been a fun and exhaustive journey, but in the end all of the hard work and sleepless nights have been worth it.
 
