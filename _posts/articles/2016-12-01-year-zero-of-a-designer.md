@@ -96,6 +96,7 @@ I have created a [Process Page]({{site.baseurl}}/process)
 ## When it comes down to a tl;dr
 
 What I learned from my journey:
+
 * Not everyone is going to be nice and supportive when you do something different.
 
 * There are plenty of people who go through the same things you do, you just have to go find them.
