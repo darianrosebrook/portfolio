@@ -118,7 +118,8 @@ What I learned from my journey:
 * Get some good podcasts in like [MegaMaker](http://megamaker.co/podcast), [Late Nights with Trav and Los](http://travandlos.com), and even though there's only one free one to listen to each week, [The seanwes Podcast](http://seanwes.com/podcast) is still a great podcast too.
 * Look for great articles from [invision](blog.invisionapp.com), [A List Apart](http://alistapart.com/articles), and [me \*Wink*]({{site.baseurl/articles}})
 
-You are in control of what you know. Do what you will with what I have just given. 
+You are in control of what you know. Do what you will with what I have just given.
 
 ## You have value. You matter to people. And you have "oh so much to learn."
-#### So get out there and create.
+
+#### Get out there and be creative.
