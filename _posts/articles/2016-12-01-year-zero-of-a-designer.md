@@ -97,25 +97,41 @@ I have created a [Process Page]({{site.baseurl}}/process)
 
 What I learned from my journey:
 * Not everyone is going to be nice and supportive when you do something different.
+
 * There are plenty of people who go through the same things you do, you just have to go find them.
+
 * Learn the guiding principles before trying to learn the tools and do crazy things. That means you need to learn it so well that you start to see what's wrong with road signs, take-out menus, and how misaligned and asymmetrical everyone's bodies actually are by design.
+
 * Treat your self-teaching with the same level of intensity as your job. It is one and you are a fool to think that learning without applying will get you anywhere. Go out and make things.
+
 * Even if there seems to be nothing going right along your journey, there's no reason to quit. Nothing of quality comes in this life without hard work.
+
 * Don't undervalue yourself with the job boards and $5 logo sites, you're better than that. It's a good place to start to see that people will pay for work you do, but they are vicious there and will constantly try to devalue the time, effort, and difficulty it is to do creative work.
+
 * I have consumed nearly 500 videos, podcast episodes, and resources that helped frame my mind towards design thinking and teaching the hard skills and soft skills needed to do my work.
+
 * Read, read, and re–read the books, articles you've saved, and tutorials.
+
 * In pursuing anything, you'll learn more than just that thing. I've found that I have been learning how to market and sell my services, display my work, manage social media accounts for growth building. It keeps bubbling out there.
+
 * You have value. You matter. And no one but you can tell yourself that.
 
 ## Resources on where to start.
 
 * Look up [hackdesign.org](http://hackdesign.org) and get on the list for their curated resources, articles, and videos.
+
 * Get online with some free courses to practice like [freeCodeCamp](http://freeCodeCamp.org) and [Codecademy](http://codecademy.com) and [So You Want to be a Web Developer]((https://christopherpound.com/so-you-want-to-be-a-web-developer))
+
 * Books: [Making and Breaking the Grid](https://www.amazon.com/gp/product/1592531253/), [Thinking with Type](https://www.amazon.com/Thinking-Type-2nd-revised-expanded/dp/1568989695), [Don't Make Me Think](https://www.amazon.com/Dont-Make-Think-Revisited-Usability/dp/0321965515), and [any of these from A Book Apart](https://abookapart.com/products/).
+
 * Get on a site like [Briefbox](http://briefbox.me) which is a site that gets you some of the best practice briefs and preps you for design thinking and tackling both challenges and deadlines.
+
 * Watch this talk by [Mike Monteiro](https://www.youtube.com/watch?v=jVkLVRt6c1U) about getting paid for work.
+
 * Start looking around on YouTube for people doing some great work like [The Futur](https://www.youtube.com/user/TheSkoolRocks/videos), [Will Patterson](https://www.youtube.com/user/breakdesignsco/videos), and [Swerve](https://www.youtube.com/channel/UC9kxpA_FHEsXX1xWMb-Egow).
+
 * Get some good podcasts in like [MegaMaker](http://megamaker.co/podcast), [Late Nights with Trav and Los](http://travandlos.com), and even though there's only one free one to listen to each week, [The seanwes Podcast](http://seanwes.com/podcast) is still a great podcast too.
+
 * Look for great articles from [invision](blog.invisionapp.com), [A List Apart](http://alistapart.com/articles), and [me \*Wink*]({{site.baseurl/articles}})
 
 You are in control of what you know. Do what you will with what I have just given.
