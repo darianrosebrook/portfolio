@@ -103,7 +103,7 @@ sitemap:
     <h4>Experience to thought, thought to writing</h4>
   </div>
   <div class="row">
-    {% for post in site.categories.article limit: 12%}
+    {% for post in site.categories.article limit: 6%}
     {% capture article %}{% cycle '1', '2', '3' %}{% endcapture %}
     {% if article == '1' %}<div class="row">{% endif %}
       <article class="{{post.class}} article module">
