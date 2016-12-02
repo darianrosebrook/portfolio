@@ -48,7 +48,7 @@ Because of how thirsty I was for more information as well as how determined I wa
 
 This didn't stop me from pursuing design, there are still [plenty of things you can do as a beginner](https://skillcrush.com/category/free-tech-resources/) in tech.
 
-## My first year
+## My first year and what I have learned
 
 ![tech, get it? no? oh]({{site.baseurl}}/assets/img/posts/articles/1st-year/wires.jpg)
 So what did I do? It was almost 2016 and I was borrowing a laptop from my ex. I needed to have proper tools for me to do my work. I got myself a laptop that could run the design programs I needed with little difficulty. I got a few micron pens and some [Baron Fig sketchbooks](https://www.baronfig.com). I played with graphic design software like Gimp and Inkscape which are free tools, as well as using the "trial version" of Photoshop and Illustrator.
@@ -74,14 +74,14 @@ I have talked about [why designers and developers need to find a community]({{si
 
 And to everyone who has supported me along the way, you guys mean a whole lot to me. I really appreciate the conversations we've had and that you guys took the time to help a pleb like me.
 
-#### I haven't had a full night's sleep in over a year.
+#### I barely had any chance of a full night's sleep in over a year.
 
 Partly because I have a child that likes to wake up in the mornings around 5am. I didn't ditch my day job partly because my pursuit of design didn't quite have a lot of money up front for someone who had baby skills in design and development. So I was restricted to 40.5 hours a week working at the very job I was trying to get rid of, leaving me to [fit in being a dad, working a day job, and doing design work]({{site.baseurl}}/archive/handling-expectational-debt-and-falling-behind) into my everyday life. I've kept this up for as long as I remember starting design a year ago.
 
 #### I should have kept investing in my health.
-_and drink less beer_.
+_and drank less beer_.
 
-I have gained more weight this year with both stress and unhealthy habits than I have the previous 4 years. There was "no time"  to do so, but it was really me just making excuses.
+I have gained more weight this year with both stress and unhealthy habits than I have the previous 4 years. There was "no time"  to do so, but it was really me just making excuses. Your health matters as well, and even with all the craziness, afford yourself at least 20 minutes of some sort of activity that gives you a small workout each day.
 
 #### I got on with a group of talented developers as the Lead Designer
 
@@ -91,13 +91,34 @@ I am very thankful they have had enough hustle to keep up with me and my crazy l
 
 I was aimless and haphazardly going about where I learned from, not really paying attention to the levels they were teaching but also how much time I spent there versus how much I actually practiced or did work for clients.
 
+I have created a [Process Page]({{site.baseurl}}/process)
+
 ## When it comes down to a tl;dr
 
 What I learned from my journey:
-* Not everyone is going to be nice and supportive
+* Not everyone is going to be nice and supportive when you do something different.
 * There are plenty of people who go through the same things you do, you just have to go find them.
-* Learn the basics before trying to do crazy things. And that means learn it so well that you start to see what's wrong with road signs, take-out menus, and how misaligned and asymmetrical everyone's bodies actually are by design.
-* Treat your self-teaching with the intensity of a job. It is one and you are a fool to think that learning without applying will get you anywhere. Go out and make things.
-* Even if there seems to be nothing going right along your journey, you should come up with something that keeps you growing in the realm of what you choose.
-* I finished nearly 500 videos and resources for what made great websites and brand identities.
-* Read read, read the typography books and the layout verions of a grid systems. Look up [hackdesign.org](http://hackdesign.org)
+* Learn the guiding principles before trying to learn the tools and do crazy things. That means you need to learn it so well that you start to see what's wrong with road signs, take-out menus, and how misaligned and asymmetrical everyone's bodies actually are by design.
+* Treat your self-teaching with the same level of intensity as your job. It is one and you are a fool to think that learning without applying will get you anywhere. Go out and make things.
+* Even if there seems to be nothing going right along your journey, there's no reason to quit. Nothing of quality comes in this life without hard work.
+* Don't undervalue yourself with the job boards and $5 logo sites, you're better than that. It's a good place to start to see that people will pay for work you do, but they are vicious there and will constantly try to devalue the time, effort, and difficulty it is to do creative work.
+* I have consumed nearly 500 videos, podcast episodes, and resources that helped frame my mind towards design thinking and teaching the hard skills and soft skills needed to do my work.
+* Read, read, and re–read the books, articles you've saved, and tutorials.
+* In pursuing anything, you'll learn more than just that thing. I've found that I have been learning how to market and sell my services, display my work, manage social media accounts for growth building. It keeps bubbling out there.
+* You have value. You matter. And no one but you can tell yourself that.
+
+## Resources on where to start.
+
+* Look up [hackdesign.org](http://hackdesign.org) and get on the list for their curated resources, articles, and videos.
+* Get online with some free courses to practice like [freeCodeCamp](http://freeCodeCamp.org) and [Codecademy](http://codecademy.com) and [So You Want to be a Web Developer]((https://christopherpound.com/so-you-want-to-be-a-web-developer))
+* Books: [Making and Breaking the Grid](https://www.amazon.com/gp/product/1592531253/), [Thinking with Type](https://www.amazon.com/Thinking-Type-2nd-revised-expanded/dp/1568989695), [Don't Make Me Think](https://www.amazon.com/Dont-Make-Think-Revisited-Usability/dp/0321965515), and [any of these from A Book Apart](https://abookapart.com/products/).
+* Get on a site like [Briefbox](http://briefbox.me) which is a site that gets you some of the best practice briefs and preps you for design thinking and tackling both challenges and deadlines.
+* Watch this talk by [Mike Monteiro](https://www.youtube.com/watch?v=jVkLVRt6c1U) about getting paid for work.
+* Start looking around on YouTube for people doing some great work like [The Futur](https://www.youtube.com/user/TheSkoolRocks/videos), [Will Patterson](https://www.youtube.com/user/breakdesignsco/videos), and [Swerve](https://www.youtube.com/channel/UC9kxpA_FHEsXX1xWMb-Egow).
+* Get some good podcasts in like [MegaMaker](http://megamaker.co/podcast), [Late Nights with Trav and Los](http://travandlos.com), and even though there's only one free one to listen to each week, [The seanwes Podcast](http://seanwes.com/podcast) is still a great podcast too.
+* Look for great articles from [invision](blog.invisionapp.com), [A List Apart](http://alistapart.com/articles), and [me \*Wink*]({{site.baseurl/articles}})
+
+You are in control of what you know. Do what you will with what I have just given. 
+
+## You have value. You matter to people. And you have "oh so much to learn."
+#### So get out there and create.
