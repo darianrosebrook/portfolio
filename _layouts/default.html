@@ -12,6 +12,12 @@
 
   -->
     <!-- S T Y L E S and S C R I P T S -->
+    <script type="text/javascript">
+      var host = "yoursite.com";
+      if ((host == window.location.host) && (window.location.protocol != "https:")) {
+        window.location.protocol = "https";
+      }
+    </script>
     {% if page.custom_css %}
       {% for stylesheet in page.custom_css %}
       <link rel="stylesheet" type="text/css" href="{{site.baseurl}}/css/{{ stylesheet }}.css" media="screen"/>
