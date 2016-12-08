@@ -109,7 +109,6 @@ body
   z-index: 0
   width: 100%
   transition: $transition
-  transform-origin: top
 .hidden-nav
   position: fixed
   top: 0
@@ -140,11 +139,9 @@ body
 @media only screen and (min-width: 800px)
   #nav-toggler:checked + .page-wrap .main-content
     padding-left: 0
-    width: 65%
-    left: 20%
+    transform: translateX(190px)
     .case-study
       background-attachment: scroll
-
 
 // Typography
 p, h1, h2, h3, h4, h5, h6, q, a, blockquote, i, strong, small, em, input, textarea, label, img

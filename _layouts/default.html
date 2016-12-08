@@ -42,11 +42,7 @@
     <meta name="twitter:url" content="https://darianrosebrook.com" />
     <meta name="twitter:title" content="{{page.title}}" />
     <meta name="twitter:description" content="{{page.description | truncate: 196}}" />
-    {% if page.metaimg %}
-    <meta name="twitter:image" content="https://darianrosebrook.com{{page.index_image}}" />
-    {% else %}
-    <meta name="twitter:image" content="https://darianrosebrook.com/assets/hero-responsive.gif" />
-    {% endif%}
+    <meta name="twitter:image" content="https://darianrosebrook.com{% if page.index_image %}{{page.index_image}}{% else %}/assets/img/index.jpg{% endif %}" />
     <!-- pinterest -->
     <meta name="p:domain_verify" content="4990647bc88b5df93fc24e07f254d0a9"/>
     <!-- facebook -->
@@ -54,7 +50,7 @@
     <meta property="og:url" content="{{site.url}}/{{page.id}}" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="{{page.title}}" />
-    <meta property="og:image" content="https://darianrosebrook{{page.index_image}}" />
+    <meta property="og:image" content="https://darianrosebrook{% if page.index_image %}{{page.index_image}}{% else %}/assets/img/index.jpg{% endif %}" />
     <meta property="og:description" content="{{page.description | truncate: 167}}" />
     <meta property="og:site_name" content="Darian Rosebrook" />
     <meta property="og:locale" content="en_US" />

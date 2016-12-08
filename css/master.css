@@ -312,8 +312,7 @@ body {
   position: relative;
   z-index: 0;
   width: 100%;
-  transition: all ease 0.25s;
-  transform-origin: top; }
+  transition: all ease 0.25s; }
 
 .hidden-nav {
   position: fixed;
@@ -346,8 +345,7 @@ body {
 @media only screen and (min-width: 800px) {
   #nav-toggler:checked + .page-wrap .main-content {
     padding-left: 0;
-    width: 65%;
-    left: 20%; }
+    transform: translateX(190px); }
     #nav-toggler:checked + .page-wrap .main-content .case-study {
       background-attachment: scroll; } }
 p::selection, h1::selection, h2::selection, h3::selection, h4::selection, h5::selection, h6::selection, q::selection, a::selection, blockquote::selection, i::selection, strong::selection, small::selection, em::selection, input::selection, textarea::selection, label::selection, img::selection {
