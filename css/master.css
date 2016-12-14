@@ -208,13 +208,13 @@ body {
   line-height: 1.8; }
   body.in-transition {
     transition: transform 0.5s cubic-bezier(0.65, 0.01, 0.19, 1.01); }
+  @media only screen and (min-width: 200px) {
+    body {
+      font-size: 1.6rem; } }
+  @media only screen and (min-width: 800px) {
+    body {
+      font-size: 1.8rem; } }
 
-@media only screen and (min-width: 200px) {
-  body {
-    font-size: 1.6rem; } }
-@media only screen and (min-width: 800px) {
-  body {
-    font-size: 1.8rem; } }
 .hidden {
   display: none !important;
   opacity: 0; }
@@ -825,6 +825,12 @@ form .container {
   .hero.featured-darian:after {
     background: url("../assets/img/posts/study/portfolio-img/web-mobile-darian.jpg") no-repeat center center;
     background-size: cover; }
+  .hero.featured-gyc:after {
+    background: url("../assets/img/posts/study/grow-your-code/portfolio-case-study-banner.jpg") no-repeat center center;
+    background-size: cover; }
+  .hero.featured-keyspark-brand:after {
+    background: url("../assets/img/posts/study/keyspark/ksseattle.jpg") no-repeat center center;
+    background-size: cover; }
 
 @media only screen and (min-width: 800px) {
   .index-header {
@@ -863,6 +869,13 @@ form .container {
       background-size: cover; }
     .hero.featured-darian {
       background: url("../assets/img/posts/study/portfolio-img/web-desktop-darian.jpg") no-repeat right center;
+      background-size: cover; }
+    .hero.featured-gyc {
+      background: url("../assets/img/posts/study/grow-your-code/portfolio-case-study-banner.jpg") no-repeat right center;
+      background-size: cover;
+      color: #f2f2f2; }
+    .hero.featured-keyspark-brand {
+      background: url("../assets/img/posts/study/keyspark/ksseattle.jpg") no-repeat center center;
       background-size: cover; } }
 .sub-nav {
   background-color: #261924;
@@ -1197,19 +1210,15 @@ header#year-one {
           filter: grayscale(1);
           width: 100%; } }
 #img-quilt {
-  position: relative;
-  transform: translateX(-25%);
-  width: 80vw;
-  height: 100vh;
-  overflow-y: hidden; }
-  #img-quilt img {
+  width: 80vw; }
+  #img-quilt .grid-item, #img-quilt .grid-sizer {
+    width: 33%;
     position: static;
-    transform: none;
-    float: left;
-    width: calc(100% / 2.2); }
+    transform: none; }
 
 @media only screen and (min-width: 800px) {
-  #img-quilt img {
-    width: calc(100% / 4.2); } }
+  #img-quilt {
+    width: 90vw;
+    transform: translateX(-23%); } }
 
 /*# sourceMappingURL=master.css.map */

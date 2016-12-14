@@ -4,20 +4,16 @@ layout: default
 <header class="container hero featured-{{page.class}}">
       <h1>Case Study</h1>
       <div class="row featured info">
-        <h2>{{page.title}}</h2>
         {% if page.logo %}<img src="{{page.logo}}" alt="{{page.company}}" class="logo" />{% endif %}
       </div>
 </header>
 <section class="container {{page.head}}">
   <article class="row article-content">
+    <h2>{{page.title}}</h2>
     <p>
       <small>{{page.date | date_to_long_string}} | <em class="{{page.class}}" >{{page.type}}</em></small>
     </p>
-    <p>
-      &mdash; <a href="{{site.baseurl}}/about">Darian Rosebrook</a>
-    </p>
-    <p>{% assign words = content | number_of_words %}{% if words < 360 %}1 min read{% else %}{{ words | divided_by:180 }} min read{% endif %}
-    </p>
+
     {{content}}
     <div class="share">
           <h3>If you found this case study helpful, consider sharing this with your friends: </h3>
@@ -29,3 +25,4 @@ layout: default
   </article>
 </section>
 <script async defer src="//assets.pinterest.com/js/pinit.js"></script>
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>

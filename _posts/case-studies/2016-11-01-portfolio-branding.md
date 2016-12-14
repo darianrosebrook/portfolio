@@ -18,7 +18,7 @@ sitemap:
   changefreq: 'monthly'
   exclude: 'no'
 ---
-### Introduction
+### Background
 
 #### A portfolio website to showcase my featured articles and case studies
 
@@ -59,11 +59,11 @@ Each uses the same colors as outlined above in the color palette.
 
 ### Images
 
-<div id="img-quilt">
-  <img src="{{site.baseurl}}/assets/img/posts/study/portfolio-img/brand-colors.gif" alt="desktop image of the for the final concept of darianrosebrook.com" />
-  <img src="{{site.baseurl}}/assets/img/posts/study/portfolio-img/brand-icons.gif" alt="desktop image of the for the final concept of darianrosebrook.com" />
-  <img src="{{site.baseurl}}/assets/img/posts/study/portfolio-img/brand-interaction.gif" alt="desktop image of the for the final concept of darianrosebrook.com" />
-  <img src="{{site.baseurl}}/assets/img/posts/study/portfolio-img/brand-gem.png" alt="desktop image of the for the final concept of darianrosebrook.com" />
-  <img src="{{site.baseurl}}/assets/img/posts/study/portfolio-img/brand-contact-icons.gif" alt="desktop image of the for the final concept of darianrosebrook.com" />
-  <img src="{{site.baseurl}}/assets/img/posts/study/portfolio-img/brand-icon-comparison.jpg" alt="desktop image of the for the final concept of darianrosebrook.com" />
+<div id="img-quilt" class="grid cf">
+  <img class="grid-sizer" src="{{site.baseurl}}/assets/img/posts/study/portfolio-img/brand-colors.gif" alt="desktop image of the for the final concept of darianrosebrook.com" />
+  <img class="grid-sizer" src="{{site.baseurl}}/assets/img/posts/study/portfolio-img/brand-icons.gif" alt="desktop image of the for the final concept of darianrosebrook.com" />
+  <img class="grid-sizer" src="{{site.baseurl}}/assets/img/posts/study/portfolio-img/brand-interaction.gif" alt="desktop image of the for the final concept of darianrosebrook.com" />
+  <img class="grid-sizer" src="{{site.baseurl}}/assets/img/posts/study/portfolio-img/brand-gem.png" alt="desktop image of the for the final concept of darianrosebrook.com" />
+  <img class="grid-sizer" src="{{site.baseurl}}/assets/img/posts/study/portfolio-img/brand-contact-icons.gif" alt="desktop image of the for the final concept of darianrosebrook.com" />
+  <img class="grid-sizer" src="{{site.baseurl}}/assets/img/posts/study/portfolio-img/brand-icon-comparison.jpg" alt="desktop image of the for the final concept of darianrosebrook.com" />
 </div>

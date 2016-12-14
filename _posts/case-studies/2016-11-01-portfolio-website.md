@@ -18,7 +18,7 @@ sitemap:
   changefreq: 'monthly'
   exclude: 'no'
 ---
-### Introduction
+### Background
 
 #### A personal touch with a flavor of red and dark purple
 
@@ -28,21 +28,21 @@ This case study is the second half to the [rebranding of my personal portfolio s
 
 [My Previous Portfolio]({{site.baseurl}}/archive/portfolio-v5) was a self serving site that built up on the previous 3 versions over the last year. Yeah, you read that right. I had four different revisions before this current site.
 
-<small>The technology used that runs the site: Jekyll, Sass, Vanilla Javascript, Github Pages, and Cloudflare</small>
+<small>The technology used that runs the portfolio: Jekyll, Sass, Vanilla Javascript, Github Pages, and Cloudflare</small>
 
-## Goals
+## The Ask
 * Mobile Responsive from the beginning
 * Optimized for speed
-* Change the focus from styling my site based off of what I like into what is going to be best for displaying the work I do
-* Show how someone could benefit by choosing to work with me.
+* Change the focus from what I like into what is going to be best for displaying work
+* Show how someone could benefit by choosing to work with me
 * Unify the brand under a professional style design
-* Actually finish all of the pages to properly fit the content
+* Actually finish designing and developing all pages
 
 ### Research
 
 #### Improving the professionalism
 
-I had a love of card design early on in the year 2016. It wasn't building the best readability, it performed poorly when scaling up and down my site and wasn't in tune with the style of the rest of the site. A clear change was the removal of the buttons. If everything was a button, there were no buttons. I needed to have clear call to actions, so it came down to the main buttons for hiring me, the secondary was to see more work.
+I had a love for card design early on in the year 2016. Sadly, it wasn't the best for readability, it performed poorly when scaling up and down my site and wasn't in tune with the rest of the style. A clear change was the removal of the buttons. If everything was a button, there were no buttons. I needed to have clear call to actions, so it came down to two main buttons. A button for hiring me and a button to see more work.
 
 I had reviewed the portfolios of some of the top professionals in my industry and took extensive notes on what was working well for them and some areas where I feel that things could improve.
 
@@ -61,9 +61,12 @@ The final site that follows completes what I had originally envisioned when crea
 
 ### Images
 
-<div id="img-quilt">
-  <img src="{{site.baseurl}}/assets/img/posts/study/portfolio-img/desktop-index-v6.png" alt="desktop image of the for the final concept of darianrosebrook.com" />
-  <img src="{{site.baseurl}}/assets/img/posts/study/portfolio-img/desktop-articles-v6.png" alt="desktop image of the for the final concept of darianrosebrook.com" />
-  <img src="{{site.baseurl}}/assets/img/posts/study/portfolio-img/desktop-branding-v6.png" alt="desktop image of the for the final concept of darianrosebrook.com" />
-  <img src="{{site.baseurl}}/assets/img/posts/study/portfolio-img/desktop-web-design-v6.png" alt="desktop image of the for the final concept of darianrosebrook.com" />
+<div id="img-quilt" class="grid cf">
+  <img class="grid-sizer" src="{{site.baseurl}}/assets/img/posts/study/portfolio-img/desktop-index-v6.png" alt="desktop image of the for the final concept of darianrosebrook.com" />
+  <img class="grid-sizer" src="{{site.baseurl}}/assets/img/posts/study/portfolio-img/desktop-articles-v6.png" alt="desktop image of the for the final concept of darianrosebrook.com" />
+  <img class="grid-sizer" src="{{site.baseurl}}/assets/img/posts/study/portfolio-img/desktop-branding-v6.png" alt="desktop image of the for the final concept of darianrosebrook.com" />
+  <img class="grid-sizer" src="{{site.baseurl}}/assets/img/posts/study/portfolio-img/desktop-web-design-v6.png" alt="desktop image of the for the final concept of darianrosebrook.com" />
+  <img class="grid-sizer" src="{{site.baseurl}}/assets/img/posts/study/portfolio-img/brand-interaction.gif" alt="desktop image of the for the final concept of darianrosebrook.com" />  
+  <img class="grid-sizer" src="{{site.baseurl}}/assets/img/posts/study/portfolio-img/brand-contact-icons.gif" alt="desktop image of the for the final concept of darianrosebrook.com" />
+  <img class="grid-sizer" src="{{site.baseurl}}/assets/img/posts/study/portfolio-img/featured-article-desktop-.png" alt="desktop image of the for the final concept of darianrosebrook.com" />
 </div>
