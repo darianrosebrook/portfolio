@@ -6,11 +6,10 @@ category:
   - brand
 title: Out- Branding
 type: Concept
-class: brand
+class: out-branding
 description:  The series of icons and logo done for an outdoor activity center. ...
 index_image: /assets/img/posts/study/out-branding/out-branding.png
 company: Out - Outdoor Activity Center
-logo: /assets/img/posts/study/out-branding/out-branding.png
 header:
 callout:
 sitemap:

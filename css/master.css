@@ -831,6 +831,12 @@ form .container {
   .hero.featured-keyspark-brand:after {
     background: url("../assets/img/posts/study/keyspark/ksseattle.jpg") no-repeat center center;
     background-size: cover; }
+  .hero.featured-genaros-coffee:after {
+    background: url("../assets/img/posts/study/genaros/genaros-sign.jpg") no-repeat top center;
+    background-size: cover; }
+  .hero.featured-out-branding:after {
+    background: linear-gradient(to left, rgba(230, 230, 230, 0) 10%, #e6e6e6), url("../assets/img/posts/study/out-branding/image.png") no-repeat center center;
+    background-size: cover; }
 
 @media only screen and (min-width: 800px) {
   .index-header {
@@ -876,6 +882,12 @@ form .container {
       color: #f2f2f2; }
     .hero.featured-keyspark-brand {
       background: url("../assets/img/posts/study/keyspark/ksseattle.jpg") no-repeat center center;
+      background-size: cover; }
+    .hero.featured-genaros-coffee {
+      background: url("../assets/img/posts/study/genaros/genaros-sign.jpg") no-repeat center center;
+      background-size: cover; }
+    .hero.featured-out-branding {
+      background: linear-gradient(to left, rgba(230, 230, 230, 0) 10%, #e6e6e6), url("../assets/img/posts/study/out-branding/image.png") no-repeat top center;
       background-size: cover; } }
 .sub-nav {
   background-color: #261924;

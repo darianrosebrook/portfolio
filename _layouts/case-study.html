@@ -4,9 +4,9 @@ layout: default
 <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 <header class="container hero featured-{{page.class}}">
       <h1>Case Study</h1>
-      <div class="row featured info">
-        {% if page.logo %}<img src="{{page.logo}}" alt="{{page.company}}" class="logo" />{% endif %}
-      </div>
+      {% if page.logo %}<div class="row featured info">
+        <img src="{{page.logo}}" alt="{{page.company}}" class="logo" />
+      </div>{% endif %}
 </header>
 <section class="container {{page.head}}">
   <article class="row article-content">
