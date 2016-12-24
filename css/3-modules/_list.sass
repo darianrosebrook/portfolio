@@ -32,15 +32,15 @@
     width: 100%
 @media screen and (min-width: 800px)
   .list
+    .list-item
+      display: flex
+      
     .post-img
       width: 25%
     img
       display: inline-block
     .artcont
-      position: absolute
-      top: 50%
-      transform: translateY(-50%)
-      width: 70%
+      width: calc(70% - 5vw)
       display: inline-block
     select
       display: inline-block

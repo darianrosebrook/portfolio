@@ -37,30 +37,40 @@ Straight from the site
 
 ### Research
 
-#### What did they need for the intended style?
+#### How do you digitize the outdoors
 
-We needed something that fit the idea of growth. When someone is building their knowledge of something, it takes a long time, but that knowledge lasts. So when coming to an idea for the Grow Your Code, I wanted something that fit what the area he's from and the industry his work is in. Both natural yet electronic.
+When you take an idea or image from nature, you have to remember to bring a bit of it back when you digitize that image. Nature has a way of being difficult to translate into design. Surely as one of my first tasks this seemed like a good way of getting my hands dirty. The images that the brief references are heavy with serif fonts, flat imagery, and illustrated icon style geometry. I wanted to make sure this was taken into consideration, mainly using the images below as reference.
 
-![The before image.]({{site.baseurl}}/assets/img/posts/study/out-branding/before.png)
-
-I started thinking of evergreen trees and how they grow over time. Coming up with the first part of the logo is a general feel for the styling.
-
-![Starting off with trees.]({{site.baseurl}}/assets/img/posts/study/out-branding/cubism.jpg)
-![A kind of rugged outdoors style.]({{site.baseurl}}/assets/img/posts/study/out-branding/tehachapi3.png)
+![The before image.]({{site.baseurl}}/assets/img/posts/study/out-branding/Park-City-by-Dann-Petty.jpg)
+![Starting off with trees.]({{site.baseurl}}/assets/img/posts/study/out-branding/Adventure-by-Dan-Cedarholm.png)
+![A kind of rugged outdoors style.]({{site.baseurl}}/assets/img/posts/study/out-branding/Buck-Wild-by-Jess-Caddick.jpg)
 
 ### Development
 
-I had an initial idea of where to start, so I started to conceptualize what a logo of the sorts, representing code and growth would look like.
+After spending much years outdoors and around snowboarding style brands, I researched some more and got to developing some unified styling on what how I wanted to keep the icons unified.
 
-![The challenge]({{site.baseurl}}/assets/img/posts/study/out-branding/sketches.jpg)
+Every outdoor activity needs it's own icon that represents that activity. I chose to go with thick lines, a muted color palette pulled from one of the above images, and a grid to base the icons off of.
 
-What was difficult was coming up with a decent idea within the few days he gave me before his next podcast episode. Once I got a few ideas on paper, I starred what was working. I took from the best elements of each and started to go into illustrator to get the working ideas into a digital form.
+Mountaineering was a more obvious choice and I played with a stylistic representation of mountains. Really, most logos of outdoorsy things have mountains or compasses. I wanted to slightly vary this by keeping it interesting and tied into the overall brand mark.
+
+Abseiling was more difficult seeing that I wasn't sure how to represent something moving with a static image. I chose to go with a person with their head pointed downwards, at an angle, and holding on to a rope with tension at the top, but not the bottom. As specific as I could get, I found a way.
+
+Canoeing was great. I created a boat, oars, and stylized it with the same style as the next few icons.
+
+Rock climbing is an activity that most people recognize by heavy-duty carabiners. It seemed fitting to throw one in as the icon for climbing.
+
+Caving was a person with a headlamp. I had tried more physical representations like actual caves, or stalagmites and stalactites, but the lack of borders or geometry in the icons limited backgrounds and props.
+
+Team building is something usually done around a fire at camps. One of the most popular forms of team building is making s'mores and hanging out. I figured a s'more would make a good representation of that.
+
+
+![The challenge]({{site.baseurl}}/assets/img/posts/study/out-branding/icon-artboard.jpg)
 
 ### Final Concept
 
-At the end of the skeching both digitally and analog, I came to the conclusion we would need enough sizes for different media, as well as dark and light monochromes should he decide to display on his personal site as well. The finals consist of an emblem with the full name, a circle emblem with the initials, and the hexagonal emblem with the initials. The full logo has the code brackets "\< \>" in there to symbolize the code with the trees as growing. The variant omits the brackets to increase legibility from smaller sizes.
+At the end of the sketching both digitally and analog, I came to the conclusion we would need enough sizes for different media, as well as dark and light monochromes should he decide to display on his personal site as well. The finals consist of an emblem with the full name, a circle emblem with the initials, and the hexagonal emblem with the initials. The full logo has the code brackets "\< \>" in there to symbolize the code with the trees as growing. The variant omits the brackets to increase legibility from smaller sizes.
 
-![Icon set]({{site.baseurl}}/assets/img/posts/study/out-branding/finals.jpg)
+![Icon set]({{site.baseurl}}/assets/img/posts/study/out-branding/out-branding-presentation.gif)
 
 I also threw in a stylized banner radio banner style for flavour.
 
@@ -69,12 +79,8 @@ I also threw in a stylized banner radio banner style for flavour.
 ### Images
 
 <div id="img-quilt" class="grid cf">
-  <img class="grid-sizer" src="{{site.baseurl}}/assets/img/posts/study/out-branding/finals.jpg" alt="desktop image of the for the final concept of Grow Your Code" />
-  <img class="grid-sizer" src="{{site.baseurl}}/assets/img/posts/study/out-branding/gyc.png" alt="desktop image of the for the final concept of Grow Your Code" />
-  <img class="grid-sizer" src="{{site.baseurl}}/assets/img/posts/study/out-branding/after.png" alt="desktop image of the for the final concept of Grow Your Code" />
-  <img class="grid-sizer" src="{{site.baseurl}}/assets/img/posts/study/out-branding/finals.png" alt="desktop image of the for the final concept of Grow Your Code" />
-  <img class="grid-sizer" src="{{site.baseurl}}/assets/img/posts/study/out-branding/bracket-banner-brown.png" alt="desktop image of the for the final concept of Grow Your Code" />
-  <img class="grid-sizer" src="{{site.baseurl}}/assets/img/posts/study/out-branding/bracket-hexicon-brown.png" alt="desktop image of the for the final concept of Grow Your Code" />
-  <img class="grid-sizer" src="{{site.baseurl}}/assets/img/posts/study/out-branding/bracket-icon-brown.png" alt="desktop image of the for the final concept of Grow Your Code" />
-  <img class="grid-sizer" src="{{site.baseurl}}/assets/img/posts/study/out-branding/nobracket-banner-brown.png" alt="desktop image of the for the final concept of Grow Your Code" />
+  <img class="grid-sizer" src="{{site.baseurl}}/assets/img/posts/study/out-branding/icon-artboard.jpg" alt="desktop image of the for the final concept of Grow Your Code" />
+  <img class="grid-sizer" src="{{site.baseurl}}/assets/img/posts/study/out-branding/image.png" alt="desktop image of the for the final concept of Grow Your Code" />
+  <img class="grid-sizer" src="{{site.baseurl}}/assets/img/posts/study/out-branding/out-branding-presentation.gif" alt="desktop image of the for the final concept of Grow Your Code" />
+  <img class="grid-sizer" src="{{site.baseurl}}/assets/img/posts/study/out-branding/out-branding.png" alt="desktop image of the for the final concept of Grow Your Code" />
 </div>

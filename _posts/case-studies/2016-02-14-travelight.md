@@ -10,7 +10,7 @@ class: web
 description:  A landing page for Travelight, an app that lets you find the shortest route to your destination.
 index_image: /assets/img/posts/study/travelight/landing.jpg
 company: Travelight App
-logo: /assets/img/posts/study/travelight/landing.jpg
+logo: /assets/img/posts/study/travelight/travelight-logo.svg
 header:
 callout:
 sitemap:
@@ -19,4 +19,7 @@ sitemap:
   changefreq: 'monthly'
   exclude: 'no'
 ---
-## I am rewriting these case studies with the redesign of my site, come back soon for the updated content.
+## After the dark ages
+
+I started learning web design and branding back in 2015 after taking a few small courses. My first goals were to get some practice in for designing landing pages. I threw together this creative landing page for a fake brand that I was experimenting with. I was pleased enough with the end result to share.
+![Travelight landing page]({{site.baseurl}}/assets/img/posts/study/travelight/large-landing.jpg)

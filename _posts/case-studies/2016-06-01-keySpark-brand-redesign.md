@@ -74,5 +74,5 @@ I also threw in a stylized banner radio banner style for flavour.
   <img class="grid-sizer" src="{{site.baseurl}}/assets/img/posts/study/keyspark/white-icon.png" alt="desktop image of the for the final concept of darianrosebrook.com" />
   <img class="grid-sizer" src="{{site.baseurl}}/assets/img/posts/study/keyspark/ks.png" alt="the initials and icons for the keyspark logo" />
   <img class="grid-sizer" src="{{site.baseurl}}/assets/img/posts/study/keyspark/keyspark-update.png" alt="" />
-  <img class="grid-sizer" src="{{site.baseurl}}/assets/img/posts/study/keyspark/brand-icon-comparison.jpg" alt="desktop image of the for the final concept of darianrosebrook.com" />
+  <img class="grid-sizer" src="{{site.baseurl}}/assets/img/posts/study/keyspark/keyspark-logo.png" alt="desktop image of the for the final concept of darianrosebrook.com" />
 </div>
