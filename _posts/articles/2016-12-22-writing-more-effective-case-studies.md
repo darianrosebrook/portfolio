@@ -6,7 +6,7 @@ topic: Productivity
 title: Writing More Effective Case Studies in 2017
 description: I'm tackling the problem of ineffective case studies for next year. Writing case studies is hard. Writing them in 2017 should be easier.
 index_image: /assets/img/posts/articles/writing-case-studies/visuals.png
-header: year-one
+header: case-study
 sitemap:
   lastmod: 2016-08-09
   priority: 0.7
@@ -75,10 +75,11 @@ If you have the habit of writing in place when working on projects, you should b
 
 
 I want to thank the people contributing to this article: 
-[Justin Jackson](justinjackson.ca) who hosts [Product People](http://t.co/7N3hHdf7pQ) and [Megamaker](https://megamaker.co/), [Pavel Ispravnikov](http://pavelisp.com/) a communications designer, [Eric Hoekendorf](https://twitter.com/erichoekendorf) who co-founded [foyyay](http://www.foyyay.com/), and others who subscribed to the newsletter to get early access and editing rights.
+[Justin Jackson](http://justinjackson.ca) who hosts [Product People](http://t.co/7N3hHdf7pQ) and [Megamaker](https://megamaker.co/), [Pavel Ispravnikov](http://pavelisp.com/) a communications designer, [Eric Hoekendorf](https://twitter.com/erichoekendorf) who co-founded [foyyay](http://www.foyyay.com/), and others who subscribed to the newsletter to get early access and editing rights.
 
 ##### I think giving some credit to those who contribute is a great opportunity  as well.
  
 Newsletter subscribers get early access to the each article. This grants them the ability to contribute their ideas, discuss the topic, and help edit the newest article before it is published.
 I’m working on improving this experience for everyone right now, but for those who are interested, you can subscribe to the list to help increase the amount of value that other designers and developers like you receive from articles like this. 
+
 [Sign up to be a part of the next generation]({{site.baseurl}}/newsletter) of designers and get a personalized High-Five from me (:
