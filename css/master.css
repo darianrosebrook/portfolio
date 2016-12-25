@@ -1195,7 +1195,7 @@ header#year-one {
   background-size: cover; }
 
 header#case-study {
-  background: linear-gradient(to left, rgba(230, 230, 230, 0.8) 10%, rgba(230, 230, 230, 0.8)), url("../assets/img/posts/articles/case-study/visuals.png") no-repeat center;
+  background: linear-gradient(to left, rgba(230, 230, 230, 0.8) 10%, rgba(230, 230, 230, 0.8)), url("../assets/img/posts/articles/writing-case-studies/visuals.png") no-repeat center;
   background-size: cover; }
 
 @media only screen and (min-width: 800px) {
