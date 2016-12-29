@@ -2,6 +2,7 @@
   <div class="row">
     <h2>Let's Get in Contact</h2>
     <form action="https://formspree.io/mnnjazpm" method="POST">
+      <input type="hidden" name="_next" value="{{site.baseurl}}/continue" />
       <input type="text" name="name" placeholder="Your Name..." class="transition enter text-center" required>
       <input type="email" name="_replyto" placeholder="Your Email..." class="transition enter text-center" required>
       <p>What kind of project would you like to work on?</p>
