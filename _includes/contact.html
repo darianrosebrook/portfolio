@@ -2,7 +2,6 @@
   <div class="row">
     <h2>Let's Get in Contact</h2>
     <form action="https://formspree.io/mnnjazpm" method="POST">
-      <input type="hidden" name="_next" value="{{site.baseurl}}/continue" />
       <input type="text" name="name" placeholder="Your Name..." class="transition enter text-center" required>
       <input type="email" name="_replyto" placeholder="Your Email..." class="transition enter text-center" required>
       <p>What kind of project would you like to work on?</p>
@@ -64,6 +63,7 @@
       <input type="text" name="_gotcha" class="hidden" />
       <p class="continue project"> Thank you! This filled form here will help me keep your organization's goals and audience in the forefront of the design.</p>
       <input type="submit" class="button continue project message" value="Submit!">
+      <input type="hidden" name="_next" value="https://darianrosebrook.com/continue" />
     </form>
    </div>
 </section>
