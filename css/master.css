@@ -348,11 +348,11 @@ body {
     transform: translateX(190px); }
     #nav-toggler:checked + .page-wrap .main-content .case-study {
       background-attachment: scroll; } }
-p::selection, h1::selection, h2::selection, h3::selection, h4::selection, h5::selection, h6::selection, q::selection, a::selection, blockquote::selection, i::selection, strong::selection, small::selection, em::selection, input::selection, textarea::selection, label::selection, img::selection {
+*::selection {
   color: #f2f2f2;
   background-color: #e74b4c; }
 
-p {
+p, ul, li {
   margin-bottom: 1.5rem; }
 
 a, a:link, a:visited, a:hover, a:focus {
@@ -1096,6 +1096,8 @@ form .container {
   .container .article-content img {
     display: block;
     width: 100%; }
+  .container .article-content .mid-pic {
+    width: 50%; }
 .container.article-descriptions {
   background-color: #261924;
   color: #f2f2f2; }
@@ -1196,6 +1198,10 @@ header#year-one {
 
 header#case-study {
   background: linear-gradient(to left, rgba(230, 230, 230, 0.8) 10%, rgba(230, 230, 230, 0.8)), url("../assets/img/posts/articles/writing-case-studies/visuals.png") no-repeat center;
+  background-size: cover; }
+
+header#welcome-email {
+  background: linear-gradient(to left, rgba(230, 230, 230, 0.8) 10%, rgba(230, 230, 230, 0.8)), url("https://cdn-images-1.medium.com/max/1080/1*6icFYlEErr0Q_6lZJLZfVQ.png") no-repeat center;
   background-size: cover; }
 
 @media only screen and (min-width: 800px) {

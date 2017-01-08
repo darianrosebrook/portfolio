@@ -142,12 +142,13 @@ body
       background-attachment: scroll
 
 // Typography
-p, h1, h2, h3, h4, h5, h6, q, a, blockquote, i, strong, small, em, input, textarea, label, img
+*
   &::selection
     color: $light
     background-color: $main
-p
+p, ul, li
   margin-bottom: $margin
+
 a, a:link, a:visited, a:hover, a:focus
   transition: $transition
   text-decoration: none
