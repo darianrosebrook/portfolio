@@ -42,7 +42,7 @@ sitemap:
   {% capture thecycle %}{% cycle '1', '2', '3' %}{% endcapture %}
   {% if thecycle == '1' %}<div class="row">{% endif %}
       <article class="work module">
-        {% if forloop.index == 1 %}<h4 class="work-featured">Featured</h4>{% else %}{% if post.type == 'Branding' %}<h4 class="work-branding">{% elsif post.type == 'Web Design' %}<h4 class="work-web">{% elsif post.type == 'Concept' %}<h4 class="work-concept">{% else %}<h4>{% endif %}{{post.type}}</h4><{% endif %}
+        {% if forloop.index == 1 %}<h4 class="work-featured">Featured</h4>{% else %}{% if post.type == 'Branding' %}<h4 class="work-branding">{% elsif post.type == 'Web Design' %}<h4 class="work-web">{% elsif post.type == 'Concept' %}<h4 class="work-concept">{% else %}<h4>{% endif %}{{post.type}}</h4>{% endif %}
         <a href="{{site.baseurl}}{{post.url}}"><img src="{{post.index_image}}" alt="{{post.title | truncate: 120}}" /></a>
         <div class="data">
           <h5><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h5>
