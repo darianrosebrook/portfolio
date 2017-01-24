@@ -668,6 +668,8 @@ form .container {
   #contact .continue {
     display: none;
     animation: slideIn 0.3s backwards; }
+    #contact .continue:not(.button) {
+      height: 50vh; }
   #contact input[data-continue="true"]:checked ~ .continue.project {
     display: flex; }
   #contact input[data-continue="true"]:checked ~ div span.hidden {
