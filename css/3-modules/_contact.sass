@@ -16,8 +16,7 @@
   .continue
     display: none
     animation: slideIn 0.3s backwards
-    &:not(.button)
-      height: 30vh
+
   input[data-continue="true"]:checked
     & ~ .continue.project
       display: flex
@@ -51,3 +50,6 @@
     position: relative
     margin: 0 auto
     width: 66%
+    .continue
+      &:not(.button)
+        height: 30vh

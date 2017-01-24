@@ -668,8 +668,6 @@ form .container {
   #contact .continue {
     display: none;
     animation: slideIn 0.3s backwards; }
-    #contact .continue:not(.button) {
-      height: 30vh; }
   #contact input[data-continue="true"]:checked ~ .continue.project {
     display: flex; }
   #contact input[data-continue="true"]:checked ~ div span.hidden {
@@ -723,7 +721,9 @@ form .container {
   #contact {
     position: relative;
     margin: 0 auto;
-    width: 66%; } }
+    width: 66%; }
+    #contact .continue:not(.button) {
+      height: 30vh; } }
 .list {
   position: relative;
   color: #261924;
@@ -980,7 +980,7 @@ form .container {
 
   .blurb-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: stretch;
     opacity: 1;
     transition: all ease 0.25s;
@@ -999,7 +999,7 @@ form .container {
       animation: fadeIn 0.5s ease-in 1 forwards;
       animation-play-state: running; }
     .blurb-container img {
-      width: calc(25% - 1em);
+      width: calc(15% - 1em);
       position: static;
       transform: none; }
     .blurb-container div {
