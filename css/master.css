@@ -818,7 +818,7 @@ form .container {
   .hero.featured-article {
     margin-bottom: calc(50vw * 1.77); }
     .hero.featured-article:after {
-      background: url("https://cdn-images-1.medium.com/max/800/1*VKgpPmoE749gkMrZGF9Mbw.jpeg") no-repeat center center;
+      background: url("https://cdn-images-1.medium.com/max/720/0*95sXPlkGpZ-S_ced.") no-repeat center center;
       background-size: contain; }
   .hero.process:after {
     background: url("../assets/img/process.gif") no-repeat center center;
@@ -869,7 +869,7 @@ form .container {
     .hero.featured-article {
       margin-bottom: 0;
       background: no-repeat right center;
-      background-image: linear-gradient(to left, rgba(230, 230, 230, 0.5) 10%, #e6e6e6), url("https://cdn-images-1.medium.com/max/800/1*VKgpPmoE749gkMrZGF9Mbw.jpeg");
+      background-image: linear-gradient(to left, rgba(230, 230, 230, 0.5) 10%, #e6e6e6), url("https://cdn-images-1.medium.com/max/720/0*95sXPlkGpZ-S_ced.");
       background-size: cover; }
     .hero.process {
       height: 80vh;
@@ -1212,6 +1212,10 @@ header#anchor {
 
 header#public {
   background: linear-gradient(to left, rgba(230, 230, 230, 0.8) 10%, rgba(230, 230, 230, 0.8)), url("https://cdn-images-1.medium.com/max/800/1*VKgpPmoE749gkMrZGF9Mbw.jpeg") no-repeat center;
+  background-size: cover; }
+
+header#fluff {
+  background: linear-gradient(to left, rgba(230, 230, 230, 0.8) 10%, rgba(230, 230, 230, 0.8)), url("https://cdn-images-1.medium.com/max/720/0*95sXPlkGpZ-S_ced.") no-repeat center;
   background-size: cover; }
 
 @media only screen and (min-width: 800px) {
