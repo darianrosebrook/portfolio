@@ -4,11 +4,7 @@ category: article
 type: productivity
 topic: Productivity
 title: Cut the fluff
-description: Strong communication stems from brevity. Brevity is a concise and exact use of
-words in writing or speech. With the art of language, having the exact choice of
-words to say more with less is a sincere form of mastery. Though you may never
-scrub your verbal dictionary perfectly clean of filler words, you can make a
-serious change in improving how you communicate your ideas to other people.
+description: Strong communication stems from brevity. Brevity is a concise and exact use of words in writing or speech. With the art of language, having the exact choice of words to say more with less is a sincere form of mastery. Though you may never scrub your verbal dictionary perfectly clean of filler words, you can make a serious change in improving how you communicate your ideas to other people.
 index_image:
 cdn: https://cdn-images-1.medium.com/max/720/0*95sXPlkGpZ-S_ced.
 header: fluff
