@@ -835,6 +835,9 @@ form .container {
   .hero.featured-keyspark-brand:after {
     background: url("../assets/img/posts/study/keyspark/ksseattle.jpg") no-repeat center center;
     background-size: cover; }
+  .hero.featured-keyspark-web:after {
+    background: url("../assets/img/posts/study/keyspark/featured-desktop-keyspark.jpg") no-repeat center center;
+    background-size: cover; }
   .hero.featured-genaros-coffee:after {
     background: url("../assets/img/posts/study/genaros/genaros-sign.jpg") no-repeat top center;
     background-size: cover; }
@@ -892,6 +895,9 @@ form .container {
       background-size: cover; }
     .hero.featured-keyspark-brand {
       background: url("../assets/img/posts/study/keyspark/ksseattle.jpg") no-repeat center center;
+      background-size: cover; }
+    .hero.featured-keyspark-web {
+      background: url("../assets/img/posts/study/keyspark/featured-desktop-keyspark.jpg") no-repeat center center;
       background-size: cover; }
     .hero.featured-genaros-coffee {
       background: url("../assets/img/posts/study/genaros/genaros-sign.jpg") no-repeat center center;
