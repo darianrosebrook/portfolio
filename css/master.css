@@ -829,6 +829,9 @@ form .container {
   .hero.featured-gyc:after {
     background: url("../assets/img/posts/study/grow-your-code/portfolio-case-study-banner.jpg") no-repeat center center;
     background-size: cover; }
+  .hero.featured-gyc-update:after {
+    background: url("../assets/img/posts/study/grow-your-code/gyc-update-2.png") no-repeat top center;
+    background-size: cover; }
   .hero.featured-keyspark-brand:after {
     background: url("../assets/img/posts/study/keyspark/ksseattle.jpg") no-repeat center center;
     background-size: cover; }
@@ -884,6 +887,9 @@ form .container {
       background: url("../assets/img/posts/study/grow-your-code/portfolio-case-study-banner.jpg") no-repeat right center;
       background-size: cover;
       color: #f2f2f2; }
+    .hero.featured-gyc-update {
+      background: url("../assets/img/posts/study/grow-your-code/gyc-update-2.png") no-repeat top center;
+      background-size: cover; }
     .hero.featured-keyspark-brand {
       background: url("../assets/img/posts/study/keyspark/ksseattle.jpg") no-repeat center center;
       background-size: cover; }
