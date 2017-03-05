@@ -1038,27 +1038,25 @@ form .container {
       margin-right: 0;
       margin-left: 1em; }
 
-  .work {
-    background-color: rgba(33, 33, 33, 0.1); }
-    .work .data {
-      top: 10%;
-      position: absolute;
-      opacity: 0;
-      display: none; }
-    .work img {
-      width: 100%; }
-    .work:hover {
-      background-color: transparent; }
-      .work:hover img {
-        filter: grayscale(0);
-        opacity: 0.08; }
-      .work:hover .data {
-        opacity: 1;
-        display: block; }
-    .work h4 {
-      display: block;
-      position: absolute;
-      margin-right: 20%; }
+  .work .data {
+    top: 10%;
+    position: absolute;
+    opacity: 0;
+    display: none; }
+  .work img {
+    width: 100%; }
+  .work:hover {
+    background-color: transparent; }
+    .work:hover img {
+      filter: grayscale(0);
+      opacity: 0.08; }
+    .work:hover .data {
+      opacity: 1;
+      display: block; }
+  .work h4 {
+    display: block;
+    position: absolute;
+    margin-right: 20%; }
 
   .sub-nav {
     height: calc(30vw / 1.777); }

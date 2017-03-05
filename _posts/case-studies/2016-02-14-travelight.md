@@ -19,7 +19,7 @@ sitemap:
   changefreq: 'monthly'
   exclude: 'no'
 ---
-## After the dark ages
+## I am rewriting these case studies with the redesign of my site, come back soon for the updated content.
 
 I started learning web design and branding back in 2015 after taking a few small courses. My first goals were to get some practice in for designing landing pages. I threw together this creative landing page for a fake brand that I was experimenting with. I was pleased enough with the end result to share.
 ![Travelight landing page]({{site.baseurl}}/assets/img/posts/study/travelight/large-landing.jpg)

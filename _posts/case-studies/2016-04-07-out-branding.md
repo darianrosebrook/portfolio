@@ -72,10 +72,6 @@ At the end of the sketching both digitally and analog, I came to the conclusion 
 
 ![Icon set]({{site.baseurl}}/assets/img/posts/study/out-branding/out-branding-presentation.gif)
 
-I also threw in a stylized banner radio banner style for flavour.
-
-![Icon set]({{site.baseurl}}/assets/img/posts/study/out-branding/finals.png)
-
 ### Images
 
 <div id="img-quilt" class="grid cf">
