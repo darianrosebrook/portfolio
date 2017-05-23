@@ -8,4 +8,14 @@ sitemap:
   changefreq: 'monthly'
   exclude: 'no'
 ---
-<h1>hi</h1>
+<header id="hero" class="container hero featured">
+  <h1>Branding</h1>
+  <div class="row featured info">
+    <h2>Featured Work</h2>
+      <article class="featured-item">
+        <h3><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h3>
+        <p>{{post.description}}</p>
+        <a href="{{site.baseurl}}{{post.url}}" class="">View Project</a>
+      </article>
+  </div>
+</header>
