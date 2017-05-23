@@ -12,8 +12,7 @@ sitemap:
 <header id="hero" class="index-header">
   <div class="info">
       <h1 class="name">DARIAN <br>ROSEBROOK</h1>
-      <h2 class="position">Branding Consultant</h2>
-      <h2 class="position">Web Designer</h2>
+      <h2 class="position">Brand Identity Designer</h2>
       <button data-href="#contact" class="scrollBtn button">For Hire</button>
   </div>
   <img src="/assets/img/profile-alpha.png" alt="Darian Rosebrook, a designer who focuses on websites and branding projects for companies." />
@@ -23,10 +22,6 @@ sitemap:
   <article class="icon col">
     <img src="/assets/img/icon-branding.svg" alt="Icon specifically for the topic of branding" />
     <h4>Branding</h4>
-  </article>
-  <article class="icon col">
-    <img src="/assets/img/icon-web.svg" alt="Icon specifically for the topic of Web Design" />
-    <h4>Web Design</h4>
   </article>
   <article class="icon col">
     <img src="/assets/img/icon-process.svg" alt="Icon specifically for the topic of Process" />
@@ -49,15 +44,6 @@ sitemap:
   </article>
   <hr class="mobile-separator" />
   <article class="blurb-container module">
-    <img src="/assets/img/icon-web.svg" alt="Icon specifically for the topic of Web Design" class="" />
-    <div>
-      <h4><a href="{{site.baseurl}}web">Responsive Website Design and Development</a></h4>
-      <p>Make a space to showcase your brand online. Let's work together to make it as effective as possible.</p>
-      <a href="{{site.baseurl}}web">View Web Design Projects</a>
-    </div>
-  </article>
-  <hr class="mobile-separator" />
-  <article class="blurb-container module">
     <img src="/assets/img/icon-process.svg" alt="Icon specifically for the topic of Process" class="" />
     <div>
       <h4><a href="{{site.baseurl}}process">The Design Process</a></h4>
@@ -76,25 +62,19 @@ sitemap:
   </article>
 </section>
 <section id="past-work" class="container">
-  <h1>Archive</h1>
+  <h2>Active Projects</h2>
   <div id="hero" class="row">
-    <h2>Previous Work:</h2>
+    <h3>What I am working on now</h3>
   </div>
-{% for post in site.categories.public limit: 6 %}
-{% capture thecycle %}{% cycle '1', '2', '3' %}{% endcapture %}
-{% if thecycle == '1' %}<div class="row">{% endif %}
-    <article class="work module">
-      {% if post.type == 'Branding' %}<h4 class="work-branding">{% elsif post.type == 'Web Design' %}<h4 class="work-web">{% elsif post.type == 'Concept' %}<h4 class="work-concept">{% else %}<h4>{% endif %}{{post.type}}</h4>
-      <a href="{{site.baseurl}}{{post.url}}"><img src="{{post.index_image}}" alt="{{post.title | truncate: 120}}" /></a>
-      <div class="data">
-        <h5><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h5>
-        <small><a href="{{site.baseurl}}archive/articles">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.topic}}</em></a></small>
-        <p class="meta_description">&ldquo;{{post.description | truncate: 170}}&rdquo;</p>
-      </div>
+  <div class="row">
+    <article class="featured-project">
+      <h4>So Magnetic</h4>
+      <a href="{{site.baseurl}}/"><img src="{{site.baseurl}}/assets/img/posts/study/sm/sm-logo-full.svg" alt="Logo for the branding agency So Magnetic"></a>
     </article>
-  {% if thecycle == '3' or forloop.last %}</div>{% endif %}
-  {% endfor %}
-  <a href="{{site.baseurl}}archive/case-studies" class="button secondary">View All Case Studies</a>
+    <article class="featured-project">
+      <h4>Compass of Design</h4>
+      <a href="{{site.baseurl}}/"><img src="{{site.baseurl}}/assets/img/posts/study/compass/cod-logo.svg" alt="Logo for the Compass of Design"></a>
+    </article>
 </section>
 {% include testimony.html %}
 <section id="articles" class="container">

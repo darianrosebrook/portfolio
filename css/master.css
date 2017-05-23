@@ -416,7 +416,8 @@ h1 {
   margin: 0 0 1.5rem 0;
   font-size: 4rem;
   font-weight: 500;
-  color: #e74b4c; }
+  color: #e74b4c;
+  line-height: 0; }
 
 i {
   margin-right: 2rem;
@@ -790,7 +791,7 @@ form .container {
     transform: none; }
   .index-header h1 {
     line-height: 1.1em;
-    margin-bottom: 1em; }
+    margin-bottom: 0.4em; }
   .index-header h2 {
     color: #261924;
     line-height: 0.8; }
