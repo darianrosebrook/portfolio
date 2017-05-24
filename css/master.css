@@ -604,7 +604,8 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: flex-start; }
+  align-items: flex-start;
+  padding: 3em 0; }
 
 form input:not(.button), form textarea {
   width: 100%;
