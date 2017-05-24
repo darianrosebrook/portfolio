@@ -600,6 +600,12 @@ footer {
       padding-bottom: 0;
       margin-left: 1em; } }
 
+.flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start; }
+
 form input:not(.button), form textarea {
   width: 100%;
   margin-bottom: 1.2em;
@@ -1100,6 +1106,16 @@ form .container {
       display: inline-block;
       width: 55vw; }
     #mailchimp h4 {
+      width: 100%; }
+
+  .featured-project {
+    width: 49%;
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    align-content: space-between; }
+    .featured-project a img {
       width: 100%; } }
 .container .article-content {
   position: relative;
