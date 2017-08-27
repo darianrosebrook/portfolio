@@ -638,14 +638,36 @@ form label.module {
     border: 2px dashed #e74b4c; }
   form label.module ~ label.module {
     margin-left: 0.9em; }
-form input[name$="-webdesign"]:checked ~ .container label[for$="-webdesign"] {
-  background-color: rgba(33, 33, 33, 0.4); }
+form input[name$="-logo"]:checked ~ .container label[for$="-logo"] {
+  background-color: #494768;
+  color: #f2f2f2; }
 form input[name$="-branding"]:checked ~ .container label[for$="-branding"] {
-  background-color: rgba(33, 33, 33, 0.4); }
+  background-color: #494768;
+  color: #f2f2f2; }
 form input[name$="-ux"]:checked ~ .container label[for$="-ux"] {
-  background-color: rgba(33, 33, 33, 0.4); }
+  background-color: #494768;
+  color: #f2f2f2; }
 form input[name$="-hello"]:checked ~ .container label[for$="-hello"] {
-  background-color: rgba(33, 33, 33, 0.4); }
+  background-color: #494768;
+  color: #f2f2f2; }
+form input[id$="size-1"]:checked ~ .container label[for$="size-1"] {
+  background-color: #494768;
+  color: #f2f2f2; }
+form input[id$="size-2"]:checked ~ .container label[for$="size-2"] {
+  background-color: #494768;
+  color: #f2f2f2; }
+form input[id$="size-3"]:checked ~ .container label[for$="size-3"] {
+  background-color: #494768;
+  color: #f2f2f2; }
+form input[id$="size-4"]:checked ~ .container label[for$="size-4"] {
+  background-color: #494768;
+  color: #f2f2f2; }
+form input[id$="-before-1"]:checked ~ .container label[for$="before-1"] {
+  background-color: #494768;
+  color: #f2f2f2; }
+form input[id$="-before-2"]:checked ~ .container label[for$="before-2"] {
+  background-color: #494768;
+  color: #f2f2f2; }
 form .container {
   display: flex;
   padding: 3rem 0; }

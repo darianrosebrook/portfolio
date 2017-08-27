@@ -7,14 +7,14 @@
       <p>What kind of project would you like to work on?</p>
       <p><small>(Yes, you can select more than one.)</small></p>
       {% if page.url contains 'process' %}{% else %}<p><small>If you need to check out <a href="{{site.baseurl}}/process">The Design Process</a>, feel free to do so.</small></p>{% endif %}
-      <input type="checkbox" class="hidden" data-continue="true" id="checkbox-webdesign" name="checkbox-webdesign" value="" >
+      <input type="checkbox" class="hidden" data-continue="true" id="checkbox-logo" name="checkbox-logo" value="" >
       <input type="checkbox" class="hidden" data-continue="true" id="checkbox-branding" name="checkbox-branding" value="" >
       <input type="checkbox" class="hidden" data-continue="false" id="checkbox-hello" name="checkbox-hello" value="" ><br>
       <div class="container">
-        <label class="transition module " for="checkbox-webdesign">
-          <img src="{{site.baseurl}}/assets/img/icon-web.svg" alt="" />
+        <label class="transition module " for="checkbox-logo">
+          <img src="{{site.baseurl}}/assets/img/logo.svg" alt="" />
           <br />
-          Web Design
+          Logo Design
         </label>
         <label class="transition module " for="checkbox-branding">
           <img src="{{site.baseurl}}/assets/img/icon-branding.svg" alt="" />
@@ -27,42 +27,87 @@
           I'm just saying hello!
         </label>
       </div>
+      <p><img src="{{site.baseurl}}/assets/img/posts/study/sm/sm-logo-full.svg" alt=""></p>
       <p class=" continue questionnaire-part-1 project">
-        Alright! In order for me to focus and deliver
-      the best possible solution for you and your organization, I just need a little more information. This takes a very short amount of time and allows me to keep your organization's audience and goals at the forefront of the design.
+        As a designer, it's my duty to deliver the right brand experience for you and your brand's audience. Therefore, I need to be selective about the projects that I take on. Providing details on your project help me understand your need and deliver the most effective design solution.<br/><br/>I'll review your reply here and get back to you as soon as possible. Thanks!
       </p>
       <div class="continue project questionnaire-part-2">
-        <input type="text" name="message" class="transition enter text-center" value="" placeholder="e.g. (Avenue Editorial, Inc.)">
-        <h6 class="enter" > What is the name of your business or the company you work for?</h6>
+        <input type="text" name="Source" class="transition enter text-center" value="" placeholder="Referral? Twitter?">
+        <h4 class="enter" > How did you hear about Darian and So Magnetic?</h4>
+      </div>
+      <div class="continue project questionnaire-part-2">
+        <input type="text" name="Business-Name" class="transition enter text-center" value="" placeholder="e.g. (Avenue Editorial, Inc.)">
+        <h4 class="enter" > What is the name of your business or the company you work for?</h4>
       </div>
       <div class="continue project questionnaire-part-3">
-        <input type="text" name="message" class="transition enter text-center" value="" placeholder="e.g (+1 360 555 555)">
-        <h6 class="enter" > What is a good phone number to reach you at?</h6>
-    </div>
-      <div class="continue project questionnaire-part-4">
-        <input type="text" name="message" class="transition enter text-center" value="" placeholder="http://...">
-        <h6 class="enter" >Does your organization have a website? I'd love to see it!</h6>
+        <input type="text" name="Phone" class="transition enter text-center" value="" placeholder="e.g (+1 360 555 555)">
+        <h4 class="enter" > What is a good phone number to reach you at?</h4>
       </div>
-      <div id="special" class="continue project questionnaire-part-5">
-      <textarea name="message" class="transition enter text-center "  placeholder="What makes you guys unique?"></textarea>
-      <h6 class="enter" > What does your organization do and what excites you most about it?</h6>
-      </div>
-      <div class="continue project questionnaire-part-6">
-        <textarea name="message" class="transition enter text-center "  placeholder="What looks like success for you?"></textarea>
-        <h6 class="enter" > How will design help accomplish your goals as an organization?</h6>
-      </div>
-      <div class="continue project questionnaire-part-7">
-        <input type="text" name="message" class="transition enter text-center" value="" placeholder="e.g. (middle aged adults who haven't given up being a teenager)">
-        <h6 class="enter" > Who is the audience you are trying to reach?</h6>
+      <div id="special" class="continue project questionnaire-part-4">
+      <textarea name="Organization-type" class="transition enter text-center "  placeholder="The more specific the better."></textarea>
+      <h4 class="enter" > What does your organization do and what excites you most about it?</h4>
       </div>
 
+      <div class="continue project questionnaire-part-4">
+        <input type="text" name="Uniqueness" class="transition enter text-center" value="" placeholder="What makes you unique?">
+        <h4 class="enter" >How does what you do differ from your competition?</h4>
+      </div>
+      <div class="continue project questionnaire-part-6">
+        <input type="radio" class="hidden" name="org-size" id="org-size-1" value="1-10 people">
+        <input type="radio" class="hidden" name="org-size" id="org-size-2" value="10-20 people">
+        <input type="radio" class="hidden" name="org-size" id="org-size-3" value="20-50 people">
+        <input type="radio" class="hidden" name="org-size" id="org-size-4" value="100 plus">
+        <div class="container check-container">
+          <label class="module four" for="org-size-1"> 1-10 people</label>
+          <label class="module four" for="org-size-2"> 10-20 people</label>
+          <label class="module four" for="org-size-3"> 20-50 people</label>
+          <label class="module four" for="org-size-4">100 + people</label>
+        </div>
+        <h4 class="enter" > How big is your organization?</h4>
+      </div>
+      <div class="continue project questionnaire-part-7">
+        <input type="text" name="Audience" class="transition enter text-center" value="" placeholder="e.g. (middle aged adults who haven't given up being a teenager)">
+        <h4 class="enter" > Who is the audience you are trying to reach?</h4>
+      </div>
+      <div class="continue project questionnaire-part-7">
+        <input type="text" name="Channels" class="transition enter text-center" value="" placeholder="e.g. Word of mouth, advertisements, Social Media">
+        <h4 class="enter" > How do people find out about your organization?</h4>
+      </div>
+      <div class="continue project questionnaire-part-7">
+        <input type="text" name="Attributes" class="transition enter text-center" value="" placeholder="e.g. Trustworthy, Energetic, Formal, Casual">
+        <h4 class="enter" > What attributes does your organization value?</h4>
+      </div>
+      <div class="continue project questionnaire-part-7">
+        <input type="text" name="Admiration" class="transition enter text-center" value="" placeholder="e.g. Urban Outfitters, Starbucks, HBO, Instagram">
+        <h4 class="enter" > What brands do you admire in your industry?</h4>
+      </div>
+      <div class="continue project questionnaire-part-7">
+        <input type="text" name="Dates" class="transition enter text-center" value="" placeholder="Specific dates are helpful here">
+        <h4 class="enter" >Is there a special event or launch date that is going to drive the deadline of this project?</h4>
+      </div>
+      <div class="continue project questionnaire-part-7">
+        <input type="text" name="Success" class="transition enter text-center" value="" placeholder="More recurring revenue, pre-launch sales, etc.">
+        <h4 class="enter" >What does the success from this project look like to you?</h4>
+      </div>
+      <div class="continue project questionnaire-part-7">
+        <input type="text" name="Goals" class="transition enter text-center" value="" placeholder="Any other goals go here">
+        <h4 class="enter" >Are there any other specific goals you are trying to achieve with this campaign?</h4>
+      </div>
+      <div class="continue project questionnaire-part-6">
+        <input type="radio" class="hidden" name="hire-before" id="hire-before-1" value="yes">
+        <input type="radio" class="hidden" name="hire-before" id="hire-before-2" value="no">
+        <div class="container check-container">
+          <label class="module" for="hire-before-1">Yes</label>
+          <label class="module" for="hire-before-2">No</label>
+        </div>
+        <h4 class="enter" >Have you worked with a design agency in the past (this project or any before)?</h4>
+      </div>
       <div class="questionnaire-part-1 continue message project" >
-      <textarea name="message" placeholder="Your Message..." class="transition enter text-center " ></textarea>
-      <h6 class="message enter"><span class="hidden project">Is there anything else I need to know about the project?</span><span class="hidden message">How's it going? :D</span></h6>
+      <textarea name="additional-info" placeholder="Your Message..." class="transition enter text-center " ></textarea>
+      <h4 class="message enter"><span class="hidden project">Is there any additional information that needs to be taken into consideration?</span><span class="hidden message">How's it going? :D</span></h4>
       </div>
       <input type="text" name="_gotcha" class="hidden" />
-      <p class="continue project"> Thank you! This filled form here will help me keep your organization's goals and audience in the forefront of the design.</p>
-      <input type="submit" class="button continue project message" value="Submit!">
+      <p class="continue project"> Thank you! This filled form here will help me keep your organization's goals and audience in the forefront of the design. <br><br>I'll review the questions here and respond to you as soon as I can. Thanks!</p>      <input type="submit" class="button continue project message" value="Submit!">
       <input type="hidden" name="_next" value="https://darianrosebrook.com/continue" />
     </form>
    </div>
