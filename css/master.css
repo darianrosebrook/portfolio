@@ -698,6 +698,12 @@ form .container {
     opacity: 1; }
   #contact label {
     cursor: pointer; }
+    #contact label.icon-label {
+      width: 50%; }
+      #contact label.icon-label:nth-of-type(1n+2) {
+        margin-left: 0; }
+  #contact .label-container {
+    flex-wrap: wrap; }
   #contact .continue {
     display: none;
     animation: slideIn 0.3s backwards; }
@@ -758,7 +764,10 @@ form .container {
     margin: 0 auto;
     width: 66%; }
     #contact .continue:not(.button) {
-      height: 30vh; } }
+      height: 30vh; }
+    #contact label.icon-label {
+      width: 25%;
+      margin-left: auto; } }
 .list {
   position: relative;
   color: #261924;
