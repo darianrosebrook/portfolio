@@ -647,7 +647,10 @@ form input[name$="-branding"]:checked ~ .container label[for$="-branding"] {
 form input[name$="-ux"]:checked ~ .container label[for$="-ux"] {
   background-color: #494768;
   color: #f2f2f2; }
-form input[name$="-hello"]:checked ~ .container label[for$="-hello"] {
+form input[name$="-speaking"]:checked ~ .container label[for$="-speaking"] {
+  background-color: #494768;
+  color: #f2f2f2; }
+form input[name$="-else"]:checked ~ .container label[for$="-else"] {
   background-color: #494768;
   color: #f2f2f2; }
 form input[id$="size-1"]:checked ~ .container label[for$="size-1"] {
@@ -706,11 +709,11 @@ form .container {
     display: inline-flex !important; }
   #contact input[data-continue="true"]:checked ~ div span.message {
     display: none !important; }
-  #contact input[name$="-hello"]:checked ~ .continue.message, #contact input[name$="-hello"]:checked input[name$="-hello"]:checked ~ div .continue.message {
-    display: block; }
-  #contact input[name$="-hello"]:checked ~ div span.message {
+  #contact input[name$="-speaking"]:checked ~ .continue.message, #contact input[name$="-speaking"]:checked input[name$="-speaking"]:checked ~ div .continue.message, #contact input[name$="-speaking"]:checked input[name$="-else"]:checked ~ div .continue.message, #contact input[name$="-else"]:checked ~ .continue.message, #contact input[name$="-else"]:checked input[name$="-speaking"]:checked ~ div .continue.message, #contact input[name$="-else"]:checked input[name$="-else"]:checked ~ div .continue.message {
+    display: flex; }
+  #contact input[name$="-speaking"]:checked ~ div span.message, #contact input[name$="-else"]:checked ~ div span.message {
     display: inline !important; }
-  #contact input[name$="-hello"]:checked ~ div span.project {
+  #contact input[name$="-speaking"]:checked ~ div span.project, #contact input[name$="-else"]:checked ~ div span.project {
     display: none !important; }
   #contact .continue.questionnaire-part-1 {
     height: auto;
