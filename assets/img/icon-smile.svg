@@ -1,1 +1,39 @@
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><defs><style>.cls-1,.cls-5{fill:#e74b4c;}.cls-1,.cls-3{stroke:#261924;stroke-miterlimit:10;}.cls-2{fill:#261924;}.cls-3,.cls-4{fill:none;stroke-linecap:round;}.cls-3{stroke-width:1.22px;}.cls-4{stroke:#e74b4c;stroke-linejoin:round;}</style></defs><title>icon-smiley</title><circle class="cls-1" cx="34.08" cy="29.42" r="12.42"/><circle class="cls-2" cx="26.07" cy="24.17" r="1.29"/><circle class="cls-2" cx="37.8" cy="24.24" r="1.29"/><path class="cls-3" d="M35.75,29.92c0,3.27-7.39,3.13-7.39,0"/><path class="cls-4" d="M17.73,20.42H7.31a2,2,0,0,1-2-2V10.33a2,2,0,0,1,2-2H18.15a2,2,0,0,1,2,2v7.73l1.63,3.7Z"/><rect class="cls-5" x="7.88" y="10.44" width="9.5" height="1"/><rect class="cls-5" x="7.88" y="12.44" width="8" height="1"/><rect class="cls-5" x="7.88" y="14.44" width="9.5" height="1"/><rect class="cls-5" x="7.88" y="16.44" width="5" height="1"/></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#E74B4C;stroke:#261924;stroke-width:0.7772;stroke-miterlimit:10;}
+	.st1{fill:#261924;}
+	.st2{fill:none;stroke:#261924;stroke-width:0.9482;stroke-linecap:round;stroke-miterlimit:10;}
+	.st3{fill:none;stroke:#E74B4C;stroke-width:0.7772;stroke-linecap:round;stroke-linejoin:round;}
+	.st4{fill:#E74B4C;}
+</style>
+<title>icon-smiley</title>
+<g>
+	<g>
+		<circle class="st0" cx="39.4" cy="32.2" r="9.7"/>
+		<circle class="st1" cx="33.1" cy="28.1" r="1"/>
+		<circle class="st1" cx="42.2" cy="28.1" r="1"/>
+		<path class="st2" d="M40.7,32.6c0,2.5-5.7,2.4-5.7,0"/>
+	</g>
+	<g>
+		<path class="st3" d="M28.2,34.5L27,37.4v6c0,0.9-0.7,1.6-1.6,1.6H17c-0.9,0-1.6-0.7-1.6-1.6v-6.3c0-0.9,0.7-1.6,1.6-1.6h8.1
+			L28.2,34.5z"/>
+		<rect x="17.4" y="42.5" class="st4" width="7.4" height="0.8"/>
+		<rect x="17.4" y="40.9" class="st4" width="6.2" height="0.8"/>
+		<rect x="17.4" y="39.4" class="st4" width="7.4" height="0.8"/>
+		<rect x="17.4" y="37.8" class="st4" width="6.2" height="0.8"/>
+	</g>
+	<circle class="st0" cx="10.6" cy="21.5" r="9.7"/>
+	<circle class="st1" cx="16.9" cy="17.4" r="1"/>
+	<circle class="st1" cx="7.8" cy="17.4" r="1"/>
+	<path class="st2" d="M15.1,21.9c0,2.4-5.7,2.5-5.7,0"/>
+	<path class="st3" d="M20.2,15.5l1.3-2.9v-6c0-0.9,0.7-1.6,1.6-1.6h8.4c0.9,0,1.6,0.7,1.6,1.6v6.3c0,0.9-0.7,1.6-1.6,1.6h-8.1
+		L20.2,15.5z"/>
+	<rect x="23.6" y="6.7" class="st4" width="7.4" height="0.8"/>
+	<rect x="24.8" y="8.3" class="st4" width="6.2" height="0.8"/>
+	<rect x="23.6" y="9.8" class="st4" width="7.4" height="0.8"/>
+	<rect x="27.1" y="11.4" class="st4" width="3.9" height="0.8"/>
+</g>
+</svg>

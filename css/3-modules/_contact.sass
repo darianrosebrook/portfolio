@@ -13,6 +13,12 @@
       opacity: 1
   label
     cursor: pointer
+    &.icon-label
+      width: 50%
+      &:nth-of-type(1n+2)
+        margin-left: 0
+  .label-container
+    flex-wrap: wrap
   .continue
     display: none
     animation: slideIn 0.3s backwards
@@ -55,3 +61,6 @@
     .continue
       &:not(.button)
         height: 30vh
+    label.icon-label
+      width: 25%
+      margin-left: auto
