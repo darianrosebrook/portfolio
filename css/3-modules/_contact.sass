@@ -26,9 +26,9 @@
       display: inline-flex !important
     & ~ div span.message
       display: none !important
-  input[name$="-hello"]:checked
-    & ~ .continue.message, input[name$="-hello"]:checked ~ div .continue.message
-      display: block
+  input[name$="-speaking"]:checked, input[name$="-else"]:checked
+    & ~ .continue.message, input[name$="-speaking"]:checked ~ div .continue.message, input[name$="-else"]:checked ~ div .continue.message
+      display: flex
     & ~ div span.message
       display: inline !important
     & ~ div span.project

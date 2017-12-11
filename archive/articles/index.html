@@ -8,7 +8,7 @@ sitemap:
   exclude: 'no'
 ---
 {% for post in site.categories.article limit:1 %}
-<header id="hero" class="container hero featured-article">
+<header id="hero" class="container hero featured-article" style="background: linear-gradient(to left, rgba(230, 230, 230, 0) 30%, #e6e6e6),url('{{post.index_image}}'); background-repeat:none; background-size:cover;">
   <div class="row featured info">
     <h1>Articles</h1>
     <h2>Featured Article</h2>
