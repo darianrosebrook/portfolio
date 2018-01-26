@@ -68,7 +68,7 @@ Team building is something usually done around a fire at camps. One of the most 
 
 ### Final Concept
 
-At the end of the sketching both digitally and analog, I came to the conclusion we would need enough sizes for different media, as well as dark and light monochromes should he decide to display on his personal site as well. The finals consist of an emblem with the full name, a circle emblem with the initials, and the hexagonal emblem with the initials. The full logo has the code brackets "\< \>" in there to symbolize the code with the trees as growing. The variant omits the brackets to increase legibility from smaller sizes.
+At the end of the sketching both digitally and analog, I came to the final results here using a flat style for the icons, simple color pallete that is repeatable throughout each icon. All of these tie back into the logo to represent the outdoor nature of the brand but with an emphasis on friendly, welcoming interaction between nature and the community of outdoors adventurers.
 
 ![Icon set]({{site.baseurl}}/assets/img/posts/study/out-branding/out-branding-presentation.gif)
 
