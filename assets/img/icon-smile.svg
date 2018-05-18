@@ -3,37 +3,39 @@
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:#E74B4C;stroke:#261924;stroke-width:0.7772;stroke-miterlimit:10;}
+	.st0{fill:#E74B4C;stroke:#261924;stroke-width:0.6887;stroke-miterlimit:10;}
 	.st1{fill:#261924;}
-	.st2{fill:none;stroke:#261924;stroke-width:0.9482;stroke-linecap:round;stroke-miterlimit:10;}
-	.st3{fill:none;stroke:#E74B4C;stroke-width:0.7772;stroke-linecap:round;stroke-linejoin:round;}
+	.st2{fill:none;stroke:#261924;stroke-width:0.8403;stroke-linecap:round;stroke-miterlimit:10;}
+	.st3{fill:none;stroke:#E74B4C;stroke-width:0.6887;stroke-linecap:round;stroke-linejoin:round;}
 	.st4{fill:#E74B4C;}
 </style>
 <title>icon-smiley</title>
 <g>
 	<g>
-		<circle class="st0" cx="39.4" cy="32.2" r="9.7"/>
-		<circle class="st1" cx="33.1" cy="28.1" r="1"/>
-		<circle class="st1" cx="42.2" cy="28.1" r="1"/>
-		<path class="st2" d="M40.7,32.6c0,2.5-5.7,2.4-5.7,0"/>
+		<g>
+			<circle class="st0" cx="40.3" cy="23.4" r="8.6"/>
+			<circle class="st1" cx="34.7" cy="19.8" r="0.9"/>
+			<circle class="st1" cx="42.8" cy="19.8" r="0.9"/>
+			<path class="st2" d="M41.4,23.8c0,2.2-5.1,2.1-5.1,0"/>
+		</g>
+		<g>
+			<path class="st3" d="M30.4,25.5l-1.1,2.6v5.3c0,0.8-0.6,1.4-1.4,1.4h-7.4c-0.8,0-1.4-0.6-1.4-1.4v-5.6c0-0.8,0.6-1.4,1.4-1.4h7.2
+				L30.4,25.5z"/>
+			<rect x="20.8" y="32.6" class="st4" width="6.6" height="0.7"/>
+			<rect x="20.8" y="31.2" class="st4" width="5.5" height="0.7"/>
+			<rect x="20.8" y="29.8" class="st4" width="6.6" height="0.7"/>
+			<rect x="20.8" y="28.4" class="st4" width="5.5" height="0.7"/>
+		</g>
 	</g>
-	<g>
-		<path class="st3" d="M28.2,34.5L27,37.4v6c0,0.9-0.7,1.6-1.6,1.6H17c-0.9,0-1.6-0.7-1.6-1.6v-6.3c0-0.9,0.7-1.6,1.6-1.6h8.1
-			L28.2,34.5z"/>
-		<rect x="17.4" y="42.5" class="st4" width="7.4" height="0.8"/>
-		<rect x="17.4" y="40.9" class="st4" width="6.2" height="0.8"/>
-		<rect x="17.4" y="39.4" class="st4" width="7.4" height="0.8"/>
-		<rect x="17.4" y="37.8" class="st4" width="6.2" height="0.8"/>
-	</g>
-	<circle class="st0" cx="10.6" cy="21.5" r="9.7"/>
-	<circle class="st1" cx="16.9" cy="17.4" r="1"/>
-	<circle class="st1" cx="7.8" cy="17.4" r="1"/>
-	<path class="st2" d="M15.1,21.9c0,2.4-5.7,2.5-5.7,0"/>
-	<path class="st3" d="M20.2,15.5l1.3-2.9v-6c0-0.9,0.7-1.6,1.6-1.6h8.4c0.9,0,1.6,0.7,1.6,1.6v6.3c0,0.9-0.7,1.6-1.6,1.6h-8.1
-		L20.2,15.5z"/>
-	<rect x="23.6" y="6.7" class="st4" width="7.4" height="0.8"/>
-	<rect x="24.8" y="8.3" class="st4" width="6.2" height="0.8"/>
-	<rect x="23.6" y="9.8" class="st4" width="7.4" height="0.8"/>
-	<rect x="27.1" y="11.4" class="st4" width="3.9" height="0.8"/>
+	<circle class="st0" cx="9.6" cy="23.4" r="8.6"/>
+	<circle class="st1" cx="15.2" cy="19.8" r="0.9"/>
+	<circle class="st1" cx="7.1" cy="19.8" r="0.9"/>
+	<path class="st2" d="M13.6,23.8c0,2.1-5.1,2.2-5.1,0"/>
+	<path class="st3" d="M18.1,18.1l1.2-2.6v-5.3c0-0.8,0.6-1.4,1.4-1.4h7.4c0.8,0,1.4,0.6,1.4,1.4v5.6c0,0.8-0.6,1.4-1.4,1.4h-7.2
+		L18.1,18.1z"/>
+	<rect x="21.1" y="10.3" class="st4" width="6.6" height="0.7"/>
+	<rect x="22.2" y="11.7" class="st4" width="5.5" height="0.7"/>
+	<rect x="21.1" y="13.1" class="st4" width="6.6" height="0.7"/>
+	<rect x="24.2" y="14.5" class="st4" width="3.5" height="0.7"/>
 </g>
 </svg>
