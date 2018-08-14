@@ -4,17 +4,20 @@
     <article class="person">
       <h3>Who I've worked with&#8230;</h3>
       {% for post in site.categories.testimony %}
-      <div>
-        <div class="circle"><img src="{{site.baseurl}}/assets/img/testimonials/{{post.img}}" alt="{{post.who}}" /></div>
-        <h4><a href="{{post.where}}">{{post.who}}</a></h4>
-        <p class="Occupation">{{post.occupation}}</p>
-        {{post.content}}
+      <div class="row">
+        <div>
+          <div class="circle"><img src="{{site.baseurl}}/assets/img/testimonials/{{post.img}}" alt="{{post.who}}" /></div>
+          <h4><a href="{{post.where}}" target="_blank">{{post.who}}</a></h4>
+          <p class="Occupation">{{post.occupation}}</p>
+          {{post.content}}
+        </div>
+        <div>
+          <blockquote cite="">
+            &ldquo; {{post.testimony}} &rdquo;
+          </blockquote>
+        </div>
       </div>
-      <div>
-        <blockquote cite="">
-          &ldquo; {{post.testimony}} &rdquo;
-        </blockquote>
-      </div>
+      <br /> <br />
       {% endfor %}
     </article>
   </div>
