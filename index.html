@@ -1,109 +1,57 @@
 ---
 layout: default
-title: Brand Identity and Web Design | Darian Rosebrook
-description: Darian Rosebrook is a Brand Identity Designer with skills based around digital products and website design. Specializing in professional branding for companies, he works globally just north of Seattle in the Pacific North West (PNW).
-img:
+title: Brand Identity Designer | Darian Rosebrook
+description: Darian Rosebrook is a Brand Identity Designer from the Seattle area. He specializing in crafting the brand experience from physical to digital products as well as the logo and identity design.
+index_image: /assets/img/index.jpg
 sitemap:
   lastmod: 2016-11-25
   priority: 0.7
   changefreq: 'weekly'
   exclude: 'no'
 ---
-<header id="hero" class="index-header">
-  <div class="info">
-      <h1 class="name">DARIAN <br>ROSEBROOK</h1>
-      <h2 class="position">Branding Consultant</h2>
-      <h2 class="position">Web Designer</h2>
-      <button data-href="#contact" class="scrollBtn button">For Hire</button>
-  </div>
-  <img src="/assets/img/profile-alpha.png" alt="Darian Rosebrook, a designer who focuses on websites and branding projects for companies." />
+<header id="hero" class="container">
+  <article class="row">
+    <div class="module">
+      <img src="{{site.baseurl}}/assets/img/darian.png" alt="">
+    </div>
+    <div class="module">
+        <h1 class="name">Darian <br/>Rosebrook</h1>
+        <h3 class="position">BRAND IDENTITY DESIGNER</h3>
+        <p>I run <a href="https://somagnetic.com" target="_blank">So Magnetic</a> which help businesses <strong>design magnetic brand experiences</strong> to help them <strong>increase customer engagement and revenue.</strong></p>
+        <p>I also run the <a href="https://compassofdesign.com" target="_blank">Compass of Design</a> community, a design community as a mentor to countless other designers online. </p>
+        <h6>Looking to get in contact?</h6>
+        <button data-href="#contact" class="scrollBtn button">Contact Me</button>
+    </div>
+  </article>
 </header>
-<section class="sub-nav hidden container">
-  <h3 class="hidden">Services</h3>
-  <article class="icon col">
-    <img src="/assets/img/icon-branding.svg" alt="Icon specifically for the topic of branding" />
-    <h4>Branding</h4>
-  </article>
-  <article class="icon col">
-    <img src="/assets/img/icon-web.svg" alt="Icon specifically for the topic of Web Design" />
-    <h4>Web Design</h4>
-  </article>
-  <article class="icon col">
-    <img src="/assets/img/icon-process.svg" alt="Icon specifically for the topic of Process" />
-    <h4>My Process</h4>
-  </article>
-  <article class="icon col">
-    <img src="/assets/img/icon-writing.svg" alt="Icon specifically for the topic of Articles" />
-    <h4>Articles</h4>
-  </article>
-</section>
-<section class="descriptions container">
-  <h3 class="mobile">The Work I Do:</h3>
-  <article class="blurb-container module">
-    <img src="/assets/img/icon-branding.svg" alt="Icon specifically for the topic of branding" class="" />
-    <div>
-      <h4><a href="{{site.baseurl}}branding">Brand Identity and Design</a></h4>
-      <p>Make your brand stand out in the industry with professional branding services. </p>
-      <a href="{{site.baseurl}}branding">View Branding Projects</a>
-    </div>
-  </article>
-  <hr class="mobile-separator" />
-  <article class="blurb-container module">
-    <img src="/assets/img/icon-web.svg" alt="Icon specifically for the topic of Web Design" class="" />
-    <div>
-      <h4><a href="{{site.baseurl}}web">Responsive Website Design and Development</a></h4>
-      <p>Make a space to showcase your brand online. Let's work together to make it as effective as possible.</p>
-      <a href="{{site.baseurl}}web">View Web Design Projects</a>
-    </div>
-  </article>
-  <hr class="mobile-separator" />
-  <article class="blurb-container module">
-    <img src="/assets/img/icon-process.svg" alt="Icon specifically for the topic of Process" class="" />
-    <div>
-      <h4><a href="{{site.baseurl}}process">The Design Process</a></h4>
-      <p>An effective design starts with an effective process. I use careful research and questions that center around the goals of both the brand and the target audience. </p>
-      <a href="{{site.baseurl}}process">View the Design Process</a>
-    </div>
-  </article>
-  <hr class="mobile-separator" />
-  <article class="blurb-container module">
-    <img src="/assets/img/icon-writing.svg" alt="Icon specifically for the topic of Articles" class="" />
-    <div>
-      <h4><a href="{{site.baseurl}}archive/articles">Articles on Creative Business</a></h4>
-      <p>When building a brand, there is a lot of research that can still be put to good use. Here are the quantified notes and experiences edited to fit the creative industry.</p>
-      <a href="{{site.baseurl}}archive/articles">View the Articles Archive</a>
-    </div>
-  </article>
-</section>
+
 <section id="past-work" class="container">
-  <h1>Archive</h1>
+  <h2>Active Projects</h2>
   <div id="hero" class="row">
-    <h2>Previous Work:</h2>
+    <h3>What I am working on now</h3>
   </div>
-{% for post in site.categories.public limit: 6 %}
-{% capture thecycle %}{% cycle '1', '2', '3' %}{% endcapture %}
-{% if thecycle == '1' %}<div class="row">{% endif %}
-    <article class="work module">
-      {% if post.type == 'Branding' %}<h4 class="work-branding">{% elsif post.type == 'Web Design' %}<h4 class="work-web">{% elsif post.type == 'Concept' %}<h4 class="work-concept">{% else %}<h4>{% endif %}{{post.type}}</h4>
-      <a href="{{site.baseurl}}{{post.url}}"><img src="{{post.index_image}}" alt="{{post.title | truncate: 120}}" /></a>
-      <div class="data">
-        <h5><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h5>
-        <small><a href="{{site.baseurl}}archive/articles">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.topic}}</em></a></small>
-        <p class="meta_description">&ldquo;{{post.description | truncate: 170}}&rdquo;</p>
-      </div>
+  <div class="row flex">
+    <article class="featured-project">
+      <h3>So Magnetic: Branding design Agency</h3>
+      <p>This is an agile team of designers capable of handling <br/>your company's toughest branding challenges.</p>
+      <a href="https://somagnetic.com"><img src="{{site.baseurl}}/assets/img/svg-magnet-icon.svg" alt="Logo for the branding agency So Magnetic"></a>
+
     </article>
-  {% if thecycle == '3' or forloop.last %}</div>{% endif %}
-  {% endfor %}
-  <a href="{{site.baseurl}}archive/case-studies" class="button secondary">View All Case Studies</a>
+    <article class="featured-project">
+      <h3>Compass of Design Community </h3>
+      <p>A platform for helping designers improve their professional skills through feedback.<br/> This project utilized a myriad of design skills including UX, UI, and Branding Design.</p>
+      <a href="https://read.compassofdesign.com/how-i-build-the-ux-of-my-projects-40ddcdb0f2bc"><img src="{{site.baseurl}}/assets/img/svg-compass-icon.svg" alt="Logo for the Compass of Design"></a>
+    </article>
+  </div>
 </section>
 {% include testimony.html %}
 <section id="articles" class="container">
   <div class="row">
     <h2>Writing</h2>
-    <h4>Experience to thought, thought to writing</h4>
+    <h4>My experience as a designer to help other designers</h4>
   </div>
   <div class="row">
-    {% for post in site.categories.article limit: 12%}
+    {% for post in site.categories.article limit: 6%}
     {% capture article %}{% cycle '1', '2', '3' %}{% endcapture %}
     {% if article == '1' %}<div class="row">{% endif %}
       <article class="{{post.class}} article module">
@@ -117,4 +65,4 @@ sitemap:
   </div>
   <a href="{{site.baseurl}}archive/articles" class="button secondary">View All Articles</a>
 </section>
-{% include mailchimp.html %}
+ 
