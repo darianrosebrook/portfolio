@@ -386,7 +386,7 @@ Thinking](https://read.compassofdesign.com/tagged/design-thinking?source=post)
 
 Clapping shows how much you appreciated Darian Rosebrook’s story.
 
-### [Darian Rosebrook](https://read.compassofdesign.com/@d_evyn)
+### [Darian Rosebrook](https://read.compassofdesign.com/@darianrosebrook)
 
 Brand Consultant at [https://mgntc.co](https://mgntc.co/), running designer
 network at [https://cmps.co](https://cmps.co/) I ate a whole large dominos pizza

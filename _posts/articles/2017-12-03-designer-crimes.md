@@ -253,7 +253,7 @@ Thinking](https://read.compassofdesign.com/tagged/design-thinking?source=post)
 
 By clapping more or less, you can signal to us which stories really stand out.
 
-### [Darian Rosebrook](https://read.compassofdesign.com/@d_evyn)
+### [Darian Rosebrook](https://read.compassofdesign.com/@darianrosebrook)
 
 Brand Identity Designer for  [@itssomagnetic](http://twitter.com/itssomagnetic),
 running a design community at
