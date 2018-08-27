@@ -18,3 +18,4 @@ sitemap:
   changefreq: 'monthly'
   exclude: 'no'
 ---
+## I am rewriting these case studies with the redesign of my site, come back soon for the updated content.

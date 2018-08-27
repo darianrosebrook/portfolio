@@ -17,3 +17,4 @@ sitemap:
   changefreq: 'monthly'
   exclude: 'no'
 ---
+## I am rewriting these case studies, come back soon for the updated content.
