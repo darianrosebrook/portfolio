@@ -5,7 +5,7 @@
   padding: 0
 html
   background: $light
-  font-family: "Work Sans", "Helvetica", Arial, Verdana, sans-serif
+  font-family: "PT Sans", "Helvetica", Arial, Verdana, sans-serif
   @include responsive-font(1vw, 12px, 14px)
   color: $main
 body
@@ -61,10 +61,11 @@ a:hover
 h1, h2, h3, h4, h5, h6
   position: relative
   width: fit-content
-  font-family: "PT Sans"
+  font-family: "Work Sans", "Helvetica", sans-serif
   transition: $transition
-  letter-spacing: 5px
+  letter-spacing: -.03em
   margin-bottom: 2rem
+  text-transform: lowercase
   a:before
     content: ""
     position: absolute

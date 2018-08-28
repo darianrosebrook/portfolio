@@ -153,11 +153,3 @@ if(filter) {
     }
   });
 }
-// Adding Masonry because my solution without it doesn't cut cross browser portfolio-website
-var elem = document.querySelector('.grid');
-var msnry = new Masonry( elem, {
-  // options
-  columnWidth: '.grid-sizer',
-  itemSelector: '.grid-sizer',
-  percentPosition: true
-});
