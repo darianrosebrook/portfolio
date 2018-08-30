@@ -153,3 +153,40 @@ if(filter) {
     }
   });
 }
+var accessToken = '12cf5726b061b5e521a31389b6aea25a51f977b46537c693ca5fb8231d21fb3f';
+
+// Call Dribble v2 API
+// Date formatter
+
+var months = ["Jan", "Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov", "Dec"];
+
+
+$.ajax({
+    url: 'https://api.dribbble.com/v2/user/shots?access_token='+accessToken,
+    dataType: 'json',
+    type: 'GET',
+    success: function(data) {
+      var image;
+      if (data.length > 0) {
+        $.each(data.reverse(), function(i, val) {
+          var postDate = new Date(val.published_at);
+          var m = postDate.getMonth(); // returns 6
+          var d = postDate.getDay();  // returns 15
+          var y = postDate.getFullYear();  // returns 2012
+          var mLong = months[m];
+
+          if (val.images.hidpi) {
+            image = val.images.hidpi;
+          } else {
+            image = val.images.normal;
+          }
+          $('#shots').prepend(
+            '<div class="grid-item"><p><small>'+ d + ' ' + mLong + ' ' + y +'</small></p><hr><a class="shot" target="_blank" href="'+ val.html_url +'" title="' + val.title + '"><img src="'+ image +'"/></a><h5>'+ val.title + '</h5>'+ val.description + '</div>'
+            )
+        })
+      }
+      else {
+        $('#shots').append('<p>No shots yet!</p>');
+      }
+    }
+});
