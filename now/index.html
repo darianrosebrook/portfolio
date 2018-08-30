@@ -29,7 +29,7 @@ sitemap:
 {% for post in site.categories.updates%}
   {% capture update %}{% cycle '1', '2', '3', '4'  %}{% endcapture %}
   {% if update == '1' %}<section class="container">{% endif %}
-      <div class="col">
+      <div class="grid-item">
             <p>{{post.date | date_to_string }}</p>
             <h4>{{post.title}}</h4>
             <p>{{post.content}}</p>

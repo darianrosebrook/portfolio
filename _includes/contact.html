@@ -1,26 +1,28 @@
 <section id="contact" class="container">
   <div class="row">
-    <h2>Let's Get in Contact</h2>
+    <h2>Let's Get in Contact</h2><h6>* All Fields Required</h6>
     <form action="https://formspree.io/mnnjazpm" method="POST">
       <input type="text" name="name" placeholder="Your Name..." class="transition enter text-center" required>
       <input type="email" name="_replyto" placeholder="Your Email..." class="transition enter text-center" required>
-
+<!--
       <input type="checkbox" class="hidden" data-continue="true" id="checkbox-logo" name="checkbox-logo" value="" >
-      <input type="checkbox" class="hidden" data-continue="true" id="checkbox-branding" name="checkbox-branding" value="" >
-      <input type="checkbox" class="hidden" data-continue="false" id="checkbox-speaking" name="checkbox-speaking" value="" >
-      <input type="checkbox" class="hidden" data-continue="false" id="checkbox-else" name="checkbox-else" value="" ><br />
+      <input type="checkbox" class="hidden" data-continue="true" id="checkbox-branding" name="checkbox-branding" value="" > -->
+      <input type="checkbox" class="hidden" data-continue="false" id="checkbox-speaking" name="checkbox-speaking" value=""  >
+      <input type="checkbox" class="hidden" data-continue="false" id="checkbox-else" name="checkbox-else" value=""  ><br />
+
+
       <div class="container label-container">
-        <label class="transition module " for="checkbox-speaking">
-          <img src="{{site.baseurl}}/assets/img/icon-smile.svg" alt="" />
-          <br />
-          Personal Design Mentorship and Coaching
-        </label>
-        <label class="transition module " for="checkbox-else">
-          <img src="{{site.baseurl}}/assets/img/icon-else.svg" alt="" />
-          <br />
-          Something Else. (Speaking gig, collaboration, saying hi, etc)
-        </label>
-      </div>
+      <label class="transition module " for="checkbox-speaking">
+        <img src="{{site.baseurl}}/assets/img/icon-smile.svg" alt="" />
+        <br />
+        Personal Design Mentorship and Coaching
+      </label>
+      <label class="transition module " for="checkbox-else">
+        <img src="{{site.baseurl}}/assets/img/icon-else.svg" alt="" />
+        <br />
+        Something Else. (Speaking gig, collaboration, saying hi, etc)
+      </label>
+    </div>
       <!-- <p class=" continue questionnaire-part-1 project">
         As a designer, it's my duty to deliver the right brand experience for you and your brand's audience. Therefore, I need to be selective about the projects that I take on. Providing details on your project help me understand your need and deliver the most effective design solution.<br/><br/>I'll review your reply here and get back to you as soon as possible. Thanks! -->
       <!-- </p>
@@ -98,9 +100,10 @@
       <div class="questionnaire-part-1 continue message project" >
       <textarea name="additional-info" placeholder="Your Message..." class="transition enter text-center " ></textarea>
       <h4 class="message enter"><span class="hidden project">Tell me more about what you're looking to get out of personal coaching?</span><span class="hidden message">How can I help? :D</span></h4>
+      <input type="submit" class="button tertiary" value="Submit!">
       </div>
       <input type="text" name="_gotcha" class="hidden" />
-      <p class="continue project"> Thank you! <br><br>I'll review the responses here and respond to you as soon as I can. Thanks!</p>      <input type="submit" class="button continue project message" value="Submit!">
+      <p class="continue project"> Thank you! <br><br>I'll review the responses here and respond to you as soon as I can. Thanks!</p>
       <input type="hidden" name="_next" value="https://darianrosebrook.com/continue" />
     </form>
    </div>
