@@ -19,7 +19,8 @@ form
 
       border-width: 2.5rem
       border-color: $dark
-
+  textarea
+    height: 30vh
   label.module
     display: flex
     flex-direction: column
@@ -47,47 +48,12 @@ form
       border: 2px dashed $dark
       color: $dark
       background-color: $secondary
-  input[name$="-logo"]:checked ~ .container label[for$="speaking"]
+  input[name$="-speaking"]:checked ~ .container label[for$="-speaking"]
     background-color: $secondary
-    border-color: $dark
-    color: $light
-  input[name$="-branding"]:checked ~ .container label[for$="else"]
+    color: $dark
+  input[name$="-else"]:checked ~ .container label[for$="-else"]
     background-color: $secondary
-    border-color: $dark
-    color: $light
-  input[name$="-audit"]:checked ~ .container label[for$="-audit"]
-    background-color: $dark
-    border-color: $dark
-    color: $light
-  input[name$="-hello"]:checked ~ .container label[for$="-hello"]
-    background-color: $dark
-    border-color: $dark
-    color: $light
-  input[id$="size-1"]:checked ~ .container label[for$="size-1"]
-    background-color: $dark
-    border-color: $dark
-    color: $light
-  input[id$="size-2"]:checked ~ .container label[for$="size-2"]
-    background-color: $dark
-    border-color: $dark
-    color: $light
-  input[id$="size-3"]:checked ~ .container label[for$="size-3"]
-    background-color: $dark
-    border-color: $dark
-    color: $light
-  input[id$="size-4"]:checked ~ .container label[for$="size-4"]
-    background-color: $dark
-    border-color: $dark
-    color: $light
-  input[id$="-before-1"]:checked ~ .container label[for$="before-1"]
-    background-color: $dark
-    border-color: $dark
-    color: $light
-  input[id$="-before-2"]:checked ~ .container label[for$="before-2"]
-    background-color: $dark
-    border-color: $dark
-
-    color: $light
+    color: $dark
   .container
     display: flex
     padding: 3rem 0

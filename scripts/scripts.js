@@ -181,7 +181,7 @@ $.ajax({
             image = val.images.normal;
           }
           $('#shots').prepend(
-            '<div class="grid-item"><p><small>'+ d + ' ' + mLong + ' ' + y +'</small></p><hr><a class="shot" target="_blank" href="'+ val.html_url +'" title="' + val.title + '"><img src="'+ image +'"/></a><h5>'+ val.title + '</h5>'+ val.description + '</div>'
+            '<div class="grid-item"><p><small>'+ d + ' ' + mLong + ' ' + y +'</small></p><hr><a class="shot" target="_blank" href="'+ val.html_url +'" title="' + val.title + '"><img src="'+ image +'"/></a><h5>'+ val.title + '</h5><div class="truncate">'+ val.description + '</div></div>'
             )
         })
       }
@@ -189,4 +189,10 @@ $.ajax({
         $('#shots').append('<p>No shots yet!</p>');
       }
     }
+
+});
+$(function() {
+  $('.truncate').each(function(index, value) {
+		 $(this).html($(this).html().substring(0, 250)); // number of characters
+	});
 });
