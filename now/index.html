@@ -9,30 +9,43 @@ sitemap:
   changefreq: 'weekly'
   exclude: 'no'
 ---
-<header id="hero" class="index-header">
-  <div class="info">
-    <h1>What have I been up to recently?</h1>
-    <h2>My name is Darian Rosebrook, I'm a branding designer</h2>
-    <p class="desktop">I've been consistently building out two side projects:</p>
-    <ul>
-      <li><strong><a href="https:/compassofdesign.com">Compass of Design</a></strong> &mdash; a designer community</li>
-      <li><strong><a href="https:/somagnetic.com">So Magnetic</a></strong> &mdash; a branding design agency</li>
-    </ul>
-    <p>On top of that, I do a lot of teaching and fun things across the internet and in the offline world. Here you'll see updates on all of that as they happen.</p>
+<section class="container">
+<article class="row">
+  <h4><a href="/"><i class="fa fa-arrow-left"><span>Main menu,</span></i> Head Back</a></h4>
+</article>
+</section>
+<header id="hero" class="container">
+  <article class="row">
+    <div class="module">
+    <h1>Now</h1>
+    <h4>My name is Darian Rosebrook, I'm a branding designer</h4>
+      <p class="desktop">I've been consistently building out two side projects:</p>
+      <ul>
+        <li><strong><a href="https:/compassofdesign.com">Compass of Design</a></strong> &mdash; a designer community</li>
+        <li><strong><a href="https:/somagnetic.com">So Magnetic</a></strong> &mdash; a branding design agency</li>
+      </ul>
+      <p>On top of that, I do a lot of teaching and fun things across the internet and in the offline world. Here you'll see updates on all of that as they happen.</p>
   </div>
-  <img src="/assets/img/darian.png" alt="Darian Rosebrook, a designer who focuses on websites and branding projects for companies." />
+  <div class="module">
+    <img src="/assets/img/darian.png" alt="Darian Rosebrook, a designer who focuses on websites and branding projects for companies." />
+  </div>
 </header>
 <section class="container">
-<h2>What I've been up to</h2>
+  <article class="row">
+    <h2>What am I up to?</h2>
 
-</section>
+    <div class="grid">
 {% for post in site.categories.updates%}
   {% capture update %}{% cycle '1', '2', '3', '4'  %}{% endcapture %}
-  {% if update == '1' %}<section class="container">{% endif %}
-      <div class="grid-item">
-            <p>{{post.date | date_to_string }}</p>
-            <h4>{{post.title}}</h4>
-            <p>{{post.content}}</p>
-        </div>
-    {% if update == '4' or forloop.last %}</section>{% endif %}
+  {% if update == '1' %}{% endif %}
+      <div class="grid-item" id="{{post.specific}}">
+        <p><small>{{post.date | date_to_string }}</small></p>
+        <hr>
+        <h4>{{post.title}}</h4>
+        <div>{{post.content}}</div>
+      </div>
+    {% if update == '4' or forloop.last %}{% endif %}
   {% endfor %}
+</div>
+</article>
+</section>

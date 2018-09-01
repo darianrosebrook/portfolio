@@ -41,12 +41,13 @@ sitemap:
             <p><small>{{post.date | date_to_string }}</small></p>
             <hr>
             <h4>{{post.title}}</h4>
-            <div class="truncate">{{post.content}}</div>
+            <div>{{post.content | truncatewords: 45}}</div>
+            <p><a href="{{site.baseurl}}/now/#{{post.specific}}">See More</a></p>
           </div>
-        {% if update == '4' or forloop.last %}{% endif %}
-      {% endfor %}
+      {% if update == '4' or forloop.last %}{% endif %}
+    {% endfor %}
       <div class="grid-item see-all">
-        <!-- <h4><a href="{{site.baseurl}}/now">See all the latest posts <i class="fa fa-arrow-right"><span>Click to continue</span></i></a></h4> -->
+        <h4><a href="{{site.baseurl}}/now">See all the latest posts <i class="fa fa-arrow-right"><span>Click to continue</span></i></a></h4>
       </div>
     </div>
   </article>
