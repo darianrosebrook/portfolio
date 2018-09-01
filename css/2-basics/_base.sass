@@ -208,6 +208,7 @@ header
   font-size: 1rem
   position: relative
   width: fit-content
+  transition: all ease .3s
   &.grid-head
     color: $highlight
     font-size: 1.3rem
@@ -215,6 +216,8 @@ header
   &.see-all
     align-self: center
     justify-content: center
+  &:hover
+    background: #fff
 
   img
     @include center(true, false)
@@ -237,3 +240,5 @@ header
   .grid
     grid-row-gap: 5rem
     grid-template-columns: 1fr 1fr 1fr 1fr
+  .grid-item
+    padding: 1em
