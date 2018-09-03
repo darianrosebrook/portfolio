@@ -1,13 +1,13 @@
 ---
-layout: article
-category: article
-topic: Compass of Design
+
+categories: articles, post
+type: article
 title: Networking as a designer — Stop trying to shake trees.
 description: Let’s talk about your heroes. Boy, wouldn’t it be nice to be noticed by big name people every once in a while? You follow them and see their name all over on the internet getting interviews and sharing awesome design work. It’s like there’s some type of inner circle where every big name person on the internet knows each other.
-external: https://cmps.co/design-influencers
+link_to: https://cmps.co/design-influencers
 index_image: https://cdn-images-1.medium.com/max/1200/1*yTxS-zdVbLge9UKyCH1YDQ.jpeg
 article_author: Darian Rosebrook
-author_link: https://twitter.com/d_evyn
+author_link: https://twitter.com/darianrosebrook
 ---
 ![](https://cdn-images-1.medium.com/max/1000/1*yTxS-zdVbLge9UKyCH1YDQ.jpeg)
 

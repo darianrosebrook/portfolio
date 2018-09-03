@@ -1,14 +1,14 @@
 ---
-layout: article
-category: article
-topic: Compass of Design
+
+categories: articles, post
+type: article
 title: Building your personal brand
 description: We artists and designers alike love to create visual gold. We find the things we create to be small extensions of ourselves. We’re very emotionally attached to our work.
 
-external: https://read.compassofdesign.com/building-your-personal-brand-3e1178ed2679
+link_to: https://read.compassofdesign.com/building-your-personal-brand-3e1178ed2679
 index_image: https://cdn-images-1.medium.com/max/1000/1*mqH9UBCUt8Qg7MBi2mIAhQ.jpeg
 article_author: Darian Rosebrook
-author_link: https://twitter.com/d_evyn
+author_link: https://twitter.com/darianrosebrook
 ---
 ![](https://cdn-images-1.medium.com/max/1000/1*mqH9UBCUt8Qg7MBi2mIAhQ.jpeg)
 

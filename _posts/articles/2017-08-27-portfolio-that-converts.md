@@ -1,13 +1,13 @@
 ---
-layout: article
-category: article
-topic: Compass of Design
+
+categories: articles, post
+type: article
 title: Crafting a portfolio that converts
 description: Recently, I shared an article about Marketing Yourself as a Designer. The article dives into the various ways that you can make sure that your skills as a designer don’t go unnoticed. Because let’s face it… Unless we’ve studied it in depth, marketing our skills is one of the hardest challenges that we have as a designer.
-external: https://cmps.co/portfolio-that-converts
+link_to: https://cmps.co/portfolio-that-converts
 index_image: https://cdn-images-1.medium.com/max/1200/1*GZegDaKz9RmMur72ULfQdw.jpeg
 article_author: Darian Rosebrook
-author_link: https://twitter.com/d_evyn
+author_link: https://twitter.com/darianrosebrook
 ---
 ![](https://cdn-images-1.medium.com/max/1200/1*GZegDaKz9RmMur72ULfQdw.jpeg)
 

@@ -1,13 +1,13 @@
 ---
-layout: article
-category: article
-topic: Compass of Design
+
+categories: articles, post
+type: article
 title: Finding the best design resources — And having a gold-miner’s mindset
 description: It always seems the more you read into someone or something, the more you’re able to find things that you don’t agree with. Just think of all the talk with politics or healthcare. (or don’t, that’ll get you sidetracked). Everything out there has things that you have to tune out to get to the good stuff.
-external: https://cmps.co/goldminer-mindset
+link_to: https://cmps.co/goldminer-mindset
 index_image: https://cdn-images-1.medium.com/max/1200/1*fCHVtFONYQmo07BKusPpcg.jpeg
 article_author: Darian Rosebrook
-author_link: https://twitter.com/d_evyn
+author_link: https://twitter.com/darianrosebrook
 ---
 ![](https://cdn-images-1.medium.com/max/1000/1*fCHVtFONYQmo07BKusPpcg.jpeg)
 

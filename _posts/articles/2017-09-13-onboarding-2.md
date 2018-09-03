@@ -1,13 +1,13 @@
 ---
-layout: article
-category: article
-topic: Compass of Design
+
+categories: articles, post
+type: article
 title: Onboarding new Design Clients — Position yourself as a professional designer
 description: A professional is someone who holds themselves to a high standard AND can achieve those standards of their industry. A professional recognizes where the responsibilities lie and taking accountability for them with their actions. You must make deliberate choices as a designer from your own evaluations or you’ll have those choices made for you.
-external: https://cmps.co/client-onboard-2-b
+link_to: https://cmps.co/client-onboard-2-b
 index_image: https://cdn-images-1.medium.com/max/1200/1*_pkevHuKWDIG9hRnSb9e_Q.jpeg
 article_author: Darian Rosebrook
-author_link: https://twitter.com/d_evyn
+author_link: https://twitter.com/darianrosebrook
 ---
 ![](https://cdn-images-1.medium.com/max/1000/1*_pkevHuKWDIG9hRnSb9e_Q.jpeg)
 

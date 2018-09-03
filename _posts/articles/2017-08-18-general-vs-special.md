@@ -1,13 +1,13 @@
 ---
-layout: article
-category: article
-topic: Compass of Design
+
+categories: articles, post
+type: article
 title: Is it Better for a Designer to be a Generalist or Specialist?
 description: When you start to focus on growing your skills, you poke around and borrow styles from all over the place. Borrowing ideas as a designer is a good way to figure out your own style. You may work on figuring out new tools, software, new material, or messaging. As your skills begin to improve, you may be wondering
-external: https://cmps.co/generalist-specialist
+link_to: https://cmps.co/generalist-specialist
 index_image: https://cdn-images-1.medium.com/max/1200/1*pY9KzkH9hO0AV13O9d1CVw.jpeg
 article_author: Darian Rosebrook
-author_link: https://twitter.com/d_evyn
+author_link: https://twitter.com/darianrosebrook
 ---
 ![](https://cdn-images-1.medium.com/max/1000/1*pY9KzkH9hO0AV13O9d1CVw.jpeg)
 

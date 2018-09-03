@@ -1,13 +1,13 @@
 ---
-layout: article
-category: article
-topic: Compass of Design
+
+categories: articles, post
+type: article
 title: Do I use my name or a business name to freelance?
 description: One of the things that you begin to wonder when you’re starting out as a freelance designer is whether or not you should choose to brand what you are doing. I’ve had really good conversations with members of the Compass of Design Community about branding their freelance business that led to some interesting discoveries. The choice of what to brand yourself as is never an easy one. You want to connect your heart and soul to what you do.
-external: https://cmps.co/business-or-personal
+link_to: https://cmps.co/business-or-personal
 index_image: https://cdn-images-1.medium.com/max/1200/1*T-WjwpMTovwjY7W6mh6ONA.jpeg
 article_author: Darian Rosebrook
-author_link: https://twitter.com/d_evyn
+author_link: https://twitter.com/darianrosebrook
 ---
 ![](https://cdn-images-1.medium.com/max/1000/1*T-WjwpMTovwjY7W6mh6ONA.jpeg)
 

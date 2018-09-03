@@ -1,5 +1,6 @@
 ---
-category: updates
+categories: updates, post
+type: update
 title: New Ventures and Leaving KeySpark
 specific: leaving-keyspark
 ---

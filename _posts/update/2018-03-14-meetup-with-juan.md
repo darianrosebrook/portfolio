@@ -1,5 +1,6 @@
 ---
-category: updates
+categories: updates, post
+type: update
 title: Meetup with Juan Valera from Coastalco.co
 specific: juan-valera
 ---

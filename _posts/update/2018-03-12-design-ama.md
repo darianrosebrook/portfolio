@@ -1,5 +1,6 @@
 ---
-category: updates
+categories: updates, post
+type: update
 title: I got invited to AMAfeed
 specific: invited-to-amafeed
 ---

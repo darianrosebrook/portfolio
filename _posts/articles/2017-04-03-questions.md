@@ -1,23 +1,17 @@
 ---
-layout: article
-category: article
-type: productivity
-topic: Productivity
+
+categories: articles, post
+type: article
 title: Are we asking designers the right questions?
 description: We all love clickbait. There’s some sort of unsatisfying feeling where the shot of dopamine hits us before we even open the article. What we get in return is a let down or repurposed garbled content that spew out from the community faucet.
-index_image: /assets/img/posts/articles/questions/emily-morter.jpg
-cdn:
-header: question
-sitemap:
-  lastmod: 2017-02-04
-  priority: 0.7
-  changefreq: 'monthly'
-  exclude: 'no'
-
+link_to: https://medium.com/compass-of-design/are-we-asking-designers-the-right-questions-b70d056cac9f
+index_image: https://cdn-images-1.medium.com/max/1000/0*X5s0j-Q1JVl8tzoK.jpg
+article_author: Darian Rosebrook
+author_link: https://twitter.com/darianrosebrook
 ---
-![](https://cdn-images-1.medium.com/max/800/0*Vm9HxLsflJe62rV3.gif)
+![](https://cdn-images-1.medium.com/max/1000/0*X5s0j-Q1JVl8tzoK.jpg)
 
-
+# Are we asking designers the right questions?
 
 ## A look at the constraints and limitations we face
 
@@ -25,9 +19,11 @@ We all love clickbait. There’s some sort of unsatisfying feeling where the sho
 of dopamine hits us before we even open the article. What we get in return is a
 let down or repurposed garbled content that spew out from the community faucet.
 
-All of the titles you see around the question “should \_\_\_\_ learn to \_\_\_\_?” are
+All of the titles you see around the question “should ____ learn to ____?” are
 doing just that. They want you to click through to find out the answer. Is this
 the design skill that has been missing from your life?
+
+![](https://cdn-images-1.medium.com/max/800/0*Vm9HxLsflJe62rV3.gif)
 
 Really, our answer is no. We should be asking a different question. Before we
 get into an argument over this age old “should designers learn to code”
@@ -44,7 +40,7 @@ code, he’ll probably give you this look.
 
 I’ve done a fair bit of coding during my time as a designer to build my own
 sites. That has been immensely helpful to me when I work with
-[keySpark](https://medium.com/@keySpark) ([KeySpark.io](http://keyspark.io)) on
+[keySpark](https://medium.com/@keySpark) ([KeySpark.io](http://keyspark.io/)) on
 their web projects.
 
 I dont actually touch the code they make for the web apps they do. I leave it to
@@ -81,9 +77,10 @@ we would like our designers to know.
 
 ### Every medium has it’s limitations.
 
-A colleague had mentioned that “*if you don’t understand the constraints of your
-medium then you wont design effectively for it.*” This is why a lot of teachers
-in college will have you make your portfolio out of the materials in the shop.
+A colleague had mentioned that “[if you don’t understand the constraints of your
+medium then you wont design effectively for
+it](http://twitter.com/sarah_federman)*.*” This is why a lot of teachers in
+college will have you make your portfolio out of the materials in the shop.
 
 When designers were working on typefaces for print, they had to work with wood,
 metal, the ink and paper of their time. Things weren’t as easy as creating
@@ -108,7 +105,48 @@ our craft through tools. Whether that’s pen and paper, or if it is with code a
 VR headsets. We use our design knowledge to work on our given discipline through
 whatever tools the medium requires.
 
+> Ask yourself the right question. What are the limitations of the things I design
+> for and how can that be a positive thing to help achieve the goal?
 
-> Ask yourself the right question. What are the limitations of the things I design for and how can that be a positive thing to help achieve the goal?
+Thanks for the discussions that lead to the conclusion: Sarah Federman, Jon
+Friesen, Sander Visser, Tony Lombardi, Tyrel Chambers
 
-#### [Sign up to be a part of the next generation]({{site.baseurl}}/newsletter) of designers and get a personalized High-Five from me (:
+Learn to design with confidence with the Compass of Design newsletter
+
+* Weekly articles about overcoming the struggles of self starting design
+* Launch discounts
+* Early access to new resources
+* Early access to each article
+* The ability to contribute ideas, discuss the topic, and help edit the newest
+article before it is published
+* Credit for the edits that add value to the article for others
+
+> [Sign up to be a part of the next generation of
+> designers](https://coach.compassofdesign.com/join) who want to start designing
+with confidence.
+
+*****
+
+> Originally posted on
+> [darianrosebrook.com](https://darianrosebrook.com/archive/the-right-question) on
+April 2, 2017
+
+* [Design](https://read.compassofdesign.com/tagged/design?source=post)
+* [UX](https://read.compassofdesign.com/tagged/ux?source=post)
+* [Design
+Thinking](https://read.compassofdesign.com/tagged/design-thinking?source=post)
+* [Learning To
+Code](https://read.compassofdesign.com/tagged/learning-to-code?source=post)
+* [UI](https://read.compassofdesign.com/tagged/ui?source=post)
+
+Clapping shows how much you appreciated Darian Rosebrook’s story.
+
+### [Darian Rosebrook](https://read.compassofdesign.com/@darianrosebrook)
+
+Brand Consultant at [@itssomagnetic](http://twitter.com/itssomagnetic), running
+designer network at [@compassofdesign](http://twitter.com/compassofdesign) I ate
+a whole large dominos pizza by myself once. 🍕
+
+### [Compass of Design](https://read.compassofdesign.com/?source=footer_card)
+
+Curated design articles for self-starting designers.

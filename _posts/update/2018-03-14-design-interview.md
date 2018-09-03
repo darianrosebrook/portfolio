@@ -1,5 +1,6 @@
 ---
-category: updates
+categories: updates, post
+type: update
 title: A design interview by Chris Green of This Design Life
 specific: chris-green-design-life
 ---
