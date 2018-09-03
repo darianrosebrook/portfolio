@@ -1,13 +1,13 @@
 ---
-layout: article
-category: article
-topic: Compass of Design
+
+categories: articles, post
+type: article
 title: Marketing yourself as a designer
 description: Marketing is that topic that gets you added by a bot to all those lists on Twitter, or followed by fake accounts on Instagram, or shunned completely by your friends on Facebook for asking them to try your new (*insert thing here*). Why do we need to add it to our design career?
-external: https://cmps.co/design-and-marketing
+link_to: https://cmps.co/design-and-marketing
 index_image: https://cdn-images-1.medium.com/max/1200/1*Nx3Od6qlEX8gaomeDO3ujw.jpeg
 article_author: Darian Rosebrook
-author_link: https://twitter.com/d_evyn
+author_link: https://twitter.com/darianrosebrook
 ---
 # Marketing yourself as a designer
 

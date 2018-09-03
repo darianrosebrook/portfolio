@@ -1,13 +1,13 @@
 ---
-layout: article
-category: article
-topic: Compass of Design
+
+categories: articles, post
+type: article
 title: What is the fastest way to learn something?
 description: Having that much to say about something shows that you either know it so well you could write a book, or that you really don’t know it well enough, otherwise you’d be able to explain it in it’s simplest form.
-external: https://cmps.co/quick-learner
+link_to: https://cmps.co/quick-learner
 index_image: https://cdn-images-1.medium.com/max/1200/1*nS-j4ARcKs9_z-_OlHxhCA.jpeg
 article_author: Darian Rosebrook
-author_link: https://twitter.com/d_evyn
+author_link: https://twitter.com/darianrosebrook
 ---
 ![](https://cdn-images-1.medium.com/max/1000/1*nS-j4ARcKs9_z-_OlHxhCA.jpeg)
 

@@ -121,38 +121,36 @@ function checked() {
 
 // filter for archive sites.
 
-var filter = byId('filter');
-var posts = byClass('list-item');
+  // filter
+  var filter = byId('filter');
+  var posts = byClass('list-item');
 
-function togglePosts(check) {
-  for(var c = 0; c < posts.length; c++) {
+  function togglePosts(check) {
+    for(var c = 0; c < posts.length; c++) {
       posts[c].classList.add('hidden');
-      if (posts[c].dataset.type == check) {
-        posts[c].classList.remove('hidden');
-      }
-      if (check == null || undefined) {
-        posts[c].classList.remove('hidden');
-      }
-  }
-}
-if(filter) {
-  filter.addEventListener('change', function() {
-
-    switch (filter.selectedIndex) {
-      case 1: togglePosts('web');
-        break;
-      case 2: togglePosts('brand');
-        break;
-      case 3: togglePosts('productivity');
-        break;
-      case 4: togglePosts('life');
-        break;
-      case 5: togglePosts('external');
-        break;
-      default:  togglePosts();
+      posts[c].classList.remove('not-hidden');
+        if (posts[c].dataset.type == check) {
+          posts[c].classList.remove('hidden');
+          posts[c].classList.add('not-hidden');
+        }
+        if (check == null || undefined) {
+          posts[c].classList.remove('hidden');
+          posts[c].classList.add('not-hidden');
+        }
     }
-  });
-}
+  }
+  if(filter) {
+    filter.addEventListener('change', function() {
+      var selected_val = filter[filter.selectedIndex].value;
+      if(selected_val.length === 0){
+        togglePosts();
+      }
+      else {
+        togglePosts(selected_val);
+      }
+      }
+    );
+  }
 var accessToken = '12cf5726b061b5e521a31389b6aea25a51f977b46537c693ca5fb8231d21fb3f';
 
 // Call Dribble v2 API

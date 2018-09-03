@@ -1,13 +1,13 @@
 ---
-layout: article
-category: article
-topic: Compass of Design
+
+categories: articles, post
+type: article
 title: Stop getting stuck on your digital design concepts.
 description: Often, I am trying to finish a logo design or branding project with a lot going on. There’s a certain project that I have been trying to finish, but I have very little time during the day right now to do work. However, this project is special. I wanted to make sure I had the opportunity to use my “more professional” process. Unfortunately, I forgot a crucial part of the design process.
-external: https://read.compassofdesign.com/stop-getting-stuck-on-your-digital-design-concepts-6aff4ef6d042
+link_to: https://read.compassofdesign.com/stop-getting-stuck-on-your-digital-design-concepts-6aff4ef6d042
 index_image: https://cdn-images-1.medium.com/max/1000/1*FYln1kxn0OLaqXd0D-7xgQ.jpeg
 article_author: Darian Rosebrook
-author_link: https://twitter.com/d_evyn
+author_link: https://twitter.com/darianrosebrook
 ---
 ![](https://cdn-images-1.medium.com/max/2000/1*FYln1kxn0OLaqXd0D-7xgQ.jpeg)
 

@@ -1,14 +1,14 @@
 ---
-layout: article
-category: article
-topic: Compass of Design
+
+categories: articles, post
+type: article
 title: Designer Crimes of the 21st Century
 description: As we continue to improve our design skills, we train our eye to notice really good design. One side effect however, we tend to not look for the things where we might be creating bad designs. It just happens that eventually you learn to avoid these mistakes with time, practice, and dedication to getting better (which includes seeking feedback on your work).
-external: https://read.compassofdesign.com/designer-crimes-of-the-21st-century-4b672e9f39b9
+link_to: https://read.compassofdesign.com/designer-crimes-of-the-21st-century-4b672e9f39b9
 index_image: https://cdn-images-1.medium.com/max/1000/0*ArKZMhpaum02M8_0.png
 article_author: Darian Rosebrook
-author_link: https://twitter.com/d_evyn
-author_img:
+author_link: https://twitter.com/darianrosebrook
+author_img: 
 ---
 ![](https://cdn-images-1.medium.com/max/1000/0*ArKZMhpaum02M8_0.png)
 

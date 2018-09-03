@@ -1,13 +1,13 @@
 ---
-layout: article
-category: article
-topic: Compass of Design
+
+categories: articles, post
+type: article
 title: About the Compass of Design
 description: Sometimes we forget what it was like to start out in the design industry. For some, it’s a rude awakening when the things we were taught in college aren’t how it actually is out there. For others, it could be heading into the void when teaching yourself all the aspects of a new career choice. A lot of us are thrown into the ecosystem with no idea how the design world
-external: https://read.compassofdesign.com/the-compass-of-design-community-fdab714328bd
+link_to: https://read.compassofdesign.com/the-compass-of-design-community-fdab714328bd
 index_image: https://cdn-images-1.medium.com/max/800/1*fGpOEQt8gz6GkLTNXKcMGw.png
 article_author: Darian Rosebrook
-author_link: https://twitter.com/d_evyn
+author_link: https://twitter.com/darianrosebrook
 ---
 # The Compass of Design Community
 
@@ -29,7 +29,7 @@ Community](http://cmps.co/) was created to be the compass to guide designers in
 the right direction.
 
 ![](https://cdn-images-1.medium.com/max/600/1*TDCOEZcVrL6U3vlNqGq_qQ.jpeg)
-<span class="figcaption_hack">[Darian Rosebrook](https://twitter.com/d_evyn) — Brand Identity Designer</span>
+<span class="figcaption_hack">[Darian Rosebrook](https://twitter.com/darianrosebrook) — Brand Identity Designer</span>
 
 #### So who did all this?
 
