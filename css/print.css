@@ -6,7 +6,7 @@ html {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%; }
   background: #f2f2f2;
-  font-family: "Proxima Nova", "lato", "helvetica", verdana, sans-serif;
+  font-family: "Work Sans", "Helvetica", sans-serif;
   font-size: 62.5%;
   color: #3c3c3c; }
 
@@ -22,6 +22,9 @@ img {
 .hidden,#contact, .toggle {
   display: none;
 }
+section {
+    page-break-before: always;
+}
 .cf::after {
   content: " ";
   visibility: hidden;
@@ -31,4 +34,25 @@ img {
 }
 .cf::after, .cf::before {
   display: block;
+}
+
+.grid{
+display: inline-grid;
+grid-template-columns: 1fr 1fr;
+grid-gap: 1rem;
+justify-items: left;
+font-size: 1em;
+width: 100%;
+margin: 0;}
+.grid:nth-child(5n) {
+  page-break-before: always;
+}
+.grid-item{
+align-self: start;
+font-size: 1rem;
+position: relative;
+width: fit-content;
+transition: all ease .3s;}
+.grid-item img {
+  width: 100%;
 }
