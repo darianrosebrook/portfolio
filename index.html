@@ -12,15 +12,15 @@ sitemap:
 <header id="hero" class="container">
   <article class="row">
     <div class="module">
-      <img src="{{site.baseurl}}/assets/img/darian.png" alt="">
-    </div>
-    <div class="module">
-        <h4 class="position">BRAND IDENTITY DESIGNER</h4>
         <h1 class="name">Hi, I'm Darian Rosebrook.</h1>
+        <h5 class="position">I'm a brand identity designer</h5>
         <p>I run <a href="https://somagnetic.com" target="_blank">So Magnetic</a>, an agile design agency which help businesses by <strong>using design strategy to build a brand's identity design</strong> focused on helping them <strong>increase customer engagement and revenue.</strong></p>
         <p>I also run the community group for <a href="https://compassofdesign.com" target="_blank">Compass of Design</a>, an online design community focused on equipping people with skills needed to become better professional designers. </p>
         <h6>Looking to get in contact?</h6>
         <button data-href="#contact" class="scrollBtn button">Contact Me</button>
+    </div>
+    <div class="module">
+      <img src="{{site.baseurl}}/assets/img/darian.png" alt="">
     </div>
   </article>
 </header>
@@ -33,6 +33,7 @@ sitemap:
       <hr>
       <h4>Building the Compass of Design Community app</h4>
       <p class="truncate">This project has been a huge step in what I'm able to achieve as the sole person on a project. This product utilizes my knowledge in UX Design, UI Design, and Back End Development by wrapping all of those together into one product. The Compass of Design Membership Site. This platform is going to be a powerhouse in helping designers get actionable feedback on questions they have and designs they've done. So far, there hasn't been a site that effectively does this without it becoming a popularity contest. Our goal here is to change the way we do design feedback!</p>
+      <p><a href="{{site.baseurl}}/now/#compass-community-site">See More</a></p>
     </div>
     {% for post in site.categories.updates limit:6%}
       {% capture update %}{% cycle '1', '2', '3', '4'  %}{% endcapture %}
@@ -47,7 +48,7 @@ sitemap:
       {% if update == '4' or forloop.last %}{% endif %}
     {% endfor %}
       <div class="grid-item see-all">
-        <h4><a href="{{site.baseurl}}/now">See all the latest posts <i class="fa fa-arrow-right"><span>Click to continue</span></i></a></h4>
+        <h4><a href="{{site.baseurl}}/now">See more about me and what I'm up to <i class="fa fa-arrow-right"><span>Click to continue</span></i></a></h4>
       </div>
     </div>
   </article>
