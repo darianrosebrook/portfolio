@@ -17,9 +17,6 @@ body
 .hidden
   display: none !important
   opacity: 0
-.not-hidden
-  display: block !important
-  opacity: 1
 .cf::after
   content: ' '
   visibility: hidden
@@ -224,6 +221,11 @@ header
     justify-content: center
   &:hover
     background: #fff
+  &.publications
+    img
+      max-height: 250px
+      filter: grayscale(1)
+    align-self: center
 
   img
     @include center(true, false)

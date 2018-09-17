@@ -1,6 +1,6 @@
 ---
 
-categories: articles, post
+categories: [articles, post]
 type: article
 title: Building your personal brand
 description: We artists and designers alike love to create visual gold. We find the things we create to be small extensions of ourselves. We’re very emotionally attached to our work.

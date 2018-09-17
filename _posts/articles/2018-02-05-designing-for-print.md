@@ -1,6 +1,6 @@
 ---
 
-categories: articles, post
+categories: [articles, post]
 type: article
 title: Print Design Tips for the Digital age
 description: You control the cost for printing through your designs, so having as much knowledge about it can help you and the businesses you design for control budget for years of ongoing work.

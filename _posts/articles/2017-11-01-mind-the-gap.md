@@ -1,6 +1,6 @@
 ---
 
-categories: articles, post
+categories: [articles, post]
 type: article
 title: Please mind the gap. The gap of where you are now to where you want to be
 description: Have you felt recently that there’s a gap between where you are at now and where you want to be? I tend to have this feeling a lot while I’m working on my businesses for So Magnetic and Compass of Design. I see a huge gap between where I want everything to be and where it’s at now.

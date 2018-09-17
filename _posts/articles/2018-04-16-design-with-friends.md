@@ -1,6 +1,6 @@
 ---
 
-categories: articles, post
+categories: [articles, post]
 type: article
 title: Design is better with friends
 description: Just a lighthearted talk today about the connections we make as designers. We started talking about this a few weeks back in the design community and I figured I’d share my experience with you all here too.
