@@ -1,5 +1,5 @@
 ---
-categories: updates, post
+categories: [updates, post]
 type: update
 title: Moving to full time consultancy
 specific: moving-to-consultancy

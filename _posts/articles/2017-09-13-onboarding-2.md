@@ -1,6 +1,6 @@
 ---
 
-categories: articles, post
+categories: [articles, post]
 type: article
 title: Onboarding new Design Clients — Position yourself as a professional designer
 description: A professional is someone who holds themselves to a high standard AND can achieve those standards of their industry. A professional recognizes where the responsibilities lie and taking accountability for them with their actions. You must make deliberate choices as a designer from your own evaluations or you’ll have those choices made for you.

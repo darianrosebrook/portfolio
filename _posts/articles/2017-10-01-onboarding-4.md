@@ -1,6 +1,6 @@
 ---
 
-categories: articles, post
+categories: [articles, post]
 type: article
 title: Onboarding new Design Clients — How to deliver the design proposal 
 description: You’ll only need a proposal if there’s a client you’re trying to secure. For most of us, we write proposals to help with onboarding the client. It’s a part of the process that may seem tedious, but you’ll thank yourself later on for using one.

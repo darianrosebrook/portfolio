@@ -1,6 +1,6 @@
 ---
 
-categories: articles, post
+categories: [articles, post]
 type: article
 title: The secret heroes of UX Design
 description: The width that this design discipline can span is insane. Throughout the rise of UX Design, there have been very specialized fields pop up within the discipline. UX has also cannibalized the Data Visualization, Information architecture, and User Interface design fields along with things like wayfinding and architecture.

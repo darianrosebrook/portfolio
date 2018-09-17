@@ -1,6 +1,6 @@
 ---
 
-categories: articles, post
+categories: [articles, post]
 type: article
 title: Stop getting stuck on your digital design concepts.
 description: Often, I am trying to finish a logo design or branding project with a lot going on. There’s a certain project that I have been trying to finish, but I have very little time during the day right now to do work. However, this project is special. I wanted to make sure I had the opportunity to use my “more professional” process. Unfortunately, I forgot a crucial part of the design process.

@@ -1,6 +1,6 @@
 ---
 
-categories: articles, post
+categories: [articles, post]
 type: article
 title: Rise of the T skill designer
 description: While we have been fighting over whether or not to become a specialist or a generalist, there’s been another designer that’s been taking the cake.

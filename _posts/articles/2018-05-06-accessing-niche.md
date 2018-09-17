@@ -1,6 +1,6 @@
 ---
 
-categories: articles, post
+categories: [articles, post]
 type: article
 title: How to find the access point of your niche
 description: Last week we took a better look at how you can find a unique market for the work you do. Hopefully, that post was able to drum up some ideas of what audiences you are most equipped to work with out there

@@ -1,5 +1,5 @@
 ---
-categories: updates, post
+categories: [updates, post]
 type: update
 title: Creating a custom membership site
 specific: making-a-membership-site

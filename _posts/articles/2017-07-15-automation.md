@@ -1,6 +1,6 @@
 ---
 
-categories: articles, post
+categories: [articles, post]
 type: article
 title: Automating Your Product
 description: Why should you develop a product that you have to update every few months? For example, you have to update your copyright every year, but with a few lines of script you can do that yourself.
