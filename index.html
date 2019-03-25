@@ -63,6 +63,26 @@ sitemap:
 </section>
 <section class="container">
   <article class="row">
+    <h2>What My Process Looks Like</h2>
+    <div class="grid">
+    {% for post in site.categories.ux-study limit:7%}
+          <div class="grid-item">
+            <p><small>{{post.date | date_to_string }}</small></p>
+            <hr>
+            <h4>{{post.title}}</h4>
+            <h6>{{post.type | capitalize}}</h6>
+            <div>{% if post.type contains "update" %}{{post.content}}</div>
+            <p><a href="{{site.baseurl}}{{post.url}}">See More</a></p>{% else %}{{post.description}}</div><p><a href="{{site.baseurl}}{{post.url}}" target="_blank">See the article</a></p>{% endif %}
+          </div>
+    {% endfor %}
+      <div class="grid-item see-all">
+        <h4><a href="{{site.baseurl}}/now">Read more of what I've written <i class="fa fa-arrow-right"><span>Click to continue</span></i></a></h4>
+      </div>
+    </div>
+  </article>
+</section>
+<section class="container">
+  <article class="row">
     <h2>What I've Written</h2>
     <div class="grid">
     {% for post in site.categories.articles limit:7%}
