@@ -182,14 +182,14 @@ $(function() {
               image = val.images.normal;
             }
             if (val.low_profile === false) {
-              $('#shots').prepend(
-                '<div class="grid-item"><p><small>'+ d + ' ' + mLong + ' ' + y +'</small></p><hr><a class="shot" target="_blank" href="'+ val.html_url +'" title="' + val.title + '"><img src="'+ image +'"/><h5>'+ val.title + '</h5></a><div class="truncate">'+ val.description + '</div><p><a href="'+ val.html_url +'" target="_blank" >See more</a></p></div>'
-              )
+            $('#shots').prepend(
+              '<div class="grid-item"><p><small>'+ d + ' ' + mLong + ' ' + y +'</small></p><hr><a class="shot" target="_blank" href="'+ val.html_url +'" title="' + val.title + '"><img src="'+ image +'"/><h5>'+ val.title + '</h5></a><div class="truncate">'+ val.description + '</div><p><a href="'+ val.html_url +'" target="_blank" >See more</a></p></div>'
+            )
 
-              $('.truncate').each(function(index, value) {
-                 $(this).html($(this).html().substring(0, 400));
-                // number of characters
-              })
+            $('.truncate').each(function(index, value) {
+               $(this).html($(this).html().substring(0, 400));
+              // number of characters
+            })
             }
           })
         }
