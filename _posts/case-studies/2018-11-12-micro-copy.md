@@ -11,7 +11,7 @@ description:  Using microcopy to craft better in-app experiences.
 index_image: /assets/img/posts/study/travelight/landing.jpg
 company: Travelight App
 logo: /assets/img/posts/study/travelight/travelight-logo.svg
-link_to: https://read.compassofdesign.com/getting-your-feet-wet-with-microcopy-611fd686e5db
+link: https://read.compassofdesign.com/getting-your-feet-wet-with-microcopy-611fd686e5db
 header:
 callout:
 sitemap:
