@@ -11,6 +11,7 @@ description:  A look into the process of Designing the Compass of Design Applica
 index_image: /assets/img/posts/study/travelight/landing.jpg
 company: Travelight App
 logo: /assets/img/posts/study/travelight/travelight-logo.svg
+link: https://read.compassofdesign.com/how-i-build-the-ux-of-my-projects-40ddcdb0f2bc
 header:
 callout:
 sitemap:
