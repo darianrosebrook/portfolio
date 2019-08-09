@@ -2,33 +2,29 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="IE=edge" />
     <title>{{page.title}}</title>
     <meta name="description" content="{{page.description | truncate: 200}}" />
+    <base href="{{ site.baseurl }}">
     <!--
 
     The design and code of this site is created almost all in part by me, Darian Rosebrook. Should you have questions, feel free to reach out using the contact form below.
 
   -->
     <!-- S T Y L E S and S C R I P T S -->
-      {% if page.custom_css %}
-      {% for stylesheet in page.custom_css %}
-      <link rel="stylesheet" type="text/css" href="{{site.baseurl}}/css/{{ stylesheet }}.css" media="screen"/>
-      {% endfor %}
-    {% else %}
-      <link rel="stylesheet" type="text/css" href="{{site.baseurl}}/css/master.css" media="screen"/>
-      <link rel="stylesheet" type="text/css" href="{{site.baseurl}}/css/print.css" media="print" />
-    {% endif %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" type="text/css" />
-    <link rel="author" href="https://plus.google.com/106679625106063278529" /><link rel="author" href="https://plus.google.com/106679625106063278529" />
+
+    <link rel="stylesheet" type="text/css" href="{{site.baseurl}}/css/master.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="{{site.baseurl}}/css/print.css" media="print" />
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" type="text/css" />
+    <link rel="author" href="https://twitter.com/darianrosebrook" />
     <meta name="theme-color" content="#261924" />
-    {% if page.url contains 'hidden' %}
-    <meta name="robots" content="noindex, follow" />
-    {% else %}
     <meta name="robots" content="index, follow" />
-    {% endif %}
+    <meta name="googlebot" content="index,follow">
     <link rel="canonical" href=" {{ site.url }}{{ page.url }}" />
+    <!-- <link rel="amphtml" href="{{ site.url }}"> -->
+
+
     <!-- twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@darianrosebrook" />
@@ -148,7 +144,7 @@
       		"sameAs": [
       			"https://compassofdesign.com"
       		]
-      	},
+      	}
       ],
       "url": "https://darianrosebrook.com",
       "image": "https://s.gravatar.com/avatar/d7d54ec00a4b23395571073b80a6bb39?s=80",
@@ -166,7 +162,8 @@
       	"https://ca.linkedin.com/in/darianrosebrook/en",
       	"https://dribbble.com/darianrosebrook",
       	"https://www.behance.net/darianrosebrook",
-      	"https://medium.com/@darianrosebrook"
+      	"https://medium.com/@darianrosebrook",
+        "https://www.quora.com/profile/Darian-Rosebrook"
       	]
       }
     </script>
