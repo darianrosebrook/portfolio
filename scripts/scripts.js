@@ -183,7 +183,7 @@ $(function() {
             }
             if (val.low_profile === false) {
             $('#shots').prepend(
-              '<div class="grid-item"><img src="'+ image +'"/><p><small>'+ d + ' ' + mLong + ' ' + y +'</small></p><a class="shot" target="_blank" href="'+ val.html_url +'" title="' + val.title + '"><hr><h4>'+ val.title + '</h4></a><div class="truncate">'+ val.description + '</div><p><a href="'+ val.html_url +'" target="_blank" >See more</a></p></div>'
+              '<div class="grid-item"><a class="shot" target="_blank" href="'+ val.html_url +'" title="' + val.title + '"><img src="'+ image +'"/><p><small>'+ d + ' ' + mLong + ' ' + y +'</small></p><hr><h4>'+ val.title + '</h4></a><div class="truncate">'+ val.description + '</div><p><a href="'+ val.html_url +'" target="_blank" >See more</a></p></div>'
             )
 
             $('.truncate').each(function(index, value) {
