@@ -190,14 +190,21 @@
     </script>
   </head>
   <body class="main">
-    <div class="page-wrap">
-      </label>
-      <main class="main-content">
-        {{content}}
-        {% include contact.html %}
-        {% include footer.html %}
-      </main>
-    </div>
+    <nav class="nav">
+      <ul>
+        <li><a href="/">Darian Rosebrook</a></li>
+      </ul>
+      <ul>
+        <li><a href="/#work">Work</a></li>
+        <li><a href="/now">About</a></li>
+        <li><a href="#contact" class="scrollBtn ">Contact</a></li>
+      </ul>
+    </nav>
+    <main class="main-content">
+      {{content}}
+      {% include contact.html %}
+      {% include footer.html %}
+    </main>
 
   <script src="{{site.baseurl}}/scripts/scripts.js" type="text/javascript"></script>
 
