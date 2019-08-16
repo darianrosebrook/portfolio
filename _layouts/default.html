@@ -63,7 +63,10 @@
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <!-- G o o g l e   A n a l y t i c s -->
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-74665762-1"></script>
     <script>
       (function(h,o,t,j,a,r){
@@ -190,14 +193,21 @@
     </script>
   </head>
   <body class="main">
-    <div class="page-wrap">
-      </label>
-      <main class="main-content">
-        {{content}}
-        {% include contact.html %}
-        {% include footer.html %}
-      </main>
-    </div>
+    <nav class="nav">
+      <ul>
+        <li><a href="/">Darian Rosebrook</a></li>
+      </ul>
+      <ul>
+        <li><a href="/#work">Work</a></li>
+        <li><a href="/now">About</a></li>
+        <li><a href="#contact" class="scrollBtn ">Contact</a></li>
+      </ul>
+    </nav>
+    <main class="main-content">
+      {{content}}
+      {% include contact.html %}
+      {% include footer.html %}
+    </main>
 
   <script src="{{site.baseurl}}/scripts/scripts.js" type="text/javascript"></script>
 
