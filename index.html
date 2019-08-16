@@ -3,29 +3,23 @@ layout: default
 title: Product and UX Designer | Darian Rosebrook
 description: Darian Rosebrook is a Brand Identity and UX Designer from the Seattle area. He specializing in crafting the brand experience from physical to digital products as well as the logo and identity design.
 index_image: /assets/img/index.jpg
+
+
+occupation: Product and User Experience Designer
+
 sitemap:
   lastmod: 2016-11-25
   priority: 0.7
   changefreq: 'weekly'
   exclude: 'no'
 ---
-<header id="hero" class="container">
+<header id="hero" >
+  <img src="/assets/img/logo.svg" alt="Darian Rosebrook Logo" class="logo">
   <article class="row">
     <div class="module">
-        <h1 class="name">Hey there!</h1><h5>My name is Darian Rosebrook, I'm a Product and User Experience designer</h5>
-      <p class="desktop">I have two projects I am currently working on:</p>
-      <ul>
-        <li><strong><a href="https://compassofdesign.com">Compass of Design</a></strong> &mdash; a designer community</li>
-        <li><strong><a href="https://somagnetic.com">So Magnetic</a></strong> &mdash; a branding design agency</li>
-      </ul><br />
-      <p>On top of that, I love teaching what I know as a designer to help others who are trying to improve their skills.</p>
-      <ul>
-        <li>I do private mentorship and help designers within the <a href="https://compassofdesign.com" target="_blank">Compass of Design Community</a>.</li>
-        <li>I write in depth design guides and articles for the <a href="https://read.compassofdesign.com/">Compass of Design's design publication</a>.</li>
-        <li>I <a href="https://www.youtube.com/channel/UCTin1d0uPVufY4xwitzkyFQ">make design videos on YouTube</a> to help designers learn more about design.</li>
-        <li>I also run a <a href="http://podcast.compassofdesign.com/">podcast for Compass of Design</a>, teaching things I've learned along the way with managing client work as a freelancer and small agency.</li>
-      </ul><br /><br />
-      <h6>Looking to get in contact?</h6><br />
+        <h1 class="name">Hey there! I'm Darian Rosebrook, a product designer that helps businesses design better UX & Brand Experiences. </h1>
+
+      <h2>Looking to get in contact?</h2><br />
         <button data-href="#contact" class="scrollBtn button">Contact Me</button>
     </div>
     <div class="module">
@@ -34,9 +28,51 @@ sitemap:
 
   </article>
 </header>
+
 <section class="container">
   <article class="row">
-    <h2>Where I've been</h2>
+    <h2>Skills</h2>
+    <div class="grid">
+      <article class="grid-item">
+        <h3>User Experience Design</h3>
+        <ul class="title-list">
+          <li>User flow charts</li>
+          <li>Wireframing</li>
+          <li>Rapid prototyping</li>
+          <li>Storyboarding</li>
+          <li>Interaction design</li>
+        </ul>
+      </article>
+      <article class="">
+        <h3>Brand Identity Design</h3>
+        <ul class="title-list">
+        <li>Logo design systems</li>
+        <li>Brand standard guides</li>
+        <li>Iconography</li>
+        <li>Packaging design</li>
+      </ul>
+      </article>
+      <article class="">
+        <h3>Strategy</h3>
+        <ul class="title-list">
+        <li>Brand Positioning</li>
+        <li>Design Sprints</li>
+        <li>Competitive research</li>
+      </ul>
+      </article>
+      <article class="">
+        <h3>Tools</h3>
+        <ul class="title-list">
+        <li>Adobe Creative Suite</li>
+        <li>Sketch App</li>
+        <li>InVision and InVision Studio</li>
+        <li>HTML, CSS, JavaScript, Ruby on Rails</li>
+      </ul>
+      </article>
+    </div>
+  </article>
+  <article class="row">
+    <h2>History</h2>
       <div class="module work">
       <p><small>May 2019 &mdash; Present</small></p>
       <hr>
@@ -73,7 +109,7 @@ sitemap:
 </section>
 <section class="container">
   <article class="row">
-    <h2>What My Process Looks Like</h2>
+    <h2>Process</h2>
     <div class="grid">
     {% for post in site.categories.ux-study limit:7%}
           <div class="grid-item">
@@ -82,7 +118,7 @@ sitemap:
             <h4>{{post.title}}</h4>
             <h6>{{post.type | capitalize}}</h6>
             <div>{% if post.type contains "update" %}{{post.content}}</div>
-            <p><a href="{{post.link}}">See More</a></p>{% else %}{{post.description}}</div><p><a href="{{post.link}}" target="_blank">See the article</a></p>{% endif %}
+            <p><a href="{{post.link}}">See More</a></p>{% else %}{{post.description}}</div><p><a href="{{post.link}}" rel="noreferrer" target="_blank">See the article</a></p>{% endif %}
           </div>
     {% endfor %}
     </div>
@@ -90,7 +126,7 @@ sitemap:
 </section>
 <section class="container">
   <article class="row">
-    <h2>What I've Written</h2>
+    <h2>Writing</h2>
     <div class="grid">
     {% for post in site.categories.articles limit:7%}
           <div class="grid-item">
@@ -99,7 +135,7 @@ sitemap:
             <h4>{{post.title}}</h4>
             <h6>{{post.type | capitalize}}</h6>
             <div>{% if post.type contains "update" %}{{post.content}}</div>
-            <p><a href="{{site.baseurl}}/now/#{{post.specific}}">See More</a></p>{% else %}{{post.description}}</div><p><a href="{{post.link_to}}" target="_blank">See the article</a></p>{% endif %}
+            <p><a href="{{site.baseurl}}/now/#{{post.specific}}">See More</a></p>{% else %}{{post.description}}</div><p><a href="{{post.link_to}}" rel="noreferrer" target="_blank">See the article</a></p>{% endif %}
           </div>
     {% endfor %}
       <div class="grid-item see-all">
@@ -111,7 +147,7 @@ sitemap:
 {% include dribbble.html %}
 <section class="container">
   <article class="row">
-    <h2>What else I've been up to now</h2>
+    <h2>Updates</h2>
     <div class="grid">
     <div class="grid-item">
       <p><small>12 Nov 2017 - Present</small></p>
@@ -130,7 +166,7 @@ sitemap:
             <h4>{{post.title}}</h4>
             <h6>{{post.type | capitalize}}</h6>
             <div>{% if post.type contains "update" %}{{post.content}}</div>
-            <p><a href="{{site.baseurl}}/now/#{{post.specific}}">See More</a></p>{% else %}{{post.description}}</div><p><a href="{{post.link_to}}" target="_blank">See the article</a></p>{% endif %}
+            <p><a href="{{site.baseurl}}/now/#{{post.specific}}">See More</a></p>{% else %}{{post.description}}</div><p><a href="{{post.link_to}}" rel="noreferrer" target="_blank">See the article</a></p>{% endif %}
           </div>
       {% if update == '4' or forloop.last %}{% endif %}
     {% endfor %}

@@ -5,20 +5,19 @@ form
     padding: .5em 2em
     background: none
 
-    border: 1rem solid $dark
+    border: 1rem solid var(--dark)
 
-    color: $dark
+    color: var(--dark)
 
     border-top: 0
     border-bottom: 0
-    transition: $transition
+    transition: var(--transition)
     outline: none
     text-align: center
-    @include center(true, false)
     &:focus, &:active, &:hover
 
       border-width: 2.5rem
-      border-color: $dark
+      border-color: var(--dark)
   textarea
     height: 30vh
   label.module
@@ -32,12 +31,12 @@ form
     width: 90%
     text-align: center
 
-    border: 2px solid $dark
-    color: $dark
+    border: 2px solid var(--dark)
+    color: var(--dark)
 
     border-radius: 10px
     margin-bottom: .3em
-    transition: $transition
+    transition: var(--transition)
     img
       position: static
       transform: none
@@ -45,15 +44,15 @@ form
       width: 50%
     &:hover
 
-      border: 2px dashed $dark
-      color: $dark
-      background-color: $secondary
+      border: 2px dashed var(--dark)
+      color: var(--dark)
+      background-color: var(--secondary)
   input[name$="-speaking"]:checked ~ .container label[for$="-speaking"]
-    background-color: $grey
-    color: $light
+    background-color: var(--grey)
+    color: var(--light)
   input[name$="-else"]:checked ~ .container label[for$="-else"]
-    background-color: $grey
-    color: $light
+    background-color: var(--grey)
+    color: var(--light)
   .container
     display: flex
     padding: 3rem 0
@@ -72,7 +71,7 @@ form
   margin: 0  auto
   margin-top: 5rem
   font-size: 1.7rem
-  color: $dark
+  color: var(--dark)
   z-index: 3
   .row
     width: 100%
@@ -82,7 +81,7 @@ form
     justify-content: center
     margin-bottom: .3em
     padding: .5em
-    transition: $transition
+    transition: var(--transition)
   label
     display: inline-flex
     cursor: pointer
@@ -101,7 +100,7 @@ form
       margin: 0
   .continue.questionnaire-part-1
     height: auto
-    color: $main
+    color: var(--main)
   .continue.questionnaire-part-6
     input[type="checkbox"]
       width: auto
