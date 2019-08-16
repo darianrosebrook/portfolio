@@ -9,7 +9,7 @@
   background-color: hsla(60, 100, 100, .5)
 html
   background: var(--light)
-  @include responsive-font(1vw, 14px, 18px)
+  @include responsive-font(1vw, 12px, 18px)
   color: var(--main)
 body
 
@@ -58,6 +58,10 @@ main
   background: var(--secondary)
 
 // Typography
+a.social-link
+  font-size: 0 !important
+  i
+    font-size: 1rem !important
 a, a:link, a:visited, a:hover, a:focus
   display: inline-block
   transition: var(--transition)
