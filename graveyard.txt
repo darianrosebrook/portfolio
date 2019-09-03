@@ -6,7 +6,7 @@
 <div class="row">
 <article class="work module">
   {% if post.type == 'Branding' %}<h4 class="work-branding">{% elsif post.type == 'Web Design' %}<h4 class="work-web">{% elsif post.type == 'Concept' %}<h4 class="work-concept">{% else %}<h4>{% endif %}{{post.type}}</h4>
-  <a href="{{site.baseurl}}{{post.url}}"><img src="{{post.index_image}}" alt="{{post.description | truncate: 120}}" /></a>
+  <a href="{{site.baseurl}}{{post.url}}"><img loading="lazy" src="{{post.index_image}}" alt="{{post.description | truncate: 120}}" /></a>
   <div class="data">
     <h5><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h5>
     <small><a href="{{site.baseurl}}/archive/case-study/">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.type}}</em></a></small>
@@ -18,7 +18,7 @@
 <div class="row">
 <article class="work module">
   {% if post.type == 'Branding' %}<h4 class="work-branding">{% elsif post.type == 'Web Design' %}<h4 class="work-web">{% elsif post.type == 'Concept' %}<h4 class="work-concept">{% else %}<h4>{% endif %}{{post.type}}</h4>
-  <a href="{{site.baseurl}}{{post.url}}"><img src="{{post.index_image}}" alt="{{post.description | truncate: 120}}" /></a>
+  <a href="{{site.baseurl}}{{post.url}}"><img loading="lazy" src="{{post.index_image}}" alt="{{post.description | truncate: 120}}" /></a>
   <div class="data">
     <h5><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h5>
     <small><a href="{{site.baseurl}}archive/case-study/">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.type}}</em></a></small>
@@ -28,7 +28,7 @@
 {% elsif post.type == "Web Design" %}
 <article class="work module">
   {% if post.type == 'Branding' %}<h4 class="work-branding">{% elsif post.type == 'Web Design' %}<h4 class="work-web">{% elsif post.type == 'Concept' %}<h4 class="work-concept">{% else %}<h4>{% endif %}{{post.type}}</h4>
-  <a href="{{site.baseurl}}{{post.url}}"><img src="{{post.index_image}}" alt="{{post.description | truncate: 120}}" /></a>
+  <a href="{{site.baseurl}}{{post.url}}"><img loading="lazy" src="{{post.index_image}}" alt="{{post.description | truncate: 120}}" /></a>
   <div class="data">
     <h5><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h5>
     <small><a href="{{site.baseurl}}archive/case-study/">{{post.date | date_to_long_string}} &#124; <em class="{{post.class}}" >{{post.type}}</em></a></small>
