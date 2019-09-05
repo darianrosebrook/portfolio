@@ -4,20 +4,20 @@
   margin: 0
   padding: 0
 *::selection
-  background-color: var(--main)
-  color: var(--highlight)
+  background-color: var(--main, $main)
+  color: var(--highlight, $highlight)
   // background-color: hsla(60, 100, 100, .5)
 html
-  background: var(--light)
+  background: var(--light, $light)
   @include responsive-font(1vw, 12px, 18px)
-  color: var(--main)
+  color: var(--main, $main)
 body
 
   padding: 1em
-  background: var(--dark)
+  background: var(--dark, $dark)
   line-height: 1.8
   opacity: 0
-  transition: var(--transition)
+  transition: var(--transition, $transition)
   overflow-x: hidden
 .hidden
   display: none !important
@@ -33,7 +33,7 @@ body
 
 // Images
 img
-  transition: var(--transition)
+  transition: var(--transition, $transition)
   display: inline-block
   width: 100%
   &.logo
@@ -55,7 +55,7 @@ body.main
   opacity: 1
 main
   padding: 6em 2em 2em
-  background: var(--secondary)
+  background: var(--secondary, $secondary)
 
 // Typography
 a.social-link
@@ -64,20 +64,20 @@ a.social-link
     font-size: 1rem !important
 a, a:link, a:visited, a:hover, a:focus
   display: inline-block
-  transition: var(--transition)
+  transition: var(--transition, $transition)
   text-decoration: none
   color: var(--highlight)
-  box-shadow: inset 0 -0.00em 0 var(--highlight)
+  box-shadow: inset 0 -0.00em 0 var(--highlight, $highlight)
 a:hover
   color: lighten( $highlight, 100%)
-  box-shadow: inset 0 -3.25em 0 var(--highlight)
+  box-shadow: inset 0 -3.25em 0 var(--highlight, $highlight)
 .regular
   font-weight: 400
 .bold
   font-weight: 300
 h1, h2, h3, h4, h5, h6
   position: relative
-  transition: var(--transition)
+  transition: var(--transition, $transition)
   line-height: 1.2
   a
     box-shadow: none
@@ -89,7 +89,7 @@ h1, h2, h3, h4, h5, h6
     //   background-color: var(--highlight)
     //   top: 100%
     //   right: 0
-    //   transition: var(--transition)
+    //   transition: var(--transition, $transition)
     // &:hover:before
     //   width: 100%
   @extend .regular
@@ -97,10 +97,10 @@ h3, h2, h1
   @extend .bold
 h6
   font-size: 1.4rem
-  color: var(--highlight)
+  color: var(--highlight, $highlight)
 h5
   font-size: 1.6rem
-  color: var(--highlight)
+  color: var(--highlight, $highlight)
   font-weight: 600
 h4
   font-size: 2.1rem
@@ -108,7 +108,7 @@ h4
 h3
   font-size: 1rem
   margin-bottom: 0
-  color: var(--highlight)
+  color: var(--highlight, $highlight)
 h2
   font-size: 2.5rem
   margin-bottom: 1em
@@ -133,7 +133,7 @@ i
 
 // Buttons
 button, a.button, input[type="submit"]
-  transition: var(--transition)
+  transition: var(--transition, $transition)
   display: inline-block
   min-width: 5rem
   border: 2px solid var(--dark)
@@ -145,7 +145,7 @@ button, a.button, input[type="submit"]
   cursor: pointer
   padding: 1em 2em
   &.secondary
-    background: var(--light)
+    background: var(--light, $light)
     color: var(--dark)
     border: none
     &:hover, &:focus, &:active
@@ -153,16 +153,16 @@ button, a.button, input[type="submit"]
       color: $dark
   &.tertiary
     background: var(--main)
-    color: var(--light)
+    color: var(--light, $light)
     &:hover, &:focus, &:active
       background-color:  darken($main, 15%)
 .button:active, .button:focus,a.button:active, a.button:focus
   font-size: 1.2rem
   background-color: darken($highlight-3, 45%)
-  color: var(--light)
+  color: var(--light, $light)
 .button:hover, a.button:hover
   background-color: var(--dark)
-  color: var(--light)
+  color: var(--light, $light)
 .button ~ .button, a.button ~ a.button
   margin-left: 1.3em
   margin-right: 0
@@ -182,9 +182,9 @@ nav
   flex-direction: row
   justify-content: space-between
   width: 100%
-  color: var(--light)
+  color: var(--light, $light)
   &.nav a
-    color: var(--light)
+    color: var(--light, $light)
 
   ul
     display: flex
@@ -210,7 +210,7 @@ nav
   margin-bottom: 1em
 
 hr
-  border: 2px solid var(--highlight)
+  border: 2px solid var(--highlight, $highlight)
   width: 65%
   margin: .5em 0
 .grid
