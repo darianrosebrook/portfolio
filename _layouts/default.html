@@ -1,3 +1,7 @@
+---
+occupation: Product and User Experience Designer
+---
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -195,17 +199,29 @@
     </script>
   </head>
   <body class="main">
-    <nav class="nav">
-      <ul>
-        <li><a href="/">Darian Rosebrook <!-- {{ site.time | date: '%Y' | minus:1992 }} -->
-</a></li>
-      </ul>
-      <ul>
-        <li><a href="/#work">Work</a></li>
-        <li><a href="/now">About</a></li>
-        <li><a href="#contact" class="scrollBtn ">Contact</a></li>
-      </ul>
-    </nav>
+    <header>
+      <article class="head-content">
+        <p><img loading="lazy" src="/assets/img/logo.svg" alt="Darian Rosebrook Logo" class="logo"></p>
+        <p>Product and UX Designer<p>
+        <h1 alt="Darian Rosebrook" class="sitename"><a href="/">Darian Rosebrook</a></h1>
+        <p><i class="fal fal-clock"><span>Age:</span> {{ site.time | date: '%Y' | minus:1992 }}yo</p>
+        <p><i class="fal fal-person"><span>Pronoun: </span></i> He/Him</p>
+        <p><img loading="lazy" src="/assets/img/darian-rosebrook-avatar.png" alt="Darian Rosebrook's avatar" class="avatar"></p>
+      </article>
+      <nav class="nav">
+        <ul>
+          <li><a href="/work">Design Work</a></li>
+          <li><a href="/work">Articles</a></li>
+          <li><a href="/now">Podcasts</a></li>
+          <li><a href="/now">Books</a></li>
+          <li><a href="/now">Graphic Novel</a></li>
+          <li><a href="/now">Talks</a></li>
+          <li><a href="/now">About Me</a></li>
+          <li><a href="/now">Updates</a></li>
+          <li><a href="#contact" class="scrollBtn ">How to Contact</a></li>
+        </ul>
+      </nav>
+    </header>
     <main class="main-content">
       {{content}}
       {% include contact.html %}

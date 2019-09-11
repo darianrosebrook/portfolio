@@ -1,3 +1,10 @@
+// Animations
+@keyframes fadeIn
+0%
+  opacity: 0
+100%
+  opacity: 1
+
 // Global
 *, *::before, *::after
   box-sizing: border-box
@@ -6,16 +13,12 @@
 *::selection
   background-color: var(--main)
   color: var(--highlight)
-  // background-color: hsla(60, 100, 100, .5)
 html
   background: var(--light)
   @include responsive-font(1vw, 12px, 18px)
-  color: var(--main)
+  color: var(--dark)
 body
-
-  padding: 1em
-  background: var(--dark)
-  line-height: 1.8
+  line-height: 1.25
   opacity: 0
   transition: var(--transition)
   overflow-x: hidden
@@ -37,17 +40,6 @@ img
   display: inline-block
   width: 100%
   &.logo
-    position: absolute
-    top: 6rem
-    left: 6rem
-    width: 10vw
-    max-width: 120px
-// Animations
-@keyframes fadeIn
-  0%
-    opacity: 0
-  100%
-    opacity: 1
 
 // Main
 body.main
@@ -58,10 +50,6 @@ main
   background: var(--secondary)
 
 // Typography
-a.social-link
-  font-size: 0 !important
-  i
-    font-size: 1rem !important
 a, a:link, a:visited, a:hover, a:focus
   display: inline-block
   transition: var(--transition)
@@ -76,6 +64,7 @@ a:hover
 .bold
   font-weight: 300
 h1, h2, h3, h4, h5, h6
+  font-family: 'Crimson Pro', serif
   position: relative
   transition: var(--transition)
   line-height: 1.2
@@ -214,40 +203,3 @@ hr
   width: 65%
   margin: .5em 0
 .grid
-  display: inline-grid
-  grid-template-columns: 1fr 1fr
-  grid-gap: .8rem
-  font-size: 1em
-  margin: 0
-  h5
-    font-size: 1.4rem
-header
-  .row
-    width: 80%
-
-  .module
-    vertical-align: bottom
-footer.container
-  margin: 0 -2em
-
-@media only screen and (min-width: 800px)
-  h1
-    font-size: 4rem
-  .grid
-    &:hover
-      .grid-item
-        opacity: .75
-    .grid-item
-      &:hover
-        opacity: 1
-        img
-          transform: translate(0, -1em)
-          box-shadow: 0 4px 6px 0 hsla(0, 0, 0, 0.2)
-    grid-gap: 3rem
-    grid-template-columns: 1fr 1fr 1fr 1fr
-  .row
-    width: 60%
-  .module
-    width: 48%
-    & ~ .module
-      margin-left: 3%
