@@ -88,6 +88,8 @@ h1, h2, h3, h4, h5, h6
   position: relative
   transition: var(--transition)
   line-height: 1.2
+  margin-bottom: .3em
+  @extend .regular
   a
     // box-shadow: none
     // &:before
@@ -133,7 +135,8 @@ h1
   letter-spacing: -.025em
   font-weight: 100
 p
-  margin-bottom: 1em
+  & ~ p
+    margin-top: 1em
 strong
   color: var(--dark)
   text-transform: uppercase
@@ -257,6 +260,10 @@ nav
   grid-column: 2 / span 5
   padding: 1em 0
   border-bottom: 1px solid var(--grey)
+  &.callout
+    grid-column: 1 / span 7
+    padding: 2em
+    background: var(--grey)
 .row
   position: relative
   margin: auto
@@ -282,6 +289,10 @@ hr
 .grid
   display: grid
   grid-template-columns: repeat(5, 1fr)
+  .logo
+    max-width: 16px
+    margin-right: .3em
+    margin-bottom: -.2em
   .grid-item
     padding: 1rem
     border-right: 1px solid var(--grey)
