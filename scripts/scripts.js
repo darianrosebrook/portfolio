@@ -1,4 +1,5 @@
 //functions
+
 function byId(id) {
   return document.getElementById(id);
 }
@@ -118,6 +119,16 @@ function checked() {
     )
   }
 }
+// Change background for hashed item to easily see item highlighted
+
+if(window.location.hash) {
+     var hash = window.location.hash.substring(1); //Puts hash in variable, and removes the # character
+     var hashedElem = byId(hash);
+     hashedElem.style.backgroundColor = "#efffef";
+     // hash found
+ } else {
+     // No hash found
+ }
 
 // filter for archive sites.
 

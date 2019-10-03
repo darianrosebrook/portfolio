@@ -126,6 +126,7 @@ h3
   font-size: 1rem
   margin-bottom: 0
 h2
+  text-transform: uppercase
   font-family: 'Inter var', sans-serif
   font-size: 1rem
   color: var(--tertiary)
@@ -195,6 +196,7 @@ button, a.button, input[type="submit"]
 
 // -- Architecture --
 header
+  margin: 0 2rem
   border-bottom: 2px solid var(--tertiary)
   .head-content
     display: grid
@@ -209,6 +211,9 @@ header
 .hero
   position: relative
   overflow-y: hidden
+  margin-right: -.5rem
+  padding-right: .5rem
+
   p
     width: 25%
   h1
@@ -269,7 +274,7 @@ nav
   margin: auto
   height: 100%
   .row-head
-    padding: 1em
+    padding: 1em 0
     width: 100%
     display: flex
     justify-content: space-between
@@ -289,6 +294,7 @@ hr
 .grid
   display: grid
   grid-template-columns: repeat(5, 1fr)
+  grid-gap: 1rem
   .logo
     max-width: 16px
     margin-right: .3em
@@ -296,10 +302,15 @@ hr
   .grid-item
     padding: 1rem
     border-right: 1px solid var(--grey)
+    margin-right: -.5rem
+    padding-right: 1.5rem
     &:first-of-type
       padding-left: 0
+    &:nth-of-type(5)
+      border-right: none
     & ~ .grid-item:last-of-type
       padding-right: 0
+      margin-right: 0
       border-right: none
     h4
       font-size: 1rem
