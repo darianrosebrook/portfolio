@@ -124,7 +124,7 @@ function checked() {
 if(window.location.hash) {
      var hash = window.location.hash.substring(1); //Puts hash in variable, and removes the # character
      var hashedElem = byId(hash);
-     hashedElem.style.backgroundColor = "#efffef";
+     hashedElem.style.backgroundColor = "rgba(83, 136, 160, 0.5)";
      // hash found
  } else {
      // No hash found
