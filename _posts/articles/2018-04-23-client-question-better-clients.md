@@ -1,6 +1,7 @@
 ---
 
 categories: [articles, post]
+permalink: archive/:title
 type: article
 title: Changing the question of — “how do I find better clients?”
 description: Finding great clients has never been easy I’ve been riding my third year of freelance design. With nearly fifteen clients that I’ve worked with over those two “completed” years, I have learned that finding great clients is not easy.

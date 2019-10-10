@@ -1,6 +1,7 @@
 ---
 
 categories: [articles, post]
+permalink: archive/:title
 type: article
 title: What is design strategy? Why we need to opt for a more professional process
 description: This term means a many different things to designers nowadays. What design strategy sounds like to one might be completely different to the other. The thing to understand about strategy in design is that we are all a part of it, in both large an small forms, with different roles along the process.

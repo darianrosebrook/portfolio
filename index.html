@@ -3,15 +3,13 @@ layout: default
 title: Product and UX Designer | Darian Rosebrook
 description: I'm Darian, a design consultant who focuses on the intersection of user experience design and branding design. Currently working on redesigning the design process within DevOps and DesignOps.
 index_image: /assets/img/index.jpg
-
-
 sitemap:
   lastmod: 2016-11-25
   priority: 0.7
   changefreq: 'weekly'
   exclude: 'no'
 ---
-<section class="container">
+<section class="container" id="updates">
   <article class="row">
     <div class="row-head"><h2>Updates</h2> <p><a href="{{site.baseurl}}/now">See All <i class="fa fa-arrow-right"><span>Click to see all updates</span></i></a></p></div>
     <div class="grid">
@@ -22,7 +20,7 @@ sitemap:
     </div>
     {% for post in site.categories.updates limit:12%}
       {% capture update %}{% cycle '1', '2', '3', '4'  %}{% endcapture %}
-      {% if update == '1' %}{% endif %} 
+      {% if update == '1' %}{% endif %}
           <div class="grid-item" style="grid-colum: 12 / span 4"><a href="{{site.baseurl}}/now/#{{post.specific}}" class="block-link">
             <p><i class="far fa-{{post.icon}}"></i></p>
             <p><small><strong>{{post.date | date_to_string }}</strong></small></p>
@@ -36,12 +34,12 @@ sitemap:
 <header class="hero row" style="grid-column: 2/6; padding-right: 1em; border-right: 1px solid var(--grey);">
   <div class="row-head"><h2>Product &amp; UX Designer</h2>
     <p><small><strong>Find me Here: </strong></small>
-      <a href="http://medium.com/darianrosebrook" class="social-link" rel="noreferrer" target="_blank"><i class="fab fa-medium-m transition"><span>Medium</span></i></a>
-      <a href="http://dribbble.com/darianrosebrook" class="social-link" rel="noreferrer" target="_blank"><i class="fab fa-dribbble transition"><span>Dribbble</span></i></a><a href="http://www.facebook.com/DarianRosebrook/" class="hidden">facebook page</a><a href="https://plus.google.com/u/1/106679625106063278529" class="hidden">Google page</a>
-      <a href="http://instagram.com/darianrosebrook" class="social-link" rel="noreferrer" target="_blank"><i class="fab fa-instagram transition"><span>Instagram</span></i></a>
-      <a href="http://youtube.com/compassofdesign" class="social-link" rel="noreferrer" target="_blank"><i class="fab fa-youtube transition"><span>YouTube</span></i></a>
-      <a href="http://linkedin.com/in/darianrosebrook" class="social-link" rel="noreferrer" target="_blank"><i class="fab fa-linkedin transition"><span>Linkedin</span></i></a>
-      <a href="http://twitter.com/darianrosebrook" class="social-link" rel="noreferrer" target="_blank"><i class="fab fa-twitter transition"><span>Twitter</span></i></a>
+      <a href="http://medium.com/darianrosebrook" class="social-link" rel="noreferrer" target="_blank">Link to<i class="fab fa-medium-m transition"><span>Medium</span></i></a>
+      <a href="http://dribbble.com/darianrosebrook" class="social-link" rel="noreferrer" target="_blank">Link to<i class="fab fa-dribbble transition"><span>Dribbble</span></i></a><a href="http://www.facebook.com/DarianRosebrook/" class="hidden">facebook page</a><a href="https://plus.google.com/u/1/106679625106063278529" class="hidden">Google page</a>
+      <a href="http://instagram.com/darianrosebrook" class="social-link" rel="noreferrer" target="_blank">Link to<i class="fab fa-instagram transition"><span>Instagram</span></i></a>
+      <a href="http://youtube.com/compassofdesign" class="social-link" rel="noreferrer" target="_blank">Link to<i class="fab fa-youtube transition"><span>YouTube</span></i></a>
+      <a href="http://linkedin.com/in/darianrosebrook" class="social-link" rel="noreferrer" target="_blank">Link to<i class="fab fa-linkedin transition"><span>Linkedin</span></i></a>
+      <a href="http://twitter.com/darianrosebrook" class="social-link" rel="noreferrer" target="_blank">Link to<i class="fab fa-twitter transition"><span>Twitter</span></i></a>
     </p>
   </div>
   <article class="row">
@@ -183,6 +181,7 @@ sitemap:
                 <input type="email" name="email" class="ck_email_address" id="ck_emailField" placeholder="Email Address" required>
               </div>
               <div class="ck_control_group ck_captcha2_h_field_group ck-captcha2-h" style="position: absolute !important;left: -999em !important;">
+                <label for="ck_captcha2_h">Robot Detector </label>
                 <input type="text" name="captcha2_h" class="ck-captcha2-h" id="ck_captcha2_h" placeholder="We use this field to detect spam bots. If you fill this in, you will be marked as a spammer.">
               </div>
 
@@ -196,7 +195,6 @@ sitemap:
             <div id="ck_converted_content" class="ck_converted_content">You've signed up for the newsletter.
 
         Have you taken the design assessment?
-        <a href="/design-assessment/">Learn more about where your skills sit as a designer</a></div>
         </div>
 
         </div>
@@ -208,44 +206,3 @@ sitemap:
     </div>
   </article>
 </section>
-
-<section class="container">
-  <article class="row">
-    <h2>Process</h2>
-    <div class="grid">
-    {% for post in site.categories.ux-study limit:7%}
-          <div class="grid-item">
-            <p><small>{{post.date | date_to_string }}</small></p>
-
-            <h4>{{post.title}}</h4>
-            <div>{% if post.type contains "update" %}{{post.content}}</div>
-            <p><a href="{{post.link}}">See More</a></p>{% else %}{{post.description}}</div>
-            <h6>{{post.type | capitalize}}</h6>
-            <p><a href="{{post.link}}" rel="noreferrer" target="_blank">See the article</a></p>{% endif %}
-          </div>
-    {% endfor %}
-    </div>
-  </article>
-</section>
-<section class="container">
-  <article class="row">
-    <h2>Writing</h2>
-    <div class="grid">
-    {% for post in site.categories.articles limit:7%}
-          <div class="grid-item">
-            <p><small>{{post.date | date_to_string }}</small></p>
-
-            <h4>{{post.title}}</h4>
-            <div>{% if post.type contains "update" %}{{post.content}}</div>
-            <p><a href="{{site.baseurl}}/now/#{{post.specific}}">See More</a></p>{% else %}{{post.description}}</div>
-            <h6>{{post.type | capitalize}}</h6>
-            <p><a href="{{post.link_to}}" rel="noreferrer" target="_blank">See the article</a></p>{% endif %}
-          </div>
-    {% endfor %}
-      <div class="grid-item see-all">
-        <h4><a href="{{site.baseurl}}/now">Read more of what I've written <i class="fa fa-arrow-right"><span>Click to continue</span></i></a></h4>
-      </div>
-    </div>
-  </article>
-</section>
-{% include dribbble.html %}

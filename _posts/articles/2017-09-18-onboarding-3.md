@@ -1,6 +1,7 @@
 ---
 
 categories: [articles, post]
+permalink: archive/:title
 type: article
 title: Onboarding new Design Clients — Win your next client in 15 seconds
 description: Sometimes we’re forced into gatherings to socialize with other people. We as creatives can be very introverted sometimes, thinking that all we have to focus on is doing good work. Sometimes these uncomfortable social situations come when you are returning from college for the winter, or it’s one of your friend’s baby showers, or you just got done at some design meetup and now you’re at an after party.

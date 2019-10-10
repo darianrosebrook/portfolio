@@ -1,6 +1,7 @@
 ---
 
 categories: [articles, post]
+permalink: archive/:title
 type: article
 title: Design is “about the details,” just don’t ignore the bigger picture
 description: Details are a huge part of what makes a design go from good to great and from great to excellent. We love to be meticulous about the smallest details of our designs. But after spending all of that time going over everything, it feels “off”… Ever wondered why your designs just don’t look right?
