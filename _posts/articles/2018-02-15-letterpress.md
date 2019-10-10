@@ -1,6 +1,7 @@
 ---
 
 categories: [articles, post]
+permalink: archive/:title
 type: article
 title: Why letterpress is my favorite printing method
 description: I love-love-love letterpress prints. It leaves an impression (literally) when you give or receive something that gets put through this print process. It takes a business to a level above what standard printing could do.

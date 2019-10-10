@@ -1,6 +1,7 @@
 ---
 
 categories: [articles, post]
+permalink: archive/:title
 type: article
 title: A Compass guide to designing custom stickers - Vinyl Stickers
 description: One of the fun things about being a branding designer is that not everything has to be so literal, or even formal, when designing the brand of a company.
