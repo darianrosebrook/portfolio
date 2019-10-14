@@ -56,262 +56,262 @@ body.main
   animation: fadeIn 2.5s
   opacity: 1
   padding: 0 10em
-// main
-//   display: grid
-//   margin: 0 auto
-//   grid-template-columns: 1em repeat(5, 1fr ) 1em
-//   grid-template-rows: auto
-//   grid-gap: 1em
-//   align-items: start
+main
+  display: grid
+  margin: 0 auto
+  grid-template-columns: 1em repeat(5, 1fr ) 1em
+  grid-template-rows: auto
+  grid-gap: 1em
+  align-items: start
 
 
 
-// // -- Typography --
-// a, a:link, a:visited, a:hover, a:focus
-//   display: inline-block
-//   transition: var(--transition)
-//   text-decoration: none
-//   color: var(--highlight)
-// a:not(.block-link)
-//   box-shadow: inset 0 -0.00em 0 var(--highlight)
-// a:hover
-//   color: lighten( $highlight, 100%)
-//   box-shadow: inset 0 -4.25em 0 var(--highlight)
-// .block-link
-//   border-bottom: none
-// .regular
-//   font-weight: 400
-// .bold
-//   font-weight: 300
-// h1, h2, h3, h4, h5, h6
-//   font-family: 'Crimson Pro', serif
-//   position: relative
-//   transition: var(--transition)
-//   line-height: 1.2
-//   margin-bottom: .3em
-//   @extend .regular
-//   a
-//     // box-shadow: none
-//     // &:before
-//     //   content: ""
-//     //   position: absolute
-//     //   width: 0%
-//     //   height: 2px
-//     //   background-color: var(--highlight)
-//     //   top: 100%
-//     //   right: 0
-//     //   transition: var(--transition)
-//     // &:hover:before
-//     //   width: 100%
-//   @extend .regular
-// h3, h2, h1
-//   @extend .bold
-// h6
-//   font-family: "Inter Var", sans-serif
-//   display: inline-block
-//   width: fit-content
-//   font-size: .8rem
-//   text-transform: uppercase
-//   font-weight: 200
-//   background: var(--grey)
-//   padding: .3em
-// h5
-//   font-size: 1.4rem
-//   color: var(--foreground)
-// h4
-//   font-size: 2.1rem
-//   color: var(--foreground)
-// h3
-//   display: inline-block
-//   font-size: 1rem
-//   margin-bottom: 0
-// h2
-//   text-transform: uppercase
-//   font-family: 'Inter var', sans-serif
-//   font-size: 1rem
-//   color: var(--tertiary)
-//   margin-bottom: 1em
-// h1
-//   font-size: 3rem
-//   letter-spacing: -.025em
-//   font-weight: 100
-// p
-//   & ~ p
-//     margin-top: 1em
-// strong
-//   color: var(--foreground)
-//   text-transform: uppercase
-//   font-weight: 400
+// -- Typography --
+a, a:link, a:visited, a:hover, a:focus
+  display: inline-block
+  transition: var(--transition)
+  text-decoration: none
+  color: var(--highlight)
+a:not(.block-link)
+  box-shadow: inset 0 -0.00em 0 var(--highlight)
+a:hover
+  color: lighten( $highlight, 100%)
+  box-shadow: inset 0 -4.25em 0 var(--highlight)
+.block-link
+  border-bottom: none
+.regular
+  font-weight: 400
+.bold
+  font-weight: 300
+h1, h2, h3, h4, h5, h6
+  font-family: 'Crimson Pro', serif
+  position: relative
+  transition: var(--transition)
+  line-height: 1.2
+  margin-bottom: .3em
+  @extend .regular
+  a
+    // box-shadow: none
+    // &:before
+    //   content: ""
+    //   position: absolute
+    //   width: 0%
+    //   height: 2px
+    //   background-color: var(--highlight)
+    //   top: 100%
+    //   right: 0
+    //   transition: var(--transition)
+    // &:hover:before
+    //   width: 100%
+  @extend .regular
+h3, h2, h1
+  @extend .bold
+h6
+  font-family: "Inter Var", sans-serif
+  display: inline-block
+  width: fit-content
+  font-size: .8rem
+  text-transform: uppercase
+  font-weight: 200
+  background: var(--grey)
+  padding: .3em
+h5
+  font-size: 1.4rem
+  color: var(--foreground)
+h4
+  font-size: 2.1rem
+  color: var(--foreground)
+h3
+  display: inline-block
+  font-size: 1rem
+  margin-bottom: 0
+h2
+  text-transform: uppercase
+  font-family: 'Inter var', sans-serif
+  font-size: 1rem
+  color: var(--tertiary)
+  margin-bottom: 1em
+h1
+  font-size: 3rem
+  letter-spacing: -.025em
+  font-weight: 100
+p
+  & ~ p
+    margin-top: 1em
+strong
+  color: var(--foreground)
+  text-transform: uppercase
+  font-weight: 400
 
 
-// small
-//   font-size: .8em
-//   font-variant-numeric: normal
-// em
+small
+  font-size: .8em
+  font-variant-numeric: normal
+em
 
-// i
-//   color: var(--foreground)
-//   font-size: 1.25em
-//   & ~ i
-//     padding: 0 2em
-//   span
-//     display: none
+i
+  color: var(--foreground)
+  font-size: 1.25em
+  & ~ i
+    padding: 0 2em
+  span
+    display: none
 
-// // -- Buttons --
-// button, a.button, input[type="submit"]
-//   transition: var(--transition)
-//   display: inline-block
-//   min-width: 5rem
-//   border: 2px solid var(--foreground)
-//   font-size: 1.3rem
-//   text-align: center
-//   text-transform: none
-//   background: none
-//   color: var(--foreground)
-//   cursor: pointer
-//   padding: 1em 2em
-//   &.secondary
-//     background: var(--background)
-//     color: var(--foreground)
-//     border: none
-//     &:hover, &:focus, &:active
-//       background-color:  darken($background, 15%)
-//       color: var(--foreground)
-//   &.tertiary
-//     background: var(--main)
-//     color: var(--background)
-//     &:hover, &:focus, &:active
-//       background-color:  darken($main, 15%)
-// .button:active, .button:focus,a.button:active, a.button:focus
-//   font-size: 1.2rem
-//   background-color: darken($highlight-3, 45%)
-//   color: var(--background)
-// .button:hover, a.button:hover
-//   background-color: var(--foreground)
-//   color: var(--background)
-// .button ~ .button, a.button ~ a.button
-//   margin-left: 1.3em
-//   margin-right: 0
+// -- Buttons --
+button, a.button, input[type="submit"]
+  transition: var(--transition)
+  display: inline-block
+  min-width: 5rem
+  border: 2px solid var(--foreground)
+  font-size: 1.3rem
+  text-align: center
+  text-transform: none
+  background: none
+  color: var(--foreground)
+  cursor: pointer
+  padding: 1em 2em
+  &.secondary
+    background: var(--background)
+    color: var(--foreground)
+    border: none
+    &:hover, &:focus, &:active
+      background-color:  darken($background, 15%)
+      color: var(--foreground)
+  &.tertiary
+    background: var(--main)
+    color: var(--background)
+    &:hover, &:focus, &:active
+      background-color:  darken($main, 15%)
+.button:active, .button:focus,a.button:active, a.button:focus
+  font-size: 1.2rem
+  background-color: darken($highlight-3, 45%)
+  color: var(--background)
+.button:hover, a.button:hover
+  background-color: var(--foreground)
+  color: var(--background)
+.button ~ .button, a.button ~ a.button
+  margin-left: 1.3em
+  margin-right: 0
 
 
-// // -- Architecture --
-// header
-//   margin: 0 2rem
-//   border-bottom: 2px solid var(--tertiary)
-//   .head-content
-//     display: grid
-//     grid-template-columns: repeat(7, 1fr)
-//     flex-direction: row
-//     justify-items: center
-//     text-align: center
-//     align-items: center
-//     border-bottom: 1px solid var(--grey)
-//     a
-//       color: var(--foreground)
-// .hero
-//   position: relative
-//   overflow-y: hidden
-//   margin-right: -.5rem
-//   padding-right: .5rem
+// -- Architecture --
+header
+  margin: 0 2rem
+  border-bottom: 2px solid var(--tertiary)
+  .head-content
+    display: grid
+    grid-template-columns: repeat(7, 1fr)
+    flex-direction: row
+    justify-items: center
+    text-align: center
+    align-items: center
+    border-bottom: 1px solid var(--grey)
+    a
+      color: var(--foreground)
+.hero
+  position: relative
+  overflow-y: hidden
+  margin-right: -.5rem
+  padding-right: .5rem
 
-//   p
-//     width: 25%
-//   h1
-//     width: 50%
-//     padding: .45rem 0
-//     line-height: 1.15
-//     span
-//       background: var(--background)
-//       display: inline
-//       padding: .1rem .45rem
-//       box-decoration-break: clone
-//       --webkit-box-decoration-break: clone
+  p
+    width: 25%
+  h1
+    width: 50%
+    padding: .45rem 0
+    line-height: 1.15
+    span
+      background: var(--background)
+      display: inline
+      padding: .1rem .45rem
+      box-decoration-break: clone
+      --webkit-box-decoration-break: clone
 
-//       border-radius: .3em
-//   img
-//     z-index: -1
-//     max-width: calc(75% - 1em)
+      border-radius: .3em
+  img
+    z-index: -1
+    max-width: calc(75% - 1em)
 
-//     position: absolute
-//     top: 0
-//     right: 0
-// ul
-//   list-style: none
-//   margin-bottom: 1em
-//   &.title-list
-//     font-family: "Crimson Pro", serif
-//     font-weight: 200
-//     line-height: 1.2
-//     li
-//       margin-bottom: 0.5rem
-// nav
-//   padding: 2em 0
-//   font-family: sans-serif
-//   width: 100%
-//   color: var(--tertiary)
-//   display: flex
-//   flex-direction: row
-//   justify-content: center
-//   &.nav a
-//     color: var(--tertiary)
+    position: absolute
+    top: 0
+    right: 0
+ul
+  list-style: none
+  margin-bottom: 1em
+  &.title-list
+    font-family: "Crimson Pro", serif
+    font-weight: 200
+    line-height: 1.2
+    li
+      margin-bottom: 0.5rem
+nav
+  padding: 2em 0
+  font-family: sans-serif
+  width: 100%
+  color: var(--tertiary)
+  display: flex
+  flex-direction: row
+  justify-content: center
+  &.nav a
+    color: var(--tertiary)
 
-//   ul
-//     display: flex
-//     flex-direction: row
-//     li
-//       & ~ li
-//         margin-left: 1em
-// .container
-//   position: relative
-//   grid-column: 2 / span 5
-//   padding: 1em 0
-//   border-bottom: 1px solid var(--grey)
-//   &.callout
-//     grid-column: 1 / span 7
-//     padding: 2em
-//     background: var(--grey)
-// .row
-//   position: relative
-//   margin: auto
-//   height: 100%
-//   .row-head
-//     padding: 1em 0
-//     width: 100%
-//     display: flex
-//     justify-content: space-between
-//     p
-//       display: flex
-//       justify-content: space-between
+  ul
+    display: flex
+    flex-direction: row
+    li
+      & ~ li
+        margin-left: 1em
+.container
+  position: relative
+  grid-column: 2 / span 5
+  padding: 1em 0
+  border-bottom: 1px solid var(--grey)
+  &.callout
+    grid-column: 1 / span 7
+    padding: 2em
+    background: var(--grey)
+.row
+  position: relative
+  margin: auto
+  height: 100%
+  .row-head
+    padding: 1em 0
+    width: 100%
+    display: flex
+    justify-content: space-between
+    p
+      display: flex
+      justify-content: space-between
 
-// .module
-//   vertical-align: top
-//   display: inline-block
-//   margin-bottom: 1em
+.module
+  vertical-align: top
+  display: inline-block
+  margin-bottom: 1em
 
-// hr
-//   border: 2px solid var(--highlight)
-//   width: 65%
-//   margin: .5em 0
-// .grid
-//   display: grid
-//   grid-template-columns: repeat(5, 1fr)
-//   grid-gap: 1rem
-//   .logo
-//     max-width: 16px
-//     margin-right: .3em
-//     margin-bottom: -.2em
-//   .grid-item
-//     padding: 1rem
-//     border-right: 1px solid var(--grey)
-//     margin-right: -.5rem
-//     padding-right: 1.5rem
-//     &:first-of-type
-//       padding-left: 0
-//     &:nth-of-type(5)
-//       border-right: none
-//     & ~ .grid-item:last-of-type
-//       padding-right: 0
-//       margin-right: 0
-//       border-right: none
-//     h4
-//       font-size: 1rem
+hr
+  border: 2px solid var(--highlight)
+  width: 65%
+  margin: .5em 0
+.grid
+  display: grid
+  grid-template-columns: repeat(5, 1fr)
+  grid-gap: 1rem
+  .logo
+    max-width: 16px
+    margin-right: .3em
+    margin-bottom: -.2em
+  .grid-item
+    padding: 1rem
+    border-right: 1px solid var(--grey)
+    margin-right: -.5rem
+    padding-right: 1.5rem
+    &:first-of-type
+      padding-left: 0
+    &:nth-of-type(5)
+      border-right: none
+    & ~ .grid-item:last-of-type
+      padding-right: 0
+      margin-right: 0
+      border-right: none
+    h4
+      font-size: 1rem
