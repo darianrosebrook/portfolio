@@ -147,7 +147,6 @@ strong
 small
   font-size: .8em
   font-variant-numeric: normal
-em
 
 i
   color: var(--foreground)
@@ -307,8 +306,10 @@ hr
     padding-right: 1.5rem
     &:first-of-type
       padding-left: 0
-    &:nth-of-type(5)
+    &:nth-of-type(5n + 5)
       border-right: none
+    &:nth-of-type(5n + 6)
+      padding-left: 0
     & ~ .grid-item:last-of-type
       padding-right: 0
       margin-right: 0

@@ -18,7 +18,7 @@ sitemap:
       <p><small><strong>12 Nov 2017 - Present</strong></small></p>
       <h4>Building the Compass of Design Community app</h4></a>
     </div>
-    {% for post in site.categories.updates limit:12%}
+    {% for post in site.categories.updates limit:9%}
       {% capture update %}{% cycle '1', '2', '3', '4'  %}{% endcapture %}
       {% if update == '1' %}{% endif %}
           <div class="grid-item" style="grid-colum: 12 / span 4"><a href="{{site.baseurl}}/now/#{{post.specific}}" class="block-link">
