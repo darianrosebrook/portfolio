@@ -1,0 +1,35 @@
+// -- Buttons --
+button, a.button, input[type="submit"]
+  transition: var(--transition)
+  display: inline-block
+  min-width: 5rem
+  border: 2px solid var(--foreground)
+  font-size: 1.3rem
+  text-align: center
+  text-transform: none
+  background: none
+  color: var(--foreground)
+  cursor: pointer
+  padding: 1em 2em
+  &.secondary
+    background: var(--background)
+    color: var(--foreground)
+    border: none
+    &:hover, &:focus, &:active
+      background-color:  darken($background, 15%)
+      color: var(--foreground)
+  &.tertiary
+    background: var(--main)
+    color: var(--background)
+    &:hover, &:focus, &:active
+      background-color:  darken($main, 15%)
+.button:active, .button:focus,a.button:active, a.button:focus
+  font-size: 1.2rem
+  background-color: darken($highlight-3, 45%)
+  color: var(--background)
+.button:hover, a.button:hover
+  background-color: var(--foreground)
+  color: var(--background)
+.button ~ .button, a.button ~ a.button
+  margin-left: 1.3em
+  margin-right: 0

@@ -9,28 +9,7 @@ sitemap:
   changefreq: 'weekly'
   exclude: 'no'
 ---
-<section class="container" id="updates">
-  <article class="row">
-    <div class="row-head"><h2>Updates</h2> <p><a href="{{site.baseurl}}/now">See All <i class="fa fa-arrow-right"><span>Click to see all updates</span></i></a></p></div>
-    <div class="grid">
-    <div class="grid-item"><a href="{{site.baseurl}}/now/#compass-community-site class="block-link"">
-      <p><i class="far fa-drafting-compass"></i></p>
-      <p><small><strong>12 Nov 2017 - Present</strong></small></p>
-      <h4>Building the Compass of Design Community app</h4></a>
-    </div>
-    {% for post in site.categories.updates limit:9%}
-      {% capture update %}{% cycle '1', '2', '3', '4'  %}{% endcapture %}
-      {% if update == '1' %}{% endif %}
-          <div class="grid-item" style="grid-colum: 12 / span 4"><a href="{{site.baseurl}}/now/#{{post.specific}}" class="block-link">
-            <p><i class="far fa-{{post.icon}}"></i></p>
-            <p><small><strong>{{post.date | date_to_string }}</strong></small></p>
-            <h4>{{post.title}}</h4></a>
-          </div>
-      {% if update == '4' or forloop.last %}{% endif %}
-    {% endfor %}
-    </div>
-  </article>
-</section>
+{% include updates.html %}
 <header class="hero row" style="grid-column: 2/6; padding-right: 1em; border-right: 1px solid var(--grey);">
   <div class="row-head"><h2>Product &amp; UX Designer</h2>
     <p><small><strong>Find me Here: </strong></small>

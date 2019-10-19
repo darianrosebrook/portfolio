@@ -1,0 +1,75 @@
+// -- Typography --
+a, a:link, a:visited, a:hover, a:focus
+  display: inline-block
+  transition: var(--transition)
+  text-decoration: none
+  color: var(--highlight)
+a:not(.block-link)
+  box-shadow: inset 0 -0.00em 0 var(--highlight)
+a:hover
+  color: lighten( $highlight, 100%)
+  box-shadow: inset 0 -4.25em 0 var(--highlight)
+.block-link
+  border-bottom: none
+.regular
+  font-weight: 400
+.bold
+  font-weight: 300
+h1, h2, h3, h4, h5, h6
+  font-family: 'Crimson Pro', serif
+  position: relative
+  transition: var(--transition)
+  line-height: 1.2
+  margin-bottom: .3em
+  @extend .regular
+h3, h2, h1
+  @extend .bold
+h6
+  font-family: "Inter Var", sans-serif
+  display: inline-block
+  width: fit-content
+  font-size: .8rem
+  text-transform: uppercase
+  font-weight: 200
+  background: var(--grey)
+  padding: .3em
+h5
+  font-size: 1.4rem
+  color: var(--foreground)
+h4
+  font-size: 2.1rem
+  color: var(--foreground)
+h3
+  display: inline-block
+  font-size: 1rem
+  margin-bottom: 0
+h2
+  text-transform: uppercase
+  font-family: 'Inter var', sans-serif
+  font-size: 1rem
+  color: var(--tertiary)
+  margin-bottom: 1em
+h1
+  font-size: 3rem
+  letter-spacing: -.025em
+  font-weight: 100
+p
+  & ~ p
+    margin-top: 1em
+strong
+  color: var(--foreground)
+  text-transform: uppercase
+  font-weight: 400
+
+
+small
+  font-size: .8em
+  font-variant-numeric: normal
+
+i
+  color: var(--foreground)
+  font-size: 1.25em
+  & ~ i
+    padding: 0 2em
+  span
+    display: none
