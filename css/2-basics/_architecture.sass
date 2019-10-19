@@ -1,0 +1,123 @@
+//-- Architecture --
+header
+  margin: 0 2rem
+  border-bottom: 2px solid var(--tertiary)
+  .head-content
+    display: grid
+    grid-template-columns: repeat(7, 1fr)
+    flex-direction: row
+    justify-items: center
+    text-align: center
+    align-items: center
+    border-bottom: 1px solid var(--grey)
+    a
+      color: var(--foreground)
+.hero
+  position: relative
+  overflow-y: hidden
+  margin-right: -.5rem
+  padding-right: .5rem
+
+  p
+    width: 25%
+  h1
+    width: 50%
+    padding: .45rem 0
+    line-height: 1.15
+    span
+      background: var(--background)
+      display: inline
+      padding: .1rem .45rem
+      box-decoration-break: clone
+      --webkit-box-decoration-break: clone
+
+      border-radius: .3em
+  img
+    z-index: -1
+    max-width: calc(75% - 1em)
+
+    position: absolute
+    top: 0
+    right: 0
+ul
+  list-style: none
+  margin-bottom: 1em
+  &.title-list
+    font-family: "Crimson Pro", serif
+    font-weight: 200
+    line-height: 1.2
+    li
+      margin-bottom: 0.5rem
+nav
+  padding: 2em 0
+  font-family: sans-serif
+  width: 100%
+  color: var(--tertiary)
+  display: flex
+  flex-direction: row
+  justify-content: center
+  &.nav a
+    color: var(--tertiary)
+
+  ul
+    display: flex
+    flex-direction: row
+    li
+      & ~ li
+        margin-left: 1em
+.container
+  position: relative
+  grid-column: 2 / span 5
+  padding: 1em 0
+  border-bottom: 1px solid var(--grey)
+  &.callout
+    grid-column: 1 / span 7
+    padding: 2em
+    background: var(--grey)
+.row
+  position: relative
+  margin: auto
+  height: 100%
+  .row-head
+    padding: 1em 0
+    width: 100%
+    display: flex
+    justify-content: space-between
+    p
+      display: flex
+      justify-content: space-between
+
+.module
+  vertical-align: top
+  display: inline-block
+  margin-bottom: 1em
+
+hr
+  border: 2px solid var(--highlight)
+  width: 65%
+  margin: .5em 0
+.grid
+  display: grid
+  grid-template-columns: repeat(5, 1fr)
+  grid-gap: 1rem
+  .logo
+    max-width: 16px
+    margin-right: .3em
+    margin-bottom: -.2em
+  .grid-item
+    padding: 1rem
+    border-right: 1px solid var(--grey)
+    margin-right: -.5rem
+    padding-right: 1.5rem
+    &:first-of-type
+      padding-left: 0
+    &:nth-of-type(5n + 5)
+      border-right: none
+    &:nth-of-type(5n + 6)
+      padding-left: 0
+    & ~ .grid-item:last-of-type
+      padding-right: 0
+      margin-right: 0
+      border-right: none
+    h4
+      font-size: 1rem
