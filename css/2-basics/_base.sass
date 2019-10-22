@@ -9,7 +9,7 @@
   color: var(--background)
 
 html
-  @include responsive-font(1vw, 10px, 16px)
+  @include responsive-font(2vw, 10px, 14px)
   background: var(--background)
   color: var(--foreground)
 
@@ -23,7 +23,10 @@ body
 .hidden
   display: none !important
   opacity: 0
-
+.f-r
+  float: right
+.f-l
+  float: left
 .cf::after
   content: ' '
   visibility: hidden
@@ -36,14 +39,6 @@ body
 body.main
   animation: fadeIn 2.5s
   opacity: 1
-  padding: 0 10em
-main
-  display: grid
-  margin: 0 auto
-  grid-template-columns: 1em repeat(5, 1fr ) 1em
-  grid-template-rows: auto
-  grid-gap: 1em
-  align-items: start
 
 // Images
 img
