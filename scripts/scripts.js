@@ -21,7 +21,6 @@ var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
     if(!!window.chrome && !isOpera )
     { animateTime = 900;
     }
-
 // get the y offset
 function getPageScroll() {
   var yScroll;
@@ -194,7 +193,7 @@ $(function() {
             }
             if (val.low_profile === false) {
             $('#shots').prepend(
-              '<div class="grid-item"><a class="shot" rel="noreferrer" target="_blank" href="'+ val.html_url +'" title="' + val.title + '"><img loading="lazy" src="'+ image +'" alt="' + val.title + '"/><p><small>'+ d + ' ' + mLong + ' ' + y +'</small></p><h4>'+ val.title + '</h4></a><div class="truncate">'+ val.description + '</div><p><a href="'+ val.html_url +'" rel="noreferrer" target="_blank" >See more</a></p></div>'
+              '<div class="grid-item" style="grid-colum: 12 / span 4"><a class="shot" rel="noreferrer" target="_blank" href="'+ val.html_url +'" title="' + val.title + '"><img loading="lazy" src="'+ image +'" alt="' + val.title + '"/><p><small>'+ d + ' ' + mLong + ' ' + y +'</small></p><h4>'+ val.title + '</h4></a></div>'
             )
 
             $('.truncate').each(function(index, value) {
