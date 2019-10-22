@@ -13,7 +13,7 @@ sitemap:
 <header class="hero row" style="">
   <div class="row-head"><h2>Product &amp; UX Designer</h2>
     <p><small><strong>Find me Here: </strong></small>
-      <a href="http://medium.com/darianrosebrook" class="social-link" rel="noreferrer" target="_blank" aria-label="Link To Medium"><i class="fab fa-medium-m transition"><span>Link to Medium</span></i></a>
+      <a href="http://medium.com/@darianrosebrook" class="social-link" rel="noreferrer" target="_blank" aria-label="Link To Medium"><i class="fab fa-medium-m transition"><span>Link to Medium</span></i></a>
       <a href="http://dribbble.com/darianrosebrook" class="social-link" rel="noreferrer" target="_blank" aria-label="Link To Dribbble"><i class="fab fa-dribbble transition"><span>Link to Dribbble</span></i></a><a href="http://www.facebook.com/DarianRosebrook/" class="hidden">facebook page</a><a href="https://plus.google.com/u/1/106679625106063278529" class="hidden">Google page</a>
       <a href="http://instagram.com/darianrosebrook" class="social-link" rel="noreferrer" target="_blank" aria-label="Link To Instagram"><i class="fab fa-instagram transition"><span>Link to Instagram</span></i></a>
       <a href="http://youtube.com/compassofdesign" class="social-link" rel="noreferrer" target="_blank" aria-label="Link To YouTube"><i class="fab fa-youtube transition"><span>Link to YouTube</span></i></a>
@@ -85,6 +85,7 @@ sitemap:
         <li>HTML</li>
         <li>CSS</li>
         <li>JavaScript</li>
+        <li>Web Components</li>
         <li>React</li>
         <li>Polymer</li>
         <li> Ruby on Rails</li>
@@ -95,6 +96,9 @@ sitemap:
     </div>
   </article>
   </section>
+
+  {% include clients.html %}
+
   <section class="container work-history">
   <article class="row">
     <h2>Work History</h2>
@@ -126,22 +130,6 @@ sitemap:
         <img src="{{site.baseurl}}/assets/img/keyspark-logo.svg" class="logo" alt=""><h3>KeySpark</h3>
       </div>
     </div>
-  </article>
-</section>
-<section class="container">
-  <article class="row" style="">
-    <div class="column">
-      <h3> Compass of Design Podcast </h3>
-      <img src="{{site.baseurl}}/assets/img/compass-of-design-logo.svg" class="logo" alt=""><h3>Compass of Design</h3>
-      <iframe title="Podcast widget for the Compass of Design Podcast" src='https://share.transistor.fm/e/bite-sized-design/latest' width='100%' height='180' frameborder='0' scrolling='no' seamless='true' style='width:100%; height:180px;'></iframe>
-    </div>
-    <div class="column">
-      <h3> Compass of Design Podcast </h3>
-      <img src="{{site.baseurl}}/assets/img/compass-of-design-logo.svg" class="logo" alt=""><h3>Compass of Design</h3>
-      <iframe title="Podcast widget for the Responsibly Irresponsible podcast" src='https://share.transistor.fm/e/bite-sized-design/latest' width='100%' height='180' frameborder='0' scrolling='no' seamless='true' style='width:100%; height:180px;'></iframe>
-    </div>
-
-
   </article>
 </section>
 <section class="container callout">
@@ -205,8 +193,4 @@ sitemap:
     </div>
   </article>
 </section>
-<section class="container">
-  <article class="row">
-    {% include dribbble.html %}
-  </article>
-</section>
+{% include dribbble.html %}
