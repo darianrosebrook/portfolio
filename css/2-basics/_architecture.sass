@@ -10,6 +10,7 @@ main
   align-items: start
 
   grid-template-areas: "ud ud ud ud ud" "he he he he he" "sk sk pc pc pc" "sk sk wh wh wh" "nl nl nl nl nl" "dw dw dw dw dw" "vd vd vd vd vd" "pd pd pd pd pd" "bk bk bk bk bk"
+
 //-- Framing --
 .container
   position: relative
@@ -47,6 +48,8 @@ main
   .grid-item
     &:nth-of-type(1n + 4)
       // display: none
+
+
   .logo
     max-width: 16px
     margin-right: .3rem
@@ -71,6 +74,14 @@ main
   grid-area: wh
   .grid
     grid-template-columns: repeat(1, 1fr)
+    img:not(.logo)
+      display: inline
+      width: 30%
+      float: left
+      margin-right: 1rem
+    .module
+      display: inline-block
+      width: calc(60% - 1rem)
 
 .previous-clients
   grid-column: 3 / span 3
@@ -106,6 +117,7 @@ header
   position: relative
   grid-column: 1 / span 5
   grid-area: he
+  border-bottom: 1px solid var(--grey)
   p
     width: 100%
   h1
@@ -189,7 +201,7 @@ a.block-link
       margin-right: -.5rem
       padding-right: 1.5rem
       &:nth-of-type(1n + 4)
-        display: inherit
+        display: inline-block
       &:first-of-type
         padding-left: 0
       &:nth-of-type(5n + 5)
@@ -229,9 +241,9 @@ a.block-link
     h1
       width: 50%
     figure
-      width: 100%
+      width: calc(75% - 1rem)
       z-index: -1
-      max-width: calc(75% - 1rem)
+      max-width: 1400px
       position: absolute
       top: 0
       right: 0
@@ -239,7 +251,18 @@ a.block-link
     padding-left: 1rem
   .work-history
     .grid
-      grid-template-columns: repeat(1, 1fr)
+      grid-template-columns: repeat(4, 1fr)
+      .module
+        img:not(.logo)
+          display: inline-block
+          width: 40%
+          float: left
+          margin-right: 1rem
 
   .block-link
     display: inline-block
+  nav
+    align-items: baseline
+    ul
+      flex-direction: row
+      margin-left: 1rem
