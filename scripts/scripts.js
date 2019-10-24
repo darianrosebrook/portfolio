@@ -193,7 +193,13 @@ $(function() {
             }
             if (val.low_profile === false) {
             $('#shots').prepend(
-              '<div class="grid-item" style="grid-colum: 12 / span 4"><a class="shot" rel="noreferrer" target="_blank" href="'+ val.html_url +'" title="' + val.title + '"><img loading="lazy" src="'+ image +'" alt="' + val.title + '"/><p><small>'+ d + ' ' + mLong + ' ' + y +'</small></p><h4>'+ val.title + '</h4></a></div>'
+             '<a class="shot module grid-item"  rel="noreferrer" target="_blank" href="'+ val.html_url +'" title="' + val.title + '">'+
+              '<img loading="lazy" src="'+ image +'" alt="' + val.title + '"/>'+
+              '<div>' +
+                   '<p><small>'+ d + ' ' + mLong + ' ' + y +'</small></p>'+
+                   '<h5>'+ val.title + '</h5>'+
+               '</div>' +
+             '</a>'
             )
 
             $('.truncate').each(function(index, value) {
@@ -201,6 +207,7 @@ $(function() {
               // number of characters
             })
             }
+            return i < 10
           })
         }
         else {

@@ -33,3 +33,32 @@ button, a.button, input[type="submit"]
 .button ~ .button, a.button ~ a.button
   margin-left: 1.3em
   margin-right: 0
+
+.field
+  display: inline-block
+  width: fit-content
+label
+  display: block
+  margin-bottom: 1rem
+input[type="text"], input[type="email"], textarea
+    padding: 2rem
+    border: none
+    border-radius: 1rem
+    margin-bottom: 1rem
+    &::placeholder
+      font-family: "Crimson Pro"
+input[type="email"]
+  border-radius: 1rem 0 0 1rem
+  margin-right: 0
+textarea
+  resize: none
+  width: 100%
+.subscribe_button
+  background: var(--tertiary)
+  padding: 2.2rem
+  display: inline
+  margin-left: 0
+  border: none
+  border-radius: 0 1rem 1rem 0
+  i
+    color: var(--background)

@@ -92,9 +92,16 @@ main
 
 .newsletter
   grid-area: nl
-
+  h4, h4 i
+    font-size: 3rem
+    align-self: start
 .design-work
   grid-area: dw
+  .module
+    img
+      float: left
+      width: 30%
+      margin-right: 1rem
 
 .video
   grid-area: vd
@@ -190,7 +197,7 @@ a.block-link
   body.main
     padding: 0 10rem
   main
-    grid-template-columns: 1rem repeat(5, 1fr ) 1rem
+    grid-template-columns: 2rem repeat(5, 1fr ) 1rem
     grid-template-areas:  ". ud ud ud ud ud ." ". he he he he sk ." ". wh wh wh wh pc ." "nl nl nl nl nl nl nl" ". dw dw dw dw dw ." ". vd vd vd vd vd ." ". pd pd pd pd pd ." ". bk bk bk bk bk ."
 
   .grid
@@ -227,7 +234,7 @@ a.block-link
     // grid-column: 2 / span 5
     &.callout
       grid-column: 1 / span 7
-      padding: 1rem
+      padding: 2rem
   .row
     .row-head
       flex-direction: row
@@ -258,6 +265,13 @@ a.block-link
           width: 40%
           float: left
           margin-right: 1rem
+  .newsletter
+    .module
+      display: grid
+      grid-template-columns: 1fr 9fr 10fr
+      gap: 1rem
+      align-items: center
+  .design-work
 
   .block-link
     display: inline-block
