@@ -1,11 +1,5 @@
 User-Agent: *
-Allow: /archive/
-Allow: /archive/case-studies/
-Allow: /archive/articles/
-Allow: /web/
-Allow: /about/
-Allow: /branding/
-Allow: /process/
-Disallow: /hidden-studies/
+Allow: /now/
+Allow: /
 
 Sitemap: https://darianrosebrook.com/sitemap.xml
