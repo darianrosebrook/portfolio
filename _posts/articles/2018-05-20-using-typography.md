@@ -1,6 +1,7 @@
 ---
 
 categories: [articles, post]
+permalink: archive/:title
 type: article
 title: Design Principle 4 — Typefaces and how to use them
 description: What I will be covering in this guide is not about specific typefaces, which typefaces are better when paired, or choosing what font files to use. We are talking about being able to effectively choose what typeface you want to use solely by the characteristics of it.
