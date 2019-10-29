@@ -1,7 +1,7 @@
 ---
 categories: [updates, post]
 type: update
-title: I Was Interviewed on the Fowler Hour Podcast
+title: Interview on The Fowler Hour about creating a design community
 specific: podcasted-interview
 icon: microphone-alt
 ---

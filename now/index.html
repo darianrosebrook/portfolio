@@ -14,7 +14,7 @@ sitemap:
   <h4><a href="/"><i class="fa fa-arrow-left"><span>Main menu,</span></i> Head Back</a></h4>
 </article>
 </section>
-<header id="hero" class="container">
+<section class="container">
   <article class="row">
     <div class="module">
     <h1>About</h1>
@@ -28,7 +28,7 @@ sitemap:
     </div>
   </article>
 
-</header>
+</section>
 <section class="container">
   <article class="row">
     <div class="module">
@@ -68,15 +68,19 @@ sitemap:
 
 
     </select></p>
+  </article>
+</section>
+<section class="container">
+  <article class="row">
     <div class="grid">
-    <div data-type="update" class="grid-item list-item" id="compass-community-site">
+    <div data-type="update" class="grid-item update" id="compass-community-site">
       <p><small>12 Nov 2017 - Present</small></p>
       <hr>
       <h4>Building the Compass of Design Community app</h4>
       <p >This project has been a huge step in what I'm able to achieve as the sole person on a project. This product utilizes my knowledge in UX Design, UI Design, and Back End Development by wrapping all of those together into one product. The Compass of Design Membership Site. This platform is going to be a powerhouse in helping designers get actionable feedback on questions they have and designs they've done. So far, there hasn't been a site that effectively does this without it becoming a popularity contest. Our goal here is to change the way we do design feedback!</p>
     </div>
 {% for post in site.categories.post%}
-      <div data-type="{{post.type}}" class="grid-item list-item" id="{{post.specific}}">
+      <div data-type="{{post.type}}" class="grid-item update" id="{{post.specific}}">
         <p><small>{{post.date | date_to_string }}</small></p>
         <hr>
         <h4>{{post.title}}</h4>
@@ -84,6 +88,7 @@ sitemap:
         <div>{% if post.type contains "update" %}{{post.content}}</div>{% else %}{{post.description}}</div><p><a href="{{post.link_to}}" rel="noreferrer" target="_blank">See the article</a></p>{% endif %}
       </div>
   {% endfor %}
-</div>
+
+    </div>
 </article>
 </section>
