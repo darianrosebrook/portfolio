@@ -1,4 +1,5 @@
 //functions
+
 function byId(id) {
   return document.getElementById(id);
 }
@@ -20,7 +21,6 @@ var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
     if(!!window.chrome && !isOpera )
     { animateTime = 900;
     }
-
 // get the y offset
 function getPageScroll() {
   var yScroll;
@@ -118,6 +118,16 @@ function checked() {
     )
   }
 }
+// Change background for hashed item to easily see item highlighted
+
+if(window.location.hash) {
+     var hash = window.location.hash.substring(1); //Puts hash in variable, and removes the # character
+     var hashedElem = byId(hash);
+     hashedElem.style.backgroundColor = "rgba(83, 136, 160, 0.5)";
+     // hash found
+ } else {
+     // No hash found
+ }
 
 // filter for archive sites.
 
@@ -183,7 +193,13 @@ $(function() {
             }
             if (val.low_profile === false) {
             $('#shots').prepend(
-              '<div class="grid-item"><a class="shot" rel="noreferrer" target="_blank" href="'+ val.html_url +'" title="' + val.title + '"><img loading="lazy" src="'+ image +'" alt="' + val.title + '"/><p><small>'+ d + ' ' + mLong + ' ' + y +'</small></p><hr><h4>'+ val.title + '</h4></a><div class="truncate">'+ val.description + '</div><p><a href="'+ val.html_url +'" rel="noreferrer" target="_blank" >See more</a></p></div>'
+             '<a class="shot module grid-item"  rel="noreferrer" target="_blank" href="'+ val.html_url +'" title="' + val.title + '">'+
+              '<img loading="lazy" src="'+ image +'" alt="' + val.title + '"/>'+
+              '<div>' +
+                   '<p><small>'+ d + ' ' + mLong + ' ' + y +'</small></p>'+
+                   '<h5>'+ val.title + '</h5>'+
+               '</div>' +
+             '</a>'
             )
 
             $('.truncate').each(function(index, value) {
@@ -191,6 +207,7 @@ $(function() {
               // number of characters
             })
             }
+            return i < 10
           })
         }
         else {

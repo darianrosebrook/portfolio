@@ -1,6 +1,7 @@
 ---
 
 categories: [articles, post]
+permalink: archive/:title
 type: article
 title: The power of consistency in branding design Defining the experience of your products and services
 description: Branding starts happening when you take the brand’s Visual Identity, Messaging, Activity, Products/Services, and Name and give it meaning. Your collection of previous work, products, services, marketing efforts, and different social media accounts for your company become a part of your brand.

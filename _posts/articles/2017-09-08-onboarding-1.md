@@ -1,6 +1,7 @@
 ---
 
 categories: [articles, post]
+permalink: archive/:title
 type: article
 title: Onboarding new Design Clients — Asking the right questions
 description: A great designer can be measured by the quality of questions they ask. It’s not the defining characteristic, but having an arsenal of great questions to ask helps ensure that you are able to do the best work you can possibly do and have the client on the same page as you.

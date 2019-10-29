@@ -1,6 +1,7 @@
 ---
 
 categories: [articles, post]
+permalink: archive/:title
 type: article
 title: Is it Better for a Designer to be a Generalist or Specialist?
 description: When you start to focus on growing your skills, you poke around and borrow styles from all over the place. Borrowing ideas as a designer is a good way to figure out your own style. You may work on figuring out new tools, software, new material, or messaging. As your skills begin to improve, you may be wondering

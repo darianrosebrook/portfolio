@@ -1,6 +1,7 @@
 ---
 
 categories: [articles, post]
+permalink: archive/:title
 type: article
 title: Switching to value base pricing
 description: What I have learned so far about implementing value based pricing.

@@ -1,6 +1,7 @@
 ---
 
 categories: [articles, post]
+permalink: archive/:title
 type: article
 title: How to find and access your niche
 description: A two part series of how to figure out who to market your skills to as a freelancer or agency.

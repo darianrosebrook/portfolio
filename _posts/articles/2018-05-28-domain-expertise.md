@@ -1,6 +1,7 @@
 ---
 
 categories: [articles, post]
+permalink: archive/:title
 type: article
 title: Building Domain Expertise in what you do.
 description: My personal goal as a designer is to become a master of my craft. I’m a brand identity designer who focuses on mapping business goals to design strategy. I help businesses reach their goals with their communication and products to craft the visual approach to their brand.

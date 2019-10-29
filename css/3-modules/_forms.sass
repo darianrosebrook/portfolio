@@ -1,23 +1,21 @@
-form
+#contact
+  grid-area: ct
   input:not(.button), textarea,
     width: 100%
     margin-bottom: 1.2em
     padding: .5em 2em
     background: none
 
-    border: 1rem solid var(--dark)
+    border-left: 1rem solid var(--foreground)
 
-    color: var(--dark)
+    color: var(--tertiary)
 
-    border-top: 0
-    border-bottom: 0
     transition: var(--transition)
     outline: none
     text-align: center
     &:focus, &:active, &:hover
 
-      border-width: 2.5rem
-      border-color: var(--dark)
+      border-color: var(--highlight-2)
   textarea
     height: 30vh
   label.module
@@ -31,8 +29,8 @@ form
     width: 90%
     text-align: center
 
-    border: 2px solid var(--dark)
-    color: var(--dark)
+    border: 2px solid var(--grey)
+    color: var(--foreground)
 
     border-radius: 10px
     margin-bottom: .3em
@@ -44,15 +42,15 @@ form
       width: 50%
     &:hover
 
-      border: 2px dashed var(--dark)
-      color: var(--dark)
+      border: 2px dashed var(--grey)
+      color: var(--foreground)
       background-color: var(--secondary)
   input[name$="-speaking"]:checked ~ .container label[for$="-speaking"]
     background-color: var(--grey)
-    color: var(--light)
+    color: var(--foreground)
   input[name$="-else"]:checked ~ .container label[for$="-else"]
     background-color: var(--grey)
-    color: var(--light)
+    color: var(--foreground)
   .container
     display: flex
     padding: 3rem 0
@@ -67,11 +65,10 @@ form
 #contact
 
   position: relative
-  width: 90%
   margin: 0  auto
   margin-top: 5rem
   font-size: 1.7rem
-  color: var(--dark)
+  color: var(--foreground)
   z-index: 3
   .row
     width: 100%
@@ -124,7 +121,6 @@ form
 
   #contact
 
-    width: 60%
     .continue
       &:not(.button)
         height: calc(30vw / 1.7)
