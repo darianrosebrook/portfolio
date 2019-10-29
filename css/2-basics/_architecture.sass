@@ -65,6 +65,29 @@ main
     svg
       width: 80%
       fill: var(--foreground)
+
+
+header
+  padding-top: 2rem
+  .head-content
+    display: grid
+    grid-template-columns: repeat(4, 1fr)
+    grid-template-areas: "a b b c" "d e f g"
+    p:nth-of-type(1)
+      grid-area: a
+    p:nth-of-type(2)
+      grid-area: d
+    p:nth-of-type(3)
+      grid-area: e
+    p:nth-of-type(4)
+      grid-area: f
+    p:nth-of-type(5)
+      grid-area: g
+    p:nth-of-type(6)
+      grid-area: c
+    h4
+      grid-area: b
+
 .skills
   grid-column: span 2
   grid-area: sk
@@ -116,7 +139,6 @@ main
   grid-area: ft
 // -- Structure --
 header
-  margin: 0 2rem
   border-bottom: 2px solid var(--tertiary)
   .head-content
     text-align: center
@@ -159,16 +181,19 @@ nav
   width: 100%
   color: var(--tertiary)
   display: flex
-  justify-content: center
+  justify-content: space-between
   &.nav a
     color: var(--tertiary)
-
   ul
     display: flex
-    flex-direction: column
+    flex-direction: row
+    flex-wrap: wrap
+    justify-content: space-between
+    width: 90%
     li
-      & ~ li
-        margin-left: 1rem
+      width: calc(50% - 2.3rem)
+      margin-right: 2rem
+      margin-bottom: 2rem
 
 hr
   border: 2px solid var(--highlight)
@@ -226,13 +251,25 @@ a.block-link
     display: block
   header
     .head-content
-      display: grid
+      grid-template-areas: unset
       grid-template-columns: repeat(7, 1fr)
       flex-direction: row
       justify-items: center
       text-align: center
       align-items: center
       border-bottom: 1px solid var(--grey)
+      p:nth-of-type(1n)
+        grid-area: unset
+      h4
+        grid-area: unset
+    nav
+      justify-content: center
+
+      ul
+        width: auto
+        justify-content: center
+        li
+          width: auto
   .container
     // grid-column: 2 / span 5
     &.callout
