@@ -1,5 +1,6 @@
 ---
 
+layout: article 
 categories: [articles, post]
 permalink: archive/:title
 type: article

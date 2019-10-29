@@ -1,3 +1,31 @@
 ---
 layout: default
 ---
+<article class="hero row">
+  <article class="row">
+    <div class="row-head">
+      <h2>Article</h2>
+    </div>
+    <article class="row">
+      <div class="module">
+        <figure class="f-r cf" >
+          <img loading="lazy" src="{{page.index_image}}" alt="{{page.title}}">
+        </figure>
+          <h1 class="name"><span>{{page.title}}</span></h1>
+          <h6>{% capture words %}{{ page.content | number_of_words | minus: 250 }}{% endcapture %}
+        {% unless words contains "-" %}
+          {{ words | plus: 250 | divided_by: 180 | append: " minute read" }}
+        {% endunless %}</h6>
+          <p>&mdash; by {{page.article_author}}<p>
+
+        {% if page.link_to %} <p><a href="{{page.link_to}}">Originally posted on Medium <i class="fa fa-arrow-right"><span>Original article link</span></i></a></p>{% endif %}
+        <p>{{page.description}}</p>
+
+
+      </div>
+
+    </article>
+
+  </article>
+</article>
+{{page.content}}

@@ -2,7 +2,6 @@
 *, *::before, *::after
   flex-direction: row
   box-sizing: border-box
-  margin: 0
   padding: 0
 *::selection
   background-color: var(--foreground)
@@ -28,13 +27,9 @@ body
 .f-l
   float: left
 .cf::after
-  content: ' '
-  visibility: hidden
-  display: block
-  height: 0
+  content: ""
+  display: table
   clear: both
-.cf::after, .cf::before
-  display: block
 
 body.main
   animation: fadeIn 2.5s
