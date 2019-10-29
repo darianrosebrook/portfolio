@@ -1,6 +1,6 @@
 ---
+layout: article
 categories: [articles, post]
-permalink: archive/:title
 permalink: archive/:title
 type: article
 title: Handling expectational debt and falling behind.

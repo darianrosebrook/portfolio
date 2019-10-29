@@ -243,7 +243,7 @@ occupation: Product and User Experience Designer
   </head>
   <body class="main">
     {% include nav.html %}
-    <main class="main-content">
+    <main class="main-content {% if page.type contains 'article' %}article{% endif %}">
       {{content}}
       {% include contact.html %}
       {% include footer.html %}

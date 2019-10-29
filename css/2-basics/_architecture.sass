@@ -12,15 +12,15 @@ main
   grid-template-areas: "ud ud ud ud ud" "he he he he he" "sk sk pc pc pc" "sk sk wh wh wh" "nl nl nl nl nl" "dw dw dw dw dw" "vd vd vd vd vd" "pd pd pd pd pd" "bk bk bk bk bk" "ct ct ct ct ct" "ft ft ft ft ft"
 
 //-- Framing --
-.container
+.container, section
   position: relative
   grid-column: 1 / span 5
   padding: 1rem 0
   border-bottom: 1px solid var(--grey)
-  &.callout
-    grid-column: 1 / span 5
-    padding: 1rem
-    background: var(--grey)
+.callout, blockquote
+  grid-column: 1 / span 5
+  padding: 1rem
+  background: var(--grey)
 
 .row
   position: relative
@@ -99,8 +99,6 @@ header
     grid-template-columns: repeat(1, 1fr)
     img:not(.logo)
       display: inline
-      width: 30%
-      float: left
       margin-right: 1rem
     .module
       display: inline-block
@@ -222,9 +220,30 @@ a.block-link
     grid-column: 4 / span 7
     margin: 0
 
+.main-content.article
+  grid-template-areas: unset
+  p, ul, h1, h2, h3, h4, h5, h6
+    grid-column: 1 / span 5
+  h3
+    font-size: 1.8rem
+  p
+    font-size: 1.4rem
+  .footer, #contact, header, .hero
+    grid-area: unset
+    grid-column: 1 /span 5
+
 
 //-- Responsive Restructuring --
-@media (min-width: 770px)
+@media (min-width: 1000px)
+  .main-content.article
+    grid-template-areas: unset
+    p, ul
+      grid-column: 3 / span 3
+    h1, h2, h3, h4, h5, h6
+      grid-column: 3 / span 2
+    .footer, #contact, header, .hero
+      grid-area: unset
+      grid-column: 2 / span 5
   body.main
     padding: 0 10rem
   main
@@ -275,9 +294,11 @@ a.block-link
           width: auto
   .container
     grid-column: 2 / span 5
-    &.callout
-      grid-column: 1 / span 7
-      padding: 2rem
+  .callout, blockquote
+    grid-column: 1 / span 7
+    padding: 2rem
+  blockquote
+    grid-column: 3 / span 3
   .row
     .row-head
       flex-direction: row
@@ -292,12 +313,13 @@ a.block-link
       width: 50%
       z-index: 1
     figure
-      width: calc(75% - 1rem)
+      width: calc(70% - 1rem)
       z-index: 0
       max-width: 1400px
-      position: absolute
-      top: 0
-      right: 0
+      // position: absolute
+      // top: 0
+      // right: 0
+      margin-bottom: 2rem
   .skills
     padding-left: 1rem
   .work-history
