@@ -1,7 +1,7 @@
 ---
 categories: [updates, post]
 type: update
-title: Interview for my role as a product designer on Scamp Studio
+title: Interview about my role as a product designer on Scamp Studio
 specific: product-design-interview
 icon: microphone-alt
 ---
