@@ -9,7 +9,7 @@ main
   grid-gap: 1rem
   align-items: start
 
-  grid-template-areas: "ud ud ud ud ud" "he he he he he" "sk sk pc pc pc" "sk sk wh wh wh" "nl nl nl nl nl" "dw dw dw dw dw" "vd vd vd vd vd" "pd pd pd pd pd" "bk bk bk bk bk"
+  grid-template-areas: "ud ud ud ud ud" "he he he he he" "sk sk pc pc pc" "sk sk wh wh wh" "nl nl nl nl nl" "dw dw dw dw dw" "vd vd vd vd vd" "pd pd pd pd pd" "bk bk bk bk bk" "ct ct ct ct ct" "ft ft ft ft ft"
 
 //-- Framing --
 .container
@@ -111,6 +111,9 @@ main
 
 .books
   grid-area: bk
+
+.footer
+  grid-area: ft
 // -- Structure --
 header
   margin: 0 2rem
@@ -198,7 +201,7 @@ a.block-link
     padding: 0 10rem
   main
     grid-template-columns: 2rem repeat(5, 1fr ) 1rem
-    grid-template-areas:  ". ud ud ud ud ud ." ". he he he he sk ." ". wh wh wh wh pc ." "nl nl nl nl nl nl nl" ". dw dw dw dw dw ." ". vd vd vd vd vd ." ". pd pd pd pd pd ." ". bk bk bk bk bk ."
+    grid-template-areas:  ". ud ud ud ud ud ." ". he he he he sk ." ". wh wh wh wh pc ." "nl nl nl nl nl nl nl" ". dw dw dw dw dw ." ". vd vd vd vd vd ." ". pd pd pd pd pd ." ". bk bk bk bk bk ." ". ct ct ct ct ct ." ". ft ft ft ft ft ."
 
   .grid
     grid-template-columns: repeat(5, 1fr)
