@@ -1,11 +1,3 @@
-@mixin center($x: true, $y: true)
-  position: if($y, absolute, relative)
-  transform: translate(if($x, -50%, 0), if($y, -50%, 0) )
-  @if $x
-    left: 50%
-  @if $y
-    top: 50%
-///
 /// Viewport sized typography with minimum and maximum values
 ///
 /// @author Eduardo Boucas (@eduardoboucas)
