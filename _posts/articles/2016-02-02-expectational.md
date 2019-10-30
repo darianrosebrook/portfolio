@@ -10,9 +10,6 @@ index_image: https://darianrosebrook.com/assets/img/posts/articles/expectational
 article_author: Darian Rosebrook
 author_link: https://twitter.com/darianrosebrook
 ---
-# Handling expectational debt and falling behind.
-
-![](https://cdn-images-1.medium.com/max/800/1*K4f3A2W9KI1ifrUIErGTYA.jpeg)
 
 Why are we all given the same 24 hours? A lot of people seem to get more done
 than I can, and yet no one has more time during the day than others. Even since

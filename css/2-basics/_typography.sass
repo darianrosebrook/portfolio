@@ -4,11 +4,14 @@ a, a:link, a:visited, a:hover, a:focus
   transition: var(--transition)
   text-decoration: none
   color: var(--highlight)
+  padding: .3rem
 a:not(.block-link)
-  box-shadow: inset 0 -0.00em 0 var(--highlight)
+  box-shadow: inset 0 -0.00rem 0 var(--highlight)
 a:hover
-  color: lighten( $highlight, 100%)
-  box-shadow: inset 0 -4.25em 0 var(--highlight)
+  color: var(--background) !important
+  box-shadow: inset 0 -10rem 0 var(--highlight)
+  h3, h4, h5, p, small, strong, i::before
+    color: var(--background) !important
 .block-link
   border-bottom: none
 .regular
@@ -53,6 +56,7 @@ h1
   font-size: 3rem
   letter-spacing: -.025rem
   font-weight: 100
+  margin: 0
 p
   margin-bottom: 1.25rem
 strong
@@ -66,7 +70,10 @@ blockquote
 small
   font-size: 1rem
   font-variant-numeric: normal
-
+.social-link
+  i
+    font-size: 1.5rem
+    padding: 1rem
 i
   color: var(--foreground)
   font-size: 1.25rem

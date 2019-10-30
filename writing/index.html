@@ -1,0 +1,28 @@
+---
+layout: default
+title: Books, Articles, and Novels written by Darian Rosebrook
+description: This is a collection of articles, graphic novels, and books written by product designer, Darian Rosebrook
+img:
+sitemap:
+  lastmod: 2016-11-25
+  priority: 0.7
+  changefreq: 'weekly'
+  exclude: 'no'
+---
+
+<section class="container">
+  <article class="row">
+    <div class="grid">
+{% for post in site.categories.articles%}
+      <div data-type="{{post.type}}" class="grid-item list-item update" id="{{post.specific}}">
+        <p><small>{{post.date | date_to_string }}</small></p>
+        <hr>
+        <h4>{{post.title}}</h4>
+        <h6>{{post.type | capitalize}}</h6>
+        <div>{% if post.type contains "update" %}{{post.content}}</div>{% else %}{{post.description}}</div><p><a href="{{post.url}}" rel="noreferrer" target="_blank">See the article</a></p>{% endif %}
+      </div>
+  {% endfor %}
+
+    </div>
+</article>
+</section>
