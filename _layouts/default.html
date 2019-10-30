@@ -50,7 +50,7 @@ occupation: Product and User Experience Designer
     <meta name="theme-color" content="#261924" />
     <meta name="robots" content="index, follow" />
     <meta name="googlebot" content="index,follow">
-    <link rel="canonical" href=" {{ site.url }}{{ page.url }}" />
+    <link rel="canonical" href="{% if page.link_to %}{{page.link_to}}{% else %} {{ site.url }}{{ page.url }}{% endif %}" />
     <!-- <link rel="amphtml" href="{{ site.url }}"> -->
 
 <!-- Buh, nuh, nuh, nuh, nuh, nuh, nuh nuh, nuuuuuh -->

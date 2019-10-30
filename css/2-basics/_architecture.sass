@@ -199,7 +199,7 @@ nav
 hr
   border: 2px solid var(--highlight)
   width: 65%
-  margin: .5rem 0
+  margin: .5rem auto
 
 a.block-link
   display: block
@@ -222,28 +222,61 @@ a.block-link
 
 .main-content.article
   grid-template-areas: unset
-  p, ul, h1, h2, h3, h4, h5, h6
+  p, ul, h1, h2, h3, h4, h5, h6, ol, hr
+    text-transform: none
     grid-column: 1 / span 5
   h3
     font-size: 1.8rem
+  h2
+    font-size: 2rem
   p
     font-size: 1.4rem
+    img
+      width: 70%
+      display: block
+      margin: 0 auto
+  strong
+    text-transform: none
+    font-weight: 600
   .footer, #contact, header, .hero
     grid-area: unset
     grid-column: 1 /span 5
+  ul
+    list-style-type: disc
+  .avatar
+    display: inline-block
+    margin-bottom: -.8rem
+  .hero
+    border-right: 0
 
 
 //-- Responsive Restructuring --
 @media (min-width: 1000px)
   .main-content.article
     grid-template-areas: unset
-    p, ul
+    p, ul, ol
       grid-column: 3 / span 3
     h1, h2, h3, h4, h5, h6
       grid-column: 3 / span 2
-    .footer, #contact, header, .hero
+    .footer, #contact, header, .hero, hr
       grid-area: unset
-      grid-column: 2 / span 5
+      grid-column: 2 / span 6
+    .hero
+      p
+        width: 25%
+      h1
+        width: 50%
+        z-index: 1
+      figure
+        width: calc(70% - 1rem)
+        z-index: 0
+        max-width: 1400px
+        // position: absolute
+        // top: 0
+        // right: 0
+        margin-bottom: 2rem
+
+
   body.main
     padding: 0 10rem
   main
@@ -305,32 +338,21 @@ a.block-link
   .module
   .hero
     grid-column: 2/6
-    padding-right: 1rem
+    padding-right: 1.5rem
+    margin-right: -.5rem
     border-right: 1px solid var(--grey)
-    p
-      width: 25%
-    h1
-      width: 50%
-      z-index: 1
-    figure
-      width: calc(70% - 1rem)
-      z-index: 0
-      max-width: 1400px
-      // position: absolute
-      // top: 0
-      // right: 0
-      margin-bottom: 2rem
+    .module
+      width: 80%
   .skills
     padding-left: 1rem
   .work-history
     .grid
       grid-template-columns: repeat(4, 1fr)
-      .module
-        img:not(.logo)
-          display: inline-block
-          width: 40%
-          float: left
-          margin-right: 1rem
+      img:not(.logo)
+        display: inline-block
+        width: 40%
+        float: left
+        margin-right: 1rem
   .newsletter
     .module
       display: grid
@@ -338,6 +360,10 @@ a.block-link
       gap: 1rem
       align-items: center
   .design-work
+    .module
+      img
+        float: none
+        width: 80%
 
   .block-link
     display: inline-block

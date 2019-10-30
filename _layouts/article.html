@@ -2,26 +2,20 @@
 layout: default
 ---
 <article class="hero row">
-  <article class="row">
+  <article>
     <div class="row-head">
       <h2>Article</h2>
     </div>
-    <article class="row">
+    <article>
       <div class="module">
-        <figure class="f-r cf" >
-          <img loading="lazy" src="{{page.index_image}}" alt="{{page.title}}">
+        <figure class="f-r cf">
+          <img loading="lazy" src="{{page.index_image}}" alt="{{page.title}} " />
         </figure>
-          <h1 class="name"><span>{{page.title}}</span></h1>
-          <h6>{% capture words %}{{ page.content | number_of_words | minus: 250 }}{% endcapture %}
-        {% unless words contains "-" %}
-          {{ words | plus: 250 | divided_by: 180 | append: " minute read" }}
-        {% endunless %}</h6>
-          <p>&mdash; by {{page.article_author}}<p>
-
-        {% if page.link_to %} <p><a href="{{page.link_to}}">Originally posted on Medium <i class="fa fa-arrow-right"><span>Original article link</span></i></a></p>{% endif %}
+        <h6>{% capture words %}{{ page.content | number_of_words | minus: 250 }}{% endcapture %}{% unless words contains "-" %}{{ words | plus: 250 | divided_by: 200 | append: " minute read" }}{% endunless %}</h6>
+        <h1 class="name"><span>{{page.title}}</span></h1>
         <p>{{page.description}}</p>
-
-
+        {% if page.link_to %} <p><a href="{{page.link_to}}" target="_blank">Originally posted on Medium <i class="fa fa-arrow-right"><span>Original article link</span></i></a></p>{% endif %}
+        <p><img loading="lazy" src="/assets/img/darian-rosebrook-avatar.jpg" alt="Darian Rosebrook's avatar" class="avatar" />&mdash; by {{page.article_author}}</p>
       </div>
 
     </article>
