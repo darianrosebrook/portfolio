@@ -298,7 +298,7 @@ One hundred and one business terms and concepts that have helped me be able to s
 [Blair Enns who was on The Futur’s podcast to talk with Chris Do about the win without pitching book](https://www.youtube.com/watch?v=KtL02T5MonA). This is a manifesto that goes over design professionalism and positioning within your creative business.
 
 ![](https://cdn-images-1.medium.com/max/2000/0*cmEVkxraNv_3tJHU.jpg)
-> [**Pricing Creativity ](https://www.winwithoutpitching.com/pricingcreativity/)— Blair Enns**
+> [Pricing Creativity ](https://www.winwithoutpitching.com/pricingcreativity/)— Blair Enns
 
 [T](https://www.winwithoutpitching.com/pricingcreativity/)his book is Blair Enn’s culmination of working for years in the client service industry. If you were looking for the training book for how to price on value. This book will help you master the conversation and come to an effective system at pricing your designs.
 
