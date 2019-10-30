@@ -18,7 +18,7 @@ author_img:
 I’m sure you have gotten the same question that I had when starting out as a freelance designer.
 
 It’s one that is very innocent on the surface but starts the interaction with a misaligned value.
-> # *“How much do you charge to design something like this?”*
+> *“How much do you charge to design something like this?”*
 
 See there are very few businesses that actually value design. What they value is achieving their goals and getting business results, with some widely unaware what good design (or any effort towards design at all) can do for their business.
 
@@ -125,10 +125,10 @@ From there, I’ve gotten to talk to Justin a lot over the last two years and ha
 I swear that we all teach topics that we ourselves are trying to understand better because I know Justin has this part pretty figured out on *delivering things that help his clients achieve where they want to be.*
 
 You see, your customers have a reason for wanting to achieve the things that they do. Everyone does. They don’t come to you because they want a sexy new website design. They don’t really come over because they want to have cool new logos, menus, and better-looking point of sale screens.
-> # The client has a valid reason they are coming to you, and you specifically.
+> The client has a valid reason they are coming to you, and you specifically.
 
 **Try to pick this apart.**
-> # *A client wants what your service helps them get in the future and what it means to them and their business.*
+> *A client wants what your service helps them get in the future and what it means to them and their business.*
 
 This point is mainly focused on what goals they have, where they want to be, and how important or prioritized are these goals.
 
@@ -271,7 +271,7 @@ These other videos from Chris Do’s **The Futur **have been a good way to refra
 If you see that I’m sharing quite a few links from them, it’s because what they share is quite in line with what I’ve been learning as well. These videos from them kind of inspire where I’ve searched for answers to value pricing.
 
 ![](https://cdn-images-1.medium.com/max/2000/0*73D42Lf0klXsNal7.png)
-> # [Pricing Design — Dan Mall](https://el2.convertkit-mail2.com/c/preview/lnfeh6/aHR0cHM6Ly9hYm9va2FwYXJ0LmNvbS9wcm9kdWN0cy9wcmljaW5nLWRlc2lnbg==)
+> [Pricing Design — Dan Mall](https://el2.convertkit-mail2.com/c/preview/lnfeh6/aHR0cHM6Ly9hYm9va2FwYXJ0LmNvbS9wcm9kdWN0cy9wcmljaW5nLWRlc2lnbg==)
 
 Pricing Design, which was written by Dan Mall is definitely worth the heavy cash that you have to put up for it. It’s $8.
 
@@ -281,34 +281,34 @@ But this gives you a very good introduction to implementing Value Pricing if you
 >  and how your design drives value and impacts business goals.
 
 ![](https://cdn-images-1.medium.com/max/2000/0*_AuCYSOJLFphEnrn.jpg)
-> # [Creative Strategy and the business of design](https://www.amazon.com/gp/product/1440341559/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=compassofdesi-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=1440341559&linkId=3047cde6fdb0e3e86fe8da818bb34b48) — Douglas Davis
+> [Creative Strategy and the business of design](https://www.amazon.com/gp/product/1440341559/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=compassofdesi-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=1440341559&linkId=3047cde6fdb0e3e86fe8da818bb34b48) — Douglas Davis
 
 One of the best books that I’ve read for understanding how design impacts business is this book by Douglas Davis, [Creative Strategy and the Business of Design](https://www.amazon.com/gp/product/1440341559/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=compassofdesi-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=1440341559&linkId=3047cde6fdb0e3e86fe8da818bb34b48). Though it doesn’t cover pricing, it will cover the things that help you become a better consultant, and thus, being able to effectively implement value pricing.
 
 ![](https://cdn-images-1.medium.com/max/2000/0*Zjb8n9zzipE77-AK.jpg)
-> # [101 things I learned in business school](https://www.amazon.com/gp/product/0446550280/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=compassofdesi-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=0446550280&linkId=4b354bcc3e43cdc1a426894ca4f354db)
+> [101 things I learned in business school](https://www.amazon.com/gp/product/0446550280/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=compassofdesi-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=0446550280&linkId=4b354bcc3e43cdc1a426894ca4f354db)
 
 One hundred and one business terms and concepts that have helped me be able to speak the same language that business execs speak. When you start to work with higher value clients, you need to be able to understand what they talk about during your meetings. If you want to see a bit inside, you can watch [Chris Do’s review of 101 things I learned in business school](https://www.youtube.com/watch?v=mJvv0TOaam8)
 
 ### **Creative Professionalism**
 
 ![](https://cdn-images-1.medium.com/max/2000/0*8H-t5XW8GeHUnGgD.jpg)
-> # [The Win Without Pitching Manifesto](http://amzn.to/2xffUgi) — Blair Enns
+> [The Win Without Pitching Manifesto](http://amzn.to/2xffUgi) — Blair Enns
 
 [Blair Enns who was on The Futur’s podcast to talk with Chris Do about the win without pitching book](https://www.youtube.com/watch?v=KtL02T5MonA). This is a manifesto that goes over design professionalism and positioning within your creative business.
 
 ![](https://cdn-images-1.medium.com/max/2000/0*cmEVkxraNv_3tJHU.jpg)
-> # [**Pricing Creativity ](https://www.winwithoutpitching.com/pricingcreativity/)— Blair Enns**
+> [**Pricing Creativity ](https://www.winwithoutpitching.com/pricingcreativity/)— Blair Enns**
 
 [T](https://www.winwithoutpitching.com/pricingcreativity/)his book is Blair Enn’s culmination of working for years in the client service industry. If you were looking for the training book for how to price on value. This book will help you master the conversation and come to an effective system at pricing your designs.
 
 ![](https://cdn-images-1.medium.com/max/2000/0*eW_opRj8t-KAPUsq.jpg)
-> # [Value Proposition Design ](http://amzn.to/2fyTzme)— Alexander Osterwalder
+> [Value Proposition Design ](http://amzn.to/2fyTzme)— Alexander Osterwalder
 
 Take what you know about designing products and services and pair that with what you need to learn about basing that work off of real world data. This is for helping you understand the patterns of great value propositions.
 
 ![](https://cdn-images-1.medium.com/max/2000/0*Hwqj0LulMduPyhzW.jpg)
-> # [Sprint ](http://amzn.to/2xgc72b)— by Jake Knapp and Google Ventures
+> [Sprint ](http://amzn.to/2xgc72b)— by Jake Knapp and Google Ventures
 
 Sprint, though not a book about pricing, shows you a system of design that works with higher level clients. This book has been really helpful at mastering the solving process in design. When you’re brought in to be a high value consultant, a lot of the ideas here will help you get more done and deliver more value to clients.
 
