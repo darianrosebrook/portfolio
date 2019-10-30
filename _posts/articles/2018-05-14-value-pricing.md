@@ -60,7 +60,7 @@ These prices are often arbitrary and can break the model if clients start asking
 
 **3 — Those who are paid on a commission of value generated**
 
-**These designers focus on delivering the client the most value possible**. **The more that you can help the client **gain in profit, in gaining better metrics, in avoiding risk, eliminating costs, whatever their goals are, **the better you are paid.**
+**These designers focus on delivering the client the most value possible**. **The more that you can help the client** gain in profit, in gaining better metrics, in avoiding risk, eliminating costs, whatever their goals are, **the better you are paid.**
 
 Clients are then also incentivized hire the right creative team that is the best investment in their business. They also are incentivized to consult designer on their goals in order to set the right game plan to help them achieve their goals.
 
@@ -68,21 +68,21 @@ These models of business are all for similar work but are focused on different g
 
 **Hourly goals:**
 
-* **Client **— Finish the work quickly to minimize expense
+* **Client** — Finish the work quickly to minimize expense
 
-* **Designer **— Either to max out your schedule and always be working or take time for quality on each project
+* **Designer** — Either to max out your schedule and always be working or take time for quality on each project
 
 **Flat-Fee goals:**
 
-* **Client **— Spend time getting the most work for the best priced services
+* **Client** — Spend time getting the most work for the best priced services
 
-* **Designer **— Finish work quickly and within scope to maximize profits
+* **Designer** — Finish work quickly and within scope to maximize profits
 
 **Value-Based goals:**
 
-* **Client **— Investing in the right team that will help them reach their business goals, minimize risk, and deliver the most value
+* **Client** — Investing in the right team that will help them reach their business goals, minimize risk, and deliver the most value
 
-* **Designer **— Deliver the most value to the client through focusing on achieving their goals and delivering the right solution
+* **Designer** — Deliver the most value to the client through focusing on achieving their goals and delivering the right solution
 
 There is an abundance of work being done within the first two business models. It is the traditional business way for them to go to someone, pay them to do the job, and get a widget they can use for their business in the end.
 
@@ -262,7 +262,7 @@ Go over these videos and article to understand more about the things that drive 
 
 I was watching [a recent conversation that Chris Do from The Futur was having with Ran Segall](https://www.youtube.com/watch?v=GtrVGkIVbhc) where Ran was explaining what he wanted to do with his business, and Chris took the opportunity to treat him as if he were a client of his, having a nearly disguised, but flawless representation of Value Based Pricing.
 
-These other videos from Chris Do’s **The Futur **have been a good way to reframe the conversations and mindset on finding clients that value design.
+These other videos from Chris Do’s **The Futur** have been a good way to reframe the conversations and mindset on finding clients that value design.
 
 [How to find clients that Value Design](https://www.youtube.com/watch?v=w_TYQQIagwc) — The Futur
 
