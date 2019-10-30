@@ -12,28 +12,28 @@ $margin: 1.5rem
 $line: 1.3rem
 
 \:root
+  --foreground: #1B1D1C
+  --background: #fff
   --main: #323149
   --secondary: #f2f2f2
   --tertiary: #6A6F80
   --highlight: #DA2649
   --highlight-2: #5f935f
   --highlight-3: #494768
-  --foreground: #1B1D1C
-  --background: #fff
   --grey: #EAEAEA
   --transition: all ease .25s
   --margin: 1.5rem
   --line: 1.3em
-// @media (prefers-color-scheme: dark)
-//   \:root
-//     --foreground: #e0e0e0
-//     --background: #1B1D1C
-//     --main: #e0e0e0
-//     --secondary: #1b1d1c
-//     --tertiary: #c8c8c8
-//     --highlight: #ea5252
-//     --highlight-2: #5f935f
-//     --highlight-3: #000011
-//     --grey: #0f0f11
-//   .grid .logo
-//     mix-blend-mode: difference
+@media (prefers-color-scheme: dark)
+  \:root
+    --foreground: #e0e0e0
+    --background: #1B1D1C
+    --main: #e0e0e0
+    --secondary: #3f3f3f
+    --tertiary: #c8c8c8
+    --highlight: #ea5252
+    --highlight-2: #5f935f
+    --highlight-3: #000011
+    --grey: #3f3f3f
+  .grid .logo
+    mix-blend-mode: difference

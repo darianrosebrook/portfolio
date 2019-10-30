@@ -8,7 +8,7 @@ occupation: Product and User Experience Designer
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>{{page.title}}</title>
-    <meta name="description" content="{{page.description | truncate: 200}}" />
+    <meta name="description" content="{{page.description | truncate: 170}}" />
     <base href="{{ site.baseurl }}">
 
 <!-- Cue bongos -->
@@ -44,6 +44,7 @@ occupation: Product and User Experience Designer
     <!-- S T Y L E S and S C R I P T S -->
     <link rel="stylesheet" type="text/css" href="{{site.baseurl}}/css/master.css" media="screen"/>
     <link rel="stylesheet" type="text/css" href="{{site.baseurl}}/css/print.css" media="print" />
+    {% if page.url != '/' %}<link rel="stylesheet" type="text/css" href="{{site.baseurl}}/css/pages.css">{% endif %}
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.11.2/css/all.css" integrity="sha384-zrnmn8R8KkWl12rAZFt4yKjxplaDaT7/EUkKm7AovijfrQItFWR7O/JJn4DAa/gx" crossorigin="anonymous">
 
     <link rel="author" href="https://twitter.com/darianrosebrook" />
@@ -62,7 +63,7 @@ occupation: Product and User Experience Designer
     <meta name="twitter:url" content="https://darianrosebrook.com" />
     <meta name="twitter:title" content="{{page.title}}" />
     <meta name="twitter:description" content="{{page.description | truncate: 196}}" />
-    <meta name="twitter:image" content="https://darianrosebrook.com/assets/img/index.jpg" />
+    <meta name="twitter:image" content="{% if page.index_image %}{{page.index_image}}{% else %}https://darianrosebrook.com/assets/img/index.jpg{% endif %}" />
     <!-- pinterest -->
     <meta name="p:domain_verify" content="4990647bc88b5df93fc24e07f254d0a9"/>
     <!-- facebook -->
@@ -70,7 +71,7 @@ occupation: Product and User Experience Designer
     <meta property="og:url" content="{{site.url}}/{{page.id}}" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="{{page.title}}" />
-    <meta property="og:image" content="https://darianrosebrook.com/assets/img/index.jpg" />
+    <meta property="og:image" content="{% if page.index_image %}{{page.index_image}}{% else %}https://darianrosebrook.com/assets/img/index.jpg{% endif %}" />
     <meta property="og:description" content="{{page.description | truncate: 167}}" />
     <meta property="og:site_name" content="Darian Rosebrook" />
     <meta property="og:locale" content="en_US" />
