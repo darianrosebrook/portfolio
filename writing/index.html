@@ -15,10 +15,9 @@ sitemap:
     <div class="grid">
 {% for post in site.categories.articles%}
       <div data-type="{{post.type}}" class="grid-item list-item update" id="{{post.specific}}">
-        <p><small>{{post.date | date_to_string }}</small></p>
-        <hr>
-        <h4>{{post.title}}</h4>
         <h6>{{post.type | capitalize}}</h6>
+        <p><small>{{post.date | date_to_string }}</small></p>
+        <h4>{{post.title}}</h4>
         <div>{% if post.type contains "update" %}{{post.content}}</div>{% else %}{{post.description}}</div><p><a href="{{post.url}}" rel="noreferrer" target="_blank">See the article</a></p>{% endif %}
       </div>
   {% endfor %}
