@@ -4,6 +4,8 @@ layout: article
 categories: [articles, post]
 permalink: archive/:title
 type: article
+icon: newspaper
+
 title: Design is “about the details,” just don’t ignore the bigger picture
 description: Details are a huge part of what makes a design go from good to great and from great to excellent. We love to be meticulous about the smallest details of our designs. But after spending all of that time going over everything, it feels “off”… Ever wondered why your designs just don’t look right?
 link_to: https://read.compassofdesign.com/design-is-about-the-details-just-dont-fret-over-the-little-things-957b406369d3

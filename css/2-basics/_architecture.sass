@@ -5,12 +5,12 @@ main
   display: grid
   margin: 0 auto
   grid-template-columns: repeat(5, 1fr )
-  grid-template-rows: auto
-  grid-gap: 1rem
+  grid-gap: var(--gap)
   align-items: start
 
   grid-template-areas: "ud ud ud ud ud" "he he he he he" "sk sk pc pc pc" "sk sk wh wh wh" "nl nl nl nl nl" "dw dw dw dw dw" "vd vd vd vd vd" "pd pd pd pd pd" "bk bk bk bk bk" "ct ct ct ct ct" "ft ft ft ft ft"
-
+.f-r, .f-l
+  float: none
 //-- Framing --
 .container, section
   position: relative
@@ -44,10 +44,15 @@ main
 .grid
   display: grid
   grid-template-columns: repeat(1, 1fr)
-  grid-gap: 1rem
-  .grid-item
-    &:nth-of-type(1n + 4)
-      // display: none
+  grid-gap: var(--gap)
+  &.by-2
+    grid-template-columns: repeat(2, 1fr)
+  &.by-3
+    grid-template-columns: repeat(3, 1fr)
+  &.by-4
+    grid-template-columns: repeat(4, 1fr)
+  &.by-5
+    grid-template-columns: repeat(5, 1fr)
 
 
   .logo
@@ -100,6 +105,7 @@ header
     img:not(.logo)
       display: inline
       margin-right: 1rem
+      max-width: 30%
     .module
       display: inline-block
       width: calc(60% - 1rem)
@@ -173,7 +179,7 @@ ul
     font-family: "Crimson Pro", serif
     font-weight: 200
     line-height: 1.2
-    font-size: 1.2rem
+    font-size: 1.4rem
     li
       margin-bottom: 0.5rem
 nav
@@ -207,7 +213,7 @@ a.block-link
 .linked-block
   display: grid
   grid-template-columns: repeat(10, 1fr)
-  grid-gap: 1rem
+  grid-gap: var(--gap)
   align-items: center
   width: 100%
   p:first-of-type
@@ -228,7 +234,14 @@ a.block-link
     padding: 0 10rem
   main
     grid-template-columns: 2rem repeat(5, 1fr ) 1rem
-    grid-template-areas:  ". ud ud ud ud ud ." ". he he he he sk ." ". wh wh wh wh pc ." "nl nl nl nl nl nl nl" ". dw dw dw dw dw ." ". vd vd vd vd vd ." ". pd pd pd pd pd ." ". bk bk bk bk bk ." ". ct ct ct ct ct ." ". ft ft ft ft ft ."
+    grid-template-areas:  ". ud ud ud ud ud ." ". he he he he sk ." ". he he he he pc ." ". wh wh wh wh wh ." "nl nl nl nl nl nl nl" ". dw dw dw dw dw ." ". vd vd vd vd vd ." ". pd pd pd pd pd ." ". bk bk bk bk bk ." ". ct ct ct ct ct ." ". ft ft ft ft ft ."
+
+  .f-r
+    float: right
+    margin-left: 3rem
+  .f-l
+    float: left
+    margin-right: 3rem
 
   .grid
     grid-template-columns: repeat(5, 1fr)
@@ -298,13 +311,14 @@ a.block-link
       img:not(.logo)
         display: inline-block
         width: 40%
+        max-width: 250px
         float: left
         margin-right: 1rem
   .newsletter
     .module
       display: grid
       grid-template-columns: 1fr 9fr 10fr
-      gap: 1rem
+      gap: var(--gap)
       align-items: center
   .design-work
     .module

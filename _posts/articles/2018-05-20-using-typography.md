@@ -4,6 +4,8 @@ layout: article
 categories: [articles, post]
 permalink: archive/:title
 type: article
+icon: newspaper
+
 title: Design Principle 4 — Typefaces and how to use them
 description: What I will be covering in this guide is not about specific typefaces, which typefaces are better when paired, or choosing what font files to use. We are talking about being able to effectively choose what typeface you want to use solely by the characteristics of it.
 link_to: https://read.compassofdesign.com/design-principle-4-typefaces-and-how-to-use-them-4e1225eac4b1

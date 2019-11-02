@@ -4,6 +4,8 @@ layout: article
 categories: [articles, post]
 permalink: archive/:title
 type: article
+icon: newspaper
+
 title: Networking as a designer — Stop trying to shake trees.
 description: Let’s talk about your heroes. Boy, wouldn’t it be nice to be noticed by big name people every once in a while? You follow them and see their name all over on the internet getting interviews and sharing awesome design work. It’s like there’s some type of inner circle where every big name person on the internet knows each other.
 link_to: https://cmps.co/design-influencers

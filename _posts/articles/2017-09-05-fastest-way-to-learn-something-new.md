@@ -4,6 +4,8 @@ layout: article
 categories: [articles, post]
 permalink: archive/:title
 type: article
+icon: newspaper
+
 title: What is the fastest way to learn something?
 description: Having that much to say about something shows that you either know it so well you could write a book, or that you really don’t know it well enough, otherwise you’d be able to explain it in it’s simplest form.
 link_to: https://cmps.co/quick-learner

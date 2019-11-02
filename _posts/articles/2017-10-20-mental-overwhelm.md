@@ -4,6 +4,8 @@ layout: article
 categories: [articles, post]
 permalink: archive/:title
 type: article
+icon: newspaper
+
 title: Overthinking things? Here’s some help with all of the mental overwhelm.
 description: I’m going to (probably incorrectly) guess that you don’t deal with being stressed out over all the design work you have to do, the emails coming in, the phone calls you miss, the family time you’re running late to… You probably don’t deal with being overwhelmed at all.
 link_to: https://read.compassofdesign.com/are-you-over-thinking-too-often-2b743b1a586d

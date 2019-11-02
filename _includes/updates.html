@@ -13,17 +13,19 @@
           </div>
         </a>
       </div>
-    {% for post in site.categories.updates limit:4%}
+    {% for post in site.categories.updates limit:4 %}
       {% capture update %}{% cycle '1', '2', '3', '4'  %}{% endcapture %}
       {% if update == '1' %}{% endif %}
       <div class="grid-item">
-        <a  class="block-link" href="{{site.baseurl}}/now/#{{post.specific}}">
+        {% if page.url == '/' %}<a  class="block-link" href="{{site.baseurl}}/now/#{{post.specific}}"> {% endif %}
           <div class="linked-block">
             <p><i class="far fa-{{post.icon}}"></i></p>
             <p><small><strong>{{post.date | date_to_string }}</strong></small></p>
             <h4>{{post.title}}</h4>
+
+            {% if page.url contains '/now' %}<p>{{post.content}}</p>{% endif %}
           </div>
-        </a>
+        {% if page.url == '/' %}</a>{% endif %}
       </div>
       {% if update == '4' or forloop.last %}{% endif %}
     {% endfor %}

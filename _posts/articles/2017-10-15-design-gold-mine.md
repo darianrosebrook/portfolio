@@ -4,6 +4,8 @@ layout: article
 categories: [articles, post]
 permalink: archive/:title
 type: article
+icon: newspaper
+
 title: Finding the best design resources — And having a gold-miner’s mindset
 description: It always seems the more you read into someone or something, the more you’re able to find things that you don’t agree with. Just think of all the talk with politics or healthcare. (or don’t, that’ll get you sidetracked). Everything out there has things that you have to tune out to get to the good stuff.
 link_to: https://cmps.co/goldminer-mindset
