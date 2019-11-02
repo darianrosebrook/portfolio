@@ -4,6 +4,8 @@ layout: article
 categories: [articles, post]
 permalink: archive/:title
 type: article
+icon: newspaper
+
 title: Design bound by ethics — Being able to sleep at night after work.
 description: Design is a beautiful thing. You have the ability to take an idea effectively make it a great experience for another person. In other words, your design has the power to affect the people that come face to face with it. When you have that type of role in the design process of these ideas, you are bound ethically to how your design helps or hinders someone their goal.
 link_to: https://cmps.co/ethics-for-designers

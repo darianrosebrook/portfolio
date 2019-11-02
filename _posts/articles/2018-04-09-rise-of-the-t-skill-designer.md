@@ -4,6 +4,8 @@ layout: article
 categories: [articles, post]
 permalink: archive/:title
 type: article
+icon: newspaper
+
 title: Rise of the T skill designer
 description: While we have been fighting over whether or not to become a specialist or a generalist, there’s been another designer that’s been taking the cake.
 link_to: https://read.compassofdesign.com/rise-of-the-t-skill-designer-2184cc54d140

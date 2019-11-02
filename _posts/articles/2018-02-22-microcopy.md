@@ -1,9 +1,11 @@
 ---
 
-layout: article 
+layout: article
 categories: [articles, post]
 permalink: archive/:title
 type: article
+icon: newspaper
+
 title: Getting your feet wet with microcopy
 description: A few weeks ago, I released an article going over some simple steps of UX design that people often overlooked. And though parts of these areas of the user experience may feel like basic rules, they can be severely passed over. One of which is being the microcopy, or the text that we use in our UI designs.
 link_to: cmps.co/microcopy

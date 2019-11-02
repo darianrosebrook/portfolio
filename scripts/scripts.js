@@ -118,12 +118,37 @@ function checked() {
     )
   }
 }
+
+// Expand or collapse details
+if (byClass('updateDetails')) {
+  var toggle = byId('toggle');
+  var list= document.querySelectorAll("details");
+
+
+}
+function toggleOpen() {
+  for (var i = 0; i < list.length; i++) {
+    console.log(i);
+    list[i].setAttribute('open', 'true');
+  }
+}
+
+function toggleClosed() {
+  for (var i = 0; i < list.length; i++) {
+    console.log(i);
+    list[i].removeAttribute('open');
+  }
+}
+
 // Change background for hashed item to easily see item highlighted
 
 if(window.location.hash) {
      var hash = window.location.hash.substring(1); //Puts hash in variable, and removes the # character
+     var hashDetails = hash + "-details";
      var hashedElem = byId(hash);
-     hashedElem.style.backgroundColor = "rgba(83, 136, 160, 0.5)";
+     var hashedDetailElem = byId(hashDetails)
+     hashedElem.style.backgroundColor = "var(--grey)";
+     hashedDetailElem.setAttribute('open', 'true');
      // hash found
  } else {
      // No hash found

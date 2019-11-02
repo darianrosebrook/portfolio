@@ -4,6 +4,8 @@ layout: article
 categories: [articles, post]
 permalink: archive/:title
 type: article
+icon: newspaper
+
 title: Crafting a portfolio that converts
 description: Recently, I shared an article about Marketing Yourself as a Designer. The article dives into the various ways that you can make sure that your skills as a designer don’t go unnoticed. Because let’s face it… Unless we’ve studied it in depth, marketing our skills is one of the hardest challenges that we have as a designer.
 link_to: https://cmps.co/portfolio-that-converts

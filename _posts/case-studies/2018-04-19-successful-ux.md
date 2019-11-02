@@ -7,7 +7,7 @@ category:
 title: Compass of Design Community
 type: Case Study
 class: web
-description:  A look into the process of Designing the Compass of Design Application
+description: A look into the process of Designing the Compass of Design Application
 index_image: /assets/img/posts/study/travelight/landing.jpg
 company: Travelight App
 logo: /assets/img/posts/study/travelight/travelight-logo.svg

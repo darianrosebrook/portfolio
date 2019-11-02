@@ -4,6 +4,8 @@ layout: article
 categories: [articles, post]
 permalink: archive/:title
 type: article
+icon: newspaper
+
 title: Quick update for those interested in the Community
 description: We’ve been having a lot of great conversation in the community about client work, web design layouts, and paths to take in our design career. Things have been going well for those involved in the conversations within here. I’m proud of the progress that everyone in there is making and am glad to have started the group.
 link_to: https://read.compassofdesign.com/quick-update-for-those-interested-in-the-community-3a395f3743e

@@ -4,6 +4,8 @@ layout: article
 categories: [articles, post]
 permalink: archive/:title
 type: article
+icon: newspaper
+
 title: Marketing yourself as a designer
 description: Marketing is that topic that gets you added by a bot to all those lists on Twitter, or followed by fake accounts on Instagram, or shunned completely by your friends on Facebook for asking them to try your new (*insert thing here*). Why do we need to add it to our design career?
 link_to: https://cmps.co/design-and-marketing

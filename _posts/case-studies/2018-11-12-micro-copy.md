@@ -5,7 +5,8 @@ category:
   - public
   - ux-study
 title: Getting your feet wet with Micro Copy
-type: Article/Study
+type: article
+icon: newspaper
 class: web
 description:  Using microcopy to craft better in-app experiences.
 index_image: /assets/img/posts/study/travelight/landing.jpg

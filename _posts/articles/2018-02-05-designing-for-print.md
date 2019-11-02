@@ -4,6 +4,8 @@ layout: article
 categories: [articles, post]
 permalink: archive/:title
 type: article
+icon: newspaper
+
 title: Print Design Tips for the Digital age
 description: You control the cost for printing through your designs, so having as much knowledge about it can help you and the businesses you design for control budget for years of ongoing work.
 link_to: https://read.compassofdesign.com/print-design-tips-for-the-digital-age-75461d12912f

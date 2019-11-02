@@ -4,6 +4,8 @@ layout: article
 categories: [articles, post]
 permalink: archive/:title
 type: article
+icon: newspaper
+
 title: How to find and access your niche
 description: A two part series of how to figure out who to market your skills to as a freelancer or agency.
 link_to: https://read.compassofdesign.com/how-to-find-and-access-your-niche-3a3c4336d600

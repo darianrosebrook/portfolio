@@ -19,6 +19,7 @@ a:hover
 .bold
   font-weight: 300
 h1, h2, h3, h4, h5, h6
+  
   font-family: 'Crimson Pro', serif
   position: relative
   transition: var(--transition)
@@ -52,6 +53,8 @@ h2
   font-size: 1rem
   color: var(--tertiary)
   margin-bottom: 1rem
+  &.subfeature
+    font-size: 2rem
 h1
   font-size: 3rem
   letter-spacing: -.025rem
@@ -83,3 +86,16 @@ i
     padding: 0 2rem
   span
     display: none
+details
+  transition: var(--transition)
+  margin-bottom: var(--gap)
+  & summary ~ *
+    opacity: 0
+  & summary
+    opacity: 1
+details[open]
+  summary ~ *
+    animation: fadeIn 2.5s
+    opacity: 1
+  summary
+    margin-bottom: 1rem

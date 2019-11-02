@@ -4,6 +4,8 @@ layout: article
 categories: [articles, post]
 permalink: archive/:title
 type: article
+icon: newspaper
+
 title: The art of Letter Press Printing
 description: I love-love-love letterpress prints. It leaves an impression (literally) when you give or receive something that gets put through this print process. It takes a business to a level above what standard printing could do.
 link_to: https://read.compassofdesign.com/why-letterpress-is-my-favorite-printing-method-ddcd1aafb77d
