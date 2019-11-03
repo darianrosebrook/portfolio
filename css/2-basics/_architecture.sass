@@ -291,7 +291,9 @@ a.block-link
     grid-column: 1 / span 7
     padding: 2rem
   blockquote
-    grid-column: 3 / span 3
+    grid-column: 2 / span 2
+    & + p
+      grid-column: 4 / span 3
   .row
     .row-head
       flex-direction: row

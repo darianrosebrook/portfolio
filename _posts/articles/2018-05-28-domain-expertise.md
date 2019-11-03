@@ -8,7 +8,7 @@ icon: newspaper
 
 title: Building Domain Expertise in what you do.
 description: My personal goal as a designer is to become a master of my craft. I’m a brand identity designer who focuses on mapping business goals to design strategy. I help businesses reach their goals with their communication and products to craft the visual approach to their brand.
-link_to: https://read.compassofdesign.com/building-domain-expertise-in-what-you-do-6883c1e9311b
+link_to: https://compassofdesign.com/articles/building-domain-expertise-in-what-you-do
 index_image: https://cdn-images-1.medium.com/max/1100/1*5czQ7qEfgG866jAS3r0MKQ.jpeg
 article_author: Darian Rosebrook
 author_link: https://twitter.com/darianrosebrook
