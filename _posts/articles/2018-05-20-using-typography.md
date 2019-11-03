@@ -8,7 +8,7 @@ icon: newspaper
 
 title: Design Principle 4 — Typefaces and how to use them
 description: What I will be covering in this guide is not about specific typefaces, which typefaces are better when paired, or choosing what font files to use. We are talking about being able to effectively choose what typeface you want to use solely by the characteristics of it.
-link_to: https://read.compassofdesign.com/design-principle-4-typefaces-and-how-to-use-them-4e1225eac4b1
+link_to: https://compassofdesign.com/articles/design-principle-4-typefaces-and-how-to-use-them
 index_image: https://cdn-images-1.medium.com/max/1000/1*n864UQID8ugaI6CbigIhUA.jpeg
 article_author: Darian Rosebrook
 author_link: https://twitter.com/darianrosebrook
