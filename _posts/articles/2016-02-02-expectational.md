@@ -123,19 +123,3 @@ Want to follow my work? Come visit me at
 **Find me on **[twitter ](http://twitter.com/darianrosebrook)**! **<br> I post great
 finds on UX and Design as well as some great content of my own creation! Hope to
 see you there!
-
-* [Productivity](https://read.compassofdesign.com/tagged/productivity?source=post)
-* [Entrepreneurship](https://read.compassofdesign.com/tagged/entrepreneurship?source=post)
-* [Fatherhood](https://read.compassofdesign.com/tagged/fatherhood?source=post)
-
-Clapping shows how much you appreciated Darian Rosebrook’s story.
-
-### [Darian Rosebrook](https://read.compassofdesign.com/@darianrosebrook)
-
-Brand Consultant at [@itssomagnetic](http://twitter.com/itssomagnetic), running
-designer network at [@compassofdesign](http://twitter.com/compassofdesign) I ate
-a whole large dominos pizza by myself once. 🍕
-
-### [Compass of Design](https://read.compassofdesign.com/?source=footer_card)
-
-Curated design articles for self-starting designers.
