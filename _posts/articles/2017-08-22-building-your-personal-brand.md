@@ -33,7 +33,7 @@ A while ago [I put out a twitter poll](https://twitter.com/compassofdesign/statu
 Standing out among that crowd is proving to be harder and harder each day.
 
 A lot of people already do what you do, so how do you rise above what other people are doing? **You’ve got to work on your personal brand.**
-> # “Oh no! Not another ‘work-on-your-personal-brand’ post…”
+> ## “Oh no! Not another ‘work-on-your-personal-brand’ post…”
 
 ## So what is branding?
 

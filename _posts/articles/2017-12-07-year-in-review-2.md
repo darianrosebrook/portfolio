@@ -1,6 +1,6 @@
 ---
 
-layout: article 
+layout: article
 categories: [articles, post]
 permalink: archive/:title
 type: article
@@ -14,11 +14,6 @@ article_author: Darian Rosebrook
 author_link: https://twitter.com/darianrosebrook
 author_img:
 ---
-![](https://cdn-images-1.medium.com/max/1000/1*Ela67mPWfErWNS2B_5c1fQ.png)
-<span class="figcaption_hack">[A fraction of everything that I posted in 2017 on
-Dribbble.com](https://dribbble.com/darianrosebrook)</span>
-
-# I just completed two years of moonlighting as a freelance designer.
 
 ## And what building two design focused businesses at the same time looks like.
 
@@ -578,24 +573,3 @@ work on your projects like I am.
 
 I want to thank you for everything you as an audience has given me in support.
 Without it, this would be a very dull adventure.
-
-* <br>
-
-*****
-
-![](https://cdn-images-1.medium.com/max/800/1*mo7_gcoDhIhJHCOLPxMfLg.png)
-
-### As a designer, have you got your sklls ready for next year in 2018?
-
-Come join other like-minded designers who are working at becoming masters of
-their craft.
-
-Every week we go over ways to market yourself better by improving your design
-skills, your personal brand, and other topics to further develop as a great
-designer.
-
-Tap either picture to get started investing in your design skills (:
-
-<span class="figcaption_hack">Tap on either picture to get started at compassofdesign.com</span>
-
-<br>

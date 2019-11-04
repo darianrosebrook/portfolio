@@ -1,6 +1,6 @@
 ---
 
-layout: article 
+layout: article
 categories: [articles, post]
 permalink: archive/:title
 type: article
@@ -14,11 +14,6 @@ article_author: Darian Rosebrook
 author_link: https://twitter.com/darianrosebrook
 author_img:
 ---
-![](https://cdn-images-1.medium.com/max/1000/1*DlFE4sV73nvncdqiAS44GA.jpeg)
-
-# The power of consistency in branding design
-
-## Defining the experience of your products and services
 
 As a brand identity designer, it’s my passion to help bridge the gap between a
 product or service and the people who need it.
@@ -303,46 +298,3 @@ we’ve gone over today and think of our question below.
 #### **If you need help building your brand identity, **[head over to So Magnetic
 ](https://somagnetic.com/)**and we can talk about how branding design can play
 into your brand strategy.**
-
-*****
-
-![](https://cdn-images-1.medium.com/max/800/1*mo7_gcoDhIhJHCOLPxMfLg.png)
-
-### How do I get better as a designer?
-
-If this is a question you need an answer to, come join other like-minded
-designers who are also working at becoming masters of their craft.
-
-Every week we go over ways to market yourself better by improving your design
-skills, your personal brand, and other topics to further develop as a great
-designer.
-
-Tap either picture to get started investing in your design skills (:
-
-![](https://cdn-images-1.medium.com/max/600/1*Z4keeZyradapOqSji4gV0g.jpeg)
-
-![](https://cdn-images-1.medium.com/max/600/1*5qCNGOpbIMY9ms1mE1bQhw.jpeg)
-<span class="figcaption_hack">Tap on either picture to get started at compassofdesign.com</span>
-
-* [Branding](https://read.compassofdesign.com/tagged/branding?source=post)
-* [Design](https://read.compassofdesign.com/tagged/design?source=post)
-* [Design
-Thinking](https://read.compassofdesign.com/tagged/design-thinking?source=post)
-* [Product
-Design](https://read.compassofdesign.com/tagged/product-design?source=post)
-* [Business](https://read.compassofdesign.com/tagged/business?source=post)
-
-By clapping more or less, you can signal to us which stories really stand out.
-
-### [Darian Rosebrook](https://read.compassofdesign.com/@darianrosebrook)
-
-Brand Identity Designer for [@itssomagnetic](http://twitter.com/itssomagnetic),
-running a design community at
-[@compassofdesign](http://twitter.com/compassofdesign). I write to help others
-grow their skills as designers.
-
-### [Compass of Design](https://read.compassofdesign.com/?source=footer_card)
-
-Some of the best design articles written by members of the Compass of Design
-Community to help you strengthen your skills in design, business/freelance, and
-marketing yourself.

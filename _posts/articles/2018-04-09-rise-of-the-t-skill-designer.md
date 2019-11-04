@@ -1,6 +1,6 @@
 ---
 
-layout: article 
+layout: article
 categories: [articles, post]
 permalink: archive/:title
 type: article
@@ -14,9 +14,6 @@ article_author: Darian Rosebrook
 author_link: https://twitter.com/darianrosebrook
 author_img:
 ---
-![](https://cdn-images-1.medium.com/max/800/0*Q6gIT5G-FUz5EBD7.png)
-
-# Rise of the T skill designer
 
 There seems to be a lot of sensationalism behind the polarizing idea that you
 should either be a generalist or a specialist. One side advocates that you have
@@ -243,42 +240,3 @@ aspect of today’s topic.
 Thanks,
 
 — [Darian Rosebrook](https://twitter.com/darianrosebrook), Compass of Design
-
-*****
-
-![](https://cdn-images-1.medium.com/max/800/1*mo7_gcoDhIhJHCOLPxMfLg.png)
-
-### How do you know what skills you should focus on?
-
-If this is a question you need an answer to, come join other like-minded
-designers who are also working at becoming masters of their craft.
-
-Every week we go over ways to market yourself better by improving your design
-skills, your personal brand, and other topics to further develop as a great
-designer.
-
-Tap either picture to get started investing in your design skills (:
-
-<span class="figcaption_hack">Tap on either picture to get started at compassofdesign.com</span>
-
-* [Design](https://read.compassofdesign.com/tagged/design?source=post)
-* [Design
-Thinking](https://read.compassofdesign.com/tagged/design-thinking?source=post)
-* [UX](https://read.compassofdesign.com/tagged/ux?source=post)
-* [Freelancing](https://read.compassofdesign.com/tagged/freelancing?source=post)
-* [Web Design](https://read.compassofdesign.com/tagged/web-design?source=post)
-
-By clapping more or less, you can signal to us which stories really stand out.
-
-### [Darian Rosebrook](https://read.compassofdesign.com/@darianrosebrook)
-
-Brand Identity Designer for [@itssomagnetic](http://twitter.com/itssomagnetic),
-running a design community at
-[@compassofdesign](http://twitter.com/compassofdesign). I write to help others
-grow their skills as designers.
-
-### [Compass of Design](https://read.compassofdesign.com/?source=footer_card)
-
-Some of the best design articles written by members of the Compass of Design
-Community to help you strengthen your skills in design, business/freelance, and
-marketing yourself.

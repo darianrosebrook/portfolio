@@ -1,6 +1,6 @@
 ---
 
-layout: article 
+layout: article
 categories: [articles, post]
 permalink: archive/:title
 type: article
@@ -13,11 +13,6 @@ index_image: https://cdn-images-1.medium.com/max/1000/1*gwmB5no8gS-D6y4Rq91X3Q.j
 article_author: Darian Rosebrook
 author_link: https://twitter.com/darianrosebrook
 ---
-![](https://cdn-images-1.medium.com/max/1000/1*gwmB5no8gS-D6y4Rq91X3Q.jpeg)
-
-# Design bound by ethics
-
-## Being able to sleep at night after work
 
 Design is a beautiful thing. You have the ability to take an idea effectively
 make it a great experience for another person. In other words, **your design has
@@ -348,7 +343,7 @@ Thinking](https://read.compassofdesign.com/tagged/design-thinking?source=post)
 * [UX](https://read.compassofdesign.com/tagged/ux?source=post)
 * [Marketing](https://read.compassofdesign.com/tagged/marketing?source=post)
 
-By clapping more or less, you can signal to us which stories really stand out.
+By sharing more or less, you can signal to us which stories really stand out.
 
 ### [Darian Rosebrook](https://read.compassofdesign.com/@darianrosebrook)
 

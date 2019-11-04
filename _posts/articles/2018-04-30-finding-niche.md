@@ -1,6 +1,6 @@
 ---
 
-layout: article 
+layout: article
 categories: [articles, post]
 permalink: archive/:title
 type: article
@@ -14,9 +14,6 @@ article_author: Darian Rosebrook
 author_link: https://twitter.com/darianrosebrook
 author_img:
 ---
-![](https://cdn-images-1.medium.com/max/1000/1*FBAkTr-hT9t-040kkeUY9g.png)
-
-# How to find and access your niche
 
 ## A two part series of how to figure out who to market your skills to as a
 freelancer or agency.
@@ -195,41 +192,3 @@ example, right now Shopify store owners is a hot niche).*
 > Thanks,
 
 > — [Darian Rosebrook](https://twitter.com/darianrosebrook), Compass of Design
-
-*****
-
-![](https://cdn-images-1.medium.com/max/800/1*mo7_gcoDhIhJHCOLPxMfLg.png)
-
-### How do you know what skills you should focus on?
-
-If this is a question you need an answer to, come join other like-minded
-designers who are also working at becoming masters of their craft.
-
-Every week we go over ways to market yourself better by improving your design
-skills, your personal brand, and other topics to further develop as a great
-designer.
-
-Tap either picture to get started investing in your design skills (:
-
-<span class="figcaption_hack">Tap on either picture to get started at compassofdesign.com</span>
-
-* [Business](https://read.compassofdesign.com/tagged/business?source=post)
-* [Design](https://read.compassofdesign.com/tagged/design?source=post)
-* [Marketing](https://read.compassofdesign.com/tagged/marketing?source=post)
-* [UX](https://read.compassofdesign.com/tagged/ux?source=post)
-* [Branding](https://read.compassofdesign.com/tagged/branding?source=post)
-
-By clapping more or less, you can signal to us which stories really stand out.
-
-### [Darian Rosebrook](https://read.compassofdesign.com/@darianrosebrook)
-
-Brand Identity Designer for [@itssomagnetic](http://twitter.com/itssomagnetic),
-running a design community at
-[@compassofdesign](http://twitter.com/compassofdesign). I write to help others
-grow their skills as designers.
-
-### [Compass of Design](https://read.compassofdesign.com/?source=footer_card)
-
-Some of the best design articles written by members of the Compass of Design
-Community to help you strengthen your skills in design, business/freelance, and
-marketing yourself.

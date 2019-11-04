@@ -15,8 +15,6 @@ author_link: https://twitter.com/darianrosebrook
 author_img:
 ---
 
-## The compass guide to designing your own custom lapel pins:
-
 ## Lapel Pins
 
 A few months back, we had a chance to look at the ways that you can design and order your own custom vinyl stickers. Now, though I’m not a print designer by trade, a lot of you messaged me back saying that it was “Super helpful” for them.
