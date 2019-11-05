@@ -1,14 +1,27 @@
-pushIt() {
+# Git Commands
+addcom() {
     git add .
     git commit -m "${1:-update}"
-    git push
 }
+
 alias profile="vim ~/.bash_profile"
 alias reloading="source ~/.bash_profile"
+
+
+
+# git alias
+alias gcheck="git checkout"
+alias gpull="git pull origin"
+alias gpo="git push origin"
+alias gstat="git status"
+alias gdiff="git diff"
+alias grao="git remote add origin"
+alias oops="git reset HEAD~1"
+
 alias portfolio="cd ~/Desktop/Projects/portfolio/portfolio;"
 alias jwatch="bundle exec jekyll serve --watch;"
 alias sasswatch="cd ~/Desktop/Projects/portfolio/portfolio;sass --watch css/master.sass:css/master.css --style compressed"
-alias pagewatch="cd ~/Desktop/Projects/portfolio/portfolio;sass --watch css/pages.sass:css/pages.css --style compressed"
+
 export PS1="\u$ "# get current branch in git repo
 function parse_git_branch() {
 	BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
@@ -56,7 +69,7 @@ function parse_git_dirty {
 	fi
 }
 
-export PS1="\n\u@\h:\w:\n\W[\`parse_git_branch\`]\\$ "
+export PS1="\n[\[\e[36m\]\h\[\e[m\]]:[\w]:\[\e[32m\]\`parse_git_branch\`\[\e[m\]\[\e[37m\]\n[\[\e[m\]\[\e[36m\]\u\[\e[m\]] \\$ "
 
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 

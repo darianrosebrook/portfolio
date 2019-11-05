@@ -1,6 +1,6 @@
 ---
 
-layout: article 
+layout: article
 categories: [articles, post]
 permalink: archive/:title
 type: article
@@ -14,7 +14,6 @@ article_author: Darian Rosebrook
 author_link: https://twitter.com/darianrosebrook
 author_img:
 ---
-# Design *is* “about the details,” just don’t ignore the bigger picture
 
 ## Ever wondered why your designs just don’t look right?
 
@@ -174,44 +173,3 @@ the tips here.
 If after all of this, you still feel like you’re designs just aren’t where they
 should be, [read this article I wrote on closing the gaps in your
 skills.](https://read.compassofdesign.com/please-mind-the-gap-54803d2b3b9c)
-
-*****
-
-![](https://cdn-images-1.medium.com/max/800/1*mo7_gcoDhIhJHCOLPxMfLg.png)
-
-### How do you know what skills you should focus on?
-
-If this is a question you need an answer to, come join other like-minded
-designers who are also working at becoming masters of their craft.
-
-Every week we go over ways to market yourself better by improving your design
-skills, your personal brand, and other topics to further develop as a great
-designer.
-
-Tap either picture to get started investing in your design skills (:
-
-<span class="figcaption_hack">Tap on either picture to get started at compassofdesign.com</span>
-
-* [Design](https://read.compassofdesign.com/tagged/design?source=post)
-* [Design
-Thinking](https://read.compassofdesign.com/tagged/design-thinking?source=post)
-* [Design
-Process](https://read.compassofdesign.com/tagged/design-process?source=post)
-* [UX](https://read.compassofdesign.com/tagged/ux?source=post)
-* [Product
-Design](https://read.compassofdesign.com/tagged/product-design?source=post)
-
-By clapping more or less, you can signal to us which stories really stand out.
-
-### [Darian Rosebrook](https://read.compassofdesign.com/@darianrosebrook)
-
-Brand Identity Designer for [@itssomagnetic](http://twitter.com/itssomagnetic),
-running a design community at
-[@compassofdesign](http://twitter.com/compassofdesign). I write to help others
-grow their skills as designers.
-
-### [Compass of Design](https://read.compassofdesign.com/?source=footer_card)
-
-Some of the best design articles written by members of the Compass of Design
-Community to help you strengthen your skills in design, business/freelance, and
-marketing yourself.

@@ -8,14 +8,12 @@ icon: newspaper
 
 title: The compass guide to designing your own custom lapel pins
 description: A few months back, we had a chance to look at the ways that you can design and order your own custom vinyl stickers. Now, though I’m not a print designer by trade, a lot of you messaged me back saying that it was “Super helpful” for them.
-link_to: https://read.compassofdesign.com/the-compass-guide-to-designing-your-own-custom-lapel-pins-2710e4a1c795
+link_to: https://compassofdesign.com/articles/the-compass-guide-to-designing-your-own-custom-lapel-pins
 index_image: https://cdn-images-1.medium.com/max/2000/0*WcZi0KNJPk9PlEjX.png
 article_author: Darian Rosebrook
 author_link: https://twitter.com/darianrosebrook
 author_img:
 ---
-
-## The compass guide to designing your own custom lapel pins:
 
 ## Lapel Pins
 

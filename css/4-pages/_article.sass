@@ -1,8 +1,17 @@
 .main-content.article
   grid-template-areas: unset
-  p, ul, h1, h2, h3, h4, h5, h6, ol, hr
+  grid-gap: 1.5rem
+  p, ul, h1, h2, h3, h4, h5, h6, ol, hr, iframe
     text-transform: none
     grid-column: 1 / span 5
+    margin: 0
+  .twitter-tweet, iframe
+    margin: 0 auto
+
+  h1, h2, h3, h4, h5, h6
+    margin-top: 1em
+    font-family: "Inter Var", sans-serif
+
   h3
     font-size: 1.8rem
   h2
@@ -10,9 +19,13 @@
   p
     font-size: 1.4rem
     img
-      width: 70%
+      width: 80%
       display: block
       margin: 0 auto
+    .figcaption_hack
+      width: 80%
+      margin: 0 auto
+      display: block
   strong
     text-transform: none
     font-weight: 600
@@ -27,24 +40,46 @@
   .hero
     border-right: 0
 
+  blockquote
+    grid-column: 1 / span 5
+    font-size: 2rem !important
+    font-style: oblique
+    background: inherit
+    border-top: 1px solid var(--grey)
+    border-bottom: 1px solid var(--grey)
+    text-align: center
+    p
+      font-size: 2rem !important
 
 //-- Responsive Restructuring --
 @media (min-width: 1000px)
   .main-content.article
     grid-template-areas: unset
-    p, ul, ol, .twitter-tweet
+    p, ul, ol, .twitter-tweet, iframe
       grid-column: 3 / span 3
     h1, h2, h3, h4, h5, h6
       grid-column: 3 / span 2
     .footer, #contact, header, .hero, hr
       grid-area: unset
       grid-column: 2 / span 6
+      width: 100%
+    iframe
+      margin: 0 auto
+    p
+      img
+        width: 60%
+      .figcaption_hack
+        width: 60%
     .hero
+      h1, p
+        margin: 0
+        margin-bottom: 1rem
       .module
         width: 100%
       p
         width: 25%
       h1
+        font-family: "Crimson Pro"
         width: 50%
         z-index: 1
       figure
@@ -55,3 +90,9 @@
         // top: 0
         // right: 0
         margin-bottom: 2rem
+      h2
+        text-transform: uppercase
+        font-size: 1rem
+        margin-bottom: 1rem
+    blockquote
+      grid-column: 3 / span 3
