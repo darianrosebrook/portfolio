@@ -1,13 +1,14 @@
 ---
-layout: article
-category: article
-topic: Compass of Design
+
+categories: [articles, post]
+permalink: archive/:title
+type: article
 title: Overthinking things? Here’s some help with all of the mental overwhelm.
 description: I’m going to (probably incorrectly) guess that you don’t deal with being stressed out over all the design work you have to do, the emails coming in, the phone calls you miss, the family time you’re running late to… You probably don’t deal with being overwhelmed at all.
-external: https://read.compassofdesign.com/are-you-over-thinking-too-often-2b743b1a586d
+link_to: https://read.compassofdesign.com/are-you-over-thinking-too-often-2b743b1a586d
 index_image: https://cdn-images-1.medium.com/max/1200/1*HBPl7x30X0-ErvKtWk_Elw.jpeg
 article_author: Darian Rosebrook
-author_link: https://twitter.com/d_evyn
+author_link: https://twitter.com/darianrosebrook
 ---
 ![](https://cdn-images-1.medium.com/max/800/1*HBPl7x30X0-ErvKtWk_Elw.jpeg)
 

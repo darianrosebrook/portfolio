@@ -9,30 +9,81 @@ sitemap:
   changefreq: 'weekly'
   exclude: 'no'
 ---
-<header id="hero" class="index-header">
-  <div class="info">
-    <h1>What have I been up to recently?</h1>
-    <h2>My name is Darian Rosebrook, I'm a branding designer</h2>
-    <p class="desktop">I've been consistently building out two side projects:</p>
-    <ul>
-      <li><strong><a href="https:/compassofdesign.com">Compass of Design</a></strong> &mdash; a designer community</li>
-      <li><strong><a href="https:/somagnetic.com">So Magnetic</a></strong> &mdash; a branding design agency</li>
-    </ul>
-    <p>On top of that, I do a lot of teaching and fun things across the internet and in the offline world. Here you'll see updates on all of that as they happen.</p>
-  </div>
-  <img src="/assets/img/darian.png" alt="Darian Rosebrook, a designer who focuses on websites and branding projects for companies." />
+<section class="container">
+<article class="row">
+  <h4><a href="/"><i class="fa fa-arrow-left"><span>Main menu,</span></i> Head Back</a></h4>
+</article>
+</section>
+<header id="hero" class="container">
+  <article class="row">
+    <div class="module">
+    <h1>About</h1>
+        <h5 class="position">Hi, I'm a brand identity and user experience designer</h5>
+        <p>I run <a href="https://somagnetic.com" rel="noreferrer" target="_blank">So Magnetic</a>, an agile design agency which helps businesses by <strong>using design strategy to build a brand's identity design.</strong> We focus on helping them <strong>increase customer engagement and revenue.</strong></p>
+        <p>I also run the community group for <a href="https://compassofdesign.com" rel="noreferrer" target="_blank">Compass of Design.</a>This is an online design community focused on equipping people with skills needed to become better professional designers. </p>
+
+    </div>
+    <div class="module">
+      <img loading="lazy" src="/assets/img/darian-now.png" alt="Darian Rosebrook, a designer who focuses on websites and branding projects for companies." />
+    </div>
+  </article>
+
 </header>
 <section class="container">
-<h2>What I've been up to</h2>
+  <article class="row">
+    <div class="module">
 
+    <p class="desktop">I have two projects I am currently working on:</p>
+    <ul>
+      <li><strong><a href="https://compassofdesign.com">Compass of Design</a></strong> &mdash; a designer community</li>
+      <li><strong><a href="https://somagnetic.com">So Magnetic</a></strong> &mdash; a branding design agency</li>
+    </ul><br />
+    <p>On top of that, I love teaching what I know as a designer to help others who are trying to improve their skills.</p>
+    <ul>
+      <li>I do private mentorship and help designers within the <a href="https://compassofdesign.com" rel="noreferrer" target="_blank">Compass of Design Community</a>.</li>
+      <li>I write in depth design guides and articles for the <a href="https://read.compassofdesign.com/">Compass of Design's design publication</a>.</li>
+      <li>I <a href="https://www.youtube.com/channel/UCTin1d0uPVufY4xwitzkyFQ">make design videos on YouTube</a> to help designers learn more about design.</li>
+      <li>I also run a <a href="http://podcast.compassofdesign.com/">podcast for Compass of Design</a>, teaching things I've learned along the way with managing client work as a freelancer and small agency.</li>
+    </ul><br /><br />
+
+    </div>
+  </article>
 </section>
-{% for post in site.categories.updates%}
-  {% capture update %}{% cycle '1', '2', '3', '4'  %}{% endcapture %}
-  {% if update == '1' %}<section class="container">{% endif %}
-      <div class="col">
-            <p>{{post.date | date_to_string }}</p>
-            <h4>{{post.title}}</h4>
-            <p>{{post.content}}</p>
-        </div>
-    {% if update == '4' or forloop.last %}</section>{% endif %}
+<section class="container">
+  <article class="row">
+    <h2>What am I up to nowadays?</h2>
+    <div class="module">
+      <p>What started as a side hustle, became a full time passion in 2015. I had been freelancing as a web designer to stay connected to a creative industry when I decided to focus on design as a full time pursuit. In mid 2016, I had joined a small team of developers as their lead designer based on my experience with UX Design and UI Design. When the work started to slow down with that team, in January 2017, I decided to focus full time on client work again. This time, by handling larger design clients and projects, where I could also hire and manage other designers to work in tandem to complete these projects.</p>
+    </div>
+    <div class="module">
+      <p>My two areas of expertise run along side each other. As a designer, I am adept at handling both the user experience of digital products and the brand experience of a product's design ecosystem (product, packaging, logo design, etc.) Both of these thrive from the same research, and both have the same path of exploration. As a designer, I couldn't find a better way to marry the skills I learned as a UX designer and my passion for creating meaningful brand experiences both on and off screens.</p>
+    </div>
+    <br /><br />
+    <h6>Do you want just my updates or the articles?</h6>
+    <label>Filter them by type</label>
+    <p><select class="filter" name="filter" id="filter">
+      <option value="">Filter All</option>
+      <option value="article">Articles</option>
+      <option value="update">Updates</option>
+
+
+    </select></p>
+    <div class="grid">
+    <div data-type="update" class="grid-item list-item" id="compass-community-site">
+      <p><small>12 Nov 2017 - Present</small></p>
+      <hr>
+      <h4>Building the Compass of Design Community app</h4>
+      <p >This project has been a huge step in what I'm able to achieve as the sole person on a project. This product utilizes my knowledge in UX Design, UI Design, and Back End Development by wrapping all of those together into one product. The Compass of Design Membership Site. This platform is going to be a powerhouse in helping designers get actionable feedback on questions they have and designs they've done. So far, there hasn't been a site that effectively does this without it becoming a popularity contest. Our goal here is to change the way we do design feedback!</p>
+    </div>
+{% for post in site.categories.post%}
+      <div data-type="{{post.type}}" class="grid-item list-item" id="{{post.specific}}">
+        <p><small>{{post.date | date_to_string }}</small></p>
+        <hr>
+        <h4>{{post.title}}</h4>
+        <h6>{{post.type | capitalize}}</h6>
+        <div>{% if post.type contains "update" %}{{post.content}}</div>{% else %}{{post.description}}</div><p><a href="{{post.link_to}}" rel="noreferrer" target="_blank">See the article</a></p>{% endif %}
+      </div>
   {% endfor %}
+</div>
+</article>
+</section>

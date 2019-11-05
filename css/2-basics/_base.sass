@@ -1,22 +1,32 @@
 // Global
 *, *::before, *::after
+  flex-direction: row
   box-sizing: border-box
   margin: 0
   padding: 0
+*::selection
+  background-color: var(--foreground)
+  color: var(--background)
+
 html
-  background: $light
-  font-family: "Work Sans", "Helvetica", Arial, Verdana, sans-serif
-  @include responsive-font(1vw, 12px, 14px)
-  color: $main
+  @include responsive-font(2vw, 10px, 14px)
+  background: var(--background)
+  color: var(--foreground)
+
 body
-  background: $light
-  line-height: 1.8
+  font-size: 1.6rem
+  line-height: 1.2
   opacity: 0
-  transition: all ease .5s
+  transition: var(--transition)
   overflow-x: hidden
+
 .hidden
   display: none !important
   opacity: 0
+.f-r
+  float: right
+.f-l
+  float: left
 .cf::after
   content: ' '
   visibility: hidden
@@ -26,204 +36,20 @@ body
 .cf::after, .cf::before
   display: block
 
+body.main
+  animation: fadeIn 2.5s
+  opacity: 1
+
 // Images
 img
-  transition: $transition
+  transition: var(--transition)
   display: inline-block
   width: 100%
-
-// Animations
-@keyframes fadeIn
-  0%
-    opacity: 0
-  100%
-    opacity: 1
-body.main
-  animation: fadeIn 1.5s
-  opacity: 1
-main
-  margin-top: 10rem
-
-// Typography
-a, a:link, a:visited, a:hover, a:focus
-  display: inline-block
-  transition: $transition
-  text-decoration: none
-  color: $highlight
-a:hover
-  color: darken($highlight, 50%)
-
-
-.regular
-  font-weight: 400
-.bold
-  font-weight: 600
-h1, h2, h3, h4, h5, h6
-  position: relative
-  width: fit-content
-  font-family: "PT Sans"
-  transition: $transition
-  letter-spacing: 5px
-  margin-bottom: 2rem
-  a:before
-    content: ""
-    position: absolute
-    width: 0%
-    height: 2px
-    background-color: $highlight
-    top: 100%
-    right: 0
-    transition: $transition
-  a:hover:before
-    width: 100%
-h6
-  font-size: 1.4rem
-  color: $tertiary
-h5
-  font-size: 1.6rem
-  color: $highlight
-  font-weight: 600
-h4
-  font-size: 2.1rem
-  color: $highlight
-h3
-  font-size: 2.5rem
-  color: $highlight
-h2
-  font-size: 5em
-h1
-  font-size: 8em
-  font-weight: 900
-  line-height: 1
-p
-  font-size: 1.2rem
-  margin-bottom: 1.5rem
-strong
-  color: $dark
-
-em
-  font-family: Georgia, serif
-small
-  font-family: Georgia, serif
-  font-size: 1rem
-i
-  margin: 0 .5em
-  opacity: .85
-  span
-    display: none
-.feature
-  i
-    color: $highlight-3
-.word-highlight
-  color: $highlight
-ul
-  list-style-type: none
-  li
-    & ~ li
-      margin-top: 1rem
-// Buttons
-
-.button, a.button, input[type="submit"]
-  transition: $transition
-  display: inline-block
-  min-width: 5rem
-  border: 2px solid $dark
-  font-size: 1.3rem
-  text-align: center
-  text-transform: none
-  background: none
-  color: $dark
-  cursor: pointer
-  padding: 1em 2em
-  &.secondary
-    background: $light
-    color: $dark
-    border: none
-    &:hover, &:focus, &:active
-      background-color:  darken($light, 15%)
-      color: $dark
-  &.tertiary
-    background: $main
-    color: $light
-    &:hover, &:focus, &:active
-      background-color:  darken($main, 15%)
-.button:active, .button:focus,a.button:active, a.button:focus
-  font-size: 1.2rem
-  background-color: darken($highlight-3, 45%)
-  color: $light
-.button:hover, a.button:hover
-  background-color: $dark
-  color: $light
-.button ~ .button, a.button ~ a.button
-  margin-left: 1.3em
-  margin-right: 0
-
-// Scaffolding
-header
-  width: 100%
-.footer
-  background: $dark
-  color: $light !important
-  padding: 3rem 0
-  a
-    color: $light
-.box
-  width: 100%
-  position: relative
-.container, .module
-  @extend .box
-.container
-  font-size: 0
-.row
-  font-size: 1rem
-  width: 90%
-  @include center(true, false)
-  margin-bottom: 3em
-.module
-  display: inline-block
-  vertical-align: top
-  @media only screen and (max-width: 800px)
-    margin-bottom: 2rem
-.grid
-  display: inline-grid
-  grid-template-columns: 1fr 1fr
-  grid-gap: 1rem
-  justify-items: center
-  align-items: center
-  font-size: 1em
-  width: 100%
-  margin: 0
-.grid-item
-  align-self: start
-  font-size: 1rem
-  position: relative
-  width: fit-content
-  text-align: center
-  &.grid-head
-    color: $highlight
-    font-size: 1.3rem
-    border-bottom: 2px solid #f0f0f0
-
-  img
-    @include center(true, false)
-
-// Tablet
-@media only screen and (min-width: 600px)
-  .row
-    width: 75%
-    margin-bottom: 5rem
-  .module
-    width: 45%
-    & ~ .module
-      margin-left: 3%
-  .grid
-    &:hover
-      .grid-item
-        opacity: .75
-    .grid-item
-      &:hover
-        opacity: 1
-        img
-          transform: translate(-50%, -1em)
-          box-shadow: 0 4px 6px 0 hsla(0, 0, 0, 0.2)
-    grid-row-gap: 5rem
+  &.logo
+    min-width: 2vmin
+    max-width: 36px
+  &.avatar
+    min-width: 1vw
+    max-width: 36px
+    border: 1px solid var(--grey)
+    border-radius: 100%
