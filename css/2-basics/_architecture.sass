@@ -295,6 +295,9 @@ a.block-link
   .row
     .row-head
       flex-direction: row
+      p
+        width: auto
+        display: inline-block
   .module
   .hero
     grid-column: 2/6
@@ -302,7 +305,9 @@ a.block-link
     margin-right: -.5rem
     border-right: 1px solid var(--grey)
     .module
-      width: 80%
+      width: 100%
+    figure
+      max-width: calc(75% - 2rem)
   .skills
     padding-left: 1rem
   .work-history
