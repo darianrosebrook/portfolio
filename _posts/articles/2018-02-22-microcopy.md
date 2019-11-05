@@ -14,10 +14,6 @@ article_author: Darian Rosebrook
 author_link: https://twitter.com/darianrosebrook
 author_img:
 ---
-![](https://cdn-images-1.medium.com/max/1000/1*NBefEZaEzk8-j-RwyXidcg.png)
-
-# Getting your feet wet with microcopy
-
 A few weeks ago, [I released an article going over some simple steps of UX
 design that people often
 overlooked](https://read.compassofdesign.com/the-secret-heroes-of-ux-design-56014d087dee).
@@ -232,43 +228,3 @@ to the perfect UX of your projects.
 Thanks,
 
 — Darian Rosebrook, [Compass of Design](https://compassofdesign.com/)
-
-*****
-
-![](https://cdn-images-1.medium.com/max/800/1*mo7_gcoDhIhJHCOLPxMfLg.png)
-
-### Take another step towards learning more about design from other designers.
-
-Come join other like-minded designers who are working at becoming masters of
-their craft.
-
-Every week we go over ways to market yourself better by improving your design
-skills, your personal brand, and other topics to further develop as a great
-designer.
-
-Tap either picture to get started investing in your design skills (:
-
-<span class="figcaption_hack">Tap on either picture to get started at compassofdesign.com</span>
-
-* [UX](https://read.compassofdesign.com/tagged/ux?source=post)
-* [Design](https://read.compassofdesign.com/tagged/design?source=post)
-* [Design
-Thinking](https://read.compassofdesign.com/tagged/design-thinking?source=post)
-* [Web
-Development](https://read.compassofdesign.com/tagged/web-development?source=post)
-* [Web Design](https://read.compassofdesign.com/tagged/web-design?source=post)
-
-By clapping more or less, you can signal to us which stories really stand out.
-
-### [Darian Rosebrook](https://read.compassofdesign.com/@darianrosebrook)
-
-Brand Identity Designer for [@itssomagnetic](http://twitter.com/itssomagnetic),
-running a design community at
-[@compassofdesign](http://twitter.com/compassofdesign). I write to help others
-grow their skills as designers.
-
-### [Compass of Design](https://read.compassofdesign.com/?source=footer_card)
-
-Some of the best design articles written by members of the Compass of Design
-Community to help you strengthen your skills in design, business/freelance, and
-marketing yourself.

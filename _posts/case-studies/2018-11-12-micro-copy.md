@@ -69,9 +69,9 @@ But it doesn’t just stop there. Though this is a very interactive form of conv
 Think of any time you’ve run to a search bar that just said** “Search”** Of course you understand it’s mechanics and the base functionality.
 
 But think of how a change of the way you frame common elements on the screen can lead to more direction towards action:
-> # “What are you looking for?” Vs. “Search”
-> # “How many cases do you need?” Vs. Select Quantity
-> # “Start a new project” Vs. “Contact”
+>##“What are you looking for?” Vs. “Search”
+>##“How many cases do you need?” Vs. Select Quantity
+>##“Start a new project” Vs. “Contact”
 
 You have so many things that are much better described by goal-oriented conversational labels rather than just stating the core functionality of what that action does.
 > An excellent read on this topic is [this article for the differences in terms used in checkout carts](https://el2.convertkit-mail2.com/c/preview/pxtehq/aHR0cHM6Ly9iYXltYXJkLmNvbS9ibG9nL3NoaXBwaW5nLXNwZWVkLXZzLWRlbGl2ZXJ5LWRhdGU=).
@@ -102,7 +102,7 @@ This could be situations like:
 It would pay to do research on what situations are going to be present when someone is using the project you’re designing.
 
 You have to be conscious of the amount of choices or actions a person needs to go through in order to complete what they came for. So by paying attention to the path to completion, you might think about breaking the tasks apart in order to lighten cognitive load.
-> # I do still stand behind the idea that we should use the tone that’s most appropriate for the context with the formula:
+>##I do still stand behind the idea that we should use the tone that’s most appropriate for the context with the formula:
 > (Right Tone * Level of Invisibility[or]Interactivity) + Descriptive micro copy = Positive user experience.
 > A positive experience a person has with the project you designed is a product of: using the right tone of voice multiplied by the level of interactivity a person needs to understand/use your work, added to other descriptive labels and helper text to guide users users to their intended goal.
 
@@ -137,9 +137,9 @@ Using words in your call-to-action buttons forces the end user to “Identify”
 Where the danger of that lies is in the tone of words you use.
 
 Some companies and brands have opted for a very dark pattern where people have to click a self-deprecating statement to complete an action. Most of which say things like:
-> # “No, I hate free money.”
-> # “No thanks, I’d rather waste my time searching instead.”
-> # “I don’t need a new sofa.”
+>##“No, I hate free money.”
+>##“No thanks, I’d rather waste my time searching instead.”
+>##“I don’t need a new sofa.”
 
 These types of interactions demean the user by forcing them into action and often can influence self-esteem. It’s not something to ever play with as a brand unless that is expected by the brand to be that way.
 

@@ -3,31 +3,38 @@ layout: default
 specific_css: /css/pages.css
 ---
 <script type="application/ld+json">
-{ "@context": "https://schema.org",
- "@type": "BlogPosting",
- "headline": "{{page.title}}",
- "alternativeHeadline": "{{page.title}} | Darian Rosebrook ",
- "image": "{{page.index_image}}",
- "editor": "{{page.article_author}}",
- "genre": "Freelance Design",
- "keywords": "freelance design business tips",
- "wordcount": "{{ page.content | number_of_words }}",
- "publisher": {
-   "@type": "Organization",
-   "name": "Compass of Design",
-   "logo": {
-				"@type": "ImageObject",
-				"url": "https://cdn-images-1.medium.com/max/800/1*mo7_gcoDhIhJHCOLPxMfLg.png",
-				"width":"447",
-				"height":"99"
-			}
- },
- "url": "{% if page.link_to %}{{page.link_to}}{% else %}{{page.url}}{% endif %}",
- "datePublished": "{{page.date}}",
- "dateCreated": "{{page.date}}",
- "dateModified": "{{page.date}}",
- "description": "{{page.description}}",
- "articleBody": "{{page.content | strip_html}}",
+{
+  "@context": "https://schema.org",
+  "@type": "NewsArticle",
+  "image": "{{page.index_image}}",
+  "url": "{% if page.link_to %}{{page.link_to}}{% else %}{{page.url}}{% endif %}",
+  "mainEntityOfPage": "https://read.compassofdesign.com/cut-the-fluff-32bebe0cfcbb",
+  "dateCreated": "{{page.date}}",
+  "datePublished": "{{page.date}}",
+  "dateModified": "{{page.date}}",
+  "headline": "{{page.title}}",
+  "name": "{{page.title}}",
+  "description": "{{page.description}}",
+  "alternativeHeadline": "{{page.title}} | Darian Rosebrook ",
+  "editor": "{{page.article_author}}",
+  "genre": "Freelance Design",
+  "keywords": "freelance design business tips",
+  "wordcount": "{{ page.content | number_of_words }}",
+  "creator": [
+    "Darian Rosebrook"
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "name": "Compass of Design",
+    "url": "https://compassofdesign.com",
+    "logo": {
+      "@type": "ImageObject",
+      "width": 303,
+      "height": 60,
+      "url": "https://miro.medium.com/max/303/1*9dQR97LE0tYSrrGOt4oNkg.png"
+    }
+  },
+  "articleBody": "{{page.content | strip_html}}",
    "author": {
     "@type": "Person",
     "@id": "https://darianrosebrook.com/about",
@@ -43,84 +50,85 @@ specific_css: /css/pages.css
       }
     },
 
-    "birthDate": "1992.07.14",
-    "height": "68 inches",
-    "affiliation": [
-      {
-        "@type": "Organization",
-        "name": "Compass of Design",
-        "sameAs": [
-          "https://compassofdesign.com",
-          "https://twitter.com/compassofdesign",
-          "https://www.instagram.com/compassofdesign/",
-          "https://www.linkedin.com/company/18132312",
-          "https://www.youtube.com/channel/UCTin1d0uPVufY4xwitzkyFQ"
-        ]
-      },
-      {
-        "@type": "Organization",
-        "name": "So Magnetic",
-        "sameAs": [
-          "https://twitter.com/itssomagnetic",
-          "https://www.instagram.com/itssomagnetic/",
-          "https://www.linkedin.com/company/18027829/",
-          "https://somagnetic.com"
-        ]
-      }
-    ],
-    "alumniOf": [
-      {
-       "@type": "CollegeOrUniversity",
-       "name": "Bellevue College",
-       "sameAs": "https://en.wikipedia.org/wiki/Bellevue_College"
-      }
-    ],
-    "gender": "Male",
-    "Description": "Designer",
-    "disambiguatingDescription": "Founder of Compass of Design",
-    "jobTitle": "Experience Designer",
-    "worksFor": [
-      {
-        "@type": "Organization",
-        "name": "Microsoft",
-        "sameAs": [
-          "https://microsoft.com"
-        ]
-      },
-      {
-        "@type": "Organization",
-        "name": "Compass of Design",
-        "sameAs": [
-          "https://compassofdesign.com"
-        ]
-      }
-    ],
-    "url": "https://darianrosebrook.com",
-    "image": "https://s.gravatar.com/avatar/d7d54ec00a4b23395571073b80a6bb39?s=80",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Bellevue",
-      "addressRegion": "WA",
-      "addressCountry": "United States"
-    },
-    "sameAs": [
-      "https://twitter.com/darianrosebrook",
-      "https://pinterest.com/ocelots",
-      "https://instagram.com/darianrosebrook",
-      "https://www.facebook.com/darianrosebrook",
-      "https://ca.linkedin.com/in/darianrosebrook/en",
-      "https://dribbble.com/darianrosebrook",
-      "https://www.behance.net/darianrosebrook",
-      "https://medium.com/@darianrosebrook",
-      "https://www.quora.com/profile/Darian-Rosebrook"
+  "birthDate": "1992.07.14",
+  "height": "68 inches",
+  "affiliation": [
+    {
+      "@type": "Organization",
+      "name": "Compass of Design",
+      "sameAs": [
+        "https://compassofdesign.com",
+        "https://twitter.com/compassofdesign",
+        "https://www.instagram.com/compassofdesign/",
+        "https://www.linkedin.com/company/18132312",
+        "https://www.youtube.com/channel/UCTin1d0uPVufY4xwitzkyFQ"
       ]
+    },
+    {
+      "@type": "Organization",
+      "name": "So Magnetic",
+      "sameAs": [
+        "https://twitter.com/itssomagnetic",
+        "https://www.instagram.com/itssomagnetic/",
+        "https://www.linkedin.com/company/18027829/",
+        "https://somagnetic.com"
+      ]
+    }
+  ],
+  "alumniOf": [
+    {
+     "@type": "CollegeOrUniversity",
+     "name": "Bellevue College",
+     "sameAs": "https://en.wikipedia.org/wiki/Bellevue_College"
+    }
+  ],
+  "gender": "Male",
+  "Description": "Designer",
+  "disambiguatingDescription": "Founder of Compass of Design",
+  "jobTitle": "Experience Designer",
+  "worksFor": [
+    {
+      "@type": "Organization",
+      "name": "Microsoft",
+      "sameAs": [
+        "https://microsoft.com"
+      ]
+    },
+    {
+      "@type": "Organization",
+      "name": "Compass of Design",
+      "sameAs": [
+        "https://compassofdesign.com"
+      ]
+    }
+  ],
+  "url": "https://darianrosebrook.com",
+  "image": "https://s.gravatar.com/avatar/d7d54ec00a4b23395571073b80a6bb39?s=80",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Bellevue",
+    "addressRegion": "WA",
+    "addressCountry": "United States"
+  },
+  "sameAs": [
+    "https://twitter.com/darianrosebrook",
+    "https://pinterest.com/ocelots",
+    "https://instagram.com/darianrosebrook",
+    "https://www.facebook.com/darianrosebrook",
+    "https://ca.linkedin.com/in/darianrosebrook/en",
+    "https://dribbble.com/darianrosebrook",
+    "https://www.behance.net/darianrosebrook",
+    "https://medium.com/@darianrosebrook",
+    "https://www.quora.com/profile/Darian-Rosebrook"
+    ]
   }
  }
 </script>
 <article class="hero row">
   <article>
     <div class="row-head">
-      <h2>Article</h2>
+      <h2 >Article</h2>
+      <h2><a href="/writing"><i class="fa fa-arrow-left"><span>Main menu,</span></i> Head Back</a></h2>
     </div>
     <article>
       <div class="module">
@@ -133,6 +141,16 @@ specific_css: /css/pages.css
         <p>{{page.description}}</p>
         {% if page.link_to %} <p><a href="{{page.link_to}}" target="_blank">Originally posted on Compass of Design <i class="fa fa-arrow-right"><span>Original article link</span></i></a></p>{% endif %}
         <p><img loading="lazy" src="/assets/img/darian-rosebrook-avatar.jpg" alt="Darian Rosebrook's avatar" class="avatar" />&mdash; by <a href="https://twitter.com/darianrosebrook" target="_blank">{{page.article_author}}</a></p>
+        <div class="social_share">
+          <p><em>If you find this article helpful to you, share it with a friend (:</em></p>
+          <p>
+            <span>To share, choose one of these: </span>
+            <span><a href="https://twitter.com/share?url={% if page.link_to %}{{page.link_to}}{% else %}{{page.url}}{% endif %}&amp;text={{page.title | replace: ' ', '%20' }}%20Via:{% if page.link_to %}%20%40compassofdesign{% else %}%20%40darianrosebrook{% endif %}" target="_blank"><i class="fab fa-twitter"><span>Share this article on Twitter </span></i></a></span>
+            <span><a href="http://www.facebook.com/sharer.php?u={% if page.link_to %}{{page.link_to}}{% else %}{{page.url}}{% endif %} " target="_blank"><i class="fab fa-facebook"><span>Share this article on Facebook </span></i></a></span>
+            <span><a href="http://www.linkedin.com/shareArticle?mini=false&amp;url={% if page.link_to %}{{page.link_to}}{% else %}{{page.url}}{% endif %}" target="_blank"><i class="fab fa-linkedin"><span>Share this article on LinkedIn </span></i></a></span>
+            <span><a href="https://www.pinterest.com/pin/create/button/" data-pin-do="buttonBookmark" data-pin-custom='true'><i class="fab fa-pinterest"><span>Share this article on Pinterest </span></i></a></span>
+          </p>
+        </div>
       </div>
 
     </article>

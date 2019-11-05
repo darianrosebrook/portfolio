@@ -7,7 +7,7 @@ icon: newspaper
 
 title: Switching to value base pricing
 description: there are very few businesses that actually value design. What they value is achieving their goals and getting business results, with some widely unaware what good design (or any effort towards design at all) can do for their business.
-link_to: https://read.compassofdesign.com/switching-to-value-base-pricing-6188f221c869
+link_to: https://compassofdesign.com/articles/switching-to-value-based-pricing
 index_image: https://cdn-images-1.medium.com/max/1000/1*qi40lnpvgbhFCKCOCgNJ_g.png
 article_author: Darian Rosebrook
 author_link: https://twitter.com/darianrosebrook

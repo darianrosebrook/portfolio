@@ -6,7 +6,7 @@ type: article
 icon: newspaper
 title: Handling expectational debt and falling behind.
 description: Time is a commodity. It is both finite and infinite. We only have 24 hours to use and it does not replenish until the following day. We have to protect our use of that time just as much as we protect the use of our money. When we say yes and commit to things, we are spending some of the expectations held for that day.
-link_to: https://medium.com/compass-of-design/handling-expectational-debt-and-falling-behind-9a658c33edd1
+link_to: https://compassofdesign.com/articles/handling-expectational-debt-as-a-designer
 index_image: https://darianrosebrook.com/assets/img/posts/articles/expectational-debt/expectational-debt.jpg
 article_author: Darian Rosebrook
 author_link: https://twitter.com/darianrosebrook
@@ -123,19 +123,3 @@ Want to follow my work? Come visit me at
 **Find me on **[twitter ](http://twitter.com/darianrosebrook)**! **<br> I post great
 finds on UX and Design as well as some great content of my own creation! Hope to
 see you there!
-
-* [Productivity](https://read.compassofdesign.com/tagged/productivity?source=post)
-* [Entrepreneurship](https://read.compassofdesign.com/tagged/entrepreneurship?source=post)
-* [Fatherhood](https://read.compassofdesign.com/tagged/fatherhood?source=post)
-
-Clapping shows how much you appreciated Darian Rosebrook’s story.
-
-### [Darian Rosebrook](https://read.compassofdesign.com/@darianrosebrook)
-
-Brand Consultant at [@itssomagnetic](http://twitter.com/itssomagnetic), running
-designer network at [@compassofdesign](http://twitter.com/compassofdesign) I ate
-a whole large dominos pizza by myself once. 🍕
-
-### [Compass of Design](https://read.compassofdesign.com/?source=footer_card)
-
-Curated design articles for self-starting designers.

@@ -8,6 +8,7 @@ icon: newspaper
 
 title: Are we asking designers the right questions?
 description: We all love clickbait. There’s some sort of unsatisfying feeling where the shot of dopamine hits us before we even open the article. What we get in return is a let down or repurposed garbled content that spew out from the community faucet.
+link_to: https://compassofdesign.com/articles/are-we-asking-designers-the-right-questions
 index_image: https://cdn-images-1.medium.com/max/1000/0*X5s0j-Q1JVl8tzoK.jpg
 article_author: Darian Rosebrook
 author_link: https://twitter.com/darianrosebrook
@@ -42,10 +43,10 @@ Therefore it’s good my developer has a working knowledge of Design as well.
 That works for me knowing this because my work is tied to user interface and user experience with web apps.
 
 As I transition out of that role and release those reins to a more experienced web designer, I’m moving into brand identity design including logos, packaging, and light product design. There is nearly 0% of my coding knowledge being used to do so.
-> # Realistically, not every designer needs to know how to code.
+>##Realistically, not every designer needs to know how to code.
 
 What we are trying to figure out is the answer to this question:
-> # What limitations in their chosen medium should a designer learn about their design discipline?
+>##What limitations in their chosen medium should a designer learn about their design discipline?
 
 Paraphrase how you would like it, this question dives closer to the root of what we would like our designers to know.
 
@@ -53,7 +54,7 @@ Paraphrase how you would like it, this question dives closer to the root of what
 
 ![](https://cdn-images-1.medium.com/max/2160/1*Awtv4gE0NNgXKrPmGnDUtQ.png)
 
-A colleague had mentioned that “[*if you don’t understand the constraints of your medium then you wont design effectively for it](http://twitter.com/sarah_federman). *” This is why a lot of teachers in college will have you make your portfolio out of the materials in the shop.
+A colleague had mentioned that “[*if you don’t understand the constraints of your medium then you wont design effectively for it](http://twitter.com/sarah_federman).*” This is why a lot of teachers in college will have you make your portfolio out of the materials in the shop.
 
 When designers were working on typefaces for print, they had to work with wood, metal, the ink and paper of their time. Things weren’t as easy as creating vectors on the screen.
 
@@ -68,6 +69,6 @@ No.
 You should spend some time working with the materials and have people to go to for questions about what you’re working with.
 
 We need to understand that Design as a career is something that constantly evolves and constantly requires us to put our skills to new mediums. We hone in our craft through tools. Whether that’s pen and paper, or if it is with code and VR headsets. We use our design knowledge to work on our given discipline through whatever tools the medium requires.
-> # Ask yourself the right question. What are the limitations of the things I design for and how can that be a positive thing to help achieve the goal?
+>##Ask yourself the right question. What are the limitations of the things I design for and how can that be a positive thing to help achieve the goal?
 
 Thanks for the discussions that lead to the conclusion: Sarah Federman, Jon Friesen, Sander Visser, Tony Lombardi, Tyrel Chambers

@@ -8,7 +8,7 @@ icon: newspaper
 
 title: 5 tips for setting the right tone with your email list.
 description: What do you remember about the last person you met? Usually the first meeting you remember if they seemed like a trustworthy person or not. Were they clumsy? Were they suave? Your first interaction with others is important on setting the right tone of any relationship. The same can be said for email marketing.
-link_to: https://medium.com/compass-of-design/5-tips-for-setting-the-right-tone-with-your-email-list-93a5afbb8d8b
+link_to: https://compassofdesign.com/articles/5-tips-for-setting-the-right-tone-with-your-email-list
 index_image: https://darianrosebrook.com/assets/img/posts/articles/welcome-email/welcome-email.png
 article_author: Darian Rosebrook
 author_link: https://twitter.com/darianrosebrook
@@ -20,7 +20,7 @@ I am learning that email content is difficult to get a head start in. It’s the
 ### My crazy idea
 
 In the early part of December 2015, I gathered the questions that I have been answering about design and my processes. This list, though it is now antiquated, was the start of my process on writing about what I know and what I am learning. But I wanted to do more and I wanted to help more people.
-> # The challenge was that I had less than a years experience doing design as a full time gig.
+>##The challenge was that I had less than a years experience doing design as a full time gig.
 
 For me, that crazy idea burning inside me is to teach and grow an audience around people who are starting to learn design. Though design is a broad term for many specialties, I wanted to focus my efforts on people who are identifying with branding, web design, and graphic design. The early pains of starting out and creating good, solid content is something I live every day. I want this to be something that people don’t have to go alone.
 
