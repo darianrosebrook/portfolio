@@ -1,13 +1,14 @@
 ---
-layout: article
-category: article
-topic: Compass of Design
+
+categories: [articles, post]
+permalink: archive/:title
+type: article
 title: I just completed two years of moonlighting as a freelance designer.
 description: Here’s what building two design focused businesses at the same time looks like. Two years ago in this first week of December, I started learning to code websites. I had my eyes set on becoming a freelance web designer. The glam and glory was appealing, meaning that I was able to do something that interested me (finally) and get paid handsomely to do so.
-external: https://read.compassofdesign.com/i-just-completed-two-years-of-moonlighting-as-a-freelance-designer-e13ad247acaf
+link_to: https://read.compassofdesign.com/i-just-completed-two-years-of-moonlighting-as-a-freelance-designer-e13ad247acaf
 index_image: https://cdn-images-1.medium.com/max/800/1*VhoE7JmWYNvFZpxEaaVM3A.gif
 article_author: Darian Rosebrook
-author_link: https://twitter.com/d_evyn
+author_link: https://twitter.com/darianrosebrook
 author_img:
 ---
 ![](https://cdn-images-1.medium.com/max/1000/1*Ela67mPWfErWNS2B_5c1fQ.png)

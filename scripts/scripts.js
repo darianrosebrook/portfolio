@@ -1,4 +1,5 @@
 //functions
+
 function byId(id) {
   return document.getElementById(id);
 }
@@ -20,7 +21,6 @@ var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
     if(!!window.chrome && !isOpera )
     { animateTime = 900;
     }
-
 // get the y offset
 function getPageScroll() {
   var yScroll;
@@ -42,14 +42,14 @@ function smoothSroll(event) {
   targetOffset = byId(target.dataset.href.substr(1)).offsetTop;
   currentPosition = getPageScroll(); // uses yScroll's value
 
-  // accounting for hidden-nav
-  if (toggler.checked && window.innerWidth < 1000){
-    targetOffset = targetOffset ;
-    currentPosition = currentPosition;
-  } else if(toggler.checked){
-    targetOffset = targetOffset;
-    currentPosition = currentPosition;
-  }
+  // // accounting for hidden-nav
+  // if (toggler.checked && window.innerWidth < 1000){
+  //   targetOffset = targetOffset ;
+  //   currentPosition = currentPosition;
+  // } else if(toggler.checked){
+  //   targetOffset = targetOffset;
+  //   currentPosition = currentPosition;
+  // }
   body.classList.add('in-transition');
   if (targetOffset < currentPosition) {
     body.style.WebitTransform = "translate(0, " + (currentPosition - targetOffset) + "px)";
@@ -118,46 +118,102 @@ function checked() {
     )
   }
 }
+// Change background for hashed item to easily see item highlighted
+
+if(window.location.hash) {
+     var hash = window.location.hash.substring(1); //Puts hash in variable, and removes the # character
+     var hashedElem = byId(hash);
+     hashedElem.style.backgroundColor = "rgba(83, 136, 160, 0.5)";
+     // hash found
+ } else {
+     // No hash found
+ }
 
 // filter for archive sites.
 
-var filter = byId('filter');
-var posts = byClass('list-item');
+  // filter
+  var filter = byId('filter');
+  var posts = byClass('list-item');
 
-function togglePosts(check) {
-  for(var c = 0; c < posts.length; c++) {
+  function togglePosts(check) {
+    for(var c = 0; c < posts.length; c++) {
       posts[c].classList.add('hidden');
-      if (posts[c].dataset.type == check) {
-        posts[c].classList.remove('hidden');
-      }
-      if (check == null || undefined) {
-        posts[c].classList.remove('hidden');
-      }
-  }
-}
-if(filter) {
-  filter.addEventListener('change', function() {
-
-    switch (filter.selectedIndex) {
-      case 1: togglePosts('web');
-        break;
-      case 2: togglePosts('brand');
-        break;
-      case 3: togglePosts('productivity');
-        break;
-      case 4: togglePosts('life');
-        break;
-      case 5: togglePosts('external');
-        break;
-      default:  togglePosts();
+      posts[c].classList.remove('not-hidden');
+        if (posts[c].dataset.type == check) {
+          posts[c].classList.remove('hidden');
+          posts[c].classList.add('not-hidden');
+        }
+        if (check == null || undefined) {
+          posts[c].classList.remove('hidden');
+          posts[c].classList.add('not-hidden');
+        }
     }
+  }
+  if(filter) {
+    filter.addEventListener('change', function() {
+      var selected_val = filter[filter.selectedIndex].value;
+      if(selected_val.length === 0){
+        togglePosts();
+      }
+      else {
+        togglePosts(selected_val);
+      }
+      }
+    );
+  }
+var accessToken = '12cf5726b061b5e521a31389b6aea25a51f977b46537c693ca5fb8231d21fb3f';
+
+// Call Dribble v2 API
+// Date formatter
+
+var months = ["Jan", "Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov", "Dec"];
+
+
+
+$(function() {
+  $.ajax({
+      url: 'https://api.dribbble.com/v2/user/shots?access_token=' + accessToken,
+      dataType: 'json',
+      type: 'GET',
+      success: function(data) {
+        console.log(data);
+        var image;
+        if (data.length > 0) {
+          $.each(data.reverse(), function(i, val) {
+            var postDate = new Date(val.published_at);
+            var m = postDate.getMonth(); // returns 6
+            var d = postDate.getDay();  // returns 15
+            var y = postDate.getFullYear();  // returns 2012
+            var mLong = months[m];
+
+            if (val.images.hidpi) {
+              image = val.images.hidpi;
+            } else {
+              image = val.images.normal;
+            }
+            if (val.low_profile === false) {
+            $('#shots').prepend(
+             '<a class="shot module grid-item"  rel="noreferrer" target="_blank" href="'+ val.html_url +'" title="' + val.title + '">'+
+              '<img loading="lazy" src="'+ image +'" alt="' + val.title + '"/>'+
+              '<div>' +
+                   '<p><small>'+ d + ' ' + mLong + ' ' + y +'</small></p>'+
+                   '<h5>'+ val.title + '</h5>'+
+               '</div>' +
+             '</a>'
+            )
+
+            $('.truncate').each(function(index, value) {
+               $(this).html($(this).html().substring(0, 400));
+              // number of characters
+            })
+            }
+            return i < 10
+          })
+        }
+        else {
+          $('#shots').append('<p>No shots yet!</p>');
+        }
+      }
+
   });
-}
-// Adding Masonry because my solution without it doesn't cut cross browser portfolio-website
-var elem = document.querySelector('.grid');
-var msnry = new Masonry( elem, {
-  // options
-  columnWidth: '.grid-sizer',
-  itemSelector: '.grid-sizer',
-  percentPosition: true
 });

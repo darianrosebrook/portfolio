@@ -1,13 +1,14 @@
 ---
-layout: article
-category: article
-topic: Compass of Design
+
+categories: [articles, post]
+permalink: archive/:title
+type: article
 title: Design bound by ethics — Being able to sleep at night after work.
 description: Design is a beautiful thing. You have the ability to take an idea effectively make it a great experience for another person. In other words, your design has the power to affect the people that come face to face with it. When you have that type of role in the design process of these ideas, you are bound ethically to how your design helps or hinders someone their goal.
-external: https://cmps.co/ethics-for-designers
+link_to: https://cmps.co/ethics-for-designers
 index_image: https://cdn-images-1.medium.com/max/1000/1*gwmB5no8gS-D6y4Rq91X3Q.jpeg
 article_author: Darian Rosebrook
-author_link: https://twitter.com/d_evyn
+author_link: https://twitter.com/darianrosebrook
 ---
 ![](https://cdn-images-1.medium.com/max/1000/1*gwmB5no8gS-D6y4Rq91X3Q.jpeg)
 
@@ -248,7 +249,7 @@ carrier we didn’t need because we were “given” (never actually received it
 default a new wifi-hotspot for signing up for a certain plan. We didn’t know
 about it because of automatic billing and payments so when we went to switch to
 the new plan, [the old account never
-closed.](https://twitter.com/d_evyn/status/912127961951637504)
+closed.](https://twitter.com/darianrosebrook/status/912127961951637504)
 
 The default choice here was not being told we can opt out, nor telling us we
 were being added to the additional plan in the contract.
