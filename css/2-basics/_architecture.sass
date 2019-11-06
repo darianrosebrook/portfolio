@@ -138,7 +138,25 @@ header
 
 .books
   grid-area: bk
-
+  .logo
+    margin-bottom: -.8rem
+  .book-content
+    h3
+      font-size: 4rem
+    h4
+      display: inline
+      width: fit-content
+  .grid-item
+    img
+      display: block
+      max-width: 140px
+      margin: 0 auto
+    span
+      font-family: "Crimson Pro"
+      font-size: 4rem
+      font-weight: 300
+    h4
+      font-size: 3rem
 .footer
   grid-area: ft
 .update
@@ -234,7 +252,7 @@ a.block-link
     padding: 0 10rem
   main
     grid-template-columns: 2rem repeat(5, 1fr ) 1rem
-    grid-template-areas:  ". ud ud ud ud ud ." ". he he he he sk ." ". he he he he pc ." ". wh wh wh wh wh ." "nl nl nl nl nl nl nl" ". dw dw dw dw dw ." ". vd vd vd vd vd ." ". pd pd pd pd pd ." ". bk bk bk bk bk ." ". ct ct ct ct ct ." ". ft ft ft ft ft ."
+    grid-template-areas:  ". ud ud ud ud ud ." ". he he he he sk ." ". he he he he pc ." ". wh wh wh wh wh ." "nl nl nl nl nl nl nl" ". dw dw dw dw dw ." ". vd vd vd vd vd ." ". pd pd pd pd pd ." "bk bk bk bk bk bk ." ". ct ct ct ct ct ." ". ft ft ft ft ft ."
 
   .f-r
     float: right
@@ -332,7 +350,24 @@ a.block-link
       img
         float: none
         width: 80%
+  .books
+    .row
+      .row-head
+        margin-left: 3rem
+      article
+        display: grid
+        grid-template-columns: 1rem repeat(5, 1fr)
+        gap: 1.5rem
 
+      .module.callout
+        padding: 0
+        grid-column: span 3
+        & ~ .module
+          grid-column: 4 / span 3
+        .book-content
+          padding: 3rem
+      .grid
+        grid-template-columns: repeat(3, 1fr)
   .block-link
     display: inline-block
   nav
