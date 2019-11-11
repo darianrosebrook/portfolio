@@ -14,8 +14,6 @@
         </a>
       </div>
     {% for post in site.categories.updates limit:4 %}
-      {% capture update %}{% cycle '1', '2', '3', '4'  %}{% endcapture %}
-      {% if update == '1' %}{% endif %}
       <div class="grid-item">
         {% if page.url == '/' %}<a  class="block-link" href="{{site.baseurl}}/now/#{{post.specific}}"> {% endif %}
           <div class="linked-block">
@@ -27,7 +25,6 @@
           </div>
         {% if page.url == '/' %}</a>{% endif %}
       </div>
-      {% if update == '4' or forloop.last %}{% endif %}
     {% endfor %}
     </div>
   </article>
