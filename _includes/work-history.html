@@ -2,38 +2,20 @@
   <article class="row">
     <h2>Work History</h2>
     <div class="grid">
-      <div class="grid-item">
-        <img loading="lazy" class="cf" src="{{site.baseurl}}/assets/img/darian-rosebrook-microsoft.jpg" alt="Darian Rosebrook employed by Microsoft in May 2019" />
-        <div class="module">
-          <p><small>May 2019 &mdash; Present</small></p>
-          <h5>Product Designer 3 ( Contract )</h5>
-          <img src="{{site.baseurl}}/assets/img/microsoft-logo.svg" class="logo" alt=""><h3>Microsoft</h3>
+      {% for post in site.categories.work limit:4 %}
+        <div class="grid-item">
+          <a  class="block-link" href="{{site.baseurl}}{{post.url}}">
+            <div class="linked-block">
+              <p><img loading="lazy" class="f-l cf" src="{{site.baseurl}}{{post.index_image}}" alt="{{post.title}}" /></p>
+                <p><small><strong>{{post.startDate |  date: "%b %Y" }} &mdash; {{post.endDate |  date: "%b %Y" }}</strong></small></p>
+                <h5>{{post.position}}</h5>
+                {% include {{post.logo}} %}
+                <h3>{{post.company}}</h3>
+            </div>
+          </a>
         </div>
-      </div>
-      <div class="grid-item">
-        <img loading="lazy" class="cf" src="{{site.baseurl}}/assets/img/darian-rosebrook-senior-user-experience-designer.jpg" alt="Darian Rosebrook employed by Compass of Design as a Senior User Experience Designer" />
-        <div class="module">
-          <p><small>Jan 2017 &mdash; May 2019</small></p>
-          <h5>Senior UX Designer</h5>
-          <img src="{{site.baseurl}}/assets/img/compass-of-design-logo.svg" class="logo" alt=""><h3>Compass of Design</h3>
-        </div>
-      </div>
-      <div class="grid-item">
-        <img loading="lazy" class="cf" src="{{site.baseurl}}/assets/img/darian-rosebrook-contract-brand-identity-designer.jpg" alt="Darian Rosebrook working independently on brand strategy, design strategy, and user experience design" />
-        <div class="module">
-          <p><small>Sept 2015 &mdash; May 2019</small></p>
-          <h5>Brand Identity Designer</h5>
-          <img src="{{site.baseurl}}/assets/img/so-magnetic-logo.svg" class="logo" alt=""><h3>So Magnetic</h3>
-        </div>
-      </div>
-      <div class="grid-item">
-        <img loading="lazy" class="cf" src="{{site.baseurl}}/assets/img/darian-rosebrook-lead-user-interface-designer.jpg" alt="Darian Rosebrook employed by Keyspark in May 2019 as a lead user interface designer" />
-        <div class="module">
-          <p><small>May 2016 &mdash; Oct 2017</small></p>
-          <h5>Lead UI Designer</h5>
-          <img src="{{site.baseurl}}/assets/img/keyspark-logo.svg" class="logo" alt=""><h3>KeySpark</h3>
-        </div>
-      </div>
+      {% endfor %}
+
     </div>
   </article>
 </section>
