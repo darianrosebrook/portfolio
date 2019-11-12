@@ -232,7 +232,7 @@ $(function() {
               // number of characters
             })
             }
-            return i < 10
+            return i < 9
           })
         }
         else {
