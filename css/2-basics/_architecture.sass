@@ -102,6 +102,8 @@ header
   grid-area: wh
   .grid
     grid-template-columns: repeat(1, 1fr)
+    .linked-block
+      display: block
     img:not(.logo)
       display: inline
       margin-right: 1rem
@@ -135,6 +137,14 @@ header
 
 .podcast
   grid-area: pd
+  .grid
+    display: block
+    margin-bottom: 1rem
+    img
+      width: 55%
+
+  h3
+    font-size: 4rem
 
 .books
   grid-area: bk
@@ -351,6 +361,11 @@ a.block-link
       img
         float: none
         width: 80%
+
+  .podcast
+    .grid
+      display: grid
+
   .books
     .row
       .row-head
