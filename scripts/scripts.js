@@ -146,9 +146,11 @@ if(window.location.hash) {
      var hash = window.location.hash.substring(1); //Puts hash in variable, and removes the # character
      var hashDetails = hash + "-details";
      var hashedElem = byId(hash);
-     var hashedDetailElem = byId(hashDetails)
-     hashedElem.style.backgroundColor = "var(--grey)";
-     hashedDetailElem.setAttribute('open', 'true');
+     if (hashedElem) {
+       var hashedDetailElem = byId(hashDetails)
+       hashedElem.style.backgroundColor = "var(--grey)";
+       hashedDetailElem.setAttribute('open', 'true');
+     }
      // hash found
  } else {
      // No hash found
