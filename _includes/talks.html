@@ -1,3 +1,24 @@
-
-{% for post in site.categories.articles%}
-{% endfor %}
+<section class="video">
+  <article class="row">
+    <div class="row-header">
+      <h2>Recent Talks</h2>
+    </div>
+    <div class="module">
+      <div class="grid">
+      {% assign i = 0 %}
+      {% for post in site.categories.talk %}
+          {% assign i = i | plus:1 %}
+          {% assign class = '' %}
+          {% if i == 0 %}
+            {% assign class = 'featured-video' %}
+          {% else %}
+            {% assign class = ('v' + i) %}
+          {% endif %}
+          <article class="grid-item {{class}}">
+            {{post.content}}
+          </article>
+      {% endfor %}
+      </div>
+    </div>
+  </article>
+</section>

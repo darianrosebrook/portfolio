@@ -134,6 +134,19 @@ header
 
 .video
   grid-area: vd
+  .grid
+    width: 100%
+    grid-template-areas: "fv fv" "v2 v3" "v4 v5"
+    .featured-video
+      grid-area: fv
+    .v2
+      grid-area: v2
+    .v3
+      grid-area: v3
+    .v4
+      grid-area: v4
+    .v5
+      grid-area: v5
 
 .podcast
   grid-area: pd
@@ -361,6 +374,10 @@ a.block-link
       img
         float: none
         width: 80%
+  .video
+    grid-area: vd
+    .grid
+      grid-template-areas: "v2 fv fv v4" "v3 fv fv v5"
 
   .podcast
     .grid
