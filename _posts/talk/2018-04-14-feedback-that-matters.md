@@ -31,4 +31,4 @@ author_link: https://twitter.com/darianrosebrook
     }
 </style>
 
-<div class='embed-container'><iframe width="560" height="315" src="https://www.youtube.com/embed/{{ page.video_id }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<div class='embed-container'><iframe title="{{page.title}}" width="560" height="315" src="https://www.youtube.com/embed/{{ page.video_id }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
