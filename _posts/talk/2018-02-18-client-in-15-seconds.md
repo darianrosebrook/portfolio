@@ -9,7 +9,7 @@ description: Sometimes we’re forced into gatherings to socialize with other pe
 specific: 15-second-client
 icon: play-circle
 link_to: https://www.youtube.com/watch?v=-placeholder-
-index_image: https://i.ytimg.com/vi/-placeholder-/maxresdefault.jpg
+index_image: https://i.ytimg.com/vi/-placeholder-/mqdefault.jpg
 location: YouTube
 article_author: Darian Rosebrook
 author_link: https://twitter.com/darianrosebrook
