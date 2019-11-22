@@ -11,6 +11,9 @@
   <nav class="nav">
     <i class="far fa-address-card"><span>Site Navigation:</span> </i>
     <ul>
+      {% if page.url != '/' %}
+      <li><a href="/">Home</a></li>
+      {% endif %}
       <li><a href="/work">Design Work</a></li>
       <li><a href="/writing">Writing</a></li>
       <li><a href="/talks">Speaking</a></li>
