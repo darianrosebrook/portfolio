@@ -19,23 +19,23 @@
         {% for post in site.categories.books reversed %}
         <div class="grid-item">
           <p><span>{{ forloop.index }}</span></p>
-          <img src="{{site.baseurl}}{{post.index_image}}" alt="">
+          <img loading="lazy" src="{{site.baseurl}}{{post.index_image}}" alt="{{post.title}}">
           <p> <small>Coming in {{post.release}}</small> </p>
           <h4>{{post.title}}</h4>
         </div>
         {% endfor %}
         <div class="grid-item">
-          <p><span>4</span></p><img src="/assets/img/books/tbd.png" alt="">
+          <p><span>4</span></p><img loading="lazy" src="/assets/img/books/tbd.png" alt="To Be Determined">
           <p> <small>TBD</small> </p>
           <h4>TBD</h4>
         </div>
         <div class="grid-item">
-          <p><span>5</span></p><img src="/assets/img/books/tbd.png" alt="">
+          <p><span>5</span></p><img loading="lazy" src="/assets/img/books/tbd.png" alt="To Be Determined">
           <p> <small>TBD</small> </p>
           <h4>TBD</h4>
         </div>
         <div class="grid-item">
-          <p><span>6 </span></p><img src="/assets/img/books/tbd.png" alt="">
+          <p><span>6 </span></p><img loading="lazy" src="/assets/img/books/tbd.png" alt="To Be Determined">
           <p> <small>TBD</small> </p>
           <h4>TBD</h4>
         </div>
