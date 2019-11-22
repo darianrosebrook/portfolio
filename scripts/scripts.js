@@ -212,12 +212,7 @@ $(function() {
             var d = postDate.getDay();  // returns 15
             var y = postDate.getFullYear();  // returns 2012
             var mLong = months[m];
-
-            if (val.images.hidpi) {
-              image = val.images.hidpi;
-            } else {
-              image = val.images.normal;
-            }
+            image = val.images.normal;
             if (val.low_profile === false) {
             $('#shots').prepend(
              '<a class="shot module grid-item"  rel="noreferrer" target="_blank" href="'+ val.html_url +'" title="' + val.title + '">'+

@@ -9,7 +9,7 @@ description: A professional is someone who holds themselves to a high standard A
 specific: professional-positioning
 icon: play-circle
 link_to: https://www.youtube.com/watch?v=-placeholder-
-index_image: https://i.ytimg.com/vi/-placeholder-/maxresdefault.jpg
+index_image: https://i.ytimg.com/vi/-placeholder-/mqdefault.jpg
 location: YouTube
 article_author: Darian Rosebrook
 author_link: https://twitter.com/darianrosebrook
