@@ -1,5 +1,7 @@
 //functions
-
+if ('ontouchstart' in document.documentElement) {
+  document.addEventListener('touchstart', onTouchStart, {passive: true});
+}
 function byId(id) {
   return document.getElementById(id);
 }
