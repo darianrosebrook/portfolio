@@ -139,6 +139,31 @@ header
 
 .video
   grid-area: vd
+  h6
+    display: block
+    margin: 1rem 0
+    &.new
+      color: var(--highlight)
+  h3
+    font-size: 2rem
+  a
+    color: var(--foreground)
+  .grid
+    width: 100%
+    grid-template-columns: 1fr 1fr
+    grid-template-areas: "fv fv" "v2 v3" "v4 v5"
+    img
+      width: 100%
+    .featured-video
+      grid-area: fv
+    .v2
+      grid-area: v2
+    .v3
+      grid-area: v3
+    .v4
+      grid-area: v4
+    .v5
+      grid-area: v5
 
 .podcast
   grid-area: pd
@@ -366,6 +391,11 @@ a.block-link
       img
         float: none
         width: 80%
+
+  .video
+    .grid
+      grid-template-columns: repeat(5, 1fr)
+      grid-template-areas: "v2 fv fv fv v4" "v3 fv fv fv v5"
 
   .podcast
     .grid

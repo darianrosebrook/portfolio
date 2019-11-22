@@ -1,3 +1,34 @@
+<section class="video">
+  <article class="row">
+    <div class="row-header">
+      <h2>Recent Talks</h2>
+    </div>
+    <div class="module">
+      <div class="grid">
+        {% assign i = 0 %}
+        {% for post in site.categories.talk %}
+        {% assign i = i | plus:1 %}
+        {% assign class = '' %}
+        {% if i == 1 %}
+        {% assign class = 'featured-video' %}
+        {% else %}
+        {% assign class = i %}
+        {% endif %}
+        <article class="grid-item {% if i > 1 %}v{% endif %}{{class}}">
+          {% if i > 1 %}<a href="{{post.link_to | replace: '-placeholder-', post.video_id }}" rel="noreferrer" target="_blank"><img src="{{post.index_image | replace: '-placeholder-', {{post.video_id}}" alt="{{post.title}}" loading="lazy" />
+            <h6>{{post.date |  date: "%b %d, %y" }}</h6>
+            <h3>{{post.title}}</h3>
+            <p><small>{{post.description | truncate: 75 }}</small></p>
+          </a>{% else %}
+          {{post.content}}
+          <h6>{{post.date |  date: "%b %d, %y" }}</h6>
+          <h3>{{post.title}}</h3>
+          <p><small>{{post.description | truncate: 200 }}</small></p>
+          {% endif %}
+        </article>
+        {% endfor %}
 
-{% for post in site.categories.articles%}
-{% endfor %}
+      </div>
+    </div>
+  </article>
+</section>
