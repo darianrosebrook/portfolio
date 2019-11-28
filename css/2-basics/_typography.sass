@@ -6,6 +6,8 @@ a, a:link, a:visited, a:hover, a:focus
   color: var(--highlight)
   padding: .3rem
   height: 100%
+  h6
+    color: var(--foreground)
 a:not(.block-link)
   box-shadow: inset 0 -0.00rem 0 var(--highlight)
 a:hover
@@ -13,8 +15,10 @@ a:hover
   box-shadow: inset 0 -15em 0 var(--highlight)
   img
     filter: grayscale(0)
-  h3, h4, h5, p, small, strong, i::before
+  h3, h4, h5, h6, .figcaption_hack, p, small, strong, i::before
     color: var(--background) !important
+  h6, .figcaption_hack
+    background: var(--foreground)
 .block-link
   border-bottom: none
 .regular
