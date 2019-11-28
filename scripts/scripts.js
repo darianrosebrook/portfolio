@@ -220,7 +220,7 @@ $(function() {
              '<a class="shot module grid-item"  rel="noreferrer" target="_blank" href="'+ val.html_url +'" title="' + val.title + '">'+
               '<img loading="lazy" src="'+ image +'" alt="' + val.title + '"/>'+
               '<div>' +
-                   '<p><small>'+ d + ' ' + mLong + ' ' + y +'</small></p>'+
+                   '<h6>'+ d + ' ' + mLong + ' ' + y +'</h6>'+
                    '<h5>'+ val.title + '</h5>'+
                '</div>' +
              '</a>'
