@@ -241,12 +241,13 @@ ul
     li
       margin-bottom: 0.5rem
 nav
+  font-size: 1.5rem
   padding: 2rem 0
-  font-family: sans-serif
   width: 100%
   color: var(--tertiary)
   display: flex
   justify-content: space-between
+  align-items: center
   &.nav a
     color: var(--tertiary)
   ul
@@ -255,6 +256,7 @@ nav
     flex-wrap: wrap
     justify-content: space-between
     width: 90%
+    margin: 0
     li
       width: calc(50% - 2.3rem)
       margin-right: 2rem
@@ -429,7 +431,10 @@ a.block-link
   .block-link
     display: inline-block
   nav
-    align-items: baseline
+    align-items: center
     ul
       flex-direction: row
       margin-left: 1rem
+      margin-bottom: 0
+      li
+        margin-bottom: 0

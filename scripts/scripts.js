@@ -1,7 +1,7 @@
 //functions
-if ('ontouchstart' in document.documentElement) {
-  document.addEventListener('touchstart', onTouchStart, {passive: true});
-}
+// if ('ontouchstart' in document.documentElement) {
+//   document.addEventListener('touchstart', onTouchStart, {passive: true});
+// }
 function byId(id) {
   return document.getElementById(id);
 }
@@ -141,6 +141,22 @@ function toggleClosed() {
     list[i].removeAttribute('open');
   }
 }
+
+// Dark mode / light mode toggle
+var toggle = byId('dark-mode-toggle');
+var body = document.body;
+toggle.appearance = 'toggle';
+if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  body.classList.toggle('flip', toggle.mode === 'dark');
+}
+// Set or remove the `dark` class the first time.
+toggle.mode === 'dark' ? body.classList.add('flip') : body.classList.remove('flip');
+
+// Listen for toggle changes (which includes `prefers-color-scheme` changes)
+// and toggle the `dark` class accordingly.
+toggle.addEventListener('colorschemechange', () => {
+  body.classList.toggle('flip', toggle.mode === 'dark');
+});
 
 // Change background for hashed item to easily see item highlighted
 
