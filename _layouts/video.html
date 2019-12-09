@@ -135,7 +135,7 @@ specific_css: /css/pages.css
         <div><small>{% capture words %}{{ page.content | number_of_words | minus: 250 }}{% endcapture %}{% unless words contains "-" %}{{ words | plus: 250 | divided_by: 200 | append: " minute read" }}{% endunless %}</small></div>
         <h1 class="name"><span>{{page.title}}</span></h1>
         <p>{{page.description}}</p>
-        {% if page.link_to %} <p><a href="{{page.link_to | replace: '-placeholder-', page.video_id}}" target="_blank">Originally posted on Compass of Design <i class="fa fa-arrow-right"><span>Original article link</span></i></a></p>{% endif %}
+        {% if page.link_to %} <p><a href="{{page.link_to | replace: '-placeholder-', page.video_id}}" target="_blank">Originally posted on {{page.location}} <i class="fa fa-arrow-right"><span>Original article link</span></i></a></p>{% endif %}
         <p><img loading="lazy" src="/assets/img/darian-rosebrook-avatar.jpg" alt="Darian Rosebrook's avatar" class="avatar" />&mdash; by <a href="https://twitter.com/darianrosebrook" target="_blank">{{page.article_author}}</a></p>
         <div class="social_share">
           <p><em>If you find this video helpful to you, share it with a friend (:</em></p>
@@ -159,7 +159,7 @@ specific_css: /css/pages.css
   </article>
 </article>
 {{page.content}}
-{% if page.link_to %} <p><a href="{{page.link_to | replace: '-placeholder-', page.video_id}}" target="_blank">Originally posted on Compass of Design on {{page.date | date: "%b %d, %Y"}}</a></p>{% endif %}
+{% if page.link_to %} <p><a href="{{page.link_to | replace: '-placeholder-', page.video_id}}" target="_blank">Originally posted on {{page.location}} on {{page.date | date: "%b %d, %Y"}}</a></p>{% endif %}
 <script>
   if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
     var list = document.getElementsByClassName("twitter-tweet");

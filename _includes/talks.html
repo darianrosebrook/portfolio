@@ -1,12 +1,13 @@
 <section class="video">
   <article class="row">
-    <div class="row-header">
+    <div class="row-head">
       <h2>Recent Talks</h2>
+      <p><a href="{{site.baseurl}}/talks">See more <i class="fa fa-arrow-right"><span>Click to see all talks</span></i></a></p>
     </div>
     <div class="module">
       <div class="grid">
         {% assign i = 0 %}
-        {% for post in site.categories.talk %}
+        {% for post in site.categories.talk limit: 5 %}
         {% assign i = i | plus:1 %}
         {% assign class = '' %}
         {% if i == 1 %}
