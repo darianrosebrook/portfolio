@@ -25,8 +25,9 @@ $line: 1.3rem
   --margin: 1.5rem
   --line: 1.3em
   --gap: 1rem
-  --dark-mode-toggle-icon-size: 14px
-  --dark-mode-toggle-light-icon: url(https://darianrosebrook.com/assets/img/lightbulb-regular.svg)
+  --dark-mode-toggle-icon-size: 24px
+  --dark-mode-toggle-dark-icon: url(/assets/img/lightbulb-light.svg)
+  --dark-mode-toggle-light-icon: url(/assets/img/lightbulb-regular.svg)
 .flip
   --foreground: #d8dbdb
   --background: #282B2B
@@ -37,28 +38,27 @@ $line: 1.3rem
   --highlight-2: #5f935f
   --highlight-3: #000011
   --grey: #3f3f3f
-  --dark-mode-toggle-dark-icon: url(https://darianrosebrook.com/assets/img/lightbulb-regular.svg)
 @media (prefers-color-scheme: dark)
-  // \:root
-  //   --foreground: #d8dbdb
-  //   --background: #282B2B
-  //   --main: #e0e0e0
-  //   --secondary: #484b4b
-  //   --tertiary: #c8c8c8
-  //   --highlight: #e86a6a
-  //   --highlight-2: #5f935f
-  //   --highlight-3: #000011
-  //   --grey: #3f3f3f
+  \:root
+    --foreground: #d8dbdb
+    --background: #282B2B
+    --main: #e0e0e0
+    --secondary: #484b4b
+    --tertiary: #c8c8c8
+    --highlight: #e86a6a
+    --highlight-2: #5f935f
+    --highlight-3: #000011
+    --grey: #3f3f3f
   a:hover
     .logo
       --foreground: --background
-  // .flip
-  //   --foreground: #282B2B
-  //   --background: #fff
-  //   --main: #323149
-  //   --secondary: #f2f2f2
-  //   --tertiary: #6A6F80
-  //   --highlight: #DA2649
-  //   --highlight-2: #5f935f
-  //   --highlight-3: #494768
-  //   --grey: #EAEAEA
+  .flip
+    --foreground: #282B2B
+    --background: #fff
+    --main: #323149
+    --secondary: #f2f2f2
+    --tertiary: #6A6F80
+    --highlight: #DA2649
+    --highlight-2: #5f935f
+    --highlight-3: #494768
+    --grey: #EAEAEA

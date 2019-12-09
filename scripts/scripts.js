@@ -147,14 +147,15 @@ var toggle = byId('dark-mode-toggle');
 var body = document.body;
 toggle.appearance = 'toggle';
 if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-  body.classList.toggle('flip', toggle.mode === 'dark');
+  toggle.mode = 'dark';
+  console.log(toggle.mode);
 }
 // Set or remove the `dark` class the first time.
-toggle.mode === 'dark' ? body.classList.add('flip') : body.classList.remove('flip');
+// toggle.mode === 'dark' ? body.classList.add('flip') : body.classList.remove('flip');
 
 // Listen for toggle changes (which includes `prefers-color-scheme` changes)
 // and toggle the `dark` class accordingly.
-toggle.addEventListener('colorschemechange', () => {
+toggle.addEventListener("click", () => {
   body.classList.toggle('flip', toggle.mode === 'dark');
 });
 
