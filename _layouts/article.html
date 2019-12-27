@@ -142,7 +142,7 @@ specific_css: /css/pages.css
           <p>
             <span>To share, choose one of these: </span>
             <span><a
-                href="https://twitter.com/share?url={% if page.link_to %}{{page.link_to}}{% else %}{{base.url}}{{page.url}}{% endif %}&amp;text={{page.title | replace: ' ', '%20' }}%20Via:{% if page.link_to %}%20%40compassofdesign{% else %}%20%40darianrosebrook{% endif %}"
+                href="https://twitter.com/share?url={% if page.link_to %}{{page.link_to}}{% else %}https://darianrosebrook.com{{page.url}}{% endif %}&amp;text={{page.title | replace: ' ', '%20' }}%20Via:{% if page.link_to %}%20%40compassofdesign{% else %}%20%40darianrosebrook{% endif %}"
                 target="_blank"><i class="fab fa-twitter"><span>Share this article on Twitter </span></i></a></span>
             <span><a href="http://www.facebook.com/sharer.php?u={% if page.link_to %}{{page.link_to}}{% else %}https://darianrosebrook.com{{page.url}}{% endif %} " target="_blank"><i class="fab fa-facebook"><span>Share this article on Facebook
                   </span></i></a></span>
