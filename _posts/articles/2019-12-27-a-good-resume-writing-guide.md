@@ -28,7 +28,7 @@ I want to face a challenge to learn in the roles that I take part in, and not ju
 I've been very blessed to have had access to that kind of role here at Microsoft this year on this contract. Funnily enough, I was hired without a job description. I was never given one the entire time I've worked here. Inside the teams that I've been able to work with, I've received a massive amount of responsibility with the freedom to define my own role.
 
 ## Here is what my job description would say if I wrote it for what I'm doing now as a designer
-_These are things that I do in my role with Microsoft as a Product Designer 3_
+_These are things that I do in my role with Microsoft as a Product Designer 3 with a little dash of what other things I've done as a finishing garnish :P_
 
 ### About the role
 As a Senior Product Designer, you would be a voice at the table between Product Managers, Engineering, and Design. You will attend meetings centered around product planning and discuss high-level user experience principles and considerations to help our company start projects with designing ideal experiences.
