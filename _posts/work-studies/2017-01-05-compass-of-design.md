@@ -7,7 +7,7 @@ category:
 type: case-study
 permalink: work/:title
 
-title: Senior UX Designer at Compass of Design
+title: Senior User Experience Designer at Compass of Design
 subtitle:  Design systems, Product Design, Brand Experience Design
 description: My role with Compass of Design is maintaining the total user experience of our web application and unifying the brand experience from a visual perspective. The project also requires my skills in responsive web design to map our existing interface into a custom iOS app. These detailed mockups, standard guides, and user experience maps are to help maintain a consistent feel coming from the web version to mobile.
 
