@@ -28,7 +28,7 @@ exclude: 'no'
         {% assign class = i %}
         {% endif %}
         <article class="grid-item {% if i > 1 %}v{% endif %}{{class}}">
-          {% if i > 1 %}<a href="{{post.url }}" rel="noreferrer"><img src="{{post.index_image | replace: '-placeholder-', {{post.video_id}}" alt="{{post.title}}" loading="lazy" />
+          {% if i > 1 %}<a href="{{ post.url }}" rel="noreferrer"><img src="{{ post.index_image | replace: '-placeholder-', post.video_id}}" alt="{{post.title}}" loading="lazy" />
             <h6>{{post.date |  date: "%b %d, %y" }}</h6>
             <h3>{{post.title}}</h3>
             <p><small>{{post.description | truncate: 75 }}</small></p>
