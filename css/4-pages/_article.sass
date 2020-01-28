@@ -35,6 +35,8 @@
     grid-column: 1 /span 5
   ul
     list-style-type: disc
+  li ~ li
+    margin-top: 1rem
   .avatar
     display: inline-block
     margin-bottom: -.8rem
@@ -57,14 +59,14 @@
   .main-content.article
     grid-template-areas: unset
     p, ul, ol, .twitter-tweet, iframe
-      grid-column: 3 / span 3
+      grid-column: 2 / span 3
     h1, h2, h3, h4, h5, h6
-      grid-column: 3 / span 3
+      grid-column: 2/ span 3
     hr
-      grid-column: 4 / span 1
-    .footer, #contact, header, .hero, hr
+      grid-column: 3 / span 1
+    .footer, #contact, header, .hero
       grid-area: unset
-      grid-column: 2 / span 6
+      grid-column: 1/ span 6
       width: 100%
     iframe
       margin: 0 auto
