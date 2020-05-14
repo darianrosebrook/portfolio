@@ -218,22 +218,22 @@ $(function() {
             var mLong = months[m];
             image = val.images.normal;
             if (val.low_profile === false) {
-            $('#shots').prepend(
-             '<a class="shot module grid-item"  rel="noreferrer" target="_blank" href="'+ val.html_url +'" title="' + val.title + '">'+
-              '<img loading="lazy" src="'+ image +'" alt="' + val.title + '"/>'+
-              '<div>' +
-                   '<h6>'+ d + ' ' + mLong + ' ' + y +'</h6>'+
-                   '<h5>'+ val.title + '</h5>'+
-               '</div>' +
-             '</a>'
-            )
+              $('#shots').prepend(
+               '<a class="shot module grid-item"  rel="noreferrer" target="_blank" href="'+ val.html_url +'" title="' + val.title + '">'+
+                '<img loading="lazy" src="'+ image +'" alt="' + val.teaser + '"/>'+
+                '<div>' +
+                     '<h6>'+ d + ' ' + mLong + ' ' + y +'</h6>'+
+                     '<h5>'+ val.title + '</h5>'+
+                 '</div>' +
+               '</a>'
+              )
 
-            $('.truncate').each(function(index, value) {
-               $(this).html($(this).html().substring(0, 400));
-              // number of characters
-            })
+              $('.truncate').each(function(index, value) {
+                 $(this).html($(this).html().substring(0, 400));
+                // number of characters
+              })
             }
-            return i < 9
+            return i < 12
           })
         }
         else {
