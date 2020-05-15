@@ -41,7 +41,7 @@ sitemap:
   exclude: 'no'
 ---
 ## This work can be seen in more detail in my design portfolio in Notion
-[See the case study in Notion >](https://www.notion.so/somagnetic/Edge-DevTools-82419d079263406a8723f4c43e5ef6c9)
+<a href="https://www.notion.so/somagnetic/Edge-DevTools-82419d079263406a8723f4c43e5ef6c9"> See the case study in Notion <i class="fal fa-chevron-right icon"></i></a>
 
 On January 15, 2020, Microsoft launched the new Edge browser built on Chromium. Prior to this launch, I had been working for nearly 9 months with multiple teams in this project helping with product design, user experience, storyboarding, prototyping, and setting up collaboration processes for the design org to scale within Edge and the DevTools project.
 
