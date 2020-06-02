@@ -24,7 +24,7 @@ skills-used:
 
 position: Product Designer 3
 startDate: 2019-05-15
-endDate: Present
+endDate: 2020-02-04
 
 company: Microsoft
 team-size: 50
