@@ -82,7 +82,7 @@ Everything below is a small portion of work that I created to supply the team wi
 ## Redesigning the Edge Design team's product design process
 This was a deep dive into the product design process that the design team at Edge uses. While the work here isn't visible publicly, it helped map and improve the process that the team and I used over the integration of the DevTools Engineers and the User experience teams.
 ![](/assets/img/work/ms/18.png)
-![](/assets/img/work/ms/19.png)
+![](/assets/img/work/ms/19.jpg)
 ![](/assets/img/work/ms/20.png)
 ![](/assets/img/work/ms/21.png)
 ![](/assets/img/work/ms/22.png)
