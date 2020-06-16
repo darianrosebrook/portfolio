@@ -2,7 +2,7 @@
   grid-template-areas: unset
   grid-template-columns: repeat(5, 1fr)
   grid-gap: 1.5rem
-  p, ul, h1, h2, h3, h4, h5, h6, ol, hr, iframe, .twitter-tweet
+  p, ul, h1, h2, h3, h4, h5, h6, ol, hr, iframe, .twitter-tweet, video
     text-transform: none
     grid-column: 1 / span 5
     margin: 0
@@ -17,6 +17,11 @@
     font-size: 1.8rem
   h2
     font-size: 2rem
+  video
+    width: 80%
+    display: block
+    margin: 0 auto
+    grid-column: 1 / span 5
   p
     font-size: 1.4rem
     img
@@ -58,7 +63,7 @@
 @media (min-width: 1000px)
   .main-content.article
     grid-template-areas: unset
-    p, ul, ol, .twitter-tweet, iframe
+    p, ul, ol, .twitter-tweet, iframe, video
       grid-column: 2 / span 3
     h1, h2, h3, h4, h5, h6
       grid-column: 2/ span 3

@@ -1,7 +1,7 @@
 .main-content.case-study
   grid-template-areas: unset
   grid-gap: 1.5rem
-  p, ul, h1, h2, h3, h4, h5, h6, ol, hr, iframe
+  p, ul, h1, h2, h3, h4, h5, h6, ol, hr, iframe, video
     text-transform: none
     grid-column: 1 / span 5
     margin: 0
@@ -12,6 +12,10 @@
     margin-top: 1em
     font-family: "Inter Var", sans-serif
 
+  video
+    width: 80%
+    display: block
+    margin: 0 auto
   h3
     font-size: 1.8rem
   h2
@@ -57,7 +61,7 @@
 @media (min-width: 1000px)
   .main-content.case-study
     grid-template-areas: unset
-    p, ul, ol, .twitter-tweet, iframe
+    p, ul, ol, .twitter-tweet, iframe, video
       grid-column: 3 / span 3
     h1, h2, h3, h4, h5, h6
       grid-column: 3 / span 2
@@ -67,6 +71,9 @@
       width: 100%
     iframe
       margin: 0 auto
+    video
+      width: 100%
+      max-width: 750px
     p
       img
         width: 100%
