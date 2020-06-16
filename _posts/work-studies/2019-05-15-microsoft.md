@@ -73,6 +73,16 @@ Everything below is a small portion of work that I created to supply the team wi
 ![](/assets/img/work/ms/2.png)
 ![](/assets/img/work/ms/3.png)
 ![](/assets/img/work/ms/4.png)
+### Early interaction work
+<video controls src="/assets/vids/Untitled-1.mp4">
+    Sorry, your browser doesn't support embedded videos.
+</video>
+<video controls src="/assets/vids/Drag_and_Drop_example_with_links.mov">
+    Sorry, your browser doesn't support embedded videos.
+</video>
+<video controls src="/assets/vids/screengrab.mov">
+    Sorry, your browser doesn't support embedded videos.
+</video>
 ### Early user interface work
 ![](/assets/img/work/ms/5.png)
 ![](/assets/img/work/ms/7.png)
