@@ -1,5 +1,7 @@
 //functions
-
+// if ('ontouchstart' in document.documentElement) {
+//   document.addEventListener('touchstart', onTouchStart, {passive: true});
+// }
 function byId(id) {
   return document.getElementById(id);
 }
@@ -118,12 +120,41 @@ function checked() {
     )
   }
 }
+
+// Expand or collapse details
+if (byClass('updateDetails')) {
+  var toggle = byId('toggle');
+  var list= document.querySelectorAll("details");
+
+
+}
+function toggleOpen() {
+  for (var i = 0; i < list.length; i++) {
+    console.log(i);
+    list[i].setAttribute('open', 'true');
+  }
+}
+
+function toggleClosed() {
+  for (var i = 0; i < list.length; i++) {
+    console.log(i);
+    list[i].removeAttribute('open');
+  }
+}
+
+
+
 // Change background for hashed item to easily see item highlighted
 
 if(window.location.hash) {
      var hash = window.location.hash.substring(1); //Puts hash in variable, and removes the # character
+     var hashDetails = hash + "-details";
      var hashedElem = byId(hash);
-     hashedElem.style.backgroundColor = "rgba(83, 136, 160, 0.5)";
+     if (hashedElem) {
+       var hashedDetailElem = byId(hashDetails)
+       hashedElem.style.backgroundColor = "var(--grey)";
+       hashedDetailElem.setAttribute('open', 'true');
+     }
      // hash found
  } else {
      // No hash found
@@ -185,29 +216,24 @@ $(function() {
             var d = postDate.getDay();  // returns 15
             var y = postDate.getFullYear();  // returns 2012
             var mLong = months[m];
-
-            if (val.images.hidpi) {
-              image = val.images.hidpi;
-            } else {
-              image = val.images.normal;
-            }
+            image = val.images.normal;
             if (val.low_profile === false) {
-            $('#shots').prepend(
-             '<a class="shot module grid-item"  rel="noreferrer" target="_blank" href="'+ val.html_url +'" title="' + val.title + '">'+
-              '<img loading="lazy" src="'+ image +'" alt="' + val.title + '"/>'+
-              '<div>' +
-                   '<p><small>'+ d + ' ' + mLong + ' ' + y +'</small></p>'+
-                   '<h5>'+ val.title + '</h5>'+
-               '</div>' +
-             '</a>'
-            )
+              $('#shots').prepend(
+               '<a class="shot module grid-item"  rel="noreferrer" target="_blank" href="'+ val.html_url +'" title="' + val.title + '">'+
+                '<img loading="lazy" src="'+ image +'" alt="' + val.teaser + '"/>'+
+                '<div>' +
+                     '<h6>'+ d + ' ' + mLong + ' ' + y +'</h6>'+
+                     '<h5>'+ val.title + '</h5>'+
+                 '</div>' +
+               '</a>'
+              )
 
-            $('.truncate').each(function(index, value) {
-               $(this).html($(this).html().substring(0, 400));
-              // number of characters
-            })
+              $('.truncate').each(function(index, value) {
+                 $(this).html($(this).html().substring(0, 400));
+                // number of characters
+              })
             }
-            return i < 10
+            return i < 12
           })
         }
         else {

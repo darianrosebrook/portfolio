@@ -1,8 +1,11 @@
 ---
 
+layout: article 
 categories: [articles, post]
 permalink: archive/:title
 type: article
+icon: newspaper
+
 title: About the Compass of Design
 description: Sometimes we forget what it was like to start out in the design industry. For some, it’s a rude awakening when the things we were taught in college aren’t how it actually is out there. For others, it could be heading into the void when teaching yourself all the aspects of a new career choice. A lot of us are thrown into the ecosystem with no idea how the design world
 link_to: https://read.compassofdesign.com/the-compass-of-design-community-fdab714328bd

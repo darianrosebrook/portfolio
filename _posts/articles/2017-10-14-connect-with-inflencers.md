@@ -1,8 +1,9 @@
 ---
-
+layout: article
 categories: [articles, post]
 permalink: archive/:title
 type: article
+icon: newspaper
 title: Networking as a designer — Stop trying to shake trees.
 description: Let’s talk about your heroes. Boy, wouldn’t it be nice to be noticed by big name people every once in a while? You follow them and see their name all over on the internet getting interviews and sharing awesome design work. It’s like there’s some type of inner circle where every big name person on the internet knows each other.
 link_to: https://cmps.co/design-influencers
@@ -10,12 +11,6 @@ index_image: https://cdn-images-1.medium.com/max/1200/1*yTxS-zdVbLge9UKyCH1YDQ.j
 article_author: Darian Rosebrook
 author_link: https://twitter.com/darianrosebrook
 ---
-![](https://cdn-images-1.medium.com/max/1000/1*yTxS-zdVbLge9UKyCH1YDQ.jpeg)
-
-# Networking as a designer
-
-## Stop trying to shake trees.
-
 ### Let’s talk about your heroes
 
 Boy, wouldn’t it be nice to be noticed by big name people every once in a while?
@@ -192,47 +187,3 @@ and effort. From there the circle closes and you’re able to spend more time
 around the people who were previously out of reach from you.
 
 **You’ll be shaking trees on your own soon enough**
-
-*****
-
-![](https://cdn-images-1.medium.com/max/800/1*mo7_gcoDhIhJHCOLPxMfLg.png)
-
-### Still looking to connect with great designers?
-
-Come join other like-minded designers who are working at becoming masters of
-their craft.
-
-Every week we go over ways to market yourself better by improving your design
-skills, your personal brand, and design professionalism (and maybe other topics)
-to further develop as a great designer.
-
-Tap either picture to get started investing in your design skills (:
-
-![](https://cdn-images-1.medium.com/max/600/1*Z4keeZyradapOqSji4gV0g.jpeg)
-
-![](https://cdn-images-1.medium.com/max/600/1*5qCNGOpbIMY9ms1mE1bQhw.jpeg)
-<span class="figcaption_hack">Get started above by clicking a picture.</span>
-
-* [Social Media](https://read.compassofdesign.com/tagged/social-media?source=post)
-* [Marketing](https://read.compassofdesign.com/tagged/marketing?source=post)
-* [Design](https://read.compassofdesign.com/tagged/design?source=post)
-* [Design
-Thinking](https://read.compassofdesign.com/tagged/design-thinking?source=post)
-* [Social Media
-Marketing](https://read.compassofdesign.com/tagged/social-media-marketing?source=post)
-
-Clapping shows how much you appreciated Darian Rosebrook’s story.
-
-### [Darian Rosebrook](https://read.compassofdesign.com/@darianrosebrook)
-
-Brand Identity Designer for  [@itssomagnetic](http://twitter.com/itssomagnetic),
-running a design community at
-[@compassofdesign](http://twitter.com/compassofdesign). I write to help others
-grow their skills as designers.
-
-### [Compass of Design](https://read.compassofdesign.com/?source=footer_card)
-
-Some of the best design articles written by members of the Compass of Design
-Community to help you strengthen your design skills, business/freelance ethics,
-and design professionalism. Join us in the community or get on the newsletter to
-get access to exclusive content.

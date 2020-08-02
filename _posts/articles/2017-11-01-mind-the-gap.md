@@ -1,8 +1,11 @@
 ---
 
+layout: article
 categories: [articles, post]
 permalink: archive/:title
 type: article
+icon: newspaper
+
 title: Please mind the gap. The gap of where you are now to where you want to be
 description: Have you felt recently that there’s a gap between where you are at now and where you want to be? I tend to have this feeling a lot while I’m working on my businesses for So Magnetic and Compass of Design. I see a huge gap between where I want everything to be and where it’s at now.
 link_to: https://read.compassofdesign.com/please-mind-the-gap-54803d2b3b9c
@@ -10,11 +13,6 @@ index_image: https://cdn-images-1.medium.com/max/1000/1*VbdLlu3lxq4AMTm6i-9p9A.j
 article_author: Darian Rosebrook
 author_link: https://twitter.com/darianrosebrook
 ---
-![](https://cdn-images-1.medium.com/max/1000/1*VbdLlu3lxq4AMTm6i-9p9A.jpeg)
-
-# Please mind the gap
-
-## The gap of where you are now to where you want to be
 
 Have you felt recently that there’s a gap between **where you are at now **and
 **where you want to be**?
@@ -164,44 +162,3 @@ take a picture.
 **If you’re up for sharing what you’ve found out there, reply here or tag me on
 **[Twitter ](http://twitter.com/compassofdesign)**or
 **[Instagram!](http://instagram.com/compassofdesign)
-
-*****
-
-![](https://cdn-images-1.medium.com/max/800/1*mo7_gcoDhIhJHCOLPxMfLg.png)
-
-### Still trying to fill the gap?
-
-Come join other like-minded designers who are working at becoming masters of
-their craft.
-
-Every week we go over ways to market yourself better by improving your design
-skills, your personal brand, and other topics to further develop as a great
-designer.
-
-Tap either picture to get started investing in your design skills (:
-
-<span class="figcaption_hack">Tap on either picture to get started at compassofdesign.com</span>
-
-* [Design](https://read.compassofdesign.com/tagged/design?source=post)
-* [Design
-Thinking](https://read.compassofdesign.com/tagged/design-thinking?source=post)
-* [Inspiration](https://read.compassofdesign.com/tagged/inspiration?source=post)
-* [Self
-Improvement](https://read.compassofdesign.com/tagged/self-improvement?source=post)
-* [UX](https://read.compassofdesign.com/tagged/ux?source=post)
-
-By clapping more or less, you can signal to us which stories really stand out.
-
-### [Darian Rosebrook](https://read.compassofdesign.com/@darianrosebrook)
-
-Brand Identity Designer for  [@itssomagnetic](http://twitter.com/itssomagnetic),
-running a design community at
-[@compassofdesign](http://twitter.com/compassofdesign). I write to help others
-grow their skills as designers.
-
-### [Compass of Design](https://read.compassofdesign.com/?source=footer_card)
-
-Some of the best design articles written by members of the Compass of Design
-Community to help you strengthen your design skills, business/freelance ethics,
-and design professionalism. Join us in the community or get on the newsletter to
-get access to exclusive content.

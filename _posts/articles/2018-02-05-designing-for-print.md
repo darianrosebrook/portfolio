@@ -1,8 +1,11 @@
 ---
 
+layout: article
 categories: [articles, post]
 permalink: archive/:title
 type: article
+icon: newspaper
+
 title: Print Design Tips for the Digital age
 description: You control the cost for printing through your designs, so having as much knowledge about it can help you and the businesses you design for control budget for years of ongoing work.
 link_to: https://read.compassofdesign.com/print-design-tips-for-the-digital-age-75461d12912f
@@ -11,9 +14,6 @@ article_author: Darian Rosebrook
 author_link: https://twitter.com/darianrosebrook
 author_img:
 ---
-![](https://cdn-images-1.medium.com/max/1000/0*YKhIRiQiwFwO9ZlW.jpg)
-
-# Print design tips for the digital age
 
 ## How to avoid some common pitfalls that we might otherwise miss
 
@@ -236,42 +236,3 @@ If you feel like you might need more info about any one of these areas, let me
 know and I can expand on these topics.
 
 #### When in doubt, call your local print company!
-
-*****
-
-![](https://cdn-images-1.medium.com/max/800/1*mo7_gcoDhIhJHCOLPxMfLg.png)
-
-### Still trying to wrap your head around design principles like this?
-
-Come join other like-minded designers who are working at becoming masters of
-their craft.
-
-Every week we go over ways to market yourself better by improving your design
-skills, your personal brand, and other topics to further develop as a great
-designer.
-
-Tap either picture to get started investing in your design skills (:
-
-<span class="figcaption_hack">Tap on either picture to get started at compassofdesign.com</span>
-
-* [Design](https://read.compassofdesign.com/tagged/design?source=post)
-* [Advertising](https://read.compassofdesign.com/tagged/advertising?source=post)
-* [Marketing](https://read.compassofdesign.com/tagged/marketing?source=post)
-* [Branding](https://read.compassofdesign.com/tagged/branding?source=post)
-* [Design
-Thinking](https://read.compassofdesign.com/tagged/design-thinking?source=post)
-
-By clapping more or less, you can signal to us which stories really stand out.
-
-### [Darian Rosebrook](https://read.compassofdesign.com/@darianrosebrook)
-
-Brand Identity Designer for [@itssomagnetic](http://twitter.com/itssomagnetic),
-running a design community at
-[@compassofdesign](http://twitter.com/compassofdesign). I write to help others
-grow their skills as designers.
-
-### [Compass of Design](https://read.compassofdesign.com/?source=footer_card)
-
-Some of the best design articles written by members of the Compass of Design
-Community to help you strengthen your skills in design, business/freelance, and
-marketing yourself.

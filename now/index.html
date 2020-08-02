@@ -1,5 +1,6 @@
 ---
 layout: default
+type: now
 title: What am I up to now? | Darian Rosebrook
 description: If you're curious about what I'm currently doing or what I've just recently done, check out this page. Kind of a log of sorts that shows what I've been up to recently.
 img:
@@ -9,81 +10,116 @@ sitemap:
   changefreq: 'weekly'
   exclude: 'no'
 ---
-<section class="container">
-<article class="row">
-  <h4><a href="/"><i class="fa fa-arrow-left"><span>Main menu,</span></i> Head Back</a></h4>
-</article>
-</section>
-<header id="hero" class="container">
+<section class="container back-button">
   <article class="row">
-    <div class="module">
-    <h1>About</h1>
-        <h5 class="position">Hi, I'm a brand identity and user experience designer</h5>
-        <p>I run <a href="https://somagnetic.com" rel="noreferrer" target="_blank">So Magnetic</a>, an agile design agency which helps businesses by <strong>using design strategy to build a brand's identity design.</strong> We focus on helping them <strong>increase customer engagement and revenue.</strong></p>
-        <p>I also run the community group for <a href="https://compassofdesign.com" rel="noreferrer" target="_blank">Compass of Design.</a>This is an online design community focused on equipping people with skills needed to become better professional designers. </p>
-
-    </div>
-    <div class="module">
-      <img loading="lazy" src="/assets/img/darian-now.png" alt="Darian Rosebrook, a designer who focuses on websites and branding projects for companies." />
-    </div>
-  </article>
-
-</header>
-<section class="container">
-  <article class="row">
-    <div class="module">
-
-    <p class="desktop">I have two projects I am currently working on:</p>
-    <ul>
-      <li><strong><a href="https://compassofdesign.com">Compass of Design</a></strong> &mdash; a designer community</li>
-      <li><strong><a href="https://somagnetic.com">So Magnetic</a></strong> &mdash; a branding design agency</li>
-    </ul><br />
-    <p>On top of that, I love teaching what I know as a designer to help others who are trying to improve their skills.</p>
-    <ul>
-      <li>I do private mentorship and help designers within the <a href="https://compassofdesign.com" rel="noreferrer" target="_blank">Compass of Design Community</a>.</li>
-      <li>I write in depth design guides and articles for the <a href="https://read.compassofdesign.com/">Compass of Design's design publication</a>.</li>
-      <li>I <a href="https://www.youtube.com/channel/UCTin1d0uPVufY4xwitzkyFQ">make design videos on YouTube</a> to help designers learn more about design.</li>
-      <li>I also run a <a href="http://podcast.compassofdesign.com/">podcast for Compass of Design</a>, teaching things I've learned along the way with managing client work as a freelancer and small agency.</li>
-    </ul><br /><br />
-
+    <div class="row-head">
+      <h2 ><span>What I'm working on now:</span></h2>
+      <h4><a href="/"><i class="fa fa-arrow-left icon"><span>Main menu,</span></i> Head Back</a></h4>
     </div>
   </article>
 </section>
-<section class="container">
-  <article class="row">
-    <h2>What am I up to nowadays?</h2>
-    <div class="module">
-      <p>What started as a side hustle, became a full time passion in 2015. I had been freelancing as a web designer to stay connected to a creative industry when I decided to focus on design as a full time pursuit. In mid 2016, I had joined a small team of developers as their lead designer based on my experience with UX Design and UI Design. When the work started to slow down with that team, in January 2017, I decided to focus full time on client work again. This time, by handling larger design clients and projects, where I could also hire and manage other designers to work in tandem to complete these projects.</p>
-    </div>
-    <div class="module">
-      <p>My two areas of expertise run along side each other. As a designer, I am adept at handling both the user experience of digital products and the brand experience of a product's design ecosystem (product, packaging, logo design, etc.) Both of these thrive from the same research, and both have the same path of exploration. As a designer, I couldn't find a better way to marry the skills I learned as a UX designer and my passion for creating meaningful brand experiences both on and off screens.</p>
-    </div>
-    <br /><br />
-    <h6>Do you want just my updates or the articles?</h6>
-    <label>Filter them by type</label>
-    <p><select class="filter" name="filter" id="filter">
-      <option value="">Filter All</option>
-      <option value="article">Articles</option>
-      <option value="update">Updates</option>
+
+{% include tweets.html %}
+<section class="container page-content grid">
+  <section class="container hero update-hero">
+    <article class="row">
+        <figure class="f-l cf" >
+
+          <img loading="lazy" src="{{site.baseurl}}/assets/img/overtone-cover.png" alt="Graphic novel cover for Overtone: Issue 000" />
+          <figcaption><h6>Overtone: Issue - 000 </h6> </figcaption>
+          <p><a href="https://instagram.com/overtonecomic">See more <i class="fa fa-arrow-right icon"><span>Click to see more</span></i></a></p>
+        </figure>
+        <div class="grid by-2">
+          <div class="module">
+            <h6>Graphic Novel</h6>
+            <h1 class="name"><span>Overtone Comic</span> </h1>
+            <p>While working as a full time Product Designer for Microsoft, I wanted to use some of my free time to continue building the story of Overtone, a post-earth era digital comic that follows the life of ex-cop [name]. I'm currently working on creating the home of the novel as well, trying to find a cadence of release that would be feasible. </p>
+
+            <p>My thought is to release this chapter by chapter until the first volume is complete. </p>
+          </div>
+          <div class="module novel-list">
+
+        {% for post in site.categories.novel  reversed limit:4  %}
+              <div data-type="{{post.type}}" class="grid-item list-item update linked-block" id="{{post.specific}}">
+                <p><i class="far fa-{{post.icon}}"></i></p>
+                <p><small><strong>{{post.date | date_to_string }}</strong></small></p>
+                <h4>{{post.title}}</h4>
+                <div class='content'>{{post.content}}</div>
+              </div>
+          {% endfor %}
+          </div>
+        </div>
+
+    </article>
 
 
-    </select></p>
-    <div class="grid">
-    <div data-type="update" class="grid-item list-item" id="compass-community-site">
-      <p><small>12 Nov 2017 - Present</small></p>
-      <hr>
-      <h4>Building the Compass of Design Community app</h4>
-      <p >This project has been a huge step in what I'm able to achieve as the sole person on a project. This product utilizes my knowledge in UX Design, UI Design, and Back End Development by wrapping all of those together into one product. The Compass of Design Membership Site. This platform is going to be a powerhouse in helping designers get actionable feedback on questions they have and designs they've done. So far, there hasn't been a site that effectively does this without it becoming a popularity contest. Our goal here is to change the way we do design feedback!</p>
-    </div>
-{% for post in site.categories.post%}
-      <div data-type="{{post.type}}" class="grid-item list-item" id="{{post.specific}}">
-        <p><small>{{post.date | date_to_string }}</small></p>
-        <hr>
-        <h4>{{post.title}}</h4>
-        <h6>{{post.type | capitalize}}</h6>
-        <div>{% if post.type contains "update" %}{{post.content}}</div>{% else %}{{post.description}}</div><p><a href="{{post.link_to}}" rel="noreferrer" target="_blank">See the article</a></p>{% endif %}
+  </section>
+  <section class="container projects">
+    <article class="row">
+      <h2>What projects do I have on the table?</h2>
+      <div class="module">
+
+      <p class="desktop">I try to keep my hands on a few projects at a time. This keeps me moving the needle forward on things should I have an opportunity to continue working on something with any downtime to spare.</p>
+      <ul>
+        <li><a href="https://compassofdesign.com">Compass of Design</a> &mdash; a designer community</li>
+        <li><a href="https://somagnetic.com">So Magnetic</a> &mdash; a branding design agency</li>
+      </ul><br />
+      <p>On top of that, I love teaching what I know as a designer to help others who are trying to improve their skills.</p>
+      <ul>
+        <li>I do private mentorship and help designers within the <a href="https://compassofdesign.com" rel="noreferrer" target="_blank">Compass of Design Community</a>.</li>
+        <li>I write in depth design guides and articles for the <a href="https://read.compassofdesign.com/">Compass of Design's design publication</a>.</li>
+        <li>I <a href="https://www.youtube.com/channel/UCTin1d0uPVufY4xwitzkyFQ">make design videos on YouTube</a> to help designers learn more about design.</li>
+        <li>I also run a <a href="http://podcast.compassofdesign.com/">podcast for Compass of Design</a>, teaching things I've learned along the way with managing client work as a freelancer and small agency.</li>
+      </ul><br /><br />
+
       </div>
-  {% endfor %}
-</div>
-</article>
+    </article>
+  </section>
+  <section class="container history">
+    <article class="row">
+      <h2>Any other things?</h2>
+      <div class="module">
+        <p>I'm currently podcasting with a few friends and my wife. Check that out at <a href="https://responsiblyirresponsible.transistor.fm">our Responsibly Irresponsible site</a></p>
+      </div>
+      <div class="module">
+        <p>Working on more updates here too</p>
+      </div>
+
+    </article>
+  </section>
+
+  <section class="container updates">
+    <article class="row">
+      <div class="row-head">
+        <h2>Updates</h2>
+        <p> <button type="button" class="button secondary" name="button" onclick="toggleOpen()">Expand All</button> | <button type="button" class="button secondary" name="button" onclick="toggleClosed()">Collapse All</button> </p>
+      </div>
+      <div class="grid">
+      <div data-type="update" class="grid-item list-item update linked-block" id="compass-community-site">
+        <p><i class="far fa-drafting-compass"></i></p>
+        <p><small><strong>12 Nov 2017 - Present</strong></small></p>
+        <h4>Building the Compass of Design Community app</h4>
+        <br />
+        <details id="compass-community-site-details">
+          <summary>Expand Details</summary>
+          <p >This project has been a huge step in what I'm able to achieve as the sole person on a project. This product utilizes my knowledge in UX Design, UI Design, and Back End Development by wrapping all of those together into one product. The Compass of Design Membership Site. This platform is going to be a powerhouse in helping designers get actionable feedback on questions they have and designs they've done. So far, there hasn't been a site that effectively does this without it becoming a popularity contest. Our goal here is to change the way we do design feedback!</p>
+        </details>
+      </div>
+  {% for post in site.categories.updates %}
+        <div data-type="{{post.type}}" class="grid-item list-item update linked-block" id="{{post.specific}}">
+          <p><i class="far fa-{{post.icon}}"></i></p>
+          <p><small><strong>{{post.date | date_to_string }}</strong></small></p>
+          <h4>{{post.title}}</h4>
+          <br />
+          <details id="{{post.specific}}-details">
+            <summary>Expand Details</summary>
+          <p>{{post.content}}</p>
+        </details>
+        </div>
+    {% endfor %}
+
+      </div>
+  </article>
+  </section>
+
 </section>
