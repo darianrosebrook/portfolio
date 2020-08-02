@@ -1,8 +1,11 @@
 ---
 
+layout: article
 categories: [articles, post]
 permalink: archive/:title
 type: article
+icon: newspaper
+
 title: The secret heroes of UX Design
 description: The width that this design discipline can span is insane. Throughout the rise of UX Design, there have been very specialized fields pop up within the discipline. UX has also cannibalized the Data Visualization, Information architecture, and User Interface design fields along with things like wayfinding and architecture.
 link_to: https://read.compassofdesign.com/the-secret-heroes-of-ux-design-56014d087dee
@@ -11,9 +14,6 @@ article_author: Darian Rosebrook
 author_link: https://twitter.com/darianrosebrook
 author_img:
 ---
-![](https://cdn-images-1.medium.com/max/1000/1*4x3kgk2I-F7G_B9vdo2Ukw.jpeg)
-
-# The secret heroes of UX Design ✅🆗
 
 I am a huge advocate of [User Experience (UX)
 design](https://medium.theuxblog.com/the-crazy-world-of-ux-design-9239893a2c5d?).
@@ -185,43 +185,3 @@ Hope this helps you with finding ways to improve the overall experience someone
 has when accessing your designs.
 
 > What has been the best examples you’ve seen of Micro Copy?
-
-*****
-
-![](https://cdn-images-1.medium.com/max/800/1*mo7_gcoDhIhJHCOLPxMfLg.png)
-
-### Looking forward to learning more design principles in 2018? So are we!
-
-Come join other like-minded designers who are working at becoming masters of
-their craft.
-
-Every week we go over ways to market yourself better by improving your design
-skills, your personal brand, and other topics to further develop as a great
-designer.
-
-Tap either picture to get started investing in your design skills (:
-
-<span class="figcaption_hack">Tap on either picture to get started at compassofdesign.com</span>
-
-* [UX](https://read.compassofdesign.com/tagged/ux?source=post)
-* [Design](https://read.compassofdesign.com/tagged/design?source=post)
-* [Design
-Thinking](https://read.compassofdesign.com/tagged/design-thinking?source=post)
-* [Web
-Development](https://read.compassofdesign.com/tagged/web-development?source=post)
-* [Web Design](https://read.compassofdesign.com/tagged/web-design?source=post)
-
-By clapping more or less, you can signal to us which stories really stand out.
-
-### [Darian Rosebrook](https://read.compassofdesign.com/@darianrosebrook)
-
-Brand Identity Designer for [@itssomagnetic](http://twitter.com/itssomagnetic),
-running a design community at
-[@compassofdesign](http://twitter.com/compassofdesign). I write to help others
-grow their skills as designers.
-
-### [Compass of Design](https://read.compassofdesign.com/?source=footer_card)
-
-Some of the best design articles written by members of the Compass of Design
-Community to help you strengthen your skills in design, business/freelance, and
-marketing yourself.

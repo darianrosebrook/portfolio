@@ -1,8 +1,11 @@
 ---
 
+layout: article
 categories: [articles, post]
 permalink: archive/:title
 type: article
+icon: newspaper
+
 title: Finding the best design resources — And having a gold-miner’s mindset
 description: It always seems the more you read into someone or something, the more you’re able to find things that you don’t agree with. Just think of all the talk with politics or healthcare. (or don’t, that’ll get you sidetracked). Everything out there has things that you have to tune out to get to the good stuff.
 link_to: https://cmps.co/goldminer-mindset
@@ -10,11 +13,6 @@ index_image: https://cdn-images-1.medium.com/max/1200/1*fCHVtFONYQmo07BKusPpcg.j
 article_author: Darian Rosebrook
 author_link: https://twitter.com/darianrosebrook
 ---
-![](https://cdn-images-1.medium.com/max/1000/1*fCHVtFONYQmo07BKusPpcg.jpeg)
-
-# Finding the best design resources
-
-## And having a gold-miner’s mindset
 
 Let’s start with a story.
 
@@ -206,42 +204,3 @@ created when they answer something that you’re replying with or when they come
 directly from the community.
 
 *****
-
-![](https://cdn-images-1.medium.com/max/800/1*mo7_gcoDhIhJHCOLPxMfLg.png)
-
-### Still wondering how to find gold in design resources?
-
-Come join other like-minded designers who are working at becoming masters of
-their craft.
-
-Every week we go over ways to market yourself better by improving your design
-skills, your personal brand, and other topics to further develop as a great
-designer.
-
-Tap either picture to get started investing in your design skills (:
-
-<span class="figcaption_hack">Tap on either picture to get started at compassofdesign.com</span>
-
-* [Design](https://read.compassofdesign.com/tagged/design?source=post)
-* [Design
-Thinking](https://read.compassofdesign.com/tagged/design-thinking?source=post)
-* [Design
-Research](https://read.compassofdesign.com/tagged/design-research?source=post)
-* [Education](https://read.compassofdesign.com/tagged/education?source=post)
-* [Bootcamp](https://read.compassofdesign.com/tagged/bootcamp?source=post)
-
-Clapping shows how much you appreciated Darian Rosebrook’s story.
-
-### [Darian Rosebrook](https://read.compassofdesign.com/@darianrosebrook)
-
-Brand Identity Designer for  [@itssomagnetic](http://twitter.com/itssomagnetic),
-running a design community at
-[@compassofdesign](http://twitter.com/compassofdesign). I write to help others
-grow their skills as designers.
-
-### [Compass of Design](https://read.compassofdesign.com/?source=footer_card)
-
-Some of the best design articles written by members of the Compass of Design
-Community to help you strengthen your design skills, business/freelance ethics,
-and design professionalism. Join us in the community or get on the newsletter to
-get access to exclusive content.

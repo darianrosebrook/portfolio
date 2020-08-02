@@ -10,21 +10,22 @@ button, a.button, input[type="submit"]
   background: none
   color: var(--foreground)
   cursor: pointer
-  padding: 1em 2em
+  padding: 1rem 2rem
   &.secondary
     background: var(--background)
     color: var(--foreground)
     border: none
     &:hover, &:focus, &:active
-      background-color:  darken($background, 15%)
-      color: var(--foreground)
+      background-color:  var(--foreground)
+      color: var(--background)
   &.tertiary
     background: var(--main)
     color: var(--background)
     &:hover, &:focus, &:active
       background-color:  darken($main, 15%)
 .button:active, .button:focus,a.button:active, a.button:focus
-  font-size: 1.2rem
+  font-size: 1.3rem
+  padding: 1rem 2rem
   background-color: darken($highlight-3, 45%)
   color: var(--background)
 .button:hover, a.button:hover
@@ -53,12 +54,15 @@ input[type="email"]
 textarea
   resize: none
   width: 100%
+.input-connect
+  display: flex
+  align-items: stretch
+  height: 100%
 .subscribe_button
   background: var(--tertiary)
-  padding: 2.2rem
   display: inline
-  margin-left: 0
   border: none
   border-radius: 0 1rem 1rem 0
+  margin-bottom: 1rem
   i
     color: var(--background)

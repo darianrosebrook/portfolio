@@ -1,8 +1,11 @@
 ---
 
+layout: article
 categories: [articles, post]
 permalink: archive/:title
 type: article
+icon: newspaper
+
 title: What is design strategy? Why we need to opt for a more professional process
 description: This term means a many different things to designers nowadays. What design strategy sounds like to one might be completely different to the other. The thing to understand about strategy in design is that we are all a part of it, in both large an small forms, with different roles along the process.
 link_to: https://read.compassofdesign.com/what-is-design-strategy-497453c9d83a
@@ -11,11 +14,6 @@ article_author: Darian Rosebrook
 author_link: https://twitter.com/darianrosebrook
 author_img:
 ---
-![](https://cdn-images-1.medium.com/max/1200/1*5PFeKnwrCgPXdk0J7xHiCg.jpeg)
-
-# What is design strategy?
-
-## Why we need to opt for a more professional process
 
 > I may continue to add to this document as the year progresses. So keep tabs on
 > this. If there’s anything you want expanded upon, let me know. 🤓
@@ -359,45 +357,3 @@ learn this year about positioning your business as a design strategist.
 
 Until then, enjoy the new year and we’ll pick up with the newsletter again on
 the 4th of January. 🤓
-
-*****
-
-![](https://cdn-images-1.medium.com/max/800/1*mo7_gcoDhIhJHCOLPxMfLg.png)
-
-### Still trying to fill the gap?
-
-Come join other like-minded designers who are working at becoming masters of
-their craft.
-
-Every week we go over ways to market yourself better by improving your design
-skills, your personal brand, and other topics to further develop as a great
-designer.
-
-Tap either picture to get started investing in your design skills (:
-
-<span class="figcaption_hack">Tap on either picture to get started at compassofdesign.com</span>
-
-* [Design](https://read.compassofdesign.com/tagged/design?source=post)
-* [Design
-Thinking](https://read.compassofdesign.com/tagged/design-thinking?source=post)
-* [Business](https://read.compassofdesign.com/tagged/business?source=post)
-* [Business
-Strategy](https://read.compassofdesign.com/tagged/business-strategy?source=post)
-* [UX](https://read.compassofdesign.com/tagged/ux?source=post)
-
-By clapping more or less, you can signal to us which stories really stand out.
-
-### [Darian Rosebrook](https://read.compassofdesign.com/@darianrosebrook)
-
-Brand Identity Designer for [@itssomagnetic](http://twitter.com/itssomagnetic),
-running a design community at
-[@compassofdesign](http://twitter.com/compassofdesign). I write to help others
-grow their skills as designers.
-
-### [Compass of Design](https://read.compassofdesign.com/?source=footer_card)
-
-Some of the best design articles written by members of the Compass of Design
-Community to help you strengthen your skills in design, business/freelance, and
-marketing yourself.
-
-Interesting…

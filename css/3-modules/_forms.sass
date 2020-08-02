@@ -7,14 +7,14 @@
     background: none
 
     border-left: 1rem solid var(--foreground)
-
+    border-radius: 0
     color: var(--tertiary)
 
     transition: var(--transition)
     outline: none
     text-align: center
     &:focus, &:active, &:hover
-
+      background: var(--grey)
       border-color: var(--highlight-2)
   textarea
     height: 30vh
@@ -45,7 +45,7 @@
       border: 2px dashed var(--grey)
       color: var(--foreground)
       background-color: var(--secondary)
-  input[name$="-speaking"]:checked ~ .container label[for$="-speaking"]
+  input[name$="-hello"]:checked ~ .container label[for$="-hello"]
     background-color: var(--grey)
     color: var(--foreground)
   input[name$="-else"]:checked ~ .container label[for$="-else"]
@@ -133,5 +133,3 @@
         height: 100%
 
     label
-      ~ label
-        margin-left: 2.5%

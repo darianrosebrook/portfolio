@@ -1,8 +1,11 @@
 ---
 
+layout: article
 categories: [articles, post]
 permalink: archive/:title
 type: article
+icon: newspaper
+
 title: Design is better with friends
 description: Just a lighthearted talk today about the connections we make as designers. We started talking about this a few weeks back in the design community and I figured I’d share my experience with you all here too.
 link_to: https://read.compassofdesign.com/design-is-better-with-friends-279494355d52
@@ -11,7 +14,6 @@ article_author: Darian Rosebrook
 author_link: https://twitter.com/darianrosebrook
 author_img:
 ---
-# Design is better with friends
 
 Just a lighthearted talk today about the connections we make as designers. We
 started talking about this a few weeks back in the design community and I
@@ -219,42 +221,3 @@ If you find someone doing good things too, not just on newsletters, reach out to
 them, or share their work! It’s truly humbling to be shared by others and I do
 say, I’m more privy to starting conversation with someone who shared something I
 made.
-
-*****
-
-![](https://cdn-images-1.medium.com/max/800/1*mo7_gcoDhIhJHCOLPxMfLg.png)
-
-### How do you know what skills you should focus on?
-
-If this is a question you need an answer to, come join other like-minded
-designers who are also working at becoming masters of their craft.
-
-Every week we go over ways to market yourself better by improving your design
-skills, your personal brand, and other topics to further develop as a great
-designer.
-
-Tap either picture to get started investing in your design skills (:
-
-<span class="figcaption_hack">Tap on either picture to get started at compassofdesign.com</span>
-
-* [Community](https://read.compassofdesign.com/tagged/community?source=post)
-* [Design](https://read.compassofdesign.com/tagged/design?source=post)
-* [Design
-Thinking](https://read.compassofdesign.com/tagged/design-thinking?source=post)
-* [UX](https://read.compassofdesign.com/tagged/ux?source=post)
-* [Networking](https://read.compassofdesign.com/tagged/networking?source=post)
-
-By clapping more or less, you can signal to us which stories really stand out.
-
-### [Darian Rosebrook](https://read.compassofdesign.com/@darianrosebrook)
-
-Brand Identity Designer for [@itssomagnetic](http://twitter.com/itssomagnetic),
-running a design community at
-[@compassofdesign](http://twitter.com/compassofdesign). I write to help others
-grow their skills as designers.
-
-### [Compass of Design](https://read.compassofdesign.com/?source=footer_card)
-
-Some of the best design articles written by members of the Compass of Design
-Community to help you strengthen your skills in design, business/freelance, and
-marketing yourself.

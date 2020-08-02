@@ -1,19 +1,19 @@
 ---
 
+layout: article
 categories: [articles, post]
 permalink: archive/:title
 type: article
+icon: newspaper
+
 title: Designer Crimes of the 21st Century
 description: As we continue to improve our design skills, we train our eye to notice really good design. One side effect however, we tend to not look for the things where we might be creating bad designs. It just happens that eventually you learn to avoid these mistakes with time, practice, and dedication to getting better (which includes seeking feedback on your work).
 link_to: https://read.compassofdesign.com/designer-crimes-of-the-21st-century-4b672e9f39b9
 index_image: https://cdn-images-1.medium.com/max/1000/0*ArKZMhpaum02M8_0.png
 article_author: Darian Rosebrook
 author_link: https://twitter.com/darianrosebrook
-author_img: 
+author_img:
 ---
-![](https://cdn-images-1.medium.com/max/1000/0*ArKZMhpaum02M8_0.png)
-
-# Designer Crimes of the 21st Century
 
 ## Please take this advice, even if it is Comic Sans :P
 
@@ -242,57 +242,3 @@ stuff) for 2018 coming real soon!
 
 Check out the [Compass of Design](https://compassofdesign.com/community) to get
 started!
-
-![](https://cdn-images-1.medium.com/max/1000/1*mo7_gcoDhIhJHCOLPxMfLg.png)
-
-* [Design](https://read.compassofdesign.com/tagged/design?source=post)
-* [Design
-Thinking](https://read.compassofdesign.com/tagged/design-thinking?source=post)
-* [UX](https://read.compassofdesign.com/tagged/ux?source=post)
-* [UI](https://read.compassofdesign.com/tagged/ui?source=post)
-* [Web Design](https://read.compassofdesign.com/tagged/web-design?source=post)
-
-By clapping more or less, you can signal to us which stories really stand out.
-
-### [Darian Rosebrook](https://read.compassofdesign.com/@darianrosebrook)
-
-Brand Identity Designer for  [@itssomagnetic](http://twitter.com/itssomagnetic),
-running a design community at
-[@compassofdesign](http://twitter.com/compassofdesign). I write to help others
-grow their skills as designers.
-
-### [Compass of Design](https://read.compassofdesign.com/?source=footer_card)
-
-Some of the best design articles written by members of the Compass of Design
-Community to help you strengthen your skills in design, business/freelance, and
-marketing yourself.
-
-Well, actually™
-
-I am working for 10 years in Japan. One thing I have learned is that this
-assumption while broadly correct, has some cultural sensitivity to it.
-
-I won't speak for other CJK cultures, but it is certainly true at the very least
-Japanese EC customers love high information density.
-
-I agree with you, I do know most of different cultures are bound by certain
-conventions like that. Thank you for the reminder. I’ll see if I can amend my
-statement. (:
-
-It still can’t hurt having a bit of breathing room for most other designs.
-
-Thanks for the insight, Philipp!
-
-Thank you,
-
-and I am still trying to add more white space.
-
-Fun fact though: in my last and my current company I have been working on
-enterprise facing apps and here the situation is very different.
-
-I agree, but this may change with the advent of OLED screens becoming the norm.
-I find it awful in magazines designs too, but since OLED screens have better
-colour reproduction (at the right viewing angle), many designers will want to
-try those out.
-
-Not looking forward to that.

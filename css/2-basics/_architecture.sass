@@ -1,26 +1,31 @@
-//-- Architecture --
+//-- Architecture -- d
 body
-  padding: 0 1rem
+  padding: 0 2rem
 main
   display: grid
   margin: 0 auto
   grid-template-columns: repeat(5, 1fr )
-  grid-template-rows: auto
-  grid-gap: 1rem
+  grid-gap: var(--gap)
   align-items: start
 
-  grid-template-areas: "ud ud ud ud ud" "he he he he he" "sk sk pc pc pc" "sk sk wh wh wh" "nl nl nl nl nl" "dw dw dw dw dw" "vd vd vd vd vd" "pd pd pd pd pd" "bk bk bk bk bk" "ct ct ct ct ct" "ft ft ft ft ft"
+  grid-template-areas: "he he he he he" "ud ud ud ud ud"  "sk sk pc pc pc" "sk sk wh wh wh" "dw dw dw dw dw" "nl nl nl nl nl"  "vd vd vd vd vd" "pd pd pd pd pd" "bk bk bk bk bk" "ct ct ct ct ct" "ft ft ft ft ft"
 
+  img
+    // filter: grayscale(1)
+    // &:hover
+    //   filter: grayscale(0)
+.f-r, .f-l
+  float: none
 //-- Framing --
-.container
+.container, section
   position: relative
   grid-column: 1 / span 5
   padding: 1rem 0
   border-bottom: 1px solid var(--grey)
-  &.callout
-    grid-column: 1 / span 5
-    padding: 1rem
-    background: var(--grey)
+.callout, blockquote
+  grid-column: 1 / span 5
+  padding: 1rem
+  background: var(--grey)
 
 .row
   position: relative
@@ -44,10 +49,15 @@ main
 .grid
   display: grid
   grid-template-columns: repeat(1, 1fr)
-  grid-gap: 1rem
-  .grid-item
-    &:nth-of-type(1n + 4)
-      // display: none
+  grid-gap: var(--gap)
+  &.by-2
+    grid-template-columns: repeat(2, 1fr)
+  &.by-3
+    grid-template-columns: repeat(3, 1fr)
+  &.by-4
+    grid-template-columns: repeat(4, 1fr)
+  &.by-5
+    grid-template-columns: repeat(5, 1fr)
 
 
   .logo
@@ -65,6 +75,31 @@ main
     svg
       width: 80%
       fill: var(--foreground)
+
+
+header
+  padding-top: 2rem
+  .head-content
+    display: grid
+    grid-template-columns: repeat(4, 1fr)
+    grid-template-areas: "a b b c" "d e f g"
+    p.darian
+      margin: auto
+    p:nth-of-type(1)
+      grid-area: a
+    p:nth-of-type(2)
+      grid-area: d
+    p:nth-of-type(3)
+      grid-area: e
+    p:nth-of-type(4)
+      grid-area: f
+    p:nth-of-type(5)
+      grid-area: g
+    p:nth-of-type(6)
+      grid-area: c
+    h4
+      grid-area: b
+
 .skills
   grid-column: span 2
   grid-area: sk
@@ -74,15 +109,20 @@ main
   grid-area: wh
   .grid
     grid-template-columns: repeat(1, 1fr)
+    .linked-block
+      display: block
     img:not(.logo)
       display: inline
-      width: 30%
-      float: left
       margin-right: 1rem
+      max-width: 30%
     .module
       display: inline-block
       width: calc(60% - 1rem)
-
+    .block-link
+      background: var(--grey)
+      padding: 2rem
+    .company
+      padding-bottom: 8rem
 .previous-clients
   grid-column: 3 / span 3
   grid-area: pc
@@ -105,18 +145,71 @@ main
 
 .video
   grid-area: vd
+  h6
+    display: block
+    margin: 1rem 0
+    &.new
+      color: var(--highlight)
+  h3
+    font-size: 2rem
+  .module
+    a
+      color: var(--foreground)
+  .grid
+    width: 100%
+    grid-template-columns: 1fr 1fr
+    grid-template-areas: "fv fv" "v2 v3" "v4 v5"
+    img
+      width: 100%
+    .featured-video
+      grid-area: fv
+    .v2
+      grid-area: v2
+    .v3
+      grid-area: v3
+    .v4
+      grid-area: v4
+    .v5
+      grid-area: v5
 
 .podcast
   grid-area: pd
+  .grid
+    display: block
+    margin-bottom: 1rem
+    img
+      width: 55%
+
+  h3
+    font-size: 4rem
 
 .books
   grid-area: bk
-
+  .logo
+    margin-bottom: -.8rem
+  .book-content
+    h3
+      font-size: 4rem
+    h4
+      display: inline
+      width: fit-content
+  .grid-item
+    img
+      display: block
+      max-width: 140px
+      margin: 0 auto
+    span
+      font-family: "Crimson Pro"
+      font-size: 4rem
+      font-weight: 300
+    h4
+      font-size: 3rem
 .footer
   grid-area: ft
+.update
+  font-size: 1.2rem
 // -- Structure --
 header
-  margin: 0 2rem
   border-bottom: 2px solid var(--tertiary)
   .head-content
     text-align: center
@@ -128,22 +221,24 @@ header
   grid-column: 1 / span 5
   grid-area: he
   border-bottom: 1px solid var(--grey)
+  img
+    width: 100%
   p
     width: 100%
   h1
     width: 100%
     padding: .45rem 0
     line-height: 1.15
-    padding: .1rem .45rem
+    // padding: .1rem .45rem
     margin-left: -.45rem
     span
-      background: var(--background)
-      display: inline
-      padding: .1rem 0
-      box-decoration-break: clone
-      --webkit-box-decoration-break: clone
-
-      border-radius: .3rem
+      // background: var(--background)
+      // display: inline
+      // padding: .1rem 0
+      // box-decoration-break: clone
+      // --webkit-box-decoration-break: clone
+      //
+      // border-radius: .3rem
 ul
   list-style: none
   margin-bottom: 1rem
@@ -151,29 +246,35 @@ ul
     font-family: "Crimson Pro", serif
     font-weight: 200
     line-height: 1.2
+    font-size: 1.4rem
     li
       margin-bottom: 0.5rem
 nav
+  font-size: 1.5rem
   padding: 2rem 0
-  font-family: sans-serif
   width: 100%
   color: var(--tertiary)
   display: flex
-  justify-content: center
+  justify-content: space-between
+  align-items: center
   &.nav a
     color: var(--tertiary)
-
   ul
     display: flex
-    flex-direction: column
+    flex-direction: row
+    flex-wrap: wrap
+    justify-content: space-between
+    width: 90%
+    margin: 0
     li
-      & ~ li
-        margin-left: 1rem
+      width: calc(50% - 2.3rem)
+      margin-right: 2rem
+      margin-bottom: 2rem
 
 hr
   border: 2px solid var(--highlight)
   width: 65%
-  margin: .5rem 0
+  margin: .5rem auto
 
 a.block-link
   display: block
@@ -181,7 +282,7 @@ a.block-link
 .linked-block
   display: grid
   grid-template-columns: repeat(10, 1fr)
-  grid-gap: 1rem
+  grid-gap: var(--gap)
   align-items: center
   width: 100%
   p:first-of-type
@@ -190,18 +291,29 @@ a.block-link
     grid-column: 2 / span 2
     small strong
       color: var(--tertiary)
-  h4
+  h4, h3
+    color: var(--foreground)
     grid-column: 4 / span 7
     margin: 0
 
 
 //-- Responsive Restructuring --
-@media (min-width: 770px)
+@media (min-width: 1000px)
+
   body.main
-    padding: 0 10rem
+    max-width: 1400px
+    margin: 0 auto
+
   main
     grid-template-columns: 2rem repeat(5, 1fr ) 1rem
-    grid-template-areas:  ". ud ud ud ud ud ." ". he he he he sk ." ". wh wh wh wh pc ." "nl nl nl nl nl nl nl" ". dw dw dw dw dw ." ". vd vd vd vd vd ." ". pd pd pd pd pd ." ". bk bk bk bk bk ." ". ct ct ct ct ct ." ". ft ft ft ft ft ."
+    grid-template-areas:  ". he he he he sk ." ". he he he he sk ." ". ud ud ud ud ud ." ". wh wh wh wh pc ." ". dw dw dw dw dw ."  "nl nl nl nl nl nl nl" ". vd vd vd vd vd ." ". pd pd pd pd pd ." "bk bk bk bk bk bk ." ". ct ct ct ct ct ." ". ft ft ft ft ft ."
+
+  .f-r
+    float: right
+    margin-left: 3rem
+  .f-l
+    float: left
+    margin-right: 3rem
 
   .grid
     grid-template-columns: repeat(5, 1fr)
@@ -226,60 +338,118 @@ a.block-link
     display: block
   header
     .head-content
-      display: grid
+      grid-template-areas: unset
       grid-template-columns: repeat(7, 1fr)
       flex-direction: row
       justify-items: center
       text-align: center
       align-items: center
       border-bottom: 1px solid var(--grey)
+      p:nth-of-type(1n)
+        grid-area: unset
+      h4
+        grid-area: unset
+    nav
+      justify-content: center
+
+      ul
+        width: auto
+        justify-content: center
+        li
+          width: auto
   .container
-    // grid-column: 2 / span 5
-    &.callout
-      grid-column: 1 / span 7
-      padding: 2rem
+    grid-column: 2 / span 5
+  .callout, blockquote
+    grid-column: 1 / span 7
+    padding: 2rem
+  blockquote
+    grid-column: 2 / span 2
+    & + p
+      grid-column: 4 / span 3
   .row
     .row-head
       flex-direction: row
+      p
+        width: auto
+        display: inline-block
   .module
   .hero
     grid-column: 2/6
-    padding-right: 1rem
+    padding-right: 1.5rem
+    margin-right: -.5rem
     border-right: 1px solid var(--grey)
-    p
-      width: 25%
-    h1
-      width: 50%
+    .module
+      width: 100%
     figure
-      width: calc(75% - 1rem)
-      z-index: -1
-      max-width: 1400px
-      position: absolute
-      top: 0
-      right: 0
+      width: calc(75% - 2rem)
   .skills
     padding-left: 1rem
   .work-history
     .grid
       grid-template-columns: repeat(4, 1fr)
-      .module
-        img:not(.logo)
-          display: inline-block
-          width: 40%
-          float: left
-          margin-right: 1rem
+      img:not(.logo)
+        display: inline-block
+        width: 40%
+        max-width: 250px
+        float: left
+        margin-right: 1rem
+      .block-link:hover
+        padding-bottom: 0
+        .company
+
+  .previous-clients
+    height: 100%
   .newsletter
     .module
       display: grid
       grid-template-columns: 1fr 9fr 10fr
-      gap: 1rem
+      gap: var(--gap)
       align-items: center
   .design-work
+    .module
+      img
+        float: none
+        width: 80%
+  .video
+    grid-area: vd
+    .grid
+      grid-template-areas: "v2 fv fv v4" "v3 fv fv v5"
 
+  .video
+    .grid
+      grid-template-columns: repeat(5, 1fr)
+      grid-template-areas: "v2 fv fv fv v4" "v3 fv fv fv v5"
+
+  .podcast
+    .grid
+      display: grid
+      grid-template-columns: 1fr 1fr
+
+  .books
+    .row
+      .row-head
+        margin-left: 3rem
+      article
+        display: grid
+        grid-template-columns: 1rem repeat(5, 1fr)
+        gap: 1.5rem
+
+      .module.callout
+        padding: 0
+        grid-column: span 3
+        & ~ .module
+          grid-column: 4 / span 3
+        .book-content
+          padding: 3rem
+      .grid
+        grid-template-columns: repeat(3, 1fr)
   .block-link
     display: inline-block
   nav
-    align-items: baseline
+    align-items: center
     ul
       flex-direction: row
       margin-left: 1rem
+      margin-bottom: 0
+      li
+        margin-bottom: 0

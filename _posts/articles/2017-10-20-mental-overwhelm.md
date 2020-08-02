@@ -1,8 +1,11 @@
 ---
 
+layout: article
 categories: [articles, post]
 permalink: archive/:title
 type: article
+icon: newspaper
+
 title: Overthinking things? Here’s some help with all of the mental overwhelm.
 description: I’m going to (probably incorrectly) guess that you don’t deal with being stressed out over all the design work you have to do, the emails coming in, the phone calls you miss, the family time you’re running late to… You probably don’t deal with being overwhelmed at all.
 link_to: https://read.compassofdesign.com/are-you-over-thinking-too-often-2b743b1a586d
@@ -10,9 +13,6 @@ index_image: https://cdn-images-1.medium.com/max/1200/1*HBPl7x30X0-ErvKtWk_Elw.j
 article_author: Darian Rosebrook
 author_link: https://twitter.com/darianrosebrook
 ---
-![](https://cdn-images-1.medium.com/max/800/1*HBPl7x30X0-ErvKtWk_Elw.jpeg)
-
-# Overthinking things? Here’s some help with all of the mental overwhelm.
 
 I’m going to (probably incorrectly) guess that you don’t deal with being
 stressed out over all the design work you have to do, the emails coming in, the
@@ -294,43 +294,3 @@ through these any time you’re feeling overwhelmed by the insurmountable pile o
 things to do.
 
 Hope that helps. (:
-
-*****
-
-![](https://cdn-images-1.medium.com/max/800/1*mo7_gcoDhIhJHCOLPxMfLg.png)
-
-### Still feeling overwhelmed as a designer?
-
-Come join other like-minded designers who are working at becoming masters of
-their craft.
-
-Every week we go over ways to market yourself better by improving your design
-skills, your personal brand, and other topics to further develop as a great
-designer.
-
-Tap either picture to get started investing in your design skills (:
-
-<span class="figcaption_hack">Tap on either picture to get started at compassofdesign.com</span>
-
-* [Productivity](https://read.compassofdesign.com/tagged/productivity?source=post)
-* [Design](https://read.compassofdesign.com/tagged/design?source=post)
-* [Self
-Improvement](https://read.compassofdesign.com/tagged/self-improvement?source=post)
-* [Self-awareness](https://read.compassofdesign.com/tagged/self-awareness?source=post)
-* [Entrepreneurship](https://read.compassofdesign.com/tagged/entrepreneurship?source=post)
-
-Clapping shows how much you appreciated Darian Rosebrook’s story.
-
-### [Darian Rosebrook](https://read.compassofdesign.com/@darianrosebrook)
-
-Brand Identity Designer for  [@itssomagnetic](http://twitter.com/itssomagnetic),
-running a design community at
-[@compassofdesign](http://twitter.com/compassofdesign). I write to help others
-grow their skills as designers.
-
-### [Compass of Design](https://read.compassofdesign.com/?source=footer_card)
-
-Some of the best design articles written by members of the Compass of Design
-Community to help you strengthen your design skills, business/freelance ethics,
-and design professionalism. Join us in the community or get on the newsletter to
-get access to exclusive content.
