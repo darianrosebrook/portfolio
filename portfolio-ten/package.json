@@ -54,6 +54,7 @@
     "lit-element": "^2.0.1",
     "lit-html": "^1.0.0",
     "lit-redux-router": "^0.15.0",
+    "moment": "^2.27.0",
     "pwa-helpers": "^0.9.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0"
