@@ -1,4 +1,4 @@
-import { LitElement, html } from 'lit-element';
+import { LitElement, html, css } from 'lit-element';
 
 // Actions
 
@@ -7,6 +7,62 @@ import styles from '../styles/index.js';
 
 // Components
 import '../components/Icon.js';
+
+const host = css`
+  .hero {
+    position: relative;
+
+    border-bottom: 1px solid var(--grey);
+  }
+  h1 {
+    font-size: var(--ramp-t2);
+  }
+  h2 {
+    font-size: var(--ramp-t7);
+  }
+  .row-head {
+    padding: 1rem 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .row-head p {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  p {
+    width: 100%;
+  }
+  h1 {
+    width: 100%;
+    padding: 0.45rem 0;
+    line-height: 1.15;
+    margin-left: -0.45rem;
+  }
+  @media (min-width: 1000px) {
+    .hero {
+      grid-column: 2/6;
+      padding-right: 1.5rem;
+      margin-right: -0.5rem;
+      border-right: 1px solid var(--grey);
+    }
+    .module {
+      width: 100%;
+    }
+    figure {
+      width: calc(75% - 2rem);
+    }
+    .row-head {
+      flex-direction: row;
+    }
+    p {
+      width: auto;
+      display: inline-block;
+    }
+  }
+`;
 
 // Redux
 // class ___ extends connect(store)(LitElement) {
@@ -108,7 +164,7 @@ class Hero extends LitElement {
               businesses design better end to end user experiences.
             </span>
           </h1>
-          <p>
+          <p class="p-1">
             You know when you’re using an app or website and you get frustrated
             when it doesn't do what you want it to? I work to help make sure
             that doesn't happen.
@@ -137,7 +193,7 @@ class Hero extends LitElement {
   }
 
   static get styles() {
-    return styles;
+    return [styles, host];
   }
 }
 
