@@ -46,7 +46,7 @@ class NavBar extends LitElement {
         </p>
 
         <p class="darian">
-          <button>
+          <button class="stealth">
             <avatar-image
               source="/assets/img/darian-rosebrook-avatar.jpg"
               altHeading="Darian Rosebrook's avatar"
@@ -86,14 +86,81 @@ class NavBar extends LitElement {
         header {
           display: flex;
           flex-direction: column;
+          padding-top: 2rem;
         }
-        .head-content,
+        .head-content {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          grid-template-areas: 'a b b c' 'd e f g';
+        }
+        p.darian {
+          margin: auto;
+        }
+        p:nth-of-type(1) {
+          grid-area: a;
+        }
+        p:nth-of-type(2) {
+          grid-area: d;
+        }
+        p:nth-of-type(3) {
+          grid-area: e;
+        }
+        p:nth-of-type(4) {
+          grid-area: f;
+        }
+        p:nth-of-type(5) {
+          grid-area: g;
+        }
+        p:nth-of-type(6) {
+          grid-area: c;
+        }
+        h4 {
+          grid-area: b;
+        }
+        nav {
+          border-bottom: 2px solid var(--cr-grey-60);
+          padding: 2rem 0;
+          width: 50%;
+        }
+        .nav a {
+          color: var(--cr-grey-60);
+          font-size: var(--ramp-t5);
+        }
         nav,
         ul {
           width: 100%;
           display: flex;
           flex-direction: row;
           align-items: center;
+          justify-content: space-between;
+        }
+        @media (min-width: 1000px) {
+          header .head-content {
+            grid-template-areas: unset;
+            grid-template-columns: repeat(7, 1fr);
+            flex-direction: row;
+            justify-items: center;
+            text-align: center;
+            align-items: center;
+            border-bottom: 1px solid var(--cr-grey-20);
+          }
+          p:nth-of-type(1n) {
+            grid-area: unset;
+          }
+          h4 {
+            grid-area: unset;
+          }
+          nav {
+            justify-content: center;
+          }
+
+          ul {
+            width: auto;
+            justify-content: center;
+          }
+          li {
+            width: auto;
+          }
         }
       `,
     ];
