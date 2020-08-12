@@ -7,3 +7,4 @@ export * from './Shiplane.js';
 export * from './Minimum.js';
 export * from './GlassFrontier.js';
 export * from './Travelight.js';
+export * from './WorkLogos.js';

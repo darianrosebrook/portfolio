@@ -50,6 +50,7 @@
   "author": "portfolio-ten",
   "license": "MIT",
   "dependencies": {
+    "@intcreator/markdown-element": "^0.3.3",
     "deepmerge": "^4.2.2",
     "lit-element": "^2.0.1",
     "lit-html": "^1.0.0",

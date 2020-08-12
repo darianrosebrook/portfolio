@@ -1,4 +1,4 @@
-import { LitElement, html } from 'lit-element';
+import { LitElement, html, css } from 'lit-element';
 
 // Actions
 
@@ -7,6 +7,80 @@ import styles from '../styles/index.js';
 
 // Components
 import '../components/Icon.js';
+import '../components/Button.js';
+
+const host = css`
+  .hero {
+    position: relative;
+  }
+  .row {
+    padding-bottom: var(--margin);
+    border-bottom: 1px solid var(--divider-color);
+  }
+  h1 {
+    font-size: var(--ramp-t2);
+  }
+  h2 {
+    font-size: var(--ramp-t7);
+  }
+  .row-head {
+    padding: 1rem 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .row-head p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .row-head p button-component + button-component {
+    margin-left: var(--margin);
+  }
+
+  p {
+    width: 100%;
+  }
+  h1 {
+    width: 100%;
+    padding: 0.45rem 0;
+    line-height: 1.15;
+    margin-left: -0.45rem;
+  }
+  @media (min-width: 1000px) {
+    .hero {
+      grid-column: 2/6;
+      padding-right: 2rem;
+      margin-right: -0.5rem;
+      border-right: 1px solid var(--divider-color);
+    }
+    .module {
+      width: 100%;
+    }
+    small {
+      width: 100%;
+      white-space: nowrap;
+    }
+    figure {
+      width: calc(75% - 2rem);
+    }
+    h6 {
+      padding: var(--design-unit);
+      background: var(--neutral-layer-l2);
+      width: fit-content;
+    }
+    .row-head {
+      flex-direction: row;
+    }
+    h2 {
+      width: 20%;
+    }
+    p {
+      width: auto;
+    }
+  }
+`;
 
 // Redux
 // class ___ extends connect(store)(LitElement) {
@@ -14,73 +88,59 @@ import '../components/Icon.js';
 class Hero extends LitElement {
   render() {
     return html`
-      <article class="hero row">
+      <article class="hero ">
         <div class="row-head">
           <h2>Product &amp; UX Designer</h2>
           <p>
-            <small><strong>Find me Here: </strong></small>
-            <a
-              href="http://twitter.com/darianrosebrook"
-              class="social-link"
-              rel="noreferrer"
-              target="_blank"
-              aria-label="Link To Twitter"
-              ><fa-icon
-                weight="b"
-                icon="twitter"
-                ariaLabel="Link to Twitter"
-              ></fa-icon
-            ></a>
-            <a
-              href="http://medium.com/@darianrosebrook"
-              class="social-link"
-              rel="noreferrer"
-              target="_blank"
-              aria-label="Link To Medium"
-              ><fa-icon weight="b" icon="medium-m" ariaLabel=""
-                ><span>Link to Medium</span></fa-icon
-              ></a
-            >
-            <a
-              href="http://dribbble.com/darianrosebrook"
-              class="social-link"
-              rel="noreferrer"
-              target="_blank"
-              aria-label="Link To Dribbble"
-              ><fa-icon weight="b" icon="dribbble" ariaLabel=""
-                ><span>Link to Dribbble</span></fa-icon
-              ></a
-            >
-            <a
-              href="http://instagram.com/darianrosebrook"
-              class="social-link"
-              rel="noreferrer"
-              target="_blank"
-              aria-label="Link To Instagram"
-              ><fa-icon weight="b" icon="instagram" ariaLabel=""
-                ><span>Link to Instagram</span></fa-icon
-              ></a
-            >
-            <a
-              href="http://youtube.com/compassofdesign"
-              class="social-link"
-              rel="noreferrer"
-              target="_blank"
-              aria-label="Link To YouTube"
-              ><fa-icon weight="b" icon="youtube" ariaLabel=""
-                ><span>Link to YouTube</span></fa-icon
-              ></a
-            >
-            <a
-              href="http://linkedin.com/in/darianrosebrook"
-              class="social-link"
-              rel="noreferrer"
-              target="_blank"
-              aria-label="Link To Linkedin"
-              ><fa-icon weight="b" icon="linkedin" ariaLabel=""
-                ><span>Link to Linkedin</span></fa-icon
-              ></a
-            >
+            <small class="c1-upper">Find me Here:</small>
+            <button-component
+              action="http://twitter.com/darianrosebrook"
+              weight="b"
+              iconSize="small"
+              icon="twitter"
+              ariaLabel="Link to Twitter"
+              variant="stealth"
+            ></button-component>
+            <button-component
+              action="http://medium.com/@darianrosebrook"
+              weight="b"
+              iconSize="small"
+              icon="medium-m"
+              ariaLabel="Link to Medium"
+              variant="stealth"
+            ></button-component>
+            <button-component
+              action="http://dribbble.com/darianrosebrook"
+              weight="b"
+              iconSize="small"
+              icon="dribbble"
+              ariaLabel="Link to Dribbble"
+              variant="stealth"
+            ></button-component>
+            <button-component
+              action="http://instagram.com/darianrosebrook"
+              weight="b"
+              iconSize="small"
+              icon="instagram"
+              ariaLabel="Link To Instagram"
+              variant="stealth"
+            ></button-component>
+            <button-component
+              action="http://youtube.com/compassofdesign"
+              weight="b"
+              iconSize="small"
+              icon="youtube"
+              ariaLabel="Link to YouTube"
+              variant="stealth"
+            ></button-component>
+            <button-component
+              action="http://linkedin.com/in/darianrosebrook"
+              weight="b"
+              iconSize="small"
+              icon="linkedin"
+              ariaLabel="Link to Linkedin"
+              variant="stealth"
+            ></button-component>
           </p>
         </div>
         <article class="row">
@@ -102,13 +162,13 @@ class Hero extends LitElement {
               </p>
             </figcaption>
           </figure>
-          <h1 class="name">
+          <h1 class="emph">
             <span
               >Hey there! I'm Darian Rosebrook, a product designer that helps
               businesses design better end to end user experiences.
             </span>
           </h1>
-          <p>
+          <p class="p-1">
             You know when you’re using an app or website and you get frustrated
             when it doesn't do what you want it to? I work to help make sure
             that doesn't happen.
@@ -137,7 +197,7 @@ class Hero extends LitElement {
   }
 
   static get styles() {
-    return styles;
+    return [styles, host];
   }
 }
 
