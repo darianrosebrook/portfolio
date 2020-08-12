@@ -1,10 +1,33 @@
-import { LitElement, html } from 'lit-element';
+import { LitElement, html, css } from 'lit-element';
 
 // Actions
+import '../components/WorkLink.js';
+
+import { work } from '../constants/index.js';
+import { workLogos } from '../../assets/img/logo/index.js';
 
 // Styles
 import styles from '../styles/index.js';
 
+const host = css`
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin: var(--margin) 0;
+    grid-gap: var(--design-unit);
+  }
+  work-link + work-link {
+    padding-left: 2rem;
+    border-left: 1px solid var(--divider-color);
+  }
+  h2 {
+    font-size: var(--ramp-t7);
+  }
+  .row {
+    padding: 1rem 0 1rem 0;
+    border-bottom: 1px solid var(--divider-color);
+  }
+`;
 // Components
 
 // Redux
@@ -16,37 +39,28 @@ class WorkHistory extends LitElement {
       <article class="row">
         <h2>Work History</h2>
         <div class="grid">
-          {% for post in site.categories.work limit:4 %}
-          <div class="grid-item">
-            <a class="block-link  cf" href="{{site.baseurl}}{{post.url}}">
-              <div class="linked-block w-h">
-                <div class="company">
-                  {% include {{post.logo}} %}
-                  <h3>
-                    {{post.company}} <i class="fal fa-chevron-right icon"></i>
-                  </h3>
-                </div>
-                <!-- <p><img loading="lazy" class="f-l" src="{{site.baseurl}}{{post.index_image}}" alt="{{post.title}}" /></p> -->
-                <h4>{{post.position}}</h4>
-                <p>
-                  <small
-                    ><strong
-                      >{{post.startDate | date: "%b %Y" }} &mdash;
-                      {{post.endDate | date: "%b %Y" }}</strong
-                    ></small
-                  >
-                </p>
-              </div>
-            </a>
-          </div>
-          {% endfor %}
+          ${Object.keys(work)
+            .reverse()
+            .slice(0, 4)
+            .map(
+              key => html`
+                <work-link
+                  .companyName="${work[key].companyName}"
+                  .role="${work[key].role}"
+                  .dateFrom="${work[key].dateFrom}"
+                  .dateTo="${work[key].dateTo}"
+                  .logo="${workLogos[key]}"
+                  .src="${work[key]}"
+                ></work-link>
+              `
+            )}
         </div>
       </article>
     </section> `;
   }
 
   static get styles() {
-    return styles;
+    return [styles, host];
   }
 }
 

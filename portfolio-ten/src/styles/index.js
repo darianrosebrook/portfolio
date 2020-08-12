@@ -61,6 +61,9 @@ export default css`
     font-weight: 600;
     line-height: 1.428571428571429;
   }
+  p {
+    margin-bottom: var(--margin);
+  }
   p.p-1 {
     font-size: var(--ramp-t5);
     font-weight: 400;
@@ -77,6 +80,10 @@ export default css`
   p.mono,
   pre {
     font-family: 'Monaco';
+  }
+  .emph {
+    font-family: 'Crimson Pro';
+    font-weight: 100;
   }
   label,
   .label {
@@ -157,10 +164,12 @@ export default css`
     background-color: var(--foreground);
     color: var(--background);
   }
-  button.stealth {
+  button.stealth,
+  a.stealth {
     border: none;
   }
-  button.stealth:hover {
+  button.stealth:hover,
+  a.stealth:hover {
     background: var(--hover-background);
   }
   /* Form inputs */

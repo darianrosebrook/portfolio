@@ -1,77 +1,70 @@
-import { LitElement, html } from 'lit-element';
+import { LitElement, html, css } from 'lit-element';
+
+import '../components/UpdateLink.js';
 
 // Actions
 
 // Styles
 import styles from '../styles/index.js';
-
 // Components
 
+// Resources
+import { updates } from '../constants/index.js';
+
+const host = css`
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    margin: var(--margin) 0;
+    grid-gap: var(--design-unit);
+  }
+  update-link + update-link {
+    padding-left: 2rem;
+    border-left: 1px solid var(--divider-color);
+  }
+  h2 {
+    font-size: var(--ramp-t7);
+  }
+  .row {
+    padding: 1rem 0 1rem 0;
+    border-bottom: 1px solid var(--divider-color);
+  }
+`;
 // Redux
 // class ___ extends connect(store)(LitElement) {
 
 class Updates extends LitElement {
   render() {
-    return html`<section class="container updates" id="updates">
-      <article class="row">
-        <div class="row-head">
-          <h2>Updates</h2>
-          <p>
-            <a href="{{site.baseurl}}/now"
-              >See more
-              <i class="fa fa-arrow-right icon"
-                ><span>Click to see all updates</span></i
-              ></a
-            >
-          </p>
-        </div>
-
-        <div class="grid">
-          <div class="grid-item">
-            <a
-              class="block-link"
-              href="{{site.baseurl}}/now/#compass-community-site"
-            >
-              <div class="linked-block">
-                <p><i class="far fa-drafting-compass"></i></p>
-                <p>
-                  <small><strong>12 Nov 2017 - Present</strong></small>
-                </p>
-                <h4>Building the Compass of Design Community app</h4>
-              </div>
-            </a>
-          </div>
-          {% for post in site.categories.updates limit:4 %}
-          <div class="grid-item">
-            {% if page.url == '/' %}<a
-              class="block-link"
-              href="{{site.baseurl}}/now/#{{post.specific}}"
-            >
-              {% endif %}
-              <div class="linked-block">
-                <p><i class="far fa-{{post.icon}}"></i></p>
-                <p>
-                  <small
-                    ><strong>{{post.date | date_to_string }}</strong></small
-                  >
-                </p>
-                <h4>{{post.title}}</h4>
-
-                {% if page.url contains '/now' %}
-                <p>{{post.content}}</p>
-                {% endif %}
-              </div>
-              {% if page.url == '/' %}</a
-            >{% endif %}
-          </div>
-          {% endfor %}
-        </div>
-      </article>
+    return html`<section class="row">
+      <h2>Updates</h2>
+      <div class="grid" id="updates">
+        ${Object.keys(updates)
+          .reverse()
+          .slice(0, 5)
+          .map(
+            key => html` <update-link
+              .title=${updates[key].title}
+              .date=${updates[key].date}
+              .icon=${updates[key].icon}
+              .anchorTag=${updates[key]}
+            ></update-link>`
+          )}
+      </div>
     </section> `;
   }
 
+  static get properties() {
+    return {
+      markdown: { type: Object },
+    };
+  }
+
   static get styles() {
-    return styles;
+    return [styles, host];
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
   }
 }
 

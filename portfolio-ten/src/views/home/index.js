@@ -37,7 +37,6 @@ const stylesheet = css`
     position: relative;
     grid-column: 1 / span 5;
     grid-area: he;
-    border-bottom: 1px solid var(--cr-grey-40);
   }
   ::slotted(skills-list ){
     grid-column: span 2;
@@ -81,9 +80,15 @@ const stylesheet = css`
   }
   @media (min-width: 1000px) {
     :host {
+
+      position: relative;
+      max-width: 1400px;
+      margin: 0 auto;
+      left: 50%;
+      transform: translateX(-50%);
       grid-gap: var(--design-unit);
       grid-template-columns: 1rem repeat(5, 1fr) 1rem;
-      grid-template-areas: '. nv nv nv nv nv .' '. he he he he sk .' '. he he he he sk .' '. ud ud ud ud ud .' '. wh wh wh wh pc .' '. dw dw dw dw dw .' 'nl nl nl nl nl nl nl' '. vd vd vd vd vd .' '. pd pd pd pd pd .' 'bk bk bk bk bk bk .' '. ct ct ct ct ct .' '. ft ft ft ft ft .';
+      grid-template-areas: '. nv nv nv nv nv .' '. ud ud ud ud ud .' '. he he he he sk .' '. he he he he sk .' '. wh wh wh wh pc .' '. dw dw dw dw dw .' 'nl nl nl nl nl nl nl' '. vd vd vd vd vd .' '. pd pd pd pd pd .' 'bk bk bk bk bk bk .' '. ct ct ct ct ct .' '. ft ft ft ft ft .';
     }
     nav-bar {
       grid-area: nv;
@@ -96,7 +101,6 @@ const stylesheet = css`
 
         grid-column: 2/6
       grid-area: he;
-      border-bottom: 1px solid var(--cr-grey-40);
     }
     ::slotted(skills-list) {
       grid-column: span 2;
@@ -140,6 +144,7 @@ const stylesheet = css`
     }
   }
 `;
+
 class Home extends LitElement {
   render() {
     return html`
