@@ -1,12 +1,14 @@
 import { css } from 'lit-element';
 import reset from './reset.js';
 
+import keyframes from './keyframes.js';
+
 export default css`
   ${reset}
+  ${keyframes}
   *,
   *::before,
   *::after {
-    flex-direction: row;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -15,28 +17,11 @@ export default css`
     background-color: var(--foreground);
     color: var(--background);
   }
-  h1.subheading {
-    font-weight: 300;
+
+  img {
+    width: 100%;
   }
-  h2.subheading {
-    font-weight: 300;
-  }
-  h3.subheading {
-    font-weight: 300;
-  }
-  h4.subheading {
-    font-weight: 300;
-  }
-  h5.subheading {
-    font-weight: 300;
-  }
-  h6.subheading {
-    font-weight: 300;
-  }
-  strong.subheading,
-  b.subheading {
-    font-weight: 300;
-  }
+
   h1 {
     font-size: var(--ramp-t1);
     font-weight: 600;
@@ -67,11 +52,17 @@ export default css`
     font-weight: 600;
     line-height: 1.5;
   }
+  .subheading {
+    font-weight: 300;
+  }
   strong,
   b {
     font-size: var(--ramp-t7);
     font-weight: 600;
     line-height: 1.428571428571429;
+  }
+  p {
+    margin-bottom: var(--margin);
   }
   p.p-1 {
     font-size: var(--ramp-t5);
@@ -82,12 +73,17 @@ export default css`
   }
   p,
   p.p-3,
-  div {
+  div,
+  ul {
     font-size: var(--ramp-t7);
   }
   p.mono,
   pre {
     font-family: 'Monaco';
+  }
+  .emph {
+    font-family: 'Crimson Pro';
+    font-weight: 100;
   }
   label,
   .label {
@@ -117,6 +113,11 @@ export default css`
     text-transform: uppercase;
     font-size: var(--ramp-t9);
   }
+
+  ul {
+    list-style-type: none;
+  }
+
   a,
   a:link,
   a:visited,
@@ -163,7 +164,14 @@ export default css`
     background-color: var(--foreground);
     color: var(--background);
   }
-
+  button.stealth,
+  a.stealth {
+    border: none;
+  }
+  button.stealth:hover,
+  a.stealth:hover {
+    background: var(--hover-background);
+  }
   /* Form inputs */
   .input-group {
     display: flex;
@@ -197,7 +205,7 @@ export default css`
     justify-content: space-between;
     align-items: center;
   }
-  div:first-child {
+  nav div:first-child {
     width: 50%;
   }
   nav div {
@@ -237,6 +245,20 @@ export default css`
     /* A link that is selected */
     a:active {
       color: var(--cr-blue-20);
+    }
+  }
+  :host {
+    display: block;
+    width: 100%;
+  }
+  @media (min-width: 1000px) {
+    .f-r {
+      float: right;
+      margin-left: 3rem;
+    }
+    .f-l {
+      float: left;
+      margin-right: 3rem;
     }
   }
 `;

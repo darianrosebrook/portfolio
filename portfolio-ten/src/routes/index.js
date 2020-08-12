@@ -1,6 +1,7 @@
-import { LitElement, html } from 'lit-element';
+import { LitElement, html, css } from 'lit-element';
 
 import '../views/home/index.js';
+import styles from '../styles/index.js';
 
 class Routes extends LitElement {
   render() {
@@ -9,6 +10,18 @@ class Routes extends LitElement {
         <lit-route path="/" component="home-page"></lit-route>
       </section>
     `;
+  }
+
+  static get styles() {
+    return [
+      styles,
+      css`
+        lit-route {
+          display: block;
+          width: 100%;
+        }
+      `,
+    ];
   }
 }
 

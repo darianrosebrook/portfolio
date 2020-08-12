@@ -18,6 +18,39 @@ import {
   glassFrontierLogo,
 } from '../../assets/img/logo/index.js';
 
+const host = css`
+  .grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: var(--margin);
+    margin: var(--margin) 0;
+    align-items: center;
+  }
+  a {
+    grid-column: span 4;
+  }
+  svg {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    height: auto;
+    fill: var(--foreground);
+  }
+  section {
+    padding-left: 2rem;
+    border-left: 1px solid var(--divider-color);
+  }
+  h2 {
+    font-size: var(--ramp-t7);
+  }
+  .row {
+    padding: 1rem 0 1rem 0;
+    border-bottom: 1px solid var(--divider-color);
+  }
+`;
+
 // Redux
 // class ___ extends connect(store)(LitElement) {
 
@@ -26,7 +59,7 @@ class ClientList extends LitElement {
     return html`<section class="previous-clients">
       <article class="row">
         <h2>Previous Clients</h2>
-        <div class="grid clients">
+        <div class="grid ">
           <a href="https://clinicallymedia.com/" target="_blank"
             >${clinicallyMediaLogo}</a
           >
@@ -53,30 +86,14 @@ class ClientList extends LitElement {
             >${glassFrontierLogo}</a
           >
 
-          ${travelightLogo}
+          <a href="#" style="pointer-events: none;">${travelightLogo}</a>
         </div>
       </article>
     </section> `;
   }
 
   static get styles() {
-    return [
-      styles,
-      css`
-        .grid {
-          width: 100%;
-          display: grid;
-          grid-template-columns: repeat(8, 1fr);
-          gap: var(--margin);
-        }
-        a {
-          grid-column: span 1;
-        }
-        a svg {
-          width: 100%;
-        }
-      `,
-    ];
+    return [styles, host];
   }
 }
 

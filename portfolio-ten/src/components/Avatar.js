@@ -30,7 +30,7 @@ class Avatar extends LitElement {
     return css`
       img {
         border: 1px solid var(--df-dark-neutral-dark);
-        width: 4.8rem;
+        width: 3.6rem;
         max-width: 128px;
         border-radius: 100%;
       }
