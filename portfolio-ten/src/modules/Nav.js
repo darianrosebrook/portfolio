@@ -14,35 +14,27 @@ class NavBar extends LitElement {
       <article class="head-content">
         <p class="darian">${darianLogo}</p>
         <p>
-          <small>
-            <fa-icon
-              icon="briefcase"
-              weight="r"
-              ariaLabel="Occupation:"
-            ></fa-icon>
-            Product Designer</small
-          >
+          <fa-icon
+            icon="briefcase"
+            weight="r"
+            ariaLabel="Occupation:"
+          ></fa-icon>
+          Product Designer
         </p>
         <p>
-          <small>
-            <fa-icon icon="globe" weight="r" ariaLabel="Location:"></fa-icon>
-            Seattle, Wa
-          </small>
+          <fa-icon icon="globe" weight="r" ariaLabel="Location:"></fa-icon>
+          Seattle, Wa
         </p>
-        <h4 alt="Darian Rosebrook" class="sitename">
+        <h4 alt="Darian Rosebrook" class="emph">
           <a href="/">Darian Rosebrook</a>
         </h4>
         <p>
-          <small>
-            <fa-icon icon="clock" weight="r" ariaLabel="Age:"></fa-icon> ${this
-              .age}yo</small
-          >
+          <fa-icon icon="clock" weight="r" ariaLabel="Age:"></fa-icon> ${this
+            .age}yo
         </p>
         <p>
-          <small>
-            <fa-icon icon="user" weight="r" ariaLabel="Pronouns:"></fa-icon>
-            He/Him</small
-          >
+          <fa-icon icon="user" weight="r" ariaLabel="Pronouns:"></fa-icon>
+          He/Him
         </p>
 
         <p class="darian">
@@ -56,7 +48,7 @@ class NavBar extends LitElement {
       </article>
       <nav class="nav">
         <ul>
-          <li><a href="/">Home</a></li>
+          <li style=${this._isActive(window, '/')}><a href="/">Home</a></li>
           <li><a href="/work">Design Work</a></li>
           <li><a href="/writing">Writing</a></li>
           <li><a href="/talks">Speaking</a></li>
@@ -87,6 +79,8 @@ class NavBar extends LitElement {
           display: flex;
           flex-direction: column;
           padding-top: 2rem;
+          border-bottom: 2px solid var(--cr-grey-60);
+          margin-bottom: var(--margin);
         }
         .head-content {
           display: grid;
@@ -118,21 +112,11 @@ class NavBar extends LitElement {
           grid-area: b;
         }
         nav {
-          border-bottom: 2px solid var(--cr-grey-60);
           padding: 2rem 0;
-          width: 50%;
         }
         .nav a {
           color: var(--cr-grey-60);
           font-size: var(--ramp-t5);
-        }
-        nav,
-        ul {
-          width: 100%;
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          justify-content: space-between;
         }
         @media (min-width: 1000px) {
           header .head-content {
@@ -144,6 +128,14 @@ class NavBar extends LitElement {
             align-items: center;
             border-bottom: 1px solid var(--cr-grey-20);
           }
+          nav,
+          ul {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+          }
           p:nth-of-type(1n) {
             grid-area: unset;
           }
@@ -151,12 +143,13 @@ class NavBar extends LitElement {
             grid-area: unset;
           }
           nav {
-            justify-content: center;
+            width: 60%;
+            margin: 0 auto;
+            justify-content: space-between;
           }
 
           ul {
-            width: auto;
-            justify-content: center;
+            justify-content: space-between;
           }
           li {
             width: auto;
@@ -165,6 +158,13 @@ class NavBar extends LitElement {
       `,
     ];
   }
+
+  _isActive = (history, path) => {
+    if (history.location.pathname === path) {
+      return 'display: none';
+    }
+    return '';
+  };
 }
 
 customElements.define('nav-bar', NavBar);
