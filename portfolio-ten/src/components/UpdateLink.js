@@ -7,10 +7,10 @@ import './Icon.js';
 
 class UpdateLink extends LitElement {
   render() {
-    return html` <a class="block-link" href="/now/#${this.anchorTag}">
+    return html` <a class="block-link " href="/now/#${this.anchorTag}">
       <div class="linked-block">
         <p><fa-icon icon="${this.icon}" weight="r"></fa-icon></p>
-        <h6>${this.date}</h6>
+        <small class="c1-upper">${this.date}</small>
         <h5>${this.title}</h5>
       </div>
     </a>`;
