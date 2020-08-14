@@ -18,10 +18,6 @@ const host = css`
     margin: var(--margin) 0;
     grid-gap: var(--design-unit);
   }
-  update-link + update-link {
-    padding-left: 2rem;
-    border-left: 1px solid var(--divider-color);
-  }
   h2 {
     font-size: var(--ramp-t7);
   }
@@ -43,6 +39,7 @@ class Updates extends LitElement {
           .slice(0, 5)
           .map(
             key => html` <update-link
+              class="grid-item"
               .title=${updates[key].title}
               .date=${updates[key].date}
               .icon=${updates[key].icon}

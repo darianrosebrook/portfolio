@@ -51,7 +51,7 @@ class Skills extends LitElement {
               <li>Component Architecture</li>
             </ul>
           </article>
-          <article class="grid-item">
+          <article>
             <h6><small class="c1-upper">UX</small></h6>
             <ul class="emph">
               <li>User Experience Storytelling</li>

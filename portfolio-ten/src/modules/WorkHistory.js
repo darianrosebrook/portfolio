@@ -16,10 +16,6 @@ const host = css`
     margin: var(--margin) 0;
     grid-gap: var(--design-unit);
   }
-  work-link + work-link {
-    padding-left: 2rem;
-    border-left: 1px solid var(--divider-color);
-  }
   h2 {
     font-size: var(--ramp-t7);
   }
@@ -45,6 +41,7 @@ class WorkHistory extends LitElement {
             .map(
               key => html`
                 <work-link
+                  class="grid-item"
                   .companyName="${work[key].companyName}"
                   .role="${work[key].role}"
                   .dateFrom="${work[key].dateFrom}"
