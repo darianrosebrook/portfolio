@@ -1,4 +1,4 @@
-import { LitElement, html } from 'lit-element';
+import { LitElement, html, css } from 'lit-element';
 
 // Actions
 
@@ -6,7 +6,29 @@ import { LitElement, html } from 'lit-element';
 import styles from '../styles/index.js';
 
 // Components
+import '../components/Icon.js';
 
+const host = css`
+  .module {
+    display: grid;
+    grid-template-columns: 1fr 9fr 10fr;
+    gap: var(--margin);
+    align-items: center;
+  }
+  .callout {
+    padding: calc(var(--margin) * 2);
+    background: var(--cr-blue-10);
+    border-radius: var(--design-unit);
+  }
+  fa-icon {
+    align-self: start;
+  }
+  @media (prefers-color-scheme: dark) {
+    .callout {
+      background: var(--cr-blue-100);
+    }
+  }
+`;
 // Redux
 // class ___ extends connect(store)(LitElement) {
 
@@ -15,11 +37,14 @@ class Newsletter extends LitElement {
     return html` <section class="container callout newsletter">
       <article class="row">
         <div class="module">
-          <h4>
-            <i class="far fa-newspaper transition"><span>Newsletter</span></i>
-          </h4>
+          <fa-icon
+            weight="r"
+            iconSize="medium"
+            icon="newspaper"
+            ariaLabel="Newsletter"
+          ></fa-icon>
           <div class="content">
-            <h4>Itching to get better at design strategy?</h4>
+            <h4 class="emph">Itching to get better at design strategy?</h4>
             <p>
               Every Thursday, I send out a new article to my newsletter group
               about things that I’m learning with the design strategy. Since I
@@ -137,7 +162,7 @@ class Newsletter extends LitElement {
   }
 
   static get styles() {
-    return styles;
+    return [styles, host];
   }
 }
 
