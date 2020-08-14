@@ -44,7 +44,7 @@ class WorkLink extends LitElement {
           ${this.companyName}
           <fa-icon icon="chevron-right" weight="r"></fa-icon>
         </p>
-        <h6>${this.dateFrom} &mdash; ${this.dateTo}</h6>
+        <small class="c1-upper">${this.dateFrom} &mdash; ${this.dateTo}</small>
         <h5>${this.role}</h5>
       </div>
     </a>`;

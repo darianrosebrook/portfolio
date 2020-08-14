@@ -13,6 +13,9 @@ const host = css`
     margin: var(--margin) 0;
     grid-gap: var(--design-unit);
   }
+  h2 {
+    font-size: var(--ramp-t7);
+  }
 `;
 
 // Components
