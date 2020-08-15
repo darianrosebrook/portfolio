@@ -1,12 +1,50 @@
-import { LitElement, html } from 'lit-element';
+import { LitElement, html, css } from 'lit-element';
 
 // Actions
+import { talks } from '../constants/index.js';
 
 // Styles
 import styles from '../styles/index.js';
-
 // Components
+import '../components/YouTubePlayer.js';
+import '../components/VideoLink.js';
 
+const host = css`
+  h2 {
+    font-size: var(--ramp-t7);
+  }
+  .grid {
+    display: grid;
+    width: 100%;
+    gap: var(--design-unit);
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 'fv fv' 'v2 v3' 'v4 v5';
+  }
+  img {
+    width: 100%;
+  }
+  .featured-video {
+    grid-area: fv;
+  }
+  .v2 {
+    grid-area: v2;
+  }
+  .v3 {
+    grid-area: v3;
+  }
+  .v4 {
+    grid-area: v4;
+  }
+  .v5 {
+    grid-area: v5;
+  }
+  @media (min-width: 1000px) {
+    .grid {
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-areas: 'v2 fv fv fv v4' 'v3 fv fv fv v5';
+    }
+  }
+`;
 // Redux
 // class ___ extends connect(store)(LitElement) {
 
@@ -28,62 +66,66 @@ class Talks extends LitElement {
           </div>
           <div class="module">
             <div class="grid">
-              {% assign i = 0 %} {% for post in site.categories.talk limit: 5 %}
-              {% assign i = i | plus:1 %} {% assign class = '' %} {% if i == 1
-              %} {% assign class = 'featured-video' %} {% else %} {% assign
-              class = i %} {% endif %}
-              <article class="grid-item ">
-                <a href="{{post.url }}" rel="noreferrer"
-                  ><img src="" alt="" loading="lazy" />
-                  <h6>{{post.date | date: "%b %d, %y" }}</h6>
-                  <h3>{{post.title}}</h3>
-                  <p><small>{{post.description | truncate: 75 }}</small></p> </a
-                >{% else %}
-                <style>
-                  .embed-container {
-                    position: relative;
-                    padding-bottom: 56.25%;
-                    height: 0;
-                    overflow: hidden;
-                    max-width: 100%;
-                  }
+              ${Object.keys(talks)
+                .reverse()
+                .slice(0, 4)
+                .map((item, i) => {
+                  return i > 0
+                    ? html`
+                        <video-link
+                          class="v${i + 1}"
+                          videoId="${talks[item].videoId}"
+                          date="${talks[item].date}"
+                          title="${talks[item].title}"
+                          description="${talks[item].description}"
+                        ></video-link>
+                      `
+                    : html`<div class="featured-video">
+                        <style>
+                          .embed-container {
+                            position: relative;
+                            padding-bottom: 56.25%;
+                            height: 0;
+                            overflow: hidden;
+                            max-width: 100%;
+                          }
 
-                  .embed-container iframe,
-                  .embed-container object,
-                  .embed-container embed {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                  }
-                </style>
+                          .embed-container iframe,
+                          .embed-container object,
+                          .embed-container embed {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                          }
+                        </style>
 
-                <div class="embed-container">
-                  <iframe
-                    title=""
-                    width="560"
-                    height="315"
-                    src="https://www.youtube.com/embed/post.video_id"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
-                  ></iframe>
-                </div>
-                <h6>{{post.date | date: "%b %d, %y" }}</h6>
-                <h3>{{post.title}}</h3>
-                <p><small>{{post.description | truncate: 200 }}</small></p>
-                <p>
-                  <a href="posturl"
-                    >See more
-                    <i class="fa fa-arrow-right icon"
-                      ><span>Click to see more</span></i
-                    ></a
-                  >
-                </p>
-                {% endif %}
-              </article>
-              {% endfor %}
+                        <div class="embed-container">
+                          <iframe
+                            title="${talks[item].title}"
+                            width="560"
+                            height="315"
+                            src="https://www.youtube.com/embed/${talks[item]
+                              .videoId}"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen
+                          ></iframe>
+                        </div>
+                        <h6>${talks[item].date}</h6>
+                        <h3>${talks[item].title}</h3>
+                        <p><small>${talks[item].description}</small></p>
+                        <p>
+                          <a href="posturl"
+                            >See more
+                            <i class="fa fa-arrow-right icon"
+                              ><span>Click to see more</span></i
+                            ></a
+                          >
+                        </p>
+                      </div>`;
+                })}
             </div>
           </div>
         </article>
@@ -92,7 +134,7 @@ class Talks extends LitElement {
   }
 
   static get styles() {
-    return styles;
+    return [styles, host];
   }
 }
 

@@ -9,6 +9,9 @@ import styles from '../styles/index.js';
 import '../components/Icon.js';
 
 const host = css`
+  section {
+    margin: var(--margin) 0;
+  }
   .module {
     display: grid;
     grid-template-columns: 1fr 9fr 10fr;
