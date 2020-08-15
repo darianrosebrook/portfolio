@@ -11,16 +11,17 @@
     "start": "es-dev-server --app-index index.html --node-resolve --open --watch"
   },
   "devDependencies": {
-    "eslint": "^6.1.0",
-    "@open-wc/eslint-config": "^2.0.0",
-    "prettier": "^2.0.4",
+    "@open-wc/building-rollup": "^1.7.0",
+    "@open-wc/eslint-config": "^2.1.0",
+    "es-dev-server": "^1.57.2",
+    "eslint": "^7.6.0",
     "eslint-config-prettier": "^6.11.0",
-    "husky": "^1.0.0",
-    "lint-staged": "^10.0.0",
-    "@open-wc/building-rollup": "^1.0.0",
-    "rimraf": "^2.6.3",
-    "rollup": "^2.3.4",
-    "es-dev-server": "^1.5.0"
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "prettier": "^2.0.5",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.23.1",
+    "serialize-javascript": ">=4.0.0"
   },
   "eslintConfig": {
     "extends": [
@@ -52,9 +53,9 @@
   "dependencies": {
     "@intcreator/markdown-element": "^0.3.3",
     "deepmerge": "^4.2.2",
-    "lit-element": "^2.0.1",
-    "lit-html": "^1.0.0",
-    "lit-redux-router": "^0.15.0",
+    "lit-element": "^2.3.1",
+    "lit-html": "^1.2.1",
+    "lit-redux-router": "^0.15.1",
     "moment": "^2.27.0",
     "pwa-helpers": "^0.9.1",
     "redux": "^4.0.5",

@@ -5,14 +5,17 @@ import styles from '../styles/index.js';
 
 import './Icon.js';
 
-class UpdateLink extends LitElement {
+class VideoLink extends LitElement {
   render() {
-    return html` <a class="block-link " href="/now/#${this.anchorTag}">
-      <div class="linked-block">
-        <p><fa-icon icon="${this.icon}" weight="r"></fa-icon></p>
-        <small class="c1-upper">${this.date}</small>
-        <h5>${this.title}</h5>
-      </div>
+    return html`<a href="{{post.url }}" rel="noreferrer" class="block-link">
+      <img
+        src="https://i.ytimg.com/vi/${this.videoId}/mqdefault.jpg"
+        alt="${this.title}"
+        loading="lazy"
+      />
+      <small class="c1-upper">${this.date}</small>
+      <h5>${this.title}</h5>
+      <p><small>${this.description}</small></p>
     </a>`;
   }
 
@@ -22,6 +25,8 @@ class UpdateLink extends LitElement {
       date: { type: String },
       icon: { type: String },
       anchorTag: { type: String },
+      videoId: { type: String },
+      description: { type: String },
     };
   }
 
@@ -35,4 +40,4 @@ class UpdateLink extends LitElement {
   }
 }
 
-customElements.define('update-link', UpdateLink);
+customElements.define('video-link', VideoLink);
