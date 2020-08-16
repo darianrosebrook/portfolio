@@ -222,8 +222,7 @@ export default css`
   .grid-item {
     border-right: 1px solid var(--divider-color);
     margin-right: -0.5rem;
-    padding-right: 1.5rem;
-    padding-left: 1.5rem;
+    padding: 0 var(--margin);
   }
   .grid-item:nth-of-type(1n + 4) {
     display: inline-block;
