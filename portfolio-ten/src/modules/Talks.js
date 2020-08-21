@@ -10,6 +10,10 @@ import '../components/YouTubePlayer.js';
 import '../components/VideoLink.js';
 
 const host = css`
+  section {
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--divider-color);
+  }
   h2 {
     font-size: var(--ramp-t7);
   }
