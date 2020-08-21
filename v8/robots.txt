@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /now/
+Allow: /
+
+Sitemap: https://darianrosebrook.com/sitemap.xml
