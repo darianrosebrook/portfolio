@@ -157,8 +157,8 @@ class Home extends LitElement {
         <newsletter-form></newsletter-form>
         <dribbble-shots></dribbble-shots>
         <video-talks></video-talks>
-        <book-list></book-list>
         <podcast-list></podcast-list>
+        <!-- <book-list></book-list> -->
         <contact-form></contact-form>
       </shared-layout>
     `;

@@ -29,7 +29,7 @@ class BookList extends LitElement {
           <div class="module callout">
             <img
               loading="lazy"
-              src="{{site.baseurl}}/assets/img/books/by-design.png"
+              src="/assets/img/books/by-design.png"
               alt="Done By Design, a book that dives into the world of the deliberately decided from a design perspective"
             />
             <div class="book-content">
@@ -45,7 +45,7 @@ class BookList extends LitElement {
                 great invisible.
               </p>
 
-              {% include compass-of-design-logo.svg %}
+              compass-of-design-logo.svg
               <h4>&mdash;Compass of Design</h4>
             </div>
           </div>
