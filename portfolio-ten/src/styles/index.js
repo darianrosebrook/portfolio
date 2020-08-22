@@ -4,11 +4,15 @@ import reset from './reset.js';
 import keyframes from './keyframes.js';
 
 export default css`
+  /* Imports */
   ${reset}
   ${keyframes}
+
+  /* Defaults */
   *,
   *::before,
   *::after {
+    flex-direction: row;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -18,10 +22,28 @@ export default css`
     color: var(--background);
   }
 
+  /* -- Clearfix--  */
+  .f-r,
+  .f-l {
+    float: none;
+  }
+  .cf::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+  /* -- Media -- */
   img {
+    transition: var(--transition);
+    display: inline-block;
     width: 100%;
   }
+  video {
+    display: block;
+  }
 
+  /* Typography  */
+  /* -- Headings--  */
   h1 {
     font-size: var(--ramp-t1);
     font-weight: 600;
@@ -61,6 +83,7 @@ export default css`
     font-weight: 600;
     line-height: 1.428571428571429;
   }
+
   p {
     margin-bottom: var(--margin);
   }
@@ -143,12 +166,20 @@ export default css`
     display: block;
     width: 100%;
   }
+
+  /* Architecture */
+  /* -- Grid--  */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: var(--margin);
+  }
+
   button,
   a.button,
   input[type='submit'] {
     transition: var(--transition);
     display: inline;
-    min-width: 5rem;
     border: 2px solid var(--foreground);
     font-size: 1.3rem;
     text-align: center;
@@ -156,7 +187,6 @@ export default css`
     background: none;
     color: var(--foreground);
     cursor: pointer;
-    padding: 1rem 2rem;
   }
   button:hover,
   a.button:hover,
@@ -215,29 +245,6 @@ export default css`
     align-items: center;
   }
 
-  .grid {
-    grid-template-columns: repeat(5, 1fr);
-  }
-
-  .grid-item {
-    border-right: 1px solid var(--divider-color);
-    margin-right: -0.5rem;
-    padding: 0 var(--margin);
-  }
-  .grid-item:nth-of-type(1n + 4) {
-    display: inline-block;
-  }
-  .grid-item:first-of-type {
-  }
-  .grid-item:nth-of-type(5n + 5) {
-    border-right: none;
-  }
-  .grid-item:nth-of-type(5n + 6) {
-  }
-  .grid-item ~ .grid-item:last-of-type {
-    margin-right: 0;
-    border-right: none;
-  }
   h5 {
     font-family: 'Crimson pro';
     font-weight: 200;
@@ -280,6 +287,7 @@ export default css`
     width: 100%;
   }
   @media (min-width: 1000px) {
+    /* Clearfix */
     .f-r {
       float: right;
       margin-left: 3rem;
@@ -287,6 +295,31 @@ export default css`
     .f-l {
       float: left;
       margin-right: 3rem;
+    }
+
+    /* Grid */
+
+    .grid {
+      grid-template-columns: repeat(5, 1fr);
+    }
+    .grid-item {
+      border-right: 1px solid var(--divider-color);
+      margin-right: -0.5rem;
+      padding: 0 var(--margin);
+    }
+    .grid-item:nth-of-type(1n + 4) {
+      display: inline-block;
+    }
+    .grid-item:first-of-type {
+    }
+    .grid-item:nth-of-type(5n + 5) {
+      border-right: none;
+    }
+    .grid-item:nth-of-type(5n + 6) {
+    }
+    .grid-item ~ .grid-item:last-of-type {
+      margin-right: 0;
+      border-right: none;
     }
   }
 `;

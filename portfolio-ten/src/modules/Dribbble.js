@@ -9,12 +9,17 @@ import styles from '../styles/index.js';
 const host = css`
   .grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     margin: var(--margin) 0;
     grid-gap: var(--design-unit);
   }
   h2 {
     font-size: var(--ramp-t7);
+  }
+  @media (min-width: 1000px) {
+    .grid {
+      grid-template-columns: repeat(5, 1fr);
+    }
   }
 `;
 

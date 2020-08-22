@@ -10,11 +10,13 @@ import { workLogos } from '../../assets/img/logo/index.js';
 import styles from '../styles/index.js';
 
 const host = css`
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    margin: var(--margin) 0;
-    grid-gap: var(--design-unit);
+  @media (min-width: 1000px) {
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin: var(--margin) 0;
+      grid-gap: var(--design-unit);
+    }
   }
   h2 {
     font-size: var(--ramp-t7);

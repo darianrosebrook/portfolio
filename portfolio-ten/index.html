@@ -231,13 +231,15 @@
         margin: 0;
         color: var(--foreground);
         background-color: var(--background);
-        padding: 0 2rem;
         font-family: 'Inter', sans-serif;
         font-size: var(--ramp-t9);
+        line-height: 1.2;
+        transition: var(--transition);
       }
-      body {
-        transition: all ease 0.3s;
+      body.main {
+        padding: 0 2rem;
         animation: fadeIn 2.5s;
+        overflow-x: hidden;
       }
 
       compass-of-design {
@@ -298,7 +300,7 @@
     <title>Darianrosebrook</title>
   </head>
 
-  <body>
+  <body class="main">
     <root-portfolio
       ><h1>
         This browser is not supported by this website.

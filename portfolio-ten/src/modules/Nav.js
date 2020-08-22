@@ -86,6 +86,7 @@ class NavBar extends LitElement {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
           grid-template-areas: 'a b b c' 'd e f g';
+          text-align: center;
         }
         p.darian {
           margin: auto;
@@ -113,6 +114,8 @@ class NavBar extends LitElement {
         }
         nav {
           padding: 2rem 0;
+          text-align: center;
+          margin: 0 auto;
         }
         .nav a {
           color: var(--cr-grey-60);

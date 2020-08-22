@@ -30,15 +30,17 @@ const host = css`
     flex-direction: column;
     justify-content: space-between;
   }
-  .row-head p {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
   .row-head p button-component + button-component {
-    margin-left: var(--margin);
   }
-
+  small {
+    display: block;
+    width: 100%;
+    white-space: nowrap;
+  }
+  button-component {
+    display: inline;
+    width: ;
+  }
   p {
     width: 100%;
   }
@@ -49,6 +51,11 @@ const host = css`
     margin-left: -0.45rem;
   }
   @media (min-width: 1000px) {
+    .row-head p {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
     .hero {
       grid-column: 2/6;
       padding-right: 2rem;
