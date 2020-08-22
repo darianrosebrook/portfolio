@@ -10,6 +10,10 @@ import '../components/YouTubePlayer.js';
 import '../components/VideoLink.js';
 
 const host = css`
+  section {
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--divider-color);
+  }
   h2 {
     font-size: var(--ramp-t7);
   }
@@ -20,11 +24,19 @@ const host = css`
     grid-template-columns: 1fr 1fr;
     grid-template-areas: 'fv fv' 'v2 v3' 'v4 v5';
   }
+  video-link {
+    border-right: 1px solid var(--divider-color);
+  }
+  video-link:nth-of-type(1n + 3) {
+    border-right: none;
+  }
   img {
     width: 100%;
   }
   .featured-video {
     grid-area: fv;
+    padding: 0 var(--margin);
+    border-right: 1px solid var(--divider-color);
   }
   .v2 {
     grid-area: v2;
@@ -67,13 +79,13 @@ class Talks extends LitElement {
           <div class="module">
             <div class="grid">
               ${Object.keys(talks)
+                .slice(0, 5)
                 .reverse()
-                .slice(0, 4)
                 .map((item, i) => {
                   return i > 0
                     ? html`
                         <video-link
-                          class="v${i + 1}"
+                          class="v${i + 1} grid-item"
                           videoId="${talks[item].videoId}"
                           date="${talks[item].date}"
                           title="${talks[item].title}"

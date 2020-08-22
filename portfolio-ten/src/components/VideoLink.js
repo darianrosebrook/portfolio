@@ -37,6 +37,9 @@ class VideoLink extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this.date = moment(this.date).format('DD MMM YYYY');
+    if (this.description.length > 10) {
+      this.description = `${this.description.substring(0, 147)}...`;
+    }
   }
 }
 
