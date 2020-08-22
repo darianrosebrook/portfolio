@@ -22,55 +22,54 @@ const stylesheet = css`
     grid-template-columns: repeat(5, 1fr);
     grid-gap: var(--design-unit);
     align-items: start;
-
     grid-template-areas: 'nv nv nv nv nv' 'he he he he he' 'ud ud ud ud ud' 'sk sk pc pc pc' 'sk sk wh wh wh' 'dw dw dw dw dw' 'nl nl nl nl nl' 'vd vd vd vd vd' 'pd pd pd pd pd' 'bk bk bk bk bk' 'ct ct ct ct ct' 'ft ft ft ft ft';
   }
   nav-bar {
     grid-area: nv;
     grid-column: 1 / span 5;
   }
-::slotted(  update-list ){
+  ::slotted(update-list){
     grid-area: ud;
     grid-column: 1 / span 5;
   }
-  ::slotted(hero-content ){
+  ::slotted(hero-content){
     position: relative;
     grid-column: 1 / span 5;
     grid-area: he;
   }
-  ::slotted(skills-list ){
+  ::slotted(skills-list){
     grid-column: span 2;
     grid-area: sk;
   }
-  ::slotted(client-list) {
+  ::slotted(client-list){
     grid-column: 3 / span 3;
     grid-area: pc;
   }
-  ::slotted(work-history) {
+  ::slotted(work-history){
     grid-column: 3 / span 3;
     grid-area: wh;
   }
-  ::slotted(newsletter-form) {
+  ::slotted(newsletter-form){
     grid-area: nl;
     grid-column: 1 / span 5;
   }
-  ::slotted(dribbble-shots) {
+  ::slotted(dribbble-shots){
     grid-area: dw;
     grid-column: 1 / span 5;
   }
-  ::slotted(video-talks) {
+  ::slotted(video-talks){
     grid-area: vd;
     grid-column: 1 / span 5;
   }
-  ::slotted(book-list) {
+  ::slotted(book-list){
     grid-area: bk;
     grid-column: 1 / span 5;
   }
-  ::slotted(podcast-list) {
+  ::slotted(podcast-list){
     grid-area: pd;
     grid-column: 1 / span 5;
   }
-  ::slotted(contact-form) {
+  ::slotted(contact-form){
     grid-area: ct;
     grid-column: 1 / span 5;
   }
