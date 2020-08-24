@@ -187,6 +187,7 @@ export default css`
     background: none;
     color: var(--foreground);
     cursor: pointer;
+    padding: 1rem;
   }
   button:hover,
   a.button:hover,

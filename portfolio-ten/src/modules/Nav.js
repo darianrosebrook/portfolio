@@ -26,7 +26,7 @@ class NavBar extends LitElement {
           Seattle, Wa
         </p>
         <h4 alt="Darian Rosebrook" class="emph">
-          <a href="/">Darian Rosebrook</a>
+          <a class="block-link" href="/">Darian Rosebrook</a>
         </h4>
         <p>
           <fa-icon icon="clock" weight="r" ariaLabel="Age:"></fa-icon> ${this
