@@ -68,7 +68,6 @@ class Skills extends LitElement {
               <li>Logo design systems</li>
               <li>Brand standard guides</li>
               <li>Iconography</li>
-              <li>Packaging design</li>
             </ul>
           </article>
           <article class="">
@@ -78,14 +77,12 @@ class Skills extends LitElement {
               <li>Figma</li>
               <li>Sketch App</li>
               <li>InVision</li>
-              <li>InVision Studio</li>
             </ul>
           </article>
           <article class="">
             <h6><small class="c1-upper">Code</small></h6>
             <ul class="emph">
-              <li>HTML</li>
-              <li>CSS</li>
+              <li>HTML & CSS</li>
               <li>JavaScript</li>
               <li>Web Components</li>
               <li>React</li>
