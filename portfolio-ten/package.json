@@ -8,11 +8,15 @@
     "format": "npm run format:eslint && npm run format:prettier",
     "build": "rimraf dist && rollup -c rollup.config.js",
     "start:build": "npm run build && es-dev-server --root-dir dist --app-index index.html --open --compatibility none",
-    "start": "es-dev-server --app-index index.html --node-resolve --open --watch"
+    "start": "es-dev-server --app-index index.html --node-resolve --open --watch",
+    "deploy": "npm run build && cp CNAME ./dist && gh-pages -d dist"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@open-wc/building-rollup": "^1.7.0",
     "@open-wc/eslint-config": "^2.1.0",
+    "@rollup/plugin-url": "^5.0.1",
+    "babel-plugin-transform-inline-environment-variables": "^0.4.3",
     "es-dev-server": "^1.57.2",
     "eslint": "^7.6.0",
     "eslint-config-prettier": "^6.11.0",
@@ -22,6 +26,8 @@
     "prettier": "^2.0.5",
     "rimraf": "^3.0.2",
     "rollup": "^2.23.1",
+    "rollup-plugin-copy-assets": "^2.0.1",
+    "rollup-plugin-node-resolve": "^5.2.0",
     "serialize-javascript": ">=4.0.0"
   },
   "eslintConfig": {

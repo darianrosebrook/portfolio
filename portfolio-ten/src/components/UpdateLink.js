@@ -3,10 +3,14 @@ import moment from 'moment/src/moment';
 
 import styles from '../styles/index.js';
 import './Icon.js';
+import './Avatar.js';
 
 class UpdateLink extends LitElement {
   render() {
     return html` <style>
+        avatar-image {
+          display: none;
+        }
         .linked-block {
           display: grid;
           grid-template-columns: repeat(10, 1fr);
@@ -23,12 +27,20 @@ class UpdateLink extends LitElement {
           margin: 0;
         }
         @media (min-width: 1000px) {
+          avatar-image {
+            display: block;
+          }
           .linked-block {
             display: block;
           }
         }</style
       ><a class="block-link " href="/now/#${this.anchorTag}">
         <div class="linked-block">
+          <avatar-image
+            class="f-r"
+            source="/assets/img/darian-rosebrook-avatar.jpg"
+            altHeading="Darian Rosebrook's avatar"
+          ></avatar-image>
           <p><fa-icon icon="${this.icon}" weight="r"></fa-icon></p>
           <small class="c1-upper">${this.date}</small>
           <h5>${this.title}</h5>

@@ -6,6 +6,9 @@ import moment from 'moment/src/moment';
 // Styles
 import styles from '../styles/index.js';
 
+// Components
+import '../components/Avatar.js';
+
 const host = css`
   .grid {
     display: grid;
@@ -22,8 +25,6 @@ const host = css`
     }
   }
 `;
-
-// Components
 
 // Redux
 // class ___ extends connect(store)(LitElement) {
@@ -49,12 +50,19 @@ class Dribbble extends LitElement {
                       alt=${this.shots[item].title}
                     />
                   </p>
-                  <small class="c1-upper"
-                    >${moment(this.shots[item].published_at).format(
-                      'DD MMM YYYY'
-                    )}</small
-                  >
-                  <h5>${this.shots[item].title}</h5>
+                  <div>
+                    <avatar-image
+                      class="f-r"
+                      source="/assets/img/darian-rosebrook-avatar.jpg"
+                      altHeading="Darian Rosebrook's avatar"
+                    ></avatar-image>
+                    <small class="c1-upper"
+                      >${moment(this.shots[item].published_at).format(
+                        'DD MMM YYYY'
+                      )}</small
+                    >
+                    <h5>${this.shots[item].title}</h5>
+                  </div>
                 </a>
               </div>`;
             })}
