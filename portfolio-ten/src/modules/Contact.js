@@ -1,12 +1,44 @@
-import { LitElement, html } from 'lit-element';
+import { LitElement, html, css } from 'lit-element';
 
 // Actions
 
 // Styles
 import styles from '../styles/index.js';
-
 // Components
+import '../components/VisualCheckbox.js';
 
+const host = css`
+  form {
+    margin: 0 auto;
+  }
+  .checkbox-container {
+    margin-bottom: 3rem;
+  }
+  visual-checkbox {
+    height: 100%;
+  }
+  input,
+  textarea {
+    margin-bottom: 2rem;
+  }
+  label {
+    margin-bottom: 2rem;
+  }
+  .hidden {
+    display: none;
+  }
+  @media (min-width: 1000px) {
+    form {
+      width: 50%;
+    }
+    .checkbox-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: var(--design-unit);
+      margin-bottom: 5rem;
+    }
+  }
+`;
 // Redux
 // class ___ extends connect(store)(LitElement) {
 
@@ -17,43 +49,17 @@ class Contact extends LitElement {
         <h2>Let's Get in Contact</h2>
         <h6>* All Fields Required</h6>
         <form action="https://formspree.io/mnnjazpm" method="POST">
-          <input
-            type="checkbox"
-            class="hidden"
-            data-continue="false"
-            id="checkbox-hello"
-            name="checkbox-hello"
-            value=""
-          />
-          <input
-            type="checkbox"
-            class="hidden"
-            data-continue="false"
-            id="checkbox-else"
-            name="checkbox-else"
-            value=""
-          /><br />
-          <div class="container label-container">
-            <label class="transition module " for="checkbox-hello">
-              <img
-                loading="lazy"
-                src="{{site.baseurl}}/assets/img/icon-smile.svg"
-                alt=""
-              />
-              <br />
-              <p>Say hello and have a conversation</p>
-            </label>
-            <label class="transition module " for="checkbox-else">
-              <img
-                loading="lazy"
-                src="{{site.baseurl}}/assets/img/icon-else.svg"
-                alt=""
-              />
-              <br />
-              <p>
-                Something else: Collaboration, Conference, Run a Workshop, Etc
-              </p>
-            </label>
+          <div class="checkbox-container">
+            <visual-checkbox
+              contents="Say hello and have a conversation"
+              icon="comments-alt"
+              inputName="conversation"
+            ></visual-checkbox>
+            <visual-checkbox
+              contents="Something else: Collaboration, Conference, Run a Workshop, Etc"
+              icon="question-circle"
+              inputName="conversation"
+            ></visual-checkbox>
           </div>
           <label for="name">Name</label>
           <input
@@ -80,31 +86,25 @@ class Contact extends LitElement {
             placeholder="Your Message..."
             class="transition enter text-center "
           ></textarea>
-          <h4 class="message enter">
-            <span class="hidden project"
-              >Tell me more about what you're looking to get out of personal
-              coaching?</span
-            ><span class="hidden message">How can I help? :D</span>
-          </h4>
-          <input type="submit" class="button tertiary" value="Submit!" />
 
           <input type="text" name="_gotcha" class="hidden" />
-          <p class=" project">
-            Thank you! <br /><br />I'll review the responses here and respond to
-            you as soon as I can. Thanks!
-          </p>
           <input
             type="hidden"
             name="_next"
             value="https://darianrosebrook.com/continue"
           />
+          <input type="submit" class="button tertiary" value="Submit!" />
+          <p class=" project">
+            Thank you! <br /><br />I'll review the responses here and respond to
+            you as soon as I can. Thanks!
+          </p>
         </form>
       </div>
     </section>`;
   }
 
   static get styles() {
-    return styles;
+    return [styles, host];
   }
 }
 

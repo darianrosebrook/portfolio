@@ -40,7 +40,6 @@ class WorkHistory extends LitElement {
             .reverse()
             .slice(0, 4)
             .map(key => {
-              console.log(workLogos[key]);
               return html`
                 <work-link
                   class="grid-item"

@@ -210,7 +210,8 @@ export default css`
     margin-bottom: var(--margin);
   }
 
-  input {
+  input,
+  textarea {
     outline: none;
     padding: 1rem 2rem;
     min-height: 4.4rem;
