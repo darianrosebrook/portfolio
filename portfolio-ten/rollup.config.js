@@ -2,7 +2,7 @@ import merge from 'deepmerge';
 // use createSpaConfig for bundling a Single Page App
 import { createSpaConfig } from '@open-wc/building-rollup';
 import url from '@rollup/plugin-url';
-import copy from 'rollup-plugin-copy-assets';
+import copy from 'rollup-plugin-copy';
 import resolve from 'rollup-plugin-node-resolve';
 // use createBasicConfig to do regular JS to JS bundling
 // import { createBasicConfig } from '@open-wc/building-rollup';
@@ -28,24 +28,49 @@ export default merge(baseConfig, {
   input: './index.html',
   plugins: [
     resolve(),
-    url({
-      // Where to put files
-      destDir: 'dist/assets/',
-      // Path to put infront of files (in code)
-      publicPath:
-        process.env.NODE_ENV === 'development'
-          ? 'http://localhost:8000/dist/assets/'
-          : './assets/',
-      // File name once copied
-      fileName: '[name][extname]',
-      // Kinds of files to process
-      include: ['**/*.svg', '**/*.png', '**/*.gif', '**/*.jpg', '**/*.jpeg'],
-    }),
+    url(
+      {
+        // Where to put files
+        destDir: 'dist/assets/',
+        // Path to put infront of files (in code)
+        publicPath:
+          process.env.NODE_ENV === 'development'
+            ? 'http://localhost:8000/dist/assets/'
+            : './assets/',
+        // File name once copied
+        fileName: '[name][extname]',
+        // Kinds of files to process
+        include: ['**/*.svg', '**/*.png', '**/*.gif', '**/*.jpg', '**/*.jpeg'],
+      },
+      {
+        // Where to put files
+        destDir: 'dist/posts/',
+        // Path to put infront of files (in code)
+        publicPath:
+          process.env.NODE_ENV === 'development'
+            ? 'http://localhost:8000/dist/posts/'
+            : './posts/',
+        // File name once copied
+        fileName: '[name][extname]',
+        // Kinds of files to process
+        include: [
+          '**/*.svg',
+          '**/*.png',
+          '**/*.gif',
+          '**/*.jpg',
+          '**/*.jpeg',
+          '**/*.md',
+        ],
+      }
+    ),
+
     copy({
-      assets: [
-        // You can include directories
-        'src/assets',
+      targets: [
+        { src: 'src/assets/**/*', dest: 'dist' },
+        { src: 'src/posts/**/*', dest: 'dist' },
       ],
+      // set flatten to false to preserve folder structure
+      flatten: false,
     }),
   ],
   // alternatively, you can use your JS as entrypoint for rollup and
