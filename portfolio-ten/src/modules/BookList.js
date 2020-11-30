@@ -1,10 +1,31 @@
-import { LitElement, html } from 'lit-element';
+import { LitElement, html, css } from 'lit-element';
 
 // Actions
 
 // Styles
 import styles from '../styles/index.js';
 
+const host = css`.books
+  grid-area: bk
+  .logo
+    margin-bottom: -.8rem
+  .book-content
+    h3
+      font-size: 4rem
+    h4
+      display: inline
+      width: fit-content
+  .grid-item
+    img
+      display: block
+      max-width: 140px
+      margin: 0 auto
+    span
+      font-family: "Crimson Pro"
+      font-size: 4rem
+      font-weight: 300
+    h4
+      font-size: 3rem`;
 // Components
 
 // Redux
@@ -99,7 +120,7 @@ class BookList extends LitElement {
   }
 
   static get styles() {
-    return styles;
+    return [styles, host];
   }
 }
 
