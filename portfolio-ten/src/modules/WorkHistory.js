@@ -4,17 +4,19 @@ import { LitElement, html, css } from 'lit-element';
 import '../components/WorkLink.js';
 
 import { work } from '../constants/index.js';
-import { workLogos } from '../../assets/img/logo/index.js';
+import { workLogos } from '../assets/img/logo/WorkLogos.js';
 
 // Styles
 import styles from '../styles/index.js';
 
 const host = css`
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    margin: var(--margin) 0;
-    grid-gap: var(--design-unit);
+  @media (min-width: 1000px) {
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin: var(--margin) 0;
+      grid-gap: var(--design-unit);
+    }
   }
   h2 {
     font-size: var(--ramp-t7);
@@ -28,7 +30,6 @@ const host = css`
 
 // Redux
 // class ___ extends connect(store)(LitElement) {
-
 class WorkHistory extends LitElement {
   render() {
     return html`<section class=" work-history">
@@ -38,8 +39,8 @@ class WorkHistory extends LitElement {
           ${Object.keys(work)
             .reverse()
             .slice(0, 4)
-            .map(
-              key => html`
+            .map(key => {
+              return html`
                 <work-link
                   class="grid-item"
                   .companyName="${work[key].companyName}"
@@ -47,10 +48,10 @@ class WorkHistory extends LitElement {
                   .dateFrom="${work[key].dateFrom}"
                   .dateTo="${work[key].dateTo}"
                   .logo="${workLogos[key]}"
-                  .src="${work[key]}"
+                  .anchorTag="${work[key].anchorTag}"
                 ></work-link>
-              `
-            )}
+              `;
+            })}
         </div>
       </article>
     </section> `;

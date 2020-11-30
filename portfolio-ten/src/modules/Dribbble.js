@@ -6,19 +6,25 @@ import moment from 'moment/src/moment';
 // Styles
 import styles from '../styles/index.js';
 
+// Components
+import '../components/Avatar.js';
+
 const host = css`
   .grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     margin: var(--margin) 0;
     grid-gap: var(--design-unit);
   }
   h2 {
     font-size: var(--ramp-t7);
   }
+  @media (min-width: 1000px) {
+    .grid {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
 `;
-
-// Components
 
 // Redux
 // class ___ extends connect(store)(LitElement) {
@@ -44,12 +50,19 @@ class Dribbble extends LitElement {
                       alt=${this.shots[item].title}
                     />
                   </p>
-                  <small class="c1-upper"
-                    >${moment(this.shots[item].published_at).format(
-                      'DD MMM YYYY'
-                    )}</small
-                  >
-                  <h5>${this.shots[item].title}</h5>
+                  <div>
+                    <avatar-image
+                      class="f-r"
+                      source="/assets/img/darian-rosebrook-avatar.jpg"
+                      altHeading="Darian Rosebrook's avatar"
+                    ></avatar-image>
+                    <small class="c1-upper"
+                      >${moment(this.shots[item].published_at).format(
+                        'DD MMM YYYY'
+                      )}</small
+                    >
+                    <h5>${this.shots[item].title}</h5>
+                  </div>
                 </a>
               </div>`;
             })}

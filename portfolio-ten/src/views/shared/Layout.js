@@ -1,11 +1,9 @@
 import { LitElement, html } from 'lit-element';
 
 import styles from '../../styles/index.js';
-// Components
 import '../../modules/Nav.js';
 import '../../modules/Footer.js';
-// Redux
-// Actions
+import '../../components/Alert.js';
 
 class SharedLayout extends LitElement {
   render() {

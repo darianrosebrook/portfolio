@@ -39,4 +39,12 @@ export const talks = {
     description:
       'Darian Rosebrook is a brand designer and founder of the design community Compass Of Design. Today we talk about how important it is to be surrounded by like-minded creatives and his journey to building Compass Of Design.',
   },
+  notionDesignSystem: {
+    src: '/posts/update/2015-10-22-starting-my-journey-to-development.md',
+    title: 'How I use Notion for design system documentation',
+    date: '10-10-2020',
+    videoId: '0bO1-BSCqUs',
+    description:
+      'A quick run down of how I have been starting the documentation for a design system using Notion and Figma. Potentially will have a part two that will go over the Figma side of things, but now that Figma Variants feture is out, I need to refactor some components.',
+  },
 };

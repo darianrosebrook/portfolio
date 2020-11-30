@@ -26,7 +26,7 @@ class NavBar extends LitElement {
           Seattle, Wa
         </p>
         <h4 alt="Darian Rosebrook" class="emph">
-          <a href="/">Darian Rosebrook</a>
+          <a class="block-link" href="/">Darian Rosebrook</a>
         </h4>
         <p>
           <fa-icon icon="clock" weight="r" ariaLabel="Age:"></fa-icon> ${this
@@ -86,6 +86,7 @@ class NavBar extends LitElement {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
           grid-template-areas: 'a b b c' 'd e f g';
+          text-align: center;
         }
         p.darian {
           margin: auto;
@@ -113,6 +114,8 @@ class NavBar extends LitElement {
         }
         nav {
           padding: 2rem 0;
+          text-align: center;
+          margin: 0 auto;
         }
         .nav a {
           color: var(--cr-grey-60);

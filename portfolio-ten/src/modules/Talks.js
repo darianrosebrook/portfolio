@@ -79,8 +79,8 @@ class Talks extends LitElement {
           <div class="module">
             <div class="grid">
               ${Object.keys(talks)
-                .slice(0, 5)
                 .reverse()
+                .slice(0, 5)
                 .map((item, i) => {
                   return i > 0
                     ? html`
