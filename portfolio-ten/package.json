@@ -25,7 +25,8 @@
     "lint-staged": "^10.2.11",
     "prettier": "^2.0.5",
     "rimraf": "^3.0.2",
-    "rollup": "^2.23.1",
+    "rollup": "^2.27.0",
+    "rollup-plugin-copy": "^3.3.0",
     "rollup-plugin-copy-assets": "^2.0.1",
     "rollup-plugin-node-resolve": "^5.2.0",
     "serialize-javascript": ">=4.0.0"
@@ -64,6 +65,8 @@
     "lit-html": "^1.2.1",
     "lit-redux-router": "^0.15.1",
     "moment": "^2.27.0",
+    "prism-markdown-element": "^1.0.9",
+    "prismjs": "^1.15.0",
     "pwa-helpers": "^0.9.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0"

@@ -48,7 +48,7 @@ class WorkHistory extends LitElement {
                   .dateFrom="${work[key].dateFrom}"
                   .dateTo="${work[key].dateTo}"
                   .logo="${workLogos[key]}"
-                  .src="${work[key]}"
+                  .anchorTag="${work[key].anchorTag}"
                 ></work-link>
               `;
             })}

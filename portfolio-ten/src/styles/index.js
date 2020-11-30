@@ -27,6 +27,9 @@ export default css`
   .f-l {
     float: none;
   }
+  avatar-image.f-r {
+    float: right;
+  }
   .cf::after {
     content: '';
     display: table;

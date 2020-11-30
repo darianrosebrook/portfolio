@@ -31,7 +31,7 @@ class WorkLink extends LitElement {
   render() {
     return html` <a
       class="block-link"
-      href="/now/#${this.anchorTag}"
+      href="/posts/work-studies/${this.anchorTag}"
       style="
     height: 100%;"
     >
