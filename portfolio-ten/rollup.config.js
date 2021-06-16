@@ -60,11 +60,12 @@ export default merge(baseConfig, {
           '**/*.jpg',
           '**/*.jpeg',
           '**/*.md',
+          '**/*.ico'
         ],
       }
     ),
 
-    copy({ patterns: '**/*.{svg,jpg,jpeg,json}', exclude: 'node_modules'})
+    copy({ patterns: '**/*.{svg,jpg,jpeg,json,ico}', exclude: 'node_modules'})
   ],
   // alternatively, you can use your JS as entrypoint for rollup and
   // optionally set a HTML template manually
