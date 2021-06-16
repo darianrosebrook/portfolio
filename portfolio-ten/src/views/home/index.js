@@ -146,9 +146,25 @@ const stylesheet = css`
 
 class Home extends LitElement {
   render() {
+    let alertDescription = html`<p>
+        I am using LitElement to recreate the original site as a test of
+        <strong>design systems thinking</strong> and
+        <strong>using native web components in production</strong>.
+      </p>
+      <p>
+        For my actual portfolio, please check out
+        <a href="https://darian.is/a-designer" target="_blank"
+          >darian.is/a-designer</a
+        >
+      </p>`;
+    let alertTitle = `This portfolio iteration is a test.`;
     return html`
       <shared-layout .stylesheet=${stylesheet}>
-        <alert-notification style="grid-area: al;"></alert-notification>
+        <alert-notification
+          style="grid-area: al;"
+          .alertTitle="${alertTitle}"
+          .alertDescription=${alertDescription}
+        ></alert-notification>
         <update-list></update-list>
         <hero-content></hero-content>
         <skills-list></skills-list>

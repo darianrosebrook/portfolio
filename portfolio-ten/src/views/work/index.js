@@ -140,7 +140,6 @@ class Work extends LitElement {
   render() {
     return html`
       <shared-layout .stylesheet=${stylesheet}>
-        <alert-notification style="grid-area: al;"></alert-notification>
         <client-list></client-list>
         <work-history></work-history>
         <dribbble-shots></dribbble-shots>

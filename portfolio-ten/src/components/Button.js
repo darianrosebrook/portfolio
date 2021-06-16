@@ -50,7 +50,7 @@ class Button extends LitElement {
           color: var(--background) !important;
         }
         fa-icon {
-          color: var(--foreground) !important;
+          color: inherit;
         }
       `,
     ];
