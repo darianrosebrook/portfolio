@@ -170,15 +170,17 @@ class Hero extends LitElement {
             </figcaption>
           </figure>
           <h1 class="emph">
-            <span
-              >Hey there! I'm Darian Rosebrook, a product designer that helps
-              businesses design better end to end user experiences.
-            </span>
+            <span>Hey there! I'm Darian Rosebrook. </span>
           </h1>
           <p class="p-1">
-            You know when you’re using an app or website and you get frustrated
-            when it doesn't do what you want it to? I work to help make sure
-            that doesn't happen.
+            I work as a senior product designer focused on design systems and
+            better end-to-end user experiences.
+          </p>
+          <p class="p-1">
+            One of the biggest hurdles I've seen in product development is the
+            divide between Product, Engineering, and Design. So I create
+            connected systems that help product teams deliver work faster and
+            better.
           </p>
           <p>
             I work as a digital product designer in the Seattle area. Here, I
@@ -188,16 +190,15 @@ class Hero extends LitElement {
           </p>
           <p>
             I have also worked with large companies, VC backed startups,
-            bootstrapped startups, multiple clients in brandind and experience
-            design. I've worked cross collaboratively, setting up design
-            processes for the Developer Experiences team with Microsoft's Edge.
-            I've built a design system and design process for Common Room's
-            product team. I've designed an entire community app and website with
-            a small team for the community that I run. I mentor and teach other
-            designers ways to become better freelancers, designers, and
-            communicators.
+            bootstrapped startups, multiple clients in branding and user
+            experience design. I've worked cross collaboratively, setting up
+            design processes for the Developer Experiences team with Microsoft's
+            Edge. I've built a design system and design process for Common
+            Room's product team. I've designed an entire community app and
+            website with a small team for the community that I run. I mentor and
+            teach other designers ways to become better freelancers, designers,
+            and communicators.
           </p>
-          <h4>I am currently looking for my next role as a product designer</h4>
         </article>
       </article>
     `;

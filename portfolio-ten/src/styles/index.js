@@ -188,7 +188,7 @@ export default css`
     text-align: center;
     text-transform: none;
     background: none;
-    color: var(--foreground);
+    color: inherit;
     cursor: pointer;
     padding: 1rem;
   }

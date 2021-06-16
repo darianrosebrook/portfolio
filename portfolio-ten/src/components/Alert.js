@@ -1,5 +1,5 @@
 import { LitElement, html, css } from 'lit-element';
-
+import './Button.js';
 // Actions
 
 // Styles
@@ -7,12 +7,24 @@ import { LitElement, html, css } from 'lit-element';
 import styles from '../styles/index.js';
 
 const host = css`
-  div {
+  .container {
     padding: 1rem;
     margin: 4rem 0;
     border-radius: var(--design-unit);
-    background-color: var(--cr-orange-10);
-    color: var(--cr-orange-70);
+    background-color: var(--warn-background);
+    color: var(--warn-foreground);
+    display: flex;
+    justify-content: space-between;
+  }
+  .content {
+    width: 100%;
+  }
+  button-component {
+    width: fit-content;
+    color: var(--warn-foreground);
+  }
+  .hide {
+    display: none;
   }
 `;
 // Components
@@ -22,31 +34,42 @@ const host = css`
 
 class AlertNotification extends LitElement {
   render() {
-    return html` <div>
-      <p>
-        <strong>
-          This portfolio iteration is a test.
-        </strong>
-      </p>
-      <p>
-        I am using LitElement to recreate the original site as a test of
-        <strong>design systems thinking</strong> and
-        <strong>using native web components in production</strong>.
-      </p>
-      <p>
-        For my actual portfolio, please check out
-        <a
-          href="https://darian.is/a-designer"
-          style="color: var(--cr-blue-70);"
-          target="_blank"
-          >darian.is/a-designer</a
-        >
-      </p>
+    return html` <div class="container ${this.dismissed ? 'hide' : ''}">
+      <div class="content">
+        <h6>${this.alertTitle}</h6>
+        <p>${this.alertDescription}</p>
+      </div>
+      <button-component
+        class="close"
+        icon="times"
+        iconSize="small"
+        weight="r"
+        ariaLabel="Close the modal"
+        variant="stealth"
+        action=""
+        @click="${this._handleClick}"
+      ></button-component>
     </div>`;
   }
-
+  _handleClick(e) {
+    this.dismissed = true;
+    console.log(this.dismissed);
+  }
+  constructor() {
+    super();
+    this.dismissed = false;
+    console.log(this.dismissed);
+  }
   static get styles() {
     return [styles, host];
+  }
+  static get properties() {
+    return {
+      alertType: { type: String },
+      dismissed: { type: Boolean },
+      alertTitle: { type: String },
+      alertDescription: { type: Object },
+    };
   }
 }
 

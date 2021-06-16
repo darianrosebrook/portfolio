@@ -131,8 +131,16 @@ export const work = {
     src: 'readme.md',
     companyName: 'Salesforce',
     dateFrom: '07-21-2020',
-    dateTo: 'Present',
+    dateTo: '02-12-2021',
     role: 'UX Designer 2',
+    anchorTag: '#',
+  },
+  nike: {
+    src: 'readme.md',
+    companyName: 'Nike',
+    dateFrom: '02-22-2021',
+    dateTo: 'Present',
+    role: 'Senior UX Designer',
     anchorTag: '#',
   },
 };

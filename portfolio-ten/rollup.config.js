@@ -2,7 +2,7 @@ import merge from 'deepmerge';
 // use createSpaConfig for bundling a Single Page App
 import { createSpaConfig } from '@open-wc/building-rollup';
 import url from '@rollup/plugin-url';
-import copy from 'rollup-plugin-copy';
+import { copy } from '@web/rollup-plugin-copy'
 import resolve from 'rollup-plugin-node-resolve';
 // use createBasicConfig to do regular JS to JS bundling
 // import { createBasicConfig } from '@open-wc/building-rollup';
@@ -64,14 +64,7 @@ export default merge(baseConfig, {
       }
     ),
 
-    copy({
-      targets: [
-        { src: 'src/assets/**/*', dest: 'dist' },
-        { src: 'src/posts/**/*', dest: 'dist' },
-      ],
-      // set flatten to false to preserve folder structure
-      flatten: false,
-    }),
+    copy({ patterns: '**/*.{svg,jpg,jpeg,json}', exclude: 'node_modules'})
   ],
   // alternatively, you can use your JS as entrypoint for rollup and
   // optionally set a HTML template manually

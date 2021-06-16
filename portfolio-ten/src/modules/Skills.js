@@ -42,19 +42,20 @@ class Skills extends LitElement {
           <article class="">
             <h6><small class="c1-upper">Strategy</small></h6>
             <ul class="emph">
-              <li>Crafting Spec Documents</li>
-              <li>Design Thinking Workshops</li>
-              <li>User Experience Audits</li>
-              <li>Design Sprints</li>
-              <li>Competitive Research</li>
+              <li>Design System Documentation</li>
               <li>Design Systems Thinking</li>
               <li>Component Architecture</li>
+              <li>Design Thinking Workshops</li>
+              <li>Design Sprints</li>
+              <li>User Experience Audits</li>
+              <li>Competitive Research</li>
             </ul>
           </article>
           <article>
-            <h6><small class="c1-upper">UX</small></h6>
+            <h6><small class="c1-upper">UX Design</small></h6>
             <ul class="emph">
-              <li>User Experience Storytelling</li>
+              <li>User Stories</li>
+              <li>User Personas</li>
               <li>User Flows</li>
               <li>Wireframing</li>
               <li>Rapid Prototyping</li>

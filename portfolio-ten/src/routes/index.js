@@ -1,6 +1,7 @@
 import { LitElement, html, css } from 'lit-element';
 import '../views/home/index.js';
 import '../views/work/index.js';
+import '../views/links/index.js';
 import '../views/shared/PostShow.js';
 import styles from '../styles/index.js';
 
@@ -14,6 +15,7 @@ class Routes extends LitElement {
           component="post-show"
         ></lit-route>
         <lit-route path="/work" component="work-page"></lit-route>
+        <lit-route path="/links" component="links-page"></lit-route>
       </section>
     `;
   }
