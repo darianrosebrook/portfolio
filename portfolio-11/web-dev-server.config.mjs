@@ -20,8 +20,18 @@ export default /** @type {import('@web/dev-server').DevServerConfig} */ ({
   // },
 
   plugins: [
-    /** Use Hot Module Replacement by uncommenting. Requires @open-wc/dev-server-hmr plugin */
-    // hmr && hmrPlugin({ exclude: ['**/*/node_modules/**/*'], presets: [presets.litElement] }),
+    {
+      transform(context) {
+        if (context.path === "/index.html") {
+          const transformedBody = context.body.replace(
+            "</head>",
+            '<script>window.process = { env: { NODE_ENV: "development", API_URL:"http://localhost:4000/api"} }</script></head>'
+          );
+          return { body: transformedBody };
+        }
+      },
+    },
+  
   ],
 
   // See documentation for all available options
