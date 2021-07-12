@@ -13,7 +13,7 @@ const stylesheet = css`
 class Button extends LitElement {
   render() {
     return this.href ?
-      html`<a 
+      html`<a @click=${this._handleButtonPress} @keyup=${this._handleButtonPress}
             href=${this.href} 
             class="button${this.buttonType ? ' ' + this.buttonType : null}${this.disabled ? ' disabled' : null}" 
             target=${ifDefined(this.external ? '_blank' : undefined)}
@@ -57,7 +57,8 @@ class Button extends LitElement {
     return r.test(url);
   }
   _handleButtonPress = e => {
-    const event = new CustomEvent('buttonClick', {
+    console.log(e.type);
+    const event = new CustomEvent('buttonPress', {
       bubbles: true,
       composed: true,
       detail: {context: this.context,key: this.key}
