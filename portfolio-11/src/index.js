@@ -1,6 +1,6 @@
 import { LitElement, html} from "lit-element";
 import { connectRouter } from "lit-redux-router";
-import "./routes";
+import "./routes/Routes";
 
 import { store } from "./redux/store.js";
 import { connect } from "pwa-helpers";
@@ -16,7 +16,7 @@ export class portfolio extends connect(store)(LitElement) {
   }
 
   render() {
-    return html` hi `;
+    return html` <router-routes></router-routes> `;
   }
 }
 customElements.define("root-portfolio", portfolio);

@@ -2,6 +2,17 @@ import { css } from "lit-element";
 import reset from "./reset.js";
 import keyframes from "./keyframes.js";
 
+/*
+  Position
+  Display
+  Sizing
+  Margin/padding
+  Border
+  Colors
+  Typography
+  Effects
+*/
+
 export default css`
   /* Imports */
   ${reset}
@@ -12,13 +23,19 @@ export default css`
   *::before,
   *::after {
     flex-direction: row;
-    box-sizing: border-box;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    box-sizing:border-box;
+    vertical-align:top;
     margin: 0;
     padding: 0;
   }
   *::selection {
     background-color: var(--foreground);
     color: var(--background);
+  }
+  *:focus {
+    outline: var(--focus) solid 2px ;
   }
   .elevation-1 {
     --depth: var(--depth-1);
@@ -76,32 +93,32 @@ export default css`
   /* -- Headings--  */
   h1 {
     font-size: var(--ramp-t1);
-    font-weight: 600;
+    font-weight: var(--light);
     line-height: 1.2;
   }
   h2 {
     font-size: var(--ramp-t2);
-    font-weight: 600;
+    font-weight: var(--light);
     line-height: 1.2173913043;
   }
   h3 {
     font-size: var(--ramp-t3);
-    font-weight: 600;
+    font-weight: var(--light);
     line-height: 1.294117647058824;
   }
   h4 {
     font-size: var(--ramp-t4);
-    font-weight: 600;
+    font-weight: var(--light);
     line-height: 1.285714285714286;
   }
   h5 {
     font-size: var(--ramp-t5);
-    font-weight: 600;
+    font-weight: var(--light);
     line-height: 1.4;
   }
   h6 {
     font-size: var(--ramp-t6);
-    font-weight: 600;
+    font-weight: var(--light);
     line-height: 1.5;
   }
   .subheading {
@@ -177,15 +194,15 @@ export default css`
   a:hover,
   a:focus {
     display: inline-block;
-    transition: all ease 0.3s;
+    transition: var(--transition);
     text-decoration: none;
     color: var(--link-rest);
-    padding: 0.3rem;
+    padding: 0.25rem;
     height: 100%;
   }
   a:hover {
     color: var(--background);
-    box-shadow: inset 0 -15em 0 var(--link-hover);
+    box-shadow: inset 0 -.125em 0 var(--link-rest);
   }
   a:active {
     color: var(--link-active);
@@ -209,21 +226,24 @@ export default css`
   a.button,
   input[type="submit"] {
     transition: var(--transition);
-    display: inline;
+    display: inline-block;
     border: 2px solid var(--foreground);
-    font-size: 1.3rem;
+    border-radius: 4px;
+    font-size: 1.6rem;
     text-align: center;
     text-transform: none;
     background: none;
-    color: var(--foreground);
+    color: var(--foreground) !important;
     cursor: pointer;
     padding: 1rem;
+    min-height: 4.4rem;
   }
   button:hover,
   a.button:hover,
   input[type="submit"]:hover {
     background-color: var(--foreground);
-    color: var(--background);
+    color: var(--background) !important;
+    box-shadow: none;
   }
   button.stealth,
   a.stealth {
@@ -232,6 +252,18 @@ export default css`
   button.stealth:hover,
   a.stealth:hover {
     background: var(--hover-background);
+    color: var(--foreground) !important;
+  }
+  button.disabled,
+  a.disabled {
+    border: 2px solid var(--disabled);
+    color: var(--disabled) !important;
+    cursor: not-allowed;
+  }
+  button.disabled:hover,
+  a.disabled:hover {
+    background: var(--hover-background);
+    color: var(--foreground) !important;
   }
   /* Form inputs */
   .input-group {
