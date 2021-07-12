@@ -1,4 +1,6 @@
 import merge from 'deepmerge';
+import replace from 'rollup-plugin-replace';
+import copy from 'rollup-plugin-copy'
 // use createSpaConfig for bundling a Single Page App
 import { createSpaConfig } from '@open-wc/building-rollup';
 
@@ -15,4 +17,14 @@ const baseConfig = createSpaConfig({
 
 export default merge(baseConfig, {
   input: './index.html',
+  plugins: [
+    replace({
+      'process.env.NODE_ENV': JSON.stringify( 'production' )
+    }),
+    copy({
+      targets: [
+        { src: ['CNAME', '.nojekyll', 'favicon.ico', '404.html'], dest: 'dist/' },
+      ]
+    })
+  ]
 });
