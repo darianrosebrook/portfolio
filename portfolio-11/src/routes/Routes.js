@@ -40,9 +40,9 @@ import "../views/home/home";
 // // Admin content management
 // import "../views/admin/manageproducts";
 
-// // Restricted routes
-// import "../auth/privateroute";
-// import "../auth/adminroute";
+// Restricted routes
+import "../auth/privateroute";
+import "../auth/adminroute";
 
 class Routes extends LitElement {
   static get styles() {

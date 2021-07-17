@@ -5,6 +5,14 @@ export const alertActions = {
   clear,
 };
 
+function info(message) {
+  return { type: alertConstants.INFO, message };
+}
+
+function warning(message) {
+  return { type: alertConstants.WARNING, message };
+}
+
 function success(message) {
   return { type: alertConstants.SUCCESS, message };
 }
