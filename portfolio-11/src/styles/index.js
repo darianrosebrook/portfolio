@@ -39,31 +39,27 @@ export default css`
   }
   .elevation-1 {
     --depth: var(--depth-1);
-    --elevation:
-    0px calc(var(--depth, 8) * 0.25px) calc(var(--depth, 8) * 0.75px) rgba(17, 17, 17, 0.08), 
+    box-shadow: 0px calc(var(--depth, 8) * 0.25px) calc(var(--depth, 8) * 0.75px) rgba(17, 17, 17, 0.08), 
     0px calc(var(--depth, 8) * 0.125px) calc(var(--depth, 8) * 0.25px) rgba(17, 17, 17, 0.04);
-  box-shadow: var(--elevation);
+    
   }
   .elevation-2 {
     --depth: var(--depth-2);
-    --elevation:
-    0px calc(var(--depth, 8) * 0.25px) calc(var(--depth, 8) * 0.75px) rgba(17, 17, 17, 0.08), 
+    box-shadow: 0px calc(var(--depth, 8) * 0.25px) calc(var(--depth, 8) * 0.75px) rgba(17, 17, 17, 0.08), 
     0px calc(var(--depth, 8) * 0.125px) calc(var(--depth, 8) * 0.25px) rgba(17, 17, 17, 0.04);
-  box-shadow: var(--elevation);
+    
   }
   .elevation-3 {
     --depth: var(--depth-3);
-    --elevation:
-    0px calc(var(--depth, 8) * 0.25px) calc(var(--depth, 8) * 0.75px) rgba(17, 17, 17, 0.08), 
+    box-shadow: 0px calc(var(--depth, 8) * 0.25px) calc(var(--depth, 8) * 0.75px) rgba(17, 17, 17, 0.08), 
     0px calc(var(--depth, 8) * 0.125px) calc(var(--depth, 8) * 0.25px) rgba(17, 17, 17, 0.04);
-  box-shadow: var(--elevation);
+    
   }
   .elevation-4 {
     --depth: var(--depth-4);
-    --elevation:
-    0px calc(var(--depth, 8) * 0.25px) calc(var(--depth, 8) * 0.75px) rgba(17, 17, 17, 0.08), 
+    box-shadow: 0px calc(var(--depth, 8) * 0.25px) calc(var(--depth, 8) * 0.75px) rgba(17, 17, 17, 0.08), 
     0px calc(var(--depth, 8) * 0.125px) calc(var(--depth, 8) * 0.25px) rgba(17, 17, 17, 0.04);
-  box-shadow: var(--elevation);
+    
   }
   
   /* -- Clearfix--  */
@@ -247,12 +243,19 @@ export default css`
   }
   button.stealth,
   a.stealth {
-    border: none;
+    border: 1px solid transparent;
   }
   button.stealth:hover,
   a.stealth:hover {
+    background: transparent;
+    color: var(--foreground) !important;
+    border: 1px solid var(--cr-neutral-50);
+  }
+  button.stealth:active,
+  a.stealth:active {
     background: var(--hover-background);
     color: var(--foreground) !important;
+    border: 1px solid var(--cr-neutral-50);
   }
   button.disabled,
   a.disabled {

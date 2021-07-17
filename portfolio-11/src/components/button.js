@@ -9,6 +9,15 @@ const stylesheet = css`
     width: fit-content;
   }
 `
+const eventType = e => {
+  if (e.type === 'click') {
+    return true;
+  } else if (e.type === 'keyup') {
+    let keyCode = e.keyCode || e.which;
+    return keyCode === 13 || keyCode === 32;
+  }
+  return false;
+};
 
 class Button extends LitElement {
   render() {
@@ -27,10 +36,9 @@ class Button extends LitElement {
           }
         </a>
       ` :
-      html`
-        <button class=${ifDefined(this.disabled ? 'disabled' : undefined)}  @click=${this._handleButtonPress} @keyup=${this._handleButtonPress}><slot></slot></button>
-   `
+      html`<button class='button${this.buttonType ? ' ' + this.buttonType : null}${this.disabled ? ' disabled' : null}'  @click=${this._handleButtonPress} @keyup=${this._handleButtonPress}><slot></slot></button>`
   }
+
   static get properties() {
     return {
       key: {type: String},
@@ -57,24 +65,21 @@ class Button extends LitElement {
     return r.test(url);
   }
   _handleButtonPress = e => {
-    console.log(e.type);
     const event = new CustomEvent('buttonPress', {
       bubbles: true,
       composed: true,
       detail: {context: this.context,key: this.key}
     });
+    const buttonPress = eventType(e) ? e : null;
     if (this.disabled) {
       e.preventDefault();
       return;
     } else {
-      if (e.type === 'keydown') {
-        if (e.keyCode === 13 || e.keyCode === 32) {
-          this.dispatchEvent(event);
-        } else {
-          return
-        }
-      } else if (e.type === 'click') {
+      if (buttonPress) {
+        console.log();
         this.dispatchEvent(event);
+      } else {
+        return;
       }
     }
   }
