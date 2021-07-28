@@ -3,6 +3,8 @@ import { LitElement, html, css } from "lit";
 import { store } from "../../redux/store.js";
 import { connect, updateMetadata } from "pwa-helpers";
 
+import { alertActions } from "../../redux/actions";
+
 import '../../patterns/nav'
 import '../../components/alert'
 
@@ -17,6 +19,8 @@ class Layout extends connect(store)(LitElement) {
         }
         ${this.stylesheet ? this.stylesheet : ''}
       </style>
+      
+      ${this.showAlert ? html`<alert-toast @buttonPress=${this.clearAlert} @alert-close=${this.clearAlert} .hideAlert=${false} .data=${this.data }></alert-toast>` : ''}
       <nav-bar></nav-bar>
       <slot></slot>
     `;
@@ -35,14 +39,19 @@ class Layout extends connect(store)(LitElement) {
   stateChanged(state) {
     console.log(state);
     this.stylesheet = state.stylesheet;
-    this.showAlert = state.showAlert;
+    if (state.alert.type && state.alert.message) {
+      this.data = {type: state.alert.type, message: state.alert.message, title: state.alert.title}
+      this.showAlert = true;
+    } else {
+      this.showAlert = false;
+    }
   }
   constructor() {
     super();
     this.heading = "Darian Rosebrook | Sr. Product Designer, Seattle, WA";
     this.description = "Hey there! I'm Darian Rosebrook. I work as a senior product designer in the Seattle area where I'm focused on design systems and better end-to-end user experiences.";
     this.showAlert = false;
-    this.data = this.data || {type: '', message: null};
+    this.data = this.data || {type: '', message: null, title: null};
   }
   updated(changedProps) {
     if (changedProps.has('heading')) {
@@ -54,6 +63,13 @@ class Layout extends connect(store)(LitElement) {
         });
       }
     }
+  }
+  clearAlert(e) {
+    e.preventDefault();
+    store.dispatch(
+      alertActions.clear()
+    );
+    this.showAlert = false;
   }
 }
 

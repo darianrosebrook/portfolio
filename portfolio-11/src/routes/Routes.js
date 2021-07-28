@@ -32,8 +32,8 @@ import "../views/home/home";
 import "../views/auth/signin";
 import "../views/auth/signup";
 
-// //Dashboards
-// import "../views/admin/admindashboard";
+//Dashboards
+import "../views/admin/admindashboard";
 // import "../views/user/userdashboard";
 // import "../views/user/profile";
 
@@ -85,13 +85,13 @@ class Routes extends LitElement {
           path="/user/account"
           component="user-dashboard"
         ></private-route>
-
+  -->
         <admin-route
           path="/admin/account"
           component="admin-dashboard"
         ></admin-route>
 
-        <admin-route
+        <!-- <admin-route
           path="/admin/categories"
           component="manage-categories"
         ></admin-route>

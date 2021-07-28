@@ -3,22 +3,24 @@ export const alertActions = {
   success,
   error,
   clear,
+  info,
+  warning
 };
 
-function info(message) {
-  return { type: alertConstants.INFO, message };
+function info(message, title) {
+  return { type: alertConstants.INFO, message, title };
 }
 
-function warning(message) {
-  return { type: alertConstants.WARNING, message };
+function warning(message, title) {
+  return { type: alertConstants.WARNING, message, title };
 }
 
-function success(message) {
-  return { type: alertConstants.SUCCESS, message };
+function success(message, title) {
+  return { type: alertConstants.SUCCESS, message, title };
 }
 
-function error(message) {
-  return { type: alertConstants.ERROR, message };
+function error(message, title) {
+  return { type: alertConstants.ERROR, message, title };
 }
 
 function clear() {

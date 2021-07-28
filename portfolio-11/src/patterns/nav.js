@@ -1,17 +1,70 @@
 import {LitElement,html, css} from 'lit';
+import { logout, isAuthenticated } from "../auth";
+import { navigate } from "lit-redux-router";
+import {store} from '../redux/store';
+import {connect} from 'pwa-helpers/connect-mixin.js';
+import { userActions } from "../redux/actions";
+
 import styles from '../styles'
 
-class Nav extends LitElement {
+class Nav extends connect(store)(LitElement) {
   render() {
+    const { user } = isAuthenticated();
+    const redirectUser = () => {
+      this._goTo("/");
+    };
+    let accountLocation;
+    if (user && user.admin.role === 1) {
+      accountLocation = "/admin/account";
+    } else {
+      accountLocation = "/user/account";
+    }
     return html`
       <nav>
-        <ul>
-          <li><a href='/'> Darian Rosebrook</a></li>
-          <li>@darianrosebrook</li>
-          <li>
-            <a href="/sign-in">Sign in</a>
-          </li>
-        </ul>
+        <div>
+          <a href="/" style=${this._isActive(window, "/")}> Home </a>
+          <a href="/products" style=${this._isActive(window, "/products")}>
+            Products
+          </a>
+          <a href="/articles" style=${this._isActive(window, "/articles")}>
+            Articles
+          </a>
+          <a href="/books" style=${this._isActive(window, "/books")}>
+            Books
+          </a>
+
+          |
+          <search-component></search-component>
+        </div>
+        <div>
+          <a href="/cart"
+            >Cart
+            ${this.cart && Object.keys(this.cart).length > 0
+              ? html`(${Object.keys(this.cart).length})`
+              : html``}</a
+          >
+          ${isAuthenticated()
+            ? html` <a
+                href=${accountLocation}
+                style=${this._isActive(window, accountLocation)}
+              >
+                Account
+              </a>`
+            : html`<a
+                href="/sign-in"
+                style=${this._isActive(window, "/sign-in")}
+              >
+                Sign in
+              </a>`}
+          ${!isAuthenticated()
+            ? ""
+            : html`<button
+                @click=${() =>
+                  store.dispatch(userActions.logout(() => redirectUser()))}
+              >
+                Logout
+              </button>`}
+        </div>
       </nav>
     `
   }
@@ -33,5 +86,27 @@ class Nav extends LitElement {
       }
     `]
   }
+  static get properties() {
+    return {
+      cart: { type: Object },
+    };
+  }
+  constructor() {
+    super();
+    this.cart = {};
+  }
+  stateChanged(state) {
+  }
+
+  _goTo(path) {
+    store.dispatch(navigate(path));
+  }
+  _isActive = (history, path) => {
+    if (history.location.pathname === path) {
+      return "pointer-events: none; text-decoration: none; font-weight: 600; color: var(--foreground)";
+    } else {
+      return "";
+    }
+  };
 }
 customElements.define("nav-bar", Nav);

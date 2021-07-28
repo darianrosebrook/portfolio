@@ -59,11 +59,11 @@ function login(user) {
     userService.login(user).then(
       (user) => {
         dispatch(success(user));
-        dispatch(alertActions.success("Login successful"));
+        dispatch(alertActions.success("Login successful", 'Success'));
       },
       (error) => {
         dispatch(failure(error.toString()));
-        dispatch(alertActions.error(error.toString()));
+        dispatch(alertActions.error(error.toString(), "An error occured"));
       }
     );
   };
@@ -83,7 +83,7 @@ function logout(next) {
   return (dispatch) => {
     userService.logout(next).then((success) => {
       dispatch(logout(success));
-      dispatch(alertActions.success("Successfully logged out"));
+      dispatch(alertActions.success("Successfully logged out", "Success"));
     });
     function logout(success) {
       return { type: userConstants.LOGOUT };
@@ -98,7 +98,7 @@ function register(user) {
     userService.register(user).then(
       (user) => {
         dispatch(success());
-        dispatch(alertActions.success("Registration successful"));
+        dispatch(alertActions.success("Registration successful", 'Success'));
       },
       (error) => {
         dispatch(failure(error.toString()));
