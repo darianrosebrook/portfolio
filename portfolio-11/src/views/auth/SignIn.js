@@ -1,5 +1,6 @@
 import {LitElement,html,css} from 'lit';
 import '../shared/layout';
+import styles from '../../styles'
 // import '../../blocks/signinform'
 class SignIn extends LitElement {
   static get properties() {
@@ -7,6 +8,9 @@ class SignIn extends LitElement {
       heading: { type: String },
       description: { type: String },
     };
+  }
+  static get styles() {
+    return styles;
   }
   constructor() {
     super();
@@ -20,7 +24,7 @@ class SignIn extends LitElement {
     }
     return html`
       <shared-layout heading=${this.heading} description=${this.description}>
-        <!-- <login-form></login-form> -->
+      <h1>${this.heading}</h1>
       </shared-layout>
     `;
   }

@@ -22,7 +22,19 @@ class Home extends LitElement {
   render() {
     return html`
       <shared-layout heading=${'Darian'} description=${'blah'}>
-        
+        <h1>👋🏼 Hey there, I&rsquo;m Darian.</h1>
+        <p class='p-1'> I'm a senior product designer focused on design systems teaching better end to end user experience design.</p>
+        <h3>Products</h3>
+        <p>list</p>
+        <h3>Writing</h3>
+        <p>list</p>
+        <h3>Speaking</h3>
+        <p>list</p>
+        <h3>Design Work</h3>
+        <p>list</p>
+
+
+
       </shared-layout>
     `;
   }
