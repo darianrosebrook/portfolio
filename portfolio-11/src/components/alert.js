@@ -21,11 +21,6 @@ class Alert extends LitElement {
   }
   constructor() {
     super();
-    this.data = {
-      title: 'Alert',
-      message: 'This is a message',
-      type: 'info',
-    };
     this.hideAlert = true;
     this.dismissable = false;
   }

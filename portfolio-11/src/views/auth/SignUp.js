@@ -1,6 +1,6 @@
 import { LitElement, html, css } from "lit";
 import "../shared/layout";
-import "../../modules/signupform";
+// import "../../modules/signupform";
 
 class SignUp extends LitElement {
   static get properties() {
@@ -13,13 +13,6 @@ class SignUp extends LitElement {
     super();
     this.heading = "Sign up";
     this.description = "Sign up for the compass of design";
-  }
-  static get styles() {
-    return css`
-      div {
-        width: 100%;
-      }
-    `;
   }
   render() {
     return html`

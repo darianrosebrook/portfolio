@@ -30,7 +30,7 @@ import "../views/home/home";
 
 //Auth
 import "../views/auth/signin";
-// import "../views/auth/signup";
+import "../views/auth/signup";
 
 // //Dashboards
 // import "../views/admin/admindashboard";
@@ -39,6 +39,8 @@ import "../views/auth/signin";
 
 // // Admin content management
 // import "../views/admin/manageproducts";
+
+import '../views/error-page/error-page'
 
 // Restricted routes
 import "../auth/privateroute";
@@ -70,10 +72,10 @@ class Routes extends LitElement {
 
         <lit-route path="/cart" component="cart-page"></lit-route> -->
 
-        <!-- <lit-route path="/sign-up" component="sign-up"></lit-route> -->
+        <lit-route path="/sign-up" component="sign-up"></lit-route>
         <lit-route path="/sign-in" component="sign-in"></lit-route>
 
-        <lit-route><h1>404 Not found</h1></lit-route>
+        <lit-route component="error-page"></lit-route>
 <!-- 
         <private-route
           path="/u/:userId"

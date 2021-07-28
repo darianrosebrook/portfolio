@@ -16,7 +16,7 @@ export class portfolio extends connect(store)(LitElement) {
   }
 
   render() {
-    return html` <router-routes></router-routes> `;
+    return html`<router-routes></router-routes>`;
   }
 }
 customElements.define("root-portfolio", portfolio);
