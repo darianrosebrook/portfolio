@@ -1,4 +1,4 @@
-import { LitElement, html, css } from "lit-element";
+import { LitElement, html, css } from "lit";
 import styles from "../../styles";
 import reset from "../../styles/reset";
 

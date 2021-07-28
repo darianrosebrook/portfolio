@@ -1,4 +1,4 @@
-import { LitElement, html, css } from "lit-element";
+import { LitElement, html, css } from "lit";
 import { login, authenticate, isAuthenticated } from "../../auth";
 import { createProduct, getCategories } from "../../api/apiAdmin";
 import { productService } from "../../redux/services";

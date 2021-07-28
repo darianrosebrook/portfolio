@@ -1,4 +1,4 @@
-import { css } from "lit-element";
+import { css } from "lit";
 import reset from "./reset.js";
 import keyframes from "./keyframes.js";
 
@@ -274,7 +274,11 @@ export default css`
     flex-direction: column;
     margin-bottom: var(--margin);
   }
-
+  label {
+    display: block;
+    font-weight: 300;
+    margin-bottom: var(--du-2);
+  }
   input,
   textarea {
     outline: none;
@@ -288,6 +292,7 @@ export default css`
     background: transparent;
     cursor: text;
     width: 100%;
+    font-size: var(--ramp-t7);
   }
   input:focus {
     border: 1px solid var(--focus);
@@ -295,6 +300,31 @@ export default css`
   input:disabled,
   input:disabled ~ .label {
     opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .formValidation {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: var(--ramp-t7);
+    line-height: 1.428571428571429;
+  }
+  .formValidation span {
+    color: var(--secondary-text);
+    background-color: var(--cr-neutral-10);
+    border-radius: var(--design-unit);
+    padding: var(--design-unit) var(--du-2) var(--design-unit) var(--design-unit);
+  }
+  .warning span {
+    color: var(--warning-foreground);
+    background-color: var(--warning-background);
+  }
+  .danger span {
+    color: var(--danger-foreground);
+    background-color: var(--danger-background);
+  }
+  .success span {
+    color: var(--success-foreground);
+    background-color: var(--success-background);
   }
   nav {
     display: flex;

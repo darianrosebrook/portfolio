@@ -1,4 +1,4 @@
-import { css } from "lit-element";
+import { css } from "lit";
 
 export default css`
   /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */

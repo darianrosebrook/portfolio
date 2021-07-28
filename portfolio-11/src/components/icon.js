@@ -10,7 +10,14 @@ class FontAwesomeIcon extends LitElement {
       iconSize: { type: String },
     };
   }
-
+  static get styles() {
+    return css`
+      :host {
+        display: inline-block;
+        width: auto;
+      }
+      `
+  }
   constructor() {
     super();
     this.icon = 'skull-crossbones';

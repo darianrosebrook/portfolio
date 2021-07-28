@@ -28,8 +28,8 @@ import "../views/home/home";
 // import "../views/categories/addcategory";
 // import "../views/categories/editcategory";
 
-// //Auth
-// import "../views/auth/signin";
+//Auth
+import "../views/auth/signin";
 // import "../views/auth/signup";
 
 // //Dashboards
@@ -68,10 +68,10 @@ class Routes extends LitElement {
         <lit-route path="/books" component="books-page"></lit-route>
         <lit-route path="/book/:slug" component="book-show"></lit-route>
 
-        <lit-route path="/cart" component="cart-page"></lit-route>
+        <lit-route path="/cart" component="cart-page"></lit-route> -->
 
-        <lit-route path="/sign-up" component="sign-up"></lit-route>
-        <lit-route path="/sign-in" component="sign-in"></lit-route> -->
+        <!-- <lit-route path="/sign-up" component="sign-up"></lit-route> -->
+        <lit-route path="/sign-in" component="sign-in"></lit-route>
 
         <lit-route><h1>404 Not found</h1></lit-route>
 <!-- 
