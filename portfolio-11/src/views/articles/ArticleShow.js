@@ -1,4 +1,4 @@
-import { LitElement, html, css } from "lit-element";
+import { LitElement, html, css } from "lit";
 import "../shared/layout";
 import "../../modules/articleslist";
 import { read } from "../../api/apicore";

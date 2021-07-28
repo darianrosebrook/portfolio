@@ -1,4 +1,4 @@
-import { LitElement, html, css } from "lit-element";
+import { LitElement, html, css } from "lit";
 
 import { store } from "../../redux/store.js";
 import { connect } from "pwa-helpers";

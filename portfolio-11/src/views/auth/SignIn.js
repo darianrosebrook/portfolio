@@ -1,7 +1,6 @@
-import { LitElement, html, css } from "lit-element";
-import "../shared/layout";
-import "../../modules/loginform";
-
+import {LitElement,html,css} from 'lit';
+import '../shared/layout';
+import '../../blocks/signinform'
 class SignIn extends LitElement {
   static get properties() {
     return {
@@ -14,13 +13,6 @@ class SignIn extends LitElement {
     this.heading = "Sign in";
     this.description = "This is the sign in page";
   }
-  static get styles() {
-    return css`
-      div {
-        width: 100%;
-      }
-    `;
-  }
   render() {
     if (window.location.pathname != "/sign-in") {
       this.heading = "Please log in";
@@ -28,10 +20,10 @@ class SignIn extends LitElement {
     }
     return html`
       <shared-layout heading=${this.heading} description=${this.description}>
-        <login-form />
+        <lit-button >JSAIOFPWIJEFOIWEJF</lit-button>
+        <login-form></login-form>
       </shared-layout>
     `;
   }
 }
-
 customElements.define("sign-in", SignIn);

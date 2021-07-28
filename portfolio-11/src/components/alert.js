@@ -34,7 +34,7 @@ class Alert extends LitElement {
     this.dismissable = this.data.type === 'danger';
     if (!this.dismissable) {
       setTimeout(() => {
-        this.hideAlert = true;
+        this._closeAlert();
       }, 5000);
     }
 

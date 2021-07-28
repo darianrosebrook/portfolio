@@ -1,4 +1,4 @@
-import { LitElement, html, css } from "lit-element";
+import { LitElement, html, css } from "lit";
 import "@power-elements/stripe-elements";
 
 import { store } from "../../redux/store.js";
