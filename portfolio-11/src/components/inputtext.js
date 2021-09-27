@@ -16,12 +16,41 @@ const validatePassword = password => {
 class TextInput extends LitElement {
   render() {
     return html`
-      ${this.label ? html`<label for= "${this.id}">
-        ${toSentenceCase(this.label)} 
-        ${this.tooltip ? html`<tool-tip type=${this.data.type} for='trigger-${this.id}' details=${this.tooltip}><fa-icon tabindex="0" id='trigger-${this.id}' slot="trigger" icon="info-circle"></fa-icon></tool-tip>` : ''}</label>` : ''
+      
+      ${this.label ? 
+        html`<label for= "${this.id}">
+          ${toSentenceCase(this.label)} 
+          ${this.tooltip ?
+            html`
+              <tool-tip
+                alertType=${this.data ? this.data.type : 'info'}
+                for='trigger-${this.id}'
+                details=${this.tooltip}
+              >
+                <fa-icon
+                  tabindex="0"
+                  id='trigger-${this.id}'
+                  slot="trigger"
+                  icon="info-circle"
+                ></fa-icon>
+              </tool-tip>` : ''}
+          </label>` : ''
       }
-      <input ?disabled=${this.disabled} id=${this.id} type="${this.inputType}" placeholder="${this.placeholder}" value="${this.value}" @input=${this._onChange} />
-      ${this.data && this.data.message ? html`<p class="${this.data.type} formValidation"><span >${this._validationIcon(this.data.type)} ${this.data.message}</span></p>` : ''}
+      <input 
+        ?disabled=${this.disabled}
+        id=${this.id}
+        type=${this.inputType || 'text'}
+        placeholder="${this.placeholder}"
+        value="${this.value}"
+        @input=${this._onChange}
+        @keyup=${this._handleEnterKey} 
+      />
+      ${this.data && this.data.message ?
+        html`
+          <p class="${this.data.type} formValidation">
+          <span>${this._validationIcon(this.data.type)} ${this.data.message}</span>
+        </p>`
+        : ''}
     `;
   }
   static get properties() {
@@ -34,6 +63,7 @@ class TextInput extends LitElement {
       data: {type: Object},
       tooltip: {type: String},
       disabled: {type: Boolean},
+      submitFromField: {type: Boolean},
     }
   }
   static get styles() {
@@ -60,6 +90,15 @@ class TextInput extends LitElement {
       composed: true,
       detail: {value: this.value, id: this.id},
     }));
+  }
+  _handleEnterKey(e) {
+    if (this.submitFromField && e.keyCode === 13) {
+      this.dispatchEvent(new CustomEvent('textInputEnter', {
+        bubbles: true,
+        composed: true,
+        detail: {value: this.value, id: this.id},
+      }));
+    }
   }
   _validationIcon(type) {
     switch (type) {
@@ -107,9 +146,9 @@ class TextInput extends LitElement {
         break;
       default:
         this.inputType = 'text';
+
         break;
     }
   }
 }
 customElements.define("text-input", TextInput);
-

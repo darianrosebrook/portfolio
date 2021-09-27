@@ -37,7 +37,8 @@ class Alert extends LitElement {
   static get styles() {
     return [styles, css`
     :host {
-      display: block;
+      display: inline-block;
+      width: 60%;
       position: absolute;
       top: 3rem;
       transform: translateX(-50%);
@@ -53,7 +54,7 @@ class Alert extends LitElement {
         opacity: 1;
         position: relative;
         margin: 0 auto;
-        max-width: 60%;
+        max-width: 100%;
         padding: 10px;
         background-color: var(--background);
         border: 1px solid var(--border);

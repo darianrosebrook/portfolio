@@ -12,7 +12,7 @@ class PrivateRoute extends connect(store)(LitElement) {
   }
   stateChanged(state) {
     this.authenticated = state.authentication;
-    this.user = state.auth.user;
+    this.user = state.authentication.user;
   }
   constructor() {
     super();

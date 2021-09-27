@@ -33,8 +33,6 @@ class Nav extends connect(store)(LitElement) {
             Books
           </a>
 
-          |
-          <search-component></search-component>
         </div>
         <div>
           <a href="/cart"
@@ -96,6 +94,7 @@ class Nav extends connect(store)(LitElement) {
     this.cart = {};
   }
   stateChanged(state) {
+    // this.cart = state.cart.items;
   }
 
   _goTo(path) {

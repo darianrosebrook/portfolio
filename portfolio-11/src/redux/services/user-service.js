@@ -21,7 +21,6 @@ function login(user) {
   })
     .then(handleResponse)
     .then((user) => {
-      console.log(user);
       localStorage.setItem("user", JSON.stringify(user));
       return user;
     });
@@ -133,14 +132,14 @@ function _delete(id) {
 }
 
 function handleResponse(response) {
-  return response.json().then((message) => {
-    if (message.error) {
-      console.log(message.error);
-      const error = message.error || response.statusText;
-
+  return response.json().then((data) => {
+    if (data.error) {
+      const message = data.error || response.statusText;
+      let errType = data.errType ? data.errType : null;
+      const error = {message, errType};
       return Promise.reject(error);
     }
 
-    return message;
+    return data;
   });
 }
