@@ -57,7 +57,7 @@ class Popover {
 class Tooltip extends LitElement {
   static get properties() {
     return {
-      type: {type: String},
+      alertType: {type: String},
       details: {type: String},
       link: {type: String},
       placement: {type: String},
@@ -78,7 +78,6 @@ class Tooltip extends LitElement {
         background-color: var(--foreground);
         color: var(--background);
       }
-
   .warning.popover {
     color: var(--warning-foreground);
     background-color: var(--warning-background);
@@ -113,7 +112,9 @@ class Tooltip extends LitElement {
       }
       p {
         margin: 0;
-        font-size: var(--t-8);
+        height: auto;
+        font-size: var(--ramp-t8);
+        line-height: 1em;
       }
       .arrow {
         position: relative;
@@ -208,9 +209,9 @@ class Tooltip extends LitElement {
   }
   render() {
     return html`
-      <div id="popover" class="popover ${this.type}" aria-live="polite">
+      <div id="popover" class="popover ${this.alertType}" aria-live="polite">
         <div id="arrow" class="arrow" data-popper-arrow></div>
-        <p class=${this.type}><slot role="tooltip">${this.details}</slot></p>
+        <p>${this.details}</p>
       </div>
       <slot name="trigger" data-trigger-placement="${this.placement}"></slot>
     `

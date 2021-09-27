@@ -62,8 +62,8 @@ function login(user) {
         dispatch(alertActions.success("Login successful", 'Success'));
       },
       (error) => {
-        dispatch(failure(error.toString()));
-        dispatch(alertActions.error(error.toString(), "An error occured"));
+        dispatch(failure(error));
+        dispatch(alertActions.error(error, "An error occured"));
       }
     );
   };

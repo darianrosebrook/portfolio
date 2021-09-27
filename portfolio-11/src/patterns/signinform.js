@@ -8,64 +8,54 @@ import { userActions } from "../redux/actions";
 import { store } from "../redux/store.js";
 import { connect } from "pwa-helpers";
 
+import '../components/inputtext'
+import '../components/button'
+
 class LoginForm extends connect(store)(LitElement) {
   render() {
     return html`
       <form>
-        <div class="input-group">
-          <label for="email"
-            >Email ${!this.email && this.loading ? "(required)" : ""}</label
-          >
-          <input
-            @input=${this._handleChange("email")}
-            type="email"
-            name="email"
-            placeholder="Email"
-            value=${this.email}
-            style=${!this.email && this.loading
-              ? "border-color: var(--cr-red-60);"
-              : ""}
-            required
-          />
-        </div>
-        <div class="input-group">
-          <label
-            for="password"
-            style=${!this.password && this.loading
-              ? "border-color: var(--cr-red-60);"
-              : ""}
-            >Password
-            ${!this.password && this.loading ? "(required)" : ""}</label
-          >
-          <input
-            @input=${this._handleChange("password")}
-            type="password"
-            name="password"
-            placeholder="Password"
-            value=${this.password}
-            style=${!this.password && this.loading
-              ? "border-color: var(--cr-red-60);"
-              : ""}
-            required
-          />
-        </div>
-        <button @click=${this._login} type="submit">
-          Submit
-        </button>
+        <text-input
+          inputType="email"
+          label="Email"
+          placeholder="Email"
+          .value="${this.email}"
+          .data=${this.error ? this.data.email : null}
+          @textInputChange=${e => this._handleChange(e, "email")}
+          @textInputEnter=${e => this._login(e)}
+          submitFromField
+        ></text-input>
+        <text-input
+          inputType="password"
+          label="Password"
+          placeholder="Password"
+          .value="${this.password}"
+          .data=${this.error ? this.data.password : null}
+          @textInputChange=${e => this._handleChange(e, "password")}
+          @textInputEnter=${e => this._login(e)}
+          submitFromField
+        ></text-input>
+        <lit-button @buttonPress=${this._login}>Submit</lit-button>
+
         <p>
-          ${this.showLoading()} ${this.showError()}
+          ${this.showLoading()} 
           ${this.authenticated.loggedIn ? this.redirectUser() : ""}
         </p>
       </form>
     `
   }
   static get styles() {
-    return styles;
+    return [styles, css`
+      text-input {
+        margin-bottom: 1rem;
+      }
+    `];
   }
   static get properties() {
     return {
       email: { type: String },
       password: { type: String },
+      data: { type: Object },
       error: { type: String },
       loading: { type: Boolean },
       redirectToReferrer: { type: Boolean },
@@ -77,10 +67,11 @@ class LoginForm extends connect(store)(LitElement) {
     super();
     this.email = "";
     this.password = "";
-    this.error = "";
+    this.error = false;
     this.loading = false;
     this.redirectToReferrer = false;
     this.authenticated = false;
+    this.data = {};
     const { user } = isAuthenticated();
   }
   connectedCallback() {
@@ -89,7 +80,7 @@ class LoginForm extends connect(store)(LitElement) {
     this.password = "password";
     this.email = 'hello@darianrosebrook.com'
   }
-  _handleChange = (name) => (event) => {
+  _handleChange = (event, name) => {
     this.error = false;
     this.loading = false;
     switch (name) {
@@ -105,13 +96,31 @@ class LoginForm extends connect(store)(LitElement) {
   };
   stateChanged(state) {
     this.authenticated = state.authentication;
-    this.error = state.alert.message;
+    this.error = state.alert.errType ? true : false;
+    console.log(this.error);
+    if (state.alert.errType) {
+      this.data[state.alert.errType].message = state.alert.message;
+      this.data[state.alert.errType].type = 'danger';
+      console.log(this.data);
+    }
   }
   _login = (event) => {
     event.preventDefault();
     this.loading = true;
+
+    this.data = {
+      email: {
+        message: !this.email ? "Email is required" : "",
+        type: !this.email ? "danger" : "",
+      },
+      password: {
+        message: !this.password ? "Password is required" : "",
+        type: !this.password ? "danger" : "",
+      }
+    };
     if (!this.email || !this.password) {
-      return (this.error = "Please fill out this form completely");
+      this.loading = false;
+      return (this.error = true);
     }
     this.error = false;
     this.loading = true;
@@ -119,16 +128,6 @@ class LoginForm extends connect(store)(LitElement) {
       userActions.login({ email: this.email, password: this.password })
     );
     this.loading = false;
-  };
-  showError = () => {
-    return html`
-      <div
-        className="alert alert-danger"
-        style="color: var(--cr-red-60); display: ${this.error ? "" : "none"}"
-      >
-        ${this.error}
-      </div>
-    `;
   };
 
   showLoading = () => {
@@ -148,7 +147,7 @@ class LoginForm extends connect(store)(LitElement) {
       `;
     }
   };
-
+  
   goTo(path) {
     store.dispatch(navigate(path));
   }

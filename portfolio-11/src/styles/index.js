@@ -279,6 +279,9 @@ export default css`
     font-weight: 300;
     margin-bottom: var(--du-2);
   }
+  input {
+    line-height: 1;
+  }
   input,
   textarea {
     outline: none;
@@ -286,7 +289,7 @@ export default css`
     min-height: 4.4rem;
     color: var(--foreground);
     transition: 0.1s ease-out;
-    border: 1px solid;
+    border: 2px solid;
     border-color: var(--foreground);
     border-radius: var(--design-unit);
     background: transparent;
@@ -295,7 +298,8 @@ export default css`
     font-size: var(--ramp-t7);
   }
   input:focus {
-    border: 1px solid var(--focus);
+    outline: none;
+    border: 2px solid var(--focus);
   }
   input:disabled,
   input:disabled ~ .label {

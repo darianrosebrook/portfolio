@@ -1,7 +1,7 @@
 import { LitElement, html, css } from "lit";
 import "../shared/layout";
-import "../../modules/productslist";
-import "../../modules/profiledata";
+// import "../../modules/productslist";
+// import "../../modules/profiledata";
 import { store } from "../../redux/store.js";
 import { connect } from "pwa-helpers";
 

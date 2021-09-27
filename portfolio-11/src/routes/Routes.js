@@ -34,7 +34,7 @@ import "../views/auth/signup";
 
 //Dashboards
 import "../views/admin/admindashboard";
-// import "../views/user/userdashboard";
+import "../views/user/userdashboard";
 // import "../views/user/profile";
 
 // // Admin content management
@@ -76,7 +76,7 @@ class Routes extends LitElement {
         <lit-route path="/sign-in" component="sign-in"></lit-route>
 
         <lit-route component="error-page"></lit-route>
-<!-- 
+
         <private-route
           path="/u/:userId"
           component="user-profile"
@@ -85,7 +85,7 @@ class Routes extends LitElement {
           path="/user/account"
           component="user-dashboard"
         ></private-route>
-  -->
+ 
         <admin-route
           path="/admin/account"
           component="admin-dashboard"
