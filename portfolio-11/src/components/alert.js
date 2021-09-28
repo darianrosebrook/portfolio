@@ -40,7 +40,7 @@ class Alert extends LitElement {
       display: inline-block;
       width: auto;
       position: absolute;
-      bottom: 3rem;
+      top: 1rem;
       transform: translateX(-50%);
       left: 50%;
     }

@@ -10,12 +10,10 @@ const stylesheet = css`
   }
 `
 const eventType = e => {
+  console.log(e.type);
   if (e.type === 'click') {
     return true;
-  } else if (e.type === 'keyup') {
-    let keyCode = e.keyCode || e.which;
-    return keyCode === 13 || keyCode === 32;
-  }
+  } 
   return false;
 };
 
@@ -76,7 +74,6 @@ class Button extends LitElement {
       return;
     } else {
       if (buttonPress) {
-        console.log();
         this.dispatchEvent(event);
       } else {
         return;

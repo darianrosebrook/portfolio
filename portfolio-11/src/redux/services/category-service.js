@@ -5,7 +5,7 @@ export const categoryService = {
   deleteCategory,
 };
 function getCategories() {
-  return fetch(`${window.process.env.API_URL}/cateogories`, {
+  return fetch(`${window.process.env.API_URL}/categories`, {
     method: "GET",
   })
     .then((res) => {
@@ -40,9 +40,9 @@ function updateCategory(userName, token, categoryId, category) {
     })
     .catch((err) => console.log(err));
 }
-function deleteCategory(userName, token, categoryId) {
+function deleteCategory(category, userName, token) {
   return fetch(
-    `${window.process.env.API_URL}/category/${categoryId}/${userName}`,
+    `${window.process.env.API_URL}/category/${category}/${userName}`,
     {
       method: "DELETE",
       headers: {
