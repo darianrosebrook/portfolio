@@ -205,7 +205,6 @@ export default css`
     text-decoration: none;
     color: var(--link-rest);
     padding: 0.25rem;
-    height: 100%;
   }
   a:hover {
     color: var(--background);
@@ -294,7 +293,8 @@ export default css`
     line-height: 1;
   }
   input,
-  textarea {
+  textarea, select {
+    display: block;
     outline: none;
     padding: 1rem 2rem;
     min-height: 4.4rem;

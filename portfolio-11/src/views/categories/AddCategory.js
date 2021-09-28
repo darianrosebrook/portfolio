@@ -1,6 +1,6 @@
 import { LitElement, html, css } from "lit";
 import "../shared/layout";
-import "../../admin/categoryform";
+import "../../admin/CategoryForm";
 
 class AddCategory extends LitElement {
   static get properties() {

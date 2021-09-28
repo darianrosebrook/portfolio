@@ -24,9 +24,10 @@ import "../views/home/home";
 // import "../views/books/addbook";
 // import "../views/books/editbook";
 
-// //Category
-// import "../views/categories/addcategory";
-// import "../views/categories/editcategory";
+//Category
+import "../views/admin/ManageCategories";
+import "../views/categories/addcategory";
+import "../views/categories/editcategory";
 
 //Auth
 import "../views/auth/signin";
@@ -90,8 +91,7 @@ class Routes extends LitElement {
           path="/admin/account"
           component="admin-dashboard"
         ></admin-route>
-
-        <!-- <admin-route
+        <admin-route
           path="/admin/categories"
           component="manage-categories"
         ></admin-route>
@@ -103,6 +103,7 @@ class Routes extends LitElement {
           path="/edit/category/:slug"
           component="edit-category"
         ></admin-route>
+        <!-- 
 
         <admin-route
           path="/admin/products"
