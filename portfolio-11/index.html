@@ -305,20 +305,17 @@
           this.pos = { x: 0, y: 0 };
           this._animate = this._animate.bind(this);
         }
-
         init() {
           this._createPest();
           this._addEventListener();
           this._animate();
         }
-
         _createPest() {
           this.pest = document.createElement('span');
           this.pest.id = 'pest';
           this.pest.style.height = `${this.settings.size}px`;
           document.body.appendChild(this.pest);
         }
-
         _addEventListener() {
           window.addEventListener('mousemove', e => {
             const { pageX: x, pageY: y } = e;
@@ -333,29 +330,23 @@
             this.pest.style.cssText += `border-width: 2px; border-color: var(--foreground);border-style: solid;`;
           });
         }
-
         _animate() {
           const { x: xMouse, y: yMouse } = this.mouse;
           const { x: xPos, y: yPos } = this.pos;
           const { x: xDelta, y: yDelta } = this.deltaPos;
           const { laziness, stiffness, size } = this.settings;
           this.deltaPos = { x: xMouse - xPos, y: yMouse - yPos };
-
           this.pos = {
             x: xPos + xDelta / laziness,
             y: yPos + yDelta / laziness,
           };
-
           this.pest.style.cssText += `top: ${this.pos.y - size / 2}px; left: ${
             this.pos.x - size / 2
           }px;`;
-
           // Slinky
-
           const angleDeg =
             (Math.atan2(yMouse - this.pos.y, xMouse - this.pos.x) * 180) /
             Math.PI;
-
           const stretchWidth =
             size +
             this._diff(this.pos.x, this.pos.y, this.mouse.x, this.mouse.y) /
@@ -363,15 +354,12 @@
           this.pest.style.cssText += `width: ${stretchWidth}px`;
           // Angle slinky
           this.pest.style.cssText += `transform: rotate(${angleDeg}deg)`;
-
           requestAnimationFrame(this._animate);
         }
-
         _diff(x1, y1, x2, y2) {
           return Math.hypot(x2 - x1, y2 - y1);
         }
       }
-
       const slinky = new SlinkyCursor();
       slinky.init();
     </script>

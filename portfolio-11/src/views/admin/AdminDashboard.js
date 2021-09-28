@@ -75,7 +75,6 @@ class AdminDashboard extends LitElement {
     this.description = `Hey ${publicDetails.name}, ` + this.description;
     return html`
       <shared-layout heading=${this.heading} description=${this.description}>
-        <p>It's ${moment(Date(Date.now)).format("MMMM Do, YYYY")}</p>
         ${adminLinks()} ${adminInfo()}
         <orders-list></orders-list>
       </shared-layout>

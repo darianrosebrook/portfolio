@@ -2,7 +2,6 @@ import { LitElement, html, css } from "lit";
 import "../shared/layout";
 import { isAuthenticated } from "../../auth";
 import { productService } from "../../redux/services";
-import moment from "moment/src/moment";
 import styles from "../../styles";
 import "./orders";
 

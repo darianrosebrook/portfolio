@@ -55,7 +55,6 @@ export function authentication(state = initialState, action) {
 function login(user) {
   return (dispatch) => {
     dispatch(request(user.email));
-
     userService.login(user).then(
       (user) => {
         dispatch(success(user));
