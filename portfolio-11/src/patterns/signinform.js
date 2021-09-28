@@ -37,10 +37,8 @@ class LoginForm extends connect(store)(LitElement) {
         ></text-input>
         <lit-button @buttonPress=${this._login}>Submit</lit-button>
 
-        <p>
-          ${this.showLoading()} 
-          ${this.authenticated.loggedIn ? this.redirectUser() : ""}
-        </p>
+        ${this.showLoading()} 
+        ${this.authenticated.loggedIn ? this.redirectUser() : ""}
       </form>
     `
   }
@@ -48,6 +46,8 @@ class LoginForm extends connect(store)(LitElement) {
     return [styles, css`
       text-input {
         margin-bottom: 1rem;
+        width: 100%;
+        max-width: 40rem;
       }
     `];
   }
@@ -97,7 +97,6 @@ class LoginForm extends connect(store)(LitElement) {
   stateChanged(state) {
     this.authenticated = state.authentication;
     this.error = state.alert.errType ? true : false;
-    console.log(this.error);
     if (state.alert.errType) {
       this.data[state.alert.errType].message = state.alert.message;
       this.data[state.alert.errType].type = 'danger';

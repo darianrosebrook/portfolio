@@ -9,7 +9,7 @@ export function alert(state = {}, action) {
     case alertConstants.SUCCESS:
       return {
         type: "success",
-        message: action.message.message.toString(),
+        message: action.message.toString(),
         title: action.title
       };
     case alertConstants.ERROR:

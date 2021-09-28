@@ -139,7 +139,7 @@ function handleResponse(response) {
       const error = {message, errType};
       return Promise.reject(error);
     }
-
+    console.log(data);
     return data;
   });
 }

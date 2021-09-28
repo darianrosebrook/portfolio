@@ -75,6 +75,17 @@ export default css`
     display: table;
     clear: both;
   }
+  /* -- Global -- */
+  html {
+    opacity: 0;
+    animation: fadein 0.3s ease-in-out;
+    opacity: 1;
+  }
+  .fadein {
+    opacity: 0;
+    animation: fadein 0.3s ease-in-out;
+    opacity: 1;
+  }
   /* -- Media -- */
   img {
     transition: var(--transition);
