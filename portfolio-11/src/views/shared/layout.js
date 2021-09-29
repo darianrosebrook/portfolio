@@ -37,7 +37,6 @@ class Layout extends connect(store)(LitElement) {
     };
   }
   stateChanged(state) {
-    console.log(state);
     this.stylesheet = state.stylesheet;
     if (state.alert.type && state.alert.message) {
       this.data = {type: state.alert.type, message: state.alert.message, title: state.alert.title}

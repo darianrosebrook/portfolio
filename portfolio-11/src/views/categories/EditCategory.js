@@ -1,6 +1,6 @@
 import { LitElement, html, css } from "lit";
 import "../shared/layout";
-import "../../admin/CategoryForm";
+import "./EditCategoryForm";
 
 class EditCategory extends LitElement {
   static get properties() {
@@ -24,7 +24,7 @@ class EditCategory extends LitElement {
   render() {
     return html`
       <shared-layout heading=${this.heading} description=${this.description}>
-        <category-form></category-form>
+        <editcategory-form></editcategory-form>
       </shared-layout>
     `;
   }
