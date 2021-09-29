@@ -10,7 +10,6 @@ const stylesheet = css`
   }
 `
 const eventType = e => {
-  console.log(e.type);
   if (e.type === 'click') {
     return true;
   } 

@@ -1,14 +1,12 @@
 import { LitElement, html, css } from "lit";
-import { login, authenticate, isAuthenticated } from "../../auth";
-import { createProduct, getCategories } from "../../api/apiAdmin";
-import { productService } from "../../redux/services";
-import styles from "../../styles";
+import { login, authenticate, isAuthenticated } from "../auth";
+import { createProduct, getCategories } from "../api/apiAdmin";
+import styles from "../styles";
 
-class EditProductForm extends LitElement {
+class ProductForm extends LitElement {
   render() {
     return html`
       <form>
-        <h1> Edit Product Form </h1>
         <div class="input-group">
           <h4>Add a photo</h4>
           <label for="product">Product</label>
@@ -59,11 +57,9 @@ class EditProductForm extends LitElement {
             type="description"
             name="description"
             placeholder="Description"
+            value=${this.description}
             required
-          >
-${this.description}
-</textarea
-          >
+          ></textarea>
         </div>
         <div class="input-group">
           <label for="body">Product body</label>
@@ -72,11 +68,9 @@ ${this.description}
             type="text"
             name="body"
             placeholder="Article Body"
+            value=${this.body}
             required
-          >
-${this.body}
-</textarea
-          >
+          ></textarea>
         </div>
         <div class="input-group">
           <label for="price">price</label>
@@ -98,7 +92,7 @@ ${this.body}
           >
             <option>-Choose a category-</option>
             ${this.categories.map((category) => {
-              return html`<option value=${category._id} .selected=${category._id === this.category}>
+              return html`<option value=${category._id}>
                 ${category.category}</option
               >`;
             })}
@@ -128,7 +122,7 @@ ${this.body}
           />
         </div>
         <button @click=${this.clickSubmit} type="submit">
-          Edit product
+          Create product
         </button>
         <p>${this.showLoading()} ${this.showError()} ${this.showSuccess()}</p>
       </form>
@@ -164,33 +158,52 @@ ${this.body}
   }
   constructor() {
     super();
+    this.slug = "";
     this.contentType = "product";
+    this.title = "";
+    this.subTitle = "";
+    this.description = "";
+    this.tags = [];
+    this.category = "";
+    this.categories = [];
+    this.body = "";
     this.author = "this.user._id";
+    this.price = 0.0;
     this.shipping = true;
+    this.quantity = 0;
+    this.sold = 0;
+    this.photo = "";
+    this.bookReferenced = "";
+    this.booksReferenced = [];
+    this.articlesReferenced = [];
+    this.error = "";
     this.redirectToProfile = false;
     this.formData = new FormData();
     this.loading = false;
     this.createdProduct = "";
-    this.categories = [];
   }
   connectedCallback() {
     super.connectedCallback();
-    const { user, token } = isAuthenticated();
-    this.user = user;
-    this.token = token;
-    this.author = this.user._id;
     getCategories().then((data) => {
       if (data.error) {
         this.error = data.error;
-        this.getProduct();
       } else {
+        console.log(data);
         const productCategories = data.filter((i) =>
           Object.values(i).includes("product")
         );
         this.categories = productCategories;
-        this.getProduct();
       }
     });
+    const { user, token } = isAuthenticated();
+    this.user = user;
+    this.token = token;
+    this.author = this.user._id;
+    this.formData = new FormData();
+    this.formData.set("author.id", this.user._id);
+    this.formData.set("author.name", this.user.publicDetails.name);
+    this.formData.set("author.userName", this.user.publicDetails.userName);
+    this.formData.set("contentType", this.contentType);
   }
   _handleChange = (name) => (event) => {
     const value = name === "photo" ? event.target.files[0] : event.target.value;
@@ -201,71 +214,45 @@ ${this.body}
   };
   clickSubmit(event) {
     event.preventDefault();
-    for (var pair of this.formData.entries()) {
-      console.log(pair[0] + ", " + pair[1]);
-    }
 
     this.error = "";
     this.loading = true;
-    productService
-      .updateProduct(
-        this.user.publicDetails.userName,
-        this.token,
-        this.slug,
-        this.formData
-      )
-      .then((data) => {
-        if (data.error) {
-          this.error = data.error;
-        } else {
-          this.contentType = "product";
-          this.author = "this.user._id";
-          this.redirectToProfile = false;
-          this.formData = "";
-          this.loading = false;
-          this.createdProduct = data.product.title;
-        }
-      });
-  }
-  getProduct = () => {
-    function getPathFromUrl(string) {
-      return string.split(/[?#]/)[0];
+    for(let key of this.formData.entries()) {
+      console.log(key[0] + ', ' + key[1]);
     }
-    let url = window.location.href;
-    url = getPathFromUrl(url).replace(/\/$/, "");
-    const productSlug = url.substr(url.lastIndexOf("/") + 1);
-    productService.getProduct(productSlug).then((data) => {
-      if (data.error) {
-        this.error = data.error;
-      } else {
-        this.slug = data.slug;
-        this.title = data.title;
-        this.subTitle = data.subTitle;
-        this.description = data.description;
-        this.category = data.category
-        this.body = data.body;
-        this.price = data.price;
-        this.shipping = data.shipping;
-        this.quantity = data.quantity;
-        this.photo = data.photo;
-        this.formData = new FormData();
-        this.formData.set("author.id", this.user._id);
-        this.formData.set("author.name", this.user.publicDetails.name);
-        this.formData.set("author.userName", this.user.publicDetails.userName);
-        this.formData.set("contentType", this.contentType);
-        this.formData.set("slug", this.slug);
-        this.formData.set("title", this.title);
-        this.formData.set("subTitle", this.subTitle);
-        this.formData.set("description", this.description);
-        this.formData.set("category", this.category);
-        this.formData.set("body", this.body);
-        this.formData.set("price", this.price);
-        this.formData.set("shipping", this.shipping);
-        this.formData.set("quantity", this.quantity);
-        this.formData.set("photo", this.photo);
-      }
-    });
-  };
+    // createProduct(
+    //   this.user.publicDetails.userName,
+    //   this.token,
+    //   this.formData
+    // ).then((data) => {
+    //   if (data.error) {
+    //     this.error = data.error;
+    //   } else {
+    //     this.slug = "";
+    //     this.contentType = "product";
+    //     this.title = "";
+    //     this.subTitle = "";
+    //     this.description = "";
+    //     this.tags = [];
+    //     this.category = "";
+    //     this.categories = [];
+    //     this.body = "";
+    //     this.author = "this.user._id";
+    //     this.price = "";
+    //     this.shipping = "";
+    //     this.quantity = "";
+    //     this.photo = "";
+    //     this.bookReferenced = "";
+    //     this.booksReferenced = [];
+    //     this.articlesReferenced = [];
+    //     this.error = "";
+    //     this.redirectToProfile = false;
+    //     this.formData = "";
+    //     this.loading = false;
+    //     this.createdProduct = data.product.title;
+    //   }
+    // });
+  }
   showError = () => {
     return html`
       <div
@@ -304,4 +291,4 @@ ${this.body}
   };
 }
 
-customElements.define("edit-product-form", EditProductForm);
+customElements.define("product-form", ProductForm);
