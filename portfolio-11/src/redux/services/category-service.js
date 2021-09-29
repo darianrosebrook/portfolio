@@ -29,7 +29,6 @@ function updateCategory(userName, token, categoryId, category) {
       method: "PUT",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
       body: category,
@@ -47,7 +46,6 @@ function deleteCategory(category, userName, token) {
       method: "DELETE",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     }

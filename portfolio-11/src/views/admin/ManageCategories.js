@@ -85,9 +85,8 @@ class ManageCategories extends connect(store)(LitElement) {
         <div>
           <h2>Use this to edit categories</h2>
           <ul>
-            ${this.categories
+            ${this.categories && this.categories.length > 0
               ? this.categories.map((item) => {
-                  console.log(item);
                   return html`
                   <li>
                     <div>                  
@@ -97,15 +96,17 @@ class ManageCategories extends connect(store)(LitElement) {
                     item.categoryType.slice(1)}</p>
                   </div>
                   <div>
-                    <a href="/edit/category/${item.slug}">Update</a>
+                    <a href="/edit/category/${item._id}">Update</a>
                     <button @click=${() =>
                       this.destroy(
-                        item.category
+                        item._id
                       )} style="color: var(--cr-red-60)">Delete</button>
                   </div>
                   </li>`;
                 })
-              : ``}
+              : html`
+                  <li>No categories to display. Please <a href="/create/category">create a category</a></li>
+              `}
           </ul>
         </div>
       </shared-layout>

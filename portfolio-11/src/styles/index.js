@@ -204,7 +204,7 @@ export default css`
     transition: var(--transition);
     text-decoration: none;
     color: var(--link-rest);
-    padding: 0.25rem;
+    padding: 0 0.25rem;
   }
   a:hover {
     color: var(--background);
