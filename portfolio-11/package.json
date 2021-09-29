@@ -29,7 +29,7 @@
     "build": "rimraf dist && rollup -c rollup.config.js",
     "start:build": "npm run build && web-dev-server --root-dir dist --app-index index.html --open --compatibility none",
     "deploy": "npm run build && gh-pages -d dist -t ",
-    "start": "wds --node-resolve --app-index index.html --watch --open"
+    "start": "web-dev-server --node-resolve --app-index index.html --open --watch"
   },
   "name": "portfolio-11",
   "version": "0.0.0",

@@ -6,8 +6,8 @@ import "../views/home/home";
 // //Products
 // import "../views/products/products";
 // import "../views/products/productshow";
-// import "../views/products/addproduct";
-// import "../views/products/editproduct";
+import "../views/products/addproduct";
+import "../views/products/editproduct";
 
 // //Cart
 // import "../views/cart/cart";
@@ -39,7 +39,7 @@ import "../views/user/userdashboard";
 // import "../views/user/profile";
 
 // // Admin content management
-// import "../views/admin/manageproducts";
+import "../views/admin/manageproducts";
 
 import '../views/error-page/error-page'
 
@@ -103,7 +103,6 @@ class Routes extends LitElement {
           path="/edit/category/:slug"
           component="edit-category"
         ></admin-route>
-        <!-- 
 
         <admin-route
           path="/admin/products"
@@ -117,6 +116,7 @@ class Routes extends LitElement {
           path="/edit/product/:slug"
           component="edit-product"
         ></admin-route>
+        <!-- 
 
         <admin-route
           path="/admin/articles"

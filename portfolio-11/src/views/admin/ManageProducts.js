@@ -36,10 +36,12 @@ class ManageProducts extends connect(store)(LitElement) {
         console.log(data.error);
       } else {
         this.products = data;
+
       }
     });
   };
   destroy = (productId) => {
+    if (confirm("Are you sure you want to delete this product?")) {
     productService
       .deleteProduct(productId, this.user.publicDetails.userName, this.token)
       .then((data) => {
@@ -49,14 +51,35 @@ class ManageProducts extends connect(store)(LitElement) {
           this.loadProducts();
         }
       });
+    }
+    return
   };
   static get styles() {
     return [
       styles,
       css`
-        div {
-          width: 100%;
-        }
+      div {
+        width: 100%;
+      }
+      div + div {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
+      button {
+        margin-left: 1rem;
+      }
+      li {
+        display: flex;
+        padding: 1rem;
+        transition: all 0.3s ease-in-out;
+        margin-left: -1rem;
+        margin-right: -1rem;
+        border-radius: var(--border-radius);
+      }
+      li:hover {
+        background: var(--hover-background);
+      }
       `,
     ];
   }
@@ -70,14 +93,19 @@ class ManageProducts extends connect(store)(LitElement) {
               ? this.products.map((item) => {
                   return html`
                   <li>
-                  <h5>${item.title}<h5>
-                  <p>
-                  <a href="/edit/product/${item.slug}">Update</a>
-                   <button @click=${() =>
-                     this.destroy(
-                       item.slug
-                     )} style="color: var(--cr-red-60)">Delete</button>
-                  </p>
+                    <div>                  
+                  <h5>${item.title}</h5>
+                  <p>${item.description}</p>
+                  <p>$${item.price.toFixed(2)}</p>
+                  <p>${item.quantity} left</p>
+                  </div>
+                  <div>
+                    <a href="/edit/product/${item.slug}">Update</a>
+                    <button @click=${() =>
+                      this.destroy(
+                        item.slug
+                      )} style="color: var(--cr-red-60)">Delete</button>
+                  </div>
                   </li>`;
                 })
               : ``}
