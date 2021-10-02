@@ -1,6 +1,6 @@
 import { LitElement, html, css } from "lit";
 import "../shared/layout";
-import "./editproductform";
+import "./edit-product-form";
 
 class EditProduct extends LitElement {
   static get properties() {
@@ -29,5 +29,4 @@ class EditProduct extends LitElement {
     `;
   }
 }
-
 customElements.define("edit-product", EditProduct);
