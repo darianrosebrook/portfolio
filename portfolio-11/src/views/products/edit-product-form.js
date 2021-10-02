@@ -4,54 +4,59 @@ import { createProduct, getCategories } from "../../api/apiAdmin";
 import { productService } from "../../redux/services";
 import styles from "../../styles";
 
+import '../../components/inputtext'
+import '../../components/inputselect'
+import '../../components/button'
+
 class EditProductForm extends LitElement {
   render() {
     return html`
       <form>
         <h1> Edit Product Form </h1>
         <div class="input-group">
-          <h4>Add a photo</h4>
-          <label for="product">Product</label>
+          <label for="product">Add a photo</label>
           <input
             @input=${this._handleChange("photo")}
             type="file"
             name="photo"
             accept="image/*"
           />
+
         </div>
-        <div class="input-group">
-          <label for="title">Title</label>
-          <input
-            @input=${this._handleChange("title")}
-            type="text"
-            name="title"
-            placeholder="Title"
-            value=${this.title}
-            required
-          />
-        </div>
-        <div class="input-group">
-          <label for="subTitle">Subtitle</label>
-          <input
-            @input=${this._handleChange("subTitle")}
-            type="text"
-            name="subTitle"
-            placeholder="Subtitle"
-            value=${this.subTitle}
-            required
-          />
-        </div>
-        <div class="input-group">
-          <label for="slug">Url</label>
-          <input
-            @input=${this._handleChange("slug")}
-            type="text"
-            name="slug"
-            placeholder="Url"
-            value=${this.slug}
-            required
-          />
-        </div>
+        <text-input
+          @textInputChange=${e => this._handleChange(e, 'title')}
+          inputType="text"
+          placeholder="Title"
+          .value=${this.title}
+          label="Title"
+          required
+        ></text-input>
+        <text-input
+          @textInputChange=${e => this._handleChange(e, 'subTitle')}
+          inputType="text"
+          placeholder="Subtitle"
+          .value=${this.subTitle}
+          label="Subtitle"
+          required
+        ></text-input>
+        
+        <text-input
+          @textInputChange=${e => this._handleChange(e, 'slug')}
+          inputType="text"
+          placeholder="URL Slug"
+          .value=${this.slug}
+          label="URL Slug"
+          required
+        ></text-input>
+        
+        <text-input
+          @textInputChange=${e => this._handleChange(e, 'slug')}
+          inputType="text"
+          placeholder="URL Slug"
+          .value=${this.slug}
+          label="URL Slug"
+          required
+        ></text-input>
         <div class="input-group">
           <label for="description">Description</label>
           <textarea
@@ -60,9 +65,7 @@ class EditProductForm extends LitElement {
             name="description"
             placeholder="Description"
             required
-          >
-${this.description}
-</textarea
+          >${this.description}</textarea
           >
         </div>
         <div class="input-group">
@@ -73,49 +76,38 @@ ${this.description}
             name="body"
             placeholder="Article Body"
             required
-          >
-${this.body}
-</textarea
-          >
+          >${this.body}</textarea>
         </div>
+        
         <div class="input-group">
-          <label for="price">price</label>
+          <label for="price">Price</label>
           <input
             @input=${this._handleChange("price")}
             type="number"
             name="price"
             placeholder="$0.00"
             value=${this.price}
+            step=".01"
             required
           />
         </div>
-        <div class="input-group">
-          <label for="category">Category</label>
-          <select
-            @input=${this._handleChange("category")}
-            name="category"
+        ${this.categories && this.categories.length > 0 ? html`
+          <select-input
+            .options=${this.categories}
+            placeholder="—Choose a category—"
+            label="Category"
+            @selectInputChange=${e => this._handleChange(e, 'category')}
             required
-          >
-            <option>-Choose a category-</option>
-            ${this.categories.map((category) => {
-              return html`<option value=${category._id} .selected=${category._id === this.category}>
-                ${category.category}</option
-              >`;
-            })}
-          </select>
-        </div>
-        <div class="input-group">
-          <label for="shipping">Shipping</label>
-          <select
-            @input=${this._handleChange("shipping")}
-            name="shipping"
-            required
-          >
-            <option>-Select if shipping is required-</option>
-            <option value="1">Yes</option>
-            <option value="0">No</option>
-          </select>
-        </div>
+          ></select-input>
+          ` : ''        
+        }
+        <select-input
+          .options=${[{ value: 1, label: "Yes" }, { value: 0, label: "No" }]}
+          placeholder="—Is shipping required?—"
+          label="Shipping"
+          @selectInputChange=${e => this._handleChange(e, 'shipping')}
+          required
+        ></select-input>
         <div class="input-group">
           <label for="quantity">Quantity</label>
           <input
@@ -127,9 +119,9 @@ ${this.body}
             required
           />
         </div>
-        <button @click=${this.clickSubmit} type="submit">
-          Edit product
-        </button>
+        <lit-button
+          @buttonPress=${this.clickSubmit}
+          >Edit Product</lit-button>
         <p>${this.showLoading()} ${this.showError()} ${this.showSuccess()}</p>
       </form>
     `;
@@ -160,7 +152,13 @@ ${this.body}
     };
   }
   static get styles() {
-    return [styles];
+    return [styles, css`
+      text-input, .input-group, select-input {
+        width: 100%;
+        max-width: 40rem;
+        margin-bottom: 2rem;
+      }
+    `];
   }
   constructor() {
     super();
@@ -187,7 +185,9 @@ ${this.body}
         const productCategories = data.filter((i) =>
           Object.values(i).includes("product")
         );
-        this.categories = productCategories;
+        productCategories.forEach((category) => {
+          this.categories.push({value: category._id, label: category.category});
+        });
         this.getProduct();
       }
     });
@@ -201,9 +201,6 @@ ${this.body}
   };
   clickSubmit(event) {
     event.preventDefault();
-    for (var pair of this.formData.entries()) {
-      console.log(pair[0] + ", " + pair[1]);
-    }
 
     this.error = "";
     this.loading = true;
