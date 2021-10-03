@@ -9,6 +9,39 @@ import { store } from "../../redux/store.js";
 import { connect } from "pwa-helpers";
 
 class ManageProducts extends connect(store)(LitElement) {
+  render() {
+    return html`
+      <shared-layout heading=${this.heading} description=${this.description}>
+        <div>
+          <h2>Use this to edit products</h2>
+          <ul class='grid'>
+            ${this.products
+              ? this.products.map((item) => {
+                  return html`
+                  <li>
+                    <div>
+                      <div class="displaybox" style="background: url(${item.photo}); background-size: cover; background-position: center;" > 
+
+                      </div>
+                  <h5>${item.title}</h5>
+                  <p>${item.description}</p>
+                  <p>$${item.price.toFixed(2)}</p>
+                  <p>${item.quantity} left</p>
+                  </div>
+                  <div>
+                    <a href="/edit/product/${item.slug}">Update</a>
+                    <button @click="${() => this.destroy(item.slug)}">Delete</button>
+                  </div>
+                  </li>`;
+                })
+              : ``}
+          </ul>
+            
+        </div>
+      </shared-layout>
+    `;
+  }
+  
   static get properties() {
     return {
       heading: { type: String },
@@ -24,7 +57,7 @@ class ManageProducts extends connect(store)(LitElement) {
   connectedCallback() {
     super.connectedCallback();
 
-    this.loadProducts();
+    this.loadProducts()
   }
   stateChanged(state) {
     this.user = state.authentication.account.user;
@@ -36,7 +69,6 @@ class ManageProducts extends connect(store)(LitElement) {
         console.log(data.error);
       } else {
         this.products = data;
-
       }
     });
   };
@@ -71,6 +103,7 @@ class ManageProducts extends connect(store)(LitElement) {
       }
       li {
         display: flex;
+        flex-direction: column;
         padding: 1rem;
         transition: all 0.3s ease-in-out;
         margin-left: -1rem;
@@ -80,39 +113,36 @@ class ManageProducts extends connect(store)(LitElement) {
       li:hover {
         background: var(--hover-background);
       }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        grid-gap: 4rem;
+        list-style: none;
+      }
+      img {
+        width: 100%;
+      }
+      .displaybox {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        border-radius: var(--border-radius);
+        overflow: hidden;
+      }
+      @supports not (aspect-ratio: 16 / 9) { 
+        .displaybox::before {
+          float: left;
+          padding-top: 56.25%;
+          content: '';
+        }
+        
+        .displaybox::after {  
+          display: block;
+          content: '';
+          clear: both;
+        }
+      }
       `,
     ];
-  }
-  render() {
-    return html`
-      <shared-layout heading=${this.heading} description=${this.description}>
-        <div>
-          <h2>Use this to edit products</h2>
-          <ul>
-            ${this.products
-              ? this.products.map((item) => {
-                  return html`
-                  <li>
-                    <div>                  
-                  <h5>${item.title}</h5>
-                  <p>${item.description}</p>
-                  <p>$${item.price.toFixed(2)}</p>
-                  <p>${item.quantity} left</p>
-                  </div>
-                  <div>
-                    <a href="/edit/product/${item.slug}">Update</a>
-                    <button @click=${() =>
-                      this.destroy(
-                        item.slug
-                      )} style="color: var(--cr-red-60)">Delete</button>
-                  </div>
-                  </li>`;
-                })
-              : ``}
-          </ul>
-        </div>
-      </shared-layout>
-    `;
   }
 }
 

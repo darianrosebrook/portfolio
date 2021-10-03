@@ -1,9 +1,13 @@
 import { LitElement, html, css } from "lit";
+import {store} from "../redux/store";
+import { connect } from "pwa-helpers/connect-mixin";
 import { login, authenticate, isAuthenticated } from "../auth";
 import { createProduct, getCategories } from "../api/apiAdmin";
 import styles from "../styles";
 
-class ProductForm extends LitElement {
+import { alertActions } from "../redux/actions";
+
+class ProductForm extends connect(store)(LitElement) {
   render() {
     return html`
       <form>
@@ -14,6 +18,7 @@ class ProductForm extends LitElement {
             @input=${this._handleChange("photo")}
             type="file"
             name="photo"
+            id="product"
             accept="image/*"
           />
         </div>
@@ -220,38 +225,39 @@ class ProductForm extends LitElement {
     for(let key of this.formData.entries()) {
       console.log(key[0] + ', ' + key[1]);
     }
-    // createProduct(
-    //   this.user.publicDetails.userName,
-    //   this.token,
-    //   this.formData
-    // ).then((data) => {
-    //   if (data.error) {
-    //     this.error = data.error;
-    //   } else {
-    //     this.slug = "";
-    //     this.contentType = "product";
-    //     this.title = "";
-    //     this.subTitle = "";
-    //     this.description = "";
-    //     this.tags = [];
-    //     this.category = "";
-    //     this.categories = [];
-    //     this.body = "";
-    //     this.author = "this.user._id";
-    //     this.price = "";
-    //     this.shipping = "";
-    //     this.quantity = "";
-    //     this.photo = "";
-    //     this.bookReferenced = "";
-    //     this.booksReferenced = [];
-    //     this.articlesReferenced = [];
-    //     this.error = "";
-    //     this.redirectToProfile = false;
-    //     this.formData = "";
-    //     this.loading = false;
-    //     this.createdProduct = data.product.title;
-    //   }
-    // });
+    createProduct(
+      this.user.publicDetails.userName,
+      this.token,
+      this.formData
+    ).then((data) => {
+      if (data.error) {
+        this.error = data.error;
+      } else {
+        store.dispatch(alertActions.success(`${this.title} was created successfully`));
+        this.slug = "";
+        this.contentType = "product";
+        this.title = "";
+        this.subTitle = "";
+        this.description = "";
+        this.tags = [];
+        this.category = "";
+        this.categories = [];
+        this.body = "";
+        this.author = "this.user._id";
+        this.price = "";
+        this.shipping = "";
+        this.quantity = "";
+        this.photo = "";
+        this.bookReferenced = "";
+        this.booksReferenced = [];
+        this.articlesReferenced = [];
+        this.error = "";
+        this.redirectToProfile = false;
+        this.formData = "";
+        this.loading = false;
+        this.createdProduct = data.product.title;
+      }
+    });
   }
   showError = () => {
     return html`

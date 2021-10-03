@@ -30,17 +30,20 @@ class SelectInput extends LitElement {
       }
       <select
         ?disabled=${this.disabled}
+        ?required=${this.required}
         id=${this.id}
         type=${this.inputType || 'text'}
         placeholder="${this.placeholder}"
-        value="${this.value}"
+        .value=${this.value}
         @input=${this._onChange}
-        @keyup=${this._handleEnterKey} 
+        @keyup=${this._handleEnterKey}
+
       >
         <option value="">
           ${this.placeholder}
         </option>
         ${this.options.map((option) => html`
+
           <option
             value="${option.value}"
             ?selected=${option.value === this.value}
@@ -62,12 +65,13 @@ class SelectInput extends LitElement {
     return {
       options: {type: Array},
       placeholder: {type: String},
-      value: {type: String},
+      value: {type: Object},
       label: {type: String},
       id: {type: String},
       data: {type: Object},
       tooltip: {type: String},
       disabled: {type: Boolean},
+      required: {type: Boolean}
     }
   }
   static get styles() {
@@ -84,6 +88,7 @@ class SelectInput extends LitElement {
     this.id = this.id || 'input-' + Math.random().toString(36).substring(7);
     this.data = this.data || {type: '', message: null};
     this.disabled = this.disabled || false;
+    this.options = this.options || [];
   }
   _onChange(e) {
     this.value = e.target.value;

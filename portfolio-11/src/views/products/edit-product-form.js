@@ -2,13 +2,16 @@ import { LitElement, html, css } from "lit";
 import { login, authenticate, isAuthenticated } from "../../auth";
 import { createProduct, getCategories } from "../../api/apiAdmin";
 import { productService } from "../../redux/services";
+import { alertActions } from "../../redux/actions/alerts";
+import {store} from "../../redux/store";
+import { connect } from "pwa-helpers/connect-mixin";
 import styles from "../../styles";
 
 import '../../components/inputtext'
 import '../../components/inputselect'
 import '../../components/button'
 
-class EditProductForm extends LitElement {
+class EditProductForm extends connect(store)(LitElement) {
   render() {
     return html`
       <form>
@@ -16,7 +19,7 @@ class EditProductForm extends LitElement {
         <div class="input-group">
           <label for="product">Add a photo</label>
           <input
-            @input=${this._handleChange("photo")}
+            @input=${e => this._handleChange(e, "photo")}
             type="file"
             name="photo"
             accept="image/*"
@@ -60,7 +63,7 @@ class EditProductForm extends LitElement {
         <div class="input-group">
           <label for="description">Description</label>
           <textarea
-            @input=${this._handleChange("description")}
+            @input=${e => this._handleChange(e, "description")}
             type="description"
             name="description"
             placeholder="Description"
@@ -71,7 +74,7 @@ class EditProductForm extends LitElement {
         <div class="input-group">
           <label for="body">Product body</label>
           <textarea
-            @input=${this._handleChange("body")}
+            @input=${e => this._handleChange(e, "body")}
             type="text"
             name="body"
             placeholder="Article Body"
@@ -82,7 +85,7 @@ class EditProductForm extends LitElement {
         <div class="input-group">
           <label for="price">Price</label>
           <input
-            @input=${this._handleChange("price")}
+            @input=${e => this._handleChange(e, "price")}
             type="number"
             name="price"
             placeholder="$0.00"
@@ -95,6 +98,7 @@ class EditProductForm extends LitElement {
           <select-input
             .options=${this.categories}
             placeholder="—Choose a category—"
+            .value=${this.category}
             label="Category"
             @selectInputChange=${e => this._handleChange(e, 'category')}
             required
@@ -102,16 +106,17 @@ class EditProductForm extends LitElement {
           ` : ''        
         }
         <select-input
-          .options=${[{ value: 1, label: "Yes" }, { value: 0, label: "No" }]}
+          .options=${[{ value: true, label: "Yes" }, { value: false, label: "No" }]}
           placeholder="—Is shipping required?—"
           label="Shipping"
+          .value=${this.shipping}
           @selectInputChange=${e => this._handleChange(e, 'shipping')}
           required
         ></select-input>
         <div class="input-group">
           <label for="quantity">Quantity</label>
           <input
-            @input=${this._handleChange("quantity")}
+            @input=${e => this._handleChange(e, "quantity")}
             type="number"
             name="quantity"
             placeholder="0"
@@ -192,10 +197,10 @@ class EditProductForm extends LitElement {
       }
     });
   }
-  _handleChange = (name) => (event) => {
+  _handleChange = (event, name) => {
     const value = name === "photo" ? event.target.files[0] : event.target.value;
     this.formData.set(name, value);
-
+    console.log(value === this.formData.get(name));
     this.error = "";
     this.loading = false;
   };
@@ -215,12 +220,13 @@ class EditProductForm extends LitElement {
         if (data.error) {
           this.error = data.error;
         } else {
+          console.log(data);
+          store.dispatch(alertActions.success(`${this.title} has been updated successfully`));
           this.contentType = "product";
           this.author = "this.user._id";
           this.redirectToProfile = false;
           this.formData = "";
           this.loading = false;
-          this.createdProduct = data.product.title;
         }
       });
   }

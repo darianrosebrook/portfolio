@@ -23,7 +23,6 @@ function getProduct(productSlug) {
     .catch((err) => console.log(err));
 }
 function updateProduct(userName, token, productSlug, product) {
-  console.log(userName, token, productSlug, product);
   return fetch(
     `${window.process.env.API_URL}/product/${productSlug}/${userName}`,
     {
