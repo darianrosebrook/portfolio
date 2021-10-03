@@ -11,6 +11,7 @@ import '../../components/alert'
 class Layout extends connect(store)(LitElement) {
   render() {
     return html`
+
       <style>
         :host {
           display: block;

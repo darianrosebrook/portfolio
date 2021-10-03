@@ -162,11 +162,6 @@ export default css`
     font-family: "Crimson Pro";
     font-weight: 100;
   }
-  label,
-  .label {
-    font-size: var(--ramp-t7);
-    font-weight: 300;
-  }
   small,
   caption {
     font-weight: 300;
@@ -285,8 +280,9 @@ export default css`
     margin-bottom: var(--margin);
   }
   label {
+    font-size: var(--ramp-t6);
+    font-weight: var(--medium);
     display: block;
-    font-weight: 300;
     margin-bottom: var(--du-2);
   }
   input {

@@ -37,11 +37,12 @@ class TextInput extends LitElement {
           </label>` : ''
       }
       <input 
-        ?disabled=${this.disabled}
-        id=${this.id}
         type=${this.inputType || 'text'}
         placeholder="${this.placeholder}"
-        value="${this.value}"
+        .value="${this.value}"
+        id=${this.id}
+        ?disabled=${this.disabled}
+        ?required=${this.required}
         @input=${this._onChange}
         @keyup=${this._handleEnterKey} 
       />
@@ -60,9 +61,10 @@ class TextInput extends LitElement {
       value: {type: String},
       label: {type: String},
       id: {type: String},
-      data: {type: Object},
       tooltip: {type: String},
+      data: {type: Object},
       disabled: {type: Boolean},
+      required: {type: Boolean},
       submitFromField: {type: Boolean},
     }
   }
@@ -78,6 +80,7 @@ class TextInput extends LitElement {
     this.inputType = this._setType(this.inputType);
     this.placeholder = '';
     this.value = '';
+    this.required = false;
     this.id = this.id || 'input-' + Math.random().toString(36).substring(7);
     this.data = this.data || {type: '', message: null};
     this.disabled = this.disabled || false;
