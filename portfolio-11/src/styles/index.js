@@ -290,6 +290,7 @@ export default css`
   }
   input,
   textarea, select {
+    line-height: 1;
     display: block;
     outline: none;
     padding: 1rem 2rem;
