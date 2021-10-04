@@ -24,6 +24,7 @@ class AddBook extends LitElement {
   render() {
     return html`
       <shared-layout heading=${this.heading} description=${this.description}>
+        <h1>Add a book</h1>
         <book-form></book-form>
       </shared-layout>
     `;

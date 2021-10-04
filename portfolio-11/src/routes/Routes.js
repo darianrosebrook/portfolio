@@ -21,11 +21,12 @@ import "../views/products/editproduct";
 // //Books
 // import "../views/books/books";
 // import "../views/books/bookshow";
-// import "../views/books/addbook";
-// import "../views/books/editbook";
+import "../views/admin/manageBooks";
+import "../views/books/addbook";
+import "../views/books/editbook";
 
 //Category
-import "../views/admin/ManageCategories";
+import "../views/admin/managecategories";
 import "../views/categories/addcategory";
 import "../views/categories/editcategory";
 
@@ -116,6 +117,19 @@ class Routes extends LitElement {
           path="/edit/product/:slug"
           component="edit-product"
         ></admin-route>
+
+        <admin-route
+          path="/admin/books"
+          component="manage-books"
+        ></admin-route>
+        <admin-route
+          path="/create/book"
+          component="add-book"
+        ></admin-route>
+        <admin-route
+          path="/edit/book/:slug"
+          component="edit-book"
+        ></admin-route> 
         <!-- 
 
         <admin-route
@@ -129,14 +143,7 @@ class Routes extends LitElement {
         <admin-route
           path="/edit/article/:slug"
           component="edit-article"
-        ></admin-route>
-
-        <admin-route path="/admin/books" component="manage-books"></admin-route>
-        <admin-route path="/create/book" component="add-book"></admin-route>
-        <admin-route
-          path="/edit/book/:slug"
-          component="edit-book"
-        ></admin-route> -->
+        ></admin-route>-->
       </div>
     `;
   }

@@ -4,19 +4,9 @@ import './icon'
 import './tooltip'
 
 const toSentenceCase = str => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-const validateEmail = email => {
-  const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return re.test(email);
-};
-const validatePassword = password => {
-  const re = /^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};:'",.<>/?]{6,}$/;
-  return re.test(password);
-};
-
-class TextInput extends LitElement {
+class FileInput extends LitElement {
   render() {
     return html`
-      
       ${this.label ? 
         html`<label for= "${this.id}">
           ${toSentenceCase(this.label)} ${this.required ? html`<span title="This field is required" style="color: var(--danger-foreground)">*</span>` : ''}
@@ -36,16 +26,23 @@ class TextInput extends LitElement {
               </tool-tip>` : ''}
           </label>` : ''
       }
-      <input 
-        type=${this.inputType || 'text'}
-        placeholder="${this.placeholder}"
-        .value="${this.value}"
-        id=${this.id}
-        ?disabled=${this.disabled}
-        ?required=${this.required}
-        @change=${this._onChange}
-        @keyup=${this._handleEnterKey} 
-      />
+          <label for="${this.id}" id="fileLabel" @drop=${e => this._handleDrop(e)} @dragover=${e => this._handleDragover(e)}>
+            ${this.icon ? html`<fa-icon icon="${this.icon}"></fa-icon>` : ''}
+          
+          ${this.value ? this.value.split( "\\" ).pop() : 'Add a file'}</label>
+
+          <input
+            .value="${this.value}"
+            type="file"
+            name="${this.id}"
+            id="${this.id}"
+            accept=${this.accept}
+            placeholder="${this.placeholder}"
+            ?disabled=${this.disabled}
+            ?required=${this.required}
+            @change=${e => this._onChange(e)}
+          />
+        </div>
       ${this.data && this.data.message ?
         html`
           <p class="${this.data.type} formValidation">
@@ -58,6 +55,8 @@ class TextInput extends LitElement {
     return {
       inputType: {type: String},
       placeholder: {type: String},
+      icon: {type: String},
+      accept: {type: String},
       value: {type: String},
       label: {type: String},
       id: {type: String},
@@ -73,12 +72,35 @@ class TextInput extends LitElement {
       :host {
         margin: 1rem 0;
         }
+      input[type="file"] {
+        display: none;
+      }
+      #fileLabel {
+        display: block;
+        outline: none;
+        font-weight: var(--normal);
+        color: var(--secondary-text);
+        padding: 1rem 2rem;
+        min-height: 4.4rem;
+        color: var(--foreground);
+        transition: 0.1s ease-out;
+        border: 2px solid;
+        border-color: var(--foreground);
+        border-radius: var(--design-unit);
+        background: transparent;
+        cursor: text;
+        width: 100%;
+        font-size: var(--ramp-t7);
+      }
+      #fileLabel:hover {
+        cursor: pointer;
+      }
         `];
   }
   constructor() {
     super();
-    this.inputType = this._setType(this.inputType);
     this.placeholder = '';
+    this.icon = '';
     this.value = '';
     this.required = false;
     this.id = this.id || 'input-' + Math.random().toString(36).substring(7);
@@ -88,20 +110,11 @@ class TextInput extends LitElement {
   _onChange(e) {
     this.value = e.target.value;
     this.data = {}
-    this.dispatchEvent(new CustomEvent('textInputChange', {
+    this.dispatchEvent(new CustomEvent('fileInputChange', {
       bubbles: true,
       composed: true,
       detail: {value: this.value, id: this.id},
     }));
-  }
-  _handleEnterKey(e) {
-    if (this.submitFromField && e.keyCode === 13) {
-      this.dispatchEvent(new CustomEvent('textInputEnter', {
-        bubbles: true,
-        composed: true,
-        detail: {value: this.value, id: this.id},
-      }));
-    }
   }
   _validationIcon(type) {
     switch (type) {
@@ -115,43 +128,18 @@ class TextInput extends LitElement {
         return '';
     }
   }
-  _setType(type) {
-    switch (type) {
-      case 'text':
-        this.inputType = 'text';
-        break;
-      case 'password':
-        this.inputType = 'password';
-        break;
-      case 'number':
-        this.inputType = 'number';
-        break;
-      case 'email':
-        this.inputType = 'email';
-        break;
-      case 'url':
-        this.inputType = 'url';
-        break;
-      case 'tel':
-        this.inputType = 'tel';
-        break;
-      case 'search':
-        this.inputType = 'search';
-        break;
-      case 'date':
-        this.inputType = 'date';
-        break;
-      case 'time':
-        this.inputType = 'time';
-        break;
-      case 'datetime-local':
-        this.inputType = 'datetime-local';
-        break;
-      default:
-        this.inputType = 'text';
-
-        break;
+  
+  _handleDrop(e) {
+    e.preventDefault();
+    if (e.dataTransfer.files.length > 0) {
+    const dt = e.dataTransfer;
+    const files = dt.files[0].name;
+    this.value = files;
     }
+
+  }
+  _handleDragover(e) {
+    e.preventDefault();
   }
 }
-customElements.define("text-input", TextInput);
+customElements.define("file-input", FileInput);
