@@ -77,8 +77,6 @@ class LoginForm extends connect(store)(LitElement) {
   connectedCallback() {
     super.connectedCallback();
 
-    this.password = "password";
-    this.email = 'hello@darianrosebrook.com'
   }
   _handleChange = (event, name) => {
     this.error = false;

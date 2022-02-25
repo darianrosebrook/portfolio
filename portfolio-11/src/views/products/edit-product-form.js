@@ -1,30 +1,29 @@
-import { LitElement, html, css } from "lit";
-import { login, authenticate, isAuthenticated } from "../../auth";
-import { createProduct, getCategories } from "../../api/apiAdmin";
-import { productService } from "../../redux/services";
-import { alertActions } from "../../redux/actions/alerts";
-import {store} from "../../redux/store";
-import { connect } from "pwa-helpers/connect-mixin";
-import styles from "../../styles";
+import { LitElement, html, css } from 'lit';
+import { login, authenticate, isAuthenticated } from '../../auth';
+import { createProduct, getCategories } from '../../api/apiAdmin';
+import { productService } from '../../redux/services';
+import { alertActions } from '../../redux/actions/alerts';
+import { store } from '../../redux/store';
+import { connect } from 'pwa-helpers/connect-mixin';
+import styles from '../../styles';
 
-import '../../components/inputtext'
-import '../../components/inputselect'
-import '../../components/button'
+import '../../components/inputtext';
+import '../../components/inputselect';
+import '../../components/button';
 
 class EditProductForm extends connect(store)(LitElement) {
   render() {
     return html`
       <form>
-        <h1> Edit Product Form </h1>
+        <h1>${ this.title ? this.title : 'Edit product' }</h1>
         <div class="input-group">
           <label for="product">Add a photo</label>
           <input
-            @input=${e => this._handleChange(e, "photo")}
+            @input=${e => this._handleChange(e, 'photo')}
             type="file"
             name="photo"
             accept="image/*"
           />
-
         </div>
         <text-input
           @textInputChange=${e => this._handleChange(e, 'title')}
@@ -42,7 +41,7 @@ class EditProductForm extends connect(store)(LitElement) {
           label="Subtitle"
           required
         ></text-input>
-        
+
         <text-input
           @textInputChange=${e => this._handleChange(e, 'slug')}
           inputType="text"
@@ -51,7 +50,7 @@ class EditProductForm extends connect(store)(LitElement) {
           label="URL Slug"
           required
         ></text-input>
-        
+
         <text-input
           @textInputChange=${e => this._handleChange(e, 'slug')}
           inputType="text"
@@ -63,29 +62,32 @@ class EditProductForm extends connect(store)(LitElement) {
         <div class="input-group">
           <label for="description">Description</label>
           <textarea
-            @input=${e => this._handleChange(e, "description")}
+            @input=${e => this._handleChange(e, 'description')}
             type="description"
             name="description"
             placeholder="Description"
             required
-          >${this.description}</textarea
+          >
+            ${this.description}</textarea
           >
         </div>
         <div class="input-group">
           <label for="body">Product body</label>
           <textarea
-            @input=${e => this._handleChange(e, "body")}
+            @input=${e => this._handleChange(e, 'body')}
             type="text"
             name="body"
             placeholder="Article Body"
             required
-          >${this.body}</textarea>
+          >
+          ${this.body}</textarea
+          >
         </div>
-        
+
         <div class="input-group">
           <label for="price">Price</label>
           <input
-            @input=${e => this._handleChange(e, "price")}
+            @input=${e => this._handleChange(e, 'price')}
             type="number"
             name="price"
             placeholder="$0.00"
@@ -94,19 +96,23 @@ class EditProductForm extends connect(store)(LitElement) {
             required
           />
         </div>
-        ${this.categories && this.categories.length > 0 ? html`
-          <select-input
-            .options=${this.categories}
-            placeholder="—Choose a category—"
-            .value=${this.category}
-            label="Category"
-            @selectInputChange=${e => this._handleChange(e, 'category')}
-            required
-          ></select-input>
-          ` : ''        
-        }
+        ${this.categories && this.categories.length > 0
+          ? html`
+              <select-input
+                .options=${this.categories}
+                placeholder="—Choose a category—"
+                .value=${this.category}
+                label="Category"
+                @selectInputChange=${e => this._handleChange(e, 'category')}
+                required
+              ></select-input>
+            `
+          : ''}
         <select-input
-          .options=${[{ value: true, label: "Yes" }, { value: false, label: "No" }]}
+          .options=${[
+            { value: true, label: 'Yes' },
+            { value: false, label: 'No' },
+          ]}
           placeholder="—Is shipping required?—"
           label="Shipping"
           .value=${this.shipping}
@@ -116,7 +122,7 @@ class EditProductForm extends connect(store)(LitElement) {
         <div class="input-group">
           <label for="quantity">Quantity</label>
           <input
-            @input=${e => this._handleChange(e, "quantity")}
+            @input=${e => this._handleChange(e, 'quantity')}
             type="number"
             name="quantity"
             placeholder="0"
@@ -124,9 +130,7 @@ class EditProductForm extends connect(store)(LitElement) {
             required
           />
         </div>
-        <lit-button
-          @buttonPress=${this.clickSubmit}
-          >Edit Product</lit-button>
+        <lit-button @buttonPress=${this.clickSubmit}>Edit Product</lit-button>
         <p>${this.showLoading()} ${this.showError()} ${this.showSuccess()}</p>
       </form>
     `;
@@ -157,23 +161,28 @@ class EditProductForm extends connect(store)(LitElement) {
     };
   }
   static get styles() {
-    return [styles, css`
-      text-input, .input-group, select-input {
-        width: 100%;
-        max-width: 40rem;
-        margin-bottom: 2rem;
-      }
-    `];
+    return [
+      styles,
+      css`
+        text-input,
+        .input-group,
+        select-input {
+          width: 100%;
+          max-width: 40rem;
+          margin-bottom: 2rem;
+        }
+      `,
+    ];
   }
   constructor() {
     super();
-    this.contentType = "product";
-    this.author = "this.user._id";
+    this.contentType = 'product';
+    this.author = 'this.user._id';
     this.shipping = true;
     this.redirectToProfile = false;
     this.formData = new FormData();
     this.loading = false;
-    this.createdProduct = "";
+    this.createdProduct = '';
     this.categories = [];
   }
   connectedCallback() {
@@ -182,32 +191,35 @@ class EditProductForm extends connect(store)(LitElement) {
     this.user = user;
     this.token = token;
     this.author = this.user._id;
-    getCategories().then((data) => {
+    getCategories().then(data => {
       if (data.error) {
         this.error = data.error;
         this.getProduct();
       } else {
-        const productCategories = data.filter((i) =>
-          Object.values(i).includes("product")
+        const productCategories = data.filter(i =>
+          Object.values(i).includes('product')
         );
-        productCategories.forEach((category) => {
-          this.categories.push({value: category._id, label: category.category});
+        productCategories.forEach(category => {
+          this.categories.push({
+            value: category._id,
+            label: category.category,
+          });
         });
         this.getProduct();
       }
     });
   }
   _handleChange = (event, name) => {
-    const value = name === "photo" ? event.target.files[0] : event.target.value;
+    const value = name === 'photo' ? event.target.files[0] : event.target.value;
     this.formData.set(name, value);
     console.log(value === this.formData.get(name));
-    this.error = "";
+    this.error = '';
     this.loading = false;
   };
   clickSubmit(event) {
     event.preventDefault();
 
-    this.error = "";
+    this.error = '';
     this.loading = true;
     productService
       .updateProduct(
@@ -216,16 +228,18 @@ class EditProductForm extends connect(store)(LitElement) {
         this.slug,
         this.formData
       )
-      .then((data) => {
+      .then(data => {
         if (data.error) {
           this.error = data.error;
         } else {
           console.log(data);
-          store.dispatch(alertActions.success(`${this.title} has been updated successfully`));
-          this.contentType = "product";
-          this.author = "this.user._id";
+          store.dispatch(
+            alertActions.success(`${this.title} has been updated successfully`)
+          );
+          this.contentType = 'product';
+          this.author = 'this.user._id';
           this.redirectToProfile = false;
-          this.formData = "";
+          this.formData = '';
           this.loading = false;
         }
       });
@@ -235,9 +249,9 @@ class EditProductForm extends connect(store)(LitElement) {
       return string.split(/[?#]/)[0];
     }
     let url = window.location.href;
-    url = getPathFromUrl(url).replace(/\/$/, "");
-    const productSlug = url.substr(url.lastIndexOf("/") + 1);
-    productService.getProduct(productSlug).then((data) => {
+    url = getPathFromUrl(url).replace(/\/$/, '');
+    const productSlug = url.substr(url.lastIndexOf('/') + 1);
+    productService.getProduct(productSlug).then(data => {
       if (data.error) {
         this.error = data.error;
       } else {
@@ -245,27 +259,27 @@ class EditProductForm extends connect(store)(LitElement) {
         this.title = data.title;
         this.subTitle = data.subTitle;
         this.description = data.description;
-        this.category = data.category
+        this.category = data.category;
         this.body = data.body;
         this.price = data.price;
         this.shipping = data.shipping;
         this.quantity = data.quantity;
         this.photo = data.photo;
         this.formData = new FormData();
-        this.formData.set("author.id", this.user._id);
-        this.formData.set("author.name", this.user.publicDetails.name);
-        this.formData.set("author.userName", this.user.publicDetails.userName);
-        this.formData.set("contentType", this.contentType);
-        this.formData.set("slug", this.slug);
-        this.formData.set("title", this.title);
-        this.formData.set("subTitle", this.subTitle);
-        this.formData.set("description", this.description);
-        this.formData.set("category", this.category);
-        this.formData.set("body", this.body);
-        this.formData.set("price", this.price);
-        this.formData.set("shipping", this.shipping);
-        this.formData.set("quantity", this.quantity);
-        this.formData.set("photo", this.photo);
+        this.formData.set('author.id', this.user._id);
+        this.formData.set('author.name', this.user.publicDetails.name);
+        this.formData.set('author.userName', this.user.publicDetails.userName);
+        this.formData.set('contentType', this.contentType);
+        this.formData.set('slug', this.slug);
+        this.formData.set('title', this.title);
+        this.formData.set('subTitle', this.subTitle);
+        this.formData.set('description', this.description);
+        this.formData.set('category', this.category);
+        this.formData.set('body', this.body);
+        this.formData.set('price', this.price);
+        this.formData.set('shipping', this.shipping);
+        this.formData.set('quantity', this.quantity);
+        this.formData.set('photo', this.photo);
       }
     });
   };
@@ -273,7 +287,7 @@ class EditProductForm extends connect(store)(LitElement) {
     return html`
       <div
         className="alert alert-danger"
-        style="color: var(--cr-red-60); display: ${this.error ? "" : "none"}"
+        style="color: var(--cr-red-60); display: ${this.error ? '' : 'none'}"
       >
         ${this.error}
       </div>
@@ -284,7 +298,7 @@ class EditProductForm extends connect(store)(LitElement) {
       return html`
         <div
           className="alert alert-info"
-          style="display:${this.createdProduct ? "" : "none"}"
+          style="display:${this.createdProduct ? '' : 'none'}"
         >
           <h2>${this.createdProduct} has been created!</h2>
         </div>
@@ -297,8 +311,8 @@ class EditProductForm extends connect(store)(LitElement) {
         <div
           className="alert alert-info"
           style="color: var(--df-dark-neutral-dark); display: ${this.loading
-            ? ""
-            : "none"}"
+            ? ''
+            : 'none'}"
         >
           Loading... please wait
         </div>
@@ -307,4 +321,4 @@ class EditProductForm extends connect(store)(LitElement) {
   };
 }
 
-customElements.define("edit-product-form", EditProductForm);
+customElements.define('edit-product-form', EditProductForm);

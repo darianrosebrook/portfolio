@@ -19,6 +19,7 @@ class PrivateRoute extends connect(store)(LitElement) {
     this.authenticated = false;
   }
   render() {
+    console.log(this.authenticated);
     return html`
     <lit-route 
       path=${this.path}

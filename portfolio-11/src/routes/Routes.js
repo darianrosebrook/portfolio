@@ -3,6 +3,9 @@ import { LitElement, html, css } from "lit";
 // Root path
 import "../views/home/home";
 
+// Design system
+import "../views/design-system/design-system";
+
 // //Products
 // import "../views/products/products";
 // import "../views/products/productshow";
@@ -73,13 +76,14 @@ class Routes extends LitElement {
         <lit-route path="/book/:slug" component="book-show"></lit-route>
 
         <lit-route path="/cart" component="cart-page"></lit-route> -->
+        <lit-route path="/design-system" component="design-system"></lit-route>
 
-        <lit-route path="/sign-up" component="sign-up"></lit-route>
-        <lit-route path="/sign-in" component="sign-in"></lit-route>
+        <!-- <lit-route path="/sign-up" component="sign-up"></lit-route>
+        <lit-route path="/sign-in" component="sign-in"></lit-route> -->
 
         <lit-route component="error-page"></lit-route>
 
-        <private-route
+        <!-- <private-route
           path="/u/:userId"
           component="user-profile"
         ></private-route>
@@ -87,7 +91,7 @@ class Routes extends LitElement {
           path="/user/account"
           component="user-dashboard"
         ></private-route>
- 
+         
         <admin-route
           path="/admin/account"
           component="admin-dashboard"
@@ -129,7 +133,7 @@ class Routes extends LitElement {
         <admin-route
           path="/edit/book/:slug"
           component="edit-book"
-        ></admin-route> 
+        ></admin-route>  -->
         <!-- 
 
         <admin-route

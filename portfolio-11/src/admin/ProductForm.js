@@ -5,120 +5,113 @@ import { login, authenticate, isAuthenticated } from "../auth";
 import { createProduct, getCategories } from "../api/apiAdmin";
 import styles from "../styles";
 
+import '../components/inputfile'
+import '../components/inputtext'
+import '../components/inputtextarea'
+import '../components/inputselect'
+
 import { alertActions } from "../redux/actions";
 
 class ProductForm extends connect(store)(LitElement) {
+
   render() {
     return html`
       <form>
-        <div class="input-group">
-          <h4>Add a photo</h4>
-          <label for="product">Product</label>
-          <input
-            @input=${this._handleChange("photo")}
-            type="file"
-            name="photo"
-            id="product"
-            accept="image/*"
-          />
-        </div>
-        <div class="input-group">
-          <label for="title">Title</label>
-          <input
-            @input=${this._handleChange("title")}
-            type="text"
-            name="title"
-            placeholder="Title"
-            value=${this.title}
-            required
-          />
-        </div>
-        <div class="input-group">
-          <label for="subTitle">Subtitle</label>
-          <input
-            @input=${this._handleChange("subTitle")}
-            type="text"
-            name="subTitle"
-            placeholder="Subtitle"
-            value=${this.subTitle}
-            required
-          />
-        </div>
-        <div class="input-group">
-          <label for="slug">Url</label>
-          <input
-            @input=${this._handleChange("slug")}
-            type="text"
-            name="slug"
-            placeholder="Url"
-            value=${this.slug}
-            required
-          />
-        </div>
-        <div class="input-group">
-          <label for="description">Description</label>
-          <textarea
-            @input=${this._handleChange("description")}
-            type="description"
-            name="description"
-            placeholder="Description"
-            value=${this.description}
-            required
-          ></textarea>
-        </div>
+        <file-input
+          .value=${this.photo}
+          accept="image/*"
+          placeholder="Add a photo"
+          icon="camera"
+          label="Photo"
+          @fileInputChange=${e => this._handleChange(e, "photo")}
+        ></file-input>
+        <text-input
+          @textInputChange=${e => this._handleChange(e, 'title')}
+          inputType="text"
+          placeholder="Title"
+          .value=${this.title}
+          label="Title"
+          required
+        ></text-input>
+        <text-input
+          @textInputChange=${e => this._handleChange(e, 'subTitle')}
+          inputType="text"
+          placeholder="Subtitle"
+          .value=${this.subTitle}
+          label="Subtitle"
+          required
+        ></text-input>
+
+        <text-input
+          @textInputChange=${e => this._handleChange(e, 'slug')}
+          inputType="text"
+          placeholder="URL Slug"
+          .value=${this.slug}
+          label="URL Slug"
+          required
+        ></text-input>
+
+        <text-input
+          @textInputChange=${e => this._handleChange(e, 'description')}
+          inputType="text"
+          placeholder="Description"
+          .value=${this.description}
+          label="Description"
+          required
+        ></text-input>
+        
         <div class="input-group">
           <label for="body">Product body</label>
           <textarea
-            @input=${this._handleChange("body")}
+            @input=${e => this._handleChange(e, 'body')}
             type="text"
             name="body"
             placeholder="Article Body"
-            value=${this.body}
             required
-          ></textarea>
+          >
+          ${this.body}</textarea
+          >
         </div>
+
         <div class="input-group">
-          <label for="price">price</label>
+          <label for="price">Price</label>
           <input
-            @input=${this._handleChange("price")}
+            @input=${e => this._handleChange(e, 'price')}
             type="number"
             name="price"
             placeholder="$0.00"
             value=${this.price}
+            step=".01"
             required
           />
         </div>
-        <div class="input-group">
-          <label for="category">Category</label>
-          <select
-            @input=${this._handleChange("category")}
-            name="category"
-            required
-          >
-            <option>-Choose a category-</option>
-            ${this.categories.map((category) => {
-              return html`<option value=${category._id}>
-                ${category.category}</option
-              >`;
-            })}
-          </select>
-        </div>
-        <div class="input-group">
-          <label for="shipping">Shipping</label>
-          <select
-            @input=${this._handleChange("shipping")}
-            name="shipping"
-            required
-          >
-            <option>-Select if shipping is required-</option>
-            <option value="1">Yes</option>
-            <option value="0">No</option>
-          </select>
-        </div>
+        ${this.categories && this.categories.length > 0
+          ? html`
+              <select-input
+                .options=${this.categories}
+                placeholder="—Choose a category—"
+                .value=${this.category}
+                label="Category"
+                @selectInputChange=${e => this._handleChange(e, 'category')}
+                required
+              ></select-input>
+            `
+          : ''}
+        <select-input
+          .options=${[
+            { value: true, label: 'Yes' },
+            { value: false, label: 'No' },
+          ]}
+          placeholder="—Is shipping required?—"
+          label="Shipping"
+          .value=${this.shipping}
+          @selectInputChange=${e => this._handleChange(e, 'shipping')}
+          required
+        ></select-input>
         <div class="input-group">
           <label for="quantity">Quantity</label>
           <input
-            @input=${this._handleChange("quantity")}
+            @input=${e => this._handleChange(e, 'quantity')}
             type="number"
             name="quantity"
             placeholder="0"
@@ -126,9 +119,7 @@ class ProductForm extends connect(store)(LitElement) {
             required
           />
         </div>
-        <button @click=${this.clickSubmit} type="submit">
-          Create product
-        </button>
+        <lit-button @buttonPress=${this.clickSubmit}>Edit Product</lit-button>
         <p>${this.showLoading()} ${this.showError()} ${this.showSuccess()}</p>
       </form>
     `;
@@ -197,7 +188,15 @@ class ProductForm extends connect(store)(LitElement) {
         const productCategories = data.filter((i) =>
           Object.values(i).includes("product")
         );
-        this.categories = productCategories;
+        console.log(productCategories);
+        productCategories.forEach(category => {
+
+          this.categories.push({
+            value: category._id,
+            label: category.category,
+          });
+          console.log(this.categories.length)
+        });
       }
     });
     const { user, token } = isAuthenticated();
@@ -210,13 +209,16 @@ class ProductForm extends connect(store)(LitElement) {
     this.formData.set("author.userName", this.user.publicDetails.userName);
     this.formData.set("contentType", this.contentType);
   }
-  _handleChange = (name) => (event) => {
-    const value = name === "photo" ? event.target.files[0] : event.target.value;
+  
+  _handleChange = (event, name) => {
+    console.log(event);
+    const value = name === 'photo' ? event.target.files[0] : event.target.value;
     this.formData.set(name, value);
-
-    this.error = "";
+    console.log(value === this.formData.get(name));
+    this.error = '';
     this.loading = false;
   };
+
   clickSubmit(event) {
     event.preventDefault();
 

@@ -1,6 +1,6 @@
-import {LitElement,html,css} from 'lit';
-import {createPopper} from '@popperjs/core';
-import styles from '../styles'
+import { LitElement, html, css } from 'lit';
+import { createPopper } from '@popperjs/core';
+import styles from '../styles';
 
 const POPOVER_OFFSET_skidding = 0,
   POPOVER_OFFSET_distance = 18;
@@ -11,7 +11,7 @@ class Popover {
     this.popover = popover;
     this.options = {
       placement,
-      visibleClass: 'data-show'
+      visibleClass: 'data-show',
     };
     this.popover.classList.remove(this.options.visibleClass);
   }
@@ -28,11 +28,8 @@ class Popover {
         {
           name: 'offset',
           options: {
-            offset: [
-              POPOVER_OFFSET_skidding,
-              POPOVER_OFFSET_distance
-            ]
-          }
+            offset: [POPOVER_OFFSET_skidding, POPOVER_OFFSET_distance],
+          },
         },
         {
           name: 'preventOverflow',
@@ -41,8 +38,8 @@ class Popover {
             padding: 16,
           },
         },
-      ]
-    })
+      ],
+    });
   }
 
   triggerUpdate() {
@@ -52,21 +49,23 @@ class Popover {
   hide() {
     this.popover.classList.remove(this.options.visibleClass);
   }
-} 
+}
 
 class Tooltip extends LitElement {
   static get properties() {
     return {
-      alertType: {type: String},
-      details: {type: String},
-      link: {type: String},
-      placement: {type: String},
-      for: {type: String},
-      dismissable: {type: Boolean},
-    }
+      alertType: { type: String },
+      details: { type: String },
+      link: { type: String },
+      placement: { type: String },
+      for: { type: String },
+      dismissable: { type: Boolean },
+    };
   }
   static get styles() {
-    return [styles, css`
+    return [
+      styles,
+      css`
       :host {display:inline-block;position: relative; width: auto;}
       .popover {
         display: none;
@@ -129,7 +128,8 @@ class Tooltip extends LitElement {
         top: calc(50% + 6px);
         transform: translateY(-50%) rotate(45deg);
         border-radius: 0 0 0 2px;
-      `];
+      `,
+    ];
   }
   constructor() {
     super();
@@ -149,9 +149,10 @@ class Tooltip extends LitElement {
   }
   disconnectedCallback() {
     super.disconnectedCallback();
-    document.removeEventListener('click', this.documentClickHandler)
+    document.removeEventListener('click', this.documentClickHandler);
   }
-  firstUpdated() {this.trigger = document.querySelector(`#${this.for}`);
+  firstUpdated() {
+    this.trigger = document.querySelector(`#${this.for}`);
     // allow placement in shadow roots
     if (this.trigger === null) {
       this.trigger = this.getRootNode().querySelector(`#${this.for}`);
@@ -161,25 +162,28 @@ class Tooltip extends LitElement {
     this.popper = new Popover(this.trigger, this.popover, this.placement);
 
     const handleShow = () => {
-      this.toggleShow();
-    },
-    handleHide = () => {
-      this.toggleHide();
-    },
-    handleKeyboardWhenFocusOnTrigger = (event) => {
-      const key = event.key.toLowerCase();
+        this.toggleShow();
+      },
+      handleHide = () => {
+        this.toggleHide();
+      },
+      handleKeyboardWhenFocusOnTrigger = event => {
+        const key = event.key.toLowerCase();
 
-      if (this.isPopoverVisible) {
-        if (key === 'tab' || key === 'escape') {
-          this.toggleHide();
+        if (this.isPopoverVisible) {
+          if (key === 'tab' || key === 'escape') {
+            this.toggleHide();
+          }
         }
-      }
 
-      if (key === ' ' || key === 'enter') {
-        this.toggle();
-      }
-    },
-    element = this.trigger.parentElement.nodeName === 'AURO-POPOVER' ? this : this.trigger;
+        if (key === ' ' || key === 'enter') {
+          this.toggle();
+        }
+      },
+      element =
+        this.trigger.parentElement.nodeName === 'AURO-POPOVER'
+          ? this
+          : this.trigger;
 
     element.addEventListener('mouseenter', handleShow);
     element.addEventListener('mouseleave', handleHide);
@@ -214,7 +218,7 @@ class Tooltip extends LitElement {
         <p>${this.details}</p>
       </div>
       <slot name="trigger" data-trigger-placement="${this.placement}"></slot>
-    `
+    `;
   }
 }
-customElements.define("tool-tip", Tooltip);
+customElements.define('tool-tip', Tooltip);
