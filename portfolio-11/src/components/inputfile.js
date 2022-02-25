@@ -32,7 +32,6 @@ class FileInput extends LitElement {
           ${this.value ? this.value.split( "\\" ).pop() : 'Add a file'}</label>
 
           <input
-            .value="${this.value}"
             type="file"
             name="${this.id}"
             id="${this.id}"
@@ -109,6 +108,7 @@ class FileInput extends LitElement {
   }
   _onChange(e) {
     this.value = e.target.value;
+    console.log(this.value);
     this.data = {}
     this.dispatchEvent(new CustomEvent('fileInputChange', {
       bubbles: true,
@@ -132,8 +132,10 @@ class FileInput extends LitElement {
   _handleDrop(e) {
     e.preventDefault();
     if (e.dataTransfer.files.length > 0) {
+      console.log(e.dataTransfer.files[0]);
     const dt = e.dataTransfer;
     const files = dt.files[0].name;
+    console.log(files);
     this.value = files;
     }
 

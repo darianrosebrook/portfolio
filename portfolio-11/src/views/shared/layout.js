@@ -18,7 +18,6 @@ class Layout extends connect(store)(LitElement) {
           width: 100%;
           height: 100%;
         }
-        ${this.stylesheet ? this.stylesheet : ''}
       </style>
       
       ${this.showAlert ? html`<alert-toast @buttonPress=${this.clearAlert} @alert-close=${this.clearAlert} .hideAlert=${false} .data=${this.data }></alert-toast>` : ''}

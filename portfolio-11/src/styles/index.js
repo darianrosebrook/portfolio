@@ -29,10 +29,12 @@ export default css`
     vertical-align:top;
     margin: 0;
     padding: 0;
+    
   }
   *::selection {
     background-color: var(--foreground);
     color: var(--background);
+
   }
   *:focus {
     outline: var(--focus) solid 2px ;
@@ -98,61 +100,77 @@ export default css`
 
   /* Typography  */
   /* -- Headings--  */
-  h1 {
-    font-size: var(--ramp-t1);
-    font-weight: var(--light);
+  
+
+  h1, .title-1 {
+    font: var(--tr-title-1);
+    margin: 0;
+    letter-spacing: -0.04em;
     line-height: 1.2;
   }
-  h2 {
-    font-size: var(--ramp-t2);
-    font-weight: var(--light);
-    line-height: 1.2173913043;
+  h2, .title-2 {
+    font: var(--tr-title-2);
+    margin: 0;
+    line-height: 1.2;
   }
-  h3 {
-    font-size: var(--ramp-t3);
-    font-weight: var(--light);
-    line-height: 1.294117647058824;
+  h3, .title-3 {
+    font: var(--tr-title-3);
+    margin: 0;
+    line-height: 1.2;
   }
-  h4 {
-    font-size: var(--ramp-t4);
-    font-weight: var(--light);
-    line-height: 1.285714285714286;
+  h4, .title-4 {
+    font: var(--tr-title-4);
+    margin: 0;
+    line-height: 1.2;
   }
-  h5 {
-    font-size: var(--ramp-t5);
-    font-weight: var(--light);
-    line-height: 1.4;
+  h5, .title-5 {
+    font: var(--tr-title-5);
+    margin: 0;
+    line-height: 1.2;
   }
-  h6 {
-    font-size: var(--ramp-t6);
-    font-weight: var(--light);
-    line-height: 1.5;
+  h6, .title-6 {
+    font: var(--tr-title-6);
+    margin: 0;
+    line-height: 1.2;
   }
-  .subheading {
-    font-weight: 300;
+  .subtitle-1 {
+    font: var(--tr-subtitle-1);
+    margin: 0;
+    line-height: 1.2;
+  }
+  .subtitle-2 {
+    font: var(--tr-subtitle-2);
+    margin: 0;
+    line-height: 1.2;
+  }
+  .subtitle-3 {
+    font: var(--tr-subtitle-3);
+    margin: 0;
+  }
+  small, .legal {
+    font: var(--tr-legal);
+    margin: 0;
   }
   strong,
   b {
-    font-size: var(--ramp-t7);
-    font-weight: 600;
-    line-height: 1.428571428571429;
+    font-size: inherit;
+    font-weight: var(--bold);
   }
-
-  p {
-    margin-bottom: var(--margin);
+  .body-1 {
+    font: var(--tr-body-1);
+    margin: 0;
   }
-  p.p-1 {
-    font-size: var(--ramp-t5);
-    font-weight: 400;
+  p,.body-2 {
+    font: var(--tr-body-2);
+    margin: 0;
   }
-  p.p-2 {
-    font-size: var(--ramp-t6);
-  }
-  p,
-  p.p-3,
+  .body-3,
   div,
   ul {
-    font-size: var(--ramp-t7);
+    font: var(--tr-body-3);
+  }
+  * + p {
+    margin-top: 1rem;
   }
   p.mono,
   pre {
@@ -188,6 +206,7 @@ export default css`
 
   ul {
     list-style-type: none;
+    font: 
   }
 
   a,
@@ -230,7 +249,7 @@ export default css`
     display: inline-block;
     border: 2px solid var(--foreground);
     border-radius: 4px;
-    font-size: 1.6rem;
+
     text-align: center;
     text-transform: none;
     background: none;
@@ -252,8 +271,8 @@ export default css`
   }
   button.stealth:hover,
   a.stealth:hover {
-    background: transparent;
-    color: var(--foreground) !important;
+    background: var(--foreground);
+    color: var(--background) !important;
     border: 1px solid var(--cr-neutral-50);
   }
   button.stealth:active,
@@ -314,6 +333,9 @@ export default css`
     opacity: 0.5;
     cursor: not-allowed;
   }
+  ::placeholder, .placeholder { 
+    color: var(--foreground-secondary);
+  }
   .formValidation {
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -337,26 +359,6 @@ export default css`
   .success span {
     color: var(--success-foreground);
     background-color: var(--success-background);
-  }
-  nav {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-  nav div:first-child {
-    width: 50%;
-  }
-  nav div {
-    width: 25%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  h5 {
-    font-family: "Crimson pro";
-    font-weight: 200;
   }
 
   a:link {
@@ -395,6 +397,31 @@ export default css`
     display: block;
     width: 100%;
   }
+  /* Structure */
+  section {
+    margin-top: var(--du-4);
+  }
+
+  /* Tables */
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    margin-bottom: var(--margin);
+  }
+  table thead th {
+    font-weight: var(--medium);
+    font-size: var(--ramp-t6);
+    color: var(--foreground);
+    text-align: left;
+  }
+  tbody tr {
+    border-top: 1px solid var(--cr-neutral-10);
+  }
+  td, th {
+    padding: var(--du-4) var(--du-4) var(--du-4) var(--du-4);
+  }
+
   @media (min-width: 1000px) {
     /* Clearfix */
     .f-r {

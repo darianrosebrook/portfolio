@@ -29,6 +29,7 @@ class BookForm extends LitElement {
             accept="image/*"
           />
         </div> -->
+        <h1>${this.photo}</h1>
       <file-input
         .value=${this.photo}
         accept="image/*"
@@ -38,6 +39,7 @@ class BookForm extends LitElement {
 
         @fileInputChange=${e => this._handleChange(e, "photo")}
       ></file-input>
+      
       <text-input
         inputType="text"
         label="Title"

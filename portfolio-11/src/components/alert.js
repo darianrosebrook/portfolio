@@ -7,7 +7,6 @@ class Alert extends LitElement {
   render() {
     return html`
       <div class="fadein alert elevation-3 ${this.data.type}${this.hideAlert ? ' hidden' : ''}" role="alert" aria-live="assertive">
-        <!-- <p class="p-1">${this.data.title}</p> -->
         <p>${this.data.message}</p>
         ${this.dismissable ? html`<lit-button @buttonPress=${this._closeAlert} buttonType="stealth" class="alert-close"><fa-icon icon='times' ></fa-icon></lit-button>` : ''}
       </div>
@@ -104,7 +103,6 @@ class Alert extends LitElement {
   `];
   }
   _closeAlert() {
-    // fire a custom event to close the alert
     this.dispatchEvent(new CustomEvent('alert-close', {
       bubbles: true,
       composed: true,
