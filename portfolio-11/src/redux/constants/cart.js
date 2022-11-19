@@ -1,7 +1,0 @@
-export const cartConstants = {
-  SET_CART: "SET_CART",
-  ADD_TO_CART: "ADD_TO_CART",
-  EDIT_CART: "EDIT_CART",
-  REMOVE_FROM_CART: "REMOVE_FROM_CART",
-  CLEAR_CART: "CLEAR_CART",
-};
