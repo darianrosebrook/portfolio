@@ -11,12 +11,26 @@
 </script>
 
 <svelte:head>
+	<meta charset="utf-8" />
 	<title>{$page.data.title}</title>
+	<meta name="description" content={description} />
+	<link rel="icon" href="%sveltekit.assets%/favicon.ico" />
+	<meta name="viewport" content="width=device-width" />
+	<script src="https://kit.fontawesome.com/cf8a647076.js" crossorigin="anonymous"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta property="og:url" content="https://darianrosebrook.com/" />
-	<!-- meta property og:image using title as query string -->
 	<meta property="og:image" content="https://darianrosebrook.com/og?title={title}" />
 	<meta property="og:title" content={title} />
 	<meta property="og:description" content={description} />
+	<meta property="og:type" content="website" />
+	<meta property="og:site_name" content="Darian Rosebrook" />
+	<meta property="og:locale" content="en_US" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="@darianrosebrook" />
+	<meta name="twitter:creator" content="@darianrosebrook" />
+	<meta name="twitter:title" content={title} />
+	<meta name="twitter:description" content={description} />
+	<meta name="twitter:image" content="https://darianrosebrook.com/og?title={title}" />
 </svelte:head>
 
 <main>
