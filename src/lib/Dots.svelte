@@ -5,7 +5,6 @@
 	export let domain = 'darianrosebrook.com';
 	export let title = `Product Designer | Design Systems, Portland Oregon`;
 	export let satori = false;
-	import img from '$lib/darian-square.jpg';
 </script>
 
 <div
