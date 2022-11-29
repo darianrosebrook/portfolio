@@ -98,11 +98,6 @@
 </section>
 
 <style>
-	section {
-		margin: 0 auto;
-		width: calc(100% - 4rem);
-		max-width: 720px;
-	}
 	.hero {
 		position: relative;
 		display: flex;
@@ -134,10 +129,6 @@
 		aspect-ratio: 3/4;
 	}
 	@media (min-width: 1080px) {
-		section {
-			width: calc(100% - 8rem);
-			max-width: 1440px;
-		}
 		.hero-body {
 			grid-template-columns: 1fr 1fr;
 			align-items: center;
