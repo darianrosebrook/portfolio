@@ -11,12 +11,8 @@
 </script>
 
 <svelte:head>
-	<meta charset="utf-8" />
 	<title>{$page.data.title}</title>
 	<meta name="description" content={description} />
-	<meta name="viewport" content="width=device-width" />
-	<script src="https://kit.fontawesome.com/cf8a647076.js" crossorigin="anonymous"></script>
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta property="og:url" content="https://darianrosebrook.com/" />
 	<meta property="og:image" content="https://darianrosebrook.com/og?title={title}" />
 	<meta property="og:title" content={title} />
