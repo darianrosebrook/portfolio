@@ -14,7 +14,6 @@
 	<meta charset="utf-8" />
 	<title>{$page.data.title}</title>
 	<meta name="description" content={description} />
-	<link rel="icon" href="%sveltekit.assets%/favicon.ico" />
 	<meta name="viewport" content="width=device-width" />
 	<script src="https://kit.fontawesome.com/cf8a647076.js" crossorigin="anonymous"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
