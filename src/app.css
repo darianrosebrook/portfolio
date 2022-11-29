@@ -9,12 +9,14 @@
   font-display: swap;
   font-style: normal;
 }
-
-html {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
+}
+html {
   color-scheme: light dark;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -39,7 +41,8 @@ html {
   /* Typography */
   --font-family: 'PP Neue Montreal', Inter, Helvetica, sans-serif;
   --alt-family: 'Palatino', Georgia, serif;
-  --line-height: var(--tr-2);
+  --line-height: 1.15;
+  --heading-line-height: 1;
   --letter-spacing: 0.01em;
   --black: 900;
   --extra-bold: 800;
@@ -237,7 +240,7 @@ html {
 body {
   font-family: var(--font-family);
   font-weight: var(--regular);
-  font-size: var(--body-1);
+  font-size: var(--body-2);
   line-height: var(--line-height);
   letter-spacing: var(--letter-spacing);
 }
@@ -249,6 +252,7 @@ h4,
 h5,
 h6 {
   letter-spacing: calc(var(--letter-spacing) * -1);
+  line-height: var(--heading-line-height);
   font-weight: 400;
 }
 .subtitle {
@@ -275,11 +279,11 @@ h3 {
 h4 {
   font-size: var(--title-4);
 }
-.body-1,
-p {
+.body-1 {
   font-size: var(--body-1);
 }
-.body-2 {
+.body-2,
+p {
   font-size: var(--body-2);
 }
 .caption-1,
@@ -292,6 +296,30 @@ small {
   text-transform: uppercase;
 }
 
+ul li {
+  margin-left: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* all block level typography has a bottom margin of 1rem unless it's the last child */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+ol,
+blockquote,
+pre,
+table,
+dl,
+figure,
+hr {
+  margin-bottom: 1rem;
+}
+
 #pest {
   display: block;
   box-sizing: border-box;
@@ -301,4 +329,30 @@ small {
   border: 2px solid var(--foreground);
   transition: border ease 0.2s;
   animation: fadeIn 5s;
+}
+main {
+  margin-top: 2em;
+}
+i span {
+  display: none;
+}
+.social-link {
+  display: inline-block;
+  margin: 0 0.5em;
+  transition: color ease 0.2s;
+  border: 0;
+}
+a:has(i) {
+  padding: 0 0.25rem;
+  border-bottom: 1px solid var(--link-hover);
+}
+a {
+  color: var(--link-rest);
+  text-decoration: none;
+  transition: color ease 0.2s;
+  border-bottom: 1px solid var(--link-rest);
+}
+a:hover {
+  color: var(--link-hover);
+  border-bottom: 1px solid var(--link-hover);
 }
