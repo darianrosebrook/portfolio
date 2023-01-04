@@ -26,6 +26,32 @@
 	<meta name="twitter:title" content={title} />
 	<meta name="twitter:description" content={description} />
 	<meta name="twitter:image" content="https://darianrosebrook.com/og?title={title}" />
+	<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "Person",
+			"mainEntityOfPage": {
+				"@type": "WebPage",
+				"@id": "https://darianrosebrook.com/"
+			},
+			"name": "Darian Rosebrook",
+			"image": "https://darianrosebrook.com/darianrosebrook.jpg",
+			"jobTitle": ["Product Designer", "Author", "Writer" ],
+			"worksFor": {
+				"@type": "Organization",
+				"name": "Paths.design"
+			}, 
+			"url": "https://darianrosebrook.com/",
+			"sameAs": [
+				"https://twitter.com/darianrosebrook",
+				"https://www.linkedin.com/in/darianrosebrook/",
+				"https://www.github.com/darianrosebrook",
+				"https://www.instagram.com/darianrosebrook/",
+				"https://www.youtube.com/@darian.rosebrook",
+				"https://read.compassofdesign.com/@darianrosebrook",
+		],
+		}
+	</script>
 </svelte:head>
 
 <main>
