@@ -80,18 +80,36 @@
 
 			<p>
 				You can also find me here — <a
-					class="social-link"
-					href="https://twitter.com/darianrosebrook"
-					target="_blank"
-					rel="noreferrer"
-					><i class="fa-brands fa-twitter" aria-label="Twitter logo"><span>Twitter</span></i></a
-				><a
+				class="social-link"
+				href="https://twitter.com/darianrosebrook"
+				target="_blank"
+				rel="noreferrer"
+				><i class="fa-brands fa-twitter" aria-label="Twitter logo"><span>Twitter</span></i></a
+			><a
+			class="social-link"
+			href="https://instagram.com/darianrosebrook"
+			target="_blank"
+			rel="noreferrer"
+			><i class="fa-brands fa-instagram" aria-label="Instagram logo"><span>Instagram</span></i></a
+		><a
 					href="https://linkedin.com/in/darianrosebrook"
 					class="social-link"
 					target="_blank"
 					rel="noreferrer"
 					><i class="fa-brands fa-linkedin" aria-label="Linkedin Logo"><span>Linkedin</span></i></a
-				>
+				><a
+				href="https://youtube.com/@darianrosebrook"
+				class="social-link"
+				target="_blank"
+				rel="noreferrer"
+				><i class="fa-brands fa-youtube" aria-label="YouTube Logo"><span>YouTube</span></i></a
+			><a
+			href="https://read.compassofdesign.com/@darianrosebrook"
+			class="social-link"
+			target="_blank"
+			rel="noreferrer"
+			><i class="fa-brands fa-medium" aria-label="Medium.com Logo"><span>Medium.com</span></i></a
+		>
 			</p>
 		</div>
 	</div>

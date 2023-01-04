@@ -243,6 +243,7 @@ body {
 	font-size: var(--body-2);
 	line-height: var(--line-height);
 	letter-spacing: var(--letter-spacing);
+	padding-bottom: 5rem;
 }
 
 h1,
