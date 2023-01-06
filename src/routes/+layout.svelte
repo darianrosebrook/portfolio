@@ -49,7 +49,7 @@
 				"https://www.instagram.com/darianrosebrook/",
 				"https://www.youtube.com/@darian.rosebrook",
 				"https://read.compassofdesign.com/@darianrosebrook",
-		],
+		]
 		}
 	</script>
 </svelte:head>
