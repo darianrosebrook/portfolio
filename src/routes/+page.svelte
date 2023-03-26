@@ -20,58 +20,20 @@
 				{title}
 			</h1>
 
-			<p>
-				Hey! I'm Darian Rosebrook. I am a product designer focused on design systems, design
-				technology (ux engineering), and custom design tooling for Figma in the Portland, Oregon,
-				area.
-			</p>
-
-			<p>I build things that make it easier for people to build things.</p>
-
-			<p>
-				I'm super passionate about design ops, using design to design the designers' design
-				processes.
-			</p>
-
-			<p>
-				As a designer and developer hybrid, I bridge a lot of the product development cycle, helping
-				improve the experience for both design and engineering. I design better workflows for
-				designers working on products, standardize product design decisions, and document our design
-				patterns and best practices. Prioritizing someone to focus on these decisions frees time for
-				product teams to focus on more in-depth problem-solving in their product.
-			</p>
-
-			<p>
-				Because I'm well versed in both modern web development (React / Web Components / HTML / CSS
-				/ Javascript) and product design (Design System Thinking, User Experience Design, User
-				Interface Design), I utilize these skills to do things like:
-			</p>
-
-			<ul>
-				<li>
-					<p>Creating full-featured, high fidelity component libraries in tools like Figma</p>
-				</li>
-				<li><p>Creating guides and documentation on how to use the design system</p></li>
-				<li><p>Improving the development experience around consuming a component library</p></li>
-				<li>
-					<p>
-						Creating workflow specific tooling like custom Figma plugins that help speed up the
-						product design workflow, the creation and maintenance of design systems, and more
-					</p>
-				</li>
-				<li><p>Creating tooling that helps keep design and development closer in sync</p></li>
-				<li>
-					<p>
-						Creating processes and workflows that improve our feedback, contribution, and adoption
-						across teams
-					</p>
-				</li>
-				<li><p>…and much more.</p></li>
-			</ul>
-
-			<p>
-				I'm always happy to discuss the work I do, so if anything resonates, feel free to reach out!
-				And if you need to see my work, <a
+			    <p>Hey there! I'm Darian Rosebrook, a Lead Product Designer based in the Portland, Oregon area, specializing in design systems, design technology (UX engineering), and custom design tooling for Figma. My passion lies at the intersection of design operations and design systems, where I focus on fixing design collaboration and product development cycles by improving design processes and collaboration.</p>
+            <p>As a designer and developer hybrid, I bridge the gap in the product development cycle, enhancing the experience for both design and engineering teams. I'm dedicated to creating custom tooling between GitHub and Figma to streamline workflows, crafting robust design systems that drive innovation, and fostering a collaborative environment that encourages growth.</p>
+            <p>My expertise includes:</p>
+            <ul>
+                <li>Developing full-featured, high fidelity component libraries in tools like Figma</li>
+                <li>Creating comprehensive guides and documentation on design system usage</li>
+                <li>Enhancing the development experience by streamlining component library consumption</li>
+                <li>Building custom Figma plugins that accelerate product design workflows, design system creation, and maintenance</li>
+                <li>Implementing tooling that keeps design and development closely in sync</li>
+                <li>Establishing processes and workflows that optimize feedback, contribution, and adoption across teams</li>
+            </ul>
+            <p>Throughout my career, I've had the privilege of working with industry giants like Microsoft, Salesforce, and Nike, contributing to groundbreaking products and design systems. I'm committed to continuously teaching and mentoring designers in the community, sharing my knowledge, and helping others reach their full potential.</p>
+            <p>If you're passionate about design and want to discuss how we can collaborate to create innovative solutions, feel free to reach out! I'm always eager to connect with like-minded professionals and explore new opportunities in UX and Product Design.</p>
+	<p>And if you need to see my work, <a
 					target="_blank"
 					rel="noopener noreferrer nofollow"
 					href="https://darian.is/a-designer">check out my portfolio here</a
