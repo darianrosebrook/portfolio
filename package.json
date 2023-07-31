@@ -1,40 +1,39 @@
 {
-  "private": true,
-  "scripts": {
-    "dev": "vite dev --open --port 3000",
-    "build": "vite build",
-    "package": "svelte-kit package",
-    "preview": "vite preview",
-    "check": "svelte-check --tsconfig ./jsconfig.json",
-    "check:watch": "svelte-check --tsconfig ./jsconfig.json --watch",
-    "lint": "prettier --check .",
-    "format": "prettier --write ."
-  },
-  "devDependencies": {
-    "@resvg/resvg-js": "^2.4.1",
-    "@sveltejs/adapter-auto": "next",
-    
-    "@sveltejs/kit": "1.5.0", 
-    "@types/cookie": "^0.5.1",
-    "prettier": "^2.8.7",
-    "prettier-plugin-svelte": "^2.10.0",
-    "satori": "^0.0.44",
-    "satori-html": "^0.3.2",
-    "svelte": "^3.57.0",
-    "svelte-check": "^2.10.3",
-    "typescript": "^4.9.5"
-  },
-  "type": "module",
-  "dependencies": {
-    "@ethercorps/sveltekit-og": "^0.1.8",
-    "@fontsource/fira-mono": "^4.5.10",
-    "@vercel/og": "^0.0.21",
-    "cookie": "^0.4.2",
-    "nice-color-palettes": "^3.0.0",
-    "random-words": "^1.3.0",
-    "seedrandom": "^3.0.5",
-    "vite": "^4.2.1",
-    "vite-plugin-wasm": "^3.2.2",
-    "web-vitals": "^2.1.4"
-  }
+	"private": true,
+	"scripts": {
+		"dev": "vite dev --open --port 3000",
+		"build": "vite build",
+		"package": "svelte-kit package",
+		"preview": "vite preview",
+		"check": "svelte-check --tsconfig ./jsconfig.json",
+		"check:watch": "svelte-check --tsconfig ./jsconfig.json --watch",
+		"lint": "prettier --check .",
+		"format": "prettier --write ."
+	},
+	"devDependencies": {
+		"@resvg/resvg-js": "^2.4.1",
+		"@sveltejs/adapter-auto": "next",
+		"@sveltejs/kit": "1.5.0",
+		"@types/cookie": "^0.5.1",
+		"prettier": "^2.8.7",
+		"prettier-plugin-svelte": "^2.10.0",
+		"satori": "^0.0.44",
+		"satori-html": "^0.3.2",
+		"svelte": "^3.57.0",
+		"svelte-check": "^2.10.3",
+		"typescript": "^4.9.5"
+	},
+	"type": "module",
+	"dependencies": {
+		"@ethercorps/sveltekit-og": "^0.1.8",
+		"@fontsource/fira-mono": "^4.5.10",
+		"@vercel/og": "^0.0.21",
+		"cookie": "^0.4.2",
+		"nice-color-palettes": "^3.0.0",
+		"random-words": "^1.3.0",
+		"seedrandom": "^3.0.5",
+		"vite": "^4.2.1",
+		"vite-plugin-wasm": "^3.2.2",
+		"web-vitals": "^2.1.4"
+	}
 }

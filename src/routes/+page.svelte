@@ -8,9 +8,9 @@
 	<div class="hero-body">
 		<div class="hero-image">
 			<img
-				src=" https://community-production.nyc3.digitaloceanspaces.com/product/asdfaefwef/darian-thin.png"
-				alt="hero "
-			/>
+				src="/darianrosebrook.jpg"
+				alt="Darian Rosebrook, a product designer from the Portland, Oregon area. He specializes in design systems, design technology, and custom design tooling."
+				/>
 		</div>
 		<div class="container">
 			<p class="body-2 subtitle">
