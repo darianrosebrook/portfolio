@@ -60,7 +60,7 @@
 					rel="noreferrer"
 					><i class="fa-brands fa-linkedin" aria-label="Linkedin Logo"><span>Linkedin</span></i></a
 				><a
-				href="https://youtube.com/@darianrosebrook"
+				href="https://youtube.com/@darian.rosebrook"
 				class="social-link"
 				target="_blank"
 				rel="noreferrer"
