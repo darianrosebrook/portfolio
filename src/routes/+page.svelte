@@ -33,12 +33,7 @@
             </ul>
             <p>Throughout my career, I've had the privilege of working with industry giants like Microsoft, Salesforce, and Nike, contributing to groundbreaking products and design systems. I'm committed to continuously teaching and mentoring designers in the community, sharing my knowledge, and helping others reach their full potential.</p>
             <p>If you're passionate about design and want to discuss how we can collaborate to create innovative solutions, feel free to reach out! I'm always eager to connect with like-minded professionals and explore new opportunities in UX and Product Design.</p>
-	<p>And if you need to see my work, <a
-					target="_blank"
-					rel="noopener noreferrer nofollow"
-					href="https://darian.is/a-designer">check out my portfolio here</a
-				>
-			</p>
+	  
 
 			<p>
 				You can also find me here — <a
