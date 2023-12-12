@@ -24,7 +24,8 @@
             <p>As a designer and developer hybrid, I bridge the gap in the product development cycle, enhancing the experience for both design and engineering teams. I'm dedicated to creating custom tooling between GitHub and Figma to streamline workflows, crafting robust design systems that drive innovation, and fostering a collaborative environment that encourages growth.</p>
             <p>My expertise includes:</p>
             <ul>
-                <li>Developing full-featured, high fidelity component libraries in tools like Figma</li>
+		<li>Planning and implementing automation pipelines for design system assets</li>
+                <li>Developing full-featured design systems with high fidelity component libraries in Figma, React, Web Components, and Svelte</li>
                 <li>Creating comprehensive guides and documentation on design system usage</li>
                 <li>Enhancing the development experience by streamlining component library consumption</li>
                 <li>Building custom Figma plugins that accelerate product design workflows, design system creation, and maintenance</li>
