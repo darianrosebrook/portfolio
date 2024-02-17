@@ -25,7 +25,7 @@ export default function Home() {
         ask me about if it you want. That&apos;s cool I guess.
       </p>
       <p>
-        Idk, here&apos;s a link to{" "}``
+        Idk, here&apos;s a link to{" "}
         <a href="https://x.com/darianrosebrook/status/847670574964920320">something i made that I posted on twitter.</a>
       </p>
       <p>I wanna go back to bed</p>
