@@ -135,13 +135,14 @@ export default function Home() {
         </div>
       </section>
       <section data-print="true" className="projects">
-        <h3>Favorite Projects</h3>
+        <h2>Highlighted Projects</h2>
+        <p>These are just the favorites. Case studies available on request.</p>
         <ul className="experience">
           <li>
             <div className="dateYear">
               <span>2023</span>
             </div> 
-              <h4>Iconography Sync <span> at eBay</span></h4>
+              <h3>Iconography Sync <span> at eBay</span></h3>
               <div className="">
                 <p>
                   I've created a figma plugin for design system teams that
@@ -169,9 +170,9 @@ export default function Home() {
             <div className="dateYear">
               <span>2022</span>
             </div>
-            <h4>
+            <h3>
               Figma library sync<span> at Nike</span>
-            </h4>
+            </h3>
             <div className="">
               <p>
                 For our Nike foundations design system library, I created a
@@ -201,9 +202,9 @@ export default function Home() {
             <div className="dateYear">
               <span>2022</span>
             </div>
-            <h4>
+            <h3>
               Podium Foundations Library<span> at Nike</span>
-            </h4>
+            </h3>
             <div className="">
               <p>
                 In late 2021, the Consumer, Marketing, and Enterprise leaders
@@ -234,7 +235,7 @@ export default function Home() {
             <div className="dateYear">
               <span>2021</span>
             </div>
-            <h4 className="ProfileItem_title__rsz3J">
+            <h3 className="ProfileItem_title__rsz3J">
               <div>
                 <a
                   className="MegaLink_megalink__u_TFB ProfileItem_titleLink__qXU7l"
@@ -260,7 +261,7 @@ export default function Home() {
                   </svg>
                 </span>
               </div>
-            </h4>
+            </h3>
             <div className="">
               <p>
                 I worked for 18 months designing and building the enterprise
@@ -287,9 +288,9 @@ export default function Home() {
             <div className="dateYear">
               <span>2020</span>
             </div>
-            <h4>
+            <h3>
               Branding and Product design<span> at Common Room</span>
-            </h4>
+            </h3>
             <div className="">
               <p>
                 I was one of the first designers contracted with their team. It
@@ -313,9 +314,9 @@ export default function Home() {
             <div className="dateYear">
               <span>2020</span>
             </div>
-            <h4>
+            <h3>
               Sustainability Cloud<span> at Salesforce</span>
-            </h4>
+            </h3>
             <div className="">
               <p>
                 I worked on the Salesforce Sustainabilitu Cloud which functions
@@ -347,9 +348,9 @@ export default function Home() {
             <div className="dateYear">
               <span>2019</span>
             </div>
-            <h4>
+            <h3>
               The New Microsoft Edge Browser<span> at Microsoft</span>
-            </h4>
+            </h3>
             <div className="">
               <p>
                 My work with Edge was a mixture of branding, product design, and
