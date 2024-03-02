@@ -145,7 +145,7 @@ export default function Home() {
               <h3>Iconography Sync <span> at eBay</span></h3>
               <div className="">
                 <p>
-                  I've created a figma plugin for design system teams that
+                  I&apos;ve created a figma plugin for design system teams that
                   allows design and development to be closer in sync, allowing
                   for a fairly optimized and automated process for syncing our
                   design assets to our code assets through GitHub. Designers
