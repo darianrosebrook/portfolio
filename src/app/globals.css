@@ -27,6 +27,11 @@
     --background: var(--dark);
   }
 }
+ul { 
+  padding: 0;
+  padding-left: 1rem;
+  margin: 0;
+}
  
 * {
   box-sizing: border-box;
@@ -77,4 +82,15 @@ a {
 }
 a:hover {
   text-decoration: underline;
+}
+.social-link {
+  display: inline-flex;
+  gap: var(--unit-xs);
+  align-items: center;
+}
+.social-link span {
+  display: none;
+}
+.social-link + .social-link {
+  margin-left: var(--unit-xs);
 }
