@@ -15,8 +15,8 @@
   --unit-md: calc(var(--unit-base) * 8);
   --unit-lg: calc(var(--unit-base) * 16);
   --unit-xl: calc(var(--unit-base) * 32);
-  --color-accent: #ff6f61;
-
+  --color-accent: #C80E10;
+  
   font-family: "Nohemi", sans-serif;
   font-size: var(--unit-sm);
   font-weight: 350;
@@ -26,6 +26,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
+    --color-accent: #ff6f61;
     --foreground: var(--light);
     --secondary: rgb(200, 200, 200);
     --background: var(--dark);
@@ -121,7 +122,7 @@ li {
 }
 nav {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   gap: var(--unit-xs);
 }
 
