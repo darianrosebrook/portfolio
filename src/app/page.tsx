@@ -12,58 +12,33 @@ export default function Home() {
             height={675}
           />
         </div>
-        <div className="container">
-          <div >
-            <h1>Darian Rosebrook</h1>
-            <p>Product Designer and Developer</p>
-          </div>
+        <div className="content">
           <p>
-            Hey there! I&apos;m Darian Rosebrook, a Lead Product Designer based
-            in the Portland, Oregon area, specializing in design systems, design
-            technology (UX engineering), and custom design tooling for Figma. My
-            passion lies at the intersection of design operations and design
-            systems, where I focus on fixing design collaboration and product
-            development cycles by improving design processes and collaboration.
+            Hey there! I&apos;m <strong> Darian Rosebrook</strong>, a Product
+            Designer specializing in design systems, design technology (UX
+            engineering), and custom design tooling for Figma. Currently, I am
+            based in the Portland, Oregon area, where I spend a lot of time in
+            the city. My passion lies at finding the ideal intersection of the
+            design process and the development pipeline, where I focus on fixing
+            design collaboration and product development cycles.
           </p>
           <p>
             As a designer and developer hybrid, I bridge the gap in the product
-            development cycle, enhancing the experience for both design and
-            engineering teams. I&apos;m dedicated to creating custom tooling
-            between GitHub and Figma to streamline workflows, crafting robust
-            design systems that drive innovation, and fostering a collaborative
-            environment that encourages growth.
+            development cycle, enhancing the user experience for both design and
+            engineering teams when they interact with our design system.
+            I&apos;m often dedicating time to creating custom tooling between
+            GitHub and Figma to streamline product development workflows,
+            crafting robust design systems that drive innovation, and fostering
+            a collaborative environment that encourages velocity to get designs
+            into the hands of customers more quickly.
           </p>
-          <p>My expertise includes:</p>
-          <ul>
-            <li>
-              Planning and implementing automation pipelines for design system
-              assets
-            </li>
-            <li>
-              Developing full-featured design systems with high fidelity
-              component libraries in Figma, React, Web Components, and Svelte
-            </li>
-            <li>
-              Creating comprehensive guides and documentation on design system
-              usage
-            </li>
-            <li>
-              Enhancing the development experience by streamlining component
-              library consumption
-            </li>
-            <li>
-              Building custom Figma plugins that accelerate product design
-              workflows, design system creation, and maintenance
-            </li>
-            <li>
-              Implementing tooling that keeps design and development closely in
-              sync
-            </li>
-            <li>
-              Establishing processes and workflows that optimize feedback,
-              contribution, and adoption across teams
-            </li>
-          </ul>
+          <p>
+            I have been leading cross collaborative teams through highly
+            technical projects for years now. Working with project managers and
+            development leads to break large initiatives into smaller arcs of
+            work, managing and delegating resources, and helping deliver through
+            highly technical execution across a project.
+          </p>
           <p>
             Throughout my career, I&apos;ve had the privilege of working with
             industry giants like eBay, Microsoft, Salesforce, and Nike,
@@ -78,9 +53,9 @@ export default function Home() {
             out! I&apos;m always eager to connect with like-minded professionals
             and explore new opportunities in UX and Product Design.
           </p>
-
+            <p><a href="https://docs.google.com/document/d/1FaoQVYYH0htEI1gyb81V484xOkZbOSV2/edit?usp=sharing&ouid=107993876908625421793&rtpof=true&sd=true" target="_blank">My resume</a></p>
           <p>
-            You can also find me here —
+            Other places to find me:
             <a
               className="social-link"
               href="https://twitter.com/darianrosebrook"
@@ -133,47 +108,183 @@ export default function Home() {
             </a>
           </p>
         </div>
+        <div className="content">
+          <p>
+            <strong>Technical skillset</strong>
+          </p>
+          <p>Design</p>
+          <ul>
+            <li>Design Management</li>
+            <li>Design Systems</li>
+            <li>Design Tokens</li>
+            <li>User Research</li>
+            <li>UX Design</li>
+            <li>UX Engineering</li>
+            <li>Figma Component Libraries</li>
+          </ul>
+          <p>Development</p>
+          <ul>
+            <li>Figma Plugin Development</li>
+            <li>Figma API</li>
+            <li>React</li>
+            <li>Vue</li>
+            <li>Angular</li>
+            <li>Svelte</li>
+            <li>Web Components</li>
+            <li>Backend Development</li>
+            <li>API Design</li>
+            <li>Mobile Development</li>
+            <li>Kotlin</li>
+            <li>SwiftUI</li>
+            <li>Java</li>
+            <li>Objective-C</li>
+          </ul>
+        </div>
+        <div className="content">
+          <p>
+            <strong>Strategic skillset</strong>
+          </p>
+          <ul>
+            <li>
+              Simplifying highly technical concepts for non-technical teams
+            </li>
+            <li>Running design system workshops</li>
+            <li>Comprehensive design system documentation</li>
+            <li>
+              Planning and implementing automation pipelines for design system
+              assets
+            </li>
+            <li>
+              Developing full-featured design systems with high fidelity
+              component libraries in Figma, Web, Android, and iOS
+            </li>
+            <li>
+              Auditing design components created in React, Vue, or other web
+              technologies, as well as native mobile design systems in Swift,
+              Kotlin, or Java.
+            </li>
+            <li>
+              Creating comprehensive guides and documentation on design system
+              usage
+            </li>
+            <li>
+              Enhancing the development experience by streamlining component
+              library consumption
+            </li>
+            <li>
+              Building custom Figma plugins that accelerate product design
+              workflows, design system creation, and maintenance
+            </li>
+            <li>
+              Implementing tooling and pipelines that keeps design and
+              development closely in sync
+            </li>
+            <li>
+              Establishing processes and workflows for design and development
+              that optimize feedback, contribution, and adoption across teams
+            </li>
+          </ul>
+        </div>
       </section>
       <section data-print="true" className="projects">
         <h2>Highlighted Projects</h2>
-        <p>These are just the favorites. Case studies available on request.</p>
+        <p>
+          These are just the favorites of some recent work. Full case studies
+          available on request.
+        </p>
         <ul className="experience">
           <li>
-            <div className="dateYear">
+            <h3 className="dateYear">
               <span>2023</span>
-            </div> 
-              <h3>Iconography Sync <span> at eBay</span></h3>
-              <div className="">
-                <p>
-                  I&apos;ve created a figma plugin for design system teams that
-                  allows design and development to be closer in sync, allowing
-                  for a fairly optimized and automated process for syncing our
-                  design assets to our code assets through GitHub. Designers
-                  have control over which of their designed assets gets output
-                  from the tooling, developers have control over what gets
-                  checked into the codebase, site, and packages. Utilizing
-                  bidirectional sync with GitHub based on versioning, design and
-                  development now have a dual turn key moment for releasing new
-                  changes in things like iconography, design tokens, and
-                  illustrations. Designers have the ability to see the status of
-                  their work, and developers have visibility into what changes
-                  are made instead of reaching blindly into the google folder to
-                  grab all icons and hope that nothing breaks again
-                </p>
-                <p>
-                  By bridging the gap between design and code here, I have saved
-                  hours and hours of manual process for our team.
-                </p>
-              </div> 
+            </h3>
+            <h3>
+              Iconography Sync <span> at eBay</span>
+            </h3>
+            <div className="content">
+              <p>
+                I&apos;ve created a figma plugin for design system teams that
+                allows design and development to be closer in sync, allowing for
+                a fairly optimized and automated process for syncing our design
+                assets to our code assets through GitHub. Designers have control
+                over which of their designed assets gets output from the
+                tooling, developers have control over what gets checked into the
+                codebase, site, and packages.
+              </p>
+              <p>
+                Utilizing bidirectional sync with GitHub based on versioning,
+                design and development now have a dual turn key moment for
+                releasing new changes in things like iconography, design tokens,
+                and illustrations. Designers have the ability to see the status
+                of their work, and developers have visibility into what changes
+                are made instead of reaching blindly into the google folder to
+                grab all icons and hope that nothing breaks again
+              </p>
+              <p>
+                By bridging the gap between design and code here, our design
+                system team can now create, publish, and release new iconography
+                from Figma to the team's codebase the same day. Much better than
+                the 6-8 week turnaround due to meetings, backlogging tickets,
+                and working around release schedules.
+              </p>
+              <p>
+                From the push of a button, and the approving pull request of a
+                developer, our Figma library, our Web, Android, and iOS
+                libraries, and our documentation site are all updated at the
+                same time.
+              </p>
+            </div>
           </li>
           <li>
-            <div className="dateYear">
-              <span>2022</span>
+            <h3 className="dateYear">
+              <span>2023</span>
+            </h3>
+            <h3>
+              Designer&lsquo;s Definition of Done<span> at eBay</span>
+            </h3>
+            <div className="content">
+              <p>
+                Me and my coworker Catalina Manea interviewed over 40 designers,
+                30 developers,and 11 project managers to understand the current
+                landscape of design handoff and design/developer collaboration.
+                We worked with them to identify strong key points along our
+                product process that were critically broken, requiring some form
+                of intervention and reeducation to fix.
+              </p>
+              <p>
+                Together, we set out to bring these pain points directly to the
+                teams they partner with, like accessibility, content designers,
+                development leads, the design system team. We worked with these
+                teams to develop a list of key things they require when
+                interfacing with them cross collaboratively.
+              </p>
+              <p>
+                Using this list, I and one other developer used this list to
+                create a custom &ldquo;<strong>Definitiion of Done</strong>
+                &rdquo; interactive Figma widget to be used as a companion that
+                helps designers build good habits and file hygeine before
+                interfacing with their partners during the product design
+                lifecycle.
+              </p>
+              <p>
+                This tool helps build a standard of things we expect from our
+                senior level designers, and helps teams build consistent habits
+                across the organization.
+              </p>
+              <p>
+                Teams involved in our pilots have had a large reduction in bugs,
+                and more efficient design handoff as opposed to teams outside
+                the pilot
+              </p>
             </div>
+          </li>
+          <li>
+            <h3 className="dateYear">
+              <span>2022</span>
+            </h3>
             <h3>
               Figma library sync<span> at Nike</span>
             </h3>
-            <div className="">
+            <div className="content">
               <p>
                 For our Nike foundations design system library, I created a
                 figma plugin that takes the design tokens that are defined in
@@ -198,31 +309,35 @@ export default function Home() {
             </div>
           </li>
           <li>
-            {" "}
-            <div className="dateYear">
+            <h3 className="dateYear">
               <span>2022</span>
-            </div>
+            </h3>
             <h3>
               Podium Foundations Library<span> at Nike</span>
             </h3>
-            <div className="">
+            <div className="content">
               <p>
                 In late 2021, the Consumer, Marketing, and Enterprise leaders
                 got together to figure out how to work towards an even tighter
                 collaboration on design across our orgs. The result led to me
                 and my lead developer on the enterprise design system to co-lead
                 the effort with leads from each org to design a foundational
-                library that feeds all three org-focused design systems. To pull
-                redundancy of designing the design tokens, base components, and
-                overall codebases, I helped architect and build several internal
-                tools that take the existing properties of Figma libraries,
-                branching, GitHub, and the Figma plugin system and created
-                custom tooling that outputs and links our foundational figma
-                library to GitHub for our developers, and links the foundational
-                library to other figma libraries. This connection allows us to
-                change underlying tokens in a turn key moment between design and
-                development to ensure the updates to code and design can happen
-                simultaneously with the correct values and little lag time.
+                library that feeds all three org-focused design systems.
+              </p>
+              <p>
+                To pull redundancy of designing the design tokens, base
+                components, and overall codebases, I helped architect and build
+                several internal tools that take the existing properties of
+                Figma libraries, branching, GitHub, and the Figma plugin system
+                and created custom tooling that outputs and links our
+                foundational figma library to GitHub for our developers, and
+                links the foundational library to other figma libraries.
+              </p>
+              <p>
+                This connection allows us to change underlying tokens in a turn
+                key moment between design and development to ensure the updates
+                to code and design can happen simultaneously with the correct
+                values and little lag time.
               </p>
               <p>
                 Through this, I helped facilitate intense design system
@@ -232,9 +347,9 @@ export default function Home() {
             </div>
           </li>
           <li>
-            <div className="dateYear">
+            <h3 className="dateYear">
               <span>2021</span>
-            </div>
+            </h3>
             <h3 className="ProfileItem_title__rsz3J">
               <div>
                 <a
@@ -262,7 +377,7 @@ export default function Home() {
                 </span>
               </div>
             </h3>
-            <div className="">
+            <div className="content">
               <p>
                 I worked for 18 months designing and building the enterprise
                 branch of the Nike design system. Prior to me joining, Nike had
@@ -281,17 +396,16 @@ export default function Home() {
                 across the org.
               </p>
             </div>
-             
           </li>
           <li>
             {" "}
-            <div className="dateYear">
+            <h3 className="dateYear">
               <span>2020</span>
-            </div>
+            </h3>
             <h3>
               Branding and Product design<span> at Common Room</span>
             </h3>
-            <div className="">
+            <div className="content">
               <p>
                 I was one of the first designers contracted with their team. It
                 was a pre launch product gaining traction with early investors
@@ -311,13 +425,13 @@ export default function Home() {
             </div>
           </li>
           <li>
-            <div className="dateYear">
+            <h3 className="dateYear">
               <span>2020</span>
-            </div>
+            </h3>
             <h3>
               Sustainability Cloud<span> at Salesforce</span>
             </h3>
-            <div className="">
+            <div className="content">
               <p>
                 I worked on the Salesforce Sustainabilitu Cloud which functions
                 as a carbon emissions tracker, analytics, and data reporting
@@ -345,13 +459,13 @@ export default function Home() {
             </div>
           </li>
           <li>
-            <div className="dateYear">
+            <h3 className="dateYear">
               <span>2019</span>
-            </div>
+            </h3>
             <h3>
               The New Microsoft Edge Browser<span> at Microsoft</span>
             </h3>
-            <div className="">
+            <div className="content">
               <p>
                 My work with Edge was a mixture of branding, product design, and
                 design process refinement. I had been onboarded to a pre launch

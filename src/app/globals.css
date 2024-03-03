@@ -6,7 +6,7 @@
 :root {
   --light: rgb(240, 240, 240);
   --secondary: rgb(50, 50, 50);
-  --dark: #181818;
+  --dark: #121212;
   --foreground: var(--dark);
   --background: var(--light);
   --unit-base: 4px;
@@ -18,8 +18,9 @@
   --color-accent: #ff6f61;
 
   font-family: "Nohemi", sans-serif;
+  font-size: var(--unit-sm);
   font-weight: 350;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
   line-height: 1.25;
 }
 
@@ -33,6 +34,8 @@
 
 * {
   box-sizing: border-box;
+  /* background: rgba(190, 0, 0 , 0.1);
+  border: 1px solid rgba(0, 0, 0, 1); */
   padding: 0;
   margin: 0;
 }
@@ -90,22 +93,52 @@ a:hover {
 .social-link {
   font-size: 1.5rem;
   display: inline-flex;
-
+  margin: 0;
   margin-left: var(--unit-sm);
   align-items: center;
 }
 .social-link span {
   display: none;
 }
+* + p {
+  margin-top: var(--unit-sm);
+}
+* + .content {
+  margin-top: var(--unit-sm);
+}
 .experience {
-  padding: 1rem;
   list-style-type: none;
 }
-.experience li + li {
-  margin-top: var(--unit-lg);
+li {
+  margin-top: var(--unit-xs);
 }
-.container > * + * {
-  margin-top: var(--unit-sm);
+.projects ul {
+  padding-left: 0;
+}
+.experience > li {  
+  margin: 0;
+  margin-top: var(--unit-md);
+}
+nav {
+  display: flex;
+  justify-content: start;
+  gap: var(--unit-xs);
+}
+
+nav h1,
+nav h2 {
+  line-height: 1;
+  margin-top: 0.5rem;
+  font-weight: 300;
+}
+nav h2 {
+  font-size: var(--unit-sm);
+  margin-top: .25rem
+}
+.logo {
+  width: var(--unit-lg);
+  height: var(--unit-lg);
+  margin: 0;
 }
 @media screen and (min-width: 1000px) {
   section {
@@ -127,5 +160,8 @@ a:hover {
     /* date place description */
     grid-template-columns: 1fr 1fr 3fr;
     gap: 2rem;
+  }
+  .experience .content{
+    margin-top: 0;
   }
 }
