@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Header from "./components/header";
 
 export const metadata: Metadata = {
   title: "Darian Rosebrook: Product Designer | Design Systems, Portland Oregon",
@@ -21,7 +22,10 @@ export default function RootLayout({
           crossOrigin="anonymous"
         ></script>
       </head>
-      <body>{children}</body>
+      <body>
+        <Header />
+        {children}
+        </body>
     </html>
   );
 }
