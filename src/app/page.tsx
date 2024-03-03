@@ -222,7 +222,7 @@ export default function Home() {
               <p>
                 By bridging the gap between design and code here, our design
                 system team can now create, publish, and release new iconography
-                from Figma to the team's codebase the same day. Much better than
+                from Figma to the team&lsquo;s codebase the same day. Much better than
                 the 6-8 week turnaround due to meetings, backlogging tickets,
                 and working around release schedules.
               </p>
