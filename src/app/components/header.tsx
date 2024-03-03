@@ -1,12 +1,12 @@
- 
 import Image from "next/image";
+import logo from "./logo.svg";
 
 export default function Header() {
   return (
     <header>
       <nav>
         <div>
-            <Image src="/logo.svg" width="36" height="36" alt="Darian Rosebrook" />
+          <Image src={logo} width="36" height="36" alt="Darian Rosebrook" className="logo" />
         </div>
         <div>
           <h1>Darian Rosebrook</h1>
