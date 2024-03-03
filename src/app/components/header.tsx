@@ -6,7 +6,7 @@ export default function Header() {
     <header>
       <nav>
         <div>
-            <Image src="/logo.svg" alt="Darian Rosebrook" />
+            <Image src="/logo.svg" width="36" height="36" alt="Darian Rosebrook" />
         </div>
         <div>
           <h1>Darian Rosebrook</h1>
