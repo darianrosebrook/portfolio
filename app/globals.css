@@ -1,6 +1,116 @@
 @font-face {
+  /* variable font nohemi, weight 100-900 trutype /fonts/Nohemi-vf.ttf */
   font-family: "Nohemi";
-  src: url(/fonts/Nohemi-vf.ttf) format("truetype");
+  src: url("/fonts/Nohemi-vf.ttf") format("truetype");
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: normal;
+}
+:root {
+  --aalt: "aalt" on;
+  --case: "case" on;
+  --frac: "frac" on;
+  --hist: "hist" on;
+  --ordn: "ordn" on;
+  --sups: "sups" on;
+}
+ 
+.aalt {
+  --aalt: "aalt" on;
+}
+
+.case {
+  --case: "case" on;
+}
+
+.frac {
+  --frac: "frac" on;
+}
+
+@supports (font-variant-numeric: diagonal-fractions) {
+  .frac {
+    --frac: "____";
+    font-variant-numeric: diagonal-fractions;
+  }
+}
+
+.hist {
+  --hist: "hist" on;
+}
+
+@supports (font-variant-alternates: historical-forms) {
+  .hist {
+    --hist: "____";
+    font-variant-alternates: historical-forms;
+  }
+}
+
+.ordn {
+  --ordn: "ordn" on;
+}
+
+@supports (font-variant-numeric: ordinal) {
+  .ordn {
+    --ordn: "____";
+    font-variant-numeric: ordinal;
+  }
+}
+
+.sups {
+  --sups: "sups" on;
+}
+
+@supports (font-variant-position: super) {
+  .sups {
+    --sups: "____";
+    font-variant-position: super;
+  }
+} 
+.aalt,
+.case,
+.frac,
+.hist,
+.ordn,
+.sups {
+  font-feature-settings: var(--aalt), var(--case), var(--frac), var(--hist),
+    var(--ordn), var(--sups);
+}
+
+/* Variable instances */
+.thin {
+  font-variation-settings: "wght" 100;
+}
+
+.extra-light {
+  font-variation-settings: "wght" 200;
+}
+
+.light {
+  font-variation-settings: "wght" 300;
+}
+
+.regular {
+  font-variation-settings: "wght" 400;
+}
+
+.medium {
+  font-variation-settings: "wght" 500;
+}
+
+.semi-bold {
+  font-variation-settings: "wght" 600;
+}
+
+.bold {
+  font-variation-settings: "wght" 700;
+}
+
+.extra-bold {
+  font-variation-settings: "wght" 800;
+}
+
+.black {
+  font-variation-settings: "wght" 900;
 }
 
 :root {
@@ -65,15 +175,20 @@
   code,
   pre,
   kbd {
+    display: inline-block;
+    border-radius: var(--radius-01);
+    padding: var(--size-01);
+    background: var(--background-secondary);
     font-family: "Fira Code", monospace;
   }
   .bold,
   strong {
-    font-weight: 500;
+    font-weight: 450;
   }
   .emphasis,
   em {
     font-style: italic;
+    font-variation-settings: "ital" 1;
   }
   .uppercase {
     text-transform: uppercase;
@@ -106,7 +221,7 @@
     font-size: var(--size-06);
   }
   .large,
-  h3 {
+  h3 { 
     font-size: var(--size-07);
   }
   .largest,
@@ -119,12 +234,13 @@
   }
   .meta {
     display: flex;
+    justify-content: space-between;
     gap: var(--size-03);
-    align-content:last baseline;
-  }
-
+    align-items: center;
+  } 
   .byline a {
     font-size: var(--size-04);
+    color: var(--foreground);
     font-weight: 300;
     display: inline-flex;
     gap: var(--size-03);
@@ -215,6 +331,7 @@ body {
 main {
   margin: 2rem auto;
   padding-bottom: 2rem;
+  max-width: 1280px;
 }
 section + section {
   margin-top: var(--size-07);
@@ -332,25 +449,35 @@ article ol {
   padding-left: 1rem;
 }
 .articleContent {
-  max-width: 700px;
+  max-width: 55rem;
   margin: 0 auto;
+  font-size: calc(var(--size-05) + 0.25rem);
+}
+.articleContent > * + * {
+  margin-top: var(--size-06);
+}
+.next-prev {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--size-05);
+  margin-top: var(--size-07);
 }
 .grid {
   display: grid;
   gap: var(--size-05);
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   align-content: stretch;
 }
 .card {
   padding: var(--size-05);
   border-radius: var(--size-05);
   background: var(--background);
-  box-shadow: var(--elevation); 
+  box-shadow: var(--elevation);
   transition: box-shadow 0.2s ease;
 }
 .card a {
   color: var(--foreground);
-} 
+}
 @media screen and (min-width: 1000px) {
   section.home {
     display: grid;

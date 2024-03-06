@@ -1,8 +1,6 @@
 export default function Page() {
   return (
-    <div>
-      <main>
-        
+    <div>  
       <h2>Highlighted Projects</h2>
           <p>
             These are just the favorites of some recent work. Full case studies
@@ -322,8 +320,7 @@ export default function Page() {
               </div>{" "}
             </li>
           </ul>
-        </section>
-      </main>
+        </section> 
     </div>
   );
 }
