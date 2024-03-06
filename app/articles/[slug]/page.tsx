@@ -20,6 +20,7 @@ import OrderedList from "@tiptap/extension-ordered-list";
 import bulletList from "@tiptap/extension-bullet-list";
 import Highlight from "@tiptap/extension-highlight";
 import Code from "@tiptap/extension-code";
+import hardBreak from "@tiptap/extension-hard-break";
 import { generateHTML } from "@tiptap/html";
 import { JSONContent } from "@tiptap/react";
 
@@ -50,6 +51,7 @@ type ArticleSchema = {
 };
 function getArticleContent(data: JSONContent) {
   const html: string = generateHTML(data, [
+    hardBreak,
     Document,
     Text,
     Paragraph,
@@ -143,7 +145,7 @@ async function getData(slug) {
 export default async function Notes({ params }: { params: { slug: string } }) {
   const { slug } = params;
   const article = await getData(slug);
-  console.log(article);
+
   return (
     <article className="articleContent">
       <Image

@@ -14,7 +14,7 @@
   --ordn: "ordn" on;
   --sups: "sups" on;
 }
- 
+
 .aalt {
   --aalt: "aalt" on;
 }
@@ -65,7 +65,7 @@
     --sups: "____";
     font-variant-position: super;
   }
-} 
+}
 .aalt,
 .case,
 .frac,
@@ -221,7 +221,7 @@
     font-size: var(--size-06);
   }
   .large,
-  h3 { 
+  h3 {
     font-size: var(--size-07);
   }
   .largest,
@@ -237,7 +237,7 @@
     justify-content: space-between;
     gap: var(--size-03);
     align-items: center;
-  } 
+  }
   .byline a {
     font-size: var(--size-04);
     color: var(--foreground);
@@ -398,15 +398,9 @@ li {
   margin-top: var(--size-05);
 }
 nav {
-  display: flex;
-  justify-content: flex-start;
   gap: var(--size-02);
   min-height: 1rem;
-}
-nav {
   margin-bottom: var(--size-02);
-  display: flex;
-  justify-content: space-between;
 }
 nav ul {
   display: flex;
@@ -488,6 +482,8 @@ article ol {
     margin: 0 auto;
   }
   nav {
+    display: flex;
+    justify-content: space-between;
     max-width: 1280px;
     margin: 0 auto;
   }
