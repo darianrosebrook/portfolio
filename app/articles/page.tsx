@@ -13,23 +13,13 @@ async function getData() {
     description,
     image,
     slug,
-    author,
+    author(*),
     published_at
     `
     )
     .eq("draft", false)
     .filter("draft", "eq", false);
-
-  const profiles = await articles.data.map(async (article, i) => {
-    const { data, error } = await supabase
-      .from("profiles")
-      .select("full_name, username, avatar_url")
-      .eq("id", article.author);
-    if (data) {
-      article.author = data[0];
-    }
-  });
-  await Promise.all(profiles);
+  
   return articles;
 }
 function Card(data: {
@@ -47,7 +37,7 @@ function Card(data: {
         <h2>{data.headline}</h2>
       </Link>
       <div className="meta">
-        <p className="byline">
+        <div className="byline">
           <Link href={`/about`}>
             <Avatar
               size="large"
@@ -56,7 +46,7 @@ function Card(data: {
             />
             {data.author.full_name}
           </Link>
-        </p>{" "}
+        </div>
         <time dateTime={data.published_at}>
           {new Date(data.published_at).toLocaleDateString("en-US", {
             year: "numeric",
@@ -70,10 +60,11 @@ function Card(data: {
   );
 }
 export default async function Notes() {
-  const data = await getData();
+  const articles = await getData();
+  console.log(articles)
   return (
     <div className="grid">
-      {data.data.map((article) => (
+      {articles.data.map((article) => (
         <Card
           key={article.id}
           image={article.image}
