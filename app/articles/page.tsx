@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 async function getData() {
   const supabase = createClient();
-  const articles = await supabase
+  const {data, count} = await supabase
     .from("articles")
     .select(
       `
@@ -18,9 +18,10 @@ async function getData() {
     `
     )
     .eq("draft", false)
-    .filter("draft", "eq", false);
+    .filter("draft", "eq", false)
+    .order("published_at", { ascending: false });
   
-  return articles;
+   return data;
 }
 function Card(data: {
   image: string;
@@ -59,12 +60,12 @@ function Card(data: {
     </article>
   );
 }
-export default async function Notes() {
+export default async function Page() {
   const articles = await getData();
   console.log(articles)
   return (
     <div className="grid">
-      {articles.data.map((article) => (
+      {articles.map((article) => (
         <Card
           key={article.id}
           image={article.image}

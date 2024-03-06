@@ -456,12 +456,13 @@ article ol {
 .articleContent > * + * {
   margin-top: var(--size-06);
 }
-.next-prev {
-  display: flex;
-  justify-content: space-between;
+.prev-next {
+  display: grid;
   gap: var(--size-05);
   margin-top: var(--size-07);
+  grid-template-columns: 1fr 1fr;
 }
+
 .grid {
   display: grid;
   gap: var(--size-05);
