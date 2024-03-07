@@ -1,26 +1,12 @@
 import { createClient } from "@/utils/supabase/server";
-
+// Next
 import NextLink from "next/link";
 import Avatar from "@/components/avatar/avatar";
-import Image from "next/image";
+import Image from "next/image"; 
 
-import Document from "@tiptap/extension-document";
-import Text from "@tiptap/extension-text";
-import Paragraph from "@tiptap/extension-paragraph";
-import Bold from "@tiptap/extension-bold";
-import Italic from "@tiptap/extension-italic";
-import Strike from "@tiptap/extension-strike";
-import Underline from "@tiptap/extension-underline";
-import Subscript from "@tiptap/extension-subscript";
-import Superscript from "@tiptap/extension-superscript";
-import Heading from "@tiptap/extension-heading";
-import ListItem from "@tiptap/extension-list-item";
-import Link from "@tiptap/extension-link";
-import OrderedList from "@tiptap/extension-ordered-list";
-import bulletList from "@tiptap/extension-bullet-list";
-import Highlight from "@tiptap/extension-highlight";
-import Code from "@tiptap/extension-code";
-import hardBreak from "@tiptap/extension-hard-break";
+// TipTap
+import StarterKit from '@tiptap/starter-kit'; 
+
 import { generateHTML } from "@tiptap/html";
 import { JSONContent } from "@tiptap/react";
 
@@ -51,23 +37,8 @@ type ArticleSchema = {
 };
 function getArticleContent(data: JSONContent) {
   const html: string = generateHTML(data, [
-    hardBreak,
-    Document,
-    Text,
-    Paragraph,
-    Bold,
-    Italic,
-    Strike,
-    Underline,
-    Subscript,
-    Superscript,
-    Heading,
-    ListItem,
-    Link,
-    OrderedList,
-    bulletList,
-    Highlight,
-    Code,
+    StarterKit,
+   
   ]);
   return html;
 }

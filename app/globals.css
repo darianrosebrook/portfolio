@@ -419,6 +419,9 @@ nav h2 {
   font-size: var(--size-05);
   margin-top: 0.25rem;
 }
+nav .large {
+  font-weight: 200;
+}
 .logo {
   width: var(--size-07);
   height: var(--size-07);

@@ -14,7 +14,7 @@ export default function Header() {
             className="logo"
           />
 
-          <h1 className="large">Darian Rosebrook</h1>
+          <h1 className="large">{`Darian Rosebrook` }</h1>
         </Link> 
         <ul> 
           <li>
