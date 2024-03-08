@@ -44,7 +44,6 @@
     font-variant-alternates: historical-forms;
   }
 }
-
 .ordn {
   --ordn: "ordn" on;
 }
@@ -475,6 +474,11 @@ article ol {
 }
 .card a {
   color: var(--foreground);
+}
+
+tr {
+  border-top: 1px solid var(--foreground);
+  padding: var(--size-07)
 }
 @media screen and (min-width: 1000px) {
   section.home {
