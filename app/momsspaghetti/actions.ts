@@ -4,16 +4,14 @@ import { redirect } from "next/navigation";
 import { createClient } from "../../utils/supabase/server";
 
 export async function login() {
-  const client = createClient();
-  console.log("clicking login button");
+  const client = createClient(); 
   const { data, error } = await client.auth.signInWithOAuth({
     provider: "google",
     options: {
       redirectTo: `${process.env.NEXT_PUBLIC_SUPABASE_REDIRECT_URL}/auth/callback`,
     },
   });
-  if (data.url) {
-    console.log("data:", data);
+  if (data.url) { 
     redirect(data.url);
   } else if (error) {
     console.error("Error logging in:", error);
