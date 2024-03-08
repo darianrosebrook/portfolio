@@ -33,7 +33,7 @@ function Card(data: {
 }) {
   return (
     <article className="card">
-      <Link href={`/articles/${data.slug}`}>
+      <Link href={`/dashboard/articles/${data.slug}/edit`}>
         <Image src={data.image} alt={data.headline} width={300} height={200} />
         <h2>{data.headline}</h2>
       </Link>

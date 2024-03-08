@@ -1,3 +1,5 @@
+import { JSONContent } from "@tiptap/react"
+
 export type Json =
   | string
   | number
@@ -33,9 +35,9 @@ export type Database = {
       articles: {
         Row: {
           alternativeHeadline: string | null
-          articleBody: Json | null
+          articleBody: JSONContent | null
           articleSection: string | null
-          author: string | null
+          author: Database["public"]["Tables"]["profiles"]["Row"] | null
           created_at: string | null
           description: string | null
           draft: boolean | null
@@ -47,6 +49,7 @@ export type Database = {
           modified_at: string | null
           published_at: string | null
           wordCount: number | null
+          slug: string | null
         }
         Insert: {
           alternativeHeadline?: string | null
@@ -64,6 +67,7 @@ export type Database = {
           modified_at?: string | null
           published_at?: string | null
           wordCount?: number | null
+          slug?: string | null
         }
         Update: {
           alternativeHeadline?: string | null
@@ -81,6 +85,7 @@ export type Database = {
           modified_at?: string | null
           published_at?: string | null
           wordCount?: number | null
+          slug?: string | null
         }
         Relationships: [
           {
