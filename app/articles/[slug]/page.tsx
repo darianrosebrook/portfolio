@@ -9,31 +9,12 @@ import StarterKit from '@tiptap/starter-kit';
 
 import { generateHTML } from "@tiptap/html";
 import { JSONContent } from "@tiptap/react";
+import { Database } from "app/types/supabase";
 
-type ArticleSchema = {
-  id: string;
-  created_at: string;
-  published_at: string | null;
-  modified_at: string | null;
-  author: {
-    full_name: string;
-    username: string;
-    avatar_url: string;
-  };
-  editor: string | null;
-  draft: boolean;
-  headline: string;
-  alternativeHeadline: string;
-  description: string;
-  articleBody: JSONContent;
-  html?: string;
-  articleSection: string;
-  wordCount: number | null;
-  keywords: string | null;
-  image: string;
-  slug: string;
-  beforeArticle: ArticleSchema;
-  afterArticle: ArticleSchema;
+type ArticleSchema = Database["public"]["Tables"]["articles"]["Row"] & {
+  html: string;
+  beforeArticle: Database["public"]["Tables"]["articles"]["Row"];
+  afterArticle: Database["public"]["Tables"]["articles"]["Row"];
 };
 function getArticleContent(data: JSONContent) {
   const html: string = generateHTML(data, [

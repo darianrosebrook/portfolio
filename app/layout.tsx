@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Header from "@/components/header/header";
+import Header from "@/components/header/header"; 
 
 export const metadata: Metadata = {
   title: "Darian Rosebrook: Product Designer | Design Systems, Portland Oregon",
@@ -11,7 +11,8 @@ export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+}>) { 
+
   return (
     <html lang="en"> 
       <body>
