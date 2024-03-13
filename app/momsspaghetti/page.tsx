@@ -1,7 +1,9 @@
-import LoginButton from "@/components/header/login-button";
+import { login, } from './actions'
 
 export default function Page() {
   return (
-     <LoginButton />
-  );
+    <form> 
+      <button formAction={login}>Log in</button>
+    </form>
+  )
 }
