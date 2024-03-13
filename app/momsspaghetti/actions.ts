@@ -18,7 +18,7 @@ export async function login() {
   const { data, error } = await client.auth.signInWithOAuth({
     provider: "google",
     options: {
-      redirectTo: getURL(),
+      redirectTo: `${getURL()}/auth/callback`,
     },
   });
   if (data.url) { 
