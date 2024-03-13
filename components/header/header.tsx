@@ -1,8 +1,8 @@
-'use client';
+"use client";
 import Image from "next/image";
 import logo from "./logo.svg";
 import Link from "next/link";
-import { usePathname } from "next/navigation"; 
+import { usePathname } from "next/navigation";
 import LogoutButton from "./logout-button";
 
 export default function Header({ isAuthed }) {
@@ -34,34 +34,34 @@ export default function Header({ isAuthed }) {
           <h1 className="large">{`Darian Rosebrook`}</h1>
         </Link>
         <ul>
-          {paths.map((path) => (
-            <li key={path[1]}>
+          {paths.map(([route, name]) => (
+            <li key={name}>
               <Link
-                href={path[0]}
-                className={pathname === path[0] ? "active" : ""}
+                href={route}
+                className={pathname === route ? "active" : ""}
               >
-                {path[1]}
+                {name}
               </Link>
             </li>
-          ))}
-          {isAuthed && (
-            <>
-              {adminPaths.map((path) => (
-                <li key={path[1]}>
-                  <Link
-                    href={path[0]}
-                    className={pathname === path[0] ? "active" : ""}
-                  >
-                    {path[1]}
-                  </Link>
-                </li>
-              ))}
-              <li>  
-                <LogoutButton />
-              </li>
-            </>
-          )}
+          ))} 
         </ul>
+        {isAuthed && (
+          <ul>
+            {adminPaths.map(([route, name]) => (
+              <li key={name}>
+                <Link
+                  href={route}
+                  className={pathname === route ? "active" : ""}
+                >
+                  {name}
+                </Link>
+              </li>
+            ))}
+            <li>
+              <LogoutButton />
+            </li>
+          </ul>
+        )}
       </nav>
     </header>
   );

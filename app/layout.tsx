@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/header/header";
 import { createClient } from "@/utils/supabase/server";
-import { headers } from "next/headers";
 
 export const metadata: Metadata = {
   title: "Darian Rosebrook: Product Designer | Design Systems, Portland Oregon",
@@ -14,15 +13,16 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const supabase = createClient();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser(); 
+  const client = createClient();
+  const { data, error } = await client.auth.getUser();
+  if (error) {
+    console.error(error);
+  }
+  const isAuth = data?.user !== undefined;
   return (
     <html lang="en">
       <body>
-        <Header isAuthed={!!user} />
+        <Header isAuthed={isAuth} />
         <main>{children}</main>
         <script
           async
