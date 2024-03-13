@@ -3,7 +3,7 @@
     margin: 0 auto;
     max-width: 1280px;
     background: var(--background);
-    border: 1px solid var(--mid);
+    border: 1px solid var(--secondary);
     border-radius: var(--radius-03);
 } 
 .editor *:focus-visible { 

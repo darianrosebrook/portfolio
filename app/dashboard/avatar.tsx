@@ -39,10 +39,10 @@ export default function Avatar({
 
       const { data, error: uploadError } = await supabase.storage
         .from("avatars")
-        .upload(filePath, file);
+        .upload(filePath, file, {upsert: true}); 
       const {
         data: { publicUrl },
-      } = await supabase.storage.from("avatars").getPublicUrl(filePath);
+      } = await supabase.storage.from("avatars").getPublicUrl(filePath); 
       if (uploadError) {
         throw uploadError;
       } 
