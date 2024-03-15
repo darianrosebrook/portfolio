@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Header from "@/components/header/header";
+import Navbar from "@/components/navbar";
 import { createClient } from "@/utils/supabase/server";
 
 export const metadata: Metadata = {
@@ -21,7 +21,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Header isAuthed={isAuthed} />
+        <Navbar isAuthed={isAuthed} />
         <main>{children}</main>
         <script
           async

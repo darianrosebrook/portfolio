@@ -84,7 +84,7 @@ export default function AccountForm({ user }: { user: User | null }) {
       />
       <div>
         <label htmlFor="email">Email</label>
-        <input id="email" type="text" value={user?.email} disabled />
+        <input id="email" type="text" value={user?.email} readOnly />
       </div>
       <div>
         <label htmlFor="fullName">Full Name</label>
@@ -104,16 +104,14 @@ export default function AccountForm({ user }: { user: User | null }) {
           onChange={(e) => setUsername(e.target.value)}
         />
       </div>
-      <div>
+      <div className="two-up">
         <button
           className="button primary block"
           onClick={() => updateProfile({ fullname, username, avatar_url })}
           disabled={loading}
         >
           {loading ? "Loading ..." : "Update"}
-        </button>
-      </div>
-      <div>
+        </button> 
         <form action="/auth/signout" method="post">
           <button className="button block" type="submit">
             Sign out

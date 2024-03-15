@@ -4,8 +4,9 @@ import logo from "./logo.svg";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import LogoutButton from "./logout-button";
+import styles from "./index.module.css";
 
-export default function Header({ isAuthed }) {
+export default function Navbar({ isAuthed }) {
   const pathname = usePathname();
   const adminPaths = [
     ["/dashboard", "Dashboard"],
@@ -21,16 +22,15 @@ export default function Header({ isAuthed }) {
   ];
   return (
     <header>
-      <nav>
+      <nav className={styles.nav}>
         <Link href="/" className="logoLink">
           <Image
             src={logo}
             width="36"
             height="36"
             alt="Darian Rosebrook"
-            className="logo"
+            className={styles.logo}
           />
-
           <h1 className="large">{`Darian Rosebrook`}</h1>
         </Link>
         <ul>
@@ -38,12 +38,12 @@ export default function Header({ isAuthed }) {
             <li key={name}>
               <Link
                 href={route}
-                className={pathname === route ? "active" : ""}
+                className={pathname === route ? styles.active : ""}
               >
                 {name}
               </Link>
             </li>
-          ))} 
+          ))}
         </ul>
         {isAuthed && (
           <ul>
@@ -51,7 +51,7 @@ export default function Header({ isAuthed }) {
               <li key={name}>
                 <Link
                   href={route}
-                  className={pathname === route ? "active" : ""}
+                  className={pathname === route ? styles.active : ""}
                 >
                   {name}
                 </Link>

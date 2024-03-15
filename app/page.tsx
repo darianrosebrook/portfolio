@@ -1,3 +1,4 @@
+import IconButton from "@/components/iconButton";
 import Image from "next/image";
 
 export default function Home() {
@@ -55,58 +56,62 @@ export default function Home() {
             My resume
           </a>
         </p>
+        <p>Other places to find me:</p>
         <p>
-          Other places to find me:
-          <a
-            className="social-link"
+          <IconButton
+            size="small"
+            external={true}
             href="https://twitter.com/darianrosebrook"
-            target="_blank"
-            rel="noreferrer"
           >
             <i className="fa-brands fa-twitter" aria-label="Twitter logo">
               <span>Twitter</span>
             </i>
-          </a>
-          <a
-            className="social-link"
-            href="https://instagram.com/darianrosebrook"
-            target="_blank"
-            rel="noreferrer"
+          </IconButton>
+          <IconButton
+            size="small"
+            external={true}
+            href="https://github.com/darianrosebrook"
           >
-            <i className="fa-brands fa-instagram" aria-label="Instagram logo">
-              <span>Instagram</span>
+            <i className="fa-brands fa-github" aria-label="Github logo">
+              <span>Github</span>
             </i>
-          </a>
-          <a
+          </IconButton>
+          <IconButton
+            size="small"
+            external={true}
             href="https://linkedin.com/in/darianrosebrook"
-            className="social-link"
-            target="_blank"
-            rel="noreferrer"
           >
             <i className="fa-brands fa-linkedin" aria-label="Linkedin Logo">
               <span>Linkedin</span>
             </i>
-          </a>
-          <a
+          </IconButton>
+          <IconButton
+            size="small"
+            external={true}
             href="https://youtube.com/@darian.rosebrook"
-            className="social-link"
-            target="_blank"
-            rel="noreferrer"
           >
             <i className="fa-brands fa-youtube" aria-label="YouTube Logo">
               <span>YouTube</span>
             </i>
-          </a>
-          <a
+          </IconButton>
+          <IconButton
+            size="small"
+            external={true}
             href="https://read.compassofdesign.com/@darianrosebrook"
-            className="social-link"
-            target="_blank"
-            rel="noreferrer"
           >
             <i className="fa-brands fa-medium" aria-label="Medium.com Logo">
               <span>Medium.com</span>
             </i>
-          </a>
+          </IconButton>
+          <IconButton
+            size="small"
+            external={true}
+            href="https://instagram.com/darianrosebrook"
+          >
+            <i className="fa-brands fa-instagram" aria-label="Instagram logo">
+              <span>Instagram</span>
+            </i>
+          </IconButton>
         </p>
       </div>
       <div className="content">
@@ -151,8 +156,9 @@ export default function Home() {
             designers to work smarter, not harder.
           </li>
           <li>
-            Designing, Developing, and Implementing tooling or pipelines that keep design and development
-            closely in sync, fostering collaboration and reducing friction.
+            Designing, Developing, and Implementing tooling or pipelines that
+            keep design and development closely in sync, fostering collaboration
+            and reducing friction.
           </li>
           <li>
             Establishing processes and workflows that optimize feedback,
@@ -160,7 +166,8 @@ export default function Home() {
             continuous improvement.
           </li>
         </ul>
-      </div><div className="content">
+      </div>
+      <div className="content">
         <p>
           <strong>Technical skillset</strong>
         </p>
