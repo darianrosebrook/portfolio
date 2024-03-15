@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 async function getData() {
   const supabase = createClient();
-  const {data, count} = await supabase
+  const { data, count } = await supabase
     .from("articles")
     .select(
       `
@@ -20,8 +20,8 @@ async function getData() {
     .eq("draft", false)
     .filter("draft", "eq", false)
     .order("published_at", { ascending: false });
-  
-   return data;
+
+  return data;
 }
 function Card(data: {
   image: string;
@@ -33,35 +33,50 @@ function Card(data: {
 }) {
   return (
     <article className="card">
-      <Link href={`/articles/${data.slug}`}>
-        <Image src={data.image} alt={data.headline} width={300} height={200} />
-        <h2>{data.headline}</h2>
-      </Link>
-      <div className="meta">
-        <div className="byline">
-          <Link href={`/about`}>
-            <Avatar
-              size="large"
-              name={data.author.full_name}
-              src={data.author.avatar_url}
-            />
-            {data.author.full_name}
-          </Link>
+      <div className="media">
+        <Link href={`/articles/${data.slug}`}>
+          <Image
+            src={data.image}
+            alt={data.headline}
+            width={300}
+            height={200}
+          />
+        </Link>
+        <div className="meta">
+          <div className="byline">
+            <Link href={`/about`}>
+              <Avatar
+                size="large"
+                name={data.author.full_name}
+                src={data.author.avatar_url}
+              />
+              {data.author.full_name}
+            </Link>
+          </div>
+          <time dateTime={data.published_at}>
+            {new Date(data.published_at).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </time>
         </div>
-        <time dateTime={data.published_at}>
-          {new Date(data.published_at).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
-        </time>
       </div>
-      <p>{data.description}</p>
+      <div>
+        <Link href={`/articles/${data.slug}`}>
+          <p className="medium">{data.headline}</p>
+        </Link>
+        <p>
+          {data.description.length > 240
+            ? data.description.slice(0, 240) + "..."
+            : data.description}
+        </p>
+      </div>
     </article>
   );
 }
 export default async function Page() {
-  const articles = await getData(); 
+  const articles = await getData();
   return (
     <div className="grid">
       {articles.map((article) => (
