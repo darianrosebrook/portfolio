@@ -6,14 +6,6 @@
   font-display: swap;
   font-style: normal;
 }
-:root {
-  --aalt: "aalt" on;
-  --case: "case" on;
-  --frac: "frac" on;
-  --hist: "hist" on;
-  --ordn: "ordn" on;
-  --sups: "sups" on;
-}
 
 .aalt {
   --aalt: "aalt" on;
@@ -113,6 +105,12 @@
 }
 
 :root {
+  --aalt: "aalt" on;
+  --case: "case" on;
+  --frac: "frac" on;
+  --hist: "hist" on;
+  --ordn: "ordn" on;
+  --sups: "sups" on;
 
   /* units */
   --unit-base: 16;
@@ -204,12 +202,13 @@
   .body,
   label,
   h6,
-  h5 {
-    font-size: var(--size-05);
+  h5,
+  p {
+    font-size: var(--size-06);
   }
   .medium,
   h4 {
-    font-size: var(--size-06);
+    font-size: var(--size-07);
   }
   .large,
   h3 {
@@ -222,29 +221,6 @@
   .hero,
   h1 {
     font-size: var(--size-09);
-  }
-  .meta {
-    display: flex;
-    justify-content: space-between;
-    gap: var(--size-03);
-    align-items: center;
-  }
-  .byline a {
-    font-size: var(--size-04);
-    color: var(--foreground);
-    font-weight: 300;
-    display: inline-flex;
-    gap: var(--size-03);
-    align-items: center;
-    line-height: 1;
-    border: 1px solid transparent;
-    border-radius: var(--radius-full);
-    padding: var(--size-02);
-    padding-right: var(--size-03);
-    transition: background 0.2s ease;
-  }
-  .byline a:hover {
-    border-color: var(--foreground);
   }
 
   /* Layout */
@@ -292,14 +268,14 @@
   --light: rgb(245, 245, 245);
   --white: rgb(255, 255, 255);
   --mid: rgb(200, 200, 200);
-  --secondary: rgb(50, 50, 50); 
+  --secondary: rgb(50, 50, 50);
   --dark: #121212;
   --foreground: var(--dark);
   --background: var(--light);
   --background-secondary: var(--mid);
   --background-interactive: var(--color-accent);
   --background-input: var(--white);
-  --color-accent: #C80E10;
+  --color-accent: #c80e10;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -322,7 +298,7 @@
 }
 *:focus-visible {
   outline: 2px solid var(--color-accent);
-  outline-offset: var(--size-02); 
+  outline-offset: var(--size-02);
   border-radius: var(--size-02);
 }
 
@@ -417,7 +393,7 @@ button + button {
   margin-top: var(--size-06);
 }
 label {
-  display: block; 
+  display: block;
   font-weight: 300;
 }
 label + input[type="text"],
@@ -426,9 +402,9 @@ label + input[type="password"],
 label + textarea {
   margin-top: var(--size-02);
 }
-input[type="text"]  + label,
+input[type="text"] + label,
 input[type="email"] + label,
-input[type="password"] + label, 
+input[type="password"] + label,
 textarea + label {
   margin-top: var(--size-06);
 }
@@ -514,25 +490,60 @@ article ol {
   align-content: stretch;
 }
 .card {
+  display: flex; 
   padding: var(--size-05);
   border-radius: var(--size-05);
   background: var(--background);
   box-shadow: var(--elevation);
   transition: box-shadow 0.2s ease;
 }
+.card p.medium {
+  font-size: var(--size-06);
+}
 .card a {
   color: var(--foreground);
+}
+.card .media {
+  width: 33%;
+  margin-right: var(--size-05);
+}
+.card .media + div {
+  margin: 0;
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--size-03);
+  /* align-items: center; */
+}
+.byline a {
+  font-size: var(--size-04);
+  color: var(--foreground);
+  font-weight: 300;
+  display: inline-flex;
+  gap: var(--size-03);
+  align-items: center;
+  line-height: 1;
+  border: 1px solid transparent;
+  border-radius: var(--radius-full);
+  padding: var(--size-02);
+  padding-right: var(--size-03);
+  transition: background 0.2s ease;
+}
+.byline a:hover {
+  border-color: var(--foreground);
 }
 
 tr {
   border-top: 1px solid var(--foreground);
-  padding: var(--size-07)
+  padding: var(--size-07);
 }
-
 
 .tiptap > * + * {
   margin-top: 0.75em;
-} 
+}
 .tiptap > div {
   padding: 2rem;
   margin: 0 auto;
@@ -541,8 +552,8 @@ tr {
   border: 1px solid var(--secondary);
   border-radius: var(--radius-03);
   height: 80vh;
-} 
-.tiptap *:focus-visible { 
+}
+.tiptap *:focus-visible {
   border: 1px solid var(--color-accent);
   outline: 0;
 }
@@ -554,7 +565,6 @@ tr {
   pointer-events: none;
 }
 
-
 @media screen and (min-width: 1000px) {
   section.home {
     display: grid;
@@ -562,7 +572,7 @@ tr {
     grid-template-columns: 1fr 1fr;
     max-width: 1280px;
     margin: 0 auto;
-  } 
+  }
   main section + section {
     display: block;
     margin-top: var(--size-07);
@@ -579,5 +589,27 @@ tr {
   .experience .content {
     margin-top: 0;
   }
-  
+  .card {
+    flex-direction: column;
+  }
+  .card .media {
+    width: 100%;
+    margin-right: 0;
+  }
+  .card .media + div {
+    margin-top: var(--size-05);
+  }
+  .meta {
+    flex-direction: row;
+    align-items: center;
+  }
+  .meta .byline {
+    flex-direction: row;
+    gap: var(--size-03);
+    align-items: center;
+  }
+  .card p.medium {
+    font-size: var(--size-07);
+  }
+
 }
