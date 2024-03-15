@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 import { type CookieOptions, createServerClient } from '@supabase/ssr'
-import { signOut } from '../momsspaghetti/actions'
+import { signOut } from '../ha/actions'
 
 export async function GET(request: Request) {
   const cookieStore = cookies()
