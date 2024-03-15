@@ -14,15 +14,14 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const client = createClient();
-  const { data, error } = await client.auth.getUser();
-  if (error) {
-    console.error(error);
-  }
-  const isAuth = data?.user !== undefined;
+  const response = await client.auth.getSession(); 
+  const session = response.data.session 
+  response.error && console.error('error', response.error);
+  const isAuthed = session !== null;
   return (
     <html lang="en">
       <body>
-        <Header isAuthed={isAuth} />
+        <Header isAuthed={isAuthed} />
         <main>{children}</main>
         <script
           async

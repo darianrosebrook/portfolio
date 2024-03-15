@@ -7,7 +7,7 @@ export default function LogoutButton() {
 
     const supabase = createClient();
     await supabase.auth.signOut();
-    return redirect("/momsspaghetti");
+    return redirect("/ha");
   };
   return (
     <form action={signOut}>

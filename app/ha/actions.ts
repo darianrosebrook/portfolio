@@ -8,10 +8,7 @@ const getURL = () => {
   let url =
     process?.env?.NEXT_PUBLIC_SITE_URL ?? // Set this to your site URL in production env.
     process?.env?.NEXT_PUBLIC_VERCEL_URL ?? // Automatically set by Vercel.
-    "http://localhost:3000/";
-  // Make sure to include `https://` when not localhost.
-  url = url.includes("http") ? url : `https://${url}`;
-  // Make sure to include a trailing `/`.
+    "http://localhost:3000/"; 
   url = url.charAt(url.length - 1) === "/" ? url : `${url}/`;
   return url;
 };
@@ -24,28 +21,22 @@ export async function signOut() {
     redirect("/");
   }
 }
-export async function login(formData: FormData) {
-  // preveent default form submission
-  const supabase = createClient();
-
-  // type-casting here for convenience
-  // in practice, you should validate your inputs
+export async function login(formData: FormData) { 
+  const supabase = createClient(); 
 
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "google",
     options: {
-      redirectTo: `${getURL()}/auth/callback`,
-      skipBrowserRedirect: true
+      redirectTo: `${getURL()}/auth/callback`, 
     },
   });
 
-  if (data.url) {   
+  if (data.url) { 
+    console.log('data.url', data)  
     redirect(data.url, RedirectType.replace);
   } else if (error) {
     console.error("Error logging in:", error);
-  } else {
-    redirect("/");
-  }
+  } 
  
 }
 

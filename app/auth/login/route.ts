@@ -26,20 +26,4 @@ export const login = async (formdata: any) => {
     console.error(error);
   }
   return data;
-};
-export async function POST(req: NextRequest) {
-  const client = createClient();
-  const { data, error } = await client.auth.signInWithOAuth({
-    provider: "google",
-    options: {
-      redirectTo: `${getURL()}/auth/callback`,
-    },
-  });
-  if (error) {
-    console.error(error);
-  }
-  revalidatePath("/", "layout");
-  return NextResponse.redirect(new URL("/", req.url), {
-    status: 302,
-  });
-}
+}; 
