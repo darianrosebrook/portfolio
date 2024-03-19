@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/navbar";
 import { createClient } from "@/utils/supabase/server";
+import Footer from "@/components/footer";
 
 export const metadata: Metadata = {
   title: "Darian Rosebrook: Product Designer | Design Systems, Portland Oregon",
@@ -14,15 +15,16 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const client = createClient();
-  const response = await client.auth.getSession(); 
-  const session = response.data.session 
-  response.error && console.error('error', response.error);
+  const response = await client.auth.getSession();
+  const session = response.data.session;
+  response.error && console.error("error", response.error);
   const isAuthed = session !== null;
   return (
     <html lang="en">
       <body>
         <Navbar isAuthed={isAuthed} />
         <main>{children}</main>
+        <Footer />
         <script
           async
           src="https://kit.fontawesome.com/cf8a647076.js"

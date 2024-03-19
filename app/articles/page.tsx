@@ -1,4 +1,4 @@
-import Avatar from "@/components/avatar/avatar";
+import ProfileFlag from "@/components/ProfileFlag";
 import { createClient } from "@/utils/supabase/server";
 import Image from "next/image";
 import Link from "next/link";
@@ -29,8 +29,21 @@ function Card(data: {
   description: string;
   slug: string;
   author: any;
-  published_at: string;
+  published_at?: string;
+  created_at?: string;
+  id?: number;
 }) {
+  let { description } = data;
+  if (description.length > 240) {
+    description = description.slice(0, 240) + "...";
+  }
+  const date = new Date(
+    data.published_at || data.created_at
+  ).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
   return (
     <article className="card">
       <div className="media">
@@ -43,34 +56,17 @@ function Card(data: {
           />
         </Link>
         <div className="meta">
-          <div className="byline">
-            <Link href={`/about`}>
-              <Avatar
-                size="large"
-                name={data.author.full_name}
-                src={data.author.avatar_url}
-              />
-              {data.author.full_name}
-            </Link>
-          </div>
-          <time dateTime={data.published_at}>
-            {new Date(data.published_at).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
-          </time>
+          <ProfileFlag profile={data.author} />
+          <small>
+            <time dateTime={date}>{date}</time>
+          </small>
         </div>
       </div>
       <div>
         <Link href={`/articles/${data.slug}`}>
           <p className="medium">{data.headline}</p>
         </Link>
-        <p>
-          {data.description.length > 240
-            ? data.description.slice(0, 240) + "..."
-            : data.description}
-        </p>
+        <p>{description}</p>
       </div>
     </article>
   );
