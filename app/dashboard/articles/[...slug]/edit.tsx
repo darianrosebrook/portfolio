@@ -10,17 +10,17 @@ export default function EditArticle({
   article: Database["public"]["Tables"]["articles"]["Row"];
 }) {
   let keyPairs = Object.entries(article).filter(
-    (a) => !["articleBody", "author", "image"].includes(a[0])
+    (a) => !["articleBody", "author"].includes(a[0])
   );
+  const { author, image, articleBody, ...rest } = article;
 
   return (
     <article className="articleContent">
-      <Link href={`/dashboard/articles/${article.slug}/edit`}>Edit</Link>
       <Image
-        src={article.image}
+        src={article.image || "/darianrosebrook.jpg"}
         alt={article.headline}
-        width={500}
-        height={300}
+        width={300}
+        height={200}
       />
       <h1>{article.headline}</h1>
       <div className="meta">
@@ -42,15 +42,27 @@ export default function EditArticle({
           })}
         </time>
       </div>{" "}
-      <h3>Metadata table</h3> 
+      <h3>Metadata table</h3>
       <table
-        style={{ textAlign: "left", paddingTop: "1rem", paddingRight: "1rem", borderSpacing: "1rem", borderCollapse: "collapse"}}
+        style={{
+          textAlign: "left",
+          paddingTop: "1rem",
+          paddingRight: "1rem",
+          borderSpacing: "1rem",
+          borderCollapse: "collapse",
+        }}
       >
         <tbody>
           {keyPairs.map((pair, i) => (
-            <tr  className="borderTop" key={pair[0]}>
+            <tr className="borderTop" key={pair[0]}>
               <th style={{ padding: "1rem" }}>{pair[0]}</th>
-              <td style={{ padding: "1rem" }}>{JSON.stringify(pair[1])}</td>
+              <td style={{ padding: "1rem" }}>
+                {pair[1]?.toString().includes("http") ? (
+                  <Link href={pair[1].toString()}>{pair[1].toString()}</Link>
+                ) : (
+                  pair[1] && pair[1].toString()
+                )}
+              </td>
             </tr>
           ))}
         </tbody>

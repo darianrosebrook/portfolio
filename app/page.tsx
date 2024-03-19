@@ -1,9 +1,36 @@
-import IconButton from "@/components/iconButton";
 import Image from "next/image";
 
 export default function Home() {
+  const ldJson = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": "https://darianrosebrook.com/",
+    },
+    name: "Darian Rosebrook",
+    image: "https://darianrosebrook.com/darianrosebrook.jpg",
+    jobTitle: "Product Designer, Design Systems",
+    worksFor: {
+      "@type": "Organization",
+      name: "Paths.design",
+    },
+    url: "https://darianrosebrook.com/",
+    sameAs: [
+      "https://twitter.com/darianrosebrook",
+      "https://www.linkedin.com/in/darianrosebrook/",
+      "https://www.github.com/darianrosebrook",
+      "https://www.instagram.com/darianrosebrook/",
+      "https://www.youtube.com/@darian.rosebrook",
+      "https://read.compassofdesign.com/@darianrosebrook",
+    ]
+  };
   return (
     <section className="home">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }}
+      />
       <div className="hero">
         <Image
           src="/darianrosebrook.jpg"
@@ -13,8 +40,8 @@ export default function Home() {
         />
       </div>
       <div className="content">
-        <h2>Darian Rosebrook</h2>
-        <h3>Product Designer</h3>
+        <h2 className="light">Darian Rosebrook</h2>
+        <h3 className="light secondary">Product Designer</h3>
         <p>
           As a seasoned Product Designer with a strong background in UX
           engineering, I specialize in crafting robust design systems and
@@ -55,63 +82,6 @@ export default function Home() {
           >
             My resume
           </a>
-        </p>
-        <p>Other places to find me:</p>
-        <p>
-          <IconButton
-            size="small"
-            external={true}
-            href="https://twitter.com/darianrosebrook"
-          >
-            <i className="fa-brands fa-twitter" aria-label="Twitter logo">
-              <span>Twitter</span>
-            </i>
-          </IconButton>
-          <IconButton
-            size="small"
-            external={true}
-            href="https://github.com/darianrosebrook"
-          >
-            <i className="fa-brands fa-github" aria-label="Github logo">
-              <span>Github</span>
-            </i>
-          </IconButton>
-          <IconButton
-            size="small"
-            external={true}
-            href="https://linkedin.com/in/darianrosebrook"
-          >
-            <i className="fa-brands fa-linkedin" aria-label="Linkedin Logo">
-              <span>Linkedin</span>
-            </i>
-          </IconButton>
-          <IconButton
-            size="small"
-            external={true}
-            href="https://youtube.com/@darian.rosebrook"
-          >
-            <i className="fa-brands fa-youtube" aria-label="YouTube Logo">
-              <span>YouTube</span>
-            </i>
-          </IconButton>
-          <IconButton
-            size="small"
-            external={true}
-            href="https://read.compassofdesign.com/@darianrosebrook"
-          >
-            <i className="fa-brands fa-medium" aria-label="Medium.com Logo">
-              <span>Medium.com</span>
-            </i>
-          </IconButton>
-          <IconButton
-            size="small"
-            external={true}
-            href="https://instagram.com/darianrosebrook"
-          >
-            <i className="fa-brands fa-instagram" aria-label="Instagram logo">
-              <span>Instagram</span>
-            </i>
-          </IconButton>
         </p>
       </div>
       <div className="content">

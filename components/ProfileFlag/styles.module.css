@@ -1,0 +1,20 @@
+.profileFlag a {
+  display: flex;
+  align-items: center;
+  gap: var(--size-03);
+  padding: var(--size-02) ;
+  padding-right: var(--size-04) ;
+  border: 1px solid transparent;
+  border-radius: var(--radius-full);
+  color: var(--foreground);
+  text-decoration: none;
+  line-height: 1;
+  transition: border-color 0.2s ease;
+} 
+.profileFlag a small {
+  margin-top: var(--size-02);
+}
+
+.profileFlag a:hover {
+  border: 1px solid var(--color-accent);
+}
