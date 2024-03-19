@@ -1,6 +1,6 @@
 "use server";
 
-import { createClient } from "./supabase/server";
+import { createClient } from "./server";
 import { unstable_noStore as noStore } from "next/cache";
 
 export async function checkForAuth() {
@@ -11,5 +11,4 @@ export async function checkForAuth() {
   } else {
     return noStore;
   }
-  
 }

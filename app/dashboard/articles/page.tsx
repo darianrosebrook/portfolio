@@ -1,27 +1,12 @@
-import Avatar from "@/components/avatar/avatar";
 import { createClient } from "@/utils/supabase/server";
 import Image from "next/image";
 import Link from "next/link";
+import ProfileFlag from "@/components/ProfileFlag";
 async function getData() {
   const supabase = createClient();
-  const {data, count} = await supabase
-    .from("articles")
-    .select(
-      `
-    id,
-    headline,
-    description,
-    image,
-    slug,
-    author(*),
-    published_at
-    `
-    )
-    .eq("draft", false)
-    .filter("draft", "eq", false)
-    .order("published_at", { ascending: false });
-  
-   return data;
+  const { data } = await supabase.from("articles").select(` *,  author(*)  `);
+  console.log(data);
+  return data;
 }
 function Card(data: {
   image: string;
@@ -29,51 +14,55 @@ function Card(data: {
   description: string;
   slug: string;
   author: any;
-  published_at: string;
+  published_at?: string;
+  created_at?: string;
+  id?: number;
 }) {
+  const url = `/dashboard/articles/${data.slug}/edit`;
+  let { description } = data;
+  if (description?.length && description.length > 240) {
+    description = description.slice(0, 240) + "...";
+  }
+  const date = new Date(
+    data.published_at || data.created_at
+  ).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
   return (
     <article className="card">
-      <Link href={`/dashboard/articles/${data.slug}/edit`}>
-        <Image src={data.image} alt={data.headline} width={300} height={200} />
-        <h2>{data.headline}</h2>
-      </Link>
-      <div className="meta">
-        <div className="byline">
-          <Link href={`/about`}>
-            <Avatar
-              size="large"
-              name={data.author.full_name}
-              src={data.author.avatar_url}
-            />
-            {data.author.full_name}
-          </Link>
+      <div className="media">
+        <Link href={url}>
+          <Image
+            src={data.image || "/darianrosebrook.jpg"}
+            alt={data.headline}
+            width={300}
+            height={200}
+          />
+        </Link>
+        <div className="meta">
+          <ProfileFlag profile={data.author} />
+          <small>
+            <time dateTime={date} className="small" />
+          </small>
         </div>
-        <time dateTime={data.published_at}>
-          {new Date(data.published_at).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
-        </time>
       </div>
-      <p>{data.description}</p>
+      <div>
+        <Link href={url}>
+          <p className="medium">{data.headline}</p>
+        </Link>
+        <p>{description}</p>
+      </div>
     </article>
   );
 }
 export default async function Page() {
-  const articles = await getData(); 
+  const articles = await getData();
   return (
     <div className="grid">
-      {articles.map((article) => (
-        <Card
-          key={article.id}
-          image={article.image}
-          headline={article.headline}
-          description={article.description}
-          author={article.author}
-          slug={article.slug}
-          published_at={article.published_at}
-        />
+      {articles.map((article: any) => (
+        <Card key={article.id} {...article} />
       ))}
     </div>
   );

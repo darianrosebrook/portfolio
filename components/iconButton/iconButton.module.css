@@ -1,8 +1,8 @@
 .iconButton {
   all: unset;
   cursor: pointer;
-  width: var(--size-10);
-  height: var(--size-10);
+  width: var(--size-08);
+  height: var(--size-08);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -13,7 +13,7 @@
   background-color: var(--background-interactive);
   cursor: pointer;
   transition: background-color 0.3s;
-  font-size: var(--size-07);
+  font-size: var(--size-05);
 } 
 .iconButton:hover {
   background-color: var(--foreground);
@@ -34,4 +34,19 @@
   }
 .iconButton + .iconButton {
   margin-left: var(--size-04);
+}
+.small {
+  width: var(--size-07);
+  height: var(--size-07);
+  font-size: var(--size-04);
+}
+.medium {
+  width: var(--size-08);
+  height: var(--size-08);
+  font-size: var(--size-05);
+}
+.large {
+  width: var(--size-10);
+  height: var(--size-10);
+  font-size: var(--size-08);
 }
