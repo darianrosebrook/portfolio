@@ -6,104 +6,6 @@
   font-display: swap;
   font-style: normal;
 }
-
-.aalt {
-  --aalt: "aalt" on;
-}
-
-.case {
-  --case: "case" on;
-}
-
-.frac {
-  --frac: "frac" on;
-}
-
-@supports (font-variant-numeric: diagonal-fractions) {
-  .frac {
-    --frac: "____";
-    font-variant-numeric: diagonal-fractions;
-  }
-}
-
-.hist {
-  --hist: "hist" on;
-}
-
-@supports (font-variant-alternates: historical-forms) {
-  .hist {
-    --hist: "____";
-    font-variant-alternates: historical-forms;
-  }
-}
-.ordn {
-  --ordn: "ordn" on;
-}
-
-@supports (font-variant-numeric: ordinal) {
-  .ordn {
-    --ordn: "____";
-    font-variant-numeric: ordinal;
-  }
-}
-
-.sups {
-  --sups: "sups" on;
-}
-
-@supports (font-variant-position: super) {
-  .sups {
-    --sups: "____";
-    font-variant-position: super;
-  }
-}
-.aalt,
-.case,
-.frac,
-.hist,
-.ordn,
-.sups {
-  font-feature-settings: var(--aalt), var(--case), var(--frac), var(--hist),
-    var(--ordn), var(--sups);
-}
-
-/* Variable instances */
-.thin {
-  font-variation-settings: "wght" 100;
-}
-
-.extra-light {
-  font-variation-settings: "wght" 200;
-}
-
-.light {
-  font-variation-settings: "wght" 300;
-}
-
-.regular {
-  font-variation-settings: "wght" 400;
-}
-
-.medium {
-  font-variation-settings: "wght" 500;
-}
-
-.semi-bold {
-  font-variation-settings: "wght" 600;
-}
-
-.bold {
-  font-variation-settings: "wght" 700;
-}
-
-.extra-bold {
-  font-variation-settings: "wght" 800;
-}
-
-.black {
-  font-variation-settings: "wght" 900;
-}
-
 :root {
   --aalt: "aalt" on;
   --case: "case" on;
@@ -113,41 +15,38 @@
   --sups: "sups" on;
 
   /* units */
-  --unit-base: 16;
-  --unit-0125: 0.0125rem;
-  --unit-25: 0.25rem;
-  --unit-50: 0.5rem;
-  --unit-75: 0.75rem;
-  --unit-8125: 0.8125rem;
-  --unit-100: 1rem;
-  --unit-150: 1.5rem;
-  --unit-200: 2rem;
-  --unit-250: 2.5rem;
-  --unit-300: 3rem;
-  --unit-350: 3.5rem;
-  --unit-400: 4rem;
-  --unit-500: 5rem;
-  --unit-600: 6rem;
+  --unit-base: 16px;
+  --unit-0: 0;
+  --unit-01: 0.125rem; /* 2px */
+  --unit-02: 0.25rem; /* 4px */
+  --unit-03: 0.5rem; /* 8px */
+  --unit-04: 0.75rem; /* 12px */
+  --unit-05: 1rem; /* 16px */
+  --unit-06: 1.25rem; /* 20px */
+  --unit-07: 1.5rem; /* 24px */
+  --unit-08: 2rem; /* 32px */
+  --unit-09: 2.5rem; /* 40px */
+  --unit-10: 3rem; /* 48px */
 
   /* size */
-  --size-01: var(--unit-0125);
-  --size-02: var(--unit-25);
-  --size-03: var(--unit-50);
-  --size-04: var(--unit-75);
-  --size-05: var(--unit-8125);
-  --size-06: var(--unit-100);
-  --size-07: var(--unit-150);
-  --size-08: var(--unit-200);
-  --size-09: var(--unit-250);
-  --size-10: var(--unit-300);
+  --size-01: var(--unit-01);
+  --size-02: var(--unit-02);
+  --size-03: var(--unit-03);
+  --size-04: var(--unit-04);
+  --size-05: var(--unit-05);
+  --size-06: var(--unit-06);
+  --size-07: var(--unit-07);
+  --size-08: var(--unit-08);
+  --size-09: var(--unit-09);
+  --size-10: var(--unit-10);
 
   /* Typography */
   --line-height: 1.25;
   --line-height-collapse: 1;
-  --letter-spacing: 0.05%;
+  --letter-spacing: 0.01em;
 
   font-family: "Nohemi", sans-serif;
-  font-size: calc(var(--unit-base) * 1px);
+  font-size: var(--unit-base);
   font-weight: 350;
   letter-spacing: var(--letter-spacing);
   line-height: var(--line-height);
@@ -158,20 +57,23 @@
   h5,
   h6 {
     font-weight: 400;
-  }
-  .code,
-  code,
-  pre,
-  kbd {
-    display: inline-block;
-    border-radius: var(--radius-01);
-    padding: var(--size-01);
-    background: var(--background-secondary);
-    font-family: "Fira Code", monospace;
+    line-height: var(--line-height-collapse);
   }
   .bold,
   strong {
     font-weight: 450;
+  }
+  .light {
+    font-variation-settings: "wght" 250;
+  }
+  .regular {
+    font-variation-settings: "wght" 300;
+  }
+  .body {
+    font-weight: 400;
+  }
+  .black {
+    font-variation-settings: "wght" 900;
   }
   .emphasis,
   em {
@@ -184,7 +86,9 @@
   .underline {
     text-decoration: underline;
   }
-  .super {
+  .super,
+  .sups {
+    --sups: "sups" on;
     font-size: var(--size-03);
     vertical-align: super;
   }
@@ -198,6 +102,7 @@
   .small,
   small {
     font-size: var(--size-04);
+    letter-spacing: var(--letter-spacing);
   }
   .body,
   label,
@@ -205,14 +110,17 @@
   h5,
   p {
     font-size: var(--size-06);
+    line-height: var(--line-height);
   }
   .medium,
   h4 {
     font-size: var(--size-07);
+    line-height: var(--line-height);
   }
   .large,
   h3 {
     font-size: var(--size-07);
+    line-height: var(--line-height);
   }
   .largest,
   h2 {
@@ -220,7 +128,63 @@
   }
   .hero,
   h1 {
-    font-size: var(--size-09);
+    font-size: var(--size-10);
+  }
+
+  .aalt {
+    --aalt: "aalt" on;
+  }
+
+  .case {
+    --case: "case" on;
+  }
+
+  .frac {
+    --frac: "frac" on;
+  }
+
+  @supports (font-variant-numeric: diagonal-fractions) {
+    .frac {
+      --frac: "____";
+      font-variant-numeric: diagonal-fractions;
+    }
+  }
+
+  .hist {
+    --hist: "hist" on;
+  }
+
+  @supports (font-variant-alternates: historical-forms) {
+    .hist {
+      --hist: "____";
+      font-variant-alternates: historical-forms;
+    }
+  }
+  .ordn {
+    --ordn: "ordn" on;
+  }
+
+  @supports (font-variant-numeric: ordinal) {
+    .ordn {
+      --ordn: "____";
+      font-variant-numeric: ordinal;
+    }
+  }
+
+  @supports (font-variant-position: super) {
+    .sups {
+      --sups: "____";
+      font-variant-position: super;
+    }
+  }
+  .aalt,
+  .case,
+  .frac,
+  .hist,
+  .ordn,
+  .sups {
+    font-feature-settings: var(--aalt), var(--case), var(--frac), var(--hist),
+      var(--ordn), var(--sups);
   }
 
   /* Layout */
@@ -282,13 +246,15 @@
   :root {
     --color-accent: #ff6f61;
     --foreground: var(--light);
-    --secondary: rgb(200, 200, 200);
+    --secondary: rgb(173, 173, 173);
     --background: var(--dark);
     --mid: rgb(27, 27, 27);
     --background-input: var(--background-secondary);
   }
 }
-
+.secondary {
+  color: var(--secondary);
+}
 * {
   box-sizing: border-box;
   /* background: rgba(190, 0, 0 , 0.1);
@@ -302,6 +268,7 @@
   border-radius: var(--size-02);
 }
 
+/* structure */
 html,
 body {
   max-width: 100vw;
@@ -309,6 +276,9 @@ body {
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   padding: 1rem;
   color: var(--foreground);
   background: var(--background);
@@ -316,11 +286,19 @@ body {
 
 main {
   margin: 2rem auto;
+  width: 100%;
   padding-bottom: 2rem;
   max-width: 1280px;
+  flex-grow: 1;
 }
 section + section {
   margin-top: var(--size-07);
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--foreground);
+  margin: var(--size-07) 0;
 }
 
 ul {
@@ -337,7 +315,6 @@ h3 span {
 img {
   border-radius: var(--size-05);
   width: 100%;
-  max-width: 700px;
   margin: 0 auto;
   height: auto;
 }
@@ -352,6 +329,9 @@ a {
 }
 a:hover {
   text-decoration: underline;
+}
+i span {
+  display: none;
 }
 .social-link {
   font-size: 1.5rem;
@@ -453,34 +433,12 @@ li {
   margin: 0;
   margin-top: var(--size-05);
 }
-article {
-  font-size: var(--size-05);
-  margin-top: var(--unit-600);
-  padding: 0.5rem;
-}
-article > * + * {
-  margin-top: var(--size-05);
-}
 .active {
   font-weight: 500;
 }
 article ul,
 article ol {
   padding-left: 1rem;
-}
-.articleContent {
-  max-width: 55rem;
-  margin: 0 auto;
-  font-size: calc(var(--size-05) + 0.25rem);
-}
-.articleContent > * + * {
-  margin-top: var(--size-06);
-}
-.prev-next {
-  display: grid;
-  gap: var(--size-05);
-  margin-top: var(--size-07);
-  grid-template-columns: 1fr 1fr;
 }
 
 .grid {
@@ -490,7 +448,6 @@ article ol {
   align-content: stretch;
 }
 .card {
-  display: flex; 
   padding: var(--size-05);
   border-radius: var(--size-05);
   background: var(--background);
@@ -504,65 +461,22 @@ article ol {
   color: var(--foreground);
 }
 .card .media {
-  width: 33%;
   margin-right: var(--size-05);
 }
 .card .media + div {
-  margin: 0;
+  margin-top: var(--size-05);
 }
 
 .meta {
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
   gap: var(--size-03);
-  /* align-items: center; */
-}
-.byline a {
-  font-size: var(--size-04);
-  color: var(--foreground);
-  font-weight: 300;
-  display: inline-flex;
-  gap: var(--size-03);
   align-items: center;
-  line-height: 1;
-  border: 1px solid transparent;
-  border-radius: var(--radius-full);
-  padding: var(--size-02);
-  padding-right: var(--size-03);
-  transition: background 0.2s ease;
-}
-.byline a:hover {
-  border-color: var(--foreground);
 }
 
 tr {
   border-top: 1px solid var(--foreground);
   padding: var(--size-07);
-}
-
-.tiptap > * + * {
-  margin-top: 0.75em;
-}
-.tiptap > div {
-  padding: 2rem;
-  margin: 0 auto;
-  max-width: 1280px;
-  background: var(--background);
-  border: 1px solid var(--secondary);
-  border-radius: var(--radius-03);
-  height: 80vh;
-}
-.tiptap *:focus-visible {
-  border: 1px solid var(--color-accent);
-  outline: 0;
-}
-.tiptap .is-empty::before {
-  color: #adb5bd;
-  content: attr(data-placeholder);
-  float: left;
-  height: 0;
-  pointer-events: none;
 }
 
 @media screen and (min-width: 1000px) {
@@ -611,5 +525,4 @@ tr {
   .card p.medium {
     font-size: var(--size-07);
   }
-
 }

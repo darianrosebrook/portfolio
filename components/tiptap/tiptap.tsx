@@ -1,46 +1,77 @@
 "use client";
 
-import { useEditor, EditorContent, JSONContent } from "@tiptap/react";
-import { Database } from "app/types/supabase";
+import {
+  useEditor,
+  EditorContent,
+  JSONContent,
+  ReactNodeViewRenderer,
+  Node,
+} from "@tiptap/react";
 import styles from "./tiptap.module.css";
 import StarterKit from "@tiptap/starter-kit";
-import Image from "@tiptap/extension-image";
+// import Image from "@tiptap/extension-image";
+import Image from "./ImageExtended";
 import Document from "@tiptap/extension-document";
 import Placeholder from "@tiptap/extension-placeholder";
+import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
 import CharacterCount from "@tiptap/extension-character-count";
-import ToggleSwitch from "../toggleSwitch/toggleSwitch";
+import css from "highlight.js/lib/languages/css";
+import js from "highlight.js/lib/languages/javascript";
+import ts from "highlight.js/lib/languages/typescript";
+import html from "highlight.js/lib/languages/xml";
+import { common, createLowlight } from "lowlight";
+ 
+import ToggleSwitch from "@/components/toggleSwitch";
 
+import CodeBlockComponent from "./CodeBlockComponent";
+const lowlight = createLowlight(common);
 
+lowlight.register("html", html);
+lowlight.register("css", css);
+lowlight.register("js", js);
+lowlight.register("ts", ts);
 
 // upload image
-import { upload } from "@/utils/upload";
+import { upload } from "@/utils/supabase/upload";
 import { useState } from "react";
+import { Article } from "app/types";
+import { numberToWordValue } from "@/utils/index";
 
 const CustomDocument = Document.extend({
   content: "heading block*",
 });
-const numberToWordValue = (num: number) => {
-  num = Math.floor(num / 300);
-  if (num < 1) return "less than a minute";
-  if (num === 1) return "a minute";
-  if (num < 60) return `${num} minutes`;
-  if (num === 60) return "an hour";
-  if (num < 1440) return `${Math.floor(num / 60)} hours`;
-  if (num === 1440) return "a day";
-  return `${Math.floor(num / 1440)} days`;
-};
 
 const Tiptap = ({
   article,
+  handleUpdate = null,
+  handlePublish = null,
+  setDraft = null,
 }: {
-  article?: Database["public"]["Tables"]["articles"]["Row"];
+  article?: any;
+  handleUpdate?: (article: Article) => void;
+  handlePublish?: () => void;
+  setDraft?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) => {
-  const [isDraft, setIsDraft] = useState(false);
-  const handleToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsDraft( !isDraft);
-  }
   const images = new Map<string, string>();
   const content = article?.articleBody as JSONContent | undefined;
+
+  const getH1FromArticleBody = (articleBody) => {
+    const h1 = articleBody.content.find(
+      (node) => node.type === "heading" && node.attrs.level === 1
+    ); 
+    return h1?.content?.[0]?.text || null;
+  };
+  const getArticleImage = (articleBody) => {
+    const image = articleBody.content.find((node) => node.type === "image"); 
+    return image?.attrs.src || null;
+  };
+  const createSlugFromHeadline = (headline: string) => {
+    return headline
+      .toLowerCase()
+      .replace(/[^\w ]+/g, "")
+      .replace(/ +/g, "-");
+  }; 
+
   const editor = useEditor({
     content: content,
     extensions: [
@@ -58,57 +89,50 @@ const Tiptap = ({
           return "Can you add some further context?";
         },
       }),
+      CodeBlockLowlight.extend({
+        addNodeView() {
+          return ReactNodeViewRenderer(CodeBlockComponent);
+        },
+      }).configure({ lowlight }),
     ],
-    editorProps: {
-      handleDrop: function (view, event, slice, moved) {
-        if (
-          !moved &&
-          event.dataTransfer &&
-          event.dataTransfer.files &&
-          event.dataTransfer.files[0]
-        ) {
-          const file = event.dataTransfer.files[0];
-          const newImage = document.createElement("img");
-          newImage.src = URL.createObjectURL(file);
-          newImage.onload = async () => {
-            const path = await upload({
-              file: {
-                type: "image",
-                media: {
-                  name: file.name,
-                  data: file,
-                },
-              },
-              bucket: "article-images",
-            });
-            images.set(file.name, path);
-
-            const { schema } = view.state;
-            const coordinates = view.posAtCoords({
-              left: event.clientX,
-              top: event.clientY,
-            });
-            const node = schema.nodes.image.create({ src: path }); // creates the image element
-            const transaction = view.state.tr.insert(coordinates.pos, node); // places it in the correct position
-            return view.dispatch(transaction);
-          };
-        } else {
-          return false;
-        }
-      },
-    },
+    onUpdate: ({ editor }) => {
+      if (handleUpdate) {
+        let updatedArticle: Article = { ...article };
+        updatedArticle.articleBody = editor.getJSON();
+        updatedArticle.headline = getH1FromArticleBody(
+          updatedArticle.articleBody
+        );
+        updatedArticle.alternativeHeadline = updatedArticle.headline;
+        updatedArticle.wordCount = editor.storage.characterCount.words();
+        updatedArticle.modified_at = updatedArticle.published_at
+          ? new Date().toISOString()
+          : null;
+        updatedArticle.slug =
+          (updatedArticle.headline &&
+            createSlugFromHeadline(updatedArticle.headline)) ||
+          null;
+        updatedArticle.image = getArticleImage(updatedArticle.articleBody);
+        handleUpdate(updatedArticle);
+      }
+    }, 
   });
+
   return (
     <>
-      {editor && (
-        <p className="minuteInWords">
-          Reading time:{' '}
-          <strong>
-            {numberToWordValue(editor.storage.characterCount.words())} minute
-            read
-          </strong>
-        </p>
-      )} <ToggleSwitch checked={isDraft} onChange={handleToggle}>Draft</ToggleSwitch> 
+    <div className="publishBar"> 
+      <button className="publishButton" onClick={handlePublish}>
+       {  article.draft ? "Save Draft" : "Publish" }
+      </button>
+    </div>
+    <p className="minuteInWords">
+      Reading time:{" "}
+      <strong>
+        {numberToWordValue(article.wordCount)} minute read
+      </strong>
+    </p>
+    <ToggleSwitch checked={article.draft} onChange={setDraft}>
+      Draft
+    </ToggleSwitch>
       <EditorContent editor={editor} className={styles.editor} />
     </>
   );

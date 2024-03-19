@@ -1,4 +1,4 @@
-import { createClient } from "./supabase/client";
+import { createClient } from "./client";
 type media = {
   name: string;
   data:

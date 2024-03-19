@@ -1,66 +1,29 @@
 import { createClient } from "@/utils/supabase/server";
 // Next
-import NextLink from "next/link";
-import Avatar from "@/components/avatar/avatar";
-import Image from "next/image"; 
+import Image from "next/image";
 
 // TipTap
-import StarterKit from '@tiptap/starter-kit'; 
+import StarterKit from "@tiptap/starter-kit";
 
 import { generateHTML } from "@tiptap/html";
 import { JSONContent } from "@tiptap/react";
-import { Database } from "app/types/supabase";
 
-type ArticleSchema = Database["public"]["Tables"]["articles"]["Row"] & {
+import styles from "./styles.module.css";
+import { Article } from "app/types";
+import ProfileFlag from "@/components/ProfileFlag";
+import ShareLinks from "./ShareLinks";
+import type { Metadata, ResolvingMetadata } from "next";
+
+type ArticleSchema = Article & {
   html: string;
-  beforeArticle: Database["public"]["Tables"]["articles"]["Row"];
-  afterArticle: Database["public"]["Tables"]["articles"]["Row"];
+  beforeArticle: Article;
+  afterArticle: Article;
 };
 function getArticleContent(data: JSONContent) {
-  const html: string = generateHTML(data, [
-    StarterKit,
-   
-  ]);
+  const html: string = generateHTML(data, [StarterKit]);
   return html;
 }
 
-function Card(data: {
-  image: string;
-  headline: string;
-  description: string;
-  slug: string;
-  author: any;
-  published_at: string;
-}) {
-  return (
-    <article className="card">
-      <NextLink href={`/articles/${data.slug}`}>
-        <Image src={data.image} alt={data.headline} width={300} height={200} />
-        <h2>{data.headline}</h2>
-      </NextLink>
-      <div className="meta">
-        <div className="byline">
-          <NextLink href={`/about`}>
-            <Avatar
-              size="large"
-              name={data.author.full_name}
-              src={data.author.avatar_url}
-            />
-            {data.author.full_name}
-          </NextLink>
-        </div>
-        <time dateTime={data.published_at}>
-          {new Date(data.published_at).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
-        </time>
-      </div>
-      <p>{data.description}</p>
-    </article>
-  );
-}
 async function getData(slug) {
   const supabase = createClient();
   const { data: article } = await supabase
@@ -68,7 +31,7 @@ async function getData(slug) {
     .select("*, author(full_name, username, avatar_url)")
     .eq("slug", slug)
     .single();
-  const { published_at } = article;
+  const published_at = article?.published_at || new Date().toISOString();
   const { data: beforeArticle, error } = await supabase
     .from("articles")
     .select(
@@ -91,68 +54,153 @@ async function getData(slug) {
     .order("published_at", { ascending: true })
     .limit(1)
     .single();
-  const html = getArticleContent(article.articleBody);
+  const html = getArticleContent(
+    article?.articleBody || { type: "doc", content: [] }
+  );
   return { ...article, html, beforeArticle, afterArticle } as ArticleSchema;
 }
-export default async function Notes({ params }: { params: { slug: string } }) {
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const { slug } = params;
   const article = await getData(slug);
+  const canonical = `https://darianrosebrook.com/articles/${slug}`;
+  const openGraph = {
+    title: article.headline,
+    description: article.description,
+    url: canonical,
+    siteName: "Darian Rosebrook | Product Designer",
+    images: [
+      {
+        url: article.image,
+        width: 800,
+        height: 600,
+        alt: article.headline,
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  };
+  const twitter = {
+    card: "summary_large_image",
+    title: article.headline,
+    description: article.description,
+    creator: "@darianrosebrook",
+    images: [article.image],
+  };
+  const meta = {
+    category: "Design",
+    creator: "Darian Rosebrook",
+    description: article.description,
+    title: article.headline,
+  };
+  return { canonical, openGraph, twitter };
+}
 
+export default async function Page({ params }: { params: { slug: string } }) {
+  const { slug } = params;
+  const canonical = `https://darianrosebrook.com/articles/${slug}`;
+  const article = await getData(slug);
+  const handleCopy = () => {
+    navigator.clipboard.writeText(window.location.href);
+  };
+  const ldJson = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.headline,
+    alternativeHeadline: article.alternativeHeadline,
+    description: article.description,
+    datePublished: article.published_at,
+    dateModified: article.modified_at,
+    author: {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": "https://darianrosebrook.com/",
+      },
+      name: "Darian Rosebrook",
+      image: "https://darianrosebrook.com/darianrosebrook.jpg",
+      jobTitle: "Product Designer, Design Systems",
+      worksFor: {
+        "@type": "Organization",
+        name: "Paths.design",
+      },
+      url: "https://darianrosebrook.com/",
+      sameAs: [
+        "https://twitter.com/darianrosebrook",
+        "https://www.linkedin.com/in/darianrosebrook/",
+        "https://www.github.com/darianrosebrook",
+        "https://www.instagram.com/darianrosebrook/",
+        "https://www.youtube.com/@darian.rosebrook",
+        "https://read.compassofdesign.com/@darianrosebrook",
+      ],
+    },
+    publisher: {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: "Paths.design",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://darianrosebrook.com/darianrosebrook.jpg",
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": canonical,
+    },
+    image: article.image,
+  };
   return (
-    <article className="articleContent">
+    <article className={styles.articleContent}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }}
+      />
+      <div className={styles.articleLede}>
+        {article.articleSection && (
+          <p className="small uppercase">
+            {article.articleSection}
+            {article.keywords &&
+              ` |  ${article.keywords.split(",").join(" | ")}`}
+          </p>
+        )}
+        <h1>{article.headline}</h1>
+        {article.alternativeHeadline && (
+          <h2 className="medium light">{article.alternativeHeadline}</h2>
+        )}
+        <hr />
+        <div className={styles.meta}>
+          <div className={styles.byline}>
+            <ProfileFlag profile={article.author} />
+            <time dateTime={article.published_at}>
+              <small>
+                {new Date(article.published_at).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </small>
+            </time>
+          </div>
+          <ShareLinks url={canonical} article={article} />
+        </div>
+      </div>
       <Image
         src={article.image}
         alt={article.headline}
         width={500}
         height={300}
       />
-      <h1>{article.headline}</h1>
-
-      <div className="meta">
-        <div className="byline">
-          <NextLink href={`/about`}>
-            <Avatar
-              size="large"
-              name={article.author.full_name}
-              src={article.author.avatar_url}
-            />
-            {article.author.full_name}
-          </NextLink>
-        </div>
-        <time dateTime={article.published_at}>
-          {new Date(article.published_at).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
-        </time>
-      </div>
+      <p className="caption"></p>
       <div
-        className="articleContent"
+        className={styles.articleContent}
         dangerouslySetInnerHTML={{ __html: article.html }}
       />
-      <div className="prev-next">
-        {article.beforeArticle ? (
-          <Card
-            image={article.beforeArticle.image}
-            headline={article.beforeArticle.headline}
-            description={article.beforeArticle.description}
-            slug={article.beforeArticle.slug}
-            author={article.beforeArticle.author}
-            published_at={article.beforeArticle.published_at}
-          /> 
-        ) : <span></span>} 
-        {article.afterArticle ? (
-          <Card
-            image={article.afterArticle.image}
-            headline={article.afterArticle.headline}
-            description={article.afterArticle.description}
-            slug={article.afterArticle.slug}
-            author={article.afterArticle.author}
-            published_at={article.afterArticle.published_at}
-          />
-        ): <span></span>}
-      </div>
+      <div className="prev-next"></div>
     </article>
   );
 }

@@ -6,7 +6,7 @@
 .nav a:has(img) {
   display: flex;
   align-items: center;
-  gap: var(--unit-50);
+  gap: var(--size-02);
   color: var(--color-foreground);
 }
 .nav {

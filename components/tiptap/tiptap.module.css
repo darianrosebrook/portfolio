@@ -22,3 +22,6 @@
   height: 0;
   pointer-events: none;
 }
+.editorFrame > * + * {
+  margin-top: var(--size-07);
+}
