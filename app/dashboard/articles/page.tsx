@@ -4,8 +4,7 @@ import Link from "next/link";
 import ProfileFlag from "@/components/ProfileFlag";
 async function getData() {
   const supabase = createClient();
-  const { data } = await supabase.from("articles").select(` *,  author(*)  `);
-  console.log(data);
+  const { data } = await supabase.from("articles").select(` *,  author(*)  `); 
   return data;
 }
 function Card(data: {

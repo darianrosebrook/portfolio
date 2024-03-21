@@ -175,16 +175,20 @@ export default async function Page({ params }: { params: { slug: string } }) {
         <hr />
         <div className={styles.meta}>
           <div className={styles.byline}>
+            <p className="small">
+              Published on{" "}
+              <time dateTime={article.published_at}>
+                <small className="bold">
+                  {new Date(article.published_at).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </small>
+              </time>{" "}
+              by
+            </p>
             <ProfileFlag profile={article.author} />
-            <time dateTime={article.published_at}>
-              <small>
-                {new Date(article.published_at).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </small>
-            </time>
           </div>
           <ShareLinks url={canonical} article={article} />
         </div>

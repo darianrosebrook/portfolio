@@ -62,7 +62,7 @@ const Tiptap = ({
     return h1?.content?.[0]?.text || null;
   };
   const getArticleImage = (articleBody) => {
-    const image = articleBody.content.find((node) => node.type === "image"); 
+    const image = articleBody.content.find((node) => node.type === "image");  
     return image?.attrs.src || null;
   };
   const createSlugFromHeadline = (headline: string) => {

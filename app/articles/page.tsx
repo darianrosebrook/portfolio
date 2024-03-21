@@ -64,7 +64,7 @@ function Card(data: {
       </div>
       <div>
         <Link href={`/articles/${data.slug}`}>
-          <p className="medium">{data.headline}</p>
+          <h2 className="medium">{data.headline}</h2>
         </Link>
         <p>{description}</p>
       </div>
