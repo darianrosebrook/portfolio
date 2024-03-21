@@ -85,7 +85,7 @@ export default async function Page() {
           slug={article.slug}
           published_at={article.published_at}
         />
-      ))}
+      ))}  
     </div>
   );
 }
