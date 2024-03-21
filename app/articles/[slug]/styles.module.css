@@ -1,6 +1,10 @@
 .articleContent {
   max-width: 55rem;
-  margin: 0 auto; 
+  margin: 0 auto;
+}
+.articleContent p {
+  font-size: var(--body-02);
+  line-height:  1.5;
 }
 .articleContent > * + * {
   margin-top: var(--size-07);
@@ -42,6 +46,12 @@
   margin: 0;
   margin-left: var(--size-03);
   list-style: none;
+}
+.prev_next {
+  display: grid;
+  gap: var(--size-05);
+  margin-top: var(--size-07);
+  grid-template-columns: 1fr 1fr;
 }
 @media screen and (min-width: 1000px) {
   .meta {

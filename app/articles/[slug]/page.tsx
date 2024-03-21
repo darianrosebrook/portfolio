@@ -175,16 +175,20 @@ export default async function Page({ params }: { params: { slug: string } }) {
         <hr />
         <div className={styles.meta}>
           <div className={styles.byline}>
+            <p className="small">
+              Published on{" "}
+              <time dateTime={article.published_at}>
+                <small className="bold">
+                  {new Date(article.published_at).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </small>
+              </time>{" "}
+              by
+            </p>
             <ProfileFlag profile={article.author} />
-            <time dateTime={article.published_at}>
-              <small>
-                {new Date(article.published_at).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </small>
-            </time>
           </div>
           <ShareLinks url={canonical} article={article} />
         </div>
@@ -200,7 +204,40 @@ export default async function Page({ params }: { params: { slug: string } }) {
         className={styles.articleContent}
         dangerouslySetInnerHTML={{ __html: article.html }}
       />
-      <div className="prev-next"></div>
+      <div className={styles.prev_next}>
+        {article.beforeArticle ? (
+          <article className="card">
+            <h3>Previous</h3>
+          <a href={`/articles/${article.beforeArticle.slug}`}>
+            <Image
+              src={article.beforeArticle.image}
+              alt={article.beforeArticle.headline}
+              width={100}
+              height={100}
+            />
+            <h5>{article.beforeArticle.headline}</h5>
+          </a>
+          </article>
+        ) : (
+          <span></span>
+        )}
+        {article.afterArticle ? (
+          <article className="card">
+            <h3>Next</h3>
+            <a href={`/articles/${article.afterArticle.slug}`}>
+              <Image
+                src={article.afterArticle.image}
+                alt={article.afterArticle.headline}
+                width={100}
+                height={100}
+              />
+              <h5>{article.afterArticle.headline}</h5>
+            </a>
+          </article>
+        ) : (
+          <span></span>
+        )}
+      </div>
     </article>
   );
 }

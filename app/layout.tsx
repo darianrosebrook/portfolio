@@ -2,7 +2,26 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/navbar";
 import { createClient } from "@/utils/supabase/server";
-import Footer from "@/components/footer";
+import Footer from "@/components/footer"; 
+import localFont from "next/font/local";
+
+// If loading a variable font, you don't need to specify the font weight 
+const nohemi = localFont({
+  src: "../public/fonts/Nohemi-VF.ttf",
+  display: "swap",
+  fallback: ["sans-serif"],
+  preload: true,
+  weight: "100 900",
+  variable: '--font-nohemi',
+});
+const inter = localFont({
+  src: "../public/fonts/InterVariable.woff2", 
+  fallback: ["sans-serif"], 
+  display: "auto",
+  weight: "100 900",
+  variable: '--font-inter',
+});
+
 
 export const metadata: Metadata = {
   title: "Darian Rosebrook: Product Designer | Design Systems, Portland Oregon",
@@ -20,7 +39,7 @@ export default async function RootLayout({
   response.error && console.error("error", response.error);
   const isAuthed = session !== null;
   return (
-    <html lang="en">
+    <html lang="en" className={`${inter.variable} ${nohemi.variable}`}>
       <body>
         <Navbar isAuthed={isAuthed} />
         <main>{children}</main>

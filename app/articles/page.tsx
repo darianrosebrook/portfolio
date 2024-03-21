@@ -64,7 +64,7 @@ function Card(data: {
       </div>
       <div>
         <Link href={`/articles/${data.slug}`}>
-          <p className="medium">{data.headline}</p>
+          <h2 className="medium">{data.headline}</h2>
         </Link>
         <p>{description}</p>
       </div>
@@ -85,7 +85,7 @@ export default async function Page() {
           slug={article.slug}
           published_at={article.published_at}
         />
-      ))}
+      ))}  
     </div>
   );
 }
