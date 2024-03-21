@@ -8,7 +8,11 @@ import {
   Node,
 } from "@tiptap/react"; 
 import styles from "./tiptap.module.css";
+<<<<<<< Updated upstream
 import StarterKit from "@tiptap/starter-kit"; 
+=======
+import StarterKit from "@tiptap/starter-kit";
+>>>>>>> Stashed changes
 import Image from "./ImageExtended";
 import Document from "@tiptap/extension-document";
 import Placeholder from "@tiptap/extension-placeholder";
@@ -57,9 +61,13 @@ const CustomDocument = Document.extend({
 const byLine = (article: Article) => {
   return (
     <div className="byline">
+<<<<<<< Updated upstream
       <ProfileFlag
         profile={article.author} 
       />
+=======
+      <ProfileFlag profile={article.author} />
+>>>>>>> Stashed changes
       <p>
         {article.author?.username} -{" "}
         {new Date(article.published_at).toLocaleDateString("en-US", {
@@ -70,7 +78,11 @@ const byLine = (article: Article) => {
       </p>
     </div>
   );
+<<<<<<< Updated upstream
 }
+=======
+};
+>>>>>>> Stashed changes
 
 const Tiptap = ({
   article,
@@ -78,24 +90,31 @@ const Tiptap = ({
   handlePublish = null,
   setDraft = null,
 }: {
-  article?: any;
+  article: Article;
   handleUpdate?: (article: Article) => void;
   handlePublish?: () => void;
   setDraft?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) => {
+<<<<<<< Updated upstream
 
 
+=======
+  const [updatedArticle, setUpdatedArticle] = useState<Article>();
+  if (article) {
+    setUpdatedArticle(article);
+  }
+>>>>>>> Stashed changes
   const images = new Map<string, string>();
   const content = article?.articleBody as JSONContent | undefined;
 
   const getH1FromArticleBody = (articleBody) => {
     const h1 = articleBody.content.find(
       (node) => node.type === "heading" && node.attrs.level === 1
-    ); 
+    );
     return h1?.content?.[0]?.text || null;
   };
   const getArticleImage = (articleBody) => {
-    const image = articleBody.content.find((node) => node.type === "image");  
+    const image = articleBody.content.find((node) => node.type === "image");
     return image?.attrs.src || null;
   };
   const createSlugFromHeadline = (headline: string) => {
@@ -103,7 +122,7 @@ const Tiptap = ({
       .toLowerCase()
       .replace(/[^\w ]+/g, "")
       .replace(/ +/g, "-");
-  }; 
+  };
 
 
   const editor = useEditor({
@@ -131,7 +150,6 @@ const Tiptap = ({
     ],
     onUpdate: ({ editor }) => {
       if (handleUpdate) {
-        let updatedArticle: Article = { ...article };
         updatedArticle.articleBody = editor.getJSON();
         updatedArticle.headline = getH1FromArticleBody(
           updatedArticle.articleBody
@@ -148,25 +166,23 @@ const Tiptap = ({
         updatedArticle.image = getArticleImage(updatedArticle.articleBody);
         handleUpdate(updatedArticle);
       }
-    }, 
+    },
   });
 
   return (
     <>
-    <div className="publishBar"> 
-      <button className="publishButton" onClick={handlePublish}>
-       {  article.draft ? "Save Draft" : "Publish" }
-      </button>
-    </div>
-    <p className="minuteInWords">
-      Reading time:{" "}
-      <strong>
-        {numberToWordValue(article.wordCount)} minute read
-      </strong>
-    </p>
-    <ToggleSwitch checked={article.draft} onChange={setDraft}>
-      Draft
-    </ToggleSwitch>
+      <div className="publishBar">
+        <button className="publishButton" onClick={handlePublish}>
+          {article.draft ? "Save Draft" : "Publish"}
+        </button>
+      </div>
+      <p className="minuteInWords">
+        Reading time:{" "}
+        <strong>{numberToWordValue(article.wordCount)} minute read</strong>
+      </p>
+      <ToggleSwitch checked={article.draft} onChange={setDraft}>
+        Draft
+      </ToggleSwitch>
       <EditorContent editor={editor} className={styles.editor} />
     </>
   );
