@@ -49,12 +49,8 @@ const NewArticle = () => {
       },
       body: JSON.stringify(article),
     });
-    const { data, error } = await response.json();
-    if (error) {
-      console.error(error);
-    } else {
-      console.log(data);
-    }
+    console.log(response); 
+    return response;
   };
 
   return (
