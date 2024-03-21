@@ -6,10 +6,9 @@ import {
   JSONContent,
   ReactNodeViewRenderer,
   Node,
-} from "@tiptap/react";
+} from "@tiptap/react"; 
 import styles from "./tiptap.module.css";
-import StarterKit from "@tiptap/starter-kit";
-// import Image from "@tiptap/extension-image";
+import StarterKit from "@tiptap/starter-kit"; 
 import Image from "./ImageExtended";
 import Document from "@tiptap/extension-document";
 import Placeholder from "@tiptap/extension-placeholder";
@@ -20,7 +19,7 @@ import js from "highlight.js/lib/languages/javascript";
 import ts from "highlight.js/lib/languages/typescript";
 import html from "highlight.js/lib/languages/xml";
 import { common, createLowlight } from "lowlight";
- 
+import ProfileFlag from "../ProfileFlag";
 import ToggleSwitch from "@/components/toggleSwitch";
 
 import CodeBlockComponent from "./CodeBlockComponent";
@@ -31,15 +30,47 @@ lowlight.register("css", css);
 lowlight.register("js", js);
 lowlight.register("ts", ts);
 
-// upload image
-import { upload } from "@/utils/supabase/upload";
-import { useState } from "react";
 import { Article } from "app/types";
 import { numberToWordValue } from "@/utils/index";
+
+// alternativeHeadline: string | null
+// articleBody: JSONContent | null
+// articleSection: string | null
+// author: Database["public"]["Tables"]["profiles"]["Row"] | null
+// created_at: string | null
+// description: string | null
+// draft: boolean | null
+// editor: string | null
+// headline: string | null
+// id: number
+// image: string | null
+// keywords: string | null
+// modified_at: string | null
+// published_at: string | null
+// wordCount: number | null
+// slug: string | null
 
 const CustomDocument = Document.extend({
   content: "heading block*",
 });
+
+const byLine = (article: Article) => {
+  return (
+    <div className="byline">
+      <ProfileFlag
+        profile={article.author} 
+      />
+      <p>
+        {article.author?.username} -{" "}
+        {new Date(article.published_at).toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })}
+      </p>
+    </div>
+  );
+}
 
 const Tiptap = ({
   article,
@@ -52,6 +83,8 @@ const Tiptap = ({
   handlePublish?: () => void;
   setDraft?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) => {
+
+
   const images = new Map<string, string>();
   const content = article?.articleBody as JSONContent | undefined;
 
@@ -62,7 +95,7 @@ const Tiptap = ({
     return h1?.content?.[0]?.text || null;
   };
   const getArticleImage = (articleBody) => {
-    const image = articleBody.content.find((node) => node.type === "image"); 
+    const image = articleBody.content.find((node) => node.type === "image");  
     return image?.attrs.src || null;
   };
   const createSlugFromHeadline = (headline: string) => {
@@ -71,6 +104,7 @@ const Tiptap = ({
       .replace(/[^\w ]+/g, "")
       .replace(/ +/g, "-");
   }; 
+
 
   const editor = useEditor({
     content: content,

@@ -1,10 +1,10 @@
-"use client";
-import Image from "next/image";
-import logo from "./logo.svg";
+"use client"; 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import LogoutButton from "./logout-button";
 import styles from "./index.module.css";
+import Logo from "./logo";
+import Avatar from "../avatar/avatar";
 
 export default function Navbar({ isAuthed }) {
   const pathname = usePathname();
@@ -23,14 +23,8 @@ export default function Navbar({ isAuthed }) {
     <header>
       <nav className={styles.nav}>
         <Link href="/" className="logoLink">
-          <Image
-            src={logo}
-            width="36"
-            height="36"
-            alt="Darian Rosebrook"
-            className={styles.logo}
-          />
-          <h1 className="large">{`Darian Rosebrook`}</h1>
+          <Logo />
+          <h1 className="medium logo">{`Darian Rosebrook`}</h1>
         </Link>
         <ul>
           {paths.map(([route, name]) => (

@@ -37,6 +37,7 @@
     "eslint": "^8",
     "eslint-config-next": "14.1.0",
     "supabase": "^1.145.4",
+    "svg-inline-loader": "^0.8.2",
     "typescript": "^5"
   }
 }

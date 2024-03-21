@@ -1,54 +1,84 @@
-@font-face {
-  /* variable font nohemi, weight 100-900 trutype /fonts/Nohemi-vf.ttf */
-  font-family: "Nohemi";
-  src: url("/fonts/Nohemi-VF.ttf") format("truetype");
-  font-weight: 100 900;
-  font-display: swap;
-  font-style: normal;
-}
-:root {
-  --aalt: "aalt" on;
-  --case: "case" on;
-  --frac: "frac" on;
-  --hist: "hist" on;
-  --ordn: "ordn" on;
-  --sups: "sups" on;
+:root { 
 
   /* units */
-  --unit-base: 16px;
-  --unit-0: 0;
-  --unit-01: 0.125rem; /* 2px */
-  --unit-02: 0.25rem; /* 4px */
-  --unit-03: 0.5rem; /* 8px */
-  --unit-04: 0.75rem; /* 12px */
-  --unit-05: 1rem; /* 16px */
-  --unit-06: 1.25rem; /* 20px */
-  --unit-07: 1.5rem; /* 24px */
-  --unit-08: 2rem; /* 32px */
-  --unit-09: 2.5rem; /* 40px */
-  --unit-10: 3rem; /* 48px */
-
-  /* size */
-  --size-01: var(--unit-01);
-  --size-02: var(--unit-02);
-  --size-03: var(--unit-03);
-  --size-04: var(--unit-04);
-  --size-05: var(--unit-05);
-  --size-06: var(--unit-06);
-  --size-07: var(--unit-07);
-  --size-08: var(--unit-08);
-  --size-09: var(--unit-09);
-  --size-10: var(--unit-10);
+  --du-base: 16px;
+  --du-00: 0; /* 0px */
+  --du-02: 0.125rem; /* 2px */
+  --du-04: 0.25rem; /* 4px */
+  --du-08: 0.5rem; /* 8px */
+  --du-10: 0.625rem; /* 10px */
+  --du-12: 0.75rem; /* 12px */
+  --du-14: 0.875rem; /* 14px */
+  --du-16: 1rem; /* 16px */
+  --du-18: 1.125rem; /* 18px */
+  --du-20: 1.25rem; /* 20px */
+  --du-24: 1.5rem; /* 24px */
+  --du-32: 2rem; /* 32px */
+  --du-40: 2.5rem; /* 40px */
+  --du-48: 3rem; /* 48px */
+  --du-56: 3.5rem; /* 56px */
+  --du-64: 4rem; /* 64px */
+  --du-72: 4.5rem; /* 72px */
 
   /* Typography */
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  --font-weight-black: 900;
+
   --line-height: 1.25;
   --line-height-collapse: 1;
-  --letter-spacing: 0.01em;
+  --letter-spacing-tight: -0.018em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.018em;
 
-  font-family: "Nohemi", sans-serif;
-  font-size: var(--unit-base);
-  font-weight: 350;
-  letter-spacing: var(--letter-spacing);
+  /* body */
+  --body-01: var(--du-20);
+  --body-02: var(--du-18);
+  --body-03: var(--du-16);
+  --body-04: var(--du-14);
+
+  /* heading */
+  --heading-super: var(--du-72);
+  --heading-hero: var(--du-64);
+  --heading-01: var(--du-56);
+  --heading-02: var(--du-48);
+  --heading-03: var(--du-40);
+  --heading-04: var(--du-32);
+  --heading-05: var(--du-24);
+  --heading-06: var(--du-20);
+
+  /* button */
+  --button-01: var(--du-20);
+  --button-02: var(--du-18);
+  --button-03: var(--du-16);
+
+  /* caption */
+  --caption-01: var(--du-14);
+  --caption-02: var(--du-12);
+  --caption-03: var(--du-10);
+
+  /* spacing */
+  --size-00: var(--du-00);
+  --size-01: var(--du-02);
+  --size-02: var(--du-04);
+  --size-03: var(--du-08);
+  --size-04: var(--du-16);
+  --size-05: var(--du-20);
+  --size-06: var(--du-24);
+  --size-07: var(--du-32);
+  --size-08: var(--du-40);
+  --size-09: var(--du-48);
+  --size-10: var(--du-56);
+
+  /* Typography */
+
+  font-family: var(--font-inter ), sans-serif;
+  font-feature-settings: "case" 0, "dlig", "frac" 0, "dnom" 0, "numr" 0, "subs" 0, "sups" 0, "tnum" 0, "zero" 0, "ss01" 0, "ss02" 0, "ss03", "ss04", "ss05" 0, "ss06" 0, "ss07" 0, "ss08" 0, "cv01", "cv02" 0, "cv03" 0, "cv04" 0, "cv05" 0, "cv06" 0, "cv07", "cv08" 0, "cv09" 0, "cv10" 0, "cv11" 0, "cv12" 0, "cv13" 0, "cpsp" 0, "c2sc" 0, "salt" 0, "aalt" 0, "calt", "ccmp", "locl", "kern";
+  font-size: var(--du-base);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-tight);
   line-height: var(--line-height);
   h1,
   h2,
@@ -56,136 +86,111 @@
   h4,
   h5,
   h6 {
+    font-family: var(--font-nohemi), sans-serif;
     font-weight: 400;
     line-height: var(--line-height-collapse);
+    letter-spacing: var(--letter-spacing-wide)
   }
+  .heading-01,
+  h1 {
+    font-size: var(--heading-01);
+  }
+  .heading-02,
+  h2 {
+    font-size: var(--heading-02);
+  }
+  .heading-03,
+  h3 {
+    font-size: var(--heading-03);
+  }
+  .heading-04,
+  h4 {
+    font-size: var(--heading-04);
+  }
+  .heading-05,
+  h5 {
+    font-size: var(--heading-05);
+  }
+  .heading-06,
+  h6 {
+    font-size: var(--heading-06);
+  }
+  .heading-hero {
+    font-size: var(--heading-hero);
+  }
+  .heading-super {
+    font-size: var(--heading-super);
+  }
+  [class*="button-"] {
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--letter-spacing-tight);
+  }
+  .button-01 {
+    font-size: var(--button-01);
+  }
+  .button-02 {
+    font-size: var(--button-02);
+  }
+  .button-03 {
+    font-size: var(--button-03);
+  }
+  .caption-01 {
+    font-size: var(--caption-01);
+  }
+  .caption-02,
+  small,
+  .small {
+    font-size: var(--caption-02);
+  }
+  .caption-03,
+  .smallest {
+    font-size: var(--caption-03);
+  }
+  .body-01, .medium {
+    font-size: var(--body-01);
+  }
+  .body-02,
+  p  {
+    font-size: var(--body-02);
+  }
+  .body-03, .regular{
+    font-size: var(--body-03);
+  }
+  .body-04 {
+    font-size: var(--body-04);
+  }
+
   .bold,
   strong {
-    font-weight: 450;
-  }
-  .light {
-    font-variation-settings: "wght" 250;
-  }
-  .regular {
-    font-variation-settings: "wght" 300;
-  }
+    font-weight: var(--font-weight-bold);
+  } 
   .body {
-    font-weight: 400;
-  }
-  .black {
-    font-variation-settings: "wght" 900;
-  }
+    font-weight: var(--font-weight-regular);
+  } 
   .emphasis,
   em {
-    font-style: italic;
-    font-variation-settings: "ital" 1;
+    font-style: italic; 
   }
   .uppercase {
     text-transform: uppercase;
+    font-feature-settings: "case" 1;
   }
   .underline {
     text-decoration: underline;
   }
   .super,
-  .sups {
-    --sups: "sups" on;
-    font-size: var(--size-03);
+  .sups { 
+    font-size: var(--caption-03);
     vertical-align: super;
   }
   .sub {
-    font-size: var(--size-03);
+    font-size: var(--caption-03);
     vertical-align: sub;
   }
   .smallest {
-    font-size: var(--size-03);
+    font-size: var(--caption-02);
   }
-  .small,
-  small {
-    font-size: var(--size-04);
-    letter-spacing: var(--letter-spacing);
-  }
-  .body,
-  label,
-  h6,
-  h5,
-  p {
-    font-size: var(--size-06);
-    line-height: var(--line-height);
-  }
-  .medium,
-  h4 {
-    font-size: var(--size-07);
-    line-height: var(--line-height);
-  }
-  .large,
-  h3 {
-    font-size: var(--size-07);
-    line-height: var(--line-height);
-  }
-  .largest,
-  h2 {
-    font-size: var(--size-08);
-  }
-  .hero,
-  h1 {
-    font-size: var(--size-10);
-  }
-
-  .aalt {
-    --aalt: "aalt" on;
-  }
-
-  .case {
-    --case: "case" on;
-  }
-
-  .frac {
-    --frac: "frac" on;
-  }
-
-  @supports (font-variant-numeric: diagonal-fractions) {
-    .frac {
-      --frac: "____";
-      font-variant-numeric: diagonal-fractions;
-    }
-  }
-
-  .hist {
-    --hist: "hist" on;
-  }
-
-  @supports (font-variant-alternates: historical-forms) {
-    .hist {
-      --hist: "____";
-      font-variant-alternates: historical-forms;
-    }
-  }
-  .ordn {
-    --ordn: "ordn" on;
-  }
-
-  @supports (font-variant-numeric: ordinal) {
-    .ordn {
-      --ordn: "____";
-      font-variant-numeric: ordinal;
-    }
-  }
-
-  @supports (font-variant-position: super) {
-    .sups {
-      --sups: "____";
-      font-variant-position: super;
-    }
-  }
-  .aalt,
-  .case,
-  .frac,
-  .hist,
-  .ordn,
-  .sups {
-    font-feature-settings: var(--aalt), var(--case), var(--frac), var(--hist),
-      var(--ordn), var(--sups);
-  }
+ 
 
   /* Layout */
   /* radius */
@@ -233,7 +238,7 @@
   --white: rgb(255, 255, 255);
   --mid: rgb(200, 200, 200);
   --secondary: rgb(50, 50, 50);
-  --dark: #121212;
+  --dark: #151515;
   --foreground: var(--dark);
   --background: var(--light);
   --background-secondary: var(--mid);
@@ -309,11 +314,11 @@ ul {
 h3 span {
   display: block;
   color: var(--secondary);
-  font-weight: 300;
+  font-weight: var(--font-weight-light);
 }
 /* Graphics / Visuals */
 img {
-  border-radius: var(--size-05);
+  border-radius: var(--size-03);
   width: 100%;
   margin: 0 auto;
   height: auto;
@@ -334,7 +339,7 @@ i span {
   display: none;
 }
 .social-link {
-  font-size: 1.5rem;
+  font-size: var(--heading-05);
   display: inline-flex;
   margin: 0;
   margin-left: var(--size-02);
@@ -374,7 +379,7 @@ button + button {
 }
 label {
   display: block;
-  font-weight: 300;
+  font-weight: var(--font-weight-medium);
 }
 label + input[type="text"],
 label + input[type="email"],
@@ -424,17 +429,14 @@ input:disabled {
   padding-left: 0;
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--size-05);
+  gap: var(--size-04);
 }
 li {
   margin-top: var(--size-02);
 }
 .experience > li {
   margin: 0;
-  margin-top: var(--size-05);
-}
-.active {
-  font-weight: 500;
+  margin-top: var(--size-04);
 }
 article ul,
 article ol {
@@ -443,28 +445,28 @@ article ol {
 
 .grid {
   display: grid;
-  gap: var(--size-05);
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--size-02);
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   align-content: stretch;
 }
 .card {
-  padding: var(--size-05);
-  border-radius: var(--size-05);
+  padding: var(--size-04);
+  border-radius: var(--size-02);
   background: var(--background);
   box-shadow: var(--elevation);
   transition: box-shadow 0.2s ease;
 }
 .card p.medium {
-  font-size: var(--size-06);
+  font-size: var(--body-03);
 }
 .card a {
   color: var(--foreground);
 }
 .card .media {
-  margin-right: var(--size-05);
+  margin-right: var(--size-04);
 }
 .card .media + div {
-  margin-top: var(--size-05);
+  margin-top: var(--size-04);
 }
 
 .meta {
@@ -506,12 +508,15 @@ tr {
   .card {
     flex-direction: column;
   }
+  .card p {
+    font-size: var(--body-03);
+  }
   .card .media {
     width: 100%;
     margin-right: 0;
   }
   .card .media + div {
-    margin-top: var(--size-05);
+    margin-top: var(--size-04);
   }
   .meta {
     flex-direction: row;
@@ -523,6 +528,6 @@ tr {
     align-items: center;
   }
   .card p.medium {
-    font-size: var(--size-07);
+    font-size: var(--body-01);
   }
 }

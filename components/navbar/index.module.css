@@ -3,7 +3,7 @@
   height: var(--size-07);
   margin: 0;
 }
-.nav a:has(img) {
+.nav a:has(svg) {
   display: flex;
   align-items: center;
   gap: var(--size-02);
@@ -24,22 +24,17 @@
   padding: 0;
   margin: 0;
 }
-.nav h1,
-.nav h2 {
+.nav h1{
   line-height: 1;
   margin-top: 0.5rem;
-  font-weight: 300;
-}
-.nav h2 {
-  font-size: var(--size-05);
-  margin-top: 0.25rem;
-}
-.nav .large {
-  font-weight: 200;
-}
+  font-weight: var(--font-weight-light) !important;
+} 
 .nav a.active {
-  font-weight: 500;
+  font-weight: var(--font-weight-bold);
   color: var(--foreground);
+}
+.nav a { 
+  font-family: var(--font-nohemi);  
 }
 @media screen and (min-width: 1000px) {
   .nav {
