@@ -40,7 +40,7 @@ export default async function RootLayout({
   const isAuthed = session !== null;
   return (
     <html lang="en" className={`${inter.variable} ${nohemi.variable}`}>
-      <body>
+      <body><svg className="pointer-events-none absolute cursor-none"><filter id="grainy"><feTurbulence type="turbulence" baseFrequency="0.5"></feTurbulence><feColorMatrix type="saturate" values="0"></feColorMatrix></filter></svg>
         <Navbar isAuthed={isAuthed} />
         <main>{children}</main>
         <Footer />
