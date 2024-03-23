@@ -1,9 +1,15 @@
 import { createClient } from "@/utils/supabase/server";
 // Next
-import Image from "next/image";
+import NextImage from "next/image";
 
 // TipTap
+
 import StarterKit from "@tiptap/starter-kit";
+import CharacterCount from "@tiptap/extension-character-count";
+import Image from "@tiptap/extension-image";
+import CustomDocument from "@tiptap/extension-document";
+import Placeholder from "@tiptap/extension-placeholder";
+import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
 
 import { generateHTML } from "@tiptap/html";
 import { JSONContent } from "@tiptap/react";
@@ -19,9 +25,19 @@ type ArticleSchema = Article & {
   beforeArticle: Article;
   afterArticle: Article;
 };
+
 function getArticleContent(data: JSONContent) {
-  const html: string = generateHTML(data, [StarterKit]);
-  return html;
+  let html: string = generateHTML(data, [
+    CharacterCount,
+    Image, 
+    StarterKit 
+  ]); 
+  const h1FromHTML = html.match(/<h1>(.*?)<\/h1>/);
+  const imageFromHTML = html.match(/<img(.*?)>/);
+  h1FromHTML && (html = html.replace(h1FromHTML[0], ""));
+  imageFromHTML && (html = html.replace(imageFromHTML[0], ""));
+  const content = { h1FromHTML, imageFromHTML, html };
+  return content;
 }
 
 async function getData(slug) {
@@ -54,10 +70,10 @@ async function getData(slug) {
     .order("published_at", { ascending: true })
     .limit(1)
     .single();
-  const html = getArticleContent(
-    article?.articleBody || { type: "doc", content: [] }
-  );
-  return { ...article, html, beforeArticle, afterArticle } as ArticleSchema;
+  
+    const contents = getArticleContent(article.articleBody);
+    const { h1FromHTML, imageFromHTML, html } = contents;
+  return { ...article, html, beforeArticle, afterArticle, h1FromHTML, imageFromHTML };
 }
 
 export async function generateMetadata({
@@ -193,7 +209,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
           <ShareLinks url={canonical} article={article} />
         </div>
       </div>
-      <Image
+      <NextImage
         src={article.image}
         alt={article.headline}
         width={500}
@@ -209,7 +225,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
           <article className="card">
             <h3>Previous</h3>
           <a href={`/articles/${article.beforeArticle.slug}`}>
-            <Image
+            <NextImage
               src={article.beforeArticle.image}
               alt={article.beforeArticle.headline}
               width={100}
@@ -225,7 +241,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
           <article className="card">
             <h3>Next</h3>
             <a href={`/articles/${article.afterArticle.slug}`}>
-              <Image
+              <NextImage
                 src={article.afterArticle.image}
                 alt={article.afterArticle.headline}
                 width={100}

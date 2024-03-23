@@ -1,67 +1,100 @@
-import { createClient } from "@/utils/supabase/server";
 // Next
-import NextLink from "next/link";
-import Avatar from "@/components/avatar/avatar";
-import Image from "next/image";
+import NextImage from "next/image";
+import ProfileFlag from "@/components/ProfileFlag";
 
 // TipTap
 import StarterKit from "@tiptap/starter-kit";
+import CharacterCount from "@tiptap/extension-character-count";
+import Image from "@tiptap/extension-image";
+import CustomDocument from "@tiptap/extension-document";
+import Placeholder from "@tiptap/extension-placeholder";
+import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
 
 import { generateHTML } from "@tiptap/html";
 import { JSONContent } from "@tiptap/react";
 import { Database } from "app/types/supabase";
-import Link from "next/link";
 
-type ArticleSchema = Database["public"]["Tables"]["articles"]["Row"] & {
-  html: string;
-  beforeArticle: Database["public"]["Tables"]["articles"]["Row"];
-  afterArticle: Database["public"]["Tables"]["articles"]["Row"];
-};
+import styles from "./styles.module.css";
 function getArticleContent(data: JSONContent) {
-  const html: string = generateHTML(data, [StarterKit]);
-  return html;
+  let html: string = generateHTML(data, [
+    CharacterCount,
+    Image,
+    CustomDocument,
+    StarterKit.configure({
+      document: false,
+    }),
+    Placeholder.configure({
+      placeholder: ({ node }) => {
+        if (node.type.name === "heading") {
+          return "What’s the title?";
+        }
+        return "Can you add some further context?";
+      },
+    }),
+    CodeBlockLowlight,
+  ]);
+  console.log(html);
+  const h1FromHTML = html.match(/<h1>(.*?)<\/h1>/);
+  const imageFromHTML = html.match(/<img(.*?)>/);
+  h1FromHTML && (html = html.replace(h1FromHTML[0], ""));
+  imageFromHTML && (html = html.replace(imageFromHTML[0], ""));
+  const content = { h1FromHTML, imageFromHTML, html };
+  return content;
 }
- 
+
 export default async function Notes({
   article,
 }: {
   article: Database["public"]["Tables"]["articles"]["Row"];
-}) { 
-  const html = getArticleContent(article.articleBody); 
-  return (
-    <article className="articleContent">
-      <Link href={`/dashboard/articles/${article.slug}/edit`}>Edit</Link>
-      <Image
+}) {
+  const contents = getArticleContent(article.articleBody);
+  const { h1FromHTML, imageFromHTML, html } = contents;
+  const format = (
+    <>
+      <div className={styles.articleLede}>
+        {article.articleSection && (
+          <p className="small uppercase">
+            {article.articleSection}
+            {article.keywords &&
+              ` |  ${article.keywords.split(",").join(" | ")}`}
+          </p>
+        )}
+        <h1>{article.headline}</h1>
+        {article.alternativeHeadline && (
+          <h2 className="medium light">{article.alternativeHeadline}</h2>
+        )}
+        <hr />
+        <div className={styles.meta}>
+          <div className={styles.byline}>
+            <p className="small">
+              Published on{" "}
+              <time dateTime={article.published_at}>
+                <small className="bold">
+                  {new Date(article.published_at).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </small>
+              </time>{" "}
+              by
+            </p>
+            <ProfileFlag profile={article.author} />
+          </div>
+        </div>
+      </div>
+      <NextImage
         src={article.image}
         alt={article.headline}
         width={500}
         height={300}
       />
-      <h1>{article.headline}</h1>
-
-      <div className="meta">
-        <div className="byline">
-          <NextLink href={`/about`}>
-            <Avatar
-              size="large"
-              name={article.author.full_name}
-              src={article.author.avatar_url}
-            />
-            {article.author.full_name}
-          </NextLink>
-        </div>
-        <time dateTime={article.published_at}>
-          {new Date(article.published_at).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
-        </time>
-      </div>
+      <p className="caption"></p>
       <div
-        className="articleContent"
+        className={styles.articleContent}
         dangerouslySetInnerHTML={{ __html: html }}
-      /> 
-    </article>
-  )
+      />
+    </>
+  );
+  return <article className={styles.articleContent}>{format}</article>;
 }
