@@ -2,9 +2,7 @@
 import { useState } from "react";
 import Tiptap from "@/components/tiptap/tiptap";
 import { Article } from "app/types";
-import debounce from "@/utils/debounce";
-import { numberToWordValue } from "@/utils/index";
-import { createClient } from "@/utils/supabase/client";
+import debounce from "@/utils/debounce"; 
 
 const articleDefaults = {
   alternativeHeadline: null,

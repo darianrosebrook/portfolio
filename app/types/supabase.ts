@@ -43,7 +43,7 @@ export type Database = {
           draft: boolean | null
           editor: string | null
           headline: string | null
-          id: number
+          id?: number
           image: string | null
           keywords: string | null
           modified_at: string | null

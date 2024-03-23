@@ -6,13 +6,9 @@ import {
   JSONContent,
   ReactNodeViewRenderer,
   Node,
-} from "@tiptap/react"; 
+} from "@tiptap/react";
 import styles from "./tiptap.module.css";
-<<<<<<< Updated upstream
-import StarterKit from "@tiptap/starter-kit"; 
-=======
 import StarterKit from "@tiptap/starter-kit";
->>>>>>> Stashed changes
 import Image from "./ImageExtended";
 import Document from "@tiptap/extension-document";
 import Placeholder from "@tiptap/extension-placeholder";
@@ -23,7 +19,7 @@ import js from "highlight.js/lib/languages/javascript";
 import ts from "highlight.js/lib/languages/typescript";
 import html from "highlight.js/lib/languages/xml";
 import { common, createLowlight } from "lowlight";
-import ProfileFlag from "../ProfileFlag";
+
 import ToggleSwitch from "@/components/toggleSwitch";
 
 import CodeBlockComponent from "./CodeBlockComponent";
@@ -36,53 +32,12 @@ lowlight.register("ts", ts);
 
 import { Article } from "app/types";
 import { numberToWordValue } from "@/utils/index";
-
-// alternativeHeadline: string | null
-// articleBody: JSONContent | null
-// articleSection: string | null
-// author: Database["public"]["Tables"]["profiles"]["Row"] | null
-// created_at: string | null
-// description: string | null
-// draft: boolean | null
-// editor: string | null
-// headline: string | null
-// id: number
-// image: string | null
-// keywords: string | null
-// modified_at: string | null
-// published_at: string | null
-// wordCount: number | null
-// slug: string | null
+import { useState } from "react"; 
+import Link from "next/link";
 
 const CustomDocument = Document.extend({
   content: "heading block*",
 });
-
-const byLine = (article: Article) => {
-  return (
-    <div className="byline">
-<<<<<<< Updated upstream
-      <ProfileFlag
-        profile={article.author} 
-      />
-=======
-      <ProfileFlag profile={article.author} />
->>>>>>> Stashed changes
-      <p>
-        {article.author?.username} -{" "}
-        {new Date(article.published_at).toLocaleDateString("en-US", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        })}
-      </p>
-    </div>
-  );
-<<<<<<< Updated upstream
-}
-=======
-};
->>>>>>> Stashed changes
 
 const Tiptap = ({
   article,
@@ -95,15 +50,7 @@ const Tiptap = ({
   handlePublish?: () => void;
   setDraft?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) => {
-<<<<<<< Updated upstream
-
-
-=======
-  const [updatedArticle, setUpdatedArticle] = useState<Article>();
-  if (article) {
-    setUpdatedArticle(article);
-  }
->>>>>>> Stashed changes
+  const [updatedArticle, setUpdatedArticle] = useState<Article>(article);
   const images = new Map<string, string>();
   const content = article?.articleBody as JSONContent | undefined;
 
@@ -124,6 +71,10 @@ const Tiptap = ({
       .replace(/ +/g, "-");
   };
 
+  const parseUpdateFromInput = (e) => {
+    setUpdatedArticle({ ...updatedArticle, [e.target.name]: e.target.value });
+    handleUpdate(updatedArticle);
+  };
 
   const editor = useEditor({
     content: content,
@@ -170,11 +121,92 @@ const Tiptap = ({
   });
 
   return (
-    <>
-      <div className="publishBar">
+    <div className={styles.editorGroups}>
+      <div className={styles.publishBar}>
+<Link href={`/dashboard/articles/${article.slug}/preview`}>Preview</Link>
         <button className="publishButton" onClick={handlePublish}>
           {article.draft ? "Save Draft" : "Publish"}
         </button>
+      </div>
+      <div className="grid">
+        <div>
+          <label htmlFor="headline">Headline</label>
+          <input
+            type="text"
+            name="headline"
+            placeholder="Title"
+            value={updatedArticle.headline}
+            onChange={parseUpdateFromInput}
+          />
+        </div>
+        <div>
+          <label htmlFor="alternativeHeadline">Alternative Headline</label>
+          <input
+            type="text"
+            name="alternativeHeadline"
+            placeholder="Alternative Headline"
+            value={updatedArticle.alternativeHeadline}
+            onChange={parseUpdateFromInput}
+          />
+        </div>
+        <div>
+          <label htmlFor="description">Description</label>
+          <textarea
+            name="description"
+            placeholder="Description"
+            value={updatedArticle.description}
+            onChange={parseUpdateFromInput}
+          />
+        </div>
+        <div>
+          <label htmlFor="keywords">Keywords</label>
+          <input
+            type="text"
+            name="keywords"
+            placeholder="Keywords"
+            value={updatedArticle.keywords}
+            onChange={parseUpdateFromInput}
+          />
+        </div>
+        <div>
+          <label htmlFor="image">Image</label>
+          <input
+            type="text"
+            name="image"
+            placeholder="Image URL"
+            value={updatedArticle.image}
+            onChange={parseUpdateFromInput}
+          />
+        </div>   
+        <div>
+          <label htmlFor="slug">Slug</label>
+          <input
+            type="text"
+            name="slug"
+            placeholder="Slug"
+            value={updatedArticle.slug}
+            onChange={parseUpdateFromInput}
+          />
+        </div> 
+        <div>
+          <label htmlFor="articleSection">Article Section</label>
+          <input
+            type="text"
+            name="articleSection"
+            placeholder="Article Section"
+            value={updatedArticle.articleSection}
+            onChange={parseUpdateFromInput}
+          />
+        </div>
+        <div>
+          <label htmlFor="published_at">published_at</label>
+          <input
+            type="date"
+            name="published_at"
+            value={ updatedArticle.created_at && new Date(updatedArticle.created_at).toISOString().split("T")[0] }
+            onChange={parseUpdateFromInput}
+          />
+        </div>
       </div>
       <p className="minuteInWords">
         Reading time:{" "}
@@ -184,7 +216,7 @@ const Tiptap = ({
         Draft
       </ToggleSwitch>
       <EditorContent editor={editor} className={styles.editor} />
-    </>
+    </div>
   );
 };
 

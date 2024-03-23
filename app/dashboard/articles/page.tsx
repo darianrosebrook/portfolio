@@ -4,7 +4,7 @@ import Link from "next/link";
 import ProfileFlag from "@/components/ProfileFlag";
 async function getData() {
   const supabase = createClient();
-  const { data } = await supabase.from("articles").select(` *,  author(*)  `); 
+  const { data } = await supabase.from("articles").select(` *,  author(*)  `).order("published_at", { ascending: false });
   return data;
 }
 function Card(data: {
@@ -43,7 +43,9 @@ function Card(data: {
         <div className="meta">
           <ProfileFlag profile={data.author} />
           <small>
-            <time dateTime={date} className="small" />
+            <time dateTime={date} className="small" title={date}>
+              {date}
+            </time>
           </small>
         </div>
       </div>

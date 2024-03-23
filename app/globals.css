@@ -1,5 +1,4 @@
-:root { 
-
+:root {
   /* units */
   --du-base: 16px;
   --du-00: 0; /* 0px */
@@ -74,8 +73,13 @@
 
   /* Typography */
 
-  font-family: var(--font-inter ), sans-serif;
-  font-feature-settings: "case" 0, "dlig", "frac" 0, "dnom" 0, "numr" 0, "subs" 0, "sups" 0, "tnum" 0, "zero" 0, "ss01" 0, "ss02" 0, "ss03", "ss04", "ss05" 0, "ss06" 0, "ss07" 0, "ss08" 0, "cv01", "cv02" 0, "cv03" 0, "cv04" 0, "cv05" 0, "cv06" 0, "cv07", "cv08" 0, "cv09" 0, "cv10" 0, "cv11" 0, "cv12" 0, "cv13" 0, "cpsp" 0, "c2sc" 0, "salt" 0, "aalt" 0, "calt", "ccmp", "locl", "kern";
+  font-family: var(--font-inter), sans-serif;
+  font-feature-settings: "case" 0, "dlig", "frac" 0, "dnom" 0, "numr" 0,
+    "subs" 0, "sups" 0, "tnum" 0, "zero" 0, "ss01" 0, "ss02" 0, "ss03", "ss04",
+    "ss05" 0, "ss06" 0, "ss07" 0, "ss08" 0, "cv01", "cv02" 0, "cv03" 0, "cv04" 0,
+    "cv05" 0, "cv06" 0, "cv07", "cv08" 0, "cv09" 0, "cv10" 0, "cv11" 0, "cv12" 0,
+    "cv13" 0, "cpsp" 0, "c2sc" 0, "salt" 0, "aalt" 0, "calt", "ccmp", "locl",
+    "kern";
   font-size: var(--du-base);
   font-weight: var(--font-weight-regular);
   letter-spacing: var(--letter-spacing-tight);
@@ -89,7 +93,7 @@
     font-family: var(--font-nohemi), sans-serif;
     font-weight: 400;
     line-height: var(--line-height-collapse);
-    letter-spacing: var(--letter-spacing-wide)
+    letter-spacing: var(--letter-spacing-wide);
   }
   .heading-01,
   h1 {
@@ -146,14 +150,16 @@
   .smallest {
     font-size: var(--caption-03);
   }
-  .body-01, .medium {
+  .body-01,
+  .medium {
     font-size: var(--body-01);
   }
   .body-02,
-  p  {
+  p {
     font-size: var(--body-02);
   }
-  .body-03, .regular{
+  .body-03,
+  .regular {
     font-size: var(--body-03);
   }
   .body-04 {
@@ -163,13 +169,13 @@
   .bold,
   strong {
     font-weight: var(--font-weight-bold);
-  } 
+  }
   .body {
     font-weight: var(--font-weight-regular);
-  } 
+  }
   .emphasis,
   em {
-    font-style: italic; 
+    font-style: italic;
   }
   .uppercase {
     text-transform: uppercase;
@@ -179,7 +185,7 @@
     text-decoration: underline;
   }
   .super,
-  .sups { 
+  .sups {
     font-size: var(--caption-03);
     vertical-align: super;
   }
@@ -190,7 +196,6 @@
   .smallest {
     font-size: var(--caption-02);
   }
- 
 
   /* Layout */
   /* radius */
@@ -234,7 +239,7 @@
   }
 
   /* color */
-  --light: rgb(245, 245, 245);
+  --light: rgb(250, 250, 250);
   --white: rgb(255, 255, 255);
   --mid: rgb(200, 200, 200);
   --secondary: rgb(50, 50, 50);
@@ -283,10 +288,31 @@ body {
 body {
   display: flex;
   flex-direction: column;
+  position: relative;
   min-height: 100vh;
   padding: 1rem;
   color: var(--foreground);
   background: var(--background);
+}
+body::before {
+  filter: url(#grainy);
+  position: fixed;
+  left: 0;
+  top: 0;
+  content: "";
+  width: 100%;
+  height: 100%;
+  z-index: 3023023023020;
+  pointer-events: none;
+  opacity: 15%;
+  color: var(--foreground);
+}
+svg:has(#grainy) {
+  position: absolute;
+  cursor: none;
+  top: 0;
+  left: 0;
+  pointer-events: none;
 }
 
 main {
@@ -393,7 +419,10 @@ input[type="password"] + label,
 textarea + label {
   margin-top: var(--size-06);
 }
-input {
+input, textarea {
+  width: 100%;
+  min-height: var(--size-09);
+  resize: vertical;
   padding: var(--size-03);
   border-radius: var(--radius-02);
   border: 1px solid var(--secondary);
@@ -401,17 +430,17 @@ input {
   color: var(--foreground);
   transition: border 0.2s ease;
 }
-input:focus-visible {
+input:focus-visible, textarea:focus-visible {
   outline: var(--color-accent) auto 5px;
   border-color: var(--color-accent);
 }
-input:read-only {
+input:read-only, textarea:read-only {
   background: var(--mid);
   border-color: var(--mid);
   color: var(--secondary);
   outline: none;
 }
-input:disabled {
+input:disabled, textarea:disabled{
   background: var(--background-secondary);
   border-color: var(--mid);
   color: var(--mid);
@@ -445,7 +474,7 @@ article ol {
 
 .grid {
   display: grid;
-  gap: var(--size-02);
+  gap: var(--size-04);
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   align-content: stretch;
 }
