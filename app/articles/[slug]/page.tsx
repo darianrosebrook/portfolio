@@ -171,6 +171,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
     image: article.image,
   };
   return (
+    <section>
+
     <article className={styles.articleContent}>
       <script
         type="application/ld+json"
@@ -255,5 +257,6 @@ export default async function Page({ params }: { params: { slug: string } }) {
         )}
       </div>
     </article>
+    </section>
   );
 }

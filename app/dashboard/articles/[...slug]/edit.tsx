@@ -1,5 +1,5 @@
 "use client";
-import Tiptap from "@/components/tiptap/tiptap";
+import Tiptap from "@/components/Tiptap/tiptap";
 import debounce from "@/utils/debounce";
 import { Article } from "app/types";
 import { Database } from "app/types/supabase";
