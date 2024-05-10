@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/component/Navbar";
 import { createClient } from "@/utils/supabase/server";
-import Footer from "@/components/Footer";
+import Footer from "@/component/Footer";
 import localFont from "next/font/local";
-import SlinkyCursor from "@/components/SlinkyCursor";
+import SlinkyCursor from "@/component/SlinkyCursor";
 
 // If loading a variable font, you don't need to specify the font weight
 const nohemi = localFont({

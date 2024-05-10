@@ -1,4 +1,4 @@
-import LoginButton from "@/components/Navbar/loginButton";
+import LoginButton from "@/component/Navbar/loginButton";
 
 export default function Page() {
   return <LoginButton />;

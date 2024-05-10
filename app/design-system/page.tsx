@@ -1,7 +1,7 @@
 "use client";
-import * as AlertNotice from "@/components/AlertNotice";
-import type { AlertNoticeProps } from "@/components/AlertNotice";
-import Button from "@/components/Button";
+import * as AlertNotice from "@/component/AlertNotice";
+import type { AlertNoticeProps } from "@/component/AlertNotice";
+import Button from "@/component/Button";
 import { useState } from "react";
 import Style from "./page.module.css";
 export default function Page() {
