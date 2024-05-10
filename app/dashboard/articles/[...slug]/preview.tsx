@@ -1,6 +1,6 @@
 // Next
 import NextImage from "next/image";
-import ProfileFlag from "@/component/ProfileFlag";
+import ProfileFlag from "@/components/ProfileFlag";
 
 // TipTap
 import StarterKit from "@tiptap/starter-kit";

@@ -601,7 +601,7 @@ body {
   display: flex;
   flex-direction: column;
   position: relative;
-  min-height: 100vh; 
+  min-height: 100vh;
   color: var(--color-foreground-primary);
   background: var(--color-background-primary);
 }
@@ -616,7 +616,7 @@ body::before {
   z-index: 3023023023020;
   pointer-events: none;
   opacity: 15%;
-  color: var(--color-foreground-primary); 
+  color: var(--color-foreground-primary);
 }
 svg:has(#grainy) {
   position: absolute;
@@ -625,19 +625,19 @@ svg:has(#grainy) {
   left: 0;
   pointer-events: none;
 }
-body > svg  {
+body > svg {
   position: absolute;
   cursor: none;
   top: 0;
   left: 0;
-  pointer-events: none; 
+  pointer-events: none;
 }
 
 main {
-  display: block;
-  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
   width: 100%;
-  padding-bottom: 2rem;
   flex-grow: 1;
 }
 * + section {
@@ -892,10 +892,40 @@ thead tr:first-of-type {
 
 section {
   max-width: 1280px;
-  padding: 0 var(--size-02);
+  padding: 0 var(--size-03);
   margin: 0 auto;
 }
+.gooey {
+  filter: url(#goo);
+}
+.gooey > span {
+  background: var(--color-background-primary);
+  color: var(--color-foreground-primary);
+  padding: var(--size-05) var(--size-05);
+  /* make sure the padding apply to all the lines */
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+#pest {
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  border-radius: 999px;
+  pointer-events: none;
+  border: 2px solid var(--color-border-bold);
+}
+#pest span {
+  display: block;
+  min-height: 40px;
+  min-width: 40px;
+  border-radius: 1920px;
+  transition: border ease 0.2s;
+}
 @media screen and (min-width: 1000px) {
+  .gooey > span {
+    padding: var(--size-06) var(--size-06);
+  }
   section.home {
     display: grid;
     gap: 2rem;
@@ -944,31 +974,4 @@ section {
   .card p.medium {
     font-size: var(--body-01);
   }
-}
-.gooey {
-  filter: url(#goo);
-}
-.gooey > span {
-  background: var(--color-background-inverse);
-  color: var(--color-foreground-inverse);
-  padding: var(--size-06) var(--size-06);
-  /* make sure the padding apply to all the lines */
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
-}
-
-#pest { 
-  display: block;
-  box-sizing: border-box;
-  position: absolute;
-  border-radius: 999px;
-  pointer-events: none;
-  border: 2px solid var(--color-border-bold);
-}
-#pest span {
-  display: block;
-  min-height: 40px;
-  min-width: 40px;
-  border-radius: 1920px; 
-  transition: border ease 0.2s;
 }

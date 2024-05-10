@@ -11,25 +11,26 @@ const Footer = () => {
     youtube: "https://youtube.com/@darian.rosebrook",
     instagram: "https://instagram.com/darianrosebrook",
     medium: "https://read.compassofdesign.com/@darianrosebrook",
-  }
+  };
   return (
     <footer className={styles.footer}>
+    <ul>
+      {Object.keys(links).map((key) => (
+        <li key={key}>
+          <Button href={links[key]} variant="primary" size="small">
+            <i className={`fab fa-${key}`} aria-label={key}>
+              <span>{key}</span>
+            </i>
+          </Button>
+        </li>
+      ))}
+    </ul>
       <p>
-        <small>&copy; {currentYear} Darian Rosebrook. All rights reserved.</small>
-      </p> 
-      <ul>
-        {Object.keys(links).map((key) => (
-          <li key={key}>
-            <Button
-              href={links[key]}
-              variant="primary"
-              size="small"
-              >
-                <i className={`fab fa-${key}`} aria-label={key}><span>{key}</span></i>
-
-              </Button>
-          </li>))}
-      </ul>
+        <small>&copy; {currentYear} Darian Rosebrook.</small>
+      </p>
+      <p>
+        <small> All rights reserved.</small>
+      </p>
     </footer>
   );
 };
