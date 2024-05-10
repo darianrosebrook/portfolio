@@ -1,7 +1,7 @@
 "use client";
 import { Article } from "app/types";
 import styles from "./styles.module.css";
-import Button from "@/component/Button";
+import Button from "@/components/Button";
 
 export default function ShareLinks({
   url,

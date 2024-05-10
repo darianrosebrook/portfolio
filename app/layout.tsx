@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navbar from "@/component/Navbar";
+import Navbar from "@/components/Navbar";
 import { createClient } from "@/utils/supabase/server";
-import Footer from "@/component/Footer";
+import Footer from "@/components/Footer";
 import localFont from "next/font/local";
-import SlinkyCursor from "@/component/SlinkyCursor";
+import SlinkyCursor from "@/components/SlinkyCursor";
 
 // If loading a variable font, you don't need to specify the font weight
 const nohemi = localFont({
@@ -49,11 +49,9 @@ export default async function RootLayout({
           </filter>
         </svg>
         <Navbar isAuthed={isAuthed} />
-        <main>
-          {children}
-          <SlinkyCursor />
-        </main>
+        <main>{children}</main>
         <Footer />
+        <SlinkyCursor />
         <script
           async
           src="https://kit.fontawesome.com/cf8a647076.js"

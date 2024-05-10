@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import {Tiptap} from "@/component/Tiptap";
+import {Tiptap} from "@/components/Tiptap";
 import { Article } from "app/types";
 import debounce from "@/utils/debounce"; 
 
