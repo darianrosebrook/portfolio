@@ -1,5 +1,6 @@
 .hero { 
   position: relative; 
+  padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,6 +15,7 @@
 .headingHero h1 {  
   letter-spacing: var(--letter-spacing-tight);
   width: 100%;
+  line-height: 1.15;
   max-width: 1280px;
 }
 .headingHero h1 span:first-of-type {
@@ -21,6 +23,7 @@
   font-size: var(--heading-06);
   color: var(--color-foreground-accent);
   margin-bottom: var(--size-02);
+  z-index: 1;
 }  
 .heroImage {
   width: 100%;
@@ -34,4 +37,10 @@
 .about {
   max-width: 1280px;
   margin: 0 auto;
+}
+
+@media screen and (max-width: 992px) {
+  .headingHero h1  {
+    font-size: var(--heading-02);
+  }
 }
