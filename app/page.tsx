@@ -1,5 +1,5 @@
 import styles from "./page.module.css";
-import OutlineBox from "@/component/OutlineBox";
+import OutlineBox from "@/components/OutlineBox";
 export default function Home() {
   return (
     <>
