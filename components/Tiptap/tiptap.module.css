@@ -1,0 +1,47 @@
+.editorGroups > * + * {
+  margin-top: 1rem;
+}
+.editor > div {
+  padding: 2rem;
+  margin: 0 auto;
+  max-width: 1280px;
+  height: 80vh;
+  background: var(--background);
+  border: 1px solid var(--secondary);
+  border-radius: var(--radius-03);
+  overflow-y: scroll;
+}
+.editor *:focus-visible {
+  border: 1px solid var(--color-accent);
+  outline: 0;
+} 
+.editor .tiptap > * + * {
+  margin-top: 0.75em;
+} 
+.editor .tiptap .is-empty::before {
+  color: #adb5bd;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+.editorFrame > * + * {
+  margin-top: var(--size-07);
+}
+.editor img { 
+  cursor: grab;
+}
+.editor img.ProseMirror-selectednode {
+  outline: 1px solid var(--color-accent);
+  outline-offset: var(--size-03);
+}
+.editor img.ProseMirror-selectednode:active {
+  cursor: grabbing;
+}
+
+.publishBar {
+  display: flex;
+  justify-content: flex-end; 
+  align-items: center;
+  gap: 1rem;
+}

@@ -1,5 +1,5 @@
 "use client";
-import Tiptap from "@/components/Tiptap/tiptap";
+import { Tiptap } from "@/components/Tiptap";
 import debounce from "@/utils/debounce";
 import { Article } from "app/types";
 import { Database } from "app/types/supabase";
@@ -50,7 +50,7 @@ export default function EditArticle({
         article={updatedArticle}
         handleUpdate={handleUpdate}
         handlePublish={handlePublish}
-        setDraft={ handleToggle }
+        setDraft={handleToggle}
       />
     </article>
   );
