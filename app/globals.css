@@ -1,3 +1,4 @@
+ 
 :root {
   /* Design Tokens */
 
@@ -305,10 +306,10 @@
     --color-foreground-tertiary: var(--color-core-neutral-500);
     --color-foreground-inverse: var(--color-core-dark);
 
-    --color-foreground-accent: var(--color-core-red-500);
+    --color-foreground-accent: var(--color-core-red-400);
     --color-foreground-onColor: var(--color-core-white);
 
-    --color-foreground-danger: var(--color-core-red-500);
+    --color-foreground-danger: var(--color-core-red-400);
     --color-foreground-onDangerSubtle: var(--color-core-red-200);
     --color-foreground-success: var(--color-core-green-500);
     --color-foreground-onSuccessSubtle: var(--color-core-green-200);
@@ -727,47 +728,7 @@ button:-moz-focusring,
 [type="submit"]:-moz-focusring {
   outline: var(--focus-ring);
   outline-offset: var(--focus-ring-offset);
-}
-button,
-.button {
-  all: unset;
-  display: inline-flex;
-  align-items: center;
-  place-items: center;
-  gap: var(--size-04);
-  padding: var(--size-04) var(--size-06);
-  border: var(--border-weight-thin) solid var(--color-core-transparent);
-  border-radius: var(--radius-full);
-  background: var(--color-foreground-accent);
-  color: var(--color-background-primary);
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-button:focus-visible,
-.button:focus-visible {
-  outline: var(--focus-ring);
-  outline-offset: var(--focus-ring-offset);
-  border-radius: var(--radius-full);
-}
-button:hover,
-.button:hover {
-  background: var(--color-background-secondary);
-  border-color: var(--color-border-accent);
-  color: var(--color-foreground-onColor);
-}
-button:active,
-.button:active {
-  transform: scale(0.95);
-}
-button:disabled,
-.button:disabled {
-  background: var(--color-background-disabled);
-  cursor: not-allowed;
-}
-button + button,
-.button + .button {
-  margin-left: var(--size-04);
-}
+} 
 
 /* Form Elements */
 .form-widget > * + * {

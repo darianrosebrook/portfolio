@@ -22,6 +22,7 @@
 .headingHero h1 span:first-of-type {
   display: inline-block;
   font-size: var(--heading-06);
+  letter-spacing: var(--letter-spacing-normal);
   color: var(--color-foreground-accent);
   margin-bottom: var(--size-02);
   z-index: 1;

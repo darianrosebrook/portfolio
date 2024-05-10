@@ -1,6 +1,7 @@
 .footer {
   bottom: 0;
   display: flex;
+  justify-content: space-evenly;
   flex-direction: column;
   gap: var(--size-04);
   justify-content: space-between;
