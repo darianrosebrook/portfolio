@@ -15,10 +15,10 @@
   height: var(--size-06);
 }
 .avatar_large {
-  width: var(--size-07);
-  height: var(--size-07);
-}
-.avatar_extra-large {
   width: var(--size-08);
   height: var(--size-08);
+}
+.avatar_extra-large {
+  width: var(--size-09);
+  height: var(--size-09);
 }

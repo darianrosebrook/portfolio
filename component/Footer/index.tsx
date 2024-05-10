@@ -1,4 +1,4 @@
-import IconButton from "../iconButton";
+import Button from "../Button";
 
 import styles from "./footer.module.css";
 const Footer = () => {
@@ -11,8 +11,6 @@ const Footer = () => {
     youtube: "https://youtube.com/@darian.rosebrook",
     instagram: "https://instagram.com/darianrosebrook",
     medium: "https://read.compassofdesign.com/@darianrosebrook",
-
-
   }
   return (
     <footer className={styles.footer}>
@@ -22,13 +20,14 @@ const Footer = () => {
       <ul>
         {Object.keys(links).map((key) => (
           <li key={key}>
-            <IconButton
+            <Button
               href={links[key]}
+              variant="primary"
               size="small"
               >
                 <i className={`fab fa-${key}`} aria-label={key}><span>{key}</span></i>
 
-              </IconButton>
+              </Button>
           </li>))}
       </ul>
     </footer>

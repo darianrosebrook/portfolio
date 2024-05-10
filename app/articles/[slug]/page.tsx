@@ -16,7 +16,7 @@ import { JSONContent } from "@tiptap/react";
 
 import styles from "./styles.module.css";
 import { Article } from "app/types";
-import ProfileFlag from "@/components/ProfileFlag";
+import ProfileFlag from "@/component/ProfileFlag";
 import ShareLinks from "./ShareLinks";
 import type { Metadata, ResolvingMetadata } from "next";
 
@@ -171,6 +171,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
     image: article.image,
   };
   return (
+    <section>
+
     <article className={styles.articleContent}>
       <script
         type="application/ld+json"
@@ -255,5 +257,6 @@ export default async function Page({ params }: { params: { slug: string } }) {
         )}
       </div>
     </article>
+    </section>
   );
 }

@@ -1,0 +1,18 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+<style>
+    rect {
+        stroke: var(--foreground);
+    }
+</style>
+    <rect x="0.5" y="0.5" width="1279" height="719" />
+<rect x="0.5" y="0.5" width="426" height="239" />
+<rect x="427.5" y="0.5" width="194" height="239" />
+<rect x="622.5" y="0.5" width="425" height="239" />
+<rect x="1048.5" y="0.5" width="231" height="239" />
+<rect x="0.5" y="240.5" width="368" height="117" />
+<rect x="369.5" y="240.5" width="95" height="239" />
+<rect x="465.5" y="240.5" width="522" height="239" />
+<rect x="0.5" y="480.5" width="425" height="239" />
+<rect x="426.5" y="480.5" width="426" height="239" />
+<rect x="853.5" y="480.5" width="426" height="239" />
+</svg>

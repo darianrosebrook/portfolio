@@ -20,7 +20,7 @@ import ts from "highlight.js/lib/languages/typescript";
 import html from "highlight.js/lib/languages/xml";
 import { common, createLowlight } from "lowlight";
 
-import ToggleSwitch from "@/components/toggleSwitch";
+import ToggleSwitch from "@/component/ToggleSwitch";
 
 import CodeBlockComponent from "./CodeBlockComponent";
 const lowlight = createLowlight(common);
