@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import LogoutButton from "./logout-button";
 import styles from "./index.module.css";
 import Logo from "./logo";
-import Avatar from "../avatar/avatar";
+import Avatar from "../Avatar/avatar";
 
 export default function Navbar({ isAuthed }) {
   const pathname = usePathname();

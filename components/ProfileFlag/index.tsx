@@ -1,5 +1,5 @@
 import { Profile } from "app/types";
-import Avatar from "../avatar/avatar";
+import Avatar from "../Avatar/avatar";
 import Link from "next/link";
 import styles from "./styles.module.css";
 const ProfileFlag = ({ profile }: { profile: Profile }) => {

@@ -1,0 +1,29 @@
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.table {
+width: 100%;
+border-collapse:collapse;
+}
+.table tr {
+    padding: var(--size-04) 0; 
+    margin-top: var(--size-06);
+    border-top: 1px solid var(--color-border-primary);
+}
+.table th {
+    text-align: left;
+    padding: var(--size-04) 0; 
+    
+} 
+.table td {
+    padding: var(--size-04) 0; 
+    
+}   
+.table td > div {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-04);
+    
+    justify-content: center;
+}
