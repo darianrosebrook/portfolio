@@ -16,7 +16,7 @@ import { JSONContent } from "@tiptap/react";
 
 import styles from "./styles.module.css";
 import { Article } from "app/types";
-import ProfileFlag from "@/components/ProfileFlag";
+import ProfileFlag from "@/component/ProfileFlag";
 import ShareLinks from "./ShareLinks";
 import type { Metadata, ResolvingMetadata } from "next";
 

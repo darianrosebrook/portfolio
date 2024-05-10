@@ -1,7 +1,7 @@
 import { createClient } from "@/utils/supabase/server";
 import Image from "next/image";
 import Link from "next/link";
-import ProfileFlag from "@/components/ProfileFlag";
+import ProfileFlag from "@/component/ProfileFlag";
 async function getData() {
   const supabase = createClient();
   const { data } = await supabase.from("articles").select(` *,  author(*)  `).order("published_at", { ascending: false });
