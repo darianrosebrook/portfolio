@@ -892,6 +892,7 @@ thead tr:first-of-type {
 
 section {
   max-width: 1280px;
+  padding: 0 var(--size-02);
   margin: 0 auto;
 }
 @media screen and (min-width: 1000px) {
