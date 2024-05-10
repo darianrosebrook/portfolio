@@ -1,7 +1,7 @@
 "use client";
 import { Article } from "app/types";
 import styles from "./styles.module.css";
-import IconButton from "@/components/iconButton";
+import Button from "@/component/Button";
 
 export default function ShareLinks({
   url,
@@ -28,14 +28,14 @@ export default function ShareLinks({
       </i>
       <ul>
         <li>
-          <IconButton handleClick={handleCopy} size="medium" title="Copy to clipboard">
+          <Button variant="primary" handleClick={handleCopy} size="medium" title="Copy to clipboard">
             <i className="fa fa-link">
               <span>Copy Link</span>
             </i>
-          </IconButton>
+          </Button>
         </li>
         <li>
-          <IconButton 
+          <Button variant="primary" 
 
             title="Share on Twitter"
             handleClick={() => {
@@ -50,10 +50,10 @@ export default function ShareLinks({
             <i className="fa fa-twitter">
               <span>Share on Twitter</span>
             </i>
-          </IconButton>
+          </Button>
         </li>
         <li>
-          <IconButton
+          <Button variant="primary"
             title="Share on Facebook"
             handleClick={() => {
               window.open(
@@ -67,10 +67,10 @@ export default function ShareLinks({
             <i className="fa fa-facebook">
               <span>Share on Facebook</span>
             </i>
-          </IconButton>
+          </Button>
         </li>
         <li>
-          <IconButton
+          <Button variant="primary"
             title="Share on LinkedIn"
             handleClick={() => {
               window.open(
@@ -84,7 +84,7 @@ export default function ShareLinks({
             <i className="fa fa-linkedin">
               <span>Share on LinkedIn</span>
             </i>
-          </IconButton>
+          </Button>
         </li>
       </ul>
     </div>

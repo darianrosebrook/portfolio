@@ -1,4 +1,4 @@
-import ProfileFlag from "@/components/ProfileFlag";
+import ProfileFlag from "@/component/ProfileFlag";
 import { createClient } from "@/utils/supabase/server";
 import Image from "next/image";
 import Link from "next/link";
@@ -63,9 +63,9 @@ function Card(data: {
         </div>
       </div>
       <div>
-        <Link href={`/articles/${data.slug}`}>
-          <h2 className="medium">{data.headline}</h2>
-        </Link>
+        <h2 className="medium">
+          <Link href={`/articles/${data.slug}`}>{data.headline}</Link>
+        </h2>
         <p>{description}</p>
       </div>
     </article>
@@ -74,7 +74,7 @@ function Card(data: {
 export default async function Page() {
   const articles = await getData();
   return (
-    <div className="grid">
+    <section className="grid">
       {articles.map((article) => (
         <Card
           key={article.id}
@@ -85,7 +85,7 @@ export default async function Page() {
           slug={article.slug}
           published_at={article.published_at}
         />
-      ))}  
-    </div>
+      ))}
+    </section>
   );
 }
