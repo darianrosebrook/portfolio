@@ -1564,7 +1564,7 @@
     },
     "xl": {
       "$type": "dimension",
-      "$value": "1280px"
+      "$value": "1440px"
     },
     "xxl": {
       "$type": "dimension",

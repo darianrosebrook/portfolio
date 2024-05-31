@@ -55,17 +55,17 @@ function Card(data: {
             height={200}
           />
         </Link>
-        <div className="meta">
-          <ProfileFlag profile={data.author} />
-          <small>
-            <time dateTime={date}>{date}</time>
-          </small>
-        </div>
+      </div>
+      <div className="meta">
+        <ProfileFlag profile={data.author} />
+        <small>
+          <time dateTime={date}>{date}</time>
+        </small>
       </div>
       <div>
-        <h2 className="medium">
+        <h5>
           <Link href={`/articles/${data.slug}`}>{data.headline}</Link>
-        </h2>
+        </h5>
         <p>{description}</p>
       </div>
     </article>
