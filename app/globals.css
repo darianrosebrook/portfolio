@@ -93,7 +93,7 @@
   --breakpoint-sm: 640px;
   --breakpoint-md: 768px;
   --breakpoint-lg: 1024px;
-  --breakpoint-xl: 1280px;
+  --breakpoint-xl: 1440px;
   --breakpoint-xxl: 1536px;
   --breakpoint-xxxl: 1920px;
 
@@ -645,6 +645,11 @@ main {
   margin-top: var(--size-10);
 }
 
+/* indent subsequent paragraphs */
+p + p {
+  text-indent: 1em;
+}
+
 hr {
   box-sizing: content-box;
   height: 0;
@@ -662,7 +667,7 @@ ul {
   padding: 0 0 0 1rem;
   margin: 0;
 }
-h3 span {
+h4 span, h3 span {
   display: block;
   color: var(--color-foreground-secondary);
   font-weight: var(--font-weight-light);
@@ -822,18 +827,15 @@ article ol {
   background: var(--color-background-primary);
   box-shadow: var(--elevation);
   transition: box-shadow 0.2s ease;
-}
-.card p.medium {
-  font-size: var(--body-03);
-}
+} 
 .card a {
   color: var(--color-foreground-primary);
+} 
+.card > * + * {
+  margin-top: var(--size-06);
 }
-.card .media {
-  margin-right: var(--size-05);
-}
-.card .media + div {
-  margin-top: var(--size-04);
+.card img {
+  width: 100%;
 }
 
 .meta {
@@ -851,9 +853,10 @@ thead tr:first-of-type {
   border-top: none;
 }
 
-section {
-  max-width: 1280px;
-  padding: 0 var(--size-03);
+section, header, footer {
+  width: 100%;
+  max-width: 1440px;
+  padding: 0 var(--size-06);
   margin: 0 auto;
 }
 .gooey {
@@ -891,7 +894,7 @@ section {
     display: grid;
     gap: 2rem;
     grid-template-columns: 1fr 1fr;
-    max-width: 1280px;
+    max-width: 1440px;
     margin: 0 auto;
   }
   main section + section {
@@ -912,10 +915,7 @@ section {
   }
   .card {
     flex-direction: column;
-  }
-  .card p {
-    font-size: var(--body-03);
-  }
+  } 
   .card .media {
     width: 100%;
     margin-right: 0;
@@ -931,8 +931,5 @@ section {
     flex-direction: row;
     gap: var(--size-03);
     align-items: center;
-  }
-  .card p.medium {
-    font-size: var(--body-01);
-  }
+  } 
 }
