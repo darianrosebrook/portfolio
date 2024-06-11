@@ -33,7 +33,6 @@ function getArticleContent(data: JSONContent) {
     }),
     CodeBlockLowlight,
   ]);
-  console.log(html);
   const h1FromHTML = html.match(/<h1>(.*?)<\/h1>/);
   const imageFromHTML = html.match(/<img(.*?)>/);
   h1FromHTML && (html = html.replace(h1FromHTML[0], ""));
@@ -42,7 +41,7 @@ function getArticleContent(data: JSONContent) {
   return content;
 }
 
-export default async function Notes({
+const PreviewArticle = function PreviewArticle({
   article,
 }: {
   article: Database["public"]["Tables"]["articles"]["Row"];
@@ -97,4 +96,6 @@ export default async function Notes({
     </>
   );
   return <article className={styles.articleContent}>{format}</article>;
-}
+};
+
+export default PreviewArticle;

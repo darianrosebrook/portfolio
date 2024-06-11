@@ -2,7 +2,7 @@
 import { useRef } from 'react';
 import Spline from '@splinetool/react-spline';
 
-export default function App() {
+export default function Backdrop() {
   const spline = useRef();
 
   function onLoad(splineApp) {
