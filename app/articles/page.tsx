@@ -2,6 +2,7 @@ import ProfileFlag from "@/components/ProfileFlag";
 import { createClient } from "@/utils/supabase/server";
 import Image from "next/image";
 import Link from "next/link";
+import Styles from "./styles.module.css";
 async function getData() {
   const supabase = createClient();
   const { data, count } = await supabase
@@ -74,7 +75,7 @@ function Card(data: {
 export default async function Page() {
   const articles = await getData();
   return (
-    <section className="grid">
+    <section className={`grid content ${Styles.articleGrid}`}>
       {articles.map((article) => (
         <Card
           key={article.id}

@@ -1,14 +1,14 @@
 export default function Page() {
   return (
     <>
-      <section>
+      <section className="content">
         <h2>Highlighted Projects</h2>
         <p>
           These are just the favorites of some recent work. Full case studies
           available on request.
         </p>
       </section>
-      <section data-print="true" className="projects">
+      <section data-print="true" className="projects content">
         <ul className="experience">
           <li>
             <h3 className="dateYear">

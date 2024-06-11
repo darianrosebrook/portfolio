@@ -91,33 +91,39 @@ export default function Page() {
 
   return (
     <>
-      <section>
+      <section className="content">
         <h1>Design System</h1>
-        {/* <input type="text" placeholder="Search" />
-      <h2>Alerts</h2>
-      {alerts.map((alert, index) => (
-        <AlertNotice.Container
-          key={index}
-          index={index}
-          status={alert.status}
-          level={alert.level}
-          dismissible={alert.dismissible}
-          onDismiss={onDismiss}
-        >
-          {alert && <AlertNotice.Icon status={alert.status} />}
-          {alert && <AlertNotice.Title> {alert.title}</AlertNotice.Title>}
-          <AlertNotice.BodyContent>
-            <p className="body-01">
-              This is a <strong>{alert.level}</strong> level{" "}
-              <strong>{alert.status}</strong> alert
-            </p>
-          </AlertNotice.BodyContent>
-        </AlertNotice.Container>
-      ))} */}
-      </section>
-      <section>
         <h2>Work in progress, gonna be cool, I swear 😘</h2>
         {/* <h2>Buttons</h2>
+        <input type="text" placeholder="Search" />
+        </section>
+        <section className="content">
+        <h2>Alerts</h2>
+      </section>
+      <section>
+        {alerts.map((alert, index) => (
+          <AlertNotice.Container
+            key={index}
+            index={index}
+            status={alert.status}
+            level={alert.level}
+            dismissible={alert.dismissible}
+            onDismiss={onDismiss}
+          >
+            {alert && <AlertNotice.Icon status={alert.status} />}
+            {alert && <AlertNotice.Title> {alert.title}</AlertNotice.Title>}
+            <AlertNotice.BodyContent>
+              <p className="body-01">
+                This is a <strong>{alert.level}</strong> level{" "}
+                <strong>{alert.status}</strong> alert
+              </p>
+            </AlertNotice.BodyContent>
+          </AlertNotice.Container>
+        ))}
+      </section>
+      <section className="content">
+        <h2>Buttons</h2>
+
         <table className={Style.table}>
           <thead>
             <tr>

@@ -1,5 +1,9 @@
 import LoginButton from "@/components/Navbar/loginButton";
 
 export default function Page() {
-  return <LoginButton />;
+  return (
+    <section>
+      <LoginButton />
+    </section>
+  );
 }

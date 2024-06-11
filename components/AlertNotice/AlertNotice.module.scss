@@ -57,19 +57,19 @@
     padding: var(--size-06) var(--size-08);
     margin: 0 -1rem;
     &--info {
-      color: var(--color-foreground-on-color);
+      color: var(--color-foreground-onColor);
       background: var(--color-background-info-strong);
     }
     &--warning {
-      color: var(--color-foreground-on-color);
+      color: var(--color-foreground-onColor);
       background: var(--color-background-warning-strong);
     }
     &--danger {
-      color: var(--color-foreground-on-color);
+      color: var(--color-foreground-onColor);
       background: var(--color-background-danger-strong);
     }
     &--success {
-      color: var(--color-foreground-on-color);
+      color: var(--color-foreground-onColor);
       background: var(--color-background-success-strong);
     }
   }

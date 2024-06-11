@@ -227,7 +227,7 @@
   --color-foreground-inverse: var(--color-core-light);
 
   --color-foreground-accent: var(--color-core-red-500);
-  --color-foreground-onColor: var(--color-core-white);
+  --color-foreground-onColor: var(--color-foreground-inverse);
 
   --color-foreground-danger: var(--color-core-red-500);
   --color-foreground-onDangerSubtle: var(--color-core-red-700);
@@ -307,15 +307,15 @@
     --color-foreground-inverse: var(--color-core-dark);
 
     --color-foreground-accent: var(--color-core-red-400);
-    --color-foreground-onColor: var(--color-core-white);
+    --color-foreground-onColor: var(--color-foreground-primary);
 
     --color-foreground-danger: var(--color-core-red-400);
     --color-foreground-onDangerSubtle: var(--color-core-red-200);
-    --color-foreground-success: var(--color-core-green-500);
+    --color-foreground-success: var(--color-core-green-400);
     --color-foreground-onSuccessSubtle: var(--color-core-green-200);
-    --color-foreground-warning: var(--color-core-orange-500);
+    --color-foreground-warning: var(--color-core-orange-400);
     --color-foreground-onWarningSubtle: var(--color-core-orange-200);
-    --color-foreground-info: var(--color-core-blue-500);
+    --color-foreground-info: var(--color-core-blue-400);
     --color-foreground-onInfoSubtle: var(--color-core-blue-200);
 
     --color-foreground-hover: var(--color-core-neutral-300);
@@ -400,7 +400,7 @@
   h5,
   h6 {
     font-family: var(--font-nohemi), sans-serif;
-    font-weight: 400;
+    font-weight: 300;
     line-height: var(--line-height-collapse);
     letter-spacing: var(--letter-spacing-wide);
   }
@@ -639,6 +639,7 @@ main {
   flex-direction: column;
   margin: auto;
   width: 100%;
+  min-height: 80vh;
   flex-grow: 1;
 }
 * + section {
@@ -789,8 +790,11 @@ textarea:disabled {
 }
 
 /* Typography */
+.content {
+  padding: 0 var(--size-06);
+}
 * + .content {
-  margin-top: var(--size-03);
+  margin-top: var(--size-07);
 }
 .experience {
   list-style-type: none;
@@ -854,9 +858,7 @@ thead tr:first-of-type {
 }
 
 section, header, footer {
-  width: 100%;
-  max-width: 1440px;
-  padding: 0 var(--size-06);
+  width: 100%;  
   margin: 0 auto;
 }
 .gooey {
@@ -889,6 +891,10 @@ section, header, footer {
 @media screen and (min-width: 1000px) {
   .gooey > span {
     padding: var(--size-06) var(--size-06);
+  }
+  .content {
+    max-width: 1440px;
+    padding: 0;
   }
   section.home {
     display: grid;
