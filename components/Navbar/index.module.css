@@ -1,3 +1,6 @@
+.navContainer {
+  padding: var(--size-02) var(--size-06);
+}
 .logo {
   width: var(--size-07);
   height: var(--size-07);

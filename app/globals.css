@@ -894,7 +894,7 @@ section, header, footer {
   }
   .content {
     max-width: 1440px;
-    padding: 0;
+    padding: 0 var(--size-06);
   }
   section.home {
     display: grid;
