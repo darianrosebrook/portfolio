@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Page() {
   return (
     <>
@@ -7,6 +9,7 @@ export default function Page() {
           These are just the favorites of some recent work. Full case studies
           available on request.
         </p>
+        <Link href="/work/design-process">Design Process</Link>
       </section>
       <section data-print="true" className="projects content">
         <ul className="experience">
@@ -15,7 +18,9 @@ export default function Page() {
               <span>2023</span>
             </h3>
             <h4>
-              Iconography Sync <span> at eBay</span>
+              <Link href={"/work/iconography-sync"}>
+                Iconography Sync <span> at eBay</span>
+              </Link>
             </h4>
             <div className="content">
               <p>
@@ -60,12 +65,16 @@ export default function Page() {
             </h4>
             <div className="content">
               <p>
-                Me and my coworker Catalina Manea interviewed over 40 designers,
-                30 developers,and 11 project managers to understand the current
-                landscape of design handoff and design/developer collaboration.
-                We worked with them to identify strong key points along our
-                product process that were critically broken, requiring some form
-                of intervention and reeducation to fix.
+                Me and my coworker{" "}
+                <Link href={"https://www.catalinamanea.com/"} target="_blank">
+                  Catalina Manea
+                </Link>{" "}
+                interviewed over 40 designers, 30 developers,and 11 project
+                managers to understand the current landscape of design handoff
+                and design/developer collaboration. We worked with them to
+                identify strong key points along our product process that were
+                critically broken, requiring some form of intervention and
+                reeducation to fix.
               </p>
               <p>
                 Together, we set out to bring these pain points directly to the
