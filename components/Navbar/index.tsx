@@ -20,7 +20,7 @@ export default function Navbar({ isAuthed }) {
     ["/about", "About"],
   ];
   return (
-    <header>
+    <header className={styles.navContainer}>
       <nav className={styles.nav}>
         <Link href="/" className="logoLink">
           <Logo />
