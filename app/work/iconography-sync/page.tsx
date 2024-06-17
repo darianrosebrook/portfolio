@@ -5,11 +5,84 @@ import Styles from "../../articles/[slug]/styles.module.css";
 type PageProps = {};
 
 const Page: React.FC<PageProps> = () => {
+  const enterPassForImages = () => {
+    const password = prompt("Enter password to view images");
+    if (password === "password") {
+      const images = document.querySelectorAll("img");
+      images.forEach((img) => {
+        const src = img.getAttribute("data-src");
+        img.setAttribute("src", src);
+      });
+    }
+  };
+  const images = {
+    "icon-tool.jpg": {
+      alt: "Icon Sync",
+      src: "/icon-tool/icon-tool.jpg",
+      width: 800,
+      height: 400,
+    },
+    "icon-tool-01.png": {
+      alt: "Icon Sync",
+      src: "/icon-tool/icon-tool-01.png",
+      width: 800,
+      height: 400,
+    },
+    "icon-tool-02.png": {
+      alt: "Icon Sync",
+      src: "/icon-tool/icon-tool-02.png",
+      width: 800,
+      height: 400,
+    },
+    "icon-tool-03.png": {
+      alt: "Icon Sync",
+      src: "/icon-tool/icon-tool-03.png",
+      width: 800,
+      height: 400,
+    },
+
+    "icon-tool-04.png": {
+      alt: "Icon Sync",
+      src: "/icon-tool/icon-tool-04.png",
+      width: 800,
+      height: 400,
+    },
+    "icon-tool-05.png": {
+      alt: "Icon Sync",
+      src: "/icon-tool/icon-tool-05.png",
+      width: 800,
+      height: 400,
+    },
+    "icon-tool-06.png": {
+      alt: "Icon Sync",
+      src: "/icon-tool/icon-tool-06.png",
+      width: 800,
+      height: 400,
+    },
+
+    "icon-tool-07.png": {
+      alt: "Icon Sync",
+      src: "/icon-tool/icon-tool-07.png",
+      width: 800,
+      height: 400,
+    },
+    "icon-tool-08.png": {
+      alt: "Icon Sync",
+      src: "/icon-tool/icon-tool-08.png",
+      width: 800,
+      height: 400,
+    },
+  };
   return (
     <section className="content">
       <Link href="/work">Previous</Link>
       <article className={Styles.articleContent}>
-        <Image src="/icon-tool.jpg" alt="Icon Sync"  width={800} height={400} />
+        <Image
+          src="/icon-tool/icon-tool.jpg"
+          alt="Icon Sync"
+          width={800}
+          height={400}
+        />
         <h2>Iconography Sync</h2>
         <p>
           I&rsquo;ve created a figma plugin for design system teams that allows
@@ -40,42 +113,56 @@ const Page: React.FC<PageProps> = () => {
           developer, our Figma library, our Web, Android, and iOS libraries, and
           our documentation site are all updated at the same time.
         </p>
-        <h3>Addressing the issue</h3>
-        <h4>
-          <>Visual discrepancies</>
-        </h4>
-        <p>
-          Because of our manual process for updating icons, iconography was
-          often different across platforms due to legacy icons not being
-          removed, being incorrectly imported, or altogether
-        </p>
-        <h4>
-          <>Naming differences</>
-        </h4>
-        <p>
-          Icons were notoriously named different things across different
-          platforms, leading to references to the wrong icons, or icons under
-          the wrong reference
-        </p>
-        <h4>
-          <>Legacy versions</>
-        </h4>
-        <p>
-          If iconography was transferred by hand, finding old versions, or
-          managing updates could easily be overlooked when making changes to the
-          platform libraries
-        </p>
-        <h2>Addressing the workflow</h2>
-        <p>
-          I met with each of the platform teams and design system team to
-          understand the process of going from Figma to code.
-        </p>
-        <h4>Redundant processes</h4>
-        <p>
-          These icons were being optimized individually before being added to
-          the folder, only to be re-optimized and added into each project by the
-          consuming platform teams
-        </p>
+        <h3>Main Goals</h3>
+        <Image {...images["icon-tool-01.png"]} />
+        <aside>
+          <Image {...images["icon-tool-02.png"]} />
+          <div>
+            <h3>Addressing the issue</h3>
+            <h4>
+              <>Visual discrepancies</>
+            </h4>
+            <p>
+              Because of our manual process for updating icons, iconography was
+              often different across platforms due to legacy icons not being
+              removed, being incorrectly imported, or altogether
+            </p>
+            <h4>
+              <>Naming differences</>
+            </h4>
+            <p>
+              Icons were notoriously named different things across different
+              platforms, leading to references to the wrong icons, or icons
+              under the wrong reference
+            </p>
+            <h4>
+              <>Legacy versions</>
+            </h4>
+            <p>
+              If iconography was transferred by hand, finding old versions, or
+              managing updates could easily be overlooked when making changes to
+              the platform libraries
+            </p>
+          </div>
+        </aside>
+        <aside>
+          <div>
+            <h4>Addressing the workflow</h4>
+            <p>
+              I met with each of the platform teams and design system team to
+              understand the process of going from Figma to code.
+            </p>
+            <h4>Redundant processes</h4>
+            <p>
+              These icons were being optimized individually before being added
+              to the folder, only to be re-optimized and added into each project
+              by the consuming platform teams
+            </p>
+          </div>
+          <Image {...images["icon-tool-03.png"]} />
+        </aside>
+        <Image {...images["icon-tool-04.png"]} />
+
         <h3>Simplifying our process by removing redundancy</h3>
         <p>
           By taking stock of all the steps along the way of having design to
@@ -112,38 +199,55 @@ const Page: React.FC<PageProps> = () => {
         </ul>
 
         <h3>Transitioning to automation</h3>
-        <h4>
-          <>Automating the flow</>
-        </h4>
-        <p>
-          Once the key moments were defined, we were able to take the laborious
-          time-heavy moments of exporting, optimizing, and importing iconography
-          and hand that off to a custom tool built to handle eBay’s current
-          needs
-        </p>
-        <h4>
-          <>Introducing versioning</>
-        </h4>
-        <p>
-          By intelligently connecting Figma to GitHub we’re in a much better
-          space to understand and track the changes across icons while still
-          being native to the user’s experience
-        </p>
+        <aside>
+          <Image {...images["icon-tool-05.png"]} />
+          <div>
+            <h4>
+              <>Automating the flow</>
+            </h4>
+            <p>
+              Once the key moments were defined, we were able to take the
+              laborious time-heavy moments of exporting, optimizing, and
+              importing iconography and hand that off to a custom tool built to
+              handle eBay’s current needs
+            </p>
+            <h4>
+              <>Introducing versioning</>
+            </h4>
+            <p>
+              By intelligently connecting Figma to GitHub we’re in a much better
+              space to understand and track the changes across icons while still
+              being native to the user’s experience
+            </p>
+          </div>
+        </aside>
+        <aside>
+          <Image {...images["icon-tool-06.png"]} />
+          <div>
+            <p>
+              Working together with Design Technology I had been given the green
+              light for the development direction and for the design direction
+              by our Icon designer.
+            </p>
+          </div>
+        </aside>
 
-        <p>
-          Working together with Design Technology I had been given the green
-          light for the development direction and for the design direction by
-          our Icon designer.
-        </p>
-        <p>
-          I would further work with our designer on more specific details like
-          how to address optimization details across iconography
-        </p>
-        <p>
-          These optimization steps could be brought into the same process behind
-          the scenes of the designer’s output, meaning the designer just had to
-          verify the design still looked correct and then forward on the icon.
-        </p>
+        <h3>Results</h3>
+        <aside>
+          <div>
+            <p>
+              I would further work with our designer on more specific details
+              like how to address optimization details across iconography
+            </p>
+            <p>
+              These optimization steps could be brought into the same process
+              behind the scenes of the designer’s output, meaning the designer
+              just had to verify the design still looked correct and then
+              forward on the icon.
+            </p>
+          </div>
+          <Image {...images["icon-tool-07.png"]} />
+        </aside>
 
         <p>
           The overall process when finally hooked up would enable our icon
@@ -164,13 +268,13 @@ const Page: React.FC<PageProps> = () => {
           </li>
           <li>Pull the changes down to their local machine</li>
         </ul>
-        <h4>
+        <h5>
           <>
             The changes used to take a whole quarter to become fully available
             to developers. Now, it takes as much time as this 1 minute video
             here
           </>
-        </h4>
+        </h5>
         <video
           src="https://somagnetic.notion.site/signed/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F993bf54c-76d8-4a31-8618-b1d61384a010%2F610a59cb-3678-4205-ba5d-72c256e6c573%2FIcon_Sync.mov?table=block&id=3e3e6ba6-2e8e-46d8-90a2-4d03b21b80e6&spaceId=993bf54c-76d8-4a31-8618-b1d61384a010&name=Icon%20Sync.mov&cache=v2"
           controls

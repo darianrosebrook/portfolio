@@ -22,7 +22,7 @@ export default function Page() {
                 Iconography Sync <span> at eBay</span>
               </Link>
             </h4>
-            <div className="content"> 
+            <div className="content">
               <p>
                 I&apos;ve created a figma plugin for design system teams that
                 allows design and development to be closer in sync, allowing for

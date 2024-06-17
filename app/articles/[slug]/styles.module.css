@@ -9,6 +9,9 @@
 .articleContent > * + * {
   margin-top: var(--size-07);
 }
+.articleContent aside div > * + * {
+  margin-top: var(--size-07);
+}
 .articleLede > * + * {
   margin-top: var(--size-04);
 }
@@ -63,5 +66,10 @@
   .byline {
     flex-direction: row;
     align-items: center;
+  }
+  .articleContent aside {
+    display: grid;
+    gap: var(--size-07);
+    grid-template-columns: 1fr 1fr;
   }
 }
