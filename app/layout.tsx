@@ -68,7 +68,7 @@ export default async function RootLayout({
               <feColorMatrix
                 in="blur"
                 mode="matrix"
-                values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -4"
+                values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -8"
                 result="goo"
               />
               <feComposite in="SourceGraphic" in2="goo" operator="atop" />
