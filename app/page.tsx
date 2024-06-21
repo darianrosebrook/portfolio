@@ -9,9 +9,13 @@ export default function Home() {
         </div>
         <div className={styles.headingHero}>
           <h1 className="gooey">
-            <span>Product designer &amp; Developer</span>
+            <span>Product Designer &amp; Developer</span>
             <br />
-            <span>Design Systems and Tooling</span>
+            <span>
+              Connecting Design &rarr; Code 
+              with Design Systems &amp; 
+              Custom Plugins
+            </span>
           </h1>
         </div>
       </section>
