@@ -16,7 +16,7 @@ export default function Home() {
               with Design Systems &amp; 
               Custom Plugins
             </span>
-          </h1>
+            </h1>
         </div>
       </section>
     </>

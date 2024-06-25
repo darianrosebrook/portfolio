@@ -73,10 +73,10 @@ function Card(data: {
   );
 }
 export default async function Page() {
-  const articles = await getData();
+  const articles = await getData() || []
   return (
     <section className={`grid content ${Styles.articleGrid}`}>
-      {articles.map((article) => (
+      {articles.length > 0 && articles.map((article) => (
         <Card
           key={article.id}
           image={article.image}
