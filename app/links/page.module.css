@@ -1,0 +1,15 @@
+.linktree {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.linktree li {
+    display: flex;
+    gap: 1rem;
+}
+.avatarFlag {
+    display: flex;
+    flex-direction: row;  
+    gap: 1rem; 
+    align-items: center;
+}
