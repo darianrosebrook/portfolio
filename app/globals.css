@@ -638,18 +638,13 @@ main {
   display: flex;
   flex-direction: column;
   margin: auto;
-  width: 100%;
-  min-height: 80vh;
+  width: 100%; 
   flex-grow: 1;
 }
 * + section {
   margin-top: var(--size-10);
 }
-
-/* indent subsequent paragraphs */
-p + p {
-  text-indent: 1em;
-}
+ 
 
 hr {
   box-sizing: content-box;
@@ -677,13 +672,16 @@ h4 span, h3 span {
 img,
 picture,
 video,
-canvas,
-svg {
+canvas {
   display: block;
   border-radius: var(--size-03);
   max-width: 100%;
   height: auto;
 }
+.avatar {
+  border-radius: var(--radius-full);
+}
+
 a {
   color: inherit;
   text-decoration: none;
