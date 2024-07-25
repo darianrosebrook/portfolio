@@ -72,6 +72,7 @@ interface RenderedStyle {
     translateX: { previous: number; current: number };
     contrast: { previous: number; current: number };
     brightness: { previous: number; current: number };
+    [key: string]: number | { previous: number; current: number };
 }
 
 const Blueprints: React.FC = () => {
@@ -124,13 +125,19 @@ const Blueprints: React.FC = () => {
             for (let prop in config) {
                 if (config[prop as keyof typeof config]) {
                     const styleProp = prop as keyof RenderedStyle;
-                    style[styleProp].current = mappedValues[styleProp];
-                    const amt = styleProp === 'scaleAmt' ? style.scaleAmt : style.amt;
-                    style[styleProp].previous = linearInterpolation(
-                        style[styleProp].previous,
-                        style[styleProp].current,
-                        amt
-                    );
+                    if (typeof style[styleProp] === 'object') {
+                        style[styleProp] = {
+                            ...style[styleProp],
+                            current: mappedValues[styleProp],
+                            previous: linearInterpolation(
+                                style[styleProp].previous,
+                                mappedValues[styleProp],
+                                styleProp === 'scaleAmt' ? style.scaleAmt : style.amt
+                            )
+                        };
+                    } else {
+                        style[styleProp] = mappedValues[styleProp];
+                    }
                 }
             }
         });
