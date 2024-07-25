@@ -1,30 +1,24 @@
-<style>
-    * {
-        border: 1px solid red;
-    }
-    .isometric {
+<style> 
+    .isometric-container {
         position: relative;
-        display: inline-block;
+        font-family: sans-serif;
     }
 
-    .isometric svg {
-        height: 100%;
-        width: auto;
-    }
-
-    .isometric .cardContent {
+    .isometric-text {
+        position: absolute;
         display: flex;
         flex-direction: column;
+        width: 100%;
+        height: 60%;
         justify-content: space-between;
-        height: 100%;
-        color: black;
-        position: absolute;
-        top: 16%;
-        left: 4%;
-        transform: rotate(30deg) skew(30deg);
+        top: 50%;
+        left: 50%;
+        transform:
+            translate(-50%, -50%) matrix(0.866025, 0.5, 0, 1, 0, 0); 
+        color: #000; 
     }
 </style>
-<div class="isometric">
+<div class="isometric-container">
     <svg width="142" height="265" viewBox="0 0 142 265" fill="none" xmlns="http://www.w3.org/2000/svg">
 
         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -57,7 +51,7 @@
             </clipPath>
         </defs>
     </svg>
-    <div class="cardContent">
+    <div class="isometric-text">
         <p>Component
             13</p>
         <div>
