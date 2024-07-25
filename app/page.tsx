@@ -1,3 +1,4 @@
+import Status from "@/components/Status";
 import styles from "./page.module.css";
 import OutlineBox from "@/components/Backdrop";
 export default function Home() {
@@ -8,15 +9,16 @@ export default function Home() {
           <OutlineBox />
         </div>
         <div className={styles.headingHero}>
+          <div className="gooey"><Status status="error">Available for work</Status></div>
           <h1 className="gooey">
             <span>Product Designer &amp; Developer</span>
             <br />
             <span>
-              Connecting Design &rarr; Code 
-              with Design Systems &amp; 
+              Connecting Design &rarr; Code
+              with Design Systems &amp;
               Custom Plugins
             </span>
-            </h1>
+          </h1>
         </div>
       </section>
     </>

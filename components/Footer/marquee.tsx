@@ -15,8 +15,8 @@ const Marquee: React.FC<MarqueeProps> = ({ title, items, children }) => {
   const href = items[0];
   let icon = items[1]; 
   const marqueeRef = useRef(null); // Create a ref for the marquee element
-  const clone = (
-    <div className={Styles.box}>
+  const clone = (index) => (
+    <div className={Styles.box} key={index}>
       <p className={`heading-04 ${Styles.socialLinkTitle}`}>
         {title.toUpperCase()}
         <i className={`fa${icon === "file-alt" ? "l" : 'b'} fa-${icon}`}></i>
@@ -49,7 +49,7 @@ const Marquee: React.FC<MarqueeProps> = ({ title, items, children }) => {
           <i className={`fal fa-arrow-up-right`}></i>
         </h4>
         <div className={Styles.marquee} ref={marqueeRef}>
-          {clones}
+          {clones && clones.map((clone, index) => clone(index))}
         </div>
       </Link>
     </>
