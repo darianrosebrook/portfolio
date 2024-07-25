@@ -1,23 +1,16 @@
 .status {
-    display: inline-grid;
-    grid-template-columns: 1fr auto;
-    align-items: center;
-    justify-content: center;
-    border: var(--color-border-bold) solid 2px;
-    border-radius: var(--radius-full);
-    padding: 0.5rem 1rem;
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: var(--color-foreground-primary);
-    background: var(--color-background-primary);
+  display: inline-grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  border: var(--color-border-bold) solid 2px;
+  border-radius: var(--radius-full);
+  padding: 0.5rem 1rem; 
+  color: var(--color-foreground-primary);
+  background: var(--color-background-primary);
+  fill: var(--color-foreground-accent);
 }
-
-.status--indicator {
-    content: '';
-    display: inline-block;
-    width: 1rem;
-    height: 1rem;
-    margin-right: 0.5rem;
-    border-radius: 50%;
-    background-color: var(--color-foreground-primary);
+.status svg {
+  fill: var(--color-foreground-accent);
 }

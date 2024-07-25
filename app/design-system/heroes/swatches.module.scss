@@ -1,0 +1,25 @@
+.gridContainer {
+  width: 100%; 
+  height: 100%;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+}
+
+.gridContent {
+  gap: 2vh;
+  flex: none;
+  position: relative;
+  width: 200vh;
+  transform-origin: center center;
+}
+
+.colorSwatches {
+  display: flex;  
+}
+.colorSwatchContainer {
+  position: relative;
+  display: flex; 
+  gap: 2vh;
+  transition: gap 2.5s; 
+}

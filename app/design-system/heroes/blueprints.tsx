@@ -1,71 +1,15 @@
 'use client'
-import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import React, { useState, useRef, useCallback, useMemo } from 'react';
 import Styles from './blueprints.module.scss';
-import { getMousePos, linearInterpolation } from '@/utils';
+import { linearInterpolation } from '@/utils';
 import { gsap } from 'gsap';
 import { Flip } from "gsap/Flip";
 import { useGSAP } from '@gsap/react';
+import SvgIllustration from '../svgIllustration';
+import { useMousePosition } from './useMousePosition';
+import { useWindowSize } from './useWindowSize';
 
-gsap.registerPlugin(Flip); 
-// Custom throttle function
-const throttle = (func: (...args: any[]) => void, limit: number) => {
-    let inThrottle: boolean;
-    return function(this: any, ...args: any[]) {
-        const context = this;
-        if (!inThrottle) {
-            func.apply(context, args);
-            inThrottle = true;
-            setTimeout(() => inThrottle = false, limit);
-        }
-    }
-}; // Custom hook for window size 
-const useWindowSize = () => {
-    const isClient = typeof window === 'object';
-
-    const getSize = () => ({
-        width: isClient ? window.innerWidth : 0,
-        height: isClient ? window.innerHeight : 0
-    });
-
-    const [winsize, setWinsize] = useState(getSize);
-
-    useEffect(() => {
-        if (!isClient) {
-            return;
-        }
-
-        const handleResize = () => {
-            setWinsize(getSize());
-        };
-
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, [isClient]);
-
-    return winsize;
-};
-// Custom hook for mouse position
-const useMousePosition = () => {
-    const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-
-    const handleMouseMove = useCallback( (ev: MouseEvent | Touch) => {
-        const pos = getMousePos(ev);
-        setMousePos(pos);
-    } , []); // Throttle the event handler to limit updates to once every 50ms
-
-    useEffect(() => {
-        window.addEventListener('mousemove', handleMouseMove);
-        window.addEventListener('touchmove', (ev) => handleMouseMove(ev.touches[0]));
-
-        return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
-            window.removeEventListener('touchmove', handleMouseMove as any);
-        };
-    }, [handleMouseMove]);
-
-    return mousePos;
-};
-
+gsap.registerPlugin(Flip);
 interface RenderedStyle {
     amt: number;
     scaleAmt: number;
@@ -111,11 +55,11 @@ const Blueprints: React.FC = () => {
                 brightness: { previous: 100, current: 100 }
             };
         })
-    , [numRows, middleRowIndex]);
+        , [numRows, middleRowIndex]);
 
     const calculateMappedValues = useCallback(() => ({
         translateX: ((mousePos.x / winsize.width) * 2 - 1) * 25 * winsize.width / 100,
-        contrast: 100 - Math.pow(Math.abs((mousePos.x / winsize.width) * 2 - 1), 2) * (100 - 330), 
+        contrast: 100 - Math.pow(Math.abs((mousePos.x / winsize.width) * 2 - 1), 2) * (100 - 330),
     }), [mousePos.x, winsize.width]);
 
     const updateStyles = useCallback(() => {
@@ -170,9 +114,7 @@ const Blueprints: React.FC = () => {
                             const count = i * numCols + j + 1;
                             return (
                                 <div key={j} className={`${Styles.cell} ${i === middleRowIndex && j === middleColIndex ? Styles.middleCell : ''}`}>
-                                   <svg width={261} height={214} viewBox="0 0 261 214">
-                                    <use xlinkHref="#dropdown" />
-                                   </svg>
+                                    <SvgIllustration name="dropdown" /> 
                                 </div>
                             )
                         })}

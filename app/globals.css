@@ -866,6 +866,7 @@ section, header, footer {
 }
 .gooey {
   filter: url(#goo);
+  z-index: 9999;
 }
 .gooey > span {
   background: var(--color-background-primary);
@@ -892,6 +893,9 @@ section, header, footer {
   transition: border ease 0.2s;
 }
 .backdropContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100%;
   position: relative;
