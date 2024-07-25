@@ -104,7 +104,7 @@ const Swatches = () => {
                 const mousePercent = (mouseX / gridRect.width) / 2;
                 const mousePercentFromCenter = (mouseX / gridRect.width);
                 const amplitude = 120;
-                const frequency = 0.30;
+                const frequency = 0.40;
                 colors.forEach((_, i) => {
                     const swatch = gridRef.current.children[i] as HTMLElement;
                     const x = linearInterpolation(0, gridRect.width - swatch.offsetWidth, mousePercent);
