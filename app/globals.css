@@ -1,7 +1,10 @@
  
 :root {
   /* Design Tokens */
+	--angle: -15deg;
 
+  --trans-content: -20vh;
+  
   /* Typography ramp */
   --tr-1: 10px; /* .625rem */
   --tr-2: 12px; /* .75rem */
@@ -854,7 +857,9 @@ tr {
 thead tr:first-of-type {
   border-top: none;
 }
-
+section {
+  min-height: 30vh;
+}
 section, header, footer {
   width: 100%;  
   margin: 0 auto;
