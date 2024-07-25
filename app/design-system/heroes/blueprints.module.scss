@@ -6,14 +6,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
- 
 }
 
 .gridContent {
   gap: 1rem;
   flex: none;
   position: relative;
-  width: 200vh; 
+  width: 200vh;
   display: grid;
   grid-template-rows: repeat(9, 1fr);
   transform: rotate(var(--angle));
@@ -23,7 +22,7 @@
 .row {
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat( 9, 1fr);
+  grid-template-columns: repeat(9, 1fr);
   will-change: transform, filter;
 }
 
@@ -43,8 +42,7 @@
     z-index: 1;
   }
 }
- 
-  
+
 .enter {
   position: fixed;
   bottom: 2rem;
@@ -64,4 +62,3 @@
     pointer-events: none;
   }
 }
-  
