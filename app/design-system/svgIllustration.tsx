@@ -7,9 +7,7 @@ type SvgIllustrationProps = {
 const SvgIllustration: React.FC<SvgIllustrationProps> = ({ name }) => {
     return (
         <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 100 100"
-            preserveAspectRatio="xMidYMid slice"
+            xmlns="http://www.w3.org/2000/svg"  
         >
             <use xlinkHref={`#${name}`} />
         </svg>
