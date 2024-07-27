@@ -8,14 +8,13 @@
   gap: 1rem;
   flex: none;
   position: relative;
-  width: 200vh; 
+  width: 250vh; 
   height: 100%;
   transform-origin: center center;
 } 
 .colorSwatchContainer {
   position: relative;
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: 2vh;
   transition: gap 2.5s;

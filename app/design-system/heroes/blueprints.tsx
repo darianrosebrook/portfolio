@@ -18,17 +18,18 @@ interface RenderedStyle {
     brightness: { previous: number; current: number };
     [key: string]: number | { previous: number; current: number };
 }
-
 const Blueprints: React.FC = () => {
+
+
     const mousePos = useMousePosition();
     const winsize = useWindowSize();
     const gridRef = useRef<HTMLDivElement>(null);
     const [isHovered, setIsHovered] = useState(false);
-
     const numRows = 9;
     const numCols = 9;
     const middleRowIndex = Math.floor(numRows / 2);
     const middleColIndex = Math.floor(numCols / 2);
+    const spriteRef = useRef<HTMLDivElement>(null);
 
     const config = useMemo(() => ({
         translateX: true,
@@ -61,7 +62,6 @@ const Blueprints: React.FC = () => {
         translateX: ((mousePos.x / winsize.width) * 2 - 1) * 25 * winsize.width / 100,
         contrast: 100 - Math.pow(Math.abs((mousePos.x / winsize.width) * 2 - 1), 2) * (100 - 330),
     }), [mousePos.x, winsize.width]);
-
     const updateStyles = useCallback(() => {
         const mappedValues = calculateMappedValues();
 
@@ -88,6 +88,7 @@ const Blueprints: React.FC = () => {
     }, [calculateMappedValues, config, renderedStyles]);
 
     useGSAP(() => {
+
         if (isHovered) {
             const animation = gsap.timeline({
                 repeat: -1,
@@ -96,8 +97,21 @@ const Blueprints: React.FC = () => {
 
             return () => animation.kill();
         }
-    }, [updateStyles, isHovered]);
-
+    }, [updateStyles, isHovered]); 
+    
+    // get #DSSPRITE svg sprite and create an array of the symbol ids
+    const dsSprite = document.getElementById('DSSPRITE') as HTMLDivElement;
+    if (dsSprite) {
+        spriteRef.current = dsSprite;
+    }
+    const svgs = useMemo(() => {
+        const sprite = spriteRef.current;
+        if (sprite) {
+            const symbols = Array.from(sprite.querySelectorAll('symbol'));
+            return symbols.map((symbol) => symbol.id);
+        }
+        return [];
+    }, [spriteRef.current]);
     return (
         <div
             className={Styles.gridContainer}
@@ -114,7 +128,7 @@ const Blueprints: React.FC = () => {
                             const count = i * numCols + j + 1;
                             return (
                                 <div key={j} className={`${Styles.cell} ${i === middleRowIndex && j === middleColIndex ? Styles.middleCell : ''}`}>
-                                    <SvgIllustration name="dropdown" /> 
+                                    <SvgIllustration name={svgs[(i + j ) % svgs.length]} />
                                 </div>
                             )
                         })}

@@ -37,9 +37,12 @@
   border: 1px solid var(--color-border-accent);
   border-radius: var(--radius-03);
   overflow: hidden;
-
+  padding: 1rem;
   &.middleCell {
     z-index: 1;
+  }
+  svg {
+    max-width: 100%; 
   }
 }
 
