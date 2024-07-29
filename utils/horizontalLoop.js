@@ -15,6 +15,7 @@ Features:
 - times - an Array of the times on the timeline where each element hits the "starting" spot. There's also a label added accordingly, so "label1" is when the 2nd element reaches the start.
 */
 export function horizontalLoop(items, config) {
+  if (items.length === 0) return;
   items = gsap.utils.toArray(items);
   config = config || {};
   let tl = gsap.timeline({
@@ -35,7 +36,7 @@ export function horizontalLoop(items, config) {
       return xPercents[i];
     },
   });
-  gsap.set(items, { x: 0 });
+  gsap.set(items, { x: 0 })
   totalWidth =
     items[length - 1].offsetLeft +
     (xPercents[length - 1] / 100) * widths[length - 1] -

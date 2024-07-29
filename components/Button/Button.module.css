@@ -1,6 +1,5 @@
 .button {
   all: unset;
-
   cursor: pointer;
 
   min-width: var(--size-07);
@@ -9,6 +8,7 @@
 
   display: inline-grid;
   grid-auto-flow: column;
+  width: max-content;
 
   gap: var(--size-03);
   padding: 0 var(--size-06);
@@ -37,10 +37,7 @@
 .button:matches(:focus-visible, :focus) {
   outline: 2px solid var(--color-foreground-accent);
   outline-offset: var(--size-02);
-}
-.button:visited {
-  color: var(--color-foreground-inverse);
-}
+} 
 .button i span {
   display: none;
 }

@@ -642,7 +642,8 @@ main {
   flex-direction: column;
   margin: auto;
   width: 100%; 
-  flex-grow: 1;
+  flex-grow: 1; 
+  padding-top: 5vh;
 }
 * + section {
   margin-top: var(--size-10);
@@ -792,6 +793,11 @@ textarea:disabled {
 
 /* Typography */
 .content {
+  display: flex;
+  flex-direction: column;
+  max-width: 1440px;
+  margin: 0 auto;
+  gap: var(--size-06);
   padding: 0 var(--size-06);
 }
 * + .content {
@@ -901,6 +907,21 @@ section, header, footer {
   height: 100%;
   overflow: hidden;
 }  
+.avatarFlag {
+  display: flex;
+  align-items: center;
+  gap: var(--size-06);
+}
+.flag {
+  display: inline-block; 
+  & .icon {
+    margin-right: var(--size-03);
+  }
+  & p:last-of-type {
+    margin-top: 0;
+    color: var(--color-foreground-secondary);
+  }
+} 
 
 @keyframes animatedBackground {
   from {

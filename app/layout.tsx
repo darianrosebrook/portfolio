@@ -48,6 +48,7 @@ export default async function RootLayout({
             <feColorMatrix type="saturate" values="0"></feColorMatrix>
           </filter>
         </svg>
+      
         <Navbar isAuthed={isAuthed} />
         <main>{children}</main>
         <Footer />
