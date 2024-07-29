@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useRef, useCallback, useMemo } from 'react';
+import React, { useState, useRef, useCallback, useMemo, useEffect } from 'react';
 import Styles from './blueprints.module.scss';
 import { linearInterpolation } from '@/utils';
 import { gsap } from 'gsap';
@@ -97,13 +97,17 @@ const Blueprints: React.FC = () => {
 
             return () => animation.kill();
         }
-    }, [updateStyles, isHovered]); 
-    
-    // get #DSSPRITE svg sprite and create an array of the symbol ids
-    const dsSprite = document.getElementById('DSSPRITE') as HTMLDivElement;
-    if (dsSprite) {
-        spriteRef.current = dsSprite;
-    }
+    }, [updateStyles, isHovered]);
+
+    useEffect(() => {
+
+        // get #DSSPRITE svg sprite and create an array of the symbol ids
+        const dsSprite = document.getElementById('DSSPRITE') as HTMLDivElement;
+        if (dsSprite) {
+            spriteRef.current = dsSprite;
+        }
+
+    }, []);
     const svgs = useMemo(() => {
         const sprite = spriteRef.current;
         if (sprite) {
@@ -128,7 +132,7 @@ const Blueprints: React.FC = () => {
                             const count = i * numCols + j + 1;
                             return (
                                 <div key={j} className={`${Styles.cell} ${i === middleRowIndex && j === middleColIndex ? Styles.middleCell : ''}`}>
-                                    <SvgIllustration name={svgs[(i + j ) % svgs.length]} />
+                                    <SvgIllustration name={svgs[(i + j) % svgs.length]} />
                                 </div>
                             )
                         })}

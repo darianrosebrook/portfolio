@@ -37,10 +37,7 @@ const Marquee: React.FC<MarqueeProps> = ({ title, items, children }) => {
       return loop;
     },
     { scope: marqueeRef.current }
-  );
-  const pauseOnHover = (e) => {
-    e.target.classList.add(Styles.pause);
-  };
+  ); 
   return (
     <>
       <Link href={href} className={Styles.socialLink}>

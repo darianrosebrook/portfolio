@@ -22,7 +22,7 @@ const SvgSprite = () => (
 <rect height="24" width="24" fill="var(--color-foreground-tertiary)" rx="4" x="246" y="16"/>
 <rect height="24" width="24" fill="var(--color-foreground-tertiary)" rx="4" x="287" y="16"/>
 </symbol>
-<symbol viewbox="0 0 300 241" id="modal"> 
+<symbol viewBox="0 0 300 241" id="modal"> 
 <rect height="238.696" width="299.348" fill="var(--color-background-primary)" rx="4.8913" x="0.326087" y="1.26066"  stroke="#CCCCCC" strokeWidth="0.652174" /> 
 <rect height="23.4783" width="94.5652" fill="var(--color-background-inverse)" rx="11.7391" x="189.783" y="201.152"/>
 <rect height="52.1739" width="268.696" fill="var(--color-background-tertiary)" rx="5.21739" x="15.6523" y="117.674"/>

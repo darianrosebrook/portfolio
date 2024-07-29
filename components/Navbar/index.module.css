@@ -1,5 +1,8 @@
 .navContainer {
+  position: fixed;
   padding: var(--size-02) var(--size-06);
+  background: linear-gradient(0, var(--color-core-transparent) 0%, var(--color-background-primary) 50%);
+  z-index: 1000;
 }
 .logo {
   width: var(--size-07);

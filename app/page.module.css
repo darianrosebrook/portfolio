@@ -36,11 +36,24 @@
   left: 0;
   z-index: 0;
 }
+.cover {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, var(--color-background-primary) 0%, var(--color-core-transparent) 10% 90%, var(--color-background-primary) 100%);
+  z-index: 0;
+}
 .about {
   max-width: 1440px;
   margin: 0 auto;
 }
-
+.quip { 
+  position: relative;
+  padding: 15vh 0;
+}
 @media screen and (max-width: 992px) {
   .headingHero h1 {
     font-size: var(--heading-02);
