@@ -864,7 +864,7 @@ thead tr:first-of-type {
   border-top: none;
 }
 section {
-  min-height: 30vh;
+  min-height: 20vh;
 }
 section, header, footer {
   width: 100%;  

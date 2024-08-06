@@ -5,7 +5,7 @@ import { linearInterpolation } from '@/utils';
 import { gsap } from 'gsap';
 import { Flip } from "gsap/Flip";
 import { useGSAP } from '@gsap/react';
-import SvgIllustration from '../svgIllustration';
+import SvgIllustration from './svgIllustration';
 import { useMousePosition } from './useMousePosition';
 import { useWindowSize } from './useWindowSize';
 
