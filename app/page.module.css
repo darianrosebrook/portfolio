@@ -9,7 +9,7 @@
   min-height: 50vh;
 }
 .hero:first-of-type {
-  min-height: 80vh;
+  min-height: 75vh;
 }
 .headingHero {
   max-width: 90vw;
@@ -69,8 +69,5 @@
   padding: 5vh 0 0 0;
   min-height: unset;
 }
-@media screen and (max-width: 992px) {
-  .headingHero h1 {
-    font-size: var(--heading-02);
-  }
+@media screen and (max-width: 992px) { 
 }

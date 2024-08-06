@@ -1,10 +1,9 @@
- 
 :root {
   /* Design Tokens */
-	--angle: -15deg;
+  --angle: -15deg;
 
   --trans-content: -20vh;
-  
+
   /* Typography ramp */
   --tr-1: 10px; /* .625rem */
   --tr-2: 12px; /* .75rem */
@@ -54,12 +53,12 @@
   --body-weight: var(--font-weight-regular);
 
   /* heading */
-  --heading-01: var(--tr-11);
-  --heading-02: var(--tr-10);
-  --heading-03: var(--tr-9);
-  --heading-04: var(--tr-8);
-  --heading-05: var(--tr-7);
-  --heading-06: var(--tr-6);
+  --heading-01: calc(var(--tr-8) + 1vw + 1vh);
+  --heading-02: calc(var(--tr-7) + 1vw + 1vh);
+  --heading-03: calc(var(--tr-6) + 1vw + 1vh);
+  --heading-04: calc(var(--tr-5) + .5vw + .5vh);
+  --heading-05: calc(var(--tr-4) + .25vw + .25vh);
+  --heading-06: calc(var(--tr-3) + .25vw + .25vh);
   --heading-weight: var(--font-weight-bold);
 
   /* oversize */
@@ -641,14 +640,13 @@ main {
   display: flex;
   flex-direction: column;
   margin: auto;
-  width: 100%; 
-  flex-grow: 1; 
+  width: 100%;
+  flex-grow: 1;
   padding-top: 5vh;
 }
-* + section {
+section:not(:first-of-type) + section {
   margin-top: var(--size-10);
 }
- 
 
 hr {
   box-sizing: content-box;
@@ -667,7 +665,8 @@ ul {
   padding: 0 0 0 1rem;
   margin: 0;
 }
-h4 span, h3 span {
+h4 span,
+h3 span {
   display: block;
   color: var(--color-foreground-secondary);
   font-weight: var(--font-weight-light);
@@ -736,7 +735,7 @@ button:-moz-focusring,
 [type="submit"]:-moz-focusring {
   outline: var(--focus-ring);
   outline-offset: var(--focus-ring-offset);
-} 
+}
 
 /* Form Elements */
 .form-widget > * + * {
@@ -838,10 +837,10 @@ article ol {
   background: var(--color-background-primary);
   box-shadow: var(--elevation);
   transition: box-shadow 0.2s ease;
-} 
+}
 .card a {
   color: var(--color-foreground-primary);
-} 
+}
 .card > * + * {
   margin-top: var(--size-06);
 }
@@ -866,9 +865,14 @@ thead tr:first-of-type {
 section {
   min-height: 20vh;
 }
-section, header, footer {
-  width: 100%;  
+section,
+header,
+footer {
+  width: 100%;
   margin: 0 auto;
+}
+header + main {
+  margin-top: var(--size-07);
 }
 .gooey {
   filter: url(#goo);
@@ -906,14 +910,14 @@ section, header, footer {
   width: 100%;
   height: 100%;
   overflow: hidden;
-}  
+}
 .avatarFlag {
   display: flex;
   align-items: center;
   gap: var(--size-06);
 }
 .flag {
-  display: inline-block; 
+  display: inline-block;
   & .icon {
     margin-right: var(--size-03);
   }
@@ -921,13 +925,13 @@ section, header, footer {
     margin-top: 0;
     color: var(--color-foreground-secondary);
   }
-} 
+}
 
 @keyframes animatedBackground {
   from {
     background-position: 0 0;
   }
-/*use negative width if you want it to flow right to left else and positive for left to right*/
+  /*use negative width if you want it to flow right to left else and positive for left to right*/
   to {
     background-position: 0 -10000px;
   }
@@ -965,7 +969,7 @@ section, header, footer {
   }
   .card {
     flex-direction: column;
-  } 
+  }
   .card .media {
     width: 100%;
     margin-right: 0;
@@ -981,5 +985,5 @@ section, header, footer {
     flex-direction: row;
     gap: var(--size-03);
     align-items: center;
-  } 
+  }
 }
