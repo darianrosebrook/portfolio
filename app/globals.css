@@ -53,9 +53,9 @@
   --body-weight: var(--font-weight-regular);
 
   /* heading */
-  --heading-01: calc(var(--tr-8) + 1vw + 1vh);
-  --heading-02: calc(var(--tr-7) + 1vw + 1vh);
-  --heading-03: calc(var(--tr-6) + 1vw + 1vh);
+  --heading-01: calc(var(--tr-8) + .75vw + .75vh);
+  --heading-02: calc(var(--tr-7) + .5vw + .5vh);
+  --heading-03: calc(var(--tr-6) + .5vw + .5vh);
   --heading-04: calc(var(--tr-5) + .5vw + .5vh);
   --heading-05: calc(var(--tr-4) + .25vw + .25vh);
   --heading-06: calc(var(--tr-3) + .25vw + .25vh);
@@ -405,6 +405,9 @@
     font-weight: 300;
     line-height: var(--line-height-collapse);
     letter-spacing: var(--letter-spacing-wide);
+  }
+  h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong {
+    font-weight: 400;
   }
   .heading-01,
   h1 {
@@ -872,7 +875,7 @@ footer {
   margin: 0 auto;
 }
 header + main {
-  margin-top: var(--size-07);
+  margin-top: 5vh;
 }
 .gooey {
   filter: url(#goo);

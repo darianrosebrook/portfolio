@@ -3,13 +3,16 @@ import Link from "next/link";
 export default function Page() {
   return (
     <>
-      <section className="content">
-        <h2>Highlighted Projects</h2>
-        <p>
-          These are just the favorites of some recent work. Full case studies
-          available on request.
-        </p>
-        <Link href="/work/design-process">Design Process</Link>
+      <section >
+        <div className="content">
+
+          <h2>Highlighted Projects</h2>
+          <p>
+            These are just the favorites of some recent work. Full case studies
+            available on request.
+          </p>
+          <Link href="/work/design-process">Design Process</Link>
+        </div>
       </section>
       <section data-print="true" className="projects content">
         <ul className="experience">
