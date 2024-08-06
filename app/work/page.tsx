@@ -64,7 +64,9 @@ export default function Page() {
               <span>2023</span>
             </h3>
             <h4>
-              Designer&lsquo;s Definition of Done<span> at eBay</span>
+              <Link href={"/work/definition-of-done"}>
+                Designer&lsquo;s Definition of Done<span> at eBay</span>
+              </Link>
             </h4>
             <div className="content">
               <p>
