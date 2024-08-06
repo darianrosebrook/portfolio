@@ -14,8 +14,7 @@ export default function Navbar({ isAuthed }) {
     ["/dashboard/articles/new", "New Article"],
   ];
   const paths = [ 
-    ["/articles", "Articles"],
-    ["/design-system", "Design System"],
+    ["/articles", "Articles"], 
     ["/work", "Work"],
     ["/about", "About"],
   ];

@@ -4,12 +4,16 @@ import OutlineBox from "@/components/Backdrop";
 import Avatar from "@/components/Avatar/avatar";
 import Button from "@/components/Button";
 import LogoMaruqee from "@/components/LogoMarquee";
+import SvgSprite from "./heroes/svgSprite";
+import Blueprints from "./heroes/blueprints";
+import Swatches from "./heroes/swatches";
 export default function Home() {
   return (
     <>
+      <SvgSprite />
       <section className={styles.hero}>
         <div className={styles.heroImage}>
-          <OutlineBox />
+          <Blueprints />
           <div className={styles.cover}></div>
         </div>
         <div className={styles.headingHero}>
@@ -26,6 +30,7 @@ export default function Home() {
         </div>
       </section>
       <section className={styles.quip}>
+        <LogoMaruqee />
         <div className="content">
           <div className="avatarFlag">
             <Avatar size="extra-large" name="Darian Rosebrook" src="/darian-square.jpg" />
@@ -51,14 +56,31 @@ export default function Home() {
 
         <div className="content">
           <h3>Where I&#8217;ve been</h3>
-<p className="body-01">Over the last ten years, I have spent my career building up skills at creating, maintaining, and scaling design systems across different sized initiatives.</p>
+          <p className="body-01">Over the last ten years, I have spent my career building up skills at creating, maintaining, and scaling design systems across different sized initiatives.</p>
           <p className="body-01">For large and small brands alike, throughout my career, I have successfully led cross-functional teams through highly technical projects, collaborating with project managers and development leads to break down complex initiatives into manageable arcs of work. By effectively managing and delegating resources, I ensure the smooth execution of projects, delivering results that exceed expectations.</p>
           <p className="body-01">I am passionate about making things that make it easier for people to make things, and love a challenge when it comes to interesting problems to solve for.</p>
           <p className="body-01">You can see some of the places where I have worked to make their brand excel through my work with design systems </p>
           <p>p.s. A lot of this site is still a work in progress, as is the folly of all portfolio sites. haha</p>
           <Button href="/work" variant="secondary" >View my work &#8594;</Button>
         </div>
-        <LogoMaruqee />
+      </section>
+      <section className={`${styles.education}`}>
+        <div className="content">
+          <h2>Design System Education</h2>
+        </div> 
+      </section>
+      <section className={`${styles.hero} ${styles.tokens}`}>
+        <div className={styles.heroImage}>
+          <div className="backdropContainer">
+            <Swatches />
+          </div>
+        </div>
+        <div className={`${styles.headingHero}`}>
+          <h1 className="gooey">  <span>Fundamentals</span><br /><span>
+            Design Tokens
+          </span>
+          </h1>
+        </div>
       </section>
     </>
   );

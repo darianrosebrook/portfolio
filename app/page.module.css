@@ -4,8 +4,11 @@
   margin: 0;
   display: flex;
   justify-content: center;
-  align-items: center;  
-  max-width: 100vw; 
+  align-items: center;
+  max-width: 100vw;
+  min-height: 50vh;
+}
+.hero:first-of-type {
   min-height: 80vh;
 }
 .headingHero {
@@ -29,9 +32,10 @@
 .heroImage {
   width: 100%;
   height: 100%;
-  min-height: 80vh;
+  min-height: 50vh;
   object-fit: cover;
   position: absolute;
+  overflow: hidden;
   top: 0;
   left: 0;
   z-index: 0;
@@ -43,16 +47,27 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, var(--color-background-primary) 0%, var(--color-core-transparent) 10% 90%, var(--color-background-primary) 100%);
+  background: linear-gradient(
+    180deg,
+    var(--color-background-primary) 0%,
+    var(--color-core-transparent) 10% 90%,
+    var(--color-background-primary) 100%
+  );
   z-index: 0;
 }
 .about {
   max-width: 1440px;
   margin: 0 auto;
 }
-.quip { 
+.quip {
   position: relative;
   padding: 15vh 0;
+  min-height: unset;
+  padding: unset;
+}
+.education {
+  padding: 5vh 0 0 0;
+  min-height: unset;
 }
 @media screen and (max-width: 992px) {
   .headingHero h1 {
