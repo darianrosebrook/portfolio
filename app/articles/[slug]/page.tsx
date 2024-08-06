@@ -111,9 +111,10 @@ export async function generateMetadata({
     category: "Design",
     creator: "Darian Rosebrook",
     description: article.description,
-    title: article.headline,
+    title: article.headline + " | Darian Rosebrook",
   };
-  return { canonical, openGraph, twitter };
+
+  return { canonical, openGraph, twitter, ...meta };
 }
 
 export default async function Page({ params }: { params: { slug: string } }) {
