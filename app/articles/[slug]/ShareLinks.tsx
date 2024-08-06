@@ -22,10 +22,12 @@ export default function ShareLinks({
   };
   return (
     <div className={styles.links}>
-      <p className="small">Share to</p>
-      <i className="fa fa-arrow-right">
-        <span>Share</span>
-      </i>
+      <div className={styles.share}>
+        <p className="small">Share to</p>
+        <i className="fa fa-arrow-right">
+          <span>Share</span>
+        </i>
+      </div>
       <ul>
         <li>
           <Button variant="primary" handleClick={handleCopy} size="medium" title="Copy to clipboard">
@@ -35,7 +37,7 @@ export default function ShareLinks({
           </Button>
         </li>
         <li>
-          <Button variant="primary" 
+          <Button variant="primary"
 
             title="Share on Twitter"
             handleClick={() => {

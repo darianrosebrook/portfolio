@@ -171,7 +171,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
     image: article.image,
   };
   return (
-    <section>
+    <section className="content">
 
     <article className={styles.articleContent}>
       <script
