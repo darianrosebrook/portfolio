@@ -2,6 +2,8 @@
 import { Article } from "app/types";
 import styles from "./styles.module.css";
 import Button from "@/components/Button";
+import { byPrefixAndName } from "@awesome.me/kit-0ba7f5fefb/icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function ShareLinks({
   url,
@@ -10,6 +12,11 @@ export default function ShareLinks({
   url: string;
   article: Article;
 }) {
+
+  const faTwitter = byPrefixAndName["fab"]["twitter"];
+  const faFacebook = byPrefixAndName["fab"]["facebook"];
+  const faLinkedin = byPrefixAndName["fab"]["linkedin"];
+  const faLink = byPrefixAndName["far"]["link"];
   const handleCopy = () => {
     // replace contents of button with a checkmark to indicate success
     const copyButton = document.querySelector(`.${styles.links} button`);
@@ -24,69 +31,32 @@ export default function ShareLinks({
     <div className={styles.links}>
       <div className={styles.share}>
         <p className="small">Share to</p>
-        <i className="fa fa-arrow-right">
-          <span>Share</span>
-        </i>
       </div>
       <ul>
         <li>
-          <Button variant="primary" handleClick={handleCopy} size="medium" title="Copy to clipboard">
-            <i className="fa fa-link">
-              <span>Copy Link</span>
-            </i>
-          </Button>
+          <Button
+            variant="primary"
+            handleClick={handleCopy}
+            size="medium"
+            title="Copy to clipboard"><FontAwesomeIcon icon={faLink} /></Button>
         </li>
         <li>
           <Button variant="primary"
-
             title="Share on Twitter"
-            handleClick={() => {
-              window.open(
-                `https://twitter.com/intent/tweet?text=${encodeURIComponent(
-                  article.headline
-                )}&url=${encodeURIComponent(url)}`
-              );
-            }}
-            size="medium"
-          >
-            <i className="fa fa-twitter">
-              <span>Share on Twitter</span>
-            </i>
-          </Button>
+            handleClick={() => { window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(article.headline)}&url=${encodeURIComponent(url)}`); }} size="medium"
+          ><FontAwesomeIcon icon={faTwitter} /></Button>
         </li>
         <li>
           <Button variant="primary"
             title="Share on Facebook"
-            handleClick={() => {
-              window.open(
-                `https://www.facebook.com/sharer.php?u=${encodeURIComponent(
-                  url
-                )}`
-              );
-            }}
-            size="medium"
-          >
-            <i className="fa fa-facebook">
-              <span>Share on Facebook</span>
-            </i>
-          </Button>
+            handleClick={() => { window.open(`https://www.facebook.com/sharer.php?u=${encodeURIComponent(url)}`); }} size="medium"
+          ><FontAwesomeIcon icon={faFacebook} /></Button>
         </li>
         <li>
           <Button variant="primary"
             title="Share on LinkedIn"
-            handleClick={() => {
-              window.open(
-                `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(
-                  url
-                )}&title=${encodeURIComponent(article.headline)}`
-              );
-            }}
-            size="medium"
-          >
-            <i className="fa fa-linkedin">
-              <span>Share on LinkedIn</span>
-            </i>
-          </Button>
+            handleClick={() => { window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(url)}&title=${encodeURIComponent(article.headline)}`); }} size="medium"
+          ><FontAwesomeIcon icon={faLinkedin} /></Button>
         </li>
       </ul>
     </div>

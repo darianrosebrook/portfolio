@@ -76,6 +76,27 @@ const Page: React.FC<PageProps> = () => {
   return (
     <section className="content">
       <Link href="/work">Previous</Link>
+      <h2>Iconography Sync</h2>
+      <div className={Styles.hero}>
+        <div>
+          <p>
+            I&rsquo;ve created a figma plugin for design system teams that allows
+            design and development to be closer in sync, allowing for a fairly
+            optimized and automated process for syncing our design assets to our
+            code assets through GitHub. Designers have control over which of their
+            designed assets gets output from the tooling, developers have control
+            over what gets checked into the codebase, site, and packages.
+          </p>
+        </div>
+        <div>
+          <p><strong>Responsibilities:</strong></p>
+          <p>project coordination, user research, design, development, user testing, delivery and presentation </p>
+          <p><strong>Designers: </strong>Darian Rosebrook </p>
+          <p><strong>Research:</strong> Darian Rosebrook </p>
+          <p><strong>Developers: </strong>Darian Rosebrook, Caleb Nance</p>
+          <p><strong>Scope of impact:</strong> Design System Maintainers</p>
+        </div>
+      </div>
       <article className={Styles.articleContent}>
         <Image
           src="/icon-tool/icon-tool.jpg"
@@ -83,15 +104,6 @@ const Page: React.FC<PageProps> = () => {
           width={800}
           height={400}
         />
-        <h2>Iconography Sync</h2>
-        <p>
-          I&rsquo;ve created a figma plugin for design system teams that allows
-          design and development to be closer in sync, allowing for a fairly
-          optimized and automated process for syncing our design assets to our
-          code assets through GitHub. Designers have control over which of their
-          designed assets gets output from the tooling, developers have control
-          over what gets checked into the codebase, site, and packages.
-        </p>
         <p>
           Utilizing bidirectional sync with GitHub based on versioning, design
           and development now have a dual turn key moment for releasing new

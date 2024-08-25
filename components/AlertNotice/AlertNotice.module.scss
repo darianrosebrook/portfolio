@@ -2,7 +2,7 @@
   &__inline {
     display: inline-flex;
     row-gap: var(--grid-gap-small);
-    column-gap: var(--grid-gap-small); 
+    column-gap: var(--grid-gap-small);
     align-items: baseline;
     padding: var(--size-06);
     background-color: var(--color-background-primary);
@@ -20,9 +20,9 @@
     }
   }
   &__section {
-    display: grid; 
-    grid-template-areas: "icon title body dismiss" ;
-    grid-template-columns: auto auto 1fr auto; 
+    display: grid;
+    grid-template-areas: "icon title body dismiss";
+    grid-template-columns: auto auto 1fr auto;
     align-items: baseline;
     row-gap: var(--grid-gap-small);
     column-gap: var(--grid-gap-medium);
@@ -52,7 +52,7 @@
     grid-template-columns: auto 1fr auto;
     align-items: baseline;
     row-gap: var(--grid-gap-small);
-    column-gap: var(--grid-gap-medium); 
+    column-gap: var(--grid-gap-medium);
     min-height: var(--size-12);
     padding: var(--size-06) var(--size-08);
     margin: 0 -1rem;
