@@ -1,57 +1,64 @@
-"use client";
-import { forwardRef } from "react";
-import styles from "./Button.module.css";
+'use client'
 import React from "react";
+import styles from "./Button.module.scss";
+
 interface ButtonProps {
   size?: "small" | "medium" | "large";
-  variant: "primary" | "secondary" | "tertiary";
+  variant?: "primary" | "secondary" | "tertiary";
   children: React.ReactNode;
   href?: string | null;
   external?: boolean;
   title?: string;
   handleClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
-export default function Button({
-  size,
+
+const Button: React.FC<ButtonProps> = ({
+  size = "medium",
+  variant = "primary",
   children,
   href = null,
   external = false,
   title,
-  variant = "primary",
   handleClick,
   ...props
-}: ButtonProps) {
-  // If there are multiple children, wrap them in a span, workaround for not being able to select text node with css
+}) => {
   const childrenArray = React.Children.toArray(children);
-  const childrenCount = childrenArray.length;
-  if (childrenCount > 1) {
-    childrenArray[1] = <span>{childrenArray[1]}</span>;
+  const isSvgOnly = childrenArray.length === 1 && React.isValidElement(childrenArray[0]) && childrenArray[0].type === 'svg';
+
+  const className = `${styles.button} ${styles[size]} ${styles[variant]}${isSvgOnly ? ` ${styles.icon}` : ""}`;
+
+  const content = isSvgOnly ? children : (
+    <>
+      {childrenArray[0]}
+      {childrenArray.length > 1 && <span>{childrenArray.slice(1)}</span>}
+    </>
+  );
+
+  if (href) {
+    return (
+      <a
+        href={href}
+        title={title}
+        className={className}
+        target={external ? "_blank" : undefined}
+        rel={external ? "noreferrer" : undefined}
+        {...props}
+      >
+        {content}
+      </a>
+    );
   }
-  children = childrenArray;
-  const button = href ? (
-    <a
-      title={title}
-      className={`${styles.button} ${styles[size || "medium"]} ${
-        styles[variant]
-      }`}
-      href={href}
-      target={external ? "_blank" : ""}
-      rel={external ? "noreferrer" : ""}
-      {...props}
-    >
-      {children}
-    </a>
-  ) : (
+
+  return (
     <button
       title={title}
       onClick={handleClick}
-      className={`${styles.button} ${styles[size || "medium"]} ${
-        styles[variant]
-      }`}
+      className={className}
       {...props}
     >
-      {children}
+      {content}
     </button>
   );
-  return <>{button}</>;
-}
+};
+
+export default Button;

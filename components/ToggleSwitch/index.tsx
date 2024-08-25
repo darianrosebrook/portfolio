@@ -7,12 +7,12 @@ const ToggleSwitch = ({ checked, onChange, children }) => {
       <input
         type="checkbox"
         checked={checked}
-        className={checked  ? styles.checked : undefined}
+        className={checked ? styles.checked : undefined}
         onChange={onChange}
         id={`toggleSwitch-${children}`}
       />
       <label
-        className={checked  ? styles.checked : undefined}
+        className={checked ? styles.checked : undefined}
         htmlFor={`toggleSwitch-${children}`}
       >
         {children}

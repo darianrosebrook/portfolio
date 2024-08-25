@@ -29,9 +29,9 @@ type ArticleSchema = Article & {
 function getArticleContent(data: JSONContent) {
   let html: string = generateHTML(data, [
     CharacterCount,
-    Image, 
-    StarterKit 
-  ]); 
+    Image,
+    StarterKit
+  ]);
   const h1FromHTML = html.match(/<h1>(.*?)<\/h1>/);
   const imageFromHTML = html.match(/<img(.*?)>/);
   h1FromHTML && (html = html.replace(h1FromHTML[0], ""));
@@ -70,9 +70,9 @@ async function getData(slug) {
     .order("published_at", { ascending: true })
     .limit(1)
     .single();
-  
-    const contents = getArticleContent(article.articleBody);
-    const { h1FromHTML, imageFromHTML, html } = contents;
+
+  const contents = getArticleContent(article.articleBody);
+  const { h1FromHTML, imageFromHTML, html } = contents;
   return { ...article, html, beforeArticle, afterArticle, h1FromHTML, imageFromHTML };
 }
 
@@ -174,90 +174,90 @@ export default async function Page({ params }: { params: { slug: string } }) {
   return (
     <section className="content">
 
-    <article className={styles.articleContent}>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }}
-      />
-      <div className={styles.articleLede}>
-        {article.articleSection && (
-          <p className="small uppercase">
-            {article.articleSection}
-            {article.keywords &&
-              ` |  ${article.keywords.split(",").join(" | ")}`}
-          </p>
-        )}
-        <h1>{article.headline}</h1>
-        {article.alternativeHeadline && (
-          <h2 className="medium light">{article.alternativeHeadline}</h2>
-        )}
-        <hr />
-        <div className={styles.meta}>
-          <div className={styles.byline}>
-            <p className="small">
-              Published on{" "}
-              <time dateTime={article.published_at}>
-                <small className="bold">
-                  {new Date(article.published_at).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                </small>
-              </time>{" "}
-              by
+      <article className={styles.articleContent}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }}
+        />
+        <div className={styles.articleLede}>
+          {article.articleSection && (
+            <p className="small uppercase">
+              {article.articleSection}
+              {article.keywords &&
+                ` |  ${article.keywords.split(",").join(" | ")}`}
             </p>
-            <ProfileFlag profile={article.author} />
+          )}
+          <h1>{article.headline}</h1>
+          {article.alternativeHeadline && (
+            <h2 className="medium light">{article.alternativeHeadline}</h2>
+          )}
+          <hr />
+          <div className={styles.meta}>
+            <div className={styles.byline}>
+              <p className="small">
+                Published on{" "}
+                <time dateTime={article.published_at}>
+                  <small className="bold">
+                    {new Date(article.published_at).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </small>
+                </time>{" "}
+                by
+              </p>
+              <ProfileFlag profile={article.author} />
+            </div>
+            <ShareLinks url={canonical} article={article} />
           </div>
-          <ShareLinks url={canonical} article={article} />
         </div>
-      </div>
-      <NextImage
-        src={article.image}
-        alt={article.headline}
-        width={500}
-        height={300}
-      />
-      <p className="caption"></p>
-      <div
-        className={styles.articleContent}
-        dangerouslySetInnerHTML={{ __html: article.html }}
-      />
-      <div className={styles.prev_next}>
-        {article.beforeArticle ? (
-          <article className="card">
-            <h3>Previous</h3>
-          <a href={`/articles/${article.beforeArticle.slug}`}>
-            <NextImage
-              src={article.beforeArticle.image}
-              alt={article.beforeArticle.headline}
-              width={100}
-              height={100}
-            />
-            <h5>{article.beforeArticle.headline}</h5>
-          </a>
-          </article>
-        ) : (
-          <span></span>
-        )}
-        {article.afterArticle ? (
-          <article className="card">
-            <h3>Next</h3>
-            <a href={`/articles/${article.afterArticle.slug}`}>
-              <NextImage
-                src={article.afterArticle.image}
-                alt={article.afterArticle.headline}
-                width={100}
-                height={100}
-              />
-              <h5>{article.afterArticle.headline}</h5>
-            </a>
-          </article>
-        ) : (
-          <span></span>
-        )}
-      </div>
-    </article>
+        <NextImage
+          src={article.image}
+          alt={article.headline}
+          width={500}
+          height={300}
+        />
+        <p className="caption"></p>
+        <div
+          className={styles.articleContent}
+          dangerouslySetInnerHTML={{ __html: article.html }}
+        />
+        <div className={styles.prev_next}>
+          {article.beforeArticle ? (
+            <article className="card">
+              <h3>Previous</h3>
+              <a href={`/articles/${article.beforeArticle.slug}`}>
+                <NextImage
+                  src={article.beforeArticle.image}
+                  alt={article.beforeArticle.headline}
+                  width={100}
+                  height={100}
+                />
+                <h5>{article.beforeArticle.headline}</h5>
+              </a>
+            </article>
+          ) : (
+            <span></span>
+          )}
+          {article.afterArticle ? (
+            <article className="card">
+              <h3>Next</h3>
+              <a href={`/articles/${article.afterArticle.slug}`}>
+                <NextImage
+                  src={article.afterArticle.image}
+                  alt={article.afterArticle.headline}
+                  width={100}
+                  height={100}
+                />
+                <h5>{article.afterArticle.headline}</h5>
+              </a>
+            </article>
+          ) : (
+            <span></span>
+          )}
+        </div>
+      </article>
     </section>
   );
 }

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "./globals.scss";
 import Navbar from "@/components/Navbar";
 import { createClient } from "@/utils/supabase/server";
 import Footer from "@/components/Footer";

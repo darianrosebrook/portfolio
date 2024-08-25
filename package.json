@@ -9,8 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@awesome.me/kit-0ba7f5fefb": "^1.0.4",
+    "@fortawesome/fontawesome-svg-core": "^6.6.0",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "@gsap/react": "^2.1.1",
-    "@splinetool/react-spline": "^4.0.0",
     "@supabase/ssr": "^0.1.0",
     "@supabase/supabase-js": "^2.39.7",
     "@tiptap/extension-character-count": "^2.2.4",

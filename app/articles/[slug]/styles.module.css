@@ -1,3 +1,9 @@
+.hero {
+  display: grid;
+  gap: var(--size-07);
+  margin-top: var(--size-07);
+  grid-template-columns: 1fr;
+}
 .articleContent {
   max-width: 55rem;
   margin: 0 auto;
@@ -71,6 +77,9 @@
   grid-template-columns: 1fr 1fr;
 }
 @media screen and (min-width: 1000px) {
+  .hero {
+    grid-template-columns: 1fr 1fr;
+  }
   .meta {
     flex-direction: row;
   }

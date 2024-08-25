@@ -650,6 +650,9 @@ main {
 section:not(:first-of-type) + section {
   margin-top: var(--size-10);
 }
+p {
+  max-width: 55em;
+}
 
 hr {
   box-sizing: content-box;

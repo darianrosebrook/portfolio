@@ -31,9 +31,8 @@ const Container = React.forwardRef<
     <div
       ref={ref}
       role="alert"
-      className={`${style.alert} ${style[`alert__${level}`]} ${
-        style[`alert__${level}--${status}`]
-      }`}
+      className={`${style.alert} ${style[`alert__${level}`]} ${style[`alert__${level}--${status}`]
+        }`}
       {...props}
     >
       {props.children}
