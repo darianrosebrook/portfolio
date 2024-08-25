@@ -1,6 +1,5 @@
 import Status from "@/components/Status";
-import styles from "./page.module.css";
-import OutlineBox from "@/components/Backdrop";
+import styles from "./page.module.css"; 
 import Avatar from "@/components/Avatar/avatar";
 import Button from "@/components/Button";
 import LogoMaruqee from "@/components/LogoMarquee";
