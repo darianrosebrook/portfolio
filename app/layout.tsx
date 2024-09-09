@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/react';
 import type { Metadata } from "next";
 import "./globals.scss";
 import Navbar from "@/components/Navbar";
@@ -48,7 +49,7 @@ export default async function RootLayout({
             <feColorMatrix type="saturate" values="0"></feColorMatrix>
           </filter>
         </svg>
-      
+
         <Navbar isAuthed={isAuthed} />
         <main>{children}</main>
         <Footer />
@@ -76,6 +77,7 @@ export default async function RootLayout({
             </filter>
           </defs>
         </svg>
+        <Analytics />
       </body>
     </html>
   );

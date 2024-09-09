@@ -1,7 +1,7 @@
 import Status from "@/components/Status";
-import styles from "./page.module.css"; 
+import styles from "./page.module.css";
 import Avatar from "@/components/Avatar/avatar";
-import Button from "@/components/Button";
+import Button from "@/components/Button"; 
 import LogoMaruqee from "@/components/LogoMarquee";
 import SvgSprite from "./heroes/svgSprite";
 import Blueprints from "./heroes/blueprints";
@@ -31,8 +31,8 @@ export default function Home() {
       <section className={styles.quip}>
         <LogoMaruqee />
         <div className="content">
-          <div className="avatarFlag">
-            <Avatar size="extra-large" name="Darian Rosebrook" src="/darian-square.jpg" />
+          <div className="avatarFlag"> 
+              <Avatar  src="/darian-square.jpg" name="Darian Rosebrook" size="extra-large" />
             <div className="flag">
               <p><strong>Darian Rosebrook</strong></p>
               <p>
@@ -66,7 +66,7 @@ export default function Home() {
       <section className={`${styles.education}`}>
         <div className="content">
           <h2>Design System Education</h2>
-        </div> 
+        </div>
       </section>
       <section className={`${styles.hero} ${styles.tokens}`}>
         <div className={styles.heroImage}>

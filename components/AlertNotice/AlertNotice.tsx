@@ -1,9 +1,7 @@
 "use client";
-import * as React from "react";
-import Button from "../Button";
-import style from "./AlertNotice.module.scss";
-import { parse } from "path";
-
+import * as React from 'react'
+import Button from '../Button';
+import Styles from "./AlertNotice.module.scss";
 export type AlertNoticeProps = {
   status?: "info" | "success" | "warning" | "danger";
   level?: "page" | "section" | "inline";
@@ -11,7 +9,6 @@ export type AlertNoticeProps = {
   dismissible?: boolean;
   onDismiss?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
-
 const Container = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement> & AlertNoticeProps
@@ -31,13 +28,13 @@ const Container = React.forwardRef<
     <div
       ref={ref}
       role="alert"
-      className={`${style.alert} ${style[`alert__${level}`]} ${style[`alert__${level}--${status}`]
+      className={`${Styles.alert} ${Styles[`alert__${level}`]} ${Styles[`alert__${level}--${status}`]
         }`}
       {...props}
     >
       {props.children}
       {dismissible && onDismiss && (
-        <div className={style["__dismiss"]}>
+        <div className={Styles["__dismiss"]}>
           <Button
             variant="tertiary"
             handleClick={onDismiss}
@@ -56,12 +53,12 @@ const Container = React.forwardRef<
 Container.displayName = "AlertNotice.Container";
 
 const Title = ({ children }: { children: React.ReactNode }) => (
-  <h6 className={style["__title"]}>{children}</h6>
+  <h6 className={Styles["__title"]}>{children}</h6>
 );
 Title.displayName = "AlertNotice.Title";
 
 const BodyContent = ({ children }: { children: React.ReactNode }) => (
-  <div className={style["__body"]}>{children}</div>
+  <div className={Styles["__body"]}>{children}</div>
 );
 BodyContent.displayName = "AlertNotice.Body";
 
@@ -74,7 +71,7 @@ const Icon = ({ status }: { status: string }) => {
   };
 
   return (
-    <div className={style["__icon"]}>
+    <div className={Styles["__icon"]}>
       <i className={`fa fa-${icons[status]}`} aria-hidden="true" />
     </div>
   );

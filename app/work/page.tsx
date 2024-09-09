@@ -26,6 +26,18 @@ export default function Page() {
               </Link>
             </h4>
             <div className="content">
+              <div className="three-up">
+                <div>
+                  <h5>Role</h5>
+                  <p><strong>Lead Designer, Developer</strong></p>
+                </div>
+              </div>
+              <h5>Outcomes</h5>
+              <div className="three-up">
+                <p>95% Time Reductionfrom finished design to code implementation</p>
+                <p>100% reduction in naming, mismatching, and availability errors across codebases</p>
+                <p>Proof of viability for more asset automation pipelines in our design system</p>
+              </div>
               <p>
                 I&apos;ve created a figma plugin for design system teams that
                 allows design and development to be closer in sync, allowing for
@@ -69,11 +81,21 @@ export default function Page() {
               </Link>
             </h4>
             <div className="content">
+              <div className="three-up">
+                <div>
+                  <h5>Role</h5>
+                  <p><strong>Co-Designer, Co-Developer</strong></p>
+                </div>
+              </div> 
+              <h5>Outcomes</h5>
+              <div className="three-up">
+                <p>Standardized the process for preparing design work, creating more efficient collaboration between design and development teams.</p>
+                <p>A large reduction in bug reports from edge cases being covered during design and improved communication processes.</p>
+                <p>Standardized onboarding with new designers getting from &ldquo;Zero-To-One&rdquo; quickly ensuring consistency by adhering to org standards</p>
+              </div>
               <p>
-                Me and my coworker{" "}
-                <Link href={"https://www.catalinamanea.com/"} target="_blank">
-                  Catalina Manea
-                </Link>{" "}
+                Me and my coworker
+                <Link href={"https://www.catalinamanea.com/"} target="_blank"> Catalina Manea </Link>
                 interviewed over 40 designers, 30 developers,and 11 project
                 managers to understand the current landscape of design handoff
                 and design/developer collaboration. We worked with them to
@@ -106,6 +128,7 @@ export default function Page() {
                 and more efficient design handoff as opposed to teams outside
                 the pilot
               </p>
+              <h5>Outcomes</h5> 
             </div>
           </li>
           <li>
@@ -116,6 +139,12 @@ export default function Page() {
               Figma library sync<span> at Nike</span>
             </h4>
             <div className="content">
+              <div className="three-up">
+                <div>
+                  <h5>Role</h5>
+                  <p><strong>Lead Designer, Developer</strong></p>
+                </div>
+              </div>
               <p>
                 For our Nike foundations design system library, I created a
                 figma plugin that takes the design tokens that are defined in
@@ -147,6 +176,12 @@ export default function Page() {
               Podium Foundations Library<span> at Nike</span>
             </h4>
             <div className="content">
+              <div className="three-up">
+                <div>
+                  <h5>Role</h5>
+                  <p><strong>Workshop Co-lead, Strategist, Co-developer</strong></p>
+                </div>
+              </div>
               <p>
                 In late 2021, the Consumer, Marketing, and Enterprise leaders
                 got together to figure out how to work towards an even tighter
@@ -194,6 +229,12 @@ export default function Page() {
               </div>
             </h4>
             <div className="content">
+              <div className="three-up">
+                <div>
+                  <h5>Role</h5>
+                  <p><strong>Lead Designer </strong></p>
+                </div>
+              </div>
               <p>
                 I worked for 18 months designing and building the enterprise
                 branch of the Nike design system. Prior to me joining, Nike had
@@ -214,7 +255,7 @@ export default function Page() {
             </div>
           </li>
           <li>
-            {" "}
+            
             <h3 className="dateYear">
               <span>2020</span>
             </h3>
@@ -222,6 +263,12 @@ export default function Page() {
               Branding and Product design<span> at Common Room</span>
             </h4>
             <div className="content">
+              <div className="three-up">
+                <div>
+                  <h5>Role</h5>
+                  <p><strong>Lead Designer </strong></p>
+                </div>
+              </div>
               <p>
                 I was one of the first designers contracted with their team. It
                 was a pre launch product gaining traction with early investors
@@ -248,6 +295,12 @@ export default function Page() {
               Sustainability Cloud<span> at Salesforce</span>
             </h4>
             <div className="content">
+              <div className="three-up">
+                <div>
+                  <h5>Role</h5>
+                  <p><strong>UX Designer, UX Researcher </strong></p>
+                </div>
+              </div>
               <p>
                 I worked on the Salesforce Sustainabilitu Cloud which functions
                 as a carbon emissions tracker, analytics, and data reporting
@@ -282,6 +335,12 @@ export default function Page() {
               The New Microsoft Edge Browser<span> at Microsoft</span>
             </h4>
             <div className="content">
+              <div className="three-up">
+                <div>
+                  <h5>Role</h5>
+                  <p><strong>UX Designer, UX Researcher </strong></p>
+                </div>
+              </div>
               <p>
                 My work with Edge was a mixture of branding, product design, and
                 design process refinement. I had been onboarded to a pre launch

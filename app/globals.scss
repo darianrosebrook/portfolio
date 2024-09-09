@@ -892,7 +892,12 @@ header + main {
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
 }
-
+// Grids
+.three-up {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--size-06);
+}
 #pest {
   display: block;
   box-sizing: border-box;
@@ -932,7 +937,9 @@ header + main {
     color: var(--color-foreground-secondary);
   }
 }
-
+.projects ul {
+  gap: var(--size-10);
+}
 @keyframes animatedBackground {
   from {
     background-position: 0 0;

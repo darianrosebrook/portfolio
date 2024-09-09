@@ -4,7 +4,7 @@ import styles from "./avatar.module.css";
 type AvatarProps = {
     src?: string;
     name: string;
-    size: string;
+    size: "small" | "medium" | "large" | "extra-large";
 };
 
 function initials(name: string) {
