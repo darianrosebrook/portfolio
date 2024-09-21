@@ -127,8 +127,7 @@ export default function Page() {
                 Teams involved in our pilots have had a large reduction in bugs,
                 and more efficient design handoff as opposed to teams outside
                 the pilot
-              </p>
-              <h5>Outcomes</h5> 
+              </p> 
             </div>
           </li>
           <li>
@@ -144,6 +143,12 @@ export default function Page() {
                   <h5>Role</h5>
                   <p><strong>Lead Designer, Developer</strong></p>
                 </div>
+              </div>  
+              <h5>Outcomes</h5>
+              <div className="three-up">
+                <p>A solid pre-variables workflow for connecting underlying design tokens across multiple libraries.</p>
+                <p>Enabled control over the scope and amount of design tokens imported, creating flexibility while still adhering to standards.</p>
+                <p>Synchronized updates across multiple libraries, reducing manual management of individual design tokens.</p>
               </div>
               <p>
                 For our Nike foundations design system library, I created a
