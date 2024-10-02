@@ -37,7 +37,7 @@ const Container = React.forwardRef<
         <div className={Styles["__dismiss"]}>
           <Button
             variant="tertiary"
-            handleClick={onDismiss}
+            onClick={onDismiss}
             title="Dismiss this alert"
             data-index={index}
           >

@@ -1,12 +1,18 @@
-const numberToWordValue = (num: number) => {
-  num = Math.floor(num / 300);
-  if (num < 1) return "less than a minute";
-  if (num === 1) return "a minute";
-  if (num < 60) return `${num} minutes`;
-  if (num === 60) return "an hour";
-  if (num < 1440) return `${Math.floor(num / 60)} hours`;
-  if (num === 1440) return "a day";
-  return `${Math.floor(num / 1440)} days`;
-};
+function calculateReadingTime(wordCount) {
+  const wordsPerMinute = 300;
+  const minutes = Math.floor(wordCount / wordsPerMinute);
 
-export { numberToWordValue };
+  if (minutes < 1) return "less than a minute";
+  if (minutes === 1) return "a minute";
+  if (minutes < 60) return `${minutes} minutes`;
+  if (minutes === 60) return "an hour";
+  
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours} hour${hours > 1 ? 's' : ''}`;
+  if (hours === 24) return "a day";
+  
+  const days = Math.floor(hours / 24);
+  return `${days} day${days > 1 ? 's' : ''}`;
+}
+
+export { calculateReadingTime };

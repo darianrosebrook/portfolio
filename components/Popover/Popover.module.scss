@@ -1,3 +1,28 @@
+.popoverContainer {
+  display: inline-block;
+}
+
 .popoverTrigger {
-    position: relative
+  all: unset;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.popoverContent {
+  background: var(--color-background-secondary);
+  min-width: 160px;
+  border-radius: var(--radius-02);
+  box-shadow: var(--elevation);
+  padding: var(--size-06);
+  will-change: transform, opacity;
+  z-index: 1000;
+}
+
+.activeTrigger {
+  outline: 2px solid var(--color-border-accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-full);
+  display: inline-block;
+  line-height: 0;
+
 }

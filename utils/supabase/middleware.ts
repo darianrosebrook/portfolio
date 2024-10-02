@@ -7,6 +7,7 @@ export async function updateSession(request: NextRequest) {
       headers: request.headers,
     },
   })
+  response.headers.set('x-current-path', request.nextUrl.pathname) 
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,

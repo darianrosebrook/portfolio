@@ -1,7 +1,8 @@
+import React from 'react'
+
 import './CodeBlockComponent.css'
 
 import { NodeViewContent, NodeViewWrapper } from '@tiptap/react'
-import React from 'react'
 
 const codeBlock = ({ node: { attrs: { language: defaultLanguage } }, updateAttributes, extension }) => (
   <NodeViewWrapper className="code-block">

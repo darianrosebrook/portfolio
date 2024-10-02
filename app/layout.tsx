@@ -35,10 +35,10 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const client = createClient();
-  const response = await client.auth.getSession();
-  const session = response.data.session;
-  response.error && console.error("error", response.error);
-  const isAuthed = session !== null;
+  const response = await client.auth.getUser();
+  response.error && console.error("error", response.error); 
+  const {data: {user}} = response; 
+  const id = user?.id || null; 
 
   return (
     <html lang="en" className={`${inter.variable} ${nohemi.variable}`}>
@@ -50,7 +50,7 @@ export default async function RootLayout({
           </filter>
         </svg>
 
-        <Navbar isAuthed={isAuthed} />
+        <Navbar id={id} />
         <main>{children}</main>
         <Footer />
         <SlinkyCursor />

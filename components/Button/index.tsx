@@ -2,47 +2,60 @@
 import React from "react";
 import styles from "./Button.module.scss";
 
-interface ButtonProps {
-  size?: "small" | "medium" | "large";
-  variant?: "primary" | "secondary" | "tertiary";
-  children: React.ReactNode;
-  href?: string | null;
-  external?: boolean;
-  title?: string;
-  handleClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+type ButtonSize = 'small' | 'medium' | 'large';
+type ButtonVariant = 'primary' | 'secondary' | 'tertiary';
+
+interface ButtonBaseProps {
+  size?: ButtonSize;
+  variant?: ButtonVariant;
+  isLoading?: boolean;
+  className?: string;
+  icon?: React.ReactElement;
+  iconOnly?: boolean;
 }
 
+interface ButtonAsButton extends ButtonBaseProps, Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'className'> {
+  as?: 'button';
+}
+
+interface ButtonAsAnchor extends ButtonBaseProps, Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'className'> {
+  as: 'a';
+  href: string;
+}
+
+type ButtonProps = ButtonAsButton | ButtonAsAnchor;
+
 const Button: React.FC<ButtonProps> = ({
-  size = "medium",
-  variant = "primary",
+  as = 'button',
+  size = 'medium',
+  variant = 'primary',
+  isLoading = false,
+  className = '',
   children,
-  href = null,
-  external = false,
-  title,
-  handleClick,
-  ...props
+  icon,
+  iconOnly = false,
+  ...rest
 }) => {
-  const childrenArray = React.Children.toArray(children);
-  const isSvgOnly = childrenArray.length === 1 && React.isValidElement(childrenArray[0]) && childrenArray[0].type === 'svg';
+  const baseClassName = styles.button;
+  const sizeClassName = styles[size];
+  const variantClassName = styles[variant];
 
-  const className = `${styles.button} ${styles[size]} ${styles[variant]}${isSvgOnly ? ` ${styles.icon}` : ""}`;
+  const combinedClassName = `${baseClassName} ${sizeClassName} ${variantClassName} ${className}`.trim();
 
-  const content = isSvgOnly ? children : (
+  const content = (
     <>
-      {childrenArray[0]}
-      {childrenArray.length > 1 && <span>{childrenArray.slice(1)}</span>}
+      {icon && React.cloneElement(icon, { 'aria-hidden': 'true' })}
+      {!iconOnly && <span>{isLoading ? 'Loading...' : children}</span>}
     </>
   );
 
-  if (href) {
+  if (as === 'a') {
+    const { href, ...anchorRest } = rest as ButtonAsAnchor;
     return (
       <a
         href={href}
-        title={title}
-        className={className}
-        target={external ? "_blank" : undefined}
-        rel={external ? "noreferrer" : undefined}
-        {...props}
+        className={combinedClassName}
+        {...anchorRest}
       >
         {content}
       </a>
@@ -51,10 +64,9 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
-      title={title}
-      onClick={handleClick}
-      className={className}
-      {...props}
+      className={combinedClassName}
+      disabled={isLoading}
+      {...(rest as ButtonAsButton)}
     >
       {content}
     </button>

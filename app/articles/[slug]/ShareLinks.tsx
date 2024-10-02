@@ -36,26 +36,26 @@ export default function ShareLinks({
         <li>
           <Button
             variant="primary"
-            handleClick={handleCopy}
+            onClick={handleCopy}
             size="medium"
             title="Copy to clipboard"><FontAwesomeIcon icon={faLink} /></Button>
         </li>
         <li>
           <Button variant="primary"
             title="Share on Twitter"
-            handleClick={() => { window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(article.headline)}&url=${encodeURIComponent(url)}`); }} size="medium"
+            onClick={() => { window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(article.headline)}&url=${encodeURIComponent(url)}`); }} size="medium"
           ><FontAwesomeIcon icon={faTwitter} /></Button>
         </li>
         <li>
           <Button variant="primary"
             title="Share on Facebook"
-            handleClick={() => { window.open(`https://www.facebook.com/sharer.php?u=${encodeURIComponent(url)}`); }} size="medium"
+            onClick={() => { window.open(`https://www.facebook.com/sharer.php?u=${encodeURIComponent(url)}`); }} size="medium"
           ><FontAwesomeIcon icon={faFacebook} /></Button>
         </li>
         <li>
           <Button variant="primary"
             title="Share on LinkedIn"
-            handleClick={() => { window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(url)}&title=${encodeURIComponent(article.headline)}`); }} size="medium"
+            onClick={() => { window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(url)}&title=${encodeURIComponent(article.headline)}`); }} size="medium"
           ><FontAwesomeIcon icon={faLinkedin} /></Button>
         </li>
       </ul>

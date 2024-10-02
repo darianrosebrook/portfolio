@@ -31,7 +31,7 @@ lowlight.register("js", js);
 lowlight.register("ts", ts);
 
 import { Article } from "app/types";
-import { numberToWordValue } from "@/utils/index";
+import { calculateReadingTime } from "@/utils/index";
 import { useState } from "react"; 
 import Link from "next/link";
 
@@ -95,7 +95,7 @@ const Tiptap = ({
       }),
       CodeBlockLowlight.extend({
         addNodeView() {
-          return ReactNodeViewRenderer(CodeBlockComponent);
+          return ReactNodeViewRenderer(CodeBlockComponent as any);
         },
       }).configure({ lowlight }),
     ],
@@ -210,7 +210,7 @@ const Tiptap = ({
       </div>
       <p className="minuteInWords">
         Reading time:{" "}
-        <strong>{numberToWordValue(article.wordCount)} minute read</strong>
+        <strong>{calculateReadingTime(article.wordCount)} minute read</strong>
       </p>
       <ToggleSwitch checked={article.draft} onChange={setDraft}>
         Draft
