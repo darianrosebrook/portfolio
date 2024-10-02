@@ -1,6 +1,6 @@
 import Status from "@/components/Status";
 import styles from "./page.module.css";
-import Avatar from "@/components/Avatar/avatar";
+import Avatar from "@/components/Avatar";
 import Button from "@/components/Button"; 
 import LogoMaruqee from "@/components/LogoMarquee";
 import SvgSprite from "./heroes/svgSprite";

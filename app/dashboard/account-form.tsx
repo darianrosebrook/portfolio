@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import { createClient } from "@/utils/supabase/client";
 import { type User } from "@supabase/supabase-js";
 import Avatar from "./avatar";
+import Button from "@/components/Button";
 export default function AccountForm({ user }: { user: User | null }) {
   const supabase = createClient();
   const [loading, setLoading] = useState(true);
@@ -105,17 +106,24 @@ export default function AccountForm({ user }: { user: User | null }) {
         />
       </div>
       <div className="two-up">
-        <button
+        {/* <button
           className="button primary block"
           onClick={() => updateProfile({ fullname, username, avatar_url })}
           disabled={loading}
         >
           {loading ? "Loading ..." : "Update"}
-        </button> 
+        </button>  */}
+        <Button
+          onClick={() => updateProfile({ fullname, username, avatar_url })}
+          disabled={loading}
+          isLoading={loading}
+        >
+          Update
+        </Button>
         <form action="/auth/signout" method="post">
-          <button className="button block" type="submit">
+          {/* <button className="button block" type="submit">
             Sign out
-          </button>
+          </button> */}
         </form>
       </div>
     </div>

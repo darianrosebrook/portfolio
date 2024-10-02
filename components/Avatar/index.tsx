@@ -15,14 +15,22 @@ function initials(name: string) {
     return parts.map((part) => part[0]).join("");
 }
 
-export default function Avatar({ src, name, size }: AvatarProps) {
+const Avatar = ({ src, name, size }: AvatarProps) => {
     return (
         <div className={`${styles.avatar} ${styles['avatar_' + size]}`}>
             {src ? (
-                <img src={src} alt={name} />
+                <Image
+                    src={src}
+                    alt={name}
+                    width={150}
+                    height={150}
+                    className={styles.avatar_image}
+                />
             ) : (
                 <span>{initials(name)}</span>
             )}
         </div>
     );
 }
+
+export default Avatar;
