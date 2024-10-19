@@ -32,7 +32,7 @@ const SlinkyCursor: React.FC = () => {
       pest.style.left = `${pos.current.x - size / 2}px`;
       const angleDeg = Math.atan2(yMouse - yPos, xMouse - xPos) * 180 / Math.PI;
       const stretchWidth = size + diff(xPos, yPos, xMouse, yMouse) / stiffness;
-      pest.style.cssText += `width: ${stretchWidth}px; height: ${size}px; transform: rotate(${angleDeg}deg);`;
+      pest.style.cssText += `z-index: 9999;width: ${stretchWidth}px; height: ${size}px; transform: rotate(${angleDeg}deg);`;
     }
     requestAnimationFrame(animate);
   };

@@ -9,6 +9,9 @@
   cursor: pointer;
 }
 .popoverContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-04);
   background: var(--color-background-secondary);
   min-width: 160px;
   border-radius: var(--radius-02);
@@ -24,5 +27,10 @@
   border-radius: var(--radius-full);
   display: inline-block;
   line-height: 0;
+  transition: all ease-out 2s;
+
+  & > div:hover {
+    transform: rotate(1080deg);
+  }
 
 }

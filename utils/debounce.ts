@@ -7,4 +7,4 @@ const debounce = (fn: Function, ms: number) => {
   };
 };
 
-export default debounce;
+export {debounce}; 

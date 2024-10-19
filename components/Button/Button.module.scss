@@ -1,33 +1,34 @@
 .button {
   all: unset;
   cursor: pointer;
+  --button-gap: var(--size-02);
+  --button-text-size: var(--caption-03);
+  --min-size: var(--size-07);
 
-  min-width: var(--size-07);
-  min-height: var(--size-07);
-  max-height: var(--size-07);
-
-  display: inline-grid;
-  grid-auto-flow: column;
-  width: max-content;
-
-  gap: var(--size-03);
-  padding: 0 var(--size-06);
-
+  min-width: var(--min-size);
+  min-height: var(--min-size);
+  max-height: var(--min-size); 
+  max-width: fit-content;
+   
+  display: inline-flex; 
   align-items: center;
   justify-content: center;
-
+  gap: var(--button-gap);
+  padding: var(--button-gap);
+ 
   border: none;
   border-radius: var(--radius-full);
   background-color: var(--color-background-inverse);
   color: var(--color-foreground-inverse);
+  font-size: var(--button-text-size);
+  line-height: var(--line-height-collapse);
+  
   transition: all 0.3s;
-  font-size: var(--body-02);
 
-  &:has(svg):not(:has(span)) {
-    aspect-ratio: 1 / 1;
-    padding: 0;
-    width: var(--size-07);
-    height: var(--size-07);
+  &:disabled {
+    cursor: not-allowed;
+    background-color: var(--color-background-disabled);
+    color: var(--color-foreground-disabled);
   }
 
   &:hover {
@@ -45,48 +46,25 @@
     outline-offset: var(--size-02);
   }
 
-  svg span {
-    display: none;
-  }
-
   & + & {
     margin-left: var(--size-04);
   }
 
-  &.small {
-    min-width: var(--size-07);
-    min-height: var(--size-07);
-    max-height: var(--size-07);
-    font-size: var(--body-04);
-
-    &:has(svg) > svg + :empty {
-      width: var(--size-07);
-      height: var(--size-07);
-    }
+  &.small { 
+    --min-size: var(--size-07);
+    --button-text-size: var(--body-04);
   }
 
   &.medium {
-    min-width: var(--size-08);
-    min-height: var(--size-08);
-    max-height: var(--size-08);
-    font-size: var(--body-02);
-
-    &:has(svg) > svg + :empty {
-      width: var(--size-08);
-      height: var(--size-08);
-    }
+    --button-gap: var(--size-04);
+    --min-size: var(--size-07);
+    --button-text-size: var(--body-01);
   }
 
   &.large {
-    min-width: var(--size-09);
-    min-height: var(--size-09);
-    max-height: var(--size-09);
-    font-size: var(--body-01);
-
-    &:has(svg) > svg + :empty {
-      width: var(--size-09);
-      height: var(--size-09);
-    }
+    --button-gap: var(--size-05);
+    --min-size: var(--size-08);
+    --button-text-size: var(--body-01);
   }
 
   &.primary {
@@ -109,8 +87,8 @@
 
   &.tertiary {
     background-color: var(--color-transparent);
-    border: var(--border-weight-default) solid var(--color-border-onColor);
-    color: var(--color-foreground-onColor);
+    border: var(--border-weight-default) solid var(--color-border-light);
+    color: var(--color-foreground-tertiary);
 
     &:hover {
       background-color: var(--color-background-hover);

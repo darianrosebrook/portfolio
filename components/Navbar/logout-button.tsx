@@ -1,5 +1,6 @@
 import { createClient } from "@/utils/supabase/client";
 import { redirect } from "next/navigation";
+import Button from "../Button";
 
 export default function LogoutButton() {
   const client = createClient(); 
@@ -11,9 +12,9 @@ export default function LogoutButton() {
   };
   return (
     <form action={signOut}>
-      <button className="py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover">
+      <Button type="submit" variant="tertiary">
         Logout
-      </button>
+      </Button>
     </form>
   );
 }

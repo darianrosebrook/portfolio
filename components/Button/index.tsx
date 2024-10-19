@@ -1,5 +1,4 @@
-'use client'
-import React from "react";
+import React, { ReactNode } from "react";
 import styles from "./Button.module.scss";
 
 type ButtonSize = 'small' | 'medium' | 'large';
@@ -8,10 +7,10 @@ type ButtonVariant = 'primary' | 'secondary' | 'tertiary';
 interface ButtonBaseProps {
   size?: ButtonSize;
   variant?: ButtonVariant;
-  isLoading?: boolean;
+  loading?: boolean;
+  disabled?: boolean;
   className?: string;
-  icon?: React.ReactElement;
-  iconOnly?: boolean;
+  title?: string; // Ensure you have a title prop for accessibility
 }
 
 interface ButtonAsButton extends ButtonBaseProps, Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'className'> {
@@ -29,32 +28,48 @@ const Button: React.FC<ButtonProps> = ({
   as = 'button',
   size = 'medium',
   variant = 'primary',
-  isLoading = false,
+  loading = false,
+  disabled = false,
   className = '',
+  title = '',
   children,
-  icon,
-  iconOnly = false,
   ...rest
 }) => {
   const baseClassName = styles.button;
   const sizeClassName = styles[size];
   const variantClassName = styles[variant];
+  const isLoading = loading ? styles.isLoading : '';
+  const isDisabled = disabled ? styles.disabled : '';
+  const hasOnlyIcon = React.Children.count(children) === 1 && typeof children === 'object' && !('props' in children && children.props.children);
 
-  const combinedClassName = `${baseClassName} ${sizeClassName} ${variantClassName} ${className}`.trim();
 
-  const content = (
-    <>
-      {icon && React.cloneElement(icon, { 'aria-hidden': 'true' })}
-      {!iconOnly && <span>{isLoading ? 'Loading...' : children}</span>}
-    </>
-  );
+  const combinedClassName = [
+    baseClassName,
+    sizeClassName,
+    variantClassName,
+    isLoading,
+    isDisabled,
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
+  // Loop over children and identify if there's an icon (based on type or props)
+  // clone the icon and add aria-hidden to it, wrap the rest in span
+  // aria-label if only icon is present, and no text
+  const ariaProps = hasOnlyIcon ? { 'aria-label': title } : {};
+  const content = React.Children.map(children, (child) => {
+
+    return <span>{child}</span>;
+  });
   if (as === 'a') {
     const { href, ...anchorRest } = rest as ButtonAsAnchor;
     return (
       <a
         href={href}
         className={combinedClassName}
+        title={title}
+        {...ariaProps}
         {...anchorRest}
       >
         {content}
@@ -65,8 +80,10 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <button
       className={combinedClassName}
-      disabled={isLoading}
+      disabled={disabled}
+      title={title}
       {...(rest as ButtonAsButton)}
+      {...ariaProps}
     >
       {content}
     </button>
