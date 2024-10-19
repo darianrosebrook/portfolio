@@ -2,6 +2,7 @@ import { createClient } from "@/utils/supabase/server";
 import Image from "next/image";
 import Link from "next/link";
 import ProfileFlag from "@/components/ProfileFlag";
+import styles from "./page.module.scss";
 async function getData() {
   const supabase = createClient();
   const { data } = await supabase.from("articles").select(` *,  author(*)  `).order("published_at", { ascending: false });
@@ -61,7 +62,8 @@ function Card(data: {
 export default async function Page() {
   const articles = await getData();
   return (
-    <div className="grid">
+    <div className={styles.articleGrid}>
+      <div><Link href="articles/edit">New Article</Link></div>
       {articles.map((article: any) => (
         <Card key={article.id} {...article} />
       ))}

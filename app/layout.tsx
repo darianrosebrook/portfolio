@@ -36,9 +36,9 @@ export default async function RootLayout({
 }>) {
   const client = createClient();
   const response = await client.auth.getUser();
-  response.error && console.error("error", response.error); 
-  const {data: {user}} = response; 
-  const id = user?.id || null; 
+  response.error && console.error("error", response.error);
+  const { data: { user } } = response;
+  const id = user?.id || null;
 
   return (
     <html lang="en" className={`${inter.variable} ${nohemi.variable}`}>
@@ -51,9 +51,8 @@ export default async function RootLayout({
         </svg>
 
         <Navbar id={id} />
-        <main>{children}</main>
+        {children}
         <Footer />
-        <SlinkyCursor />
         <script
           async
           src="https://kit.fontawesome.com/cf8a647076.js"
@@ -78,6 +77,7 @@ export default async function RootLayout({
           </defs>
         </svg>
         <Analytics />
+        <SlinkyCursor />
       </body>
     </html>
   );

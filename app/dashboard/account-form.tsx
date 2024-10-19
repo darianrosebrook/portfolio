@@ -116,7 +116,7 @@ export default function AccountForm({ user }: { user: User | null }) {
         <Button
           onClick={() => updateProfile({ fullname, username, avatar_url })}
           disabled={loading}
-          isLoading={loading}
+          loading={loading}
         >
           Update
         </Button>

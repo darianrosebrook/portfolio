@@ -24,7 +24,7 @@
   margin-bottom: var(--size-02);
   width: 100%;
 }
-.nav ul {
+.nav .navLinks {
   display: flex;
   align-items: center;
   gap: var(--size-05);

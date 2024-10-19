@@ -37,25 +37,24 @@ export default function ShareLinks({
           <Button
             variant="primary"
             onClick={handleCopy}
-            size="medium"
             title="Copy to clipboard"><FontAwesomeIcon icon={faLink} /></Button>
         </li>
         <li>
           <Button variant="primary"
             title="Share on Twitter"
-            onClick={() => { window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(article.headline)}&url=${encodeURIComponent(url)}`); }} size="medium"
+            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(article.headline)}&url=${encodeURIComponent(url)}`} size="medium"
           ><FontAwesomeIcon icon={faTwitter} /></Button>
         </li>
         <li>
           <Button variant="primary"
             title="Share on Facebook"
-            onClick={() => { window.open(`https://www.facebook.com/sharer.php?u=${encodeURIComponent(url)}`); }} size="medium"
+            href={`https://www.facebook.com/sharer.php?u=${encodeURIComponent(url)}`} size="medium"
           ><FontAwesomeIcon icon={faFacebook} /></Button>
         </li>
         <li>
           <Button variant="primary"
             title="Share on LinkedIn"
-            onClick={() => { window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(url)}&title=${encodeURIComponent(article.headline)}`); }} size="medium"
+            onClick={() => { window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(url)}&title=${encodeURIComponent(article.headline)}`); }} 
           ><FontAwesomeIcon icon={faLinkedin} /></Button>
         </li>
       </ul>
