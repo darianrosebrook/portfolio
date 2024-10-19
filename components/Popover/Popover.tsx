@@ -10,7 +10,7 @@ import React, {
   useCallback,
 } from 'react';
 import { gsap } from 'gsap';
-import styles from './popover.module.scss';
+import styles from './Popover.module.scss';
 
 interface PopoverProps {
   children: React.ReactNode;
