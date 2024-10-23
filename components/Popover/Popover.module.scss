@@ -13,7 +13,8 @@
   flex-direction: column;
   gap: var(--size-04);
   background: var(--color-background-secondary);
-  min-width: 160px;
+  min-width: 256px;
+  max-width: calc(100vw - var(--size-06));
   border-radius: var(--radius-02);
   box-shadow: var(--elevation);
   padding: var(--size-06);
