@@ -65,7 +65,7 @@ export default function Navbar({ id = null }) {
               </Popover.Trigger>
               <Popover.Content>
                 <ul className="menuList">
-                  <li><ToggleSwitch checked={false} disabled={true} onChange={() => null}  > Pause animations (coming soon) </ToggleSwitch></li>
+                  <li><ToggleSwitch checked={false} disabled={true} onChange={() => null}  > Reduce animations (coming soon) </ToggleSwitch></li>
                   <li><ToggleSwitch checked={slider} onChange={() => setSlider(!slider)} > But hey, check out this cool ToggleSwitch </ToggleSwitch></li>
                 </ul>
               </Popover.Content>
