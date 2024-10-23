@@ -1,7 +1,7 @@
 'use client';
 import React, { useRef, useId, useContext, createContext, useLayoutEffect, useState, useCallback, forwardRef, MutableRefObject } from 'react';
 import { gsap } from 'gsap';
-import styles from './popover.module.scss';
+import styles from './Popover.module.scss';
 
 interface PopoverProps {
   children: React.ReactNode;
