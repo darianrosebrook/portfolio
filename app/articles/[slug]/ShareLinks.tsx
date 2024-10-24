@@ -41,20 +41,23 @@ export default function ShareLinks({
         </li>
         <li>
           <Button variant="primary"
+            as="a"
             title="Share on Twitter"
             href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(article.headline)}&url=${encodeURIComponent(url)}`} size="medium"
           ><FontAwesomeIcon icon={faTwitter} /></Button>
         </li>
         <li>
           <Button variant="primary"
+            as="a"
             title="Share on Facebook"
             href={`https://www.facebook.com/sharer.php?u=${encodeURIComponent(url)}`} size="medium"
           ><FontAwesomeIcon icon={faFacebook} /></Button>
         </li>
         <li>
           <Button variant="primary"
+            as="a"
+            href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(url)}&title=${encodeURIComponent(article.headline)}`}
             title="Share on LinkedIn"
-            onClick={() => { window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(url)}&title=${encodeURIComponent(article.headline)}`); }} 
           ><FontAwesomeIcon icon={faLinkedin} /></Button>
         </li>
       </ul>
