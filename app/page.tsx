@@ -48,7 +48,7 @@ export default function Home() {
           <p className="heading-02">Hello! I&#8217;m Darian Rosebrook 👋🏼</p>
           <p className="heading-05">I&#8217;m a seasoned Product Designer with a strong background in front-end engineering, I specialize in crafting robust design systems and developing custom design tooling for Figma that optimizes product development workflows.</p>
           <p className="heading-05">I live at the intersection of design and development  where I dedicate my efforts to streamlining collaboration and optimizing product development cycles.</p>
-          <Button href="/about" variant="secondary" >Learn more about me &#8594;</Button>
+          <Button href="/about" as="a" variant="secondary" >Learn more about me &#8594;</Button>
         </div>
       </section>
       <section className={styles.marquee}>
@@ -60,7 +60,7 @@ export default function Home() {
           <p className="body-01">I am passionate about making things that make it easier for people to make things, and love a challenge when it comes to interesting problems to solve for.</p>
           <p className="body-01">You can see some of the places where I have worked to make their brand excel through my work with design systems </p>
           <p>p.s. A lot of this site is still a work in progress, as is the folly of all portfolio sites. haha</p>
-          <Button href="/work" variant="secondary" >View my work &#8594;</Button>
+          <Button href="/work" as="a" variant="secondary" >View my work &#8594;</Button>
         </div>
       </section>
       <section className={`${styles.education}`}>
