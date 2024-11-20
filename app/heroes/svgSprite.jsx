@@ -67,8 +67,8 @@ const SvgSprite = () => (
 <symbol   viewBox="0 0 103 85" id="tooltip">
 <circle cx="52" cy="65" r="19.4444" fill="none" stroke="var(--color-border-bold)" strokeWidth="1.11111"/>
 <rect height="17.9995" width="17.9995" fill="var(--color-border-bold)" rx="4.49986" x="43" y="56"/>
-<rect height="32" width="103" fill="var(--color-background-inverse)" rx="8"/>
-<path d="M40 31.3135L51.3137 19.9998L62.6274 31.3135L52.7279 41.213C51.9469 41.994 50.6805 41.994 49.8995 41.213L40 31.3135Z" fill="var(--color-background-inverse)"/>
+<rect height="32" width="103" fill="var(--color-background-secondary)" rx="8"/>
+<path d="M40 31.3135L51.3137 19.9998L62.6274 31.3135L52.7279 41.213C51.9469 41.994 50.6805 41.994 49.8995 41.213L40 31.3135Z" fill="var(--color-background-secondary)"/>
 </symbol>
 <symbol  fill="none" viewBox="0 0 300 36" id="pagination">
 <circle cx="16" cy="18" fill="var(--color-background-inverse)" r="16"/>

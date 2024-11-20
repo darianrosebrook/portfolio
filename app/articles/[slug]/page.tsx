@@ -7,24 +7,13 @@ import NextImage from "next/image";
 import StarterKit from "@tiptap/starter-kit";
 import CharacterCount from "@tiptap/extension-character-count";
 import Image from "@tiptap/extension-image";
-import CustomDocument from "@tiptap/extension-document";
-import Placeholder from "@tiptap/extension-placeholder";
-import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
 
 import { generateHTML } from "@tiptap/html";
 import { JSONContent } from "@tiptap/react";
 
 import styles from "./styles.module.css";
-import { Article } from "app/types";
 import ProfileFlag from "@/components/ProfileFlag";
 import ShareLinks from "./ShareLinks";
-import type { Metadata, ResolvingMetadata } from "next";
-
-type ArticleSchema = Article & {
-  html: string;
-  beforeArticle: Article;
-  afterArticle: Article;
-};
 
 function getArticleContent(data: JSONContent) {
   let html: string = generateHTML(data, [
@@ -34,21 +23,25 @@ function getArticleContent(data: JSONContent) {
   ]);
   const h1FromHTML = html.match(/<h1>(.*?)<\/h1>/);
   const imageFromHTML = html.match(/<img(.*?)>/);
-  h1FromHTML && (html = html.replace(h1FromHTML[0], ""));
-  imageFromHTML && (html = html.replace(imageFromHTML[0], ""));
+  if (h1FromHTML) {
+    html = html.replace(h1FromHTML[0], "");
+  }
+  if (imageFromHTML) {
+    html = html.replace(imageFromHTML[0], "");
+  }
   const content = { h1FromHTML, imageFromHTML, html };
   return content;
 }
 
 async function getData(slug) {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data: article } = await supabase
     .from("articles")
     .select("*, author(full_name, username, avatar_url)")
     .eq("slug", slug)
     .single();
   const published_at = article?.published_at || new Date().toISOString();
-  const { data: beforeArticle, error } = await supabase
+  const { data: beforeArticle, } = await supabase
     .from("articles")
     .select(
       "author(full_name, username, avatar_url), slug, published_at, headline, image, description"
@@ -59,7 +52,7 @@ async function getData(slug) {
     .order("published_at", { ascending: false })
     .limit(1)
     .single();
-  const { data: afterArticle, error: afterError } = await supabase
+  const { data: afterArticle, } = await supabase
     .from("articles")
     .select(
       "author(full_name, username, avatar_url), slug, published_at, headline, image, description"
@@ -81,7 +74,7 @@ export async function generateMetadata({
 }: {
   params: { slug: string };
 }) {
-  const { slug } = params;
+  const { slug } = await params;
   const article = await getData(slug);
   const canonical = `https://darianrosebrook.com/articles/${slug}`;
   const openGraph = {
@@ -117,13 +110,12 @@ export async function generateMetadata({
   return { canonical, openGraph, twitter, ...meta };
 }
 
-export default async function Page({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+type Params = Promise<{ slug: string }>
+
+export default async function Page({ params }: { params: Params }) {  
+  const { slug } = await params 
   const canonical = `https://darianrosebrook.com/articles/${slug}`;
   const article = await getData(slug);
-  const handleCopy = () => {
-    navigator.clipboard.writeText(window.location.href);
-  };
   const ldJson = {
     "@context": "https://schema.org",
     "@type": "Article",

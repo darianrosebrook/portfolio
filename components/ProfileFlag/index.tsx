@@ -1,4 +1,4 @@
-import { Profile } from "app/types";
+import { Profile } from "@/types";
 import Avatar from "../Avatar";
 import Link from "next/link";
 import styles from "./styles.module.css";

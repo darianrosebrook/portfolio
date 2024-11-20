@@ -37,7 +37,7 @@ const upload = async ({
   file: mediaUpload;
   bucket: string;
 }) => {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { name, data: fileData } = file.media;
   const { data, error: uploadError } = await supabase.storage
     .from(bucket)

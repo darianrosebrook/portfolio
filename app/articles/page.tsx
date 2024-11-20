@@ -3,9 +3,10 @@ import { createClient } from "@/utils/supabase/server";
 import Image from "next/image";
 import Link from "next/link";
 import Styles from "./styles.module.css";
+import { Article, Profile  } from "@/types";
 async function getData() {
-  const supabase = createClient();
-  const { data, count } = await supabase
+  const supabase = await createClient();
+  const { data, error } = await supabase
     .from("articles")
     .select(
       `
@@ -21,25 +22,26 @@ async function getData() {
     .eq("draft", false)
     .filter("draft", "eq", false)
     .order("published_at", { ascending: false });
-
-  return data;
-}
+  if (error) {
+    console.error(error);
+    return [] as Article[];
+  }
+  return data
+}  
 function Card(data: {
   image: string;
   headline: string;
   description: string;
   slug: string;
-  author: any;
-  published_at?: string;
-  created_at?: string;
-  id?: number;
+  author: Profile;
+  published_at: string;
 }) {
   let { description } = data;
   if (description.length > 240) {
     description = description.slice(0, 240) + "...";
   }
   const date = new Date(
-    data.published_at || data.created_at
+    data.published_at  
   ).toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
@@ -73,7 +75,7 @@ function Card(data: {
   );
 }
 export default async function Page() {
-  const articles = await getData() || []
+  const articles = await getData();
   return (
     <section className={`grid content ${Styles.articleGrid}`}>
       {articles.length > 0 && articles.map((article) => (

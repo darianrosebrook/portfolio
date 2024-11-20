@@ -2,9 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 import Styles from "../../articles/[slug]/styles.module.css";
 
-type PageProps = {};
 
-const Page: React.FC<PageProps> = () => {
+const Page: React.FC = () => {
 
     const images = {
         "dod-1": {
@@ -69,14 +68,14 @@ const Page: React.FC<PageProps> = () => {
                 </div>
             </div>
             <article className={Styles.articleContent}>
-                <Image {...images["dod-1"]} />
+                <Image src={images["dod-1"].src} alt={images["dod-1"].alt} width={images["dod-1"].width} height={images["dod-1"].height} />
                 <p>
                     Our goal with this tool was to help designers get from Zero-To-One as quick as we can through onboarding when we have new hires on the team.
                 </p>
                 <p>
                     Previously I’ve worked on a design system checklist for design systems. This list was expansive, and geared towards a high level of detail outlining what our developers expect of our design system designers. Though this list is massive, it’s not an “End of process” checklist. If you were to check things off after you’ve completed the work, the list would feel like too much.
                 </p>
-                <Image {...images["dod-2"]} />
+                <Image src={images["dod-2"].src} alt={images["dod-2"].alt} width={images["dod-2"].width} height={images["dod-2"].height} />
                 <p>
                     This led us to coming up with a better solution for managing this list, and splitting it up into two goals:
                 </p>
@@ -92,7 +91,7 @@ const Page: React.FC<PageProps> = () => {
                     <li>Evangelism for design standards</li>
                 </ul>
                 <h3>Product Design Interview Process</h3>
-                <Image {...images["dod-3"]} />
+                <Image src={images["dod-3"].src} alt={images["dod-3"].alt} width={images["dod-3"].width} height={images["dod-3"].height} />
                 <p>
                     During the first few weeks, we set out to understand more about what our product partners experience when working with the designers in our organization.
                 </p>
@@ -109,23 +108,23 @@ const Page: React.FC<PageProps> = () => {
                     We gathered everyone’s requirements and expectations when working with senior-level designers and refined our approach to our designer’s definition of done.
                 </p>
                 <h3>Piloting with Design Teams</h3>
-                <Image {...images["dod-4"]} />
+                <Image src={images["dod-4"].src} alt={images["dod-4"].alt} width={images["dod-4"].width} height={images["dod-4"].height} />
                 <p>
                     Our first pilot was to have designers go through a document that outlined each requirement. This was the lowest, most viable way we could get our checks and balances for designers out the door.
                 </p>
                 <p>
                     This bought enough time for me and another developer to build out a custom tool for Figma that worked like a plugin. This widget would sit on the main canvas as a companion tool allowing people to check off things that applied to their work as they worked on the file.
                 </p>
-                <Image {...images["dod-5"]} />
+                <Image src={images["dod-5"].src} alt={images["dod-5"].alt} width={images["dod-5"].width} height={images["dod-5"].height} />
                 <p>
                     As we gathered feedback from our team, we made really rapid design changes to directly address feedback.
                 </p>
-                <Image {...images["dod-6"]} />
+                <Image src={images["dod-6"].src} alt={images["dod-6"].alt} width={images["dod-6"].width} height={images["dod-6"].height} />
                 <p>
                     These changes made the design a lot less overwhelming and hooked our Figma widget up to more integrations like analytics and our google feedback forms
                 </p>
                 <h3>Testing and Refinement</h3>
-                <Image {...images["dod-7"]} />
+                <Image src={images["dod-7"].src} alt={images["dod-7"].alt} width={images["dod-7"].width} height={images["dod-7"].height} />
                 <p>
                     We were able to take direct feedback from the org which allowed leads to work with us on the progress and time savings it was generating for their teams. This feedback led to micro adjustments to things like content and interactive control.
                 </p>

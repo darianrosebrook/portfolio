@@ -4,8 +4,7 @@ import {
   useEditor,
   EditorContent,
   JSONContent,
-  ReactNodeViewRenderer,
-  Node,
+  ReactNodeViewRenderer, 
 } from "@tiptap/react";
 import styles from "./tiptap.module.css";
 import StarterKit from "@tiptap/starter-kit";
@@ -29,8 +28,7 @@ lowlight.register("css", css);
 lowlight.register("js", js);
 lowlight.register("ts", ts);
 
-import { Article } from "app/types";
-import { useState } from "react"; 
+import { Article } from "@/types";  
 
 const CustomDocument = Document.extend({
   content: "heading block*",
@@ -42,9 +40,7 @@ const Tiptap = ({
 }: {
   article: Article;
   handleUpdate?: (article: Article) => void; 
-}) => {
-  const [updatedArticle, setUpdatedArticle] = useState<Article>(article);
-  const images = new Map<string, string>();
+}) => { 
   const content = article?.articleBody as JSONContent | undefined;
   const editor = useEditor({
     content,
@@ -65,15 +61,15 @@ const Tiptap = ({
       }),
       CodeBlockLowlight.extend({
         addNodeView() {
-          return ReactNodeViewRenderer(CodeBlockComponent as any);
+          return ReactNodeViewRenderer(CodeBlockComponent  );
         },
       }).configure({ lowlight }),
     ],
     onUpdate: ({ editor }) => {
       if (handleUpdate) {
-        updatedArticle.articleBody = editor.getJSON(); 
-        updatedArticle.wordCount = editor.storage.characterCount.words();
-        handleUpdate(updatedArticle);
+        const articleBody = editor.getJSON(); 
+         const wordCount = editor.storage.characterCount.words();
+        handleUpdate({ ...article, articleBody, wordCount });
       }
     },
   });

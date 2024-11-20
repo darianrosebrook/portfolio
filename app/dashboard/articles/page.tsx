@@ -3,8 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 import ProfileFlag from "@/components/ProfileFlag";
 import styles from "./page.module.scss";
+import { Article } from "@/types";
 async function getData() {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data } = await supabase.from("articles").select(` *,  author(*)  `).order("published_at", { ascending: false });
   return data;
 }
@@ -13,7 +14,7 @@ function Card(data: {
   headline: string;
   description: string;
   slug: string;
-  author: any;
+  author: Article["author"];
   published_at?: string;
   created_at?: string;
   id?: number;
@@ -64,7 +65,7 @@ export default async function Page() {
   return (
     <div className={styles.articleGrid}>
       <div><Link href="articles/edit">New Article</Link></div>
-      {articles.map((article: any) => (
+      {articles.map((article: Article) => (
         <Card key={article.id} {...article} />
       ))}
     </div>

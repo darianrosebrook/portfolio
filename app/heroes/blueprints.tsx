@@ -1,146 +1,109 @@
 'use client'
-import React, { useState, useRef, useCallback, useMemo, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Styles from './blueprints.module.scss';
-import { linearInterpolation } from '@/utils';
-import { gsap } from 'gsap';
-import { Flip } from "gsap/Flip";
-import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react'; // Import useGSAP hook
 import SvgIllustration from './svgIllustration';
-import { useMousePosition } from './useMousePosition';
 import { useWindowSize } from './useWindowSize';
 
-gsap.registerPlugin(Flip);
-interface RenderedStyle {
-    amt: number;
-    scaleAmt: number;
-    translateX: { previous: number; current: number };
-    contrast: { previous: number; current: number };
-    brightness: { previous: number; current: number };
-    [key: string]: number | { previous: number; current: number };
-}
+gsap.registerPlugin(useGSAP);
+
 const Blueprints: React.FC = () => {
+  const winsize = useWindowSize();
+  const gridRef = useRef<HTMLDivElement>(null);
+  const spriteRef = useRef<HTMLDivElement>(null);
+  const mousePos = useRef({ x: 0, y: 0 }); // Use ref to store mouse position
 
+  const numRows = 9;
+  const numCols = 12;
+  const middleRowIndex = Math.floor(numRows / 2);
 
-    const mousePos = useMousePosition();
-    const winsize = useWindowSize();
-    const gridRef = useRef<HTMLDivElement>(null);
-    const [isHovered, setIsHovered] = useState(false);
-    const numRows = 9;
-    const numCols = 9;
-    const middleRowIndex = Math.floor(numRows / 2);
-    const middleColIndex = Math.floor(numCols / 2);
-    const spriteRef = useRef<HTMLDivElement>(null);
+  const [isHovered, setIsHovered] = useState(false);
+  const [svgs, setSvgs] = useState<string[]>([]); // Track SVG symbol IDs
 
-    const config = useMemo(() => ({
-        translateX: true,
-        skewX: false,
-        contrast: true,
-        scale: false,
-        brightness: true
-    }), []);
+  useGSAP(() => {
+    if (!gridRef.current) return;
 
-    const baseAmt = 0.1;
-    const minAmt = 0.05;
-    const maxAmt = 0.8;
+    const rows = Array.from(gridRef.current.children) as HTMLElement[];
+ 
 
-    const renderedStyles = useMemo<RenderedStyle[]>(() =>
-        Array.from({ length: numRows }, (_, index) => {
-            const distanceFromMiddle = Math.abs(index - middleRowIndex);
-            const amt = Math.max(baseAmt - distanceFromMiddle * 0.03, minAmt);
-            const scaleAmt = Math.min(baseAmt + distanceFromMiddle * 0.03, maxAmt);
-            return {
-                amt,
-                scaleAmt,
-                translateX: { previous: 0, current: 0 },
-                contrast: { previous: 100, current: 100 },
-                brightness: { previous: 100, current: 100 }
-            };
-        })
-        , [numRows, middleRowIndex]);
+    // Handler to update mouse position
+    const handleMouseMove = (event: MouseEvent) => {
+      mousePos.current.x = event.clientX;
+      mousePos.current.y = event.clientY;
+    };
 
-    const calculateMappedValues = useCallback(() => ({
-        translateX: ((mousePos.x / winsize.width) * 2 - 1) * 25 * winsize.width / 100,
-        contrast: 100 - Math.pow(Math.abs((mousePos.x / winsize.width) * 2 - 1), 2) * (100 - 330),
-    }), [mousePos.x, winsize.width]);
-    const updateStyles = useCallback(() => {
-        const mappedValues = calculateMappedValues();
+    // Add event listener when hovered 
+      window.addEventListener('mousemove', handleMouseMove); 
 
-        renderedStyles.forEach((style) => {
-            for (let prop in config) {
-                if (config[prop as keyof typeof config]) {
-                    const styleProp = prop as keyof RenderedStyle;
-                    if (typeof style[styleProp] === 'object') {
-                        style[styleProp] = {
-                            ...style[styleProp],
-                            current: mappedValues[styleProp],
-                            previous: linearInterpolation(
-                                style[styleProp].previous,
-                                mappedValues[styleProp],
-                                styleProp === 'scaleAmt' ? style.scaleAmt : style.amt
-                            )
-                        };
-                    } else {
-                        style[styleProp] = mappedValues[styleProp];
-                    }
-                }
-            }
+    // Use GSAP's ticker to update positions on every frame
+    const tickerFunction = () => {
+      if (!isHovered) return;
+    
+      // Normalize mouse X position
+      const normalizedMouseX = (mousePos.current.x / winsize.width) * 2 - 1;
+      const targetTranslateX = normalizedMouseX * 12 * (winsize.width / 80);
+    
+      rows.forEach((row, index) => {
+        const distanceFromMiddle = Math.abs(index - middleRowIndex);
+        const factor = 1 - 0.2 * distanceFromMiddle;
+        const targetX = targetTranslateX * factor;
+    
+        // Smoothly animate to the new position with easing
+        gsap.to(row, {
+          x: targetX,
+          duration: 1.5, // Adjust duration for smoothness
+          ease: 'power2.out', // Adjust easing type for the desired effect
         });
-    }, [calculateMappedValues, config, renderedStyles]);
+      });
+    };
+    
 
-    useGSAP(() => {
+    gsap.ticker.add(tickerFunction);
 
-        if (isHovered) {
-            const animation = gsap.timeline({
-                repeat: -1,
-                onUpdate: updateStyles
-            });
+    // Cleanup function
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      gsap.ticker.remove(tickerFunction);
+    };
+  }, { dependencies: [winsize.width, isHovered], scope: gridRef });
 
-            return () => animation.kill();
-        }
-    }, [updateStyles, isHovered]);
+  useEffect(() => {
+    const dsSprite = document.getElementById('DSSPRITE') as HTMLDivElement;
+    if (dsSprite) {
+      spriteRef.current = dsSprite;
+      const symbols = Array.from(dsSprite.querySelectorAll('symbol'));
+      setSvgs(symbols.map((symbol) => symbol.id)); // Update SVG IDs
+    }
+  }, []);
 
-    useEffect(() => {
-
-        // get #DSSPRITE svg sprite and create an array of the symbol ids
-        const dsSprite = document.getElementById('DSSPRITE') as HTMLDivElement;
-        if (dsSprite) {
-            spriteRef.current = dsSprite;
-        }
-
-    }, []);
-    const svgs = useMemo(() => {
-        const sprite = spriteRef.current;
-        if (sprite) {
-            const symbols = Array.from(sprite.querySelectorAll('symbol'));
-            return symbols.map((symbol) => symbol.id);
-        }
-        return [];
-    }, [spriteRef.current]);
-    return (
-        <div
-            className={Styles.gridContainer}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-        >
-            <div className={Styles.gridContent} ref={gridRef}>
-                {renderedStyles.map((style, i) => (
-                    <div key={i} className={Styles.row} style={{
-                        transform: `translateX(${style.translateX.previous}px)`,
-                        filter: `contrast(${style.contrast.previous}%) brightness(${style.brightness.previous}%)`
-                    }}>
-                        {Array.from({ length: numCols }, (_, j) => {
-                            const count = i * numCols + j + 1;
-                            return (
-                                <div key={j} className={`${Styles.cell} ${i === middleRowIndex && j === middleColIndex ? Styles.middleCell : ''}`}>
-                                    <SvgIllustration name={svgs[(i + j) % svgs.length]} />
-                                </div>
-                            )
-                        })}
-                    </div>
-                ))}
+  return (
+    <div
+      className={Styles.gridContainer}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <div className={Styles.gridContent} ref={gridRef}>
+        {svgs.length > 0 &&
+          Array.from({ length: numRows }, (_, i) => (
+            <div key={i} className={Styles.row}>
+              {Array.from({ length: numCols }, (_, j) => (
+                <div
+                  key={j}
+                  className={`${Styles.cell} ${
+                    i === middleRowIndex && j === Math.floor(numCols / 2)
+                      ? Styles.middleCell
+                      : ''
+                  }`}
+                >
+                  <SvgIllustration name={svgs[(i + j) % svgs.length]} />
+                </div>
+              ))}
             </div>
-        </div>
-    );
-}
+          ))}
+      </div>
+    </div>
+  );
+};
 
 export default React.memo(Blueprints);

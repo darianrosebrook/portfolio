@@ -9,7 +9,7 @@ export const useMousePosition = () => {
     const handleMouseMove = useCallback((ev: MouseEvent | Touch) => {
         const pos = getMousePos(ev);
         setMousePos(pos);
-    }, []); // Throttle the event handler to limit updates to once every 50ms
+    }, []); 
 
     useEffect(() => {
         window.addEventListener('mousemove', handleMouseMove);
@@ -17,7 +17,7 @@ export const useMousePosition = () => {
 
         return () => {
             window.removeEventListener('mousemove', handleMouseMove);
-            window.removeEventListener('touchmove', handleMouseMove as any);
+            window.removeEventListener('touchmove', handleMouseMove as EventListener);
         };
     }, [handleMouseMove]);
 

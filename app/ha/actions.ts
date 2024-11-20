@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { RedirectType, redirect } from "next/navigation";
 
 import { createClient } from "@/utils/supabase/server";
+
 const getURL = () => {
   let url =
     process?.env?.NEXT_PUBLIC_SITE_URL ?? // Set this to your site URL in production env.
@@ -12,27 +13,25 @@ const getURL = () => {
   url = url.charAt(url.length - 1) === "/" ? url : `${url}/`;
   return url;
 };
-export async function signOut() {
-  const client = createClient();
-  const { error } = await client.auth.signOut();
+export const signOutAction = async () => {
+  const supabase = await createClient();
+  const { error } = await supabase.auth.signOut()
   if (error) {
     console.error("Error logging out:", error);
-  } else {
-    redirect("/");
   }
-}
-export async function login(formData: FormData) { 
-  const supabase = createClient(); 
-
-  const { data, error } = await supabase.auth.signInWithOAuth({
-    provider: "google",
+  return redirect("/");
+};
+export async function login() {
+  const supabase = await createClient()
+  const provider = "google";
+  const { data, error } = await supabase.auth.signInWithOAuth({ 
+    provider,
     options: {
       redirectTo: `${getURL()}/auth/callback`, 
     },
   });
 
-  if (data.url) { 
-    console.log('data.url', data)  
+  if (data.url) {  
     redirect(data.url, RedirectType.replace);
   } else if (error) {
     console.error("Error logging in:", error);
@@ -41,7 +40,7 @@ export async function login(formData: FormData) {
 }
 
 export async function signup(formData: FormData) {
-  const supabase = createClient();
+  const supabase =  await createClient();
 
   // type-casting here for convenience
   // in practice, you should validate your inputs

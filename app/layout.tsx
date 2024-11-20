@@ -34,12 +34,18 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const client = createClient();
+  const client = await createClient();
   const response = await client.auth.getUser();
-  response.error && console.error("error", response.error);
-  const { data: { user } } = response;
+  const { data: { user }, error } = response;
+  if (error) {
+    console.error(error);
+  }
   const id = user?.id || null;
-
+  const pages = [
+    { name: 'Blueprints', path: 'blueprints', admin: false },
+    { name: 'Articles', path: 'articles', admin: false },
+    { name: 'Work', path: 'work', admin: false }, 
+  ]
   return (
     <html lang="en" className={`${inter.variable} ${nohemi.variable}`}>
       <body>
@@ -50,7 +56,7 @@ export default async function RootLayout({
           </filter>
         </svg>
 
-        <Navbar id={id} />
+        <Navbar id={id} pages={pages}/>
         {children}
         <Footer />
         <script

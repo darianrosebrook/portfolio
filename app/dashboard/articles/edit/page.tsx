@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Tiptap } from "@/components/Tiptap";
-import { Article } from "app/types";
+import { Article } from "@/types";
 
 import { calculateReadingTime, debounce } from "@/utils";
 
@@ -39,7 +39,7 @@ const EditArticle = () => {
     console.log(article);
   };
   const handleUpdate = debounce((article: Article) => {
-    let updatedArticle = { ...article };
+    const updatedArticle = { ...article };
     updatedArticle.headline = getH1FromArticleBody(
       updatedArticle.articleBody
     );
@@ -56,7 +56,7 @@ const EditArticle = () => {
   }, 1000); // If the user stops typing for 10 seconds, push the changes to the server
   const handlePublish = async () => {
     // publish the article
-    let response = await fetch("/api/publish", {
+    const response = await fetch("/api/publish", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

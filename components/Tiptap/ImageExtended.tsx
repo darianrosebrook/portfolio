@@ -41,7 +41,7 @@ export default Image.extend({
                   name = `${Math.random().toString(36).substring(7)}-${name}`;
                 }
                 const reader = new FileReader();
-                reader.onload = async (readerEvent) => {
+                reader.onload = async () => {
                   const path = await upload({
                     file: {
                       type: "image",
@@ -93,7 +93,7 @@ export default Image.extend({
                 }
                 const reader = new FileReader();
 
-                reader.onload = async (readerEvent) => {
+                reader.onload = async () => {
                   const path = await upload({
                     file: {
                       type: "image",
