@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Style from './swatches.module.scss';
 import { useMousePosition } from './useMousePosition';
 import { useWindowSize } from './useWindowSize';
@@ -42,8 +42,8 @@ const ColorSwatch: React.FC<ColorSwatchProps> = ({ token, value, colorName }) =>
             }}>
                 <div>
                     <p><>{colorName}</></p>
-                    <p><small>{token}</small></p>
                     <p><small>{value}</small></p>
+                    <p><small>{token}</small></p>
                 </div>
                 <div>
                 </div>
@@ -52,7 +52,7 @@ const ColorSwatch: React.FC<ColorSwatchProps> = ({ token, value, colorName }) =>
     );
 };
 const Swatches = () => {
-    const colors = [
+    const colors = React.useMemo(() => [
         // Red
         { token: "--color-core-red-100", value: "#fceaea", colorName: "Red 100", },
         { token: "--color-core-red-200", value: "#f7c1c2", colorName: "Red 200", },
@@ -102,7 +102,7 @@ const Swatches = () => {
         { token: "--color-core-violet-600", value: "#931d8f", colorName: "Violet 600", },
         { token: "--color-core-violet-700", value: "#661463", colorName: "Violet 700", },
         { token: "--color-core-violet-800", value: "#3b0c3a", colorName: "Violet 800", },
-        
+
         // Neutral
         { token: "--color-core-neutral-100", value: "#efefef", colorName: "Neutral 100", },
         { token: "--color-core-neutral-200", value: "#cecece", colorName: "Neutral 200", },
@@ -113,7 +113,7 @@ const Swatches = () => {
         { token: "--color-core-neutral-700", value: "#3a3a3a", colorName: "Neutral 700", },
         { token: "--color-core-neutral-800", value: "#212121", colorName: "Neutral 800", },
 
-    ];
+    ], []);
 
     const [isHovered, setIsHovered] = useState(false);
     const gridRef = useRef<HTMLDivElement>(null);
@@ -121,25 +121,24 @@ const Swatches = () => {
     const winsize = useWindowSize();
 
     useEffect(() => {
-        if (gridRef.current && isHovered) {
+        if (gridRef.current) {
             const handleMouseMove = () => {
                 const gridRect = gridRef.current.getBoundingClientRect();
                 const mouseX = mousePos.x - gridRect.left - winsize.width;
                 const mousePercent = (mouseX / gridRect.width) / 2;
                 const mousePercentFromCenter = (mouseX / gridRect.width);
-                const amplitude = 120;
-                const frequency = 0.40;
+                const amplitude = 256;
+                const frequency = .16;
                 colors.forEach((_, i) => {
                     const swatch = gridRef.current.children[i] as HTMLElement;
                     const x = linearInterpolation(0, gridRect.width - swatch.offsetWidth, mousePercent);
                     // Modified sine wave calculation
                     const y = Math.sin(i * frequency + mousePercentFromCenter * Math.PI) * amplitude;
-
                     gsap.to(swatch, {
                         x,
                         y,
-                        duration: 0.5,
-                        ease: 'power2.out'
+                        duration: .5,
+                        ease: 'power1.out'
                     });
                 });
             };
@@ -148,7 +147,7 @@ const Swatches = () => {
                 window.removeEventListener('mousemove', handleMouseMove);
             };
         }
-    }, [mousePos, winsize, colors]);
+    }, [isHovered, mousePos, winsize, colors]);
 
 
     return (
@@ -223,7 +222,7 @@ const Swatches = () => {
             </svg>
             <div className={`${Style.colorSwatchContainer} ${Style.gridContent}`} ref={gridRef}>
                 {colors.map((swatch, i) => {
-                    let zIndex = 100 - i;
+                    const zIndex = 100 - i;
                     return (
                         <div key={i} className={Style.colorSwatch} style={{ zIndex, }}>
                             <ColorSwatch {...swatch} />

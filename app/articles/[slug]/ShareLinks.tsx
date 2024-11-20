@@ -1,5 +1,5 @@
 "use client";
-import { Article } from "app/types";
+import { Article } from "@/types";
 import styles from "./styles.module.css";
 import Button from "@/components/Button";
 import { byPrefixAndName } from "@awesome.me/kit-0ba7f5fefb/icons";

@@ -565,6 +565,7 @@
   box-sizing: border-box;
   /* background: rgba(190, 0, 0 , 0.1);
   border: 1px solid rgba(0, 0, 0, 1); */
+  line-height: var(--line-height-body);
   min-width: 0;
   min-height: 0;
   overflow-wrap: anywhere;
@@ -573,6 +574,9 @@
 }
 * {
   margin: 0;
+} 
+*:not(h1, h2, h3, h4, h5, h6, p, span, a, blockquote, pre, code) {
+  line-height: var(--line-height-collapse);
 }
 a:focus-visible,
 a:focus {

@@ -18,8 +18,7 @@ const Container = React.forwardRef<
       status = "info",
       level,
       dismissible,
-      onDismiss,
-      className,
+      onDismiss, 
       index,
       ...props
     },

@@ -13,7 +13,7 @@ export default async function PrivateRoute({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data, error } = await supabase.auth.getUser();
   if (error || !data?.user) {
     redirect("/");
@@ -31,7 +31,8 @@ export default async function PrivateRoute({
     { name: "Account", url: "/dashboard/account", icon: account, active: false },
     { name: "Settings", url: "/dashboard/settings", icon: settings, active: false },
   ];
-  const url = headers().get("x-current-path");  
+  const nextHeaders = await headers();
+  const url = nextHeaders.get("x-current-path");  
   const activeTab = tabs.find((tab) => tab.url === url);
   if (activeTab) {
     activeTab.active = true;

@@ -3,8 +3,7 @@ import {
   BodyContent,
   Container,
   Icon,
-  Title,
-  AlertNoticeProps,
+  Title, 
 } from "./AlertNotice";
 export { BodyContent, Container, Icon, Title };
 export type { AlertNoticeProps } from "./AlertNotice";

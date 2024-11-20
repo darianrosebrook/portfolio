@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import LogoutButton from "./logout-button";
+import { usePathname } from "next/navigation"; 
 import styles from "./index.module.css";
 import Logo from "./logo";
 import Avatar from "../Avatar";
@@ -13,28 +12,25 @@ import { byPrefixAndName } from "@awesome.me/kit-0ba7f5fefb/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ToggleSwitch from "../ToggleSwitch";
 
-
 const faBars = byPrefixAndName["far"]["bars"];
 
-
-export default function Navbar({ id = null }) {
-
+type NavbarProps = {
+  pages:  {name: string, path: string, admin: boolean}[] | null;
+  id: string;
+};
+export default function Navbar({pages = [], id = null }: NavbarProps) {
   const [profile, setProfile] = useState(null);
-  const [slider, setSlider] = useState(false);
+  const [slider, setSlider] = useState(false); 
+
   const getProfile = async () => {
-    const client = createClient();
+    const client = await createClient();
     const response = await client.from("profiles").select("*").eq("id", id);
     setProfile(response.data[0]);
     console.log(profile);
   }
-  let full_name = profile?.full_name || "Darian Rosebrook";
-  let avatar_url = profile?.avatar_url || "/images/avatar.png";
-  const pathname = usePathname();
-  const paths = [
-    ["/articles", "Articles"],
-    ["/work", "Work"],
-    ["/about", "About"],
-  ];
+  const full_name = profile?.full_name || "Darian Rosebrook";
+  const avatar_url = profile?.avatar_url || "/images/avatar.png";
+  const pathname = usePathname();  
   useEffect(() => {
     if (id && !profile) {
       getProfile();
@@ -48,13 +44,13 @@ export default function Navbar({ id = null }) {
           <h1 className="medium logo">{`Darian Rosebrook`}</h1>
         </Link>
         <ul className={styles.navLinks}>
-          {paths.map(([route, name]) => (
-            <li key={name}>
+          {pages.length > 0 && pages.map(page => (
+            <li key={page.name}>
               <Link
-                href={route}
-                className={pathname === route ? styles.active : ""}
+                href={`/${page.path}`}
+                className={pathname === page.path ? styles.active : ""}
               >
-                {name}
+                {page.name}
               </Link>
             </li>
           ))}
@@ -89,7 +85,7 @@ export default function Navbar({ id = null }) {
                       <Link className="menuItem" href="/settings">Settings</Link>
                     </li>
                   </ul>
-                  <LogoutButton />
+                  <Button href="/signout" as="a">Logout</Button>
                 </Popover.Content>
               </Popover></li>
           )}

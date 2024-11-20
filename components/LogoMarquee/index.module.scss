@@ -28,3 +28,12 @@
     background: linear-gradient(90deg, var(--color-background-primary) 0% , var(--color-background-transparent) 20% 80%, var(--color-background-primary) 100%);
    
 }
+
+@media (max-width: 768px) {
+  .marquee {
+    gap: var(--size-04); 
+  }
+  .box svg {
+    max-height: 50px;
+  }
+}

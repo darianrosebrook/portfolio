@@ -2,19 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Styles from "../../articles/[slug]/styles.module.css";
 
-type PageProps = {};
-
-const Page: React.FC<PageProps> = () => {
-  const enterPassForImages = () => {
-    const password = prompt("Enter password to view images");
-    if (password === "password") {
-      const images = document.querySelectorAll("img");
-      images.forEach((img) => {
-        const src = img.getAttribute("data-src");
-        img.setAttribute("src", src);
-      });
-    }
-  };
+const Page: React.FC = () => {
   const images = {
     "icon-tool.jpg": {
       alt: "Icon Sync",
@@ -40,7 +28,6 @@ const Page: React.FC<PageProps> = () => {
       width: 800,
       height: 400,
     },
-
     "icon-tool-04.png": {
       alt: "Icon Sync",
       src: "/icon-tool/icon-tool-04.png",
@@ -59,7 +46,6 @@ const Page: React.FC<PageProps> = () => {
       width: 800,
       height: 400,
     },
-
     "icon-tool-07.png": {
       alt: "Icon Sync",
       src: "/icon-tool/icon-tool-07.png",
@@ -116,7 +102,7 @@ const Page: React.FC<PageProps> = () => {
         <p>
           By bridging the gap between design and code here, our design system
           team can now create, publish, and release new iconography from Figma
-          to the team‘s codebase the same day. Much better than the 6-8 week
+          to the team&apos;s codebase the same day. Much better than the 6-8 week
           turnaround due to meetings, backlogging tickets, and working around
           release schedules.
         </p>
@@ -126,9 +112,19 @@ const Page: React.FC<PageProps> = () => {
           our documentation site are all updated at the same time.
         </p>
         <h3>Main Goals</h3>
-        <Image {...images["icon-tool-01.png"]} />
+        <Image
+          src={images["icon-tool-01.png"].src}
+          alt={images["icon-tool-01.png"].alt}
+          width={images["icon-tool-01.png"].width}
+          height={images["icon-tool-01.png"].height}
+        />
         <aside>
-          <Image {...images["icon-tool-02.png"]} />
+          <Image
+            src={images["icon-tool-02.png"].src}
+            alt={images["icon-tool-02.png"].alt}
+            width={images["icon-tool-02.png"].width}
+            height={images["icon-tool-02.png"].height}
+          />
           <div>
             <h3>Addressing the issue</h3>
             <h4>
@@ -171,9 +167,19 @@ const Page: React.FC<PageProps> = () => {
               by the consuming platform teams
             </p>
           </div>
-          <Image {...images["icon-tool-03.png"]} />
+          <Image
+            src={images["icon-tool-03.png"].src}
+            alt={images["icon-tool-03.png"].alt}
+            width={images["icon-tool-03.png"].width}
+            height={images["icon-tool-03.png"].height}
+          />
         </aside>
-        <Image {...images["icon-tool-04.png"]} />
+        <Image
+          src={images["icon-tool-04.png"].src}
+          alt={images["icon-tool-04.png"].alt}
+          width={images["icon-tool-04.png"].width}
+          height={images["icon-tool-04.png"].height}
+        />
 
         <h3>Simplifying our process by removing redundancy</h3>
         <p>
@@ -212,7 +218,12 @@ const Page: React.FC<PageProps> = () => {
 
         <h3>Transitioning to automation</h3>
         <aside>
-          <Image {...images["icon-tool-05.png"]} />
+          <Image
+            src={images["icon-tool-05.png"].src}
+            alt={images["icon-tool-05.png"].alt}
+            width={images["icon-tool-05.png"].width}
+            height={images["icon-tool-05.png"].height}
+          />
           <div>
             <h4>
               <>Automating the flow</>
@@ -221,20 +232,25 @@ const Page: React.FC<PageProps> = () => {
               Once the key moments were defined, we were able to take the
               laborious time-heavy moments of exporting, optimizing, and
               importing iconography and hand that off to a custom tool built to
-              handle eBay’s current needs
+              handle eBay&apos;s current needs
             </p>
             <h4>
               <>Introducing versioning</>
             </h4>
             <p>
-              By intelligently connecting Figma to GitHub we’re in a much better
+              By intelligently connecting Figma to GitHub we&apos;re in a much better
               space to understand and track the changes across icons while still
-              being native to the user’s experience
+              being native to the user&apos;s experience
             </p>
           </div>
         </aside>
         <aside>
-          <Image {...images["icon-tool-06.png"]} />
+          <Image
+            src={images["icon-tool-06.png"].src}
+            alt={images["icon-tool-06.png"].alt}
+            width={images["icon-tool-06.png"].width}
+            height={images["icon-tool-06.png"].height}
+          />
           <div>
             <p>
               Working together with Design Technology I had been given the green
@@ -253,12 +269,17 @@ const Page: React.FC<PageProps> = () => {
             </p>
             <p>
               These optimization steps could be brought into the same process
-              behind the scenes of the designer’s output, meaning the designer
+              behind the scenes of the designer&apos;s output, meaning the designer
               just had to verify the design still looked correct and then
               forward on the icon.
             </p>
           </div>
-          <Image {...images["icon-tool-07.png"]} />
+          <Image
+            src={images["icon-tool-07.png"].src}
+            alt={images["icon-tool-07.png"].alt}
+            width={images["icon-tool-07.png"].width}
+            height={images["icon-tool-07.png"].height}
+          />
         </aside>
 
         <p>

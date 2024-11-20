@@ -14,10 +14,7 @@ export const contentType = "image/png";
 
 // Image generation
 export default async function Image() {
-  // Font
-  const nohemi = await fetch(
-    "https://darianrosebrook.com/fonts/Nohemi-Regular.woff2"
-  ).then((res) => res.arrayBuffer());
+  // Font 
   return new ImageResponse(
     (
       <div

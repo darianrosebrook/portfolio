@@ -39,8 +39,7 @@ const LogoMarquee: React.FC = () => {
     useEffect(() => {
         const LOGOSPRITE = document.getElementById('LOGOSPRITE');
         if (LOGOSPRITE) {
-            spriteRef.current = LOGOSPRITE;
-            const boxElements = logoMarqueeRef.current.children;
+            spriteRef.current = LOGOSPRITE; 
             const children = LOGOSPRITE.children;
             console.log(children)
             const newBoxes = Array.from(children).map(child => box(child));
@@ -52,7 +51,7 @@ const LogoMarquee: React.FC = () => {
         <div className={Styles.marqueeContainer}>
             <LogoSprite />
             <div className={Styles.marquee} ref={logoMarqueeRef}>
-                {clones && boxes && boxes.map((box, index) => box)}
+                {clones && boxes && boxes.map((box) => box)}
             </div>
             <div className={Styles.cover}>
 

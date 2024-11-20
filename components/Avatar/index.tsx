@@ -16,6 +16,7 @@ function initials(name: string) {
 }
 
 const Avatar = ({ src, name, size }: AvatarProps) => {
+    const displayInitials = name ? initials(name) : "";
     return (
         <div className={`${styles.avatar} ${styles['avatar_' + size]}`}>
             {src ? (
@@ -27,7 +28,7 @@ const Avatar = ({ src, name, size }: AvatarProps) => {
                     className={styles.avatar_image}
                 />
             ) : (
-                <span>{initials(name)}</span>
+                <span>{displayInitials}</span>
             )}
         </div>
     );

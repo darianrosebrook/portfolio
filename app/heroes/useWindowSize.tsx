@@ -1,14 +1,14 @@
 'use client';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 // Custom hook for window size 
 export const useWindowSize = () => {
     const isClient = typeof window === 'object';
 
-    const getSize = () => ({
+    const getSize = useCallback(() => ({
         width: isClient ? window.innerWidth : 0,
         height: isClient ? window.innerHeight : 0
-    });
+    }), [isClient]);
 
     const [winsize, setWinsize] = useState(getSize);
 
@@ -23,7 +23,7 @@ export const useWindowSize = () => {
 
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
-    }, [isClient]);
+    }, [getSize, isClient]);
 
     return winsize;
 };

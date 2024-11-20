@@ -1,9 +1,6 @@
-import Link from "next/link";
-import Styles from "./Page.module.scss";
+import Link from "next/link"; 
 
-type PageProps = {};
-
-const Page: React.FC<PageProps> = () => {
+const Page: React.FC= () => {
   return (
     <section className="content">
       <Link href="/work">Previous</Link>

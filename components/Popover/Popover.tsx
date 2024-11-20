@@ -50,9 +50,7 @@ const Popover: React.FC<PopoverProps> & {
   const updatePosition = useCallback(() => {
     if (triggerRef.current && contentRef.current) {
       const triggerRect = triggerRef.current.getBoundingClientRect();
-      const contentRect = contentRef.current.getBoundingClientRect();
-      const scrollX = window.scrollX;
-      const scrollY = window.scrollY;
+      const contentRect = contentRef.current.getBoundingClientRect(); 
 
       // Calculate initial positions
       let left = triggerRect.left + offset;
