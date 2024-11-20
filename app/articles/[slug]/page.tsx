@@ -69,12 +69,10 @@ async function getData(slug) {
   return { ...article, html, beforeArticle, afterArticle, h1FromHTML, imageFromHTML };
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const { slug } = await params;
+export async function generateMetadata(props: {
+  params: Params}) {
+  const params = await props.params
+  const { slug } = params;
   const article = await getData(slug);
   const canonical = `https://darianrosebrook.com/articles/${slug}`;
   const openGraph = {
@@ -112,8 +110,12 @@ export async function generateMetadata({
 
 type Params = Promise<{ slug: string }>
 
-export default async function Page({ params }: { params: Params }) {  
-  const { slug } = await params 
+export default async function Page(props: {
+  params: Params
+}) {
+
+  const params = await props.params
+  const { slug } =  params;
   const canonical = `https://darianrosebrook.com/articles/${slug}`;
   const article = await getData(slug);
   const ldJson = {
