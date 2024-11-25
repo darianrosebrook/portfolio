@@ -178,17 +178,36 @@
   --color-core-red-500: #d9292b; /* 4.88 :1 */
   --color-core-red-600: #ae0001; /* 7.5 :1 */
   --color-core-red-700: #7b0000; /* 11.4 :1 */
-  --color-core-red-800: #4b0000; /* 16.16 :1 */
-
+  --color-core-red-800: #4b0000; /* 16.16 :1 */ 
+  // orange
+  // #ffeadd 1.11 
+  // #ffb58e  1.64
+  // #ff7c3c 2.45
+  // #d55d21 3.71
+  // #a5491d 5.63
+  // #7b3919 8.24
+  // #552915 11.74
+  // #29160c 16.57
   /* orange */
-  --color-core-orange-100: #ffedcc; /* 1.15 :1 */
-  --color-core-orange-200: #ffc458; /* 1.58 :1 */
-  --color-core-orange-300: #fe9400; /* 2.22 :1 */
-  --color-core-orange-400: #d77600; /* 3.24 :1 */
-  --color-core-orange-500: #ac5c00; /* 4.9 :1 */
-  --color-core-orange-600: #824500; /* 7.5 :1 */
-  --color-core-orange-700: #593000; /* 11.37 :1 */
-  --color-core-orange-800: #331b00; /* 16.18 :1 */
+
+  --color-core-orange-100: #ffeadd; /* 1.11 :1 */
+  --color-core-orange-200: #ffb58e; /* 1.64 :1 */
+  --color-core-orange-300: #ff7c3c; /* 2.45 :1 */
+  --color-core-orange-400: #d55d21; /* 3.71 :1 */
+  --color-core-orange-500: #a5491d; /* 5.63 :1 */
+  --color-core-orange-600: #7b3919; /* 8.24 :1 */
+  --color-core-orange-700: #552915; /* 11.74 :1 */
+  --color-core-orange-800: #29160c; /* 16.57 :1 */
+  
+  /* yellow */
+  --color-core-yellow-100: #ffedcc; /* 1.15 :1 */
+  --color-core-yellow-200: #ffc458; /* 1.58 :1 */
+  --color-core-yellow-300: #fe9400; /* 2.22 :1 */
+  --color-core-yellow-400: #d77600; /* 3.24 :1 */
+  --color-core-yellow-500: #ac5c00; /* 4.9 :1 */
+  --color-core-yellow-600: #824500; /* 7.5 :1 */
+  --color-core-yellow-700: #593000; /* 11.37 :1 */
+  --color-core-yellow-800: #331b00; /* 16.18 :1 */
 
   /* green */
   --color-core-green-100: #e4f2e0; /* 1.16 :1 */
@@ -199,6 +218,17 @@
   --color-core-green-600: #336006; /* 7.46 :1 */
   --color-core-green-700: #234104; /* 11.48 :1 */
   --color-core-green-800: #142502; /* 16.21 :1 */
+
+  /* teal */
+  --color-core-teal-100: #caf8f7; /* 1.16 :1 */
+  --color-core-teal-200: #18dbdb; /* 1.57 :1 */
+  --color-core-teal-300: #22b4b4; /* 2.22 :1 */
+  --color-core-teal-400: #258f8e; /* 3.25 :1 */
+  --color-core-teal-500: #236f6f; /* 4.91 :1 */
+  --color-core-teal-600: #205353; /* 7.46 :1 */
+  --color-core-teal-700: #1a3a3a; /* 11.48 :1 */
+  --color-core-teal-800: #121d1d; /* 16.21 :1 */
+
 
   /* blue */
   --color-core-blue-100: #d9f3fe; /* 1.15 :1 */
@@ -228,6 +258,7 @@
   --color-foreground-tertiary: var(--color-core-neutral-500);
   --color-foreground-inverse: var(--color-core-light);
 
+  --color-foreground-highlight: var(--color-core-blue-700);
   --color-foreground-accent: var(--color-core-red-500);
   --color-foreground-onColor: var(--color-foreground-inverse);
 
@@ -253,7 +284,8 @@
   --color-background-secondary: var(--color-core-neutral-100);
   --color-background-tertiary: var(--color-core-neutral-200);
   --color-background-inverse: var(--color-core-dark);
-
+  
+  --color-background-highlight: var(--color-core-blue-200);
   --color-background-accent: var(--color-core-red-500);
   --color-background-onColor: var(--color-background-primary);
 
@@ -307,7 +339,7 @@
     --color-foreground-secondary: var(--color-core-neutral-300);
     --color-foreground-tertiary: var(--color-core-neutral-500);
     --color-foreground-inverse: var(--color-core-dark);
-
+ 
     --color-foreground-accent: var(--color-core-red-400);
     --color-foreground-onColor: var(--color-foreground-primary);
 
@@ -333,7 +365,7 @@
     --color-background-secondary: var(--color-core-neutral-800);
     --color-background-tertiary: var(--color-core-neutral-700);
     --color-background-inverse: var(--color-core-light);
-
+ 
     --color-background-accent: var(--color-core-red-500);
     --color-background-onColor: var(--color-background-primary);
 
@@ -577,6 +609,10 @@
 } 
 *:not(h1, h2, h3, h4, h5, h6, p, span, a, blockquote, pre, code) {
   line-height: var(--line-height-collapse);
+}
+*::selection {
+  background: var(--color-background-highlight);
+  color: var(--color-foreground-highlight);
 }
 a:focus-visible,
 a:focus {

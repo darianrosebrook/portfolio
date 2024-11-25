@@ -64,14 +64,24 @@ const Swatches = () => {
         { token: "--color-core-red-800", value: "#4b0000", colorName: "Red 800", },
 
         // Orange
-        { token: "--color-core-orange-100", value: "#ffedcc", colorName: "Orange 100", },
-        { token: "--color-core-orange-200", value: "#ffc458", colorName: "Orange 200", },
-        { token: "--color-core-orange-300", value: "#fe9400", colorName: "Orange 300", },
-        { token: "--color-core-orange-400", value: "#d77600", colorName: "Orange 400", },
-        { token: "--color-core-orange-500", value: "#ac5c00", colorName: "Orange 500", },
-        { token: "--color-core-orange-600", value: "#824500", colorName: "Orange 600", },
-        { token: "--color-core-orange-700", value: "#593000", colorName: "Orange 700", },
-        { token: "--color-core-orange-800", value: "#331b00", colorName: "Orange 800", },
+        { token: "--color-core-orange-100", value: "#ffeadd", colorName: "Orange 100", },
+        { token: "--color-core-orange-200", value: "#ffb58e", colorName: "Orange 200", },
+        { token: "--color-core-orange-300", value: "#ff7c3c", colorName: "Orange 300", },
+        { token: "--color-core-orange-400", value: "#d55d21", colorName: "Orange 400", },
+        { token: "--color-core-orange-500", value: "#a5491d", colorName: "Orange 500", },
+        { token: "--color-core-orange-600", value: "#7b3919", colorName: "Orange 600", },
+        { token: "--color-core-orange-700", value: "#552915", colorName: "Orange 700", },
+        { token: "--color-core-orange-800", value: "#29160c", colorName: "Orange 800", },
+ 
+        // Yellow
+        { token: "--color-core-yellow-100", value: "#ffedcc", colorName: "Yellow 100", },
+        { token: "--color-core-yellow-200", value: "#ffc458", colorName: "Yellow 200", },
+        { token: "--color-core-yellow-300", value: "#fe9400", colorName: "Yellow 300", },
+        { token: "--color-core-yellow-400", value: "#d77600", colorName: "Yellow 400", },
+        { token: "--color-core-yellow-500", value: "#ac5c00", colorName: "Yellow 500", },
+        { token: "--color-core-yellow-600", value: "#824500", colorName: "Yellow 600", },
+        { token: "--color-core-yellow-700", value: "#593000", colorName: "Yellow 700", },
+        { token: "--color-core-yellow-800", value: "#331b00", colorName: "Yellow 800", },
 
         // Green
         { token: "--color-core-green-100", value: "#e4f2e0", colorName: "Green 100", },
@@ -81,7 +91,17 @@ const Swatches = () => {
         { token: "--color-core-green-500", value: "#487e1e", colorName: "Green 500", },
         { token: "--color-core-green-600", value: "#336006", colorName: "Green 600", },
         { token: "--color-core-green-700", value: "#234104", colorName: "Green 700", },
-        { token: "--color-core-green-800", value: "#142502", colorName: "Green 800", },
+        { token: "--color-core-green-800", value: "#142502", colorName: "Green 800", }, 
+
+        // Teal
+        { token: "--color-core-teal-100", value: "#caf8f7", colorName: "Teal 100", },
+        { token: "--color-core-teal-200", value: "#18dbdb", colorName: "Teal 200", },
+        { token: "--color-core-teal-300", value: "#22b4b4", colorName: "Teal 300", },
+        { token: "--color-core-teal-400", value: "#258f8e", colorName: "Teal 400", },
+        { token: "--color-core-teal-500", value: "#236f6f", colorName: "Teal 500", },
+        { token: "--color-core-teal-600", value: "#205353", colorName: "Teal 600", },
+        { token: "--color-core-teal-700", value: "#1a3a3a", colorName: "Teal 700", },
+        { token: "--color-core-teal-800", value: "#121d1d", colorName: "Teal 800", },
 
         // Blue
         { token: "--color-core-blue-100", value: "#d9f3fe", colorName: "Blue 100", },
@@ -92,7 +112,7 @@ const Swatches = () => {
         { token: "--color-core-blue-600", value: "#0042dc", colorName: "Blue 600", },
         { token: "--color-core-blue-700", value: "#002d99", colorName: "Blue 700", },
         { token: "--color-core-blue-800", value: "#001b5a", colorName: "Blue 800", },
-
+        
         // Violet
         { token: "--color-core-violet-100", value: "#ffe9fe", colorName: "Violet 100", },
         { token: "--color-core-violet-200", value: "#ffb5fc", colorName: "Violet 200", },
