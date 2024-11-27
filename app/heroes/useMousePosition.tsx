@@ -21,5 +21,5 @@ export const useMousePosition = () => {
         };
     }, [handleMouseMove]);
 
-    return mousePos;
+    return  mousePos.x 
 };

@@ -1,15 +1,17 @@
 'use client';
 import React, { useState, useRef, useEffect } from 'react';
 import Style from './swatches.module.scss';
-import { useMousePosition } from './useMousePosition';
-import { useWindowSize } from './useWindowSize';
+import { useMousePosition } from './useMousePosition'; 
+import { useWindowSize } from './useWindowSize'; 
 import { gsap } from 'gsap';
-import { linearInterpolation } from '@/utils';
+import { linearInterpolation } from '@/utils'; 
+import { useScrollPosition } from './useScrollPosition';
 type ColorSwatchProps = {
     token: string;
     value: string;
     colorName: string;
 };
+
 const ColorSwatch: React.FC<ColorSwatchProps> = ({ token, value, colorName }) => {
     const calculateContrast = (hexcolor: string) => {
         let r: number, g: number, b: number;
@@ -72,7 +74,7 @@ const Swatches = () => {
         { token: "--color-core-orange-600", value: "#7b3919", colorName: "Orange 600", },
         { token: "--color-core-orange-700", value: "#552915", colorName: "Orange 700", },
         { token: "--color-core-orange-800", value: "#29160c", colorName: "Orange 800", },
- 
+
         // Yellow
         { token: "--color-core-yellow-100", value: "#ffedcc", colorName: "Yellow 100", },
         { token: "--color-core-yellow-200", value: "#ffc458", colorName: "Yellow 200", },
@@ -91,7 +93,7 @@ const Swatches = () => {
         { token: "--color-core-green-500", value: "#487e1e", colorName: "Green 500", },
         { token: "--color-core-green-600", value: "#336006", colorName: "Green 600", },
         { token: "--color-core-green-700", value: "#234104", colorName: "Green 700", },
-        { token: "--color-core-green-800", value: "#142502", colorName: "Green 800", }, 
+        { token: "--color-core-green-800", value: "#142502", colorName: "Green 800", },
 
         // Teal
         { token: "--color-core-teal-100", value: "#caf8f7", colorName: "Teal 100", },
@@ -112,7 +114,7 @@ const Swatches = () => {
         { token: "--color-core-blue-600", value: "#0042dc", colorName: "Blue 600", },
         { token: "--color-core-blue-700", value: "#002d99", colorName: "Blue 700", },
         { token: "--color-core-blue-800", value: "#001b5a", colorName: "Blue 800", },
-        
+
         // Violet
         { token: "--color-core-violet-100", value: "#ffe9fe", colorName: "Violet 100", },
         { token: "--color-core-violet-200", value: "#ffb5fc", colorName: "Violet 200", },
@@ -137,38 +139,68 @@ const Swatches = () => {
 
     const [isHovered, setIsHovered] = useState(false);
     const gridRef = useRef<HTMLDivElement>(null);
-    const mousePos = useMousePosition();
     const winsize = useWindowSize();
+    const mousePos = useMousePosition(); 
+    const scrollPercent = useScrollPosition(gridRef);
+    
 
     useEffect(() => {
-        if (gridRef.current) {
-            const handleMouseMove = () => {
-                const gridRect = gridRef.current.getBoundingClientRect();
-                const mouseX = mousePos.x - gridRect.left - winsize.width;
-                const mousePercent = (mouseX / gridRect.width) / 2;
-                const mousePercentFromCenter = (mouseX / gridRect.width);
-                const amplitude = 256;
-                const frequency = .16;
-                colors.forEach((_, i) => {
-                    const swatch = gridRef.current.children[i] as HTMLElement;
-                    const x = linearInterpolation(0, gridRect.width - swatch.offsetWidth, mousePercent);
-                    // Modified sine wave calculation
-                    const y = Math.sin(i * frequency + mousePercentFromCenter * Math.PI) * amplitude;
-                    gsap.to(swatch, {
-                        x,
-                        y,
-                        duration: .5,
-                        ease: 'power1.out'
-                    });
-                });
-            };
-            window.addEventListener('mousemove', handleMouseMove);
-            return () => {
-                window.removeEventListener('mousemove', handleMouseMove);
-            };
-        }
-    }, [isHovered, mousePos, winsize, colors]);
+        if (gridRef.current) { 
+            if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+            if (window.innerWidth < 768) {
+                const handleScrollPosition = () => {
+                    const gridRect = gridRef.current.getBoundingClientRect();
+                    const amplitude =  128;
+                    const frequency =  1 / 8;
+                    colors.forEach((_, i) => {
+                        const swatch = gridRef.current.children[i] as HTMLElement;
+                        const x = 32 * i + linearInterpolation(-(gridRect.width / 2 ),  swatch.offsetWidth /2, scrollPercent * 1.5) - gridRect.width / 1.5;
+                        const y = Math.sin(i * frequency + scrollPercent * Math.PI ) * amplitude; 
 
+                        gsap.to(swatch, {
+                            x,
+                            y,
+                            duration: 0.5,
+                            ease: 'power1.out'
+                        });
+                    });
+                }
+
+                window.addEventListener('scroll', handleScrollPosition);
+                return () => {
+                    window.removeEventListener('scroll', handleScrollPosition);
+                };
+
+            } else {
+                const handleMouseMove = () => {
+                    const gridRect = gridRef.current.getBoundingClientRect();
+                    const mouseX = mousePos - gridRect.left - winsize.width;
+                    const mousePercent = (mouseX / gridRect.width) / 2; 
+                    const mousePercentFromCenter = (mouseX / gridRect.width);
+                    const amplitude = 256;
+                    const frequency = 0.10;
+    
+                    colors.forEach((_, i) => {
+                        const swatch = gridRef.current.children[i] as HTMLElement;
+                        const x = linearInterpolation(0, gridRect.width - swatch.offsetWidth, mousePercent); 
+                        const y = Math.sin(i * frequency + mousePercentFromCenter * Math.PI) * amplitude;
+    
+                        gsap.to(swatch, {
+                            x,
+                            y,
+                            duration: 0.5,
+                            ease: 'power1.out'
+                        });
+                    }); 
+                };
+
+                window.addEventListener('mousemove', handleMouseMove);
+                return () => {
+                    window.removeEventListener('mousemove', handleMouseMove);
+                };
+            }
+        }
+    }, [isHovered, mousePos, scrollPercent, winsize, colors]);
 
     return (
         <div className={`${Style.gridContainer}`}
@@ -253,5 +285,5 @@ const Swatches = () => {
         </div>
     );
 }
-
+ 
 export default Swatches;

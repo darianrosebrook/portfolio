@@ -1,38 +1,42 @@
-.marqueeContainer {  
-  position: relative; 
+.marqueeContainer {
+  position: relative;
   width: 100%;
   min-height: 20vh;
 }
+
 .marquee {
-  position: absolute;  
-  display: flex;  
-  top: 50%; 
-  transform: translateY(-50%);
-  width: 100%;
-  align-items: center; 
+  position: absolute;
+  top: 50%;
+  display: flex;
+  gap: var(--size-10);
+  align-items: center;
   overflow: hidden;
+  width: 100%;
   width: fit-content;
-  white-space: nowrap;
-  gap: var(--size-10); 
   color: var(--color-foreground-primary);
+  white-space: nowrap;
   transition: all 0.5s ease-in-out;
+  transform: translateY(-50%);
 }
+
 .box svg {
   max-height: 100px;
 }
-.cover { 
+
+.cover {
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background: linear-gradient(90deg, var(--color-background-primary) 0% , var(--color-background-transparent) 20% 80%, var(--color-background-primary) 100%);
-   
+
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .marquee {
-    gap: var(--size-04); 
+    gap: var(--size-04);
   }
+
   .box svg {
     max-height: 50px;
   }

@@ -1,50 +1,60 @@
 .navContainer {
   position: fixed;
-  padding: var(--size-02) var(--size-06);
-  background: linear-gradient(0, var(--color-core-transparent) 0%, var(--color-background-primary) 20%);
   z-index: 1000;
+  padding: var(--size-02) var(--size-06);
+  background: linear-gradient(to top, var(--color-core-transparent) 0%, var(--color-background-primary) 20%);
 }
+
 .logo {
   width: var(--size-07);
   height: var(--size-07);
   margin: 0;
 }
+
+.nav a {
+  font-family: var(--font-nohemi);
+}
+
+
 .nav a:has(svg) {
   display: flex;
-  align-items: center;
   gap: var(--size-02);
+  align-items: center;
   color: var(--color-foreground);
 }
+
+.nav a.active {
+  color: var(--foreground);
+  font-weight: var(--font-weight-bold);
+}
+
 .nav {
   display: flex;
   flex-direction: column;
   gap: var(--size-02);
-  min-height: var(--size-10);
-  padding: var(--size-02) 0;
-  margin-bottom: var(--size-02);
   width: 100%;
+  min-height: var(--size-10);
+  margin-bottom: var(--size-02);
+  padding: var(--size-02) 0;
 }
+
 .nav .navLinks {
   display: flex;
-  align-items: center;
   gap: var(--size-05);
-  list-style-type: none;
-  padding: 0;
+  align-items: center;
   margin: 0;
+  padding: 0;
+  list-style-type: none;
 }
+
 .nav h1 {
-  line-height: 1;
   margin-top: 0.5rem;
   font-weight: var(--font-weight-light) !important;
+  line-height: 1;
 }
-.nav a.active {
-  font-weight: var(--font-weight-bold);
-  color: var(--foreground);
-}
-.nav a {
-  font-family: var(--font-nohemi);
-}
-@media screen and (min-width: 1000px) {
+
+
+@media screen and (width >= 1000px) {
   .nav {
     display: flex;
     flex-direction: row;

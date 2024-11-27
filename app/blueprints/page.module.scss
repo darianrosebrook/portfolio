@@ -1,50 +1,57 @@
 .hero {
   position: relative;
-  padding: 0;
-  margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   max-width: 100vw;
+  height: 75vh;
   min-height: 50vh;
+  margin: 0;
+  padding: 0;
 }
+
 .hero:first-of-type {
   min-height: 75vh;
 }
+
 .headingHero {
+  z-index: 1;
   max-width: 90vw;
   margin: 0 auto;
-  z-index: 1;
 }
+
 .headingHero h1 {
-  letter-spacing: var(--letter-spacing-tight);
-  line-height: 1.3;
   max-width: 16em;
+  line-height: 1.3;
+  letter-spacing: var(--letter-spacing-tight);
 }
+
 .headingHero h1 span:first-of-type {
+  z-index: 1;
   display: inline-block;
+  margin-bottom: var(--size-02);
+  color: var(--color-foreground-accent);
   font-size: var(--heading-06);
   letter-spacing: var(--letter-spacing-normal);
-  color: var(--color-foreground-accent);
-  margin-bottom: var(--size-02);
-  z-index: 1;
 }
+
 .heroImage {
-  width: 100%;
-  height: 100%;
-  min-height: 50vh;
-  object-fit: cover;
   position: absolute;
-  overflow: hidden;
   top: 0;
   left: 0;
   z-index: 0;
+  object-fit: cover;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  min-height: 50vh;
 }
+
 .cover {
-  pointer-events: none;
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 0;
   width: 100%;
   height: 100%;
   background: linear-gradient(
@@ -53,27 +60,74 @@
     var(--color-core-transparent) 10% 90%,
     var(--color-background-primary) 100%
   );
-  z-index: 0;
+  pointer-events: none;
 }
+
 .about {
   max-width: 1440px;
   margin: 0 auto;
 }
+
 .quip {
   position: relative;
-  padding: 15vh 0;
   min-height: unset;
+  padding: 15vh 0;
   padding: unset;
 }
+
 .education {
-  padding: 5vh 0 0 0;
   min-height: unset;
+  padding: 5vh 0 0;
 }
-@media screen and (max-width: 992px) { 
+
+@media screen and (width <= 992px) {
   .blueprintSVG {
     grid-template-columns: 1fr;
   }
 }
+
+.component {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-content: center;
+  align-items: center;
+
+  .faceplate {
+   z-index: 3
+  }
+
+  .bottom {
+  z-index: 0
+
+  }
+
+  .top {
+   z-index: 2
+  }
+
+  .middle {
+   z-index: 1
+  }
+
+  .propsvg {
+   z-index: 4
+  }
+
+  svg {
+    grid-row: 1 / 2;
+    grid-column: 1 / 2;
+    width: 75%;
+    height: 75%;
+    margin: 0 auto;
+    transition: all 0.3s ease-in-out;
+    transform: translateY(0);
+  }
+
+  .propsTable svg {
+    opacity: 0;
+  }
+}
+
 .blueprintSVG {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -82,71 +136,43 @@
   & > div:first-of-type {
     display: flex;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
     overflow: hidden;
-    height: 100%;
     width: 100%;
+    height: 100%;
   }
+
   .propsvg {
     opacity: 0;
   }
-  &:hover {  
+
+  &:hover {
     filter: blur(1px);
+
     .faceplate {
-      transform: translateY(-10%);
       opacity: 0;
+      transform: translateY(-10%);
     }
+
     .bottom {
       transform:  translateY(10%);
     }
+
     .top {
       transform: translateY(-10%);
     }
+
     .middle {
       transform: translateY(0%);
     }
+
     .propsvg {
-      transform: translateY(-10%); 
       opacity: 1;
+      transform: translateY(-10%);
     }
+
     .propsTable svg {
       opacity: .7;
     }
   }
 }
-.component { 
-  display: grid;
-  grid-template-columns: 1fr; 
-  justify-content: center;
-  align-items: center;
-  .faceplate {
-   z-index: 3
-  }
-  .bottom {
-  z-index: 0
-
-  }
-  .top {
-   z-index: 2
-  }
-  .middle {
-   z-index: 1
-  }
-  .propsvg {
-   z-index: 4 
-  }
-  .propsTable svg {
-    opacity: 0;
-  }
-  svg {
-    width: 75%;
-    height: 75%;
-    margin: 0 auto;
-    grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row-start: 1;
-    grid-row-end: 2;
-    transform: translateY(0);
-    transition: all 0.3s ease-in-out;
-  }
-} 

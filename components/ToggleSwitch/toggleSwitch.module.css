@@ -1,58 +1,67 @@
 .toggleSwitch {
   position: relative;
   display: inline-flex;
-  align-content: center;
-  max-height: 1.5rem;
   gap: 0.25rem;
+  align-content: center;
   align-items: center;
+  max-height: 1.5rem;
   line-height: 1;
 }
-.toggleSwitch input:disabled {
-  cursor: not-allowed;
-  background-color: var(--color-background-disabled);
-}
-.toggleSwitch input:disabled + label {
-  cursor: not-allowed;
-  color: var(--color-foreground-disabled)
-}
+
 .toggleSwitch input {
   all: unset;
-  cursor: pointer;
   display: inline-flex;
   width: 3rem;
   min-width: 3rem;
   height: 1.5rem;
-  border-radius: var(--radius-full);
-
   border: 1px solid var(--color-border-primary);
-  background-color: var(--color-background-secondary); 
+  border-radius: var(--radius-full);
+  background-color: var(--color-background-secondary);
+  cursor: pointer;
   transition: all 0.3s ease;
 }
+
+.toggleSwitch input:disabled {
+  background-color: var(--color-background-disabled);
+  cursor: not-allowed;
+}
+
+
 .toggleSwitch input.checked {
   background-color: var(--color-background-primary);
-} 
-.toggleSwitch label::before {
-  position: absolute;
-  display: inline-block;
-  top: 0.2125rem;
-  left: 0.25rem;
-  content: " ";
-  height: 1rem;
-  width: 1rem;
-  background-color: var(--color-background-primary);
-  border: 1px solid var(--color-border-primary);
-  border-radius: var(--radius-full);
-  transition: all ease 0.3s;
 }
-.toggleSwitch label.checked::before {
-  left: 1.75rem;
-  background-color: var(--color-background-accent );
-}
-.toggleSwitch input:focus-visible {
-  outline: 0.2rem solid var(--color-accent);
-  outline-offset: 0.2rem;
-}
+
 .toggleSwitch label {
   margin-left: 0.25rem;
   cursor: pointer;
 }
+
+.toggleSwitch input:disabled + label {
+  color: var(--color-foreground-disabled);
+  cursor: not-allowed
+}
+
+.toggleSwitch label::before {
+  content: " ";
+  position: absolute;
+  top: 0.2125rem;
+  left: 0.25rem;
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-full);
+  background-color: var(--color-background-primary);
+  transition: all ease 0.3s;
+}
+
+.toggleSwitch label.checked::before {
+  left: 1.75rem;
+  background-color: var(--color-background-accent );
+}
+
+.toggleSwitch input:focus-visible {
+  outline: 0.2rem solid var(--color-accent);
+  outline-offset: 0.2rem;
+}
+

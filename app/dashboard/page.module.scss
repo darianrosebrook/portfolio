@@ -4,6 +4,7 @@
     grid-template-columns: auto 1fr;
   }
 }
+
 .navigation {
   display: flex;
   flex-direction: column;
@@ -11,25 +12,29 @@
   border-right: 1px solid var(--color-border-accent);
 
   &__tabs {
-    list-style-type: none;
     display: flex;
     flex-direction: column;
     align-items: center;
+    list-style-type: none;
   }
-} 
+}
+
 .tab {
   width: 100%;
   border-radius: var(--size-04);
+
   a {
     display: flex;
     gap: var(--size-06);
     align-items: center;
     padding: 1rem 2rem;
   }
+
   &:hover {
     background: var(--color-background-secondary);
   }
 }
+
 .active {
   background: var(--color-background-tertiary);
 }

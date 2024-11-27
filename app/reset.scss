@@ -1,0 +1,81 @@
+// CSS Reset
+*, *::before, *::after {
+  box-sizing: border-box;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  line-height: var(--line-height-body);
+  overflow-wrap: anywhere;
+  margin-block-end: 0;
+}
+
+html {
+  text-size-adjust: none;
+}
+
+html:focus-within { scroll-behavior: smooth; }
+
+body {
+  min-height: 100vh;
+  line-height: var(--line-height-body, 1.25);
+  text-rendering: optimizespeed;
+}
+
+p { max-width: 55em; }
+
+a:not([class]) {
+  color: currentcolor;
+  text-decoration-skip-ink: auto;
+}
+
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+}
+
+img, picture, svg, video, canvas, audio, iframe, embed, object {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-style: italic;
+  shape-margin: 0.75rem;
+}
+
+img:not([alt]) {
+  border: 4px solid red;
+  filter: blur(5px);
+}
+
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+textarea:not([rows]) {
+  min-height: 10em;
+}
+
+:target {
+  scroll-margin-block: 5ex;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
