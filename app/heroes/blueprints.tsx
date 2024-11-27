@@ -1,8 +1,8 @@
 'use client'
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 import Styles from './blueprints.module.scss';
 import gsap from 'gsap';
-import { useGSAP } from '@gsap/react'; // Import useGSAP hook
+import { useGSAP } from '@gsap/react';
 import SvgIllustration from './svgIllustration';
 import { useWindowSize } from './useWindowSize';
 import { useScrollPosition } from './useScrollPosition';
@@ -13,77 +13,76 @@ const Blueprints: React.FC = () => {
   const winsize = useWindowSize();
   const gridRef = useRef<HTMLDivElement>(null);
   const spriteRef = useRef<HTMLDivElement>(null);
-  const mousePos = useRef({ x: 0, y: 0 }); // Use ref to store mouse position
+  const mousePos = useRef({ x: 0, y: 0 });
 
   const numRows = 9;
   const numCols = 12;
   const middleRowIndex = Math.floor(numRows / 2);
- 
-  const [svgs, setSvgs] = useState<string[]>([]); // Track SVG symbol IDs
+
+  const [isHovered, setIsHovered] = useState(false);
+  const [svgs, setSvgs] = useState<string[]>([]);
   const percentInView = useScrollPosition(gridRef);
+
+  const rows = useMemo(() => {
+    return gridRef.current ? Array.from(gridRef.current.children) as HTMLElement[] : [];
+  }, [ ]);
+
+  const handleMouseMove = useCallback((event: MouseEvent) => {
+    mousePos.current.x = event.clientX;
+    mousePos.current.y = event.clientY;
+  }, []);
+
+  const tickerFunction = useCallback(() => {
+    if (!isHovered) return;
+
+    const normalizedMouseX = (mousePos.current.x / winsize.width) * 2 - 1;
+    const targetTranslateX = normalizedMouseX * 12 * (winsize.width / 80);
+
+    rows.forEach((row, index) => {
+      const distanceFromMiddle = Math.abs(index - middleRowIndex);
+      const factor = 1 - 0.2 * distanceFromMiddle;
+      const targetX = targetTranslateX * factor;
+
+      gsap.to(row, {
+        x: targetX,
+        duration: 1.5,
+        ease: 'power2.out',
+      });
+    });
+  }, [isHovered, rows,   winsize.width, middleRowIndex]);
 
   useGSAP(() => {
     if (!gridRef.current) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const rows = Array.from(gridRef.current.children) as HTMLElement[];
-
-    // Handler to update mouse position
-    const handleMouseMove = (event: MouseEvent) => {
-      mousePos.current.x = event.clientX;
-      mousePos.current.y = event.clientY;
-    };
-
-    // Add event listener for desktop
     if (window.innerWidth > 768) {
       window.addEventListener('mousemove', handleMouseMove);
     } else {
-      // For mobile, update x based on scroll position as percentage of window width
       mousePos.current.x = percentInView * winsize.width;
     }
 
-    // Use GSAP's ticker to update positions on every frame
-    const tickerFunction = () => { 
-
-      // Normalize mouse X position
-      const normalizedMouseX = (mousePos.current.x / winsize.width) * 2 - 1;
-      const targetTranslateX = normalizedMouseX * 12 * (winsize.width / 80);
-
-      rows.forEach((row, index) => {
-        const distanceFromMiddle = Math.abs(index - middleRowIndex);
-        const factor = 1 - 0.2 * distanceFromMiddle;
-        const targetX = targetTranslateX * factor;
-
-        // Smoothly animate to the new position with easing
-        gsap.to(row, {
-          x: targetX,
-          duration: 1.5, // Adjust duration for smoothness
-          ease: 'power2.out', // Adjust easing type for the desired effect
-        });
-      });
-    };
-
     gsap.ticker.add(tickerFunction);
 
-    // Cleanup function
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       gsap.ticker.remove(tickerFunction);
     };
-  }, { dependencies: [winsize.width, percentInView], scope: gridRef });
+  }, [handleMouseMove, tickerFunction, percentInView, winsize.width]);
 
   useEffect(() => {
     const dsSprite = document.getElementById('DSSPRITE') as HTMLDivElement;
     if (dsSprite) {
       spriteRef.current = dsSprite;
       const symbols = Array.from(dsSprite.querySelectorAll('symbol'));
-      setSvgs(symbols.map((symbol) => symbol.id)); // Update SVG IDs
+      setSvgs(symbols.map((symbol) => symbol.id));
     }
   }, []);
 
   return (
     <div
-      className={Styles.gridContainer} 
+      className={Styles.gridContainer}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       <div className={Styles.gridContent} ref={gridRef}>
         {svgs.length > 0 &&
