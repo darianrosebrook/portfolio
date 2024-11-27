@@ -275,7 +275,7 @@ const Swatches = () => {
                             />
                         </clipPath>
                     </defs>
-                </symbol> 
+                </symbol>
             </svg>
             <div className={`${Style.colorSwatchContainer} ${Style.gridContent}`} ref={gridRef}>
                 {colors.map((swatch, i) => {
