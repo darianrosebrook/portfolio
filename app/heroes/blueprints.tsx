@@ -25,6 +25,7 @@ const Blueprints: React.FC = () => {
   useGSAP(() => {
     if (!gridRef.current) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (document.querySelector('body').classList.contains('reduce-motion')) return;
 
     const rows = Array.from(gridRef.current.children) as HTMLElement[];
 
