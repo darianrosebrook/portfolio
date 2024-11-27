@@ -1,36 +1,41 @@
 .footer {
   bottom: 0;
   display: flex;
-  justify-content: space-evenly;
   flex-direction: column;
   gap: var(--size-04);
+  justify-content: space-evenly;
   justify-content: space-between;
   width: 100%;
   min-height: var(--size-09);
 }
+
 .footer ul {
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 0;
   margin: 0;
+  padding: 0;
   list-style: none;
 }
+
 .footer li {
   margin: 0;
   border-top: 2px solid var(--color-border-light);
 }
+
 .footer li:last-of-type {
   border-bottom: 2px solid var(--color-border-light);
 }
+
 .social {
   display: flex;
-  width: 100%;
-  justify-content: space-between;
   gap: var(--size-04);
+  justify-content: space-between;
+  width: 100%;
   padding: var(--size-10) var(--size-06);
 
 }
+
 .socialLink {
   position: relative;
   display: flex;
@@ -39,63 +44,70 @@
   padding: var(--size-08);
   transition: all 0.5s ease-in-out;
 }
+
 .socialLink:hover {
   background: var(--color-core-transparent);
   color: var(--color-core-transparent) !important;
 }
+
 .socialLinkTitle  {
   display: flex;
+  gap: var(--size-10);
+  justify-content: space-between;
   align-items: baseline;
   width: 100%;
-  justify-content: space-between;
-  gap: var(--size-10);
 }
+
 .marquee {
   position: absolute;
   top: 50%;
   left: 0;
-  transform: translateY(-50%);
   display: flex;
+  gap: var(--size-10);
   align-items: center;
-  height: 0;
   overflow: hidden;
   width: fit-content;
-  white-space: nowrap;
-  gap: var(--size-10);
+  height: 0;
   background-color: var(--color-background-accent);
   color: var(--color-foreground-primary);
+  white-space: nowrap;
   transition: all 0.5s ease-in-out;
+  transform: translateY(-50%);
 }
+
 .box {
+  position: relative;
   display: flex;
-  align-items: center;
-  justify-content: center;
   gap: var(--size-10);
+  justify-content: center;
+  align-items: center;
   margin: 0;
   padding: 0;
-  position: relative;
   cursor: pointer;
 }
+
 .socialLink:hover .marquee {
   height: 100%;
   background-color: var(--color-background-accent);
   color: var(--color-foreground-onColor);
 }
+
 .copyRight {
-  display: flex; 
-  align-items: center;
+  display: flex;
   gap: var(--size-04);
-  padding: var(--size-08) var(--size-06);
+  align-items: center;
   width: 100%;
+  padding: var(--size-08) var(--size-06);
   color: var(--color-foreground-primary);
 }
-@media screen and (min-width: 1000px) {
-  
+
+@media screen and (width >= 1000px) {
   .socialLinkTitle, .social, .copyRight  {
     max-width: 1440px;
     margin: 0 auto;
-  } 
+  }
+
   .social, .copyRight {
-    padding: var(--size-08) var(--size-06); 
+    padding: var(--size-08) var(--size-06);
   }
 }

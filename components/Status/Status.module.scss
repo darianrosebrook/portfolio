@@ -2,15 +2,16 @@
   display: inline-grid;
   grid-template-columns: 1fr auto;
   gap: 0.5rem;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  padding: 0.5rem 1rem;
   border: var(--color-border-bold) solid 2px;
   border-radius: var(--radius-full);
-  padding: 0.5rem 1rem; 
-  color: var(--color-foreground-primary);
   background: var(--color-background-primary);
+  color: var(--color-foreground-primary);
   fill: var(--color-foreground-accent);
 }
+
 .status svg {
   fill: var(--color-foreground-accent);
 }

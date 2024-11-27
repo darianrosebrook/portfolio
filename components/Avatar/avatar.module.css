@@ -1,23 +1,27 @@
 .avatar {
   display: inline-block;
+  overflow: hidden;
   width: var(--size-06);
   height: var(--size-06);
-  border-radius: 1920px;
-  overflow: hidden;
   border: var(--stroke-1) solid var(--secondary);
+  border-radius: 1920px;
 }
+
 .avatar_small {
   width: var(--size-05);
   height: var(--size-05);
 }
+
 .avatar_medium {
   width: var(--size-06);
   height: var(--size-06);
 }
+
 .avatar_large {
   width: var(--size-08);
   height: var(--size-08);
 }
+
 .avatar_extra-large {
   width: var(--size-10);
   height: var(--size-10);

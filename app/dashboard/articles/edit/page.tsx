@@ -11,22 +11,23 @@ import Link from "next/link";
 import styles from "./page.module.scss";
 
 const articleDefaults: Article = {
-  alternativeHeadline: null,
-  articleSection: null,
-  articleBody:  null,
+  alternativeHeadline: '',
+  articleSection: '',
+  articleBody: {},
   author: null,
   created_at: new Date().toISOString(),
-  description: null,
+  description: '',
   draft: true,
-  editor: null,
-  headline: null,
-  image: null,
-  keywords: null,
+  editor: '',
+  headline: '',
+  image: '',
+  keywords: '',
   modified_at: new Date().toISOString(),
-  published_at: null,
+  published_at: '',
   wordCount: 0,
-  slug: null,
+  slug: '',
 };
+
 
 const EditArticle = () => {
   const [article, setArticle] = useState(articleDefaults);
@@ -89,10 +90,10 @@ const EditArticle = () => {
     handleUpdate(article);
   };
 
-  return ( 
-       <div className={styles.editorGroups}>
+  return (
+    <div className={styles.editorGroups}>
       <div className={styles.publishBar}>
-<Link href={`/dashboard/articles/${article.slug}/preview`}>Preview</Link>
+        <Link href={`/dashboard/articles/${article.slug}/preview`}>Preview</Link>
         <button className="publishButton" onClick={handlePublish}>
           {article.draft ? "Save Draft" : "Publish"}
         </button>
@@ -146,7 +147,7 @@ const EditArticle = () => {
             value={article.image}
             onChange={parseUpdateFromInput}
           />
-        </div>   
+        </div>
         <div>
           <label htmlFor="slug">Slug</label>
           <input
@@ -156,7 +157,7 @@ const EditArticle = () => {
             value={article.slug}
             onChange={parseUpdateFromInput}
           />
-        </div> 
+        </div>
         <div>
           <label htmlFor="articleSection">Article Section</label>
           <input
@@ -172,7 +173,7 @@ const EditArticle = () => {
           <input
             type="date"
             name="published_at"
-            value={ article.created_at && new Date(article.created_at).toISOString().split("T")[0] }
+            value={article.created_at && new Date(article.created_at).toISOString().split("T")[0]}
             onChange={parseUpdateFromInput}
           />
         </div>
@@ -184,10 +185,12 @@ const EditArticle = () => {
       <ToggleSwitch checked={article.draft} onChange={handleToggle}>
         Draft
       </ToggleSwitch>
-      <Tiptap
-        handleUpdate={handleUpdate}
-        article={article} 
-      />
+      <div className={styles.articleContent}>
+        <Tiptap
+          handleUpdate={handleUpdate}
+          article={article}
+        />
+      </div>
     </div>
   );
 };
