@@ -194,6 +194,7 @@ const Swatches = () => {
     useEffect(() => {
         if (gridRef.current) {
             if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            if (document.querySelector('body').classList.contains('reduce-motion')) return;
             if (window.innerWidth < 768) {
                 window.addEventListener('scroll', handleScrollPosition);
                 return () => {

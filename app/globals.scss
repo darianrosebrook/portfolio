@@ -17,6 +17,10 @@
     "cv13" 0, "cpsp" 0, "c2sc" 0, "salt" 0, "aalt" 0, "calt", "ccmp", "locl",
     "kern";
 
+  p + p {
+    margin-top: var(--size-04);
+  }
+
   strong { font-weight: var(--font-weight-bold); }
 
   h1, h2, h3, h4, h5, h6 {
@@ -45,7 +49,7 @@
   .caption-02, small, .small { font-size: var(--caption-02); }
   .caption-03, .smallest { font-size: var(--caption-03); }
   .body-01, .medium { font-size: var(--body-01); }
-  .body-02, p { font-size: var(--body-02); }
+  .body-02  { font-size: var(--body-02); }
   .body-03, .regular { font-size: var(--body-03); }
   .body-04 { font-size: var(--body-04); }
 
@@ -329,6 +333,18 @@ button:-moz-focusring,
   outline-offset: var(--focus-ring-offset);
 }
 
+article > * + * {
+  margin-top: var(--size-06);
+
+  & > * + * {
+    margin-top: var(--size-04);
+
+    & > * + * {
+      margin-top: var(--size-03);
+    }
+  }
+}
+
 /* Form Elements */
 .form-widget > * + * {
   margin-top: var(--size-06);
@@ -414,6 +430,7 @@ textarea:disabled {
   margin-top: var(--size-07);
 }
 
+
 .experience {
   display: grid;
   grid-template-columns: 1fr;
@@ -426,6 +443,7 @@ gap: var(--grid-gap-medium);
   margin: 0;
   margin-top: var(--size-04);
 }
+
 
 article ul,
 article ol {

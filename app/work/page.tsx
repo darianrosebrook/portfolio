@@ -26,7 +26,7 @@ export default function Page() {
               </Link>
             </h4>
             <div className="content">
-              <div className="three-up">
+              <div >
                 <div>
                   <h5>Role</h5>
                   <p><strong>Lead Designer, Developer</strong></p>
@@ -81,7 +81,7 @@ export default function Page() {
               </Link>
             </h4>
             <div className="content">
-              <div className="three-up">
+              <div >
                 <div>
                   <h5>Role</h5>
                   <p><strong>Co-Designer, Co-Developer</strong></p>
@@ -138,7 +138,7 @@ export default function Page() {
               Figma library sync<span> at Nike</span>
             </h4>
             <div className="content">
-              <div className="three-up">
+              <div >
                 <div>
                   <h5>Role</h5>
                   <p><strong>Lead Designer, Developer</strong></p>
@@ -181,7 +181,7 @@ export default function Page() {
               Podium Foundations Library<span> at Nike</span>
             </h4>
             <div className="content">
-              <div className="three-up">
+              <div >
                 <div>
                   <h5>Role</h5>
                   <p><strong>Workshop Co-lead, Strategist, Co-developer</strong></p>
@@ -234,7 +234,7 @@ export default function Page() {
               </div>
             </h4>
             <div className="content">
-              <div className="three-up">
+              <div >
                 <div>
                   <h5>Role</h5>
                   <p><strong>Lead Designer </strong></p>
@@ -268,7 +268,7 @@ export default function Page() {
               Branding and Product design<span> at Common Room</span>
             </h4>
             <div className="content">
-              <div className="three-up">
+              <div >
                 <div>
                   <h5>Role</h5>
                   <p><strong>Lead Designer </strong></p>
@@ -300,7 +300,7 @@ export default function Page() {
               Sustainability Cloud<span> at Salesforce</span>
             </h4>
             <div className="content">
-              <div className="three-up">
+              <div >
                 <div>
                   <h5>Role</h5>
                   <p><strong>UX Designer, UX Researcher </strong></p>
@@ -340,7 +340,7 @@ export default function Page() {
               The New Microsoft Edge Browser<span> at Microsoft</span>
             </h4>
             <div className="content">
-              <div className="three-up">
+              <div >
                 <div>
                   <h5>Role</h5>
                   <p><strong>UX Designer, UX Researcher </strong></p>

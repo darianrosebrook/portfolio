@@ -10,6 +10,11 @@
   margin: 0 auto;
 }
 
+.articleContent img {
+  width: 100%;
+  height: auto;
+}
+
 .articleContent h2 {
   font-size: var(--heading-02);
 }

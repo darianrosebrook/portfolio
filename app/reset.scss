@@ -25,7 +25,7 @@ body {
 p { max-width: 55em; }
 
 a:not([class]) {
-  color: currentcolor;
+  color: var(--color-foreground-accent, currentcolor);
   text-decoration-skip-ink: auto;
 }
 
@@ -34,7 +34,7 @@ ol[role='list'] {
   list-style: none;
 }
 
-img, picture {
+img, picture, video, iframe, embed, object, audio, canvas, map {
   display: block;
   max-width: 100%;
   height: auto;

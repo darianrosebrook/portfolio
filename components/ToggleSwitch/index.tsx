@@ -1,11 +1,12 @@
 "use client";
+import { ReactNode } from "react";
 import styles from "./toggleSwitch.module.css";
 
 type ToggleSwitchProps = {
   checked: boolean;
   disabled?: boolean;
   onChange: (e) => void;
-  children: string;
+  children: ReactNode;
 };
 
 const ToggleSwitch = ({ checked, disabled = false, onChange, children }: ToggleSwitchProps) => {

@@ -5,7 +5,7 @@ import styles from "./styles.module.css";
 const ProfileFlag = ({ profile }: { profile: Profile }) => {
   return (
     <div className={styles.profileFlag}>
-      <Link href={`/about`}>
+      <Link href={`/`}>
         <Avatar
           size="medium"
           name={profile.full_name}

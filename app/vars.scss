@@ -179,20 +179,11 @@
     --color-core-red-600: #ae0001; /* 7.5 :1 */
     --color-core-red-700: #7b0000; /* 11.4 :1 */
     --color-core-red-800: #4b0000; /* 16.16 :1 */
-    // orange
-    // #ffeadd 1.11
-    // #ffb58e  1.64
-    // #ff7c3c 2.45
-    // #d55d21 3.71
-    // #a5491d 5.63
-    // #7b3919 8.24
-    // #552915 11.74
-    // #29160c 16.57
 
     /* orange */
 
     --color-core-orange-100: #ffeadd; /* 1.11 :1 */
-    --color-core-orange-200: #ffb58e; /* 1.64 :1 */
+    --color-core-orange-200: #ffb58e;  /* 1.64 :1 */
     --color-core-orange-300: #ff7c3c; /* 2.45 :1 */
     --color-core-orange-400: #d55d21; /* 3.71 :1 */
     --color-core-orange-500: #a5491d; /* 5.63 :1 */
@@ -322,7 +313,149 @@
     --focus-ring-offset: var(--size-02);
   }
 
-  @media (prefers-color-scheme: dark) {
+.light {
+    /* Semantic color */
+
+    /* foreground */
+    --color-foreground-primary: var(--color-core-dark);
+    --color-foreground-secondary: var(--color-core-neutral-600);
+    --color-foreground-tertiary: var(--color-core-neutral-500);
+    --color-foreground-inverse: var(--color-core-light);
+    --color-foreground-highlight: var(--color-core-blue-700);
+    --color-foreground-accent: var(--color-core-red-500);
+    --color-foreground-onColor: var(--color-foreground-inverse);
+    --color-foreground-danger: var(--color-core-red-500);
+    --color-foreground-onDangerSubtle: var(--color-core-red-700);
+    --color-foreground-success: var(--color-core-green-500);
+    --color-foreground-onSuccessSubtle: var(--color-core-green-700);
+    --color-foreground-warning: var(--color-core-orange-500);
+    --color-foreground-onWarningSubtle: var(--color-core-orange-700);
+    --color-foreground-info: var(--color-core-blue-500);
+    --color-foreground-onInfoSubtle: var(--color-core-blue-700);
+    --color-foreground-hover: var(--color-core-neutral-700);
+    --color-foreground-disabled: var(--color-core-neutral-300);
+    --color-foreground-placeholder: var(--color-core-neutral-400);
+    --color-foreground-link: var(--color-core-red-500);
+    --color-foreground-link-hover: var(--color-core-red-600);
+    --color-foreground-link-visisted: var(--color-core-red-400);
+
+    /* background */
+    --color-background-primary: var(--color-core-light);
+    --color-background-secondary: var(--color-core-neutral-100);
+    --color-background-tertiary: var(--color-core-neutral-200);
+    --color-background-inverse: var(--color-core-dark);
+    --color-background-highlight: var(--color-core-blue-200);
+    --color-background-accent: var(--color-core-red-500);
+    --color-background-onColor: var(--color-background-primary);
+    --color-background-danger-strong: var(--color-core-red-600);
+    --color-background-danger-subtle: var(--color-core-red-100);
+    --color-background-success-strong: var(--color-core-green-600);
+    --color-background-success-subtle: var(--color-core-green-100);
+    --color-background-warning-strong: var(--color-core-orange-400);
+    --color-background-warning-subtle: var(--color-core-orange-100);
+    --color-background-info-strong: var(--color-core-blue-600);
+    --color-background-info-subtle: var(--color-core-blue-100);
+    --color-background-hover: var(--color-core-neutral-200);
+    --color-background-active: var(--color-core-neutral-300);
+    --color-background-disabled: var(--color-core-neutral-200);
+    --color-background-placeholder: var(--color-core-neutral-100);
+    --color-background-read-only: var(--color-core-neutral-200);
+    --color-background-image-overlay: rgb(0 0 0 / var(--opacity-50));
+
+    /* border */
+    --color-border-primary: var(--color-core-neutral-300);
+    --color-border-bold: var(--color-core-neutral-600);
+    --color-border-light: var(--color-core-neutral-200);
+    --color-border-accent: var(--color-core-red-500);
+    --color-border-onColor: var(--color-core-white);
+    --color-border-danger: var(--color-core-red-600);
+    --color-border-success: var(--color-core-green-600);
+    --color-border-warning: var(--color-core-orange-600);
+    --color-border-info: var(--color-core-blue-600);
+    --color-border-disabled: var(--color-core-neutral-200);
+
+    /* data vis */
+    --color-data-trend-default: var(--color-core-blue-400);
+    --color-data-trend-neutral: var(--color-core-neutral-500);
+    --color-data-trend-up: var(--color-core-green-500);
+    --color-data-trend-down: var(--color-core-red-500);
+
+    /* focus */
+    --focus-ring: 2px solid var(--foreground-accent);
+    --focus-ring-offset: var(--size-02);
+}
+
+.dark {
+      /* Dark Semantic color */
+
+      /* Dark mode foreground  */
+      --color-foreground-primary: var(--color-core-light);
+      --color-foreground-secondary: var(--color-core-neutral-300);
+      --color-foreground-tertiary: var(--color-core-neutral-500);
+      --color-foreground-inverse: var(--color-core-dark);
+      --color-foreground-accent: var(--color-core-red-400);
+      --color-foreground-onColor: var(--color-foreground-primary);
+      --color-foreground-danger: var(--color-core-red-400);
+      --color-foreground-onDangerSubtle: var(--color-core-red-200);
+      --color-foreground-success: var(--color-core-green-400);
+      --color-foreground-onSuccessSubtle: var(--color-core-green-200);
+      --color-foreground-warning: var(--color-core-orange-400);
+      --color-foreground-onWarningSubtle: var(--color-core-orange-200);
+      --color-foreground-info: var(--color-core-blue-400);
+      --color-foreground-onInfoSubtle: var(--color-core-blue-200);
+      --color-foreground-hover: var(--color-core-neutral-300);
+      --color-foreground-disabled: var(--color-core-neutral-600);
+      --color-foreground-placeholder: var(--color-core-neutral-400);
+      --color-foreground-link: var(--color-core-red-400);
+      --color-foreground-link-hover: var(--color-core-red-300);
+      --color-foreground-link-visisted: var(--color-core-red-500);
+
+      /* Dark mode background */
+      --color-background-primary: var(--color-core-dark);
+      --color-background-secondary: var(--color-core-neutral-800);
+      --color-background-tertiary: var(--color-core-neutral-700);
+      --color-background-inverse: var(--color-core-light);
+      --color-background-accent: var(--color-core-red-500);
+      --color-background-onColor: var(--color-background-primary);
+      --color-background-danger-strong: var(--color-core-red-600);
+      --color-background-danger-subtle: var(--color-core-red-800);
+      --color-background-success: var(--color-core-green-600);
+      --color-background-success-subtle: var(--color-core-green-800);
+      --color-background-warning: var(--color-core-orange-600);
+      --color-background-warning-subtle: var(--color-core-orange-800);
+      --color-background-info: var(--color-core-blue-600);
+      --color-background-info-subtle: var(--color-core-blue-800);
+      --color-background-hover: var(--color-core-neutral-700);
+      --color-background-active: var(--color-core-neutral-600);
+      --color-background-disabled: var(--color-core-neutral-700);
+      --color-background-placeholder: var(--color-core-neutral-800);
+      --color-background-read-only: var(--color-core-neutral-700);
+      --color-background-image-overlay: rgb(0 0 0 / var(--opacity-50));
+
+      /* Dark mode border */
+      --color-border-primary: var(--color-core-neutral-600);
+      --color-border-bold: var(--color-core-neutral-300);
+      --color-border-light: var(--color-core-neutral-700);
+      --color-border-accent: var(--color-core-red-500);
+      --color-border-onColor: var(--color-core-white);
+      --color-border-danger: var(--color-core-red-600);
+      --color-border-success: var(--color-core-green-600);
+      --color-border-warning: var(--color-core-orange-600);
+      --color-border-info: var(--color-core-blue-600);
+      --color-border-disabled: var(--color-core-neutral-700);
+
+      /* Dark mode data vis */
+      --color-data-trend-default: var(--color-core-blue-400);
+      --color-data-trend-neutral: var(--color-core-neutral-500);
+      --color-data-trend-up: var(--color-core-green-500);
+      --color-data-trend-down: var(--color-core-red-500);
+
+      /* Dark mode focus */
+      --focus-ring: 2px solid var(--color-foreground-accent);
+      --focus-ring-offset: var(--size-02);
+}
+
+@media (prefers-color-scheme: dark) {
     :root {
       /* Dark Semantic color */
 
@@ -392,4 +525,77 @@
       --focus-ring: 2px solid var(--color-foreground-accent);
       --focus-ring-offset: var(--size-02);
     }
-  }
+
+    .light  {
+    /* Semantic color */
+
+    /* foreground */
+    --color-foreground-primary: var(--color-core-dark);
+    --color-foreground-secondary: var(--color-core-neutral-600);
+    --color-foreground-tertiary: var(--color-core-neutral-500);
+    --color-foreground-inverse: var(--color-core-light);
+    --color-foreground-highlight: var(--color-core-blue-700);
+    --color-foreground-accent: var(--color-core-red-500);
+    --color-foreground-onColor: var(--color-foreground-inverse);
+    --color-foreground-danger: var(--color-core-red-500);
+    --color-foreground-onDangerSubtle: var(--color-core-red-700);
+    --color-foreground-success: var(--color-core-green-500);
+    --color-foreground-onSuccessSubtle: var(--color-core-green-700);
+    --color-foreground-warning: var(--color-core-orange-500);
+    --color-foreground-onWarningSubtle: var(--color-core-orange-700);
+    --color-foreground-info: var(--color-core-blue-500);
+    --color-foreground-onInfoSubtle: var(--color-core-blue-700);
+    --color-foreground-hover: var(--color-core-neutral-700);
+    --color-foreground-disabled: var(--color-core-neutral-300);
+    --color-foreground-placeholder: var(--color-core-neutral-400);
+    --color-foreground-link: var(--color-core-red-500);
+    --color-foreground-link-hover: var(--color-core-red-600);
+    --color-foreground-link-visisted: var(--color-core-red-400);
+
+    /* background */
+    --color-background-primary: var(--color-core-light);
+    --color-background-secondary: var(--color-core-neutral-100);
+    --color-background-tertiary: var(--color-core-neutral-200);
+    --color-background-inverse: var(--color-core-dark);
+    --color-background-highlight: var(--color-core-blue-200);
+    --color-background-accent: var(--color-core-red-500);
+    --color-background-onColor: var(--color-background-primary);
+    --color-background-danger-strong: var(--color-core-red-600);
+    --color-background-danger-subtle: var(--color-core-red-100);
+    --color-background-success-strong: var(--color-core-green-600);
+    --color-background-success-subtle: var(--color-core-green-100);
+    --color-background-warning-strong: var(--color-core-orange-400);
+    --color-background-warning-subtle: var(--color-core-orange-100);
+    --color-background-info-strong: var(--color-core-blue-600);
+    --color-background-info-subtle: var(--color-core-blue-100);
+    --color-background-hover: var(--color-core-neutral-200);
+    --color-background-active: var(--color-core-neutral-300);
+    --color-background-disabled: var(--color-core-neutral-200);
+    --color-background-placeholder: var(--color-core-neutral-100);
+    --color-background-read-only: var(--color-core-neutral-200);
+    --color-background-image-overlay: rgb(0 0 0 / var(--opacity-50));
+
+    /* border */
+    --color-border-primary: var(--color-core-neutral-300);
+    --color-border-bold: var(--color-core-neutral-600);
+    --color-border-light: var(--color-core-neutral-200);
+    --color-border-accent: var(--color-core-red-500);
+    --color-border-onColor: var(--color-core-white);
+    --color-border-danger: var(--color-core-red-600);
+    --color-border-success: var(--color-core-green-600);
+    --color-border-warning: var(--color-core-orange-600);
+    --color-border-info: var(--color-core-blue-600);
+    --color-border-disabled: var(--color-core-neutral-200);
+
+    /* data vis */
+    --color-data-trend-default: var(--color-core-blue-400);
+    --color-data-trend-neutral: var(--color-core-neutral-500);
+    --color-data-trend-up: var(--color-core-green-500);
+    --color-data-trend-down: var(--color-core-red-500);
+
+    /* focus */
+    --focus-ring: 2px solid var(--foreground-accent);
+    --focus-ring-offset: var(--size-02);
+}
+
+}
