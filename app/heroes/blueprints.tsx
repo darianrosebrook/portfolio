@@ -18,8 +18,7 @@ const Blueprints: React.FC = () => {
   const numRows = 9;
   const numCols = 12;
   const middleRowIndex = Math.floor(numRows / 2);
-
-  const [isHovered, setIsHovered] = useState(false);
+ 
   const [svgs, setSvgs] = useState<string[]>([]);
   const percentInView = useScrollPosition(gridRef);
 
@@ -32,8 +31,7 @@ const Blueprints: React.FC = () => {
     mousePos.current.y = event.clientY;
   }, []);
 
-  const tickerFunction = useCallback(() => {
-    if (!isHovered) return;
+  const tickerFunction = useCallback(() => { 
 
     const normalizedMouseX = (mousePos.current.x / winsize.width) * 2 - 1;
     const targetTranslateX = normalizedMouseX * 12 * (winsize.width / 80);
@@ -49,7 +47,7 @@ const Blueprints: React.FC = () => {
         ease: 'power2.out',
       });
     });
-  }, [isHovered, rows,   winsize.width, middleRowIndex]);
+  }, [ rows,   winsize.width, middleRowIndex]);
 
   useGSAP(() => {
     if (!gridRef.current) return;
@@ -80,9 +78,7 @@ const Blueprints: React.FC = () => {
 
   return (
     <div
-      className={Styles.gridContainer}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      className={Styles.gridContainer} 
     >
       <div className={Styles.gridContent} ref={gridRef}>
         {svgs.length > 0 &&
