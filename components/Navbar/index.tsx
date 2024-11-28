@@ -59,10 +59,9 @@ export default function Navbar({ pages = [], id = null }: NavbarProps) {
   useEffect(() => {
     // Set initial theme based on system preference
     if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      setTheme("dark");
+      setTheme("light");
       document.body.classList.add("dark");
     } else {
-      setTheme("light");
       document.body.classList.add("light");
     }
 
