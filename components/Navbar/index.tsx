@@ -2,10 +2,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from "./index.module.css";
-import Logo from "./logo";
-import Avatar from "../Avatar";
-import { createClient } from "@/utils/supabase/client";
-import { useEffect, useState } from "react";
+import Logo from "./logo"; 
+import { useCallback, useEffect, useState } from "react"; 
+import { useReducedMotion } from "@/context";
 import Popover from "../Popover/Popover";
 import Button from "../Button";
 import { byPrefixAndName } from "@awesome.me/kit-0ba7f5fefb/icons";
@@ -19,31 +18,18 @@ type NavbarProps = {
   id: string;
 };
 
-export default function Navbar({ pages = [], id = null }: NavbarProps) {
-  const [profile, setProfile] = useState(null);
+export default function Navbar({ pages = [], id = null }: NavbarProps) { 
   const [slider, setSlider] = useState(false);
-  const [theme, setTheme] = useState("dark");
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-  const full_name = profile?.full_name || "Darian Rosebrook";
-  const avatar_url = profile?.avatar_url || "/images/avatar.png";
+  const [theme, setTheme] = useState("dark"); 
   const pathname = usePathname();
 
+  const { prefersReducedMotion, setPrefersReducedMotion } = useReducedMotion();
+
   const handlePrefersReducedMotion = (e) => {
-    const enabled = e.target.checked;
-    setPrefersReducedMotion(enabled);
-
-    // Update body attribute for global effect
-    const body = document.querySelector("body");
-    if (enabled) {
-      body.classList.add("reduce-motion");
-    } else {
-      body.classList.remove("reduce-motion");
-    }
-    // Persist preference in localStorage
-    localStorage.setItem("prefersReducedMotion", enabled.toString());
+      const enabled = e.target.checked;
+      setPrefersReducedMotion(enabled);
   };
-
-  const handleTheme = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleTheme = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const enabled = e.target.checked;
     setSlider(enabled);
     const body = document.querySelector("body");
@@ -54,56 +40,20 @@ export default function Navbar({ pages = [], id = null }: NavbarProps) {
       body.classList.add("dark");
       body.classList.remove("light");
     }
-  };
+  }, []);
 
   useEffect(() => {
-    // Set initial theme based on system preference
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      setTheme("light");
-      document.body.classList.add("dark");
-    } else {
-      document.body.classList.add("light");
-    }
-
-    // Set initial reduced-motion preference
-    const storedMotionPreference = localStorage.getItem("prefersReducedMotion");
-    const prefersMotion =
-      storedMotionPreference !== null
-        ? storedMotionPreference === "true"
-        : window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    setPrefersReducedMotion(prefersMotion);
-    const body = document.querySelector("body");
-    if (prefersMotion) {
-      body.setAttribute("data-prefers-reduced-motion", "reduce");
-    } else {
-      body.removeAttribute("data-prefers-reduced-motion");
-    }
-
-    // Dynamic listening for reduced-motion changes
-    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const motionListener = (event) => {
-      setPrefersReducedMotion(event.matches);
-    };
-    motionQuery.addEventListener("change", motionListener);
-
-    return () => {
-      motionQuery.removeEventListener("change", motionListener);
-    };
-  }, [id, profile]);
+    if (typeof window === 'undefined') return; 
+    const initialTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    setTheme(initialTheme);
+    document.body.classList.add(initialTheme);
+  }, []);
+ 
 
   useEffect(() => {
-    if (id && !profile) {
-      const getProfile = async () => {
-        const client = await createClient();
-        const response = await client.from("profiles").select("*").eq("id", id);
-        setProfile(response.data[0]);
-      };
-      getProfile();
-    }
-  }, [id, profile]);
-
-  return (
+    console.log('Navbar props or state changed:', { id, slider, theme });
+  }, [id, slider, theme]);
+return (
     <header className={styles.navContainer}>
       <nav className={styles.nav}>
         <Link href="/" className="logoLink">
@@ -148,7 +98,7 @@ export default function Navbar({ pages = [], id = null }: NavbarProps) {
               </Popover.Content>
             </Popover>
           </li>
-          {profile && (
+          {/* {profile && (
             <li>
               <Popover>
                 <Popover.Trigger>
@@ -178,7 +128,7 @@ export default function Navbar({ pages = [], id = null }: NavbarProps) {
                 </Popover.Content>
               </Popover>
             </li>
-          )}
+          )} */}
         </ul>
       </nav>
     </header>

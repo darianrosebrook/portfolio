@@ -1,11 +1,11 @@
 'use client'
-import React, {  useRef, useEffect, useCallback } from 'react';
+import React, {  useRef} from 'react';
 import Style from './swatches.module.scss';
-import { useMousePosition } from './useMousePosition';
 import { useWindowSize } from './useWindowSize';
 import { gsap } from 'gsap';
-import { linearInterpolation } from '@/utils';
-import { useScrollPosition } from './useScrollPosition';
+import { linearInterpolation } from '@/utils'; 
+import { useGSAP } from '@gsap/react';
+import { useMouseEvent } from '@/context';
 
 type ColorSwatchProps = {
     token: string;
@@ -148,66 +148,38 @@ const Swatches = () => {
     
     const gridRef = useRef<HTMLDivElement>(null);
     const winsize = useWindowSize();
-    const mousePos = useMousePosition();
-    const scrollPercent = useScrollPosition(gridRef);
+    const mousePosition =  useMouseEvent() 
 
-    const handleScrollPosition = useCallback(() => {
+    useGSAP(() => {
+        if (!gridRef.current) return; 
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        if (document.querySelector('body').classList.contains('reduce-motion')) return; 
+        
         const gridRect = gridRef.current.getBoundingClientRect();
-        const amplitude = 128;
-        const frequency = 1 / 8;
-        colors.forEach((_, i) => {
-            const swatch = gridRef.current.children[i] as HTMLElement;
-            const x = 32 * i + linearInterpolation(-(gridRect.width / 2), swatch.offsetWidth / 2, scrollPercent * 1.5) - gridRect.width / 1.5;
-            const y = Math.sin(i * frequency + scrollPercent * Math.PI) * amplitude;
-
-            gsap.to(swatch, {
-                x,
-                y,
-                duration: 0.5,
-                ease: 'power1.out',
-            });
-        });
-    }, [colors, scrollPercent]);
-
-    const handleMouseMove = useCallback(() => {
-        const gridRect = gridRef.current.getBoundingClientRect();
-        const mouseX = mousePos - gridRect.left - winsize.width;
+        const mouseX = mousePosition.x - gridRect.left - winsize.width;
         const mousePercent = mouseX / gridRect.width / 2;
         const mousePercentFromCenter = mouseX / gridRect.width;
         const amplitude = 256;
-        const frequency = 0.1;
-
+        const frequency = 0.1; 
         colors.forEach((_, i) => {
             const swatch = gridRef.current.children[i] as HTMLElement;
             const x = linearInterpolation(0, gridRect.width - swatch.offsetWidth, mousePercent);
             const y = Math.sin(i * frequency + mousePercentFromCenter * Math.PI) * amplitude;
 
-            gsap.to(swatch, {
-                x,
-                y,
+            const toX = gsap.quickTo(swatch, 'x',{
                 duration: 0.5,
                 ease: 'power1.out',
             });
-        });
-    }, [colors, mousePos, winsize.width]);
+            const toY = gsap.quickTo(swatch, 'y',{
+                duration: 0.5,
+                ease: 'power1.out',
+            });
 
-    useEffect(() => {
-        if (gridRef.current) {
-            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-            if (document.querySelector('body').classList.contains('reduce-motion')) return;
-            if (window.innerWidth < 768) {
-                window.addEventListener('scroll', handleScrollPosition);
-                return () => {
-                    window.removeEventListener('scroll', handleScrollPosition);
-                };
-            } else {
-                window.addEventListener('mousemove', handleMouseMove);
-                return () => {
-                    window.removeEventListener('mousemove', handleMouseMove);
-                };
-            }
-        }
-    }, [handleScrollPosition, handleMouseMove]);
+            toX(x);
+            toY(y);
+        });
+    }, [colors, mousePosition, winsize.width])
+ 
 
     return (
         <div

@@ -3,6 +3,15 @@
     /* Design Tokens */
     --angle: -15deg;
     --trans-content: -20vh;
+    --cursor-x: 0; /* Horizontal mouse position */
+    --view-percent: 0;  /* Percentage of the box in viewport */
+    --mouse-x: 0;
+    --mouse-y: 0;
+    --mouse-prev-x: 0;
+    --mouse-prev-y: 0;
+    --cursor-y: 0;
+    --mouse-delta-x: 1;
+    --mouse-delta-y:1;
 
     /* Typography ramp */
     --tr-1: 10px; /* .625rem */

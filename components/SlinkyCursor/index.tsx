@@ -1,5 +1,7 @@
 'use client'
-import React, { useEffect, useRef } from 'react';
+import { useMouseEvent } from '@/context'; // Ensure this matches your file structure
+import React, { useCallback, useEffect, useRef } from 'react';
+import styles from './index.module.scss'
 
 interface CursorSettings {
   size: number;
@@ -9,65 +11,78 @@ interface CursorSettings {
 
 const SlinkyCursor: React.FC = () => {
   const settings = useRef<CursorSettings>({ size: 40, laziness: 4, stiffness: 4 });
-  const mouse = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
-  const deltaPos = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
-  const pos = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
-  const pestRef = useRef<HTMLDivElement>(null);
+  const mouse = useMouseEvent();
 
-  const animate = () => {
-    const xMouse = mouse.current.x;
-    const yMouse = mouse.current.y;
-    const xPos = pos.current.x;
-    const yPos = pos.current.y;
-    const xDelta = xMouse - xPos;
-    const yDelta = yMouse - yPos;
-
-    deltaPos.current = { x: xDelta, y: yDelta };
-    pos.current = { x: xPos + xDelta / settings.current.laziness, y: yPos + yDelta / settings.current.laziness };
-
-    const pest = pestRef.current;
-    if (pest) {
-      const { size, stiffness } = settings.current;
-      pest.style.top = `${pos.current.y - size / 2}px`;
-      pest.style.left = `${pos.current.x - size / 2}px`;
-      const angleDeg = Math.atan2(yMouse - yPos, xMouse - xPos) * 180 / Math.PI;
-      const stretchWidth = size + diff(xPos, yPos, xMouse, yMouse) / stiffness;
-      pest.style.cssText += `z-index: 9999;width: ${stretchWidth}px; height: ${size}px; transform: rotate(${angleDeg}deg);`;
-    }
-    requestAnimationFrame(animate);
-  };
+  // Refs for position tracking
+  const pos = useRef({ x: 0, y: 0 });
+  const deltaPos = useRef({ x: 0, y: 0 });
 
   const diff = (x1: number, y1: number, x2: number, y2: number) => {
     return Math.hypot(x2 - x1, y2 - y1);
   };
 
+  const pestRef = useRef<HTMLDivElement>(null);
+
+  const animate = useCallback(() => {
+    if (!pestRef.current) return;
+    const xMouse = mouse.event?.pageX || 0;
+    const yMouse = mouse.event?.pageY || 0;
+    const { x: xPos, y: yPos } = pos.current;
+
+    // Calculate deltas and new positions
+    const xDelta = xMouse - xPos;
+    const yDelta = yMouse - yPos;
+    deltaPos.current = { x: xDelta, y: yDelta };
+
+    // Smoothly move towards the mouse position
+    pos.current = {
+      x: xPos + xDelta / settings.current.laziness,
+      y: yPos + yDelta / settings.current.laziness,
+    };
+
+    const pest = pestRef.current;
+    if (pest) {
+      const { size, stiffness } = settings.current;
+      // Update position
+      pest.style.top = `${pos.current.y - size / 2}px`;
+      pest.style.left = `${pos.current.x - size / 2}px`;
+
+      // Calculate rotation and stretch
+      const angleDeg = Math.atan2(yMouse - yPos, xMouse - xPos) * (180 / Math.PI);
+      const stretchWidth = size + diff(xPos, yPos, xMouse, yMouse) / stiffness;
+
+      // Use CSS variables for styling
+      pest.style.setProperty('width', `${stretchWidth}px`);
+      pest.style.setProperty('transform', `rotate(${angleDeg}deg)`);
+    }
+
+    requestAnimationFrame(animate);
+  }, [mouse]);
+
+  // Update active state based on mouse.isPressed from context
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      mouse.current = { x: e.pageX, y: e.pageY };
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mousedown', () => {
-      settings.current.size = 32; // Example modification on mousedown
-      if (pestRef.current) {
-        pestRef.current.style.cssText += 'border-color: var(--color-border-hover); border-style: dashed;';
+    const pest = pestRef.current;
+    if (pest) {
+      if (mouse.isPressed) {
+        pest.classList.add('active');
+      } else {
+        pest.classList.remove('active');
       }
-    });
-    window.addEventListener('mouseup', () => {
-      settings.current.size = 40; // Reset on mouseup
-      if (pestRef.current) {
-        pestRef.current.style.cssText += 'border-width: 2px; border-color: var(--color-border-bold); border-style: solid;';
-      }
-    });
+    }
+  }, [mouse.isPressed]);
 
-    animate();
+  useEffect(() => {
+    // Start the animation loop once component mounts
+    requestAnimationFrame(animate);
+  }, [animate]);
 
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-    };
-  } );
-
-  return <div ref={pestRef} id="pest" style={{ position: 'absolute', pointerEvents: 'none' }}><span style={{ height: `${settings.current.size}px` }}></span></div>;
+  return (
+    <div
+      ref={pestRef}
+      className={styles.pest}
+      style={{ position: 'absolute', pointerEvents: 'none' }}
+    ></div>
+  );
 };
 
 export default SlinkyCursor;

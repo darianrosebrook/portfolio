@@ -1,11 +1,7 @@
 import { Analytics } from '@vercel/analytics/react';
 import type { Metadata } from "next";
-import "./globals.scss";
-import Navbar from "@/components/Navbar";
-import { createClient } from "@/utils/supabase/server";
-import Footer from "@/components/Footer";
-import localFont from "next/font/local";
-import SlinkyCursor from "@/components/SlinkyCursor";
+import "./globals.scss";   
+import localFont from "next/font/local"; 
 
 // If loading a variable font, you don't need to specify the font weight
 const nohemi = localFont({
@@ -28,24 +24,12 @@ export const metadata: Metadata = {
   title: "Darian Rosebrook: Product Designer | Design Systems, Portland Oregon",
   description:
     "Hey! I'm Darian Rosebrook 👋🏼 I am a product designer in the Portland, Oregon area. I make design systems, custom design tooling, Figma plugins, and design ops stuff for product teams.",
-};
+}; 
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
-  const client = await createClient();
-  const response = await client.auth.getUser();
-  const { data: { user }, error } = response;
-  if (error) {
-    console.error(error);
-  }
-  const id = user?.id || null;
-  const pages = [
-    { name: 'Blueprints', path: 'blueprints', admin: false },
-    { name: 'Articles', path: 'articles', admin: false },
-    { name: 'Work', path: 'work', admin: false }, 
-  ]
+}>) { 
   return (
     <html lang="en" className={`${inter.variable} ${nohemi.variable}`}>
       <body>
@@ -54,16 +38,7 @@ export default async function RootLayout({
             <feTurbulence type="turbulence" baseFrequency="0.5"></feTurbulence>
             <feColorMatrix type="saturate" values="0"></feColorMatrix>
           </filter>
-        </svg>
-
-        <Navbar id={id} pages={pages}/>
-        {children}
-        <Footer />
-        <script
-          async
-          src="https://kit.fontawesome.com/cf8a647076.js"
-          crossOrigin="anonymous"
-        ></script>
+        </svg> 
         <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
           <defs>
             <filter id="goo">
@@ -81,9 +56,15 @@ export default async function RootLayout({
               <feComposite in="SourceGraphic" in2="goo" operator="atop" />
             </filter>
           </defs>
-        </svg>
-        <Analytics />
-        <SlinkyCursor />
+        </svg> 
+        {children} 
+        <script
+          async
+          src="https://kit.fontawesome.com/cf8a647076.js"
+          crossOrigin="anonymous"
+        ></script>
+       
+        <Analytics /> 
       </body>
     </html>
   );

@@ -1,17 +1,29 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, {  useEffect, useRef } from "react";
 import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
+import { useGSAP } from "@gsap/react"; 
+import { ReducedMotionProvider, MouseProvider } from "@/context";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import SlinkyCursor from "@/components/SlinkyCursor"; 
+import { User } from "@supabase/supabase-js";
 
 type TemplateProps = {
     children: React.ReactNode;
+    user: User;
 };
 
-const Template: React.FC<TemplateProps> = ({ children }) => {
+const Template: React.FC<TemplateProps> = ({ children, user }) => {
     const ref = useRef(null);
-    const handleSelectionChange = useRef(null);
+    const handleSelectionChange = useRef(null); 
 
+    const id = user?.id || null;
+    const pages = [
+      { name: 'Blueprints', path: 'blueprints', admin: false },
+      { name: 'Articles', path: 'articles', admin: false },
+      { name: 'Work', path: 'work', admin: false }, 
+    ] 
     useEffect(() => {
         if (!handleSelectionChange.current) {
             handleSelectionChange.current = () => {
@@ -20,16 +32,7 @@ const Template: React.FC<TemplateProps> = ({ children }) => {
                     const rootElement = document.documentElement;
                     const isDarkTheme = window.matchMedia(
                         "(prefers-color-scheme: dark)"
-                    ).matches;
-
-                    // LAB color space
-                    // const lightnessForLAB = isDarkTheme ? [90, 5] : [5, 90];
-                    // const positiveNegative = Math.random() < 0.5 ? -1 : 1;
-                    // const randomPercent = () => Math.floor(Math.random() * 100 * positiveNegative);
-                    // const val1 = randomPercent();
-                    // const val2 = randomPercent();
-                    // const background = `lab(${lightnessForLAB[1]}% ${val1}% ${val2}%)`;
-                    // const foreground = `lab(${lightnessForLAB[0]}% ${val1}% ${val2}%)`;
+                    ).matches; 
 
                     const colors = [
                         "red",
@@ -76,7 +79,17 @@ const Template: React.FC<TemplateProps> = ({ children }) => {
         });
     }, []);
 
-    return <main ref={ref}>{children}</main>;
+    return  (
+    <ReducedMotionProvider>
+        <MouseProvider> 
+            <Navbar id={id} pages={pages}/>
+            <main ref={ref}> 
+                {children}
+            </main>;
+            <Footer />
+            <SlinkyCursor />
+        </MouseProvider>
+    </ReducedMotionProvider>)
 };
 
 export default Template;
