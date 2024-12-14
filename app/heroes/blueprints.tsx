@@ -4,68 +4,47 @@ import Styles from './blueprints.module.scss';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import SvgIllustration from './svgIllustration';
-import { useWindowSize } from './useWindowSize';
-import { useScrollPosition } from './useScrollPosition';
+import { useWindowSize } from './useWindowSize'; 
+import { useMouseEvent } from '@/context';
 
 gsap.registerPlugin(useGSAP);
 
 const Blueprints: React.FC = () => {
   const winsize = useWindowSize();
   const gridRef = useRef<HTMLDivElement>(null);
-  const spriteRef = useRef<HTMLDivElement>(null);
-  const mousePos = useRef({ x: 0, y: 0 });
+  const spriteRef = useRef<HTMLDivElement>(null); 
 
   const numRows = 9;
   const numCols = 12;
   const middleRowIndex = Math.floor(numRows / 2); 
 
-  const [svgs, setSvgs] = useState<string[]>([]);
-  const percentInView = useScrollPosition(gridRef);
+  const [svgs, setSvgs] = useState<string[]>([]); 
+  const mouse = useMouseEvent()  
 
-  useGSAP(() => {
-    if (!gridRef.current) return;
+  useGSAP(() => { 
+    if (!gridRef.current) return; 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    if (document.querySelector('body').classList.contains('reduce-motion')) return;
+    if (document.querySelector('body').classList.contains('reduce-motion')) return; 
 
-    const rows = Array.from(gridRef.current.children) as HTMLElement[];
-
-    const handleMouseMove = (event: MouseEvent) => {
-      mousePos.current.x = event.clientX;
-      mousePos.current.y = event.clientY;
-    };
-    let distanceModifier = 0.2;
-    if (window.innerWidth > 768) {
-      window.addEventListener('mousemove', handleMouseMove);
-    } else {
-      mousePos.current.x = (percentInView + 1) / 3 * winsize.width;  
-      distanceModifier = .4
-    }
-
-    const tickerFunction = () => { 
-
-      const normalizedMouseX = (mousePos.current.x / winsize.width) * 2 - 1;
+    const rows = Array.from(gridRef.current.children) as HTMLElement[]; 
+    const distanceModifier = 0.2; 
+ 
+      const normalizedMouseX = (mouse.x / winsize.width) * 2 - 1;
       const targetTranslateX = normalizedMouseX * 12 * (winsize.width / 80);
 
       rows.forEach((row, index) => {
         const distanceFromMiddle = Math.abs(index - middleRowIndex);
         const factor = 1 - distanceModifier * distanceFromMiddle;
         const targetX = targetTranslateX * factor;
-
-        gsap.to(row, {
-          x: targetX,
+        const toX = gsap.quickTo(row, 'x',{
           duration: 1.5,
           ease: 'power2.out',
         });
-      });
-    };
 
-    gsap.ticker.add(tickerFunction);
+        toX(targetX);
 
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      gsap.ticker.remove(tickerFunction);
-    };
-  }, [ winsize.width, percentInView, gridRef]);
+      }); 
+  }, [ winsize.width, gridRef, mouse]);
 
   useEffect(() => {
     const dsSprite = document.getElementById('DSSPRITE') as HTMLDivElement;
