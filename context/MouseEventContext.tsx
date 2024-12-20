@@ -1,6 +1,7 @@
 import React, { createContext, useContext, ReactNode, useEffect, useState } from 'react';
 import { Observer } from 'gsap/Observer';
 import { gsap } from 'gsap';
+import { useReducedMotion } from './ReducedMotionContext';
 
 // Ensure the plugin is registered
 gsap.registerPlugin(Observer);
@@ -20,6 +21,7 @@ interface MouseContextType extends Partial<Observer> {
 const MouseContext = createContext<MouseContextType | undefined>(undefined);
 
 export const MouseProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const { prefersReducedMotion } = useReducedMotion()
   const [mouseData, setMouseData] = useState<MouseContextType>({
     x: 0,
     y: 0,
@@ -33,6 +35,7 @@ export const MouseProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   });
 
   useEffect(() => {
+    if (prefersReducedMotion) return;
     const observer = Observer.create({
       target: window,
       type: 'pointer, wheel, touch, scroll',
@@ -80,7 +83,7 @@ export const MouseProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     return () => {
       observer.kill(); // Cleanup on unmount
     };
-  }, []);
+  }, [prefersReducedMotion]);
 
   return <MouseContext.Provider value={mouseData}>{children}</MouseContext.Provider>;
 };

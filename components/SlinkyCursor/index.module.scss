@@ -22,12 +22,11 @@
   background: rgb(0 0 0 / 10%);
   line-height: 0;
   pointer-events: none;
-  transition: transform 0.2s ease-out, width var(--cursor-laziness) ease-out, border-color 0.2s ease-out, rotate 0.2s ease-out;
   transform-origin: center;
 }
 
 .pest.active {
-  width: 32px;
+  width: 32px !important;
   height: 32px;
   aspect-ratio: 1/1;
 

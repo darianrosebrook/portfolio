@@ -10,7 +10,7 @@ interface CursorSettings {
 }
 
 const SlinkyCursor: React.FC = () => {
-  const settings = useRef<CursorSettings>({ size: 40, laziness: 4, stiffness: 4 });
+  const settings = useRef<CursorSettings>({ size: 40, laziness: 4, stiffness: 2 });
   const mouse = useMouseEvent();
 
   // Refs for position tracking
@@ -64,9 +64,11 @@ const SlinkyCursor: React.FC = () => {
     const pest = pestRef.current;
     if (pest) {
       if (mouse.isPressed) {
-        pest.classList.add('active');
+        pest.classList.add(styles.active);
+        settings.current.size = 32;
       } else {
-        pest.classList.remove('active');
+        pest.classList.remove(styles.active);
+        settings.current.size = 40;
       }
     }
   }, [mouse.isPressed]);
