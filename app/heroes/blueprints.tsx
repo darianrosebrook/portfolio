@@ -41,7 +41,7 @@ const Blueprints: React.FC = () => {
     const distanceModifier = 0.2; 
  
       let normalizedMouseX = (mouse.x / winsize.width) * 2 - 1;
-      if (winsize.width < 700) {
+      if (winsize.width < 1000) {
         normalizedMouseX = percentInView * 5
       }
       const targetTranslateX = normalizedMouseX * 12 * (winsize.width / 80);
