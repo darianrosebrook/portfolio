@@ -1,5 +1,5 @@
 'use client'
-import React, {  useRef, useState} from 'react';
+import React, {  useRef } from 'react';
 import Style from './swatches.module.scss';
 import { useWindowSize } from './useWindowSize';
 import { gsap } from 'gsap';
@@ -143,46 +143,23 @@ const Swatches = () => {
         { token: "--color-core-neutral-700", value: "#3a3a3a", colorName: "Neutral 700", },
         { token: "--color-core-neutral-800", value: "#212121", colorName: "Neutral 800", },
 
-    ], []);
-
-    const containerRef = useRef<HTMLDivElement>(null);
+    ], []); 
     const gridRef = useRef<HTMLDivElement>(null);
     const winsize = useWindowSize();
-    const mousePosition =  useMouseEvent() 
-    const [percentInView, setPercentInView] = useState(0)
+    const mousePosition =  useMouseEvent()  
 
     useGSAP(() => {
-        if (!gridRef.current || !containerRef.current) return; 
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                setPercentInView(entry.intersectionRatio)
-            },
-            {
-                root: null,
-                rootMargin: '0px', 
-            }
-        );
-        observer.observe(containerRef.current
-
-        )
+        if (!gridRef.current  ) return;  
         const gridRect = gridRef.current.getBoundingClientRect();
         const mouseX = mousePosition.x - gridRect.left - winsize.width;
-        let mousePercent = mouseX / gridRect.width / 2; 
-        let mousePercentFromCenter = mouseX / gridRect.width;
-         if (winsize.width < 700) {
-            mousePercentFromCenter =  ((percentInView) / -4 )  
-            mousePercent = (percentInView) / -10
-        } 
-        console.log('mousePercent', mousePercent, 'mousePercentFromCenter', mousePercentFromCenter)
+        const mousePercent = mouseX / gridRect.width / 2; 
+        const mousePercentFromCenter = mouseX / gridRect.width;  
         
         const amplitude = 256 ;
         const frequency = 0.14; 
         colors.forEach((_, i) => {
             const swatch = gridRef.current.children[i] as HTMLElement;
-            let x = linearInterpolation(0, gridRect.width - swatch.offsetWidth, mousePercent);
-            if (winsize.width < 700 ) {
-                x = linearInterpolation(0, gridRect.width - swatch.offsetWidth, mousePercent )
-            }
+            const x = linearInterpolation(0, gridRect.width - swatch.offsetWidth, mousePercent); 
             const y = Math.sin(i * frequency + mousePercentFromCenter * Math.PI) * amplitude;
 
             const toX = gsap.quickTo(swatch, 'x',{
@@ -196,15 +173,12 @@ const Swatches = () => {
 
             toX(x);
             toY(y);
-        });
-        return () => {
-            observer.unobserve(containerRef.current)
-        }
+        }); 
     }, [colors, mousePosition, winsize.width])
  
 
     return (
-        <div    ref = {containerRef}
+        <div  
             className={`${Style.gridContainer}`} 
         >
             <svg xmlns="http://www.w3.org/2000/svg" style={{ display: 'none' }}> 
