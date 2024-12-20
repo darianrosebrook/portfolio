@@ -18,13 +18,12 @@ type NavbarProps = {
   id: string;
 };
 
-export default function Navbar({ pages = [], id = null }: NavbarProps) { 
+export default function Navbar({ pages = []  }: NavbarProps) { 
   const [slider, setSlider] = useState(false);
-  const [theme, setTheme] = useState("dark"); 
+  const [theme, setTheme] = useState('dark');  
   const pathname = usePathname();
 
-  const { prefersReducedMotion, setPrefersReducedMotion } = useReducedMotion();
-
+  const { prefersReducedMotion, setPrefersReducedMotion } = useReducedMotion(); 
   const handlePrefersReducedMotion = (e) => {
       const enabled = e.target.checked;
       setPrefersReducedMotion(enabled);
@@ -34,25 +33,30 @@ export default function Navbar({ pages = [], id = null }: NavbarProps) {
     setSlider(enabled);
     const body = document.querySelector("body");
     if (enabled) {
-      body.classList.add("light");
-      body.classList.remove("dark");
+      body.classList.add(theme); 
     } else {
-      body.classList.add("dark");
-      body.classList.remove("light");
+      body.classList.remove(theme); 
     }
-  }, []);
+  }, [theme]);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return; 
-    const initialTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-    setTheme(initialTheme);
-    document.body.classList.add(initialTheme);
-  }, []);
+    if (typeof window === 'undefined') return;  
+    const prefersColorSchemeDarkQuery = window?.matchMedia("(prefers-color-scheme: dark)")
+    const body = document.querySelector("body");
+    if ( prefersColorSchemeDarkQuery.matches ) {
+      setTheme('light')
+    }
+    prefersColorSchemeDarkQuery.onchange = e => { 
+      setSlider(false);
+        setTheme(e.matches ? 'light' :'dark') 
+        body.classList.remove(theme);
+        console.log(e.matches)
+    }
  
-
-  useEffect(() => {
-    console.log('Navbar props or state changed:', { id, slider, theme });
-  }, [id, slider, theme]);
+    
+  }, [ theme]);
+ 
+ 
 return (
     <header className={styles.navContainer}>
       <nav className={styles.nav}>
@@ -91,7 +95,7 @@ return (
                   </li>
                   <li>
                     <ToggleSwitch checked={slider} onChange={handleTheme}>
-                      Use {theme} mode
+                      Use {theme} theme
                     </ToggleSwitch>
                   </li>
                 </ul>

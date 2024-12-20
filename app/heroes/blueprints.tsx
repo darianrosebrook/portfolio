@@ -22,9 +22,7 @@ const Blueprints: React.FC = () => {
   const mouse = useMouseEvent()  
 
   useGSAP(() => { 
-    if (!gridRef.current) return; 
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    if (document.querySelector('body').classList.contains('reduce-motion')) return; 
+    if (!gridRef.current) return;   
 
     const rows = Array.from(gridRef.current.children) as HTMLElement[]; 
     const distanceModifier = 0.2; 
