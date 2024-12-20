@@ -6,51 +6,32 @@ import { useReducedMotion } from './ReducedMotionContext';
 // Ensure the plugin is registered
 gsap.registerPlugin(Observer);
 
-interface MouseContextType extends Partial<Observer> {
-  x: number;
-  y: number;
-  deltaX: number;
-  deltaY: number;
-  velocityX: number;
-  velocityY: number;
-  isDragging: boolean;
-  isPressed: boolean;
-  event: PointerEvent | null;
-}
+// interface MouseContextType extends Partial<Observer> {
+//   x: number;
+//   y: number;
+//   deltaX: number;
+//   deltaY: number;
+//   velocityX: number;
+//   velocityY: number;
+//   isDragging: boolean;
+//   isPressed: boolean;
+//   event: MouseEvent | null; 
+// }
 
-const MouseContext = createContext<MouseContextType | undefined>(undefined);
+const MouseContext = createContext (undefined);
 
 export const MouseProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const { prefersReducedMotion } = useReducedMotion()
-  const [mouseData, setMouseData] = useState<MouseContextType>({
-    x: 0,
-    y: 0,
-    deltaX: 0,
-    deltaY: 0,
-    velocityX: 0,
-    velocityY: 0,
-    isDragging: false,
-    isPressed: false,
-    event: null,
-  });
+  const [mouseData, setMouseData] = useState ({})
 
   useEffect(() => {
     if (prefersReducedMotion) return;
     const observer = Observer.create({
       target: window,
       type: 'pointer, wheel, touch, scroll',
-      onMove: (self) => {
-        const event = self.event as PointerEvent;
+      onMove: (self) => { 
         setMouseData({
-          x: self.x || 0,
-          y: self.y || 0,
-          deltaX: self.deltaX || 0,
-          deltaY: self.deltaY || 0,
-          velocityX: self.velocityX || 0,
-          velocityY: self.velocityY || 0,
-          isDragging: self.isDragging || false,
-          isPressed: self.isPressed || false,
-          event: event || null,
+          ...self
         });
       },
       onPress: () => {
@@ -77,7 +58,13 @@ export const MouseProvider: React.FC<{ children: ReactNode }> = ({ children }) =
           ...prev,
           isDragging: false,
         }));
-      },
+      }, 
+      onWheel: (self) => {
+        setMouseData(prev => ({
+          ...prev,
+          ...self
+        }))
+      }
     });
 
     return () => {

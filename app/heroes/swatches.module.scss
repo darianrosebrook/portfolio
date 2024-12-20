@@ -19,9 +19,11 @@
 
 .colorSwatchContainer {
   position: relative;
+  left: 50%;
   display: flex;
   align-items: center;
   transition: gap 2.5s;
+  transform: translateX(-50%);
 }
 
 .isometricContainer {
@@ -51,6 +53,10 @@
     height: 80%;
     padding: 1rem 0;
 
+  }
+
+  & p:first-of-type {
+    font-size: var(--tr-4);
   }
 }
 
