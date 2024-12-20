@@ -13,21 +13,37 @@ const Blueprints: React.FC = () => {
   const winsize = useWindowSize();
   const gridRef = useRef<HTMLDivElement>(null);
   const spriteRef = useRef<HTMLDivElement>(null); 
+  const containerRef  = useRef<HTMLDivElement>(null);
 
   const numRows = 9;
   const numCols = 12;
   const middleRowIndex = Math.floor(numRows / 2); 
 
   const [svgs, setSvgs] = useState<string[]>([]); 
+  const [percentInView, setPercentInView] = useState(0);
   const mouse = useMouseEvent()  
 
   useGSAP(() => { 
-    if (!gridRef.current) return;   
+    if (!gridRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setPercentInView(entry.intersectionRatio);
+      },
+      {
+        root: null, // Observing the viewport itself
+        rootMargin: '0px',
+        threshold:1, // Trigger when at least 10% of the element is visible
+      }
+    );
+    observer.observe(containerRef.current);  
 
     const rows = Array.from(gridRef.current.children) as HTMLElement[]; 
     const distanceModifier = 0.2; 
  
-      const normalizedMouseX = (mouse.x / winsize.width) * 2 - 1;
+      let normalizedMouseX = (mouse.x / winsize.width) * 2 - 1;
+      if (winsize.width < 700) {
+        normalizedMouseX = percentInView * 5
+      }
       const targetTranslateX = normalizedMouseX * 12 * (winsize.width / 80);
 
       rows.forEach((row, index) => {
@@ -42,7 +58,10 @@ const Blueprints: React.FC = () => {
         toX(targetX);
 
       }); 
-  }, [ winsize.width, gridRef, mouse]);
+      return () => {
+        observer.unobserve(containerRef.current)
+      }
+  }, [ winsize.width, gridRef, containerRef, mouse]);
 
   useEffect(() => {
     const dsSprite = document.getElementById('DSSPRITE') as HTMLDivElement;
@@ -55,8 +74,9 @@ const Blueprints: React.FC = () => {
 
   return (
     <div
+    ref={containerRef}
       className={Styles.gridContainer} 
-    >
+    > 
       <div className={Styles.gridContent} ref={gridRef}>
         {svgs.length > 0 &&
           Array.from({ length: numRows }, (_, i) => (
