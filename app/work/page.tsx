@@ -15,10 +15,39 @@ export default function Page() {
         </div>
       </section>
       <section data-print="true" className="projects content">
-        <ul className="experience">
+        <ul className="experience"><li>
+          <h3 className="dateYear">
+            <span>2025</span>
+          </h3>
+          <h4>
+            Design Ecosystem Mapping <span> at Verizon</span>
+          </h4>
+          <div className="content">
+            <div >
+              <div>
+                <h5>Role</h5>
+                <p><strong>Team Lead, UX Engineer</strong></p>
+              </div>
+            </div>
+            <h5>Outcomes</h5>
+            <div className="three-up">
+              <p>Detailed Key Performance Indicator (KPIs) Metrics for the Design System across the Product Organization</p>
+              <p>Custom Data Visualization for Design System Analytics and Adoption across Design and Code</p>
+              <p>Data Management portals for creating, updating, and deleting records</p>
+            </div>
+            <p>
+              As the lead UX Engineer on my team, I worked with my team to build a robust tool for data insights, tracking specific Key Performance Indicators across our Design and Engineering orgs through Figma, Gitlab, and other integrations. With my expertise in the Figma and Design System space, I helped implement an API layer to empower other tools our larger team built with the data necessisary to help improve the workflows of our team.
+            </p>
+            <p>Once the data layer was set up, I created a custom website using React that serves as an admin level portal to manage this data. This custom analytics tool also serves as a central hub for our product design organization&apos;s data. The tool enables rich insights into the relationships between products, team resourcing, design system adoption, and other metrics important to our design leaders.
+            </p>
+            <p>
+              As a result, our team has been able to make more informed decisions about the design system, and the design system has been able to make more informed decisions about the products it serves. This has led to a more cohesive design ecosystem, and a more efficient design process.
+            </p>
+          </div>
+        </li>
           <li>
             <h3 className="dateYear">
-              <span>2023</span>
+              <span>2024</span>
             </h3>
             <h4>
               <Link href={"/work/iconography-sync"}>
@@ -86,7 +115,7 @@ export default function Page() {
                   <h5>Role</h5>
                   <p><strong>Co-Designer, Co-Developer</strong></p>
                 </div>
-              </div> 
+              </div>
               <h5>Outcomes</h5>
               <div className="three-up">
                 <p>Standardized the process for preparing design work, creating more efficient collaboration between design and development teams.</p>
@@ -127,7 +156,7 @@ export default function Page() {
                 Teams involved in our pilots have had a large reduction in bugs,
                 and more efficient design handoff as opposed to teams outside
                 the pilot
-              </p> 
+              </p>
             </div>
           </li>
           <li>
@@ -143,7 +172,7 @@ export default function Page() {
                   <h5>Role</h5>
                   <p><strong>Lead Designer, Developer</strong></p>
                 </div>
-              </div>  
+              </div>
               <h5>Outcomes</h5>
               <div className="three-up">
                 <p>A solid pre-variables workflow for connecting underlying design tokens across multiple libraries.</p>
@@ -260,7 +289,7 @@ export default function Page() {
             </div>
           </li>
           <li>
-            
+
             <h3 className="dateYear">
               <span>2020</span>
             </h3>
@@ -379,7 +408,7 @@ export default function Page() {
             </div>
           </li>
         </ul>
-      </section>
+      </section >
     </>
   );
 }
