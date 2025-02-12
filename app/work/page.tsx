@@ -15,7 +15,8 @@ export default function Page() {
         </div>
       </section>
       <section data-print="true" className="projects content">
-        <ul className="experience"><li>
+        <ul className="experience">
+        {/* <li>
           <h3 className="dateYear">
             <span>2025</span>
           </h3>
@@ -44,7 +45,7 @@ export default function Page() {
               As a result, our team has been able to make more informed decisions about the design system, and the design system has been able to make more informed decisions about the products it serves. This has led to a more cohesive design ecosystem, and a more efficient design process.
             </p>
           </div>
-        </li>
+        </li> */}
           <li>
             <h3 className="dateYear">
               <span>2024</span>
