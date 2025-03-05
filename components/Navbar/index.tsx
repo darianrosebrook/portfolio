@@ -1,9 +1,10 @@
 "use client";
+import { useTransitionRouter } from "next-view-transitions";  
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from "./index.module.css";
 import Logo from "./logo"; 
-import { useCallback, useEffect, useState } from "react"; 
+import React, { useCallback, useEffect, useState } from "react"; 
 import { useReducedMotion } from "@/context";
 import Popover from "../Popover/Popover";
 import Button from "../Button";
@@ -22,6 +23,42 @@ export default function Navbar({ pages = []  }: NavbarProps) {
   const [slider, setSlider] = useState(false);
   const [theme, setTheme] = useState('dark');  
   const pathname = usePathname();
+  const router = useTransitionRouter();
+  const slideInOut = useCallback(
+    () => {
+      document.documentElement.animate(
+        [
+          { opacity: 1, transform: "translatex(0)" },
+          { opacity: 0.0, transform: "translatex(-35%)" },
+        ], {
+          duration: 500,
+          easing: "cubic-bezier(0.8, 0, 0.15, 1)",
+          fill: "forwards",
+          pseudoElement: "::view-transition-old(main)",
+        }
+      )
+      document.documentElement.animate(
+        [
+          // { opacity: 0, clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)" },
+          // { opacity: 1, clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)" }, 
+          { opacity: 0, transform: "translatex(35%)" },
+          { opacity: 1, transform: "translatex(0)" },
+        ], 
+        {
+          duration: 500,
+          easing: "cubic-bezier(0.8, 0, 0.176, 1)",
+          fill: "forwards",
+          pseudoElement: "::view-transition-new(main)",
+        }
+      )
+    }, []
+  );
+  const hanldeRouteChange = (event: React.MouseEvent<HTMLAnchorElement>, route: string) => {
+    event.preventDefault();
+    router.push(route, {
+      onTransitionReady: slideInOut,
+    });
+  };
 
   const { prefersReducedMotion, setPrefersReducedMotion } = useReducedMotion(); 
   const handlePrefersReducedMotion = (e) => {
@@ -60,7 +97,7 @@ export default function Navbar({ pages = []  }: NavbarProps) {
 return (
     <header className={styles.navContainer}>
       <nav className={styles.nav}>
-        <Link href="/" className="logoLink">
+        <Link onClick={(e) => hanldeRouteChange(e, "/")} href="/" className="logoLink">
           <Logo />
           <h1 className="medium logo">{`Darian Rosebrook`}</h1>
         </Link>
@@ -68,12 +105,12 @@ return (
           {pages.length > 0 &&
             pages.map((page) => (
               <li key={page.name}>
-                <Link
+                <a onClick={(e) => hanldeRouteChange(e, `/${page.path}`)}
                   href={`/${page.path}`}
                   className={pathname === page.path ? styles.active : ""}
                 >
                   {page.name}
-                </Link>
+                </a>
               </li>
             ))}
           <li>
@@ -111,17 +148,17 @@ return (
                 <Popover.Content>
                   <ul className="menuList">
                     <li>
-                      <Link className="menuItem" href={`/profile/${id}`}>
+                      <Link onClick={(e) => hanldeRouteChange(e, "/")} className="menuItem" href={`/profile/${id}`}>
                         Profile
                       </Link>
                     </li>
                     <li>
-                      <Link className="menuItem" href="/dashboard">
+                      <Link onClick={(e) => hanldeRouteChange(e, "/")} className="menuItem" href="/dashboard">
                         Dashboard
                       </Link>
                     </li>
                     <li>
-                      <Link className="menuItem" href="/settings">
+                      <Link onClick={(e) => hanldeRouteChange(e, "/")} className="menuItem" href="/settings">
                         Settings
                       </Link>
                     </li>

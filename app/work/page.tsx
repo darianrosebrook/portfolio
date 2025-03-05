@@ -37,7 +37,7 @@ export default function Page() {
               <p>Data Management portals for creating, updating, and deleting records</p>
             </div>
             <p>
-              As a UX Engineer on my team, I was designated as the team lead to guide the direction of our project. I worked with my team to build a robust tool for data insights, tracking specific Key Performance Indicators across our Design and Engineering orgs through Figma, Gitlab, and other integrations. With my expertise in the Figma and Design System space, I helped implement an API layer to empower other tools our larger team built with the data necessisary to help improve the workflows of our team.
+              As a UX Engineer on my team, I was designated as the team lead to guide the direction of our project. I worked with my team to build a robust tool for data insights, tracking specific Key Performance Indicators across our Design and Engineering orgs through Figma, Gitlab, and other integrations. With my expertise in the Figma and Design System space, I helped implement an API layer to empower other tools our larger team built with the data necessary to help improve the workflows of our team.
             </p>
             <p>Once the data layer was set up, I created a custom website using React that serves as an admin level portal to manage this data. This custom analytics tool also serves as a central hub for our product design organization&apos;s data. The tool enables rich insights into the relationships between products, team resourcing, design system adoption, and other metrics important to our design leaders.
             </p>
