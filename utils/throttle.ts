@@ -1,10 +1,9 @@
 // Custom throttle function
-export const throttle = (func: (...args: any[]) => void, limit: number) => {
+export const throttle = (func: (...args: unknown[]) => void, limit: number) => {
     let inThrottle: boolean;
-    return function(this: any, ...args: any[]) {
-        const context = this;
+    return (...args: unknown[]) => {
         if (!inThrottle) {
-            func.apply(context, args);
+            func(...args);
             inThrottle = true;
             setTimeout(() => inThrottle = false, limit);
         }
