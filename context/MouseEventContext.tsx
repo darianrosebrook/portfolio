@@ -1,4 +1,10 @@
-import React, { createContext, useContext, ReactNode, useEffect, useState } from 'react';
+import React, {
+  createContext,
+  useContext,
+  ReactNode,
+  useEffect,
+  useState,
+} from 'react';
 import { Observer } from 'gsap/Observer';
 import { gsap } from 'gsap';
 import { useReducedMotion } from './ReducedMotionContext';
@@ -15,23 +21,25 @@ gsap.registerPlugin(Observer);
 //   velocityY: number;
 //   isDragging: boolean;
 //   isPressed: boolean;
-//   event: MouseEvent | null; 
+//   event: MouseEvent | null;
 // }
 
-const MouseContext = createContext (undefined);
+const MouseContext = createContext(undefined);
 
-export const MouseProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const { prefersReducedMotion } = useReducedMotion()
-  const [mouseData, setMouseData] = useState ({})
+export const MouseProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
+  const { prefersReducedMotion } = useReducedMotion();
+  const [mouseData, setMouseData] = useState({});
 
   useEffect(() => {
     if (prefersReducedMotion) return;
     const observer = Observer.create({
       target: window,
       type: 'pointer, wheel, touch, scroll',
-      onMove: (self) => { 
+      onMove: (self) => {
         setMouseData({
-          ...self
+          ...self,
         });
       },
       onPress: () => {
@@ -58,13 +66,13 @@ export const MouseProvider: React.FC<{ children: ReactNode }> = ({ children }) =
           ...prev,
           isDragging: false,
         }));
-      }, 
+      },
       onWheel: (self) => {
-        setMouseData(prev => ({
+        setMouseData((prev) => ({
           ...prev,
-          ...self
-        }))
-      }
+          ...self,
+        }));
+      },
     });
 
     return () => {
@@ -72,7 +80,9 @@ export const MouseProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     };
   }, [prefersReducedMotion]);
 
-  return <MouseContext.Provider value={mouseData}>{children}</MouseContext.Provider>;
+  return (
+    <MouseContext.Provider value={mouseData}>{children}</MouseContext.Provider>
+  );
 };
 
 export const useMouseEvent = () => {

@@ -1,24 +1,24 @@
-"use client";
-import { useCallback, useEffect, useState } from "react";
-import { createClient } from "@/utils/supabase/client";
-import { type User } from "@supabase/supabase-js";
-import Avatar from "./avatar";
-import Button from "@/components/Button";
+'use client';
+import { useCallback, useEffect, useState } from 'react';
+import { createClient } from '@/utils/supabase/client';
+import { type User } from '@supabase/supabase-js';
+import Avatar from './avatar';
+import Button from '@/components/Button';
 export default function AccountForm({ user }: { user: User | null }) {
-  const supabase =  createClient();
+  const supabase = createClient();
   const [loading, setLoading] = useState(true);
   const [fullname, setFullname] = useState<string | null>(null);
   const [username, setUsername] = useState<string | null>(null);
-  const [avatar_url, setAvatarUrl] = useState<string | null>(null); 
+  const [avatar_url, setAvatarUrl] = useState<string | null>(null);
   const getProfile = useCallback(async () => {
     try {
       setLoading(true);
 
       const { data, error, status } = await supabase
-        .from("profiles")
+        .from('profiles')
         .select(`full_name, username, avatar_url`)
-        .eq("id", user?.id)
-        .single(); 
+        .eq('id', user?.id)
+        .single();
 
       if (error && status !== 406) {
         console.error(error);
@@ -26,14 +26,14 @@ export default function AccountForm({ user }: { user: User | null }) {
       }
       const { full_name, username, avatar_url } = data;
 
-      if (data) { 
+      if (data) {
         setFullname(full_name);
         setUsername(username);
         setAvatarUrl(avatar_url);
       }
     } catch (error) {
       console.error(error);
-      alert("Error loading user data!");
+      alert('Error loading user data!');
     } finally {
       setLoading(false);
     }
@@ -55,25 +55,28 @@ export default function AccountForm({ user }: { user: User | null }) {
     try {
       setLoading(true);
 
-      const { error } = await supabase.from("profiles").update({
-        id: user?.id as string,
-        full_name: fullname,
-        username,
-        avatar_url,
-        updated_at: new Date().toISOString(),
-      }).eq("id", user?.id);
+      const { error } = await supabase
+        .from('profiles')
+        .update({
+          id: user?.id as string,
+          full_name: fullname,
+          username,
+          avatar_url,
+          updated_at: new Date().toISOString(),
+        })
+        .eq('id', user?.id);
       if (error) throw error;
-      alert("Profile updated!");
+      alert('Profile updated!');
     } catch (error) {
       console.error(error);
-      alert("Error updating the data!");
+      alert('Error updating the data!');
     } finally {
       setLoading(false);
     }
   }
 
   return (
-    <div className="form-widget"> 
+    <div className="form-widget">
       <Avatar
         uid={user?.id ?? null}
         url={avatar_url}
@@ -92,7 +95,7 @@ export default function AccountForm({ user }: { user: User | null }) {
         <input
           id="fullName"
           type="text"
-          value={fullname || ""}
+          value={fullname || ''}
           onChange={(e) => setFullname(e.target.value)}
         />
       </div>
@@ -101,7 +104,7 @@ export default function AccountForm({ user }: { user: User | null }) {
         <input
           id="username"
           type="text"
-          value={username || ""}
+          value={username || ''}
           onChange={(e) => setUsername(e.target.value)}
         />
       </div>

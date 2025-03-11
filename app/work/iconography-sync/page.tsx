@@ -1,60 +1,60 @@
-import Link from "next/link";
-import Image from "next/image";
-import Styles from "../../articles/[slug]/styles.module.css";
+import Link from 'next/link';
+import Image from 'next/image';
+import Styles from '../../articles/[slug]/styles.module.css';
 
 const Page: React.FC = () => {
   const images = {
-    "icon-tool.jpg": {
-      alt: "Icon Sync",
-      src: "/icon-tool/icon-tool.jpg",
+    'icon-tool.jpg': {
+      alt: 'Icon Sync',
+      src: '/icon-tool/icon-tool.jpg',
       width: 800,
       height: 400,
     },
-    "icon-tool-01.png": {
-      alt: "Icon Sync",
-      src: "/icon-tool/icon-tool-01.png",
+    'icon-tool-01.png': {
+      alt: 'Icon Sync',
+      src: '/icon-tool/icon-tool-01.png',
       width: 800,
       height: 400,
     },
-    "icon-tool-02.png": {
-      alt: "Icon Sync",
-      src: "/icon-tool/icon-tool-02.png",
+    'icon-tool-02.png': {
+      alt: 'Icon Sync',
+      src: '/icon-tool/icon-tool-02.png',
       width: 800,
       height: 400,
     },
-    "icon-tool-03.png": {
-      alt: "Icon Sync",
-      src: "/icon-tool/icon-tool-03.png",
+    'icon-tool-03.png': {
+      alt: 'Icon Sync',
+      src: '/icon-tool/icon-tool-03.png',
       width: 800,
       height: 400,
     },
-    "icon-tool-04.png": {
-      alt: "Icon Sync",
-      src: "/icon-tool/icon-tool-04.png",
+    'icon-tool-04.png': {
+      alt: 'Icon Sync',
+      src: '/icon-tool/icon-tool-04.png',
       width: 800,
       height: 400,
     },
-    "icon-tool-05.png": {
-      alt: "Icon Sync",
-      src: "/icon-tool/icon-tool-05.png",
+    'icon-tool-05.png': {
+      alt: 'Icon Sync',
+      src: '/icon-tool/icon-tool-05.png',
       width: 800,
       height: 400,
     },
-    "icon-tool-06.png": {
-      alt: "Icon Sync",
-      src: "/icon-tool/icon-tool-06.png",
+    'icon-tool-06.png': {
+      alt: 'Icon Sync',
+      src: '/icon-tool/icon-tool-06.png',
       width: 800,
       height: 400,
     },
-    "icon-tool-07.png": {
-      alt: "Icon Sync",
-      src: "/icon-tool/icon-tool-07.png",
+    'icon-tool-07.png': {
+      alt: 'Icon Sync',
+      src: '/icon-tool/icon-tool-07.png',
       width: 800,
       height: 400,
     },
-    "icon-tool-08.png": {
-      alt: "Icon Sync",
-      src: "/icon-tool/icon-tool-08.png",
+    'icon-tool-08.png': {
+      alt: 'Icon Sync',
+      src: '/icon-tool/icon-tool-08.png',
       width: 800,
       height: 400,
     },
@@ -66,21 +66,35 @@ const Page: React.FC = () => {
       <div className={Styles.hero}>
         <div>
           <p>
-            I&rsquo;ve created a figma plugin for design system teams that allows
-            design and development to be closer in sync, allowing for a fairly
-            optimized and automated process for syncing our design assets to our
-            code assets through GitHub. Designers have control over which of their
-            designed assets gets output from the tooling, developers have control
-            over what gets checked into the codebase, site, and packages.
+            I&rsquo;ve created a figma plugin for design system teams that
+            allows design and development to be closer in sync, allowing for a
+            fairly optimized and automated process for syncing our design assets
+            to our code assets through GitHub. Designers have control over which
+            of their designed assets gets output from the tooling, developers
+            have control over what gets checked into the codebase, site, and
+            packages.
           </p>
         </div>
         <div>
-          <p><strong>Responsibilities:</strong></p>
-          <p>project coordination, user research, design, development, user testing, delivery and presentation </p>
-          <p><strong>Designers: </strong>Darian Rosebrook </p>
-          <p><strong>Research:</strong> Darian Rosebrook </p>
-          <p><strong>Developers: </strong>Darian Rosebrook, Caleb Nance</p>
-          <p><strong>Scope of impact:</strong> Design System Maintainers</p>
+          <p>
+            <strong>Responsibilities:</strong>
+          </p>
+          <p>
+            project coordination, user research, design, development, user
+            testing, delivery and presentation{' '}
+          </p>
+          <p>
+            <strong>Designers: </strong>Darian Rosebrook{' '}
+          </p>
+          <p>
+            <strong>Research:</strong> Darian Rosebrook{' '}
+          </p>
+          <p>
+            <strong>Developers: </strong>Darian Rosebrook, Caleb Nance
+          </p>
+          <p>
+            <strong>Scope of impact:</strong> Design System Maintainers
+          </p>
         </div>
       </div>
       <article className={Styles.articleContent}>
@@ -102,9 +116,9 @@ const Page: React.FC = () => {
         <p>
           By bridging the gap between design and code here, our design system
           team can now create, publish, and release new iconography from Figma
-          to the team&apos;s codebase the same day. Much better than the 6-8 week
-          turnaround due to meetings, backlogging tickets, and working around
-          release schedules.
+          to the team&apos;s codebase the same day. Much better than the 6-8
+          week turnaround due to meetings, backlogging tickets, and working
+          around release schedules.
         </p>
         <p>
           From the push of a button, and the approving pull request of a
@@ -113,17 +127,17 @@ const Page: React.FC = () => {
         </p>
         <h3>Main Goals</h3>
         <Image
-          src={images["icon-tool-01.png"].src}
-          alt={images["icon-tool-01.png"].alt}
-          width={images["icon-tool-01.png"].width}
-          height={images["icon-tool-01.png"].height}
+          src={images['icon-tool-01.png'].src}
+          alt={images['icon-tool-01.png'].alt}
+          width={images['icon-tool-01.png'].width}
+          height={images['icon-tool-01.png'].height}
         />
         <aside>
           <Image
-            src={images["icon-tool-02.png"].src}
-            alt={images["icon-tool-02.png"].alt}
-            width={images["icon-tool-02.png"].width}
-            height={images["icon-tool-02.png"].height}
+            src={images['icon-tool-02.png'].src}
+            alt={images['icon-tool-02.png'].alt}
+            width={images['icon-tool-02.png'].width}
+            height={images['icon-tool-02.png'].height}
           />
           <div>
             <h3>Addressing the issue</h3>
@@ -168,17 +182,17 @@ const Page: React.FC = () => {
             </p>
           </div>
           <Image
-            src={images["icon-tool-03.png"].src}
-            alt={images["icon-tool-03.png"].alt}
-            width={images["icon-tool-03.png"].width}
-            height={images["icon-tool-03.png"].height}
+            src={images['icon-tool-03.png'].src}
+            alt={images['icon-tool-03.png'].alt}
+            width={images['icon-tool-03.png'].width}
+            height={images['icon-tool-03.png'].height}
           />
         </aside>
         <Image
-          src={images["icon-tool-04.png"].src}
-          alt={images["icon-tool-04.png"].alt}
-          width={images["icon-tool-04.png"].width}
-          height={images["icon-tool-04.png"].height}
+          src={images['icon-tool-04.png'].src}
+          alt={images['icon-tool-04.png'].alt}
+          width={images['icon-tool-04.png'].width}
+          height={images['icon-tool-04.png'].height}
         />
 
         <h3>Simplifying our process by removing redundancy</h3>
@@ -219,10 +233,10 @@ const Page: React.FC = () => {
         <h3>Transitioning to automation</h3>
         <aside>
           <Image
-            src={images["icon-tool-05.png"].src}
-            alt={images["icon-tool-05.png"].alt}
-            width={images["icon-tool-05.png"].width}
-            height={images["icon-tool-05.png"].height}
+            src={images['icon-tool-05.png'].src}
+            alt={images['icon-tool-05.png'].alt}
+            width={images['icon-tool-05.png'].width}
+            height={images['icon-tool-05.png'].height}
           />
           <div>
             <h4>
@@ -238,18 +252,18 @@ const Page: React.FC = () => {
               <>Introducing versioning</>
             </h4>
             <p>
-              By intelligently connecting Figma to GitHub we&apos;re in a much better
-              space to understand and track the changes across icons while still
-              being native to the user&apos;s experience
+              By intelligently connecting Figma to GitHub we&apos;re in a much
+              better space to understand and track the changes across icons
+              while still being native to the user&apos;s experience
             </p>
           </div>
         </aside>
         <aside>
           <Image
-            src={images["icon-tool-06.png"].src}
-            alt={images["icon-tool-06.png"].alt}
-            width={images["icon-tool-06.png"].width}
-            height={images["icon-tool-06.png"].height}
+            src={images['icon-tool-06.png'].src}
+            alt={images['icon-tool-06.png'].alt}
+            width={images['icon-tool-06.png'].width}
+            height={images['icon-tool-06.png'].height}
           />
           <div>
             <p>
@@ -269,16 +283,16 @@ const Page: React.FC = () => {
             </p>
             <p>
               These optimization steps could be brought into the same process
-              behind the scenes of the designer&apos;s output, meaning the designer
-              just had to verify the design still looked correct and then
-              forward on the icon.
+              behind the scenes of the designer&apos;s output, meaning the
+              designer just had to verify the design still looked correct and
+              then forward on the icon.
             </p>
           </div>
           <Image
-            src={images["icon-tool-07.png"].src}
-            alt={images["icon-tool-07.png"].alt}
-            width={images["icon-tool-07.png"].width}
-            height={images["icon-tool-07.png"].height}
+            src={images['icon-tool-07.png'].src}
+            alt={images['icon-tool-07.png'].alt}
+            width={images['icon-tool-07.png'].width}
+            height={images['icon-tool-07.png'].height}
           />
         </aside>
 

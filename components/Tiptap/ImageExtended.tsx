@@ -1,6 +1,6 @@
-import { upload } from "@/utils/supabase/upload";
-import Image from "@tiptap/extension-image";
-import { Plugin } from "prosemirror-state";
+import { upload } from '@/utils/supabase/upload';
+import Image from '@tiptap/extension-image';
+import { Plugin } from 'prosemirror-state';
 
 export default Image.extend({
   addProseMirrorPlugins() {
@@ -8,8 +8,8 @@ export default Image.extend({
       new Plugin({
         props: {
           handleDOMEvents: {
-            drop(view, event,) {
-              console.log("drop event", event);
+            drop(view, event) {
+              console.log('drop event', event);
               const hasFiles =
                 event.dataTransfer &&
                 event.dataTransfer.files &&
@@ -35,22 +35,22 @@ export default Image.extend({
                 top: event.clientY,
               });
 
-              images.forEach((image) => { 
+              images.forEach((image) => {
                 let { name } = image;
-                if (name === "image.png") {
+                if (name === 'image.png') {
                   name = `${Math.random().toString(36).substring(7)}-${name}`;
                 }
                 const reader = new FileReader();
                 reader.onload = async () => {
                   const path = await upload({
                     file: {
-                      type: "image",
+                      type: 'image',
                       media: {
                         name,
                         data: image,
                       },
                     },
-                    bucket: "article-images",
+                    bucket: 'article-images',
                   });
                   const node = schema.nodes.image.create({
                     src: path,
@@ -86,9 +86,9 @@ export default Image.extend({
 
               const { schema } = view.state;
 
-              images.forEach((image) => { 
+              images.forEach((image) => {
                 let { name } = image;
-                if (name === "image.png") {
+                if (name === 'image.png') {
                   name = `${Math.random().toString(36).substring(7)}-${name}`;
                 }
                 const reader = new FileReader();
@@ -96,13 +96,13 @@ export default Image.extend({
                 reader.onload = async () => {
                   const path = await upload({
                     file: {
-                      type: "image",
+                      type: 'image',
                       media: {
                         name,
                         data: image,
                       },
                     },
-                    bucket: "article-images",
+                    bucket: 'article-images',
                   });
                   const node = schema.nodes.image.create({
                     src: path,

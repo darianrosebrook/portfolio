@@ -1,5 +1,15 @@
 'use client';
-import React, { useRef, useId, useContext, createContext, useLayoutEffect, useState, useCallback, forwardRef, MutableRefObject } from 'react';
+import React, {
+  useRef,
+  useId,
+  useContext,
+  createContext,
+  useLayoutEffect,
+  useState,
+  useCallback,
+  forwardRef,
+  MutableRefObject,
+} from 'react';
 import { gsap } from 'gsap';
 import styles from './Popover.module.scss';
 
@@ -50,7 +60,7 @@ const Popover: React.FC<PopoverProps> & {
   const updatePosition = useCallback(() => {
     if (triggerRef.current && contentRef.current) {
       const triggerRect = triggerRef.current.getBoundingClientRect();
-      const contentRect = contentRef.current.getBoundingClientRect(); 
+      const contentRect = contentRef.current.getBoundingClientRect();
 
       // Calculate initial positions
       let left = triggerRect.left + offset;
@@ -84,62 +94,64 @@ const Popover: React.FC<PopoverProps> & {
   }, [offset]);
 
   return (
-    <PopoverContext.Provider value={{
-      popoverId,
-      triggerRef,
-      contentRef,
-      position,
-      updatePosition,
-      isOpen,
-      setIsOpen,
-      offset
-    }}>
+    <PopoverContext.Provider
+      value={{
+        popoverId,
+        triggerRef,
+        contentRef,
+        position,
+        updatePosition,
+        isOpen,
+        setIsOpen,
+        offset,
+      }}
+    >
       <div className={styles.popoverContainer}>{children}</div>
     </PopoverContext.Provider>
   );
 };
 
-const Trigger = forwardRef<HTMLElement, TriggerProps>(({
-  children,
-  className,
-  as: Component = 'div'
-}, forwardedRef) => {
-  const context = useContext(PopoverContext);
+const Trigger = forwardRef<HTMLElement, TriggerProps>(
+  ({ children, className, as: Component = 'div' }, forwardedRef) => {
+    const context = useContext(PopoverContext);
 
-  if (!context) {
-    throw new Error('Popover.Trigger must be used within a Popover component');
-  }
-
-  const { triggerRef, isOpen, setIsOpen } = context;
-
-  const handleRefs = (element: HTMLElement | null) => {
-    triggerRef.current = element;
-
-    if (forwardedRef) {
-      if (typeof forwardedRef === 'function') {
-        forwardedRef(element);
-      } else {
-        forwardedRef.current = element;
-      }
+    if (!context) {
+      throw new Error(
+        'Popover.Trigger must be used within a Popover component'
+      );
     }
-  };
 
-  const handleClick = () => {
-    setIsOpen(!isOpen);
-  };
+    const { triggerRef, isOpen, setIsOpen } = context;
 
-  return (
-    <Component
-      ref={handleRefs}
-      className={`${styles.popoverTrigger} ${isOpen ? styles.activeTrigger : ''} ${className || ''}`}
-      onClick={handleClick}
-      aria-haspopup="dialog"
-      aria-expanded={isOpen}
-    >
-      {children}
-    </Component>
-  );
-});
+    const handleRefs = (element: HTMLElement | null) => {
+      triggerRef.current = element;
+
+      if (forwardedRef) {
+        if (typeof forwardedRef === 'function') {
+          forwardedRef(element);
+        } else {
+          forwardedRef.current = element;
+        }
+      }
+    };
+
+    const handleClick = () => {
+      setIsOpen(!isOpen);
+    };
+
+    return (
+      <Component
+        ref={handleRefs}
+        className={`${styles.popoverTrigger} ${isOpen ? styles.activeTrigger : ''} ${className || ''}`}
+        onClick={handleClick}
+        aria-haspopup="dialog"
+        aria-expanded={isOpen}
+      >
+        {children}
+      </Component>
+    );
+  }
+);
 
 Trigger.displayName = 'Trigger';
 
@@ -151,7 +163,7 @@ const Content: React.FC<ContentProps> = ({ children, className }) => {
   }
 
   const { popoverId, position, updatePosition, isOpen, contentRef } = context;
-  const animationRef = useRef (null);
+  const animationRef = useRef(null);
 
   useLayoutEffect(() => {
     if (contentRef.current && isOpen) {
@@ -167,10 +179,10 @@ const Content: React.FC<ContentProps> = ({ children, className }) => {
       // Animation
       animationRef.current = gsap.fromTo(
         contentRef.current,
-        { autoAlpha: 0, y: -10},
+        { autoAlpha: 0, y: -10 },
         {
           duration: 0.3,
-          autoAlpha: 1, 
+          autoAlpha: 1,
           y: 0,
           ease: 'back.out(1.7)',
         }

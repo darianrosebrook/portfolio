@@ -1,5 +1,5 @@
-import React  from "react";
-import styles from "./Button.module.scss";
+import React from 'react';
+import styles from './Button.module.scss';
 
 type ButtonSize = 'small' | 'medium' | 'large';
 type ButtonVariant = 'primary' | 'secondary' | 'tertiary';
@@ -13,11 +13,15 @@ interface ButtonBaseProps {
   title?: string; // Ensure you have a title prop for accessibility
 }
 
-interface ButtonAsButton extends ButtonBaseProps, Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'className'> {
+interface ButtonAsButton
+  extends ButtonBaseProps,
+    Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'className'> {
   as?: 'button';
 }
 
-interface ButtonAsAnchor extends ButtonBaseProps, Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'className'> {
+interface ButtonAsAnchor
+  extends ButtonBaseProps,
+    Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'className'> {
   as: 'a';
   href: string;
 }
@@ -40,8 +44,10 @@ const Button: React.FC<ButtonProps> = ({
   const variantClassName = styles[variant];
   const isLoading = loading ? styles.isLoading : '';
   const isDisabled = disabled ? styles.disabled : '';
-  const hasOnlyIcon = React.Children.count(children) === 1 && typeof children === 'object' && !('props' in children && children.props.children);
-
+  const hasOnlyIcon =
+    React.Children.count(children) === 1 &&
+    typeof children === 'object' &&
+    !('props' in children && children.props.children);
 
   const combinedClassName = [
     baseClassName,
@@ -59,7 +65,6 @@ const Button: React.FC<ButtonProps> = ({
   // aria-label if only icon is present, and no text
   const ariaProps = hasOnlyIcon ? { 'aria-label': title } : {};
   const content = React.Children.map(children, (child) => {
-
     return <span>{child}</span>;
   });
   if (as === 'a') {

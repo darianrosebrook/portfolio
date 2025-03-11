@@ -1,33 +1,29 @@
-import { createClient } from "@/utils/supabase/server";
+import { createClient } from '@/utils/supabase/server';
 // Next
-import NextImage from "next/image";
+import NextImage from 'next/image';
 
 // TipTap
 
-import StarterKit from "@tiptap/starter-kit";
-import CharacterCount from "@tiptap/extension-character-count";
-import Image from "@tiptap/extension-image";
+import StarterKit from '@tiptap/starter-kit';
+import CharacterCount from '@tiptap/extension-character-count';
+import Image from '@tiptap/extension-image';
 
-import { generateHTML } from "@tiptap/html";
-import { JSONContent } from "@tiptap/react";
+import { generateHTML } from '@tiptap/html';
+import { JSONContent } from '@tiptap/react';
 
-import styles from "./styles.module.css";
-import ProfileFlag from "@/components/ProfileFlag";
-import ShareLinks from "./ShareLinks";
+import styles from './styles.module.css';
+import ProfileFlag from '@/components/ProfileFlag';
+import ShareLinks from './ShareLinks';
 
 function getArticleContent(data: JSONContent) {
-  let html: string = generateHTML(data, [
-    CharacterCount,
-    Image,
-    StarterKit
-  ]);
+  let html: string = generateHTML(data, [CharacterCount, Image, StarterKit]);
   const h1FromHTML = html.match(/<h1>(.*?)<\/h1>/);
   const imageFromHTML = html.match(/<img(.*?)>/);
   if (h1FromHTML) {
-    html = html.replace(h1FromHTML[0], "");
+    html = html.replace(h1FromHTML[0], '');
   }
   if (imageFromHTML) {
-    html = html.replace(imageFromHTML[0], "");
+    html = html.replace(imageFromHTML[0], '');
   }
   const content = { h1FromHTML, imageFromHTML, html };
   return content;
@@ -36,42 +32,48 @@ function getArticleContent(data: JSONContent) {
 async function getData(slug) {
   const supabase = await createClient();
   const { data: article } = await supabase
-    .from("articles")
-    .select("*, author(full_name, username, avatar_url)")
-    .eq("slug", slug)
+    .from('articles')
+    .select('*, author(full_name, username, avatar_url)')
+    .eq('slug', slug)
     .single();
   const published_at = article?.published_at || new Date().toISOString();
-  const { data: beforeArticle, } = await supabase
-    .from("articles")
+  const { data: beforeArticle } = await supabase
+    .from('articles')
     .select(
-      "author(full_name, username, avatar_url), slug, published_at, headline, image, description"
+      'author(full_name, username, avatar_url), slug, published_at, headline, image, description'
     )
     //  the article is published and the published date is less than the current date, limit to 1
-    .eq("draft", false)
-    .lt("published_at", published_at)
-    .order("published_at", { ascending: false })
+    .eq('draft', false)
+    .lt('published_at', published_at)
+    .order('published_at', { ascending: false })
     .limit(1)
     .single();
-  const { data: afterArticle, } = await supabase
-    .from("articles")
+  const { data: afterArticle } = await supabase
+    .from('articles')
     .select(
-      "author(full_name, username, avatar_url), slug, published_at, headline, image, description"
+      'author(full_name, username, avatar_url), slug, published_at, headline, image, description'
     )
     //  the article is published and the published date is greater than the current date, limit to 1
-    .eq("draft", false)
-    .gt("published_at", published_at)
-    .order("published_at", { ascending: true })
+    .eq('draft', false)
+    .gt('published_at', published_at)
+    .order('published_at', { ascending: true })
     .limit(1)
     .single();
 
   const contents = getArticleContent(article.articleBody);
   const { h1FromHTML, imageFromHTML, html } = contents;
-  return { ...article, html, beforeArticle, afterArticle, h1FromHTML, imageFromHTML };
+  return {
+    ...article,
+    html,
+    beforeArticle,
+    afterArticle,
+    h1FromHTML,
+    imageFromHTML,
+  };
 }
 
-export async function generateMetadata(props: {
-  params: Params}) {
-  const params = await props.params
+export async function generateMetadata(props: { params: Params }) {
+  const params = await props.params;
   const { slug } = params;
   const article = await getData(slug);
   const canonical = `https://darianrosebrook.com/articles/${slug}`;
@@ -79,7 +81,7 @@ export async function generateMetadata(props: {
     title: article.headline,
     description: article.description,
     url: canonical,
-    siteName: "Darian Rosebrook | Product Designer",
+    siteName: 'Darian Rosebrook | Product Designer',
     images: [
       {
         url: article.image,
@@ -88,86 +90,82 @@ export async function generateMetadata(props: {
         alt: article.headline,
       },
     ],
-    locale: "en_US",
-    type: "website",
+    locale: 'en_US',
+    type: 'website',
   };
   const twitter = {
-    card: "summary_large_image",
+    card: 'summary_large_image',
     title: article.headline,
     description: article.description,
-    creator: "@darianrosebrook",
+    creator: '@darianrosebrook',
     images: [article.image],
   };
   const meta = {
-    category: "Design",
-    creator: "Darian Rosebrook",
+    category: 'Design',
+    creator: 'Darian Rosebrook',
     description: article.description,
-    title: article.headline + " | Darian Rosebrook",
+    title: article.headline + ' | Darian Rosebrook',
   };
 
   return { canonical, openGraph, twitter, ...meta };
 }
 
-type Params = Promise<{ slug: string }>
+type Params = Promise<{ slug: string }>;
 
-export default async function Page(props: {
-  params: Params
-}) {
-
-  const params = await props.params
-  const { slug } =  params;
+export default async function Page(props: { params: Params }) {
+  const params = await props.params;
+  const { slug } = params;
   const canonical = `https://darianrosebrook.com/articles/${slug}`;
   const article = await getData(slug);
   const ldJson = {
-    "@context": "https://schema.org",
-    "@type": "Article",
+    '@context': 'https://schema.org',
+    '@type': 'Article',
     headline: article.headline,
     alternativeHeadline: article.alternativeHeadline,
     description: article.description,
     datePublished: article.published_at,
     dateModified: article.modified_at,
     author: {
-      "@context": "https://schema.org",
-      "@type": "Person",
+      '@context': 'https://schema.org',
+      '@type': 'Person',
       mainEntityOfPage: {
-        "@type": "WebPage",
-        "@id": "https://darianrosebrook.com/",
+        '@type': 'WebPage',
+        '@id': 'https://darianrosebrook.com/',
       },
-      name: "Darian Rosebrook",
-      image: "https://darianrosebrook.com/darianrosebrook.jpg",
-      jobTitle: "Product Designer, Design Systems",
+      name: 'Darian Rosebrook',
+      image: 'https://darianrosebrook.com/darianrosebrook.jpg',
+      jobTitle: 'Product Designer, Design Systems',
       worksFor: {
-        "@type": "Organization",
-        name: "Paths.design",
+        '@type': 'Organization',
+        name: 'Paths.design',
       },
-      url: "https://darianrosebrook.com/",
+      url: 'https://darianrosebrook.com/',
       sameAs: [
-        "https://twitter.com/darianrosebrook",
-        "https://www.linkedin.com/in/darianrosebrook/",
-        "https://www.github.com/darianrosebrook",
-        "https://www.instagram.com/darianrosebrook/",
-        "https://www.youtube.com/@darian.rosebrook",
-        "https://read.compassofdesign.com/@darianrosebrook",
+        'https://twitter.com/darianrosebrook',
+        'https://www.linkedin.com/in/darianrosebrook/',
+        'https://www.github.com/darianrosebrook',
+        'https://www.instagram.com/darianrosebrook/',
+        'https://www.youtube.com/@darian.rosebrook',
+        'https://read.compassofdesign.com/@darianrosebrook',
       ],
     },
     publisher: {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      name: "Paths.design",
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: 'Paths.design',
       logo: {
-        "@type": "ImageObject",
-        url: "https://darianrosebrook.com/darianrosebrook.jpg",
+        '@type': 'ImageObject',
+        url: 'https://darianrosebrook.com/darianrosebrook.jpg',
       },
     },
     mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": canonical,
+      '@type': 'WebPage',
+      '@id': canonical,
     },
     image: article.image,
   };
   return (
     <section className="content">
-
       <article className={styles.articleContent}>
         <script
           type="application/ld+json"
@@ -178,7 +176,7 @@ export default async function Page(props: {
             <p className="small uppercase">
               {article.articleSection}
               {article.keywords &&
-                ` |  ${article.keywords.split(",").join(" | ")}`}
+                ` |  ${article.keywords.split(',').join(' | ')}`}
             </p>
           )}
           <h1>{article.headline}</h1>
@@ -189,16 +187,19 @@ export default async function Page(props: {
           <div className={styles.meta}>
             <div className={styles.byline}>
               <p className="small">
-                Published on{" "}
+                Published on{' '}
                 <time dateTime={article.published_at}>
                   <small className="bold">
-                    {new Date(article.published_at).toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    })}
+                    {new Date(article.published_at).toLocaleDateString(
+                      'en-US',
+                      {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                      }
+                    )}
                   </small>
-                </time>{" "}
+                </time>{' '}
                 by
               </p>
               <ProfileFlag profile={article.author} />

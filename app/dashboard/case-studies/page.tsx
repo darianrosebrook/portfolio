@@ -1,15 +1,15 @@
-'use client' 
+'use client';
 
 type PageProps = {
-    children?: React.ReactNode;
+  children?: React.ReactNode;
 };
 
-const Page: React.FC<PageProps> = ({  }) => {
-    return (
-        <>
-            <p>Page</p>
-        </>
-    );
+const Page: React.FC<PageProps> = ({}) => {
+  return (
+    <>
+      <p>Page</p>
+    </>
+  );
 };
 
 export default Page;
