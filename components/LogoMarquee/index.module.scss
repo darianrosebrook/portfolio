@@ -11,7 +11,8 @@
   gap: var(--size-10);
   align-items: center;
   overflow: hidden;
-  width: 100%;
+  padding-left: var(--size-09);
+  padding-right: var(--size-09);
   width: fit-content;
   color: var(--color-foreground-primary);
   white-space: nowrap;
