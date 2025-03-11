@@ -1,7 +1,7 @@
-'use client'
+'use client';
 import { useMouseEvent } from '@/context'; // Ensure this matches your file structure
 import React, { useCallback, useEffect, useRef } from 'react';
-import styles from './index.module.scss'
+import styles from './index.module.scss';
 
 interface CursorSettings {
   size: number;
@@ -10,7 +10,11 @@ interface CursorSettings {
 }
 
 const SlinkyCursor: React.FC = () => {
-  const settings = useRef<CursorSettings>({ size: 40, laziness: 4, stiffness: 2 });
+  const settings = useRef<CursorSettings>({
+    size: 40,
+    laziness: 4,
+    stiffness: 2,
+  });
   const mouse = useMouseEvent();
 
   // Refs for position tracking
@@ -48,7 +52,8 @@ const SlinkyCursor: React.FC = () => {
       pest.style.left = `${pos.current.x - size / 2}px`;
 
       // Calculate rotation and stretch
-      const angleDeg = Math.atan2(yMouse - yPos, xMouse - xPos) * (180 / Math.PI);
+      const angleDeg =
+        Math.atan2(yMouse - yPos, xMouse - xPos) * (180 / Math.PI);
       const stretchWidth = size + diff(xPos, yPos, xMouse, yMouse) / stiffness;
 
       // Use CSS variables for styling

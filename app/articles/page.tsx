@@ -1,13 +1,13 @@
-import ProfileFlag from "@/components/ProfileFlag";
-import { createClient } from "@/utils/supabase/server";
-import Image from "next/image";
-import Link from "next/link";
-import Styles from "./styles.module.css";
-import { Article, Profile  } from "@/types";
+import ProfileFlag from '@/components/ProfileFlag';
+import { createClient } from '@/utils/supabase/server';
+import Image from 'next/image';
+import Link from 'next/link';
+import Styles from './styles.module.css';
+import { Article, Profile } from '@/types';
 async function getData() {
   const supabase = await createClient();
   const { data, error } = await supabase
-    .from("articles")
+    .from('articles')
     .select(
       `
     id,
@@ -19,15 +19,15 @@ async function getData() {
     published_at
     `
     )
-    .eq("draft", false)
-    .filter("draft", "eq", false)
-    .order("published_at", { ascending: false });
+    .eq('draft', false)
+    .filter('draft', 'eq', false)
+    .order('published_at', { ascending: false });
   if (error) {
     console.error(error);
     return [] as Article[];
   }
-  return data
-}  
+  return data;
+}
 function Card(data: {
   image: string;
   headline: string;
@@ -38,14 +38,12 @@ function Card(data: {
 }) {
   let { description } = data;
   if (description.length > 240) {
-    description = description.slice(0, 240) + "...";
+    description = description.slice(0, 240) + '...';
   }
-  const date = new Date(
-    data.published_at  
-  ).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
+  const date = new Date(data.published_at).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
   });
   return (
     <article className="card">
@@ -78,17 +76,18 @@ export default async function Page() {
   const articles = await getData();
   return (
     <section className={`grid content ${Styles.articleGrid}`}>
-      {articles.length > 0 && articles.map((article) => (
-        <Card
-          key={article.id}
-          image={article.image}
-          headline={article.headline}
-          description={article.description}
-          author={article.author}
-          slug={article.slug}
-          published_at={article.published_at}
-        />
-      ))}
+      {articles.length > 0 &&
+        articles.map((article) => (
+          <Card
+            key={article.id}
+            image={article.image}
+            headline={article.headline}
+            description={article.description}
+            author={article.author}
+            slug={article.slug}
+            published_at={article.published_at}
+          />
+        ))}
     </section>
   );
 }

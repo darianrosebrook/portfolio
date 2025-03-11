@@ -1,11 +1,10 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 export default function Page() {
   return (
     <>
-      <section >
+      <section>
         <div className="content">
-
           <h2>Highlighted Projects</h2>
           <p>
             These are just the favorites of some recent work. Full case studies
@@ -16,57 +15,96 @@ export default function Page() {
       </section>
       <section data-print="true" className="projects content">
         <ul className="experience">
-        <li>
-          <h3 className="dateYear">
-            <span>2025</span>
-          </h3>
-          <h4>
-            Design System Analytics <span> at Verizon</span>
-          </h4>
-          <div className="content">
-            <div >
+          <li>
+            <h3 className="dateYear">
+              <span>2025</span>
+            </h3>
+            <h4>
+              Design System Analytics <span> at Verizon</span>
+            </h4>
+            <div className="content">
               <div>
-                <h5>Role</h5>
-                <p><strong>Design Technologist, UX Engineer</strong></p>
+                <div>
+                  <h5>Role</h5>
+                  <p>
+                    <strong>Design Technologist, UX Engineer</strong>
+                  </p>
+                </div>
               </div>
+              <h5>Outcomes</h5>
+              <div className="three-up">
+                <p>
+                  Detailed Key Performance Indicator (KPIs) Metrics for the
+                  Design System across the Product Organization
+                </p>
+                <p>
+                  Custom Data Visualization for Design System Analytics and
+                  Adoption across Design and Code
+                </p>
+                <p>
+                  Data Management portals for creating, updating, and deleting
+                  records
+                </p>
+              </div>
+              <p>
+                As a UX Engineer on my team, I was designated as the team lead
+                to guide the direction of our project. I worked with my team to
+                build a robust tool for data insights, tracking specific Key
+                Performance Indicators across our Design and Engineering orgs
+                through Figma, Gitlab, and other integrations. With my expertise
+                in the Figma and Design System space, I helped implement an API
+                layer to empower other tools our larger team built with the data
+                necessary to help improve the workflows of our team.
+              </p>
+              <p>
+                Once the data layer was set up, I created a custom website using
+                React that serves as an admin level portal to manage this data.
+                This custom analytics tool also serves as a central hub for our
+                product design organization&apos;s data. The tool enables rich
+                insights into the relationships between products, team
+                resourcing, design system adoption, and other metrics important
+                to our design leaders.
+              </p>
+              <p>
+                As a result, our team has been able to make more informed
+                decisions about the design system, and the design system has
+                been able to make more informed decisions about the products it
+                serves. This has led to a more cohesive design ecosystem, and a
+                more efficient design process.
+              </p>
             </div>
-            <h5>Outcomes</h5>
-            <div className="three-up">
-              <p>Detailed Key Performance Indicator (KPIs) Metrics for the Design System across the Product Organization</p>
-              <p>Custom Data Visualization for Design System Analytics and Adoption across Design and Code</p>
-              <p>Data Management portals for creating, updating, and deleting records</p>
-            </div>
-            <p>
-              As a UX Engineer on my team, I was designated as the team lead to guide the direction of our project. I worked with my team to build a robust tool for data insights, tracking specific Key Performance Indicators across our Design and Engineering orgs through Figma, Gitlab, and other integrations. With my expertise in the Figma and Design System space, I helped implement an API layer to empower other tools our larger team built with the data necessary to help improve the workflows of our team.
-            </p>
-            <p>Once the data layer was set up, I created a custom website using React that serves as an admin level portal to manage this data. This custom analytics tool also serves as a central hub for our product design organization&apos;s data. The tool enables rich insights into the relationships between products, team resourcing, design system adoption, and other metrics important to our design leaders.
-            </p>
-            <p>
-              As a result, our team has been able to make more informed decisions about the design system, and the design system has been able to make more informed decisions about the products it serves. This has led to a more cohesive design ecosystem, and a more efficient design process.
-            </p>
-          </div>
-        </li>
+          </li>
           <li>
             <h3 className="dateYear">
               <span>2024</span>
             </h3>
             <h4>
-              <Link href={"/work/iconography-sync"}>
+              <Link href={'/work/iconography-sync'}>
                 Iconography Sync <span> at eBay</span>
               </Link>
             </h4>
             <div className="content">
-              <div >
+              <div>
                 <div>
                   <h5>Role</h5>
-                  <p><strong>Lead Designer, Developer</strong></p>
+                  <p>
+                    <strong>Lead Designer, Developer</strong>
+                  </p>
                 </div>
               </div>
               <h5>Outcomes</h5>
               <div className="three-up">
-                <p>95% Time Reductionfrom finished design to code implementation</p>
-                <p>100% reduction in naming, mismatching, and availability errors across codebases</p>
-                <p>Proof of viability for more asset automation pipelines in our design system</p>
+                <p>
+                  95% Time Reductionfrom finished design to code implementation
+                </p>
+                <p>
+                  100% reduction in naming, mismatching, and availability errors
+                  across codebases
+                </p>
+                <p>
+                  Proof of viability for more asset automation pipelines in our
+                  design system
+                </p>
               </div>
               <p>
                 I&apos;ve created a figma plugin for design system teams that
@@ -106,26 +144,42 @@ export default function Page() {
               <span>2023</span>
             </h3>
             <h4>
-              <Link href={"/work/definition-of-done"}>
+              <Link href={'/work/definition-of-done'}>
                 Designer&lsquo;s Definition of Done<span> at eBay</span>
               </Link>
             </h4>
             <div className="content">
-              <div >
+              <div>
                 <div>
                   <h5>Role</h5>
-                  <p><strong>Co-Designer, Co-Developer</strong></p>
+                  <p>
+                    <strong>Co-Designer, Co-Developer</strong>
+                  </p>
                 </div>
               </div>
               <h5>Outcomes</h5>
               <div className="three-up">
-                <p>Standardized the process for preparing design work, creating more efficient collaboration between design and development teams.</p>
-                <p>A large reduction in bug reports from edge cases being covered during design and improved communication processes.</p>
-                <p>Standardized onboarding with new designers getting from &ldquo;Zero-To-One&rdquo; quickly ensuring consistency by adhering to org standards</p>
+                <p>
+                  Standardized the process for preparing design work, creating
+                  more efficient collaboration between design and development
+                  teams.
+                </p>
+                <p>
+                  A large reduction in bug reports from edge cases being covered
+                  during design and improved communication processes.
+                </p>
+                <p>
+                  Standardized onboarding with new designers getting from
+                  &ldquo;Zero-To-One&rdquo; quickly ensuring consistency by
+                  adhering to org standards
+                </p>
               </div>
               <p>
                 Me and my coworker
-                <Link href={"https://www.catalinamanea.com/"} target="_blank"> Catalina Manea </Link>
+                <Link href={'https://www.catalinamanea.com/'} target="_blank">
+                  {' '}
+                  Catalina Manea{' '}
+                </Link>
                 interviewed over 40 designers, 30 developers,and 11 project
                 managers to understand the current landscape of design handoff
                 and design/developer collaboration. We worked with them to
@@ -168,17 +222,29 @@ export default function Page() {
               Figma library sync<span> at Nike</span>
             </h4>
             <div className="content">
-              <div >
+              <div>
                 <div>
                   <h5>Role</h5>
-                  <p><strong>Lead Designer, Developer</strong></p>
+                  <p>
+                    <strong>Lead Designer, Developer</strong>
+                  </p>
                 </div>
               </div>
               <h5>Outcomes</h5>
               <div className="three-up">
-                <p>A solid pre-variables workflow for connecting underlying design tokens across multiple libraries.</p>
-                <p>Enabled control over the scope and amount of design tokens imported, creating flexibility while still adhering to standards.</p>
-                <p>Synchronized updates across multiple libraries, reducing manual management of individual design tokens.</p>
+                <p>
+                  A solid pre-variables workflow for connecting underlying
+                  design tokens across multiple libraries.
+                </p>
+                <p>
+                  Enabled control over the scope and amount of design tokens
+                  imported, creating flexibility while still adhering to
+                  standards.
+                </p>
+                <p>
+                  Synchronized updates across multiple libraries, reducing
+                  manual management of individual design tokens.
+                </p>
               </div>
               <p>
                 For our Nike foundations design system library, I created a
@@ -211,10 +277,12 @@ export default function Page() {
               Podium Foundations Library<span> at Nike</span>
             </h4>
             <div className="content">
-              <div >
+              <div>
                 <div>
                   <h5>Role</h5>
-                  <p><strong>Workshop Co-lead, Strategist, Co-developer</strong></p>
+                  <p>
+                    <strong>Workshop Co-lead, Strategist, Co-developer</strong>
+                  </p>
                 </div>
               </div>
               <p>
@@ -264,10 +332,12 @@ export default function Page() {
               </div>
             </h4>
             <div className="content">
-              <div >
+              <div>
                 <div>
                   <h5>Role</h5>
-                  <p><strong>Lead Designer </strong></p>
+                  <p>
+                    <strong>Lead Designer </strong>
+                  </p>
                 </div>
               </div>
               <p>
@@ -290,7 +360,6 @@ export default function Page() {
             </div>
           </li>
           <li>
-
             <h3 className="dateYear">
               <span>2020</span>
             </h3>
@@ -298,10 +367,12 @@ export default function Page() {
               Branding and Product design<span> at Common Room</span>
             </h4>
             <div className="content">
-              <div >
+              <div>
                 <div>
                   <h5>Role</h5>
-                  <p><strong>Lead Designer </strong></p>
+                  <p>
+                    <strong>Lead Designer </strong>
+                  </p>
                 </div>
               </div>
               <p>
@@ -330,10 +401,12 @@ export default function Page() {
               Sustainability Cloud<span> at Salesforce</span>
             </h4>
             <div className="content">
-              <div >
+              <div>
                 <div>
                   <h5>Role</h5>
-                  <p><strong>UX Designer, UX Researcher </strong></p>
+                  <p>
+                    <strong>UX Designer, UX Researcher </strong>
+                  </p>
                 </div>
               </div>
               <p>
@@ -370,10 +443,12 @@ export default function Page() {
               The New Microsoft Edge Browser<span> at Microsoft</span>
             </h4>
             <div className="content">
-              <div >
+              <div>
                 <div>
                   <h5>Role</h5>
-                  <p><strong>UX Designer, UX Researcher </strong></p>
+                  <p>
+                    <strong>UX Designer, UX Researcher </strong>
+                  </p>
                 </div>
               </div>
               <p>
@@ -409,7 +484,7 @@ export default function Page() {
             </div>
           </li>
         </ul>
-      </section >
+      </section>
     </>
   );
 }

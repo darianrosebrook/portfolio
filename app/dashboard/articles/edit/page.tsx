@@ -1,14 +1,14 @@
-"use client";
-import { useState } from "react";
-import { Tiptap } from "@/components/Tiptap";
-import { Article } from "@/types";
+'use client';
+import { useState } from 'react';
+import { Tiptap } from '@/components/Tiptap';
+import { Article } from '@/types';
 
-import { calculateReadingTime, debounce } from "@/utils";
+import { calculateReadingTime, debounce } from '@/utils';
 
-import ToggleSwitch from "@/components/ToggleSwitch";
-import Link from "next/link";
+import ToggleSwitch from '@/components/ToggleSwitch';
+import Link from 'next/link';
 
-import styles from "./page.module.scss";
+import styles from './page.module.scss';
 
 const articleDefaults: Article = {
   alternativeHeadline: '',
@@ -28,7 +28,6 @@ const articleDefaults: Article = {
   slug: '',
 };
 
-
 const EditArticle = () => {
   const [article, setArticle] = useState(articleDefaults);
   const handleToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,9 +40,7 @@ const EditArticle = () => {
   };
   const handleUpdate = debounce((article: Article) => {
     const updatedArticle = { ...article };
-    updatedArticle.headline = getH1FromArticleBody(
-      updatedArticle.articleBody
-    );
+    updatedArticle.headline = getH1FromArticleBody(updatedArticle.articleBody);
     updatedArticle.alternativeHeadline = updatedArticle.headline;
     updatedArticle.modified_at = updatedArticle.published_at
       ? new Date().toISOString()
@@ -57,10 +54,10 @@ const EditArticle = () => {
   }, 1000); // If the user stops typing for 10 seconds, push the changes to the server
   const handlePublish = async () => {
     // publish the article
-    const response = await fetch("/api/publish", {
-      method: "POST",
+    const response = await fetch('/api/publish', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(article),
     });
@@ -70,19 +67,19 @@ const EditArticle = () => {
 
   const getH1FromArticleBody = (articleBody) => {
     const h1 = articleBody.content.find(
-      (node) => node.type === "heading" && node.attrs.level === 1
+      (node) => node.type === 'heading' && node.attrs.level === 1
     );
     return h1?.content?.[0]?.text || null;
   };
   const getArticleImage = (articleBody) => {
-    const image = articleBody.content.find((node) => node.type === "image");
+    const image = articleBody.content.find((node) => node.type === 'image');
     return image?.attrs.src || null;
   };
   const createSlugFromHeadline = (headline: string) => {
     return headline
       .toLowerCase()
-      .replace(/[^\w ]+/g, "")
-      .replace(/ +/g, "-");
+      .replace(/[^\w ]+/g, '')
+      .replace(/ +/g, '-');
   };
 
   const parseUpdateFromInput = (e) => {
@@ -93,9 +90,11 @@ const EditArticle = () => {
   return (
     <div className={styles.editorGroups}>
       <div className={styles.publishBar}>
-        <Link href={`/dashboard/articles/${article.slug}/preview`}>Preview</Link>
+        <Link href={`/dashboard/articles/${article.slug}/preview`}>
+          Preview
+        </Link>
         <button className="publishButton" onClick={handlePublish}>
-          {article.draft ? "Save Draft" : "Publish"}
+          {article.draft ? 'Save Draft' : 'Publish'}
         </button>
       </div>
       <div className="grid">
@@ -173,23 +172,23 @@ const EditArticle = () => {
           <input
             type="date"
             name="published_at"
-            value={article.created_at && new Date(article.created_at).toISOString().split("T")[0]}
+            value={
+              article.created_at &&
+              new Date(article.created_at).toISOString().split('T')[0]
+            }
             onChange={parseUpdateFromInput}
           />
         </div>
       </div>
       <p className="minuteInWords">
-        Reading time:{" "}
+        Reading time:{' '}
         <strong>{calculateReadingTime(article.wordCount)} minute read</strong>
       </p>
       <ToggleSwitch checked={article.draft} onChange={handleToggle}>
         Draft
       </ToggleSwitch>
       <div className={styles.articleContent}>
-        <Tiptap
-          handleUpdate={handleUpdate}
-          article={article}
-        />
+        <Tiptap handleUpdate={handleUpdate} article={article} />
       </div>
     </div>
   );

@@ -1,9 +1,4 @@
-"use client";
-import {
-  BodyContent,
-  Container,
-  Icon,
-  Title, 
-} from "./AlertNotice";
+'use client';
+import { BodyContent, Container, Icon, Title } from './AlertNotice';
 export { BodyContent, Container, Icon, Title };
-export type { AlertNoticeProps } from "./AlertNotice";
+export type { AlertNoticeProps } from './AlertNotice';

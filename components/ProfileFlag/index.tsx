@@ -1,7 +1,7 @@
-import { Profile } from "@/types";
-import Avatar from "../Avatar";
-import Link from "next/link";
-import styles from "./styles.module.css";
+import { Profile } from '@/types';
+import Avatar from '../Avatar';
+import Link from 'next/link';
+import styles from './styles.module.css';
 const ProfileFlag = ({ profile }: { profile: Profile }) => {
   return (
     <div className={styles.profileFlag}>

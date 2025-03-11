@@ -1,4 +1,4 @@
-import { createClient } from "./client";
+import { createClient } from './client';
 type media = {
   name: string;
   data:
@@ -23,7 +23,7 @@ type media = {
   pageCount?: number;
 };
 
-type mediaType = "image" | "video" | "audio" | "pdf";
+type mediaType = 'image' | 'video' | 'audio' | 'pdf';
 
 type mediaUpload = {
   type: mediaType;
@@ -42,11 +42,11 @@ const upload = async ({
   const { data, error: uploadError } = await supabase.storage
     .from(bucket)
     .upload(name, fileData, { upsert: true });
-    console.log(data)
+  console.log(data);
   const {
     data: { publicUrl },
   } = await supabase.storage.from(bucket).getPublicUrl(name);
-  console.log(publicUrl)
+  console.log(publicUrl);
   if (uploadError) {
     throw uploadError;
   }

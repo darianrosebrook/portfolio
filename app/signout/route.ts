@@ -1,6 +1,5 @@
-import { signOutAction } from '../ha/actions'
+import { signOutAction } from '../ha/actions';
 
-export async function GET() { 
- 
-  await signOutAction() 
+export async function GET() {
+  await signOutAction();
 }

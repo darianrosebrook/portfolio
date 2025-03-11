@@ -1,10 +1,10 @@
-'use client'
+'use client';
 import React, { useState, useRef, useEffect } from 'react';
 import Styles from './blueprints.module.scss';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import SvgIllustration from './svgIllustration';
-import { useWindowSize } from './useWindowSize'; 
+import { useWindowSize } from './useWindowSize';
 import { useMouseEvent } from '@/context';
 
 gsap.registerPlugin(useGSAP);
@@ -12,37 +12,36 @@ gsap.registerPlugin(useGSAP);
 const Blueprints: React.FC = () => {
   const winsize = useWindowSize();
   const gridRef = useRef<HTMLDivElement>(null);
-  const spriteRef = useRef<HTMLDivElement>(null);  
+  const spriteRef = useRef<HTMLDivElement>(null);
 
   const numRows = 9;
   const numCols = 12;
-  const middleRowIndex = Math.floor(numRows / 2); 
+  const middleRowIndex = Math.floor(numRows / 2);
 
-  const [svgs, setSvgs] = useState<string[]>([]);  
-  const mouse = useMouseEvent()  
+  const [svgs, setSvgs] = useState<string[]>([]);
+  const mouse = useMouseEvent();
 
-  useGSAP(() => { 
-    if (!gridRef.current) return; 
+  useGSAP(() => {
+    if (!gridRef.current) return;
 
-    const rows = Array.from(gridRef.current.children) as HTMLElement[]; 
-    const distanceModifier = 0.2; 
- 
-      const normalizedMouseX = (mouse.x / winsize.width) * 2 - 1; 
-      const targetTranslateX = normalizedMouseX * 12 * (winsize.width / 80);
+    const rows = Array.from(gridRef.current.children) as HTMLElement[];
+    const distanceModifier = 0.2;
 
-      rows.forEach((row, index) => {
-        const distanceFromMiddle = Math.abs(index - middleRowIndex);
-        const factor = 1 - distanceModifier * distanceFromMiddle;
-        const targetX = targetTranslateX * factor;
-        const toX = gsap.quickTo(row, 'x',{
-          duration: 1.5,
-          ease: 'power2.out',
-        });
+    const normalizedMouseX = (mouse.x / winsize.width) * 2 - 1;
+    const targetTranslateX = normalizedMouseX * 12 * (winsize.width / 80);
 
-        toX(targetX);
+    rows.forEach((row, index) => {
+      const distanceFromMiddle = Math.abs(index - middleRowIndex);
+      const factor = 1 - distanceModifier * distanceFromMiddle;
+      const targetX = targetTranslateX * factor;
+      const toX = gsap.quickTo(row, 'x', {
+        duration: 1.5,
+        ease: 'power2.out',
+      });
 
-      });  
-  }, [ winsize.width, gridRef, mouse]);
+      toX(targetX);
+    });
+  }, [winsize.width, gridRef, mouse]);
 
   useEffect(() => {
     const dsSprite = document.getElementById('DSSPRITE') as HTMLDivElement;
@@ -54,9 +53,7 @@ const Blueprints: React.FC = () => {
   }, []);
 
   return (
-    <div 
-      className={Styles.gridContainer} 
-    > 
+    <div className={Styles.gridContainer}>
       <div className={Styles.gridContent} ref={gridRef}>
         {svgs.length > 0 &&
           Array.from({ length: numRows }, (_, i) => (

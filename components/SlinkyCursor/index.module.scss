@@ -1,11 +1,10 @@
 .pest {
   --cursor-size: 40px;
-  --cursor-laziness: .5s;
+  --cursor-laziness: 0.5s;
   --cursor-stretch: calc(
     max(var(--mouse-delta-x, 0px), var(--mouse-delta-y, 0px))
   );
-  --cursor-angle: atan2(
-  );
+  --cursor-angle: atan2();
 
   position: absolute;
   z-index: 9999;

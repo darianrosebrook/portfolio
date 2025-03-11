@@ -1,28 +1,28 @@
 import { Analytics } from '@vercel/analytics/react';
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import { ViewTransitions } from "next-view-transitions";
-import "./globals.scss";
+import type { Metadata } from 'next';
+import localFont from 'next/font/local';
+import { ViewTransitions } from 'next-view-transitions';
+import './globals.scss';
 
 // If loading a variable font, you don't need to specify the font weight
 const nohemi = localFont({
-  src: "../public/fonts/Nohemi-VF.ttf",
-  display: "swap",
-  fallback: ["sans-serif"],
+  src: '../public/fonts/Nohemi-VF.ttf',
+  display: 'swap',
+  fallback: ['sans-serif'],
   preload: true,
-  weight: "100 900",
-  variable: "--font-nohemi",
+  weight: '100 900',
+  variable: '--font-nohemi',
 });
 const inter = localFont({
-  src: "../public/fonts/InterVariable.woff2",
-  fallback: ["sans-serif"],
-  display: "auto",
-  weight: "100 900",
-  variable: "--font-inter",
+  src: '../public/fonts/InterVariable.woff2',
+  fallback: ['sans-serif'],
+  display: 'auto',
+  weight: '100 900',
+  variable: '--font-inter',
 });
 
 export const metadata: Metadata = {
-  title: "Darian Rosebrook: Product Designer | Design Systems, Portland Oregon",
+  title: 'Darian Rosebrook: Product Designer | Design Systems, Portland Oregon',
   description:
     "Hey! I'm Darian Rosebrook 👋🏼 I am a product designer in the Portland, Oregon area. I make design systems, custom design tooling, Figma plugins, and design ops stuff for product teams.",
 };
@@ -33,12 +33,14 @@ export default async function RootLayout({
 }>) {
   return (
     <ViewTransitions>
-
       <html lang="en" className={`${inter.variable} ${nohemi.variable}`}>
         <body>
           <svg className="pointer-events-none absolute cursor-none">
             <filter id="grainy">
-              <feTurbulence type="turbulence" baseFrequency="0.5"></feTurbulence>
+              <feTurbulence
+                type="turbulence"
+                baseFrequency="0.5"
+              ></feTurbulence>
               <feColorMatrix type="saturate" values="0"></feColorMatrix>
             </filter>
           </svg>

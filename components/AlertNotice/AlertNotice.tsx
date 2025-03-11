@@ -1,10 +1,10 @@
-"use client";
-import * as React from 'react'
+'use client';
+import * as React from 'react';
 import Button from '../Button';
-import Styles from "./AlertNotice.module.scss";
+import Styles from './AlertNotice.module.scss';
 export type AlertNoticeProps = {
-  status?: "info" | "success" | "warning" | "danger";
-  level?: "page" | "section" | "inline";
+  status?: 'info' | 'success' | 'warning' | 'danger';
+  level?: 'page' | 'section' | 'inline';
   index: number;
   dismissible?: boolean;
   onDismiss?: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -14,26 +14,20 @@ const Container = React.forwardRef<
   React.HTMLAttributes<HTMLDivElement> & AlertNoticeProps
 >(
   (
-    {
-      status = "info",
-      level,
-      dismissible,
-      onDismiss, 
-      index,
-      ...props
-    },
+    { status = 'info', level, dismissible, onDismiss, index, ...props },
     ref
   ) => (
     <div
       ref={ref}
       role="alert"
-      className={`${Styles.alert} ${Styles[`alert__${level}`]} ${Styles[`alert__${level}--${status}`]
-        }`}
+      className={`${Styles.alert} ${Styles[`alert__${level}`]} ${
+        Styles[`alert__${level}--${status}`]
+      }`}
       {...props}
     >
       {props.children}
       {dismissible && onDismiss && (
-        <div className={Styles["__dismiss"]}>
+        <div className={Styles['__dismiss']}>
           <Button
             variant="tertiary"
             onClick={onDismiss}
@@ -49,32 +43,32 @@ const Container = React.forwardRef<
     </div>
   )
 );
-Container.displayName = "AlertNotice.Container";
+Container.displayName = 'AlertNotice.Container';
 
 const Title = ({ children }: { children: React.ReactNode }) => (
-  <h6 className={Styles["__title"]}>{children}</h6>
+  <h6 className={Styles['__title']}>{children}</h6>
 );
-Title.displayName = "AlertNotice.Title";
+Title.displayName = 'AlertNotice.Title';
 
 const BodyContent = ({ children }: { children: React.ReactNode }) => (
-  <div className={Styles["__body"]}>{children}</div>
+  <div className={Styles['__body']}>{children}</div>
 );
-BodyContent.displayName = "AlertNotice.Body";
+BodyContent.displayName = 'AlertNotice.Body';
 
 const Icon = ({ status }: { status: string }) => {
   const icons = {
-    info: "info-circle",
-    success: "check-circle",
-    warning: "exclamation-triangle",
-    danger: "exclamation-circle",
+    info: 'info-circle',
+    success: 'check-circle',
+    warning: 'exclamation-triangle',
+    danger: 'exclamation-circle',
   };
 
   return (
-    <div className={Styles["__icon"]}>
+    <div className={Styles['__icon']}>
       <i className={`fa fa-${icons[status]}`} aria-hidden="true" />
     </div>
   );
 };
-Icon.displayName = "AlertNotice.Icon";
+Icon.displayName = 'AlertNotice.Icon';
 
 export { Container, Title, BodyContent, Icon };

@@ -26,7 +26,6 @@
   cursor: not-allowed;
 }
 
-
 .toggleSwitch input.checked {
   background-color: var(--color-background-primary);
 }
@@ -38,11 +37,11 @@
 
 .toggleSwitch input:disabled + label {
   color: var(--color-foreground-disabled);
-  cursor: not-allowed
+  cursor: not-allowed;
 }
 
 .toggleSwitch label::before {
-  content: " ";
+  content: ' ';
   position: absolute;
   top: 0.2125rem;
   left: 0.25rem;
@@ -57,11 +56,10 @@
 
 .toggleSwitch label.checked::before {
   left: 1.75rem;
-  background-color: var(--color-background-accent );
+  background-color: var(--color-background-accent);
 }
 
 .toggleSwitch input:focus-visible {
   outline: 0.2rem solid var(--color-accent);
   outline-offset: 0.2rem;
 }
-

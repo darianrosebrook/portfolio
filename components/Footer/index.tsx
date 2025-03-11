@@ -1,46 +1,46 @@
 import { byPrefixAndName } from '@awesome.me/kit-0ba7f5fefb/icons';
-import styles from "./index.module.css";
-import Marquee from "./marquee";
+import styles from './index.module.css';
+import Marquee from './marquee';
 const Footer = () => {
   const year = new Date().getFullYear();
   const currentYear = `2015 - ${year}`;
-  const faFileAlt = byPrefixAndName["far"]["file-alt"];
-  const faGithub = byPrefixAndName["fab"]["github"];
-  const faLinkedin = byPrefixAndName["fab"]["linkedin"];
-  const faTwitter = byPrefixAndName["fab"]["twitter"];
-  const faYoutube = byPrefixAndName["fab"]["youtube"];
-  const faInstagram = byPrefixAndName["fab"]["instagram"];
+  const faFileAlt = byPrefixAndName['far']['file-alt'];
+  const faGithub = byPrefixAndName['fab']['github'];
+  const faLinkedin = byPrefixAndName['fab']['linkedin'];
+  const faTwitter = byPrefixAndName['fab']['twitter'];
+  const faYoutube = byPrefixAndName['fab']['youtube'];
+  const faInstagram = byPrefixAndName['fab']['instagram'];
   const links = [
     {
-      title: "Resume",
+      title: 'Resume',
       icon: faFileAlt,
-      url: "https://drive.google.com/file/d/1h2QH7K7153QGbW59CHWWt07Dzhgzst3a/view?usp=sharing",
+      url: 'https://drive.google.com/file/d/1h2QH7K7153QGbW59CHWWt07Dzhgzst3a/view?usp=sharing',
     },
     {
-      title: "GitHub",
+      title: 'GitHub',
       icon: faGithub,
-      url: "https://github.com/darianrosebrook",
+      url: 'https://github.com/darianrosebrook',
     },
     {
-      title: "LinkedIn",
+      title: 'LinkedIn',
       icon: faLinkedin,
-      url: "https://linkedin.com/in/darianrosebrook",
+      url: 'https://linkedin.com/in/darianrosebrook',
     },
     {
-      title: "Twitter",
+      title: 'Twitter',
       icon: faTwitter,
-      url: "https://twitter.com/darianrosebrook",
+      url: 'https://twitter.com/darianrosebrook',
     },
     {
-      title: "YouTube",
+      title: 'YouTube',
       icon: faYoutube,
-      url: "https://youtube.com/@darian.rosebrook",
+      url: 'https://youtube.com/@darian.rosebrook',
     },
     {
-      title: "Instagram",
+      title: 'Instagram',
       icon: faInstagram,
-      url: "https://instagram.com/darianrosebrook",
-    }, 
+      url: 'https://instagram.com/darianrosebrook',
+    },
   ];
 
   return (
@@ -49,7 +49,7 @@ const Footer = () => {
         <h2 className="light">Elsewhere</h2>
       </div>
       <ul>
-        {Object.entries(links).map(([key, value]) => { 
+        {Object.entries(links).map(([key, value]) => {
           return (
             <li key={key}>
               <Marquee {...value} />

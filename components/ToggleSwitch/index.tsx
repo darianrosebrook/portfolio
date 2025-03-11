@@ -1,6 +1,6 @@
-"use client";
-import { ReactNode } from "react";
-import styles from "./toggleSwitch.module.css";
+'use client';
+import { ReactNode } from 'react';
+import styles from './toggleSwitch.module.css';
 
 type ToggleSwitchProps = {
   checked: boolean;
@@ -9,7 +9,12 @@ type ToggleSwitchProps = {
   children: ReactNode;
 };
 
-const ToggleSwitch = ({ checked, disabled = false, onChange, children }: ToggleSwitchProps) => {
+const ToggleSwitch = ({
+  checked,
+  disabled = false,
+  onChange,
+  children,
+}: ToggleSwitchProps) => {
   return (
     <div className={styles.toggleSwitch}>
       <input
@@ -28,5 +33,5 @@ const ToggleSwitch = ({ checked, disabled = false, onChange, children }: ToggleS
       </label>
     </div>
   );
-}; 
+};
 export default ToggleSwitch;

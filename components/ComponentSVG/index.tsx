@@ -6,8 +6,7 @@ const button = (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <style> 
-    </style>
+    <style></style>
     <rect
       x="0.75"
       y="0.75"
@@ -30,8 +29,6 @@ const button = (
   </svg>
 );
 const ComponentSVG = () => {
-  return <>
-    {button}
-  </>;
+  return <>{button}</>;
 };
 export default ComponentSVG;

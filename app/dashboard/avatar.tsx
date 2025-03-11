@@ -1,7 +1,7 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import { createClient } from "@/utils/supabase/client";
-import Image from "next/image";
+'use client';
+import React, { useEffect, useState } from 'react';
+import { createClient } from '@/utils/supabase/client';
+import Image from 'next/image';
 
 export default function Avatar({
   uid,
@@ -29,20 +29,20 @@ export default function Avatar({
       setUploading(true);
 
       if (!event.target.files || event.target.files.length === 0) {
-        throw new Error("You must select an image to upload.");
+        throw new Error('You must select an image to upload.');
       }
 
       const file = event.target.files[0];
-      const fileNameParts = file.name.split(".");
+      const fileNameParts = file.name.split('.');
       const fileExt = fileNameParts[fileNameParts.length - 1];
       const filePath = `${uid}.${fileExt}`;
 
       const { error: uploadError } = await supabase.storage
-        .from("avatars")
+        .from('avatars')
         .upload(filePath, file, { upsert: true });
       const {
         data: { publicUrl },
-      } = await supabase.storage.from("avatars").getPublicUrl(filePath);
+      } = await supabase.storage.from('avatars').getPublicUrl(filePath);
       if (uploadError) {
         throw uploadError;
       }
@@ -50,7 +50,7 @@ export default function Avatar({
       onUpload(publicUrl);
     } catch (error) {
       console.error(error);
-      alert("Error uploading avatar!");
+      alert('Error uploading avatar!');
     } finally {
       setUploading(false);
     }
@@ -75,12 +75,12 @@ export default function Avatar({
       )}
       <div style={{ width: size }}>
         <label className="button primary block" htmlFor="single">
-          {uploading ? "Uploading ..." : "Upload"}
+          {uploading ? 'Uploading ...' : 'Upload'}
         </label>
         <input
           style={{
-            visibility: "hidden",
-            position: "absolute",
+            visibility: 'hidden',
+            position: 'absolute',
           }}
           type="file"
           id="single"
