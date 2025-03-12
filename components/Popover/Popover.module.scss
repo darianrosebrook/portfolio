@@ -1,4 +1,5 @@
 .popoverContainer {
+  position: relative;
   display: inline-block;
 }
 
@@ -10,17 +11,71 @@
 }
 
 .popoverContent {
+  position: absolute;
+  inset: auto;
+  top: anchor(bottom);
+  right: anchor(right);
   z-index: 1000;
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: var(--size-04);
   min-width: 256px;
   max-width: calc(100vw - var(--size-06));
+  margin: 0;
+  margin-top: var(--size-04);
   padding: var(--size-06);
+  border: 1px solid var(--color-border-light);
   border-radius: var(--radius-02);
   background: var(--color-background-secondary);
+  color: var(--color-foreground-primary);
   box-shadow: var(--elevation);
+  opacity: 0;
+  transition: opacity .3s ease-in, display .3s ease-in, overlay .3s ease-in, transform .3s ease-in;
+  transform: translateY(var(--size-06));
+  transition-behavior: allow-discrete;
   will-change: transform, opacity;
+  position-try-fallbacks: --left, --right, --top, --bottom;
+
+
+  &:popover-open {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+
+    @starting-style {
+      display: flex;
+      opacity: 0;
+      transform: translateY(var(--size-06));
+    }
+  }
+}
+
+@position-try --left {
+  inset: auto;
+  top: anchor(bottom);
+  right: anchor(right);
+  margin: var(--size-04) 0 0 0;
+}
+
+@position-try --right {
+  inset: auto;
+  top: anchor(bottom);
+  left: anchor(right);
+  margin:  var(--size-04) 0 0 0;
+}
+
+@position-try --top {
+  inset: auto;
+  bottom: anchor(top);
+  left: anchor(right);
+  margin: 0 0 var(--size-04) 0;
+}
+
+@position-try --bottom {
+  inset: auto;
+  top: anchor(bottom);
+  left: anchor(right);
+  margin: 0 0 var(--size-04) 0;
 }
 
 .activeTrigger {
@@ -31,7 +86,4 @@
   line-height: 0;
   transition: all ease-out 2s;
 
-  & > div:hover {
-    transform: rotate(1080deg);
-  }
 }

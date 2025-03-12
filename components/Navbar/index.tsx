@@ -124,7 +124,7 @@ export default function Navbar({ pages = [] }: NavbarProps) {
             ))}
           <li>
             <Popover>
-              <Popover.Trigger>
+              <Popover.Trigger asChild>
                 <Button variant="tertiary" size="small">
                   <FontAwesomeIcon icon={faBars} />
                 </Button>
