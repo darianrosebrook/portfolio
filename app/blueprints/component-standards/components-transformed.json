@@ -32,10 +32,7 @@
         "Toast Alert"
       ],
       "category": "Feedback",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component that displays important messages, warnings, or errors to users, typically with different visual styles to indicate severity levels.",
-      "interactions": "Click, Keyboard, Mouse",
+      "description": "displays important messages, warnings, or errors to users, typically with different visual styles to indicate severity levels.",
       "status": "Planned"
     },
     {
@@ -61,8 +58,6 @@
         "Call-to-Action Link"
       ],
       "category": "Navigation",
-      "complexity": "",
-      "platformSupport": "",
       "description": "A clickable text element that navigates users to another location, either within the same page or to an external resource.",
       "interactions": "Click, Keyboard",
       "status": "Planned"
@@ -71,30 +66,22 @@
       "component": "Anchor Target",
       "alternativeNames": ["Scroll Area", "Scroller", "Signpost", "Skip Link"],
       "category": "Navigation",
-      "complexity": "",
-      "platformSupport": "",
       "description": "A target location for navigation within a page.",
       "interactions": "None",
       "status": "Planned"
     },
     {
       "component": "Anchored Overlay",
-      "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A floating panel that appears anchored to a specific element, typically used for contextual menus, tooltips, or popovers that need to maintain a visual connection to their trigger element.",
-      "interactions": "Click, Keyboard, Mouse",
+      "alternativeNames": ["Contextual Overlay", "Anchor Popup"],
+      "category": "Layout",
+      "description": "A floating panel anchored to a specific element, typically used for contextual menus, tooltips, or popovers.",
       "status": "Planned"
     },
     {
       "component": "Aspect Ratio",
-      "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A container component that maintains a specific width-to-height ratio for its content, ensuring consistent proportions across different screen sizes and preventing layout shifts during content loading.",
-      "interactions": "Click, Keyboard, Mouse",
+      "alternativeNames": ["Ratio Box", "Proportional Container"],
+      "category": "Layout",
+      "description": "A container maintaining a consistent width-to-height ratio for content.",
       "status": "Planned"
     },
     {
@@ -109,20 +96,14 @@
         "User Thumbnail"
       ],
       "category": "Display",
-      "complexity": "",
-      "platformSupport": "",
       "description": "A circular or rounded component that displays a user's profile picture, initials, or a placeholder icon to represent a person or entity.",
-      "interactions": "Click, Keyboard, Mouse",
       "status": "Planned"
     },
     {
       "component": "Avatar Group",
-      "alternativeNames": ["Avatar stack", "Avatar pair"],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A collection of avatar components displayed together, often with overlapping or stacked layouts to represent groups of users, team members, or related entities.",
-      "interactions": "Click, Keyboard, Mouse",
+      "alternativeNames": ["Avatar Collection", "User Stack"],
+      "category": "Display",
+      "description": "A group of avatars displayed together to represent multiple users or entities.",
       "status": "Planned"
     },
     {
@@ -145,40 +126,28 @@
         "Indicator Badge"
       ],
       "category": "Display",
-      "complexity": "",
-      "platformSupport": "",
       "description": "A small visual indicator that displays a number, status, or label, often used to show counts, states, or highlight important information.",
-      "interactions": "Click, Keyboard, Mouse",
       "status": "Planned"
     },
     {
       "component": "Banner",
-      "alternativeNames": ["Project Banner", "Brand Moment", "Brand Splash"],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A prominent display component that spans the width of its container, typically used for marketing messages, announcements, or brand-related content with high visual impact.",
-      "interactions": "Click, Keyboard, Mouse",
+      "alternativeNames": ["Project Banner", "Brand Moment", "Promo Bar"],
+      "category": "Display",
+      "description": "A prominent visual component for announcements or brand-related content.",
       "status": "Planned"
     },
     {
       "component": "Blockquote",
-      "alternativeNames": ["Quote", "Expert Quote", "Testimonial"],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component that visually distinguishes quoted text from regular content, often with special styling, indentation, or decorative elements to highlight important statements or testimonials.",
-      "interactions": "Click, Keyboard, Mouse",
+      "alternativeNames": ["Quote", "Testimonial"],
+      "category": "Display",
+      "description": "A visually distinct component for highlighting quoted text.",
       "status": "Planned"
     },
     {
       "component": "Book",
-      "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component that simulates a book or document interface, allowing users to navigate through pages or sections with realistic page-turning animations and layout.",
-      "interactions": "Click, Keyboard, Mouse",
+      "alternativeNames": ["Flipbook", "Page Viewer"],
+      "category": "Display",
+      "description": "Simulates a book interface for page navigation with realistic animations.",
       "status": "Planned"
     },
     {
@@ -196,10 +165,7 @@
         "Trail"
       ],
       "category": "Navigation",
-      "complexity": "",
-      "platformSupport": "",
       "description": "A navigation component that shows the current page's location within a website's hierarchy, allowing users to understand their position and navigate back to previous levels.",
-      "interactions": "Click, Keyboard, Mouse",
       "status": "Planned"
     },
     {
@@ -229,33 +195,14 @@
         "Text Button"
       ],
       "category": "Action",
-      "complexity": "",
-      "platformSupport": "",
       "description": "An interactive element that triggers an action when clicked, available in various styles and sizes to indicate different levels of importance and functionality.",
-      "interactions": "Click, Keyboard, Mouse",
       "status": "Planned"
     },
     {
       "component": "Button Group",
-      "alternativeNames": [
-        "Button Container",
-        "Button Dock",
-        "Action List",
-        "Action Group",
-        "Button Row",
-        "Button Set",
-        "Segmented Control",
-        "Split Button",
-        "Segmented",
-        "Segmented button",
-        "Segmented options",
-        "Multi-action button"
-      ],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A container that groups related buttons together, providing visual and functional organization for multiple actions, with options for different layouts and interaction patterns.",
-      "interactions": "Click, Keyboard, Mouse",
+      "alternativeNames": ["Action Group", "Button Set", "Button Cluster"],
+      "category": "Action",
+      "description": "Groups related buttons together for organized interactions.",
       "status": "Planned"
     },
     {
@@ -271,20 +218,14 @@
         "Time Grid"
       ],
       "category": "Data",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component that displays dates in a grid format, allowing users to view, select, and interact with dates, often including features for event display and date range selection.",
-      "interactions": "Click, Keyboard, Mouse",
+      "description": "displays dates in a grid format, allowing users to view, select, and interact with dates, often including features for event display and date range selection.",
       "status": "Planned"
     },
     {
       "component": "Captcha",
-      "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A security component that verifies human users through challenges like image recognition, text input, or puzzle solving, helping prevent automated bot interactions.",
-      "interactions": "Click, Keyboard, Mouse",
+      "alternativeNames": ["Human Verification"],
+      "category": "Form",
+      "description": "Verifies users through interactive challenges to prevent bots.",
       "status": "Planned"
     },
     {
@@ -312,10 +253,7 @@
         "Feature Card"
       ],
       "category": "Layout",
-      "complexity": "",
-      "platformSupport": "",
       "description": "A container component that groups related content and actions together, often with a visual boundary and optional header, footer, or interactive elements.",
-      "interactions": "Click, Keyboard, Mouse",
       "status": "Planned"
     },
     {
@@ -331,10 +269,7 @@
         "Product Carousel"
       ],
       "category": "Display",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component that displays a series of content items (images, cards, or other elements) in a rotating sequence, with navigation controls to move between items.",
-      "interactions": "Click, Keyboard, Mouse",
+      "description": "displays a series of content items (images, cards, or other elements) in a rotating sequence, with navigation controls to move between items.",
       "status": "Planned"
     },
     {
@@ -358,20 +293,14 @@
         "Selection Control"
       ],
       "category": "Form",
-      "complexity": "",
-      "platformSupport": "",
       "description": "A form control that allows users to select one or multiple options from a set of choices, typically displayed as a square box that can be checked or unchecked.",
-      "interactions": "Click, Keyboard, Mouse",
       "status": "Planned"
     },
     {
       "component": "Coachmark",
-      "alternativeNames": ["Education Notice"],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A contextual help component that highlights and explains interface elements through visual overlays and tooltips, guiding users through new features or complex interactions.",
-      "interactions": "Click, Keyboard, Mouse",
+      "alternativeNames": ["Tooltip Tour", "Guided Help"],
+      "category": "Feedback",
+      "description": "Highlights and explains interface elements with guided overlays.",
       "status": "Planned"
     },
     {
@@ -386,10 +315,7 @@
         "Code Preview"
       ],
       "category": "Display",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component that displays formatted code with syntax highlighting, line numbers, and optional copy functionality, typically used for documentation or code examples.",
-      "interactions": "Click, Keyboard, Mouse",
+      "description": "displays formatted code with syntax highlighting, line numbers, and optional copy functionality, typically used for documentation or code examples.",
       "status": "Planned"
     },
     {
@@ -409,10 +335,7 @@
         "HEX Picker"
       ],
       "category": "Form",
-      "complexity": "",
-      "platformSupport": "",
       "description": "A specialized input component that allows users to select colors through various interfaces like color wheels, sliders, or swatches, with support for different color formats.",
-      "interactions": "Click, Keyboard, Mouse",
       "status": "Planned"
     },
     {
@@ -430,10 +353,7 @@
         "Enhanced Select"
       ],
       "category": "Form",
-      "complexity": "",
-      "platformSupport": "",
       "description": "A combination of a text input and dropdown menu that allows users to either select from predefined options or enter custom values, with filtering and search capabilities.",
-      "interactions": "Click, Keyboard, Mouse",
       "status": "Planned"
     },
     {
@@ -459,40 +379,28 @@
         "Quick Actions"
       ],
       "category": "Navigation",
-      "complexity": "",
-      "platformSupport": "",
       "description": "A menu that appears in response to user interaction (like right-click or long-press), displaying contextually relevant actions and options for the selected element.",
-      "interactions": "Click, Keyboard, Mouse",
       "status": "Planned"
     },
     {
       "component": "Counter",
-      "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component that displays and manages numerical values, allowing users to increment or decrement a count through buttons or input, with options for minimum and maximum limits.",
-      "interactions": "Click, Keyboard, Mouse",
+      "alternativeNames": ["Stepper", "Incrementer"],
+      "category": "Form",
+      "description": "Displays and manages numerical values through increment/decrement interactions.",
       "status": "Planned"
     },
     {
       "component": "Currency converter",
       "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
+      "category": "Form",
       "description": "A specialized input component that handles currency conversion, allowing users to input amounts in one currency and view equivalent values in other currencies with real-time updates.",
-      "interactions": "Click, Keyboard, Mouse",
       "status": "Planned"
     },
     {
       "component": "Data Visualization",
       "alternativeNames": ["Chart"],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component that presents data in visual formats like charts, graphs, or diagrams, making complex information more accessible and understandable through visual representation.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Display",
+      "description": "presents data in visual formats like charts, graphs, or diagrams, making complex information more accessible and understandable through visual representation.",
       "status": "Planned"
     },
     {
@@ -520,10 +428,7 @@
         "Time Selector"
       ],
       "category": "Form",
-      "complexity": "",
-      "platformSupport": "",
       "description": "A specialized input component that allows users to select dates through a calendar interface, with support for date ranges, time selection, and various date formats.",
-      "interactions": "Click, Keyboard, Mouse",
       "status": "Planned"
     },
     {
@@ -558,10 +463,7 @@
         "Show/Hide"
       ],
       "category": "Layout",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component that allows users to expand and collapse content sections, typically with a visible summary and hidden details that can be toggled on demand.",
-      "interactions": "Click, Keyboard, Mouse",
+      "description": "allows users to expand and collapse content sections, typically with a visible summary and hidden details that can be toggled on demand.",
       "status": "Planned"
     },
     {
@@ -589,60 +491,50 @@
         "Confirmation Dialog"
       ],
       "category": "Feedback",
-      "complexity": "",
-      "platformSupport": "",
       "description": "A floating window that appears over the main content to present information, gather user input, or confirm actions, often with a semi-transparent backdrop.",
-      "interactions": "Click, Keyboard, Mouse",
       "status": "Planned"
     },
     {
       "component": "Dictionary",
-      "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component that provides definitions, translations, or explanations for terms, often with search functionality and categorization to help users understand specialized vocabulary.",
-      "interactions": "Click, Keyboard, Mouse",
+      "alternativeNames": [
+        "Definition List",
+        "Definition",
+        "Definition Card",
+        "Definition Box",
+        "Definition Block",
+        "Definition Item",
+        "Definition Section"
+      ],
+      "category": "Display",
+      "description": "provides definitions, translations, or explanations for terms, often with search functionality and categorization to help users understand specialized vocabulary.",
       "status": "Planned"
     },
     {
       "component": "Disclosure",
       "alternativeNames": ["Description", "Caption"],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component that reveals additional information or content when activated, typically through a button or trigger, helping to manage information density and focus user attention.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Display",
+      "description": "reveals additional information or content when activated, typically through a button or trigger, helping to manage information density and focus user attention.",
       "status": "Planned"
     },
     {
       "component": "Divider",
       "alternativeNames": ["Separator"],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
+      "category": "Display",
       "description": "A visual element that creates separation between content sections, available in various styles like lines, spaces, or decorative elements to improve content organization and readability.",
-      "interactions": "Click, Keyboard, Mouse",
       "status": "Planned"
     },
     {
       "component": "Do and Don't List",
       "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component that presents best practices and common mistakes in a structured format, using visual indicators to clearly distinguish between recommended and discouraged actions.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Display",
+      "description": "presents best practices and common mistakes in a structured format, using visual indicators to clearly distinguish between recommended and discouraged actions.",
       "status": "Planned"
     },
     {
       "component": "Download",
       "alternativeNames": ["Download button", "File download"],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component that initiates file downloads, providing information about file size, type, and download progress, with options for different file formats and download methods.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Form",
+      "description": "initiates file downloads, providing information about file size, type, and download progress, with options for different file formats and download methods.",
       "status": "Planned"
     },
     {
@@ -658,20 +550,14 @@
         "Slide-out Navigation"
       ],
       "category": "Navigation",
-      "complexity": "",
-      "platformSupport": "",
       "description": "A panel that slides in from the edge of the screen, typically used for navigation, settings, or additional content, with options for different positions and interaction patterns.",
-      "interactions": "Click, Keyboard, Mouse",
       "status": "Planned"
     },
     {
       "component": "Editor",
       "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component that provides a rich text editing interface, allowing users to create and modify content with formatting options, media embedding, and real-time collaboration features.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Form",
+      "description": "provides a rich text editing interface, allowing users to create and modify content with formatting options, media embedding, and real-time collaboration features.",
       "status": "Planned"
     },
     {
@@ -688,10 +574,7 @@
         "First-time Experience"
       ],
       "category": "Feedback",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component that displays when there is no data or content to show, providing guidance, illustrations, or actions to help users understand and resolve the empty state.",
-      "interactions": "Click, Keyboard, Mouse",
+      "description": "displays when there is no data or content to show, providing guidance, illustrations, or actions to help users understand and resolve the empty state.",
       "status": "Planned"
     },
     {
@@ -710,21 +593,15 @@
         "Input group",
         "Contact Form"
       ],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
+      "category": "Form",
       "description": "A container component that groups related form controls together, providing visual organization and semantic structure for complex forms with multiple input fields.",
-      "interactions": "Click, Keyboard, Mouse",
       "status": "Planned"
     },
     {
       "component": "File details",
       "alternativeNames": ["Document card", "File"],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component that displays metadata and information about a file, including name, size, type, last modified date, and preview options, with actions for file management.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Display",
+      "description": "displays metadata and information about a file, including name, size, type, last modified date, and preview options, with actions for file management.",
       "status": "Planned"
     },
     {
@@ -748,10 +625,7 @@
         "File Selector"
       ],
       "category": "Form",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component that allows users to select and upload files, supporting drag-and-drop interactions, file type validation, and progress indicators for the upload process.",
-      "interactions": "Click, Keyboard, Mouse",
+      "description": "allows users to select and upload files, supporting drag-and-drop interactions, file type validation, and progress indicators for the upload process.",
       "status": "Planned"
     },
     {
@@ -767,80 +641,56 @@
         "Filter Controls"
       ],
       "category": "Form",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component that allows users to refine and narrow down content or data based on specific criteria, often with multiple filter options and real-time filtering capabilities.",
-      "interactions": "Click, Keyboard, Mouse",
+      "description": "allows users to refine and narrow down content or data based on specific criteria, often with multiple filter options and real-time filtering capabilities.",
       "status": "Planned"
     },
     {
       "component": "Flag",
       "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
+      "category": "Display",
       "description": "A small visual indicator that draws attention to specific content or states, often using color, icons, or text to highlight important information or status changes.",
-      "interactions": "Click, Keyboard, Mouse",
       "status": "Planned"
     },
     {
       "component": "Flightline",
       "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component that visualizes a sequence of events or steps in a process, typically using a horizontal or vertical line with connected nodes to show progression and relationships.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Display",
+      "description": "visualizes a sequence of events or steps in a process, typically using a horizontal or vertical line with connected nodes to show progression and relationships.",
       "status": "Planned"
     },
     {
       "component": "Focus Ring",
       "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
+      "category": "Display",
       "description": "A visual indicator that shows which element currently has keyboard focus, helping users navigate the interface and maintain accessibility standards for keyboard-only users.",
-      "interactions": "Click, Keyboard, Mouse",
       "status": "Planned"
     },
     {
       "component": "Footer",
       "alternativeNames": ["Page footer"],
       "category": "Layout",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component that appears at the bottom of a page or section, typically containing navigation links, copyright information, and supplementary content organized in a structured layout.",
-      "interactions": "Click, Keyboard, Mouse",
+      "description": "appears at the bottom of a page or section, typically containing navigation links, copyright information, and supplementary content organized in a structured layout.",
       "status": "Planned"
     },
     {
       "component": "Gauge",
       "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component that displays a measurement or progress using a circular or semi-circular indicator, often with color coding and numerical values to show current status or performance.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Progress",
+      "description": "displays a measurement or progress using a circular or semi-circular indicator, often with color coding and numerical values to show current status or performance.",
       "status": "Planned"
     },
     {
       "component": "Globe Rating",
       "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
+      "category": "Progress",
       "description": "A rating component that uses a globe or circular visualization to represent scores or ratings, with options for different rating scales and visual styles to indicate quality or performance.",
-      "interactions": "Click, Keyboard, Mouse",
       "status": "Planned"
     },
     {
       "component": "Grid",
       "alternativeNames": ["Layout Grid", "Page Layout", "Flex"],
       "category": "Layout",
-      "complexity": "",
-      "platformSupport": "",
       "description": "A layout component that organizes content into rows and columns, providing a flexible and responsive structure for arranging interface elements in a consistent and visually balanced way.",
-      "interactions": "Click, Keyboard, Mouse",
       "status": "Planned"
     },
     {
@@ -854,20 +704,14 @@
         "Section message"
       ],
       "category": "Layout",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component that appears at the top of a page or section, typically containing navigation, branding, and key actions, with options for different styles and responsive behaviors.",
-      "interactions": "Click, Keyboard, Mouse",
+      "description": "appears at the top of a page or section, typically containing navigation, branding, and key actions, with options for different styles and responsive behaviors.",
       "status": "Planned"
     },
     {
       "component": "Hero",
       "alternativeNames": ["Jumbotron", "Hero area", "Highlight board"],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
+      "category": "Display",
       "description": "A prominent display component that spans the full width of the viewport, typically used for key marketing messages, featured content, or important announcements with high visual impact.",
-      "interactions": "Click, Keyboard, Mouse",
       "status": "Planned"
     },
     {
@@ -878,11 +722,8 @@
         "Focus Highlight",
         "Focus ring"
       ],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component that highlights and magnifies specific areas of an image or interface, allowing users to focus on details or access additional information about particular elements.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Display",
+      "description": "highlights and magnifies specific areas of an image or interface, allowing users to focus on details or access additional information about particular elements.",
       "status": "Planned"
     },
     {
@@ -898,70 +739,49 @@
         "Visual Indicator"
       ],
       "category": "Display",
-      "complexity": "",
-      "platformSupport": "",
       "description": "A visual symbol or graphic that represents an action, object, or concept, available in various sizes and styles to enhance visual communication and user interface clarity.",
-      "interactions": "Click, Keyboard, Mouse",
       "status": "Planned"
     },
     {
       "component": "Icon Button",
       "alternativeNames": ["Button Icon", "Icon button link"],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
+      "category": "Form",
       "description": "A button component that uses an icon as its primary visual element, providing a compact and intuitive way to represent actions or navigation options with visual clarity.",
-      "interactions": "Click, Keyboard, Mouse",
       "status": "Planned"
     },
     {
       "component": "Illustration",
       "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component that displays custom artwork or graphics, often used to enhance visual appeal, explain concepts, or provide visual context for content and features.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Display",
+      "description": "displays custom artwork or graphics, often used to enhance visual appeal, explain concepts, or provide visual context for content and features.",
       "status": "Planned"
     },
     {
       "component": "Image",
       "alternativeNames": ["Image card", "Picture card"],
       "category": "Display",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component that displays and manages images, with options for different aspect ratios, loading states, captions, and interactive features like zoom or gallery views.",
-      "interactions": "Click, Keyboard, Mouse",
+      "description": "displays and manages images, with options for different aspect ratios, loading states, captions, and interactive features like zoom or gallery views.",
       "status": "Planned"
     },
     {
       "component": "Info Icon",
       "alternativeNames": ["Help Button", "Service icons"],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
+      "category": "Display",
       "description": "A small icon component that provides access to additional information or help content, typically appearing as a question mark or information symbol that reveals details on interaction.",
-      "interactions": "Click, Keyboard, Mouse",
       "status": "Planned"
     },
     {
       "component": "Infotip",
       "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
+      "category": "Display",
       "description": "A small popup component that provides contextual information or guidance, appearing when users hover over or focus on an element to explain its purpose or usage.",
-      "interactions": "Click, Keyboard, Mouse",
       "status": "Planned"
     },
     {
       "component": "Inline Edit",
       "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component that allows users to edit content directly in its display context, transforming static text into editable fields when activated, with options for different input types and validation.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Form",
+      "description": "allows users to edit content directly in its display context, transforming static text into editable fields when activated, with options for different input types and validation.",
       "status": "Planned"
     },
     {
@@ -982,40 +802,28 @@
         "Data Entry"
       ],
       "category": "Form",
-      "complexity": "",
-      "platformSupport": "",
       "description": "A form control that allows users to enter and edit text or data, with various types and validation options to ensure proper input format.",
-      "interactions": "Click, Keyboard, Mouse",
       "status": "Planned"
     },
     {
       "component": "Item Tile",
       "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Display",
+      "description": "displays a list of items in a tile format, typically used for navigation or content organization, with options for different styles and responsive behaviors.",
       "status": "Planned"
     },
     {
       "component": "Keyboard Input",
       "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Form",
+      "description": "displays a list of items in a keyboard input format, typically used for navigation or content organization, with options for different styles and responsive behaviors.",
       "status": "Planned"
     },
     {
       "component": "Label",
       "alternativeNames": ["Field label", "Field message", "Label Group"],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Form",
+      "description": "displays a label for a form field, with options for different styles and responsive behaviors.",
       "status": "Planned"
     },
     {
@@ -1044,10 +852,7 @@
         "Data List"
       ],
       "category": "Data",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component that displays a collection of items in a structured format, with options for different list styles, item selection, and interactive features for data manipulation.",
-      "interactions": "Click, Keyboard, Mouse",
+      "description": "displays a collection of items in a structured format, with options for different list styles, item selection, and interactive features for data manipulation.",
       "status": "Planned"
     },
     {
@@ -1071,80 +876,57 @@
         "Loading State"
       ],
       "category": "Feedback",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component that indicates an ongoing process or loading state, available in various styles like spinners, progress bars, or skeleton screens to provide visual feedback.",
-      "interactions": "Click, Keyboard, Mouse",
+      "description": "indicates an ongoing process or loading state, available in various styles like spinners, progress bars, or skeleton screens to provide visual feedback.",
       "status": "Planned"
     },
     {
       "component": "Lockup",
       "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Display",
+      "description": "displays a list of items in a lockup format, typically used for navigation or content organization, with options for different styles and responsive behaviors.",
       "status": "Planned"
     },
     {
       "component": "Lookup",
       "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Display",
+      "description": "displays a list of items in a lookup format, typically used for navigation or content organization, with options for different styles and responsive behaviors.",
       "status": "Planned"
     },
     {
       "component": "Marquee",
-      "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
-      "status": "Planned"
-    },
-    {
-      "component": "Material",
-      "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "alternativeNames": [
+        "Marquee",
+        "Marquee Text",
+        "Marquee Content",
+        "Marquee Section",
+        "Marquee Block",
+        "Marquee Item",
+        "Marquee Section"
+      ],
+      "category": "Display",
+      "description": "displays a continuous scrolling text or content, often used for announcements, promotions, or important messages, with options for different styles and responsive behaviors.",
       "status": "Planned"
     },
     {
       "component": "Media Container",
       "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Media",
+      "description": "provides a container for media content, with options for different aspect ratios, loading states, captions, and interactive features like zoom or gallery views.",
       "status": "Planned"
     },
     {
       "component": "Message",
       "alternativeNames": ["Message card", "Message inline", "Message bar"],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Display",
+      "description": "displays a message or notification, often used to inform users about system status, updates, or important information, with options for different styles and auto-dismissal.",
       "status": "Planned"
     },
     {
       "component": "Metadata",
       "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Display",
+      "description": "displays metadata or information about an item, often used to provide additional details or context about the content or object.",
       "status": "Planned"
     },
     {
@@ -1161,10 +943,7 @@
         "Dialog Box"
       ],
       "category": "Feedback",
-      "complexity": "",
-      "platformSupport": "",
       "description": "A focused dialog that requires user interaction before returning to the main interface, typically used for important messages, forms, or content that needs immediate attention.",
-      "interactions": "Click, Keyboard, Mouse",
       "status": "Planned"
     },
     {
@@ -1198,10 +977,7 @@
         "Tertiary Navigation"
       ],
       "category": "Navigation",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component that provides access to different sections or pages of an application, available in various layouts and styles to accommodate different navigation patterns and hierarchies.",
-      "interactions": "Click, Keyboard, Mouse",
+      "description": "provides access to different sections or pages of an application, available in various layouts and styles to accommodate different navigation patterns and hierarchies.",
       "status": "Planned"
     },
     {
@@ -1221,50 +997,35 @@
         "Push Notification"
       ],
       "category": "Feedback",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component that displays temporary messages to inform users about system status, updates, or important information, with options for different styles and auto-dismissal.",
-      "interactions": "Click, Keyboard, Mouse",
+      "description": "displays temporary messages to inform users about system status, updates, or important information, with options for different styles and auto-dismissal.",
       "status": "Planned"
     },
     {
       "component": "Number Input",
       "alternativeNames": ["Numberfield", "Numeric input"],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Form",
+      "description": "allows users to enter and edit numeric values, with options for different input types and validation options to ensure proper input format.",
       "status": "Planned"
     },
     {
       "component": "Offscreen",
       "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Display",
+      "description": "displays content off-screen, typically used for temporary or hidden content that needs to be accessible for screen readers or other assistive technologies.",
       "status": "Planned"
     },
     {
       "component": "One-time Password Input",
       "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Form",
+      "description": "allows users to enter and edit numeric values, with options for different input types and validation options to ensure proper input format.",
       "status": "Planned"
     },
     {
       "component": "Overlay",
       "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Display",
+      "description": "A non-opaque overlay that appears on top of the main content, typically used to provide additional information or context about the content or object.",
       "status": "Planned"
     },
     {
@@ -1280,10 +1041,7 @@
         "Page Indicator"
       ],
       "category": "Navigation",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component that allows users to navigate through multiple pages of content, typically showing page numbers, previous/next controls, and options for page size selection.",
-      "interactions": "Click, Keyboard, Mouse",
+      "description": "allows users to navigate through multiple pages of content, typically showing page numbers, previous/next controls, and options for page size selection.",
       "status": "Planned"
     },
     {
@@ -1298,81 +1056,50 @@
         "Full sheet",
         "Full Screen Takeover"
       ],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Display",
+      "description": "displays content in a split-screen format, typically used for sidebars or supplementary information that can be toggled on and off of the main content.",
       "status": "Planned"
     },
     {
       "component": "Payment Form",
       "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Form",
+      "description": "allows users to enter and edit payment information, with options for different input types and validation options to ensure proper input format.",
       "status": "Planned"
     },
     {
       "component": "Phone Number Input",
       "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Form",
+      "description": "allows users to enter and edit phone number information, with options for different input types and validation options to ensure proper input format.",
       "status": "Planned"
     },
     {
       "component": "Picklist",
       "alternativeNames": ["Skeleton body text"],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Form",
+      "description": "allows users to select one or more options from a list, with options for different styles, step values, and visual feedback.",
       "status": "Planned"
     },
     {
       "component": "Pivot",
       "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Display",
+      "description": "displays a list of items in a pivot format, typically used for navigation or content organization, with options for different styles and responsive behaviors.",
       "status": "Planned"
     },
     {
       "component": "Placeholder",
       "alternativeNames": ["Empty prompt"],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
-      "status": "Planned"
-    },
-    {
-      "component": "PointerBox",
-      "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Display",
+      "description": "displays a placeholder for content that is still loading or has not been loaded yet, with options for different styles and responsive behaviors.",
       "status": "Planned"
     },
     {
       "component": "Popover",
-      "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "alternativeNames": ["Anchor Popup", "PointerBox"],
+      "category": "Display",
+      "description": "displays a small popup or tooltip that appears when users hover over or focus on an element to provide additional information or context about the content or object.",
       "status": "Planned"
     },
     {
@@ -1398,20 +1125,14 @@
         "Completion Meter"
       ],
       "category": "Feedback",
-      "complexity": "",
-      "platformSupport": "",
       "description": "A visual indicator that shows the completion status of a process, available in linear or circular formats, with optional animations and percentage displays.",
-      "interactions": "Click, Keyboard, Mouse",
       "status": "Planned"
     },
     {
       "component": "Prompt",
       "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Form",
+      "description": "allows users to enter and edit text information, with options for different input types and validation options to ensure proper input format.",
       "status": "Planned"
     },
     {
@@ -1436,10 +1157,7 @@
         "Choice Button"
       ],
       "category": "Form",
-      "complexity": "",
-      "platformSupport": "",
       "description": "A form control that allows users to select a single option from a set of mutually exclusive choices, typically displayed as circular buttons that can be selected.",
-      "interactions": "Click, Keyboard, Mouse",
       "status": "Planned"
     },
     {
@@ -1456,10 +1174,7 @@
         "Progress Slider"
       ],
       "category": "Form",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component that allows users to select a value or range of values by moving a slider along a track, with options for different styles, step values, and visual feedback.",
-      "interactions": "Click, Keyboard, Mouse",
+      "description": "allows users to select a value or range of values by moving a slider along a track, with options for different styles, step values, and visual feedback.",
       "status": "Planned"
     },
     {
@@ -1477,10 +1192,7 @@
         "Performance Rating"
       ],
       "category": "Form",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component that allows users to provide or view ratings, typically using stars or other visual indicators, with options for different rating scales and display styles.",
-      "interactions": "Click, Keyboard, Mouse",
+      "description": "allows users to provide or view ratings, typically using stars or other visual indicators, with options for different rating scales and display styles.",
       "status": "Planned"
     },
     {
@@ -1495,20 +1207,14 @@
         "Formatting Toolbar"
       ],
       "category": "Form",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component that provides a text editing interface with formatting options, allowing users to create and edit rich text content with various styling and formatting capabilities.",
-      "interactions": "Click, Keyboard, Mouse",
+      "description": "provides a text editing interface with formatting options, allowing users to create and edit rich text content with various styling and formatting capabilities.",
       "status": "Planned"
     },
     {
       "component": "Screen Reader Only",
       "alternativeNames": ["Visually Hidden", "Screenreadercontent"],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Display",
+      "description": "displays content that is only visible to screen readers, typically used to provide additional information or context about the content or object.",
       "status": "Planned"
     },
     {
@@ -1531,20 +1237,14 @@
         "Filter Search"
       ],
       "category": "Form",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component that allows users to search for content, with features like autocomplete, search suggestions, and filters to help users find relevant information quickly.",
-      "interactions": "Click, Keyboard, Mouse",
+      "description": "allows users to search for content, with features like autocomplete, search suggestions, and filters to help users find relevant information quickly.",
       "status": "Planned"
     },
     {
       "component": "Section",
       "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Display",
+      "description": "displays a list of items in a section format, typically used for navigation or content organization, with options for different styles and responsive behaviors.",
       "status": "Planned"
     },
     {
@@ -1560,20 +1260,14 @@
         "Selection Menu"
       ],
       "category": "Form",
-      "complexity": "",
-      "platformSupport": "",
       "description": "A form control that allows users to select one or multiple options from a dropdown list, with support for search, filtering, and custom option rendering.",
-      "interactions": "Click, Keyboard, Mouse",
       "status": "Planned"
     },
     {
       "component": "Show More",
       "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Display",
+      "description": "displays a list of items in a show more format, typically used for navigation or content organization, with options for different styles and responsive behaviors.",
       "status": "Planned"
     },
     {
@@ -1584,31 +1278,22 @@
         "Listbox",
         "Listbox button"
       ],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Form",
+      "description": "allows users to transfer items between two lists, with options for different styles, step values, and visual feedback.",
       "status": "Planned"
     },
     {
       "component": "Side Navigation",
       "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Navigation",
+      "description": "displays a list of items in a side navigation format, typically used for navigation or content organization, with options for different styles and responsive behaviors.",
       "status": "Planned"
     },
     {
       "component": "Signal",
       "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Display",
+      "description": "displays a list of items in a signal format, typically used for navigation or content organization, with options for different styles and responsive behaviors.",
       "status": "Planned"
     },
     {
@@ -1628,50 +1313,35 @@
         "Ghost Loading"
       ],
       "category": "Feedback",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component that displays a placeholder preview of content while it's loading, using subtle animations to indicate that content is being fetched and will appear soon.",
-      "interactions": "Click, Keyboard, Mouse",
+      "description": "displays a placeholder preview of content while it's loading, using subtle animations to indicate that content is being fetched and will appear soon.",
       "status": "Planned"
     },
     {
       "component": "Snackbar",
       "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Feedback",
+      "description": "displays a temporary message to inform users about system status, updates, or important information, with options for different styles and auto-dismissal.",
       "status": "Planned"
     },
     {
       "component": "Splash page",
       "alternativeNames": ["Entry card", "Splash animation"],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Display",
+      "description": "displays a splash page with a logo, title, and description, typically used to welcome users to a new product or service.",
       "status": "Planned"
     },
     {
       "component": "Stack",
       "alternativeNames": ["Stack view", "Sonner", "Toaster"],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Display",
+      "description": "displays a list of items in a stack format, typically used for navigation or content organization, with options for different styles and responsive behaviors.",
       "status": "Planned"
     },
     {
       "component": "Stamp",
       "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Display",
+      "description": "displays a list of items in a stamp format, typically used for navigation or content organization, with options for different styles and responsive behaviors.",
       "status": "Planned"
     },
     {
@@ -1686,11 +1356,8 @@
         "Status Indicator",
         "Status label"
       ],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Feedback",
+      "description": "displays a status indicator or label for an entity or object, with options for different styles and responsive behaviors.",
       "status": "Planned"
     },
     {
@@ -1703,21 +1370,15 @@
         "Stepper horizontal",
         "Stepper indicator"
       ],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Form",
+      "description": "displays a list of steps in a stepper format, typically used for navigation or content organization, with options for different styles and responsive behaviors.",
       "status": "Planned"
     },
     {
       "component": "Sticker",
       "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Display",
+      "description": "displays a list of items in a sticker format, typically used for navigation or content organization, with options for different styles and responsive behaviors.",
       "status": "Planned"
     },
     {
@@ -1732,10 +1393,7 @@
         "State Toggle"
       ],
       "category": "Form",
-      "complexity": "",
-      "platformSupport": "",
       "description": "A form control that allows users to toggle between two states (on/off), typically displayed as a sliding switch with visual feedback for the current state.",
-      "interactions": "Click, Keyboard, Mouse",
       "status": "Planned"
     },
     {
@@ -1764,10 +1422,7 @@
         "Tabbed Content"
       ],
       "category": "Navigation",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component that organizes content into multiple panels, with tabs for switching between them, supporting different styles and layouts for content organization.",
-      "interactions": "Click, Keyboard, Mouse",
+      "description": "organizes content into multiple panels, with tabs for switching between them, supporting different styles and layouts for content organization.",
       "status": "Planned"
     },
     {
@@ -1789,40 +1444,28 @@
         "Matrix"
       ],
       "category": "Data",
-      "complexity": "",
-      "platformSupport": "",
       "description": "A structured component that displays data in rows and columns, with support for sorting, filtering, pagination, and various interactive features for data manipulation.",
-      "interactions": "Click, Keyboard, Mouse",
       "status": "Planned"
     },
     {
       "component": "Table of Contents",
       "alternativeNames": ["Contents List", "Index Table"],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Navigation",
+      "description": "displays a list of items in a table of contents format, typically used for navigation or content organization, with options for different styles and responsive behaviors.",
       "status": "Planned"
     },
     {
       "component": "Tag",
       "alternativeNames": ["Token", "Tagbutton", "Tag dismissible"],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Display",
+      "description": "displays a list of items in a tag format, typically used for navigation or content organization, with options for different styles and responsive behaviors.",
       "status": "Planned"
     },
     {
       "component": "Text",
       "alternativeNames": ["Specialized text"],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Display",
+      "description": "displays text in various sizes and styles to create visual hierarchy and structure in content, with options for different heading levels and styles.",
       "status": "Planned"
     },
     {
@@ -1838,30 +1481,21 @@
         "Description Field"
       ],
       "category": "Form",
-      "complexity": "",
-      "platformSupport": "",
       "description": "A multi-line text input component that allows users to enter and edit longer text content, with options for resizing, character limits, and formatting.",
-      "interactions": "Click, Keyboard, Mouse",
       "status": "Planned"
     },
     {
       "component": "Theme Switcher",
       "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Form",
+      "description": "allows users to switch between different themes or color schemes, typically displayed as a dropdown menu with options for different themes or color schemes.",
       "status": "Planned"
     },
     {
       "component": "Tile",
       "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Display",
+      "description": "displays a list of items in a tile format, typically used for navigation or content organization, with options for different styles and responsive behaviors.",
       "status": "Planned"
     },
     {
@@ -1876,10 +1510,7 @@
         "Chronological View"
       ],
       "category": "Data",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component that displays events or activities in chronological order, with options for different layouts, event types, and interactive features for exploring the timeline.",
-      "interactions": "Click, Keyboard, Mouse",
+      "description": "displays events or activities in chronological order, with options for different layouts, event types, and interactive features for exploring the timeline.",
       "status": "Planned"
     },
     {
@@ -1895,10 +1526,7 @@
         "Display Text"
       ],
       "category": "Display",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component that displays text in various sizes and styles to create visual hierarchy and structure in content, with options for different heading levels and styles.",
-      "interactions": "Click, Keyboard, Mouse",
+      "description": "displays text in various sizes and styles to create visual hierarchy and structure in content, with options for different heading levels and styles.",
       "status": "Planned"
     },
     {
@@ -1914,11 +1542,8 @@
         "Toggledetails",
         "Togglegroup"
       ],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Form",
+      "description": "allows users to toggle between two states (on/off), typically displayed as a sliding switch with visual feedback for the current state.",
       "status": "Planned"
     },
     {
@@ -1934,11 +1559,8 @@
         "Top app bar",
         "Top bar"
       ],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Navigation",
+      "description": "displays a list of items in a pivot format, typically used for navigation or content organization, with options for different styles and responsive behaviors.",
       "status": "Planned"
     },
     {
@@ -1955,20 +1577,14 @@
         "Popover Tip"
       ],
       "category": "Feedback",
-      "complexity": "",
-      "platformSupport": "",
       "description": "A small popup that appears when users hover over or focus on an element, providing additional information, context, or guidance about the element.",
-      "interactions": "Click, Keyboard, Mouse",
       "status": "Planned"
     },
     {
       "component": "Tourtip",
       "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Display",
+      "description": "displays a small popup that appears when users hover over or focus on an element, providing additional information, context, or guidance about the element.",
       "status": "Planned"
     },
     {
@@ -1985,50 +1601,35 @@
         "Nested List"
       ],
       "category": "Data",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component that displays hierarchical data in a tree structure, with options for expanding/collapsing nodes, selection, and navigation through the hierarchy.",
-      "interactions": "Click, Keyboard, Mouse",
+      "description": "displays hierarchical data in a tree structure, with options for expanding/collapsing nodes, selection, and navigation through the hierarchy.",
       "status": "Planned"
     },
     {
       "component": "Truncate",
       "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Display",
+      "description": "displays a truncated text with options for different styles and responsive behaviors.",
       "status": "Planned"
     },
     {
       "component": "User Feedback",
       "alternativeNames": [],
-      "category": "Uncategorized",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "category": "Feedback",
+      "description": "allows users to provide feedback or suggestions about a product or service, with options for different styles and interactive features.",
       "status": "Planned"
     },
     {
       "component": "Video",
       "alternativeNames": ["Video player"],
       "category": "Display",
-      "complexity": "",
-      "platformSupport": "",
-      "description": "A component for user interface interaction.",
-      "interactions": "Click, Keyboard, Mouse",
+      "description": "displays a video player with options for different styles, playback controls, and responsive behaviors.",
       "status": "Planned"
     },
     {
       "component": "Wizard",
       "alternativeNames": ["Multi-step Form"],
       "category": "Action",
-      "complexity": "",
-      "platformSupport": "",
       "description": "A multi-step form that guides users through a series of steps to complete a task.",
-      "interactions": "Click, Keyboard, Mouse",
       "status": "Planned"
     }
   ]

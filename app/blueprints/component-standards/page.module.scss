@@ -301,35 +301,39 @@
   white-space: nowrap;
 
   &.category {
+    border-color: var(--color-border-info);
     background-color: var(--color-background-info-subtle);
-    color: var(--color-foreground-info);
+    color: var(--color-foreground-onInfoSubtle);
   }
 
   &.complexity {
+    border-color: var(--color-border-success);
     background-color: var(--color-background-success-subtle);
-    color: var(--color-foreground-success);
+    color: var(--color-foreground-onSuccessSubtle);
   }
 
-  &.status {
-    &-completed {
-      background-color: var(--color-background-success-subtle);
-      color: var(--color-foreground-success);
-    }
+  &.completed {
+    border-color: var(--color-border-success);
+    background-color: var(--color-background-success-subtle);
+    color: var(--color-foreground-onSuccessSubtle);
+  }
 
-    &-in-progress {
-      background-color: var(--color-background-warning-subtle);
-      color: var(--color-foreground-warning);
-    }
+  &.in-progress {
+    border-color: var(--color-border-warning);
+    background-color: var(--color-background-warning-subtle);
+    color: var(--color-foreground-onWarningSubtle);
+  }
 
-    &-planned {
-      background-color: var(--color-background-info-subtle);
-      color: var(--color-foreground-info);
-    }
+  &.planned {
+    border-color: var(--color-border-warning);
+    background-color: var(--color-background-warning-subtle);
+    color: var(--color-foreground-onWarningSubtle);
+  }
 
-    &-deprecated {
-      background-color: var(--color-background-error-subtle);
-      color: var(--color-foreground-error);
-    }
+  &.deprecated {
+    border-color: var(--color-border-error);
+    background-color: var(--color-background-error-subtle);
+    color: var(--color-foreground-onErrorSubtle);
   }
 }
 
