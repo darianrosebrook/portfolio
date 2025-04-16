@@ -83,7 +83,7 @@ const Template: React.FC<TemplateProps> = ({ children, user }) => {
     <ReducedMotionProvider>
       <MouseProvider>
         <Navbar id={id} pages={pages} />
-        <main ref={ref}>{children}</main>;
+        <main ref={ref}>{children}</main>
         <Footer />
         <SlinkyCursor />
       </MouseProvider>
