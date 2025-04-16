@@ -1,9 +1,9 @@
 import styles from './page.module.scss';
 import { Top, Middle, Bottom, Props, Faceplate, Table } from './svgs';
 import Swatches from '../heroes/swatches';
-// import Link from 'next/link';
 import Blueprints from '../heroes/blueprints';
 import SvgSprite from '../heroes/svgSprite';
+import Link from 'next/link';
 const Page: React.FC = () => {
   return (
     <>
@@ -52,13 +52,12 @@ const Page: React.FC = () => {
         </div>
         <div className={`${styles.headingHero}`}>
           <h1 className="gooey">
-            {' '}
-            <span>Fundamentals</span>
+            <span>Design Language</span>
             <br />
             <span>
-              {/* <Link href="/tokens"> */}
-              Design Tokens (coming soon)
-              {/* </Link> */}
+              <Link href="/blueprints/foundations" className={styles.heroLink}>
+                Design System Building Blocks →
+              </Link>
             </span>
           </h1>
         </div>
@@ -71,13 +70,15 @@ const Page: React.FC = () => {
         </div>
         <div className={`${styles.headingHero}`}>
           <h1 className="gooey">
-            {' '}
-            <span>Blueprints</span>
+            <span>UX Principles</span>
             <br />
             <span>
-              {/* <Link href="/tokens"> */}
-              UX Patterns (coming soon)
-              {/* </Link> */}
+              <Link
+                href="/blueprints/interaction-patterns"
+                className={styles.heroLink}
+              >
+                Interaction Design Patterns →
+              </Link>
             </span>
           </h1>
         </div>
@@ -99,13 +100,15 @@ const Page: React.FC = () => {
         </div>
         <div className={`${styles.headingHero}`}>
           <h1 className="gooey">
-            {' '}
-            <span>UX patterns</span>
+            <span>Authoring Blueprints</span>
             <br />
             <span>
-              {/* <Link href="/typography"> */}
-              Component Blueprints
-              {/* </Link> */}
+              <Link
+                href="/blueprints/component-standards"
+                className={styles.heroLink}
+              >
+                Component Standards →
+              </Link>
             </span>
           </h1>
         </div>
