@@ -63,7 +63,7 @@ const ComponentStandardsPage: React.FC = () => {
                 <th>Component</th>
                 <th>Description</th>
                 <th>Category</th>
-                <th>Status</th>
+                <th>Documentation Status</th>
               </tr>
             </thead>
             <tbody>
@@ -86,7 +86,7 @@ const ComponentStandardsPage: React.FC = () => {
                   </td>
                   <td>
                     <span
-                      className={`${styles.badge} ${styles.status}-${component.status}`}
+                      className={`${styles.badge} ${styles[component.status.toLowerCase()]}`}
                     >
                       {component.status}
                     </span>
