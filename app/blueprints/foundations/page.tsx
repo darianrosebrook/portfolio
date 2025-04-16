@@ -5,52 +5,52 @@ const foundations = [
   {
     title: 'Color',
     desc: 'Establishes brand identity, provides hierarchy, and supports contrast across light and dark themes. You&apos;ll learn how to define semantic and functional color tokens, evaluate contrast accessibility using WCAG and APCA, and implement color theming across platforms.',
-    href: '/foundations/color',
+    href: '/blueprints/foundations/color',
   },
   {
     title: 'Typography',
     desc: 'Typography communicates tone, hierarchy, and clarity. Explore how to define typographic scales, apply system font stacks, manage line height and letter spacing, and ensure readable text across screen sizes and user preferences.',
-    href: '/foundations/typography',
+    href: '/blueprints/foundations/typography',
   },
   {
     title: 'Spacing & Sizing',
     desc: 'A consistent rhythm of space supports layout clarity and legibility. Learn how to define a modular spacing scale, use sizing tokens for components, and build layouts that respect accessibility requirements like minimum touch targets.',
-    href: '/foundations/spacing',
+    href: '/blueprints/foundations/spacing',
   },
   {
     title: 'Layout',
     desc: 'The structure that guides responsive design and visual organization. Understand how to create grid systems, define breakpoints, and structure containers and flows that adapt across screen sizes while preserving usability.',
-    href: '/foundations/layout',
+    href: '/blueprints/foundations/layout',
   },
   {
     title: 'Icons',
     desc: 'Icons offer fast recognition and visual language support. Learn about icon sizing, stroke styles, accessibility alternatives like ARIA labels, and how to systematize icons for consistency in size, alignment, and usage.',
-    href: '/foundations/icons',
+    href: '/blueprints/foundations/icons',
   },
   {
     title: 'Elevation & Shadows',
     desc: 'Visual layering helps users distinguish between surfaces and understand interactions. This section covers shadow tokens, elevation ramps, and how to provide depth cues that are both accessible and performant across platforms.',
-    href: '/foundations/elevation',
+    href: '/blueprints/foundations/elevation',
   },
   {
     title: 'Radius & Shape',
     desc: 'Shape tokens define the visual personality of your interface. Explore how to create consistent border-radius scales, apply shapes meaningfully to interactive components, and align visual identity across a system.',
-    href: '/foundations/radius',
+    href: '/blueprints/foundations/radius',
   },
   {
     title: 'Motion & Duration',
     desc: 'Motion provides continuity and feedback. You&apos;ll learn to define motion tokens (duration, easing), support prefers-reduced-motion, and create accessible animations that reinforce user interaction rather than distract.',
-    href: '/foundations/motion',
+    href: '/blueprints/foundations/motion',
   },
   {
     title: 'Grid Systems',
     desc: 'Grid systems help organize layouts with predictable flow and alignment. This section introduces column structures, gutter sizing, spacing alignment, and how to adapt grids responsively while maintaining accessibility.',
-    href: '/foundations/grid',
+    href: '/blueprints/foundations/grid',
   },
   {
     title: 'Borders & Strokes',
     desc: 'Borders frame and delineate components. Learn how to apply tokenized border styles and widths, ensure contrast and visibility, and support semantic distinctions (e.g. input focus or warning states).',
-    href: '/foundations/borders',
+    href: '/blueprints/foundations/borders',
   },
 ];
 
@@ -58,27 +58,27 @@ const metaFoundations = [
   {
     title: 'Token Naming & Hierarchy',
     desc: 'Understand how to structure your tokens into core, semantic, and component-level layers to ensure clarity, reuse, and scalability across platforms and themes.',
-    href: '/foundations/meta/token-naming',
+    href: '/blueprints/foundations/meta/token-naming',
   },
   {
     title: 'Theming Strategies',
     desc: 'Learn techniques for supporting dark mode, brand variations, and context-aware styling using alias tokens, layered tokens, and theme inheritance.',
-    href: '/foundations/meta/theming',
+    href: '/blueprints/foundations/meta/theming',
   },
   {
     title: 'Atomic vs Semantic Tokens',
     desc: 'Explore the difference between raw value tokens and purpose-driven semantic tokens to create a balance between flexibility and clarity.',
-    href: '/foundations/meta/atomic-vs-semantic',
+    href: '/blueprints/foundations/meta/atomic-vs-semantic',
   },
   {
     title: 'System vs Style',
     desc: 'Distinguish between foundational system logic and brand style layers, helping your design system scale while preserving identity.',
-    href: '/foundations/meta/system-vs-style',
+    href: '/blueprints/foundations/meta/system-vs-style',
   },
   {
     title: 'Component Mapping',
     desc: 'Map tokens to component anatomy to make token usage more intuitive and help teams understand how design decisions translate to implementation.',
-    href: '/foundations/meta/component-mapping',
+    href: '/blueprints/foundations/meta/component-mapping',
   },
 ];
 
@@ -86,17 +86,17 @@ const toolingFoundations = [
   {
     title: 'Design Tooling',
     desc: 'Explore tools like Token Studio, Figma variables, and contrast checking plugins that help define, test, and maintain design-side foundations.',
-    href: '/foundations/tooling/design',
+    href: '/blueprints/foundations/tooling/design',
   },
   {
     title: 'Code Tooling',
     desc: 'Integrate tokens into code using tools like Style Dictionary, Tailwind token syncing, and accessibility linters like eslint-plugin-jsx-a11y.',
-    href: '/foundations/tooling/code',
+    href: '/blueprints/foundations/tooling/code',
   },
   {
     title: 'Automation & CI/CD',
     desc: 'Automate token distribution, theme switching, and documentation updates using GitHub Actions, custom pipelines, and preview deployments.',
-    href: '/foundations/tooling/automation',
+    href: '/blueprints/foundations/tooling/automation',
   },
 ];
 
@@ -104,27 +104,27 @@ const accessibilityFoundations = [
   {
     title: 'Standards & Principles',
     desc: 'Learn how WCAG 2.1+, APCA, and the POUR model shape accessible design. Understand how these principles apply throughout your system.',
-    href: '/foundations/accessibility/standards',
+    href: '/blueprints/foundations/accessibility/standards',
   },
   {
     title: 'Token-Level Accessibility',
     desc: 'Build accessible systems from the ground up using tokens for color contrast, motion sensitivity, spacing for legibility, and focus states.',
-    href: '/foundations/accessibility/tokens',
+    href: '/blueprints/foundations/accessibility/tokens',
   },
   {
     title: 'Assistive Tech Support',
     desc: 'Support screen readers and other assistive tools with proper semantics, ARIA usage, and keyboard navigation considerations.',
-    href: '/foundations/accessibility/assistive-tech',
+    href: '/blueprints/foundations/accessibility/assistive-tech',
   },
   {
     title: 'Accessibility Tooling',
     desc: 'Use tools like axe-core, Lighthouse, and Figma plugins to test, validate, and enforce accessibility at every stage of your workflow.',
-    href: '/foundations/accessibility/tooling',
+    href: '/blueprints/foundations/accessibility/tooling',
   },
   {
     title: 'Philosophy & Practice',
     desc: 'Frame accessibility as a design constraint that enhances decision-making and expands the usability of your product for everyone.',
-    href: '/foundations/accessibility/philosophy',
+    href: '/blueprints/foundations/accessibility/philosophy',
   },
 ];
 
