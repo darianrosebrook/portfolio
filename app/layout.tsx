@@ -14,7 +14,7 @@ const nohemi = localFont({
   variable: '--font-nohemi',
 });
 const inter = localFont({
-  src: '../public/fonts/InterVariable.woff2',
+  src: '../public/fonts/InterVariable.ttf',
   fallback: ['sans-serif'],
   display: 'auto',
   weight: '100 900',
