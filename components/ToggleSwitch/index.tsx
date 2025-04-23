@@ -1,6 +1,6 @@
 'use client';
 import { ReactNode } from 'react';
-import styles from './toggleSwitch.module.css';
+import styles from './toggleSwitch.module.scss';
 
 type ToggleSwitchProps = {
   checked: boolean;
