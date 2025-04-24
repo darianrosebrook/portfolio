@@ -379,28 +379,27 @@ export const InspectorProvider: React.FC<{
       const getPropertyValue = (property: string) =>
         style.getPropertyValue(property).trim();
       setColors({
-        anchorFill: getPropertyValue('--color-background-primary'),
-        anchorStroke: getPropertyValue('--color-foreground-primary'),
+        anchorFill: getPropertyValue('--color-background-secondary'),
+        anchorStroke: getPropertyValue('--color-foreground-info'),
         metricStroke: getPropertyValue('--color-border-primary'),
         metricFill: getPropertyValue('--color-foreground-primary'),
         checkerFill: getPropertyValue('--color-background-image-overlay'),
         checkerStroke: getPropertyValue('--color-background-secondary'),
-        boundsStroke: getPropertyValue('--color-border-info'),
+        boundsStroke: getPropertyValue('--color-foreground-info'),
         boundsFill: getPropertyValue('--color-background-info-subtle'),
         lsbStroke: getPropertyValue('--color-foreground-info'),
         lsbFill: getPropertyValue('--color-background-info-subtle'),
         rsbStroke: getPropertyValue('--color-foreground-warning'),
         rsbFill: getPropertyValue('--color-background-warning-subtle'),
-        pathStroke: getPropertyValue('--color-foreground-primary'),
+        pathStroke: getPropertyValue('--color-foreground-warning'),
         pathFill: getPropertyValue('--color-foreground-primary'),
-        handleStroke: getPropertyValue('--color-border-warning'),
-        handleFill: getPropertyValue('--color-background-warning-subtle'),
+        handleStroke: getPropertyValue('--color-background-warning-strong'),
+        handleFill: getPropertyValue('--color-background-warning'),
         cursorStroke: getPropertyValue('--color-core-transparent'),
         cursorFill: getPropertyValue('--color-foreground-primary'),
         labelFill: getPropertyValue('--color-foreground-primary'),
         labelStroke: getPropertyValue('--color-background-primary'),
       });
-      console.log(getPropertyValue('--color-background-primary'));
     };
 
     // Initial sync
@@ -448,6 +447,7 @@ export const InspectorProvider: React.FC<{
   const glyph = useMemo(() => {
     if (!fontInstance) return null;
     const glyph = fontInstance.glyphForCodePoint(glyphUnicode);
+
     if (!glyph) return null;
     return glyph;
   }, [fontInstance, glyphUnicode]);

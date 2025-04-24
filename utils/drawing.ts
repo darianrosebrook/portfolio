@@ -154,51 +154,111 @@ export function drawPathDetails(
   ctx.save();
   ctx.beginPath();
 
-  glyph.path.commands.forEach(({ command, args }) => {
+  // keep track of the last anchor
+  let lastAnchor = null;
+  ctx.strokeStyle = colors.handleStroke;
+  ctx.lineWidth = 1;
+  for (let i = 0; i < glyph.path.commands.length; i++) {
+    const { command, args } = glyph.path.commands[i];
     switch (command) {
       case 'moveTo': {
-        const x = args[0] * scale,
-          y = -args[1] * scale;
+        const x = args[0] * scale;
+        const y = -args[1] * scale;
+        lastAnchor = { x, y };
         anchors.push([x, y, false]);
         ctx.moveTo(x, y);
         break;
       }
+
       case 'lineTo': {
-        const x = args[0] * scale,
-          y = -args[1] * scale;
+        const x = args[0] * scale;
+        const y = -args[1] * scale;
+        lastAnchor = { x, y };
         anchors.push([x, y, false]);
-        ctx.lineTo(x, y);
         break;
       }
+
       case 'quadraticCurveTo': {
-        const [cx, cy, x, y] = args.map((a, idx) =>
-          idx % 2 ? -a * scale : a * scale
-        );
+        // raw Q: (P1 = [cxRaw,cyRaw], P2 = [xRaw,yRaw])
+        const [cxRaw, cyRaw, xRaw, yRaw] = args;
+        const cx = cxRaw * scale,
+          cy = -cyRaw * scale;
+        const x = xRaw * scale,
+          y = -yRaw * scale;
+
+        // remember P0
+        const { x: x0, y: y0 } = lastAnchor;
+        // convert Q→C:
+        const x1 = x0 + (2 / 3) * (cx - x0);
+        const y1 = y0 + (2 / 3) * (cy - y0);
+        const x2 = x + (2 / 3) * (cx - x);
+        const y2 = y + (2 / 3) * (cy - y);
+
+        // draw the actual curve
+        ctx.bezierCurveTo(x1, y1, x2, y2, x, y);
+
+        // handle-spoke from P0 → C1
+        ctx.beginPath();
+        ctx.moveTo(x0, y0);
+        ctx.lineTo(x1, y1);
+        ctx.stroke();
+
+        // handle-spoke from P2 → C2
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.lineTo(x2, y2);
+        ctx.stroke();
+
+        // update lastAnchor
+        lastAnchor = { x, y };
         anchors.push([x, y, false]);
-        handles.push([cx, cy]);
-        ctx.lineTo(cx, cy);
-        ctx.lineTo(x, y);
+        handles.push([x1, y1], [x2, y2]);
         break;
       }
+
       case 'bezierCurveTo': {
-        const [c1x, c1y, c2x, c2y, x, y] = args.map((a, idx) =>
-          idx % 2 ? -a * scale : a * scale
-        );
+        // raw C: (C1=[c1xRaw,c1yRaw], C2=[c2xRaw,c2yRaw], P2=[xRaw,yRaw])
+        const [c1xRaw, c1yRaw, c2xRaw, c2yRaw, xRaw, yRaw] = args;
+        const c1x = c1xRaw * scale,
+          c1y = -c1yRaw * scale;
+        const c2x = c2xRaw * scale,
+          c2y = -c2yRaw * scale;
+        const x = xRaw * scale,
+          y = -yRaw * scale;
+
+        // draw the curve
+        ctx.bezierCurveTo(c1x, c1y, c2x, c2y, x, y);
+
+        // P0 → C1
+        const { x: x0, y: y0 } = lastAnchor;
+        ctx.beginPath();
+        ctx.moveTo(x0, y0);
+        ctx.lineTo(c1x, c1y);
+        ctx.stroke();
+
+        // P2 → C2
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.lineTo(c2x, c2y);
+        ctx.stroke();
+
+        lastAnchor = { x, y };
         anchors.push([x, y, false]);
         handles.push([c1x, c1y], [c2x, c2y]);
-        ctx.bezierCurveTo(c1x, c1y, c2x, c2y, x, y);
         break;
       }
-      case 'closePath':
+
+      case 'closePath': {
         if (anchors.length) anchors[anchors.length - 1][2] = true;
         ctx.closePath();
         break;
+      }
     }
-  });
+  }
 
-  // outline
-  ctx.strokeStyle = colors.pathStroke;
-  ctx.lineWidth = 1;
+  // path details outline
+  ctx.strokeStyle = colors.handleStroke;
+  ctx.lineWidth = 1.5;
   ctx.stroke();
 
   // anchors
@@ -206,9 +266,14 @@ export function drawPathDetails(
   ctx.strokeStyle = colors.anchorStroke;
   anchors.forEach(([ax, ay, start]) => {
     ctx.beginPath();
-    ctx.ellipse(ax, ay, 1.5, 1.5, 0, 0, Math.PI * 2);
-    if (start) ctx.fill();
-    else {
+    ctx.ellipse(ax, ay, 2.5, 2.5, 0, 0, Math.PI * 2);
+    if (start) {
+      ctx.fillStyle = colors.anchorStroke;
+      ctx.font = '12px sans-serif';
+      ctx.fillText('Start', ax + 4, ay + 4);
+      ctx.fill();
+      ctx.fillStyle = colors.anchorFill;
+    } else {
       ctx.fill();
       ctx.stroke();
     }
@@ -219,7 +284,7 @@ export function drawPathDetails(
   ctx.strokeStyle = colors.handleStroke;
   handles.forEach(([hx, hy]) => {
     ctx.beginPath();
-    ctx.ellipse(hx, hy, 2.5, 2.5, 0, 0, Math.PI * 2);
+    ctx.rect(hx - 1.5, hy - 1.5, 3, 3);
     ctx.fill();
     ctx.stroke();
   });
