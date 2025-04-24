@@ -447,7 +447,7 @@ export const InspectorProvider: React.FC<{
   const glyph = useMemo(() => {
     if (!fontInstance) return null;
     const glyph = fontInstance.glyphForCodePoint(glyphUnicode);
-    
+
     if (!glyph) return null;
     return glyph;
   }, [fontInstance, glyphUnicode]);
