@@ -29,10 +29,17 @@ const Template: React.FC<TemplateProps> = ({ children, user }) => {
       handleSelectionChange.current = () => {
         const selection = document.getSelection();
         if (selection && '' === selection.toString()) {
-          const rootElement = document.documentElement;
-          const isDarkTheme = window.matchMedia(
+          const rootElement = document.body;
+          let isDarkTheme = window.matchMedia(
             '(prefers-color-scheme: dark)'
           ).matches;
+          const bodyClassOverride = rootElement.classList;
+          if (bodyClassOverride.contains('light')) {
+            isDarkTheme = false;
+          }
+          if (bodyClassOverride.contains('dark')) {
+            isDarkTheme = true;
+          }
 
           const colors = [
             'red',
