@@ -34,7 +34,7 @@ Unify and simplify the mouse/scroll animation logic in hero components (Blueprin
    - [x] Use safe defaults and early returns.
 3. **Document and Test**
    - [x] Create this plan file.
-   - [ ] Confirm both components animate correctly with mouse and scroll.
+   - [x] Confirm both components animate correctly with mouse and scroll, including during scroll events.
 
 ---
 
@@ -44,3 +44,4 @@ Unify and simplify the mouse/scroll animation logic in hero components (Blueprin
   - Now provides `hasMouseMoved` in mouse state.
 - **Blueprints/Swatches:**
   - Both use unified fallback logic for animation.
+  - Animation now continues during scroll events.

@@ -37,10 +37,6 @@ const Swatches = () => {
     const animate = () => {
       const grid = gridRef.current;
       if (!grid) return;
-      if (Math.abs(scroll.y) >= 0.6) {
-        frameId = requestAnimationFrame(animate);
-        return;
-      }
       const rect = grid.getBoundingClientRect();
       const { x, hasMouseMoved } = mouse;
       let interactionX: number;
