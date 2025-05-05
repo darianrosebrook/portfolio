@@ -40,7 +40,7 @@ export const MouseProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const { prefersReducedMotion } = useReducedMotion();
   // Use refs for position, only state for pressed/dragged
-  const positionRef = useRef<MousePosition>({
+  const positionRef = useRef<MousePosition & { hasMouseMoved?: boolean }>({
     x: 0,
     y: 0,
     clientX: 0,
@@ -50,6 +50,7 @@ export const MouseProvider: React.FC<{ children: ReactNode }> = ({
     velocityX: 0,
     velocityY: 0,
     event: null,
+    hasMouseMoved: false,
   });
   const [isPressed, setIsPressed] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
@@ -74,6 +75,7 @@ export const MouseProvider: React.FC<{ children: ReactNode }> = ({
           velocityX: self.velocityX,
           velocityY: self.velocityY,
           event,
+          hasMouseMoved: true,
         };
       },
       onPress: () => {
@@ -101,6 +103,7 @@ export const MouseProvider: React.FC<{ children: ReactNode }> = ({
           velocityX: self.velocityX,
           velocityY: self.velocityY,
           event,
+          hasMouseMoved: true,
         };
       },
     });
@@ -114,8 +117,13 @@ export const MouseProvider: React.FC<{ children: ReactNode }> = ({
   useEffect(() => {
     const updatePositionOnScrollOrResize = () => {
       const last = positionRef.current;
-      // Only update if we have a last known clientX/clientY
-      if (last.clientX !== undefined && last.clientY !== undefined) {
+      // Only update if we have a last known clientX/clientY and mouse has moved
+      if (
+        last.hasMouseMoved &&
+        last.clientX !== undefined &&
+        last.clientY !== undefined &&
+        (last.clientX !== 0 || last.clientY !== 0)
+      ) {
         positionRef.current = {
           ...last,
           x: last.clientX + window.scrollX,
