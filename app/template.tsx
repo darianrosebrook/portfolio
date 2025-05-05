@@ -3,7 +3,7 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { ReducedMotionProvider, MouseProvider } from '@/context';
+import { ReducedMotionProvider, InteractionProvider } from '@/context';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SlinkyCursor from '@/components/SlinkyCursor';
@@ -88,12 +88,12 @@ const Template: React.FC<TemplateProps> = ({ children, user }) => {
 
   return (
     <ReducedMotionProvider>
-      <MouseProvider>
+      <InteractionProvider>
         <Navbar id={id} pages={pages} />
         <main ref={ref}>{children}</main>
         <Footer />
         <SlinkyCursor />
-      </MouseProvider>
+      </InteractionProvider>
     </ReducedMotionProvider>
   );
 };

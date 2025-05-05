@@ -1,4 +1,4 @@
-const SwatchSVG = () => (
+export const SwatchSprite = (
   <svg xmlns="http://www.w3.org/2000/svg" style={{ display: 'none' }}>
     <symbol id="isometric" viewBox="0 0 142 265">
       <path
@@ -65,5 +65,3 @@ const SwatchSVG = () => (
     </symbol>
   </svg>
 );
-
-export default SwatchSVG;

@@ -3,7 +3,6 @@ import styles from './page.module.css';
 import Avatar from '@/components/Avatar';
 import Button from '@/components/Button';
 import LogoMaruqee from '@/components/LogoMarquee';
-import SvgSprite from './heroes/svgSprite';
 import Blueprints from './heroes/blueprints';
 import Image from 'next/image';
 export default function Home() {
@@ -37,7 +36,6 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }}
       />
-      <SvgSprite />
       <section className={styles.hero}>
         <div className={styles.heroImage}>
           <Blueprints />
