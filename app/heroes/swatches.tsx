@@ -7,6 +7,7 @@ import { linearInterpolation } from '@/utils';
 import { useMouseEvent } from '@/context';
 import { ColorSwatch } from './ColorSwatch';
 import { colorPalette } from './ColorPalette';
+import { useGSAP } from '@gsap/react';
 
 const Swatches = () => {
   const colors = React.useMemo(() => colorPalette, []);
@@ -16,15 +17,25 @@ const Swatches = () => {
   const toX = useRef<((x: number) => void)[]>([]);
   const toY = useRef<((y: number) => void)[]>([]);
 
-  // For RAF-throttling
-  const isTicking = useRef(false);
-  const rafId = useRef<number>();
-
   const winsize = useWindowSize();
   const mousePosition = useMouseEvent();
 
-  // Refactored: Extract update logic
-  const updateSwatchPositions = React.useCallback(() => {
+  // 1) Once on mount: grab each swatch element and build its quickTo tweens
+  useEffect(() => {
+    const grid = gridRef.current;
+    if (!grid) return;
+
+    const swatches = Array.from(grid.children) as HTMLElement[];
+    toX.current = swatches.map((el) =>
+      gsap.quickTo(el, 'x', { duration: 0.5, ease: 'power1.out' })
+    );
+    toY.current = swatches.map((el) =>
+      gsap.quickTo(el, 'y', { duration: 0.5, ease: 'power1.out' })
+    );
+  }, []);
+
+  // useGSAP for continuous animation
+  useGSAP(() => {
     const grid = gridRef.current;
     if (!grid) return;
 
@@ -50,43 +61,7 @@ const Swatches = () => {
       const y = Math.sin(i * freq + mouseCenter * Math.PI) * amplitude;
       tweenFn(y);
     });
-  }, [mousePosition, winsize.width, linearInterpolation]);
-
-  // 1) Once on mount: grab each swatch element and build its quickTo tweens
-  useEffect(() => {
-    const grid = gridRef.current;
-    if (!grid) return;
-
-    const swatches = Array.from(grid.children) as HTMLElement[];
-    toX.current = swatches.map((el) =>
-      gsap.quickTo(el, 'x', { duration: 0.5, ease: 'power1.out' })
-    );
-    toY.current = swatches.map((el) =>
-      gsap.quickTo(el, 'y', { duration: 0.5, ease: 'power1.out' })
-    );
-    // Call update on mount to set initial positions
-    updateSwatchPositions();
-  }, [updateSwatchPositions]);
-
-  // 2) On mouse or resize changes: schedule one RAF update
-  useEffect(() => {
-    const grid = gridRef.current;
-    if (!grid) return;
-
-    const update = () => {
-      updateSwatchPositions();
-      isTicking.current = false;
-    };
-
-    if (!isTicking.current) {
-      isTicking.current = true;
-      rafId.current = requestAnimationFrame(update);
-    }
-
-    return () => {
-      if (rafId.current) cancelAnimationFrame(rafId.current);
-    };
-  }, [mousePosition, winsize.width, updateSwatchPositions]);
+  }, [mousePosition, winsize.width, gridRef]);
 
   return (
     <div className={`${Style.gridContainer}`}>
