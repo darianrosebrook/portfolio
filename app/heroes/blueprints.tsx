@@ -27,7 +27,7 @@ const Blueprints: React.FC = () => {
     const rows = Array.from(gridRef.current.children) as HTMLElement[];
     const distanceModifier = 0.2;
 
-    const normalizedMouseX = (mouse.x / winsize.width) * 2 - 1;
+    const normalizedMouseX = (mouse.getPosition().x / winsize.width) * 2 - 1;
     const targetTranslateX = normalizedMouseX * 12 * (winsize.width / 80);
 
     rows.forEach((row, index) => {
