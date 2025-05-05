@@ -6,6 +6,7 @@ import { useGSAP } from '@gsap/react';
 import SvgIllustration from './svgIllustration';
 import { useWindowSize } from '../../context/useWindowSize';
 import { useMouseEvent } from '@/context';
+import { useScrollPosition } from '../../context/useScrollPosition';
 
 gsap.registerPlugin(useGSAP);
 
@@ -20,12 +21,17 @@ const Blueprints: React.FC = () => {
 
   const [svgs, setSvgs] = useState<string[]>([]);
   const mouse = useMouseEvent();
+  const percentFromMiddle = useScrollPosition(gridRef);
 
   // Animation loop for mouse movement
   useEffect(() => {
     let frameId: number;
     const animate = () => {
       if (!gridRef.current) return;
+      if (Math.abs(percentFromMiddle) >= 0.6) {
+        frameId = requestAnimationFrame(animate);
+        return;
+      }
       const rows = Array.from(gridRef.current.children) as HTMLElement[];
       const distanceModifier = 0.2;
       const normalizedMouseX = (mouse.getPosition().x / winsize.width) * 2 - 1;
@@ -46,7 +52,7 @@ const Blueprints: React.FC = () => {
     return () => {
       cancelAnimationFrame(frameId);
     };
-  }, [mouse, winsize.width, gridRef, middleRowIndex]);
+  }, [mouse, winsize.width, gridRef, middleRowIndex, percentFromMiddle]);
 
   useEffect(() => {
     const dsSprite = document.getElementById('DSSPRITE') as HTMLDivElement;
