@@ -19,6 +19,19 @@ const Blueprints: React.FC = () => {
 
   const [svgs, setSvgs] = useState<string[]>([]);
 
+  // Hold our quickTo functions in refs so they survive re-renders
+  const toX = useRef<((x: number) => void)[]>([]);
+
+  // 1) Once on mount or when grid changes: build quickTo tweens for each row
+  useEffect(() => {
+    const grid = gridRef.current;
+    if (!grid) return;
+    const rows = Array.from(grid.children) as HTMLElement[];
+    toX.current = rows.map((el) =>
+      gsap.quickTo(el, 'x', { duration: 1.5, ease: 'power2.out' })
+    );
+  }, [svgs.length]);
+
   // Animation loop for mouse movement
   useEffect(() => {
     let frameId: number;
@@ -26,7 +39,6 @@ const Blueprints: React.FC = () => {
       if (!gridRef.current) return;
       const rows = Array.from(gridRef.current.children) as HTMLElement[];
       const distanceModifier = 0.2;
-      // Unified interaction X: mouse if moved, else scroll-based fallback
       const { x, hasMouseMoved } = mouse;
       let interactionX: number;
       if (hasMouseMoved) {
@@ -41,11 +53,8 @@ const Blueprints: React.FC = () => {
         const distanceFromMiddle = Math.abs(index - middleRowIndex);
         const factor = 1 - distanceModifier * distanceFromMiddle;
         const targetX = targetTranslateX * factor;
-        const toX = gsap.quickTo(row, 'x', {
-          duration: 1.5,
-          ease: 'power2.out',
-        });
-        toX(targetX);
+        const tweenFn = toX.current[index];
+        if (tweenFn) tweenFn(targetX);
       });
       frameId = requestAnimationFrame(animate);
     };
@@ -53,7 +62,7 @@ const Blueprints: React.FC = () => {
     return () => {
       cancelAnimationFrame(frameId);
     };
-  }, [mouse, winsize.width, gridRef, middleRowIndex, scroll.y]);
+  }, [mouse, winsize.width, gridRef, middleRowIndex, scroll.y, svgs.length]);
 
   useEffect(() => {
     const dsSprite = document.getElementById('DSSPRITE') as HTMLDivElement;

@@ -26,6 +26,7 @@ const defaultMouse: MouseState = {
   isPressed: false,
   isDragging: false,
   hasMouseMoved: false,
+  hoveredTarget: undefined,
 };
 
 const defaultScroll: ScrollState = {
@@ -50,9 +51,11 @@ export const InteractionProvider: React.FC<{ children: ReactNode }> = ({
   // Mouse state
   const mouseRef = useRef<MouseState>({ ...defaultMouse });
   const [mouse, setMouse] = useState<MouseState>({ ...defaultMouse });
+
   // Scroll state
   const scrollRef = useRef<ScrollState>({ ...defaultScroll });
   const [scroll, setScroll] = useState<ScrollState>({ ...defaultScroll });
+
   // Window size
   const [windowSize, setWindowSize] = useState<WindowSize>({
     ...defaultWindow,
@@ -128,6 +131,12 @@ export const InteractionProvider: React.FC<{ children: ReactNode }> = ({
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Provide setHoveredTarget to update hoveredTarget in mouse state
+  const setHoveredTarget = (target: string | undefined) => {
+    mouseRef.current.hoveredTarget = target;
+    setMouse((prev) => ({ ...prev, hoveredTarget: target }));
+  };
+
   // Provide context value
   const contextValue = React.useMemo(
     () => ({
@@ -136,6 +145,7 @@ export const InteractionProvider: React.FC<{ children: ReactNode }> = ({
       window: windowSize,
       prefersReducedMotion,
       setPrefersReducedMotion,
+      setHoveredTarget,
     }),
     [mouse, scroll, windowSize, prefersReducedMotion, setPrefersReducedMotion]
   );

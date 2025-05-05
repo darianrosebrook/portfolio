@@ -8,6 +8,7 @@ export interface MouseState {
   isPressed: boolean;
   isDragging: boolean;
   hasMouseMoved?: boolean;
+  hoveredTarget?: string;
 }
 
 export interface ScrollState {
@@ -27,4 +28,5 @@ export interface InteractionContextValue {
   window: WindowSize;
   prefersReducedMotion: boolean;
   setPrefersReducedMotion?: (value: boolean) => void;
+  setHoveredTarget?: (target: string | undefined) => void;
 }
