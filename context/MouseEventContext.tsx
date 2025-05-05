@@ -3,7 +3,9 @@ import React, {
   useContext,
   ReactNode,
   useEffect,
+  useRef,
   useState,
+  useCallback,
 } from 'react';
 import { Observer } from 'gsap/Observer';
 import { gsap } from 'gsap';
@@ -12,25 +14,44 @@ import { useReducedMotion } from './ReducedMotionContext';
 // Ensure the plugin is registered
 gsap.registerPlugin(Observer);
 
-// interface MouseContextType extends Partial<Observer> {
-//   x: number;
-//   y: number;
-//   deltaX: number;
-//   deltaY: number;
-//   velocityX: number;
-//   velocityY: number;
-//   isDragging: boolean;
-//   isPressed: boolean;
-//   event: MouseEvent | null;
-// }
+// Mouse context type
+type MousePosition = {
+  x: number;
+  y: number;
+  deltaX: number;
+  deltaY: number;
+  velocityX: number;
+  velocityY: number;
+  event: MouseEvent | null;
+};
 
-const MouseContext = createContext(undefined);
+interface MouseContextType {
+  getPosition: () => MousePosition;
+  isPressed: boolean;
+  isDragging: boolean;
+}
+
+const MouseContext = createContext<MouseContextType | undefined>(undefined);
 
 export const MouseProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const { prefersReducedMotion } = useReducedMotion();
-  const [mouseData, setMouseData] = useState({});
+  // Use refs for position, only state for pressed/dragged
+  const positionRef = useRef<MousePosition>({
+    x: 0,
+    y: 0,
+    deltaX: 0,
+    deltaY: 0,
+    velocityX: 0,
+    velocityY: 0,
+    event: null,
+  });
+  const [isPressed, setIsPressed] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+
+  // Stable getPosition function
+  const getPosition = useCallback(() => positionRef.current, []);
 
   useEffect(() => {
     if (prefersReducedMotion) return;
@@ -38,40 +59,39 @@ export const MouseProvider: React.FC<{ children: ReactNode }> = ({
       target: window,
       type: 'pointer, wheel, touch, scroll',
       onMove: (self) => {
-        setMouseData({
-          ...self,
-        });
+        positionRef.current = {
+          x: self.x,
+          y: self.y,
+          deltaX: self.deltaX,
+          deltaY: self.deltaY,
+          velocityX: self.velocityX,
+          velocityY: self.velocityY,
+          event: self.event instanceof MouseEvent ? self.event : null,
+        };
       },
       onPress: () => {
-        setMouseData((prev) => ({
-          ...prev,
-          isPressed: true,
-        }));
+        setIsPressed(true);
       },
       onRelease: () => {
-        setMouseData((prev) => ({
-          ...prev,
-          isPressed: false,
-          isDragging: false,
-        }));
+        setIsPressed(false);
+        setIsDragging(false);
       },
       onDragStart: () => {
-        setMouseData((prev) => ({
-          ...prev,
-          isDragging: true,
-        }));
+        setIsDragging(true);
       },
       onDragEnd: () => {
-        setMouseData((prev) => ({
-          ...prev,
-          isDragging: false,
-        }));
+        setIsDragging(false);
       },
       onWheel: (self) => {
-        setMouseData((prev) => ({
-          ...prev,
-          ...self,
-        }));
+        positionRef.current = {
+          x: self.x,
+          y: self.y,
+          deltaX: self.deltaX,
+          deltaY: self.deltaY,
+          velocityX: self.velocityX,
+          velocityY: self.velocityY,
+          event: self.event instanceof MouseEvent ? self.event : null,
+        };
       },
     });
 
@@ -80,8 +100,14 @@ export const MouseProvider: React.FC<{ children: ReactNode }> = ({
     };
   }, [prefersReducedMotion]);
 
+  // Stable context value
+  const contextValue = React.useMemo(
+    () => ({ getPosition, isPressed, isDragging }),
+    [getPosition, isPressed, isDragging]
+  );
+
   return (
-    <MouseContext.Provider value={mouseData}>{children}</MouseContext.Provider>
+    <MouseContext.Provider value={contextValue}>{children}</MouseContext.Provider>
   );
 };
 

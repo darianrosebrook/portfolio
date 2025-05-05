@@ -1,4 +1,4 @@
-const SvgSprite = () => (
+export const SVGComponentIllo = (
   <svg style={{ display: 'none' }} id="DSSPRITE">
     <symbol viewBox="0 0 216 97" id="pin">
       <rect
@@ -682,4 +682,3 @@ const SvgSprite = () => (
     </symbol>
   </svg>
 );
-export default SvgSprite;

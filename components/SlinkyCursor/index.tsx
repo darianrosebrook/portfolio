@@ -27,10 +27,12 @@ const SlinkyCursor: React.FC = () => {
 
   const pestRef = useRef<HTMLDivElement>(null);
 
+  // Use a ref to always get the latest mouse position
+  const getPosition = mouse.getPosition;
+
   const animate = useCallback(() => {
     if (!pestRef.current) return;
-    const xMouse = mouse.event?.pageX || 0;
-    const yMouse = mouse.event?.pageY || 0;
+    const { x: xMouse, y: yMouse } = getPosition();
     const { x: xPos, y: yPos } = pos.current;
 
     // Calculate deltas and new positions
@@ -62,7 +64,7 @@ const SlinkyCursor: React.FC = () => {
     }
 
     requestAnimationFrame(animate);
-  }, [mouse]);
+  }, [getPosition]);
 
   // Update active state based on mouse.isPressed from context
   useEffect(() => {
@@ -81,6 +83,7 @@ const SlinkyCursor: React.FC = () => {
   useEffect(() => {
     // Start the animation loop once component mounts
     requestAnimationFrame(animate);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [animate]);
 
   return (
