@@ -5,7 +5,6 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import SvgIllustration from './svgIllustration';
 import { useInteraction } from '@/context';
-import type { MouseState } from '@/types/app/interaction';
 
 gsap.registerPlugin(useGSAP);
 
@@ -32,10 +31,7 @@ const Blueprints: React.FC = () => {
       const rows = Array.from(gridRef.current.children) as HTMLElement[];
       const distanceModifier = 0.2;
       // Unified interaction X: mouse if moved, else scroll-based fallback
-      const mousePos = mouse as MouseState & {
-        hasMouseMoved?: boolean;
-      };
-      const { x, hasMouseMoved } = mousePos;
+      const { x, hasMouseMoved } = mouse;
       let interactionX: number;
       if (hasMouseMoved) {
         interactionX = x;

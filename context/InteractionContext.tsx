@@ -25,6 +25,7 @@ const defaultMouse: MouseState = {
   velocityY: 0,
   isPressed: false,
   isDragging: false,
+  hasMouseMoved: false,
 };
 
 const defaultScroll: ScrollState = {
@@ -70,6 +71,7 @@ export const InteractionProvider: React.FC<{ children: ReactNode }> = ({
           y: self.y,
           velocityX: self.velocityX,
           velocityY: self.velocityY,
+          hasMouseMoved: true,
         };
         setMouse({ ...mouseRef.current });
       },
