@@ -7,7 +7,6 @@ import { linearInterpolation } from '@/utils';
 import { useMouseEvent } from '@/context';
 import { ColorSwatch } from './ColorSwatch';
 import { colorPalette } from './ColorPalette';
-import { useGSAP } from '@gsap/react';
 
 const Swatches = () => {
   const colors = React.useMemo(() => colorPalette, []);
@@ -34,33 +33,41 @@ const Swatches = () => {
     );
   }, []);
 
-  // useGSAP for continuous animation
-  useGSAP(() => {
-    const grid = gridRef.current;
-    if (!grid) return;
+  // Animation loop for mouse movement
+  useEffect(() => {
+    let frameId: number;
+    const animate = () => {
+      const grid = gridRef.current;
+      if (!grid) return;
 
-    const rect = grid.getBoundingClientRect();
-    const mouseX = mousePosition.getPosition().x - rect.left - winsize.width;
-    const mousePercent = mouseX / rect.width / 2;
-    const mouseCenter = mouseX / rect.width;
+      const rect = grid.getBoundingClientRect();
+      const mouseX = mousePosition.getPosition().x - rect.left - winsize.width;
+      const mousePercent = mouseX / rect.width / 2;
+      const mouseCenter = mouseX / rect.width;
 
-    const amplitude = 256;
-    const freq = 0.14;
+      const amplitude = 256;
+      const freq = 0.14;
 
-    toX.current.forEach((tweenFn, i) => {
-      const sw = grid.children[i] as HTMLElement;
-      const x = linearInterpolation(
-        0,
-        rect.width - sw.offsetWidth,
-        mousePercent
-      );
-      tweenFn(x);
-    });
+      toX.current.forEach((tweenFn, i) => {
+        const sw = grid.children[i] as HTMLElement;
+        const x = linearInterpolation(
+          0,
+          rect.width - sw.offsetWidth,
+          mousePercent
+        );
+        tweenFn(x);
+      });
 
-    toY.current.forEach((tweenFn, i) => {
-      const y = Math.sin(i * freq + mouseCenter * Math.PI) * amplitude;
-      tweenFn(y);
-    });
+      toY.current.forEach((tweenFn, i) => {
+        const y = Math.sin(i * freq + mouseCenter * Math.PI) * amplitude;
+        tweenFn(y);
+      });
+      frameId = requestAnimationFrame(animate);
+    };
+    animate();
+    return () => {
+      cancelAnimationFrame(frameId);
+    };
   }, [mousePosition, winsize.width, gridRef]);
 
   return (
