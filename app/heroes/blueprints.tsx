@@ -24,10 +24,6 @@ const Blueprints: React.FC = () => {
     let frameId: number;
     const animate = () => {
       if (!gridRef.current) return;
-      if (Math.abs(scroll.y) >= 0.6) {
-        frameId = requestAnimationFrame(animate);
-        return;
-      }
       const rows = Array.from(gridRef.current.children) as HTMLElement[];
       const distanceModifier = 0.2;
       // Unified interaction X: mouse if moved, else scroll-based fallback
