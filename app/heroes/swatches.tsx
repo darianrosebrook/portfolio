@@ -42,7 +42,14 @@ const Swatches = () => {
         return;
       }
       const rect = grid.getBoundingClientRect();
-      const mouseX = mouse.x - rect.left - winsize.width;
+      const { x, hasMouseMoved } = mouse;
+      let interactionX: number;
+      if (hasMouseMoved) {
+        interactionX = x;
+      } else {
+        interactionX = rect.left + rect.width / 2 + (scroll.y * rect.width) / 2;
+      }
+      const mouseX = interactionX - rect.left - winsize.width;
       const mousePercent = mouseX / rect.width / 2;
       const mouseCenter = mouseX / rect.width;
 

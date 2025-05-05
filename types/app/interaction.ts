@@ -7,6 +7,7 @@ export interface MouseState {
   velocityY: number;
   isPressed: boolean;
   isDragging: boolean;
+  hasMouseMoved?: boolean;
 }
 
 export interface ScrollState {
