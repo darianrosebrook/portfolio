@@ -23,15 +23,13 @@ const Swatches = () => {
   const winsize = useWindowSize();
   const mousePosition = useMouseEvent();
 
-  // Extracted update function to set swatch positions
+  // Refactored: Extract update logic
   const updateSwatchPositions = React.useCallback(() => {
     const grid = gridRef.current;
     if (!grid) return;
 
     const rect = grid.getBoundingClientRect();
-    // Use mouse position if available, otherwise default to center
-    const hasMouse = typeof mousePosition.x === 'number' && !isNaN(mousePosition.x);
-    const mouseX = hasMouse ? mousePosition.x - rect.left - winsize.width : rect.width / 2;
+    const mouseX = mousePosition.x - rect.left - winsize.width;
     const mousePercent = mouseX / rect.width / 2;
     const mouseCenter = mouseX / rect.width;
 
@@ -52,7 +50,7 @@ const Swatches = () => {
       const y = Math.sin(i * freq + mouseCenter * Math.PI) * amplitude;
       tweenFn(y);
     });
-  }, [mousePosition, winsize.width]);
+  }, [mousePosition, winsize.width, linearInterpolation]);
 
   // 1) Once on mount: grab each swatch element and build its quickTo tweens
   useEffect(() => {
@@ -66,11 +64,9 @@ const Swatches = () => {
     toY.current = swatches.map((el) =>
       gsap.quickTo(el, 'y', { duration: 0.5, ease: 'power1.out' })
     );
-
-    // Set initial positions on mount
+    // Call update on mount to set initial positions
     updateSwatchPositions();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [updateSwatchPositions]);
 
   // 2) On mouse or resize changes: schedule one RAF update
   useEffect(() => {
