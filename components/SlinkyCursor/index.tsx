@@ -1,5 +1,5 @@
 'use client';
-import { useMouseEvent } from '@/context'; // Ensure this matches your file structure
+import { useInteraction } from '@/context';
 import React, { useCallback, useEffect, useRef } from 'react';
 import styles from './index.module.scss';
 
@@ -15,7 +15,7 @@ const SlinkyCursor: React.FC = () => {
     laziness: 4,
     stiffness: 2,
   });
-  const mouse = useMouseEvent();
+  const { mouse } = useInteraction();
 
   // Refs for position tracking
   const pos = useRef({ x: 0, y: 0 });
@@ -28,11 +28,11 @@ const SlinkyCursor: React.FC = () => {
   const pestRef = useRef<HTMLDivElement>(null);
 
   // Use a ref to always get the latest mouse position
-  const getPosition = mouse.getPosition;
+  const { x, y } = mouse;
 
   const animate = useCallback(() => {
     if (!pestRef.current) return;
-    const { x: xMouse, y: yMouse } = getPosition();
+    const { x: xMouse, y: yMouse } = { x, y };
     const { x: xPos, y: yPos } = pos.current;
 
     // Calculate deltas and new positions
@@ -64,7 +64,7 @@ const SlinkyCursor: React.FC = () => {
     }
 
     requestAnimationFrame(animate);
-  }, [getPosition]);
+  }, [x, y]);
 
   // Update active state based on mouse.isPressed from context
   useEffect(() => {
@@ -83,7 +83,6 @@ const SlinkyCursor: React.FC = () => {
   useEffect(() => {
     // Start the animation loop once component mounts
     requestAnimationFrame(animate);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [animate]);
 
   return (

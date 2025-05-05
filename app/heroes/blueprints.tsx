@@ -4,15 +4,13 @@ import Styles from './blueprints.module.scss';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import SvgIllustration from './svgIllustration';
-import { useWindowSize } from '../../context/useWindowSize';
-import { useMouseEvent } from '@/context';
-import { useScrollPosition } from '../../context/useScrollPosition';
-import type { MousePosition } from '../../context/MouseEventContext';
+import { useInteraction } from '@/context';
+import type { MouseState } from '@/types/app/interaction';
 
 gsap.registerPlugin(useGSAP);
 
 const Blueprints: React.FC = () => {
-  const winsize = useWindowSize();
+  const { window: winsize, scroll, mouse } = useInteraction();
   const gridRef = useRef<HTMLDivElement>(null);
   const spriteRef = useRef<HTMLDivElement>(null);
 
@@ -21,22 +19,20 @@ const Blueprints: React.FC = () => {
   const middleRowIndex = Math.floor(numRows / 2);
 
   const [svgs, setSvgs] = useState<string[]>([]);
-  const mouse = useMouseEvent();
-  const percentFromMiddle = useScrollPosition(gridRef);
 
   // Animation loop for mouse movement
   useEffect(() => {
     let frameId: number;
     const animate = () => {
       if (!gridRef.current) return;
-      if (Math.abs(percentFromMiddle) >= 0.6) {
+      if (Math.abs(scroll.y) >= 0.6) {
         frameId = requestAnimationFrame(animate);
         return;
       }
       const rows = Array.from(gridRef.current.children) as HTMLElement[];
       const distanceModifier = 0.2;
       // Unified interaction X: mouse if moved, else scroll-based fallback
-      const mousePos = mouse.getPosition() as MousePosition & {
+      const mousePos = mouse as MouseState & {
         hasMouseMoved?: boolean;
       };
       const { x, hasMouseMoved } = mousePos;
@@ -45,8 +41,7 @@ const Blueprints: React.FC = () => {
         interactionX = x;
       } else {
         const rect = gridRef.current.getBoundingClientRect();
-        interactionX =
-          rect.left + rect.width / 2 + (percentFromMiddle * rect.width) / 2;
+        interactionX = rect.left + rect.width / 2 + (scroll.y * rect.width) / 2;
       }
       const normalizedMouseX = (interactionX / winsize.width) * 2 - 1;
       const targetTranslateX = normalizedMouseX * 12 * (winsize.width / 80);
@@ -66,7 +61,7 @@ const Blueprints: React.FC = () => {
     return () => {
       cancelAnimationFrame(frameId);
     };
-  }, [mouse, winsize.width, gridRef, middleRowIndex, percentFromMiddle]);
+  }, [mouse, winsize.width, gridRef, middleRowIndex, scroll.y]);
 
   useEffect(() => {
     const dsSprite = document.getElementById('DSSPRITE') as HTMLDivElement;

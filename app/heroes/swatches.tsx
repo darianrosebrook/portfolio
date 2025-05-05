@@ -1,13 +1,11 @@
 'use client';
 import React, { useEffect, useRef } from 'react';
 import Style from './swatches.module.scss';
-import { useWindowSize } from '../../context/useWindowSize';
+import { useInteraction } from '@/context';
 import { gsap } from 'gsap';
 import { linearInterpolation } from '@/utils';
-import { useMouseEvent } from '@/context';
 import { ColorSwatch } from './ColorSwatch';
 import { colorPalette } from './ColorPalette';
-import { useScrollPosition } from '../../context/useScrollPosition';
 
 const Swatches = () => {
   const colors = React.useMemo(() => colorPalette, []);
@@ -17,9 +15,7 @@ const Swatches = () => {
   const toX = useRef<((x: number) => void)[]>([]);
   const toY = useRef<((y: number) => void)[]>([]);
 
-  const winsize = useWindowSize();
-  const mousePosition = useMouseEvent();
-  const percentFromMiddle = useScrollPosition(gridRef);
+  const { window: winsize, scroll, mouse } = useInteraction();
 
   // 1) Once on mount: grab each swatch element and build its quickTo tweens
   useEffect(() => {
@@ -41,12 +37,12 @@ const Swatches = () => {
     const animate = () => {
       const grid = gridRef.current;
       if (!grid) return;
-      if (Math.abs(percentFromMiddle) >= 0.6) {
+      if (Math.abs(scroll.y) >= 0.6) {
         frameId = requestAnimationFrame(animate);
         return;
       }
       const rect = grid.getBoundingClientRect();
-      const mouseX = mousePosition.getPosition().x - rect.left - winsize.width;
+      const mouseX = mouse.x - rect.left - winsize.width;
       const mousePercent = mouseX / rect.width / 2;
       const mouseCenter = mouseX / rect.width;
 
@@ -73,7 +69,7 @@ const Swatches = () => {
     return () => {
       cancelAnimationFrame(frameId);
     };
-  }, [mousePosition, winsize.width, gridRef, percentFromMiddle]);
+  }, [mouse, winsize.width, gridRef, scroll.y]);
 
   return (
     <div className={`${Style.gridContainer}`}>
