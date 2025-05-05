@@ -29,7 +29,9 @@ const Swatches = () => {
     if (!grid) return;
 
     const rect = grid.getBoundingClientRect();
-    const mouseX = mousePosition.x - rect.left - winsize.width;
+    // Use mouse position if available, otherwise default to center
+    const hasMouse = typeof mousePosition.x === 'number' && !isNaN(mousePosition.x);
+    const mouseX = hasMouse ? mousePosition.x - rect.left - winsize.width : rect.width / 2;
     const mousePercent = mouseX / rect.width / 2;
     const mouseCenter = mouseX / rect.width;
 
