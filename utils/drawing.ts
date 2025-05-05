@@ -445,7 +445,7 @@ function drawMarker(
 // TODO: For anatomy functions, have a list of features that exist with certain glyphs, these will be used to determine if we have a feature that needs to be highlighted.
 // Determine if we need a backwards lookup for glyphs that have certain features.  The size won't matter as much for the list because there's only a few hundred glyphs and a handful of features.
 
-// TODO: Gather list of glyphs 
+// TODO: Gather list of glyphs
 // TODO: Add a list of features
 // TODO: Map the features to the glyphs that have them.
 // TODO: Map the features to the glyphs that have them

@@ -16,8 +16,10 @@ gsap.registerPlugin(Observer);
 
 // Mouse context type
 type MousePosition = {
-  x: number;
-  y: number;
+  x: number; // pageX
+  y: number; // pageY
+  clientX: number; // viewport X
+  clientY: number; // viewport Y
   deltaX: number;
   deltaY: number;
   velocityX: number;
@@ -41,6 +43,8 @@ export const MouseProvider: React.FC<{ children: ReactNode }> = ({
   const positionRef = useRef<MousePosition>({
     x: 0,
     y: 0,
+    clientX: 0,
+    clientY: 0,
     deltaX: 0,
     deltaY: 0,
     velocityX: 0,
@@ -59,14 +63,17 @@ export const MouseProvider: React.FC<{ children: ReactNode }> = ({
       target: window,
       type: 'pointer, wheel, touch, scroll',
       onMove: (self) => {
+        const event = self.event instanceof MouseEvent ? self.event : null;
         positionRef.current = {
-          x: self.x,
-          y: self.y,
+          x: event ? event.pageX : self.x,
+          y: event ? event.pageY : self.y,
+          clientX: event ? event.clientX : 0,
+          clientY: event ? event.clientY : 0,
           deltaX: self.deltaX,
           deltaY: self.deltaY,
           velocityX: self.velocityX,
           velocityY: self.velocityY,
-          event: self.event instanceof MouseEvent ? self.event : null,
+          event,
         };
       },
       onPress: () => {
@@ -83,14 +90,17 @@ export const MouseProvider: React.FC<{ children: ReactNode }> = ({
         setIsDragging(false);
       },
       onWheel: (self) => {
+        const event = self.event instanceof MouseEvent ? self.event : null;
         positionRef.current = {
-          x: self.x,
-          y: self.y,
+          x: event ? event.pageX : self.x,
+          y: event ? event.pageY : self.y,
+          clientX: event ? event.clientX : 0,
+          clientY: event ? event.clientY : 0,
           deltaX: self.deltaX,
           deltaY: self.deltaY,
           velocityX: self.velocityX,
           velocityY: self.velocityY,
-          event: self.event instanceof MouseEvent ? self.event : null,
+          event,
         };
       },
     });
@@ -100,6 +110,29 @@ export const MouseProvider: React.FC<{ children: ReactNode }> = ({
     };
   }, [prefersReducedMotion]);
 
+  // Add scroll/resize listeners to update position
+  useEffect(() => {
+    const updatePositionOnScrollOrResize = () => {
+      const last = positionRef.current;
+      // Only update if we have a last known clientX/clientY
+      if (last.clientX !== undefined && last.clientY !== undefined) {
+        positionRef.current = {
+          ...last,
+          x: last.clientX + window.scrollX,
+          y: last.clientY + window.scrollY,
+        };
+      }
+    };
+    window.addEventListener('scroll', updatePositionOnScrollOrResize, {
+      passive: true,
+    });
+    window.addEventListener('resize', updatePositionOnScrollOrResize);
+    return () => {
+      window.removeEventListener('scroll', updatePositionOnScrollOrResize);
+      window.removeEventListener('resize', updatePositionOnScrollOrResize);
+    };
+  }, []);
+
   // Stable context value
   const contextValue = React.useMemo(
     () => ({ getPosition, isPressed, isDragging }),
@@ -107,7 +140,9 @@ export const MouseProvider: React.FC<{ children: ReactNode }> = ({
   );
 
   return (
-    <MouseContext.Provider value={contextValue}>{children}</MouseContext.Provider>
+    <MouseContext.Provider value={contextValue}>
+      {children}
+    </MouseContext.Provider>
   );
 };
 
