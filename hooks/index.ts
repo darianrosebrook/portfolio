@@ -1,2 +1,2 @@
-export * from './useMousePosition';
-export * from './useReducedMotion';
+// ... existing code ...
+// Remove exports for deleted hooks
