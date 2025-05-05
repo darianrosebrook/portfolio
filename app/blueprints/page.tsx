@@ -1,11 +1,11 @@
 import styles from './page.module.scss';
 import { Top, Middle, Bottom, Props, Faceplate, Table } from './svgs';
 import { Swatches } from '../heroes/swatches';
-import Blueprints from '../heroes/blueprints'; 
+import Blueprints from '../heroes/blueprints';
 import Link from 'next/link';
 const Page: React.FC = () => {
   return (
-    <> 
+    <>
       <section className="content">
         <h1>Design System Blueprints</h1>
         <p>

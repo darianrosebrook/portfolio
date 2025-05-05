@@ -1,1 +1,1 @@
-export * from './SVGSprites'
+export * from './SVGSprites';

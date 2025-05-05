@@ -2,7 +2,7 @@ import Status from '@/components/Status';
 import styles from './page.module.css';
 import Avatar from '@/components/Avatar';
 import Button from '@/components/Button';
-import LogoMaruqee from '@/components/LogoMarquee'; 
+import LogoMaruqee from '@/components/LogoMarquee';
 import Blueprints from './heroes/blueprints';
 import Image from 'next/image';
 export default function Home() {
@@ -35,7 +35,7 @@ export default function Home() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }}
-      /> 
+      />
       <section className={styles.hero}>
         <div className={styles.heroImage}>
           <Blueprints />
