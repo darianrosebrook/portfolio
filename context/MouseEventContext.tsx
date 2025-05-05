@@ -15,7 +15,7 @@ import { useReducedMotion } from './ReducedMotionContext';
 gsap.registerPlugin(Observer);
 
 // Mouse context type
-type MousePosition = {
+export type MousePosition = {
   x: number; // pageX
   y: number; // pageY
   clientX: number; // viewport X

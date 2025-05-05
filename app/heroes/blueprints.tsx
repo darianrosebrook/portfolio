@@ -7,6 +7,7 @@ import SvgIllustration from './svgIllustration';
 import { useWindowSize } from '../../context/useWindowSize';
 import { useMouseEvent } from '@/context';
 import { useScrollPosition } from '../../context/useScrollPosition';
+import type { MousePosition } from '../../context/MouseEventContext';
 
 gsap.registerPlugin(useGSAP);
 
@@ -34,7 +35,20 @@ const Blueprints: React.FC = () => {
       }
       const rows = Array.from(gridRef.current.children) as HTMLElement[];
       const distanceModifier = 0.2;
-      const normalizedMouseX = (mouse.getPosition().x / winsize.width) * 2 - 1;
+      // Unified interaction X: mouse if moved, else scroll-based fallback
+      const mousePos = mouse.getPosition() as MousePosition & {
+        hasMouseMoved?: boolean;
+      };
+      const { x, hasMouseMoved } = mousePos;
+      let interactionX: number;
+      if (hasMouseMoved) {
+        interactionX = x;
+      } else {
+        const rect = gridRef.current.getBoundingClientRect();
+        interactionX =
+          rect.left + rect.width / 2 + (percentFromMiddle * rect.width) / 2;
+      }
+      const normalizedMouseX = (interactionX / winsize.width) * 2 - 1;
       const targetTranslateX = normalizedMouseX * 12 * (winsize.width / 80);
       rows.forEach((row, index) => {
         const distanceFromMiddle = Math.abs(index - middleRowIndex);
