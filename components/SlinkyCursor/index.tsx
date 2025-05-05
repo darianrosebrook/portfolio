@@ -15,7 +15,7 @@ const SlinkyCursor: React.FC = () => {
     laziness: 4,
     stiffness: 2,
   });
-  const { mouse } = useInteraction();
+  const { mouse, scroll } = useInteraction();
 
   // Refs for position tracking
   const pos = useRef({ x: 0, y: 0 });
@@ -29,10 +29,11 @@ const SlinkyCursor: React.FC = () => {
 
   // Use a ref to always get the latest mouse position
   const { x, y } = mouse;
+  const scrollY = scroll?.y ?? 0;
 
   const animate = useCallback(() => {
     if (!pestRef.current) return;
-    const { x: xMouse, y: yMouse } = { x, y };
+    const { x: xMouse, y: yMouse } = { x, y: y + scrollY };
     const { x: xPos, y: yPos } = pos.current;
 
     // Calculate deltas and new positions
@@ -64,7 +65,7 @@ const SlinkyCursor: React.FC = () => {
     }
 
     requestAnimationFrame(animate);
-  }, [x, y]);
+  }, [x, y, scrollY]);
 
   // Update active state based on mouse.isPressed from context
   useEffect(() => {
