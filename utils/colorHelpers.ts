@@ -3,7 +3,22 @@
 //  * This module provides functions for converting between different color spaces
 //  * including RGB, HSL, LAB, LCH, XYZ, HSV, and more.
 //  */
-
+const calculateContrast = (hexcolor: string) => {
+    let r: number, g: number, b: number;
+    if (hexcolor.startsWith('#')) hexcolor = hexcolor.slice(1);
+    if (hexcolor.length === 3) {
+      r = parseInt(hexcolor[0] + hexcolor[0], 16);
+      g = parseInt(hexcolor[1] + hexcolor[1], 16);
+      b = parseInt(hexcolor[2] + hexcolor[2], 16);
+    } else if (hexcolor.length === 6) {
+      r = parseInt(hexcolor.slice(0, 2), 16);
+      g = parseInt(hexcolor.slice(2, 4), 16);
+      b = parseInt(hexcolor.slice(4, 6), 16);
+    } else {
+      throw new Error('Invalid hex color: ' + hexcolor);
+    }
+    return (r * 299 + g * 587 + b * 114) / 1000;
+  };
 // /**
 //  * RGB color space interface
 //  * @interface RGB
@@ -701,3 +716,5 @@
 // }
 
 // // (inverse CAM02 → XYZ → RGB is even more complex)
+
+export { calculateContrast };

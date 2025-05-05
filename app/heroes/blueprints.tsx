@@ -4,7 +4,7 @@ import Styles from './blueprints.module.scss';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import SvgIllustration from './svgIllustration';
-import { useWindowSize } from './useWindowSize';
+import { useWindowSize } from '../../context/useWindowSize';
 import { useMouseEvent } from '@/context';
 
 gsap.registerPlugin(useGSAP);
