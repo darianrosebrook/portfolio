@@ -6,6 +6,9 @@
 }
 
 .tool-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; 
   padding: 1.5rem;
   border-radius: 0.75rem;
   background: var(--color-background-secondary);
@@ -20,9 +23,10 @@
   }
 
   h3 {
-    margin-top: 0;
+    margin-top: 0.5rem;
     margin-bottom: 1rem;
     font-size: 1.5rem;
+    text-align: center;
   }
 
   p {
@@ -31,8 +35,64 @@
   }
 }
 
+.tool-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: 0.75rem;
+  line-height: 1.25;
+  white-space: nowrap;
+
+  &.category {
+    border-color: var(--color-border-info);
+    background-color: var(--color-background-info-subtle);
+    color: var(--color-foreground-onInfoSubtle);
+  }
+
+  &.complexity {
+    border-color: var(--color-border-success);
+    background-color: var(--color-background-success-subtle);
+    color: var(--color-foreground-onSuccessSubtle);
+  }
+
+  &.completed {
+    border-color: var(--color-border-success);
+    background-color: var(--color-background-success-subtle);
+    color: var(--color-foreground-onSuccessSubtle);
+  }
+
+  &.in-progress {
+    border-color: var(--color-border-warning);
+    background-color: var(--color-background-warning-subtle);
+    color: var(--color-foreground-onWarningSubtle);
+  }
+
+  &.planned {
+    border-color: var(--color-border-warning);
+    background-color: var(--color-background-warning-subtle);
+    color: var(--color-foreground-onWarningSubtle);
+  }
+
+  &.deprecated {
+    border-color: var(--color-border-error);
+    background-color: var(--color-background-error-subtle);
+    color: var(--color-foreground-onErrorSubtle);
+  }
+}
+
 @media (width <= 768px) {
   .tool-grid {
     grid-template-columns: 1fr;
   }
-} 
+}
