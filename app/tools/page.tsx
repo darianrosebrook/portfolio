@@ -1,4 +1,3 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { byPrefixAndName } from '@awesome.me/kit-0ba7f5fefb/icons';
 import styles from './page.module.scss';
 
@@ -9,9 +8,6 @@ import styles from './page.module.scss';
  * @returns {JSX.Element}
  */
 const DesignToolsPage = () => {
-  const faCheckCircle = byPrefixAndName['far']['check-circle'];
-  const faTimesCircle = byPrefixAndName['far']['times-circle'];
-
   const tools = [
     {
       icon: byPrefixAndName['far']['sliders-h'],
