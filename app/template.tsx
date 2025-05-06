@@ -19,10 +19,15 @@ const Template: React.FC<TemplateProps> = ({ children, user }) => {
   const handleSelectionChange = useRef(null);
 
   const id = user?.id || null;
+  /**
+   * Top-level navigation pages for the main Navbar.
+   * @type {{ name: string; path: string; admin: boolean }[]}
+   */
   const pages = [
     { name: 'Blueprints', path: 'blueprints', admin: false },
     { name: 'Articles', path: 'articles', admin: false },
     { name: 'Work', path: 'work', admin: false },
+    { name: 'Design Tools', path: 'tools', admin: false },
   ];
   useEffect(() => {
     if (!handleSelectionChange.current) {

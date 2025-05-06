@@ -1,0 +1,38 @@
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.tool-card {
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  background: var(--color-background-secondary);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 8%);
+  transition:
+    transform 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 8px 24px rgb(0 0 0 / 12%);
+    transform: translateY(-4px);
+  }
+
+  h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+  }
+
+  p {
+    margin-bottom: 1.5rem;
+    opacity: 0.85;
+  }
+}
+
+@media (width <= 768px) {
+  .tool-grid {
+    grid-template-columns: 1fr;
+  }
+} 
