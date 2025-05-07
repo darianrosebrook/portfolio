@@ -542,8 +542,8 @@ export const FontInspector: React.FC = () => (
         </details>
       </div>
       <div className={styles.symbolContainer}>
-        {TypographyArticleContent}
         <SymbolGrid />
+        {TypographyArticleContent}
       </div>
     </section>
   </InspectorProvider>
