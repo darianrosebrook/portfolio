@@ -528,17 +528,14 @@ export const FontInspector: React.FC = () => (
         </div>
         <details className={styles.accordion} open>
           <summary>Anatomy Details</summary>
-
-          <div className={styles.controlsContainer}>
-            <AnatomyControls />
-            <p className="caption" style={{ margin: '1rem' }}>
-              Credit where credit is due, this is heavily inspired by Rasmus and
-              their Inter font inspector at{' '}
-              <a href="https://rsms.me/inter/#glyphs">
-                https://rsms.me/inter/#glyphs
-              </a>
-            </p>
-          </div>
+          <AnatomyControls />
+          <p className="caption" style={{ margin: '1rem' }}>
+            Credit where credit is due, this is heavily inspired by Rasmus and
+            their Inter font inspector at{' '}
+            <a href="https://rsms.me/inter/#glyphs">
+              https://rsms.me/inter/#glyphs
+            </a>
+          </p>
         </details>
       </div>
       <div className={styles.symbolContainer}>
