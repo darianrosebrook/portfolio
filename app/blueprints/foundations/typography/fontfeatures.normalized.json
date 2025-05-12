@@ -1,0 +1,1713 @@
+[
+  {
+    "term": "Alternate",
+    "aliases": ["Stylistic Alternate"],
+    "definition": "Designer-supplied substitute glyph; accessed via stylistic set.",
+    "letterforms": [],
+    "otTag": [
+      "salt",
+      "ss01",
+      "ss02",
+      "ss03",
+      "ss04",
+      "ss05",
+      "ss06",
+      "ss07",
+      "ss08",
+      "ss09",
+      "ss10",
+      "ss11",
+      "ss12",
+      "ss13",
+      "ss14",
+      "ss15",
+      "ss16",
+      "ss17",
+      "ss18",
+      "ss19",
+      "ss20"
+    ],
+    "category": ["anatomy"],
+    "sources": ["OpenType spec", "MS Typography"]
+  },
+  {
+    "term": "Ankle",
+    "aliases": [],
+    "definition": "Small curved juncture where a stem meets a leg.",
+    "letterforms": ["R", "k"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Blackwell"]
+  },
+  {
+    "term": "Anti-aliasing",
+    "aliases": [],
+    "definition": "Smoothing the edges of type on screen using semi-transparent pixels.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Monotype"]
+  },
+  {
+    "term": "Antiqua",
+    "aliases": ["Antikva"],
+    "definition": "Serif typefaces designed between 16th–17th century or in that style.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Monotype"]
+  },
+  {
+    "term": "Aperture",
+    "aliases": [],
+    "definition": "Opening between counter and outside space in partially closed glyphs.",
+    "letterforms": ["e", "a", "c"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Bringhurst"]
+  },
+  {
+    "term": "Apex",
+    "aliases": ["Vertex-top"],
+    "definition": "Point where two diagonals meet at the top of a glyph.",
+    "letterforms": ["A", "W"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Type Terminology (Adobe)"]
+  },
+  {
+    "term": "Arc",
+    "aliases": ["Arch"],
+    "definition": "Curved transition stroke joining stems.",
+    "letterforms": ["n", "m", "h", "a"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Blackwell"]
+  },
+  {
+    "term": "Arm",
+    "aliases": [],
+    "definition": "Horizontal or angled stroke free at one or both ends.",
+    "letterforms": ["T", "K", "r"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Adobe Glossary"]
+  },
+  {
+    "term": "Ascender",
+    "aliases": [],
+    "definition": "Portion of lowercase that rises above the x-height.",
+    "letterforms": ["b", "d", "h", "k", "l", "t"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Adobe Glossary"]
+  },
+  {
+    "term": "Axis",
+    "aliases": ["Calligraphic stress"],
+    "definition": "Imaginary line through thinnest parts of a curved stroke; shows thick-to-thin angle.",
+    "letterforms": ["o", "e"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Bringhurst"]
+  },
+  {
+    "term": "Backslant",
+    "aliases": [],
+    "definition": "Letters slanted to the left, opposite of italic.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Monotype"]
+  },
+  {
+    "term": "Ball terminal",
+    "aliases": [],
+    "definition": "Rounded circular stroke ending.",
+    "letterforms": ["a", "c", "f", "j", "r"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Blackwell"]
+  },
+  {
+    "term": "Bar",
+    "aliases": ["horizontal bar"],
+    "definition": "Horizontal stroke that connects or divides forms.",
+    "letterforms": ["H", "t", "4"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Adobe Glossary"]
+  },
+  {
+    "term": "Baseline",
+    "aliases": [],
+    "definition": "Imaginary line on which most letters sit.",
+    "letterforms": ["n", "H"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Adobe Glossary"]
+  },
+  {
+    "term": "Beak",
+    "aliases": ["Beak serif"],
+    "definition": "Sharp triangular serif or stroke ending.",
+    "letterforms": ["T", "E"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Blackwell"]
+  },
+  {
+    "term": "Bearing",
+    "aliases": ["Side bearing"],
+    "definition": "Space between glyph outline and advance box edge.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "Belly",
+    "aliases": [],
+    "definition": "Bulging outward curve that is not fully closed.",
+    "letterforms": ["P", "R"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Type Terminology (Linotype)"]
+  },
+  {
+    "term": "Bilateral serif",
+    "aliases": [],
+    "definition": "Serif extending equally left and right from a stem.",
+    "letterforms": ["I", "H"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Blackwell"]
+  },
+  {
+    "term": "Body",
+    "aliases": ["em-square"],
+    "definition": "Full em box a digital glyph occupies; equals point size.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Typography Deconstructed"]
+  },
+  {
+    "term": "Body height",
+    "aliases": [],
+    "definition": "The full vertical extent of a glyph, including ascenders/descenders.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Wikipedia"]
+  },
+  {
+    "term": "Bounding box",
+    "aliases": ["EM box"],
+    "definition": "Total X and Y dimensions including bearings.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "Bowl",
+    "aliases": [],
+    "definition": "Fully enclosed curved counter.",
+    "letterforms": ["o", "b", "d", "p", "q", "D", "B", "P", "R"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Adobe Glossary"]
+  },
+  {
+    "term": "Bracket",
+    "aliases": [],
+    "definition": "Curved transition between serif and main stroke.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Adobe Glossary"]
+  },
+  {
+    "term": "Cap height",
+    "aliases": [],
+    "definition": "Distance from baseline to flat capital tops.",
+    "letterforms": ["H", "E"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Adobe Glossary"]
+  },
+  {
+    "term": "Caps-to-small-caps",
+    "aliases": [],
+    "definition": "Substitutes capitals with small-capital forms.",
+    "letterforms": [],
+    "otTag": ["c2sc"],
+    "category": ["anatomy"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "Case-sensitive forms",
+    "aliases": [],
+    "definition": "Shifts punctuation & symbols to align with capitals.",
+    "letterforms": [],
+    "otTag": ["case"],
+    "category": ["anatomy"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "Center space",
+    "aliases": ["Optical core"],
+    "definition": "Center of visual mass in a glyph.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["CJK Type Guide (Adobe)"]
+  },
+  {
+    "term": "Character",
+    "aliases": [],
+    "definition": "Any letter, numeral, punctuation, or symbol in a font.",
+    "letterforms": ["A", "1", "!"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Wikipedia"]
+  },
+  {
+    "term": "Condensed",
+    "aliases": [],
+    "definition": "Style with narrower than normal widths.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["FontLab docs"]
+  },
+  {
+    "term": "Connecting stroke",
+    "aliases": [],
+    "definition": "A stroke that joins two parts of a glyph.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["TypeType"]
+  },
+  {
+    "term": "Counter",
+    "aliases": ["Counter-form", "Window"],
+    "definition": "Negative space inside (closed) or partly inside (open) a glyph.",
+    "letterforms": ["b", "d", "o", "p", "q", "a", "e", "n"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Heckdon", "Adobe"]
+  },
+  {
+    "term": "Cross-stroke",
+    "aliases": ["Cross-bar"],
+    "definition": "Short horizontal crossing a single stem.",
+    "letterforms": ["t", "f"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Adobe Glossary"]
+  },
+  {
+    "term": "Crotch",
+    "aliases": [],
+    "definition": "Interior angle where two strokes meet.",
+    "letterforms": ["V", "Y"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Blackwell"]
+  },
+  {
+    "term": "Cursive",
+    "aliases": [],
+    "definition": "Script or handwriting-like type, or a font feature for cursive connection.",
+    "letterforms": [],
+    "otTag": ["curs"],
+    "category": ["anatomy", "opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "Denominator",
+    "aliases": [],
+    "definition": "Numerals used as the bottom part of a fraction.",
+    "letterforms": ["1", "2"],
+    "otTag": ["dnom"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "Descender",
+    "aliases": [],
+    "definition": "Portion that falls below the baseline.",
+    "letterforms": ["p", "q", "y", "g", "j"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Adobe Glossary"]
+  },
+  {
+    "term": "Descender line",
+    "aliases": [],
+    "definition": "Guideline touching bottoms of descenders.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Adobe Glossary"]
+  },
+  {
+    "term": "Diacritic",
+    "aliases": [],
+    "definition": "Marks added to a base letter to change sound or meaning.",
+    "letterforms": ["á", "é", "ç", "ǒ"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Adobe Glossary", "Bringhurst"]
+  },
+  {
+    "term": "Diagonal stress",
+    "aliases": [],
+    "definition": "Stroke contrast where thinnest axis is diagonal.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Bringhurst"]
+  },
+  {
+    "term": "Dingbat",
+    "aliases": [],
+    "definition": "Decorative symbols or ornaments in a font.",
+    "letterforms": [],
+    "otTag": ["ornm"],
+    "category": ["anatomy", "opentype-feature"],
+    "sources": ["Wikipedia"]
+  },
+  {
+    "term": "Display font",
+    "aliases": [],
+    "definition": "Design intended for large point sizes.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Adobe Fonts FAQ"]
+  },
+  {
+    "term": "Downstroke",
+    "aliases": [],
+    "definition": "Descending diagonal stroke.",
+    "letterforms": ["A"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["TypeType"]
+  },
+  {
+    "term": "Drop",
+    "aliases": ["Teardrop terminal"],
+    "definition": "Teardrop-shaped terminal on serif *r* or *a*.",
+    "letterforms": ["r", "a"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["PangramPangram"]
+  },
+  {
+    "term": "Ductus",
+    "aliases": [],
+    "definition": "Formal stroke order or direction underlying the written model.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Scribe Principles"]
+  },
+  {
+    "term": "Ear",
+    "aliases": [],
+    "definition": "Small projecting stroke on double-storey *g* or *r*.",
+    "letterforms": ["g", "r", "f"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Type Anatomy (Adobe)"]
+  },
+  {
+    "term": "Embedding",
+    "aliases": [],
+    "definition": "Including font data in a document for portability.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Monotype"]
+  },
+  {
+    "term": "Expert set",
+    "aliases": [],
+    "definition": "A font with extra glyphs (fractions, small caps, etc.).",
+    "letterforms": [],
+    "otTag": ["expt"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "Eye",
+    "aliases": [],
+    "definition": "Enclosed counter of lowercase *e*.",
+    "letterforms": ["e"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Typedia"]
+  },
+  {
+    "term": "Family",
+    "aliases": [],
+    "definition": "A group of related typefaces.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Monotype"]
+  },
+  {
+    "term": "Finial",
+    "aliases": ["flat", "tapered"],
+    "definition": "Terminal ending that is neither serif nor ball.",
+    "letterforms": ["e", "c"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Blackwell"]
+  },
+  {
+    "term": "Flag",
+    "aliases": [],
+    "definition": "Horizontal stroke atop numeral 5.",
+    "letterforms": ["5"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Blackwell"]
+  },
+  {
+    "term": "Flourish",
+    "aliases": [],
+    "definition": "Ornamental extension or stroke.",
+    "letterforms": [],
+    "otTag": ["swsh"],
+    "category": ["anatomy", "opentype-feature"],
+    "sources": ["Monotype"]
+  },
+  {
+    "term": "Foot",
+    "aliases": [],
+    "definition": "Bottom serif or end of vertical stroke on baseline.",
+    "letterforms": ["E", "L"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Blackwell"]
+  },
+  {
+    "term": "Foot serif",
+    "aliases": [],
+    "definition": "Bottom serif of a vertical stroke.",
+    "letterforms": ["S", "I"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Blackwell"]
+  },
+  {
+    "term": "Foundry",
+    "aliases": [],
+    "definition": "A company that designs/distributes fonts.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Monotype"]
+  },
+  {
+    "term": "Gadzook",
+    "aliases": [],
+    "definition": "Decorative flourish linking letters inside a discretionary ligature.",
+    "letterforms": ["ct", "st"],
+    "otTag": ["dlig"],
+    "category": ["anatomy"],
+    "sources": ["MS Typography"]
+  },
+  {
+    "term": "Glyph",
+    "aliases": [],
+    "definition": "Concrete shape that renders a character codepoint.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Unicode Glossary"]
+  },
+  {
+    "term": "Gravity center",
+    "aliases": ["CJK"],
+    "definition": "Optical centroid that balances CJK glyphs.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Adobe CJK Guide"]
+  },
+  {
+    "term": "Grotesk",
+    "aliases": [],
+    "definition": "Sans-serif classification (German).",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Typedia"]
+  },
+  {
+    "term": "Hairline",
+    "aliases": [],
+    "definition": "Thinnest stroke in glyph or thinnest weight name.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Adobe Glossary"]
+  },
+  {
+    "term": "Head serif",
+    "aliases": [],
+    "definition": "Serif at top of a vertical stroke.",
+    "letterforms": ["I", "H"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Blackwell"]
+  },
+  {
+    "term": "Hinting",
+    "aliases": [],
+    "definition": "Instructions to improve rasterisation at small sizes.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "Hook",
+    "aliases": [],
+    "definition": "Downward-curving terminal.",
+    "letterforms": ["f", "j", "s", "r"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Blackwell"]
+  },
+  {
+    "term": "Hybrid figures",
+    "aliases": [],
+    "definition": "Numerals between lining and oldstyle in form.",
+    "letterforms": ["0-9"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Monotype"]
+  },
+  {
+    "term": "Ink trap",
+    "aliases": [],
+    "definition": "Deliberate notch that avoids ink gain in small sizes.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Monotype"]
+  },
+  {
+    "term": "Inline",
+    "aliases": [],
+    "definition": "A type style with a white line inside the strokes.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Monotype"]
+  },
+  {
+    "term": "Italic",
+    "aliases": [],
+    "definition": "True cursive companion style, not mechanically sloped.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Adobe Glossary"]
+  },
+  {
+    "term": "Joint",
+    "aliases": ["Junction"],
+    "definition": "Point where a secondary stroke meets a stem.",
+    "letterforms": ["k", "v", "w", "y"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Type Anatomy (Adobe)"]
+  },
+  {
+    "term": "Kerning",
+    "aliases": [],
+    "definition": "Pair-specific spacing adjustment.",
+    "letterforms": [],
+    "otTag": ["kern"],
+    "category": ["anatomy"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "Leading",
+    "aliases": ["Line spacing"],
+    "definition": "Baseline-to-baseline vertical distance.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Adobe Glossary"]
+  },
+  {
+    "term": "Leg",
+    "aliases": [],
+    "definition": "Downward diagonal stroke.",
+    "letterforms": ["R", "K", "k"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Adobe Glossary"]
+  },
+  {
+    "term": "Lettering",
+    "aliases": [],
+    "definition": "Hand-drawn letterforms, distinct from type.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Monotype"]
+  },
+  {
+    "term": "Ligature",
+    "aliases": [],
+    "definition": "Single glyph representing two or more joined letters.",
+    "letterforms": ["fi", "fl", "ct", "st"],
+    "otTag": ["liga", "dlig"],
+    "category": ["anatomy"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "Linespacing",
+    "aliases": [],
+    "definition": "Another term for leading; vertical space between lines.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Monotype"]
+  },
+  {
+    "term": "Lining figures",
+    "aliases": [],
+    "definition": "Cap-height numerals.",
+    "letterforms": ["0‒9", "0123456789"],
+    "otTag": ["lnum"],
+    "category": ["anatomy"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "Link",
+    "aliases": ["Neck", "double-storey g"],
+    "definition": "Connector between upper bowl and lower loop.",
+    "letterforms": ["g"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Adobe Glossary"]
+  },
+  {
+    "term": "Loop",
+    "aliases": ["Lobe"],
+    "definition": "Lower closed counter of double-storey g.",
+    "letterforms": ["g"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Adobe Glossary"]
+  },
+  {
+    "term": "Lower bowl",
+    "aliases": [],
+    "definition": "Bottom bowl in two-storey glyphs.",
+    "letterforms": ["g"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": []
+  },
+  {
+    "term": "Master size",
+    "aliases": [],
+    "definition": "The base size from which other sizes are derived.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Monotype"]
+  },
+  {
+    "term": "Mean line",
+    "aliases": ["Midline"],
+    "definition": "Guideline marking the top of x-height.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Oxford DNB"]
+  },
+  {
+    "term": "Metrics",
+    "aliases": [],
+    "definition": "The spacing and sizing data in a font.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "Monospaced",
+    "aliases": ["Fixed-width"],
+    "definition": "Font whose glyphs share identical advance widths.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["W3C CSS Fonts"]
+  },
+  {
+    "term": "Neck",
+    "aliases": ["R", "K"],
+    "definition": "Narrow connection between bowl and leg.",
+    "letterforms": ["R", "K"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": []
+  },
+  {
+    "term": "Oblique",
+    "aliases": [],
+    "definition": "Mechanically sloped Roman (esp. in sans).",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Adobe Glossary"]
+  },
+  {
+    "term": "Old-style figures",
+    "aliases": [],
+    "definition": "Lowercase-like numerals with ascenders/descenders.",
+    "letterforms": ["0‒9", "0123456789"],
+    "otTag": ["onum"],
+    "category": ["anatomy"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "OpenType features",
+    "aliases": [],
+    "definition": "Font instructions that enable alternate glyph behaviour.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "Overhang",
+    "aliases": [],
+    "definition": "Part of a glyph that extends beyond the baseline or cap height.",
+    "letterforms": ["O", "C", "S"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Monotype"]
+  },
+  {
+    "term": "Overshoot",
+    "aliases": [],
+    "definition": "Curves extend beyond flat guides for optical balance.",
+    "letterforms": ["O", "C", "S"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Adobe Glossary"]
+  },
+  {
+    "term": "Petite caps",
+    "aliases": [],
+    "definition": "Small caps that are the height of lowercase letters.",
+    "letterforms": ["A", "B", "C"],
+    "otTag": ["pcap", "c2pc"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "Pro",
+    "aliases": [],
+    "definition": "OpenType Pro fonts with extended language support.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Monotype"]
+  },
+  {
+    "term": "Proportional figures",
+    "aliases": [],
+    "definition": "Variable-width digits for running text.",
+    "letterforms": ["0‒9", "0123456789"],
+    "otTag": ["pnum"],
+    "category": ["anatomy"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "Rasterisation",
+    "aliases": [],
+    "definition": "Conversion of vector outlines to pixel bitmaps.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["FreeType docs"]
+  },
+  {
+    "term": "Roman",
+    "aliases": [],
+    "definition": "Upright (non-italic) style.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Adobe Glossary"]
+  },
+  {
+    "term": "Serif",
+    "aliases": [],
+    "definition": "Small finishing stroke at ends of main strokes.",
+    "letterforms": ["T", "I", "E", "F"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Adobe Glossary"]
+  },
+  {
+    "term": "Shoulder",
+    "aliases": [],
+    "definition": "Curved stroke projecting from a stem.",
+    "letterforms": ["h", "n", "m"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Adobe Glossary"]
+  },
+  {
+    "term": "Side bearing",
+    "aliases": [],
+    "definition": "Left/right space between glyph and its advance width.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": []
+  },
+  {
+    "term": "Single-storey",
+    "aliases": ["Double-storey"],
+    "definition": "Differentiates one-bowl vs. two-bowl a or g.",
+    "letterforms": ["a", "g"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Blackwell"]
+  },
+  {
+    "term": "Skeleton",
+    "aliases": [],
+    "definition": "Imaginary centerline from which a glyph's weight is built.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["TypeCooker"]
+  },
+  {
+    "term": "Slab serif",
+    "aliases": [],
+    "definition": "A type of serif with thick, block-like serifs.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Monotype"]
+  },
+  {
+    "term": "Small caps",
+    "aliases": [],
+    "definition": "Purpose-drawn capitals at x-height.",
+    "letterforms": ["A", "B", "C"],
+    "otTag": ["smcp"],
+    "category": ["anatomy"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "Spine",
+    "aliases": [],
+    "definition": "Central curved stroke of S.",
+    "letterforms": ["S", "s"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Adobe Glossary"]
+  },
+  {
+    "term": "Spur",
+    "aliases": [],
+    "definition": "Short projection off a main stroke (not a serif).",
+    "letterforms": ["G", "b", "a", "c", "e"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Blackwell"]
+  },
+  {
+    "term": "Spurless",
+    "aliases": [],
+    "definition": "A design where curves transition into stems without a spur.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Monotype"]
+  },
+  {
+    "term": "Static fonts",
+    "aliases": [],
+    "definition": "Fonts with little or no width/weight variation.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["TypeType"]
+  },
+  {
+    "term": "Stress contrast",
+    "aliases": ["degree"],
+    "definition": "Ratio between thick and thin strokes.",
+    "letterforms": ["o", "e"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Bringhurst"]
+  },
+  {
+    "term": "Stroke modulation",
+    "aliases": [],
+    "definition": "Pattern of thickness variation along a stroke.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Bringhurst"]
+  },
+  {
+    "term": "Style-linking",
+    "aliases": [],
+    "definition": "Grouping font styles for easy switching in software.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Monotype"]
+  },
+  {
+    "term": "Stylistic set",
+    "aliases": [],
+    "definition": "Designer-defined bundle of alternates.",
+    "letterforms": [],
+    "otTag": [
+      "ss01",
+      "ss02",
+      "ss03",
+      "ss04",
+      "ss05",
+      "ss06",
+      "ss07",
+      "ss08",
+      "ss09",
+      "ss10",
+      "ss11",
+      "ss12",
+      "ss13",
+      "ss14",
+      "ss15",
+      "ss16",
+      "ss17",
+      "ss18",
+      "ss19",
+      "ss20"
+    ],
+    "category": ["anatomy"],
+    "sources": []
+  },
+  {
+    "term": "Subscript",
+    "aliases": [],
+    "definition": "Lowered small numerals / letters.",
+    "letterforms": ["1", "2", "x"],
+    "otTag": ["subs"],
+    "category": ["anatomy"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "Super family",
+    "aliases": ["Type system"],
+    "definition": "A coordinated group of type families.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Monotype"]
+  },
+  {
+    "term": "Superscript",
+    "aliases": [],
+    "definition": "Raised small numerals / letters.",
+    "letterforms": ["1", "2", "x"],
+    "otTag": ["sups"],
+    "category": ["anatomy"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "Swash",
+    "aliases": [],
+    "definition": "Decorative, extended flourish on glyphs.",
+    "letterforms": ["A", "Q", "k", "Q", "R", "k", "h", "f"],
+    "otTag": ["swsh"],
+    "category": ["anatomy"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "Tabular figures",
+    "aliases": [],
+    "definition": "Monospaced digits for tables.",
+    "letterforms": ["0‒9", "0123456789"],
+    "otTag": ["tnum"],
+    "category": ["anatomy"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "Tail",
+    "aliases": [],
+    "definition": "Descending diagonal or curved stroke.",
+    "letterforms": ["Q", "y", "t"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Adobe Glossary"]
+  },
+  {
+    "term": "Taper",
+    "aliases": [],
+    "definition": "Gradual thinning at the end of a stroke.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": []
+  },
+  {
+    "term": "Terminal",
+    "aliases": [],
+    "definition": "Any stroke ending lacking a serif (ball, flat, teardrop, etc.).",
+    "letterforms": ["a", "c", "f", "j", "r"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Adobe Glossary"]
+  },
+  {
+    "term": "Three-quarter caps",
+    "aliases": [],
+    "definition": "Capitals that are 3/4 the height of full caps.",
+    "letterforms": ["A", "B", "C"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Monotype"]
+  },
+  {
+    "term": "Three-quarter figures",
+    "aliases": [],
+    "definition": "Numerals that are 3/4 the height of full figures.",
+    "letterforms": ["0-9"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Monotype"]
+  },
+  {
+    "term": "Tie",
+    "aliases": [],
+    "definition": "Curved connecting stroke in discretionary ligatures.",
+    "letterforms": ["ct", "st"],
+    "otTag": ["dlig"],
+    "category": ["anatomy"],
+    "sources": ["Blackwell"]
+  },
+  {
+    "term": "Tittle",
+    "aliases": [],
+    "definition": "Dot above i or j.",
+    "letterforms": ["i", "j"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Adobe Glossary"]
+  },
+  {
+    "term": "Tracking",
+    "aliases": [],
+    "definition": "Uniform letter-spacing over a text range.",
+    "letterforms": [],
+    "otTag": ["letter-spacing CSS"],
+    "category": ["anatomy"],
+    "sources": ["W3C"]
+  },
+  {
+    "term": "TrueType",
+    "aliases": ["TTF"],
+    "definition": "Outline format using quadratic Béziers; hinting-rich.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["file-format"],
+    "sources": ["Apple TT Spec"]
+  },
+  {
+    "term": "Unicase",
+    "aliases": [],
+    "definition": "Mixed-case design where all letters share one height.",
+    "letterforms": ["Alphabet"],
+    "otTag": ["unic", "unic*"],
+    "category": ["anatomy"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "Upper bowl",
+    "aliases": [],
+    "definition": "Top bowl in two-storey glyphs.",
+    "letterforms": ["B"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": []
+  },
+  {
+    "term": "Uppercase",
+    "aliases": ["Lowercase"],
+    "definition": "Caps and small letters; names from metal-type cases.",
+    "letterforms": ["A", "a"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Typedia"]
+  },
+  {
+    "term": "Upstroke",
+    "aliases": [],
+    "definition": "Ascending diagonal stroke.",
+    "letterforms": ["A"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["TypeType"]
+  },
+  {
+    "term": "Vector",
+    "aliases": [],
+    "definition": "Mathematical description of glyph outlines.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Wikipedia"]
+  },
+  {
+    "term": "Vertex",
+    "aliases": ["bottom"],
+    "definition": "Point where two diagonals meet at bottom.",
+    "letterforms": ["V", "W"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Blackwell"]
+  },
+  {
+    "term": "Visual compensations",
+    "aliases": [],
+    "definition": "Adjustments to glyphs for optical balance.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["TypeType"]
+  },
+  {
+    "term": "Volume",
+    "aliases": [],
+    "definition": "A collection of fonts sold as a unit.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Monotype"]
+  },
+  {
+    "term": "Waist",
+    "aliases": [],
+    "definition": "Narrow middle section of B, E, S.",
+    "letterforms": ["B", "E", "S"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Blackwell"]
+  },
+  {
+    "term": "Weight",
+    "aliases": [],
+    "definition": "Relative darkness of strokes (Thin → Black).",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Adobe Glossary"]
+  },
+  {
+    "term": "White space",
+    "aliases": [],
+    "definition": "Area between and inside glyph strokes or between glyphs.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["CSS Fonts"]
+  },
+  {
+    "term": "Width",
+    "aliases": [],
+    "definition": "The horizontal extent of a glyph.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Monotype"]
+  },
+  {
+    "term": "Window",
+    "aliases": [],
+    "definition": "Large, often rectangular counterform in some sans-serifs.",
+    "letterforms": ["A", "DIN-style a", "Euro-style a"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Heckdon"]
+  },
+  {
+    "term": "WOFF",
+    "aliases": ["WOFF2"],
+    "definition": "Compressed web-font wrapper for OT/TTF data.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["W3C WOFF"]
+  },
+  {
+    "term": "X-height",
+    "aliases": [],
+    "definition": "Height of lowercase x; baseline → mean line.",
+    "letterforms": ["x"],
+    "otTag": [],
+    "category": ["anatomy"],
+    "sources": ["Adobe Glossary"]
+  },
+  {
+    "term": "Zero",
+    "aliases": ["slashed"],
+    "definition": "Alternate zero glyph with diagonal slash.",
+    "letterforms": ["0"],
+    "otTag": ["zero"],
+    "category": ["anatomy"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "aalt",
+    "aliases": [],
+    "definition": "Access All Alternates; presents all alternate forms of a character.",
+    "letterforms": [],
+    "otTag": ["aalt"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "afrc",
+    "aliases": [],
+    "definition": "Alternative Fractions; stacked fraction form.",
+    "letterforms": ["1/2", "3/4"],
+    "otTag": ["afrc"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "c2pc",
+    "aliases": [],
+    "definition": "Capitals to Petite Caps; substitutes capitals with petite caps.",
+    "letterforms": ["A", "B", "C"],
+    "otTag": ["c2pc"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "calt",
+    "aliases": [],
+    "definition": "Contextual Alternates; applies alternates based on context.",
+    "letterforms": [],
+    "otTag": ["calt"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "ccmp",
+    "aliases": [],
+    "definition": "Glyph Composition/Decomposition; ligature or decomposition logic.",
+    "letterforms": [],
+    "otTag": ["ccmp"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "clig",
+    "aliases": [],
+    "definition": "Contextual Ligatures; ligatures based on context.",
+    "letterforms": ["fi", "fl"],
+    "otTag": ["clig"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "cpsp",
+    "aliases": [],
+    "definition": "Capital Spacing; adjusts spacing in all-caps text.",
+    "letterforms": ["A", "B", "C"],
+    "otTag": ["cpsp"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "cswh",
+    "aliases": [],
+    "definition": "Contextual Swash; swash alternates based on context.",
+    "letterforms": [],
+    "otTag": ["cswh"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "cv01–cv99",
+    "aliases": [],
+    "definition": "Character Variants; multiple variants of a single character.",
+    "letterforms": [],
+    "otTag": ["cv01–cv99"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "expt",
+    "aliases": [],
+    "definition": "Expert Forms; typographic alternatives for some scripts.",
+    "letterforms": [],
+    "otTag": ["expt"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "falt",
+    "aliases": [],
+    "definition": "Final Glyph on Line Alternates; alternate for final glyph on a line.",
+    "letterforms": [],
+    "otTag": ["falt"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "fwid",
+    "aliases": [],
+    "definition": "Full Widths; replaces with full-width versions.",
+    "letterforms": ["A", "1", "!"],
+    "otTag": ["fwid"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "hist",
+    "aliases": [],
+    "definition": "Historical Forms; obsolete forms of characters.",
+    "letterforms": [],
+    "otTag": ["hist"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "hlig",
+    "aliases": [],
+    "definition": "Historical Ligatures; obsolete ligatures.",
+    "letterforms": ["ct", "st"],
+    "otTag": ["hlig"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "hwid",
+    "aliases": [],
+    "definition": "Half Widths; replaces with half-width versions.",
+    "letterforms": ["A", "1", "!"],
+    "otTag": ["hwid"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "init",
+    "aliases": [],
+    "definition": "Initial Forms; special form at word start (Arabic, Syriac).",
+    "letterforms": [],
+    "otTag": ["init"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "isol",
+    "aliases": [],
+    "definition": "Isolated Forms; special form outside a word (Arabic, Syriac).",
+    "letterforms": [],
+    "otTag": ["isol"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "ital",
+    "aliases": [],
+    "definition": "Italics; replaces with italic glyph (boolean).",
+    "letterforms": ["A", "a"],
+    "otTag": ["ital"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "jalt",
+    "aliases": [],
+    "definition": "Justification Alternates; alternates for justification.",
+    "letterforms": [],
+    "otTag": ["jalt"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "locl",
+    "aliases": [],
+    "definition": "Localized Forms; preferred form for a script/language.",
+    "letterforms": [],
+    "otTag": ["locl"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "mark",
+    "aliases": [],
+    "definition": "Mark Positioning; fine positioning of marks.",
+    "letterforms": [],
+    "otTag": ["mark"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "med2",
+    "aliases": [],
+    "definition": "Medial Form #2; Syriac.",
+    "letterforms": [],
+    "otTag": ["med2"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "medi",
+    "aliases": [],
+    "definition": "Medial Forms; special form in word middle (Arabic, Syriac).",
+    "letterforms": [],
+    "otTag": ["medi"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "mkmk",
+    "aliases": [],
+    "definition": "Mark-to-mark Positioning; position mark to another mark.",
+    "letterforms": [],
+    "otTag": ["mkmk"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "nalt",
+    "aliases": [],
+    "definition": "Alternate Annotation Forms; circled digits, inverse letters, etc.",
+    "letterforms": [],
+    "otTag": ["nalt"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "numr",
+    "aliases": [],
+    "definition": "Numerators; numerals for the top part of a fraction.",
+    "letterforms": ["1", "2"],
+    "otTag": ["numr"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "ordn",
+    "aliases": [],
+    "definition": "Ordinals; replaces with ordinal forms.",
+    "letterforms": ["1st", "2nd"],
+    "otTag": ["ordn"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "ornm",
+    "aliases": [],
+    "definition": "Ornaments; decorative alternates for bullet, etc.",
+    "letterforms": ["•"],
+    "otTag": ["ornm"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "palt",
+    "aliases": [],
+    "definition": "Proportional Alternates; repositions monospace chars by width.",
+    "letterforms": ["A", "1", "!"],
+    "otTag": ["palt"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "pcap",
+    "aliases": [],
+    "definition": "Petite Caps; replaces lowercase with petite caps.",
+    "letterforms": ["a", "b", "c"],
+    "otTag": ["pcap"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "pkna",
+    "aliases": [],
+    "definition": "Proportional Kana; kana for use with alphabets.",
+    "letterforms": [],
+    "otTag": ["pkna"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "qwid",
+    "aliases": [],
+    "definition": "Quarter Widths; replaces with quarter-width versions.",
+    "letterforms": ["A", "1", "!"],
+    "otTag": ["qwid"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "rand",
+    "aliases": [],
+    "definition": "Randomize; replaces with random forms.",
+    "letterforms": [],
+    "otTag": ["rand"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "rlig",
+    "aliases": [],
+    "definition": "Required Ligatures; ligatures required for correct display.",
+    "letterforms": ["fi", "fl"],
+    "otTag": ["rlig"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "rvrn",
+    "aliases": [],
+    "definition": "Required Variation Alternates; special variants for variable fonts.",
+    "letterforms": [],
+    "otTag": ["rvrn"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "salt",
+    "aliases": [],
+    "definition": "Stylistic Alternates; alternate forms for a character.",
+    "letterforms": [],
+    "otTag": ["salt"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "sinf",
+    "aliases": [],
+    "definition": "Scientific Inferiors; small numerals for formulas.",
+    "letterforms": ["1", "2"],
+    "otTag": ["sinf"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "size",
+    "aliases": [],
+    "definition": "Optical Size; font variant for specific point-size range.",
+    "letterforms": [],
+    "otTag": ["size"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "ss01–ss20",
+    "aliases": [],
+    "definition": "Stylistic Sets 1–20; font-specific alternate sets.",
+    "letterforms": [],
+    "otTag": [
+      "ss01",
+      "ss02",
+      "ss03",
+      "ss04",
+      "ss05",
+      "ss06",
+      "ss07",
+      "ss08",
+      "ss09",
+      "ss10",
+      "ss11",
+      "ss12",
+      "ss13",
+      "ss14",
+      "ss15",
+      "ss16",
+      "ss17",
+      "ss18",
+      "ss19",
+      "ss20"
+    ],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "supr",
+    "aliases": [],
+    "definition": "Superiors; small raised glyphs for footnotes, etc.",
+    "letterforms": ["1", "2"],
+    "otTag": ["supr"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "titl",
+    "aliases": [],
+    "definition": "Titling Alternates; forms suited for large type.",
+    "letterforms": ["A", "B", "C"],
+    "otTag": ["titl"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "unic",
+    "aliases": [],
+    "definition": "Unicase; single case glyphs for upper/lowercase.",
+    "letterforms": ["A", "a"],
+    "otTag": ["unic"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "vert",
+    "aliases": [],
+    "definition": "Vertical Alternates; forms for vertical writing.",
+    "letterforms": [],
+    "otTag": ["vert"],
+    "category": ["opentype-feature"],
+    "sources": ["OpenType spec"]
+  },
+  {
+    "term": "WOFF",
+    "aliases": ["WOFF2"],
+    "definition": "Compressed web-font wrapper for OT/TTF data.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["file-format"],
+    "sources": ["W3C WOFF"]
+  },
+  {
+    "term": "Unicode",
+    "aliases": [],
+    "definition": "Universal character encoding standard.",
+    "letterforms": [],
+    "otTag": [],
+    "category": ["file-format"],
+    "sources": ["Unicode"]
+  }
+]
