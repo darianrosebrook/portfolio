@@ -5,8 +5,8 @@ import { headers } from 'next/headers';
 import { createClient } from '@/utils/supabase/server';
 
 import { byPrefixAndName } from '@awesome.me/kit-0ba7f5fefb/icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
+import Icon from '@/components/Icon';
 
 export default async function PrivateRoute({
   children,
@@ -67,7 +67,7 @@ export default async function PrivateRoute({
               className={`${styles.tab} ${tab.active ? styles.active : ''}`}
             >
               <Link href={tab.url} passHref>
-                <FontAwesomeIcon icon={tab.icon} />
+                <Icon icon={tab.icon} />
                 <span>{tab.name}</span>
               </Link>
             </li>

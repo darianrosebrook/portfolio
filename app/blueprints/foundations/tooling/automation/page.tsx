@@ -1,3 +1,26 @@
+/**
+ * Metadata for the /blueprints/foundations/tooling/automation page.
+ * @type {import('next').Metadata}
+ */
+export const metadata = {
+  title: 'Automation & CI/CD | Darian Rosebrook',
+  description:
+    'Learn how to automate token distribution, theme switching, and documentation updates for scalable, maintainable design systems.',
+  openGraph: {
+    title: 'Automation & CI/CD | Darian Rosebrook',
+    description:
+      'Learn how to automate token distribution, theme switching, and documentation updates for scalable, maintainable design systems.',
+    images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Automation & CI/CD | Darian Rosebrook',
+    description:
+      'Learn how to automate token distribution, theme switching, and documentation updates for scalable, maintainable design systems.',
+    images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
+  },
+};
+
 import styles from './page.module.scss';
 
 const AutomationPage: React.FC = () => {

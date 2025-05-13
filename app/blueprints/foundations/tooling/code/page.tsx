@@ -1,3 +1,26 @@
+/**
+ * Metadata for the /blueprints/foundations/tooling/code page.
+ * @type {import('next').Metadata}
+ */
+export const metadata = {
+  title: 'Code Tooling | Darian Rosebrook',
+  description:
+    'Discover code-side tools like Style Dictionary, Tailwind token syncing, and accessibility linters for robust design system implementation.',
+  openGraph: {
+    title: 'Code Tooling | Darian Rosebrook',
+    description:
+      'Discover code-side tools like Style Dictionary, Tailwind token syncing, and accessibility linters for robust design system implementation.',
+    images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Code Tooling | Darian Rosebrook',
+    description:
+      'Discover code-side tools like Style Dictionary, Tailwind token syncing, and accessibility linters for robust design system implementation.',
+    images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
+  },
+};
+
 import styles from './page.module.scss';
 
 const CodeToolingPage: React.FC = () => {

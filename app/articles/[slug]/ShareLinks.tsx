@@ -2,8 +2,8 @@
 import { Article } from '@/types';
 import styles from './styles.module.css';
 import Button from '@/components/Button';
+import Icon from '@/components/Icon';
 import { byPrefixAndName } from '@awesome.me/kit-0ba7f5fefb/icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function ShareLinks({
   url,
@@ -38,7 +38,7 @@ export default function ShareLinks({
             onClick={handleCopy}
             title="Copy to clipboard"
           >
-            <FontAwesomeIcon icon={faLink} />
+            <Icon icon={faLink} />
           </Button>
         </li>
         <li>
@@ -49,7 +49,7 @@ export default function ShareLinks({
             href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(article.headline)}&url=${encodeURIComponent(url)}`}
             size="medium"
           >
-            <FontAwesomeIcon icon={faTwitter} />
+            <Icon icon={faTwitter} />
           </Button>
         </li>
         <li>
@@ -60,7 +60,7 @@ export default function ShareLinks({
             href={`https://www.facebook.com/sharer.php?u=${encodeURIComponent(url)}`}
             size="medium"
           >
-            <FontAwesomeIcon icon={faFacebook} />
+            <Icon icon={faFacebook} />
           </Button>
         </li>
         <li>
@@ -70,7 +70,7 @@ export default function ShareLinks({
             href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(url)}&title=${encodeURIComponent(article.headline)}`}
             title="Share on LinkedIn"
           >
-            <FontAwesomeIcon icon={faLinkedin} />
+            <Icon icon={faLinkedin} />
           </Button>
         </li>
       </ul>

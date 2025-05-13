@@ -1,5 +1,28 @@
 import styles from './page.module.scss';
 
+/**
+ * Metadata for the /blueprints/foundations/accessibility/tokens page.
+ * @type {import('next').Metadata}
+ */
+export const metadata = {
+  title: 'Token-Level Accessibility | Darian Rosebrook',
+  description:
+    'Learn how to create design tokens that support accessibility for color contrast, motion, spacing, and focus states in design systems.',
+  openGraph: {
+    title: 'Token-Level Accessibility | Darian Rosebrook',
+    description:
+      'Learn how to create design tokens that support accessibility for color contrast, motion, spacing, and focus states in design systems.',
+    images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Token-Level Accessibility | Darian Rosebrook',
+    description:
+      'Learn how to create design tokens that support accessibility for color contrast, motion, spacing, and focus states in design systems.',
+    images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
+  },
+};
+
 const AccessibilityTokensPage: React.FC = () => {
   return (
     <section className="content">

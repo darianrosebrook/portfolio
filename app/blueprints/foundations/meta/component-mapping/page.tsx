@@ -1,3 +1,26 @@
+/**
+ * Metadata for the /blueprints/foundations/meta/component-mapping page.
+ * @type {import('next').Metadata}
+ */
+export const metadata = {
+  title: 'Component Mapping | Darian Rosebrook',
+  description:
+    'Learn strategies for mapping design tokens to component anatomy for clear, maintainable, and scalable design systems.',
+  openGraph: {
+    title: 'Component Mapping | Darian Rosebrook',
+    description:
+      'Learn strategies for mapping design tokens to component anatomy for clear, maintainable, and scalable design systems.',
+    images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Component Mapping | Darian Rosebrook',
+    description:
+      'Learn strategies for mapping design tokens to component anatomy for clear, maintainable, and scalable design systems.',
+    images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
+  },
+};
+
 import styles from './page.module.scss';
 
 const ComponentMappingPage: React.FC = () => {

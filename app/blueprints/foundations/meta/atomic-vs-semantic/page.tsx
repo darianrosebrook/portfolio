@@ -1,3 +1,26 @@
+/**
+ * Metadata for the /blueprints/foundations/meta/atomic-vs-semantic page.
+ * @type {import('next').Metadata}
+ */
+export const metadata = {
+  title: 'Atomic vs Semantic Tokens | Darian Rosebrook',
+  description:
+    'Explore the differences and balance between atomic (raw value) and semantic (purpose-driven) tokens in design systems.',
+  openGraph: {
+    title: 'Atomic vs Semantic Tokens | Darian Rosebrook',
+    description:
+      'Explore the differences and balance between atomic (raw value) and semantic (purpose-driven) tokens in design systems.',
+    images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Atomic vs Semantic Tokens | Darian Rosebrook',
+    description:
+      'Explore the differences and balance between atomic (raw value) and semantic (purpose-driven) tokens in design systems.',
+    images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
+  },
+};
+
 import styles from './page.module.scss';
 
 const AtomicVsSemanticPage: React.FC = () => {
