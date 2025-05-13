@@ -2,6 +2,29 @@ import { byPrefixAndName } from '@awesome.me/kit-0ba7f5fefb/icons';
 import styles from './page.module.scss';
 
 /**
+ * Metadata for the /tools page.
+ * @type {import('next').Metadata}
+ */
+export const metadata = {
+  title: 'Design System Tools | Darian Rosebrook',
+  description:
+    'A showcase of design tools and utilities for design system maintainers, including typography inspectors, contrast evaluators, and more.',
+  openGraph: {
+    title: 'Design System Tools | Darian Rosebrook',
+    description:
+      'A showcase of design tools and utilities for design system maintainers, including typography inspectors, contrast evaluators, and more.',
+    images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Design System Tools | Darian Rosebrook',
+    description:
+      'A showcase of design tools and utilities for design system maintainers, including typography inspectors, contrast evaluators, and more.',
+    images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
+  },
+};
+
+/**
  * Design Tools landing page.
  *
  * This page showcases various design tools created, planned, or uniquely positioned to be built for design system maintainers.

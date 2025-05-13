@@ -1,3 +1,29 @@
+/**
+ * Metadata for the main page (Home).
+ * Provides SEO, Open Graph, and Twitter card information for the homepage.
+ * @type {import('next').Metadata}
+ */
+export const metadata = {
+  title:
+    'Darian Rosebrook: Staff Design Technologist | Design Systems, Portland Oregon',
+  description:
+    "Hey! I'm Darian Rosebrook 👋🏼 I am a staff design technologist in the Portland, Oregon area. I make design systems, custom design tooling, Figma plugins, and design ops stuff for product teams.",
+  openGraph: {
+    title:
+      'Darian Rosebrook: Staff Design Technologist | Design Systems, Portland Oregon',
+    description:
+      "Hey! I'm Darian Rosebrook 👋🏼 I am a staff design technologist in the Portland, Oregon area. I make design systems, custom design tooling, Figma plugins, and design ops stuff for product teams.",
+    images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title:
+      'Darian Rosebrook: Staff Design Technologist | Design Systems, Portland Oregon',
+    description:
+      "Hey! I'm Darian Rosebrook 👋🏼 I am a staff design technologist in the Portland, Oregon area. I make design systems, custom design tooling, Figma plugins, and design ops stuff for product teams.",
+    images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
+  },
+};
 import Status from '@/components/Status';
 import styles from './page.module.css';
 import Avatar from '@/components/Avatar';
@@ -5,22 +31,36 @@ import Button from '@/components/Button';
 import LogoMaruqee from '@/components/LogoMarquee';
 import Blueprints from './heroes/blueprints';
 import Image from 'next/image';
+
 export default function Home() {
   const ldJson = {
     '@context': 'https://schema.org',
     '@type': 'Person',
+    name: 'Darian Rosebrook',
+    url: 'https://darianrosebrook.com/',
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': 'https://darianrosebrook.com/',
     },
-    name: 'Darian Rosebrook',
     image: 'https://darianrosebrook.com/darianrosebrook.jpg',
-    jobTitle: 'Product Designer, Design Systems',
+    jobTitle: 'Staff Design Technologist, Design Systems',
+    description:
+      'Staff Design Technologist and Design Systems Architect focused on scalable UI component libraries, accessibility, and cross-platform tooling for web, iOS, and Android.',
     worksFor: {
       '@type': 'Organization',
       name: 'Paths.design',
+      url: 'https://paths.design',
     },
-    url: 'https://darianrosebrook.com/',
+    knowsAbout: [
+      'Design Systems',
+      'Component Libraries',
+      'Design Tokens',
+      'Accessibility',
+      'UX Engineering',
+      'Cross-platform Design',
+      'Radix UI',
+      'Figma Plugins',
+    ],
     sameAs: [
       'https://twitter.com/darianrosebrook',
       'https://www.linkedin.com/in/darianrosebrook/',
@@ -28,6 +68,8 @@ export default function Home() {
       'https://www.instagram.com/darianrosebrook/',
       'https://www.youtube.com/@darian.rosebrook',
       'https://read.compassofdesign.com/@darianrosebrook',
+      'https://darianrosebrook.com/docs/design-system',
+      'https://github.com/darianrosebrook/component-blueprints',
     ],
   };
   return (
@@ -69,7 +111,7 @@ export default function Home() {
         </div>
         <div className="content">
           <h2 className="light">Darian Rosebrook</h2>
-          <h3 className="light secondary">Product Designer</h3>
+          <h3 className="light secondary">Staff Design Technologist</h3>
           <div className="avatarFlag">
             <Avatar
               src="/darian-square.jpg"

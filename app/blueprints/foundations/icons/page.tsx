@@ -1,5 +1,28 @@
 import styles from './page.module.scss';
 
+/**
+ * Metadata for the /blueprints/foundations/icons page.
+ * @type {import('next').Metadata}
+ */
+export const metadata = {
+  title: 'Icon Foundations | Darian Rosebrook',
+  description:
+    'Learn about icon system design, sizing, accessibility, and best practices for scalable, consistent digital products.',
+  openGraph: {
+    title: 'Icon Foundations | Darian Rosebrook',
+    description:
+      'Learn about icon system design, sizing, accessibility, and best practices for scalable, consistent digital products.',
+    images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Icon Foundations | Darian Rosebrook',
+    description:
+      'Learn about icon system design, sizing, accessibility, and best practices for scalable, consistent digital products.',
+    images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
+  },
+};
+
 const IconsPage: React.FC = () => {
   return (
     <section className="content">

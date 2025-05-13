@@ -1,5 +1,28 @@
 import styles from './page.module.scss';
 
+/**
+ * Metadata for the /blueprints/foundations/layout page.
+ * @type {import('next').Metadata}
+ */
+export const metadata = {
+  title: 'Layout Foundations | Darian Rosebrook',
+  description:
+    'Master responsive design, grid systems, and container strategies for consistent, scalable layouts in design systems.',
+  openGraph: {
+    title: 'Layout Foundations | Darian Rosebrook',
+    description:
+      'Master responsive design, grid systems, and container strategies for consistent, scalable layouts in design systems.',
+    images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Layout Foundations | Darian Rosebrook',
+    description:
+      'Master responsive design, grid systems, and container strategies for consistent, scalable layouts in design systems.',
+    images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
+  },
+};
+
 const LayoutPage: React.FC = () => {
   return (
     <section className="content">

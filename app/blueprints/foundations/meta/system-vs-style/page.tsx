@@ -1,3 +1,26 @@
+/**
+ * Metadata for the /blueprints/foundations/meta/system-vs-style page.
+ * @type {import('next').Metadata}
+ */
+export const metadata = {
+  title: 'System vs Style | Darian Rosebrook',
+  description:
+    'Learn how to balance foundational system logic with brand style layers for scalable, unique design systems.',
+  openGraph: {
+    title: 'System vs Style | Darian Rosebrook',
+    description:
+      'Learn how to balance foundational system logic with brand style layers for scalable, unique design systems.',
+    images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'System vs Style | Darian Rosebrook',
+    description:
+      'Learn how to balance foundational system logic with brand style layers for scalable, unique design systems.',
+    images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
+  },
+};
+
 import styles from './page.module.scss';
 
 const SystemVsStylePage: React.FC = () => {

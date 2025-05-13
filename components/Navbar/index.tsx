@@ -9,7 +9,7 @@ import { useReducedMotion } from '@/context';
 import Popover from '../Popover/Popover';
 import Button from '../Button';
 import { byPrefixAndName } from '@awesome.me/kit-0ba7f5fefb/icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Icon from '@/components/Icon';
 import ToggleSwitch from '../ToggleSwitch';
 
 const faBars = byPrefixAndName['far']['bars'];
@@ -126,7 +126,7 @@ export default function Navbar({ pages = [] }: NavbarProps) {
             <Popover>
               <Popover.Trigger>
                 <Button variant="tertiary" size="small">
-                  <FontAwesomeIcon icon={faBars} />
+                  <Icon icon={faBars} />
                 </Button>
               </Popover.Trigger>
               <Popover.Content>

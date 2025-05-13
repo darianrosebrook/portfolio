@@ -10,13 +10,11 @@ export default function GlobalError({
   reset: () => void;
 }) {
   return (
-    <html>
-      <body>
-        <h2>Having some trouble loading this content...</h2>
-        <button onClick={() => reset()}>Try again</button>
-        <pre>{error.message}</pre>
-        <Link href="/">Go back home</Link>
-      </body>
-    </html>
+    <section className="content">
+      <h2>Having some trouble loading this content...</h2>
+      <button onClick={() => reset()}>Try again</button>
+      <pre>{error.message}</pre>
+      <Link href="/">Go back home</Link>
+    </section>
   );
 }

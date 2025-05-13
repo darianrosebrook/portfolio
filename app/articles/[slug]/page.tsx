@@ -10,6 +10,7 @@ import Image from '@tiptap/extension-image';
 
 import { generateHTML } from '@tiptap/html';
 import { JSONContent } from '@tiptap/react';
+import { generateLDJson } from '@/utils/ldjson';
 
 import styles from './styles.module.css';
 import ProfileFlag from '@/components/ProfileFlag';
@@ -72,6 +73,14 @@ async function getData(slug) {
   };
 }
 
+/**
+ * Generates dynamic metadata for the article page based on the slug parameter.
+ * Fetches article data and constructs metadata for SEO, Open Graph, and Twitter cards.
+ *
+ * @param {Object} props - The props object containing route parameters.
+ * @param {Object} props.params - The route parameters, including the article slug.
+ * @returns {Promise<import('next').Metadata>} The metadata object for the page.
+ */
 export async function generateMetadata(props: { params: Params }) {
   const params = await props.params;
   const { slug } = params;
@@ -117,53 +126,11 @@ export default async function Page(props: { params: Params }) {
   const { slug } = params;
   const canonical = `https://darianrosebrook.com/articles/${slug}`;
   const article = await getData(slug);
-  const ldJson = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: article.headline,
-    alternativeHeadline: article.alternativeHeadline,
-    description: article.description,
-    datePublished: article.published_at,
-    dateModified: article.modified_at,
-    author: {
-      '@context': 'https://schema.org',
-      '@type': 'Person',
-      mainEntityOfPage: {
-        '@type': 'WebPage',
-        '@id': 'https://darianrosebrook.com/',
-      },
-      name: 'Darian Rosebrook',
-      image: 'https://darianrosebrook.com/darianrosebrook.jpg',
-      jobTitle: 'Product Designer, Design Systems',
-      worksFor: {
-        '@type': 'Organization',
-        name: 'Paths.design',
-      },
-      url: 'https://darianrosebrook.com/',
-      sameAs: [
-        'https://twitter.com/darianrosebrook',
-        'https://www.linkedin.com/in/darianrosebrook/',
-        'https://www.github.com/darianrosebrook',
-        'https://www.instagram.com/darianrosebrook/',
-        'https://www.youtube.com/@darian.rosebrook',
-        'https://read.compassofdesign.com/@darianrosebrook',
-      ],
-    },
-    publisher: {
-      '@context': 'https://schema.org',
-      '@type': 'Organization',
-      name: 'Paths.design',
-      logo: {
-        '@type': 'ImageObject',
-        url: 'https://darianrosebrook.com/darianrosebrook.jpg',
-      },
-    },
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': canonical,
-    },
-    image: article.image,
-  };
+  const ldJson = generateLDJson({
+    article,
+    canonical,
+  });
+
   return (
     <section className="content">
       <article className={styles.articleContent}>

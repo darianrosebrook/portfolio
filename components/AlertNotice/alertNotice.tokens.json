@@ -1,0 +1,59 @@
+{
+  "prefix": "alert",
+  "tokens": {
+    "color": {
+      "background": {
+        "primary": "{color.background.primary}",
+        "info": "{color.background.info}",
+        "success": "{color.background.success}",
+        "warning": "{color.background.warning}",
+        "danger": "{color.background.danger}"
+      },
+      "foreground": {
+        "primary": "{color.foreground.primary}",
+        "info": "{color.foreground.info}",
+        "success": "{color.foreground.success}",
+        "warning": "{color.foreground.warning}",
+        "danger": "{color.foreground.danger}"
+      },
+      "border": {
+        "primary": "{color.border.primary}",
+        "info": "{color.border.info}",
+        "success": "{color.border.success}",
+        "warning": "{color.border.warning}",
+        "danger": "{color.border.danger}"
+      }
+    },
+    "size": {
+      "inline": {
+        "padding": "{size.06}",
+        "radius": "{radius.02}",
+        "iconSize": "{size.06}"
+      },
+      "section": {
+        "padding": "{size.06}",
+        "radius": "{radius.02}",
+        "iconSize": "{size.06}"
+      },
+      "page": {
+        "padding": "{size.06}",
+        "radius": "{radius.02}",
+        "iconSize": "{size.06}"
+      }
+    },
+    "shadow": {
+      "default": "{shadow.02}"
+    },
+    "radius": {
+      "default": "{radius.02}"
+    },
+    "text": {
+      "font": "{font.body.default}",
+      "size": "{size.06}",
+      "weight": "{font.weight.regular}"
+    },
+    "icon": {
+      "size": "{size.06}"
+    }
+  }
+}

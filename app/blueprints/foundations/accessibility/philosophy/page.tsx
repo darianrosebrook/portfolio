@@ -1,5 +1,28 @@
 import styles from './page.module.scss';
 
+/**
+ * Metadata for the /blueprints/foundations/accessibility/philosophy page.
+ * @type {import('next').Metadata}
+ */
+export const metadata = {
+  title: 'Accessibility Philosophy & Practice | Darian Rosebrook',
+  description:
+    'Frame accessibility as a design constraint and mindset that leads to better, more inclusive products and systems.',
+  openGraph: {
+    title: 'Accessibility Philosophy & Practice | Darian Rosebrook',
+    description:
+      'Frame accessibility as a design constraint and mindset that leads to better, more inclusive products and systems.',
+    images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Accessibility Philosophy & Practice | Darian Rosebrook',
+    description:
+      'Frame accessibility as a design constraint and mindset that leads to better, more inclusive products and systems.',
+    images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
+  },
+};
+
 const AccessibilityPhilosophyPage: React.FC = () => {
   return (
     <section className="content">

@@ -1,3 +1,26 @@
+/**
+ * Metadata for the /blueprints/foundations/accessibility/assistive-tech page.
+ * @type {import('next').Metadata}
+ */
+export const metadata = {
+  title: 'Assistive Technology Support | Darian Rosebrook',
+  description:
+    'Best practices for supporting screen readers, keyboard navigation, ARIA, and other assistive technologies in design systems.',
+  openGraph: {
+    title: 'Assistive Technology Support | Darian Rosebrook',
+    description:
+      'Best practices for supporting screen readers, keyboard navigation, ARIA, and other assistive technologies in design systems.',
+    images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Assistive Technology Support | Darian Rosebrook',
+    description:
+      'Best practices for supporting screen readers, keyboard navigation, ARIA, and other assistive technologies in design systems.',
+    images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
+  },
+};
+
 import styles from './page.module.scss';
 
 const AssistiveTechPage: React.FC = () => {

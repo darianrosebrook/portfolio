@@ -1,5 +1,4 @@
 import { Analytics } from '@vercel/analytics/react';
-import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import { ViewTransitions } from 'next-view-transitions';
 import './globals.scss';
@@ -21,11 +20,6 @@ const inter = localFont({
   variable: '--font-inter',
 });
 
-export const metadata: Metadata = {
-  title: 'Darian Rosebrook: Product Designer | Design Systems, Portland Oregon',
-  description:
-    "Hey! I'm Darian Rosebrook 👋🏼 I am a product designer in the Portland, Oregon area. I make design systems, custom design tooling, Figma plugins, and design ops stuff for product teams.",
-};
 export default async function RootLayout({
   children,
 }: Readonly<{

@@ -1,5 +1,28 @@
 import styles from './page.module.scss';
 
+/**
+ * Metadata for the /blueprints/foundations/tooling/design page.
+ * @type {import('next').Metadata}
+ */
+export const metadata = {
+  title: 'Design Tooling | Darian Rosebrook',
+  description:
+    'Explore design-side tools like Token Studio, Figma variables, and plugins for building and maintaining design system foundations.',
+  openGraph: {
+    title: 'Design Tooling | Darian Rosebrook',
+    description:
+      'Explore design-side tools like Token Studio, Figma variables, and plugins for building and maintaining design system foundations.',
+    images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Design Tooling | Darian Rosebrook',
+    description:
+      'Explore design-side tools like Token Studio, Figma variables, and plugins for building and maintaining design system foundations.',
+    images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
+  },
+};
+
 const DesignToolingPage: React.FC = () => {
   return (
     <section className="content">
