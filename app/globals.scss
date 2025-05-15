@@ -356,6 +356,7 @@ main {
   display: flex;
   flex-grow: 1;
   flex-direction: column;
+  overflow-x: hidden;
   width: 100%;
   margin: auto;
   padding-top: 5vh;
