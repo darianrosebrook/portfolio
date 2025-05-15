@@ -30,7 +30,7 @@
   letter-spacing: var(--letter-spacing-tight);
 }
 
-.headingHero h1 span:first-of-type {
+.headingHero h2 span:first-of-type {
   z-index: 1;
   display: inline-block;
   margin-bottom: var(--size-02);
@@ -177,5 +177,30 @@
     .propsTable svg {
       opacity: 0.7;
     }
+  }
+}
+
+.cardsBackdrop {
+  --backdrop-01: hsl(from var(--color-background-primary) h s l / 5%);
+  --backdrop-02: hsl(from var(--color-background-secondary) h s l / 44%);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 340px;
+  min-height: 480px;
+  margin: 0 1rem;
+  padding: 2rem;
+  border-radius: 2rem;
+  background: linear-gradient(
+    135deg,
+    var(--backdrop-01) 0%,
+    var(--backdrop-02) 100%
+  );
+  box-shadow: 0 8px 32px rgb(0 0 0 / 10%);
+  @media screen and (width <= 900px) {
+    width: 100%;
+    min-width: unset;
+    padding: 1rem;
   }
 }
