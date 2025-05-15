@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Style from './swatches.module.scss';
 import { useInteraction } from '@/context';
 import { gsap } from 'gsap';
@@ -17,6 +17,19 @@ const Swatches = () => {
 
   const { window: winsize, scroll, mouse } = useInteraction();
 
+  // track if container is in view, if in view, allow animation
+  const [isInView, setIsInView] = useState(false);
+  useEffect(() => {
+    if (!gridRef.current) return;
+    const observer = new IntersectionObserver((entries) => {
+      setIsInView(
+        entries[0].isIntersecting && entries[0].intersectionRatio > 0.05
+      );
+    });
+    observer.observe(gridRef.current);
+    return () => observer.disconnect();
+  }, [gridRef, scroll]);
+
   // 1) Once on mount: grab each swatch element and build its quickTo tweens
   useEffect(() => {
     const grid = gridRef.current;
@@ -33,6 +46,7 @@ const Swatches = () => {
 
   // Animation loop for mouse movement
   useEffect(() => {
+    if (!isInView) return;
     let frameId: number;
     const animate = () => {
       const grid = gridRef.current;
@@ -72,7 +86,7 @@ const Swatches = () => {
     return () => {
       cancelAnimationFrame(frameId);
     };
-  }, [mouse, winsize.width, gridRef, scroll.y]);
+  }, [mouse, winsize.width, gridRef, scroll.y, isInView]);
 
   return (
     <div className={`${Style.gridContainer}`}>

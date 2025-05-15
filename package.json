@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 3000",
+    "dev": "next dev -p 4040",
     "build": "prettier --check . && stylelint --allow-empty-input \"**/*.{css,scss}\" && next build",
     "start": "next start",
     "lint": "next lint"
@@ -33,6 +33,7 @@
     "eslint-plugin-prettier": "^5.2.3",
     "fontkit": "^2.0.4",
     "gsap": "^3.12.5",
+    "html2canvas": "^1.4.1",
     "next": "^15.3.1",
     "next-view-transitions": "^0.3.4",
     "react": "^18",
@@ -44,6 +45,7 @@
     "@eslint/eslintrc": "^3.3.0",
     "@eslint/js": "^9.22.0",
     "@stylistic/stylelint-plugin": "^3.1.1",
+    "@types/html2canvas": "^0.5.35",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

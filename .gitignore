@@ -39,4 +39,5 @@ next-env.d.ts
 # test files that are named test   
 **/*test*
 
-/plans/
+/plans/ 
+.vscode/

@@ -792,6 +792,55 @@ header + main {
   }
 }
 
+.glossary-list {
+  list-style: none;
+}
+
+.glossary-letter-header {
+  display: flex;
+  justify-content: space-between;
+  height: auto;
+  line-height: 4rem;
+  padding-bottom: var(--size-10);
+
+  a {
+    display: flex;
+    gap: var(--size-04);
+    align-items: center;
+    color: var(--color-foreground-secondary);
+  }
+}
+
+.glossary-letters {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(48px, 1fr));
+  gap: var(--size-03);
+  margin-top: 0;
+  padding-left: 0;
+  list-style: none;
+  font-size: var(--heading-05);
+
+  a {
+    font-weight: var(--font-weight-medium);
+  }
+}
+
+.glossary-item h4 {
+  display: flex;
+  grid-column: span 1;
+  gap: var(--size-05);
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sub-list {
+  margin-top: 0;
+  padding-top: var(--size-10);
+  padding-left: 0;
+  border-top: 1px solid var(--color-border-primary);
+  list-style: none;
+}
+
 @media screen and (width >= 1000px) {
   .gooey > span {
     padding: var(--size-06) var(--size-06);
@@ -817,6 +866,98 @@ header + main {
 
   main .hero {
     align-self: center;
+  }
+
+  .glossary-letters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--size-03);
+  }
+
+  .glossary-letter {
+    display: inline-block;
+    margin-right: var(--size-03);
+    list-style: none;
+    font-weight: var(--font-weight-bold);
+  }
+
+  .content .glossary-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 3fr;
+    gap: var(--size-06);
+    align-items: start;
+    margin: 0 auto;
+  }
+
+  .glossary-list dd {
+    grid-column: span 1;
+    align-self: start;
+    margin-top: 0;
+  }
+
+  .glossary-list .sub-list {
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-column: span 3;
+    gap: var(--size-06);
+    margin-top: 0;
+    padding-left: 0;
+
+    dl {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-column: span 2;
+      gap: var(--size-06);
+      align-items: start;
+
+      .glossary-item {
+        padding: var(--size-03) var(--size-04);
+        border-radius: var(--radius-02);
+        transition: all 0.2s ease;
+
+        &:hover {
+          background: var(--color-background-highlight);
+          color: var(--color-foreground-highlight);
+
+          & + dd {
+            background: var(--color-background-highlight);
+            color: var(--color-foreground-highlight);
+          }
+        }
+
+        &:has(+ dd:hover) {
+          background: var(--color-background-highlight);
+          color: var(--color-foreground-highlight);
+        }
+      }
+
+      dt h4 {
+        display: flex;
+        grid-column: span 1;
+        gap: var(--size-05);
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+  }
+
+  .glossary-letter-header {
+    flex-direction: column;
+    justify-content: flex-start;
+    line-height: 4rem;
+
+    a {
+      opacity: 0.5;
+      transition: opacity 0.2s ease;
+    }
+
+    &:hover a {
+      opacity: 1;
+    }
+
+    &:hover a span {
+      transform: rotate(180deg);
+    }
   }
 
   .experience li {

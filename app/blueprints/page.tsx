@@ -25,11 +25,13 @@ import { Top, Middle, Bottom, Props, Faceplate, Table } from './svgs';
 import { Swatches } from '../heroes/swatches';
 import Blueprints from '../heroes/blueprints';
 import Link from 'next/link';
+import GlossaryCardStack from '../heroes/glossaryCards';
+
 const Page: React.FC = () => {
   return (
     <>
-      <section className="content">
-        <h1>Design System Blueprints</h1>
+      <section className={'content'}>
+        <h2>Design System Blueprints</h2>
         <p>
           Design systems are more than a collection of pre-built components;
           they are the embodiment of deliberate decisions that shape your
@@ -64,6 +66,24 @@ const Page: React.FC = () => {
           design system
         </p>
       </section>
+      <section className={`${styles.hero} `}>
+        <div className={styles.heroImage}>
+          <div className={`${styles.cardsBackdrop} backdropContainer`}>
+            <GlossaryCardStack />
+          </div>
+        </div>
+        <div className={styles.headingHero}>
+          <h2 className="gooey">
+            <span>Glossary</span>
+            <br />
+            <span>
+              <Link href="/blueprints/glossary" className={styles.heroLink}>
+                Design Systems Terminology →
+              </Link>
+            </span>
+          </h2>
+        </div>
+      </section>
       <section className={`${styles.hero} ${styles.tokens}`}>
         <div className={styles.heroImage}>
           <div className="backdropContainer">
@@ -71,7 +91,7 @@ const Page: React.FC = () => {
           </div>
         </div>
         <div className={`${styles.headingHero}`}>
-          <h1 className="gooey">
+          <h2 className="gooey">
             <span>Design Language</span>
             <br />
             <span>
@@ -79,7 +99,7 @@ const Page: React.FC = () => {
                 Design System Building Blocks →
               </Link>
             </span>
-          </h1>
+          </h2>
         </div>
       </section>
       <section className={`${styles.hero} ${styles.tokens}`}>
@@ -89,7 +109,7 @@ const Page: React.FC = () => {
           </div>
         </div>
         <div className={`${styles.headingHero}`}>
-          <h1 className="gooey">
+          <h2 className="gooey">
             <span>UX Principles</span>
             <br />
             <span>
@@ -100,7 +120,7 @@ const Page: React.FC = () => {
                 Interaction Design Patterns →
               </Link>
             </span>
-          </h1>
+          </h2>
         </div>
       </section>
       <section className={`${styles.hero}`}>
@@ -119,7 +139,7 @@ const Page: React.FC = () => {
           </div>
         </div>
         <div className={`${styles.headingHero}`}>
-          <h1 className="gooey">
+          <h2 className="gooey">
             <span>Authoring Blueprints</span>
             <br />
             <span>
@@ -130,7 +150,7 @@ const Page: React.FC = () => {
                 Component Standards →
               </Link>
             </span>
-          </h1>
+          </h2>
         </div>
       </section>
     </>
