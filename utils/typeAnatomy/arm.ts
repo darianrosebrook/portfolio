@@ -46,6 +46,3 @@ export function hasArm(g: Glyph, m: Metrics): boolean {
 function isDrawable(g: Glyph): g is Glyph & { path: { commands: unknown[] } } {
   return !!(g && g.path && g.path.commands && g.bbox);
 }
-
-const foo = 'bar';
-console.log(foo);

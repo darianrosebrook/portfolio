@@ -4,6 +4,7 @@ import { Tiptap } from '@/components/Tiptap';
 import { Article } from '@/types';
 
 import { calculateReadingTime, debounce } from '@/utils';
+import { beforeArticleUpdate } from '@/utils/supabase/article-cleanup';
 
 import ToggleSwitch from '@/components/ToggleSwitch';
 import Link from 'next/link';
@@ -34,10 +35,16 @@ const EditArticle = () => {
     setArticle({ ...article, draft: e.target.checked });
   };
 
-  const pushChanges = (article: Article) => {
+  const pushChanges = async (article: Article) => {
+    // Run image cleanup before saving if we have an article ID
+    if (article.id && article.articleBody) {
+      await beforeArticleUpdate(article.id, article.articleBody);
+    }
+
     // push changes to the server
-    console.log(article);
+    // You would implement your actual save logic here
   };
+
   const handleUpdate = debounce((article: Article) => {
     const updatedArticle = { ...article };
     updatedArticle.headline = getH1FromArticleBody(updatedArticle.articleBody);
@@ -50,9 +57,15 @@ const EditArticle = () => {
         createSlugFromHeadline(updatedArticle.headline)) ||
       null;
     updatedArticle.image = getArticleImage(updatedArticle.articleBody);
-    pushChanges(article);
+    pushChanges(updatedArticle);
   }, 1000); // If the user stops typing for 10 seconds, push the changes to the server
+
   const handlePublish = async () => {
+    // Run image cleanup before publishing
+    if (article.id && article.articleBody) {
+      await beforeArticleUpdate(article.id, article.articleBody);
+    }
+
     // publish the article
     const response = await fetch('/api/publish', {
       method: 'POST',
@@ -61,20 +74,27 @@ const EditArticle = () => {
       },
       body: JSON.stringify(article),
     });
-    console.log(response);
     return response;
   };
 
   const getH1FromArticleBody = (articleBody) => {
+    if (!articleBody?.content) {
+      return null;
+    }
     const h1 = articleBody.content.find(
-      (node) => node.type === 'heading' && node.attrs.level === 1
+      (node) => node.type === 'heading' && node.attrs?.level === 1
     );
-    return h1?.content?.[0]?.text || null;
+    return h1?.content?.[0]?.text ?? null;
   };
+
   const getArticleImage = (articleBody) => {
+    if (!articleBody?.content) {
+      return null;
+    }
     const image = articleBody.content.find((node) => node.type === 'image');
-    return image?.attrs.src || null;
+    return image?.attrs?.src ?? null;
   };
+
   const createSlugFromHeadline = (headline: string) => {
     return headline
       .toLowerCase()

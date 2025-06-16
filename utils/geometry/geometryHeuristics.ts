@@ -117,7 +117,6 @@ export function traceRegion(
     return null;
   }
   // Log the seed point for debugging
-  console.log('[traceRegion] Starting trace from seed:', seed);
   const outline: Point2D[] = [];
   const overshoot = getOvershoot(g);
   for (let a = 0; a < 360; a += step) {
@@ -137,7 +136,6 @@ export function traceRegion(
         break;
       }
       // Log each test point and result for the first few angles
-      // if (a < 20) console.log('[traceRegion] Test pt:', pt, 'inside:', inside);
       if (!inside) {
         break;
       }

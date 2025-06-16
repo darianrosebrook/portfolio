@@ -2,21 +2,31 @@ import { upload } from '@/utils/supabase/upload';
 import Image from '@tiptap/extension-image';
 import { Plugin } from 'prosemirror-state';
 
-export default Image.extend({
+interface ImageExtendedOptions {
+  articleId?: number;
+}
+
+export default Image.extend<ImageExtendedOptions>({
+  addOptions() {
+    return {
+      ...this.parent?.(),
+      articleId: undefined,
+    };
+  },
+
   addProseMirrorPlugins() {
     return [
       new Plugin({
         props: {
           handleDOMEvents: {
             drop(view, event) {
-              console.log('drop event', event);
               const hasFiles =
                 event.dataTransfer &&
                 event.dataTransfer.files &&
                 event.dataTransfer.files.length;
 
               if (!hasFiles) {
-                return;
+                return false;
               }
 
               const images = Array.from(event.dataTransfer.files).filter(
@@ -24,7 +34,7 @@ export default Image.extend({
               );
 
               if (images.length === 0) {
-                return;
+                return false;
               }
 
               event.preventDefault();
@@ -35,13 +45,17 @@ export default Image.extend({
                 top: event.clientY,
               });
 
-              images.forEach((image) => {
-                let { name } = image;
-                if (name === 'image.png') {
-                  name = `${Math.random().toString(36).substring(7)}-${name}`;
-                }
-                const reader = new FileReader();
-                reader.onload = async () => {
+              if (!coordinates) {
+                return false;
+              }
+
+              images.forEach(async (image) => {
+                try {
+                  let { name } = image;
+                  if (name === 'image.png') {
+                    name = `${Math.random().toString(36).substring(7)}-${name}`;
+                  }
+
                   const path = await upload({
                     file: {
                       type: 'image',
@@ -51,7 +65,9 @@ export default Image.extend({
                       },
                     },
                     bucket: 'article-images',
+                    articleId: this.options.articleId,
                   });
+
                   const node = schema.nodes.image.create({
                     src: path,
                   });
@@ -60,9 +76,13 @@ export default Image.extend({
                     node
                   );
                   view.dispatch(transaction);
-                };
-                reader.readAsDataURL(image);
+                } catch (error) {
+                  console.error('Failed to upload image:', error);
+                  // Optionally show user feedback here
+                }
               });
+
+              return true;
             },
             paste(view, event) {
               const hasFiles =
@@ -71,7 +91,7 @@ export default Image.extend({
                 event.clipboardData.files.length;
 
               if (!hasFiles) {
-                return;
+                return false;
               }
 
               const images = Array.from(event.clipboardData.files).filter(
@@ -79,21 +99,20 @@ export default Image.extend({
               );
 
               if (images.length === 0) {
-                return;
+                return false;
               }
 
               event.preventDefault();
 
               const { schema } = view.state;
 
-              images.forEach((image) => {
-                let { name } = image;
-                if (name === 'image.png') {
-                  name = `${Math.random().toString(36).substring(7)}-${name}`;
-                }
-                const reader = new FileReader();
+              images.forEach(async (image) => {
+                try {
+                  let { name } = image;
+                  if (name === 'image.png') {
+                    name = `${Math.random().toString(36).substring(7)}-${name}`;
+                  }
 
-                reader.onload = async () => {
                   const path = await upload({
                     file: {
                       type: 'image',
@@ -103,15 +122,21 @@ export default Image.extend({
                       },
                     },
                     bucket: 'article-images',
+                    articleId: this.options.articleId,
                   });
+
                   const node = schema.nodes.image.create({
                     src: path,
                   });
                   const transaction = view.state.tr.replaceSelectionWith(node);
                   view.dispatch(transaction);
-                };
-                reader.readAsDataURL(image);
+                } catch (error) {
+                  console.error('Failed to upload image:', error);
+                  // Optionally show user feedback here
+                }
               });
+
+              return true;
             },
           },
         },
