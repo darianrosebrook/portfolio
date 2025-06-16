@@ -12,9 +12,19 @@ import Link from 'next/link';
 import styles from './page.module.scss';
 
 const articleDefaults: Article = {
+  id: 0, // Will be set by database on creation
+  index: null,
   alternativeHeadline: '',
   articleSection: '',
-  articleBody: {},
+  articleBody: {
+    type: 'doc',
+    content: [
+      {
+        type: 'paragraph',
+        content: [],
+      },
+    ],
+  },
   author: null,
   created_at: new Date().toISOString(),
   description: '',

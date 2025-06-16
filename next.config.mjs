@@ -16,6 +16,16 @@ const nextConfig = {
         hostname: 'lh3.googleusercontent.com',
         port: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'cdn.bsky.app',
+        port: '',
+      },
+      {
+        protocol: 'https',
+        hostname: 'video.bsky.app',
+        port: '',
+      },
     ],
   },
 };
