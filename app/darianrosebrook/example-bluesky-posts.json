@@ -1,0 +1,299 @@
+{
+  "profile": {
+    "displayName": "Darian Rosebrook",
+    "handle": "darianrosebrook.com",
+    "description": "🧪 Dev & Design for Design Systems \n😈 Chaotic Neutral\n🌯 Loves burritos\n🖥️ darianrosebrook.com",
+    "avatar": "https://cdn.bsky.app/img/avatar/plain/did:plc:ffuh5jnfl5d75nlpr3ce2xb2/bafkreidkdzrdvgp4uhlyoecc2rbsj3jbaslncsj4v4frjmk232ujgnvnfm@jpeg",
+    "banner": "https://cdn.bsky.app/img/banner/plain/did:plc:ffuh5jnfl5d75nlpr3ce2xb2/bafkreigp77hreyivbdwgtsye3jq67h4qplwjwo3w5zcfzalxmcikas4xda@jpeg",
+    "followersCount": 411,
+    "followsCount": 335,
+    "postsCount": 38
+  },
+  "posts": [
+    {
+      "post": {
+        "uri": "at://did:plc:ffuh5jnfl5d75nlpr3ce2xb2/app.bsky.feed.post/3lrdu2p6zr22j",
+        "cid": "bafyreicjltftbmypvq26ze3vvr6chh6mpzo3lfuzd66ror2wj3mvfxen6a",
+        "author": {
+          "did": "did:plc:ffuh5jnfl5d75nlpr3ce2xb2",
+          "handle": "darianrosebrook.com",
+          "displayName": "Darian Rosebrook",
+          "avatar": "https://cdn.bsky.app/img/avatar/plain/did:plc:ffuh5jnfl5d75nlpr3ce2xb2/bafkreidkdzrdvgp4uhlyoecc2rbsj3jbaslncsj4v4frjmk232ujgnvnfm@jpeg",
+          "associated": {
+            "chat": {
+              "allowIncoming": "all"
+            }
+          },
+          "labels": [],
+          "createdAt": "2023-04-17T03:43:26.643Z"
+        },
+        "record": {
+          "$type": "app.bsky.feed.post",
+          "createdAt": "2025-06-11T16:42:56.908Z",
+          "langs": ["en"],
+          "reply": {
+            "parent": {
+              "cid": "bafyreiccszudvsv63wthxnvlxukg3ywtaujwluqoxcazs5zm3sabyza75u",
+              "uri": "at://did:plc:ffuh5jnfl5d75nlpr3ce2xb2/app.bsky.feed.post/3lrdtgepzok2j"
+            },
+            "root": {
+              "cid": "bafyreiccszudvsv63wthxnvlxukg3ywtaujwluqoxcazs5zm3sabyza75u",
+              "uri": "at://did:plc:ffuh5jnfl5d75nlpr3ce2xb2/app.bsky.feed.post/3lrdtgepzok2j"
+            }
+          },
+          "text": "And no, it wasn’t Figma. But it’s a big reason why I keep saying no to meeting with their team.\n\nLike, can I get a kickback for this since it’s now going to be used as a differentiator?\n\nGonna go grumble and eat breakfast"
+        },
+        "replyCount": 0,
+        "repostCount": 0,
+        "likeCount": 0,
+        "quoteCount": 0,
+        "indexedAt": "2025-06-11T16:42:57.246Z",
+        "labels": []
+      },
+      "reply": {
+        "root": {
+          "uri": "at://did:plc:ffuh5jnfl5d75nlpr3ce2xb2/app.bsky.feed.post/3lrdtgepzok2j",
+          "cid": "bafyreiccszudvsv63wthxnvlxukg3ywtaujwluqoxcazs5zm3sabyza75u",
+          "author": {
+            "did": "did:plc:ffuh5jnfl5d75nlpr3ce2xb2",
+            "handle": "darianrosebrook.com",
+            "displayName": "Darian Rosebrook",
+            "avatar": "https://cdn.bsky.app/img/avatar/plain/did:plc:ffuh5jnfl5d75nlpr3ce2xb2/bafkreidkdzrdvgp4uhlyoecc2rbsj3jbaslncsj4v4frjmk232ujgnvnfm@jpeg",
+            "associated": {
+              "chat": {
+                "allowIncoming": "all"
+              }
+            },
+            "labels": [],
+            "createdAt": "2023-04-17T03:43:26.643Z"
+          },
+          "record": {
+            "$type": "app.bsky.feed.post",
+            "createdAt": "2025-06-11T16:31:34.841Z",
+            "langs": ["en"],
+            "text": "lol, I gotta remember to keep my best ideas close to my chest. \n\nWas taking part in a pilot at work and shared how I was making their tool work for me, only to have them tit-for-tat release my workflow as a feature of their tool the next week."
+          },
+          "replyCount": 1,
+          "repostCount": 0,
+          "likeCount": 1,
+          "quoteCount": 0,
+          "indexedAt": "2025-06-11T16:31:35.353Z",
+          "labels": [],
+          "$type": "app.bsky.feed.defs#postView"
+        },
+        "parent": {
+          "uri": "at://did:plc:ffuh5jnfl5d75nlpr3ce2xb2/app.bsky.feed.post/3lrdtgepzok2j",
+          "cid": "bafyreiccszudvsv63wthxnvlxukg3ywtaujwluqoxcazs5zm3sabyza75u",
+          "author": {
+            "did": "did:plc:ffuh5jnfl5d75nlpr3ce2xb2",
+            "handle": "darianrosebrook.com",
+            "displayName": "Darian Rosebrook",
+            "avatar": "https://cdn.bsky.app/img/avatar/plain/did:plc:ffuh5jnfl5d75nlpr3ce2xb2/bafkreidkdzrdvgp4uhlyoecc2rbsj3jbaslncsj4v4frjmk232ujgnvnfm@jpeg",
+            "associated": {
+              "chat": {
+                "allowIncoming": "all"
+              }
+            },
+            "labels": [],
+            "createdAt": "2023-04-17T03:43:26.643Z"
+          },
+          "record": {
+            "$type": "app.bsky.feed.post",
+            "createdAt": "2025-06-11T16:31:34.841Z",
+            "langs": ["en"],
+            "text": "lol, I gotta remember to keep my best ideas close to my chest. \n\nWas taking part in a pilot at work and shared how I was making their tool work for me, only to have them tit-for-tat release my workflow as a feature of their tool the next week."
+          },
+          "replyCount": 1,
+          "repostCount": 0,
+          "likeCount": 1,
+          "quoteCount": 0,
+          "indexedAt": "2025-06-11T16:31:35.353Z",
+          "labels": [],
+          "$type": "app.bsky.feed.defs#postView"
+        }
+      }
+    },
+    {
+      "post": {
+        "uri": "at://did:plc:ffuh5jnfl5d75nlpr3ce2xb2/app.bsky.feed.post/3lrdtgepzok2j",
+        "cid": "bafyreiccszudvsv63wthxnvlxukg3ywtaujwluqoxcazs5zm3sabyza75u",
+        "author": {
+          "did": "did:plc:ffuh5jnfl5d75nlpr3ce2xb2",
+          "handle": "darianrosebrook.com",
+          "displayName": "Darian Rosebrook",
+          "avatar": "https://cdn.bsky.app/img/avatar/plain/did:plc:ffuh5jnfl5d75nlpr3ce2xb2/bafkreidkdzrdvgp4uhlyoecc2rbsj3jbaslncsj4v4frjmk232ujgnvnfm@jpeg",
+          "associated": {
+            "chat": {
+              "allowIncoming": "all"
+            }
+          },
+          "labels": [],
+          "createdAt": "2023-04-17T03:43:26.643Z"
+        },
+        "record": {
+          "$type": "app.bsky.feed.post",
+          "createdAt": "2025-06-11T16:31:34.841Z",
+          "langs": ["en"],
+          "text": "lol, I gotta remember to keep my best ideas close to my chest. \n\nWas taking part in a pilot at work and shared how I was making their tool work for me, only to have them tit-for-tat release my workflow as a feature of their tool the next week."
+        },
+        "replyCount": 1,
+        "repostCount": 0,
+        "likeCount": 1,
+        "quoteCount": 0,
+        "indexedAt": "2025-06-11T16:31:35.353Z",
+        "labels": []
+      }
+    },
+    {
+      "post": {
+        "uri": "at://did:plc:ffuh5jnfl5d75nlpr3ce2xb2/app.bsky.feed.post/3lr2rbxkqvs2o",
+        "cid": "bafyreiau3jwcox3dbulivfzmsjxwhrefqktxhec4prfcsyf4c574rea6hi",
+        "author": {
+          "did": "did:plc:ffuh5jnfl5d75nlpr3ce2xb2",
+          "handle": "darianrosebrook.com",
+          "displayName": "Darian Rosebrook",
+          "avatar": "https://cdn.bsky.app/img/avatar/plain/did:plc:ffuh5jnfl5d75nlpr3ce2xb2/bafkreidkdzrdvgp4uhlyoecc2rbsj3jbaslncsj4v4frjmk232ujgnvnfm@jpeg",
+          "associated": {
+            "chat": {
+              "allowIncoming": "all"
+            }
+          },
+          "labels": [],
+          "createdAt": "2023-04-17T03:43:26.643Z"
+        },
+        "record": {
+          "$type": "app.bsky.feed.post",
+          "createdAt": "2025-06-08T01:59:21.692Z",
+          "langs": ["en"],
+          "text": "So uh, is this civil war 2?"
+        },
+        "replyCount": 0,
+        "repostCount": 0,
+        "likeCount": 3,
+        "quoteCount": 0,
+        "indexedAt": "2025-06-08T01:59:22.351Z",
+        "labels": []
+      }
+    },
+    {
+      "post": {
+        "uri": "at://did:plc:ffuh5jnfl5d75nlpr3ce2xb2/app.bsky.feed.post/3lqajfn5uyc2c",
+        "cid": "bafyreiefwfgkern4m4dfxsbfz57yj77nfjflyoujudb4bcdv6mi5mpbfey",
+        "author": {
+          "did": "did:plc:ffuh5jnfl5d75nlpr3ce2xb2",
+          "handle": "darianrosebrook.com",
+          "displayName": "Darian Rosebrook",
+          "avatar": "https://cdn.bsky.app/img/avatar/plain/did:plc:ffuh5jnfl5d75nlpr3ce2xb2/bafkreidkdzrdvgp4uhlyoecc2rbsj3jbaslncsj4v4frjmk232ujgnvnfm@jpeg",
+          "associated": {
+            "chat": {
+              "allowIncoming": "all"
+            }
+          },
+          "labels": [],
+          "createdAt": "2023-04-17T03:43:26.643Z"
+        },
+        "record": {
+          "$type": "app.bsky.feed.post",
+          "createdAt": "2025-05-28T15:29:01.870Z",
+          "langs": ["en"],
+          "text": "How many zoom meetings does it take for you to finally put on pants for the day?"
+        },
+        "replyCount": 0,
+        "repostCount": 0,
+        "likeCount": 3,
+        "quoteCount": 0,
+        "indexedAt": "2025-05-28T15:29:05.674Z",
+        "labels": []
+      }
+    },
+    {
+      "post": {
+        "uri": "at://did:plc:ffuh5jnfl5d75nlpr3ce2xb2/app.bsky.feed.post/3lpfql6b6o22s",
+        "cid": "bafyreig4kvh2gcyt3d3xmo5lwsur3d7fmiwiiebajir5zrkj6i7pc2ylei",
+        "author": {
+          "did": "did:plc:ffuh5jnfl5d75nlpr3ce2xb2",
+          "handle": "darianrosebrook.com",
+          "displayName": "Darian Rosebrook",
+          "avatar": "https://cdn.bsky.app/img/avatar/plain/did:plc:ffuh5jnfl5d75nlpr3ce2xb2/bafkreidkdzrdvgp4uhlyoecc2rbsj3jbaslncsj4v4frjmk232ujgnvnfm@jpeg",
+          "associated": {
+            "chat": {
+              "allowIncoming": "all"
+            }
+          },
+          "labels": [],
+          "createdAt": "2023-04-17T03:43:26.643Z"
+        },
+        "record": {
+          "$type": "app.bsky.feed.post",
+          "createdAt": "2025-05-17T23:55:30.833Z",
+          "embed": {
+            "$type": "app.bsky.embed.video",
+            "alt": "Going through the various pages of Darian’s portfolio website full of interactive widgets, animations based on scroll interactions like colored cards that move or highlighting the underlying vector path of typefaces",
+            "aspectRatio": {
+              "height": 2092,
+              "width": 2862
+            },
+            "video": {
+              "$type": "blob",
+              "ref": {
+                "$link": "bafkreidsgv243adapp6gnfiqwmhzx4lnwftnqrj4lcjnch2ornrb4rd6ru"
+              },
+              "mimeType": "video/mp4",
+              "size": 12249849
+            }
+          },
+          "langs": ["en"],
+          "text": "I don’t think I’ll ever get bored of making cool websites."
+        },
+        "embed": {
+          "$type": "app.bsky.embed.video#view",
+          "cid": "bafkreidsgv243adapp6gnfiqwmhzx4lnwftnqrj4lcjnch2ornrb4rd6ru",
+          "playlist": "https://video.bsky.app/watch/did%3Aplc%3Affuh5jnfl5d75nlpr3ce2xb2/bafkreidsgv243adapp6gnfiqwmhzx4lnwftnqrj4lcjnch2ornrb4rd6ru/playlist.m3u8",
+          "thumbnail": "https://video.bsky.app/watch/did%3Aplc%3Affuh5jnfl5d75nlpr3ce2xb2/bafkreidsgv243adapp6gnfiqwmhzx4lnwftnqrj4lcjnch2ornrb4rd6ru/thumbnail.jpg",
+          "alt": "Going through the various pages of Darian’s portfolio website full of interactive widgets, animations based on scroll interactions like colored cards that move or highlighting the underlying vector path of typefaces",
+          "aspectRatio": {
+            "height": 2092,
+            "width": 2862
+          }
+        },
+        "replyCount": 2,
+        "repostCount": 0,
+        "likeCount": 11,
+        "quoteCount": 0,
+        "indexedAt": "2025-05-17T23:55:31.952Z",
+        "labels": []
+      }
+    },
+    {
+      "post": {
+        "uri": "at://did:plc:ffuh5jnfl5d75nlpr3ce2xb2/app.bsky.feed.post/3lotwtz5n2s24",
+        "cid": "bafyreib6oks6wfuhvvsuds35qn5czetlam6lzr7niqljd2twq5l56xo2g4",
+        "author": {
+          "did": "did:plc:ffuh5jnfl5d75nlpr3ce2xb2",
+          "handle": "darianrosebrook.com",
+          "displayName": "Darian Rosebrook",
+          "avatar": "https://cdn.bsky.app/img/avatar/plain/did:plc:ffuh5jnfl5d75nlpr3ce2xb2/bafkreidkdzrdvgp4uhlyoecc2rbsj3jbaslncsj4v4frjmk232ujgnvnfm@jpeg",
+          "associated": {
+            "chat": {
+              "allowIncoming": "all"
+            }
+          },
+          "labels": [],
+          "createdAt": "2023-04-17T03:43:26.643Z"
+        },
+        "record": {
+          "$type": "app.bsky.feed.post",
+          "createdAt": "2025-05-10T21:59:54.618Z",
+          "langs": ["en"],
+          "text": "Guess who’s moving back to the Seattle area because they got a job as a design technologist up there!\n\n👆🏼 \nUh, so I got a new job and I’m coming back to Washington finally 😅"
+        },
+        "replyCount": 2,
+        "repostCount": 0,
+        "likeCount": 4,
+        "quoteCount": 0,
+        "indexedAt": "2025-05-10T21:59:54.846Z",
+        "labels": []
+      }
+    }
+  ]
+}

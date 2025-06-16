@@ -1,0 +1,107 @@
+a:has(.post) {
+  text-decoration: none !important;
+}
+
+.post {
+  margin-bottom: var(--size-06);
+  padding: var(--size-06);
+  border: var(--border-weight-thin) solid var(--color-border-light);
+  border-radius: var(--radius-02);
+  background-color: var(--color-background-primary);
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    border-color: var(--color-border-accent);
+    background-color: var(--color-background-secondary);
+  }
+}
+
+.header {
+  display: flex;
+  gap: var(--size-05);
+  align-items: center;
+  margin-bottom: var(--size-05);
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-03);
+
+  & > p,
+  & > p + p {
+    margin: 0;
+    line-height: 1;
+  }
+}
+
+.displayName {
+  margin: 0;
+  color: var(--color-foreground-primary);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--body-02);
+}
+
+.handle {
+  margin: 0;
+  color: var(--color-foreground-secondary);
+  font-size: var(--body-03);
+}
+
+.timestamp {
+  margin-left: auto;
+  color: var(--color-foreground-secondary);
+  font-size: var(--body-03);
+}
+
+.content {
+  margin-bottom: var(--size-05);
+  color: var(--color-foreground-primary);
+  font-size: var(--body-02);
+  line-height: var(--line-height-body);
+  white-space: pre-wrap;
+}
+
+.video,
+.image,
+.audio {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: var(--size-05);
+  border-radius: var(--radius-02);
+}
+
+.footer {
+  display: flex;
+  gap: var(--size-07);
+  color: var(--color-foreground-secondary);
+  font-size: var(--body-03);
+}
+
+.stats {
+  display: flex;
+  gap: var(--size-07);
+}
+
+.stat {
+  display: flex;
+  gap: var(--size-03);
+  align-items: center;
+  padding: var(--size-02) var(--size-03);
+  border: none;
+  background: none;
+  color: var(--color-foreground-secondary);
+  font-size: var(--body-03);
+  cursor: pointer;
+  transition: color 0.2s ease;
+
+  svg {
+    width: var(--size-07);
+    height: var(--size-07);
+  }
+
+  &:hover {
+    color: var(--color-foreground-primary);
+  }
+}

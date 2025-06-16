@@ -15,6 +15,8 @@ export default Image.extend<ImageExtendedOptions>({
   },
 
   addProseMirrorPlugins() {
+    const { articleId } = this.options;
+
     return [
       new Plugin({
         props: {
@@ -65,7 +67,7 @@ export default Image.extend<ImageExtendedOptions>({
                       },
                     },
                     bucket: 'article-images',
-                    articleId: this.options.articleId,
+                    articleId,
                   });
 
                   const node = schema.nodes.image.create({
@@ -122,7 +124,7 @@ export default Image.extend<ImageExtendedOptions>({
                       },
                     },
                     bucket: 'article-images',
-                    articleId: this.options.articleId,
+                    articleId,
                   });
 
                   const node = schema.nodes.image.create({

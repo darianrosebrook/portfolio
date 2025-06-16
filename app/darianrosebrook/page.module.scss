@@ -1,0 +1,113 @@
+.main {
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.profileHeader {
+  margin-bottom: 40px;
+}
+
+.banner {
+  height: 200px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  background-position: center;
+  background-size: cover;
+}
+
+.profileContent {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.avatar {
+  margin-top: -60px;
+  border: 4px solid white;
+  border-radius: 50%;
+}
+
+.profileInfo {
+  flex: 1;
+}
+
+.displayName {
+  margin: 0 0 8px;
+  font-weight: bold;
+  font-size: 32px;
+}
+
+.handle {
+  margin: 0 0 16px;
+  color: #657786;
+  font-size: 18px;
+}
+
+.description {
+  margin: 0 0 16px;
+  line-height: 1.5;
+}
+
+.stats {
+  display: flex;
+  gap: 24px;
+  color: #657786;
+  font-size: 14px;
+}
+
+.postsSection {
+  max-width: 800px;
+  margin-bottom: 24px;
+}
+
+.postsTitle {
+  margin-bottom: 24px;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.noPosts {
+  color: #657786;
+  font-style: italic;
+}
+
+.errorContainer {
+  padding: 20px;
+}
+
+.thread {
+  margin-bottom: var(--size-07);
+}
+
+.postWrapper {
+  position: relative;
+}
+
+.rootPost {
+  // Base styling for root posts
+}
+
+.replyPost {
+  position: relative;
+  margin-top: var(--size-04);
+  margin-left: var(--size-07);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: calc(-1 * var(--size-07));
+    width: var(--size-05);
+    height: 1px;
+    background-color: var(--color-border-light);
+  }
+}
+
+.threadLine {
+  position: absolute;
+  top: calc(-1 * var(--size-04));
+  left: calc(-1 * var(--size-07));
+  width: 1px;
+  height: var(--size-04);
+  background-color: var(--color-border-light);
+}

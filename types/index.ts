@@ -5,3 +5,16 @@ export type Article = Database['public']['Tables']['articles']['Row'];
 export type Profile = Database['public']['Tables']['profiles']['Row'];
 
 export type ArticleBody = JSONContent;
+
+// Bluesky types
+export type {
+  BlueskyProfile,
+  BlueskyAuthor,
+  BlueskyPostRecord,
+  BlueskyPost,
+  BlueskyFeedResponse,
+  BlueskyEmbed,
+  BlueskyVideoEmbed,
+  BlueskyImageEmbed,
+  BlueskyExternalEmbed,
+} from './bluesky';

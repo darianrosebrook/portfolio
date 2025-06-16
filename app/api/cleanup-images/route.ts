@@ -1,12 +1,11 @@
 import { createClient } from '@/utils/supabase/server';
 import { cleanupOrphanedImages } from '@/utils/supabase/upload';
-import { NextRequest } from 'next/server';
 
 /**
  * POST /api/cleanup-images
  * Cleans up orphaned images (images with 0 references)
  */
-export async function POST(req: NextRequest) {
+export async function POST() {
   const supabase = await createClient();
 
   try {
