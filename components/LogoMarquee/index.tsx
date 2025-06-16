@@ -44,7 +44,6 @@ const LogoMarquee: React.FC = () => {
     if (LOGOSPRITE) {
       spriteRef.current = LOGOSPRITE;
       const children = LOGOSPRITE.children;
-      console.log(children);
       const newBoxes = Array.from(children).map((child) => box(child));
       setBoxes(newBoxes);
       setIsBoxesReady(true);

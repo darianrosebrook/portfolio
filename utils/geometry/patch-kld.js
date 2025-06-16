@@ -1,5 +1,4 @@
 // Debug: confirm patch script is loaded
-console.log('[patch-kld] Patch script loaded');
 
 // Use ESM import for svg-intersections
 import sgi from 'svg-intersections';
@@ -33,7 +32,7 @@ function toPoint(obj) {
  * Handles degenerate + prototype-stripped inputs safely
  */
 function safeIntersectBezier2Line(p1, p2, p3, a1, a2) {
-  console.log('[patch-kld] Called with:', { p1, p2, p3, a1, a2 });
+  // console.log('[patch-kld] Called with:', { p1, p2, p3, a1, a2 });
   // normalise all inputs
   p1 = toPoint(p1);
   p2 = toPoint(p2);
@@ -55,15 +54,15 @@ function safeIntersectBezier2Line(p1, p2, p3, a1, a2) {
       console.error('[patch-kld] Stack trace:', new Error().stack);
       return new Intersection(); // Always return Intersection
     }
-    console.log('[patch-kld] Polyline fallback result:', result);
+    // console.log('[patch-kld] Polyline fallback result:', result);
     return result;
   }
 
   // early-exit if the line segment degenerates to a point
   if (a1.x === a2.x && a1.y === a2.y) {
-    console.log(
-      '[patch-kld] Line segment degenerate, returning empty Intersection'
-    );
+    // console.log(
+    //   '[patch-kld] Line segment degenerate, returning empty Intersection'
+    // );
     return new Intersection();
   }
 
@@ -89,7 +88,7 @@ function safeIntersectBezier2Line(p1, p2, p3, a1, a2) {
   cl = a1.x * a2.y - a2.x * a1.y;
 
   const roots = new Polynomial(n.dot(c2), n.dot(c1), n.dot(c0) + cl).getRoots();
-  console.log('[patch-kld] Roots:', roots);
+  // console.log('[patch-kld] Roots:', roots);
   for (const t of roots) {
     if (t < 0 || t > 1) continue;
 
@@ -121,7 +120,7 @@ function safeIntersectBezier2Line(p1, p2, p3, a1, a2) {
       console.error('[patch-kld] Stack trace:', new Error().stack);
       return new Intersection();
     }
-    console.log('[patch-kld] Alt fallback result:', alt);
+    // console.log('[patch-kld] Alt fallback result:', alt);
     return alt;
   }
 
@@ -130,7 +129,7 @@ function safeIntersectBezier2Line(p1, p2, p3, a1, a2) {
     console.error('[patch-kld] Final result is not Intersection:', result);
     console.error('[patch-kld] Stack trace:', new Error().stack);
   } else {
-    console.log('[patch-kld] Returning Intersection:', result);
+    // console.log('[patch-kld] Returning Intersection:', result);
   }
   return result;
 }
@@ -143,16 +142,16 @@ try {
     kld.Intersection &&
     typeof kld.Intersection.intersectBezier2Line === 'function'
   ) {
-    console.log('[patch-kld] Before static patch:', {
-      intersectBezier2Line: kld.Intersection.intersectBezier2Line,
-    });
+    // console.log('[patch-kld] Before static patch:', {
+    //   intersectBezier2Line: kld.Intersection.intersectBezier2Line,
+    // });
     kld.Intersection.intersectBezier2Line = safeIntersectBezier2Line;
-    console.log('[patch-kld] After static patch:', {
-      intersectBezier2Line: kld.Intersection.intersectBezier2Line,
-    });
-    console.log('[patch-kld] Patched static intersectBezier2Line');
+    // console.log('[patch-kld] After static patch:', {
+    //   intersectBezier2Line: kld.Intersection.intersectBezier2Line,
+    // });
+    // console.log('[patch-kld] Patched static intersectBezier2Line');
   } else {
-    console.log('[patch-kld] kld.Intersection.intersectBezier2Line not found');
+    //  console.log('[patch-kld] kld.Intersection.intersectBezier2Line not found');
   }
 } catch (e) {
   console.warn(

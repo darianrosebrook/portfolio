@@ -8,7 +8,7 @@ import {
 } from '@tiptap/react';
 import styles from './tiptap.module.css';
 import StarterKit from '@tiptap/starter-kit';
-import Image from './ImageExtended';
+import ImageExtended from './Extensions/ImageExtended/ImageExtended';
 import Document from '@tiptap/extension-document';
 import Placeholder from '@tiptap/extension-placeholder';
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
@@ -19,7 +19,9 @@ import ts from 'highlight.js/lib/languages/typescript';
 import html from 'highlight.js/lib/languages/xml';
 import { common, createLowlight } from 'lowlight';
 
-import CodeBlockComponent from './CodeBlockComponent';
+import TestContent from './testContent.json';
+
+import CodeBlockComponent from './Extensions/CodeBlockExtended/CodeBlockComponent';
 const lowlight = createLowlight(common);
 
 lowlight.register('html', html);
@@ -40,12 +42,14 @@ const Tiptap = ({
   article: Article;
   handleUpdate?: (article: Article) => void;
 }) => {
-  const content = article?.articleBody as JSONContent | undefined;
+  const content = TestContent as JSONContent | undefined;
   const editor = useEditor({
     content,
     extensions: [
       CharacterCount,
-      Image,
+      ImageExtended.configure({
+        articleId: article?.id,
+      }),
       CustomDocument,
       StarterKit.configure({
         document: false,
@@ -53,7 +57,7 @@ const Tiptap = ({
       Placeholder.configure({
         placeholder: ({ node }) => {
           if (node.type.name === 'heading') {
-            return 'What’s the title?';
+            return "What's the title?";
           }
           return 'Can you add some further context?';
         },

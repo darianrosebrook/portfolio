@@ -3,15 +3,20 @@ import Avatar from '../Avatar';
 import Link from 'next/link';
 import styles from './styles.module.css';
 const ProfileFlag = ({ profile }: { profile: Profile }) => {
+  if (!profile) {
+    return null;
+  }
+  const { full_name, avatar_url, username } = profile;
+  const insert = {
+    name: full_name || 'Error',
+    src: avatar_url || null,
+    username: username || '404',
+  };
   return (
     <div className={styles.profileFlag}>
-      <Link href={`/`}>
-        <Avatar
-          size="medium"
-          name={profile.full_name}
-          src={profile.avatar_url}
-        />
-        <small>{profile.full_name}</small>
+      <Link href={`/${insert.username}`}>
+        <Avatar size="medium" name={insert.name} src={insert.src} />
+        <small>{insert.name}</small>
       </Link>
     </div>
   );

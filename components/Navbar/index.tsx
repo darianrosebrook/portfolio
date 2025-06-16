@@ -94,7 +94,6 @@ export default function Navbar({ pages = [] }: NavbarProps) {
       setSlider(false);
       setTheme(e.matches ? 'light' : 'dark');
       body.classList.remove(theme);
-      console.log(e.matches);
     };
   }, [theme]);
 
