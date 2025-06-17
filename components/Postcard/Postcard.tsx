@@ -94,11 +94,14 @@ const Author: React.FC = () => {
     </div>
   );
 };
-function getRelativeTimeString(date, lang = navigator.language) {
+function getRelativeTimeString(date, lang = 'en-US') {
+  // Use default lang during SSR to avoid navigator issues
+  const browserLang =
+    typeof navigator !== 'undefined' ? navigator.language : lang;
   const timeMs = typeof date === 'number' ? date : date.getTime();
   const deltaSeconds = -Math.round((timeMs - Date.now()) / 1000);
 
-  const rtf = new Intl.RelativeTimeFormat(lang, { numeric: 'auto' });
+  const rtf = new Intl.RelativeTimeFormat(browserLang, { numeric: 'auto' });
 
   if (Math.abs(deltaSeconds) < 60) {
     return rtf.format(-deltaSeconds, 'second');

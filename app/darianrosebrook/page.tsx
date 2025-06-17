@@ -1,24 +1,15 @@
-'use client';
 import Image from 'next/image';
 import styles from './page.module.scss';
-import exampleBlueskyPosts from './example-bluesky-posts.json';
 import Postcard from '@/components/Postcard/Postcard';
 import Avatar from '@/components/Avatar';
 import type {
-  BlueskyPost,
   BlueskyEmbed,
   BlueskyVideoEmbed,
   BlueskyImageEmbed,
   BlueskyExternalEmbed,
 } from '@/types/bluesky';
 import Link from 'next/link';
-
-interface ThreadedPost {
-  post: BlueskyPost['post'];
-  reply?: BlueskyPost['reply'];
-  isReply: boolean;
-  parentUri?: string;
-}
+import { fetchBlueskyData } from '@/utils/bluesky';
 
 const transformEmbed = (
   embed?: BlueskyEmbed
@@ -89,72 +80,31 @@ const transformEmbed = (
   return undefined;
 };
 
-export default function Page() {
+export default async function Page() {
   try {
-    const { profile, posts } = exampleBlueskyPosts;
+    const { profile, threads } = await fetchBlueskyData();
 
-    // Process posts to identify threaded conversations
-    const processedPosts = posts.reduce((acc: ThreadedPost[], feedItem) => {
-      if (!feedItem?.post) return acc;
-
-      const isReply = !!feedItem.post.record.reply;
-      const parentUri = isReply
-        ? feedItem.post.record.reply?.parent?.uri
-        : undefined;
-
-      const threadedPost: ThreadedPost = {
-        post: feedItem.post,
-        reply: feedItem.reply,
-        isReply,
-        parentUri,
-      };
-
-      acc.push(threadedPost);
-      return acc;
-    }, []);
     const description = (
       <>
         <p className={styles.description}>
-          I’m Darian Rosebrook, a Staff Design Technologist with a background
-          that bridges branding, UX, and system-level design engineering across
-          some of the world’s largest product ecosystems. My work focuses on
-          improving the workflows between design and code—developing tooling,
-          scalable design systems, and AI-augmented processes that enhance
-          quality, accessibility, and consistency.
+          I&apos;m Darian Rosebrook, a Staff Design Technologist with a
+          background that bridges branding, UX, and system-level design
+          engineering across some of the world&apos;s largest product
+          ecosystems. My work focuses on improving the workflows between design
+          and code—developing tooling, scalable design systems, and AI-augmented
+          processes that enhance quality, accessibility, and consistency.
         </p>
         <p className={styles.description}>
-          I’ve led high-impact initiatives at companies like Microsoft,
-          Salesforce, Nike, eBay, Verizon, Venmo, and now Qualtrics, where I’m
-          defining how technology, design, and automation converge to elevate
-          product development. I care deeply about aligning internal values with
-          external systems, and my current focus is on building intelligent,
-          inclusive systems that empower cross-functional teams to do their best
-          work.
+          I&apos;ve led high-impact initiatives at companies like Microsoft,
+          Salesforce, Nike, eBay, Verizon, Venmo, and now Qualtrics, where
+          I&apos;m defining how technology, design, and automation converge to
+          elevate product development. I care deeply about aligning internal
+          values with external systems, and my current focus is on building
+          intelligent, inclusive systems that empower cross-functional teams to
+          do their best work.
         </p>
       </>
     );
-    // Separate root posts and replies
-    const rootPosts = processedPosts.filter((item) => !item.isReply);
-    const replies = processedPosts.filter((item) => item.isReply);
-
-    // Build threaded structure
-    const threadsMap = new Map<string, ThreadedPost[]>();
-
-    rootPosts.forEach((rootPost) => {
-      threadsMap.set(rootPost.post.uri, [rootPost]);
-    });
-
-    replies.forEach((reply) => {
-      if (reply.parentUri) {
-        const thread = threadsMap.get(reply.parentUri);
-        if (thread) {
-          thread.push(reply);
-        } else {
-          // If parent not found, treat as root for now
-          threadsMap.set(reply.post.uri, [reply]);
-        }
-      }
-    });
 
     return (
       <div className={styles.main}>
@@ -200,11 +150,11 @@ export default function Page() {
         <section className={styles.postsSection}>
           <h2 className={styles.postsTitle}>Recent Posts</h2>
 
-          {posts.length === 0 ? (
+          {threads.length === 0 ? (
             <p className={styles.noPosts}>No posts found</p>
           ) : (
             <div>
-              {Array.from(threadsMap.values()).map((thread, threadIndex) => (
+              {threads.map((thread, threadIndex) => (
                 <div key={threadIndex} className={styles.thread}>
                   {thread.map((threadedPost, postIndex) => {
                     const { post, isReply } = threadedPost;
