@@ -19,8 +19,6 @@ import ts from 'highlight.js/lib/languages/typescript';
 import html from 'highlight.js/lib/languages/xml';
 import { common, createLowlight } from 'lowlight';
 
-import TestContent from './testContent.json';
-
 import CodeBlockComponent from './Extensions/CodeBlockExtended/CodeBlockComponent';
 const lowlight = createLowlight(common);
 
@@ -42,7 +40,7 @@ const Tiptap = ({
   article: Article;
   handleUpdate?: (article: Article) => void;
 }) => {
-  const content = TestContent as JSONContent | undefined;
+  const content = article.articleBody as JSONContent | undefined;
   const editor = useEditor({
     content,
     extensions: [
