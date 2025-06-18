@@ -80,6 +80,9 @@ const transformEmbed = (
   return undefined;
 };
 
+// Force dynamic rendering since this page needs real-time data from Bluesky API
+export const dynamic = 'force-dynamic';
+
 export default async function Page() {
   try {
     const { profile, threads } = await fetchBlueskyData();
