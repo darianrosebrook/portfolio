@@ -105,11 +105,11 @@ const Author: React.FC = () => {
     </div>
   );
 };
-function getRelativeTimeString(date, lang = navigator.language) {
+function getRelativeTimeString(date: Date | number) {
   const timeMs = typeof date === 'number' ? date : date.getTime();
   const deltaSeconds = -Math.round((timeMs - Date.now()) / 1000);
 
-  const rtf = new Intl.RelativeTimeFormat(lang, { numeric: 'auto' });
+  const rtf = new Intl.RelativeTimeFormat('en-US', { numeric: 'auto' });
 
   if (Math.abs(deltaSeconds) < 60) {
     return rtf.format(-deltaSeconds, 'second');
