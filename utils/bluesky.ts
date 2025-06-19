@@ -34,10 +34,6 @@ export interface BlueskyPost {
       $type: string;
       [key: string]: unknown;
     };
-    reply?: {
-      parent?: { uri: string };
-      root?: { uri: string };
-    };
   };
   embed?: {
     $type: string;
@@ -56,18 +52,8 @@ export interface BlueskyPost {
 }
 
 /**
- * Interface for threaded post structure
- */
-export interface ThreadedPost {
-  post: BlueskyPost;
-  reply?: BlueskyPost['reply'];
-  isReply: boolean;
-  parentUri?: string;
-}
-
-/**
  * Fetches Bluesky profile and feed data for a given handle
- * @returns Promise containing profile and processed threaded posts
+ * @returns Promise containing profile and feed data
  */
 export async function fetchBlueskyData() {
   if (!agent) {
@@ -80,54 +66,36 @@ export async function fetchBlueskyData() {
   ]);
 
   const profile = profileResponse?.data;
-  const feedItems = feedResponse?.data?.feed ?? [];
+  const posts = feedResponse?.data?.feed ?? [];
 
   if (!profile) {
     throw new Error('No profile data found');
   }
 
-  // Process feed items to create threaded posts
-  const processedPosts = feedItems.reduce((acc: ThreadedPost[], feedItem) => {
-    if (!feedItem?.post) return acc;
+  // Group posts by thread
+  const threadMap = new Map<string, BlueskyPost[]>();
+  const processedPosts = new Set<string>();
 
-    const post = feedItem.post as unknown as BlueskyPost;
-    const isReply = !!post.record.reply;
-    const parentUri = isReply ? post.record.reply?.parent?.uri : undefined;
+  posts.forEach(({ post }) => {
+    const postData = post as unknown as BlueskyPost;
 
-    const threadedPost: ThreadedPost = {
-      post,
-      reply: feedItem.reply
-        ? (feedItem.reply as unknown as BlueskyPost['reply'])
-        : undefined,
-      isReply,
-      parentUri,
-    };
-
-    acc.push(threadedPost);
-    return acc;
-  }, []);
-
-  // Separate root posts and replies
-  const rootPosts = processedPosts.filter((item) => !item.isReply);
-  const replies = processedPosts.filter((item) => item.isReply);
-
-  // Build threaded structure
-  const threadsMap = new Map<string, ThreadedPost[]>();
-
-  rootPosts.forEach((rootPost) => {
-    threadsMap.set(rootPost.post.uri, [rootPost]);
-  });
-
-  replies.forEach((reply) => {
-    if (reply.parentUri) {
-      const thread = threadsMap.get(reply.parentUri);
-      if (thread) {
-        thread.push(reply);
-      } else {
-        // If parent not found, treat as root for now
-        threadsMap.set(reply.post.uri, [reply]);
-      }
+    // Skip if we've already processed this post
+    if (processedPosts.has(postData.uri)) {
+      return;
     }
+
+    // If this is a reply, add it to the thread
+    if (postData.reply?.root) {
+      const rootUri = postData.reply.root.uri;
+      const thread = threadMap.get(rootUri) ?? [];
+      thread.push(postData);
+      threadMap.set(rootUri, thread);
+    } else {
+      // This is a root post, start a new thread
+      threadMap.set(postData.uri, [postData]);
+    }
+
+    processedPosts.add(postData.uri);
   });
 
   return {
@@ -141,7 +109,6 @@ export async function fetchBlueskyData() {
       followsCount: profile.followsCount ?? 0,
       postsCount: profile.postsCount ?? 0,
     },
-    threads: Array.from(threadsMap.values()),
-    processedPosts,
+    posts: Array.from(threadMap.values()),
   };
 }

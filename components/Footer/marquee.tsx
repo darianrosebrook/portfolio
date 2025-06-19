@@ -5,23 +5,23 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import Styles from './index.module.css';
 import { horizontalLoop } from '@/utils';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { byPrefixAndName } from '@awesome.me/kit-0ba7f5fefb/icons';
 import Icon from '../Icon';
 type MarqueeProps = {
   title: string;
-  icon: IconProp;
+  icon: IconDefinition;
   url: string;
 };
+const faArrowUpRight = byPrefixAndName['far']['arrow-up-right'];
 
 const Marquee: React.FC<MarqueeProps> = ({ title, icon, url }) => {
-  const faArrowUpRight = byPrefixAndName['far']['arrow-up-right'];
   const marqueeRef = useRef(null); // Create a ref for the marquee element
   const clone = (index) => (
     <div className={Styles.box} key={index}>
       <p className={`heading-04 ${Styles.socialLinkTitle}`}>
         {title.toUpperCase()}
-        <Icon icon={icon} />
+        <Icon width={48} height={48} icon={icon} />
       </p>
     </div>
   );
@@ -45,7 +45,7 @@ const Marquee: React.FC<MarqueeProps> = ({ title, icon, url }) => {
       <Link href={url} className={Styles.socialLink}>
         <h4 className={Styles.socialLinkTitle}>
           {title.toUpperCase()}
-          <Icon icon={faArrowUpRight} />
+          <Icon width={48} height={48} icon={faArrowUpRight} />
         </h4>
         <div className={Styles.marquee} ref={marqueeRef}>
           {clones && clones.map((clone, index) => clone(index))}

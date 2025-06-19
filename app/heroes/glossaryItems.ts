@@ -552,7 +552,7 @@ export const glossaryItems: GlossaryItem[] = [
     id: '33',
     name: 'Contribution Guidelines',
     letter: 'C',
-    icon: byPrefixAndName['far']['handshake'],
+    icon: byPrefixAndName['far']['user'],
     description:
       "A clear set of rules and conventions for how to propose, review, and merge changes to the design system's code, documentation, and tokens. Good guidelines outline branch naming, commit message format, review criteria, and sign-off requirements to streamline collaboration and maintain quality.",
     resources: [
@@ -585,7 +585,7 @@ export const glossaryItems: GlossaryItem[] = [
     id: '35',
     name: 'Developer Experience (DX)',
     letter: 'D',
-    icon: byPrefixAndName['far']['laptop-code'],
+    icon: byPrefixAndName['far']['code'],
     description:
       'The overall quality of the tooling, documentation, and workflows that engineers encounter when integrating and extending the design system. High DX means clear code samples, auto-generated docs, IDE support, and smooth release processes that minimize friction and accelerate development.',
     resources: [
@@ -601,7 +601,7 @@ export const glossaryItems: GlossaryItem[] = [
     id: '36',
     name: 'Design System Audit',
     letter: 'D',
-    icon: byPrefixAndName['far']['clipboard-check'],
+    icon: byPrefixAndName['far']['clipboard'],
     description:
       'A periodic, systematic review of components, tokens, documentation, and usage patterns to identify inconsistencies, outdated assets, or accessibility gaps. Audits combine automated checks (linting, token coverage) with manual evaluations (visual reviews, user interviews) to keep the system healthy and aligned with evolving requirements.',
     resources: [
@@ -617,7 +617,7 @@ export const glossaryItems: GlossaryItem[] = [
     id: '37',
     name: 'Performance Budget',
     letter: 'P',
-    icon: byPrefixAndName['far']['gauge-high'],
+    icon: byPrefixAndName['far']['money-bill'],
     description:
       'Predefined thresholds for key performance metrics—such as bundle size, render time, and animation smoothness—that guide design and development decisions. Enforcing a budget helps prevent regressions, encourages optimization (lazy loading, code splitting), and ensures the system remains performant on a variety of devices and network conditions.',
     resources: [
@@ -633,7 +633,7 @@ export const glossaryItems: GlossaryItem[] = [
     id: '38',
     name: 'UI Patterns',
     letter: 'U',
-    icon: byPrefixAndName['far']['object-group'],
+    icon: byPrefixAndName['far']['rectangles-mixed'],
     description:
       'Reusable combinations of components and layout rules that solve common interface challenges—like form validation, data tables, or navigation bars—providing a higher-level blueprint than individual components. Documenting patterns clarifies when and how to assemble components for typical use cases, speeding design and guiding developers.',
     resources: [
@@ -665,7 +665,7 @@ export const glossaryItems: GlossaryItem[] = [
     id: '40',
     name: 'Design System Roadmap',
     letter: 'D',
-    icon: byPrefixAndName['far']['map'],
+    icon: byPrefixAndName['far']['sign-post'],
     description:
       'A strategic plan that outlines upcoming priorities, milestones, and long-term goals for the design system—such as new component areas, major refactors, or accessibility initiatives. A roadmap aligns stakeholders, communicates expectations, and helps product teams plan their integrations around scheduled work.',
     resources: [
