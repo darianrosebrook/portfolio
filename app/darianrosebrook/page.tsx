@@ -1,91 +1,66 @@
 import Image from 'next/image';
 import styles from './page.module.scss';
-import Postcard from '@/components/Postcard/Postcard';
-import Avatar from '@/components/Avatar';
-import type {
-  BlueskyEmbed,
-  BlueskyVideoEmbed,
-  BlueskyImageEmbed,
-  BlueskyExternalEmbed,
-} from '@/types/bluesky';
-import Link from 'next/link';
+
+// Remove unused Bluesky types
+// import type {
+//   BlueskyEmbed,
+//   BlueskyVideoEmbed,
+//   BlueskyImageEmbed,
+//   BlueskyExternalEmbed,
+// } from '@/types/bluesky';
+
 import { fetchBlueskyData } from '@/utils/bluesky';
+import dynamic from 'next/dynamic';
 
-const transformEmbed = (
-  embed?: BlueskyEmbed
-):
-  | {
-      type: 'image' | 'video' | 'audio';
-      url: string;
-      aspectRatio: { width: number; height: number };
-    }
-  | undefined => {
-  if (!embed) return undefined;
-
-  switch (embed.$type) {
-    case 'app.bsky.embed.video#view': {
-      const videoEmbed = embed as BlueskyVideoEmbed;
-      return {
-        type: 'video',
-        url: videoEmbed.playlist ?? videoEmbed.thumbnail,
-        aspectRatio: videoEmbed.aspectRatio ?? { width: 16, height: 9 },
-      };
-    }
-    case 'app.bsky.embed.images#view': {
-      const imageEmbed = embed as BlueskyImageEmbed;
-      // Handle images array - take the first image
-      if (imageEmbed.images && imageEmbed.images.length > 0) {
-        const firstImage = imageEmbed.images[0];
-        return {
-          type: 'image',
-          url: firstImage.fullsize ?? firstImage.thumb,
-          aspectRatio: firstImage.aspectRatio ?? { width: 4, height: 3 },
-        };
-      }
-      break;
-    }
-    case 'app.bsky.embed.external#view': {
-      const externalEmbed = embed as BlueskyExternalEmbed;
-      // Handle external links with preview images
-      if (externalEmbed.external?.thumb) {
-        return {
-          type: 'image',
-          url: externalEmbed.external.thumb,
-          aspectRatio: { width: 16, height: 9 }, // Default aspect ratio for link previews
-        };
-      }
-      break;
-    }
-    default: {
-      // Try to infer from available data
-      const anyEmbed = embed as BlueskyVideoEmbed;
-      if (anyEmbed.playlist) {
-        return {
-          type: 'video',
-          url: anyEmbed.playlist as string,
-          aspectRatio: anyEmbed.aspectRatio ?? { width: 16, height: 9 },
-        };
-      }
-      if (anyEmbed.thumbnail) {
-        return {
-          type: 'image',
-          url: anyEmbed.thumbnail as string,
-          aspectRatio: anyEmbed.aspectRatio ?? { width: 16, height: 9 },
-        };
-      }
-      break;
-    }
-  }
-
-  return undefined;
-};
-
-// Force dynamic rendering since this page needs real-time data from Bluesky API
-export const dynamic = 'force-dynamic';
+const PostcardThreadList = dynamic(() => import('./PostcardThreadList.client'));
 
 export default async function Page() {
   try {
-    const { profile, threads } = await fetchBlueskyData();
+    const { profile, posts } = await fetchBlueskyData();
+
+    // Process each thread to properly structure the conversation
+    const processedThreads = posts.map((thread) => {
+      // Sort posts within each thread by timestamp to maintain conversation order
+      const sortedThread = thread.sort((a, b) => {
+        const timeA = new Date(a.indexedAt ?? '').getTime();
+        const timeB = new Date(b.indexedAt ?? '').getTime();
+        return timeA - timeB;
+      });
+
+      return sortedThread
+        .map((feedItem) => {
+          if (!feedItem) return null;
+
+          const isReply = !!feedItem.reply;
+          const parentUri = isReply ? feedItem.reply?.parent?.uri : undefined;
+
+          return {
+            post: {
+              uri: String(feedItem.uri ?? ''),
+              cid: String(feedItem.cid ?? ''),
+              author: {
+                displayName: String(feedItem.author?.displayName ?? ''),
+                handle: String(feedItem.author?.handle ?? ''),
+                avatar: String(feedItem.author?.avatar ?? ''),
+              },
+              record: {
+                text: String(feedItem.record?.text ?? ''),
+              },
+              embed: feedItem.embed,
+              replyCount: Number(feedItem.replyCount ?? 0),
+              repostCount: Number(feedItem.repostCount ?? 0),
+              likeCount: Number(feedItem.likeCount ?? 0),
+              quoteCount: Number(feedItem.quoteCount ?? 0),
+              indexedAt: String(feedItem.indexedAt ?? ''),
+              labels: Array.isArray(feedItem.labels) ? feedItem.labels : [],
+            },
+            reply: feedItem.reply,
+            isReply,
+            parentUri: parentUri ? String(parentUri) : undefined,
+          };
+        })
+        .filter(Boolean); // Remove null entries
+    });
 
     const description = (
       <>
@@ -153,70 +128,10 @@ export default async function Page() {
         <section className={styles.postsSection}>
           <h2 className={styles.postsTitle}>Recent Posts</h2>
 
-          {threads.length === 0 ? (
+          {posts.length === 0 ? (
             <p className={styles.noPosts}>No posts found</p>
           ) : (
-            <div>
-              {threads.map((thread, threadIndex) => (
-                <div key={threadIndex} className={styles.thread}>
-                  {thread.map((threadedPost, postIndex) => {
-                    const { post, isReply } = threadedPost;
-                    const transformedEmbed = transformEmbed(post.embed);
-
-                    return (
-                      <div
-                        key={post.uri ?? `${threadIndex}-${postIndex}`}
-                        className={`${styles.postWrapper} ${isReply ? styles.replyPost : styles.rootPost}`}
-                      >
-                        {isReply && <div className={styles.threadLine} />}
-                        <Link
-                          href={`https://bsky.app/profile/darianrosebrook.com/post/${post.uri.split('/').pop()}`}
-                          target="_blank"
-                        >
-                          <Postcard
-                            postId={post.uri ?? `${threadIndex}-${postIndex}`}
-                            author={{
-                              name: post.author.displayName,
-                              handle: post.author.handle,
-                              avatar: post.author.avatar,
-                            }}
-                            timestamp={post.indexedAt}
-                            content={post.record.text}
-                            embed={transformedEmbed}
-                            stats={{
-                              likes: post.likeCount ?? 0,
-                              replies: post.replyCount ?? 0,
-                              reposts: post.repostCount ?? 0,
-                            }}
-                          >
-                            <Postcard.Header>
-                              <Avatar
-                                size="large"
-                                name={post.author.displayName}
-                                src={post.author.avatar}
-                              />
-                              <Postcard.Author />
-                              <Postcard.Timestamp />
-                            </Postcard.Header>
-                            <Postcard.Body>
-                              <Postcard.Content />
-                              {transformedEmbed && <Postcard.Embed />}
-                            </Postcard.Body>
-                            <Postcard.Footer>
-                              <Postcard.Stats>
-                                <Postcard.Like />
-                                <Postcard.Reply />
-                                <Postcard.Repost />
-                              </Postcard.Stats>
-                            </Postcard.Footer>
-                          </Postcard>
-                        </Link>
-                      </div>
-                    );
-                  })}
-                </div>
-              ))}
-            </div>
+            <PostcardThreadList threads={processedThreads} />
           )}
         </section>
       </div>

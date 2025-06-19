@@ -2,9 +2,19 @@
 import { createContext, useContext, ReactNode, useEffect, useRef } from 'react';
 import styles from './Postcard.module.scss';
 import Image from 'next/image';
-import { byPrefixAndName } from '@awesome.me/kit-0ba7f5fefb/icons';
 import Icon from '../Icon';
+import {
+  byPrefixAndName,
+  IconDefinition,
+} from '@awesome.me/kit-0ba7f5fefb/icons';
+import Link from 'next/link';
 
+const faHeart = byPrefixAndName['far']['heart'] as IconDefinition;
+const faComments = byPrefixAndName['far']['comments-alt'] as IconDefinition;
+const faRetweet = byPrefixAndName['far']['retweet-alt'] as IconDefinition;
+const faExternalLink = byPrefixAndName['far'][
+  'external-link'
+] as IconDefinition;
 interface PostcardContextType {
   postId: string;
   author: {
@@ -61,6 +71,7 @@ const Postcard: React.FC<PostcardProps> & {
   Like: React.FC;
   Reply: React.FC;
   Repost: React.FC;
+  ExternalLink: React.FC<{ link: string }>;
 } = ({ children, ...props }) => {
   return (
     <PostcardContext.Provider value={props}>
@@ -94,14 +105,11 @@ const Author: React.FC = () => {
     </div>
   );
 };
-function getRelativeTimeString(date, lang = 'en-US') {
-  // Use default lang during SSR to avoid navigator issues
-  const browserLang =
-    typeof navigator !== 'undefined' ? navigator.language : lang;
+function getRelativeTimeString(date, lang = navigator.language) {
   const timeMs = typeof date === 'number' ? date : date.getTime();
   const deltaSeconds = -Math.round((timeMs - Date.now()) / 1000);
 
-  const rtf = new Intl.RelativeTimeFormat(browserLang, { numeric: 'auto' });
+  const rtf = new Intl.RelativeTimeFormat(lang, { numeric: 'auto' });
 
   if (Math.abs(deltaSeconds) < 60) {
     return rtf.format(-deltaSeconds, 'second');
@@ -129,7 +137,7 @@ const Timestamp: React.FC = () => {
 
 const Content: React.FC = () => {
   const { content } = usePostcard();
-  return <p className={styles.content}>{content}</p>;
+  return <div className={styles.content}>{content}</div>;
 };
 
 const Embed: React.FC = () => {
@@ -201,36 +209,48 @@ const Embed: React.FC = () => {
       return null;
   }
 };
-const likeIcon = byPrefixAndName['far']['heart'];
 const Like: React.FC = () => {
   const { stats } = usePostcard();
   return (
     <button className={styles.stat}>
-      <Icon width={44} height={44} icon={likeIcon}></Icon>
+      <span>
+        <Icon icon={faHeart} />
+      </span>
       <span>{stats.likes}</span>
     </button>
   );
 };
 
-const replyIcon = byPrefixAndName['far']['comments-alt'];
 const Reply: React.FC = () => {
   const { stats } = usePostcard();
   return (
     <button className={styles.stat}>
-      <Icon width={44} height={44} icon={replyIcon}></Icon>
+      <span>
+        <Icon icon={faComments} />
+      </span>
       <span>{stats.replies}</span>
     </button>
   );
 };
 
-const repostIcon = byPrefixAndName['far']['retweet-alt'];
 const Repost: React.FC = () => {
   const { stats } = usePostcard();
   return (
     <button className={styles.stat}>
-      <Icon width={44} height={44} icon={repostIcon}></Icon>
+      <span>
+        <Icon icon={faRetweet} />
+      </span>
       <span>{stats.reposts}</span>
     </button>
+  );
+};
+
+const ExternalLink: React.FC<{ link: string }> = ({ link }) => {
+  return (
+    <Link href={link} target="_blank" className={styles.stat}>
+      <Icon icon={faExternalLink} />
+      <span>View on Bluesky</span>
+    </Link>
   );
 };
 
@@ -245,5 +265,6 @@ Postcard.Embed = Embed;
 Postcard.Like = Like;
 Postcard.Reply = Reply;
 Postcard.Repost = Repost;
+Postcard.ExternalLink = ExternalLink;
 
 export default Postcard;

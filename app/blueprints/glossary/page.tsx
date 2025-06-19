@@ -92,7 +92,7 @@ const Page: NextPage = () => {
                       <h4>
                         {item.icon && (
                           <span style={{ display: 'inline-block' }}>
-                            <Icon icon={item.icon} />
+                            <Icon icon={item.icon} width={44} height={44} />
                           </span>
                         )}
                         {item.name}

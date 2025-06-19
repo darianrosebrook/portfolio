@@ -88,8 +88,9 @@ a:has(.post) {
   display: flex;
   gap: var(--size-03);
   align-items: center;
-  padding: var(--size-02) var(--size-03);
-  border: none;
+  padding: var(--size-02) var(--size-04);
+  border: 2px solid var(--color-border-light);
+  border-radius: var(--radius-full);
   background: none;
   color: var(--color-foreground-secondary);
   font-size: var(--body-03);
@@ -97,8 +98,8 @@ a:has(.post) {
   transition: color 0.2s ease;
 
   svg {
-    width: var(--size-07);
-    height: var(--size-07);
+    width: var(--size-06);
+    height: var(--size-06);
   }
 
   &:hover {
