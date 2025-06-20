@@ -4,7 +4,7 @@ import styles from './DraggableNodeView.module.scss';
 import Icon from '@/components/Icon';
 import { byPrefixAndName } from '@awesome.me/kit-0ba7f5fefb/icons';
 
-const faGripVertical = byPrefixAndName['far']['grip-vertical'];
+const faGripVertical = byPrefixAndName['far']['bars-sort'];
 
 const createSlug = (text: string) =>
   text

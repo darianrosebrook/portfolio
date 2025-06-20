@@ -19,9 +19,9 @@ async function getData() {
     published_at
     `
     )
-    .eq('draft', false)
-    .filter('draft', 'eq', false)
+    .eq('status', 'published')
     .order('published_at', { ascending: false });
+  console.log(data, error);
   if (error) {
     console.error(error);
     return [] as Article[];

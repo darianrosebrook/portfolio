@@ -67,7 +67,7 @@ const SlashCommandList = forwardRef((props: SlashCommandListProps, ref) => {
           key={index}
           onClick={() => selectItem(index)}
         >
-          <Icon icon={item.icon} />
+          {item.icon && <Icon icon={item.icon} />}
           {item.title}
         </button>
       ))}

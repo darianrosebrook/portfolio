@@ -1,15 +1,15 @@
 import { NextResponse } from 'next/server';
-import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
-import { cookies } from 'next/headers';
+import { createClient } from '@/utils/supabase/server';
 import { createArticleSchema } from '@/utils/schemas/article.schema';
 
 export async function POST(request: Request) {
-  const supabase = createRouteHandlerClient({ cookies });
+  const supabase = await createClient();
   const {
-    data: { session },
-  } = await supabase.auth.getSession();
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
 
-  if (!session) {
+  if (!user || userError) {
     return new NextResponse(JSON.stringify({ error: 'Unauthorized' }), {
       status: 401,
       headers: { 'Content-Type': 'application/json' },
@@ -28,9 +28,7 @@ export async function POST(request: Request) {
 
   const { data, error } = await supabase
     .from('articles')
-    .insert([
-      { ...validation.data, author: session.user.id, editor: session.user.id },
-    ])
+    .insert([{ ...validation.data, author: user.id, editor: user.id }])
     .select();
 
   if (error) {
@@ -47,12 +45,13 @@ export async function POST(request: Request) {
 }
 
 export async function GET() {
-  const supabase = createRouteHandlerClient({ cookies });
+  const supabase = await createClient();
   const {
-    data: { session },
-  } = await supabase.auth.getSession();
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
 
-  if (!session) {
+  if (!user || userError) {
     return new NextResponse(JSON.stringify({ error: 'Unauthorized' }), {
       status: 401,
       headers: { 'Content-Type': 'application/json' },
@@ -62,7 +61,7 @@ export async function GET() {
   const { data, error } = await supabase
     .from('articles')
     .select('*')
-    .eq('author', session.user.id);
+    .eq('author', user.id);
 
   if (error) {
     return new NextResponse(JSON.stringify({ error: error.message }), {
