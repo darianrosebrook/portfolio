@@ -59,7 +59,6 @@ const Tiptap = ({
 }) => {
   const content = article.articleBody as JSONContent | undefined;
   const editor = useEditor({
-    content,
     extensions: [
       ImageExtended.configure({
         articleId: article?.id,
@@ -69,6 +68,8 @@ const Tiptap = ({
         document: false,
         heading: false,
         paragraph: false,
+        gapcursor: false,
+        codeBlock: false,
       }),
       Gapcursor,
       Paragraph.extend({
@@ -128,6 +129,8 @@ const Tiptap = ({
       Markdown,
       SlashCommand,
     ],
+    immediatelyRender: false,
+    content: content,
     onUpdate: ({ editor }) => {
       if (handleUpdate) {
         const articleBody = editor.getJSON();

@@ -14,6 +14,7 @@ const ArticleList = ({
   articleDefaults,
 }: ArticleListProps) => {
   const [articles, setArticles] = useState<Article[]>([]);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
   const [groupedArticles, setGroupedArticles] = useState<{
     [status: string]: Article[];
   }>({});
@@ -43,9 +44,26 @@ const ArticleList = ({
   }, [articles]);
 
   const fetchArticles = async () => {
-    const response = await fetch('/api/articles');
-    const data = await response.json();
-    setArticles(data);
+    try {
+      const response = await fetch('/api/articles');
+      if (response.status === 401) {
+        // User is not authenticated, show login prompt
+        console.log('User not authenticated, please log in');
+        setArticles([]);
+        setIsAuthenticated(false);
+        return;
+      }
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      setArticles(data);
+      setIsAuthenticated(true);
+    } catch (error) {
+      console.error('Failed to fetch articles:', error);
+      setArticles([]);
+      setIsAuthenticated(false);
+    }
   };
 
   const handleNewArticle = () => {
@@ -62,6 +80,11 @@ const ArticleList = ({
         <h2>Articles</h2>
         <button onClick={handleNewArticle}>New Article</button>
       </div>
+      {!isAuthenticated && (
+        <div className={styles.authMessage}>
+          <p>Please log in to view your articles.</p>
+        </div>
+      )}
       {Object.entries(groupedArticles).map(([status, articles]) => (
         <div key={status} className={styles.group}>
           <h3 onClick={() => toggleGroup(status)}>

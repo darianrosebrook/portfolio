@@ -1,11 +1,10 @@
 import { NextResponse } from 'next/server';
-import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
-import { cookies } from 'next/headers';
+import { createClient } from '@/utils/supabase/server';
 import { updateArticleSchema } from '@/utils/schemas/article.schema';
 
 export async function GET(request: Request, context) {
+  const supabase = await createClient();
   const { params } = context;
-  const supabase = createRouteHandlerClient({ cookies });
   const { data, error } = await supabase
     .from('articles')
     .select('*')
@@ -26,13 +25,14 @@ export async function GET(request: Request, context) {
 }
 
 export async function PUT(request: Request, context) {
+  const supabase = await createClient();
   const { params } = context;
-  const supabase = createRouteHandlerClient({ cookies });
   const {
-    data: { session },
-  } = await supabase.auth.getSession();
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
 
-  if (!session) {
+  if (!user || userError) {
     return new NextResponse(JSON.stringify({ error: 'Unauthorized' }), {
       status: 401,
       headers: { 'Content-Type': 'application/json' },
@@ -53,7 +53,7 @@ export async function PUT(request: Request, context) {
     .from('articles')
     .update(validation.data)
     .eq('slug', params.slug)
-    .eq('author', session.user.id)
+    .eq('author', user.id)
     .select();
 
   if (error) {
@@ -70,13 +70,14 @@ export async function PUT(request: Request, context) {
 }
 
 export async function DELETE(request: Request, context) {
+  const supabase = await createClient();
   const { params } = context;
-  const supabase = createRouteHandlerClient({ cookies });
   const {
-    data: { session },
-  } = await supabase.auth.getSession();
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
 
-  if (!session) {
+  if (!user || userError) {
     return new NextResponse(JSON.stringify({ error: 'Unauthorized' }), {
       status: 401,
       headers: { 'Content-Type': 'application/json' },
@@ -87,7 +88,7 @@ export async function DELETE(request: Request, context) {
     .from('articles')
     .delete()
     .eq('slug', params.slug)
-    .eq('author', session.user.id);
+    .eq('author', user.id);
 
   if (error) {
     return new NextResponse(JSON.stringify({ error: error.message }), {
