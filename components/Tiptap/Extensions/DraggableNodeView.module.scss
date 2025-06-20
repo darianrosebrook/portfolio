@@ -1,0 +1,21 @@
+.container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.dragHandle {
+  margin-right: 0.5rem;
+  opacity: 0;
+  cursor: grab;
+  user-select: none;
+  transition: opacity 0.2s;
+}
+
+.container:hover .dragHandle {
+  opacity: 1;
+}
+
+.content {
+  flex-grow: 1;
+}

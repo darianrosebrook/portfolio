@@ -14,6 +14,25 @@ export default Image.extend<ImageExtendedOptions>({
     };
   },
 
+  addAttributes() {
+    return {
+      ...this.parent?.(),
+      'data-align': {
+        default: 'center',
+      },
+    };
+  },
+
+  renderHTML({ HTMLAttributes }) {
+    return [
+      'img',
+      {
+        ...HTMLAttributes,
+        class: `align-${HTMLAttributes['data-align']}`,
+      },
+    ];
+  },
+
   addProseMirrorPlugins() {
     const { articleId } = this.options;
 
