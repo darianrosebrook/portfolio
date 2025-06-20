@@ -46,7 +46,9 @@ function Card(data: {
           />
         </Link>
         <div className="meta">
-          <ProfileFlag profile={data.author} />
+          <ProfileFlag
+            profile={typeof data.author === 'string' ? undefined : data.author}
+          />
           <small>
             <time dateTime={date} className="small" title={date}>
               {date}

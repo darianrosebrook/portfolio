@@ -1,5 +1,3 @@
-import { ArticleBody, Profile } from '.';
-
 export type Json =
   | string
   | number
@@ -146,12 +144,11 @@ export type Database = {
       articles: {
         Row: {
           alternativeHeadline: string | null;
-          articleBody: ArticleBody | null;
+          articleBody: Json | null;
           articleSection: string | null;
-          author: Profile | null;
+          author: string | null;
           created_at: string | null;
           description: string | null;
-          draft: boolean | null;
           editor: string | null;
           headline: string | null;
           id: number;
@@ -160,17 +157,17 @@ export type Database = {
           keywords: string | null;
           modified_at: string | null;
           published_at: string | null;
-          slug: string | null;
+          slug: string;
+          status: Database['public']['Enums']['article_status'] | null;
           wordCount: number | null;
         };
         Insert: {
           alternativeHeadline?: string | null;
-          articleBody?: ArticleBody | null;
+          articleBody?: Json | null;
           articleSection?: string | null;
           author?: string | null;
           created_at?: string | null;
           description?: string | null;
-          draft?: boolean | null;
           editor?: string | null;
           headline?: string | null;
           id?: number;
@@ -179,17 +176,17 @@ export type Database = {
           keywords?: string | null;
           modified_at?: string | null;
           published_at?: string | null;
-          slug?: string | null;
+          slug: string;
+          status?: Database['public']['Enums']['article_status'] | null;
           wordCount?: number | null;
         };
         Update: {
           alternativeHeadline?: string | null;
-          articleBody?: ArticleBody | null;
+          articleBody?: Json | null;
           articleSection?: string | null;
           author?: string | null;
           created_at?: string | null;
           description?: string | null;
-          draft?: boolean | null;
           editor?: string | null;
           headline?: string | null;
           id?: number;
@@ -198,7 +195,8 @@ export type Database = {
           keywords?: string | null;
           modified_at?: string | null;
           published_at?: string | null;
-          slug?: string | null;
+          slug?: string;
+          status?: Database['public']['Enums']['article_status'] | null;
           wordCount?: number | null;
         };
         Relationships: [
@@ -226,7 +224,6 @@ export type Database = {
           author: string | null;
           created_at: string | null;
           description: string | null;
-          draft: boolean | null;
           editor: string | null;
           headline: string | null;
           id: number;
@@ -235,7 +232,8 @@ export type Database = {
           keywords: string | null;
           modified_at: string | null;
           published_at: string | null;
-          slug: string | null;
+          slug: string;
+          status: Database['public']['Enums']['article_status'] | null;
           wordCount: number | null;
         };
         Insert: {
@@ -245,7 +243,6 @@ export type Database = {
           author?: string | null;
           created_at?: string | null;
           description?: string | null;
-          draft?: boolean | null;
           editor?: string | null;
           headline?: string | null;
           id?: number;
@@ -254,7 +251,8 @@ export type Database = {
           keywords?: string | null;
           modified_at?: string | null;
           published_at?: string | null;
-          slug?: string | null;
+          slug: string;
+          status?: Database['public']['Enums']['article_status'] | null;
           wordCount?: number | null;
         };
         Update: {
@@ -264,7 +262,6 @@ export type Database = {
           author?: string | null;
           created_at?: string | null;
           description?: string | null;
-          draft?: boolean | null;
           editor?: string | null;
           headline?: string | null;
           id?: number;
@@ -273,7 +270,8 @@ export type Database = {
           keywords?: string | null;
           modified_at?: string | null;
           published_at?: string | null;
-          slug?: string | null;
+          slug?: string;
+          status?: Database['public']['Enums']['article_status'] | null;
           wordCount?: number | null;
         };
         Relationships: [
@@ -474,7 +472,7 @@ export type Database = {
       };
     };
     Enums: {
-      [_ in never]: never;
+      article_status: 'draft' | 'published' | 'archived';
     };
     CompositeTypes: {
       [_ in never]: never;
@@ -589,6 +587,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      article_status: ['draft', 'published', 'archived'],
+    },
   },
 } as const;
