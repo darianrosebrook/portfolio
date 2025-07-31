@@ -11,6 +11,22 @@ export const SVG_GOO = (
         />
         <feComposite in="SourceGraphic" in2="goo" operator="atop" />
       </filter>
+
+      {/* Text-optimized gooey filter with less blur for readability */}
+      <filter id="goo-text">
+        <feGaussianBlur
+          in="SourceGraphic"
+          stdDeviation="2"
+          result="blur-text"
+        />
+        <feColorMatrix
+          in="blur-text"
+          mode="matrix"
+          values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 15 -6"
+          result="goo-text"
+        />
+        <feComposite in="SourceGraphic" in2="goo-text" operator="atop" />
+      </filter>
     </defs>
   </svg>
 );

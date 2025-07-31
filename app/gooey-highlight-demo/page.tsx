@@ -1,0 +1,152 @@
+import React from 'react';
+import GooeyHighlight from '@/components/GooeyHighlight';
+
+/**
+ * Demo page showcasing gooey text highlighting functionality
+ */
+export default function GooeyHighlightDemo() {
+  return (
+    <div className="content">
+      <h1>Gooey Text Highlighting Demo</h1>
+
+      <section>
+        <h2>Interactive Highlighting</h2>
+        <p>
+          This demo showcases the gooey highlighting effect using the CSS Custom
+          Highlight API. Try selecting text or clicking on words to see the
+          gooey effect in action.
+        </p>
+
+        <GooeyHighlight>
+          This is a demonstration of the gooey highlight effect. You can select
+          any text in this paragraph and it will apply a beautiful gooey
+          background with inverse border radius. The effect works particularly
+          well with highlighted text that spans multiple lines or has complex
+          shapes.
+        </GooeyHighlight>
+      </section>
+
+      <section>
+        <h2>Manual Highlighting Examples</h2>
+        <p>Here are some examples using mark elements with the gooey effect:</p>
+
+        <div style={{ fontSize: 'var(--text-lg)', lineHeight: 1.6 }}>
+          <p>
+            This sentence contains <mark>highlighted text</mark> that
+            demonstrates the gooey effect with inverse border radius. The{' '}
+            <mark>gooey filter</mark> creates a beautiful organic shape around
+            the highlighted content.
+          </p>
+
+          <p>
+            You can also use the{' '}
+            <span className="text-highlighted">
+              <span>text-highlighted</span>
+            </span>
+            class to achieve the same effect programmatically. This approach
+            works well for dynamic content that needs highlighting.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2>Selection Styling</h2>
+        <p>
+          Try selecting text in this paragraph to see the gooey selection
+          styling. The ::selection pseudo-element is styled with the gooey
+          filter to create a consistent experience across all text selections.
+        </p>
+
+        <div
+          style={{
+            fontSize: 'var(--text-lg)',
+            lineHeight: 1.6,
+            padding: 'var(--size-04)',
+            border: '1px solid var(--color-border-primary)',
+            borderRadius: 'var(--radius-01)',
+            background: 'var(--color-background-secondary)',
+          }}
+        >
+          This is selectable text that will show the gooey highlighting effect
+          when you click and drag to select it. The effect creates a beautiful
+          organic shape that follows the text boundaries and creates an inverse
+          border radius effect that's impossible to achieve with standard CSS.
+        </div>
+      </section>
+
+      <section>
+        <h2>Technical Details</h2>
+        <div
+          style={{
+            background: 'var(--color-background-secondary)',
+            padding: 'var(--size-04)',
+            borderRadius: 'var(--radius-01)',
+            fontSize: 'var(--text-sm)',
+          }}
+        >
+          <h3>How it works:</h3>
+          <ul>
+            <li>
+              <strong>CSS Custom Highlight API:</strong> Uses the modern CSS
+              Custom Highlight API for programmatic text highlighting
+            </li>
+            <li>
+              <strong>Gooey Filter:</strong> Separate SVG filter optimized for
+              text (less blur than the original gooey filter)
+            </li>
+            <li>
+              <strong>Fallback Support:</strong> Graceful degradation for
+              browsers that don't support the API
+            </li>
+            <li>
+              <strong>Multiple Approaches:</strong> Works with ::selection, mark
+              elements, and custom classes
+            </li>
+          </ul>
+
+          <h3>Browser Support:</h3>
+          <p>
+            The CSS Custom Highlight API is currently supported in Chrome 105+
+            and Edge 105+. For unsupported browsers, the component provides a
+            fallback experience with standard highlighting.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2>Usage Examples</h2>
+        <div
+          style={{
+            display: 'grid',
+            gap: 'var(--size-04)',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          }}
+        >
+          <div>
+            <h4>Basic Usage</h4>
+            <GooeyHighlight>
+              Simple text highlighting with gooey effect.
+            </GooeyHighlight>
+          </div>
+
+          <div>
+            <h4>Custom Colors</h4>
+            <GooeyHighlight
+              highlightColor="var(--color-core-green-200)"
+              textColor="var(--color-core-green-800)"
+            >
+              Custom colored highlighting with green theme.
+            </GooeyHighlight>
+          </div>
+
+          <div>
+            <h4>Non-Interactive</h4>
+            <GooeyHighlight interactive={false}>
+              This text cannot be highlighted interactively.
+            </GooeyHighlight>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
