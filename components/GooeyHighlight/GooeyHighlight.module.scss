@@ -1,0 +1,137 @@
+.gooeyHighlightContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-06);
+  padding: var(--size-06);
+  max-width: 100%;
+  background: var(--color-background-secondary);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-02);
+}
+
+.controls {
+  display: flex;
+  gap: var(--size-03);
+  flex-wrap: wrap;
+}
+
+.demoButton,
+.clearButton {
+  padding: var(--size-02) var(--size-04);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-01);
+  background: var(--color-background-primary);
+  color: var(--color-foreground-primary);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover:not(:disabled) {
+    background: var(--color-background-tertiary);
+    border-color: var(--color-border-bold);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.textContainer {
+  position: relative;
+  min-height: 120px;
+  padding: var(--size-04);
+  background: var(--color-background-primary);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-01);
+}
+
+.highlightableText {
+  position: relative;
+  font-size: var(--text-lg);
+  line-height: 1.6;
+  color: var(--color-foreground-primary);
+  cursor: text;
+  user-select: text;
+
+  /* Apply gooey filter for text highlighting */
+  filter: url('#goo-text');
+
+  /* Custom properties for dynamic colors */
+  --highlight-color: var(--color-background-highlight);
+  --text-color: var(--color-foreground-highlight);
+
+  /* Selection styling */
+  &::selection {
+    background: var(--highlight-color);
+    color: var(--text-color);
+  }
+
+  /* Focus styles */
+  &:focus {
+    outline: 2px solid var(--color-border-bold);
+    outline-offset: 2px;
+  }
+}
+
+.fallbackMessage {
+  padding: var(--size-04);
+  background: var(--color-background-tertiary);
+  border: 1px solid transparent;
+  border-left: 4px solid var(--color-border-bold);
+  border-radius: var(--radius-01);
+
+  p {
+    margin: 0 0 var(--size-02) 0;
+    font-size: var(--text-sm);
+    color: var(--color-foreground-secondary);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.instructions {
+  h4 {
+    margin: 0 0 var(--size-03) 0;
+    font-size: var(--text-md);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-foreground-primary);
+  }
+
+  ul {
+    margin: 0;
+    padding-left: var(--size-04);
+    font-size: var(--text-sm);
+    color: var(--color-foreground-secondary);
+
+    li {
+      margin-bottom: var(--size-01);
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+/* Responsive adjustments */
+@media (width <= 768px) {
+  .gooeyHighlightContainer {
+    padding: var(--size-04);
+  }
+
+  .controls {
+    flex-direction: column;
+  }
+
+  .demoButton,
+  .clearButton {
+    width: 100%;
+  }
+
+  .highlightableText {
+    font-size: var(--text-md);
+  }
+}
