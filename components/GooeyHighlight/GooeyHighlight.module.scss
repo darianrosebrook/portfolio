@@ -26,14 +26,14 @@
   cursor: pointer;
   transition: all 0.2s ease;
 
-  &:hover:not(:disabled) {
-    background: var(--color-background-tertiary);
-    border-color: var(--color-border-bold);
-  }
-
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+  }
+
+  &:hover:not(:disabled) {
+    background: var(--color-background-tertiary);
+    border-color: var(--color-border-bold);
   }
 }
 
@@ -54,9 +54,6 @@
   cursor: text;
   user-select: text;
 
-  /* Apply gooey filter for text highlighting */
-  filter: url('#goo-text');
-
   /* Custom properties for dynamic colors */
   --highlight-color: var(--color-background-highlight);
   --text-color: var(--color-foreground-highlight);
@@ -72,6 +69,16 @@
     outline: 2px solid var(--color-border-bold);
     outline-offset: 2px;
   }
+}
+
+.gooeyHighlightWrapper {
+  position: relative;
+  display: inline;
+  filter: url('#goo-text');
+
+  /* Custom properties for dynamic colors */
+  --highlight-color: var(--color-background-highlight);
+  --text-color: var(--color-foreground-highlight);
 }
 
 .fallbackMessage {

@@ -1,5 +1,8 @@
+'use client';
+
 import React from 'react';
 import GooeyHighlight from '@/components/GooeyHighlight';
+import { wrapWithGooeyHighlight } from '@/utils/gooeyHighlight';
 
 /**
  * Demo page showcasing gooey text highlighting functionality
@@ -14,7 +17,8 @@ export default function GooeyHighlightDemo() {
         <p>
           This demo showcases the gooey highlighting effect using the CSS Custom
           Highlight API. Try selecting text or clicking on words to see the
-          gooey effect in action.
+          gooey effect in action. The text remains crisp while the background
+          has the organic gooey effect.
         </p>
 
         <GooeyHighlight>
@@ -28,7 +32,11 @@ export default function GooeyHighlightDemo() {
 
       <section>
         <h2>Manual Highlighting Examples</h2>
-        <p>Here are some examples using mark elements with the gooey effect:</p>
+        <p>
+          Here are some examples using mark elements with the gooey effect.
+          Notice how the text remains crisp while the background has the organic
+          gooey shape.
+        </p>
 
         <div style={{ fontSize: 'var(--text-lg)', lineHeight: 1.6 }}>
           <p>
@@ -42,9 +50,30 @@ export default function GooeyHighlightDemo() {
             You can also use the{' '}
             <span className="text-highlighted">
               <span>text-highlighted</span>
-            </span>
+            </span>{' '}
             class to achieve the same effect programmatically. This approach
             works well for dynamic content that needs highlighting.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2>Wrapped Text Highlighting</h2>
+        <p>
+          This approach uses wrapper elements to keep text crisp while applying
+          the gooey effect to the background only.
+        </p>
+
+        <div style={{ fontSize: 'var(--text-lg)', lineHeight: 1.6 }}>
+          <p>
+            This text uses the wrapper approach:{' '}
+            {wrapWithGooeyHighlight(
+              'highlighted with gooey effect',
+              'var(--color-core-green-200)',
+              'var(--color-core-green-800)'
+            )}{' '}
+            to demonstrate how the text stays crisp while the background has the
+            organic gooey shape.
           </p>
         </div>
       </section>
@@ -87,12 +116,20 @@ export default function GooeyHighlightDemo() {
           <h3>How it works:</h3>
           <ul>
             <li>
+              <strong>Pseudo-element Backgrounds:</strong> Uses ::before
+              pseudo-elements to apply gooey filters to backgrounds only
+            </li>
+            <li>
+              <strong>Crisp Text:</strong> Text content remains sharp while
+              backgrounds get the organic gooey effect
+            </li>
+            <li>
               <strong>CSS Custom Highlight API:</strong> Uses the modern CSS
               Custom Highlight API for programmatic text highlighting
             </li>
             <li>
-              <strong>Gooey Filter:</strong> Separate SVG filter optimized for
-              text (less blur than the original gooey filter)
+              <strong>Multiple Filters:</strong> Different blur levels for
+              different use cases (goo-text, goo-text-subtle)
             </li>
             <li>
               <strong>Fallback Support:</strong> Graceful degradation for

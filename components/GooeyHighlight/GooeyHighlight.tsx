@@ -71,7 +71,7 @@ export const GooeyHighlight: React.FC<GooeyHighlightProps> = ({
       <div className={styles.textContainer}>
         <div
           ref={textRef}
-          className={styles.highlightableText}
+          className={`${styles.highlightableText} ${styles.gooeyHighlightWrapper}`}
           onMouseUp={handleSelection}
           onClick={handleClick}
           style={

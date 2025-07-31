@@ -305,7 +305,7 @@
 ::selection {
   background: var(--color-background-highlight);
   color: var(--color-foreground-highlight);
-  filter: url('#goo-text');
+  filter: url('#goo-text-subtle');
 }
 
 /* Mark element styling with gooey effect */
@@ -314,9 +314,9 @@ mark {
   background: var(--color-background-highlight);
   color: var(--color-foreground-highlight);
   border-radius: var(--radius-01);
-  filter: url('#goo-text');
   box-decoration-break: clone;
   transition: all 0.2s ease;
+  filter: url('#goo-text');
 }
 
 /* Animation for highlighted text */
@@ -349,10 +349,29 @@ mark:hover {
   background: var(--color-background-highlight);
   color: var(--color-foreground-highlight);
   border-radius: var(--radius-01);
-  filter: url('#goo-text');
   box-decoration-break: clone;
   transition: all 0.2s ease;
   animation: gooeyHighlightFadeIn 0.3s ease-out;
+  /* Use a very subtle blur to avoid text obscuring */
+  filter: url('#goo-text-subtle');
+}
+
+/* Wrapper for gooey highlighting that keeps text crisp */
+.gooey-highlight-wrapper {
+  position: relative;
+  display: inline;
+  filter: url('#goo-text');
+}
+
+.gooey-highlight-wrapper > span {
+  position: relative;
+  z-index: 2;
+  padding: var(--size-01) var(--size-02);
+  background: var(--color-background-highlight);
+  color: var(--color-foreground-highlight);
+  border-radius: var(--radius-01);
+  box-decoration-break: clone;
+  transition: all 0.2s ease;
 }
 
 /* Animation for CSS Custom Highlight API highlights */
