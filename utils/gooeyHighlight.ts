@@ -1,4 +1,7 @@
+'use client';
+
 import { useEffect, useRef, useState } from 'react';
+import React from 'react';
 
 /**
  * Interface for gooey highlight options
@@ -188,6 +191,29 @@ export const useGooeyHighlight = (options: GooeyHighlightOptions = {}) => {
     highlightColor,
     textColor,
   };
+};
+
+/**
+ * Utility function to wrap text with gooey highlighting
+ * This approach keeps text crisp while applying gooey effect to background
+ */
+export const wrapWithGooeyHighlight = (
+  text: string,
+  highlightColor?: string,
+  textColor?: string
+) => {
+  return React.createElement(
+    'span',
+    {
+      className: 'gooey-highlight-wrapper',
+      style: {
+        '--highlight-color':
+          highlightColor || 'var(--color-background-highlight)',
+        '--text-color': textColor || 'var(--color-foreground-highlight)',
+      } as React.CSSProperties,
+    },
+    React.createElement('span', null, text)
+  );
 };
 
 /**

@@ -22,10 +22,26 @@ export const SVG_GOO = (
         <feColorMatrix
           in="blur-text"
           mode="matrix"
-          values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 15 -6"
+          values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 10 -3"
           result="goo-text"
         />
         <feComposite in="SourceGraphic" in2="goo-text" operator="atop" />
+      </filter>
+
+      {/* Very subtle gooey filter for CSS Custom Highlight API */}
+      <filter id="goo-text-subtle">
+        <feGaussianBlur
+          in="SourceGraphic"
+          stdDeviation="1"
+          result="blur-subtle"
+        />
+        <feColorMatrix
+          in="blur-subtle"
+          mode="matrix"
+          values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 8 -2"
+          result="goo-subtle"
+        />
+        <feComposite in="SourceGraphic" in2="goo-subtle" operator="atop" />
       </filter>
     </defs>
   </svg>
