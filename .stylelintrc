@@ -52,6 +52,196 @@
       {
         "severity": "warning"
       }
+    ],
+    "order/properties-order": [
+      [
+        {
+          "groupName": "Content",
+          "properties": ["content"]
+        },
+        {
+          "groupName": "Position",
+          "properties": [
+            "position",
+            "top",
+            "right",
+            "bottom",
+            "left",
+            "inset",
+            "inset-block",
+            "inset-inline",
+            "z-index"
+          ]
+        },
+        {
+          "groupName": "Layout",
+          "properties": [
+            "display",
+            "flex",
+            "flex-grow",
+            "flex-shrink",
+            "flex-basis",
+            "flex-direction",
+            "flex-wrap",
+            "flex-flow",
+            "justify-content",
+            "align-items",
+            "align-content",
+            "align-self",
+            "order",
+            "grid",
+            "grid-template",
+            "grid-template-rows",
+            "grid-template-columns",
+            "grid-template-areas",
+            "grid-auto-rows",
+            "grid-auto-columns",
+            "grid-auto-flow",
+            "grid-area",
+            "grid-row",
+            "grid-column",
+            "grid-row-start",
+            "grid-row-end",
+            "grid-column-start",
+            "grid-column-end",
+            "place-content",
+            "place-items",
+            "place-self",
+            "gap",
+            "row-gap",
+            "column-gap"
+          ]
+        },
+        {
+          "groupName": "Box Model",
+          "properties": [
+            "width",
+            "min-width",
+            "max-width",
+            "height",
+            "min-height",
+            "max-height",
+            "margin",
+            "margin-top",
+            "margin-right",
+            "margin-bottom",
+            "margin-left",
+            "padding",
+            "padding-top",
+            "padding-right",
+            "padding-bottom",
+            "padding-left",
+            "overflow",
+            "overflow-x",
+            "overflow-y",
+            "box-sizing"
+          ]
+        },
+        {
+          "groupName": "Typography",
+          "properties": [
+            "font",
+            "font-family",
+            "font-size",
+            "font-weight",
+            "font-style",
+            "font-variant",
+            "line-height",
+            "letter-spacing",
+            "word-spacing",
+            "text-align",
+            "text-decoration",
+            "text-transform",
+            "text-indent",
+            "text-shadow",
+            "white-space",
+            "word-break",
+            "word-wrap",
+            "overflow-wrap"
+          ]
+        },
+        {
+          "groupName": "Visual",
+          "properties": [
+            "color",
+            "background",
+            "background-color",
+            "background-image",
+            "background-repeat",
+            "background-position",
+            "background-size",
+            "background-attachment",
+            "background-clip",
+            "background-origin",
+            "border",
+            "border-width",
+            "border-style",
+            "border-color",
+            "border-top",
+            "border-right",
+            "border-bottom",
+            "border-left",
+            "border-radius",
+            "border-top-left-radius",
+            "border-top-right-radius",
+            "border-bottom-left-radius",
+            "border-bottom-right-radius",
+            "box-shadow",
+            "outline",
+            "outline-width",
+            "outline-style",
+            "outline-color",
+            "outline-offset",
+            "opacity",
+            "visibility"
+          ]
+        },
+        {
+          "groupName": "Animation",
+          "properties": [
+            "transition",
+            "transition-property",
+            "transition-duration",
+            "transition-timing-function",
+            "transition-delay",
+            "animation",
+            "animation-name",
+            "animation-duration",
+            "animation-timing-function",
+            "animation-delay",
+            "animation-iteration-count",
+            "animation-direction",
+            "animation-fill-mode",
+            "animation-play-state",
+            "transform",
+            "transform-origin",
+            "transform-style",
+            "perspective",
+            "perspective-origin",
+            "backface-visibility"
+          ]
+        },
+        {
+          "groupName": "Misc",
+          "properties": [
+            "appearance",
+            "cursor",
+            "pointer-events",
+            "user-select",
+            "resize",
+            "filter",
+            "backdrop-filter",
+            "mix-blend-mode",
+            "isolation",
+            "will-change",
+            "contain"
+          ]
+        }
+      ],
+      {
+        "severity": "warning",
+        "unspecified": "bottomAlphabetical"
+      }
     ]
   }
 }
