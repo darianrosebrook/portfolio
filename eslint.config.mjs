@@ -15,17 +15,35 @@ const compat = new FlatCompat({
 });
 
 const config = [
+  // Base configuration for all files
   ...compat.extends('next/core-web-vitals', 'prettier'),
   eslintPluginPrettierRecommended,
+
+  // TypeScript-specific configuration
   {
+    files: ['**/*.ts', '**/*.tsx'],
     plugins: {
       '@typescript-eslint': typescriptEslint,
     },
-
     languageOptions: {
       parser: tsParser,
+      parserOptions: {
+        project: ['./tsconfig.json'],
+        projectService: true,
+        tsconfigRootDir: __dirname,
+      },
+    },
+    rules: {
+      // Add any custom TypeScript rules here
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        { argsIgnorePattern: '^_' },
+      ],
+      '@typescript-eslint/prefer-const': 'warn',
     },
   },
+
+  // Apply TypeScript recommended rules
   ...compat
     .extends(
       'next/core-web-vitals',
@@ -36,20 +54,6 @@ const config = [
       ...config,
       files: ['**/*.ts', '**/*.tsx'],
     })),
-  {
-    files: ['**/*.ts', '**/*.tsx'],
-
-    languageOptions: {
-      ecmaVersion: 5,
-      sourceType: 'script',
-
-      parserOptions: {
-        project: ['./tsconfig.json'],
-        projectService: true,
-        tsconfigRootDir: '/Users/darianrosebrook/Desktop/Projects/portfolio',
-      },
-    },
-  },
 ];
 
 export default config;
