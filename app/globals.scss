@@ -305,7 +305,31 @@
 ::selection {
   background: var(--color-background-highlight);
   color: var(--color-foreground-highlight);
+  /* Note: ::selection doesn't support pseudo-elements, so we can't use gooey filter here
+     without blurring the text. The gooey effect will be handled by CSS Custom Highlight API
+     for programmatic selections, and manual highlighting for static content. */
+}
+
+/* Enhanced selection styling for gooey effect */
+::highlight(gooey-highlight) {
+  padding: var(--size-01) var(--size-02);
+  background: var(--color-background-highlight);
+  color: var(--color-foreground-highlight);
+  border-radius: var(--radius-01);
+  box-decoration-break: clone;
+  transition: all 0.2s ease;
+  animation: gooeyHighlightFadeIn 0.3s ease-out;
+  /* Use a very subtle blur to avoid text obscuring */
   filter: url('#goo-text-subtle');
+}
+
+/* Fallback for browsers that don't support CSS Custom Highlight API */
+@supports not (CSS.highlights) {
+  ::selection {
+    background: var(--color-background-highlight);
+    color: var(--color-foreground-highlight);
+    border-radius: var(--radius-01);
+  }
 }
 
 /* Mark element styling with gooey effect */
@@ -341,19 +365,6 @@ mark {
 mark:hover {
   background: var(--color-background-tertiary);
   transform: scale(1.02);
-}
-
-/* CSS Custom Highlight API styles for gooey highlighting */
-::highlight(gooey-highlight) {
-  padding: var(--size-01) var(--size-02);
-  background: var(--color-background-highlight);
-  color: var(--color-foreground-highlight);
-  border-radius: var(--radius-01);
-  box-decoration-break: clone;
-  transition: all 0.2s ease;
-  animation: gooeyHighlightFadeIn 0.3s ease-out;
-  /* Use a very subtle blur to avoid text obscuring */
-  filter: url('#goo-text-subtle');
 }
 
 /* Wrapper for gooey highlighting that keeps text crisp */
