@@ -29,8 +29,8 @@ import styles from './page.module.css';
 import Avatar from '@/components/Avatar';
 import Button from '@/components/Button';
 import LogoMaruqee from '@/components/LogoMarquee';
-import Blueprints from './heroes/blueprints';
 import Image from 'next/image';
+import BlueprintsWrapper from './BlueprintsWrapper';
 
 export default function Home() {
   const ldJson = {
@@ -80,7 +80,7 @@ export default function Home() {
       />
       <section className={styles.hero}>
         <div className={styles.heroImage}>
-          <Blueprints />
+          <BlueprintsWrapper />
           <div className={styles.cover}></div>
         </div>
         <div className={styles.headingHero}>
@@ -103,10 +103,12 @@ export default function Home() {
       <section className="home">
         <div className="hero content">
           <Image
-            src="/darianrosebrook.jpg"
+            src="/darianrosebrook-optimized.webp"
             alt="Picture of Darian Rosebrook cropped close from the chest and shoulders, wearing a sweater. They are looking off to their right, a slight smile on their face. Curly dark hair about 3 inches long. They seem tired."
             width={540}
             height={675}
+            priority
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 540px"
           />
         </div>
         <div className="content">
