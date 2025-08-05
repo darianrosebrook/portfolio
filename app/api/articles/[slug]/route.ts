@@ -2,13 +2,16 @@ import { NextResponse } from 'next/server';
 import { createClient } from '@/utils/supabase/server';
 import { updateArticleSchema } from '@/utils/schemas/article.schema';
 
-export async function GET(request: Request, context) {
+export async function GET(
+  _request: Request,
+  { params }: { params: Promise<{ slug: string }> }
+) {
+  const { slug } = await params;
   const supabase = await createClient();
-  const { params } = context;
   const { data, error } = await supabase
     .from('articles')
     .select('*')
-    .eq('slug', params.slug)
+    .eq('slug', slug)
     .single();
 
   if (error) {
@@ -24,9 +27,12 @@ export async function GET(request: Request, context) {
   });
 }
 
-export async function PUT(request: Request, context) {
+export async function PUT(
+  request: Request,
+  { params }: { params: Promise<{ slug: string }> }
+) {
+  const { slug } = await params;
   const supabase = await createClient();
-  const { params } = context;
   const {
     data: { user },
     error: userError,
@@ -52,7 +58,7 @@ export async function PUT(request: Request, context) {
   const { data, error } = await supabase
     .from('articles')
     .update(validation.data)
-    .eq('slug', params.slug)
+    .eq('slug', slug)
     .eq('author', user.id)
     .select();
 
@@ -69,9 +75,12 @@ export async function PUT(request: Request, context) {
   });
 }
 
-export async function DELETE(request: Request, context) {
+export async function DELETE(
+  _request: Request,
+  { params }: { params: Promise<{ slug: string }> }
+) {
+  const { slug } = await params;
   const supabase = await createClient();
-  const { params } = context;
   const {
     data: { user },
     error: userError,
@@ -87,7 +96,7 @@ export async function DELETE(request: Request, context) {
   const { error } = await supabase
     .from('articles')
     .delete()
-    .eq('slug', params.slug)
+    .eq('slug', slug)
     .eq('author', user.id);
 
   if (error) {
