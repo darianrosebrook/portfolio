@@ -63,7 +63,9 @@ export default function Navbar({ pages = [] }: NavbarProps) {
   };
 
   const { prefersReducedMotion, setPrefersReducedMotion } = useReducedMotion();
-  const handlePrefersReducedMotion = (e) => {
+  const handlePrefersReducedMotion = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const enabled = e.target.checked;
     setPrefersReducedMotion(enabled);
   };
@@ -72,9 +74,9 @@ export default function Navbar({ pages = [] }: NavbarProps) {
       const enabled = e.target.checked;
       setSlider(enabled);
       const body = document.querySelector('body');
-      if (enabled) {
+      if (enabled && body) {
         body.classList.add(theme);
-      } else {
+      } else if (body) {
         body.classList.remove(theme);
       }
     },
@@ -93,7 +95,9 @@ export default function Navbar({ pages = [] }: NavbarProps) {
     prefersColorSchemeDarkQuery.onchange = (e) => {
       setSlider(false);
       setTheme(e.matches ? 'light' : 'dark');
-      body.classList.remove(theme);
+      if (body) {
+        body.classList.remove(theme);
+      }
     };
   }, [theme]);
 
@@ -109,7 +113,8 @@ export default function Navbar({ pages = [] }: NavbarProps) {
           <h1 className="medium logo">{`Darian Rosebrook`}</h1>
         </Link>
         <ul className={styles.navLinks}>
-          {pages.length > 0 &&
+          {pages &&
+            pages.length > 0 &&
             pages.map((page) => (
               <li key={page.name}>
                 <a

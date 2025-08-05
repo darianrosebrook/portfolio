@@ -11,7 +11,7 @@ gsap.registerPlugin(useGSAP);
 const Blueprints: React.FC = () => {
   const { window: winsize, scroll, mouse } = useInteraction();
   const gridRef = useRef<HTMLDivElement>(null);
-  const spriteRef = useRef<HTMLDivElement>(null);
+  const spriteRef = useRef<HTMLDivElement | null>(null);
 
   const numRows = 9;
   const numCols = 12;

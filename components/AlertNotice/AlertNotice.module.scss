@@ -1,8 +1,8 @@
 .alert {
   &__inline {
     display: inline-flex;
-    gap: var(--grid-gap-small) var(--grid-gap-small);
     align-items: baseline;
+    gap: var(--grid-gap-small) var(--grid-gap-small);
     padding: var(--size-06);
     background-color: var(--color-background-primary);
 
@@ -25,63 +25,63 @@
 
   &__section {
     display: grid;
-    grid-template-areas: 'icon title body dismiss';
-    grid-template-columns: auto auto 1fr auto;
-    gap: var(--grid-gap-small) var(--grid-gap-medium);
     align-items: baseline;
+    grid-template-columns: auto auto 1fr auto;
+    grid-template-areas: 'icon title body dismiss';
+    gap: var(--grid-gap-small) var(--grid-gap-medium);
     padding: var(--size-06);
-    border-radius: var(--radius-02);
     background-color: var(--color-background-secondary);
+    border-radius: var(--radius-02);
 
     &--info {
-      background: var(--color-background-info-subtle);
       color: var(--color-foreground-onInfoSubtle);
+      background: var(--color-background-info-subtle);
     }
 
     &--warning {
-      background: var(--color-background-warning-subtle);
       color: var(--color-foreground-onWarningSubtle);
+      background: var(--color-background-warning-subtle);
     }
 
     &--danger {
-      background: var(--color-background-danger-subtle);
       color: var(--color-foreground-onDangerSubtle);
+      background: var(--color-background-danger-subtle);
     }
 
     &--success {
-      background: var(--color-background-success-subtle);
       color: var(--color-foreground-onSuccessSubtle);
+      background: var(--color-background-success-subtle);
     }
   }
 
   &__page {
     display: grid;
-    grid-template-areas: 'icon title dismiss' 'icon body dismiss';
-    grid-template-columns: auto 1fr auto;
-    gap: var(--grid-gap-small) var(--grid-gap-medium);
     align-items: baseline;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas: 'icon title dismiss' 'icon body dismiss';
+    gap: var(--grid-gap-small) var(--grid-gap-medium);
     min-height: var(--size-12);
     margin: 0 -1rem;
     padding: var(--size-06) var(--size-08);
 
     &--info {
-      background: var(--color-background-info-strong);
       color: var(--color-foreground-onColor);
+      background: var(--color-background-info-strong);
     }
 
     &--warning {
-      background: var(--color-background-warning-strong);
       color: var(--color-foreground-onColor);
+      background: var(--color-background-warning-strong);
     }
 
     &--danger {
-      background: var(--color-background-danger-strong);
       color: var(--color-foreground-onColor);
+      background: var(--color-background-danger-strong);
     }
 
     &--success {
-      background: var(--color-background-success-strong);
       color: var(--color-foreground-onColor);
+      background: var(--color-background-success-strong);
     }
   }
 
@@ -104,8 +104,8 @@
   grid-row: span 1;
   grid-column: span 1;
   grid-column-end: -2;
-  font-weight: var(--font-weight-bold);
   font-size: var(--font-size-06);
+  font-weight: var(--font-weight-bold);
 }
 
 .__body {

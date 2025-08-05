@@ -87,15 +87,19 @@ const ArticleList = ({
       )}
       {Object.entries(groupedArticles).map(([status, articles]) => (
         <div key={status} className={styles.group}>
-          <h3 onClick={() => toggleGroup(status)}>
+          <button onClick={() => toggleGroup(status)} tabIndex={0}>
             {expandedGroups[status] ? '▼' : '►'} {status}
-          </h3>
+          </button>
           {expandedGroups[status] && (
             <ul>
               {articles.map((article) => (
-                <li key={article.id} onClick={() => onSelectArticle(article)}>
+                <button
+                  key={article.id}
+                  onClick={() => onSelectArticle(article)}
+                  tabIndex={0}
+                >
                   {article.headline || 'Untitled'}
-                </li>
+                </button>
               ))}
             </ul>
           )}

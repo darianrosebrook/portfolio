@@ -16,7 +16,7 @@ type TemplateProps = {
 
 const Template: React.FC<TemplateProps> = ({ children, user }) => {
   const ref = useRef(null);
-  const handleSelectionChange = useRef(null);
+  const handleSelectionChange = useRef<(() => void) | null>(null);
 
   const id = user?.id || null;
   /**
@@ -71,13 +71,20 @@ const Template: React.FC<TemplateProps> = ({ children, user }) => {
         }
       };
     }
-    document.addEventListener('selectionchange', handleSelectionChange.current);
-
-    return () => {
-      document.removeEventListener(
+    if (handleSelectionChange.current) {
+      document.addEventListener(
         'selectionchange',
         handleSelectionChange.current
       );
+    }
+
+    return () => {
+      if (handleSelectionChange.current) {
+        document.removeEventListener(
+          'selectionchange',
+          handleSelectionChange.current
+        );
+      }
     };
   }, []);
 
@@ -94,7 +101,7 @@ const Template: React.FC<TemplateProps> = ({ children, user }) => {
   return (
     <ReducedMotionProvider>
       <InteractionProvider>
-        <Navbar id={id} pages={pages} />
+        <Navbar id={id || ''} pages={pages} />
         <main ref={ref}>{children}</main>
         <Footer />
         <SlinkyCursor />

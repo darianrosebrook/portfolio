@@ -3,8 +3,19 @@ import { createClient } from '@/utils/supabase/server';
 import Image from 'next/image';
 import Link from 'next/link';
 import Styles from './styles.module.css';
-import { Article, Profile } from '@/types';
-async function getData() {
+import { Profile } from '@/types';
+
+// Type for the specific fields we select in the query
+type ArticleWithAuthor = {
+  id: number;
+  headline: string | null;
+  description: string | null;
+  image: string | null;
+  slug: string;
+  author: Profile;
+  published_at: string | null;
+};
+async function getData(): Promise<ArticleWithAuthor[]> {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from('articles')
@@ -24,48 +35,44 @@ async function getData() {
   console.log(data, error);
   if (error) {
     console.error(error);
-    return [] as Article[];
+    return [] as ArticleWithAuthor[];
   }
-  return data;
+  return data as unknown as ArticleWithAuthor[];
 }
-function Card(data: {
-  image: string;
-  headline: string;
-  description: string;
-  slug: string;
-  author: Profile;
-  published_at: string;
-}) {
-  let { description } = data;
+function Card(data: ArticleWithAuthor) {
+  // Handle null values with defaults
+  const headline = data.headline ?? 'Untitled';
+  const image = data.image ?? '/placeholder-image.jpg';
+  let description = data.description ?? 'No description available';
+
   if (description.length > 240) {
     description = description.slice(0, 240) + '...';
   }
-  const date = new Date(data.published_at).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
+
+  const date = data.published_at
+    ? new Date(data.published_at).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      })
+    : 'Date not available';
+
   return (
     <article className="card">
       <div className="media">
         <Link href={`/articles/${data.slug}`}>
-          <Image
-            src={data.image}
-            alt={data.headline}
-            width={300}
-            height={200}
-          />
+          <Image src={image} alt={headline} width={300} height={200} />
         </Link>
       </div>
       <div className="meta">
         <ProfileFlag profile={data.author} />
         <small>
-          <time dateTime={date}>{date}</time>
+          <time dateTime={data.published_at ?? undefined}>{date}</time>
         </small>
       </div>
       <div>
         <h5>
-          <Link href={`/articles/${data.slug}`}>{data.headline}</Link>
+          <Link href={`/articles/${data.slug}`}>{headline}</Link>
         </h5>
         <p>{description}</p>
       </div>
@@ -77,17 +84,7 @@ export default async function Page() {
   return (
     <section className={`grid content ${Styles.articleGrid}`}>
       {articles.length > 0 &&
-        articles.map((article) => (
-          <Card
-            key={article.id}
-            image={article.image}
-            headline={article.headline}
-            description={article.description}
-            author={article.author}
-            slug={article.slug}
-            published_at={article.published_at}
-          />
-        ))}
+        articles.map((article) => <Card key={article.id} {...article} />)}
     </section>
   );
 }

@@ -47,6 +47,7 @@ const Button: React.FC<ButtonProps> = ({
   const hasOnlyIcon =
     React.Children.count(children) === 1 &&
     typeof children === 'object' &&
+    children &&
     !('props' in children && children.props.children);
 
   const combinedClassName = [
