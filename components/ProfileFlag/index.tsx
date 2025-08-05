@@ -2,7 +2,7 @@ import { Profile } from '@/types';
 import Avatar from '../Avatar';
 import Link from 'next/link';
 import styles from './styles.module.css';
-const ProfileFlag = ({ profile }: { profile: Profile }) => {
+const ProfileFlag = ({ profile }: { profile: Profile | null }) => {
   if (!profile) {
     return null;
   }
@@ -15,7 +15,11 @@ const ProfileFlag = ({ profile }: { profile: Profile }) => {
   return (
     <div className={styles.profileFlag}>
       <Link href={`/${insert.username}`}>
-        <Avatar size="medium" name={insert.name} src={insert.src} />
+        <Avatar
+          size="medium"
+          name={insert.name}
+          src={insert.src || undefined}
+        />
         <small>{insert.name}</small>
       </Link>
     </div>

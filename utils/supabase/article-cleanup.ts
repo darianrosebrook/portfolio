@@ -17,6 +17,7 @@ const extractImageUrls = (articleBody: ArticleBody): string[] => {
   const imageUrls: string[] = [];
 
   const traverseContent = (content: ArticleBody['content']): void => {
+    if (!content) return;
     content.forEach((node) => {
       if (node.type === 'image' && node.attrs?.src) {
         imageUrls.push(node.attrs.src);

@@ -1,9 +1,11 @@
 'use client';
+import { useState } from 'react';
 import { Article } from '@/types';
 import styles from './styles.module.css';
 import Button from '@/components/Button';
 import Icon from '@/components/Icon';
 import { byPrefixAndName } from '@awesome.me/kit-0ba7f5fefb/icons';
+import { CheckIcon, LinkIcon } from '@/components/Icon/LocalIcons';
 
 export default function ShareLinks({
   url,
@@ -12,19 +14,20 @@ export default function ShareLinks({
   url: string;
   article: Article;
 }) {
+  const [copied, setCopied] = useState(false);
+
   const faTwitter = byPrefixAndName['fab']['twitter'];
   const faFacebook = byPrefixAndName['fab']['facebook'];
   const faLinkedin = byPrefixAndName['fab']['linkedin'];
-  const faLink = byPrefixAndName['far']['link'];
-  const handleCopy = () => {
-    // replace contents of button with a checkmark to indicate success
-    const copyButton = document.querySelector(`.${styles.links} button`);
-    copyButton.innerHTML = "<i class='fa fa-check'></i>";
-    setTimeout(() => {
-      copyButton.innerHTML = "<i class='fa fa-link'></i>";
-    }, 2000);
-    // copy url to clipboard
-    navigator.clipboard.writeText(url);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy to clipboard:', err);
+    }
   };
   return (
     <div className={styles.links}>
@@ -36,9 +39,9 @@ export default function ShareLinks({
           <Button
             variant="primary"
             onClick={handleCopy}
-            title="Copy to clipboard"
+            title={copied ? 'Copied!' : 'Copy to clipboard'}
           >
-            <Icon icon={faLink} />
+            {copied ? <CheckIcon size={16} /> : <LinkIcon size={16} />}
           </Button>
         </li>
         <li>
@@ -46,7 +49,7 @@ export default function ShareLinks({
             variant="primary"
             as="a"
             title="Share on Twitter"
-            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(article.headline)}&url=${encodeURIComponent(url)}`}
+            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(article.headline ?? '')}&url=${encodeURIComponent(url)}`}
             size="medium"
           >
             <Icon icon={faTwitter} />
@@ -67,7 +70,7 @@ export default function ShareLinks({
           <Button
             variant="primary"
             as="a"
-            href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(url)}&title=${encodeURIComponent(article.headline)}`}
+            href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(url)}&title=${encodeURIComponent(article.headline ?? '')}`}
             title="Share on LinkedIn"
           >
             <Icon icon={faLinkedin} />

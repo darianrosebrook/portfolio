@@ -103,6 +103,8 @@ const Page: React.FC = () => {
           alt="Icon Sync"
           width={800}
           height={400}
+          loading="lazy"
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 80vw, 800px"
         />
         <p>
           Utilizing bidirectional sync with GitHub based on versioning, design
@@ -131,6 +133,8 @@ const Page: React.FC = () => {
           alt={images['icon-tool-01.png'].alt}
           width={images['icon-tool-01.png'].width}
           height={images['icon-tool-01.png'].height}
+          loading="lazy"
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 75vw, 600px"
         />
         <aside>
           <Image
@@ -138,6 +142,8 @@ const Page: React.FC = () => {
             alt={images['icon-tool-02.png'].alt}
             width={images['icon-tool-02.png'].width}
             height={images['icon-tool-02.png'].height}
+            loading="lazy"
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 400px"
           />
           <div>
             <h3>Addressing the issue</h3>
@@ -186,6 +192,8 @@ const Page: React.FC = () => {
             alt={images['icon-tool-03.png'].alt}
             width={images['icon-tool-03.png'].width}
             height={images['icon-tool-03.png'].height}
+            loading="lazy"
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 400px"
           />
         </aside>
         <Image
@@ -193,6 +201,8 @@ const Page: React.FC = () => {
           alt={images['icon-tool-04.png'].alt}
           width={images['icon-tool-04.png'].width}
           height={images['icon-tool-04.png'].height}
+          loading="lazy"
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 75vw, 600px"
         />
 
         <h3>Simplifying our process by removing redundancy</h3>
@@ -237,6 +247,8 @@ const Page: React.FC = () => {
             alt={images['icon-tool-05.png'].alt}
             width={images['icon-tool-05.png'].width}
             height={images['icon-tool-05.png'].height}
+            loading="lazy"
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 75vw, 600px"
           />
           <div>
             <h4>
@@ -264,6 +276,8 @@ const Page: React.FC = () => {
             alt={images['icon-tool-06.png'].alt}
             width={images['icon-tool-06.png'].width}
             height={images['icon-tool-06.png'].height}
+            loading="lazy"
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 75vw, 600px"
           />
           <div>
             <p>
@@ -293,6 +307,8 @@ const Page: React.FC = () => {
             alt={images['icon-tool-07.png'].alt}
             width={images['icon-tool-07.png'].width}
             height={images['icon-tool-07.png'].height}
+            loading="lazy"
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 75vw, 600px"
           />
         </aside>
 

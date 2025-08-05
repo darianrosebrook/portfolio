@@ -16,8 +16,8 @@ type MarqueeProps = {
 const faArrowUpRight = byPrefixAndName['far']['arrow-up-right'];
 
 const Marquee: React.FC<MarqueeProps> = ({ title, icon, url }) => {
-  const marqueeRef = useRef(null); // Create a ref for the marquee element
-  const clone = (index) => (
+  const marqueeRef = useRef<HTMLDivElement>(null); // Create a ref for the marquee element
+  const clone = (index: number) => (
     <div className={Styles.box} key={index}>
       <p className={`heading-04 ${Styles.socialLinkTitle}`}>
         {title.toUpperCase()}
@@ -29,6 +29,7 @@ const Marquee: React.FC<MarqueeProps> = ({ title, icon, url }) => {
 
   useGSAP(
     () => {
+      if (!marqueeRef.current) return;
       const boxes = marqueeRef.current.querySelectorAll(`.${Styles.box}`);
       gsap.set(marqueeRef.current, { perspective: 500 });
       const loop = horizontalLoop(boxes, {
@@ -38,7 +39,7 @@ const Marquee: React.FC<MarqueeProps> = ({ title, icon, url }) => {
       });
       return loop;
     },
-    { scope: marqueeRef.current }
+    marqueeRef.current ? { scope: marqueeRef.current } : undefined
   );
   return (
     <>

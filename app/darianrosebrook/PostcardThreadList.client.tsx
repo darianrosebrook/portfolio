@@ -116,7 +116,7 @@ interface PostcardThreadListProps {
       reply?: unknown;
       isReply: boolean;
       parentUri?: string;
-    }>
+    } | null>
   >;
 }
 
