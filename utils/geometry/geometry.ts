@@ -4,4 +4,4 @@
  * @property {number} x - X coordinate
  * @property {number} y - Y coordinate
  */
-export type Point2D = { x: number; y: number };
+export type point2d = { x: number; y: number };

@@ -1,6 +1,6 @@
 // Centralized types for interaction context (mouse, scroll, window, reduced motion)
 
-export interface MouseState {
+export interface mousestate {
   x: number;
   y: number;
   velocityX: number;
@@ -11,21 +11,21 @@ export interface MouseState {
   hoveredTarget?: string;
 }
 
-export interface ScrollState {
+export interface scrollstate {
+  direction: 'up' | 'down' | 'left' | 'right' | null;
   x: number;
   y: number;
-  direction: 'up' | 'down' | 'left' | 'right' | null;
 }
 
-export interface WindowSize {
+export interface windowsize {
   width: number;
   height: number;
 }
 
-export interface InteractionContextValue {
-  mouse: MouseState;
-  scroll: ScrollState;
-  window: WindowSize;
+export interface interactioncontextvalue {
+  mouse: mousestate;
+  scroll: scrollstate;
+  window: windowsize;
   prefersReducedMotion: boolean;
   setPrefersReducedMotion?: (value: boolean) => void;
   setHoveredTarget?: (target: string | undefined) => void;
