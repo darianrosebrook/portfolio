@@ -4,8 +4,8 @@
   align-items: center;
   min-height: 100vh;
   padding: 2rem;
-  color: var(--color-foreground-primary);
   background: var(--color-background-primary);
+  color: var(--color-foreground-primary);
 }
 
 .content {
@@ -15,32 +15,32 @@
 
 .content h1 {
   margin-bottom: 1rem;
-  font-size: 2.5rem;
   color: var(--color-foreground-primary);
+  font-size: 2.5rem;
 }
 
 .content p {
   margin-bottom: 2rem;
+  color: var(--color-foreground-secondary);
   font-size: 1.1rem;
   line-height: 1.6;
-  color: var(--color-foreground-secondary);
 }
 
 .actions {
   display: flex;
-  justify-content: center;
   gap: 1rem;
+  justify-content: center;
   margin-bottom: 3rem;
 }
 
 .button {
   padding: 0.75rem 1.5rem;
-  font-weight: 500;
-  text-decoration: none;
-  color: var(--color-foreground-primary);
   background: var(--color-background-secondary);
   border: 2px solid var(--color-border-primary);
   border-radius: var(--radius-02);
+  color: var(--color-foreground-primary);
+  font-weight: 500;
+  text-decoration: none;
   transition: all 0.2s ease;
   cursor: pointer;
 }
@@ -52,16 +52,16 @@
 
 .cachedContent {
   padding: 1.5rem;
-  text-align: left;
   background: var(--color-background-secondary);
   border: 1px solid var(--color-border-primary);
   border-radius: var(--radius-02);
+  text-align: left;
 }
 
 .cachedContent h2 {
   margin-bottom: 1rem;
-  font-size: 1.25rem;
   color: var(--color-foreground-primary);
+  font-size: 1.25rem;
 }
 
 .cachedContent ul {
@@ -72,8 +72,8 @@
 
 .cachedContent li {
   padding: 0.5rem 0;
-  color: var(--color-foreground-secondary);
   border-bottom: 1px solid var(--color-border-primary);
+  color: var(--color-foreground-secondary);
 }
 
 .cachedContent li:last-child {

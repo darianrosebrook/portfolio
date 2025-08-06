@@ -17,8 +17,8 @@
 
 .profileContent {
   display: flex;
-  align-items: flex-start;
   gap: 20px;
+  align-items: flex-start;
 }
 
 .avatar {
@@ -33,14 +33,14 @@
 
 .displayName {
   margin: 0 0 8px;
-  font-size: 32px;
   font-weight: bold;
+  font-size: 32px;
 }
 
 .handle {
   margin: 0 0 16px;
-  font-size: 18px;
   color: #657786;
+  font-size: 18px;
 }
 
 .description {
@@ -51,8 +51,8 @@
 .stats {
   display: flex;
   gap: 24px;
-  font-size: 14px;
   color: #657786;
+  font-size: 14px;
 }
 
 .postsSection {
@@ -62,13 +62,13 @@
 
 .postsTitle {
   margin-bottom: 24px;
-  font-size: 24px;
   font-weight: bold;
+  font-size: 24px;
 }
 
 .noPosts {
-  font-style: italic;
   color: #657786;
+  font-style: italic;
 }
 
 .errorContainer {
@@ -89,13 +89,13 @@
   margin-left: var(--size-07);
 
   &::before {
-    content: '';
     position: absolute;
     top: 0;
     left: calc(-1 * var(--size-07));
     width: var(--size-05);
     height: 1px;
     background-color: var(--color-border-light);
+    content: '';
   }
 }
 

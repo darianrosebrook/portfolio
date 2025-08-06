@@ -18,8 +18,8 @@ a:has(.post) {
 
 .header {
   display: flex;
-  align-items: center;
   gap: var(--size-05);
+  align-items: center;
   margin-bottom: var(--size-05);
 }
 
@@ -37,29 +37,29 @@ a:has(.post) {
 
 .displayName {
   margin: 0;
-  font-size: var(--body-02);
-  font-weight: var(--font-weight-semibold);
   color: var(--color-foreground-primary);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--body-02);
 }
 
 .handle {
   margin: 0;
-  font-size: var(--body-03);
   color: var(--color-foreground-secondary);
+  font-size: var(--body-03);
 }
 
 .timestamp {
   margin-left: auto;
-  font-size: var(--body-03);
   color: var(--color-foreground-secondary);
+  font-size: var(--body-03);
 }
 
 .content {
   margin-bottom: var(--size-05);
+  color: var(--color-foreground-primary);
   font-size: var(--body-02);
   line-height: var(--line-height-body);
   white-space: pre-wrap;
-  color: var(--color-foreground-primary);
 }
 
 .video,
@@ -75,8 +75,8 @@ a:has(.post) {
 .footer {
   display: flex;
   gap: var(--size-07);
-  font-size: var(--body-03);
   color: var(--color-foreground-secondary);
+  font-size: var(--body-03);
 }
 
 .stats {
@@ -86,14 +86,14 @@ a:has(.post) {
 
 .stat {
   display: flex;
-  align-items: center;
   gap: var(--size-03);
+  align-items: center;
   padding: var(--size-02) var(--size-04);
-  font-size: var(--body-03);
-  color: var(--color-foreground-secondary);
   background: none;
   border: 2px solid var(--color-border-light);
   border-radius: var(--radius-full);
+  color: var(--color-foreground-secondary);
+  font-size: var(--body-03);
   transition: color 0.2s ease;
   cursor: pointer;
 

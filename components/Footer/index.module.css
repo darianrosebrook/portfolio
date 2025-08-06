@@ -2,9 +2,9 @@
   bottom: 0;
   display: flex;
   flex-direction: column;
+  gap: var(--size-04);
   justify-content: space-evenly;
   justify-content: space-between;
-  gap: var(--size-04);
   width: 100%;
   min-height: var(--size-09);
 }
@@ -29,8 +29,8 @@
 
 .social {
   display: flex;
-  justify-content: space-between;
   gap: var(--size-04);
+  justify-content: space-between;
   width: 100%;
   padding: var(--size-10) var(--size-06);
 }
@@ -45,15 +45,15 @@
 }
 
 .socialLink:hover {
-  color: var(--color-core-transparent) !important;
   background: var(--color-core-transparent);
+  color: var(--color-core-transparent) !important;
 }
 
 .socialLinkTitle {
   display: flex;
+  gap: var(--size-10);
   justify-content: space-between;
   align-items: baseline;
-  gap: var(--size-10);
   width: 100%;
 }
 
@@ -62,14 +62,14 @@
   top: 50%;
   left: 0;
   display: flex;
-  align-items: center;
   gap: var(--size-10);
+  align-items: center;
+  overflow: hidden;
   width: fit-content;
   height: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  color: var(--color-foreground-primary);
   background-color: var(--color-background-accent);
+  color: var(--color-foreground-primary);
+  white-space: nowrap;
   transition: all 0.5s ease-in-out;
   transform: translateY(-50%);
 }
@@ -77,9 +77,9 @@
 .box {
   position: relative;
   display: flex;
+  gap: var(--size-10);
   justify-content: center;
   align-items: center;
-  gap: var(--size-10);
   margin: 0;
   padding: 0;
   cursor: pointer;
@@ -87,14 +87,14 @@
 
 .socialLink:hover .marquee {
   height: 100%;
-  color: var(--color-foreground-onColor);
   background-color: var(--color-background-accent);
+  color: var(--color-foreground-onColor);
 }
 
 .copyRight {
   display: flex;
-  align-items: center;
   gap: var(--size-04);
+  align-items: center;
   width: 100%;
   padding: var(--size-08) var(--size-06);
   color: var(--color-foreground-primary);

@@ -30,11 +30,12 @@
 }
 
 :root {
+  font-weight: var(--font-weight-regular);
+  font-size: var(--body-02);
+
   /* Typography */
 
   font-family: var(--font-inter), sans-serif;
-  font-size: var(--body-02);
-  font-weight: var(--font-weight-regular);
   line-height: var(--line-height-body);
   letter-spacing: var(--letter-spacing-tight);
   font-feature-settings:
@@ -91,8 +92,8 @@
   h4,
   h5,
   h6 {
-    font-family: var(--font-nohemi), sans-serif;
     font-weight: 300;
+    font-family: var(--font-nohemi), sans-serif;
     line-height: var(--line-height-collapse);
     letter-spacing: var(--letter-spacing-wide);
     text-wrap: balance;
@@ -143,14 +144,14 @@
   // Accessibility utility
   .sr-only {
     position: absolute;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
     width: 1px;
     height: 1px;
     margin: -1px;
     padding: 0;
-    overflow: hidden;
-    white-space: nowrap;
     border: 0;
-    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
   }
 
   .button-01 {
@@ -224,15 +225,15 @@
   .sups,
   sup {
     top: -0.5em;
-    font-size: var(--caption-03);
     vertical-align: super;
+    font-size: var(--caption-03);
   }
 
   .sub,
   sub {
     bottom: -0.25em;
-    font-size: var(--caption-03);
     vertical-align: sub;
+    font-size: var(--caption-03);
   }
 
   sub,
@@ -240,8 +241,8 @@
   sup,
   .sup {
     position: relative;
-    line-height: 0;
     vertical-align: baseline;
+    line-height: 0;
   }
 
   .smallest {
@@ -249,17 +250,17 @@
   }
 
   abbr[title] {
+    border-bottom: none;
     text-decoration: underline;
     text-decoration: underline dotted;
-    border-bottom: none;
   }
 
   code,
   kbd,
   samp,
   pre {
-    font-family: monospace;
     font-size: 1em;
+    font-family: monospace;
   }
 
   .elevated {
@@ -293,16 +294,16 @@
 }
 
 *::selection {
-  color: var(--color-foreground-highlight);
   background: var(--color-background-highlight);
+  color: var(--color-foreground-highlight);
 }
 
 h4,
 h3 {
   span {
     display: block;
-    font-weight: var(--font-weight-light);
     color: var(--color-foreground-secondary);
+    font-weight: var(--font-weight-light);
   }
 }
 
@@ -315,17 +316,17 @@ h3 {
 
 .text-highlighted > span {
   padding: var(--size-02) var(--size-03);
-  color: var(--color-foreground-highlight);
   background: var(--color-background-highlight);
   border-radius: var(--radius-01);
-  transition: all 0.2s ease;
   box-decoration-break: clone;
+  color: var(--color-foreground-highlight);
+  transition: all 0.2s ease;
 }
 
 /* Gooey selection styling */
 ::selection {
-  color: var(--color-foreground-highlight);
   background: var(--color-background-highlight);
+  color: var(--color-foreground-highlight);
 
   /* Note: ::selection doesn't support pseudo-elements, so we can't use gooey filter here
      without blurring the text. The gooey effect will be handled by CSS Custom Highlight API
@@ -335,35 +336,35 @@ h3 {
 /* Enhanced selection styling for gooey effect */
 ::highlight(gooey-highlight) {
   padding: var(--size-01) var(--size-02);
-  color: var(--color-foreground-highlight);
   background: var(--color-background-highlight);
   border-radius: var(--radius-01);
+  box-decoration-break: clone;
+  color: var(--color-foreground-highlight);
   transition: all 0.2s ease;
   animation: gooeyHighlightFadeIn 0.3s ease-out;
 
   /* Use a very subtle blur to avoid text obscuring */
   filter: url('#goo-text-subtle');
-  box-decoration-break: clone;
 }
 
 /* Fallback for browsers that don't support CSS Custom Highlight API */
 @supports not (CSS.highlights) {
   *::selection {
-    color: var(--color-foreground-highlight);
     background: var(--color-background-highlight);
     border-radius: var(--radius-01);
+    color: var(--color-foreground-highlight);
   }
 }
 
 /* Mark element styling with gooey effect */
 mark {
   padding: var(--size-01) var(--size-02);
-  color: var(--color-foreground-highlight);
   background: var(--color-background-highlight);
   border-radius: var(--radius-01);
+  box-decoration-break: clone;
+  color: var(--color-foreground-highlight);
   transition: all 0.2s ease;
   filter: url('#goo-text');
-  box-decoration-break: clone;
 }
 
 /* Animation for highlighted text */
@@ -389,11 +390,11 @@ mark {
     position: relative;
     z-index: 2;
     padding: var(--size-01) var(--size-02);
-    color: var(--color-foreground-highlight);
     background: var(--color-background-highlight);
     border-radius: var(--radius-01);
-    transition: all 0.2s ease;
     box-decoration-break: clone;
+    color: var(--color-foreground-highlight);
+    transition: all 0.2s ease;
   }
 }
 
@@ -404,11 +405,11 @@ mark {
 
 .gooey > span {
   padding: var(--size-05) var(--size-05);
-  color: var(--color-foreground-primary);
   background: var(--color-background-primary);
 
   /* make sure the padding apply to all the lines */
   box-decoration-break: clone;
+  color: var(--color-foreground-primary);
 }
 
 /* Hover effects for highlighted text */
@@ -466,22 +467,22 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  color: var(--color-foreground-primary);
   background: var(--color-background-primary);
+  color: var(--color-foreground-primary);
 }
 
 body::before {
-  content: '';
   position: fixed;
   top: 0;
   left: 0;
   z-index: 3023023023020;
   width: 100%;
   height: 100%;
-  color: var(--color-foreground-primary);
   opacity: 0.15;
-  pointer-events: none;
+  color: var(--color-foreground-primary);
   filter: url('#grainy');
+  pointer-events: none;
+  content: '';
 }
 
 body > svg {
@@ -504,10 +505,10 @@ main {
   display: flex;
   flex-grow: 1;
   flex-direction: column;
+  overflow-x: hidden;
   width: 100%;
   margin: auto;
   padding-top: 5vh;
-  overflow-x: hidden;
   transition-property: transform, filter;
   view-transition-name: main;
 }
@@ -553,10 +554,10 @@ section:not(:first-of-type) + section {
 }
 
 hr {
-  height: 0;
-  margin: var(--size-07) 0;
   overflow: visible;
   box-sizing: content-box;
+  height: 0;
+  margin: var(--size-07) 0;
   border: none;
   border-top: 1px solid var(--color-foreground-primary);
 }
@@ -583,8 +584,8 @@ canvas {
 }
 
 a {
-  text-decoration: none;
   color: var(--color-foreground-accent, inherit);
+  text-decoration: none;
 }
 
 a:focus-visible,
@@ -614,8 +615,8 @@ button,
 [type='submit'] {
   background: none;
   border: none;
-  appearance: button;
   cursor: pointer;
+  appearance: button;
 }
 
 button::-moz-focus-inner,
@@ -669,10 +670,10 @@ textarea {
   max-width: 30em;
   min-height: var(--tap-target-large);
   padding: var(--size-03) var(--size-04);
-  color: var(--color-foreground-primary);
   background: var(--color-background-input);
   border: 1px solid var(--color-border-primary);
   border-radius: var(--radius-02);
+  color: var(--color-foreground-primary);
   transition: border 0.2s ease;
   resize: vertical;
 }
@@ -700,17 +701,17 @@ textarea:focus-visible {
 
 input:read-only,
 textarea:read-only {
-  color: var(--secondary);
   background: var(--color-background-read-only);
   border-color: var(--color-foreground-primary);
   outline: none;
+  color: var(--secondary);
 }
 
 input:disabled,
 textarea:disabled {
-  color: var(--color-foreground-disabled);
   background: var(--color-background-secondary);
   border-color: var(--color-border-disabled);
+  color: var(--color-foreground-disabled);
 }
 
 input[type='range'] {
@@ -772,9 +773,9 @@ article ol {
 
 .grid {
   display: grid;
-  align-content: stretch;
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   gap: var(--grid-gap-medium);
+  align-content: stretch;
 }
 
 .card {
@@ -799,9 +800,9 @@ article ol {
 
 .meta {
   display: flex;
+  gap: var(--size-03);
   justify-content: space-between;
   align-items: center;
-  gap: var(--size-03);
 }
 
 tr {
@@ -878,15 +879,15 @@ header + main {
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
   width: 100%;
   height: 100%;
-  overflow: hidden;
 }
 
 .avatarFlag {
   display: flex;
-  align-items: center;
   gap: var(--size-06);
+  align-items: center;
 }
 
 .flag {
@@ -930,8 +931,8 @@ header + main {
 
   a {
     display: flex;
-    align-items: center;
     gap: var(--size-04);
+    align-items: center;
     color: var(--color-foreground-secondary);
   }
 }
@@ -952,10 +953,10 @@ header + main {
 
 .glossary-item h4 {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   grid-column: span 1;
   gap: var(--size-05);
+  justify-content: space-between;
+  align-items: center;
 }
 
 .sub-list {
@@ -1008,15 +1009,15 @@ header + main {
 
   .content .glossary-list {
     display: grid;
-    align-items: start;
     grid-template-columns: 1fr 1fr 3fr;
     gap: var(--size-06);
+    align-items: start;
     margin: 0 auto;
   }
 
   .glossary-list dd {
-    align-self: start;
     grid-column: span 1;
+    align-self: start;
     margin-top: 0;
   }
 
@@ -1030,10 +1031,10 @@ header + main {
 
     dl {
       display: grid;
-      align-items: start;
       grid-template-columns: 1fr 1fr;
       grid-column: span 2;
       gap: var(--size-06);
+      align-items: start;
 
       .glossary-item {
         padding: var(--size-03) var(--size-04);
@@ -1041,27 +1042,27 @@ header + main {
         transition: all 0.2s ease;
 
         &:hover {
-          color: var(--color-foreground-highlight);
           background: var(--color-background-highlight);
+          color: var(--color-foreground-highlight);
 
           & + dd {
-            color: var(--color-foreground-highlight);
             background: var(--color-background-highlight);
+            color: var(--color-foreground-highlight);
           }
         }
 
         &:has(+ dd:hover) {
-          color: var(--color-foreground-highlight);
           background: var(--color-background-highlight);
+          color: var(--color-foreground-highlight);
         }
       }
 
       dt h4 {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
         grid-column: span 1;
         gap: var(--size-05);
+        justify-content: space-between;
+        align-items: center;
       }
     }
   }
@@ -1117,19 +1118,19 @@ header + main {
 
   .meta .byline {
     flex-direction: row;
-    align-items: center;
     gap: var(--size-03);
+    align-items: center;
   }
 }
 
 img.align-left {
-  margin-right: 1rem;
   float: left;
+  margin-right: 1rem;
 }
 
 img.align-right {
-  margin-left: 1rem;
   float: right;
+  margin-left: 1rem;
 }
 
 img.align-center {

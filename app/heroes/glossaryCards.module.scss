@@ -30,9 +30,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
   width: clamp(150px, 30vw, 300px);
   height: clamp(150px, 30vw, 400px);
-  overflow: hidden;
   background: var(--card-background);
   border: var(--card-border, 1px solid var(--color-border-primary));
   border-radius: 16px;
@@ -55,11 +55,11 @@
   position: absolute;
   top: 12px;
   right: 12px;
+  color: var(--color-foreground-primary);
 
   // color: orange;
   font-size: clamp(var(--caption-03), 1.5vw, var(--body-03));
   text-transform: uppercase;
-  color: var(--color-foreground-primary);
   pointer-events: none;
 }
 
@@ -67,16 +67,16 @@
   position: absolute;
   bottom: 12px;
   left: 12px;
+  color: var(--color-foreground-primary);
   font-size: clamp(var(--caption-03), 1.5vw, var(--body-03));
   text-transform: uppercase;
-  color: var(--color-foreground-primary);
   pointer-events: none;
 }
 
 .cardContent {
   z-index: 1;
-  font-size: clamp(var(--heading-05), 3vw, var(--oversize-02));
   color: var(--color-foreground-secondary);
+  font-size: clamp(var(--heading-05), 3vw, var(--oversize-02));
   pointer-events: none;
   user-select: none;
 }

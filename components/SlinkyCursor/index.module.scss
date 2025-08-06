@@ -16,10 +16,10 @@
   min-width: 32px;
   height: var(--cursor-size, 40px);
   min-height: 32px;
-  line-height: 0;
   background: rgb(0 0 0 / 10%);
   border: 2px solid var(--color-border-primary);
   border-radius: var(--radius-full);
+  line-height: 0;
   transform-origin: center;
   pointer-events: none;
 }
@@ -27,9 +27,9 @@
 .pest.active {
   width: 32px !important;
   height: 32px;
+  aspect-ratio: 1/1;
   background: rgb(0 0 0 / 20%);
 
   /* Style changes on mouse down */
   border: 2px dashed var(--color-border-hover, #ccc);
-  aspect-ratio: 1/1;
 }

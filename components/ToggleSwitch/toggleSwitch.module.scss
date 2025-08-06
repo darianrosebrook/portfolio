@@ -1,12 +1,12 @@
 .toggleSwitch {
   position: relative;
   display: inline-flex;
-  align-items: center;
-  align-content: center;
   gap: 0.25rem;
+  align-content: center;
+  align-items: center;
   max-height: 1.5rem;
-  line-height: 1;
   border-radius: var(--radius-full);
+  line-height: 1;
 
   &:focus-within {
     outline: 2px solid var(--color-border-accent);
@@ -20,6 +20,7 @@
   }
 
   input {
+    all: unset;
     display: inline-flex;
     width: 3rem;
     min-width: 3rem;
@@ -29,7 +30,6 @@
     border-radius: var(--radius-full);
     transition: all 0.3s ease;
     cursor: pointer;
-    all: unset;
 
     &:disabled {
       background-color: var(--color-background-disabled);
@@ -53,7 +53,6 @@
 }
 
 .toggleSwitch label::before {
-  content: ' ';
   position: absolute;
   top: 0.2125rem;
   left: 0.25rem;
@@ -64,6 +63,7 @@
   border: 1px solid var(--color-border-primary);
   border-radius: var(--radius-full);
   transition: all ease 0.3s;
+  content: ' ';
 }
 
 .toggleSwitch label.checked::before {
