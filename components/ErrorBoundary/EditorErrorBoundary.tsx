@@ -24,7 +24,9 @@ const EditorErrorBoundary: React.FC<EditorErrorBoundaryProps> = ({
   };
 
   const handleDataRecovery = () => {
-    const storageKey = editorName ? `${editorName}-autosave` : 'editor-autosave';
+    const storageKey = editorName
+      ? `${editorName}-autosave`
+      : 'editor-autosave';
     const saved = localStorage.getItem(storageKey);
     if (saved) {
       console.log('Recovered data:', JSON.parse(saved));
@@ -39,8 +41,18 @@ const EditorErrorBoundary: React.FC<EditorErrorBoundaryProps> = ({
           <h3>{editorName || 'Editor'} Error</h3>
           <p>Your work has been auto-saved and can be recovered.</p>
           <button onClick={handleDataRecovery}>Recover Data</button>
-          <button onClick={() => window.location.reload()}>Restart Editor</button>
-          <button onClick={() => navigator.clipboard.writeText(JSON.stringify({ editorName, timestamp: new Date() }))}>Copy Error Info</button>
+          <button onClick={() => window.location.reload()}>
+            Restart Editor
+          </button>
+          <button
+            onClick={() =>
+              navigator.clipboard.writeText(
+                JSON.stringify({ editorName, timestamp: new Date() })
+              )
+            }
+          >
+            Copy Error Info
+          </button>
         </div>
       }
     >

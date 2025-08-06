@@ -22,7 +22,8 @@ const AnimationErrorBoundary: React.FC<AnimationErrorBoundaryProps> = ({
     console.error(`${animationName || 'Animation'} animation error:`, {
       animationContext: {
         animationSupport: {
-          requestAnimationFrame: typeof window !== 'undefined' && 'requestAnimationFrame' in window,
+          requestAnimationFrame:
+            typeof window !== 'undefined' && 'requestAnimationFrame' in window,
         },
       },
       error,

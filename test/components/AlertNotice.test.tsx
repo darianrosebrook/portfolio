@@ -133,10 +133,7 @@ describe('AlertNotice Components', () => {
           </Container>
         );
 
-        await expectNoAccessibilityViolations(
-          renderResult,
-          designSystemAxeConfig
-        );
+        await expectNoAccessibilityViolations(renderResult);
       });
 
       it('should have no accessibility violations when dismissible', async () => {
@@ -156,10 +153,7 @@ describe('AlertNotice Components', () => {
           </Container>
         );
 
-        await expectNoAccessibilityViolations(
-          renderResult,
-          designSystemAxeConfig
-        );
+        await expectNoAccessibilityViolations(renderResult);
       });
 
       it('should maintain accessibility across all status variants', async () => {
