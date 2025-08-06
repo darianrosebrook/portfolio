@@ -1,5 +1,9 @@
 import '@testing-library/jest-dom';
 import { vi } from 'vitest';
+import { toHaveNoViolations } from 'jest-axe';
+
+// Extend Vitest's expect with jest-axe matchers
+expect.extend(toHaveNoViolations);
 
 // Polyfill requestIdleCallback for accessibility testing
 if (typeof globalThis.requestIdleCallback === 'undefined') {
