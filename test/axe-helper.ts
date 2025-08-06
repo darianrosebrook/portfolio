@@ -27,7 +27,9 @@ export const designSystemAxeConfig = {
 /**
  * Helper function to check for accessibility violations with custom config
  */
-export const expectNoAccessibilityViolations = async (element: Element | { container: Element }) => {
+export const expectNoAccessibilityViolations = async (
+  element: Element | { container: Element }
+) => {
   const targetElement = 'container' in element ? element.container : element;
   const results = await axe(targetElement);
   expect(results).toHaveNoViolations();
