@@ -8,6 +8,7 @@ interface ErrorBoundaryState {
 interface ErrorBoundaryProps {
   children: ReactNode;
   fallback?: ReactNode;
+  onError?: (error: Error, errorInfo: React.ErrorInfo) => void;
 }
 
 /**
@@ -28,6 +29,11 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     // Log the error to console or error reporting service
     console.error('ErrorBoundary caught an error:', error, errorInfo);
+    
+    // Call custom onError callback if provided
+    if (this.props.onError) {
+      this.props.onError(error, errorInfo);
+    }
   }
 
   render() {
@@ -51,9 +57,39 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
           <h3 style={{ margin: '0 0 0.5rem 0', fontSize: '1rem' }}>
             Something went wrong
           </h3>
-          <p style={{ margin: '0', fontSize: '0.9rem' }}>
+          <p style={{ margin: '0 0 1rem 0', fontSize: '0.9rem' }}>
             {this.state.error?.message || 'An unexpected error occurred'}
           </p>
+          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+            <button
+              onClick={() => window.location.reload()}
+              style={{ padding: '0.5rem', fontSize: '0.8rem' }}
+            >
+              Try Again
+            </button>
+            <button
+              onClick={() => {
+                setTimeout(() => window.location.reload(), 3000);
+              }}
+              style={{ padding: '0.5rem', fontSize: '0.8rem' }}
+            >
+              Retry in 3s
+            </button>
+            <button
+              onClick={() => window.location.reload()}
+              style={{ padding: '0.5rem', fontSize: '0.8rem' }}
+            >
+              Reload Page
+            </button>
+          </div>
+          {process.env.NODE_ENV === 'development' && (
+            <details style={{ marginTop: '1rem' }}>
+              <summary>Error Details</summary>
+              <pre style={{ fontSize: '0.7rem', overflow: 'auto' }}>
+                {this.state.error?.stack}
+              </pre>
+            </details>
+          )}
         </div>
       );
     }
@@ -64,19 +100,25 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 
 export default ErrorBoundary;
 
+interface WithErrorBoundaryOptions {
+  fallback?: ReactNode;
+  onError?: (error: Error, errorInfo: React.ErrorInfo) => void;
+  componentName?: string;
+}
+
 /**
  * Higher-order component that wraps a component with ErrorBoundary
  */
 export const withErrorBoundary = <P extends object>(
   Component: React.ComponentType<P>,
-  fallback?: ReactNode,
+  options?: WithErrorBoundaryOptions
 ) => {
   const WrappedComponent = (props: P) => (
-    <ErrorBoundary fallback={fallback}>
+    <ErrorBoundary fallback={options?.fallback} onError={options?.onError}>
       <Component {...props} />
     </ErrorBoundary>
   );
-  
+ 
   WrappedComponent.displayName = `withErrorBoundary(${Component.displayName || Component.name})`;
   return WrappedComponent;
 };
