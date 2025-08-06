@@ -8,7 +8,7 @@
  *   - getCounter
  */
 import type { Glyph } from 'fontkit';
-import type { Point2D } from '@/utils/geometry/geometry';
+import type { point2d } from '@/utils/geometry/geometry';
 import { Logger } from '@/utils/helpers/logger';
 import { getOvershoot, shapeForV2 } from '@/utils/caching';
 import { isInside, rayHits } from '@/utils/geometry/geometryCore';
@@ -17,7 +17,7 @@ import { FeatureDetectionConfig } from './featureConfig';
 
 export type FeatureShape =
   | { type: 'circle'; cx: number; cy: number; r: number }
-  | { type: 'polyline'; points: Point2D[] }
+  | { type: 'polyline'; points: point2d[] }
   | { type: 'path'; d: string };
 
 export interface FeatureResult {
@@ -32,7 +32,7 @@ export interface FeatureResult {
  * @param m - Font metrics
  * @returns Point2D inside the counter, or null if not found.
  */
-export function counterSeed(g: Glyph, m: Metrics): Point2D | null {
+export function counterSeed(g: Glyph, m: Metrics): point2d | null {
   if (!isDrawable(g) || !g.path || !Array.isArray(g.path.commands)) {
     Logger.warn(
       '[counterSeed] Glyph is not drawable or has no path/commands:',
@@ -46,7 +46,7 @@ export function counterSeed(g: Glyph, m: Metrics): Point2D | null {
   for (let i = 1; i < bands; i++) {
     const y = m.baseline + (i * (m.xHeight - m.baseline)) / bands;
     const origin = { x: -overshoot, y };
-    let points: Point2D[] = [];
+    let points: point2d[] = [];
     try {
       const result = rayHits(gs, origin, 0, overshoot * 2);
       points = Array.isArray(result.points) ? result.points : [];
@@ -81,7 +81,7 @@ export function counterSeed(g: Glyph, m: Metrics): Point2D | null {
  */
 export function traceRegion(
   g: Glyph,
-  seed: Point2D,
+  seed: point2d,
   step = 6,
   rad = 1.5
 ): FeatureShape | null {
@@ -92,7 +92,7 @@ export function traceRegion(
     );
     return null;
   }
-  const outline: Point2D[] = [];
+  const outline: point2d[] = [];
   const overshoot = getOvershoot(g);
   for (let a = 0; a < 360; a += step) {
     const ang = (a * Math.PI) / 180;
