@@ -1,0 +1,107 @@
+.dashboard {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1000;
+  max-width: 200px;
+  padding: 1rem;
+  font-family:
+    ui-monospace, 'SF Mono', Monaco, Inconsolata, 'Roboto Mono', monospace;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  background: rgb(255 255 255 / 95%);
+  border: 1px solid rgb(0 0 0 / 10%);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
+  backdrop-filter: blur(8px);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgb(0 0 0 / 10%);
+}
+
+.header h3 {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgb(51 51 51);
+}
+
+.closeButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  font-size: 1.2rem;
+  color: rgb(102 102 102);
+  background: none;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.closeButton:hover {
+  background-color: rgb(0 0 0 / 5%);
+}
+
+.metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.metric {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.label {
+  font-weight: 500;
+  color: rgb(102 102 102);
+}
+
+.value {
+  font-weight: 600;
+  color: rgb(34 34 34);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-color-scheme: dark) {
+  .dashboard {
+    background: rgb(34 34 34 / 95%);
+    border-color: rgb(255 255 255 / 20%);
+  }
+
+  .header {
+    border-bottom-color: rgb(255 255 255 / 20%);
+  }
+
+  .header h3 {
+    color: rgb(245 245 245);
+  }
+
+  .closeButton {
+    color: rgb(170 170 170);
+  }
+
+  .closeButton:hover {
+    background-color: rgb(255 255 255 / 10%);
+  }
+
+  .label {
+    color: rgb(170 170 170);
+  }
+
+  .value {
+    color: rgb(245 245 245);
+  }
+}

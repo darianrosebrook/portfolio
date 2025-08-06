@@ -29,7 +29,7 @@ const FontInspector = dynamic(
 
 export default function Page() {
   return (
-    <InteractiveErrorBoundary componentName="FontInspector">
+    <InteractiveErrorBoundary>
       <FontInspector />
     </InteractiveErrorBoundary>
   );

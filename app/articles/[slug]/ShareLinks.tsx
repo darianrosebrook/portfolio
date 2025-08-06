@@ -41,7 +41,7 @@ export default function ShareLinks({
             onClick={handleCopy}
             title={copied ? 'Copied!' : 'Copy to clipboard'}
           >
-            {copied ? <CheckIcon size={16} /> : <LinkIcon size={16} />}
+            {copied ? <CheckIcon /> : <LinkIcon />}
           </Button>
         </li>
         <li>
