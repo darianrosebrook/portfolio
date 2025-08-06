@@ -2,7 +2,25 @@
 
 > **Status:** Recovery in progress after catastrophic git failure
 > **Branch:** `feature/optimization-recovery`
+> **Repository:** `darianrosebrook/portfolio`
 > **Last Updated:** 2025-08-05
+
+## 📁 **Project Context**
+
+**Repository Information:**
+- **GitHub:** https://github.com/darianrosebrook/portfolio
+- **Framework:** Next.js 15.3.2 with App Router
+- **TypeScript:** Strict mode enabled
+- **Styling:** SCSS with CSS Modules
+- **Database:** Supabase
+- **Deployment:** Production-ready optimization target
+
+**Key Technologies:**
+- **Editor:** Tiptap (rich text editing)
+- **Animation:** GSAP
+- **Testing:** Vitest + Testing Library
+- **Performance:** Lighthouse + Bundle Analyzer
+- **Caching:** Advanced LRU + Service Worker
 
 ## 🚨 **Recovery Context**
 
@@ -16,6 +34,24 @@
 - `stash@{0}`: WIP on main (lighthouse performance results)
 - `stash@{1}`: Performance optimization files (5 files)
 - `stash@{2}`: Comprehensive optimizations (100+ files) ⭐ **PRIMARY RECOVERY SOURCE**
+
+**Git References for Future Context:**
+```bash
+# View stash contents
+git stash list
+git stash show stash@{2} --name-only
+git show stash@{2}:next.config.mjs
+git show stash@{2}:package.json
+
+# Recovery commands
+git stash apply stash@{2}
+git stash pop stash@{1}
+```
+
+**Key Commit Hashes (if needed):**
+- Last known good state: Check `git log --oneline -10` for recent commits
+- Main branch: `origin/main` should have stable base
+- Feature branches: `git branch -a` shows available branches
 
 ---
 
@@ -163,10 +199,159 @@
 
 ---
 
+## 📂 **Critical File Locations & Configurations**
+
+### **Known Working Configurations from Stash:**
+
+#### **Next.js Config** (`next.config.mjs`)
+```javascript
+// Key optimizations that were working:
+- withBundleAnalyzer integration
+- Image optimization (WebP/AVIF, device sizes)
+- Compression enabled
+- Package import optimization for Tiptap
+- Console removal in production
+- PoweredBy header removal
+```
+
+#### **Package Dependencies** (`package.json`)
+```json
+// Critical additions that were working:
+"scripts": {
+  "analyze": "ANALYZE=true npm run build",
+  "test": "vitest",
+  "test:run": "vitest run"
+}
+
+"devDependencies": {
+  "@next/bundle-analyzer": "^15.4.5",
+  "vitest": "^3.2.4",
+  "@testing-library/*": "latest versions"
+}
+```
+
+#### **TypeScript Route Handler Pattern** (Working)
+```typescript
+// All API routes should use this Next.js 15 pattern:
+export async function GET(
+  _request: Request,
+  { params }: { params: Promise<{ slug: string }> }
+) {
+  const { slug } = await params;
+  // ... rest of handler
+}
+```
+
+### **Missing Infrastructure to Recreate:**
+
+#### **Testing Setup**
+- `vitest.config.ts` - Path aliases (`@` pointing to root)
+- `test/setup.ts` - requestIdleCallback polyfill for @axe-core/react
+- `test/test-utils.tsx` - React testing utilities wrapper
+
+#### **Performance Monitoring**
+- `utils/performance/monitor.ts` - Core Web Vitals tracking
+- `utils/caching/advancedCache.ts` - LRU cache with stale-while-revalidate
+- `components/PerformanceDashboard/` - Real-time performance UI
+
+#### **Service Worker & Offline**
+- `public/sw.js` - Advanced caching strategies
+- `app/offline/page.tsx` - Offline fallback page with navigation
+
+---
+
+## 🔍 **Debugging & Validation Commands**
+
+### **Quick Health Checks:**
+```bash
+# Build validation
+npm run build
+
+# Test validation  
+npm run test:run
+
+# Development server
+npm run dev
+
+# Bundle analysis
+npm run analyze
+
+# Lint checks
+npm run lint
+npx prettier --check .
+npx stylelint "**/*.{css,scss}"
+```
+
+### **Performance Validation:**
+```bash
+# Install lighthouse globally if needed
+npm install -g lighthouse
+
+# Run lighthouse test
+lighthouse http://localhost:3000 --only-categories=performance
+
+# Check bundle size
+npm run analyze
+```
+
+### **Git State Checks:**
+```bash
+# Check current state
+git status
+git branch -a
+git stash list
+
+# Check recent commits
+git log --oneline -10
+
+# Check for conflicts
+git diff HEAD
+```
+
+---
+
+## 📊 **Performance Benchmarks (Target Goals)**
+
+**Lighthouse Scores to Achieve:**
+- Overall Performance: 75/100 (previously achieved)
+- First Contentful Paint: ~1.2s
+- Largest Contentful Paint: <9.6s (aim for <2.5s)
+- Total Blocking Time: 0ms
+- Cumulative Layout Shift: 0
+
+**Bundle Size Targets:**
+- Total bundle: <1,808 KiB (previously achieved)
+- Main chunk: <53.2 KiB
+- First Load JS: <178 KiB for homepage
+
+**Test Coverage Goals:**
+- 110+ tests passing (previously achieved)
+- Core functionality: 100% passing
+- TypeScript: Zero errors
+- ESLint/Stylelint: Clean
+
+---
+
 ## 📝 **Recovery Log**
 
 **2025-08-05 17:20** - Created recovery branch and TODO.md
+**2025-08-05 17:25** - Enhanced TODO.md with git references and technical context
 **Next:** Resolve conflicts and apply comprehensive stash
+
+---
+
+## 🆘 **Emergency Recovery Guide**
+
+If this chat session ends, the next AI assistant can:
+
+1. **Read this TODO.md** for complete context
+2. **Check git stashes** with `git stash list`
+3. **Apply main stash** with `git stash apply stash@{2}`
+4. **Follow recovery tasks** in order from Phase 2 onwards
+5. **Use validation commands** to verify progress
+6. **Reference GitHub repo** at https://github.com/darianrosebrook/portfolio
+
+**Key Context:** This is a Next.js 15 portfolio with comprehensive performance optimizations that were working (47% improvement) before git failure. All code is recoverable from stashes.
 
 ---
 
