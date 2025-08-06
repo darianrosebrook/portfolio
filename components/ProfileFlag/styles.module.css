@@ -1,16 +1,16 @@
 .profileFlag a {
   display: grid;
+  align-items: center;
   grid-template-columns: auto auto;
   gap: var(--size-03);
-  align-items: center;
   width: fit-content;
   padding: var(--size-04);
   padding-right: var(--size-06);
-  border: 1px solid var(--color-border-primary);
-  border-radius: var(--radius-full);
-  color: var(--foreground);
   line-height: 1;
   text-decoration: none;
+  color: var(--foreground);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-full);
   transition: border-color 0.2s ease;
 }
 

@@ -163,7 +163,7 @@ const Content: React.FC<ContentProps> = ({ children, className }) => {
   }
 
   const { popoverId, position, updatePosition, isOpen, contentRef } = context;
-  const animationRef = useRef(null);
+  const animationRef = useRef<gsap.core.Tween | null>(null);
 
   useLayoutEffect(() => {
     if (contentRef.current && isOpen) {

@@ -12,23 +12,14 @@ async function getData() {
     .order('published_at', { ascending: false });
   return data;
 }
-function Card(data: {
-  image: string;
-  headline: string;
-  description: string;
-  slug: string;
-  author: Article['author'];
-  published_at?: string;
-  created_at?: string;
-  id?: number;
-}) {
+function Card(data: Article) {
   const url = `/dashboard/articles/${data.slug}/edit`;
   let { description } = data;
   if (description?.length && description.length > 240) {
     description = description.slice(0, 240) + '...';
   }
   const date = new Date(
-    data.published_at || data.created_at
+    data.published_at || data.created_at || new Date()
   ).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
@@ -40,14 +31,16 @@ function Card(data: {
         <Link href={url}>
           <Image
             src={data.image || '/darianrosebrook.jpg'}
-            alt={data.headline}
+            alt={data.headline || 'Article'}
             width={300}
             height={200}
+            loading="lazy"
+            sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 300px"
           />
         </Link>
         <div className="meta">
           <ProfileFlag
-            profile={typeof data.author === 'string' ? undefined : data.author}
+            profile={typeof data.author === 'string' ? null : data.author}
           />
           <small>
             <time dateTime={date} className="small" title={date}>
@@ -72,7 +65,7 @@ export default async function Page() {
       <div>
         <Link href="articles/edit">New Article</Link>
       </div>
-      {articles.map((article: Article) => (
+      {articles?.map((article: Article) => (
         <Card key={article.id} {...article} />
       ))}
     </div>

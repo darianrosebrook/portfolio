@@ -48,7 +48,7 @@ interface InspectorContextType {
   fonts: FontInfo[];
   currentFontIndex: number;
   font: Font | null;
-  fontInstance: Font;
+  fontInstance: Font | null;
   axisValues: AxisValues;
   glyphUnicode: number;
   glyph: Glyph | null;
@@ -430,7 +430,7 @@ export const InspectorProvider: React.FC<{
 
   const setAxisValues = useCallback(
     (v: Partial<AxisValues>) => {
-      setAxisValuesState((prev) => ({ ...prev, ...v }));
+      setAxisValuesState((prev) => ({ ...prev, ...v }) as AxisValues);
     },
     [setAxisValuesState]
   );

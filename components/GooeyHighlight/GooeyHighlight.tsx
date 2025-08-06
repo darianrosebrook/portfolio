@@ -27,7 +27,7 @@ export const GooeyHighlight: React.FC<GooeyHighlightProps> = ({
 }) => {
   const {
     textRef,
-    highlights,
+    // highlights,
     isSupported,
     clearHighlights,
     highlightWords,
@@ -72,8 +72,11 @@ export const GooeyHighlight: React.FC<GooeyHighlightProps> = ({
         <div
           ref={textRef}
           className={`${styles.highlightableText} ${styles.gooeyHighlightWrapper}`}
-          onMouseUp={handleSelection}
+          onMouseUp={handleClick}
           onClick={handleClick}
+          onSelect={handleSelection}
+          onMouseDown={handleSelection}
+          onKeyDown={() => null}
           style={
             {
               '--highlight-color': highlightColor,

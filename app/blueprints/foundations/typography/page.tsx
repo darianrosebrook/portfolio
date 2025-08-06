@@ -1,28 +1,36 @@
-// app/page.tsx
-/**
- * Metadata for the /blueprints/foundations/typography page.
- * @type {import('next').Metadata}
- */
-export const metadata = {
-  title: 'Typography Foundations | Darian Rosebrook',
-  description:
-    'Explore typographic scales, font stacks, and best practices for accessible, expressive typography in design systems.',
-  openGraph: {
-    title: 'Typography Foundations | Darian Rosebrook',
-    description:
-      'Explore typographic scales, font stacks, and best practices for accessible, expressive typography in design systems.',
-    images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Typography Foundations | Darian Rosebrook',
-    description:
-      'Explore typographic scales, font stacks, and best practices for accessible, expressive typography in design systems.',
-    images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
-  },
-};
-import { FontInspector } from '@/components/FontInspector'; // adjust path if needed
+'use client';
+
+import dynamic from 'next/dynamic';
+import { InteractiveErrorBoundary } from '@/components/ErrorBoundary';
+
+// Dynamically import FontInspector for better performance
+const FontInspector = dynamic(
+  () =>
+    import('@/components/FontInspector').then((mod) => ({
+      default: mod.FontInspector,
+    })),
+  {
+    loading: () => (
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: '400px',
+          color: 'var(--color-foreground-secondary)',
+        }}
+      >
+        <div>Loading typography inspector...</div>
+      </div>
+    ),
+    ssr: false, // FontInspector uses Canvas API and complex calculations
+  }
+);
 
 export default function Page() {
-  return <FontInspector />;
+  return (
+    <InteractiveErrorBoundary componentName="FontInspector">
+      <FontInspector />
+    </InteractiveErrorBoundary>
+  );
 }

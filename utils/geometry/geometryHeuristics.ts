@@ -193,7 +193,7 @@ export function getCounter(g: Glyph, m: Metrics): FeatureResult {
  * @param _m - Font metrics
  * @returns FeatureResult for bowl
  */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
 export function getBowl(_g: Glyph, _m: Metrics): FeatureResult {
   // TODO: Implement bowl detection and region tracing
   return { found: false };
@@ -206,7 +206,7 @@ export function getBowl(_g: Glyph, _m: Metrics): FeatureResult {
  * @param _font - The fontkit Font object
  * @returns FeatureResult for tittle
  */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
 export function getTittle(_g: Glyph, _m: Metrics, _font: Font): FeatureResult {
   // TODO: Implement tittle detection and shape extraction
   return { found: false };
@@ -214,8 +214,8 @@ export function getTittle(_g: Glyph, _m: Metrics, _font: Font): FeatureResult {
 
 /**
  * Returns SVG path data string for a glyph, or empty if not drawable.
- * @param g - The fontkit Glyph object.
- * @returns SVG path data string
+ * @param {Glyph} g - The fontkit Glyph object.
+ * @returns {string} SVG path data string.
  */
 export function dFor(g: Glyph): string {
   try {
@@ -303,9 +303,9 @@ function hits(
 /**
  * Checks if a point is inside the glyph outline using the fastest available method.
  * Uses IntersectionQuery.pointInPath if available (kld >= 0.4), else falls back to ray/winding number.
- * @param g - The fontkit Glyph object.
- * @param pt - The point to test.
- * @returns boolean
+ * @param {Glyph} g - The fontkit Glyph object.
+ * @param {Point2D} pt - The point to test.
+ * @returns {boolean}
  */
 export function isInside(g: Glyph, pt: Point2D): boolean {
   const gs = shapeForV2(g);
@@ -331,11 +331,11 @@ export function isInside(g: Glyph, pt: Point2D): boolean {
 
 /**
  * Measures stroke thickness at (x, y) along the vertical direction.
- * @param g - The fontkit Glyph object.
- * @param x - X coordinate
- * @param y - Y coordinate
- * @param font - The fontkit Font object
- * @returns thickness (number)
+ * @param {Glyph} g - The fontkit Glyph object.
+ * @param {number} x - X coordinate.
+ * @param {number} y - Y coordinate.
+ * @param {Font} font - The fontkit Font object.
+ * @returns {number} The thickness of the stroke.
  */
 export function strokeThickness(
   g: Glyph,
@@ -381,7 +381,7 @@ function getOvershoot(g: Glyph): number {
  * @param font - The fontkit Font object
  * @returns scale factor (number)
  */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
 function getFontScale(font?: Font & { fontMatrix?: number[] }): number {
   // fontMatrix is [a, b, c, d, e, f] for 2D affine transform; scale is sqrt(a^2 + b^2)
   // Most fonts use [1,0,0,1,0,0], but oblique/italic may scale X or Y
@@ -396,9 +396,9 @@ function getFontScale(font?: Font & { fontMatrix?: number[] }): number {
 /**
  * Detects if a glyph contains a counter (enclosed negative space).
  * Uses multiple horizontal scanlines between baseline and x-height.
- * @param g - The fontkit Glyph object.
- * @param m - Font metrics
- * @returns boolean
+ * @param {Glyph} g - The fontkit Glyph object.
+ * @param {Metrics} m - Font metrics.
+ * @returns {boolean}
  */
 export function hasCounter(g: Glyph, m: Metrics): boolean {
   if (!isDrawable(g)) return false;
@@ -420,10 +420,10 @@ export function hasCounter(g: Glyph, m: Metrics): boolean {
  * Detects if a glyph contains a stem (main vertical/diagonal stroke).
  * Uses vertical and diagonal scanlines and measures gap thickness at several Y positions.
  * Early bail-out after two bands with thick regions.
- * @param g - The fontkit Glyph object.
- * @param m - Font metrics
- * @param font - The fontkit Font object
- * @returns boolean
+ * @param {Glyph} g - The fontkit Glyph object.
+ * @param {Metrics} m - Font metrics.
+ * @param {Font} font - The fontkit Font object.
+ * @returns {boolean}
  */
 export function hasStem(g: Glyph, m: Metrics, font: Font): boolean {
   if (!isDrawable(g)) return false;
@@ -484,9 +484,9 @@ export function hasStem(g: Glyph, m: Metrics, font: Font): boolean {
 /**
  * Detects if a glyph contains a bowl (fully enclosed curved counter).
  * Uses multiple vertical scanlines and intersection counting.
- * @param g - The fontkit Glyph object.
- * @param m - Font metrics
- * @returns boolean
+ * @param {Glyph} g - The fontkit Glyph object.
+ * @param {Metrics} m - Font metrics.
+ * @returns {boolean}
  */
 export function hasBowl(g: Glyph, m: Metrics): boolean {
   if (!isDrawable(g)) return false;
@@ -512,9 +512,9 @@ export function hasBowl(g: Glyph, m: Metrics): boolean {
 /**
  * Detects if a glyph contains an arm (free horizontal/angled stroke).
  * Uses vertical scanline near right edge, slides inward until inside glyph.
- * @param g - The fontkit Glyph object.
- * @param m - Font metrics
- * @returns boolean
+ * @param {Glyph} g - The fontkit Glyph object.
+ * @param {Metrics} m - Font metrics.
+ * @returns {boolean}
  */
 export function hasArm(g: Glyph, m: Metrics): boolean {
   if (!isDrawable(g)) return false;
@@ -544,9 +544,9 @@ export function hasArm(g: Glyph, m: Metrics): boolean {
 /**
  * Detects if a glyph contains a tail (descending, curved stroke).
  * Minimal: horizontal scan below baseline, one-sided intersection.
- * @param g - The fontkit Glyph object.
- * @param m - Font metrics
- * @returns boolean
+ * @param {Glyph} g - The fontkit Glyph object.
+ * @param {Metrics} m - Font metrics.
+ * @returns {boolean}
  */
 export function hasTail(g: Glyph, m: Metrics): boolean {
   if (!isDrawable(g)) return false;
@@ -562,9 +562,9 @@ export function hasTail(g: Glyph, m: Metrics): boolean {
 /**
  * Detects if a glyph contains a loop (closed/partial below baseline, e.g. g, y).
  * Minimal: detect a bowl below baseline (baseline → descent band).
- * @param g - The fontkit Glyph object.
- * @param m - Font metrics
- * @returns boolean
+ * @param {Glyph} g - The fontkit Glyph object.
+ * @param {Metrics} m - Font metrics.
+ * @returns {boolean}
  */
 export function hasLoop(g: Glyph, m: Metrics): boolean {
   if (!isDrawable(g)) return false;
@@ -604,10 +604,10 @@ export function hasLoop(g: Glyph, m: Metrics): boolean {
 /**
  * Detects if a glyph contains an apex (top meeting point, e.g. A, V).
  * Minimal: cast two 45° rays from center upward, check if they converge within EPS at top.
- * @param g - The fontkit Glyph object.
- * @param m - Font metrics
- * @param font - The fontkit Font object
- * @returns boolean
+ * @param {Glyph} g - The fontkit Glyph object.
+ * @param {Metrics} m - Font metrics.
+ * @param {Font} font - The fontkit Font object.
+ * @returns {boolean}
  */
 export function hasApex(g: Glyph, m: Metrics, font: Font): boolean {
   if (!isDrawable(g)) return false;
@@ -632,10 +632,10 @@ export function hasApex(g: Glyph, m: Metrics, font: Font): boolean {
 /**
  * Detects if a glyph contains a vertex (bottom meeting point, e.g. V, W).
  * Minimal: cast two 45° rays from center downward, check if they converge within EPS at bottom.
- * @param g - The fontkit Glyph object.
- * @param m - Font metrics
- * @param font - The fontkit Font object
- * @returns boolean
+ * @param {Glyph} g - The fontkit Glyph object.
+ * @param {Metrics} m - Font metrics.
+ * @param {Font} font - The fontkit Font object.
+ * @returns {boolean}
  */
 export function hasVertex(g: Glyph, m: Metrics, font: Font): boolean {
   if (!isDrawable(g)) return false;
@@ -659,10 +659,10 @@ export function hasVertex(g: Glyph, m: Metrics, font: Font): boolean {
 /**
  * Detects if a glyph contains a serif (terminal projection).
  * Minimal: at each vertical stem hit, cast a short horizontal ray outward; if thickness at y ± EPS spikes, it's a serif.
- * @param g - The fontkit Glyph object.
- * @param m - Font metrics
- * @param font - The fontkit Font object
- * @returns boolean
+ * @param {Glyph} g - The fontkit Glyph object.
+ * @param {Metrics} m - Font metrics.
+ * @param {Font} font - The fontkit Font object.
+ * @returns {boolean}
  */
 export function hasSerif(g: Glyph, m: Metrics, font: Font): boolean {
   if (!isDrawable(g)) return false;
@@ -705,10 +705,10 @@ export function hasSerif(g: Glyph, m: Metrics, font: Font): boolean {
 /**
  * Detects if a glyph contains a finial (non-serif, non-ball terminal).
  * Uses diagonal probe: if no quick intersection, likely a square finial.
- * @param g - The fontkit Glyph object.
- * @param m - Font metrics
- * @param font - The fontkit Font object
- * @returns boolean
+ * @param {Glyph} g - The fontkit Glyph object.
+ * @param {Metrics} m - Font metrics.
+ * @param {Font} font - The fontkit Font object.
+ * @returns {boolean}
  */
 export function hasFinial(g: Glyph, m: Metrics, font: Font): boolean {
   if (!isDrawable(g)) return false;
@@ -773,9 +773,9 @@ function hitsInWedge(
 /**
  * Detects if a glyph contains an ear (small projection, e.g. g, r).
  * Uses a wedge probe at the top-right of the glyph, sweeping outward.
- * @param g - The fontkit Glyph object.
- * @param m - Font metrics
- * @returns boolean
+ * @param {Glyph} g - The fontkit Glyph object.
+ * @param {Metrics} m - Font metrics.
+ * @returns {boolean}
  */
 export function hasEar(g: Glyph, m: Metrics): boolean {
   if (!isDrawable(g)) return false;
@@ -793,9 +793,9 @@ export function hasEar(g: Glyph, m: Metrics): boolean {
 /**
  * Detects if a glyph contains a spur (small projection, e.g. G, S).
  * Uses a wedge probe at the bottom-left, sweeping downward.
- * @param g - The fontkit Glyph object.
- * @param m - Font metrics
- * @returns boolean
+ * @param {Glyph} g - The fontkit Glyph object.
+ * @param {Metrics} m - Font metrics.
+ * @returns {boolean}
  */
 export function hasSpur(g: Glyph, m: Metrics): boolean {
   if (!isDrawable(g)) return false;
@@ -813,9 +813,9 @@ export function hasSpur(g: Glyph, m: Metrics): boolean {
 /**
  * Detects if a glyph contains a crotch (interior angle, e.g. A, V, W).
  * Uses a wedge probe between limbs, sweeping 30°.
- * @param g - The fontkit Glyph object.
- * @param m - Font metrics
- * @returns boolean
+ * @param {Glyph} g - The fontkit Glyph object.
+ * @param {Metrics} m - Font metrics.
+ * @returns {boolean}
  */
 export function hasCrotch(g: Glyph, m: Metrics): boolean {
   if (!isDrawable(g)) return false;
@@ -833,9 +833,9 @@ export function hasCrotch(g: Glyph, m: Metrics): boolean {
 /**
  * Detects if a glyph contains a bar (horizontal divider/crossbar).
  * Minimal: for each vertical stem, find two thick segments at the same Y; if distance between them is consistent across bands, it's a bar.
- * @param g - The fontkit Glyph object.
- * @param m - Font metrics
- * @returns boolean
+ * @param {Glyph} g - The fontkit Glyph object.
+ * @param {Metrics} m - Font metrics.
+ * @returns {boolean}
  */
 export function hasBar(g: Glyph, m: Metrics): boolean {
   if (!isDrawable(g)) return false;
@@ -863,8 +863,7 @@ export function hasBar(g: Glyph, m: Metrics): boolean {
 
 /**
  * Detects if a glyph contains an eye (enclosed counter in e).
- * @param glyph - The fontkit Glyph object.
- * @returns boolean
+ * @returns {boolean}
  */
 export function hasEye(): boolean {
   // TODO: Implement geometric analysis for eye detection
@@ -1325,7 +1324,7 @@ export function safeIntersect(
  */
 export function precomputeScanlines(
   g: Glyph,
-  m: Metrics,
+  _m: Metrics,
   bands = 8
 ): Array<{
   origin: Point2D;

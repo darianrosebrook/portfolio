@@ -114,7 +114,9 @@ const MetadataPanel = ({
       </div>
       <p>
         Reading time:{' '}
-        <strong>{calculateReadingTime(article.wordCount)} minute read</strong>
+        <strong>
+          {calculateReadingTime(article.wordCount ?? 0)} minute read
+        </strong>
       </p>
       <ToggleSwitch checked={article.status === 'draft'} onChange={onToggle}>
         Draft

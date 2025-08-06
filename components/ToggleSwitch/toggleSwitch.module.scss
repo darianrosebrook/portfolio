@@ -1,12 +1,12 @@
 .toggleSwitch {
   position: relative;
   display: inline-flex;
-  gap: 0.25rem;
-  align-content: center;
   align-items: center;
+  align-content: center;
+  gap: 0.25rem;
   max-height: 1.5rem;
-  border-radius: var(--radius-full);
   line-height: 1;
+  border-radius: var(--radius-full);
 
   &:focus-within {
     outline: 2px solid var(--color-border-accent);
@@ -20,16 +20,16 @@
   }
 
   input {
-    all: unset;
     display: inline-flex;
     width: 3rem;
     min-width: 3rem;
     height: 1.5rem;
+    background-color: var(--color-background-secondary);
     border: 1px solid var(--color-border-primary);
     border-radius: var(--radius-full);
-    background-color: var(--color-background-secondary);
-    cursor: pointer;
     transition: all 0.3s ease;
+    cursor: pointer;
+    all: unset;
 
     &:disabled {
       background-color: var(--color-background-disabled);
@@ -60,9 +60,9 @@
   display: inline-block;
   width: 1rem;
   height: 1rem;
+  background-color: var(--color-background-primary);
   border: 1px solid var(--color-border-primary);
   border-radius: var(--radius-full);
-  background-color: var(--color-background-primary);
   transition: all ease 0.3s;
 }
 

@@ -1,13 +1,35 @@
 'use client';
 
 import React from 'react';
-import GooeyHighlight from '@/components/GooeyHighlight';
+import dynamic from 'next/dynamic';
 import { wrapWithGooeyHighlight } from '@/utils/gooeyHighlight';
+import { AnimationErrorBoundary } from '@/components/ErrorBoundary';
+import { useReducedMotion } from '@/context/ReducedMotionContext';
+
+// Dynamically import GooeyHighlight for better performance
+const GooeyHighlight = dynamic(() => import('@/components/GooeyHighlight'), {
+  loading: () => (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '300px',
+        color: 'var(--color-foreground-secondary)',
+      }}
+    >
+      <div>Loading gooey highlight component...</div>
+    </div>
+  ),
+  ssr: false, // GooeyHighlight uses CSS Custom Highlight API
+});
 
 /**
  * Demo page showcasing gooey text highlighting functionality
  */
 export default function GooeyHighlightDemo() {
+  const { prefersReducedMotion } = useReducedMotion();
+
   return (
     <div className="content">
       <h1>Gooey Text Highlighting Demo</h1>
@@ -21,13 +43,31 @@ export default function GooeyHighlightDemo() {
           has the organic gooey effect.
         </p>
 
-        <GooeyHighlight>
-          This is a demonstration of the gooey highlight effect. You can select
-          any text in this paragraph and it will apply a beautiful gooey
-          background with inverse border radius. The effect works particularly
-          well with highlighted text that spans multiple lines or has complex
-          shapes.
-        </GooeyHighlight>
+        <AnimationErrorBoundary
+          animationName="GooeyHighlight"
+          disableAnimations={prefersReducedMotion}
+          fallbackContent={
+            <div
+              style={{
+                padding: '1rem',
+                backgroundColor: 'var(--color-background-secondary)',
+                borderRadius: '0.5rem',
+                color: 'var(--color-foreground-primary)',
+              }}
+            >
+              This is a demonstration of text highlighting. The gooey animation
+              effect is disabled based on your motion preferences.
+            </div>
+          }
+        >
+          <GooeyHighlight>
+            This is a demonstration of the gooey highlight effect. You can
+            select any text in this paragraph and it will apply a beautiful
+            gooey background with inverse border radius. The effect works
+            particularly well with highlighted text that spans multiple lines or
+            has complex shapes.
+          </GooeyHighlight>
+        </AnimationErrorBoundary>
       </section>
 
       <section>
@@ -99,7 +139,8 @@ export default function GooeyHighlightDemo() {
           This is selectable text that will show the gooey highlighting effect
           when you click and drag to select it. The effect creates a beautiful
           organic shape that follows the text boundaries and creates an inverse
-          border radius effect that's impossible to achieve with standard CSS.
+          border radius effect that&apos;s impossible to achieve with standard
+          CSS.
         </div>
       </section>
 
@@ -133,7 +174,7 @@ export default function GooeyHighlightDemo() {
             </li>
             <li>
               <strong>Fallback Support:</strong> Graceful degradation for
-              browsers that don't support the API
+              browsers that don&apos;t support the API
             </li>
             <li>
               <strong>Multiple Approaches:</strong> Works with ::selection, mark
@@ -161,26 +202,41 @@ export default function GooeyHighlightDemo() {
         >
           <div>
             <h4>Basic Usage</h4>
-            <GooeyHighlight>
-              Simple text highlighting with gooey effect.
-            </GooeyHighlight>
+            <AnimationErrorBoundary
+              animationName="GooeyHighlight Basic"
+              disableAnimations={prefersReducedMotion}
+            >
+              <GooeyHighlight>
+                Simple text highlighting with gooey effect.
+              </GooeyHighlight>
+            </AnimationErrorBoundary>
           </div>
 
           <div>
             <h4>Custom Colors</h4>
-            <GooeyHighlight
-              highlightColor="var(--color-core-green-200)"
-              textColor="var(--color-core-green-800)"
+            <AnimationErrorBoundary
+              animationName="GooeyHighlight Custom"
+              disableAnimations={prefersReducedMotion}
             >
-              Custom colored highlighting with green theme.
-            </GooeyHighlight>
+              <GooeyHighlight
+                highlightColor="var(--color-core-green-200)"
+                textColor="var(--color-core-green-800)"
+              >
+                Custom colored highlighting with green theme.
+              </GooeyHighlight>
+            </AnimationErrorBoundary>
           </div>
 
           <div>
             <h4>Non-Interactive</h4>
-            <GooeyHighlight interactive={false}>
-              This text cannot be highlighted interactively.
-            </GooeyHighlight>
+            <AnimationErrorBoundary
+              animationName="GooeyHighlight Non-Interactive"
+              disableAnimations={prefersReducedMotion}
+            >
+              <GooeyHighlight interactive={false}>
+                This text cannot be highlighted interactively.
+              </GooeyHighlight>
+            </AnimationErrorBoundary>
           </div>
         </div>
       </section>

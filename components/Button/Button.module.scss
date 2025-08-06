@@ -3,34 +3,34 @@
   --button-text-size: var(--caption-03);
   --min-size: var(--size-07);
 
-  all: unset;
   display: inline-flex;
-  gap: var(--button-gap);
   justify-content: center;
   align-items: center;
+  gap: var(--button-gap);
   min-width: var(--min-size);
   max-width: fit-content;
   min-height: var(--min-size);
   max-height: var(--min-size);
   padding: var(--button-gap);
-  border: none;
-  border-radius: var(--radius-full);
-  background-color: var(--color-background-inverse);
-  color: var(--color-foreground-inverse);
   font-size: var(--button-text-size);
   line-height: var(--line-height-collapse);
-  cursor: pointer;
+  color: var(--color-foreground-inverse);
+  background-color: var(--color-background-inverse);
+  border: none;
+  border-radius: var(--radius-full);
   transition: all 0.3s;
+  cursor: pointer;
+  all: unset;
 
   &:disabled {
-    background-color: var(--color-background-disabled);
     color: var(--color-foreground-disabled);
+    background-color: var(--color-background-disabled);
     cursor: not-allowed;
   }
 
   &:hover {
-    background-color: var(--color-background-hover);
     text-decoration: none;
+    background-color: var(--color-background-hover);
   }
 
   &:focus {
@@ -65,32 +65,32 @@
   }
 
   &.primary {
-    border: var(--border-weight-default) solid var(--color-border-accent);
-    background-color: var(--color-background-accent);
     color: var(--color-foreground-primary);
+    background-color: var(--color-background-accent);
+    border: var(--border-weight-default) solid var(--color-border-accent);
   }
 
   &.secondary {
-    border: var(--border-weight-default) solid var(--color-border-accent);
-    background-color: var(--color-background-secondary);
     color: var(--color-foreground-accent);
+    background-color: var(--color-background-secondary);
+    border: var(--border-weight-default) solid var(--color-border-accent);
 
     &:hover {
-      border-color: var(--color-border-bold);
-      background-color: var(--color-background-inverse);
       color: var(--color-foreground-inverse);
+      background-color: var(--color-background-inverse);
+      border-color: var(--color-border-bold);
     }
   }
 
   &.tertiary {
-    border: var(--border-weight-default) solid var(--color-border-light);
-    background-color: var(--color-transparent);
     color: var(--color-foreground-tertiary);
+    background-color: var(--color-transparent);
+    border: var(--border-weight-default) solid var(--color-border-light);
 
     &:hover {
-      border-color: var(--color-border-bold);
-      background-color: var(--color-background-hover);
       color: var(--color-foreground-primary);
+      background-color: var(--color-background-hover);
+      border-color: var(--color-border-bold);
     }
   }
 }

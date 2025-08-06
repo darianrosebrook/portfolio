@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: column;
   gap: var(--size-06);
-  padding: var(--size-06);
   max-width: 100%;
+  padding: var(--size-06);
   background: var(--color-background-secondary);
   border: 1px solid var(--color-border-primary);
   border-radius: var(--radius-02);
@@ -11,20 +11,20 @@
 
 .controls {
   display: flex;
-  gap: var(--size-03);
   flex-wrap: wrap;
+  gap: var(--size-03);
 }
 
 .demoButton,
 .clearButton {
   padding: var(--size-02) var(--size-04);
+  font-size: var(--text-sm);
+  color: var(--color-foreground-primary);
+  background: var(--color-background-primary);
   border: 1px solid var(--color-border-primary);
   border-radius: var(--radius-01);
-  background: var(--color-background-primary);
-  color: var(--color-foreground-primary);
-  font-size: var(--text-sm);
-  cursor: pointer;
   transition: all 0.2s ease;
+  cursor: pointer;
 
   &:disabled {
     opacity: 0.5;
@@ -47,6 +47,10 @@
 }
 
 .highlightableText {
+  /* Custom properties for dynamic colors */
+  --highlight-color: var(--color-background-highlight);
+  --text-color: var(--color-foreground-highlight);
+
   position: relative;
   font-size: var(--text-lg);
   line-height: 1.6;
@@ -54,14 +58,10 @@
   cursor: text;
   user-select: text;
 
-  /* Custom properties for dynamic colors */
-  --highlight-color: var(--color-background-highlight);
-  --text-color: var(--color-foreground-highlight);
-
   /* Selection styling */
   &::selection {
-    background: var(--highlight-color);
     color: var(--text-color);
+    background: var(--highlight-color);
   }
 
   /* Focus styles */
@@ -72,13 +72,13 @@
 }
 
 .gooeyHighlightWrapper {
-  position: relative;
-  display: inline;
-  filter: url('#goo-text');
-
   /* Custom properties for dynamic colors */
   --highlight-color: var(--color-background-highlight);
   --text-color: var(--color-foreground-highlight);
+
+  position: relative;
+  display: inline;
+  filter: url('#goo-text');
 }
 
 .fallbackMessage {

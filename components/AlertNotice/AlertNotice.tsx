@@ -2,6 +2,7 @@
 import * as React from 'react';
 import Button from '../Button';
 import Styles from './AlertNotice.module.scss';
+import { TimesIcon, LocalIcons } from '@/components/Icon/LocalIcons';
 export type AlertNoticeProps = {
   status?: 'info' | 'success' | 'warning' | 'danger';
   level?: 'page' | 'section' | 'inline';
@@ -34,9 +35,8 @@ const Container = React.forwardRef<
             title="Dismiss this alert"
             data-index={index}
           >
-            <i className="fa fa-times">
-              <span>Dismiss this alert</span>
-            </i>
+            <TimesIcon aria-hidden={true} />
+            <span className="sr-only">Dismiss this alert</span>
           </Button>
         </div>
       )}
@@ -57,15 +57,17 @@ BodyContent.displayName = 'AlertNotice.Body';
 
 const Icon = ({ status }: { status: string }) => {
   const icons = {
-    info: 'info-circle',
-    success: 'check-circle',
-    warning: 'exclamation-triangle',
-    danger: 'exclamation-circle',
+    info: 'info-circle' as const,
+    success: 'check-circle' as const,
+    warning: 'exclamation-triangle' as const,
+    danger: 'exclamation-circle' as const,
   };
+
+  const IconComponent = LocalIcons[icons[status as keyof typeof icons]];
 
   return (
     <div className={Styles['__icon']}>
-      <i className={`fa fa-${icons[status]}`} aria-hidden="true" />
+      <IconComponent aria-hidden={true} />
     </div>
   );
 };

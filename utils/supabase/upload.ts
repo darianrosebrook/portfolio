@@ -1,6 +1,6 @@
 import { createClient } from './client';
 
-type media = {
+type Media = {
   name: string;
   data:
     | string
@@ -24,11 +24,11 @@ type media = {
   pageCount?: number;
 };
 
-type mediaType = 'image' | 'video' | 'audio' | 'pdf';
+type MediaType = 'image' | 'video' | 'audio' | 'pdf';
 
-type mediaUpload = {
-  type: mediaType;
-  media: media;
+type MediaUpload = {
+  type: MediaType;
+  media: Media;
 };
 
 /**
@@ -58,14 +58,19 @@ const getImageDimensions = (
 };
 
 /**
- * Uploads a file with deduplication and usage tracking
+ * Uploads a file with deduplication and usage tracking.
+ * @param {object} params - The upload parameters.
+ * @param {MediaUpload} params.file - The file to upload.
+ * @param {string} params.bucket - The Supabase storage bucket.
+ * @param {number} [params.articleId] - The ID of the article to associate the image with.
+ * @returns {Promise<string>} A promise that resolves to the public URL of the uploaded file.
  */
 const upload = async ({
   file,
   bucket,
   articleId,
 }: {
-  file: mediaUpload;
+  file: MediaUpload;
   bucket: string;
   articleId?: number;
 }) => {
@@ -128,12 +133,22 @@ const upload = async ({
       } = supabase.storage.from(bucket).getPublicUrl(fileName);
 
       // Get image dimensions if it's an image
-      let dimensions = { width: null, height: null };
-      if (file.type === 'image') {
+      const dimensions: { width: number; height: number } = {
+        width: 0,
+        height: 0,
+      };
+      if (
+        file.type === 'image' &&
+        fileData instanceof File &&
+        fileData.type.startsWith('image/')
+      ) {
         try {
-          dimensions = await getImageDimensions(fileData);
+          const { width, height } = await getImageDimensions(fileData);
+          if (!isNaN(width) && width > 0) dimensions.width = width;
+          if (!isNaN(height) && height > 0) dimensions.height = height;
         } catch {
-          // Ignore dimension errors, keep as null
+          // Warn if dimensions cannot be determined
+          console.warn('Failed to get image dimensions');
         }
       }
 
@@ -187,7 +202,10 @@ const upload = async ({
 };
 
 /**
- * Removes an image from an article and decrements reference count
+ * Removes an image from an article and decrements its reference count.
+ * @param {string} imageUrl - The public URL of the image to remove.
+ * @param {number} articleId - The ID of the article to remove the image from.
+ * @returns {Promise<void>}
  */
 const removeImageFromArticle = async (imageUrl: string, articleId: number) => {
   const supabase = await createClient();
@@ -238,7 +256,9 @@ const removeImageFromArticle = async (imageUrl: string, articleId: number) => {
 };
 
 /**
- * Cleans up all images associated with an article
+ * Cleans up all images associated with a specific article.
+ * @param {number} articleId - The ID of the article to clean up images for.
+ * @returns {Promise<void>}
  */
 const cleanupArticleImages = async (articleId: number) => {
   const supabase = await createClient();
@@ -297,7 +317,8 @@ const cleanupArticleImages = async (articleId: number) => {
 };
 
 /**
- * Finds and removes orphaned images (images with 0 references)
+ * Finds and removes orphaned images (images with 0 references).
+ * @returns {Promise<void>}
  */
 const cleanupOrphanedImages = async () => {
   const supabase = await createClient();
