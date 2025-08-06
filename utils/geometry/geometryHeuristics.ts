@@ -7,7 +7,6 @@ import './patch-kld';
 import { shape, intersect } from 'svg-intersections';
 import type { Glyph, Font } from 'fontkit';
 import type { Point2D } from './geometry';
-// @ts-expect-error - bezier-js types not available
 import { Bezier } from 'bezier-js';
 import { Metrics } from '@/utils/typeAnatomy';
 
