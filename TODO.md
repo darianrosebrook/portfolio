@@ -1,13 +1,12 @@
 # Portfolio Optimization Recovery - TODO List
 
 > **Status:** Recovery in progress after catastrophic git failure
-> **Branch:** `feature/optimization-recovery`
-> **Repository:** `darianrosebrook/portfolio`
-> **Last Updated:** 2025-08-05
+> **Branch:** `feature/optimization-recovery` > **Repository:** `darianrosebrook/portfolio` > **Last Updated:** 2025-08-05
 
 ## 📁 **Project Context**
 
 **Repository Information:**
+
 - **GitHub:** https://github.com/darianrosebrook/portfolio
 - **Framework:** Next.js 15.3.2 with App Router
 - **TypeScript:** Strict mode enabled
@@ -16,6 +15,7 @@
 - **Deployment:** Production-ready optimization target
 
 **Key Technologies:**
+
 - **Editor:** Tiptap (rich text editing)
 - **Animation:** GSAP
 - **Testing:** Vitest + Testing Library
@@ -25,17 +25,20 @@
 ## 🚨 **Recovery Context**
 
 **What Happened:**
+
 - Previous comprehensive optimizations were working successfully
 - Git failure occurred during merge process, causing project revert
 - All optimization work from "when I said we're not working on main" onwards was lost
 - Need to recover optimizations from git stashes
 
 **Available Stashes:**
+
 - `stash@{0}`: WIP on main (lighthouse performance results)
 - `stash@{1}`: Performance optimization files (5 files)
 - `stash@{2}`: Comprehensive optimizations (100+ files) ⭐ **PRIMARY RECOVERY SOURCE**
 
 **Git References for Future Context:**
+
 ```bash
 # View stash contents
 git stash list
@@ -49,6 +52,7 @@ git stash pop stash@{1}
 ```
 
 **Key Commit Hashes & Branch References:**
+
 - **Current recovery branch:** `ca903e0f` (feature/optimization-recovery)
 - **Base gooey branch:** `19fa86a5` (origin/feature/gooey-text-highlighting)
 - **Main branch:** `origin/main` (stable base)
@@ -60,17 +64,20 @@ git stash pop stash@{1}
 ## 🔄 **Recovery Progress**
 
 ### ✅ **Phase 1: Assessment & Setup**
+
 - [x] Created recovery branch `feature/optimization-recovery`
 - [x] Analyzed available stashes
 - [x] Identified comprehensive stash with optimizations
 - [x] Created this TODO.md for progress tracking
 
 ### 🚧 **Phase 2: Stash Recovery - IN PROGRESS**
+
 - [ ] **Resolve current conflicts** (app/globals.scss, tsconfig.json)
 - [ ] **Apply comprehensive stash** (`stash@{2}`)
 - [ ] **Verify key optimizations are restored**
 
 **Current Conflicts to Resolve:**
+
 1. **app/globals.scss** - Gooey highlighting styles vs optimization styles
 2. **tsconfig.json** - Strict mode setting (current: true, stash: likely false)
 
@@ -79,6 +86,7 @@ git stash pop stash@{1}
 **From Stash Analysis - These Were Working:**
 
 #### **Next.js Configuration** (`next.config.mjs`)
+
 - [x] ✅ **Verified in stash** - Bundle analyzer integration
 - [ ] Image optimization (WebP/AVIF, device sizes, cache TTL)
 - [ ] Performance optimizations (package imports, compression)
@@ -86,19 +94,22 @@ git stash pop stash@{1}
 - [ ] Power-by header removal
 
 #### **Package Dependencies** (`package.json`)
+
 - [x] ✅ **Verified in stash** - Testing infrastructure added
 - [ ] Vitest testing framework
 - [ ] Bundle analyzer (`@next/bundle-analyzer`)
-- [ ] Testing libraries (@testing-library/*, @axe-core/react)
+- [ ] Testing libraries (@testing-library/\*, @axe-core/react)
 - [ ] Performance monitoring tools
 
 #### **TypeScript Fixes** (API Routes)
+
 - [x] ✅ **Verified in stash** - Next.js 15 compatibility
 - [ ] `app/api/articles/[slug]/route.ts` - Proper params typing
 - [ ] `app/api/publish/route.ts` - Route handler signatures
 - [ ] All API routes using `Promise<{ slug: string }>` pattern
 
 #### **Missing Critical Files** (Need to be recreated)
+
 - [ ] **Vitest Configuration** (`vitest.config.ts`)
 - [ ] **Test Infrastructure** (`test/` directory)
   - [ ] `test/setup.ts` - Test environment setup
@@ -119,6 +130,7 @@ git stash pop stash@{1}
 ### **Immediate Actions Needed:**
 
 1. **Resolve Current Conflicts:**
+
    ```bash
    # Handle globals.scss - decide which styles to keep
    # Handle tsconfig.json - verify strict mode setting
@@ -127,6 +139,7 @@ git stash pop stash@{1}
    ```
 
 2. **Apply Comprehensive Stash:**
+
    ```bash
    git stash apply stash@{2}
    ```
@@ -139,6 +152,7 @@ git stash pop stash@{1}
 ### **Performance Infrastructure to Recreate:**
 
 #### **Testing Infrastructure:**
+
 ```typescript
 // vitest.config.ts - Path aliases and test setup
 // test/setup.ts - requestIdleCallback polyfill for accessibility tests
@@ -147,6 +161,7 @@ git stash pop stash@{1}
 ```
 
 #### **Performance Optimizations:**
+
 ```typescript
 // app/BlueprintsWrapper.tsx - Dynamic import for heavy components
 // utils/performance/monitor.ts - Core Web Vitals tracking
@@ -155,6 +170,7 @@ git stash pop stash@{1}
 ```
 
 #### **Service Worker & Offline:**
+
 ```javascript
 // public/sw.js - Advanced caching strategies
 // app/offline/page.tsx - Offline fallback page
@@ -165,6 +181,7 @@ git stash pop stash@{1}
 ## 🎯 **Success Metrics from Previous Work**
 
 **Performance Achievements (from Lighthouse):**
+
 - Overall score: 51/100 → 75/100 (+47% improvement)
 - Total Blocking Time: 1,050ms → 0ms (eliminated)
 - Bundle size: 4,262 KiB → 1,808 KiB (58% reduction)
@@ -172,6 +189,7 @@ git stash pop stash@{1}
 - Server response: 170ms → 10ms
 
 **Technical Achievements:**
+
 - 110+ core functionality tests passing
 - TypeScript errors resolved (Next.js 15 compatibility)
 - CSS module testing fixed
@@ -183,11 +201,13 @@ git stash pop stash@{1}
 ## 🚨 **Critical Notes**
 
 1. **Don't Repeat Git Mistakes:**
+
    - Commit frequently during recovery
    - Test each major restoration step
    - Keep stashes until everything is verified working
 
 2. **Priority Order:**
+
    1. Core functionality (API routes, basic optimizations)
    2. Testing infrastructure
    3. Performance monitoring
@@ -206,6 +226,7 @@ git stash pop stash@{1}
 ### **Known Working Configurations from Stash:**
 
 #### **Next.js Config** (`next.config.mjs`)
+
 ```javascript
 // Key optimizations that were working:
 - withBundleAnalyzer integration
@@ -217,6 +238,7 @@ git stash pop stash@{1}
 ```
 
 #### **Package Dependencies** (`package.json`)
+
 ```json
 // Critical additions that were working:
 "scripts": {
@@ -233,6 +255,7 @@ git stash pop stash@{1}
 ```
 
 #### **TypeScript Route Handler Pattern** (Working)
+
 ```typescript
 // All API routes should use this Next.js 15 pattern:
 export async function GET(
@@ -247,16 +270,19 @@ export async function GET(
 ### **Missing Infrastructure to Recreate:**
 
 #### **Testing Setup**
+
 - `vitest.config.ts` - Path aliases (`@` pointing to root)
 - `test/setup.ts` - requestIdleCallback polyfill for @axe-core/react
 - `test/test-utils.tsx` - React testing utilities wrapper
 
 #### **Performance Monitoring**
+
 - `utils/performance/monitor.ts` - Core Web Vitals tracking
 - `utils/caching/advancedCache.ts` - LRU cache with stale-while-revalidate
 - `components/PerformanceDashboard/` - Real-time performance UI
 
 #### **Service Worker & Offline**
+
 - `public/sw.js` - Advanced caching strategies
 - `app/offline/page.tsx` - Offline fallback page with navigation
 
@@ -265,11 +291,12 @@ export async function GET(
 ## 🔍 **Debugging & Validation Commands**
 
 ### **Quick Health Checks:**
+
 ```bash
 # Build validation
 npm run build
 
-# Test validation  
+# Test validation
 npm run test:run
 
 # Development server
@@ -285,6 +312,7 @@ npx stylelint "**/*.{css,scss}"
 ```
 
 ### **Performance Validation:**
+
 ```bash
 # Install lighthouse globally if needed
 npm install -g lighthouse
@@ -297,6 +325,7 @@ npm run analyze
 ```
 
 ### **Git State Checks:**
+
 ```bash
 # Check current state
 git status
@@ -315,6 +344,7 @@ git diff HEAD
 ## 📊 **Performance Benchmarks (Target Goals)**
 
 **Lighthouse Scores to Achieve:**
+
 - Overall Performance: 75/100 (previously achieved)
 - First Contentful Paint: ~1.2s
 - Largest Contentful Paint: <9.6s (aim for <2.5s)
@@ -322,11 +352,13 @@ git diff HEAD
 - Cumulative Layout Shift: 0
 
 **Bundle Size Targets:**
+
 - Total bundle: <1,808 KiB (previously achieved)
 - Main chunk: <53.2 KiB
 - First Load JS: <178 KiB for homepage
 
 **Test Coverage Goals:**
+
 - 110+ tests passing (previously achieved)
 - Core functionality: 100% passing
 - TypeScript: Zero errors
@@ -336,13 +368,14 @@ git diff HEAD
 
 ## 📝 **Recovery Log**
 
-**2025-08-05 17:20** - Created recovery branch `feature/optimization-recovery` 
+**2025-08-05 17:20** - Created recovery branch `feature/optimization-recovery`
 **2025-08-05 17:25** - Enhanced TODO.md with comprehensive recovery context
 **2025-08-05 17:30** - Added specific git commit hashes and branch references
+
 - Current HEAD: `ca903e0f` on `feature/optimization-recovery`
 - Base branch: `19fa86a5` on `origin/feature/gooey-text-highlighting`
 - Stashes verified: 3 available with comprehensive optimizations
-**Next:** Resolve conflicts (globals.scss, tsconfig.json) and apply stash@{2}
+  **Next:** Resolve conflicts (globals.scss, tsconfig.json) and apply stash@{2}
 
 ---
 
@@ -361,4 +394,4 @@ If this chat session ends, the next AI assistant can:
 
 ---
 
-*This file tracks the recovery of comprehensive performance optimizations that were working successfully before the git failure. All optimizations were verified working with significant performance improvements.*
+_This file tracks the recovery of comprehensive performance optimizations that were working successfully before the git failure. All optimizations were verified working with significant performance improvements._
