@@ -4,9 +4,9 @@
   gap: var(--size-06);
   max-width: 100%;
   padding: var(--size-06);
+  background: var(--color-background-secondary);
   border: 1px solid var(--color-border-primary);
   border-radius: var(--radius-02);
-  background: var(--color-background-secondary);
 }
 
 .controls {
@@ -18,13 +18,13 @@
 .demoButton,
 .clearButton {
   padding: var(--size-02) var(--size-04);
+  font-size: var(--text-sm);
+  color: var(--color-foreground-primary);
+  background: var(--color-background-primary);
   border: 1px solid var(--color-border-primary);
   border-radius: var(--radius-01);
-  background: var(--color-background-primary);
-  color: var(--color-foreground-primary);
-  font-size: var(--text-sm);
-  cursor: pointer;
   transition: all 0.2s ease;
+  cursor: pointer;
 
   &:disabled {
     opacity: 0.5;
@@ -32,8 +32,8 @@
   }
 
   &:hover:not(:disabled) {
-    border-color: var(--color-border-bold);
     background: var(--color-background-tertiary);
+    border-color: var(--color-border-bold);
   }
 }
 
@@ -41,9 +41,9 @@
   position: relative;
   min-height: 120px;
   padding: var(--size-04);
+  background: var(--color-background-primary);
   border: 1px solid var(--color-border-primary);
   border-radius: var(--radius-01);
-  background: var(--color-background-primary);
 }
 
 .highlightableText {
@@ -52,16 +52,16 @@
   --text-color: var(--color-foreground-highlight);
 
   position: relative;
-  color: var(--color-foreground-primary);
   font-size: var(--text-lg);
   line-height: 1.6;
+  color: var(--color-foreground-primary);
   cursor: text;
   user-select: text;
 
   /* Selection styling */
   &::selection {
-    background: var(--highlight-color);
     color: var(--text-color);
+    background: var(--highlight-color);
   }
 
   /* Focus styles */
@@ -83,15 +83,15 @@
 
 .fallbackMessage {
   padding: var(--size-04);
+  background: var(--color-background-tertiary);
   border: 1px solid transparent;
   border-left: 4px solid var(--color-border-bold);
   border-radius: var(--radius-01);
-  background: var(--color-background-tertiary);
 
   p {
     margin: 0 0 var(--size-02) 0;
-    color: var(--color-foreground-secondary);
     font-size: var(--text-sm);
+    color: var(--color-foreground-secondary);
 
     &:last-child {
       margin-bottom: 0;
@@ -102,16 +102,16 @@
 .instructions {
   h4 {
     margin: 0 0 var(--size-03) 0;
-    color: var(--color-foreground-primary);
-    font-weight: var(--font-weight-medium);
     font-size: var(--text-md);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-foreground-primary);
   }
 
   ul {
     margin: 0;
     padding-left: var(--size-04);
-    color: var(--color-foreground-secondary);
     font-size: var(--text-sm);
+    color: var(--color-foreground-secondary);
 
     li {
       margin-bottom: var(--size-01);

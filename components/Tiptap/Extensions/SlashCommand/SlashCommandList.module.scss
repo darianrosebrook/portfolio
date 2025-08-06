@@ -1,9 +1,9 @@
 .container {
   position: relative;
-  overflow: hidden;
   padding: 0.5rem;
-  border-radius: 0.5rem;
+  overflow: hidden;
   background-color: white;
+  border-radius: 0.5rem;
   box-shadow:
     0 0 0 1px rgb(0 0 0 / 5%),
     0 10px 20px rgb(0 0 0 / 10%);
@@ -11,14 +11,14 @@
 
 .item {
   display: flex;
-  gap: 0.5rem;
   align-items: center;
+  gap: 0.5rem;
   width: 100%;
   padding: 0.25rem 0.5rem;
+  text-align: left;
+  background: transparent;
   border: 1px solid transparent;
   border-radius: 0.4rem;
-  background: transparent;
-  text-align: left;
 
   &.isSelected,
   &:hover {

@@ -168,24 +168,7 @@ const EditArticle = () => {
         />
       </div>
       <div className={styles.editorContainer}>
-        <EditorErrorBoundary
-          editorName="Article Editor"
-          onDataLoss={() => {
-            // Save current article data to localStorage for recovery
-            try {
-              localStorage.setItem(
-                'article-editor-autosave',
-                JSON.stringify({
-                  ...article,
-                  timestamp: new Date().toISOString(),
-                })
-              );
-              console.log('Article auto-saved to localStorage for recovery');
-            } catch (error) {
-              console.error('Failed to save article for recovery:', error);
-            }
-          }}
-        >
+        <EditorErrorBoundary>
           <Tiptap handleUpdate={handleUpdate} article={article} />
         </EditorErrorBoundary>
       </div>

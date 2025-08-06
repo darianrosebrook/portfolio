@@ -1,265 +1,184 @@
-/**
- * Utility functions and hooks for gooey text highlighting
- * Provides helper functions for creating gooey highlight effects
- */
+'use client';
 
-import React, { useRef, useCallback, useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import React from 'react';
 
 /**
- * Wraps text with gooey highlight styling
- * @param text - The text to highlight
- * @param backgroundColor - Background color for the highlight
- * @param textColor - Text color for the highlighted text
- * @returns React element with gooey highlight wrapper
+ * Interface for gooey highlight options
  */
-export function wrapWithGooeyHighlight(
-  text: string,
-  backgroundColor: string = 'var(--color-core-blue-200)',
-  textColor: string = 'var(--color-core-blue-800)'
-): React.ReactElement {
-  return React.createElement(
-    'span',
-    {
-      className: 'gooey-highlight-wrapper',
-      style: {
-        position: 'relative',
-        display: 'inline-block',
-        color: textColor,
-      },
-    },
-    [
-      React.createElement('span', {
-        key: 'background',
-        className: 'gooey-highlight-background',
-        style: {
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundColor,
-          filter: 'url(#goo-text)',
-          borderRadius: '0.25rem',
-          zIndex: -1,
-        },
-      }),
-      React.createElement(
-        'span',
-        {
-          key: 'text',
-          className: 'gooey-highlight-text',
-          style: {
-            position: 'relative',
-            zIndex: 1,
-            padding: '0.125rem 0.25rem',
-          },
-        },
-        text
-      ),
-    ]
-  );
-}
-
-/**
- * Creates a gooey highlight CSS class name
- * @param variant - The variant of the gooey effect
- * @returns CSS class name
- */
-export function getGooeyHighlightClass(
-  variant: 'default' | 'subtle' | 'strong' = 'default'
-): string {
-  switch (variant) {
-    case 'subtle':
-      return 'gooey-highlight-subtle';
-    case 'strong':
-      return 'gooey-highlight-strong';
-    default:
-      return 'gooey-highlight';
-  }
-}
-
-/**
- * Checks if the browser supports CSS Custom Highlight API
- * @returns boolean indicating support
- */
-export function supportsCustomHighlightAPI(): boolean {
-  if (typeof window === 'undefined') return false;
-  return 'highlights' in CSS && !!CSS.highlights;
-}
-
-/**
- * Creates a custom highlight range for text selection
- * @param selector - CSS selector for the target element
- * @param text - Text to highlight
- * @param highlightName - Name for the highlight
- */
-export function createCustomHighlight(
-  selector: string,
-  text: string,
-  highlightName: string = 'gooey-highlight'
-): void {
-  if (!supportsCustomHighlightAPI()) {
-    console.warn('CSS Custom Highlight API not supported');
-    return;
-  }
-
-  const targetElement = document.querySelector(selector);
-  if (!targetElement) {
-    console.warn(`Element not found: ${selector}`);
-    return;
-  }
-
-  const walker = document.createTreeWalker(targetElement, NodeFilter.SHOW_TEXT);
-
-  const textNodes: Text[] = [];
-  let node: Node | null;
-
-  while ((node = walker.nextNode())) {
-    if (node.textContent?.includes(text)) {
-      textNodes.push(node as Text);
-    }
-  }
-
-  const ranges: Range[] = [];
-
-  textNodes.forEach((textNode) => {
-    const content = textNode.textContent || '';
-    const index = content.indexOf(text);
-
-    if (index !== -1) {
-      const range = new Range();
-      range.setStart(textNode, index);
-      range.setEnd(textNode, index + text.length);
-      ranges.push(range);
-    }
-  });
-
-  if (ranges.length > 0 && CSS.highlights) {
-    const highlight = new Highlight(...ranges);
-    CSS.highlights.set(highlightName, highlight);
-  }
-}
-
-/**
- * Removes a custom highlight
- * @param highlightName - Name of the highlight to remove
- */
-export function removeCustomHighlight(
-  highlightName: string = 'gooey-highlight'
-): void {
-  if (supportsCustomHighlightAPI() && CSS.highlights) {
-    CSS.highlights.delete(highlightName);
-  }
-}
-
-/**
- * Hook for gooey text highlighting functionality
- */
-interface UseGooeyHighlightOptions {
-  interactive?: boolean;
+interface GooeyHighlightOptions {
+  /** Custom highlight color */
   highlightColor?: string;
+  /** Custom text color */
   textColor?: string;
+  /** Whether to enable interactive highlighting */
+  interactive?: boolean;
+  /** Custom highlight name for CSS Custom Highlight API */
+  highlightName?: string;
 }
 
-export function useGooeyHighlight(options: UseGooeyHighlightOptions = {}) {
-  const { interactive = true, highlightColor, textColor } = options;
-  const textRef = useRef<HTMLDivElement>(null);
+/**
+ * Interface for highlight range data
+ */
+interface HighlightRange {
+  start: number;
+  end: number;
+  text: string;
+}
+
+/**
+ * Hook for managing gooey text highlights
+ */
+export const useGooeyHighlight = (options: GooeyHighlightOptions = {}) => {
+  const {
+    highlightColor,
+    textColor,
+    interactive = true,
+    highlightName = 'gooey-highlight',
+  } = options;
+
+  const [highlights, setHighlights] = useState<HighlightRange[]>([]);
   const [isSupported, setIsSupported] = useState(false);
-  const [highlights, setHighlights] = useState<Map<string, Range[]>>(new Map());
+  const textRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setIsSupported(supportsCustomHighlightAPI());
+    // Check if CSS Custom Highlight API is supported
+    setIsSupported(!!CSS.highlights);
   }, []);
 
-  const clearHighlights = useCallback(() => {
-    if (CSS.highlights) {
-      CSS.highlights.clear();
+  /**
+   * Creates a highlight for the given text range
+   */
+  const createHighlight = (range: Range) => {
+    if (!isSupported || !CSS.highlights) return;
+
+    const highlight = new Highlight(range);
+    CSS.highlights.set(highlightName, highlight);
+  };
+
+  /**
+   * Clears all highlights
+   */
+  const clearHighlights = () => {
+    if (!isSupported || !CSS.highlights) return;
+    CSS.highlights.clear();
+    setHighlights([]);
+  };
+
+  /**
+   * Highlights specific words in the text
+   */
+  const highlightWords = (words: string[]) => {
+    if (!textRef.current || !isSupported) return;
+
+    const textNode = textRef.current.firstChild;
+    if (!textNode || textNode.nodeType !== Node.TEXT_NODE) return;
+
+    const text = textNode.textContent || '';
+    const ranges: Range[] = [];
+    const highlightRanges: HighlightRange[] = [];
+
+    words.forEach((word) => {
+      const startIndex = text.toLowerCase().indexOf(word.toLowerCase());
+      if (startIndex !== -1) {
+        const range = document.createRange();
+        range.setStart(textNode, startIndex);
+        range.setEnd(textNode, startIndex + word.length);
+        ranges.push(range);
+
+        highlightRanges.push({
+          start: startIndex,
+          end: startIndex + word.length,
+          text: word,
+        });
+      }
+    });
+
+    if (ranges.length > 0) {
+      setHighlights(highlightRanges);
+      ranges.forEach(createHighlight);
     }
-    setHighlights(new Map());
-  }, []);
+  };
 
-  const highlightWords = useCallback(
-    (words: string[]) => {
-      if (!isSupported || !textRef.current) return;
+  /**
+   * Handles text selection and creates gooey highlights
+   */
+  const handleSelection = () => {
+    if (!interactive || !textRef.current) return;
 
-      words.forEach((word, index) => {
-        createCustomHighlight(
-          `[data-ref="${textRef.current?.dataset.ref || 'gooey-text'}"]`,
-          word,
-          `gooey-highlight-${index}`
-        );
+    const selection = window.getSelection();
+    if (!selection || selection.rangeCount === 0) return;
+
+    clearHighlights();
+
+    const ranges: Range[] = [];
+    const highlightRanges: HighlightRange[] = [];
+
+    for (let i = 0; i < selection.rangeCount; i++) {
+      const range = selection.getRangeAt(i);
+      ranges.push(range);
+
+      highlightRanges.push({
+        start: range.startOffset,
+        end: range.endOffset,
+        text: range.toString(),
       });
-    },
-    [isSupported]
-  );
-
-  const handleSelection = useCallback(
-    (event: React.SyntheticEvent) => {
-      if (!interactive || !isSupported) return;
-
-      const selection = window.getSelection();
-      if (!selection || selection.rangeCount === 0) return;
-
-      const range = selection.getRangeAt(0);
-      if (range.collapsed) return;
-
-      const selectedText = selection.toString();
-      if (selectedText.trim()) {
-        const highlightName = `selection-${Date.now()}`;
-        if (CSS.highlights) {
-          const highlight = new Highlight(range.cloneRange());
-          CSS.highlights.set(highlightName, highlight);
-        }
-      }
-    },
-    [interactive, isSupported]
-  );
-
-  const handleClick = useCallback(
-    (event: React.MouseEvent) => {
-      if (!interactive || !isSupported) return;
-
-      const target = event.target as HTMLElement;
-      if (target.nodeType === Node.TEXT_NODE || target.textContent) {
-        // Handle word-level highlighting on click
-        const selection = window.getSelection();
-        if (selection) {
-          selection.removeAllRanges();
-
-          // Create a range around the clicked word
-          const range = document.createRange();
-          const textNode = target.firstChild || target;
-          if (textNode.nodeType === Node.TEXT_NODE) {
-            const text = textNode.textContent || '';
-            const words = text.split(' ');
-
-            // Simple word detection (could be enhanced)
-            words.forEach((word, index) => {
-              if (word.trim()) {
-                const wordStart = text.indexOf(word);
-                const wordEnd = wordStart + word.length;
-                range.setStart(textNode, wordStart);
-                range.setEnd(textNode, wordEnd);
-
-                const highlightName = `word-${Date.now()}-${index}`;
-                if (CSS.highlights) {
-                  const highlight = new Highlight(range.cloneRange());
-                  CSS.highlights.set(highlightName, highlight);
-                }
-              }
-            });
-          }
-        }
-      }
-    },
-    [interactive, isSupported]
-  );
-
-  useEffect(() => {
-    if (textRef.current) {
-      textRef.current.dataset.ref = 'gooey-text';
     }
-  }, []);
+
+    if (ranges.length > 0) {
+      setHighlights(highlightRanges);
+      ranges.forEach(createHighlight);
+    }
+  };
+
+  /**
+   * Handles click events to create manual highlights
+   */
+  const handleClick = (event: React.MouseEvent) => {
+    if (!interactive || !textRef.current) return;
+
+    const selection = window.getSelection();
+    if (!selection) return;
+
+    // Create a range for the clicked word
+    const range = document.createRange();
+    const textNode = textRef.current.firstChild;
+
+    if (textNode && textNode.nodeType === Node.TEXT_NODE) {
+      const text = textNode.textContent || '';
+      const clickX = event.clientX;
+      const rect = textRef.current.getBoundingClientRect();
+      const relativeX = clickX - rect.left;
+
+      // Simple word boundary detection
+      const charIndex = Math.floor((relativeX / rect.width) * text.length);
+      const words = text.split(/\s+/);
+      let currentIndex = 0;
+
+      for (const word of words) {
+        const wordStart = text.indexOf(word, currentIndex);
+        const wordEnd = wordStart + word.length;
+
+        if (charIndex >= wordStart && charIndex <= wordEnd) {
+          range.setStart(textNode, wordStart);
+          range.setEnd(textNode, wordEnd);
+          break;
+        }
+        currentIndex = wordEnd + 1;
+      }
+
+      if (!range.collapsed) {
+        createHighlight(range);
+        setHighlights([
+          {
+            start: range.startOffset,
+            end: range.endOffset,
+            text: range.toString(),
+          },
+        ]);
+      }
+    }
+  };
 
   return {
     textRef,
@@ -269,5 +188,64 @@ export function useGooeyHighlight(options: UseGooeyHighlightOptions = {}) {
     highlightWords,
     handleSelection,
     handleClick,
+    highlightColor,
+    textColor,
   };
-}
+};
+
+/**
+ * Utility function to wrap text with gooey highlighting
+ * This approach keeps text crisp while applying gooey effect to background
+ */
+export const wrapWithGooeyHighlight = (
+  text: string,
+  highlightColor?: string,
+  textColor?: string
+) => {
+  return React.createElement(
+    'span',
+    {
+      className: 'gooey-highlight-wrapper',
+      style: {
+        '--highlight-color':
+          highlightColor || 'var(--color-background-highlight)',
+        '--text-color': textColor || 'var(--color-foreground-highlight)',
+      } as React.CSSProperties,
+    },
+    React.createElement('span', null, text)
+  );
+};
+
+/**
+ * Utility function to create a gooey highlight for a specific text range
+ */
+export const createGooeyHighlight = (
+  element: HTMLElement,
+  startOffset: number,
+  endOffset: number,
+  highlightName = 'gooey-highlight'
+) => {
+  if (!CSS.highlights) return false;
+
+  const textNode = element.firstChild;
+  if (!textNode || textNode.nodeType !== Node.TEXT_NODE) return false;
+
+  const range = document.createRange();
+  range.setStart(textNode, startOffset);
+  range.setEnd(textNode, endOffset);
+
+  const highlight = new Highlight(range);
+  CSS.highlights.set(highlightName, highlight);
+
+  return true;
+};
+
+/**
+ * Utility function to clear all gooey highlights
+ */
+export const clearGooeyHighlights = (highlightName = 'gooey-highlight') => {
+  if (!CSS.highlights) return false;
+
+  CSS.highlights.delete(highlightName);
+  return true;
+};

@@ -4,7 +4,7 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 import { wrapWithGooeyHighlight } from '@/utils/gooeyHighlight';
 import { AnimationErrorBoundary } from '@/components/ErrorBoundary';
-import { useReducedMotion } from '@/context/ReducedMotionContext';
+// import { useReducedMotion } from '@/context/ReducedMotionContext';
 
 // Dynamically import GooeyHighlight for better performance
 const GooeyHighlight = dynamic(() => import('@/components/GooeyHighlight'), {
@@ -28,7 +28,7 @@ const GooeyHighlight = dynamic(() => import('@/components/GooeyHighlight'), {
  * Demo page showcasing gooey text highlighting functionality
  */
 export default function GooeyHighlightDemo() {
-  const { prefersReducedMotion } = useReducedMotion();
+  // const { prefersReducedMotion } = useReducedMotion();
 
   return (
     <div className="content">
@@ -43,23 +43,7 @@ export default function GooeyHighlightDemo() {
           has the organic gooey effect.
         </p>
 
-        <AnimationErrorBoundary
-          animationName="GooeyHighlight"
-          disableAnimations={prefersReducedMotion}
-          fallbackContent={
-            <div
-              style={{
-                padding: '1rem',
-                backgroundColor: 'var(--color-background-secondary)',
-                borderRadius: '0.5rem',
-                color: 'var(--color-foreground-primary)',
-              }}
-            >
-              This is a demonstration of text highlighting. The gooey animation
-              effect is disabled based on your motion preferences.
-            </div>
-          }
-        >
+        <AnimationErrorBoundary>
           <GooeyHighlight>
             This is a demonstration of the gooey highlight effect. You can
             select any text in this paragraph and it will apply a beautiful
@@ -202,10 +186,7 @@ export default function GooeyHighlightDemo() {
         >
           <div>
             <h4>Basic Usage</h4>
-            <AnimationErrorBoundary
-              animationName="GooeyHighlight Basic"
-              disableAnimations={prefersReducedMotion}
-            >
+            <AnimationErrorBoundary>
               <GooeyHighlight>
                 Simple text highlighting with gooey effect.
               </GooeyHighlight>
@@ -214,10 +195,7 @@ export default function GooeyHighlightDemo() {
 
           <div>
             <h4>Custom Colors</h4>
-            <AnimationErrorBoundary
-              animationName="GooeyHighlight Custom"
-              disableAnimations={prefersReducedMotion}
-            >
+            <AnimationErrorBoundary>
               <GooeyHighlight
                 highlightColor="var(--color-core-green-200)"
                 textColor="var(--color-core-green-800)"
@@ -229,10 +207,7 @@ export default function GooeyHighlightDemo() {
 
           <div>
             <h4>Non-Interactive</h4>
-            <AnimationErrorBoundary
-              animationName="GooeyHighlight Non-Interactive"
-              disableAnimations={prefersReducedMotion}
-            >
+            <AnimationErrorBoundary>
               <GooeyHighlight interactive={false}>
                 This text cannot be highlighted interactively.
               </GooeyHighlight>

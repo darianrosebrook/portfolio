@@ -1,4 +1,5 @@
 import '@testing-library/jest-dom';
+import { vi } from 'vitest';
 
 // Polyfill requestIdleCallback for accessibility testing
 if (typeof globalThis.requestIdleCallback === 'undefined') {
@@ -23,70 +24,47 @@ if (typeof globalThis.cancelIdleCallback === 'undefined') {
     clearTimeout(id);
   };
 }
-import { afterEach } from 'vitest';
-import { cleanup } from '@testing-library/react';
 
-// Configure axe-core for accessibility testing (disabled in tests to avoid conflicts)
-// @axe-core/react is primarily for development, not testing
-// We use jest-axe for testing instead
-
-// Mock IntersectionObserver for components that use it
+// Mock IntersectionObserver
 global.IntersectionObserver = class IntersectionObserver {
   constructor() {}
   disconnect() {}
   observe() {}
   unobserve() {}
-  takeRecords(): IntersectionObserverEntry[] {
-    return [];
-  }
-  rootMargin: string = '';
-  thresholds: number[] = [];
-  root: null = null;
-};
+} as any;
 
-// Mock ResizeObserver for components that use it
+// Mock ResizeObserver
 global.ResizeObserver = class ResizeObserver {
   constructor() {}
   disconnect() {}
   observe() {}
   unobserve() {}
-};
+} as any;
 
-// Mock matchMedia for responsive components
+// Mock matchMedia
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
-  value: (query: string) => ({
+  value: vi.fn().mockImplementation((query) => ({
     matches: false,
     media: query,
     onchange: null,
-    addListener: () => {}, // deprecated
-    removeListener: () => {}, // deprecated
-    addEventListener: () => {},
-    removeEventListener: () => {},
-    dispatchEvent: () => {},
-  }),
+    addListener: vi.fn(), // deprecated
+    removeListener: vi.fn(), // deprecated
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+    dispatchEvent: vi.fn(),
+  })),
 });
 
 // Mock localStorage
+const localStorageMock = {
+  getItem: vi.fn(),
+  setItem: vi.fn(),
+  removeItem: vi.fn(),
+  clear: vi.fn(),
+  length: 0,
+  key: vi.fn(),
+};
 Object.defineProperty(window, 'localStorage', {
-  value: {
-    getItem: () => null,
-    setItem: () => {},
-    removeItem: () => {},
-    clear: () => {},
-  },
-});
-
-// Mock requestIdleCallback for @axe-core/react
-global.requestIdleCallback = (callback: IdleRequestCallback) => {
-  return setTimeout(callback, 0);
-};
-
-global.cancelIdleCallback = (id: number) => {
-  clearTimeout(id);
-};
-
-// Cleanup after each test
-afterEach(() => {
-  cleanup();
+  value: localStorageMock,
 });

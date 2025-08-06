@@ -1,161 +1,107 @@
 .dashboard {
   position: fixed;
-  top: 20px;
-  right: 20px;
+  top: 1rem;
+  right: 1rem;
   z-index: 1000;
-  overflow: hidden;
-  width: 400px;
-  max-height: 80vh;
-  border: 1px solid var(--color-border-primary);
-  border-radius: var(--radius-02);
-  background: var(--color-background-primary);
-  box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
-  font-size: 14px;
-  font-family: 'Inter Variable', sans-serif;
-}
-
-.toggleButton {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50px;
-  height: 50px;
-  border: 1px solid var(--color-border-primary);
-  border-radius: 50%;
-  background: var(--color-background-primary);
-  box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
-  font-size: 20px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-
-  &:hover {
-    box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
-    transform: scale(1.1);
-  }
+  max-width: 200px;
+  padding: 1rem;
+  font-family:
+    ui-monospace, 'SF Mono', Monaco, Inconsolata, 'Roboto Mono', monospace;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  background: rgb(255 255 255 / 95%);
+  border: 1px solid rgb(0 0 0 / 10%);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
+  backdrop-filter: blur(8px);
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--color-border-primary);
-  background: var(--color-background-secondary);
-
-  h3 {
-    margin: 0;
-    color: var(--color-foreground-primary);
-    font-weight: 600;
-    font-size: 16px;
-  }
-
-  button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 24px;
-    height: 24px;
-    padding: 0;
-    border: none;
-    border-radius: 4px;
-    background: none;
-    color: var(--color-foreground-secondary);
-    font-size: 20px;
-    cursor: pointer;
-
-    &:hover {
-      background: var(--color-background-primary);
-      color: var(--color-foreground-primary);
-    }
-  }
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgb(0 0 0 / 10%);
 }
 
-.content {
-  overflow-y: auto;
-  max-height: calc(80vh - 60px);
-  padding: 20px;
+.header h3 {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgb(51 51 51);
 }
 
-.section {
-  margin-bottom: 24px;
+.closeButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  font-size: 1.2rem;
+  color: rgb(102 102 102);
+  background: none;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
 
-  &:last-child {
-    margin-bottom: 0;
-  }
-
-  h4 {
-    margin: 0 0 12px;
-    color: var(--color-foreground-primary);
-    font-weight: 600;
-    font-size: 14px;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-  }
+.closeButton:hover {
+  background-color: rgb(0 0 0 / 5%);
 }
 
 .metrics {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
 .metric {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 12px;
-  border: 1px solid var(--color-border-primary);
-  border-radius: 6px;
-  background: var(--color-background-secondary);
 }
 
 .label {
-  color: var(--color-foreground-secondary);
   font-weight: 500;
-  font-size: 12px;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
+  color: rgb(102 102 102);
 }
 
 .value {
-  color: var(--color-foreground-primary);
   font-weight: 600;
-  font-size: 13px;
-  font-family: 'Nohemi Variable', monospace;
-
-  &.green {
-    color: #10b981;
-  }
-
-  &.yellow {
-    color: #f59e0b;
-  }
-
-  &.red {
-    color: #ef4444;
-  }
+  color: rgb(34 34 34);
+  font-variant-numeric: tabular-nums;
 }
 
-.loading {
-  padding: 40px 20px;
-  color: var(--color-foreground-secondary);
-  font-style: italic;
-  text-align: center;
-}
-
-// Responsive design
-@media (width <= 768px) {
+@media (prefers-color-scheme: dark) {
   .dashboard {
-    right: 20px;
-    left: 20px;
-    width: calc(100vw - 40px);
+    background: rgb(34 34 34 / 95%);
+    border-color: rgb(255 255 255 / 20%);
   }
 
-  .metrics {
-    grid-template-columns: 1fr;
+  .header {
+    border-bottom-color: rgb(255 255 255 / 20%);
+  }
+
+  .header h3 {
+    color: rgb(245 245 245);
+  }
+
+  .closeButton {
+    color: rgb(170 170 170);
+  }
+
+  .closeButton:hover {
+    background-color: rgb(255 255 255 / 10%);
+  }
+
+  .label {
+    color: rgb(170 170 170);
+  }
+
+  .value {
+    color: rgb(245 245 245);
   }
 }

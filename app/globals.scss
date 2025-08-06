@@ -30,12 +30,11 @@
 }
 
 :root {
-  font-weight: var(--font-weight-regular);
-  font-size: var(--body-02);
-
   /* Typography */
 
   font-family: var(--font-inter), sans-serif;
+  font-size: var(--body-02);
+  font-weight: var(--font-weight-regular);
   line-height: var(--line-height-body);
   letter-spacing: var(--letter-spacing-tight);
   font-feature-settings:
@@ -92,8 +91,8 @@
   h4,
   h5,
   h6 {
-    font-weight: 300;
     font-family: var(--font-nohemi), sans-serif;
+    font-weight: 300;
     line-height: var(--line-height-collapse);
     letter-spacing: var(--letter-spacing-wide);
     text-wrap: balance;
@@ -139,6 +138,19 @@
 
   .heading-super {
     font-size: var(--oversize-01);
+  }
+
+  // Accessibility utility
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    border: 0;
+    clip: rect(0, 0, 0, 0);
   }
 
   .button-01 {
@@ -212,15 +224,15 @@
   .sups,
   sup {
     top: -0.5em;
-    vertical-align: super;
     font-size: var(--caption-03);
+    vertical-align: super;
   }
 
   .sub,
   sub {
     bottom: -0.25em;
-    vertical-align: sub;
     font-size: var(--caption-03);
+    vertical-align: sub;
   }
 
   sub,
@@ -228,8 +240,8 @@
   sup,
   .sup {
     position: relative;
-    vertical-align: baseline;
     line-height: 0;
+    vertical-align: baseline;
   }
 
   .smallest {
@@ -237,17 +249,17 @@
   }
 
   abbr[title] {
-    border-bottom: none;
     text-decoration: underline;
     text-decoration: underline dotted;
+    border-bottom: none;
   }
 
   code,
   kbd,
   samp,
   pre {
-    font-size: 1em;
     font-family: monospace;
+    font-size: 1em;
   }
 
   .elevated {
@@ -281,8 +293,144 @@
 }
 
 *::selection {
-  background: var(--color-background-highlight, blue);
-  color: var(--color-foreground-highlight, lightBlue);
+  color: var(--color-foreground-highlight);
+  background: var(--color-background-highlight);
+}
+
+h4,
+h3 {
+  span {
+    display: block;
+    font-weight: var(--font-weight-light);
+    color: var(--color-foreground-secondary);
+  }
+}
+
+/* Gooey text highlighting */
+.text-highlighted {
+  position: relative;
+  z-index: 1;
+  filter: url('#goo-text');
+}
+
+.text-highlighted > span {
+  padding: var(--size-02) var(--size-03);
+  color: var(--color-foreground-highlight);
+  background: var(--color-background-highlight);
+  border-radius: var(--radius-01);
+  transition: all 0.2s ease;
+  box-decoration-break: clone;
+}
+
+/* Gooey selection styling */
+::selection {
+  color: var(--color-foreground-highlight);
+  background: var(--color-background-highlight);
+
+  /* Note: ::selection doesn't support pseudo-elements, so we can't use gooey filter here
+     without blurring the text. The gooey effect will be handled by CSS Custom Highlight API
+     for programmatic selections, and manual highlighting for static content. */
+}
+
+/* Enhanced selection styling for gooey effect */
+::highlight(gooey-highlight) {
+  padding: var(--size-01) var(--size-02);
+  color: var(--color-foreground-highlight);
+  background: var(--color-background-highlight);
+  border-radius: var(--radius-01);
+  transition: all 0.2s ease;
+  animation: gooeyHighlightFadeIn 0.3s ease-out;
+
+  /* Use a very subtle blur to avoid text obscuring */
+  filter: url('#goo-text-subtle');
+  box-decoration-break: clone;
+}
+
+/* Fallback for browsers that don't support CSS Custom Highlight API */
+@supports not (CSS.highlights) {
+  *::selection {
+    color: var(--color-foreground-highlight);
+    background: var(--color-background-highlight);
+    border-radius: var(--radius-01);
+  }
+}
+
+/* Mark element styling with gooey effect */
+mark {
+  padding: var(--size-01) var(--size-02);
+  color: var(--color-foreground-highlight);
+  background: var(--color-background-highlight);
+  border-radius: var(--radius-01);
+  transition: all 0.2s ease;
+  filter: url('#goo-text');
+  box-decoration-break: clone;
+}
+
+/* Animation for highlighted text */
+@keyframes highlightFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Wrapper for gooey highlighting that keeps text crisp */
+.gooey-highlight-wrapper {
+  position: relative;
+  display: inline;
+  filter: url('#goo-text');
+
+  > span {
+    position: relative;
+    z-index: 2;
+    padding: var(--size-01) var(--size-02);
+    color: var(--color-foreground-highlight);
+    background: var(--color-background-highlight);
+    border-radius: var(--radius-01);
+    transition: all 0.2s ease;
+    box-decoration-break: clone;
+  }
+}
+
+.text-highlighted > span,
+mark {
+  animation: highlightFadeIn 0.3s ease-out;
+}
+
+.gooey > span {
+  padding: var(--size-05) var(--size-05);
+  color: var(--color-foreground-primary);
+  background: var(--color-background-primary);
+
+  /* make sure the padding apply to all the lines */
+  box-decoration-break: clone;
+}
+
+/* Hover effects for highlighted text */
+.text-highlighted:hover {
+  > span,
+  mark:hover {
+    background: var(--color-background-tertiary);
+    transform: scale(1.02);
+  }
+}
+
+/* Animation for CSS Custom Highlight API highlights */
+@keyframes gooeyHighlightFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 [hidden] {
@@ -303,8 +451,8 @@ select {
 /* structure   */
 html {
   line-height: var(--line-height);
-  text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
+  text-size-adjust: 100%;
 }
 
 html,
@@ -318,8 +466,8 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: var(--color-background-primary);
   color: var(--color-foreground-primary);
+  background: var(--color-background-primary);
 }
 
 body::before {
@@ -332,8 +480,8 @@ body::before {
   height: 100%;
   color: var(--color-foreground-primary);
   opacity: 0.15;
-  filter: url('#grainy');
   pointer-events: none;
+  filter: url('#grainy');
 }
 
 body > svg {
@@ -356,10 +504,10 @@ main {
   display: flex;
   flex-grow: 1;
   flex-direction: column;
-  overflow-x: hidden;
   width: 100%;
   margin: auto;
   padding-top: 5vh;
+  overflow-x: hidden;
   transition-property: transform, filter;
   view-transition-name: main;
 }
@@ -405,10 +553,10 @@ section:not(:first-of-type) + section {
 }
 
 hr {
-  overflow: visible;
-  box-sizing: content-box;
   height: 0;
   margin: var(--size-07) 0;
+  overflow: visible;
+  box-sizing: content-box;
   border: none;
   border-top: 1px solid var(--color-foreground-primary);
 }
@@ -420,13 +568,6 @@ progress {
 ul {
   margin: 0;
   padding: 0 0 0 1rem;
-}
-
-h4 span,
-h3 span {
-  display: block;
-  color: var(--color-foreground-secondary);
-  font-weight: var(--font-weight-light);
 }
 
 /* Graphics / Visuals */
@@ -442,8 +583,8 @@ canvas {
 }
 
 a {
-  color: var(--color-foreground-accent, inherit);
   text-decoration: none;
+  color: var(--color-foreground-accent, inherit);
 }
 
 a:focus-visible,
@@ -455,15 +596,7 @@ a:hover {
   text-decoration: underline;
 }
 
-i {
-  all: unset;
-  color: inherit;
-  font-size: inherit;
-}
-
-i span {
-  display: none;
-}
+// FontAwesome styles removed - using local SVG icons instead
 
 .social-link {
   display: inline-flex;
@@ -479,10 +612,10 @@ button,
 [type='button'],
 [type='reset'],
 [type='submit'] {
-  border: none;
   background: none;
-  cursor: pointer;
+  border: none;
   appearance: button;
+  cursor: pointer;
 }
 
 button::-moz-focus-inner,
@@ -536,12 +669,12 @@ textarea {
   max-width: 30em;
   min-height: var(--tap-target-large);
   padding: var(--size-03) var(--size-04);
+  color: var(--color-foreground-primary);
+  background: var(--color-background-input);
   border: 1px solid var(--color-border-primary);
   border-radius: var(--radius-02);
-  background: var(--color-background-input);
-  color: var(--color-foreground-primary);
-  resize: vertical;
   transition: border 0.2s ease;
+  resize: vertical;
 }
 
 textarea + label {
@@ -567,32 +700,32 @@ textarea:focus-visible {
 
 input:read-only,
 textarea:read-only {
-  border-color: var(--color-foreground-primary);
-  background: var(--color-background-read-only);
   color: var(--secondary);
+  background: var(--color-background-read-only);
+  border-color: var(--color-foreground-primary);
   outline: none;
 }
 
 input:disabled,
 textarea:disabled {
-  border-color: var(--color-border-disabled);
-  background: var(--color-background-secondary);
   color: var(--color-foreground-disabled);
+  background: var(--color-background-secondary);
+  border-color: var(--color-border-disabled);
 }
 
 input[type='range'] {
   width: 100%;
   min-height: 20px;
   padding: 0;
-  border: none;
-  border-radius: var(--radius-02);
   background: linear-gradient(
     to right,
     var(--color-foreground-primary),
     var(--color-foreground-secondary)
   );
-  cursor: pointer;
+  border: none;
+  border-radius: var(--radius-02);
   transition: background 0.2s ease;
+  cursor: pointer;
 
   &:focus-visible {
     outline: var(--focus-ring);
@@ -639,15 +772,15 @@ article ol {
 
 .grid {
   display: grid;
+  align-content: stretch;
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   gap: var(--grid-gap-medium);
-  align-content: stretch;
 }
 
 .card {
   padding: var(--size-06);
-  border-radius: var(--radius-02);
   background: var(--color-background-primary);
+  border-radius: var(--radius-02);
   box-shadow: var(--elevation);
   transition: box-shadow 0.2s ease;
 }
@@ -666,9 +799,9 @@ article ol {
 
 .meta {
   display: flex;
-  gap: var(--size-03);
   justify-content: space-between;
   align-items: center;
+  gap: var(--size-03);
 }
 
 tr {
@@ -712,15 +845,6 @@ header + main {
   filter: url('#goo');
 }
 
-.gooey > span {
-  padding: var(--size-05) var(--size-05);
-  background: var(--color-background-primary);
-  color: var(--color-foreground-primary);
-
-  /* make sure the padding apply to all the lines */
-  box-decoration-break: clone;
-}
-
 // Grids
 .three-up {
   display: grid;
@@ -754,15 +878,15 @@ header + main {
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 
 .avatarFlag {
   display: flex;
-  gap: var(--size-06);
   align-items: center;
+  gap: var(--size-06);
 }
 
 .flag {
@@ -806,8 +930,8 @@ header + main {
 
   a {
     display: flex;
-    gap: var(--size-04);
     align-items: center;
+    gap: var(--size-04);
     color: var(--color-foreground-secondary);
   }
 }
@@ -818,8 +942,8 @@ header + main {
   gap: var(--size-03);
   margin-top: 0;
   padding-left: 0;
-  list-style: none;
   font-size: var(--heading-05);
+  list-style: none;
 
   a {
     font-weight: var(--font-weight-medium);
@@ -828,10 +952,10 @@ header + main {
 
 .glossary-item h4 {
   display: flex;
-  grid-column: span 1;
-  gap: var(--size-05);
   justify-content: space-between;
   align-items: center;
+  grid-column: span 1;
+  gap: var(--size-05);
 }
 
 .sub-list {
@@ -878,21 +1002,21 @@ header + main {
   .glossary-letter {
     display: inline-block;
     margin-right: var(--size-03);
-    list-style: none;
     font-weight: var(--font-weight-bold);
+    list-style: none;
   }
 
   .content .glossary-list {
     display: grid;
+    align-items: start;
     grid-template-columns: 1fr 1fr 3fr;
     gap: var(--size-06);
-    align-items: start;
     margin: 0 auto;
   }
 
   .glossary-list dd {
-    grid-column: span 1;
     align-self: start;
+    grid-column: span 1;
     margin-top: 0;
   }
 
@@ -906,10 +1030,10 @@ header + main {
 
     dl {
       display: grid;
+      align-items: start;
       grid-template-columns: 1fr 1fr;
       grid-column: span 2;
       gap: var(--size-06);
-      align-items: start;
 
       .glossary-item {
         padding: var(--size-03) var(--size-04);
@@ -917,27 +1041,27 @@ header + main {
         transition: all 0.2s ease;
 
         &:hover {
-          background: var(--color-background-highlight);
           color: var(--color-foreground-highlight);
+          background: var(--color-background-highlight);
 
           & + dd {
-            background: var(--color-background-highlight);
             color: var(--color-foreground-highlight);
+            background: var(--color-background-highlight);
           }
         }
 
         &:has(+ dd:hover) {
-          background: var(--color-background-highlight);
           color: var(--color-foreground-highlight);
+          background: var(--color-background-highlight);
         }
       }
 
       dt h4 {
         display: flex;
-        grid-column: span 1;
-        gap: var(--size-05);
         justify-content: space-between;
         align-items: center;
+        grid-column: span 1;
+        gap: var(--size-05);
       }
     }
   }
@@ -993,19 +1117,19 @@ header + main {
 
   .meta .byline {
     flex-direction: row;
-    gap: var(--size-03);
     align-items: center;
+    gap: var(--size-03);
   }
 }
 
 img.align-left {
-  float: left;
   margin-right: 1rem;
+  float: left;
 }
 
 img.align-right {
-  float: right;
   margin-left: 1rem;
+  float: right;
 }
 
 img.align-center {
