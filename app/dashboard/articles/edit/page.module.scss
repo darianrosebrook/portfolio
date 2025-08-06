@@ -56,28 +56,28 @@
 .meta {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   gap: var(--size-06);
+  justify-content: space-between;
 }
 
 .byline {
   display: flex;
+  gap: var(--size-05);
   justify-content: space-between;
   align-items: center;
-  gap: var(--size-05);
 }
 
 .links {
   display: flex;
+  gap: var(--size-03);
   justify-content: space-between;
   align-items: center;
-  gap: var(--size-03);
 }
 
 .share {
   display: flex;
-  align-items: center;
   gap: var(--size-03);
+  align-items: center;
 }
 
 .links ul {
@@ -125,18 +125,18 @@
 }
 
 .articleList {
-  padding: 1rem;
   overflow-y: auto;
+  padding: 1rem;
   border-right: 1px solid #eee;
 }
 
 .editorContainer {
-  padding: 1rem;
   overflow-y: auto;
+  padding: 1rem;
 }
 
 .metadataPanel {
-  padding: 1rem;
   overflow-y: auto;
+  padding: 1rem;
   border-left: 1px solid #eee;
 }

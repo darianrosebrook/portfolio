@@ -18,11 +18,11 @@
 .demoButton,
 .clearButton {
   padding: var(--size-02) var(--size-04);
-  font-size: var(--text-sm);
-  color: var(--color-foreground-primary);
   background: var(--color-background-primary);
   border: 1px solid var(--color-border-primary);
   border-radius: var(--radius-01);
+  color: var(--color-foreground-primary);
+  font-size: var(--text-sm);
   transition: all 0.2s ease;
   cursor: pointer;
 
@@ -52,16 +52,16 @@
   --text-color: var(--color-foreground-highlight);
 
   position: relative;
+  color: var(--color-foreground-primary);
   font-size: var(--text-lg);
   line-height: 1.6;
-  color: var(--color-foreground-primary);
   cursor: text;
   user-select: text;
 
   /* Selection styling */
   &::selection {
-    color: var(--text-color);
     background: var(--highlight-color);
+    color: var(--text-color);
   }
 
   /* Focus styles */
@@ -90,8 +90,8 @@
 
   p {
     margin: 0 0 var(--size-02) 0;
-    font-size: var(--text-sm);
     color: var(--color-foreground-secondary);
+    font-size: var(--text-sm);
 
     &:last-child {
       margin-bottom: 0;
@@ -102,16 +102,16 @@
 .instructions {
   h4 {
     margin: 0 0 var(--size-03) 0;
-    font-size: var(--text-md);
-    font-weight: var(--font-weight-medium);
     color: var(--color-foreground-primary);
+    font-weight: var(--font-weight-medium);
+    font-size: var(--text-md);
   }
 
   ul {
     margin: 0;
     padding-left: var(--size-04);
-    font-size: var(--text-sm);
     color: var(--color-foreground-secondary);
+    font-size: var(--text-sm);
 
     li {
       margin-bottom: var(--size-01);

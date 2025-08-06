@@ -3,11 +3,11 @@
 }
 
 .editor > div {
+  overflow-y: scroll;
   max-width: 1440px;
   height: 80vh;
   margin: 0 auto;
   padding: 2rem;
-  overflow-y: scroll;
   background: var(--color-background-secondary);
   border: 1px solid var(--secondary);
   border-radius: var(--radius-03);
@@ -23,11 +23,11 @@
 }
 
 .editor .tiptap .is-empty::before {
-  content: attr(data-placeholder);
+  float: left;
   height: 0;
   color: #adb5bd;
   pointer-events: none;
-  float: left;
+  content: attr(data-placeholder);
 }
 
 .editor img {
@@ -45,7 +45,7 @@
 
 .publishBar {
   display: flex;
+  gap: 1rem;
   justify-content: flex-end;
   align-items: center;
-  gap: 1rem;
 }
