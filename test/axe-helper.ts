@@ -12,3 +12,23 @@ export const axe = configureAxe({
 });
 
 export { toHaveNoViolations } from 'jest-axe';
+
+/**
+ * Design system specific axe configuration for testing components
+ */
+export const designSystemAxeConfig = {
+  rules: {
+    'color-contrast': { enabled: false }, // Disabled during development
+    'landmark-one-main': { enabled: false }, // Not applicable to isolated components
+    'page-has-heading-one': { enabled: false }, // Not applicable to isolated components
+  },
+};
+
+/**
+ * Helper function to check for accessibility violations with custom config
+ */
+export const expectNoAccessibilityViolations = async (element: Element | { container: Element }) => {
+  const targetElement = 'container' in element ? element.container : element;
+  const results = await axe(targetElement);
+  expect(results).toHaveNoViolations();
+};
