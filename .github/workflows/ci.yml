@@ -24,14 +24,33 @@ jobs:
 
       - name: Configure npm authentication for private packages
         run: |
-          echo "//npm.fontawesome.com/:_authToken=${{ secrets.FONTAWESOME_PACKAGE_TOKEN }}" >> ~/.npmrc
-          echo "//registry.tiptap.dev/:_authToken=${{ secrets.TIPTAP_PRO_PACKAGE_TOKEN }}" >> ~/.npmrc
-          echo "@awesome.me:registry=https://npm.fontawesome.com/" >> ~/.npmrc
-          echo "@fortawesome:registry=https://npm.fontawesome.com/" >> ~/.npmrc
-          echo "@tiptap-pro:registry=https://registry.tiptap.dev/" >> ~/.npmrc
+          # Backup existing .npmrc and create CI-specific one
+          if [ -f .npmrc ]; then
+            mv .npmrc .npmrc.backup
+          fi
+          
+          # Create CI-specific .npmrc with actual tokens
+          cat > .npmrc << EOF
+          @awesome.me:registry=https://npm.fontawesome.com/
+          @fortawesome:registry=https://npm.fontawesome.com/
+          @tiptap-pro:registry=https://registry.tiptap.dev/
+          
+          //npm.fontawesome.com/:_authToken=${{ secrets.FONTAWESOME_PACKAGE_TOKEN }}
+          //registry.tiptap.dev/:_authToken=${{ secrets.TIPTAP_PRO_PACKAGE_TOKEN }}
+          EOF
+          
+          # Also set up user-level npmrc as backup
+          mkdir -p ~/.npm
+          cp .npmrc ~/.npmrc
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Restore original .npmrc
+        run: |
+          if [ -f .npmrc.backup ]; then
+            mv .npmrc.backup .npmrc
+          fi
 
       - name: Run linting
         run: npm run lint
