@@ -3,15 +3,15 @@
   top: 20px;
   right: 20px;
   z-index: 1000;
+  overflow: hidden;
   width: 400px;
   max-height: 80vh;
-  overflow: hidden;
-  font-family: 'Inter Variable', sans-serif;
-  font-size: 14px;
-  background: var(--color-background-primary);
   border: 1px solid var(--color-border-primary);
   border-radius: var(--radius-02);
+  background: var(--color-background-primary);
   box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
+  font-size: 14px;
+  font-family: 'Inter Variable', sans-serif;
 }
 
 .toggleButton {
@@ -24,13 +24,13 @@
   align-items: center;
   width: 50px;
   height: 50px;
-  font-size: 20px;
-  background: var(--color-background-primary);
   border: 1px solid var(--color-border-primary);
   border-radius: 50%;
+  background: var(--color-background-primary);
   box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
-  transition: all 0.2s ease;
+  font-size: 20px;
   cursor: pointer;
+  transition: all 0.2s ease;
 
   &:hover {
     box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
@@ -43,14 +43,14 @@
   justify-content: space-between;
   align-items: center;
   padding: 16px 20px;
-  background: var(--color-background-secondary);
   border-bottom: 1px solid var(--color-border-primary);
+  background: var(--color-background-secondary);
 
   h3 {
     margin: 0;
-    font-size: 16px;
-    font-weight: 600;
     color: var(--color-foreground-primary);
+    font-weight: 600;
+    font-size: 16px;
   }
 
   button {
@@ -60,24 +60,24 @@
     width: 24px;
     height: 24px;
     padding: 0;
-    font-size: 20px;
-    color: var(--color-foreground-secondary);
-    background: none;
     border: none;
     border-radius: 4px;
+    background: none;
+    color: var(--color-foreground-secondary);
+    font-size: 20px;
     cursor: pointer;
 
     &:hover {
-      color: var(--color-foreground-primary);
       background: var(--color-background-primary);
+      color: var(--color-foreground-primary);
     }
   }
 }
 
 .content {
+  overflow-y: auto;
   max-height: calc(80vh - 60px);
   padding: 20px;
-  overflow-y: auto;
 }
 
 .section {
@@ -89,11 +89,11 @@
 
   h4 {
     margin: 0 0 12px;
-    font-size: 14px;
+    color: var(--color-foreground-primary);
     font-weight: 600;
+    font-size: 14px;
     letter-spacing: 0.5px;
     text-transform: uppercase;
-    color: var(--color-foreground-primary);
   }
 }
 
@@ -108,24 +108,24 @@
   justify-content: space-between;
   align-items: center;
   padding: 8px 12px;
-  background: var(--color-background-secondary);
   border: 1px solid var(--color-border-primary);
   border-radius: 6px;
+  background: var(--color-background-secondary);
 }
 
 .label {
-  font-size: 12px;
+  color: var(--color-foreground-secondary);
   font-weight: 500;
+  font-size: 12px;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  color: var(--color-foreground-secondary);
 }
 
 .value {
-  font-family: 'Nohemi Variable', monospace;
-  font-size: 13px;
-  font-weight: 600;
   color: var(--color-foreground-primary);
+  font-weight: 600;
+  font-size: 13px;
+  font-family: 'Nohemi Variable', monospace;
 
   &.green {
     color: #10b981;
@@ -142,9 +142,9 @@
 
 .loading {
   padding: 40px 20px;
+  color: var(--color-foreground-secondary);
   font-style: italic;
   text-align: center;
-  color: var(--color-foreground-secondary);
 }
 
 // Responsive design
