@@ -15,7 +15,10 @@ export default function GlossaryCards() {
 
   let glossaryItems = terms.slice(0, 14);
   //if container is less than 800px wide, slice the glossaryItems to 10
-  if (containerRef.current?.clientWidth < 800) {
+  if (
+    containerRef.current?.clientWidth &&
+    containerRef.current.clientWidth < 800
+  ) {
     glossaryItems = glossaryItems.slice(0, 10);
   }
   const cardsRef = useRef<HTMLDivElement[]>([]);

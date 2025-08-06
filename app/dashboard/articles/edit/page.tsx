@@ -1,6 +1,31 @@
 'use client';
 import { useState } from 'react';
-import { Tiptap } from '@/components/Tiptap';
+import dynamic from 'next/dynamic';
+import { EditorErrorBoundary } from '@/components/ErrorBoundary';
+
+// Dynamically import Tiptap editor for better performance
+const Tiptap = dynamic(
+  () => import('@/components/Tiptap').then((mod) => ({ default: mod.Tiptap })),
+  {
+    loading: () => (
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: '500px',
+          color: 'var(--color-foreground-secondary)',
+          border: '1px solid var(--color-border-primary)',
+          borderRadius: 'var(--radius-02)',
+          background: 'var(--color-background-secondary)',
+        }}
+      >
+        <div>Loading editor...</div>
+      </div>
+    ),
+    ssr: false, // Tiptap editor requires client-side initialization
+  }
+);
 import { Article } from '@/types';
 
 import { debounce } from '@/utils';
@@ -48,7 +73,7 @@ const EditArticle = () => {
     });
   };
 
-  const pushChanges = async (article: Article) => {
+  const pushChanges = async (article: Partial<Article>) => {
     // Run image cleanup before saving if we have an article ID
     if (
       article.id &&
@@ -63,8 +88,8 @@ const EditArticle = () => {
     // You would implement your actual save logic here
   };
 
-  const handleUpdate = debounce((article: Article) => {
-    const updatedArticle = { ...article };
+  const handleUpdate = debounce((article: Partial<Article>) => {
+    const updatedArticle = { ...article } as Article;
     let title = '';
     let description = '';
     let coverImage = '';
@@ -95,7 +120,7 @@ const EditArticle = () => {
     }
     setArticle(updatedArticle);
     pushChanges(updatedArticle);
-  }, 1000);
+  }, 1000) as (article: Partial<Article>) => void;
 
   const handlePublish = async () => {
     // Run image cleanup before publishing
@@ -126,9 +151,12 @@ const EditArticle = () => {
       .replace(/ +/g, '-');
   };
 
-  const parseUpdateFromInput = (e) => {
-    setArticle({ ...article, [e.target.name]: e.target.value });
-    handleUpdate(article);
+  const parseUpdateFromInput = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const updatedArticle = { ...article, [e.target.name]: e.target.value };
+    setArticle(updatedArticle);
+    handleUpdate(updatedArticle);
   };
 
   return (
@@ -140,7 +168,26 @@ const EditArticle = () => {
         />
       </div>
       <div className={styles.editorContainer}>
-        <Tiptap handleUpdate={handleUpdate} article={article} />
+        <EditorErrorBoundary
+          editorName="Article Editor"
+          onDataLoss={() => {
+            // Save current article data to localStorage for recovery
+            try {
+              localStorage.setItem(
+                'article-editor-autosave',
+                JSON.stringify({
+                  ...article,
+                  timestamp: new Date().toISOString(),
+                })
+              );
+              console.log('Article auto-saved to localStorage for recovery');
+            } catch (error) {
+              console.error('Failed to save article for recovery:', error);
+            }
+          }}
+        >
+          <Tiptap handleUpdate={handleUpdate} article={article} />
+        </EditorErrorBoundary>
       </div>
       <div className={styles.metadataPanel}>
         <MetadataPanel

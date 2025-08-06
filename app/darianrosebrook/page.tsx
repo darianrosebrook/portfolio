@@ -102,6 +102,8 @@ export default async function Page() {
                 width={120}
                 height={120}
                 className={styles.avatar}
+                loading="lazy"
+                sizes="120px"
               />
             )}
 

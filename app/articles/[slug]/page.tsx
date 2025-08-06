@@ -30,7 +30,7 @@ function getArticleContent(data: JSONContent) {
   return content;
 }
 
-async function getData(slug) {
+async function getData(slug: string) {
   const supabase = await createClient();
   const { data: article } = await supabase
     .from('articles')
@@ -179,6 +179,8 @@ export default async function Page(props: { params: Params }) {
           alt={article.headline}
           width={500}
           height={300}
+          loading="lazy"
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 75vw, 500px"
         />
         <p className="caption"></p>
         <div

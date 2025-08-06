@@ -155,7 +155,7 @@ export function drawPathDetails(
   ctx.beginPath();
 
   // keep track of the last anchor
-  let lastAnchor = null;
+  let lastAnchor: { x: number; y: number } | null = null;
   ctx.strokeStyle = colors.handleStroke;
   ctx.lineWidth = 1;
   for (let i = 0; i < glyph.path.commands.length; i++) {
@@ -187,6 +187,7 @@ export function drawPathDetails(
           y = -yRaw * scale;
 
         // remember P0
+        if (!lastAnchor) break;
         const { x: x0, y: y0 } = lastAnchor;
         // convert Q→C:
         const x1 = x0 + (2 / 3) * (cx - x0);
@@ -230,6 +231,7 @@ export function drawPathDetails(
         ctx.bezierCurveTo(c1x, c1y, c2x, c2y, x, y);
 
         // P0 → C1
+        if (!lastAnchor) break;
         const { x: x0, y: y0 } = lastAnchor;
         ctx.beginPath();
         ctx.moveTo(x0, y0);
@@ -295,7 +297,7 @@ export function drawPathDetails(
 export function drawAxisValues(
   ctx: CanvasRenderingContext2D,
   width: number,
-  baseline: number,
+  _baseline: number,
   wght: number,
   opsz: number,
   colors: DrawColors
@@ -319,7 +321,7 @@ export function drawCursorLabel(
   ctx: CanvasRenderingContext2D,
   x: number,
   y: number,
-  wght: number,
+  _wght: number,
   colors: DrawColors
 ) {
   ctx.save();
@@ -345,16 +347,16 @@ export function drawCursorLabel(
  */
 export function drawAnatomyOverlay(
   ctx: CanvasRenderingContext2D,
-  w: number,
-  h: number,
+  _w: number,
+  _h: number,
   glyph: Glyph,
   scale: number,
   colors: DrawColors,
-  metrics: {
+  _metrics: {
     [key: string]: number;
   },
   selected: Map<string, AnatomyFeature>,
-  analysis?: Float64Array // eslint-disable-line @typescript-eslint/no-unused-vars
+  _analysis?: Float64Array
 ) {
   // 'analysis' is intentionally unused for now; will be used for overlays in the future.
   if (!selected || selected.size === 0) {
