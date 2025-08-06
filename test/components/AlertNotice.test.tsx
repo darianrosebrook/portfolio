@@ -1,9 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '../test-utils';
-import {
-  expectNoAccessibilityViolations,
-  designSystemAxeConfig,
-} from '../axe-helper';
+import { expectNoAccessibilityViolations } from '../axe-helper';
 import {
   Container,
   Title,
@@ -170,10 +167,7 @@ describe('AlertNotice Components', () => {
             </Container>
           );
 
-          await expectNoAccessibilityViolations(
-            renderResult,
-            designSystemAxeConfig
-          );
+          await expectNoAccessibilityViolations(renderResult);
           renderResult.unmount();
         }
       });

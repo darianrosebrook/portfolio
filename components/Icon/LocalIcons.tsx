@@ -1,7 +1,10 @@
 import React from 'react';
 
 // Local icon components to avoid external dependencies in optimized build
-export const CheckIcon: React.FC<{ className?: string; 'aria-hidden'?: boolean }> = ({ className, 'aria-hidden': ariaHidden }) => (
+export const CheckIcon: React.FC<{
+  className?: string;
+  'aria-hidden'?: boolean;
+}> = ({ className, 'aria-hidden': ariaHidden }) => (
   <svg
     className={className}
     width="16"
@@ -15,7 +18,10 @@ export const CheckIcon: React.FC<{ className?: string; 'aria-hidden'?: boolean }
   </svg>
 );
 
-export const LinkIcon: React.FC<{ className?: string; 'aria-hidden'?: boolean }> = ({ className, 'aria-hidden': ariaHidden }) => (
+export const LinkIcon: React.FC<{
+  className?: string;
+  'aria-hidden'?: boolean;
+}> = ({ className, 'aria-hidden': ariaHidden }) => (
   <svg
     className={className}
     width="16"
@@ -30,7 +36,10 @@ export const LinkIcon: React.FC<{ className?: string; 'aria-hidden'?: boolean }>
   </svg>
 );
 
-export const TimesIcon: React.FC<{ className?: string; 'aria-hidden'?: boolean }> = ({ className, 'aria-hidden': ariaHidden }) => (
+export const TimesIcon: React.FC<{
+  className?: string;
+  'aria-hidden'?: boolean;
+}> = ({ className, 'aria-hidden': ariaHidden }) => (
   <svg
     className={className}
     width="16"
@@ -44,7 +53,10 @@ export const TimesIcon: React.FC<{ className?: string; 'aria-hidden'?: boolean }
   </svg>
 );
 
-export const InfoIcon: React.FC<{ className?: string; 'aria-hidden'?: boolean }> = ({ className, 'aria-hidden': ariaHidden }) => (
+export const InfoIcon: React.FC<{
+  className?: string;
+  'aria-hidden'?: boolean;
+}> = ({ className, 'aria-hidden': ariaHidden }) => (
   <svg
     className={className}
     width="16"
@@ -59,10 +71,10 @@ export const InfoIcon: React.FC<{ className?: string; 'aria-hidden'?: boolean }>
   </svg>
 );
 
-export const WarningIcon: React.FC<{ className?: string; 'aria-hidden'?: boolean }> = ({
-  className,
-  'aria-hidden': ariaHidden,
-}) => (
+export const WarningIcon: React.FC<{
+  className?: string;
+  'aria-hidden'?: boolean;
+}> = ({ className, 'aria-hidden': ariaHidden }) => (
   <svg
     className={className}
     width="16"
@@ -76,7 +88,10 @@ export const WarningIcon: React.FC<{ className?: string; 'aria-hidden'?: boolean
   </svg>
 );
 
-export const ErrorIcon: React.FC<{ className?: string; 'aria-hidden'?: boolean }> = ({ className, 'aria-hidden': ariaHidden }) => (
+export const ErrorIcon: React.FC<{
+  className?: string;
+  'aria-hidden'?: boolean;
+}> = ({ className, 'aria-hidden': ariaHidden }) => (
   <svg
     className={className}
     width="16"
@@ -90,10 +105,10 @@ export const ErrorIcon: React.FC<{ className?: string; 'aria-hidden'?: boolean }
   </svg>
 );
 
-export const SuccessIcon: React.FC<{ className?: string; 'aria-hidden'?: boolean }> = ({
-  className,
-  'aria-hidden': ariaHidden,
-}) => (
+export const SuccessIcon: React.FC<{
+  className?: string;
+  'aria-hidden'?: boolean;
+}> = ({ className, 'aria-hidden': ariaHidden }) => (
   <svg
     className={className}
     width="16"
