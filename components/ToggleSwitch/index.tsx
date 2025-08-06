@@ -5,7 +5,7 @@ import styles from './toggleSwitch.module.scss';
 type ToggleSwitchProps = {
   checked: boolean;
   disabled?: boolean;
-  onChange: (e) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   children: ReactNode;
 };
 
@@ -15,6 +15,13 @@ const ToggleSwitch = ({
   onChange,
   children,
 }: ToggleSwitchProps) => {
+  // Generate a safe ID from children - handle both string and ReactNode
+  const childrenString =
+    typeof children === 'string'
+      ? children
+      : `toggle-${Math.random().toString(36).substring(2, 9)}`;
+  const safeId = `toggleSwitch-${childrenString.replace(/[^\w-]/g, '-')}`;
+
   return (
     <div className={styles.toggleSwitch}>
       <input
@@ -23,12 +30,9 @@ const ToggleSwitch = ({
         className={checked ? styles.checked : ''}
         onChange={onChange}
         disabled={disabled}
-        id={`toggleSwitch-${children}`}
+        id={safeId}
       />
-      <label
-        className={checked ? styles.checked : ''}
-        htmlFor={`toggleSwitch-${children}`}
-      >
+      <label className={checked ? styles.checked : ''} htmlFor={safeId}>
         {children}
       </label>
     </div>

@@ -1,8 +1,8 @@
 .gridContainer {
   position: relative;
-  overflow: visible;
   width: 100%;
   height: 100%;
+  overflow: visible;
 
   & svg {
     max-width: unset;
@@ -29,8 +29,8 @@
 .isometricContainer {
   position: relative;
   display: inline-grid;
-  color: var(--colorSwatch-color-text, #000);
   font-family: sans-serif;
+  color: var(--colorSwatch-color-text, #000);
   transition: all ease-in-out 0.5s;
 }
 

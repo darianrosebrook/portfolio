@@ -24,9 +24,9 @@ export default function AccountForm({ user }: { user: User | null }) {
         console.error(error);
         throw error;
       }
-      const { full_name, username, avatar_url } = data;
 
       if (data) {
+        const { full_name, username, avatar_url } = data;
         setFullname(full_name);
         setUsername(username);
         setAvatarUrl(avatar_url);

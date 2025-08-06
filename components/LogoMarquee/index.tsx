@@ -7,12 +7,12 @@ import { horizontalLoop } from '@/utils';
 import LogoSprite from './LogoSprite';
 
 const LogoMarquee: React.FC = () => {
-  const logoMarqueeRef = useRef(null);
-  const spriteRef = useRef(null);
-  const [boxes, setBoxes] = useState(null);
+  const logoMarqueeRef = useRef<HTMLDivElement>(null);
+  const spriteRef = useRef<HTMLElement | null>(null);
+  const [boxes, setBoxes] = useState<React.ReactElement[] | null>(null);
   const [isBoxesReady, setIsBoxesReady] = useState(false);
 
-  const box = (svg) => (
+  const box = (svg: Element) => (
     <div className={Styles.box} key={svg.id}>
       <svg className={Styles.logo}>
         <use href={`#${svg.id}`} />
@@ -24,6 +24,7 @@ const LogoMarquee: React.FC = () => {
   useGSAP(
     () => {
       if (!isBoxesReady) return;
+      if (!logoMarqueeRef.current) return;
       const boxElements = logoMarqueeRef.current.children;
       gsap.set(logoMarqueeRef.current, { perspective: 500 });
       const loop = horizontalLoop(boxElements, {
@@ -31,7 +32,9 @@ const LogoMarquee: React.FC = () => {
         paused: false,
         speed: 1,
       });
-      return () => loop.kill();
+      return () => {
+        if (loop) loop.kill();
+      };
     },
     {
       scope: logoMarqueeRef,
@@ -42,7 +45,7 @@ const LogoMarquee: React.FC = () => {
   useEffect(() => {
     const LOGOSPRITE = document.getElementById('LOGOSPRITE');
     if (LOGOSPRITE) {
-      spriteRef.current = LOGOSPRITE;
+      spriteRef.current = LOGOSPRITE as HTMLElement;
       const children = LOGOSPRITE.children;
       const newBoxes = Array.from(children).map((child) => box(child));
       setBoxes(newBoxes);
@@ -53,7 +56,9 @@ const LogoMarquee: React.FC = () => {
     <div className={Styles.marqueeContainer}>
       <LogoSprite />
       <div className={Styles.marquee} ref={logoMarqueeRef}>
-        {clones && boxes && boxes.map((box) => box)}
+        {clones &&
+          boxes &&
+          boxes.map((box, index) => <div key={index}>{box}</div>)}
       </div>
       <div className={Styles.cover}></div>
     </div>

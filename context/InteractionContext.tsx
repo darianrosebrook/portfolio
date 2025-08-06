@@ -70,8 +70,8 @@ export const InteractionProvider: React.FC<{ children: ReactNode }> = ({
       onMove: (self) => {
         mouseRef.current = {
           ...mouseRef.current,
-          x: self.x,
-          y: self.y,
+          x: self.x ?? 0,
+          y: self.y ?? 0,
           velocityX: self.velocityX,
           velocityY: self.velocityY,
           hasMouseMoved: true,
