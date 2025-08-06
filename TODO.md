@@ -48,10 +48,12 @@ git stash apply stash@{2}
 git stash pop stash@{1}
 ```
 
-**Key Commit Hashes (if needed):**
-- Last known good state: Check `git log --oneline -10` for recent commits
-- Main branch: `origin/main` should have stable base
-- Feature branches: `git branch -a` shows available branches
+**Key Commit Hashes & Branch References:**
+- **Current recovery branch:** `ca903e0f` (feature/optimization-recovery)
+- **Base gooey branch:** `19fa86a5` (origin/feature/gooey-text-highlighting)
+- **Main branch:** `origin/main` (stable base)
+- **Available branches:** main, feature/gooey-text-highlighting, fix/typescript-route-handlers
+- **Recovery starting point:** commit `cdee8e7b` (initial TODO.md creation)
 
 ---
 
@@ -334,9 +336,13 @@ git diff HEAD
 
 ## 📝 **Recovery Log**
 
-**2025-08-05 17:20** - Created recovery branch and TODO.md
-**2025-08-05 17:25** - Enhanced TODO.md with git references and technical context
-**Next:** Resolve conflicts and apply comprehensive stash
+**2025-08-05 17:20** - Created recovery branch `feature/optimization-recovery` 
+**2025-08-05 17:25** - Enhanced TODO.md with comprehensive recovery context
+**2025-08-05 17:30** - Added specific git commit hashes and branch references
+- Current HEAD: `ca903e0f` on `feature/optimization-recovery`
+- Base branch: `19fa86a5` on `origin/feature/gooey-text-highlighting`
+- Stashes verified: 3 available with comprehensive optimizations
+**Next:** Resolve conflicts (globals.scss, tsconfig.json) and apply stash@{2}
 
 ---
 
