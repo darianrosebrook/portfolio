@@ -1,8 +1,8 @@
 .avatar {
   display: inline-block;
-  overflow: hidden;
   width: var(--size-06);
   height: var(--size-06);
+  overflow: hidden;
   border: var(--stroke-1) solid var(--secondary);
   border-radius: 1920px;
 }

@@ -1,45 +1,40 @@
-import { z } from 'zod';
-
 /**
- * Environment variable schema validation
- * Ensures all required environment variables are present and valid
+ * Environment variable utility
+ * Provides type-safe access to environment variables with validation
  */
-const envSchema = z.object({
-  // Next.js environment
-  NODE_ENV: z
-    .enum(['development', 'production', 'test'])
-    .default('development'),
 
-  // Supabase configuration
-  NEXT_PUBLIC_SUPABASE_URL: z.string().url('Invalid Supabase URL'),
-  NEXT_PUBLIC_SUPABASE_ANON_KEY: z
-    .string()
-    .min(1, 'Supabase anon key is required'),
-
-  // Site configuration
-  NEXT_PUBLIC_SITE_URL: z.string().url().optional(),
-  NEXT_PUBLIC_VERCEL_URL: z.string().optional(),
-});
-
-/**
- * Validated environment variables
- * Use this instead of process.env to ensure type safety and validation
- */
-export const env = envSchema.parse(process.env);
-
-/**
- * Runtime environment validation
- * Call this in your app startup to ensure all env vars are valid
- */
-export function validateEnvironment() {
-  try {
-    envSchema.parse(process.env);
-    console.log('✅ Environment variables validated successfully');
-  } catch (error) {
-    console.error('❌ Environment validation failed:', error);
-    throw new Error('Invalid environment configuration');
-  }
+interface Environment {
+  supabaseUrl: string;
+  supabaseAnonKey: string;
+  nextPublicSupabaseUrl: string;
+  nextPublicSupabaseAnonKey: string;
+  nodeEnv: string;
+  NEXT_PUBLIC_SITE_URL?: string;
+  NEXT_PUBLIC_VERCEL_URL?: string;
 }
 
-// Type for validated environment
-export type Environment = z.infer<typeof envSchema>;
+const validateEnvVar = (key: string, value: string | undefined): string => {
+  if (!value) {
+    throw new Error(`Missing required environment variable: ${key}`);
+  }
+  return value;
+};
+
+export const env: Environment = {
+  supabaseUrl: validateEnvVar('SUPABASE_URL', process.env.SUPABASE_URL),
+  supabaseAnonKey: validateEnvVar(
+    'SUPABASE_ANON_KEY',
+    process.env.SUPABASE_ANON_KEY
+  ),
+  nextPublicSupabaseUrl: validateEnvVar(
+    'NEXT_PUBLIC_SUPABASE_URL',
+    process.env.NEXT_PUBLIC_SUPABASE_URL
+  ),
+  nextPublicSupabaseAnonKey: validateEnvVar(
+    'NEXT_PUBLIC_SUPABASE_ANON_KEY',
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  ),
+  nodeEnv: process.env.NODE_ENV || 'development',
+  NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
+  NEXT_PUBLIC_VERCEL_URL: process.env.NEXT_PUBLIC_VERCEL_URL,
+};

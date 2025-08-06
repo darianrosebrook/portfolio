@@ -1,2 +1,2 @@
-export { default } from './GooeyHighlight';
 export { GooeyHighlight } from './GooeyHighlight';
+export { default } from './GooeyHighlight';

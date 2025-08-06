@@ -1,156 +1,111 @@
-/**
- * Local SVG icon components to replace FontAwesome external script
- * These are optimized, lightweight alternatives to external font loading
- */
-
 import React from 'react';
 
-interface IconProps {
-  className?: string;
-  'aria-hidden'?: boolean;
-  size?: number;
-}
-
-// Core icons used throughout the app
-export const TimesIcon: React.FC<IconProps> = ({
-  className = '',
-  'aria-hidden': ariaHidden = true,
-  size = 16,
-}) => (
+// Local icon components to avoid external dependencies in optimized build
+export const CheckIcon: React.FC<{ className?: string }> = ({ className }) => (
   <svg
     className={className}
-    aria-hidden={ariaHidden}
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
     fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
   >
-    <path d="M18.3 5.71a.996.996 0 0 0-1.41 0L12 10.59 7.11 5.7A.996.996 0 1 0 5.7 7.11L10.59 12 5.7 16.89a.996.996 0 1 0 1.41 1.41L12 13.41l4.89 4.89a.996.996 0 1 0 1.41-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4z" />
+    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
   </svg>
 );
 
-export const CheckIcon: React.FC<IconProps> = ({
-  className = '',
-  'aria-hidden': ariaHidden = true,
-  size = 16,
-}) => (
+export const LinkIcon: React.FC<{ className?: string }> = ({ className }) => (
   <svg
     className={className}
-    aria-hidden={ariaHidden}
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
     fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
   >
-    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+    <path d="M6.354 5.5H4a3 3 0 0 0 0 6h3a3 3 0 0 0 2.83-4H9c-.086 0-.17.01-.25.031A2 2 0 0 1 7 9.5H4a2 2 0 1 1 0-4h1.535c.218-.376.495-.714.82-1z" />
+    <path d="M9 5.5a3 3 0 0 0-2.83 4h1.098A2 2 0 0 1 9 7.5h3a2 2 0 1 1 0 4h-1.535a4.02 4.02 0 0 1-.82 1H12a3 3 0 1 0 0-6H9z" />
   </svg>
 );
 
-export const LinkIcon: React.FC<IconProps> = ({
-  className = '',
-  'aria-hidden': ariaHidden = true,
-  size = 16,
-}) => (
+export const TimesIcon: React.FC<{ className?: string }> = ({ className }) => (
   <svg
     className={className}
-    aria-hidden={ariaHidden}
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
     fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
   >
-    <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z" />
+    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
   </svg>
 );
 
-export const InfoCircleIcon: React.FC<IconProps> = ({
-  className = '',
-  'aria-hidden': ariaHidden = true,
-  size = 16,
-}) => (
+export const InfoIcon: React.FC<{ className?: string }> = ({ className }) => (
   <svg
     className={className}
-    aria-hidden={ariaHidden}
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
     fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
   >
-    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
+    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
   </svg>
 );
 
-export const CheckCircleIcon: React.FC<IconProps> = ({
-  className = '',
-  'aria-hidden': ariaHidden = true,
-  size = 16,
+export const WarningIcon: React.FC<{ className?: string }> = ({
+  className,
 }) => (
   <svg
     className={className}
-    aria-hidden={ariaHidden}
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
     fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
   >
-    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+    <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
   </svg>
 );
 
-export const ExclamationTriangleIcon: React.FC<IconProps> = ({
-  className = '',
-  'aria-hidden': ariaHidden = true,
-  size = 16,
+export const ErrorIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <svg
+    className={className}
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+  </svg>
+);
+
+export const SuccessIcon: React.FC<{ className?: string }> = ({
+  className,
 }) => (
   <svg
     className={className}
-    aria-hidden={ariaHidden}
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
     fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
   >
-    <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z" />
+    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.061L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
   </svg>
 );
 
-export const ExclamationCircleIcon: React.FC<IconProps> = ({
-  className = '',
-  'aria-hidden': ariaHidden = true,
-  size = 16,
-}) => (
-  <svg
-    className={className}
-    aria-hidden={ariaHidden}
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
-    fill="currentColor"
-  >
-    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
-  </svg>
-);
-
-// Icon mapping for easy replacement
+// Export a map for the AlertNotice component
 export const LocalIcons = {
-  times: TimesIcon,
-  check: CheckIcon,
-  link: LinkIcon,
-  'info-circle': InfoCircleIcon,
-  'check-circle': CheckCircleIcon,
-  'exclamation-triangle': ExclamationTriangleIcon,
-  'exclamation-circle': ExclamationCircleIcon,
+  info: InfoIcon,
+  warning: WarningIcon,
+  error: ErrorIcon,
+  success: SuccessIcon,
+  'info-circle': InfoIcon,
+  'check-circle': SuccessIcon,
+  'exclamation-triangle': WarningIcon,
+  'exclamation-circle': ErrorIcon,
 } as const;
-
-// Helper component that mimics FontAwesome's fa classes
-interface FAIconProps {
-  icon: keyof typeof LocalIcons;
-  className?: string;
-  'aria-hidden'?: boolean;
-  size?: number;
-}
-
-export const FAIcon: React.FC<FAIconProps> = ({ icon, ...props }) => {
-  const IconComponent = LocalIcons[icon];
-  return <IconComponent {...props} />;
-};

@@ -1,30 +1,25 @@
 'use client';
 
-import dynamic from 'next/dynamic';
+import React from 'react';
 import { Editor } from '@tiptap/react';
+import dynamic from 'next/dynamic';
 
-// Dynamically import Toolbar components for better performance
-const Toolbar = dynamic(() => import('../Toolbar/Toolbar'), {
-  loading: () => <div>Loading toolbar...</div>,
-  ssr: false,
-});
-
-const ImageToolbar = dynamic(() => import('../Toolbar/ImageToolbar'), {
-  loading: () => <div>Loading image toolbar...</div>,
+// Dynamic import for performance optimization
+const Toolbar = dynamic(() => import('@/components/Toolbar/Toolbar'), {
+  loading: () => <div style={{ height: '40px' }} />, // Placeholder to prevent layout shift
   ssr: false,
 });
 
 interface ToolbarWrapperProps {
-  editor: Editor | null;
+  editor: Editor;
 }
 
-export default function ToolbarWrapper({ editor }: ToolbarWrapperProps) {
-  if (!editor) return null;
+/**
+ * Wrapper component for dynamic toolbar import
+ * Part of the performance optimization to reduce initial bundle size
+ */
+const ToolbarWrapper: React.FC<ToolbarWrapperProps> = ({ editor }) => {
+  return <Toolbar editor={editor} />;
+};
 
-  return (
-    <>
-      <Toolbar editor={editor} />
-      <ImageToolbar editor={editor} />
-    </>
-  );
-}
+export default ToolbarWrapper;

@@ -23,7 +23,7 @@ const Tiptap = ({
 }) => {
   const content = article.articleBody as JSONContent | undefined;
   const editor = useEditor({
-    extensions: createExtensions(article?.id),
+    extensions: createExtensions(article?.id?.toString()),
     immediatelyRender: false,
     content: content,
     onUpdate: ({ editor }) => {

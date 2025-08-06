@@ -16,16 +16,17 @@ const compat = new FlatCompat({
 });
 
 const config = [
+  // Base configuration for all files
   ...compat.extends('next/core-web-vitals', 'prettier'),
   eslintPluginPrettierRecommended,
 
   // TypeScript and React configuration
   {
+    files: ['**/*.ts', '**/*.tsx'],
     plugins: {
       '@typescript-eslint': typescriptEslint,
       'jsx-a11y': jsxA11y,
     },
-
     languageOptions: {
       parser: tsParser,
       parserOptions: {
@@ -59,6 +60,8 @@ const config = [
       'jsx-a11y/role-supports-aria-props': 'error',
     },
   },
+
+  // Apply TypeScript recommended rules
   ...compat
     .extends(
       'next/core-web-vitals',
@@ -69,20 +72,6 @@ const config = [
       ...config,
       files: ['**/*.ts', '**/*.tsx'],
     })),
-  {
-    files: ['**/*.ts', '**/*.tsx'],
-
-    languageOptions: {
-      ecmaVersion: 5,
-      sourceType: 'script',
-
-      parserOptions: {
-        project: ['./tsconfig.json'],
-        projectService: true,
-        tsconfigRootDir: '/Users/darianrosebrook/Desktop/Projects/portfolio',
-      },
-    },
-  },
 ];
 
 export default config;

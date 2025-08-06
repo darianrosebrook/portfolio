@@ -7,9 +7,9 @@
 .dragHandle {
   margin-right: 0.5rem;
   opacity: 0;
+  transition: opacity 0.2s;
   cursor: grab;
   user-select: none;
-  transition: opacity 0.2s;
 }
 
 .container:hover .dragHandle {
