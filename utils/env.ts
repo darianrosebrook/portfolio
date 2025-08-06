@@ -13,10 +13,16 @@ interface Environment {
   NEXT_PUBLIC_VERCEL_URL?: string;
 }
 
-const validateEnvVar = (key: string, value: string | undefined, fallback?: string): string => {
+const validateEnvVar = (
+  key: string,
+  value: string | undefined,
+  fallback?: string
+): string => {
   if (!value) {
     if (fallback && process.env.NODE_ENV !== 'production') {
-      console.warn(`Warning: Using fallback for missing environment variable: ${key}`);
+      console.warn(
+        `Warning: Using fallback for missing environment variable: ${key}`
+      );
       return fallback;
     }
     throw new Error(`Missing required environment variable: ${key}`);
@@ -25,7 +31,11 @@ const validateEnvVar = (key: string, value: string | undefined, fallback?: strin
 };
 
 export const env: Environment = {
-  supabaseUrl: validateEnvVar('SUPABASE_URL', process.env.SUPABASE_URL, 'https://placeholder.supabase.co'),
+  supabaseUrl: validateEnvVar(
+    'SUPABASE_URL',
+    process.env.SUPABASE_URL,
+    'https://placeholder.supabase.co'
+  ),
   supabaseAnonKey: validateEnvVar(
     'SUPABASE_ANON_KEY',
     process.env.SUPABASE_ANON_KEY,
