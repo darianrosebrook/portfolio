@@ -12,9 +12,9 @@ export interface MouseState {
 }
 
 export interface ScrollState {
+  direction: 'up' | 'down' | 'left' | 'right' | null;
   x: number;
   y: number;
-  direction: 'up' | 'down' | 'left' | 'right' | null;
 }
 
 export interface WindowSize {
@@ -30,3 +30,9 @@ export interface InteractionContextValue {
   setPrefersReducedMotion?: (value: boolean) => void;
   setHoveredTarget?: (target: string | undefined) => void;
 }
+
+// Legacy exports for backward compatibility
+export type mousestate = MouseState;
+export type scrollstate = ScrollState;
+export type windowsize = WindowSize;
+export type interactioncontextvalue = InteractionContextValue;

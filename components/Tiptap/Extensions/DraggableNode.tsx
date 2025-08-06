@@ -12,7 +12,9 @@ const createSlug = (text: string) =>
     .replace(/[^\w ]+/g, '')
     .replace(/ +/g, '-');
 
-export const DraggableNode = ({ node }) => {
+import type { NodeViewProps } from '@tiptap/react';
+
+export const DraggableNode: React.FC<NodeViewProps> = ({ node }) => {
   const id =
     node.type.name === 'heading' ? createSlug(node.textContent) : undefined;
 

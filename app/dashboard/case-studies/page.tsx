@@ -1,15 +1,9 @@
 'use client';
 
-type PageProps = {
-  children?: React.ReactNode;
-};
-
-const Page: React.FC<PageProps> = ({}) => {
+export default function Page() {
   return (
     <>
       <p>Page</p>
     </>
   );
-};
-
-export default Page;
+}

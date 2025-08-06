@@ -37,7 +37,8 @@ yarn-error.log*
 next-env.d.ts
 
 # test files that are named test   
-**/*test*
+ 
 
 /plans/ 
 .vscode/
+**/TODO.md

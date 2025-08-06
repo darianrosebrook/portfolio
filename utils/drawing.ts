@@ -187,6 +187,7 @@ export function drawPathDetails(
           y = -yRaw * scale;
 
         // remember P0
+        if (!lastAnchor) break;
         const { x: x0, y: y0 } = lastAnchor;
         // convert Q→C:
         const x1 = x0 + (2 / 3) * (cx - x0);
@@ -230,6 +231,7 @@ export function drawPathDetails(
         ctx.bezierCurveTo(c1x, c1y, c2x, c2y, x, y);
 
         // P0 → C1
+        if (!lastAnchor) break;
         const { x: x0, y: y0 } = lastAnchor;
         ctx.beginPath();
         ctx.moveTo(x0, y0);

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Extension } from '@tiptap/core';
 import Suggestion from '@tiptap/suggestion';
 import { ReactRenderer } from '@tiptap/react';
@@ -24,7 +25,7 @@ export const SlashCommand = Extension.create({
         },
         render: () => {
           let component: ReactRenderer;
-          let popup: unknown;
+          let popup: ReturnType<typeof tippy>;
 
           return {
             onStart: (props) => {
@@ -34,20 +35,21 @@ export const SlashCommand = Extension.create({
               });
 
               popup = tippy('body', {
-                getReferenceClientRect: props.clientRect,
+                getReferenceClientRect:
+                  props.clientRect || (() => new DOMRect()),
                 appendTo: () => document.body,
                 content: component.element,
                 showOnCreate: true,
                 interactive: true,
                 trigger: 'manual',
                 placement: 'bottom-start',
-              });
+              } as any);
             },
             onUpdate(props) {
               component.updateProps(props);
 
               popup[0].setProps({
-                getReferenceClientRect: props.clientRect,
+                getReferenceClientRect: props.clientRect as any,
               });
             },
             onKeyDown(props) {

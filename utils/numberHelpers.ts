@@ -1,4 +1,4 @@
-function calculateReadingTime(wordCount) {
+function calculateReadingTime(wordCount: number) {
   const wordsPerMinute = 300;
   const minutes = Math.floor(wordCount / wordsPerMinute);
 
