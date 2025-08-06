@@ -3,6 +3,7 @@ import React, { Component, ReactNode } from 'react';
 interface ErrorBoundaryState {
   hasError: boolean;
   error?: Error;
+  errorBoundaryKey: number;
 }
 
 interface ErrorBoundaryProps {
@@ -18,10 +19,10 @@ interface ErrorBoundaryProps {
 class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
     super(props);
-    this.state = { hasError: false };
+    this.state = { hasError: false, errorBoundaryKey: 0 };
   }
 
-  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
+  static getDerivedStateFromError(error: Error): Partial<ErrorBoundaryState> {
     // Update state so the next render will show the fallback UI
     return { hasError: true, error };
   }
@@ -29,7 +30,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     // Log the error to console or error reporting service
     console.error('ErrorBoundary caught an error:', error, errorInfo);
-    
+
     // Call custom onError callback if provided
     if (this.props.onError) {
       this.props.onError(error, errorInfo);
@@ -62,7 +63,11 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
           </p>
           <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
             <button
-              onClick={() => window.location.reload()}
+              onClick={() => this.setState({ 
+                hasError: false, 
+                error: undefined,
+                errorBoundaryKey: this.state.errorBoundaryKey + 1 
+              })}
               style={{ padding: '0.5rem', fontSize: '0.8rem' }}
             >
               Try Again
@@ -94,7 +99,11 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
       );
     }
 
-    return this.props.children;
+    return (
+      <React.Fragment key={this.state.errorBoundaryKey}>
+        {this.props.children}
+      </React.Fragment>
+    );
   }
 }
 
@@ -118,7 +127,7 @@ export const withErrorBoundary = <P extends object>(
       <Component {...props} />
     </ErrorBoundary>
   );
- 
+
   WrappedComponent.displayName = `withErrorBoundary(${Component.displayName || Component.name})`;
   return WrappedComponent;
 };

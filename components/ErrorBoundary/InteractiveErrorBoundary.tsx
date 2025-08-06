@@ -35,7 +35,16 @@ const InteractiveErrorBoundary: React.FC<InteractiveErrorBoundaryProps> = ({
           <h3>{componentName || 'Interactive feature'} Unavailable</h3>
           <p>This may be due to browser compatibility issues.</p>
           <button onClick={() => window.location.reload()}>Refresh Page</button>
-          <button onClick={() => window.open('https://github.com/darianrosebrook/portfolio/issues', '_blank')}>Get Help</button>
+          <button
+            onClick={() =>
+              window.open(
+                'https://github.com/darianrosebrook/portfolio/issues',
+                '_blank'
+              )
+            }
+          >
+            Get Help
+          </button>
         </div>
       }
     >
