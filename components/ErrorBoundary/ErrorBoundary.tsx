@@ -63,11 +63,13 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
           </p>
           <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
             <button
-              onClick={() => this.setState({ 
-                hasError: false, 
-                error: undefined,
-                errorBoundaryKey: this.state.errorBoundaryKey + 1 
-              })}
+              onClick={() =>
+                this.setState({
+                  hasError: false,
+                  error: undefined,
+                  errorBoundaryKey: this.state.errorBoundaryKey + 1,
+                })
+              }
               style={{ padding: '0.5rem', fontSize: '0.8rem' }}
             >
               Try Again
