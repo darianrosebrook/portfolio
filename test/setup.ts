@@ -5,7 +5,7 @@ if (typeof globalThis.requestIdleCallback === 'undefined') {
   globalThis.requestIdleCallback = function (
     cb: IdleRequestCallback,
     options?: IdleRequestOptions
-  ) {
+  ): number {
     const start = Date.now();
     return setTimeout(() => {
       cb({
@@ -14,7 +14,7 @@ if (typeof globalThis.requestIdleCallback === 'undefined') {
           return Math.max(0, 50 - (Date.now() - start));
         },
       });
-    }, 1);
+    }, 1) as unknown as number;
   };
 }
 
