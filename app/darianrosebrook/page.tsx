@@ -143,7 +143,7 @@ export default async function Page() {
 
     return (
       <main className={styles.errorContainer}>
-        <h1>Darian Rosebrook</h1>
+        <h1>Darian Rosebrook is Awesome</h1>
         <p>Unable to load Bluesky profile. Please try again later.</p>
       </main>
     );
