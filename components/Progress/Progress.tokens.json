@@ -1,0 +1,129 @@
+{
+  "prefix": "progress",
+  "tokens": {
+    "color": {
+      "track": {
+        "default": "{semantic.color.background.tertiary}",
+        "success": "{semantic.color.background.successSubtle}",
+        "warning": "{semantic.color.background.warningSubtle}",
+        "danger": "{semantic.color.background.dangerSubtle}",
+        "info": "{semantic.color.background.infoSubtle}"
+      },
+      "fill": {
+        "default": "{semantic.color.background.neutral}",
+        "success": "{semantic.color.background.success}",
+        "warning": "{semantic.color.background.warning}",
+        "danger": "{semantic.color.background.danger}",
+        "info": "{semantic.color.background.info}"
+      },
+      "text": {
+        "default": "{semantic.color.foreground.primary}",
+        "contrast": "{semantic.color.foreground.onAccent}",
+        "muted": "{semantic.color.foreground.secondary}"
+      }
+    },
+    "size": {
+      "linear": {
+        "small": {
+          "height": "4px",
+          "fontSize": "{semantic.typography.caption.04}"
+        },
+        "medium": {
+          "height": "8px",
+          "fontSize": "{semantic.typography.body.04}"
+        },
+        "large": {
+          "height": "12px",
+          "fontSize": "{semantic.typography.body.03}"
+        }
+      },
+      "circular": {
+        "small": {
+          "diameter": "32px",
+          "strokeWidth": "3px",
+          "fontSize": "{semantic.typography.caption.04}"
+        },
+        "medium": {
+          "diameter": "48px",
+          "strokeWidth": "4px",
+          "fontSize": "{semantic.typography.caption.03}"
+        },
+        "large": {
+          "diameter": "64px",
+          "strokeWidth": "5px",
+          "fontSize": "{semantic.typography.body.04}"
+        }
+      }
+    },
+    "border": {
+      "radius": "{semantic.size.radius.full}"
+    },
+    "spacing": {
+      "gap": "{core.size.02}"
+    },
+    "typography": {
+      "fontFamily": "{core.typography.fontFamily.sans}",
+      "fontWeight": "{semantic.typography.fontWeight.medium}",
+      "lineHeight": "{semantic.typography.lineHeight.collapse}",
+      "letterSpacing": "{semantic.typography.letterSpacing.normal}"
+    },
+    "transition": {
+      "duration": "0.3s",
+      "easing": "ease-in-out",
+      "properties": "width, stroke-dashoffset"
+    },
+    "animation": {
+      "duration": "2s",
+      "easing": "ease-in-out"
+    },
+    "indeterminate": {
+      "animation": {
+        "duration": "1.5s",
+        "easing": "ease-in-out"
+      }
+    }
+  },
+  "fallbacks": {
+    "progress-color-track-default": "#e5e7eb",
+    "progress-color-track-success": "#dcfce7",
+    "progress-color-track-warning": "#fef3c7",
+    "progress-color-track-danger": "#fee2e2",
+    "progress-color-track-info": "#dbeafe",
+    "progress-color-fill-default": "#6b7280",
+    "progress-color-fill-success": "#22c55e",
+    "progress-color-fill-warning": "#f59e0b",
+    "progress-color-fill-danger": "#ef4444",
+    "progress-color-fill-info": "#3b82f6",
+    "progress-color-text-default": "#374151",
+    "progress-color-text-contrast": "#ffffff",
+    "progress-color-text-muted": "#6b7280",
+    "progress-size-linear-small-height": "4px",
+    "progress-size-linear-small-fontSize": "12px",
+    "progress-size-linear-medium-height": "8px",
+    "progress-size-linear-medium-fontSize": "14px",
+    "progress-size-linear-large-height": "12px",
+    "progress-size-linear-large-fontSize": "16px",
+    "progress-size-circular-small-diameter": "32px",
+    "progress-size-circular-small-strokeWidth": "3px",
+    "progress-size-circular-small-fontSize": "10px",
+    "progress-size-circular-medium-diameter": "48px",
+    "progress-size-circular-medium-strokeWidth": "4px",
+    "progress-size-circular-medium-fontSize": "12px",
+    "progress-size-circular-large-diameter": "64px",
+    "progress-size-circular-large-strokeWidth": "5px",
+    "progress-size-circular-large-fontSize": "14px",
+    "progress-border-radius": "1920px",
+    "progress-spacing-gap": "8px",
+    "progress-typography-fontFamily": "Inter, sans-serif",
+    "progress-typography-fontWeight": "500",
+    "progress-typography-lineHeight": "1.2",
+    "progress-typography-letterSpacing": "0",
+    "progress-transition-duration": "0.3s",
+    "progress-transition-easing": "ease-in-out",
+    "progress-transition-properties": "width, stroke-dashoffset",
+    "progress-animation-duration": "2s",
+    "progress-animation-easing": "ease-in-out",
+    "progress-indeterminate-animation-duration": "1.5s",
+    "progress-indeterminate-animation-easing": "ease-in-out"
+  }
+}
