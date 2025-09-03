@@ -204,8 +204,14 @@ function calculateTooltipPosition(
   }
 
   // Constrain to boundary
-  top = Math.max(boundaryRect.top, Math.min(top, boundaryRect.bottom - tooltipRect.height));
-  left = Math.max(boundaryRect.left, Math.min(left, boundaryRect.right - tooltipRect.width));
+  top = Math.max(
+    boundaryRect.top,
+    Math.min(top, boundaryRect.bottom - tooltipRect.height)
+  );
+  left = Math.max(
+    boundaryRect.left,
+    Math.min(left, boundaryRect.right - tooltipRect.width)
+  );
 
   return {
     top: top + scrollY,
@@ -272,11 +278,7 @@ const TooltipContent: React.FC<TooltipContentProps> = ({
     >
       {children}
       {showArrow && (
-        <TooltipArrow
-          placement={placement}
-          variant={variant}
-          size={size}
-        />
+        <TooltipArrow placement={placement} variant={variant} size={size} />
       )}
     </div>
   );
@@ -393,20 +395,37 @@ const Tooltip: React.FC<TooltipProps> = ({
   ) as string;
 
   const safeVariant = safeTokenValue(variant, 'default', (val) =>
-    ['default', 'dark', 'light', 'error', 'warning', 'success', 'info'].includes(val as string)
+    [
+      'default',
+      'dark',
+      'light',
+      'error',
+      'warning',
+      'success',
+      'info',
+    ].includes(val as string)
   ) as string;
 
   const safePlacement = safeTokenValue(placement, 'top', (val) =>
     [
-      'top', 'top-start', 'top-end',
-      'bottom', 'bottom-start', 'bottom-end',
-      'left', 'left-start', 'left-end',
-      'right', 'right-start', 'right-end'
+      'top',
+      'top-start',
+      'top-end',
+      'bottom',
+      'bottom-start',
+      'bottom-end',
+      'left',
+      'left-start',
+      'left-end',
+      'right',
+      'right-start',
+      'right-end',
     ].includes(val as string)
   ) as TooltipPlacement;
 
   // Determine current open state
-  const isOpen = controlledIsOpen !== undefined ? controlledIsOpen : internalIsOpen;
+  const isOpen =
+    controlledIsOpen !== undefined ? controlledIsOpen : internalIsOpen;
 
   // Get offset from tokens or custom value
   const offsetValue = customOffset || (tokens['tooltip-offset'] as number) || 8;
@@ -508,11 +527,14 @@ const Tooltip: React.FC<TooltipProps> = ({
   }, [triggers, isOpen, showTooltip, hideTooltip]);
 
   // Handle keyboard events
-  const handleKeyDown = useCallback((event: React.KeyboardEvent) => {
-    if (event.key === 'Escape' && isOpen) {
-      hideTooltip();
-    }
-  }, [isOpen, hideTooltip]);
+  const handleKeyDown = useCallback(
+    (event: React.KeyboardEvent) => {
+      if (event.key === 'Escape' && isOpen) {
+        hideTooltip();
+      }
+    },
+    [isOpen, hideTooltip]
+  );
 
   // Handle tooltip mouse events for interactive tooltips
   const handleTooltipMouseEnter = useCallback(() => {
@@ -532,12 +554,12 @@ const Tooltip: React.FC<TooltipProps> = ({
   useEffect(() => {
     if (isOpen) {
       updatePosition();
-      
+
       // Update position on scroll/resize
       const handleUpdate = () => updatePosition();
       window.addEventListener('scroll', handleUpdate, true);
       window.addEventListener('resize', handleUpdate);
-      
+
       return () => {
         window.removeEventListener('scroll', handleUpdate, true);
         window.removeEventListener('resize', handleUpdate);

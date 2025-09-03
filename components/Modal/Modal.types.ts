@@ -62,7 +62,7 @@ export interface ModalTokens {
   // Layout tokens
   'border-width': TokenValue;
   'border-radius': TokenValue;
-  'shadow': TokenValue;
+  shadow: TokenValue;
   'spacing-padding': TokenValue;
   'spacing-gap': TokenValue;
   'spacing-margin': TokenValue;
@@ -286,7 +286,7 @@ export const DEFAULT_MODAL_TOKENS: ModalTokens = {
   // Layout tokens
   'border-width': '1px',
   'border-radius': '8px',
-  'shadow': '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+  shadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
   'spacing-padding': '24px',
   'spacing-gap': '16px',
   'spacing-margin': '16px',

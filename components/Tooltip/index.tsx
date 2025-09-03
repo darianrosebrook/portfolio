@@ -1,4 +1,9 @@
-export { default, TooltipContent, TooltipArrow, TooltipTrigger } from './Tooltip';
+export {
+  default,
+  TooltipContent,
+  TooltipArrow,
+  TooltipTrigger,
+} from './Tooltip';
 export type {
   TooltipProps,
   TooltipTheme,

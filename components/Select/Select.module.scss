@@ -108,15 +108,15 @@
 .selectTrigger {
   // Reset
   all: unset;
-  box-sizing: border-box;
 
   // Layout
   position: relative;
   display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: space-between;
   gap: var(--select-size-medium-gap, 8px);
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
 
   // Sizing (default to medium)
   height: var(--select-size-medium-height, 40px);
@@ -128,11 +128,11 @@
     var(--select-color-border-default, #d1d5db);
   border-radius: var(--select-border-radius, 6px);
   color: var(--select-color-foreground-default, #374151);
+  font-weight: var(--select-typography-fontWeight, 400);
+  font-size: var(--select-size-medium-fontSize, 16px);
 
   // Typography
   font-family: var(--select-typography-fontFamily, Inter, sans-serif);
-  font-weight: var(--select-typography-fontWeight, 400);
-  font-size: var(--select-size-medium-fontSize, 16px);
   line-height: var(--select-typography-lineHeight, 1.5);
   letter-spacing: var(--select-typography-letterSpacing, 0);
   text-align: left;
@@ -150,16 +150,16 @@
 
   // Size variants
   &--small {
+    gap: var(--select-size-small-gap, 6px);
     height: var(--select-size-small-height, 32px);
     padding: var(--select-size-small-padding, 6px 8px);
-    gap: var(--select-size-small-gap, 6px);
     font-size: var(--select-size-small-fontSize, 14px);
   }
 
   &--large {
+    gap: var(--select-size-large-gap, 12px);
     height: var(--select-size-large-height, 48px);
     padding: var(--select-size-large-padding, 12px 16px);
-    gap: var(--select-size-large-gap, 12px);
     font-size: var(--select-size-large-fontSize, 18px);
   }
 
@@ -180,10 +180,10 @@
 
   // Focus state
   &:focus {
-    outline: none;
     border-color: var(--select-color-border-focus, #2563eb);
     box-shadow: 0 0 0 var(--select-focus-outlineWidth, 2px)
       var(--select-color-border-focus, #2563eb);
+    outline: none;
   }
 
   // Open state
@@ -217,22 +217,22 @@
 .selectValue {
   flex: 1;
   overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
   color: inherit;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 
   // Placeholder styling
   &:empty::before {
-    content: attr(data-placeholder);
     color: var(--select-color-foreground-placeholder, #9ca3af);
+    content: attr(data-placeholder);
   }
 }
 
 .selectIcon {
   display: flex;
   flex-shrink: 0;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   width: var(--select-size-medium-iconSize, 20px);
   height: var(--select-size-medium-iconSize, 20px);
   color: var(--select-color-foreground-placeholder, #9ca3af);
@@ -261,8 +261,9 @@
   top: calc(100% + var(--select-dropdown-offset, 4px));
   left: 0;
   z-index: 1000;
-  min-width: var(--select-dropdown-minWidth, 200px);
+  overflow: hidden;
   width: 100%;
+  min-width: var(--select-dropdown-minWidth, 200px);
   max-height: var(--select-dropdown-maxHeight, 200px);
   background-color: var(--select-color-dropdown-background, #fff);
   border: var(--select-border-width, 1px) solid
@@ -270,12 +271,12 @@
   border-radius: var(--select-border-radius, 6px);
   box-shadow: var(
     --select-color-dropdown-shadow,
-    0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05)
+    0 10px 15px -3px rgb(0 0 0 / 10%),
+    0 4px 6px -2px rgb(0 0 0 / 5%)
   );
-  animation: selectDropdownFadeIn var(--select-dropdown-animation-duration, 0.2s)
+  animation: selectDropdownFadeIn
+    var(--select-dropdown-animation-duration, 0.2s)
     var(--select-dropdown-animation-easing, ease-out);
-  overflow: hidden;
 }
 
 .selectSearch {
@@ -299,10 +300,10 @@
     var(--select-search-border, #e5e7eb);
   border-radius: var(--select-border-radius, 6px);
   color: var(--select-color-foreground-default, #374151);
+  font-size: var(--select-size-small-fontSize, 14px);
 
   // Typography
   font-family: var(--select-typography-fontFamily, Inter, sans-serif);
-  font-size: var(--select-size-small-fontSize, 14px);
 
   // Animation
   transition: var(
@@ -319,27 +320,26 @@
   }
 
   &:focus {
-    outline: none;
     border-color: var(--select-color-border-focus, #2563eb);
+    outline: none;
   }
 }
 
 .selectOptions {
-  max-height: calc(var(--select-dropdown-maxHeight, 200px) - 60px);
   overflow-y: auto;
+  max-height: calc(var(--select-dropdown-maxHeight, 200px) - 60px);
 }
 
 .selectOption {
   display: flex;
-  align-items: center;
   gap: var(--select-size-medium-gap, 8px);
+  align-items: center;
   padding: var(--select-size-medium-padding, 8px 12px);
   background-color: var(--select-color-option-background-default, transparent);
   color: var(--select-color-option-foreground-default, #374151);
-  font-family: var(--select-typography-fontFamily, Inter, sans-serif);
   font-size: var(--select-size-medium-fontSize, 16px);
+  font-family: var(--select-typography-fontFamily, Inter, sans-serif);
   line-height: var(--select-typography-lineHeight, 1.5);
-  cursor: pointer;
   transition: var(
       --select-transition-properties,
       border-color,
@@ -348,6 +348,7 @@
     )
     var(--select-transition-duration, 0.15s)
     var(--select-transition-easing, ease-in-out);
+  cursor: pointer;
 
   // Hover state
   &:hover,
@@ -384,8 +385,8 @@
 .selectOptionIcon {
   display: flex;
   flex-shrink: 0;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   width: var(--select-size-medium-iconSize, 20px);
   height: var(--select-size-medium-iconSize, 20px);
 }
@@ -393,8 +394,8 @@
 .selectOptionLabel {
   flex: 1;
   overflow: hidden;
-  white-space: nowrap;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .selectOptionDescription {
@@ -405,28 +406,28 @@
 .selectOptionCheck {
   display: flex;
   flex-shrink: 0;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   width: 16px;
   height: 16px;
-  color: currentColor;
+  color: currentcolor;
 }
 
 .selectLoading,
 .selectEmpty {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   padding: var(--select-size-large-padding, 12px 16px);
   color: var(--select-color-foreground-placeholder, #9ca3af);
-  font-family: var(--select-typography-fontFamily, Inter, sans-serif);
-  font-size: var(--select-size-medium-fontSize, 16px);
   font-style: italic;
+  font-size: var(--select-size-medium-fontSize, 16px);
+  font-family: var(--select-typography-fontFamily, Inter, sans-serif);
 }
 
 .selectMessage {
-  font-family: var(--select-typography-fontFamily, Inter, sans-serif);
   font-size: calc(var(--select-size-medium-fontSize, 16px) * 0.875);
+  font-family: var(--select-typography-fontFamily, Inter, sans-serif);
   line-height: var(--select-typography-lineHeight, 1.5);
 
   &--helper {
@@ -452,6 +453,7 @@
     opacity: 0;
     transform: translateY(-4px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);

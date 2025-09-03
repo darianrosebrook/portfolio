@@ -145,8 +145,7 @@ const SelectMessage: React.FC<SelectMessageProps> = ({
   type = 'helper',
   className = '',
 }) => {
-  const messageClass =
-    styles[`selectMessage--${type}`] || styles.selectMessage;
+  const messageClass = styles[`selectMessage--${type}`] || styles.selectMessage;
 
   return <div className={`${messageClass} ${className}`}>{children}</div>;
 };
@@ -560,10 +559,10 @@ const Select: React.FC<SelectProps> = ({
   const currentState = errorMessage
     ? 'error'
     : warningMessage
-    ? 'warning'
-    : successMessage
-    ? 'success'
-    : safeState;
+      ? 'warning'
+      : successMessage
+        ? 'success'
+        : safeState;
 
   // Determine which message to show
   const messageToShow =
@@ -571,10 +570,10 @@ const Select: React.FC<SelectProps> = ({
   const messageType = errorMessage
     ? 'error'
     : warningMessage
-    ? 'warning'
-    : successMessage
-    ? 'success'
-    : 'helper';
+      ? 'warning'
+      : successMessage
+        ? 'success'
+        : 'helper';
 
   // Format display value
   const formatDisplayValue = () => {
@@ -692,4 +691,9 @@ export {
   SelectSearch,
 };
 export default Select;
-export type { SelectProps, SelectOption, SelectOptionGroup, SelectTheme } from './Select.types';
+export type {
+  SelectProps,
+  SelectOption,
+  SelectOptionGroup,
+  SelectTheme,
+} from './Select.types';

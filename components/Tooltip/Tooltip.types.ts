@@ -37,7 +37,14 @@ export type TooltipSize = 'small' | 'medium' | 'large';
 /**
  * Tooltip visual variants
  */
-export type TooltipVariant = 'default' | 'dark' | 'light' | 'error' | 'warning' | 'success' | 'info';
+export type TooltipVariant =
+  | 'default'
+  | 'dark'
+  | 'light'
+  | 'error'
+  | 'warning'
+  | 'success'
+  | 'info';
 
 /**
  * Tooltip design tokens interface
@@ -99,8 +106,8 @@ export interface TooltipTokens {
   // Layout tokens
   'border-width': TokenValue;
   'border-radius': TokenValue;
-  'shadow': TokenValue;
-  'offset': TokenValue;
+  shadow: TokenValue;
+  offset: TokenValue;
 
   // Typography tokens
   'typography-fontFamily': TokenValue;
@@ -113,7 +120,7 @@ export interface TooltipTokens {
   'animation-delay': TokenValue;
 
   // Z-index tokens
-  'zIndex': TokenValue;
+  zIndex: TokenValue;
 }
 
 /**
@@ -295,8 +302,9 @@ export const DEFAULT_TOOLTIP_TOKENS: TooltipTokens = {
   // Layout tokens
   'border-width': '1px',
   'border-radius': '6px',
-  'shadow': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-  'offset': '8px',
+  shadow:
+    '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+  offset: '8px',
 
   // Typography tokens
   'typography-fontFamily': 'Inter, sans-serif',
@@ -309,5 +317,5 @@ export const DEFAULT_TOOLTIP_TOKENS: TooltipTokens = {
   'animation-delay': '0s',
 
   // Z-index tokens
-  'zIndex': '1050',
+  zIndex: '1050',
 };

@@ -200,7 +200,9 @@ export interface SelectProps {
   /** Custom option renderer */
   renderOption?: (option: SelectOption, isSelected: boolean) => React.ReactNode;
   /** Custom value renderer */
-  renderValue?: (value: string | number | (string | number)[]) => React.ReactNode;
+  renderValue?: (
+    value: string | number | (string | number)[]
+  ) => React.ReactNode;
   /** Label text */
   label?: string;
   /** Helper text */
@@ -320,7 +322,8 @@ export const DEFAULT_SELECT_TOKENS: SelectTokens = {
   // Dropdown colors
   'color-dropdown-background': '#ffffff',
   'color-dropdown-border': '#e5e7eb',
-  'color-dropdown-shadow': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+  'color-dropdown-shadow':
+    '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
   'color-option-background-default': 'transparent',
   'color-option-background-hover': '#f3f4f6',
   'color-option-background-selected': '#dbeafe',
