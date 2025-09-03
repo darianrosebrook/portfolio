@@ -1,0 +1,127 @@
+{
+  "prefix": "toggle",
+  "tokens": {
+    "color": {
+      "track": {
+        "unchecked": "{semantic.color.background.secondary}",
+        "checked": "{semantic.color.background.accent}",
+        "disabled": "{semantic.color.background.disabled}",
+        "hover": "{semantic.color.background.hover}",
+        "focus": "{semantic.color.background.accent}"
+      },
+      "thumb": {
+        "unchecked": "{semantic.color.background.primary}",
+        "checked": "{semantic.color.background.primary}",
+        "disabled": "{semantic.color.background.placeholder}",
+        "hover": "{semantic.color.background.primary}"
+      },
+      "border": {
+        "unchecked": "{semantic.color.border.primary}",
+        "checked": "{semantic.color.border.accent}",
+        "disabled": "{semantic.color.border.disabled}",
+        "focus": "{semantic.color.border.accent}"
+      },
+      "label": {
+        "default": "{semantic.color.foreground.primary}",
+        "disabled": "{semantic.color.foreground.disabled}"
+      }
+    },
+    "size": {
+      "small": {
+        "trackWidth": "36px",
+        "trackHeight": "20px",
+        "thumbSize": "16px",
+        "thumbOffset": "{core.size.01}",
+        "fontSize": "{semantic.typography.caption.03}",
+        "gap": "{core.size.02}"
+      },
+      "medium": {
+        "trackWidth": "48px",
+        "trackHeight": "24px",
+        "thumbSize": "20px",
+        "thumbOffset": "{core.size.01}",
+        "fontSize": "{semantic.typography.body.04}",
+        "gap": "{core.size.02}"
+      },
+      "large": {
+        "trackWidth": "56px",
+        "trackHeight": "28px",
+        "thumbSize": "24px",
+        "thumbOffset": "{core.size.01}",
+        "fontSize": "{semantic.typography.body.03}",
+        "gap": "{core.size.03}"
+      }
+    },
+    "border": {
+      "width": "{semantic.size.border.default}",
+      "radius": "{semantic.size.radius.full}"
+    },
+    "thumb": {
+      "borderRadius": "{semantic.size.radius.full}"
+    },
+    "typography": {
+      "fontFamily": "{core.typography.fontFamily.sans}",
+      "fontWeight": "{semantic.typography.fontWeight.regular}",
+      "lineHeight": "{semantic.typography.lineHeight.collapse}",
+      "letterSpacing": "{semantic.typography.letterSpacing.normal}"
+    },
+    "transition": {
+      "duration": "0.3s",
+      "easing": "ease-in-out",
+      "properties": "all"
+    },
+    "focus": {
+      "outlineColor": "{semantic.color.foreground.accent}",
+      "outlineWidth": "{semantic.focus.ring.border.width}",
+      "outlineOffset": "{semantic.focus.ringOffset}"
+    }
+  },
+  "fallbacks": {
+    "toggle-color-track-unchecked": "#e5e5e5",
+    "toggle-color-track-checked": "#d9292b",
+    "toggle-color-track-disabled": "#f0f0f0",
+    "toggle-color-track-hover": "#d0d0d0",
+    "toggle-color-track-focus": "#d9292b",
+    "toggle-color-thumb-unchecked": "#ffffff",
+    "toggle-color-thumb-checked": "#ffffff",
+    "toggle-color-thumb-disabled": "#f5f5f5",
+    "toggle-color-thumb-hover": "#ffffff",
+    "toggle-color-border-unchecked": "#cecece",
+    "toggle-color-border-checked": "#d9292b",
+    "toggle-color-border-disabled": "#e0e0e0",
+    "toggle-color-border-focus": "#d9292b",
+    "toggle-color-label-default": "#141414",
+    "toggle-color-label-disabled": "#aeaeae",
+    "toggle-size-small-trackWidth": "36px",
+    "toggle-size-small-trackHeight": "20px",
+    "toggle-size-small-thumbSize": "16px",
+    "toggle-size-small-thumbOffset": "2px",
+    "toggle-size-small-fontSize": "12px",
+    "toggle-size-small-gap": "6px",
+    "toggle-size-medium-trackWidth": "48px",
+    "toggle-size-medium-trackHeight": "24px",
+    "toggle-size-medium-thumbSize": "20px",
+    "toggle-size-medium-thumbOffset": "2px",
+    "toggle-size-medium-fontSize": "14px",
+    "toggle-size-medium-gap": "8px",
+    "toggle-size-large-trackWidth": "56px",
+    "toggle-size-large-trackHeight": "28px",
+    "toggle-size-large-thumbSize": "24px",
+    "toggle-size-large-thumbOffset": "2px",
+    "toggle-size-large-fontSize": "16px",
+    "toggle-size-large-gap": "10px",
+    "toggle-border-width": "1px",
+    "toggle-border-radius": "1920px",
+    "toggle-thumb-borderRadius": "1920px",
+    "toggle-typography-fontFamily": "Inter, sans-serif",
+    "toggle-typography-fontWeight": "400",
+    "toggle-typography-lineHeight": "1.2",
+    "toggle-typography-letterSpacing": "0",
+    "toggle-transition-duration": "0.3s",
+    "toggle-transition-easing": "ease-in-out",
+    "toggle-transition-properties": "all",
+    "toggle-focus-outlineColor": "#d9292b",
+    "toggle-focus-outlineWidth": "2px",
+    "toggle-focus-outlineOffset": "2px"
+  }
+}
