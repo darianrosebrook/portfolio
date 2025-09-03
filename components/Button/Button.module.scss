@@ -1,96 +1,193 @@
-.button {
-  --button-gap: var(--size-02);
-  --button-text-size: var(--caption-03);
-  --min-size: var(--size-07);
+/**
+ * Button Component Styles
+ *
+ * Uses CSS custom properties from design tokens for flexible theming
+ * Supports BYODS (Bring Your Own Design System) patterns
+ */
 
+.button {
+  // Reset all inherited styles
   all: unset;
+
+  // Layout
   display: inline-flex;
-  gap: var(--button-gap);
+
+  // Spacing
+  gap: var(--button-size-medium-gap, 12px);
   justify-content: center;
   align-items: center;
-  min-width: var(--min-size);
+
+  // Sizing with token support
+  min-width: var(--button-size-medium-minWidth, 40px);
   max-width: fit-content;
-  min-height: var(--min-size);
-  max-height: var(--min-size);
-  padding: var(--button-gap);
-  background-color: var(--color-background-inverse);
-  border: none;
-  border-radius: var(--radius-full);
-  color: var(--color-foreground-inverse);
-  font-size: var(--button-text-size);
-  line-height: var(--line-height-collapse);
-  transition: all 0.3s;
+  min-height: var(--button-size-medium-minHeight, 40px);
+  padding: var(--button-size-medium-padding, 12px);
+
+  // Visual styling
+  background-color: var(--button-color-background-primary, #d9292b);
+  border: var(--button-border-width, 1px) solid
+    var(--button-color-border-primary, #d9292b);
+  border-radius: var(--button-radius-default, 1920px);
+  color: var(--button-color-foreground-primary, #141414);
+
+  // Typography
+  font-weight: var(--button-typography-fontWeight, 500);
+  font-size: var(--button-size-medium-fontSize, 16px);
+  line-height: var(--button-typography-lineHeight, 1);
+  letter-spacing: var(--button-typography-letterSpacing, 0);
+  white-space: nowrap;
+
+  // Interaction
+  transition: var(--button-transition-properties, all)
+    var(--button-transition-duration, 0.3s)
+    var(--button-transition-easing, ease-in-out);
   cursor: pointer;
 
   &:disabled {
-    background-color: var(--color-background-disabled);
-    color: var(--color-foreground-disabled);
+    background-color: var(--button-color-background-disabled, #cecece);
+    border-color: var(--button-color-border-disabled, #cecece);
+    opacity: 0.6;
+    color: var(--button-color-foreground-disabled, #aeaeae);
     cursor: not-allowed;
   }
 
-  &:hover {
-    background-color: var(--color-background-hover);
-    text-decoration: none;
-  }
-
+  // Focus states for accessibility
   &:focus {
-    border-radius: var(--radius-full);
     outline: none;
   }
 
-  &:matches(:focus-visible, :focus) {
-    outline: 2px solid var(--color-foreground-accent);
-    outline-offset: var(--size-02);
+  &:focus-visible {
+    outline: var(--button-focus-outlineWidth, 2px) solid
+      var(--button-focus-outlineColor, #d9292b);
+    outline-offset: var(--button-focus-outlineOffset, 8px);
   }
 
+  // Adjacent button spacing
   & + & {
-    margin-left: var(--size-04);
+    margin-left: var(--button-spacing-adjacent, 12px);
   }
 
   &.small {
-    --min-size: var(--size-07);
-    --button-text-size: var(--body-04);
+    gap: var(--button-size-small-gap, 8px);
+    min-width: var(--button-size-small-minWidth, 32px);
+    min-height: var(--button-size-small-minHeight, 32px);
+    padding: var(--button-size-small-padding, 8px);
+    font-size: var(--button-size-small-fontSize, 12px);
+
+    // Icon sizing for small buttons
+    svg,
+    img {
+      width: var(--button-size-small-iconSize, 16px);
+      height: var(--button-size-small-iconSize, 16px);
+    }
   }
 
   &.medium {
-    --button-gap: var(--size-04);
-    --min-size: var(--size-07);
-    --button-text-size: var(--body-01);
+    gap: var(--button-size-medium-gap, 12px);
+    min-width: var(--button-size-medium-minWidth, 40px);
+    min-height: var(--button-size-medium-minHeight, 40px);
+    padding: var(--button-size-medium-padding, 12px);
+    font-size: var(--button-size-medium-fontSize, 16px);
+
+    // Icon sizing for medium buttons
+    svg,
+    img {
+      width: var(--button-size-medium-iconSize, 20px);
+      height: var(--button-size-medium-iconSize, 20px);
+    }
   }
 
   &.large {
-    --button-gap: var(--size-05);
-    --min-size: var(--size-08);
-    --button-text-size: var(--body-01);
+    gap: var(--button-size-large-gap, 16px);
+    min-width: var(--button-size-large-minWidth, 48px);
+    min-height: var(--button-size-large-minHeight, 48px);
+    padding: var(--button-size-large-padding, 16px);
+    font-size: var(--button-size-large-fontSize, 18px);
+
+    // Icon sizing for large buttons
+    svg,
+    img {
+      width: var(--button-size-large-iconSize, 24px);
+      height: var(--button-size-large-iconSize, 24px);
+    }
   }
 
+  // Icon-only button adjustments
+  &:has(svg:only-child),
+  &:has(img:only-child) {
+    padding: var(--button-size-medium-gap, 12px);
+
+    &.small {
+      padding: var(--button-size-small-gap, 8px);
+    }
+
+    &.large {
+      padding: var(--button-size-large-gap, 16px);
+    }
+  }
+
+  // Hover state (only when not disabled)
+  &:hover:not(:disabled) {
+    background-color: var(--button-color-background-hover, #aeaeae);
+    border-color: var(--button-color-border-hover, #555);
+    text-decoration: none;
+  }
+
+  // Size variants with token overrides
+
+  // Visual variants with token support
   &.primary {
-    background-color: var(--color-background-accent);
-    border: var(--border-weight-default) solid var(--color-border-accent);
-    color: var(--color-foreground-primary);
+    background-color: var(--button-color-background-primary, #d9292b);
+    border-color: var(--button-color-border-primary, #d9292b);
+    color: var(--button-color-foreground-primary, #141414);
   }
 
   &.secondary {
-    background-color: var(--color-background-secondary);
-    border: var(--border-weight-default) solid var(--color-border-accent);
-    color: var(--color-foreground-accent);
+    background-color: var(--button-color-background-secondary, #efefef);
+    border-color: var(--button-color-border-secondary, #d9292b);
+    color: var(--button-color-foreground-secondary, #d9292b);
 
-    &:hover {
-      background-color: var(--color-background-inverse);
-      border-color: var(--color-border-bold);
-      color: var(--color-foreground-inverse);
+    &:hover:not(:disabled) {
+      background-color: var(--button-color-background-hover, #aeaeae);
+      border-color: var(--button-color-border-hover, #555);
+      color: var(--button-color-foreground-inverse, #fafafa);
     }
   }
 
   &.tertiary {
-    background-color: var(--color-background-transparent);
-    border: var(--border-weight-default) solid var(--color-border-light);
-    color: var(--color-foreground-tertiary);
+    background-color: var(--button-color-background-tertiary, transparent);
+    border-color: var(--button-color-border-tertiary, #cecece);
+    color: var(--button-color-foreground-tertiary, #717171);
 
-    &:hover {
-      background-color: var(--color-background-hover);
-      border-color: var(--color-border-bold);
-      color: var(--color-foreground-primary);
+    &:hover:not(:disabled) {
+      background-color: var(--button-color-background-hover, #aeaeae);
+      border-color: var(--button-color-border-hover, #555);
+      color: var(--button-color-foreground-primary, #141414);
     }
+  }
+
+  // Loading state
+  &.isLoading {
+    cursor: wait;
+
+    // Add loading animation if needed
+    &::after {
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      margin-left: var(--button-size-medium-gap, 12px);
+      border: 2px solid currentcolor;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: button-spin 1s linear infinite;
+      content: '';
+    }
+  }
+}
+
+// Loading animation
+@keyframes button-spin {
+  to {
+    transform: rotate(360deg);
   }
 }

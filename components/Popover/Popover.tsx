@@ -8,54 +8,135 @@ import React, {
   useState,
   useCallback,
   forwardRef,
-  MutableRefObject,
+  useMemo,
 } from 'react';
 import { gsap } from 'gsap';
 import styles from './Popover.module.scss';
+import {
+  PopoverProps,
+  PopoverTriggerProps,
+  PopoverContentProps,
+  PopoverContextType,
+  PopoverTheme,
+  PopoverPosition,
+  DEFAULT_POPOVER_TOKENS,
+} from './Popover.types';
+import {
+  mergeTokenSources,
+  tokensToCSSProperties,
+  safeTokenValue,
+  TokenSource,
+  TokenValue,
+} from '@/utils/designTokens';
 
-interface PopoverProps {
-  children: React.ReactNode;
-  offset?: number;
-}
+// Import the default token configuration
+import defaultTokenConfig from './Popover.tokens.json';
 
-interface TriggerProps {
-  children: React.ReactNode;
-  className?: string;
-  as?: React.ElementType;
-}
+/**
+ * Custom hook for managing Popover design tokens
+ * Supports multiple token sources with smart defaults and BYODS patterns
+ */
+function usePopoverTokens(theme?: PopoverTheme) {
+  return useMemo(() => {
+    const tokenSources: TokenSource[] = [];
 
-interface ContentProps {
-  children: React.ReactNode;
-  className?: string;
-}
+    // 1. Start with JSON token configuration
+    tokenSources.push({
+      type: 'json',
+      data: defaultTokenConfig,
+    });
 
-interface Position {
-  top: number;
-  left: number;
-}
+    // 2. Add external token config if provided
+    if (theme?.tokenConfig) {
+      tokenSources.push({
+        type: 'json',
+        data: theme.tokenConfig,
+      });
+    }
 
-interface PopoverContextType {
-  popoverId: string;
-  triggerRef: MutableRefObject<HTMLElement | null>;
-  contentRef: MutableRefObject<HTMLDivElement | null>;
-  position: Position;
-  updatePosition: () => void;
-  isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
-  offset: number;
+    // 3. Add inline token overrides
+    if (theme?.tokens) {
+      const inlineTokens: Record<string, TokenValue> = {};
+      Object.entries(theme.tokens).forEach(([key, value]) => {
+        inlineTokens[`popover-${key}`] = value;
+      });
+
+      tokenSources.push({
+        type: 'inline',
+        tokens: inlineTokens,
+      });
+    }
+
+    // Merge all token sources with fallbacks
+    const resolvedTokens = mergeTokenSources(tokenSources, {
+      fallbacks: (() => {
+        const fallbacks: Record<string, TokenValue> = {};
+        Object.entries(DEFAULT_POPOVER_TOKENS).forEach(([key, value]) => {
+          fallbacks[`popover-${key}`] = value;
+        });
+        return fallbacks;
+      })(),
+    });
+
+    // Generate CSS custom properties
+    const cssProperties = tokensToCSSProperties(resolvedTokens, 'popover');
+
+    // Add any direct CSS property overrides
+    if (theme?.cssProperties) {
+      Object.assign(cssProperties, theme.cssProperties);
+    }
+
+    return {
+      tokens: resolvedTokens,
+      cssProperties,
+    };
+  }, [theme]);
 }
 
 const PopoverContext = createContext<PopoverContextType | null>(null);
 
+/**
+ * Popover Component with Design Token Support
+ * 
+ * Features:
+ * - Smart defaults with fallback values
+ * - Bring-your-own-design-system (BYODS) support
+ * - Multiple token sources (JSON, CSS, inline)
+ * - Type-safe token management
+ * - Accessibility-first design
+ * - GSAP animations with token-based timing
+ */
 const Popover: React.FC<PopoverProps> & {
-  Trigger: React.FC<TriggerProps>;
-  Content: React.FC<ContentProps>;
-} = ({ children, offset = 8 }) => {
+  Trigger: React.FC<PopoverTriggerProps>;
+  Content: React.FC<PopoverContentProps>;
+} = ({ children, offset = 8, theme, className = '' }) => {
+  // Load and resolve design tokens
+  const { cssProperties, tokens } = usePopoverTokens(theme);
+
   const popoverId = `popover-${useId()}`;
   const triggerRef = useRef<HTMLElement | null>(null);
   const contentRef = useRef<HTMLDivElement | null>(null);
-  const [position, setPosition] = useState<Position>({ top: 0, left: 0 });
+  const [position, setPosition] = useState<PopoverPosition>({ top: 0, left: 0 });
   const [isOpen, setIsOpen] = useState(false);
+
+  // Safe token values with validation
+  const safeOffset = safeTokenValue(
+    offset,
+    8,
+    (val) => typeof val === 'number' && val >= 0
+  ) as number;
+
+  const edgeMargin = safeTokenValue(
+    tokens['popover-positioning-edgeMargin'],
+    10,
+    (val) => typeof val === 'string' && !isNaN(parseFloat(val))
+  ) as string;
+
+  const windowMargin = safeTokenValue(
+    tokens['popover-positioning-windowMargin'],
+    16,
+    (val) => typeof val === 'string' && !isNaN(parseFloat(val))
+  ) as string;
 
   const updatePosition = useCallback(() => {
     if (triggerRef.current && contentRef.current) {
@@ -63,35 +144,38 @@ const Popover: React.FC<PopoverProps> & {
       const contentRect = contentRef.current.getBoundingClientRect();
 
       // Calculate initial positions
-      let left = triggerRect.left + offset;
-      let top = triggerRect.bottom + offset;
+      let left = triggerRect.left + safeOffset;
+      let top = triggerRect.bottom + safeOffset;
+
+      const edgeMarginValue = parseFloat(edgeMargin);
+      const windowMarginValue = parseFloat(windowMargin);
 
       // Check right edge overflow
       if (left + contentRect.width > window.innerWidth) {
         // Try to align with right edge of trigger
-        left = triggerRect.right - contentRect.width - offset;
+        left = triggerRect.right - contentRect.width - safeOffset;
 
-        // If still overflowing, align with window edge with small margin
+        // If still overflowing, align with window edge with margin
         if (left < 0) {
-          left = window.innerWidth - contentRect.width - 16;
+          left = window.innerWidth - contentRect.width - windowMarginValue;
         }
       }
 
       // Check left edge overflow
       if (left < 0) {
-        left = 10; // Small margin from left edge
+        left = edgeMarginValue;
       }
 
       // Check bottom edge overflow
       const bottomOverflow = top + contentRect.height > window.innerHeight;
       if (bottomOverflow) {
         // Position above the trigger
-        top = triggerRect.top - contentRect.height - offset;
+        top = triggerRect.top - contentRect.height - safeOffset;
       }
 
       setPosition({ top, left });
     }
-  }, [offset]);
+  }, [safeOffset, edgeMargin, windowMargin]);
 
   return (
     <PopoverContext.Provider
@@ -103,16 +187,24 @@ const Popover: React.FC<PopoverProps> & {
         updatePosition,
         isOpen,
         setIsOpen,
-        offset,
+        offset: safeOffset,
       }}
     >
-      <div className={styles.popoverContainer}>{children}</div>
+      <div 
+        className={`${styles.popoverContainer} ${className}`}
+        style={cssProperties}
+      >
+        {children}
+      </div>
     </PopoverContext.Provider>
   );
 };
 
-const Trigger = forwardRef<HTMLElement, TriggerProps>(
-  ({ children, className, as: Component = 'div' }, forwardedRef) => {
+/**
+ * Popover Trigger Component
+ */
+const Trigger = forwardRef<HTMLElement, PopoverTriggerProps>(
+  ({ children, className = '', as: Component = 'div' }, forwardedRef) => {
     const context = useContext(PopoverContext);
 
     if (!context) {
@@ -139,10 +231,18 @@ const Trigger = forwardRef<HTMLElement, TriggerProps>(
       setIsOpen(!isOpen);
     };
 
+    const triggerClassName = [
+      styles.popoverTrigger,
+      isOpen ? styles.activeTrigger : '',
+      className,
+    ]
+      .filter(Boolean)
+      .join(' ');
+
     return (
       <Component
         ref={handleRefs}
-        className={`${styles.popoverTrigger} ${isOpen ? styles.activeTrigger : ''} ${className || ''}`}
+        className={triggerClassName}
         onClick={handleClick}
         aria-haspopup="dialog"
         aria-expanded={isOpen}
@@ -153,9 +253,12 @@ const Trigger = forwardRef<HTMLElement, TriggerProps>(
   }
 );
 
-Trigger.displayName = 'Trigger';
+Trigger.displayName = 'Popover.Trigger';
 
-const Content: React.FC<ContentProps> = ({ children, className }) => {
+/**
+ * Popover Content Component with Token-based Animations
+ */
+const Content: React.FC<PopoverContentProps> = ({ children, className = '' }) => {
   const context = useContext(PopoverContext);
 
   if (!context) {
@@ -164,6 +267,27 @@ const Content: React.FC<ContentProps> = ({ children, className }) => {
 
   const { popoverId, position, updatePosition, isOpen, contentRef } = context;
   const animationRef = useRef<gsap.core.Tween | null>(null);
+
+  // Get animation tokens from CSS properties
+  const computedStyle = contentRef.current 
+    ? getComputedStyle(contentRef.current) 
+    : null;
+
+  const animationDurationEnter = computedStyle
+    ? computedStyle.getPropertyValue('--popover-animation-duration-enter') || '0.3s'
+    : '0.3s';
+
+  const animationDurationExit = computedStyle
+    ? computedStyle.getPropertyValue('--popover-animation-duration-exit') || '0.2s'
+    : '0.2s';
+
+  const animationTranslateY = computedStyle
+    ? computedStyle.getPropertyValue('--popover-animation-translateY-enter') || '-10px'
+    : '-10px';
+
+  const animationScaleExit = computedStyle
+    ? computedStyle.getPropertyValue('--popover-animation-scale-exit') || '0.8'
+    : '0.8';
 
   useLayoutEffect(() => {
     if (contentRef.current && isOpen) {
@@ -176,12 +300,15 @@ const Content: React.FC<ContentProps> = ({ children, className }) => {
       });
       resizeObserver.observe(contentRef.current);
 
-      // Animation
+      // Animation with token-based values
       animationRef.current = gsap.fromTo(
         contentRef.current,
-        { autoAlpha: 0, y: -10 },
+        { 
+          autoAlpha: 0, 
+          y: parseFloat(animationTranslateY) 
+        },
         {
-          duration: 0.3,
+          duration: parseFloat(animationDurationEnter),
           autoAlpha: 1,
           y: 0,
           ease: 'back.out(1.7)',
@@ -201,26 +328,33 @@ const Content: React.FC<ContentProps> = ({ children, className }) => {
         }
       };
     }
-  }, [updatePosition, isOpen, contentRef]);
+  }, [updatePosition, isOpen, animationDurationEnter, animationTranslateY]);
 
   useLayoutEffect(() => {
     if (!isOpen && contentRef.current && animationRef.current) {
       gsap.to(contentRef.current, {
-        duration: 0.2,
+        duration: parseFloat(animationDurationExit),
         autoAlpha: 0,
-        scale: 0.8,
+        scale: parseFloat(animationScaleExit),
         ease: 'power2.in',
       });
     }
-  }, [isOpen, contentRef]);
+  }, [isOpen, animationDurationExit, animationScaleExit]);
 
   if (!isOpen) return null;
+
+  const contentClassName = [
+    styles.popoverContent,
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return (
     <div
       ref={contentRef}
       id={popoverId}
-      className={`${styles.popoverContent} ${className || ''}`}
+      className={contentClassName}
       style={{
         position: 'fixed',
         top: `${position.top}px`,
@@ -232,7 +366,10 @@ const Content: React.FC<ContentProps> = ({ children, className }) => {
   );
 };
 
+Content.displayName = 'Popover.Content';
+
 Popover.Trigger = Trigger;
 Popover.Content = Content;
 
 export default Popover;
+export type { PopoverProps, PopoverTheme } from './Popover.types';

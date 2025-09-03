@@ -1,35 +1,42 @@
+/**
+ * Popover Component Styles
+ *
+ * Uses CSS custom properties from design tokens for flexible theming
+ * Supports BYODS (Bring Your Own Design System) patterns
+ */
+
 .popoverContainer {
-  display: inline-block;
+  display: var(--popover-container-display, inline-block);
 }
 
 .popoverTrigger {
   all: unset;
-  background: none;
-  border: none;
-  cursor: pointer;
+  background: var(--popover-trigger-background, none);
+  border: var(--popover-trigger-border, none);
+  cursor: var(--popover-trigger-cursor, pointer);
 }
 
 .popoverContent {
-  z-index: 1000;
-  display: flex;
-  flex-direction: column;
-  gap: var(--size-04);
-  min-width: 256px;
-  max-width: calc(100vw - var(--size-06));
-  padding: var(--size-06);
-  background: var(--color-background-secondary);
-  border-radius: var(--radius-02);
-  box-shadow: var(--elevation);
+  z-index: var(--popover-content-zIndex, 1000);
+  display: var(--popover-content-display, flex);
+  flex-direction: var(--popover-content-flexDirection, column);
+  gap: var(--popover-content-gap, 16px);
+  min-width: var(--popover-content-minWidth, 256px);
+  max-width: var(--popover-content-maxWidth, calc(100vw - 32px));
+  padding: var(--popover-content-padding, 20px);
+  background: var(--popover-content-background, #efefef);
+  border-radius: var(--popover-content-borderRadius, 8px);
+  box-shadow: var(--popover-content-boxShadow, 0 10px 25px rgb(0 0 0 / 15%));
   will-change: transform, opacity;
 }
 
 .activeTrigger {
   display: inline-block;
-  border-radius: var(--radius-full);
-  outline: 2px solid var(--color-border-accent);
-  outline-offset: 2px;
+  border-radius: var(--popover-trigger-active-borderRadius, 1920px);
+  outline: var(--popover-trigger-active-outlineWidth, 2px) solid var(--popover-trigger-active-outlineColor, #d9292b);
+  outline-offset: var(--popover-trigger-active-outlineOffset, 2px);
   line-height: 0;
-  transition: all ease-out 2s;
+  transition: all var(--popover-trigger-active-transitionEasing, ease-out) var(--popover-trigger-active-transitionDuration, 0.2s);
 
   & > div:hover {
     transform: rotate(1080deg);
