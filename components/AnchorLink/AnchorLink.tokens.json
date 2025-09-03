@@ -1,0 +1,75 @@
+{
+  "prefix": "anchor-link",
+  "tokens": {
+    "color": {
+      "foreground": {
+        "default": "{semantic.color.link.primary}",
+        "primary": "{semantic.color.link.primary}",
+        "secondary": "{semantic.color.foreground.secondary}",
+        "muted": "{semantic.color.foreground.muted}",
+        "danger": "{semantic.color.foreground.danger}",
+        "hover": "{semantic.color.link.hover}",
+        "active": "{semantic.color.link.active}",
+        "visited": "{semantic.color.link.visited}",
+        "disabled": "{semantic.color.foreground.disabled}"
+      },
+      "underline": "currentColor",
+      "focus": {
+        "ring": "{semantic.color.border.focus}"
+      }
+    },
+    "typography": {
+      "fontFamily": "inherit",
+      "fontWeight": "inherit",
+      "lineHeight": "inherit",
+      "textDecoration": "underline"
+    },
+    "size": {
+      "small": { "fontSize": "{semantic.typography.body.04}" },
+      "medium": { "fontSize": "{semantic.typography.body.03}" },
+      "large": { "fontSize": "{semantic.typography.body.02}" }
+    },
+    "underline": {
+      "thickness": "1px",
+      "offset": "2px"
+    },
+    "transition": {
+      "duration": "0.15s",
+      "easing": "ease-in-out",
+      "properties": "color, text-decoration-color"
+    },
+    "focus": {
+      "outline": {
+        "width": "2px",
+        "offset": "2px"
+      }
+    }
+  },
+  "fallbacks": {
+    "anchor-link-color-foreground-default": "#2563eb",
+    "anchor-link-color-foreground-primary": "#2563eb",
+    "anchor-link-color-foreground-secondary": "#6b7280",
+    "anchor-link-color-foreground-muted": "#9ca3af",
+    "anchor-link-color-foreground-danger": "#dc2626",
+    "anchor-link-color-foreground-hover": "#1d4ed8",
+    "anchor-link-color-foreground-active": "#1e40af",
+    "anchor-link-color-foreground-visited": "#7c3aed",
+    "anchor-link-color-foreground-disabled": "#9ca3af",
+    "anchor-link-color-underline": "currentColor",
+    "anchor-link-color-focus-ring": "#2563eb",
+    "anchor-link-typography-fontFamily": "inherit",
+    "anchor-link-typography-fontWeight": "inherit",
+    "anchor-link-typography-lineHeight": "inherit",
+    "anchor-link-typography-textDecoration": "underline",
+    "anchor-link-size-small-fontSize": "14px",
+    "anchor-link-size-medium-fontSize": "16px",
+    "anchor-link-size-large-fontSize": "18px",
+    "anchor-link-underline-thickness": "1px",
+    "anchor-link-underline-offset": "2px",
+    "anchor-link-transition-duration": "0.15s",
+    "anchor-link-transition-easing": "ease-in-out",
+    "anchor-link-transition-properties": "color, text-decoration-color",
+    "anchor-link-focus-outline-width": "2px",
+    "anchor-link-focus-outline-offset": "2px"
+  }
+}

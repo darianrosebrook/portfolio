@@ -1,0 +1,166 @@
+/**
+ * Tabs Component Styles
+ */
+
+.tabsWrapper {
+  width: 100%;
+
+  &--vertical {
+    display: flex;
+    gap: var(--tabs-size-medium-gap, 6px);
+  }
+}
+
+.tabList {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-bottom: var(--tabs-border-width, 1px) solid
+    var(--tabs-color-border-default, #e5e7eb);
+
+  &--pills {
+    gap: var(--tabs-size-medium-gap, 6px);
+    border-bottom: none;
+  }
+
+  &--underline {
+    border-bottom: var(--tabs-border-width, 1px) solid
+      var(--tabs-color-border-default, #e5e7eb);
+  }
+
+  &--bordered {
+    border: var(--tabs-border-width, 1px) solid
+      var(--tabs-color-border-default, #e5e7eb);
+    border-radius: var(--tabs-border-radius, 6px);
+    padding: 4px;
+    background-color: var(--tabs-color-background-hover, #f9fafb);
+  }
+
+  &--vertical {
+    flex-direction: column;
+    border-bottom: none;
+    border-right: var(--tabs-border-width, 1px) solid
+      var(--tabs-color-border-default, #e5e7eb);
+    min-width: 200px;
+  }
+
+  &--small {
+    gap: var(--tabs-size-small-gap, 4px);
+  }
+
+  &--large {
+    gap: var(--tabs-size-large-gap, 8px);
+  }
+}
+
+.tab {
+  all: unset;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--tabs-size-medium-gap, 6px);
+  padding: var(--tabs-size-medium-padding, 10px 16px);
+  color: var(--tabs-color-foreground-default, #6b7280);
+  font-family: var(--tabs-typography-fontFamily, Inter, sans-serif);
+  font-weight: var(--tabs-typography-fontWeight-default, 500);
+  font-size: var(--tabs-size-medium-fontSize, 16px);
+  line-height: var(--tabs-typography-lineHeight, 1.5);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: var(--tabs-transition-properties, color, background-color, border-color)
+    var(--tabs-transition-duration, 0.15s)
+    var(--tabs-transition-easing, ease-in-out);
+  position: relative;
+
+  &:hover:not(&--disabled) {
+    color: var(--tabs-color-foreground-active, #111827);
+    background-color: var(--tabs-color-background-hover, #f9fafb);
+  }
+
+  &:focus {
+    outline: 2px solid var(--tabs-color-focus-ring, #2563eb);
+    outline-offset: 2px;
+  }
+
+  &--active {
+    color: var(--tabs-color-foreground-active, #111827);
+    font-weight: var(--tabs-typography-fontWeight-active, 600);
+  }
+
+  &--disabled {
+    color: var(--tabs-color-foreground-disabled, #9ca3af);
+    cursor: not-allowed;
+  }
+
+  &--small {
+    gap: var(--tabs-size-small-gap, 4px);
+    padding: var(--tabs-size-small-padding, 8px 12px);
+    font-size: var(--tabs-size-small-fontSize, 14px);
+  }
+
+  &--large {
+    gap: var(--tabs-size-large-gap, 8px);
+    padding: var(--tabs-size-large-padding, 12px 20px);
+    font-size: var(--tabs-size-large-fontSize, 18px);
+  }
+
+  // Variant-specific styles
+  &--pills {
+    border-radius: var(--tabs-border-radius, 6px);
+    &.tab--active {
+      background-color: var(--tabs-color-background-active, #f3f4f6);
+    }
+  }
+
+  &--underline {
+    border-bottom: var(--tabs-indicator-height, 2px) solid transparent;
+    &.tab--active {
+      border-bottom-color: var(--tabs-color-border-active, #2563eb);
+    }
+  }
+
+  &--bordered {
+    border-radius: var(--tabs-border-radius, 6px);
+    &.tab--active {
+      background-color: var(--tabs-color-background-active, #f3f4f6);
+    }
+  }
+}
+
+.tabBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 6px;
+  background-color: var(--tabs-color-border-default, #e5e7eb);
+  border-radius: 9px;
+  color: var(--tabs-color-foreground-default, #6b7280);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+
+  .tab--active & {
+    background-color: var(--tabs-color-border-active, #2563eb);
+    color: white;
+  }
+}
+
+.tabPanel {
+  padding: var(--tabs-content-padding, 16px);
+  outline: none;
+
+  &[hidden] {
+    display: none;
+  }
+
+  &--small {
+    padding: calc(var(--tabs-content-padding, 16px) * 0.75);
+  }
+
+  &--large {
+    padding: calc(var(--tabs-content-padding, 16px) * 1.25);
+  }
+}

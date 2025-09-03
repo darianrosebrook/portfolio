@@ -22,9 +22,18 @@
       "lineHeight": "{semantic.typography.lineHeight.normal}"
     },
     "size": {
-      "small": { "gap": "{core.size.02}", "fontSize": "{semantic.typography.body.04}" },
-      "medium": { "gap": "{core.size.02}", "fontSize": "{semantic.typography.body.03}" },
-      "large": { "gap": "{core.size.03}", "fontSize": "{semantic.typography.body.02}" },
+      "small": {
+        "gap": "{core.size.02}",
+        "fontSize": "{semantic.typography.body.04}"
+      },
+      "medium": {
+        "gap": "{core.size.02}",
+        "fontSize": "{semantic.typography.body.03}"
+      },
+      "large": {
+        "gap": "{core.size.03}",
+        "fontSize": "{semantic.typography.body.02}"
+      },
       "separator": { "spacing": "{core.size.02}" }
     },
     "border": { "radius": "{semantic.size.radius.01}" },
@@ -60,5 +69,3 @@
     "breadcrumb-transition-properties": "color, background-color"
   }
 }
-
-

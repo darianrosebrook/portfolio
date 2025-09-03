@@ -1,0 +1,95 @@
+{
+  "prefix": "tabs",
+  "tokens": {
+    "color": {
+      "background": {
+        "default": "transparent",
+        "active": "{semantic.color.background.secondary}",
+        "hover": "{semantic.color.background.hover}"
+      },
+      "foreground": {
+        "default": "{semantic.color.foreground.secondary}",
+        "active": "{semantic.color.foreground.primary}",
+        "disabled": "{semantic.color.foreground.disabled}"
+      },
+      "border": {
+        "default": "{semantic.color.border.default}",
+        "active": "{semantic.color.border.focus}"
+      },
+      "focus": {
+        "ring": "{semantic.color.border.focus}"
+      }
+    },
+    "typography": {
+      "fontFamily": "{core.typography.fontFamily.sans}",
+      "fontWeight": {
+        "default": "{semantic.typography.fontWeight.medium}",
+        "active": "{semantic.typography.fontWeight.semibold}"
+      },
+      "lineHeight": "{semantic.typography.lineHeight.normal}"
+    },
+    "size": {
+      "small": {
+        "padding": "{core.size.02} {core.size.03}",
+        "fontSize": "{semantic.typography.body.04}",
+        "gap": "{core.size.01}"
+      },
+      "medium": {
+        "padding": "{core.size.02} {core.size.04}",
+        "fontSize": "{semantic.typography.body.03}",
+        "gap": "{core.size.01}"
+      },
+      "large": {
+        "padding": "{core.size.03} {core.size.05}",
+        "fontSize": "{semantic.typography.body.02}",
+        "gap": "{core.size.02}"
+      }
+    },
+    "border": {
+      "radius": "{semantic.size.radius.01}",
+      "width": "1px"
+    },
+    "indicator": {
+      "height": "2px"
+    },
+    "content": {
+      "padding": "{core.size.04}"
+    },
+    "transition": {
+      "duration": "0.15s",
+      "easing": "ease-in-out",
+      "properties": "color, background-color, border-color"
+    }
+  },
+  "fallbacks": {
+    "tabs-color-background-default": "transparent",
+    "tabs-color-background-active": "#f3f4f6",
+    "tabs-color-background-hover": "#f9fafb",
+    "tabs-color-foreground-default": "#6b7280",
+    "tabs-color-foreground-active": "#111827",
+    "tabs-color-foreground-disabled": "#9ca3af",
+    "tabs-color-border-default": "#e5e7eb",
+    "tabs-color-border-active": "#2563eb",
+    "tabs-color-focus-ring": "#2563eb",
+    "tabs-typography-fontFamily": "Inter, sans-serif",
+    "tabs-typography-fontWeight-default": "500",
+    "tabs-typography-fontWeight-active": "600",
+    "tabs-typography-lineHeight": "1.5",
+    "tabs-size-small-padding": "8px 12px",
+    "tabs-size-medium-padding": "10px 16px",
+    "tabs-size-large-padding": "12px 20px",
+    "tabs-size-small-fontSize": "14px",
+    "tabs-size-medium-fontSize": "16px",
+    "tabs-size-large-fontSize": "18px",
+    "tabs-size-small-gap": "4px",
+    "tabs-size-medium-gap": "6px",
+    "tabs-size-large-gap": "8px",
+    "tabs-border-radius": "6px",
+    "tabs-border-width": "1px",
+    "tabs-indicator-height": "2px",
+    "tabs-content-padding": "16px",
+    "tabs-transition-duration": "0.15s",
+    "tabs-transition-easing": "ease-in-out",
+    "tabs-transition-properties": "color, background-color, border-color"
+  }
+}

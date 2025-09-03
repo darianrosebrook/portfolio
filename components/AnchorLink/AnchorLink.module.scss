@@ -1,0 +1,82 @@
+/**
+ * Anchor Link Component Styles
+ */
+
+.anchorLink {
+  display: inline;
+  color: var(--anchor-link-color-foreground-default, #2563eb);
+  font-family: var(--anchor-link-typography-fontFamily, inherit);
+  font-weight: var(--anchor-link-typography-fontWeight, inherit);
+  font-size: var(--anchor-link-size-medium-fontSize, 16px);
+  line-height: var(--anchor-link-typography-lineHeight, inherit);
+  text-decoration: var(--anchor-link-typography-textDecoration, underline);
+  text-decoration-color: var(--anchor-link-color-underline, currentColor);
+  text-decoration-thickness: var(--anchor-link-underline-thickness, 1px);
+  text-underline-offset: var(--anchor-link-underline-offset, 2px);
+  transition: var(--anchor-link-transition-properties, color, text-decoration-color)
+    var(--anchor-link-transition-duration, 0.15s)
+    var(--anchor-link-transition-easing, ease-in-out);
+
+  &:hover {
+    color: var(--anchor-link-color-foreground-hover, #1d4ed8);
+  }
+
+  &:active {
+    color: var(--anchor-link-color-foreground-active, #1e40af);
+  }
+
+  &:visited {
+    color: var(--anchor-link-color-foreground-visited, #7c3aed);
+  }
+
+  &:focus {
+    outline: var(--anchor-link-focus-outline-width, 2px) solid
+      var(--anchor-link-color-focus-ring, #2563eb);
+    outline-offset: var(--anchor-link-focus-outline-offset, 2px);
+  }
+
+  &--small {
+    font-size: var(--anchor-link-size-small-fontSize, 14px);
+  }
+
+  &--large {
+    font-size: var(--anchor-link-size-large-fontSize, 18px);
+  }
+
+  &--primary {
+    color: var(--anchor-link-color-foreground-primary, #2563eb);
+  }
+
+  &--secondary {
+    color: var(--anchor-link-color-foreground-secondary, #6b7280);
+  }
+
+  &--muted {
+    color: var(--anchor-link-color-foreground-muted, #9ca3af);
+  }
+
+  &--danger {
+    color: var(--anchor-link-color-foreground-danger, #dc2626);
+  }
+
+  &--underlineNone {
+    text-decoration: none;
+  }
+
+  &--underlineHover {
+    text-decoration: none;
+    &:hover {
+      text-decoration: var(--anchor-link-typography-textDecoration, underline);
+    }
+  }
+
+  &--underlineAlways {
+    text-decoration: var(--anchor-link-typography-textDecoration, underline);
+  }
+
+  &--disabled {
+    color: var(--anchor-link-color-foreground-disabled, #9ca3af);
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}

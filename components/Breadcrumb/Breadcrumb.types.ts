@@ -63,7 +63,11 @@ export interface BreadcrumbProps {
   theme?: BreadcrumbTheme;
   className?: string;
   navAriaLabel?: string;
-  onNavigate?: (item: BreadcrumbItem, index: number, event: React.MouseEvent | React.KeyboardEvent) => void;
+  onNavigate?: (
+    item: BreadcrumbItem,
+    index: number,
+    event: React.MouseEvent | React.KeyboardEvent
+  ) => void;
 }
 
 export const DEFAULT_BREADCRUMB_TOKENS: BreadcrumbTokens = {
@@ -94,5 +98,3 @@ export const DEFAULT_BREADCRUMB_TOKENS: BreadcrumbTokens = {
   'transition-easing': 'ease-in-out',
   'transition-properties': 'color, background-color',
 };
-
-

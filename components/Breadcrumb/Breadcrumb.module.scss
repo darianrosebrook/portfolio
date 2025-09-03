@@ -8,39 +8,39 @@
 
 .breadcrumbList {
   display: flex;
-  align-items: center;
   gap: var(--breadcrumb-size-medium-gap, 8px);
+  align-items: center;
   margin: 0;
   padding: 0;
-  list-style: none;
   color: var(--breadcrumb-color-foreground-default, #374151);
-  font-family: var(--breadcrumb-typography-fontFamily, Inter, sans-serif);
   font-weight: var(--breadcrumb-typography-fontWeight, 400);
   font-size: var(--breadcrumb-size-medium-fontSize, 16px);
+  font-family: var(--breadcrumb-typography-fontFamily, Inter, sans-serif);
   line-height: var(--breadcrumb-typography-lineHeight, 1.5);
+  list-style: none;
 }
 
 .breadcrumbItem {
   display: inline-flex;
-  align-items: center;
   gap: var(--breadcrumb-separator-spacing, 8px);
+  align-items: center;
 }
 
 .breadcrumbLink {
   all: unset;
-  box-sizing: border-box;
   display: inline-flex;
   align-items: center;
+  box-sizing: border-box;
   padding-inline: var(--breadcrumb-padding-inline, 4px);
   border-radius: var(--breadcrumb-border-radius, 6px);
   color: var(--breadcrumb-color-foreground-default, #374151);
-  cursor: pointer;
   transition: var(--breadcrumb-transition-properties, color, background-color)
     var(--breadcrumb-transition-duration, 0.15s)
     var(--breadcrumb-transition-easing, ease-in-out);
+  cursor: pointer;
 
   &:hover {
-    background-color: var(--breadcrumb-color-background-hover, rgba(0, 0, 0, 0.04));
+    background-color: var(--breadcrumb-color-background-hover, rgb(0 0 0 / 4%));
   }
 
   &:focus {
@@ -66,19 +66,19 @@
 
 .breadcrumbOverflowButton {
   all: unset;
-  box-sizing: border-box;
   display: inline-flex;
   align-items: center;
+  box-sizing: border-box;
   padding-inline: var(--breadcrumb-padding-inline, 4px);
   border-radius: var(--breadcrumb-border-radius, 6px);
   color: var(--breadcrumb-color-foreground-default, #374151);
-  cursor: pointer;
   transition: var(--breadcrumb-transition-properties, color, background-color)
     var(--breadcrumb-transition-duration, 0.15s)
     var(--breadcrumb-transition-easing, ease-in-out);
+  cursor: pointer;
 
   &:hover {
-    background-color: var(--breadcrumb-color-background-hover, rgba(0, 0, 0, 0.04));
+    background-color: var(--breadcrumb-color-background-hover, rgb(0 0 0 / 4%));
   }
 
   &:focus {
@@ -86,5 +86,3 @@
     outline-offset: 2px;
   }
 }
-
-
