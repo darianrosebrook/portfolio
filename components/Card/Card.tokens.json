@@ -1,0 +1,87 @@
+{
+  "prefix": "card",
+  "tokens": {
+    "color": {
+      "background": {
+        "default": "{semantic.color.background.primary}",
+        "hover": "{semantic.color.background.hover}"
+      },
+      "foreground": {
+        "default": "{semantic.color.foreground.primary}"
+      },
+      "border": {
+        "default": "{semantic.color.border.default}",
+        "hover": "{semantic.color.border.hover}"
+      },
+      "shadow": {
+        "default": "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
+        "hover": "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)"
+      },
+      "focus": {
+        "ring": "{semantic.color.border.focus}"
+      }
+    },
+    "typography": {
+      "fontFamily": "{core.typography.fontFamily.sans}",
+      "fontWeight": "{semantic.typography.fontWeight.normal}",
+      "lineHeight": "{semantic.typography.lineHeight.normal}"
+    },
+    "size": {
+      "small": {
+        "padding": "{core.size.03}",
+        "gap": "{core.size.02}",
+        "borderRadius": "{semantic.size.radius.01}"
+      },
+      "medium": {
+        "padding": "{core.size.04}",
+        "gap": "{core.size.03}",
+        "borderRadius": "{semantic.size.radius.02}"
+      },
+      "large": {
+        "padding": "{core.size.06}",
+        "gap": "{core.size.04}",
+        "borderRadius": "{semantic.size.radius.03}"
+      }
+    },
+    "border": {
+      "width": "1px"
+    },
+    "image": {
+      "aspectRatio": "16/9",
+      "borderRadius": "{semantic.size.radius.01}"
+    },
+    "transition": {
+      "duration": "0.15s",
+      "easing": "ease-in-out",
+      "properties": "background-color, border-color, box-shadow, transform"
+    }
+  },
+  "fallbacks": {
+    "card-color-background-default": "#ffffff",
+    "card-color-background-hover": "#f9fafb",
+    "card-color-foreground-default": "#111827",
+    "card-color-border-default": "#e5e7eb",
+    "card-color-border-hover": "#d1d5db",
+    "card-color-shadow-default": "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
+    "card-color-shadow-hover": "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+    "card-color-focus-ring": "#2563eb",
+    "card-typography-fontFamily": "Inter, sans-serif",
+    "card-typography-fontWeight": "400",
+    "card-typography-lineHeight": "1.5",
+    "card-size-small-padding": "12px",
+    "card-size-medium-padding": "16px",
+    "card-size-large-padding": "24px",
+    "card-size-small-gap": "8px",
+    "card-size-medium-gap": "12px",
+    "card-size-large-gap": "16px",
+    "card-size-small-borderRadius": "6px",
+    "card-size-medium-borderRadius": "8px",
+    "card-size-large-borderRadius": "12px",
+    "card-border-width": "1px",
+    "card-image-aspectRatio": "16/9",
+    "card-image-borderRadius": "6px",
+    "card-transition-duration": "0.15s",
+    "card-transition-easing": "ease-in-out",
+    "card-transition-properties": "background-color, border-color, box-shadow, transform"
+  }
+}

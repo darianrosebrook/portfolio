@@ -1,0 +1,89 @@
+{
+  "prefix": "table",
+  "tokens": {
+    "color": {
+      "background": {
+        "default": "{semantic.color.background.primary}",
+        "header": "{semantic.color.background.secondary}",
+        "row": {
+          "even": "{semantic.color.background.primary}",
+          "odd": "{semantic.color.background.secondary}",
+          "hover": "{semantic.color.background.hover}",
+          "selected": "{semantic.color.background.selected}"
+        }
+      },
+      "foreground": {
+        "default": "{semantic.color.foreground.primary}",
+        "header": "{semantic.color.foreground.secondary}",
+        "muted": "{semantic.color.foreground.muted}"
+      },
+      "border": {
+        "default": "{semantic.color.border.default}",
+        "header": "{semantic.color.border.strong}"
+      },
+      "focus": {
+        "ring": "{semantic.color.border.focus}"
+      }
+    },
+    "typography": {
+      "fontFamily": "{core.typography.fontFamily.sans}",
+      "fontWeight": {
+        "default": "{semantic.typography.fontWeight.normal}",
+        "header": "{semantic.typography.fontWeight.semibold}"
+      },
+      "lineHeight": "{semantic.typography.lineHeight.normal}"
+    },
+    "size": {
+      "small": {
+        "padding": "{core.size.02} {core.size.03}",
+        "fontSize": "{semantic.typography.body.04}"
+      },
+      "medium": {
+        "padding": "{core.size.03} {core.size.04}",
+        "fontSize": "{semantic.typography.body.03}"
+      },
+      "large": {
+        "padding": "{core.size.04} {core.size.05}",
+        "fontSize": "{semantic.typography.body.02}"
+      }
+    },
+    "border": {
+      "width": "1px",
+      "radius": "{semantic.size.radius.02}"
+    },
+    "transition": {
+      "duration": "0.15s",
+      "easing": "ease-in-out",
+      "properties": "background-color, border-color"
+    }
+  },
+  "fallbacks": {
+    "table-color-background-default": "#ffffff",
+    "table-color-background-header": "#f9fafb",
+    "table-color-background-row-even": "#ffffff",
+    "table-color-background-row-odd": "#f9fafb",
+    "table-color-background-row-hover": "#f3f4f6",
+    "table-color-background-row-selected": "#eff6ff",
+    "table-color-foreground-default": "#111827",
+    "table-color-foreground-header": "#374151",
+    "table-color-foreground-muted": "#6b7280",
+    "table-color-border-default": "#e5e7eb",
+    "table-color-border-header": "#d1d5db",
+    "table-color-focus-ring": "#2563eb",
+    "table-typography-fontFamily": "Inter, sans-serif",
+    "table-typography-fontWeight-default": "400",
+    "table-typography-fontWeight-header": "600",
+    "table-typography-lineHeight": "1.5",
+    "table-size-small-padding": "8px 12px",
+    "table-size-medium-padding": "12px 16px",
+    "table-size-large-padding": "16px 20px",
+    "table-size-small-fontSize": "14px",
+    "table-size-medium-fontSize": "16px",
+    "table-size-large-fontSize": "18px",
+    "table-border-width": "1px",
+    "table-border-radius": "8px",
+    "table-transition-duration": "0.15s",
+    "table-transition-easing": "ease-in-out",
+    "table-transition-properties": "background-color, border-color"
+  }
+}
