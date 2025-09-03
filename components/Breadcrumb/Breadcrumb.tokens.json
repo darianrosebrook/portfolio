@@ -1,0 +1,64 @@
+{
+  "prefix": "breadcrumb",
+  "tokens": {
+    "color": {
+      "foreground": {
+        "default": "{semantic.color.foreground.primary}",
+        "muted": "{semantic.color.foreground.secondary}",
+        "current": "{semantic.color.foreground.primary}",
+        "disabled": "{semantic.color.foreground.disabled}"
+      },
+      "separator": "{semantic.color.foreground.secondary}",
+      "background": {
+        "hover": "{semantic.color.background.hover}"
+      },
+      "focus": {
+        "ring": "{semantic.color.border.focus}"
+      }
+    },
+    "typography": {
+      "fontFamily": "{core.typography.fontFamily.sans}",
+      "fontWeight": "{semantic.typography.fontWeight.normal}",
+      "lineHeight": "{semantic.typography.lineHeight.normal}"
+    },
+    "size": {
+      "small": { "gap": "{core.size.02}", "fontSize": "{semantic.typography.body.04}" },
+      "medium": { "gap": "{core.size.02}", "fontSize": "{semantic.typography.body.03}" },
+      "large": { "gap": "{core.size.03}", "fontSize": "{semantic.typography.body.02}" },
+      "separator": { "spacing": "{core.size.02}" }
+    },
+    "border": { "radius": "{semantic.size.radius.01}" },
+    "padding": { "inline": "{core.size.01}" },
+    "transition": {
+      "duration": "0.15s",
+      "easing": "ease-in-out",
+      "properties": "color, background-color"
+    }
+  },
+  "fallbacks": {
+    "breadcrumb-color-foreground-default": "#374151",
+    "breadcrumb-color-foreground-muted": "#6b7280",
+    "breadcrumb-color-foreground-current": "#111827",
+    "breadcrumb-color-foreground-disabled": "#9ca3af",
+    "breadcrumb-color-separator": "#9ca3af",
+    "breadcrumb-color-background-hover": "rgba(0, 0, 0, 0.04)",
+    "breadcrumb-color-focus-ring": "#2563eb",
+    "breadcrumb-typography-fontFamily": "Inter, sans-serif",
+    "breadcrumb-typography-fontWeight": "400",
+    "breadcrumb-typography-lineHeight": "1.5",
+    "breadcrumb-size-small-gap": "6px",
+    "breadcrumb-size-medium-gap": "8px",
+    "breadcrumb-size-large-gap": "10px",
+    "breadcrumb-size-small-fontSize": "14px",
+    "breadcrumb-size-medium-fontSize": "16px",
+    "breadcrumb-size-large-fontSize": "18px",
+    "breadcrumb-separator-spacing": "8px",
+    "breadcrumb-border-radius": "6px",
+    "breadcrumb-padding-inline": "4px",
+    "breadcrumb-transition-duration": "0.15s",
+    "breadcrumb-transition-easing": "ease-in-out",
+    "breadcrumb-transition-properties": "color, background-color"
+  }
+}
+
+

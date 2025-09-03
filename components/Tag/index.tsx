@@ -7,5 +7,3 @@ export type {
   TagVariant,
   TagShape,
 } from './Tag.types';
-
-

@@ -1,0 +1,90 @@
+/**
+ * Breadcrumb Component Styles
+ */
+
+.breadcrumbNav {
+  width: 100%;
+}
+
+.breadcrumbList {
+  display: flex;
+  align-items: center;
+  gap: var(--breadcrumb-size-medium-gap, 8px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--breadcrumb-color-foreground-default, #374151);
+  font-family: var(--breadcrumb-typography-fontFamily, Inter, sans-serif);
+  font-weight: var(--breadcrumb-typography-fontWeight, 400);
+  font-size: var(--breadcrumb-size-medium-fontSize, 16px);
+  line-height: var(--breadcrumb-typography-lineHeight, 1.5);
+}
+
+.breadcrumbItem {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--breadcrumb-separator-spacing, 8px);
+}
+
+.breadcrumbLink {
+  all: unset;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  padding-inline: var(--breadcrumb-padding-inline, 4px);
+  border-radius: var(--breadcrumb-border-radius, 6px);
+  color: var(--breadcrumb-color-foreground-default, #374151);
+  cursor: pointer;
+  transition: var(--breadcrumb-transition-properties, color, background-color)
+    var(--breadcrumb-transition-duration, 0.15s)
+    var(--breadcrumb-transition-easing, ease-in-out);
+
+  &:hover {
+    background-color: var(--breadcrumb-color-background-hover, rgba(0, 0, 0, 0.04));
+  }
+
+  &:focus {
+    outline: 2px solid var(--breadcrumb-color-focus-ring, #2563eb);
+    outline-offset: 2px;
+  }
+
+  &--disabled {
+    color: var(--breadcrumb-color-foreground-disabled, #9ca3af);
+    cursor: not-allowed;
+  }
+}
+
+.breadcrumbCurrent {
+  color: var(--breadcrumb-color-foreground-current, #111827);
+}
+
+.breadcrumbSeparator {
+  display: inline-flex;
+  align-items: center;
+  color: var(--breadcrumb-color-separator, #9ca3af);
+}
+
+.breadcrumbOverflowButton {
+  all: unset;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  padding-inline: var(--breadcrumb-padding-inline, 4px);
+  border-radius: var(--breadcrumb-border-radius, 6px);
+  color: var(--breadcrumb-color-foreground-default, #374151);
+  cursor: pointer;
+  transition: var(--breadcrumb-transition-properties, color, background-color)
+    var(--breadcrumb-transition-duration, 0.15s)
+    var(--breadcrumb-transition-easing, ease-in-out);
+
+  &:hover {
+    background-color: var(--breadcrumb-color-background-hover, rgba(0, 0, 0, 0.04));
+  }
+
+  &:focus {
+    outline: 2px solid var(--breadcrumb-color-focus-ring, #2563eb);
+    outline-offset: 2px;
+  }
+}
+
+

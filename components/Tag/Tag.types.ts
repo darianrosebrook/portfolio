@@ -191,7 +191,6 @@ export const DEFAULT_TAG_TOKENS: TagTokens = {
   // Transition
   'transition-duration': '0.15s',
   'transition-easing': 'ease-in-out',
-  'transition-properties': 'background-color, border-color, color, transform, box-shadow',
+  'transition-properties':
+    'background-color, border-color, color, transform, box-shadow',
 };
-
-
