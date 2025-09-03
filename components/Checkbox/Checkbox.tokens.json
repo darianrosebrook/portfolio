@@ -1,0 +1,121 @@
+{
+  "prefix": "checkbox",
+  "tokens": {
+    "color": {
+      "box": {
+        "unchecked": "{semantic.color.background.primary}",
+        "checked": "{semantic.color.background.accent}",
+        "indeterminate": "{semantic.color.background.accent}",
+        "disabled": "{semantic.color.background.disabled}",
+        "hover": "{semantic.color.background.hover}",
+        "focus": "{semantic.color.background.primary}"
+      },
+      "border": {
+        "unchecked": "{semantic.color.border.primary}",
+        "checked": "{semantic.color.border.accent}",
+        "indeterminate": "{semantic.color.border.accent}",
+        "disabled": "{semantic.color.border.disabled}",
+        "hover": "{semantic.color.border.bold}",
+        "focus": "{semantic.color.border.accent}",
+        "error": "{semantic.color.border.danger}",
+        "success": "{semantic.color.border.success}",
+        "warning": "{semantic.color.border.warning}"
+      },
+      "checkmark": {
+        "default": "{semantic.color.foreground.onAccent}",
+        "disabled": "{semantic.color.foreground.disabled}"
+      },
+      "label": {
+        "default": "{semantic.color.foreground.primary}",
+        "disabled": "{semantic.color.foreground.disabled}"
+      }
+    },
+    "size": {
+      "small": {
+        "boxSize": "16px",
+        "fontSize": "{semantic.typography.caption.03}",
+        "gap": "{core.size.02}",
+        "checkmarkSize": "10px"
+      },
+      "medium": {
+        "boxSize": "20px",
+        "fontSize": "{semantic.typography.body.04}",
+        "gap": "{core.size.02}",
+        "checkmarkSize": "12px"
+      },
+      "large": {
+        "boxSize": "24px",
+        "fontSize": "{semantic.typography.body.03}",
+        "gap": "{core.size.03}",
+        "checkmarkSize": "14px"
+      }
+    },
+    "border": {
+      "width": "{semantic.size.border.default}",
+      "radius": "{semantic.size.radius.01}"
+    },
+    "typography": {
+      "fontFamily": "{core.typography.fontFamily.sans}",
+      "fontWeight": "{semantic.typography.fontWeight.regular}",
+      "lineHeight": "{semantic.typography.lineHeight.body}",
+      "letterSpacing": "{semantic.typography.letterSpacing.normal}"
+    },
+    "transition": {
+      "duration": "0.2s",
+      "easing": "ease-in-out",
+      "properties": "background-color, border-color, transform"
+    },
+    "focus": {
+      "outlineColor": "{semantic.color.foreground.accent}",
+      "outlineWidth": "{semantic.focus.ring.border.width}",
+      "outlineOffset": "{semantic.focus.ringOffset}",
+      "boxShadow": "0 0 0 3px rgba(217, 41, 43, 0.1)"
+    }
+  },
+  "fallbacks": {
+    "checkbox-color-box-unchecked": "#ffffff",
+    "checkbox-color-box-checked": "#d9292b",
+    "checkbox-color-box-indeterminate": "#d9292b",
+    "checkbox-color-box-disabled": "#f0f0f0",
+    "checkbox-color-box-hover": "#f5f5f5",
+    "checkbox-color-box-focus": "#ffffff",
+    "checkbox-color-border-unchecked": "#cecece",
+    "checkbox-color-border-checked": "#d9292b",
+    "checkbox-color-border-indeterminate": "#d9292b",
+    "checkbox-color-border-disabled": "#e0e0e0",
+    "checkbox-color-border-hover": "#aeaeae",
+    "checkbox-color-border-focus": "#d9292b",
+    "checkbox-color-border-error": "#ae0001",
+    "checkbox-color-border-success": "#336006",
+    "checkbox-color-border-warning": "#824500",
+    "checkbox-color-checkmark-default": "#ffffff",
+    "checkbox-color-checkmark-disabled": "#aeaeae",
+    "checkbox-color-label-default": "#141414",
+    "checkbox-color-label-disabled": "#aeaeae",
+    "checkbox-size-small-boxSize": "16px",
+    "checkbox-size-small-fontSize": "12px",
+    "checkbox-size-small-gap": "6px",
+    "checkbox-size-small-checkmarkSize": "10px",
+    "checkbox-size-medium-boxSize": "20px",
+    "checkbox-size-medium-fontSize": "14px",
+    "checkbox-size-medium-gap": "8px",
+    "checkbox-size-medium-checkmarkSize": "12px",
+    "checkbox-size-large-boxSize": "24px",
+    "checkbox-size-large-fontSize": "16px",
+    "checkbox-size-large-gap": "10px",
+    "checkbox-size-large-checkmarkSize": "14px",
+    "checkbox-border-width": "1px",
+    "checkbox-border-radius": "4px",
+    "checkbox-typography-fontFamily": "Inter, sans-serif",
+    "checkbox-typography-fontWeight": "400",
+    "checkbox-typography-lineHeight": "1.5",
+    "checkbox-typography-letterSpacing": "0",
+    "checkbox-transition-duration": "0.2s",
+    "checkbox-transition-easing": "ease-in-out",
+    "checkbox-transition-properties": "background-color, border-color, transform",
+    "checkbox-focus-outlineColor": "#d9292b",
+    "checkbox-focus-outlineWidth": "2px",
+    "checkbox-focus-outlineOffset": "2px",
+    "checkbox-focus-boxShadow": "0 0 0 3px rgba(217, 41, 43, 0.1)"
+  }
+}

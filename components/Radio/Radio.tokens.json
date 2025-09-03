@@ -1,0 +1,121 @@
+{
+  "prefix": "radio",
+  "tokens": {
+    "color": {
+      "circle": {
+        "unchecked": "{semantic.color.background.primary}",
+        "checked": "{semantic.color.background.primary}",
+        "disabled": "{semantic.color.background.disabled}",
+        "hover": "{semantic.color.background.hover}",
+        "focus": "{semantic.color.background.primary}"
+      },
+      "border": {
+        "unchecked": "{semantic.color.border.primary}",
+        "checked": "{semantic.color.border.accent}",
+        "disabled": "{semantic.color.border.disabled}",
+        "hover": "{semantic.color.border.bold}",
+        "focus": "{semantic.color.border.accent}",
+        "error": "{semantic.color.border.danger}",
+        "success": "{semantic.color.border.success}",
+        "warning": "{semantic.color.border.warning}"
+      },
+      "dot": {
+        "default": "{semantic.color.foreground.accent}",
+        "disabled": "{semantic.color.foreground.disabled}"
+      },
+      "label": {
+        "default": "{semantic.color.foreground.primary}",
+        "disabled": "{semantic.color.foreground.disabled}"
+      }
+    },
+    "size": {
+      "small": {
+        "circleSize": "16px",
+        "fontSize": "{semantic.typography.caption.03}",
+        "gap": "{core.size.02}",
+        "dotSize": "6px"
+      },
+      "medium": {
+        "circleSize": "20px",
+        "fontSize": "{semantic.typography.body.04}",
+        "gap": "{core.size.02}",
+        "dotSize": "8px"
+      },
+      "large": {
+        "circleSize": "24px",
+        "fontSize": "{semantic.typography.body.03}",
+        "gap": "{core.size.03}",
+        "dotSize": "10px"
+      }
+    },
+    "border": {
+      "width": "{semantic.size.border.default}",
+      "radius": "50%"
+    },
+    "dot": {
+      "borderRadius": "50%"
+    },
+    "typography": {
+      "fontFamily": "{core.typography.fontFamily.sans}",
+      "fontWeight": "{semantic.typography.fontWeight.regular}",
+      "lineHeight": "{semantic.typography.lineHeight.body}",
+      "letterSpacing": "{semantic.typography.letterSpacing.normal}"
+    },
+    "transition": {
+      "duration": "0.2s",
+      "easing": "ease-in-out",
+      "properties": "background-color, border-color, transform"
+    },
+    "focus": {
+      "outlineColor": "{semantic.color.foreground.accent}",
+      "outlineWidth": "{semantic.focus.ring.border.width}",
+      "outlineOffset": "{semantic.focus.ringOffset}",
+      "boxShadow": "0 0 0 3px rgba(217, 41, 43, 0.1)"
+    }
+  },
+  "fallbacks": {
+    "radio-color-circle-unchecked": "#ffffff",
+    "radio-color-circle-checked": "#ffffff",
+    "radio-color-circle-disabled": "#f0f0f0",
+    "radio-color-circle-hover": "#f5f5f5",
+    "radio-color-circle-focus": "#ffffff",
+    "radio-color-border-unchecked": "#cecece",
+    "radio-color-border-checked": "#d9292b",
+    "radio-color-border-disabled": "#e0e0e0",
+    "radio-color-border-hover": "#aeaeae",
+    "radio-color-border-focus": "#d9292b",
+    "radio-color-border-error": "#ae0001",
+    "radio-color-border-success": "#336006",
+    "radio-color-border-warning": "#824500",
+    "radio-color-dot-default": "#d9292b",
+    "radio-color-dot-disabled": "#aeaeae",
+    "radio-color-label-default": "#141414",
+    "radio-color-label-disabled": "#aeaeae",
+    "radio-size-small-circleSize": "16px",
+    "radio-size-small-fontSize": "12px",
+    "radio-size-small-gap": "6px",
+    "radio-size-small-dotSize": "6px",
+    "radio-size-medium-circleSize": "20px",
+    "radio-size-medium-fontSize": "14px",
+    "radio-size-medium-gap": "8px",
+    "radio-size-medium-dotSize": "8px",
+    "radio-size-large-circleSize": "24px",
+    "radio-size-large-fontSize": "16px",
+    "radio-size-large-gap": "10px",
+    "radio-size-large-dotSize": "10px",
+    "radio-border-width": "1px",
+    "radio-border-radius": "50%",
+    "radio-dot-borderRadius": "50%",
+    "radio-typography-fontFamily": "Inter, sans-serif",
+    "radio-typography-fontWeight": "400",
+    "radio-typography-lineHeight": "1.5",
+    "radio-typography-letterSpacing": "0",
+    "radio-transition-duration": "0.2s",
+    "radio-transition-easing": "ease-in-out",
+    "radio-transition-properties": "background-color, border-color, transform",
+    "radio-focus-outlineColor": "#d9292b",
+    "radio-focus-outlineWidth": "2px",
+    "radio-focus-outlineOffset": "2px",
+    "radio-focus-boxShadow": "0 0 0 3px rgba(217, 41, 43, 0.1)"
+  }
+}
