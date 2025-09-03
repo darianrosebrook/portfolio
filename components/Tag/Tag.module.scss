@@ -1,0 +1,88 @@
+/**
+ * Tag Component Styles
+ */
+
+.tag {
+  all: unset;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--tag-size-medium-gap, 6px);
+  vertical-align: middle;
+
+  height: var(--tag-size-medium-height, 28px);
+  padding: var(--tag-size-medium-padding, 4px 8px);
+  min-width: var(--tag-size-medium-height, 28px);
+
+  background-color: var(--tag-color-background-default, #f5f5f5);
+  border: var(--tag-border-width, 1px) solid var(--tag-color-border-default, #e5e7eb);
+  border-radius: var(--tag-border-radius-rounded, 8px);
+  color: var(--tag-color-foreground-default, #374151);
+
+  font-family: var(--tag-typography-fontFamily, Inter, sans-serif);
+  font-weight: var(--tag-typography-fontWeight, 500);
+  font-size: var(--tag-size-medium-fontSize, 13px);
+  line-height: var(--tag-typography-lineHeight, 1);
+  letter-spacing: var(--tag-typography-letterSpacing, 0.01em);
+  text-transform: var(--tag-typography-textTransform, none);
+  white-space: nowrap;
+
+  transition: var(--tag-transition-properties, background-color, border-color, color, transform, box-shadow)
+    var(--tag-transition-duration, 0.15s)
+    var(--tag-transition-easing, ease-in-out);
+
+  &--small {
+    height: var(--tag-size-small-height, 24px);
+    padding: var(--tag-size-small-padding, 2px 6px);
+    min-width: var(--tag-size-small-height, 24px);
+    gap: var(--tag-size-small-gap, 4px);
+    font-size: var(--tag-size-small-fontSize, 12px);
+  }
+
+  &--large {
+    height: var(--tag-size-large-height, 32px);
+    padding: var(--tag-size-large-padding, 6px 12px);
+    min-width: var(--tag-size-large-height, 32px);
+    gap: var(--tag-size-large-gap, 8px);
+    font-size: var(--tag-size-large-fontSize, 14px);
+  }
+
+  &--primary { background-color: var(--tag-color-background-primary, #d9292b); border-color: var(--tag-color-border-primary, #d9292b); color: var(--tag-color-foreground-primary, #fff); }
+  &--secondary { background-color: var(--tag-color-background-secondary, #6b7280); border-color: var(--tag-color-border-secondary, #6b7280); color: var(--tag-color-foreground-secondary, #fff); }
+  &--success { background-color: var(--tag-color-background-success, #336006); border-color: var(--tag-color-border-success, #336006); color: var(--tag-color-foreground-success, #fff); }
+  &--warning { background-color: var(--tag-color-background-warning, #824500); border-color: var(--tag-color-border-warning, #824500); color: var(--tag-color-foreground-warning, #fff); }
+  &--danger { background-color: var(--tag-color-background-danger, #ae0001); border-color: var(--tag-color-border-danger, #ae0001); color: var(--tag-color-foreground-danger, #fff); }
+  &--info { background-color: var(--tag-color-background-info, #0369a1); border-color: var(--tag-color-border-info, #0369a1); color: var(--tag-color-foreground-info, #fff); }
+
+  &--rounded { border-radius: var(--tag-border-radius-rounded, 8px); }
+  &--pill { border-radius: var(--tag-border-radius-pill, 1920px); }
+  &--square { border-radius: var(--tag-border-radius-square, 4px); }
+
+  &--interactive { cursor: pointer; user-select: none; }
+  &--interactive:hover { transform: var(--tag-hover-transform, translateY(-1px)); box-shadow: var(--tag-hover-boxShadow, 0 2px 4px rgb(0 0 0 / 10%)); }
+  &--interactive:active { transform: var(--tag-active-transform, translateY(0)); }
+  &--selected { outline: 2px solid currentcolor; outline-offset: 1px; }
+}
+
+.tagContent { display: inline-block; }
+
+.tagIcon {
+  display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+  &--small { width: var(--tag-size-small-iconSize, 12px); height: var(--tag-size-small-iconSize, 12px); }
+  &--medium { width: var(--tag-size-medium-iconSize, 14px); height: var(--tag-size-medium-iconSize, 14px); }
+  &--large { width: var(--tag-size-large-iconSize, 16px); height: var(--tag-size-large-iconSize, 16px); }
+  svg { width: 100%; height: 100%; fill: currentcolor; }
+}
+
+.tagDismiss {
+  all: unset; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center;
+  width: 16px; height: 16px; margin-left: 2px; border-radius: 50%; cursor: pointer; color: currentcolor; opacity: .75;
+  transition: var(--tag-transition-properties, background-color, border-color, color, transform, box-shadow)
+    var(--tag-transition-duration, 0.15s)
+    var(--tag-transition-easing, ease-in-out);
+  &:hover { opacity: 1; background-color: rgb(255 255 255 / 20%); }
+  &:active { transform: scale(0.95); }
+}
+
+
