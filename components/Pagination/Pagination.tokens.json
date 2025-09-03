@@ -1,0 +1,101 @@
+{
+  "prefix": "pagination",
+  "tokens": {
+    "color": {
+      "background": {
+        "default": "transparent",
+        "hover": "{semantic.color.background.hover}",
+        "active": "{semantic.color.background.secondary}",
+        "disabled": "{semantic.color.background.disabled}"
+      },
+      "foreground": {
+        "default": "{semantic.color.foreground.secondary}",
+        "active": "{semantic.color.foreground.primary}",
+        "disabled": "{semantic.color.foreground.disabled}"
+      },
+      "border": {
+        "default": "{semantic.color.border.default}",
+        "hover": "{semantic.color.border.hover}",
+        "active": "{semantic.color.border.active}"
+      },
+      "focus": {
+        "ring": "{semantic.color.border.focus}"
+      }
+    },
+    "typography": {
+      "fontFamily": "{core.typography.fontFamily.sans}",
+      "fontWeight": {
+        "default": "{semantic.typography.fontWeight.medium}",
+        "active": "{semantic.typography.fontWeight.semibold}"
+      },
+      "lineHeight": "{semantic.typography.lineHeight.normal}"
+    },
+    "size": {
+      "small": {
+        "padding": "{core.size.01} {core.size.02}",
+        "fontSize": "{semantic.typography.body.04}",
+        "gap": "{core.size.01}",
+        "minWidth": "32px"
+      },
+      "medium": {
+        "padding": "{core.size.02} {core.size.03}",
+        "fontSize": "{semantic.typography.body.03}",
+        "gap": "{core.size.01}",
+        "minWidth": "40px"
+      },
+      "large": {
+        "padding": "{core.size.02} {core.size.04}",
+        "fontSize": "{semantic.typography.body.02}",
+        "gap": "{core.size.02}",
+        "minWidth": "48px"
+      }
+    },
+    "border": {
+      "radius": "{semantic.size.radius.01}",
+      "width": "1px"
+    },
+    "icon": {
+      "size": "16px"
+    },
+    "transition": {
+      "duration": "0.15s",
+      "easing": "ease-in-out",
+      "properties": "color, background-color, border-color"
+    }
+  },
+  "fallbacks": {
+    "pagination-color-background-default": "transparent",
+    "pagination-color-background-hover": "#f3f4f6",
+    "pagination-color-background-active": "#e5e7eb",
+    "pagination-color-background-disabled": "#f9fafb",
+    "pagination-color-foreground-default": "#374151",
+    "pagination-color-foreground-active": "#111827",
+    "pagination-color-foreground-disabled": "#9ca3af",
+    "pagination-color-border-default": "#e5e7eb",
+    "pagination-color-border-hover": "#d1d5db",
+    "pagination-color-border-active": "#9ca3af",
+    "pagination-color-focus-ring": "#2563eb",
+    "pagination-typography-fontFamily": "Inter, sans-serif",
+    "pagination-typography-fontWeight-default": "500",
+    "pagination-typography-fontWeight-active": "600",
+    "pagination-typography-lineHeight": "1.5",
+    "pagination-size-small-padding": "6px 10px",
+    "pagination-size-medium-padding": "8px 12px",
+    "pagination-size-large-padding": "10px 16px",
+    "pagination-size-small-fontSize": "14px",
+    "pagination-size-medium-fontSize": "16px",
+    "pagination-size-large-fontSize": "18px",
+    "pagination-size-small-gap": "4px",
+    "pagination-size-medium-gap": "6px",
+    "pagination-size-large-gap": "8px",
+    "pagination-size-small-minWidth": "32px",
+    "pagination-size-medium-minWidth": "40px",
+    "pagination-size-large-minWidth": "48px",
+    "pagination-border-radius": "6px",
+    "pagination-border-width": "1px",
+    "pagination-icon-size": "16px",
+    "pagination-transition-duration": "0.15s",
+    "pagination-transition-easing": "ease-in-out",
+    "pagination-transition-properties": "color, background-color, border-color"
+  }
+}

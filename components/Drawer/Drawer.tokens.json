@@ -1,0 +1,89 @@
+{
+  "prefix": "drawer",
+  "tokens": {
+    "color": {
+      "background": {
+        "default": "{semantic.color.background.primary}",
+        "overlay": "rgba(0, 0, 0, 0.5)"
+      },
+      "foreground": {
+        "default": "{semantic.color.foreground.primary}"
+      },
+      "border": {
+        "default": "{semantic.color.border.default}"
+      },
+      "shadow": "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+      "focus": {
+        "ring": "{semantic.color.border.focus}"
+      }
+    },
+    "typography": {
+      "fontFamily": "{core.typography.fontFamily.sans}",
+      "fontWeight": "{semantic.typography.fontWeight.semibold}",
+      "lineHeight": "{semantic.typography.lineHeight.normal}"
+    },
+    "size": {
+      "small": {
+        "width": "320px",
+        "height": "50vh",
+        "padding": "{core.size.04}",
+        "gap": "{core.size.03}"
+      },
+      "medium": {
+        "width": "480px",
+        "height": "70vh",
+        "padding": "{core.size.06}",
+        "gap": "{core.size.04}"
+      },
+      "large": {
+        "width": "640px",
+        "height": "90vh",
+        "padding": "{core.size.08}",
+        "gap": "{core.size.05}"
+      }
+    },
+    "border": {
+      "radius": "{semantic.size.radius.01}",
+      "width": "1px"
+    },
+    "zIndex": "1000",
+    "overlay": {
+      "opacity": "0.5"
+    },
+    "animation": {
+      "duration": "0.3s",
+      "easing": "ease-in-out",
+      "properties": "transform, opacity"
+    }
+  },
+  "fallbacks": {
+    "drawer-color-background-default": "#ffffff",
+    "drawer-color-background-overlay": "rgba(0, 0, 0, 0.5)",
+    "drawer-color-foreground-default": "#111827",
+    "drawer-color-border-default": "#e5e7eb",
+    "drawer-color-shadow": "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+    "drawer-color-focus-ring": "#2563eb",
+    "drawer-typography-fontFamily": "Inter, sans-serif",
+    "drawer-typography-fontWeight": "600",
+    "drawer-typography-lineHeight": "1.5",
+    "drawer-size-small-width": "320px",
+    "drawer-size-medium-width": "480px",
+    "drawer-size-large-width": "640px",
+    "drawer-size-small-height": "50vh",
+    "drawer-size-medium-height": "70vh",
+    "drawer-size-large-height": "90vh",
+    "drawer-size-small-padding": "16px",
+    "drawer-size-medium-padding": "24px",
+    "drawer-size-large-padding": "32px",
+    "drawer-size-small-gap": "12px",
+    "drawer-size-medium-gap": "16px",
+    "drawer-size-large-gap": "20px",
+    "drawer-border-radius": "8px",
+    "drawer-border-width": "1px",
+    "drawer-z-index": "1000",
+    "drawer-overlay-opacity": "0.5",
+    "drawer-animation-duration": "0.3s",
+    "drawer-animation-easing": "ease-in-out",
+    "drawer-animation-properties": "transform, opacity"
+  }
+}
