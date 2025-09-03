@@ -1,4 +1,10 @@
-export { default, CheckboxWrapper, CheckboxInput, CheckboxLabel, CheckboxMessage } from './Checkbox';
+export {
+  default,
+  CheckboxWrapper,
+  CheckboxInput,
+  CheckboxLabel,
+  CheckboxMessage,
+} from './Checkbox';
 export type {
   CheckboxProps,
   CheckboxTheme,

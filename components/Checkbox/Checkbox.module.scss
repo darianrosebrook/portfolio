@@ -15,11 +15,11 @@
 .checkbox {
   position: relative;
   display: inline-flex;
-  align-items: flex-start;
   gap: var(--checkbox-size-medium-gap, 8px);
-  cursor: pointer;
+  align-items: flex-start;
   font-family: var(--checkbox-typography-fontFamily, Inter, sans-serif);
   line-height: var(--checkbox-typography-lineHeight, 1.5);
+  cursor: pointer;
 
   // Size variants
   &--small {
@@ -42,7 +42,8 @@
   // Focus-within for wrapper when input is focused
   &:focus-within {
     .checkboxBox {
-      outline: var(--checkbox-focus-outlineWidth, 2px) solid var(--checkbox-focus-outlineColor, #d9292b);
+      outline: var(--checkbox-focus-outlineWidth, 2px) solid
+        var(--checkbox-focus-outlineColor, #d9292b);
       outline-offset: var(--checkbox-focus-outlineOffset, 2px);
     }
   }
@@ -51,17 +52,23 @@
 .checkboxBox {
   position: relative;
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
   flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
   width: var(--checkbox-size-medium-boxSize, 20px);
   height: var(--checkbox-size-medium-boxSize, 20px);
   background-color: var(--checkbox-color-box-unchecked, #fff);
-  border: var(--checkbox-border-width, 1px) solid var(--checkbox-color-border-unchecked, #cecece);
+  border: var(--checkbox-border-width, 1px) solid
+    var(--checkbox-color-border-unchecked, #cecece);
   border-radius: var(--checkbox-border-radius, 4px);
-  transition: var(--checkbox-transition-properties, background-color, border-color, transform) 
-              var(--checkbox-transition-duration, 0.2s) 
-              var(--checkbox-transition-easing, ease-in-out);
+  transition: var(
+      --checkbox-transition-properties,
+      background-color,
+      border-color,
+      transform
+    )
+    var(--checkbox-transition-duration, 0.2s)
+    var(--checkbox-transition-easing, ease-in-out);
 
   // Size variants
   .checkbox--small & {
@@ -135,8 +142,8 @@
   top: 50%;
   left: 50%;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100%;
   transform: translate(-50%, -50%);
@@ -144,12 +151,17 @@
 }
 
 .checkboxIcon {
-  color: var(--checkbox-color-checkmark-default, #fff);
   opacity: 0;
+  color: var(--checkbox-color-checkmark-default, #fff);
+  transition: var(
+      --checkbox-transition-properties,
+      background-color,
+      border-color,
+      transform
+    )
+    var(--checkbox-transition-duration, 0.2s)
+    var(--checkbox-transition-easing, ease-in-out);
   transform: scale(0.8);
-  transition: var(--checkbox-transition-properties, background-color, border-color, transform) 
-              var(--checkbox-transition-duration, 0.2s) 
-              var(--checkbox-transition-easing, ease-in-out);
 
   // Show icon when checked or indeterminate
   .checkbox.checked &,
@@ -206,13 +218,13 @@
 }
 
 .checkboxMessage {
-  font-family: var(--checkbox-typography-fontFamily, Inter, sans-serif);
   font-size: calc(var(--checkbox-size-medium-fontSize, 14px) * 0.875);
+  font-family: var(--checkbox-typography-fontFamily, Inter, sans-serif);
   line-height: var(--checkbox-typography-lineHeight, 1.5);
 
   &--helper {
-    color: var(--checkbox-color-label-default, #141414);
     opacity: 0.7;
+    color: var(--checkbox-color-label-default, #141414);
   }
 
   &--error {

@@ -1,6 +1,6 @@
 /**
  * Checkbox Component Types
- * 
+ *
  * Defines TypeScript interfaces for Checkbox component props and design tokens
  */
 
@@ -112,7 +112,10 @@ export interface CheckboxProps {
   /** Whether the checkbox is disabled */
   disabled?: boolean;
   /** Change handler */
-  onChange?: (checked: boolean, event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (
+    checked: boolean,
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => void;
   /** Label content */
   children?: React.ReactNode;
   /** Visual size variant */

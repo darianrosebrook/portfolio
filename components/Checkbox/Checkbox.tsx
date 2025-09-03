@@ -97,7 +97,10 @@ const CheckboxWrapper: React.FC<CheckboxWrapperProps> = ({
   const { cssProperties } = useCheckboxTokens(theme);
 
   return (
-    <div className={`${styles.checkboxWrapper} ${className}`} style={cssProperties}>
+    <div
+      className={`${styles.checkboxWrapper} ${className}`}
+      style={cssProperties}
+    >
       {children}
     </div>
   );
@@ -171,7 +174,8 @@ const CheckboxMessage: React.FC<CheckboxMessageProps> = ({
   children,
   className = '',
 }) => {
-  const messageClass = styles[`checkboxMessage--${type}`] || styles.checkboxMessage;
+  const messageClass =
+    styles[`checkboxMessage--${type}`] || styles.checkboxMessage;
 
   return (
     <div className={`${styles.checkboxMessage} ${messageClass} ${className}`}>
@@ -231,7 +235,7 @@ const IndeterminateIcon: React.FC<{ size?: string; className?: string }> = ({
 
 /**
  * Checkbox Component with Design Token Support
- * 
+ *
  * Features:
  * - Smart defaults with fallback values
  * - Bring-your-own-design-system (BYODS) support
@@ -298,16 +302,12 @@ const Checkbox: React.FC<CheckboxProps> = ({
     (val) => typeof val === 'boolean'
   ) as boolean;
 
-  const safeSize = safeTokenValue(
-    size,
-    'medium',
-    (val) => ['small', 'medium', 'large'].includes(val as string)
+  const safeSize = safeTokenValue(size, 'medium', (val) =>
+    ['small', 'medium', 'large'].includes(val as string)
   ) as string;
 
-  const safeVariant = safeTokenValue(
-    variant,
-    'default',
-    (val) => ['default', 'success', 'warning', 'danger'].includes(val as string)
+  const safeVariant = safeTokenValue(variant, 'default', (val) =>
+    ['default', 'success', 'warning', 'danger'].includes(val as string)
   ) as string;
 
   // Handle change events
@@ -332,7 +332,8 @@ const Checkbox: React.FC<CheckboxProps> = ({
     .join(' ');
 
   // Determine which message to show (priority: error > warning > success > helper)
-  const messageToShow = errorMessage || warningMessage || successMessage || helperText;
+  const messageToShow =
+    errorMessage || warningMessage || successMessage || helperText;
   const messageType = errorMessage
     ? 'error'
     : warningMessage
@@ -342,7 +343,8 @@ const Checkbox: React.FC<CheckboxProps> = ({
         : 'helper';
 
   // Determine icon size based on checkbox size
-  const iconSize = safeSize === 'small' ? '10' : safeSize === 'large' ? '14' : '12';
+  const iconSize =
+    safeSize === 'small' ? '10' : safeSize === 'large' ? '14' : '12';
 
   return (
     <CheckboxWrapper theme={theme} className={containerClassName}>
@@ -358,11 +360,16 @@ const Checkbox: React.FC<CheckboxProps> = ({
             value={value}
             required={required}
             aria-label={ariaLabel}
-            aria-describedby={messageToShow ? `${checkboxId}-message` : ariaDescribedBy}
+            aria-describedby={
+              messageToShow ? `${checkboxId}-message` : ariaDescribedBy
+            }
           />
           <div className={styles.checkboxIndicator}>
             {safeIndeterminate ? (
-              <IndeterminateIcon size={iconSize} className={styles.checkboxIcon} />
+              <IndeterminateIcon
+                size={iconSize}
+                className={styles.checkboxIcon}
+              />
             ) : safeChecked ? (
               <CheckmarkIcon size={iconSize} className={styles.checkboxIcon} />
             ) : null}

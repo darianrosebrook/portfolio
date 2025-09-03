@@ -1,0 +1,117 @@
+{
+  "prefix": "textarea",
+  "tokens": {
+    "color": {
+      "background": {
+        "default": "{semantic.color.background.primary}",
+        "filled": "{semantic.color.background.secondary}",
+        "disabled": "{semantic.color.background.disabled}",
+        "readonly": "{semantic.color.background.readOnly}"
+      },
+      "foreground": {
+        "default": "{semantic.color.foreground.primary}",
+        "placeholder": "{semantic.color.foreground.placeholder}",
+        "disabled": "{semantic.color.foreground.disabled}"
+      },
+      "border": {
+        "default": "{semantic.color.border.primary}",
+        "hover": "{semantic.color.border.bold}",
+        "focus": "{semantic.color.border.accent}",
+        "error": "{semantic.color.border.danger}",
+        "success": "{semantic.color.border.success}",
+        "warning": "{semantic.color.border.warning}",
+        "disabled": "{semantic.color.border.disabled}"
+      }
+    },
+    "size": {
+      "small": {
+        "minHeight": "80px",
+        "padding": "{core.size.02} {core.size.03}",
+        "fontSize": "{semantic.typography.body.04}"
+      },
+      "medium": {
+        "minHeight": "120px",
+        "padding": "{core.size.03} {core.size.04}",
+        "fontSize": "{semantic.typography.body.02}"
+      },
+      "large": {
+        "minHeight": "160px",
+        "padding": "{core.size.04} {core.size.05}",
+        "fontSize": "{semantic.typography.body.01}"
+      }
+    },
+    "border": {
+      "width": "{semantic.size.border.default}",
+      "radius": "{semantic.size.radius.02}"
+    },
+    "outline": {
+      "width": "{semantic.focus.ring.border.width}",
+      "offset": "{semantic.focus.ringOffset}"
+    },
+    "typography": {
+      "fontFamily": "{core.typography.fontFamily.sans}",
+      "fontWeight": "{semantic.typography.fontWeight.regular}",
+      "lineHeight": "{semantic.typography.lineHeight.body}",
+      "letterSpacing": "{semantic.typography.letterSpacing.normal}"
+    },
+    "transition": {
+      "duration": "0.2s",
+      "easing": "ease-in-out",
+      "properties": "border-color, box-shadow, background-color"
+    },
+    "focus": {
+      "outlineColor": "{semantic.color.foreground.accent}",
+      "boxShadow": "0 0 0 3px rgba(217, 41, 43, 0.1)"
+    },
+    "spacing": {
+      "gap": "{core.size.02}"
+    },
+    "resize": {
+      "handle": {
+        "color": "{semantic.color.border.primary}",
+        "size": "16px"
+      }
+    }
+  },
+  "fallbacks": {
+    "textarea-color-background-default": "#ffffff",
+    "textarea-color-background-filled": "#f5f5f5",
+    "textarea-color-background-disabled": "#f0f0f0",
+    "textarea-color-background-readonly": "#fafafa",
+    "textarea-color-foreground-default": "#141414",
+    "textarea-color-foreground-placeholder": "#8f8f8f",
+    "textarea-color-foreground-disabled": "#aeaeae",
+    "textarea-color-border-default": "#cecece",
+    "textarea-color-border-hover": "#aeaeae",
+    "textarea-color-border-focus": "#d9292b",
+    "textarea-color-border-error": "#ae0001",
+    "textarea-color-border-success": "#336006",
+    "textarea-color-border-warning": "#824500",
+    "textarea-color-border-disabled": "#e0e0e0",
+    "textarea-size-small-minHeight": "80px",
+    "textarea-size-small-padding": "8px 12px",
+    "textarea-size-small-fontSize": "14px",
+    "textarea-size-medium-minHeight": "120px",
+    "textarea-size-medium-padding": "12px 16px",
+    "textarea-size-medium-fontSize": "16px",
+    "textarea-size-large-minHeight": "160px",
+    "textarea-size-large-padding": "16px 20px",
+    "textarea-size-large-fontSize": "18px",
+    "textarea-border-width": "1px",
+    "textarea-border-radius": "8px",
+    "textarea-outline-width": "2px",
+    "textarea-outline-offset": "2px",
+    "textarea-typography-fontFamily": "Inter, sans-serif",
+    "textarea-typography-fontWeight": "400",
+    "textarea-typography-lineHeight": "1.5",
+    "textarea-typography-letterSpacing": "0",
+    "textarea-transition-duration": "0.2s",
+    "textarea-transition-easing": "ease-in-out",
+    "textarea-transition-properties": "border-color, box-shadow, background-color",
+    "textarea-focus-outlineColor": "#d9292b",
+    "textarea-focus-boxShadow": "0 0 0 3px rgba(217, 41, 43, 0.1)",
+    "textarea-spacing-gap": "8px",
+    "textarea-resize-handle-color": "#cecece",
+    "textarea-resize-handle-size": "16px"
+  }
+}

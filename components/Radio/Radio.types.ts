@@ -1,6 +1,6 @@
 /**
  * Radio Component Types
- * 
+ *
  * Defines TypeScript interfaces for Radio component props and design tokens
  */
 
@@ -123,7 +123,10 @@ export interface RadioProps {
   /** Whether the radio is disabled */
   disabled?: boolean;
   /** Change handler */
-  onChange?: (value: string, event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (
+    value: string,
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => void;
   /** Label content */
   children?: React.ReactNode;
   /** Radio value */
@@ -169,7 +172,10 @@ export interface RadioGroupProps {
   /** Default selected value */
   defaultValue?: string;
   /** Change handler */
-  onChange?: (value: string, event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (
+    value: string,
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => void;
   /** Radio options */
   options: RadioOption[];
   /** Group name */

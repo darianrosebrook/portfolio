@@ -1,0 +1,303 @@
+/**
+ * TextArea Component Styles
+ *
+ * Uses CSS custom properties from design tokens for flexible theming
+ * Supports BYODS (Bring Your Own Design System) patterns
+ */
+
+.textareaWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--textarea-spacing-gap, 8px);
+  width: 100%;
+}
+
+.textareaLabel {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  color: var(--textarea-color-foreground-default, #141414);
+  font-weight: var(--textarea-typography-fontWeight, 400);
+  font-size: var(--textarea-size-medium-fontSize, 16px);
+  font-family: var(--textarea-typography-fontFamily, Inter, sans-serif);
+  line-height: var(--textarea-typography-lineHeight, 1.5);
+}
+
+.required {
+  color: var(--textarea-color-border-error, #ae0001);
+  font-weight: 600;
+}
+
+.textareaContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.textarea {
+  // Reset
+  all: unset;
+
+  // Layout
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+
+  // Sizing (default to medium)
+  min-height: var(--textarea-size-medium-minHeight, 120px);
+  padding: var(--textarea-size-medium-padding, 12px 16px);
+
+  // Visual styling
+  background-color: var(--textarea-color-background-default, #fff);
+  border: var(--textarea-border-width, 1px) solid
+    var(--textarea-color-border-default, #cecece);
+  border-radius: var(--textarea-border-radius, 8px);
+  color: var(--textarea-color-foreground-default, #141414);
+  font-weight: var(--textarea-typography-fontWeight, 400);
+  font-size: var(--textarea-size-medium-fontSize, 16px);
+
+  // Typography
+  font-family: var(--textarea-typography-fontFamily, Inter, sans-serif);
+  line-height: var(--textarea-typography-lineHeight, 1.5);
+  letter-spacing: var(--textarea-typography-letterSpacing, 0);
+
+  // Interaction
+  transition: var(
+      --textarea-transition-properties,
+      border-color,
+      box-shadow,
+      background-color
+    )
+    var(--textarea-transition-duration, 0.2s)
+    var(--textarea-transition-easing, ease-in-out);
+
+  // Resize behavior (default to vertical)
+  resize: vertical;
+  cursor: text;
+
+  // Placeholder styling
+  &::placeholder {
+    opacity: 1;
+    color: var(--textarea-color-foreground-placeholder, #8f8f8f);
+  }
+
+  // Focus state
+  &:focus {
+    border-color: var(--textarea-color-border-focus, #d9292b);
+    box-shadow: var(--textarea-focus-boxShadow, 0 0 0 3px rgb(217 41 43 / 10%));
+    outline: none;
+  }
+
+  // Hover state (only when not disabled or readonly)
+  &:hover:not(:disabled, :read-only) {
+    border-color: var(--textarea-color-border-hover, #aeaeae);
+  }
+
+  // Disabled state
+  &:disabled,
+  &--disabled {
+    background-color: var(--textarea-color-background-disabled, #f0f0f0);
+    border-color: var(--textarea-color-border-disabled, #e0e0e0);
+    color: var(--textarea-color-foreground-disabled, #aeaeae);
+    resize: none;
+    cursor: not-allowed;
+
+    &::placeholder {
+      color: var(--textarea-color-foreground-disabled, #aeaeae);
+    }
+  }
+
+  // Readonly state
+  &:read-only,
+  &--readonly {
+    background-color: var(--textarea-color-background-readonly, #fafafa);
+    resize: none;
+    cursor: default;
+  }
+
+  // Size variants
+  &--small {
+    min-height: var(--textarea-size-small-minHeight, 80px);
+    padding: var(--textarea-size-small-padding, 8px 12px);
+    font-size: var(--textarea-size-small-fontSize, 14px);
+  }
+
+  &--medium {
+    min-height: var(--textarea-size-medium-minHeight, 120px);
+    padding: var(--textarea-size-medium-padding, 12px 16px);
+    font-size: var(--textarea-size-medium-fontSize, 16px);
+  }
+
+  &--large {
+    min-height: var(--textarea-size-large-minHeight, 160px);
+    padding: var(--textarea-size-large-padding, 16px 20px);
+    font-size: var(--textarea-size-large-fontSize, 18px);
+  }
+
+  // Visual variants
+  &--filled {
+    background-color: var(--textarea-color-background-filled, #f5f5f5);
+    border-color: transparent;
+
+    &:focus {
+      background-color: var(--textarea-color-background-default, #fff);
+      border-color: var(--textarea-color-border-focus, #d9292b);
+    }
+  }
+
+  &--outlined {
+    background-color: transparent;
+    border-width: calc(var(--textarea-border-width, 1px) * 2);
+  }
+
+  // State variants
+  &--error {
+    border-color: var(--textarea-color-border-error, #ae0001);
+
+    &:focus {
+      border-color: var(--textarea-color-border-error, #ae0001);
+      box-shadow: 0 0 0 3px rgb(174 0 1 / 10%);
+    }
+  }
+
+  &--success {
+    border-color: var(--textarea-color-border-success, #336006);
+
+    &:focus {
+      border-color: var(--textarea-color-border-success, #336006);
+      box-shadow: 0 0 0 3px rgb(51 96 6 / 10%);
+    }
+  }
+
+  &--warning {
+    border-color: var(--textarea-color-border-warning, #824500);
+
+    &:focus {
+      border-color: var(--textarea-color-border-warning, #824500);
+      box-shadow: 0 0 0 3px rgb(130 69 0 / 10%);
+    }
+  }
+
+  // Resize variants
+  &--resize-none {
+    resize: none;
+  }
+
+  &--resize-vertical {
+    resize: vertical;
+  }
+
+  &--resize-horizontal {
+    resize: horizontal;
+  }
+
+  &--resize-both {
+    resize: both;
+  }
+
+  // Auto-resize variant
+  &--autoResize {
+    overflow: hidden;
+    resize: none;
+  }
+}
+
+.textareaMessage {
+  font-size: calc(var(--textarea-size-medium-fontSize, 16px) * 0.875);
+  font-family: var(--textarea-typography-fontFamily, Inter, sans-serif);
+  line-height: var(--textarea-typography-lineHeight, 1.5);
+
+  &--helper {
+    color: var(--textarea-color-foreground-placeholder, #8f8f8f);
+  }
+
+  &--error {
+    color: var(--textarea-color-border-error, #ae0001);
+  }
+
+  &--success {
+    color: var(--textarea-color-border-success, #336006);
+  }
+
+  &--warning {
+    color: var(--textarea-color-border-warning, #824500);
+  }
+}
+
+.textareaCharacterCount {
+  color: var(--textarea-color-foreground-placeholder, #8f8f8f);
+  font-size: calc(var(--textarea-size-medium-fontSize, 16px) * 0.75);
+  font-family: var(--textarea-typography-fontFamily, Inter, sans-serif);
+  text-align: right;
+
+  &.overLimit {
+    color: var(--textarea-color-border-error, #ae0001);
+    font-weight: 600;
+  }
+}
+
+.characterCountOverlay {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  z-index: 1;
+  padding: 4px 8px;
+  background-color: var(--textarea-color-background-default, #fff);
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 10%);
+  pointer-events: none;
+}
+
+// TextArea group styling for multiple textareas
+.textareaWrapper + .textareaWrapper {
+  margin-top: var(--textarea-spacing-gap, 8px);
+}
+
+// Focus-within for wrapper when textarea is focused
+.textareaWrapper:focus-within {
+  .textareaLabel {
+    color: var(--textarea-color-border-focus, #d9292b);
+  }
+}
+
+// Custom scrollbar styling for webkit browsers
+.textarea {
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--textarea-resize-handle-color, #cecece);
+    border-radius: 4px;
+
+    &:hover {
+      background-color: var(--textarea-color-border-hover, #aeaeae);
+    }
+  }
+}
+
+// Custom resize handle styling
+.textarea {
+  &::-webkit-resizer {
+    background-color: var(--textarea-resize-handle-color, #cecece);
+    border-radius: 2px;
+  }
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+  .textarea {
+    border-width: 2px;
+  }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+  .textarea {
+    transition: none;
+  }
+}

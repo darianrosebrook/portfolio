@@ -15,11 +15,11 @@
 .radio {
   position: relative;
   display: inline-flex;
-  align-items: flex-start;
   gap: var(--radio-size-medium-gap, 8px);
-  cursor: pointer;
+  align-items: flex-start;
   font-family: var(--radio-typography-fontFamily, Inter, sans-serif);
   line-height: var(--radio-typography-lineHeight, 1.5);
+  cursor: pointer;
 
   // Size variants
   &--small {
@@ -42,7 +42,8 @@
   // Focus-within for wrapper when input is focused
   &:focus-within {
     .radioCircle {
-      outline: var(--radio-focus-outlineWidth, 2px) solid var(--radio-focus-outlineColor, #d9292b);
+      outline: var(--radio-focus-outlineWidth, 2px) solid
+        var(--radio-focus-outlineColor, #d9292b);
       outline-offset: var(--radio-focus-outlineOffset, 2px);
     }
   }
@@ -51,17 +52,23 @@
 .radioCircle {
   position: relative;
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
   flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
   width: var(--radio-size-medium-circleSize, 20px);
   height: var(--radio-size-medium-circleSize, 20px);
   background-color: var(--radio-color-circle-unchecked, #fff);
-  border: var(--radio-border-width, 1px) solid var(--radio-color-border-unchecked, #cecece);
+  border: var(--radio-border-width, 1px) solid
+    var(--radio-color-border-unchecked, #cecece);
   border-radius: var(--radio-border-radius, 50%);
-  transition: var(--radio-transition-properties, background-color, border-color, transform) 
-              var(--radio-transition-duration, 0.2s) 
-              var(--radio-transition-easing, ease-in-out);
+  transition: var(
+      --radio-transition-properties,
+      background-color,
+      border-color,
+      transform
+    )
+    var(--radio-transition-duration, 0.2s)
+    var(--radio-transition-easing, ease-in-out);
 
   // Size variants
   .radio--small & {
@@ -132,10 +139,15 @@
   height: var(--radio-size-medium-dotSize, 8px);
   background-color: var(--radio-color-dot-default, #d9292b);
   border-radius: var(--radio-dot-borderRadius, 50%);
+  transition: var(
+      --radio-transition-properties,
+      background-color,
+      border-color,
+      transform
+    )
+    var(--radio-transition-duration, 0.2s)
+    var(--radio-transition-easing, ease-in-out);
   transform: translate(-50%, -50%) scale(0);
-  transition: var(--radio-transition-properties, background-color, border-color, transform) 
-              var(--radio-transition-duration, 0.2s) 
-              var(--radio-transition-easing, ease-in-out);
   pointer-events: none;
 
   // Show dot when checked
@@ -186,13 +198,13 @@
 }
 
 .radioMessage {
-  font-family: var(--radio-typography-fontFamily, Inter, sans-serif);
   font-size: calc(var(--radio-size-medium-fontSize, 14px) * 0.875);
+  font-family: var(--radio-typography-fontFamily, Inter, sans-serif);
   line-height: var(--radio-typography-lineHeight, 1.5);
 
   &--helper {
-    color: var(--radio-color-label-default, #141414);
     opacity: 0.7;
+    color: var(--radio-color-label-default, #141414);
   }
 
   &--error {
@@ -216,8 +228,7 @@
 
   &--horizontal {
     .radioGroupOptions {
-      flex-direction: row;
-      flex-wrap: wrap;
+      flex-flow: row wrap;
       gap: calc(var(--radio-size-medium-gap, 8px) * 2);
     }
   }
@@ -237,8 +248,8 @@
 
 .radioGroupLabel {
   display: flex;
-  align-items: center;
   gap: 4px;
+  align-items: center;
   color: var(--radio-color-label-default, #141414);
   font-weight: var(--radio-typography-fontWeight, 400);
   font-size: var(--radio-size-medium-fontSize, 14px);
@@ -267,7 +278,7 @@
   }
 
   .radioDot {
-    border: 1px solid currentColor;
+    border: 1px solid currentcolor;
   }
 }
 

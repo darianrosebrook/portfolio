@@ -98,7 +98,10 @@ const RadioWrapper: React.FC<RadioWrapperProps> = ({
   const { cssProperties } = useRadioTokens(theme);
 
   return (
-    <div className={`${styles.radioWrapper} ${className}`} style={cssProperties}>
+    <div
+      className={`${styles.radioWrapper} ${className}`}
+      style={cssProperties}
+    >
       {children}
     </div>
   );
@@ -170,7 +173,7 @@ const RadioMessage: React.FC<RadioMessageProps> = ({
 
 /**
  * Radio Component with Design Token Support
- * 
+ *
  * Features:
  * - Smart defaults with fallback values
  * - Bring-your-own-design-system (BYODS) support
@@ -229,16 +232,12 @@ const Radio: React.FC<RadioProps> = ({
     (val) => typeof val === 'boolean'
   ) as boolean;
 
-  const safeSize = safeTokenValue(
-    size,
-    'medium',
-    (val) => ['small', 'medium', 'large'].includes(val as string)
+  const safeSize = safeTokenValue(size, 'medium', (val) =>
+    ['small', 'medium', 'large'].includes(val as string)
   ) as string;
 
-  const safeVariant = safeTokenValue(
-    variant,
-    'default',
-    (val) => ['default', 'success', 'warning', 'danger'].includes(val as string)
+  const safeVariant = safeTokenValue(variant, 'default', (val) =>
+    ['default', 'success', 'warning', 'danger'].includes(val as string)
   ) as string;
 
   // Handle change events
@@ -262,7 +261,8 @@ const Radio: React.FC<RadioProps> = ({
     .join(' ');
 
   // Determine which message to show (priority: error > warning > success > helper)
-  const messageToShow = errorMessage || warningMessage || successMessage || helperText;
+  const messageToShow =
+    errorMessage || warningMessage || successMessage || helperText;
   const messageType = errorMessage
     ? 'error'
     : warningMessage
@@ -284,7 +284,9 @@ const Radio: React.FC<RadioProps> = ({
             value={value}
             required={required}
             aria-label={ariaLabel}
-            aria-describedby={messageToShow ? `${radioId}-message` : ariaDescribedBy}
+            aria-describedby={
+              messageToShow ? `${radioId}-message` : ariaDescribedBy
+            }
           />
           <div className={styles.radioDot} />
         </div>
@@ -307,7 +309,7 @@ const Radio: React.FC<RadioProps> = ({
 
 /**
  * RadioGroup Component for managing multiple radio buttons
- * 
+ *
  * Features:
  * - Controlled and uncontrolled modes
  * - Automatic name generation
@@ -356,7 +358,10 @@ const RadioGroup: React.FC<RadioGroupProps> = ({
   }, [state, errorMessage, successMessage, warningMessage]);
 
   // Handle change events
-  const handleChange = (optionValue: string, event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    optionValue: string,
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     if (!disabled) {
       if (!isControlled) {
         setInternalValue(optionValue);
@@ -379,7 +384,8 @@ const RadioGroup: React.FC<RadioGroupProps> = ({
     .join(' ');
 
   // Determine which message to show (priority: error > warning > success > helper)
-  const messageToShow = errorMessage || warningMessage || successMessage || helperText;
+  const messageToShow =
+    errorMessage || warningMessage || successMessage || helperText;
   const messageType = errorMessage
     ? 'error'
     : warningMessage
@@ -394,7 +400,11 @@ const RadioGroup: React.FC<RadioGroupProps> = ({
         {label && (
           <div className={styles.radioGroupLabel} id={`${groupId}-label`}>
             {label}
-            {required && <span className={styles.required} aria-label="required">*</span>}
+            {required && (
+              <span className={styles.required} aria-label="required">
+                *
+              </span>
+            )}
           </div>
         )}
 
