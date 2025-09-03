@@ -8,19 +8,19 @@
 .badge {
   // Reset
   all: unset;
-  box-sizing: border-box;
 
   // Layout
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--badge-size-medium-gap, 4px);
   vertical-align: middle;
+  gap: var(--badge-size-medium-gap, 4px);
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  min-width: var(--badge-size-medium-height, 24px);
 
   // Sizing (default to medium)
   height: var(--badge-size-medium-height, 24px);
   padding: var(--badge-size-medium-padding, 4px 8px);
-  min-width: var(--badge-size-medium-height, 24px);
 
   // Visual styling
   background-color: var(--badge-color-background-default, #f5f5f5);
@@ -28,43 +28,50 @@
     var(--badge-color-border-default, #e5e7eb);
   border-radius: var(--badge-border-radius-rounded, 6px);
   color: var(--badge-color-foreground-default, #374151);
+  font-weight: var(--badge-typography-fontWeight, 600);
+  font-size: var(--badge-size-medium-fontSize, 12px);
 
   // Typography
   font-family: var(--badge-typography-fontFamily, Inter, sans-serif);
-  font-weight: var(--badge-typography-fontWeight, 600);
-  font-size: var(--badge-size-medium-fontSize, 12px);
   line-height: var(--badge-typography-lineHeight, 1);
   letter-spacing: var(--badge-typography-letterSpacing, 0.025em);
   text-transform: var(--badge-typography-textTransform, none);
   white-space: nowrap;
 
   // Animation
-  transition: var(--badge-transition-properties, background-color, border-color, color, transform, box-shadow) 
-              var(--badge-transition-duration, 0.15s) 
-              var(--badge-transition-easing, ease-in-out);
+  transition: var(
+      --badge-transition-properties,
+      background-color,
+      border-color,
+      color,
+      transform,
+      box-shadow
+    )
+    var(--badge-transition-duration, 0.15s)
+    var(--badge-transition-easing, ease-in-out);
 
   // Size variants
   &--small {
+    gap: var(--badge-size-small-gap, 4px);
+    min-width: var(--badge-size-small-height, 20px);
     height: var(--badge-size-small-height, 20px);
     padding: var(--badge-size-small-padding, 2px 6px);
-    min-width: var(--badge-size-small-height, 20px);
-    gap: var(--badge-size-small-gap, 4px);
     font-size: var(--badge-size-small-fontSize, 11px);
   }
 
   &--medium {
+    gap: var(--badge-size-medium-gap, 4px);
+    min-width: var(--badge-size-medium-height, 24px);
     height: var(--badge-size-medium-height, 24px);
     padding: var(--badge-size-medium-padding, 4px 8px);
-    min-width: var(--badge-size-medium-height, 24px);
-    gap: var(--badge-size-medium-gap, 4px);
     font-size: var(--badge-size-medium-fontSize, 12px);
   }
 
   &--large {
+    gap: var(--badge-size-large-gap, 6px);
+    min-width: var(--badge-size-large-height, 28px);
     height: var(--badge-size-large-height, 28px);
     padding: var(--badge-size-large-padding, 6px 12px);
-    min-width: var(--badge-size-large-height, 28px);
-    gap: var(--badge-size-large-gap, 6px);
     font-size: var(--badge-size-large-fontSize, 14px);
   }
 
@@ -124,8 +131,8 @@
     user-select: none;
 
     &:hover {
+      box-shadow: var(--badge-hover-boxShadow, 0 2px 4px rgb(0 0 0 / 10%));
       transform: var(--badge-hover-transform, translateY(-1px));
-      box-shadow: var(--badge-hover-boxShadow, 0 2px 4px rgba(0, 0, 0, 0.1));
     }
 
     &:active {
@@ -141,8 +148,8 @@
   // Dot variant (minimal indicator)
   &--dot {
     width: var(--badge-dot-size, 8px);
-    height: var(--badge-dot-size, 8px);
     min-width: var(--badge-dot-size, 8px);
+    height: var(--badge-dot-size, 8px);
     padding: 0;
     border-radius: 50%;
   }
@@ -155,9 +162,9 @@
 
 .badgeIcon {
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
   flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
 
   // Size variants
   &--small {
@@ -179,42 +186,49 @@
   svg {
     width: 100%;
     height: 100%;
-    fill: currentColor;
+    fill: currentcolor;
   }
 }
 
 .badgeDismiss {
   // Reset
   all: unset;
-  box-sizing: border-box;
 
   // Layout
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
   flex-shrink: 0;
-  margin-left: 2px;
-  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
 
   // Sizing
   width: 16px;
   height: 16px;
-  border-radius: 50%;
+  margin-left: 2px;
 
   // Visual styling
   background-color: transparent;
-  color: currentColor;
+  border-radius: 50%;
   opacity: 0.7;
+  color: currentcolor;
 
   // Animation
-  transition: var(--badge-transition-properties, background-color, border-color, color, transform, box-shadow) 
-              var(--badge-transition-duration, 0.15s) 
-              var(--badge-transition-easing, ease-in-out);
+  transition: var(
+      --badge-transition-properties,
+      background-color,
+      border-color,
+      color,
+      transform,
+      box-shadow
+    )
+    var(--badge-transition-duration, 0.15s)
+    var(--badge-transition-easing, ease-in-out);
+  cursor: pointer;
 
   // Hover state
   &:hover {
+    background-color: rgb(255 255 255 / 20%);
     opacity: 1;
-    background-color: rgba(255, 255, 255, 0.2);
   }
 
   &:active {
@@ -222,7 +236,7 @@
   }
 
   &:focus {
-    outline: 1px solid currentColor;
+    outline: 1px solid currentcolor;
     outline-offset: 1px;
   }
 
@@ -253,7 +267,7 @@
   svg {
     width: 12px;
     height: 12px;
-    stroke: currentColor;
+    stroke: currentcolor;
   }
 }
 
@@ -261,10 +275,10 @@
   display: inline-block;
   width: var(--badge-dot-size, 8px);
   height: var(--badge-dot-size, 8px);
-  border-radius: 50%;
   background-color: var(--badge-color-background-primary, #d9292b);
   border: var(--badge-border-width, 1px) solid
     var(--badge-color-border-primary, #d9292b);
+  border-radius: 50%;
 
   // Variant colors
   &--default {
@@ -316,25 +330,25 @@
 
 // Badge positioning for overlays
 .badge {
-  &[data-position="top-right"] {
+  &[data-position='top-right'] {
     position: absolute;
     top: var(--badge-dot-offset, -2px);
     right: var(--badge-dot-offset, -2px);
   }
 
-  &[data-position="top-left"] {
+  &[data-position='top-left'] {
     position: absolute;
     top: var(--badge-dot-offset, -2px);
     left: var(--badge-dot-offset, -2px);
   }
 
-  &[data-position="bottom-right"] {
+  &[data-position='bottom-right'] {
     position: absolute;
-    bottom: var(--badge-dot-offset, -2px);
     right: var(--badge-dot-offset, -2px);
+    bottom: var(--badge-dot-offset, -2px);
   }
 
-  &[data-position="bottom-left"] {
+  &[data-position='bottom-left'] {
     position: absolute;
     bottom: var(--badge-dot-offset, -2px);
     left: var(--badge-dot-offset, -2px);

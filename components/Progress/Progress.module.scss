@@ -14,25 +14,25 @@
 
 .progressHeader {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
   gap: var(--progress-spacing-gap, 8px);
+  justify-content: space-between;
+  align-items: center;
 }
 
 .progressLabel {
   color: var(--progress-color-text-default, #374151);
-  font-family: var(--progress-typography-fontFamily, Inter, sans-serif);
   font-weight: var(--progress-typography-fontWeight, 500);
   font-size: var(--progress-size-linear-medium-fontSize, 14px);
+  font-family: var(--progress-typography-fontFamily, Inter, sans-serif);
   line-height: var(--progress-typography-lineHeight, 1.2);
   letter-spacing: var(--progress-typography-letterSpacing, 0);
 }
 
 .progressValue {
   color: var(--progress-color-text-muted, #6b7280);
-  font-family: var(--progress-typography-fontFamily, Inter, sans-serif);
   font-weight: var(--progress-typography-fontWeight, 500);
   font-size: var(--progress-size-linear-medium-fontSize, 14px);
+  font-family: var(--progress-typography-fontFamily, Inter, sans-serif);
   line-height: var(--progress-typography-lineHeight, 1.2);
   letter-spacing: var(--progress-typography-letterSpacing, 0);
   white-space: nowrap;
@@ -41,9 +41,9 @@
 // Linear Progress Styles
 .linearProgress {
   position: relative;
+  overflow: hidden;
   width: 100%;
   height: var(--progress-size-linear-medium-height, 8px);
-  overflow: hidden;
 
   // Size variants
   &--small {
@@ -79,8 +79,7 @@
       width: 40% !important;
       animation: linearProgressIndeterminate
         var(--progress-indeterminate-animation-duration, 1.5s)
-        var(--progress-indeterminate-animation-easing, ease-in-out)
-        infinite;
+        var(--progress-indeterminate-animation-easing, ease-in-out) infinite;
     }
   }
 
@@ -98,11 +97,11 @@
     .linearProgressFill {
       background-image: linear-gradient(
         45deg,
-        rgba(255, 255, 255, 0.15) 25%,
+        rgb(255 255 255 / 15%) 25%,
         transparent 25%,
         transparent 50%,
-        rgba(255, 255, 255, 0.15) 50%,
-        rgba(255, 255, 255, 0.15) 75%,
+        rgb(255 255 255 / 15%) 50%,
+        rgb(255 255 255 / 15%) 75%,
         transparent 75%,
         transparent
       );
@@ -120,11 +119,11 @@
 
 .linearProgressTrack {
   position: relative;
+  overflow: hidden;
   width: 100%;
   height: 100%;
   background-color: var(--progress-color-track-default, #e5e7eb);
   border-radius: var(--progress-border-radius, 1920px);
-  overflow: hidden;
 
   // Variant colors
   .linearProgress--success & {
@@ -174,16 +173,14 @@
 .circularProgress {
   position: relative;
   display: inline-flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 
   // Indeterminate animation
   &--indeterminate {
     .circularProgressFill {
       animation: circularProgressIndeterminate
-        var(--progress-indeterminate-animation-duration, 1.5s)
-        linear
-        infinite;
+        var(--progress-indeterminate-animation-duration, 1.5s) linear infinite;
     }
   }
 
@@ -249,14 +246,14 @@
   top: 50%;
   left: 50%;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   transform: translate(-50%, -50%);
 
   .progressValue {
-    font-size: var(--progress-size-circular-medium-fontSize, 12px);
-    font-weight: 600;
     color: var(--progress-color-text-default, #374151);
+    font-weight: 600;
+    font-size: var(--progress-size-circular-medium-fontSize, 12px);
   }
 
   // Size variants
@@ -274,6 +271,7 @@
   0% {
     left: -40%;
   }
+
   100% {
     left: 100%;
   }
@@ -283,6 +281,7 @@
   0% {
     background-position: 0 0;
   }
+
   100% {
     background-position: 16px 0;
   }
@@ -293,10 +292,12 @@
     stroke-dasharray: 1px, 200px;
     stroke-dashoffset: 0;
   }
+
   50% {
     stroke-dasharray: 100px, 200px;
     stroke-dashoffset: -15px;
   }
+
   100% {
     stroke-dasharray: 100px, 200px;
     stroke-dashoffset: -125px;
@@ -312,8 +313,8 @@
 @media (prefers-contrast: high) {
   .linearProgressTrack,
   .circularProgressTrack {
-    stroke-width: 2px;
     border-width: 2px;
+    stroke-width: 2px;
   }
 
   .linearProgressFill,

@@ -1,6 +1,6 @@
 /**
  * Progress Component Types
- * 
+ *
  * Defines TypeScript interfaces for Progress component props and design tokens
  */
 
@@ -15,7 +15,12 @@ export type ProgressSize = 'small' | 'medium' | 'large';
 /**
  * Progress visual variants
  */
-export type ProgressVariant = 'default' | 'success' | 'warning' | 'danger' | 'info';
+export type ProgressVariant =
+  | 'default'
+  | 'success'
+  | 'warning'
+  | 'danger'
+  | 'info';
 
 /**
  * Progress shape variants

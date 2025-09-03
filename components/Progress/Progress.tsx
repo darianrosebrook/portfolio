@@ -113,11 +113,7 @@ const ProgressWrapper: React.FC<ProgressWrapperProps> = ({
 const ProgressLabel: React.FC<ProgressLabelProps> = ({
   children,
   className = '',
-}) => (
-  <div className={`${styles.progressLabel} ${className}`}>
-    {children}
-  </div>
-);
+}) => <div className={`${styles.progressLabel} ${className}`}>{children}</div>;
 
 /**
  * Progress Value Display Component
@@ -133,9 +129,7 @@ const ProgressValue: React.FC<ProgressValueProps> = ({
     : `${Math.round((value / max) * 100)}%`;
 
   return (
-    <div className={`${styles.progressValue} ${className}`}>
-      {displayValue}
-    </div>
+    <div className={`${styles.progressValue} ${className}`}>{displayValue}</div>
   );
 };
 
@@ -177,20 +171,18 @@ const LinearProgress: React.FC<LinearProgressProps> = ({
     (val) => typeof val === 'number' && val > 0
   ) as number;
 
-  const safeSize = safeTokenValue(
-    size,
-    'medium',
-    (val) => ['small', 'medium', 'large'].includes(val as string)
+  const safeSize = safeTokenValue(size, 'medium', (val) =>
+    ['small', 'medium', 'large'].includes(val as string)
   ) as string;
 
-  const safeVariant = safeTokenValue(
-    variant,
-    'default',
-    (val) => ['default', 'success', 'warning', 'danger', 'info'].includes(val as string)
+  const safeVariant = safeTokenValue(variant, 'default', (val) =>
+    ['default', 'success', 'warning', 'danger', 'info'].includes(val as string)
   ) as string;
 
   // Calculate percentage
-  const percentage = indeterminate ? 0 : Math.min((safeValue / safeMax) * 100, 100);
+  const percentage = indeterminate
+    ? 0
+    : Math.min((safeValue / safeMax) * 100, 100);
 
   // Generate CSS classes
   const progressClasses = [
@@ -269,7 +261,12 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
   'data-testid': testId,
 }) => {
   // Load and resolve design tokens
-  const { cssProperties, tokens } = useProgressTokens(theme, size, variant, 'circular');
+  const { cssProperties, tokens } = useProgressTokens(
+    theme,
+    size,
+    variant,
+    'circular'
+  );
 
   // Safe validation for props
   const safeValue = safeTokenValue(
@@ -284,28 +281,30 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
     (val) => typeof val === 'number' && val > 0
   ) as number;
 
-  const safeSize = safeTokenValue(
-    size,
-    'medium',
-    (val) => ['small', 'medium', 'large'].includes(val as string)
+  const safeSize = safeTokenValue(size, 'medium', (val) =>
+    ['small', 'medium', 'large'].includes(val as string)
   ) as string;
 
-  const safeVariant = safeTokenValue(
-    variant,
-    'default',
-    (val) => ['default', 'success', 'warning', 'danger', 'info'].includes(val as string)
+  const safeVariant = safeTokenValue(variant, 'default', (val) =>
+    ['default', 'success', 'warning', 'danger', 'info'].includes(val as string)
   ) as string;
 
   // Get size-specific values from tokens
-  const diameter = tokens[`progress-size-circular-${safeSize}-diameter`] as number || 48;
-  const defaultStrokeWidth = tokens[`progress-size-circular-${safeSize}-strokeWidth`] as number || 4;
+  const diameter =
+    (tokens[`progress-size-circular-${safeSize}-diameter`] as number) || 48;
+  const defaultStrokeWidth =
+    (tokens[`progress-size-circular-${safeSize}-strokeWidth`] as number) || 4;
   const actualStrokeWidth = strokeWidth || defaultStrokeWidth;
 
   // Calculate SVG properties
   const radius = (diameter - actualStrokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
-  const percentage = indeterminate ? 0 : Math.min((safeValue / safeMax) * 100, 100);
-  const strokeDashoffset = indeterminate ? 0 : circumference - (percentage / 100) * circumference;
+  const percentage = indeterminate
+    ? 0
+    : Math.min((safeValue / safeMax) * 100, 100);
+  const strokeDashoffset = indeterminate
+    ? 0
+    : circumference - (percentage / 100) * circumference;
 
   // Generate CSS classes
   const progressClasses = [
@@ -371,15 +370,14 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
 
         {showCenter && (
           <div className={styles.circularProgressCenter}>
-            {centerContent || (
-              showValue && !indeterminate && (
+            {centerContent ||
+              (showValue && !indeterminate && (
                 <ProgressValue
                   value={safeValue}
                   max={safeMax}
                   formatValue={formatValue}
                 />
-              )
-            )}
+              ))}
           </div>
         )}
       </div>
@@ -390,10 +388,7 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
 /**
  * Main Progress Component with automatic shape detection
  */
-const Progress: React.FC<ProgressProps> = ({
-  shape = 'linear',
-  ...props
-}) => {
+const Progress: React.FC<ProgressProps> = ({ shape = 'linear', ...props }) => {
   if (shape === 'circular') {
     return <CircularProgress {...(props as CircularProgressProps)} />;
   }
@@ -402,6 +397,17 @@ const Progress: React.FC<ProgressProps> = ({
 };
 
 // Export sub-components for advanced usage
-export { ProgressWrapper, ProgressLabel, ProgressValue, LinearProgress, CircularProgress };
+export {
+  ProgressWrapper,
+  ProgressLabel,
+  ProgressValue,
+  LinearProgress,
+  CircularProgress,
+};
 export default Progress;
-export type { ProgressProps, LinearProgressProps, CircularProgressProps, ProgressTheme } from './Progress.types';
+export type {
+  ProgressProps,
+  LinearProgressProps,
+  CircularProgressProps,
+  ProgressTheme,
+} from './Progress.types';

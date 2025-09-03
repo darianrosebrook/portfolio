@@ -1,6 +1,6 @@
 /**
  * Badge Component Types
- * 
+ *
  * Defines TypeScript interfaces for Badge component props and design tokens
  */
 
@@ -15,7 +15,14 @@ export type BadgeSize = 'small' | 'medium' | 'large';
 /**
  * Badge visual variants
  */
-export type BadgeVariant = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'info';
+export type BadgeVariant =
+  | 'default'
+  | 'primary'
+  | 'secondary'
+  | 'success'
+  | 'warning'
+  | 'danger'
+  | 'info';
 
 /**
  * Badge shape variants
@@ -234,7 +241,8 @@ export const DEFAULT_BADGE_TOKENS: BadgeTokens = {
   // Animation tokens
   'transition-duration': '0.15s',
   'transition-easing': 'ease-in-out',
-  'transition-properties': 'background-color, border-color, color, transform, box-shadow',
+  'transition-properties':
+    'background-color, border-color, color, transform, box-shadow',
 
   // Interactive tokens
   'hover-transform': 'translateY(-1px)',

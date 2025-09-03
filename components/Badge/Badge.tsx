@@ -174,7 +174,7 @@ const BadgeDismiss: React.FC<BadgeDismissProps> = ({
 
 /**
  * Badge Component with Design Token Support
- * 
+ *
  * Features:
  * - Smart defaults with fallback values
  * - Bring-your-own-design-system (BYODS) support
@@ -208,22 +208,24 @@ const Badge: React.FC<BadgeProps> = ({
   const { cssProperties } = useBadgeTokens(theme, size, variant, shape);
 
   // Safe validation for props
-  const safeSize = safeTokenValue(
-    size,
-    'medium',
-    (val) => ['small', 'medium', 'large'].includes(val as string)
+  const safeSize = safeTokenValue(size, 'medium', (val) =>
+    ['small', 'medium', 'large'].includes(val as string)
   ) as string;
 
-  const safeVariant = safeTokenValue(
-    variant,
-    'default',
-    (val) => ['default', 'primary', 'secondary', 'success', 'warning', 'danger', 'info'].includes(val as string)
+  const safeVariant = safeTokenValue(variant, 'default', (val) =>
+    [
+      'default',
+      'primary',
+      'secondary',
+      'success',
+      'warning',
+      'danger',
+      'info',
+    ].includes(val as string)
   ) as string;
 
-  const safeShape = safeTokenValue(
-    shape,
-    'rounded',
-    (val) => ['rounded', 'pill', 'square'].includes(val as string)
+  const safeShape = safeTokenValue(shape, 'rounded', (val) =>
+    ['rounded', 'pill', 'square'].includes(val as string)
   ) as string;
 
   // Format numeric content with max limit
@@ -295,9 +297,7 @@ const Badge: React.FC<BadgeProps> = ({
       )}
 
       {children && (
-        <span className={styles.badgeContent}>
-          {formatContent(children)}
-        </span>
+        <span className={styles.badgeContent}>{formatContent(children)}</span>
       )}
 
       {icon && iconPosition === 'end' && (
