@@ -1,0 +1,113 @@
+{
+  "prefix": "status",
+  "tokens": {
+    "color": {
+      "background": {
+        "success": "{semantic.color.background.successSubtle}",
+        "error": "{semantic.color.background.dangerSubtle}",
+        "warning": "{semantic.color.background.warningSubtle}",
+        "info": "{semantic.color.background.infoSubtle}",
+        "neutral": "{semantic.color.background.secondary}"
+      },
+      "foreground": {
+        "success": "{semantic.color.foreground.success}",
+        "error": "{semantic.color.foreground.danger}",
+        "warning": "{semantic.color.foreground.warning}",
+        "info": "{semantic.color.foreground.info}",
+        "neutral": "{semantic.color.foreground.secondary}"
+      },
+      "border": {
+        "success": "{semantic.color.border.success}",
+        "error": "{semantic.color.border.danger}",
+        "warning": "{semantic.color.border.warning}",
+        "info": "{semantic.color.border.info}",
+        "neutral": "{semantic.color.border.primary}"
+      },
+      "icon": {
+        "success": "{semantic.color.foreground.success}",
+        "error": "{semantic.color.foreground.danger}",
+        "warning": "{semantic.color.foreground.warning}",
+        "info": "{semantic.color.foreground.info}",
+        "neutral": "{semantic.color.foreground.accent}"
+      }
+    },
+    "size": {
+      "small": {
+        "padding": "{core.size.01} {core.size.02}",
+        "gap": "{core.size.01}",
+        "fontSize": "{semantic.typography.caption.03}",
+        "iconSize": "{core.size.03}"
+      },
+      "medium": {
+        "padding": "{core.size.02} {core.size.03}",
+        "gap": "{core.size.02}",
+        "fontSize": "{semantic.typography.body.04}",
+        "iconSize": "{core.size.04}"
+      },
+      "large": {
+        "padding": "{core.size.03} {core.size.04}",
+        "gap": "{core.size.02}",
+        "fontSize": "{semantic.typography.body.03}",
+        "iconSize": "{core.size.04}"
+      }
+    },
+    "border": {
+      "width": "{semantic.size.border.default}",
+      "radius": "{semantic.size.radius.full}"
+    },
+    "typography": {
+      "fontFamily": "{core.typography.fontFamily.sans}",
+      "fontWeight": "{semantic.typography.fontWeight.medium}",
+      "lineHeight": "{semantic.typography.lineHeight.collapse}",
+      "letterSpacing": "{semantic.typography.letterSpacing.normal}"
+    },
+    "transition": {
+      "duration": "0.2s",
+      "easing": "ease-in-out",
+      "properties": "background-color, border-color, color, transform"
+    }
+  },
+  "fallbacks": {
+    "status-color-background-success": "#e4f2e0",
+    "status-color-background-error": "#fceaea",
+    "status-color-background-warning": "#ffedcc",
+    "status-color-background-info": "#e0f2fe",
+    "status-color-background-neutral": "#f5f5f5",
+    "status-color-foreground-success": "#336006",
+    "status-color-foreground-error": "#ae0001",
+    "status-color-foreground-warning": "#824500",
+    "status-color-foreground-info": "#0369a1",
+    "status-color-foreground-neutral": "#555555",
+    "status-color-border-success": "#336006",
+    "status-color-border-error": "#ae0001",
+    "status-color-border-warning": "#824500",
+    "status-color-border-info": "#0369a1",
+    "status-color-border-neutral": "#aeaeae",
+    "status-color-icon-success": "#336006",
+    "status-color-icon-error": "#ae0001",
+    "status-color-icon-warning": "#824500",
+    "status-color-icon-info": "#0369a1",
+    "status-color-icon-neutral": "#555555",
+    "status-size-small-padding": "4px 8px",
+    "status-size-small-gap": "4px",
+    "status-size-small-fontSize": "12px",
+    "status-size-small-iconSize": "12px",
+    "status-size-medium-padding": "8px 12px",
+    "status-size-medium-gap": "6px",
+    "status-size-medium-fontSize": "14px",
+    "status-size-medium-iconSize": "14px",
+    "status-size-large-padding": "12px 16px",
+    "status-size-large-gap": "8px",
+    "status-size-large-fontSize": "16px",
+    "status-size-large-iconSize": "16px",
+    "status-border-width": "1px",
+    "status-border-radius": "1920px",
+    "status-typography-fontFamily": "Inter, sans-serif",
+    "status-typography-fontWeight": "500",
+    "status-typography-lineHeight": "1.2",
+    "status-typography-letterSpacing": "0",
+    "status-transition-duration": "0.2s",
+    "status-transition-easing": "ease-in-out",
+    "status-transition-properties": "background-color, border-color, color, transform"
+  }
+}

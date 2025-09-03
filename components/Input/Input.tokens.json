@@ -1,0 +1,109 @@
+{
+  "prefix": "input",
+  "tokens": {
+    "color": {
+      "background": {
+        "default": "{semantic.color.background.primary}",
+        "filled": "{semantic.color.background.secondary}",
+        "disabled": "{semantic.color.background.disabled}",
+        "readonly": "{semantic.color.background.readOnly}"
+      },
+      "foreground": {
+        "default": "{semantic.color.foreground.primary}",
+        "placeholder": "{semantic.color.foreground.placeholder}",
+        "disabled": "{semantic.color.foreground.disabled}"
+      },
+      "border": {
+        "default": "{semantic.color.border.primary}",
+        "hover": "{semantic.color.border.bold}",
+        "focus": "{semantic.color.border.accent}",
+        "error": "{semantic.color.border.danger}",
+        "success": "{semantic.color.border.success}",
+        "warning": "{semantic.color.border.warning}",
+        "disabled": "{semantic.color.border.disabled}"
+      }
+    },
+    "size": {
+      "small": {
+        "height": "{semantic.size.tapTarget.small}",
+        "padding": "{core.size.02} {core.size.03}",
+        "fontSize": "{semantic.typography.body.04}"
+      },
+      "medium": {
+        "height": "{semantic.size.tapTarget.medium}",
+        "padding": "{core.size.03} {core.size.04}",
+        "fontSize": "{semantic.typography.body.02}"
+      },
+      "large": {
+        "height": "{semantic.size.tapTarget.large}",
+        "padding": "{core.size.04} {core.size.05}",
+        "fontSize": "{semantic.typography.body.01}"
+      }
+    },
+    "border": {
+      "width": "{semantic.size.border.default}",
+      "radius": "{semantic.size.radius.02}"
+    },
+    "outline": {
+      "width": "{semantic.focus.ring.border.width}",
+      "offset": "{semantic.focus.ringOffset}"
+    },
+    "typography": {
+      "fontFamily": "{core.typography.fontFamily.sans}",
+      "fontWeight": "{semantic.typography.fontWeight.regular}",
+      "lineHeight": "{semantic.typography.lineHeight.body}",
+      "letterSpacing": "{semantic.typography.letterSpacing.normal}"
+    },
+    "transition": {
+      "duration": "0.2s",
+      "easing": "ease-in-out",
+      "properties": "border-color, box-shadow, background-color"
+    },
+    "focus": {
+      "outlineColor": "{semantic.color.foreground.accent}",
+      "boxShadow": "0 0 0 3px rgba(217, 41, 43, 0.1)"
+    },
+    "spacing": {
+      "gap": "{core.size.02}"
+    }
+  },
+  "fallbacks": {
+    "input-color-background-default": "#ffffff",
+    "input-color-background-filled": "#f5f5f5",
+    "input-color-background-disabled": "#f0f0f0",
+    "input-color-background-readonly": "#fafafa",
+    "input-color-foreground-default": "#141414",
+    "input-color-foreground-placeholder": "#8f8f8f",
+    "input-color-foreground-disabled": "#aeaeae",
+    "input-color-border-default": "#cecece",
+    "input-color-border-hover": "#aeaeae",
+    "input-color-border-focus": "#d9292b",
+    "input-color-border-error": "#ae0001",
+    "input-color-border-success": "#336006",
+    "input-color-border-warning": "#824500",
+    "input-color-border-disabled": "#e0e0e0",
+    "input-size-small-height": "32px",
+    "input-size-small-padding": "8px 12px",
+    "input-size-small-fontSize": "14px",
+    "input-size-medium-height": "40px",
+    "input-size-medium-padding": "12px 16px",
+    "input-size-medium-fontSize": "16px",
+    "input-size-large-height": "48px",
+    "input-size-large-padding": "16px 20px",
+    "input-size-large-fontSize": "18px",
+    "input-border-width": "1px",
+    "input-border-radius": "8px",
+    "input-outline-width": "2px",
+    "input-outline-offset": "2px",
+    "input-typography-fontFamily": "Inter, sans-serif",
+    "input-typography-fontWeight": "400",
+    "input-typography-lineHeight": "1.5",
+    "input-typography-letterSpacing": "0",
+    "input-transition-duration": "0.2s",
+    "input-transition-easing": "ease-in-out",
+    "input-transition-properties": "border-color, box-shadow, background-color",
+    "input-focus-outlineColor": "#d9292b",
+    "input-focus-boxShadow": "0 0 0 3px rgba(217, 41, 43, 0.1)",
+    "input-spacing-gap": "8px"
+  }
+}

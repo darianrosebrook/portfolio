@@ -1,17 +1,159 @@
+/**
+ * Status Component Styles
+ *
+ * Uses CSS custom properties from design tokens for flexible theming
+ * Supports BYODS (Bring Your Own Design System) patterns
+ */
+
 .status {
-  display: inline-grid;
-  grid-template-columns: 1fr auto;
-  gap: 0.5rem;
-  justify-content: center;
+  display: inline-flex;
   align-items: center;
-  padding: 0.5rem 1rem;
-  background: var(--color-background-primary);
-  border: var(--color-border-bold) solid 2px;
-  border-radius: var(--radius-full);
-  color: var(--color-foreground-primary);
-  fill: var(--color-foreground-accent);
+  justify-content: center;
+  gap: var(--status-size-medium-gap, 6px);
+  padding: var(--status-size-medium-padding, 8px 12px);
+  background-color: var(--status-color-background-neutral, #f5f5f5);
+  border: var(--status-border-width, 1px) solid var(--status-color-border-neutral, #aeaeae);
+  border-radius: var(--status-border-radius, 1920px);
+  color: var(--status-color-foreground-neutral, #555555);
+  font-family: var(--status-typography-fontFamily, Inter, sans-serif);
+  font-weight: var(--status-typography-fontWeight, 500);
+  font-size: var(--status-size-medium-fontSize, 14px);
+  line-height: var(--status-typography-lineHeight, 1.2);
+  letter-spacing: var(--status-typography-letterSpacing, 0);
+  transition: var(--status-transition-properties, background-color, border-color, color, transform) 
+              var(--status-transition-duration, 0.2s) 
+              var(--status-transition-easing, ease-in-out);
+  white-space: nowrap;
+
+  // Icon styling
+  svg {
+    width: var(--status-size-medium-iconSize, 14px);
+    height: var(--status-size-medium-iconSize, 14px);
+    flex-shrink: 0;
+    color: var(--status-color-icon-neutral, #555555);
+  }
+
+  // Size variants
+  &--small {
+    gap: var(--status-size-small-gap, 4px);
+    padding: var(--status-size-small-padding, 4px 8px);
+    font-size: var(--status-size-small-fontSize, 12px);
+
+    svg {
+      width: var(--status-size-small-iconSize, 12px);
+      height: var(--status-size-small-iconSize, 12px);
+    }
+  }
+
+  &--medium {
+    gap: var(--status-size-medium-gap, 6px);
+    padding: var(--status-size-medium-padding, 8px 12px);
+    font-size: var(--status-size-medium-fontSize, 14px);
+
+    svg {
+      width: var(--status-size-medium-iconSize, 14px);
+      height: var(--status-size-medium-iconSize, 14px);
+    }
+  }
+
+  &--large {
+    gap: var(--status-size-large-gap, 8px);
+    padding: var(--status-size-large-padding, 12px 16px);
+    font-size: var(--status-size-large-fontSize, 16px);
+
+    svg {
+      width: var(--status-size-large-iconSize, 16px);
+      height: var(--status-size-large-iconSize, 16px);
+    }
+  }
+
+  // Status type variants
+  &--success {
+    background-color: var(--status-color-background-success, #e4f2e0);
+    border-color: var(--status-color-border-success, #336006);
+    color: var(--status-color-foreground-success, #336006);
+
+    svg {
+      color: var(--status-color-icon-success, #336006);
+    }
+  }
+
+  &--error {
+    background-color: var(--status-color-background-error, #fceaea);
+    border-color: var(--status-color-border-error, #ae0001);
+    color: var(--status-color-foreground-error, #ae0001);
+
+    svg {
+      color: var(--status-color-icon-error, #ae0001);
+    }
+  }
+
+  &--warning {
+    background-color: var(--status-color-background-warning, #ffedcc);
+    border-color: var(--status-color-border-warning, #824500);
+    color: var(--status-color-foreground-warning, #824500);
+
+    svg {
+      color: var(--status-color-icon-warning, #824500);
+    }
+  }
+
+  &--info {
+    background-color: var(--status-color-background-info, #e0f2fe);
+    border-color: var(--status-color-border-info, #0369a1);
+    color: var(--status-color-foreground-info, #0369a1);
+
+    svg {
+      color: var(--status-color-icon-info, #0369a1);
+    }
+  }
+
+  &--neutral {
+    background-color: var(--status-color-background-neutral, #f5f5f5);
+    border-color: var(--status-color-border-neutral, #aeaeae);
+    color: var(--status-color-foreground-neutral, #555555);
+
+    svg {
+      color: var(--status-color-icon-neutral, #555555);
+    }
+  }
+
+  // Visual variants
+  &--outlined {
+    background-color: transparent;
+    border-width: calc(var(--status-border-width, 1px) * 2);
+  }
+
+  &--subtle {
+    border-color: transparent;
+  }
+
+  // Interactive state
+  &--interactive {
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+
+    &:focus {
+      outline: 2px solid var(--status-color-border-info, #0369a1);
+      outline-offset: 2px;
+    }
+  }
 }
 
-.status svg {
-  fill: var(--color-foreground-accent);
+.statusText {
+  display: inline-block;
+  margin: 0;
+}
+
+// Status group styling for multiple statuses
+.status + .status {
+  margin-left: 8px;
 }
