@@ -28,7 +28,7 @@ import Status from '@/components/Status';
 import styles from './page.module.css';
 import Avatar from '@/components/Avatar';
 import Button from '@/components/Button';
-import LogoMaruqee from '@/components/LogoMarquee';
+import LogoMaruqee from '@/modules/LogoMarquee';
 import Image from 'next/image';
 import BlueprintsWrapper from './BlueprintsWrapper';
 

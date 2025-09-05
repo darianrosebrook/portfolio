@@ -1,7 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { InteractiveErrorBoundary } from '@/components/ErrorBoundary';
+import { InteractiveErrorBoundary } from '@/modules/ErrorBoundary';
 
 // Dynamically import FontInspector for better performance
 const FontInspector = dynamic(
