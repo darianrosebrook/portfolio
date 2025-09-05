@@ -9,6 +9,10 @@ import { Table } from '@tiptap/extension-table';
 import TableRow from '@tiptap/extension-table-row';
 import TableHeader from '@tiptap/extension-table-header';
 import TableCell from '@tiptap/extension-table-cell';
+import { DetailsExtension } from './Extensions/Details/DetailsExtension';
+import { TableOfContentsExtension } from './Extensions/TableOfContents/TableOfContentsExtension';
+import { UniqueIdExtension } from './Extensions/UniqueId/UniqueIdExtension';
+import { DragHandleExtension } from './Extensions/DragHandle/DragHandleExtension';
 
 // import SlashCommand from './Extensions/SlashCommand';
 // import CodeBlockComponent from './Extensions/CodeBlockExtended/CodeBlockComponent';
@@ -51,6 +55,44 @@ export const createExtensions = (_articleId?: string) => {
         }
         return 'Start writing or type "/" for commands...';
       },
+    }),
+    // Details extension for collapsible content sections
+    DetailsExtension.configure({
+      HTMLAttributes: {
+        class: 'details-block',
+      },
+    }),
+    // Table of Contents extension for auto-generating TOC
+    TableOfContentsExtension.configure({
+      HTMLAttributes: {
+        class: 'table-of-contents-block',
+      },
+      maxDepth: 3,
+      showNumbers: false,
+    }),
+    // Unique ID extension for adding IDs to headings
+    UniqueIdExtension.configure({
+      types: ['heading'],
+      generateId: (node) => {
+        const text = node.textContent || '';
+        return text
+          .toLowerCase()
+          .replace(/[^a-z0-9\s-]/g, '')
+          .replace(/\s+/g, '-')
+          .replace(/-+/g, '-')
+          .trim();
+      },
+    }),
+    // Drag Handle extension for better content reordering
+    DragHandleExtension.configure({
+      draggableTypes: [
+        'paragraph',
+        'heading',
+        'blockquote',
+        'details',
+        'tableOfContents',
+      ],
+      showDragHandles: true,
     }),
     // TODO: Re-enable extended features after fixing TypeScript issues
     // CodeBlockComponent,
