@@ -42,7 +42,7 @@ const codeBlock: React.FC<CodeBlockProps> = ({
         ))}
     </select>
     <pre>
-      <NodeViewContent as="code" />
+      <NodeViewContent />
     </pre>
   </NodeViewWrapper>
 );

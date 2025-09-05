@@ -20,7 +20,7 @@ const page = ({ children }: pageProps) => {
         <div className="grid">
           {/* card */}
           <div>
-            <Container>
+            <Container index={0}>
               <Icon status="info" />
               <Title>Alert Notice</Title>
               <BodyContent>
