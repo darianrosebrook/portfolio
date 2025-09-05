@@ -1,5 +1,1 @@
-export { default } from '@/middleware';
-
-
-
-
+export { middleware } from '@/middleware';
