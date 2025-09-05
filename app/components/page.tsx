@@ -1,0 +1,37 @@
+import { Container, Title, BodyContent, Icon } from '@/components/AlertNotice';
+
+interface pageProps {
+  children: React.ReactNode;
+}
+
+const page = ({ children }: pageProps) => {
+  return (
+    <>
+      <section className="content">
+        <h2>Components</h2>
+        <p>
+          This is a visual collection of all the components in our design
+          system, as a test for our design system congruency and consistency.
+        </p>
+      </section>
+      <section className="content">
+        <h2>Component Library</h2>
+        {/* 3x3 grid of components */}
+        <div className="grid">
+          {/* card */}
+          <div>
+            <Container>
+              <Icon status="info" />
+              <Title>Alert Notice</Title>
+              <BodyContent>
+                This is a test of the alert notice component.
+              </BodyContent>
+            </Container>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+};
+
+export default page;

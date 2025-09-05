@@ -645,7 +645,11 @@
           "$type": "color",
           "$value": "{core.color.blue.600}",
           "$extensions": {
-            "design.paths.dark": "{core.color.blue.600}"
+            "design.paths.dark": "{core.color.blue.600}",
+            "design.paths.brand1.light": "{core.color.yellow.600}",
+            "design.paths.brand1.dark": "{core.color.yellow.300}",
+            "design.paths.brand2.light": "{core.color.orange.600}",
+            "design.paths.brand2.dark": "{core.color.orange.300}"
           }
         },
         "disabled": {

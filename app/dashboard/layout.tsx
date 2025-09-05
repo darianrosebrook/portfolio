@@ -1,80 +1,35 @@
-import { redirect } from 'next/navigation';
-import styles from './page.module.scss';
-import { headers } from 'next/headers';
-
-import { createClient } from '@/utils/supabase/server';
-
-import { byPrefixAndName } from '@awesome.me/kit-0ba7f5fefb/icons';
 import Link from 'next/link';
-import Icon from '@/components/Icon';
+import styles from './page.module.scss';
 
-export default async function PrivateRoute({
+export default function DashboardLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
-  const supabase = await createClient();
-  const { data, error } = await supabase.auth.getUser();
-  if (error || !data?.user) {
-    redirect('/');
-  }
-
-  const dashboard = byPrefixAndName['far']['grid-2'];
-  const articles = byPrefixAndName['far']['newspaper'];
-  const caseStudies = byPrefixAndName['far']['flask'];
-  const account = byPrefixAndName['far']['id-card'];
-  const settings = byPrefixAndName['far']['sliders-h'];
+}) {
   const tabs = [
-    { name: 'Dashboard', url: '/dashboard', icon: dashboard, active: false },
-    {
-      name: 'Articles',
-      url: '/dashboard/articles',
-      icon: articles,
-      active: false,
-    },
-    {
-      name: 'Case Studies',
-      url: '/dashboard/case-studies',
-      icon: caseStudies,
-      active: false,
-    },
-    {
-      name: 'Account',
-      url: '/dashboard/account',
-      icon: account,
-      active: false,
-    },
-    {
-      name: 'Settings',
-      url: '/dashboard/settings',
-      icon: settings,
-      active: false,
-    },
+    { href: '/dashboard/articles', label: 'Articles' },
+    { href: '/dashboard/case-studies', label: 'Case Studies' },
+    { href: '/dashboard/analytics', label: 'Analytics' },
+    { href: '/dashboard/performance', label: 'Performance' },
+    { href: '/dashboard/profile', label: 'Profile' },
   ];
-  const nextHeaders = await headers();
-  const url = nextHeaders.get('x-current-path');
-  const activeTab = tabs.find((tab) => tab.url === url);
-  if (activeTab) {
-    activeTab.active = true;
-  }
+
   return (
-    <section className={styles.dashboard__container}>
-      <aside className={styles.navigation}>
-        <ul className={styles.navigation__tabs}>
-          {tabs.map((tab) => (
-            <li
-              key={tab.name}
-              className={`${styles.tab} ${tab.active ? styles.active : ''}`}
-            >
-              <Link href={tab.url} passHref>
-                <Icon icon={tab.icon} />
-                <span>{tab.name}</span>
-              </Link>
+    <section className="content">
+      <nav className={styles.tabs}>
+        <ul>
+          {tabs.map((t) => (
+            <li key={t.href}>
+              <Link href={t.href}>{t.label}</Link>
             </li>
           ))}
         </ul>
-      </aside>
-      {children}
+      </nav>
+      <div className={styles.container}>{children}</div>
     </section>
   );
 }
+
+
+
+

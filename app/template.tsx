@@ -4,8 +4,8 @@ import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ReducedMotionProvider, InteractionProvider } from '@/context';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+import Navbar from '@/modules/Navbar';
+import Footer from '@/modules/Footer';
 import SlinkyCursor from '@/components/SlinkyCursor';
 import { User } from '@supabase/supabase-js';
 
