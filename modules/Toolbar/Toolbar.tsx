@@ -17,6 +17,8 @@ const faQuoteLeft = byPrefixAndName['far']['quote-left-alt'];
 const faMinus = byPrefixAndName['far']['minus'];
 const faUndo = byPrefixAndName['far']['undo'];
 const faRedo = byPrefixAndName['far']['redo'];
+const faChevronDown = byPrefixAndName['far']['chevron-down'];
+const faList = byPrefixAndName['far']['list'];
 
 type ToolbarProps = {
   editor: Editor | null;
@@ -144,6 +146,18 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
       </button>
       <button onClick={() => editor.chain().focus().setHorizontalRule().run()}>
         <Icon icon={faMinus} />
+      </button>
+      <button
+        onClick={() => editor.chain().focus().setDetails('Details').run()}
+        title="Insert Details Section"
+      >
+        <Icon icon={faChevronDown} />
+      </button>
+      <button
+        onClick={() => editor.chain().focus().setTableOfContents().run()}
+        title="Insert Table of Contents"
+      >
+        <Icon icon={faList} />
       </button>
       <button onClick={() => editor.chain().focus().undo().run()}>
         <Icon icon={faUndo} />
