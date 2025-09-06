@@ -1,6 +1,7 @@
 import { Extension } from '@tiptap/core';
 import { Plugin, PluginKey } from '@tiptap/pm/state';
-import { Decoration, DecorationSet } from '@tiptap/pm/view';
+import type { Node as ProseMirrorNode } from '@tiptap/pm/model';
+import type { JSONContent } from '@tiptap/core';
 
 export interface UniqueIdOptions {
   /**
@@ -10,7 +11,7 @@ export interface UniqueIdOptions {
   /**
    * Function to generate unique IDs
    */
-  generateId: (node: any) => string;
+  generateId: (node: { textContent?: string } | ProseMirrorNode) => string;
   /**
    * HTML attribute name for the ID
    */
@@ -83,17 +84,26 @@ export const UniqueIdExtension = Extension.create<UniqueIdOptions>({
             return null;
           }
 
-          // Find all nodes that need IDs
+          // Track counts for each generated id to avoid collisions
+          const idCounts: Record<string, number> = {};
+
+          // Find all nodes that need IDs in document order
           newState.doc.descendants((node, pos) => {
             if (this.options.types.includes(node.type.name)) {
-              const currentId = node.attrs[this.options.attributeName];
-              const generatedId = this.options.generateId(node);
+              const currentId = node.attrs[this.options.attributeName] as
+                | string
+                | null;
+              const baseId = this.options.generateId(node);
+              const nextCount = (idCounts[baseId] ?? 0) + 1;
+              idCounts[baseId] = nextCount;
+              const candidateId =
+                nextCount > 1 ? `${baseId}-${nextCount}` : baseId;
 
               // Only update if the ID is missing or different
-              if (!currentId || currentId !== generatedId) {
+              if (!currentId || currentId !== candidateId) {
                 tr.setNodeMarkup(pos, undefined, {
                   ...node.attrs,
-                  [this.options.attributeName]: generatedId,
+                  [this.options.attributeName]: candidateId,
                 });
                 modified = true;
               }
@@ -104,5 +114,90 @@ export const UniqueIdExtension = Extension.create<UniqueIdOptions>({
         },
       }),
     ];
+  },
+
+  onBeforeCreate() {
+    // Preprocess initial JSON content (if provided) to assign stable IDs
+    const editor = this.editor;
+    const content = editor?.options?.content;
+    if (!content || typeof content !== 'object') {
+      return;
+    }
+
+    const idCounts: Record<string, number> = {};
+
+    const extractText = (node: JSONContent): string => {
+      if (!node) return '';
+      if (node.type === 'text' && typeof node.text === 'string') {
+        return node.text;
+      }
+      const children = Array.isArray(node.content) ? node.content : [];
+      let combined = '';
+      for (const child of children) {
+        combined += extractText(child);
+      }
+      return combined;
+    };
+
+    const processNode = (node: JSONContent) => {
+      if (!node || typeof node !== 'object') return;
+
+      if (node.type && this.options.types.includes(node.type)) {
+        const textContent = extractText(node);
+        const baseId = this.options.generateId({
+          textContent: textContent ?? '',
+        });
+        const nextCount = (idCounts[baseId] ?? 0) + 1;
+        idCounts[baseId] = nextCount;
+        const candidateId = nextCount > 1 ? `${baseId}-${nextCount}` : baseId;
+
+        node.attrs = {
+          ...(node.attrs || {}),
+          [this.options.attributeName]:
+            node.attrs?.[this.options.attributeName] || candidateId,
+        };
+      }
+
+      if (Array.isArray(node.content)) {
+        for (const child of node.content) {
+          processNode(child);
+        }
+      }
+    };
+
+    processNode(content);
+    editor.options.content = content;
+  },
+
+  onCreate() {
+    const { state, view } = this.editor;
+    const tr = state.tr;
+    let modified = false;
+
+    const idCounts: Record<string, number> = {};
+
+    state.doc.descendants((node, pos) => {
+      if (this.options.types.includes(node.type.name)) {
+        const currentId = node.attrs[this.options.attributeName] as
+          | string
+          | null;
+        const baseId = this.options.generateId(node);
+        const nextCount = (idCounts[baseId] ?? 0) + 1;
+        idCounts[baseId] = nextCount;
+        const candidateId = nextCount > 1 ? `${baseId}-${nextCount}` : baseId;
+
+        if (!currentId || currentId !== candidateId) {
+          tr.setNodeMarkup(pos, undefined, {
+            ...node.attrs,
+            [this.options.attributeName]: candidateId,
+          });
+          modified = true;
+        }
+      }
+    });
+
+    if (modified) {
+      view.dispatch(tr);
+    }
   },
 });

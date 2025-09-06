@@ -8,6 +8,7 @@ import { generateHTML } from '@tiptap/html';
 import StarterKit from '@tiptap/starter-kit';
 import Image from '@tiptap/extension-image';
 import CharacterCount from '@tiptap/extension-character-count';
+import { VideoExtended } from '@/modules/Tiptap/Extensions/VideoExtended';
 import ToggleSwitch from '@/components/ToggleSwitch';
 
 const Tiptap = dynamic(
@@ -17,10 +18,6 @@ const Tiptap = dynamic(
 
 type Entity = 'articles' | 'case-studies';
 type RecordType = Article | CaseStudy;
-
-function isArticle(r: RecordType): r is Article {
-  return (r as Article).status !== undefined;
-}
 
 export default function ContentEditor({
   initial,
@@ -34,7 +31,7 @@ export default function ContentEditor({
   const [updatePublishDateOnPublish, setUpdatePublishDateOnPublish] =
     useState<boolean>(false);
   const [draftToggleChecked, setDraftToggleChecked] = useState<boolean>(
-    (initial.status as any) === 'draft'
+    initial.status === 'draft'
   );
 
   useEffect(() => {
@@ -46,7 +43,12 @@ export default function ContentEditor({
       type: 'doc',
       content: [],
     };
-    return generateHTML(doc, [CharacterCount, Image, StarterKit]);
+    return generateHTML(doc, [
+      CharacterCount,
+      Image,
+      VideoExtended,
+      StarterKit,
+    ]);
   }, [record.articleBody]);
 
   const save = async (payload: Partial<RecordType>) => {
@@ -88,13 +90,15 @@ export default function ContentEditor({
   }, [record, entity]);
 
   const deriveAndSave = async (next: RecordType) => {
-    const meta = extractMetadata((next.articleBody ?? { type: 'doc' }) as any);
+    const meta = extractMetadata(
+      (next.articleBody ?? { type: 'doc' }) as JSONContent
+    );
     const calculated: Partial<RecordType> = {
       ...next,
       headline: next.headline ?? meta.title,
       description: next.description ?? meta.description,
       image: next.image ?? meta.coverImage,
-      wordCount: meta.wordCount as any,
+      wordCount: meta.wordCount as number,
     };
     await save(calculated);
     setRecord(calculated as RecordType);
@@ -121,13 +125,13 @@ export default function ContentEditor({
 
   const handlePrimaryAction = async () => {
     const nowIso = new Date().toISOString();
-    if ((record.status as any) === 'published') {
+    if ((record.status as RecordType['status']) === 'published') {
       // Unpublish
       const next = {
         ...record,
-        status: 'draft' as any,
+        status: 'draft' as RecordType['status'],
         // Keep published_at to preserve first published; update only modified
-        modified_at: nowIso as any,
+        modified_at: nowIso as RecordType['modified_at'],
       } as RecordType;
       await deriveAndSave(next);
       setDraftToggleChecked(true);
@@ -138,8 +142,8 @@ export default function ContentEditor({
       // Save as draft
       const next = {
         ...record,
-        status: 'draft' as any,
-        modified_at: nowIso as any,
+        status: 'draft' as RecordType['status'],
+        modified_at: nowIso as RecordType['modified_at'],
       } as RecordType;
       await deriveAndSave(next);
       return;
@@ -148,18 +152,19 @@ export default function ContentEditor({
     // Publish
     const next = {
       ...record,
-      status: 'published' as any,
+      status: 'published' as RecordType['status'],
       published_at:
         updatePublishDateOnPublish || !record.published_at
-          ? (nowIso as any)
+          ? (nowIso as RecordType['published_at'])
           : record.published_at,
-      modified_at: nowIso as any,
+      modified_at: nowIso as RecordType['modified_at'],
     } as RecordType;
     await deriveAndSave(next);
   };
 
   const primaryLabel = useMemo(() => {
-    if ((record.status as any) === 'published') return 'Unpublish';
+    if ((record.status as RecordType['status']) === 'published')
+      return 'Unpublish';
     return draftToggleChecked ? 'Save' : 'Publish';
   }, [record.status, draftToggleChecked]);
 
@@ -170,8 +175,8 @@ export default function ContentEditor({
       <div>
         {!preview ? (
           <Tiptap
-            article={record as any}
-            handleUpdate={handleUpdateArticle as any}
+            article={record as RecordType}
+            handleUpdate={handleUpdateArticle as (article: RecordType) => void}
           />
         ) : (
           <div
@@ -197,63 +202,95 @@ export default function ContentEditor({
       >
         <h3 style={{ margin: 0 }}>Settings</h3>
         <div>
-          <label className="small">Draft</label>
+          <label className="small" htmlFor="draftToggle">
+            Draft
+          </label>
           <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-            <ToggleSwitch checked={draftToggleChecked} onChange={toggleDraft}>
+            <ToggleSwitch
+              checked={draftToggleChecked}
+              onChange={toggleDraft}
+              id="draftToggle"
+            >
               Draft Mode
             </ToggleSwitch>
             <small>
               Current:{' '}
-              {(record.status as any) === 'published' ? 'published' : 'draft'}
+              {(record.status as RecordType['status']) === 'published'
+                ? 'published'
+                : 'draft'}
             </small>
           </div>
         </div>
         <div>
-          <label className="small">Slug</label>
-          <input name="slug" value={record.slug} onChange={handleField} />
+          <label className="small" htmlFor="slug">
+            Slug
+          </label>
+          <input
+            name="slug"
+            value={record.slug}
+            onChange={handleField}
+            id="slug"
+          />
         </div>
         <div>
-          <label className="small">Headline</label>
+          <label className="small" htmlFor="headline">
+            Headline
+          </label>
           <input
             name="headline"
             value={record.headline ?? ''}
             onChange={handleField}
+            id="headline"
           />
         </div>
         <div>
-          <label className="small">Description</label>
+          <label className="small" htmlFor="description">
+            Description
+          </label>
           <textarea
             name="description"
             value={record.description ?? ''}
             onChange={handleField}
+            id="description"
           />
         </div>
         <div>
-          <label className="small">Image</label>
+          <label className="small" htmlFor="image">
+            Image
+          </label>
           <input
             name="image"
             value={record.image ?? ''}
             onChange={handleField}
+            id="image"
           />
         </div>
         <div>
-          <label className="small">Section</label>
+          <label className="small" htmlFor="articleSection">
+            Section
+          </label>
           <input
             name="articleSection"
             value={record.articleSection ?? ''}
             onChange={handleField}
+            id="articleSection"
           />
         </div>
         <div>
-          <label className="small">Keywords (comma-separated)</label>
+          <label className="small" htmlFor="keywords">
+            Keywords (comma-separated)
+          </label>
           <input
             name="keywords"
             value={record.keywords ?? ''}
             onChange={handleField}
+            id="keywords"
           />
         </div>
         <div>
-          <label className="small">Published at</label>
+          <label className="small" htmlFor="published_at">
+            Published at
+          </label>
           <input
             type="datetime-local"
             value={
@@ -264,9 +301,12 @@ export default function ContentEditor({
             onChange={(e) =>
               setRecord({
                 ...record,
-                published_at: new Date(e.target.value).toISOString() as any,
+                published_at: new Date(
+                  e.target.value
+                ).toISOString() as RecordType['published_at'],
               })
             }
+            id="published_at"
           />
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>

@@ -2,6 +2,7 @@ import { createClient } from '@/utils/supabase/server';
 import { getCaseStudyContent } from '@/utils/caseStudy';
 import CaseStudyPage from '../_components/CaseStudyPage';
 import type { JSONContent } from '@tiptap/react';
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 export const dynamic = 'force-dynamic';
 
@@ -73,7 +74,7 @@ export async function generateMetadata(props: { params: Params }) {
     title: (data.headline ?? 'Case Study') + ' | Darian Rosebrook',
   };
 
-  return { canonical, openGraph, twitter, ...meta } as any;
+  return { canonical, openGraph, twitter, ...meta } as Metadata;
 }
 
 export default async function Page(props: { params: Params }) {

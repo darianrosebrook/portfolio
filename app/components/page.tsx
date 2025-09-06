@@ -1,10 +1,6 @@
 import { Container, Title, BodyContent, Icon } from '@/components/AlertNotice';
 
-interface pageProps {
-  children: React.ReactNode;
-}
-
-const page = ({ children }: pageProps) => {
+export default function ComponentsPage() {
   return (
     <>
       <section className="content">
@@ -32,6 +28,4 @@ const page = ({ children }: pageProps) => {
       </section>
     </>
   );
-};
-
-export default page;
+}

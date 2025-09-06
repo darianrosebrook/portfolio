@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './CodeBlockComponent.css';
+// Inline minimal styles to avoid external CSS imports
 
 import { NodeViewContent, NodeViewWrapper } from '@tiptap/react';
 
@@ -44,6 +44,23 @@ const codeBlock: React.FC<CodeBlockProps> = ({
     <pre>
       <NodeViewContent />
     </pre>
+    <style jsx>{`
+      .code-block select {
+        margin-bottom: 8px;
+        padding: 4px 6px;
+        border: 1px solid var(--color-border-primary);
+        border-radius: var(--radius-02);
+        background: var(--color-background-secondary);
+        color: var(--color-text-primary);
+      }
+      .code-block pre {
+        background: var(--color-background-tertiary);
+        border: 1px solid var(--color-border-primary);
+        border-radius: var(--radius-03);
+        padding: var(--size-04);
+        overflow-x: auto;
+      }
+    `}</style>
   </NodeViewWrapper>
 );
 export default codeBlock as never;

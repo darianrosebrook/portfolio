@@ -349,6 +349,9 @@ const cleanupOrphanedImages = async () => {
 };
 
 export {
+  type Media,
+  type MediaType,
+  type MediaUpload,
   upload,
   removeImageFromArticle,
   cleanupArticleImages,

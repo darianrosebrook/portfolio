@@ -11,15 +11,21 @@ import Button from '../../components/Button';
 import { byPrefixAndName } from '@awesome.me/kit-0ba7f5fefb/icons';
 import Icon from '@/components/Icon';
 import ToggleSwitch from '../../components/ToggleSwitch';
+import Avatar from '../../components/Avatar';
+import { User } from '@supabase/supabase-js';
 
 const faBars = byPrefixAndName['far']['bars'];
+const faUser = byPrefixAndName['far']['user'];
+const faList = byPrefixAndName['far']['list'];
+const faArrowRight = byPrefixAndName['far']['arrow-right'];
 
 type NavbarProps = {
   pages: { name: string; path: string; admin: boolean }[] | null;
   id: string;
+  user?: User | null;
 };
 
-export default function Navbar({ pages = [] }: NavbarProps) {
+export default function Navbar({ pages = [], id, user }: NavbarProps) {
   const [slider, setSlider] = useState(false);
   const [theme, setTheme] = useState('dark');
   const pathname = usePathname();
@@ -152,37 +158,58 @@ export default function Navbar({ pages = [] }: NavbarProps) {
               </Popover.Content>
             </Popover>
           </li>
-          {/* {profile && (
+          {user && (
             <li>
               <Popover>
                 <Popover.Trigger>
-                  <Avatar src={avatar_url} name={full_name} size="large" />
+                  <Button variant="tertiary" size="small">
+                    <Avatar
+                      src={user.user_metadata?.avatar_url}
+                      name={
+                        user.user_metadata?.full_name || user.email || 'User'
+                      }
+                      size="small"
+                    />
+                  </Button>
                 </Popover.Trigger>
                 <Popover.Content>
                   <ul className="menuList">
                     <li>
-                      <Link onClick={(e) => hanldeRouteChange(e, "/")} className="menuItem" href={`/profile/${id}`}>
-                        Profile
+                      <Link
+                        onClick={(e) =>
+                          hanldeRouteChange(e, '/dashboard/profile')
+                        }
+                        className="menuItem"
+                        href="/dashboard/profile"
+                      >
+                        <Icon icon={faUser} />
+                        Account
                       </Link>
                     </li>
                     <li>
-                      <Link onClick={(e) => hanldeRouteChange(e, "/")} className="menuItem" href="/dashboard">
+                      <Link
+                        onClick={(e) => hanldeRouteChange(e, '/dashboard')}
+                        className="menuItem"
+                        href="/dashboard"
+                      >
+                        <Icon icon={faList} />
                         Dashboard
                       </Link>
                     </li>
-                    <li>
-                      <Link onClick={(e) => hanldeRouteChange(e, "/")} className="menuItem" href="/settings">
-                        Settings
-                      </Link>
-                    </li>
                   </ul>
-                  <Button href="/signout" as="a">
+                  <Button
+                    href="/signout"
+                    as="a"
+                    variant="secondary"
+                    size="small"
+                  >
+                    <Icon icon={faArrowRight} />
                     Logout
                   </Button>
                 </Popover.Content>
               </Popover>
             </li>
-          )} */}
+          )}
         </ul>
       </nav>
     </header>

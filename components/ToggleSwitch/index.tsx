@@ -2,19 +2,15 @@
 import { ReactNode } from 'react';
 import styles from './toggleSwitch.module.scss';
 
-type ToggleSwitchProps = {
+type ToggleSwitchProps = React.ComponentProps<'input'> & {
   checked: boolean;
   disabled?: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   children: ReactNode;
 };
 
-const ToggleSwitch = ({
-  checked,
-  disabled = false,
-  onChange,
-  children,
-}: ToggleSwitchProps) => {
+const ToggleSwitch = ({ children, ...props }: ToggleSwitchProps) => {
+  const { checked, onChange, disabled, ...rest } = props;
   // Generate a safe ID from children - handle both string and ReactNode
   const childrenString =
     typeof children === 'string'
@@ -31,6 +27,7 @@ const ToggleSwitch = ({
         onChange={onChange}
         disabled={disabled}
         id={safeId}
+        {...rest}
       />
       <label className={checked ? styles.checked : ''} htmlFor={safeId}>
         {children}

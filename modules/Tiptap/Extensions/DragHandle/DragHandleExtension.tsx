@@ -90,7 +90,7 @@ export const DragHandleExtension = Extension.create<DragHandleOptions>({
                       display: flex;
                       align-items: center;
                       justify-content: center;
-                      color: #94a3b8;
+                      color: var(--color-text-tertiary);
                       font-size: 12px;
                       line-height: 1;
                       opacity: 0;
@@ -102,12 +102,12 @@ export const DragHandleExtension = Extension.create<DragHandleOptions>({
                     // Add hover effects
                     handle.addEventListener('mouseenter', () => {
                       handle.style.opacity = '1';
-                      handle.style.color = '#3b82f6';
+                      handle.style.color = 'var(--color-accent)';
                     });
 
                     handle.addEventListener('mouseleave', () => {
                       handle.style.opacity = '0';
-                      handle.style.color = '#94a3b8';
+                      handle.style.color = 'var(--color-text-tertiary)';
                     });
 
                     // Add drag functionality

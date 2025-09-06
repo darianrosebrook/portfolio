@@ -47,6 +47,9 @@ export async function PATCH(
   }
 
   const body = await request.json();
+
+  // For now, save working draft to the main fields since working columns don't exist yet
+  // TODO: Apply the add-working-columns.sql migration to enable proper draft functionality
   const {
     workingBody,
     workingHeadline,
@@ -55,17 +58,17 @@ export async function PATCH(
     workingKeywords,
     workingArticleSection,
   } = body;
+  console.log('workingBody', workingBody);
   const { data, error } = await supabase
     .from('case_studies')
     .update({
-      workingBody,
-      workingHeadline,
-      workingDescription,
-      workingImage,
-      workingKeywords,
-      workingArticleSection,
-      working_modified_at: new Date().toISOString(),
-      is_dirty: true,
+      articleBody: workingBody,
+      headline: workingHeadline,
+      description: workingDescription,
+      image: workingImage,
+      keywords: workingKeywords,
+      articleSection: workingArticleSection,
+      modified_at: new Date().toISOString(),
     })
     .eq('slug', slug)
     .eq('author', user.id)

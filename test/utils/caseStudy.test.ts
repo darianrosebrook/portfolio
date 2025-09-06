@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, it, expect } from 'vitest';
 import { getCaseStudyContent } from '@/utils/caseStudy';
 
@@ -26,7 +27,3 @@ describe('getCaseStudyContent', () => {
     expect(html).toContain('Hello world');
   });
 });
-
-
-
-
