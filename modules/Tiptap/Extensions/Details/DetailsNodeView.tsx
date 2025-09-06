@@ -62,12 +62,12 @@ export const DetailsNodeView: React.FC<NodeViewProps> = ({
         .details-node-view {
           margin: 16px 0;
           border: 2px solid transparent;
-          border-radius: 8px;
+          border-radius: var(--radius-03);
           transition: border-color 0.2s ease;
         }
 
         .details-node-view.selected {
-          border-color: #3b82f6;
+          border-color: var(--color-accent);
         }
 
         .details-editor {
@@ -81,34 +81,35 @@ export const DetailsNodeView: React.FC<NodeViewProps> = ({
         .summary-input {
           width: 100%;
           padding: 8px 12px;
-          border: 1px solid #e5e7eb;
-          border-radius: 6px;
+          border: 1px solid var(--color-border-primary);
+          border-radius: var(--radius-02);
           font-size: 14px;
           font-weight: 600;
-          background: #f9fafb;
+          background: var(--color-background-secondary);
           transition: all 0.2s ease;
         }
 
         .summary-input:focus {
           outline: none;
-          border-color: #3b82f6;
-          background: #ffffff;
-          box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+          border-color: var(--color-accent);
+          background: var(--color-background-primary);
+          box-shadow: 0 0 0 3px
+            color-mix(in srgb, var(--color-accent) 10%, transparent);
         }
 
         .details-content {
-          border: 1px solid #e5e7eb;
-          border-radius: 8px;
+          border: 1px solid var(--color-border-primary);
+          border-radius: var(--radius-03);
           overflow: hidden;
         }
 
         .details-content :global(.summary) {
-          background: #f3f4f6;
-          border-bottom: 1px solid #e5e7eb;
+          background: var(--color-background-tertiary);
+          border-bottom: 1px solid var(--color-border-primary);
         }
 
         .details-content :global(.content) {
-          background: #ffffff;
+          background: var(--color-background-primary);
         }
       `}</style>
     </NodeViewWrapper>

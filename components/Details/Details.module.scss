@@ -1,36 +1,36 @@
 /**
  * Details component styles
  * Collapsible content sections for case studies and articles
- * 
+ *
  * @author @darianrosebrook
  */
 
 .details {
+  overflow: hidden;
+  margin: var(--spacing-md, 16px) 0;
+  background: var(--color-background, #fff);
   border: 1px solid var(--color-border, #e5e7eb);
   border-radius: var(--border-radius-md, 8px);
-  margin: var(--spacing-md, 16px) 0;
-  background: var(--color-background, #ffffff);
-  overflow: hidden;
   transition: all 0.2s ease-in-out;
 
   &:hover {
     border-color: var(--color-border-hover, #d1d5db);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 3px rgb(0 0 0 / 10%);
   }
 
   &[open] {
     border-color: var(--color-primary, #3b82f6);
-    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.15);
+    box-shadow: 0 2px 8px rgb(59 130 246 / 15%);
   }
 }
 
 .summary {
-  list-style: none;
-  cursor: pointer;
   padding: var(--spacing-md, 16px);
   background: var(--color-background-subtle, #f9fafb);
   border-bottom: 1px solid var(--color-border, #e5e7eb);
+  list-style: none;
   transition: background-color 0.2s ease-in-out;
+  cursor: pointer;
   user-select: none;
 
   &:hover {
@@ -53,18 +53,20 @@
 
 .summaryContent {
   display: flex;
-  align-items: center;
   gap: var(--spacing-sm, 8px);
-  font-weight: 600;
+  align-items: center;
   color: var(--color-text-primary, #111827);
+  font-weight: 600;
 }
 
 .icon {
+  flex-shrink: 0;
   width: 20px;
   height: 20px;
   color: var(--color-text-secondary, #6b7280);
-  transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
-  flex-shrink: 0;
+  transition:
+    transform 0.2s ease-in-out,
+    color 0.2s ease-in-out;
 }
 
 .summaryText {
@@ -74,30 +76,36 @@
 
 .content {
   padding: var(--spacing-md, 16px);
-  background: var(--color-background, #ffffff);
+  background: var(--color-background, #fff);
   color: var(--color-text-primary, #111827);
   line-height: 1.6;
 
   // Nested content styling
-  :global {
+  :root {
     p {
       margin: 0 0 var(--spacing-sm, 8px) 0;
-      
+
       &:last-child {
         margin-bottom: 0;
       }
     }
 
-    h1, h2, h3, h4, h5, h6 {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
       margin: var(--spacing-md, 16px) 0 var(--spacing-sm, 8px) 0;
       color: var(--color-text-primary, #111827);
-      
+
       &:first-child {
         margin-top: 0;
       }
     }
 
-    ul, ol {
+    ul,
+    ol {
       margin: var(--spacing-sm, 8px) 0;
       padding-left: var(--spacing-lg, 24px);
     }
@@ -109,40 +117,40 @@
     blockquote {
       margin: var(--spacing-md, 16px) 0;
       padding: var(--spacing-sm, 8px) var(--spacing-md, 16px);
-      border-left: 4px solid var(--color-primary, #3b82f6);
       background: var(--color-background-subtle, #f9fafb);
+      border-left: 4px solid var(--color-primary, #3b82f6);
       font-style: italic;
     }
 
     code {
-      background: var(--color-background-code, #f3f4f6);
       padding: 2px 6px;
+      background: var(--color-background-code, #f3f4f6);
       border-radius: var(--border-radius-sm, 4px);
-      font-family: var(--font-mono, 'Monaco', 'Menlo', monospace);
       font-size: 0.9em;
+      font-family: var(--font-mono, 'Monaco', 'Menlo', monospace);
     }
 
     pre {
-      background: var(--color-background-code, #f3f4f6);
-      padding: var(--spacing-md, 16px);
-      border-radius: var(--border-radius-md, 8px);
       overflow-x: auto;
       margin: var(--spacing-md, 16px) 0;
+      padding: var(--spacing-md, 16px);
+      background: var(--color-background-code, #f3f4f6);
+      border-radius: var(--border-radius-md, 8px);
     }
   }
 }
 
 // Animation for opening/closing
 .details[open] .icon {
-  transform: rotate(90deg);
   color: var(--color-primary, #3b82f6);
+  transform: rotate(90deg);
 }
 
 // Dark mode support
 @media (prefers-color-scheme: dark) {
   .details {
-    border-color: var(--color-border-dark, #374151);
     background: var(--color-background-dark, #1f2937);
+    border-color: var(--color-border-dark, #374151);
 
     &:hover {
       border-color: var(--color-border-hover-dark, #4b5563);
@@ -174,8 +182,13 @@
     background: var(--color-background-dark, #1f2937);
     color: var(--color-text-primary-dark, #f9fafb);
 
-    :global {
-      h1, h2, h3, h4, h5, h6 {
+    :root {
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
         color: var(--color-text-primary-dark, #f9fafb);
       }
 

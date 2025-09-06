@@ -24,7 +24,7 @@ export default function EditCaseStudyPage({
   return (
     <div>
       <h2>Edit: {record.slug}</h2>
-      <ContentEditor initial={record as any} entity="case-studies" />
+      <ContentEditor initial={record as CaseStudy} entity="case-studies" />
     </div>
   );
 }

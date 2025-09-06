@@ -1,5 +1,4 @@
 import StarterKit from '@tiptap/starter-kit';
-import Image from '@tiptap/extension-image';
 import Placeholder from '@tiptap/extension-placeholder';
 import Underline from '@tiptap/extension-underline';
 import TextAlign from '@tiptap/extension-text-align';
@@ -9,10 +8,21 @@ import { Table } from '@tiptap/extension-table';
 import TableRow from '@tiptap/extension-table-row';
 import TableHeader from '@tiptap/extension-table-header';
 import TableCell from '@tiptap/extension-table-cell';
+import Dropcursor from '@tiptap/extension-dropcursor';
+import Focus from '@tiptap/extension-focus';
+import Link from '@tiptap/extension-link';
+import Highlight from '@tiptap/extension-highlight';
+import HorizontalRule from '@tiptap/extension-horizontal-rule';
+import TaskList from '@tiptap/extension-task-list';
+import TaskItem from '@tiptap/extension-task-item';
 import { DetailsExtension } from './Extensions/Details/DetailsExtension';
 import { TableOfContentsExtension } from './Extensions/TableOfContents/TableOfContentsExtension';
 import { UniqueIdExtension } from './Extensions/UniqueId/UniqueIdExtension';
 import { DragHandleExtension } from './Extensions/DragHandle/DragHandleExtension';
+import { SlashCommand } from './Extensions/SlashCommand';
+import { CodeBlockExtended } from './Extensions/CodeBlockExtended';
+import { ImageExtended } from './Extensions/ImageExtended';
+import { VideoExtended } from './Extensions/VideoExtended';
 
 // import SlashCommand from './Extensions/SlashCommand';
 // import CodeBlockComponent from './Extensions/CodeBlockExtended/CodeBlockComponent';
@@ -22,19 +32,34 @@ import { DragHandleExtension } from './Extensions/DragHandle/DragHandleExtension
  * Creates optimized Tiptap extensions configuration
  * This function was part of the bundle optimization to reduce initial load
  */
-export const createExtensions = (_articleId?: string) => {
+export const createExtensions = (articleId?: number) => {
   return [
-    StarterKit.configure({
-      // Optimize by disabling unused features
-      dropcursor: {
-        color: 'var(--color-primary)',
-        width: 2,
-      },
+    StarterKit.configure({ codeBlock: false }),
+    Dropcursor.configure({
+      color: 'var(--color-accent)',
+      width: 2,
     }),
-    Image.configure({
-      HTMLAttributes: {
-        class: 'editor-image',
-      },
+    Focus.configure({
+      className: 'is-focused',
+      mode: 'all',
+    }),
+    Link.configure({
+      autolink: true,
+      openOnClick: true,
+      linkOnPaste: true,
+      protocols: ['http', 'https', 'mailto'],
+    }),
+    Highlight,
+    HorizontalRule,
+    TaskList,
+    TaskItem.configure({ nested: true }),
+    ImageExtended.configure({
+      bucket: 'article-images',
+      getArticleId: () => articleId,
+    }),
+    VideoExtended.configure({
+      bucket: 'article-videos',
+      getArticleId: () => articleId,
     }),
     Underline,
     TextAlign.configure({
@@ -91,13 +116,12 @@ export const createExtensions = (_articleId?: string) => {
         'blockquote',
         'details',
         'tableOfContents',
+        'image',
+        'video',
       ],
       showDragHandles: true,
     }),
-    // TODO: Re-enable extended features after fixing TypeScript issues
-    // CodeBlockComponent,
-    // SlashCommand.configure({
-    //   articleId,
-    // }),
+    CodeBlockExtended,
+    SlashCommand,
   ];
 };

@@ -101,7 +101,7 @@ const Template: React.FC<TemplateProps> = ({ children, user }) => {
   return (
     <ReducedMotionProvider>
       <InteractionProvider>
-        <Navbar id={id || ''} pages={pages} />
+        <Navbar id={id || ''} pages={pages} user={user} />
         <main ref={ref}>{children}</main>
         <Footer />
         <SlinkyCursor />

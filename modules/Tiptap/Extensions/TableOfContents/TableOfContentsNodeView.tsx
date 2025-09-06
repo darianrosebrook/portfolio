@@ -150,19 +150,19 @@ export const TableOfContentsNodeView: React.FC<NodeViewProps> = ({
         .table-of-contents-node {
           margin: 24px 0;
           border: 2px solid transparent;
-          border-radius: 8px;
+          border-radius: var(--radius-03);
           transition: border-color 0.2s ease;
         }
 
         .table-of-contents-node.selected {
-          border-color: #3b82f6;
+          border-color: var(--color-accent);
         }
 
         .toc-container {
-          background: #f8fafc;
-          border: 1px solid #e2e8f0;
-          border-radius: 8px;
-          padding: 16px;
+          background: var(--color-background-secondary);
+          border: 1px solid var(--color-border-primary);
+          border-radius: var(--radius-03);
+          padding: var(--size-05);
         }
 
         .toc-header {
@@ -176,9 +176,9 @@ export const TableOfContentsNodeView: React.FC<NodeViewProps> = ({
 
         .toc-header h3 {
           margin: 0;
-          font-size: 16px;
+          font-size: var(--font-size-03);
           font-weight: 600;
-          color: #1e293b;
+          color: var(--color-text-primary);
         }
 
         .toc-controls {
@@ -188,18 +188,18 @@ export const TableOfContentsNodeView: React.FC<NodeViewProps> = ({
 
         .toc-refresh-btn {
           background: none;
-          border: 1px solid #cbd5e1;
-          border-radius: 4px;
-          padding: 4px 8px;
+          border: 1px solid var(--color-border-secondary);
+          border-radius: var(--radius-02);
+          padding: var(--size-02) var(--size-03);
           cursor: pointer;
-          font-size: 14px;
-          color: #64748b;
+          font-size: var(--font-size-02);
+          color: var(--color-text-secondary);
           transition: all 0.2s ease;
         }
 
         .toc-refresh-btn:hover {
-          background: #e2e8f0;
-          border-color: #94a3b8;
+          background: var(--color-background-tertiary);
+          border-color: var(--color-border-primary);
         }
 
         .toc-list {
@@ -209,25 +209,25 @@ export const TableOfContentsNodeView: React.FC<NodeViewProps> = ({
 
         .toc-item {
           cursor: pointer;
-          padding: 4px 8px;
-          border-radius: 4px;
+          padding: var(--size-02) var(--size-03);
+          border-radius: var(--radius-02);
           transition: background-color 0.2s ease;
           margin: 2px 0;
         }
 
         .toc-item:hover {
-          background: #e2e8f0;
+          background: var(--color-background-tertiary);
         }
 
         .toc-text {
-          font-size: 14px;
-          color: #475569;
+          font-size: var(--font-size-02);
+          color: var(--color-text-secondary);
           line-height: 1.4;
         }
 
         .toc-level-1 .toc-text {
           font-weight: 600;
-          color: #1e293b;
+          color: var(--color-text-primary);
         }
 
         .toc-level-2 .toc-text {
@@ -236,8 +236,8 @@ export const TableOfContentsNodeView: React.FC<NodeViewProps> = ({
 
         .toc-empty {
           text-align: center;
-          padding: 20px;
-          color: #64748b;
+          padding: var(--size-05);
+          color: var(--color-text-secondary);
         }
 
         .toc-empty p {
@@ -246,46 +246,7 @@ export const TableOfContentsNodeView: React.FC<NodeViewProps> = ({
         }
 
         /* Dark mode support */
-        @media (prefers-color-scheme: dark) {
-          .toc-container {
-            background: #1e293b;
-            border-color: #334155;
-          }
-
-          .toc-header {
-            border-bottom-color: #334155;
-          }
-
-          .toc-header h3 {
-            color: #f1f5f9;
-          }
-
-          .toc-refresh-btn {
-            border-color: #475569;
-            color: #94a3b8;
-          }
-
-          .toc-refresh-btn:hover {
-            background: #334155;
-            border-color: #64748b;
-          }
-
-          .toc-item:hover {
-            background: #334155;
-          }
-
-          .toc-text {
-            color: #94a3b8;
-          }
-
-          .toc-level-1 .toc-text {
-            color: #f1f5f9;
-          }
-
-          .toc-empty {
-            color: #94a3b8;
-          }
-        }
+        /* Color scheme handled via tokens */
       `}</style>
     </NodeViewWrapper>
   );

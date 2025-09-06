@@ -2,9 +2,10 @@
 
 import { useEditor, EditorContent, JSONContent } from '@tiptap/react';
 import styles from './tiptap.module.css';
-import 'tippy.js/dist/tippy.css';
 
 import { createExtensions } from './extensions';
+import ImageBubbleMenu from './ImageBubbleMenu';
+import VideoBubbleMenu from './VideoBubbleMenu';
 import ToolbarWrapper from './ToolbarWrapper';
 
 import { Article } from '@/types';
@@ -18,7 +19,7 @@ const Tiptap = ({
 }) => {
   const content = article.articleBody as JSONContent | undefined;
   const editor = useEditor({
-    extensions: createExtensions(article?.id?.toString()),
+    extensions: createExtensions(article?.id as unknown as number),
     immediatelyRender: false,
     content: content,
     onUpdate: ({ editor }) => {
@@ -33,6 +34,8 @@ const Tiptap = ({
     <>
       <EditorContent editor={editor} className={styles.editor} />
       {editor && <ToolbarWrapper editor={editor} />}
+      {editor && <ImageBubbleMenu editor={editor} />}
+      {editor && <VideoBubbleMenu editor={editor} />}
     </>
   );
 };

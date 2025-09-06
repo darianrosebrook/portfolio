@@ -27,7 +27,3 @@ export default async function CaseStudiesPage() {
     </div>
   );
 }
-
-
-
-

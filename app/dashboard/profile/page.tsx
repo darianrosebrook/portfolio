@@ -12,7 +12,3 @@ export default async function ProfilePage() {
     </div>
   );
 }
-
-
-
-
