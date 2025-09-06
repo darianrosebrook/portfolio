@@ -5,14 +5,13 @@ import { usePathname } from 'next/navigation';
 import styles from './index.module.css';
 import Logo from './logo';
 import React, { useCallback, useEffect, useState } from 'react';
-import { useReducedMotion } from '@/context';
+import { useReducedMotion, useUser } from '@/context';
 import Popover from '../../components/Popover/Popover';
 import Button from '../../components/Button';
 import { byPrefixAndName } from '@awesome.me/kit-0ba7f5fefb/icons';
 import Icon from '@/components/Icon';
 import ToggleSwitch from '../../components/ToggleSwitch';
 import Avatar from '../../components/Avatar';
-import { User } from '@supabase/supabase-js';
 
 const faBars = byPrefixAndName['far']['bars'];
 const faUser = byPrefixAndName['far']['user'];
@@ -21,11 +20,10 @@ const faArrowRight = byPrefixAndName['far']['arrow-right'];
 
 type NavbarProps = {
   pages: { name: string; path: string; admin: boolean }[] | null;
-  id: string;
-  user?: User | null;
 };
 
-export default function Navbar({ pages = [], id, user }: NavbarProps) {
+export default function Navbar({ pages = [] }: NavbarProps) {
+  const { user, profile, loading } = useUser();
   const [slider, setSlider] = useState(false);
   const [theme, setTheme] = useState('dark');
   const pathname = usePathname();
@@ -158,17 +156,22 @@ export default function Navbar({ pages = [], id, user }: NavbarProps) {
               </Popover.Content>
             </Popover>
           </li>
-          {user && (
+          {user && !loading && (
             <li>
               <Popover>
                 <Popover.Trigger>
                   <Button variant="tertiary" size="small">
                     <Avatar
-                      src={user.user_metadata?.avatar_url}
-                      name={
-                        user.user_metadata?.full_name || user.email || 'User'
+                      src={
+                        profile?.avatar_url || user.user_metadata?.avatar_url
                       }
-                      size="small"
+                      name={
+                        profile?.full_name ||
+                        user.user_metadata?.full_name ||
+                        user.email ||
+                        'User'
+                      }
+                      size="large"
                     />
                   </Button>
                 </Popover.Trigger>

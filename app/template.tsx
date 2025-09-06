@@ -3,22 +3,22 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { ReducedMotionProvider, InteractionProvider } from '@/context';
+import {
+  ReducedMotionProvider,
+  InteractionProvider,
+  UserProvider,
+} from '@/context';
 import Navbar from '@/modules/Navbar';
 import Footer from '@/modules/Footer';
 import SlinkyCursor from '@/components/SlinkyCursor';
-import { User } from '@supabase/supabase-js';
-
 type TemplateProps = {
   children: React.ReactNode;
-  user: User;
 };
 
-const Template: React.FC<TemplateProps> = ({ children, user }) => {
+const Template: React.FC<TemplateProps> = ({ children }) => {
   const ref = useRef(null);
   const handleSelectionChange = useRef<(() => void) | null>(null);
 
-  const id = user?.id || null;
   /**
    * Top-level navigation pages for the main Navbar.
    * @type {{ name: string; path: string; admin: boolean }[]}
@@ -101,10 +101,12 @@ const Template: React.FC<TemplateProps> = ({ children, user }) => {
   return (
     <ReducedMotionProvider>
       <InteractionProvider>
-        <Navbar id={id || ''} pages={pages} user={user} />
-        <main ref={ref}>{children}</main>
-        <Footer />
-        <SlinkyCursor />
+        <UserProvider>
+          <Navbar pages={pages} />
+          <main ref={ref}>{children}</main>
+          <Footer />
+          <SlinkyCursor />
+        </UserProvider>
       </InteractionProvider>
     </ReducedMotionProvider>
   );
