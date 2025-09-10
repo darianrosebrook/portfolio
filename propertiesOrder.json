@@ -1,4 +1,0 @@
-{
-  "plugins": ["stylelint-order"],
-  "rules": {}
-}
