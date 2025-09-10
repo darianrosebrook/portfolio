@@ -4,17 +4,20 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 3000",
-    "build": "prettier --check . && stylelint --allow-empty-input \"**/*.{css,scss}\" && next build",
+    "build": "npm run tokens:build && prettier --check . && stylelint --allow-empty-input \"**/*.{css,scss}\" && next build",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "lint:fix:css": "stylelint --fix \"**/*.{css,scss}\"",
     "typecheck": "tsc --noEmit",
-    "test": "vitest",
+    "test": "vitest run",
     "test:ui": "vitest --ui",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "analyze": "ANALYZE=true npm run build"
+    "analyze": "ANALYZE=true npm run build",
+    "tokens:scss": "node utils/generateCSSTokens.mjs",
+    "tokens:globals": "node utils/designTokens/generateGlobalTokens.mjs",
+    "tokens:build": "npm run tokens:globals && npm run tokens:scss"
   },
   "dependencies": {
     "@atproto/api": "^0.15.15",
@@ -111,6 +114,7 @@
     "stylelint-config-standard-scss": "^13.1.0",
     "stylelint-order": "^6.0.4",
     "svg-inline-loader": "^0.8.2",
+    "ts-node": "^10.9.2",
     "typescript": "^5.8.2",
     "typescript-eslint": "^8.26.1",
     "vitest": "^3.2.4"

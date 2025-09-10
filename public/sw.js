@@ -156,6 +156,15 @@ async function handleDocumentRequest(request) {
 
 // Handle other requests with network-first strategy
 async function handleOtherRequest(request) {
+  // Skip caching for non-http(s) schemes (e.g., chrome-extension:, file:)
+  try {
+    const url = new URL(request.url);
+    if (url.protocol !== 'http:' && url.protocol !== 'https:') {
+      return fetch(request);
+    }
+  } catch (_) {
+    // If URL parsing fails, fall through to network-first handling
+  }
   try {
     const networkResponse = await fetch(request);
     const cache = await caches.open(DYNAMIC_CACHE);

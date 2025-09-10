@@ -6,7 +6,7 @@ import { InteractiveErrorBoundary } from '@/modules/ErrorBoundary';
 // Dynamically import FontInspector for better performance
 const FontInspector = dynamic(
   () =>
-    import('@/components/FontInspector').then((mod) => ({
+    import('@/modules/FontInspector').then((mod) => ({
       default: mod.FontInspector,
     })),
   {
@@ -17,7 +17,7 @@ const FontInspector = dynamic(
           justifyContent: 'center',
           alignItems: 'center',
           minHeight: '400px',
-          color: 'var(--color-foreground-secondary)',
+          color: 'var(--semantic-color-foreground-secondary)',
         }}
       >
         <div>Loading typography inspector...</div>

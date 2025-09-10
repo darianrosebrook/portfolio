@@ -1,23 +1,23 @@
 .tabs {
-  margin-bottom: var(--size-05);
-  border-bottom: 1px solid var(--color-border-primary);
+  margin-bottom: var(--core-size-05);
+  border-bottom: 1px solid var(--semantic-color-border-primary);
 }
 
 .tabs ul {
   display: flex;
-  gap: var(--size-04);
+  gap: var(--core-size-04);
   margin: 0;
-  padding: 0 0 var(--size-03) 0;
+  padding: 0 0 var(--core-size-03) 0;
   list-style: none;
 }
 
 .tabs a {
   display: inline-block;
-  padding: var(--size-02) var(--size-03);
-  border-radius: var(--radius-02);
+  padding: var(--core-size-02) var(--core-size-03);
+  border-radius: var(--semantic-size-radius-02);
 }
 
 .container {
   display: grid;
-  gap: var(--size-05);
+  gap: var(--core-size-05);
 }

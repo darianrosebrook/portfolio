@@ -1,5 +1,6 @@
 @use 'reset';
 @use 'vars';
+@use 'designTokens';
 
 @view-transition {
   navigation: auto;
@@ -30,14 +31,17 @@
 }
 
 :root {
-  font-weight: var(--font-weight-regular);
-  font-size: var(--body-02);
+  --semantic-font-inter: var(--font-inter);
+  --semantic-font-nohemi: var(--font-nohemi);
+
+  font-weight: var(--semantic-typography-fontWeight-regular);
+  font-size: var(--semantic-typography-body-02);
 
   /* Typography */
 
-  font-family: var(--font-inter), sans-serif;
-  line-height: var(--line-height-body);
-  letter-spacing: var(--letter-spacing-tight);
+  font-family: var(--semantic-font-inter), sans-serif;
+  line-height: var(--semantic-typography-lineHeight-body);
+  letter-spacing: var(--semantic-typography-letterSpacing-tight);
   font-feature-settings:
     'case' 0,
     'dlig',
@@ -79,11 +83,11 @@
     'kern';
 
   p + p {
-    margin-top: var(--size-04);
+    margin-top: var(--core-size-04);
   }
 
   strong {
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--semantic-typography-fontWeight-bold);
   }
 
   h1,
@@ -93,9 +97,9 @@
   h5,
   h6 {
     font-weight: 300;
-    font-family: var(--font-nohemi), sans-serif;
-    line-height: var(--line-height-collapse);
-    letter-spacing: var(--letter-spacing-wide);
+    font-family: var(--semantic-font-nohemi), sans-serif;
+    line-height: var(--semantic-typography-lineHeight-collapse);
+    letter-spacing: var(--semantic-typography-letterSpacing-wide);
     text-wrap: balance;
 
     & strong {
@@ -105,40 +109,40 @@
 
   .heading-01,
   h1 {
-    font-size: var(--heading-01);
+    font-size: var(--semantic-typography-heading-01);
   }
 
   .heading-02,
   h2 {
-    font-size: var(--heading-02);
+    font-size: var(--semantic-typography-heading-02);
   }
 
   .heading-03,
   h3 {
-    font-size: var(--heading-03);
+    font-size: var(--semantic-typography-heading-03);
   }
 
   .heading-04,
   h4 {
-    font-size: var(--heading-04);
+    font-size: var(--semantic-typography-heading-04);
   }
 
   .heading-05,
   h5 {
-    font-size: var(--heading-05);
+    font-size: var(--semantic-typography-heading-05);
   }
 
   .heading-06,
   h6 {
-    font-size: var(--heading-06);
+    font-size: var(--semantic-typography-heading-06);
   }
 
   .heading-hero {
-    font-size: var(--oversize-03);
+    font-size: var(--semantic-typography-oversize-03);
   }
 
   .heading-super {
-    font-size: var(--oversize-01);
+    font-size: var(--semantic-typography-oversize-01);
   }
 
   // Accessibility utility
@@ -155,56 +159,56 @@
   }
 
   .button-01 {
-    font-size: var(--button-01);
+    font-size: var(--semantic-typography-button-01);
   }
 
   .button-02 {
-    font-size: var(--button-02);
+    font-size: var(--semantic-typography-button-02);
   }
 
   .button-03 {
-    font-size: var(--button-03);
+    font-size: var(--semantic-typography-button-03);
   }
 
   .caption-01 {
-    font-size: var(--caption-01);
+    font-size: var(--semantic-typography-caption-01);
   }
 
   .caption-02,
   small,
   .small {
-    font-size: var(--caption-02);
+    font-size: var(--semantic-typography-caption-02);
   }
 
   .caption-03,
   .smallest {
-    font-size: var(--caption-03);
+    font-size: var(--semantic-typography-caption-03);
   }
 
   .body-01,
   .medium {
-    font-size: var(--body-01);
+    font-size: var(--semantic-typography-body-01);
   }
 
   .body-02 {
-    font-size: var(--body-02);
+    font-size: var(--semantic-typography-body-02);
   }
 
   .body-03,
   .regular {
-    font-size: var(--body-03);
+    font-size: var(--semantic-typography-body-03);
   }
 
   .body-04 {
-    font-size: var(--body-04);
+    font-size: var(--semantic-typography-body-04);
   }
 
   .bold {
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--semantic-typography-fontWeight-bold);
   }
 
   .body {
-    font-weight: var(--font-weight-regular);
+    font-weight: var(--semantic-typography-fontWeight-regular);
   }
 
   .emphasis,
@@ -226,14 +230,14 @@
   sup {
     top: -0.5em;
     vertical-align: super;
-    font-size: var(--caption-03);
+    font-size: var(--semantic-typography-caption-03);
   }
 
   .sub,
   sub {
     bottom: -0.25em;
     vertical-align: sub;
-    font-size: var(--caption-03);
+    font-size: var(--semantic-typography-caption-03);
   }
 
   sub,
@@ -242,11 +246,11 @@
   .sup {
     position: relative;
     vertical-align: baseline;
-    line-height: 0;
+    line-height: var(--semantic-typography-lineHeight-collapse);
   }
 
   .smallest {
-    font-size: var(--caption-02);
+    font-size: var(--semantic-typography-caption-02);
   }
 
   abbr[title] {
@@ -265,45 +269,46 @@
 
   .elevated {
     --elevation:
-      var(--depth) 0.25px 0.75px rgb(20 20 20 / var(--opacity-100)),
-      0px 0.125px 0.25px rgb(20 20 20 / var(--opacity-50));
+      var(--semantic-elevation-depth) 0.25px 0.75px
+        rgb(20 20 20 / var(--core-opacity-100)),
+      0px 0.125px 0.25px rgb(20 20 20 / var(--core-opacity-50));
 
     box-shadow: var(--elevation);
   }
 
   .elevation-1 {
     /* override depth here */
-    --depth: var(--depth-1);
+    --depth: var(--core-depth-1);
   }
 
   .elevation-2 {
-    --depth: var(--depth-2);
+    --depth: var(--core-depth-2);
   }
 
   .elevation-3 {
-    --depth: var(--depth-3);
+    --depth: var(--core-depth-3);
   }
 
   .elevation-4 {
-    --depth: var(--depth-4);
+    --depth: var(--core-depth-4);
   }
 }
 
 .secondary {
-  color: var(--color-foreground-secondary);
+  color: var(--semantic-color-foreground-secondary);
 }
 
 *::selection {
-  background: var(--color-background-highlight);
-  color: var(--color-foreground-highlight);
+  background: var(--semantic-color-background-highlight);
+  color: var(--semantic-color-foreground-highlight);
 }
 
 h4,
 h3 {
   span {
     display: block;
-    color: var(--color-foreground-secondary);
-    font-weight: var(--font-weight-light);
+    color: var(--semantic-color-foreground-secondary);
+    font-weight: var(--semantic-typography-fontWeight-light);
   }
 }
 
@@ -315,18 +320,18 @@ h3 {
 }
 
 .text-highlighted > span {
-  padding: var(--size-02) var(--size-03);
-  background: var(--color-background-highlight);
-  border-radius: var(--radius-01);
+  padding: var(--core-size-02) var(--core-size-03);
+  background: var(--semantic-color-background-highlight);
+  border-radius: var(--semantic-size-radius-01);
   box-decoration-break: clone;
-  color: var(--color-foreground-highlight);
+  color: var(--semantic-color-foreground-highlight);
   transition: all 0.2s ease;
 }
 
 /* Gooey selection styling */
 ::selection {
-  background: var(--color-background-highlight);
-  color: var(--color-foreground-highlight);
+  background: var(--semantic-color-background-highlight);
+  color: var(--semantic-color-foreground-highlight);
 
   /* Note: ::selection doesn't support pseudo-elements, so we can't use gooey filter here
      without blurring the text. The gooey effect will be handled by CSS Custom Highlight API
@@ -335,11 +340,11 @@ h3 {
 
 /* Enhanced selection styling for gooey effect */
 ::highlight(gooey-highlight) {
-  padding: var(--size-01) var(--size-02);
-  background: var(--color-background-highlight);
-  border-radius: var(--radius-01);
+  padding: var(--core-size-01) var(--core-size-02);
+  background: var(--semantic-color-background-highlight);
+  border-radius: var(--semantic-size-radius-01);
   box-decoration-break: clone;
-  color: var(--color-foreground-highlight);
+  color: var(--semantic-color-foreground-highlight);
   transition: all 0.2s ease;
   animation: gooeyHighlightFadeIn 0.3s ease-out;
 
@@ -348,21 +353,21 @@ h3 {
 }
 
 /* Fallback for browsers that don't support CSS Custom Highlight API */
-@supports not (CSS.highlights) {
-  *::selection {
-    background: var(--color-background-highlight);
-    border-radius: var(--radius-01);
-    color: var(--color-foreground-highlight);
-  }
-}
+// @supports not (CSS.highlights) {
+//   *::selection {
+//     background: var(--semantic-color-background-highlight);
+//     border-radius: var(--semantic-size-radius-01);
+//     color: var(--semantic-color-foreground-highlight);
+//   }
+// }
 
 /* Mark element styling with gooey effect */
 mark {
-  padding: var(--size-01) var(--size-02);
-  background: var(--color-background-highlight);
-  border-radius: var(--radius-01);
+  padding: var(--core-size-01) var(--core-size-02);
+  background: var(--semantic-color-background-highlight);
+  border-radius: var(--semantic-size-radius-01);
   box-decoration-break: clone;
-  color: var(--color-foreground-highlight);
+  color: var(--semantic-color-foreground-highlight);
   transition: all 0.2s ease;
   filter: url('#goo-text');
 }
@@ -389,11 +394,11 @@ mark {
   > span {
     position: relative;
     z-index: 2;
-    padding: var(--size-01) var(--size-02);
-    background: var(--color-background-highlight);
-    border-radius: var(--radius-01);
+    padding: var(--core-size-01) var(--core-size-02);
+    background: var(--semantic-color-background-highlight);
+    border-radius: var(--semantic-size-radius-01);
     box-decoration-break: clone;
-    color: var(--color-foreground-highlight);
+    color: var(--semantic-color-foreground-highlight);
     transition: all 0.2s ease;
   }
 }
@@ -404,19 +409,19 @@ mark {
 }
 
 .gooey > span {
-  padding: var(--size-05) var(--size-05);
-  background: var(--color-background-primary);
+  padding: var(--core-size-05) var(--core-size-05);
+  background: var(--semantic-color-background-primary);
 
   /* make sure the padding apply to all the lines */
   box-decoration-break: clone;
-  color: var(--color-foreground-primary);
+  color: var(--semantic-color-foreground-primary);
 }
 
 /* Hover effects for highlighted text */
 .text-highlighted:hover {
   > span,
   mark:hover {
-    background: var(--color-background-tertiary);
+    background: var(--semantic-color-background-tertiary);
     transform: scale(1.02);
   }
 }
@@ -451,7 +456,7 @@ select {
 
 /* structure   */
 html {
-  line-height: var(--line-height);
+  line-height: var(--semantic-typography-lineHeight-body);
   -webkit-font-smoothing: antialiased;
   text-size-adjust: 100%;
 }
@@ -467,8 +472,8 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: var(--color-background-primary);
-  color: var(--color-foreground-primary);
+  background: var(--semantic-color-background-primary);
+  color: var(--semantic-color-foreground-primary);
 }
 
 body::before {
@@ -479,7 +484,7 @@ body::before {
   width: 100%;
   height: 100%;
   opacity: 0.15;
-  color: var(--color-foreground-primary);
+  color: var(--semantic-color-foreground-primary);
   filter: url('#grainy');
   pointer-events: none;
   content: '';
@@ -550,16 +555,16 @@ footer {
 }
 
 section:not(:first-of-type) + section {
-  margin-top: var(--size-10);
+  margin-top: var(--core-size-10);
 }
 
 hr {
   overflow: visible;
   box-sizing: content-box;
   height: 0;
-  margin: var(--size-07) 0;
+  margin: var(--core-size-07) 0;
   border: none;
-  border-top: 1px solid var(--color-foreground-primary);
+  border-top: 1px solid var(--semantic-color-foreground-primary);
 }
 
 progress {
@@ -576,21 +581,21 @@ img,
 picture,
 video,
 canvas {
-  border-radius: var(--size-03);
+  border-radius: var(--core-size-03);
 }
 
 .avatar {
-  border-radius: var(--radius-full);
+  border-radius: var(--semantic-size-radius-full);
 }
 
 a {
-  color: var(--color-foreground-accent, inherit);
+  color: var(--semantic-color-foreground-accent, inherit);
   text-decoration: none;
 }
 
 a:focus-visible,
 a:focus {
-  border-radius: var(--radius-01);
+  border-radius: var(--semantic-size-radius-01);
 }
 
 a:hover {
@@ -603,8 +608,8 @@ a:hover {
   display: inline-flex;
   align-items: center;
   margin: 0;
-  margin-left: var(--size-02);
-  font-size: var(--heading-05);
+  margin-left: var(--core-size-02);
+  font-size: var(--semantic-typography-heading-05);
 }
 
 /* Interactive UI */
@@ -631,62 +636,62 @@ button:-moz-focusring,
 [type='button']:-moz-focusring,
 [type='reset']:-moz-focusring,
 [type='submit']:-moz-focusring {
-  outline: var(--focus-ring);
-  outline-offset: var(--focus-ring-offset);
+  outline: 2px solid var(--semantic-color-border-accent);
+  outline-offset: var(--semantic-focus-ringOffset);
 }
 
 article > * + * {
-  margin-top: var(--size-06);
+  margin-top: var(--core-size-06);
 
   & > * + * {
-    margin-top: var(--size-04);
+    margin-top: var(--core-size-04);
 
     & > * + * {
-      margin-top: var(--size-03);
+      margin-top: var(--core-size-03);
     }
   }
 }
 
 /* Form Elements */
 .form-widget > * + * {
-  margin-top: var(--size-06);
+  margin-top: var(--core-size-06);
 }
 
 label {
   display: block;
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--semantic-typography-fontWeight-medium);
 }
 
 textarea {
   min-height: 10em;
   resize: none;
-  scrollbar-color: var(--color-foreground-primary)
-    var(--color-background-primary);
+  scrollbar-color: var(--semantic-color-foreground-primary)
+    var(--semantic-color-background-primary);
 }
 
 input,
 textarea {
   width: 100%;
   max-width: 30em;
-  min-height: var(--tap-target-large);
-  padding: var(--size-03) var(--size-04);
-  background: var(--color-background-input);
-  border: 1px solid var(--color-border-primary);
-  border-radius: var(--radius-02);
-  color: var(--color-foreground-primary);
+  min-height: var(--semantic-size-tapTarget-large);
+  padding: var(--core-size-03) var(--core-size-04);
+  background: var(--semantic-color-background-secondary);
+  border: 1px solid var(--semantic-color-border-primary);
+  border-radius: var(--semantic-size-radius-02);
+  color: var(--semantic-color-foreground-primary);
   transition: border 0.2s ease;
   resize: vertical;
 }
 
 textarea + label {
-  margin-top: var(--size-06);
+  margin-top: var(--core-size-06);
 }
 
 label + input[type='text'],
 label + input[type='email'],
 label + input[type='password'],
 label + textarea {
-  margin-top: var(--size-03);
+  margin-top: var(--core-size-03);
 }
 
 input[type='text'] + label,
@@ -694,24 +699,24 @@ input[type='email'] + label,
 input[type='password'] + label,
 input:focus-visible,
 textarea:focus-visible {
-  border-color: var(--color-border-bold);
-  outline: var(--focus-ring);
-  outline-offset: var(--focus-ring-offset);
+  border-color: var(--semantic-color-border-bold);
+  outline: 2px solid var(--semantic-color-border-accent);
+  outline-offset: var(--semantic-focus-ringOffset);
 }
 
 input:read-only,
 textarea:read-only {
-  background: var(--color-background-read-only);
-  border-color: var(--color-foreground-primary);
+  background: var(--semantic-color-background-readOnly);
+  border-color: var(--semantic-color-foreground-primary);
   outline: none;
-  color: var(--secondary);
+  color: var(--semantic-color-foreground-secondary);
 }
 
 input:disabled,
 textarea:disabled {
-  background: var(--color-background-secondary);
-  border-color: var(--color-border-disabled);
-  color: var(--color-foreground-disabled);
+  background: var(--semantic-color-background-secondary);
+  border-color: var(--semantic-color-border-disabled);
+  color: var(--semantic-color-foreground-disabled);
 }
 
 input[type='range'] {
@@ -720,17 +725,17 @@ input[type='range'] {
   padding: 0;
   background: linear-gradient(
     to right,
-    var(--color-foreground-primary),
-    var(--color-foreground-secondary)
+    var(--semantic-color-foreground-primary),
+    var(--semantic-color-foreground-secondary)
   );
   border: none;
-  border-radius: var(--radius-02);
+  border-radius: var(--semantic-size-radius-02);
   transition: background 0.2s ease;
   cursor: pointer;
 
   &:focus-visible {
-    outline: var(--focus-ring);
-    outline-offset: var(--focus-ring-offset);
+    outline: 2px solid var(--semantic-color-border-accent);
+    outline-offset: var(--semantic-focus-ringOffset);
   }
 }
 
@@ -738,27 +743,27 @@ input[type='range'] {
 .content {
   display: flex;
   flex-direction: column;
-  gap: var(--size-06);
+  gap: var(--core-size-06);
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 var(--size-06);
+  padding: 0 var(--core-size-06);
 }
 
 * + .content {
-  margin-top: var(--size-07);
+  margin-top: var(--core-size-07);
 }
 
 .experience {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--grid-gap-medium);
+  gap: var(--semantic-size-grid-gap-medium);
   padding-left: 0;
   list-style-type: none;
 }
 
 .experience > li {
   margin: 0;
-  margin-top: var(--size-04);
+  margin-top: var(--core-size-04);
 }
 
 article ul,
@@ -768,30 +773,30 @@ article ol {
 
 .two-up {
   display: flex;
-  gap: var(--size-04);
+  gap: var(--core-size-04);
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-  gap: var(--grid-gap-medium);
+  gap: var(--semantic-size-grid-gap-medium);
   align-content: stretch;
 }
 
 .card {
-  padding: var(--size-06);
-  background: var(--color-background-primary);
-  border-radius: var(--radius-02);
+  padding: var(--core-size-06);
+  background: var(--semantic-color-background-primary);
+  border-radius: var(--semantic-size-radius-02);
   box-shadow: var(--elevation);
   transition: box-shadow 0.2s ease;
 }
 
 .card a {
-  color: var(--color-foreground-primary);
+  color: var(--semantic-color-foreground-primary);
 }
 
 .card > * + * {
-  margin-top: var(--size-06);
+  margin-top: var(--core-size-06);
 }
 
 .card img {
@@ -800,14 +805,14 @@ article ol {
 
 .meta {
   display: flex;
-  gap: var(--size-03);
+  gap: var(--core-size-03);
   justify-content: space-between;
   align-items: center;
 }
 
 tr {
-  padding: var(--size-07);
-  border-top: 1px solid var(--color-foreground-primary);
+  padding: var(--core-size-07);
+  border-top: 1px solid var(--semantic-color-foreground-primary);
 }
 
 thead tr:first-of-type {
@@ -821,7 +826,7 @@ header + main {
 .menuList {
   display: flex;
   flex-direction: column;
-  gap: var(--size-06);
+  gap: var(--core-size-06);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -831,13 +836,13 @@ header + main {
   display: flex;
   align-items: center;
   width: 100%;
-  padding: var(--size-04);
-  border-radius: var(--size-04);
-  box-shadow: var(--shadow-01);
-  transition: var(--transition);
+  padding: var(--core-size-04);
+  border-radius: var(--core-size-04);
+  box-shadow: 0 1px 3px rgb(0 0 0 / var(--core-opacity-100));
+  transition: all 0.2s ease;
 
   &:hover {
-    background: var(--color-background-tertiary);
+    background: var(--semantic-color-background-tertiary);
   }
 }
 
@@ -850,7 +855,7 @@ header + main {
 .three-up {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--size-06);
+  gap: var(--core-size-06);
 
   p + p {
     margin-top: 0;
@@ -861,7 +866,7 @@ header + main {
   position: absolute;
   display: block;
   box-sizing: border-box;
-  border: 2px solid var(--color-border-bold);
+  border: 2px solid var(--semantic-color-border-bold);
   border-radius: 999px;
   pointer-events: none;
 }
@@ -886,7 +891,7 @@ header + main {
 
 .avatarFlag {
   display: flex;
-  gap: var(--size-06);
+  gap: var(--core-size-06);
   align-items: center;
 }
 
@@ -894,17 +899,17 @@ header + main {
   display: inline-block;
 
   & .icon {
-    margin-right: var(--size-03);
+    margin-right: var(--core-size-03);
   }
 
   & p:last-of-type {
     margin-top: 0;
-    color: var(--color-foreground-secondary);
+    color: var(--semantic-color-foreground-secondary);
   }
 }
 
 .projects ul {
-  gap: var(--size-10);
+  gap: var(--core-size-10);
 }
 
 @keyframes animatedBackground {
@@ -926,55 +931,55 @@ header + main {
   display: flex;
   justify-content: space-between;
   height: auto;
-  padding-bottom: var(--size-10);
+  padding-bottom: var(--core-size-10);
   line-height: 4rem;
 
   a {
     display: flex;
-    gap: var(--size-04);
+    gap: var(--core-size-04);
     align-items: center;
-    color: var(--color-foreground-secondary);
+    color: var(--semantic-color-foreground-secondary);
   }
 }
 
 .glossary-letters {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(48px, 1fr));
-  gap: var(--size-03);
+  gap: var(--core-size-03);
   margin-top: 0;
   padding-left: 0;
-  font-size: var(--heading-05);
+  font-size: var(--semantic-typography-heading-05);
   list-style: none;
 
   a {
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--semantic-typography-fontWeight-medium);
   }
 }
 
 .glossary-item h4 {
   display: flex;
   grid-column: span 1;
-  gap: var(--size-05);
+  gap: var(--core-size-05);
   justify-content: space-between;
   align-items: center;
 }
 
 .sub-list {
   margin-top: 0;
-  padding-top: var(--size-10);
+  padding-top: var(--core-size-10);
   padding-left: 0;
-  border-top: 1px solid var(--color-border-primary);
+  border-top: 1px solid var(--semantic-color-border-primary);
   list-style: none;
 }
 
 @media screen and (width >= 1000px) {
   .gooey > span {
-    padding: var(--size-06) var(--size-06);
+    padding: var(--core-size-06) var(--core-size-06);
   }
 
   .content {
     max-width: 1440px;
-    padding: 0 var(--size-06);
+    padding: 0 var(--core-size-06);
   }
 
   section.home {
@@ -987,7 +992,7 @@ header + main {
 
   main section + section {
     display: block;
-    margin-top: var(--size-07);
+    margin-top: var(--core-size-07);
   }
 
   main .hero {
@@ -997,20 +1002,20 @@ header + main {
   .glossary-letters {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--size-03);
+    gap: var(--core-size-03);
   }
 
   .glossary-letter {
     display: inline-block;
-    margin-right: var(--size-03);
-    font-weight: var(--font-weight-bold);
+    margin-right: var(--core-size-03);
+    font-weight: var(--semantic-typography-fontWeight-bold);
     list-style: none;
   }
 
   .content .glossary-list {
     display: grid;
     grid-template-columns: 1fr 1fr 3fr;
-    gap: var(--size-06);
+    gap: var(--core-size-06);
     align-items: start;
     margin: 0 auto;
   }
@@ -1025,7 +1030,7 @@ header + main {
     display: grid;
     grid-template-columns: subgrid;
     grid-column: span 3;
-    gap: var(--size-06);
+    gap: var(--core-size-06);
     margin-top: 0;
     padding-left: 0;
 
@@ -1033,34 +1038,34 @@ header + main {
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-column: span 2;
-      gap: var(--size-06);
+      gap: var(--core-size-06);
       align-items: start;
 
       .glossary-item {
-        padding: var(--size-03) var(--size-04);
-        border-radius: var(--radius-02);
+        padding: var(--core-size-03) var(--core-size-04);
+        border-radius: var(--semantic-size-radius-02);
         transition: all 0.2s ease;
 
         &:hover {
-          background: var(--color-background-highlight);
-          color: var(--color-foreground-highlight);
+          background: var(--semantic-color-background-highlight);
+          color: var(--semantic-color-foreground-highlight);
 
           & + dd {
-            background: var(--color-background-highlight);
-            color: var(--color-foreground-highlight);
+            background: var(--semantic-color-background-highlight);
+            color: var(--semantic-color-foreground-highlight);
           }
         }
 
         &:has(+ dd:hover) {
-          background: var(--color-background-highlight);
-          color: var(--color-foreground-highlight);
+          background: var(--semantic-color-background-highlight);
+          color: var(--semantic-color-foreground-highlight);
         }
       }
 
       dt h4 {
         display: flex;
         grid-column: span 1;
-        gap: var(--size-05);
+        gap: var(--core-size-05);
         justify-content: space-between;
         align-items: center;
       }
@@ -1108,7 +1113,7 @@ header + main {
   }
 
   .card .media + div {
-    margin-top: var(--size-04);
+    margin-top: var(--core-size-04);
   }
 
   .meta {
@@ -1118,7 +1123,7 @@ header + main {
 
   .meta .byline {
     flex-direction: row;
-    gap: var(--size-03);
+    gap: var(--core-size-03);
     align-items: center;
   }
 }

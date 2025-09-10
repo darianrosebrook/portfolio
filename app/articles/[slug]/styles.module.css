@@ -1,8 +1,8 @@
 .hero {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--size-07);
-  margin-top: var(--size-07);
+  gap: var(--core-size-07);
+  margin-top: var(--core-size-07);
 }
 
 .articleContent {
@@ -16,11 +16,11 @@
 }
 
 .articleContent h2 {
-  font-size: var(--heading-02);
+  font-size: var(--semantic-typography-heading-02);
 }
 
 .articleContent p {
-  font-size: var(--body-02);
+  font-size: var(--semantic-typography-body-02);
   line-height: 1.5;
 }
 
@@ -29,67 +29,67 @@
 }
 
 .articleContent > * + * {
-  margin-top: var(--size-07);
+  margin-top: var(--core-size-07);
 }
 
 .articleLede > * + * {
-  margin-top: var(--size-04);
+  margin-top: var(--core-size-04);
 }
 
 .byline > * + * {
-  margin-top: var(--size-03);
+  margin-top: var(--core-size-03);
 }
 
 .articleContent aside div > * + * {
-  margin-top: var(--size-07);
+  margin-top: var(--core-size-07);
 }
 
 .articleLede img {
   width: 100%;
   height: auto;
   margin: 0 auto;
-  border-radius: var(--size-05);
+  border-radius: var(--core-size-05);
 }
 
 .prev-next {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--size-05);
-  margin-top: var(--size-07);
+  gap: var(--core-size-05);
+  margin-top: var(--core-size-07);
 }
 
 .meta {
   display: flex;
   flex-direction: column;
-  gap: var(--size-06);
+  gap: var(--core-size-06);
   justify-content: space-between;
 }
 
 .byline {
   display: flex;
-  gap: var(--size-05);
+  gap: var(--core-size-05);
   justify-content: space-between;
   align-items: center;
 }
 
 .links {
   display: flex;
-  gap: var(--size-03);
+  gap: var(--core-size-03);
   justify-content: space-between;
   align-items: center;
 }
 
 .share {
   display: flex;
-  gap: var(--size-03);
+  gap: var(--core-size-03);
   align-items: center;
 }
 
 .links ul {
   display: flex;
-  gap: var(--size-03);
+  gap: var(--core-size-03);
   margin: 0;
-  margin-left: var(--size-03);
+  margin-left: var(--core-size-03);
   padding: 0;
   list-style: none;
 }
@@ -97,8 +97,8 @@
 .prev_next {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--size-05);
-  margin-top: var(--size-07);
+  gap: var(--core-size-05);
+  margin-top: var(--core-size-07);
 }
 
 @media screen and (width >= 1000px) {
@@ -118,6 +118,6 @@
   .articleContent aside {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--size-07);
+    gap: var(--semantic-size-gridGap-large);
   }
 }

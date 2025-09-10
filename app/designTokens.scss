@@ -1,0 +1,528 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: components/designTokens.json
+ */
+
+:root {
+  --core-color-black: #000000;
+  --core-color-blue-100: #d9f3fe;
+  --core-color-blue-200: #8ad9fc;
+  --core-color-blue-300: #2eb9f9;
+  --core-color-blue-400: #1d91fb;
+  --core-color-blue-500: #0a65fe;
+  --core-color-blue-600: #0042dc;
+  --core-color-blue-700: #002d99;
+  --core-color-blue-800: #001b5a;
+  --core-color-dark: #141414;
+  --core-color-green-100: #e4f2e0;
+  --core-color-green-200: #b0daa4;
+  --core-color-green-300: #79bf65;
+  --core-color-green-400: #609e41;
+  --core-color-green-500: #487e1e;
+  --core-color-green-600: #336006;
+  --core-color-green-700: #234104;
+  --core-color-green-800: #142502;
+  --core-color-light: #fafafa;
+  --core-color-neutral-100: #efefef;
+  --core-color-neutral-200: #cecece;
+  --core-color-neutral-300: #aeaeae;
+  --core-color-neutral-400: #8f8f8f;
+  --core-color-neutral-500: #717171;
+  --core-color-neutral-600: #555555;
+  --core-color-neutral-700: #3a3a3a;
+  --core-color-neutral-800: #212121;
+  --core-color-orange-100: #ffedcc;
+  --core-color-orange-200: #ffc458;
+  --core-color-orange-300: #fe9400;
+  --core-color-orange-400: #d77600;
+  --core-color-orange-500: #ac5c00;
+  --core-color-orange-600: #824500;
+  --core-color-orange-700: #593000;
+  --core-color-orange-800: #331b00;
+  --core-color-red-100: #fceaea;
+  --core-color-red-200: #f7c1c2;
+  --core-color-red-300: #f29495;
+  --core-color-red-400: #ea6465;
+  --core-color-red-500: #d9292b;
+  --core-color-red-600: #ae0001;
+  --core-color-red-700: #7b0000;
+  --core-color-red-800: #4b0000;
+  --core-color-teal-100: #caf8f7;
+  --core-color-teal-200: #18dbdb;
+  --core-color-teal-300: #22b4b4;
+  --core-color-teal-400: #258f8e;
+  --core-color-teal-500: #236f6f;
+  --core-color-teal-600: #205353;
+  --core-color-teal-700: #1a3a3a;
+  --core-color-teal-800: #121d1d;
+  --core-color-transparent: transparent;
+  --core-color-violet-100: #ffe9fe;
+  --core-color-violet-200: #ffb5fc;
+  --core-color-violet-300: #ff7bfa;
+  --core-color-violet-400: #f431ed;
+  --core-color-violet-500: #c127bc;
+  --core-color-violet-600: #931d8f;
+  --core-color-violet-700: #661463;
+  --core-color-violet-800: #3b0c3a;
+  --core-color-white: #ffffff;
+  --core-color-yellow-100: #ffedcc;
+  --core-color-yellow-200: #ffc458;
+  --core-color-yellow-300: #fe9400;
+  --core-color-yellow-400: #d77600;
+  --core-color-yellow-500: #ac5c00;
+  --core-color-yellow-600: #824500;
+  --core-color-yellow-700: #593000;
+  --core-color-yellow-800: #331b00;
+  --core-depth-0: 0;
+  --core-depth-1: 8;
+  --core-depth-2: 16;
+  --core-depth-3: 32;
+  --core-depth-4: 64;
+  --core-opacity-100: 0.08;
+  --core-opacity-200: 0.12;
+  --core-opacity-300: 0.16;
+  --core-opacity-400: 0.24;
+  --core-opacity-50: 0.04;
+  --core-opacity-500: 0.32;
+  --core-opacity-600: 0.48;
+  --core-opacity-700: 0.64;
+  --core-opacity-800: 0.8;
+  --core-opacity-900: 0.96;
+  --core-opacity-full: 1;
+  --core-radius-full: 1920px;
+  --core-radius-large: 16px;
+  --core-radius-medium: 8px;
+  --core-radius-none: 0;
+  --core-radius-small: 4px;
+  --core-size-00: 0;
+  --core-size-01: 1px;
+  --core-size-02: 2px;
+  --core-size-03: 4px;
+  --core-size-04: 8px;
+  --core-size-05: 12px;
+  --core-size-06: 16px;
+  --core-size-07: 24px;
+  --core-size-08: 32px;
+  --core-size-09: 48px;
+  --core-size-10: 64px;
+  --core-typography-fontFamily-mono: Menlo, monospace;
+  --core-typography-fontFamily-sans: Inter, sans-serif;
+  --core-typography-fontFamily-serif: Georgia, serif;
+  --core-typography-fontWeight-black: 900;
+  --core-typography-fontWeight-bold: 700;
+  --core-typography-fontWeight-light: 300;
+  --core-typography-fontWeight-medium: 500;
+  --core-typography-fontWeight-regular: 400;
+  --core-typography-letterSpacing-normal: 0;
+  --core-typography-letterSpacing-tight: -0.018em;
+  --core-typography-letterSpacing-wide: 0.018em;
+  --core-typography-lineHeight-body: 1.5;
+  --core-typography-lineHeight-collapse: 1;
+  --core-typography-lineHeight-heading: 1;
+  --core-typography-ramp-1: 10px;
+  --core-typography-ramp-10: 48px;
+  --core-typography-ramp-11: 60px;
+  --core-typography-ramp-12: 72px;
+  --core-typography-ramp-13: 96px;
+  --core-typography-ramp-14: 128px;
+  --core-typography-ramp-15: 160px;
+  --core-typography-ramp-16: 192px;
+  --core-typography-ramp-2: 12px;
+  --core-typography-ramp-3: 14px;
+  --core-typography-ramp-4: 16px;
+  --core-typography-ramp-5: 18px;
+  --core-typography-ramp-6: 20px;
+  --core-typography-ramp-7: 24px;
+  --core-typography-ramp-8: 32px;
+  --core-typography-ramp-9: 40px;
+  --semantic-color-background-accent: var(--core-color-red-500);
+  --semantic-color-background-active: var(--core-color-neutral-300);
+  --semantic-color-background-dangerStrong: var(--core-color-red-600);
+  --semantic-color-background-dangerSubtle: var(--core-color-red-100);
+  --semantic-color-background-disabled: var(--core-color-neutral-200);
+  --semantic-color-background-highlight: var(--core-color-blue-200);
+  --semantic-color-background-hover: var(--core-color-neutral-200);
+  --semantic-color-background-imageOverlay: rgba(
+    0,
+    0,
+    0,
+    var(--core-opacity-50)
+  );
+  --semantic-color-background-infoStrong: var(--core-color-blue-600);
+  --semantic-color-background-infoSubtle: var(--core-color-blue-100);
+  --semantic-color-background-inverse: var(--core-color-light);
+  --semantic-color-background-onColor: var(--semantic-color-background-primary);
+  --semantic-color-background-placeholder: var(--core-color-neutral-100);
+  --semantic-color-background-primary: var(--core-color-light);
+  --semantic-color-background-readOnly: var(--core-color-neutral-200);
+  --semantic-color-background-secondary: var(--core-color-neutral-100);
+  --semantic-color-background-successStrong: var(--core-color-green-600);
+  --semantic-color-background-successSubtle: var(--core-color-green-100);
+  --semantic-color-background-tertiary: var(--core-color-neutral-200);
+  --semantic-color-background-warningStrong: var(--core-color-orange-400);
+  --semantic-color-background-warningSubtle: var(--core-color-orange-100);
+  --semantic-color-border-accent: var(--core-color-red-500);
+  --semantic-color-border-bold: var(--core-color-neutral-600);
+  --semantic-color-border-danger: var(--core-color-red-600);
+  --semantic-color-border-disabled: var(--core-color-neutral-200);
+  --semantic-color-border-info: var(--core-color-blue-600);
+  --semantic-color-border-light: var(--core-color-neutral-200);
+  --semantic-color-border-onColor: var(--core-color-white);
+  --semantic-color-border-primary: var(--core-color-neutral-300);
+  --semantic-color-border-success: var(--core-color-green-600);
+  --semantic-color-border-warning: var(--core-color-orange-600);
+  --semantic-color-data-trendDefault: var(--core-color-blue-400);
+  --semantic-color-data-trendDown: var(--core-color-red-500);
+  --semantic-color-data-trendNeutral: var(--core-color-neutral-500);
+  --semantic-color-data-trendUp: var(--core-color-green-500);
+  --semantic-color-foreground-accent: var(--core-color-red-500);
+  --semantic-color-foreground-danger: var(--core-color-red-500);
+  --semantic-color-foreground-disabled: var(--core-color-neutral-300);
+  --semantic-color-foreground-highlight: var(--core-color-blue-700);
+  --semantic-color-foreground-hover: var(--core-color-neutral-700);
+  --semantic-color-foreground-info: var(--core-color-blue-500);
+  --semantic-color-foreground-inverse: var(--core-color-light);
+  --semantic-color-foreground-link: var(--core-color-red-500);
+  --semantic-color-foreground-linkHover: var(--core-color-red-600);
+  --semantic-color-foreground-linkVisited: var(--core-color-red-400);
+  --semantic-color-foreground-onColor: var(--semantic-color-foreground-primary);
+  --semantic-color-foreground-onDangerSubtle: var(--core-color-red-700);
+  --semantic-color-foreground-onInfoSubtle: var(--core-color-blue-700);
+  --semantic-color-foreground-onSuccessSubtle: var(--core-color-green-700);
+  --semantic-color-foreground-onWarningSubtle: var(--core-color-orange-700);
+  --semantic-color-foreground-placeholder: var(--core-color-neutral-400);
+  --semantic-color-foreground-primary: var(--core-color-dark);
+  --semantic-color-foreground-secondary: var(--core-color-neutral-600);
+  --semantic-color-foreground-success: var(--core-color-green-500);
+  --semantic-color-foreground-tertiary: var(--core-color-neutral-500);
+  --semantic-color-foreground-warning: var(--core-color-orange-500);
+  --semantic-elevation-depth: var(--core-depth-0);
+  --semantic-focus-ringOffset: var(--core-size-02);
+  --semantic-size-border-bold: var(--core-size-03);
+  --semantic-size-border-default: var(--core-size-02);
+  --semantic-size-border-offset: var(--core-size-02);
+  --semantic-size-border-thin: var(--core-size-01);
+  --semantic-size-breakpoint-lg: 1024px;
+  --semantic-size-breakpoint-md: 768px;
+  --semantic-size-breakpoint-sm: 640px;
+  --semantic-size-breakpoint-xl: 1440px;
+  --semantic-size-breakpoint-xxl: 1536px;
+  --semantic-size-breakpoint-xxxl: 1920px;
+  --semantic-size-grid-gap-large: var(--core-size-10);
+  --semantic-size-grid-gap-medium: var(--core-size-07);
+  --semantic-size-grid-gap-small: var(--core-size-04);
+  --semantic-size-radius-00: var(--core-size-00);
+  --semantic-size-radius-01: var(--core-size-03);
+  --semantic-size-radius-02: var(--core-size-04);
+  --semantic-size-radius-03: var(--core-size-06);
+  --semantic-size-radius-full: 1920px;
+  --semantic-size-ratio-1-2: 1/2;
+  --semantic-size-ratio-16-9: 16/9;
+  --semantic-size-ratio-2-1: 2/1;
+  --semantic-size-ratio-2-3: 2/3;
+  --semantic-size-ratio-3-2: 3/2;
+  --semantic-size-ratio-3-4: 3/4;
+  --semantic-size-ratio-4-3: 4/3;
+  --semantic-size-ratio-9-16: 9/16;
+  --semantic-size-ratio-square: 1/1;
+  --semantic-size-tapTarget-large: var(--core-size-09);
+  --semantic-size-tapTarget-medium: var(--core-size-08);
+  --semantic-size-tapTarget-small: var(--core-size-07);
+  --semantic-typography-body-01: var(--core-typography-ramp-5);
+  --semantic-typography-body-02: var(--core-typography-ramp-4);
+  --semantic-typography-body-03: var(--core-typography-ramp-3);
+  --semantic-typography-body-04: var(--core-typography-ramp-2);
+  --semantic-typography-button-01: var(--core-typography-ramp-5);
+  --semantic-typography-button-02: var(--core-typography-ramp-4);
+  --semantic-typography-button-03: var(--core-typography-ramp-3);
+  --semantic-typography-caption-01: var(--core-typography-ramp-3);
+  --semantic-typography-caption-02: var(--core-typography-ramp-2);
+  --semantic-typography-caption-03: var(--core-typography-ramp-1);
+  --semantic-typography-fontWeight-black: 900;
+  --semantic-typography-fontWeight-bold: 700;
+  --semantic-typography-fontWeight-light: 300;
+  --semantic-typography-fontWeight-medium: 500;
+  --semantic-typography-fontWeight-regular: 400;
+  --semantic-typography-heading-01: var(--core-typography-ramp-8);
+  --semantic-typography-heading-02: var(--core-typography-ramp-7);
+  --semantic-typography-heading-03: var(--core-typography-ramp-6);
+  --semantic-typography-heading-04: var(--core-typography-ramp-5);
+  --semantic-typography-heading-05: var(--core-typography-ramp-4);
+  --semantic-typography-heading-06: var(--core-typography-ramp-3);
+  --semantic-typography-letterSpacing-normal: 0;
+  --semantic-typography-letterSpacing-tight: -0.018em;
+  --semantic-typography-letterSpacing-wide: 0.018em;
+  --semantic-typography-lineHeight-body: 1.5;
+  --semantic-typography-lineHeight-collapse: 1;
+  --semantic-typography-lineHeight-heading: var(
+    --semantic-typography-lineHeight-collapse
+  );
+  --semantic-typography-oversize-01: var(--core-typography-ramp-16);
+  --semantic-typography-oversize-02: var(--core-typography-ramp-15);
+  --semantic-typography-oversize-03: var(--core-typography-ramp-14);
+  --semantic-typography-oversize-04: var(--core-typography-ramp-13);
+}
+
+.light {
+  --semantic-color-background-accent: var(--core-color-red-500);
+  --semantic-color-background-active: var(--core-color-neutral-300);
+  --semantic-color-background-dangerStrong: var(--core-color-red-600);
+  --semantic-color-background-dangerSubtle: var(--core-color-red-100);
+  --semantic-color-background-disabled: var(--core-color-neutral-200);
+  --semantic-color-background-highlight: var(--core-color-blue-200);
+  --semantic-color-background-hover: var(--core-color-neutral-200);
+  --semantic-color-background-imageOverlay: rgba(
+    0,
+    0,
+    0,
+    var(--core-opacity-50)
+  );
+  --semantic-color-background-infoStrong: var(--core-color-blue-600);
+  --semantic-color-background-infoSubtle: var(--core-color-blue-100);
+  --semantic-color-background-inverse: var(--core-color-light);
+  --semantic-color-background-onColor: var(--semantic-color-background-primary);
+  --semantic-color-background-placeholder: var(--core-color-neutral-100);
+  --semantic-color-background-primary: var(--core-color-light);
+  --semantic-color-background-readOnly: var(--core-color-neutral-200);
+  --semantic-color-background-secondary: var(--core-color-neutral-100);
+  --semantic-color-background-successStrong: var(--core-color-green-600);
+  --semantic-color-background-successSubtle: var(--core-color-green-100);
+  --semantic-color-background-tertiary: var(--core-color-neutral-200);
+  --semantic-color-background-warningStrong: var(--core-color-orange-400);
+  --semantic-color-background-warningSubtle: var(--core-color-orange-100);
+  --semantic-color-border-accent: var(--core-color-red-500);
+  --semantic-color-border-bold: var(--core-color-neutral-600);
+  --semantic-color-border-danger: var(--core-color-red-600);
+  --semantic-color-border-disabled: var(--core-color-neutral-200);
+  --semantic-color-border-info: var(--core-color-blue-600);
+  --semantic-color-border-light: var(--core-color-neutral-200);
+  --semantic-color-border-onColor: var(--core-color-white);
+  --semantic-color-border-primary: var(--core-color-neutral-300);
+  --semantic-color-border-success: var(--core-color-green-600);
+  --semantic-color-border-warning: var(--core-color-orange-600);
+  --semantic-color-data-trendDefault: var(--core-color-blue-400);
+  --semantic-color-data-trendDown: var(--core-color-red-500);
+  --semantic-color-data-trendNeutral: var(--core-color-neutral-500);
+  --semantic-color-data-trendUp: var(--core-color-green-500);
+  --semantic-color-foreground-accent: var(--core-color-red-500);
+  --semantic-color-foreground-danger: var(--core-color-red-500);
+  --semantic-color-foreground-disabled: var(--core-color-neutral-300);
+  --semantic-color-foreground-highlight: var(--core-color-blue-700);
+  --semantic-color-foreground-hover: var(--core-color-neutral-700);
+  --semantic-color-foreground-info: var(--core-color-blue-500);
+  --semantic-color-foreground-inverse: var(--core-color-light);
+  --semantic-color-foreground-link: var(--core-color-red-500);
+  --semantic-color-foreground-linkHover: var(--core-color-red-600);
+  --semantic-color-foreground-linkVisited: var(--core-color-red-400);
+  --semantic-color-foreground-onColor: var(--semantic-color-foreground-primary);
+  --semantic-color-foreground-onDangerSubtle: var(--core-color-red-700);
+  --semantic-color-foreground-onInfoSubtle: var(--core-color-blue-700);
+  --semantic-color-foreground-onSuccessSubtle: var(--core-color-green-700);
+  --semantic-color-foreground-onWarningSubtle: var(--core-color-orange-700);
+  --semantic-color-foreground-placeholder: var(--core-color-neutral-400);
+  --semantic-color-foreground-primary: var(--core-color-dark);
+  --semantic-color-foreground-secondary: var(--core-color-neutral-600);
+  --semantic-color-foreground-success: var(--core-color-green-500);
+  --semantic-color-foreground-tertiary: var(--core-color-neutral-500);
+  --semantic-color-foreground-warning: var(--core-color-orange-500);
+}
+
+.dark {
+  --semantic-color-background-accent: var(--core-color-red-500);
+  --semantic-color-background-active: var(--core-color-neutral-600);
+  --semantic-color-background-dangerStrong: var(--core-color-red-600);
+  --semantic-color-background-dangerSubtle: var(--core-color-red-800);
+  --semantic-color-background-disabled: var(--core-color-neutral-700);
+  --semantic-color-background-highlight: var(--core-color-blue-800);
+  --semantic-color-background-hover: var(--core-color-neutral-700);
+  --semantic-color-background-imageOverlay: rgba(
+    0,
+    0,
+    0,
+    var(--core-opacity-50)
+  );
+  --semantic-color-background-infoStrong: var(--core-color-blue-600);
+  --semantic-color-background-infoSubtle: var(--core-color-blue-800);
+  --semantic-color-background-inverse: var(--core-color-light);
+  --semantic-color-background-onColor: var(--semantic-color-background-primary);
+  --semantic-color-background-placeholder: var(--core-color-neutral-800);
+  --semantic-color-background-primary: var(--core-color-dark);
+  --semantic-color-background-readOnly: var(--core-color-neutral-700);
+  --semantic-color-background-secondary: var(--core-color-neutral-800);
+  --semantic-color-background-successStrong: var(--core-color-green-600);
+  --semantic-color-background-successSubtle: var(--core-color-green-800);
+  --semantic-color-background-tertiary: var(--core-color-neutral-700);
+  --semantic-color-background-warningStrong: var(--core-color-orange-600);
+  --semantic-color-background-warningSubtle: var(--core-color-orange-800);
+  --semantic-color-border-accent: var(--core-color-red-500);
+  --semantic-color-border-bold: var(--core-color-neutral-300);
+  --semantic-color-border-danger: var(--core-color-red-600);
+  --semantic-color-border-disabled: var(--core-color-neutral-700);
+  --semantic-color-border-info: var(--core-color-blue-600);
+  --semantic-color-border-light: var(--core-color-neutral-700);
+  --semantic-color-border-onColor: var(--core-color-white);
+  --semantic-color-border-primary: var(--core-color-neutral-600);
+  --semantic-color-border-success: var(--core-color-green-600);
+  --semantic-color-border-warning: var(--core-color-orange-600);
+  --semantic-color-data-trendDefault: var(--core-color-blue-400);
+  --semantic-color-data-trendDown: var(--core-color-red-500);
+  --semantic-color-data-trendNeutral: var(--core-color-neutral-500);
+  --semantic-color-data-trendUp: var(--core-color-green-500);
+  --semantic-color-foreground-accent: var(--core-color-red-400);
+  --semantic-color-foreground-danger: var(--core-color-red-400);
+  --semantic-color-foreground-disabled: var(--core-color-neutral-600);
+  --semantic-color-foreground-highlight: var(--core-color-blue-400);
+  --semantic-color-foreground-hover: var(--core-color-neutral-300);
+  --semantic-color-foreground-info: var(--core-color-blue-400);
+  --semantic-color-foreground-inverse: var(--core-color-dark);
+  --semantic-color-foreground-link: var(--core-color-red-400);
+  --semantic-color-foreground-linkHover: var(--core-color-red-300);
+  --semantic-color-foreground-linkVisited: var(--core-color-red-500);
+  --semantic-color-foreground-onColor: var(--semantic-color-foreground-primary);
+  --semantic-color-foreground-onDangerSubtle: var(--core-color-red-200);
+  --semantic-color-foreground-onInfoSubtle: var(--core-color-blue-200);
+  --semantic-color-foreground-onSuccessSubtle: var(--core-color-green-200);
+  --semantic-color-foreground-onWarningSubtle: var(--core-color-orange-200);
+  --semantic-color-foreground-placeholder: var(--core-color-neutral-400);
+  --semantic-color-foreground-primary: var(--core-color-light);
+  --semantic-color-foreground-secondary: var(--core-color-neutral-300);
+  --semantic-color-foreground-success: var(--core-color-green-400);
+  --semantic-color-foreground-tertiary: var(--core-color-neutral-500);
+  --semantic-color-foreground-warning: var(--core-color-orange-400);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --semantic-color-background-accent: var(--core-color-red-500);
+    --semantic-color-background-active: var(--core-color-neutral-600);
+    --semantic-color-background-dangerStrong: var(--core-color-red-600);
+    --semantic-color-background-dangerSubtle: var(--core-color-red-800);
+    --semantic-color-background-disabled: var(--core-color-neutral-700);
+    --semantic-color-background-highlight: var(--core-color-blue-800);
+    --semantic-color-background-hover: var(--core-color-neutral-700);
+    --semantic-color-background-imageOverlay: rgba(
+      0,
+      0,
+      0,
+      var(--core-opacity-50)
+    );
+    --semantic-color-background-infoStrong: var(--core-color-blue-600);
+    --semantic-color-background-infoSubtle: var(--core-color-blue-800);
+    --semantic-color-background-inverse: var(--core-color-light);
+    --semantic-color-background-onColor: var(
+      --semantic-color-background-primary
+    );
+    --semantic-color-background-placeholder: var(--core-color-neutral-800);
+    --semantic-color-background-primary: var(--core-color-dark);
+    --semantic-color-background-readOnly: var(--core-color-neutral-700);
+    --semantic-color-background-secondary: var(--core-color-neutral-800);
+    --semantic-color-background-successStrong: var(--core-color-green-600);
+    --semantic-color-background-successSubtle: var(--core-color-green-800);
+    --semantic-color-background-tertiary: var(--core-color-neutral-700);
+    --semantic-color-background-warningStrong: var(--core-color-orange-600);
+    --semantic-color-background-warningSubtle: var(--core-color-orange-800);
+    --semantic-color-border-accent: var(--core-color-red-500);
+    --semantic-color-border-bold: var(--core-color-neutral-300);
+    --semantic-color-border-danger: var(--core-color-red-600);
+    --semantic-color-border-disabled: var(--core-color-neutral-700);
+    --semantic-color-border-info: var(--core-color-blue-600);
+    --semantic-color-border-light: var(--core-color-neutral-700);
+    --semantic-color-border-onColor: var(--core-color-white);
+    --semantic-color-border-primary: var(--core-color-neutral-600);
+    --semantic-color-border-success: var(--core-color-green-600);
+    --semantic-color-border-warning: var(--core-color-orange-600);
+    --semantic-color-data-trendDefault: var(--core-color-blue-400);
+    --semantic-color-data-trendDown: var(--core-color-red-500);
+    --semantic-color-data-trendNeutral: var(--core-color-neutral-500);
+    --semantic-color-data-trendUp: var(--core-color-green-500);
+    --semantic-color-foreground-accent: var(--core-color-red-400);
+    --semantic-color-foreground-danger: var(--core-color-red-400);
+    --semantic-color-foreground-disabled: var(--core-color-neutral-600);
+    --semantic-color-foreground-highlight: var(--core-color-blue-400);
+    --semantic-color-foreground-hover: var(--core-color-neutral-300);
+    --semantic-color-foreground-info: var(--core-color-blue-400);
+    --semantic-color-foreground-inverse: var(--core-color-dark);
+    --semantic-color-foreground-link: var(--core-color-red-400);
+    --semantic-color-foreground-linkHover: var(--core-color-red-300);
+    --semantic-color-foreground-linkVisited: var(--core-color-red-500);
+    --semantic-color-foreground-onColor: var(
+      --semantic-color-foreground-primary
+    );
+    --semantic-color-foreground-onDangerSubtle: var(--core-color-red-200);
+    --semantic-color-foreground-onInfoSubtle: var(--core-color-blue-200);
+    --semantic-color-foreground-onSuccessSubtle: var(--core-color-green-200);
+    --semantic-color-foreground-onWarningSubtle: var(--core-color-orange-200);
+    --semantic-color-foreground-placeholder: var(--core-color-neutral-400);
+    --semantic-color-foreground-primary: var(--core-color-light);
+    --semantic-color-foreground-secondary: var(--core-color-neutral-300);
+    --semantic-color-foreground-success: var(--core-color-green-400);
+    --semantic-color-foreground-tertiary: var(--core-color-neutral-500);
+    --semantic-color-foreground-warning: var(--core-color-orange-400);
+  }
+  .light {
+    --semantic-color-background-accent: var(--core-color-red-500);
+    --semantic-color-background-active: var(--core-color-neutral-300);
+    --semantic-color-background-dangerStrong: var(--core-color-red-600);
+    --semantic-color-background-dangerSubtle: var(--core-color-red-100);
+    --semantic-color-background-disabled: var(--core-color-neutral-200);
+    --semantic-color-background-highlight: var(--core-color-blue-200);
+    --semantic-color-background-hover: var(--core-color-neutral-200);
+    --semantic-color-background-imageOverlay: rgba(
+      0,
+      0,
+      0,
+      var(--core-opacity-50)
+    );
+    --semantic-color-background-infoStrong: var(--core-color-blue-600);
+    --semantic-color-background-infoSubtle: var(--core-color-blue-100);
+    --semantic-color-background-inverse: var(--core-color-light);
+    --semantic-color-background-onColor: var(
+      --semantic-color-background-primary
+    );
+    --semantic-color-background-placeholder: var(--core-color-neutral-100);
+    --semantic-color-background-primary: var(--core-color-light);
+    --semantic-color-background-readOnly: var(--core-color-neutral-200);
+    --semantic-color-background-secondary: var(--core-color-neutral-100);
+    --semantic-color-background-successStrong: var(--core-color-green-600);
+    --semantic-color-background-successSubtle: var(--core-color-green-100);
+    --semantic-color-background-tertiary: var(--core-color-neutral-200);
+    --semantic-color-background-warningStrong: var(--core-color-orange-400);
+    --semantic-color-background-warningSubtle: var(--core-color-orange-100);
+    --semantic-color-border-accent: var(--core-color-red-500);
+    --semantic-color-border-bold: var(--core-color-neutral-600);
+    --semantic-color-border-danger: var(--core-color-red-600);
+    --semantic-color-border-disabled: var(--core-color-neutral-200);
+    --semantic-color-border-info: var(--core-color-blue-600);
+    --semantic-color-border-light: var(--core-color-neutral-200);
+    --semantic-color-border-onColor: var(--core-color-white);
+    --semantic-color-border-primary: var(--core-color-neutral-300);
+    --semantic-color-border-success: var(--core-color-green-600);
+    --semantic-color-border-warning: var(--core-color-orange-600);
+    --semantic-color-data-trendDefault: var(--core-color-blue-400);
+    --semantic-color-data-trendDown: var(--core-color-red-500);
+    --semantic-color-data-trendNeutral: var(--core-color-neutral-500);
+    --semantic-color-data-trendUp: var(--core-color-green-500);
+    --semantic-color-foreground-accent: var(--core-color-red-500);
+    --semantic-color-foreground-danger: var(--core-color-red-500);
+    --semantic-color-foreground-disabled: var(--core-color-neutral-300);
+    --semantic-color-foreground-highlight: var(--core-color-blue-700);
+    --semantic-color-foreground-hover: var(--core-color-neutral-700);
+    --semantic-color-foreground-info: var(--core-color-blue-500);
+    --semantic-color-foreground-inverse: var(--core-color-light);
+    --semantic-color-foreground-link: var(--core-color-red-500);
+    --semantic-color-foreground-linkHover: var(--core-color-red-600);
+    --semantic-color-foreground-linkVisited: var(--core-color-red-400);
+    --semantic-color-foreground-onColor: var(
+      --semantic-color-foreground-primary
+    );
+    --semantic-color-foreground-onDangerSubtle: var(--core-color-red-700);
+    --semantic-color-foreground-onInfoSubtle: var(--core-color-blue-700);
+    --semantic-color-foreground-onSuccessSubtle: var(--core-color-green-700);
+    --semantic-color-foreground-onWarningSubtle: var(--core-color-orange-700);
+    --semantic-color-foreground-placeholder: var(--core-color-neutral-400);
+    --semantic-color-foreground-primary: var(--core-color-dark);
+    --semantic-color-foreground-secondary: var(--core-color-neutral-600);
+    --semantic-color-foreground-success: var(--core-color-green-500);
+    --semantic-color-foreground-tertiary: var(--core-color-neutral-500);
+    --semantic-color-foreground-warning: var(--core-color-orange-500);
+  }
+}

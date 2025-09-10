@@ -1,17 +1,17 @@
 .navContainer {
   position: fixed;
   z-index: 1000;
-  padding: var(--size-02) var(--size-06);
+  padding: var(--core-size-02) var(--core-size-06);
   background: linear-gradient(
     to top,
     var(--color-core-transparent) 0%,
-    var(--color-background-primary) 20%
+    var(--semantic-color-background-primary) 20%
   );
 }
 
 .logo {
-  width: var(--size-07);
-  height: var(--size-07);
+  width: var(--core-size-07);
+  height: var(--core-size-07);
   margin: 0;
 }
 
@@ -21,9 +21,9 @@
 
 .nav a:has(svg) {
   display: flex;
-  gap: var(--size-02);
+  gap: var(--core-size-02);
   align-items: center;
-  color: var(--color-foreground);
+  color: var(--semantic-color-foreground);
 }
 
 .nav a.active {
@@ -34,16 +34,16 @@
 .nav {
   display: flex;
   flex-direction: column;
-  gap: var(--size-02);
+  gap: var(--core-size-02);
   width: 100%;
-  min-height: var(--size-10);
-  margin-bottom: var(--size-02);
-  padding: var(--size-02) 0;
+  min-height: var(--core-size-10);
+  margin-bottom: var(--core-size-02);
+  padding: var(--core-size-02) 0;
 }
 
 .nav .navLinks {
   display: flex;
-  gap: var(--size-05);
+  gap: var(--core-size-05);
   align-items: center;
   margin: 0;
   padding: 0;

@@ -208,8 +208,9 @@ export const wrapWithGooeyHighlight = (
       className: 'gooey-highlight-wrapper',
       style: {
         '--highlight-color':
-          highlightColor || 'var(--color-background-highlight)',
-        '--text-color': textColor || 'var(--color-foreground-highlight)',
+          highlightColor || 'var(--semantic-color-background-highlight)',
+        '--text-color':
+          textColor || 'var(--semantic-color-foreground-highlight)',
       } as React.CSSProperties,
     },
     React.createElement('span', null, text)

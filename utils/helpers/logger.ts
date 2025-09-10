@@ -9,6 +9,14 @@
 export class Logger {
   static level: 'debug' | 'info' | 'warn' | 'error' | 'silent' = 'warn';
 
+  static timeStart(label: string) {
+    if (['debug', 'info', 'warn', 'error'].includes(Logger.level))
+      console.time(label);
+  }
+  static timeEnd(label: string) {
+    if (['debug', 'info', 'warn', 'error'].includes(Logger.level))
+      console.timeEnd(label);
+  }
   static debug(...args: unknown[]) {
     if (['debug'].includes(Logger.level)) console.debug('[DEBUG]', ...args);
   }

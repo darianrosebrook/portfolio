@@ -61,11 +61,11 @@ const Template: React.FC<TemplateProps> = ({ children }) => {
           const foreground = `var(--color-core-${color}-${val[0]})`;
           const background = `var(--color-core-${color}-${val[1]})`;
           rootElement.style.setProperty(
-            '--color-foreground-highlight',
+            '--semantic-color-foreground-highlight',
             foreground
           );
           rootElement.style.setProperty(
-            '--color-background-highlight',
+            '--semantic-color-background-highlight',
             background
           );
         }

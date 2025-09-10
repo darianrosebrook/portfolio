@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import styles from './avatar.module.css';
+import styles from './Avatar.module.scss';
 
 type AvatarProps = {
   src?: string;

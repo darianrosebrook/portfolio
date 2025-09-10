@@ -115,10 +115,10 @@ const VideoBubbleMenu: React.FC<VideoBubbleMenuProps> = ({ editor }) => {
         left: '50%',
         transform: 'translateX(-50%)',
         zIndex: 1000,
-        background: 'var(--color-background-primary)',
-        border: '1px solid var(--color-border-primary)',
-        borderRadius: 'var(--radius-02)',
-        padding: 'var(--size-02)',
+        background: 'var(--semantic-color-background-primary)',
+        border: '1px solid var(--semantic-color-border-primary)',
+        borderRadius: 'var(--semantic-size-radius-02)',
+        padding: 'var(--core-size-02)',
         boxShadow: 'var(--shadow-02)',
       }}
     >
@@ -126,7 +126,7 @@ const VideoBubbleMenu: React.FC<VideoBubbleMenuProps> = ({ editor }) => {
         <div
           style={{
             display: 'flex',
-            gap: 'var(--size-01)',
+            gap: 'var(--core-size-01)',
             alignItems: 'center',
           }}
         >
@@ -144,9 +144,9 @@ const VideoBubbleMenu: React.FC<VideoBubbleMenuProps> = ({ editor }) => {
               }
             }}
             style={{
-              padding: 'var(--size-01) var(--size-02)',
-              border: '1px solid var(--color-border-primary)',
-              borderRadius: 'var(--radius-01)',
+              padding: 'var(--core-size-01) var(--core-size-02)',
+              border: '1px solid var(--semantic-color-border-primary)',
+              borderRadius: 'var(--semantic-size-radius-01)',
               fontSize: 'var(--font-size-sm)',
               minWidth: '200px',
             }}
@@ -155,11 +155,11 @@ const VideoBubbleMenu: React.FC<VideoBubbleMenuProps> = ({ editor }) => {
             onClick={handleUrlSubmit}
             title="Update URL"
             style={{
-              padding: 'var(--size-01) var(--size-02)',
+              padding: 'var(--core-size-01) var(--core-size-02)',
               background: 'var(--color-accent)',
               color: 'var(--color-accent-contrast)',
               border: 'none',
-              borderRadius: 'var(--radius-01)',
+              borderRadius: 'var(--semantic-size-radius-01)',
               cursor: 'pointer',
             }}
           >
@@ -169,11 +169,11 @@ const VideoBubbleMenu: React.FC<VideoBubbleMenuProps> = ({ editor }) => {
             onClick={handleUrlCancel}
             title="Cancel"
             style={{
-              padding: 'var(--size-01) var(--size-02)',
-              background: 'var(--color-background-secondary)',
+              padding: 'var(--core-size-01) var(--core-size-02)',
+              background: 'var(--semantic-color-background-secondary)',
               color: 'var(--color-text-secondary)',
-              border: '1px solid var(--color-border-primary)',
-              borderRadius: 'var(--radius-01)',
+              border: '1px solid var(--semantic-color-border-primary)',
+              borderRadius: 'var(--semantic-size-radius-01)',
               cursor: 'pointer',
             }}
           >
@@ -184,11 +184,11 @@ const VideoBubbleMenu: React.FC<VideoBubbleMenuProps> = ({ editor }) => {
         <div
           style={{
             display: 'flex',
-            gap: 'var(--size-02)',
+            gap: 'var(--core-size-02)',
             alignItems: 'center',
           }}
         >
-          <div style={{ display: 'flex', gap: 'var(--size-01)' }}>
+          <div style={{ display: 'flex', gap: 'var(--core-size-01)' }}>
             <button
               onClick={() => {
                 setUrlValue(currentAttrs.src || '');
@@ -196,10 +196,10 @@ const VideoBubbleMenu: React.FC<VideoBubbleMenuProps> = ({ editor }) => {
               }}
               title="Change video URL"
               style={{
-                padding: 'var(--size-01) var(--size-02)',
+                padding: 'var(--core-size-01) var(--core-size-02)',
                 background: 'transparent',
-                border: '1px solid var(--color-border-primary)',
-                borderRadius: 'var(--radius-01)',
+                border: '1px solid var(--semantic-color-border-primary)',
+                borderRadius: 'var(--semantic-size-radius-01)',
                 cursor: 'pointer',
                 fontSize: 'var(--font-size-sm)',
               }}
@@ -208,11 +208,11 @@ const VideoBubbleMenu: React.FC<VideoBubbleMenuProps> = ({ editor }) => {
             </button>
           </div>
 
-          <div style={{ display: 'flex', gap: 'var(--size-01)' }}>
+          <div style={{ display: 'flex', gap: 'var(--core-size-01)' }}>
             <button
               onClick={handleAlignLeft}
               style={{
-                padding: 'var(--size-01) var(--size-02)',
+                padding: 'var(--core-size-01) var(--core-size-02)',
                 background:
                   currentAttrs['data-align'] === 'left'
                     ? 'var(--color-accent)'
@@ -221,8 +221,8 @@ const VideoBubbleMenu: React.FC<VideoBubbleMenuProps> = ({ editor }) => {
                   currentAttrs['data-align'] === 'left'
                     ? 'var(--color-accent-contrast)'
                     : 'var(--color-text-secondary)',
-                border: '1px solid var(--color-border-primary)',
-                borderRadius: 'var(--radius-01)',
+                border: '1px solid var(--semantic-color-border-primary)',
+                borderRadius: 'var(--semantic-size-radius-01)',
                 cursor: 'pointer',
                 fontSize: 'var(--font-size-sm)',
               }}
@@ -233,7 +233,7 @@ const VideoBubbleMenu: React.FC<VideoBubbleMenuProps> = ({ editor }) => {
             <button
               onClick={handleAlignCenter}
               style={{
-                padding: 'var(--size-01) var(--size-02)',
+                padding: 'var(--core-size-01) var(--core-size-02)',
                 background:
                   currentAttrs['data-align'] === 'center'
                     ? 'var(--color-accent)'
@@ -242,8 +242,8 @@ const VideoBubbleMenu: React.FC<VideoBubbleMenuProps> = ({ editor }) => {
                   currentAttrs['data-align'] === 'center'
                     ? 'var(--color-accent-contrast)'
                     : 'var(--color-text-secondary)',
-                border: '1px solid var(--color-border-primary)',
-                borderRadius: 'var(--radius-01)',
+                border: '1px solid var(--semantic-color-border-primary)',
+                borderRadius: 'var(--semantic-size-radius-01)',
                 cursor: 'pointer',
                 fontSize: 'var(--font-size-sm)',
               }}
@@ -254,7 +254,7 @@ const VideoBubbleMenu: React.FC<VideoBubbleMenuProps> = ({ editor }) => {
             <button
               onClick={handleAlignRight}
               style={{
-                padding: 'var(--size-01) var(--size-02)',
+                padding: 'var(--core-size-01) var(--core-size-02)',
                 background:
                   currentAttrs['data-align'] === 'right'
                     ? 'var(--color-accent)'
@@ -263,8 +263,8 @@ const VideoBubbleMenu: React.FC<VideoBubbleMenuProps> = ({ editor }) => {
                   currentAttrs['data-align'] === 'right'
                     ? 'var(--color-accent-contrast)'
                     : 'var(--color-text-secondary)',
-                border: '1px solid var(--color-border-primary)',
-                borderRadius: 'var(--radius-01)',
+                border: '1px solid var(--semantic-color-border-primary)',
+                borderRadius: 'var(--semantic-size-radius-01)',
                 cursor: 'pointer',
                 fontSize: 'var(--font-size-sm)',
               }}
@@ -274,19 +274,19 @@ const VideoBubbleMenu: React.FC<VideoBubbleMenuProps> = ({ editor }) => {
             </button>
           </div>
 
-          <div style={{ display: 'flex', gap: 'var(--size-01)' }}>
+          <div style={{ display: 'flex', gap: 'var(--core-size-01)' }}>
             <button
               onClick={handleToggleControls}
               style={{
-                padding: 'var(--size-01) var(--size-02)',
+                padding: 'var(--core-size-01) var(--core-size-02)',
                 background: currentAttrs.controls
                   ? 'var(--color-accent)'
                   : 'transparent',
                 color: currentAttrs.controls
                   ? 'var(--color-accent-contrast)'
                   : 'var(--color-text-secondary)',
-                border: '1px solid var(--color-border-primary)',
-                borderRadius: 'var(--radius-01)',
+                border: '1px solid var(--semantic-color-border-primary)',
+                borderRadius: 'var(--semantic-size-radius-01)',
                 cursor: 'pointer',
                 fontSize: 'var(--font-size-sm)',
               }}
@@ -297,15 +297,15 @@ const VideoBubbleMenu: React.FC<VideoBubbleMenuProps> = ({ editor }) => {
             <button
               onClick={handleToggleAutoplay}
               style={{
-                padding: 'var(--size-01) var(--size-02)',
+                padding: 'var(--core-size-01) var(--core-size-02)',
                 background: currentAttrs.autoplay
                   ? 'var(--color-accent)'
                   : 'transparent',
                 color: currentAttrs.autoplay
                   ? 'var(--color-accent-contrast)'
                   : 'var(--color-text-secondary)',
-                border: '1px solid var(--color-border-primary)',
-                borderRadius: 'var(--radius-01)',
+                border: '1px solid var(--semantic-color-border-primary)',
+                borderRadius: 'var(--semantic-size-radius-01)',
                 cursor: 'pointer',
                 fontSize: 'var(--font-size-sm)',
               }}
@@ -316,15 +316,15 @@ const VideoBubbleMenu: React.FC<VideoBubbleMenuProps> = ({ editor }) => {
             <button
               onClick={handleToggleLoop}
               style={{
-                padding: 'var(--size-01) var(--size-02)',
+                padding: 'var(--core-size-01) var(--core-size-02)',
                 background: currentAttrs.loop
                   ? 'var(--color-accent)'
                   : 'transparent',
                 color: currentAttrs.loop
                   ? 'var(--color-accent-contrast)'
                   : 'var(--color-text-secondary)',
-                border: '1px solid var(--color-border-primary)',
-                borderRadius: 'var(--radius-01)',
+                border: '1px solid var(--semantic-color-border-primary)',
+                borderRadius: 'var(--semantic-size-radius-01)',
                 cursor: 'pointer',
                 fontSize: 'var(--font-size-sm)',
               }}
@@ -335,15 +335,15 @@ const VideoBubbleMenu: React.FC<VideoBubbleMenuProps> = ({ editor }) => {
             <button
               onClick={handleToggleMuted}
               style={{
-                padding: 'var(--size-01) var(--size-02)',
+                padding: 'var(--core-size-01) var(--core-size-02)',
                 background: currentAttrs.muted
                   ? 'var(--color-accent)'
                   : 'transparent',
                 color: currentAttrs.muted
                   ? 'var(--color-accent-contrast)'
                   : 'var(--color-text-secondary)',
-                border: '1px solid var(--color-border-primary)',
-                borderRadius: 'var(--radius-01)',
+                border: '1px solid var(--semantic-color-border-primary)',
+                borderRadius: 'var(--semantic-size-radius-01)',
                 cursor: 'pointer',
                 fontSize: 'var(--font-size-sm)',
               }}
@@ -353,16 +353,16 @@ const VideoBubbleMenu: React.FC<VideoBubbleMenuProps> = ({ editor }) => {
             </button>
           </div>
 
-          <div style={{ display: 'flex', gap: 'var(--size-01)' }}>
+          <div style={{ display: 'flex', gap: 'var(--core-size-01)' }}>
             <button
               onClick={handleDelete}
               title="Delete video"
               style={{
-                padding: 'var(--size-01) var(--size-02)',
+                padding: 'var(--core-size-01) var(--core-size-02)',
                 background: 'var(--color-danger)',
                 color: 'var(--color-danger-contrast)',
                 border: 'none',
-                borderRadius: 'var(--radius-01)',
+                borderRadius: 'var(--semantic-size-radius-01)',
                 cursor: 'pointer',
                 fontSize: 'var(--font-size-sm)',
               }}

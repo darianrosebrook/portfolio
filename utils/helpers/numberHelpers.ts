@@ -1,4 +1,4 @@
-function calculateReadingTime(wordCount: number) {
+export const calculateReadingTime = (wordCount: number) => {
   const wordsPerMinute = 300;
   const minutes = Math.floor(wordCount / wordsPerMinute);
 
@@ -13,6 +13,29 @@ function calculateReadingTime(wordCount: number) {
 
   const days = Math.floor(hours / 24);
   return `${days} day${days > 1 ? 's' : ''}`;
-}
+};
 
-export { calculateReadingTime };
+export const formatNumberWithPrecision = (
+  number: number,
+  precision: number = 2
+) => {
+  return number.toFixed(precision);
+};
+
+export const formatNumberWithCommas = (
+  number: number,
+  precision: number = 0
+) => {
+  return number.toLocaleString('en-US', { minimumFractionDigits: precision });
+};
+
+export const formatDate = (
+  date: Date,
+  config: Intl.DateTimeFormatOptions = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }
+) => {
+  return date.toLocaleDateString('en-US', config);
+};

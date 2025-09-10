@@ -17,8 +17,8 @@
   height: var(--cursor-size, 40px);
   min-height: 32px;
   background: rgb(0 0 0 / 10%);
-  border: 2px solid var(--color-border-primary);
-  border-radius: var(--radius-full);
+  border: 2px solid var(--semantic-color-border-primary);
+  border-radius: var(--semantic-size-radius-full);
   line-height: 0;
   transform-origin: center;
   pointer-events: none;
@@ -31,5 +31,5 @@
   background: rgb(0 0 0 / 20%);
 
   /* Style changes on mouse down */
-  border: 2px dashed var(--color-border-hover, #ccc);
+  border: 2px dashed var(--semantic-color-border-hover, #ccc);
 }

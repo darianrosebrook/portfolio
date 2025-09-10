@@ -5,11 +5,12 @@
 .tableContainer {
   position: relative;
   overflow-x: auto;
-  background-color: var(--color-background-primary);
-  border: 1px solid var(--color-border-primary);
-  border-radius: var(--radius-03);
+  background-color: var(--semantic-color-background-primary);
+  border: 1px solid var(--semantic-color-border-primary);
+  border-radius: var(--semantic-size-radius-03);
   -webkit-overflow-scrolling: touch;
-  scrollbar-color: var(--color-border-primary) var(--color-background-secondary);
+  scrollbar-color: var(--semantic-color-border-primary)
+    var(--semantic-color-background-secondary);
   scrollbar-width: thin;
 
   &::after {
@@ -34,16 +35,16 @@
   }
 
   &::-webkit-scrollbar-track {
-    background: var(--color-background-secondary);
-    border-radius: var(--radius-full);
+    background: var(--semantic-color-background-secondary);
+    border-radius: var(--semantic-size-radius-full);
   }
 
   &::-webkit-scrollbar-thumb {
-    background: var(--color-border-primary);
-    border-radius: var(--radius-full);
+    background: var(--semantic-color-border-primary);
+    border-radius: var(--semantic-size-radius-full);
 
     &:hover {
-      background: var(--color-background-secondary);
+      background: var(--semantic-color-background-secondary);
     }
   }
 }
@@ -58,11 +59,11 @@
     position: sticky;
     top: 0;
     z-index: 10;
-    background-color: var(--color-background-primary);
+    background-color: var(--semantic-color-background-primary);
 
     th {
       padding: 1rem 1.5rem;
-      color: var(--color-foreground-secondary);
+      color: var(--semantic-color-foreground-secondary);
       font-weight: 600;
       font-size: 0.75rem;
       letter-spacing: 0.05em;
@@ -92,11 +93,11 @@
 
   tbody {
     tr {
-      border-top: 1px solid var(--color-border-bold);
+      border-top: 1px solid var(--semantic-color-border-bold);
       transition: background-color 0.2s ease;
 
       &:hover {
-        background-color: var(--color-background-secondary);
+        background-color: var(--semantic-color-background-secondary);
       }
 
       td {
@@ -115,14 +116,14 @@
 
         .componentName {
           margin-bottom: 0.25rem;
-          color: var(--color-foreground-primary);
+          color: var(--semantic-color-foreground-primary);
           font-weight: 600;
           font-size: 0.875rem;
           word-break: break-word;
         }
 
         .alternativeNames {
-          color: var(--color-foreground-secondary);
+          color: var(--semantic-color-foreground-secondary);
           font-size: 0.875rem;
           line-height: 1.5;
           word-break: break-word;
@@ -294,47 +295,47 @@
   display: inline-flex;
   align-items: center;
   padding: 0.25rem 0.75rem;
-  border: 1px solid var(--color-border-primary);
-  border-radius: var(--radius-full);
+  border: 1px solid var(--semantic-color-border-primary);
+  border-radius: var(--semantic-size-radius-full);
   font-weight: 600;
   font-size: 0.75rem;
   line-height: 1.25;
   white-space: nowrap;
 
   &.category {
-    background-color: var(--color-background-info-subtle);
-    border-color: var(--color-border-info);
-    color: var(--color-foreground-onInfoSubtle);
+    background-color: var(--semantic-color-background-infoSubtle);
+    border-color: var(--semantic-color-border-info);
+    color: var(--semantic-color-foreground-onInfoSubtle);
   }
 
   &.complexity {
-    background-color: var(--color-background-success-subtle);
-    border-color: var(--color-border-success);
-    color: var(--color-foreground-onSuccessSubtle);
+    background-color: var(--semantic-color-background-successSubtle);
+    border-color: var(--semantic-color-border-success);
+    color: var(--semantic-color-foreground-onSuccessSubtle);
   }
 
   &.completed {
-    background-color: var(--color-background-success-subtle);
-    border-color: var(--color-border-success);
-    color: var(--color-foreground-onSuccessSubtle);
+    background-color: var(--semantic-color-background-successSubtle);
+    border-color: var(--semantic-color-border-success);
+    color: var(--semantic-color-foreground-onSuccessSubtle);
   }
 
   &.in-progress {
-    background-color: var(--color-background-warning-subtle);
-    border-color: var(--color-border-warning);
-    color: var(--color-foreground-onWarningSubtle);
+    background-color: var(--semantic-color-background-warningSubtle);
+    border-color: var(--semantic-color-border-warning);
+    color: var(--semantic-color-foreground-onWarningSubtle);
   }
 
   &.planned {
-    background-color: var(--color-background-warning-subtle);
-    border-color: var(--color-border-warning);
-    color: var(--color-foreground-onWarningSubtle);
+    background-color: var(--semantic-color-background-warningSubtle);
+    border-color: var(--semantic-color-border-warning);
+    color: var(--semantic-color-foreground-onWarningSubtle);
   }
 
   &.deprecated {
-    background-color: var(--color-background-error-subtle);
-    border-color: var(--color-border-error);
-    color: var(--color-foreground-onErrorSubtle);
+    background-color: var(--semantic-color-background-errorSubtle);
+    border-color: var(--semantic-color-border-error);
+    color: var(--semantic-color-foreground-onErrorSubtle);
   }
 }
 

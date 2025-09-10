@@ -76,7 +76,7 @@
 }
 
 .thread {
-  margin-bottom: var(--size-07);
+  margin-bottom: var(--core-size-07);
 }
 
 .postWrapper {
@@ -85,25 +85,25 @@
 
 .replyPost {
   position: relative;
-  margin-top: var(--size-04);
-  margin-left: var(--size-07);
+  margin-top: var(--core-size-04);
+  margin-left: var(--core-size-07);
 
   &::before {
     position: absolute;
     top: 0;
-    left: calc(-1 * var(--size-07));
-    width: var(--size-05);
+    left: calc(-1 * var(--core-size-07));
+    width: var(--core-size-05);
     height: 1px;
-    background-color: var(--color-border-light);
+    background-color: var(--semantic-color-border-light);
     content: '';
   }
 }
 
 .threadLine {
   position: absolute;
-  top: calc(-1 * var(--size-04));
-  left: calc(-1 * var(--size-07));
+  top: calc(-1 * var(--core-size-04));
+  left: calc(-1 * var(--core-size-07));
   width: 1px;
-  height: var(--size-04);
-  background-color: var(--color-border-light);
+  height: var(--core-size-04);
+  background-color: var(--semantic-color-border-light);
 }

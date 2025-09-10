@@ -181,10 +181,10 @@ export default function ContentEditor({
         ) : (
           <div
             style={{
-              border: '1px solid var(--color-border-primary)',
-              borderRadius: 'var(--radius-02)',
-              padding: 'var(--size-05)',
-              background: 'var(--color-background-secondary)',
+              border: '1px solid var(--semantic-color-border-primary)',
+              borderRadius: 'var(--semantic-size-radius-02)',
+              padding: 'var(--core-size-05)',
+              background: 'var(--semantic-color-background-secondary)',
             }}
             dangerouslySetInnerHTML={{ __html: htmlPreview }}
           />
@@ -196,7 +196,7 @@ export default function ContentEditor({
           gap: '0.75rem',
           alignSelf: 'start',
           position: 'sticky',
-          top: 'var(--size-06)',
+          top: 'var(--core-size-06)',
           height: 'max-content',
         }}
       >

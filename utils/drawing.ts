@@ -1,5 +1,5 @@
 import type { Glyph } from 'fontkit';
-import type { AnatomyFeature } from '../components/FontInspector/FontInspector';
+import type { AnatomyFeature } from '../modules/FontInspector/FontInspector';
 export interface DrawColors {
   anchorFill: string;
   anchorStroke: string;
