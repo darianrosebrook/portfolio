@@ -1,0 +1,83 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: components/AlertNotice/AlertNotice.tokens.json
+ */
+@mixin vars {
+  /* === Color Tokens === */
+  --alert-color-background-primary: var(--semantic-color-background-primary);
+  --alert-color-background-info: var(--semantic-color-background-info);
+  --alert-color-background-success: var(--semantic-color-background-success);
+  --alert-color-background-warning: var(--semantic-color-background-warning);
+  --alert-color-background-danger: var(--semantic-color-background-danger);
+  --alert-color-background-infoSubtle: var(
+    --semantic-color-background-info-subtle
+  );
+  --alert-color-background-warningSubtle: var(
+    --semantic-color-background-warning-subtle
+  );
+  --alert-color-background-dangerSubtle: var(
+    --semantic-color-background-danger-subtle
+  );
+  --alert-color-background-successSubtle: var(
+    --semantic-color-background-success-subtle
+  );
+  --alert-color-background-infoStrong: var(
+    --semantic-color-background-info-strong
+  );
+  --alert-color-background-warningStrong: var(
+    --semantic-color-background-warning-strong
+  );
+  --alert-color-background-dangerStrong: var(
+    --semantic-color-background-danger-strong
+  );
+  --alert-color-background-successStrong: var(
+    --semantic-color-background-success-strong
+  );
+  --alert-color-foreground-primary: var(--semantic-color-foreground-primary);
+  --alert-color-foreground-info: var(--semantic-color-foreground-info);
+  --alert-color-foreground-success: var(--semantic-color-foreground-success);
+  --alert-color-foreground-warning: var(--semantic-color-foreground-warning);
+  --alert-color-foreground-danger: var(--semantic-color-foreground-danger);
+  --alert-color-foreground-onInfoSubtle: var(
+    --semantic-color-foreground-onInfoSubtle
+  );
+  --alert-color-foreground-onWarningSubtle: var(
+    --semantic-color-foreground-onWarningSubtle
+  );
+  --alert-color-foreground-onDangerSubtle: var(
+    --semantic-color-foreground-onDangerSubtle
+  );
+  --alert-color-foreground-onSuccessSubtle: var(
+    --semantic-color-foreground-onSuccessSubtle
+  );
+  --alert-color-foreground-onColor: var(--semantic-color-foreground-onColor);
+  --alert-color-border-primary: var(--semantic-color-border-primary);
+  --alert-color-border-info: var(--semantic-color-border-info);
+  --alert-color-border-success: var(--semantic-color-border-success);
+  --alert-color-border-warning: var(--semantic-color-border-warning);
+  --alert-color-border-danger: var(--semantic-color-border-danger);
+
+  /* === Size Tokens === */
+  --alert-size-inline-padding: var(--core-size-06);
+  --alert-size-inline-radius: var(--semantic-size-radius-02);
+  --alert-size-inline-iconSize: var(--core-size-06);
+  --alert-size-section-padding: var(--core-size-06);
+  --alert-size-section-radius: var(--semantic-size-radius-02);
+  --alert-size-section-iconSize: var(--core-size-06);
+  --alert-size-page-padding: var(--core-size-06);
+  --alert-size-page-radius: var(--semantic-size-radius-02);
+  --alert-size-page-iconSize: var(--core-size-06);
+
+  /* === Shadow Tokens === */
+  --alert-shadow-default: var(--semantic-elevation-02);
+
+  /* === Radius Tokens === */
+  --alert-radius-default: var(--semantic-size-radius-02);
+
+  /* === Text Tokens === */
+  --alert-text-font: var(--semantic-typography-body-default);
+  --alert-text-size: var(--core-size-06);
+  --alert-text-weight: var(--semantic-typography-fontWeight-regular);
+
+  /* === Icon Tokens === */
+  --alert-icon-size: var(--core-size-06);
+}

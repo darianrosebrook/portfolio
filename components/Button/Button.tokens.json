@@ -1,0 +1,83 @@
+{
+  "prefix": "button",
+  "tokens": {
+    "color": {
+      "background": {
+        "default": "{brand1.color.background.inverse}",
+        "hover": "{brand1.color.background.hover}",
+        "active": "{brand1.color.background.active}",
+        "focus": "{brand1.color.background.inverse}",
+        "focusVisible": "{brand1.color.background.inverse}",
+        "disabled": "{brand1.color.background.disabled}",
+        "primary": "{brand1.color.background.accent}",
+        "primaryHover": "{brand1.color.background.hover}",
+        "primaryActive": "{brand1.color.background.active}",
+        "secondary": "{brand1.color.background.secondary}",
+        "secondaryHover": "{brand1.color.background.hover}",
+        "secondaryActive": "{brand1.color.background.active}",
+        "tertiary": "{brand1.color.background.transparent}",
+        "tertiaryHover": "{brand1.color.background.hover}",
+        "tertiaryActive": "{brand1.color.background.active}"
+      },
+      "foreground": {
+        "default": "{semantic.color.foreground.inverse}",
+        "hover": "{semantic.color.foreground.primary}",
+        "active": "{semantic.color.foreground.primary}",
+        "focus": "{semantic.color.foreground.inverse}",
+        "focusVisible": "{semantic.color.foreground.inverse}",
+        "disabled": "{semantic.color.foreground.disabled}",
+        "primary": "{semantic.color.foreground.primary}",
+        "primaryHover": "{semantic.color.foreground.primary}",
+        "primaryActive": "{semantic.color.foreground.primary}",
+        "secondary": "{semantic.color.foreground.accent}",
+        "secondaryHover": "{semantic.color.foreground.primary}",
+        "secondaryActive": "{semantic.color.foreground.primary}",
+        "tertiary": "{semantic.color.foreground.tertiary}",
+        "tertiaryHover": "{semantic.color.foreground.primary}",
+        "tertiaryActive": "{semantic.color.foreground.primary}"
+      },
+      "border": {
+        "default": "{semantic.color.border.light}",
+        "hover": "{semantic.color.border.bold}",
+        "active": "{semantic.color.border.accent}",
+        "focus": "{semantic.color.border.accent}",
+        "focusVisible": "{semantic.color.border.accent}",
+        "disabled": "{semantic.color.border.disabled}",
+        "primary": "{semantic.color.border.accent}",
+        "primaryHover": "{semantic.color.border.accent}",
+        "primaryActive": "{semantic.color.border.accent}",
+        "secondary": "{semantic.color.border.light}",
+        "secondaryHover": "{semantic.color.border.bold}",
+        "secondaryActive": "{semantic.color.border.accent}",
+        "tertiary": "{semantic.color.border.light}",
+        "tertiaryHover": "{semantic.color.border.bold}",
+        "tertiaryActive": "{semantic.color.border.accent}"
+      }
+    },
+    "size": {
+      "gap": {
+        "default": "{core.size.04}"
+      },
+      "min": {
+        "small": "{core.size.07}",
+        "medium": "{core.size.07}",
+        "large": "{core.size.08}"
+      },
+      "radius": "{semantic.size.radius.02}",
+      "border": "{semantic.size.border.default}"
+    },
+    "text": {
+      "size": {
+        "small": "{semantic.typography.body.04}",
+        "medium": "{semantic.typography.body.01}",
+        "large": "{semantic.typography.body.01}"
+      },
+      "lineHeight": {
+        "collapse": "{semantic.typography.lineHeight.collapse}"
+      }
+    },
+    "motion": {
+      "duration": "{semantic.duration.fast}"
+    }
+  }
+}

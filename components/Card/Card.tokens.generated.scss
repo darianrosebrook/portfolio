@@ -1,0 +1,19 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: components/Card/Card.tokens.json
+ */
+@mixin vars {
+  /* === Color Tokens === */
+  --card-color-background-default: var(--semantic-color-background-primary);
+  --card-color-background-hover: var(--semantic-color-background-secondary);
+  --card-color-border-default: var(--semantic-color-border-light);
+  --card-color-border-accent: var(--semantic-color-border-accent);
+  --card-color-foreground-primary: var(--semantic-color-foreground-primary);
+  --card-color-foreground-secondary: var(--semantic-color-foreground-secondary);
+
+  /* === Size Tokens === */
+  --card-size-padding-default: var(--core-size-06);
+  --card-size-radius-default: var(--semantic-size-radius-02);
+
+  /* === Elevation Tokens === */
+  --card-elevation-default: var(--semantic-elevation-default);
+}
