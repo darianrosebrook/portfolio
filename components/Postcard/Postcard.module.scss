@@ -1,8 +1,8 @@
+@use './Postcard.tokens.generated.scss' as postcardTokens;
+
 a:has(.post) {
   text-decoration: none !important;
 }
-
-@use './Postcard.tokens.generated.scss' as postcardTokens;
 
 .post {
   @include postcardTokens.vars;
