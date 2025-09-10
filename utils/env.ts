@@ -5,8 +5,6 @@
  */
 
 interface Environment {
-  supabaseUrl: string;
-  supabaseAnonKey: string;
   nextPublicSupabaseUrl: string;
   nextPublicSupabaseAnonKey: string;
   nodeEnv: string;
@@ -20,21 +18,18 @@ const validateEnvVar = (
   fallback?: string
 ): string => {
   if (!value) {
-    if (fallback && process.env.NODE_ENV !== 'production') {
-      console.warn(
-        `Warning: Using fallback for missing environment variable: ${key}`
-      );
+    if (fallback) {
+      if (process.env.NODE_ENV !== 'production') {
+        console.warn(
+          `Warning: Using fallback for missing environment variable: ${key}`
+        );
+      }
       return fallback;
     }
     throw new Error(`Missing required environment variable: ${key}`);
   }
   return value;
 };
-
-/**
- * Check if we're running in the browser environment
- */
-const isBrowser = typeof window !== 'undefined';
 
 /**
  * Get environment variables with proper client/server handling
@@ -45,14 +40,6 @@ const getEnvVar = (key: string, fallback?: string): string => {
 };
 
 export const env: Environment = {
-  // Server-side only variables (not available in browser)
-  supabaseUrl: isBrowser
-    ? 'https://placeholder.supabase.co'
-    : getEnvVar('SUPABASE_URL', 'https://placeholder.supabase.co'),
-  supabaseAnonKey: isBrowser
-    ? 'placeholder_anon_key'
-    : getEnvVar('SUPABASE_ANON_KEY', 'placeholder_anon_key'),
-
   // Client-side variables (available in browser via NEXT_PUBLIC_ prefix)
   nextPublicSupabaseUrl: getEnvVar(
     'NEXT_PUBLIC_SUPABASE_URL',
