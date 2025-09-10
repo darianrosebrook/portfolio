@@ -168,8 +168,8 @@ const TOLERANCE = {
 
 // Helper function to compare color objects with tolerance
 function compareColor(
-  actual: Record<string, number>,
-  expected: Record<string, number>,
+  actual: Record<string, number> | RGB | LAB | LCH,
+  expected: Record<string, number> | RGB | LAB | LCH,
   tolerance: number = TOLERANCE.rgb,
   keys: string[] = ['r', 'g', 'b']
 ) {

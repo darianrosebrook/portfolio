@@ -413,6 +413,26 @@ export function rgbToLch(rgb: RGB): LCH {
 //  * @param lch - An LCH object { l, c, h }.
 //  * @returns An RGB object { r, g, b } (0-255), rounded and clamped.
 //  */
+/**
+ * Converts LAB color space to LCH color space
+ * @param lab - LAB color object
+ * @returns LCH color object
+ */
+export function labToLch({ l, a, b }: LAB): LCH {
+  // Calculate Chroma (C*)
+  const c = Math.sqrt(a * a + b * b);
+
+  // Calculate Hue (h_ab) in degrees
+  let h = Math.atan2(b, a) * (180 / Math.PI);
+
+  // Normalize hue angle to be within [0, 360)
+  if (h < 0) {
+    h += 360;
+  }
+
+  return { l, c, h };
+}
+
 export function lchToRgb({ l, c, h }: LCH): RGB {
   // Convert LCH back to LAB
   const rad = (h * Math.PI) / 180; // Convert hue angle to radians
@@ -758,6 +778,8 @@ export function oklchToRgbClipped(L: number, c: number, h: number): RGB {
   return oklabToRgb(L, a, b);
 }
 class CIECAM02 {
+  parameters: { L: number; C: number; h: number };
+
   constructor() {
     this.parameters = {
       L: 0, // Lightness
@@ -778,7 +800,11 @@ class CIECAM02 {
 }
 // export function rgbToCam02JCh(...) { ... }
 export function rgbToCam02JCh(rgb: RGB) {
+  // Convert RGB to LAB first, then to LCH for CIECAM02
+  const lab = rgbToLab(rgb);
+  const lch = labToLch(lab);
+
   const cam02 = new CIECAM02();
-  cam02.setParameters({ L: rgb.L, C: rgb.C, h: rgb.h });
+  cam02.setParameters({ L: lch.l, C: lch.c, h: lch.h });
   return cam02.getParameters();
 }
