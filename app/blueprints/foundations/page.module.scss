@@ -1,39 +1,41 @@
 .foundation-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 2rem;
-  margin: 2rem 0;
+  gap: var(--core-size-05);
+  margin: var(--core-size-05) 0;
 }
 
 .foundation-card {
-  padding: 1.5rem;
-  background: var(--color-background-secondary);
-  border-radius: 0.75rem;
-  box-shadow: 0 4px 12px rgb(0 0 0 / 8%);
+  padding: var(--core-size-05);
+  background: var(--semantic-color-background-secondary);
+  border-radius: var(--semantic-size-radius-05);
+  box-shadow: var(--semantic-elevation-depth-1)
+    var(--semantic-color-background-imageOverlay);
   transition:
     transform 0.2s ease-in-out,
     box-shadow 0.2s ease-in-out;
 
   &:hover {
-    box-shadow: 0 8px 24px rgb(0 0 0 / 12%);
+    box-shadow: var(--semantic-elevation-depth-2)
+      var(--semantic-color-background-imageOverlay);
     transform: translateY(-4px);
   }
 
   h3 {
     margin-top: 0;
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
+    margin-bottom: var(--core-size-05);
+    font-size: var(--semantic-typography-heading-05);
   }
 
   p {
-    margin-bottom: 1.5rem;
-    opacity: 0.85;
+    margin-bottom: var(--core-size-05);
+    opacity: var(--semantic-opacity-85);
   }
 
   a {
     display: inline-block;
-    color: var(--color-foreground-link);
-    font-weight: 500;
+    color: var(--semantic-color-foreground-link);
+    font-weight: var(--semantic-font-weight-medium);
     text-decoration: none;
 
     &:hover {
@@ -44,23 +46,23 @@
 
 .cta-button {
   display: inline-block;
-  padding: 0.75rem 1.5rem;
-  background: var(--color-foreground-link);
-  border-radius: 0.5rem;
+  padding: var(--core-size-05) var(--core-size-05);
+  background: var(--semantic-color-foreground-link);
+  border-radius: var(--semantic-size-radius-05);
   color: white;
-  font-weight: 500;
+  font-weight: var(--semantic-font-weight-medium);
   text-decoration: none;
   transition: background-color 0.2s ease-in-out;
 
   &:hover {
-    background: var(--color-foreground-link-hover);
+    background: var(--semantic-color-foreground-linkHover);
   }
 }
 
 .cta-container {
   display: flex;
-  gap: 1rem;
-  margin-top: 1.5rem;
+  gap: var(--core-size-05);
+  margin-top: var(--core-size-05);
 }
 
 @media (width <= 768px) {

@@ -16,13 +16,13 @@
   --card-opacity: 5%;
   --card-blur: 24px;
   --card-background: hsl(
-    from var(--color-background-inverse) h s l / var(--card-opacity)
+    from var(--semantic-color-background-inverse) h s l / var(--card-opacity)
   );
-  --card-border: 1px solid var(--color-border-subtle);
+  --card-border: 1px solid var(--semantic-color-border-subtle);
   --card-shadow: 0 8px 32px
-    hsl(from var(--color-background-secondary) h s l / 5%);
+    hsl(from var(--semantic-color-background-secondary) h s l / 5%);
   --card-shadow-active: 0 0 30px
-    hsl(from var(--color-background-secondary) h s l / 5%);
+    hsl(from var(--semantic-color-background-secondary) h s l / 5%);
 
   position: absolute;
   top: 50%;
@@ -34,7 +34,7 @@
   width: clamp(150px, 30vw, 300px);
   height: clamp(150px, 30vw, 400px);
   background: var(--card-background);
-  border: var(--card-border, 1px solid var(--color-border-primary));
+  border: var(--card-border, 1px solid var(--semantic-color-border-primary));
   border-radius: 16px;
   box-shadow: var(--card-shadow);
   transition:
@@ -55,7 +55,7 @@
   position: absolute;
   top: 12px;
   right: 12px;
-  color: var(--color-foreground-primary);
+  color: var(--semantic-color-foreground-primary);
 
   // color: orange;
   font-size: clamp(var(--caption-03), 1.5vw, var(--body-03));
@@ -67,7 +67,7 @@
   position: absolute;
   bottom: 12px;
   left: 12px;
-  color: var(--color-foreground-primary);
+  color: var(--semantic-color-foreground-primary);
   font-size: clamp(var(--caption-03), 1.5vw, var(--body-03));
   text-transform: uppercase;
   pointer-events: none;
@@ -75,7 +75,7 @@
 
 .cardContent {
   z-index: 1;
-  color: var(--color-foreground-secondary);
+  color: var(--semantic-color-foreground-secondary);
   font-size: clamp(var(--heading-05), 3vw, var(--oversize-02));
   pointer-events: none;
   user-select: none;

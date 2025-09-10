@@ -62,9 +62,9 @@ const ImageBubbleMenu: React.FC<Props> = ({ editor }) => {
               gridAutoFlow: 'column',
               alignItems: 'center',
               gap: '8px',
-              background: 'var(--color-background-secondary)',
-              border: '1px solid var(--color-border-primary)',
-              borderRadius: 'var(--radius-03)',
+              background: 'var(--semantic-color-background-secondary)',
+              border: '1px solid var(--semantic-color-border-primary)',
+              borderRadius: 'var(--semantic-size-radius-03)',
               padding: '6px 8px',
               cursor: 'pointer',
             }}
@@ -111,9 +111,9 @@ const ImageBubbleMenu: React.FC<Props> = ({ editor }) => {
               placeholder="Add caption…"
               style={{
                 minWidth: '200px',
-                border: '1px solid var(--color-border-primary)',
-                borderRadius: 'var(--radius-02)',
-                background: 'var(--color-background-primary)',
+                border: '1px solid var(--semantic-color-border-primary)',
+                borderRadius: 'var(--semantic-size-radius-02)',
+                background: 'var(--semantic-color-background-primary)',
                 color: 'var(--color-text-primary)',
                 padding: '4px 6px',
               }}
@@ -123,9 +123,9 @@ const ImageBubbleMenu: React.FC<Props> = ({ editor }) => {
         <Popover.Content>
           <div
             style={{
-              background: 'var(--color-background-secondary)',
-              border: '1px solid var(--color-border-primary)',
-              borderRadius: 'var(--radius-03)',
+              background: 'var(--semantic-color-background-secondary)',
+              border: '1px solid var(--semantic-color-border-primary)',
+              borderRadius: 'var(--semantic-size-radius-03)',
               padding: '8px',
               boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
             }}

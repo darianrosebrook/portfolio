@@ -379,26 +379,32 @@ export const InspectorProvider: React.FC<{
       const getPropertyValue = (property: string) =>
         style.getPropertyValue(property).trim();
       setColors({
-        anchorFill: getPropertyValue('--color-background-secondary'),
-        anchorStroke: getPropertyValue('--color-foreground-info'),
-        metricStroke: getPropertyValue('--color-border-primary'),
-        metricFill: getPropertyValue('--color-foreground-primary'),
-        checkerFill: getPropertyValue('--color-background-image-overlay'),
-        checkerStroke: getPropertyValue('--color-background-secondary'),
-        boundsStroke: getPropertyValue('--color-foreground-info'),
-        boundsFill: getPropertyValue('--color-background-info-subtle'),
-        lsbStroke: getPropertyValue('--color-foreground-info'),
-        lsbFill: getPropertyValue('--color-background-info-subtle'),
-        rsbStroke: getPropertyValue('--color-foreground-warning'),
-        rsbFill: getPropertyValue('--color-background-warning-subtle'),
-        pathStroke: getPropertyValue('--color-foreground-warning'),
-        pathFill: getPropertyValue('--color-foreground-primary'),
-        handleStroke: getPropertyValue('--color-background-warning-strong'),
-        handleFill: getPropertyValue('--color-background-warning'),
+        anchorFill: getPropertyValue('--semantic-color-background-secondary'),
+        anchorStroke: getPropertyValue('--semantic-color-foreground-info'),
+        metricStroke: getPropertyValue('--semantic-color-border-primary'),
+        metricFill: getPropertyValue('--semantic-color-foreground-primary'),
+        checkerFill: getPropertyValue(
+          '--semantic-color-background-image-overlay'
+        ),
+        checkerStroke: getPropertyValue(
+          '--semantic-color-background-secondary'
+        ),
+        boundsStroke: getPropertyValue('--semantic-color-foreground-info'),
+        boundsFill: getPropertyValue('--semantic-color-background-info-subtle'),
+        lsbStroke: getPropertyValue('--semantic-color-foreground-info'),
+        lsbFill: getPropertyValue('--semantic-color-background-info-subtle'),
+        rsbStroke: getPropertyValue('--semantic-color-foreground-warning'),
+        rsbFill: getPropertyValue('--semantic-color-background-warning-subtle'),
+        pathStroke: getPropertyValue('--semantic-color-foreground-warning'),
+        pathFill: getPropertyValue('--semantic-color-foreground-primary'),
+        handleStroke: getPropertyValue(
+          '--semantic-color-background-warning-strong'
+        ),
+        handleFill: getPropertyValue('--semantic-color-background-warning'),
         cursorStroke: getPropertyValue('--color-core-transparent'),
-        cursorFill: getPropertyValue('--color-foreground-primary'),
-        labelFill: getPropertyValue('--color-foreground-primary'),
-        labelStroke: getPropertyValue('--color-background-primary'),
+        cursorFill: getPropertyValue('--semantic-color-foreground-primary'),
+        labelFill: getPropertyValue('--semantic-color-foreground-primary'),
+        labelStroke: getPropertyValue('--semantic-color-background-primary'),
       });
     };
 

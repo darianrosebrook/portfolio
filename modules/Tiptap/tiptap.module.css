@@ -7,10 +7,10 @@
   max-width: 1440px;
   height: 80vh;
   margin: 0 auto;
-  padding: var(--size-06);
-  background: var(--color-background-secondary);
-  border: 1px solid var(--color-border-primary);
-  border-radius: var(--radius-03);
+  padding: var(--core-size-06);
+  background: var(--semantic-color-background-secondary);
+  border: 1px solid var(--semantic-color-border-primary);
+  border-radius: var(--semantic-size-radius-03);
 }
 
 .editor > div * + * {
@@ -36,7 +36,7 @@
 
 .editor img.ProseMirror-selectednode {
   outline: 1px solid var(--color-accent);
-  outline-offset: var(--size-03);
+  outline-offset: var(--core-size-03);
 }
 
 .editor img.ProseMirror-selectednode:active {

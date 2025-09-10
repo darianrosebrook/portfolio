@@ -31,7 +31,7 @@ p {
 }
 
 a:not([class]) {
-  color: var(--color-foreground-accent, currentcolor);
+  color: var(--semantic-color-foreground-accent, currentcolor);
   text-decoration-skip-ink: auto;
 }
 

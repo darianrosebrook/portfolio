@@ -137,16 +137,16 @@ class ResourceOptimizer {
     // Inline critical CSS for above-the-fold content
     const criticalCSS = `
       :root {
-        --color-background-primary: #ffffff;
-        --color-foreground-primary: #000000;
-        --color-border-primary: #e5e5e5;
-        --radius-02: 8px;
+        --semantic-color-background-primary: #ffffff;
+        --semantic-color-foreground-primary: #000000;
+        --semantic-color-border-primary: #e5e5e5;
+        --semantic-size-radius-02: 8px;
       }
       body {
         margin: 0;
         font-family: 'Inter Variable', sans-serif;
-        background: var(--color-background-primary);
-        color: var(--color-foreground-primary);
+        background: var(--semantic-color-background-primary);
+        color: var(--semantic-color-foreground-primary);
       }
       .hero {
         min-height: 100vh;

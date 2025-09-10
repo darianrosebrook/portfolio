@@ -1,27 +1,27 @@
 .gooeyHighlightContainer {
   display: flex;
   flex-direction: column;
-  gap: var(--size-06);
+  gap: var(--core-size-06);
   max-width: 100%;
-  padding: var(--size-06);
-  background: var(--color-background-secondary);
-  border: 1px solid var(--color-border-primary);
-  border-radius: var(--radius-02);
+  padding: var(--core-size-06);
+  background: var(--semantic-color-background-secondary);
+  border: 1px solid var(--semantic-color-border-primary);
+  border-radius: var(--semantic-size-radius-02);
 }
 
 .controls {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--size-03);
+  gap: var(--core-size-03);
 }
 
 .demoButton,
 .clearButton {
-  padding: var(--size-02) var(--size-04);
-  background: var(--color-background-primary);
-  border: 1px solid var(--color-border-primary);
-  border-radius: var(--radius-01);
-  color: var(--color-foreground-primary);
+  padding: var(--core-size-02) var(--core-size-04);
+  background: var(--semantic-color-background-primary);
+  border: 1px solid var(--semantic-color-border-primary);
+  border-radius: var(--semantic-size-radius-01);
+  color: var(--semantic-color-foreground-primary);
   font-size: var(--text-sm);
   transition: all 0.2s ease;
   cursor: pointer;
@@ -32,27 +32,27 @@
   }
 
   &:hover:not(:disabled) {
-    background: var(--color-background-tertiary);
-    border-color: var(--color-border-bold);
+    background: var(--semantic-color-background-tertiary);
+    border-color: var(--semantic-color-border-bold);
   }
 }
 
 .textContainer {
   position: relative;
   min-height: 120px;
-  padding: var(--size-04);
-  background: var(--color-background-primary);
-  border: 1px solid var(--color-border-primary);
-  border-radius: var(--radius-01);
+  padding: var(--core-size-04);
+  background: var(--semantic-color-background-primary);
+  border: 1px solid var(--semantic-color-border-primary);
+  border-radius: var(--semantic-size-radius-01);
 }
 
 .highlightableText {
   /* Custom properties for dynamic colors */
-  --highlight-color: var(--color-background-highlight);
-  --text-color: var(--color-foreground-highlight);
+  --highlight-color: var(--semantic-color-background-highlight);
+  --text-color: var(--semantic-color-foreground-highlight);
 
   position: relative;
-  color: var(--color-foreground-primary);
+  color: var(--semantic-color-foreground-primary);
   font-size: var(--text-lg);
   line-height: 1.6;
   cursor: text;
@@ -66,15 +66,15 @@
 
   /* Focus styles */
   &:focus {
-    outline: 2px solid var(--color-border-bold);
+    outline: 2px solid var(--semantic-color-border-bold);
     outline-offset: 2px;
   }
 }
 
 .gooeyHighlightWrapper {
   /* Custom properties for dynamic colors */
-  --highlight-color: var(--color-background-highlight);
-  --text-color: var(--color-foreground-highlight);
+  --highlight-color: var(--semantic-color-background-highlight);
+  --text-color: var(--semantic-color-foreground-highlight);
 
   position: relative;
   display: inline;
@@ -82,15 +82,15 @@
 }
 
 .fallbackMessage {
-  padding: var(--size-04);
-  background: var(--color-background-tertiary);
+  padding: var(--core-size-04);
+  background: var(--semantic-color-background-tertiary);
   border: 1px solid transparent;
-  border-left: 4px solid var(--color-border-bold);
-  border-radius: var(--radius-01);
+  border-left: 4px solid var(--semantic-color-border-bold);
+  border-radius: var(--semantic-size-radius-01);
 
   p {
-    margin: 0 0 var(--size-02) 0;
-    color: var(--color-foreground-secondary);
+    margin: 0 0 var(--core-size-02) 0;
+    color: var(--semantic-color-foreground-secondary);
     font-size: var(--text-sm);
 
     &:last-child {
@@ -101,20 +101,20 @@
 
 .instructions {
   h4 {
-    margin: 0 0 var(--size-03) 0;
-    color: var(--color-foreground-primary);
+    margin: 0 0 var(--core-size-03) 0;
+    color: var(--semantic-color-foreground-primary);
     font-weight: var(--font-weight-medium);
     font-size: var(--text-md);
   }
 
   ul {
     margin: 0;
-    padding-left: var(--size-04);
-    color: var(--color-foreground-secondary);
+    padding-left: var(--core-size-04);
+    color: var(--semantic-color-foreground-secondary);
     font-size: var(--text-sm);
 
     li {
-      margin-bottom: var(--size-01);
+      margin-bottom: var(--core-size-01);
 
       &:last-child {
         margin-bottom: 0;
@@ -126,7 +126,7 @@
 /* Responsive adjustments */
 @media (width <= 768px) {
   .gooeyHighlightContainer {
-    padding: var(--size-04);
+    padding: var(--core-size-04);
   }
 
   .controls {

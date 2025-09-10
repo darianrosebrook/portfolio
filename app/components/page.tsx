@@ -1,6 +1,13 @@
-import { Container, Title, BodyContent, Icon } from '@/components/AlertNotice';
+'use client';
+
+import { Select } from '@/components/Select';
 
 export default function ComponentsPage() {
+  const options = [
+    { title: 'Option 1', group: 'title', id: 'opt1' },
+    { title: 'Option 2', group: 'title', id: 'opt2' },
+    { title: 'Option 3', group: 'title', id: 'opt3' },
+  ];
   return (
     <>
       <section className="content">
@@ -16,13 +23,11 @@ export default function ComponentsPage() {
         <div className="grid">
           {/* card */}
           <div>
-            <Container index={0}>
-              <Icon status="info" />
-              <Title>Alert Notice</Title>
-              <BodyContent>
-                This is a test of the alert notice component.
-              </BodyContent>
-            </Container>
+            <Select
+              options={options}
+              onChange={() => null}
+              multiselect={false}
+            />
           </div>
         </div>
       </section>

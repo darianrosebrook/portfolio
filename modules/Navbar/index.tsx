@@ -160,7 +160,7 @@ export default function Navbar({ pages = [] }: NavbarProps) {
             <li>
               <Popover>
                 <Popover.Trigger>
-                  <Button variant="tertiary" size="small">
+                  <Button variant="secondary" size="small">
                     <Avatar
                       src={
                         profile?.avatar_url || user.user_metadata?.avatar_url

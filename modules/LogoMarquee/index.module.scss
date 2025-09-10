@@ -8,13 +8,13 @@
   position: absolute;
   top: 50%;
   display: flex;
-  gap: var(--size-10);
+  gap: var(--core-size-10);
   align-items: center;
   overflow: hidden;
   width: fit-content;
-  padding-right: var(--size-09);
-  padding-left: var(--size-09);
-  color: var(--color-foreground-primary);
+  padding-right: var(--core-size-09);
+  padding-left: var(--core-size-09);
+  color: var(--semantic-color-foreground-primary);
   white-space: nowrap;
   transition: all 0.5s ease-in-out;
   transform: translateY(-50%);
@@ -31,15 +31,15 @@
   height: 100%;
   background: linear-gradient(
     90deg,
-    var(--color-background-primary) 0%,
-    var(--color-background-transparent) 20% 80%,
-    var(--color-background-primary) 100%
+    var(--semantic-color-background-primary) 0%,
+    var(--semantic-color-background-transparent) 20% 80%,
+    var(--semantic-color-background-primary) 100%
   );
 }
 
 @media (width <= 768px) {
   .marquee {
-    gap: var(--size-04);
+    gap: var(--core-size-04);
   }
 
   .box svg {

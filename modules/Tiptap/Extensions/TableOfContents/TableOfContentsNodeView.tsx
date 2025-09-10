@@ -150,7 +150,7 @@ export const TableOfContentsNodeView: React.FC<NodeViewProps> = ({
         .table-of-contents-node {
           margin: 24px 0;
           border: 2px solid transparent;
-          border-radius: var(--radius-03);
+          border-radius: var(--semantic-size-radius-03);
           transition: border-color 0.2s ease;
         }
 
@@ -159,10 +159,10 @@ export const TableOfContentsNodeView: React.FC<NodeViewProps> = ({
         }
 
         .toc-container {
-          background: var(--color-background-secondary);
-          border: 1px solid var(--color-border-primary);
-          border-radius: var(--radius-03);
-          padding: var(--size-05);
+          background: var(--semantic-color-background-secondary);
+          border: 1px solid var(--semantic-color-border-primary);
+          border-radius: var(--semantic-size-radius-03);
+          padding: var(--core-size-05);
         }
 
         .toc-header {
@@ -188,9 +188,9 @@ export const TableOfContentsNodeView: React.FC<NodeViewProps> = ({
 
         .toc-refresh-btn {
           background: none;
-          border: 1px solid var(--color-border-secondary);
-          border-radius: var(--radius-02);
-          padding: var(--size-02) var(--size-03);
+          border: 1px solid var(--semantic-color-border-secondary);
+          border-radius: var(--semantic-size-radius-02);
+          padding: var(--core-size-02) var(--core-size-03);
           cursor: pointer;
           font-size: var(--font-size-02);
           color: var(--color-text-secondary);
@@ -198,8 +198,8 @@ export const TableOfContentsNodeView: React.FC<NodeViewProps> = ({
         }
 
         .toc-refresh-btn:hover {
-          background: var(--color-background-tertiary);
-          border-color: var(--color-border-primary);
+          background: var(--semantic-color-background-tertiary);
+          border-color: var(--semantic-color-border-primary);
         }
 
         .toc-list {
@@ -209,14 +209,14 @@ export const TableOfContentsNodeView: React.FC<NodeViewProps> = ({
 
         .toc-item {
           cursor: pointer;
-          padding: var(--size-02) var(--size-03);
-          border-radius: var(--radius-02);
+          padding: var(--core-size-02) var(--core-size-03);
+          border-radius: var(--semantic-size-radius-02);
           transition: background-color 0.2s ease;
           margin: 2px 0;
         }
 
         .toc-item:hover {
-          background: var(--color-background-tertiary);
+          background: var(--semantic-color-background-tertiary);
         }
 
         .toc-text {
@@ -236,7 +236,7 @@ export const TableOfContentsNodeView: React.FC<NodeViewProps> = ({
 
         .toc-empty {
           text-align: center;
-          padding: var(--size-05);
+          padding: var(--core-size-05);
           color: var(--color-text-secondary);
         }
 

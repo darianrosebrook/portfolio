@@ -15,7 +15,7 @@
 }
 
 .heroLink {
-  color: var(--color-foreground-primary);
+  color: var(--semantic-color-foreground-primary);
 }
 
 .headingHero {
@@ -33,8 +33,8 @@
 .headingHero h2 span:first-of-type {
   z-index: 1;
   display: inline-block;
-  margin-bottom: var(--size-02);
-  color: var(--color-foreground-accent);
+  margin-bottom: var(--core-size-02);
+  color: var(--semantic-color-foreground-accent);
   font-size: var(--heading-06);
   letter-spacing: var(--letter-spacing-normal);
 }
@@ -60,9 +60,9 @@
   height: 100%;
   background: linear-gradient(
     180deg,
-    var(--color-background-primary) 0%,
+    var(--semantic-color-background-primary) 0%,
     var(--color-core-transparent) 10% 90%,
-    var(--color-background-primary) 100%
+    var(--semantic-color-background-primary) 100%
   );
   pointer-events: none;
 }
@@ -181,8 +181,10 @@
 }
 
 .cardsBackdrop {
-  --backdrop-01: hsl(from var(--color-background-primary) h s l / 5%);
-  --backdrop-02: hsl(from var(--color-background-secondary) h s l / 44%);
+  --backdrop-01: hsl(from var(--semantic-color-background-primary) h s l / 5%);
+  --backdrop-02: hsl(
+    from var(--semantic-color-background-secondary) h s l / 44%
+  );
 
   display: flex;
   justify-content: center;

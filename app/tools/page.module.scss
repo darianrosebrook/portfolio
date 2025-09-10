@@ -9,82 +9,84 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding: 1.5rem;
-  background: var(--color-background-secondary);
+  padding: var(--core-size-05);
+  background: var(--semantic-color-background-secondary);
   border-radius: 0.75rem;
-  box-shadow: 0 4px 12px rgb(0 0 0 / 8%);
+  box-shadow: var(--semantic-elevation-depth-1)
+    var(--semantic-color-background-imageOverlay);
   transition:
     transform 0.2s ease-in-out,
     box-shadow 0.2s ease-in-out;
 
   &:hover {
-    box-shadow: 0 8px 24px rgb(0 0 0 / 12%);
+    box-shadow: var(--semantic-elevation-depth-2)
+      var(--semantic-color-background-imageOverlay);
     transform: translateY(-4px);
   }
 
   h3 {
-    margin-top: 0.5rem;
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
+    margin-top: var(--core-size-05);
+    margin-bottom: var(--core-size-05);
+    font-size: var(--semantic-typography-heading-05);
   }
 
   p {
-    margin-bottom: 1.5rem;
+    margin-bottom: var(--core-size-05);
     opacity: 0.85;
   }
 }
 
 .tool-header {
   display: flex;
-  gap: 0.75rem;
+  gap: var(--core-size-05);
   margin-bottom: 1rem;
 }
 
 .badge {
   display: inline-flex;
   align-items: center;
-  padding: 0.25rem 0.75rem;
-  border: 1px solid var(--color-border-primary);
-  border-radius: var(--radius-full);
-  font-weight: 600;
+  padding: var(--core-size-05) var(--core-size-05);
+  border: 1px solid var(--semantic-color-border-primary);
+  border-radius: var(--semantic-size-radius-full);
+  font-weight: var(--semantic-typography-fontWeight-medium);
   font-size: 0.75rem;
   line-height: 1.25;
   white-space: nowrap;
 
   &.category {
-    background-color: var(--color-background-info-subtle);
-    border-color: var(--color-border-info);
-    color: var(--color-foreground-onInfoSubtle);
+    background-color: var(--semantic-color-background-infoSubtle);
+    border-color: var(--semantic-color-border-info);
+    color: var(--semantic-color-foreground-onInfoSubtle);
   }
 
   &.complexity {
-    background-color: var(--color-background-success-subtle);
-    border-color: var(--color-border-success);
-    color: var(--color-foreground-onSuccessSubtle);
+    background-color: var(--semantic-color-background-successSubtle);
+    border-color: var(--semantic-color-border-success);
+    color: var(--semantic-color-foreground-onSuccessSubtle);
   }
 
   &.completed {
-    background-color: var(--color-background-success-subtle);
-    border-color: var(--color-border-success);
-    color: var(--color-foreground-onSuccessSubtle);
+    background-color: var(--semantic-color-background-successSubtle);
+    border-color: var(--semantic-color-border-success);
+    color: var(--semantic-color-foreground-onSuccessSubtle);
   }
 
   &.in-progress {
-    background-color: var(--color-background-warning-subtle);
-    border-color: var(--color-border-warning);
-    color: var(--color-foreground-onWarningSubtle);
+    background-color: var(--semantic-color-background-warningSubtle);
+    border-color: var(--semantic-color-border-warning);
+    color: var(--semantic-color-foreground-onWarningSubtle);
   }
 
   &.planned {
-    background-color: var(--color-background-tertiary);
-    border-color: var(--color-border-subtle);
-    color: var(--color-foreground-primary);
+    background-color: var(--semantic-color-background-tertiary);
+    border-color: var(--semantic-color-border-primary);
+    color: var(--semantic-color-foreground-primary);
   }
 
   &.deprecated {
-    background-color: var(--color-background-error-subtle);
-    border-color: var(--color-border-error);
-    color: var(--color-foreground-onErrorSubtle);
+    background-color: var(--semantic-color-background-errorSubtle);
+    border-color: var(--semantic-color-border-error);
+    color: var(--semantic-color-foreground-onErrorSubtle);
   }
 }
 

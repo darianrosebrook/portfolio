@@ -62,7 +62,7 @@ export const DetailsNodeView: React.FC<NodeViewProps> = ({
         .details-node-view {
           margin: 16px 0;
           border: 2px solid transparent;
-          border-radius: var(--radius-03);
+          border-radius: var(--semantic-size-radius-03);
           transition: border-color 0.2s ease;
         }
 
@@ -81,35 +81,35 @@ export const DetailsNodeView: React.FC<NodeViewProps> = ({
         .summary-input {
           width: 100%;
           padding: 8px 12px;
-          border: 1px solid var(--color-border-primary);
-          border-radius: var(--radius-02);
+          border: 1px solid var(--semantic-color-border-primary);
+          border-radius: var(--semantic-size-radius-02);
           font-size: 14px;
           font-weight: 600;
-          background: var(--color-background-secondary);
+          background: var(--semantic-color-background-secondary);
           transition: all 0.2s ease;
         }
 
         .summary-input:focus {
           outline: none;
           border-color: var(--color-accent);
-          background: var(--color-background-primary);
+          background: var(--semantic-color-background-primary);
           box-shadow: 0 0 0 3px
             color-mix(in srgb, var(--color-accent) 10%, transparent);
         }
 
         .details-content {
-          border: 1px solid var(--color-border-primary);
-          border-radius: var(--radius-03);
+          border: 1px solid var(--semantic-color-border-primary);
+          border-radius: var(--semantic-size-radius-03);
           overflow: hidden;
         }
 
         .details-content :global(.summary) {
-          background: var(--color-background-tertiary);
-          border-bottom: 1px solid var(--color-border-primary);
+          background: var(--semantic-color-background-tertiary);
+          border-bottom: 1px solid var(--semantic-color-border-primary);
         }
 
         .details-content :global(.content) {
-          background: var(--color-background-primary);
+          background: var(--semantic-color-background-primary);
         }
       `}</style>
     </NodeViewWrapper>

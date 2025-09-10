@@ -1,4 +1,8 @@
+@use './Icon.tokens.generated.scss' as iconTokens;
+
 .icon {
+  @include iconTokens.vars;
+
   display: flex;
   justify-content: center;
   align-items: center;

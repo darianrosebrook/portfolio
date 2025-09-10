@@ -1,0 +1,144 @@
+@use './Select.tokens.generated.scss' as selectTokens;
+
+.select {
+  @include selectTokens.vars;
+
+  box-sizing: border-box;
+  width: 180px;
+  padding: var(--select-size-padding-default, 8px);
+  background-color: var(--select-color-background-default, #fafafa);
+  border: var(--select-size-border-default, 2px) solid
+    var(--select-color-border-default, #aeaeae);
+  border-radius: var(--select-size-radius-default, 8px);
+  color: var(--select-color-foreground-default, #141414);
+  font-weight: var(--select-font-weight-default, 400);
+  font-size: var(--select-font-size-default, 16px);
+  line-height: var(--select-font-lineHeight-default, 1.5);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  appearance: base-select;
+
+  & > button {
+    display: flex;
+    width: 100%;
+    color: currentcolor;
+    font-family: inherit;
+
+    & > svg {
+      width: 1.2rem;
+      height: 1.2rem;
+      margin: 0 0 0 auto;
+    }
+  }
+
+  &:hover {
+    background-color: var(--select-color-background-hover, #cecece);
+    border-color: var(--select-color-border-hover, #555);
+    color: var(--select-color-foreground-hover, #141414);
+  }
+
+  &:focus {
+    background-color: var(--select-color-background-focus, #fafafa);
+    border-color: var(--select-color-border-focus, #aeaeae);
+    outline: none;
+    color: var(--select-color-foreground-focus, #141414);
+  }
+
+  &:focus-visible {
+    background-color: var(--select-color-background-focusVisible, #fafafa);
+    border-color: var(--select-color-border-focusVisible, #d9292b);
+    outline: 2px solid var(--select-color-border-focusVisible, #d9292b);
+    outline-offset: -1px;
+    color: var(--select-color-foreground-focusVisible, #141414);
+  }
+
+  &:disabled {
+    background-color: var(--select-color-background-disabled, #cecece);
+    border-color: var(--select-color-border-disabled, #cecece);
+    color: var(--select-color-foreground-disabled, #aeaeae);
+    cursor: not-allowed;
+  }
+
+  &:has(option:not([hidden]):checked) {
+    color: var(--select-color-foreground-checked, #141414);
+  }
+
+  &::picker-icon {
+    display: none;
+  }
+
+  &::picker(select) {
+    margin-top: 0.25rem;
+    padding: var(--select-size-padding-default, 8px);
+    background-color: var(--select-color-background-default, #fafafa);
+    border: var(--select-size-border-default, 2px) solid
+      var(--select-color-border-default, #aeaeae);
+    border-radius: var(--select-size-radius-default, 8px);
+    box-shadow:
+      0 4px 6px -1px rgb(0 0 0 / 10%),
+      0 2px 4px -2px rgb(0 0 0 / 10%);
+    opacity: 1;
+    transition:
+      opacity 225ms ease-in-out,
+      transform 225ms ease-in-out;
+    transform: translateY(0);
+    transform-origin: top;
+    cursor: default;
+    appearance: base-select;
+
+    @starting-style {
+      opacity: 0;
+      transform: translateY(-0.25rem) scale(0.95);
+    }
+  }
+
+  & optgroup label {
+    display: block;
+    padding: var(--select-size-padding-default, 8px);
+    color: var(--select-color-foreground-default, #141414);
+    font-weight: var(--select-font-weight-default, 400);
+  }
+
+  & option {
+    padding: var(--select-size-padding-default, 8px);
+    background-color: var(--select-color-background-default, #fafafa);
+    border-radius: var(--select-size-radius-default, 8px);
+    outline: none;
+    color: var(--select-color-foreground-default, #141414);
+
+    &::after {
+      width: 1rem;
+      height: 1.5rem;
+      margin-left: auto;
+      background: center / contain no-repeat
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23d9292b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'%3E%3C/path%3E%3C/svg%3E");
+      opacity: 0;
+      content: '';
+    }
+
+    &::checkmark {
+      display: none;
+    }
+
+    &:checked {
+      background-color: var(--select-color-background-checked, #fafafa);
+      color: var(--select-color-foreground-checked, #141414);
+
+      &::after {
+        opacity: 1;
+      }
+    }
+
+    &:hover,
+    &:focus-visible {
+      background-color: var(--select-color-background-hover, #cecece);
+      color: var(--select-color-foreground-hover, #141414);
+    }
+
+    &:disabled {
+      background-color: var(--select-color-background-disabled, #cecece);
+      color: var(--select-color-foreground-disabled, #aeaeae);
+      cursor: not-allowed;
+    }
+  }
+}

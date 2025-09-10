@@ -48,16 +48,16 @@ const codeBlock: React.FC<CodeBlockProps> = ({
       .code-block select {
         margin-bottom: 8px;
         padding: 4px 6px;
-        border: 1px solid var(--color-border-primary);
-        border-radius: var(--radius-02);
-        background: var(--color-background-secondary);
+        border: 1px solid var(--semantic-color-border-primary);
+        border-radius: var(--semantic-size-radius-02);
+        background: var(--semantic-color-background-secondary);
         color: var(--color-text-primary);
       }
       .code-block pre {
-        background: var(--color-background-tertiary);
-        border: 1px solid var(--color-border-primary);
-        border-radius: var(--radius-03);
-        padding: var(--size-04);
+        background: var(--semantic-color-background-tertiary);
+        border: 1px solid var(--semantic-color-border-primary);
+        border-radius: var(--semantic-size-radius-03);
+        padding: var(--core-size-04);
         overflow-x: auto;
       }
     `}</style>

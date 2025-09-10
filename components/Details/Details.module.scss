@@ -5,41 +5,46 @@
  * @author @darianrosebrook
  */
 
+@use './Details.tokens.generated.scss' as detailsTokens;
+
 .details {
+  @include detailsTokens.vars;
+
   overflow: hidden;
-  margin: var(--spacing-md, 16px) 0;
-  background: var(--color-background, #fff);
-  border: 1px solid var(--color-border, #e5e7eb);
-  border-radius: var(--border-radius-md, 8px);
+  margin: var(--details-size-padding-default) 0;
+  background: var(--details-color-background-default);
+  border: 1px solid var(--details-color-border-default);
+  border-radius: var(--details-size-radius-default);
   transition: all 0.2s ease-in-out;
 
   &:hover {
-    border-color: var(--color-border-hover, #d1d5db);
+    border-color: var(--details-color-border-hover);
     box-shadow: 0 1px 3px rgb(0 0 0 / 10%);
   }
 
   &[open] {
-    border-color: var(--color-primary, #3b82f6);
+    border-color: var(--details-color-border-accent);
     box-shadow: 0 2px 8px rgb(59 130 246 / 15%);
   }
 }
 
 .summary {
-  padding: var(--spacing-md, 16px);
-  background: var(--color-background-subtle, #f9fafb);
-  border-bottom: 1px solid var(--color-border, #e5e7eb);
+  padding: var(--details-size-padding-default);
+  background: var(--details-color-background-subtle);
+  border-bottom: 1px solid var(--details-color-border-default);
   list-style: none;
   transition: background-color 0.2s ease-in-out;
   cursor: pointer;
   user-select: none;
 
   &:hover {
-    background: var(--color-background-hover, #f3f4f6);
+    background: var(--details-color-background-hover);
   }
 
   &:focus {
-    outline: 2px solid var(--color-primary, #3b82f6);
-    outline-offset: -2px;
+    outline: var(--details-focus-ring-width) var(--details-focus-ring-style)
+      var(--details-focus-ring-color);
+    outline-offset: var(--details-focus-ring-offset);
   }
 
   &::-webkit-details-marker {
@@ -53,9 +58,9 @@
 
 .summaryContent {
   display: flex;
-  gap: var(--spacing-sm, 8px);
+  gap: var(--core-size-02);
   align-items: center;
-  color: var(--color-text-primary, #111827);
+  color: var(--details-color-foreground-primary);
   font-weight: 600;
 }
 
@@ -63,7 +68,7 @@
   flex-shrink: 0;
   width: 20px;
   height: 20px;
-  color: var(--color-text-secondary, #6b7280);
+  color: var(--details-color-foreground-secondary);
   transition:
     transform 0.2s ease-in-out,
     color 0.2s ease-in-out;
@@ -75,15 +80,15 @@
 }
 
 .content {
-  padding: var(--spacing-md, 16px);
-  background: var(--color-background, #fff);
-  color: var(--color-text-primary, #111827);
+  padding: var(--details-size-padding-default);
+  background: var(--details-color-background-default);
+  color: var(--details-color-foreground-primary);
   line-height: 1.6;
 
   // Nested content styling
   :root {
     p {
-      margin: 0 0 var(--spacing-sm, 8px) 0;
+      margin: 0 0 var(--core-size-02) 0;
 
       &:last-child {
         margin-bottom: 0;
@@ -96,8 +101,8 @@
     h4,
     h5,
     h6 {
-      margin: var(--spacing-md, 16px) 0 var(--spacing-sm, 8px) 0;
-      color: var(--color-text-primary, #111827);
+      margin: var(--details-size-padding-default) 0 var(--core-size-02) 0;
+      color: var(--details-color-foreground-primary);
 
       &:first-child {
         margin-top: 0;
@@ -106,106 +111,47 @@
 
     ul,
     ol {
-      margin: var(--spacing-sm, 8px) 0;
-      padding-left: var(--spacing-lg, 24px);
+      margin: var(--core-size-02) 0;
+      padding-left: var(--core-size-06);
     }
 
     li {
-      margin: var(--spacing-xs, 4px) 0;
+      margin: var(--core-size-01) 0;
     }
 
     blockquote {
-      margin: var(--spacing-md, 16px) 0;
-      padding: var(--spacing-sm, 8px) var(--spacing-md, 16px);
-      background: var(--color-background-subtle, #f9fafb);
-      border-left: 4px solid var(--color-primary, #3b82f6);
+      margin: var(--details-size-padding-default) 0;
+      padding: var(--core-size-02) var(--details-size-padding-default);
+      background: var(--details-color-background-subtle);
+      border-left: 4px solid var(--details-color-border-accent);
       font-style: italic;
     }
 
     code {
       padding: 2px 6px;
-      background: var(--color-background-code, #f3f4f6);
-      border-radius: var(--border-radius-sm, 4px);
+      background: var(--details-color-background-code);
+      border-radius: var(--core-size-01);
       font-size: 0.9em;
       font-family: var(--font-mono, 'Monaco', 'Menlo', monospace);
     }
 
     pre {
       overflow-x: auto;
-      margin: var(--spacing-md, 16px) 0;
-      padding: var(--spacing-md, 16px);
-      background: var(--color-background-code, #f3f4f6);
-      border-radius: var(--border-radius-md, 8px);
+      margin: var(--details-size-padding-default) 0;
+      padding: var(--details-size-padding-default);
+      background: var(--details-color-background-code);
+      border-radius: var(--details-size-radius-default);
     }
   }
 }
 
 // Animation for opening/closing
 .details[open] .icon {
-  color: var(--color-primary, #3b82f6);
+  color: var(--details-color-border-accent);
   transform: rotate(90deg);
 }
 
-// Dark mode support
-@media (prefers-color-scheme: dark) {
-  .details {
-    background: var(--color-background-dark, #1f2937);
-    border-color: var(--color-border-dark, #374151);
-
-    &:hover {
-      border-color: var(--color-border-hover-dark, #4b5563);
-    }
-
-    &[open] {
-      border-color: var(--color-primary, #3b82f6);
-    }
-  }
-
-  .summary {
-    background: var(--color-background-subtle-dark, #111827);
-    border-bottom-color: var(--color-border-dark, #374151);
-
-    &:hover {
-      background: var(--color-background-hover-dark, #1f2937);
-    }
-  }
-
-  .summaryContent {
-    color: var(--color-text-primary-dark, #f9fafb);
-  }
-
-  .icon {
-    color: var(--color-text-secondary-dark, #9ca3af);
-  }
-
-  .content {
-    background: var(--color-background-dark, #1f2937);
-    color: var(--color-text-primary-dark, #f9fafb);
-
-    :root {
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        color: var(--color-text-primary-dark, #f9fafb);
-      }
-
-      blockquote {
-        background: var(--color-background-subtle-dark, #111827);
-      }
-
-      code {
-        background: var(--color-background-code-dark, #374151);
-      }
-
-      pre {
-        background: var(--color-background-code-dark, #374151);
-      }
-    }
-  }
-}
+// Note: Dark mode support is handled automatically by design tokens
 
 // Reduced motion support
 @media (prefers-reduced-motion: reduce) {
