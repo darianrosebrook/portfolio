@@ -8,14 +8,14 @@
         "success": "{semantic.color.background.success}",
         "warning": "{semantic.color.background.warning}",
         "danger": "{semantic.color.background.danger}",
-        "infoSubtle": "{semantic.color.background.info-subtle}",
-        "warningSubtle": "{semantic.color.background.warning-subtle}",
-        "dangerSubtle": "{semantic.color.background.danger-subtle}",
-        "successSubtle": "{semantic.color.background.success-subtle}",
-        "infoStrong": "{semantic.color.background.info-strong}",
-        "warningStrong": "{semantic.color.background.warning-strong}",
-        "dangerStrong": "{semantic.color.background.danger-strong}",
-        "successStrong": "{semantic.color.background.success-strong}"
+        "infoSubtle": "{semantic.color.background.infoSubtle}",
+        "warningSubtle": "{semantic.color.background.warningSubtle}",
+        "dangerSubtle": "{semantic.color.background.dangerSubtle}",
+        "successSubtle": "{semantic.color.background.successSubtle}",
+        "infoStrong": "{semantic.color.background.infoStrong}",
+        "warningStrong": "{semantic.color.background.warningStrong}",
+        "dangerStrong": "{semantic.color.background.dangerStrong}",
+        "successStrong": "{semantic.color.background.successStrong}"
       },
       "foreground": {
         "primary": "{semantic.color.foreground.primary}",

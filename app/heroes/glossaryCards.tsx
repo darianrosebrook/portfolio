@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import styles from './glossaryCards.module.scss';
@@ -45,6 +45,18 @@ export default function GlossaryCards() {
   const quickToX = useRef<((v: number) => void)[]>([]);
   const quickToY = useRef<((v: number) => void)[]>([]);
   const quickToRot = useRef<((v: number) => void)[]>([]);
+
+  // Drag state management
+  const [draggedCard, setDraggedCard] = useState<number | null>(null);
+  const dragOffset = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+  const isDragging = useRef<boolean>(false);
+  const [isDraggingState, setIsDraggingState] = useState<boolean>(false);
+  // Track current visual scale during drag to keep pointer anchor stable
+  const currentScale = useRef<number>(1);
+  // Track pointer and transform at drag start for delta-based dragging
+  const dragStartMouse = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+  const dragStartTransform = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+
   // 1) Entrance animation + compute each card's rest transform and center
   useEffect(() => {
     if (!containerRef.current || prefersReducedMotion) return;
@@ -58,6 +70,8 @@ export default function GlossaryCards() {
       } = containerRef.current!.getBoundingClientRect();
 
       cardsRef.current.forEach((card, i) => {
+        if (!card) return;
+
         // random start
         const xStart = gsap.utils.random(-cw / 2, cw / 2);
         const yStart = gsap.utils.random(-ch / 2, ch / 2);
@@ -126,15 +140,33 @@ export default function GlossaryCards() {
   // Build quickTo setters on mount
   useEffect(() => {
     if (!containerRef.current) return;
-    quickToX.current = cardsRef.current.map((el) =>
-      gsap.quickTo(el, 'x', { duration: 1, ease: 'power4.out' })
-    );
-    quickToY.current = cardsRef.current.map((el) =>
-      gsap.quickTo(el, 'y', { duration: 1, ease: 'power4.out' })
-    );
-    quickToRot.current = cardsRef.current.map((el) =>
-      gsap.quickTo(el, 'rotation', { duration: 1, ease: 'power4.out' })
-    );
+    quickToX.current = cardsRef.current
+      .filter((el) => el !== null)
+      .map((el) =>
+        gsap.quickTo(el, 'x', {
+          duration: 1,
+          ease: 'power4.out',
+          overwrite: 'auto',
+        })
+      );
+    quickToY.current = cardsRef.current
+      .filter((el) => el !== null)
+      .map((el) =>
+        gsap.quickTo(el, 'y', {
+          duration: 1,
+          ease: 'power4.out',
+          overwrite: 'auto',
+        })
+      );
+    quickToRot.current = cardsRef.current
+      .filter((el) => el !== null)
+      .map((el) =>
+        gsap.quickTo(el, 'rotation', {
+          duration: 1,
+          ease: 'power4.out',
+          overwrite: 'auto',
+        })
+      );
   }, [prefersReducedMotion, isInView]);
 
   // 2) Pointer-driven "knock" effect, per-card, using only cached values
@@ -145,15 +177,49 @@ export default function GlossaryCards() {
     const radius = 100; // px
 
     const loop = () => {
-      const { left, top } = containerRef.current!.getBoundingClientRect();
+      if (!containerRef.current) return;
+      const { left, top } = containerRef.current.getBoundingClientRect();
       const px = mouse.x - left;
       const py = mouse.y - top;
+
+      // Handle dragging
+      if (isDragging.current && draggedCard !== null) {
+        const card = cardsRef.current[draggedCard];
+        if (card) {
+          const dx = px - dragStartMouse.current.x;
+          const dy = py - dragStartMouse.current.y;
+          const newX = (dragStartTransform.current.x ?? 0) + dx;
+          const newY = (dragStartTransform.current.y ?? 0) + dy;
+
+          // Update card position directly
+          gsap.set(card, { x: newX, y: newY });
+
+          // Update the transform cache
+          const cardRect = card.getBoundingClientRect();
+          const centerX = (cardRect.left + cardRect.right) / 2 - left;
+          const centerY = (cardRect.top + cardRect.bottom) / 2 - top;
+
+          transformsRef.current[draggedCard] = {
+            xEnd: newX,
+            yEnd: newY,
+            rotEnd: transformsRef.current[draggedCard]?.rotEnd ?? 0,
+            centerX,
+            centerY,
+          };
+        }
+        lastMouse = { x: px, y: py };
+        rafId = requestAnimationFrame(loop);
+        return;
+      }
+
       // compute pointer "velocity"
       const vx = px - lastMouse.x;
       const vy = py - lastMouse.y;
       const vMag = Math.hypot(vx, vy);
 
       transformsRef.current.forEach((transform, i) => {
+        // Skip the dragged card
+        if (i === draggedCard) return;
         const { xEnd, yEnd, rotEnd, centerX, centerY } = transform;
         const dx = px - centerX;
         const dy = py - centerY;
@@ -195,7 +261,93 @@ export default function GlossaryCards() {
 
     loop();
     return () => cancelAnimationFrame(rafId);
-  }, [mouse, prefersReducedMotion, isInView]);
+  }, [mouse, prefersReducedMotion, isInView, draggedCard]);
+
+  // Drag event handlers
+  const handleMouseDown = (e: React.MouseEvent, cardIndex: number) => {
+    if (prefersReducedMotion) return;
+
+    e.preventDefault();
+    const card = cardsRef.current[cardIndex];
+    if (!card || !containerRef.current) return;
+
+    // Stop any entrance/ongoing tweens that could fight the drag
+    gsap.killTweensOf(card);
+
+    const containerRect = containerRef.current.getBoundingClientRect();
+    const cardRect = card.getBoundingClientRect();
+    const startPx = mouse.x - containerRect.left;
+    const startPy = mouse.y - containerRect.top;
+
+    // Calculate offset from mouse to card center
+    const cardCenterX =
+      (cardRect.left + cardRect.right) / 2 - containerRect.left;
+    const cardCenterY =
+      (cardRect.top + cardRect.bottom) / 2 - containerRect.top;
+
+    dragOffset.current = {
+      x: mouse.x - containerRect.left - cardCenterX,
+      y: mouse.y - containerRect.top - cardCenterY,
+    };
+
+    // Record starting mouse position and element transform for delta-based dragging
+    dragStartMouse.current = { x: startPx, y: startPy };
+    dragStartTransform.current = {
+      x: (Number(gsap.getProperty(card, 'x')) as number) || 0,
+      y: (Number(gsap.getProperty(card, 'y')) as number) || 0,
+    };
+    console.log('dragOffset', dragOffset.current);
+    console.log('mouse', mouse);
+    console.log('containerRect', containerRect);
+    console.log('cardRect', cardRect);
+    console.log('cardCenterX', cardCenterX);
+    console.log('cardCenterY', cardCenterY);
+    // Visually scale on drag start without interfering with translation
+    currentScale.current = 1.05;
+    gsap.to(card, {
+      scale: 1.05,
+      duration: 0.15,
+      ease: 'power2.out',
+      overwrite: 'auto',
+      transformOrigin: '50% 50%',
+    });
+
+    setDraggedCard(cardIndex);
+    isDragging.current = true;
+    setIsDraggingState(true);
+  };
+
+  const handleMouseUp = useCallback(() => {
+    if (isDragging.current && draggedCard !== null) {
+      isDragging.current = false;
+      setIsDraggingState(false);
+      // Reset scale
+      const card = cardsRef.current[draggedCard];
+      currentScale.current = 1;
+      if (card) {
+        gsap.to(card, {
+          scale: 1,
+          duration: 0.15,
+          ease: 'power2.out',
+          overwrite: 'auto',
+        });
+      }
+      setDraggedCard(null);
+    }
+  }, [draggedCard]);
+
+  // Global mouse up listener
+  useEffect(() => {
+    if (isDraggingState) {
+      const handleGlobalMouseUp = () => handleMouseUp();
+      document.addEventListener('mouseup', handleGlobalMouseUp);
+      document.addEventListener('mouseleave', handleGlobalMouseUp);
+      return () => {
+        document.removeEventListener('mouseup', handleGlobalMouseUp);
+        document.removeEventListener('mouseleave', handleGlobalMouseUp);
+      };
+    }
+  }, [isDraggingState, handleMouseUp]);
 
   return (
     <div ref={containerRef} className={styles.cardsContainer}>
@@ -206,7 +358,12 @@ export default function GlossaryCards() {
             if (el) cardsRef.current[i] = el;
           }}
           className={styles.card}
-          style={{ opacity: prefersReducedMotion ? 1 : 0 }}
+          style={{
+            opacity: prefersReducedMotion ? 1 : 0,
+            cursor: isDraggingState && draggedCard === i ? 'grabbing' : 'grab',
+            zIndex: isDraggingState && draggedCard === i ? 1000 : 'auto',
+          }}
+          onMouseDown={(e) => handleMouseDown(e, i)}
         >
           <div className={styles.cardLabel}>{item.name}</div>
           <div className={styles.cardContent}>

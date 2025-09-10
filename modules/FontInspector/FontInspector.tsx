@@ -390,9 +390,9 @@ export const InspectorProvider: React.FC<{
           '--semantic-color-background-secondary'
         ),
         boundsStroke: getPropertyValue('--semantic-color-foreground-info'),
-        boundsFill: getPropertyValue('--semantic-color-background-info-subtle'),
+        boundsFill: getPropertyValue('--semantic-color-background-infoSubtle'),
         lsbStroke: getPropertyValue('--semantic-color-foreground-info'),
-        lsbFill: getPropertyValue('--semantic-color-background-info-subtle'),
+        lsbFill: getPropertyValue('--semantic-color-background-infoSubtle'),
         rsbStroke: getPropertyValue('--semantic-color-foreground-warning'),
         rsbFill: getPropertyValue('--semantic-color-background-warning-subtle'),
         pathStroke: getPropertyValue('--semantic-color-foreground-warning'),

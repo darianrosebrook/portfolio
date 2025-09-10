@@ -58,7 +58,7 @@
     &--info {
       background: var(
         --alert-color-background-info,
-        var(--semantic-color-background-info-subtle)
+        var(--semantic-color-background-infoSubtle)
       );
       color: var(
         --alert-color-foreground-info,
@@ -69,7 +69,7 @@
     &--warning {
       background: var(
         --alert-color-background-warning,
-        var(--semantic-color-background-warning-subtle)
+        var(--semantic-color-background-warningSubtle)
       );
       color: var(
         --alert-color-foreground-warning,
@@ -80,7 +80,7 @@
     &--danger {
       background: var(
         --alert-color-background-danger,
-        var(--semantic-color-background-danger-subtle)
+        var(--semantic-color-background-dangerSubtle)
       );
       color: var(
         --alert-color-foreground-danger,
@@ -91,7 +91,7 @@
     &--success {
       background: var(
         --alert-color-background-success,
-        var(--semantic-color-background-success-subtle)
+        var(--semantic-color-background-successSubtle)
       );
       color: var(
         --alert-color-foreground-success,
@@ -116,7 +116,7 @@
     &--info {
       background: var(
         --alert-color-background-info,
-        var(--semantic-color-background-info-strong)
+        var(--semantic-color-background-infoStrong)
       );
       color: var(
         --alert-color-foreground-onColor,
@@ -127,7 +127,7 @@
     &--warning {
       background: var(
         --alert-color-background-warning,
-        var(--semantic-color-background-warning-strong)
+        var(--semantic-color-background-warningStrong)
       );
       color: var(
         --alert-color-foreground-onColor,
@@ -138,7 +138,7 @@
     &--danger {
       background: var(
         --alert-color-background-danger,
-        var(--semantic-color-background-danger-strong)
+        var(--semantic-color-background-dangerStrong)
       );
       color: var(
         --alert-color-foreground-onColor,

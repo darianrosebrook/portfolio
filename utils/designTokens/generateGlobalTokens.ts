@@ -14,7 +14,10 @@
 
 import fs from 'fs';
 import path from 'path';
-import designTokens from '../../components/designTokens.json';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 type JSONValue = string | number | boolean | null | JSONObject | JSONArray;
 interface JSONObject {
@@ -27,6 +30,7 @@ interface ResolveOptions {
 }
 
 const PROJECT_ROOT = path.resolve(__dirname, '..', '..');
+const TOKENS_PATH = path.join(PROJECT_ROOT, 'components', 'designTokens.json');
 const OUTPUT_PATH = path.join(PROJECT_ROOT, 'app', 'designTokens.scss');
 
 // Converts a dot path into a CSS custom property name
@@ -34,7 +38,7 @@ function tokenPathToCSSVar(pathStr: string): string {
   return `--${pathStr.replace(/\./g, '-')}`;
 }
 
-// Resolve a token node considering $value, $extensions with design.paths.{theme}
+// Resolve a token node considering $value, $extensions with design.paths.{theme} and viewport scaling
 function resolveNode(
   node: unknown,
   pathStr: string,
@@ -66,6 +70,36 @@ function resolveNode(
       const themed = ext[themeKey];
       if (typeof themed === 'string') {
         raw = themed;
+      }
+    }
+
+    // Check for viewport scaling extensions (design.paths.scale.heading)
+    if (ext && typeof ext === 'object' && 'design.paths.scale.heading' in ext) {
+      const scaleConfig = ext['design.paths.scale.heading'] as Record<
+        string,
+        unknown
+      >;
+      if (scaleConfig && typeof scaleConfig === 'object') {
+        const vw = scaleConfig.vw as Record<string, unknown>;
+        const vh = scaleConfig.vh as Record<string, unknown>;
+
+        if (vw && vh && '$value' in vw && '$value' in vh) {
+          const vwValue = vw.$value as string;
+          const vhValue = vh.$value as string;
+
+          // Convert the base value to a CSS variable reference if it's a token reference
+          let baseValue = raw;
+          if (typeof baseValue === 'string') {
+            const refPattern = /\{([^}]+)\}/g;
+            baseValue = baseValue.replace(
+              refPattern,
+              (_, refPath: string) => `var(${tokenPathToCSSVar(refPath)})`
+            );
+          }
+
+          // Create calc() expression with viewport scaling
+          return `calc(${baseValue} + ${vwValue} + ${vhValue})`;
+        }
       }
     }
   }
@@ -131,7 +165,8 @@ function formatBlock(selector: string, map: Record<string, string>): string {
 }
 
 function generate(): void {
-  const tokensObj = designTokens as unknown as Record<string, unknown>;
+  const raw = fs.readFileSync(TOKENS_PATH, 'utf8');
+  const tokensObj = JSON.parse(raw) as Record<string, unknown>;
 
   // Build maps
   const lightMap: Record<string, string> = {};

@@ -18,7 +18,7 @@
   --card-background: hsl(
     from var(--semantic-color-background-inverse) h s l / var(--card-opacity)
   );
-  --card-border: 1px solid var(--semantic-color-border-subtle);
+  --card-border: 1px solid var(--semantic-color-border-light);
   --card-shadow: 0 8px 32px
     hsl(from var(--semantic-color-background-secondary) h s l / 5%);
   --card-shadow-active: 0 0 30px
@@ -35,7 +35,7 @@
   height: clamp(150px, 30vw, 400px);
   background: var(--card-background);
   border: var(--card-border, 1px solid var(--semantic-color-border-primary));
-  border-radius: 16px;
+  border-radius: var(--core-radius-medium);
   box-shadow: var(--card-shadow);
   transition:
     box-shadow 0.3s ease,
