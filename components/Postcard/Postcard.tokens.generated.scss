@@ -1,0 +1,21 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: components/Postcard/Postcard.tokens.json
+ */
+@mixin vars {
+  /* === Color Tokens === */
+  --postcard-color-background-default: var(--semantic-color-background-primary);
+  --postcard-color-background-hover: var(--semantic-color-background-secondary);
+  --postcard-color-background-active: var(--semantic-color-background-active);
+  --postcard-color-border-default: var(--semantic-color-border-light);
+  --postcard-color-border-accent: var(--semantic-color-border-accent);
+  --postcard-color-border-hover: var(--semantic-color-border-bold);
+  --postcard-color-foreground-primary: var(--semantic-color-foreground-primary);
+  --postcard-color-foreground-secondary: var(
+    --semantic-color-foreground-secondary
+  );
+  --postcard-color-foreground-muted: var(--semantic-color-foreground-secondary);
+
+  /* === Size Tokens === */
+  --postcard-size-padding-default: var(--core-size-06);
+  --postcard-size-radius-default: var(--semantic-size-radius-02);
+}

@@ -1,0 +1,57 @@
+{
+  "prefix": "toggle",
+  "tokens": {
+    "size": {
+      "track": {
+        "width": "{core.size.12}",
+        "height": "{core.size.06}"
+      },
+      "thumb": {
+        "size": "{core.size.05}"
+      },
+      "radius": {
+        "full": "{semantic.size.radius.full}"
+      }
+    },
+    "color": {
+      "background": {
+        "track": "{semantic.color.background.secondary}",
+        "trackHover": "{semantic.color.background.hover}",
+        "trackFocus": "{semantic.color.background.secondary}",
+        "trackDisabled": "{semantic.color.background.disabled}",
+        "trackChecked": "{semantic.color.background.primary}",
+        "trackError": "{semantic.color.background.danger-subtle}",
+        "thumb": "{semantic.color.background.primary}",
+        "thumbHover": "{semantic.color.background.hover}",
+        "thumbFocus": "{semantic.color.background.primary}",
+        "thumbDisabled": "{semantic.color.background.disabled}",
+        "thumbChecked": "{semantic.color.background.accent}",
+        "thumbError": "{semantic.color.background.danger}"
+      },
+      "border": {
+        "track": "{semantic.color.border.primary}",
+        "trackHover": "{semantic.color.border.bold}",
+        "trackFocus": "{semantic.color.border.accent}",
+        "trackDisabled": "{semantic.color.border.disabled}",
+        "trackError": "{semantic.color.border.danger}",
+        "thumb": "{semantic.color.border.primary}",
+        "thumbHover": "{semantic.color.border.bold}",
+        "thumbFocus": "{semantic.color.border.accent}",
+        "thumbDisabled": "{semantic.color.border.disabled}",
+        "thumbError": "{semantic.color.border.danger}"
+      },
+      "foreground": {
+        "labelDefault": "{semantic.color.foreground.secondary}",
+        "labelHover": "{semantic.color.foreground.primary}",
+        "labelDisabled": "{semantic.color.foreground.disabled}",
+        "labelError": "{semantic.color.foreground.danger}"
+      }
+    },
+    "focus": {
+      "ring": {
+        "color": "{semantic.color.border.accent}",
+        "width": "{semantic.size.border.offset}"
+      }
+    }
+  }
+}
