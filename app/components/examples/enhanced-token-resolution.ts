@@ -13,7 +13,6 @@ import {
   createDefaultConfig,
   formatAsCSS,
   builtInTransforms,
-  type ResolverConfig,
   type Transform,
 } from '../../../utils/designTokens/componentTokenUtils';
 
