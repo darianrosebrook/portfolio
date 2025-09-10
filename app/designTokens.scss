@@ -3,7 +3,7 @@
  */
 
 :root {
-  --core-color-black: #000;
+  --core-color-black: #000000;
   --core-color-blue-100: #d9f3fe;
   --core-color-blue-200: #8ad9fc;
   --core-color-blue-300: #2eb9f9;
@@ -27,7 +27,7 @@
   --core-color-neutral-300: #aeaeae;
   --core-color-neutral-400: #8f8f8f;
   --core-color-neutral-500: #717171;
-  --core-color-neutral-600: #555;
+  --core-color-neutral-600: #555555;
   --core-color-neutral-700: #3a3a3a;
   --core-color-neutral-800: #212121;
   --core-color-orange-100: #ffedcc;
@@ -63,7 +63,7 @@
   --core-color-violet-600: #931d8f;
   --core-color-violet-700: #661463;
   --core-color-violet-800: #3b0c3a;
-  --core-color-white: #fff;
+  --core-color-white: #ffffff;
   --core-color-yellow-100: #ffedcc;
   --core-color-yellow-200: #ffc458;
   --core-color-yellow-300: #fe9400;
@@ -104,9 +104,9 @@
   --core-size-08: 32px;
   --core-size-09: 48px;
   --core-size-10: 64px;
-  --core-typography-fontFamily-mono: menlo, monospace;
-  --core-typography-fontFamily-sans: inter, sans-serif;
-  --core-typography-fontFamily-serif: georgia, serif;
+  --core-typography-fontFamily-mono: Menlo, monospace;
+  --core-typography-fontFamily-sans: Inter, sans-serif;
+  --core-typography-fontFamily-serif: Georgia, serif;
   --core-typography-fontWeight-black: 900;
   --core-typography-fontWeight-bold: 700;
   --core-typography-fontWeight-light: 300;
@@ -141,7 +141,12 @@
   --semantic-color-background-disabled: var(--core-color-neutral-200);
   --semantic-color-background-highlight: var(--core-color-blue-200);
   --semantic-color-background-hover: var(--core-color-neutral-200);
-  --semantic-color-background-imageOverlay: rgb(0 0 0 / var(--core-opacity-50));
+  --semantic-color-background-imageOverlay: rgba(
+    0,
+    0,
+    0,
+    var(--core-opacity-50)
+  );
   --semantic-color-background-infoStrong: var(--core-color-blue-600);
   --semantic-color-background-infoSubtle: var(--core-color-blue-100);
   --semantic-color-background-inverse: var(--core-color-light);
@@ -287,7 +292,12 @@
   --semantic-color-background-disabled: var(--core-color-neutral-200);
   --semantic-color-background-highlight: var(--core-color-blue-200);
   --semantic-color-background-hover: var(--core-color-neutral-200);
-  --semantic-color-background-imageOverlay: rgb(0 0 0 / var(--core-opacity-50));
+  --semantic-color-background-imageOverlay: rgba(
+    0,
+    0,
+    0,
+    var(--core-opacity-50)
+  );
   --semantic-color-background-infoStrong: var(--core-color-blue-600);
   --semantic-color-background-infoSubtle: var(--core-color-blue-100);
   --semantic-color-background-inverse: var(--core-color-light);
@@ -346,7 +356,12 @@
   --semantic-color-background-disabled: var(--core-color-neutral-700);
   --semantic-color-background-highlight: var(--core-color-blue-800);
   --semantic-color-background-hover: var(--core-color-neutral-700);
-  --semantic-color-background-imageOverlay: rgb(0 0 0 / var(--core-opacity-50));
+  --semantic-color-background-imageOverlay: rgba(
+    0,
+    0,
+    0,
+    var(--core-opacity-50)
+  );
   --semantic-color-background-infoStrong: var(--core-color-blue-600);
   --semantic-color-background-infoSubtle: var(--core-color-blue-800);
   --semantic-color-background-inverse: var(--core-color-light);
@@ -406,8 +421,11 @@
     --semantic-color-background-disabled: var(--core-color-neutral-700);
     --semantic-color-background-highlight: var(--core-color-blue-800);
     --semantic-color-background-hover: var(--core-color-neutral-700);
-    --semantic-color-background-imageOverlay: rgb(
-      0 0 0 / var(--core-opacity-50)
+    --semantic-color-background-imageOverlay: rgba(
+      0,
+      0,
+      0,
+      var(--core-opacity-50)
     );
     --semantic-color-background-infoStrong: var(--core-color-blue-600);
     --semantic-color-background-infoSubtle: var(--core-color-blue-800);
@@ -462,7 +480,6 @@
     --semantic-color-foreground-tertiary: var(--core-color-neutral-500);
     --semantic-color-foreground-warning: var(--core-color-orange-400);
   }
-
   .light {
     --semantic-color-background-accent: var(--core-color-red-500);
     --semantic-color-background-active: var(--core-color-neutral-300);
@@ -471,8 +488,11 @@
     --semantic-color-background-disabled: var(--core-color-neutral-200);
     --semantic-color-background-highlight: var(--core-color-blue-200);
     --semantic-color-background-hover: var(--core-color-neutral-200);
-    --semantic-color-background-imageOverlay: rgb(
-      0 0 0 / var(--core-opacity-50)
+    --semantic-color-background-imageOverlay: rgba(
+      0,
+      0,
+      0,
+      var(--core-opacity-50)
     );
     --semantic-color-background-infoStrong: var(--core-color-blue-600);
     --semantic-color-background-infoSubtle: var(--core-color-blue-100);
