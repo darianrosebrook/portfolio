@@ -85,10 +85,10 @@ export default function Home() {
         </div>
         <div className={styles.headingHero}>
           <div className="gooey">
-            <Status status="error">Available for work</Status>
+            <Status status="error">Design Technologist</Status>
           </div>
           <h1 className="gooey">
-            <span>Product Designer &amp; Developer</span>
+            <span>Darian Rosebrook</span>
             <br />
             <span>
               Connecting Design &rarr; Code with Design Systems &amp; Custom

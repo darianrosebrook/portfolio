@@ -30,6 +30,8 @@ function resolveNode(node, pathStr, theme) {
 
   if (node && typeof node === 'object' && '$extensions' in node) {
     const ext = node.$extensions || {};
+
+    // Apply theme-based extensions first
     const key = `design.paths.${theme}`;
     if (
       ext &&
@@ -38,6 +40,32 @@ function resolveNode(node, pathStr, theme) {
       typeof ext[key] === 'string'
     ) {
       raw = ext[key];
+    }
+
+    // Check for viewport scaling extensions (design.paths.scale.heading)
+    if (ext && typeof ext === 'object' && 'design.paths.scale.heading' in ext) {
+      const scaleConfig = ext['design.paths.scale.heading'];
+      if (scaleConfig && typeof scaleConfig === 'object') {
+        const vw = scaleConfig.vw;
+        const vh = scaleConfig.vh;
+
+        if (vw && vh && '$value' in vw && '$value' in vh) {
+          const vwValue = vw.$value;
+          const vhValue = vh.$value;
+
+          // Convert the base value to a CSS variable reference if it's a token reference
+          let baseValue = raw;
+          if (typeof baseValue === 'string') {
+            baseValue = baseValue.replace(
+              /\{([^}]+)\}/g,
+              (_, refPath) => `var(${tokenPathToCSSVar(refPath)})`
+            );
+          }
+
+          // Create calc() expression with viewport scaling
+          return `calc(${baseValue} + ${vwValue} + ${vhValue})`;
+        }
+      }
     }
   }
 
@@ -63,44 +91,52 @@ function collectMaps(tokens, currentPath, inheritedType, maps) {
       const nodeType =
         typeof val.$type === 'string' ? val.$type : inheritedType;
       const hasValue = Object.prototype.hasOwnProperty.call(val, '$value');
-      if (hasValue) {
-        const v = val.$value;
-        if (typeof v === 'string' || typeof v === 'number') {
-          const cssVar = tokenPathToCSSVar(pathStr);
-          // Root always uses light/default resolution
-          const lightVal = resolveNode(val, pathStr, 'light');
-          maps.root[cssVar] = lightVal;
+      const hasChildren = Object.keys(val).some(
+        (k) =>
+          k !== '$value' &&
+          k !== '$type' &&
+          k !== '$description' &&
+          k !== '$extensions' &&
+          k !== '$alias'
+      );
 
-          // Only theme color tokens that have extensions
-          if (nodeType === 'color' && val.$extensions) {
-            const ext = val.$extensions || {};
-            const hasLightPath = Object.prototype.hasOwnProperty.call(
-              ext,
-              'design.paths.light'
-            );
-            const hasDarkPath = Object.prototype.hasOwnProperty.call(
-              ext,
-              'design.paths.dark'
-            );
+      if (hasValue || !hasChildren) {
+        const cssVar = tokenPathToCSSVar(pathStr);
+        // Root always uses light/default resolution
+        const lightVal = resolveNode(val, pathStr, 'light');
+        const darkVal = resolveNode(val, pathStr, 'dark');
 
-            if (hasLightPath || hasDarkPath) {
-              const lightVal = resolveNode(val, pathStr, 'light');
-              const darkVal = resolveNode(val, pathStr, 'dark');
+        maps.root[cssVar] = lightVal;
 
-              if (hasLightPath) maps.lightColors[cssVar] = lightVal;
-              if (hasDarkPath) {
-                maps.darkColors[cssVar] = darkVal;
-                maps.hasDarkOverride = true;
-              }
+        // Handle theme extensions for any token type
+        if (val.$extensions) {
+          const ext = val.$extensions || {};
+          const hasLightPath = Object.prototype.hasOwnProperty.call(
+            ext,
+            'design.paths.light'
+          );
+          const hasDarkPath = Object.prototype.hasOwnProperty.call(
+            ext,
+            'design.paths.dark'
+          );
+
+          if (hasLightPath || hasDarkPath) {
+            if (hasLightPath) maps.lightColors[cssVar] = lightVal;
+            if (hasDarkPath) {
+              maps.darkColors[cssVar] = darkVal;
+              maps.hasDarkOverride = true;
             }
           }
         }
       }
-      // Recurse
-      for (const [childKey, childVal] of Object.entries(val)) {
-        if (childKey.startsWith('$')) continue;
-        collectMaps({ [childKey]: childVal }, nextPath, nodeType, maps);
-      }
+
+      // Recurse regardless to catch nested tokens
+      collectMaps(val, nextPath, nodeType, maps);
+    } else {
+      // Handle primitive values
+      const cssVar = tokenPathToCSSVar(pathStr);
+      const lightVal = resolveNode(val, pathStr, 'light');
+      maps.root[cssVar] = lightVal;
     }
   }
 }
