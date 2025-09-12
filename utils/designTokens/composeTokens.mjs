@@ -18,8 +18,8 @@ const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const projectRoot = path.resolve(__dirname, '..', '..');
 
-const SOURCES_DIR = path.join(projectRoot, 'components', 'designTokens');
-const OUTPUT_PATH = path.join(projectRoot, 'components', 'designTokens.json');
+const SOURCES_DIR = path.join(projectRoot, 'ui', 'designTokens');
+const OUTPUT_PATH = path.join(projectRoot, 'ui', 'designTokens.json');
 
 function readIfExists(p) {
   if (!fs.existsSync(p)) return null;
