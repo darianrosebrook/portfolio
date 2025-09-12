@@ -1,7 +1,7 @@
 import React from 'react';
 import { Editor } from '@tiptap/react';
 import styles from './Toolbar.module.scss';
-import Icon from '../../components/Icon';
+import Icon from '../../ui/Icon';
 import { byPrefixAndName } from '@awesome.me/kit-0ba7f5fefb/icons';
 const faBold = byPrefixAndName['far']['bold'];
 const faItalic = byPrefixAndName['far']['italic'];

@@ -32,10 +32,10 @@ const Tiptap = ({
 
   return (
     <>
-      <EditorContent editor={editor} className={styles.editor} />
       {editor && <ToolbarWrapper editor={editor} />}
       {editor && <ImageBubbleMenu editor={editor} />}
       {editor && <VideoBubbleMenu editor={editor} />}
+      <EditorContent editor={editor} className={styles.editor} />
     </>
   );
 };

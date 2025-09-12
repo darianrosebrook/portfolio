@@ -1,0 +1,411 @@
+{
+  "core": {
+    "typography": {
+      "fontFamily": {
+        "sans": {
+          "$value": "Inter, sans-serif",
+          "$type": "string",
+          "$description": "Default sans-serif font family for the system."
+        },
+        "serif": {
+          "$value": "Georgia, serif",
+          "$type": "string",
+          "$description": "Default serif font family for the system."
+        },
+        "mono": {
+          "$value": "Menlo, monospace",
+          "$type": "string",
+          "$description": "Default monospace font family for the system."
+        }
+      },
+      "ramp": {
+        "1": {
+          "$value": "10px",
+          "$description": "Smallest font size."
+        },
+        "2": {
+          "$value": "12px",
+          "$description": "Extra small font size."
+        },
+        "3": {
+          "$value": "14px",
+          "$description": "Small font size."
+        },
+        "4": {
+          "$value": "16px",
+          "$description": "Base font size."
+        },
+        "5": {
+          "$value": "18px",
+          "$description": "Medium font size."
+        },
+        "6": {
+          "$value": "20px",
+          "$description": "Large font size."
+        },
+        "7": {
+          "$value": "24px",
+          "$description": "Extra large font size."
+        },
+        "8": {
+          "$value": "32px",
+          "$description": "Heading font size 1."
+        },
+        "9": {
+          "$value": "40px",
+          "$description": "Heading font size 2."
+        },
+        "10": {
+          "$value": "48px",
+          "$description": "Heading font size 3."
+        },
+        "11": {
+          "$value": "60px",
+          "$description": "Heading font size 4."
+        },
+        "12": {
+          "$value": "72px",
+          "$description": "Heading font size 5."
+        },
+        "13": {
+          "$value": "96px",
+          "$description": "Oversized font size 1."
+        },
+        "14": {
+          "$value": "128px",
+          "$description": "Oversized font size 2."
+        },
+        "15": {
+          "$value": "160px",
+          "$description": "Oversized font size 3."
+        },
+        "16": {
+          "$value": "192px",
+          "$description": "Oversized font size 4."
+        },
+        "$type": "dimension",
+        "$description": "Typography scale for font sizes."
+      },
+      "lineHeight": {
+        "$type": "number",
+        "$description": "Line height scales for text.",
+        "collapse": {
+          "$value": "1",
+          "$description": "Line height with no extra spacing, often for headings."
+        },
+        "body": {
+          "$value": "1.5",
+          "$description": "Default line height for body text."
+        },
+        "heading": {
+          "$value": "1",
+          "$description": "Line height for headings, matches collapse."
+        }
+      },
+      "letterSpacing": {
+        "$type": "dimension",
+        "$description": "Letter spacing values for text.",
+        "tight": {
+          "$value": "-0.018em",
+          "$description": "Tight letter spacing for compact text."
+        },
+        "normal": {
+          "$value": "0",
+          "$description": "Default letter spacing."
+        },
+        "wide": {
+          "$value": "0.018em",
+          "$description": "Wide letter spacing for emphasis."
+        }
+      },
+      "fontWeight": {
+        "$type": "number",
+        "$description": "Font weights for typography.",
+        "light": {
+          "$value": "300",
+          "$description": "Light font weight, often for headings."
+        },
+        "regular": {
+          "$value": "400",
+          "$description": "Regular font weight for body text."
+        },
+        "medium": {
+          "$value": "500",
+          "$description": "Medium font weight, slightly heavier than regular."
+        },
+        "bold": {
+          "$value": "700",
+          "$description": "Bold font weight for emphasis."
+        },
+        "black": {
+          "$value": "900",
+          "$description": "Heaviest font weight, often for display use."
+        }
+      }
+    }
+  },
+  "semantic": {
+    "typography": {
+      "oversize": {
+        "01": {
+          "$type": "dimension",
+          "$value": "{core.typography.ramp.16}",
+          "$extensions": {
+            "design.paths.scale.heading": {
+              "vh": {
+                "$type": "dimension",
+                "$value": "0.75vh"
+              },
+              "vw": {
+                "$type": "dimension",
+                "$value": "0.75vw"
+              }
+            }
+          }
+        },
+        "02": {
+          "$type": "dimension",
+          "$value": "{core.typography.ramp.15}",
+          "$extensions": {
+            "design.paths.scale.heading": {
+              "vh": {
+                "$type": "dimension",
+                "$value": "0.5vh"
+              },
+              "vw": {
+                "$type": "dimension",
+                "$value": "0.5vw"
+              }
+            }
+          }
+        },
+        "03": {
+          "$type": "dimension",
+          "$value": "{core.typography.ramp.14}",
+          "$extensions": {
+            "design.paths.scale.heading": {
+              "vh": {
+                "$type": "dimension",
+                "$value": "0.5vh"
+              },
+              "vw": {
+                "$type": "dimension",
+                "$value": "0.5vw"
+              }
+            }
+          }
+        },
+        "04": {
+          "$type": "dimension",
+          "$value": "{core.typography.ramp.13}",
+          "$extensions": {
+            "design.paths.scale.heading": {
+              "vh": {
+                "$type": "dimension",
+                "$value": "0.5vh"
+              },
+              "vw": {
+                "$type": "dimension",
+                "$value": "0.5vw"
+              }
+            }
+          }
+        }
+      },
+      "heading": {
+        "01": {
+          "$type": "dimension",
+          "$value": "{core.typography.ramp.8}",
+          "$extensions": {
+            "design.paths.scale.heading": {
+              "vh": {
+                "$type": "dimension",
+                "$value": "0.75vh"
+              },
+              "vw": {
+                "$type": "dimension",
+                "$value": "0.75vw"
+              }
+            }
+          }
+        },
+        "02": {
+          "$type": "dimension",
+          "$value": "{core.typography.ramp.7}",
+          "$extensions": {
+            "design.paths.scale.heading": {
+              "vh": {
+                "$type": "dimension",
+                "$value": "0.5vh"
+              },
+              "vw": {
+                "$type": "dimension",
+                "$value": "0.5vw"
+              }
+            }
+          }
+        },
+        "03": {
+          "$type": "dimension",
+          "$value": "{core.typography.ramp.6}",
+          "$extensions": {
+            "design.paths.scale.heading": {
+              "vh": {
+                "$type": "dimension",
+                "$value": "0.5vh"
+              },
+              "vw": {
+                "$type": "dimension",
+                "$value": "0.5vw"
+              }
+            }
+          }
+        },
+        "04": {
+          "$type": "dimension",
+          "$value": "{core.typography.ramp.5}",
+          "$extensions": {
+            "design.paths.scale.heading": {
+              "vh": {
+                "$type": "dimension",
+                "$value": "0.5vh"
+              },
+              "vw": {
+                "$type": "dimension",
+                "$value": "0.5vw"
+              }
+            }
+          }
+        },
+        "05": {
+          "$type": "dimension",
+          "$value": "{core.typography.ramp.4}",
+          "$extensions": {
+            "design.paths.scale.heading": {
+              "vh": {
+                "$type": "dimension",
+                "$value": "0.25vh"
+              },
+              "vw": {
+                "$type": "dimension",
+                "$value": "0.25vw"
+              }
+            }
+          }
+        },
+        "06": {
+          "$type": "dimension",
+          "$value": "{core.typography.ramp.3}",
+          "$extensions": {
+            "design.paths.scale.heading": {
+              "vh": {
+                "$type": "dimension",
+                "$value": "0.25vh"
+              },
+              "vw": {
+                "$type": "dimension",
+                "$value": "0.25vw"
+              }
+            }
+          }
+        }
+      },
+      "body": {
+        "01": {
+          "$type": "dimension",
+          "$value": "{core.typography.ramp.5}"
+        },
+        "02": {
+          "$type": "dimension",
+          "$value": "{core.typography.ramp.4}"
+        },
+        "03": {
+          "$type": "dimension",
+          "$value": "{core.typography.ramp.3}"
+        },
+        "04": {
+          "$type": "dimension",
+          "$value": "{core.typography.ramp.2}"
+        }
+      },
+      "caption": {
+        "01": {
+          "$type": "dimension",
+          "$value": "{core.typography.ramp.3}"
+        },
+        "02": {
+          "$type": "dimension",
+          "$value": "{core.typography.ramp.2}"
+        },
+        "03": {
+          "$type": "dimension",
+          "$value": "{core.typography.ramp.1}"
+        }
+      },
+      "button": {
+        "01": {
+          "$type": "dimension",
+          "$value": "{core.typography.ramp.5}"
+        },
+        "02": {
+          "$type": "dimension",
+          "$value": "{core.typography.ramp.4}"
+        },
+        "03": {
+          "$type": "dimension",
+          "$value": "{core.typography.ramp.3}"
+        }
+      },
+      "fontWeight": {
+        "light": {
+          "$type": "number",
+          "$value": 300
+        },
+        "regular": {
+          "$type": "number",
+          "$value": 400
+        },
+        "medium": {
+          "$type": "number",
+          "$value": 500
+        },
+        "bold": {
+          "$type": "number",
+          "$value": 700
+        },
+        "black": {
+          "$type": "number",
+          "$value": 900
+        }
+      },
+      "lineHeight": {
+        "collapse": {
+          "$type": "number",
+          "$value": 1
+        },
+        "body": {
+          "$type": "number",
+          "$value": 1.5
+        },
+        "heading": {
+          "$type": "number",
+          "$value": "{semantic.typography.lineHeight.collapse}"
+        }
+      },
+      "letterSpacing": {
+        "tight": {
+          "$type": "dimension",
+          "$value": "-0.018em"
+        },
+        "normal": {
+          "$type": "dimension",
+          "$value": "0"
+        },
+        "wide": {
+          "$type": "dimension",
+          "$value": "0.018em"
+        }
+      }
+    }
+  }
+}

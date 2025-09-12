@@ -17,7 +17,9 @@
     "analyze": "ANALYZE=true npm run build",
     "tokens:scss": "node utils/generateCSSTokens.mjs",
     "tokens:globals": "node utils/designTokens/generateGlobalTokens.mjs",
-    "tokens:build": "npm run tokens:globals && npm run tokens:scss"
+    "tokens:split": "node utils/designTokens/splitTokens.mjs",
+    "tokens:compose": "node utils/designTokens/composeTokens.mjs",
+    "tokens:build": "npm run tokens:compose && npm run tokens:globals && npm run tokens:scss"
   },
   "dependencies": {
     "@atproto/api": "^0.15.15",

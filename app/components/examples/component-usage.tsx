@@ -7,7 +7,7 @@ import {
   generate,
   createDefaultConfig,
 } from '../../../utils/designTokens/componentTokenUtils';
-import designTokens from '../../../components/designTokens.json';
+import designTokens from '../../../ui/designTokens.json';
 
 // Example component tokens
 const buttonTokens = {

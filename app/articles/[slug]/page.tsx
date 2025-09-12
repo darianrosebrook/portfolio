@@ -13,7 +13,7 @@ import { JSONContent } from '@tiptap/react';
 import { generateLDJson } from '@/utils/ldjson';
 
 import styles from './styles.module.css';
-import ProfileFlag from '@/components/ProfileFlag';
+import ProfileFlag from '@/ui/ProfileFlag';
 import ShareLinks from './ShareLinks';
 
 function getArticleContent(data: JSONContent) {

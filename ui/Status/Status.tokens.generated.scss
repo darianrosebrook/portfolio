@@ -1,0 +1,25 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: components/Status/Status.tokens.json
+ */
+@mixin vars {
+  /* === Color Tokens === */
+  --status-color-background-default: var(--semantic-color-background-primary);
+  --status-color-background-hover: var(--semantic-color-background-hover);
+  --status-color-background-active: var(--semantic-color-background-active);
+  --status-color-background-disabled: var(--semantic-color-background-disabled);
+  --status-color-foreground-primary: var(--semantic-color-foreground-primary);
+  --status-color-foreground-secondary: var(
+    --semantic-color-foreground-secondary
+  );
+  --status-color-foreground-accent: var(--semantic-color-foreground-accent);
+  --status-color-foreground-disabled: var(--semantic-color-foreground-disabled);
+  --status-color-border-default: var(--semantic-color-border-primary);
+  --status-color-border-hover: var(--semantic-color-border-bold);
+  --status-color-border-accent: var(--semantic-color-border-accent);
+  --status-color-border-disabled: var(--semantic-color-border-disabled);
+
+  /* === Size Tokens === */
+  --status-size-radius-default: var(--core-shape-radius-full);
+  --status-size-padding-default: var(--core-spacing-size-04);
+  --status-size-border-default: var(--core-shape-border-width-hairline);
+}

@@ -2,10 +2,10 @@
 import { useState } from 'react';
 import { Article } from '@/types';
 import styles from './styles.module.css';
-import Button from '@/components/Button';
-import Icon from '@/components/Icon';
+import Button from '@/ui/Button';
+import Icon from '@/ui/Icon';
 import { byPrefixAndName } from '@awesome.me/kit-0ba7f5fefb/icons';
-import { CheckIcon, LinkIcon } from '@/components/Icon/LocalIcons';
+import { CheckIcon, LinkIcon } from '@/ui/Icon/LocalIcons';
 
 export default function ShareLinks({
   url,
