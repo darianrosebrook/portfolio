@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Editor } from '@tiptap/react';
-import Popover from '@/components/Popover';
+import Popover from '@/ui/Popover';
 
 type Props = {
   editor: Editor;

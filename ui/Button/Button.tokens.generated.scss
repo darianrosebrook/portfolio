@@ -1,0 +1,115 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: components/Button/Button.tokens.json
+ */
+@mixin vars {
+  /* === Color Tokens === */
+  --button-color-background-default: var(--semantic-color-background-inverse);
+  --button-color-background-hover: var(--semantic-interaction-background-hover);
+  --button-color-background-active: var(
+    --semantic-interaction-background-active
+  );
+  --button-color-background-focus: var(--semantic-color-background-inverse);
+  --button-color-background-focusVisible: var(
+    --semantic-color-background-inverse
+  );
+  --button-color-background-disabled: var(--semantic-color-background-disabled);
+  --button-color-background-primary: var(--semantic-color-background-brand);
+  --button-color-background-primaryHover: var(
+    --semantic-interaction-background-hover
+  );
+  --button-color-background-primaryActive: var(
+    --semantic-interaction-background-active
+  );
+  --button-color-background-secondary: var(
+    --semantic-color-background-secondary
+  );
+  --button-color-background-secondaryHover: var(
+    --semantic-interaction-background-hover
+  );
+  --button-color-background-secondaryActive: var(
+    --semantic-interaction-background-active
+  );
+  --button-color-background-tertiary: var(--core-color-mode-transparent);
+  --button-color-background-tertiaryHover: var(
+    --semantic-interaction-background-hover
+  );
+  --button-color-background-tertiaryActive: var(
+    --semantic-interaction-background-active
+  );
+  --button-color-foreground-default: var(--semantic-color-foreground-inverse);
+  --button-color-foreground-hover: var(--semantic-interaction-text-hover);
+  --button-color-foreground-active: var(--semantic-interaction-text-active);
+  --button-color-foreground-focus: var(--semantic-color-foreground-inverse);
+  --button-color-foreground-focusVisible: var(
+    --semantic-color-foreground-inverse
+  );
+  --button-color-foreground-disabled: var(--semantic-color-foreground-disabled);
+  --button-color-foreground-primary: var(--semantic-color-foreground-onBrand);
+  --button-color-foreground-primaryHover: var(
+    --semantic-color-foreground-onBrand
+  );
+  --button-color-foreground-primaryActive: var(
+    --semantic-color-foreground-onBrand
+  );
+  --button-color-foreground-secondary: var(--semantic-color-foreground-primary);
+  --button-color-foreground-secondaryHover: var(
+    --semantic-interaction-text-hover
+  );
+  --button-color-foreground-secondaryActive: var(
+    --semantic-interaction-text-active
+  );
+  --button-color-foreground-tertiary: var(--semantic-color-foreground-tertiary);
+  --button-color-foreground-tertiaryHover: var(
+    --semantic-interaction-text-hover
+  );
+  --button-color-foreground-tertiaryActive: var(
+    --semantic-interaction-text-active
+  );
+  --button-color-border-default: var(--semantic-color-border-light);
+  --button-color-border-hover: var(--semantic-interaction-border-hover);
+  --button-color-border-active: var(--semantic-interaction-border-active);
+  --button-color-border-focus: var(--semantic-color-border-accent);
+  --button-color-border-focusVisible: var(--semantic-color-border-accent);
+  --button-color-border-disabled: var(--semantic-color-border-disabled);
+  --button-color-border-primary: var(--semantic-color-border-accent);
+  --button-color-border-primaryHover: var(--semantic-color-border-accent);
+  --button-color-border-primaryActive: var(--semantic-color-border-accent);
+  --button-color-border-secondary: var(--semantic-color-border-light);
+  --button-color-border-secondaryHover: var(
+    --semantic-interaction-border-hover
+  );
+  --button-color-border-secondaryActive: var(
+    --semantic-interaction-border-active
+  );
+  --button-color-border-tertiary: var(--semantic-color-border-light);
+  --button-color-border-tertiaryHover: var(--semantic-interaction-border-hover);
+  --button-color-border-tertiaryActive: var(
+    --semantic-interaction-border-active
+  );
+
+  /* === Size Tokens === */
+  --button-size-gap-default: var(--core-spacing-size-04);
+  --button-size-min-small: var(--semantic-control-size-sm-height);
+  --button-size-min-medium: var(--semantic-control-size-md-height);
+  --button-size-min-large: var(--semantic-control-size-lg-height);
+  --button-size-radius: var(--semantic-shape-control-radius-default);
+  --button-size-border: var(--core-shape-border-width-hairline);
+
+  /* === Text Tokens === */
+  --button-text-size-small: var(--semantic-typography-body-04);
+  --button-text-size-medium: var(--semantic-typography-body-01);
+  --button-text-size-large: var(--semantic-typography-body-01);
+  --button-text-lineHeight-collapse: var(
+    --semantic-typography-lineHeight-collapse
+  );
+
+  /* === Motion Tokens === */
+  --button-motion-duration: var(--core-motion-duration-short);
+  --button-motion-easing: var(--core-motion-easing-standard);
+  --button-motion-scale-pressed: 0.98;
+
+  /* === Focus Tokens === */
+  --button-focus-outlineWidth: var(--core-shape-border-width-thick);
+  --button-focus-outlineOffset: var(--core-spacing-size-02);
+  --button-focus-outlineColor: var(--semantic-color-border-accent);
+}

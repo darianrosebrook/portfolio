@@ -7,7 +7,7 @@ import Styles from './index.module.css';
 import { horizontalLoop } from '@/utils';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { byPrefixAndName } from '@awesome.me/kit-0ba7f5fefb/icons';
-import Icon from '../../components/Icon';
+import Icon from '../../ui/Icon';
 type MarqueeProps = {
   title: string;
   icon: IconDefinition;

@@ -5,7 +5,7 @@
  * to actual CSS values, with support for recursive token references and fallbacks.
  */
 
-import designTokens from '../../components/designTokens.json';
+import designTokens from '../../ui/designTokens.json';
 import { Logger } from '../helpers/logger';
 import {
   parseCssColorToRgb,

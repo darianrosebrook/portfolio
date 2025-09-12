@@ -1,6 +1,6 @@
 import { getCurrentUserProfile } from '@/utils/supabase/profile';
 import { createClient } from '@/utils/supabase/server';
-import Avatar from '@/components/Avatar';
+import Avatar from '@/ui/Avatar';
 
 export default async function ProfilePage() {
   const supabase = await createClient();

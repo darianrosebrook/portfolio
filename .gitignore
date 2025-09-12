@@ -42,3 +42,4 @@ next-env.d.ts
 /plans/ 
 .vscode/
 **/TODO.md
+docs/

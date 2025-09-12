@@ -9,7 +9,7 @@ import StarterKit from '@tiptap/starter-kit';
 import Image from '@tiptap/extension-image';
 import CharacterCount from '@tiptap/extension-character-count';
 import { VideoExtended } from '@/modules/Tiptap/Extensions/VideoExtended';
-import ToggleSwitch from '@/components/ToggleSwitch';
+import ToggleSwitch from '@/ui/ToggleSwitch';
 
 const Tiptap = dynamic(
   () => import('@/modules/Tiptap').then((mod) => ({ default: mod.Tiptap })),

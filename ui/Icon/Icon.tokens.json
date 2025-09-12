@@ -1,0 +1,15 @@
+{
+  "prefix": "icon",
+  "tokens": {
+    "color": {
+      "foreground": {
+        "default": "{semantic.color.foreground.primary}"
+      }
+    },
+    "size": {
+      "padding": {
+        "default": "{core.spacing.size.01}"
+      }
+    }
+  }
+}

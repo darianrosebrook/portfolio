@@ -5,6 +5,7 @@
   ],
   "plugins": ["@stylistic/stylelint-plugin", "stylelint-order"],
   "rules": {
+    "color-hex-length": "long",
     "@stylistic/no-eol-whitespace": true,
     "declaration-block-single-line-max-declarations": 3,
     "selector-class-pattern": [

@@ -1,6 +1,6 @@
 'use client';
 
-import { Select } from '@/components/Select';
+import { Select } from '@/ui/Select';
 
 export default function ComponentsPage() {
   const options = [

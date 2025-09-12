@@ -1,4 +1,4 @@
-import ToggleSwitch from '../../components/ToggleSwitch';
+import ToggleSwitch from '../../ui/ToggleSwitch';
 import { useInspector } from './FontInspector';
 import styles from './FontInspector.module.scss';
 /*

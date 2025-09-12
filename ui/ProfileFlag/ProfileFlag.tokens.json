@@ -1,0 +1,21 @@
+{
+  "prefix": "profileFlag",
+  "tokens": {
+    "color": {
+      "background": {
+        "default": "{semantic.color.background.primary}"
+      },
+      "border": {
+        "default": "{semantic.color.border.light}"
+      },
+      "foreground": {
+        "primary": "{semantic.color.foreground.primary}"
+      }
+    },
+    "size": {
+      "radius": {
+        "default": "{semantic.shape.control.radius.default}"
+      }
+    }
+  }
+}

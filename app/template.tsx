@@ -10,7 +10,7 @@ import {
 } from '@/context';
 import Navbar from '@/modules/Navbar';
 import Footer from '@/modules/Footer';
-import SlinkyCursor from '@/components/SlinkyCursor';
+import SlinkyCursor from '@/ui/SlinkyCursor';
 type TemplateProps = {
   children: React.ReactNode;
 };

@@ -1,0 +1,62 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: components/ToggleSwitch/ToggleSwitch.tokens.json
+ */
+@mixin vars {
+  /* === Size Tokens === */
+  --toggle-size-track-width: var(--core-spacing-size-12);
+  --toggle-size-track-height: var(--core-spacing-size-06);
+  --toggle-size-thumb-size: var(--core-spacing-size-05);
+  --toggle-size-radius-full: var(--core-shape-radius-full);
+
+  /* === Color Tokens === */
+  --toggle-color-background-track: var(--semantic-color-background-secondary);
+  --toggle-color-background-trackHover: var(--semantic-color-background-hover);
+  --toggle-color-background-trackFocus: var(
+    --semantic-color-background-secondary
+  );
+  --toggle-color-background-trackDisabled: var(
+    --semantic-color-background-disabled
+  );
+  --toggle-color-background-trackChecked: var(
+    --semantic-color-background-primary
+  );
+  --toggle-color-background-trackError: var(
+    --semantic-color-background-danger-subtle
+  );
+  --toggle-color-background-thumb: var(--semantic-color-background-primary);
+  --toggle-color-background-thumbHover: var(--semantic-color-background-hover);
+  --toggle-color-background-thumbFocus: var(
+    --semantic-color-background-primary
+  );
+  --toggle-color-background-thumbDisabled: var(
+    --semantic-color-background-disabled
+  );
+  --toggle-color-background-thumbChecked: var(
+    --semantic-color-background-accent
+  );
+  --toggle-color-background-thumbError: var(--semantic-color-background-danger);
+  --toggle-color-border-track: var(--semantic-color-border-primary);
+  --toggle-color-border-trackHover: var(--semantic-color-border-bold);
+  --toggle-color-border-trackFocus: var(--semantic-color-border-accent);
+  --toggle-color-border-trackDisabled: var(--semantic-color-border-disabled);
+  --toggle-color-border-trackError: var(--semantic-color-border-danger);
+  --toggle-color-border-thumb: var(--semantic-color-border-primary);
+  --toggle-color-border-thumbHover: var(--semantic-color-border-bold);
+  --toggle-color-border-thumbFocus: var(--semantic-color-border-accent);
+  --toggle-color-border-thumbDisabled: var(--semantic-color-border-disabled);
+  --toggle-color-border-thumbError: var(--semantic-color-border-danger);
+  --toggle-color-foreground-labelDefault: var(
+    --semantic-color-foreground-secondary
+  );
+  --toggle-color-foreground-labelHover: var(
+    --semantic-color-foreground-primary
+  );
+  --toggle-color-foreground-labelDisabled: var(
+    --semantic-color-foreground-disabled
+  );
+  --toggle-color-foreground-labelError: var(--semantic-color-foreground-danger);
+
+  /* === Focus Tokens === */
+  --toggle-focus-ring-color: var(--semantic-color-border-accent);
+  --toggle-focus-ring-width: var(--core-spacing-size-02);
+}

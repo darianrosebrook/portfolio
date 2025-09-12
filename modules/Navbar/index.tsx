@@ -6,12 +6,12 @@ import styles from './index.module.css';
 import Logo from './logo';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useReducedMotion, useUser } from '@/context';
-import Popover from '../../components/Popover/Popover';
-import Button from '../../components/Button';
+import Popover from '../../ui/Popover/Popover';
+import Button from '../../ui/Button';
 import { byPrefixAndName } from '@awesome.me/kit-0ba7f5fefb/icons';
-import Icon from '@/components/Icon';
-import ToggleSwitch from '../../components/ToggleSwitch';
-import Avatar from '../../components/Avatar';
+import Icon from '@/ui/Icon';
+import ToggleSwitch from '../../ui/ToggleSwitch';
+import Avatar from '../../ui/Avatar';
 
 const faBars = byPrefixAndName['far']['bars'];
 const faUser = byPrefixAndName['far']['user'];

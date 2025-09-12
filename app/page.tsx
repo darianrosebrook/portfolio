@@ -24,10 +24,10 @@ export const metadata = {
     images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
   },
 };
-import Status from '@/components/Status';
+import Status from '@/ui/Status';
 import styles from './page.module.css';
-import Avatar from '@/components/Avatar';
-import Button from '@/components/Button';
+import Avatar from '@/ui/Avatar';
+import Button from '@/ui/Button';
 import LogoMaruqee from '@/modules/LogoMarquee';
 import Image from 'next/image';
 import BlueprintsWrapper from './BlueprintsWrapper';
