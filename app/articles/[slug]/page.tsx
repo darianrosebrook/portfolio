@@ -12,8 +12,8 @@ import { generateHTML } from '@tiptap/html';
 import { JSONContent } from '@tiptap/react';
 import { generateLDJson } from '@/utils/ldjson';
 
-import styles from './styles.module.css';
-import ProfileFlag from '@/ui/ProfileFlag';
+import styles from './styles.module.scss';
+import ProfileFlag from '@/ui/components/ProfileFlag';
 import ShareLinks from './ShareLinks';
 
 function getArticleContent(data: JSONContent) {

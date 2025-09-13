@@ -1,0 +1,36 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Details/Details.tokens.json
+ */
+@mixin vars {
+  /* === Size Tokens === */
+  --details-size-padding-default: var(--core-spacing-size-06);
+  --details-size-radius-default: var(--semantic-shape-control-radius-default);
+
+  /* === Color Tokens === */
+  --details-color-background-default: var(--semantic-color-background-primary);
+  --details-color-background-subtle: var(--semantic-color-background-secondary);
+  --details-color-background-hover: var(--semantic-color-background-hover);
+  --details-color-background-code: var(--semantic-color-background-secondary);
+  --details-color-foreground-primary: var(--semantic-color-foreground-primary);
+  --details-color-foreground-secondary: var(
+    --semantic-color-foreground-secondary
+  );
+  --details-color-border-default: var(--semantic-color-border-primary);
+  --details-color-border-hover: var(--semantic-color-border-bold);
+  --details-color-border-accent: var(--semantic-color-border-accent);
+
+  /* === Focus Tokens === */
+  --details-focus-ring-width: var(--core-shape-border-width-thick);
+  --details-focus-ring-color: var(--semantic-color-border-accent);
+  --details-focus-ring-offset: var(--core-spacing-size-02);
+
+  /* === Motion Tokens === */
+  --details-motion-duration-fast: var(--semantic-duration-fast);
+  --details-motion-easing-standard: var(--semantic-easing-standard);
+
+  /* === Spacing Tokens === */
+  --details-spacing-gap-default: var(--core-spacing-size-02);
+  --details-spacing-padding-left: var(--core-spacing-size-06);
+  --details-spacing-margin-bottom: var(--core-spacing-size-02);
+  --details-spacing-margin-top: var(--core-spacing-size-01);
+}

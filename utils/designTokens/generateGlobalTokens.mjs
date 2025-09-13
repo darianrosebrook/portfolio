@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Global token generator (JS version)
-// - Reads ui/designTokens.json
+// - Reads ui/designTokens/designTokens.json
 // - Emits app/designTokens.scss with :root, .light, .dark, and prefers-color-scheme: dark blocks
 
 import fs from 'fs';
@@ -10,7 +10,12 @@ import url from 'url';
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PROJECT_ROOT = path.resolve(__dirname, '..', '..');
-const TOKENS_PATH = path.join(PROJECT_ROOT, 'ui', 'designTokens.json');
+const TOKENS_PATH = path.join(
+  PROJECT_ROOT,
+  'ui',
+  'designTokens',
+  'designTokens.json'
+);
 const OUTPUT_PATH = path.join(PROJECT_ROOT, 'app', 'designTokens.scss');
 
 // Global sets for reference validation

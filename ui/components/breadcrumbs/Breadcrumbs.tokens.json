@@ -1,0 +1,48 @@
+{
+  "$schema": "../../../ui/designTokens/designTokens.schema.json",
+  "prefix": "breadcrumbs",
+  "tokens": {
+    "color": {
+      "foreground": {
+        "secondary": "{semantic.color.foreground.secondary}",
+        "link": "{semantic.color.foreground.link}",
+        "primary": "{semantic.color.foreground.primary}",
+        "tertiary": "{semantic.color.foreground.tertiary}"
+      },
+      "background": {
+        "elevated": "{semantic.color.background.elevated}"
+      },
+      "border": {
+        "subtle": "{semantic.color.border.subtle}"
+      }
+    },
+    "typography": {
+      "lineHeight": {
+        "collapse": "{core.typography.lineHeight.collapse}"
+      }
+    },
+    "shape": {
+      "radius": {
+        "medium": "{semantic.shape.radius.medium}"
+      }
+    },
+    "elevation": {
+      "surface": {
+        "raised": "{semantic.elevation.surface.raised}"
+      }
+    },
+    "spacing": {
+      "gap": {
+        "default": "0.5rem",
+        "small": "0.25rem"
+      },
+      "padding": {
+        "default": "0.5rem",
+        "small": "0.25rem"
+      },
+      "margin": {
+        "top": "0.25rem"
+      }
+    }
+  }
+}

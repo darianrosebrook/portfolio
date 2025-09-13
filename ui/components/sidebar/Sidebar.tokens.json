@@ -1,0 +1,29 @@
+{
+  "$schema": "../../../ui/designTokens/designTokens.schema.json",
+  "prefix": "sidebar",
+  "tokens": {
+    "color": {
+      "border": {
+        "subtle": "{semantic.color.border.subtle}"
+      },
+      "foreground": {
+        "secondary": "{semantic.color.foreground.secondary}",
+        "link": "{semantic.color.foreground.link}"
+      }
+    },
+    "spacing": {
+      "padding": {
+        "right": "1rem"
+      },
+      "margin": {
+        "bottom": {
+          "default": "1rem",
+          "small": "0.5rem"
+        }
+      },
+      "gap": {
+        "default": "0.25rem"
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import { AnatomyFeature } from '@/modules/FontInspector/FontInspector';
+import { AnatomyFeature } from '@/ui/modules/FontInspector/FontInspector';
 import type { Glyph } from 'fontkit';
 export interface DrawColors {
   anchorFill: string;

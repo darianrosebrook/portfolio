@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '../test-utils';
-import Button from '@/ui/Button';
+import Button from '@/ui/components/Button';
 
 describe('Button', () => {
   it('renders button with text correctly', () => {

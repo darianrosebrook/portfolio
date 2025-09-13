@@ -1,0 +1,51 @@
+.editorGroups > * + * {
+  margin-top: 1em;
+}
+
+.editor > div {
+  overflow-y: scroll;
+  max-width: 1440px;
+  height: 80vh;
+  margin: 0 auto;
+  padding: var(--core-spacing-size-06);
+  background: var(--semantic-color-background-secondary);
+  border: 1px solid var(--semantic-color-border-primary);
+  border-radius: var(--core-shape-radius-large);
+}
+
+.editor > div * + * {
+  margin-top: 0.75em;
+}
+
+.editor *:focus-visible {
+  border: 1px solid var(--semantic-color-border-accent);
+  outline: 0;
+}
+
+.editor .tiptap .is-empty::before {
+  float: left;
+  height: 0;
+  color: var(--semantic-color-foreground-placeholder);
+  pointer-events: none;
+  content: attr(data-placeholder);
+}
+
+.editor img {
+  cursor: grab;
+}
+
+.editor img.ProseMirror-selectednode {
+  outline: 1px solid var(--semantic-color-border-accent);
+  outline-offset: var(--core-spacing-size-03);
+}
+
+.editor img.ProseMirror-selectednode:active {
+  cursor: grabbing;
+}
+
+.publishBar {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  align-items: center;
+}

@@ -1,7 +1,7 @@
 'use client';
 
-import Postcard from '@/ui/Postcard';
-import Avatar from '@/ui/Avatar';
+import Postcard from '@/ui/components/Postcard';
+import Avatar from '@/ui/components/Avatar';
 import styles from './page.module.scss';
 import type {
   BlueskyEmbed,

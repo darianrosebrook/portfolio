@@ -1,0 +1,41 @@
+@use './Popover.tokens.generated.scss' as popoverTokens;
+
+.popoverContainer {
+  display: inline-block;
+}
+
+.popoverTrigger {
+  all: unset;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.popoverContent {
+  @include popoverTokens.vars;
+
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: var(--popover-size-gap-default);
+  min-width: 256px;
+  max-width: calc(100vw - var(--popover-size-maxWidth-default));
+  padding: var(--popover-size-padding-default);
+  background: var(--popover-color-background-content);
+  border-radius: var(--popover-size-radius-default);
+  box-shadow: var(--popover-elevation-default, var(--elevation));
+  will-change: transform, opacity;
+}
+
+.activeTrigger {
+  display: inline-block;
+  border-radius: var(--popover-size-radius-full);
+  outline: 2px solid var(--popover-color-border-accent);
+  outline-offset: 2px;
+  line-height: 0;
+  transition: all ease-out 2s;
+
+  & > div:hover {
+    transform: rotate(1080deg);
+  }
+}

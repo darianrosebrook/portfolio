@@ -1,0 +1,144 @@
+.gooeyHighlightContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--core-spacing-size-06);
+  max-width: 100%;
+  padding: var(--core-spacing-size-06);
+  background: var(--semantic-color-background-secondary);
+  border: 1px solid var(--semantic-color-border-primary);
+  border-radius: var(--semantic-shape-control-radius-default);
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--core-spacing-size-03);
+}
+
+.demoButton,
+.clearButton {
+  padding: var(--core-spacing-size-02) var(--core-spacing-size-04);
+  background: var(--semantic-color-background-primary);
+  border: 1px solid var(--semantic-color-border-primary);
+  border-radius: var(--core-shape-radius-small);
+  color: var(--semantic-color-foreground-primary);
+  font-size: var(--text-sm);
+  transition: all 0.2s ease;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &:hover:not(:disabled) {
+    background: var(--semantic-color-background-tertiary);
+    border-color: var(--semantic-color-border-bold);
+  }
+}
+
+.textContainer {
+  position: relative;
+  min-height: 120px;
+  padding: var(--core-spacing-size-04);
+  background: var(--semantic-color-background-primary);
+  border: 1px solid var(--semantic-color-border-primary);
+  border-radius: var(--core-shape-radius-small);
+}
+
+.highlightableText {
+  /* Custom properties for dynamic colors */
+  --highlight-color: var(--semantic-color-background-highlight);
+  --text-color: var(--semantic-color-foreground-highlight);
+
+  position: relative;
+  color: var(--semantic-color-foreground-primary);
+  font-size: var(--text-lg);
+  line-height: 1.6;
+  cursor: text;
+  user-select: text;
+
+  /* Selection styling */
+  &::selection {
+    background: var(--highlight-color);
+    color: var(--text-color);
+  }
+
+  /* Focus styles */
+  &:focus {
+    outline: 2px solid var(--semantic-color-border-bold);
+    outline-offset: 2px;
+  }
+}
+
+.gooeyHighlightWrapper {
+  /* Custom properties for dynamic colors */
+  --highlight-color: var(--semantic-color-background-highlight);
+  --text-color: var(--semantic-color-foreground-highlight);
+
+  position: relative;
+  display: inline;
+  filter: url('#goo-text');
+}
+
+.fallbackMessage {
+  padding: var(--core-spacing-size-04);
+  background: var(--semantic-color-background-tertiary);
+  border: 1px solid transparent;
+  border-left: 4px solid var(--semantic-color-border-bold);
+  border-radius: var(--core-shape-radius-small);
+
+  p {
+    margin: 0 0 var(--core-spacing-size-02) 0;
+    color: var(--semantic-color-foreground-secondary);
+    font-size: var(--text-sm);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.instructions {
+  h4 {
+    margin: 0 0 var(--core-spacing-size-03) 0;
+    color: var(--semantic-color-foreground-primary);
+    font-weight: var(--font-weight-medium);
+    font-size: var(--text-md);
+  }
+
+  ul {
+    margin: 0;
+    padding-left: var(--core-spacing-size-04);
+    color: var(--semantic-color-foreground-secondary);
+    font-size: var(--text-sm);
+
+    li {
+      margin-bottom: var(--core-spacing-size-01);
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+/* Responsive adjustments */
+@media (width <= 768px) {
+  .gooeyHighlightContainer {
+    padding: var(--core-spacing-size-04);
+  }
+
+  .controls {
+    flex-direction: column;
+  }
+
+  .demoButton,
+  .clearButton {
+    width: 100%;
+  }
+
+  .highlightableText {
+    font-size: var(--text-md);
+  }
+}

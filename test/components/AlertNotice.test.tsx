@@ -6,7 +6,7 @@ import {
   Title,
   BodyContent,
   Icon,
-} from '@/ui/AlertNotice/AlertNotice';
+} from '@/ui/components/AlertNotice/AlertNotice';
 
 describe('AlertNotice Components', () => {
   describe('Container', () => {

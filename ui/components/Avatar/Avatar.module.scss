@@ -1,0 +1,90 @@
+@use './Avatar.tokens.generated.scss' as avatarTokens;
+
+.avatar {
+  @include avatarTokens.vars;
+
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  width: var(--avatar-size-default);
+  height: var(--avatar-size-default);
+  border: var(--avatar-size-border-default) solid
+    var(--avatar-color-border-default);
+  border-radius: var(--avatar-size-radius-default);
+
+  &:focus-visible {
+    outline: var(--avatar-size-border-default) solid
+      var(--avatar-color-border-info);
+    outline-offset: var(--avatar-size-border-offset);
+  }
+}
+
+.avatar_small {
+  width: var(--avatar-size-small);
+  height: var(--avatar-size-small);
+}
+
+.avatar_medium {
+  width: var(--avatar-size-default);
+  height: var(--avatar-size-default);
+}
+
+.avatar_large {
+  width: var(--avatar-size-medium);
+  height: var(--avatar-size-medium);
+}
+
+.avatar_extra-large {
+  width: var(--avatar-size-large);
+  height: var(--avatar-size-large);
+}
+
+.avatar_rounded {
+  border-radius: var(--avatar-size-radius-default);
+}
+
+.avatar_square {
+  border-radius: var(--avatar-size-radius-small);
+}
+
+.avatar_image {
+  display: block;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.avatar_initials {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  background: var(--avatar-color-background-default);
+  color: var(--avatar-color-foreground-primary);
+  font-weight: var(--avatar-typography-fontWeight-medium);
+  font-family: var(--avatar-typography-fontFamily-sans);
+  user-select: none;
+}
+
+.status {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: var(--avatar-size-status);
+  height: var(--avatar-size-status);
+  border: var(--avatar-size-border-default) solid
+    var(--avatar-color-background-inverse);
+  border-radius: var(--avatar-size-radius-full);
+}
+
+.status_online {
+  background: var(--avatar-color-background-success);
+}
+
+.status_offline {
+  background: var(--avatar-color-background-disabled);
+}
+
+.status_away {
+  background: var(--avatar-color-background-warning);
+}

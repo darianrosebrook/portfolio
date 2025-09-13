@@ -4,7 +4,7 @@ import { ViewTransitions } from 'next-view-transitions';
 import './globals.scss';
 import { SVGSprites } from './SVGSprites/SVGSprites';
 
-import PerformanceDashboard from '@/modules/PerformanceDashboard/PerformanceDashboard';
+import PerformanceDashboard from '@/ui/modules/PerformanceDashboard/PerformanceDashboard';
 // If loading a variable font, you don't need to specify the font weight
 const nohemi = localFont({
   src: '../public/fonts/Nohemi-VF.ttf',

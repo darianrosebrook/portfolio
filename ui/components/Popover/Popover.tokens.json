@@ -1,0 +1,32 @@
+{
+  "$schema": "../../../ui/designTokens/designTokens.schema.json",
+  "prefix": "popover",
+  "tokens": {
+    "size": {
+      "padding": {
+        "default": "{core.spacing.size.06}"
+      },
+      "radius": {
+        "default": "{semantic.shape.control.radius.default}",
+        "full": "{semantic.shape.radius.full}"
+      },
+      "gap": {
+        "default": "{core.spacing.size.04}"
+      },
+      "maxWidth": {
+        "default": "{core.spacing.size.06}"
+      }
+    },
+    "color": {
+      "background": {
+        "content": "{semantic.color.background.secondary}"
+      },
+      "border": {
+        "accent": "{semantic.color.border.accent}"
+      }
+    },
+    "elevation": {
+      "default": "{semantic.elevation.default}"
+    }
+  }
+}

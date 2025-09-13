@@ -7,7 +7,7 @@
   min-height: 0;
   margin: 0;
   padding: 0;
-  line-height: var(--line-height-body);
+  line-height: var(--core-typography-line-height-normal);
   overflow-wrap: anywhere;
   margin-block-end: 0;
 }
@@ -22,7 +22,7 @@ html:focus-within {
 
 body {
   min-height: 100vh;
-  line-height: var(--line-height-body, 1.25);
+  line-height: var(--core-typography-line-height-body, 1.25);
   text-rendering: optimizespeed;
 }
 
@@ -31,7 +31,7 @@ p {
 }
 
 a:not([class]) {
-  color: var(--semantic-color-foreground-accent, currentcolor);
+  color: var(--semantic-color-foreground-accent, currentColor);
   text-decoration-skip-ink: auto;
 }
 

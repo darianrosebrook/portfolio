@@ -7,7 +7,7 @@ import {
   EditorErrorBoundary,
   AnimationErrorBoundary,
   withErrorBoundary,
-} from '@/modules/ErrorBoundary';
+} from '@/ui/modules/ErrorBoundary';
 import { expectNoAccessibilityViolations } from '../axe-helper';
 
 // Mock console methods to avoid cluttering test output

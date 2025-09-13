@@ -1,0 +1,14 @@
+{
+  "$schema": "../../../ui/designTokens/designTokens.schema.json",
+  "prefix": "animatedLink",
+  "tokens": {
+    "typography": {
+      "fontWeight": {
+        "regular": "{semantic.typography.fontWeight.regular}"
+      },
+      "lineHeight": {
+        "collapse": "{core.typography.lineHeight.collapse}"
+      }
+    }
+  }
+}

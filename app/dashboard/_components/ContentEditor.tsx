@@ -8,11 +8,11 @@ import { generateHTML } from '@tiptap/html';
 import StarterKit from '@tiptap/starter-kit';
 import Image from '@tiptap/extension-image';
 import CharacterCount from '@tiptap/extension-character-count';
-import { VideoExtended } from '@/modules/Tiptap/Extensions/VideoExtended';
-import ToggleSwitch from '@/ui/ToggleSwitch';
+import { VideoExtended } from '@/ui/modules/Tiptap/Extensions/VideoExtended';
+import ToggleSwitch from '@/ui/components/ToggleSwitch';
 
 const Tiptap = dynamic(
-  () => import('@/modules/Tiptap').then((mod) => ({ default: mod.Tiptap })),
+  () => import('@/ui/modules/Tiptap').then((mod) => ({ default: mod.Tiptap })),
   { ssr: false }
 );
 
@@ -182,8 +182,8 @@ export default function ContentEditor({
           <div
             style={{
               border: '1px solid var(--semantic-color-border-primary)',
-              borderRadius: 'var(--semantic-size-radius-02)',
-              padding: 'var(--core-size-05)',
+              borderRadius: 'var(--core-shape-radius-medium)',
+              padding: 'var(--core-spacing-size-05)',
               background: 'var(--semantic-color-background-secondary)',
             }}
             dangerouslySetInnerHTML={{ __html: htmlPreview }}
@@ -196,7 +196,7 @@ export default function ContentEditor({
           gap: '0.75rem',
           alignSelf: 'start',
           position: 'sticky',
-          top: 'var(--core-size-06)',
+          top: 'var(--core-spacing-size-06)',
           height: 'max-content',
         }}
       >

@@ -1,14 +1,14 @@
 .foundation-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: var(--core-size-05);
-  margin: var(--core-size-05) 0;
+  gap: var(--core-spacing-size-05);
+  margin: var(--core-spacing-size-05) 0;
 }
 
 .foundation-card {
-  padding: var(--core-size-07);
+  padding: var(--core-spacing-size-07);
   background: var(--semantic-color-background-secondary);
-  border-radius: var(--core-radius-medium);
+  border-radius: var(--core-shape-radius-medium);
   box-shadow: var(--semantic-elevation-depth-1)
     var(--semantic-color-background-imageOverlay);
   transition:
@@ -23,19 +23,19 @@
 
   h3 {
     margin-top: 0;
-    margin-bottom: var(--core-size-05);
+    margin-bottom: var(--core-spacing-size-05);
     font-size: var(--semantic-typography-heading-05);
   }
 
   p {
-    margin-bottom: var(--core-size-05);
+    margin-bottom: var(--core-spacing-size-05);
     opacity: var(--semantic-opacity-85);
   }
 
   a {
     display: inline-block;
     color: var(--semantic-color-foreground-link);
-    font-weight: var(--semantic-font-weight-medium);
+    font-weight: var(--semantic-typography-font-weight-medium);
     text-decoration: none;
 
     &:hover {
@@ -46,23 +46,23 @@
 
 .cta-button {
   display: inline-block;
-  padding: var(--core-size-05) var(--core-size-05);
+  padding: var(--core-spacing-size-05) var(--core-spacing-size-05);
   background: var(--semantic-color-foreground-link);
-  border-radius: var(--semantic-size-radius-05);
+  border-radius: var(--core-shape-radius-medium);
   color: white;
-  font-weight: var(--semantic-font-weight-medium);
+  font-weight: var(--semantic-typography-font-weight-medium);
   text-decoration: none;
   transition: background-color 0.2s ease-in-out;
 
   &:hover {
-    background: var(--semantic-color-foreground-linkHover);
+    background: var(--semantic-color-foreground-link-hover);
   }
 }
 
 .cta-container {
   display: flex;
-  gap: var(--core-size-05);
-  margin-top: var(--core-size-05);
+  gap: var(--core-spacing-size-05);
+  margin-top: var(--core-spacing-size-05);
 }
 
 @media (width <= 768px) {

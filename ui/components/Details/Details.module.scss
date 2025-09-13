@@ -1,0 +1,197 @@
+/**
+ * Details component styles
+ * Collapsible content sections for case studies and articles
+ *
+ * @author @darianrosebrook
+ */
+
+@use './Details.tokens.generated.scss' as detailsTokens;
+
+.details {
+  @include detailsTokens.vars;
+
+  overflow: hidden;
+  margin: var(--details-size-padding-default) 0;
+  background: var(--details-color-background-default);
+  border: 1px solid var(--details-color-border-default);
+  border-radius: var(--details-size-radius-default);
+  transition:
+    border-color var(--details-motion-duration-fast)
+      var(--details-motion-easing-standard),
+    box-shadow var(--details-motion-duration-fast)
+      var(--details-motion-easing-standard);
+
+  &:hover {
+    border-color: var(--details-color-border-hover);
+    box-shadow: 0 1px 3px rgb(0 0 0 / 10%);
+  }
+
+  &[open] {
+    border-color: var(--details-color-border-accent);
+    box-shadow: 0 2px 8px rgb(59 130 246 / 15%);
+  }
+}
+
+.summary {
+  padding: var(--details-size-padding-default);
+  background: var(--details-color-background-subtle);
+  border-bottom: 1px solid var(--details-color-border-default);
+  list-style: none;
+  transition: background-color var(--details-motion-duration-fast)
+    var(--details-motion-easing-standard);
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    background: var(--details-color-background-hover);
+  }
+
+  &:focus {
+    outline: var(--details-focus-ring-width) var(--details-focus-ring-style)
+      var(--details-focus-ring-color);
+    outline-offset: var(--details-focus-ring-offset);
+  }
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+
+  &::-moz-list-bullet {
+    display: none;
+  }
+}
+
+.summaryContent {
+  display: flex;
+  gap: var(--details-spacing-gap-default);
+  align-items: center;
+  color: var(--details-color-foreground-primary);
+  font-weight: 600;
+}
+
+.icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: var(--details-color-foreground-secondary);
+  transition:
+    transform var(--details-motion-duration-fast)
+      var(--details-motion-easing-standard),
+    color var(--details-motion-duration-fast)
+      var(--details-motion-easing-standard);
+}
+
+.summaryText {
+  flex: 1;
+  line-height: 1.5;
+}
+
+.content {
+  padding: var(--details-size-padding-default);
+  background: var(--details-color-background-default);
+  color: var(--details-color-foreground-primary);
+  line-height: 1.6;
+
+  // Nested content styling
+  :root {
+    p {
+      margin: 0 0 var(--details-spacing-margin-bottom) 0;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin: var(--details-size-padding-default) 0
+        var(--details-spacing-margin-bottom) 0;
+      color: var(--details-color-foreground-primary);
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+
+    ul,
+    ol {
+      margin: var(--details-spacing-margin-bottom) 0;
+      padding-left: var(--details-spacing-padding-left);
+    }
+
+    li {
+      margin: var(--details-spacing-margin-top) 0;
+    }
+
+    blockquote {
+      margin: var(--details-size-padding-default) 0;
+      padding: var(--details-spacing-gap-default)
+        var(--details-size-padding-default);
+      background: var(--details-color-background-subtle);
+      border-left: 4px solid var(--details-color-border-accent);
+      font-style: italic;
+    }
+
+    code {
+      padding: 2px 6px;
+      background: var(--details-color-background-code);
+      border-radius: var(--details-spacing-gap-default);
+      font-size: 0.9em;
+      font-family: var(--font-mono, 'Monaco', 'Menlo', monospace);
+    }
+
+    pre {
+      overflow-x: auto;
+      margin: var(--details-size-padding-default) 0;
+      padding: var(--details-size-padding-default);
+      background: var(--details-color-background-code);
+      border-radius: var(--details-size-radius-default);
+    }
+  }
+}
+
+.inline {
+  display: inline-block;
+  width: auto;
+
+  .summary {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--details-size-padding-default);
+  }
+
+  .content {
+    display: inline-block;
+    width: auto;
+  }
+}
+
+// Animation for opening/closing
+.details[open] .icon {
+  color: var(--details-color-border-accent);
+  transform: rotate(90deg);
+}
+
+.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+
+  .summary {
+    cursor: not-allowed;
+  }
+}
+
+// Note: Dark mode support is handled automatically by design tokens
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+  .details,
+  .summary,
+  .icon {
+    transition: none;
+  }
+}

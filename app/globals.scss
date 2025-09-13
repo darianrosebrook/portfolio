@@ -40,7 +40,7 @@
   /* Typography */
 
   font-family: var(--semantic-font-inter), sans-serif;
-  line-height: var(--semantic-typography-lineHeight-body);
+  line-height: var(--semantic-typography-line-height-body);
   letter-spacing: var(--semantic-typography-letterSpacing-tight);
   font-feature-settings:
     'case' 0,
@@ -83,7 +83,7 @@
     'kern';
 
   p + p {
-    margin-top: var(--core-size-04);
+    margin-top: var(--core-spacing-size-04);
   }
 
   strong {
@@ -98,7 +98,7 @@
   h6 {
     font-weight: 300;
     font-family: var(--semantic-font-nohemi), sans-serif;
-    line-height: var(--semantic-typography-lineHeight-collapse);
+    line-height: var(--semantic-typography-line-height-collapse);
     letter-spacing: var(--semantic-typography-letterSpacing-wide);
     text-wrap: balance;
 
@@ -246,7 +246,7 @@
   .sup {
     position: relative;
     vertical-align: baseline;
-    line-height: var(--semantic-typography-lineHeight-collapse);
+    line-height: var(--semantic-typography-line-height-collapse);
   }
 
   .smallest {
@@ -320,9 +320,9 @@ h3 {
 }
 
 .text-highlighted > span {
-  padding: var(--core-size-02) var(--core-size-03);
+  padding: var(--core-spacing-size-02) var(--core-spacing-size-03);
   background: var(--semantic-color-background-highlight);
-  border-radius: var(--semantic-size-radius-01);
+  border-radius: var(--core-shape-radius-small);
   box-decoration-break: clone;
   color: var(--semantic-color-foreground-highlight);
   transition: all 0.2s ease;
@@ -340,9 +340,9 @@ h3 {
 
 /* Enhanced selection styling for gooey effect */
 ::highlight(gooey-highlight) {
-  padding: var(--core-size-01) var(--core-size-02);
+  padding: var(--core-spacing-size-01) var(--core-spacing-size-02);
   background: var(--semantic-color-background-highlight);
-  border-radius: var(--semantic-size-radius-01);
+  border-radius: var(--core-shape-radius-small);
   box-decoration-break: clone;
   color: var(--semantic-color-foreground-highlight);
   transition: all 0.2s ease;
@@ -356,16 +356,16 @@ h3 {
 // @supports not (CSS.highlights) {
 //   *::selection {
 //     background: var(--semantic-color-background-highlight);
-//     border-radius: var(--semantic-size-radius-01);
+//     border-radius: var(--core-shape-radius-small);
 //     color: var(--semantic-color-foreground-highlight);
 //   }
 // }
 
 /* Mark element styling with gooey effect */
 mark {
-  padding: var(--core-size-01) var(--core-size-02);
+  padding: var(--core-spacing-size-01) var(--core-spacing-size-02);
   background: var(--semantic-color-background-highlight);
-  border-radius: var(--semantic-size-radius-01);
+  border-radius: var(--core-shape-radius-small);
   box-decoration-break: clone;
   color: var(--semantic-color-foreground-highlight);
   transition: all 0.2s ease;
@@ -394,9 +394,9 @@ mark {
   > span {
     position: relative;
     z-index: 2;
-    padding: var(--core-size-01) var(--core-size-02);
+    padding: var(--core-spacing-size-01) var(--core-spacing-size-02);
     background: var(--semantic-color-background-highlight);
-    border-radius: var(--semantic-size-radius-01);
+    border-radius: var(--core-shape-radius-small);
     box-decoration-break: clone;
     color: var(--semantic-color-foreground-highlight);
     transition: all 0.2s ease;
@@ -409,7 +409,7 @@ mark {
 }
 
 .gooey > span {
-  padding: var(--core-size-05) var(--core-size-05);
+  padding: var(--core-spacing-size-05) var(--core-spacing-size-05);
   background: var(--semantic-color-background-primary);
 
   /* make sure the padding apply to all the lines */
@@ -456,7 +456,7 @@ select {
 
 /* structure   */
 html {
-  line-height: var(--semantic-typography-lineHeight-body);
+  line-height: var(--semantic-typography-line-height-body);
   -webkit-font-smoothing: antialiased;
   text-size-adjust: 100%;
 }
@@ -555,14 +555,14 @@ footer {
 }
 
 section:not(:first-of-type) + section {
-  margin-top: var(--core-size-10);
+  margin-top: var(--core-spacing-size-10);
 }
 
 hr {
   overflow: visible;
   box-sizing: content-box;
   height: 0;
-  margin: var(--core-size-07) 0;
+  margin: var(--core-spacing-size-07) 0;
   border: none;
   border-top: 1px solid var(--semantic-color-foreground-primary);
 }
@@ -581,11 +581,11 @@ img,
 picture,
 video,
 canvas {
-  border-radius: var(--core-size-03);
+  border-radius: var(--core-spacing-size-03);
 }
 
 .avatar {
-  border-radius: var(--semantic-size-radius-full);
+  border-radius: var(--core-shape-radius-full);
 }
 
 a {
@@ -595,7 +595,7 @@ a {
 
 a:focus-visible,
 a:focus {
-  border-radius: var(--semantic-size-radius-01);
+  border-radius: var(--core-shape-radius-small);
 }
 
 a:hover {
@@ -608,7 +608,7 @@ a:hover {
   display: inline-flex;
   align-items: center;
   margin: 0;
-  margin-left: var(--core-size-02);
+  margin-left: var(--core-spacing-size-02);
   font-size: var(--semantic-typography-heading-05);
 }
 
@@ -641,20 +641,20 @@ button:-moz-focusring,
 }
 
 article > * + * {
-  margin-top: var(--core-size-06);
+  margin-top: var(--core-spacing-size-06);
 
-  & > * + * {
-    margin-top: var(--core-size-04);
+  & > * + *:not(li) {
+    margin-top: var(--core-spacing-size-04);
 
-    & > * + * {
-      margin-top: var(--core-size-03);
+    & > * + *:not(li) {
+      margin-top: var(--core-spacing-size-03);
     }
   }
 }
 
 /* Form Elements */
 .form-widget > * + * {
-  margin-top: var(--core-size-06);
+  margin-top: var(--core-spacing-size-06);
 }
 
 label {
@@ -674,24 +674,24 @@ textarea {
   width: 100%;
   max-width: 30em;
   min-height: var(--semantic-size-tapTarget-large);
-  padding: var(--core-size-03) var(--core-size-04);
+  padding: var(--core-spacing-size-03) var(--core-spacing-size-04);
   background: var(--semantic-color-background-secondary);
   border: 1px solid var(--semantic-color-border-primary);
-  border-radius: var(--semantic-size-radius-02);
+  border-radius: var(--semantic-shape-control-radius-default);
   color: var(--semantic-color-foreground-primary);
   transition: border 0.2s ease;
   resize: vertical;
 }
 
 textarea + label {
-  margin-top: var(--core-size-06);
+  margin-top: var(--core-spacing-size-06);
 }
 
 label + input[type='text'],
 label + input[type='email'],
 label + input[type='password'],
 label + textarea {
-  margin-top: var(--core-size-03);
+  margin-top: var(--core-spacing-size-03);
 }
 
 input[type='text'] + label,
@@ -729,7 +729,7 @@ input[type='range'] {
     var(--semantic-color-foreground-secondary)
   );
   border: none;
-  border-radius: var(--semantic-size-radius-02);
+  border-radius: var(--semantic-shape-control-radius-default);
   transition: background 0.2s ease;
   cursor: pointer;
 
@@ -743,14 +743,14 @@ input[type='range'] {
 .content {
   display: flex;
   flex-direction: column;
-  gap: var(--core-size-06);
+  gap: var(--core-spacing-size-06);
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 var(--core-size-06);
+  padding: 0 var(--core-spacing-size-06);
 }
 
 * + .content {
-  margin-top: var(--core-size-07);
+  margin-top: var(--core-spacing-size-07);
 }
 
 .experience {
@@ -763,7 +763,7 @@ input[type='range'] {
 
 .experience > li {
   margin: 0;
-  margin-top: var(--core-size-04);
+  margin-top: var(--core-spacing-size-04);
 }
 
 article ul,
@@ -773,7 +773,7 @@ article ol {
 
 .two-up {
   display: flex;
-  gap: var(--core-size-04);
+  gap: var(--core-spacing-size-04);
 }
 
 .grid {
@@ -784,9 +784,9 @@ article ol {
 }
 
 .card {
-  padding: var(--core-size-06);
+  padding: var(--core-spacing-size-06);
   background: var(--semantic-color-background-primary);
-  border-radius: var(--semantic-size-radius-02);
+  border-radius: var(--semantic-shape-control-radius-default);
   box-shadow: var(--elevation);
   transition: box-shadow 0.2s ease;
 }
@@ -796,7 +796,7 @@ article ol {
 }
 
 .card > * + * {
-  margin-top: var(--core-size-06);
+  margin-top: var(--core-spacing-size-06);
 }
 
 .card img {
@@ -805,13 +805,13 @@ article ol {
 
 .meta {
   display: flex;
-  gap: var(--core-size-03);
+  gap: var(--core-spacing-size-03);
   justify-content: space-between;
   align-items: center;
 }
 
 tr {
-  padding: var(--core-size-07);
+  padding: var(--core-spacing-size-07);
   border-top: 1px solid var(--semantic-color-foreground-primary);
 }
 
@@ -826,7 +826,7 @@ header + main {
 .menuList {
   display: flex;
   flex-direction: column;
-  gap: var(--core-size-06);
+  gap: var(--core-spacing-size-06);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -836,8 +836,8 @@ header + main {
   display: flex;
   align-items: center;
   width: 100%;
-  padding: var(--core-size-04);
-  border-radius: var(--core-size-04);
+  padding: var(--core-spacing-size-04);
+  border-radius: var(--core-spacing-size-04);
   box-shadow: 0 1px 3px rgb(0 0 0 / var(--core-opacity-100));
   transition: all 0.2s ease;
 
@@ -855,7 +855,7 @@ header + main {
 .three-up {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--core-size-06);
+  gap: var(--core-spacing-size-06);
 
   p + p {
     margin-top: 0;
@@ -891,7 +891,7 @@ header + main {
 
 .avatarFlag {
   display: flex;
-  gap: var(--core-size-06);
+  gap: var(--core-spacing-size-06);
   align-items: center;
 }
 
@@ -899,7 +899,7 @@ header + main {
   display: inline-block;
 
   & .icon {
-    margin-right: var(--core-size-03);
+    margin-right: var(--core-spacing-size-03);
   }
 
   & p:last-of-type {
@@ -909,7 +909,7 @@ header + main {
 }
 
 .projects ul {
-  gap: var(--core-size-10);
+  gap: var(--core-spacing-size-10);
 }
 
 @keyframes animatedBackground {
@@ -931,12 +931,12 @@ header + main {
   display: flex;
   justify-content: space-between;
   height: auto;
-  padding-bottom: var(--core-size-10);
+  padding-bottom: var(--core-spacing-size-10);
   line-height: 4rem;
 
   a {
     display: flex;
-    gap: var(--core-size-04);
+    gap: var(--core-spacing-size-04);
     align-items: center;
     color: var(--semantic-color-foreground-secondary);
   }
@@ -945,7 +945,7 @@ header + main {
 .glossary-letters {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(48px, 1fr));
-  gap: var(--core-size-03);
+  gap: var(--core-spacing-size-03);
   margin-top: 0;
   padding-left: 0;
   font-size: var(--semantic-typography-heading-05);
@@ -959,14 +959,14 @@ header + main {
 .glossary-item h4 {
   display: flex;
   grid-column: span 1;
-  gap: var(--core-size-05);
+  gap: var(--core-spacing-size-05);
   justify-content: space-between;
   align-items: center;
 }
 
 .sub-list {
   margin-top: 0;
-  padding-top: var(--core-size-10);
+  padding-top: var(--core-spacing-size-10);
   padding-left: 0;
   border-top: 1px solid var(--semantic-color-border-primary);
   list-style: none;
@@ -974,12 +974,12 @@ header + main {
 
 @media screen and (width >= 1000px) {
   .gooey > span {
-    padding: var(--core-size-06) var(--core-size-06);
+    padding: var(--core-spacing-size-06) var(--core-spacing-size-06);
   }
 
   .content {
     max-width: 1440px;
-    padding: 0 var(--core-size-06);
+    padding: 0 var(--core-spacing-size-06);
   }
 
   section.home {
@@ -992,7 +992,7 @@ header + main {
 
   main section + section {
     display: block;
-    margin-top: var(--core-size-07);
+    margin-top: var(--core-spacing-size-07);
   }
 
   main .hero {
@@ -1002,12 +1002,12 @@ header + main {
   .glossary-letters {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--core-size-03);
+    gap: var(--core-spacing-size-03);
   }
 
   .glossary-letter {
     display: inline-block;
-    margin-right: var(--core-size-03);
+    margin-right: var(--core-spacing-size-03);
     font-weight: var(--semantic-typography-fontWeight-bold);
     list-style: none;
   }
@@ -1015,7 +1015,7 @@ header + main {
   .content .glossary-list {
     display: grid;
     grid-template-columns: 1fr 1fr 3fr;
-    gap: var(--core-size-06);
+    gap: var(--core-spacing-size-06);
     align-items: start;
     margin: 0 auto;
   }
@@ -1030,7 +1030,7 @@ header + main {
     display: grid;
     grid-template-columns: subgrid;
     grid-column: span 3;
-    gap: var(--core-size-06);
+    gap: var(--core-spacing-size-06);
     margin-top: 0;
     padding-left: 0;
 
@@ -1038,12 +1038,12 @@ header + main {
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-column: span 2;
-      gap: var(--core-size-06);
+      gap: var(--core-spacing-size-06);
       align-items: start;
 
       .glossary-item {
-        padding: var(--core-size-03) var(--core-size-04);
-        border-radius: var(--semantic-size-radius-02);
+        padding: var(--core-spacing-size-03) var(--core-spacing-size-04);
+        border-radius: var(--semantic-shape-control-radius-default);
         transition: all 0.2s ease;
 
         &:hover {
@@ -1065,7 +1065,7 @@ header + main {
       dt h4 {
         display: flex;
         grid-column: span 1;
-        gap: var(--core-size-05);
+        gap: var(--core-spacing-size-05);
         justify-content: space-between;
         align-items: center;
       }
@@ -1113,7 +1113,7 @@ header + main {
   }
 
   .card .media + div {
-    margin-top: var(--core-size-04);
+    margin-top: var(--core-spacing-size-04);
   }
 
   .meta {
@@ -1123,7 +1123,7 @@ header + main {
 
   .meta .byline {
     flex-direction: row;
-    gap: var(--core-size-03);
+    gap: var(--core-spacing-size-03);
     align-items: center;
   }
 }

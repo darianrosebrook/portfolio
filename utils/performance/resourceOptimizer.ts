@@ -140,7 +140,7 @@ class ResourceOptimizer {
         --semantic-color-background-primary: #ffffff;
         --semantic-color-foreground-primary: #000000;
         --semantic-color-border-primary: #e5e5e5;
-        --semantic-size-radius-02: 8px;
+        --core-shape-radius-medium: 8px;
       }
       body {
         margin: 0;

@@ -1,0 +1,78 @@
+.dashboard {
+  position: fixed;
+  top: var(--core-spacing-size-04);
+  right: var(--core-spacing-size-04);
+  z-index: var(--core-layer-modal);
+  max-width: var(--core-spacing-size-50);
+  padding: var(--core-spacing-size-04);
+  background: var(--semantic-color-background-primary);
+  border: var(--core-shape-border-width-hairline) solid
+    var(--semantic-color-border-light);
+  border-radius: var(--core-shape-radius-medium);
+  box-shadow: var(--semantic-elevation-default);
+  font-size: var(--core-typography-fontSize-xs);
+  font-family: var(--core-typography-fontFamily-mono);
+  line-height: var(--core-typography-line-height-tight);
+  backdrop-filter: var(--core-effect-backdropBlur-medium);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--core-spacing-size-02);
+  padding-bottom: var(--core-spacing-size-02);
+  border-bottom: var(--core-shape-border-width-hairline) solid
+    var(--semantic-color-border-light);
+}
+
+.header h3 {
+  margin: 0;
+  color: var(--semantic-color-foreground-primary);
+  font-weight: var(--core-typography-fontWeight-semibold);
+  font-size: var(--core-typography-fontSize-sm);
+}
+
+.closeButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--core-spacing-size-05);
+  height: var(--core-spacing-size-05);
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: var(--core-shape-radius-small);
+  color: var(--semantic-color-foreground-secondary);
+  font-size: var(--core-typography-fontSize-lg);
+  transition: background-color var(--core-motion-duration-short)
+    var(--core-motion-easing-standard);
+  cursor: pointer;
+}
+
+.closeButton:hover {
+  background-color: var(--semantic-interaction-background-hover);
+}
+
+.metrics {
+  display: flex;
+  flex-direction: column;
+  gap: var(--core-spacing-size-01);
+}
+
+.metric {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.label {
+  color: var(--semantic-color-foreground-secondary);
+  font-weight: var(--core-typography-fontWeight-medium);
+}
+
+.value {
+  color: var(--semantic-color-foreground-primary);
+  font-weight: var(--core-typography-fontWeight-semibold);
+  font-variant-numeric: tabular-nums;
+}

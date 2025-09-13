@@ -17,9 +17,13 @@
     "analyze": "ANALYZE=true npm run build",
     "tokens:scss": "node utils/generateCSSTokens.mjs",
     "tokens:globals": "node utils/designTokens/generateGlobalTokens.mjs",
-    "tokens:split": "node utils/designTokens/splitTokens.mjs",
     "tokens:compose": "node utils/designTokens/composeTokens.mjs",
-    "tokens:build": "npm run tokens:compose && npm run tokens:globals && npm run tokens:scss"
+    "tokens:schema": "node utils/designTokens/generateSchema.mjs",
+    "tokens:types": "node utils/designTokens/generateTypes.mjs",
+    "tokens:validate": "node utils/designTokens/validateTokens.mjs",
+    "tokens:build": "npm run tokens:schema && npm run tokens:compose && npm run tokens:globals && npm run tokens:scss && npm run tokens:types",
+    "tokens:inspect": "node utils/designTokens/inspectTokens.mjs",
+    "tokens:report": "node utils/designTokens/inspectTokens.mjs"
   },
   "dependencies": {
     "@atproto/api": "^0.15.15",
@@ -99,6 +103,8 @@
     "@typescript-eslint/eslint-plugin": "^8.26.0",
     "@typescript-eslint/parser": "^8.26.0",
     "@vitejs/plugin-react": "^4.7.0",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
     "eslint": "^9.32.0",
     "eslint-config-next": "^15.2.2",
     "eslint-config-prettier": "^10.0.2",

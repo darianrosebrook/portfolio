@@ -1,30 +1,51 @@
 #!/usr/bin/env node
-// Compose split token sources into components/designTokens.json
-// Sources:
-// Preferred:
-// - components/designTokens/core.tokens.json
-// - components/designTokens/semantic.tokens.json
-// Legacy (back-compat):
-// - components/designTokens/core.json
-// - components/designTokens/typography.json
-// - components/designTokens/light.json
-// - components/designTokens/dark.json
+// Compose split token sources into ui/designTokens/designTokens.json
+// Sources (required):
+// - ui/designTokens/core.tokens.json
+// - ui/designTokens/semantic.tokens.json
 
 import fs from 'fs';
 import path from 'path';
 import url from 'url';
+import { validateTokenFile, logValidationResult } from './validateTokens.mjs';
 
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const projectRoot = path.resolve(__dirname, '..', '..');
 
 const SOURCES_DIR = path.join(projectRoot, 'ui', 'designTokens');
-const OUTPUT_PATH = path.join(projectRoot, 'ui', 'designTokens.json');
+const OUTPUT_PATH = path.join(
+  projectRoot,
+  'ui',
+  'designTokens',
+  'designTokens.json'
+);
 
 function readIfExists(p) {
   if (!fs.existsSync(p)) return null;
-  const raw = fs.readFileSync(p, 'utf8');
-  return JSON.parse(raw);
+
+  try {
+    // Validate the token file
+    const validationResult = validateTokenFile(p);
+    logValidationResult(validationResult);
+
+    if (!validationResult.isValid) {
+      console.warn(
+        `[tokens] Validation issues found in ${path.basename(p)}, but continuing build...`
+      );
+      // Don't exit on validation errors for now - just warn
+      // process.exit(1);
+    }
+
+    return validationResult.tokens;
+  } catch (error) {
+    // Fallback to simple file reading if validation fails
+    console.warn(
+      `[tokens] Validation unavailable for ${path.basename(p)}, proceeding with basic parsing`
+    );
+    const raw = fs.readFileSync(p, 'utf8');
+    return JSON.parse(raw);
+  }
 }
 
 function deepMerge(target, source) {
@@ -75,11 +96,9 @@ function collectPaths(obj, base = []) {
 }
 
 function compose() {
-  // Preferred new inputs: core/semantic W3C DT files (un-namespaced paths)
+  // Required inputs: core/semantic W3C DT files (un-namespaced paths)
   const coreTokensPath = path.join(SOURCES_DIR, 'core.tokens.json');
   const semanticTokensPath = path.join(SOURCES_DIR, 'semantic.tokens.json');
-  const hasNewInputs =
-    fs.existsSync(coreTokensPath) && fs.existsSync(semanticTokensPath);
 
   function transformRefs(obj, prefixer) {
     if (obj == null || typeof obj !== 'object') return obj;
@@ -131,70 +150,28 @@ function compose() {
     return isSemanticToken ? `semantic.${pathStr}` : `core.${pathStr}`;
   }
 
-  if (hasNewInputs) {
-    const coreRaw = readIfExists(coreTokensPath) || {};
-    const semanticRaw = readIfExists(semanticTokensPath) || {};
-    const coreNamespaced = { core: transformRefs(coreRaw, defaultPrefixer) };
-    const semanticNamespaced = {
-      semantic: transformRefs(semanticRaw, defaultPrefixer),
-    };
-    const composedNew = deepMerge({}, coreNamespaced);
-    deepMerge(composedNew, semanticNamespaced);
-    const jsonNew = JSON.stringify(composedNew, null, 2) + '\n';
-    fs.writeFileSync(OUTPUT_PATH, jsonNew, 'utf8');
-    console.log(
-      '[tokens] Composed (core/semantic) ->',
-      path.relative(projectRoot, OUTPUT_PATH)
-    );
-    return;
-  }
-
-  const core = readIfExists(path.join(SOURCES_DIR, 'core.json')) || {};
-  const typography =
-    readIfExists(path.join(SOURCES_DIR, 'typography.json')) || {};
-  const light = readIfExists(path.join(SOURCES_DIR, 'light.json')) || {};
-  const dark = readIfExists(path.join(SOURCES_DIR, 'dark.json')) || {};
-
-  // Merge base structures: core + typography
-  const composed = deepMerge({}, core);
-  deepMerge(composed, typography);
-
-  // Derive $extensions.design.paths.light|dark from explicit light/dark token values
-  // Strategy: for any token present in light.semantic.* or dark.semantic.*, set the extension on the corresponding token node
-  function applyModeExtensions(modeObj, modeKey) {
-    const semantic = modeObj.semantic;
-    if (!semantic) return;
-    const paths = collectPaths(semantic);
-    for (const p of paths) {
-      const fullPath = `semantic.${p}`; // p already starts with color/background/etc
-      // ensure node exists in composed
-      // create minimal node if missing
-      // get or create node
-      const segs = fullPath.split('.');
-      let node = composed;
-      for (const s of segs) {
-        if (!node[s] || typeof node[s] !== 'object') node[s] = {};
-        node = node[s];
-      }
-      if (!('$extensions' in node)) node.$extensions = {};
-      node.$extensions[`design.paths.${modeKey}`] = `{${fullPath}}`;
+  if (!fs.existsSync(coreTokensPath) || !fs.existsSync(semanticTokensPath)) {
+    console.error('[tokens] Missing required token sources:');
+    if (!fs.existsSync(coreTokensPath)) {
+      console.error('  - ui/designTokens/core.tokens.json');
     }
+    if (!fs.existsSync(semanticTokensPath)) {
+      console.error('  - ui/designTokens/semantic.tokens.json');
+    }
+    process.exit(1);
   }
 
-  applyModeExtensions(light, 'light');
-  applyModeExtensions(dark, 'dark');
-
-  // Merge semantic color/background/border/data base values from light as default $value if missing
-  // This keeps light as base values; dark overrides via $extensions.
-  deepMerge(composed, light);
-
-  // Write output
+  const coreRaw = readIfExists(coreTokensPath) || {};
+  const semanticRaw = readIfExists(semanticTokensPath) || {};
+  const coreNamespaced = { core: transformRefs(coreRaw, defaultPrefixer) };
+  const semanticNamespaced = {
+    semantic: transformRefs(semanticRaw, defaultPrefixer),
+  };
+  const composed = deepMerge({}, coreNamespaced);
+  deepMerge(composed, semanticNamespaced);
   const json = JSON.stringify(composed, null, 2) + '\n';
   fs.writeFileSync(OUTPUT_PATH, json, 'utf8');
-  console.log(
-    '[tokens] Composed (legacy) ->',
-    path.relative(projectRoot, OUTPUT_PATH)
-  );
+  console.log('[tokens] Composed ->', path.relative(projectRoot, OUTPUT_PATH));
 }
 
 compose();

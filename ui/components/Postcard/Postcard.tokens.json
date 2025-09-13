@@ -1,0 +1,40 @@
+{
+  "prefix": "postcard",
+  "tokens": {
+    "color": {
+      "background": {
+        "default": "{semantic.color.background.primary}",
+        "hover": "{semantic.color.background.secondary}",
+        "active": "{semantic.color.background.active}"
+      },
+      "border": {
+        "default": "{semantic.color.border.light}",
+        "accent": "{semantic.color.border.accent}",
+        "hover": "{semantic.color.border.bold}"
+      },
+      "foreground": {
+        "primary": "{semantic.color.foreground.primary}",
+        "secondary": "{semantic.color.foreground.secondary}",
+        "muted": "{semantic.color.foreground.secondary}"
+      }
+    },
+    "size": {
+      "padding": {
+        "default": "{core.spacing.size.06}"
+      },
+      "radius": {
+        "default": "{semantic.shape.control.radius.default}",
+        "medium": "{semantic.shape.radius.medium}",
+        "full": "{semantic.shape.radius.full}"
+      },
+      "margin": {
+        "bottom": "{core.spacing.size.06}"
+      },
+      "gap": {
+        "default": "{core.spacing.size.05}",
+        "small": "{core.spacing.size.03}",
+        "large": "{core.spacing.size.07}"
+      }
+    }
+  }
+}

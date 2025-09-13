@@ -1,0 +1,36 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Avatar/Avatar.tokens.json
+ */
+@mixin vars {
+  /* === Size Tokens === */
+  --avatar-size-small: var(--core-spacing-size-05);
+  --avatar-size-default: var(--core-spacing-size-06);
+  --avatar-size-medium: var(--core-spacing-size-08);
+  --avatar-size-large: var(--core-spacing-size-10);
+  --avatar-size-status: var(--core-spacing-size-03);
+  --avatar-size-radius-default: var(--semantic-shape-radius-full);
+  --avatar-size-radius-small: var(--core-shape-radius-small);
+  --avatar-size-radius-full: var(--core-shape-radius-full);
+  --avatar-size-border-default: var(--semantic-size-border-default);
+  --avatar-size-border-offset: var(--semantic-size-border-offset);
+
+  /* === Color Tokens === */
+  --avatar-color-background-default: var(--semantic-color-background-secondary);
+  --avatar-color-background-inverse: var(--semantic-color-background-inverse);
+  --avatar-color-background-success: var(
+    --semantic-color-background-successStrong
+  );
+  --avatar-color-background-warning: var(
+    --semantic-color-background-warningStrong
+  );
+  --avatar-color-background-disabled: var(--semantic-color-border-disabled);
+  --avatar-color-foreground-primary: var(--semantic-color-foreground-primary);
+  --avatar-color-border-default: var(--semantic-color-border-light);
+  --avatar-color-border-info: var(--semantic-color-border-info);
+
+  /* === Typography Tokens === */
+  --avatar-typography-fontWeight-medium: var(
+    --core-typography-fontWeight-medium
+  );
+  --avatar-typography-fontFamily-sans: var(--core-typography-fontFamily-sans);
+}

@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import { glossaryItems, GlossaryItem } from '@/app/heroes/glossaryItems';
-import Icon from '@/ui/Icon';
+import Icon from '@/ui/components/Icon';
 import React from 'react';
 import Link from 'next/link';
 import { byPrefixAndName } from '@awesome.me/kit-0ba7f5fefb/icons';

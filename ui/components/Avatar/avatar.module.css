@@ -1,0 +1,33 @@
+@use './Avatar.tokens.generated.scss' as avatarTokens;
+
+.avatar {
+  @include avatarTokens.vars;
+
+  display: inline-block;
+  overflow: hidden;
+  width: var(--core-spacing-size-06);
+  height: var(--core-spacing-size-06);
+  border: var(--semantic-size-border-default) solid
+    var(--avatar-color-border-default);
+  border-radius: var(--avatar-size-radius-default);
+}
+
+.avatar_small {
+  width: var(--core-spacing-size-05);
+  height: var(--core-spacing-size-05);
+}
+
+.avatar_medium {
+  width: var(--core-spacing-size-06);
+  height: var(--core-spacing-size-06);
+}
+
+.avatar_large {
+  width: var(--core-spacing-size-08);
+  height: var(--core-spacing-size-08);
+}
+
+.avatar_extra-large {
+  width: var(--core-spacing-size-10);
+  height: var(--core-spacing-size-10);
+}
