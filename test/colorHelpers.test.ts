@@ -174,7 +174,9 @@ function compareColor(
   keys: string[] = ['r', 'g', 'b']
 ) {
   for (const key of keys) {
-    expect(actual[key]).toBeCloseTo(expected[key], tolerance);
+    const actualValue = (actual as Record<string, number>)[key];
+    const expectedValue = (expected as Record<string, number>)[key];
+    expect(actualValue).toBeCloseTo(expectedValue, tolerance);
   }
 }
 

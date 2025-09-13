@@ -35,7 +35,7 @@
   height: clamp(150px, 30vw, 400px);
   background: var(--card-background);
   border: var(--card-border, 1px solid var(--semantic-color-border-primary));
-  border-radius: var(--core-radius-medium);
+  border-radius: var(--core-shape-radius-medium);
   box-shadow: var(--card-shadow);
   transition:
     box-shadow 0.3s ease,
@@ -58,7 +58,11 @@
   color: var(--semantic-color-foreground-primary);
 
   // color: orange;
-  font-size: clamp(var(--caption-03), 1.5vw, var(--body-03));
+  font-size: clamp(
+    var(--semantic-typography-caption-03),
+    1.5vw,
+    var(--semantic-typography-body-03)
+  );
   text-transform: uppercase;
   pointer-events: none;
 }
@@ -68,7 +72,11 @@
   bottom: 12px;
   left: 12px;
   color: var(--semantic-color-foreground-primary);
-  font-size: clamp(var(--caption-03), 1.5vw, var(--body-03));
+  font-size: clamp(
+    var(--semantic-typography-caption-03),
+    1.5vw,
+    var(--semantic-typography-body-03)
+  );
   text-transform: uppercase;
   pointer-events: none;
 }
