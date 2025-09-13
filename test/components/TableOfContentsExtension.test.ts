@@ -3,7 +3,7 @@ import Document from '@tiptap/extension-document';
 import Paragraph from '@tiptap/extension-paragraph';
 import Heading from '@tiptap/extension-heading';
 import Text from '@tiptap/extension-text';
-import { TableOfContentsExtension } from '@/modules/Tiptap/Extensions/TableOfContents/TableOfContentsExtension';
+import { TableOfContentsExtension } from '@/ui/modules/Tiptap/Extensions/TableOfContents/TableOfContentsExtension';
 
 describe('TableOfContentsExtension', () => {
   it('inserts a toc node with defaults', () => {

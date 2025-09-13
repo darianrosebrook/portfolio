@@ -1,0 +1,45 @@
+{
+  "prefix": "avatar",
+  "tokens": {
+    "size": {
+      "small": "{core.spacing.size.05}",
+      "default": "{core.spacing.size.06}",
+      "medium": "{core.spacing.size.08}",
+      "large": "{core.spacing.size.10}",
+      "status": "{core.spacing.size.03}",
+      "radius": {
+        "default": "{semantic.shape.radius.full}",
+        "small": "{core.shape.radius.small}",
+        "full": "{core.shape.radius.full}"
+      },
+      "border": {
+        "default": "{semantic.size.border.default}",
+        "offset": "{semantic.size.border.offset}"
+      }
+    },
+    "color": {
+      "background": {
+        "default": "{semantic.color.background.secondary}",
+        "inverse": "{semantic.color.background.inverse}",
+        "success": "{semantic.color.background.successStrong}",
+        "warning": "{semantic.color.background.warningStrong}",
+        "disabled": "{semantic.color.border.disabled}"
+      },
+      "foreground": {
+        "primary": "{semantic.color.foreground.primary}"
+      },
+      "border": {
+        "default": "{semantic.color.border.light}",
+        "info": "{semantic.color.border.info}"
+      }
+    },
+    "typography": {
+      "fontWeight": {
+        "medium": "{core.typography.fontWeight.medium}"
+      },
+      "fontFamily": {
+        "sans": "{core.typography.fontFamily.sans}"
+      }
+    }
+  }
+}

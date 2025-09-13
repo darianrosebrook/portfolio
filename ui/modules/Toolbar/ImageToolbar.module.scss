@@ -1,0 +1,27 @@
+.toolbar {
+  display: flex;
+  align-items: center;
+  padding: var(--core-spacing-size-03);
+  background-color: var(--semantic-color-background-primary);
+  border-radius: var(--core-shape-radius-medium);
+  box-shadow: var(--semantic-elevation-default);
+
+  button {
+    margin: 0 var(--core-spacing-size-01);
+    padding: var(--core-spacing-size-01);
+    background: none;
+    border: none;
+    border-radius: var(--core-shape-radius-small);
+    transition: background-color var(--core-motion-duration-short)
+      var(--core-motion-easing-standard);
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--semantic-interaction-background-hover);
+    }
+
+    &.isActive {
+      background-color: var(--semantic-color-background-secondary);
+    }
+  }
+}

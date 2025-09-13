@@ -1,8 +1,8 @@
-import ProfileFlag from '@/ui/ProfileFlag';
+import ProfileFlag from '@/ui/components/ProfileFlag';
 import { createClient } from '@/utils/supabase/server';
 import Image from 'next/image';
 import Link from 'next/link';
-import Styles from './styles.module.css';
+import Styles from './styles.module.scss';
 import { Profile } from '@/types';
 
 // Type for the specific fields we select in the query

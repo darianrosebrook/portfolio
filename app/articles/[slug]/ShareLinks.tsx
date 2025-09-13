@@ -1,11 +1,11 @@
 'use client';
 import { useState } from 'react';
 import { Article } from '@/types';
-import styles from './styles.module.css';
-import Button from '@/ui/Button';
-import Icon from '@/ui/Icon';
+import styles from './styles.module.scss';
+import Button from '@/ui/components/Button';
+import Icon from '@/ui/components/Icon';
 import { byPrefixAndName } from '@awesome.me/kit-0ba7f5fefb/icons';
-import { CheckIcon, LinkIcon } from '@/ui/Icon/LocalIcons';
+import { CheckIcon, LinkIcon } from '@/ui/components/Icon/LocalIcons';
 
 export default function ShareLinks({
   url,

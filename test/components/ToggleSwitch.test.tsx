@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '../test-utils';
-import ToggleSwitch from '@/ui/ToggleSwitch';
+import ToggleSwitch from '@/ui/components/ToggleSwitch';
 
 describe('ToggleSwitch', () => {
   const defaultProps = {

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://design-tokens.github.io/schema.json",
+  "$schema": "./designTokens.schema.json",
   "meta": {
     "version": "1.0.0",
     "source": "Semantic roles (aliases to core)"
@@ -366,14 +366,14 @@
       },
       "trendUp": { "$type": "color", "$value": "{color.palette.green.500}" }
     },
-    "overlay": {
-      "scrim": { "$type": "color", "$value": "{color.overlay.scrim}" }
-    },
     "gradient": {
       "brandPrimary": {
         "$type": "gradient",
-        "$value": "{color.gradient.brandPrimary}"
+        "$value": "{core.color.gradient.brandPrimary}"
       }
+    },
+    "overlay": {
+      "scrim": { "$type": "color", "$value": "{core.color.overlay.scrim}" }
     }
   },
 
@@ -455,23 +455,23 @@
     "fontWeight": {
       "black": {
         "$type": "fontWeight",
-        "$value": "{typography.fontWeight.black}"
+        "$value": "{core.typography.weight.black}"
       },
       "bold": {
         "$type": "fontWeight",
-        "$value": "{typography.fontWeight.bold}"
+        "$value": "{core.typography.weight.bold}"
       },
       "light": {
         "$type": "fontWeight",
-        "$value": "{typography.fontWeight.light}"
+        "$value": "{core.typography.weight.light}"
       },
       "medium": {
         "$type": "fontWeight",
-        "$value": "{typography.fontWeight.medium}"
+        "$value": "{core.typography.weight.medium}"
       },
       "regular": {
         "$type": "fontWeight",
-        "$value": "{typography.fontWeight.regular}"
+        "$value": "{core.typography.weight.regular}"
       }
     },
     "heading": {
@@ -503,41 +503,41 @@
     "letterSpacing": {
       "normal": {
         "$type": "dimension",
-        "$value": "{typography.letterSpacing.normal}"
+        "$value": "{core.typography.letterSpacing.normal}"
       },
       "tight": {
         "$type": "dimension",
-        "$value": "{typography.letterSpacing.tight}"
+        "$value": "{core.typography.letterSpacing.tight}"
       },
       "wide": {
         "$type": "dimension",
-        "$value": "{typography.letterSpacing.wide}"
+        "$value": "{core.typography.letterSpacing.wide}"
       }
     },
     "lineHeight": {
       "body": {
         "$type": "number",
-        "$value": "{typography.lineHeight.body}"
+        "$value": "{core.typography.lineHeight.body}"
       },
       "collapse": {
         "$type": "number",
-        "$value": "{typography.lineHeight.collapse}"
+        "$value": "{core.typography.lineHeight.collapse}"
       },
       "heading": {
         "$type": "number",
-        "$value": "{typography.lineHeight.heading}"
+        "$value": "{core.typography.lineHeight.heading}"
       },
       "loose": {
         "$type": "number",
-        "$value": "{typography.lineHeight.loose}"
+        "$value": "{core.typography.lineHeight.loose}"
       },
       "normal": {
         "$type": "number",
-        "$value": "{typography.lineHeight.normal}"
+        "$value": "{core.typography.lineHeight.normal}"
       },
       "tight": {
         "$type": "number",
-        "$value": "{typography.lineHeight.tight}"
+        "$value": "{core.typography.lineHeight.tight}"
       }
     },
     "oversize": {
@@ -650,14 +650,48 @@
       "$value": "{dimension.actionMinHeight}"
     },
     "breakpoint": {
-      "sm": { "$type": "dimension", "$value": "{dimension.breakpoint.sm}" },
-      "md": { "$type": "dimension", "$value": "{dimension.breakpoint.md}" },
-      "lg": { "$type": "dimension", "$value": "{dimension.breakpoint.lg}" },
-      "xl": { "$type": "dimension", "$value": "{dimension.breakpoint.xl}" }
+      "sm": { "$type": "dimension", "$value": "640px" },
+      "md": { "$type": "dimension", "$value": "768px" },
+      "lg": { "$type": "dimension", "$value": "1024px" },
+      "xl": { "$type": "dimension", "$value": "1280px" }
     }
   },
 
   "shape": {
+    "radius": {
+      "full": {
+        "$type": "borderRadius",
+        "$value": "{core.shape.radius.full}"
+      },
+      "extraLarge": {
+        "$type": "borderRadius",
+        "$value": "{shape.radius.05}"
+      },
+      "large": {
+        "$type": "borderRadius",
+        "$value": "{shape.radius.04}"
+      },
+      "medium": {
+        "$type": "borderRadius",
+        "$value": "{shape.radius.03}"
+      },
+      "small": {
+        "$type": "borderRadius",
+        "$value": "{shape.radius.02}"
+      },
+      "extraSmall": {
+        "$type": "borderRadius",
+        "$value": "{shape.radius.01}"
+      },
+      "none": {
+        "$type": "borderRadius",
+        "$value": "{core.shape.radius.none}"
+      },
+      "default": {
+        "$type": "borderRadius",
+        "$value": "{shape.radius.02}"
+      }
+    },
     "control": {
       "radius": {
         "default": {
@@ -717,7 +751,10 @@
       }
     },
     "keyframes": {
-      "fadeIn": { "$type": "string", "$value": "{motion.keyframes.fadeIn}" }
+      "fadeIn": {
+        "$type": "string",
+        "$value": "{core.motion.keyframes.fadeIn}"
+      }
     }
   },
 

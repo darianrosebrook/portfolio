@@ -38,7 +38,7 @@
   aspect-ratio: 1 / 1;
   padding: 1rem;
   border: 1px solid var(--semantic-color-border-accent);
-  border-radius: var(--semantic-size-radius-03);
+  border-radius: var(--core-shape-radius-medium);
 
   &.middleCell {
     z-index: 1;
@@ -57,7 +57,7 @@
   padding: 1rem 2rem;
   background-color: var(--semantic-color-background);
   border: none;
-  border-radius: var(--semantic-size-radius-02);
+  border-radius: var(--core-shape-radius-medium);
   color: var(--color-text);
   transition: opacity 0.3s ease;
   transform: translateX(-50%);

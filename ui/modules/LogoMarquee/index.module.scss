@@ -1,0 +1,48 @@
+.marqueeContainer {
+  position: relative;
+  width: 100%;
+  min-height: 20vh;
+}
+
+.marquee {
+  position: absolute;
+  top: 50%;
+  display: flex;
+  gap: var(--core-spacing-size-10);
+  align-items: center;
+  overflow: hidden;
+  width: fit-content;
+  padding-right: var(--core-spacing-size-09);
+  padding-left: var(--core-spacing-size-09);
+  color: var(--semantic-color-foreground-primary);
+  white-space: nowrap;
+  transition: all 0.5s ease-in-out;
+  transform: translateY(-50%);
+}
+
+.box svg {
+  max-height: var(--core-spacing-size-25);
+}
+
+.cover {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--semantic-color-background-primary) 0%,
+    var(--semantic-color-background-transparent) 20% 80%,
+    var(--semantic-color-background-primary) 100%
+  );
+}
+
+@media (width <= 768px) {
+  .marquee {
+    gap: var(--core-spacing-size-04);
+  }
+
+  .box svg {
+    max-height: var(--core-spacing-size-12);
+  }
+}

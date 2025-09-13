@@ -1,6 +1,6 @@
 .main {
   margin: 0 auto;
-  padding: 20px;
+  padding: var(--core-spacing-size-05);
 }
 
 .profileHeader {
@@ -39,7 +39,7 @@
 
 .handle {
   margin: 0 0 16px;
-  color: #657786;
+  color: var(--semantic-color-foreground-secondary);
   font-size: 18px;
 }
 
@@ -51,7 +51,7 @@
 .stats {
   display: flex;
   gap: 24px;
-  color: #657786;
+  color: var(--semantic-color-foreground-secondary);
   font-size: 14px;
 }
 
@@ -67,16 +67,16 @@
 }
 
 .noPosts {
-  color: #657786;
+  color: var(--semantic-color-foreground-secondary);
   font-style: italic;
 }
 
 .errorContainer {
-  padding: 20px;
+  padding: var(--core-spacing-size-05);
 }
 
 .thread {
-  margin-bottom: var(--core-size-07);
+  margin-bottom: var(--core-spacing-size-07);
 }
 
 .postWrapper {
@@ -85,14 +85,14 @@
 
 .replyPost {
   position: relative;
-  margin-top: var(--core-size-04);
-  margin-left: var(--core-size-07);
+  margin-top: var(--core-spacing-size-04);
+  margin-left: var(--core-spacing-size-07);
 
   &::before {
     position: absolute;
     top: 0;
-    left: calc(-1 * var(--core-size-07));
-    width: var(--core-size-05);
+    left: calc(-1 * var(--core-spacing-size-07));
+    width: var(--core-spacing-size-05);
     height: 1px;
     background-color: var(--semantic-color-border-light);
     content: '';
@@ -101,9 +101,9 @@
 
 .threadLine {
   position: absolute;
-  top: calc(-1 * var(--core-size-04));
-  left: calc(-1 * var(--core-size-07));
+  top: calc(-1 * var(--core-spacing-size-04));
+  left: calc(-1 * var(--core-spacing-size-07));
   width: 1px;
-  height: var(--core-size-04);
+  height: var(--core-spacing-size-04);
   background-color: var(--semantic-color-border-light);
 }

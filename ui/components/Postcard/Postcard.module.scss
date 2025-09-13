@@ -1,0 +1,112 @@
+@use './Postcard.tokens.generated.scss' as postcardTokens;
+
+a:has(.post) {
+  text-decoration: none !important;
+}
+
+.post {
+  @include postcardTokens.vars;
+
+  margin-bottom: var(--postcard-size-margin-bottom);
+  padding: var(--postcard-size-padding-default);
+  background-color: var(--postcard-color-background-default);
+  border: var(--border-weight-thin) solid var(--postcard-color-border-default);
+  border-radius: var(--postcard-size-radius-default);
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: var(--postcard-color-background-hover);
+    border-color: var(--postcard-color-border-accent);
+  }
+}
+
+.header {
+  display: flex;
+  gap: var(--postcard-size-gap-default);
+  align-items: center;
+  margin-bottom: var(--postcard-size-gap-default);
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--postcard-size-gap-small);
+
+  & > p,
+  & > p + p {
+    margin: 0;
+    line-height: 1;
+  }
+}
+
+.displayName {
+  margin: 0;
+  color: var(--postcard-color-foreground-primary);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--body-02);
+}
+
+.handle {
+  margin: 0;
+  color: var(--postcard-color-foreground-secondary);
+  font-size: var(--body-03);
+}
+
+.timestamp {
+  margin-left: auto;
+  color: var(--postcard-color-foreground-secondary);
+  font-size: var(--body-03);
+}
+
+.content {
+  margin-bottom: var(--postcard-size-gap-default);
+  color: var(--postcard-color-foreground-primary);
+  font-size: var(--body-02);
+  line-height: var(--line-height-body);
+  white-space: pre-wrap;
+}
+
+.video,
+.image,
+.audio {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: var(--postcard-size-gap-default);
+  border-radius: var(--postcard-size-radius-medium);
+}
+
+.footer {
+  display: flex;
+  gap: var(--postcard-size-gap-large);
+  color: var(--postcard-color-foreground-secondary);
+  font-size: var(--body-03);
+}
+
+.stats {
+  display: flex;
+  gap: var(--postcard-size-gap-large);
+}
+
+.stat {
+  display: flex;
+  gap: var(--postcard-size-gap-small);
+  align-items: center;
+  padding: var(--postcard-size-gap-small) var(--postcard-size-gap-small);
+  background: none;
+  border: 2px solid var(--postcard-color-border-default);
+  border-radius: var(--postcard-size-radius-full);
+  color: var(--postcard-color-foreground-secondary);
+  font-size: var(--body-03);
+  transition: color 0.2s ease;
+  cursor: pointer;
+
+  svg {
+    width: var(--postcard-size-gap-default);
+    height: var(--postcard-size-gap-default);
+  }
+
+  &:hover {
+    color: var(--postcard-color-foreground-primary);
+  }
+}

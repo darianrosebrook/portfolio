@@ -6,7 +6,7 @@ import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import styles from './glossaryCards.module.scss';
 import { useInteraction } from '@/context';
 import { glossaryItems as terms } from './glossaryItems';
-import Icon from '@/ui/Icon';
+import Icon from '@/ui/components/Icon';
 
 gsap.registerPlugin(ScrollTrigger);
 

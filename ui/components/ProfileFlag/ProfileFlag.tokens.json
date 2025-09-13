@@ -1,0 +1,34 @@
+{
+  "prefix": "profileFlag",
+  "tokens": {
+    "color": {
+      "background": {
+        "default": "{semantic.color.background.primary}"
+      },
+      "border": {
+        "default": "{semantic.color.border.light}",
+        "hover": "{semantic.color.border.bold}"
+      },
+      "foreground": {
+        "primary": "{semantic.color.foreground.primary}"
+      }
+    },
+    "size": {
+      "radius": {
+        "default": "{semantic.shape.control.radius.default}"
+      }
+    },
+    "spacing": {
+      "gap": {
+        "default": "{core.spacing.size.03}"
+      },
+      "padding": {
+        "default": "{core.spacing.size.04}",
+        "right": "{core.spacing.size.06}"
+      },
+      "margin": {
+        "top": "{core.spacing.size.02}"
+      }
+    }
+  }
+}

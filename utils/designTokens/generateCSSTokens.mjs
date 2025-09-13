@@ -132,7 +132,7 @@ function run() {
   // Validate system tokens exist (not strictly required for ref mode)
   if (!fs.existsSync(SYSTEM_TOKENS_PATH)) {
     console.warn(
-      '[tokens] Warning: ui/designTokens.json not found. Proceeding with reference output.'
+      '[tokens] Warning: ui/designTokens/designTokens.json not found. Proceeding with reference output.'
     );
   }
 

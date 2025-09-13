@@ -1,0 +1,30 @@
+@use './Sidebar.tokens.generated.scss' as sidebarTokens;
+
+.root {
+  @include sidebarTokens.vars;
+
+  position: sticky;
+  top: 1rem;
+  align-self: start;
+  padding-right: var(--sidebar-spacing-padding-right);
+  border-right: 1px solid var(--sidebar-color-border-subtle);
+}
+
+.group {
+  margin-bottom: var(--sidebar-spacing-margin-bottom-default);
+}
+
+.group h4 {
+  margin: 0 0 var(--sidebar-spacing-margin-bottom-small);
+  color: var(--sidebar-color-foreground-secondary);
+}
+
+.nav {
+  display: grid;
+  gap: var(--sidebar-spacing-gap-default);
+}
+
+.link {
+  color: var(--sidebar-color-foreground-link);
+  text-decoration: none;
+}

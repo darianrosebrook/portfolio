@@ -1,0 +1,17 @@
+{
+  "$schema": "../../../ui/designTokens/designTokens.schema.json",
+  "prefix": "slinkycursor",
+  "tokens": {
+    "color": {
+      "border": {
+        "primary": "{semantic.color.border.primary}",
+        "hover": "{semantic.color.border.hover}"
+      }
+    },
+    "shape": {
+      "radius": {
+        "full": "{semantic.shape.radius.full}"
+      }
+    }
+  }
+}

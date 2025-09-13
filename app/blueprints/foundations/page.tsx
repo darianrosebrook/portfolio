@@ -26,6 +26,11 @@ export const metadata = {
 
 const foundations = [
   {
+    title: 'Design Tokens',
+    desc: 'The contract between design and code. Learn how core primitives and semantic roles work together, how we validate and generate outputs, and how tokens drive accessibility and theming.',
+    href: '/blueprints/foundations/tokens',
+  },
+  {
     title: 'Color',
     desc: 'Establishes brand identity, provides hierarchy, and supports contrast across light and dark themes. You&apos;ll learn how to define semantic and functional color tokens, evaluate contrast accessibility using WCAG and APCA, and implement color theming across platforms.',
     href: '/blueprints/foundations/color',

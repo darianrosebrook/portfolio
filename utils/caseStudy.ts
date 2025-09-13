@@ -4,9 +4,9 @@ import Image from '@tiptap/extension-image';
 import { generateHTML } from '@tiptap/html';
 import { JSONContent } from '@tiptap/react';
 // Use server-safe nodes to avoid importing React NodeViews on the server
-import { DetailsServer } from '@/modules/Tiptap/Extensions/Details/DetailsServer';
-import { TableOfContentsServer } from '@/modules/Tiptap/Extensions/TableOfContents/TableOfContentsServer';
-import { VideoServer } from '@/modules/Tiptap/Extensions/VideoExtended/VideoServer';
+import { DetailsServer } from '@/ui/modules/Tiptap/Extensions/Details/DetailsServer';
+import { TableOfContentsServer } from '@/ui/modules/Tiptap/Extensions/TableOfContents/TableOfContentsServer';
+import { VideoServer } from '@/ui/modules/Tiptap/Extensions/VideoExtended/VideoServer';
 
 export type CaseStudyContent = {
   h1FromHTML: RegExpMatchArray | null;

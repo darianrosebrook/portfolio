@@ -37,7 +37,7 @@
   padding: 0.75rem 1.5rem;
   background: var(--semantic-color-background-secondary);
   border: 2px solid var(--semantic-color-border-primary);
-  border-radius: var(--semantic-size-radius-02);
+  border-radius: var(--core-shape-radius-medium);
   color: var(--semantic-color-foreground-primary);
   font-weight: 500;
   text-decoration: none;
@@ -54,7 +54,7 @@
   padding: 1.5rem;
   background: var(--semantic-color-background-secondary);
   border: 1px solid var(--semantic-color-border-primary);
-  border-radius: var(--semantic-size-radius-02);
+  border-radius: var(--core-shape-radius-medium);
   text-align: left;
 }
 

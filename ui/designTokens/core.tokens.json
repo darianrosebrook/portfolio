@@ -1,5 +1,5 @@
 {
-  "$schema": "https://design-tokens.github.io/schema.json",
+  "$schema": "./designTokens.schema.json",
   "meta": {
     "version": "1.0.0",
     "source": "Core scales and primitives only"
@@ -685,7 +685,7 @@
     },
     "letterSpacing": {
       "tight": { "$type": "dimension", "$value": "-0.018em" },
-      "normal": { "$type": "dimension", "$value": "0" },
+      "normal": { "$type": "dimension", "$value": "0em" },
       "wide": { "$type": "dimension", "$value": "0.018em" }
     },
     "features": {
@@ -695,8 +695,19 @@
   },
 
   "scale": {
-    "base": { "$type": "dimension", "$value": "1" },
-    "05": { "$type": "dimension", "$value": ".5" }
+    "base": { "$type": "number", "$value": 1 },
+    "050": { "$type": "number", "$value": 0.5 },
+    "000": { "$type": "number", "$value": 0 },
+    "100": { "$type": "number", "$value": 1 },
+    "110": { "$type": "number", "$value": 1.1 },
+    "125": { "$type": "number", "$value": 1.25 },
+    "150": { "$type": "number", "$value": 1.5 },
+    "175": { "$type": "number", "$value": 1.75 },
+    "200": { "$type": "number", "$value": 2 },
+    "225": { "$type": "number", "$value": 2.25 },
+    "250": { "$type": "number", "$value": 2.5 },
+    "275": { "$type": "number", "$value": 2.75 },
+    "300": { "$type": "number", "$value": 3 }
   },
   "spacing": {
     "size": {
@@ -739,7 +750,7 @@
     },
     "depth": {
       "$type": "number",
-      "0": { "$value": 0 },
+      "0": { "$type": "number", "$value": 0 },
       "1": { "$value": 8 },
       "2": { "$value": 16 },
       "3": { "$value": 32 },
@@ -778,11 +789,38 @@
 
   "shape": {
     "radius": {
-      "none": { "$type": "borderRadius", "$value": "0" },
-      "small": { "$type": "borderRadius", "$value": "4px" },
-      "medium": { "$type": "borderRadius", "$value": "8px" },
-      "large": { "$type": "borderRadius", "$value": "16px" },
-      "full": { "$type": "borderRadius", "$value": "9999px" }
+      "none": {
+        "$type": "borderRadius",
+        "$value": "0"
+      },
+      "01": {
+        "$type": "borderRadius",
+        "$value": "2px"
+      },
+      "02": {
+        "$type": "borderRadius",
+        "$value": "4px"
+      },
+      "medium": {
+        "$type": "borderRadius",
+        "$value": "6px"
+      },
+      "03": {
+        "$type": "borderRadius",
+        "$value": "8px"
+      },
+      "04": {
+        "$type": "borderRadius",
+        "$value": "16px"
+      },
+      "05": {
+        "$type": "borderRadius",
+        "$value": "32px"
+      },
+      "full": {
+        "$type": "borderRadius",
+        "$value": "9999px"
+      }
     },
     "border": {
       "width": {

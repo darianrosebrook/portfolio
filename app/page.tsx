@@ -24,11 +24,11 @@ export const metadata = {
     images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
   },
 };
-import Status from '@/ui/Status';
-import styles from './page.module.css';
-import Avatar from '@/ui/Avatar';
-import Button from '@/ui/Button';
-import LogoMaruqee from '@/modules/LogoMarquee';
+import Status from '@/ui/components/Status';
+import styles from './page.module.scss';
+import Avatar from '@/ui/components/Avatar';
+import Button from '@/ui/components/Button';
+import LogoMaruqee from '@/ui/modules/LogoMarquee';
 import Image from 'next/image';
 import BlueprintsWrapper from './BlueprintsWrapper';
 
@@ -85,10 +85,10 @@ export default function Home() {
         </div>
         <div className={styles.headingHero}>
           <div className="gooey">
-            <Status status="error">Design Technologist</Status>
+            <Status status="error">Not looking for work</Status>
           </div>
           <h1 className="gooey">
-            <span>Darian Rosebrook</span>
+            <span>Staff Design Technologist</span>
             <br />
             <span>
               Connecting Design &rarr; Code with Design Systems &amp; Custom

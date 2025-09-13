@@ -76,7 +76,11 @@
 .cardContent {
   z-index: 1;
   color: var(--semantic-color-foreground-secondary);
-  font-size: clamp(var(--heading-05), 3vw, var(--oversize-02));
+  font-size: clamp(
+    var(--semantic-typography-heading-05),
+    3vw,
+    var(--semantic-typography-oversize-02)
+  );
   pointer-events: none;
   user-select: none;
 }

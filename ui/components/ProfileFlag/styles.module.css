@@ -1,0 +1,30 @@
+@use './ProfileFlag.tokens.generated.scss' as profileFlagTokens;
+
+.profileFlag {
+  @include profileFlagTokens.vars;
+
+  a {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: var(--core-spacing-size-03);
+    align-items: center;
+    width: fit-content;
+    padding: var(--core-spacing-size-04);
+    padding-right: var(--core-spacing-size-06);
+    background-color: var(--profileFlag-color-background-default);
+    border: 1px solid var(--profileFlag-color-border-default);
+    border-radius: var(--profileFlag-size-radius-default);
+    color: var(--profileFlag-color-foreground-primary);
+    line-height: 1;
+    text-decoration: none;
+    transition: border-color 0.2s ease;
+
+    small {
+      margin-top: var(--core-spacing-size-02);
+    }
+
+    &:hover {
+      border: 1px solid var(--semantic-color-border-bold);
+    }
+  }
+}

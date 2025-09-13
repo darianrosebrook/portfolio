@@ -7,7 +7,7 @@
   overflow-x: auto;
   background-color: var(--semantic-color-background-primary);
   border: 1px solid var(--semantic-color-border-primary);
-  border-radius: var(--semantic-size-radius-03);
+  border-radius: var(--core-shape-radius-medium);
   -webkit-overflow-scrolling: touch;
   scrollbar-color: var(--semantic-color-border-primary)
     var(--semantic-color-background-secondary);
@@ -36,12 +36,12 @@
 
   &::-webkit-scrollbar-track {
     background: var(--semantic-color-background-secondary);
-    border-radius: var(--semantic-size-radius-full);
+    border-radius: var(--core-shape-radius-full);
   }
 
   &::-webkit-scrollbar-thumb {
     background: var(--semantic-color-border-primary);
-    border-radius: var(--semantic-size-radius-full);
+    border-radius: var(--core-shape-radius-full);
 
     &:hover {
       background: var(--semantic-color-background-secondary);
@@ -296,46 +296,46 @@
   align-items: center;
   padding: 0.25rem 0.75rem;
   border: 1px solid var(--semantic-color-border-primary);
-  border-radius: var(--semantic-size-radius-full);
+  border-radius: var(--core-shape-radius-full);
   font-weight: 600;
   font-size: 0.75rem;
   line-height: 1.25;
   white-space: nowrap;
 
   &.category {
-    background-color: var(--semantic-color-background-infoSubtle);
+    background-color: var(--semantic-color-background-info-subtle);
     border-color: var(--semantic-color-border-info);
     color: var(--semantic-color-foreground-onInfoSubtle);
   }
 
   &.complexity {
-    background-color: var(--semantic-color-background-successSubtle);
+    background-color: var(--semantic-color-background-success-subtle);
     border-color: var(--semantic-color-border-success);
-    color: var(--semantic-color-foreground-onSuccessSubtle);
+    color: var(--semantic-color-foreground-on-success-subtle);
   }
 
   &.completed {
-    background-color: var(--semantic-color-background-successSubtle);
+    background-color: var(--semantic-color-background-success-subtle);
     border-color: var(--semantic-color-border-success);
-    color: var(--semantic-color-foreground-onSuccessSubtle);
+    color: var(--semantic-color-foreground-on-success-subtle);
   }
 
   &.in-progress {
-    background-color: var(--semantic-color-background-warningSubtle);
+    background-color: var(--semantic-color-background-warning-subtle);
     border-color: var(--semantic-color-border-warning);
-    color: var(--semantic-color-foreground-onWarningSubtle);
+    color: var(--semantic-color-foreground-on-warning-subtle);
   }
 
   &.planned {
-    background-color: var(--semantic-color-background-warningSubtle);
+    background-color: var(--semantic-color-background-warning-subtle);
     border-color: var(--semantic-color-border-warning);
-    color: var(--semantic-color-foreground-onWarningSubtle);
+    color: var(--semantic-color-foreground-on-warning-subtle);
   }
 
   &.deprecated {
-    background-color: var(--semantic-color-background-errorSubtle);
-    border-color: var(--semantic-color-border-error);
-    color: var(--semantic-color-foreground-onErrorSubtle);
+    background-color: var(--semantic-color-background-danger-subtle);
+    border-color: var(--semantic-color-border-danger);
+    color: var(--semantic-color-foreground-on-danger-subtle);
   }
 }
 

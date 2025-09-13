@@ -22,16 +22,16 @@
 .headingHero h1 {
   max-width: 16em;
   line-height: 1.3;
-  letter-spacing: var(--letter-spacing-tight);
+  letter-spacing: var(--core-typography-letterSpacing-tight);
 }
 
 .headingHero h1 span:first-of-type {
   z-index: 1;
   display: inline-block;
-  margin-bottom: var(--core-size-02);
+  margin-bottom: var(--core-spacing-size-02);
   color: var(--semantic-color-foreground-accent);
-  font-size: var(--heading-06);
-  letter-spacing: var(--letter-spacing-normal);
+  font-size: var(--semantic-typography-heading-06);
+  letter-spacing: var(--core-typography-letterSpacing-normal);
 }
 
 .heroImage {

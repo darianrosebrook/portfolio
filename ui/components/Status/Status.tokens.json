@@ -1,0 +1,36 @@
+{
+  "prefix": "status",
+  "tokens": {
+    "color": {
+      "background": {
+        "default": "{semantic.color.background.primary}",
+        "hover": "{semantic.color.background.hover}",
+        "active": "{semantic.color.background.active}",
+        "disabled": "{semantic.color.background.disabled}"
+      },
+      "foreground": {
+        "primary": "{semantic.color.foreground.primary}",
+        "secondary": "{semantic.color.foreground.secondary}",
+        "accent": "{semantic.color.foreground.accent}",
+        "disabled": "{semantic.color.foreground.disabled}"
+      },
+      "border": {
+        "default": "{semantic.color.border.primary}",
+        "hover": "{semantic.color.border.bold}",
+        "accent": "{semantic.color.border.accent}",
+        "disabled": "{semantic.color.border.disabled}"
+      }
+    },
+    "size": {
+      "radius": {
+        "default": "{semantic.shape.radius.full}"
+      },
+      "padding": {
+        "default": "{core.spacing.size.04}"
+      },
+      "border": {
+        "default": "{core.shape.border.width.hairline}"
+      }
+    }
+  }
+}

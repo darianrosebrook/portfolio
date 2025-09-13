@@ -27,16 +27,16 @@
 .headingHero h1 {
   max-width: 16em;
   line-height: 1.3;
-  letter-spacing: var(--letter-spacing-tight);
+  letter-spacing: var(--core-typography-letterSpacing-tight);
 }
 
 .headingHero h2 span:first-of-type {
   z-index: 1;
   display: inline-block;
-  margin-bottom: var(--core-size-02);
+  margin-bottom: var(--core-spacing-size-02);
   color: var(--semantic-color-foreground-accent);
-  font-size: var(--heading-06);
-  letter-spacing: var(--letter-spacing-normal);
+  font-size: var(--semantic-typography-heading-06);
+  letter-spacing: var(--core-typography-letterSpacing-normal);
 }
 
 .heroImage {
@@ -61,7 +61,7 @@
   background: linear-gradient(
     180deg,
     var(--semantic-color-background-primary) 0%,
-    var(--color-core-transparent) 10% 90%,
+    var(--core-color-mode-transparent) 10% 90%,
     var(--semantic-color-background-primary) 100%
   );
   pointer-events: none;

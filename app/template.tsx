@@ -8,9 +8,9 @@ import {
   InteractionProvider,
   UserProvider,
 } from '@/context';
-import Navbar from '@/modules/Navbar';
-import Footer from '@/modules/Footer';
-import SlinkyCursor from '@/ui/SlinkyCursor';
+import Navbar from '@/ui/modules/Navbar';
+import Footer from '@/ui/modules/Footer';
+import SlinkyCursor from '@/ui/components/SlinkyCursor';
 type TemplateProps = {
   children: React.ReactNode;
 };

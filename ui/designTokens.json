@@ -1,6 +1,6 @@
 {
   "core": {
-    "$schema": "https://design-tokens.github.io/schema.json",
+    "$schema": "./designTokens/designTokens.schema.json",
     "meta": {
       "version": "1.0.0",
       "source": "Core scales and primitives only"
@@ -1051,17 +1051,25 @@
           "$type": "borderRadius",
           "$value": "0"
         },
-        "small": {
+        "01": {
+          "$type": "borderRadius",
+          "$value": "2px"
+        },
+        "02": {
           "$type": "borderRadius",
           "$value": "4px"
         },
-        "medium": {
+        "03": {
           "$type": "borderRadius",
           "$value": "8px"
         },
-        "large": {
+        "04": {
           "$type": "borderRadius",
           "$value": "16px"
+        },
+        "05": {
+          "$type": "borderRadius",
+          "$value": "32px"
         },
         "full": {
           "$type": "borderRadius",
@@ -1265,7 +1273,7 @@
     }
   },
   "semantic": {
-    "$schema": "https://design-tokens.github.io/schema.json",
+    "$schema": "./designTokens/designTokens.schema.json",
     "meta": {
       "version": "1.0.0",
       "source": "Semantic roles (aliases to core)"
@@ -2066,6 +2074,14 @@
       }
     },
     "shape": {
+      "radius": {
+        "full": "{core.shape.radius.full}",
+        "large": "{core.shape.radius.large}",
+        "medium": "{core.shape.radius.medium}",
+        "none": "{core.shape.radius.none}",
+        "small": "{core.shape.radius.small}",
+        "default": "{core.shape.radius.medium}"
+      },
       "control": {
         "radius": {
           "default": {

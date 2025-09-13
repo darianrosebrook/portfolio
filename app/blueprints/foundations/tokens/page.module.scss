@@ -1,0 +1,20 @@
+.placeholder {
+  margin: 2rem 0;
+  padding: 2rem;
+  background: var(--semantic-color-background-info-subtle);
+  border-radius: var(--core-shape-radius-medium);
+  color: var(--semantic-color-foreground-on-info-subtle);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--core-spacing-size-05, 1.25rem);
+}
+
+.card {
+  padding: 1.25rem;
+  background: var(--semantic-color-background-elevated);
+  border: 1px solid var(--semantic-color-border-subtle);
+  border-radius: var(--core-shape-radius-medium);
+}
