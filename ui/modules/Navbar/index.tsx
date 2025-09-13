@@ -109,7 +109,7 @@ export default function Navbar({ pages = [] }: NavbarProps) {
   return (
     <header className={styles.navContainer}>
       <nav className={styles.nav}>
-        <div className="logoLink">
+        <div className={styles.logoLink}>
           <Logo />
           <h1 className="medium logo">
             <AnimatedLink href="/">Darian&nbsp;Rosebrook</AnimatedLink>

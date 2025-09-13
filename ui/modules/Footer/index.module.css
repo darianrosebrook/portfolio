@@ -68,7 +68,7 @@
   width: fit-content;
   height: 0;
   background-color: var(--semantic-color-background-accent);
-  color: var(--semantic-color-foreground-primary);
+  color: var(--semantic-color-foreground-on-color);
   white-space: nowrap;
   transition: all 0.5s ease-in-out;
   transform: translateY(-50%);
@@ -88,7 +88,6 @@
 .socialLink:hover .marquee {
   height: 100%;
   background-color: var(--semantic-color-background-accent);
-  color: var(--semantic-color-foreground-onColor);
 }
 
 .copyRight {

@@ -1,7 +1,7 @@
 .navContainer {
   position: fixed;
   z-index: 1000;
-  padding: var(--core-spacing-size-02) var(--core-spacing-size-06);
+  padding: var(--core-spacing-size-02) var(--core-spacing-size-07);
   background: linear-gradient(
     to top,
     var(--core-color-mode-transparent) 0%,
@@ -13,6 +13,12 @@
   width: var(--core-spacing-size-07);
   height: var(--core-spacing-size-07);
   margin: 0;
+}
+
+.logoLink {
+  display: flex;
+  gap: var(--core-spacing-size-02);
+  align-items: center;
 }
 
 .nav a {
