@@ -298,102 +298,53 @@
   --core-typography-weight-regular: 400;
   --core-typography-weight-thin: 100;
   --semantic-color-background-accent: var(--core-color-palette-red-500);
-  --semantic-color-background-active: var(
-    --core-color-palette-neutral-300
-  ); /* via $extensions.design.paths.light */
-
+  --semantic-color-background-active: var(--core-color-palette-neutral-300);
   --semantic-color-background-brand: var(
     --core-color-palette-brand-primary-500
   );
   --semantic-color-background-danger-strong: var(--core-color-palette-red-600);
-  --semantic-color-background-danger-subtle: var(
-    --core-color-palette-red-100
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-background-disabled: var(
-    --core-color-palette-neutral-200
-  ); /* via $extensions.design.paths.light */
-
+  --semantic-color-background-danger-subtle: var(--core-color-palette-red-100);
+  --semantic-color-background-disabled: var(--core-color-palette-neutral-200);
   --semantic-color-background-elevated: var(--core-color-mode-white);
-  --semantic-color-background-highlight: var(
-    --core-color-palette-blue-200
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-background-hover: var(
-    --core-color-palette-neutral-200
-  ); /* via $extensions.design.paths.light */
-
+  --semantic-color-background-highlight: var(--core-color-palette-blue-200);
+  --semantic-color-background-hover: var(--core-color-palette-neutral-200);
   --semantic-color-background-image-overlay: rgb(
     0 0 0 / var(--core-opacity-50)
   );
   --semantic-color-background-info-strong: var(--core-color-palette-blue-600);
-  --semantic-color-background-info-subtle: var(
-    --core-color-palette-blue-100
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-background-inverse: var(
-    --core-color-mode-light
-  ); /* via $extensions.design.paths.light */
-
+  --semantic-color-background-info-subtle: var(--core-color-palette-blue-100);
+  --semantic-color-background-inverse: var(--core-color-mode-light);
   --semantic-color-background-on-color: var(
     --semantic-color-background-primary
   );
   --semantic-color-background-placeholder: var(
     --core-color-palette-neutral-100
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-background-primary: var(
-    --core-color-mode-light
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-background-read-only: var(
-    --core-color-palette-neutral-200
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-background-secondary: var(
-    --core-color-palette-neutral-100
-  ); /* via $extensions.design.paths.light */
-
+  );
+  --semantic-color-background-primary: var(--core-color-mode-light);
+  --semantic-color-background-read-only: var(--core-color-palette-neutral-200);
+  --semantic-color-background-secondary: var(--core-color-palette-neutral-100);
   --semantic-color-background-success-strong: var(
     --core-color-palette-green-600
   );
   --semantic-color-background-success-subtle: var(
     --core-color-palette-green-100
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-background-tertiary: var(
-    --core-color-palette-neutral-200
-  ); /* via $extensions.design.paths.light */
-
+  );
+  --semantic-color-background-tertiary: var(--core-color-palette-neutral-200);
   --semantic-color-background-warning-strong: var(
     --core-color-palette-orange-400
-  ); /* via $extensions.design.paths.light */
-
+  );
   --semantic-color-background-warning-subtle: var(
     --core-color-palette-orange-100
-  ); /* via $extensions.design.paths.light */
-
+  );
   --semantic-color-border-accent: var(--core-color-palette-red-500);
-  --semantic-color-border-bold: var(
-    --core-color-palette-neutral-600
-  ); /* via $extensions.design.paths.light */
-
+  --semantic-color-border-bold: var(--core-color-palette-neutral-600);
   --semantic-color-border-danger: var(--core-color-palette-red-600);
-  --semantic-color-border-disabled: var(
-    --core-color-palette-neutral-200
-  ); /* via $extensions.design.paths.light */
-
+  --semantic-color-border-disabled: var(--core-color-palette-neutral-200);
   --semantic-color-border-focus: var(--core-color-palette-brand-primary-500);
   --semantic-color-border-info: var(--core-color-palette-blue-600);
-  --semantic-color-border-light: var(
-    --core-color-palette-neutral-200
-  ); /* via $extensions.design.paths.light */
-
+  --semantic-color-border-light: var(--core-color-palette-neutral-200);
   --semantic-color-border-on-color: var(--core-color-mode-white);
-  --semantic-color-border-primary: var(
-    --core-color-palette-neutral-300
-  ); /* via $extensions.design.paths.light */
-
+  --semantic-color-border-primary: var(--core-color-palette-neutral-300);
   --semantic-color-border-strong: var(--core-color-palette-neutral-400);
   --semantic-color-border-subtle: var(--core-color-palette-neutral-300);
   --semantic-color-border-success: var(--core-color-palette-green-600);
@@ -402,86 +353,40 @@
   --semantic-color-data-trend-down: var(--core-color-palette-red-500);
   --semantic-color-data-trend-neutral: var(--core-color-palette-neutral-500);
   --semantic-color-data-trend-up: var(--core-color-palette-green-500);
-  --semantic-color-foreground-accent: var(
-    --core-color-palette-red-500
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-foreground-danger: var(
-    --core-color-palette-red-500
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-foreground-disabled: var(
-    --core-color-palette-neutral-300
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-foreground-highlight: var(
-    --core-color-palette-blue-700
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-foreground-hover: var(
-    --core-color-palette-neutral-700
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-foreground-info: var(
-    --core-color-palette-blue-500
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-foreground-inverse: var(
-    --core-color-mode-light
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-foreground-link: var(
-    --core-color-palette-red-500
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-foreground-link-hover: var(
-    --core-color-palette-red-600
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-foreground-link-visited: var(
-    --core-color-palette-red-400
-  ); /* via $extensions.design.paths.light */
-
+  --semantic-color-foreground-accent: var(--core-color-palette-red-500);
+  --semantic-color-foreground-danger: var(--core-color-palette-red-500);
+  --semantic-color-foreground-disabled: var(--core-color-palette-neutral-300);
+  --semantic-color-foreground-highlight: var(--core-color-palette-blue-700);
+  --semantic-color-foreground-hover: var(--core-color-palette-neutral-700);
+  --semantic-color-foreground-info: var(--core-color-palette-blue-500);
+  --semantic-color-foreground-inverse: var(--core-color-mode-light);
+  --semantic-color-foreground-link: var(--core-color-palette-red-500);
+  --semantic-color-foreground-link-hover: var(--core-color-palette-red-600);
+  --semantic-color-foreground-link-visited: var(--core-color-palette-red-400);
   --semantic-color-foreground-on-brand: var(--core-color-mode-white);
   --semantic-color-foreground-on-color: var(
     --semantic-color-foreground-primary
   );
   --semantic-color-foreground-on-danger-subtle: var(
     --core-color-palette-red-700
-  ); /* via $extensions.design.paths.light */
-
+  );
   --semantic-color-foreground-on-info-subtle: var(
     --core-color-palette-blue-700
-  ); /* via $extensions.design.paths.light */
-
+  );
   --semantic-color-foreground-on-success-subtle: var(
     --core-color-palette-green-700
-  ); /* via $extensions.design.paths.light */
-
+  );
   --semantic-color-foreground-on-warning-subtle: var(
     --core-color-palette-orange-700
-  ); /* via $extensions.design.paths.light */
-
+  );
   --semantic-color-foreground-placeholder: var(
     --core-color-palette-neutral-400
   );
-  --semantic-color-foreground-primary: var(
-    --core-color-mode-dark
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-foreground-secondary: var(
-    --core-color-palette-neutral-600
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-foreground-success: var(
-    --core-color-palette-green-500
-  ); /* via $extensions.design.paths.light */
-
+  --semantic-color-foreground-primary: var(--core-color-mode-dark);
+  --semantic-color-foreground-secondary: var(--core-color-palette-neutral-600);
+  --semantic-color-foreground-success: var(--core-color-palette-green-500);
   --semantic-color-foreground-tertiary: var(--core-color-palette-neutral-500);
-  --semantic-color-foreground-warning: var(
-    --core-color-palette-orange-500
-  ); /* via $extensions.design.paths.light */
-
+  --semantic-color-foreground-warning: var(--core-color-palette-orange-500);
   --semantic-color-gradient-brand-primary: var(
     --core-color-gradient-brand-primary
   );
@@ -798,602 +703,242 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --semantic-color-background-active: var(
-      --core-color-palette-neutral-600
-    ); /* via $extensions.design.paths.dark */
-
+    --semantic-color-background-active: var(--core-color-palette-neutral-600);
     --semantic-color-background-danger-subtle: var(
       --core-color-palette-red-800
-    ); /* via $extensions.design.paths.dark */
-
-    --semantic-color-background-disabled: var(
-      --core-color-palette-neutral-700
-    ); /* via $extensions.design.paths.dark */
-
-    --semantic-color-background-highlight: var(
-      --core-color-palette-blue-800
-    ); /* via $extensions.design.paths.dark */
-
-    --semantic-color-background-hover: var(
-      --core-color-palette-neutral-700
-    ); /* via $extensions.design.paths.dark */
-
-    --semantic-color-background-info-subtle: var(
-      --core-color-palette-blue-800
-    ); /* via $extensions.design.paths.dark */
-
-    --semantic-color-background-inverse: var(
-      --core-color-mode-light
-    ); /* via $extensions.design.paths.dark */
-
+    );
+    --semantic-color-background-disabled: var(--core-color-palette-neutral-700);
+    --semantic-color-background-highlight: var(--core-color-palette-blue-800);
+    --semantic-color-background-hover: var(--core-color-palette-neutral-700);
+    --semantic-color-background-info-subtle: var(--core-color-palette-blue-800);
+    --semantic-color-background-inverse: var(--core-color-mode-light);
     --semantic-color-background-placeholder: var(
       --core-color-palette-neutral-800
-    ); /* via $extensions.design.paths.dark */
-
-    --semantic-color-background-primary: var(
-      --core-color-mode-dark
-    ); /* via $extensions.design.paths.dark */
-
+    );
+    --semantic-color-background-primary: var(--core-color-mode-dark);
     --semantic-color-background-read-only: var(
       --core-color-palette-neutral-700
-    ); /* via $extensions.design.paths.dark */
-
+    );
     --semantic-color-background-secondary: var(
       --core-color-palette-neutral-800
-    ); /* via $extensions.design.paths.dark */
-
+    );
     --semantic-color-background-success-subtle: var(
       --core-color-palette-green-800
-    ); /* via $extensions.design.paths.dark */
-
-    --semantic-color-background-tertiary: var(
-      --core-color-palette-neutral-700
-    ); /* via $extensions.design.paths.dark */
-
+    );
+    --semantic-color-background-tertiary: var(--core-color-palette-neutral-700);
     --semantic-color-background-warning-strong: var(
       --core-color-palette-orange-600
-    ); /* via $extensions.design.paths.dark */
-
+    );
     --semantic-color-background-warning-subtle: var(
       --core-color-palette-orange-800
-    ); /* via $extensions.design.paths.dark */
-
-    --semantic-color-border-bold: var(
-      --core-color-palette-neutral-300
-    ); /* via $extensions.design.paths.dark */
-
-    --semantic-color-border-disabled: var(
-      --core-color-palette-neutral-700
-    ); /* via $extensions.design.paths.dark */
-
-    --semantic-color-border-light: var(
-      --core-color-palette-neutral-700
-    ); /* via $extensions.design.paths.dark */
-
-    --semantic-color-border-primary: var(
-      --core-color-palette-neutral-600
-    ); /* via $extensions.design.paths.dark */
-
-    --semantic-color-foreground-accent: var(
-      --core-color-palette-red-400
-    ); /* via $extensions.design.paths.dark */
-
-    --semantic-color-foreground-danger: var(
-      --core-color-palette-red-400
-    ); /* via $extensions.design.paths.dark */
-
-    --semantic-color-foreground-disabled: var(
-      --core-color-palette-neutral-600
-    ); /* via $extensions.design.paths.dark */
-
-    --semantic-color-foreground-highlight: var(
-      --core-color-palette-blue-400
-    ); /* via $extensions.design.paths.dark */
-
-    --semantic-color-foreground-hover: var(
-      --core-color-palette-neutral-300
-    ); /* via $extensions.design.paths.dark */
-
-    --semantic-color-foreground-info: var(
-      --core-color-palette-blue-400
-    ); /* via $extensions.design.paths.dark */
-
-    --semantic-color-foreground-inverse: var(
-      --core-color-mode-dark
-    ); /* via $extensions.design.paths.dark */
-
-    --semantic-color-foreground-link: var(
-      --core-color-palette-red-400
-    ); /* via $extensions.design.paths.dark */
-
-    --semantic-color-foreground-link-hover: var(
-      --core-color-palette-red-300
-    ); /* via $extensions.design.paths.dark */
-
-    --semantic-color-foreground-link-visited: var(
-      --core-color-palette-red-500
-    ); /* via $extensions.design.paths.dark */
-
+    );
+    --semantic-color-border-bold: var(--core-color-palette-neutral-300);
+    --semantic-color-border-disabled: var(--core-color-palette-neutral-700);
+    --semantic-color-border-light: var(--core-color-palette-neutral-700);
+    --semantic-color-border-primary: var(--core-color-palette-neutral-600);
+    --semantic-color-foreground-accent: var(--core-color-palette-red-400);
+    --semantic-color-foreground-danger: var(--core-color-palette-red-400);
+    --semantic-color-foreground-disabled: var(--core-color-palette-neutral-600);
+    --semantic-color-foreground-highlight: var(--core-color-palette-blue-400);
+    --semantic-color-foreground-hover: var(--core-color-palette-neutral-300);
+    --semantic-color-foreground-info: var(--core-color-palette-blue-400);
+    --semantic-color-foreground-inverse: var(--core-color-mode-dark);
+    --semantic-color-foreground-link: var(--core-color-palette-red-400);
+    --semantic-color-foreground-link-hover: var(--core-color-palette-red-300);
+    --semantic-color-foreground-link-visited: var(--core-color-palette-red-500);
     --semantic-color-foreground-on-danger-subtle: var(
       --core-color-palette-red-200
-    ); /* via $extensions.design.paths.dark */
-
+    );
     --semantic-color-foreground-on-info-subtle: var(
       --core-color-palette-blue-200
-    ); /* via $extensions.design.paths.dark */
-
+    );
     --semantic-color-foreground-on-success-subtle: var(
       --core-color-palette-green-200
-    ); /* via $extensions.design.paths.dark */
-
+    );
     --semantic-color-foreground-on-warning-subtle: var(
       --core-color-palette-orange-200
-    ); /* via $extensions.design.paths.dark */
-
-    --semantic-color-foreground-primary: var(
-      --core-color-mode-light
-    ); /* via $extensions.design.paths.dark */
-
+    );
+    --semantic-color-foreground-primary: var(--core-color-mode-light);
     --semantic-color-foreground-secondary: var(
       --core-color-palette-neutral-300
-    ); /* via $extensions.design.paths.dark */
-
-    --semantic-color-foreground-success: var(
-      --core-color-palette-green-400
-    ); /* via $extensions.design.paths.dark */
-
-    --semantic-color-foreground-warning: var(
-      --core-color-palette-orange-400
-    ); /* via $extensions.design.paths.dark */
+    );
+    --semantic-color-foreground-success: var(--core-color-palette-green-400);
+    --semantic-color-foreground-warning: var(--core-color-palette-orange-400);
   }
 
   .light {
-    --semantic-color-background-active: var(
-      --core-color-palette-neutral-300
-    ); /* via $extensions.design.paths.light */
-
+    --semantic-color-background-active: var(--core-color-palette-neutral-300);
     --semantic-color-background-danger-subtle: var(
       --core-color-palette-red-100
-    ); /* via $extensions.design.paths.light */
-
-    --semantic-color-background-disabled: var(
-      --core-color-palette-neutral-200
-    ); /* via $extensions.design.paths.light */
-
-    --semantic-color-background-highlight: var(
-      --core-color-palette-blue-200
-    ); /* via $extensions.design.paths.light */
-
-    --semantic-color-background-hover: var(
-      --core-color-palette-neutral-200
-    ); /* via $extensions.design.paths.light */
-
-    --semantic-color-background-info-subtle: var(
-      --core-color-palette-blue-100
-    ); /* via $extensions.design.paths.light */
-
-    --semantic-color-background-inverse: var(
-      --core-color-mode-light
-    ); /* via $extensions.design.paths.light */
-
+    );
+    --semantic-color-background-disabled: var(--core-color-palette-neutral-200);
+    --semantic-color-background-highlight: var(--core-color-palette-blue-200);
+    --semantic-color-background-hover: var(--core-color-palette-neutral-200);
+    --semantic-color-background-info-subtle: var(--core-color-palette-blue-100);
+    --semantic-color-background-inverse: var(--core-color-mode-light);
     --semantic-color-background-placeholder: var(
       --core-color-palette-neutral-100
-    ); /* via $extensions.design.paths.light */
-
-    --semantic-color-background-primary: var(
-      --core-color-mode-light
-    ); /* via $extensions.design.paths.light */
-
+    );
+    --semantic-color-background-primary: var(--core-color-mode-light);
     --semantic-color-background-read-only: var(
       --core-color-palette-neutral-200
-    ); /* via $extensions.design.paths.light */
-
+    );
     --semantic-color-background-secondary: var(
       --core-color-palette-neutral-100
-    ); /* via $extensions.design.paths.light */
-
+    );
     --semantic-color-background-success-subtle: var(
       --core-color-palette-green-100
-    ); /* via $extensions.design.paths.light */
-
-    --semantic-color-background-tertiary: var(
-      --core-color-palette-neutral-200
-    ); /* via $extensions.design.paths.light */
-
+    );
+    --semantic-color-background-tertiary: var(--core-color-palette-neutral-200);
     --semantic-color-background-warning-strong: var(
       --core-color-palette-orange-400
-    ); /* via $extensions.design.paths.light */
-
+    );
     --semantic-color-background-warning-subtle: var(
       --core-color-palette-orange-100
-    ); /* via $extensions.design.paths.light */
-
-    --semantic-color-border-bold: var(
-      --core-color-palette-neutral-600
-    ); /* via $extensions.design.paths.light */
-
-    --semantic-color-border-disabled: var(
-      --core-color-palette-neutral-200
-    ); /* via $extensions.design.paths.light */
-
-    --semantic-color-border-light: var(
-      --core-color-palette-neutral-200
-    ); /* via $extensions.design.paths.light */
-
-    --semantic-color-border-primary: var(
-      --core-color-palette-neutral-300
-    ); /* via $extensions.design.paths.light */
-
-    --semantic-color-foreground-accent: var(
-      --core-color-palette-red-500
-    ); /* via $extensions.design.paths.light */
-
-    --semantic-color-foreground-danger: var(
-      --core-color-palette-red-500
-    ); /* via $extensions.design.paths.light */
-
-    --semantic-color-foreground-disabled: var(
-      --core-color-palette-neutral-300
-    ); /* via $extensions.design.paths.light */
-
-    --semantic-color-foreground-highlight: var(
-      --core-color-palette-blue-700
-    ); /* via $extensions.design.paths.light */
-
-    --semantic-color-foreground-hover: var(
-      --core-color-palette-neutral-700
-    ); /* via $extensions.design.paths.light */
-
-    --semantic-color-foreground-info: var(
-      --core-color-palette-blue-500
-    ); /* via $extensions.design.paths.light */
-
-    --semantic-color-foreground-inverse: var(
-      --core-color-mode-light
-    ); /* via $extensions.design.paths.light */
-
-    --semantic-color-foreground-link: var(
-      --core-color-palette-red-500
-    ); /* via $extensions.design.paths.light */
-
-    --semantic-color-foreground-link-hover: var(
-      --core-color-palette-red-600
-    ); /* via $extensions.design.paths.light */
-
-    --semantic-color-foreground-link-visited: var(
-      --core-color-palette-red-400
-    ); /* via $extensions.design.paths.light */
-
+    );
+    --semantic-color-border-bold: var(--core-color-palette-neutral-600);
+    --semantic-color-border-disabled: var(--core-color-palette-neutral-200);
+    --semantic-color-border-light: var(--core-color-palette-neutral-200);
+    --semantic-color-border-primary: var(--core-color-palette-neutral-300);
+    --semantic-color-foreground-accent: var(--core-color-palette-red-500);
+    --semantic-color-foreground-danger: var(--core-color-palette-red-500);
+    --semantic-color-foreground-disabled: var(--core-color-palette-neutral-300);
+    --semantic-color-foreground-highlight: var(--core-color-palette-blue-700);
+    --semantic-color-foreground-hover: var(--core-color-palette-neutral-700);
+    --semantic-color-foreground-info: var(--core-color-palette-blue-500);
+    --semantic-color-foreground-inverse: var(--core-color-mode-light);
+    --semantic-color-foreground-link: var(--core-color-palette-red-500);
+    --semantic-color-foreground-link-hover: var(--core-color-palette-red-600);
+    --semantic-color-foreground-link-visited: var(--core-color-palette-red-400);
     --semantic-color-foreground-on-danger-subtle: var(
       --core-color-palette-red-700
-    ); /* via $extensions.design.paths.light */
-
+    );
     --semantic-color-foreground-on-info-subtle: var(
       --core-color-palette-blue-700
-    ); /* via $extensions.design.paths.light */
-
+    );
     --semantic-color-foreground-on-success-subtle: var(
       --core-color-palette-green-700
-    ); /* via $extensions.design.paths.light */
-
+    );
     --semantic-color-foreground-on-warning-subtle: var(
       --core-color-palette-orange-700
-    ); /* via $extensions.design.paths.light */
-
-    --semantic-color-foreground-primary: var(
-      --core-color-mode-dark
-    ); /* via $extensions.design.paths.light */
-
+    );
+    --semantic-color-foreground-primary: var(--core-color-mode-dark);
     --semantic-color-foreground-secondary: var(
       --core-color-palette-neutral-600
-    ); /* via $extensions.design.paths.light */
-
-    --semantic-color-foreground-success: var(
-      --core-color-palette-green-500
-    ); /* via $extensions.design.paths.light */
-
-    --semantic-color-foreground-warning: var(
-      --core-color-palette-orange-500
-    ); /* via $extensions.design.paths.light */
+    );
+    --semantic-color-foreground-success: var(--core-color-palette-green-500);
+    --semantic-color-foreground-warning: var(--core-color-palette-orange-500);
   }
 }
 
 .light {
-  --semantic-color-background-active: var(
-    --core-color-palette-neutral-300
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-background-danger-subtle: var(
-    --core-color-palette-red-100
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-background-disabled: var(
-    --core-color-palette-neutral-200
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-background-highlight: var(
-    --core-color-palette-blue-200
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-background-hover: var(
-    --core-color-palette-neutral-200
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-background-info-subtle: var(
-    --core-color-palette-blue-100
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-background-inverse: var(
-    --core-color-mode-light
-  ); /* via $extensions.design.paths.light */
-
+  --semantic-color-background-active: var(--core-color-palette-neutral-300);
+  --semantic-color-background-danger-subtle: var(--core-color-palette-red-100);
+  --semantic-color-background-disabled: var(--core-color-palette-neutral-200);
+  --semantic-color-background-highlight: var(--core-color-palette-blue-200);
+  --semantic-color-background-hover: var(--core-color-palette-neutral-200);
+  --semantic-color-background-info-subtle: var(--core-color-palette-blue-100);
+  --semantic-color-background-inverse: var(--core-color-mode-light);
   --semantic-color-background-placeholder: var(
     --core-color-palette-neutral-100
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-background-primary: var(
-    --core-color-mode-light
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-background-read-only: var(
-    --core-color-palette-neutral-200
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-background-secondary: var(
-    --core-color-palette-neutral-100
-  ); /* via $extensions.design.paths.light */
-
+  );
+  --semantic-color-background-primary: var(--core-color-mode-light);
+  --semantic-color-background-read-only: var(--core-color-palette-neutral-200);
+  --semantic-color-background-secondary: var(--core-color-palette-neutral-100);
   --semantic-color-background-success-subtle: var(
     --core-color-palette-green-100
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-background-tertiary: var(
-    --core-color-palette-neutral-200
-  ); /* via $extensions.design.paths.light */
-
+  );
+  --semantic-color-background-tertiary: var(--core-color-palette-neutral-200);
   --semantic-color-background-warning-strong: var(
     --core-color-palette-orange-400
-  ); /* via $extensions.design.paths.light */
-
+  );
   --semantic-color-background-warning-subtle: var(
     --core-color-palette-orange-100
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-border-bold: var(
-    --core-color-palette-neutral-600
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-border-disabled: var(
-    --core-color-palette-neutral-200
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-border-light: var(
-    --core-color-palette-neutral-200
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-border-primary: var(
-    --core-color-palette-neutral-300
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-foreground-accent: var(
-    --core-color-palette-red-500
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-foreground-danger: var(
-    --core-color-palette-red-500
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-foreground-disabled: var(
-    --core-color-palette-neutral-300
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-foreground-highlight: var(
-    --core-color-palette-blue-700
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-foreground-hover: var(
-    --core-color-palette-neutral-700
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-foreground-info: var(
-    --core-color-palette-blue-500
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-foreground-inverse: var(
-    --core-color-mode-light
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-foreground-link: var(
-    --core-color-palette-red-500
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-foreground-link-hover: var(
-    --core-color-palette-red-600
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-foreground-link-visited: var(
-    --core-color-palette-red-400
-  ); /* via $extensions.design.paths.light */
-
+  );
+  --semantic-color-border-bold: var(--core-color-palette-neutral-600);
+  --semantic-color-border-disabled: var(--core-color-palette-neutral-200);
+  --semantic-color-border-light: var(--core-color-palette-neutral-200);
+  --semantic-color-border-primary: var(--core-color-palette-neutral-300);
+  --semantic-color-foreground-accent: var(--core-color-palette-red-500);
+  --semantic-color-foreground-danger: var(--core-color-palette-red-500);
+  --semantic-color-foreground-disabled: var(--core-color-palette-neutral-300);
+  --semantic-color-foreground-highlight: var(--core-color-palette-blue-700);
+  --semantic-color-foreground-hover: var(--core-color-palette-neutral-700);
+  --semantic-color-foreground-info: var(--core-color-palette-blue-500);
+  --semantic-color-foreground-inverse: var(--core-color-mode-light);
+  --semantic-color-foreground-link: var(--core-color-palette-red-500);
+  --semantic-color-foreground-link-hover: var(--core-color-palette-red-600);
+  --semantic-color-foreground-link-visited: var(--core-color-palette-red-400);
   --semantic-color-foreground-on-danger-subtle: var(
     --core-color-palette-red-700
-  ); /* via $extensions.design.paths.light */
-
+  );
   --semantic-color-foreground-on-info-subtle: var(
     --core-color-palette-blue-700
-  ); /* via $extensions.design.paths.light */
-
+  );
   --semantic-color-foreground-on-success-subtle: var(
     --core-color-palette-green-700
-  ); /* via $extensions.design.paths.light */
-
+  );
   --semantic-color-foreground-on-warning-subtle: var(
     --core-color-palette-orange-700
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-foreground-primary: var(
-    --core-color-mode-dark
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-foreground-secondary: var(
-    --core-color-palette-neutral-600
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-foreground-success: var(
-    --core-color-palette-green-500
-  ); /* via $extensions.design.paths.light */
-
-  --semantic-color-foreground-warning: var(
-    --core-color-palette-orange-500
-  ); /* via $extensions.design.paths.light */
+  );
+  --semantic-color-foreground-primary: var(--core-color-mode-dark);
+  --semantic-color-foreground-secondary: var(--core-color-palette-neutral-600);
+  --semantic-color-foreground-success: var(--core-color-palette-green-500);
+  --semantic-color-foreground-warning: var(--core-color-palette-orange-500);
 }
 
 .dark {
-  --semantic-color-background-active: var(
-    --core-color-palette-neutral-600
-  ); /* via $extensions.design.paths.dark */
-
-  --semantic-color-background-danger-subtle: var(
-    --core-color-palette-red-800
-  ); /* via $extensions.design.paths.dark */
-
-  --semantic-color-background-disabled: var(
-    --core-color-palette-neutral-700
-  ); /* via $extensions.design.paths.dark */
-
-  --semantic-color-background-highlight: var(
-    --core-color-palette-blue-800
-  ); /* via $extensions.design.paths.dark */
-
-  --semantic-color-background-hover: var(
-    --core-color-palette-neutral-700
-  ); /* via $extensions.design.paths.dark */
-
-  --semantic-color-background-info-subtle: var(
-    --core-color-palette-blue-800
-  ); /* via $extensions.design.paths.dark */
-
-  --semantic-color-background-inverse: var(
-    --core-color-mode-light
-  ); /* via $extensions.design.paths.dark */
-
+  --semantic-color-background-active: var(--core-color-palette-neutral-600);
+  --semantic-color-background-danger-subtle: var(--core-color-palette-red-800);
+  --semantic-color-background-disabled: var(--core-color-palette-neutral-700);
+  --semantic-color-background-highlight: var(--core-color-palette-blue-800);
+  --semantic-color-background-hover: var(--core-color-palette-neutral-700);
+  --semantic-color-background-info-subtle: var(--core-color-palette-blue-800);
+  --semantic-color-background-inverse: var(--core-color-mode-light);
   --semantic-color-background-placeholder: var(
     --core-color-palette-neutral-800
-  ); /* via $extensions.design.paths.dark */
-
-  --semantic-color-background-primary: var(
-    --core-color-mode-dark
-  ); /* via $extensions.design.paths.dark */
-
-  --semantic-color-background-read-only: var(
-    --core-color-palette-neutral-700
-  ); /* via $extensions.design.paths.dark */
-
-  --semantic-color-background-secondary: var(
-    --core-color-palette-neutral-800
-  ); /* via $extensions.design.paths.dark */
-
+  );
+  --semantic-color-background-primary: var(--core-color-mode-dark);
+  --semantic-color-background-read-only: var(--core-color-palette-neutral-700);
+  --semantic-color-background-secondary: var(--core-color-palette-neutral-800);
   --semantic-color-background-success-subtle: var(
     --core-color-palette-green-800
-  ); /* via $extensions.design.paths.dark */
-
-  --semantic-color-background-tertiary: var(
-    --core-color-palette-neutral-700
-  ); /* via $extensions.design.paths.dark */
-
+  );
+  --semantic-color-background-tertiary: var(--core-color-palette-neutral-700);
   --semantic-color-background-warning-strong: var(
     --core-color-palette-orange-600
-  ); /* via $extensions.design.paths.dark */
-
+  );
   --semantic-color-background-warning-subtle: var(
     --core-color-palette-orange-800
-  ); /* via $extensions.design.paths.dark */
-
-  --semantic-color-border-bold: var(
-    --core-color-palette-neutral-300
-  ); /* via $extensions.design.paths.dark */
-
-  --semantic-color-border-disabled: var(
-    --core-color-palette-neutral-700
-  ); /* via $extensions.design.paths.dark */
-
-  --semantic-color-border-light: var(
-    --core-color-palette-neutral-700
-  ); /* via $extensions.design.paths.dark */
-
-  --semantic-color-border-primary: var(
-    --core-color-palette-neutral-600
-  ); /* via $extensions.design.paths.dark */
-
-  --semantic-color-foreground-accent: var(
-    --core-color-palette-red-400
-  ); /* via $extensions.design.paths.dark */
-
-  --semantic-color-foreground-danger: var(
-    --core-color-palette-red-400
-  ); /* via $extensions.design.paths.dark */
-
-  --semantic-color-foreground-disabled: var(
-    --core-color-palette-neutral-600
-  ); /* via $extensions.design.paths.dark */
-
-  --semantic-color-foreground-highlight: var(
-    --core-color-palette-blue-400
-  ); /* via $extensions.design.paths.dark */
-
-  --semantic-color-foreground-hover: var(
-    --core-color-palette-neutral-300
-  ); /* via $extensions.design.paths.dark */
-
-  --semantic-color-foreground-info: var(
-    --core-color-palette-blue-400
-  ); /* via $extensions.design.paths.dark */
-
-  --semantic-color-foreground-inverse: var(
-    --core-color-mode-dark
-  ); /* via $extensions.design.paths.dark */
-
-  --semantic-color-foreground-link: var(
-    --core-color-palette-red-400
-  ); /* via $extensions.design.paths.dark */
-
-  --semantic-color-foreground-link-hover: var(
-    --core-color-palette-red-300
-  ); /* via $extensions.design.paths.dark */
-
-  --semantic-color-foreground-link-visited: var(
-    --core-color-palette-red-500
-  ); /* via $extensions.design.paths.dark */
-
+  );
+  --semantic-color-border-bold: var(--core-color-palette-neutral-300);
+  --semantic-color-border-disabled: var(--core-color-palette-neutral-700);
+  --semantic-color-border-light: var(--core-color-palette-neutral-700);
+  --semantic-color-border-primary: var(--core-color-palette-neutral-600);
+  --semantic-color-foreground-accent: var(--core-color-palette-red-400);
+  --semantic-color-foreground-danger: var(--core-color-palette-red-400);
+  --semantic-color-foreground-disabled: var(--core-color-palette-neutral-600);
+  --semantic-color-foreground-highlight: var(--core-color-palette-blue-400);
+  --semantic-color-foreground-hover: var(--core-color-palette-neutral-300);
+  --semantic-color-foreground-info: var(--core-color-palette-blue-400);
+  --semantic-color-foreground-inverse: var(--core-color-mode-dark);
+  --semantic-color-foreground-link: var(--core-color-palette-red-400);
+  --semantic-color-foreground-link-hover: var(--core-color-palette-red-300);
+  --semantic-color-foreground-link-visited: var(--core-color-palette-red-500);
   --semantic-color-foreground-on-danger-subtle: var(
     --core-color-palette-red-200
-  ); /* via $extensions.design.paths.dark */
-
+  );
   --semantic-color-foreground-on-info-subtle: var(
     --core-color-palette-blue-200
-  ); /* via $extensions.design.paths.dark */
-
+  );
   --semantic-color-foreground-on-success-subtle: var(
     --core-color-palette-green-200
-  ); /* via $extensions.design.paths.dark */
-
+  );
   --semantic-color-foreground-on-warning-subtle: var(
     --core-color-palette-orange-200
-  ); /* via $extensions.design.paths.dark */
-
-  --semantic-color-foreground-primary: var(
-    --core-color-mode-light
-  ); /* via $extensions.design.paths.dark */
-
-  --semantic-color-foreground-secondary: var(
-    --core-color-palette-neutral-300
-  ); /* via $extensions.design.paths.dark */
-
-  --semantic-color-foreground-success: var(
-    --core-color-palette-green-400
-  ); /* via $extensions.design.paths.dark */
-
-  --semantic-color-foreground-warning: var(
-    --core-color-palette-orange-400
-  ); /* via $extensions.design.paths.dark */
+  );
+  --semantic-color-foreground-primary: var(--core-color-mode-light);
+  --semantic-color-foreground-secondary: var(--core-color-palette-neutral-300);
+  --semantic-color-foreground-success: var(--core-color-palette-green-400);
+  --semantic-color-foreground-warning: var(--core-color-palette-orange-400);
 }

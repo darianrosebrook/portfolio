@@ -301,9 +301,22 @@ function formatLine(name, valueObj, includeProvenance = false) {
   return `  ${name}: ${value};${comment}`;
 }
 
+// sort tokens by path order ranking alphabetically per path level
+function sortByPathAlphabetically(a, b) {
+  const pathA = a.split('.');
+  const pathB = b.split('.');
+
+  for (let i = 0; i < pathA.length; i++) {
+    if (pathA[i] !== pathB[i]) {
+      return pathA[i].localeCompare(pathB[i]);
+    }
+  }
+  return 0;
+}
+
 function formatBlock(selector, map, includeProvenance = false) {
   const lines = Object.entries(map)
-    .sort(([a], [b]) => a.localeCompare(b))
+    .sort(([a], [b]) => sortByPathAlphabetically(a, b))
     .map(([name, valueObj]) => formatLine(name, valueObj, includeProvenance))
     .join('\n');
   return `${selector} {\n${lines}\n}`;
@@ -340,13 +353,13 @@ function run() {
   validateReferences();
 
   const banner = `/* AUTO-GENERATED: Do not edit directly.\n * Source: components/designTokens.json\n */`;
-  const rootBlock = formatBlock(':root', maps.root, true);
-  const lightBlock = formatBlock('.light', maps.lightColors, true);
-  const darkBlock = formatBlock('.dark', maps.darkColors, true);
+  const rootBlock = formatBlock(':root', maps.root);
+  const lightBlock = formatBlock('.light', maps.lightColors);
+  const darkBlock = formatBlock('.dark', maps.darkColors);
 
   // Reorder: prefers-color-scheme before theme classes for better precedence
   const prefersBlock = maps.hasDarkOverride
-    ? `@media (prefers-color-scheme: dark) {\n${formatBlock('  :root', maps.darkColors, true)}\n${formatBlock('  .light', maps.lightColors, true)}\n}`
+    ? `@media (prefers-color-scheme: dark) {\n${formatBlock('  :root', maps.darkColors)}\n${formatBlock('  .light', maps.lightColors)}\n}`
     : '';
 
   const content = [
