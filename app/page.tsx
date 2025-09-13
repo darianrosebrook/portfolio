@@ -31,6 +31,7 @@ import Button from '@/ui/components/Button';
 import LogoMaruqee from '@/ui/modules/LogoMarquee';
 import Image from 'next/image';
 import BlueprintsWrapper from './BlueprintsWrapper';
+import { AnimatedLink } from '@/ui/components/links/AnimatedLink';
 
 export default function Home() {
   const ldJson = {
@@ -179,12 +180,13 @@ export default function Home() {
             and explore new opportunities in UX and Product Design.
           </p>
           <p>
-            <a
+            <AnimatedLink
               href="https://drive.google.com/file/d/1h2QH7K7153QGbW59CHWWt07Dzhgzst3a/view?usp=sharingue"
               target="_blank"
+              rel="noopener noreferrer"
             >
               My resume
-            </a>
+            </AnimatedLink>
           </p>
         </div>
         <div className="content">

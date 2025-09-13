@@ -5,11 +5,13 @@ import { useRef } from 'react';
 import { gsap } from 'gsap';
 import { SplitText } from 'gsap/SplitText';
 import { useGSAP } from '@gsap/react';
+import { useFontsLoaded } from '@/hooks/useFontsLoaded';
 import styles from './AnimatedLink.module.scss';
 
 gsap.registerPlugin(useGSAP, SplitText);
 
-export interface AnimatedLinkProps {
+export interface AnimatedLinkProps
+  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   href: string;
   children: string; // plain text; we split into characters
   className?: string;
@@ -25,17 +27,19 @@ export function AnimatedLink({
   onClick,
   staggerMs = 28,
   durationMs = 400,
+  ...props
 }: AnimatedLinkProps) {
   const rootRef = useRef<HTMLAnchorElement | null>(null);
   const textRef = useRef<HTMLSpanElement | null>(null);
   const cloneRef = useRef<HTMLSpanElement | null>(null);
+  const fontsLoaded = useFontsLoaded();
 
   useGSAP(
     () => {
       const el = rootRef.current;
       const textEl = textRef.current;
       const cloneEl = cloneRef.current;
-      if (!el || !textEl || !cloneEl) return;
+      if (!el || !textEl || !cloneEl || !fontsLoaded) return;
 
       // Split text into characters
       const splitText = new SplitText(textEl, {
@@ -95,7 +99,7 @@ export function AnimatedLink({
         splitClone.revert();
       };
     },
-    { scope: rootRef, dependencies: [children] }
+    { scope: rootRef, dependencies: [children, fontsLoaded] }
   );
 
   return (
@@ -104,6 +108,7 @@ export function AnimatedLink({
       href={href}
       className={`${styles.root} ${className || ''}`}
       onClick={onClick}
+      {...props}
     >
       <span className={styles.maskLine}>
         <span ref={textRef} className={styles.text}>
