@@ -10,7 +10,15 @@ export interface ListProps extends React.HTMLAttributes<HTMLElement> {
   /** Size variant */
   size?: 'sm' | 'md' | 'lg';
   /** Marker style for ordered/unordered lists */
-  marker?: 'default' | 'none' | 'disc' | 'circle' | 'square' | 'decimal' | 'alpha' | 'roman';
+  marker?:
+    | 'default'
+    | 'none'
+    | 'disc'
+    | 'circle'
+    | 'square'
+    | 'decimal'
+    | 'alpha'
+    | 'roman';
   /** Spacing between items */
   spacing?: 'none' | 'sm' | 'md' | 'lg';
 }

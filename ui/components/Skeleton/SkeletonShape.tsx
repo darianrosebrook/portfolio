@@ -21,7 +21,7 @@ export const SkeletonShape: React.FC<SkeletonShapeProps> = ({
 }) => {
   const style: React.CSSProperties = {
     ['--skeleton-wipe-delay' as any]: `${delayMs}ms`,
-    ['--_radius' as any]: radius
+    ['--skeleton-radius-override' as any]: radius
       ? `var(--skeleton-radius-${radius})`
       : undefined,
     width: typeof width === 'number' ? `${width}px` : width,

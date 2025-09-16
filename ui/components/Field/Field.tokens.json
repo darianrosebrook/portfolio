@@ -1,0 +1,26 @@
+{
+  "prefix": "field",
+  "tokens": {
+    "gap": {
+      "y": "{semantic.form.density.regular.gapY}",
+      "meta": "{core.spacing.size.03}"
+    },
+    "label": {
+      "fontSize": "{semantic.form.density.regular.labelFontSize}",
+      "color": "{semantic.color.foreground.secondary}"
+    },
+    "radius": "{semantic.shape.control.radius.default}",
+    "pad": {
+      "x": "{semantic.form.density.regular.padX}",
+      "y": "{semantic.form.density.regular.padY}"
+    },
+    "color": {
+      "bg": "{semantic.color.background.elevated}",
+      "fg": "{semantic.color.foreground.primary}",
+      "border": "{semantic.color.border.subtle}",
+      "focus-border": "{semantic.color.border.focus}",
+      "invalid-border": "{semantic.color.border.danger}",
+      "invalid-text": "{semantic.color.foreground.danger}"
+    }
+  }
+}

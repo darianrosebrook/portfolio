@@ -1,0 +1,24 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Field/Field.tokens.json
+ */
+@mixin vars {
+  /* === Gap Tokens === */
+  --field-gap-y: var(--semantic-form-density-regular-gapY);
+  --field-gap-meta: var(--core-spacing-size-03);
+
+  /* === Label Tokens === */
+  --field-label-fontSize: var(--semantic-form-density-regular-labelFontSize);
+  --field-label-color: var(--semantic-color-foreground-secondary);
+
+  /* === Pad Tokens === */
+  --field-pad-x: var(--semantic-form-density-regular-padX);
+  --field-pad-y: var(--semantic-form-density-regular-padY);
+
+  /* === Color Tokens === */
+  --field-color-bg: var(--semantic-color-background-elevated);
+  --field-color-fg: var(--semantic-color-foreground-primary);
+  --field-color-border: var(--semantic-color-border-subtle);
+  --field-color-focus-border: var(--semantic-color-border-focus);
+  --field-color-invalid-border: var(--semantic-color-border-danger);
+  --field-color-invalid-text: var(--semantic-color-foreground-danger);
+}

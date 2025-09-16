@@ -1,24 +1,28 @@
 {
   "prefix": "skeleton",
   "tokens": {
-    "surface": {
-      "bg": "{semantic.color.background.surface}"
+    "color": {
+      "base": "{semantic.color.background.secondary}",
+      "highlight": "{semantic.color.background.highlight}",
+      "highlight-2": "{semantic.color.status.info}",
+      "static": "{semantic.color.background.secondary}",
+      "contrast-base": "{semantic.color.border.primary}"
     },
-    "shimmer": {
-      "c1": "{semantic.color.background.elevated}",
-      "c2": "{semantic.color.accent.info}",
-      "c3": "{semantic.color.accent.warning}",
-      "c4": "{semantic.color.accent.danger}"
+    "radius": {
+      "sm": "{core.shape.radius.02}",
+      "md": "{core.shape.radius.03}",
+      "lg": "{core.shape.radius.04}"
     },
-    "spacing": {
-      "gap": "{core.spacing.size.03}"
+    "gap": {
+      "sm": "{core.spacing.size.03}",
+      "md": "{core.spacing.size.05}",
+      "lg": "{core.spacing.size.07}"
     },
-    "size": {
-      "lineHeight": "{core.spacing.size.03}"
-    },
-    "radius": "{core.shape.radius.medium}",
-    "motion": {
-      "duration": "{semantic.motion.duration.slower}"
+    "anim": {
+      "duration": "{core.motion.duration.long}",
+      "duration-alt": "{core.motion.duration.long}",
+      "duration-pulse": "{core.motion.duration.medium}",
+      "easing": "{core.motion.easing.standard}"
     }
   }
 }

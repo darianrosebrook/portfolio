@@ -7,25 +7,17 @@
   --select-color-background-hover: var(--semantic-color-background-hover);
   --select-color-background-isOpen: var(--semantic-color-background-active);
   --select-color-background-focus: var(--semantic-color-background-primary);
-  --select-color-background-focusVisible: var(
-    --semantic-color-background-primary
-  );
+  --select-color-background-focusVisible: var(--semantic-color-background-primary);
   --select-color-background-disabled: var(--semantic-color-background-disabled);
   --select-color-background-readOnly: var(--semantic-color-background-readOnly);
   --select-color-background-checked: var(--semantic-color-background-primary);
-  --select-color-background-error: var(
-    --semantic-color-background-danger-subtle
-  );
-  --select-color-background-success: var(
-    --semantic-color-background-success-subtle
-  );
+  --select-color-background-error: var(--semantic-color-background-danger-subtle);
+  --select-color-background-success: var(--semantic-color-background-success-subtle);
   --select-color-foreground-default: var(--semantic-color-foreground-primary);
   --select-color-foreground-hover: var(--semantic-color-foreground-hover);
   --select-color-foreground-isOpen: var(--semantic-color-foreground-primary);
   --select-color-foreground-focus: var(--semantic-color-foreground-primary);
-  --select-color-foreground-focusVisible: var(
-    --semantic-color-foreground-primary
-  );
+  --select-color-foreground-focusVisible: var(--semantic-color-foreground-primary);
   --select-color-foreground-disabled: var(--semantic-color-foreground-disabled);
   --select-color-foreground-readOnly: var(--semantic-color-foreground-primary);
   --select-color-foreground-checked: var(--semantic-color-foreground-primary);
@@ -49,30 +41,14 @@
   --select-color-icon-disabled: var(--semantic-color-foreground-disabled);
   --select-color-icon-readOnly: var(--semantic-color-foreground-secondary);
   --select-color-icon-checked: var(--semantic-color-foreground-accent);
-  --select-color-placeholder-default: var(
-    --semantic-color-foreground-placeholder
-  );
-  --select-color-placeholder-hover: var(
-    --semantic-color-foreground-placeholder
-  );
-  --select-color-placeholder-isOpen: var(
-    --semantic-color-foreground-placeholder
-  );
-  --select-color-placeholder-focus: var(
-    --semantic-color-foreground-placeholder
-  );
-  --select-color-placeholder-focusVisible: var(
-    --semantic-color-foreground-placeholder
-  );
-  --select-color-placeholder-disabled: var(
-    --semantic-color-foreground-disabled
-  );
-  --select-color-placeholder-readOnly: var(
-    --semantic-color-foreground-placeholder
-  );
-  --select-color-placeholder-checked: var(
-    --semantic-color-foreground-placeholder
-  );
+  --select-color-placeholder-default: var(--semantic-color-foreground-placeholder);
+  --select-color-placeholder-hover: var(--semantic-color-foreground-placeholder);
+  --select-color-placeholder-isOpen: var(--semantic-color-foreground-placeholder);
+  --select-color-placeholder-focus: var(--semantic-color-foreground-placeholder);
+  --select-color-placeholder-focusVisible: var(--semantic-color-foreground-placeholder);
+  --select-color-placeholder-disabled: var(--semantic-color-foreground-disabled);
+  --select-color-placeholder-readOnly: var(--semantic-color-foreground-placeholder);
+  --select-color-placeholder-checked: var(--semantic-color-foreground-placeholder);
 
   /* === Size Tokens === */
   --select-size-padding-default: var(--core-spacing-size-03);

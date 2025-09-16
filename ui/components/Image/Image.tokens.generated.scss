@@ -3,12 +3,16 @@
   /* === Color === */
   --image-color-background-default: var(--semantic-color-background-secondary);
   --image-color-foreground-primary: var(--semantic-color-foreground-primary);
-  --image-color-foreground-secondary: var(--semantic-color-foreground-secondary);
+  --image-color-foreground-secondary: var(
+    --semantic-color-foreground-secondary
+  );
   --image-color-border-default: var(--semantic-color-border-light);
   --image-color-border-accent: var(--semantic-color-border-accent);
+
   /* === Size === */
   --image-size-padding-default: var(--core-spacing-size-07);
   --image-size-radius-default: var(--core-shape-radius-medium);
+
   /* === Elevation === */
   --image-elevation-default: var(--semantic-elevation-depth-1);
 }
