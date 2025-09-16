@@ -3,10 +3,6 @@
  */
 @mixin vars {
   /* === Typography Tokens === */
-  --animatedLink-typography-fontWeight-regular: var(
-    --semantic-typography-fontWeight-regular
-  );
-  --animatedLink-typography-lineHeight-collapse: var(
-    --core-typography-lineHeight-collapse
-  );
+  --animatedLink-typography-fontWeight-regular: var(--semantic-typography-fontWeight-regular);
+  --animatedLink-typography-lineHeight-collapse: var(--core-typography-lineHeight-collapse);
 }

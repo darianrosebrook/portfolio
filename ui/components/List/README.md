@@ -20,13 +20,13 @@ A semantic list component that provides consistent styling for ordered, unordere
 
 ### ListProps
 
-| Prop      | Type                                                                      | Default     | Description                          |
-| --------- | ------------------------------------------------------------------------- | ----------- | ------------------------------------ |
-| `as`      | `'ul' \| 'ol' \| 'dl'`                                                    | `'ul'`      | List type                            |
-| `variant` | `'default' \| 'unstyled' \| 'inline' \| 'divided' \| 'spaced'`           | `'default'` | Visual variant                       |
-| `size`    | `'sm' \| 'md' \| 'lg'`                                                    | `'md'`      | Size variant                         |
+| Prop      | Type                                                                                       | Default     | Description                              |
+| --------- | ------------------------------------------------------------------------------------------ | ----------- | ---------------------------------------- |
+| `as`      | `'ul' \| 'ol' \| 'dl'`                                                                     | `'ul'`      | List type                                |
+| `variant` | `'default' \| 'unstyled' \| 'inline' \| 'divided' \| 'spaced'`                             | `'default'` | Visual variant                           |
+| `size`    | `'sm' \| 'md' \| 'lg'`                                                                     | `'md'`      | Size variant                             |
 | `marker`  | `'default' \| 'none' \| 'disc' \| 'circle' \| 'square' \| 'decimal' \| 'alpha' \| 'roman'` | `'default'` | Marker style for ordered/unordered lists |
-| `spacing` | `'none' \| 'sm' \| 'md' \| 'lg'`                                          | `'md'`      | Spacing between items                |
+| `spacing` | `'none' \| 'sm' \| 'md' \| 'lg'`                                                           | `'md'`      | Spacing between items                    |
 
 Extends `React.HTMLAttributes<HTMLElement>`.
 

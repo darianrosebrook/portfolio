@@ -20,40 +20,47 @@ A flexible typography component that provides consistent text styling and hierar
 
 ### TextProps
 
-| Prop        | Type                                                                                     | Default    | Description                      |
-| ----------- | ---------------------------------------------------------------------------------------- | ---------- | -------------------------------- |
-| `as`        | `'p' \| 'span' \| 'div' \| 'h1' \| 'h2' \| 'h3' \| 'h4' \| 'h5' \| 'h6'`                | `'p'`      | Element type to render           |
-| `variant`   | `'display' \| 'headline' \| 'title' \| 'body' \| 'caption' \| 'overline' \| 'code'`     | `'body'`   | Typography variant               |
-| `size`      | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl' \| '3xl'`                                 | `'md'`     | Size within variant              |
-| `weight`    | `'light' \| 'normal' \| 'medium' \| 'semibold' \| 'bold'`                               | `'normal'` | Font weight                      |
-| `align`     | `'left' \| 'center' \| 'right' \| 'justify'`                                            | `'left'`   | Text alignment                   |
-| `color`     | `'default' \| 'muted' \| 'subtle' \| 'accent' \| 'success' \| 'warning' \| 'error'`     | `'default'` | Text color variant              |
-| `truncate`  | `boolean`                                                                                | `false`    | Whether text should be truncated |
-| `transform` | `'none' \| 'uppercase' \| 'lowercase' \| 'capitalize'`                                   | `'none'`   | Transform text case              |
+| Prop        | Type                                                                                | Default     | Description                      |
+| ----------- | ----------------------------------------------------------------------------------- | ----------- | -------------------------------- |
+| `as`        | `'p' \| 'span' \| 'div' \| 'h1' \| 'h2' \| 'h3' \| 'h4' \| 'h5' \| 'h6'`            | `'p'`       | Element type to render           |
+| `variant`   | `'display' \| 'headline' \| 'title' \| 'body' \| 'caption' \| 'overline' \| 'code'` | `'body'`    | Typography variant               |
+| `size`      | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl' \| '3xl'`                            | `'md'`      | Size within variant              |
+| `weight`    | `'light' \| 'normal' \| 'medium' \| 'semibold' \| 'bold'`                           | `'normal'`  | Font weight                      |
+| `align`     | `'left' \| 'center' \| 'right' \| 'justify'`                                        | `'left'`    | Text alignment                   |
+| `color`     | `'default' \| 'muted' \| 'subtle' \| 'accent' \| 'success' \| 'warning' \| 'error'` | `'default'` | Text color variant               |
+| `truncate`  | `boolean`                                                                           | `false`     | Whether text should be truncated |
+| `transform` | `'none' \| 'uppercase' \| 'lowercase' \| 'capitalize'`                              | `'none'`    | Transform text case              |
 
 Extends `React.HTMLAttributes<HTMLElement>`.
 
 ## Typography Variants
 
 ### Display
+
 Large, bold text for major headings and hero content.
 
 ### Headline
+
 Medium-large text for section headings and important content.
 
 ### Title
+
 Smaller headings for subsections and card titles.
 
 ### Body
+
 Standard text for paragraphs and general content.
 
 ### Caption
+
 Small text for captions, labels, and secondary information.
 
 ### Overline
+
 Small, uppercase text for categories and labels.
 
 ### Code
+
 Monospace text for code snippets and technical content.
 
 ## Accessibility

@@ -56,15 +56,15 @@
   list-style: none;
   padding-inline-start: 0;
 
-  > :global(li):not(:last-child) {
+  > & li :not(:last-child) {
     border-block-end: var(--list-divider-width) solid var(--list-divider-color);
-    padding-block-end: var(--list-spacing-md);
     margin-block-end: var(--list-spacing-md);
+    padding-block-end: var(--list-spacing-md);
   }
 }
 
 .spaced {
-  > :global(li):not(:last-child) {
+  > & li :not(:last-child) {
     margin-block-end: var(--list-spacing-lg);
   }
 }
@@ -100,19 +100,19 @@
 }
 
 /* Spacing variants */
-.spacing-none > :global(li):not(:last-child) {
+.spacing-none > & li :not(:last-child) {
   margin-block-end: var(--list-spacing-none);
 }
 
-.spacing-sm > :global(li):not(:last-child) {
+.spacing-sm > & li :not(:last-child) {
   margin-block-end: var(--list-spacing-sm);
 }
 
-.spacing-md > :global(li):not(:last-child) {
+.spacing-md > & li :not(:last-child) {
   margin-block-end: var(--list-spacing-md);
 }
 
-.spacing-lg > :global(li):not(:last-child) {
+.spacing-lg > & li :not(:last-child) {
   margin-block-end: var(--list-spacing-lg);
 }
 
@@ -123,17 +123,21 @@
 
 /* Definition list specific styles */
 .dl.default {
-  > :global(dt) {
+  > & dt {
     font-weight: 600;
     margin-block-end: var(--list-spacing-sm);
   }
 
-  > :global(dd) {
-    margin-inline-start: var(--list-spacing-indent);
+  > & dd {
     margin-block-end: var(--list-spacing-md);
+    margin-inline-start: var(--list-spacing-indent);
   }
 
-  > :global(dd):last-child {
+  > & dd:first-child {
+    margin: 0;
+  }
+
+  > & dd:last-child {
     margin-block-end: 0;
   }
 }
@@ -143,11 +147,7 @@
   grid-template-columns: max-content 1fr;
   gap: var(--list-spacing-sm) var(--list-spacing-md);
 
-  > :global(dt) {
+  > & dt {
     font-weight: 600;
-  }
-
-  > :global(dd) {
-    margin: 0;
   }
 }

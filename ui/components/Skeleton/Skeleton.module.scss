@@ -33,7 +33,7 @@
   display: inline-block;
   overflow: hidden;
   background: var(--skeleton-bg);
-  border-radius: var(--skeleton-radius-cur);
+  border-radius: var(--skeleton-radius-override, var(--skeleton-radius-cur));
 }
 
 .kind-circle {

@@ -6,9 +6,11 @@
   --text-color-foreground-secondary: var(--semantic-color-foreground-secondary);
   --text-color-border-default: var(--semantic-color-border-light);
   --text-color-border-accent: var(--semantic-color-border-accent);
+
   /* === Size === */
   --text-size-padding-default: var(--core-spacing-size-07);
   --text-size-radius-default: var(--core-shape-radius-medium);
+
   /* === Elevation === */
   --text-elevation-default: var(--semantic-elevation-depth-1);
 }

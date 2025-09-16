@@ -3,6 +3,7 @@
  * Consolidates Select and Combobox components
  */
 import { useState, useEffect, useRef, ChangeEvent, useMemo } from 'react';
+import * as React from 'react';
 import { Option, ControlSize } from '@/types/ui';
 import styles from './Select.module.scss';
 
@@ -46,6 +47,23 @@ export interface SelectProps {
    */
   name?: string;
   /**
+   * Native select id; used to associate external <label htmlFor>
+   */
+  id?: string;
+  /**
+   * Required state for native select
+   */
+  required?: boolean;
+  /**
+   * Blur handler (native select)
+   */
+  onBlur?: React.FocusEventHandler<HTMLSelectElement>;
+  /** a11y associations forwarded from Field */
+  'aria-labelledby'?: string;
+  'aria-describedby'?: string;
+  'aria-errormessage'?: string;
+  'aria-invalid'?: boolean;
+  /**
    * Enable search/filtering (combobox mode only)
    */
   searchable?: boolean;
@@ -73,6 +91,13 @@ const Select = ({
   disabled = false,
   className = '',
   name = '',
+  id,
+  required,
+  onBlur,
+  'aria-labelledby': ariaLabelledby,
+  'aria-describedby': ariaDescribedby,
+  'aria-errormessage': ariaErrormessage,
+  'aria-invalid': ariaInvalid,
   searchable = false,
   clearable = false,
   loading = false,
@@ -161,7 +186,7 @@ const Select = ({
     }
   };
 
-  const selectId = `select-${Math.random().toString(36).substr(2, 9)}`;
+  const selectId = id ?? `select-${Math.random().toString(36).substr(2, 9)}`;
   const sizeClass = styles[`select--${size}`] || styles['select--md'];
 
   // Native select mode
@@ -187,15 +212,21 @@ const Select = ({
           id={selectId}
           ref={selectRef}
           onChange={handleNativeSelect}
+          onBlur={onBlur}
           multiple={multiselect}
           disabled={disabled || loading}
           className={`${styles.select} ${sizeClass}`}
           name={name}
+          required={required}
           value={
             multiselect ? selected.map((opt) => opt.id) : selected[0]?.id || ''
           }
           aria-disabled={disabled || loading || undefined}
           aria-busy={loading || undefined}
+          aria-labelledby={ariaLabelledby}
+          aria-describedby={ariaDescribedby}
+          aria-errormessage={ariaErrormessage}
+          aria-invalid={ariaInvalid || undefined}
         >
           {!multiselect && !value && !loading && (
             <option value="" disabled hidden>

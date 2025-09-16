@@ -3,67 +3,214 @@
     "text": {
       "typography": {
         "display": {
-          "xs": { "fontSize": "{font.size.600}", "lineHeight": "{font.lineHeight.600}" },
-          "sm": { "fontSize": "{font.size.700}", "lineHeight": "{font.lineHeight.700}" },
-          "md": { "fontSize": "{font.size.800}", "lineHeight": "{font.lineHeight.800}" },
-          "lg": { "fontSize": "{font.size.900}", "lineHeight": "{font.lineHeight.900}" },
-          "xl": { "fontSize": "{font.size.1000}", "lineHeight": "{font.lineHeight.1000}" },
-          "2xl": { "fontSize": "{font.size.1100}", "lineHeight": "{font.lineHeight.1100}" },
-          "3xl": { "fontSize": "{font.size.1200}", "lineHeight": "{font.lineHeight.1200}" }
+          "xs": {
+            "fontSize": "{font.size.600}",
+            "lineHeight": "{font.lineHeight.600}"
+          },
+          "sm": {
+            "fontSize": "{font.size.700}",
+            "lineHeight": "{font.lineHeight.700}"
+          },
+          "md": {
+            "fontSize": "{font.size.800}",
+            "lineHeight": "{font.lineHeight.800}"
+          },
+          "lg": {
+            "fontSize": "{font.size.900}",
+            "lineHeight": "{font.lineHeight.900}"
+          },
+          "xl": {
+            "fontSize": "{font.size.1000}",
+            "lineHeight": "{font.lineHeight.1000}"
+          },
+          "2xl": {
+            "fontSize": "{font.size.1100}",
+            "lineHeight": "{font.lineHeight.1100}"
+          },
+          "3xl": {
+            "fontSize": "{font.size.1200}",
+            "lineHeight": "{font.lineHeight.1200}"
+          }
         },
         "headline": {
-          "xs": { "fontSize": "{font.size.500}", "lineHeight": "{font.lineHeight.500}" },
-          "sm": { "fontSize": "{font.size.600}", "lineHeight": "{font.lineHeight.600}" },
-          "md": { "fontSize": "{font.size.700}", "lineHeight": "{font.lineHeight.700}" },
-          "lg": { "fontSize": "{font.size.800}", "lineHeight": "{font.lineHeight.800}" },
-          "xl": { "fontSize": "{font.size.900}", "lineHeight": "{font.lineHeight.900}" },
-          "2xl": { "fontSize": "{font.size.1000}", "lineHeight": "{font.lineHeight.1000}" },
-          "3xl": { "fontSize": "{font.size.1100}", "lineHeight": "{font.lineHeight.1100}" }
+          "xs": {
+            "fontSize": "{font.size.500}",
+            "lineHeight": "{font.lineHeight.500}"
+          },
+          "sm": {
+            "fontSize": "{font.size.600}",
+            "lineHeight": "{font.lineHeight.600}"
+          },
+          "md": {
+            "fontSize": "{font.size.700}",
+            "lineHeight": "{font.lineHeight.700}"
+          },
+          "lg": {
+            "fontSize": "{font.size.800}",
+            "lineHeight": "{font.lineHeight.800}"
+          },
+          "xl": {
+            "fontSize": "{font.size.900}",
+            "lineHeight": "{font.lineHeight.900}"
+          },
+          "2xl": {
+            "fontSize": "{font.size.1000}",
+            "lineHeight": "{font.lineHeight.1000}"
+          },
+          "3xl": {
+            "fontSize": "{font.size.1100}",
+            "lineHeight": "{font.lineHeight.1100}"
+          }
         },
         "title": {
-          "xs": { "fontSize": "{font.size.300}", "lineHeight": "{font.lineHeight.300}" },
-          "sm": { "fontSize": "{font.size.400}", "lineHeight": "{font.lineHeight.400}" },
-          "md": { "fontSize": "{font.size.500}", "lineHeight": "{font.lineHeight.500}" },
-          "lg": { "fontSize": "{font.size.600}", "lineHeight": "{font.lineHeight.600}" },
-          "xl": { "fontSize": "{font.size.700}", "lineHeight": "{font.lineHeight.700}" },
-          "2xl": { "fontSize": "{font.size.800}", "lineHeight": "{font.lineHeight.800}" },
-          "3xl": { "fontSize": "{font.size.900}", "lineHeight": "{font.lineHeight.900}" }
+          "xs": {
+            "fontSize": "{font.size.300}",
+            "lineHeight": "{font.lineHeight.300}"
+          },
+          "sm": {
+            "fontSize": "{font.size.400}",
+            "lineHeight": "{font.lineHeight.400}"
+          },
+          "md": {
+            "fontSize": "{font.size.500}",
+            "lineHeight": "{font.lineHeight.500}"
+          },
+          "lg": {
+            "fontSize": "{font.size.600}",
+            "lineHeight": "{font.lineHeight.600}"
+          },
+          "xl": {
+            "fontSize": "{font.size.700}",
+            "lineHeight": "{font.lineHeight.700}"
+          },
+          "2xl": {
+            "fontSize": "{font.size.800}",
+            "lineHeight": "{font.lineHeight.800}"
+          },
+          "3xl": {
+            "fontSize": "{font.size.900}",
+            "lineHeight": "{font.lineHeight.900}"
+          }
         },
         "body": {
-          "xs": { "fontSize": "{font.size.100}", "lineHeight": "{font.lineHeight.100}" },
-          "sm": { "fontSize": "{font.size.200}", "lineHeight": "{font.lineHeight.200}" },
-          "md": { "fontSize": "{font.size.300}", "lineHeight": "{font.lineHeight.300}" },
-          "lg": { "fontSize": "{font.size.400}", "lineHeight": "{font.lineHeight.400}" },
-          "xl": { "fontSize": "{font.size.500}", "lineHeight": "{font.lineHeight.500}" },
-          "2xl": { "fontSize": "{font.size.600}", "lineHeight": "{font.lineHeight.600}" },
-          "3xl": { "fontSize": "{font.size.700}", "lineHeight": "{font.lineHeight.700}" }
+          "xs": {
+            "fontSize": "{font.size.100}",
+            "lineHeight": "{font.lineHeight.100}"
+          },
+          "sm": {
+            "fontSize": "{font.size.200}",
+            "lineHeight": "{font.lineHeight.200}"
+          },
+          "md": {
+            "fontSize": "{font.size.300}",
+            "lineHeight": "{font.lineHeight.300}"
+          },
+          "lg": {
+            "fontSize": "{font.size.400}",
+            "lineHeight": "{font.lineHeight.400}"
+          },
+          "xl": {
+            "fontSize": "{font.size.500}",
+            "lineHeight": "{font.lineHeight.500}"
+          },
+          "2xl": {
+            "fontSize": "{font.size.600}",
+            "lineHeight": "{font.lineHeight.600}"
+          },
+          "3xl": {
+            "fontSize": "{font.size.700}",
+            "lineHeight": "{font.lineHeight.700}"
+          }
         },
         "caption": {
-          "xs": { "fontSize": "{font.size.50}", "lineHeight": "{font.lineHeight.50}" },
-          "sm": { "fontSize": "{font.size.100}", "lineHeight": "{font.lineHeight.100}" },
-          "md": { "fontSize": "{font.size.200}", "lineHeight": "{font.lineHeight.200}" },
-          "lg": { "fontSize": "{font.size.300}", "lineHeight": "{font.lineHeight.300}" },
-          "xl": { "fontSize": "{font.size.400}", "lineHeight": "{font.lineHeight.400}" },
-          "2xl": { "fontSize": "{font.size.500}", "lineHeight": "{font.lineHeight.500}" },
-          "3xl": { "fontSize": "{font.size.600}", "lineHeight": "{font.lineHeight.600}" }
+          "xs": {
+            "fontSize": "{font.size.50}",
+            "lineHeight": "{font.lineHeight.50}"
+          },
+          "sm": {
+            "fontSize": "{font.size.100}",
+            "lineHeight": "{font.lineHeight.100}"
+          },
+          "md": {
+            "fontSize": "{font.size.200}",
+            "lineHeight": "{font.lineHeight.200}"
+          },
+          "lg": {
+            "fontSize": "{font.size.300}",
+            "lineHeight": "{font.lineHeight.300}"
+          },
+          "xl": {
+            "fontSize": "{font.size.400}",
+            "lineHeight": "{font.lineHeight.400}"
+          },
+          "2xl": {
+            "fontSize": "{font.size.500}",
+            "lineHeight": "{font.lineHeight.500}"
+          },
+          "3xl": {
+            "fontSize": "{font.size.600}",
+            "lineHeight": "{font.lineHeight.600}"
+          }
         },
         "overline": {
-          "xs": { "fontSize": "{font.size.50}", "lineHeight": "{font.lineHeight.50}" },
-          "sm": { "fontSize": "{font.size.100}", "lineHeight": "{font.lineHeight.100}" },
-          "md": { "fontSize": "{font.size.200}", "lineHeight": "{font.lineHeight.200}" },
-          "lg": { "fontSize": "{font.size.300}", "lineHeight": "{font.lineHeight.300}" },
-          "xl": { "fontSize": "{font.size.400}", "lineHeight": "{font.lineHeight.400}" },
-          "2xl": { "fontSize": "{font.size.500}", "lineHeight": "{font.lineHeight.500}" },
-          "3xl": { "fontSize": "{font.size.600}", "lineHeight": "{font.lineHeight.600}" }
+          "xs": {
+            "fontSize": "{font.size.50}",
+            "lineHeight": "{font.lineHeight.50}"
+          },
+          "sm": {
+            "fontSize": "{font.size.100}",
+            "lineHeight": "{font.lineHeight.100}"
+          },
+          "md": {
+            "fontSize": "{font.size.200}",
+            "lineHeight": "{font.lineHeight.200}"
+          },
+          "lg": {
+            "fontSize": "{font.size.300}",
+            "lineHeight": "{font.lineHeight.300}"
+          },
+          "xl": {
+            "fontSize": "{font.size.400}",
+            "lineHeight": "{font.lineHeight.400}"
+          },
+          "2xl": {
+            "fontSize": "{font.size.500}",
+            "lineHeight": "{font.lineHeight.500}"
+          },
+          "3xl": {
+            "fontSize": "{font.size.600}",
+            "lineHeight": "{font.lineHeight.600}"
+          }
         },
         "code": {
-          "xs": { "fontSize": "{font.size.100}", "lineHeight": "{font.lineHeight.100}" },
-          "sm": { "fontSize": "{font.size.200}", "lineHeight": "{font.lineHeight.200}" },
-          "md": { "fontSize": "{font.size.300}", "lineHeight": "{font.lineHeight.300}" },
-          "lg": { "fontSize": "{font.size.400}", "lineHeight": "{font.lineHeight.400}" },
-          "xl": { "fontSize": "{font.size.500}", "lineHeight": "{font.lineHeight.500}" },
-          "2xl": { "fontSize": "{font.size.600}", "lineHeight": "{font.lineHeight.600}" },
-          "3xl": { "fontSize": "{font.size.700}", "lineHeight": "{font.lineHeight.700}" }
+          "xs": {
+            "fontSize": "{font.size.100}",
+            "lineHeight": "{font.lineHeight.100}"
+          },
+          "sm": {
+            "fontSize": "{font.size.200}",
+            "lineHeight": "{font.lineHeight.200}"
+          },
+          "md": {
+            "fontSize": "{font.size.300}",
+            "lineHeight": "{font.lineHeight.300}"
+          },
+          "lg": {
+            "fontSize": "{font.size.400}",
+            "lineHeight": "{font.lineHeight.400}"
+          },
+          "xl": {
+            "fontSize": "{font.size.500}",
+            "lineHeight": "{font.lineHeight.500}"
+          },
+          "2xl": {
+            "fontSize": "{font.size.600}",
+            "lineHeight": "{font.lineHeight.600}"
+          },
+          "3xl": {
+            "fontSize": "{font.size.700}",
+            "lineHeight": "{font.lineHeight.700}"
+          }
         }
       },
       "weight": {

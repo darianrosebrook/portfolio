@@ -23,8 +23,8 @@
 [data-variant='ring'] .visual {
   background: conic-gradient(
     from 0turn,
-    var(--spinner-color-accent, currentColor) 0turn 0.25turn,
-    var(--spinner-color-track, rgb(0 0 0 / 20%)) 0.25turn 1turn
+    var(--spinner-color-accent) 0turn 0.25turn,
+    var(--spinner-color-track) 0.25turn 1turn
   );
   border-radius: 999px;
   animation: spin var(--spinner-anim-duration, 800ms) linear infinite;
@@ -48,7 +48,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  background: var(--spinner-color-accent, currentColor);
+  background: var(--spinner-color-accent);
   border-radius: 999px;
   transform: translate(-50%, -50%);
   animation: pulse var(--spinner-anim-duration, 800ms) ease-in-out infinite;
@@ -77,7 +77,7 @@
   inset: 0;
   background: conic-gradient(
     from 0turn,
-    var(--spinner-color-accent, currentColor) 0 10deg,
+    var(--spinner-color-accent) 0 10deg,
     #00000000 10deg 30deg
   );
   animation: spin var(--spinner-anim-duration, 800ms) linear infinite;
@@ -87,6 +87,27 @@
     #000000 calc(100% - var(--spinner-thickness-value, 3px)),
     #00000000
   );
+}
+
+@media (prefers-contrast: more) {
+  [data-variant='ring'] .visual {
+    background: conic-gradient(
+      from 0turn,
+      var(--spinner-color-accent) 0turn 0.25turn,
+      var(--spinner-color-track) 0.25turn 1turn
+    );
+    filter: contrast(1.1) saturate(1.05);
+  }
+
+  [data-variant='dots'] .visual,
+  [data-variant='dots'] .visual::before,
+  [data-variant='dots'] .visual::after {
+    filter: contrast(1.1) saturate(1.05);
+  }
+
+  [data-variant='bars'] .visual::before {
+    filter: contrast(1.1) saturate(1.05);
+  }
 }
 
 @keyframes spin {

@@ -21,7 +21,14 @@ export interface TextProps extends React.HTMLAttributes<HTMLElement> {
   /** Text alignment */
   align?: 'left' | 'center' | 'right' | 'justify';
   /** Text color variant */
-  color?: 'default' | 'muted' | 'subtle' | 'accent' | 'success' | 'warning' | 'error';
+  color?:
+    | 'default'
+    | 'muted'
+    | 'subtle'
+    | 'accent'
+    | 'success'
+    | 'warning'
+    | 'error';
   /** Whether text should be truncated */
   truncate?: boolean;
   /** Transform text case */

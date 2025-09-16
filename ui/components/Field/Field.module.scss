@@ -1,0 +1,56 @@
+@use './Field.tokens.generated.scss' as fld;
+
+.root {
+  @include fld.vars;
+
+  display: grid;
+  gap: var(--field-gap-y);
+}
+
+.header {
+  color: var(--field-label-color);
+  font-size: var(--field-label-fontSize);
+}
+
+.control :is(input, select, textarea) {
+  padding: var(--field-pad-y) var(--field-pad-x);
+  background: var(--field-color-bg);
+  border: 1px solid var(--field-color-border);
+  border-radius: var(
+    --field-radius,
+    var(--semantic-shape-control-radius-default)
+  );
+  outline: none;
+  color: var(--field-color-fg);
+}
+
+.control :is(input, select, textarea):focus-visible {
+  border-color: var(--field-color-focus-border);
+  box-shadow: 0 0 0 3px
+    color-mix(in oklab, var(--field-color-focus-border) 30%, transparent);
+}
+
+[data-status='invalid'] .control :is(input, select, textarea) {
+  border-color: var(--field-color-invalid-border);
+}
+
+.meta {
+  display: grid;
+  gap: var(--field-gap-meta);
+}
+
+.meta [role='alert'] {
+  color: var(--field-color-invalid-text);
+}
+
+.validatingIndicator {
+  display: inline-flex;
+  align-items: center;
+  margin-inline-start: var(--core-spacing-size-03);
+}
+
+@media (prefers-contrast: more) {
+  .control :is(input, select, textarea) {
+    border-color: var(--semantic-color-border-bold);
+  }
+}

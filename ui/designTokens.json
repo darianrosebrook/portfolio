@@ -2387,6 +2387,64 @@
         "$value": "{semantic.color.foreground.linkVisited}"
       }
     },
+    "form": {
+      "density": {
+        "compact": {
+          "gapY": {
+            "$type": "dimension",
+            "$value": "{core.spacing.size.03}"
+          },
+          "padX": {
+            "$type": "dimension",
+            "$value": "{core.spacing.size.03}"
+          },
+          "padY": {
+            "$type": "dimension",
+            "$value": "{core.spacing.size.02}"
+          },
+          "labelFontSize": {
+            "$type": "dimension",
+            "$value": "{core.typography.ramp.3}"
+          }
+        },
+        "regular": {
+          "gapY": {
+            "$type": "dimension",
+            "$value": "{core.spacing.size.04}"
+          },
+          "padX": {
+            "$type": "dimension",
+            "$value": "{core.spacing.size.04}"
+          },
+          "padY": {
+            "$type": "dimension",
+            "$value": "{core.spacing.size.03}"
+          },
+          "labelFontSize": {
+            "$type": "dimension",
+            "$value": "{core.typography.ramp.4}"
+          }
+        },
+        "spacious": {
+          "gapY": {
+            "$type": "dimension",
+            "$value": "{core.spacing.size.07}"
+          },
+          "padX": {
+            "$type": "dimension",
+            "$value": "{core.spacing.size.05}"
+          },
+          "padY": {
+            "$type": "dimension",
+            "$value": "{core.spacing.size.04}"
+          },
+          "labelFontSize": {
+            "$type": "dimension",
+            "$value": "{core.typography.ramp.5}"
+          }
+        }
+      }
+    },
     "overlay": {
       "scrimWeak": {
         "$type": "color",
