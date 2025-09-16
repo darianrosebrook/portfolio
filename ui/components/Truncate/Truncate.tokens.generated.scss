@@ -1,0 +1,22 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Truncate/Truncate.tokens.json
+ */
+@mixin vars {
+  /* === Color Tokens === */
+  --truncate-color-background-default: var(
+    --semantic-color-background-secondary
+  );
+  --truncate-color-foreground-primary: var(--semantic-color-foreground-primary);
+  --truncate-color-foreground-secondary: var(
+    --semantic-color-foreground-secondary
+  );
+  --truncate-color-border-default: var(--semantic-color-border-light);
+  --truncate-color-border-accent: var(--semantic-color-border-accent);
+
+  /* === Size Tokens === */
+  --truncate-size-padding-default: var(--core-spacing-size-07);
+  --truncate-size-radius-default: var(--core-shape-radius-medium);
+
+  /* === Elevation Tokens === */
+  --truncate-elevation-default: var(--semantic-elevation-depth-1);
+}

@@ -1,0 +1,46 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Walkthrough/Walkthrough.tokens.json
+ */
+@mixin vars {
+  /* === Surface Tokens === */
+  --walkthrough-surface-bg: var(--semantic-color-background-layer);
+  --walkthrough-surface-border: var(--semantic-color-border-subtle);
+  --walkthrough-surface-radius: var(--core-shape-radius-large);
+  --walkthrough-surface-shadow: var(--semantic-elevation-depth-3);
+  --walkthrough-surface-padding: var(--core-spacing-size-08);
+
+  /* === Title Tokens === */
+  --walkthrough-title-fontSize: var(--semantic-typography-size-300);
+  --walkthrough-title-fontWeight: var(--semantic-typography-weight-semibold);
+  --walkthrough-title-color: var(--semantic-color-foreground-primary);
+
+  /* === Description Tokens === */
+  --walkthrough-description-fontSize: var(--semantic-typography-size-200);
+  --walkthrough-description-color: var(--semantic-color-foreground-secondary);
+  --walkthrough-description-marginTop: var(--core-spacing-size-04);
+
+  /* === Controls Tokens === */
+  --walkthrough-controls-gap: var(--core-spacing-size-05);
+  --walkthrough-controls-marginTop: var(--core-spacing-size-06);
+
+  /* === Dots Tokens === */
+  --walkthrough-dots-size: var(--core-spacing-size-02);
+  --walkthrough-dots-gap: var(--core-spacing-size-03);
+  --walkthrough-dots-active: var(--semantic-color-brand-500);
+  --walkthrough-dots-idle: var(--semantic-color-border-subtle);
+
+  /* === Button Tokens === */
+  --walkthrough-button-primary-bg: var(--semantic-color-brand-500);
+  --walkthrough-button-primary-color: var(--semantic-color-foreground-onBrand);
+  --walkthrough-button-primary-radius: var(--core-shape-radius-medium);
+  --walkthrough-button-primary-paddingY: var(--core-spacing-size-04);
+  --walkthrough-button-primary-paddingX: var(--core-spacing-size-06);
+  --walkthrough-button-secondary-bg: transparent;
+  --walkthrough-button-secondary-color: var(
+    --semantic-color-foreground-secondary
+  );
+  --walkthrough-button-secondary-border: var(--semantic-color-border-subtle);
+  --walkthrough-button-secondary-radius: var(--core-shape-radius-medium);
+  --walkthrough-button-secondary-paddingY: var(--core-spacing-size-04);
+  --walkthrough-button-secondary-paddingX: var(--core-spacing-size-06);
+}

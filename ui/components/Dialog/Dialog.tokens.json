@@ -1,0 +1,91 @@
+{
+  "prefix": "dialog",
+  "tokens": {
+    "color": {
+      "background": {
+        "default": "{semantic.color.background.primary}",
+        "backdrop": "{semantic.color.overlay.scrim}"
+      },
+      "foreground": {
+        "default": "{semantic.color.foreground.primary}",
+        "title": "{semantic.color.foreground.primary}",
+        "secondary": "{semantic.color.foreground.secondary}"
+      },
+      "border": {
+        "default": "{semantic.color.border.subtle}"
+      }
+    },
+    "size": {
+      "sm": {
+        "width": "400px",
+        "maxWidth": "90vw",
+        "padding": "{core.spacing.size.06}"
+      },
+      "md": {
+        "width": "500px",
+        "maxWidth": "90vw",
+        "padding": "{core.spacing.size.07}"
+      },
+      "lg": {
+        "width": "700px",
+        "maxWidth": "90vw",
+        "padding": "{core.spacing.size.08}"
+      },
+      "xl": {
+        "width": "900px",
+        "maxWidth": "95vw",
+        "padding": "{core.spacing.size.09}"
+      },
+      "full": {
+        "width": "100vw",
+        "height": "100vh",
+        "maxWidth": "100vw",
+        "padding": "{core.spacing.size.08}"
+      },
+      "radius": {
+        "default": "{semantic.shape.radius.large}"
+      }
+    },
+    "elevation": {
+      "default": "{semantic.elevation.surface.floating}"
+    },
+    "spacing": {
+      "header": {
+        "paddingTop": "{core.spacing.size.06}",
+        "paddingRight": "{core.spacing.size.07}",
+        "paddingBottom": "{core.spacing.size.04}",
+        "paddingLeft": "{core.spacing.size.07}"
+      },
+      "body": {
+        "paddingTop": "{core.spacing.size.04}",
+        "paddingRight": "{core.spacing.size.07}",
+        "paddingBottom": "{core.spacing.size.04}",
+        "paddingLeft": "{core.spacing.size.07}"
+      },
+      "footer": {
+        "paddingTop": "{core.spacing.size.04}",
+        "paddingRight": "{core.spacing.size.07}",
+        "paddingBottom": "{core.spacing.size.06}",
+        "paddingLeft": "{core.spacing.size.07}",
+        "gap": "{core.spacing.size.03}"
+      }
+    },
+    "typography": {
+      "title": {
+        "fontSize": "{semantic.typography.heading.04}",
+        "fontWeight": "{semantic.typography.fontWeight.bold}",
+        "lineHeight": "{semantic.typography.lineHeight.heading}"
+      }
+    },
+    "motion": {
+      "duration": {
+        "enter": "{semantic.motion.interaction.enter.duration}",
+        "exit": "{semantic.motion.interaction.exit.duration}"
+      },
+      "easing": {
+        "enter": "{semantic.motion.interaction.enter.easing}",
+        "exit": "{semantic.motion.interaction.exit.easing}"
+      }
+    }
+  }
+}

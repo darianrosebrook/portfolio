@@ -1,0 +1,51 @@
+@use './Tabs.tokens.generated.scss' as tabsTokens;
+
+.root {
+  @include tabsTokens.vars;
+}
+
+.list {
+  position: relative;
+  display: inline-flex;
+  gap: var(--tabs-spacing-gap);
+}
+
+.indicator {
+  position: absolute;
+  height: 2px;
+  background: var(--tabs-color-indicator);
+  transition: transform var(--tabs-motion-indicator);
+  transform: translateX(0%);
+  inline-size: 100px;
+  inset-block-end: 0;
+}
+
+.tab {
+  padding: var(--tabs-spacing-padding);
+  background: transparent;
+  border: none;
+  color: var(--tabs-color-fg);
+  cursor: pointer;
+}
+
+.tabActive {
+  background: var(--tabs-color-active-bg);
+  color: var(--tabs-color-active-fg);
+}
+
+.tabDisabled {
+  color: var(--tabs-color-disabled-fg);
+  cursor: not-allowed;
+}
+
+.panel {
+  margin-block-start: var(--tabs-spacing-panelGap);
+}
+
+.panelActive {
+  opacity: 1;
+}
+
+.panelInactive {
+  opacity: 0;
+}

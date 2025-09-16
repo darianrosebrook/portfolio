@@ -1,0 +1,180 @@
+@use './ErrorBoundary.tokens.generated.scss' as errorBoundaryTokens;
+
+.errorBoundary {
+  @include errorBoundaryTokens.vars;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  padding: var(--error-boundary-space-padding);
+  background: var(--error-boundary-color-background);
+  border: 1px solid var(--error-boundary-color-border);
+  border-radius: var(--error-boundary-size-radius);
+  color: var(--error-boundary-color-text);
+  text-align: center;
+}
+
+.errorIcon {
+  width: var(--error-boundary-size-icon);
+  height: var(--error-boundary-size-icon);
+  margin-bottom: var(--error-boundary-space-icon-margin);
+  color: var(--error-boundary-color-icon);
+}
+
+.errorTitle {
+  margin: 0 0 var(--error-boundary-space-title-margin) 0;
+  color: var(--error-boundary-color-title);
+  font-weight: var(--error-boundary-typo-title-fontWeight);
+  font-size: var(--error-boundary-typo-title-fontSize);
+  line-height: var(--error-boundary-typo-title-lineHeight);
+}
+
+.errorMessage {
+  margin: 0 0 var(--error-boundary-space-message-margin) 0;
+  color: var(--error-boundary-color-message);
+  font-size: var(--error-boundary-typo-message-fontSize);
+  line-height: var(--error-boundary-typo-message-lineHeight);
+}
+
+.errorDetails {
+  overflow-x: auto;
+  margin: 0 0 var(--error-boundary-space-details-margin) 0;
+  padding: var(--error-boundary-space-details-padding);
+  background: var(--error-boundary-color-details-background);
+  border: 1px solid var(--error-boundary-color-details-border);
+  border-radius: var(--error-boundary-size-details-radius);
+  color: var(--error-boundary-color-details-text);
+  font-size: var(--error-boundary-typo-details-fontSize);
+  font-family: var(--error-boundary-typo-details-fontFamily);
+  line-height: var(--error-boundary-typo-details-lineHeight);
+  text-align: left;
+  white-space: pre-wrap;
+}
+
+.errorActions {
+  display: flex;
+  gap: var(--error-boundary-space-actions-gap);
+  margin-top: var(--error-boundary-space-actions-margin);
+}
+
+.retryButton {
+  padding: var(--error-boundary-space-button-padding);
+  background: var(--error-boundary-color-button-background);
+  border: 1px solid var(--error-boundary-color-button-border);
+  border-radius: var(--error-boundary-size-button-radius);
+  color: var(--error-boundary-color-button-text);
+  font-size: var(--error-boundary-typo-button-fontSize);
+  transition: all var(--error-boundary-motion-button-transition);
+  cursor: pointer;
+}
+
+.retryButton:hover {
+  background: var(--error-boundary-color-button-background-hover);
+  border-color: var(--error-boundary-color-button-border-hover);
+  color: var(--error-boundary-color-button-text-hover);
+}
+
+.retryButton:focus-visible {
+  outline: 2px solid var(--error-boundary-color-button-focus);
+  outline-offset: 2px;
+}
+
+.reportButton {
+  padding: var(--error-boundary-space-button-padding);
+  background: var(--error-boundary-color-button-secondary-background);
+  border: 1px solid var(--error-boundary-color-button-secondary-border);
+  border-radius: var(--error-boundary-size-button-radius);
+  color: var(--error-boundary-color-button-secondary-text);
+  font-size: var(--error-boundary-typo-button-fontSize);
+  transition: all var(--error-boundary-motion-button-transition);
+  cursor: pointer;
+}
+
+.reportButton:hover {
+  background: var(--error-boundary-color-button-secondary-background-hover);
+  border-color: var(--error-boundary-color-button-secondary-border-hover);
+  color: var(--error-boundary-color-button-secondary-text-hover);
+}
+
+.reportButton:focus-visible {
+  outline: 2px solid var(--error-boundary-color-button-focus);
+  outline-offset: 2px;
+}
+
+/* Animation variants */
+.animationErrorBoundary {
+  position: relative;
+  overflow: hidden;
+}
+
+.animationErrorBoundary::before {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in oklab, var(--error-boundary-color-accent) 20%, transparent),
+    transparent
+  );
+  animation: shimmer var(--error-boundary-motion-shimmer-duration) infinite;
+  content: '';
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+
+  100% {
+    left: 100%;
+  }
+}
+
+/* Interactive error boundary */
+.interactiveErrorBoundary {
+  position: relative;
+  transition: transform var(--error-boundary-motion-interactive-transition);
+  cursor: pointer;
+}
+
+.interactiveErrorBoundary:hover {
+  box-shadow: var(--error-boundary-elevation-hover);
+  transform: translateY(-2px);
+}
+
+.interactiveErrorBoundary:active {
+  transform: translateY(0);
+}
+
+/* Editor-specific error boundary */
+.editorErrorBoundary {
+  min-height: 100px;
+  background: var(--error-boundary-color-editor-background);
+  border: 2px dashed var(--error-boundary-color-editor-border);
+}
+
+.editorErrorBoundary .errorTitle {
+  color: var(--error-boundary-color-editor-title);
+}
+
+.editorErrorBoundary .errorMessage {
+  color: var(--error-boundary-color-editor-message);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .errorBoundary,
+  .retryButton,
+  .reportButton,
+  .interactiveErrorBoundary {
+    transition: none;
+  }
+
+  .animationErrorBoundary::before {
+    animation: none;
+  }
+}

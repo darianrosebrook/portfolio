@@ -1,0 +1,39 @@
+@use './AspectRatio.tokens.generated.scss' as aspectRatioTokens;
+
+.container {
+  @include aspectRatioTokens.vars;
+
+  position: relative;
+  overflow: hidden;
+
+  /* Fallback for browsers without aspect-ratio support */
+  @supports not (aspect-ratio: 1) {
+    &::before {
+      display: block;
+      padding-bottom: calc(100% / var(--aspect-ratio, 1));
+      content: '';
+    }
+
+    > * {
+      position: absolute;
+      inset: 0;
+    }
+  }
+}
+
+/* Optional placeholder styling when empty */
+.container:empty {
+  background: var(--aspectRatio-placeholder-bg);
+  border: 1px dashed var(--aspectRatio-surface-border);
+  border-radius: var(--aspectRatio-surface-radius);
+
+  &::after {
+    position: absolute;
+    inset: 50%;
+    color: var(--aspectRatio-placeholder-color);
+    font-size: 0.875rem;
+    white-space: nowrap;
+    transform: translate(-50%, -50%);
+    content: 'Aspect Ratio Container';
+  }
+}

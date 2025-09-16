@@ -30,19 +30,25 @@
   cursor: pointer;
   appearance: base-select;
 
-  &.small {
-    padding: 0.25rem 1.5rem 0.25rem 0.75rem;
-    font-size: 0.875rem;
+  &--sm {
+    height: var(--semantic-control-size-sm-height);
+    padding: var(--semantic-control-size-sm-paddingY)
+      var(--semantic-control-size-sm-paddingX);
+    font-size: var(--semantic-typography-body-small-fontSize);
   }
 
-  &.medium {
-    padding: 0.5rem 2rem 0.5rem 1rem;
-    font-size: 1rem;
+  &--md {
+    height: var(--semantic-control-size-md-height);
+    padding: var(--semantic-control-size-md-paddingY)
+      var(--semantic-control-size-md-paddingX);
+    font-size: var(--semantic-typography-body-default-fontSize);
   }
 
-  &.large {
-    padding: 0.75rem 2.5rem 0.75rem 1.25rem;
-    font-size: 1.125rem;
+  &--lg {
+    height: var(--semantic-control-size-lg-height);
+    padding: var(--semantic-control-size-lg-paddingY)
+      var(--semantic-control-size-lg-paddingX);
+    font-size: var(--semantic-typography-body-default-fontSize);
   }
 
   & > button {
@@ -208,8 +214,118 @@
 
 /* Removed descendant size selectors to avoid specificity issues. Size is applied via .select.small/.medium/.large */
 
+// Combobox mode styles
+.comboboxContainer {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.comboboxInput {
+  @include selectTokens.vars;
+
+  box-sizing: border-box;
+  width: 100%;
+  background-color: var(--select-color-background-default, #fafafa);
+  border: var(--select-size-border-default, 2px) solid
+    var(--select-color-border-default, #aeaeae);
+  border-radius: var(--select-size-radius-default, 8px);
+  color: var(--select-color-foreground-default, #141414);
+  font-weight: var(--select-font-weight-default, 400);
+  line-height: var(--select-font-lineHeight-default, 1.5);
+  transition:
+    background-color var(--select-motion-duration-fast)
+      var(--select-motion-easing-standard),
+    border-color var(--select-motion-duration-fast)
+      var(--select-motion-easing-standard),
+    color var(--select-motion-duration-fast)
+      var(--select-motion-easing-standard);
+  cursor: text;
+
+  &--sm {
+    height: var(--semantic-control-size-sm-height);
+    padding: var(--semantic-control-size-sm-paddingY)
+      var(--semantic-control-size-sm-paddingX);
+    font-size: var(--semantic-typography-body-small-fontSize);
+  }
+
+  &--md {
+    height: var(--semantic-control-size-md-height);
+    padding: var(--semantic-control-size-md-paddingY)
+      var(--semantic-control-size-md-paddingX);
+    font-size: var(--semantic-typography-body-default-fontSize);
+  }
+
+  &--lg {
+    height: var(--semantic-control-size-lg-height);
+    padding: var(--semantic-control-size-lg-paddingY)
+      var(--semantic-control-size-lg-paddingX);
+    font-size: var(--semantic-typography-body-default-fontSize);
+  }
+
+  &:focus {
+    border-color: var(--select-color-border-focus, #0066cc);
+    box-shadow: 0 0 0 2px
+      var(--select-color-border-focus-ring, rgb(0 102 204 / 20%));
+    outline: none;
+  }
+
+  &:disabled {
+    background-color: var(--select-color-background-disabled, #f5f5f5);
+    border-color: var(--select-color-border-disabled, #d0d0d0);
+    color: var(--select-color-foreground-disabled, #999999);
+    cursor: not-allowed;
+  }
+}
+
+.comboboxList {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 0;
+  z-index: 1000;
+  overflow-y: auto;
+  max-height: 200px;
+  margin: 0;
+  padding: 0;
+  background: var(--select-color-background-default, #fafafa);
+  border: var(--select-size-border-default, 2px) solid
+    var(--select-color-border-default, #aeaeae);
+  border-top: none;
+  border-radius: 0 0 var(--select-size-radius-default, 8px)
+    var(--select-size-radius-default, 8px);
+  box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
+  list-style: none;
+}
+
+.comboboxOption {
+  padding: 0.5rem 1rem;
+  color: var(--select-color-foreground-default, #141414);
+  cursor: pointer;
+
+  &:hover,
+  &.active {
+    background-color: var(--select-color-background-hover, #f0f0f0);
+  }
+
+  &[aria-selected='true'] {
+    background-color: var(--select-color-background-selected, #e6f3ff);
+    color: var(--select-color-foreground-selected, #0066cc);
+  }
+
+  &.disabled {
+    color: var(--select-color-foreground-disabled, #999999);
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .select {
+  .select,
+  .comboboxInput {
     transition: none;
   }
 }

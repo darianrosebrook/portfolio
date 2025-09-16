@@ -23,7 +23,11 @@
     "tokens:validate": "node utils/designTokens/validateTokens.mjs",
     "tokens:build": "npm run tokens:schema && npm run tokens:compose && npm run tokens:globals && npm run tokens:scss && npm run tokens:types",
     "tokens:inspect": "node utils/designTokens/inspectTokens.mjs",
-    "tokens:report": "node utils/designTokens/inspectTokens.mjs"
+    "tokens:report": "node utils/designTokens/inspectTokens.mjs",
+    "validate:components": "node scripts/validateComponents.mjs",
+    "validate:component": "node scripts/validateComponents.mjs",
+    "scaffold:component": "node scripts/scaffoldComponent.mjs",
+    "generate:components-docs": "node scripts/generateComponentsAndDocs.mjs"
   },
   "dependencies": {
     "@atproto/api": "^0.15.15",

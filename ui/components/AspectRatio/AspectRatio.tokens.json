@@ -1,0 +1,15 @@
+{
+  "component": {
+    "aspectRatio": {
+      "surface": {
+        "bg": "{color.background.subtle}",
+        "border": "{color.border.subtle}",
+        "radius": "{radius.md}"
+      },
+      "placeholder": {
+        "color": "{color.foreground.muted}",
+        "bg": "{color.background.muted}"
+      }
+    }
+  }
+}

@@ -1,0 +1,34 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Toast/Toast.tokens.json
+ */
+@mixin vars {
+  /* === Surface Tokens === */
+  --toast-surface-bg: var(--semantic-color-background-layer);
+  --toast-surface-border: var(--semantic-color-border-subtle);
+  --toast-surface-radius: var(--core-shape-radius-medium);
+  --toast-surface-shadow: var(--semantic-elevation-depth-2);
+
+  /* === Color Tokens === */
+  --toast-color-info: var(--semantic-color-foreground-primary);
+  --toast-color-success: var(--semantic-color-status-success-fg);
+  --toast-color-warning: var(--semantic-color-status-warning-fg);
+  --toast-color-error: var(--semantic-color-status-danger-fg);
+
+  /* === Accent Tokens === */
+  --toast-accent-info: var(--semantic-color-accent-info);
+  --toast-accent-success: var(--semantic-color-accent-success);
+  --toast-accent-warning: var(--semantic-color-accent-warning);
+  --toast-accent-error: var(--semantic-color-accent-danger);
+
+  /* === Spacing Tokens === */
+  --toast-spacing-padding: var(--core-spacing-size-05);
+  --toast-spacing-gap: var(--core-spacing-size-04);
+  --toast-spacing-stackGap: var(--core-spacing-size-04);
+
+  /* === Size Tokens === */
+  --toast-size-maxWidth: var(--core-size-content-2xs);
+
+  /* === Motion Tokens === */
+  --toast-motion-enter: var(--semantic-motion-duration-fast);
+  --toast-motion-leave: var(--semantic-motion-duration-fast);
+}

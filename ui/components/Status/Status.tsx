@@ -1,17 +1,17 @@
 'use client';
 import Styles from './Status.module.scss';
-
-type StatusType = 'success' | 'error' | 'warning' | 'info';
+import { Intent, StatusIntent, normalizeStatusIntent } from '@/types';
 
 type StatusProps = {
-  status: StatusType;
+  status: StatusIntent;
   children: string;
 };
 
 const Status: React.FC<StatusProps> = ({ status, children }) => {
+  const intent: Intent = normalizeStatusIntent(status);
   return (
     <>
-      <div className={`${Styles.status} ${Styles[status]}`}>
+      <div className={`${Styles.status} ${Styles[intent]}`}>
         <svg
           width="14"
           height="14"

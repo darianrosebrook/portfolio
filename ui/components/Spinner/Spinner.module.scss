@@ -1,0 +1,117 @@
+@use './Spinner.tokens.generated.scss' as sp;
+
+.root {
+  @include sp.vars;
+
+  display: inline-block;
+  vertical-align: middle;
+  block-size: var(--spinner-size-value, var(--spinner-size-md));
+  inline-size: var(--spinner-size-value, var(--spinner-size-md));
+}
+
+.inline {
+  vertical-align: baseline;
+}
+
+.visual {
+  display: block;
+  block-size: 100%;
+  inline-size: 100%;
+}
+
+/* Variant: ring */
+[data-variant='ring'] .visual {
+  background: conic-gradient(
+    from 0turn,
+    var(--spinner-color-accent, currentColor) 0turn 0.25turn,
+    var(--spinner-color-track, rgb(0 0 0 / 20%)) 0.25turn 1turn
+  );
+  border-radius: 999px;
+  animation: spin var(--spinner-anim-duration, 800ms) linear infinite;
+  mask: radial-gradient(
+    farthest-side,
+    #00000000 calc(100% - var(--spinner-thickness-value, 3px)),
+    #000000 calc(100% - var(--spinner-thickness-value, 3px))
+  );
+}
+
+/* Variant: dots */
+[data-variant='dots'] .visual {
+  --spinner-dots-gap-local: var(--spinner-dots-gap, 0.375rem);
+
+  position: relative;
+}
+
+[data-variant='dots'] .visual,
+[data-variant='dots'] .visual::before,
+[data-variant='dots'] .visual::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: var(--spinner-color-accent, currentColor);
+  border-radius: 999px;
+  transform: translate(-50%, -50%);
+  animation: pulse var(--spinner-anim-duration, 800ms) ease-in-out infinite;
+  block-size: calc(var(--spinner-size-value, 20px) / 6);
+  content: '';
+  inline-size: calc(var(--spinner-size-value, 20px) / 6);
+}
+
+[data-variant='dots'] .visual::before {
+  transform: translate(calc(-50% - var(--spinner-dots-gap-local)), -50%);
+  animation-delay: -0.2s;
+}
+
+[data-variant='dots'] .visual::after {
+  transform: translate(calc(-50% + var(--spinner-dots-gap-local)), -50%);
+  animation-delay: 0.2s;
+}
+
+/* Variant: bars */
+[data-variant='bars'] .visual {
+  position: relative;
+}
+
+[data-variant='bars'] .visual::before {
+  position: absolute;
+  inset: 0;
+  background: conic-gradient(
+    from 0turn,
+    var(--spinner-color-accent, currentColor) 0 10deg,
+    #00000000 10deg 30deg
+  );
+  animation: spin var(--spinner-anim-duration, 800ms) linear infinite;
+  content: '';
+  mask: radial-gradient(
+    farthest-side,
+    #000000 calc(100% - var(--spinner-thickness-value, 3px)),
+    #00000000
+  );
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .visual,
+  [data-variant='bars'] .visual::before,
+  [data-variant='dots'] .visual,
+  [data-variant='dots'] .visual::before,
+  [data-variant='dots'] .visual::after {
+    animation: none !important;
+  }
+}

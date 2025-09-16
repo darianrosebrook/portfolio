@@ -1,0 +1,14 @@
+.field {
+  display: grid;
+  gap: 0.375rem;
+}
+
+.description {
+  opacity: 0.8;
+  font-size: 0.875rem;
+}
+
+.error {
+  color: var(--semantic-color-foreground-danger);
+  font-size: 0.875rem;
+}

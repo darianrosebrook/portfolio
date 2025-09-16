@@ -1,0 +1,46 @@
+@use './Blockquote.tokens.generated.scss' as blockquoteTokens;
+
+.blockquote {
+  @include blockquoteTokens.vars;
+
+  margin: var(--blockquote-spacing-margin);
+  padding: var(--blockquote-spacing-padding);
+  color: var(--blockquote-surface-color);
+  font-weight: var(--blockquote-typography-fontWeight);
+  font-style: var(--blockquote-typography-fontStyle);
+}
+
+.sm {
+  font-size: var(--blockquote-typography-sm-fontSize);
+  line-height: var(--blockquote-typography-sm-lineHeight);
+}
+
+.md {
+  font-size: var(--blockquote-typography-md-fontSize);
+  line-height: var(--blockquote-typography-md-lineHeight);
+}
+
+.lg {
+  font-size: var(--blockquote-typography-lg-fontSize);
+  line-height: var(--blockquote-typography-lg-lineHeight);
+}
+
+.default {
+  border-inline-start: var(--blockquote-border-width)
+    var(--blockquote-border-style) var(--blockquote-border-color);
+  padding-inline-start: var(--blockquote-spacing-indent);
+}
+
+.bordered {
+  background: var(--blockquote-surface-bg);
+  border: 1px solid var(--blockquote-border-color);
+  border-radius: var(--blockquote-border-radius);
+  border-inline-start-width: var(--blockquote-border-width);
+}
+
+.highlighted {
+  background: var(--blockquote-surface-bg);
+  border-radius: var(--blockquote-border-radius);
+  border-inline-start: var(--blockquote-border-width)
+    var(--blockquote-border-style) var(--blockquote-accent-color);
+}

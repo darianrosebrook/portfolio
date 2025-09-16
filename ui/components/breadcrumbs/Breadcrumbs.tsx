@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { AnimatedLink } from '@/ui/components/links/AnimatedLink';
+import { AnimatedLink } from '@/ui/components/Links';
 import styles from './Breadcrumbs.module.scss';
 
 export type Crumb = {

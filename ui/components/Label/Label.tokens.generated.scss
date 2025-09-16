@@ -1,0 +1,11 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Label/Label.tokens.json
+ */
+@mixin vars {
+  /* === Color Tokens === */
+  --label-color-text-default: var(--semantic-color-foreground-primary);
+
+  /* === Typo Tokens === */
+  --label-typo-weight-default: var(--font-weight-semibold);
+  --label-typo-lineHeight-default: var(--font-lineHeight-100);
+}

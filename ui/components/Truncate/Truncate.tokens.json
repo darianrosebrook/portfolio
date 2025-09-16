@@ -1,0 +1,16 @@
+{
+  "component": {
+    "truncate": {
+      "toggle": {
+        "color": "{color.accent.primary}",
+        "colorHover": "{color.accent.primaryHover}",
+        "fontSize": "inherit",
+        "fontWeight": "{font.weight.medium}",
+        "spacing": "{space.100}"
+      },
+      "fade": {
+        "gradient": "linear-gradient(to right, transparent 0%, {color.background.default} 100%)"
+      }
+    }
+  }
+}

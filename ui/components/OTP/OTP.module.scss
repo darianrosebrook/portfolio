@@ -1,0 +1,41 @@
+@use './OTP.tokens.generated.scss' as otpTokens;
+
+.otp {
+  @include otpTokens.vars;
+
+  display: block;
+  padding: var(--otp-size-padding-default);
+  background: var(--otp-color-background-default);
+  border-radius: var(--otp-size-radius-default);
+  box-shadow: var(--otp-elevation-default)
+    var(--semantic-color-background-imageOverlay);
+}
+
+.group {
+  display: inline-flex;
+  gap: var(--otp-size-padding-default);
+  align-items: center;
+}
+
+.field {
+  background: var(--otp-color-background-default);
+  border: 1px solid var(--otp-color-border-default);
+  border-radius: var(--otp-size-radius-default);
+  color: var(--otp-color-foreground-primary);
+  text-align: center;
+  block-size: 2.75rem;
+  inline-size: 2.25rem;
+}
+
+.field:focus-visible {
+  border-color: var(--otp-color-border-accent);
+  box-shadow: 0 0 0 3px
+    color-mix(in oklab, var(--otp-color-border-accent) 25%, transparent);
+  outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .otp {
+    transition: none;
+  }
+}

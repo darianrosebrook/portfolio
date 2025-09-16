@@ -1,0 +1,69 @@
+@use './Toast.tokens.generated.scss' as toastTokens;
+
+.viewport {
+  @include toastTokens.vars;
+
+  position: fixed;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: var(--toast-spacing-stackGap);
+  inset-block-end: 1rem;
+  inset-inline-end: 1rem;
+}
+
+.item {
+  display: grid;
+  gap: var(--toast-spacing-gap);
+  padding: var(--toast-spacing-padding);
+  background: var(--toast-surface-bg);
+  border: 1px solid var(--toast-surface-border);
+  border-radius: var(--toast-surface-radius);
+  box-shadow: var(--toast-surface-shadow);
+  opacity: 1;
+  transition:
+    opacity var(--toast-motion-enter),
+    transform var(--toast-motion-enter);
+  transform: translateY(0);
+  max-inline-size: var(--toast-size-maxWidth);
+}
+
+.item.entering {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.item.leaving {
+  opacity: 0;
+  transition-duration: var(--toast-motion-leave);
+  transform: translateY(8px);
+}
+
+.row {
+  display: flex;
+  gap: var(--toast-spacing-gap);
+  justify-content: flex-end;
+}
+
+.variant-info {
+  border-inline-start: 3px solid var(--toast-accent-info);
+}
+
+.variant-success {
+  border-inline-start: 3px solid var(--toast-accent-success);
+}
+
+.variant-warning {
+  border-inline-start: 3px solid var(--toast-accent-warning);
+}
+
+.variant-error {
+  border-inline-start: 3px solid var(--toast-accent-error);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .item,
+  .item.leaving {
+    transition: none;
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "component": {
+    "list": {
+      "typography": {
+        "sm": {
+          "fontSize": "{font.size.200}",
+          "lineHeight": "{font.lineHeight.200}"
+        },
+        "md": {
+          "fontSize": "{font.size.300}",
+          "lineHeight": "{font.lineHeight.300}"
+        },
+        "lg": {
+          "fontSize": "{font.size.400}",
+          "lineHeight": "{font.lineHeight.400}"
+        }
+      },
+      "spacing": {
+        "none": "0",
+        "sm": "{space.100}",
+        "md": "{space.200}",
+        "lg": "{space.300}",
+        "indent": "{space.400}"
+      },
+      "marker": {
+        "color": "{color.foreground.muted}",
+        "spacing": "{space.200}"
+      },
+      "divider": {
+        "color": "{color.border.subtle}",
+        "width": "1px"
+      },
+      "surface": {
+        "color": "{color.foreground.default}"
+      }
+    }
+  }
+}

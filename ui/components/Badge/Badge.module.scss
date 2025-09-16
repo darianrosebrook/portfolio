@@ -1,0 +1,136 @@
+@use './Badge.tokens.generated.scss' as badgeTokens;
+
+.badge {
+  @include badgeTokens.vars;
+
+  display: inline-flex;
+  vertical-align: baseline;
+  gap: var(--badge-spacing-gap);
+  align-items: center;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+
+  // Default variant
+  &--default {
+    padding: var(--badge-size-md-padding);
+    background: var(--badge-color-background-default);
+    border: 1px solid var(--badge-color-border-default);
+    border-radius: var(--badge-size-md-radius);
+    box-shadow: var(--badge-elevation-default);
+    color: var(--badge-color-foreground-primary);
+    font-size: var(--badge-size-md-fontSize);
+  }
+
+  // Status variant (replaces Status component)
+  &--status {
+    padding: var(--badge-size-md-padding);
+    border: 1px solid transparent;
+    border-radius: var(--badge-size-md-radius);
+    box-shadow: var(--badge-elevation-status);
+    font-size: var(--badge-size-md-fontSize);
+
+    &--info {
+      background: var(--badge-color-background-info);
+      border-color: var(--badge-color-border-info);
+      color: var(--badge-color-foreground-info);
+    }
+
+    &--success {
+      background: var(--badge-color-background-success);
+      border-color: var(--badge-color-border-success);
+      color: var(--badge-color-foreground-success);
+    }
+
+    &--warning {
+      background: var(--badge-color-background-warning);
+      border-color: var(--badge-color-border-warning);
+      color: var(--badge-color-foreground-warning);
+    }
+
+    &--danger {
+      background: var(--badge-color-background-danger);
+      border-color: var(--badge-color-border-danger);
+      color: var(--badge-color-foreground-danger);
+    }
+  }
+
+  // Counter variant
+  &--counter {
+    justify-content: center;
+    min-width: var(--badge-size-sm-iconSize);
+    padding: var(--badge-size-sm-padding);
+    background: var(--badge-color-background-counter);
+    border-radius: var(--badge-size-sm-radius);
+    color: var(--badge-color-foreground-onColor);
+    font-size: var(--badge-size-sm-fontSize);
+  }
+
+  // Tag variant
+  &--tag {
+    padding: var(--badge-size-sm-padding);
+    background: var(--badge-color-background-tag);
+    border: 1px solid var(--badge-color-border-default);
+    border-radius: var(--badge-size-sm-radius);
+    color: var(--badge-color-foreground-secondary);
+    font-size: var(--badge-size-sm-fontSize);
+  }
+
+  // Size variants
+  &--sm {
+    padding: var(--badge-size-sm-paddingY) var(--badge-size-sm-paddingX);
+    border-radius: var(--badge-size-sm-radius);
+    font-size: var(--badge-size-sm-fontSize);
+  }
+
+  &--md {
+    padding: var(--badge-size-md-paddingY) var(--badge-size-md-paddingX);
+    border-radius: var(--badge-size-md-radius);
+    font-size: var(--badge-size-md-fontSize);
+  }
+
+  &--lg {
+    padding: var(--badge-size-lg-paddingY) var(--badge-size-lg-paddingX);
+    border-radius: var(--badge-size-lg-radius);
+    font-size: var(--badge-size-lg-fontSize);
+  }
+}
+
+.badge__icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    width: 100%;
+    height: 100%;
+    fill: currentcolor;
+  }
+
+  // Size-specific icon sizing
+  .badge--sm & {
+    width: var(--badge-size-sm-iconSize);
+    height: var(--badge-size-sm-iconSize);
+  }
+
+  .badge--md & {
+    width: var(--badge-size-md-iconSize);
+    height: var(--badge-size-md-iconSize);
+  }
+
+  .badge--lg & {
+    width: var(--badge-size-lg-iconSize);
+    height: var(--badge-size-lg-iconSize);
+  }
+}
+
+.badge__content {
+  display: inline-block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .badge {
+    transition: none;
+  }
+}

@@ -1,0 +1,39 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Progress/Progress.tokens.json
+ */
+@mixin vars {
+  /* === Color Tokens === */
+  --progress-color-track-background: var(--semantic-color-background-secondary);
+  --progress-color-fill-info: var(--semantic-color-status-info);
+  --progress-color-fill-success: var(--semantic-color-status-success);
+  --progress-color-fill-warning: var(--semantic-color-status-warning);
+  --progress-color-fill-danger: var(--semantic-color-status-danger);
+  --progress-color-text-default: var(--semantic-color-foreground-secondary);
+
+  /* === Size Tokens === */
+  --progress-size-linear-sm-height: var(--core-spacing-size-02);
+  --progress-size-linear-sm-radius: var(--semantic-shape-radius-full);
+  --progress-size-linear-md-height: var(--core-spacing-size-03);
+  --progress-size-linear-md-radius: var(--semantic-shape-radius-full);
+  --progress-size-linear-lg-height: var(--core-spacing-size-04);
+  --progress-size-linear-lg-radius: var(--semantic-shape-radius-full);
+  --progress-size-circular-sm-size: 32px;
+  --progress-size-circular-sm-strokeWidth: 2px;
+  --progress-size-circular-md-size: 40px;
+  --progress-size-circular-md-strokeWidth: 3px;
+  --progress-size-circular-lg-size: 48px;
+  --progress-size-circular-lg-strokeWidth: 4px;
+
+  /* === Typography Tokens === */
+  --progress-typography-value-fontSize: var(--semantic-typography-caption-01);
+  --progress-typography-value-fontWeight: var(
+    --semantic-typography-fontWeight-medium
+  );
+
+  /* === Motion Tokens === */
+  --progress-motion-duration-indeterminate: 1.5s;
+  --progress-motion-easing-indeterminate: ease-in-out;
+
+  /* === Spacing Tokens === */
+  --progress-spacing-gap: var(--core-spacing-size-02);
+}

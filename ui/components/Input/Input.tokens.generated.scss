@@ -1,0 +1,18 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Input/Input.tokens.json
+ */
+@mixin vars {
+  /* === Color Tokens === */
+  --input-color-bg-default: var(--semantic-color-background-surface);
+  --input-color-text-default: var(--semantic-color-foreground-primary);
+  --input-color-border-default: var(--semantic-color-border-default);
+  --input-color-focus-default: var(--semantic-color-border-focus);
+  --input-color-invalid-default: var(--semantic-color-border-danger);
+
+  /* === Size Tokens === */
+  --input-size-height-default: var(--size-12);
+  --input-size-radius-default: var(--radius-md);
+
+  /* === Space Tokens === */
+  --input-space-inline-default: var(--space-300);
+}

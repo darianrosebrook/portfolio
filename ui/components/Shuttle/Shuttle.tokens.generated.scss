@@ -1,0 +1,22 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Shuttle/Shuttle.tokens.json
+ */
+@mixin vars {
+  /* === Color Tokens === */
+  --shuttle-color-background-default: var(
+    --semantic-color-background-secondary
+  );
+  --shuttle-color-foreground-primary: var(--semantic-color-foreground-primary);
+  --shuttle-color-foreground-secondary: var(
+    --semantic-color-foreground-secondary
+  );
+  --shuttle-color-border-default: var(--semantic-color-border-light);
+  --shuttle-color-border-accent: var(--semantic-color-border-accent);
+
+  /* === Size Tokens === */
+  --shuttle-size-padding-default: var(--core-spacing-size-07);
+  --shuttle-size-radius-default: var(--core-shape-radius-medium);
+
+  /* === Elevation Tokens === */
+  --shuttle-elevation-default: var(--semantic-elevation-depth-1);
+}

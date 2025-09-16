@@ -1,0 +1,29 @@
+@use './Tooltip.tokens.generated.scss' as tooltipTokens;
+
+.tooltip {
+  @include tooltipTokens.vars;
+
+  z-index: 9999;
+  max-width: var(--tooltip-size-maxWidth);
+  padding: var(--tooltip-size-padding-y) var(--tooltip-size-padding-x);
+  background: var(--tooltip-color-background-default);
+  border: 1px solid var(--tooltip-color-border-default);
+  border-radius: var(--tooltip-size-radius-default);
+  box-shadow: var(--tooltip-elevation-default);
+  color: var(--tooltip-color-foreground-default);
+  font-weight: var(--tooltip-typography-fontWeight);
+  font-size: var(--tooltip-typography-fontSize);
+  line-height: var(--tooltip-typography-lineHeight);
+  text-align: center;
+  word-wrap: break-word;
+
+  // Ensure tooltip appears above other content
+  pointer-events: none;
+  user-select: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tooltip {
+    transition: none;
+  }
+}

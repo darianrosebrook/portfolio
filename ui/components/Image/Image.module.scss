@@ -1,0 +1,34 @@
+@import '../../designTokens/index';
+@use './Image.tokens.generated.scss' as imageTokens;
+
+.image {
+  @include imageTokens.vars;
+
+  display: block;
+  padding: var(--image-size-padding-default);
+  background: var(--image-color-background-default);
+  border-radius: var(--image-size-radius-default);
+  box-shadow: var(--image-elevation-default) var(--semantic-color-background-imageOverlay);
+  transition: box-shadow var(--core-motion-duration-short) var(--core-motion-easing-standard),
+    transform var(--core-motion-duration-short) var(--core-motion-easing-standard);
+}
+
+.image.clickable {
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: var(--semantic-elevation-depth-2) var(--semantic-color-background-imageOverlay);
+    transform: translateY(-2px);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--semantic-color-border-accent);
+    outline-offset: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image {
+    transition: none;
+  }
+}

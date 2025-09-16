@@ -1,0 +1,18 @@
+@use './Shuttle.tokens.generated.scss' as shuttleTokens;
+
+.shuttle {
+  @include shuttleTokens.vars;
+
+  display: block;
+  padding: var(--shuttle-size-padding-default);
+  background: var(--shuttle-color-background-default);
+  border-radius: var(--shuttle-size-radius-default);
+  box-shadow: var(--shuttle-elevation-default)
+    var(--semantic-color-background-imageOverlay);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shuttle {
+    transition: none;
+  }
+}

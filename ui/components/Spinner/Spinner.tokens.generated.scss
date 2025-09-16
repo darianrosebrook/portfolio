@@ -1,0 +1,25 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Spinner/Spinner.tokens.json
+ */
+@mixin vars {
+  /* === Size Tokens === */
+  --spinner-size-xs: 12px;
+  --spinner-size-sm: 16px;
+  --spinner-size-md: 20px;
+  --spinner-size-lg: 28px;
+
+  /* === Thickness Tokens === */
+  --spinner-thickness-hairline: 2px;
+  --spinner-thickness-regular: 3px;
+  --spinner-thickness-bold: 4px;
+
+  /* === Color Tokens === */
+  --spinner-color-accent: var(--semantic-color-accent-brand);
+  --spinner-color-track: var(--semantic-color-border-subtle);
+
+  /* === Dots Tokens === */
+  --spinner-dots-gap: var(--core-spacing-size-04);
+
+  /* === Anim Tokens === */
+  --spinner-anim-duration: 800ms;
+}

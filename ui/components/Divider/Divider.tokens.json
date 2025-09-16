@@ -1,0 +1,18 @@
+{
+  "component": {
+    "divider": {
+      "thickness": {
+        "default": "1px",
+        "thick": "2px"
+      },
+      "color": {
+        "default": "{color.border.default}",
+        "subtle": "{color.border.subtle}",
+        "muted": "{color.border.muted}"
+      },
+      "spacing": {
+        "margin": "{space.200}"
+      }
+    }
+  }
+}

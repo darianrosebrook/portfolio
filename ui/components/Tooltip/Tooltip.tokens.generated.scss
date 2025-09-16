@@ -1,0 +1,35 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Tooltip/Tooltip.tokens.json
+ */
+@mixin vars {
+  /* === Color Tokens === */
+  --tooltip-color-background-default: var(--semantic-color-background-inverse);
+  --tooltip-color-foreground-default: var(--semantic-color-foreground-inverse);
+  --tooltip-color-border-default: var(--semantic-color-border-subtle);
+
+  /* === Size Tokens === */
+  --tooltip-size-padding-y: var(--core-spacing-size-03);
+  --tooltip-size-padding-x: var(--core-spacing-size-04);
+  --tooltip-size-radius-default: var(--semantic-shape-radius-small);
+  --tooltip-size-maxWidth: 200px;
+
+  /* === Elevation Tokens === */
+  --tooltip-elevation-default: var(--semantic-elevation-surface-floating);
+
+  /* === Typography Tokens === */
+  --tooltip-typography-fontSize: var(--semantic-typography-caption-01);
+  --tooltip-typography-fontWeight: var(--semantic-typography-fontWeight-medium);
+  --tooltip-typography-lineHeight: var(--semantic-typography-lineHeight-tight);
+
+  /* === Motion Tokens === */
+  --tooltip-motion-duration-enter: var(
+    --semantic-motion-interaction-enter-duration
+  );
+  --tooltip-motion-duration-exit: var(
+    --semantic-motion-interaction-exit-duration
+  );
+  --tooltip-motion-easing-enter: var(
+    --semantic-motion-interaction-enter-easing
+  );
+  --tooltip-motion-easing-exit: var(--semantic-motion-interaction-exit-easing);
+}

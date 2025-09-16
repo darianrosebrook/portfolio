@@ -1,0 +1,64 @@
+{
+  "prefix": "badge",
+  "tokens": {
+    "color": {
+      "background": {
+        "default": "{semantic.color.background.secondary}",
+        "info": "{semantic.color.background.infoSubtle}",
+        "success": "{semantic.color.background.successSubtle}",
+        "warning": "{semantic.color.background.warningSubtle}",
+        "danger": "{semantic.color.background.dangerSubtle}",
+        "counter": "{semantic.color.background.accent}",
+        "tag": "{semantic.color.background.tertiary}"
+      },
+      "foreground": {
+        "primary": "{semantic.color.foreground.primary}",
+        "secondary": "{semantic.color.foreground.secondary}",
+        "info": "{semantic.color.foreground.onInfoSubtle}",
+        "success": "{semantic.color.foreground.onSuccessSubtle}",
+        "warning": "{semantic.color.foreground.onWarningSubtle}",
+        "danger": "{semantic.color.foreground.onDangerSubtle}",
+        "accent": "{semantic.color.foreground.accent}",
+        "onColor": "{semantic.color.foreground.onColor}"
+      },
+      "border": {
+        "default": "{semantic.color.border.light}",
+        "accent": "{semantic.color.border.accent}",
+        "info": "{semantic.color.border.info}",
+        "success": "{semantic.color.border.success}",
+        "warning": "{semantic.color.border.warning}",
+        "danger": "{semantic.color.border.danger}"
+      }
+    },
+    "size": {
+      "sm": {
+        "paddingY": "{core.spacing.size.02}",
+        "paddingX": "{core.spacing.size.03}",
+        "fontSize": "{semantic.typography.caption.01}",
+        "radius": "{semantic.shape.radius.small}",
+        "iconSize": "{core.icon.size.sm}"
+      },
+      "md": {
+        "paddingY": "{core.spacing.size.03}",
+        "paddingX": "{core.spacing.size.04}",
+        "fontSize": "{semantic.typography.body.small.fontSize}",
+        "radius": "{semantic.shape.radius.default}",
+        "iconSize": "{core.icon.size.md}"
+      },
+      "lg": {
+        "paddingY": "{core.spacing.size.04}",
+        "paddingX": "{core.spacing.size.05}",
+        "fontSize": "{semantic.typography.body.default.fontSize}",
+        "radius": "{semantic.shape.radius.medium}",
+        "iconSize": "{core.icon.size.lg}"
+      }
+    },
+    "elevation": {
+      "default": "{semantic.elevation.surface.raised}",
+      "status": "none"
+    },
+    "spacing": {
+      "gap": "{core.spacing.size.02}"
+    }
+  }
+}

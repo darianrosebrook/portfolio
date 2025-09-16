@@ -1,0 +1,19 @@
+{
+  "prefix": "input",
+  "tokens": {
+    "color": {
+      "bg": { "default": "{semantic.color.background.surface}" },
+      "text": { "default": "{semantic.color.foreground.primary}" },
+      "border": { "default": "{semantic.color.border.default}" },
+      "focus": { "default": "{semantic.color.border.focus}" },
+      "invalid": { "default": "{semantic.color.border.danger}" }
+    },
+    "size": {
+      "height": { "default": "{size.12}" },
+      "radius": { "default": "{radius.md}" }
+    },
+    "space": {
+      "inline": { "default": "{space.300}" }
+    }
+  }
+}

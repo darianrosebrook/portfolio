@@ -1,0 +1,217 @@
+@use './Progress.tokens.generated.scss' as progressTokens;
+
+.progress {
+  @include progressTokens.vars;
+
+  display: inline-flex;
+  gap: var(--progress-spacing-gap);
+  align-items: center;
+
+  // Linear variant
+  &--linear {
+    width: 100%;
+
+    .progressTrack {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      background: var(--progress-color-track-background);
+    }
+
+    .progressFill {
+      height: 100%;
+      background: var(--progress-color-fill-info);
+      border-radius: inherit;
+      transition: width 0.3s ease-out;
+    }
+
+    .progressCircleForeground {
+      stroke: var(--progress-color-fill-info);
+    }
+
+    // Size variants for linear
+    &.progress--sm .progressTrack {
+      height: var(--progress-size-linear-sm-height);
+      border-radius: var(--progress-size-linear-sm-radius);
+    }
+
+    &.progress--md .progressTrack {
+      height: var(--progress-size-linear-md-height);
+      border-radius: var(--progress-size-linear-md-radius);
+    }
+
+    &.progress--lg .progressTrack {
+      height: var(--progress-size-linear-lg-height);
+      border-radius: var(--progress-size-linear-lg-radius);
+    }
+
+    // Indeterminate animation for linear
+    &.progress--indeterminate .progressFill {
+      width: 30% !important;
+      animation: progressIndeterminateLinear
+        var(--progress-motion-duration-indeterminate)
+        var(--progress-motion-easing-indeterminate) infinite;
+    }
+  }
+
+  // Circular variant
+  &--circular {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    .progressCircle {
+      transform: rotate(-90deg);
+    }
+
+    .progressCircleBackground {
+      stroke: var(--progress-color-track-background);
+    }
+
+    .progressCircleForeground {
+      transition: stroke-dashoffset 0.3s ease-out;
+      stroke: var(--progress-color-fill-info);
+    }
+
+    // Size variants for circular
+    &.progress--sm {
+      .progressCircle {
+        width: var(--progress-size-circular-sm-size);
+        height: var(--progress-size-circular-sm-size);
+      }
+
+      .progressCircleBackground,
+      .progressCircleForeground {
+        stroke-width: var(--progress-size-circular-sm-strokeWidth);
+      }
+    }
+
+    &.progress--md {
+      .progressCircle {
+        width: var(--progress-size-circular-md-size);
+        height: var(--progress-size-circular-md-size);
+      }
+
+      .progressCircleBackground,
+      .progressCircleForeground {
+        stroke-width: var(--progress-size-circular-md-strokeWidth);
+      }
+    }
+
+    &.progress--lg {
+      .progressCircle {
+        width: var(--progress-size-circular-lg-size);
+        height: var(--progress-size-circular-lg-size);
+      }
+
+      .progressCircleBackground,
+      .progressCircleForeground {
+        stroke-width: var(--progress-size-circular-lg-strokeWidth);
+      }
+    }
+
+    // Indeterminate animation for circular
+    &.progress--indeterminate .progressCircleForeground {
+      animation: progressIndeterminateCircular
+        var(--progress-motion-duration-indeterminate) linear infinite;
+      stroke-dasharray: 25 75;
+    }
+  }
+
+  // Intent colors - declared after base variant styles to satisfy no-descending-specificity
+  &.progress--info {
+    .progressFill,
+    .progressCircleForeground {
+      background: var(--progress-color-fill-info);
+      stroke: var(--progress-color-fill-info);
+    }
+  }
+
+  &.progress--success {
+    .progressFill,
+    .progressCircleForeground {
+      background: var(--progress-color-fill-success);
+      stroke: var(--progress-color-fill-success);
+    }
+  }
+
+  &.progress--warning {
+    .progressFill,
+    .progressCircleForeground {
+      background: var(--progress-color-fill-warning);
+      stroke: var(--progress-color-fill-warning);
+    }
+  }
+
+  &.progress--danger {
+    .progressFill,
+    .progressCircleForeground {
+      background: var(--progress-color-fill-danger);
+      stroke: var(--progress-color-fill-danger);
+    }
+  }
+}
+
+.progressValue {
+  flex-shrink: 0;
+  color: var(--progress-color-text-default);
+  font-weight: var(--progress-typography-value-fontWeight);
+  font-size: var(--progress-typography-value-fontSize);
+  white-space: nowrap;
+
+  // Position value text inside circular progress
+  .progress--circular & {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+// Animations
+@keyframes progressIndeterminateLinear {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(400%);
+  }
+}
+
+@keyframes progressIndeterminateCircular {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progress {
+    .progressFill,
+    .progressCircleForeground {
+      transition: none;
+    }
+
+    &--indeterminate {
+      .progressFill,
+      .progressCircleForeground {
+        animation: none;
+      }
+
+      // Show static state for reduced motion
+      .progressFill {
+        width: 50% !important;
+      }
+
+      .progressCircleForeground {
+        transform: none;
+        stroke-dasharray: 50 50;
+      }
+    }
+  }
+}

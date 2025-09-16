@@ -1,0 +1,18 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/OTP/OTP.tokens.json
+ */
+@mixin vars {
+  /* === Color Tokens === */
+  --otp-color-background-default: var(--semantic-color-background-secondary);
+  --otp-color-foreground-primary: var(--semantic-color-foreground-primary);
+  --otp-color-foreground-secondary: var(--semantic-color-foreground-secondary);
+  --otp-color-border-default: var(--semantic-color-border-light);
+  --otp-color-border-accent: var(--semantic-color-border-accent);
+
+  /* === Size Tokens === */
+  --otp-size-padding-default: var(--core-spacing-size-07);
+  --otp-size-radius-default: var(--core-shape-radius-medium);
+
+  /* === Elevation Tokens === */
+  --otp-elevation-default: var(--semantic-elevation-depth-1);
+}

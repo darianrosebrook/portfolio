@@ -1,0 +1,14 @@
+{
+  "component": {
+    "visuallyHidden": {
+      "focusable": {
+        "bg": "{color.background.layer}",
+        "border": "{color.border.focus}",
+        "color": "{color.foreground.default}",
+        "padding": "{space.200}",
+        "radius": "{radius.sm}",
+        "shadow": "{shadow.md}"
+      }
+    }
+  }
+}

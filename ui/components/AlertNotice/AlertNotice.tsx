@@ -3,8 +3,9 @@ import * as React from 'react';
 import Button from '../Button';
 import Styles from './AlertNotice.module.scss';
 import { TimesIcon, LocalIcons } from '@/ui/components/Icon/LocalIcons';
+import { Intent, StatusIntent, normalizeStatusIntent } from '@/types';
 export type AlertNoticeProps = {
-  status?: 'info' | 'success' | 'warning' | 'danger';
+  status?: StatusIntent;
   level?: 'page' | 'section' | 'inline';
   index: number;
   dismissible?: boolean;
@@ -17,31 +18,32 @@ const Container = React.forwardRef<
   (
     { status = 'info', level, dismissible, onDismiss, index, ...props },
     ref
-  ) => (
-    <div
-      ref={ref}
-      role="alert"
-      className={`${Styles.alert} ${Styles[`alert__${level}`]} ${
-        Styles[`alert__${level}--${status}`]
-      }`}
-      {...props}
-    >
-      {props.children}
-      {dismissible && onDismiss && (
-        <div className={Styles['__dismiss']}>
-          <Button
-            variant="tertiary"
-            onClick={onDismiss}
-            title="Dismiss this alert"
-            data-index={index}
-          >
-            <TimesIcon aria-hidden={true} />
-            <span className="sr-only">Dismiss this alert</span>
-          </Button>
-        </div>
-      )}
-    </div>
-  )
+  ) => {
+    const intent: Intent = normalizeStatusIntent(status);
+    return (
+      <div
+        ref={ref}
+        role="alert"
+        className={`${Styles.alert} ${Styles[`alert__${level}`]} ${Styles[`alert__${level}--${intent}`]}`}
+        {...props}
+      >
+        {props.children}
+        {dismissible && onDismiss && (
+          <div className={Styles['__dismiss']}>
+            <Button
+              variant="tertiary"
+              onClick={onDismiss}
+              title="Dismiss this alert"
+              data-index={index}
+            >
+              <TimesIcon aria-hidden={true} />
+              <span className="sr-only">Dismiss this alert</span>
+            </Button>
+          </div>
+        )}
+      </div>
+    );
+  }
 );
 Container.displayName = 'AlertNotice.Container';
 
@@ -55,7 +57,8 @@ const BodyContent = ({ children }: { children: React.ReactNode }) => (
 );
 BodyContent.displayName = 'AlertNotice.Body';
 
-const Icon = ({ status }: { status: string }) => {
+const Icon = ({ status }: { status: StatusIntent }) => {
+  const intent: Intent = normalizeStatusIntent(status);
   const icons = {
     info: 'info-circle' as const,
     success: 'check-circle' as const,
@@ -63,7 +66,7 @@ const Icon = ({ status }: { status: string }) => {
     danger: 'exclamation-circle' as const,
   };
 
-  const IconComponent = LocalIcons[icons[status as keyof typeof icons]];
+  const IconComponent = LocalIcons[icons[intent]];
 
   return (
     <div className={Styles['__icon']}>
@@ -73,4 +76,12 @@ const Icon = ({ status }: { status: string }) => {
 };
 Icon.displayName = 'AlertNotice.Icon';
 
+const AlertNotice = {
+  Container,
+  Title,
+  Body: BodyContent,
+  Icon,
+};
+
 export { Container, Title, BodyContent, Icon };
+export default AlertNotice;

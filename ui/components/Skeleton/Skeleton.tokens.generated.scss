@@ -1,0 +1,22 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Skeleton/Skeleton.tokens.json
+ */
+@mixin vars {
+  /* === Surface Tokens === */
+  --skeleton-surface-bg: var(--semantic-color-background-surface);
+
+  /* === Shimmer Tokens === */
+  --skeleton-shimmer-c1: var(--semantic-color-background-elevated);
+  --skeleton-shimmer-c2: var(--semantic-color-accent-info);
+  --skeleton-shimmer-c3: var(--semantic-color-accent-warning);
+  --skeleton-shimmer-c4: var(--semantic-color-accent-danger);
+
+  /* === Spacing Tokens === */
+  --skeleton-spacing-gap: var(--core-spacing-size-03);
+
+  /* === Size Tokens === */
+  --skeleton-size-lineHeight: var(--core-spacing-size-03);
+
+  /* === Motion Tokens === */
+  --skeleton-motion-duration: var(--semantic-motion-duration-slower);
+}

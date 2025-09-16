@@ -1,0 +1,26 @@
+@use './Input.tokens.generated.scss' as inputTokens;
+
+.input {
+  @include inputTokens.vars;
+
+  padding-inline: var(--input-space-inline);
+  padding-block: 0;
+  background: var(--input-color-bg);
+  border: 1px solid var(--input-color-border);
+  border-radius: var(--input-size-radius);
+  color: var(--input-color-text);
+  appearance: none;
+  block-size: var(--input-size-height);
+  inline-size: 100%;
+}
+
+.input:focus-visible {
+  border-color: var(--input-color-focus);
+  box-shadow: 0 0 0 3px
+    color-mix(in oklab, var(--input-color-focus) 25%, transparent);
+  outline: none;
+}
+
+.invalid {
+  border-color: var(--input-color-invalid);
+}

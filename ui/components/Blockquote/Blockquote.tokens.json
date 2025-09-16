@@ -1,0 +1,40 @@
+{
+  "component": {
+    "blockquote": {
+      "typography": {
+        "sm": {
+          "fontSize": "{font.size.300}",
+          "lineHeight": "{font.lineHeight.300}"
+        },
+        "md": {
+          "fontSize": "{font.size.400}",
+          "lineHeight": "{font.lineHeight.400}"
+        },
+        "lg": {
+          "fontSize": "{font.size.500}",
+          "lineHeight": "{font.lineHeight.500}"
+        },
+        "fontStyle": "italic",
+        "fontWeight": "{font.weight.medium}"
+      },
+      "spacing": {
+        "padding": "{space.400}",
+        "margin": "{space.400} 0",
+        "indent": "{space.500}"
+      },
+      "border": {
+        "width": "3px",
+        "style": "solid",
+        "color": "{color.border.accent}",
+        "radius": "{radius.md}"
+      },
+      "surface": {
+        "bg": "{color.background.subtle}",
+        "color": "{color.foreground.muted}"
+      },
+      "accent": {
+        "color": "{color.accent.primary}"
+      }
+    }
+  }
+}
