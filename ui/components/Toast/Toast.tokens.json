@@ -1,0 +1,35 @@
+{
+  "prefix": "toast",
+  "tokens": {
+    "surface": {
+      "bg": "{semantic.color.background.layer}",
+      "border": "{semantic.color.border.subtle}",
+      "radius": "{core.shape.radius.medium}",
+      "shadow": "{semantic.elevation.depth.2}"
+    },
+    "color": {
+      "info": "{semantic.color.foreground.primary}",
+      "success": "{semantic.color.status.success.fg}",
+      "warning": "{semantic.color.status.warning.fg}",
+      "error": "{semantic.color.status.danger.fg}"
+    },
+    "accent": {
+      "info": "{semantic.color.accent.info}",
+      "success": "{semantic.color.accent.success}",
+      "warning": "{semantic.color.accent.warning}",
+      "error": "{semantic.color.accent.danger}"
+    },
+    "spacing": {
+      "padding": "{core.spacing.size.05}",
+      "gap": "{core.spacing.size.04}",
+      "stackGap": "{core.spacing.size.04}"
+    },
+    "size": {
+      "maxWidth": "{core.size.content.2xs}"
+    },
+    "motion": {
+      "enter": "{semantic.motion.duration.fast}",
+      "leave": "{semantic.motion.duration.fast}"
+    }
+  }
+}

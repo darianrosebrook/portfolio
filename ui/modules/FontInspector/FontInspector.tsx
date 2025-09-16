@@ -508,7 +508,7 @@ export const InspectorProvider: React.FC<{
 // Main Inspector Component
 // ---------------------------
 
-export const FontInspector: React.FC = () => (
+const FontInspector: React.FC = () => (
   <InspectorProvider>
     <section className="content">
       <h1>Decoding Type Anatomy: Functional Choices for Design Systems</h1>
@@ -551,3 +551,6 @@ export const FontInspector: React.FC = () => (
     </section>
   </InspectorProvider>
 );
+
+export { FontInspector };
+export default FontInspector;

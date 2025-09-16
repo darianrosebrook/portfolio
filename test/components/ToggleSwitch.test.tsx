@@ -18,10 +18,7 @@ describe('ToggleSwitch', () => {
     // The component renders a checkbox, not a switch
     const toggle = screen.getByRole('checkbox');
     expect(toggle).toBeInTheDocument();
-    expect(toggle).toHaveAttribute(
-      'id',
-      expect.stringContaining('toggleSwitch')
-    );
+    expect(toggle).toHaveAttribute('id', expect.stringContaining('switch'));
   });
 
   it('renders checked state correctly', () => {

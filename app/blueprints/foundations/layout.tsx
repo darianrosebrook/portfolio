@@ -1,6 +1,6 @@
 'use client';
 // layout for foundations that contains breadcrumbs
-import { Breadcrumbs } from '@/ui/components/breadcrumbs/Breadcrumbs';
+import Breadcrumbs from '@/ui/components/Breadcrumbs';
 import { useBreadcrumbs } from '@/hooks/useBreadcrumbs';
 
 export default function FoundationsLayout({

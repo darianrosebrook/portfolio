@@ -1,0 +1,24 @@
+{
+  "prefix": "skeleton",
+  "tokens": {
+    "surface": {
+      "bg": "{semantic.color.background.surface}"
+    },
+    "shimmer": {
+      "c1": "{semantic.color.background.elevated}",
+      "c2": "{semantic.color.accent.info}",
+      "c3": "{semantic.color.accent.warning}",
+      "c4": "{semantic.color.accent.danger}"
+    },
+    "spacing": {
+      "gap": "{core.spacing.size.03}"
+    },
+    "size": {
+      "lineHeight": "{core.spacing.size.03}"
+    },
+    "radius": "{core.shape.radius.medium}",
+    "motion": {
+      "duration": "{semantic.motion.duration.slower}"
+    }
+  }
+}

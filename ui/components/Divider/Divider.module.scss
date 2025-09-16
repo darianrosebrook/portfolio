@@ -1,0 +1,22 @@
+@use './Divider.tokens.generated.scss' as dividerTokens;
+
+.divider {
+  @include dividerTokens.vars;
+
+  flex-shrink: 0;
+  margin: 0;
+  background-color: var(--divider-color-default);
+  border: none;
+}
+
+.horizontal {
+  margin-block: var(--divider-spacing-margin);
+  block-size: var(--divider-thickness, var(--divider-thickness-default));
+  inline-size: 100%;
+}
+
+.vertical {
+  margin-inline: var(--divider-spacing-margin);
+  block-size: 100%;
+  inline-size: var(--divider-thickness, var(--divider-thickness-default));
+}

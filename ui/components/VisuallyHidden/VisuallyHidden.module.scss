@@ -1,0 +1,36 @@
+@use './VisuallyHidden.tokens.generated.scss' as vhTokens;
+
+.visuallyHidden {
+  @include vhTokens.vars;
+
+  /* Modern visually hidden technique */
+  position: absolute !important;
+  overflow: hidden !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+  block-size: 1px !important;
+  clip-path: inset(50%) !important;
+  inline-size: 1px !important;
+}
+
+.focusable:focus,
+.focusable:focus-visible {
+  position: static !important;
+  z-index: 1000 !important;
+  overflow: visible !important;
+  clip: auto !important;
+  margin: 0 !important;
+  padding: var(--visuallyHidden-focusable-padding) !important;
+  background: var(--visuallyHidden-focusable-bg) !important;
+  border: 2px solid var(--visuallyHidden-focusable-border) !important;
+  border-radius: var(--visuallyHidden-focusable-radius) !important;
+  box-shadow: var(--visuallyHidden-focusable-shadow) !important;
+  color: var(--visuallyHidden-focusable-color) !important;
+  white-space: normal !important;
+  block-size: auto !important;
+  clip-path: none !important;
+  inline-size: auto !important;
+}

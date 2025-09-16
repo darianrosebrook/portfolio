@@ -1,0 +1,24 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/SideNavigation/SideNavigation.tokens.json
+ */
+@mixin vars {
+  /* === Color Tokens === */
+  --sidenavigation-color-background-default: var(
+    --semantic-color-background-secondary
+  );
+  --sidenavigation-color-foreground-primary: var(
+    --semantic-color-foreground-primary
+  );
+  --sidenavigation-color-foreground-secondary: var(
+    --semantic-color-foreground-secondary
+  );
+  --sidenavigation-color-border-default: var(--semantic-color-border-light);
+  --sidenavigation-color-border-accent: var(--semantic-color-border-accent);
+
+  /* === Size Tokens === */
+  --sidenavigation-size-padding-default: var(--core-spacing-size-07);
+  --sidenavigation-size-radius-default: var(--core-shape-radius-medium);
+
+  /* === Elevation Tokens === */
+  --sidenavigation-elevation-default: var(--semantic-elevation-depth-1);
+}

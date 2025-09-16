@@ -1,0 +1,26 @@
+{
+  "prefix": "spinner",
+  "tokens": {
+    "size": {
+      "xs": "12px",
+      "sm": "16px",
+      "md": "20px",
+      "lg": "28px"
+    },
+    "thickness": {
+      "hairline": "2px",
+      "regular": "3px",
+      "bold": "4px"
+    },
+    "color": {
+      "accent": "{semantic.color.accent.brand}",
+      "track": "{semantic.color.border.subtle}"
+    },
+    "dots": {
+      "gap": "{core.spacing.size.04}"
+    },
+    "anim": {
+      "duration": "800ms"
+    }
+  }
+}

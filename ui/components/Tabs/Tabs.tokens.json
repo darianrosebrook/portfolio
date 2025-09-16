@@ -1,0 +1,20 @@
+{
+  "prefix": "tabs",
+  "tokens": {
+    "spacing": {
+      "gap": "{core.spacing.size.04}",
+      "padding": "{core.spacing.size.04}",
+      "panelGap": "{core.spacing.size.06}"
+    },
+    "color": {
+      "fg": "{semantic.color.foreground.primary}",
+      "active-fg": "{semantic.color.foreground.primary}",
+      "active-bg": "{semantic.color.background.surface}",
+      "disabled-fg": "{semantic.color.foreground.disabled}",
+      "indicator": "{semantic.color.accent.info}"
+    },
+    "motion": {
+      "indicator": "{semantic.motion.duration.fast}"
+    }
+  }
+}

@@ -1,0 +1,113 @@
+@import '../../designTokens/index';
+@use './Walkthrough.tokens.generated.scss' as walkthroughTokens;
+
+.content {
+  @include walkthroughTokens.vars;
+
+  max-width: 28rem;
+  padding: var(--walkthrough-surface-padding);
+  background: var(--walkthrough-surface-bg);
+  border: 1px solid var(--walkthrough-surface-border);
+  border-radius: var(--walkthrough-surface-radius);
+  box-shadow: var(--walkthrough-surface-shadow);
+}
+
+.title {
+  margin: 0;
+  color: var(--walkthrough-title-color);
+  font-weight: var(--walkthrough-title-fontWeight);
+  font-size: var(--walkthrough-title-fontSize);
+}
+
+.description {
+  margin-top: var(--walkthrough-description-marginTop);
+  margin-bottom: 0;
+  color: var(--walkthrough-description-color);
+  font-size: var(--walkthrough-description-fontSize);
+}
+
+.controls {
+  display: flex;
+  gap: var(--walkthrough-controls-gap);
+  justify-content: flex-end;
+  margin-top: var(--walkthrough-controls-marginTop);
+}
+
+.skip,
+.prev {
+  padding: var(--walkthrough-button-secondary-padding);
+  background: var(--walkthrough-button-secondary-bg);
+  border: 1px solid var(--walkthrough-button-secondary-border);
+  border-radius: var(--walkthrough-button-secondary-radius);
+  color: var(--walkthrough-button-secondary-color);
+  font-size: inherit;
+  font-family: inherit;
+  transition: opacity 0.2s ease;
+  cursor: pointer;
+}
+
+.skip:hover,
+.prev:hover {
+  opacity: 0.8;
+}
+
+.prev:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.next {
+  padding: var(--walkthrough-button-primary-padding);
+  background: var(--walkthrough-button-primary-bg);
+  border: none;
+  border-radius: var(--walkthrough-button-primary-radius);
+  color: var(--walkthrough-button-primary-color);
+  font-weight: 500;
+  font-size: inherit;
+  font-family: inherit;
+  transition: opacity 0.2s ease;
+  cursor: pointer;
+}
+
+.next:hover {
+  opacity: 0.9;
+}
+
+.dots {
+  display: inline-flex;
+  gap: var(--walkthrough-dots-gap);
+  justify-content: center;
+  margin-bottom: var(--walkthrough-controls-marginTop);
+}
+
+.dot,
+.dotActive {
+  display: inline-block;
+  width: var(--walkthrough-dots-size);
+  height: var(--walkthrough-dots-size);
+  background: var(--walkthrough-dots-idle);
+  border-radius: 999px;
+  transition: background-color 0.2s ease;
+}
+
+.dotActive {
+  background: var(--walkthrough-dots-active);
+}
+
+.counter {
+  margin-bottom: var(--walkthrough-controls-marginTop);
+  color: var(--walkthrough-description-color);
+  font-size: var(--walkthrough-description-fontSize);
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dot,
+  .dotActive,
+  .skip,
+  .prev,
+  .next {
+    transition: none;
+  }
+}

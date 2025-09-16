@@ -31,7 +31,7 @@ import Button from '@/ui/components/Button';
 import LogoMaruqee from '@/ui/modules/LogoMarquee';
 import Image from 'next/image';
 import BlueprintsWrapper from './BlueprintsWrapper';
-import { AnimatedLink } from '@/ui/components/links/AnimatedLink';
+import { AnimatedLink } from '@/ui/components/Links';
 
 export default function Home() {
   const ldJson = {

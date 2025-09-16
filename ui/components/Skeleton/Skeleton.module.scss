@@ -1,0 +1,138 @@
+@use './Skeleton.tokens.generated.scss' as sk;
+
+.root {
+  --skeleton-bg: var(--skeleton-color-base, var(--skeleton-surface-bg));
+  --skeleton-hi: var(--skeleton-color-highlight, var(--skeleton-shimmer-c2));
+  --skeleton-hi2: var(--skeleton-color-highlight-2, var(--skeleton-shimmer-c3));
+  --skeleton-radius-cur: var(--skeleton-radius-md, var(--skeleton-radius));
+  --skeleton-gap-cur: var(--skeleton-gap-md, var(--skeleton-spacing-gap));
+  @include sk.vars;
+
+  display: block;
+  color: transparent;
+}
+
+.stack {
+  display: grid;
+  gap: var(--skeleton-gap-cur);
+}
+
+.row {
+  display: flex;
+  gap: var(--skeleton-gap-cur);
+  align-items: center;
+  min-width: 0;
+}
+
+.media {
+  inline-size: 100%;
+}
+
+.shape {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  background: var(--skeleton-bg);
+  border-radius: var(--skeleton-radius-cur);
+}
+
+.kind-circle {
+  border-radius: 999px;
+}
+
+.kind-line {
+  block-size: 1em;
+}
+
+[data-animate='shimmer'] .shape::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    #00000000 0%,
+    var(--skeleton-hi) 50%,
+    #00000000 100%
+  );
+  transform: translateX(-100%);
+  animation: shimmer var(--skeleton-anim-duration, 1200ms)
+    var(--skeleton-anim-easing, cubic-bezier(0.4, 0, 0.2, 1)) infinite;
+  content: '';
+}
+
+[data-animate='wipe'] .shape::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    var(--skeleton-hi) 0%,
+    var(--skeleton-hi2) 50%,
+    var(--skeleton-hi) 100%
+  );
+  transform: translateX(-120%);
+  animation: wipe var(--skeleton-anim-duration-alt, 1600ms)
+    var(--skeleton-anim-easing, cubic-bezier(0.4, 0, 0.2, 1)) infinite;
+  animation-delay: var(--skeleton-wipe-delay, 0ms);
+  content: '';
+  mask: linear-gradient(
+    90deg,
+    #00000000 0%,
+    #000000 10%,
+    #000000 90%,
+    #00000000 100%
+  );
+}
+
+[data-animate='pulse'] .shape {
+  animation: pulse var(--skeleton-anim-duration-pulse, 900ms) ease-in-out
+    infinite;
+}
+
+@container (min-width: 480px) {
+  [data-variant='text'][data-density='compact'] .kind-line {
+    block-size: 0.85em;
+  }
+
+  [data-variant='text'][data-density='spacious'] .kind-line {
+    block-size: 1.1em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shape,
+  .shape::after {
+    animation: none !important;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .shape {
+    background: var(--skeleton-color-contrast-base, var(--skeleton-bg));
+  }
+}
+
+@keyframes shimmer {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes wipe {
+  50% {
+    transform: translateX(120%);
+  }
+
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.65;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}

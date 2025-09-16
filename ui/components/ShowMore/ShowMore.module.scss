@@ -1,0 +1,18 @@
+@use './ShowMore.tokens.generated.scss' as showmoreTokens;
+
+.showmore {
+  @include showmoreTokens.vars;
+
+  display: block;
+  padding: var(--showmore-size-padding-default);
+  background: var(--showmore-color-background-default);
+  border-radius: var(--showmore-size-radius-default);
+  box-shadow: var(--showmore-elevation-default)
+    var(--semantic-color-background-imageOverlay);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .showmore {
+    transition: none;
+  }
+}

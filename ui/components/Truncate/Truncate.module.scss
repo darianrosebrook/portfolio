@@ -1,0 +1,66 @@
+@use './Truncate.tokens.generated.scss' as truncateTokens;
+
+.truncate {
+  @include truncateTokens.vars;
+
+  position: relative;
+  overflow: hidden;
+}
+
+.content {
+  display: block;
+}
+
+/* Single line truncation */
+.truncate:not(.expandable) {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Expanded state shows all content */
+.expanded .content {
+  display: block;
+  overflow: visible;
+}
+
+/* Multi-line truncation */
+.expandable:not(.expanded) .content {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--truncate-lines, 1);
+}
+
+.toggle {
+  display: inline;
+  padding: 0;
+  background: none;
+  border: none;
+  color: var(--truncate-toggle-color);
+  font-weight: var(--truncate-toggle-fontWeight);
+  font-size: var(--truncate-toggle-fontSize);
+  text-decoration: underline;
+  cursor: pointer;
+  margin-inline-start: var(--truncate-toggle-spacing);
+
+  &:hover {
+    color: var(--truncate-toggle-colorHover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid currentcolor;
+    outline-offset: 2px;
+  }
+}
+
+/* Fade effect for single line (optional enhancement) */
+.truncate:not(.expandable, .expanded)::after {
+  position: absolute;
+  background: var(--truncate-fade-gradient);
+  pointer-events: none;
+  block-size: 1.2em;
+  content: '';
+  inline-size: 2rem;
+  inset-block-end: 0;
+  inset-inline-end: 0;
+}

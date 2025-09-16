@@ -1,0 +1,21 @@
+@use './ComponentSVG.tokens.generated.scss' as componentSVGTokens;
+
+.componentSVG {
+  @include componentSVGTokens.vars;
+
+  display: inline-block;
+  width: fit-content;
+  height: fit-content;
+}
+
+.componentSVG svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .componentSVG {
+    transition: none;
+  }
+}

@@ -1,0 +1,66 @@
+.header {
+  margin-bottom: var(--core-spacing-size-07);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--core-spacing-size-06);
+}
+
+.card {
+  padding: var(--core-spacing-size-06);
+  background: var(--semantic-color-background-secondary);
+  border: 1px solid var(--semantic-color-border-primary);
+  border-radius: var(--core-shape-radius-08);
+  box-shadow: var(--semantic-elevation-depth-1)
+    var(--semantic-color-background-imageOverlay);
+}
+
+.cardTitle {
+  font-weight: var(--semantic-typography-fontWeight-medium);
+  font-size: var(--semantic-typography-body-02);
+}
+
+.section {
+  margin-top: var(--core-spacing-size-08);
+}
+
+.badgeRow {
+  display: flex;
+  gap: var(--core-spacing-size-04);
+  margin-top: var(--core-spacing-size-04);
+}
+
+.badge {
+  display: inline-flex;
+  gap: var(--core-spacing-size-03);
+  align-items: center;
+  height: 26px;
+  padding: 0 var(--core-spacing-size-04);
+  border: 1px solid var(--semantic-color-border-primary);
+  border-radius: var(--core-shape-radius-full);
+  font-size: 12px;
+  line-height: 1;
+}
+
+.badgeCategory {
+  background: var(--semantic-color-background-tertiary);
+  color: var(--semantic-color-foreground-primary);
+}
+
+.count {
+  opacity: 0.7;
+}
+
+@media (width <= 768px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (width <= 520px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

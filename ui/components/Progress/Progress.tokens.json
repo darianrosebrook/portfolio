@@ -1,0 +1,66 @@
+{
+  "prefix": "progress",
+  "tokens": {
+    "color": {
+      "track": {
+        "background": "{semantic.color.background.secondary}"
+      },
+      "fill": {
+        "info": "{semantic.color.status.info}",
+        "success": "{semantic.color.status.success}",
+        "warning": "{semantic.color.status.warning}",
+        "danger": "{semantic.color.status.danger}"
+      },
+      "text": {
+        "default": "{semantic.color.foreground.secondary}"
+      }
+    },
+    "size": {
+      "linear": {
+        "sm": {
+          "height": "{core.spacing.size.02}",
+          "radius": "{semantic.shape.radius.full}"
+        },
+        "md": {
+          "height": "{core.spacing.size.03}",
+          "radius": "{semantic.shape.radius.full}"
+        },
+        "lg": {
+          "height": "{core.spacing.size.04}",
+          "radius": "{semantic.shape.radius.full}"
+        }
+      },
+      "circular": {
+        "sm": {
+          "size": "32px",
+          "strokeWidth": "2px"
+        },
+        "md": {
+          "size": "40px",
+          "strokeWidth": "3px"
+        },
+        "lg": {
+          "size": "48px",
+          "strokeWidth": "4px"
+        }
+      }
+    },
+    "typography": {
+      "value": {
+        "fontSize": "{semantic.typography.caption.01}",
+        "fontWeight": "{semantic.typography.fontWeight.medium}"
+      }
+    },
+    "motion": {
+      "duration": {
+        "indeterminate": "1.5s"
+      },
+      "easing": {
+        "indeterminate": "ease-in-out"
+      }
+    },
+    "spacing": {
+      "gap": "{core.spacing.size.02}"
+    }
+  }
+}

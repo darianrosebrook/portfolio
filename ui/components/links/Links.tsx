@@ -6,7 +6,7 @@ import { gsap } from 'gsap';
 import { SplitText } from 'gsap/SplitText';
 import { useGSAP } from '@gsap/react';
 import { useFontsLoaded } from '@/hooks/useFontsLoaded';
-import styles from './AnimatedLink.module.scss';
+import styles from './Links.module.scss';
 
 gsap.registerPlugin(useGSAP, SplitText);
 

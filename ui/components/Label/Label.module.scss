@@ -1,0 +1,10 @@
+@use './Label.tokens.generated.scss' as labelTokens;
+
+.label {
+  @include labelTokens.vars;
+
+  color: var(--label-color-text);
+  font: inherit;
+  font-weight: var(--label-typo-weight);
+  line-height: var(--label-typo-lineHeight);
+}

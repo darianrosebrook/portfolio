@@ -1,0 +1,18 @@
+@use './SideNavigation.tokens.generated.scss' as sidenavigationTokens;
+
+.sidenavigation {
+  @include sidenavigationTokens.vars;
+
+  display: block;
+  padding: var(--sidenavigation-size-padding-default);
+  background: var(--sidenavigation-color-background-default);
+  border-radius: var(--sidenavigation-size-radius-default);
+  box-shadow: var(--sidenavigation-elevation-default)
+    var(--semantic-color-background-imageOverlay);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidenavigation {
+    transition: none;
+  }
+}

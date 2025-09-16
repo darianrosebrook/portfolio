@@ -1,0 +1,29 @@
+{
+  "prefix": "showmore",
+  "tokens": {
+    "color": {
+      "background": {
+        "default": "{semantic.color.background.secondary}"
+      },
+      "foreground": {
+        "primary": "{semantic.color.foreground.primary}",
+        "secondary": "{semantic.color.foreground.secondary}"
+      },
+      "border": {
+        "default": "{semantic.color.border.light}",
+        "accent": "{semantic.color.border.accent}"
+      }
+    },
+    "size": {
+      "padding": {
+        "default": "{core.spacing.size.07}"
+      },
+      "radius": {
+        "default": "{core.shape.radius.medium}"
+      }
+    },
+    "elevation": {
+      "default": "{semantic.elevation.depth.1}"
+    }
+  }
+}

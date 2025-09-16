@@ -1,3 +1,1 @@
-import Tiptap from './tiptap';
-
-export { Tiptap };
+export { default } from './tiptap';

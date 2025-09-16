@@ -1,0 +1,44 @@
+{
+  "prefix": "tooltip",
+  "tokens": {
+    "color": {
+      "background": {
+        "default": "{semantic.color.background.inverse}"
+      },
+      "foreground": {
+        "default": "{semantic.color.foreground.inverse}"
+      },
+      "border": {
+        "default": "{semantic.color.border.subtle}"
+      }
+    },
+    "size": {
+      "padding": {
+        "y": "{core.spacing.size.03}",
+        "x": "{core.spacing.size.04}"
+      },
+      "radius": {
+        "default": "{semantic.shape.radius.small}"
+      },
+      "maxWidth": "200px"
+    },
+    "elevation": {
+      "default": "{semantic.elevation.surface.floating}"
+    },
+    "typography": {
+      "fontSize": "{semantic.typography.caption.01}",
+      "fontWeight": "{semantic.typography.fontWeight.medium}",
+      "lineHeight": "{semantic.typography.lineHeight.tight}"
+    },
+    "motion": {
+      "duration": {
+        "enter": "{semantic.motion.interaction.enter.duration}",
+        "exit": "{semantic.motion.interaction.exit.duration}"
+      },
+      "easing": {
+        "enter": "{semantic.motion.interaction.enter.easing}",
+        "exit": "{semantic.motion.interaction.exit.easing}"
+      }
+    }
+  }
+}

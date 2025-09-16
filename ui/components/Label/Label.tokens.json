@@ -1,0 +1,18 @@
+{
+  "prefix": "label",
+  "tokens": {
+    "color": {
+      "text": {
+        "default": "{semantic.color.foreground.primary}"
+      }
+    },
+    "typo": {
+      "weight": {
+        "default": "{font.weight.semibold}"
+      },
+      "lineHeight": {
+        "default": "{font.lineHeight.100}"
+      }
+    }
+  }
+}

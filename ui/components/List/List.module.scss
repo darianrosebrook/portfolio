@@ -1,0 +1,153 @@
+@use './List.tokens.generated.scss' as listTokens;
+
+.list {
+  @include listTokens.vars;
+
+  margin: 0;
+  padding: 0;
+  color: var(--list-surface-color);
+}
+
+/* List type styles */
+.ul,
+.ol {
+  padding-inline-start: var(--list-spacing-indent);
+}
+
+.dl {
+  padding-inline-start: 0;
+}
+
+/* Size variants */
+.sm {
+  font-size: var(--list-typography-sm-fontSize);
+  line-height: var(--list-typography-sm-lineHeight);
+}
+
+.md {
+  font-size: var(--list-typography-md-fontSize);
+  line-height: var(--list-typography-md-lineHeight);
+}
+
+.lg {
+  font-size: var(--list-typography-lg-fontSize);
+  line-height: var(--list-typography-lg-lineHeight);
+}
+
+/* Variant styles */
+.default {
+  /* Default styling with standard markers */
+}
+
+.unstyled {
+  list-style: none;
+  padding-inline-start: 0;
+}
+
+.inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--list-marker-spacing);
+  list-style: none;
+  padding-inline-start: 0;
+}
+
+.divided {
+  list-style: none;
+  padding-inline-start: 0;
+
+  > :global(li):not(:last-child) {
+    border-block-end: var(--list-divider-width) solid var(--list-divider-color);
+    padding-block-end: var(--list-spacing-md);
+    margin-block-end: var(--list-spacing-md);
+  }
+}
+
+.spaced {
+  > :global(li):not(:last-child) {
+    margin-block-end: var(--list-spacing-lg);
+  }
+}
+
+/* Marker styles */
+.marker-none {
+  list-style: none;
+  padding-inline-start: 0;
+}
+
+.marker-disc {
+  list-style-type: disc;
+}
+
+.marker-circle {
+  list-style-type: circle;
+}
+
+.marker-square {
+  list-style-type: square;
+}
+
+.marker-decimal {
+  list-style-type: decimal;
+}
+
+.marker-alpha {
+  list-style-type: lower-alpha;
+}
+
+.marker-roman {
+  list-style-type: lower-roman;
+}
+
+/* Spacing variants */
+.spacing-none > :global(li):not(:last-child) {
+  margin-block-end: var(--list-spacing-none);
+}
+
+.spacing-sm > :global(li):not(:last-child) {
+  margin-block-end: var(--list-spacing-sm);
+}
+
+.spacing-md > :global(li):not(:last-child) {
+  margin-block-end: var(--list-spacing-md);
+}
+
+.spacing-lg > :global(li):not(:last-child) {
+  margin-block-end: var(--list-spacing-lg);
+}
+
+/* Custom marker colors */
+.list ::marker {
+  color: var(--list-marker-color);
+}
+
+/* Definition list specific styles */
+.dl.default {
+  > :global(dt) {
+    font-weight: 600;
+    margin-block-end: var(--list-spacing-sm);
+  }
+
+  > :global(dd) {
+    margin-inline-start: var(--list-spacing-indent);
+    margin-block-end: var(--list-spacing-md);
+  }
+
+  > :global(dd):last-child {
+    margin-block-end: 0;
+  }
+}
+
+.dl.inline {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: var(--list-spacing-sm) var(--list-spacing-md);
+
+  > :global(dt) {
+    font-weight: 600;
+  }
+
+  > :global(dd) {
+    margin: 0;
+  }
+}

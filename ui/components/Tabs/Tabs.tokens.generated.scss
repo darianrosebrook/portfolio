@@ -1,0 +1,19 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Tabs/Tabs.tokens.json
+ */
+@mixin vars {
+  /* === Spacing Tokens === */
+  --tabs-spacing-gap: var(--core-spacing-size-04);
+  --tabs-spacing-padding: var(--core-spacing-size-04);
+  --tabs-spacing-panelGap: var(--core-spacing-size-06);
+
+  /* === Color Tokens === */
+  --tabs-color-fg: var(--semantic-color-foreground-primary);
+  --tabs-color-active-fg: var(--semantic-color-foreground-primary);
+  --tabs-color-active-bg: var(--semantic-color-background-surface);
+  --tabs-color-disabled-fg: var(--semantic-color-foreground-disabled);
+  --tabs-color-indicator: var(--semantic-color-accent-info);
+
+  /* === Motion Tokens === */
+  --tabs-motion-indicator: var(--semantic-motion-duration-fast);
+}

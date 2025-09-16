@@ -1,0 +1,80 @@
+{
+  "prefix": "switch",
+  "tokens": {
+    "color": {
+      "track": {
+        "background": {
+          "default": "{semantic.color.background.secondary}",
+          "checked": "{semantic.color.background.brand}",
+          "disabled": "{semantic.color.background.disabled}"
+        },
+        "border": {
+          "default": "{semantic.color.border.primary}",
+          "checked": "{semantic.color.border.accent}",
+          "disabled": "{semantic.color.border.disabled}"
+        }
+      },
+      "thumb": {
+        "background": {
+          "default": "{semantic.color.background.primary}",
+          "checked": "{semantic.color.background.onColor}",
+          "disabled": "{semantic.color.background.disabled}"
+        },
+        "shadow": "{semantic.elevation.surface.raised}"
+      },
+      "text": {
+        "default": "{semantic.color.foreground.primary}",
+        "disabled": "{semantic.color.foreground.disabled}"
+      }
+    },
+    "size": {
+      "sm": {
+        "track": {
+          "width": "{core.spacing.size.08}",
+          "height": "{core.spacing.size.05}",
+          "radius": "{semantic.shape.radius.full}"
+        },
+        "thumb": {
+          "size": "{core.spacing.size.04}",
+          "offset": "{core.spacing.size.01}"
+        },
+        "gap": "{core.spacing.size.03}",
+        "fontSize": "{semantic.typography.caption.01}"
+      },
+      "md": {
+        "track": {
+          "width": "{core.spacing.size.09}",
+          "height": "{core.spacing.size.06}",
+          "radius": "{semantic.shape.radius.full}"
+        },
+        "thumb": {
+          "size": "{core.spacing.size.05}",
+          "offset": "{core.spacing.size.01}"
+        },
+        "gap": "{core.spacing.size.04}",
+        "fontSize": "{semantic.typography.body.small.fontSize}"
+      },
+      "lg": {
+        "track": {
+          "width": "{core.spacing.size.10}",
+          "height": "{core.spacing.size.07}",
+          "radius": "{semantic.shape.radius.full}"
+        },
+        "thumb": {
+          "size": "{core.spacing.size.06}",
+          "offset": "{core.spacing.size.01}"
+        },
+        "gap": "{core.spacing.size.05}",
+        "fontSize": "{semantic.typography.body.default.fontSize}"
+      }
+    },
+    "motion": {
+      "duration": "{semantic.motion.interaction.enter.duration}",
+      "easing": "{semantic.motion.interaction.enter.easing}"
+    },
+    "focus": {
+      "ring": "{semantic.focus.ring}",
+      "offset": "{semantic.focus.ringOffset}"
+    }
+  }
+}
