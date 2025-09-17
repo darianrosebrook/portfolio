@@ -119,14 +119,17 @@ function main() {
     const name = item.component || 'Component';
     const Name = toPascalCase(name);
     const slug = toKebabCase(name);
-    const layer = chooseLayer(name); // complexity level
-    const complexity = layer; // primitive | compound | composer | assembly
+    const layer = item.layer || chooseLayer(name); // primitives|compounds|composers
+    const complexity = layer; // keep string as-is
     const category = item.category || '';
     const description = item.description || '';
     const alt = Array.isArray(item.alternativeNames)
       ? item.alternativeNames
       : [];
     const status = item.status || '';
+    const a11yPitfalls = Array.isArray(item?.a11y?.pitfalls)
+      ? item.a11y.pitfalls
+      : [];
 
     // Scaffold component
     if (!args.dryRun) {
@@ -154,8 +157,8 @@ function main() {
     // Create docs page
     const pageDir = path.join(docsBase, slug);
     const pageFile = path.join(pageDir, 'page.tsx');
-    const pageContent = `import styles from '../page.module.scss';
-import Link from 'next/link';
+    const pageContent = `import ComponentDocPage from '../_components/ComponentDocPage';
+import { getComponentBySlug, getRelatedComponents } from '../_lib/componentsData';
 
 export const metadata = {
   title: '${Name} | Component Standards',
@@ -165,39 +168,10 @@ export const metadata = {
 };
 
 export default function Page() {
-  return (
-    <section className="content">
-      <h1>${Name}</h1>
-      ${category ? `<p className="caption">Category: ${category}</p>` : ''}
-      <p className="caption">Complexity: ${capitalize(complexity)}</p>
-      ${status ? `<p className="caption">Status: ${status}</p>` : ''}
-      ${description ? `<p style={{ opacity: 0.85 }}>${description}</p>` : ''}
-      ${
-        alt.length > 0
-          ? `<div style={{ marginTop: '1rem' }}>
-        <strong>Also known as:</strong>
-        <ul>
-          ${alt.map((n) => `<li key=${JSON.stringify(n)}>${n}</li>`).join('\n          ')}
-        </ul>
-      </div>`
-          : ''
-      }
-      <div style={{ marginTop: '2rem' }}>
-        <h2>API and Usage</h2>
-        <p>
-          This component has been scaffolded in <code>ui/components/${Name}</code>. Fill in props,
-          a11y notes, and examples in its README and token files. Use the Card pattern for compositional
-          structure where appropriate.
-        </p>
-        <p>
-          Next steps: implement states, tokens, and add examples here showcasing anatomy and interactions.
-        </p>
-      </div>
-      <p style={{ marginTop: '2rem' }}>
-        <Link href="/blueprints/component-standards">← Back to Component Standards</Link>
-      </p>
-    </section>
-  );
+  const item = getComponentBySlug('${slug}');
+  const related = getRelatedComponents('${slug}', { limit: 6 });
+  if (!item) return null;
+  return <ComponentDocPage item={item} related={related} />;
 }
 `;
 

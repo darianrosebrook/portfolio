@@ -184,7 +184,7 @@ function scaffold() {
 
     files.push([
       path.join(baseDir, `use${Name}.ts`),
-      `/** Headless logic hook for ${Name} */\nimport * as React from 'react';\n\nexport function use${Name}() {\n  // TODO: implement logic state\n  const [state, setState] = React.useState(null);\n  return { state, setState };\n}\n`,
+      `/** Headless logic hook for ${Name} */\nimport * as React from 'react';\n\nexport interface Use${Name}Options {\n  defaultOpen?: boolean;\n}\n\nexport interface Use${Name}Return {\n  isOpen: boolean;\n  open: () => void;\n  close: () => void;\n  toggle: () => void;\n}\n\nexport function use${Name}(options: Use${Name}Options = {}): Use${Name}Return {\n  const { defaultOpen = false } = options;\n  const [isOpen, setIsOpen] = React.useState<boolean>(defaultOpen);\n  const open = React.useCallback(() => setIsOpen(true), []);\n  const close = React.useCallback(() => setIsOpen(false), []);\n  const toggle = React.useCallback(() => setIsOpen((prev) => !prev), []);\n  return { isOpen, open, close, toggle };\n}\n`,
     ]);
   }
 

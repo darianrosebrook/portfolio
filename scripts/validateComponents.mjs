@@ -10,6 +10,10 @@ const __dirname = path.dirname(__filename);
 // Configuration
 const COMPONENTS_DIR = path.join(__dirname, '../ui/components');
 const MODULES_DIR = path.join(__dirname, '../ui/modules');
+const TRANSFORMED_JSON = path.join(
+  __dirname,
+  '../app/blueprints/component-standards/components-transformed.json'
+);
 
 // Required files for components (strict design system standards)
 const COMPONENT_REQUIRED_FILES = [
@@ -531,6 +535,9 @@ class ComponentValidator {
   }
 
   async validate(specificComponent = null) {
+    // Validate transformed components metadata
+    this.validateTransformedJson();
+
     if (specificComponent) {
       // Validate specific component
       const componentPath = path.join(COMPONENTS_DIR, specificComponent);
@@ -563,6 +570,80 @@ class ComponentValidator {
     }
 
     return this.printSummary();
+  }
+
+  validateTransformedJson() {
+    if (!fs.existsSync(TRANSFORMED_JSON)) {
+      this.logWarning(
+        'components-transformed.json not found, skipping metadata validation'
+      );
+      return;
+    }
+
+    try {
+      const raw = fs.readFileSync(TRANSFORMED_JSON, 'utf8');
+      const json = JSON.parse(raw);
+      const items = Array.isArray(json.components) ? json.components : [];
+
+      const seenIds = new Set();
+      const seenSlugs = new Set();
+      const allowedLayers = new Set(['primitives', 'compounds', 'composers']);
+
+      for (const item of items) {
+        const { component, id, slug, layer, category, a11y, status, paths } =
+          item || {};
+        if (!component)
+          this.logError('Missing component name in transformed item');
+        if (!id) this.logError(`Missing id for ${component}`);
+        if (!slug) this.logError(`Missing slug for ${component}`);
+        if (!layer || !allowedLayers.has(String(layer)))
+          this.logError(`Invalid layer '${layer}' for ${component}`);
+
+        if (id) {
+          if (seenIds.has(id)) this.logError(`Duplicate id: ${id}`);
+          else seenIds.add(id);
+        }
+        if (slug) {
+          if (seenSlugs.has(slug)) this.logError(`Duplicate slug: ${slug}`);
+          else seenSlugs.add(slug);
+        }
+
+        // Category should be TitleCase single segment
+        if (typeof category !== 'string' || !category) {
+          this.logError(`Missing category for ${component}`);
+        } else if (category.includes('/')) {
+          this.logWarning(
+            `Category should be normalized (no '/'): ${component} → ${category}`
+          );
+        }
+
+        // a11y.pitfalls should be an array
+        if (a11y && !Array.isArray(a11y.pitfalls)) {
+          this.logError(`a11y.pitfalls must be an array for ${component}`);
+        }
+
+        // status Built implies component path exists
+        if (status === 'Built') {
+          const compPath =
+            paths && paths.component
+              ? path.join(__dirname, '..', paths.component)
+              : null;
+          if (!compPath || !fs.existsSync(compPath)) {
+            this.logWarning(
+              `Status is Built but component path missing for ${component}`
+            );
+          }
+        }
+      }
+
+      this.logSuccess(
+        `Transformed components validated: ${items.length} items`
+      );
+    } catch (e) {
+      this.logError(
+        `Error validating components-transformed.json: ${e.message}`
+      );
+    }
   }
 }
 
