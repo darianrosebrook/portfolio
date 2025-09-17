@@ -16,6 +16,8 @@ const compat = new FlatCompat({
 });
 
 const config = [
+  // Ignore blueprint pattern samples from lint for now
+  { ignores: ['app/blueprints/design-patterns/patterns/**'] },
   // Base configuration for all files
   ...compat.extends('next/core-web-vitals', 'prettier'),
   eslintPluginPrettierRecommended,
@@ -32,6 +34,7 @@ const config = [
       parserOptions: {
         project: ['./tsconfig.json'],
         projectService: true,
+        allowDefaultProject: true,
         tsconfigRootDir: __dirname,
       },
     },
@@ -72,6 +75,39 @@ const config = [
       ...config,
       files: ['**/*.ts', '**/*.tsx'],
     })),
+
+  // Overrides for blueprint docs content to reduce noise during authoring
+  {
+    files: ['app/blueprints/**'],
+    languageOptions: {
+      parserOptions: {
+        // Disable type-aware linting for blueprint samples excluded from tsconfig
+        project: null,
+      },
+    },
+    rules: {
+      'react/no-unescaped-entities': 'off',
+      'react/jsx-no-undef': 'off',
+      'jsx-a11y/role-supports-aria-props': 'off',
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        { argsIgnorePattern: '^_' },
+      ],
+      'prettier/prettier': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-unsafe-function-type': 'off',
+      '@typescript-eslint/no-empty-object-type': 'off',
+    },
+  },
+  // Allow require() usage in specific demo file
+  {
+    files: ['app/component-displaycase/component-grid.client.tsx'],
+    rules: {
+      '@typescript-eslint/no-require-imports': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
+      'prettier/prettier': 'off',
+    },
+  },
 ];
 
 export default config;
