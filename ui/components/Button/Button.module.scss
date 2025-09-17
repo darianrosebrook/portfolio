@@ -3,22 +3,32 @@
 .button {
   @include buttonTokens.vars;
 
-  all: unset;
+  // Selective reset - only reset what we need to control
   display: inline-flex;
   gap: var(--button-size-gap-default);
   justify-content: center;
   align-items: center;
+
+  // Box Model
+  width: fit-content;
   min-width: var(--button-size-min-medium);
-  max-width: fit-content;
   min-height: var(--button-size-min-medium);
-  max-height: var(--button-size-min-medium);
+  margin: 0;
   padding: var(--button-size-gap-default);
+
+  // Visual
+  background: none;
   background-color: var(--button-color-background-default);
   border: none;
   border-radius: var(--button-size-radius);
   color: var(--button-color-foreground-default);
+
+  // Typography
+  font: inherit;
+  font-weight: var(--button-text-weight, 500);
   font-size: var(--button-text-size-medium);
   line-height: var(--button-text-lineHeight-collapse);
+  text-decoration: none;
   transition:
     transform var(--button-motion-duration-fast)
       var(--button-motion-easing-standard),
@@ -28,6 +38,8 @@
       var(--button-motion-easing-standard),
     color var(--button-motion-duration-fast)
       var(--button-motion-easing-standard);
+
+  // Interaction
   cursor: pointer;
 
   &:active {
@@ -76,13 +88,14 @@
     outline-offset: var(--button-focus-outlineOffset);
   }
 
-  & + & {
-    margin-left: var(--button-size-margin);
-  }
+  // Remove adjacent sibling selector - let parent containers handle spacing
+  // Use gap, flexbox, or CSS Grid in parent components instead
 
   &.small {
+    gap: var(--button-size-gap-small, 0.5rem);
     min-width: var(--button-size-min-small);
     min-height: var(--button-size-min-small);
+    padding: var(--button-size-padding-small, var(--button-size-gap-small));
     font-size: var(--button-text-size-small);
   }
 
@@ -90,13 +103,15 @@
     gap: var(--button-size-gap-default);
     min-width: var(--button-size-min-medium);
     min-height: var(--button-size-min-medium);
+    padding: var(--button-size-gap-default);
     font-size: var(--button-text-size-medium);
   }
 
   &.large {
-    gap: var(--button-size-gap-default);
+    gap: var(--button-size-gap-large, 0.75rem);
     min-width: var(--button-size-min-large);
     min-height: var(--button-size-min-large);
+    padding: var(--button-size-padding-large, var(--button-size-gap-large));
     font-size: var(--button-text-size-large);
   }
 

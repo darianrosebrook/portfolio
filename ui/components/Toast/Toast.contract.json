@@ -1,0 +1,49 @@
+{
+  "name": "Toast",
+  "layer": "compound",
+  "anatomy": [
+    "root",
+    "viewport",
+    "item",
+    "entering",
+    "leaving",
+    "row"
+  ],
+  "variants": {},
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "active",
+    "disabled"
+  ],
+  "slots": {},
+  "a11y": {
+    "role": "status",
+    "labeling": [
+      "aria-label"
+    ],
+    "keyboard": [
+      {
+        "key": "Escape",
+        "when": "focused",
+        "then": "dismiss"
+      }
+    ],
+    "apgPattern": "alert"
+  },
+  "tokens": {
+    "root": [
+      "toast.color.background.default",
+      "toast.color.foreground.primary",
+      "toast.size.padding.default",
+      "toast.size.radius.default"
+    ]
+  },
+  "ssr": {
+    "hydrateOn": "none"
+  },
+  "rtl": {
+    "flipIcon": false
+  }
+}

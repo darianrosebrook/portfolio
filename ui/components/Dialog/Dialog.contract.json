@@ -1,0 +1,55 @@
+{
+  "name": "Dialog",
+  "layer": "composer",
+  "anatomy": [
+    "root",
+    "backdrop",
+    "header",
+    "title",
+    "body",
+    "footer"
+  ],
+  "variants": {},
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "active",
+    "disabled"
+  ],
+  "slots": {},
+  "a11y": {
+    "role": "dialog",
+    "labeling": [
+      "aria-label",
+      "aria-labelledby"
+    ],
+    "keyboard": [
+      {
+        "key": "Escape",
+        "when": "any",
+        "then": "close"
+      },
+      {
+        "key": "Tab",
+        "when": "any",
+        "then": "cycle focus within"
+      }
+    ],
+    "apgPattern": "dialog"
+  },
+  "tokens": {
+    "root": [
+      "dialog.color.background.default",
+      "dialog.color.foreground.primary",
+      "dialog.size.padding.default",
+      "dialog.size.radius.default"
+    ]
+  },
+  "ssr": {
+    "hydrateOn": "interaction"
+  },
+  "rtl": {
+    "flipIcon": false
+  }
+}

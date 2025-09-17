@@ -1,0 +1,38 @@
+{
+  "name": "Badge",
+  "layer": "primitive",
+  "anatomy": [
+    "root"
+  ],
+  "variants": {},
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "active",
+    "disabled"
+  ],
+  "slots": {},
+  "a11y": {
+    "role": "generic",
+    "labeling": [
+      "aria-label"
+    ],
+    "keyboard": [],
+    "apgPattern": null
+  },
+  "tokens": {
+    "root": [
+      "badge.color.background.default",
+      "badge.color.foreground.primary",
+      "badge.size.padding.default",
+      "badge.size.radius.default"
+    ]
+  },
+  "ssr": {
+    "hydrateOn": "none"
+  },
+  "rtl": {
+    "flipIcon": false
+  }
+}

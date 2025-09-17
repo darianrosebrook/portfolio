@@ -1,0 +1,39 @@
+{
+  "name": "Avatar",
+  "layer": "primitive",
+  "anatomy": [
+    "root",
+    "status"
+  ],
+  "variants": {},
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "active",
+    "disabled"
+  ],
+  "slots": {},
+  "a11y": {
+    "role": "generic",
+    "labeling": [
+      "aria-label"
+    ],
+    "keyboard": [],
+    "apgPattern": null
+  },
+  "tokens": {
+    "root": [
+      "avatar.color.background.default",
+      "avatar.color.foreground.primary",
+      "avatar.size.padding.default",
+      "avatar.size.radius.default"
+    ]
+  },
+  "ssr": {
+    "hydrateOn": "none"
+  },
+  "rtl": {
+    "flipIcon": false
+  }
+}

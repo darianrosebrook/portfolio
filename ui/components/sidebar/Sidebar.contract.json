@@ -1,0 +1,41 @@
+{
+  "name": "Sidebar",
+  "layer": "primitive",
+  "anatomy": [
+    "root",
+    "group",
+    "nav",
+    "link"
+  ],
+  "variants": {},
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "active",
+    "disabled"
+  ],
+  "slots": {},
+  "a11y": {
+    "role": "generic",
+    "labeling": [
+      "aria-label"
+    ],
+    "keyboard": [],
+    "apgPattern": null
+  },
+  "tokens": {
+    "root": [
+      "sidebar.color.background.default",
+      "sidebar.color.foreground.primary",
+      "sidebar.size.padding.default",
+      "sidebar.size.radius.default"
+    ]
+  },
+  "ssr": {
+    "hydrateOn": "none"
+  },
+  "rtl": {
+    "flipIcon": false
+  }
+}

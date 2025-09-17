@@ -1,0 +1,44 @@
+{
+  "name": "Select",
+  "layer": "compound",
+  "anatomy": [
+    "root",
+    "selectContainer",
+    "selectIndicator",
+    "indicatorIcon",
+    "clearButton",
+    "clearIcon"
+  ],
+  "variants": {},
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "active",
+    "disabled"
+  ],
+  "slots": {},
+  "a11y": {
+    "role": "group",
+    "labeling": [
+      "aria-label",
+      "aria-labelledby"
+    ],
+    "keyboard": [],
+    "apgPattern": null
+  },
+  "tokens": {
+    "root": [
+      "select.color.background.default",
+      "select.color.foreground.primary",
+      "select.size.padding.default",
+      "select.size.radius.default"
+    ]
+  },
+  "ssr": {
+    "hydrateOn": "none"
+  },
+  "rtl": {
+    "flipIcon": false
+  }
+}

@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import Style from './swatches.module.scss';
 import { useInteraction } from '@/context';
 import { gsap } from 'gsap';
-import { linearInterpolation } from '@/utils';
+import { linearInterpolation } from '@/utils/helpers';
 import { ColorSwatch } from './ColorSwatch';
 import { colorPalette } from './ColorPalette';
 

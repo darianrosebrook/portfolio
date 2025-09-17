@@ -1,4 +1,4 @@
-import { calculateContrast } from '@/utils/colorHelpers';
+import { calculateContrast } from '@/utils/helpers/colorHelpers';
 import Style from './swatches.module.scss';
 type ColorSwatchProps = {
   token: string;

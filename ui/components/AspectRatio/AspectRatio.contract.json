@@ -1,0 +1,39 @@
+{
+  "name": "AspectRatio",
+  "layer": "primitive",
+  "anatomy": [
+    "root",
+    "container"
+  ],
+  "variants": {},
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "active",
+    "disabled"
+  ],
+  "slots": {},
+  "a11y": {
+    "role": "generic",
+    "labeling": [
+      "aria-label"
+    ],
+    "keyboard": [],
+    "apgPattern": null
+  },
+  "tokens": {
+    "root": [
+      "aspectratio.color.background.default",
+      "aspectratio.color.foreground.primary",
+      "aspectratio.size.padding.default",
+      "aspectratio.size.radius.default"
+    ]
+  },
+  "ssr": {
+    "hydrateOn": "none"
+  },
+  "rtl": {
+    "flipIcon": false
+  }
+}

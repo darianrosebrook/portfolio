@@ -309,7 +309,12 @@
                       "type": "boolean"
                     }
                   },
-                  "required": ["offsetX", "offsetY", "blur", "color"]
+                  "required": [
+                    "offsetX",
+                    "offsetY",
+                    "blur",
+                    "color"
+                  ]
                 },
                 {
                   "type": "array",
@@ -335,7 +340,12 @@
                         "type": "boolean"
                       }
                     },
-                    "required": ["offsetX", "offsetY", "blur", "color"]
+                    "required": [
+                      "offsetX",
+                      "offsetY",
+                      "blur",
+                      "color"
+                    ]
                   }
                 },
                 {

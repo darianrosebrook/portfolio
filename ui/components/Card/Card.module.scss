@@ -1,48 +1,54 @@
+@use './Card.tokens.generated.scss' as cardTokens;
+
 .card {
+  @include cardTokens.vars;
+
   display: flex;
   flex-direction: column;
-  padding: var(--space-md);
-  background-color: var(--color-background-card);
-  border-radius: var(--border-radius-medium);
-  color: var(--color-text-primary);
+  padding: var(--card-size-padding-default);
+  background-color: var(--card-color-background-default);
+  border-radius: var(--card-size-radius-default);
+  color: var(--card-color-foreground-primary);
   transition: all var(--transition-duration-fast) var(--transition-easing-ease);
 
   @media (prefers-reduced-motion: reduce) {
     transition: none;
 
-    &.clickable:hover {
+    &.interactive:hover {
       transform: none;
     }
 
-    &.clickable:active {
+    &.interactive:active {
       transform: none;
     }
   }
 
   &.default {
-    border: 1px solid var(--color-border-card);
+    border: 1px solid var(--card-color-border-default);
   }
 
   &.elevated {
     border: none;
-    box-shadow: var(--shadow-card-elevated);
+    box-shadow: var(--card-elevation-default);
   }
 
   &.outlined {
     background-color: transparent;
-    border: 2px solid var(--color-border-card);
+    border: 2px solid var(--card-color-border-default);
   }
 
-  &.clickable {
+  &.interactive {
     cursor: pointer;
 
     &:hover {
-      box-shadow: var(--shadow-card-hover);
-      transform: translateY(-2px);
+      background-color: var(--card-color-background-hover);
+      box-shadow: var(--card-elevation-hover, var(--shadow-card-hover));
+      transform: translateY(var(--card-motion-hover-offset, -0.125rem));
     }
 
     &:focus-visible {
-      outline: 2px solid var(--color-focus-ring);
+      outline: 2px solid
+        var(--card-color-border-accent, var(--color-focus-ring));
       outline-offset: 2px;
     }
 

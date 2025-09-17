@@ -1,0 +1,43 @@
+{
+  "name": "Tabs",
+  "layer": "compound",
+  "anatomy": [
+    "root",
+    "list",
+    "indicator",
+    "tab",
+    "tabActive"
+  ],
+  "variants": {},
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "active",
+    "disabled"
+  ],
+  "slots": {},
+  "a11y": {
+    "role": "group",
+    "labeling": [
+      "aria-label",
+      "aria-labelledby"
+    ],
+    "keyboard": [],
+    "apgPattern": null
+  },
+  "tokens": {
+    "root": [
+      "tabs.color.background.default",
+      "tabs.color.foreground.primary",
+      "tabs.size.padding.default",
+      "tabs.size.radius.default"
+    ]
+  },
+  "ssr": {
+    "hydrateOn": "none"
+  },
+  "rtl": {
+    "flipIcon": false
+  }
+}

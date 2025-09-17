@@ -26,6 +26,17 @@
   border: none;
   color: var(--tabs-color-fg);
   cursor: pointer;
+
+  &:focus-visible {
+    border-radius: var(--tabs-shape-radius, 0.25rem);
+    outline: 2px solid var(--tabs-color-focus, var(--color-focus-ring));
+    outline-offset: 2px;
+  }
+
+  &:hover:not(.tabDisabled) {
+    background: var(--tabs-color-hover-bg, oklch(0% 0 0deg / 5%));
+    color: var(--tabs-color-hover-fg, var(--tabs-color-active-fg));
+  }
 }
 
 .tabActive {

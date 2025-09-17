@@ -11,29 +11,15 @@
   /* === Color Tokens === */
   --toggle-color-background-track: var(--semantic-color-background-secondary);
   --toggle-color-background-trackHover: var(--semantic-color-background-hover);
-  --toggle-color-background-trackFocus: var(
-    --semantic-color-background-secondary
-  );
-  --toggle-color-background-trackDisabled: var(
-    --semantic-color-background-disabled
-  );
-  --toggle-color-background-trackChecked: var(
-    --semantic-color-background-primary
-  );
-  --toggle-color-background-trackError: var(
-    --semantic-color-background-danger-subtle
-  );
+  --toggle-color-background-trackFocus: var(--semantic-color-background-secondary);
+  --toggle-color-background-trackDisabled: var(--semantic-color-background-disabled);
+  --toggle-color-background-trackChecked: var(--semantic-color-background-primary);
+  --toggle-color-background-trackError: var(--semantic-color-background-danger-subtle);
   --toggle-color-background-thumb: var(--semantic-color-background-primary);
   --toggle-color-background-thumbHover: var(--semantic-color-background-hover);
-  --toggle-color-background-thumbFocus: var(
-    --semantic-color-background-primary
-  );
-  --toggle-color-background-thumbDisabled: var(
-    --semantic-color-background-disabled
-  );
-  --toggle-color-background-thumbChecked: var(
-    --semantic-color-background-accent
-  );
+  --toggle-color-background-thumbFocus: var(--semantic-color-background-primary);
+  --toggle-color-background-thumbDisabled: var(--semantic-color-background-disabled);
+  --toggle-color-background-thumbChecked: var(--semantic-color-background-accent);
   --toggle-color-background-thumbError: var(--semantic-color-background-danger);
   --toggle-color-border-track: var(--semantic-color-border-primary);
   --toggle-color-border-trackHover: var(--semantic-color-border-bold);
@@ -45,15 +31,9 @@
   --toggle-color-border-thumbFocus: var(--semantic-color-border-accent);
   --toggle-color-border-thumbDisabled: var(--semantic-color-border-disabled);
   --toggle-color-border-thumbError: var(--semantic-color-border-danger);
-  --toggle-color-foreground-labelDefault: var(
-    --semantic-color-foreground-secondary
-  );
-  --toggle-color-foreground-labelHover: var(
-    --semantic-color-foreground-primary
-  );
-  --toggle-color-foreground-labelDisabled: var(
-    --semantic-color-foreground-disabled
-  );
+  --toggle-color-foreground-labelDefault: var(--semantic-color-foreground-secondary);
+  --toggle-color-foreground-labelHover: var(--semantic-color-foreground-primary);
+  --toggle-color-foreground-labelDisabled: var(--semantic-color-foreground-disabled);
   --toggle-color-foreground-labelError: var(--semantic-color-foreground-danger);
 
   /* === Focus Tokens === */

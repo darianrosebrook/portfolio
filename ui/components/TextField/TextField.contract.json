@@ -1,0 +1,49 @@
+{
+  "name": "TextField",
+  "layer": "primitive",
+  "anatomy": [
+    "root",
+    "field",
+    "description",
+    "error"
+  ],
+  "variants": {},
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "active",
+    "disabled"
+  ],
+  "slots": {},
+  "a11y": {
+    "role": "textbox",
+    "labeling": [
+      "aria-label",
+      "aria-labelledby",
+      "aria-describedby"
+    ],
+    "keyboard": [
+      {
+        "key": "Tab",
+        "when": "root",
+        "then": "focus"
+      }
+    ],
+    "apgPattern": "textbox"
+  },
+  "tokens": {
+    "root": [
+      "textfield.color.background.default",
+      "textfield.color.foreground.primary",
+      "textfield.size.padding.default",
+      "textfield.size.radius.default"
+    ]
+  },
+  "ssr": {
+    "hydrateOn": "none"
+  },
+  "rtl": {
+    "flipIcon": false
+  }
+}

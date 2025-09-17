@@ -1,0 +1,38 @@
+{
+  "name": "Shuttle",
+  "layer": "primitive",
+  "anatomy": [
+    "root"
+  ],
+  "variants": {},
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "active",
+    "disabled"
+  ],
+  "slots": {},
+  "a11y": {
+    "role": "generic",
+    "labeling": [
+      "aria-label"
+    ],
+    "keyboard": [],
+    "apgPattern": null
+  },
+  "tokens": {
+    "root": [
+      "shuttle.color.background.default",
+      "shuttle.color.foreground.primary",
+      "shuttle.size.padding.default",
+      "shuttle.size.radius.default"
+    ]
+  },
+  "ssr": {
+    "hydrateOn": "none"
+  },
+  "rtl": {
+    "flipIcon": false
+  }
+}

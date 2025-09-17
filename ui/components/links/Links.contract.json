@@ -1,0 +1,41 @@
+{
+  "name": "Links",
+  "layer": "primitive",
+  "anatomy": [
+    "root",
+    "maskLine",
+    "text",
+    "clone"
+  ],
+  "variants": {},
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "active",
+    "disabled"
+  ],
+  "slots": {},
+  "a11y": {
+    "role": "generic",
+    "labeling": [
+      "aria-label"
+    ],
+    "keyboard": [],
+    "apgPattern": null
+  },
+  "tokens": {
+    "root": [
+      "links.color.background.default",
+      "links.color.foreground.primary",
+      "links.size.padding.default",
+      "links.size.radius.default"
+    ]
+  },
+  "ssr": {
+    "hydrateOn": "none"
+  },
+  "rtl": {
+    "flipIcon": false
+  }
+}

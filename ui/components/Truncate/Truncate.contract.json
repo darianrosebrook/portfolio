@@ -1,0 +1,40 @@
+{
+  "name": "Truncate",
+  "layer": "primitive",
+  "anatomy": [
+    "root",
+    "content",
+    "toggle"
+  ],
+  "variants": {},
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "active",
+    "disabled"
+  ],
+  "slots": {},
+  "a11y": {
+    "role": "generic",
+    "labeling": [
+      "aria-label"
+    ],
+    "keyboard": [],
+    "apgPattern": null
+  },
+  "tokens": {
+    "root": [
+      "truncate.color.background.default",
+      "truncate.color.foreground.primary",
+      "truncate.size.padding.default",
+      "truncate.size.radius.default"
+    ]
+  },
+  "ssr": {
+    "hydrateOn": "none"
+  },
+  "rtl": {
+    "flipIcon": false
+  }
+}

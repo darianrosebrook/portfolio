@@ -1,4 +1,5 @@
 import { createClient } from './client';
+import { generateFileHash } from '../helpers/hashing';
 
 type Media = {
   name: string;
@@ -29,16 +30,6 @@ type MediaType = 'image' | 'video' | 'audio' | 'pdf';
 type MediaUpload = {
   type: MediaType;
   media: Media;
-};
-
-/**
- * Generates a SHA-256 hash from file content for deduplication
- */
-const generateFileHash = async (file: File | Blob): Promise<string> => {
-  const buffer = await file.arrayBuffer();
-  const hashBuffer = await crypto.subtle.digest('SHA-256', buffer);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
 };
 
 /**

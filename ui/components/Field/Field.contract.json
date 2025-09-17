@@ -1,0 +1,49 @@
+{
+  "name": "Field",
+  "layer": "composer",
+  "anatomy": [
+    "root",
+    "header",
+    "meta",
+    "validatingIndicator"
+  ],
+  "variants": {},
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "active",
+    "disabled"
+  ],
+  "slots": {},
+  "a11y": {
+    "role": "textbox",
+    "labeling": [
+      "aria-label",
+      "aria-labelledby",
+      "aria-describedby"
+    ],
+    "keyboard": [
+      {
+        "key": "Tab",
+        "when": "root",
+        "then": "focus"
+      }
+    ],
+    "apgPattern": "textbox"
+  },
+  "tokens": {
+    "root": [
+      "field.color.background.default",
+      "field.color.foreground.primary",
+      "field.size.padding.default",
+      "field.size.radius.default"
+    ]
+  },
+  "ssr": {
+    "hydrateOn": "interaction"
+  },
+  "rtl": {
+    "flipIcon": false
+  }
+}

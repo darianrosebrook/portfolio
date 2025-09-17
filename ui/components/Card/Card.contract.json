@@ -1,0 +1,42 @@
+{
+  "name": "Card",
+  "layer": "primitive",
+  "anatomy": [
+    "root",
+    "default",
+    "elevated",
+    "outlined",
+    "clickable"
+  ],
+  "variants": {},
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "active",
+    "disabled"
+  ],
+  "slots": {},
+  "a11y": {
+    "role": "generic",
+    "labeling": [
+      "aria-label"
+    ],
+    "keyboard": [],
+    "apgPattern": null
+  },
+  "tokens": {
+    "root": [
+      "card.color.background.default",
+      "card.color.foreground.primary",
+      "card.size.padding.default",
+      "card.size.radius.default"
+    ]
+  },
+  "ssr": {
+    "hydrateOn": "none"
+  },
+  "rtl": {
+    "flipIcon": false
+  }
+}
