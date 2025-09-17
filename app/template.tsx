@@ -58,8 +58,8 @@ const Template: React.FC<TemplateProps> = ({ children }) => {
           const newColorIndex = Math.floor(Math.random() * colors.length);
           const color = colors[newColorIndex];
           const val = isDarkTheme ? ['200', '700'] : ['700', '200'];
-          const foreground = `var(--color-core-${color}-${val[0]})`;
-          const background = `var(--color-core-${color}-${val[1]})`;
+          const foreground = `var(--core-color-palette-${color}-${val[0]})`;
+          const background = `var(--core-color-palette-${color}-${val[1]})`;
           rootElement.style.setProperty(
             '--semantic-color-foreground-highlight',
             foreground

@@ -2,6 +2,32 @@
 import * as React from 'react';
 import styles from './page.module.scss';
 
+// Import all components at the top to avoid require() issues during SSR
+import Text from '@/ui/components/Text';
+import Button from '@/ui/components/Button';
+import Badge from '@/ui/components/Badge';
+import List from '@/ui/components/List';
+import { Card } from '@/ui/components/Card';
+import Alert from '@/ui/components/Alert';
+import Input from '@/ui/components/Input';
+import Avatar from '@/ui/components/Avatar';
+import Progress from '@/ui/components/Progress';
+import Spinner from '@/ui/components/Spinner';
+import Divider from '@/ui/components/Divider';
+import Blockquote from '@/ui/components/Blockquote';
+import Switch from '@/ui/components/Switch';
+import { FieldProvider, Field } from '@/ui/components/Field';
+import TextInputAdapter from '@/ui/components/Field/TextInputAdapter';
+import SelectAdapter from '@/ui/components/Field/SelectAdapter';
+import CheckboxAdapter from '@/ui/components/Field/CheckboxAdapter';
+import Select from '@/ui/components/Select';
+import type { Option } from '@/types/ui';
+import Tabs from '@/ui/components/Tabs';
+import Tooltip from '@/ui/components/Tooltip';
+import Skeleton from '@/ui/components/Skeleton';
+import Details from '@/ui/components/Details';
+import Image from '@/ui/components/Image';
+
 type DemoKey =
   | 'Text'
   | 'Button'
@@ -16,7 +42,14 @@ type DemoKey =
   | 'Divider'
   | 'Blockquote'
   | 'Switch'
-  | 'Field';
+  | 'Field'
+  | 'Select'
+  | 'Tabs'
+  | 'Tooltip'
+  | 'Toast'
+  | 'Skeleton'
+  | 'Details'
+  | 'Image';
 
 interface ShowcaseCardProps {
   title: string;
@@ -49,10 +82,103 @@ class Boundary extends React.Component<
   }
 }
 
+function SwitchDemo() {
+  const [checked1, setChecked1] = React.useState(false);
+  const [checked2, setChecked2] = React.useState(true);
+  return (
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 'var(--core-spacing-size-03)',
+      }}
+    >
+      <Switch
+        checked={checked1}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setChecked1(e.target.checked)
+        }
+      >
+        Enable notifications
+      </Switch>
+      <Switch
+        checked={checked2}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setChecked2(e.target.checked)
+        }
+      >
+        Dark mode
+      </Switch>
+      <Switch checked={false} disabled onChange={() => {}}>
+        Disabled switch
+      </Switch>
+    </div>
+  );
+}
+
+function SelectDemo() {
+  const [selected, setSelected] = React.useState<string | null>(null);
+  const [comboboxSelected, setComboboxSelected] = React.useState<string | null>(
+    null
+  );
+  const options = [
+    { id: '1', title: 'Option 1' },
+    { id: '2', title: 'Option 2' },
+    { id: '3', title: 'Option 3' },
+  ];
+
+  const handleChange = (selectedOption: Option | Option[] | null) => {
+    if (Array.isArray(selectedOption)) {
+      // Handle multiple selection case
+      setSelected(selectedOption.length > 0 ? selectedOption[0].id : null);
+    } else if (selectedOption) {
+      setSelected(selectedOption.id);
+    } else {
+      setSelected(null);
+    }
+  };
+
+  const handleComboboxChange = (selectedOption: Option | Option[] | null) => {
+    if (Array.isArray(selectedOption)) {
+      // Handle multiple selection case
+      setComboboxSelected(
+        selectedOption.length > 0 ? selectedOption[0].id : null
+      );
+    } else if (selectedOption) {
+      setComboboxSelected(selectedOption.id);
+    } else {
+      setComboboxSelected(null);
+    }
+  };
+
+  return (
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 'var(--core-spacing-size-03)',
+      }}
+    >
+      <Select
+        options={options}
+        value={selected || undefined}
+        onChange={handleChange}
+        placeholder="Choose an option"
+      />
+      <Select
+        options={options}
+        mode="combobox"
+        placeholder="Search options..."
+        searchable
+        value={comboboxSelected || undefined}
+        onChange={handleComboboxChange}
+      />
+    </div>
+  );
+}
+
 function Demo({ demo }: { demo: DemoKey }) {
   if (demo === 'Text') {
-    const Text = require('@/ui/components/Text')
-      .default as React.ComponentType<any>;
     return (
       <div>
         <Text as="p" variant="body" size="md">
@@ -66,8 +192,6 @@ function Demo({ demo }: { demo: DemoKey }) {
   }
 
   if (demo === 'Button') {
-    const Button = require('@/ui/components/Button')
-      .default as React.ComponentType<any>;
     return (
       <div
         style={{
@@ -84,8 +208,6 @@ function Demo({ demo }: { demo: DemoKey }) {
   }
 
   if (demo === 'Badge') {
-    const Badge = require('@/ui/components/Badge')
-      .default as React.ComponentType<any>;
     return (
       <div
         style={{
@@ -104,8 +226,6 @@ function Demo({ demo }: { demo: DemoKey }) {
   }
 
   if (demo === 'List') {
-    const List = require('@/ui/components/List')
-      .default as React.ComponentType<any>;
     return (
       <List as="ul">
         <li>First item</li>
@@ -116,9 +236,6 @@ function Demo({ demo }: { demo: DemoKey }) {
   }
 
   if (demo === 'Card') {
-    const { Card } = require('@/ui/components/Card');
-    const Button = require('@/ui/components/Button')
-      .default as React.ComponentType<any>;
     return (
       <Card interactive>
         <Card.Header>
@@ -136,7 +253,6 @@ function Demo({ demo }: { demo: DemoKey }) {
   }
 
   if (demo === 'Alert') {
-    const Alert = require('@/ui/components/Alert').default as any;
     return (
       <Alert intent="warning">
         <Alert.Icon intent="warning" />
@@ -147,8 +263,6 @@ function Demo({ demo }: { demo: DemoKey }) {
   }
 
   if (demo === 'Input') {
-    const Input = require('@/ui/components/Input')
-      .default as React.ComponentType<any>;
     return (
       <div
         style={{
@@ -165,8 +279,6 @@ function Demo({ demo }: { demo: DemoKey }) {
   }
 
   if (demo === 'Avatar') {
-    const Avatar = require('@/ui/components/Avatar')
-      .default as React.ComponentType<any>;
     return (
       <div
         style={{
@@ -183,8 +295,6 @@ function Demo({ demo }: { demo: DemoKey }) {
   }
 
   if (demo === 'Progress') {
-    const Progress = require('@/ui/components/Progress')
-      .default as React.ComponentType<any>;
     return (
       <div
         style={{
@@ -201,8 +311,6 @@ function Demo({ demo }: { demo: DemoKey }) {
   }
 
   if (demo === 'Spinner') {
-    const Spinner = require('@/ui/components/Spinner')
-      .default as React.ComponentType<any>;
     return (
       <div
         style={{
@@ -220,8 +328,6 @@ function Demo({ demo }: { demo: DemoKey }) {
   }
 
   if (demo === 'Divider') {
-    const Divider = require('@/ui/components/Divider')
-      .default as React.ComponentType<any>;
     return (
       <div
         style={{
@@ -249,56 +355,18 @@ function Demo({ demo }: { demo: DemoKey }) {
   }
 
   if (demo === 'Blockquote') {
-    const Blockquote = require('@/ui/components/Blockquote')
-      .default as React.ComponentType<any>;
     return (
       <Blockquote variant="bordered" cite="https://example.com">
-        "The best way to predict the future is to create it."
+        &quot;The best way to predict the future is to create it.&quot;
       </Blockquote>
     );
   }
 
   if (demo === 'Switch') {
-    const Switch = require('@/ui/components/Switch')
-      .default as React.ComponentType<any>;
-    const [checked1, setChecked1] = React.useState(false);
-    const [checked2, setChecked2] = React.useState(true);
-    return (
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 'var(--core-spacing-size-03)',
-        }}
-      >
-        <Switch
-          checked={checked1}
-          onChange={(e) => setChecked1(e.target.checked)}
-        >
-          Enable notifications
-        </Switch>
-        <Switch
-          checked={checked2}
-          onChange={(e) => setChecked2(e.target.checked)}
-        >
-          Dark mode
-        </Switch>
-        <Switch checked={false} disabled>
-          Disabled switch
-        </Switch>
-      </div>
-    );
+    return <SwitchDemo />;
   }
 
   if (demo === 'Field') {
-    const {
-      FieldProvider,
-      Field,
-      TextInputAdapter,
-      SelectAdapter,
-      CheckboxAdapter,
-    } = require('@/ui/components/Field');
-
     const options = [
       { id: 'us', title: 'United States' },
       { id: 'ca', title: 'Canada' },
@@ -348,6 +416,169 @@ function Demo({ demo }: { demo: DemoKey }) {
     );
   }
 
+  if (demo === 'Select') {
+    return <SelectDemo />;
+  }
+
+  if (demo === 'Tabs') {
+    return (
+      <Tabs>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 'var(--core-spacing-size-03)',
+          }}
+        >
+          <div style={{ display: 'flex', gap: 'var(--core-spacing-size-02)' }}>
+            <button
+              style={{
+                padding: 'var(--core-spacing-size-02)',
+                border: '1px solid var(--semantic-color-border-primary)',
+                background: 'var(--semantic-color-background-primary)',
+              }}
+            >
+              Tab 1
+            </button>
+            <button
+              style={{
+                padding: 'var(--core-spacing-size-02)',
+                border: '1px solid var(--semantic-color-border-primary)',
+                background: 'var(--semantic-color-background-primary)',
+              }}
+            >
+              Tab 2
+            </button>
+            <button
+              style={{
+                padding: 'var(--core-spacing-size-02)',
+                border: '1px solid var(--semantic-color-border-primary)',
+                background: 'var(--semantic-color-background-primary)',
+              }}
+            >
+              Tab 3
+            </button>
+          </div>
+          <div
+            style={{
+              padding: 'var(--core-spacing-size-04)',
+              border: '1px solid var(--semantic-color-border-primary)',
+              borderRadius: 'var(--core-shape-radius-medium)',
+            }}
+          >
+            Tab content goes here
+          </div>
+        </div>
+      </Tabs>
+    );
+  }
+
+  if (demo === 'Tooltip') {
+    return (
+      <div style={{ display: 'flex', gap: 'var(--core-spacing-size-03)' }}>
+        <Tooltip content="This is a tooltip">
+          <Button>Hover me</Button>
+        </Tooltip>
+        <Tooltip content="Click to show tooltip" trigger="click">
+          <Button variant="secondary">Click me</Button>
+        </Tooltip>
+      </div>
+    );
+  }
+
+  if (demo === 'Toast') {
+    return (
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 'var(--core-spacing-size-03)',
+        }}
+      >
+        <div
+          style={{
+            padding: 'var(--core-spacing-size-04)',
+            border: '1px solid var(--semantic-color-border-primary)',
+            borderRadius: 'var(--core-shape-radius-medium)',
+            background: 'var(--semantic-color-background-secondary)',
+          }}
+        >
+          Toast notification example
+        </div>
+        <div
+          style={{
+            padding: 'var(--core-spacing-size-04)',
+            border: '1px solid var(--semantic-color-border-success)',
+            borderRadius: 'var(--core-shape-radius-medium)',
+            background: 'var(--semantic-color-background-success)',
+          }}
+        >
+          Success toast
+        </div>
+      </div>
+    );
+  }
+
+  if (demo === 'Skeleton') {
+    return (
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 'var(--core-spacing-size-04)',
+        }}
+      >
+        <Skeleton variant="text" lines={3} />
+        <Skeleton variant="avatar" />
+        <Skeleton variant="actions" />
+        <Skeleton variant="media" aspectRatio="16/9" />
+      </div>
+    );
+  }
+
+  if (demo === 'Details') {
+    return (
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 'var(--core-spacing-size-03)',
+        }}
+      >
+        <Details summary="Click to expand">
+          <p>
+            This is the collapsible content that appears when you click the
+            summary.
+          </p>
+        </Details>
+        <Details summary="Another details section" defaultOpen>
+          <p>This one is open by default.</p>
+        </Details>
+      </div>
+    );
+  }
+
+  if (demo === 'Image') {
+    return (
+      <div style={{ display: 'flex', gap: 'var(--core-spacing-size-03)' }}>
+        <Image
+          src="/darian-square.jpg"
+          alt="Example image"
+          size="sm"
+          radius="md"
+          aspectRatio="square"
+        />
+        <Image
+          src="/darian-square.jpg"
+          alt="Example image"
+          size="md"
+          radius="lg"
+          aspectRatio="video"
+        />
+      </div>
+    );
+  }
+
   return null;
 }
 
@@ -389,6 +620,13 @@ const demos: {
   { key: 'Blockquote', title: 'Blockquote', demo: 'Blockquote' },
   { key: 'Switch', title: 'Switch', demo: 'Switch' },
   { key: 'Field', title: 'Field (composer)', demo: 'Field' },
+  { key: 'Select', title: 'Select', demo: 'Select' },
+  { key: 'Tabs', title: 'Tabs', demo: 'Tabs' },
+  { key: 'Tooltip', title: 'Tooltip', demo: 'Tooltip' },
+  { key: 'Toast', title: 'Toast', demo: 'Toast' },
+  { key: 'Skeleton', title: 'Skeleton', demo: 'Skeleton' },
+  { key: 'Details', title: 'Details', demo: 'Details' },
+  { key: 'Image', title: 'Image', demo: 'Image' },
 ];
 
 export function ComponentGrid() {

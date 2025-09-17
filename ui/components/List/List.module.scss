@@ -35,9 +35,6 @@
 }
 
 /* Variant styles */
-.default {
-  /* Default styling with standard markers */
-}
 
 .unstyled {
   list-style: none;
@@ -56,7 +53,7 @@
   list-style: none;
   padding-inline-start: 0;
 
-  > & li :not(:last-child) {
+  li:not(:last-child) {
     border-block-end: var(--list-divider-width) solid var(--list-divider-color);
     margin-block-end: var(--list-spacing-md);
     padding-block-end: var(--list-spacing-md);
@@ -64,7 +61,7 @@
 }
 
 .spaced {
-  > & li :not(:last-child) {
+  li:not(:last-child) {
     margin-block-end: var(--list-spacing-lg);
   }
 }
@@ -100,19 +97,19 @@
 }
 
 /* Spacing variants */
-.spacing-none > & li :not(:last-child) {
+.spacing-none li :not(:last-child) {
   margin-block-end: var(--list-spacing-none);
 }
 
-.spacing-sm > & li :not(:last-child) {
+.spacing-sm li :not(:last-child) {
   margin-block-end: var(--list-spacing-sm);
 }
 
-.spacing-md > & li :not(:last-child) {
+.spacing-md li :not(:last-child) {
   margin-block-end: var(--list-spacing-md);
 }
 
-.spacing-lg > & li :not(:last-child) {
+.spacing-lg li :not(:last-child) {
   margin-block-end: var(--list-spacing-lg);
 }
 
@@ -123,21 +120,21 @@
 
 /* Definition list specific styles */
 .dl.default {
-  > & dt {
+  dt {
     font-weight: 600;
     margin-block-end: var(--list-spacing-sm);
   }
 
-  > & dd {
+  dd {
     margin-block-end: var(--list-spacing-md);
     margin-inline-start: var(--list-spacing-indent);
   }
 
-  > & dd:first-child {
+  dd:first-child {
     margin: 0;
   }
 
-  > & dd:last-child {
+  dd:last-child {
     margin-block-end: 0;
   }
 }
@@ -147,7 +144,7 @@
   grid-template-columns: max-content 1fr;
   gap: var(--list-spacing-sm) var(--list-spacing-md);
 
-  > & dt {
+  dt {
     font-weight: 600;
   }
 }

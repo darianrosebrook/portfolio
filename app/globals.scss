@@ -35,7 +35,7 @@
   --semantic-font-nohemi: var(--font-nohemi);
 
   font-weight: var(--semantic-typography-fontWeight-regular);
-  font-size: var(--core-typography-ramp-6);
+  font-size: var(--core-typography-ramp-4);
 
   /* Typography */
 
@@ -81,6 +81,9 @@
     'ccmp',
     'locl',
     'kern';
+  @media (width >= 1000px) {
+    font-size: var(--core-typography-ramp-5);
+  }
 
   p + p {
     margin-top: var(--core-spacing-size-04);
@@ -821,6 +824,13 @@ thead tr:first-of-type {
 
 header + main {
   margin-top: 5vh;
+}
+
+/* Mobile spacing adjustment for fixed navbar */
+@media screen and (width < 1000px) {
+  header + main {
+    margin-top: 8vh;
+  }
 }
 
 .menuList {

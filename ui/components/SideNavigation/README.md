@@ -1,29 +1,61 @@
 # SideNavigation (Composer)
 
-Scaffolded component following system standards.
+Headless navigation container that orchestrates expanded/collapsed state and provides context for nested navigation items.
 
 ## Usage
 
 ```tsx
-import SideNavigation from '@/ui/components/SideNavigation';
+import SideNavigation, {
+  SideNavigationProvider,
+} from '@/ui/components/SideNavigation';
+import { useSideNavigationContext } from '@/ui/components/SideNavigation/SideNavigationProvider';
 
-<SideNavigation>{/* content */}</SideNavigation>;
+function NavToggle() {
+  const { isExpanded, toggle } = useSideNavigationContext();
+  return (
+    <button type="button" onClick={toggle} aria-pressed={isExpanded}>
+      {isExpanded ? 'Collapse' : 'Expand'}
+    </button>
+  );
+}
+
+<SideNavigationProvider storageKey="app-sidenav" defaultExpanded>
+  <SideNavigation>
+    <NavToggle />
+    {/* nav content */}
+  </SideNavigation>
+  {/* children can read context for responsive layouts */}
+</SideNavigationProvider>;
 
 // Tokens live in SideNavigation.tokens.json and are bootstrapped in SideNavigation.tokens.generated.scss
 ```
 
-## Files
+## API
 
-- index.tsx
-- SideNavigation.tsx
-- SideNavigation.module.scss
-- SideNavigation.tokens.json
-- SideNavigation.tokens.generated.scss (placeholder; replaced by tokens build)
-- SideNavigationProvider.tsx
-- useSideNavigation.ts
+### useSideNavigation(options)
 
-## Next Steps
+- `defaultExpanded` (boolean, default `false`): initial expanded state.
+- `storageKey` (string, optional): persist expanded state to `localStorage`.
 
-- Fill out tokens JSON and run `npm run tokens:build`
-- Implement a11y per COMPONENT_STANDARDS
-- Add stories/tests as needed
+Returns:
+
+- `isExpanded` (boolean)
+- `expand()` / `collapse()` / `toggle()`
+
+### SideNavigationProvider props
+
+- Inherits `useSideNavigation` options. Provides the same return values via context.
+
+## Accessibility
+
+- Toggle buttons should set `aria-pressed` reflecting `isExpanded`.
+- Expose collapsed state via data-attributes on the container if styling requires: `data-state="expanded|collapsed"`.
+- Keyboard: Enter/Space to toggle; Escape can be wired in consuming items to collapse if desired.
+
+## Design Tokens
+
+- Background, border, elevation, and padding map to design tokens defined in `SideNavigation.tokens.json` → `SideNavigation.tokens.generated.scss`.
+
+## Related
+
+- Consider pairing with `Disclosure`/`Accordion` patterns for nested groups.

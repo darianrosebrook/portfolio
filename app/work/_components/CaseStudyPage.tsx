@@ -1,3 +1,5 @@
+import CaseStudyContent from './CaseStudyContent';
+
 interface CaseStudyData {
   headline: string | null;
   alternativeHeadline: string | null;
@@ -24,11 +26,11 @@ export default function CaseStudyPage({ data }: CaseStudyPageProps) {
       </header>
 
       <main>
-        {/* TODO: Implement proper content rendering */}
-        <div
-          className="content"
-          dangerouslySetInnerHTML={{ __html: data.html }}
-        />
+        <div className="content">
+          {/* Enhance images and external links; TOC rendering handled in serializer */}
+          {}
+          <CaseStudyContent html={data.html} />
+        </div>
       </main>
     </div>
   );
