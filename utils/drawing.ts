@@ -501,10 +501,100 @@ function drawMarker(
   ctx.fillText(label, x + 8, y);
   ctx.restore();
 }
-// TODO: For anatomy functions, have a list of features that exist with certain glyphs, these will be used to determine if we have a feature that needs to be highlighted.
-// Determine if we need a backwards lookup for glyphs that have certain features.  The size won't matter as much for the list because there's only a few hundred glyphs and a handful of features.
+// Feature mapping system for font anatomy
+// Maps typographic features to the glyphs that typically exhibit them
 
-// TODO: Gather list of glyphs
-// TODO: Add a list of features
-// TODO: Map the features to the glyphs that have them.
-// TODO: Map the features to the glyphs that have them
+export type AnatomyFeatureType =
+  | 'Apex' | 'Tail' | 'Arm' | 'Tittle' | 'Bowl' | 'Counter' | 'Eye'
+  | 'Serif' | 'Finial' | 'Spur' | 'Crotch' | 'Bar' | 'Loop' | 'Ear';
+
+// Common glyphs organized by the features they typically exhibit
+const GLYPH_FEATURE_MAP: Record<AnatomyFeatureType, string[]> = {
+  // Angular glyphs with pointed tops (A, V, W, etc.)
+  Apex: ['A', 'V', 'W', 'Y', 'Λ', 'Δ', '∇'],
+
+  // Descending strokes below baseline (g, j, p, q, y, etc.)
+  Tail: ['g', 'j', 'p', 'q', 'y', 'Q', 'J', 'β', 'γ', 'ζ', 'ξ', 'φ', 'ψ', 'ω'],
+
+  // Horizontal or angled free strokes (T, E, F, L, etc.)
+  Arm: ['T', 'E', 'F', 'L', 'Z', '7', 'Γ', 'Π', 'Σ'],
+
+  // Small dots above letters (i, j, and some others)
+  Tittle: ['i', 'j', 'ı', 'ȷ'],
+
+  // Fully enclosed curved counters (o, e, c, etc.)
+  Bowl: ['o', 'e', 'c', 'C', 'O', 'Q', 'a', 'b', 'd', 'g', 'p', 'q', 'ɑ', 'ɔ', 'ə', 'ɛ', 'ɡ', 'ʊ'],
+
+  // Enclosed negative spaces (o, e, a, etc.)
+  Counter: ['o', 'e', 'a', 'b', 'd', 'g', 'p', 'q', 'O', 'Q', 'B', 'D', 'P', 'R', 'a', 'ɑ', 'ɔ', 'ə', 'ɛ', 'ɡ'],
+
+  // Open counters in e-like glyphs (e, ə, ɛ)
+  Eye: ['e', 'ə', 'ɛ', 'œ'],
+
+  // Terminal projections (I, T, E, etc.)
+  Serif: ['I', 'T', 'E', 'F', 'L', 'H', 'B', 'D', 'P', 'R', 'N', 'M', 'K', 'i', 'l', 't', 'f', 'r'],
+
+  // Square terminal endings (I, T, H, etc.)
+  Finial: ['I', 'T', 'H', 'E', 'F', 'L', 'l', 't', 'f'],
+
+  // Small projections (G, S, r, etc.)
+  Spur: ['G', 'S', 'r', 'C', 'c', 'z', '3', '5', '6', '9'],
+
+  // Interior angles between limbs (A, V, W, K, X)
+  Crotch: ['A', 'V', 'W', 'K', 'X', 'Y', '4', 'Λ', 'Δ'],
+
+  // Horizontal crossbars (A, H, t, etc.)
+  Bar: ['A', 'H', 't', 'f', 'T', 'F', 'E', 'L', 'Z', '7', 'Γ'],
+
+  // Closed/partial loops below baseline (g, y, etc.)
+  Loop: ['g', 'y', 'j', 'β', 'γ', 'ζ', 'ξ', 'φ', 'ψ', 'ω'],
+
+  // Small projections at top-right (g, r, etc.)
+  Ear: ['g', 'r', 'C', 'G', 'j', 'β', 'γ', 'ζ']
+};
+
+// Reverse lookup: which features are available for a given glyph
+const glyphToFeaturesCache = new Map<string, AnatomyFeatureType[]>();
+
+/**
+ * Get all anatomy features that a specific glyph typically exhibits
+ * @param glyphName - The name/codepoint of the glyph (e.g., 'a', 'A', 'g')
+ * @returns Array of feature types this glyph typically has
+ */
+export function getFeaturesForGlyph(glyphName: string): AnatomyFeatureType[] {
+  if (glyphToFeaturesCache.has(glyphName)) {
+    return glyphToFeaturesCache.get(glyphName)!;
+  }
+
+  const features: AnatomyFeatureType[] = [];
+
+  // Check each feature type to see if this glyph is in its list
+  for (const [feature, glyphs] of Object.entries(GLYPH_FEATURE_MAP)) {
+    if (glyphs.includes(glyphName)) {
+      features.push(feature as AnatomyFeatureType);
+    }
+  }
+
+  glyphToFeaturesCache.set(glyphName, features);
+  return features;
+}
+
+/**
+ * Get all glyphs that typically exhibit a specific anatomy feature
+ * @param feature - The anatomy feature type
+ * @returns Array of glyph names that typically have this feature
+ */
+export function getGlyphsForFeature(feature: AnatomyFeatureType): string[] {
+  return GLYPH_FEATURE_MAP[feature] || [];
+}
+
+/**
+ * Check if a glyph typically has a specific anatomy feature
+ * @param glyphName - The name/codepoint of the glyph
+ * @param feature - The anatomy feature to check for
+ * @returns True if the glyph typically has this feature
+ */
+export function glyphHasFeature(glyphName: string, feature: AnatomyFeatureType): boolean {
+  const features = getFeaturesForGlyph(glyphName);
+  return features.includes(feature);
+}

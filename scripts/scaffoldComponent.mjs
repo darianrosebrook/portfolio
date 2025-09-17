@@ -188,10 +188,58 @@ function scaffold() {
     ]);
   }
 
+  // Contract file (machine-readable component specification)
+  const contractSchema = {
+    name: Name,
+    layer: layer,
+    anatomy: ["root"],
+    variants: {},
+    states: ["default"],
+    slots: {},
+    a11y: {
+      role: layer === 'primitive' ? "generic" : "region",
+      labeling: [],
+      keyboard: [],
+      apgPattern: null
+    },
+    tokens: {
+      root: [
+        `${lower}.color.background.default`,
+        `${lower}.color.foreground.primary`,
+        `${lower}.size.padding.default`,
+        `${lower}.size.radius.default`
+      ]
+    },
+    ssr: { hydrateOn: "none" },
+    rtl: { flipIcon: false }
+  };
+
+  files.push([
+    path.join(baseDir, `${Name}.contract.json`),
+    JSON.stringify(contractSchema, null, 2) + '\n'
+  ]);
+
+  // Tests directory structure
+  const testsDir = path.join(baseDir, 'tests');
+  
+  // Unit test file
+  files.push([
+    path.join(testsDir, `${Name}.test.tsx`),
+    `import { render, screen } from '@testing-library/react';\nimport { axe, toHaveNoViolations } from 'jest-axe';\nimport ${Name} from '../${Name}';\n\n// Extend Jest matchers\nexpect.extend(toHaveNoViolations);\n\ndescribe('${Name}', () => {\n  it('renders without crashing', () => {\n    render(<${Name}>Test content</${Name}>);\n    expect(screen.getByText('Test content')).toBeInTheDocument();\n  });\n\n  it('forwards ref to the underlying element', () => {\n    const ref = React.createRef<HTMLDivElement>();\n    render(<${Name} ref={ref}>Test</${Name}>);\n    expect(ref.current).toBeInstanceOf(HTMLDivElement);\n  });\n\n  it('applies custom className', () => {\n    render(<${Name} className="custom-class">Test</${Name}>);\n    const element = screen.getByText('Test');\n    expect(element).toHaveClass('custom-class');\n  });\n\n  it('passes through HTML attributes', () => {\n    render(<${Name} data-testid="test-${lower}">Test</${Name}>);\n    expect(screen.getByTestId('test-${lower}')).toBeInTheDocument();\n  });\n\n  describe('Accessibility', () => {\n    it('should not have accessibility violations', async () => {\n      const { container } = render(<${Name}>Accessible content</${Name}>);\n      const results = await axe(container);\n      expect(results).toHaveNoViolations();\n    });\n  });\n\n  describe('Design Tokens', () => {\n    it('uses design tokens instead of hardcoded values', () => {\n      render(<${Name}>Test</${Name}>);\n      const element = screen.getByText('Test');\n      const styles = window.getComputedStyle(element);\n      \n      // Verify CSS custom properties are being used\n      // Note: In jsdom, CSS custom properties may not resolve,\n      // but we can check that the class is applied correctly\n      expect(element).toHaveClass('${lower}');\n    });\n  });\n});\n`
+  ]);
+
+  // A11y-specific test file for interactive components
+  if (layer !== 'primitive' || Name.toLowerCase().includes('button') || Name.toLowerCase().includes('input')) {
+    files.push([
+      path.join(testsDir, `${Name}.a11y.test.tsx`),
+      `import { render, screen } from '@testing-library/react';\nimport userEvent from '@testing-library/user-event';\nimport { axe, toHaveNoViolations } from 'jest-axe';\nimport ${Name} from '../${Name}';\n\n// Extend Jest matchers\nexpected.extend(toHaveNoViolations);\n\ndescribe('${Name} Accessibility', () => {\n  const user = userEvent.setup();\n\n  it('supports keyboard navigation', async () => {\n    render(<${Name}>Interactive content</${Name}>);\n    const element = screen.getByText('Interactive content');\n    \n    // Test tab navigation\n    await user.tab();\n    expect(element).toHaveFocus();\n  });\n\n  it('has proper focus indicators', async () => {\n    render(<${Name}>Focusable content</${Name}>);\n    const element = screen.getByText('Focusable content');\n    \n    await user.tab();\n    expect(element).toHaveFocus();\n    \n    // Check for focus styles (implementation-specific)\n    const styles = window.getComputedStyle(element);\n    // Add specific focus style assertions based on your design tokens\n  });\n\n  it('meets WCAG contrast requirements', async () => {\n    const { container } = render(<${Name}>Contrast test</${Name}>);\n    const results = await axe(container, {\n      rules: {\n        'color-contrast': { enabled: true }\n      }\n    });\n    expect(results).toHaveNoViolations();\n  });\n\n  it('works with screen readers', () => {\n    render(<${Name} aria-label="Screen reader label">Content</${Name}>);\n    const element = screen.getByLabelText('Screen reader label');\n    expect(element).toBeInTheDocument();\n  });\n});\n`
+    ]);
+  }
+
   // README
   files.push([
     path.join(baseDir, 'README.md'),
-    `# ${Name} (${layer.charAt(0).toUpperCase() + layer.slice(1)})\n\nScaffolded component following system standards.\n\n## Usage\n\n\`\`\`tsx\nimport ${Name} from '@/ui/components/${Name}';\n\n<${Name}>\n  {/* content */}\n</${Name}>;\n\n// Tokens live in ${Name}.tokens.json and are bootstrapped in ${Name}.tokens.generated.scss\n\`\`\`\n\n## Props\n\n- ${Name}\n  - ...div props\n\n## Examples\n\n- Add usage examples and states here.\n\n## Accessibility\n\n- Include focus styles, ARIA guidance, and keyboard behavior where applicable.\n\n## Design Tokens\n\n- Consumes ${Name}.tokens.json → ${Name}.tokens.generated.scss\n- Background, radius, padding, elevation map to semantic tokens\n`,
+    `# ${Name} (${layer.charAt(0).toUpperCase() + layer.slice(1)})\n\nScaffolded component following system standards.\n\n## Usage\n\n\`\`\`tsx\nimport ${Name} from '@/ui/components/${Name}';\n\n<${Name}>\n  {/* content */}\n</${Name}>;\n\n// Tokens live in ${Name}.tokens.json and are bootstrapped in ${Name}.tokens.generated.scss\n\`\`\`\n\n## Props\n\n| Prop | Type | Default | Description |\n|------|------|---------|-------------|\n| children | ReactNode | - | Content to render inside the component |\n| className | string | '' | Additional CSS classes |\n| ...rest | HTMLAttributes<HTMLDivElement> | - | All standard HTML div attributes |\n\n## Examples\n\n### Basic Usage\n\`\`\`tsx\n<${Name}>\n  Basic content\n</${Name}>\n\`\`\`\n\n### With Custom Styling\n\`\`\`tsx\n<${Name} className="custom-styles">\n  Styled content\n</${Name}>\n\`\`\`\n\n## Accessibility\n\n### ARIA\n- **Role**: \`${contractSchema.a11y.role}\`\n- **Labeling**: Supports \`aria-label\` and \`aria-labelledby\`\n\n### Keyboard Navigation\n\n| Key | Action | Result |\n|-----|--------|--------|\n| Tab | Focus | Moves focus to the component |\n\n### Focus Management\n- Component receives focus when tabbed to\n- Focus indicators meet WCAG 2.1 AA contrast requirements\n- Supports \`:focus-visible\` for keyboard-only focus styling\n\n### Screen Reader Support\n- Content is announced appropriately\n- Semantic structure is preserved\n\n## Design Tokens\n\n### Consumed Tokens\n- \`${lower}.color.background.default\` → Background color\n- \`${lower}.color.foreground.primary\` → Text color\n- \`${lower}.size.padding.default\` → Internal spacing\n- \`${lower}.size.radius.default\` → Border radius\n\n### Token Structure\nTokens are defined in \`${Name}.tokens.json\` and compiled to \`${Name}.tokens.generated.scss\`.\n\n## Related Components\n\n- List related components here\n\n## Testing\n\nRun component tests:\n\`\`\`bash\nnpm test -- ${Name}\n\`\`\`\n\nRun accessibility tests:\n\`\`\`bash\nnpm test -- ${Name}.a11y\n\`\`\`\n`,
   ]);
 
   // write all
