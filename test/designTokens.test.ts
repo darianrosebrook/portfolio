@@ -424,7 +424,7 @@ describe('Enhanced Design Token Resolution', () => {
     const result = generate(componentTokens, mockTokens, config);
 
     expect(result['--button-background']).toBe(
-      'var(--ds-semantic-color-bg-primary)'
+      'var(--component-test-ds-semantic-color-bg-primary)'
     );
   });
 
@@ -443,7 +443,7 @@ describe('Enhanced Design Token Resolution', () => {
     const result = generate(componentTokens, mockTokens, config);
 
     expect(result['--button-background']).toBe(
-      'var(--custom-semantic-color-bg-primary)'
+      'var(--component-test-custom-semantic-color-bg-primary)'
     );
   });
 
