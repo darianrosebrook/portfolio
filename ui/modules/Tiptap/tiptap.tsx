@@ -8,16 +8,14 @@ import ImageBubbleMenu from './ImageBubbleMenu';
 import VideoBubbleMenu from './VideoBubbleMenu';
 import ToolbarWrapper from './ToolbarWrapper';
 
-import { Article, CaseStudy } from '@/types';
-
-type RecordType = Article | CaseStudy;
+import { Article } from '@/types';
 
 const Tiptap = ({
   article,
   handleUpdate = () => {},
 }: {
-  article: RecordType;
-  handleUpdate?: (article: RecordType) => void;
+  article: Article;
+  handleUpdate?: (article: Article) => void;
 }) => {
   const content = article.articleBody as JSONContent | undefined;
   const editor = useEditor({
