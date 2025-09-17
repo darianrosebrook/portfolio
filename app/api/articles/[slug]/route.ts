@@ -97,7 +97,7 @@ export async function PATCH(
   const body = await request.json();
 
   // For now, save working draft to the main fields since working columns don't exist yet
-  // TODO: Apply the add-working-columns.sql migration to enable proper draft functionality
+  // To enable proper draft functionality, run utils/supabase/migrations/add-working-columns.sql
   const {
     workingBody,
     workingHeadline,
