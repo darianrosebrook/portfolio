@@ -1,7 +1,8 @@
 import React from 'react';
 import { render, screen, fireEvent } from '../test-utils';
 import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
-import ErrorBoundary, {
+import {
+  ErrorBoundary,
   InteractiveErrorBoundary,
   EditorErrorBoundary,
   AnimationErrorBoundary,
