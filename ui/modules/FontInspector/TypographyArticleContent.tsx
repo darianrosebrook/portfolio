@@ -154,7 +154,7 @@ export const TypographyArticleContent = (
           </strong>
           Dial in exact hierarchy and responsive layouts without swapping files.
           <code style={{ display: 'block', margin: '0.5em 0' }}>
-            {`font-variation-settings: 'wght' var(--type-wght-heading), 'wdth' var(--type-wdth-responsive);`}
+            {`font-variation-settings: 'wght' var(--component-test-type-wght-heading), 'wdth' var(--component-test-type-wdth-responsive);`}
           </code>
         </li>
 

@@ -22,12 +22,22 @@ const PerformanceDashboard: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Only show in development or when performance monitoring is enabled
+    // Only show when explicitly enabled via localStorage
+    // Disabled by default even in development to avoid clutter
     const shouldShow =
-      process.env.NODE_ENV === 'development' ||
       localStorage.getItem('showPerformanceDashboard') === 'true';
 
     setIsVisible(shouldShow);
+
+    // Listen for toggle events from the navigation menu
+    const handleToggle = (event: CustomEvent) => {
+      setIsVisible(event.detail.enabled);
+    };
+
+    window.addEventListener(
+      'performanceMonitorToggle',
+      handleToggle as EventListener
+    );
 
     if (shouldShow) {
       // Collect performance metrics
@@ -50,8 +60,21 @@ const PerformanceDashboard: React.FC = () => {
         console.debug('Performance Observer not supported');
       }
 
-      return () => observer.disconnect();
+      return () => {
+        observer.disconnect();
+        window.removeEventListener(
+          'performanceMonitorToggle',
+          handleToggle as EventListener
+        );
+      };
     }
+
+    return () => {
+      window.removeEventListener(
+        'performanceMonitorToggle',
+        handleToggle as EventListener
+      );
+    };
   }, []);
 
   if (!isVisible) {
