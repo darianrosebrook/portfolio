@@ -12,4 +12,5 @@
  .nyc_output
  test-results
  junit.xml
- docs 
+ docs
+app/designTokens.scss 
