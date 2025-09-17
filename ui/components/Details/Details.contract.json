@@ -1,0 +1,43 @@
+{
+  "name": "Details",
+  "layer": "primitive",
+  "anatomy": [
+    "root",
+    "summary",
+    "summaryContent",
+    "icon",
+    "summaryText",
+    "content"
+  ],
+  "variants": {},
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "active",
+    "disabled"
+  ],
+  "slots": {},
+  "a11y": {
+    "role": "generic",
+    "labeling": [
+      "aria-label"
+    ],
+    "keyboard": [],
+    "apgPattern": null
+  },
+  "tokens": {
+    "root": [
+      "details.color.background.default",
+      "details.color.foreground.primary",
+      "details.size.padding.default",
+      "details.size.radius.default"
+    ]
+  },
+  "ssr": {
+    "hydrateOn": "none"
+  },
+  "rtl": {
+    "flipIcon": true
+  }
+}

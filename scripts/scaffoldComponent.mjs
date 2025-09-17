@@ -192,47 +192,51 @@ function scaffold() {
   const contractSchema = {
     name: Name,
     layer: layer,
-    anatomy: ["root"],
+    anatomy: ['root'],
     variants: {},
-    states: ["default"],
+    states: ['default'],
     slots: {},
     a11y: {
-      role: layer === 'primitive' ? "generic" : "region",
+      role: layer === 'primitive' ? 'generic' : 'region',
       labeling: [],
       keyboard: [],
-      apgPattern: null
+      apgPattern: null,
     },
     tokens: {
       root: [
         `${lower}.color.background.default`,
         `${lower}.color.foreground.primary`,
         `${lower}.size.padding.default`,
-        `${lower}.size.radius.default`
-      ]
+        `${lower}.size.radius.default`,
+      ],
     },
-    ssr: { hydrateOn: "none" },
-    rtl: { flipIcon: false }
+    ssr: { hydrateOn: 'none' },
+    rtl: { flipIcon: false },
   };
 
   files.push([
     path.join(baseDir, `${Name}.contract.json`),
-    JSON.stringify(contractSchema, null, 2) + '\n'
+    JSON.stringify(contractSchema, null, 2) + '\n',
   ]);
 
   // Tests directory structure
   const testsDir = path.join(baseDir, 'tests');
-  
+
   // Unit test file
   files.push([
     path.join(testsDir, `${Name}.test.tsx`),
-    `import * as React from 'react';\nimport { render, screen } from '@testing-library/react';\nimport { axe, toHaveNoViolations } from 'jest-axe';\nimport ${Name} from '../${Name}';\n\n// Extend Jest matchers\nexpect.extend(toHaveNoViolations);\n\ndescribe('${Name}', () => {\n  it('renders without crashing', () => {\n    render(<${Name}>Test content</${Name}>);\n    expect(screen.getByText('Test content')).toBeInTheDocument();\n  });\n\n  it('forwards ref to the underlying element', () => {\n    const ref = React.createRef<HTMLDivElement>();\n    render(<${Name} ref={ref}>Test</${Name}>);\n    expect(ref.current).toBeInstanceOf(HTMLDivElement);\n  });\n\n  it('applies custom className', () => {\n    render(<${Name} className="custom-class">Test</${Name}>);\n    const element = screen.getByText('Test');\n    expect(element).toHaveClass('custom-class');\n  });\n\n  it('passes through HTML attributes', () => {\n    render(<${Name} data-testid="test-${lower}">Test</${Name}>);\n    expect(screen.getByTestId('test-${lower}')).toBeInTheDocument();\n  });\n\n  describe('Accessibility', () => {\n    it('should not have accessibility violations', async () => {\n      const { container } = render(<${Name}>Accessible content</${Name}>);\n      const results = await axe(container);\n      expect(results).toHaveNoViolations();\n    });\n  });\n\n  describe('Design Tokens', () => {\n    it('uses design tokens instead of hardcoded values', () => {\n      render(<${Name}>Test</${Name}>);\n      const element = screen.getByText('Test');\n      const styles = window.getComputedStyle(element);\n      \n      // Verify CSS custom properties are being used\n      // Note: In jsdom, CSS custom properties may not resolve,\n      // but we can check that the class is applied correctly\n      expect(element).toHaveClass('${lower}');\n    });\n  });\n});\n`
+    `import * as React from 'react';\nimport { render, screen } from '@testing-library/react';\nimport { axe, toHaveNoViolations } from 'jest-axe';\nimport ${Name} from '../${Name}';\n\n// Extend Jest matchers\nexpect.extend(toHaveNoViolations);\n\ndescribe('${Name}', () => {\n  it('renders without crashing', () => {\n    render(<${Name}>Test content</${Name}>);\n    expect(screen.getByText('Test content')).toBeInTheDocument();\n  });\n\n  it('forwards ref to the underlying element', () => {\n    const ref = React.createRef<HTMLDivElement>();\n    render(<${Name} ref={ref}>Test</${Name}>);\n    expect(ref.current).toBeInstanceOf(HTMLDivElement);\n  });\n\n  it('applies custom className', () => {\n    render(<${Name} className="custom-class">Test</${Name}>);\n    const element = screen.getByText('Test');\n    expect(element).toHaveClass('custom-class');\n  });\n\n  it('passes through HTML attributes', () => {\n    render(<${Name} data-testid="test-${lower}">Test</${Name}>);\n    expect(screen.getByTestId('test-${lower}')).toBeInTheDocument();\n  });\n\n  describe('Accessibility', () => {\n    it('should not have accessibility violations', async () => {\n      const { container } = render(<${Name}>Accessible content</${Name}>);\n      const results = await axe(container);\n      expect(results).toHaveNoViolations();\n    });\n  });\n\n  describe('Design Tokens', () => {\n    it('uses design tokens instead of hardcoded values', () => {\n      render(<${Name}>Test</${Name}>);\n      const element = screen.getByText('Test');\n      const styles = window.getComputedStyle(element);\n      \n      // Verify CSS custom properties are being used\n      // Note: In jsdom, CSS custom properties may not resolve,\n      // but we can check that the class is applied correctly\n      expect(element).toHaveClass('${lower}');\n    });\n  });\n});\n`,
   ]);
 
   // A11y-specific test file for interactive components
-  if (layer !== 'primitive' || Name.toLowerCase().includes('button') || Name.toLowerCase().includes('input')) {
+  if (
+    layer !== 'primitive' ||
+    Name.toLowerCase().includes('button') ||
+    Name.toLowerCase().includes('input')
+  ) {
     files.push([
       path.join(testsDir, `${Name}.a11y.test.tsx`),
-      `import * as React from 'react';\nimport { render, screen } from '@testing-library/react';\nimport userEvent from '@testing-library/user-event';\nimport { axe, toHaveNoViolations } from 'jest-axe';\nimport ${Name} from '../${Name}';\n\n// Extend Jest matchers\nexpect.extend(toHaveNoViolations);\n\ndescribe('${Name} Accessibility', () => {\n  const user = userEvent.setup();\n\n  it('supports keyboard navigation', async () => {\n    render(<${Name}>Interactive content</${Name}>);\n    const element = screen.getByText('Interactive content');\n    \n    // Test tab navigation\n    await user.tab();\n    expect(element).toHaveFocus();\n  });\n\n  it('has proper focus indicators', async () => {\n    render(<${Name}>Focusable content</${Name}>);\n    const element = screen.getByText('Focusable content');\n    \n    await user.tab();\n    expect(element).toHaveFocus();\n    \n    // Check for focus styles (implementation-specific)\n    const styles = window.getComputedStyle(element);\n    // Add specific focus style assertions based on your design tokens\n  });\n\n  it('meets WCAG contrast requirements', async () => {\n    const { container } = render(<${Name}>Contrast test</${Name}>);\n    const results = await axe(container, {\n      rules: {\n        'color-contrast': { enabled: true }\n      }\n    });\n    expect(results).toHaveNoViolations();\n  });\n\n  it('works with screen readers', () => {\n    render(<${Name} aria-label="Screen reader label">Content</${Name}>);\n    const element = screen.getByLabelText('Screen reader label');\n    expect(element).toBeInTheDocument();\n  });\n});\n`
+      `import * as React from 'react';\nimport { render, screen } from '@testing-library/react';\nimport userEvent from '@testing-library/user-event';\nimport { axe, toHaveNoViolations } from 'jest-axe';\nimport ${Name} from '../${Name}';\n\n// Extend Jest matchers\nexpect.extend(toHaveNoViolations);\n\ndescribe('${Name} Accessibility', () => {\n  const user = userEvent.setup();\n\n  it('supports keyboard navigation', async () => {\n    render(<${Name}>Interactive content</${Name}>);\n    const element = screen.getByText('Interactive content');\n    \n    // Test tab navigation\n    await user.tab();\n    expect(element).toHaveFocus();\n  });\n\n  it('has proper focus indicators', async () => {\n    render(<${Name}>Focusable content</${Name}>);\n    const element = screen.getByText('Focusable content');\n    \n    await user.tab();\n    expect(element).toHaveFocus();\n    \n    // Check for focus styles (implementation-specific)\n    const styles = window.getComputedStyle(element);\n    // Add specific focus style assertions based on your design tokens\n  });\n\n  it('meets WCAG contrast requirements', async () => {\n    const { container } = render(<${Name}>Contrast test</${Name}>);\n    const results = await axe(container, {\n      rules: {\n        'color-contrast': { enabled: true }\n      }\n    });\n    expect(results).toHaveNoViolations();\n  });\n\n  it('works with screen readers', () => {\n    render(<${Name} aria-label="Screen reader label">Content</${Name}>);\n    const element = screen.getByLabelText('Screen reader label');\n    expect(element).toBeInTheDocument();\n  });\n});\n`,
     ]);
   }
 

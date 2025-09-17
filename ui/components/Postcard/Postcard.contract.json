@@ -1,0 +1,50 @@
+{
+  "name": "Postcard",
+  "layer": "composer",
+  "anatomy": [
+    "root",
+    "post",
+    "header",
+    "userInfo",
+    "displayName",
+    "handle"
+  ],
+  "variants": {},
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "active",
+    "disabled"
+  ],
+  "slots": {},
+  "a11y": {
+    "role": "region",
+    "labeling": [
+      "aria-label",
+      "aria-labelledby"
+    ],
+    "keyboard": [
+      {
+        "key": "Tab",
+        "when": "any",
+        "then": "navigate children"
+      }
+    ],
+    "apgPattern": null
+  },
+  "tokens": {
+    "root": [
+      "postcard.color.background.default",
+      "postcard.color.foreground.primary",
+      "postcard.size.padding.default",
+      "postcard.size.radius.default"
+    ]
+  },
+  "ssr": {
+    "hydrateOn": "interaction"
+  },
+  "rtl": {
+    "flipIcon": false
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "name": "Text",
+  "layer": "primitive",
+  "anatomy": [
+    "root",
+    "display",
+    "headline",
+    "title",
+    "body",
+    "caption"
+  ],
+  "variants": {
+    "size": [
+      "xs",
+      "sm",
+      "md",
+      "lg",
+      "xl",
+      "2xl",
+      "3xl"
+    ]
+  },
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "active",
+    "disabled"
+  ],
+  "slots": {},
+  "a11y": {
+    "role": "generic",
+    "labeling": [
+      "aria-label"
+    ],
+    "keyboard": [],
+    "apgPattern": null
+  },
+  "tokens": {
+    "root": [
+      "text.color.background.default",
+      "text.color.foreground.primary",
+      "text.size.padding.default",
+      "text.size.radius.default"
+    ]
+  },
+  "ssr": {
+    "hydrateOn": "none"
+  },
+  "rtl": {
+    "flipIcon": false
+  }
+}

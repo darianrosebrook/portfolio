@@ -1,0 +1,47 @@
+{
+  "name": "Spinner",
+  "layer": "primitive",
+  "anatomy": [
+    "root",
+    "inline",
+    "visual"
+  ],
+  "variants": {
+    "size": [
+      "xs",
+      "sm",
+      "md",
+      "lg"
+    ]
+  },
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "active",
+    "disabled"
+  ],
+  "slots": {},
+  "a11y": {
+    "role": "generic",
+    "labeling": [
+      "aria-label"
+    ],
+    "keyboard": [],
+    "apgPattern": null
+  },
+  "tokens": {
+    "root": [
+      "spinner.color.background.default",
+      "spinner.color.foreground.primary",
+      "spinner.size.padding.default",
+      "spinner.size.radius.default"
+    ]
+  },
+  "ssr": {
+    "hydrateOn": "none"
+  },
+  "rtl": {
+    "flipIcon": false
+  }
+}

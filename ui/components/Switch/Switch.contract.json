@@ -1,0 +1,39 @@
+{
+  "name": "Switch",
+  "layer": "primitive",
+  "anatomy": [
+    "root",
+    "switchGroup"
+  ],
+  "variants": {},
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "active",
+    "disabled"
+  ],
+  "slots": {},
+  "a11y": {
+    "role": "generic",
+    "labeling": [
+      "aria-label"
+    ],
+    "keyboard": [],
+    "apgPattern": null
+  },
+  "tokens": {
+    "root": [
+      "switch.color.background.default",
+      "switch.color.foreground.primary",
+      "switch.size.padding.default",
+      "switch.size.radius.default"
+    ]
+  },
+  "ssr": {
+    "hydrateOn": "none"
+  },
+  "rtl": {
+    "flipIcon": false
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "name": "Input",
+  "layer": "primitive",
+  "anatomy": [
+    "root",
+    "invalid"
+  ],
+  "variants": {},
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "active",
+    "disabled"
+  ],
+  "slots": {},
+  "a11y": {
+    "role": "textbox",
+    "labeling": [
+      "aria-label",
+      "aria-labelledby",
+      "aria-describedby"
+    ],
+    "keyboard": [
+      {
+        "key": "Tab",
+        "when": "root",
+        "then": "focus"
+      }
+    ],
+    "apgPattern": "textbox"
+  },
+  "tokens": {
+    "root": [
+      "input.color.background.default",
+      "input.color.foreground.primary",
+      "input.size.padding.default",
+      "input.size.radius.default"
+    ]
+  },
+  "ssr": {
+    "hydrateOn": "none"
+  },
+  "rtl": {
+    "flipIcon": false
+  }
+}

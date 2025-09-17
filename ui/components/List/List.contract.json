@@ -1,0 +1,56 @@
+{
+  "name": "List",
+  "layer": "primitive",
+  "anatomy": [
+    "root",
+    "ol",
+    "dl",
+    "sm",
+    "md",
+    "lg"
+  ],
+  "variants": {
+    "variant": [
+      "default",
+      "unstyled",
+      "inline",
+      "divided",
+      "spaced"
+    ],
+    "size": [
+      "sm",
+      "md",
+      "lg"
+    ]
+  },
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "active",
+    "disabled"
+  ],
+  "slots": {},
+  "a11y": {
+    "role": "generic",
+    "labeling": [
+      "aria-label"
+    ],
+    "keyboard": [],
+    "apgPattern": null
+  },
+  "tokens": {
+    "root": [
+      "list.color.background.default",
+      "list.color.foreground.primary",
+      "list.size.padding.default",
+      "list.size.radius.default"
+    ]
+  },
+  "ssr": {
+    "hydrateOn": "none"
+  },
+  "rtl": {
+    "flipIcon": false
+  }
+}

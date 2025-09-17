@@ -1,0 +1,39 @@
+{
+  "name": "AlertNotice",
+  "layer": "primitive",
+  "anatomy": [
+    "root",
+    "alert"
+  ],
+  "variants": {},
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "active",
+    "disabled"
+  ],
+  "slots": {},
+  "a11y": {
+    "role": "generic",
+    "labeling": [
+      "aria-label"
+    ],
+    "keyboard": [],
+    "apgPattern": null
+  },
+  "tokens": {
+    "root": [
+      "alertnotice.color.background.default",
+      "alertnotice.color.foreground.primary",
+      "alertnotice.size.padding.default",
+      "alertnotice.size.radius.default"
+    ]
+  },
+  "ssr": {
+    "hydrateOn": "none"
+  },
+  "rtl": {
+    "flipIcon": false
+  }
+}

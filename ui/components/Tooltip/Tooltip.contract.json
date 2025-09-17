@@ -1,0 +1,38 @@
+{
+  "name": "Tooltip",
+  "layer": "primitive",
+  "anatomy": [
+    "root"
+  ],
+  "variants": {},
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "active",
+    "disabled"
+  ],
+  "slots": {},
+  "a11y": {
+    "role": "generic",
+    "labeling": [
+      "aria-label"
+    ],
+    "keyboard": [],
+    "apgPattern": null
+  },
+  "tokens": {
+    "root": [
+      "tooltip.color.background.default",
+      "tooltip.color.foreground.primary",
+      "tooltip.size.padding.default",
+      "tooltip.size.radius.default"
+    ]
+  },
+  "ssr": {
+    "hydrateOn": "none"
+  },
+  "rtl": {
+    "flipIcon": false
+  }
+}

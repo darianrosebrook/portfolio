@@ -1,0 +1,54 @@
+{
+  "name": "Blockquote",
+  "layer": "primitive",
+  "anatomy": [
+    "root",
+    "sm",
+    "md",
+    "lg",
+    "default",
+    "bordered"
+  ],
+  "variants": {
+    "variant": [
+      "default",
+      "bordered",
+      "highlighted"
+    ],
+    "size": [
+      "sm",
+      "md",
+      "lg"
+    ]
+  },
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "active",
+    "disabled"
+  ],
+  "slots": {},
+  "a11y": {
+    "role": "generic",
+    "labeling": [
+      "aria-label"
+    ],
+    "keyboard": [],
+    "apgPattern": null
+  },
+  "tokens": {
+    "root": [
+      "blockquote.color.background.default",
+      "blockquote.color.foreground.primary",
+      "blockquote.size.padding.default",
+      "blockquote.size.radius.default"
+    ]
+  },
+  "ssr": {
+    "hydrateOn": "none"
+  },
+  "rtl": {
+    "flipIcon": false
+  }
+}

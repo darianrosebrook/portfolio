@@ -1,0 +1,50 @@
+{
+  "name": "Button",
+  "layer": "primitive",
+  "anatomy": [
+    "root",
+    "isLoading",
+    "spinner",
+    "loadingText",
+    "small",
+    "medium"
+  ],
+  "variants": {},
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "active",
+    "disabled"
+  ],
+  "slots": {},
+  "a11y": {
+    "role": "button",
+    "labeling": [
+      "aria-label",
+      "aria-labelledby"
+    ],
+    "keyboard": [
+      {
+        "key": "Enter|Space",
+        "when": "root",
+        "then": "activate"
+      }
+    ],
+    "apgPattern": "button"
+  },
+  "tokens": {
+    "root": [
+      "button.color.background.default",
+      "button.color.foreground.primary",
+      "button.size.padding.default",
+      "button.size.radius.default"
+    ]
+  },
+  "ssr": {
+    "hydrateOn": "none"
+  },
+  "rtl": {
+    "flipIcon": false
+  }
+}

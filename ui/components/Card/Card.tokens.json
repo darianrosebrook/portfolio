@@ -24,7 +24,13 @@
       }
     },
     "elevation": {
-      "default": "{semantic.elevation.default}"
+      "default": "{semantic.elevation.default}",
+      "hover": "{semantic.elevation.hover}"
+    },
+    "motion": {
+      "hover": {
+        "offset": "-0.125rem"
+      }
     }
   }
 }

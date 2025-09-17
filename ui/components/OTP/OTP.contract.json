@@ -1,0 +1,47 @@
+{
+  "name": "OTP",
+  "layer": "composer",
+  "anatomy": [
+    "root",
+    "group",
+    "field"
+  ],
+  "variants": {},
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "active",
+    "disabled"
+  ],
+  "slots": {},
+  "a11y": {
+    "role": "region",
+    "labeling": [
+      "aria-label",
+      "aria-labelledby"
+    ],
+    "keyboard": [
+      {
+        "key": "Tab",
+        "when": "any",
+        "then": "navigate children"
+      }
+    ],
+    "apgPattern": null
+  },
+  "tokens": {
+    "root": [
+      "otp.color.background.default",
+      "otp.color.foreground.primary",
+      "otp.size.padding.default",
+      "otp.size.radius.default"
+    ]
+  },
+  "ssr": {
+    "hydrateOn": "interaction"
+  },
+  "rtl": {
+    "flipIcon": false
+  }
+}

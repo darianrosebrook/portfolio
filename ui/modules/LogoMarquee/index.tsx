@@ -3,7 +3,7 @@ import { useRef, useEffect, useState } from 'react';
 import Styles from './index.module.scss';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { horizontalLoop } from '@/utils';
+import { horizontalLoop } from '@/utils/helpers';
 import LogoSprite from './LogoSprite';
 
 const LogoMarquee: React.FC = () => {

@@ -3,74 +3,36 @@
  */
 @mixin vars {
   /* === Color Tokens === */
-  --button-color-background-default: var(
-    --semantic-color-action-background-default
-  );
+  --button-color-background-default: var(--semantic-color-action-background-default);
   --button-color-background-hover: var(--semantic-interaction-background-hover);
-  --button-color-background-active: var(
-    --semantic-interaction-background-active
-  );
-  --button-color-background-focus: var(
-    --semantic-color-action-background-focus
-  );
-  --button-color-background-focusVisible: var(
-    --semantic-color-action-background-focusVisible
-  );
-  --button-color-background-disabled: var(
-    --semantic-color-action-background-disabled
-  );
+  --button-color-background-active: var(--semantic-interaction-background-active);
+  --button-color-background-focus: var(--semantic-color-action-background-focus);
+  --button-color-background-focusVisible: var(--semantic-color-action-background-focusVisible);
+  --button-color-background-disabled: var(--semantic-color-action-background-disabled);
   --button-color-background-primary: var(--semantic-color-background-primary);
-  --button-color-background-primaryHover: var(
-    --semantic-interaction-background-hover
-  );
-  --button-color-background-primaryActive: var(
-    --semantic-interaction-background-active
-  );
-  --button-color-background-secondary: var(
-    --semantic-color-background-secondary
-  );
-  --button-color-background-secondaryHover: var(
-    --semantic-interaction-background-hover
-  );
-  --button-color-background-secondaryActive: var(
-    --semantic-interaction-background-active
-  );
+  --button-color-background-primaryHover: var(--semantic-interaction-background-hover);
+  --button-color-background-primaryActive: var(--semantic-interaction-background-active);
+  --button-color-background-secondary: var(--semantic-color-background-secondary);
+  --button-color-background-secondaryHover: var(--semantic-interaction-background-hover);
+  --button-color-background-secondaryActive: var(--semantic-interaction-background-active);
   --button-color-background-tertiary: var(--core-color-mode-transparent);
-  --button-color-background-tertiaryHover: var(
-    --semantic-interaction-background-hover
-  );
-  --button-color-background-tertiaryActive: var(
-    --semantic-interaction-background-active
-  );
+  --button-color-background-tertiaryHover: var(--semantic-interaction-background-hover);
+  --button-color-background-tertiaryActive: var(--semantic-interaction-background-active);
   --button-color-foreground-default: var(--semantic-color-foreground-inverse);
   --button-color-foreground-hover: var(--semantic-interaction-text-hover);
   --button-color-foreground-active: var(--semantic-interaction-text-active);
   --button-color-foreground-focus: var(--semantic-color-foreground-inverse);
-  --button-color-foreground-focusVisible: var(
-    --semantic-color-foreground-inverse
-  );
+  --button-color-foreground-focusVisible: var(--semantic-color-foreground-inverse);
   --button-color-foreground-disabled: var(--semantic-color-foreground-disabled);
   --button-color-foreground-primary: var(--semantic-color-foreground-onBrand);
-  --button-color-foreground-primaryHover: var(
-    --semantic-color-foreground-onBrand
-  );
-  --button-color-foreground-primaryActive: var(
-    --semantic-color-foreground-onBrand
-  );
+  --button-color-foreground-primaryHover: var(--semantic-color-foreground-onBrand);
+  --button-color-foreground-primaryActive: var(--semantic-color-foreground-onBrand);
   --button-color-foreground-secondary: var(--semantic-color-foreground-primary);
-  --button-color-foreground-secondaryHover: var(
-    --semantic-interaction-text-hover
-  );
-  --button-color-foreground-secondaryActive: var(
-    --semantic-interaction-text-active
-  );
+  --button-color-foreground-secondaryHover: var(--semantic-interaction-text-hover);
+  --button-color-foreground-secondaryActive: var(--semantic-interaction-text-active);
   --button-color-foreground-tertiary: var(--semantic-color-foreground-tertiary);
-  --button-color-foreground-tertiaryHover: var(
-    --semantic-interaction-text-hover
-  );
-  --button-color-foreground-tertiaryActive: var(
-    --semantic-interaction-text-active
-  );
+  --button-color-foreground-tertiaryHover: var(--semantic-interaction-text-hover);
+  --button-color-foreground-tertiaryActive: var(--semantic-interaction-text-active);
   --button-color-border-default: var(--semantic-color-border-light);
   --button-color-border-hover: var(--semantic-interaction-border-hover);
   --button-color-border-active: var(--semantic-interaction-border-active);
@@ -81,17 +43,11 @@
   --button-color-border-primaryHover: var(--semantic-color-border-accent);
   --button-color-border-primaryActive: var(--semantic-color-border-accent);
   --button-color-border-secondary: var(--semantic-color-border-light);
-  --button-color-border-secondaryHover: var(
-    --semantic-interaction-border-hover
-  );
-  --button-color-border-secondaryActive: var(
-    --semantic-interaction-border-active
-  );
+  --button-color-border-secondaryHover: var(--semantic-interaction-border-hover);
+  --button-color-border-secondaryActive: var(--semantic-interaction-border-active);
   --button-color-border-tertiary: var(--semantic-color-border-light);
   --button-color-border-tertiaryHover: var(--semantic-interaction-border-hover);
-  --button-color-border-tertiaryActive: var(
-    --semantic-interaction-border-active
-  );
+  --button-color-border-tertiaryActive: var(--semantic-interaction-border-active);
   --button-color-spinner-border: var(--semantic-color-border-light);
   --button-color-spinner-borderAccent: var(--semantic-color-border-accent);
 
@@ -112,9 +68,7 @@
   --button-text-size-small: var(--semantic-typography-body-04);
   --button-text-size-medium: var(--semantic-typography-body-01);
   --button-text-size-large: var(--semantic-typography-body-01);
-  --button-text-lineHeight-collapse: var(
-    --semantic-typography-lineHeight-collapse
-  );
+  --button-text-lineHeight-collapse: var(--semantic-typography-lineHeight-collapse);
 
   /* === Motion Tokens === */
   --button-motion-duration-fast: var(--core-motion-duration-short);

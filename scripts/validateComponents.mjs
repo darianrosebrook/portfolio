@@ -20,7 +20,9 @@ const COMPONENT_REQUIRED_FILES = [
   'index.tsx',
   '{ComponentName}.tsx',
   '{ComponentName}.module.scss',
+  '{ComponentName}.contract.json',
   'README.md',
+  'tests/{ComponentName}.test.tsx',
 ];
 
 // Required files for modules (more flexible, application-specific)
@@ -107,6 +109,11 @@ class ComponentValidator {
         this.logSuccess(`Required file exists: ${fileName}`);
       }
     });
+
+    // Validate contract file if it exists
+    if (type === 'component') {
+      this.validateContractFile(componentPath, componentName);
+    }
 
     // Check optional files (only warn for components, info for modules)
     optionalFiles.forEach((filePattern) => {
@@ -479,6 +486,64 @@ class ComponentValidator {
       }
     } catch (error) {
       this.logError(`Error reading SCSS file: ${error.message}`);
+    }
+  }
+
+  validateContractFile(componentPath, componentName) {
+    const contractPath = path.join(
+      componentPath,
+      `${componentName}.contract.json`
+    );
+
+    if (!fs.existsSync(contractPath)) {
+      this.logError('Missing required file: contract.json');
+      return;
+    }
+
+    try {
+      const content = fs.readFileSync(contractPath, 'utf8');
+      const contract = JSON.parse(content);
+
+      // Required fields validation
+      const requiredFields = ['name', 'layer', 'anatomy', 'a11y', 'tokens'];
+      requiredFields.forEach((field) => {
+        if (!contract[field]) {
+          this.logError(`Contract missing required field: ${field}`);
+        } else {
+          this.logSuccess(`Contract has required field: ${field}`);
+        }
+      });
+
+      // Validate layer
+      const validLayers = ['primitive', 'compound', 'composer', 'assembly'];
+      if (contract.layer && validLayers.includes(contract.layer)) {
+        this.logSuccess(`Contract has valid layer: ${contract.layer}`);
+      } else {
+        this.logError(
+          `Contract has invalid layer. Must be one of: ${validLayers.join(', ')}`
+        );
+      }
+
+      // Validate a11y structure
+      if (contract.a11y) {
+        const a11yFields = ['role', 'labeling', 'keyboard'];
+        a11yFields.forEach((field) => {
+          if (contract.a11y[field] !== undefined) {
+            this.logSuccess(`Contract a11y has ${field} specification`);
+          } else {
+            this.logWarning(`Contract a11y missing ${field} specification`);
+          }
+        });
+      }
+
+      // Validate tokens structure
+      if (contract.tokens && typeof contract.tokens === 'object') {
+        this.logSuccess('Contract has tokens specification');
+      } else {
+        this.logError('Contract tokens must be an object');
+      }
+    } catch (error) {
+      this.logError(`Error reading contract file: ${error.message}`);
     }
   }
 

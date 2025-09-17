@@ -11,7 +11,7 @@ import React, {
 import * as fontkit from 'fontkit';
 import type { Font, Glyph } from 'fontkit';
 import styles from './FontInspector.module.scss';
-import { DrawColors } from '@/utils/';
+import { DrawColors } from '@/utils/helpers';
 import { InspectorControls } from './InspectorControls';
 import { AnatomyControls } from './AnatomyControls';
 import { SymbolGrid } from './SymbolGrid';

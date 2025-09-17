@@ -1,0 +1,40 @@
+{
+  "name": "SlinkyCursor",
+  "layer": "primitive",
+  "anatomy": [
+    "root",
+    "pest",
+    "active"
+  ],
+  "variants": {},
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "active",
+    "disabled"
+  ],
+  "slots": {},
+  "a11y": {
+    "role": "generic",
+    "labeling": [
+      "aria-label"
+    ],
+    "keyboard": [],
+    "apgPattern": null
+  },
+  "tokens": {
+    "root": [
+      "slinkycursor.color.background.default",
+      "slinkycursor.color.foreground.primary",
+      "slinkycursor.size.padding.default",
+      "slinkycursor.size.radius.default"
+    ]
+  },
+  "ssr": {
+    "hydrateOn": "none"
+  },
+  "rtl": {
+    "flipIcon": false
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "name": "Popover",
+  "layer": "composer",
+  "anatomy": [
+    "root",
+    "popoverContainer",
+    "popoverTrigger",
+    "popoverContent",
+    "activeTrigger"
+  ],
+  "variants": {},
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "active",
+    "disabled"
+  ],
+  "slots": {},
+  "a11y": {
+    "role": "region",
+    "labeling": [
+      "aria-label",
+      "aria-labelledby"
+    ],
+    "keyboard": [
+      {
+        "key": "Tab",
+        "when": "any",
+        "then": "navigate children"
+      }
+    ],
+    "apgPattern": null
+  },
+  "tokens": {
+    "root": [
+      "popover.color.background.default",
+      "popover.color.foreground.primary",
+      "popover.size.padding.default",
+      "popover.size.radius.default"
+    ]
+  },
+  "ssr": {
+    "hydrateOn": "interaction"
+  },
+  "rtl": {
+    "flipIcon": false
+  }
+}

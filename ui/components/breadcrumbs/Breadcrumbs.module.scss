@@ -23,6 +23,17 @@
   color: var(--breadcrumbs-color-foreground-link);
   line-height: var(--breadcrumbs-typography-lineHeight-collapse);
   text-decoration: none;
+
+  &:hover {
+    color: var(--breadcrumbs-color-foreground-primary);
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    border-radius: var(--breadcrumbs-shape-radius-small, 0.125rem);
+    outline: 2px solid var(--breadcrumbs-color-focus, var(--color-focus-ring));
+    outline-offset: 2px;
+  }
 }
 
 .current {
@@ -41,6 +52,12 @@
 details.overflow summary {
   list-style: none;
   cursor: pointer;
+
+  &:focus-visible {
+    border-radius: var(--breadcrumbs-shape-radius-small, 0.125rem);
+    outline: 2px solid var(--breadcrumbs-color-focus, var(--color-focus-ring));
+    outline-offset: 2px;
+  }
 }
 
 details.overflow[open] summary::after {

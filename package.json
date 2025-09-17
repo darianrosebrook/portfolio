@@ -14,17 +14,20 @@
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
     "analyze": "ANALYZE=true npm run build",
+    "tokens:build": "tsx utils/designTokens/runners/build.ts",
+    "tokens:compose": "tsx utils/designTokens/generators/compose.ts",
+    "tokens:global": "tsx utils/designTokens/generators/global.ts",
+    "tokens:types": "tsx utils/designTokens/generators/types.ts",
     "tokens:scss": "node utils/generateCSSTokens.mjs",
-    "tokens:globals": "node utils/designTokens/generateGlobalTokens.mjs",
-    "tokens:compose": "node utils/designTokens/composeTokens.mjs",
     "tokens:schema": "node utils/designTokens/generateSchema.mjs",
-    "tokens:types": "node utils/designTokens/generateTypes.mjs",
     "tokens:validate": "node utils/designTokens/validateTokens.mjs",
-    "tokens:build": "npm run tokens:schema && npm run tokens:compose && npm run tokens:globals && npm run tokens:scss && npm run tokens:types",
     "tokens:inspect": "node utils/designTokens/inspectTokens.mjs",
     "validate:components": "node scripts/validateComponents.mjs",
     "scaffold:component": "node scripts/scaffoldComponent.mjs",
-    "generate:components-docs": "node scripts/generateComponentsAndDocs.mjs"
+    "generate:components-docs": "node scripts/generateComponentsAndDocs.mjs",
+    "generate:contracts": "node scripts/generateContracts.mjs",
+    "components:setup": "npm run generate:contracts && npm run validate:components",
+    "components:health": "node scripts/componentHealthCheck.mjs"
   },
   "dependencies": {
     "@atproto/api": "^0.16.9",
@@ -117,6 +120,7 @@
     "stylelint-config-prettier-scss": "^1.0.0",
     "stylelint-config-standard-scss": "^13.1.0",
     "stylelint-order": "^6.0.4",
+    "tsx": "^4.20.5",
     "typescript": "^5.9.2",
     "vitest": "^3.2.4"
   }

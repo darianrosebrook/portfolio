@@ -10,6 +10,12 @@
   font-weight: var(--animatedLink-typography-fontWeight-regular);
   line-height: var(--animatedLink-typography-lineHeight-collapse);
   text-decoration: none;
+
+  &:focus-visible {
+    border-radius: var(--animatedLink-shape-radius, 0.125rem);
+    outline: 2px solid var(--animatedLink-color-focus, var(--color-focus-ring));
+    outline-offset: 2px;
+  }
 }
 
 .maskLine {

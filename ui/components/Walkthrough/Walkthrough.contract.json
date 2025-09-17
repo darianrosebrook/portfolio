@@ -1,0 +1,50 @@
+{
+  "name": "Walkthrough",
+  "layer": "composer",
+  "anatomy": [
+    "root",
+    "content",
+    "title",
+    "description",
+    "controls",
+    "prev"
+  ],
+  "variants": {},
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "active",
+    "disabled"
+  ],
+  "slots": {},
+  "a11y": {
+    "role": "region",
+    "labeling": [
+      "aria-label",
+      "aria-labelledby"
+    ],
+    "keyboard": [
+      {
+        "key": "Tab",
+        "when": "any",
+        "then": "navigate children"
+      }
+    ],
+    "apgPattern": null
+  },
+  "tokens": {
+    "root": [
+      "walkthrough.color.background.default",
+      "walkthrough.color.foreground.primary",
+      "walkthrough.size.padding.default",
+      "walkthrough.size.radius.default"
+    ]
+  },
+  "ssr": {
+    "hydrateOn": "interaction"
+  },
+  "rtl": {
+    "flipIcon": false
+  }
+}
