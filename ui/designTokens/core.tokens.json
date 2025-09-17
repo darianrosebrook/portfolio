@@ -609,11 +609,14 @@
     "gradient": {
       "brandPrimary": {
         "$type": "gradient",
-        "$value": "linear-gradient(135deg, {color.palette.brand.primary.400} 0%, {color.palette.brand.primary.600} 100%)"
+        "$value": "{color.palette.brand.primary.400}"
       }
     },
     "overlay": {
       "scrim": { "$type": "color", "$value": "rgba(0,0,0,0.40)" }
+    },
+    "opacity": {
+      "50": { "$type": "number", "$value": 0.5 }
     },
     "selection": {
       "background": { "$type": "color", "$value": "{color.palette.blue.200}" },
@@ -858,7 +861,7 @@
     "keyframes": {
       "fadeIn": {
         "$type": "string",
-        "$value": "@keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }"
+        "$value": "fadeIn"
       }
     },
     "delay": {
@@ -916,6 +919,57 @@
       "sm": { "$type": "dimension", "$value": "4px" },
       "md": { "$type": "dimension", "$value": "8px" },
       "lg": { "$type": "dimension", "$value": "12px" }
+    }
+  },
+
+  "component": {
+    "pagination": {
+      "gap": {
+        "x": { "$type": "dimension", "$value": "{spacing.size.02}" }
+      },
+      "minSize": { "$type": "dimension", "$value": "32px" }
+    },
+    "foreground": {
+      "default": { "$type": "color", "$value": "{color.mode.dark}" }
+    },
+    "typography": {
+      "variation": {
+        "wghtHeading": { "$type": "number", "$value": 700 },
+        "wdthResponsive": { "$type": "number", "$value": 100 }
+      }
+    },
+    "otp": {
+      "field": {
+        "gap": { "$type": "dimension", "$value": "{spacing.size.02}" },
+        "minWidth": { "$type": "dimension", "$value": "48px" },
+        "height": { "$type": "dimension", "$value": "48px" },
+        "fontSize": { "$type": "dimension", "$value": "{typography.ramp.4}" },
+        "fontWeight": {
+          "$type": "fontWeight",
+          "$value": "{typography.fontWeight.medium}"
+        },
+        "radius": { "$type": "borderRadius", "$value": "{shape.radius.02}" }
+      },
+      "color": {
+        "text": { "$type": "color", "$value": "{color.foreground.primary}" },
+        "bg": { "$type": "color", "$value": "{color.background.primary}" },
+        "border": { "$type": "color", "$value": "{color.border.subtle}" },
+        "focus": { "$type": "color", "$value": "{color.palette.red.500}" }
+      }
+    },
+    "test": {
+      "dsSemanticColorBgPrimary": {
+        "$type": "color",
+        "$value": "{color.background.primary}"
+      },
+      "customSemanticColorBgPrimary": {
+        "$type": "color",
+        "$value": "{color.background.primary}"
+      },
+      "myCustomBg": { "$type": "color", "$value": "#007bff" },
+      "path": { "$type": "string", "$value": "test-path" },
+      "typeWghtHeading": { "$type": "number", "$value": 700 },
+      "typeWdthResponsive": { "$type": "number", "$value": 100 }
     }
   }
 }

@@ -672,13 +672,19 @@
       "gradient": {
         "brandPrimary": {
           "$type": "gradient",
-          "$value": "linear-gradient(135deg, {core.color.palette.brand.primary.400} 0%, {core.color.palette.brand.primary.600} 100%)"
+          "$value": "{core.color.palette.brand.primary.400}"
         }
       },
       "overlay": {
         "scrim": {
           "$type": "color",
           "$value": "rgba(0,0,0,0.40)"
+        }
+      },
+      "opacity": {
+        "50": {
+          "$type": "number",
+          "$value": 0.5
         }
       },
       "selection": {
@@ -1184,7 +1190,7 @@
       "keyframes": {
         "fadeIn": {
           "$type": "string",
-          "$value": "@keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }"
+          "$value": "fadeIn"
         }
       },
       "delay": {
@@ -1317,6 +1323,110 @@
         "lg": {
           "$type": "dimension",
           "$value": "12px"
+        }
+      }
+    },
+    "component": {
+      "pagination": {
+        "gap": {
+          "x": {
+            "$type": "dimension",
+            "$value": "{core.spacing.size.02}"
+          }
+        },
+        "minSize": {
+          "$type": "dimension",
+          "$value": "32px"
+        }
+      },
+      "foreground": {
+        "default": {
+          "$type": "color",
+          "$value": "{core.color.mode.dark}"
+        }
+      },
+      "typography": {
+        "variation": {
+          "wghtHeading": {
+            "$type": "number",
+            "$value": 700
+          },
+          "wdthResponsive": {
+            "$type": "number",
+            "$value": 100
+          }
+        }
+      },
+      "otp": {
+        "field": {
+          "gap": {
+            "$type": "dimension",
+            "$value": "{core.spacing.size.02}"
+          },
+          "minWidth": {
+            "$type": "dimension",
+            "$value": "48px"
+          },
+          "height": {
+            "$type": "dimension",
+            "$value": "48px"
+          },
+          "fontSize": {
+            "$type": "dimension",
+            "$value": "{core.typography.ramp.4}"
+          },
+          "fontWeight": {
+            "$type": "fontWeight",
+            "$value": "{semantic.typography.fontWeight.medium}"
+          },
+          "radius": {
+            "$type": "borderRadius",
+            "$value": "{core.shape.radius.02}"
+          }
+        },
+        "color": {
+          "text": {
+            "$type": "color",
+            "$value": "{semantic.color.foreground.primary}"
+          },
+          "bg": {
+            "$type": "color",
+            "$value": "{semantic.color.background.primary}"
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{semantic.color.border.subtle}"
+          },
+          "focus": {
+            "$type": "color",
+            "$value": "{core.color.palette.red.500}"
+          }
+        }
+      },
+      "test": {
+        "dsSemanticColorBgPrimary": {
+          "$type": "color",
+          "$value": "{semantic.color.background.primary}"
+        },
+        "customSemanticColorBgPrimary": {
+          "$type": "color",
+          "$value": "{semantic.color.background.primary}"
+        },
+        "myCustomBg": {
+          "$type": "color",
+          "$value": "#007bff"
+        },
+        "path": {
+          "$type": "string",
+          "$value": "test-path"
+        },
+        "typeWghtHeading": {
+          "$type": "number",
+          "$value": 700
+        },
+        "typeWdthResponsive": {
+          "$type": "number",
+          "$value": 100
         }
       }
     }
@@ -1488,6 +1598,83 @@
             "design.paths.light": "{core.color.palette.orange.700}",
             "design.paths.dark": "{core.color.palette.orange.200}"
           }
+        },
+        "syntax": {
+          "plain": {
+            "$type": "color",
+            "$value": "{semantic.color.foreground.primary}",
+            "$extensions": {
+              "design.paths.light": "{semantic.color.foreground.primary}",
+              "design.paths.dark": "{semantic.color.foreground.primary}"
+            }
+          },
+          "comment": {
+            "color": {
+              "$type": "color",
+              "$value": "{semantic.color.foreground.tertiary}",
+              "$extensions": {
+                "design.paths.light": "{semantic.color.foreground.tertiary}",
+                "design.paths.dark": "{semantic.color.foreground.tertiary}"
+              }
+            },
+            "fontStyle": "italic"
+          },
+          "keyword": {
+            "$type": "color",
+            "$value": "{semantic.color.foreground.info}",
+            "$extensions": {
+              "design.paths.light": "{semantic.color.foreground.info}",
+              "design.paths.dark": "{semantic.color.foreground.info}"
+            }
+          },
+          "definition": {
+            "$type": "color",
+            "$value": "{semantic.color.foreground.accent}",
+            "$extensions": {
+              "design.paths.light": "{semantic.color.foreground.accent}",
+              "design.paths.dark": "{semantic.color.foreground.accent}"
+            }
+          },
+          "punctuation": {
+            "$type": "color",
+            "$value": "{semantic.color.foreground.info}",
+            "$extensions": {
+              "design.paths.light": "{semantic.color.foreground.info}",
+              "design.paths.dark": "{semantic.color.foreground.info}"
+            }
+          },
+          "property": {
+            "$type": "color",
+            "$value": "{semantic.color.foreground.warning}",
+            "$extensions": {
+              "design.paths.light": "{semantic.color.foreground.warning}",
+              "design.paths.dark": "{semantic.color.foreground.warning}"
+            }
+          },
+          "tag": {
+            "$type": "color",
+            "$value": "{semantic.color.foreground.danger}",
+            "$extensions": {
+              "design.paths.light": "{semantic.color.foreground.danger}",
+              "design.paths.dark": "{semantic.color.foreground.danger}"
+            }
+          },
+          "static": {
+            "$type": "color",
+            "$value": "{semantic.color.foreground.accent}",
+            "$extensions": {
+              "design.paths.light": "{semantic.color.foreground.accent}",
+              "design.paths.dark": "{semantic.color.foreground.accent}"
+            }
+          },
+          "string": {
+            "$type": "color",
+            "$value": "{semantic.color.foreground.highlight}",
+            "$extensions": {
+              "design.paths.light": "{semantic.color.foreground.highlight}",
+              "design.paths.dark": "{semantic.color.foreground.highlight}"
+            }
+          }
         }
       },
       "background": {
@@ -1589,7 +1776,7 @@
         },
         "imageOverlay": {
           "$type": "color",
-          "$value": "rgba(0, 0, 0, {core.opacity.50})"
+          "$value": "rgba(0, 0, 0, 0.5)"
         },
         "dangerStrong": {
           "$type": "color",
@@ -1757,13 +1944,13 @@
       "gradient": {
         "brandPrimary": {
           "$type": "gradient",
-          "$value": "{core.color.gradient.brandPrimary}"
+          "$value": "{core.color.palette.brand.primary.400}"
         }
       },
       "overlay": {
         "scrim": {
           "$type": "color",
-          "$value": "{core.color.overlay.scrim}"
+          "$value": "rgba(0,0,0,0.40)"
         }
       }
     },
@@ -1817,12 +2004,12 @@
             "$value": "{core.typography.ramp.4}"
           },
           "lineHeight": {
-            "$type": "dimension",
-            "$value": "{semantic.typography.lineHeight.normal}"
+            "$type": "number",
+            "$value": 1.5
           },
           "letterSpacing": {
             "$type": "dimension",
-            "$value": "{semantic.typography.letterSpacing.normal}"
+            "$value": "0em"
           }
         },
         "small": {
@@ -1839,8 +2026,8 @@
             "$value": "{core.typography.ramp.3}"
           },
           "lineHeight": {
-            "$type": "dimension",
-            "$value": "{semantic.typography.lineHeight.normal}"
+            "$type": "number",
+            "$value": 1.5
           }
         }
       },
@@ -1897,85 +2084,85 @@
       "heading": {
         "01": {
           "$type": "dimension",
-          "$value": "calc({core.typography.ramp.8} + 0.75vw + 0.75vh)"
+          "$value": "{core.typography.ramp.8}"
         },
         "02": {
           "$type": "dimension",
-          "$value": "calc({core.typography.ramp.7} + 0.5vw + 0.5vh)"
+          "$value": "{core.typography.ramp.7}"
         },
         "03": {
           "$type": "dimension",
-          "$value": "calc({core.typography.ramp.6} + 0.5vw + 0.5vh)"
+          "$value": "{core.typography.ramp.6}"
         },
         "04": {
           "$type": "dimension",
-          "$value": "calc({core.typography.ramp.5} + 0.5vw + 0.5vh)"
+          "$value": "{core.typography.ramp.5}"
         },
         "05": {
           "$type": "dimension",
-          "$value": "calc({core.typography.ramp.4} + 0.25vw + 0.25vh)"
+          "$value": "{core.typography.ramp.4}"
         },
         "06": {
           "$type": "dimension",
-          "$value": "calc({core.typography.ramp.3} + 0.25vw + 0.25vh)"
+          "$value": "{core.typography.ramp.3}"
         }
       },
       "letterSpacing": {
         "normal": {
           "$type": "dimension",
-          "$value": "{core.typography.letterSpacing.normal}"
+          "$value": "0em"
         },
         "tight": {
           "$type": "dimension",
-          "$value": "{core.typography.letterSpacing.tight}"
+          "$value": "-0.018em"
         },
         "wide": {
           "$type": "dimension",
-          "$value": "{core.typography.letterSpacing.wide}"
+          "$value": "0.018em"
         }
       },
       "lineHeight": {
         "body": {
           "$type": "number",
-          "$value": "{core.typography.lineHeight.body}"
+          "$value": 1.5
         },
         "collapse": {
           "$type": "number",
-          "$value": "{core.typography.lineHeight.collapse}"
+          "$value": 1
         },
         "heading": {
           "$type": "number",
-          "$value": "{core.typography.lineHeight.heading}"
+          "$value": 1
         },
         "loose": {
           "$type": "number",
-          "$value": "{core.typography.lineHeight.loose}"
+          "$value": 1.8
         },
         "normal": {
           "$type": "number",
-          "$value": "{core.typography.lineHeight.normal}"
+          "$value": 1.5
         },
         "tight": {
           "$type": "number",
-          "$value": "{core.typography.lineHeight.tight}"
+          "$value": 1.2
         }
       },
       "oversize": {
         "01": {
           "$type": "dimension",
-          "$value": "calc({core.typography.ramp.16} + 0.75vw + 0.75vh)"
+          "$value": "{core.typography.ramp.16}"
         },
         "02": {
           "$type": "dimension",
-          "$value": "calc({core.typography.ramp.15} + 0.5vw + 0.5vh)"
+          "$value": "{core.typography.ramp.15}"
         },
         "03": {
           "$type": "dimension",
-          "$value": "calc({core.typography.ramp.14} + 0.5vw + 0.5vh)"
+          "$value": "{core.typography.ramp.14}"
         },
         "04": {
           "$type": "dimension",
-          "$value": "calc({core.typography.ramp.13} + 0.5vw + 0.5vh)"
+          "$value": "{core.typography.ramp.13}"
         }
       },
       "meta": {
@@ -1993,8 +2180,8 @@
             "$value": "{core.typography.ramp.2}"
           },
           "lineHeight": {
-            "$type": "dimension",
-            "$value": "{semantic.typography.lineHeight.normal}"
+            "$type": "number",
+            "$value": 1.5
           }
         },
         "legal": {
@@ -2011,8 +2198,8 @@
             "$value": "{core.typography.ramp.2}"
           },
           "lineHeight": {
-            "$type": "dimension",
-            "$value": "{semantic.typography.lineHeight.loose}"
+            "$type": "number",
+            "$value": 1.8
           }
         }
       }
@@ -2126,7 +2313,7 @@
       "radius": {
         "full": {
           "$type": "borderRadius",
-          "$value": "{core.shape.radius.full}"
+          "$value": "9999px"
         },
         "extraLarge": {
           "$type": "borderRadius",
@@ -2150,7 +2337,7 @@
         },
         "none": {
           "$type": "borderRadius",
-          "$value": "{core.shape.radius.none}"
+          "$value": "0px"
         },
         "default": {
           "$type": "borderRadius",
@@ -2220,11 +2407,47 @@
       "keyframes": {
         "fadeIn": {
           "$type": "string",
-          "$value": "{core.motion.keyframes.fadeIn}"
+          "$value": "fadeIn 0.3s ease-in-out"
         }
       }
     },
     "components": {
+      "editor": {
+        "background": {
+          "$type": "color",
+          "$value": "{semantic.color.background.primary}"
+        },
+        "surface": {
+          "$type": "color",
+          "$value": "{semantic.color.background.elevated}"
+        },
+        "gutter": {
+          "$type": "color",
+          "$value": "{semantic.color.border.light}"
+        },
+        "cursor": {
+          "$type": "color",
+          "$value": "{semantic.color.status.warning}"
+        },
+        "selection": {
+          "$type": "color",
+          "$value": "{semantic.color.background.active}"
+        },
+        "selectionHighlight": {
+          "$type": "color",
+          "$value": "{semantic.color.background.highlight}"
+        },
+        "lineNumber": {
+          "active": {
+            "$type": "color",
+            "$value": "{semantic.color.status.highlight}"
+          },
+          "default": {
+            "$type": "color",
+            "$value": "{semantic.color.border.primary}"
+          }
+        }
+      },
       "button": {
         "primary": {
           "background": {
@@ -2332,12 +2555,12 @@
             "$value": "{core.typography.ramp.10}"
           },
           "lineHeight": {
-            "$type": "dimension",
-            "$value": "{semantic.typography.lineHeight.tight}"
+            "$type": "number",
+            "$value": 1.2
           },
           "letterSpacing": {
             "$type": "dimension",
-            "$value": "{semantic.typography.letterSpacing.tight}"
+            "$value": "-0.018em"
           }
         }
       }
@@ -2519,6 +2742,102 @@
         "grid": {
           "$type": "dimension",
           "$value": "1px"
+        }
+      }
+    },
+    "component": {
+      "pagination": {
+        "gapX": {
+          "$type": "dimension",
+          "$value": "{core.component.pagination.gap.x}"
+        },
+        "minSize": {
+          "$type": "dimension",
+          "$value": "32px"
+        }
+      },
+      "foreground": {
+        "$type": "color",
+        "$value": "{core.component.foreground.default}"
+      },
+      "typography": {
+        "variation": {
+          "wghtHeading": {
+            "$type": "number",
+            "$value": 700
+          },
+          "wdthResponsive": {
+            "$type": "number",
+            "$value": 100
+          }
+        }
+      },
+      "otp": {
+        "fieldGap": {
+          "$type": "dimension",
+          "$value": "{core.component.otp.field.gap}"
+        },
+        "fieldMinWidth": {
+          "$type": "dimension",
+          "$value": "{core.component.otp.field.minWidth}"
+        },
+        "fieldHeight": {
+          "$type": "dimension",
+          "$value": "{core.component.otp.field.height}"
+        },
+        "fieldFontSize": {
+          "$type": "dimension",
+          "$value": "{core.component.otp.field.fontSize}"
+        },
+        "fieldFontWeight": {
+          "$type": "fontWeight",
+          "$value": "{core.component.otp.field.fontWeight}"
+        },
+        "fieldRadius": {
+          "$type": "borderRadius",
+          "$value": "{core.component.otp.field.radius}"
+        },
+        "colorText": {
+          "$type": "color",
+          "$value": "{core.component.otp.color.text}"
+        },
+        "colorBg": {
+          "$type": "color",
+          "$value": "{core.component.otp.color.bg}"
+        },
+        "colorBorder": {
+          "$type": "color",
+          "$value": "{core.component.otp.color.border}"
+        },
+        "colorFocus": {
+          "$type": "color",
+          "$value": "{core.component.otp.color.focus}"
+        }
+      },
+      "test": {
+        "dsSemanticColorBgPrimary": {
+          "$type": "color",
+          "$value": "#ffffff"
+        },
+        "customSemanticColorBgPrimary": {
+          "$type": "color",
+          "$value": "#ffffff"
+        },
+        "myCustomBg": {
+          "$type": "color",
+          "$value": "#007bff"
+        },
+        "path": {
+          "$type": "string",
+          "$value": "test-path"
+        },
+        "typeWghtHeading": {
+          "$type": "number",
+          "$value": 700
+        },
+        "typeWdthResponsive": {
+          "$type": "number",
+          "$value": 100
         }
       }
     }

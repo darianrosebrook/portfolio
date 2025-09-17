@@ -3,15 +3,27 @@
  */
 @mixin vars {
   /* === Color Tokens === */
-  --switch-color-track-background-default: var(--semantic-color-background-secondary);
-  --switch-color-track-background-checked: var(--semantic-color-background-brand);
-  --switch-color-track-background-disabled: var(--semantic-color-background-disabled);
+  --switch-color-track-background-default: var(
+    --semantic-color-background-secondary
+  );
+  --switch-color-track-background-checked: var(
+    --semantic-color-background-brand
+  );
+  --switch-color-track-background-disabled: var(
+    --semantic-color-background-disabled
+  );
   --switch-color-track-border-default: var(--semantic-color-border-primary);
   --switch-color-track-border-checked: var(--semantic-color-border-accent);
   --switch-color-track-border-disabled: var(--semantic-color-border-disabled);
-  --switch-color-thumb-background-default: var(--semantic-color-background-primary);
-  --switch-color-thumb-background-checked: var(--semantic-color-background-onColor);
-  --switch-color-thumb-background-disabled: var(--semantic-color-background-disabled);
+  --switch-color-thumb-background-default: var(
+    --semantic-color-background-primary
+  );
+  --switch-color-thumb-background-checked: var(
+    --semantic-color-background-onColor
+  );
+  --switch-color-thumb-background-disabled: var(
+    --semantic-color-background-disabled
+  );
   --switch-color-thumb-shadow: var(--semantic-elevation-surface-raised);
   --switch-color-text-default: var(--semantic-color-foreground-primary);
   --switch-color-text-disabled: var(--semantic-color-foreground-disabled);

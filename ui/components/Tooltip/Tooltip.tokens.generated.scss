@@ -22,8 +22,14 @@
   --tooltip-typography-lineHeight: var(--semantic-typography-lineHeight-tight);
 
   /* === Motion Tokens === */
-  --tooltip-motion-duration-enter: var(--semantic-motion-interaction-enter-duration);
-  --tooltip-motion-duration-exit: var(--semantic-motion-interaction-exit-duration);
-  --tooltip-motion-easing-enter: var(--semantic-motion-interaction-enter-easing);
+  --tooltip-motion-duration-enter: var(
+    --semantic-motion-interaction-enter-duration
+  );
+  --tooltip-motion-duration-exit: var(
+    --semantic-motion-interaction-exit-duration
+  );
+  --tooltip-motion-easing-enter: var(
+    --semantic-motion-interaction-enter-easing
+  );
   --tooltip-motion-easing-exit: var(--semantic-motion-interaction-exit-easing);
 }
