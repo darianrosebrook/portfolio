@@ -16,6 +16,31 @@ const ComponentStandardsPage: React.FC = () => {
       </section>
 
       <section className="content">
+        <h2>Component Complexity Methodology</h2>
+        <p>
+          Our layered approach to component architecture ensures scalability,
+          maintainability, and clear separation of concerns. Each layer has
+          distinct responsibilities and characteristics that guide how
+          components should be designed and implemented.
+        </p>
+        <div className={styles.standardsList}>
+          {[
+            {
+              title: 'Component Layers Overview',
+              desc: 'Understanding the four-layer architecture: primitives, compounds, composers, and assemblies.',
+              href: '/blueprints/component-standards/component-complexity',
+            },
+          ].map(({ title, desc, href }) => (
+            <div key={title}>
+              <h3>{title}</h3>
+              <p>{desc}</p>
+              <Link href={href}>Explore {title} →</Link>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="content">
         <h2>Standards Categories</h2>
         <div className={styles.standardsList}>
           {[
