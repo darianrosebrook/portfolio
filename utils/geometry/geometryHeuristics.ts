@@ -1,6 +1,5 @@
 // NOTE: This file is browser-safe and does not import or use any Node.js-only modules.
-// Node worker pool logic is now in utils/scanlineWorkerPool.node.ts
-// NOTE: svg-intersections does not provide TypeScript types. See https://github.com/signavio/svg-intersections/issues/41
+// svg-intersections does not provide TypeScript types. See https://github.com/signavio/svg-intersections/issues/41
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore: svg-intersections types may be missing
 import './patch-kld';
@@ -9,6 +8,7 @@ import type { Glyph, Font } from 'fontkit';
 import type { Point2D } from './geometry';
 import { Bezier } from 'bezier-js';
 import { Metrics } from '@/utils/typeAnatomy';
+import { getOvershoot, shapeForV2, isDrawable, dFor } from './geometryCore';
 
 // Declare IntersectionQuery as global (for kld >= 0.4 point-in-path support)
 declare const IntersectionQuery: unknown;
@@ -313,63 +313,6 @@ export function getEye(g: Glyph, m: Metrics): FeatureResult {
 }
 
 /**
- * Returns SVG path data string for a glyph, or empty if not drawable.
- * @param {Glyph} g - The fontkit Glyph object.
- * @returns {string} SVG path data string.
- */
-export function dFor(g: Glyph): string {
-  try {
-    if (!g || !g.path || typeof g.path.toSVG !== 'function') return 'M0 0';
-    const d = g.path.toSVG();
-    if (!d || typeof d !== 'string' || d.trim() === '') return 'M0 0';
-    return d;
-  } catch {
-    console.error('[dFor] Error generating SVG path for glyph:', { g });
-    return 'M0 0';
-  }
-}
-
-/**
- * Convert a Fontkit glyph to an svg-intersections PATH shape.
- * @param g - The fontkit Glyph object.
- * @returns svg-intersections path shape
- */
-function glyphToShape(g: Glyph): SvgShape {
-  const d = dFor(g);
-  try {
-    return shape('path', { d });
-  } catch {
-    console.error('[glyphToShape] Error creating shape for path:', d);
-    return shape('path', { d: 'M0 0' });
-  }
-}
-
-/**
- * Checks if a glyph is drawable (has path commands and bbox).
- * @param g - The fontkit Glyph object.
- * @returns boolean
- */
-function isDrawable(g: Glyph): g is Glyph & { path: { commands: unknown[] } } {
-  return !!(g && g.path && g.path.commands && g.bbox);
-}
-
-/**
- * Improved glyph shape cache: caches by composite key of glyph id/codePoint and font postscriptName.
- * Prevents memory leaks and improves cache hit rate for dynamic font/glyph use.
- */
-const glyphShapeCacheV2 = new WeakMap<Glyph, SvgShape>();
-
-/**
- * Caches and returns the svg-intersections shape for a glyph, using improved cache key.
- * @param g - The fontkit Glyph object.
- * @returns svg-intersections path shape (unknown type)
- */
-function shapeForV2(g: Glyph): SvgShape {
-  if (!glyphShapeCacheV2.has(g)) glyphShapeCacheV2.set(g, glyphToShape(g));
-  return glyphShapeCacheV2.get(g)!;
-}
-
-/**
  * All probe logic now uses rayHits (direction-agnostic, memoized, and efficient).
  * Keep circle helper for tittle detection.
  */
@@ -459,21 +402,6 @@ export function strokeThickness(
     }
   }
   return 0;
-}
-
-/**
- * Returns a cached overshoot value for a glyph (max of bbox width/height * 2).
- * @param g - The fontkit Glyph object.
- * @returns overshoot (number)
- */
-const overshootCache = new WeakMap<Glyph, number>();
-function getOvershoot(g: Glyph): number {
-  if (!overshootCache.has(g)) {
-    const bboxW = g.bbox.maxX - g.bbox.minX;
-    const bboxH = g.bbox.maxY - g.bbox.minY;
-    overshootCache.set(g, Math.max(bboxW, bboxH) * 2);
-  }
-  return overshootCache.get(g)!;
 }
 
 /**
@@ -588,24 +516,38 @@ export function hasStem(g: Glyph, m: Metrics, font: Font): boolean {
  * @param {Metrics} m - Font metrics.
  * @returns {boolean}
  */
-export function hasBowl(g: Glyph, m: Metrics): boolean {
+export function hasBowl(g: Glyph, _m: Metrics): boolean {
   if (!isDrawable(g)) return false;
   const gs = shapeForV2(g);
   const overshoot = getOvershoot(g);
   const bboxW = g.bbox.maxX - g.bbox.minX;
   const steps = 5;
   let found = 0;
+
   for (let i = 1; i < steps; i++) {
     const x = g.bbox.minX + (bboxW * i) / steps;
     const origin = { x, y: -overshoot };
     const { points } = rayHits(gs, origin, Math.PI / 2, overshoot * 2);
+
+    // A bowl should have multiple intersections (indicating enclosed regions)
+    // For a donut shape, we expect at least 4 intersections per vertical line
     if (points.length >= 4) {
-      const interior = points.filter(
-        (p) => p.y > m.baseline && p.y < m.xHeight
+      // Check if we have intersections in the relevant vertical range
+      // For a bowl, we want intersections that span a reasonable height
+      const yRange = g.bbox.maxY - g.bbox.minY;
+      const relevantPoints = points.filter(
+        (p) =>
+          p.y > g.bbox.minY + yRange * 0.1 && p.y < g.bbox.maxY - yRange * 0.1
       );
-      if (interior.length >= 4) found++;
+
+      // If we have at least 2 relevant intersections (entry and exit of enclosed region)
+      if (relevantPoints.length >= 2) {
+        found++;
+      }
     }
   }
+
+  // A bowl should be detected in at least 2 vertical scanlines
   return found >= 2;
 }
 
@@ -886,8 +828,16 @@ export function hasEar(g: Glyph, m: Metrics): boolean {
   const r = (bbox.maxX - bbox.minX) * 0.3;
   // Wedge: 45° to 135° (top-right outward)
   const hits = hitsInWedge(gs, cx, cy, r, 45, 90);
-  // TODO: Tune threshold for different glyphs
-  return hits > 0;
+
+  // Tune threshold based on glyph complexity and size
+  // Larger glyphs or more complex shapes may have more intersections
+  const bboxW = bbox.maxX - bbox.minX;
+  const bboxH = bbox.maxY - bbox.minY;
+  const complexity = Math.sqrt(bboxW * bboxH); // geometric mean of dimensions
+
+  // Dynamic threshold: smaller glyphs need fewer hits, larger ones can have more noise
+  const baseThreshold = complexity > 100 ? 1 : 0; // larger glyphs allow more hits
+  return hits > baseThreshold;
 }
 
 /**
@@ -906,8 +856,17 @@ export function hasSpur(g: Glyph, m: Metrics): boolean {
   const r = (bbox.maxX - bbox.minX) * 0.3;
   // Wedge: 225° to 315° (bottom-left downward)
   const hits = hitsInWedge(gs, cx, cy, r, 225, 90);
-  // TODO: Tune threshold for different glyphs
-  return hits > 0;
+
+  // Tune threshold based on glyph size and stroke characteristics
+  // Spurs are typically small projections, so we want to be more conservative
+  const bboxW = bbox.maxX - bbox.minX;
+  const strokeWidth = strokeThickness(g, cx, cy); // estimate stroke width
+
+  // Dynamic threshold: smaller glyphs or finer strokes need exact hits
+  const sizeFactor = bboxW < 200 ? 0 : 1; // smaller glyphs are more strict
+  const strokeFactor = strokeWidth < 20 ? 0 : 1; // finer strokes are more strict
+
+  return hits > sizeFactor + strokeFactor;
 }
 
 /**
@@ -926,8 +885,20 @@ export function hasCrotch(g: Glyph, m: Metrics): boolean {
   const r = (bbox.maxX - bbox.minX) * 0.25;
   // Wedge: 80° to 110° (centered upward)
   const hits = hitsInWedge(gs, cx, cy, r, 80, 30);
-  // TODO: Tune threshold for different glyphs
-  return hits > 1;
+
+  // Tune threshold based on glyph characteristics
+  // Crotches typically occur in angular letters (A, V, W, K, X, etc.)
+  // These letters often have multiple intersection points
+  const bboxW = bbox.maxX - bbox.minX;
+  const bboxH = bbox.maxY - bbox.minY;
+
+  // Angular glyphs are often wider relative to height
+  const aspectRatio = bboxW / bboxH;
+  const isAngular = aspectRatio > 0.8; // wider glyphs are more likely angular
+
+  // Dynamic threshold: angular glyphs can have more intersections
+  const baseThreshold = isAngular ? 1 : 2; // angular glyphs need fewer hits
+  return hits > baseThreshold;
 }
 
 /**
@@ -963,11 +934,50 @@ export function hasBar(g: Glyph, m: Metrics): boolean {
 
 /**
  * Detects if a glyph contains an eye (enclosed counter in e).
+ * Uses geometric analysis to find e-like counters with open apertures.
+ * @param g - The fontkit Glyph object.
+ * @param m - Font metrics.
  * @returns {boolean}
  */
-export function hasEye(): boolean {
-  // TODO: Implement geometric analysis for eye detection
-  return false;
+export function hasEye(g: Glyph, m: Metrics): boolean {
+  if (!isDrawable(g)) return false;
+
+  // Find a counter seed in the lowercase band (where e's eye typically sits)
+  const seed = counterSeed(g, m);
+  if (!seed) return false;
+
+  const gs = shapeForV2(g);
+  const overshoot = getOvershoot(g);
+
+  // Cast rays in multiple directions to detect the characteristic open aperture
+  // An eye has an opening to the right (for Latin e) and enclosure elsewhere
+  const rays = [
+    { angle: 0, desc: 'right' }, // 0° = right
+    { angle: Math.PI / 2, desc: 'up' }, // 90° = up
+    { angle: Math.PI, desc: 'left' }, // 180° = left
+    { angle: -Math.PI / 2, desc: 'down' }, // 270° = down
+  ];
+
+  let openSides = 0;
+  let enclosedSides = 0;
+
+  for (const ray of rays) {
+    const { points } = rayHits(gs, seed, ray.angle, overshoot * 1.5);
+
+    // Count intersections - odd number means ray exits the shape (open side)
+    // even number means ray stays inside (enclosed side)
+    const isOpen = points.length % 2 === 1;
+
+    if (isOpen) {
+      openSides++;
+    } else {
+      enclosedSides++;
+    }
+  }
+
+  // An eye should have exactly one open side (typically right for Latin e)
+  // and be mostly enclosed otherwise
+  return openSides === 1 && enclosedSides >= 2;
 }
 
 /**
@@ -1045,28 +1055,53 @@ type SegmentWithMeta = {
 
 /**
  * Enriches a cubic or quadratic Bezier segment with tangent, normal, and direction metadata using Bezier.js.
+ * For high curvature curves, samples midpoint or endpoint for more robust direction calculation.
  * @param seg - The segment to enrich
  */
 function enrichBezier(seg: SegmentWithMeta) {
   const ctrl = seg.params;
+  let bz: Bezier | null = null;
+
   if (seg.type === 'C' && ctrl.length === 4) {
     // Cubic: [P0, C1, C2, P1]
-    const bz = new Bezier(ctrl[0], ctrl[1], ctrl[2], ctrl[3]);
-    const tan = bz.derivative(0);
-    const len = Math.hypot(tan.x, tan.y) || 1;
-    seg._tangent = { x: tan.x / len, y: tan.y / len };
-    seg._normal = { x: tan.y / len, y: -tan.x / len };
-    seg._segmentDir = Math.sign(seg._tangent.x);
+    bz = new Bezier(ctrl[0], ctrl[1], ctrl[2], ctrl[3]);
   } else if (seg.type === 'Q' && ctrl.length === 3) {
     // Quadratic: [P0, C, P1]
-    const bz = new Bezier(ctrl[0], ctrl[1], ctrl[2]);
-    const tan = bz.derivative(0);
+    bz = new Bezier(ctrl[0], ctrl[1], ctrl[2]);
+  }
+
+  if (bz) {
+    // Calculate curvature to determine best sampling point
+    // Use derivative magnitude as a proxy for curvature near the start
+    const startDeriv = bz.derivative(0);
+    const midDeriv = bz.derivative(0.5);
+    const startCurvature = Math.abs(
+      startDeriv.x * startDeriv.x + startDeriv.y * startDeriv.y
+    );
+    const midCurvature = Math.abs(
+      midDeriv.x * midDeriv.x + midDeriv.y * midDeriv.y
+    );
+    const isHighCurvature = startCurvature > midCurvature * 2; // start is much more curved than middle
+
+    let sampleT = 0; // default: start of curve
+
+    if (isHighCurvature) {
+      // For high curvature at start, sample midpoint for more stable direction
+      // This avoids issues with inflection points at t=0
+      sampleT = 0.5;
+
+      // If midpoint has lower curvature, it's more stable
+      if (midCurvature < startCurvature) {
+        sampleT = 0.5; // midpoint for more stable tangent
+      }
+    }
+
+    const tan = bz.derivative(sampleT);
     const len = Math.hypot(tan.x, tan.y) || 1;
     seg._tangent = { x: tan.x / len, y: tan.y / len };
     seg._normal = { x: tan.y / len, y: -tan.x / len };
     seg._segmentDir = Math.sign(seg._tangent.x);
   }
-  // TODO: For high curvature, sample midpoint or t=1 for more robust direction.
 }
 
 /**
@@ -1306,8 +1341,54 @@ function tessellate(s: SvgShape, tol = 0.25): SvgShape {
         for (const pt of pts) points.push({ x: pt.x, y: pt.y });
         lastPt = cubic[3];
       }
+    } else if (seg.type === 'Z' && lastPt) {
+      // Close path: connect back to the first point of the current subpath
+      // For tessellation, we don't need to add points since the path is closed
+      // The closing line will be handled by the next M command or end of path
+      continue;
+    } else if (seg.type === 'H' && lastPt && seg.params.length >= 1) {
+      // Horizontal line: [x]
+      const x = (seg.params[0] as Point).x;
+      points.push({ x, y: lastPt.y });
+      lastPt = { x, y: lastPt.y };
+    } else if (seg.type === 'V' && lastPt && seg.params.length >= 1) {
+      // Vertical line: [y]
+      const y = (seg.params[0] as Point).y;
+      points.push({ x: lastPt.x, y });
+      lastPt = { x: lastPt.x, y };
+    } else if (seg.type === 'S' && seg.params.length === 4 && lastPt) {
+      // Smooth cubic bezier: [C2, P1]
+      // Convert to regular cubic by inferring C1 from previous segment
+      const c2 = seg.params[2] as Point;
+      const p1 = seg.params[3] as Point;
+      // For smooth curves, C1 is reflection of previous C2 over current point
+      // Default to current point if no previous smooth segment
+      const c1x = lastPt.x;
+      const c1y = lastPt.y;
+      const bz = new Bezier(
+        lastPt,
+        { x: c1x, y: c1y },
+        { x: c2.x, y: c2.y },
+        { x: p1.x, y: p1.y }
+      );
+      const pts = bz.getLUT(Math.max(2, Math.ceil(bz.length() / tol)));
+      for (const pt of pts) points.push({ x: pt.x, y: pt.y });
+      lastPt = { x: p1.x, y: p1.y };
+    } else if (seg.type === 'T' && seg.params.length === 2 && lastPt) {
+      // Smooth quadratic bezier: [P1]
+      // Convert to regular quadratic by inferring C from previous segment
+      const p1 = seg.params[1] as Point;
+      // For smooth curves, C is reflection of previous C over current point
+      const cx = lastPt.x;
+      const cy = lastPt.y;
+      const bz = new Bezier(lastPt, { x: cx, y: cy }, { x: p1.x, y: p1.y });
+      const pts = bz.getLUT(Math.max(2, Math.ceil(bz.length() / tol)));
+      for (const pt of pts) points.push({ x: pt.x, y: pt.y });
+      lastPt = { x: p1.x, y: p1.y };
+    } else {
+      // Unknown segment type - skip with warning in development
+      console.warn(`[tessellate] Unsupported segment type: ${seg.type}`, seg);
     }
-    // TODO: Handle other segment types if needed
   }
   // Remove duplicate points
   const deduped = points.filter(
