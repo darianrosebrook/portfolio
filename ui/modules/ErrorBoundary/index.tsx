@@ -1,6 +1,5 @@
 // Re-export all ErrorBoundary components for easy imports
-export { default } from './ErrorBoundary';
-export { withErrorBoundary } from './ErrorBoundary';
+export { default as ErrorBoundary, withErrorBoundary } from './ErrorBoundary';
 export { default as AnimationErrorBoundary } from './AnimationErrorBoundary';
 export { default as EditorErrorBoundary } from './EditorErrorBoundary';
 export { default as InteractiveErrorBoundary } from './InteractiveErrorBoundary';
