@@ -1,5 +1,12 @@
-import type { Glyph } from 'fontkit';
+import type { Glyph, Font } from 'fontkit';
 import type { AnatomyFeature } from '../ui/modules/FontInspector/FontInspector';
+import type { Metrics as GlyphMetrics } from '@/utils/typeAnatomy';
+import {
+  getBowl,
+  getTittle,
+  getEye,
+  type FeatureResult,
+} from '@/utils/geometry/geometryHeuristics';
 export interface DrawColors {
   anchorFill: string;
   anchorStroke: string;
@@ -343,7 +350,9 @@ export function drawAnatomyOverlay(
   metrics: {
     [key: string]: number;
   },
-  selected: Map<string, AnatomyFeature>
+  selected: Map<string, AnatomyFeature>,
+  font?: Font,
+  fontUnits?: GlyphMetrics
 ) {
   if (!selected || selected.size === 0) {
     return;
@@ -371,6 +380,54 @@ export function drawAnatomyOverlay(
   } else {
     if (selected.has('Apex') || selected.has('Tail')) {
       console.warn('Glyph has no path commands; cannot draw Apex or Tail.');
+    }
+  }
+
+  // Draw geometry heuristic overlays when requested
+  if (font && fontUnits) {
+    const drawFeatureRegion = (res: FeatureResult, label: string) => {
+      if (!res.found) return;
+      if (res.shape?.type === 'polyline' && Array.isArray(res.shape.points)) {
+        const pts = res.shape.points;
+        if (pts.length < 2) return;
+        ctx.save();
+        ctx.beginPath();
+        ctx.strokeStyle = colors.anchorFill;
+        ctx.lineWidth = 1.5;
+        // Transform glyph units → canvas (scale, invert Y)
+        ctx.moveTo(pts[0].x * scale, -pts[0].y * scale);
+        for (let i = 1; i < pts.length; i++) {
+          ctx.lineTo(pts[i].x * scale, -pts[i].y * scale);
+        }
+        ctx.closePath();
+        ctx.stroke();
+        ctx.restore();
+      } else if (res.shape?.type === 'circle') {
+        const { cx, cy, r } = res.shape;
+        ctx.save();
+        ctx.beginPath();
+        ctx.strokeStyle = colors.anchorFill;
+        ctx.lineWidth = 1.5;
+        ctx.arc(
+          cx * scale,
+          -cy * scale,
+          Math.max(1, r * scale),
+          0,
+          Math.PI * 2
+        );
+        ctx.stroke();
+        ctx.restore();
+      }
+    };
+
+    if (selected.has('Bowl')) {
+      drawFeatureRegion(getBowl(glyph, fontUnits), 'Bowl');
+    }
+    if (selected.has('Tittle')) {
+      drawFeatureRegion(getTittle(glyph, fontUnits, font), 'Tittle');
+    }
+    if (selected.has('Eye')) {
+      drawFeatureRegion(getEye(glyph, fontUnits), 'Eye');
     }
   }
 

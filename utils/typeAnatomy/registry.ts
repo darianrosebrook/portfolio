@@ -1,0 +1,63 @@
+export type FeatureKey =
+  | 'bowl'
+  | 'tittle'
+  | 'eye'
+  | 'crossbar'
+  | 'ear'
+  | 'spur'
+  | 'tail';
+
+export const LetterFeatureHints: Record<string, FeatureKey[]> = {
+  a: ['bowl'],
+  b: ['bowl'],
+  c: [],
+  d: ['bowl'],
+  e: ['bowl', 'eye'],
+  f: ['crossbar', 'tail'],
+  g: ['bowl', 'ear', 'tail'],
+  h: [],
+  i: ['tittle'],
+  j: ['tittle', 'tail'],
+  k: [],
+  l: [],
+  m: [],
+  n: [],
+  o: ['bowl'],
+  p: ['bowl', 'tail'],
+  q: ['bowl', 'tail'],
+  r: ['ear'],
+  s: [],
+  t: ['crossbar'],
+  u: [],
+  v: [],
+  w: [],
+  x: [],
+  y: ['tail'],
+  z: [],
+  A: [],
+  B: ['bowl'],
+  C: [],
+  D: ['bowl'],
+  E: ['crossbar'],
+  F: ['crossbar'],
+  G: [],
+  H: ['crossbar'],
+  I: [],
+  J: [],
+  K: [],
+  L: [],
+  M: [],
+  N: [],
+  O: ['bowl'],
+  P: ['bowl'],
+  Q: ['bowl', 'tail'],
+  R: ['bowl', 'tail'],
+  S: [],
+  T: ['crossbar'],
+  U: [],
+  V: [],
+  W: [],
+  X: [],
+  Y: [],
+  Z: [],
+};
