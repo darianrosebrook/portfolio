@@ -1,7 +1,7 @@
 'use client';
 import { useTransitionRouter } from 'next-view-transitions';
 import Link from 'next/link';
-import { AnimatedLink } from '@/ui/components/links/AnimatedLink';
+import { AnimatedLink } from '@/ui/components/Links';
 import { usePathname } from 'next/navigation';
 import styles from './index.module.css';
 import Logo from './logo';
@@ -13,11 +13,13 @@ import { byPrefixAndName } from '@awesome.me/kit-0ba7f5fefb/icons';
 import Icon from '@/ui/components/Icon';
 import ToggleSwitch from '../../components/ToggleSwitch';
 import Avatar from '../../components/Avatar';
+import { usePerformanceMonitor } from '@/hooks/usePerformanceMonitor';
 
 const faBars = byPrefixAndName['far']['bars'];
 const faUser = byPrefixAndName['far']['user'];
 const faList = byPrefixAndName['far']['list'];
 const faArrowRight = byPrefixAndName['far']['arrow-right'];
+const faChartLine = byPrefixAndName['far']['chart-line'];
 
 type NavbarProps = {
   pages: { name: string; path: string; admin: boolean }[] | null;
@@ -29,6 +31,8 @@ export default function Navbar({ pages = [] }: NavbarProps) {
   const [theme, setTheme] = useState('dark');
   const pathname = usePathname();
   const router = useTransitionRouter();
+  const { isEnabled: performanceEnabled, togglePerformanceMonitor } =
+    usePerformanceMonitor();
   const slideInOut = useCallback(() => {
     document.documentElement.animate(
       [
@@ -123,7 +127,9 @@ export default function Navbar({ pages = [] }: NavbarProps) {
                 <AnimatedLink
                   href={`/${page.path}`}
                   className={pathname === page.path ? styles.active : ''}
-                  onClick={(e) => hanldeRouteChange(e, `/${page.path}`)}
+                  onClick={(e: React.MouseEvent<HTMLAnchorElement>) =>
+                    hanldeRouteChange(e, `/${page.path}`)
+                  }
                 >
                   {page.name}
                 </AnimatedLink>
@@ -151,6 +157,19 @@ export default function Navbar({ pages = [] }: NavbarProps) {
                       Use {theme} theme
                     </ToggleSwitch>
                   </li>
+                  {process.env.NODE_ENV === 'development' && (
+                    <li>
+                      <ToggleSwitch
+                        checked={performanceEnabled}
+                        onChange={(e) =>
+                          togglePerformanceMonitor(e.target.checked)
+                        }
+                      >
+                        <Icon icon={faChartLine} />
+                        Performance monitor
+                      </ToggleSwitch>
+                    </li>
+                  )}
                 </ul>
               </Popover.Content>
             </Popover>
@@ -178,7 +197,7 @@ export default function Navbar({ pages = [] }: NavbarProps) {
                   <ul className="menuList">
                     <li>
                       <Link
-                        onClick={(e) =>
+                        onClick={(e: React.MouseEvent<HTMLAnchorElement>) =>
                           hanldeRouteChange(e, '/dashboard/profile')
                         }
                         className="menuItem"
@@ -190,7 +209,9 @@ export default function Navbar({ pages = [] }: NavbarProps) {
                     </li>
                     <li>
                       <Link
-                        onClick={(e) => hanldeRouteChange(e, '/dashboard')}
+                        onClick={(e: React.MouseEvent<HTMLAnchorElement>) =>
+                          hanldeRouteChange(e, '/dashboard')
+                        }
                         className="menuItem"
                         href="/dashboard"
                       >

@@ -156,7 +156,15 @@ export const SymbolCanvas: React.FC = () => {
         scale,
         colors,
         metrics,
-        selectedAnatomy
+        selectedAnatomy,
+        fontInstance,
+        {
+          baseline: 0,
+          xHeight: fontInstance.xHeight,
+          capHeight: fontInstance.capHeight,
+          ascent: fontInstance.ascent,
+          descent: fontInstance.descent,
+        }
       );
 
       ctx.restore();

@@ -1,4 +1,4 @@
-import { login } from 'app/ha/actions';
+import { login } from '@/app/ha/actions';
 import Button from '../../components/Button';
 
 export default function LoginButton() {

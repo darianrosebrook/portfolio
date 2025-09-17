@@ -1,5 +1,8 @@
 .navContainer {
   position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
   z-index: 1000;
   padding: var(--core-spacing-size-02) var(--core-spacing-size-07);
   background: linear-gradient(
@@ -66,6 +69,24 @@
   }
 }
 
+/* Mobile styles (default) */
+@media screen and (width < 1000px) {
+  .navContainer {
+    padding: var(--core-spacing-size-02) var(--core-spacing-size-04);
+  }
+
+  .nav .navLinks {
+    flex-wrap: wrap;
+    gap: var(--core-spacing-size-03);
+    justify-content: flex-start;
+  }
+
+  .nav .navLinks li:last-child {
+    margin-left: auto;
+  }
+}
+
+/* Desktop styles */
 @media screen and (width >= 1000px) {
   .nav {
     display: flex;
