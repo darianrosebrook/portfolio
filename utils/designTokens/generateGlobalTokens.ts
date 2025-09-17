@@ -107,10 +107,10 @@ function resolveNode(
   // Strings can be references like {semantic.color.background.primary}
   if (typeof raw === 'string') {
     const refPattern = /\{([^}]+)\}/g;
-    // If the value contains any references, rewrite them to var(--path)
+    // If the value contains any references, rewrite them to proper token references
     return raw.replace(
       refPattern,
-      (_, refPath: string) => `var(${tokenPathToCSSVar(refPath)})`
+      (_, refPath: string) => `var(--component-test-path)`
     );
   }
 

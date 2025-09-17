@@ -96,6 +96,41 @@ export function counterSeed(g: Glyph, m: Metrics): Point2D | null {
 }
 
 /**
+ * Finds a counter seed within an arbitrary vertical band [yMin, yMax].
+ */
+function counterSeedInRange(
+  g: Glyph,
+  yMin: number,
+  yMax: number
+): Point2D | null {
+  if (!isDrawable(g) || !g.path || !Array.isArray(g.path.commands)) return null;
+  const gs = shapeForV2(g);
+  const bands = 5;
+  const delta = (g.bbox.maxX - g.bbox.minX) * 0.01;
+  const overshoot = getOvershoot(g);
+  for (let i = 1; i < bands; i++) {
+    const y = yMin + (i * (yMax - yMin)) / bands;
+    const origin = { x: -overshoot, y };
+    let points: Point2D[] = [];
+    try {
+      points = rayHits(gs, origin, 0, overshoot * 2).points;
+    } catch {
+      continue;
+    }
+    if ((points.length / 2) % 2 === 1 && points.length >= 2) {
+      for (let j = 0; j < points.length - 1; j += 2) {
+        const x = (points[j].x + points[j + 1].x) / 2;
+        for (const nudge of [0, -delta, delta, -2 * delta, 2 * delta]) {
+          const testPt = { x: x + nudge, y };
+          if (isInside(g, testPt)) return testPt;
+        }
+      }
+    }
+  }
+  return null;
+}
+
+/**
  * Grows a seed point into a region by radial sweep, returning a polyline shape.
  * @param g - The fontkit Glyph object.
  * @param seed - Seed point inside the region
@@ -194,9 +229,17 @@ export function getCounter(g: Glyph, m: Metrics): FeatureResult {
  * @returns FeatureResult for bowl
  */
 
-export function getBowl(_g: Glyph, _m: Metrics): FeatureResult {
-  // TODO: Implement bowl detection and region tracing
-  return { found: false };
+export function getBowl(g: Glyph, m: Metrics): FeatureResult {
+  if (!isDrawable(g)) return { found: false };
+  if (!hasBowl(g, m)) return { found: false };
+  // Try to locate a counter seed in lowercase band first, then uppercase band
+  let seed = counterSeed(g, m);
+  if (!seed) {
+    seed = counterSeedInRange(g, m.xHeight, m.capHeight);
+  }
+  if (!seed) return { found: true };
+  const poly = traceRegion(g, seed);
+  return poly ? { found: true, shape: poly } : { found: true };
 }
 
 /**
@@ -207,9 +250,66 @@ export function getBowl(_g: Glyph, _m: Metrics): FeatureResult {
  * @returns FeatureResult for tittle
  */
 
-export function getTittle(_g: Glyph, _m: Metrics, _font: Font): FeatureResult {
-  // TODO: Implement tittle detection and shape extraction
-  return { found: false };
+export function getTittle(g: Glyph, m: Metrics, font: Font): FeatureResult {
+  if (!isDrawable(g)) return { found: false };
+  const gs = shapeForV2(g);
+  const overshoot = getOvershoot(g);
+  const bboxW = g.bbox.maxX - g.bbox.minX;
+  const bands = 4;
+  let best: { x1: number; x2: number; y: number } | null = null;
+  for (let i = 1; i <= bands; i++) {
+    const y = m.xHeight + (i * (m.ascent - m.xHeight)) / (bands + 1);
+    const { points } = rayHits(gs, { x: -overshoot, y }, 0, overshoot * 2);
+    for (let j = 0; j < points.length - 1; j += 2) {
+      const x1 = points[j].x;
+      const x2 = points[j + 1].x;
+      const w = x2 - x1;
+      // Small, near-circular dot threshold relative to glyph width
+      if (w > 0 && w < bboxW * 0.25) {
+        if (!best || w < best.x2 - best.x1) best = { x1, x2, y };
+      }
+    }
+  }
+  if (!best) return { found: false };
+  // Estimate height by probing vertical around center
+  const cx = (best.x1 + best.x2) / 2;
+  const EPS = getEPS(font);
+  const vProbe = rayHits(
+    gs,
+    { x: cx, y: best.y - EPS * 200 },
+    Math.PI / 2,
+    EPS * 400
+  );
+  let h = 0;
+  if (vProbe.points.length >= 2) {
+    // Find the pair that straddles best.y
+    for (let k = 0; k < vProbe.points.length - 1; k += 2) {
+      if (vProbe.points[k].y <= best.y && best.y <= vProbe.points[k + 1].y) {
+        h = vProbe.points[k + 1].y - vProbe.points[k].y;
+        break;
+      }
+    }
+  }
+  const r = Math.max(1, Math.min((best.x2 - best.x1) / 2, h / 2));
+  return { found: true, shape: { type: 'circle', cx: cx, cy: best.y, r } };
+}
+
+/**
+ * Eye detection for lowercase 'e'-like counters with an open aperture to the right.
+ */
+export function getEye(g: Glyph, m: Metrics): FeatureResult {
+  if (!isDrawable(g)) return { found: false };
+  // Find a counter seed in the lowercase band
+  const seed = counterSeed(g, m);
+  if (!seed) return { found: false };
+  const gs = shapeForV2(g);
+  const overshoot = getOvershoot(g);
+  // Cast a ray to the right from the seed; odd intersections imply open aperture
+  const { points } = rayHits(gs, seed, 0, overshoot * 2);
+  const openRight = points.length % 2 === 1;
+  if (!openRight) return { found: false };
+  const poly = traceRegion(g, seed);
+  return poly ? { found: true, shape: poly } : { found: true };
 }
 
 /**
