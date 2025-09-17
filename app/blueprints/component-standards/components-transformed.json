@@ -1,91 +1,47 @@
 {
   "components": [
     {
-      "component": "Alert",
-      "alternativeNames": [
-        "Alert Banner",
-        "Alert Dialog",
-        "Alert Notice",
-        "Alert Ribbon",
-        "Alert message",
-        "In-page Alert",
-        "Broadcast Message",
-        "Banner alert",
-        "Contextual Alert",
-        "Critical Alert",
-        "Error",
-        "Exception List",
-        "Flash",
-        "Floating Notification",
-        "Warning",
-        "In page alert",
-        "In-line alert",
-        "Inline notice",
-        "Message bar",
-        "Minor alert",
-        "Page alert",
-        "Page notice",
-        "Warning text",
-        "Warning callout",
-        "Status Message",
-        "System Message",
-        "Toast Alert"
-      ],
-      "category": "Feedback",
-      "description": "displays important messages, warnings, or errors to users, typically with different visual styles to indicate severity levels.",
-      "status": "Planned"
+      "component": "Accordion",
+      "id": "accordion",
+      "slug": "accordion",
+      "layer": "composers",
+      "alternativeNames": [],
+      "normalizedAliases": ["accordion"],
+      "category": "Containers",
+      "description": "Expand/collapse grouped sections.",
+      "a11y": {
+        "pitfalls": [
+          "No roving tabindex",
+          "missing ARIA expanded/collapsed states."
+        ]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/accordion/page.tsx"
+      }
     },
     {
-      "component": "Anchor Link",
-      "alternativeNames": [
-        "Block Link",
-        "External Linking",
-        "Inline Link",
-        "Link",
-        "Standalone Link",
-        "Cta link",
-        "Hyperlink",
-        "Link tile",
-        "Links",
-        "Skip links",
-        "Skip navigation",
-        "Skip to content",
-        "Skiplinks",
-        "Skipnav",
-        "Text link",
-        "Navigation Link",
-        "Action Link",
-        "Call-to-Action Link"
-      ],
-      "category": "Navigation",
-      "description": "A clickable text element that navigates users to another location, either within the same page or to an external resource.",
-      "interactions": "Click, Keyboard",
-      "status": "Planned"
-    },
-    {
-      "component": "Anchor Target",
-      "alternativeNames": ["Scroll Area", "Scroller", "Signpost", "Skip Link"],
-      "category": "Navigation",
-      "description": "A target location for navigation within a page.",
-      "interactions": "None",
-      "status": "Planned"
-    },
-    {
-      "component": "Anchored Overlay",
-      "alternativeNames": ["Contextual Overlay", "Anchor Popup"],
-      "category": "Layout",
-      "description": "A floating panel anchored to a specific element, typically used for contextual menus, tooltips, or popovers.",
-      "status": "Planned"
-    },
-    {
-      "component": "Aspect Ratio",
-      "alternativeNames": ["Ratio Box", "Proportional Container"],
-      "category": "Layout",
-      "description": "A container maintaining a consistent width-to-height ratio for content.",
-      "status": "Planned"
+      "component": "Action Bar",
+      "id": "actionbar",
+      "slug": "action-bar",
+      "layer": "composers",
+      "alternativeNames": ["Toolbar", "Action-Bar"],
+      "normalizedAliases": ["actionbar", "toolbar"],
+      "category": "Actions",
+      "description": "Groups actions with priority + overflow.",
+      "a11y": {
+        "pitfalls": ["No overflow policy", "inconsistent grouping."]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/action-bar/page.tsx"
+      }
     },
     {
       "component": "Avatar",
+      "id": "avatar",
+      "slug": "avatar",
+      "layer": "compounds",
       "alternativeNames": [
         "Profile image",
         "User Icon",
@@ -95,19 +51,23 @@
         "Profile Avatar",
         "User Thumbnail"
       ],
+      "normalizedAliases": ["avatar"],
       "category": "Display",
-      "description": "A circular or rounded component that displays a user's profile picture, initials, or a placeholder icon to represent a person or entity.",
-      "status": "Planned"
-    },
-    {
-      "component": "Avatar Group",
-      "alternativeNames": ["Avatar Collection", "User Stack"],
-      "category": "Display",
-      "description": "A group of avatars displayed together to represent multiple users or entities.",
-      "status": "Planned"
+      "description": "User representation (image/initials).",
+      "a11y": {
+        "pitfalls": ["Missing alt/fallback", "low-contrast initials."]
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/Avatar",
+        "docs": "app/blueprints/component-standards/avatar/page.tsx"
+      }
     },
     {
       "component": "Badge",
+      "id": "badge",
+      "slug": "badge",
+      "layer": "compounds",
       "alternativeNames": [
         "Pill",
         "Badge count",
@@ -125,51 +85,45 @@
         "Count Badge",
         "Indicator Badge"
       ],
-      "category": "Display",
-      "description": "A small visual indicator that displays a number, status, or label, often used to show counts, states, or highlight important information.",
-      "status": "Planned"
+      "normalizedAliases": ["badge"],
+      "category": "Feedback",
+      "description": "Count/label indicator.",
+      "a11y": {
+        "pitfalls": ["Too small for accessibility", "color-only distinction."]
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/Badge",
+        "docs": "app/blueprints/component-standards/badge/page.tsx"
+      }
     },
     {
-      "component": "Banner",
-      "alternativeNames": ["Project Banner", "Brand Moment", "Promo Bar"],
-      "category": "Display",
-      "description": "A prominent visual component for announcements or brand-related content.",
-      "status": "Planned"
-    },
-    {
-      "component": "Blockquote",
-      "alternativeNames": ["Quote", "Testimonial"],
-      "category": "Display",
-      "description": "A visually distinct component for highlighting quoted text.",
-      "status": "Planned"
-    },
-    {
-      "component": "Book",
-      "alternativeNames": ["Flipbook", "Page Viewer"],
-      "category": "Display",
-      "description": "Simulates a book interface for page navigation with realistic animations.",
-      "status": "Planned"
-    },
-    {
-      "component": "Breadcrumb",
+      "component": "Breadcrumbs",
+      "id": "breadcrumbs",
+      "slug": "breadcrumbs",
+      "layer": "compounds",
       "alternativeNames": [
-        "Back Link",
-        "Branch Name",
-        "Inpage Nav",
-        "Path",
-        "Breadcrumbs",
-        "Navigation Path",
-        "Location Indicator",
-        "Page Hierarchy",
-        "Site Navigation",
-        "Trail"
+        "Breadcrumbs (simple)",
+        "Breadcrumb",
+        "Breadcrumbs (full)"
       ],
+      "normalizedAliases": ["breadcrumbs", "breadcrumbssimple", "breadcrumb"],
       "category": "Navigation",
-      "description": "A navigation component that shows the current page's location within a website's hierarchy, allowing users to understand their position and navigate back to previous levels.",
-      "status": "Planned"
+      "description": "Parent-child navigation trail.",
+      "a11y": {
+        "pitfalls": ["Not collapsed for long paths", "missing nav landmark."]
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/Breadcrumbs",
+        "docs": "app/blueprints/component-standards/breadcrumbs/page.tsx"
+      }
     },
     {
       "component": "Button",
+      "id": "button",
+      "slug": "button",
+      "layer": "primitives",
       "alternativeNames": [
         "Action Button",
         "Action Link",
@@ -194,42 +148,26 @@
         "Icon Button",
         "Text Button"
       ],
-      "category": "Action",
-      "description": "An interactive element that triggers an action when clicked, available in various styles and sizes to indicate different levels of importance and functionality.",
-      "status": "Planned"
-    },
-    {
-      "component": "Button Group",
-      "alternativeNames": ["Action Group", "Button Set", "Button Cluster"],
-      "category": "Action",
-      "description": "Groups related buttons together for organized interactions.",
-      "status": "Planned"
-    },
-    {
-      "component": "Calendar",
-      "alternativeNames": [
-        "Scrollable Calendar",
-        "Date Picker",
-        "Date Selector",
-        "Month View",
-        "Year View",
-        "Event Calendar",
-        "Schedule View",
-        "Time Grid"
-      ],
-      "category": "Data",
-      "description": "displays dates in a grid format, allowing users to view, select, and interact with dates, often including features for event display and date range selection.",
-      "status": "Planned"
-    },
-    {
-      "component": "Captcha",
-      "alternativeNames": ["Human Verification"],
-      "category": "Form",
-      "description": "Verifies users through interactive challenges to prevent bots.",
-      "status": "Planned"
+      "normalizedAliases": ["button"],
+      "category": "Actions",
+      "description": "Clickable action element.",
+      "a11y": {
+        "pitfalls": [
+          "Overloaded with too many variants",
+          "missing accessible name for icon-only."
+        ]
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/Button",
+        "docs": "app/blueprints/component-standards/button/page.tsx"
+      }
     },
     {
       "component": "Card",
+      "id": "card",
+      "slug": "card",
+      "layer": "compounds",
       "alternativeNames": [
         "Asset card",
         "Card Composable",
@@ -252,28 +190,43 @@
         "Info Card",
         "Feature Card"
       ],
-      "category": "Layout",
-      "description": "A container component that groups related content and actions together, often with a visual boundary and optional header, footer, or interactive elements.",
-      "status": "Planned"
+      "normalizedAliases": ["card"],
+      "category": "Display",
+      "description": "Grouped container with header/body/footer.",
+      "a11y": {
+        "pitfalls": ["Too many layout permutations", "inconsistent spacing."]
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/Card",
+        "docs": "app/blueprints/component-standards/card/page.tsx"
+      }
     },
     {
-      "component": "Carousel",
-      "alternativeNames": [
-        "Image Slider",
-        "Slide Show",
-        "Gallery",
-        "Content Slider",
-        "Rotating Banner",
-        "Image Gallery",
-        "Media Carousel",
-        "Product Carousel"
-      ],
-      "category": "Display",
-      "description": "displays a series of content items (images, cards, or other elements) in a rotating sequence, with navigation controls to move between items.",
-      "status": "Planned"
+      "component": "ChartContainer",
+      "id": "chartcontainer",
+      "slug": "chart-container",
+      "layer": "composers",
+      "alternativeNames": ["Chart Container", "Chart-Container"],
+      "normalizedAliases": ["chartcontainer"],
+      "category": "Data Visualization",
+      "description": "Frame for charts (not chart itself).",
+      "a11y": {
+        "pitfalls": [
+          "Missing accessible summary",
+          "focus not managed for interactive charts."
+        ]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/chart-container/page.tsx"
+      }
     },
     {
       "component": "Checkbox",
+      "id": "checkbox",
+      "slug": "checkbox",
+      "layer": "primitives",
       "alternativeNames": [
         "Checkbox Group",
         "Checkbox Card",
@@ -292,73 +245,86 @@
         "Option Selector",
         "Selection Control"
       ],
-      "category": "Form",
-      "description": "A form control that allows users to select one or multiple options from a set of choices, typically displayed as a square box that can be checked or unchecked.",
-      "status": "Planned"
+      "normalizedAliases": ["checkbox"],
+      "category": "Inputs",
+      "description": "Binary toggle control.",
+      "a11y": {
+        "pitfalls": [
+          "Missing indeterminate state",
+          "small click target",
+          "keyboard traps."
+        ]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/checkbox/page.tsx"
+      }
     },
     {
-      "component": "Coachmark",
-      "alternativeNames": ["Tooltip Tour", "Guided Help"],
-      "category": "Feedback",
-      "description": "Highlights and explains interface elements with guided overlays.",
-      "status": "Planned"
-    },
-    {
-      "component": "Code Block",
+      "component": "CheckboxGroup",
+      "id": "checkboxgroup",
+      "slug": "checkbox-group",
+      "layer": "compounds",
       "alternativeNames": [
-        "Snippet",
-        "Code Snippet",
-        "Syntax Highlighter",
-        "Code Display",
-        "Code Viewer",
-        "Code Example",
-        "Code Preview"
+        "RadioGroup",
+        "Checkbox Group",
+        "Checkbox-Group",
+        "Radio Group",
+        "Radio-Group"
       ],
+      "normalizedAliases": ["checkboxgroup", "radiogroup"],
+      "category": "Inputs",
+      "description": "Grouped options with label.",
+      "a11y": {
+        "pitfalls": ["Group unlabeled", "inconsistent error propagation."]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/checkbox-group/page.tsx"
+      }
+    },
+    {
+      "component": "Chip",
+      "id": "chip",
+      "slug": "chip",
+      "layer": "compounds",
+      "alternativeNames": ["Tag"],
+      "normalizedAliases": ["chip", "tag"],
       "category": "Display",
-      "description": "displays formatted code with syntax highlighting, line numbers, and optional copy functionality, typically used for documentation or code examples.",
-      "status": "Planned"
+      "description": "Label + optional dismiss.",
+      "a11y": {
+        "pitfalls": ["Dismiss button unlabeled", "no keyboard removal."]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/chip/page.tsx"
+      }
     },
     {
-      "component": "Color input",
-      "alternativeNames": [
-        "Swatch Color Picker",
-        "Color",
-        "Color area",
-        "Color Picker",
-        "Color selection",
-        "Color slider",
-        "Color wheel",
-        "Color Chooser",
-        "Color Selector",
-        "Hue Picker",
-        "RGB Picker",
-        "HEX Picker"
-      ],
-      "category": "Form",
-      "description": "A specialized input component that allows users to select colors through various interfaces like color wheels, sliders, or swatches, with support for different color formats.",
-      "status": "Planned"
+      "component": "ColorPicker",
+      "id": "colorpicker",
+      "slug": "color-picker",
+      "layer": "compounds",
+      "alternativeNames": ["Color Picker", "Color-Picker"],
+      "normalizedAliases": ["colorpicker"],
+      "category": "Inputs",
+      "description": "Input + palette.",
+      "a11y": {
+        "pitfalls": ["No contrast validation", "inaccessible sliders."]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/color-picker/page.tsx"
+      }
     },
     {
-      "component": "Combo Box",
+      "component": "ContextMenu",
+      "id": "contextmenu",
+      "slug": "context-menu",
+      "layer": "composers",
       "alternativeNames": [
-        "Auto complete",
-        "Autocomplete",
-        "Typeahead",
-        "Select box",
-        "Combobox",
-        "Select menu",
-        "Searchable Select",
-        "Filterable Select",
-        "Dropdown with Search",
-        "Enhanced Select"
-      ],
-      "category": "Form",
-      "description": "A combination of a text input and dropdown menu that allows users to either select from predefined options or enter custom values, with filtering and search capabilities.",
-      "status": "Planned"
-    },
-    {
-      "component": "Context Menu",
-      "alternativeNames": [
+        "Context Menu",
+        "Context-Menu",
         "Action menu",
         "Command Menu",
         "Content Menu",
@@ -378,34 +344,25 @@
         "Pop-up Menu",
         "Quick Actions"
       ],
-      "category": "Navigation",
-      "description": "A menu that appears in response to user interaction (like right-click or long-press), displaying contextually relevant actions and options for the selected element.",
-      "status": "Planned"
+      "normalizedAliases": ["contextmenu"],
+      "category": "Actions",
+      "description": "Right-click menu.",
+      "a11y": {
+        "pitfalls": ["Not reachable via keyboard", "dismissal handling."]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/context-menu/page.tsx"
+      }
     },
     {
-      "component": "Counter",
-      "alternativeNames": ["Stepper", "Incrementer"],
-      "category": "Form",
-      "description": "Displays and manages numerical values through increment/decrement interactions.",
-      "status": "Planned"
-    },
-    {
-      "component": "Currency converter",
-      "alternativeNames": [],
-      "category": "Form",
-      "description": "A specialized input component that handles currency conversion, allowing users to input amounts in one currency and view equivalent values in other currencies with real-time updates.",
-      "status": "Planned"
-    },
-    {
-      "component": "Data Visualization",
-      "alternativeNames": ["Chart"],
-      "category": "Display",
-      "description": "presents data in visual formats like charts, graphs, or diagrams, making complex information more accessible and understandable through visual representation.",
-      "status": "Planned"
-    },
-    {
-      "component": "Date Picker",
+      "component": "DatePicker",
+      "id": "datepicker",
+      "slug": "date-picker",
+      "layer": "compounds",
       "alternativeNames": [
+        "Date Picker",
+        "Date-Picker",
         "Appointment Picker",
         "Date",
         "Date Input",
@@ -427,48 +384,24 @@
         "Calendar Picker",
         "Time Selector"
       ],
-      "category": "Form",
-      "description": "A specialized input component that allows users to select dates through a calendar interface, with support for date ranges, time selection, and various date formats.",
-      "status": "Planned"
-    },
-    {
-      "component": "Details",
-      "alternativeNames": [
-        "Description List",
-        "Accordion",
-        "Accordion Item",
-        "Details",
-        "Accordion List",
-        "Arrow toggle",
-        "Collapse",
-        "Collapsible Containers",
-        "Expandable",
-        "Read More",
-        "Summary",
-        "View More/Less",
-        "Collapsible",
-        "Collapsible sections",
-        "Expandable container",
-        "Expandable helper",
-        "Expandable section",
-        "Expand button",
-        "Expand collapse panel",
-        "Expander",
-        "Expansion",
-        "Expansion item",
-        "Section expander",
-        "Summary detail",
-        "Disclosure",
-        "Expandable Panel",
-        "Show/Hide"
-      ],
-      "category": "Layout",
-      "description": "allows users to expand and collapse content sections, typically with a visible summary and hidden details that can be toggled on demand.",
-      "status": "Planned"
+      "normalizedAliases": ["datepicker"],
+      "category": "Inputs",
+      "description": "Input + calendar popover.",
+      "a11y": {
+        "pitfalls": ["Localization, keyboard nav, timezone handling."]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/date-picker/page.tsx"
+      }
     },
     {
       "component": "Dialog",
+      "id": "dialog",
+      "slug": "dialog",
+      "layer": "composers",
       "alternativeNames": [
+        "Modal",
         "Confirm Dialog",
         "Feedback",
         "Inline Dialog",
@@ -490,244 +423,180 @@
         "Alert Dialog",
         "Confirmation Dialog"
       ],
-      "category": "Feedback",
-      "description": "A floating window that appears over the main content to present information, gather user input, or confirm actions, often with a semi-transparent backdrop.",
-      "status": "Planned"
-    },
-    {
-      "component": "Dictionary",
-      "alternativeNames": [
-        "Definition List",
-        "Definition",
-        "Definition Card",
-        "Definition Box",
-        "Definition Block",
-        "Definition Item",
-        "Definition Section"
-      ],
-      "category": "Display",
-      "description": "provides definitions, translations, or explanations for terms, often with search functionality and categorization to help users understand specialized vocabulary.",
-      "status": "Planned"
-    },
-    {
-      "component": "Disclosure",
-      "alternativeNames": ["Description", "Caption"],
-      "category": "Display",
-      "description": "reveals additional information or content when activated, typically through a button or trigger, helping to manage information density and focus user attention.",
-      "status": "Planned"
+      "normalizedAliases": ["dialog", "modal"],
+      "category": "Containers",
+      "description": "Blocking and non-blocking overlay container.",
+      "a11y": {
+        "pitfalls": [
+          "Not trapping focus",
+          "poor mobile handling",
+          "misuse for inline content."
+        ]
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/Dialog",
+        "docs": "app/blueprints/component-standards/dialog/page.tsx"
+      }
     },
     {
       "component": "Divider",
+      "id": "divider",
+      "slug": "divider",
+      "layer": "primitives",
       "alternativeNames": ["Separator"],
+      "normalizedAliases": ["divider"],
       "category": "Display",
-      "description": "A visual element that creates separation between content sections, available in various styles like lines, spaces, or decorative elements to improve content organization and readability.",
-      "status": "Planned"
-    },
-    {
-      "component": "Do and Don't List",
-      "alternativeNames": [],
-      "category": "Display",
-      "description": "presents best practices and common mistakes in a structured format, using visual indicators to clearly distinguish between recommended and discouraged actions.",
-      "status": "Planned"
-    },
-    {
-      "component": "Download",
-      "alternativeNames": ["Download button", "File download"],
-      "category": "Form",
-      "description": "initiates file downloads, providing information about file size, type, and download progress, with options for different file formats and download methods.",
-      "status": "Planned"
+      "description": "Visual separator.",
+      "a11y": {
+        "pitfalls": ["Misused as layout spacing", "poor contrast in dark mode."]
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/Divider",
+        "docs": "app/blueprints/component-standards/divider/page.tsx"
+      }
     },
     {
       "component": "Drawer",
+      "id": "drawer",
+      "slug": "drawer",
+      "layer": "composers",
       "alternativeNames": [
+        "Sidebar",
         "Bottom Sheet",
         "Tray",
         "Side Drawer",
         "Sliding Panel",
         "Slide-out Panel",
         "Off-canvas Menu",
-        "Sidebar",
         "Slide-out Navigation"
       ],
-      "category": "Navigation",
-      "description": "A panel that slides in from the edge of the screen, typically used for navigation, settings, or additional content, with options for different positions and interaction patterns.",
-      "status": "Planned"
+      "normalizedAliases": ["drawer", "sidebar"],
+      "category": "Containers",
+      "description": "Sliding overlay.",
+      "a11y": {
+        "pitfalls": ["Inconsistent screen-size behavior", "poor focus return."]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/drawer/page.tsx"
+      }
     },
     {
-      "component": "Editor",
+      "component": "Dropdown",
+      "id": "dropdown",
+      "slug": "dropdown",
+      "layer": "compounds",
+      "alternativeNames": ["MenuButton", "Menu Button", "Menu-Button"],
+      "normalizedAliases": ["dropdown", "menubutton"],
+      "category": "Actions",
+      "description": "Triggered list of actions.",
+      "a11y": {
+        "pitfalls": ["Keyboard/roving focus", "scrollable lists not announced."]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/dropdown/page.tsx"
+      }
+    },
+    {
+      "component": "Field",
+      "id": "field",
+      "slug": "field",
+      "layer": "composers",
+      "alternativeNames": ["Field (Composer)"],
+      "normalizedAliases": ["field", "fieldcomposer"],
+      "category": "Forms",
+      "description": "Governs label/error associations for controls.",
+      "a11y": {
+        "pitfalls": [
+          "Duplicated logic in each input",
+          "missing aria-describedby."
+        ]
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/Field",
+        "docs": "app/blueprints/component-standards/field/page.tsx"
+      }
+    },
+    {
+      "component": "FileInput",
+      "id": "fileinput",
+      "slug": "file-input",
+      "layer": "compounds",
+      "alternativeNames": ["File Input", "File-Input"],
+      "normalizedAliases": ["fileinput"],
+      "category": "Inputs",
+      "description": "File picker + label.",
+      "a11y": {
+        "pitfalls": ["Poor drag/drop support", "inaccessible custom buttons."]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/file-input/page.tsx"
+      }
+    },
+    {
+      "component": "FilterBar",
+      "id": "filterbar",
+      "slug": "filter-bar",
+      "layer": "composers",
+      "alternativeNames": ["Filter Bar", "Filter-Bar"],
+      "normalizedAliases": ["filterbar"],
+      "category": "Actions",
+      "description": "Toolbar specialized for filters.",
+      "a11y": {
+        "pitfalls": [
+          "Clear/reset inconsistencies",
+          "unclear scope persistence."
+        ]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/filter-bar/page.tsx"
+      }
+    },
+    {
+      "component": "Form",
+      "id": "form",
+      "slug": "form",
+      "layer": "composers",
+      "alternativeNames": ["Form (Composer)"],
+      "normalizedAliases": ["form", "formcomposer"],
+      "category": "Forms",
+      "description": "Orchestrates validation and submission.",
+      "a11y": {
+        "pitfalls": ["Mixed validation strategies", "not announcing errors."]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/form/page.tsx"
+      }
+    },
+    {
+      "component": "Heading",
+      "id": "heading",
+      "slug": "heading",
+      "layer": "primitives",
       "alternativeNames": [],
-      "category": "Form",
-      "description": "provides a rich text editing interface, allowing users to create and modify content with formatting options, media embedding, and real-time collaboration features.",
-      "status": "Planned"
-    },
-    {
-      "component": "Empty State",
-      "alternativeNames": [
-        "Blank slate",
-        "Non-ideal State",
-        "Empty",
-        "Zero State",
-        "No Results",
-        "No Data",
-        "No Content",
-        "Initial State",
-        "First-time Experience"
-      ],
-      "category": "Feedback",
-      "description": "displays when there is no data or content to show, providing guidance, illustrations, or actions to help users understand and resolve the empty state.",
-      "status": "Planned"
-    },
-    {
-      "component": "Fieldset",
-      "alternativeNames": [
-        "Form",
-        "Field set",
-        "Fieldgroup",
-        "Form block",
-        "Form fieldset",
-        "Form group",
-        "Form input",
-        "Form label",
-        "FormControl",
-        "Formfield group",
-        "Input group",
-        "Contact Form"
-      ],
-      "category": "Form",
-      "description": "A container component that groups related form controls together, providing visual organization and semantic structure for complex forms with multiple input fields.",
-      "status": "Planned"
-    },
-    {
-      "component": "File details",
-      "alternativeNames": ["Document card", "File"],
-      "category": "Display",
-      "description": "displays metadata and information about a file, including name, size, type, last modified date, and preview options, with actions for file management.",
-      "status": "Planned"
-    },
-    {
-      "component": "File Upload",
-      "alternativeNames": [
-        "Drop Zone",
-        "Multiple File Upload",
-        "Upload",
-        "Filepicker",
-        "File input",
-        "File picker",
-        "File selector",
-        "File uploader",
-        "Filedrop",
-        "Input file",
-        "Input: file",
-        "Upload input",
-        "Uploader",
-        "Drag and Drop",
-        "File Browser",
-        "File Selector"
-      ],
-      "category": "Form",
-      "description": "allows users to select and upload files, supporting drag-and-drop interactions, file type validation, and progress indicators for the upload process.",
-      "status": "Planned"
-    },
-    {
-      "component": "Filter",
-      "alternativeNames": [
-        "Filter Input",
-        "Filter Panel",
-        "Quick filter",
-        "Search Filter",
-        "Data Filter",
-        "Content Filter",
-        "Filter Bar",
-        "Filter Controls"
-      ],
-      "category": "Form",
-      "description": "allows users to refine and narrow down content or data based on specific criteria, often with multiple filter options and real-time filtering capabilities.",
-      "status": "Planned"
-    },
-    {
-      "component": "Flag",
-      "alternativeNames": [],
-      "category": "Display",
-      "description": "A small visual indicator that draws attention to specific content or states, often using color, icons, or text to highlight important information or status changes.",
-      "status": "Planned"
-    },
-    {
-      "component": "Flightline",
-      "alternativeNames": [],
-      "category": "Display",
-      "description": "visualizes a sequence of events or steps in a process, typically using a horizontal or vertical line with connected nodes to show progression and relationships.",
-      "status": "Planned"
-    },
-    {
-      "component": "Focus Ring",
-      "alternativeNames": [],
-      "category": "Display",
-      "description": "A visual indicator that shows which element currently has keyboard focus, helping users navigate the interface and maintain accessibility standards for keyboard-only users.",
-      "status": "Planned"
-    },
-    {
-      "component": "Footer",
-      "alternativeNames": ["Page footer"],
-      "category": "Layout",
-      "description": "appears at the bottom of a page or section, typically containing navigation links, copyright information, and supplementary content organized in a structured layout.",
-      "status": "Planned"
-    },
-    {
-      "component": "Gauge",
-      "alternativeNames": [],
-      "category": "Progress",
-      "description": "displays a measurement or progress using a circular or semi-circular indicator, often with color coding and numerical values to show current status or performance.",
-      "status": "Planned"
-    },
-    {
-      "component": "Globe Rating",
-      "alternativeNames": [],
-      "category": "Progress",
-      "description": "A rating component that uses a globe or circular visualization to represent scores or ratings, with options for different rating scales and visual styles to indicate quality or performance.",
-      "status": "Planned"
-    },
-    {
-      "component": "Grid",
-      "alternativeNames": ["Layout Grid", "Page Layout", "Flex"],
-      "category": "Layout",
-      "description": "A layout component that organizes content into rows and columns, providing a flexible and responsive structure for arranging interface elements in a consistent and visually balanced way.",
-      "status": "Planned"
-    },
-    {
-      "component": "Header",
-      "alternativeNames": [
-        "Masthead",
-        "Mobile Header",
-        "Global header",
-        "Page header",
-        "Section header",
-        "Section message"
-      ],
-      "category": "Layout",
-      "description": "appears at the top of a page or section, typically containing navigation, branding, and key actions, with options for different styles and responsive behaviors.",
-      "status": "Planned"
-    },
-    {
-      "component": "Hero",
-      "alternativeNames": ["Jumbotron", "Hero area", "Highlight board"],
-      "category": "Display",
-      "description": "A prominent display component that spans the full width of the viewport, typically used for key marketing messages, featured content, or important announcements with high visual impact.",
-      "status": "Planned"
-    },
-    {
-      "component": "Hotspot",
-      "alternativeNames": [
-        "Lens Dialog",
-        "Zoom",
-        "Focus Highlight",
-        "Focus ring"
-      ],
-      "category": "Display",
-      "description": "highlights and magnifies specific areas of an image or interface, allowing users to focus on details or access additional information about particular elements.",
-      "status": "Planned"
+      "normalizedAliases": ["heading"],
+      "category": "Textual",
+      "description": "Section title.",
+      "a11y": {
+        "pitfalls": ["Misusing heading levels", "skipping tokens."]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/heading/page.tsx"
+      }
     },
     {
       "component": "Icon",
+      "id": "icon",
+      "slug": "icon",
+      "layer": "primitives",
       "alternativeNames": [
         "Symbol",
         "Identicons",
@@ -738,55 +607,68 @@
         "Graphic Symbol",
         "Visual Indicator"
       ],
+      "normalizedAliases": ["icon"],
       "category": "Display",
-      "description": "A visual symbol or graphic that represents an action, object, or concept, available in various sizes and styles to enhance visual communication and user interface clarity.",
-      "status": "Planned"
+      "description": "Scalable glyph.",
+      "a11y": {
+        "pitfalls": ["Not aria-hidden when decorative", "inconsistent sizing."]
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/Icon",
+        "docs": "app/blueprints/component-standards/icon/page.tsx"
+      }
     },
     {
-      "component": "Icon Button",
-      "alternativeNames": ["Button Icon", "Icon button link"],
-      "category": "Form",
-      "description": "A button component that uses an icon as its primary visual element, providing a compact and intuitive way to represent actions or navigation options with visual clarity.",
-      "status": "Planned"
-    },
-    {
-      "component": "Illustration",
-      "alternativeNames": [],
-      "category": "Display",
-      "description": "displays custom artwork or graphics, often used to enhance visual appeal, explain concepts, or provide visual context for content and features.",
-      "status": "Planned"
+      "component": "IconButton",
+      "id": "iconbutton",
+      "slug": "icon-button",
+      "layer": "primitives",
+      "alternativeNames": [
+        "Icon Button",
+        "Icon-Button",
+        "Button Icon",
+        "Icon button link"
+      ],
+      "normalizedAliases": ["iconbutton"],
+      "category": "Actions",
+      "description": "Button containing only an icon.",
+      "a11y": {
+        "pitfalls": ["No label/aria-label", "too small hit area."]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/icon-button/page.tsx"
+      }
     },
     {
       "component": "Image",
+      "id": "image",
+      "slug": "image",
+      "layer": "primitives",
       "alternativeNames": ["Image card", "Picture card"],
+      "normalizedAliases": ["image"],
       "category": "Display",
-      "description": "displays and manages images, with options for different aspect ratios, loading states, captions, and interactive features like zoom or gallery views.",
-      "status": "Planned"
-    },
-    {
-      "component": "Info Icon",
-      "alternativeNames": ["Help Button", "Service icons"],
-      "category": "Display",
-      "description": "A small icon component that provides access to additional information or help content, typically appearing as a question mark or information symbol that reveals details on interaction.",
-      "status": "Planned"
-    },
-    {
-      "component": "Infotip",
-      "alternativeNames": [],
-      "category": "Display",
-      "description": "A small popup component that provides contextual information or guidance, appearing when users hover over or focus on an element to explain its purpose or usage.",
-      "status": "Planned"
-    },
-    {
-      "component": "Inline Edit",
-      "alternativeNames": [],
-      "category": "Form",
-      "description": "allows users to edit content directly in its display context, transforming static text into editable fields when activated, with options for different input types and validation.",
-      "status": "Planned"
+      "description": "Displays media.",
+      "a11y": {
+        "pitfalls": [
+          "Missing alt text",
+          "performance (lazy loading, responsive)."
+        ]
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/Image",
+        "docs": "app/blueprints/component-standards/image/page.tsx"
+      }
     },
     {
       "component": "Input",
+      "id": "input",
+      "slug": "input",
+      "layer": "primitives",
       "alternativeNames": [
+        "Input (Text, Number, Password)",
         "Text Input",
         "Input field",
         "Input field with button",
@@ -801,137 +683,121 @@
         "Entry Field",
         "Data Entry"
       ],
-      "category": "Form",
-      "description": "A form control that allows users to enter and edit text or data, with various types and validation options to ensure proper input format.",
-      "status": "Planned"
+      "normalizedAliases": ["input", "inputtextnumberpassword"],
+      "category": "Inputs",
+      "description": "Single-line text entry.",
+      "a11y": {
+        "pitfalls": [
+          "Mixing label/error inside",
+          "missing aria-\\*",
+          "inconsistent disabled/required."
+        ]
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/Input",
+        "docs": "app/blueprints/component-standards/input/page.tsx"
+      }
     },
     {
-      "component": "Item Tile",
-      "alternativeNames": [],
+      "component": "ListItem",
+      "id": "listitem",
+      "slug": "list-item",
+      "layer": "compounds",
+      "alternativeNames": ["List Item", "List-Item"],
+      "normalizedAliases": ["listitem"],
       "category": "Display",
-      "description": "displays a list of items in a tile format, typically used for navigation or content organization, with options for different styles and responsive behaviors.",
-      "status": "Planned"
+      "description": "Item with primary/secondary text and optional icon.",
+      "a11y": {
+        "pitfalls": ["No list semantics", "overloading with actions."]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/list-item/page.tsx"
+      }
     },
     {
-      "component": "Keyboard Input",
-      "alternativeNames": [],
-      "category": "Form",
-      "description": "displays a list of items in a keyboard input format, typically used for navigation or content organization, with options for different styles and responsive behaviors.",
-      "status": "Planned"
-    },
-    {
-      "component": "Label",
-      "alternativeNames": ["Field label", "Field message", "Label Group"],
-      "category": "Form",
-      "description": "displays a label for a form field, with options for different styles and responsive behaviors.",
-      "status": "Planned"
-    },
-    {
-      "component": "List",
-      "alternativeNames": [
-        "Block List",
-        "Bullet List",
-        "Flat List",
-        "Ordered List",
-        "Related Documents",
-        "Resource List",
-        "Structured List",
-        "Ticked List",
-        "Groupedlist",
-        "Inline list",
-        "List group",
-        "List row",
-        "Lists",
-        "Number list",
-        "Numbered list",
-        "Unordered list",
-        "Text list",
-        "Summary list",
-        "Item List",
-        "Content List",
-        "Data List"
-      ],
-      "category": "Data",
-      "description": "displays a collection of items in a structured format, with options for different list styles, item selection, and interactive features for data manipulation.",
-      "status": "Planned"
-    },
-    {
-      "component": "Loader",
-      "alternativeNames": [
-        "Inline Loading",
-        "Spinner",
-        "Splash Animation",
-        "Loader / Spinner",
-        "Loader dots",
-        "Loading",
-        "Loading animation",
-        "Loading Dots",
-        "Loading icon",
-        "Loading indicator",
-        "Loading spinner",
-        "Spin",
-        "Spinbutton",
-        "Progress Indicator",
-        "Activity Indicator",
-        "Loading State"
-      ],
+      "component": "Loading Overlay",
+      "id": "loadingoverlay",
+      "slug": "loading-overlay",
+      "layer": "composers",
+      "alternativeNames": ["Loading-Overlay"],
+      "normalizedAliases": ["loadingoverlay"],
       "category": "Feedback",
-      "description": "indicates an ongoing process or loading state, available in various styles like spinners, progress bars, or skeleton screens to provide visual feedback.",
-      "status": "Planned"
+      "description": "Full-screen blocking state.",
+      "a11y": {
+        "pitfalls": [
+          "Not announced",
+          "no cancel option",
+          "inaccessible skeletons."
+        ]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/loading-overlay/page.tsx"
+      }
     },
     {
-      "component": "Lockup",
-      "alternativeNames": [],
-      "category": "Display",
-      "description": "displays a list of items in a lockup format, typically used for navigation or content organization, with options for different styles and responsive behaviors.",
-      "status": "Planned"
+      "component": "Mention Picker",
+      "id": "mentionpicker",
+      "slug": "mention-picker",
+      "layer": "composers",
+      "alternativeNames": ["Mention-Picker"],
+      "normalizedAliases": ["mentionpicker"],
+      "category": "Editing",
+      "description": "Autocomplete list for @ mentions.",
+      "a11y": {
+        "pitfalls": ["Not announcing results", "slow async search."]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/mention-picker/page.tsx"
+      }
     },
     {
-      "component": "Lookup",
-      "alternativeNames": [],
-      "category": "Display",
-      "description": "displays a list of items in a lookup format, typically used for navigation or content organization, with options for different styles and responsive behaviors.",
-      "status": "Planned"
+      "component": "MenuButton",
+      "id": "menubutton",
+      "slug": "menu-button",
+      "layer": "compounds",
+      "alternativeNames": ["Dropdown", "Menu Button", "Menu-Button"],
+      "normalizedAliases": ["menubutton", "dropdown"],
+      "category": "Actions",
+      "description": "Triggered list of actions.",
+      "a11y": {
+        "pitfalls": ["Keyboard/roving focus", "scrollable lists not announced."]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/menu-button/page.tsx"
+      }
     },
     {
-      "component": "Marquee",
-      "alternativeNames": [
-        "Marquee",
-        "Marquee Text",
-        "Marquee Content",
-        "Marquee Section",
-        "Marquee Block",
-        "Marquee Item",
-        "Marquee Section"
-      ],
-      "category": "Display",
-      "description": "displays a continuous scrolling text or content, often used for announcements, promotions, or important messages, with options for different styles and responsive behaviors.",
-      "status": "Planned"
-    },
-    {
-      "component": "Media Container",
-      "alternativeNames": [],
-      "category": "Media",
-      "description": "provides a container for media content, with options for different aspect ratios, loading states, captions, and interactive features like zoom or gallery views.",
-      "status": "Planned"
-    },
-    {
-      "component": "Message",
-      "alternativeNames": ["Message card", "Message inline", "Message bar"],
-      "category": "Display",
-      "description": "displays a message or notification, often used to inform users about system status, updates, or important information, with options for different styles and auto-dismissal.",
-      "status": "Planned"
-    },
-    {
-      "component": "Metadata",
-      "alternativeNames": [],
-      "category": "Display",
-      "description": "displays metadata or information about an item, often used to provide additional details or context about the content or object.",
-      "status": "Planned"
+      "component": "Message Composer",
+      "id": "messagecomposer",
+      "slug": "message-composer",
+      "layer": "composers",
+      "alternativeNames": ["Message-Composer"],
+      "normalizedAliases": ["messagecomposer"],
+      "category": "Editing",
+      "description": "Text input + attachments + formatting.",
+      "a11y": {
+        "pitfalls": [
+          "Unbounded props",
+          "unclear boundaries with product logic."
+        ]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/message-composer/page.tsx"
+      }
     },
     {
       "component": "Modal",
+      "id": "modal",
+      "slug": "modal",
+      "layer": "composers",
       "alternativeNames": [
+        "Dialog",
         "Timeout Modal",
         "Modal dialog",
         "Modal alert",
@@ -942,94 +808,71 @@
         "Centered Modal",
         "Dialog Box"
       ],
-      "category": "Feedback",
-      "description": "A focused dialog that requires user interaction before returning to the main interface, typically used for important messages, forms, or content that needs immediate attention.",
-      "status": "Planned"
+      "normalizedAliases": ["modal", "dialog"],
+      "category": "Containers",
+      "description": "Blocking and non-blocking overlay container.",
+      "a11y": {
+        "pitfalls": [
+          "Not trapping focus",
+          "poor mobile handling",
+          "misuse for inline content."
+        ]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/modal/page.tsx"
+      }
     },
     {
-      "component": "Navigation",
+      "component": "Multi-Step Form",
+      "id": "multistepform",
+      "slug": "multi-step-form",
+      "layer": "composers",
+      "alternativeNames": ["Wizard", "Multi-Step-Form"],
+      "normalizedAliases": ["multistepform", "wizard"],
+      "category": "Forms",
+      "description": "Multi-step field orchestration.",
+      "a11y": {
+        "pitfalls": [
+          "Losing context across steps",
+          "progress not communicated to SRs."
+        ]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/multi-step-form/page.tsx"
+      }
+    },
+    {
+      "component": "NavigationRail",
+      "id": "navigationrail",
+      "slug": "navigation-rail",
+      "layer": "composers",
       "alternativeNames": [
-        "Application Navigation Bar",
-        "Appnav",
-        "Subnav",
-        "Bottom Navigation",
-        "Global Navigation",
-        "Horizontal Navigation",
-        "Mega Menu",
-        "Vertical Navigation",
-        "Header (navigation)",
-        "Header navigation",
-        "Main nav",
-        "Nav",
-        "Nav list",
-        "Navbar",
-        "Navigation bar",
-        "Navigation card",
-        "Navigation menu",
-        "Navigation rail",
-        "NavList",
-        "Section navigation",
-        "Side nav",
-        "Sidebar menu",
-        "Top Navigation",
-        "Primary Navigation",
-        "Secondary Navigation",
-        "Tertiary Navigation"
+        "Sidebar Nav",
+        "Navigation Rail",
+        "Navigation-Rail",
+        "Sidebar-Nav"
       ],
+      "normalizedAliases": ["navigationrail", "sidebarnav"],
       "category": "Navigation",
-      "description": "provides access to different sections or pages of an application, available in various layouts and styles to accommodate different navigation patterns and hierarchies.",
-      "status": "Planned"
-    },
-    {
-      "component": "Notification",
-      "alternativeNames": [
-        "Nudger",
-        "Scoped Notifications",
-        "Message toast",
-        "Toast",
-        "Notification bar",
-        "Notification drawer",
-        "Notification banner",
-        "Toast notification",
-        "System Message",
-        "Status Message",
-        "Alert Message",
-        "Push Notification"
-      ],
-      "category": "Feedback",
-      "description": "displays temporary messages to inform users about system status, updates, or important information, with options for different styles and auto-dismissal.",
-      "status": "Planned"
-    },
-    {
-      "component": "Number Input",
-      "alternativeNames": ["Numberfield", "Numeric input"],
-      "category": "Form",
-      "description": "allows users to enter and edit numeric values, with options for different input types and validation options to ensure proper input format.",
-      "status": "Planned"
-    },
-    {
-      "component": "Offscreen",
-      "alternativeNames": [],
-      "category": "Display",
-      "description": "displays content off-screen, typically used for temporary or hidden content that needs to be accessible for screen readers or other assistive technologies.",
-      "status": "Planned"
-    },
-    {
-      "component": "One-time Password Input",
-      "alternativeNames": [],
-      "category": "Form",
-      "description": "allows users to enter and edit numeric values, with options for different input types and validation options to ensure proper input format.",
-      "status": "Planned"
-    },
-    {
-      "component": "Overlay",
-      "alternativeNames": [],
-      "category": "Display",
-      "description": "A non-opaque overlay that appears on top of the main content, typically used to provide additional information or context about the content or object.",
-      "status": "Planned"
+      "description": "App-wide nav structure.",
+      "a11y": {
+        "pitfalls": [
+          "Poor keyboard support",
+          "collapsed vs expanded not communicated."
+        ]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/navigation-rail/page.tsx"
+      }
     },
     {
       "component": "Pagination",
+      "id": "pagination",
+      "slug": "pagination",
+      "layer": "composers",
       "alternativeNames": [
         "Content Pagination",
         "Numbered pagination",
@@ -1040,103 +883,64 @@
         "Page Numbers",
         "Page Indicator"
       ],
+      "normalizedAliases": ["pagination"],
       "category": "Navigation",
-      "description": "allows users to navigate through multiple pages of content, typically showing page numbers, previous/next controls, and options for page size selection.",
-      "status": "Planned"
-    },
-    {
-      "component": "Pane",
-      "alternativeNames": [
-        "Panel",
-        "Sheet",
-        "Flyout",
-        "Side drawer",
-        "Side panel",
-        "Side sheet",
-        "Full sheet",
-        "Full Screen Takeover"
-      ],
-      "category": "Display",
-      "description": "displays content in a split-screen format, typically used for sidebars or supplementary information that can be toggled on and off of the main content.",
-      "status": "Planned"
-    },
-    {
-      "component": "Payment Form",
-      "alternativeNames": [],
-      "category": "Form",
-      "description": "allows users to enter and edit payment information, with options for different input types and validation options to ensure proper input format.",
-      "status": "Planned"
-    },
-    {
-      "component": "Phone Number Input",
-      "alternativeNames": [],
-      "category": "Form",
-      "description": "allows users to enter and edit phone number information, with options for different input types and validation options to ensure proper input format.",
-      "status": "Planned"
-    },
-    {
-      "component": "Picklist",
-      "alternativeNames": ["Skeleton body text"],
-      "category": "Form",
-      "description": "allows users to select one or more options from a list, with options for different styles, step values, and visual feedback.",
-      "status": "Planned"
-    },
-    {
-      "component": "Pivot",
-      "alternativeNames": [],
-      "category": "Display",
-      "description": "displays a list of items in a pivot format, typically used for navigation or content organization, with options for different styles and responsive behaviors.",
-      "status": "Planned"
-    },
-    {
-      "component": "Placeholder",
-      "alternativeNames": ["Empty prompt"],
-      "category": "Display",
-      "description": "displays a placeholder for content that is still loading or has not been loaded yet, with options for different styles and responsive behaviors.",
-      "status": "Planned"
+      "description": "Controls item/page navigation.",
+      "a11y": {
+        "pitfalls": [
+          "Prop soup",
+          "missing aria-current",
+          "poor ellipses logic."
+        ]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/pagination/page.tsx"
+      }
     },
     {
       "component": "Popover",
+      "id": "popover",
+      "slug": "popover",
+      "layer": "composers",
       "alternativeNames": ["Anchor Popup", "PointerBox"],
-      "category": "Display",
-      "description": "displays a small popup or tooltip that appears when users hover over or focus on an element to provide additional information or context about the content or object.",
-      "status": "Planned"
+      "normalizedAliases": ["popover"],
+      "category": "Containers",
+      "description": "Anchored floating UI.",
+      "a11y": {
+        "pitfalls": ["Not keyboard dismissible", "hover/click confusion."]
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/Popover",
+        "docs": "app/blueprints/component-standards/popover/page.tsx"
+      }
     },
     {
-      "component": "Progress",
-      "alternativeNames": [
-        "Circular Progress",
-        "Linear Progress",
-        "Meter",
-        "Progress Bar",
-        "Progress circle",
-        "Progress Indicator",
-        "Progress loader",
-        "Progress navigation",
-        "Progress radial",
-        "Progress ring",
-        "Progress steps",
-        "Progress tracker",
-        "ProgressBar",
-        "Progresscircle",
-        "Progressindicator",
-        "Loading Bar",
-        "Status Bar",
-        "Completion Meter"
-      ],
+      "component": "ProgressBar",
+      "id": "progressbar",
+      "slug": "progress-bar",
+      "layer": "compounds",
+      "alternativeNames": ["Progress Bar", "Progress-Bar"],
+      "normalizedAliases": ["progressbar"],
       "category": "Feedback",
-      "description": "A visual indicator that shows the completion status of a process, available in linear or circular formats, with optional animations and percentage displays.",
-      "status": "Planned"
-    },
-    {
-      "component": "Prompt",
-      "alternativeNames": [],
-      "category": "Form",
-      "description": "allows users to enter and edit text information, with options for different input types and validation options to ensure proper input format.",
-      "status": "Planned"
+      "description": "Linear visual progress.",
+      "a11y": {
+        "pitfalls": [
+          "Missing aria-valuenow",
+          "not distinguishable without color."
+        ]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/progress-bar/page.tsx"
+      }
     },
     {
       "component": "Radio",
+      "id": "radio",
+      "slug": "radio",
+      "layer": "primitives",
       "alternativeNames": [
         "Radio Button",
         "Radio button group",
@@ -1156,48 +960,47 @@
         "Selection Button",
         "Choice Button"
       ],
-      "category": "Form",
-      "description": "A form control that allows users to select a single option from a set of mutually exclusive choices, typically displayed as circular buttons that can be selected.",
-      "status": "Planned"
+      "normalizedAliases": ["radio"],
+      "category": "Inputs",
+      "description": "Single-choice option.",
+      "a11y": {
+        "pitfalls": ["No group orchestration", "missing aria-checked."]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/radio/page.tsx"
+      }
     },
     {
-      "component": "Range Slider",
+      "component": "RadioGroup",
+      "id": "radiogroup",
+      "slug": "radio-group",
+      "layer": "compounds",
       "alternativeNames": [
-        "Slider",
-        "Range",
-        "Range input",
-        "Range sliders",
-        "Rangeinput",
-        "Track Slider",
-        "Value Slider",
-        "Volume Slider",
-        "Progress Slider"
+        "CheckboxGroup",
+        "Checkbox Group",
+        "Checkbox-Group",
+        "Radio Group",
+        "Radio-Group"
       ],
-      "category": "Form",
-      "description": "allows users to select a value or range of values by moving a slider along a track, with options for different styles, step values, and visual feedback.",
-      "status": "Planned"
-    },
-    {
-      "component": "Rating",
-      "alternativeNames": [
-        "Medalist Rating",
-        "Star Rating",
-        "Rate",
-        "Ratings",
-        "Star meter",
-        "Star rating",
-        "Review Rating",
-        "Score Display",
-        "Quality Rating",
-        "Performance Rating"
-      ],
-      "category": "Form",
-      "description": "allows users to provide or view ratings, typically using stars or other visual indicators, with options for different rating scales and display styles.",
-      "status": "Planned"
+      "normalizedAliases": ["radiogroup", "checkboxgroup"],
+      "category": "Inputs",
+      "description": "Grouped options with label.",
+      "a11y": {
+        "pitfalls": ["Group unlabeled", "inconsistent error propagation."]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/radio-group/page.tsx"
+      }
     },
     {
       "component": "Rich Text Editor",
+      "id": "richtexteditor",
+      "slug": "rich-text-editor",
+      "layer": "composers",
       "alternativeNames": [
+        "Rich-Text-Editor",
         "Wysiwyg",
         "Messagebox",
         "Text Editor",
@@ -1206,49 +1009,65 @@
         "Document Editor",
         "Formatting Toolbar"
       ],
-      "category": "Form",
-      "description": "provides a text editing interface with formatting options, allowing users to create and edit rich text content with various styling and formatting capabilities.",
-      "status": "Planned"
+      "normalizedAliases": ["richtexteditor"],
+      "category": "Editing",
+      "description": "Schema + plugins + toolbar orchestration.",
+      "a11y": {
+        "pitfalls": ["Paste soup", "plugin drift", "shortcut inconsistency."]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/rich-text-editor/page.tsx"
+      }
     },
     {
-      "component": "Screen Reader Only",
-      "alternativeNames": ["Visually Hidden", "Screenreadercontent"],
-      "category": "Display",
-      "description": "displays content that is only visible to screen readers, typically used to provide additional information or context about the content or object.",
-      "status": "Planned"
+      "component": "SearchField",
+      "id": "searchfield",
+      "slug": "search-field",
+      "layer": "compounds",
+      "alternativeNames": ["Search Field", "Search-Field"],
+      "normalizedAliases": ["searchfield"],
+      "category": "Inputs",
+      "description": "Input + search icon + clear button.",
+      "a11y": {
+        "pitfalls": [
+          "Icon-only clear not labeled",
+          "Enter/blur inconsistencies."
+        ]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/search-field/page.tsx"
+      }
     },
     {
-      "component": "Search",
+      "component": "SegmentedControl",
+      "id": "segmentedcontrol",
+      "slug": "segmented-control",
+      "layer": "compounds",
       "alternativeNames": [
-        "Global Search",
-        "Local Search",
-        "Input: search",
-        "Search bar",
-        "Search box",
-        "Search field",
-        "Search Input",
-        "Searchbox",
-        "Searchfield",
-        "Search Form",
-        "Search Interface",
-        "Query Input",
-        "Quick Search",
-        "Advanced Search",
-        "Filter Search"
+        "ToggleGroup",
+        "Segmented Control",
+        "Segmented-Control",
+        "Toggle Group",
+        "Toggle-Group"
       ],
-      "category": "Form",
-      "description": "allows users to search for content, with features like autocomplete, search suggestions, and filters to help users find relevant information quickly.",
-      "status": "Planned"
-    },
-    {
-      "component": "Section",
-      "alternativeNames": [],
-      "category": "Display",
-      "description": "displays a list of items in a section format, typically used for navigation or content organization, with options for different styles and responsive behaviors.",
-      "status": "Planned"
+      "normalizedAliases": ["segmentedcontrol", "togglegroup"],
+      "category": "Actions",
+      "description": "Group of related toggle buttons.",
+      "a11y": {
+        "pitfalls": ["Ambiguous single vs multi-select", "roving tabindex."]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/segmented-control/page.tsx"
+      }
     },
     {
       "component": "Select",
+      "id": "select",
+      "slug": "select",
+      "layer": "compounds",
       "alternativeNames": [
         "Dropdown",
         "Dropdown select",
@@ -1259,109 +1078,139 @@
         "Picklist",
         "Selection Menu"
       ],
-      "category": "Form",
-      "description": "A form control that allows users to select one or multiple options from a dropdown list, with support for search, filtering, and custom option rendering.",
-      "status": "Planned"
+      "normalizedAliases": ["select"],
+      "category": "Inputs",
+      "description": "Dropdown (native/custom).",
+      "a11y": {
+        "pitfalls": ["Custom menus often inaccessible", "no keyboard support."]
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/Select",
+        "docs": "app/blueprints/component-standards/select/page.tsx"
+      }
     },
     {
-      "component": "Show More",
-      "alternativeNames": [],
-      "category": "Display",
-      "description": "displays a list of items in a show more format, typically used for navigation or content organization, with options for different styles and responsive behaviors.",
-      "status": "Planned"
+      "component": "Sidebar",
+      "id": "sidebar",
+      "slug": "sidebar",
+      "layer": "composers",
+      "alternativeNames": ["Drawer"],
+      "normalizedAliases": ["sidebar", "drawer"],
+      "category": "Containers",
+      "description": "Sliding overlay.",
+      "a11y": {
+        "pitfalls": ["Inconsistent screen-size behavior", "poor focus return."]
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/Sidebar",
+        "docs": "app/blueprints/component-standards/sidebar/page.tsx"
+      }
     },
     {
-      "component": "Shuttle",
+      "component": "Sidebar Nav",
+      "id": "sidebarnav",
+      "slug": "sidebar-nav",
+      "layer": "composers",
       "alternativeNames": [
-        "Transfer List",
-        "Comparison list",
-        "Listbox",
-        "Listbox button"
+        "NavigationRail",
+        "Navigation Rail",
+        "Navigation-Rail",
+        "Sidebar-Nav"
       ],
-      "category": "Form",
-      "description": "allows users to transfer items between two lists, with options for different styles, step values, and visual feedback.",
-      "status": "Planned"
-    },
-    {
-      "component": "Side Navigation",
-      "alternativeNames": [],
+      "normalizedAliases": ["sidebarnav", "navigationrail"],
       "category": "Navigation",
-      "description": "displays a list of items in a side navigation format, typically used for navigation or content organization, with options for different styles and responsive behaviors.",
-      "status": "Planned"
+      "description": "App-wide nav structure.",
+      "a11y": {
+        "pitfalls": [
+          "Poor keyboard support",
+          "collapsed vs expanded not communicated."
+        ]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/sidebar-nav/page.tsx"
+      }
     },
     {
-      "component": "Signal",
+      "component": "Slider",
+      "id": "slider",
+      "slug": "slider",
+      "layer": "primitives",
       "alternativeNames": [],
-      "category": "Display",
-      "description": "displays a list of items in a signal format, typically used for navigation or content organization, with options for different styles and responsive behaviors.",
-      "status": "Planned"
-    },
-    {
-      "component": "Skeleton",
-      "alternativeNames": [
-        "Shimmer",
-        "Loader overlay",
-        "Skeleton display text",
-        "Skeleton loader",
-        "Skeleton loaders",
-        "Skeleton page",
-        "Skeleton tabs",
-        "Skeleton thumbnail",
-        "Skeletonloader",
-        "Loading Placeholder",
-        "Content Placeholder",
-        "Ghost Loading"
-      ],
-      "category": "Feedback",
-      "description": "displays a placeholder preview of content while it's loading, using subtle animations to indicate that content is being fetched and will appear soon.",
-      "status": "Planned"
+      "normalizedAliases": ["slider"],
+      "category": "Inputs",
+      "description": "Continuous or stepped numeric input.",
+      "a11y": {
+        "pitfalls": [
+          "No keyboard support",
+          "no min/max labels",
+          "poor focus visibility."
+        ]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/slider/page.tsx"
+      }
     },
     {
       "component": "Snackbar",
-      "alternativeNames": [],
+      "id": "snackbar",
+      "slug": "snackbar",
+      "layer": "composers",
+      "alternativeNames": ["Toast"],
+      "normalizedAliases": ["snackbar", "toast"],
       "category": "Feedback",
-      "description": "displays a temporary message to inform users about system status, updates, or important information, with options for different styles and auto-dismissal.",
-      "status": "Planned"
+      "description": "Temporary notifications.",
+      "a11y": {
+        "pitfalls": ["Not dismissible via keyboard", "poor timeout semantics."]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/snackbar/page.tsx"
+      }
     },
     {
-      "component": "Splash page",
-      "alternativeNames": ["Entry card", "Splash animation"],
-      "category": "Display",
-      "description": "displays a splash page with a logo, title, and description, typically used to welcome users to a new product or service.",
-      "status": "Planned"
-    },
-    {
-      "component": "Stack",
-      "alternativeNames": ["Stack view", "Sonner", "Toaster"],
-      "category": "Display",
-      "description": "displays a list of items in a stack format, typically used for navigation or content organization, with options for different styles and responsive behaviors.",
-      "status": "Planned"
-    },
-    {
-      "component": "Stamp",
+      "component": "Spacer",
+      "id": "spacer",
+      "slug": "spacer",
+      "layer": "primitives",
       "alternativeNames": [],
+      "normalizedAliases": ["spacer"],
       "category": "Display",
-      "description": "displays a list of items in a stamp format, typically used for navigation or content organization, with options for different styles and responsive behaviors.",
-      "status": "Planned"
+      "description": "Non-semantic layout gap.",
+      "a11y": {
+        "pitfalls": ["Overuse instead of flex/grid", "hidden clutter in DOM."]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/spacer/page.tsx"
+      }
     },
     {
-      "component": "Status",
-      "alternativeNames": [
-        "State Label",
-        "Entity status badge",
-        "Impact badge",
-        "State label",
-        "Status badge",
-        "Status Dot",
-        "Status Indicator",
-        "Status label"
-      ],
+      "component": "Spinner",
+      "id": "spinner",
+      "slug": "spinner",
+      "layer": "compounds",
+      "alternativeNames": [],
+      "normalizedAliases": ["spinner"],
       "category": "Feedback",
-      "description": "displays a status indicator or label for an entity or object, with options for different styles and responsive behaviors.",
-      "status": "Planned"
+      "description": "Indeterminate loading indicator.",
+      "a11y": {
+        "pitfalls": ["Not announced", "poor contrast on dark backgrounds."]
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/Spinner",
+        "docs": "app/blueprints/component-standards/spinner/page.tsx"
+      }
     },
     {
       "component": "Stepper",
+      "id": "stepper",
+      "slug": "stepper",
+      "layer": "compounds",
       "alternativeNames": [
         "Input stepper",
         "Progress stepper",
@@ -1370,19 +1219,25 @@
         "Stepper horizontal",
         "Stepper indicator"
       ],
-      "category": "Form",
-      "description": "displays a list of steps in a stepper format, typically used for navigation or content organization, with options for different styles and responsive behaviors.",
-      "status": "Planned"
-    },
-    {
-      "component": "Sticker",
-      "alternativeNames": [],
-      "category": "Display",
-      "description": "displays a list of items in a sticker format, typically used for navigation or content organization, with options for different styles and responsive behaviors.",
-      "status": "Planned"
+      "normalizedAliases": ["stepper"],
+      "category": "Navigation",
+      "description": "Multi-step progress indicator.",
+      "a11y": {
+        "pitfalls": [
+          "Not announcing current step",
+          "unclear “completed” states."
+        ]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/stepper/page.tsx"
+      }
     },
     {
       "component": "Switch",
+      "id": "switch",
+      "slug": "switch",
+      "layer": "primitives",
       "alternativeNames": [
         "Slide toggle",
         "Toggle switch",
@@ -1392,164 +1247,176 @@
         "On/Off Switch",
         "State Toggle"
       ],
-      "category": "Form",
-      "description": "A form control that allows users to toggle between two states (on/off), typically displayed as a sliding switch with visual feedback for the current state.",
-      "status": "Planned"
+      "normalizedAliases": ["switch"],
+      "category": "Inputs",
+      "description": "Binary toggle styled as a slider.",
+      "a11y": {
+        "pitfalls": ["Misused as yes/no", "unclear semantics."]
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/Switch",
+        "docs": "app/blueprints/component-standards/switch/page.tsx"
+      }
     },
     {
-      "component": "Tab",
-      "alternativeNames": [
-        "Content Switcher",
-        "Underline Navigation",
-        "Fake tabs",
-        "Scoped tabs",
-        "Vertical tabs",
-        "Underline nav",
-        "UnderlineNav",
-        "UnderlinePanels",
-        "Tabs bar",
-        "Tab group",
-        "Tab nav",
-        "Tab panel",
-        "Tab panels",
-        "Table tree",
-        "Table-grid",
-        "Tabnavigation",
-        "Tabs",
-        "Tabs (motion)",
-        "Tabbed Interface",
-        "Tabbed Navigation",
-        "Tabbed Content"
-      ],
+      "component": "TableRow",
+      "id": "tablerow",
+      "slug": "table-row",
+      "layer": "compounds",
+      "alternativeNames": ["Table Row", "Table-Row"],
+      "normalizedAliases": ["tablerow"],
+      "category": "Display",
+      "description": "Standardized table row.",
+      "a11y": {
+        "pitfalls": ["No scope for headers", "responsive overflow mishandling."]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/table-row/page.tsx"
+      }
+    },
+    {
+      "component": "Tabs",
+      "id": "tabs",
+      "slug": "tabs",
+      "layer": "composers",
+      "alternativeNames": ["Tab"],
+      "normalizedAliases": ["tabs", "tab"],
       "category": "Navigation",
-      "description": "organizes content into multiple panels, with tabs for switching between them, supporting different styles and layouts for content organization.",
-      "status": "Planned"
-    },
-    {
-      "component": "Table",
-      "alternativeNames": [
-        "Comparison Table",
-        "Data Table",
-        "Dynamic Table",
-        "Markup Table",
-        "Responsive Tables",
-        "Semantic Table",
-        "Striped Table",
-        "Data grid",
-        "Summarytable",
-        "Striped table",
-        "Grid",
-        "Data Grid",
-        "Spreadsheet",
-        "Matrix"
-      ],
-      "category": "Data",
-      "description": "A structured component that displays data in rows and columns, with support for sorting, filtering, pagination, and various interactive features for data manipulation.",
-      "status": "Planned"
-    },
-    {
-      "component": "Table of Contents",
-      "alternativeNames": ["Contents List", "Index Table"],
-      "category": "Navigation",
-      "description": "displays a list of items in a table of contents format, typically used for navigation or content organization, with options for different styles and responsive behaviors.",
-      "status": "Planned"
+      "description": "Tablist + tabpanels orchestration.",
+      "a11y": {
+        "pitfalls": ["Roving tabindex errors", "not linked to routing."]
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/Tabs",
+        "docs": "app/blueprints/component-standards/tabs/page.tsx"
+      }
     },
     {
       "component": "Tag",
-      "alternativeNames": ["Token", "Tagbutton", "Tag dismissible"],
+      "id": "tag",
+      "slug": "tag",
+      "layer": "compounds",
+      "alternativeNames": ["Chip", "Token", "Tagbutton", "Tag dismissible"],
+      "normalizedAliases": ["tag", "chip"],
       "category": "Display",
-      "description": "displays a list of items in a tag format, typically used for navigation or content organization, with options for different styles and responsive behaviors.",
-      "status": "Planned"
+      "description": "Label + optional dismiss.",
+      "a11y": {
+        "pitfalls": ["Dismiss button unlabeled", "no keyboard removal."]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/tag/page.tsx"
+      }
     },
     {
       "component": "Text",
+      "id": "text",
+      "slug": "text",
+      "layer": "primitives",
       "alternativeNames": ["Specialized text"],
-      "category": "Display",
-      "description": "displays text in various sizes and styles to create visual hierarchy and structure in content, with options for different heading levels and styles.",
-      "status": "Planned"
+      "normalizedAliases": ["text"],
+      "category": "Textual",
+      "description": "Styled body copy.",
+      "a11y": {
+        "pitfalls": ["Hardcoded typography", "no semantic mapping."]
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/Text",
+        "docs": "app/blueprints/component-standards/text/page.tsx"
+      }
     },
     {
-      "component": "Text area",
+      "component": "TextareaField",
+      "id": "textareafield",
+      "slug": "textarea-field",
+      "layer": "compounds",
+      "alternativeNames": ["Textarea Field", "Textarea-Field"],
+      "normalizedAliases": ["textareafield"],
+      "category": "Inputs",
+      "description": "Multiline entry.",
+      "a11y": {
+        "pitfalls": ["Missing resize handling", "poor ARIA."]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/textarea-field/page.tsx"
+      }
+    },
+    {
+      "component": "TextField",
+      "id": "textfield",
+      "slug": "text-field",
+      "layer": "compounds",
+      "alternativeNames": ["Text Field", "Text-Field"],
+      "normalizedAliases": ["textfield"],
+      "category": "Inputs",
+      "description": "Input + Label + Error + Helper.",
+      "a11y": {
+        "pitfalls": [
+          "Label optionality",
+          "missing aria-describedby",
+          "bloated props."
+        ]
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/TextField",
+        "docs": "app/blueprints/component-standards/text-field/page.tsx"
+      }
+    },
+    {
+      "component": "Toast",
+      "id": "toast",
+      "slug": "toast",
+      "layer": "composers",
+      "alternativeNames": ["Snackbar"],
+      "normalizedAliases": ["toast", "snackbar"],
+      "category": "Feedback",
+      "description": "Temporary notifications.",
+      "a11y": {
+        "pitfalls": ["Not dismissible via keyboard", "poor timeout semantics."]
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/Toast",
+        "docs": "app/blueprints/component-standards/toast/page.tsx"
+      }
+    },
+    {
+      "component": "ToggleGroup",
+      "id": "togglegroup",
+      "slug": "toggle-group",
+      "layer": "compounds",
       "alternativeNames": [
-        "Textarea wrapper",
-        "Text box",
-        "Textbox",
-        "Textarea",
-        "Multi-line Input",
-        "Comment Box",
-        "Message Box",
-        "Description Field"
+        "SegmentedControl",
+        "Segmented Control",
+        "Segmented-Control",
+        "Toggle Group",
+        "Toggle-Group"
       ],
-      "category": "Form",
-      "description": "A multi-line text input component that allows users to enter and edit longer text content, with options for resizing, character limits, and formatting.",
-      "status": "Planned"
-    },
-    {
-      "component": "Theme Switcher",
-      "alternativeNames": [],
-      "category": "Form",
-      "description": "allows users to switch between different themes or color schemes, typically displayed as a dropdown menu with options for different themes or color schemes.",
-      "status": "Planned"
-    },
-    {
-      "component": "Tile",
-      "alternativeNames": [],
-      "category": "Display",
-      "description": "displays a list of items in a tile format, typically used for navigation or content organization, with options for different styles and responsive behaviors.",
-      "status": "Planned"
-    },
-    {
-      "component": "Timeline",
-      "alternativeNames": [
-        "Event Timeline",
-        "Activity Timeline",
-        "History Timeline",
-        "Process Timeline",
-        "Vertical Timeline",
-        "Horizontal Timeline",
-        "Chronological View"
-      ],
-      "category": "Data",
-      "description": "displays events or activities in chronological order, with options for different layouts, event types, and interactive features for exploring the timeline.",
-      "status": "Planned"
-    },
-    {
-      "component": "Title",
-      "alternativeNames": [
-        "Heading",
-        "Subheading",
-        "Headings",
-        "Headline",
-        "Section heading",
-        "Page Title",
-        "Content Title",
-        "Display Text"
-      ],
-      "category": "Display",
-      "description": "displays text in various sizes and styles to create visual hierarchy and structure in content, with options for different heading levels and styles.",
-      "status": "Planned"
-    },
-    {
-      "component": "Toggle",
-      "alternativeNames": [
-        "Button toggle",
-        "Toggle / Switch",
-        "Toggle button",
-        "Toggle button group",
-        "Toggle content",
-        "Toggle group",
-        "Togglebutton",
-        "Toggledetails",
-        "Togglegroup"
-      ],
-      "category": "Form",
-      "description": "allows users to toggle between two states (on/off), typically displayed as a sliding switch with visual feedback for the current state.",
-      "status": "Planned"
+      "normalizedAliases": ["togglegroup", "segmentedcontrol"],
+      "category": "Actions",
+      "description": "Group of related toggle buttons.",
+      "a11y": {
+        "pitfalls": ["Ambiguous single vs multi-select", "roving tabindex."]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/toggle-group/page.tsx"
+      }
     },
     {
       "component": "Toolbar",
+      "id": "toolbar",
+      "slug": "toolbar",
+      "layer": "composers",
       "alternativeNames": [
         "Action Bar",
+        "Action-Bar",
         "Top Bar",
         "Bar",
         "Commandbar",
@@ -1559,12 +1426,23 @@
         "Top app bar",
         "Top bar"
       ],
-      "category": "Navigation",
-      "description": "displays a list of items in a pivot format, typically used for navigation or content organization, with options for different styles and responsive behaviors.",
-      "status": "Planned"
+      "normalizedAliases": ["toolbar", "actionbar"],
+      "category": "Actions",
+      "description": "Groups actions with priority + overflow.",
+      "a11y": {
+        "pitfalls": ["No overflow policy", "inconsistent grouping."]
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/modules/Toolbar",
+        "docs": "app/blueprints/component-standards/toolbar/page.tsx"
+      }
     },
     {
       "component": "Tooltip",
+      "id": "tooltip",
+      "slug": "tooltip",
+      "layer": "compounds",
       "alternativeNames": [
         "Toggle tip",
         "Toggletip",
@@ -1576,61 +1454,47 @@
         "Hover Tip",
         "Popover Tip"
       ],
+      "normalizedAliases": ["tooltip"],
       "category": "Feedback",
-      "description": "A small popup that appears when users hover over or focus on an element, providing additional information, context, or guidance about the element.",
-      "status": "Planned"
-    },
-    {
-      "component": "Tourtip",
-      "alternativeNames": [],
-      "category": "Display",
-      "description": "displays a small popup that appears when users hover over or focus on an element, providing additional information, context, or guidance about the element.",
-      "status": "Planned"
-    },
-    {
-      "component": "Tree View",
-      "alternativeNames": [
-        "Document List",
-        "Entity List",
-        "Tree",
-        "Treebrowser",
-        "TreeView",
-        "Directory Tree",
-        "File Tree",
-        "Hierarchical List",
-        "Nested List"
-      ],
-      "category": "Data",
-      "description": "displays hierarchical data in a tree structure, with options for expanding/collapsing nodes, selection, and navigation through the hierarchy.",
-      "status": "Planned"
-    },
-    {
-      "component": "Truncate",
-      "alternativeNames": [],
-      "category": "Display",
-      "description": "displays a truncated text with options for different styles and responsive behaviors.",
-      "status": "Planned"
-    },
-    {
-      "component": "User Feedback",
-      "alternativeNames": [],
-      "category": "Feedback",
-      "description": "allows users to provide feedback or suggestions about a product or service, with options for different styles and interactive features.",
-      "status": "Planned"
-    },
-    {
-      "component": "Video",
-      "alternativeNames": ["Video player"],
-      "category": "Display",
-      "description": "displays a video player with options for different styles, playback controls, and responsive behaviors.",
-      "status": "Planned"
+      "description": "On-hover/focus info.",
+      "a11y": {
+        "pitfalls": [
+          "Not dismissible",
+          "used for essential info",
+          "poor keyboard support."
+        ]
+      },
+      "status": "Built",
+      "paths": {
+        "component": "ui/components/Tooltip",
+        "docs": "app/blueprints/component-standards/tooltip/page.tsx"
+      }
     },
     {
       "component": "Wizard",
-      "alternativeNames": ["Multi-step Form"],
-      "category": "Action",
-      "description": "A multi-step form that guides users through a series of steps to complete a task.",
-      "status": "Planned"
+      "id": "wizard",
+      "slug": "wizard",
+      "layer": "composers",
+      "alternativeNames": [
+        "Multi-Step Form",
+        "Multi-Step-Form",
+        "Multi-step Form"
+      ],
+      "normalizedAliases": ["wizard", "multistepform"],
+      "category": "Forms",
+      "description": "Multi-step field orchestration.",
+      "a11y": {
+        "pitfalls": [
+          "Losing context across steps",
+          "progress not communicated to SRs."
+        ]
+      },
+      "status": "Planned",
+      "paths": {
+        "docs": "app/blueprints/component-standards/wizard/page.tsx"
+      }
     }
-  ]
+  ],
+  "$source": "docs/design-taxonomy.md",
+  "$generatedAt": "2025-09-16T19:25:18.936Z"
 }
