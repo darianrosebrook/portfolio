@@ -11,7 +11,10 @@ import CharacterCount from '@tiptap/extension-character-count';
 import { VideoExtended } from '@/ui/modules/Tiptap/Extensions/VideoExtended';
 import ToggleSwitch from '@/ui/components/ToggleSwitch';
 
-const Tiptap = dynamic(() => import('@/ui/modules/Tiptap'), { ssr: false });
+const Tiptap = dynamic(
+  () => import('@/ui/modules/Tiptap').then((mod) => ({ default: mod.Tiptap })),
+  { ssr: false }
+);
 
 type Entity = 'articles' | 'case-studies';
 type RecordType = Article | CaseStudy;

@@ -1,8 +1,13 @@
 /** Context Provider for Select */
 'use client';
 import * as React from 'react';
+import {
+  useSelect,
+  type UseSelectOptions,
+  type UseSelectReturn,
+} from './useSelect';
 
-interface SelectContextValue {}
+export type SelectContextValue = UseSelectReturn;
 
 const SelectContext = React.createContext<SelectContextValue | null>(null);
 export const useSelectContext = () => {
@@ -12,10 +17,10 @@ export const useSelectContext = () => {
   return ctx;
 };
 
-export const SelectProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
-  const value = React.useMemo<SelectContextValue>(() => ({}), []);
+export const SelectProvider: React.FC<
+  { children: React.ReactNode } & UseSelectOptions
+> = ({ children, ...options }) => {
+  const value = useSelect(options);
   return (
     <SelectContext.Provider value={value}>{children}</SelectContext.Provider>
   );

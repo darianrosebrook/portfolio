@@ -26,7 +26,7 @@ export const metadata = {
 
 const ComponentGrid = dynamic(
   () => import('./component-grid.client').then((m) => m.ComponentGrid),
-  { ssr: false }
+  { ssr: true }
 );
 
 const ComponentDisplayCasePage: React.FC = () => {

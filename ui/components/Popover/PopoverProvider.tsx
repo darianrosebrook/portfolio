@@ -1,8 +1,13 @@
 /** Context Provider for Popover */
 'use client';
 import * as React from 'react';
+import {
+  usePopover,
+  type UsePopoverOptions,
+  type UsePopoverReturn,
+} from './usePopover';
 
-interface PopoverContextValue {}
+export type PopoverContextValue = UsePopoverReturn;
 
 const PopoverContext = React.createContext<PopoverContextValue | null>(null);
 export const usePopoverContext = () => {
@@ -12,10 +17,10 @@ export const usePopoverContext = () => {
   return ctx;
 };
 
-export const PopoverProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
-  const value = React.useMemo<PopoverContextValue>(() => ({}), []);
+export const PopoverProvider: React.FC<
+  { children: React.ReactNode } & UsePopoverOptions
+> = ({ children, ...options }) => {
+  const value = usePopover(options);
   return (
     <PopoverContext.Provider value={value}>{children}</PopoverContext.Provider>
   );

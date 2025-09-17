@@ -1,8 +1,13 @@
 /** Context Provider for SideNavigation */
 'use client';
 import * as React from 'react';
+import {
+  useSideNavigation,
+  type UseSideNavigationOptions,
+  type UseSideNavigationReturn,
+} from './useSideNavigation';
 
-interface SideNavigationContextValue {}
+export type SideNavigationContextValue = UseSideNavigationReturn;
 
 const SideNavigationContext =
   React.createContext<SideNavigationContextValue | null>(null);
@@ -15,10 +20,10 @@ export const useSideNavigationContext = () => {
   return ctx;
 };
 
-export const SideNavigationProvider: React.FC<{
-  children: React.ReactNode;
-}> = ({ children }) => {
-  const value = React.useMemo<SideNavigationContextValue>(() => ({}), []);
+export const SideNavigationProvider: React.FC<
+  { children: React.ReactNode } & UseSideNavigationOptions
+> = ({ children, ...options }) => {
+  const value = useSideNavigation(options);
   return (
     <SideNavigationContext.Provider value={value}>
       {children}
