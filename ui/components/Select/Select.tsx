@@ -1,308 +1,151 @@
 /**
- * Select - Unified select component supporting native and combobox modes
- * Consolidates Select and Combobox components
+ * Select Composer - Provider-based orchestration with slots
+ *
+ * Layer: Composer
+ * Meta-patterns: Context provider, slotting & substitution, headless logic
+ *
+ * Before: 6 boolean props (multiselect, searchable, clearable, loading, disabled, required)
+ * After: Provider pattern with context orchestration and slots
  */
-import { useState, useEffect, useRef, ChangeEvent, useMemo } from 'react';
-import * as React from 'react';
-import { Option, ControlSize } from '@/types/ui';
+'use client';
+import React, { useCallback, useRef, useEffect } from 'react';
+import { useSelectContext } from './SelectProvider';
+import { ControlSize } from '@/types/ui';
 import styles from './Select.module.scss';
 
-export type SelectMode = 'native' | 'combobox';
-
-export interface SelectProps {
-  /**
-   * Available options
-   */
-  options: Option[];
-  /**
-   * Select mode - native HTML select or custom combobox
-   */
-  mode?: SelectMode;
-  /**
-   * Allow multiple selections (native mode only)
-   */
-  multiselect?: boolean;
-  /**
-   * Change handler
-   */
-  onChange: (selected: Option[] | Option | null) => void;
-  /**
-   * Current value(s)
-   */
-  value?: string | string[];
-  /**
-   * Placeholder text
-   */
+// Trigger component - what the user clicks to open the select
+export interface SelectTriggerProps {
+  /** Placeholder text when no selection */
   placeholder?: string;
-  /**
-   * Whether the select is disabled
-   */
-  disabled?: boolean;
-  /**
-   * Additional CSS classes
-   */
+  /** Additional CSS classes */
   className?: string;
-  /**
-   * Form name attribute
-   */
+  /** Size variant */
+  size?: ControlSize;
+  /** Show clear button when selection exists */
+  clearable?: boolean;
+  /** Loading state */
+  loading?: boolean;
+  /** Form attributes */
   name?: string;
-  /**
-   * Native select id; used to associate external <label htmlFor>
-   */
-  id?: string;
-  /**
-   * Required state for native select
-   */
   required?: boolean;
-  /**
-   * Blur handler (native select)
-   */
-  onBlur?: React.FocusEventHandler<HTMLSelectElement>;
-  /** a11y associations forwarded from Field */
+  /** Blur handler */
+  onBlur?: React.FocusEventHandler<HTMLElement>;
+  /** ARIA attributes */
   'aria-labelledby'?: string;
   'aria-describedby'?: string;
   'aria-errormessage'?: string;
   'aria-invalid'?: boolean;
-  /**
-   * Enable search/filtering (combobox mode only)
-   */
-  searchable?: boolean;
-  /**
-   * Allow clearing selection
-   */
-  clearable?: boolean;
-  /**
-   * Loading state
-   */
-  loading?: boolean;
-  /**
-   * Size using design tokens
-   */
-  size?: ControlSize;
 }
 
-const Select = ({
-  options,
-  mode = 'native',
-  multiselect = false,
-  onChange,
-  value,
-  placeholder = 'Choose an option',
-  disabled = false,
-  className = '',
-  name = '',
-  id,
-  required,
-  onBlur,
-  'aria-labelledby': ariaLabelledby,
-  'aria-describedby': ariaDescribedby,
-  'aria-errormessage': ariaErrormessage,
-  'aria-invalid': ariaInvalid,
-  searchable = false,
-  clearable = false,
-  loading = false,
-  size = 'md',
-}: SelectProps) => {
-  const [selected, setSelected] = useState<Option[]>([]);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [isOpen, setIsOpen] = useState(false);
-  const [activeIndex, setActiveIndex] = useState<number>(-1);
-  const selectRef = useRef<HTMLSelectElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const listboxRef = useRef<HTMLUListElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
+export const SelectTrigger = React.forwardRef<
+  HTMLButtonElement,
+  SelectTriggerProps
+>((props, ref) => {
+  const {
+    placeholder = 'Select an option...',
+    className = '',
+    size = 'md',
+    clearable = false,
+    loading = false,
+    onBlur,
+    ...ariaProps
+  } = props;
 
-  const filteredOptions = useMemo(() => {
-    if (mode === 'native' || !searchable) return options;
-    return options.filter((option) =>
-      option.title.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  }, [options, searchTerm, mode, searchable]);
+  const {
+    isOpen,
+    selectedOptions,
+    selectedOption,
+    isEmpty,
+    toggle,
+    clearSelection,
+    id,
+    ariaAttributes,
+    triggerRef,
+  } = useSelectContext();
 
-  const selectedOption = useMemo(
-    () => options.find((o) => o.id === value) || null,
-    [options, value]
+  // Combine refs
+  const combinedRef = useCallback(
+    (node: HTMLButtonElement) => {
+      if (triggerRef) {
+        (triggerRef as React.MutableRefObject<HTMLButtonElement>).current =
+          node;
+      }
+      if (ref) {
+        if (typeof ref === 'function') {
+          ref(node);
+        } else {
+          ref.current = node;
+        }
+      }
+    },
+    [triggerRef, ref]
   );
 
-  useEffect(() => {
-    if (value && options.length > 0) {
-      if (multiselect && Array.isArray(value)) {
-        const selectedOptions = options.filter((option) =>
-          value.includes(option.id)
-        );
-        setSelected(selectedOptions);
-      } else if (!multiselect && typeof value === 'string') {
-        const selectedOption = options.find((option) => option.id === value);
-        if (selectedOption) {
-          setSelected([selectedOption]);
-        }
-      }
-    } else if (!value) {
-      setSelected([]);
-    }
-  }, [value, options, multiselect]);
-
-  const handleNativeSelect = (e: ChangeEvent<HTMLSelectElement>) => {
-    const { target } = e;
-    const selectedOptions: Option[] = [];
-
-    if (multiselect) {
-      for (let i = 0; i < target.options.length; i++) {
-        if (target.options[i].selected) {
-          const option = options.find(
-            (opt) => opt.id === target.options[i].value
-          );
-          if (option) selectedOptions.push(option);
-        }
-      }
-    } else {
-      const selectedOption = options.find((opt) => opt.id === target.value);
-      if (selectedOption) {
-        selectedOptions.push(selectedOption);
-      }
-    }
-
-    setSelected(selectedOptions);
-    onChange(multiselect ? selectedOptions : selectedOptions[0] || null);
-  };
-
-  const handleComboboxSelect = (option: Option) => {
-    setSelected([option]);
-    onChange(option);
-    setIsOpen(false);
-    setSearchTerm('');
-    setActiveIndex(-1);
-  };
-
-  const handleClear = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    const clearedOptions: Option[] = [];
-    setSelected(clearedOptions);
-    onChange(multiselect ? clearedOptions : null);
-    setSearchTerm('');
-
-    if (selectRef.current) {
-      selectRef.current.value = '';
-    }
-  };
-
-  const selectId = id ?? `select-${Math.random().toString(36).substr(2, 9)}`;
-  const sizeClass = styles[`select--${size}`] || styles['select--md'];
-
-  // Native select mode
-  if (mode === 'native') {
-    return (
-      <div
-        ref={containerRef}
-        className={`${styles.selectContainer} ${className} ${disabled ? styles.disabled : ''} ${sizeClass}`}
-      >
-        {searchable && (
-          <input
-            type="text"
-            className={styles.searchInput}
-            placeholder="Search..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            disabled={disabled}
-            aria-label="Search options"
-          />
-        )}
-
-        <select
-          id={selectId}
-          ref={selectRef}
-          onChange={handleNativeSelect}
-          onBlur={onBlur}
-          multiple={multiselect}
-          disabled={disabled || loading}
-          className={`${styles.select} ${sizeClass}`}
-          name={name}
-          required={required}
-          value={
-            multiselect ? selected.map((opt) => opt.id) : selected[0]?.id || ''
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      switch (e.key) {
+        case 'Enter':
+        case ' ':
+          e.preventDefault();
+          toggle();
+          break;
+        case 'ArrowDown':
+        case 'ArrowUp':
+          e.preventDefault();
+          if (!isOpen) {
+            toggle();
           }
-          aria-disabled={disabled || loading || undefined}
-          aria-busy={loading || undefined}
-          aria-labelledby={ariaLabelledby}
-          aria-describedby={ariaDescribedby}
-          aria-errormessage={ariaErrormessage}
-          aria-invalid={ariaInvalid || undefined}
-        >
-          {!multiselect && !value && !loading && (
-            <option value="" disabled hidden>
-              {placeholder}
-            </option>
-          )}
-          {loading ? (
-            <option value="" disabled>
-              Loading...
-            </option>
-          ) : (
-            (() => {
-              const hasGroups = filteredOptions.some((o) => o.group);
-              if (!hasGroups) {
-                return filteredOptions.map((selectOption) => (
-                  <option
-                    key={selectOption.id}
-                    value={selectOption.id}
-                    disabled={selectOption.disabled}
-                  >
-                    {selectOption.title}
-                  </option>
-                ));
-              }
-              const groups = filteredOptions.reduce<Record<string, Option[]>>(
-                (acc, opt) => {
-                  const groupKey = opt.group || 'Ungrouped';
-                  if (!acc[groupKey]) acc[groupKey] = [];
-                  acc[groupKey].push(opt);
-                  return acc;
-                },
-                {}
-              );
-              return Object.entries(groups).map(
-                ([groupLabel, groupOptions]) => (
-                  <optgroup key={groupLabel} label={groupLabel}>
-                    {groupOptions.map((selectOption) => (
-                      <option
-                        key={selectOption.id}
-                        value={selectOption.id}
-                        disabled={selectOption.disabled}
-                      >
-                        {selectOption.title}
-                      </option>
-                    ))}
-                  </optgroup>
-                )
-              );
-            })()
-          )}
-        </select>
+          break;
+        case 'Escape':
+          if (isOpen) {
+            e.preventDefault();
+            toggle();
+          }
+          break;
+      }
+    },
+    [isOpen, toggle]
+  );
 
-        <div className={styles.selectIndicator} aria-hidden="true">
-          <svg
-            className={styles.indicatorIcon}
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-          >
-            <path
-              d="M7 10L12 15L17 10"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </div>
+  const handleClear = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      clearSelection();
+    },
+    [clearSelection]
+  );
 
-        {clearable && selected.length > 0 && !multiselect && (
+  const displayText = isEmpty
+    ? placeholder
+    : selectedOptions.map((option) => option.title).join(', ');
+
+  const sizeClass = styles[`trigger--${size}`] || styles['trigger--md'];
+
+  return (
+    <button
+      ref={combinedRef}
+      type="button"
+      className={`${styles.trigger} ${sizeClass} ${className}`}
+      onClick={toggle}
+      onKeyDown={handleKeyDown}
+      onBlur={onBlur}
+      data-state={isOpen ? 'open' : 'closed'}
+      data-loading={loading || undefined}
+      {...ariaAttributes}
+      {...ariaProps}
+    >
+      <span className={styles.triggerText}>
+        {loading ? 'Loading...' : displayText}
+      </span>
+
+      <div className={styles.triggerIcons}>
+        {clearable && !isEmpty && !loading && (
           <button
             type="button"
             className={styles.clearButton}
             onClick={handleClear}
             aria-label="Clear selection"
+            tabIndex={-1}
           >
             <svg
               className={styles.clearIcon}
@@ -320,81 +163,237 @@ const Select = ({
             </svg>
           </button>
         )}
+
+        <svg
+          className={styles.chevronIcon}
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M7 10L12 15L17 10"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </div>
+    </button>
+  );
+});
+
+SelectTrigger.displayName = 'Select.Trigger';
+
+// Content component - the dropdown content container
+export interface SelectContentProps {
+  children: React.ReactNode;
+  className?: string;
+  /** Maximum height before scrolling */
+  maxHeight?: string;
+  /** Positioning strategy */
+  position?: 'bottom' | 'top' | 'auto';
+}
+
+export const SelectContent = React.forwardRef<
+  HTMLDivElement,
+  SelectContentProps
+>(
+  (
+    { children, className = '', maxHeight = '200px', position = 'bottom' },
+    ref
+  ) => {
+    const { isOpen, close, listboxRef } = useSelectContext();
+
+    // Combine refs
+    const combinedRef = useCallback(
+      (node: HTMLDivElement) => {
+        if (listboxRef) {
+          (listboxRef as React.MutableRefObject<HTMLDivElement>).current = node;
+        }
+        if (ref) {
+          if (typeof ref === 'function') {
+            ref(node);
+          } else {
+            ref.current = node;
+          }
+        }
+      },
+      [listboxRef, ref]
+    );
+
+    // Close on outside click
+    useEffect(() => {
+      if (!isOpen) return;
+
+      const handleClickOutside = (event: MouseEvent) => {
+        const target = event.target as Node;
+        const content = listboxRef?.current;
+        const trigger = (listboxRef as any)?.current
+          ?.closest('[data-select-root]')
+          ?.querySelector('[role="combobox"]');
+
+        if (
+          content &&
+          !content.contains(target) &&
+          trigger &&
+          !trigger.contains(target)
+        ) {
+          close();
+        }
+      };
+
+      document.addEventListener('mousedown', handleClickOutside);
+      return () =>
+        document.removeEventListener('mousedown', handleClickOutside);
+    }, [isOpen, close, listboxRef]);
+
+    if (!isOpen) return null;
+
+    return (
+      <div
+        ref={combinedRef}
+        className={`${styles.content} ${className}`}
+        data-position={position}
+        style={{ maxHeight }}
+        role="listbox"
+      >
+        {children}
       </div>
     );
   }
+);
 
-  // Combobox mode - simplified implementation
+SelectContent.displayName = 'Select.Content';
+
+// Search component - for filtering options
+export interface SelectSearchProps {
+  placeholder?: string;
+  className?: string;
+}
+
+export const SelectSearch: React.FC<SelectSearchProps> = ({
+  placeholder = 'Search...',
+  className = '',
+}) => {
+  const { searchTerm, setSearchTerm } = useSelectContext();
+
   return (
-    <div
-      ref={containerRef}
-      className={`${styles.comboboxContainer} ${className} ${disabled ? styles.disabled : ''} ${sizeClass}`}
-    >
+    <div className={`${styles.searchContainer} ${className}`}>
       <input
-        ref={inputRef}
         type="text"
-        className={`${styles.comboboxInput} ${sizeClass}`}
-        placeholder={selectedOption ? selectedOption.title : placeholder}
+        className={styles.searchInput}
+        placeholder={placeholder}
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        onFocus={() => setIsOpen(true)}
-        onBlur={() => setTimeout(() => setIsOpen(false), 150)}
-        disabled={disabled || loading}
-        aria-expanded={isOpen}
-        aria-haspopup="listbox"
-        role="combobox"
+        aria-label="Search options"
       />
-
-      {isOpen && (
-        <ul ref={listboxRef} className={styles.comboboxList} role="listbox">
-          {filteredOptions.length === 0 ? (
-            <li className={styles.comboboxOption} role="option">
-              No options found
-            </li>
-          ) : (
-            filteredOptions.map((option, index) => (
-              <li
-                key={option.id}
-                className={`${styles.comboboxOption} ${
-                  index === activeIndex ? styles.active : ''
-                } ${option.disabled ? styles.disabled : ''}`}
-                role="option"
-                aria-selected={selectedOption?.id === option.id}
-                onClick={() => !option.disabled && handleComboboxSelect(option)}
-              >
-                {option.title}
-              </li>
-            ))
-          )}
-        </ul>
-      )}
-
-      {clearable && selectedOption && (
-        <button
-          type="button"
-          className={styles.clearButton}
-          onClick={handleClear}
-          aria-label="Clear selection"
-        >
-          <svg
-            className={styles.clearIcon}
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-          >
-            <path
-              d="M18 6L6 18M6 6L18 18"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-          </svg>
-        </button>
-      )}
     </div>
   );
 };
 
-export { Select };
+SelectSearch.displayName = 'Select.Search';
+
+// Options component - renders the list of options
+export interface SelectOptionsProps {
+  className?: string;
+  /** Custom empty state */
+  emptyState?: React.ReactNode;
+}
+
+export const SelectOptions: React.FC<SelectOptionsProps> = ({
+  className = '',
+  emptyState = 'No options found',
+}) => {
+  const {
+    filteredOptions,
+    selectedOptions,
+    activeIndex,
+    selectOption,
+    setActiveIndex,
+  } = useSelectContext();
+
+  const handleMouseEnter = useCallback(
+    (index: number) => {
+      setActiveIndex(index);
+    },
+    [setActiveIndex]
+  );
+
+  const handleClick = useCallback(
+    (option: any) => {
+      selectOption(option);
+    },
+    [selectOption]
+  );
+
+  if (filteredOptions.length === 0) {
+    return (
+      <div className={`${styles.emptyState} ${className}`}>{emptyState}</div>
+    );
+  }
+
+  return (
+    <div className={`${styles.options} ${className}`}>
+      {filteredOptions.map((option, index) => {
+        const isSelected = selectedOptions.some(
+          (selected) => selected.id === option.id
+        );
+        const isActive = index === activeIndex;
+
+        return (
+          <div
+            key={option.id}
+            className={`${styles.option} ${isSelected ? styles.selected : ''} ${isActive ? styles.active : ''}`}
+            role="option"
+            aria-selected={isSelected}
+            data-disabled={option.disabled || undefined}
+            onMouseEnter={() => handleMouseEnter(index)}
+            onClick={() => !option.disabled && handleClick(option)}
+          >
+            <span className={styles.optionText}>{option.title}</span>
+            {isSelected && (
+              <svg
+                className={styles.checkIcon}
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  d="M20 6L9 17L4 12"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+SelectOptions.displayName = 'Select.Options';
+
+// Main Select component (for backward compatibility)
+export interface SelectProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+export const Select: React.FC<SelectProps> = ({ children, className = '' }) => {
+  return (
+    <div className={`${styles.root} ${className}`} data-select-root>
+      {children}
+    </div>
+  );
+};
+
+Select.displayName = 'Select';
+
 export default Select;

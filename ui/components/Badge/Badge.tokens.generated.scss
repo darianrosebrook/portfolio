@@ -4,20 +4,36 @@
 @mixin vars {
   /* === Color Tokens === */
   --badge-color-background-default: var(--semantic-color-background-secondary);
-  --badge-color-background-info: var(--semantic-color-background-infoSubtle);
-  --badge-color-background-success: var(--semantic-color-background-successSubtle);
-  --badge-color-background-warning: var(--semantic-color-background-warningSubtle);
-  --badge-color-background-danger: var(--semantic-color-background-dangerSubtle);
+  --badge-color-background-info: var(--semantic-color-background-info-subtle);
+  --badge-color-background-success: var(
+    --semantic-color-background-success-subtle
+  );
+  --badge-color-background-warning: var(
+    --semantic-color-background-warning-subtle
+  );
+  --badge-color-background-danger: var(
+    --semantic-color-background-danger-subtle
+  );
   --badge-color-background-counter: var(--semantic-color-background-accent);
   --badge-color-background-tag: var(--semantic-color-background-tertiary);
   --badge-color-foreground-primary: var(--semantic-color-foreground-primary);
-  --badge-color-foreground-secondary: var(--semantic-color-foreground-secondary);
-  --badge-color-foreground-info: var(--semantic-color-foreground-onInfoSubtle);
-  --badge-color-foreground-success: var(--semantic-color-foreground-onSuccessSubtle);
-  --badge-color-foreground-warning: var(--semantic-color-foreground-onWarningSubtle);
-  --badge-color-foreground-danger: var(--semantic-color-foreground-onDangerSubtle);
+  --badge-color-foreground-secondary: var(
+    --semantic-color-foreground-secondary
+  );
+  --badge-color-foreground-info: var(
+    --semantic-color-foreground-on-info-subtle
+  );
+  --badge-color-foreground-success: var(
+    --semantic-color-foreground-on-success-subtle
+  );
+  --badge-color-foreground-warning: var(
+    --semantic-color-foreground-on-warning-subtle
+  );
+  --badge-color-foreground-danger: var(
+    --semantic-color-foreground-on-danger-subtle
+  );
   --badge-color-foreground-accent: var(--semantic-color-foreground-accent);
-  --badge-color-foreground-onColor: var(--semantic-color-foreground-onColor);
+  --badge-color-foreground-onColor: var(--semantic-color-foreground-on-color);
   --badge-color-border-default: var(--semantic-color-border-light);
   --badge-color-border-accent: var(--semantic-color-border-accent);
   --badge-color-border-info: var(--semantic-color-border-info);
@@ -33,12 +49,12 @@
   --badge-size-sm-iconSize: var(--core-icon-size-sm);
   --badge-size-md-paddingY: var(--core-spacing-size-03);
   --badge-size-md-paddingX: var(--core-spacing-size-04);
-  --badge-size-md-fontSize: var(--semantic-typography-body-small-fontSize);
+  --badge-size-md-fontSize: var(--semantic-typography-body-small-font-size);
   --badge-size-md-radius: var(--semantic-shape-radius-default);
   --badge-size-md-iconSize: var(--core-icon-size-md);
   --badge-size-lg-paddingY: var(--core-spacing-size-04);
   --badge-size-lg-paddingX: var(--core-spacing-size-05);
-  --badge-size-lg-fontSize: var(--semantic-typography-body-default-fontSize);
+  --badge-size-lg-fontSize: var(--semantic-typography-body-default-font-size);
   --badge-size-lg-radius: var(--semantic-shape-radius-medium);
   --badge-size-lg-iconSize: var(--core-icon-size-lg);
 

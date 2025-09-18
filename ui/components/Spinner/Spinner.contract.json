@@ -1,32 +1,15 @@
 {
   "name": "Spinner",
   "layer": "primitive",
-  "anatomy": [
-    "root",
-    "inline",
-    "visual"
-  ],
+  "anatomy": ["root", "inline", "visual"],
   "variants": {
-    "size": [
-      "xs",
-      "sm",
-      "md",
-      "lg"
-    ]
+    "size": ["xs", "sm", "md", "lg"]
   },
-  "states": [
-    "default",
-    "hover",
-    "focus",
-    "active",
-    "disabled"
-  ],
+  "states": ["default", "hover", "focus", "active", "disabled"],
   "slots": {},
   "a11y": {
     "role": "generic",
-    "labeling": [
-      "aria-label"
-    ],
+    "labeling": ["aria-label"],
     "keyboard": [],
     "apgPattern": null
   },

@@ -1,0 +1,66 @@
+{
+  "$schema": "../../../ui/designTokens/designTokens.schema.json",
+  "prefix": "textfield",
+  "tokens": {
+    "spacing": {
+      "gap": "{core.spacing.size.04}",
+      "padding": {
+        "input": "{core.spacing.size.05}",
+        "label": "{core.spacing.size.02}"
+      }
+    },
+    "color": {
+      "label": {
+        "default": "{semantic.color.foreground.primary}",
+        "required": "{semantic.color.status.danger}",
+        "disabled": "{semantic.color.foreground.disabled}"
+      },
+      "input": {
+        "background": "{semantic.color.background.primary}",
+        "border": "{semantic.color.border.light}",
+        "borderHover": "{semantic.color.border.primary}",
+        "borderFocus": "{semantic.color.border.accent}",
+        "borderError": "{semantic.color.status.danger}",
+        "text": "{semantic.color.foreground.primary}",
+        "placeholder": "{semantic.color.foreground.tertiary}",
+        "disabled": "{semantic.color.background.disabled}"
+      },
+      "helper": {
+        "default": "{semantic.color.foreground.tertiary}",
+        "error": "{semantic.color.status.danger}"
+      }
+    },
+    "typography": {
+      "label": {
+        "fontSize": "{semantic.typography.body.04}",
+        "fontWeight": "{semantic.typography.fontWeight.medium}",
+        "lineHeight": "{semantic.typography.lineHeight.tight}"
+      },
+      "input": {
+        "fontSize": "{semantic.typography.body.01}",
+        "fontWeight": "{semantic.typography.fontWeight.regular}",
+        "lineHeight": "{semantic.typography.lineHeight.normal}"
+      },
+      "helper": {
+        "fontSize": "{semantic.typography.body.05}",
+        "fontWeight": "{semantic.typography.fontWeight.regular}",
+        "lineHeight": "{semantic.typography.lineHeight.tight}"
+      }
+    },
+    "border": {
+      "width": "{core.shape.border.width.hairline}",
+      "radius": "{semantic.shape.radius.medium}"
+    },
+    "focus": {
+      "ring": {
+        "width": "{core.shape.border.width.thick}",
+        "color": "{semantic.color.border.accent}",
+        "offset": "{core.spacing.size.02}"
+      }
+    },
+    "transition": {
+      "duration": "{core.motion.duration.short}",
+      "easing": "{core.motion.easing.standard}"
+    }
+  }
+}

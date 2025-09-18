@@ -8,19 +8,11 @@
     "progressCircleForeground"
   ],
   "variants": {},
-  "states": [
-    "default",
-    "hover",
-    "focus",
-    "active",
-    "disabled"
-  ],
+  "states": ["default", "hover", "focus", "active", "disabled"],
   "slots": {},
   "a11y": {
     "role": "generic",
-    "labeling": [
-      "aria-label"
-    ],
+    "labeling": ["aria-label"],
     "keyboard": [],
     "apgPattern": null
   },

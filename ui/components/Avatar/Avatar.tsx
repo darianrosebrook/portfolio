@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import styles from './Avatar.module.scss';
 
-type AvatarProps = {
+export type AvatarProps = {
   src?: string;
   name: string;
   size: 'small' | 'medium' | 'large' | 'extra-large';

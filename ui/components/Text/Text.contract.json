@@ -1,38 +1,15 @@
 {
   "name": "Text",
   "layer": "primitive",
-  "anatomy": [
-    "root",
-    "display",
-    "headline",
-    "title",
-    "body",
-    "caption"
-  ],
+  "anatomy": ["root", "display", "headline", "title", "body", "caption"],
   "variants": {
-    "size": [
-      "xs",
-      "sm",
-      "md",
-      "lg",
-      "xl",
-      "2xl",
-      "3xl"
-    ]
+    "size": ["xs", "sm", "md", "lg", "xl", "2xl", "3xl"]
   },
-  "states": [
-    "default",
-    "hover",
-    "focus",
-    "active",
-    "disabled"
-  ],
+  "states": ["default", "hover", "focus", "active", "disabled"],
   "slots": {},
   "a11y": {
     "role": "generic",
-    "labeling": [
-      "aria-label"
-    ],
+    "labeling": ["aria-label"],
     "keyboard": [],
     "apgPattern": null
   },

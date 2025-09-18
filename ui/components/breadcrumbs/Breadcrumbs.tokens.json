@@ -14,7 +14,8 @@
       },
       "border": {
         "subtle": "{semantic.color.border.subtle}"
-      }
+      },
+      "focus": "{semantic.color.border.accent}"
     },
     "typography": {
       "lineHeight": {
@@ -23,7 +24,8 @@
     },
     "shape": {
       "radius": {
-        "medium": "{semantic.shape.radius.medium}"
+        "medium": "{semantic.shape.radius.medium}",
+        "small": "{semantic.shape.radius.small}"
       }
     },
     "elevation": {

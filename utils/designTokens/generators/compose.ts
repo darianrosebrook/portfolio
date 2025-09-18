@@ -76,7 +76,7 @@ function createTokenPrefixer(): (path: string) => string {
       return tokenPath;
     }
 
-    // Determine if this is a semantic token
+    // Smart prefixing: semantic patterns go to semantic namespace, others to core
     const isSemanticToken = semanticPatterns.some((pattern) =>
       pattern.test(tokenPath)
     );
@@ -120,10 +120,10 @@ export function composeTokens(): boolean {
 
   // Merge into final structure
   const composed = deepMerge({}, coreNamespaced);
-  deepMerge(composed, semanticNamespaced);
+  const result = deepMerge(composed, semanticNamespaced);
 
   // Generate output
-  const content = JSON.stringify(composed, null, 2) + '\n';
+  const content = JSON.stringify(result, null, 2) + '\n';
 
   writeOutputFile(PATHS.tokens, content, 'composed design tokens');
 

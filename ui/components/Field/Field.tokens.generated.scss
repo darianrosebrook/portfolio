@@ -3,16 +3,16 @@
  */
 @mixin vars {
   /* === Gap Tokens === */
-  --field-gap-y: var(--semantic-form-density-regular-gapY);
+  --field-gap-y: var(--semantic-form-density-regular-gap-y);
   --field-gap-meta: var(--core-spacing-size-03);
 
   /* === Label Tokens === */
-  --field-label-fontSize: var(--semantic-form-density-regular-labelFontSize);
+  --field-label-fontSize: var(--semantic-form-density-regular-label-font-size);
   --field-label-color: var(--semantic-color-foreground-secondary);
 
   /* === Pad Tokens === */
-  --field-pad-x: var(--semantic-form-density-regular-padX);
-  --field-pad-y: var(--semantic-form-density-regular-padY);
+  --field-pad-x: var(--semantic-form-density-regular-pad-x);
+  --field-pad-y: var(--semantic-form-density-regular-pad-y);
 
   /* === Color Tokens === */
   --field-color-bg: var(--semantic-color-background-elevated);

@@ -14,7 +14,7 @@ import {
   drawGlyphBounds,
   drawMetricLine,
   drawPathDetails,
-} from '@/utils/drawing';
+} from '@/utils/geometry/drawing';
 
 export const SymbolCanvas: React.FC = () => {
   const {
@@ -156,15 +156,7 @@ export const SymbolCanvas: React.FC = () => {
         scale,
         colors,
         metrics,
-        selectedAnatomy,
-        fontInstance,
-        {
-          baseline: 0,
-          xHeight: fontInstance.xHeight,
-          capHeight: fontInstance.capHeight,
-          ascent: fontInstance.ascent,
-          descent: fontInstance.descent,
-        }
+        selectedAnatomy
       );
 
       ctx.restore();

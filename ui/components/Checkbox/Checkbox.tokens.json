@@ -1,0 +1,60 @@
+{
+  "$schema": "../../../ui/designTokens/designTokens.schema.json",
+  "prefix": "checkbox",
+  "tokens": {
+    "size": {
+      "sm": {
+        "width": "{size.4}",
+        "height": "{size.4}",
+        "iconSize": "{size.3}"
+      },
+      "md": {
+        "width": "{size.5}",
+        "height": "{size.5}",
+        "iconSize": "{size.4}"
+      },
+      "lg": {
+        "width": "{size.6}",
+        "height": "{size.6}",
+        "iconSize": "{size.5}"
+      }
+    },
+    "color": {
+      "background": {
+        "default": "{color.background.surface}",
+        "checked": "{color.brand.500}",
+        "indeterminate": "{color.brand.500}",
+        "disabled": "{color.background.disabled}"
+      },
+      "border": {
+        "default": "{color.border.default}",
+        "hover": "{color.border.hover}",
+        "focus": "{color.border.focus}",
+        "checked": "{color.brand.500}",
+        "disabled": "{color.border.disabled}"
+      },
+      "icon": {
+        "default": "{color.foreground.onBrand}",
+        "disabled": "{color.foreground.disabled}"
+      }
+    },
+    "border": {
+      "width": "{border.width.1}",
+      "radius": "{radius.sm}"
+    },
+    "spacing": {
+      "gap": "{space.200}"
+    },
+    "transition": {
+      "duration": "{core.motion.duration.short}",
+      "easing": "{core.motion.easing.standard}"
+    },
+    "focus": {
+      "ring": {
+        "width": "{focus.ring.width}",
+        "color": "{focus.ring.color}",
+        "offset": "{focus.ring.offset}"
+      }
+    }
+  }
+}

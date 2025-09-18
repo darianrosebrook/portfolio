@@ -1,27 +1,13 @@
 {
   "name": "Card",
   "layer": "primitive",
-  "anatomy": [
-    "root",
-    "default",
-    "elevated",
-    "outlined",
-    "clickable"
-  ],
+  "anatomy": ["root", "default", "elevated", "outlined", "clickable"],
   "variants": {},
-  "states": [
-    "default",
-    "hover",
-    "focus",
-    "active",
-    "disabled"
-  ],
+  "states": ["default", "hover", "focus", "active", "disabled"],
   "slots": {},
   "a11y": {
     "role": "generic",
-    "labeling": [
-      "aria-label"
-    ],
+    "labeling": ["aria-label"],
     "keyboard": [],
     "apgPattern": null
   },

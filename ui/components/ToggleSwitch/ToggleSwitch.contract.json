@@ -1,32 +1,15 @@
 {
   "name": "ToggleSwitch",
   "layer": "primitive",
-  "anatomy": [
-    "root",
-    "toggleSwitch",
-    "input",
-    "checked"
-  ],
+  "anatomy": ["root", "toggleSwitch", "input", "checked"],
   "variants": {
-    "size": [
-      "small",
-      "medium",
-      "large"
-    ]
+    "size": ["small", "medium", "large"]
   },
-  "states": [
-    "default",
-    "hover",
-    "focus",
-    "active",
-    "disabled"
-  ],
+  "states": ["default", "hover", "focus", "active", "disabled"],
   "slots": {},
   "a11y": {
     "role": "generic",
-    "labeling": [
-      "aria-label"
-    ],
+    "labeling": ["aria-label"],
     "keyboard": [],
     "apgPattern": null
   },

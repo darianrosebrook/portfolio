@@ -1,28 +1,13 @@
 {
   "name": "Toast",
   "layer": "compound",
-  "anatomy": [
-    "root",
-    "viewport",
-    "item",
-    "entering",
-    "leaving",
-    "row"
-  ],
+  "anatomy": ["root", "viewport", "item", "entering", "leaving", "row"],
   "variants": {},
-  "states": [
-    "default",
-    "hover",
-    "focus",
-    "active",
-    "disabled"
-  ],
+  "states": ["default", "hover", "focus", "active", "disabled"],
   "slots": {},
   "a11y": {
     "role": "status",
-    "labeling": [
-      "aria-label"
-    ],
+    "labeling": ["aria-label"],
     "keyboard": [
       {
         "key": "Escape",

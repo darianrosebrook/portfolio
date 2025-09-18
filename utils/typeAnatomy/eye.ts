@@ -6,7 +6,12 @@
  *   - hasEye
  */
 import type { Glyph } from 'fontkit';
-import { rayHits, getOvershoot, shapeForV2, isDrawable } from '@/utils/geometry/geometryCore';
+import {
+  rayHits,
+  getOvershoot,
+  shapeForV2,
+  isDrawable,
+} from '@/utils/geometry/geometryCore';
 import type { Metrics } from './index';
 import { FeatureDetectionConfig } from './featureConfig';
 
@@ -30,10 +35,10 @@ export function hasEye(g: Glyph, m: Metrics): boolean {
   // Cast rays in multiple directions to detect the characteristic open aperture
   // An eye has an opening to the right (for Latin e) and enclosure elsewhere
   const rays = [
-    { angle: 0, desc: 'right' },     // 0° = right
-    { angle: Math.PI/2, desc: 'up' }, // 90° = up
+    { angle: 0, desc: 'right' }, // 0° = right
+    { angle: Math.PI / 2, desc: 'up' }, // 90° = up
     { angle: Math.PI, desc: 'left' }, // 180° = left
-    { angle: -Math.PI/2, desc: 'down' } // 270° = down
+    { angle: -Math.PI / 2, desc: 'down' }, // 270° = down
   ];
 
   let openSides = 0;
@@ -122,7 +127,7 @@ function isInside(g: Glyph, pt: { x: number; y: number }): boolean {
  */
 function windingNumber(gs: SvgShape, probe: SvgShape): number {
   const result = safeIntersect(gs, probe) as {
-    points: ({ segment1?: number })[];
+    points: { segment1?: number }[];
   };
   let wn = 0;
   for (const p of result.points) {
@@ -137,7 +142,10 @@ function windingNumber(gs: SvgShape, probe: SvgShape): number {
  * @param b - Second SvgShape
  * @returns intersection result
  */
-function safeIntersect(a: SvgShape, b: SvgShape): { points: { x: number; y: number }[] } {
+function safeIntersect(
+  a: SvgShape,
+  b: SvgShape
+): { points: { x: number; y: number }[] } {
   try {
     const result = intersect(a, b) as { points: { x: number; y: number }[] };
     return result || { points: [] };
@@ -145,7 +153,6 @@ function safeIntersect(a: SvgShape, b: SvgShape): { points: { x: number; y: numb
     return { points: [] };
   }
 }
-
 
 // Import svg-intersections types
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment

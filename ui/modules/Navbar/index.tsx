@@ -148,12 +148,17 @@ export default function Navbar({ pages = [] }: NavbarProps) {
                     <ToggleSwitch
                       checked={prefersReducedMotion}
                       onChange={handlePrefersReducedMotion}
+                      size="lg"
                     >
                       Reduce motion
                     </ToggleSwitch>
                   </li>
                   <li>
-                    <ToggleSwitch checked={slider} onChange={handleTheme}>
+                    <ToggleSwitch
+                      checked={slider}
+                      onChange={handleTheme}
+                      size="lg"
+                    >
                       Use {theme} theme
                     </ToggleSwitch>
                   </li>
@@ -164,6 +169,7 @@ export default function Navbar({ pages = [] }: NavbarProps) {
                         onChange={(e) =>
                           togglePerformanceMonitor(e.target.checked)
                         }
+                        size="lg"
                       >
                         <Icon icon={faChartLine} />
                         Performance monitor

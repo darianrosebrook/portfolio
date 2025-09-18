@@ -18,7 +18,7 @@
     "tokens:compose": "tsx utils/designTokens/generators/compose.ts",
     "tokens:global": "tsx utils/designTokens/generators/global.ts",
     "tokens:types": "tsx utils/designTokens/generators/types.ts",
-    "tokens:scss": "node utils/generateCSSTokens.mjs",
+    "tokens:scss": "node utils/designTokens/generateCSSTokens.mjs",
     "tokens:schema": "node utils/designTokens/generateSchema.mjs",
     "tokens:validate": "node utils/designTokens/validateTokens.mjs",
     "tokens:inspect": "node utils/designTokens/inspectTokens.mjs",

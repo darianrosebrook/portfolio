@@ -10,7 +10,7 @@
 import type { Glyph } from 'fontkit';
 import type { point2d } from '@/utils/geometry/geometry';
 import { Logger } from '@/utils/helpers/logger';
-import { getOvershoot, shapeForV2 } from '@/utils/caching';
+import { getOvershoot, shapeForV2 } from '@/utils/caching/caching';
 import { isInside, rayHits } from '@/utils/geometry/geometryCore';
 import type { Metrics } from './index';
 import { FeatureDetectionConfig } from './featureConfig';

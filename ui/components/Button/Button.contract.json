@@ -1,29 +1,13 @@
 {
   "name": "Button",
   "layer": "primitive",
-  "anatomy": [
-    "root",
-    "isLoading",
-    "spinner",
-    "loadingText",
-    "small",
-    "medium"
-  ],
+  "anatomy": ["root", "isLoading", "spinner", "loadingText", "small", "medium"],
   "variants": {},
-  "states": [
-    "default",
-    "hover",
-    "focus",
-    "active",
-    "disabled"
-  ],
+  "states": ["default", "hover", "focus", "active", "disabled"],
   "slots": {},
   "a11y": {
     "role": "button",
-    "labeling": [
-      "aria-label",
-      "aria-labelledby"
-    ],
+    "labeling": ["aria-label", "aria-labelledby"],
     "keyboard": [
       {
         "key": "Enter|Space",

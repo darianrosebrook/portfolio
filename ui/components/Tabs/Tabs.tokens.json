@@ -11,7 +11,15 @@
       "active-fg": "{semantic.color.foreground.primary}",
       "active-bg": "{semantic.color.background.surface}",
       "disabled-fg": "{semantic.color.foreground.disabled}",
-      "indicator": "{semantic.color.accent.info}"
+      "indicator": "{semantic.color.accent.info}",
+      "focus": "{semantic.color.border.accent}",
+      "hover": {
+        "bg": "{semantic.color.background.hover}",
+        "fg": "{semantic.color.foreground.primary}"
+      }
+    },
+    "shape": {
+      "radius": "{semantic.shape.radius.default}"
     },
     "motion": {
       "indicator": "{semantic.motion.duration.fast}"

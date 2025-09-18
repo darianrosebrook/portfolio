@@ -1,25 +1,13 @@
 {
   "name": "Divider",
   "layer": "primitive",
-  "anatomy": [
-    "root",
-    "horizontal",
-    "vertical"
-  ],
+  "anatomy": ["root", "horizontal", "vertical"],
   "variants": {},
-  "states": [
-    "default",
-    "hover",
-    "focus",
-    "active",
-    "disabled"
-  ],
+  "states": ["default", "hover", "focus", "active", "disabled"],
   "slots": {},
   "a11y": {
     "role": "generic",
-    "labeling": [
-      "aria-label"
-    ],
+    "labeling": ["aria-label"],
     "keyboard": [],
     "apgPattern": null
   },

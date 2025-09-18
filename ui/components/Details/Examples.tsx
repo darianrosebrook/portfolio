@@ -4,11 +4,7 @@
  */
 
 import React from 'react';
-import Details, {
-  DetailsInline,
-  DetailsCompact,
-  DetailsGroup,
-} from './Details.refactored';
+import Details from './Details';
 
 export function DetailsExamples() {
   return (
@@ -39,26 +35,26 @@ export function DetailsExamples() {
       </Details>
 
       <h3>2. Composition Components</h3>
-      <DetailsInline summary="Inline variant">
-        <span>Specialized component instead of inline={`{true}`}</span>
-      </DetailsInline>
+      <Details summary="Inline variant">
+        <span>Specialized component instead of inline prop</span>
+      </Details>
 
-      <DetailsCompact summary="Compact variant">
+      <Details summary="Compact variant">
         <p>Pre-configured for common patterns</p>
-      </DetailsCompact>
+      </Details>
 
       <h3>3. Group Coordination</h3>
-      <DetailsGroup allowMultiple={false}>
+      <div>
         <Details summary="Section 1">
-          <p>Only one can be open at a time</p>
+          <p>Each Details manages its own state</p>
         </Details>
         <Details summary="Section 2">
-          <p>Group manages state coordination</p>
+          <p>Simple and predictable behavior</p>
         </Details>
         <Details summary="Section 3">
-          <p>No need for multipleOpen prop on each item</p>
+          <p>No complex group coordination needed</p>
         </Details>
-      </DetailsGroup>
+      </div>
 
       <h3>4. API Comparison</h3>
       <div

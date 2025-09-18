@@ -6,7 +6,7 @@
  *   - hasStem
  */
 import type { Glyph, Font } from 'fontkit';
-import { getOvershoot, shapeForV2 } from '@/utils/caching';
+import { getOvershoot, shapeForV2 } from '@/utils/caching/caching';
 import { rayHits } from '@/utils/geometry/geometryCore';
 import type { Metrics } from './index';
 import { FeatureDetectionConfig } from './featureConfig';

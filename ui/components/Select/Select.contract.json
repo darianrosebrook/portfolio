@@ -10,20 +10,11 @@
     "clearIcon"
   ],
   "variants": {},
-  "states": [
-    "default",
-    "hover",
-    "focus",
-    "active",
-    "disabled"
-  ],
+  "states": ["default", "hover", "focus", "active", "disabled"],
   "slots": {},
   "a11y": {
     "role": "group",
-    "labeling": [
-      "aria-label",
-      "aria-labelledby"
-    ],
+    "labeling": ["aria-label", "aria-labelledby"],
     "keyboard": [],
     "apgPattern": null
   },

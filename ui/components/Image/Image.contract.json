@@ -1,37 +1,15 @@
 {
   "name": "Image",
   "layer": "primitive",
-  "anatomy": [
-    "root",
-    "container",
-    "xs",
-    "sm",
-    "md",
-    "lg"
-  ],
+  "anatomy": ["root", "container", "xs", "sm", "md", "lg"],
   "variants": {
-    "size": [
-      "xs",
-      "sm",
-      "md",
-      "lg",
-      "xl",
-      "full"
-    ]
+    "size": ["xs", "sm", "md", "lg", "xl", "full"]
   },
-  "states": [
-    "default",
-    "hover",
-    "focus",
-    "active",
-    "disabled"
-  ],
+  "states": ["default", "hover", "focus", "active", "disabled"],
   "slots": {},
   "a11y": {
     "role": "generic",
-    "labeling": [
-      "aria-label"
-    ],
+    "labeling": ["aria-label"],
     "keyboard": [],
     "apgPattern": null
   },

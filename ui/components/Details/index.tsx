@@ -1,38 +1,28 @@
 /**
- * Details component exports
+ * Details Composer - Provider-based orchestration exports
+ *
+ * Layer: Composer
+ * Meta-patterns: Context provider, slotting & substitution, headless logic
  *
  * @author @darianrosebrook
  */
 
-export { default as Details } from './Details';
+// Main composer components
+export {
+  Details as default,
+  Details,
+  DetailsInline,
+  DetailsCompact,
+} from './Details';
 export type { DetailsProps } from './Details';
 
-// Re-export as default for convenience
-export { default } from './Details';
+// Provider for group orchestration
+export { DetailsProvider } from './DetailsProvider';
+export type {
+  DetailsProviderProps,
+  DetailsContextValue,
+} from './DetailsProvider';
 
-// Group utility to coordinate multiple Details
-import * as React from 'react';
-import DetailsComp from './Details';
-
-export const DetailsGroup = ({
-  children,
-  multipleOpen = false,
-  className = '',
-}: {
-  children: React.ReactNode;
-  multipleOpen?: boolean;
-  className?: string;
-}) => {
-  return (
-    <div className={className}>
-      {React.Children.map(children, (child) => {
-        if (React.isValidElement(child) && child.type === DetailsComp) {
-          return React.cloneElement(child, {
-            multipleOpen,
-          } as React.ComponentProps<typeof DetailsComp>);
-        }
-        return child;
-      })}
-    </div>
-  );
-};
+// Headless logic hook
+export { useDetails } from './useDetails';
+export type { UseDetailsOptions, UseDetailsReturn } from './useDetails';
