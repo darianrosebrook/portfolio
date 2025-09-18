@@ -3,214 +3,162 @@
 .switch {
   @include switchTokens.vars;
 
-  display: inline-flex;
-  align-items: flex-start;
-  cursor: pointer;
-  user-select: none;
-}
-
-.switch__input {
-  position: absolute;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  border: 0;
-  white-space: nowrap;
-}
-
-.switch__label {
-  display: inline-flex;
-  align-items: center;
-  font-weight: 500;
-  line-height: 1.2;
-  cursor: inherit;
-}
-
-.switch__track {
   position: relative;
   display: inline-flex;
-  flex-shrink: 0;
+  gap: 0.25rem;
+  align-content: center;
   align-items: center;
-  background: var(--switch-color-track-background-default);
-  border: 1px solid var(--switch-color-track-border-default);
+  max-height: 1.5rem;
+  border-radius: var(--switch-size-md-track-radius);
+  line-height: 1;
+
+  &:focus-within {
+    outline: 2px solid var(--switch-color-track-border-focus);
+    outline-offset: 2px;
+  }
+
+  .input {
+    all: unset;
+    display: inline-flex;
+    width: 3rem;
+    min-width: 3rem;
+    min-height: 1.5rem;
+    max-height: 1.5rem;
+    background-color: var(--switch-color-track-background-default);
+    border: 1px solid var(--switch-color-track-border-default);
+    border-radius: var(--switch-size-md-track-radius);
+    transition:
+      background-color var(--switch-motion-duration) var(--switch-motion-easing),
+      border-color var(--switch-motion-duration) var(--switch-motion-easing);
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--switch-color-track-background-hover);
+    }
+
+    &:focus {
+      background-color: var(--switch-color-track-background-focus);
+    }
+
+    &:disabled {
+      background-color: var(--switch-color-track-background-disabled);
+      cursor: not-allowed;
+    }
+
+    &:disabled + .label {
+      color: var(--switch-color-text-disabled);
+      cursor: not-allowed;
+    }
+  }
+
+  // Size variants
+  &.sm {
+    .input {
+      width: 2.5rem;
+      min-width: 2.5rem;
+      min-height: 1.25rem;
+      max-height: 1.25rem;
+    }
+
+    .label::before {
+      top: var(--switch-size-sm-gap);
+      left: var(--switch-size-sm-gap);
+      width: 0.875rem;
+      height: 0.875rem;
+    }
+
+    .label.checked::before {
+      left: calc(var(--switch-size-sm-gap) + var(--switch-size-sm-thumb-size));
+    }
+  }
+
+  &.lg {
+    .input {
+      width: 3.5rem;
+      min-width: 3.5rem;
+      min-height: 1.75rem;
+      max-height: 1.75rem;
+    }
+
+    .label::before {
+      top: var(--switch-size-lg-gap);
+      left: var(--switch-size-lg-gap);
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    .label.checked::before {
+      left: calc(var(--switch-size-lg-gap) + var(--switch-size-lg-thumb-size));
+    }
+  }
+}
+
+.label {
+  margin-left: 0.25rem;
+  cursor: pointer;
+}
+
+.label::before {
+  position: absolute;
+  top: var(--switch-size-md-gap);
+  left: var(--switch-size-md-gap);
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  background-color: var(--switch-color-thumb-background-default);
+  border: 1px solid var(--switch-color-thumb-border-default);
+  border-radius: var(--switch-size-md-track-radius);
   transition:
+    left var(--switch-motion-duration) var(--switch-motion-easing),
     background-color var(--switch-motion-duration) var(--switch-motion-easing),
     border-color var(--switch-motion-duration) var(--switch-motion-easing);
+  content: ' ';
 }
 
-.switch__thumb {
-  position: absolute;
-  background: var(--switch-color-thumb-background-default);
-  border-radius: 50%;
-  box-shadow: var(--switch-color-thumb-shadow);
-  transition:
-    transform var(--switch-motion-duration) var(--switch-motion-easing),
-    background-color var(--switch-motion-duration) var(--switch-motion-easing);
+.label.checked::before {
+  left: calc(var(--switch-size-md-gap) + var(--switch-size-md-thumb-size));
+  background-color: var(--switch-color-thumb-background-checked);
 }
 
-.switch__text {
-  color: var(--switch-color-text-default);
+.input.checked {
+  background-color: var(--switch-color-track-background-checked);
 }
 
-.switch__description {
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.description {
   position: absolute;
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
-  width: 1px;
-  height: 1px;
+  width: var(--switch-size-md-gap);
+  height: var(--switch-size-md-gap);
   margin: -1px;
   padding: 0;
-  border: 0;
+  border-width: var(--switch-size-md-gap);
   white-space: nowrap;
 }
 
-// Size variants
-.switch--sm {
-  .switch__track {
-    width: var(--switch-size-sm-track-width);
-    height: var(--switch-size-sm-track-height);
-    border-radius: var(--switch-size-sm-track-radius);
-  }
-
-  .switch__thumb {
-    left: var(--switch-size-sm-thumb-offset);
-    width: var(--switch-size-sm-thumb-size);
-    height: var(--switch-size-sm-thumb-size);
-    transform: translateX(0);
-  }
-
-  .switch__text {
-    margin-left: var(--switch-size-sm-gap);
-    font-size: var(--switch-size-sm-fontSize);
-  }
-}
-
-.switch--md {
-  .switch__track {
-    width: var(--switch-size-md-track-width);
-    height: var(--switch-size-md-track-height);
-    border-radius: var(--switch-size-md-track-radius);
-  }
-
-  .switch__thumb {
-    left: var(--switch-size-md-thumb-offset);
-    width: var(--switch-size-md-thumb-size);
-    height: var(--switch-size-md-thumb-size);
-    transform: translateX(0);
-  }
-
-  .switch__text {
-    margin-left: var(--switch-size-md-gap);
-    font-size: var(--switch-size-md-fontSize);
-  }
-}
-
-.switch--lg {
-  .switch__track {
-    width: var(--switch-size-lg-track-width);
-    height: var(--switch-size-lg-track-height);
-    border-radius: var(--switch-size-lg-track-radius);
-  }
-
-  .switch__thumb {
-    left: var(--switch-size-lg-thumb-offset);
-    width: var(--switch-size-lg-thumb-size);
-    height: var(--switch-size-lg-thumb-size);
-    transform: translateX(0);
-  }
-
-  .switch__text {
-    margin-left: var(--switch-size-lg-gap);
-    font-size: var(--switch-size-lg-fontSize);
-  }
-}
-
-// Switch Group
 .switchGroup {
-  display: flex;
-  gap: var(--core-spacing-size-04);
-
-  &--vertical {
-    flex-direction: column;
-  }
-
-  &--horizontal {
-    flex-flow: row wrap;
-  }
+  display: inline-flex;
+  gap: var(--switch-size-md-gap);
 }
 
-// State-specific styles - placed at end to avoid specificity issues
-.switch--checked {
-  .switch__track {
-    background: var(--switch-color-track-background-checked);
-    border-color: var(--switch-color-track-border-checked);
-  }
-
-  .switch__thumb {
-    background: var(--switch-color-thumb-background-checked);
-  }
+.vertical {
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-// Checked transforms by size (placed after disabled to satisfy no-descending-specificity)
-
-.switch--disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-
-  .switch__track {
-    background: var(--switch-color-track-background-disabled);
-    border-color: var(--switch-color-track-border-disabled);
-  }
-
-  .switch__thumb {
-    background: var(--switch-color-thumb-background-disabled);
-  }
-
-  .switch__text {
-    color: var(--switch-color-text-disabled);
-  }
-}
-
-// Checked transforms by size (placed after disabled to satisfy no-descending-specificity)
-.switch--checked.switch--sm .switch__thumb {
-  transform: translateX(
-    calc(
-      var(--switch-size-sm-track-width) - var(--switch-size-sm-thumb-size) -
-        (2 * var(--switch-size-sm-thumb-offset))
-    )
-  );
-}
-
-.switch--checked.switch--md .switch__thumb {
-  transform: translateX(
-    calc(
-      var(--switch-size-md-track-width) - var(--switch-size-md-thumb-size) -
-        (2 * var(--switch-size-md-thumb-offset))
-    )
-  );
-}
-
-.switch--checked.switch--lg .switch__thumb {
-  transform: translateX(
-    calc(
-      var(--switch-size-lg-track-width) - var(--switch-size-lg-thumb-size) -
-        (2 * var(--switch-size-lg-thumb-offset))
-    )
-  );
-}
-
-// Focus ring (placed after base rules to satisfy no-descending-specificity)
-.switch__input:focus-visible + .switch__label .switch__track {
-  outline: var(--switch-focus-ring);
-  outline-offset: var(--switch-focus-offset);
+.horizontal {
+  flex-direction: row;
+  align-items: center;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .switch__track,
-  .switch__thumb {
+  .input,
+  .label::before {
     transition: none;
   }
 }

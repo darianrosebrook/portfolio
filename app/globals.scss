@@ -1,6 +1,7 @@
 @use 'reset';
 @use 'vars';
 @use 'designTokens';
+@use 'view-transitions';
 
 @view-transition {
   navigation: auto;

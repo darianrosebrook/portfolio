@@ -43,9 +43,9 @@ export const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
   ) => {
     const badgeClassName = [
       styles.badge,
-      styles[`badge--${variant}`],
-      variant === 'status' && styles[`badge--${variant}--${intent}`],
-      styles[`badge--${size}`],
+      styles[variant],
+      variant === 'status' && styles[intent],
+      styles[size],
       className,
     ]
       .filter(Boolean)
@@ -53,8 +53,8 @@ export const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
 
     return (
       <div ref={ref} className={badgeClassName} {...rest}>
-        {icon && <span className={styles.badge__icon}>{icon}</span>}
-        {children && <span className={styles.badge__content}>{children}</span>}
+        {icon && <span className={styles.icon}>{icon}</span>}
+        {children && <span className={styles.content}>{children}</span>}
       </div>
     );
   }

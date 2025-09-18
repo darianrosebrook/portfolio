@@ -7,6 +7,7 @@
   "rules": {
     "color-hex-length": "long",
     "declaration-block-single-line-max-declarations": 3,
+
     "no-descending-specificity": [
       true,
       {
@@ -344,9 +345,7 @@
       ],
       {
         "severity": "warning",
-        "unspecified": "bottomAlphabetical",
-        "emptyLineBeforeUnspecified": "never",
-        "emptyLineMinimumPropertyThreshold": 4
+        "unspecified": "bottomAlphabetical"
       }
     ],
 

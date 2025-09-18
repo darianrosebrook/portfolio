@@ -34,7 +34,8 @@
           "focus": "{semantic.color.border.accent}",
           "disabled": "{semantic.color.border.disabled}",
           "error": "{semantic.color.border.danger}"
-        }
+        },
+        "shadow": "{semantic.elevation.surface.raised}"
       },
       "text": {
         "default": "{semantic.color.foreground.secondary}",
@@ -89,10 +90,8 @@
       "easing": "{semantic.easing.standard}"
     },
     "focus": {
-      "ring": {
-        "color": "{semantic.color.border.accent}",
-        "width": "{core.spacing.size.02}"
-      }
+      "ring": "{semantic.focus.ring}",
+      "offset": "{semantic.focus.ringOffset}"
     }
   }
 }

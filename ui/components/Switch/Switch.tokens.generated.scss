@@ -45,6 +45,7 @@
   --switch-color-thumb-border-focus: var(--semantic-color-border-accent);
   --switch-color-thumb-border-disabled: var(--semantic-color-border-disabled);
   --switch-color-thumb-border-error: var(--semantic-color-border-danger);
+  --switch-color-thumb-shadow: var(--semantic-elevation-surface-raised);
   --switch-color-text-default: var(--semantic-color-foreground-secondary);
   --switch-color-text-hover: var(--semantic-color-foreground-primary);
   --switch-color-text-disabled: var(--semantic-color-foreground-disabled);
@@ -78,6 +79,6 @@
   --switch-motion-easing: var(--semantic-easing-standard);
 
   /* === Focus Tokens === */
-  --switch-focus-ring-color: var(--semantic-color-border-accent);
-  --switch-focus-ring-width: var(--core-spacing-size-02);
+  --switch-focus-ring: var(--semantic-focus-ring);
+  --switch-focus-offset: var(--semantic-focus-ring-offset);
 }

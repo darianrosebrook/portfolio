@@ -1,0 +1,186 @@
+// View Transitions API global styles
+// These styles are applied globally when the browser supports View Transitions API
+
+// Default page transition
+::view-transition-old(main-content),
+::view-transition-new(main-content) {
+  animation-duration: 300ms;
+  animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+// Slide transition for main content
+::view-transition-old(main-content) {
+  animation-name: slide-out;
+}
+
+::view-transition-new(main-content) {
+  animation-name: slide-in;
+}
+
+// Breadcrumb transitions
+::view-transition-old(breadcrumb),
+::view-transition-new(breadcrumb) {
+  animation-duration: 200ms;
+  animation-timing-function: ease-out;
+}
+
+::view-transition-old(breadcrumb) {
+  animation-name: fade-out;
+}
+
+::view-transition-new(breadcrumb) {
+  animation-name: fade-in;
+  animation-delay: 100ms;
+}
+
+// Documentation-specific transitions
+::view-transition-old(doc-content),
+::view-transition-new(doc-content) {
+  animation-duration: 250ms;
+  animation-timing-function: ease-in-out;
+}
+
+::view-transition-old(doc-content) {
+  animation-name: doc-slide-out;
+}
+
+::view-transition-new(doc-content) {
+  animation-name: doc-slide-in;
+}
+
+// Layout transitions
+::view-transition-old(component-standards-layout),
+::view-transition-new(component-standards-layout),
+::view-transition-old(foundations-layout),
+::view-transition-new(foundations-layout) {
+  animation-duration: 300ms;
+  animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+::view-transition-old(component-standards-layout),
+::view-transition-old(foundations-layout) {
+  animation-name: layout-slide-out;
+}
+
+::view-transition-new(component-standards-layout),
+::view-transition-new(foundations-layout) {
+  animation-name: layout-slide-in;
+}
+
+// Keyframe animations
+@keyframes slide-out {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes doc-slide-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes doc-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes layout-slide-out {
+  from {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(-10px) scale(0.98);
+  }
+}
+
+@keyframes layout-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(10px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+// Respect reduced motion
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation-duration: 150ms;
+  }
+}
+
+// Dark mode considerations
+@media (prefers-color-scheme: dark) {
+  // Ensure transitions work well in dark mode
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    // Add any dark mode specific transition adjustments here
+  }
+}

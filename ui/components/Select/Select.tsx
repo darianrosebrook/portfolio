@@ -119,7 +119,7 @@ export const SelectTrigger = React.forwardRef<
     ? placeholder
     : selectedOptions.map((option) => option.title).join(', ');
 
-  const sizeClass = styles[`trigger--${size}`] || styles['trigger--md'];
+  const sizeClass = styles[size] || styles.md;
 
   return (
     <button
@@ -134,15 +134,15 @@ export const SelectTrigger = React.forwardRef<
       {...ariaAttributes}
       {...ariaProps}
     >
-      <span className={styles.triggerText}>
+      <span className={styles.text}>
         {loading ? 'Loading...' : displayText}
       </span>
 
-      <div className={styles.triggerIcons}>
+      <div className={styles.icons}>
         {clearable && !isEmpty && !loading && (
           <button
             type="button"
-            className={styles.clearButton}
+            className={styles.clear}
             onClick={handleClear}
             aria-label="Clear selection"
             tabIndex={-1}
@@ -284,7 +284,7 @@ export const SelectSearch: React.FC<SelectSearchProps> = ({
     <div className={`${styles.searchContainer} ${className}`}>
       <input
         type="text"
-        className={styles.searchInput}
+        className={styles.search}
         placeholder={placeholder}
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
@@ -353,10 +353,10 @@ export const SelectOptions: React.FC<SelectOptionsProps> = ({
             onMouseEnter={() => handleMouseEnter(index)}
             onClick={() => !option.disabled && handleClick(option)}
           >
-            <span className={styles.optionText}>{option.title}</span>
+            <span className={styles.text}>{option.title}</span>
             {isSelected && (
               <svg
-                className={styles.checkIcon}
+                className={styles.check}
                 width="16"
                 height="16"
                 viewBox="0 0 24 24"

@@ -3,31 +3,31 @@
 .alert {
   @include alertTokens.vars;
 
-  &__inline {
+  &.inline {
     display: inline-flex;
     gap: var(--grid-gap-small) var(--grid-gap-small);
     align-items: baseline;
     padding: var(--alert-size-inline-padding);
     background-color: var(--alert-color-background-primary);
 
-    &--info {
+    &.info {
       color: var(--alert-color-foreground-info);
     }
 
-    &--warning {
+    &.warning {
       color: var(--alert-color-foreground-warning);
     }
 
-    &--danger {
+    &.danger {
       color: var(--alert-color-foreground-danger);
     }
 
-    &--success {
+    &.success {
       color: var(--alert-color-foreground-success);
     }
   }
 
-  &__section {
+  &.section {
     display: grid;
     grid-template-areas: 'icon title body dismiss';
     grid-template-columns: auto auto 1fr auto;
@@ -37,28 +37,28 @@
     background-color: var(--alert-color-background-primary);
     border-radius: var(--alert-size-radius);
 
-    &--info {
+    &.info {
       background: var(--alert-color-background-infoSubtle);
       color: var(--alert-color-foreground-onInfoSubtle);
     }
 
-    &--warning {
+    &.warning {
       background: var(--alert-color-background-warningSubtle);
       color: var(--alert-color-foreground-onWarningSubtle);
     }
 
-    &--danger {
+    &.danger {
       background: var(--alert-color-background-dangerSubtle);
       color: var(--alert-color-foreground-onDangerSubtle);
     }
 
-    &--success {
+    &.success {
       background: var(--alert-color-background-successSubtle);
       color: var(--alert-color-foreground-onSuccessSubtle);
     }
   }
 
-  &__page {
+  &.page {
     display: grid;
     grid-template-areas: 'icon title dismiss' 'icon body dismiss';
     grid-template-columns: auto 1fr auto;
@@ -68,22 +68,22 @@
     margin: 0 -1rem;
     padding: var(--alert-size-page-padding);
 
-    &--info {
+    &.info {
       background: var(--alert-color-background-infoStrong);
       color: var(--alert-color-foreground-onColor);
     }
 
-    &--warning {
+    &.warning {
       background: var(--alert-color-background-warningStrong);
       color: var(--alert-color-foreground-onColor);
     }
 
-    &--danger {
+    &.danger {
       background: var(--alert-color-background-dangerStrong);
       color: var(--alert-color-foreground-onColor);
     }
 
-    &--success {
+    &.success {
       background: var(--alert-color-background-successStrong);
       color: var(--alert-color-foreground-onColor);
     }
@@ -94,7 +94,7 @@
   }
 }
 
-.__icon {
+.icon {
   display: inline-block;
   grid-row: span 2;
   grid-column: span 1;
@@ -103,7 +103,7 @@
   height: var(--alert-icon-size);
 }
 
-.__title {
+.title {
   grid-area: title;
   grid-row: span 1;
   grid-column: span 1;
@@ -112,7 +112,7 @@
   font-size: var(--font-size-06);
 }
 
-.__body {
+.body {
   grid-area: body;
   grid-row: span 1;
   grid-column: span 1;
@@ -120,7 +120,7 @@
   font-size: var(--font-size-05);
 }
 
-.__dismiss {
+.dismiss {
   display: inline-block;
   grid-area: dismiss;
   grid-row: span 2;

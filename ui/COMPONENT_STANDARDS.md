@@ -348,6 +348,238 @@ Example (abridged):
 • Use `:where()` to keep specificity low; consider `:has()` with progressive enhancement.
 • Map visual states from `data-*` attributes; avoid deep descendant selectors.
 
+## Modern CSS Nesting Standards
+
+We are transitioning from BEM-style naming conventions to modern CSS nesting to leverage native SCSS nesting capabilities. This approach provides better readability, maintainability, and clearer component relationships while reducing verbosity.
+
+### Key Principles
+
+#### 1. Leverage SCSS Nesting
+
+Use SCSS nesting to create visual hierarchy that matches component structure:
+
+```scss
+// ✅ Modern approach
+.switch {
+  // Root styles
+
+  .input {
+    // Input-specific styles
+  }
+
+  .label {
+    // Label-specific styles
+  }
+
+  &.sm {
+    // Size modifier styles
+    .input {
+      /* Size-specific input styles */
+    }
+  }
+}
+```
+
+#### 2. Semantic Class Names
+
+Use semantic, readable class names that describe the element's purpose:
+
+```scss
+// ✅ Good
+.button {
+  .icon {
+  }
+  .text {
+  }
+
+  &.primary {
+  }
+  &.loading {
+  }
+}
+
+// ❌ Avoid
+.button {
+  .button__icon {
+  }
+  .button__text {
+  }
+
+  &.button--primary {
+  }
+  &.button--loading {
+  }
+}
+```
+
+#### 3. Component Scope
+
+Keep related styles grouped together under their parent component:
+
+```scss
+.card {
+  // Card root styles
+
+  .header {
+    // Header styles
+  }
+
+  .body {
+    // Body styles
+  }
+
+  .footer {
+    // Footer styles
+  }
+
+  &.featured {
+    // Featured card styles
+    .header {
+      /* Featured header styles */
+    }
+  }
+}
+```
+
+### Migration from BEM
+
+**Before (BEM):**
+
+```scss
+.switch {
+  .switch__input {
+  }
+  .switch__label {
+  }
+  &.switch--sm .switch__input {
+  }
+}
+```
+
+**After (Modern Nesting):**
+
+```scss
+.switch {
+  .input {
+  }
+  .label {
+  }
+
+  &.sm {
+    .input {
+    }
+  }
+}
+```
+
+### Best Practices
+
+#### 1. Nesting Depth
+
+- **Limit to 3-4 levels** maximum
+- **Use `&` for modifiers** to keep specificity low
+- **Break into separate classes** for complex components
+
+#### 2. Specificity Management
+
+- **Use `&` for modifiers** instead of deep selectors
+- **Avoid over-nesting** that increases specificity
+- **Use CSS custom properties** for theming
+
+#### 3. Component Organization
+
+- **Group related styles** together
+- **Use comments** to separate logical sections
+- **Put modifiers after base styles**
+
+### Common Patterns
+
+#### Size Variants
+
+```scss
+.component {
+  &.sm {
+    /* Small size styles */
+  }
+  &.md {
+    /* Medium size styles */
+  }
+  &.lg {
+    /* Large size styles */
+  }
+}
+```
+
+#### State Modifiers
+
+```scss
+.component {
+  &.loading {
+    /* Loading state */
+  }
+  &.error {
+    /* Error state */
+  }
+  &.disabled {
+    /* Disabled state */
+  }
+}
+```
+
+#### Complex Components
+
+```scss
+.modal {
+  .overlay {
+    /* Overlay styles */
+  }
+  .content {
+    /* Content styles */
+  }
+  .header {
+    /* Header styles */
+  }
+  .body {
+    /* Body styles */
+  }
+  .footer {
+    /* Footer styles */
+  }
+
+  // Size variants
+  &.sm {
+    .content {
+      width: 400px;
+    }
+  }
+  &.lg {
+    .content {
+      width: 800px;
+    }
+  }
+
+  // States
+  &.open {
+    .overlay {
+      opacity: 1;
+    }
+  }
+}
+```
+
+### Benefits
+
+- **Better Readability**: Visual hierarchy matches component structure
+- **Improved Maintainability**: Changes are localized to component scope
+- **Modern CSS Features**: Leverages native SCSS nesting
+- **Reduced Bundle Size**: Shorter class names and better compression
+
+### Implementation Guidelines
+
+- **New Components**: Use modern nesting for all new components
+- **Existing Components**: Migrate high-traffic components first, maintain backward compatibility during transition
+- **Legacy Cleanup**: Remove old BEM classes once migrated and update any hardcoded class references
+
 ⸻
 
 15. Performance and SSR/Hydration
