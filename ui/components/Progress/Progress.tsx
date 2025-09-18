@@ -68,10 +68,10 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>(
 
     const progressClassName = [
       styles.progress,
-      styles[`progress--${variant}`],
-      styles[`progress--${size}`],
-      styles[`progress--${intent}`],
-      isIndeterminate && styles['progress--indeterminate'],
+      styles[variant],
+      styles[size],
+      styles[intent],
+      isIndeterminate && styles.indeterminate,
       className,
     ]
       .filter(Boolean)
@@ -100,14 +100,14 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>(
       return (
         <div ref={ref} className={progressClassName} {...ariaProps} {...rest}>
           <svg
-            className={styles.progressCircle}
+            className={styles.circle}
             width="40"
             height="40"
             viewBox="0 0 40 40"
           >
             {/* Background circle */}
             <circle
-              className={styles.progressCircleBackground}
+              className={styles.circleBackground}
               cx="20"
               cy="20"
               r={radius}
@@ -116,7 +116,7 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>(
             />
             {/* Progress circle */}
             <circle
-              className={styles.progressCircleForeground}
+              className={styles.circleForeground}
               cx="20"
               cy="20"
               r={radius}
@@ -129,7 +129,7 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>(
             />
           </svg>
           {showValue && !isIndeterminate && (
-            <span className={styles.progressValue}>{formattedValue}</span>
+            <span className={styles.value}>{formattedValue}</span>
           )}
         </div>
       );
@@ -138,16 +138,16 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>(
     // Linear variant
     return (
       <div ref={ref} className={progressClassName} {...ariaProps} {...rest}>
-        <div className={styles.progressTrack}>
+        <div className={styles.track}>
           <div
-            className={styles.progressFill}
+            className={styles.fill}
             style={{
               width: isIndeterminate ? undefined : `${percentage}%`,
             }}
           />
         </div>
         {showValue && !isIndeterminate && (
-          <span className={styles.progressValue}>{formattedValue}</span>
+          <span className={styles.value}>{formattedValue}</span>
         )}
       </div>
     );

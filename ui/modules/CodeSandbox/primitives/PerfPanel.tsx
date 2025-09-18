@@ -1,0 +1,334 @@
+import * as React from 'react';
+
+export type PerfPanelProps = {
+  targetWindow?: Window;
+  sampleMs?: number;
+};
+
+type PerfMetrics = {
+  renderCount: number;
+  lastRenderTime: number;
+  avgRenderTime: number;
+  fps: number;
+  memoryEstimate?: number;
+};
+
+export function PerfPanel({ targetWindow, sampleMs = 5000 }: PerfPanelProps) {
+  const [metrics, setMetrics] = React.useState<PerfMetrics>({
+    renderCount: 0,
+    lastRenderTime: 0,
+    avgRenderTime: 0,
+    fps: 0,
+  });
+  const [isRunning, setIsRunning] = React.useState(false);
+  const [error, setError] = React.useState<string | null>(null);
+
+  const renderTimes = React.useRef<number[]>([]);
+  const frameCount = React.useRef(0);
+  const lastFrameTime = React.useRef(performance.now());
+  const animationFrameId = React.useRef<number>();
+  const intervalId = React.useRef<NodeJS.Timeout>();
+
+  const resolveTargetWindow = React.useCallback((): Window => {
+    return targetWindow ?? window;
+  }, [targetWindow]);
+
+  const updateMetrics = React.useCallback(() => {
+    const now = performance.now();
+    const deltaTime = now - lastFrameTime.current;
+
+    if (deltaTime > 0) {
+      frameCount.current++;
+      const currentFps = 1000 / deltaTime;
+
+      setMetrics((prev) => ({
+        ...prev,
+        fps: Math.round(currentFps * 10) / 10,
+        lastRenderTime: Math.round(deltaTime * 100) / 100,
+      }));
+    }
+
+    lastFrameTime.current = now;
+  }, []);
+
+  const measureRender = React.useCallback((renderTime: number) => {
+    renderTimes.current.push(renderTime);
+    if (renderTimes.current.length > 100) {
+      renderTimes.current.shift(); // Keep only last 100 measurements
+    }
+
+    const avgTime =
+      renderTimes.current.reduce((a, b) => a + b, 0) /
+      renderTimes.current.length;
+
+    setMetrics((prev) => ({
+      ...prev,
+      renderCount: prev.renderCount + 1,
+      avgRenderTime: Math.round(avgTime * 100) / 100,
+    }));
+  }, []);
+
+  const startMonitoring = React.useCallback(() => {
+    setIsRunning(true);
+    setError(null);
+    renderTimes.current = [];
+    frameCount.current = 0;
+    lastFrameTime.current = performance.now();
+
+    // FPS monitoring
+    const animate = () => {
+      updateMetrics();
+      animationFrameId.current = requestAnimationFrame(animate);
+    };
+    animate();
+
+    // Memory monitoring (if available)
+    const checkMemory = () => {
+      try {
+        const win = resolveTargetWindow();
+        if ('memory' in win.performance) {
+          const memory = (win.performance as any).memory;
+          setMetrics((prev) => ({
+            ...prev,
+            memoryEstimate: Math.round(memory.usedJSHeapSize / 1024 / 1024), // MB
+          }));
+        }
+      } catch (e) {
+        // Memory API not available or blocked
+      }
+    };
+
+    intervalId.current = setInterval(checkMemory, 1000);
+  }, [updateMetrics, resolveTargetWindow]);
+
+  const stopMonitoring = React.useCallback(() => {
+    setIsRunning(false);
+    if (animationFrameId.current) {
+      cancelAnimationFrame(animationFrameId.current);
+    }
+    if (intervalId.current) {
+      clearInterval(intervalId.current);
+    }
+  }, []);
+
+  const resetMetrics = React.useCallback(() => {
+    setMetrics({
+      renderCount: 0,
+      lastRenderTime: 0,
+      avgRenderTime: 0,
+      fps: 0,
+      memoryEstimate: undefined,
+    });
+    renderTimes.current = [];
+    frameCount.current = 0;
+  }, []);
+
+  const exportData = React.useCallback(() => {
+    const data = {
+      timestamp: new Date().toISOString(),
+      metrics,
+      sampleDuration: sampleMs,
+    };
+
+    const blob = new Blob([JSON.stringify(data, null, 2)], {
+      type: 'application/json',
+    });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'perf-report.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  }, [metrics, sampleMs]);
+
+  // Auto-stop after sample duration
+  React.useEffect(() => {
+    if (isRunning) {
+      const timer = setTimeout(() => {
+        stopMonitoring();
+      }, sampleMs);
+      return () => clearTimeout(timer);
+    }
+  }, [isRunning, sampleMs, stopMonitoring]);
+
+  // Cleanup on unmount
+  React.useEffect(() => {
+    return () => {
+      stopMonitoring();
+    };
+  }, [stopMonitoring]);
+
+  return (
+    <div
+      style={{
+        border: '1px solid var(--border-subtle)',
+        borderRadius: 8,
+        padding: 12,
+      }}
+    >
+      <div
+        style={{
+          display: 'flex',
+          gap: 8,
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+      >
+        <strong>Performance</strong>
+        <div style={{ display: 'flex', gap: 8 }}>
+          <button
+            type="button"
+            onClick={isRunning ? stopMonitoring : startMonitoring}
+            style={{
+              padding: '4px 8px',
+              borderRadius: 6,
+              background: isRunning
+                ? 'var(--surface-danger)'
+                : 'var(--surface-accent)',
+              color: 'white',
+              border: 'none',
+              cursor: 'pointer',
+            }}
+          >
+            {isRunning ? 'Stop' : 'Start'} monitoring
+          </button>
+          <button
+            type="button"
+            onClick={resetMetrics}
+            disabled={isRunning}
+            style={{
+              padding: '4px 8px',
+              borderRadius: 6,
+              background: 'var(--surface-secondary)',
+              color: 'var(--text-primary)',
+              border: 'none',
+              cursor: 'pointer',
+            }}
+          >
+            Reset
+          </button>
+          <button
+            type="button"
+            onClick={exportData}
+            disabled={metrics.renderCount === 0}
+            style={{
+              padding: '4px 8px',
+              borderRadius: 6,
+              background: 'var(--surface-secondary)',
+              color: 'var(--text-primary)',
+              border: 'none',
+              cursor: 'pointer',
+            }}
+          >
+            Export
+          </button>
+        </div>
+      </div>
+
+      {error && (
+        <div style={{ color: 'var(--text-danger)', marginTop: 8 }}>
+          Error: {error}
+        </div>
+      )}
+
+      <div
+        style={{
+          marginTop: 12,
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))',
+          gap: 12,
+        }}
+      >
+        <div style={{ textAlign: 'center' }}>
+          <div
+            style={{
+              fontSize: 24,
+              fontWeight: 600,
+              color: 'var(--text-accent)',
+            }}
+          >
+            {metrics.renderCount}
+          </div>
+          <div style={{ fontSize: 12, color: 'var(--text-secondary)' }}>
+            Renders
+          </div>
+        </div>
+
+        <div style={{ textAlign: 'center' }}>
+          <div
+            style={{
+              fontSize: 24,
+              fontWeight: 600,
+              color: 'var(--text-accent)',
+            }}
+          >
+            {metrics.fps}
+          </div>
+          <div style={{ fontSize: 12, color: 'var(--text-secondary)' }}>
+            FPS
+          </div>
+        </div>
+
+        <div style={{ textAlign: 'center' }}>
+          <div
+            style={{
+              fontSize: 24,
+              fontWeight: 600,
+              color: 'var(--text-accent)',
+            }}
+          >
+            {metrics.lastRenderTime}ms
+          </div>
+          <div style={{ fontSize: 12, color: 'var(--text-secondary)' }}>
+            Last render
+          </div>
+        </div>
+
+        <div style={{ textAlign: 'center' }}>
+          <div
+            style={{
+              fontSize: 24,
+              fontWeight: 600,
+              color: 'var(--text-accent)',
+            }}
+          >
+            {metrics.avgRenderTime}ms
+          </div>
+          <div style={{ fontSize: 12, color: 'var(--text-secondary)' }}>
+            Avg render
+          </div>
+        </div>
+
+        {metrics.memoryEstimate !== undefined && (
+          <div style={{ textAlign: 'center' }}>
+            <div
+              style={{
+                fontSize: 24,
+                fontWeight: 600,
+                color: 'var(--text-accent)',
+              }}
+            >
+              {metrics.memoryEstimate}MB
+            </div>
+            <div style={{ fontSize: 12, color: 'var(--text-secondary)' }}>
+              Memory
+            </div>
+          </div>
+        )}
+      </div>
+
+      {isRunning && (
+        <div
+          style={{
+            marginTop: 8,
+            fontSize: 12,
+            color: 'var(--text-secondary)',
+            textAlign: 'center',
+          }}
+        >
+          Monitoring for {sampleMs / 1000}s...
+        </div>
+      )}
+    </div>
+  );
+}

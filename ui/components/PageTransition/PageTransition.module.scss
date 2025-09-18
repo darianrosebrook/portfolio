@@ -1,0 +1,126 @@
+// PageTransition.module.scss
+// CSS for smooth page transitions with fallbacks
+
+.pageTransition {
+  // CSS custom properties for dynamic values
+  --transition-duration: 300ms;
+  --transition-easing: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  // Base styles
+  position: relative;
+  width: 100%;
+  min-height: 0;
+
+  // View Transitions API styling (when supported)
+  &.enabled {
+    // This will be handled by the View Transitions API when supported
+    view-transition-name: var(--view-transition-name, main-content);
+  }
+
+  // Fallback animations for browsers without View Transitions API
+  &.fallback {
+    &.transitioning {
+      opacity: 0;
+      transition:
+        opacity var(--transition-duration) var(--transition-easing),
+        transform var(--transition-duration) var(--transition-easing);
+      transform: translateY(8px);
+    }
+
+    &:not(.transitioning) {
+      opacity: 1;
+      transition:
+        opacity var(--transition-duration) var(--transition-easing),
+        transform var(--transition-duration) var(--transition-easing);
+      transform: translateY(0);
+    }
+  }
+}
+
+// Respect reduced motion preferences
+@media (prefers-reduced-motion: reduce) {
+  .pageTransition {
+    &.fallback {
+      &.transitioning,
+      &:not(.transitioning) {
+        transition: none;
+        transform: none;
+      }
+    }
+  }
+}
+
+// Note: View Transitions API styles are now in app/view-transitions.scss
+// This separation prevents CSS Modules "not pure" errors while keeping
+// component-specific styles scoped
+
+// Enhanced navigation link styles
+.transitionLink {
+  position: relative;
+  display: inline-flex;
+  vertical-align: baseline;
+  align-items: center;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    opacity: 0.8;
+  }
+
+  &:focus-visible {
+    border-radius: 0.125rem;
+    outline: 2px solid currentcolor;
+    outline-offset: 2px;
+  }
+}
+
+// Animated text styles (from AnimatedLink)
+.maskLine {
+  position: relative;
+  display: inline-block;
+  vertical-align: baseline;
+  overflow: hidden;
+  width: 100%;
+  line-height: 1;
+}
+
+.text {
+  display: block;
+  will-change: transform;
+}
+
+.clone {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  will-change: transform;
+}
+
+// Loading state for transitions
+.loading {
+  position: relative;
+
+  &::after {
+    position: absolute;
+    inset: 0;
+    background: rgb(255 255 255 / 80%);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+    backdrop-filter: blur(2px);
+    content: '';
+  }
+
+  &.transitioning::after {
+    opacity: 1;
+  }
+}
+
+// Dark mode support
+@media (prefers-color-scheme: dark) {
+  .loading.transitioning::after {
+    background: rgb(0 0 0 / 80%);
+  }
+}

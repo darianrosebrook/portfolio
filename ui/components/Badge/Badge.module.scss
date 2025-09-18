@@ -12,7 +12,7 @@
   white-space: nowrap;
 
   // Default variant
-  &--default {
+  &.default {
     padding: var(--badge-size-md-padding);
     background: var(--badge-color-background-default);
     border: 1px solid var(--badge-color-border-default);
@@ -23,32 +23,32 @@
   }
 
   // Status variant (replaces Status component)
-  &--status {
+  &.status {
     padding: var(--badge-size-md-padding);
     border: 1px solid transparent;
     border-radius: var(--badge-size-md-radius);
     box-shadow: var(--badge-elevation-status);
     font-size: var(--badge-size-md-fontSize);
 
-    &--info {
+    &.info {
       background: var(--badge-color-background-info);
       border-color: var(--badge-color-border-info);
       color: var(--badge-color-foreground-info);
     }
 
-    &--success {
+    &.success {
       background: var(--badge-color-background-success);
       border-color: var(--badge-color-border-success);
       color: var(--badge-color-foreground-success);
     }
 
-    &--warning {
+    &.warning {
       background: var(--badge-color-background-warning);
       border-color: var(--badge-color-border-warning);
       color: var(--badge-color-foreground-warning);
     }
 
-    &--danger {
+    &.danger {
       background: var(--badge-color-background-danger);
       border-color: var(--badge-color-border-danger);
       color: var(--badge-color-foreground-danger);
@@ -56,7 +56,7 @@
   }
 
   // Counter variant
-  &--counter {
+  &.counter {
     justify-content: center;
     min-width: var(--badge-size-sm-iconSize);
     padding: var(--badge-size-sm-padding);
@@ -67,7 +67,7 @@
   }
 
   // Tag variant
-  &--tag {
+  &.tag {
     padding: var(--badge-size-sm-padding);
     background: var(--badge-color-background-tag);
     border: 1px solid var(--badge-color-border-default);
@@ -77,26 +77,26 @@
   }
 
   // Size variants
-  &--sm {
+  &.sm {
     padding: var(--badge-size-sm-paddingY) var(--badge-size-sm-paddingX);
     border-radius: var(--badge-size-sm-radius);
     font-size: var(--badge-size-sm-fontSize);
   }
 
-  &--md {
+  &.md {
     padding: var(--badge-size-md-paddingY) var(--badge-size-md-paddingX);
     border-radius: var(--badge-size-md-radius);
     font-size: var(--badge-size-md-fontSize);
   }
 
-  &--lg {
+  &.lg {
     padding: var(--badge-size-lg-paddingY) var(--badge-size-lg-paddingX);
     border-radius: var(--badge-size-lg-radius);
     font-size: var(--badge-size-lg-fontSize);
   }
 }
 
-.badge__icon {
+.icon {
   display: inline-flex;
   flex-shrink: 0;
   justify-content: center;
@@ -107,26 +107,26 @@
     height: 100%;
     fill: currentcolor;
   }
-
-  // Size-specific icon sizing
-  .badge--sm & {
-    width: var(--badge-size-sm-iconSize);
-    height: var(--badge-size-sm-iconSize);
-  }
-
-  .badge--md & {
-    width: var(--badge-size-md-iconSize);
-    height: var(--badge-size-md-iconSize);
-  }
-
-  .badge--lg & {
-    width: var(--badge-size-lg-iconSize);
-    height: var(--badge-size-lg-iconSize);
-  }
 }
 
-.badge__content {
+.content {
   display: inline-block;
+}
+
+// Size-specific icon sizing
+.badge.sm .icon {
+  width: var(--badge-size-sm-iconSize);
+  height: var(--badge-size-sm-iconSize);
+}
+
+.badge.md .icon {
+  width: var(--badge-size-md-iconSize);
+  height: var(--badge-size-md-iconSize);
+}
+
+.badge.lg .icon {
+  width: var(--badge-size-lg-iconSize);
+  height: var(--badge-size-lg-iconSize);
 }
 
 @media (prefers-reduced-motion: reduce) {

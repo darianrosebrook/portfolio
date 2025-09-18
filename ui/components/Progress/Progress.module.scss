@@ -8,45 +8,45 @@
   align-items: center;
 
   // Linear variant
-  &--linear {
+  &.linear {
     width: 100%;
 
-    .progressTrack {
+    .track {
       position: relative;
       overflow: hidden;
       width: 100%;
       background: var(--progress-color-track-background);
     }
 
-    .progressFill {
+    .fill {
       height: 100%;
       background: var(--progress-color-fill-info);
       border-radius: inherit;
       transition: width 0.3s ease-out;
     }
 
-    .progressCircleForeground {
+    .circleForeground {
       stroke: var(--progress-color-fill-info);
     }
 
     // Size variants for linear
-    &.progress--sm .progressTrack {
+    &.sm .track {
       height: var(--progress-size-linear-sm-height);
       border-radius: var(--progress-size-linear-sm-radius);
     }
 
-    &.progress--md .progressTrack {
+    &.md .track {
       height: var(--progress-size-linear-md-height);
       border-radius: var(--progress-size-linear-md-radius);
     }
 
-    &.progress--lg .progressTrack {
+    &.lg .track {
       height: var(--progress-size-linear-lg-height);
       border-radius: var(--progress-size-linear-lg-radius);
     }
 
     // Indeterminate animation for linear
-    &.progress--indeterminate .progressFill {
+    &.indeterminate .fill {
       width: 30% !important;
       animation: progressIndeterminateLinear
         var(--progress-motion-duration-indeterminate)
@@ -55,64 +55,64 @@
   }
 
   // Circular variant
-  &--circular {
+  &.circular {
     position: relative;
     display: inline-flex;
     justify-content: center;
     align-items: center;
 
-    .progressCircle {
+    .circle {
       transform: rotate(-90deg);
     }
 
-    .progressCircleBackground {
+    .circleBackground {
       stroke: var(--progress-color-track-background);
     }
 
-    .progressCircleForeground {
+    .circleForeground {
       transition: stroke-dashoffset 0.3s ease-out;
       stroke: var(--progress-color-fill-info);
     }
 
     // Size variants for circular
-    &.progress--sm {
-      .progressCircle {
+    &.sm {
+      .circle {
         width: var(--progress-size-circular-sm-size);
         height: var(--progress-size-circular-sm-size);
       }
 
-      .progressCircleBackground,
-      .progressCircleForeground {
+      .circleBackground,
+      .circleForeground {
         stroke-width: var(--progress-size-circular-sm-strokeWidth);
       }
     }
 
-    &.progress--md {
-      .progressCircle {
+    &.md {
+      .circle {
         width: var(--progress-size-circular-md-size);
         height: var(--progress-size-circular-md-size);
       }
 
-      .progressCircleBackground,
-      .progressCircleForeground {
+      .circleBackground,
+      .circleForeground {
         stroke-width: var(--progress-size-circular-md-strokeWidth);
       }
     }
 
-    &.progress--lg {
-      .progressCircle {
+    &.lg {
+      .circle {
         width: var(--progress-size-circular-lg-size);
         height: var(--progress-size-circular-lg-size);
       }
 
-      .progressCircleBackground,
-      .progressCircleForeground {
+      .circleBackground,
+      .circleForeground {
         stroke-width: var(--progress-size-circular-lg-strokeWidth);
       }
     }
 
     // Indeterminate animation for circular
-    &.progress--indeterminate .progressCircleForeground {
+    &.indeterminate .circleForeground {
       animation: progressIndeterminateCircular
         var(--progress-motion-duration-indeterminate) linear infinite;
       stroke-dasharray: 25 75;
@@ -120,53 +120,53 @@
   }
 
   // Intent colors - declared after base variant styles to satisfy no-descending-specificity
-  &.progress--info {
-    .progressFill,
-    .progressCircleForeground {
+  &.info {
+    .fill,
+    .circleForeground {
       background: var(--progress-color-fill-info);
       stroke: var(--progress-color-fill-info);
     }
   }
 
-  &.progress--success {
-    .progressFill,
-    .progressCircleForeground {
+  &.success {
+    .fill,
+    .circleForeground {
       background: var(--progress-color-fill-success);
       stroke: var(--progress-color-fill-success);
     }
   }
 
-  &.progress--warning {
-    .progressFill,
-    .progressCircleForeground {
+  &.warning {
+    .fill,
+    .circleForeground {
       background: var(--progress-color-fill-warning);
       stroke: var(--progress-color-fill-warning);
     }
   }
 
-  &.progress--danger {
-    .progressFill,
-    .progressCircleForeground {
+  &.danger {
+    .fill,
+    .circleForeground {
       background: var(--progress-color-fill-danger);
       stroke: var(--progress-color-fill-danger);
     }
   }
 }
 
-.progressValue {
+.value {
   flex-shrink: 0;
   color: var(--progress-color-text-default);
   font-weight: var(--progress-typography-value-fontWeight);
   font-size: var(--progress-typography-value-fontSize);
   white-space: nowrap;
+}
 
-  // Position value text inside circular progress
-  .progress--circular & {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+// Position value text inside circular progress
+.progress.circular .value {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 // Animations
@@ -192,23 +192,23 @@
 
 @media (prefers-reduced-motion: reduce) {
   .progress {
-    .progressFill,
-    .progressCircleForeground {
+    .fill,
+    .circleForeground {
       transition: none;
     }
 
-    &--indeterminate {
-      .progressFill,
-      .progressCircleForeground {
+    &.indeterminate {
+      .fill,
+      .circleForeground {
         animation: none;
       }
 
       // Show static state for reduced motion
-      .progressFill {
+      .fill {
         width: 50% !important;
       }
 
-      .progressCircleForeground {
+      .circleForeground {
         transform: none;
         stroke-dasharray: 50 50;
       }

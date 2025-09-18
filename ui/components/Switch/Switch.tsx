@@ -3,9 +3,10 @@
  * Replaces ToggleSwitch with improved API and design token integration
  */
 'use client';
-import { ReactNode, useMemo } from 'react';
-import { ControlSize } from '@/types/ui';
+import React, { ReactNode, useMemo } from 'react';
 import styles from './Switch.module.scss';
+
+type ControlSize = 'sm' | 'md' | 'lg';
 
 type NativeInputProps = React.ComponentProps<'input'>;
 
@@ -74,9 +75,9 @@ const Switch = ({
 
   const switchClassName = [
     styles.switch,
-    styles[`switch--${size}`],
-    checked && styles['switch--checked'],
-    disabled && styles['switch--disabled'],
+    styles[size],
+    checked && styles.checked,
+    disabled && styles.disabled,
     className,
   ]
     .filter(Boolean)
@@ -90,23 +91,20 @@ const Switch = ({
         onChange={onChange}
         disabled={disabled}
         id={safeId}
-        className={styles.switch__input}
+        className={`${styles.input} ${checked ? styles.checked : ''}`}
         aria-label={
           ariaLabel || (typeof children === 'string' ? children : undefined)
         }
         aria-describedby={ariaDescription ? `${safeId}-description` : undefined}
         {...rest}
       />
-      <label className={styles.switch__label} htmlFor={safeId}>
-        <span className={styles.switch__track}>
-          <span className={styles.switch__thumb} />
-        </span>
-        <span className={styles.switch__text}>{children}</span>
+      <label
+        className={`${styles.label} ${checked ? styles.checked : ''} ${disabled ? styles.disabled : ''}`}
+        htmlFor={safeId}
+      >
+        {children}
         {ariaDescription && (
-          <span
-            id={`${safeId}-description`}
-            className={styles.switch__description}
-          >
+          <span id={`${safeId}-description`} className={styles.description}>
             {ariaDescription}
           </span>
         )}
@@ -131,11 +129,7 @@ export const SwitchGroup = ({
   className = '',
   orientation = 'vertical',
 }: SwitchGroupProps) => {
-  const groupClassName = [
-    styles.switchGroup,
-    styles[`switchGroup--${orientation}`],
-    className,
-  ]
+  const groupClassName = [styles.switchGroup, styles[orientation], className]
     .filter(Boolean)
     .join(' ');
 

@@ -267,8 +267,8 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
 
     const dialogClassName = [
       styles.dialog,
-      styles[`dialog--${size}`],
-      modal && styles['dialog--modal'],
+      styles[size],
+      modal && styles.modal,
       className,
     ]
       .filter(Boolean)
@@ -277,7 +277,7 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
     const dialogNode = (
       <div
         ref={backdropRef}
-        className={`${styles.backdrop} ${modal ? styles['backdrop--modal'] : ''}`}
+        className={`${styles.backdrop} ${modal ? styles.modal : ''}`}
         onClick={handleBackdropClick}
       >
         <div
@@ -359,7 +359,7 @@ const CloseButton = ({
   return (
     <button
       type="button"
-      className={`${styles.closeButton} ${className}`}
+      className={`${styles.close} ${className}`}
       onClick={context?.close}
       aria-label="Close dialog"
       {...props}

@@ -1,0 +1,100 @@
+/* Code highlighting styles for docs workbench */
+
+.docs-workbench {
+  /* Respect user's reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    .highlighted-line {
+      transition: none;
+    }
+
+    .highlighted-line.animate-in,
+    .highlighted-line.animate-out {
+      animation: none;
+    }
+  }
+
+  /* Highlighted line styling with theme support */
+  .highlighted-line {
+    background-color: var(--semantic-color-background-highlight-subtle);
+    opacity: 0.4;
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  /* Theme-specific overrides */
+  &.light .highlighted-line {
+    background-color: var(
+      --semantic-color-background-highlight-subtle,
+      #fef3c7
+    );
+    opacity: 0.5;
+  }
+
+  &.dark .highlighted-line {
+    background-color: var(
+      --semantic-color-background-highlight-subtle,
+      #374151
+    );
+    opacity: 0.6;
+  }
+
+  /* Focus states for accessibility */
+  .highlighted-line:focus-within {
+    outline: 2px solid var(--semantic-color-border-focus, #3b82f6);
+    outline-offset: 2px;
+  }
+
+  /* Subtle animation for line highlighting */
+  .highlighted-line.animate-in {
+    animation: highlight-fade-in 0.3s ease-out;
+  }
+
+  .highlighted-line.animate-out {
+    animation: highlight-fade-out 0.2s ease-in;
+  }
+}
+
+/* Keyframes for highlight animations */
+@keyframes highlight-fade-in {
+  from {
+    background-color: transparent;
+    opacity: 0;
+  }
+
+  to {
+    background-color: var(--semantic-color-background-highlight-subtle);
+    opacity: 0.4;
+  }
+}
+
+@keyframes highlight-fade-out {
+  from {
+    background-color: var(--semantic-color-background-highlight-subtle);
+    opacity: 0.4;
+  }
+
+  to {
+    background-color: transparent;
+    opacity: 0;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .docs-workbench .highlighted-line {
+    background-color: var(
+      --semantic-color-background-highlight-high-contrast,
+      #000000
+    );
+    border-left: 3px solid var(--semantic-color-border-accent, #3b82f6);
+    opacity: 0.8;
+    color: var(--semantic-color-foreground-high-contrast, #ffffff);
+  }
+}
+
+/* Print styles - remove highlights for printing */
+@media print {
+  .docs-workbench .highlighted-line {
+    background-color: transparent !important;
+    opacity: 1 !important;
+  }
+}

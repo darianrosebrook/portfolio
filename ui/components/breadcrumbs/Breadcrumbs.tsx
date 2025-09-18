@@ -1,6 +1,5 @@
-import Link from 'next/link';
+import { BreadcrumbNavigationLink } from '@/ui/components/PageTransition';
 import React from 'react';
-import { AnimatedLink } from '@/ui/components/Links';
 import styles from './Breadcrumbs.module.scss';
 
 export type Crumb = {
@@ -28,7 +27,9 @@ export function Breadcrumbs({ base, crumbs }: BreadcrumbsProps) {
       <nav className={styles.root} aria-label="Breadcrumb">
         <ul className={styles.list}>
           <li>
-            <AnimatedLink href={base.href}>{base.label}</AnimatedLink>
+            <BreadcrumbNavigationLink href={base.href}>
+              {base.label}
+            </BreadcrumbNavigationLink>
           </li>
         </ul>
       </nav>
@@ -46,7 +47,9 @@ export function Breadcrumbs({ base, crumbs }: BreadcrumbsProps) {
     <nav className={styles.root} aria-label="Breadcrumb">
       <ul className={styles.list}>
         <li>
-          <AnimatedLink href={base.href}>{base.label}</AnimatedLink>
+          <BreadcrumbNavigationLink href={base.href}>
+            {base.label}
+          </BreadcrumbNavigationLink>
         </li>
         <li className={styles.separator}>/</li>
 
@@ -60,7 +63,9 @@ export function Breadcrumbs({ base, crumbs }: BreadcrumbsProps) {
                 <ul>
                   {overflowItems.map((c) => (
                     <li key={c.href}>
-                      <AnimatedLink href={c.href}>{c.label}</AnimatedLink>
+                      <BreadcrumbNavigationLink href={c.href}>
+                        {c.label}
+                      </BreadcrumbNavigationLink>
                     </li>
                   ))}
                 </ul>
@@ -71,7 +76,9 @@ export function Breadcrumbs({ base, crumbs }: BreadcrumbsProps) {
           visibleMiddle.map((c) => (
             <React.Fragment key={c.href}>
               <li>
-                <AnimatedLink href={c.href}>{c.label}</AnimatedLink>
+                <BreadcrumbNavigationLink href={c.href}>
+                  {c.label}
+                </BreadcrumbNavigationLink>
               </li>
               <li className={styles.separator}>/</li>
             </React.Fragment>
@@ -81,7 +88,9 @@ export function Breadcrumbs({ base, crumbs }: BreadcrumbsProps) {
         {showPrev && prev && (
           <>
             <li>
-              <AnimatedLink href={prev.href}>{prev.label}</AnimatedLink>
+              <BreadcrumbNavigationLink href={prev.href}>
+                {prev.label}
+              </BreadcrumbNavigationLink>
             </li>
             <li className={styles.separator}>/</li>
           </>

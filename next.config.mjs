@@ -43,6 +43,8 @@ const nextConfig = {
   // Performance optimizations
   experimental: {
     optimizePackageImports: ['@tiptap/react', '@tiptap/starter-kit'],
+    // Enable View Transitions API support for page transitions
+    viewTransition: true,
   },
   // Compression
   compress: true,
