@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import React from 'react';
 import { AnimatedLink } from '@/ui/components/Links';
 import styles from './Breadcrumbs.module.scss';
 
@@ -68,12 +69,12 @@ export function Breadcrumbs({ base, crumbs }: BreadcrumbsProps) {
           </li>
         ) : (
           visibleMiddle.map((c) => (
-            <>
-              <li key={c.href}>
+            <React.Fragment key={c.href}>
+              <li>
                 <AnimatedLink href={c.href}>{c.label}</AnimatedLink>
               </li>
               <li className={styles.separator}>/</li>
-            </>
+            </React.Fragment>
           ))
         )}
 
