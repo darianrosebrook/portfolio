@@ -13,6 +13,12 @@
   --tabs-color-active-bg: var(--semantic-color-background-surface);
   --tabs-color-disabled-fg: var(--semantic-color-foreground-disabled);
   --tabs-color-indicator: var(--semantic-color-accent-info);
+  --tabs-color-focus: var(--semantic-color-border-accent);
+  --tabs-color-hover-bg: var(--semantic-color-background-hover);
+  --tabs-color-hover-fg: var(--semantic-color-foreground-primary);
+
+  /* === Shape Tokens === */
+  --tabs-shape-radius: var(--semantic-shape-radius-default);
 
   /* === Motion Tokens === */
   --tabs-motion-indicator: var(--semantic-motion-duration-fast);

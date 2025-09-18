@@ -1,41 +1,16 @@
 {
   "name": "List",
   "layer": "primitive",
-  "anatomy": [
-    "root",
-    "ol",
-    "dl",
-    "sm",
-    "md",
-    "lg"
-  ],
+  "anatomy": ["root", "ol", "dl", "sm", "md", "lg"],
   "variants": {
-    "variant": [
-      "default",
-      "unstyled",
-      "inline",
-      "divided",
-      "spaced"
-    ],
-    "size": [
-      "sm",
-      "md",
-      "lg"
-    ]
+    "variant": ["default", "unstyled", "inline", "divided", "spaced"],
+    "size": ["sm", "md", "lg"]
   },
-  "states": [
-    "default",
-    "hover",
-    "focus",
-    "active",
-    "disabled"
-  ],
+  "states": ["default", "hover", "focus", "active", "disabled"],
   "slots": {},
   "a11y": {
     "role": "generic",
-    "labeling": [
-      "aria-label"
-    ],
+    "labeling": ["aria-label"],
     "keyboard": [],
     "apgPattern": null
   },

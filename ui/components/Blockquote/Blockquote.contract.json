@@ -1,39 +1,16 @@
 {
   "name": "Blockquote",
   "layer": "primitive",
-  "anatomy": [
-    "root",
-    "sm",
-    "md",
-    "lg",
-    "default",
-    "bordered"
-  ],
+  "anatomy": ["root", "sm", "md", "lg", "default", "bordered"],
   "variants": {
-    "variant": [
-      "default",
-      "bordered",
-      "highlighted"
-    ],
-    "size": [
-      "sm",
-      "md",
-      "lg"
-    ]
+    "variant": ["default", "bordered", "highlighted"],
+    "size": ["sm", "md", "lg"]
   },
-  "states": [
-    "default",
-    "hover",
-    "focus",
-    "active",
-    "disabled"
-  ],
+  "states": ["default", "hover", "focus", "active", "disabled"],
   "slots": {},
   "a11y": {
     "role": "generic",
-    "labeling": [
-      "aria-label"
-    ],
+    "labeling": ["aria-label"],
     "keyboard": [],
     "apgPattern": null
   },

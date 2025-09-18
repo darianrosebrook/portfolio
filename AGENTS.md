@@ -1,11 +1,13 @@
 # CAWS v1.0 — Engineering-Grade Operating System for Coding Agents
 
 ## Purpose
+
 Our "engineering-grade" operating system for coding agents that (1) forces planning before code, (2) bakes in tests as first-class artifacts, (3) creates explainable provenance, and (4) enforces quality via automated CI gates. It's expressed as a Working Spec + Ruleset the agent must follow, with schemas, templates, scripts, and verification hooks that enable better collaboration between agent and our human in the loop.
 
 ## 1) Core Framework
 
 ### Risk Tiering → Drives Rigor
+
 • **Tier 1** (Core/critical path, auth/billing, migrations): highest rigor; mutation ≥ 70, branch cov ≥ 90, contract tests mandatory, chaos tests optional, manual review required.
 • **Tier 2** (Common features, data writes, cross-service APIs): mutation ≥ 50, branch cov ≥ 80, contracts mandatory if any external API, e2e smoke required.
 • **Tier 3** (Low risk, read-only UI, internal tooling): mutation ≥ 30, branch cov ≥ 70, integration happy-path + unit thoroughness, e2e optional.
@@ -13,6 +15,7 @@ Our "engineering-grade" operating system for coding agents that (1) forces plann
 Agent must infer and declare tier in the plan; human reviewer may bump it up, never down.
 
 ### Required Inputs (No Code Until Present)
+
 • **Working Spec YAML** (see schema below) with user story, scope, invariants, acceptance tests, non-functional budgets, risk tier.
 • **Interface Contracts**: OpenAPI/GraphQL SDL/proto/Pact provider/consumer stubs.
 • **Test Plan**: unit cases, properties, fixtures, integration flows, e2e smokes; data setup/teardown; flake controls.
@@ -24,70 +27,88 @@ If any are missing, agent must generate a draft and request confirmation inside 
 ### The Loop: Plan → Implement → Verify → Document
 
 #### 2.1 Plan (agent output, committed as feature.plan.md)
+
 • **Design sketch**: sequence diagram or pseudo-API table.
 • **Test matrix**: aligned to user intent (unit/contract/integration/e2e) with edge cases and property predicates.
 • **Data plan**: factories/fixtures, seed strategy, anonymized sample payloads.
 • **Observability plan**: logs/metrics/traces; which spans and attributes will verify correctness in prod.
 
 #### 2.2 Implement (rules)
+
 • **Contract-first**: generate/validate types from OpenAPI/SDL; add contract tests (Pact/WireMock/MSW) before impl.
 • **Unit focus**: pure logic isolated; mocks only at boundaries you own (clock, fs, network).
 • **State seams**: inject time/uuid/random; ensure determinism; guard for idempotency where relevant.
 • **Migration discipline**: forwards-compatible; provide up/down, dry-run, and backfill strategy.
 
 #### 2.3 Verify (must pass locally and in CI)
+
 • **Static checks**: typecheck, lint (code + tests), import hygiene, dead-code scan, secret scan.
 • **Tests**:
-  • **Unit**: fast, deterministic; cover branches and edge conditions; property-based where feasible.
-  • **Contract**: consumer/provider; versioned and stored under contracts/.
-  • **Integration**: real DB or Testcontainers; seed data via factories; verify persistence, transactions, retries/timeouts.
-  • **E2E smoke**: Playwright/Cypress; critical user paths only; semantic selectors; screenshot+trace on failure.
-  • **Mutation testing**: minimum scores per tier; non-conformant builds fail.
-  • **Non-functional checks**: axe rules; Lighthouse CI budgets or API latency budgets; SAST/dep scan clean.
-  • **Flake policy**: tests that intermittently fail are quarantined within 24h with an open ticket; no retries as policy, only as temporary band-aid with expiry.
+• **Unit**: fast, deterministic; cover branches and edge conditions; property-based where feasible.
+• **Contract**: consumer/provider; versioned and stored under contracts/.
+• **Integration**: real DB or Testcontainers; seed data via factories; verify persistence, transactions, retries/timeouts.
+• **E2E smoke**: Playwright/Cypress; critical user paths only; semantic selectors; screenshot+trace on failure.
+• **Mutation testing**: minimum scores per tier; non-conformant builds fail.
+• **Non-functional checks**: axe rules; Lighthouse CI budgets or API latency budgets; SAST/dep scan clean.
+• **Flake policy**: tests that intermittently fail are quarantined within 24h with an open ticket; no retries as policy, only as temporary band-aid with expiry.
 
 #### 2.4 Document & Deliver
+
 • **PR bundle** (template below) with:
-  • Working Spec YAML
-  • Test Plan & Coverage/Mutation summary, Contract artifacts
-  • Risk assessment, Rollback plan, Observability notes (dashboards/queries)
-  • Changelog (semver impact), Migration notes
-  • Traceability: PR title references ticket; commits follow conventional commits; each test cites the requirement ID in test name or annotation.
-  • Explainability: agent includes a 10-line "rationale" and "known-limits" section.
+• Working Spec YAML
+• Test Plan & Coverage/Mutation summary, Contract artifacts
+• Risk assessment, Rollback plan, Observability notes (dashboards/queries)
+• Changelog (semver impact), Migration notes
+• Traceability: PR title references ticket; commits follow conventional commits; each test cites the requirement ID in test name or annotation.
+• Explainability: agent includes a 10-line "rationale" and "known-limits" section.
 
 ## 2) Machine-Enforceable Implementation
 
 ### A) Executable Schemas & Validation
 
 #### Working Spec JSON Schema
+
 ```json
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "CAWS Working Spec",
   "type": "object",
-  "required": ["id", "title", "risk_tier", "scope", "invariants", "acceptance", "non_functional", "contracts"],
+  "required": [
+    "id",
+    "title",
+    "risk_tier",
+    "scope",
+    "invariants",
+    "acceptance",
+    "non_functional",
+    "contracts"
+  ],
   "properties": {
     "id": { "type": "string", "pattern": "^[A-Z]+-\\d+$" },
     "title": { "type": "string", "minLength": 8 },
-    "risk_tier": { "type": "integer", "enum": [1,2,3] },
+    "risk_tier": { "type": "integer", "enum": [1, 2, 3] },
     "scope": {
       "type": "object",
-      "required": ["in","out"],
+      "required": ["in", "out"],
       "properties": {
-        "in":  { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "in": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
         "out": { "type": "array", "items": { "type": "string" } }
       }
     },
-    "invariants": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "invariants": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
     "acceptance": {
       "type": "array",
       "minItems": 1,
       "items": {
         "type": "object",
-        "required": ["id","given","when","then"],
+        "required": ["id", "given", "when", "then"],
         "properties": {
-          "id":   { "type": "string", "pattern": "^A\\d+$" },
-          "given":{ "type": "string" },
+          "id": { "type": "string", "pattern": "^A\\d+$" },
+          "given": { "type": "string" },
           "when": { "type": "string" },
           "then": { "type": "string" }
         }
@@ -114,9 +135,12 @@ If any are missing, agent must generate a draft and request confirmation inside 
       "minItems": 1,
       "items": {
         "type": "object",
-        "required": ["type","path"],
+        "required": ["type", "path"],
         "properties": {
-          "type": { "type": "string", "enum": ["openapi","graphql","proto","pact"] },
+          "type": {
+            "type": "string",
+            "enum": ["openapi", "graphql", "proto", "pact"]
+          },
           "path": { "type": "string" }
         }
       }
@@ -124,59 +148,73 @@ If any are missing, agent must generate a draft and request confirmation inside 
     "observability": {
       "type": "object",
       "properties": {
-        "logs":    { "type": "array", "items": { "type": "string" } },
+        "logs": { "type": "array", "items": { "type": "string" } },
         "metrics": { "type": "array", "items": { "type": "string" } },
-        "traces":  { "type": "array", "items": { "type": "string" } }
+        "traces": { "type": "array", "items": { "type": "string" } }
       }
     },
     "migrations": { "type": "array", "items": { "type": "string" } },
-    "rollback":   { "type": "array", "items": { "type": "string" } }
+    "rollback": { "type": "array", "items": { "type": "string" } }
   },
   "additionalProperties": false
 }
 ```
 
 #### Provenance Manifest Schema
+
 ```json
 {
-  "$schema":"https://json-schema.org/draft/2020-12/schema",
-  "type":"object",
-  "required":["agent","model","commit","artifacts","results","approvals"],
-  "properties":{
-    "agent":{"type":"string"},
-    "model":{"type":"string"},
-    "prompts":{"type":"array","items":{"type":"string"}},
-    "commit":{"type":"string"},
-    "artifacts":{"type":"array","items":{"type":"string"}},
-    "results":{
-      "type":"object",
-      "properties":{
-        "coverage_branch":{"type":"number"},
-        "mutation_score":{"type":"number"},
-        "tests_passed":{"type":"integer"},
-        "contracts":{"type":"object","properties":{"consumer":{"type":"boolean"},"provider":{"type":"boolean"}}},
-        "a11y":{"type":"string"},
-        "perf":{"type":"object"}
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["agent", "model", "commit", "artifacts", "results", "approvals"],
+  "properties": {
+    "agent": { "type": "string" },
+    "model": { "type": "string" },
+    "prompts": { "type": "array", "items": { "type": "string" } },
+    "commit": { "type": "string" },
+    "artifacts": { "type": "array", "items": { "type": "string" } },
+    "results": {
+      "type": "object",
+      "properties": {
+        "coverage_branch": { "type": "number" },
+        "mutation_score": { "type": "number" },
+        "tests_passed": { "type": "integer" },
+        "contracts": {
+          "type": "object",
+          "properties": {
+            "consumer": { "type": "boolean" },
+            "provider": { "type": "boolean" }
+          }
+        },
+        "a11y": { "type": "string" },
+        "perf": { "type": "object" }
       },
       "additionalProperties": true
     },
-    "approvals":{"type":"array","items":{"type":"string"}}
+    "approvals": { "type": "array", "items": { "type": "string" } }
   }
 }
 ```
 
 #### Tier Policy Configuration
+
 ```json
 {
-  "1": {"min_branch": 0.90, "min_mutation": 0.70, "requires_contracts": true, "requires_manual_review": true},
-  "2": {"min_branch": 0.80, "min_mutation": 0.50, "requires_contracts": true},
-  "3": {"min_branch": 0.70, "min_mutation": 0.30, "requires_contracts": false}
+  "1": {
+    "min_branch": 0.9,
+    "min_mutation": 0.7,
+    "requires_contracts": true,
+    "requires_manual_review": true
+  },
+  "2": { "min_branch": 0.8, "min_mutation": 0.5, "requires_contracts": true },
+  "3": { "min_branch": 0.7, "min_mutation": 0.3, "requires_contracts": false }
 }
 ```
 
 ### B) CI/CD Quality Gates (Automated)
 
 #### Complete GitHub Actions Pipeline
+
 ```yaml
 name: CAWS Quality Gates
 on:
@@ -298,6 +336,7 @@ jobs:
 ```
 
 ### C) Repository Scaffold
+
 ```
 .caws/
   policy/tier-policy.json
@@ -325,58 +364,64 @@ CODEOWNERS
 ## 3) Templates & Examples
 
 ### Working Spec YAML Template
+
 ```yaml
 id: FEAT-1234
-title: "Apply coupon at checkout"
+title: 'Apply coupon at checkout'
 risk_tier: 2
 scope:
-  in: ["apply percentage/fixed coupons", "stacking rules per business policy"]
-  out: ["gift cards", "multi-currency proration"]
+  in: ['apply percentage/fixed coupons', 'stacking rules per business policy']
+  out: ['gift cards', 'multi-currency proration']
 invariants:
-  - "Total ≥ 0"
-  - "Coupon validity window respected (server time)"
-  - "Max one store-wide coupon; stacking only with product-specific coupons"
+  - 'Total ≥ 0'
+  - 'Coupon validity window respected (server time)'
+  - 'Max one store-wide coupon; stacking only with product-specific coupons'
 acceptance:
   - id: A1
-    given: "valid percentage coupon and eligible cart"
-    when:  "user applies coupon"
-    then:  "subtotal reduces by rate; taxes recomputed; UI reflects discount"
+    given: 'valid percentage coupon and eligible cart'
+    when: 'user applies coupon'
+    then: 'subtotal reduces by rate; taxes recomputed; UI reflects discount'
   - id: A2
-    given: "expired coupon"
-    when:  "apply"
-    then:  "explainable error; no state change"
+    given: 'expired coupon'
+    when: 'apply'
+    then: 'explainable error; no state change'
 non_functional:
-  a11y: ["keyboard reachable apply/remove", "announce errors with aria-live"]
+  a11y: ['keyboard reachable apply/remove', 'announce errors with aria-live']
   perf: { api_p95_ms: 250 }
-  security: ["server-side validation; no client trust"]
+  security: ['server-side validation; no client trust']
 contracts:
   - type: openapi
-    path: "contracts/checkout.yaml#/applyCoupon"
+    path: 'contracts/checkout.yaml#/applyCoupon'
 observability:
-  logs: ["coupon.apply result, reason"]
-  metrics: ["coupon_apply_success_count", "failure_reason"]
-  traces: ["applyCoupon span with coupon_id, cart_id"]
+  logs: ['coupon.apply result, reason']
+  metrics: ['coupon_apply_success_count', 'failure_reason']
+  traces: ['applyCoupon span with coupon_id, cart_id']
 migrations:
-  - "add coupon_usages table with FK and unique constraints"
-rollback: ["feature flag kill-switch; revert migration step DDL"]
+  - 'add coupon_usages table with FK and unique constraints'
+rollback: ['feature flag kill-switch; revert migration step DDL']
 ```
 
 ### PR Description Template
+
 ```markdown
 ## Summary
+
 What changed and why (business value), link to ticket.
 
 ## Working Spec
+
 - Risk Tier: 2
 - Invariants: ...
 - Acceptance IDs covered: A1, A2, ...
 
 ## Contracts
+
 - OpenAPI diff: contracts/checkout.yaml (v1.3 → v1.4)
 - Consumer tests: ✅ 12
 - Provider verification: ✅
 
 ## Tests
+
 - Unit: 74 tests, branch cov 86% (target 80%)
 - Mutation: 56% (target 50%) – survived mutants listed below (rationale)
 - Integration: 8 flows (Testcontainers Postgres)
@@ -384,80 +429,103 @@ What changed and why (business value), link to ticket.
 - A11y: axe 0 critical; keyboard path video attached
 
 ## Non-functional
+
 - API p95 212ms (budget 250ms)
 - Zero SAST criticals; deps policy compliant
 
 ## Observability
+
 - New metrics: coupon_apply_success_count
 - OTel spans: applyCoupon with attributes
 
 ## Migration & Rollback
+
 - DDL: coupons_usages (idempotent)
 - Kill switch env: FEATURE_COUPONS_APPLY=false
 
 ## Known Limits / Follow-ups
+
 - Stacking with gift cards is out of scope (FEAT-1290)
 ```
 
 ### Testing Patterns
 
 #### Property-Based Unit Test
-```typescript
-import fc from "fast-check";
-import { applyCoupon } from "../../src/discount";
-import { fixedClock } from "../helpers/clock";
 
-it("total never < 0 [INV: Total ≥ 0]", () => {
-  const cart = cartArb(); const coupon = couponArb();
-  fc.assert(fc.property(cart, coupon, (c,k) => {
-    const r = applyCoupon(c,k,fixedClock("2025-09-17T00:00:00Z"));
-    return r.total >= 0;
-  }));
+```typescript
+import fc from 'fast-check';
+import { applyCoupon } from '../../src/discount';
+import { fixedClock } from '../helpers/clock';
+
+it('total never < 0 [INV: Total ≥ 0]', () => {
+  const cart = cartArb();
+  const coupon = couponArb();
+  fc.assert(
+    fc.property(cart, coupon, (c, k) => {
+      const r = applyCoupon(c, k, fixedClock('2025-09-17T00:00:00Z'));
+      return r.total >= 0;
+    })
+  );
 });
 ```
 
 #### Contract Consumer Test
+
 ```typescript
-import { http, HttpResponse } from "msw";
-import { setupServer } from "msw/node";
-import { ApplyCouponResponse } from "../../contracts/checkout.types";
+import { http, HttpResponse } from 'msw';
+import { setupServer } from 'msw/node';
+import { ApplyCouponResponse } from '../../contracts/checkout.types';
 
 const server = setupServer(
-  http.post("/applyCoupon", () => HttpResponse.json({ success:true, subtotal:90 } satisfies ApplyCouponResponse))
+  http.post('/applyCoupon', () =>
+    HttpResponse.json({
+      success: true,
+      subtotal: 90,
+    } satisfies ApplyCouponResponse)
+  )
 );
-beforeAll(()=>server.listen()); afterAll(()=>server.close());
+beforeAll(() => server.listen());
+afterAll(() => server.close());
 
-it("conforms to /applyCoupon schema [contract]", async () => {
-  const res = await client.applyCoupon({ code:"SAVE10" });
+it('conforms to /applyCoupon schema [contract]', async () => {
+  const res = await client.applyCoupon({ code: 'SAVE10' });
   expect(res.success).toBe(true);
 });
 ```
 
 #### Integration Test with Testcontainers
+
 ```typescript
-import { StartedPostgreSqlContainer, PostgreSqlContainer } from "@testcontainers/postgresql";
+import {
+  StartedPostgreSqlContainer,
+  PostgreSqlContainer,
+} from '@testcontainers/postgresql';
 let pg: StartedPostgreSqlContainer;
 
-beforeAll(async ()=> { pg = await new PostgreSqlContainer().start(); await migrate(pg); });
-afterAll(async ()=> await pg.stop());
+beforeAll(async () => {
+  pg = await new PostgreSqlContainer().start();
+  await migrate(pg);
+});
+afterAll(async () => await pg.stop());
 
-it("persists coupon usage [flow A1]", async () => {
+it('persists coupon usage [flow A1]', async () => {
   await seed(pg).withCustomer().withEligibleItems();
-  const res = await api(pg).applyCoupon("SAVE10");
+  const res = await api(pg).applyCoupon('SAVE10');
   expect(res.status).toBe(200);
-  const cnt = await countUsages(pg, "SAVE10");
+  const cnt = await countUsages(pg, 'SAVE10');
   expect(cnt).toBe(1);
 });
 ```
 
 #### E2E Smoke Test
+
 ```typescript
-test("apply coupon updates subtotal [A1]", async ({ page }) => {
-  await page.goto("/checkout");
-  await page.getByRole("textbox", { name: /coupon/i }).fill("SAVE10");
-  await page.getByRole("button", { name: /apply/i }).click();
-  await expect(page.getByRole("status")).toHaveText(/discount applied/i);
-  await expect(page.getByTestId("subtotal")).toContainText("$90.00");
+test('apply coupon updates subtotal [A1]', async ({ page }) => {
+  await page.goto('/checkout');
+  await page.getByRole('textbox', { name: /coupon/i }).fill('SAVE10');
+  await page.getByRole('button', { name: /apply/i }).click();
+  await expect(page.getByRole('status')).toHaveText(/discount applied/i);
+  await expect(page.getByTestId('subtotal')).toContainText('$90.00');
 });
 ```
 
@@ -483,17 +551,20 @@ test("apply coupon updates subtotal [A1]", async ({ page }) => {
 ## 6) Operational Excellence
 
 ### Flake Management
+
 • **Detector**: compute week-over-week pass variance per spec ID.
 • **Policy**: >0.5% variance → auto-label flake:quarantine, open ticket with owner + expiry (7 days).
 • **Implementation**: Store test run hashes in .agent/provenance.json; nightly job aggregates and posts a table to dashboard.
 
 ### Waivers & Escalation
+
 • **Temporary waiver requires**:
-  • waivers.yml with: gate, reason, owner, expiry ISO date (≤ 14 days), compensating control.
-  • PR must link to ticket; trust score maximum capped at 79 with active waivers.
+• waivers.yml with: gate, reason, owner, expiry ISO date (≤ 14 days), compensating control.
+• PR must link to ticket; trust score maximum capped at 79 with active waivers.
 • **Escalation**: unresolved flake/waiver past expiry auto-blocks merges across the repo until cleared.
 
 ### Security & Performance Checks
+
 • **Secrets**: run gitleaks/trufflehog on changed files; CAWS gate blocks any hit above low severity.
 • **SAST**: language-appropriate tools; gate requires zero criticals.
 • **Performance**: k6 scripts for API budgets; LHCI for web budgets; regressions fail gate.
@@ -502,15 +573,18 @@ test("apply coupon updates subtotal [A1]", async ({ page }) => {
 ## 7) Language & Tooling Ecosystem
 
 ### TypeScript Stack (Recommended)
+
 • **Testing**: Jest/Vitest, fast-check, Playwright, Testcontainers, Stryker, MSW or Pact
 • **Quality**: ESLint + types, LHCI, axe-core
 • **CI**: GitHub Actions with Node 20
 
 ### Python Stack
+
 • **Testing**: pytest, hypothesis, Playwright (Python), Testcontainers-py, mutmut, Schemathesis
 • **Quality**: bandit/semgrep, Lighthouse CI, axe-core
 
 ### JVM Stack
+
 • **Testing**: JUnit5, jqwik, Testcontainers, PIT (mutation), Pact-JVM
 • **Quality**: OWASP dependency check, SonarQube, axe-core
 
@@ -518,19 +592,19 @@ test("apply coupon updates subtotal [A1]", async ({ page }) => {
 
 ## 8) Review Rubric (Scriptable Scoring)
 
-| Category | Weight | Criteria | 0 | 1 | 2 |
-|----------|--------|----------|----|----|----|
-| Spec clarity & invariants | ×5 | Clear, testable invariants | Missing/unclear | Basic coverage | Comprehensive + edge cases |
-| Contract correctness & versioning | ×5 | Schema accuracy + versioning | Errors present | Minor issues | Perfect + versioned |
-| Unit thoroughness & edge coverage | ×5 | Branch coverage + property tests | <70% coverage | Meets tier minimum | >90% + properties |
-| Integration realism | ×4 | Real containers + seeds | Mocked heavily | Basic containers | Full stack + realistic data |
-| E2E relevance & stability | ×3 | Critical paths + semantic selectors | Brittle selectors | Basic coverage | Semantic + stable |
-| Mutation adequacy | ×4 | Score vs tier threshold | <50% | Meets minimum | >80% |
-| A11y pathways & results | ×3 | Keyboard + axe clean | Major issues | Basic compliance | Full WCAG + keyboard |
-| Perf/Resilience | ×3 | Budgets + timeouts/retries | No checks | Basic budgets | Full resilience |
-| Observability | ×3 | Logs/metrics/traces asserted | Missing | Basic emission | Asserted in tests |
-| Migration safety & rollback | ×3 | Reversible + kill-switch | No rollback | Basic revert | Full rollback + testing |
-| Docs & PR explainability | ×3 | Clear rationale + limits | Minimal | Basic docs | Comprehensive + ADR |
+| Category                          | Weight | Criteria                            | 0                 | 1                  | 2                           |
+| --------------------------------- | ------ | ----------------------------------- | ----------------- | ------------------ | --------------------------- |
+| Spec clarity & invariants         | ×5     | Clear, testable invariants          | Missing/unclear   | Basic coverage     | Comprehensive + edge cases  |
+| Contract correctness & versioning | ×5     | Schema accuracy + versioning        | Errors present    | Minor issues       | Perfect + versioned         |
+| Unit thoroughness & edge coverage | ×5     | Branch coverage + property tests    | <70% coverage     | Meets tier minimum | >90% + properties           |
+| Integration realism               | ×4     | Real containers + seeds             | Mocked heavily    | Basic containers   | Full stack + realistic data |
+| E2E relevance & stability         | ×3     | Critical paths + semantic selectors | Brittle selectors | Basic coverage     | Semantic + stable           |
+| Mutation adequacy                 | ×4     | Score vs tier threshold             | <50%              | Meets minimum      | >80%                        |
+| A11y pathways & results           | ×3     | Keyboard + axe clean                | Major issues      | Basic compliance   | Full WCAG + keyboard        |
+| Perf/Resilience                   | ×3     | Budgets + timeouts/retries          | No checks         | Basic budgets      | Full resilience             |
+| Observability                     | ×3     | Logs/metrics/traces asserted        | Missing           | Basic emission     | Asserted in tests           |
+| Migration safety & rollback       | ×3     | Reversible + kill-switch            | No rollback       | Basic revert       | Full rollback + testing     |
+| Docs & PR explainability          | ×3     | Clear rationale + limits            | Minimal           | Basic docs         | Comprehensive + ADR         |
 
 **Target**: ≥ 80/100 (weighted sum). Calculator in `tools/caws/rubric.ts`.
 
@@ -545,38 +619,44 @@ test("apply coupon updates subtotal [A1]", async ({ page }) => {
 ## 10) Cursor/Codex Agent Integration
 
 ### Agent Commands
+
 • `agent plan` → emits plan + test matrix
 • `agent verify` → runs local gates; generates provenance
 • `agent prove` → creates provenance manifest
 • `agent doc` → updates README/changelog from spec
 
 ### Guardrails
+
 • **Templates**: Inject Working Spec YAML + PR template on "New Feature" command
-• **Scaffold**: Pre-wire tests/* skeletons with containers and contracts
+• **Scaffold**: Pre-wire tests/\* skeletons with containers and contracts
 • **Context discipline**: Restrict writes to spec-touched modules; deny outside scope unless spec updated
 • **Feedback loop**: PR comments show coverage, mutation diff, contract verification summary
 
 ## 11) Adoption Roadmap
 
 ### Phase 1: Foundation (Week 1)
+
 - [ ] Add .caws/ directory with schemas and templates
 - [ ] Create tools/caws/ validation scripts
 - [ ] Wire basic GitHub Actions workflow
 - [ ] Add CODEOWNERS for Tier-1 paths
 
 ### Phase 2: Quality Gates (Week 2)
+
 - [ ] Enable Testcontainers for integration tests
 - [ ] Add mutation testing with tier thresholds
 - [ ] Implement trust score calculation
 - [ ] Add axe + Playwright smoke for UI changes
 
 ### Phase 3: Operational Excellence (Week 3)
+
 - [ ] Publish provenance manifest with PRs
 - [ ] Implement flake detector and quarantine process
 - [ ] Add waiver system with trust score caps
 - [ ] Socialize review rubric and block merges <80
 
 ### Phase 4: Continuous Improvement (Ongoing)
+
 - [ ] Monitor drift in contract usage
 - [ ] Refine tooling based on feedback
 - [ ] Expand language support as needed
@@ -588,22 +668,29 @@ test("apply coupon updates subtotal [A1]", async ({ page }) => {
 const weights = {
   coverage: 0.25,
   mutation: 0.25,
-  contracts: 0.20,
-  a11y: 0.10,
-  perf: 0.10,
-  flake: 0.10
+  contracts: 0.2,
+  a11y: 0.1,
+  perf: 0.1,
+  flake: 0.1,
 };
 
 function trustScore(tier: string, prov: Provenance) {
-  const wsum = Object.values(weights).reduce((a,b)=>a+b,0);
+  const wsum = Object.values(weights).reduce((a, b) => a + b, 0);
   const score =
-    weights.coverage * normalize(prov.results.coverage_branch, tiers[tier].min_branch, 0.95) +
-    weights.mutation * normalize(prov.results.mutation_score, tiers[tier].min_mutation, 0.9) +
-    weights.contracts * (tiers[tier].requires_contracts ? (prov.results.contracts.consumer && prov.results.contracts.provider ? 1 : 0) : 1) +
-    weights.a11y * (prov.results.a11y === "pass" ? 1 : 0) +
+    weights.coverage *
+      normalize(prov.results.coverage_branch, tiers[tier].min_branch, 0.95) +
+    weights.mutation *
+      normalize(prov.results.mutation_score, tiers[tier].min_mutation, 0.9) +
+    weights.contracts *
+      (tiers[tier].requires_contracts
+        ? prov.results.contracts.consumer && prov.results.contracts.provider
+          ? 1
+          : 0
+        : 1) +
+    weights.a11y * (prov.results.a11y === 'pass' ? 1 : 0) +
     weights.perf * budgetOk(prov.results.perf) +
     weights.flake * (prov.results.flake_rate <= 0.005 ? 1 : 0.5);
-  return Math.round((score/wsum)*100);
+  return Math.round((score / wsum) * 100);
 }
 ```
 

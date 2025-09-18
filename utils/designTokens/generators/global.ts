@@ -54,8 +54,28 @@ function collectTokens(
         // Track defined variables
         context.definedVars.add(cssVar);
 
-        // Handle theme-specific values
-        if (typeof tokenValue === 'object' && tokenValue !== null) {
+        // Check for theme-specific values in $extensions
+        const extensions = value.$extensions as
+          | Record<string, unknown>
+          | undefined;
+        const hasThemeExtensions =
+          extensions &&
+          ('design.paths.light' in extensions ||
+            'design.paths.dark' in extensions);
+
+        if (hasThemeExtensions) {
+          maps.hasDarkOverride = true;
+
+          // Light theme value (from extension or default)
+          const lightValue = extensions!['design.paths.light'] || tokenValue;
+          const processedLightValue = processTokenValue(lightValue, context);
+          maps.lightColors[cssVar] = processedLightValue;
+
+          // Dark theme value (from extension or default)
+          const darkValue = extensions!['design.paths.dark'] || tokenValue;
+          const processedDarkValue = processTokenValue(darkValue, context);
+          maps.darkColors[cssVar] = processedDarkValue;
+        } else if (typeof tokenValue === 'object' && tokenValue !== null) {
           const themeObj = tokenValue as Record<string, unknown>;
 
           if ('light' in themeObj || 'dark' in themeObj) {
@@ -86,10 +106,9 @@ function collectTokens(
             tokenType === 'color' ||
             currentPath.some((p) => p.includes('color'))
           ) {
+            // For color tokens without theme extensions, use default value for both themes
             maps.lightColors[cssVar] = processedValue;
-            if (!maps.darkColors[cssVar]) {
-              maps.darkColors[cssVar] = processedValue; // Fallback to same value
-            }
+            maps.darkColors[cssVar] = processedValue;
           } else {
             maps.root[cssVar] = processedValue;
           }
@@ -173,7 +192,11 @@ export function generateGlobalTokens(): boolean {
 
   // Generate CSS content
   const banner = generateBanner(PATHS.tokens);
-  const rootBlock = formatCSSBlock(':root', maps.root);
+
+  // Merge light colors into root as defaults
+  const rootWithDefaults = { ...maps.root, ...maps.lightColors };
+  const rootBlock = formatCSSBlock(':root', rootWithDefaults);
+
   const lightBlock = formatCSSBlock('.light', maps.lightColors);
   const darkBlock = formatCSSBlock('.dark', maps.darkColors);
 

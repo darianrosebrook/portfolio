@@ -3,47 +3,81 @@
  */
 @mixin vars {
   /* === Color Tokens === */
-  --switch-color-track-background-default: var(--semantic-color-background-secondary);
-  --switch-color-track-background-checked: var(--semantic-color-background-brand);
-  --switch-color-track-background-disabled: var(--semantic-color-background-disabled);
+  --switch-color-track-background-default: var(
+    --semantic-color-background-secondary
+  );
+  --switch-color-track-background-hover: var(--semantic-color-background-hover);
+  --switch-color-track-background-focus: var(
+    --semantic-color-background-secondary
+  );
+  --switch-color-track-background-disabled: var(
+    --semantic-color-background-disabled
+  );
+  --switch-color-track-background-checked: var(
+    --semantic-color-background-primary
+  );
+  --switch-color-track-background-error: var(
+    --semantic-color-background-danger-subtle
+  );
   --switch-color-track-border-default: var(--semantic-color-border-primary);
-  --switch-color-track-border-checked: var(--semantic-color-border-accent);
+  --switch-color-track-border-hover: var(--semantic-color-border-bold);
+  --switch-color-track-border-focus: var(--semantic-color-border-accent);
   --switch-color-track-border-disabled: var(--semantic-color-border-disabled);
-  --switch-color-thumb-background-default: var(--semantic-color-background-primary);
-  --switch-color-thumb-background-checked: var(--semantic-color-background-onColor);
-  --switch-color-thumb-background-disabled: var(--semantic-color-background-disabled);
-  --switch-color-thumb-shadow: var(--semantic-elevation-surface-raised);
-  --switch-color-text-default: var(--semantic-color-foreground-primary);
+  --switch-color-track-border-error: var(--semantic-color-border-danger);
+  --switch-color-thumb-background-default: var(
+    --semantic-color-background-primary
+  );
+  --switch-color-thumb-background-hover: var(--semantic-color-background-hover);
+  --switch-color-thumb-background-focus: var(
+    --semantic-color-background-primary
+  );
+  --switch-color-thumb-background-disabled: var(
+    --semantic-color-background-disabled
+  );
+  --switch-color-thumb-background-checked: var(
+    --semantic-color-background-accent
+  );
+  --switch-color-thumb-background-error: var(
+    --semantic-color-background-danger
+  );
+  --switch-color-thumb-border-default: var(--semantic-color-border-primary);
+  --switch-color-thumb-border-hover: var(--semantic-color-border-bold);
+  --switch-color-thumb-border-focus: var(--semantic-color-border-accent);
+  --switch-color-thumb-border-disabled: var(--semantic-color-border-disabled);
+  --switch-color-thumb-border-error: var(--semantic-color-border-danger);
+  --switch-color-text-default: var(--semantic-color-foreground-secondary);
+  --switch-color-text-hover: var(--semantic-color-foreground-primary);
   --switch-color-text-disabled: var(--semantic-color-foreground-disabled);
+  --switch-color-text-error: var(--semantic-color-foreground-danger);
 
   /* === Size Tokens === */
-  --switch-size-sm-track-width: var(--core-spacing-size-08);
+  --switch-size-sm-track-width: var(--core-spacing-size-10);
   --switch-size-sm-track-height: var(--core-spacing-size-05);
   --switch-size-sm-track-radius: var(--semantic-shape-radius-full);
   --switch-size-sm-thumb-size: var(--core-spacing-size-04);
   --switch-size-sm-thumb-offset: var(--core-spacing-size-01);
-  --switch-size-sm-gap: var(--core-spacing-size-03);
+  --switch-size-sm-gap: var(--core-spacing-size-04);
   --switch-size-sm-fontSize: var(--semantic-typography-caption-01);
-  --switch-size-md-track-width: var(--core-spacing-size-09);
+  --switch-size-md-track-width: var(--core-spacing-size-12);
   --switch-size-md-track-height: var(--core-spacing-size-06);
   --switch-size-md-track-radius: var(--semantic-shape-radius-full);
   --switch-size-md-thumb-size: var(--core-spacing-size-05);
   --switch-size-md-thumb-offset: var(--core-spacing-size-01);
   --switch-size-md-gap: var(--core-spacing-size-04);
-  --switch-size-md-fontSize: var(--semantic-typography-body-small-fontSize);
-  --switch-size-lg-track-width: var(--core-spacing-size-10);
+  --switch-size-md-fontSize: var(--semantic-typography-body-small-font-size);
+  --switch-size-lg-track-width: var(--core-spacing-size-14);
   --switch-size-lg-track-height: var(--core-spacing-size-07);
   --switch-size-lg-track-radius: var(--semantic-shape-radius-full);
   --switch-size-lg-thumb-size: var(--core-spacing-size-06);
   --switch-size-lg-thumb-offset: var(--core-spacing-size-01);
-  --switch-size-lg-gap: var(--core-spacing-size-05);
-  --switch-size-lg-fontSize: var(--semantic-typography-body-default-fontSize);
+  --switch-size-lg-gap: var(--core-spacing-size-04);
+  --switch-size-lg-fontSize: var(--semantic-typography-body-default-font-size);
 
   /* === Motion Tokens === */
-  --switch-motion-duration: var(--semantic-motion-interaction-enter-duration);
-  --switch-motion-easing: var(--semantic-motion-interaction-enter-easing);
+  --switch-motion-duration: var(--semantic-duration-fast);
+  --switch-motion-easing: var(--semantic-easing-standard);
 
   /* === Focus Tokens === */
-  --switch-focus-ring: var(--semantic-focus-ring);
-  --switch-focus-offset: var(--semantic-focus-ringOffset);
+  --switch-focus-ring-color: var(--semantic-color-border-accent);
+  --switch-focus-ring-width: var(--core-spacing-size-02);
 }

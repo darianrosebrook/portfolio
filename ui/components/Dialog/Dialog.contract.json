@@ -1,29 +1,13 @@
 {
   "name": "Dialog",
   "layer": "composer",
-  "anatomy": [
-    "root",
-    "backdrop",
-    "header",
-    "title",
-    "body",
-    "footer"
-  ],
+  "anatomy": ["root", "backdrop", "header", "title", "body", "footer"],
   "variants": {},
-  "states": [
-    "default",
-    "hover",
-    "focus",
-    "active",
-    "disabled"
-  ],
+  "states": ["default", "hover", "focus", "active", "disabled"],
   "slots": {},
   "a11y": {
     "role": "dialog",
-    "labeling": [
-      "aria-label",
-      "aria-labelledby"
-    ],
+    "labeling": ["aria-label", "aria-labelledby"],
     "keyboard": [
       {
         "key": "Escape",

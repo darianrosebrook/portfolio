@@ -1,25 +1,13 @@
 {
   "name": "SlinkyCursor",
   "layer": "primitive",
-  "anatomy": [
-    "root",
-    "pest",
-    "active"
-  ],
+  "anatomy": ["root", "pest", "active"],
   "variants": {},
-  "states": [
-    "default",
-    "hover",
-    "focus",
-    "active",
-    "disabled"
-  ],
+  "states": ["default", "hover", "focus", "active", "disabled"],
   "slots": {},
   "a11y": {
     "role": "generic",
-    "labeling": [
-      "aria-label"
-    ],
+    "labeling": ["aria-label"],
     "keyboard": [],
     "apgPattern": null
   },

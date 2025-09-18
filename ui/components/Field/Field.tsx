@@ -43,4 +43,14 @@ export function Field({
   );
 }
 
+// Slot components for explicit composition
+Field.Label = Label;
+Field.Label.displayName = 'Field.Label';
+
+Field.Error = ErrorText;
+Field.Error.displayName = 'Field.Error';
+
+Field.Help = HelpText;
+Field.Help.displayName = 'Field.Help';
+
 export default Field;

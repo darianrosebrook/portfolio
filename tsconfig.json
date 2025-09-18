@@ -31,5 +31,9 @@
     "**/*.tsx",
     "globals.d.ts"
   ],
-  "exclude": ["node_modules", "app/blueprints/design-patterns/patterns/**"]
+  "exclude": [
+    "node_modules",
+    "app/blueprints/design-patterns/patterns/**",
+    "scripts/templates/**"
+  ]
 }

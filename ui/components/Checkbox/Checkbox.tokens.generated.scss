@@ -1,0 +1,44 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Checkbox/Checkbox.tokens.json
+ */
+@mixin vars {
+  /* === Size Tokens === */
+  --checkbox-size-sm-width: var(--size-4);
+  --checkbox-size-sm-height: var(--size-4);
+  --checkbox-size-sm-iconSize: var(--size-3);
+  --checkbox-size-md-width: var(--size-5);
+  --checkbox-size-md-height: var(--size-5);
+  --checkbox-size-md-iconSize: var(--size-4);
+  --checkbox-size-lg-width: var(--size-6);
+  --checkbox-size-lg-height: var(--size-6);
+  --checkbox-size-lg-iconSize: var(--size-5);
+
+  /* === Color Tokens === */
+  --checkbox-color-background-default: var(--color-background-surface);
+  --checkbox-color-background-checked: var(--color-brand-500);
+  --checkbox-color-background-indeterminate: var(--color-brand-500);
+  --checkbox-color-background-disabled: var(--color-background-disabled);
+  --checkbox-color-border-default: var(--color-border-default);
+  --checkbox-color-border-hover: var(--color-border-hover);
+  --checkbox-color-border-focus: var(--color-border-focus);
+  --checkbox-color-border-checked: var(--color-brand-500);
+  --checkbox-color-border-disabled: var(--color-border-disabled);
+  --checkbox-color-icon-default: var(--color-foreground-on-brand);
+  --checkbox-color-icon-disabled: var(--color-foreground-disabled);
+
+  /* === Border Tokens === */
+  --checkbox-border-width: var(--border-width-1);
+  --checkbox-border-radius: var(--radius-sm);
+
+  /* === Spacing Tokens === */
+  --checkbox-spacing-gap: var(--space-200);
+
+  /* === Transition Tokens === */
+  --checkbox-transition-duration: var(--core-motion-duration-short);
+  --checkbox-transition-easing: var(--core-motion-easing-standard);
+
+  /* === Focus Tokens === */
+  --checkbox-focus-ring-width: var(--focus-ring-width);
+  --checkbox-focus-ring-color: var(--focus-ring-color);
+  --checkbox-focus-ring-offset: var(--focus-ring-offset);
+}

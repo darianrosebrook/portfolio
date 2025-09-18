@@ -6,6 +6,6 @@
   --label-color-text-default: var(--semantic-color-foreground-primary);
 
   /* === Typo Tokens === */
-  --label-typo-weight-default: var(--font-weight-semibold);
-  --label-typo-lineHeight-default: var(--font-lineHeight-100);
+  --label-typo-weight-default: var(--semantic-typography-font-weight-medium);
+  --label-typo-lineHeight-default: var(--semantic-typography-line-height-tight);
 }

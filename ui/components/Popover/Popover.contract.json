@@ -9,20 +9,11 @@
     "activeTrigger"
   ],
   "variants": {},
-  "states": [
-    "default",
-    "hover",
-    "focus",
-    "active",
-    "disabled"
-  ],
+  "states": ["default", "hover", "focus", "active", "disabled"],
   "slots": {},
   "a11y": {
     "role": "region",
-    "labeling": [
-      "aria-label",
-      "aria-labelledby"
-    ],
+    "labeling": ["aria-label", "aria-labelledby"],
     "keyboard": [
       {
         "key": "Tab",

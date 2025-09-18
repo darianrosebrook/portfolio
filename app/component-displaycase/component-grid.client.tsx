@@ -18,10 +18,15 @@ import Blockquote from '@/ui/components/Blockquote';
 import Switch from '@/ui/components/Switch';
 import { FieldProvider, Field } from '@/ui/components/Field';
 import TextInputAdapter from '@/ui/components/Field/TextInputAdapter';
-import SelectAdapter from '@/ui/components/Field/SelectAdapter';
 import CheckboxAdapter from '@/ui/components/Field/CheckboxAdapter';
-import Select from '@/ui/components/Select';
-import type { Option } from '@/types/ui';
+import {
+  Select,
+  SelectProvider,
+  SelectTrigger,
+  SelectContent,
+  SelectOptions,
+  SelectSearch,
+} from '@/ui/components/Select';
 import Tabs from '@/ui/components/Tabs';
 import Tooltip from '@/ui/components/Tooltip';
 import Skeleton from '@/ui/components/Skeleton';
@@ -117,39 +122,11 @@ function SwitchDemo() {
 }
 
 function SelectDemo() {
-  const [selected, setSelected] = React.useState<string | null>(null);
-  const [comboboxSelected, setComboboxSelected] = React.useState<string | null>(
-    null
-  );
   const options = [
     { id: '1', title: 'Option 1' },
     { id: '2', title: 'Option 2' },
     { id: '3', title: 'Option 3' },
   ];
-
-  const handleChange = (selectedOption: Option | Option[] | null) => {
-    if (Array.isArray(selectedOption)) {
-      // Handle multiple selection case
-      setSelected(selectedOption.length > 0 ? selectedOption[0].id : null);
-    } else if (selectedOption) {
-      setSelected(selectedOption.id);
-    } else {
-      setSelected(null);
-    }
-  };
-
-  const handleComboboxChange = (selectedOption: Option | Option[] | null) => {
-    if (Array.isArray(selectedOption)) {
-      // Handle multiple selection case
-      setComboboxSelected(
-        selectedOption.length > 0 ? selectedOption[0].id : null
-      );
-    } else if (selectedOption) {
-      setComboboxSelected(selectedOption.id);
-    } else {
-      setComboboxSelected(null);
-    }
-  };
 
   return (
     <div
@@ -159,20 +136,23 @@ function SelectDemo() {
         gap: 'var(--core-spacing-size-03)',
       }}
     >
-      <Select
-        options={options}
-        value={selected || undefined}
-        onChange={handleChange}
-        placeholder="Choose an option"
-      />
-      <Select
-        options={options}
-        mode="combobox"
-        placeholder="Search options..."
-        searchable
-        value={comboboxSelected || undefined}
-        onChange={handleComboboxChange}
-      />
+      <SelectProvider options={options}>
+        <Select>
+          <SelectTrigger placeholder="Choose an option" />
+          <SelectContent>
+            <SelectOptions />
+          </SelectContent>
+        </Select>
+      </SelectProvider>
+      <SelectProvider options={options}>
+        <Select>
+          <SelectTrigger placeholder="Search options..." />
+          <SelectContent>
+            <SelectSearch />
+            <SelectOptions />
+          </SelectContent>
+        </Select>
+      </SelectProvider>
     </div>
   );
 }
@@ -398,7 +378,14 @@ function Demo({ demo }: { demo: DemoKey }) {
           validate={(v: unknown) => (!v ? 'Please choose a country' : null)}
         >
           <Field>
-            <SelectAdapter options={options} placeholder="Choose…" />
+            <SelectProvider options={options}>
+              <Select>
+                <SelectTrigger placeholder="Choose…" />
+                <SelectContent>
+                  <SelectOptions />
+                </SelectContent>
+              </Select>
+            </SelectProvider>
           </Field>
         </FieldProvider>
 

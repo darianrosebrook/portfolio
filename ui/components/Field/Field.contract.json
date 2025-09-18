@@ -1,28 +1,13 @@
 {
   "name": "Field",
   "layer": "composer",
-  "anatomy": [
-    "root",
-    "header",
-    "meta",
-    "validatingIndicator"
-  ],
+  "anatomy": ["root", "header", "meta", "validatingIndicator"],
   "variants": {},
-  "states": [
-    "default",
-    "hover",
-    "focus",
-    "active",
-    "disabled"
-  ],
+  "states": ["default", "hover", "focus", "active", "disabled"],
   "slots": {},
   "a11y": {
     "role": "textbox",
-    "labeling": [
-      "aria-label",
-      "aria-labelledby",
-      "aria-describedby"
-    ],
+    "labeling": ["aria-label", "aria-labelledby", "aria-describedby"],
     "keyboard": [
       {
         "key": "Tab",

@@ -13,4 +13,5 @@
  test-results
  junit.xml
  docs
-app/designTokens.scss 
+app/designTokens.scss
+scripts/templates/**/* 

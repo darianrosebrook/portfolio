@@ -15,14 +15,24 @@ const SYSTEM_TOKENS_PATH = path.join(COMPONENTS_DIR, 'designTokens.json');
 
 /**
  * Convert a token reference string like "{semantic.color.background.primary}"
- * into a CSS variable reference: "var(--semantic-color-background-primary)"
+ * into a CSS variable reference using the same naming convention as the global generator
  */
 function refToCssVar(value) {
   if (typeof value !== 'string') return String(value);
   const refMatch = value.match(/^\{([^}]+)\}$/);
   if (!refMatch) return value; // literal value (number/dimension/string)
   const tokenPath = refMatch[1];
-  const cssVarName = `--${tokenPath.replace(/\./g, '-')}`;
+
+  // Use the same CSS variable naming convention as the global generator
+  const cssVarName =
+    '--' +
+    tokenPath
+      .replace(/\./g, '-') // Convert dots to hyphens first
+      .replace(/[A-Z]/g, (m) => '-' + m.toLowerCase()) // Convert camelCase
+      .replace(/[\s_]/g, '-') // Convert spaces and underscores
+      .replace(/[^a-z0-9-]/g, '') // Remove any remaining invalid characters
+      .replace(/-+/g, '-'); // Collapse multiple hyphens into one
+
   return `var(${cssVarName})`;
 }
 

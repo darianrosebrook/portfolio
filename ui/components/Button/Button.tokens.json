@@ -70,7 +70,15 @@
     },
 
     "size": {
-      "gap": { "default": "{core.spacing.size.04}" },
+      "gap": {
+        "default": "{core.spacing.size.04}",
+        "small": "{core.spacing.size.03}",
+        "large": "{core.spacing.size.05}"
+      },
+      "padding": {
+        "small": "{core.spacing.size.03}",
+        "large": "{core.spacing.size.05}"
+      },
       "min": {
         "small": "{semantic.control.size.sm.height}",
         "medium": "{semantic.control.size.md.height}",
@@ -88,6 +96,7 @@
     },
 
     "text": {
+      "weight": "{semantic.typography.fontWeight.medium}",
       "size": {
         "small": "{semantic.typography.body.04}",
         "medium": "{semantic.typography.body.01}",

@@ -8,10 +8,10 @@
     },
     "typo": {
       "weight": {
-        "default": "{font.weight.semibold}"
+        "default": "{semantic.typography.fontWeight.medium}"
       },
       "lineHeight": {
-        "default": "{font.lineHeight.100}"
+        "default": "{semantic.typography.lineHeight.tight}"
       }
     }
   }

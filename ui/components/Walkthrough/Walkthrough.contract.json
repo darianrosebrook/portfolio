@@ -1,29 +1,13 @@
 {
   "name": "Walkthrough",
   "layer": "composer",
-  "anatomy": [
-    "root",
-    "content",
-    "title",
-    "description",
-    "controls",
-    "prev"
-  ],
+  "anatomy": ["root", "content", "title", "description", "controls", "prev"],
   "variants": {},
-  "states": [
-    "default",
-    "hover",
-    "focus",
-    "active",
-    "disabled"
-  ],
+  "states": ["default", "hover", "focus", "active", "disabled"],
   "slots": {},
   "a11y": {
     "role": "region",
-    "labeling": [
-      "aria-label",
-      "aria-labelledby"
-    ],
+    "labeling": ["aria-label", "aria-labelledby"],
     "keyboard": [
       {
         "key": "Tab",

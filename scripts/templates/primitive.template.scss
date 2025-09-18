@@ -1,0 +1,77 @@
+/* stylelint-disable */
+/**
+ * {{componentName}} Primitive Styles
+ * 
+ * Uses design tokens for consistency and theming support.
+ * Follows primitive layer principles: boring, stable, token-driven.
+ */
+.{{componentNameLower}} {
+  // Base styles using design tokens
+  font-family: var(--font-family-base);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  background-color: var(--color-background-surface);
+  color: var(--color-foreground-default);
+  transition: all 0.15s ease;
+  cursor: pointer;
+  
+  &:hover:not([data-disabled]) {
+    border-color: var(--color-border-hover);
+    background-color: var(--color-background-surfaceHover);
+  }
+  
+  &:focus-visible {
+    outline: 2px solid var(--color-border-focus);
+    outline-offset: 2px;
+  }
+  
+  &[data-disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: var(--color-background-disabled);
+    border-color: var(--color-border-disabled);
+    color: var(--color-foreground-disabled);
+  }
+}
+
+// Size variants using design tokens
+.{{componentNameLower}}--sm {
+  padding: var(--space-100) var(--space-200);
+  font-size: var(--font-size-sm);
+  min-height: var(--size-8);
+}
+
+.{{componentNameLower}}--md {
+  padding: var(--space-200) var(--space-300);
+  font-size: var(--font-size-base);
+  min-height: var(--size-10);
+}
+
+.{{componentNameLower}}--lg {
+  padding: var(--space-300) var(--space-400);
+  font-size: var(--font-size-lg);
+  min-height: var(--size-12);
+}
+
+// Variant styles
+.{{componentNameLower}}--primary {
+  background-color: var(--color-background-brand);
+  border-color: var(--color-background-brand);
+  color: var(--color-foreground-onBrand);
+  
+  &:hover:not([data-disabled]) {
+    background-color: var(--color-background-brandHover);
+    border-color: var(--color-background-brandHover);
+  }
+}
+
+.{{componentNameLower}}--secondary {
+  background-color: var(--color-background-surface);
+  border-color: var(--color-border-default);
+  color: var(--color-foreground-default);
+  
+  &:hover:not([data-disabled]) {
+    background-color: var(--color-background-surfaceHover);
+    border-color: var(--color-border-hover);
+  }
+}

@@ -6,7 +6,7 @@
  *   - hasBar
  */
 import type { Glyph } from 'fontkit';
-import { shapeForV2 } from '@/utils/caching';
+import { shapeForV2 } from '@/utils/caching/caching';
 import { rayHits } from '@/utils/geometry/geometryCore';
 import type { Metrics } from './index';
 import { FeatureDetectionConfig } from './featureConfig';
