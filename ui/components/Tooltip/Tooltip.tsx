@@ -239,7 +239,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     }, []);
 
     // Clone child with event handlers
-    const triggerElement = React.cloneElement(children, {
+    const triggerElement = React.cloneElement(children as React.ReactElement<any>, {
       ref: (node: HTMLElement | null) => {
         triggerRef.current = node;
 

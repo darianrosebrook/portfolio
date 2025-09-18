@@ -75,7 +75,8 @@ const Button: React.FC<ButtonProps> = ({
     React.isValidElement(children) &&
     (children.type === 'svg' ||
       (children.props &&
-        (children.props['aria-label'] || children.props['data-icon'])));
+        ((children.props as any)['aria-label'] ||
+          (children.props as any)['data-icon'])));
 
   const combinedClassName = useMemo(
     () =>
