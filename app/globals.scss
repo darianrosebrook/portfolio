@@ -2,6 +2,7 @@
 @use 'vars';
 @use 'designTokens';
 @use 'view-transitions';
+@use 'blueprints/component-standards/_components/codesandbox-theming';
 
 @view-transition {
   navigation: auto;

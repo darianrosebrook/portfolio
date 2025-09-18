@@ -96,7 +96,12 @@ const ComponentStandardsPage: React.FC = () => {
                 <tr key={component.component}>
                   <td>
                     <div className={styles.componentName}>
-                      {component.component}
+                      <Link
+                        href={`/blueprints/component-standards/${component.slug}`}
+                        className={styles.componentLink}
+                      >
+                        {component.component}
+                      </Link>
                     </div>
                     <div className={styles.alternativeNames}>
                       {component.alternativeNames.slice(0, 3).join(', ')}

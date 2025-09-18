@@ -1,10 +1,10 @@
-import * as React from 'react';
-import type { VirtualProject } from '../types';
-import { CodeWorkbench } from '../primitives/CodeWorkbench';
+import { useSandpack } from '@codesandbox/sandpack-react';
 import { CodeEditor } from '../primitives/CodeEditor';
 import { CodePreview } from '../primitives/CodePreview';
+import { CodeWorkbench } from '../primitives/CodeWorkbench';
+import { ErrorBoundary } from '../primitives/ErrorBoundary';
 import { FileTabs } from '../primitives/FileTabs';
-import { useSandpack } from '@codesandbox/sandpack-react';
+import type { VirtualProject } from '../types';
 
 export type DocSandboxProps = {
   project: VirtualProject;
@@ -53,13 +53,20 @@ export function DocSandbox({
 }: DocSandboxProps) {
   const themeClassName = theme && theme !== 'system' ? theme : undefined;
   return (
-    <CodeWorkbench
-      project={project}
-      engine="sandpack"
-      height={height}
-      themeClassName={themeClassName}
+    <ErrorBoundary
+      resetKeys={[project]}
+      onError={(error, errorInfo) => {
+        console.error('DocSandbox Error:', error, errorInfo);
+      }}
     >
-      <SandboxBody />
-    </CodeWorkbench>
+      <CodeWorkbench
+        project={project}
+        engine="sandpack"
+        height={height}
+        themeClassName={themeClassName}
+      >
+        <SandboxBody />
+      </CodeWorkbench>
+    </ErrorBoundary>
   );
 }

@@ -65,8 +65,7 @@
       [
         {
           "groupName": "Reset",
-          "properties": ["all"],
-          "emptyLineBefore": "never"
+          "properties": ["all"]
         },
         {
           "groupName": "Positioning",
@@ -80,9 +79,7 @@
             "inset-block",
             "inset-inline",
             "z-index"
-          ],
-          "emptyLineBefore": "threshold",
-          "emptyLineMinimumPropertyThreshold": 3
+          ]
         },
         {
           "groupName": "Layout",
@@ -128,9 +125,7 @@
             "clear",
             "object-fit",
             "object-position"
-          ],
-          "emptyLineBefore": "threshold",
-          "emptyLineMinimumPropertyThreshold": 3
+          ]
         },
         {
           "groupName": "Box Model",
@@ -161,9 +156,7 @@
             "padding-right",
             "padding-bottom",
             "padding-left"
-          ],
-          "emptyLineBefore": "threshold",
-          "emptyLineMinimumPropertyThreshold": 3
+          ]
         },
         {
           "groupName": "Visual",
@@ -221,9 +214,7 @@
             "outline-offset",
             "opacity",
             "visibility"
-          ],
-          "emptyLineBefore": "threshold",
-          "emptyLineMinimumPropertyThreshold": 3
+          ]
         },
         {
           "groupName": "Typography",
@@ -275,9 +266,7 @@
             "list-style-position",
             "list-style-type",
             "list-style-image"
-          ],
-          "emptyLineBefore": "threshold",
-          "emptyLineMinimumPropertyThreshold": 3
+          ]
         },
         {
           "groupName": "Animation",
@@ -337,16 +326,12 @@
             "orientation",
             "fill",
             "stroke"
-          ],
-          "emptyLineBefore": "threshold",
-          "emptyLineMinimumPropertyThreshold": 3
+          ]
         }
       ],
       {
         "severity": "warning",
-        "unspecified": "bottomAlphabetical",
-        "emptyLineBeforeUnspecified": "never",
-        "emptyLineMinimumPropertyThreshold": 4
+        "unspecified": "bottomAlphabetical"
       }
     ],
 

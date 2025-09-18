@@ -1,9 +1,9 @@
 'use client';
 // layout for component-standards that contains breadcrumbs
-import React from 'react';
+import { useBreadcrumbs } from '@/hooks/useBreadcrumbs';
 import Breadcrumbs from '@/ui/components/Breadcrumbs';
 import { PageTransition } from '@/ui/components/PageTransition';
-import { useBreadcrumbs } from '@/hooks/useBreadcrumbs';
+import React from 'react';
 
 export default function ComponentStandardsLayout({
   children,
@@ -27,6 +27,29 @@ export default function ComponentStandardsLayout({
     accessibility: 'Accessibility',
     testing: 'Testing',
     documentation: 'Documentation',
+    // Component-specific labels will be handled dynamically
+    button: 'Button',
+    input: 'Input',
+    card: 'Card',
+    dialog: 'Dialog',
+    avatar: 'Avatar',
+    badge: 'Badge',
+    breadcrumbs: 'Breadcrumbs',
+    divider: 'Divider',
+    field: 'Field',
+    icon: 'Icon',
+    image: 'Image',
+    popover: 'Popover',
+    select: 'Select',
+    sidebar: 'Sidebar',
+    spinner: 'Spinner',
+    switch: 'Switch',
+    tabs: 'Tabs',
+    text: 'Text',
+    'text-field': 'Text Field',
+    toast: 'Toast',
+    tooltip: 'Tooltip',
+    toolbar: 'Toolbar',
   };
 
   const crumbs = useBreadcrumbs({ base, labelMap });

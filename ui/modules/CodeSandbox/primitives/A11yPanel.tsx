@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { LoadingSpinner } from './LoadingSpinner';
 
 export type A11yPanelProps = {
   /** If provided, runs axe in this window (e.g., the preview iframe window) */
@@ -107,8 +108,15 @@ export function A11yPanel({
             type="button"
             onClick={runAxe}
             disabled={isRunning}
-            style={{ padding: '4px 8px', borderRadius: 6 }}
+            style={{
+              padding: '4px 8px',
+              borderRadius: 6,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 6,
+            }}
           >
+            {isRunning && <LoadingSpinner size="small" />}
             {isRunning ? 'Running…' : 'Run checks'}
           </button>
           <button

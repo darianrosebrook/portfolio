@@ -1,15 +1,17 @@
 # DocLayout Component
 
-An interactive documentation layout component that provides synchronized scrolling between documentation content and code examples.
+An interactive documentation layout component that provides synchronized scrolling between documentation content and code examples. Now powered by the CodeSandbox modules for enhanced functionality and consistency.
 
 ## Features
 
 - **Three-column layout**: Navigation, content, and code editor
 - **Scroll synchronization**: Code highlighting follows documentation sections
 - **Intersection Observer**: Automatic section detection and highlighting
-- **Interactive code editor**: Full Sandpack integration with syntax highlighting
+- **Interactive code editor**: Powered by CodeSandbox modules with enhanced features
 - **Responsive design**: Adapts to different screen sizes
 - **Accessibility**: Proper ARIA labels and keyboard navigation
+- **Enhanced theming**: Integrated with design system tokens
+- **Improved performance**: Leverages optimized CodeSandbox primitives
 
 ## Usage
 
@@ -110,10 +112,11 @@ Navigation component that shows section links.
 
 ## How It Works
 
-1. **Intersection Observer**: Monitors which documentation sections are visible
+1. **Intersection Observer**: Monitors which documentation sections are visible using CodeSandbox SectionSync
 2. **Context Management**: Tracks active section and updates code highlighting
-3. **Code Synchronization**: Highlights specific lines in the code editor based on the active section
+3. **Code Synchronization**: Highlights specific lines in the code editor using DocInteractive decorators
 4. **Smooth Scrolling**: Navigation clicks smoothly scroll to sections
+5. **CodeSandbox Integration**: Leverages DocInteractive component for enhanced code editing and preview
 
 ## Styling
 
@@ -135,10 +138,20 @@ The component uses CSS modules with design tokens for consistent styling:
 
 ## Integration with Design System
 
-This component follows the design system's compound component pattern:
+This component follows the design system's compound component pattern and integrates with the CodeSandbox module ecosystem:
 
-- Uses design tokens for styling
-- Implements proper TypeScript interfaces
+- Uses design tokens for styling (shared with CodeSandbox modules)
+- Implements proper TypeScript interfaces compatible with CodeSandbox types
 - Follows accessibility best practices
 - Includes comprehensive documentation
 - Supports responsive design patterns
+- Leverages CodeSandbox primitives for consistency across documentation tools
+
+## Migration from Previous Version
+
+The updated DocLayout maintains backward compatibility while internally using CodeSandbox modules:
+
+- **API unchanged**: All existing props and interfaces remain the same
+- **Enhanced features**: Better performance and consistency with other documentation tools
+- **Improved theming**: Better integration with design system tokens
+- **Future-ready**: Built on the modular CodeSandbox architecture for easier maintenance

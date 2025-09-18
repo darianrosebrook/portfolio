@@ -1,11 +1,12 @@
+import { useSandpack } from '@codesandbox/sandpack-react';
 import * as React from 'react';
-import type { VirtualProject, SectionSpec, Decoration } from '../types';
-import { CodeWorkbench } from '../primitives/CodeWorkbench';
 import { CodeEditor } from '../primitives/CodeEditor';
 import { CodePreview } from '../primitives/CodePreview';
-import { useSandpack } from '@codesandbox/sandpack-react';
+import { CodeWorkbench } from '../primitives/CodeWorkbench';
+import { ErrorBoundary } from '../primitives/ErrorBoundary';
 import { SectionSync } from '../primitives/SectionSync';
 import '../styles/highlight.scss';
+import type { Decoration, SectionSpec, VirtualProject } from '../types';
 
 export type DocInteractiveProps = {
   project: VirtualProject;
@@ -53,13 +54,31 @@ export function DocInteractive({
 
   const handleDecorate = React.useCallback(
     (decos: { file: string; line: number }[]) => {
-      if (decos.length) setActiveFile(decos[0].file);
+      if (decos.length) {
+        const newFile = decos[0].file;
+        setActiveFile((currentFile) =>
+          currentFile !== newFile ? newFile : currentFile
+        );
+      }
+
       const lines = decos.map((d) => d.line);
-      if (lines.length)
-        setHighlight([Math.min(...lines), Math.max(...lines)] as [
-          number,
-          number,
-        ]);
+      if (lines.length) {
+        const newHighlight: [number, number] = [
+          Math.min(...lines),
+          Math.max(...lines),
+        ];
+        setHighlight((currentHighlight) => {
+          // Only update if the highlight has actually changed
+          if (
+            !currentHighlight ||
+            currentHighlight[0] !== newHighlight[0] ||
+            currentHighlight[1] !== newHighlight[1]
+          ) {
+            return newHighlight;
+          }
+          return currentHighlight;
+        });
+      }
     },
     []
   );
@@ -76,62 +95,77 @@ export function DocInteractive({
 
   // Debounce URL hash updates when active section changes
   const hashUpdateRef = React.useRef<number | null>(null);
-  React.useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const id = sections.find(
+  const currentSectionId = React.useMemo(() => {
+    return sections.find(
       (s) =>
         s.code?.file === activeFile &&
         s.code?.lines[0] === highlight?.[0] &&
         s.code?.lines[1] === highlight?.[1]
     )?.id;
-    if (!id) return;
-    if (window.location.hash.slice(1) === id) return;
+  }, [sections, activeFile, highlight]);
+
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return;
+    if (!currentSectionId) return;
+    if (window.location.hash.slice(1) === currentSectionId) return;
+
     if (hashUpdateRef.current) window.clearTimeout(hashUpdateRef.current);
     hashUpdateRef.current = window.setTimeout(() => {
       try {
-        window.history.replaceState(null, '', `#${id}`);
+        window.history.replaceState(null, '', `#${currentSectionId}`);
       } catch {}
       hashUpdateRef.current = null;
     }, 150);
-  }, [sections, activeFile, highlight]);
+  }, [currentSectionId]);
 
   const themeClassName =
     preview?.theme && preview.theme !== 'system' ? preview.theme : undefined;
 
   return (
-    <CodeWorkbench
-      project={project}
-      engine="sandpack"
-      height={height}
-      themeClassName={`docs-workbench ${themeClassName || ''}`.trim()}
+    <ErrorBoundary
+      resetKeys={[project, sections]}
+      onError={(error, errorInfo) => {
+        console.error('DocInteractive Error:', error, errorInfo);
+        onEvent?.({ type: 'compileError', payload: { error: error.message } });
+      }}
     >
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateRows: '1fr 1fr',
-          height: '100%',
-          minHeight: 320,
-        }}
-        ref={setRootEl as unknown as React.Ref<HTMLDivElement>}
+      <CodeWorkbench
+        project={project}
+        engine="sandpack"
+        height={height}
+        themeClassName={`docs-workbench ${themeClassName || ''}`.trim()}
       >
-        <SectionSync
-          sections={sections}
-          root={rootEl}
-          onActiveSection={(id) => {
-            onEvent?.({ type: 'sectionChange', id });
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateRows: '1fr 1fr',
+            height: '100%',
+            minHeight: 320,
           }}
-          onDecorate={handleDecorate as any}
-        />
-        <SectionDriver rootRef={containerRef} activeFile={activeFile} />
-        <CodeEditor
-          height="100%"
-          showLineNumbers
-          wrap
-          decorators={decorators}
-        />
-        <CodePreview height="100%" />
-      </div>
-    </CodeWorkbench>
+          ref={setRootEl as unknown as React.Ref<HTMLDivElement>}
+        >
+          <SectionSync
+            sections={sections}
+            root={rootEl}
+            onActiveSection={React.useCallback(
+              (id: string) => {
+                onEvent?.({ type: 'sectionChange', id });
+              },
+              [onEvent]
+            )}
+            onDecorate={handleDecorate as any}
+          />
+          <SectionDriver rootRef={containerRef} activeFile={activeFile} />
+          <CodeEditor
+            height="100%"
+            showLineNumbers
+            wrap
+            decorators={decorators}
+          />
+          <CodePreview height="100%" />
+        </div>
+      </CodeWorkbench>
+    </ErrorBoundary>
   );
 }
 
@@ -143,14 +177,36 @@ function SectionDriver({
   activeFile?: string;
 }) {
   const { sandpack } = useSandpack();
+  const sandpackRef = React.useRef(sandpack);
+  const lastActiveFileRef = React.useRef<string>();
+
+  // Update the ref when sandpack changes, but only if it's actually different
+  React.useEffect(() => {
+    if (sandpack && sandpack !== sandpackRef.current) {
+      sandpackRef.current = sandpack;
+    }
+  }, [sandpack]);
 
   React.useEffect(() => {
-    if (activeFile) {
+    // Only update if the activeFile has actually changed and sandpack is available
+    if (
+      activeFile &&
+      activeFile !== lastActiveFileRef.current &&
+      sandpackRef.current
+    ) {
+      lastActiveFileRef.current = activeFile;
       try {
-        sandpack.openFile(activeFile);
-      } catch {}
+        // Add a small delay to ensure sandpack is fully initialized
+        setTimeout(() => {
+          if (sandpackRef.current) {
+            sandpackRef.current.openFile(activeFile);
+          }
+        }, 0);
+      } catch (error) {
+        console.warn('Failed to open file in sandpack:', error);
+      }
     }
-  }, [activeFile, sandpack]);
+  }, [activeFile]);
 
   return null;
 }

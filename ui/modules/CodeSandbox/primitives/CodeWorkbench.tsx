@@ -1,11 +1,13 @@
-import * as React from 'react';
-import type { VirtualProject } from '../types';
+import type { SandpackFiles, SandpackTheme } from '@codesandbox/sandpack-react';
 import {
+  SandpackLayout,
   SandpackProvider,
   SandpackThemeProvider,
-  SandpackLayout,
+  useSandpack,
 } from '@codesandbox/sandpack-react';
-import type { SandpackFiles, SandpackTheme } from '@codesandbox/sandpack-react';
+import * as React from 'react';
+import type { VirtualProject } from '../types';
+import { LoadingState } from './LoadingSpinner';
 
 export type CodeWorkbenchProps = {
   project: VirtualProject;
@@ -61,6 +63,40 @@ const tokenTheme: SandpackTheme = {
   },
 };
 
+function SandpackLoadingWrapper({ children }: { children: React.ReactNode }) {
+  const { sandpack } = useSandpack();
+  const [isInitializing, setIsInitializing] = React.useState(true);
+
+  React.useEffect(() => {
+    // Check if Sandpack is ready
+    const checkReady = () => {
+      // Use sandpack.files to check if it's initialized instead of status
+      if (sandpack.files && Object.keys(sandpack.files).length > 0) {
+        setIsInitializing(false);
+      }
+    };
+
+    checkReady();
+
+    // Set a timeout to stop showing loading after a reasonable time
+    const timeout = setTimeout(() => {
+      setIsInitializing(false);
+    }, 3000);
+
+    return () => clearTimeout(timeout);
+  }, [sandpack.files]);
+
+  return (
+    <LoadingState
+      isLoading={isInitializing}
+      message="Initializing sandbox..."
+      overlay={true}
+    >
+      {children}
+    </LoadingState>
+  );
+}
+
 export function CodeWorkbench({
   project,
   engine = 'sandpack',
@@ -87,7 +123,7 @@ export function CodeWorkbench({
       <div className={themeClassName} style={{ height: '100%' }}>
         <SandpackThemeProvider theme={tokenTheme}>
           <SandpackLayout style={{ height: '100%', borderRadius: 0 }}>
-            {children}
+            <SandpackLoadingWrapper>{children}</SandpackLoadingWrapper>
           </SandpackLayout>
         </SandpackThemeProvider>
       </div>
