@@ -24,10 +24,17 @@ export function useBreadcrumbs({ base, labelMap = {} }: UseBreadcrumbsOptions) {
 
   const buildCrumbs = (): Crumb[] => {
     const parts = (pathname ?? '').split('/').filter(Boolean);
-    const idx = parts.findIndex((p) => p === 'foundations');
+
+    // Extract the base segment from the base href
+    // e.g., "/blueprints/foundations" -> "foundations"
+    // e.g., "/blueprints/component-standards" -> "component-standards"
+    const baseSegments = base.href.split('/').filter(Boolean);
+    const baseSegment = baseSegments[baseSegments.length - 1];
+
+    const idx = parts.findIndex((p) => p === baseSegment);
     if (idx === -1) return [];
 
-    const tail = parts.slice(idx + 1); // segments after "foundations"
+    const tail = parts.slice(idx + 1); // segments after base segment
     const acc: Crumb[] = [];
     let href = base.href;
 
