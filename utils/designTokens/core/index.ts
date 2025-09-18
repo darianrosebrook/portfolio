@@ -14,6 +14,7 @@ export interface TokenValue {
   $value: unknown;
   $type?: string;
   $description?: string;
+  $extensions?: Record<string, unknown>;
 }
 
 export interface TokenGroup {
@@ -132,9 +133,11 @@ export function tokenPathToCSSVar(tokenPath: string, prefix = '--'): string {
   return (
     prefix +
     tokenPath
-      .replace(/[A-Z]/g, (m) => '-' + m.toLowerCase())
-      .replace(/[\s_]/g, '-')
-      .replace(/[^a-z0-9-]/g, '')
+      .replace(/\./g, '-') // Convert dots to hyphens first
+      .replace(/[A-Z]/g, (m) => '-' + m.toLowerCase()) // Convert camelCase
+      .replace(/[\s_]/g, '-') // Convert spaces and underscores
+      .replace(/[^a-z0-9-]/g, '') // Remove any remaining invalid characters
+      .replace(/-+/g, '-') // Collapse multiple hyphens into one
   );
 }
 
@@ -166,15 +169,25 @@ export function extractTokenPaths(obj: TokenGroup, prefix = ''): string[] {
 /**
  * Deep merge two objects
  */
-export function deepMerge<T>(target: T, source: Partial<T>): T {
+export function deepMerge<T extends Record<string, any>>(
+  target: T,
+  source: Partial<T>
+): T {
   if (!source) return target;
 
   const result = { ...target };
 
   for (const [key, value] of Object.entries(source)) {
     if (value && typeof value === 'object' && !Array.isArray(value)) {
-      if (key in result && typeof result[key as keyof T] === 'object') {
-        (result as any)[key] = deepMerge(result[key as keyof T], value);
+      if (
+        key in result &&
+        typeof result[key] === 'object' &&
+        !Array.isArray(result[key])
+      ) {
+        (result as any)[key] = deepMerge(
+          result[key] as Record<string, any>,
+          value as Record<string, any>
+        );
       } else {
         (result as any)[key] = value;
       }
