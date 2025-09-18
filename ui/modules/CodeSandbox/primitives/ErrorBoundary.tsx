@@ -215,9 +215,9 @@ export class ErrorBoundary extends React.Component<
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     const info: ErrorInfo = {
-      componentStack: errorInfo.componentStack,
-      errorBoundary: errorInfo.errorBoundary,
-      errorBoundaryStack: errorInfo.errorBoundaryStack,
+      componentStack: errorInfo.componentStack || '',
+      errorBoundary: '',
+      errorBoundaryStack: '',
     };
 
     this.setState({
@@ -330,4 +330,3 @@ export function withErrorBoundary<P extends object>(
 
   return WrappedComponent;
 }
-

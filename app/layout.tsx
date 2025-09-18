@@ -1,6 +1,5 @@
 import { Analytics } from '@vercel/analytics/react';
 import localFont from 'next/font/local';
-import { ViewTransitions } from 'next-view-transitions';
 import './globals.scss';
 import { SVGSprites } from './SVGSprites/SVGSprites';
 
@@ -28,36 +27,35 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ViewTransitions>
-      <html lang="en" className={`${inter.variable} ${nohemi.variable}`}>
-        <head>
-          {/* Preload critical resources */}
-          <link
-            rel="preload"
-            href="/darianrosebrook-optimized.webp"
-            as="image"
-            type="image/webp"
-          />
-          <link
-            rel="preload"
-            href="/darian-square.jpg"
-            as="image"
-            type="image/jpeg"
-          />
-          {/* DNS prefetch for external domains */}
-          <link rel="dns-prefetch" href="//wrgenoqnojvalkscpiib.supabase.co" />
-          <link rel="dns-prefetch" href="//lh3.googleusercontent.com" />
-          <link rel="dns-prefetch" href="//cdn.bsky.app" />
-          <link rel="dns-prefetch" href="//video.bsky.app" />
-        </head>
-        <body>
-          <SVGSprites />
-          {children}
-          <Analytics />
-          <PerformanceDashboard />
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
+    <html lang="en" className={`${inter.variable} ${nohemi.variable}`}>
+      <head>
+        {/* Preload critical resources */}
+        <link
+          rel="preload"
+          href="/darianrosebrook-optimized.webp"
+          as="image"
+          type="image/webp"
+        />
+        <link
+          rel="preload"
+          href="/darian-square.jpg"
+          as="image"
+          type="image/jpeg"
+        />
+        {/* DNS prefetch for external domains */}
+        <link rel="dns-prefetch" href="//wrgenoqnojvalkscpiib.supabase.co" />
+        <link rel="dns-prefetch" href="//lh3.googleusercontent.com" />
+        <link rel="dns-prefetch" href="//cdn.bsky.app" />
+        <link rel="dns-prefetch" href="//video.bsky.app" />
+      </head>
+      <body>
+        <SVGSprites />
+        {children}
+        <Analytics />
+        <PerformanceDashboard />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
                 if ('serviceWorker' in navigator) {
                   window.addEventListener('load', function() {
                     navigator.serviceWorker.register('/sw.js')
@@ -90,10 +88,9 @@ export default async function RootLayout({
                   });
                 }
               `,
-            }}
-          />
-        </body>
-      </html>
-    </ViewTransitions>
+          }}
+        />
+      </body>
+    </html>
   );
 }
