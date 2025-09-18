@@ -15,8 +15,8 @@ export interface UsePopoverReturn {
   open: () => void;
   close: () => void;
   toggle: () => void;
-  triggerRef: React.RefObject<HTMLElement>;
-  contentRef: React.RefObject<HTMLElement>;
+  triggerRef: React.RefObject<HTMLElement | null>;
+  contentRef: React.RefObject<HTMLElement | null>;
 }
 
 export function usePopover(options: UsePopoverOptions = {}): UsePopoverReturn {

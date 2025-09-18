@@ -69,8 +69,8 @@ export interface UseSelectReturn {
   };
 
   // Refs for DOM management
-  triggerRef: React.RefObject<HTMLElement>;
-  listboxRef: React.RefObject<HTMLElement>;
+  triggerRef: React.RefObject<HTMLElement | null>;
+  listboxRef: React.RefObject<HTMLElement | null>;
 }
 
 const defaultFilterFn = (option: Option, searchTerm: string): boolean => {
