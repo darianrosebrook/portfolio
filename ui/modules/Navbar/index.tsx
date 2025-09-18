@@ -1,8 +1,7 @@
 'use client';
-import { useTransitionRouter } from 'next-view-transitions';
 import Link from 'next/link';
 import { AnimatedLink } from '@/ui/components/Links';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import styles from './index.module.css';
 import Logo from './logo';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -30,7 +29,7 @@ export default function Navbar({ pages = [] }: NavbarProps) {
   const [slider, setSlider] = useState(false);
   const [theme, setTheme] = useState('dark');
   const pathname = usePathname();
-  const router = useTransitionRouter();
+  const router = useRouter();
   const { isEnabled: performanceEnabled, togglePerformanceMonitor } =
     usePerformanceMonitor();
   const slideInOut = useCallback(() => {

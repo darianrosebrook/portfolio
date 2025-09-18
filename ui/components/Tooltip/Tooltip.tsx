@@ -239,42 +239,45 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     }, []);
 
     // Clone child with event handlers
-    const triggerElement = React.cloneElement(children as React.ReactElement<any>, {
-      ref: (node: HTMLElement | null) => {
-        triggerRef.current = node;
+    const triggerElement = React.cloneElement(
+      children as React.ReactElement<any>,
+      {
+        ref: (node: HTMLElement | null) => {
+          triggerRef.current = node;
 
-        // Handle forwarded ref from child
-        const childRef = (children as any).ref;
-        if (typeof childRef === 'function') {
-          childRef(node);
-        } else if (childRef) {
-          childRef.current = node;
-        }
-      },
-      onMouseEnter: (e: React.MouseEvent) => {
-        children.props.onMouseEnter?.(e);
-        handleMouseEnter();
-      },
-      onMouseLeave: (e: React.MouseEvent) => {
-        children.props.onMouseLeave?.(e);
-        handleMouseLeave();
-      },
-      onFocus: (e: React.FocusEvent) => {
-        children.props.onFocus?.(e);
-        handleFocus();
-      },
-      onBlur: (e: React.FocusEvent) => {
-        children.props.onBlur?.(e);
-        handleBlur();
-      },
-      onClick: (e: React.MouseEvent) => {
-        children.props.onClick?.(e);
-        handleClick();
-      },
-      'aria-describedby': isVisible
-        ? tooltipId
-        : children.props['aria-describedby'],
-    });
+          // Handle forwarded ref from child
+          const childRef = (children as any).ref;
+          if (typeof childRef === 'function') {
+            childRef(node);
+          } else if (childRef) {
+            childRef.current = node;
+          }
+        },
+        onMouseEnter: (e: React.MouseEvent) => {
+          (children as any).props?.onMouseEnter?.(e);
+          handleMouseEnter();
+        },
+        onMouseLeave: (e: React.MouseEvent) => {
+          (children as any).props?.onMouseLeave?.(e);
+          handleMouseLeave();
+        },
+        onFocus: (e: React.FocusEvent) => {
+          (children as any).props?.onFocus?.(e);
+          handleFocus();
+        },
+        onBlur: (e: React.FocusEvent) => {
+          (children as any).props?.onBlur?.(e);
+          handleBlur();
+        },
+        onClick: (e: React.MouseEvent) => {
+          (children as any).props?.onClick?.(e);
+          handleClick();
+        },
+        'aria-describedby': isVisible
+          ? tooltipId
+          : (children as any).props?.['aria-describedby'],
+      }
+    );
 
     const tooltipNode = isVisible && (
       <div

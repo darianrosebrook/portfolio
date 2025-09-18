@@ -5,7 +5,7 @@ import styles from './Truncate.module.scss';
 export interface TruncateProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onToggle'> {
   /** Element type to render */
-  as?: keyof JSX.IntrinsicElements;
+  as?: keyof React.JSX.IntrinsicElements;
   /** Number of lines to show before truncating */
   lines?: number;
   /** Whether to show expand/collapse functionality */

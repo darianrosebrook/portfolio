@@ -26,8 +26,8 @@ export function PerfPanel({ targetWindow, sampleMs = 5000 }: PerfPanelProps) {
   const renderTimes = React.useRef<number[]>([]);
   const frameCount = React.useRef(0);
   const lastFrameTime = React.useRef(performance.now());
-  const animationFrameId = React.useRef<number>();
-  const intervalId = React.useRef<NodeJS.Timeout>();
+  const animationFrameId = React.useRef<number | null>(null);
+  const intervalId = React.useRef<NodeJS.Timeout | null>(null);
 
   const resolveTargetWindow = React.useCallback((): Window => {
     return targetWindow ?? window;
@@ -103,10 +103,10 @@ export function PerfPanel({ targetWindow, sampleMs = 5000 }: PerfPanelProps) {
 
   const stopMonitoring = React.useCallback(() => {
     setIsRunning(false);
-    if (animationFrameId.current) {
+    if (animationFrameId.current !== null) {
       cancelAnimationFrame(animationFrameId.current);
     }
-    if (intervalId.current) {
+    if (intervalId.current !== null) {
       clearInterval(intervalId.current);
     }
   }, []);
