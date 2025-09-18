@@ -1,0 +1,35 @@
+/* CodeSandbox component theming for component documentation */
+
+/* Apply dark mode theming to CodeSandbox components */
+.sp-wrapper {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  background: var(--semantic-color-background-primary) !important;
+  color: var(--semantic-color-foreground-primary) !important;
+}
+
+.sp-layout {
+  background: var(--semantic-color-background-primary) !important;
+  border: 1px solid var(--semantic-color-border-subtle) !important;
+}
+
+.sp-code-editor {
+  background: var(--semantic-color-background-secondary) !important;
+}
+
+.sp-preview-container {
+  background: var(--semantic-color-background-primary) !important;
+}
+
+.sp-preview-iframe {
+  background: var(--semantic-color-background-primary) !important;
+}
+
+/* Layout containment is handled by the first .sp-wrapper rule above */
+
+[data-testid='variant-matrix'] {
+  position: relative;
+  z-index: 1;
+  overflow: visible;
+}

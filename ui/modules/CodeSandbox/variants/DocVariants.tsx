@@ -1,11 +1,11 @@
 import * as React from 'react';
-import type { VirtualProject, ControlDef, VariantGrid } from '../types';
-import { VariantMatrix } from '../primitives/VariantMatrix';
-import { PropControls } from '../primitives/PropControls';
-import { CodeWorkbench } from '../primitives/CodeWorkbench';
 import { CodePreview } from '../primitives/CodePreview';
-import { useSandpack } from '@codesandbox/sandpack-react';
+import { CodeWorkbench } from '../primitives/CodeWorkbench';
+import { ErrorBoundary } from '../primitives/ErrorBoundary';
+import { PropControls } from '../primitives/PropControls';
 import { PropsBridge } from '../primitives/PropsBridge';
+import { VariantMatrix } from '../primitives/VariantMatrix';
+import type { ControlDef, VariantGrid, VirtualProject } from '../types';
 
 export type DocVariantsProps = {
   project: VirtualProject;
@@ -109,22 +109,32 @@ export function DocVariants({
   );
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '320px 1fr', gap: 16 }}>
-      <div>
-        <PropControls
-          controls={controls}
-          values={values}
-          onChange={handleChange}
-        />
+    <ErrorBoundary
+      resetKeys={[project, controls, grid]}
+      onError={(error, errorInfo) => {
+        console.error('DocVariants Error:', error, errorInfo);
+        onSelectionChange?.({ error: error.message });
+      }}
+    >
+      <div
+        style={{ display: 'grid', gridTemplateColumns: '320px 1fr', gap: 16 }}
+      >
+        <div>
+          <PropControls
+            controls={controls}
+            values={values}
+            onChange={handleChange}
+          />
+        </div>
+        <div style={{ minHeight: 320, height }}>
+          <VariantMatrix
+            rows={grid.rows}
+            cols={grid.cols}
+            template={template}
+            onTileSelect={handleChange}
+          />
+        </div>
       </div>
-      <div style={{ minHeight: 320, height }}>
-        <VariantMatrix
-          rows={grid.rows}
-          cols={grid.cols}
-          template={template}
-          onTileSelect={handleChange}
-        />
-      </div>
-    </div>
+    </ErrorBoundary>
   );
 }

@@ -1,10 +1,9 @@
-import React from 'react';
-import { render, screen } from '../test-utils';
 import {
   DocLayout,
   DocLayoutProvider,
   DocSection,
-} from '@/ui/components/DocLayout';
+} from '@/ui/modules/DocLayout';
+import { render, screen } from '../test-utils';
 
 const sections = [
   {

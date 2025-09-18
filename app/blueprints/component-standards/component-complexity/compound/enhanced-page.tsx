@@ -1,12 +1,12 @@
-import Link from 'next/link';
 import {
   DocLayout,
   DocLayoutProvider,
-  DocSection,
   DocNavigation,
+  DocSection,
   useDocLayout,
-  type DocSectionType,
+  type DocSection as DocSectionType,
 } from '@/ui/modules/DocLayout';
+import Link from 'next/link';
 
 export const metadata = {
   title: 'Compounds | Component Standards',

@@ -10,7 +10,7 @@
   gap: var(--checkbox-spacing-gap);
   align-items: center;
 
-  // Size variants - organized by specificity
+  // Size variants
   &.sm .indicator {
     width: var(--checkbox-size-sm-width);
     height: var(--checkbox-size-sm-height);
