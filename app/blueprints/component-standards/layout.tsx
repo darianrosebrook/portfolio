@@ -1,9 +1,9 @@
 'use client';
 // layout for component-standards that contains breadcrumbs
 import { useBreadcrumbs } from '@/hooks/useBreadcrumbs';
-import Breadcrumbs from '@/ui/components/Breadcrumbs';
 import { PageTransition } from '@/ui/components/PageTransition';
 import React from 'react';
+import Breadcrumbs from '../../../ui/components/Breadcrumbs';
 
 export default function ComponentStandardsLayout({
   children,

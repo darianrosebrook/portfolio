@@ -24,14 +24,14 @@ export const metadata = {
     images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
   },
 };
-import Status from '@/ui/components/Status';
-import styles from './page.module.scss';
 import Avatar from '@/ui/components/Avatar';
 import Button from '@/ui/components/Button';
+import Status from '@/ui/components/Status';
 import LogoMaruqee from '@/ui/modules/LogoMarquee';
 import Image from 'next/image';
+import { AnimatedLink } from '../ui/components/Links';
 import BlueprintsWrapper from './BlueprintsWrapper';
-import { AnimatedLink } from '@/ui/components/Links';
+import styles from './page.module.scss';
 
 export default function Home() {
   const ldJson = {
