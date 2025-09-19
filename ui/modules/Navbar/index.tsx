@@ -2,7 +2,7 @@
 import { useReducedMotion, useUser } from '@/context';
 import { usePerformanceMonitor } from '@/hooks/usePerformanceMonitor';
 import Icon from '@/ui/components/Icon';
-import { AnimatedLink } from '@/ui/components/Links/Links';
+// import { AnimatedLink } from '@/ui/components/Links/Links';
 import { byPrefixAndName } from '@awesome.me/kit-0ba7f5fefb/icons';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
@@ -113,7 +113,7 @@ export default function Navbar({ pages = [] }: NavbarProps) {
         <div className={styles.logoLink}>
           <Logo />
           <h1 className="medium logo">
-            <AnimatedLink href="/">Darian&nbsp;Rosebrook</AnimatedLink>
+            <Link href="/">Darian&nbsp;Rosebrook</Link>
           </h1>
         </div>
         <ul className={styles.navLinks}>
@@ -121,7 +121,7 @@ export default function Navbar({ pages = [] }: NavbarProps) {
             pages.length > 0 &&
             pages.map((page) => (
               <li key={page.name}>
-                <AnimatedLink
+                <Link
                   href={`/${page.path}`}
                   className={pathname === page.path ? styles.active : ''}
                   onClick={(e: React.MouseEvent<HTMLAnchorElement>) =>
@@ -129,7 +129,7 @@ export default function Navbar({ pages = [] }: NavbarProps) {
                   }
                 >
                   {page.name}
-                </AnimatedLink>
+                </Link>
               </li>
             ))}
           <li>

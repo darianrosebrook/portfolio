@@ -26,7 +26,7 @@ export const metadata = {
 };
 import Avatar from '@/ui/components/Avatar';
 import Button from '@/ui/components/Button';
-import { AnimatedLink } from '@/ui/components/Links/Links';
+// import { AnimatedLink } from '@/ui/components/Links/Links';
 import Status from '@/ui/components/Status';
 import LogoMaruqee from '@/ui/modules/LogoMarquee';
 import Image from 'next/image';
@@ -180,13 +180,13 @@ export default function Home() {
             and explore new opportunities in UX and Product Design.
           </p>
           <p>
-            <AnimatedLink
+            <a
               href="https://drive.google.com/file/d/1h2QH7K7153QGbW59CHWWt07Dzhgzst3a/view?usp=sharingue"
               target="_blank"
               rel="noopener noreferrer"
             >
               My resume
-            </AnimatedLink>
+            </a>
           </p>
         </div>
         <div className="content">
