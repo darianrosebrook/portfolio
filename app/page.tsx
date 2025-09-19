@@ -26,7 +26,7 @@ export const metadata = {
 };
 import Avatar from '@/ui/components/Avatar';
 import Button from '@/ui/components/Button';
-import { AnimatedLink } from '@/ui/components/Links';
+import { AnimatedLink } from '@/ui/components/Links/Links';
 import Status from '@/ui/components/Status';
 import LogoMaruqee from '@/ui/modules/LogoMarquee';
 import Image from 'next/image';

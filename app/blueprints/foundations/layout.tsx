@@ -1,7 +1,7 @@
 'use client';
 // layout for foundations that contains breadcrumbs
 import { useBreadcrumbs } from '@/hooks/useBreadcrumbs';
-import { Breadcrumbs } from '@/ui/components/Breadcrumbs';
+import { Breadcrumbs } from '@/ui/components/Breadcrumbs/Breadcrumbs';
 import { PageTransition } from '@/ui/components/PageTransition';
 import React from 'react';
 
