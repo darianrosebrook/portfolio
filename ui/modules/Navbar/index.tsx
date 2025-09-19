@@ -8,7 +8,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import React, { useCallback, useEffect, useState } from 'react';
 import Avatar from '../../components/Avatar';
 import Button from '../../components/Button';
-import { AnimatedLink } from '../../components/Links';
+import { AnimatedLink } from '@/ui/components/Links/Links';
 import Popover from '../../components/Popover/Popover';
 import ToggleSwitch from '../../components/ToggleSwitch';
 import styles from './index.module.css';

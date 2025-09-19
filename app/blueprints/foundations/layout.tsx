@@ -3,7 +3,7 @@
 import { useBreadcrumbs } from '@/hooks/useBreadcrumbs';
 import { PageTransition } from '@/ui/components/PageTransition';
 import React from 'react';
-import Breadcrumbs from '../../../ui/components/Breadcrumbs';
+import Breadcrumbs from '@/ui/components/Breadcrumbs/Breadcrumbs';
 
 export default function FoundationsLayout({
   children,
