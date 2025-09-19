@@ -26,10 +26,10 @@ export const metadata = {
 };
 import Avatar from '@/ui/components/Avatar';
 import Button from '@/ui/components/Button';
+import { AnimatedLink } from '@/ui/components/Links';
 import Status from '@/ui/components/Status';
 import LogoMaruqee from '@/ui/modules/LogoMarquee';
 import Image from 'next/image';
-import { AnimatedLink } from '@/ui/components/Links/Links';
 import BlueprintsWrapper from './BlueprintsWrapper';
 import styles from './page.module.scss';
 
