@@ -121,9 +121,13 @@ export function DocInteractive({
   const themeClassName =
     preview?.theme && preview.theme !== 'system' ? preview.theme : undefined;
 
+  // Create reset keys from project and sections identifiers
+  const projectKey = JSON.stringify(project.files.map((f) => f.path).sort());
+  const sectionsKey = JSON.stringify(sections?.map((s) => s.id) || []);
+
   return (
     <ErrorBoundary
-      resetKeys={[project, sections]}
+      resetKeys={[projectKey, sectionsKey]}
       onError={(error, errorInfo) => {
         console.error('DocInteractive Error:', error, errorInfo);
         onEvent?.({ type: 'compileError', payload: { error: error.message } });
@@ -173,12 +177,12 @@ function SectionDriver({
   rootRef,
   activeFile,
 }: {
-  rootRef: React.RefObject<HTMLDivElement>;
+  rootRef: React.RefObject<HTMLDivElement | null>;
   activeFile?: string;
 }) {
   const { sandpack } = useSandpack();
   const sandpackRef = React.useRef(sandpack);
-  const lastActiveFileRef = React.useRef<string>();
+  const lastActiveFileRef = React.useRef<string | undefined>(undefined);
 
   // Update the ref when sandpack changes, but only if it's actually different
   React.useEffect(() => {

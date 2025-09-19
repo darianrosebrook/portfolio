@@ -116,9 +116,13 @@ export function DocDiff({
     };
   }, [syncScroll]);
 
+  // Create reset keys from project identifiers
+  const leftKey = JSON.stringify(left.files.map((f) => f.path).sort());
+  const rightKey = JSON.stringify(right.files.map((f) => f.path).sort());
+
   return (
     <ErrorBoundary
-      resetKeys={[left, right, view]}
+      resetKeys={[leftKey, rightKey, view || 'split']}
       onError={(error, errorInfo) => {
         console.error('DocDiff Error:', error, errorInfo);
       }}

@@ -27,7 +27,7 @@ export function DocVariants({
   linkSelectionToURL,
 }: DocVariantsProps) {
   const [values, setValues] = React.useState<Record<string, any>>({});
-  const timeoutRef = React.useRef<NodeJS.Timeout>();
+  const timeoutRef = React.useRef<NodeJS.Timeout | undefined>(undefined);
 
   const handleChange = (next: Record<string, any>) => {
     setValues(next);
@@ -108,9 +108,14 @@ export function DocVariants({
     [project, values]
   );
 
+  // Create reset keys from identifiers
+  const projectKey = JSON.stringify(project.files.map((f) => f.path).sort());
+  const controlsKey = JSON.stringify(controls.map((c) => c.id).sort());
+  const gridKey = JSON.stringify(grid);
+
   return (
     <ErrorBoundary
-      resetKeys={[project, controls, grid]}
+      resetKeys={[projectKey, controlsKey, gridKey]}
       onError={(error, errorInfo) => {
         console.error('DocVariants Error:', error, errorInfo);
         onSelectionChange?.({ error: error.message });

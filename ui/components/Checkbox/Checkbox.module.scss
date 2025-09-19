@@ -4,6 +4,28 @@
   @include vars;
 }
 
+.indicator {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--checkbox-color-background-default);
+  border: var(--checkbox-border-width) solid
+    var(--checkbox-color-border-default);
+  border-radius: var(--checkbox-border-radius);
+  transition:
+    background-color var(--checkbox-transition-duration)
+      var(--checkbox-transition-easing),
+    border-color var(--checkbox-transition-duration)
+      var(--checkbox-transition-easing),
+    color var(--checkbox-transition-duration) var(--checkbox-transition-easing);
+  cursor: pointer;
+
+  &:hover {
+    border-color: var(--checkbox-color-border-hover);
+  }
+}
+
 .checkboxWrapper {
   position: relative;
   display: inline-flex;
@@ -42,28 +64,6 @@
       width: var(--checkbox-size-lg-iconSize);
       height: var(--checkbox-size-lg-iconSize);
     }
-  }
-}
-
-.indicator {
-  position: relative;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--checkbox-color-background-default);
-  border: var(--checkbox-border-width) solid
-    var(--checkbox-color-border-default);
-  border-radius: var(--checkbox-border-radius);
-  transition:
-    background-color var(--checkbox-transition-duration)
-      var(--checkbox-transition-easing),
-    border-color var(--checkbox-transition-duration)
-      var(--checkbox-transition-easing),
-    color var(--checkbox-transition-duration) var(--checkbox-transition-easing);
-  cursor: pointer;
-
-  &:hover {
-    border-color: var(--checkbox-color-border-hover);
   }
 }
 
