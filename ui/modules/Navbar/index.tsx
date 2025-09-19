@@ -2,7 +2,7 @@
 import { useReducedMotion, useUser } from '@/context';
 import { usePerformanceMonitor } from '@/hooks/usePerformanceMonitor';
 import Icon from '@/ui/components/Icon';
-import { AnimatedLink } from '@/ui/components/Links';
+import { AnimatedLink } from '@/ui/components/Links/Links';
 import { byPrefixAndName } from '@awesome.me/kit-0ba7f5fefb/icons';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
