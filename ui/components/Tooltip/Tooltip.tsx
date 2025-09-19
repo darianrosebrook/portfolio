@@ -3,17 +3,17 @@
  * Complements Popover (which is for interactive content)
  */
 'use client';
+import { Placement, TriggerStrategy } from '@/types/ui';
+import { gsap } from 'gsap';
 import React, {
-  useRef,
-  useId,
-  useState,
-  useCallback,
   forwardRef,
+  useCallback,
+  useId,
   useLayoutEffect,
+  useRef,
+  useState,
 } from 'react';
 import { createPortal } from 'react-dom';
-import { gsap } from 'gsap';
-import { Placement, TriggerStrategy } from '@/types/ui';
 import styles from './Tooltip.module.scss';
 
 export interface TooltipProps {

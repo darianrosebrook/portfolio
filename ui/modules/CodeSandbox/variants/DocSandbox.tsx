@@ -52,9 +52,12 @@ export function DocSandbox({
   theme,
 }: DocSandboxProps) {
   const themeClassName = theme && theme !== 'system' ? theme : undefined;
+  // Create reset key from project identifier
+  const projectKey = JSON.stringify(project.files.map((f) => f.path).sort());
+
   return (
     <ErrorBoundary
-      resetKeys={[project]}
+      resetKeys={[projectKey]}
       onError={(error, errorInfo) => {
         console.error('DocSandbox Error:', error, errorInfo);
       }}

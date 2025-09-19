@@ -1,18 +1,18 @@
 'use client';
-import Link from 'next/link';
+import { useReducedMotion, useUser } from '@/context';
+import { usePerformanceMonitor } from '@/hooks/usePerformanceMonitor';
+import Icon from '@/ui/components/Icon';
 import { AnimatedLink } from '@/ui/components/Links';
+import { byPrefixAndName } from '@awesome.me/kit-0ba7f5fefb/icons';
+import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import React, { useCallback, useEffect, useState } from 'react';
+import Avatar from '../../components/Avatar';
+import Button from '../../components/Button';
+import Popover from '../../components/Popover/Popover';
+import ToggleSwitch from '../../components/ToggleSwitch';
 import styles from './index.module.css';
 import Logo from './logo';
-import React, { useCallback, useEffect, useState } from 'react';
-import { useReducedMotion, useUser } from '@/context';
-import Popover from '../../components/Popover/Popover';
-import Button from '../../components/Button';
-import { byPrefixAndName } from '@awesome.me/kit-0ba7f5fefb/icons';
-import Icon from '@/ui/components/Icon';
-import ToggleSwitch from '../../components/ToggleSwitch';
-import Avatar from '../../components/Avatar';
-import { usePerformanceMonitor } from '@/hooks/usePerformanceMonitor';
 
 const faBars = byPrefixAndName['far']['bars'];
 const faUser = byPrefixAndName['far']['user'];
@@ -65,9 +65,7 @@ export default function Navbar({ pages = [] }: NavbarProps) {
     route: string
   ) => {
     event.preventDefault();
-    router.push(route, {
-      onTransitionReady: slideInOut,
-    });
+    router.push(route);
   };
 
   const { prefersReducedMotion, setPrefersReducedMotion } = useReducedMotion();

@@ -16,108 +16,108 @@
     outline: 2px solid var(--switch-color-track-border-focus);
     outline-offset: 2px;
   }
-
-  .input {
-    all: unset;
-    display: inline-flex;
-    width: 3rem;
-    min-width: 3rem;
-    min-height: 1.5rem;
-    max-height: 1.5rem;
-    background-color: var(--switch-color-track-background-default);
-    border: 1px solid var(--switch-color-track-border-default);
-    border-radius: var(--switch-size-md-track-radius);
-    transition:
-      background-color var(--switch-motion-duration) var(--switch-motion-easing),
-      border-color var(--switch-motion-duration) var(--switch-motion-easing);
-    cursor: pointer;
-
-    &:hover {
-      background-color: var(--switch-color-track-background-hover);
-    }
-
-    &:focus {
-      background-color: var(--switch-color-track-background-focus);
-    }
-
-    &:disabled {
-      background-color: var(--switch-color-track-background-disabled);
-      cursor: not-allowed;
-    }
-
-    &:disabled + .label {
-      color: var(--switch-color-text-disabled);
-      cursor: not-allowed;
-    }
-  }
-
-  // Size variants
-  &.sm {
-    .input {
-      width: 2.5rem;
-      min-width: 2.5rem;
-      min-height: 1.25rem;
-      max-height: 1.25rem;
-    }
-
-    .label::before {
-      top: var(--switch-size-sm-gap);
-      left: var(--switch-size-sm-gap);
-      width: 0.875rem;
-      height: 0.875rem;
-    }
-
-    .label.checked::before {
-      left: calc(var(--switch-size-sm-gap) + var(--switch-size-sm-thumb-size));
-    }
-  }
-
-  &.lg {
-    .input {
-      width: 3.5rem;
-      min-width: 3.5rem;
-      min-height: 1.75rem;
-      max-height: 1.75rem;
-    }
-
-    .label::before {
-      top: var(--switch-size-lg-gap);
-      left: var(--switch-size-lg-gap);
-      width: 1.25rem;
-      height: 1.25rem;
-    }
-
-    .label.checked::before {
-      left: calc(var(--switch-size-lg-gap) + var(--switch-size-lg-thumb-size));
-    }
-  }
 }
 
 .label {
   margin-left: 0.25rem;
   cursor: pointer;
+
+  &::before {
+    position: absolute;
+    top: var(--switch-size-md-gap);
+    left: var(--switch-size-md-gap);
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    background-color: var(--switch-color-thumb-background-default);
+    border: 1px solid var(--switch-color-thumb-border-default);
+    border-radius: var(--switch-size-md-track-radius);
+    transition:
+      left var(--switch-motion-duration) var(--switch-motion-easing),
+      background-color var(--switch-motion-duration) var(--switch-motion-easing),
+      border-color var(--switch-motion-duration) var(--switch-motion-easing);
+    content: ' ';
+  }
+
+  &.checked::before {
+    left: calc(var(--switch-size-md-gap) + var(--switch-size-md-thumb-size));
+    background-color: var(--switch-color-thumb-background-checked);
+  }
 }
 
-.label::before {
-  position: absolute;
-  top: var(--switch-size-md-gap);
-  left: var(--switch-size-md-gap);
-  display: inline-block;
-  width: 1rem;
-  height: 1rem;
-  background-color: var(--switch-color-thumb-background-default);
-  border: 1px solid var(--switch-color-thumb-border-default);
+.input {
+  all: unset;
+  display: inline-flex;
+  width: 3rem;
+  min-width: 3rem;
+  min-height: 1.5rem;
+  max-height: 1.5rem;
+  background-color: var(--switch-color-track-background-default);
+  border: 1px solid var(--switch-color-track-border-default);
   border-radius: var(--switch-size-md-track-radius);
   transition:
-    left var(--switch-motion-duration) var(--switch-motion-easing),
     background-color var(--switch-motion-duration) var(--switch-motion-easing),
     border-color var(--switch-motion-duration) var(--switch-motion-easing);
-  content: ' ';
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--switch-color-track-background-hover);
+  }
+
+  &:focus {
+    background-color: var(--switch-color-track-background-focus);
+  }
+
+  &:disabled {
+    background-color: var(--switch-color-track-background-disabled);
+    cursor: not-allowed;
+  }
+
+  &:disabled + .label {
+    color: var(--switch-color-text-disabled);
+    cursor: not-allowed;
+  }
 }
 
-.label.checked::before {
-  left: calc(var(--switch-size-md-gap) + var(--switch-size-md-thumb-size));
-  background-color: var(--switch-color-thumb-background-checked);
+// Size variants for switch
+.switch.sm {
+  .input {
+    width: 2.5rem;
+    min-width: 2.5rem;
+    min-height: 1.25rem;
+    max-height: 1.25rem;
+  }
+
+  .label::before {
+    top: var(--switch-size-sm-gap);
+    left: var(--switch-size-sm-gap);
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+
+  .label.checked::before {
+    left: calc(var(--switch-size-sm-gap) + var(--switch-size-sm-thumb-size));
+  }
+}
+
+.switch.lg {
+  .input {
+    width: 3.5rem;
+    min-width: 3.5rem;
+    min-height: 1.75rem;
+    max-height: 1.75rem;
+  }
+
+  .label::before {
+    top: var(--switch-size-lg-gap);
+    left: var(--switch-size-lg-gap);
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .label.checked::before {
+    left: calc(var(--switch-size-lg-gap) + var(--switch-size-lg-thumb-size));
+  }
 }
 
 .input.checked {
