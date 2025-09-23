@@ -70,8 +70,7 @@
 
 .label::before {
   position: absolute;
-  top: 0.2125rem;
-  left: 0.25rem;
+  top: 50%;
   display: inline-block;
   width: 1rem;
   height: 1rem;
@@ -94,7 +93,7 @@
 
 // Size variants for labels
 .toggleSwitch.small .label::before {
-  top: 0.125rem;
+  top: 50%;
   width: 0.875rem;
   height: 0.875rem;
 }
@@ -104,7 +103,7 @@
 }
 
 .toggleSwitch.large .label::before {
-  top: 0.25rem;
+  top: 50%;
   width: 1.25rem;
   height: 1.25rem;
 }

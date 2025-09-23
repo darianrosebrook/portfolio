@@ -3,19 +3,13 @@
  */
 @mixin vars {
   /* === Color Tokens === */
-  --profileFlag-color-background-default: var(
-    --semantic-color-background-primary
-  );
+  --profileFlag-color-background-default: var(--semantic-color-background-primary);
   --profileFlag-color-border-default: var(--semantic-color-border-light);
   --profileFlag-color-border-hover: var(--semantic-color-border-bold);
-  --profileFlag-color-foreground-primary: var(
-    --semantic-color-foreground-primary
-  );
+  --profileFlag-color-foreground-primary: var(--semantic-color-foreground-primary);
 
   /* === Size Tokens === */
-  --profileFlag-size-radius-default: var(
-    --semantic-shape-control-radius-default
-  );
+  --profileFlag-size-radius-default: var(--semantic-shape-control-radius-default);
 
   /* === Spacing Tokens === */
   --profileFlag-spacing-gap-default: var(--core-spacing-size-03);

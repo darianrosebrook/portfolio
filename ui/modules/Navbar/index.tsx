@@ -168,7 +168,6 @@ export default function Navbar({ pages = [] }: NavbarProps) {
                         }
                         size="lg"
                       >
-                        <Icon icon={faChartLine} />
                         Performance monitor
                       </ToggleSwitch>
                     </li>

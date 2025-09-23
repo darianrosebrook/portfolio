@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { SectionSpec, Decoration } from '../types';
+import type { Decoration, SectionSpec } from '../types';
 
 export type SectionSyncProps = {
   sections: SectionSpec[];
@@ -10,6 +10,39 @@ export type SectionSyncProps = {
   rootMargin?: string;
 };
 
+/**
+ * Synchronizes documentation sections with code editor decorations using Intersection Observer.
+ *
+ * This component observes sections in the documentation and automatically highlights
+ * corresponding code lines in the editor as users scroll through the content.
+ *
+ * Features:
+ * - Intersection Observer for performance
+ * - Proximity-based scoring algorithm
+ * - Automatic URL hash updates
+ * - Configurable intersection thresholds
+ * - Custom root element support (useful for containers)
+ *
+ * Algorithm:
+ * - Uses intersection ratio (70%) + proximity to viewport center (30%)
+ * - Selects section with highest composite score
+ * - Updates decorations and active section callbacks
+ *
+ * @example
+ * ```tsx
+ * <SectionSync
+ *   sections={[
+ *     { id: 'intro', code: { file: '/App.tsx', lines: [1, 10] } },
+ *     { id: 'hooks', code: { file: '/hooks.ts', lines: [15, 25] } }
+ *   ]}
+ *   root={containerElement}
+ *   onActiveSection={(id) => updateActiveTab(id)}
+ *   onDecorate={(decorations) => highlightLines(decorations)}
+ * />
+ * ```
+ *
+ * @param props - Configuration options for section synchronization
+ */
 export function SectionSync({
   sections,
   root,

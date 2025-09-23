@@ -6,7 +6,7 @@
   justify-content: space-evenly;
   justify-content: space-between;
   width: 100%;
-  min-height: var(--core-spacing-size-09);
+  min-height: var(--core-spacing-size-08);
 }
 
 .footer ul {
@@ -53,7 +53,7 @@
   display: flex;
   gap: var(--core-spacing-size-10);
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   width: 100%;
 }
 
@@ -63,6 +63,7 @@
   left: 0;
   display: flex;
   gap: var(--core-spacing-size-10);
+  justify-content: space-around;
   align-items: center;
   overflow: hidden;
   width: fit-content;

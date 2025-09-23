@@ -17,6 +17,13 @@ export type CodeWorkbenchProps = {
   themeClassName?: string;
 };
 
+/**
+ * Converts a VirtualProject to Sandpack's file format.
+ * Ensures all file contents are strings as required by Sandpack.
+ *
+ * @param project - The virtual project containing files and metadata
+ * @returns Sandpack-compatible file object
+ */
 function toSandpackFiles(project: VirtualProject): SandpackFiles {
   const out: SandpackFiles = {};
   for (const f of project.files) {
@@ -97,6 +104,34 @@ function SandpackLoadingWrapper({ children }: { children: React.ReactNode }) {
   );
 }
 
+/**
+ * Main orchestrator component for code editing and preview functionality.
+ * Wraps the selected editor engine (currently Sandpack) with theme integration
+ * and loading states.
+ *
+ * Features:
+ * - Engine abstraction (currently supports Sandpack, designed for Monaco/CodeMirror)
+ * - Design token integration for theming
+ * - Loading state management
+ * - Virtual file system support
+ *
+ * @example
+ * ```tsx
+ * <CodeWorkbench
+ *   project={{
+ *     files: [{ path: '/App.tsx', contents: 'export default function App() { return <div>Hello</div>; }' }],
+ *     dependencies: { react: '^18.0.0' }
+ *   }}
+ *   engine="sandpack"
+ *   themeClassName="dark-theme"
+ * >
+ *   <CodeEditor />
+ *   <CodePreview />
+ * </CodeWorkbench>
+ * ```
+ *
+ * @param props - Configuration options for the code workbench
+ */
 export function CodeWorkbench({
   project,
   engine = 'sandpack',

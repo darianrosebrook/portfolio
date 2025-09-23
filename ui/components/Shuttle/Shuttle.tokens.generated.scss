@@ -3,13 +3,9 @@
  */
 @mixin vars {
   /* === Color Tokens === */
-  --shuttle-color-background-default: var(
-    --semantic-color-background-secondary
-  );
+  --shuttle-color-background-default: var(--semantic-color-background-secondary);
   --shuttle-color-foreground-primary: var(--semantic-color-foreground-primary);
-  --shuttle-color-foreground-secondary: var(
-    --semantic-color-foreground-secondary
-  );
+  --shuttle-color-foreground-secondary: var(--semantic-color-foreground-secondary);
   --shuttle-color-border-default: var(--semantic-color-border-light);
   --shuttle-color-border-accent: var(--semantic-color-border-accent);
 

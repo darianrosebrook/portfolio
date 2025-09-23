@@ -13,8 +13,8 @@
   line-height: 1;
 
   &:focus-within {
-    outline: 2px solid var(--switch-color-track-border-focus);
-    outline-offset: 2px;
+    outline: var(--switch-focus-ring);
+    outline-offset: var(--switch-focus-offset);
   }
 }
 
@@ -24,24 +24,27 @@
 
   &::before {
     position: absolute;
-    top: var(--switch-size-md-gap);
-    left: var(--switch-size-md-gap);
+    top: 50%;
+    left: 0.25rem;
     display: inline-block;
     width: 1rem;
     height: 1rem;
     background-color: var(--switch-color-thumb-background-default);
-    border: 1px solid var(--switch-color-thumb-border-default);
+    border: 1px solid var(--switch-color-track-border-default);
     border-radius: var(--switch-size-md-track-radius);
     transition:
       left var(--switch-motion-duration) var(--switch-motion-easing),
       background-color var(--switch-motion-duration) var(--switch-motion-easing),
-      border-color var(--switch-motion-duration) var(--switch-motion-easing);
+      border-color var(--switch-motion-duration) var(--switch-motion-easing),
+      right var(--switch-motion-duration) var(--switch-motion-easing);
+    transform: translateY(-50%);
     content: ' ';
   }
 
   &.checked::before {
     left: calc(var(--switch-size-md-gap) + var(--switch-size-md-thumb-size));
     background-color: var(--switch-color-thumb-background-checked);
+    transform: translate(50%, -50%);
   }
 }
 
@@ -89,10 +92,11 @@
   }
 
   .label::before {
-    top: var(--switch-size-sm-gap);
+    top: 50%;
     left: var(--switch-size-sm-gap);
     width: 0.875rem;
     height: 0.875rem;
+    transform: translateY(-50%);
   }
 
   .label.checked::before {
@@ -109,7 +113,7 @@
   }
 
   .label::before {
-    top: var(--switch-size-lg-gap);
+    top: 50%;
     left: var(--switch-size-lg-gap);
     width: 1.25rem;
     height: 1.25rem;

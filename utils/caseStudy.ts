@@ -1,3 +1,7 @@
+import { DetailsExtension } from '@/ui/modules/Tiptap/Extensions/Details/DetailsExtension';
+import { TableOfContentsExtension } from '@/ui/modules/Tiptap/Extensions/TableOfContents/TableOfContentsExtension';
+import { VideoExtended } from '@/ui/modules/Tiptap/Extensions/VideoExtended';
+import Image from '@tiptap/extension-image';
 import { generateHTML } from '@tiptap/html';
 import type { JSONContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
@@ -28,13 +32,19 @@ export function getCaseStudyContent(data: JSONContent): { html: string } {
     content.splice(firstImageIndex, 1);
   }
 
-  // Generate HTML from the modified content using basic extensions
+  // Generate HTML from the modified content using extensions that match the editor
   const html = generateHTML(
     {
       type: 'doc',
       content,
     },
-    [StarterKit]
+    [
+      StarterKit,
+      Image,
+      DetailsExtension,
+      TableOfContentsExtension,
+      VideoExtended,
+    ]
   );
 
   return { html };

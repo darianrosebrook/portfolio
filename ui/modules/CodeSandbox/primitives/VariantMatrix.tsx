@@ -1,4 +1,5 @@
 import * as React from 'react';
+import '../styles/responsive.scss';
 import type { VariantAxis } from '../types';
 
 export type VariantMatrixProps = {
@@ -13,7 +14,7 @@ function toValues(axis: VariantAxis | undefined): string[] {
   return Array.isArray(axis.values) ? axis.values : [];
 }
 
-export function VariantMatrix({
+export const VariantMatrix = React.memo(function VariantMatrix({
   rows,
   cols,
   template,
@@ -24,19 +25,32 @@ export function VariantMatrix({
   const hasCols = colValues.length > 0;
 
   return (
-    <div style={{ display: 'grid', gap: 12 }}>
+    <div
+      className="codesandbox-container codesandbox-variant-matrix"
+      style={{ display: 'grid', gap: 'var(--codesandbox-gap-md)' }}
+    >
       {rowValues.map((rowVal) => (
-        <div key={rowVal} style={{ display: 'grid', gap: 12 }}>
-          <div style={{ fontWeight: 600, color: 'var(--text-secondary)' }}>
+        <div
+          key={rowVal}
+          style={{ display: 'grid', gap: 'var(--codesandbox-gap-sm)' }}
+        >
+          <div
+            style={{
+              fontWeight: 600,
+              color: 'var(--semantic-color-foreground-secondary)',
+              fontSize: 'var(--semantic-typography-body-small-font-size, 14px)',
+            }}
+          >
             {rows.label}: {rowVal}
           </div>
           <div
+            className="codesandbox-variant-grid"
             style={{
               display: 'grid',
               gridTemplateColumns: hasCols
-                ? `repeat(${colValues.length}, minmax(160px, 1fr))`
+                ? `repeat(auto-fit, minmax(var(--codesandbox-variant-grid-min), 1fr))`
                 : '1fr',
-              gap: 12,
+              gap: 'var(--codesandbox-gap-sm)',
             }}
           >
             {(hasCols ? colValues : ['_single']).map((colVal) => {
@@ -50,24 +64,43 @@ export function VariantMatrix({
                   onClick={() => onTileSelect?.(props)}
                   style={{
                     textAlign: 'left',
-                    border: '1px solid var(--border-subtle)',
-                    borderRadius: 8,
-                    padding: 8,
-                    background: 'var(--surface-raised)',
+                    border: '1px solid var(--semantic-color-border-subtle)',
+                    borderRadius: 'var(--semantic-border-radius-md, 8px)',
+                    padding: 'var(--codesandbox-padding-sm)',
+                    background: 'var(--semantic-color-background-secondary)',
                     cursor: 'pointer',
+                    minHeight: 'var(--codesandbox-min-height)',
+                    transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
+                  }}
+                  onFocus={(e) => {
+                    e.currentTarget.style.borderColor =
+                      'var(--semantic-color-border-focus)';
+                    e.currentTarget.style.boxShadow =
+                      '0 0 0 2px var(--semantic-color-border-focus-ring)';
+                  }}
+                  onBlur={(e) => {
+                    e.currentTarget.style.borderColor =
+                      'var(--semantic-color-border-subtle)';
+                    e.currentTarget.style.boxShadow = 'none';
                   }}
                 >
                   <div
                     style={{
-                      fontSize: 12,
-                      color: 'var(--text-tertiary)',
-                      marginBottom: 8,
+                      fontSize:
+                        'var(--semantic-typography-body-small-font-size, 12px)',
+                      color: 'var(--semantic-color-foreground-tertiary)',
+                      marginBottom: 'var(--codesandbox-gap-xs)',
                     }}
                   >
                     {hasCols ? `${cols!.label}: ${colVal}` : 'Example'}
                   </div>
                   <div
-                    style={{ height: 160, borderRadius: 6, overflow: 'hidden' }}
+                    style={{
+                      height: 'clamp(120px, 20vh, 180px)',
+                      borderRadius: 'var(--semantic-border-radius-sm, 6px)',
+                      overflow: 'hidden',
+                      background: 'var(--semantic-color-background-primary)',
+                    }}
                   >
                     {template(props)}
                   </div>
@@ -79,4 +112,4 @@ export function VariantMatrix({
       ))}
     </div>
   );
-}
+});

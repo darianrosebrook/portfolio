@@ -6,7 +6,11 @@ export type FileTabsProps = {
   onChange: (path: string) => void;
 };
 
-export function FileTabs({ files, active, onChange }: FileTabsProps) {
+export const FileTabs = React.memo(function FileTabs({
+  files,
+  active,
+  onChange,
+}: FileTabsProps) {
   const containerRef = React.useRef<HTMLDivElement>(null);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
@@ -77,4 +81,4 @@ export function FileTabs({ files, active, onChange }: FileTabsProps) {
       ))}
     </div>
   );
-}
+});

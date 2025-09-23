@@ -18,6 +18,27 @@ type AxeViolation = {
   nodes: { target: string[]; html?: string }[];
 };
 
+/**
+ * Accessibility testing panel that runs axe-core accessibility checks on target content.
+ *
+ * Features:
+ * - Runs axe-core accessibility audits
+ * - Supports custom rule tags (WCAG 2.0, 2.1, etc.)
+ * - Provides screen reader announcements of results
+ * - Exports violation reports as JSON
+ * - Can target specific windows (useful for iframe content)
+ *
+ * @example
+ * ```tsx
+ * <A11yPanel
+ *   targetWindow={previewIframe.contentWindow}
+ *   runOnMount={true}
+ *   runTags={['wcag2a', 'wcag2aa']}
+ * />
+ * ```
+ *
+ * @param props - Configuration options for the accessibility panel
+ */
 export function A11yPanel({
   targetWindow,
   runOnMount = false,
@@ -26,6 +47,7 @@ export function A11yPanel({
   const [isRunning, setIsRunning] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
   const [violations, setViolations] = React.useState<AxeViolation[]>([]);
+  const [announcement, setAnnouncement] = React.useState<string>('');
 
   const resolveTargetWindow = React.useCallback((): Window | null => {
     if (targetWindow) return targetWindow;
@@ -61,10 +83,29 @@ export function A11yPanel({
         })),
       }));
       setViolations(v);
+
+      // Announce results to screen readers
+      const violationCount = v.length;
+      if (violationCount === 0) {
+        setAnnouncement('Accessibility check completed. No violations found.');
+      } else {
+        const criticalCount = v.filter(
+          (violation) => violation.impact === 'critical'
+        ).length;
+        const seriousCount = v.filter(
+          (violation) => violation.impact === 'serious'
+        ).length;
+        setAnnouncement(
+          `Accessibility check completed. Found ${violationCount} violation${violationCount !== 1 ? 's' : ''}${
+            criticalCount > 0 ? `, including ${criticalCount} critical` : ''
+          }${seriousCount > 0 ? `, ${seriousCount} serious` : ''}.`
+        );
+      }
     } catch (e) {
-      setError(
-        e instanceof Error ? e.message : 'Failed to run accessibility checks'
-      );
+      const errorMessage =
+        e instanceof Error ? e.message : 'Failed to run accessibility checks';
+      setError(errorMessage);
+      setAnnouncement(`Accessibility check failed: ${errorMessage}`);
     } finally {
       setIsRunning(false);
     }
@@ -89,11 +130,30 @@ export function A11yPanel({
   return (
     <div
       style={{
-        border: '1px solid var(--border-subtle)',
-        borderRadius: 8,
-        padding: 12,
+        border: '1px solid var(--semantic-color-border-subtle)',
+        borderRadius: 'var(--semantic-border-radius-md, 8px)',
+        padding: 'var(--semantic-spacing-md, 12px)',
       }}
     >
+      {/* Screen reader announcements */}
+      <div
+        aria-live="polite"
+        aria-atomic="true"
+        className="sr-only"
+        style={{
+          position: 'absolute',
+          width: '1px',
+          height: '1px',
+          padding: 0,
+          margin: '-1px',
+          overflow: 'hidden',
+          clip: 'rect(0, 0, 0, 0)',
+          whiteSpace: 'nowrap',
+          border: 0,
+        }}
+      >
+        {announcement}
+      </div>
       <div
         style={{
           display: 'flex',

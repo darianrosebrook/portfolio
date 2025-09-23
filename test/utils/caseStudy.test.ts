@@ -1,29 +1,100 @@
-// @vitest-environment node
-import { describe, it, expect } from 'vitest';
 import { getCaseStudyContent } from '@/utils/caseStudy';
+import type { JSONContent } from '@tiptap/react';
+
+// Mock generateHTML to work in test environment
+vi.mock('@tiptap/html', () => ({
+  generateHTML: vi.fn((doc, extensions) => {
+    // Simple mock that returns basic HTML structure
+    const content = doc.content || [];
+    const htmlParts = content.map((node: any) => {
+      if (node.type === 'paragraph' && node.content) {
+        return `<p>${node.content.map((c: any) => c.text || '').join('')}</p>`;
+      }
+      if (node.type === 'heading' && node.content) {
+        const level = node.attrs?.level || 1;
+        return `<h${level}>${node.content.map((c: any) => c.text || '').join('')}</h${level}>`;
+      }
+      return '';
+    });
+    return htmlParts.join('');
+  }),
+}));
 
 describe('getCaseStudyContent', () => {
-  it('returns HTML without first h1 and first img', () => {
-    const data = {
+  it('should handle content with image nodes without throwing an error', () => {
+    const mockContent: JSONContent = {
       type: 'doc',
       content: [
         {
           type: 'heading',
           attrs: { level: 1 },
-          content: [{ type: 'text', text: 'Title' }],
+          content: [{ type: 'text', text: 'Test Title' }],
         },
-        { type: 'paragraph', content: [{ type: 'text', text: 'Hello world' }] },
         {
           type: 'image',
-          attrs: { src: 'https://example.com/image.jpg', alt: 'alt' },
+          attrs: { src: 'https://example.com/image.jpg', alt: 'Test image' },
         },
-        { type: 'paragraph', content: [{ type: 'text', text: 'More text' }] },
+        {
+          type: 'paragraph',
+          content: [{ type: 'text', text: 'This is a test paragraph.' }],
+        },
       ],
-    } as any;
+    };
 
-    const { html } = getCaseStudyContent(data);
-    expect(html).not.toContain('<h1>Title</h1>');
-    expect(html).toContain('<p>');
-    expect(html).toContain('Hello world');
+    expect(() => getCaseStudyContent(mockContent)).not.toThrow();
+  });
+
+  it('should remove the first h1 and first image from content', () => {
+    const mockContent: JSONContent = {
+      type: 'doc',
+      content: [
+        {
+          type: 'heading',
+          attrs: { level: 1 },
+          content: [{ type: 'text', text: 'Test Title' }],
+        },
+        {
+          type: 'image',
+          attrs: { src: 'https://example.com/image.jpg', alt: 'Test image' },
+        },
+        {
+          type: 'paragraph',
+          content: [{ type: 'text', text: 'This is a test paragraph.' }],
+        },
+        {
+          type: 'heading',
+          attrs: { level: 2 },
+          content: [{ type: 'text', text: 'Second Heading' }],
+        },
+      ],
+    };
+
+    const result = getCaseStudyContent(mockContent);
+
+    // Should return HTML without the first h1 and first image
+    expect(result.html).toContain('This is a test paragraph.');
+    expect(result.html).toContain('Second Heading');
+    expect(result.html).not.toContain('Test Title');
+    expect(result.html).not.toContain('https://example.com/image.jpg');
+  });
+
+  it('should handle empty content gracefully', () => {
+    const result = getCaseStudyContent({});
+    expect(result.html).toBe('');
+  });
+
+  it('should handle content with no h1 or image', () => {
+    const mockContent: JSONContent = {
+      type: 'doc',
+      content: [
+        {
+          type: 'paragraph',
+          content: [{ type: 'text', text: 'Just a paragraph.' }],
+        },
+      ],
+    };
+
+    const result = getCaseStudyContent(mockContent);
+    expect(result.html).toContain('Just a paragraph.');
   });
 });

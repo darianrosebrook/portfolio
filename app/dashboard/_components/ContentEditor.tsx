@@ -1,15 +1,17 @@
 'use client';
-import { useEffect, useMemo, useState } from 'react';
-import dynamic from 'next/dynamic';
 import type { Article, CaseStudy } from '@/types';
-import { extractMetadata } from '@/utils/metadata';
-import { JSONContent } from '@tiptap/react';
-import { generateHTML } from '@tiptap/html';
-import StarterKit from '@tiptap/starter-kit';
-import Image from '@tiptap/extension-image';
-import CharacterCount from '@tiptap/extension-character-count';
-import { VideoExtended } from '@/ui/modules/Tiptap/Extensions/VideoExtended';
+import Button from '@/ui/components/Button';
+import Checkbox from '@/ui/components/Checkbox';
 import ToggleSwitch from '@/ui/components/ToggleSwitch';
+import { VideoExtended } from '@/ui/modules/Tiptap/Extensions/VideoExtended';
+import { extractMetadata } from '@/utils/metadata';
+import CharacterCount from '@tiptap/extension-character-count';
+import Image from '@tiptap/extension-image';
+import { generateHTML } from '@tiptap/html';
+import { JSONContent } from '@tiptap/react';
+import StarterKit from '@tiptap/starter-kit';
+import dynamic from 'next/dynamic';
+import { useEffect, useMemo, useState } from 'react';
 
 const Tiptap = dynamic(
   () => import('@/ui/modules/Tiptap').then((mod) => ({ default: mod.Tiptap })),
@@ -310,11 +312,10 @@ export default function ContentEditor({
           />
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <input
-            id="updatePublishedOnPublish"
-            type="checkbox"
+          <Checkbox
             checked={updatePublishDateOnPublish}
             onChange={(e) => setUpdatePublishDateOnPublish(e.target.checked)}
+            id="updatePublishedOnPublish"
           />
           <label htmlFor="updatePublishedOnPublish" className="small">
             Update publish date on publish
@@ -323,16 +324,16 @@ export default function ContentEditor({
         <div style={{ display: 'flex', gap: '0.5rem' }}>
           {/* Show separate Save only when primary is not Save to avoid duplication */}
           {primaryLabel !== 'Save' && (
-            <button className="button" onClick={persist}>
+            <Button className="button" onClick={persist}>
               Save
-            </button>
+            </Button>
           )}
-          <button className="button" onClick={handlePrimaryAction}>
+          <Button className="button" onClick={handlePrimaryAction}>
             {primaryLabel}
-          </button>
-          <button className="button" onClick={() => setPreview((p) => !p)}>
+          </Button>
+          <Button className="button" onClick={() => setPreview((p) => !p)}>
             {preview ? 'Edit' : 'Preview'}
-          </button>
+          </Button>
         </div>
         <div>
           <small>

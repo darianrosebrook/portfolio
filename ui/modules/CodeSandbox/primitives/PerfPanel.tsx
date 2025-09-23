@@ -22,6 +22,8 @@ export function PerfPanel({ targetWindow, sampleMs = 5000 }: PerfPanelProps) {
   });
   const [isRunning, setIsRunning] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
+  const [statusAnnouncement, setStatusAnnouncement] =
+    React.useState<string>('');
 
   const renderTimes = React.useRef<number[]>([]);
   const frameCount = React.useRef(0);
@@ -71,6 +73,7 @@ export function PerfPanel({ targetWindow, sampleMs = 5000 }: PerfPanelProps) {
   const startMonitoring = React.useCallback(() => {
     setIsRunning(true);
     setError(null);
+    setStatusAnnouncement('Performance monitoring started');
     renderTimes.current = [];
     frameCount.current = 0;
     lastFrameTime.current = performance.now();
@@ -103,6 +106,7 @@ export function PerfPanel({ targetWindow, sampleMs = 5000 }: PerfPanelProps) {
 
   const stopMonitoring = React.useCallback(() => {
     setIsRunning(false);
+    setStatusAnnouncement('Performance monitoring stopped');
     if (animationFrameId.current !== null) {
       cancelAnimationFrame(animationFrameId.current);
     }
@@ -161,11 +165,30 @@ export function PerfPanel({ targetWindow, sampleMs = 5000 }: PerfPanelProps) {
   return (
     <div
       style={{
-        border: '1px solid var(--border-subtle)',
-        borderRadius: 8,
-        padding: 12,
+        border: '1px solid var(--semantic-color-border-subtle)',
+        borderRadius: 'var(--semantic-border-radius-md, 8px)',
+        padding: 'var(--semantic-spacing-md, 12px)',
       }}
     >
+      {/* Screen reader announcements */}
+      <div
+        aria-live="polite"
+        aria-atomic="false"
+        className="sr-only"
+        style={{
+          position: 'absolute',
+          width: '1px',
+          height: '1px',
+          padding: 0,
+          margin: '-1px',
+          overflow: 'hidden',
+          clip: 'rect(0, 0, 0, 0)',
+          whiteSpace: 'nowrap',
+          border: 0,
+        }}
+      >
+        {statusAnnouncement}
+      </div>
       <div
         style={{
           display: 'flex',
@@ -179,30 +202,45 @@ export function PerfPanel({ targetWindow, sampleMs = 5000 }: PerfPanelProps) {
           <button
             type="button"
             onClick={isRunning ? stopMonitoring : startMonitoring}
+            aria-describedby="monitoring-status"
             style={{
-              padding: '4px 8px',
-              borderRadius: 6,
+              padding:
+                'var(--semantic-spacing-xs, 4px) var(--semantic-spacing-sm, 8px)',
+              borderRadius: 'var(--semantic-border-radius-sm, 6px)',
               background: isRunning
-                ? 'var(--surface-danger)'
-                : 'var(--surface-accent)',
-              color: 'white',
+                ? 'var(--semantic-color-background-danger)'
+                : 'var(--semantic-color-background-accent)',
+              color: 'var(--semantic-color-foreground-on-accent)',
               border: 'none',
               cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 'var(--semantic-spacing-xs, 4px)',
             }}
           >
+            <span aria-hidden="true" style={{ fontSize: '12px' }}>
+              {isRunning ? '⏹️' : '▶️'}
+            </span>
             {isRunning ? 'Stop' : 'Start'} monitoring
+            <span id="monitoring-status" className="sr-only">
+              {isRunning
+                ? 'Currently monitoring performance'
+                : 'Performance monitoring stopped'}
+            </span>
           </button>
           <button
             type="button"
             onClick={resetMetrics}
             disabled={isRunning}
             style={{
-              padding: '4px 8px',
-              borderRadius: 6,
-              background: 'var(--surface-secondary)',
-              color: 'var(--text-primary)',
+              padding:
+                'var(--semantic-spacing-xs, 4px) var(--semantic-spacing-sm, 8px)',
+              borderRadius: 'var(--semantic-border-radius-sm, 6px)',
+              background: 'var(--semantic-color-background-secondary)',
+              color: 'var(--semantic-color-foreground-primary)',
               border: 'none',
-              cursor: 'pointer',
+              cursor: isRunning ? 'not-allowed' : 'pointer',
+              opacity: isRunning ? 0.6 : 1,
             }}
           >
             Reset
@@ -212,12 +250,14 @@ export function PerfPanel({ targetWindow, sampleMs = 5000 }: PerfPanelProps) {
             onClick={exportData}
             disabled={metrics.renderCount === 0}
             style={{
-              padding: '4px 8px',
-              borderRadius: 6,
-              background: 'var(--surface-secondary)',
-              color: 'var(--text-primary)',
+              padding:
+                'var(--semantic-spacing-xs, 4px) var(--semantic-spacing-sm, 8px)',
+              borderRadius: 'var(--semantic-border-radius-sm, 6px)',
+              background: 'var(--semantic-color-background-secondary)',
+              color: 'var(--semantic-color-foreground-primary)',
               border: 'none',
-              cursor: 'pointer',
+              cursor: metrics.renderCount === 0 ? 'not-allowed' : 'pointer',
+              opacity: metrics.renderCount === 0 ? 0.6 : 1,
             }}
           >
             Export

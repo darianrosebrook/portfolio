@@ -2,17 +2,51 @@
 
 ## Purpose
 
-Our "engineering-grade" operating system for coding agents that (1) forces planning before code, (2) bakes in tests as first-class artifacts, (3) creates explainable provenance, and (4) enforces quality via automated CI gates. It's expressed as a Working Spec + Ruleset the agent must follow, with schemas, templates, scripts, and verification hooks that enable better collaboration between agent and our human in the loop.
+Our "engineering-grade" operating system for coding agents that (1) forces planning before code, (2) bakes in tests as first-class artifacts, (3) creates explainable provenance, and (4) enforces quality via automated CI gates. It's expressed as a Working Spec + Ruleset the agent MUST follow, with schemas, templates, scripts, and verification hooks that enable better collaboration between agent and our human in the loop.
+
+## Normative Language
+
+This document uses RFC-2119/BCP-14 keywords:
+
+- **MUST/SHALL**: Absolute requirement, enforced by automation
+- **SHOULD**: Strong recommendation, may be waived with explicit rationale
+- **MAY**: Optional, profile or context-dependent
+
+## Profiles
+
+CAWS supports different project profiles with tailored gate requirements:
+
+- **web-ui**: Frontend applications with user interfaces
+- **backend-api**: Server applications exposing APIs
+- **library**: Reusable code packages
+- **cli**: Command-line tools
 
 ## 1) Core Framework
 
 ### Risk Tiering → Drives Rigor
 
-• **Tier 1** (Core/critical path, auth/billing, migrations): highest rigor; mutation ≥ 70, branch cov ≥ 90, contract tests mandatory, chaos tests optional, manual review required.
-• **Tier 2** (Common features, data writes, cross-service APIs): mutation ≥ 50, branch cov ≥ 80, contracts mandatory if any external API, e2e smoke required.
-• **Tier 3** (Low risk, read-only UI, internal tooling): mutation ≥ 30, branch cov ≥ 70, integration happy-path + unit thoroughness, e2e optional.
+#### Risk Tier Examples
 
-Agent must infer and declare tier in the plan; human reviewer may bump it up, never down.
+• **Tier 1**: Authentication flows, payment processing, data migrations, public APIs
+• **Tier 2**: User-facing features, internal APIs, database writes, third-party integrations  
+• **Tier 3**: Static content, read-only displays, internal tooling, documentation
+
+Agent MUST infer and declare tier in the plan; human reviewer MAY bump it up, never down.
+
+### Gate Matrix by Profile
+
+| Gate / Profile                     | web-ui            | backend-api | library | cli     |
+| ---------------------------------- | ----------------- | ----------- | ------- | ------- |
+| Static (type/lint/sast/secret/dep) | ✅ MUST           | ✅ MUST     | ✅ MUST | ✅ MUST |
+| Unit + mutation                    | ✅ MUST           | ✅ MUST     | ✅ MUST | ✅ MUST |
+| Contract tests                     | ⚠️ IF API calls   | ✅ MUST     | 🔵 MAY  | 🔵 MAY  |
+| Integration (Testcontainers)       | ⚠️ IF DB/external | ✅ MUST     | 🔵 MAY  | 🔵 MAY  |
+| E2E smoke (Playwright/Cypress)     | ✅ MUST           | ❌ N/A      | ❌ N/A  | ❌ N/A  |
+| A11y (axe)                         | ✅ MUST           | ❌ N/A      | ❌ N/A  | ❌ N/A  |
+| Perf budgets (LHCI)                | ✅ MUST           | ❌ N/A      | ❌ N/A  | ❌ N/A  |
+| Perf budgets (k6/API)              | ❌ N/A            | ✅ MUST     | ❌ N/A  | ❌ N/A  |
+
+**Legend**: ✅ MUST, ⚠️ CONDITIONAL (profile + tier + declared contracts), 🔵 MAY, ❌ N/A
 
 ### Required Inputs (No Code Until Present)
 
@@ -72,11 +106,15 @@ If any are missing, agent must generate a draft and request confirmation inside 
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "CAWS Working Spec",
+  "$id": "https://your-org.com/caws/working-spec.schema.json",
+  "caws_version": "1.0",
   "type": "object",
   "required": [
     "id",
     "title",
     "risk_tier",
+    "profile",
+    "rationale",
     "scope",
     "invariants",
     "acceptance",
@@ -84,9 +122,16 @@ If any are missing, agent must generate a draft and request confirmation inside 
     "contracts"
   ],
   "properties": {
+    "profile": {
+      "type": "string",
+      "enum": ["web-ui", "backend-api", "library", "cli"]
+    },
     "id": { "type": "string", "pattern": "^[A-Z]+-\\d+$" },
     "title": { "type": "string", "minLength": 8 },
     "risk_tier": { "type": "integer", "enum": [1, 2, 3] },
+    "rationale": { "type": "string", "minLength": 20 },
+    "dependencies": { "type": "array", "items": { "type": "string" } },
+    "feature_flags": { "type": "array", "items": { "type": "string" } },
     "scope": {
       "type": "object",
       "required": ["in", "out"],
@@ -117,7 +162,25 @@ If any are missing, agent must generate a draft and request confirmation inside 
     "non_functional": {
       "type": "object",
       "properties": {
-        "a11y": { "type": "array", "items": { "type": "string" } },
+        "a11y": {
+          "type": "object",
+          "properties": {
+            "axe_rules": { "type": "array", "items": { "type": "string" } },
+            "keyboard_paths": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "contrast_min": { "type": "number", "minimum": 3.0 }
+          },
+          "additionalProperties": false
+        },
+        "i18n": {
+          "type": "object",
+          "properties": {
+            "locales": { "type": "array", "items": { "type": "string" } },
+            "rtl_supported": { "type": "boolean" }
+          }
+        },
         "perf": {
           "type": "object",
           "properties": {
@@ -126,7 +189,18 @@ If any are missing, agent must generate a draft and request confirmation inside 
           },
           "additionalProperties": false
         },
-        "security": { "type": "array", "items": { "type": "string" } }
+        "security": { "type": "array", "items": { "type": "string" } },
+        "security_policy": {
+          "type": "object",
+          "properties": {
+            "sast_max_severity": {
+              "type": "string",
+              "enum": ["none", "low", "medium", "high"]
+            },
+            "secret_scan_block": { "type": "boolean" },
+            "dep_policy": { "type": "string", "enum": ["strict", "lenient"] }
+          }
+        }
       },
       "additionalProperties": false
     },
@@ -135,13 +209,21 @@ If any are missing, agent must generate a draft and request confirmation inside 
       "minItems": 1,
       "items": {
         "type": "object",
-        "required": ["type", "path"],
+        "required": ["type", "path", "role"],
         "properties": {
           "type": {
             "type": "string",
-            "enum": ["openapi", "graphql", "proto", "pact"]
+            "enum": [
+              "openapi",
+              "graphql",
+              "proto",
+              "pact",
+              "asyncapi",
+              "jsonschema"
+            ]
           },
-          "path": { "type": "string" }
+          "path": { "type": "string" },
+          "role": { "type": "string", "enum": ["consumer", "provider", "both"] }
         }
       }
     },
@@ -176,9 +258,20 @@ If any are missing, agent must generate a draft and request confirmation inside 
     "results": {
       "type": "object",
       "properties": {
-        "coverage_branch": { "type": "number" },
+        "coverage": {
+          "type": "object",
+          "properties": {
+            "metric": {
+              "type": "string",
+              "enum": ["branch", "line", "condition"]
+            },
+            "value": { "type": "number" }
+          },
+          "required": ["metric", "value"]
+        },
         "mutation_score": { "type": "number" },
         "tests_passed": { "type": "integer" },
+        "spec_changed": { "type": "boolean" },
         "contracts": {
           "type": "object",
           "properties": {
@@ -187,9 +280,18 @@ If any are missing, agent must generate a draft and request confirmation inside 
           }
         },
         "a11y": { "type": "string" },
-        "perf": { "type": "object" }
+        "perf": { "type": "object" },
+        "flake_rate": { "type": "number" }
       },
       "additionalProperties": true
+    },
+    "redactions": { "type": "array", "items": { "type": "string" } },
+    "attestations": {
+      "type": "object",
+      "properties": {
+        "inputs_sha256": { "type": "string" },
+        "artifacts_sha256": { "type": "string" }
+      }
     },
     "approvals": { "type": "array", "items": { "type": "string" } }
   }
@@ -201,13 +303,34 @@ If any are missing, agent must generate a draft and request confirmation inside 
 ```json
 {
   "1": {
-    "min_branch": 0.9,
+    "coverage_metric": "branch",
+    "min_coverage": 0.9,
     "min_mutation": 0.7,
     "requires_contracts": true,
-    "requires_manual_review": true
+    "requires_manual_review": true,
+    "profiles": {
+      "library": { "requires_contracts": false },
+      "web-ui": { "perf_budgets": "lhci" },
+      "backend-api": { "perf_budgets": "k6" }
+    }
   },
-  "2": { "min_branch": 0.8, "min_mutation": 0.5, "requires_contracts": true },
-  "3": { "min_branch": 0.7, "min_mutation": 0.3, "requires_contracts": false }
+  "2": {
+    "coverage_metric": "branch",
+    "min_coverage": 0.8,
+    "min_mutation": 0.5,
+    "requires_contracts": true,
+    "profiles": {
+      "library": { "requires_contracts": false },
+      "web-ui": { "perf_budgets": "lhci" },
+      "backend-api": { "perf_budgets": "k6" }
+    }
+  },
+  "3": {
+    "coverage_metric": "line",
+    "min_coverage": 0.7,
+    "min_mutation": 0.3,
+    "requires_contracts": false
+  }
 }
 ```
 
@@ -226,113 +349,100 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       risk: ${{ steps.risk.outputs.tier }}
+      profile: ${{ steps.risk.outputs.profile }}
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: '20' }
-      - run: npm ci
       - name: Parse Working Spec
         id: risk
         run: |
           pipx install yq
           yq -o=json '.caws/working-spec.yaml' > .caws/working-spec.json
           echo "tier=$(jq -r .risk_tier .caws/working-spec.json)" >> $GITHUB_OUTPUT
+          echo "profile=$(jq -r .profile .caws/working-spec.json)" >> $GITHUB_OUTPUT
+      - name: Bootstrap Environment
+        run: make caws:bootstrap
       - name: Validate Spec
-        run: node tools/caws/validate.js .caws/working-spec.json
+        run: tools/caws/validate .caws/working-spec.json
 
   static:
     needs: setup
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: '20' }
-      - run: npm ci
-      - run: npm run typecheck && npm run lint && npm run dep:policy && npm run sast && npm run secret:scan
+      - run: make caws:bootstrap
+      - run: make caws:static
 
   unit:
     needs: setup
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: '20' }
-      - run: npm ci
-      - run: npm run test:unit -- --coverage
-      - name: Enforce Branch Coverage
-        run: node tools/caws/gates.js coverage --tier ${{ needs.setup.outputs.risk }}
+      - run: make caws:bootstrap
+      - run: make caws:unit
+      - run: tools/caws/gates coverage --tier ${{ needs.setup.outputs.risk }}
 
   mutation:
     needs: unit
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: '20' }
-      - run: npm ci
-      - run: npm run test:mutation
-      - run: node tools/caws/gates.js mutation --tier ${{ needs.setup.outputs.risk }}
+      - run: make caws:bootstrap
+      - run: make caws:mutation
+      - run: tools/caws/gates mutation --tier ${{ needs.setup.outputs.risk }}
 
   contracts:
     needs: setup
     runs-on: ubuntu-latest
+    if: needs.setup.outputs.profile == 'backend-api' || (needs.setup.outputs.profile == 'web-ui' && contains(github.event.pull_request.changed_files, 'contracts/'))
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: '20' }
-      - run: npm ci
-      - run: npm run test:contract
-      - run: node tools/caws/gates.js contracts --tier ${{ needs.setup.outputs.risk }}
+      - run: make caws:bootstrap
+      - run: make caws:contracts
+      - run: tools/caws/gates contracts --tier ${{ needs.setup.outputs.risk }}
 
   integration:
     needs: [setup]
     runs-on: ubuntu-latest
-    services:
-      postgres: { image: postgres:16, env: { POSTGRES_PASSWORD: pass }, ports: ["5432:5432"], options: >-
-        --health-cmd="pg_isready -U postgres" --health-interval=10s --health-timeout=5s --health-retries=5 }
+    if: needs.setup.outputs.profile == 'backend-api' || needs.setup.outputs.profile == 'web-ui'
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: '20' }
-      - run: npm ci
-      - run: npm run test:integration
+      - run: make caws:bootstrap
+      - run: make caws:integration
 
   e2e_a11y:
     needs: [integration]
     runs-on: ubuntu-latest
+    if: needs.setup.outputs.profile == 'web-ui'
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: '20' }
-      - run: npm ci
-      - run: npm run test:e2e:smoke
-      - run: npm run test:axe
+      - run: make caws:bootstrap
+      - run: make caws:e2e
+      - run: make caws:a11y
 
   perf:
-    if: needs.setup.outputs.risk != '3'
+    if: needs.setup.outputs.risk != '3' && (needs.setup.outputs.profile == 'web-ui' || needs.setup.outputs.profile == 'backend-api')
     needs: [integration]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: '20' }
-      - run: npm ci
-      - run: npm run perf:budgets
+      - run: make caws:bootstrap
+      - run: make caws:perf
 
   provenance_trust:
     needs: [static, unit, mutation, contracts, integration, e2e_a11y, perf]
     runs-on: ubuntu-latest
+    if: always()
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: '20' }
-      - run: npm ci
+      - run: make caws:bootstrap
       - name: Generate Provenance
-        run: node tools/caws/provenance.js > .agent/provenance.json
+        run: tools/caws/provenance > .agent/provenance.json
       - name: Validate Provenance
-        run: node tools/caws/validate-prov.js .agent/provenance.json
+        run: tools/caws/validate-prov .agent/provenance.json
       - name: Compute Trust Score
-        run: node tools/caws/gates.js trust --tier ${{ needs.setup.outputs.risk }}
+        run: tools/caws/gates trust --tier ${{ needs.setup.outputs.risk }} --profile ${{ needs.setup.outputs.profile }}
+      - name: Check Spec Delta
+        run: tools/caws/gates spec-delta --require-if '.agent/provenance.json.results.spec_changed==true'
 ```
 
 ### C) Repository Scaffold
@@ -342,8 +452,10 @@ jobs:
   policy/tier-policy.json
   schemas/{working-spec.schema.json, provenance.schema.json}
   templates/{pr.md, feature.plan.md, test-plan.md}
+.caws.yml            # repo-level configuration
 contracts/           # OpenAPI/GraphQL/Pact
 docs/                # human docs; ADRs
+  ci-profiles.md     # CI adapter examples
 src/
 tests/
   unit/
@@ -356,9 +468,41 @@ tools/caws/
   validate.ts
   gates.ts          # thresholds, trust score
   provenance.ts
+Makefile             # caws:* target definitions
 .github/
   workflows/caws.yml
 CODEOWNERS
+```
+
+### D) Repository Configuration (.caws.yml)
+
+```yaml
+caws_version: '1.0'
+default_profile: backend-api
+coverage_metric: branch
+
+services:
+  postgres: true
+  redis: false
+
+tools:
+  unit: 'npm run test:unit -- --coverage'
+  mutation: 'npm run test:mutation'
+  contracts: 'npm run test:contract'
+  integration: 'npm run test:integration'
+  e2e: 'npm run test:e2e:smoke'
+  a11y: 'npm run test:axe'
+  static: 'npm run typecheck && npm run lint && npm run sast'
+  perf: 'npm run perf:budgets'
+
+overrides:
+  paths:
+    tier1: ['src/auth/**', 'src/billing/**']
+    ignore_contracts: ['src/internal/telemetry/**']
+
+waivers:
+  max_concurrent: 2
+  approvers: ['@security-team', '@platform-team']
 ```
 
 ## 3) Templates & Examples
@@ -369,6 +513,11 @@ CODEOWNERS
 id: FEAT-1234
 title: 'Apply coupon at checkout'
 risk_tier: 2
+profile: backend-api
+rationale: >
+  Applies coupons server-side to prevent client-side tampering; requires contract-first to coordinate with web-ui client.
+dependencies: ['FEAT-1200']
+feature_flags: ['ENABLE_COUPON_STACKING']
 scope:
   in: ['apply percentage/fixed coupons', 'stacking rules per business policy']
   out: ['gift cards', 'multi-currency proration']
@@ -386,11 +535,21 @@ acceptance:
     when: 'apply'
     then: 'explainable error; no state change'
 non_functional:
-  a11y: ['keyboard reachable apply/remove', 'announce errors with aria-live']
+  a11y:
+    axe_rules: []
+    keyboard_paths: []
   perf: { api_p95_ms: 250 }
   security: ['server-side validation; no client trust']
+  security_policy:
+    sast_max_severity: 'none'
+    secret_scan_block: true
+    dep_policy: 'strict'
+  i18n:
+    locales: ['en-US']
+    rtl_supported: false
 contracts:
   - type: openapi
+    role: provider
     path: 'contracts/checkout.yaml#/applyCoupon'
 observability:
   logs: ['coupon.apply result, reason']
@@ -446,6 +605,12 @@ What changed and why (business value), link to ticket.
 ## Known Limits / Follow-ups
 
 - Stacking with gift cards is out of scope (FEAT-1290)
+
+## Spec Delta (REQUIRED if scope changed during implementation)
+
+<!-- Describe any changes made to scope.in/out, invariants, acceptance. Link to commit updating .caws/working-spec.yaml. -->
+
+- none
 ```
 
 ### Testing Patterns
@@ -545,16 +710,16 @@ test('apply coupon updates subtotal [A1]', async ({ page }) => {
 ## 5) Trust & Telemetry
 
 • **Provenance manifest** (.agent/provenance.json): agent name/version, prompts, model, commit SHAs, test results hashes, generated files list, and human approvals. Stored with the PR for auditability.
-• **Trust score per PR**: composite of rubric + gates + historical flake rate; expose in a PR check and weekly dashboard.
+• **Trust score per PR**: composite of rubric + gates + historical flake rate; expose in a PR check and dashboard.
 • **Drift watch**: monitor contract usage in prod; alert if undocumented fields appear.
 
 ## 6) Operational Excellence
 
 ### Flake Management
 
-• **Detector**: compute week-over-week pass variance per spec ID.
+• **Detector**: compute pass rate variance per spec ID over rolling time windows.
 • **Policy**: >0.5% variance → auto-label flake:quarantine, open ticket with owner + expiry (7 days).
-• **Implementation**: Store test run hashes in .agent/provenance.json; nightly job aggregates and posts a table to dashboard.
+• **Implementation**: Store test run hashes in .agent/provenance.json; periodic job aggregates and posts a table to dashboard.
 
 ### Waivers & Escalation
 
@@ -632,30 +797,30 @@ test('apply coupon updates subtotal [A1]', async ({ page }) => {
 • **Context discipline**: Restrict writes to spec-touched modules; deny outside scope unless spec updated
 • **Feedback loop**: PR comments show coverage, mutation diff, contract verification summary
 
-## 11) Adoption Roadmap
+## 11) Implementation Roadmap
 
-### Phase 1: Foundation (Week 1)
+### Foundation Milestone
 
 - [ ] Add .caws/ directory with schemas and templates
 - [ ] Create tools/caws/ validation scripts
 - [ ] Wire basic GitHub Actions workflow
 - [ ] Add CODEOWNERS for Tier-1 paths
 
-### Phase 2: Quality Gates (Week 2)
+### Quality Gates Milestone
 
 - [ ] Enable Testcontainers for integration tests
 - [ ] Add mutation testing with tier thresholds
 - [ ] Implement trust score calculation
 - [ ] Add axe + Playwright smoke for UI changes
 
-### Phase 3: Operational Excellence (Week 3)
+### Operational Excellence Milestone
 
 - [ ] Publish provenance manifest with PRs
 - [ ] Implement flake detector and quarantine process
 - [ ] Add waiver system with trust score caps
 - [ ] Socialize review rubric and block merges <80
 
-### Phase 4: Continuous Improvement (Ongoing)
+### Continuous Improvement
 
 - [ ] Monitor drift in contract usage
 - [ ] Refine tooling based on feedback
@@ -674,15 +839,18 @@ const weights = {
   flake: 0.1,
 };
 
-function trustScore(tier: string, prov: Provenance) {
+function trustScore(tier: string, profile: string, prov: Provenance) {
+  const tierPolicy = tiers[tier];
+  const profilePolicy = tierPolicy.profiles?.[profile] || {};
   const wsum = Object.values(weights).reduce((a, b) => a + b, 0);
+
   const score =
     weights.coverage *
-      normalize(prov.results.coverage_branch, tiers[tier].min_branch, 0.95) +
+      normalize(prov.results.coverage.value, tierPolicy.min_coverage, 0.95) +
     weights.mutation *
-      normalize(prov.results.mutation_score, tiers[tier].min_mutation, 0.9) +
+      normalize(prov.results.mutation_score, tierPolicy.min_mutation, 0.9) +
     weights.contracts *
-      (tiers[tier].requires_contracts
+      ((profilePolicy.requires_contracts ?? tierPolicy.requires_contracts)
         ? prov.results.contracts.consumer && prov.results.contracts.provider
           ? 1
           : 0
@@ -693,5 +861,69 @@ function trustScore(tier: string, prov: Provenance) {
   return Math.round((score / wsum) * 100);
 }
 ```
+
+## 13) Project-Specific Addenda
+
+Each project MUST provide the following sections in their `AGENTS.project.md` file:
+
+### Project Profiles
+
+- **Primary Profile**: [web-ui|backend-api|library|cli]
+- **Secondary Profiles**: (if applicable)
+- **Justification**: Why this profile fits the project
+
+### Service Matrix
+
+- **Databases**: PostgreSQL, Redis, etc.
+- **Message Queues**: RabbitMQ, Kafka, etc.
+- **External APIs**: Third-party services used in integration tests
+- **Test Data Strategy**: Fixtures, factories, anonymization approach
+
+### Performance Budgets
+
+- **Web UI**: LCP < 2.5s, FID < 100ms, CLS < 0.1
+- **API**: P95 latency targets per endpoint
+- **Measurement Harness**: Tools and CI integration
+
+### A11y & i18n Targets
+
+- **Supported Locales**: en-US, es-ES, etc.
+- **RTL Support**: Yes/No
+- **Assistive Technology**: Screen readers, keyboard navigation
+- **Compliance Level**: WCAG 2.1 AA
+
+### Security Policy Overrides
+
+- **Temporary Leniency**: With expiration dates
+- **Compensating Controls**: Alternative security measures
+- **Risk Acceptance**: Documented and approved exceptions
+
+### Tool Adapters
+
+```makefile
+# Example Makefile targets
+caws:bootstrap:
+	npm ci
+
+caws:unit:
+	npm run test:unit -- --coverage
+
+caws:mutation:
+	npm run test:mutation
+```
+
+### CI Provider Adapter
+
+- **Primary**: GitHub Actions
+- **Alternative**: GitLab CI, CircleCI mappings
+- **Runner Requirements**: Docker, Node 20, specific services
+
+### Data Classifications
+
+- **Public**: Can be logged and stored
+- **Internal**: Requires redaction in logs
+- **Confidential**: Must be excluded from fixtures and traces
+
+---
 
 This v1.0 combines the philosophical foundation of our system with the practical, executable implementation details needed for immediate adoption. The framework provides both the "why" (quality principles) and the "how" (automated enforcement) needed for engineering-grade AI coding agents.
