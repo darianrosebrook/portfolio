@@ -1,0 +1,153 @@
+/* Responsive design tokens for CodeSandbox components */
+
+:root {
+  /* Base spacing and sizing tokens */
+  --codesandbox-gap-xs: clamp(4px, 1vw, 8px);
+  --codesandbox-gap-sm: clamp(8px, 2vw, 12px);
+  --codesandbox-gap-md: clamp(12px, 3vw, 16px);
+  --codesandbox-gap-lg: clamp(16px, 4vw, 24px);
+
+  /* Padding tokens */
+  --codesandbox-padding-xs: clamp(6px, 1.5vw, 10px);
+  --codesandbox-padding-sm: clamp(8px, 2vw, 16px);
+  --codesandbox-padding-md: clamp(12px, 3vw, 24px);
+  --codesandbox-padding-lg: clamp(16px, 4vw, 32px);
+
+  /* Grid and layout tokens */
+  --codesandbox-grid-min-width: clamp(120px, 20vw, 200px);
+  --codesandbox-variant-grid-min: clamp(140px, 25vw, 220px);
+  --codesandbox-input-width-narrow: clamp(80px, 15vw, 120px);
+  --codesandbox-input-width-wide: clamp(120px, 25vw, 180px);
+
+  /* Container breakpoints */
+  --codesandbox-breakpoint-sm: 480px;
+  --codesandbox-breakpoint-md: 768px;
+  --codesandbox-breakpoint-lg: 1024px;
+
+  /* Height constraints */
+  --codesandbox-min-height: clamp(200px, 30vh, 400px);
+  --codesandbox-max-height: clamp(400px, 60vh, 800px);
+}
+
+/* Container query setup and base styles */
+.codesandbox-container {
+  font-size: clamp(12px, 2.5vw, 14px);
+  line-height: 1.5;
+  container-type: inline-size;
+}
+
+.codesandbox-variant-matrix {
+  container-type: inline-size;
+}
+
+.codesandbox-controls {
+  container-type: inline-size;
+}
+
+/* Container query support for responsive layouts */
+@supports (container-type: inline-size) {
+  /* Responsive grid adjustments based on container width */
+  @container (width >= 768px) {
+    .codesandbox-variant-matrix {
+      grid-template-columns: repeat(
+        auto-fit,
+        minmax(var(--codesandbox-variant-grid-min), 1fr)
+      );
+    }
+
+    .codesandbox-controls {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--codesandbox-gap-md);
+    }
+  }
+
+  @container (width >= 1024px) {
+    .codesandbox-variant-matrix {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .codesandbox-controls {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
+
+/* Fallback for browsers without container query support */
+@supports not (container-type: inline-size) {
+  @media (width >= 768px) {
+    .codesandbox-variant-matrix {
+      grid-template-columns: repeat(
+        auto-fit,
+        minmax(var(--codesandbox-variant-grid-min), 1fr)
+      );
+    }
+
+    .codesandbox-controls {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--codesandbox-gap-md);
+    }
+  }
+
+  @media (width >= 1024px) {
+    .codesandbox-variant-matrix {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .codesandbox-controls {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
+
+/* Responsive typography scaling - consolidated above */
+
+/* Touch-friendly sizing for mobile devices */
+@media (hover: none) and (pointer: coarse) {
+  .codesandbox-container {
+    /* Increase touch targets on mobile */
+    --codesandbox-button-min-height: 44px;
+    --codesandbox-input-min-height: 44px;
+  }
+
+  .codesandbox-container button,
+  .codesandbox-container input,
+  .codesandbox-container select {
+    min-height: var(--codesandbox-button-min-height);
+    padding: var(--codesandbox-padding-sm);
+  }
+}
+
+/* High DPI display optimizations */
+@media (resolution >= 192dpi) {
+  .codesandbox-container {
+    /* Slightly smaller text on high-DPI displays for better density */
+    font-size: clamp(11px, 2.3vw, 13px);
+  }
+}
+
+/* Print styles */
+@media print {
+  .codesandbox-container {
+    /* Optimize for print layout */
+    --codesandbox-gap-sm: 8px;
+    --codesandbox-gap-md: 12px;
+    --codesandbox-padding-sm: 8px;
+    --codesandbox-padding-md: 12px;
+
+    /* Hide interactive elements in print */
+    .codesandbox-controls,
+    .codesandbox-toolbar {
+      display: none;
+    }
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .codesandbox-container * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -191,6 +191,27 @@ function DefaultErrorFallback({
   );
 }
 
+/**
+ * A robust error boundary component that catches JavaScript errors in child components,
+ * logs error information, and displays a fallback UI instead of crashing the whole component tree.
+ *
+ * Features:
+ * - Customizable fallback UI
+ * - Error reporting callbacks
+ * - Automatic reset on prop changes
+ * - Development-friendly error logging
+ * - Retry functionality
+ *
+ * @example
+ * ```tsx
+ * <ErrorBoundary
+ *   resetKeys={[userSession.id]}
+ *   onError={(error, errorInfo) => analytics.track('component_error', { error })}
+ * >
+ *   <MyComponent />
+ * </ErrorBoundary>
+ * ```
+ */
 export class ErrorBoundary extends React.Component<
   ErrorBoundaryProps,
   ErrorBoundaryState

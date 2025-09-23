@@ -21,7 +21,7 @@
       },
       "thumb": {
         "background": {
-          "default": "{semantic.color.background.primary}",
+          "default": "{semantic.color.background.secondary}",
           "hover": "{semantic.color.background.hover}",
           "focus": "{semantic.color.background.primary}",
           "disabled": "{semantic.color.background.disabled}",
@@ -86,8 +86,8 @@
       }
     },
     "motion": {
-      "duration": "{semantic.duration.fast}",
-      "easing": "{semantic.easing.standard}"
+      "duration": "{semantic.motion.interaction.press.fast}",
+      "easing": "{semantic.motion.interaction.press.easing}"
     },
     "focus": {
       "ring": "{semantic.focus.ring}",

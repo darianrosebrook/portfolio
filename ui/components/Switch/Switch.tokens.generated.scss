@@ -3,43 +3,23 @@
  */
 @mixin vars {
   /* === Color Tokens === */
-  --switch-color-track-background-default: var(
-    --semantic-color-background-secondary
-  );
+  --switch-color-track-background-default: var(--semantic-color-background-secondary);
   --switch-color-track-background-hover: var(--semantic-color-background-hover);
-  --switch-color-track-background-focus: var(
-    --semantic-color-background-secondary
-  );
-  --switch-color-track-background-disabled: var(
-    --semantic-color-background-disabled
-  );
-  --switch-color-track-background-checked: var(
-    --semantic-color-background-primary
-  );
-  --switch-color-track-background-error: var(
-    --semantic-color-background-danger-subtle
-  );
+  --switch-color-track-background-focus: var(--semantic-color-background-secondary);
+  --switch-color-track-background-disabled: var(--semantic-color-background-disabled);
+  --switch-color-track-background-checked: var(--semantic-color-background-primary);
+  --switch-color-track-background-error: var(--semantic-color-background-danger-subtle);
   --switch-color-track-border-default: var(--semantic-color-border-primary);
   --switch-color-track-border-hover: var(--semantic-color-border-bold);
   --switch-color-track-border-focus: var(--semantic-color-border-accent);
   --switch-color-track-border-disabled: var(--semantic-color-border-disabled);
   --switch-color-track-border-error: var(--semantic-color-border-danger);
-  --switch-color-thumb-background-default: var(
-    --semantic-color-background-primary
-  );
+  --switch-color-thumb-background-default: var(--semantic-color-background-secondary);
   --switch-color-thumb-background-hover: var(--semantic-color-background-hover);
-  --switch-color-thumb-background-focus: var(
-    --semantic-color-background-primary
-  );
-  --switch-color-thumb-background-disabled: var(
-    --semantic-color-background-disabled
-  );
-  --switch-color-thumb-background-checked: var(
-    --semantic-color-background-accent
-  );
-  --switch-color-thumb-background-error: var(
-    --semantic-color-background-danger
-  );
+  --switch-color-thumb-background-focus: var(--semantic-color-background-primary);
+  --switch-color-thumb-background-disabled: var(--semantic-color-background-disabled);
+  --switch-color-thumb-background-checked: var(--semantic-color-background-accent);
+  --switch-color-thumb-background-error: var(--semantic-color-background-danger);
   --switch-color-thumb-border-default: var(--semantic-color-border-primary);
   --switch-color-thumb-border-hover: var(--semantic-color-border-bold);
   --switch-color-thumb-border-focus: var(--semantic-color-border-accent);
@@ -75,8 +55,8 @@
   --switch-size-lg-fontSize: var(--semantic-typography-body-default-font-size);
 
   /* === Motion Tokens === */
-  --switch-motion-duration: var(--semantic-duration-fast);
-  --switch-motion-easing: var(--semantic-easing-standard);
+  --switch-motion-duration: var(--semantic-motion-interaction-press-fast);
+  --switch-motion-easing: var(--semantic-motion-interaction-press-easing);
 
   /* === Focus Tokens === */
   --switch-focus-ring: var(--semantic-focus-ring);

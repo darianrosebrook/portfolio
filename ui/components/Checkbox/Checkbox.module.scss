@@ -1,10 +1,8 @@
 @import './Checkbox.tokens.generated';
 
-:global(html) {
-  @include vars;
-}
-
 .indicator {
+  @include vars;
+
   position: relative;
   display: inline-flex;
   justify-content: center;

@@ -14,7 +14,7 @@
   min-width: var(--button-size-min-medium);
   min-height: var(--button-size-min-medium);
   margin: 0;
-  padding: var(--button-size-gap-default);
+  padding: var(--button-size-padding-small) var(--button-size-padding-small);
 
   // Visual
   background: none;
@@ -103,7 +103,7 @@
     gap: var(--button-size-gap-default);
     min-width: var(--button-size-min-medium);
     min-height: var(--button-size-min-medium);
-    padding: var(--button-size-gap-default);
+    padding: var(--button-size-padding-small) var(--button-size-padding-large);
     font-size: var(--button-text-size-medium);
   }
 

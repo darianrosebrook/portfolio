@@ -29,12 +29,12 @@
         "thumbError": "{semantic.color.background.danger}"
       },
       "border": {
-        "track": "{semantic.color.border.primary}",
+        "track": "{semantic.color.border.subtle}",
         "trackHover": "{semantic.color.border.bold}",
         "trackFocus": "{semantic.color.border.accent}",
         "trackDisabled": "{semantic.color.border.disabled}",
         "trackError": "{semantic.color.border.danger}",
-        "thumb": "{semantic.color.border.primary}",
+        "thumb": "{semantic.color.border.subtle}",
         "thumbHover": "{semantic.color.border.bold}",
         "thumbFocus": "{semantic.color.border.accent}",
         "thumbDisabled": "{semantic.color.border.disabled}",

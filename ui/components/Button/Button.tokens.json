@@ -31,15 +31,15 @@
         "focusVisible": "{semantic.color.foreground.inverse}",
         "disabled": "{semantic.color.foreground.disabled}",
 
-        "primary": "{semantic.color.foreground.onBrand}",
+        "primary": "{semantic.color.foreground.primary}",
         "primaryHover": "{semantic.color.foreground.onBrand}",
         "primaryActive": "{semantic.color.foreground.onBrand}",
 
-        "secondary": "{semantic.color.foreground.primary}",
+        "secondary": "{semantic.color.foreground.primary }",
         "secondaryHover": "{semantic.interaction.text.hover}",
         "secondaryActive": "{semantic.interaction.text.active}",
 
-        "tertiary": "{semantic.color.foreground.tertiary}",
+        "tertiary": "{semantic.color.foreground.primary}",
         "tertiaryHover": "{semantic.interaction.text.hover}",
         "tertiaryActive": "{semantic.interaction.text.active}"
       },

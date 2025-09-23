@@ -2268,7 +2268,7 @@
       },
       "ringOffset": {
         "$type": "dimension",
-        "$value": "{core.spacing.size.02}"
+        "$value": "{core.spacing.size.03}"
       }
     },
     "opacity": {

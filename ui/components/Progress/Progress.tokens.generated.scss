@@ -26,9 +26,7 @@
 
   /* === Typography Tokens === */
   --progress-typography-value-fontSize: var(--semantic-typography-caption-01);
-  --progress-typography-value-fontWeight: var(
-    --semantic-typography-font-weight-medium
-  );
+  --progress-typography-value-fontWeight: var(--semantic-typography-font-weight-medium);
 
   /* === Motion Tokens === */
   --progress-motion-duration-indeterminate: 1.5s;

@@ -1,5 +1,66 @@
 import * as React from 'react';
+import '../styles/responsive.scss';
 import type { ControlDef } from '../types';
+
+// Extract style objects to prevent recreation on each render
+const CONTROL_STYLES = {
+  container: {
+    display: 'flex',
+    flexDirection: 'column' as const,
+    gap: 'var(--codesandbox-gap-sm)',
+  },
+  controlRow: {
+    display: 'grid',
+    gridTemplateColumns: '1fr auto',
+    gap: 'var(--codesandbox-gap-xs)',
+    alignItems: 'center',
+    marginBottom: 'var(--codesandbox-gap-xs)',
+  },
+  label: {
+    color: 'var(--semantic-color-foreground-secondary)',
+    fontSize: 'var(--semantic-typography-body-small-font-size, 14px)',
+  },
+  numberInput: {
+    width: 'var(--codesandbox-input-width-narrow)',
+    minHeight: 'var(--codesandbox-input-min-height, 32px)',
+    padding: 'var(--codesandbox-padding-xs)',
+  },
+  textInput: {
+    width: 'var(--codesandbox-input-width-wide)',
+    minHeight: 'var(--codesandbox-input-min-height, 32px)',
+    padding: 'var(--codesandbox-padding-xs)',
+  },
+  selectInput: {
+    width: 'var(--codesandbox-input-width-wide)',
+    minHeight: 'var(--codesandbox-input-min-height, 32px)',
+    padding: 'var(--codesandbox-padding-xs)',
+  },
+  radioGroup: {
+    display: 'flex',
+    gap: 'var(--codesandbox-gap-sm)',
+    flexWrap: 'wrap' as const,
+  },
+  radioLabel: {
+    display: 'inline-flex',
+    gap: 'var(--codesandbox-gap-xs)',
+    alignItems: 'center',
+    minHeight: 'var(--codesandbox-button-min-height, 32px)',
+  },
+  jsonContainer: {
+    marginBottom: 'var(--codesandbox-gap-sm)',
+  },
+  jsonLabel: {
+    color: 'var(--semantic-color-foreground-secondary)',
+    marginBottom: 'var(--codesandbox-gap-xs)',
+    fontSize: 'var(--semantic-typography-body-small-font-size, 14px)',
+  },
+  jsonTextarea: {
+    width: '100%',
+    minHeight: '120px',
+    padding: 'var(--codesandbox-padding-sm)',
+    fontSize: 'var(--semantic-typography-font-family-mono, monospace)',
+  },
+} as const;
 
 export type PropControlsProps = {
   controls: ControlDef[];
@@ -7,7 +68,7 @@ export type PropControlsProps = {
   onChange: (values: Record<string, any>) => void;
 };
 
-function ControlRow({
+const ControlRow = React.memo(function ControlRow({
   label,
   children,
 }: {
@@ -15,22 +76,14 @@ function ControlRow({
   children: React.ReactNode;
 }) {
   return (
-    <label
-      style={{
-        display: 'grid',
-        gridTemplateColumns: '1fr auto',
-        gap: 8,
-        alignItems: 'center',
-        marginBottom: 8,
-      }}
-    >
-      <span style={{ color: 'var(--text-secondary)' }}>{label}</span>
+    <label style={CONTROL_STYLES.controlRow}>
+      <span style={CONTROL_STYLES.label}>{label}</span>
       {children}
     </label>
   );
-}
+});
 
-export function PropControls({
+export const PropControls = React.memo(function PropControls({
   controls,
   values,
   onChange,
@@ -43,7 +96,10 @@ export function PropControls({
   );
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
+    <div
+      className="codesandbox-container codesandbox-controls"
+      style={CONTROL_STYLES.container}
+    >
       {controls.map((c) => {
         const value = values[c.id] ?? c.defaultValue;
         switch (c.kind) {
@@ -72,7 +128,7 @@ export function PropControls({
                       e.target.value === '' ? '' : Number(e.target.value)
                     )
                   }
-                  style={{ width: 120 }}
+                  style={CONTROL_STYLES.numberInput}
                 />
               </ControlRow>
             );
@@ -83,7 +139,7 @@ export function PropControls({
                   type="text"
                   value={String(value ?? '')}
                   onChange={(e) => handleSet(c.id, e.target.value)}
-                  style={{ width: 160 }}
+                  style={CONTROL_STYLES.textInput}
                 />
               </ControlRow>
             );
@@ -103,7 +159,7 @@ export function PropControls({
                 <select
                   value={String(value ?? c.options?.[0]?.value ?? '')}
                   onChange={(e) => handleSet(c.id, e.target.value)}
-                  style={{ width: 160 }}
+                  style={CONTROL_STYLES.selectInput}
                 >
                   {(c.options ?? []).map((opt) => (
                     <option key={String(opt.value)} value={String(opt.value)}>
@@ -115,26 +171,15 @@ export function PropControls({
             );
           case 'radio':
             return (
-              <div key={c.id} style={{ marginBottom: 8 }}>
-                <div
-                  style={{ color: 'var(--text-secondary)', marginBottom: 4 }}
-                >
-                  {c.label}
-                </div>
-                <div
-                  role="radiogroup"
-                  style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}
-                >
+              <div key={c.id} style={CONTROL_STYLES.jsonContainer}>
+                <div style={CONTROL_STYLES.jsonLabel}>{c.label}</div>
+                <div role="radiogroup" style={CONTROL_STYLES.radioGroup}>
                   {(c.options ?? []).map((opt) => {
                     const checked = String(value) === String(opt.value);
                     return (
                       <label
                         key={String(opt.value)}
-                        style={{
-                          display: 'inline-flex',
-                          gap: 4,
-                          alignItems: 'center',
-                        }}
+                        style={CONTROL_STYLES.radioLabel}
                       >
                         <input
                           type="radio"
@@ -151,12 +196,8 @@ export function PropControls({
             );
           case 'json':
             return (
-              <div key={c.id} style={{ marginBottom: 8 }}>
-                <div
-                  style={{ color: 'var(--text-secondary)', marginBottom: 4 }}
-                >
-                  {c.label}
-                </div>
+              <div key={c.id} style={CONTROL_STYLES.jsonContainer}>
+                <div style={CONTROL_STYLES.jsonLabel}>{c.label}</div>
                 <textarea
                   value={(() => {
                     try {
@@ -178,7 +219,7 @@ export function PropControls({
                     }
                   }}
                   rows={6}
-                  style={{ width: '100%' }}
+                  style={CONTROL_STYLES.jsonTextarea}
                 />
               </div>
             );
@@ -188,4 +229,4 @@ export function PropControls({
       })}
     </div>
   );
-}
+});

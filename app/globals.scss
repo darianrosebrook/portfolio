@@ -8,6 +8,16 @@
   navigation: auto;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  min-width: 0;
+  min-height: 0;
+
+  // border: 1px solid purple;
+}
+
 @keyframes slide-and-fade-out {
   from {
     opacity: 1;
@@ -712,7 +722,6 @@ textarea:focus-visible {
 input:read-only,
 textarea:read-only {
   background: var(--semantic-color-background-readOnly);
-  border-color: var(--semantic-color-foreground-primary);
   outline: none;
   color: var(--semantic-color-foreground-secondary);
 }

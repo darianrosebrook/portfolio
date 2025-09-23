@@ -711,7 +711,7 @@
     },
     "ringOffset": {
       "$type": "dimension",
-      "$value": "{spacing.size.02}"
+      "$value": "{spacing.size.03}"
     }
   },
 

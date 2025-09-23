@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { SandpackCodeEditor } from '@codesandbox/sandpack-react';
+import * as React from 'react';
 
 export type CodeEditorProps = {
   engine?: 'sandpack' | 'codemirror' | 'monaco';
@@ -10,7 +10,7 @@ export type CodeEditorProps = {
   decorators?: Array<{ file: string; line: number; className?: string }>;
 };
 
-export function CodeEditor({
+export const CodeEditor = React.memo(function CodeEditor({
   engine = 'sandpack',
   readOnly,
   showLineNumbers = true,
@@ -29,4 +29,4 @@ export function CodeEditor({
       decorators={decorators}
     />
   );
-}
+});
