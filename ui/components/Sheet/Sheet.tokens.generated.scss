@@ -1,0 +1,14 @@
+/* AUTO-GENERATED: Scaffolding placeholder. Replace via tokens build. */
+@mixin vars {
+  /* === Color === */
+  --sheet-color-background-default: var(--semantic-color-background-secondary);
+  --sheet-color-foreground-primary: var(--semantic-color-foreground-primary);
+  --sheet-color-foreground-secondary: var(--semantic-color-foreground-secondary);
+  --sheet-color-border-default: var(--semantic-color-border-light);
+  --sheet-color-border-accent: var(--semantic-color-border-accent);
+  /* === Size === */
+  --sheet-size-padding-default: var(--core-spacing-size-07);
+  --sheet-size-radius-default: var(--core-shape-radius-medium);
+  /* === Elevation === */
+  --sheet-elevation-default: var(--semantic-elevation-depth-1);
+}

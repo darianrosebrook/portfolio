@@ -1,0 +1,14 @@
+/* AUTO-GENERATED: Scaffolding placeholder. Replace via tokens build. */
+@mixin vars {
+  /* === Color === */
+  --command-color-background-default: var(--semantic-color-background-secondary);
+  --command-color-foreground-primary: var(--semantic-color-foreground-primary);
+  --command-color-foreground-secondary: var(--semantic-color-foreground-secondary);
+  --command-color-border-default: var(--semantic-color-border-light);
+  --command-color-border-accent: var(--semantic-color-border-accent);
+  /* === Size === */
+  --command-size-padding-default: var(--core-spacing-size-07);
+  --command-size-radius-default: var(--core-shape-radius-medium);
+  /* === Elevation === */
+  --command-elevation-default: var(--semantic-elevation-depth-1);
+}

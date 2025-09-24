@@ -1,8 +1,32 @@
 import React, { useMemo } from 'react';
 import styles from './Button.module.scss';
 
+// Simple Slot implementation to avoid Radix dependency
+const Slot = React.forwardRef<
+  HTMLElement,
+  React.HTMLAttributes<HTMLElement> & { children: React.ReactElement }
+>(({ children, ...props }, ref) => {
+  if (React.isValidElement(children)) {
+    return React.cloneElement(children, {
+      ...props,
+      ...children.props,
+      ref,
+      className: [props.className, children.props.className]
+        .filter(Boolean)
+        .join(' '),
+    });
+  }
+  return null;
+});
+
 export type ButtonSize = 'small' | 'medium' | 'large';
-export type ButtonVariant = 'primary' | 'secondary' | 'tertiary';
+export type ButtonVariant =
+  | 'primary'
+  | 'secondary'
+  | 'tertiary'
+  | 'ghost'
+  | 'destructive'
+  | 'outline';
 
 interface ButtonBaseProps {
   size?: ButtonSize;
@@ -15,6 +39,7 @@ interface ButtonBaseProps {
   ariaExpanded?: boolean;
   ariaPressed?: boolean;
   role?: React.AriaRole;
+  asChild?: boolean;
 }
 
 interface ButtonAsButton
@@ -59,6 +84,7 @@ const Button: React.FC<ButtonProps> = ({
   ariaExpanded,
   ariaPressed,
   role,
+  asChild = false,
   children,
   ...rest
 }) => {
@@ -125,6 +151,21 @@ const Button: React.FC<ButtonProps> = ({
     }
     return children;
   };
+
+  // Handle asChild pattern
+  if (asChild) {
+    return (
+      <Slot
+        className={combinedClassName}
+        title={title}
+        {...ariaProps}
+        data-slot="button"
+      >
+        {children as React.ReactElement}
+      </Slot>
+    );
+  }
+
   if (as === 'a') {
     const { href, ...anchorRest } = rest as ButtonAsAnchor;
     return (
@@ -134,6 +175,7 @@ const Button: React.FC<ButtonProps> = ({
         title={title}
         {...ariaProps}
         {...anchorRest}
+        data-slot="button"
       >
         {renderChildren()}
       </a>
@@ -147,6 +189,7 @@ const Button: React.FC<ButtonProps> = ({
       title={title}
       {...(rest as ButtonAsButton)}
       {...ariaProps}
+      data-slot="button"
     >
       {renderChildren()}
     </button>

@@ -1,0 +1,32 @@
+{
+  "name": "Table",
+  "layer": "compound",
+  "anatomy": [
+    "root"
+  ],
+  "variants": {},
+  "states": [
+    "default"
+  ],
+  "slots": {},
+  "a11y": {
+    "role": "region",
+    "labeling": [],
+    "keyboard": [],
+    "apgPattern": null
+  },
+  "tokens": {
+    "root": [
+      "table.color.background.default",
+      "table.color.foreground.primary",
+      "table.size.padding.default",
+      "table.size.radius.default"
+    ]
+  },
+  "ssr": {
+    "hydrateOn": "none"
+  },
+  "rtl": {
+    "flipIcon": false
+  }
+}

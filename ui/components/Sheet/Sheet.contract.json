@@ -1,0 +1,32 @@
+{
+  "name": "Sheet",
+  "layer": "composer",
+  "anatomy": [
+    "root"
+  ],
+  "variants": {},
+  "states": [
+    "default"
+  ],
+  "slots": {},
+  "a11y": {
+    "role": "region",
+    "labeling": [],
+    "keyboard": [],
+    "apgPattern": null
+  },
+  "tokens": {
+    "root": [
+      "sheet.color.background.default",
+      "sheet.color.foreground.primary",
+      "sheet.size.padding.default",
+      "sheet.size.radius.default"
+    ]
+  },
+  "ssr": {
+    "hydrateOn": "none"
+  },
+  "rtl": {
+    "flipIcon": false
+  }
+}

@@ -839,39 +839,173 @@
 
   "motion": {
     "duration": {
-      "instant": { "$type": "duration", "$value": "100ms" },
-      "short": { "$type": "duration", "$value": "150ms" },
-      "medium": { "$type": "duration", "$value": "250ms" },
-      "long": { "$type": "duration", "$value": "400ms" }
+      "instant": {
+        "$type": "duration",
+        "$value": "17ms",
+        "$description": "1 frame at 60fps - for immediate feedback"
+      },
+      "short1": {
+        "$type": "duration",
+        "$value": "50ms",
+        "$description": "Micro-interactions and quick transitions"
+      },
+      "short2": {
+        "$type": "duration",
+        "$value": "83ms",
+        "$description": "5 frames - subtle hover effects"
+      },
+      "short3": {
+        "$type": "duration",
+        "$value": "167ms",
+        "$description": "10 frames - standard hover/focus transitions"
+      },
+      "medium1": {
+        "$type": "duration",
+        "$value": "250ms",
+        "$description": "Standard transition duration"
+      },
+      "medium2": {
+        "$type": "duration",
+        "$value": "333ms",
+        "$description": "20 frames - comfortable transitions"
+      },
+      "medium3": {
+        "$type": "duration",
+        "$value": "500ms",
+        "$description": "Noticeable transitions"
+      },
+      "long1": {
+        "$type": "duration",
+        "$value": "667ms",
+        "$description": "40 frames - deliberate transitions"
+      },
+      "long2": {
+        "$type": "duration",
+        "$value": "833ms",
+        "$description": "50 frames - slow transitions"
+      },
+      "long3": {
+        "$type": "duration",
+        "$value": "1000ms",
+        "$description": "Full second - very slow transitions"
+      }
     },
     "easing": {
       "standard": {
         "$type": "cubicBezier",
-        "$value": "cubic-bezier(0.4, 0, 0.2, 1)"
+        "$value": "cubic-bezier(0.3, 0, 0.1, 1)",
+        "$description": "Standard easing for most transitions"
       },
-      "emphasizedIn": {
-        "$type": "cubicBezier",
-        "$value": "cubic-bezier(0.2, 0, 0, 1)"
+      "quick": {
+        "enter": {
+          "$type": "cubicBezier",
+          "$value": "cubic-bezier(0, 0, 0.1, 1)",
+          "$description": "Quick enter - sharp start, smooth end"
+        },
+        "exit": {
+          "$type": "cubicBezier",
+          "$value": "cubic-bezier(1, 0, 1, 1)",
+          "$description": "Quick exit - smooth start, sharp end"
+        }
       },
-      "emphasizedOut": {
+      "soft": {
+        "enter": {
+          "$type": "cubicBezier",
+          "$value": "cubic-bezier(0, 0, 0.7, 1)",
+          "$description": "Soft enter - gentle acceleration"
+        },
+        "exit": {
+          "$type": "cubicBezier",
+          "$value": "cubic-bezier(0.3, 0, 1, 1)",
+          "$description": "Soft exit - gentle deceleration"
+        }
+      },
+      "continuous": {
         "$type": "cubicBezier",
-        "$value": "cubic-bezier(0.4, 0, 0.2, 1)"
+        "$value": "cubic-bezier(0.3, 0, 0.7, 1)",
+        "$description": "Continuous motion - smooth throughout"
+      },
+      "bounce": {
+        "$type": "cubicBezier",
+        "$value": "cubic-bezier(0.3, 0, 0.1, 1.25)",
+        "$description": "Bounce effect - slight overshoot"
+      },
+      "linear": {
+        "$type": "cubicBezier",
+        "$value": "cubic-bezier(0, 0, 1, 1)",
+        "$description": "Linear motion - constant speed"
       }
     },
     "keyframes": {
       "fadeIn": {
         "$type": "string",
-        "$value": "fadeIn"
+        "$value": "fadeIn",
+        "$description": "Standard fade in animation"
+      },
+      "slideUp": {
+        "$type": "string",
+        "$value": "slideUp",
+        "$description": "Slide up from bottom"
+      },
+      "slideDown": {
+        "$type": "string",
+        "$value": "slideDown",
+        "$description": "Slide down from top"
+      },
+      "scaleIn": {
+        "$type": "string",
+        "$value": "scaleIn",
+        "$description": "Scale in from center"
+      },
+      "pulse": {
+        "$type": "string",
+        "$value": "pulse",
+        "$description": "Subtle pulse animation"
       }
     },
     "delay": {
-      "short": { "$type": "duration", "$value": "50ms" },
-      "medium": { "$type": "duration", "$value": "100ms" },
-      "long": { "$type": "duration", "$value": "150ms" }
+      "none": {
+        "$type": "duration",
+        "$value": "0ms",
+        "$description": "No delay"
+      },
+      "short": {
+        "$type": "duration",
+        "$value": "50ms",
+        "$description": "Short delay for sequenced animations"
+      },
+      "medium": {
+        "$type": "duration",
+        "$value": "100ms",
+        "$description": "Medium delay"
+      },
+      "long": {
+        "$type": "duration",
+        "$value": "150ms",
+        "$description": "Long delay for dramatic effect"
+      }
     },
     "stagger": {
-      "sm": { "$type": "duration", "$value": "30ms" },
-      "md": { "$type": "duration", "$value": "60ms" }
+      "xs": {
+        "$type": "duration",
+        "$value": "17ms",
+        "$description": "1 frame stagger"
+      },
+      "sm": {
+        "$type": "duration",
+        "$value": "30ms",
+        "$description": "Small stagger for list items"
+      },
+      "md": {
+        "$type": "duration",
+        "$value": "60ms",
+        "$description": "Medium stagger for cards"
+      },
+      "lg": {
+        "$type": "duration",
+        "$value": "100ms",
+        "$description": "Large stagger for sections"
+      }
     }
   },
 
@@ -922,6 +1056,76 @@
     }
   },
 
+  "content": {
+    "maxWidth": {
+      "prose": {
+        "$type": "dimension",
+        "$value": "65ch",
+        "$description": "Optimal reading width for body text"
+      },
+      "narrow": {
+        "$type": "dimension",
+        "$value": "45ch",
+        "$description": "Narrow content for captions and asides"
+      },
+      "wide": {
+        "$type": "dimension",
+        "$value": "75ch",
+        "$description": "Wide content for technical documentation"
+      }
+    },
+    "measure": {
+      "comfortable": {
+        "$type": "dimension",
+        "$value": "60ch",
+        "$description": "Comfortable reading measure"
+      },
+      "compact": {
+        "$type": "dimension",
+        "$value": "45ch",
+        "$description": "Compact measure for sidebars"
+      }
+    }
+  },
+
+  "interaction": {
+    "focus": {
+      "ringWidth": {
+        "$type": "borderWidth",
+        "$value": "2px",
+        "$description": "Focus ring thickness"
+      },
+      "ringOffset": {
+        "$type": "dimension",
+        "$value": "2px",
+        "$description": "Space between element and focus ring"
+      },
+      "ringOpacity": {
+        "$type": "opacity",
+        "$value": 0.5,
+        "$description": "Focus ring transparency"
+      }
+    },
+    "press": {
+      "scale": {
+        "$type": "number",
+        "$value": 0.98,
+        "$description": "Scale factor for pressed elements"
+      },
+      "duration": {
+        "$type": "duration",
+        "$value": "{motion.duration.instant}"
+      }
+    },
+    "disabled": {
+      "opacity": {
+        "$type": "opacity",
+        "$value": 0.4,
+        "$description": "Opacity for disabled elements"
+      }
+    }
+  },
+
   "component": {
     "pagination": {
       "gap": {
@@ -951,20 +1155,29 @@
         "radius": { "$type": "borderRadius", "$value": "{shape.radius.02}" }
       },
       "color": {
-        "text": { "$type": "color", "$value": "{color.foreground.primary}" },
-        "bg": { "$type": "color", "$value": "{color.background.primary}" },
-        "border": { "$type": "color", "$value": "{color.border.subtle}" },
+        "text": {
+          "$type": "color",
+          "$value": "{color.display.foreground.primary}"
+        },
+        "bg": {
+          "$type": "color",
+          "$value": "{color.display.background.primary}"
+        },
+        "border": {
+          "$type": "color",
+          "$value": "{color.display.border.subtle}"
+        },
         "focus": { "$type": "color", "$value": "{color.palette.red.500}" }
       }
     },
     "test": {
       "dsSemanticColorBgPrimary": {
         "$type": "color",
-        "$value": "{color.background.primary}"
+        "$value": "{color.display.background.primary}"
       },
       "customSemanticColorBgPrimary": {
         "$type": "color",
-        "$value": "{color.background.primary}"
+        "$value": "{color.display.background.primary}"
       },
       "myCustomBg": { "$type": "color", "$value": "#007bff" },
       "path": { "$type": "string", "$value": "test-path" },
