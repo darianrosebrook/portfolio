@@ -1,0 +1,32 @@
+{
+  "name": "Command",
+  "layer": "composer",
+  "anatomy": [
+    "root"
+  ],
+  "variants": {},
+  "states": [
+    "default"
+  ],
+  "slots": {},
+  "a11y": {
+    "role": "region",
+    "labeling": [],
+    "keyboard": [],
+    "apgPattern": null
+  },
+  "tokens": {
+    "root": [
+      "command.color.background.default",
+      "command.color.foreground.primary",
+      "command.size.padding.default",
+      "command.size.radius.default"
+    ]
+  },
+  "ssr": {
+    "hydrateOn": "none"
+  },
+  "rtl": {
+    "flipIcon": false
+  }
+}

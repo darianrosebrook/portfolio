@@ -1,0 +1,62 @@
+{
+  "prefix": "command",
+  "tokens": {
+    "color": {
+      "overlay": "rgba(0, 0, 0, 0.6)",
+      "background": "{semantic.color.background.primary}",
+      "backgroundHover": "{semantic.interaction.background.hover}",
+      "border": "{semantic.color.border.light}",
+      "borderLight": "{semantic.color.border.subtle}",
+      "text": "{semantic.color.foreground.primary}",
+      "textMuted": "{semantic.color.foreground.tertiary}"
+    },
+    "border": {
+      "width": "{core.shape.border.width.hairline}",
+      "radius": "{core.shape.radius.medium}",
+      "radiusItem": "{core.shape.radius.small}"
+    },
+    "size": {
+      "maxWidth": "640px",
+      "maxHeight": "400px",
+      "maxHeightMobile": "300px",
+      "icon": "{core.spacing.size.04}"
+    },
+    "spacing": {
+      "dialogPadding": "{core.spacing.size.04}",
+      "dialogMarginTop": "{core.spacing.size.12}",
+      "inputPadding": "{core.spacing.size.04}",
+      "inputPaddingX": "{core.spacing.size.03}",
+      "inputPaddingLeft": "{core.spacing.size.10}",
+      "inputIconOffset": "{core.spacing.size.04}",
+      "listPadding": "{core.spacing.size.02}",
+      "emptyPadding": "{core.spacing.size.08}",
+      "groupGap": "{core.spacing.size.04}",
+      "groupHeadingPadding": "{core.spacing.size.02} {core.spacing.size.03}",
+      "itemGap": "{core.spacing.size.03}",
+      "itemPadding": "{core.spacing.size.02} {core.spacing.size.03}",
+      "descriptionGap": "{core.spacing.size.01}",
+      "separatorMargin": "{core.spacing.size.02}",
+      "mobilePadding": "{core.spacing.size.02}",
+      "mobileMarginTop": "{core.spacing.size.04}"
+    },
+    "text": {
+      "size": "{semantic.typography.body.02}",
+      "lineHeight": "{semantic.typography.lineHeight.default}",
+      "weight": "{semantic.typography.fontWeight.normal}",
+      "weightMedium": "{semantic.typography.fontWeight.medium}",
+      "sizeSmall": "{semantic.typography.body.04}",
+      "lineHeightTight": "{semantic.typography.lineHeight.tight}"
+    },
+    "motion": {
+      "duration": "{core.motion.duration.medium}",
+      "easing": "{core.motion.easing.standard}"
+    },
+    "zIndex": {
+      "overlay": 50
+    },
+    "shadow": "{semantic.elevation.depth.4}",
+    "opacity": {
+      "disabled": 0.5
+    }
+  }
+}

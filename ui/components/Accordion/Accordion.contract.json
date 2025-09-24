@@ -1,0 +1,32 @@
+{
+  "name": "Accordion",
+  "layer": "composer",
+  "anatomy": [
+    "root"
+  ],
+  "variants": {},
+  "states": [
+    "default"
+  ],
+  "slots": {},
+  "a11y": {
+    "role": "region",
+    "labeling": [],
+    "keyboard": [],
+    "apgPattern": null
+  },
+  "tokens": {
+    "root": [
+      "accordion.color.background.default",
+      "accordion.color.foreground.primary",
+      "accordion.size.padding.default",
+      "accordion.size.radius.default"
+    ]
+  },
+  "ssr": {
+    "hydrateOn": "none"
+  },
+  "rtl": {
+    "flipIcon": false
+  }
+}

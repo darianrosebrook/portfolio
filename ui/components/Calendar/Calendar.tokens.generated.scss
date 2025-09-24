@@ -1,0 +1,14 @@
+/* AUTO-GENERATED: Scaffolding placeholder. Replace via tokens build. */
+@mixin vars {
+  /* === Color === */
+  --calendar-color-background-default: var(--semantic-color-background-secondary);
+  --calendar-color-foreground-primary: var(--semantic-color-foreground-primary);
+  --calendar-color-foreground-secondary: var(--semantic-color-foreground-secondary);
+  --calendar-color-border-default: var(--semantic-color-border-light);
+  --calendar-color-border-accent: var(--semantic-color-border-accent);
+  /* === Size === */
+  --calendar-size-padding-default: var(--core-spacing-size-07);
+  --calendar-size-radius-default: var(--core-shape-radius-medium);
+  /* === Elevation === */
+  --calendar-elevation-default: var(--semantic-elevation-depth-1);
+}

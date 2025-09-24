@@ -1,0 +1,47 @@
+{
+  "prefix": "table",
+  "tokens": {
+    "color": {
+      "text": "{semantic.color.foreground.primary}",
+      "textHead": "{semantic.color.foreground.primary}",
+      "textMuted": "{semantic.color.foreground.secondary}",
+      "border": "{semantic.color.border.light}",
+      "background": {
+        "hover": "{semantic.interaction.background.hover}",
+        "selected": "{semantic.color.background.accent}",
+        "footer": "{semantic.color.background.secondary}"
+      }
+    },
+    "border": {
+      "width": "{core.shape.border.width.hairline}"
+    },
+    "spacing": {
+      "cellX": "{core.spacing.size.03}",
+      "cellY": "{core.spacing.size.02}",
+      "caption": "{core.spacing.size.04}",
+      "sortGap": "{core.spacing.size.02}",
+      "checkboxOffset": "{core.spacing.size.01}"
+    },
+    "size": {
+      "cellHeight": "{semantic.control.size.md.height}",
+      "checkboxColumn": "{core.spacing.size.09}"
+    },
+    "text": {
+      "size": "{semantic.typography.body.03}",
+      "lineHeight": "{semantic.typography.lineHeight.default}",
+      "sizeCaption": "{semantic.typography.body.04}",
+      "sizeSort": "{semantic.typography.body.04}",
+      "weightHead": "{semantic.typography.fontWeight.semibold}",
+      "weightFooter": "{semantic.typography.fontWeight.medium}"
+    },
+    "motion": {
+      "duration": "{core.motion.duration.short}",
+      "easing": "{core.motion.easing.standard}"
+    },
+    "focus": {
+      "width": "{core.shape.border.width.thick}",
+      "color": "{semantic.color.border.accent}",
+      "offset": "{core.spacing.size.01}"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "Calendar",
+  "layer": "composer",
+  "anatomy": [
+    "root"
+  ],
+  "variants": {},
+  "states": [
+    "default"
+  ],
+  "slots": {},
+  "a11y": {
+    "role": "region",
+    "labeling": [],
+    "keyboard": [],
+    "apgPattern": null
+  },
+  "tokens": {
+    "root": [
+      "calendar.color.background.default",
+      "calendar.color.foreground.primary",
+      "calendar.size.padding.default",
+      "calendar.size.radius.default"
+    ]
+  },
+  "ssr": {
+    "hydrateOn": "none"
+  },
+  "rtl": {
+    "flipIcon": false
+  }
+}
