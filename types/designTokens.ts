@@ -4,7 +4,7 @@
 
 /**
  * Design Token Paths
- * 
+ *
  * Auto-generated TypeScript types for design token paths.
  * Use these types to ensure type safety when referencing tokens.
  */
@@ -1199,14 +1199,14 @@ export interface TokenGroup {
 
 /**
  * Usage Examples:
- * 
+ *
  * ```typescript
  * import type { TokenPath, CoreTokenPath } from "@/types/designTokens";
- * 
+ *
  * // Type-safe token references
  * const primaryColor: TokenPath = "core.color.blue.500";
  * const semanticBg: TokenPath = "semantic.color.background.primary";
- * 
+ *
  * // In token resolution functions
  * function resolveToken(path: TokenPath): string {
  *   // implementation...

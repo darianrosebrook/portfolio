@@ -4,13 +4,13 @@ import Button from '../Button';
 import Styles from './AlertNotice.module.scss';
 import { TimesIcon, LocalIcons } from '@/ui/components/Icon/LocalIcons';
 import { Intent, StatusIntent, normalizeStatusIntent } from '@/types';
-export type AlertNoticeProps = {
+export interface AlertNoticeProps {
   status?: StatusIntent;
   level?: 'page' | 'section' | 'inline';
   index: number;
   dismissible?: boolean;
   onDismiss?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-};
+}
 const Container = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement> & AlertNoticeProps

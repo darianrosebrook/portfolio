@@ -29,19 +29,6 @@ export default async function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${nohemi.variable}`}>
       <head>
-        {/* Preload critical resources */}
-        <link
-          rel="preload"
-          href="/darianrosebrook-optimized.webp"
-          as="image"
-          type="image/webp"
-        />
-        <link
-          rel="preload"
-          href="/darian-square.jpg"
-          as="image"
-          type="image/jpeg"
-        />
         {/* DNS prefetch for external domains */}
         <link rel="dns-prefetch" href="//wrgenoqnojvalkscpiib.supabase.co" />
         <link rel="dns-prefetch" href="//lh3.googleusercontent.com" />

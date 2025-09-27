@@ -1,7 +1,7 @@
 'use client';
 import * as React from 'react';
 import { useToast } from './ToastProvider';
-import type { ToastId } from './types';
+import type { ToastId } from './Types';
 import { ToastTitle } from './slots/ToastTitle';
 import { ToastDescription } from './slots/ToastDescription';
 import { ToastAction } from './slots/ToastAction';

@@ -95,4 +95,5 @@ const SlinkyCursor: React.FC = () => {
   );
 };
 
+export { SlinkyCursor };
 export default SlinkyCursor;

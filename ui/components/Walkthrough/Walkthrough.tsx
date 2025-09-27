@@ -7,7 +7,7 @@ import * as React from 'react';
 import { useWalkthrough } from './WalkthroughProvider';
 import { WalkthroughControls } from './slots/WalkthroughControls';
 import { WalkthroughProgress } from './slots/WalkthroughProgress';
-import type { WalkthroughUIProps } from './types';
+import type { WalkthroughUIProps } from './Types';
 import styles from './Walkthrough.module.scss';
 import Popover from '../Popover';
 

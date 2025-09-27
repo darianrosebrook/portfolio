@@ -1,6 +1,6 @@
 'use client';
 import * as React from 'react';
-import type { TabsContextValue } from './types';
+import type { TabsContextValue } from './Types';
 import { useTabs as useTabsLogic, UseTabsOptions } from './useTabs';
 
 const TabsContext = React.createContext<TabsContextValue | null>(null);

@@ -109,4 +109,5 @@ const Alert = Object.assign(Container, {
 });
 
 export { Container, Title, Body, Icon };
+export { Alert };
 export default Alert;

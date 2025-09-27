@@ -66,7 +66,19 @@ export const PATHS = {
 } as const;
 
 /**
- * Safe JSON file reader with error handling
+ * Reads and parses a design token file with comprehensive error handling.
+ *
+ * @param filePath - Absolute path to the token file to read
+ * @returns Parsed token data as TokenGroup, or null if file doesn't exist or parsing fails
+ * @throws No exceptions thrown - all errors are logged and handled gracefully
+ *
+ * @example
+ * ```typescript
+ * const tokens = readTokenFile('/path/to/core.tokens.json');
+ * if (tokens) {
+ *   console.log('Loaded', Object.keys(tokens).length, 'token groups');
+ * }
+ * ```
  */
 export function readTokenFile(filePath: string): TokenGroup | null {
   try {
@@ -99,7 +111,17 @@ export function readTokenFile(filePath: string): TokenGroup | null {
 }
 
 /**
- * Write file with directory creation and error handling
+ * Writes content to a file, creating directories as needed.
+ *
+ * @param filePath - Absolute path where the file should be written
+ * @param content - String content to write to the file
+ * @param description - Optional description for logging purposes
+ * @throws Throws an error if the file cannot be written
+ *
+ * @example
+ * ```typescript
+ * writeOutputFile('/path/to/output.css', ':root { --color: red; }', 'CSS variables');
+ * ```
  */
 export function writeOutputFile(
   filePath: string,

@@ -5,7 +5,7 @@ import {
   DocSection,
   useDocLayout,
   type DocSection as DocSectionType,
-} from '@/ui/modules/DocLayout';
+} from '@/ui/modules/DocLayout/Index';
 import Link from 'next/link';
 
 export const metadata = {

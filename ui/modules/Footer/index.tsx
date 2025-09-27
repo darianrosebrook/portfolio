@@ -1,6 +1,6 @@
 import { byPrefixAndName } from '@awesome.me/kit-0ba7f5fefb/icons';
 import styles from './index.module.css';
-import Marquee from './marquee';
+import Marquee from './Marquee';
 const Footer = () => {
   const year = new Date().getFullYear();
   const currentYear = `2015 - ${year}`;

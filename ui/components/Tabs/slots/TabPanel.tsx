@@ -1,7 +1,7 @@
 'use client';
 import * as React from 'react';
 import { useTabs } from '../TabsProvider';
-import type { TabsValue } from '../types';
+import type { TabsValue } from '../Types';
 import styles from '../Tabs.module.scss';
 
 export interface TabPanelProps extends React.HTMLAttributes<HTMLDivElement> {

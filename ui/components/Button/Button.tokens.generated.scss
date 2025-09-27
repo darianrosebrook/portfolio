@@ -33,6 +33,15 @@
   --button-color-foreground-tertiary: var(--semantic-color-foreground-primary);
   --button-color-foreground-tertiaryHover: var(--semantic-interaction-text-hover);
   --button-color-foreground-tertiaryActive: var(--semantic-interaction-text-active);
+  --button-color-foreground-ghost: var(--semantic-color-foreground-primary);
+  --button-color-foreground-ghostHover: var(--semantic-interaction-text-hover);
+  --button-color-foreground-ghostActive: var(--semantic-interaction-text-active);
+  --button-color-foreground-destructive: var(--semantic-color-feedback-error-foreground);
+  --button-color-foreground-destructiveHover: var(--semantic-color-feedback-error-foreground);
+  --button-color-foreground-destructiveActive: var(--semantic-color-feedback-error-foreground);
+  --button-color-foreground-outline: var(--semantic-color-foreground-secondary);
+  --button-color-foreground-outlineHover: var(--semantic-interaction-text-hover);
+  --button-color-foreground-outlineActive: var(--semantic-interaction-text-active);
   --button-color-border-default: var(--semantic-color-border-light);
   --button-color-border-hover: var(--semantic-interaction-border-hover);
   --button-color-border-active: var(--semantic-interaction-border-active);
@@ -48,6 +57,15 @@
   --button-color-border-tertiary: var(--semantic-color-border-light);
   --button-color-border-tertiaryHover: var(--semantic-interaction-border-hover);
   --button-color-border-tertiaryActive: var(--semantic-interaction-border-active);
+  --button-color-border-ghost: var(--core-color-mode-transparent);
+  --button-color-border-ghostHover: var(--semantic-interaction-border-hover);
+  --button-color-border-ghostActive: var(--semantic-interaction-border-active);
+  --button-color-border-destructive: var(--semantic-color-feedback-error-border);
+  --button-color-border-destructiveHover: var(--semantic-color-feedback-error-border);
+  --button-color-border-destructiveActive: var(--semantic-color-feedback-error-border);
+  --button-color-border-outline: var(--semantic-color-border-secondary);
+  --button-color-border-outlineHover: var(--semantic-interaction-border-hover);
+  --button-color-border-outlineActive: var(--semantic-interaction-border-active);
   --button-color-spinner-border: var(--semantic-color-border-light);
   --button-color-spinner-borderAccent: var(--semantic-color-border-accent);
 

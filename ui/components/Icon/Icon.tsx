@@ -18,4 +18,5 @@ const Icon = ({ icon, width = 20, height = 20 }: IconProps) => {
   );
 };
 
+export { Icon };
 export default Icon;

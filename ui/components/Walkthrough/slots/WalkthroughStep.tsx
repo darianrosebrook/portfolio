@@ -2,7 +2,7 @@
 'use client';
 import * as React from 'react';
 import { useWalkthrough } from '../WalkthroughProvider';
-import type { WalkthroughStepSpec } from '../types';
+import type { WalkthroughStepSpec } from '../Types';
 
 export interface WalkthroughStepProps extends WalkthroughStepSpec {
   index: number;

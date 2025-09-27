@@ -24,7 +24,7 @@ describe('Button', () => {
 
   it('forwards ref to the underlying element', () => {
     const ref = React.createRef<HTMLButtonElement>();
-    render(<Button ref={ref}>Test</Button>);
+    render(<Button asChild ref={ref as any}><button>Test</button></Button>);
     expect(ref.current).toBeInstanceOf(HTMLButtonElement);
   });
 

@@ -2,7 +2,7 @@ import {
   DocLayout,
   DocLayoutProvider,
   DocSection,
-} from '@/ui/modules/DocLayout';
+} from '@/ui/modules/DocLayout/Index';
 import { render, screen } from '../test-utils';
 
 const sections = [

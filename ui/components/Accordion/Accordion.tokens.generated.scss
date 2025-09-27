@@ -1,14 +1,44 @@
-/* AUTO-GENERATED: Scaffolding placeholder. Replace via tokens build. */
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Accordion/Accordion.tokens.json
+ */
 @mixin vars {
-  /* === Color === */
-  --accordion-color-background-default: var(--semantic-color-background-secondary);
-  --accordion-color-foreground-primary: var(--semantic-color-foreground-primary);
-  --accordion-color-foreground-secondary: var(--semantic-color-foreground-secondary);
-  --accordion-color-border-default: var(--semantic-color-border-light);
-  --accordion-color-border-accent: var(--semantic-color-border-accent);
-  /* === Size === */
-  --accordion-size-padding-default: var(--core-spacing-size-07);
-  --accordion-size-radius-default: var(--core-shape-radius-medium);
-  /* === Elevation === */
-  --accordion-elevation-default: var(--semantic-elevation-depth-1);
+  /* === Color Tokens === */
+  --accordion-color-background-hover: var(--semantic-interaction-background-hover);
+  --accordion-color-text: var(--semantic-color-foreground-primary);
+  --accordion-color-textHover: var(--semantic-interaction-text-hover);
+  --accordion-color-textSecondary: var(--semantic-color-foreground-secondary);
+  --accordion-color-icon: var(--semantic-color-foreground-tertiary);
+
+  /* === Border Tokens === */
+  --accordion-border-width: var(--core-shape-border-width-hairline);
+  --accordion-border-color: var(--semantic-color-border-light);
+  --accordion-border-radius: var(--core-shape-radius-small);
+
+  /* === Spacing Tokens === */
+  --accordion-spacing-gap: var(--core-spacing-size-04);
+  --accordion-spacing-paddingX: var(--core-spacing-size-00);
+  --accordion-spacing-paddingY: var(--core-spacing-size-04);
+
+  /* === Text Tokens === */
+  --accordion-text-weight: var(--semantic-typography-font-weight-medium);
+  --accordion-text-size: var(--semantic-typography-body-02);
+  --accordion-text-lineHeight: var(--semantic-typography-line-height-default);
+  --accordion-text-sizeContent: var(--semantic-typography-body-03);
+  --accordion-text-lineHeightContent: var(--semantic-typography-line-height-relaxed);
+
+  /* === Icon Tokens === */
+  --accordion-icon-size: var(--core-spacing-size-04);
+  --accordion-icon-offset: var(--core-spacing-size-01);
+
+  /* === Motion Tokens === */
+  --accordion-motion-duration: var(--core-motion-duration-medium);
+  --accordion-motion-easing: var(--core-motion-easing-standard);
+
+  /* === Focus Tokens === */
+  --accordion-focus-width: var(--core-shape-border-width-thick);
+  --accordion-focus-color: var(--semantic-color-border-accent);
+  --accordion-focus-offset: var(--core-spacing-size-01);
+
+  /* === Opacity Tokens === */
+  --accordion-opacity-disabled: 0.5;
 }

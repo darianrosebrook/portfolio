@@ -1,11 +1,12 @@
+import React from 'react';
 import Image from 'next/image';
 import styles from './Avatar.module.scss';
 
-export type AvatarProps = {
+export interface AvatarProps {
   src?: string;
   name: string;
   size: 'small' | 'medium' | 'large' | 'extra-large';
-};
+}
 
 function initials(name: string) {
   let parts = name.split(' ');
@@ -15,7 +16,7 @@ function initials(name: string) {
   return parts.map((part) => part[0]).join('');
 }
 
-const Avatar = ({ src, name, size }: AvatarProps) => {
+const Avatar: React.FC<AvatarProps> = ({ src, name, size }) => {
   const displayInitials = name ? initials(name) : '';
   return (
     <div className={`${styles.avatar} ${styles['avatar_' + size]}`}>
@@ -34,4 +35,5 @@ const Avatar = ({ src, name, size }: AvatarProps) => {
   );
 };
 
+export { Avatar };
 export default Avatar;

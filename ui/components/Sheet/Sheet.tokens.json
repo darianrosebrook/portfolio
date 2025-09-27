@@ -47,7 +47,7 @@
       "overlay": 50,
       "content": 51
     },
-    "shadow": "{semantic.elevation.depth.3}",
+    "shadow": "{semantic.elevation.surface.floating}",
     "focus": {
       "width": "{core.shape.border.width.thick}",
       "color": "{semantic.color.border.accent}",

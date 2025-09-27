@@ -8,8 +8,8 @@ const Slot = React.forwardRef<
 >(({ children, ...props }, ref) => {
   if (React.isValidElement(children)) {
     return React.cloneElement(children, {
-      ...props,
       ...children.props,
+      ...(props as any),
       ref,
       className: [props.className, children.props.className]
         .filter(Boolean)
@@ -196,4 +196,5 @@ const Button: React.FC<ButtonProps> = ({
   );
 };
 
+export { Button };
 export default React.memo(Button);
