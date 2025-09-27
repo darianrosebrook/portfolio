@@ -12,7 +12,7 @@ import Button from '../../components/Button';
 import Popover from '../../components/Popover/Popover';
 import ToggleSwitch from '../../components/ToggleSwitch';
 import styles from './index.module.css';
-import Logo from './logo';
+import Logo from './Logo';
 
 const faBars = byPrefixAndName['far']['bars'];
 const faUser = byPrefixAndName['far']['user'];

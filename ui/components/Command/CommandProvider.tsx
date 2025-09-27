@@ -32,7 +32,7 @@ export const CommandProvider: React.FC<CommandProviderProps> = ({
   const value = React.useMemo<CommandContextValue>(
     () => ({
       ...command,
-      inputRef,
+      inputRef: inputRef as React.RefObject<HTMLInputElement>,
       listRef,
     }),
     [command]

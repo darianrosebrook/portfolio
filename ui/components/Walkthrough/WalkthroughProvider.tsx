@@ -6,7 +6,7 @@ import type {
   WalkthroughProps,
   WalkthroughStepSpec,
   WalkthroughContextValue,
-} from './types';
+} from './Types';
 
 const WalkthroughContext = React.createContext<WalkthroughContextValue | null>(
   null

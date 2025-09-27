@@ -10,6 +10,10 @@ import Image from '@tiptap/extension-image';
 import { generateHTML } from '@tiptap/html';
 import { JSONContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
+import { Table } from '@tiptap/extension-table';
+import TableRow from '@tiptap/extension-table-row';
+import TableHeader from '@tiptap/extension-table-header';
+import TableCell from '@tiptap/extension-table-cell';
 import dynamic from 'next/dynamic';
 import { useEffect, useMemo, useState } from 'react';
 
@@ -50,6 +54,12 @@ export default function ContentEditor({
       Image,
       VideoExtended,
       StarterKit,
+      Table.configure({
+        resizable: true,
+      }),
+      TableRow,
+      TableHeader,
+      TableCell,
     ]);
   }, [record.articleBody]);
 

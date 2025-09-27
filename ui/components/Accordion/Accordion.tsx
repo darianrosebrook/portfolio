@@ -30,7 +30,10 @@ const ChevronDownIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
 
 // Root Accordion Component
 export interface AccordionProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'defaultValue'>,
+  extends Omit<
+      React.HTMLAttributes<HTMLDivElement>,
+      'defaultValue' | 'children'
+    >,
     AccordionProviderProps {}
 
 const AccordionRoot: React.FC<AccordionProps> = ({

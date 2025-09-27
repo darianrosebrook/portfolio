@@ -1,0 +1,60 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Links/Links.tokens.json
+ */
+@mixin vars {
+  /* === Color Tokens === */
+  --links-color-foreground-default: var(--semantic-color-foreground-primary);
+  --links-color-foreground-hover: var(--semantic-interaction-text-hover);
+  --links-color-foreground-active: var(--semantic-interaction-text-active);
+  --links-color-foreground-visited: var(--semantic-color-foreground-secondary);
+  --links-color-foreground-disabled: var(--semantic-color-foreground-disabled);
+  --links-color-underline-default: var(--semantic-color-border-light);
+  --links-color-underline-hover: var(--semantic-interaction-border-hover);
+  --links-color-underline-active: var(--semantic-interaction-border-active);
+  --links-color-underline-disabled: var(--semantic-color-border-disabled);
+
+  /* === Spacing Tokens === */
+  --links-spacing-gap-default: var(--core-spacing-size-02);
+  --links-spacing-gap-small: var(--core-spacing-size-01);
+  --links-spacing-gap-large: var(--core-spacing-size-03);
+  --links-spacing-padding-default: var(--core-spacing-size-02);
+  --links-spacing-padding-small: var(--core-spacing-size-01);
+  --links-spacing-padding-large: var(--core-spacing-size-03);
+  --links-spacing-margin-default: var(--core-spacing-size-02);
+  --links-spacing-margin-small: var(--core-spacing-size-01);
+  --links-spacing-margin-large: var(--core-spacing-size-03);
+
+  /* === Typography Tokens === */
+  --links-typography-fontSize-small: var(--semantic-typography-body-05);
+  --links-typography-fontSize-medium: var(--semantic-typography-body-04);
+  --links-typography-fontSize-large: var(--semantic-typography-body-03);
+  --links-typography-fontWeight-default: var(--semantic-typography-font-weight-normal);
+  --links-typography-fontWeight-medium: var(--semantic-typography-font-weight-medium);
+  --links-typography-fontWeight-semibold: var(--semantic-typography-font-weight-semibold);
+  --links-typography-lineHeight-default: var(--semantic-typography-line-height-normal);
+  --links-typography-lineHeight-tight: var(--semantic-typography-line-height-tight);
+  --links-typography-lineHeight-relaxed: var(--semantic-typography-line-height-relaxed);
+
+  /* === Motion Tokens === */
+  --links-motion-duration-fast: var(--core-motion-duration-short);
+  --links-motion-duration-normal: var(--core-motion-duration-medium);
+  --links-motion-duration-slow: var(--core-motion-duration-long);
+  --links-motion-easing-standard: var(--core-motion-easing-standard);
+  --links-motion-easing-decelerate: var(--core-motion-easing-decelerate);
+  --links-motion-easing-accelerate: var(--core-motion-easing-accelerate);
+
+  /* === Border Tokens === */
+  --links-border-width-default: var(--core-shape-border-width-hairline);
+  --links-border-width-thick: var(--core-shape-border-width-thin);
+  --links-border-style-default: solid;
+  --links-border-style-dashed: dashed;
+  --links-border-style-dotted: dotted;
+
+  /* === Animation Tokens === */
+  --links-animation-stagger-default: 28;
+  --links-animation-stagger-fast: 20;
+  --links-animation-stagger-slow: 40;
+  --links-animation-duration-default: 400;
+  --links-animation-duration-fast: 300;
+  --links-animation-duration-slow: 600;
+}

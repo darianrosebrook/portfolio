@@ -142,4 +142,3 @@ describe('Command', () => {
     expect(screen.getByText('No commands found')).toBeInTheDocument();
   });
 });
-

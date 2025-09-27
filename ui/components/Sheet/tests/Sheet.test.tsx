@@ -90,4 +90,3 @@ describe('Sheet', () => {
     expect(screen.queryByText('Sheet content')).not.toBeInTheDocument();
   });
 });
-

@@ -110,4 +110,3 @@ describe('Table', () => {
     expect(row).toHaveAttribute('data-state', 'selected');
   });
 });
-

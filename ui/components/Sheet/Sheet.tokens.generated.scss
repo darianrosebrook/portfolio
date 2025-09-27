@@ -1,14 +1,56 @@
-/* AUTO-GENERATED: Scaffolding placeholder. Replace via tokens build. */
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Sheet/Sheet.tokens.json
+ */
 @mixin vars {
-  /* === Color === */
-  --sheet-color-background-default: var(--semantic-color-background-secondary);
-  --sheet-color-foreground-primary: var(--semantic-color-foreground-primary);
-  --sheet-color-foreground-secondary: var(--semantic-color-foreground-secondary);
-  --sheet-color-border-default: var(--semantic-color-border-light);
-  --sheet-color-border-accent: var(--semantic-color-border-accent);
-  /* === Size === */
-  --sheet-size-padding-default: var(--core-spacing-size-07);
-  --sheet-size-radius-default: var(--core-shape-radius-medium);
-  /* === Elevation === */
-  --sheet-elevation-default: var(--semantic-elevation-depth-1);
+  /* === Color Tokens === */
+  --sheet-color-overlay: rgba(0, 0, 0, 0.5);
+  --sheet-color-background: var(--semantic-color-background-primary);
+  --sheet-color-backgroundHover: var(--semantic-interaction-background-hover);
+  --sheet-color-border: var(--semantic-color-border-light);
+  --sheet-color-borderLight: var(--semantic-color-border-subtle);
+  --sheet-color-text: var(--semantic-color-foreground-primary);
+  --sheet-color-textTitle: var(--semantic-color-foreground-primary);
+  --sheet-color-textDescription: var(--semantic-color-foreground-secondary);
+  --sheet-color-textMuted: var(--semantic-color-foreground-tertiary);
+
+  /* === Border Tokens === */
+  --sheet-border-width: var(--core-shape-border-width-hairline);
+  --sheet-border-radius: var(--core-shape-radius-medium);
+  --sheet-border-radiusClose: var(--core-shape-radius-small);
+
+  /* === Size Tokens === */
+  --sheet-size-width: 400px;
+  --sheet-size-height: 300px;
+  --sheet-size-close: var(--core-spacing-size-06);
+
+  /* === Spacing Tokens === */
+  --sheet-spacing-padding: var(--core-spacing-size-06);
+  --sheet-spacing-gap: var(--core-spacing-size-04);
+  --sheet-spacing-section: var(--core-spacing-size-04);
+  --sheet-spacing-headerGap: var(--core-spacing-size-02);
+  --sheet-spacing-footerGap: var(--core-spacing-size-03);
+  --sheet-spacing-closeOffset: var(--core-spacing-size-04);
+
+  /* === Text Tokens === */
+  --sheet-text-size: var(--semantic-typography-body-02);
+  --sheet-text-lineHeight: var(--semantic-typography-line-height-default);
+  --sheet-text-sizeTitle: var(--semantic-typography-heading-06);
+  --sheet-text-lineHeightTitle: var(--semantic-typography-line-height-tight);
+  --sheet-text-weightTitle: var(--semantic-typography-font-weight-semibold);
+  --sheet-text-sizeDescription: var(--semantic-typography-body-03);
+  --sheet-text-lineHeightDescription: var(--semantic-typography-line-height-relaxed);
+
+  /* === Motion Tokens === */
+  --sheet-motion-duration: var(--core-motion-duration-medium);
+  --sheet-motion-easing: var(--core-motion-easing-standard);
+
+  /* === ZIndex Tokens === */
+  --sheet-zIndex-overlay: 50;
+  --sheet-zIndex-content: 51;
+
+  /* === Focus Tokens === */
+  --sheet-focus-width: var(--core-shape-border-width-thick);
+  --sheet-focus-color: var(--semantic-color-border-accent);
+  --sheet-focus-offset: var(--core-spacing-size-01);
 }
+  --sheet-shadow: var(--semantic-elevation-surface-floating);

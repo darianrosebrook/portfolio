@@ -9,15 +9,16 @@
 export * from './core/index';
 
 // Generation functions
-export { composeTokens } from './generators/compose';
-export { generateGlobalTokens } from './generators/global';
-export { generateTokenTypes } from './generators/types';
+export * from './generators';
 
 // Build runners
-export { buildTokens, runSteps } from './runners/build';
+export * from './runners';
 
-// Runtime utilities (re-export existing functionality)
-export { resolveToken, generate } from './componentTokenUtils';
+// Validation utilities
+export * from './validators';
+
+// Runtime utilities
+export * from './utils';
 
 // Convenience re-exports for common operations
 export {

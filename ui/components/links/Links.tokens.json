@@ -1,0 +1,93 @@
+{
+  "$schema": "../../../ui/designTokens/designTokens.schema.json",
+  "prefix": "links",
+  "tokens": {
+    "color": {
+      "foreground": {
+        "default": "{semantic.color.foreground.primary}",
+        "hover": "{semantic.interaction.text.hover}",
+        "active": "{semantic.interaction.text.active}",
+        "visited": "{semantic.color.foreground.secondary}",
+        "disabled": "{semantic.color.foreground.disabled}"
+      },
+      "underline": {
+        "default": "{semantic.color.border.light}",
+        "hover": "{semantic.interaction.border.hover}",
+        "active": "{semantic.interaction.border.active}",
+        "disabled": "{semantic.color.border.disabled}"
+      }
+    },
+    "spacing": {
+      "gap": {
+        "default": "{core.spacing.size.02}",
+        "small": "{core.spacing.size.01}",
+        "large": "{core.spacing.size.03}"
+      },
+      "padding": {
+        "default": "{core.spacing.size.02}",
+        "small": "{core.spacing.size.01}",
+        "large": "{core.spacing.size.03}"
+      },
+      "margin": {
+        "default": "{core.spacing.size.02}",
+        "small": "{core.spacing.size.01}",
+        "large": "{core.spacing.size.03}"
+      }
+    },
+    "typography": {
+      "fontSize": {
+        "small": "{semantic.typography.body.05}",
+        "medium": "{semantic.typography.body.04}",
+        "large": "{semantic.typography.body.03}"
+      },
+      "fontWeight": {
+        "default": "{semantic.typography.fontWeight.normal}",
+        "medium": "{semantic.typography.fontWeight.medium}",
+        "semibold": "{semantic.typography.fontWeight.semibold}"
+      },
+      "lineHeight": {
+        "default": "{semantic.typography.lineHeight.normal}",
+        "tight": "{semantic.typography.lineHeight.tight}",
+        "relaxed": "{semantic.typography.lineHeight.relaxed}"
+      }
+    },
+    "motion": {
+      "duration": {
+        "fast": "{core.motion.duration.short}",
+        "normal": "{core.motion.duration.medium}",
+        "slow": "{core.motion.duration.long}"
+      },
+      "easing": {
+        "standard": "{core.motion.easing.standard}",
+        "decelerate": "{core.motion.easing.decelerate}",
+        "accelerate": "{core.motion.easing.accelerate}"
+      }
+    },
+    "border": {
+      "width": {
+        "default": "{core.shape.border.width.hairline}",
+        "thick": "{core.shape.border.width.thin}"
+      },
+      "style": {
+        "default": "solid",
+        "dashed": "dashed",
+        "dotted": "dotted"
+      }
+    },
+    "animation": {
+      "stagger": {
+        "default": 28,
+        "fast": 20,
+        "slow": 40
+      },
+      "duration": {
+        "default": 400,
+        "fast": 300,
+        "slow": 600
+      }
+    }
+  }
+}
+
+
+

@@ -464,6 +464,72 @@
           "$description": "Overlay background for images"
         }
       },
+      "border": {
+        "subtle": {
+          "$type": "color",
+          "$value": "{color.palette.neutral.200}",
+          "$extensions": {
+            "design.paths.light": "{color.palette.neutral.200}",
+            "design.paths.dark": "{color.palette.neutral.700}"
+          },
+          "$description": "Subtle border color"
+        },
+        "bold": {
+          "$type": "color",
+          "$value": "{color.palette.neutral.400}",
+          "$extensions": {
+            "design.paths.light": "{color.palette.neutral.400}",
+            "design.paths.dark": "{color.palette.neutral.500}"
+          },
+          "$description": "Bold border color"
+        },
+        "disabled": {
+          "$type": "color",
+          "$value": "{color.palette.neutral.300}",
+          "$extensions": {
+            "design.paths.light": "{color.palette.neutral.300}",
+            "design.paths.dark": "{color.palette.neutral.600}"
+          },
+          "$description": "Disabled border color"
+        }
+      },
+      "foreground": {
+        "link": {
+          "default": {
+            "$type": "color",
+            "$value": "{color.palette.blue.500}",
+            "$description": "Default link color"
+          },
+          "hover": {
+            "$type": "color",
+            "$value": "{color.palette.blue.600}",
+            "$description": "Link hover color"
+          },
+          "visited": {
+            "$type": "color",
+            "$value": "{color.palette.blue.700}",
+            "$description": "Visited link color"
+          }
+        },
+        "accent": {
+          "$type": "color",
+          "$value": "{color.palette.red.500}",
+          "$extensions": {
+            "design.paths.light": "{color.palette.red.500}",
+            "design.paths.dark": "{color.palette.red.400}"
+          },
+          "$description": "Accent foreground color"
+        },
+        "disabled": {
+          "$type": "color",
+          "$value": "{color.palette.neutral.400}",
+          "$extensions": {
+            "design.paths.light": "{color.palette.neutral.400}",
+            "design.paths.dark": "{color.palette.neutral.500}"
+          },
+          "$description": "Disabled foreground color"
+        }
+      },
       "foreground": {
         "primary": {
           "$type": "color",
@@ -504,7 +570,7 @@
         },
         "onColor": {
           "$type": "color",
-          "$value": "{color.display.foreground.primary}",
+          "$value": "{color.foreground.primary}",
           "$description": "Text on colored backgrounds"
         },
         "accent": {
@@ -609,17 +675,17 @@
     "syntax": {
       "plain": {
         "$type": "color",
-        "$value": "{color.display.foreground.primary}",
-        "$extensions": {
-          "design.paths.light": "{color.display.foreground.primary}",
-          "design.paths.dark": "{color.display.foreground.primary}"
-        },
+        "$value": "{color.foreground.primary}",
+          "$extensions": {
+            "design.paths.light": "{color.foreground.primary}",
+            "design.paths.dark": "{color.foreground.primary}"
+          },
         "$description": "Plain syntax text"
       },
       "comment": {
         "color": {
           "$type": "color",
-          "$value": "{color.display.foreground.tertiary}",
+          "$value": "{color.foreground.tertiary}",
           "$extensions": {
             "design.paths.light": "{color.display.foreground.tertiary}",
             "design.paths.dark": "{color.display.foreground.tertiary}"
@@ -1769,7 +1835,7 @@
       },
       "active": {
         "$type": "color",
-        "$value": "{color.display.foreground.primary}"
+        "$value": "{color.foreground.primary}"
       },
       "disabled": {
         "$type": "color",
@@ -1779,25 +1845,50 @@
     "background": {
       "hover": {
         "$type": "color",
-        "$value": "{color.action.background.secondary.hover}"
+        "$value": "{color.palette.neutral.100}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.100}",
+          "design.paths.dark": "{color.palette.neutral.800}"
+        },
+        "$description": "Secondary action hover state"
       },
       "active": {
         "$type": "color",
-        "$value": "{color.action.background.secondary.active}"
+        "$value": "{color.palette.neutral.200}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.200}",
+          "design.paths.dark": "{color.palette.neutral.700}"
+        },
+        "$description": "Secondary action active state"
       },
       "selected": {
         "$type": "color",
-        "$value": "{color.display.background.highlight}"
+        "$value": "{color.palette.blue.200}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.blue.200}",
+          "design.paths.dark": "{color.palette.blue.800}"
+        },
+        "$description": "Highlight background for selections"
       },
       "disabled": {
         "$type": "color",
-        "$value": "{color.action.background.primary.disabled}"
+        "$value": "{color.palette.neutral.200}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.200}",
+          "design.paths.dark": "{color.palette.neutral.700}"
+        },
+        "$description": "Primary action disabled state"
       }
     },
     "border": {
       "hover": {
         "$type": "color",
-        "$value": "{color.action.border.secondary.hover}"
+        "$value": "{color.palette.neutral.400}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.400}",
+          "design.paths.dark": "{color.palette.neutral.500}"
+        },
+        "$description": "Secondary action border hover"
       },
       "active": { "$type": "color", "$value": "{color.display.border.bold}" },
       "disabled": {
@@ -1980,7 +2071,7 @@
       },
       "colorText": {
         "$type": "color",
-        "$value": "{color.display.foreground.primary}"
+        "$value": "{color.foreground.primary}"
       },
       "colorBg": {
         "$type": "color",

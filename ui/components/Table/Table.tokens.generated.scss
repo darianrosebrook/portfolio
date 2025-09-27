@@ -1,14 +1,44 @@
-/* AUTO-GENERATED: Scaffolding placeholder. Replace via tokens build. */
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Table/Table.tokens.json
+ */
 @mixin vars {
-  /* === Color === */
-  --table-color-background-default: var(--semantic-color-background-secondary);
-  --table-color-foreground-primary: var(--semantic-color-foreground-primary);
-  --table-color-foreground-secondary: var(--semantic-color-foreground-secondary);
-  --table-color-border-default: var(--semantic-color-border-light);
-  --table-color-border-accent: var(--semantic-color-border-accent);
-  /* === Size === */
-  --table-size-padding-default: var(--core-spacing-size-07);
-  --table-size-radius-default: var(--core-shape-radius-medium);
-  /* === Elevation === */
-  --table-elevation-default: var(--semantic-elevation-depth-1);
+  /* === Color Tokens === */
+  --table-color-text: var(--semantic-color-foreground-primary);
+  --table-color-textHead: var(--semantic-color-foreground-primary);
+  --table-color-textMuted: var(--semantic-color-foreground-secondary);
+  --table-color-border: var(--semantic-color-border-light);
+  --table-color-background-hover: var(--semantic-interaction-background-hover);
+  --table-color-background-selected: var(--semantic-color-background-accent);
+  --table-color-background-footer: var(--semantic-color-background-secondary);
+
+  /* === Border Tokens === */
+  --table-border-width: var(--core-shape-border-width-hairline);
+
+  /* === Spacing Tokens === */
+  --table-spacing-cellX: var(--core-spacing-size-03);
+  --table-spacing-cellY: var(--core-spacing-size-02);
+  --table-spacing-caption: var(--core-spacing-size-04);
+  --table-spacing-sortGap: var(--core-spacing-size-02);
+  --table-spacing-checkboxOffset: var(--core-spacing-size-01);
+
+  /* === Size Tokens === */
+  --table-size-cellHeight: var(--semantic-control-size-md-height);
+  --table-size-checkboxColumn: var(--core-spacing-size-09);
+
+  /* === Text Tokens === */
+  --table-text-size: var(--semantic-typography-body-03);
+  --table-text-lineHeight: var(--semantic-typography-line-height-default);
+  --table-text-sizeCaption: var(--semantic-typography-body-04);
+  --table-text-sizeSort: var(--semantic-typography-body-04);
+  --table-text-weightHead: var(--semantic-typography-font-weight-semibold);
+  --table-text-weightFooter: var(--semantic-typography-font-weight-medium);
+
+  /* === Motion Tokens === */
+  --table-motion-duration: var(--core-motion-duration-short);
+  --table-motion-easing: var(--core-motion-easing-standard);
+
+  /* === Focus Tokens === */
+  --table-focus-width: var(--core-shape-border-width-thick);
+  --table-focus-color: var(--semantic-color-border-accent);
+  --table-focus-offset: var(--core-spacing-size-01);
 }

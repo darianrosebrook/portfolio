@@ -1,6 +1,6 @@
 'use client';
 import * as React from 'react';
-import type { ToastContextValue, ToastId, ToastOptions } from './types';
+import type { ToastContextValue, ToastId, ToastOptions } from './Types';
 import { useToastLogic } from './useToast';
 
 const ToastContext = React.createContext<ToastContextValue | null>(null);

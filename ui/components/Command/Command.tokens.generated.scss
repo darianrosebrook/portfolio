@@ -1,14 +1,60 @@
-/* AUTO-GENERATED: Scaffolding placeholder. Replace via tokens build. */
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Command/Command.tokens.json
+ */
 @mixin vars {
-  /* === Color === */
-  --command-color-background-default: var(--semantic-color-background-secondary);
-  --command-color-foreground-primary: var(--semantic-color-foreground-primary);
-  --command-color-foreground-secondary: var(--semantic-color-foreground-secondary);
-  --command-color-border-default: var(--semantic-color-border-light);
-  --command-color-border-accent: var(--semantic-color-border-accent);
-  /* === Size === */
-  --command-size-padding-default: var(--core-spacing-size-07);
-  --command-size-radius-default: var(--core-shape-radius-medium);
-  /* === Elevation === */
-  --command-elevation-default: var(--semantic-elevation-depth-1);
+  /* === Color Tokens === */
+  --command-color-overlay: rgba(0, 0, 0, 0.6);
+  --command-color-background: var(--semantic-color-background-primary);
+  --command-color-backgroundHover: var(--semantic-interaction-background-hover);
+  --command-color-border: var(--semantic-color-border-light);
+  --command-color-borderLight: var(--semantic-color-border-subtle);
+  --command-color-text: var(--semantic-color-foreground-primary);
+  --command-color-textMuted: var(--semantic-color-foreground-tertiary);
+
+  /* === Border Tokens === */
+  --command-border-width: var(--core-shape-border-width-hairline);
+  --command-border-radius: var(--core-shape-radius-medium);
+  --command-border-radiusItem: var(--core-shape-radius-small);
+
+  /* === Size Tokens === */
+  --command-size-maxWidth: 640px;
+  --command-size-maxHeight: 400px;
+  --command-size-maxHeightMobile: 300px;
+  --command-size-icon: var(--core-spacing-size-04);
+
+  /* === Spacing Tokens === */
+  --command-spacing-dialogPadding: var(--core-spacing-size-04);
+  --command-spacing-dialogMarginTop: var(--core-spacing-size-12);
+  --command-spacing-inputPadding: var(--core-spacing-size-04);
+  --command-spacing-inputPaddingX: var(--core-spacing-size-03);
+  --command-spacing-inputPaddingLeft: var(--core-spacing-size-10);
+  --command-spacing-inputIconOffset: var(--core-spacing-size-04);
+  --command-spacing-listPadding: var(--core-spacing-size-02);
+  --command-spacing-emptyPadding: var(--core-spacing-size-08);
+  --command-spacing-groupGap: var(--core-spacing-size-04);
+  --command-spacing-groupHeadingPadding: {core.spacing.size.02} {core.spacing.size.03};
+  --command-spacing-itemGap: var(--core-spacing-size-03);
+  --command-spacing-itemPadding: {core.spacing.size.02} {core.spacing.size.03};
+  --command-spacing-descriptionGap: var(--core-spacing-size-01);
+  --command-spacing-separatorMargin: var(--core-spacing-size-02);
+  --command-spacing-mobilePadding: var(--core-spacing-size-02);
+  --command-spacing-mobileMarginTop: var(--core-spacing-size-04);
+
+  /* === Text Tokens === */
+  --command-text-size: var(--semantic-typography-body-02);
+  --command-text-lineHeight: var(--semantic-typography-line-height-default);
+  --command-text-weight: var(--semantic-typography-font-weight-normal);
+  --command-text-weightMedium: var(--semantic-typography-font-weight-medium);
+  --command-text-sizeSmall: var(--semantic-typography-body-04);
+  --command-text-lineHeightTight: var(--semantic-typography-line-height-tight);
+
+  /* === Motion Tokens === */
+  --command-motion-duration: var(--core-motion-duration-medium);
+  --command-motion-easing: var(--core-motion-easing-standard);
+
+  /* === ZIndex Tokens === */
+  --command-zIndex-overlay: 50;
+
+  /* === Opacity Tokens === */
+  --command-opacity-disabled: 0.5;
 }

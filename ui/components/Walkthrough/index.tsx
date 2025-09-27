@@ -9,4 +9,4 @@ export type {
   WalkthroughProps,
   WalkthroughStepSpec,
   WalkthroughUIProps,
-} from './types';
+} from './Types';

@@ -1,0 +1,71 @@
+{
+  "$schema": "../../../ui/designTokens/designTokens.schema.json",
+  "prefix": "pageTransition",
+  "tokens": {
+    "duration": {
+      "fast": "{core.motion.duration.short}",
+      "normal": "{core.motion.duration.medium}",
+      "slow": "{core.motion.duration.long}",
+      "default": "{core.motion.duration.medium}"
+    },
+    "easing": {
+      "standard": "{core.motion.easing.standard}",
+      "decelerate": "{core.motion.easing.decelerate}",
+      "accelerate": "{core.motion.easing.accelerate}",
+      "default": "{core.motion.easing.standard}"
+    },
+    "spacing": {
+      "padding": {
+        "default": "{core.spacing.size.04}",
+        "small": "{core.spacing.size.03}",
+        "large": "{core.spacing.size.05}"
+      },
+      "margin": {
+        "default": "{core.spacing.size.04}",
+        "small": "{core.spacing.size.03}",
+        "large": "{core.spacing.size.05}"
+      }
+    },
+    "color": {
+      "background": {
+        "default": "{semantic.color.background.primary}",
+        "overlay": "{semantic.color.background.overlay}"
+      },
+      "foreground": {
+        "default": "{semantic.color.foreground.primary}",
+        "secondary": "{semantic.color.foreground.secondary}"
+      }
+    },
+    "opacity": {
+      "overlay": {
+        "default": 0.8,
+        "light": 0.6,
+        "heavy": 0.9
+      },
+      "content": {
+        "default": 1,
+        "fade": 0.7
+      }
+    },
+    "transform": {
+      "scale": {
+        "default": 1,
+        "zoom": 1.05,
+        "shrink": 0.95
+      },
+      "translate": {
+        "default": 0,
+        "slide": 20,
+        "bounce": 10
+      }
+    },
+    "zIndex": {
+      "overlay": 1000,
+      "content": 1001,
+      "max": 9999
+    }
+  }
+}
+
+
+

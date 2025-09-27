@@ -12,7 +12,9 @@ export interface UseCalendarReturn {
   toggle: () => void;
 }
 
-export function useCalendar(options: UseCalendarOptions = {}): UseCalendarReturn {
+export function useCalendar(
+  options: UseCalendarOptions = {}
+): UseCalendarReturn {
   const { defaultOpen = false } = options;
   const [isOpen, setIsOpen] = React.useState<boolean>(defaultOpen);
   const open = React.useCallback(() => setIsOpen(true), []);

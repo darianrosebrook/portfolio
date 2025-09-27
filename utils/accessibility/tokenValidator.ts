@@ -5,9 +5,9 @@
  * focusing on color contrast ratios and other accessibility requirements.
  */
 
-import { contrastRatioHex, hexToRgb, type RGB } from "../helpers/colorHelpers";
-import fs from "fs";
-import path from "path";
+import { contrastRatioHex, hexToRgb, type RGB } from '../helpers/colorHelpers';
+import fs from 'fs';
+import path from 'path';
 
 // WCAG 2.1 Contrast Requirements
 export const WCAG_LEVELS = {
@@ -111,7 +111,7 @@ export function extractColorPairsFromTokens(tokensPath: string): ColorPair[] {
 
   try {
     // Read the composed design tokens
-    const tokensFile = fs.readFileSync(tokensPath, "utf8");
+    const tokensFile = fs.readFileSync(tokensPath, 'utf8');
     const tokens = JSON.parse(tokensFile);
 
     // Extract semantic color tokens
@@ -123,77 +123,77 @@ export function extractColorPairsFromTokens(tokensPath: string): ColorPair[] {
       {
         fg: semanticColors.foreground?.primary,
         bg: semanticColors.background?.primary,
-        context: "Primary text on primary background",
-        level: "AA_NORMAL" as WCAGLevel,
+        context: 'Primary text on primary background',
+        level: 'AA_NORMAL' as WCAGLevel,
       },
       {
         fg: semanticColors.foreground?.secondary,
         bg: semanticColors.background?.primary,
-        context: "Secondary text on primary background",
-        level: "AA_NORMAL" as WCAGLevel,
+        context: 'Secondary text on primary background',
+        level: 'AA_NORMAL' as WCAGLevel,
       },
       {
         fg: semanticColors.foreground?.primary,
         bg: semanticColors.background?.secondary,
-        context: "Primary text on secondary background",
-        level: "AA_NORMAL" as WCAGLevel,
+        context: 'Primary text on secondary background',
+        level: 'AA_NORMAL' as WCAGLevel,
       },
       {
         fg: semanticColors.foreground?.primary,
         bg: semanticColors.background?.elevated,
-        context: "Primary text on elevated background",
-        level: "AA_NORMAL" as WCAGLevel,
+        context: 'Primary text on elevated background',
+        level: 'AA_NORMAL' as WCAGLevel,
       },
       // Interactive elements
       {
         fg: semanticColors.foreground?.onAccent,
         bg: semanticColors.background?.accent,
-        context: "Text on accent/primary buttons",
-        level: "AA_NORMAL" as WCAGLevel,
+        context: 'Text on accent/primary buttons',
+        level: 'AA_NORMAL' as WCAGLevel,
       },
       {
         fg: semanticColors.foreground?.accent,
         bg: semanticColors.background?.primary,
-        context: "Accent text on primary background",
-        level: "AA_NORMAL" as WCAGLevel,
+        context: 'Accent text on primary background',
+        level: 'AA_NORMAL' as WCAGLevel,
       },
       // Status colors
       {
         fg: semanticColors.status?.success,
         bg: semanticColors.background?.primary,
-        context: "Success status text",
-        level: "AA_NORMAL" as WCAGLevel,
+        context: 'Success status text',
+        level: 'AA_NORMAL' as WCAGLevel,
       },
       {
         fg: semanticColors.status?.warning,
         bg: semanticColors.background?.primary,
-        context: "Warning status text",
-        level: "AA_NORMAL" as WCAGLevel,
+        context: 'Warning status text',
+        level: 'AA_NORMAL' as WCAGLevel,
       },
       {
         fg: semanticColors.status?.danger,
         bg: semanticColors.background?.primary,
-        context: "Error status text",
-        level: "AA_NORMAL" as WCAGLevel,
+        context: 'Error status text',
+        level: 'AA_NORMAL' as WCAGLevel,
       },
       {
         fg: semanticColors.status?.info,
         bg: semanticColors.background?.primary,
-        context: "Info status text",
-        level: "AA_NORMAL" as WCAGLevel,
+        context: 'Info status text',
+        level: 'AA_NORMAL' as WCAGLevel,
       },
       // Border contrasts (lower requirement)
       {
         fg: semanticColors.border?.subtle,
         bg: semanticColors.background?.primary,
-        context: "Subtle borders",
-        level: "AA_LARGE" as WCAGLevel, // Lower requirement for non-text
+        context: 'Subtle borders',
+        level: 'AA_LARGE' as WCAGLevel, // Lower requirement for non-text
       },
       {
         fg: semanticColors.border?.primary,
         bg: semanticColors.background?.primary,
-        context: "Primary borders",
-        level: "AA_LARGE" as WCAGLevel,
+        context: 'Primary borders',
+        level: 'AA_LARGE' as WCAGLevel,
       },
     ];
 
@@ -214,7 +214,7 @@ export function extractColorPairsFromTokens(tokensPath: string): ColorPair[] {
       }
     });
   } catch (error) {
-    console.error("Error reading design tokens:", error);
+    console.error('Error reading design tokens:', error);
   }
 
   return pairs;
@@ -275,8 +275,8 @@ export function generateAccessibilityReport(
 ): string {
   const { totalPairs, validPairs, invalidPairs, results, summary } = report;
 
-  let output = "\n🎨 DESIGN TOKEN ACCESSIBILITY REPORT\n";
-  output += "═".repeat(50) + "\n\n";
+  let output = '\n🎨 DESIGN TOKEN ACCESSIBILITY REPORT\n';
+  output += '═'.repeat(50) + '\n\n';
 
   // Summary
   output += `📊 SUMMARY:\n`;
@@ -299,7 +299,7 @@ export function generateAccessibilityReport(
   const failingResults = results.filter((r) => !r.isValid);
   if (failingResults.length > 0) {
     output += `❌ FAILING PAIRS:\n`;
-    output += "─".repeat(50) + "\n";
+    output += '─'.repeat(50) + '\n';
 
     failingResults.forEach((result, index) => {
       output += `${index + 1}. ${result.context}\n`;
@@ -316,11 +316,11 @@ export function generateAccessibilityReport(
   const passingResults = results.filter((r) => r.isValid);
   if (passingResults.length > 0) {
     output += `✅ PASSING PAIRS:\n`;
-    output += "─".repeat(50) + "\n";
+    output += '─'.repeat(50) + '\n';
 
     passingResults.forEach((result, index) => {
       const level =
-        result.contrastRatio >= WCAG_LEVELS.AAA_NORMAL ? "AAA" : "AA";
+        result.contrastRatio >= WCAG_LEVELS.AAA_NORMAL ? 'AAA' : 'AA';
       output += `${index + 1}. ${
         result.context
       } - ${result.contrastRatio.toFixed(2)} (${level})\n`;
@@ -338,7 +338,7 @@ export async function runAccessibilityValidation(
 ): Promise<void> {
   const defaultTokensPath = path.join(
     process.cwd(),
-    "ui/designTokens/designTokens.json"
+    'ui/designTokens/designTokens.json'
   );
   const finalTokensPath = tokensPath || defaultTokensPath;
 
@@ -356,7 +356,7 @@ export async function runAccessibilityValidation(
   console.log(reportText);
 
   // Write report to file
-  const reportPath = path.join(process.cwd(), "accessibility-report.txt");
+  const reportPath = path.join(process.cwd(), 'accessibility-report.txt');
   fs.writeFileSync(reportPath, reportText);
   console.log(`📄 Report saved to: ${reportPath}`);
 

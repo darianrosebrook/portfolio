@@ -1,0 +1,50 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/PageTransition/PageTransition.tokens.json
+ */
+@mixin vars {
+  /* === Duration Tokens === */
+  --pageTransition-duration-fast: var(--core-motion-duration-short);
+  --pageTransition-duration-normal: var(--core-motion-duration-medium);
+  --pageTransition-duration-slow: var(--core-motion-duration-long);
+  --pageTransition-duration-default: var(--core-motion-duration-medium);
+
+  /* === Easing Tokens === */
+  --pageTransition-easing-standard: var(--core-motion-easing-standard);
+  --pageTransition-easing-decelerate: var(--core-motion-easing-decelerate);
+  --pageTransition-easing-accelerate: var(--core-motion-easing-accelerate);
+  --pageTransition-easing-default: var(--core-motion-easing-standard);
+
+  /* === Spacing Tokens === */
+  --pageTransition-spacing-padding-default: var(--core-spacing-size-04);
+  --pageTransition-spacing-padding-small: var(--core-spacing-size-03);
+  --pageTransition-spacing-padding-large: var(--core-spacing-size-05);
+  --pageTransition-spacing-margin-default: var(--core-spacing-size-04);
+  --pageTransition-spacing-margin-small: var(--core-spacing-size-03);
+  --pageTransition-spacing-margin-large: var(--core-spacing-size-05);
+
+  /* === Color Tokens === */
+  --pageTransition-color-background-default: var(--semantic-color-background-primary);
+  --pageTransition-color-background-overlay: var(--semantic-color-background-overlay);
+  --pageTransition-color-foreground-default: var(--semantic-color-foreground-primary);
+  --pageTransition-color-foreground-secondary: var(--semantic-color-foreground-secondary);
+
+  /* === Opacity Tokens === */
+  --pageTransition-opacity-overlay-default: 0.8;
+  --pageTransition-opacity-overlay-light: 0.6;
+  --pageTransition-opacity-overlay-heavy: 0.9;
+  --pageTransition-opacity-content-default: 1;
+  --pageTransition-opacity-content-fade: 0.7;
+
+  /* === Transform Tokens === */
+  --pageTransition-transform-scale-default: 1;
+  --pageTransition-transform-scale-zoom: 1.05;
+  --pageTransition-transform-scale-shrink: 0.95;
+  --pageTransition-transform-translate-default: 0;
+  --pageTransition-transform-translate-slide: 20;
+  --pageTransition-transform-translate-bounce: 10;
+
+  /* === ZIndex Tokens === */
+  --pageTransition-zIndex-overlay: 1000;
+  --pageTransition-zIndex-content: 1001;
+  --pageTransition-zIndex-max: 9999;
+}
