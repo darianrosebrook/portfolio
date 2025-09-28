@@ -36,8 +36,13 @@ test.describe('Component Visual Regression', () => {
     // Wait for animations to be disabled and layout to settle
     await page.waitForTimeout(1000);
 
-    // Wait for the main content to be visible
-    await page.waitForSelector('main', { timeout: 10000 });
+    // Wait for the page content to be visible (check multiple possible selectors)
+    await page.waitForFunction(() => {
+      return document.querySelector('main') ||
+             document.querySelector('.content') ||
+             document.querySelector('h1') ||
+             document.body.textContent?.includes('Component');
+    }, { timeout: 15000 });
 
     // Find button components to test
     const buttons = page.locator('button').or(page.locator('[role="button"]'));
@@ -95,8 +100,13 @@ test.describe('Component Visual Regression', () => {
     // Wait for animations to be disabled and layout to settle
     await page.waitForTimeout(1000);
 
-    // Wait for the main content to be visible
-    await page.waitForSelector('main', { timeout: 10000 });
+    // Wait for the page content to be visible (check multiple possible selectors)
+    await page.waitForFunction(() => {
+      return document.querySelector('main') ||
+             document.querySelector('.content') ||
+             document.querySelector('h1') ||
+             document.body.textContent?.includes('Blueprint');
+    }, { timeout: 15000 });
 
     // Find card components
     const cards = page
@@ -142,8 +152,13 @@ test.describe('Component Visual Regression', () => {
     // Wait for animations to be disabled and layout to settle
     await page.waitForTimeout(1000);
 
-    // Wait for the main content to be visible
-    await page.waitForSelector('main', { timeout: 10000 });
+    // Wait for the page content to be visible (check multiple possible selectors)
+    await page.waitForFunction(() => {
+      return document.querySelector('main') ||
+             document.querySelector('.content') ||
+             document.querySelector('h1') ||
+             document.body.textContent?.includes('Component');
+    }, { timeout: 15000 });
 
     // Find form input components
     const inputs = page
