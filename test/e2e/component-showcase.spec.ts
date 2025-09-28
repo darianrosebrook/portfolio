@@ -49,14 +49,29 @@ test.describe('Component Showcase Visual Regression', () => {
       return document.fonts.ready;
     });
 
-    // Wait for any animations to settle
-    await page.waitForTimeout(2000);
+    // Disable animations to get stable screenshots
+    await page.addStyleTag({
+      content: `
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+      `,
+    });
+
+    // Wait for animations to be disabled and layout to settle
+    await page.waitForTimeout(1000);
 
     // Wait for the main content to be visible
     await page.waitForSelector('main', { timeout: 10000 });
 
     // Take a screenshot of the blueprints page
-    await expect(page).toHaveScreenshot('blueprints-page-full.png');
+    await expect(page).toHaveScreenshot('blueprints-page-full.png', {
+      animations: 'disabled',
+      caret: 'hide',
+    });
 
     // Test the component standards section
     const componentStandards = page
@@ -64,7 +79,11 @@ test.describe('Component Showcase Visual Regression', () => {
       .or(page.locator('text=Component Standards'));
     if (await componentStandards.isVisible()) {
       await expect(componentStandards).toHaveScreenshot(
-        'blueprints-component-standards.png'
+        'blueprints-component-standards.png',
+        {
+          animations: 'disabled',
+          caret: 'hide',
+        }
       );
     }
   });
