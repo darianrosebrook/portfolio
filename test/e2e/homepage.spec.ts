@@ -12,8 +12,19 @@ test.describe('Homepage Visual Regression', () => {
   test('homepage renders correctly', async ({ page }) => {
     await page.goto('/');
 
-    // Wait for the page to be fully loaded
+    // Wait for the page to be fully loaded and stable
     await page.waitForLoadState('networkidle');
+
+    // Wait for fonts to load
+    await page.waitForFunction(() => {
+      return document.fonts.ready;
+    });
+
+    // Wait for any animations to settle
+    await page.waitForTimeout(2000);
+
+    // Wait for the main content to be visible
+    await page.waitForSelector('main', { timeout: 10000 });
 
     // Take a screenshot of the full page
     await expect(page).toHaveScreenshot('homepage-full.png');
@@ -30,8 +41,19 @@ test.describe('Homepage Visual Regression', () => {
   test('homepage navigation renders correctly', async ({ page }) => {
     await page.goto('/');
 
-    // Wait for the page to be fully loaded
+    // Wait for the page to be fully loaded and stable
     await page.waitForLoadState('networkidle');
+
+    // Wait for fonts to load
+    await page.waitForFunction(() => {
+      return document.fonts.ready;
+    });
+
+    // Wait for any animations to settle
+    await page.waitForTimeout(2000);
+
+    // Wait for the header to be visible
+    await page.waitForSelector('header', { timeout: 10000 });
 
     // Test the navigation/header area
     const header = page

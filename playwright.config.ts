@@ -31,6 +31,9 @@ export default defineConfig({
 
     /* Record video on failure */
     video: 'retain-on-failure',
+
+    /* Wait for page to be fully loaded */
+    actionTimeout: 10000,
   },
 
   /* Configure projects for major browsers */

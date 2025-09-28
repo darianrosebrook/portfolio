@@ -13,8 +13,19 @@ test.describe('Component Visual Regression', () => {
     // Create a simple test page with buttons
     await page.goto('/component-displaycase');
 
-    // Wait for the page to be fully loaded
+    // Wait for the page to be fully loaded and stable
     await page.waitForLoadState('networkidle');
+
+    // Wait for fonts to load
+    await page.waitForFunction(() => {
+      return document.fonts.ready;
+    });
+
+    // Wait for any animations to settle
+    await page.waitForTimeout(2000);
+
+    // Wait for the main content to be visible
+    await page.waitForSelector('main', { timeout: 10000 });
 
     // Find button components to test
     const buttons = page.locator('button').or(page.locator('[role="button"]'));
@@ -42,8 +53,19 @@ test.describe('Component Visual Regression', () => {
   test('card component renders correctly', async ({ page }) => {
     await page.goto('/blueprints');
 
-    // Wait for the page to be fully loaded
+    // Wait for the page to be fully loaded and stable
     await page.waitForLoadState('networkidle');
+
+    // Wait for fonts to load
+    await page.waitForFunction(() => {
+      return document.fonts.ready;
+    });
+
+    // Wait for any animations to settle
+    await page.waitForTimeout(2000);
+
+    // Wait for the main content to be visible
+    await page.waitForSelector('main', { timeout: 10000 });
 
     // Find card components
     const cards = page
@@ -63,8 +85,19 @@ test.describe('Component Visual Regression', () => {
   test('form components render correctly', async ({ page }) => {
     await page.goto('/component-displaycase');
 
-    // Wait for the page to be fully loaded
+    // Wait for the page to be fully loaded and stable
     await page.waitForLoadState('networkidle');
+
+    // Wait for fonts to load
+    await page.waitForFunction(() => {
+      return document.fonts.ready;
+    });
+
+    // Wait for any animations to settle
+    await page.waitForTimeout(2000);
+
+    // Wait for the main content to be visible
+    await page.waitForSelector('main', { timeout: 10000 });
 
     // Find form input components
     const inputs = page
