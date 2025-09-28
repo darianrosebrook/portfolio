@@ -21,8 +21,20 @@ test.describe('Component Visual Regression', () => {
       return document.fonts.ready;
     });
 
-    // Wait for any animations to settle
-    await page.waitForTimeout(2000);
+    // Disable animations to get stable screenshots
+    await page.addStyleTag({
+      content: `
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+      `,
+    });
+
+    // Wait for animations to be disabled and layout to settle
+    await page.waitForTimeout(1000);
 
     // Wait for the main content to be visible
     await page.waitForSelector('main', { timeout: 10000 });
@@ -35,7 +47,10 @@ test.describe('Component Visual Regression', () => {
       // Take a screenshot of the first few buttons
       const firstButton = buttons.first();
       if (await firstButton.isVisible()) {
-        await expect(firstButton).toHaveScreenshot('button-primary.png');
+        await expect(firstButton).toHaveScreenshot('button-primary.png', {
+          animations: 'disabled',
+          caret: 'hide',
+        });
       }
 
       // Look for different button variants
@@ -44,7 +59,11 @@ test.describe('Component Visual Regression', () => {
         .filter({ hasText: /primary|submit|save/i });
       if ((await primaryButtons.count()) > 0) {
         await expect(primaryButtons.first()).toHaveScreenshot(
-          'button-primary-variant.png'
+          'button-primary-variant.png',
+          {
+            animations: 'disabled',
+            caret: 'hide',
+          }
         );
       }
     }
@@ -61,8 +80,20 @@ test.describe('Component Visual Regression', () => {
       return document.fonts.ready;
     });
 
-    // Wait for any animations to settle
-    await page.waitForTimeout(2000);
+    // Disable animations to get stable screenshots
+    await page.addStyleTag({
+      content: `
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+      `,
+    });
+
+    // Wait for animations to be disabled and layout to settle
+    await page.waitForTimeout(1000);
 
     // Wait for the main content to be visible
     await page.waitForSelector('main', { timeout: 10000 });
@@ -77,7 +108,10 @@ test.describe('Component Visual Regression', () => {
     if (cardCount > 0) {
       const firstCard = cards.first();
       if (await firstCard.isVisible()) {
-        await expect(firstCard).toHaveScreenshot('card-basic.png');
+        await expect(firstCard).toHaveScreenshot('card-basic.png', {
+          animations: 'disabled',
+          caret: 'hide',
+        });
       }
     }
   });
@@ -93,8 +127,20 @@ test.describe('Component Visual Regression', () => {
       return document.fonts.ready;
     });
 
-    // Wait for any animations to settle
-    await page.waitForTimeout(2000);
+    // Disable animations to get stable screenshots
+    await page.addStyleTag({
+      content: `
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+      `,
+    });
+
+    // Wait for animations to be disabled and layout to settle
+    await page.waitForTimeout(1000);
 
     // Wait for the main content to be visible
     await page.waitForSelector('main', { timeout: 10000 });
@@ -109,14 +155,20 @@ test.describe('Component Visual Regression', () => {
     if (inputCount > 0) {
       const firstInput = inputs.first();
       if (await firstInput.isVisible()) {
-        await expect(firstInput).toHaveScreenshot('input-basic.png');
+        await expect(firstInput).toHaveScreenshot('input-basic.png', {
+          animations: 'disabled',
+          caret: 'hide',
+        });
       }
     }
 
     // Find form labels
     const labels = page.locator('label');
     if ((await labels.count()) > 0) {
-      await expect(labels.first()).toHaveScreenshot('label-basic.png');
+      await expect(labels.first()).toHaveScreenshot('label-basic.png', {
+        animations: 'disabled',
+        caret: 'hide',
+      });
     }
   });
 });

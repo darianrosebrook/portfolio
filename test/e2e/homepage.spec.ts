@@ -20,21 +20,39 @@ test.describe('Homepage Visual Regression', () => {
       return document.fonts.ready;
     });
 
-    // Wait for any animations to settle
-    await page.waitForTimeout(2000);
+    // Disable animations to get stable screenshots
+    await page.addStyleTag({
+      content: `
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+      `,
+    });
+
+    // Wait for animations to be disabled and layout to settle
+    await page.waitForTimeout(1000);
 
     // Wait for the main content to be visible
     await page.waitForSelector('main', { timeout: 10000 });
 
     // Take a screenshot of the full page
-    await expect(page).toHaveScreenshot('homepage-full.png');
+    await expect(page).toHaveScreenshot('homepage-full.png', {
+      animations: 'disabled',
+      caret: 'hide',
+    });
 
     // Test specific sections
     const heroSection = page
       .locator('[data-testid="hero-section"]')
       .or(page.locator('main > section').first());
     if (await heroSection.isVisible()) {
-      await expect(heroSection).toHaveScreenshot('homepage-hero-section.png');
+      await expect(heroSection).toHaveScreenshot('homepage-hero-section.png', {
+        animations: 'disabled',
+        caret: 'hide',
+      });
     }
   });
 
@@ -49,8 +67,20 @@ test.describe('Homepage Visual Regression', () => {
       return document.fonts.ready;
     });
 
-    // Wait for any animations to settle
-    await page.waitForTimeout(2000);
+    // Disable animations to get stable screenshots
+    await page.addStyleTag({
+      content: `
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+      `,
+    });
+
+    // Wait for animations to be disabled and layout to settle
+    await page.waitForTimeout(1000);
 
     // Wait for the header to be visible
     await page.waitForSelector('header', { timeout: 10000 });
@@ -60,7 +90,10 @@ test.describe('Homepage Visual Regression', () => {
       .locator('header')
       .or(page.locator('[data-testid="header"]'));
     if (await header.isVisible()) {
-      await expect(header).toHaveScreenshot('homepage-header.png');
+      await expect(header).toHaveScreenshot('homepage-header.png', {
+        animations: 'disabled',
+        caret: 'hide',
+      });
     }
 
     // Test the main navigation menu
@@ -68,7 +101,10 @@ test.describe('Homepage Visual Regression', () => {
       .locator('nav')
       .or(page.locator('[data-testid="navigation"]'));
     if (await nav.isVisible()) {
-      await expect(nav).toHaveScreenshot('homepage-navigation.png');
+      await expect(nav).toHaveScreenshot('homepage-navigation.png', {
+        animations: 'disabled',
+        caret: 'hide',
+      });
     }
   });
 });
