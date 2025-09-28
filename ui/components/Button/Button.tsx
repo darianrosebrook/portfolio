@@ -7,14 +7,15 @@ const Slot = React.forwardRef<
   React.HTMLAttributes<HTMLElement> & { children: React.ReactElement }
 >(({ children, ...props }, ref) => {
   if (React.isValidElement(children)) {
+    const childProps = children.props as Record<string, unknown>;
     return React.cloneElement(children, {
-      ...children.props,
-      ...(props as any),
+      ...childProps,
+      ...props,
       ref,
-      className: [props.className, children.props.className]
+      className: [props.className, childProps.className]
         .filter(Boolean)
         .join(' '),
-    });
+    } as any);
   }
   return null;
 });
@@ -72,40 +73,54 @@ interface ButtonAsAnchor
 
 export type ButtonProps = ButtonAsButton | ButtonAsAnchor;
 
-const Button: React.FC<ButtonProps> = ({
-  as = 'button',
-  size = 'medium',
-  variant = 'primary',
-  loading = false,
-  disabled = false,
-  className = '',
-  title = '',
-  ariaLabel,
-  ariaExpanded,
-  ariaPressed,
-  role,
-  asChild = false,
-  children,
-  ...rest
-}) => {
-  const baseClassName = styles.button;
-  const sizeClassName = styles[size];
-  const variantClassName = styles[variant];
-  const isLoadingClassName = loading ? styles.isLoading : '';
-  const isDisabledClassName = disabled ? styles.disabled : '';
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      as = 'button',
+      size = 'medium',
+      variant = 'primary',
+      loading = false,
+      disabled = false,
+      className = '',
+      title = '',
+      ariaLabel,
+      ariaExpanded,
+      ariaPressed,
+      role,
+      asChild = false,
+      children,
+      ...rest
+    },
+    ref
+  ) => {
+    const baseClassName = styles.button;
+    const sizeClassName = styles[size];
+    const variantClassName = styles[variant];
+    const isLoadingClassName = loading ? styles.isLoading : '';
+    const isDisabledClassName = disabled ? styles.disabled : '';
 
-  const childCount = React.Children.count(children);
-  const isSingleChild = childCount === 1;
-  const hasOnlyIcon =
-    isSingleChild &&
-    React.isValidElement(children) &&
-    (children.type === 'svg' ||
-      (children.props &&
-        ((children.props as any)['aria-label'] ||
-          (children.props as any)['data-icon'])));
+    const childCount = React.Children.count(children);
+    const isSingleChild = childCount === 1;
+    const hasOnlyIcon =
+      isSingleChild &&
+      React.isValidElement(children) &&
+      (children.type === 'svg' ||
+        (children.props &&
+          ((children.props as any)['aria-label'] ||
+            (children.props as any)['data-icon'])));
 
-  const combinedClassName = useMemo(
-    () =>
+    const combinedClassName = useMemo(
+      () =>
+        [
+          baseClassName,
+          sizeClassName,
+          variantClassName,
+          isLoadingClassName,
+          isDisabledClassName,
+          className,
+        ]
+          .filter(Boolean)
+          .join(' '),
       [
         baseClassName,
         sizeClassName,
@@ -114,87 +129,83 @@ const Button: React.FC<ButtonProps> = ({
         isDisabledClassName,
         className,
       ]
-        .filter(Boolean)
-        .join(' '),
-    [
-      baseClassName,
-      sizeClassName,
-      variantClassName,
-      isLoadingClassName,
-      isDisabledClassName,
-      className,
-    ]
-  );
+    );
 
-  const ariaProps = {
-    ...(hasOnlyIcon && { 'aria-label': title || ariaLabel }),
-    ...(ariaExpanded !== undefined && { 'aria-expanded': ariaExpanded }),
-    ...(ariaPressed !== undefined && { 'aria-pressed': ariaPressed }),
-    ...(role && { role }),
-  } as const;
+    const ariaProps = {
+      ...(hasOnlyIcon && { 'aria-label': title || ariaLabel }),
+      ...(ariaExpanded !== undefined && { 'aria-expanded': ariaExpanded }),
+      ...(ariaPressed !== undefined && { 'aria-pressed': ariaPressed }),
+      ...(role && { role }),
+    } as const;
 
-  const renderChildren = () => {
-    if (loading) {
+    const renderChildren = () => {
+      if (loading) {
+        return (
+          <>
+            <span className={styles.spinner} aria-hidden="true" />
+            {children ? (
+              <span className={styles.loadingText}>{children}</span>
+            ) : null}
+          </>
+        );
+      }
+
+      if (children == null) return null;
+      if (typeof children === 'string' || typeof children === 'number') {
+        return <span>{children}</span>;
+      }
+      return children;
+    };
+
+    // Handle asChild pattern
+    if (asChild) {
       return (
-        <>
-          <span className={styles.spinner} aria-hidden="true" />
-          {children ? (
-            <span className={styles.loadingText}>{children}</span>
-          ) : null}
-        </>
+        <Slot
+          className={combinedClassName}
+          title={title}
+          {...ariaProps}
+          data-slot="button"
+        >
+          {children as React.ReactElement}
+        </Slot>
       );
     }
 
-    if (children == null) return null;
-    if (typeof children === 'string' || typeof children === 'number') {
-      return <span>{children}</span>;
+    if (as === 'a') {
+      const { href, ...anchorRest } = rest as ButtonAsAnchor;
+      return (
+        <a
+          href={href}
+          className={combinedClassName}
+          title={title}
+          {...ariaProps}
+          {...anchorRest}
+          data-slot="button"
+        >
+          {renderChildren()}
+        </a>
+      );
     }
-    return children;
-  };
 
-  // Handle asChild pattern
-  if (asChild) {
     return (
-      <Slot
+      <button
+        ref={ref}
         className={combinedClassName}
+        disabled={disabled}
         title={title}
+        {...(rest as ButtonAsButton)}
         {...ariaProps}
         data-slot="button"
-      >
-        {children as React.ReactElement}
-      </Slot>
-    );
-  }
-
-  if (as === 'a') {
-    const { href, ...anchorRest } = rest as ButtonAsAnchor;
-    return (
-      <a
-        href={href}
-        className={combinedClassName}
-        title={title}
-        {...ariaProps}
-        {...anchorRest}
-        data-slot="button"
+        data-variant={variant}
+        data-size={size}
       >
         {renderChildren()}
-      </a>
+      </button>
     );
   }
+);
 
-  return (
-    <button
-      className={combinedClassName}
-      disabled={disabled}
-      title={title}
-      {...(rest as ButtonAsButton)}
-      {...ariaProps}
-      data-slot="button"
-    >
-      {renderChildren()}
-    </button>
-  );
-};
+Button.displayName = 'Button';
 
 export { Button };
 export default React.memo(Button);

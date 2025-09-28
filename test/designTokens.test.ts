@@ -7,8 +7,8 @@ import {
   generate,
   createDefaultConfig,
   formatAsCSS,
-  builtInTransforms,
-} from '../utils/designTokens/componentTokenUtils';
+} from '../utils/designTokens/utils/componentTokenUtils';
+import { builtInTransforms } from '../utils/designTokens/utils/transforms';
 
 // Mock design tokens for testing
 const mockTokens = {

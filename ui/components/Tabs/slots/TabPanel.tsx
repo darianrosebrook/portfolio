@@ -5,13 +5,17 @@ import type { TabsValue } from '../Types';
 import styles from '../Tabs.module.scss';
 
 export interface TabPanelProps extends React.HTMLAttributes<HTMLDivElement> {
-  value: TabsValue;
+  value?: TabsValue;
 }
 
 export const TabPanel = React.forwardRef<HTMLDivElement, TabPanelProps>(
   ({ value, className = '', children, ...rest }, ref) => {
     const { value: active, unmountInactive } = useTabs();
-    const isActive = active === value;
+    const id = React.useId();
+
+    // Generate a value if none provided - use index-based approach
+    const panelValue = value ?? `tab-${id}`;
+    const isActive = active === panelValue;
 
     const content = (
       <div

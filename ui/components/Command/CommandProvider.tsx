@@ -33,7 +33,7 @@ export const CommandProvider: React.FC<CommandProviderProps> = ({
     () => ({
       ...command,
       inputRef: inputRef as React.RefObject<HTMLInputElement>,
-      listRef,
+      listRef: listRef as React.RefObject<HTMLDivElement>,
     }),
     [command]
   );

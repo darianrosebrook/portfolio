@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import * as React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import { PropControls } from '@/ui/modules/docs/primitives/PropControls';
+import { PropControls } from '@/ui/modules/CodeSandbox/primitives/PropControls';
 
 describe('PropControls', () => {
   it('updates values on boolean and number inputs', () => {
