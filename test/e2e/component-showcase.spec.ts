@@ -12,8 +12,19 @@ test.describe('Component Showcase Visual Regression', () => {
   test('component display case renders correctly', async ({ page }) => {
     await page.goto('/component-displaycase');
 
-    // Wait for the page to be fully loaded
+    // Wait for the page to be fully loaded and stable
     await page.waitForLoadState('networkidle');
+
+    // Wait for fonts to load
+    await page.waitForFunction(() => {
+      return document.fonts.ready;
+    });
+
+    // Wait for any animations to settle
+    await page.waitForTimeout(2000);
+
+    // Wait for the main content to be visible
+    await page.waitForSelector('main', { timeout: 10000 });
 
     // Take a screenshot of the full component grid
     await expect(page).toHaveScreenshot('component-displaycase-full.png');
@@ -30,8 +41,19 @@ test.describe('Component Showcase Visual Regression', () => {
   test('blueprints page renders correctly', async ({ page }) => {
     await page.goto('/blueprints');
 
-    // Wait for the page to be fully loaded
+    // Wait for the page to be fully loaded and stable
     await page.waitForLoadState('networkidle');
+
+    // Wait for fonts to load
+    await page.waitForFunction(() => {
+      return document.fonts.ready;
+    });
+
+    // Wait for any animations to settle
+    await page.waitForTimeout(2000);
+
+    // Wait for the main content to be visible
+    await page.waitForSelector('main', { timeout: 10000 });
 
     // Take a screenshot of the blueprints page
     await expect(page).toHaveScreenshot('blueprints-page-full.png');
