@@ -9,16 +9,27 @@ import type {
   ResolverConfig,
   ResolveContext,
 } from './types';
-import { resolvePath, DEFAULT_REF } from './resolver';
+import {
+  resolvePath,
+  DEFAULT_REF,
+  resolveInterpolated,
+  applyTransforms,
+} from './resolver';
 import { builtInTransforms } from './transforms';
 import { Logger } from '../../helpers/logger';
 
+// ComponentTokenConfig is now imported from types.ts
+
 /**
- * Component token configuration interface
+ * Helper function to get nested object values by dot path
  */
-export interface ComponentTokenConfig {
-  prefix: string;
-  tokens: Record<string, unknown>;
+function get(obj: Record<string, unknown>, path: string): unknown {
+  return path.split('.').reduce((current, segment) => {
+    if (current && typeof current === 'object' && segment in current) {
+      return (current as Record<string, unknown>)[segment];
+    }
+    return undefined;
+  }, obj as unknown);
 }
 
 /**
@@ -84,7 +95,7 @@ function walk(
  *   tokens: { color: '{semantic.color.primary}', size: '16px' }
  * };
  *
- * const cssVars = generate(config, designTokens, createDefaultConfig());
+ * const cssVars = generate(config, tokens, createDefaultConfig());
  * // Returns: { '--btn-color': 'var(--semantic-color-primary)', '--btn-size': '16px' }
  * ```
  */
@@ -197,9 +208,13 @@ export function createDefaultConfig(
  * Validates that a token path exists in the design system
  *
  * @param tokenPath - The token path to validate
+ * @param designTokens - The design tokens object to search in
  * @returns boolean indicating if the token exists
  */
-export const validateTokenPath = (tokenPath: string): boolean => {
+export const validateTokenPath = (
+  tokenPath: string,
+  designTokens: Record<string, unknown>
+): boolean => {
   try {
     const cleanPath = tokenPath.replace(/[{}]/g, '');
     const node = get(designTokens, cleanPath);
@@ -234,17 +249,17 @@ export function formatAsCSS(
 /**
  * Gets all available token paths from the design system
  *
- * @param obj - Object to traverse (defaults to design tokens)
+ * @param designTokens - Object to traverse
  * @param prefix - Current path prefix
  * @returns Array of all available token paths
  */
 export const getAvailableTokenPaths = (
-  obj: Record<string, unknown> = designTokens,
+  designTokens: Record<string, unknown>,
   prefix = ''
 ): string[] => {
   const paths: string[] = [];
 
-  for (const [key, value] of Object.entries(obj)) {
+  for (const [key, value] of Object.entries(designTokens)) {
     const currentPath = prefix ? `${prefix}.${key}` : key;
 
     if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
@@ -268,119 +283,3 @@ export const getAvailableTokenPaths = (
 
   return paths;
 };
-
-// Import design tokens at the module level
-import designTokens from '../../../ui/designTokens/designTokens.json';
-import { Logger } from '../../helpers/logger';
-import { DEFAULT_REF } from './resolver';
-
-// Helper function to get nested object values by dot path
-function get(obj: Record<string, unknown>, path: string): unknown {
-  return path.split('.').reduce((current, segment) => {
-    if (current && typeof current === 'object' && segment in current) {
-      return (current as Record<string, unknown>)[segment];
-    }
-    return undefined;
-  }, obj as unknown);
-}
-
-// Helper function to apply transforms
-function applyTransforms(value: unknown, ctx: ResolveContext): unknown {
-  const transforms = ctx.config.transforms ?? [];
-  let result = value;
-
-  for (const transform of transforms) {
-    if (transform.match(ctx)) {
-      result = transform.apply(result, ctx);
-    }
-  }
-
-  return result;
-}
-
-// Helper function to resolve interpolated strings with embedded references and fallbacks
-function resolveInterpolated(
-  input: string,
-  fallback: string,
-  ctx: ResolveContext,
-  visited: string[]
-): string {
-  const parts = input
-    .split(ctx.config.fallbackDelimiter ?? '||')
-    .map((s) => s.trim());
-
-  // If reference mode with fallback chain enabled, always build fallback chains
-  // regardless of whether tokens exist or not
-  if (
-    ctx.config.resolveToReferences !== false &&
-    (ctx.config.emitVarFallbackChain ?? true) &&
-    parts.length > 1
-  ) {
-    const pattern = ctx.config.referencePattern ?? DEFAULT_REF;
-    const systemPrefix = ctx.config.systemTokenPrefix ?? '--';
-
-    // Process each part to handle interpolation within it
-    const processedParts = parts.map((part) => {
-      // If the part contains references, replace them with var() calls
-      if (pattern.test(part)) {
-        return part.replace(pattern, (_, path) => {
-          return `var(${tokenPathToCSSVar(path, systemPrefix)})`;
-        });
-      }
-      return part;
-    });
-
-    // For interpolated strings, build nested fallbacks manually
-    let result = processedParts[processedParts.length - 1];
-    for (let i = processedParts.length - 2; i >= 0; i--) {
-      const current = processedParts[i];
-      // Check if current part has var() calls that need fallbacks
-      if (current.includes('var(--')) {
-        // Replace each var() with a fallback version
-        result = current.replace(/var\((--[^)]+)\)/g, (match, varName) => {
-          return `var(${varName}, ${result})`;
-        });
-      } else {
-        result = current;
-      }
-    }
-    return result;
-  }
-
-  // Fallback to original logic for non-reference mode or when fallback chains are disabled
-  for (const candidate of parts) {
-    try {
-      const resolved = candidate.replace(
-        ctx.config.referencePattern ?? DEFAULT_REF,
-        (_, path) => {
-          const v = resolvePath(path, ctx, visited);
-          if (v == null) throw new Error(`Unresolved ${path}`);
-          return String(v);
-        }
-      );
-      // If no unresolved references remain, return the resolved value
-      if (!resolved.match(ctx.config.referencePattern ?? DEFAULT_REF)) {
-        return resolved;
-      }
-    } catch {
-      // Continue to next fallback candidate
-      continue;
-    }
-  }
-
-  // All candidates failed → use provided fallback literal
-  ctx.config.onWarn?.({
-    code: 'UNRESOLVED_FALLBACK',
-    path: ctx.path,
-    message: `Could not resolve any fallback for: ${input}`,
-    hint: 'Check that all referenced tokens exist and are accessible',
-  });
-  return fallback;
-}
-
-/**
- * Converts a token path to a CSS custom property name
- */
-function tokenPathToCSSVar(path: string, prefix: string = '--'): string {
-  return `${prefix}${path.replace(/\./g, '-')}`;
-}

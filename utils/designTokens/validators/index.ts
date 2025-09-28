@@ -9,3 +9,6 @@ export * from './validateTokens.mjs';
 
 // Token inspection utilities
 export * from './inspectTokens.mjs';
+
+// Re-export resolveToken from the main utils (to avoid duplication)
+export { resolveToken } from '../utils/resolver';

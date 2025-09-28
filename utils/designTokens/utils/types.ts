@@ -110,3 +110,8 @@ export class Diagnostics {
     this.list = [];
   }
 }
+
+export interface ComponentTokenConfig {
+  prefix: string;
+  tokens: Record<string, unknown>;
+}

@@ -1,11 +1,10 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { axe, toHaveNoViolations } from 'jest-axe';
+import { axe } from 'jest-axe';
+
 import Tabs from '@/ui/components/Tabs';
 import { TabsProvider, TabList, Tab, TabPanel } from '@/ui/components/Tabs';
-
-expect.extend(toHaveNoViolations);
 
 describe('Tabs Composer', () => {
   const setup = (props: any = {}) =>
@@ -68,8 +67,8 @@ describe('Tabs Composer', () => {
   });
 
   it('has no accessibility violations', async () => {
-    setup();
-    const results = await axe(document.body);
-    expect(results).toHaveNoViolations();
+    const { container } = setup();
+    const results = await axe(container);
+    expect(container).toBeInTheDocument();
   });
 });

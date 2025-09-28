@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import * as React from 'react';
 import { render } from '@testing-library/react';
-import { DocInteractive } from '@/ui/modules/docs/variants/DocInteractive';
+import { DocInteractive } from '@/ui/modules/CodeSandbox/variants/DocInteractive';
 
 vi.useFakeTimers();
 

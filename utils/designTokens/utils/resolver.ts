@@ -43,7 +43,7 @@ function selectByKeys(
 }
 
 // Helper function to apply transforms
-function applyTransforms(value: unknown, ctx: ResolveContext): unknown {
+export function applyTransforms(value: unknown, ctx: ResolveContext): unknown {
   const transforms = ctx.config.transforms ?? [];
   let result = value;
 
@@ -69,7 +69,7 @@ function tokenPathToCSSVar(path: string, prefix: string = '--'): string {
 /**
  * Resolves interpolated strings with embedded references and fallbacks
  */
-function resolveInterpolated(
+export function resolveInterpolated(
   input: string,
   fallback: string,
   ctx: ResolveContext,
@@ -151,7 +151,7 @@ function resolveInterpolated(
 /**
  * Enhanced path resolution with theme/mode/platform support and aliases
  */
-function resolvePath(
+export function resolvePath(
   path: string,
   ctx: ResolveContext,
   visited: string[]
@@ -303,6 +303,7 @@ function resolvePath(
 export const resolveToken = (
   tokenPath: string,
   fallback: string,
+  designTokens: Record<string, unknown>,
   visited = new Set<string>()
 ): string => {
   try {
@@ -347,7 +348,7 @@ export const resolveToken = (
 
     // If the value is a string that looks like a token reference, resolve it recursively
     if (typeof value === 'string' && value.match(/^\{[^}]+\}$/)) {
-      return resolveToken(value, fallback, visited);
+      return resolveToken(value, fallback, designTokens, visited);
     }
 
     return String(value);
@@ -360,5 +361,4 @@ export const resolveToken = (
   }
 };
 
-// Import design tokens at the module level
-import designTokens from '../../../ui/designTokens/designTokens.json';
+// Design tokens should be passed as parameter to avoid circular imports

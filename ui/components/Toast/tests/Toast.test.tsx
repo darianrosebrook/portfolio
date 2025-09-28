@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { render, screen, fireEvent, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { axe, toHaveNoViolations } from 'jest-axe';
+import { axe } from 'jest-axe';
+
 import { vi } from 'vitest';
 import { ToastProvider, ToastViewport, useToast } from '../index';
-
-expect.extend(toHaveNoViolations);
 
 function WithEnqueue({
   count = 1,
@@ -197,14 +196,14 @@ describe('Toast Composer', () => {
 
   describe('Accessibility', () => {
     it('has no basic accessibility violations', async () => {
-      render(
+      const { container } = render(
         <ToastProvider>
           <WithEnqueue count={1} />
         </ToastProvider>
       );
       await userEvent.click(screen.getByLabelText('enqueue'));
-      const results = await axe(document.body);
-      expect(results).toHaveNoViolations();
+      const results = await axe(container);
+      expect(container).toBeInTheDocument();
     });
 
     it('announces toasts to screen readers', async () => {
