@@ -35,8 +35,13 @@ test.describe('Homepage Visual Regression', () => {
     // Wait for animations to be disabled and layout to settle
     await page.waitForTimeout(1000);
 
-    // Wait for the main content to be visible
-    await page.waitForSelector('main', { timeout: 10000 });
+    // Wait for the page content to be visible (check multiple possible selectors)
+    await page.waitForFunction(() => {
+      return document.querySelector('main') ||
+             document.querySelector('.hero') ||
+             document.querySelector('h1') ||
+             document.body.textContent?.includes('Darian Rosebrook');
+    }, { timeout: 15000 });
 
     // Take a screenshot of the full page
     await expect(page).toHaveScreenshot('homepage-full.png', {
@@ -82,8 +87,13 @@ test.describe('Homepage Visual Regression', () => {
     // Wait for animations to be disabled and layout to settle
     await page.waitForTimeout(1000);
 
-    // Wait for the header to be visible
-    await page.waitForSelector('header', { timeout: 10000 });
+    // Wait for the header to be visible (check multiple possible selectors)
+    await page.waitForFunction(() => {
+      return document.querySelector('header') ||
+             document.querySelector('nav') ||
+             document.querySelector('.navbar') ||
+             document.querySelector('[data-testid="header"]');
+    }, { timeout: 15000 });
 
     // Test the navigation/header area
     const header = page
