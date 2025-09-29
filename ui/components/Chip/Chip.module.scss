@@ -1,0 +1,179 @@
+@use './Chip.tokens.generated.scss' as chipTokens;
+
+.chip {
+  @include chipTokens.vars;
+
+  // Base styles
+  display: inline-flex;
+  align-items: center;
+  gap: var(--chip-size-gap);
+  padding: var(--chip-size-padding-vertical) var(--chip-size-padding-horizontal);
+  border-radius: var(--chip-size-radius);
+  border: var(--chip-size-border) solid var(--chip-color-border-default);
+
+  // Typography
+  font-size: var(--chip-text-size);
+  font-weight: var(--chip-text-weight);
+  line-height: var(--chip-text-lineHeight);
+  color: var(--chip-color-foreground-default);
+  background-color: var(--chip-color-background-default);
+
+  // Interaction
+  cursor: pointer;
+  user-select: none;
+  transition:
+    background-color var(--chip-motion-duration-fast) var(--chip-motion-easing-standard),
+    border-color var(--chip-motion-duration-fast) var(--chip-motion-easing-standard),
+    color var(--chip-motion-duration-fast) var(--chip-motion-easing-standard),
+    transform var(--chip-motion-duration-fast) var(--chip-motion-easing-standard);
+
+  // Focus styles
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: var(--chip-focus-outlineWidth) solid var(--chip-focus-outlineColor);
+    outline-offset: var(--chip-focus-outlineOffset);
+  }
+
+  // Hover and active states
+  &:hover {
+    background-color: var(--chip-color-background-hover);
+    border-color: var(--chip-color-border-hover);
+    color: var(--chip-color-foreground-hover);
+    text-decoration: none;
+  }
+
+  &:active {
+    transform: scale(var(--chip-motion-scale-pressed));
+    background-color: var(--chip-color-background-active);
+    border-color: var(--chip-color-border-active);
+    color: var(--chip-color-foreground-active);
+  }
+
+  // Selected variant (checkbox-like with checkmark)
+  &.selected {
+    background-color: var(--chip-color-background-selected);
+    border-color: var(--chip-color-border-selected);
+    color: var(--chip-color-foreground-selected);
+
+    &:hover {
+      background-color: var(--chip-color-background-selectedHover);
+      border-color: var(--chip-color-border-selectedHover);
+      color: var(--chip-color-foreground-selectedHover);
+    }
+
+    &:active {
+      background-color: var(--chip-color-background-selectedActive);
+      border-color: var(--chip-color-border-selectedActive);
+      color: var(--chip-color-foreground-selectedActive);
+    }
+  }
+
+  // Dismissible variant (with X icon)
+  &.dismissible {
+    background-color: var(--chip-color-background-dismissible);
+    border-color: var(--chip-color-border-dismissible);
+    color: var(--chip-color-foreground-dismissible);
+
+    &:hover {
+      background-color: var(--chip-color-background-dismissibleHover);
+      border-color: var(--chip-color-border-dismissibleHover);
+      color: var(--chip-color-foreground-dismissibleHover);
+    }
+
+    &:active {
+      background-color: var(--chip-color-background-dismissibleActive);
+      border-color: var(--chip-color-border-dismissibleActive);
+      color: var(--chip-color-foreground-dismissibleActive);
+    }
+  }
+
+  // Icon styles
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--chip-size-icon-size);
+    height: var(--chip-size-icon-size);
+    margin-left: var(--chip-size-icon-margin);
+    color: var(--chip-color-icon-default);
+    transition: color var(--chip-motion-duration-fast) var(--chip-motion-easing-standard);
+
+    .chip.selected & {
+      color: var(--chip-color-icon-selected);
+    }
+
+    .chip.dismissible & {
+      color: var(--chip-color-icon-dismissible);
+
+      &:hover {
+        color: var(--chip-color-icon-dismissibleHover);
+      }
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  // Text content
+  .text {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  // Disabled state
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+
+    .icon {
+      opacity: 0.6;
+    }
+  }
+}
+
+// Animation keyframes for icon entrance/exit
+@keyframes chip-icon-enter {
+  from {
+    opacity: 0;
+    transform: scale(var(--chip-motion-scale-iconEnter));
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes chip-icon-exit {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(var(--chip-motion-scale-iconExit));
+  }
+}
+
+// Reduced motion preferences
+@media (prefers-reduced-motion: reduce) {
+  .chip {
+    transition: none;
+
+    &:active {
+      transform: none;
+    }
+  }
+
+  .icon {
+    animation: none;
+  }
+}

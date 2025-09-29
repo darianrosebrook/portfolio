@@ -23,13 +23,23 @@ test.describe('Component Showcase Visual Regression', () => {
     // Wait for any animations to settle
     await page.waitForTimeout(2000);
 
-    // Wait for the page content to be visible (check multiple possible selectors)
-    await page.waitForFunction(() => {
-      return document.querySelector('main') ||
-             document.querySelector('.content') ||
-             document.querySelector('h1') ||
-             document.body.textContent?.includes('Component');
-    }, { timeout: 15000 });
+    // Wait for the page content to be visible with retry logic
+    await page.waitForFunction(
+      () => {
+        // Check if page has loaded basic structure
+        const hasBasicStructure = document.body && document.body.children.length > 0;
+
+        // Check for content indicators
+        const hasContent = document.querySelector('main') ||
+                          document.querySelector('.content') ||
+                          document.querySelector('h1') ||
+                          document.body.textContent?.includes('Component') ||
+                          document.body.textContent?.includes('Blueprint');
+
+        return hasBasicStructure && hasContent;
+      },
+      { timeout: 20000, polling: 500 }
+    );
 
     // Take a screenshot of the full component grid
     await expect(page).toHaveScreenshot('component-displaycase-full.png');
@@ -69,13 +79,23 @@ test.describe('Component Showcase Visual Regression', () => {
     // Wait for animations to be disabled and layout to settle
     await page.waitForTimeout(1000);
 
-    // Wait for the page content to be visible (check multiple possible selectors)
-    await page.waitForFunction(() => {
-      return document.querySelector('main') ||
-             document.querySelector('.content') ||
-             document.querySelector('h1') ||
-             document.body.textContent?.includes('Blueprint');
-    }, { timeout: 15000 });
+    // Wait for the page content to be visible with retry logic
+    await page.waitForFunction(
+      () => {
+        // Check if page has loaded basic structure
+        const hasBasicStructure = document.body && document.body.children.length > 0;
+
+        // Check for content indicators
+        const hasContent = document.querySelector('main') ||
+                          document.querySelector('.content') ||
+                          document.querySelector('h1') ||
+                          document.body.textContent?.includes('Component') ||
+                          document.body.textContent?.includes('Blueprint');
+
+        return hasBasicStructure && hasContent;
+      },
+      { timeout: 20000, polling: 500 }
+    );
 
     // Take a screenshot of the blueprints page
     await expect(page).toHaveScreenshot('blueprints-page-full.png', {

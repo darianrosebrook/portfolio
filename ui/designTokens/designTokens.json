@@ -346,6 +346,72 @@
             "$description": "Level 800 of the violet color scale, the darkest violet."
           },
           "$type": "color"
+        },
+        "display": {
+          "foreground": {
+            "primary": {
+              "$type": "color",
+              "$value": "{core.color.mode.dark}"
+            },
+            "secondary": {
+              "$type": "color",
+              "$value": "{core.color.palette.neutral.600}"
+            },
+            "tertiary": {
+              "$type": "color",
+              "$value": "{core.color.palette.neutral.500}"
+            },
+            "disabled": {
+              "$type": "color",
+              "$value": "{core.color.palette.neutral.400}"
+            },
+            "accent": {
+              "$type": "color",
+              "$value": "{core.color.palette.red.500}"
+            },
+            "link": {
+              "default": {
+                "$type": "color",
+                "$value": "{core.color.palette.blue.500}"
+              },
+              "hover": {
+                "$type": "color",
+                "$value": "{core.color.palette.blue.600}"
+              },
+              "visited": {
+                "$type": "color",
+                "$value": "{core.color.palette.blue.700}"
+              }
+            }
+          },
+          "background": {
+            "primary": {
+              "$type": "color",
+              "$value": "{core.color.mode.light}"
+            },
+            "secondary": {
+              "$type": "color",
+              "$value": "{core.color.palette.neutral.100}"
+            },
+            "tertiary": {
+              "$type": "color",
+              "$value": "{core.color.palette.neutral.200}"
+            }
+          },
+          "border": {
+            "subtle": {
+              "$type": "color",
+              "$value": "{core.color.palette.neutral.200}"
+            },
+            "bold": {
+              "$type": "color",
+              "$value": "{core.color.palette.neutral.400}"
+            },
+            "disabled": {
+              "$type": "color",
+              "$value": "{core.color.palette.neutral.200}"
+            }
+          }
         }
       },
       "datavis": {
@@ -1562,15 +1628,15 @@
         "color": {
           "text": {
             "$type": "color",
-            "$value": "{core.color.display.foreground.primary}"
+            "$value": "{core.color.palette.neutral.600}"
           },
           "bg": {
             "$type": "color",
-            "$value": "{core.color.display.background.primary}"
+            "$value": "{core.color.palette.neutral.100}"
           },
           "border": {
             "$type": "color",
-            "$value": "{core.color.display.border.subtle}"
+            "$value": "{core.color.palette.neutral.200}"
           },
           "focus": {
             "$type": "color",
@@ -1581,11 +1647,11 @@
       "test": {
         "dsSemanticColorBgPrimary": {
           "$type": "color",
-          "$value": "{core.color.display.background.primary}"
+          "$value": "{core.color.palette.neutral.100}"
         },
         "customSemanticColorBgPrimary": {
           "$type": "color",
-          "$value": "{core.color.display.background.primary}"
+          "$value": "{core.color.palette.neutral.100}"
         },
         "myCustomBg": {
           "$type": "color",
@@ -2009,220 +2075,20 @@
           }
         }
       },
-      "display": {
-        "background": {
-          "primary": {
-            "$type": "color",
-            "$value": "{core.color.mode.light}",
-            "$extensions": {
-              "design.paths.light": "{core.color.mode.light}",
-              "design.paths.dark": "{core.color.mode.dark}"
-            },
-            "$description": "Primary page background"
-          },
-          "secondary": {
-            "$type": "color",
-            "$value": "{core.color.palette.neutral.100}",
-            "$extensions": {
-              "design.paths.light": "{core.color.palette.neutral.100}",
-              "design.paths.dark": "{core.color.palette.neutral.800}"
-            },
-            "$description": "Secondary background for cards, panels"
-          },
-          "tertiary": {
-            "$type": "color",
-            "$value": "{core.color.palette.neutral.200}",
-            "$extensions": {
-              "design.paths.light": "{core.color.palette.neutral.200}",
-              "design.paths.dark": "{core.color.palette.neutral.700}"
-            },
-            "$description": "Tertiary background for subtle sections"
-          },
-          "elevated": {
-            "$type": "color",
-            "$value": "{core.color.mode.white}",
-            "$description": "Elevated surfaces like modals"
-          },
-          "brand": {
-            "$type": "color",
-            "$value": "{core.color.palette.brand.primary.500}",
-            "$description": "Brand background"
-          },
-          "accent": {
-            "$type": "color",
-            "$value": "{core.color.palette.red.500}",
-            "$description": "Accent background"
-          },
-          "highlight": {
-            "$type": "color",
-            "$value": "{core.color.palette.blue.200}",
-            "$extensions": {
-              "design.paths.light": "{core.color.palette.blue.200}",
-              "design.paths.dark": "{core.color.palette.blue.800}"
-            },
-            "$description": "Highlight background for selections"
-          },
-          "overlay": {
-            "$type": "color",
-            "$value": "rgba(0, 0, 0, 0.5)",
-            "$description": "Overlay background for images"
-          }
-        },
-        "border": {
-          "subtle": {
-            "$type": "color",
-            "$value": "{core.color.palette.neutral.300}",
-            "$description": "Subtle border color"
-          },
-          "strong": {
-            "$type": "color",
-            "$value": "{core.color.palette.neutral.400}",
-            "$description": "Strong border color"
-          },
-          "bold": {
-            "$type": "color",
-            "$value": "{core.color.palette.neutral.600}",
-            "$extensions": {
-              "design.paths.light": "{core.color.palette.neutral.600}",
-              "design.paths.dark": "{core.color.palette.neutral.300}"
-            },
-            "$description": "Bold border color"
-          },
-          "light": {
-            "$type": "color",
-            "$value": "{core.color.palette.neutral.200}",
-            "$extensions": {
-              "design.paths.light": "{core.color.palette.neutral.200}",
-              "design.paths.dark": "{core.color.palette.neutral.700}"
-            },
-            "$description": "Light border color"
-          },
-          "onColor": {
-            "$type": "color",
-            "$value": "{core.color.mode.white}",
-            "$description": "Border on colored backgrounds"
-          },
-          "disabled": {
-            "$type": "color",
-            "$value": "{core.color.palette.neutral.200}",
-            "$extensions": {
-              "design.paths.light": "{core.color.palette.neutral.200}",
-              "design.paths.dark": "{core.color.palette.neutral.700}"
-            },
-            "$description": "Disabled border color"
-          }
-        },
-        "foreground": {
-          "primary": {
-            "$type": "color",
-            "$value": "{core.color.mode.dark}",
-            "$extensions": {
-              "design.paths.light": "{core.color.mode.dark}",
-              "design.paths.dark": "{core.color.mode.light}"
-            },
-            "$description": "Primary text color"
-          },
-          "secondary": {
-            "$type": "color",
-            "$value": "{core.color.palette.neutral.600}",
-            "$extensions": {
-              "design.paths.light": "{core.color.palette.neutral.600}",
-              "design.paths.dark": "{core.color.palette.neutral.300}"
-            },
-            "$description": "Secondary text color"
-          },
-          "tertiary": {
-            "$type": "color",
-            "$value": "{core.color.palette.neutral.500}",
-            "$description": "Tertiary text color"
-          },
-          "inverse": {
-            "$type": "color",
-            "$value": "{core.color.mode.light}",
-            "$extensions": {
-              "design.paths.light": "{core.color.mode.light}",
-              "design.paths.dark": "{core.color.mode.dark}"
-            },
-            "$description": "Inverse text color"
-          },
-          "onBrand": {
-            "$type": "color",
-            "$value": "{core.color.mode.white}",
-            "$description": "Text on brand backgrounds"
-          },
-          "onColor": {
-            "$type": "color",
-            "$value": "{semantic.color.foreground.primary}",
-            "$description": "Text on colored backgrounds"
-          },
-          "accent": {
-            "$type": "color",
-            "$value": "{core.color.palette.red.500}",
-            "$extensions": {
-              "design.paths.light": "{core.color.palette.red.500}",
-              "design.paths.dark": "{core.color.palette.red.400}"
-            },
-            "$description": "Accent text color"
-          },
-          "disabled": {
-            "$type": "color",
-            "$value": "{core.color.palette.neutral.300}",
-            "$extensions": {
-              "design.paths.light": "{core.color.palette.neutral.300}",
-              "design.paths.dark": "{core.color.palette.neutral.600}"
-            },
-            "$description": "Disabled text color"
-          },
-          "placeholder": {
-            "$type": "color",
-            "$value": "{core.color.palette.neutral.400}",
-            "$description": "Placeholder text color"
-          },
-          "link": {
-            "default": {
-              "$type": "color",
-              "$value": "{core.color.palette.red.500}",
-              "$extensions": {
-                "design.paths.light": "{core.color.palette.red.500}",
-                "design.paths.dark": "{core.color.palette.red.400}"
-              },
-              "$description": "Link text color"
-            },
-            "hover": {
-              "$type": "color",
-              "$value": "{core.color.palette.red.600}",
-              "$extensions": {
-                "design.paths.light": "{core.color.palette.red.600}",
-                "design.paths.dark": "{core.color.palette.red.300}"
-              },
-              "$description": "Link hover color"
-            },
-            "visited": {
-              "$type": "color",
-              "$value": "{core.color.palette.red.400}",
-              "$extensions": {
-                "design.paths.light": "{core.color.palette.red.400}",
-                "design.paths.dark": "{core.color.palette.red.500}"
-              },
-              "$description": "Visited link color"
-            }
-          }
-        }
-      },
       "syntax": {
         "plain": {
           "$type": "color",
-          "$value": "{semantic.color.foreground.primary}",
+          "$value": "{core.color.display.foreground.primary}",
           "$extensions": {
-            "design.paths.light": "{semantic.color.foreground.primary}",
-            "design.paths.dark": "{semantic.color.foreground.primary}"
+            "design.paths.light": "{core.color.display.foreground.primary}",
+            "design.paths.dark": "{core.color.display.foreground.primary}"
           },
           "$description": "Plain syntax text"
         },
         "comment": {
           "color": {
             "$type": "color",
-            "$value": "{semantic.color.foreground.tertiary}",
+            "$value": "{core.color.display.foreground.tertiary}",
             "$extensions": {
               "design.paths.light": "{core.color.display.foreground.tertiary}",
               "design.paths.dark": "{core.color.display.foreground.tertiary}"
@@ -3199,124 +3065,6 @@
           }
         }
       },
-      "display": {
-        "padding": {
-          "composite": {
-            "small": {
-              "$type": "composition",
-              "$value": {
-                "paddingTop": "{core.spacing.size.03}",
-                "paddingRight": "{core.spacing.size.04}",
-                "paddingBottom": "{core.spacing.size.03}",
-                "paddingLeft": "{core.spacing.size.04}"
-              },
-              "$description": "Small display padding composite"
-            },
-            "default": {
-              "$type": "composition",
-              "$value": {
-                "paddingTop": "{core.spacing.size.04}",
-                "paddingRight": "{core.spacing.size.06}",
-                "paddingBottom": "{core.spacing.size.04}",
-                "paddingLeft": "{core.spacing.size.06}"
-              },
-              "$description": "Default display padding composite"
-            },
-            "large": {
-              "$type": "composition",
-              "$value": {
-                "paddingTop": "{core.spacing.size.06}",
-                "paddingRight": "{core.spacing.size.08}",
-                "paddingBottom": "{core.spacing.size.06}",
-                "paddingLeft": "{core.spacing.size.08}"
-              },
-              "$description": "Large display padding composite"
-            }
-          },
-          "section": {
-            "vertical": {
-              "$type": "dimension",
-              "$value": "{core.spacing.size.08}",
-              "$description": "Vertical padding for sections"
-            },
-            "horizontal": {
-              "$type": "dimension",
-              "$value": "{core.spacing.size.06}",
-              "$description": "Horizontal padding for sections"
-            }
-          },
-          "card": {
-            "vertical": {
-              "$type": "dimension",
-              "$value": "{core.spacing.size.04}",
-              "$description": "Vertical padding for cards"
-            },
-            "horizontal": {
-              "$type": "dimension",
-              "$value": "{core.spacing.size.04}",
-              "$description": "Horizontal padding for cards"
-            }
-          }
-        },
-        "gap": {
-          "content": {
-            "small": {
-              "$type": "dimension",
-              "$value": "{core.spacing.size.03}",
-              "$description": "Small content gap"
-            },
-            "default": {
-              "$type": "dimension",
-              "$value": "{core.spacing.size.04}",
-              "$description": "Default content gap"
-            },
-            "large": {
-              "$type": "dimension",
-              "$value": "{core.spacing.size.06}",
-              "$description": "Large content gap"
-            }
-          },
-          "section": {
-            "$type": "dimension",
-            "$value": "{core.spacing.size.08}",
-            "$description": "Gap between major sections"
-          },
-          "grid": {
-            "small": {
-              "$type": "dimension",
-              "$value": "{core.spacing.size.03}",
-              "$description": "Small grid gap"
-            },
-            "default": {
-              "$type": "dimension",
-              "$value": "{core.spacing.size.04}",
-              "$description": "Default grid gap"
-            },
-            "large": {
-              "$type": "dimension",
-              "$value": "{core.spacing.size.06}",
-              "$description": "Large grid gap"
-            }
-          }
-        },
-        "radius": {
-          "card": {
-            "$type": "borderRadius",
-            "$value": "{core.shape.radius.03}",
-            "$description": "Card border radius"
-          },
-          "panel": {
-            "$type": "borderRadius",
-            "$value": "{core.shape.radius.04}",
-            "$description": "Panel border radius"
-          },
-          "modal": {
-            "$type": "borderRadius",
-            "$value": "{core.shape.radius.04}",
-            "$description": "Modal border radius"
-          }
-        }
-      },
       "navigation": {
         "padding": {
           "composite": {
@@ -3440,7 +3188,7 @@
         },
         "active": {
           "$type": "color",
-          "$value": "{semantic.color.foreground.primary}"
+          "$value": "{core.color.display.foreground.primary}"
         },
         "disabled": {
           "$type": "color",
@@ -3633,7 +3381,7 @@
           "border": {
             "width": "{semantic.interaction.focus.ringWidth}",
             "style": "solid",
-            "color": "{semantic.color.foreground.accent}"
+            "color": "{core.color.display.foreground.accent}"
           },
           "offset": "{semantic.interaction.focus.ringOffset}",
           "opacity": "{semantic.interaction.focus.ringOpacity}"
@@ -3726,7 +3474,7 @@
         },
         "colorText": {
           "$type": "color",
-          "$value": "{semantic.color.foreground.primary}"
+          "$value": "{core.color.display.foreground.primary}"
         },
         "colorBg": {
           "$type": "color",

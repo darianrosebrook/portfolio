@@ -1,0 +1,37 @@
+{
+  "name": "Chip",
+  "layer": "primitive",
+  "anatomy": ["root", "text", "icon"],
+  "variants": {
+    "variant": ["default", "selected", "dismissible"],
+    "size": ["small", "medium", "large"]
+  },
+  "states": ["default", "hover", "focus", "active", "disabled"],
+  "slots": {},
+  "a11y": {
+    "role": "button",
+    "labeling": ["aria-label", "aria-labelledby"],
+    "keyboard": [
+      {
+        "key": "Enter|Space",
+        "when": "root",
+        "then": "activate"
+      }
+    ],
+    "apgPattern": "button"
+  },
+  "tokens": {
+    "root": [
+      "chip.color.background.default",
+      "chip.color.foreground.default",
+      "chip.size.padding.default",
+      "chip.size.radius.default"
+    ]
+  },
+  "ssr": {
+    "hydrateOn": "none"
+  },
+  "rtl": {
+    "flipIcon": false
+  }
+}

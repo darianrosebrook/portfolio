@@ -8,7 +8,7 @@ import url from 'url';
 
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const projectRoot = path.resolve(__dirname, '..', '..');
+const projectRoot = path.resolve(__dirname, '..', '..', '..');
 
 const COMPONENTS_DIR = path.join(projectRoot, 'ui');
 const SYSTEM_TOKENS_PATH = path.join(COMPONENTS_DIR, 'designTokens.json');

@@ -1,0 +1,96 @@
+{
+  "$schema": "../../../ui/designTokens/designTokens.schema.json",
+  "prefix": "chip",
+  "tokens": {
+    "color": {
+      "background": {
+        "default": "{color.action.background.secondary.default}",
+        "hover": "{color.action.background.secondary.hover}",
+        "active": "{color.action.background.secondary.active}",
+        "focus": "{color.mode.white}",
+        "selected": "{color.action.background.primary.default}",
+        "selectedHover": "{color.action.background.primary.hover}",
+        "selectedActive": "{color.action.background.primary.active}",
+        "dismissible": "{color.action.background.secondary.default}",
+        "dismissibleHover": "{color.action.background.secondary.hover}",
+        "dismissibleActive": "{color.action.background.secondary.active}"
+      },
+      "foreground": {
+        "default": "{color.action.foreground.secondary.default}",
+        "hover": "{color.action.foreground.secondary.default}",
+        "active": "{color.action.foreground.secondary.default}",
+        "focus": "{color.action.foreground.primary.default}",
+        "selected": "{color.action.foreground.primary.default}",
+        "selectedHover": "{color.action.foreground.primary.default}",
+        "selectedActive": "{color.action.foreground.primary.default}",
+        "dismissible": "{color.action.foreground.secondary.default}",
+        "dismissibleHover": "{color.action.foreground.secondary.default}",
+        "dismissibleActive": "{color.action.foreground.secondary.default}"
+      },
+      "border": {
+        "default": "{color.action.border.secondary.default}",
+        "hover": "{color.action.border.secondary.hover}",
+        "active": "{color.action.border.secondary.default}",
+        "focus": "{color.action.border.primary.focus}",
+        "selected": "{color.action.border.primary.default}",
+        "selectedHover": "{color.action.border.primary.default}",
+        "selectedActive": "{color.action.border.primary.default}",
+        "dismissible": "{color.action.border.secondary.default}",
+        "dismissibleHover": "{color.action.border.secondary.hover}",
+        "dismissibleActive": "{color.action.border.secondary.default}"
+      },
+      "icon": {
+        "default": "{color.action.foreground.secondary.default}",
+        "hover": "{color.action.foreground.secondary.default}",
+        "active": "{color.action.foreground.secondary.default}",
+        "selected": "{color.action.foreground.primary.default}",
+        "dismissible": "{color.action.foreground.secondary.default}",
+        "dismissibleHover": "{color.action.foreground.secondary.default}"
+      }
+    },
+
+    "size": {
+      "padding": {
+        "horizontal": "{spacing.size.04}",
+        "vertical": "{spacing.size.02}"
+      },
+      "gap": "{spacing.size.02}",
+      "radius": "{shape.radius.full}",
+      "border": "{shape.border.width.hairline}",
+      "icon": {
+        "size": "{spacing.size.04}",
+        "margin": "{spacing.size.01}"
+      }
+    },
+
+    "text": {
+      "size": "{typography.body.04}",
+      "weight": "{typography.fontWeight.medium}",
+      "lineHeight": "{typography.lineHeight.tight}"
+    },
+
+    "motion": {
+      "duration": {
+        "fast": "{motion.duration.short}",
+        "medium": "{motion.duration.medium}",
+        "slow": "{motion.duration.long}"
+      },
+      "easing": {
+        "standard": "{motion.easing.standard}",
+        "in": "{motion.easing.in}",
+        "out": "{motion.easing.out}"
+      },
+      "scale": {
+        "pressed": 0.98,
+        "iconEnter": 0.8,
+        "iconExit": 0.8
+      }
+    },
+
+    "focus": {
+      "outlineWidth": "{shape.border.width.thick}",
+      "outlineOffset": "{spacing.size.02}",
+      "outlineColor": "{color.action.border.primary.focus}"
+    }
+  }
+}
