@@ -283,6 +283,30 @@
           "$value": "#3b0c3a",
           "$description": "Level 800 of the violet color scale, the darkest violet."
         }
+      },
+      "display": {
+        "foreground": {
+          "primary": { "$type": "color", "$value": "{color.mode.dark}" },
+          "secondary": { "$type": "color", "$value": "{color.palette.neutral.600}" },
+          "tertiary": { "$type": "color", "$value": "{color.palette.neutral.500}" },
+          "disabled": { "$type": "color", "$value": "{color.palette.neutral.400}" },
+          "accent": { "$type": "color", "$value": "{color.palette.red.500}" },
+          "link": {
+            "default": { "$type": "color", "$value": "{color.palette.blue.500}" },
+            "hover": { "$type": "color", "$value": "{color.palette.blue.600}" },
+            "visited": { "$type": "color", "$value": "{color.palette.blue.700}" }
+          }
+        },
+        "background": {
+          "primary": { "$type": "color", "$value": "{color.mode.light}" },
+          "secondary": { "$type": "color", "$value": "{color.palette.neutral.100}" },
+          "tertiary": { "$type": "color", "$value": "{color.palette.neutral.200}" }
+        },
+        "border": {
+          "subtle": { "$type": "color", "$value": "{color.palette.neutral.200}" },
+          "bold": { "$type": "color", "$value": "{color.palette.neutral.400}" },
+          "disabled": { "$type": "color", "$value": "{color.palette.neutral.200}" }
+        }
       }
     },
     "datavis": {
@@ -1157,15 +1181,15 @@
       "color": {
         "text": {
           "$type": "color",
-          "$value": "{color.display.foreground.primary}"
+          "$value": "{color.palette.neutral.600}"
         },
         "bg": {
           "$type": "color",
-          "$value": "{color.display.background.primary}"
+          "$value": "{color.palette.neutral.100}"
         },
         "border": {
           "$type": "color",
-          "$value": "{color.display.border.subtle}"
+          "$value": "{color.palette.neutral.200}"
         },
         "focus": { "$type": "color", "$value": "{color.palette.red.500}" }
       }
@@ -1173,11 +1197,11 @@
     "test": {
       "dsSemanticColorBgPrimary": {
         "$type": "color",
-        "$value": "{color.display.background.primary}"
+        "$value": "{color.palette.neutral.100}"
       },
       "customSemanticColorBgPrimary": {
         "$type": "color",
-        "$value": "{color.display.background.primary}"
+        "$value": "{color.palette.neutral.100}"
       },
       "myCustomBg": { "$type": "color", "$value": "#007bff" },
       "path": { "$type": "string", "$value": "test-path" },

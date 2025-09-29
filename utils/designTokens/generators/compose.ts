@@ -52,7 +52,7 @@ function transformReferences(
 function createTokenPrefixer(): (path: string) => string {
   // Patterns that indicate semantic tokens
   const semanticPatterns = [
-    /^color\.(foreground|background|border|status|data|overlay|gradient)/,
+    /^color\.(action|feedback|navigation|syntax|data)/,
     /^typography\.(semanticFamily|body|button|caption|fontWeight|heading|letterSpacing|lineHeight|oversize|meta)/,
     /^spacing\.(padding|gap)/,
     /^elevation\.(default|surface)/,
