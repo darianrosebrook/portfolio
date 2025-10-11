@@ -1,0 +1,20 @@
+{
+  "$schema": "../designTokens.schema.json",
+  "skeleton": {
+    "background": {
+      "$type": "color",
+      "$value": "{color.palette.neutral.100}",
+      "$description": "Skeleton loading background"
+    },
+    "foreground": {
+      "$type": "color",
+      "$value": "{color.palette.neutral.200}",
+      "$description": "Skeleton loading shimmer"
+    },
+    "shineDuration": {
+      "$type": "duration",
+      "$value": "{motion.duration.medium3}",
+      "$description": "Duration of skeleton shine animation"
+    }
+  }
+}

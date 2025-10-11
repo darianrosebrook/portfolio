@@ -1,0 +1,760 @@
+{
+  "$schema": "../designTokens.schema.json",
+  "color": {
+    "mode": {
+      "black": {
+        "$type": "color",
+        "$value": "#000000"
+      },
+      "white": {
+        "$type": "color",
+        "$value": "#FFFFFF"
+      },
+      "light": {
+        "$type": "color",
+        "$value": "#FAFAFA"
+      },
+      "dark": {
+        "$type": "color",
+        "$value": "#141414"
+      },
+      "transparent": {
+        "$type": "color",
+        "$value": "rgba(0,0,0,0)"
+      }
+    },
+    "palette": {
+      "$type": "color",
+      "brand": {
+        "$type": "color",
+        "primary": {
+          "100": {
+            "$type": "color",
+            "$value": "#D9F3FE"
+          },
+          "200": {
+            "$type": "color",
+            "$value": "#8AD9FC"
+          },
+          "300": {
+            "$type": "color",
+            "$value": "#2EB9F9"
+          },
+          "400": {
+            "$type": "color",
+            "$value": "#1D91FB"
+          },
+          "500": {
+            "$type": "color",
+            "$value": "#0A65FE"
+          },
+          "600": {
+            "$type": "color",
+            "$value": "#0042DC"
+          },
+          "700": {
+            "$type": "color",
+            "$value": "#002D99"
+          },
+          "800": {
+            "$type": "color",
+            "$value": "#001B5A"
+          }
+        }
+      },
+      "neutral": {
+        "100": {
+          "$value": "#efefef",
+          "$description": "Level 100 of the neutral color scale, a very light shade.",
+          "$type": "color"
+        },
+        "200": {
+          "$value": "#cecece",
+          "$description": "Level 200 of the neutral color scale, a light shade.",
+          "$type": "color"
+        },
+        "300": {
+          "$value": "#aeaeae",
+          "$description": "Level 300 of the neutral color scale, a medium-light shade.",
+          "$type": "color"
+        },
+        "400": {
+          "$value": "#8f8f8f",
+          "$description": "Level 400 of the neutral color scale, a medium shade.",
+          "$type": "color"
+        },
+        "500": {
+          "$value": "#717171",
+          "$description": "Level 500 of the neutral color scale, a medium-dark shade.",
+          "$type": "color"
+        },
+        "600": {
+          "$value": "#555555",
+          "$description": "Level 600 of the neutral color scale, a dark shade.",
+          "$type": "color"
+        },
+        "700": {
+          "$value": "#3a3a3a",
+          "$description": "Level 700 of the neutral color scale, a very dark shade.",
+          "$type": "color"
+        },
+        "800": {
+          "$value": "#212121",
+          "$description": "Level 800 of the neutral color scale, the darkest shade.",
+          "$type": "color"
+        },
+        "$type": "color"
+      },
+      "red": {
+        "100": {
+          "$value": "#fceaea",
+          "$description": "Level 100 of the red color scale, a very light red.",
+          "$type": "color"
+        },
+        "200": {
+          "$value": "#f7c1c2",
+          "$description": "Level 200 of the red color scale, a light red.",
+          "$type": "color"
+        },
+        "300": {
+          "$value": "#f29495",
+          "$description": "Level 300 of the red color scale, a medium-light red.",
+          "$type": "color"
+        },
+        "400": {
+          "$value": "#ea6465",
+          "$description": "Level 400 of the red color scale, a medium red.",
+          "$type": "color"
+        },
+        "500": {
+          "$value": "#d9292b",
+          "$description": "Level 500 of the red color scale, a medium-dark red.",
+          "$type": "color"
+        },
+        "600": {
+          "$value": "#ae0001",
+          "$description": "Level 600 of the red color scale, a dark red.",
+          "$type": "color"
+        },
+        "700": {
+          "$value": "#7b0000",
+          "$description": "Level 700 of the red color scale, a very dark red.",
+          "$type": "color"
+        },
+        "800": {
+          "$value": "#4b0000",
+          "$description": "Level 800 of the red color scale, the darkest red.",
+          "$type": "color"
+        },
+        "$type": "color"
+      },
+      "orange": {
+        "100": {
+          "$value": "#ffedcc",
+          "$description": "Level 100 of the orange color scale, a very light orange.",
+          "$type": "color"
+        },
+        "200": {
+          "$value": "#ffc458",
+          "$description": "Level 200 of the orange color scale, a light orange.",
+          "$type": "color"
+        },
+        "300": {
+          "$value": "#fe9400",
+          "$description": "Level 300 of the orange color scale, a medium-light orange.",
+          "$type": "color"
+        },
+        "400": {
+          "$value": "#d77600",
+          "$description": "Level 400 of the orange color scale, a medium orange.",
+          "$type": "color"
+        },
+        "500": {
+          "$value": "#ac5c00",
+          "$description": "Level 500 of the orange color scale, a medium-dark orange.",
+          "$type": "color"
+        },
+        "600": {
+          "$value": "#824500",
+          "$description": "Level 600 of the orange color scale, a dark orange.",
+          "$type": "color"
+        },
+        "700": {
+          "$value": "#593000",
+          "$description": "Level 700 of the orange color scale, a very dark orange.",
+          "$type": "color"
+        },
+        "800": {
+          "$value": "#331b00",
+          "$description": "Level 800 of the orange color scale, the darkest orange.",
+          "$type": "color"
+        },
+        "$type": "color"
+      },
+      "yellow": {
+        "100": {
+          "$value": "#FFF8CC",
+          "$description": "very light yellow",
+          "$type": "color"
+        },
+        "200": {
+          "$value": "#FFE680",
+          "$description": "light yellow",
+          "$type": "color"
+        },
+        "300": {
+          "$value": "#FFCE33",
+          "$description": "medium-light yellow",
+          "$type": "color"
+        },
+        "400": {
+          "$value": "#FFB300",
+          "$description": "medium yellow",
+          "$type": "color"
+        },
+        "500": {
+          "$value": "#DA9A00",
+          "$description": "medium-dark yellow",
+          "$type": "color"
+        },
+        "600": {
+          "$value": "#A97A00",
+          "$description": "dark yellow",
+          "$type": "color"
+        },
+        "700": {
+          "$value": "#7A5A00",
+          "$description": "very dark yellow",
+          "$type": "color"
+        },
+        "800": {
+          "$value": "#4D3A00",
+          "$description": "darkest yellow",
+          "$type": "color"
+        },
+        "$type": "color"
+      },
+      "green": {
+        "100": {
+          "$value": "#e4f2e0",
+          "$description": "Level 100 of the green color scale, a very light green.",
+          "$type": "color"
+        },
+        "200": {
+          "$value": "#b0daa4",
+          "$description": "Level 200 of the green color scale, a light green.",
+          "$type": "color"
+        },
+        "300": {
+          "$value": "#79bf65",
+          "$description": "Level 300 of the green color scale, a medium-light green.",
+          "$type": "color"
+        },
+        "400": {
+          "$value": "#609e41",
+          "$description": "Level 400 of the green color scale, a medium green.",
+          "$type": "color"
+        },
+        "500": {
+          "$value": "#487e1e",
+          "$description": "Level 500 of the green color scale, a medium-dark green.",
+          "$type": "color"
+        },
+        "600": {
+          "$value": "#336006",
+          "$description": "Level 600 of the green color scale, a dark green.",
+          "$type": "color"
+        },
+        "700": {
+          "$value": "#234104",
+          "$description": "Level 700 of the green color scale, a very dark green.",
+          "$type": "color"
+        },
+        "800": {
+          "$value": "#142502",
+          "$description": "Level 800 of the green color scale, the darkest green.",
+          "$type": "color"
+        },
+        "$type": "color"
+      },
+      "blue": {
+        "100": {
+          "$value": "#d9f3fe",
+          "$description": "Level 100 of the blue color scale, a very light blue.",
+          "$type": "color"
+        },
+        "200": {
+          "$value": "#8ad9fc",
+          "$description": "Level 200 of the blue color scale, a light blue.",
+          "$type": "color"
+        },
+        "300": {
+          "$value": "#2eb9f9",
+          "$description": "Level 300 of the blue color scale, a medium-light blue.",
+          "$type": "color"
+        },
+        "400": {
+          "$value": "#1d91fb",
+          "$description": "Level 400 of the blue color scale, a medium blue.",
+          "$type": "color"
+        },
+        "500": {
+          "$value": "#0a65fe",
+          "$description": "Level 500 of the blue color scale, a medium-dark blue.",
+          "$type": "color"
+        },
+        "600": {
+          "$value": "#0042dc",
+          "$description": "Level 600 of the blue color scale, a dark blue.",
+          "$type": "color"
+        },
+        "700": {
+          "$value": "#002d99",
+          "$description": "Level 700 of the blue color scale, a very dark blue.",
+          "$type": "color"
+        },
+        "800": {
+          "$value": "#001b5a",
+          "$description": "Level 800 of the blue color scale, the darkest blue.",
+          "$type": "color"
+        },
+        "$type": "color"
+      },
+      "teal": {
+        "100": {
+          "$value": "#caf8f7",
+          "$description": "Level 100 of the teal color scale, a very light teal.",
+          "$type": "color"
+        },
+        "200": {
+          "$value": "#18dbdb",
+          "$description": "Level 200 of the teal color scale, a light teal.",
+          "$type": "color"
+        },
+        "300": {
+          "$value": "#22b4b4",
+          "$description": "Level 300 of the teal color scale, a medium-light teal.",
+          "$type": "color"
+        },
+        "400": {
+          "$value": "#258f8e",
+          "$description": "Level 400 of the teal color scale, a medium teal.",
+          "$type": "color"
+        },
+        "500": {
+          "$value": "#236f6f",
+          "$description": "Level 500 of the teal color scale, a medium-dark teal.",
+          "$type": "color"
+        },
+        "600": {
+          "$value": "#205353",
+          "$description": "Level 600 of the teal color scale, a dark teal.",
+          "$type": "color"
+        },
+        "700": {
+          "$value": "#1a3a3a",
+          "$description": "Level 700 of the teal color scale, a very dark teal.",
+          "$type": "color"
+        },
+        "800": {
+          "$value": "#121d1d",
+          "$description": "Level 800 of the teal color scale, the darkest teal.",
+          "$type": "color"
+        },
+        "$type": "color"
+      },
+      "violet": {
+        "100": {
+          "$value": "#ffe9fe",
+          "$description": "Level 100 of the violet color scale, a very light violet.",
+          "$type": "color"
+        },
+        "200": {
+          "$value": "#ffb5fc",
+          "$description": "Level 200 of the violet color scale, a light violet.",
+          "$type": "color"
+        },
+        "300": {
+          "$value": "#ff7bfa",
+          "$description": "Level 300 of the violet color scale, a medium-light violet.",
+          "$type": "color"
+        },
+        "400": {
+          "$value": "#f431ed",
+          "$description": "Level 400 of the violet color scale, a medium violet.",
+          "$type": "color"
+        },
+        "500": {
+          "$value": "#c127bc",
+          "$description": "Level 500 of the violet color scale, a medium-dark violet.",
+          "$type": "color"
+        },
+        "600": {
+          "$value": "#931d8f",
+          "$description": "Level 600 of the violet color scale, a dark violet.",
+          "$type": "color"
+        },
+        "700": {
+          "$value": "#661463",
+          "$description": "Level 700 of the violet color scale, a very dark violet.",
+          "$type": "color"
+        },
+        "800": {
+          "$value": "#3b0c3a",
+          "$description": "Level 800 of the violet color scale, the darkest violet.",
+          "$type": "color"
+        },
+        "$type": "color"
+      }
+    },
+    "datavis": {
+      "viridis": {
+        "1": {
+          "$type": "color",
+          "$value": "#440154",
+          "$description": "Viridis scale step 1 - darkest purple"
+        },
+        "2": {
+          "$type": "color",
+          "$value": "#482777",
+          "$description": "Viridis scale step 2 - dark purple"
+        },
+        "3": {
+          "$type": "color",
+          "$value": "#3F4A8A",
+          "$description": "Viridis scale step 3 - purple-blue"
+        },
+        "4": {
+          "$type": "color",
+          "$value": "#31678E",
+          "$description": "Viridis scale step 4 - blue"
+        },
+        "5": {
+          "$type": "color",
+          "$value": "#26838F",
+          "$description": "Viridis scale step 5 - teal-blue"
+        },
+        "6": {
+          "$type": "color",
+          "$value": "#1F9D8A",
+          "$description": "Viridis scale step 6 - teal"
+        },
+        "7": {
+          "$type": "color",
+          "$value": "#6CCE5A",
+          "$description": "Viridis scale step 7 - green"
+        },
+        "8": {
+          "$type": "color",
+          "$value": "#B6DE2B",
+          "$description": "Viridis scale step 8 - yellow-green"
+        },
+        "9": {
+          "$type": "color",
+          "$value": "#FEE825",
+          "$description": "Viridis scale step 9 - yellow"
+        },
+        "10": {
+          "$type": "color",
+          "$value": "#FFEA46",
+          "$description": "Viridis scale step 10 - bright yellow"
+        }
+      },
+      "magma": {
+        "1": {
+          "$type": "color",
+          "$value": "#000004",
+          "$description": "Magma scale step 1 - black"
+        },
+        "2": {
+          "$type": "color",
+          "$value": "#1B0C42",
+          "$description": "Magma scale step 2 - dark purple"
+        },
+        "3": {
+          "$type": "color",
+          "$value": "#4B0C6B",
+          "$description": "Magma scale step 3 - purple"
+        },
+        "4": {
+          "$type": "color",
+          "$value": "#781C6D",
+          "$description": "Magma scale step 4 - magenta-purple"
+        },
+        "5": {
+          "$type": "color",
+          "$value": "#A52C60",
+          "$description": "Magma scale step 5 - magenta"
+        },
+        "6": {
+          "$type": "color",
+          "$value": "#CF4446",
+          "$description": "Magma scale step 6 - red"
+        },
+        "7": {
+          "$type": "color",
+          "$value": "#ED6925",
+          "$description": "Magma scale step 7 - orange-red"
+        },
+        "8": {
+          "$type": "color",
+          "$value": "#FB9A06",
+          "$description": "Magma scale step 8 - orange"
+        },
+        "9": {
+          "$type": "color",
+          "$value": "#F7D03C",
+          "$description": "Magma scale step 9 - yellow-orange"
+        },
+        "10": {
+          "$type": "color",
+          "$value": "#FCFFA4",
+          "$description": "Magma scale step 10 - light yellow"
+        }
+      },
+      "plasma": {
+        "1": {
+          "$type": "color",
+          "$value": "#0D0887",
+          "$description": "Plasma scale step 1 - dark blue"
+        },
+        "2": {
+          "$type": "color",
+          "$value": "#46039F",
+          "$description": "Plasma scale step 2 - purple-blue"
+        },
+        "3": {
+          "$type": "color",
+          "$value": "#7201A8",
+          "$description": "Plasma scale step 3 - purple"
+        },
+        "4": {
+          "$type": "color",
+          "$value": "#9C179E",
+          "$description": "Plasma scale step 4 - magenta-purple"
+        },
+        "5": {
+          "$type": "color",
+          "$value": "#BD3786",
+          "$description": "Plasma scale step 5 - magenta"
+        },
+        "6": {
+          "$type": "color",
+          "$value": "#D8576B",
+          "$description": "Plasma scale step 6 - pink-red"
+        },
+        "7": {
+          "$type": "color",
+          "$value": "#ED7953",
+          "$description": "Plasma scale step 7 - orange-red"
+        },
+        "8": {
+          "$type": "color",
+          "$value": "#FB9F3A",
+          "$description": "Plasma scale step 8 - orange"
+        },
+        "9": {
+          "$type": "color",
+          "$value": "#FDCA26",
+          "$description": "Plasma scale step 9 - yellow"
+        },
+        "10": {
+          "$type": "color",
+          "$value": "#F0F921",
+          "$description": "Plasma scale step 10 - bright yellow"
+        }
+      },
+      "inferno": {
+        "1": {
+          "$type": "color",
+          "$value": "#000004",
+          "$description": "Inferno scale step 1 - black"
+        },
+        "2": {
+          "$type": "color",
+          "$value": "#1B0C42",
+          "$description": "Inferno scale step 2 - dark purple"
+        },
+        "3": {
+          "$type": "color",
+          "$value": "#4A0C6B",
+          "$description": "Inferno scale step 3 - purple"
+        },
+        "4": {
+          "$type": "color",
+          "$value": "#781C6D",
+          "$description": "Inferno scale step 4 - magenta-purple"
+        },
+        "5": {
+          "$type": "color",
+          "$value": "#A52C60",
+          "$description": "Inferno scale step 5 - magenta"
+        },
+        "6": {
+          "$type": "color",
+          "$value": "#CF4446",
+          "$description": "Inferno scale step 6 - red"
+        },
+        "7": {
+          "$type": "color",
+          "$value": "#ED6925",
+          "$description": "Inferno scale step 7 - orange-red"
+        },
+        "8": {
+          "$type": "color",
+          "$value": "#FB9906",
+          "$description": "Inferno scale step 8 - orange"
+        },
+        "9": {
+          "$type": "color",
+          "$value": "#F7D03C",
+          "$description": "Inferno scale step 9 - yellow"
+        },
+        "10": {
+          "$type": "color",
+          "$value": "#FCFFA4",
+          "$description": "Inferno scale step 10 - light yellow"
+        }
+      },
+      "cividis": {
+        "1": {
+          "$type": "color",
+          "$value": "#00224E",
+          "$description": "Cividis scale step 1 - dark blue (colorblind-optimized)"
+        },
+        "2": {
+          "$type": "color",
+          "$value": "#123570",
+          "$description": "Cividis scale step 2 - blue"
+        },
+        "3": {
+          "$type": "color",
+          "$value": "#3B496C",
+          "$description": "Cividis scale step 3 - blue-gray"
+        },
+        "4": {
+          "$type": "color",
+          "$value": "#575D6D",
+          "$description": "Cividis scale step 4 - gray-blue"
+        },
+        "5": {
+          "$type": "color",
+          "$value": "#707173",
+          "$description": "Cividis scale step 5 - gray"
+        },
+        "6": {
+          "$type": "color",
+          "$value": "#8A8678",
+          "$description": "Cividis scale step 6 - brown-gray"
+        },
+        "7": {
+          "$type": "color",
+          "$value": "#A59C74",
+          "$description": "Cividis scale step 7 - brown"
+        },
+        "8": {
+          "$type": "color",
+          "$value": "#C3B369",
+          "$description": "Cividis scale step 8 - olive"
+        },
+        "9": {
+          "$type": "color",
+          "$value": "#E1CC55",
+          "$description": "Cividis scale step 9 - yellow-olive"
+        },
+        "10": {
+          "$type": "color",
+          "$value": "#FFEA46",
+          "$description": "Cividis scale step 10 - yellow"
+        }
+      },
+      "categorical": {
+        "1": {
+          "$type": "color",
+          "$value": "#440154",
+          "$description": "Categorical color 1 - viridis purple"
+        },
+        "2": {
+          "$type": "color",
+          "$value": "#31678E",
+          "$description": "Categorical color 2 - viridis blue"
+        },
+        "3": {
+          "$type": "color",
+          "$value": "#26838F",
+          "$description": "Categorical color 3 - viridis teal"
+        },
+        "4": {
+          "$type": "color",
+          "$value": "#6CCE5A",
+          "$description": "Categorical color 4 - viridis green"
+        },
+        "5": {
+          "$type": "color",
+          "$value": "#FEE825",
+          "$description": "Categorical color 5 - viridis yellow"
+        },
+        "6": {
+          "$type": "color",
+          "$value": "#CF4446",
+          "$description": "Categorical color 6 - magma red"
+        },
+        "7": {
+          "$type": "color",
+          "$value": "#9C179E",
+          "$description": "Categorical color 7 - plasma magenta"
+        },
+        "8": {
+          "$type": "color",
+          "$value": "#FB9906",
+          "$description": "Categorical color 8 - inferno orange"
+        }
+      },
+      "divergent": {
+        "neg": {
+          "$type": "color",
+          "$value": "#440154",
+          "$description": "Divergent negative - viridis dark purple"
+        },
+        "neu": {
+          "$type": "color",
+          "$value": "#26838F",
+          "$description": "Divergent neutral - viridis teal"
+        },
+        "pos": {
+          "$type": "color",
+          "$value": "#FEE825",
+          "$description": "Divergent positive - viridis yellow"
+        }
+      }
+    },
+    "gradient": {
+      "brandPrimary": {
+        "$type": "gradient",
+        "$value": "{color.palette.brand.primary.400}"
+      }
+    },
+    "overlay": {
+      "scrim": {
+        "$type": "color",
+        "$value": "rgba(0,0,0,0.40)"
+      }
+    },
+    "opacity": {
+      "50": {
+        "$type": "number",
+        "$value": 0.5
+      }
+    },
+    "selection": {
+      "background": {
+        "$type": "color",
+        "$value": "{color.palette.blue.200}"
+      },
+      "foreground": {
+        "$type": "color",
+        "$value": "{color.mode.dark}"
+      }
+    }
+  }
+}

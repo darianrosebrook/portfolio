@@ -1,0 +1,27 @@
+{
+  "$schema": "../designTokens.schema.json",
+  "focus": {
+    "ring": {
+      "$description": "Focus ring styling for accessibility and interactive elements.",
+      "$type": "composition",
+      "$value": {
+        "border": {
+          "width": "{interaction.focus.ringWidth}",
+          "style": "solid",
+          "color": "{color.palette.red.500}"
+        },
+        "offset": "{interaction.focus.ringOffset}",
+        "opacity": "{interaction.focus.ringOpacity}"
+      }
+    },
+    "ringOffset": {
+      "$type": "dimension",
+      "$value": "{spacing.size.02}",
+      "$extensions": {
+        "design.paths.light": "{spacing.size.02}",
+        "design.paths.dark": "{spacing.size.02}"
+      },
+      "$description": "Focus ring offset distance"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "../designTokens.schema.json",
+  "elevation": {
+    "default": {
+      "$type": "shadow",
+      "$value": "{elevation.level.1}"
+    },
+    "depth": {
+      "$type": "number",
+      "$value": "{elevation.depth.0}"
+    },
+    "surface": {
+      "raised": {
+        "$type": "shadow",
+        "$value": "{elevation.level.1}"
+      },
+      "floating": {
+        "$type": "shadow",
+        "$value": "{elevation.level.2}"
+      }
+    }
+  }
+}

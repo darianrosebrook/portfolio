@@ -1,0 +1,32 @@
+{
+  "$schema": "../designTokens.schema.json",
+  "overlay": {
+    "scrimWeak": {
+      "$type": "color",
+      "$value": "rgba(0,0,0,0.24)",
+      "$extensions": {
+        "design.paths.light": "rgba(0,0,0,0.24)",
+        "design.paths.dark": "rgba(0,0,0,0.40)"
+      },
+      "$description": "Weak overlay scrim"
+    },
+    "scrimMedium": {
+      "$type": "color",
+      "$value": "rgba(0,0,0,0.40)",
+      "$extensions": {
+        "design.paths.light": "rgba(0,0,0,0.40)",
+        "design.paths.dark": "rgba(0,0,0,0.60)"
+      },
+      "$description": "Medium overlay scrim"
+    },
+    "scrimStrong": {
+      "$type": "color",
+      "$value": "rgba(0,0,0,0.64)",
+      "$extensions": {
+        "design.paths.light": "rgba(0,0,0,0.64)",
+        "design.paths.dark": "rgba(0,0,0,0.80)"
+      },
+      "$description": "Strong overlay scrim"
+    }
+  }
+}

@@ -224,7 +224,10 @@ const Popover: React.FC<PopoverProps> & {
 };
 
 const Trigger = forwardRef<HTMLElement, TriggerProps>(
-  ({ children, className, as: Component = 'div', onClick }, forwardedRef) => {
+  (
+    { children, className, as: Component = 'button', onClick },
+    forwardedRef
+  ) => {
     const context = useContext(PopoverContext);
 
     if (!context) {
@@ -260,6 +263,8 @@ const Trigger = forwardRef<HTMLElement, TriggerProps>(
       if (triggerStrategy === 'hover') setIsOpen(false);
     };
 
+    const isNonButtonElement = Component !== 'button';
+
     return (
       <Component
         ref={handleRefs}
@@ -267,7 +272,9 @@ const Trigger = forwardRef<HTMLElement, TriggerProps>(
         onClick={handleClick}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        aria-haspopup="dialog"
+        role={isNonButtonElement ? 'button' : undefined}
+        tabIndex={isNonButtonElement ? 0 : undefined}
+        aria-haspopup="true"
         aria-expanded={isOpen}
       >
         {children}

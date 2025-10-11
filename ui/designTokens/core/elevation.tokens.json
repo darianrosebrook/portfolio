@@ -1,0 +1,64 @@
+{
+  "$schema": "../designTokens.schema.json",
+  "elevation": {
+    "level": {
+      "1": {
+        "$type": "shadow",
+        "$value": "0px 1px 3px rgba(0,0,0,0.12), 0px 1px 2px rgba(0,0,0,0.08)"
+      },
+      "2": {
+        "$type": "shadow",
+        "$value": "0px 3px 6px rgba(0,0,0,0.14), 0px 2px 4px rgba(0,0,0,0.10)"
+      }
+    },
+    "offset": {
+      "y1": {
+        "$type": "dimension",
+        "$value": "1px"
+      },
+      "y2": {
+        "$type": "dimension",
+        "$value": "3px"
+      }
+    },
+    "blur": {
+      "sm": {
+        "$type": "dimension",
+        "$value": "3px"
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": "6px"
+      }
+    },
+    "spread": {
+      "none": {
+        "$type": "dimension",
+        "$value": "0px"
+      }
+    },
+    "depth": {
+      "0": {
+        "$type": "number",
+        "$value": 0
+      },
+      "1": {
+        "$value": 8,
+        "$type": "number"
+      },
+      "2": {
+        "$value": 16,
+        "$type": "number"
+      },
+      "3": {
+        "$value": 32,
+        "$type": "number"
+      },
+      "4": {
+        "$value": 64,
+        "$type": "number"
+      },
+      "$type": "number"
+    }
+  }
+}

@@ -3,20 +3,40 @@
  */
 @mixin vars {
   /* === Color Tokens === */
-  --toggleSwitch-color-background-default: var(--semantic-color-background-secondary);
-  --toggleSwitch-color-background-hover: var(--semantic-interaction-background-hover);
-  --toggleSwitch-color-background-active: var(--semantic-interaction-background-active);
-  --toggleSwitch-color-background-checked: var(--semantic-color-action-background-default);
-  --toggleSwitch-color-background-checkedHover: var(--semantic-interaction-background-hover);
-  --toggleSwitch-color-background-disabled: var(--semantic-color-background-disabled);
-  --toggleSwitch-color-foreground-default: var(--semantic-color-foreground-primary);
+  --toggleSwitch-color-background-default: var(
+    --semantic-color-background-secondary
+  );
+  --toggleSwitch-color-background-hover: var(
+    --semantic-interaction-background-hover
+  );
+  --toggleSwitch-color-background-active: var(
+    --semantic-interaction-background-active
+  );
+  --toggleSwitch-color-background-checked: var(
+    --semantic-color-action-background-default
+  );
+  --toggleSwitch-color-background-checkedHover: var(
+    --semantic-interaction-background-hover
+  );
+  --toggleSwitch-color-background-disabled: var(
+    --semantic-color-background-disabled
+  );
+  --toggleSwitch-color-foreground-default: var(
+    --semantic-color-foreground-primary
+  );
   --toggleSwitch-color-foreground-hover: var(--semantic-interaction-text-hover);
-  --toggleSwitch-color-foreground-active: var(--semantic-interaction-text-active);
-  --toggleSwitch-color-foreground-disabled: var(--semantic-color-foreground-disabled);
+  --toggleSwitch-color-foreground-active: var(
+    --semantic-interaction-text-active
+  );
+  --toggleSwitch-color-foreground-disabled: var(
+    --semantic-color-foreground-disabled
+  );
   --toggleSwitch-color-thumb-default: var(--semantic-color-foreground-inverse);
   --toggleSwitch-color-thumb-hover: var(--semantic-interaction-text-hover);
   --toggleSwitch-color-thumb-active: var(--semantic-interaction-text-active);
-  --toggleSwitch-color-thumb-disabled: var(--semantic-color-foreground-disabled);
+  --toggleSwitch-color-thumb-disabled: var(
+    --semantic-color-foreground-disabled
+  );
   --toggleSwitch-color-border-default: var(--semantic-color-border-light);
   --toggleSwitch-color-border-hover: var(--semantic-interaction-border-hover);
   --toggleSwitch-color-border-active: var(--semantic-interaction-border-active);
@@ -62,8 +82,16 @@
   --toggleSwitch-typography-fontSize-small: var(--semantic-typography-body-05);
   --toggleSwitch-typography-fontSize-medium: var(--semantic-typography-body-04);
   --toggleSwitch-typography-fontSize-large: var(--semantic-typography-body-03);
-  --toggleSwitch-typography-fontWeight-default: var(--semantic-typography-font-weight-normal);
-  --toggleSwitch-typography-fontWeight-medium: var(--semantic-typography-font-weight-medium);
-  --toggleSwitch-typography-lineHeight-default: var(--semantic-typography-line-height-normal);
-  --toggleSwitch-typography-lineHeight-tight: var(--semantic-typography-line-height-tight);
+  --toggleSwitch-typography-fontWeight-default: var(
+    --semantic-typography-font-weight-normal
+  );
+  --toggleSwitch-typography-fontWeight-medium: var(
+    --semantic-typography-font-weight-medium
+  );
+  --toggleSwitch-typography-lineHeight-default: var(
+    --semantic-typography-line-height-normal
+  );
+  --toggleSwitch-typography-lineHeight-tight: var(
+    --semantic-typography-line-height-tight
+  );
 }

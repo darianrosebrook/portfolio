@@ -3,9 +3,13 @@
  */
 @mixin vars {
   /* === Color Tokens === */
-  --calendar-color-background-default: var(--semantic-color-background-secondary);
+  --calendar-color-background-default: var(
+    --semantic-color-background-secondary
+  );
   --calendar-color-foreground-primary: var(--semantic-color-foreground-primary);
-  --calendar-color-foreground-secondary: var(--semantic-color-foreground-secondary);
+  --calendar-color-foreground-secondary: var(
+    --semantic-color-foreground-secondary
+  );
   --calendar-color-border-default: var(--semantic-color-border-light);
   --calendar-color-border-accent: var(--semantic-color-border-accent);
 

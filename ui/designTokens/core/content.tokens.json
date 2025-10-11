@@ -1,0 +1,34 @@
+{
+  "$schema": "../designTokens.schema.json",
+  "content": {
+    "maxWidth": {
+      "prose": {
+        "$type": "dimension",
+        "$value": "65ch",
+        "$description": "Optimal reading width for body text"
+      },
+      "narrow": {
+        "$type": "dimension",
+        "$value": "45ch",
+        "$description": "Narrow content for captions and asides"
+      },
+      "wide": {
+        "$type": "dimension",
+        "$value": "75ch",
+        "$description": "Wide content for technical documentation"
+      }
+    },
+    "measure": {
+      "comfortable": {
+        "$type": "dimension",
+        "$value": "60ch",
+        "$description": "Comfortable reading measure"
+      },
+      "compact": {
+        "$type": "dimension",
+        "$value": "45ch",
+        "$description": "Compact measure for sidebars"
+      }
+    }
+  }
+}

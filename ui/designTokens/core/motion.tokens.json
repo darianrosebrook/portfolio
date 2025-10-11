@@ -1,0 +1,199 @@
+{
+  "$schema": "../designTokens.schema.json",
+  "motion": {
+    "duration": {
+      "instant": {
+        "$type": "duration",
+        "$value": "100ms",
+        "$description": "Instant feedback duration"
+      },
+      "short1": {
+        "$type": "duration",
+        "$value": "50ms",
+        "$description": "Micro-interactions and quick transitions"
+      },
+      "short2": {
+        "$type": "duration",
+        "$value": "83ms",
+        "$description": "5 frames - subtle hover effects"
+      },
+      "short3": {
+        "$type": "duration",
+        "$value": "167ms",
+        "$description": "10 frames - standard hover/focus transitions"
+      },
+      "short": {
+        "$type": "duration",
+        "$value": "150ms",
+        "$description": "Short transition duration"
+      },
+      "medium": {
+        "$type": "duration",
+        "$value": "250ms",
+        "$description": "Medium transition duration"
+      },
+      "medium1": {
+        "$type": "duration",
+        "$value": "250ms",
+        "$description": "Standard transition duration"
+      },
+      "medium2": {
+        "$type": "duration",
+        "$value": "333ms",
+        "$description": "20 frames - comfortable transitions"
+      },
+      "medium3": {
+        "$type": "duration",
+        "$value": "500ms",
+        "$description": "Noticeable transitions"
+      },
+      "long": {
+        "$type": "duration",
+        "$value": "400ms",
+        "$description": "Long transition duration"
+      },
+      "long1": {
+        "$type": "duration",
+        "$value": "667ms",
+        "$description": "40 frames - deliberate transitions"
+      },
+      "long2": {
+        "$type": "duration",
+        "$value": "833ms",
+        "$description": "50 frames - slow transitions"
+      },
+      "long3": {
+        "$type": "duration",
+        "$value": "1000ms",
+        "$description": "Full second - very slow transitions"
+      }
+    },
+    "easing": {
+      "standard": {
+        "$type": "cubicBezier",
+        "$value": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "$description": "Standard easing for most transitions"
+      },
+      "emphasizedIn": {
+        "$type": "cubicBezier",
+        "$value": "cubic-bezier(0.2, 0, 0, 1)",
+        "$description": "Emphasized in easing - sharp start"
+      },
+      "emphasizedOut": {
+        "$type": "cubicBezier",
+        "$value": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "$description": "Emphasized out easing - sharp end"
+      },
+      "quick": {
+        "enter": {
+          "$type": "cubicBezier",
+          "$value": "cubic-bezier(0, 0, 0.1, 1)",
+          "$description": "Quick enter - sharp start, smooth end"
+        },
+        "exit": {
+          "$type": "cubicBezier",
+          "$value": "cubic-bezier(1, 0, 1, 1)",
+          "$description": "Quick exit - smooth start, sharp end"
+        }
+      },
+      "soft": {
+        "enter": {
+          "$type": "cubicBezier",
+          "$value": "cubic-bezier(0, 0, 0.7, 1)",
+          "$description": "Soft enter - gentle acceleration"
+        },
+        "exit": {
+          "$type": "cubicBezier",
+          "$value": "cubic-bezier(0.3, 0, 1, 1)",
+          "$description": "Soft exit - gentle deceleration"
+        }
+      },
+      "continuous": {
+        "$type": "cubicBezier",
+        "$value": "cubic-bezier(0.3, 0, 0.7, 1)",
+        "$description": "Continuous motion - smooth throughout"
+      },
+      "bounce": {
+        "$type": "cubicBezier",
+        "$value": "cubic-bezier(0.3, 0, 0.1, 1.25)",
+        "$description": "Bounce effect - slight overshoot"
+      },
+      "linear": {
+        "$type": "cubicBezier",
+        "$value": "cubic-bezier(0, 0, 1, 1)",
+        "$description": "Linear motion - constant speed"
+      }
+    },
+    "keyframes": {
+      "fadeIn": {
+        "$type": "string",
+        "$value": "fadeIn",
+        "$description": "Standard fade in animation"
+      },
+      "slideUp": {
+        "$type": "string",
+        "$value": "slideUp",
+        "$description": "Slide up from bottom"
+      },
+      "slideDown": {
+        "$type": "string",
+        "$value": "slideDown",
+        "$description": "Slide down from top"
+      },
+      "scaleIn": {
+        "$type": "string",
+        "$value": "scaleIn",
+        "$description": "Scale in from center"
+      },
+      "pulse": {
+        "$type": "string",
+        "$value": "pulse",
+        "$description": "Subtle pulse animation"
+      }
+    },
+    "delay": {
+      "none": {
+        "$type": "duration",
+        "$value": "0ms",
+        "$description": "No delay"
+      },
+      "short": {
+        "$type": "duration",
+        "$value": "50ms",
+        "$description": "Short delay for sequenced animations"
+      },
+      "medium": {
+        "$type": "duration",
+        "$value": "100ms",
+        "$description": "Medium delay"
+      },
+      "long": {
+        "$type": "duration",
+        "$value": "150ms",
+        "$description": "Long delay for dramatic effect"
+      }
+    },
+    "stagger": {
+      "xs": {
+        "$type": "duration",
+        "$value": "17ms",
+        "$description": "1 frame stagger"
+      },
+      "sm": {
+        "$type": "duration",
+        "$value": "30ms",
+        "$description": "Small stagger for list items"
+      },
+      "md": {
+        "$type": "duration",
+        "$value": "60ms",
+        "$description": "Medium stagger for cards"
+      },
+      "lg": {
+        "$type": "duration",
+        "$value": "100ms",
+        "$description": "Large stagger for sections"
+      }
+    }
+  }
+}
