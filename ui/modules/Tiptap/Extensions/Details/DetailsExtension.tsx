@@ -1,3 +1,5 @@
+'use client';
+
 import { Node, mergeAttributes } from '@tiptap/core';
 import { ReactNodeViewRenderer } from '@tiptap/react';
 import { DetailsNodeView } from './DetailsNodeView';
