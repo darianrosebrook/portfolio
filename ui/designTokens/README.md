@@ -4,10 +4,34 @@ This folder contains the source of truth for our design system tokens. We follow
 
 ### What lives here
 
-- `core.tokens.json` — primitive tokens (palette, spacing, typography, motion, shape, elevation, etc.). No brand or component semantics.
-- `semantic.tokens.json` — semantic roles that reference `core.*` (e.g., `color.background.primary`). Safe to theme/brand.
-- `designTokens.schema.json` — generated JSON Schema used for validation and IntelliSense.
-- `designTokens.json` — composed aggregate of `core` + `semantic` (built artifact).
+**Modular Structure (Recommended):**
+
+- `core/` — Modular primitive tokens split by category:
+  - `color.tokens.json` — Color palettes, modes, data visualization colors
+  - `typography.tokens.json` — Font families, weights, scales
+  - `spacing.tokens.json` — Spacing scales
+  - `motion.tokens.json` — Durations, easing, delays, staggers
+  - `shape.tokens.json` — Border radii, borders
+  - `elevation.tokens.json` — Shadows, z-index
+  - Plus: opacity, dimension, scale, layout, icon, interaction, component modules
+  - `_index.tokens.json` — Module registry (not loaded during build)
+
+- `semantic/` — Semantic roles organized by category:
+  - `color.tokens.json` — Foreground, background, border, status colors
+  - `typography.tokens.json` — Text styles, hierarchies
+  - `components/` — Component-specific semantic patterns
+  - Plus: spacing, motion, shape, elevation, control, interaction, focus, datavis, overlay modules
+  - `_index.tokens.json` — Module registry (not loaded during build)
+
+**Legacy Monolithic Files (Backward Compatible):**
+
+- `core.tokens.json` — Full primitive tokens (maintained for compatibility)
+- `semantic.tokens.json` — Full semantic roles (maintained for compatibility)
+
+**Build Artifacts:**
+
+- `designTokens.schema.json` — Generated JSON Schema for validation and IntelliSense
+- `designTokens.json` — Composed aggregate of all tokens (built artifact)
 
 ### Authoring rules
 
@@ -120,8 +144,57 @@ npm run tokens:validate   # AJV + custom validation
 
 The semantic layer is designed for multi-brand. A brand can override `semantic.*` (or attach brand namespaces) while `core.*` remains stable. Mode-aware behavior should use `design.paths` where possible to avoid duplication.
 
+### Modular vs Monolithic
+
+**Modular Advantages:**
+
+- Easier to navigate and maintain (smaller, focused files)
+- Reduced git merge conflicts (parallel edits to different categories)
+- Faster IDE performance and intellisense
+- Clear separation of concerns by token category
+- Better team collaboration (can assign ownership per module)
+
+**Build Behavior:**
+The build pipeline automatically detects and loads from the modular structure (`core/` and `semantic/` directories) if present. It falls back to monolithic files (`core.tokens.json`, `semantic.tokens.json`) for backward compatibility. The composed output (`designTokens.json`) is identical regardless of source structure.
+
+**Migration Path:**
+Existing projects can migrate gradually:
+
+1. Modular structure is created alongside monolithic files
+2. Both structures are maintained during transition
+3. Once validated, monolithic files can be removed or kept as reference
+4. All builds work with either structure
+
+### Contributing to Tokens
+
+**Adding a New Token to Modular Structure:**
+
+1. Identify the appropriate module file (e.g., `core/color.tokens.json` for a new color primitive)
+2. Add your token following the W3C format:
+   ```json
+   "newToken": {
+     "$type": "color",
+     "$value": "#FF0000",
+     "$description": "Clear description of purpose"
+   }
+   ```
+3. Run `npm run tokens:build` to regenerate composed file and CSS variables
+4. Verify in browser that new token is available
+
+**Creating a New Module:**
+
+If a category grows too large or needs separation:
+
+1. Create new `.tokens.json` file in appropriate directory (`core/` or `semantic/`)
+2. Follow the schema structure with `$schema` reference
+3. Add tokens under appropriate category name
+4. Build pipeline automatically discovers and loads it
+5. No changes needed to build scripts
+
 ### FAQ
 
 - "Why local schema?" — Reliability (offline/CI), speed, and control over our custom extensions.
 - "Why not import an icon library?" — We prefer local assets and Figma Dev Mode MCP; no new icon packages.
 - "How do I get token path autocomplete in code?" — Import from `@/types/designTokens` and use `TokenPath` or categorized path types.
+- "Can I mix modular and monolithic?" — Yes! The build pipeline supports both. Modular is preferred for new work.
+- "Do I need to update both structures?" — No, choose one. If using modular, the monolithic files are maintained automatically during transition.

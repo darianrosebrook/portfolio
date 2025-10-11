@@ -3,7 +3,7 @@
  */
 @mixin vars {
   /* === Color Tokens === */
-  --sheet-color-overlay: rgba(0, 0, 0, 0.5);
+  --sheet-color-overlay: rgb(0 0 0 / 50%);
   --sheet-color-background: var(--semantic-color-background-primary);
   --sheet-color-backgroundHover: var(--semantic-interaction-background-hover);
   --sheet-color-border: var(--semantic-color-border-light);
@@ -38,7 +38,9 @@
   --sheet-text-lineHeightTitle: var(--semantic-typography-line-height-tight);
   --sheet-text-weightTitle: var(--semantic-typography-font-weight-semibold);
   --sheet-text-sizeDescription: var(--semantic-typography-body-03);
-  --sheet-text-lineHeightDescription: var(--semantic-typography-line-height-relaxed);
+  --sheet-text-lineHeightDescription: var(
+    --semantic-typography-line-height-relaxed
+  );
 
   /* === Motion Tokens === */
   --sheet-motion-duration: var(--core-motion-duration-medium);

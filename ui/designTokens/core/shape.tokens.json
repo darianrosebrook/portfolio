@@ -1,0 +1,61 @@
+{
+  "$schema": "../designTokens.schema.json",
+  "shape": {
+    "radius": {
+      "none": {
+        "$type": "borderRadius",
+        "$value": "0"
+      },
+      "01": {
+        "$type": "borderRadius",
+        "$value": "2px"
+      },
+      "02": {
+        "$type": "borderRadius",
+        "$value": "4px"
+      },
+      "medium": {
+        "$type": "borderRadius",
+        "$value": "6px"
+      },
+      "03": {
+        "$type": "borderRadius",
+        "$value": "8px"
+      },
+      "04": {
+        "$type": "borderRadius",
+        "$value": "16px"
+      },
+      "05": {
+        "$type": "borderRadius",
+        "$value": "32px"
+      },
+      "full": {
+        "$type": "borderRadius",
+        "$value": "9999px"
+      }
+    },
+    "border": {
+      "width": {
+        "hairline": {
+          "$type": "borderWidth",
+          "$value": "1px"
+        },
+        "thick": {
+          "$type": "borderWidth",
+          "$value": "2px"
+        }
+      },
+      "style": {
+        "solid": {
+          "$type": "borderStyle",
+          "$value": "solid"
+        },
+        "dashed": {
+          "$type": "borderStyle",
+          "$value": "dashed"
+        }
+      }
+    }
+  }
+}

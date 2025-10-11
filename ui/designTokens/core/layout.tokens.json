@@ -1,0 +1,27 @@
+{
+  "$schema": "../designTokens.schema.json",
+  "layout": {
+    "container": {
+      "sm": {
+        "$type": "dimension",
+        "$value": "640px"
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": "768px"
+      },
+      "lg": {
+        "$type": "dimension",
+        "$value": "1024px"
+      },
+      "xl": {
+        "$type": "dimension",
+        "$value": "1280px"
+      },
+      "xxl": {
+        "$type": "dimension",
+        "$value": "1440px"
+      }
+    }
+  }
+}

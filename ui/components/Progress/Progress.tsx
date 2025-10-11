@@ -83,7 +83,8 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>(
 
     const ariaProps = {
       role: 'progressbar',
-      'aria-label': label,
+      'aria-label':
+        label || (isIndeterminate ? 'Loading progress' : 'Progress'),
       'aria-valuenow': isIndeterminate ? undefined : normalizedValue,
       'aria-valuemin': 0,
       'aria-valuemax': max,

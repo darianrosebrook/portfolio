@@ -1,0 +1,65 @@
+{
+  "$schema": "../designTokens.schema.json",
+  "shape": {
+    "radius": {
+      "full": {
+        "$type": "borderRadius",
+        "$value": "9999px"
+      },
+      "extraLarge": {
+        "$type": "borderRadius",
+        "$value": "{shape.radius.05}"
+      },
+      "large": {
+        "$type": "borderRadius",
+        "$value": "{shape.radius.04}"
+      },
+      "medium": {
+        "$type": "borderRadius",
+        "$value": "{shape.radius.03}"
+      },
+      "small": {
+        "$type": "borderRadius",
+        "$value": "{shape.radius.02}"
+      },
+      "extraSmall": {
+        "$type": "borderRadius",
+        "$value": "{shape.radius.01}"
+      },
+      "none": {
+        "$type": "borderRadius",
+        "$value": "0px"
+      },
+      "default": {
+        "$type": "borderRadius",
+        "$value": "{shape.radius.02}"
+      }
+    },
+    "control": {
+      "radius": {
+        "default": {
+          "$type": "borderRadius",
+          "$value": "{shape.radius.medium}"
+        },
+        "pill": {
+          "$type": "borderRadius",
+          "$value": "{shape.radius.full}"
+        }
+      },
+      "border": {
+        "defaultWidth": {
+          "$type": "borderWidth",
+          "$value": "{shape.border.width.hairline}"
+        },
+        "defaultStyle": {
+          "$type": "borderStyle",
+          "$value": "{shape.border.style.solid}"
+        },
+        "focusWidth": {
+          "$type": "borderWidth",
+          "$value": "{shape.border.width.thick}"
+        }
+      }
+    }
+  }
+}

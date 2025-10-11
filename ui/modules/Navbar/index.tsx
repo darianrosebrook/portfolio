@@ -134,11 +134,17 @@ export default function Navbar({ pages = [] }: NavbarProps) {
             ))}
           <li>
             <Popover>
-              <Popover.Trigger>
-                <Button variant="tertiary" size="small">
+              <Button
+                asChild
+                variant="tertiary"
+                size="small"
+                ariaLabel="Menu"
+                title="Menu"
+              >
+                <Popover.Trigger>
                   <Icon icon={faBars} />
-                </Button>
-              </Popover.Trigger>
+                </Popover.Trigger>
+              </Button>
               <Popover.Content>
                 <ul className="menuList">
                   <li>
@@ -179,8 +185,14 @@ export default function Navbar({ pages = [] }: NavbarProps) {
           {user && !loading && (
             <li>
               <Popover>
-                <Popover.Trigger>
-                  <Button variant="secondary" size="small">
+                <Button
+                  asChild
+                  variant="secondary"
+                  size="small"
+                  ariaLabel="User menu"
+                  title="User menu"
+                >
+                  <Popover.Trigger>
                     <Avatar
                       src={
                         profile?.avatar_url || user.user_metadata?.avatar_url
@@ -193,8 +205,8 @@ export default function Navbar({ pages = [] }: NavbarProps) {
                       }
                       size="large"
                     />
-                  </Button>
-                </Popover.Trigger>
+                  </Popover.Trigger>
+                </Button>
                 <Popover.Content>
                   <ul className="menuList">
                     <li>

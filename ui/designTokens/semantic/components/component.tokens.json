@@ -1,0 +1,99 @@
+{
+  "$schema": "../designTokens.schema.json",
+  "component": {
+    "pagination": {
+      "gapX": {
+        "$type": "dimension",
+        "$value": "{spacing.size.02}"
+      },
+      "minSize": {
+        "$type": "dimension",
+        "$value": "32px"
+      }
+    },
+    "foreground": {
+      "$type": "color",
+      "$value": "{color.mode.dark}"
+    },
+    "typography": {
+      "variation": {
+        "wghtHeading": {
+          "$type": "number",
+          "$value": 700
+        },
+        "wdthResponsive": {
+          "$type": "number",
+          "$value": 100
+        }
+      }
+    },
+    "otp": {
+      "fieldGap": {
+        "$type": "dimension",
+        "$value": "{spacing.size.02}"
+      },
+      "fieldMinWidth": {
+        "$type": "dimension",
+        "$value": "48px"
+      },
+      "fieldHeight": {
+        "$type": "dimension",
+        "$value": "48px"
+      },
+      "fieldFontSize": {
+        "$type": "dimension",
+        "$value": "{typography.ramp.4}"
+      },
+      "fieldFontWeight": {
+        "$type": "fontWeight",
+        "$value": "{typography.weight.medium}"
+      },
+      "fieldRadius": {
+        "$type": "borderRadius",
+        "$value": "{shape.radius.02}"
+      },
+      "colorText": {
+        "$type": "color",
+        "$value": "{color.mode.dark}"
+      },
+      "colorBg": {
+        "$type": "color",
+        "$value": "{color.mode.light}"
+      },
+      "colorBorder": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.200}"
+      },
+      "colorFocus": {
+        "$type": "color",
+        "$value": "{core.color.palette.red.500}"
+      }
+    },
+    "test": {
+      "dsSemanticColorBgPrimary": {
+        "$type": "color",
+        "$value": "#ffffff"
+      },
+      "customSemanticColorBgPrimary": {
+        "$type": "color",
+        "$value": "#ffffff"
+      },
+      "myCustomBg": {
+        "$type": "color",
+        "$value": "#007bff"
+      },
+      "path": {
+        "$type": "string",
+        "$value": "test-path"
+      },
+      "typeWghtHeading": {
+        "$type": "number",
+        "$value": 700
+      },
+      "typeWdthResponsive": {
+        "$type": "number",
+        "$value": 100
+      }
+    }
+  }
+}

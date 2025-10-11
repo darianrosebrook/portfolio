@@ -4,10 +4,14 @@
  *
  * Merges core and semantic token files into a single composed file
  * with proper reference handling and validation.
+ * Supports both monolithic and modular token structures.
  */
 
+import fs from 'fs';
+import path from 'path';
 import {
   PATHS,
+  PROJECT_ROOT,
   readTokenFile,
   writeOutputFile,
   deepMerge,
@@ -85,25 +89,77 @@ function createTokenPrefixer(): (path: string) => string {
 }
 
 /**
+ * Load tokens from a modular directory structure
+ */
+function loadModularTokens(baseDir: string): TokenGroup | null {
+  const modulesPath = path.join(PROJECT_ROOT, 'ui', 'designTokens', baseDir);
+
+  if (!fs.existsSync(modulesPath)) {
+    return null;
+  }
+
+  const merged: TokenGroup = {};
+  const files = fs.readdirSync(modulesPath, { withFileTypes: true });
+
+  for (const dirent of files) {
+    if (
+      dirent.isFile() &&
+      dirent.name.endsWith('.tokens.json') &&
+      !dirent.name.startsWith('_')
+    ) {
+      const modulePath = path.join(modulesPath, dirent.name);
+      const moduleTokens = readTokenFile(modulePath);
+      if (moduleTokens) {
+        console.log(`[tokens] Loaded: ${baseDir}/${dirent.name}`);
+        // Remove $schema and meta from modules
+        const { $schema, meta, ...tokenData } = moduleTokens as Record<
+          string,
+          unknown
+        >;
+        deepMerge(merged, tokenData as TokenGroup);
+      }
+    } else if (dirent.isDirectory()) {
+      // Recursively load from subdirectories (e.g., semantic/components)
+      const subTokens = loadModularTokens(path.join(baseDir, dirent.name));
+      if (subTokens) {
+        deepMerge(merged, subTokens);
+      }
+    }
+  }
+
+  return Object.keys(merged).length > 0 ? merged : null;
+}
+
+/**
  * Compose core and semantic tokens into unified token file
  */
 export function composeTokens(): boolean {
   console.log('[tokens] Composing token files...');
 
-  // Read source files
-  const coreTokens = readTokenFile(PATHS.coreTokens);
-  const semanticTokens = readTokenFile(PATHS.semanticTokens);
+  // Try loading from modular structure first, fall back to monolithic files
+  let coreTokens = loadModularTokens('core');
+  let semanticTokens = loadModularTokens('semantic');
+
+  // Fall back to monolithic files if modular structure doesn't exist
+  if (!coreTokens) {
+    console.log('[tokens] Loading from monolithic core.tokens.json...');
+    coreTokens = readTokenFile(PATHS.coreTokens);
+  }
+
+  if (!semanticTokens) {
+    console.log('[tokens] Loading from monolithic semantic.tokens.json...');
+    semanticTokens = readTokenFile(PATHS.semanticTokens);
+  }
 
   // Check for required files
   const missingFiles: string[] = [];
-  if (!coreTokens) missingFiles.push('core.tokens.json');
-  if (!semanticTokens) missingFiles.push('semantic.tokens.json');
+  if (!coreTokens) missingFiles.push('core tokens (modular or monolithic)');
+  if (!semanticTokens)
+    missingFiles.push('semantic tokens (modular or monolithic)');
 
   if (missingFiles.length > 0) {
     console.error('[tokens] Missing required token files:');
-    missingFiles.forEach((file) =>
-      console.error(`  - ui/designTokens/${file}`)
-    );
+    missingFiles.forEach((file) => console.error(`  - ${file}`));
     return false;
   }
 

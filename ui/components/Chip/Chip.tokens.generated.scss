@@ -3,42 +3,86 @@
  */
 @mixin vars {
   /* === Color Tokens === */
-  --chip-color-background-default: var(--color-action-background-secondary-default);
+  --chip-color-background-default: var(
+    --color-action-background-secondary-default
+  );
   --chip-color-background-hover: var(--color-action-background-secondary-hover);
-  --chip-color-background-active: var(--color-action-background-secondary-active);
+  --chip-color-background-active: var(
+    --color-action-background-secondary-active
+  );
   --chip-color-background-focus: var(--color-mode-white);
-  --chip-color-background-selected: var(--color-action-background-primary-default);
-  --chip-color-background-selectedHover: var(--color-action-background-primary-hover);
-  --chip-color-background-selectedActive: var(--color-action-background-primary-active);
-  --chip-color-background-dismissible: var(--color-action-background-secondary-default);
-  --chip-color-background-dismissibleHover: var(--color-action-background-secondary-hover);
-  --chip-color-background-dismissibleActive: var(--color-action-background-secondary-active);
-  --chip-color-foreground-default: var(--color-action-foreground-secondary-default);
-  --chip-color-foreground-hover: var(--color-action-foreground-secondary-default);
-  --chip-color-foreground-active: var(--color-action-foreground-secondary-default);
+  --chip-color-background-selected: var(
+    --color-action-background-primary-default
+  );
+  --chip-color-background-selectedHover: var(
+    --color-action-background-primary-hover
+  );
+  --chip-color-background-selectedActive: var(
+    --color-action-background-primary-active
+  );
+  --chip-color-background-dismissible: var(
+    --color-action-background-secondary-default
+  );
+  --chip-color-background-dismissibleHover: var(
+    --color-action-background-secondary-hover
+  );
+  --chip-color-background-dismissibleActive: var(
+    --color-action-background-secondary-active
+  );
+  --chip-color-foreground-default: var(
+    --color-action-foreground-secondary-default
+  );
+  --chip-color-foreground-hover: var(
+    --color-action-foreground-secondary-default
+  );
+  --chip-color-foreground-active: var(
+    --color-action-foreground-secondary-default
+  );
   --chip-color-foreground-focus: var(--color-action-foreground-primary-default);
-  --chip-color-foreground-selected: var(--color-action-foreground-primary-default);
-  --chip-color-foreground-selectedHover: var(--color-action-foreground-primary-default);
-  --chip-color-foreground-selectedActive: var(--color-action-foreground-primary-default);
-  --chip-color-foreground-dismissible: var(--color-action-foreground-secondary-default);
-  --chip-color-foreground-dismissibleHover: var(--color-action-foreground-secondary-default);
-  --chip-color-foreground-dismissibleActive: var(--color-action-foreground-secondary-default);
+  --chip-color-foreground-selected: var(
+    --color-action-foreground-primary-default
+  );
+  --chip-color-foreground-selectedHover: var(
+    --color-action-foreground-primary-default
+  );
+  --chip-color-foreground-selectedActive: var(
+    --color-action-foreground-primary-default
+  );
+  --chip-color-foreground-dismissible: var(
+    --color-action-foreground-secondary-default
+  );
+  --chip-color-foreground-dismissibleHover: var(
+    --color-action-foreground-secondary-default
+  );
+  --chip-color-foreground-dismissibleActive: var(
+    --color-action-foreground-secondary-default
+  );
   --chip-color-border-default: var(--color-action-border-secondary-default);
   --chip-color-border-hover: var(--color-action-border-secondary-hover);
   --chip-color-border-active: var(--color-action-border-secondary-default);
   --chip-color-border-focus: var(--color-action-border-primary-focus);
   --chip-color-border-selected: var(--color-action-border-primary-default);
   --chip-color-border-selectedHover: var(--color-action-border-primary-default);
-  --chip-color-border-selectedActive: var(--color-action-border-primary-default);
+  --chip-color-border-selectedActive: var(
+    --color-action-border-primary-default
+  );
   --chip-color-border-dismissible: var(--color-action-border-secondary-default);
-  --chip-color-border-dismissibleHover: var(--color-action-border-secondary-hover);
-  --chip-color-border-dismissibleActive: var(--color-action-border-secondary-default);
+  --chip-color-border-dismissibleHover: var(
+    --color-action-border-secondary-hover
+  );
+  --chip-color-border-dismissibleActive: var(
+    --color-action-border-secondary-default
+  );
   --chip-color-icon-default: var(--color-action-foreground-secondary-default);
   --chip-color-icon-hover: var(--color-action-foreground-secondary-default);
   --chip-color-icon-active: var(--color-action-foreground-secondary-default);
   --chip-color-icon-selected: var(--color-action-foreground-primary-default);
-  --chip-color-icon-dismissible: var(--color-action-foreground-secondary-default);
-  --chip-color-icon-dismissibleHover: var(--color-action-foreground-secondary-default);
+  --chip-color-icon-dismissible: var(
+    --color-action-foreground-secondary-default
+  );
+  --chip-color-icon-dismissibleHover: var(
+    --color-action-foreground-secondary-default
+  );
 
   /* === Size Tokens === */
   --chip-size-padding-horizontal: var(--spacing-size-04);

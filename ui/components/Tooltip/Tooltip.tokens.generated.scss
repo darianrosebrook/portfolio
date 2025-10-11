@@ -18,12 +18,20 @@
 
   /* === Typography Tokens === */
   --tooltip-typography-fontSize: var(--semantic-typography-caption-01);
-  --tooltip-typography-fontWeight: var(--semantic-typography-font-weight-medium);
+  --tooltip-typography-fontWeight: var(
+    --semantic-typography-font-weight-medium
+  );
   --tooltip-typography-lineHeight: var(--semantic-typography-line-height-tight);
 
   /* === Motion Tokens === */
-  --tooltip-motion-duration-enter: var(--semantic-motion-interaction-enter-duration);
-  --tooltip-motion-duration-exit: var(--semantic-motion-interaction-exit-duration);
-  --tooltip-motion-easing-enter: var(--semantic-motion-interaction-enter-easing);
+  --tooltip-motion-duration-enter: var(
+    --semantic-motion-interaction-enter-duration
+  );
+  --tooltip-motion-duration-exit: var(
+    --semantic-motion-interaction-exit-duration
+  );
+  --tooltip-motion-easing-enter: var(
+    --semantic-motion-interaction-enter-easing
+  );
   --tooltip-motion-easing-exit: var(--semantic-motion-interaction-exit-easing);
 }

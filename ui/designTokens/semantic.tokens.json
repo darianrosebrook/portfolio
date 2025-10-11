@@ -6,6 +6,789 @@
   },
 
   "color": {
+    "foreground": {
+      "primary": {
+        "$type": "color",
+        "$value": "{color.mode.dark}",
+        "$extensions": {
+          "design.paths.light": "{color.mode.dark}",
+          "design.paths.dark": "{color.mode.light}"
+        },
+        "$description": "Primary foreground color"
+      },
+      "secondary": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.600}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.600}",
+          "design.paths.dark": "{color.palette.neutral.300}"
+        },
+        "$description": "Secondary foreground color"
+      },
+      "tertiary": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.500}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.500}",
+          "design.paths.dark": "{color.palette.neutral.400}"
+        },
+        "$description": "Tertiary foreground color"
+      },
+      "accent": {
+        "$type": "color",
+        "$value": "{color.palette.red.500}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.red.500}",
+          "design.paths.dark": "{color.palette.red.400}"
+        },
+        "$description": "Accent foreground color"
+      },
+      "danger": {
+        "$type": "color",
+        "$value": "{color.palette.red.500}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.red.500}",
+          "design.paths.dark": "{color.palette.red.400}"
+        },
+        "$description": "Danger foreground color"
+      },
+      "hover": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.700}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.700}",
+          "design.paths.dark": "{color.palette.neutral.300}"
+        },
+        "$description": "Hover foreground color"
+      },
+      "link": {
+        "$type": "color",
+        "$value": "{color.palette.red.500}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.red.500}",
+          "design.paths.dark": "{color.palette.red.400}"
+        },
+        "$description": "Link foreground color"
+      },
+      "linkHover": {
+        "$type": "color",
+        "$value": "{color.palette.red.600}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.red.600}",
+          "design.paths.dark": "{color.palette.red.300}"
+        },
+        "$description": "Link hover foreground color"
+      },
+      "linkVisited": {
+        "$type": "color",
+        "$value": "{color.palette.red.400}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.red.400}",
+          "design.paths.dark": "{color.palette.red.500}"
+        },
+        "$description": "Link visited foreground color"
+      },
+      "onBrand": {
+        "$type": "color",
+        "$value": "{color.mode.white}",
+        "$extensions": {
+          "design.paths.light": "{color.mode.white}",
+          "design.paths.dark": "{color.mode.white}"
+        },
+        "$description": "Foreground color for text on brand backgrounds"
+      },
+      "onColor": {
+        "$type": "color",
+        "$value": "{semantic.color.foreground.primary}",
+        "$extensions": {
+          "design.paths.light": "{semantic.color.foreground.primary}",
+          "design.paths.dark": "{semantic.color.foreground.primary}"
+        },
+        "$description": "Foreground color for text on colored backgrounds"
+      },
+      "info": {
+        "$type": "color",
+        "$value": "{color.palette.blue.500}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.blue.500}",
+          "design.paths.dark": "{color.palette.blue.400}"
+        },
+        "$description": "Info foreground color"
+      },
+      "success": {
+        "$type": "color",
+        "$value": "{color.palette.green.500}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.green.500}",
+          "design.paths.dark": "{color.palette.green.400}"
+        },
+        "$description": "Success foreground color"
+      },
+      "warning": {
+        "$type": "color",
+        "$value": "{color.palette.orange.500}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.orange.500}",
+          "design.paths.dark": "{color.palette.orange.400}"
+        },
+        "$description": "Warning foreground color"
+      },
+      "onDangerSubtle": {
+        "$type": "color",
+        "$value": "{color.palette.red.700}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.red.700}",
+          "design.paths.dark": "{color.palette.red.300}"
+        },
+        "$description": "Foreground color on subtle danger backgrounds"
+      },
+      "onInfoSubtle": {
+        "$type": "color",
+        "$value": "{color.palette.blue.700}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.blue.700}",
+          "design.paths.dark": "{color.palette.blue.300}"
+        },
+        "$description": "Foreground color on subtle info backgrounds"
+      },
+      "onSuccessSubtle": {
+        "$type": "color",
+        "$value": "{color.palette.green.700}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.green.700}",
+          "design.paths.dark": "{color.palette.green.300}"
+        },
+        "$description": "Foreground color on subtle success backgrounds"
+      },
+      "onWarningSubtle": {
+        "$type": "color",
+        "$value": "{color.palette.orange.700}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.orange.700}",
+          "design.paths.dark": "{color.palette.orange.300}"
+        },
+        "$description": "Foreground color on subtle warning backgrounds"
+      },
+      "highlight": {
+        "$type": "color",
+        "$value": "{color.palette.red.700}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.red.700}",
+          "design.paths.dark": "{color.palette.red.200}"
+        },
+        "$description": "Highlight foreground color"
+      },
+      "syntax": {
+        "plain": {
+          "$type": "color",
+          "$value": "{semantic.color.foreground.primary}",
+          "$extensions": {
+            "design.paths.light": "{semantic.color.foreground.primary}",
+            "design.paths.dark": "{semantic.color.foreground.primary}"
+          },
+          "$description": "Plain text in syntax highlighting"
+        },
+        "comment": {
+          "color": {
+            "$type": "color",
+            "$value": "{semantic.color.foreground.tertiary}",
+            "$extensions": {
+              "design.paths.light": "{semantic.color.foreground.tertiary}",
+              "design.paths.dark": "{semantic.color.foreground.tertiary}"
+            },
+            "$description": "Comment color in syntax highlighting"
+          }
+        },
+        "keyword": {
+          "$type": "color",
+          "$value": "{semantic.color.foreground.info}",
+          "$extensions": {
+            "design.paths.light": "{semantic.color.foreground.info}",
+            "design.paths.dark": "{semantic.color.foreground.info}"
+          },
+          "$description": "Keyword color in syntax highlighting"
+        },
+        "definition": {
+          "$type": "color",
+          "$value": "{semantic.color.foreground.accent}",
+          "$extensions": {
+            "design.paths.light": "{semantic.color.foreground.accent}",
+            "design.paths.dark": "{semantic.color.foreground.accent}"
+          },
+          "$description": "Definition color in syntax highlighting"
+        },
+        "punctuation": {
+          "$type": "color",
+          "$value": "{semantic.color.foreground.info}",
+          "$extensions": {
+            "design.paths.light": "{semantic.color.foreground.info}",
+            "design.paths.dark": "{semantic.color.foreground.info}"
+          },
+          "$description": "Punctuation color in syntax highlighting"
+        },
+        "property": {
+          "$type": "color",
+          "$value": "{semantic.color.foreground.warning}",
+          "$extensions": {
+            "design.paths.light": "{semantic.color.foreground.warning}",
+            "design.paths.dark": "{semantic.color.foreground.warning}"
+          },
+          "$description": "Property color in syntax highlighting"
+        },
+        "tag": {
+          "$type": "color",
+          "$value": "{semantic.color.foreground.danger}",
+          "$extensions": {
+            "design.paths.light": "{semantic.color.foreground.danger}",
+            "design.paths.dark": "{semantic.color.foreground.danger}"
+          },
+          "$description": "Tag color in syntax highlighting"
+        },
+        "static": {
+          "$type": "color",
+          "$value": "{semantic.color.foreground.accent}",
+          "$extensions": {
+            "design.paths.light": "{semantic.color.foreground.accent}",
+            "design.paths.dark": "{semantic.color.foreground.accent}"
+          },
+          "$description": "Static color in syntax highlighting"
+        },
+        "string": {
+          "$type": "color",
+          "$value": "{semantic.color.foreground.highlight}",
+          "$extensions": {
+            "design.paths.light": "{semantic.color.foreground.highlight}",
+            "design.paths.dark": "{semantic.color.foreground.highlight}"
+          },
+          "$description": "String color in syntax highlighting"
+        }
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.300}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.300}",
+          "design.paths.dark": "{color.palette.neutral.500}"
+        },
+        "$description": "Disabled foreground color"
+      },
+      "placeholder": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.400}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.400}",
+          "design.paths.dark": "{color.palette.neutral.500}"
+        },
+        "$description": "Placeholder foreground color"
+      },
+      "inverse": {
+        "$type": "color",
+        "$value": "{color.mode.light}",
+        "$extensions": {
+          "design.paths.light": "{color.mode.light}",
+          "design.paths.dark": "{color.mode.dark}"
+        },
+        "$description": "Inverse foreground color (opposite of primary)"
+      },
+      "placeholder": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.400}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.400}",
+          "design.paths.dark": "{color.palette.neutral.500}"
+        },
+        "$description": "Placeholder text color"
+      }
+    },
+    "background": {
+      "primary": {
+        "$type": "color",
+        "$value": "{color.mode.white}",
+        "$extensions": {
+          "design.paths.light": "{color.mode.white}",
+          "design.paths.dark": "{color.mode.black}"
+        },
+        "$description": "Primary background color"
+      },
+      "secondary": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.100}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.100}",
+          "design.paths.dark": "{color.palette.neutral.800}"
+        },
+        "$description": "Secondary background color"
+      },
+      "tertiary": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.200}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.200}",
+          "design.paths.dark": "{color.palette.neutral.700}"
+        },
+        "$description": "Tertiary background color"
+      },
+      "highlight": {
+        "$type": "color",
+        "$value": "{color.palette.red.200}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.red.200}",
+          "design.paths.dark": "{color.palette.red.700}"
+        },
+        "$description": "Highlight background color"
+      },
+      "accent": {
+        "$type": "color",
+        "$value": "{color.palette.red.500}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.red.500}",
+          "design.paths.dark": "{color.palette.red.400}"
+        },
+        "$description": "Accent background color"
+      },
+      "hover": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.200}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.200}",
+          "design.paths.dark": "{color.palette.neutral.700}"
+        },
+        "$description": "Hover background color"
+      },
+      "dangerStrong": {
+        "$type": "color",
+        "$value": "{color.palette.red.600}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.red.600}",
+          "design.paths.dark": "{color.palette.red.500}"
+        },
+        "$description": "Strong danger background color"
+      },
+      "dangerSubtle": {
+        "$type": "color",
+        "$value": "{color.palette.red.100}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.red.100}",
+          "design.paths.dark": "{color.palette.red.800}"
+        },
+        "$description": "Subtle danger background color"
+      },
+      "elevated": {
+        "$type": "color",
+        "$value": "{color.mode.white}",
+        "$extensions": {
+          "design.paths.light": "{color.mode.white}",
+          "design.paths.dark": "{color.mode.dark}"
+        },
+        "$description": "Elevated background color for cards and modals"
+      },
+      "brand": {
+        "$type": "color",
+        "$value": "{color.palette.brand.primary.500}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.brand.primary.500}",
+          "design.paths.dark": "{color.palette.brand.primary.400}"
+        },
+        "$description": "Brand background color"
+      },
+      "onColor": {
+        "$type": "color",
+        "$value": "{semantic.color.background.primary}",
+        "$extensions": {
+          "design.paths.light": "{semantic.color.background.primary}",
+          "design.paths.dark": "{semantic.color.background.primary}"
+        },
+        "$description": "Background color for elements on colored backgrounds"
+      },
+      "imageOverlay": {
+        "$type": "color",
+        "$value": "rgba(0, 0, 0, 0.5)",
+        "$extensions": {
+          "design.paths.light": "rgba(0, 0, 0, 0.5)",
+          "design.paths.dark": "rgba(0, 0, 0, 0.7)"
+        },
+        "$description": "Image overlay background color"
+      },
+      "infoStrong": {
+        "$type": "color",
+        "$value": "{color.palette.blue.600}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.blue.600}",
+          "design.paths.dark": "{color.palette.blue.500}"
+        },
+        "$description": "Strong info background color"
+      },
+      "infoSubtle": {
+        "$type": "color",
+        "$value": "{color.palette.blue.100}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.blue.100}",
+          "design.paths.dark": "{color.palette.blue.800}"
+        },
+        "$description": "Subtle info background color"
+      },
+      "successStrong": {
+        "$type": "color",
+        "$value": "{color.palette.green.600}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.green.600}",
+          "design.paths.dark": "{color.palette.green.500}"
+        },
+        "$description": "Strong success background color"
+      },
+      "successSubtle": {
+        "$type": "color",
+        "$value": "{color.palette.green.100}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.green.100}",
+          "design.paths.dark": "{color.palette.green.800}"
+        },
+        "$description": "Subtle success background color"
+      },
+      "warningStrong": {
+        "$type": "color",
+        "$value": "{color.palette.orange.400}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.orange.400}",
+          "design.paths.dark": "{color.palette.orange.500}"
+        },
+        "$description": "Strong warning background color"
+      },
+      "warningSubtle": {
+        "$type": "color",
+        "$value": "{color.palette.orange.100}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.orange.100}",
+          "design.paths.dark": "{color.palette.orange.800}"
+        },
+        "$description": "Subtle warning background color"
+      },
+      "active": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.300}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.300}",
+          "design.paths.dark": "{color.palette.neutral.600}"
+        },
+        "$description": "Active state background color"
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.200}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.200}",
+          "design.paths.dark": "{color.palette.neutral.700}"
+        },
+        "$description": "Disabled state background color"
+      },
+      "placeholder": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.100}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.100}",
+          "design.paths.dark": "{color.palette.neutral.800}"
+        },
+        "$description": "Placeholder background color"
+      },
+      "readOnly": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.100}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.100}",
+          "design.paths.dark": "{color.palette.neutral.800}"
+        },
+        "$description": "Read-only background color"
+      },
+      "inverse": {
+        "$type": "color",
+        "$value": "{color.mode.dark}",
+        "$extensions": {
+          "design.paths.light": "{color.mode.dark}",
+          "design.paths.dark": "{color.mode.light}"
+        },
+        "$description": "Inverse background color (opposite of primary)"
+      }
+    },
+    "border": {
+      "default": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.300}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.300}",
+          "design.paths.dark": "{color.palette.neutral.600}"
+        },
+        "$description": "Default border color"
+      },
+      "subtle": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.200}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.200}",
+          "design.paths.dark": "{color.palette.neutral.700}"
+        },
+        "$description": "Subtle border color"
+      },
+      "bold": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.400}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.400}",
+          "design.paths.dark": "{color.palette.neutral.500}"
+        },
+        "$description": "Bold border color"
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.200}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.200}",
+          "design.paths.dark": "{color.palette.neutral.700}"
+        },
+        "$description": "Disabled border color"
+      },
+      "light": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.200}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.200}",
+          "design.paths.dark": "{color.palette.neutral.700}"
+        },
+        "$description": "Light border color"
+      },
+      "primary": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.300}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.300}",
+          "design.paths.dark": "{color.palette.neutral.600}"
+        },
+        "$description": "Primary border color"
+      },
+      "hover": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.400}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.400}",
+          "design.paths.dark": "{color.palette.neutral.500}"
+        },
+        "$description": "Hover border color"
+      },
+      "accent": {
+        "$type": "color",
+        "$value": "{color.palette.red.500}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.red.500}",
+          "design.paths.dark": "{color.palette.red.400}"
+        },
+        "$description": "Accent border color"
+      },
+      "focus": {
+        "$type": "color",
+        "$value": "{color.palette.brand.primary.500}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.brand.primary.500}",
+          "design.paths.dark": "{color.palette.brand.primary.400}"
+        },
+        "$description": "Focus border color"
+      },
+      "danger": {
+        "$type": "color",
+        "$value": "{color.palette.red.600}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.red.600}",
+          "design.paths.dark": "{color.palette.red.500}"
+        },
+        "$description": "Danger border color"
+      },
+      "info": {
+        "$type": "color",
+        "$value": "{color.palette.blue.600}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.blue.600}",
+          "design.paths.dark": "{color.palette.blue.500}"
+        },
+        "$description": "Info border color"
+      },
+      "onColor": {
+        "$type": "color",
+        "$value": "{color.mode.white}",
+        "$extensions": {
+          "design.paths.light": "{color.mode.white}",
+          "design.paths.dark": "{color.mode.white}"
+        },
+        "$description": "Border color for elements on colored backgrounds"
+      },
+      "success": {
+        "$type": "color",
+        "$value": "{color.palette.green.600}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.green.600}",
+          "design.paths.dark": "{color.palette.green.500}"
+        },
+        "$description": "Success border color"
+      },
+      "warning": {
+        "$type": "color",
+        "$value": "{color.palette.orange.600}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.orange.600}",
+          "design.paths.dark": "{color.palette.orange.500}"
+        },
+        "$description": "Warning border color"
+      },
+      "strong": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.400}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.400}",
+          "design.paths.dark": "{color.palette.neutral.500}"
+        },
+        "$description": "Strong border color for emphasis"
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.200}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.200}",
+          "design.paths.dark": "{color.palette.neutral.700}"
+        },
+        "$description": "Disabled border color"
+      }
+    },
+    "status": {
+      "info": {
+        "$type": "color",
+        "$value": "{color.palette.blue.500}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.blue.500}",
+          "design.paths.dark": "{color.palette.blue.400}"
+        },
+        "$description": "Info status color"
+      },
+      "success": {
+        "$type": "color",
+        "$value": "{color.palette.green.500}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.green.500}",
+          "design.paths.dark": "{color.palette.green.400}"
+        },
+        "$description": "Success status color"
+      },
+      "warning": {
+        "$type": "color",
+        "$value": "{color.palette.orange.500}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.orange.500}",
+          "design.paths.dark": "{color.palette.orange.400}"
+        },
+        "$description": "Warning status color"
+      },
+      "danger": {
+        "$type": "color",
+        "$value": "{color.palette.red.500}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.red.500}",
+          "design.paths.dark": "{color.palette.red.400}"
+        },
+        "$description": "Danger status color"
+      },
+      "highlight": {
+        "$type": "color",
+        "$value": "{color.palette.brand.primary.400}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.brand.primary.400}",
+          "design.paths.dark": "{color.palette.brand.primary.500}"
+        },
+        "$description": "Highlight status color"
+      }
+    },
+    "data": {
+      "trendDefault": {
+        "$type": "color",
+        "$value": "{color.palette.blue.400}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.blue.400}",
+          "design.paths.dark": "{color.palette.blue.300}"
+        },
+        "$description": "Default trend color for data visualization"
+      },
+      "trendDown": {
+        "$type": "color",
+        "$value": "{color.palette.red.500}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.red.500}",
+          "design.paths.dark": "{color.palette.red.400}"
+        },
+        "$description": "Downward trend color for data visualization"
+      },
+      "trendNeutral": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.500}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.500}",
+          "design.paths.dark": "{color.palette.neutral.400}"
+        },
+        "$description": "Neutral trend color for data visualization"
+      },
+      "trendUp": {
+        "$type": "color",
+        "$value": "{color.palette.green.500}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.green.500}",
+          "design.paths.dark": "{color.palette.green.400}"
+        },
+        "$description": "Upward trend color for data visualization"
+      }
+    },
+    "gradient": {
+      "brandPrimary": {
+        "$type": "color",
+        "$value": "{color.palette.brand.primary.400}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.brand.primary.400}",
+          "design.paths.dark": "{color.palette.brand.primary.500}"
+        },
+        "$description": "Brand primary gradient color"
+      }
+    },
+    "overlay": {
+      "scrim": {
+        "$type": "color",
+        "$value": "rgba(0,0,0,0.40)",
+        "$extensions": {
+          "design.paths.light": "rgba(0,0,0,0.40)",
+          "design.paths.dark": "rgba(0,0,0,0.60)"
+        },
+        "$description": "Standard overlay scrim color"
+      },
+      "scrimWeak": {
+        "$type": "color",
+        "$value": "rgba(0,0,0,0.24)",
+        "$extensions": {
+          "design.paths.light": "rgba(0,0,0,0.24)",
+          "design.paths.dark": "rgba(0,0,0,0.40)"
+        },
+        "$description": "Weak overlay scrim color"
+      },
+      "scrimMedium": {
+        "$type": "color",
+        "$value": "rgba(0,0,0,0.40)",
+        "$extensions": {
+          "design.paths.light": "rgba(0,0,0,0.40)",
+          "design.paths.dark": "rgba(0,0,0,0.60)"
+        },
+        "$description": "Medium overlay scrim color"
+      },
+      "scrimStrong": {
+        "$type": "color",
+        "$value": "rgba(0,0,0,0.64)",
+        "$extensions": {
+          "design.paths.light": "rgba(0,0,0,0.64)",
+          "design.paths.dark": "rgba(0,0,0,0.80)"
+        },
+        "$description": "Strong overlay scrim color"
+      }
+    },
     "action": {
       "background": {
         "primary": {
@@ -408,20 +1191,20 @@
     "syntax": {
       "plain": {
         "$type": "color",
-        "$value": "{core.color.display.foreground.primary}",
-          "$extensions": {
-            "design.paths.light": "{core.color.display.foreground.primary}",
-            "design.paths.dark": "{core.color.display.foreground.primary}"
-          },
+        "$value": "{color.mode.dark}",
+        "$extensions": {
+          "design.paths.light": "{color.mode.dark}",
+          "design.paths.dark": "{color.mode.dark}"
+        },
         "$description": "Plain syntax text"
       },
       "comment": {
         "color": {
           "$type": "color",
-          "$value": "{core.color.display.foreground.tertiary}",
+          "$value": "{color.palette.neutral.500}",
           "$extensions": {
-            "design.paths.light": "{core.color.display.foreground.tertiary}",
-            "design.paths.dark": "{core.color.display.foreground.tertiary}"
+            "design.paths.light": "{color.palette.neutral.500}",
+            "design.paths.dark": "{color.palette.neutral.500}"
           },
           "$description": "Comment syntax color"
         },
@@ -429,55 +1212,55 @@
       },
       "keyword": {
         "$type": "color",
-        "$value": "{core.color.feedback.foreground.info.default}",
+        "$value": "{color.feedback.foreground.info.default}",
         "$extensions": {
-          "design.paths.light": "{core.color.feedback.foreground.info.default}",
-          "design.paths.dark": "{core.color.feedback.foreground.info.default}"
+          "design.paths.light": "{color.feedback.foreground.info.default}",
+          "design.paths.dark": "{color.feedback.foreground.info.default}"
         },
         "$description": "Keyword syntax color"
       },
       "definition": {
         "$type": "color",
-        "$value": "{core.color.display.foreground.accent}",
+        "$value": "{color.palette.red.500}",
         "$extensions": {
-          "design.paths.light": "{core.color.display.foreground.accent}",
-          "design.paths.dark": "{core.color.display.foreground.accent}"
+          "design.paths.light": "{color.palette.red.500}",
+          "design.paths.dark": "{color.palette.red.500}"
         },
         "$description": "Definition syntax color"
       },
       "punctuation": {
         "$type": "color",
-        "$value": "{core.color.feedback.foreground.info.default}",
+        "$value": "{color.feedback.foreground.info.default}",
         "$extensions": {
-          "design.paths.light": "{core.color.feedback.foreground.info.default}",
-          "design.paths.dark": "{core.color.feedback.foreground.info.default}"
+          "design.paths.light": "{color.feedback.foreground.info.default}",
+          "design.paths.dark": "{color.feedback.foreground.info.default}"
         },
         "$description": "Punctuation syntax color"
       },
       "property": {
         "$type": "color",
-        "$value": "{core.color.feedback.foreground.warning.default}",
+        "$value": "{color.feedback.foreground.warning.default}",
         "$extensions": {
-          "design.paths.light": "{core.color.feedback.foreground.warning.default}",
-          "design.paths.dark": "{core.color.feedback.foreground.warning.default}"
+          "design.paths.light": "{color.feedback.foreground.warning.default}",
+          "design.paths.dark": "{color.feedback.foreground.warning.default}"
         },
         "$description": "Property syntax color"
       },
       "tag": {
         "$type": "color",
-        "$value": "{core.color.feedback.foreground.danger.default}",
+        "$value": "{color.feedback.foreground.danger.default}",
         "$extensions": {
-          "design.paths.light": "{core.color.feedback.foreground.danger.default}",
-          "design.paths.dark": "{core.color.feedback.foreground.danger.default}"
+          "design.paths.light": "{color.feedback.foreground.danger.default}",
+          "design.paths.dark": "{color.feedback.foreground.danger.default}"
         },
         "$description": "Tag syntax color"
       },
       "static": {
         "$type": "color",
-        "$value": "{core.color.display.foreground.accent}",
+        "$value": "{color.palette.red.500}",
         "$extensions": {
-          "design.paths.light": "{core.color.display.foreground.accent}",
-          "design.paths.dark": "{core.color.display.foreground.accent}"
+          "design.paths.light": "{color.palette.red.500}",
+          "design.paths.dark": "{color.palette.red.500}"
         },
         "$description": "Static syntax color"
       },
@@ -1445,15 +2228,15 @@
     "text": {
       "hover": {
         "$type": "color",
-        "$value": "{core.color.display.foreground.secondary}"
+        "$value": "{color.palette.neutral.600}"
       },
       "active": {
         "$type": "color",
-        "$value": "{core.color.display.foreground.primary}"
+        "$value": "{color.mode.dark}"
       },
       "disabled": {
         "$type": "color",
-        "$value": "{core.color.display.foreground.disabled}"
+        "$value": "{color.palette.neutral.400}"
       }
     },
     "background": {
@@ -1504,10 +2287,10 @@
         },
         "$description": "Secondary action border hover"
       },
-      "active": { "$type": "color", "$value": "{core.color.display.border.bold}" },
+      "active": { "$type": "color", "$value": "{color.palette.neutral.400}" },
       "disabled": {
         "$type": "color",
-        "$value": "{core.color.display.border.disabled}"
+        "$value": "{color.palette.neutral.200}"
       }
     }
   },
@@ -1541,33 +2324,33 @@
   "link": {
     "text": {
       "$type": "color",
-      "$value": "{core.color.display.foreground.link.default}"
+      "$value": "{color.palette.blue.500}"
     },
     "decorationColor": {
       "$type": "color",
-      "$value": "{core.color.display.foreground.link.default}"
+      "$value": "{color.palette.blue.500}"
     },
     "decorationThickness": { "$type": "dimension", "$value": "1px" },
     "decorationOffset": { "$type": "dimension", "$value": "2px" },
     "hover.text": {
       "$type": "color",
-      "$value": "{core.color.display.foreground.link.hover}"
+      "$value": "{color.palette.blue.600}"
     },
     "visited.text": {
       "$type": "color",
-      "$value": "{core.color.display.foreground.link.visited}"
+      "$value": "{color.palette.blue.700}"
     }
   },
 
   "skeleton": {
     "background": {
       "$type": "color",
-      "$value": "{core.color.display.background.secondary}",
+      "$value": "{color.palette.neutral.100}",
       "$description": "Skeleton loading background"
     },
     "foreground": {
       "$type": "color",
-      "$value": "{core.color.display.background.tertiary}",
+      "$value": "{color.palette.neutral.200}",
       "$description": "Skeleton loading shimmer"
     },
     "shineDuration": {
@@ -1606,21 +2389,157 @@
         "$value": "{spacing.size.08}",
         "$description": "Space between content sections"
       }
-    }
-  },
-
-  "focus": {
-    "ring": {
-      "$description": "Focus ring styling for accessibility and interactive elements.",
-      "$type": "composition",
-      "$value": {
-        "border": {
-          "width": "{interaction.focus.ringWidth}",
-          "style": "solid",
-          "color": "{core.color.display.foreground.accent}"
+    },
+    "editor": {
+      "background": {
+        "$type": "color",
+        "$value": "{semantic.color.background.primary}"
+      },
+      "surface": {
+        "$type": "color",
+        "$value": "{semantic.color.background.elevated}"
+      },
+      "gutter": {
+        "$type": "color",
+        "$value": "{semantic.color.border.light}"
+      },
+      "cursor": {
+        "$type": "color",
+        "$value": "{semantic.color.status.warning}"
+      },
+      "selection": {
+        "$type": "color",
+        "$value": "{semantic.color.background.active}"
+      },
+      "selectionHighlight": {
+        "$type": "color",
+        "$value": "{semantic.color.background.highlight}"
+      },
+      "lineNumber": {
+        "active": {
+          "$type": "color",
+          "$value": "{semantic.color.status.highlight}"
         },
-        "offset": "{interaction.focus.ringOffset}",
-        "opacity": "{interaction.focus.ringOpacity}"
+        "default": {
+          "$type": "color",
+          "$value": "{semantic.color.border.primary}"
+        }
+      }
+    },
+    "button": {
+      "primary": {
+        "background": {
+          "$type": "color",
+          "$value": "{semantic.color.background.brand}"
+        },
+        "foreground": {
+          "$type": "color",
+          "$value": "{semantic.color.foreground.onBrand}"
+        },
+        "border": {
+          "$type": "color",
+          "$value": "{semantic.color.border.strong}"
+        },
+        "radius": {
+          "$type": "borderRadius",
+          "$value": "{semantic.shape.radius.default}"
+        },
+        "paddingX": {
+          "$type": "dimension",
+          "$value": "{core.spacing.size.04}"
+        },
+        "paddingY": {
+          "$type": "dimension",
+          "$value": "{core.spacing.size.03}"
+        },
+        "height": {
+          "$type": "dimension",
+          "$value": "{semantic.control.size.md.height}"
+        },
+        "elevation": {
+          "$type": "shadow",
+          "$value": "{semantic.elevation.default}"
+        }
+      },
+      "danger": {
+        "background": {
+          "$type": "color",
+          "$value": "{semantic.color.background.dangerStrong}"
+        },
+        "foreground": {
+          "$type": "color",
+          "$value": "{semantic.color.foreground.onBrand}"
+        }
+      }
+    },
+    "input": {
+      "background": {
+        "$type": "color",
+        "$value": "{semantic.color.background.primary}"
+      },
+      "foreground": {
+        "$type": "color",
+        "$value": "{semantic.color.foreground.primary}"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{semantic.color.border.default}"
+      },
+      "radius": {
+        "$type": "borderRadius",
+        "$value": "{semantic.shape.radius.default}"
+      },
+      "paddingX": {
+        "$type": "dimension",
+        "$value": "{core.spacing.size.03}"
+      },
+      "paddingY": {
+        "$type": "dimension",
+        "$value": "{core.spacing.size.02}"
+      }
+    },
+    "badge": {
+      "info": {
+        "background": {
+          "$type": "color",
+          "$value": "{semantic.color.background.infoSubtle}"
+        },
+        "foreground": {
+          "$type": "color",
+          "$value": "{semantic.color.foreground.onInfoSubtle}"
+        },
+        "radius": {
+          "$type": "borderRadius",
+          "$value": "{semantic.shape.radius.small}"
+        },
+        "paddingX": {
+          "$type": "dimension",
+          "$value": "{core.spacing.size.02}"
+        }
+      }
+    },
+    "typography": {
+      "displayOversize": {
+        "fontFamily": {
+          "$type": "fontFamily",
+          "$value": "{semantic.typography.semanticFamily.heading}"
+        },
+        "fontWeight": {
+          "$type": "fontWeight",
+          "$value": "{semantic.typography.fontWeight.black}"
+        },
+        "fontSize": {
+          "$type": "dimension",
+          "$value": "{core.typography.ramp.14}"
+        },
+        "lineHeight": {
+          "$type": "number",
+          "$value": "{core.typography.lineHeight.heading}"
+        },
+        "letterSpacing": {
+          "$type": "dimension",
+          "$value": "{core.typography.letterSpacing.tight}"
+        }
       }
     }
   },
@@ -1650,7 +2569,7 @@
     },
     "foreground": {
       "$type": "color",
-      "$value": "{core.color.display.foreground.primary}"
+      "$value": "{color.mode.dark}"
     },
     "typography": {
       "variation": {
@@ -1685,15 +2604,15 @@
       },
       "colorText": {
         "$type": "color",
-        "$value": "{core.color.display.foreground.primary}"
+        "$value": "{color.mode.dark}"
       },
       "colorBg": {
         "$type": "color",
-        "$value": "{core.color.display.background.primary}"
+        "$value": "{color.mode.light}"
       },
       "colorBorder": {
         "$type": "color",
-        "$value": "{core.color.display.border.subtle}"
+        "$value": "{color.palette.neutral.200}"
       },
       "colorFocus": {
         "$type": "color",
@@ -1707,6 +2626,59 @@
       "path": { "$type": "string", "$value": "test-path" },
       "typeWghtHeading": { "$type": "number", "$value": 700 },
       "typeWdthResponsive": { "$type": "number", "$value": 100 }
+    }
+  },
+  "focus": {
+    "ring": {
+      "$description": "Focus ring styling for accessibility and interactive elements.",
+      "$type": "composition",
+      "$value": {
+        "border": {
+          "width": "{interaction.focus.ringWidth}",
+          "style": "solid",
+          "color": "{color.palette.red.500}"
+        },
+        "offset": "{interaction.focus.ringOffset}",
+        "opacity": "{interaction.focus.ringOpacity}"
+      }
+    },
+    "ringOffset": {
+      "$type": "dimension",
+      "$value": "{spacing.size.02}",
+      "$extensions": {
+        "design.paths.light": "{spacing.size.02}",
+        "design.paths.dark": "{spacing.size.02}"
+      },
+      "$description": "Focus ring offset distance"
+    }
+  },
+  "overlay": {
+    "scrimWeak": {
+      "$type": "color",
+      "$value": "rgba(0,0,0,0.24)",
+      "$extensions": {
+        "design.paths.light": "rgba(0,0,0,0.24)",
+        "design.paths.dark": "rgba(0,0,0,0.40)"
+      },
+      "$description": "Weak overlay scrim"
+    },
+    "scrimMedium": {
+      "$type": "color",
+      "$value": "rgba(0,0,0,0.40)",
+      "$extensions": {
+        "design.paths.light": "rgba(0,0,0,0.40)",
+        "design.paths.dark": "rgba(0,0,0,0.60)"
+      },
+      "$description": "Medium overlay scrim"
+    },
+    "scrimStrong": {
+      "$type": "color",
+      "$value": "rgba(0,0,0,0.64)",
+      "$extensions": {
+        "design.paths.light": "rgba(0,0,0,0.64)",
+        "design.paths.dark": "rgba(0,0,0,0.80)"
+      },
+      "$description": "Strong overlay scrim"
     }
   }
 }
