@@ -6,7 +6,7 @@ import type {
   ToastRecord,
   ToastState,
   ToastVariant,
-} from './Types';
+} from './types';
 
 const DEFAULT_DURATION = 5000;
 const MAX_VISIBLE = 3;

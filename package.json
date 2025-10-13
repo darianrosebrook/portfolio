@@ -11,6 +11,7 @@
     "lint:fix": "next lint --fix",
     "lint:fix:css": "stylelint --fix \"**/*.{css,scss}\"",
     "typecheck": "tsc --noEmit",
+    "validate": "bash scripts/validate-build.sh",
     "test": "vitest run",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",

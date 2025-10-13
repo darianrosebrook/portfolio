@@ -4,7 +4,7 @@ import type {
   TabsContextValue,
   TabsValue,
   TabRegistration,
-} from './Types';
+} from './types';
 
 export interface UseTabsOptions {
   defaultValue?: TabsValue;
