@@ -2,40 +2,40 @@
 
 ```yaml
 - generic [ref=e3]:
-  - generic [ref=e4]:
-    - generic [ref=e5]: "[plugin:vite:css]"
-    - generic [ref=e6]: "[sass] Error: Can't find stylesheet to import. ╷ 1 │ @use './MessageBubble.tokens.generated.scss'; │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ╵ /Users/darianrosebrook/Desktop/Projects/obsidian-rag/apps/rag_web_search_tool/ui/components/MessageBubble/MessageBubble.module.scss 1:1 root stylesheet"
-  - generic [ref=e8] [cursor=pointer]: /Users/darianrosebrook/Desktop/Projects/obsidian-rag/apps/rag_web_search_tool/ui/components/MessageBubble/MessageBubble.module.scss:1:1
-  - generic [ref=e9]:
-    - text: at handleCompileResponse (
-    - generic [ref=e10] [cursor=pointer]: /Users/darianrosebrook/Desktop/Projects/obsidian-rag/node_modules/.pnpm/sass-embedded@1.93.2/node_modules/sass-embedded/dist/lib/src/compiler/utils.js:155:15
-    - text: ) at AsyncCompiler.compileRequestAsync (
-    - generic [ref=e11] [cursor=pointer]: /Users/darianrosebrook/Desktop/Projects/obsidian-rag/node_modules/.pnpm/sass-embedded@1.93.2/node_modules/sass-embedded/dist/lib/src/compiler/async.js:100:54
-    - text: ) at process.processTicksAndRejections (node:internal
-    - generic [ref=e12] [cursor=pointer]: /process/task_queues:105:5
-    - text: ") at async Object.run (file:"
-    - generic [ref=e13] [cursor=pointer]: ///Users/darianrosebrook/Desktop/Projects/obsidian-rag/node_modules/.pnpm/vite@6.3.5_@types+node@24.5.2_sass-embedded@1.93.2_sass@1.93.2_tsx@4.20.5_yaml@2.8.1/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js:44528:22
-    - text: ") at async process (file:"
-    - generic [ref=e14] [cursor=pointer]: ///Users/darianrosebrook/Desktop/Projects/obsidian-rag/node_modules/.pnpm/vite@6.3.5_@types+node@24.5.2_sass-embedded@1.93.2_sass@1.93.2_tsx@4.20.5_yaml@2.8.1/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js:44587:24
-    - text: ") at async compileCSSPreprocessors (file:"
-    - generic [ref=e15] [cursor=pointer]: ///Users/darianrosebrook/Desktop/Projects/obsidian-rag/node_modules/.pnpm/vite@6.3.5_@types+node@24.5.2_sass-embedded@1.93.2_sass@1.93.2_tsx@4.20.5_yaml@2.8.1/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js:43590:28
-    - text: ") at async compileCSS (file:"
-    - generic [ref=e16] [cursor=pointer]: ///Users/darianrosebrook/Desktop/Projects/obsidian-rag/node_modules/.pnpm/vite@6.3.5_@types+node@24.5.2_sass-embedded@1.93.2_sass@1.93.2_tsx@4.20.5_yaml@2.8.1/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js:43634:32
-    - text: ") at async TransformPluginContext.handler (file:"
-    - generic [ref=e17] [cursor=pointer]: ///Users/darianrosebrook/Desktop/Projects/obsidian-rag/node_modules/.pnpm/vite@6.3.5_@types+node@24.5.2_sass-embedded@1.93.2_sass@1.93.2_tsx@4.20.5_yaml@2.8.1/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js:42965:11
-    - text: ") at async EnvironmentPluginContainer.transform (file:"
-    - generic [ref=e18] [cursor=pointer]: ///Users/darianrosebrook/Desktop/Projects/obsidian-rag/node_modules/.pnpm/vite@6.3.5_@types+node@24.5.2_sass-embedded@1.93.2_sass@1.93.2_tsx@4.20.5_yaml@2.8.1/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js:42294:18
-    - text: ") at async loadAndTransform (file:"
-    - generic [ref=e19] [cursor=pointer]: ///Users/darianrosebrook/Desktop/Projects/obsidian-rag/node_modules/.pnpm/vite@6.3.5_@types+node@24.5.2_sass-embedded@1.93.2_sass@1.93.2_tsx@4.20.5_yaml@2.8.1/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js:35735:27
-  - generic [ref=e20]:
-    - text: Click outside, press
-    - generic [ref=e21]: Esc
-    - text: key, or fix the code to dismiss.
-    - text: You can also disable this overlay by setting
-    - code [ref=e22]: server.hmr.overlay
-    - text: to
-    - code [ref=e23]: "false"
-    - text: in
-    - code [ref=e24]: vite.config.ts
-    - text: .
+    - generic [ref=e4]:
+        - generic [ref=e5]: '[plugin:vite:css]'
+        - generic [ref=e6]: "[sass] Error: Can't find stylesheet to import. ╷ 1 │ @use './MessageBubble.tokens.generated.scss'; │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ╵ /Users/darianrosebrook/Desktop/Projects/obsidian-rag/apps/rag_web_search_tool/ui/components/MessageBubble/MessageBubble.module.scss 1:1 root stylesheet"
+    - generic [ref=e8] [cursor=pointer]: /Users/darianrosebrook/Desktop/Projects/obsidian-rag/apps/rag_web_search_tool/ui/components/MessageBubble/MessageBubble.module.scss:1:1
+    - generic [ref=e9]:
+        - text: at handleCompileResponse (
+        - generic [ref=e10] [cursor=pointer]: /Users/darianrosebrook/Desktop/Projects/obsidian-rag/node_modules/.pnpm/sass-embedded@1.93.2/node_modules/sass-embedded/dist/lib/src/compiler/utils.js:155:15
+        - text: ) at AsyncCompiler.compileRequestAsync (
+        - generic [ref=e11] [cursor=pointer]: /Users/darianrosebrook/Desktop/Projects/obsidian-rag/node_modules/.pnpm/sass-embedded@1.93.2/node_modules/sass-embedded/dist/lib/src/compiler/async.js:100:54
+        - text: ) at process.processTicksAndRejections (node:internal
+        - generic [ref=e12] [cursor=pointer]: /process/task_queues:105:5
+        - text: ') at async Object.run (file:'
+        - generic [ref=e13] [cursor=pointer]: ///Users/darianrosebrook/Desktop/Projects/obsidian-rag/node_modules/.pnpm/vite@6.3.5_@types+node@24.5.2_sass-embedded@1.93.2_sass@1.93.2_tsx@4.20.5_yaml@2.8.1/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js:44528:22
+        - text: ') at async process (file:'
+        - generic [ref=e14] [cursor=pointer]: ///Users/darianrosebrook/Desktop/Projects/obsidian-rag/node_modules/.pnpm/vite@6.3.5_@types+node@24.5.2_sass-embedded@1.93.2_sass@1.93.2_tsx@4.20.5_yaml@2.8.1/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js:44587:24
+        - text: ') at async compileCSSPreprocessors (file:'
+        - generic [ref=e15] [cursor=pointer]: ///Users/darianrosebrook/Desktop/Projects/obsidian-rag/node_modules/.pnpm/vite@6.3.5_@types+node@24.5.2_sass-embedded@1.93.2_sass@1.93.2_tsx@4.20.5_yaml@2.8.1/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js:43590:28
+        - text: ') at async compileCSS (file:'
+        - generic [ref=e16] [cursor=pointer]: ///Users/darianrosebrook/Desktop/Projects/obsidian-rag/node_modules/.pnpm/vite@6.3.5_@types+node@24.5.2_sass-embedded@1.93.2_sass@1.93.2_tsx@4.20.5_yaml@2.8.1/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js:43634:32
+        - text: ') at async TransformPluginContext.handler (file:'
+        - generic [ref=e17] [cursor=pointer]: ///Users/darianrosebrook/Desktop/Projects/obsidian-rag/node_modules/.pnpm/vite@6.3.5_@types+node@24.5.2_sass-embedded@1.93.2_sass@1.93.2_tsx@4.20.5_yaml@2.8.1/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js:42965:11
+        - text: ') at async EnvironmentPluginContainer.transform (file:'
+        - generic [ref=e18] [cursor=pointer]: ///Users/darianrosebrook/Desktop/Projects/obsidian-rag/node_modules/.pnpm/vite@6.3.5_@types+node@24.5.2_sass-embedded@1.93.2_sass@1.93.2_tsx@4.20.5_yaml@2.8.1/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js:42294:18
+        - text: ') at async loadAndTransform (file:'
+        - generic [ref=e19] [cursor=pointer]: ///Users/darianrosebrook/Desktop/Projects/obsidian-rag/node_modules/.pnpm/vite@6.3.5_@types+node@24.5.2_sass-embedded@1.93.2_sass@1.93.2_tsx@4.20.5_yaml@2.8.1/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js:35735:27
+    - generic [ref=e20]:
+        - text: Click outside, press
+        - generic [ref=e21]: Esc
+        - text: key, or fix the code to dismiss.
+        - text: You can also disable this overlay by setting
+        - code [ref=e22]: server.hmr.overlay
+        - text: to
+        - code [ref=e23]: 'false'
+        - text: in
+        - code [ref=e24]: vite.config.ts
+        - text: .
 ```

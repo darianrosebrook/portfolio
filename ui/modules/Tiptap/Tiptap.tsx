@@ -3,7 +3,7 @@
 import { useEditor, EditorContent, JSONContent } from '@tiptap/react';
 import styles from './tiptap.module.css';
 
-import { createExtensions } from './Extensions';
+import { createExtensions } from './extensionsConfig';
 import ImageBubbleMenu from './ImageBubbleMenu';
 import VideoBubbleMenu from './VideoBubbleMenu';
 import ToolbarWrapper from './ToolbarWrapper';

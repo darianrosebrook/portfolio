@@ -31,10 +31,10 @@ function DataTable() {
 
 ## Props
 
-| Prop      | Type   | Default | Description              |
-| --------- | ------ | ------- | ------------------------ |
-| children  | ReactNode | -     | Table content            |
-| className | string | ''      | Additional CSS classes   |
+| Prop      | Type      | Default | Description            |
+| --------- | --------- | ------- | ---------------------- |
+| children  | ReactNode | -       | Table content          |
+| className | string    | ''      | Additional CSS classes |
 
 ## Examples
 

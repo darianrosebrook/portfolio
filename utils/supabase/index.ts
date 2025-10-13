@@ -21,13 +21,7 @@ export {
 } from './profile';
 
 // Content utilities
-export {
-  extractImageUrls,
-  syncArticleImageUsage,
-} from './article-cleanup';
+export { extractImageUrls, syncArticleImageUsage } from './article-cleanup';
 
 // Media types
-export type {
-  Media,
-  MediaType,
-} from './upload';
+export type { Media, MediaType } from './upload';

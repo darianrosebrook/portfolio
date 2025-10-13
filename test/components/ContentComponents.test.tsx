@@ -4,7 +4,6 @@ import { Text } from '@/ui/components/Text';
 import { List } from '@/ui/components/List';
 import { Image } from '@/ui/components/Image';
 
-
 describe('Text', () => {
   it('renders with default paragraph element', () => {
     render(<Text>Test content</Text>);

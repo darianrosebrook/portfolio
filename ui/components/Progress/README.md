@@ -9,30 +9,25 @@ import { Progress } from '@/ui/components/Progress';
 
 function Example() {
   return (
-    <Progress
-      value={75}
-      variant="linear"
-      label="Upload progress"
-      showValue
-    />
+    <Progress value={75} variant="linear" label="Upload progress" showValue />
   );
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| value | number | - | Progress value (0-100). If undefined, shows indeterminate progress |
-| max | number | 100 | Maximum value |
-| variant | 'linear' \| 'circular' | 'linear' | Progress indicator style |
-| size | 'sm' \| 'md' \| 'lg' | 'md' | Size variant using design tokens |
-| intent | 'info' \| 'success' \| 'warning' \| 'danger' | 'info' | Visual intent/color |
-| label | string | - | Label for accessibility |
-| showValue | boolean | false | Whether to show percentage text |
-| formatValue | (value: number, max: number) => string | - | Custom value formatter |
-| className | string | '' | Additional CSS classes |
-| ...rest | HTMLAttributes | - | Additional div props |
+| Prop        | Type                                         | Default  | Description                                                        |
+| ----------- | -------------------------------------------- | -------- | ------------------------------------------------------------------ |
+| value       | number                                       | -        | Progress value (0-100). If undefined, shows indeterminate progress |
+| max         | number                                       | 100      | Maximum value                                                      |
+| variant     | 'linear' \| 'circular'                       | 'linear' | Progress indicator style                                           |
+| size        | 'sm' \| 'md' \| 'lg'                         | 'md'     | Size variant using design tokens                                   |
+| intent      | 'info' \| 'success' \| 'warning' \| 'danger' | 'info'   | Visual intent/color                                                |
+| label       | string                                       | -        | Label for accessibility                                            |
+| showValue   | boolean                                      | false    | Whether to show percentage text                                    |
+| formatValue | (value: number, max: number) => string       | -        | Custom value formatter                                             |
+| className   | string                                       | ''       | Additional CSS classes                                             |
+| ...rest     | HTMLAttributes                               | -        | Additional div props                                               |
 
 ## Examples
 
@@ -45,11 +40,7 @@ function Example() {
 ### Progress with Label
 
 ```tsx
-<Progress
-  value={75}
-  label="File upload progress"
-  showValue
-/>
+<Progress value={75} label="File upload progress" showValue />
 ```
 
 ### Indeterminate Progress
@@ -61,12 +52,7 @@ function Example() {
 ### Circular Progress
 
 ```tsx
-<Progress
-  value={60}
-  variant="circular"
-  size="lg"
-  showValue
-/>
+<Progress value={60} variant="circular" size="lg" showValue />
 ```
 
 ### Different Intents
@@ -108,13 +94,11 @@ function FileUpload() {
     <div>
       <Progress
         value={isUploading ? progress : undefined}
-        label={isUploading ? "Uploading file..." : "Ready to upload"}
+        label={isUploading ? 'Uploading file...' : 'Ready to upload'}
         showValue={!isUploading}
-        intent={isUploading ? "info" : "success"}
+        intent={isUploading ? 'info' : 'success'}
       />
-      {progress === 100 && (
-        <span>Upload complete!</span>
-      )}
+      {progress === 100 && <span>Upload complete!</span>}
     </div>
   );
 }
@@ -125,7 +109,7 @@ function FileUpload() {
 ```tsx
 function FormProgress({ currentStep, totalSteps }) {
   const progress = (currentStep / totalSteps) * 100;
-  
+
   return (
     <Progress
       value={progress}
@@ -143,37 +127,44 @@ function FormProgress({ currentStep, totalSteps }) {
 This component uses the following design tokens:
 
 ### Layout & Spacing
+
 - `--progress-spacing-gap` - Gap between progress and value text
 - `--progress-spacing-padding` - Internal padding
 - `--progress-spacing-margin` - External margins
 
 ### Colors
+
 - `--progress-color-background` - Track background color
 - `--progress-color-foreground` - Fill color
 - `--progress-color-text` - Value text color
 - `--progress-color-border` - Border color (if applicable)
 
 ### Intent Colors
+
 - `--progress-color-info` - Info intent color
 - `--progress-color-success` - Success intent color
 - `--progress-color-warning` - Warning intent color
 - `--progress-color-danger` - Danger intent color
 
 ### Typography
+
 - `--progress-font-size` - Value text font size
 - `--progress-font-weight` - Value text font weight
 - `--progress-line-height` - Value text line height
 
 ### Animation
+
 - `--progress-transition-duration` - Animation duration
 - `--progress-transition-easing` - Animation easing
 - `--progress-indeterminate-duration` - Indeterminate animation duration
 
 ### Border & Shape
+
 - `--progress-border-radius` - Border radius
 - `--progress-border-width` - Border width
 
 ### Sizing
+
 - `--progress-height-sm` - Small progress height
 - `--progress-height-md` - Medium progress height
 - `--progress-height-lg` - Large progress height
@@ -182,6 +173,7 @@ This component uses the following design tokens:
 - `--progress-width-lg` - Large progress width
 
 ### Circular Variant
+
 - `--progress-circle-radius` - Circular progress radius
 - `--progress-circle-stroke-width` - Stroke width
 - `--progress-circle-size-sm` - Small circle size
@@ -202,10 +194,10 @@ This component uses the following design tokens:
 
 Progress indicators are typically not interactive, but they support:
 
-| Key | Action | Result | Notes |
-|-----|--------|---------|-------|
-| Tab | navigate | Move to next focusable element | If progress is focusable |
-| Space/Enter | activate | No action | Progress is read-only |
+| Key         | Action   | Result                         | Notes                    |
+| ----------- | -------- | ------------------------------ | ------------------------ |
+| Tab         | navigate | Move to next focusable element | If progress is focusable |
+| Space/Enter | activate | No action                      | Progress is read-only    |
 
 ### Focus Management
 
@@ -258,6 +250,3 @@ Progress indicators are typically not interactive, but they support:
 - CSS-based animations for better performance
 - Efficient re-rendering with proper memoization
 - Lightweight SVG for circular variant
-
-
-

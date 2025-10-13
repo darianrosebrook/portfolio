@@ -31,8 +31,19 @@ export async function POST(request: Request) {
     .insert([{ ...validation.data, author: user.id, editor: user.id }])
     .select();
 
-  if (error) {
-    return new NextResponse(JSON.stringify({ error: error.message }), {
+  if (error && (error.message || error.code || Object.keys(error).length > 0)) {
+    console.error('Article insert error:', JSON.stringify(error, null, 2));
+    return new NextResponse(
+      JSON.stringify({ error: error.message || 'Database error' }),
+      {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+  }
+
+  if (!data) {
+    return new NextResponse(JSON.stringify({ error: 'No data returned' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });
@@ -63,8 +74,19 @@ export async function GET() {
     .select('*')
     .eq('author', user.id);
 
-  if (error) {
-    return new NextResponse(JSON.stringify({ error: error.message }), {
+  if (error && (error.message || error.code || Object.keys(error).length > 0)) {
+    console.error('Articles fetch error:', JSON.stringify(error, null, 2));
+    return new NextResponse(
+      JSON.stringify({ error: error.message || 'Database error' }),
+      {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+  }
+
+  if (!data) {
+    return new NextResponse(JSON.stringify({ error: 'No data returned' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });

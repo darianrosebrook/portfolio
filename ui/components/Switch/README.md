@@ -26,26 +26,26 @@ function Example() {
 
 ### Switch
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| checked | boolean | - | **Required.** Whether the switch is on/off |
-| onChange | (e: ChangeEvent) => void | - | **Required.** Change handler |
-| children | ReactNode | - | **Required.** Label content |
-| disabled | boolean | false | Whether the switch is disabled |
-| size | 'sm' \| 'md' \| 'lg' | 'md' | Size variant using design tokens |
-| id | string | - | Unique identifier (auto-generated if not provided) |
-| ariaLabel | string | - | Accessible label (uses children if not provided) |
-| ariaDescription | string | - | Accessible description |
-| className | string | '' | Additional CSS classes |
-| ...rest | InputHTMLAttributes | - | Additional input props |
+| Prop            | Type                     | Default | Description                                        |
+| --------------- | ------------------------ | ------- | -------------------------------------------------- |
+| checked         | boolean                  | -       | **Required.** Whether the switch is on/off         |
+| onChange        | (e: ChangeEvent) => void | -       | **Required.** Change handler                       |
+| children        | ReactNode                | -       | **Required.** Label content                        |
+| disabled        | boolean                  | false   | Whether the switch is disabled                     |
+| size            | 'sm' \| 'md' \| 'lg'     | 'md'    | Size variant using design tokens                   |
+| id              | string                   | -       | Unique identifier (auto-generated if not provided) |
+| ariaLabel       | string                   | -       | Accessible label (uses children if not provided)   |
+| ariaDescription | string                   | -       | Accessible description                             |
+| className       | string                   | ''      | Additional CSS classes                             |
+| ...rest         | InputHTMLAttributes      | -       | Additional input props                             |
 
 ### SwitchGroup
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| children | ReactNode | - | **Required.** Switch components |
-| orientation | 'vertical' \| 'horizontal' | 'vertical' | Layout orientation |
-| className | string | '' | Additional CSS classes |
+| Prop        | Type                       | Default    | Description                     |
+| ----------- | -------------------------- | ---------- | ------------------------------- |
+| children    | ReactNode                  | -          | **Required.** Switch components |
+| orientation | 'vertical' \| 'horizontal' | 'vertical' | Layout orientation              |
+| className   | string                     | ''         | Additional CSS classes          |
 
 ## Examples
 
@@ -159,11 +159,13 @@ function Settings() {
 This component uses the following design tokens:
 
 ### Layout & Spacing
+
 - `--switch-spacing-gap` - Gap between switch and label
 - `--switch-spacing-padding` - Internal padding
 - `--switch-spacing-margin` - External margins
 
 ### Colors
+
 - `--switch-color-background` - Background color
 - `--switch-color-foreground` - Text color
 - `--switch-color-border` - Border color
@@ -172,21 +174,25 @@ This component uses the following design tokens:
 - `--switch-color-disabled` - Disabled state color
 
 ### Typography
+
 - `--switch-font-size` - Font size
 - `--switch-font-weight` - Font weight
 - `--switch-line-height` - Line height
 
 ### Animation
+
 - `--switch-transition-duration` - Animation duration
 - `--switch-transition-easing` - Animation easing
 - `--switch-thumb-transition` - Thumb movement animation
 
 ### Border & Shape
+
 - `--switch-border-radius` - Border radius
 - `--switch-border-width` - Border width
 - `--switch-thumb-radius` - Thumb border radius
 
 ### Sizing
+
 - `--switch-width-sm` - Small switch width
 - `--switch-width-md` - Medium switch width
 - `--switch-width-lg` - Large switch width
@@ -198,11 +204,11 @@ This component uses the following design tokens:
 
 ### Keyboard Navigation
 
-| Key | When focus is on | Action | Result | Notes |
-|-----|------------------|--------|---------|-------|
-| Space | Switch | activate | Toggles switch state | Primary activation |
-| Enter | Switch | activate | Toggles switch state | Alternative activation |
-| Tab | Switch | navigate | Move to next focusable element | Standard tab order |
+| Key   | When focus is on | Action   | Result                         | Notes                  |
+| ----- | ---------------- | -------- | ------------------------------ | ---------------------- |
+| Space | Switch           | activate | Toggles switch state           | Primary activation     |
+| Enter | Switch           | activate | Toggles switch state           | Alternative activation |
+| Tab   | Switch           | navigate | Move to next focusable element | Standard tab order     |
 
 ### Screen Reader Support
 
@@ -276,10 +282,8 @@ If migrating from the legacy `ToggleSwitch` component:
 ```
 
 Key differences:
+
 - `label` prop becomes `children`
 - Improved accessibility with native semantics
 - Better design token integration
 - Consistent sizing with other form controls
-
-
-

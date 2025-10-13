@@ -120,6 +120,7 @@ export default function Home() {
               src="/darian-square.jpg"
               name="Darian Rosebrook"
               size="extra-large"
+              priority
             />
             <div className="flag">
               <p>

@@ -1,0 +1,2045 @@
+{
+  "$schema": "./designTokens.schema.json",
+  "meta": {
+    "version": "1.0.0",
+    "source": "Semantic roles (aliases to core)"
+  },
+  "color": {
+    "foreground": {
+      "primary": {
+        "$type": "color",
+        "$value": "{color.mode.dark}",
+        "$extensions": {
+          "design.paths.light": "{color.mode.dark}",
+          "design.paths.dark": "{color.mode.light}"
+        },
+        "$description": "Primary foreground color"
+      },
+      "secondary": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.600}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.600}",
+          "design.paths.dark": "{color.palette.neutral.300}"
+        },
+        "$description": "Secondary foreground color"
+      },
+      "tertiary": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.500}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.500}",
+          "design.paths.dark": "{color.palette.neutral.400}"
+        },
+        "$description": "Tertiary foreground color"
+      },
+      "accent": {
+        "$type": "color",
+        "$value": "{color.palette.red.500}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.red.500}",
+          "design.paths.dark": "{color.palette.red.400}"
+        },
+        "$description": "Accent foreground color"
+      },
+      "highlight": {
+        "$type": "color",
+        "$value": "{color.palette.red.700}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.red.700}",
+          "design.paths.dark": "{color.palette.red.200}"
+        },
+        "$description": "Highlight foreground color"
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.400}",
+        "$description": "Disabled foreground color"
+      },
+      "inverse": {
+        "$type": "color",
+        "$value": "{color.mode.light}",
+        "$extensions": {
+          "design.paths.light": "{color.mode.light}",
+          "design.paths.dark": "{color.mode.dark}"
+        },
+        "$description": "Inverse foreground color (opposite of primary)"
+      },
+      "placeholder": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.400}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.400}",
+          "design.paths.dark": "{color.palette.neutral.500}"
+        },
+        "$description": "Placeholder text color"
+      }
+    },
+    "background": {
+      "primary": {
+        "$type": "color",
+        "$value": "{color.mode.white}",
+        "$extensions": {
+          "design.paths.light": "{color.mode.white}",
+          "design.paths.dark": "{color.mode.black}"
+        },
+        "$description": "Primary background color"
+      },
+      "secondary": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.100}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.100}",
+          "design.paths.dark": "{color.palette.neutral.800}"
+        },
+        "$description": "Secondary background color"
+      },
+      "tertiary": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.200}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.200}",
+          "design.paths.dark": "{color.palette.neutral.700}"
+        },
+        "$description": "Tertiary background color"
+      },
+      "highlight": {
+        "$type": "color",
+        "$value": "{color.palette.red.200}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.red.200}",
+          "design.paths.dark": "{color.palette.red.700}"
+        },
+        "$description": "Highlight background color"
+      },
+      "readOnly": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.100}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.100}",
+          "design.paths.dark": "{color.palette.neutral.800}"
+        },
+        "$description": "Read-only background color"
+      },
+      "inverse": {
+        "$type": "color",
+        "$value": "{color.mode.dark}",
+        "$extensions": {
+          "design.paths.light": "{color.mode.dark}",
+          "design.paths.dark": "{color.mode.light}"
+        },
+        "$description": "Inverse background color (opposite of primary)"
+      }
+    },
+    "border": {
+      "default": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.300}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.300}",
+          "design.paths.dark": "{color.palette.neutral.600}"
+        },
+        "$description": "Default border color"
+      },
+      "subtle": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.200}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.200}",
+          "design.paths.dark": "{color.palette.neutral.700}"
+        },
+        "$description": "Subtle border color"
+      },
+      "bold": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.400}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.400}",
+          "design.paths.dark": "{color.palette.neutral.500}"
+        },
+        "$description": "Bold border color"
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.200}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.200}",
+          "design.paths.dark": "{color.palette.neutral.700}"
+        },
+        "$description": "Disabled border color"
+      },
+      "light": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.200}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.200}",
+          "design.paths.dark": "{color.palette.neutral.700}"
+        },
+        "$description": "Light border color"
+      },
+      "primary": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.300}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.300}",
+          "design.paths.dark": "{color.palette.neutral.600}"
+        },
+        "$description": "Primary border color"
+      },
+      "hover": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.400}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.400}",
+          "design.paths.dark": "{color.palette.neutral.500}"
+        },
+        "$description": "Hover border color"
+      },
+      "accent": {
+        "$type": "color",
+        "$value": "{color.palette.red.500}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.red.500}",
+          "design.paths.dark": "{color.palette.red.400}"
+        },
+        "$description": "Accent border color"
+      }
+    },
+    "action": {
+      "background": {
+        "primary": {
+          "default": {
+            "$type": "color",
+            "$value": "{color.palette.brand.primary.500}",
+            "$description": "Primary action background"
+          },
+          "hover": {
+            "$type": "color",
+            "$value": "{color.palette.brand.primary.600}",
+            "$description": "Primary action hover state"
+          },
+          "active": {
+            "$type": "color",
+            "$value": "{color.palette.brand.primary.700}",
+            "$description": "Primary action active state"
+          },
+          "disabled": {
+            "$type": "color",
+            "$value": "{color.palette.neutral.200}",
+            "$extensions": {
+              "design.paths.light": "{color.palette.neutral.200}",
+              "design.paths.dark": "{color.palette.neutral.700}"
+            },
+            "$description": "Primary action disabled state"
+          }
+        },
+        "secondary": {
+          "default": {
+            "$type": "color",
+            "$value": "{color.mode.light}",
+            "$extensions": {
+              "design.paths.light": "{color.mode.light}",
+              "design.paths.dark": "{color.mode.dark}"
+            },
+            "$description": "Secondary action background"
+          },
+          "hover": {
+            "$type": "color",
+            "$value": "{color.palette.neutral.100}",
+            "$extensions": {
+              "design.paths.light": "{color.palette.neutral.100}",
+              "design.paths.dark": "{color.palette.neutral.800}"
+            },
+            "$description": "Secondary action hover state"
+          },
+          "active": {
+            "$type": "color",
+            "$value": "{color.palette.neutral.200}",
+            "$extensions": {
+              "design.paths.light": "{color.palette.neutral.200}",
+              "design.paths.dark": "{color.palette.neutral.700}"
+            },
+            "$description": "Secondary action active state"
+          }
+        },
+        "danger": {
+          "default": {
+            "$type": "color",
+            "$value": "{color.palette.red.500}",
+            "$description": "Destructive action background"
+          },
+          "hover": {
+            "$type": "color",
+            "$value": "{color.palette.red.600}",
+            "$description": "Destructive action hover state"
+          },
+          "active": {
+            "$type": "color",
+            "$value": "{color.palette.red.700}",
+            "$description": "Destructive action active state"
+          }
+        }
+      },
+      "foreground": {
+        "primary": {
+          "default": {
+            "$type": "color",
+            "$value": "{color.mode.white}",
+            "$description": "Primary action text"
+          },
+          "disabled": {
+            "$type": "color",
+            "$value": "{color.palette.neutral.400}",
+            "$description": "Primary action disabled text"
+          }
+        },
+        "secondary": {
+          "default": {
+            "$type": "color",
+            "$value": "{color.mode.dark}",
+            "$extensions": {
+              "design.paths.light": "{color.mode.dark}",
+              "design.paths.dark": "{color.mode.light}"
+            },
+            "$description": "Secondary action text"
+          }
+        },
+        "danger": {
+          "default": {
+            "$type": "color",
+            "$value": "{color.mode.white}",
+            "$description": "Destructive action text"
+          }
+        }
+      },
+      "border": {
+        "primary": {
+          "default": {
+            "$type": "color",
+            "$value": "{color.palette.brand.primary.500}",
+            "$description": "Primary action border"
+          },
+          "focus": {
+            "$type": "color",
+            "$value": "{color.palette.brand.primary.400}",
+            "$description": "Primary action focus ring"
+          }
+        },
+        "secondary": {
+          "default": {
+            "$type": "color",
+            "$value": "{color.palette.neutral.300}",
+            "$extensions": {
+              "design.paths.light": "{color.palette.neutral.300}",
+              "design.paths.dark": "{color.palette.neutral.600}"
+            },
+            "$description": "Secondary action border"
+          },
+          "hover": {
+            "$type": "color",
+            "$value": "{color.palette.neutral.400}",
+            "$extensions": {
+              "design.paths.light": "{color.palette.neutral.400}",
+              "design.paths.dark": "{color.palette.neutral.500}"
+            },
+            "$description": "Secondary action border hover"
+          }
+        },
+        "danger": {
+          "default": {
+            "$type": "color",
+            "$value": "{color.palette.red.500}",
+            "$description": "Destructive action border"
+          }
+        }
+      }
+    },
+    "feedback": {
+      "background": {
+        "success": {
+          "strong": {
+            "$type": "color",
+            "$value": "{color.palette.green.600}",
+            "$description": "Strong success background"
+          },
+          "subtle": {
+            "$type": "color",
+            "$value": "{color.palette.green.100}",
+            "$extensions": {
+              "design.paths.light": "{color.palette.green.100}",
+              "design.paths.dark": "{color.palette.green.800}"
+            },
+            "$description": "Subtle success background"
+          }
+        },
+        "warning": {
+          "strong": {
+            "$type": "color",
+            "$value": "{color.palette.orange.400}",
+            "$extensions": {
+              "design.paths.light": "{color.palette.orange.400}",
+              "design.paths.dark": "{color.palette.orange.600}"
+            },
+            "$description": "Strong warning background"
+          },
+          "subtle": {
+            "$type": "color",
+            "$value": "{color.palette.orange.100}",
+            "$extensions": {
+              "design.paths.light": "{color.palette.orange.100}",
+              "design.paths.dark": "{color.palette.orange.800}"
+            },
+            "$description": "Subtle warning background"
+          }
+        },
+        "danger": {
+          "strong": {
+            "$type": "color",
+            "$value": "{color.palette.red.600}",
+            "$description": "Strong danger background"
+          },
+          "subtle": {
+            "$type": "color",
+            "$value": "{color.palette.red.100}",
+            "$extensions": {
+              "design.paths.light": "{color.palette.red.100}",
+              "design.paths.dark": "{color.palette.red.800}"
+            },
+            "$description": "Subtle danger background"
+          }
+        },
+        "info": {
+          "strong": {
+            "$type": "color",
+            "$value": "{color.palette.blue.600}",
+            "$description": "Strong info background"
+          },
+          "subtle": {
+            "$type": "color",
+            "$value": "{color.palette.blue.100}",
+            "$extensions": {
+              "design.paths.light": "{color.palette.blue.100}",
+              "design.paths.dark": "{color.palette.blue.800}"
+            },
+            "$description": "Subtle info background"
+          }
+        }
+      },
+      "foreground": {
+        "success": {
+          "default": {
+            "$type": "color",
+            "$value": "{color.palette.green.500}",
+            "$extensions": {
+              "design.paths.light": "{color.palette.green.500}",
+              "design.paths.dark": "{color.palette.green.400}"
+            },
+            "$description": "Success text color"
+          },
+          "onSubtle": {
+            "$type": "color",
+            "$value": "{color.palette.green.700}",
+            "$extensions": {
+              "design.paths.light": "{color.palette.green.700}",
+              "design.paths.dark": "{color.palette.green.200}"
+            },
+            "$description": "Success text on subtle background"
+          }
+        },
+        "warning": {
+          "default": {
+            "$type": "color",
+            "$value": "{color.palette.orange.500}",
+            "$extensions": {
+              "design.paths.light": "{color.palette.orange.500}",
+              "design.paths.dark": "{color.palette.orange.400}"
+            },
+            "$description": "Warning text color"
+          },
+          "onSubtle": {
+            "$type": "color",
+            "$value": "{color.palette.orange.700}",
+            "$extensions": {
+              "design.paths.light": "{color.palette.orange.700}",
+              "design.paths.dark": "{color.palette.orange.200}"
+            },
+            "$description": "Warning text on subtle background"
+          }
+        },
+        "danger": {
+          "default": {
+            "$type": "color",
+            "$value": "{color.palette.red.500}",
+            "$extensions": {
+              "design.paths.light": "{color.palette.red.500}",
+              "design.paths.dark": "{color.palette.red.400}"
+            },
+            "$description": "Danger text color"
+          },
+          "onSubtle": {
+            "$type": "color",
+            "$value": "{color.palette.red.700}",
+            "$extensions": {
+              "design.paths.light": "{color.palette.red.700}",
+              "design.paths.dark": "{color.palette.red.200}"
+            },
+            "$description": "Danger text on subtle background"
+          }
+        },
+        "info": {
+          "default": {
+            "$type": "color",
+            "$value": "{color.palette.blue.500}",
+            "$extensions": {
+              "design.paths.light": "{color.palette.blue.500}",
+              "design.paths.dark": "{color.palette.blue.400}"
+            },
+            "$description": "Info text color"
+          },
+          "onSubtle": {
+            "$type": "color",
+            "$value": "{color.palette.blue.700}",
+            "$extensions": {
+              "design.paths.light": "{color.palette.blue.700}",
+              "design.paths.dark": "{color.palette.blue.200}"
+            },
+            "$description": "Info text on subtle background"
+          }
+        }
+      },
+      "border": {
+        "success": {
+          "$type": "color",
+          "$value": "{color.palette.green.600}",
+          "$description": "Success border color"
+        },
+        "warning": {
+          "$type": "color",
+          "$value": "{color.palette.orange.600}",
+          "$description": "Warning border color"
+        },
+        "danger": {
+          "$type": "color",
+          "$value": "{color.palette.red.600}",
+          "$description": "Danger border color"
+        },
+        "info": {
+          "$type": "color",
+          "$value": "{color.palette.blue.600}",
+          "$description": "Info border color"
+        }
+      }
+    },
+    "navigation": {
+      "background": {
+        "primary": {
+          "$type": "color",
+          "$value": "{color.mode.light}",
+          "$extensions": {
+            "design.paths.light": "{color.mode.light}",
+            "design.paths.dark": "{color.mode.dark}"
+          },
+          "$description": "Primary navigation background"
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "{color.palette.neutral.100}",
+          "$extensions": {
+            "design.paths.light": "{color.palette.neutral.100}",
+            "design.paths.dark": "{color.palette.neutral.800}"
+          },
+          "$description": "Secondary navigation background"
+        }
+      },
+      "foreground": {
+        "primary": {
+          "$type": "color",
+          "$value": "{color.mode.dark}",
+          "$extensions": {
+            "design.paths.light": "{color.mode.dark}",
+            "design.paths.dark": "{color.mode.light}"
+          },
+          "$description": "Primary navigation text"
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "{color.palette.neutral.600}",
+          "$extensions": {
+            "design.paths.light": "{color.palette.neutral.600}",
+            "design.paths.dark": "{color.palette.neutral.300}"
+          },
+          "$description": "Secondary navigation text"
+        },
+        "active": {
+          "$type": "color",
+          "$value": "{color.palette.red.500}",
+          "$extensions": {
+            "design.paths.light": "{color.palette.red.500}",
+            "design.paths.dark": "{color.palette.red.400}"
+          },
+          "$description": "Active navigation item"
+        },
+        "hover": {
+          "$type": "color",
+          "$value": "{color.palette.neutral.700}",
+          "$extensions": {
+            "design.paths.light": "{color.palette.neutral.700}",
+            "design.paths.dark": "{color.palette.neutral.300}"
+          },
+          "$description": "Navigation item hover state"
+        }
+      },
+      "border": {
+        "primary": {
+          "$type": "color",
+          "$value": "{color.palette.neutral.300}",
+          "$extensions": {
+            "design.paths.light": "{color.palette.neutral.300}",
+            "design.paths.dark": "{color.palette.neutral.600}"
+          },
+          "$description": "Navigation border"
+        }
+      }
+    },
+    "syntax": {
+      "plain": {
+        "$type": "color",
+        "$value": "{core.color.display.foreground.primary}",
+        "$extensions": {
+          "design.paths.light": "{core.color.display.foreground.primary}",
+          "design.paths.dark": "{core.color.display.foreground.primary}"
+        },
+        "$description": "Plain syntax text"
+      },
+      "comment": {
+        "color": {
+          "$type": "color",
+          "$value": "{core.color.display.foreground.tertiary}",
+          "$extensions": {
+            "design.paths.light": "{core.color.display.foreground.tertiary}",
+            "design.paths.dark": "{core.color.display.foreground.tertiary}"
+          },
+          "$description": "Comment syntax color"
+        },
+        "fontStyle": "italic"
+      },
+      "keyword": {
+        "$type": "color",
+        "$value": "{color.feedback.foreground.info.default}",
+        "$extensions": {
+          "design.paths.light": "{color.feedback.foreground.info.default}",
+          "design.paths.dark": "{color.feedback.foreground.info.default}"
+        },
+        "$description": "Keyword syntax color"
+      },
+      "definition": {
+        "$type": "color",
+        "$value": "{core.color.display.foreground.accent}",
+        "$extensions": {
+          "design.paths.light": "{core.color.display.foreground.accent}",
+          "design.paths.dark": "{core.color.display.foreground.accent}"
+        },
+        "$description": "Definition syntax color"
+      },
+      "punctuation": {
+        "$type": "color",
+        "$value": "{color.feedback.foreground.info.default}",
+        "$extensions": {
+          "design.paths.light": "{color.feedback.foreground.info.default}",
+          "design.paths.dark": "{color.feedback.foreground.info.default}"
+        },
+        "$description": "Punctuation syntax color"
+      },
+      "property": {
+        "$type": "color",
+        "$value": "{color.feedback.foreground.warning.default}",
+        "$extensions": {
+          "design.paths.light": "{color.feedback.foreground.warning.default}",
+          "design.paths.dark": "{color.feedback.foreground.warning.default}"
+        },
+        "$description": "Property syntax color"
+      },
+      "tag": {
+        "$type": "color",
+        "$value": "{color.feedback.foreground.danger.default}",
+        "$extensions": {
+          "design.paths.light": "{color.feedback.foreground.danger.default}",
+          "design.paths.dark": "{color.feedback.foreground.danger.default}"
+        },
+        "$description": "Tag syntax color"
+      },
+      "static": {
+        "$type": "color",
+        "$value": "{core.color.display.foreground.accent}",
+        "$extensions": {
+          "design.paths.light": "{core.color.display.foreground.accent}",
+          "design.paths.dark": "{core.color.display.foreground.accent}"
+        },
+        "$description": "Static syntax color"
+      },
+      "string": {
+        "$type": "color",
+        "$value": "{color.palette.blue.700}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.blue.700}",
+          "design.paths.dark": "{color.palette.blue.400}"
+        },
+        "$description": "String syntax color"
+      }
+    },
+    "data": {
+      "trend": {
+        "default": {
+          "$type": "color",
+          "$value": "{color.palette.blue.400}",
+          "$description": "Default trend indicator"
+        },
+        "up": {
+          "$type": "color",
+          "$value": "{color.palette.green.500}",
+          "$description": "Positive trend indicator"
+        },
+        "down": {
+          "$type": "color",
+          "$value": "{color.palette.red.500}",
+          "$description": "Negative trend indicator"
+        },
+        "neutral": {
+          "$type": "color",
+          "$value": "{color.palette.neutral.500}",
+          "$description": "Neutral trend indicator"
+        }
+      }
+    },
+    "gradient": {
+      "brand": {
+        "primary": {
+          "$type": "gradient",
+          "$value": "{color.palette.brand.primary.400}",
+          "$description": "Primary brand gradient"
+        }
+      }
+    },
+    "overlay": {
+      "scrim": {
+        "weak": {
+          "$type": "color",
+          "$value": "rgba(0,0,0,0.24)",
+          "$description": "Light overlay scrim"
+        },
+        "medium": {
+          "$type": "color",
+          "$value": "rgba(0,0,0,0.40)",
+          "$description": "Medium overlay scrim"
+        },
+        "strong": {
+          "$type": "color",
+          "$value": "rgba(0,0,0,0.64)",
+          "$description": "Strong overlay scrim"
+        }
+      }
+    }
+  },
+  "typography": {
+    "semanticFamily": {
+      "heading": {
+        "$type": "fontFamily",
+        "$value": "{typography.fontFamily.inter}"
+      },
+      "body": {
+        "$type": "fontFamily",
+        "$value": "{typography.fontFamily.inter}"
+      },
+      "mono": {
+        "$type": "fontFamily",
+        "$value": "{typography.fontFamily.monaspace}"
+      },
+      "serif": {
+        "$type": "fontFamily",
+        "$value": "{typography.fontFamily.newsreader}"
+      }
+    },
+    "body": {
+      "01": {
+        "$type": "dimension",
+        "$value": "{typography.ramp.5}"
+      },
+      "02": {
+        "$type": "dimension",
+        "$value": "{typography.ramp.4}"
+      },
+      "03": {
+        "$type": "dimension",
+        "$value": "{typography.ramp.3}"
+      },
+      "04": {
+        "$type": "dimension",
+        "$value": "{typography.ramp.2}"
+      },
+      "default": {
+        "fontFamily": {
+          "$type": "fontFamily",
+          "$value": "{typography.fontFamily.inter}"
+        },
+        "fontWeight": {
+          "$type": "fontWeight",
+          "$value": "{typography.weight.regular}"
+        },
+        "fontSize": {
+          "$type": "dimension",
+          "$value": "{typography.ramp.4}"
+        },
+        "lineHeight": {
+          "$type": "number",
+          "$value": 1.5
+        },
+        "letterSpacing": {
+          "$type": "dimension",
+          "$value": "0em"
+        }
+      },
+      "small": {
+        "fontFamily": {
+          "$type": "fontFamily",
+          "$value": "{typography.fontFamily.inter}"
+        },
+        "fontWeight": {
+          "$type": "fontWeight",
+          "$value": "{typography.weight.regular}"
+        },
+        "fontSize": {
+          "$type": "dimension",
+          "$value": "{typography.ramp.3}"
+        },
+        "lineHeight": {
+          "$type": "number",
+          "$value": 1.5
+        }
+      }
+    },
+    "button": {
+      "01": {
+        "$type": "dimension",
+        "$value": "{typography.ramp.5}"
+      },
+      "02": {
+        "$type": "dimension",
+        "$value": "{typography.ramp.4}"
+      },
+      "03": {
+        "$type": "dimension",
+        "$value": "{typography.ramp.3}"
+      }
+    },
+    "caption": {
+      "01": {
+        "$type": "dimension",
+        "$value": "{typography.ramp.3}"
+      },
+      "02": {
+        "$type": "dimension",
+        "$value": "{typography.ramp.2}"
+      },
+      "03": {
+        "$type": "dimension",
+        "$value": "{typography.ramp.1}"
+      }
+    },
+    "fontWeight": {
+      "black": {
+        "$type": "fontWeight",
+        "$value": "{typography.weight.black}"
+      },
+      "bold": {
+        "$type": "fontWeight",
+        "$value": "{typography.weight.bold}"
+      },
+      "light": {
+        "$type": "fontWeight",
+        "$value": "{typography.weight.light}"
+      },
+      "medium": {
+        "$type": "fontWeight",
+        "$value": "{typography.weight.medium}"
+      },
+      "regular": {
+        "$type": "fontWeight",
+        "$value": "{typography.weight.regular}"
+      }
+    },
+    "heading": {
+      "01": {
+        "$type": "dimension",
+        "$value": "{typography.ramp.8}"
+      },
+      "02": {
+        "$type": "dimension",
+        "$value": "{typography.ramp.7}"
+      },
+      "03": {
+        "$type": "dimension",
+        "$value": "{typography.ramp.6}"
+      },
+      "04": {
+        "$type": "dimension",
+        "$value": "{typography.ramp.5}"
+      },
+      "05": {
+        "$type": "dimension",
+        "$value": "{typography.ramp.4}"
+      },
+      "06": {
+        "$type": "dimension",
+        "$value": "{typography.ramp.3}"
+      }
+    },
+    "letterSpacing": {
+      "normal": {
+        "$type": "dimension",
+        "$value": "0em"
+      },
+      "tight": {
+        "$type": "dimension",
+        "$value": "-0.018em"
+      },
+      "wide": {
+        "$type": "dimension",
+        "$value": "0.018em"
+      }
+    },
+    "lineHeight": {
+      "body": {
+        "$type": "number",
+        "$value": 1.5
+      },
+      "collapse": {
+        "$type": "number",
+        "$value": 1
+      },
+      "heading": {
+        "$type": "number",
+        "$value": 1
+      },
+      "loose": {
+        "$type": "number",
+        "$value": 1.8
+      },
+      "normal": {
+        "$type": "number",
+        "$value": 1.5
+      },
+      "tight": {
+        "$type": "number",
+        "$value": 1.2
+      }
+    },
+    "oversize": {
+      "01": {
+        "$type": "dimension",
+        "$value": "{typography.ramp.16}"
+      },
+      "02": {
+        "$type": "dimension",
+        "$value": "{typography.ramp.15}"
+      },
+      "03": {
+        "$type": "dimension",
+        "$value": "{typography.ramp.14}"
+      },
+      "04": {
+        "$type": "dimension",
+        "$value": "{typography.ramp.13}"
+      }
+    },
+    "meta": {
+      "caption": {
+        "fontFamily": {
+          "$type": "fontFamily",
+          "$value": "{typography.fontFamily.inter}"
+        },
+        "fontWeight": {
+          "$type": "fontWeight",
+          "$value": "{typography.weight.medium}"
+        },
+        "fontSize": {
+          "$type": "dimension",
+          "$value": "{typography.ramp.2}"
+        },
+        "lineHeight": {
+          "$type": "number",
+          "$value": 1.5
+        }
+      },
+      "legal": {
+        "fontFamily": {
+          "$type": "fontFamily",
+          "$value": "{typography.fontFamily.inter}"
+        },
+        "fontWeight": {
+          "$type": "fontWeight",
+          "$value": "{typography.weight.regular}"
+        },
+        "fontSize": {
+          "$type": "dimension",
+          "$value": "{typography.ramp.2}"
+        },
+        "lineHeight": {
+          "$type": "number",
+          "$value": 1.8
+        }
+      }
+    }
+  },
+  "spacing": {
+    "padding": {
+      "container": {
+        "$type": "dimension",
+        "$value": "{spacing.size.06}"
+      },
+      "card": {
+        "$type": "dimension",
+        "$value": "{spacing.size.04}"
+      }
+    },
+    "gap": {
+      "grid": {
+        "$type": "dimension",
+        "$value": "{spacing.size.04}"
+      },
+      "gridLarge": {
+        "$type": "dimension",
+        "$value": "{spacing.size.09}"
+      },
+      "gridMedium": {
+        "$type": "dimension",
+        "$value": "{spacing.size.07}"
+      },
+      "gridSmall": {
+        "$type": "dimension",
+        "$value": "{spacing.size.04}"
+      }
+    }
+  },
+  "elevation": {
+    "default": {
+      "$type": "shadow",
+      "$value": "{elevation.level.1}"
+    },
+    "depth": {
+      "$type": "number",
+      "$value": "{elevation.depth.0}"
+    },
+    "surface": {
+      "raised": {
+        "$type": "shadow",
+        "$value": "{elevation.level.1}"
+      },
+      "floating": {
+        "$type": "shadow",
+        "$value": "{elevation.level.2}"
+      }
+    }
+  },
+  "opacity": {
+    "disabled": {
+      "$type": "opacity",
+      "$value": "{opacity.400}"
+    },
+    "overlay": {
+      "$type": "opacity",
+      "$value": "{opacity.600}"
+    }
+  },
+  "dimension": {
+    "minTarget": {
+      "$type": "dimension",
+      "$value": "{dimension.tapTargetMin}"
+    },
+    "buttonMinHeight": {
+      "$type": "dimension",
+      "$value": "{dimension.actionMinHeight}"
+    },
+    "breakpoint": {
+      "sm": {
+        "$type": "dimension",
+        "$value": "640px"
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": "768px"
+      },
+      "lg": {
+        "$type": "dimension",
+        "$value": "1024px"
+      },
+      "xl": {
+        "$type": "dimension",
+        "$value": "1280px"
+      }
+    }
+  },
+  "shape": {
+    "radius": {
+      "full": {
+        "$type": "borderRadius",
+        "$value": "9999px"
+      },
+      "extraLarge": {
+        "$type": "borderRadius",
+        "$value": "{shape.radius.05}"
+      },
+      "large": {
+        "$type": "borderRadius",
+        "$value": "{shape.radius.04}"
+      },
+      "medium": {
+        "$type": "borderRadius",
+        "$value": "{shape.radius.03}"
+      },
+      "small": {
+        "$type": "borderRadius",
+        "$value": "{shape.radius.02}"
+      },
+      "extraSmall": {
+        "$type": "borderRadius",
+        "$value": "{shape.radius.01}"
+      },
+      "none": {
+        "$type": "borderRadius",
+        "$value": "0px"
+      },
+      "default": {
+        "$type": "borderRadius",
+        "$value": "{shape.radius.02}"
+      }
+    },
+    "control": {
+      "radius": {
+        "default": {
+          "$type": "borderRadius",
+          "$value": "{shape.radius.medium}"
+        },
+        "pill": {
+          "$type": "borderRadius",
+          "$value": "{shape.radius.full}"
+        }
+      },
+      "border": {
+        "defaultWidth": {
+          "$type": "borderWidth",
+          "$value": "{shape.border.width.hairline}"
+        },
+        "defaultStyle": {
+          "$type": "borderStyle",
+          "$value": "{shape.border.style.solid}"
+        },
+        "focusWidth": {
+          "$type": "borderWidth",
+          "$value": "{shape.border.width.thick}"
+        }
+      }
+    }
+  },
+  "motion": {
+    "interaction": {
+      "press": {
+        "duration": {
+          "$type": "duration",
+          "$value": "{motion.duration.instant}",
+          "$description": "Immediate feedback for button presses"
+        },
+        "easing": {
+          "$type": "cubicBezier",
+          "$value": "{motion.easing.standard}"
+        },
+        "scale": {
+          "$type": "number",
+          "$value": 0.98,
+          "$description": "Subtle scale down for press feedback"
+        }
+      },
+      "hover": {
+        "duration": {
+          "$type": "duration",
+          "$value": "{motion.duration.short2}",
+          "$description": "Quick hover state transitions"
+        },
+        "easing": {
+          "$type": "cubicBezier",
+          "$value": "{motion.easing.quick.enter}"
+        }
+      },
+      "focus": {
+        "duration": {
+          "$type": "duration",
+          "$value": "{motion.duration.short3}",
+          "$description": "Focus ring appearance"
+        },
+        "easing": {
+          "$type": "cubicBezier",
+          "$value": "{motion.easing.soft.enter}"
+        }
+      },
+      "enter": {
+        "duration": {
+          "$type": "duration",
+          "$value": "{motion.duration.medium1}",
+          "$description": "Standard enter animations"
+        },
+        "easing": {
+          "$type": "cubicBezier",
+          "$value": "{motion.easing.soft.enter}"
+        }
+      },
+      "exit": {
+        "duration": {
+          "$type": "duration",
+          "$value": "{motion.duration.short3}",
+          "$description": "Quick exit animations"
+        },
+        "easing": {
+          "$type": "cubicBezier",
+          "$value": "{motion.easing.quick.exit}"
+        }
+      },
+      "modal": {
+        "enter": {
+          "duration": {
+            "$type": "duration",
+            "$value": "{motion.duration.medium2}",
+            "$description": "Modal entrance - comfortable timing"
+          },
+          "easing": {
+            "$type": "cubicBezier",
+            "$value": "{motion.easing.soft.enter}"
+          }
+        },
+        "exit": {
+          "duration": {
+            "$type": "duration",
+            "$value": "{motion.duration.medium1}",
+            "$description": "Modal exit - slightly faster"
+          },
+          "easing": {
+            "$type": "cubicBezier",
+            "$value": "{motion.easing.soft.exit}"
+          }
+        }
+      },
+      "tooltip": {
+        "enter": {
+          "duration": {
+            "$type": "duration",
+            "$value": "{motion.duration.short3}",
+            "$description": "Quick tooltip appearance"
+          },
+          "easing": {
+            "$type": "cubicBezier",
+            "$value": "{motion.easing.quick.enter}"
+          },
+          "delay": {
+            "$type": "duration",
+            "$value": "{motion.delay.medium}",
+            "$description": "Delay before showing tooltip"
+          }
+        },
+        "exit": {
+          "duration": {
+            "$type": "duration",
+            "$value": "{motion.duration.short1}",
+            "$description": "Immediate tooltip disappearance"
+          },
+          "easing": {
+            "$type": "cubicBezier",
+            "$value": "{motion.easing.quick.exit}"
+          }
+        }
+      }
+    },
+    "keyframes": {
+      "fadeIn": {
+        "$type": "string",
+        "$value": "fadeIn",
+        "$description": "Standard fade in animation"
+      },
+      "slideUp": {
+        "$type": "string",
+        "$value": "slideUp",
+        "$description": "Slide up from bottom"
+      },
+      "scaleIn": {
+        "$type": "string",
+        "$value": "scaleIn",
+        "$description": "Scale in from center"
+      },
+      "pulse": {
+        "$type": "string",
+        "$value": "pulse",
+        "$description": "Subtle pulse for loading states"
+      }
+    },
+    "stagger": {
+      "list": {
+        "$type": "duration",
+        "$value": "{motion.stagger.sm}",
+        "$description": "Stagger for list item animations"
+      },
+      "card": {
+        "$type": "duration",
+        "$value": "{motion.stagger.md}",
+        "$description": "Stagger for card grid animations"
+      },
+      "section": {
+        "$type": "duration",
+        "$value": "{motion.stagger.lg}",
+        "$description": "Stagger for section reveals"
+      }
+    }
+  },
+  "components": {
+    "action": {
+      "padding": {
+        "composite": {
+          "small": {
+            "$type": "composition",
+            "$value": {
+              "paddingTop": "{spacing.size.02}",
+              "paddingRight": "{spacing.size.03}",
+              "paddingBottom": "{spacing.size.02}",
+              "paddingLeft": "{spacing.size.03}"
+            },
+            "$description": "Small action padding composite"
+          },
+          "default": {
+            "$type": "composition",
+            "$value": {
+              "paddingTop": "{spacing.size.03}",
+              "paddingRight": "{spacing.size.04}",
+              "paddingBottom": "{spacing.size.03}",
+              "paddingLeft": "{spacing.size.04}"
+            },
+            "$description": "Default action padding composite"
+          },
+          "large": {
+            "$type": "composition",
+            "$value": {
+              "paddingTop": "{spacing.size.04}",
+              "paddingRight": "{spacing.size.06}",
+              "paddingBottom": "{spacing.size.04}",
+              "paddingLeft": "{spacing.size.06}"
+            },
+            "$description": "Large action padding composite"
+          }
+        },
+        "vertical": {
+          "small": {
+            "$type": "dimension",
+            "$value": "{spacing.size.02}",
+            "$description": "Small action vertical padding"
+          },
+          "default": {
+            "$type": "dimension",
+            "$value": "{spacing.size.03}",
+            "$description": "Default action vertical padding"
+          },
+          "large": {
+            "$type": "dimension",
+            "$value": "{spacing.size.04}",
+            "$description": "Large action vertical padding"
+          }
+        },
+        "horizontal": {
+          "small": {
+            "$type": "dimension",
+            "$value": "{spacing.size.03}",
+            "$description": "Small action horizontal padding"
+          },
+          "default": {
+            "$type": "dimension",
+            "$value": "{spacing.size.04}",
+            "$description": "Default action horizontal padding"
+          },
+          "large": {
+            "$type": "dimension",
+            "$value": "{spacing.size.06}",
+            "$description": "Large action horizontal padding"
+          }
+        }
+      },
+      "height": {
+        "small": {
+          "$type": "dimension",
+          "$value": "{spacing.size.07}",
+          "$description": "Small action height"
+        },
+        "default": {
+          "$type": "dimension",
+          "$value": "{spacing.size.08}",
+          "$description": "Default action height"
+        },
+        "large": {
+          "$type": "dimension",
+          "$value": "{spacing.size.09}",
+          "$description": "Large action height"
+        }
+      },
+      "radius": {
+        "default": {
+          "$type": "borderRadius",
+          "$value": "{shape.radius.02}",
+          "$description": "Default action border radius"
+        },
+        "rounded": {
+          "$type": "borderRadius",
+          "$value": "{shape.radius.03}",
+          "$description": "Rounded action border radius"
+        },
+        "pill": {
+          "$type": "borderRadius",
+          "$value": "{shape.radius.full}",
+          "$description": "Pill-shaped action border radius"
+        }
+      },
+      "gap": {
+        "icon": {
+          "$type": "dimension",
+          "$value": "{spacing.size.02}",
+          "$description": "Gap between icon and text in actions"
+        },
+        "composite": {
+          "$type": "dimension",
+          "$value": "{spacing.size.03}",
+          "$description": "Gap between action elements"
+        }
+      },
+      "typography": {
+        "fontWeight": {
+          "$type": "fontWeight",
+          "$value": "{typography.weight.medium}",
+          "$description": "Action text font weight"
+        },
+        "fontSize": {
+          "small": {
+            "$type": "dimension",
+            "$value": "{typography.ramp.3}",
+            "$description": "Small action font size"
+          },
+          "default": {
+            "$type": "dimension",
+            "$value": "{typography.ramp.4}",
+            "$description": "Default action font size"
+          },
+          "large": {
+            "$type": "dimension",
+            "$value": "{typography.ramp.5}",
+            "$description": "Large action font size"
+          }
+        }
+      }
+    },
+    "input": {
+      "padding": {
+        "composite": {
+          "small": {
+            "$type": "composition",
+            "$value": {
+              "paddingTop": "{spacing.size.02}",
+              "paddingRight": "{spacing.size.03}",
+              "paddingBottom": "{spacing.size.02}",
+              "paddingLeft": "{spacing.size.03}"
+            },
+            "$description": "Small input padding composite"
+          },
+          "default": {
+            "$type": "composition",
+            "$value": {
+              "paddingTop": "{spacing.size.03}",
+              "paddingRight": "{spacing.size.03}",
+              "paddingBottom": "{spacing.size.03}",
+              "paddingLeft": "{spacing.size.03}"
+            },
+            "$description": "Default input padding composite"
+          },
+          "large": {
+            "$type": "composition",
+            "$value": {
+              "paddingTop": "{spacing.size.04}",
+              "paddingRight": "{spacing.size.04}",
+              "paddingBottom": "{spacing.size.04}",
+              "paddingLeft": "{spacing.size.04}"
+            },
+            "$description": "Large input padding composite"
+          }
+        },
+        "vertical": {
+          "small": {
+            "$type": "dimension",
+            "$value": "{spacing.size.02}",
+            "$description": "Small input vertical padding"
+          },
+          "default": {
+            "$type": "dimension",
+            "$value": "{spacing.size.03}",
+            "$description": "Default input vertical padding"
+          },
+          "large": {
+            "$type": "dimension",
+            "$value": "{spacing.size.04}",
+            "$description": "Large input vertical padding"
+          }
+        },
+        "horizontal": {
+          "small": {
+            "$type": "dimension",
+            "$value": "{spacing.size.03}",
+            "$description": "Small input horizontal padding"
+          },
+          "default": {
+            "$type": "dimension",
+            "$value": "{spacing.size.03}",
+            "$description": "Default input horizontal padding"
+          },
+          "large": {
+            "$type": "dimension",
+            "$value": "{spacing.size.04}",
+            "$description": "Large input horizontal padding"
+          }
+        }
+      },
+      "height": {
+        "small": {
+          "$type": "dimension",
+          "$value": "{spacing.size.07}",
+          "$description": "Small input height"
+        },
+        "default": {
+          "$type": "dimension",
+          "$value": "{spacing.size.08}",
+          "$description": "Default input height"
+        },
+        "large": {
+          "$type": "dimension",
+          "$value": "{spacing.size.09}",
+          "$description": "Large input height"
+        }
+      },
+      "radius": {
+        "default": {
+          "$type": "borderRadius",
+          "$value": "{shape.radius.medium}",
+          "$description": "Default input border radius"
+        },
+        "rounded": {
+          "$type": "borderRadius",
+          "$value": "{shape.radius.03}",
+          "$description": "Rounded input border radius"
+        }
+      },
+      "border": {
+        "width": {
+          "default": {
+            "$type": "borderWidth",
+            "$value": "{shape.border.width.hairline}",
+            "$description": "Default input border width"
+          },
+          "focus": {
+            "$type": "borderWidth",
+            "$value": "{shape.border.width.thick}",
+            "$description": "Input focus border width"
+          }
+        }
+      },
+      "gap": {
+        "icon": {
+          "$type": "dimension",
+          "$value": "{spacing.size.02}",
+          "$description": "Gap between icon and input content"
+        },
+        "label": {
+          "$type": "dimension",
+          "$value": "{spacing.size.01}",
+          "$description": "Gap between label and input"
+        },
+        "help": {
+          "$type": "dimension",
+          "$value": "{spacing.size.01}",
+          "$description": "Gap between input and help text"
+        }
+      },
+      "typography": {
+        "fontSize": {
+          "small": {
+            "$type": "dimension",
+            "$value": "{typography.ramp.3}",
+            "$description": "Small input font size"
+          },
+          "default": {
+            "$type": "dimension",
+            "$value": "{typography.ramp.4}",
+            "$description": "Default input font size"
+          },
+          "large": {
+            "$type": "dimension",
+            "$value": "{typography.ramp.5}",
+            "$description": "Large input font size"
+          }
+        },
+        "fontWeight": {
+          "$type": "fontWeight",
+          "$value": "{typography.weight.regular}",
+          "$description": "Input text font weight"
+        }
+      }
+    },
+    "navigation": {
+      "padding": {
+        "composite": {
+          "default": {
+            "$type": "composition",
+            "$value": {
+              "paddingTop": "{spacing.size.03}",
+              "paddingRight": "{spacing.size.04}",
+              "paddingBottom": "{spacing.size.03}",
+              "paddingLeft": "{spacing.size.04}"
+            },
+            "$description": "Default navigation padding composite"
+          },
+          "compact": {
+            "$type": "composition",
+            "$value": {
+              "paddingTop": "{spacing.size.02}",
+              "paddingRight": "{spacing.size.03}",
+              "paddingBottom": "{spacing.size.02}",
+              "paddingLeft": "{spacing.size.03}"
+            },
+            "$description": "Compact navigation padding composite"
+          }
+        },
+        "item": {
+          "vertical": {
+            "$type": "dimension",
+            "$value": "{spacing.size.03}",
+            "$description": "Navigation item vertical padding"
+          },
+          "horizontal": {
+            "$type": "dimension",
+            "$value": "{spacing.size.04}",
+            "$description": "Navigation item horizontal padding"
+          }
+        }
+      },
+      "gap": {
+        "items": {
+          "$type": "dimension",
+          "$value": "{spacing.size.02}",
+          "$description": "Gap between navigation items"
+        },
+        "icon": {
+          "$type": "dimension",
+          "$value": "{spacing.size.02}",
+          "$description": "Gap between nav icon and text"
+        }
+      },
+      "height": {
+        "bar": {
+          "$type": "dimension",
+          "$value": "56px",
+          "$description": "Navigation bar height"
+        },
+        "item": {
+          "$type": "dimension",
+          "$value": "{spacing.size.08}",
+          "$description": "Navigation item height"
+        }
+      }
+    },
+    "feedback": {
+      "padding": {
+        "composite": {
+          "default": {
+            "$type": "composition",
+            "$value": {
+              "paddingTop": "{spacing.size.03}",
+              "paddingRight": "{spacing.size.04}",
+              "paddingBottom": "{spacing.size.03}",
+              "paddingLeft": "{spacing.size.04}"
+            },
+            "$description": "Default feedback padding composite"
+          },
+          "compact": {
+            "$type": "composition",
+            "$value": {
+              "paddingTop": "{spacing.size.02}",
+              "paddingRight": "{spacing.size.03}",
+              "paddingBottom": "{spacing.size.02}",
+              "paddingLeft": "{spacing.size.03}"
+            },
+            "$description": "Compact feedback padding composite"
+          }
+        }
+      },
+      "gap": {
+        "icon": {
+          "$type": "dimension",
+          "$value": "{spacing.size.02}",
+          "$description": "Gap between feedback icon and text"
+        },
+        "action": {
+          "$type": "dimension",
+          "$value": "{spacing.size.03}",
+          "$description": "Gap between feedback content and actions"
+        }
+      },
+      "radius": {
+        "default": {
+          "$type": "borderRadius",
+          "$value": "{shape.radius.02}",
+          "$description": "Default feedback border radius"
+        }
+      },
+      "border": {
+        "width": {
+          "$type": "borderWidth",
+          "$value": "{shape.border.width.hairline}",
+          "$description": "Feedback border width"
+        }
+      }
+    }
+  },
+  "interaction": {
+    "text": {
+      "hover": {
+        "$type": "color",
+        "$value": "{core.color.display.foreground.secondary}"
+      },
+      "active": {
+        "$type": "color",
+        "$value": "{core.color.display.foreground.primary}"
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": "{core.color.display.foreground.disabled}"
+      }
+    },
+    "background": {
+      "hover": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.100}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.100}",
+          "design.paths.dark": "{color.palette.neutral.800}"
+        },
+        "$description": "Secondary action hover state"
+      },
+      "active": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.200}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.200}",
+          "design.paths.dark": "{color.palette.neutral.700}"
+        },
+        "$description": "Secondary action active state"
+      },
+      "selected": {
+        "$type": "color",
+        "$value": "{color.palette.blue.200}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.blue.200}",
+          "design.paths.dark": "{color.palette.blue.800}"
+        },
+        "$description": "Highlight background for selections"
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.200}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.200}",
+          "design.paths.dark": "{color.palette.neutral.700}"
+        },
+        "$description": "Primary action disabled state"
+      }
+    },
+    "border": {
+      "hover": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.400}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.neutral.400}",
+          "design.paths.dark": "{color.palette.neutral.500}"
+        },
+        "$description": "Secondary action border hover"
+      },
+      "active": {
+        "$type": "color",
+        "$value": "{core.color.display.border.bold}"
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": "{core.color.display.border.disabled}"
+      }
+    }
+  },
+  "control": {
+    "size": {
+      "sm": {
+        "height": {
+          "$type": "dimension",
+          "$value": "{spacing.size.07}"
+        },
+        "paddingX": {
+          "$type": "dimension",
+          "$value": "{spacing.size.03}"
+        },
+        "paddingY": {
+          "$type": "dimension",
+          "$value": "{spacing.size.02}"
+        }
+      },
+      "md": {
+        "height": {
+          "$type": "dimension",
+          "$value": "{spacing.size.08}"
+        },
+        "paddingX": {
+          "$type": "dimension",
+          "$value": "{spacing.size.04}"
+        },
+        "paddingY": {
+          "$type": "dimension",
+          "$value": "{spacing.size.03}"
+        }
+      },
+      "lg": {
+        "height": {
+          "$type": "dimension",
+          "$value": "{spacing.size.09}"
+        },
+        "paddingX": {
+          "$type": "dimension",
+          "$value": "{spacing.size.06}"
+        },
+        "paddingY": {
+          "$type": "dimension",
+          "$value": "{spacing.size.04}"
+        }
+      }
+    }
+  },
+  "link": {
+    "text": {
+      "$type": "color",
+      "$value": "{core.color.display.foreground.link.default}"
+    },
+    "decorationColor": {
+      "$type": "color",
+      "$value": "{core.color.display.foreground.link.default}"
+    },
+    "decorationThickness": {
+      "$type": "dimension",
+      "$value": "1px"
+    },
+    "decorationOffset": {
+      "$type": "dimension",
+      "$value": "2px"
+    },
+    "hover.text": {
+      "$type": "color",
+      "$value": "{core.color.display.foreground.link.hover}"
+    },
+    "visited.text": {
+      "$type": "color",
+      "$value": "{core.color.display.foreground.link.visited}"
+    }
+  },
+  "skeleton": {
+    "background": {
+      "$type": "color",
+      "$value": "{core.color.display.background.secondary}",
+      "$description": "Skeleton loading background"
+    },
+    "foreground": {
+      "$type": "color",
+      "$value": "{core.color.display.background.tertiary}",
+      "$description": "Skeleton loading shimmer"
+    },
+    "shineDuration": {
+      "$type": "duration",
+      "$value": "{motion.duration.medium3}",
+      "$description": "Duration of skeleton shine animation"
+    }
+  },
+  "content": {
+    "maxWidth": {
+      "article": {
+        "$type": "dimension",
+        "$value": "{content.maxWidth.prose}",
+        "$description": "Article content width"
+      },
+      "sidebar": {
+        "$type": "dimension",
+        "$value": "{content.maxWidth.narrow}",
+        "$description": "Sidebar content width"
+      },
+      "documentation": {
+        "$type": "dimension",
+        "$value": "{content.maxWidth.wide}",
+        "$description": "Technical documentation width"
+      }
+    },
+    "spacing": {
+      "paragraph": {
+        "$type": "dimension",
+        "$value": "{spacing.size.04}",
+        "$description": "Space between paragraphs"
+      },
+      "section": {
+        "$type": "dimension",
+        "$value": "{spacing.size.08}",
+        "$description": "Space between content sections"
+      }
+    }
+  },
+  "focus": {
+    "ring": {
+      "$description": "Focus ring styling for accessibility and interactive elements.",
+      "$type": "composition",
+      "$value": {
+        "border": {
+          "width": "{interaction.focus.ringWidth}",
+          "style": "solid",
+          "color": "{core.color.display.foreground.accent}"
+        },
+        "offset": "{interaction.focus.ringOffset}",
+        "opacity": "{interaction.focus.ringOpacity}"
+      }
+    }
+  },
+  "datavis": {
+    "onFill": {
+      "default": {
+        "$type": "color",
+        "$value": "{color.mode.white}"
+      },
+      "muted": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.100}"
+      }
+    },
+    "gridline": {
+      "major": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.300}"
+      },
+      "minor": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.200}"
+      }
+    },
+    "strokeWidth": {
+      "series": {
+        "$type": "dimension",
+        "$value": "2px"
+      },
+      "grid": {
+        "$type": "dimension",
+        "$value": "1px"
+      }
+    }
+  },
+  "component": {
+    "pagination": {
+      "gapX": {
+        "$type": "dimension",
+        "$value": "{spacing.size.02}"
+      },
+      "minSize": {
+        "$type": "dimension",
+        "$value": "32px"
+      }
+    },
+    "foreground": {
+      "$type": "color",
+      "$value": "{core.color.display.foreground.primary}"
+    },
+    "typography": {
+      "variation": {
+        "wghtHeading": {
+          "$type": "number",
+          "$value": 700
+        },
+        "wdthResponsive": {
+          "$type": "number",
+          "$value": 100
+        }
+      }
+    },
+    "otp": {
+      "fieldGap": {
+        "$type": "dimension",
+        "$value": "{spacing.size.02}"
+      },
+      "fieldMinWidth": {
+        "$type": "dimension",
+        "$value": "48px"
+      },
+      "fieldHeight": {
+        "$type": "dimension",
+        "$value": "48px"
+      },
+      "fieldFontSize": {
+        "$type": "dimension",
+        "$value": "{typography.ramp.4}"
+      },
+      "fieldFontWeight": {
+        "$type": "fontWeight",
+        "$value": "{typography.weight.medium}"
+      },
+      "fieldRadius": {
+        "$type": "borderRadius",
+        "$value": "{shape.radius.02}"
+      },
+      "colorText": {
+        "$type": "color",
+        "$value": "{core.color.display.foreground.primary}"
+      },
+      "colorBg": {
+        "$type": "color",
+        "$value": "{core.color.display.background.primary}"
+      },
+      "colorBorder": {
+        "$type": "color",
+        "$value": "{core.color.display.border.subtle}"
+      },
+      "colorFocus": {
+        "$type": "color",
+        "$value": "{core.color.palette.red.500}"
+      }
+    },
+    "test": {
+      "dsSemanticColorBgPrimary": {
+        "$type": "color",
+        "$value": "#ffffff"
+      },
+      "customSemanticColorBgPrimary": {
+        "$type": "color",
+        "$value": "#ffffff"
+      },
+      "myCustomBg": {
+        "$type": "color",
+        "$value": "#007bff"
+      },
+      "path": {
+        "$type": "string",
+        "$value": "test-path"
+      },
+      "typeWghtHeading": {
+        "$type": "number",
+        "$value": 700
+      },
+      "typeWdthResponsive": {
+        "$type": "number",
+        "$value": 100
+      }
+    }
+  }
+}

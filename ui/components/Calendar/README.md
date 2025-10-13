@@ -10,9 +10,7 @@ import { Calendar, CalendarProvider } from '@/ui/components/Calendar';
 function Example() {
   return (
     <CalendarProvider>
-      <Calendar>
-        {/* Calendar content */}
-      </Calendar>
+      <Calendar>{/* Calendar content */}</Calendar>
     </CalendarProvider>
   );
 }
@@ -22,17 +20,17 @@ function Example() {
 
 ### Calendar (Root)
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| className | string | '' | Additional CSS classes |
-| children | ReactNode | - | Calendar content |
-| ...rest | HTMLAttributes | - | Additional div props |
+| Prop      | Type           | Default | Description            |
+| --------- | -------------- | ------- | ---------------------- |
+| className | string         | ''      | Additional CSS classes |
+| children  | ReactNode      | -       | Calendar content       |
+| ...rest   | HTMLAttributes | -       | Additional div props   |
 
 ### CalendarProvider
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| children | ReactNode | - | Calendar components |
+| Prop     | Type      | Default | Description         |
+| -------- | --------- | ------- | ------------------- |
+| children | ReactNode | -       | Calendar components |
 
 ## Hook API
 
@@ -45,14 +43,12 @@ import { useCalendar } from '@/ui/components/Calendar/useCalendar';
 
 function CalendarExample() {
   const { isOpen, open, close, toggle } = useCalendar({
-    defaultOpen: false
+    defaultOpen: false,
   });
 
   return (
     <div>
-      <button onClick={toggle}>
-        {isOpen ? 'Close' : 'Open'} Calendar
-      </button>
+      <button onClick={toggle}>{isOpen ? 'Close' : 'Open'} Calendar</button>
       {isOpen && <Calendar />}
     </div>
   );
@@ -61,17 +57,17 @@ function CalendarExample() {
 
 #### useCalendar Options
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| defaultOpen | boolean | false | Initial open state |
+| Prop        | Type    | Default | Description        |
+| ----------- | ------- | ------- | ------------------ |
+| defaultOpen | boolean | false   | Initial open state |
 
 #### useCalendar Return
 
-| Prop | Type | Description |
-|------|------|-------------|
-| isOpen | boolean | Current open state |
-| open | () => void | Function to open calendar |
-| close | () => void | Function to close calendar |
+| Prop   | Type       | Description                   |
+| ------ | ---------- | ----------------------------- |
+| isOpen | boolean    | Current open state            |
+| open   | () => void | Function to open calendar     |
+| close  | () => void | Function to close calendar    |
 | toggle | () => void | Function to toggle open state |
 
 ## Examples
@@ -81,9 +77,7 @@ function CalendarExample() {
 ```tsx
 <CalendarProvider>
   <Calendar>
-    <div className="calendar-grid">
-      {/* Calendar grid content */}
-    </div>
+    <div className="calendar-grid">{/* Calendar grid content */}</div>
   </Calendar>
 </CalendarProvider>
 ```
@@ -96,14 +90,8 @@ function CalendarWithState() {
 
   return (
     <CalendarProvider>
-      <button onClick={toggle}>
-        {isOpen ? 'Hide' : 'Show'} Calendar
-      </button>
-      {isOpen && (
-        <Calendar>
-          {/* Calendar content */}
-        </Calendar>
-      )}
+      <button onClick={toggle}>{isOpen ? 'Hide' : 'Show'} Calendar</button>
+      {isOpen && <Calendar>{/* Calendar content */}</Calendar>}
     </CalendarProvider>
   );
 }
@@ -116,9 +104,7 @@ function CalendarWithState() {
   <div className="calendar-header">
     <h3>Select Date</h3>
   </div>
-  <div className="calendar-body">
-    {/* Calendar grid */}
-  </div>
+  <div className="calendar-body">{/* Calendar grid */}</div>
 </Calendar>
 ```
 
@@ -127,12 +113,14 @@ function CalendarWithState() {
 This component uses the following design tokens:
 
 ### Layout & Spacing
+
 - `--calendar-spacing-gap` - Gap between calendar elements
 - `--calendar-spacing-padding` - Internal padding
 - `--calendar-spacing-margin` - External margins
 - `--calendar-grid-gap` - Gap between grid items
 
 ### Colors
+
 - `--calendar-color-background` - Background color
 - `--calendar-color-foreground` - Text color
 - `--calendar-color-border` - Border color
@@ -141,19 +129,23 @@ This component uses the following design tokens:
 - `--calendar-color-disabled` - Disabled date color
 
 ### Typography
+
 - `--calendar-font-size` - Font size
 - `--calendar-font-weight` - Font weight
 - `--calendar-line-height` - Line height
 
 ### Animation
+
 - `--calendar-transition-duration` - Animation duration
 - `--calendar-transition-easing` - Animation easing
 
 ### Border & Shape
+
 - `--calendar-border-radius` - Border radius
 - `--calendar-border-width` - Border width
 
 ### Sizing
+
 - `--calendar-cell-size` - Individual date cell size
 - `--calendar-header-height` - Header height
 - `--calendar-min-width` - Minimum calendar width
@@ -162,17 +154,17 @@ This component uses the following design tokens:
 
 ### Keyboard Navigation
 
-| Key | When focus is on | Action | Result | Notes |
-|-----|------------------|--------|---------|-------|
-| Arrow Keys | Date cells | navigate | Move between dates | Up/Down/Left/Right |
-| Enter/Space | Date cells | activate | Select date | Primary activation |
-| Tab | Any | navigate | Move to next focusable element | Standard tab order |
-| Escape | Any | dismiss | Close calendar | If applicable |
-| Home | Date cells | navigate | Move to first date of week | |
-| End | Date cells | navigate | Move to last date of week | |
-| Page Up/Down | Date cells | navigate | Move by week | |
-| Ctrl+Home | Date cells | navigate | Move to first date of month | |
-| Ctrl+End | Date cells | navigate | Move to last date of month | |
+| Key          | When focus is on | Action   | Result                         | Notes              |
+| ------------ | ---------------- | -------- | ------------------------------ | ------------------ |
+| Arrow Keys   | Date cells       | navigate | Move between dates             | Up/Down/Left/Right |
+| Enter/Space  | Date cells       | activate | Select date                    | Primary activation |
+| Tab          | Any              | navigate | Move to next focusable element | Standard tab order |
+| Escape       | Any              | dismiss  | Close calendar                 | If applicable      |
+| Home         | Date cells       | navigate | Move to first date of week     |                    |
+| End          | Date cells       | navigate | Move to last date of week      |                    |
+| Page Up/Down | Date cells       | navigate | Move by week                   |                    |
+| Ctrl+Home    | Date cells       | navigate | Move to first date of month    |                    |
+| Ctrl+End     | Date cells       | navigate | Move to last date of month     |                    |
 
 ### Screen Reader Support
 

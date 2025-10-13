@@ -5,7 +5,6 @@ import { Blockquote } from '@/ui/components/Blockquote';
 import { AspectRatio } from '@/ui/components/AspectRatio';
 import { Truncate } from '@/ui/components/Truncate';
 
-
 describe('Blockquote', () => {
   it('renders with semantic blockquote element', () => {
     render(<Blockquote>Test quote</Blockquote>);

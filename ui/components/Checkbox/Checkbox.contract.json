@@ -5,7 +5,15 @@
   "variants": {
     "size": ["sm", "md", "lg"]
   },
-  "states": ["default", "hover", "focus", "active", "disabled", "checked", "indeterminate"],
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "active",
+    "disabled",
+    "checked",
+    "indeterminate"
+  ],
   "slots": {
     "checkIcon": { "optional": true },
     "indeterminateIcon": { "optional": true }
@@ -41,10 +49,7 @@
       "checkbox.color.border.checked",
       "checkbox.color.icon.default"
     ],
-    "checkIcon": [
-      "checkbox.color.icon.default",
-      "checkbox.size.icon.md"
-    ],
+    "checkIcon": ["checkbox.color.icon.default", "checkbox.size.icon.md"],
     "indeterminateIcon": [
       "checkbox.color.icon.default",
       "checkbox.size.icon.md"

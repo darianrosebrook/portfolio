@@ -34,21 +34,19 @@ import { Chip } from '@/ui/components/Chip';
 const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
 const toggleItem = (item: string) => {
-  setSelectedItems(prev =>
-    prev.includes(item)
-      ? prev.filter(i => i !== item)
-      : [...prev, item]
+  setSelectedItems((prev) =>
+    prev.includes(item) ? prev.filter((i) => i !== item) : [...prev, item]
   );
 };
 
 return (
   <div>
-    {items.map(item => {
+    {items.map((item) => {
       const isSelected = selectedItems.includes(item);
       return (
         <Chip
           key={item}
-          variant={isSelected ? "selected" : "default"}
+          variant={isSelected ? 'selected' : 'default'}
           onClick={() => toggleItem(item)}
           ariaPressed={isSelected}
         >
@@ -66,12 +64,12 @@ return (
 const [tags, setTags] = useState<string[]>(['React', 'TypeScript']);
 
 const removeTag = (tag: string) => {
-  setTags(prev => prev.filter(t => t !== tag));
+  setTags((prev) => prev.filter((t) => t !== tag));
 };
 
 return (
   <div>
-    {tags.map(tag => (
+    {tags.map((tag) => (
       <Chip
         key={tag}
         variant="dismissible"
@@ -87,18 +85,18 @@ return (
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `variant` | `'default' \| 'selected' \| 'dismissible'` | `'default'` | Visual variant of the chip |
-| `size` | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the chip |
-| `disabled` | `boolean` | `false` | Whether the chip is disabled |
-| `className` | `string` | `''` | Additional CSS classes |
-| `title` | `string` | `''` | Tooltip text |
-| `ariaLabel` | `string` | - | Accessible label for screen readers |
-| `ariaPressed` | `boolean` | - | ARIA pressed state (useful for toggleable chips) |
-| `role` | `React.AriaRole` | `'button'` | ARIA role |
-| `asChild` | `boolean` | `false` | Render as child element |
-| `children` | `React.ReactNode` | - | Content of the chip |
+| Prop          | Type                                       | Default     | Description                                      |
+| ------------- | ------------------------------------------ | ----------- | ------------------------------------------------ |
+| `variant`     | `'default' \| 'selected' \| 'dismissible'` | `'default'` | Visual variant of the chip                       |
+| `size`        | `'small' \| 'medium' \| 'large'`           | `'medium'`  | Size of the chip                                 |
+| `disabled`    | `boolean`                                  | `false`     | Whether the chip is disabled                     |
+| `className`   | `string`                                   | `''`        | Additional CSS classes                           |
+| `title`       | `string`                                   | `''`        | Tooltip text                                     |
+| `ariaLabel`   | `string`                                   | -           | Accessible label for screen readers              |
+| `ariaPressed` | `boolean`                                  | -           | ARIA pressed state (useful for toggleable chips) |
+| `role`        | `React.AriaRole`                           | `'button'`  | ARIA role                                        |
+| `asChild`     | `boolean`                                  | `false`     | Render as child element                          |
+| `children`    | `React.ReactNode`                          | -           | Content of the chip                              |
 
 ### Polymorphic Props
 
@@ -135,6 +133,7 @@ The component uses CSS modules with design tokens. Custom styling can be applied
 ## Animation
 
 The component uses GSAP for smooth animations:
+
 - Icon entrance animations (scale and fade)
 - Hover effects (subtle scale)
 - Focus states with outline rings

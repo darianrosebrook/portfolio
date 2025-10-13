@@ -18,13 +18,13 @@ function WithTooltip() {
 
 ## Props
 
-| Prop      | Type   | Default | Description                |
-| --------- | ------ | ------- | -------------------------- |
-| children  | ReactNode | -     | The trigger element        |
-| content   | string | -       | The tooltip content        |
-| className | string | ''      | Additional CSS classes     |
-| side      | 'top' \| 'right' \| 'bottom' \| 'left' | 'top' | Which side to display on |
-| delay     | number | 700     | Delay before showing (ms)  |
+| Prop      | Type                                   | Default | Description               |
+| --------- | -------------------------------------- | ------- | ------------------------- |
+| children  | ReactNode                              | -       | The trigger element       |
+| content   | string                                 | -       | The tooltip content       |
+| className | string                                 | ''      | Additional CSS classes    |
+| side      | 'top' \| 'right' \| 'bottom' \| 'left' | 'top'   | Which side to display on  |
+| delay     | number                                 | 700     | Delay before showing (ms) |
 
 ## Examples
 
@@ -55,15 +55,17 @@ function WithTooltip() {
 ### Rich Content
 
 ```tsx
-<Tooltip content={
-  <div>
-    <strong>Keyboard shortcuts:</strong>
-    <br />
-    Ctrl+S to save
-    <br />
-    Ctrl+Z to undo
-  </div>
-}>
+<Tooltip
+  content={
+    <div>
+      <strong>Keyboard shortcuts:</strong>
+      <br />
+      Ctrl+S to save
+      <br />
+      Ctrl+Z to undo
+    </div>
+  }
+>
   <button>Actions</button>
 </Tooltip>
 ```

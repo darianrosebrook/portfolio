@@ -31,13 +31,13 @@ function SidePanel() {
 
 ## Props
 
-| Prop         | Type                    | Default  | Description                |
-| ------------ | ----------------------- | -------- | -------------------------- |
-| children     | ReactNode               | -        | Sheet content              |
-| open         | boolean                 | false    | Controls sheet visibility  |
-| onOpenChange | (open: boolean) => void | -        | Open state change handler  |
-| side         | 'left' \| 'right'       | 'right'  | Which side to slide from   |
-| className    | string                  | ''       | Additional CSS classes     |
+| Prop         | Type                    | Default | Description               |
+| ------------ | ----------------------- | ------- | ------------------------- |
+| children     | ReactNode               | -       | Sheet content             |
+| open         | boolean                 | false   | Controls sheet visibility |
+| onOpenChange | (open: boolean) => void | -       | Open state change handler |
+| side         | 'left' \| 'right'       | 'right' | Which side to slide from  |
+| className    | string                  | ''      | Additional CSS classes    |
 
 ## Examples
 

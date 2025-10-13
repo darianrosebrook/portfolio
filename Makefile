@@ -60,3 +60,4 @@ clean:
 	rm -rf test-results
 	rm -rf playwright-report
 	rm -rf coverage
+

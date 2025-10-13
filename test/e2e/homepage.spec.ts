@@ -39,18 +39,20 @@ test.describe('Homepage Visual Regression', () => {
     await page.waitForFunction(
       () => {
         // Check if page has loaded basic structure
-        const hasBasicStructure = document.body && document.body.children.length > 0;
+        const hasBasicStructure =
+          document.body && document.body.children.length > 0;
 
         // Check for specific content indicators
-        const hasMainContent = document.querySelector('main') ||
-                              document.querySelector('.hero') ||
-                              document.querySelector('h1') ||
-                              document.body.textContent?.includes('Darian Rosebrook');
+        const hasMainContent =
+          document.querySelector('main') ||
+          document.querySelector('.hero') ||
+          document.querySelector('h1') ||
+          document.body.textContent?.includes('Darian Rosebrook');
 
         // Check if images are loading (avoid layout shifts)
         const images = document.querySelectorAll('img');
-        const imagesLoaded = Array.from(images).every(img =>
-          img.complete || img.naturalWidth > 0
+        const imagesLoaded = Array.from(images).every(
+          (img) => img.complete || img.naturalWidth > 0
         );
 
         return hasBasicStructure && (hasMainContent || imagesLoaded);
@@ -106,13 +108,15 @@ test.describe('Homepage Visual Regression', () => {
     await page.waitForFunction(
       () => {
         // Check if page has loaded basic structure
-        const hasBasicStructure = document.body && document.body.children.length > 0;
+        const hasBasicStructure =
+          document.body && document.body.children.length > 0;
 
         // Check for header/navigation elements
-        const hasHeader = document.querySelector('header') ||
-                         document.querySelector('nav') ||
-                         document.querySelector('.navbar') ||
-                         document.querySelector('[data-testid="header"]');
+        const hasHeader =
+          document.querySelector('header') ||
+          document.querySelector('nav') ||
+          document.querySelector('.navbar') ||
+          document.querySelector('[data-testid="header"]');
 
         return hasBasicStructure && hasHeader;
       },
