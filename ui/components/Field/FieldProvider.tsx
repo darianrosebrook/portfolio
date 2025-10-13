@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useMemo } from 'react';
 import { useField } from './useField';
-import type { FieldApi, FieldProps } from './Types';
+import type { FieldApi, FieldProps } from './Types.js';
 
 const Ctx = createContext<FieldApi | null>(null);
 

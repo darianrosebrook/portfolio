@@ -1,5 +1,5 @@
 import { useCallback, useId, useMemo, useState } from 'react';
-import type { FieldApi, FieldProps, FieldStatus } from './Types';
+import type { FieldApi, FieldProps, FieldStatus } from './Types.js';
 
 export function useField(props: FieldProps): FieldApi {
   const {
