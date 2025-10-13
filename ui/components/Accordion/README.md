@@ -12,15 +12,11 @@ function Example() {
     <Accordion type="single" defaultValue="item1">
       <Accordion.Item value="item1">
         <Accordion.Trigger>Section 1</Accordion.Trigger>
-        <Accordion.Content>
-          Content for section 1
-        </Accordion.Content>
+        <Accordion.Content>Content for section 1</Accordion.Content>
       </Accordion.Item>
       <Accordion.Item value="item2">
         <Accordion.Trigger>Section 2</Accordion.Trigger>
-        <Accordion.Content>
-          Content for section 2
-        </Accordion.Content>
+        <Accordion.Content>Content for section 2</Accordion.Content>
       </Accordion.Item>
     </Accordion>
   );
@@ -31,41 +27,41 @@ function Example() {
 
 ### Accordion (Root)
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| type | 'single' \| 'multiple' | 'single' | Whether only one or multiple items can be open |
-| defaultValue | string \| string[] | - | Default open items (uncontrolled) |
-| value | string \| string[] | - | Controlled open items |
-| onValueChange | (value: string \| string[]) => void | - | Callback when open items change |
-| collapsible | boolean | true | Whether items can be closed when type is 'single' |
-| className | string | '' | Additional CSS classes |
-| children | ReactNode | - | Accordion items |
+| Prop          | Type                                | Default  | Description                                       |
+| ------------- | ----------------------------------- | -------- | ------------------------------------------------- |
+| type          | 'single' \| 'multiple'              | 'single' | Whether only one or multiple items can be open    |
+| defaultValue  | string \| string[]                  | -        | Default open items (uncontrolled)                 |
+| value         | string \| string[]                  | -        | Controlled open items                             |
+| onValueChange | (value: string \| string[]) => void | -        | Callback when open items change                   |
+| collapsible   | boolean                             | true     | Whether items can be closed when type is 'single' |
+| className     | string                              | ''       | Additional CSS classes                            |
+| children      | ReactNode                           | -        | Accordion items                                   |
 
 ### Accordion.Item
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| value | string | - | Unique identifier for this item |
-| className | string | '' | Additional CSS classes |
-| children | ReactNode | - | Item content (Trigger and Content) |
+| Prop      | Type      | Default | Description                        |
+| --------- | --------- | ------- | ---------------------------------- |
+| value     | string    | -       | Unique identifier for this item    |
+| className | string    | ''      | Additional CSS classes             |
+| children  | ReactNode | -       | Item content (Trigger and Content) |
 
 ### Accordion.Trigger
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| value | string | - | Must match the parent Item's value |
-| className | string | '' | Additional CSS classes |
-| children | ReactNode | - | Trigger content |
-| onClick | (event: MouseEvent) => void | - | Click handler |
-| ...rest | ButtonHTMLAttributes | - | Additional button props |
+| Prop      | Type                        | Default | Description                        |
+| --------- | --------------------------- | ------- | ---------------------------------- |
+| value     | string                      | -       | Must match the parent Item's value |
+| className | string                      | ''      | Additional CSS classes             |
+| children  | ReactNode                   | -       | Trigger content                    |
+| onClick   | (event: MouseEvent) => void | -       | Click handler                      |
+| ...rest   | ButtonHTMLAttributes        | -       | Additional button props            |
 
 ### Accordion.Content
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| value | string | - | Must match the parent Item's value |
-| className | string | '' | Additional CSS classes |
-| children | ReactNode | - | Content to display when open |
+| Prop      | Type      | Default | Description                        |
+| --------- | --------- | ------- | ---------------------------------- |
+| value     | string    | -       | Must match the parent Item's value |
+| className | string    | ''      | Additional CSS classes             |
+| children  | ReactNode | -       | Content to display when open       |
 
 ## Examples
 
@@ -88,15 +84,11 @@ function Example() {
 <Accordion type="multiple" defaultValue={['item1', 'item2']}>
   <Accordion.Item value="item1">
     <Accordion.Trigger>Frontend</Accordion.Trigger>
-    <Accordion.Content>
-      React, TypeScript, CSS
-    </Accordion.Content>
+    <Accordion.Content>React, TypeScript, CSS</Accordion.Content>
   </Accordion.Item>
   <Accordion.Item value="item2">
     <Accordion.Trigger>Backend</Accordion.Trigger>
-    <Accordion.Content>
-      Node.js, Express, PostgreSQL
-    </Accordion.Content>
+    <Accordion.Content>Node.js, Express, PostgreSQL</Accordion.Content>
   </Accordion.Item>
 </Accordion>
 ```
@@ -108,11 +100,7 @@ function ControlledAccordion() {
   const [openItems, setOpenItems] = useState<string[]>(['item1']);
 
   return (
-    <Accordion 
-      type="multiple" 
-      value={openItems}
-      onValueChange={setOpenItems}
-    >
+    <Accordion type="multiple" value={openItems} onValueChange={setOpenItems}>
       <Accordion.Item value="item1">
         <Accordion.Trigger>Item 1</Accordion.Trigger>
         <Accordion.Content>Content 1</Accordion.Content>
@@ -128,9 +116,7 @@ function ControlledAccordion() {
 <Accordion type="single" collapsible={false} defaultValue="item1">
   <Accordion.Item value="item1">
     <Accordion.Trigger>Always Open</Accordion.Trigger>
-    <Accordion.Content>
-      This item cannot be closed.
-    </Accordion.Content>
+    <Accordion.Content>This item cannot be closed.</Accordion.Content>
   </Accordion.Item>
 </Accordion>
 ```
@@ -140,27 +126,32 @@ function ControlledAccordion() {
 This component uses the following design tokens:
 
 ### Layout & Spacing
+
 - `--accordion-spacing-gap` - Gap between items
 - `--accordion-spacing-padding` - Internal padding
 - `--accordion-spacing-margin` - External margins
 
 ### Colors
+
 - `--accordion-color-background` - Background color
 - `--accordion-color-foreground` - Text color
 - `--accordion-color-border` - Border color
 - `--accordion-color-hover` - Hover state color
 
 ### Typography
+
 - `--accordion-font-size` - Font size
 - `--accordion-font-weight` - Font weight
 - `--accordion-line-height` - Line height
 
 ### Animation
+
 - `--accordion-transition-duration` - Animation duration
 - `--accordion-transition-easing` - Animation easing
 - `--accordion-chevron-rotation` - Chevron rotation degrees
 
 ### Border & Shape
+
 - `--accordion-border-radius` - Border radius
 - `--accordion-border-width` - Border width
 
@@ -168,13 +159,13 @@ This component uses the following design tokens:
 
 ### Keyboard Navigation
 
-| Key | When focus is on | Action | Result | Notes |
-|-----|------------------|--------|---------|-------|
-| Enter/Space | Accordion.Trigger | activate | Toggles item open/closed | Primary activation |
-| Arrow Down | Accordion.Trigger | navigate | Moves to next item | When multiple items |
-| Arrow Up | Accordion.Trigger | navigate | Moves to previous item | When multiple items |
-| Home | Accordion.Trigger | navigate | Moves to first item | When multiple items |
-| End | Accordion.Trigger | navigate | Moves to last item | When multiple items |
+| Key         | When focus is on  | Action   | Result                   | Notes               |
+| ----------- | ----------------- | -------- | ------------------------ | ------------------- |
+| Enter/Space | Accordion.Trigger | activate | Toggles item open/closed | Primary activation  |
+| Arrow Down  | Accordion.Trigger | navigate | Moves to next item       | When multiple items |
+| Arrow Up    | Accordion.Trigger | navigate | Moves to previous item   | When multiple items |
+| Home        | Accordion.Trigger | navigate | Moves to first item      | When multiple items |
+| End         | Accordion.Trigger | navigate | Moves to last item       | When multiple items |
 
 ### Screen Reader Support
 

@@ -42,14 +42,97 @@ const nextConfig = {
   },
   // Performance optimizations
   experimental: {
-    optimizePackageImports: ['@tiptap/react', '@tiptap/starter-kit'],
+    optimizePackageImports: [
+      '@tiptap/react',
+      '@tiptap/starter-kit',
+      '@tiptap/extension-image',
+      '@tiptap/extension-link',
+      '@tiptap/html',
+      'gsap',
+      '@gsap/react',
+    ],
     // Enable View Transitions API support for page transitions
     viewTransition: true,
+  },
+  // Webpack optimizations
+  webpack: (config, { dev, isServer }) => {
+    if (!dev && !isServer) {
+      config.optimization = {
+        ...config.optimization,
+        splitChunks: {
+          chunks: 'all',
+          cacheGroups: {
+            tiptap: {
+              test: /[\\/]node_modules[\\/](@tiptap)[\\/]/,
+              name: 'tiptap',
+              priority: 10,
+            },
+            gsap: {
+              test: /[\\/]node_modules[\\/](gsap|@gsap)[\\/]/,
+              name: 'gsap',
+              priority: 10,
+            },
+            sandpack: {
+              test: /[\\/]node_modules[\\/](@codesandbox\/sandpack)[\\/]/,
+              name: 'sandpack',
+              priority: 10,
+            },
+            vendor: {
+              test: /[\\/]node_modules[\\/]/,
+              name: 'vendor',
+              priority: 5,
+            },
+          },
+        },
+      };
+    }
+    return config;
   },
   // Compression
   compress: true,
   // Power by header removal
   poweredByHeader: false,
+  // Cache headers for production
+  async headers() {
+    return [
+      {
+        source: '/_next/static/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/:all*(svg|jpg|jpeg|png|webp|avif|gif|ico)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=86400, stale-while-revalidate=604800',
+          },
+        ],
+      },
+      {
+        source: '/_next/image',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/fonts/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+    ];
+  },
 };
 
 export default withBundleAnalyzer({

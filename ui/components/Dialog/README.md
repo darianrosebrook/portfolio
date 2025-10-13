@@ -17,9 +17,7 @@ function ModalExample() {
         <Dialog.Header>
           <Dialog.Title>Dialog Title</Dialog.Title>
         </Dialog.Header>
-        <Dialog.Body>
-          Dialog content goes here.
-        </Dialog.Body>
+        <Dialog.Body>Dialog content goes here.</Dialog.Body>
         <Dialog.Footer>
           <Dialog.Close>Cancel</Dialog.Close>
           <button>Confirm</button>
@@ -32,12 +30,12 @@ function ModalExample() {
 
 ## Props
 
-| Prop         | Type                              | Default  | Description                |
-| ------------ | --------------------------------- | -------- | -------------------------- |
-| children     | ReactNode                         | -        | Dialog content             |
-| open         | boolean                           | false    | Controls dialog visibility |
-| onOpenChange | (open: boolean) => void           | -        | Open state change handler  |
-| className    | string                            | ''       | Additional CSS classes     |
+| Prop         | Type                    | Default | Description                |
+| ------------ | ----------------------- | ------- | -------------------------- |
+| children     | ReactNode               | -       | Dialog content             |
+| open         | boolean                 | false   | Controls dialog visibility |
+| onOpenChange | (open: boolean) => void | -       | Open state change handler  |
+| className    | string                  | ''      | Additional CSS classes     |
 
 ## Examples
 
@@ -48,9 +46,7 @@ function ModalExample() {
   <Dialog.Header>
     <Dialog.Title>Confirm Action</Dialog.Title>
   </Dialog.Header>
-  <Dialog.Body>
-    Are you sure you want to proceed?
-  </Dialog.Body>
+  <Dialog.Body>Are you sure you want to proceed?</Dialog.Body>
   <Dialog.Footer>
     <Dialog.Close>Cancel</Dialog.Close>
     <button>Confirm</button>
@@ -65,9 +61,7 @@ function ModalExample() {
   <Dialog.Header>
     <Dialog.Title>Warning</Dialog.Title>
   </Dialog.Header>
-  <Dialog.Body>
-    This action cannot be undone.
-  </Dialog.Body>
+  <Dialog.Body>This action cannot be undone.</Dialog.Body>
   <Dialog.Footer>
     <Dialog.Close>Cancel</Dialog.Close>
     <button>Delete</button>

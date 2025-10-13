@@ -12,7 +12,6 @@ import {
   OTPSeparator,
 } from '@/ui/components/OTP';
 
-
 describe('OTP Component', () => {
   const defaultProps = {
     length: 6,

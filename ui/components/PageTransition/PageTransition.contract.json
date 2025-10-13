@@ -17,10 +17,7 @@
     "apgPattern": null
   },
   "tokens": {
-    "root": [
-      "pageTransition.duration.default",
-      "pageTransition.easing.default"
-    ]
+    "root": ["pageTransition.duration.default", "pageTransition.easing.default"]
   },
   "ssr": {
     "hydrateOn": "immediate"

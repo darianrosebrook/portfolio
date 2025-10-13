@@ -6,15 +6,7 @@
  */
 
 // Glyph shape caching
-export {
-  shapeForV2,
-  getOvershoot,
-  type SvgShape,
-} from './caching';
+export { shapeForV2, getOvershoot, type SvgShape } from './caching';
 
 // Advanced caching for articles, images, and API responses
-export {
-  articleCache,
-  imageCache,
-  apiCache,
-} from './advancedCache';
+export { articleCache, imageCache, apiCache } from './advancedCache';

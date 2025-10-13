@@ -40,14 +40,16 @@ test.describe('Component Visual Regression', () => {
     await page.waitForFunction(
       () => {
         // Check if page has loaded basic structure
-        const hasBasicStructure = document.body && document.body.children.length > 0;
+        const hasBasicStructure =
+          document.body && document.body.children.length > 0;
 
         // Check for content indicators
-        const hasContent = document.querySelector('main') ||
-                          document.querySelector('.content') ||
-                          document.querySelector('h1') ||
-                          document.body.textContent?.includes('Component') ||
-                          document.body.textContent?.includes('Blueprint');
+        const hasContent =
+          document.querySelector('main') ||
+          document.querySelector('.content') ||
+          document.querySelector('h1') ||
+          document.body.textContent?.includes('Component') ||
+          document.body.textContent?.includes('Blueprint');
 
         return hasBasicStructure && hasContent;
       },
@@ -171,14 +173,16 @@ test.describe('Component Visual Regression', () => {
     await page.waitForFunction(
       () => {
         // Check if page has loaded basic structure
-        const hasBasicStructure = document.body && document.body.children.length > 0;
+        const hasBasicStructure =
+          document.body && document.body.children.length > 0;
 
         // Check for content indicators
-        const hasContent = document.querySelector('main') ||
-                          document.querySelector('.content') ||
-                          document.querySelector('h1') ||
-                          document.body.textContent?.includes('Component') ||
-                          document.body.textContent?.includes('Blueprint');
+        const hasContent =
+          document.querySelector('main') ||
+          document.querySelector('.content') ||
+          document.querySelector('h1') ||
+          document.body.textContent?.includes('Component') ||
+          document.body.textContent?.includes('Blueprint');
 
         return hasBasicStructure && hasContent;
       },

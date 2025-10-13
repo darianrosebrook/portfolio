@@ -3,7 +3,6 @@ import { render, screen } from '@testing-library/react';
 import { Divider } from '@/ui/components/Divider';
 import { VisuallyHidden } from '@/ui/components/VisuallyHidden';
 
-
 describe('Divider', () => {
   it('renders with default horizontal orientation', () => {
     render(<Divider data-testid="divider" />);
