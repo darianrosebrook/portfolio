@@ -5,4 +5,4 @@ export { TabList } from './slots/TabList';
 export { Tab } from './slots/Tab';
 export { TabPanel } from './slots/TabPanel';
 export type { TabsProps } from './Tabs';
-export type { TabsValue, TabsActivationMode } from './Types';
+export type { TabsValue, TabsActivationMode } from './types';

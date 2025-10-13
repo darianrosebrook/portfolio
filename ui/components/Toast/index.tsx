@@ -6,5 +6,5 @@ export { ToastTitle } from './slots/ToastTitle';
 export { ToastDescription } from './slots/ToastDescription';
 export { ToastAction } from './slots/ToastAction';
 export { ToastClose } from './slots/ToastClose';
-export type { ToastOptions, ToastVariant, ToastId } from './Types';
+export type { ToastOptions, ToastVariant, ToastId } from './types';
 export type { ToastProps } from './Toast';

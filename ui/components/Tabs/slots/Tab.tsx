@@ -1,7 +1,7 @@
 'use client';
 import * as React from 'react';
 import { useTabs } from '../TabsProvider';
-import type { TabsValue } from '../Types';
+import type { TabsValue } from '../types';
 import styles from '../Tabs.module.scss';
 
 export interface TabProps
