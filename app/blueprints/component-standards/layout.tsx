@@ -52,7 +52,7 @@ export default function ComponentStandardsLayout({
     toolbar: 'Toolbar',
   };
 
-  const crumbs = useBreadcrumbs({ base, labelMap });
+  const _crumbs = useBreadcrumbs({ base, labelMap });
 
   return (
     <PageTransition transitionName="component-standards-layout" duration={300}>
