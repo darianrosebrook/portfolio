@@ -23,7 +23,7 @@ export default function FoundationsLayout({
     accessibility: 'Accessibility',
   };
 
-  const crumbs = useBreadcrumbs({ base, labelMap });
+  const _crumbs = useBreadcrumbs({ base, labelMap });
 
   // const sidebarSections = [
   //   {
