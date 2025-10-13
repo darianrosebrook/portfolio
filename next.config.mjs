@@ -55,7 +55,15 @@ const nextConfig = {
     viewTransition: true,
   },
   // Webpack optimizations
-  webpack: (config, { dev, isServer }) => {
+  webpack: (config, { dev, isServer, isEdge }) => {
+    // Handle Supabase in Edge Runtime
+    if (isEdge) {
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        encoding: false,
+      };
+    }
+
     if (!dev && !isServer) {
       config.optimization = {
         ...config.optimization,
