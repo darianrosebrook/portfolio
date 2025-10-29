@@ -1,0 +1,29 @@
+{
+  "$schema": "../designTokens.schema.json",
+  "layer": {
+    "base": {
+      "$type": "number",
+      "$value": 0
+    },
+    "dropdown": {
+      "$type": "number",
+      "$value": 1000
+    },
+    "overlay": {
+      "$type": "number",
+      "$value": 1300
+    },
+    "modal": {
+      "$type": "number",
+      "$value": 1500
+    },
+    "toast": {
+      "$type": "number",
+      "$value": 1700
+    },
+    "tooltip": {
+      "$type": "number",
+      "$value": 1800
+    }
+  }
+}

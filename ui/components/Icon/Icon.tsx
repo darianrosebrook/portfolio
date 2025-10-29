@@ -10,7 +10,7 @@ export type IconProps = {
 const Icon = ({ icon, width = 20, height = 20 }: IconProps) => {
   if (!icon) return null;
   return (
-    <span className={styles.icon} style={{ width, height }}>
+    <span className={styles.icon} style={{ width, height }} data-icon="true">
       <svg viewBox={`0 0 ${icon.icon[0]} ${icon.icon[1]}`} fill="currentColor">
         <path d={icon.icon[4] as string} />
       </svg>
@@ -18,4 +18,5 @@ const Icon = ({ icon, width = 20, height = 20 }: IconProps) => {
   );
 };
 
+export { Icon };
 export default Icon;

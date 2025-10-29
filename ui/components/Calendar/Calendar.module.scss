@@ -8,16 +8,21 @@
   padding: var(--calendar-size-padding-default);
   background: var(--calendar-color-background-default);
   border-radius: var(--calendar-size-radius-default);
-  box-shadow: var(--calendar-elevation-default) var(--semantic-color-background-imageOverlay);
-  transition: box-shadow var(--core-motion-duration-short) var(--core-motion-easing-standard),
-    transform var(--core-motion-duration-short) var(--core-motion-easing-standard);
+  box-shadow: var(--calendar-elevation-default)
+    var(--semantic-color-background-imageOverlay);
+  transition:
+    box-shadow var(--core-motion-duration-short)
+      var(--core-motion-easing-standard),
+    transform var(--core-motion-duration-short)
+      var(--core-motion-easing-standard);
 }
 
 .calendar.clickable {
   cursor: pointer;
 
   &:hover {
-    box-shadow: var(--semantic-elevation-depth-2) var(--semantic-color-background-imageOverlay);
+    box-shadow: var(--semantic-elevation-depth-2)
+      var(--semantic-color-background-imageOverlay);
     transform: translateY(-2px);
   }
 

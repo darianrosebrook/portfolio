@@ -1,0 +1,52 @@
+{
+  "$schema": "../designTokens.schema.json",
+  "spacing": {
+    "size": {
+      "10": {
+        "$value": "64px",
+        "$type": "dimension"
+      },
+      "$type": "dimension",
+      "00": {
+        "$value": "0",
+        "$type": "dimension"
+      },
+      "01": {
+        "$value": "1px",
+        "$type": "dimension"
+      },
+      "02": {
+        "$value": "2px",
+        "$type": "dimension"
+      },
+      "03": {
+        "$value": "4px",
+        "$type": "dimension"
+      },
+      "04": {
+        "$value": "8px",
+        "$type": "dimension"
+      },
+      "05": {
+        "$value": "12px",
+        "$type": "dimension"
+      },
+      "06": {
+        "$value": "16px",
+        "$type": "dimension"
+      },
+      "07": {
+        "$value": "24px",
+        "$type": "dimension"
+      },
+      "08": {
+        "$value": "32px",
+        "$type": "dimension"
+      },
+      "09": {
+        "$value": "48px",
+        "$type": "dimension"
+      }
+    }
+  }
+}

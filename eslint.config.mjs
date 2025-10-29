@@ -42,7 +42,7 @@ const config = [
       // TypeScript rules
       '@typescript-eslint/no-unused-vars': [
         'warn',
-        { argsIgnorePattern: '^_' },
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
       ],
 
       // Accessibility rules
@@ -91,7 +91,7 @@ const config = [
       'jsx-a11y/role-supports-aria-props': 'off',
       '@typescript-eslint/no-unused-vars': [
         'warn',
-        { argsIgnorePattern: '^_' },
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
       ],
       'prettier/prettier': 'off',
       '@typescript-eslint/no-explicit-any': 'off',

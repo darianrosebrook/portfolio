@@ -1,6 +1,6 @@
 'use client';
 // layout for foundations that contains breadcrumbs
-// import { useBreadcrumbs } from '@/hooks/useBreadcrumbs';
+import { useBreadcrumbs } from '@/hooks/useBreadcrumbs';
 // import { Breadcrumbs } from '@/ui/components/Breadcrumbs/Breadcrumbs';
 import { PageTransition } from '@/ui/components/PageTransition';
 import React from 'react';
@@ -10,20 +10,20 @@ export default function FoundationsLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // const base = { label: 'Foundations', href: '/blueprints/foundations' };
+  const base = { label: 'Foundations', href: '/blueprints/foundations' };
 
   // Map slug segments to friendly labels
-  // const labelMap: Record<string, string> = {
-  //   tokens: 'Design Tokens',
-  //   'core-vs-semantic': 'Core vs Semantic',
-  //   'token-naming': 'Token Naming',
-  //   theming: 'Theming & Modes',
-  //   'schema-validation': 'Schema & Validation',
-  //   'build-outputs': 'Build Outputs',
-  //   accessibility: 'Accessibility',
-  // };
+  const labelMap: Record<string, string> = {
+    tokens: 'Design Tokens',
+    'core-vs-semantic': 'Core vs Semantic',
+    'token-naming': 'Token Naming',
+    theming: 'Theming & Modes',
+    'schema-validation': 'Schema & Validation',
+    'build-outputs': 'Build Outputs',
+    accessibility: 'Accessibility',
+  };
 
-  // const crumbs = useBreadcrumbs({ base, labelMap });
+  const _crumbs = useBreadcrumbs({ base, labelMap });
 
   // const sidebarSections = [
   //   {

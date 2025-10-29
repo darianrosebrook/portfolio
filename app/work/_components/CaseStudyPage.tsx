@@ -18,6 +18,7 @@ interface CaseStudyPageProps {
  * @param data - The case study data with HTML content
  */
 export default function CaseStudyPage({ data }: CaseStudyPageProps) {
+  console.log(data);
   return (
     <div className="case-study-page">
       <header>

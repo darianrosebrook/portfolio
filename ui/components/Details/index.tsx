@@ -8,12 +8,8 @@
  */
 
 // Main composer components
-export {
-  Details as default,
-  Details,
-  DetailsInline,
-  DetailsCompact,
-} from './Details';
+export { default } from './Details';
+export { Details, DetailsInline, DetailsCompact } from './Details';
 export type { DetailsProps } from './Details';
 
 // Provider for group orchestration

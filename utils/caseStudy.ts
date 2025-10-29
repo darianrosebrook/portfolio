@@ -1,6 +1,6 @@
-import { DetailsExtension } from '@/ui/modules/Tiptap/Extensions/Details/DetailsExtension';
-import { TableOfContentsExtension } from '@/ui/modules/Tiptap/Extensions/TableOfContents/TableOfContentsExtension';
-import { VideoExtended } from '@/ui/modules/Tiptap/Extensions/VideoExtended';
+import { DetailsServer } from '@/ui/modules/Tiptap/Extensions/Details/DetailsServer';
+import { TableOfContentsServer } from '@/ui/modules/Tiptap/Extensions/TableOfContents/TableOfContentsServer';
+import { VideoServer } from '@/ui/modules/Tiptap/Extensions/VideoExtended/VideoServer';
 import Image from '@tiptap/extension-image';
 import { generateHTML } from '@tiptap/html';
 import type { JSONContent } from '@tiptap/react';
@@ -32,19 +32,13 @@ export function getCaseStudyContent(data: JSONContent): { html: string } {
     content.splice(firstImageIndex, 1);
   }
 
-  // Generate HTML from the modified content using extensions that match the editor
+  // Generate HTML from the modified content using server-side extensions
   const html = generateHTML(
     {
       type: 'doc',
       content,
     },
-    [
-      StarterKit,
-      Image,
-      DetailsExtension,
-      TableOfContentsExtension,
-      VideoExtended,
-    ]
+    [StarterKit, Image, DetailsServer, TableOfContentsServer, VideoServer]
   );
 
   return { html };

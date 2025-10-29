@@ -17,14 +17,20 @@
   /* === Color Tokens === */
   --avatar-color-background-default: var(--semantic-color-background-secondary);
   --avatar-color-background-inverse: var(--semantic-color-background-inverse);
-  --avatar-color-background-success: var(--semantic-color-background-success-strong);
-  --avatar-color-background-warning: var(--semantic-color-background-warning-strong);
+  --avatar-color-background-success: var(
+    --semantic-color-background-success-strong
+  );
+  --avatar-color-background-warning: var(
+    --semantic-color-background-warning-strong
+  );
   --avatar-color-background-disabled: var(--semantic-color-border-disabled);
   --avatar-color-foreground-primary: var(--semantic-color-foreground-primary);
   --avatar-color-border-default: var(--semantic-color-border-light);
   --avatar-color-border-info: var(--semantic-color-border-info);
 
   /* === Typography Tokens === */
-  --avatar-typography-fontWeight-medium: var(--core-typography-font-weight-medium);
+  --avatar-typography-fontWeight-medium: var(
+    --core-typography-font-weight-medium
+  );
   --avatar-typography-fontFamily-sans: var(--core-typography-font-family-sans);
 }

@@ -1,0 +1,40 @@
+{
+  "$schema": "../designTokens.schema.json",
+  "interaction": {
+    "focus": {
+      "ringWidth": {
+        "$type": "borderWidth",
+        "$value": "2px",
+        "$description": "Focus ring thickness"
+      },
+      "ringOffset": {
+        "$type": "dimension",
+        "$value": "2px",
+        "$description": "Space between element and focus ring"
+      },
+      "ringOpacity": {
+        "$type": "opacity",
+        "$value": 0.5,
+        "$description": "Focus ring transparency"
+      }
+    },
+    "press": {
+      "scale": {
+        "$type": "number",
+        "$value": 0.98,
+        "$description": "Scale factor for pressed elements"
+      },
+      "duration": {
+        "$type": "duration",
+        "$value": "{motion.duration.instant}"
+      }
+    },
+    "disabled": {
+      "opacity": {
+        "$type": "opacity",
+        "$value": 0.4,
+        "$description": "Opacity for disabled elements"
+      }
+    }
+  }
+}

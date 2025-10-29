@@ -1,8 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import {
-  generate,
-  createDefaultConfig,
-} from '../utils/designTokens/componentTokenUtils';
+import { generate, createDefaultConfig } from '../utils/designTokens';
 
 const tokens = {
   semantic: {

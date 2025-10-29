@@ -1,0 +1,33 @@
+{
+  "$schema": "../designTokens.schema.json",
+  "spacing": {
+    "padding": {
+      "container": {
+        "$type": "dimension",
+        "$value": "{spacing.size.06}"
+      },
+      "card": {
+        "$type": "dimension",
+        "$value": "{spacing.size.04}"
+      }
+    },
+    "gap": {
+      "grid": {
+        "$type": "dimension",
+        "$value": "{spacing.size.04}"
+      },
+      "gridLarge": {
+        "$type": "dimension",
+        "$value": "{spacing.size.09}"
+      },
+      "gridMedium": {
+        "$type": "dimension",
+        "$value": "{spacing.size.07}"
+      },
+      "gridSmall": {
+        "$type": "dimension",
+        "$value": "{spacing.size.04}"
+      }
+    }
+  }
+}

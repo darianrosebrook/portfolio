@@ -1,28 +1,28 @@
 {
   "name": "PageTransition",
   "layer": "composer",
-  "anatomy": ["root"],
-  "variants": {},
-  "states": ["default", "transitioning", "mounted"],
-  "slots": {},
+  "anatomy": ["root", "content"],
+  "variants": {
+    "duration": ["fast", "normal", "slow"],
+    "enabled": [true, false]
+  },
+  "states": ["default", "transitioning", "mounted", "unmounted"],
+  "slots": {
+    "content": { "required": true }
+  },
   "a11y": {
-    "role": "generic",
-    "labeling": [],
+    "role": "region",
+    "labeling": ["aria-label"],
     "keyboard": [],
     "apgPattern": null
   },
   "tokens": {
-    "root": [
-      "transition.animation.duration",
-      "transition.animation.easing",
-      "transition.color.background"
-    ]
+    "root": ["pageTransition.duration.default", "pageTransition.easing.default"]
   },
   "ssr": {
-    "hydrateOn": "none"
+    "hydrateOn": "immediate"
   },
   "rtl": {
     "flipIcon": false
   }
 }
-

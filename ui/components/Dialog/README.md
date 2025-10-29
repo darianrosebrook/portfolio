@@ -1,136 +1,110 @@
 # Dialog
 
-Modal and non-modal dialog component with GSAP animations and proper accessibility.
+A modal dialog component that provides accessible overlays for important user interactions. Built as a composer component with context-based state management.
 
 ## Usage
 
 ```tsx
 import { Dialog } from '@/ui/components/Dialog';
 
-// Basic modal dialog
-<Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
-  <Dialog.Trigger asChild>
-    <button>Open Dialog</button>
-  </Dialog.Trigger>
-  <Dialog.Portal>
-    <Dialog.Overlay />
-    <Dialog.Content>
-      <Dialog.Header>
-        <Dialog.Title>Dialog Title</Dialog.Title>
-        <Dialog.Description>
-          Dialog description text.
-        </Dialog.Description>
-      </Dialog.Header>
-      <Dialog.Body>
-        Dialog content goes here.
-      </Dialog.Body>
-      <Dialog.Footer>
-        <Dialog.Close asChild>
-          <button>Cancel</button>
-        </Dialog.Close>
-        <button onClick={handleConfirm}>Confirm</button>
-      </Dialog.Footer>
-    </Dialog.Content>
-  </Dialog.Portal>
-</Dialog.Root>
+function ModalExample() {
+  const [open, setOpen] = React.useState(false);
 
-// Non-modal dialog
-<Dialog.Root modal={false}>
-  {/* dialog content */}
-</Dialog.Root>
-
-// Different sizes
-<Dialog.Content size="sm">Small dialog</Dialog.Content>
-<Dialog.Content size="lg">Large dialog</Dialog.Content>
+  return (
+    <>
+      <button onClick={() => setOpen(true)}>Open Dialog</button>
+      <Dialog open={open} onOpenChange={setOpen}>
+        <Dialog.Header>
+          <Dialog.Title>Dialog Title</Dialog.Title>
+        </Dialog.Header>
+        <Dialog.Body>Dialog content goes here.</Dialog.Body>
+        <Dialog.Footer>
+          <Dialog.Close>Cancel</Dialog.Close>
+          <button>Confirm</button>
+        </Dialog.Footer>
+      </Dialog>
+    </>
+  );
+}
 ```
 
-## Components
+## Props
 
-### Dialog.Root
+| Prop         | Type                    | Default | Description                |
+| ------------ | ----------------------- | ------- | -------------------------- |
+| children     | ReactNode               | -       | Dialog content             |
+| open         | boolean                 | false   | Controls dialog visibility |
+| onOpenChange | (open: boolean) => void | -       | Open state change handler  |
+| className    | string                  | ''      | Additional CSS classes     |
 
-Main dialog container with state management.
+## Examples
 
-**Props:**
+### Basic Dialog
 
-- `open?: boolean` - Whether dialog is open
-- `onOpenChange?: (open) => void` - State change handler
-- `modal?: boolean` - Whether to block background interaction (default: true)
+```tsx
+<Dialog open={isOpen} onOpenChange={setIsOpen}>
+  <Dialog.Header>
+    <Dialog.Title>Confirm Action</Dialog.Title>
+  </Dialog.Header>
+  <Dialog.Body>Are you sure you want to proceed?</Dialog.Body>
+  <Dialog.Footer>
+    <Dialog.Close>Cancel</Dialog.Close>
+    <button>Confirm</button>
+  </Dialog.Footer>
+</Dialog>
+```
 
-### Dialog.Trigger
+### Alert Dialog
 
-Element that opens the dialog.
-
-### Dialog.Portal
-
-Portal container for rendering outside DOM hierarchy.
-
-### Dialog.Overlay
-
-Backdrop overlay.
-
-### Dialog.Content
-
-Main dialog content container.
-
-**Props:**
-
-- `size?: 'sm' | 'md' | 'lg' | 'xl' | 'full'` - Dialog size
-
-### Dialog.Header
-
-Dialog header section.
-
-### Dialog.Title
-
-Dialog title.
-
-### Dialog.Description
-
-Dialog description.
-
-### Dialog.Body
-
-Main content area.
-
-### Dialog.Footer
-
-Dialog footer with actions.
-
-### Dialog.Close
-
-Element that closes the dialog.
-
-## Accessibility
-
-- Proper ARIA attributes and roles
-- Focus trapping and management
-- Keyboard navigation (Escape to close)
-- Screen reader announcements
-- Portal rendering to avoid clipping
+```tsx
+<Dialog variant="alert">
+  <Dialog.Header>
+    <Dialog.Title>Warning</Dialog.Title>
+  </Dialog.Header>
+  <Dialog.Body>This action cannot be undone.</Dialog.Body>
+  <Dialog.Footer>
+    <Dialog.Close>Cancel</Dialog.Close>
+    <button>Delete</button>
+  </Dialog.Footer>
+</Dialog>
+```
 
 ## Design Tokens
 
-### Colors
+This component uses the following design tokens:
 
-- `--dialog-color-background-overlay`
-- `--dialog-color-background-content`
-- `--dialog-color-foreground`
+- `--color-background-elevated` - Dialog background
+- `--color-text-primary` - Text color
+- `--color-overlay-scrim` - Backdrop overlay
+- `--border-radius-large` - Dialog border radius
+- `--space-lg` - Internal spacing
+- `--shadow-level-3` - Dialog elevation
+- `--animation-duration-medium` - Animation timing
 
-### Spacing
+## Accessibility
 
-- `--dialog-spacing-padding`
-- `--dialog-spacing-gap`
+### Keyboard Navigation
 
-### Animation
+- Tab to navigate within dialog
+- Escape to close dialog
+- Focus trapped within dialog
+- Return focus to trigger on close
 
-- `--dialog-animation-enter-duration`
-- `--dialog-animation-exit-duration`
-- `--dialog-animation-enter-easing`
-- `--dialog-animation-exit-easing`
+### Screen Reader Support
+
+- Proper ARIA dialog role
+- Descriptive titles and descriptions
+- Alert dialog variant for important messages
+- Focus management and announcements
+
+### States
+
+- Modal behavior prevents background interaction
+- Loading states communicated to users
+- Close button clearly accessible
 
 ## Related Components
 
-- [Modal](../Modal/) - Simplified modal variant
-- [Drawer](../Drawer/) - Slide-out panel
-- [Popover](../Popover/) - Non-modal floating content
-
+- **Sheet** - For side panel overlays
+- **Popover** - For smaller contextual overlays
+- **Alert** - For inline notifications

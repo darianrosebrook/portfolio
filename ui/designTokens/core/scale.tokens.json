@@ -1,0 +1,57 @@
+{
+  "$schema": "../designTokens.schema.json",
+  "scale": {
+    "100": {
+      "$type": "number",
+      "$value": 1
+    },
+    "110": {
+      "$type": "number",
+      "$value": 1.1
+    },
+    "125": {
+      "$type": "number",
+      "$value": 1.25
+    },
+    "150": {
+      "$type": "number",
+      "$value": 1.5
+    },
+    "175": {
+      "$type": "number",
+      "$value": 1.75
+    },
+    "200": {
+      "$type": "number",
+      "$value": 2
+    },
+    "225": {
+      "$type": "number",
+      "$value": 2.25
+    },
+    "250": {
+      "$type": "number",
+      "$value": 2.5
+    },
+    "275": {
+      "$type": "number",
+      "$value": 2.75
+    },
+    "300": {
+      "$type": "number",
+      "$value": 3
+    },
+    "base": {
+      "$type": "number",
+      "$value": 1
+    },
+    "050": {
+      "$type": "number",
+      "$value": 0.5
+    },
+    "000": {
+      "$type": "number",
+      "$value": 0
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import * as React from 'react';
 import { render, cleanup } from '@testing-library/react';
-import { PropsBridge } from '@/ui/modules/docs/primitives/PropsBridge';
+import { PropsBridge } from '@/ui/modules/CodeSandbox/primitives/PropsBridge';
 
 describe('PropsBridge', () => {
   afterEach(() => {
@@ -15,7 +15,7 @@ describe('PropsBridge', () => {
       useSandpack: () => ({ sandpack: { updateFile } }),
     }));
     const { PropsBridge: TestedBridge } = await import(
-      '@/ui/modules/docs/primitives/PropsBridge'
+      '@/ui/modules/CodeSandbox/primitives/PropsBridge'
     );
     const { rerender } = render(<TestedBridge values={{ a: 1 }} />);
     rerender(<TestedBridge values={{ a: 2 }} />);

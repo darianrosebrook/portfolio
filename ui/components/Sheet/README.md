@@ -1,137 +1,112 @@
 # Sheet
 
-Slide-out panel component that appears from any side of the screen.
+A side panel component that slides in from the edge of the screen. Perfect for navigation menus, settings panels, and other side content.
 
 ## Usage
 
 ```tsx
 import { Sheet } from '@/ui/components/Sheet';
 
-// Basic sheet
-<Sheet.Root open={isOpen} onOpenChange={setIsOpen}>
-  <Sheet.Trigger asChild>
-    <button>Open Sheet</button>
-  </Sheet.Trigger>
-  <Sheet.Portal>
-    <Sheet.Overlay />
-    <Sheet.Content side="right">
-      <Sheet.Header>
-        <Sheet.Title>Sheet Title</Sheet.Title>
-        <Sheet.Description>
-          Sheet description text.
-        </Sheet.Description>
-      </Sheet.Header>
-      <Sheet.Body>
-        Sheet content goes here.
-      </Sheet.Body>
-      <Sheet.Footer>
-        <Sheet.Close asChild>
-          <button>Close</button>
-        </Sheet.Close>
-      </Sheet.Footer>
-    </Sheet.Content>
-  </Sheet.Portal>
-</Sheet.Root>
+function SidePanel() {
+  const [open, setOpen] = React.useState(false);
 
-// Different sides
-<Sheet.Content side="left">Left sheet</Sheet.Content>
-<Sheet.Content side="top">Top sheet</Sheet.Content>
-<Sheet.Content side="bottom">Bottom sheet</Sheet.Content>
-
-// Non-modal sheet
-<Sheet.Root modal={false}>
-  {/* sheet content */}
-</Sheet.Root>
+  return (
+    <>
+      <button onClick={() => setOpen(true)}>Open Sheet</button>
+      <Sheet open={open} onOpenChange={setOpen}>
+        <Sheet.Header>
+          <Sheet.Title>Settings</Sheet.Title>
+        </Sheet.Header>
+        <Sheet.Body>
+          <p>Sheet content goes here.</p>
+        </Sheet.Body>
+        <Sheet.Footer>
+          <Sheet.Close>Close</Sheet.Close>
+        </Sheet.Footer>
+      </Sheet>
+    </>
+  );
+}
 ```
 
-## Components
+## Props
 
-### Sheet.Root
+| Prop         | Type                    | Default | Description               |
+| ------------ | ----------------------- | ------- | ------------------------- |
+| children     | ReactNode               | -       | Sheet content             |
+| open         | boolean                 | false   | Controls sheet visibility |
+| onOpenChange | (open: boolean) => void | -       | Open state change handler |
+| side         | 'left' \| 'right'       | 'right' | Which side to slide from  |
+| className    | string                  | ''      | Additional CSS classes    |
 
-Main sheet container.
+## Examples
 
-**Props:**
+### Right Slide Sheet
 
-- `open?: boolean` - Whether sheet is open
-- `onOpenChange?: (open) => void` - State change handler
-- `modal?: boolean` - Whether to block background (default: true)
+```tsx
+<Sheet open={isOpen} onOpenChange={setIsOpen}>
+  <Sheet.Header>
+    <Sheet.Title>Navigation</Sheet.Title>
+  </Sheet.Header>
+  <Sheet.Body>
+    <nav>
+      <a href="/home">Home</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+    </nav>
+  </Sheet.Body>
+</Sheet>
+```
 
-### Sheet.Trigger
+### Left Slide Sheet
 
-Element that opens the sheet.
-
-### Sheet.Portal
-
-Portal container for rendering.
-
-### Sheet.Overlay
-
-Backdrop overlay.
-
-### Sheet.Content
-
-Main sheet content container.
-
-**Props:**
-
-- `side?: 'top' | 'right' | 'bottom' | 'left'` - Which side to slide from
-
-### Sheet.Header
-
-Sheet header section.
-
-### Sheet.Title
-
-Sheet title.
-
-### Sheet.Description
-
-Sheet description.
-
-### Sheet.Body
-
-Main content area.
-
-### Sheet.Footer
-
-Sheet footer with actions.
-
-### Sheet.Close
-
-Element that closes the sheet.
-
-## Accessibility
-
-- Proper ARIA attributes and focus management
-- Keyboard navigation (Escape to close)
-- Screen reader support
-- Portal rendering to avoid clipping
-- Focus trapping in modal mode
+```tsx
+<Sheet open={isOpen} onOpenChange={setIsOpen} side="left">
+  <Sheet.Header>
+    <Sheet.Title>Filters</Sheet.Title>
+  </Sheet.Header>
+  <Sheet.Body>
+    <div>Filter controls go here</div>
+  </Sheet.Body>
+</Sheet>
+```
 
 ## Design Tokens
 
-### Colors
+This component uses the following design tokens:
 
-- `--sheet-color-background-overlay`
-- `--sheet-color-background-content`
-- `--sheet-color-foreground`
+- `--color-background-primary` - Sheet background
+- `--color-text-primary` - Text color
+- `--color-overlay-scrim` - Backdrop overlay
+- `--border-radius-large` - Border radius
+- `--space-lg` - Internal spacing
+- `--shadow-level-2` - Sheet elevation
+- `--animation-duration-medium` - Slide animation timing
 
-### Spacing
+## Accessibility
 
-- `--sheet-spacing-padding`
-- `--sheet-size-width` (for side sheets)
-- `--sheet-size-height` (for top/bottom sheets)
+### Keyboard Navigation
 
-### Animation
+- Tab to navigate within sheet
+- Escape to close sheet
+- Focus trapped within sheet
+- Return focus to trigger on close
 
-- `--sheet-animation-enter-duration`
-- `--sheet-animation-exit-duration`
-- `--sheet-animation-enter-easing`
-- `--sheet-animation-exit-easing`
+### Screen Reader Support
+
+- Proper ARIA dialog role
+- Descriptive titles
+- Focus management
+- Screen reader announcements
+
+### States
+
+- Modal behavior prevents background interaction
+- Close button clearly accessible
+- Responsive behavior on mobile
 
 ## Related Components
 
-- [Dialog](../Dialog/) - Modal dialogs
-- [Drawer](../Drawer/) - Alternative slide-out component
-- [Popover](../Popover/) - Non-modal floating content
-
+- **Dialog** - For centered modal overlays
+- **Popover** - For smaller contextual overlays
+- **SideNavigation** - For persistent sidebar navigation

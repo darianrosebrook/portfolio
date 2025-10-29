@@ -318,4 +318,5 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
 
 Tooltip.displayName = 'Tooltip';
 
+export { Tooltip };
 export default Tooltip;

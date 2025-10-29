@@ -8,7 +8,7 @@ export const metadata = {
     "A playful test page for the emergency broadcast system. If you are a human, you can't see this.",
 };
 
-import LoginButton from '@/ui/modules/Navbar/loginButton';
+import LoginButton from '@/ui/modules/Navbar/LoginButton';
 
 export default function Page() {
   return (

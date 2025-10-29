@@ -1,0 +1,27 @@
+{
+  "$schema": "../designTokens.schema.json",
+  "meta": {
+    "version": "1.0.0",
+    "source": "Semantic tokens - modular structure",
+    "modules": [
+      "./color.tokens.json",
+      "./typography.tokens.json",
+      "./spacing.tokens.json",
+      "./elevation.tokens.json",
+      "./opacity.tokens.json",
+      "./dimension.tokens.json",
+      "./shape.tokens.json",
+      "./motion.tokens.json",
+      "./components/components.tokens.json",
+      "./interaction.tokens.json",
+      "./control.tokens.json",
+      "./link.tokens.json",
+      "./skeleton.tokens.json",
+      "./content.tokens.json",
+      "./focus.tokens.json",
+      "./datavis.tokens.json",
+      "./components/component.tokens.json",
+      "./overlay.tokens.json"
+    ]
+  }
+}

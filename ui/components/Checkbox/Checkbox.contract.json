@@ -1,42 +1,58 @@
 {
   "name": "Checkbox",
   "layer": "primitive",
-  "anatomy": ["root", "input", "indicator"],
+  "anatomy": ["root", "input", "indicator", "checkIcon", "indeterminateIcon"],
   "variants": {
     "size": ["sm", "md", "lg"]
   },
   "states": [
     "default",
-    "checked",
-    "unchecked",
-    "indeterminate",
-    "disabled",
     "hover",
-    "focus"
+    "focus",
+    "active",
+    "disabled",
+    "checked",
+    "indeterminate"
   ],
-  "slots": {},
+  "slots": {
+    "checkIcon": { "optional": true },
+    "indeterminateIcon": { "optional": true }
+  },
   "a11y": {
     "role": "checkbox",
-    "labeling": ["aria-label", "aria-labelledby"],
-    "keyboard": ["Space", "Enter"],
+    "labeling": ["aria-label", "aria-labelledby", "aria-describedby"],
+    "keyboard": [
+      {
+        "key": "Space",
+        "when": "root",
+        "then": "toggle"
+      },
+      {
+        "key": "Enter",
+        "when": "root",
+        "then": "toggle"
+      }
+    ],
     "apgPattern": "checkbox"
   },
   "tokens": {
     "root": [
       "checkbox.color.background.default",
-      "checkbox.color.background.checked",
-      "checkbox.color.background.indeterminate",
       "checkbox.color.border.default",
-      "checkbox.color.border.hover",
-      "checkbox.color.border.focus",
-      "checkbox.size.width.sm",
       "checkbox.size.width.md",
-      "checkbox.size.width.lg",
-      "checkbox.size.height.sm",
       "checkbox.size.height.md",
-      "checkbox.size.height.lg",
-      "checkbox.size.border-radius",
-      "checkbox.elevation.default"
+      "checkbox.border.radius",
+      "checkbox.border.width"
+    ],
+    "indicator": [
+      "checkbox.color.background.checked",
+      "checkbox.color.border.checked",
+      "checkbox.color.icon.default"
+    ],
+    "checkIcon": ["checkbox.color.icon.default", "checkbox.size.icon.md"],
+    "indeterminateIcon": [
+      "checkbox.color.icon.default",
+      "checkbox.size.icon.md"
     ]
   },
   "ssr": {
@@ -46,4 +62,3 @@
     "flipIcon": false
   }
 }
-

@@ -4,15 +4,16 @@
  * Validates individual component token files for accessibility compliance
  */
 
-import fs from 'fs';
-import { glob } from 'glob';
-import path from 'path';
 import {
   validateColorPair,
   type ColorPair,
   type ValidationResult,
+  WCAG_LEVELS,
   type WCAGLevel,
-} from './tokenValidator.js';
+} from './tokenValidator';
+import fs from 'fs';
+import path from 'path';
+import { glob } from 'glob';
 
 export interface ComponentTokenValidation {
   componentName: string;
@@ -179,10 +180,9 @@ function extractComponentColorPairs(
     const commonPairs = extractCommonColorPairs(tokens, componentName);
     pairs.push(...commonPairs);
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : String(error);
     console.warn(
       `Warning: Could not parse component tokens for ${componentName}:`,
-      errorMessage
+      error instanceof Error ? error.message : String(error)
     );
   }
 

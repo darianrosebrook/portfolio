@@ -21,8 +21,8 @@
 
     .caption {
       margin-top: var(--table-spacing-caption);
-      color: var(--table-color-text-muted);
-      font-size: var(--table-text-size-caption);
+      color: var(--table-color-textMuted);
+      font-size: var(--table-text-sizeCaption);
       text-align: left;
     }
 
@@ -55,7 +55,7 @@
     .footer {
       background-color: var(--table-color-background-footer);
       border-top: var(--table-border-width) solid var(--table-color-border);
-      font-weight: var(--table-text-weight-footer);
+      font-weight: var(--table-text-weightFooter);
 
       .row:last-child {
         border-bottom: none;
@@ -64,10 +64,10 @@
 
     .head {
       vertical-align: middle;
-      height: var(--table-size-cell-height);
-      padding: var(--table-spacing-cell-y) var(--table-spacing-cell-x);
-      color: var(--table-color-text-head);
-      font-weight: var(--table-text-weight-head);
+      height: var(--table-size-cellHeight);
+      padding: var(--table-spacing-cellY) var(--table-spacing-cellX);
+      color: var(--table-color-textHead);
+      font-weight: var(--table-text-weightHead);
       text-align: left;
       white-space: nowrap;
 
@@ -90,28 +90,28 @@
 
       .headContent {
         display: flex;
-        gap: var(--table-spacing-sort-gap);
+        gap: var(--table-spacing-sortGap);
         justify-content: space-between;
         align-items: center;
 
         .sortIcon {
           flex-shrink: 0;
           opacity: 0.7;
-          color: var(--table-color-text-muted);
-          font-size: var(--table-text-size-sort);
+          color: var(--table-color-textMuted);
+          font-size: var(--table-text-sizeSort);
         }
       }
 
       &[data-sort-direction='asc'] .sortIcon,
       &[data-sort-direction='desc'] .sortIcon {
         opacity: 1;
-        color: var(--table-color-text-head);
+        color: var(--table-color-textHead);
       }
     }
 
     .cell {
       vertical-align: middle;
-      padding: var(--table-spacing-cell-y) var(--table-spacing-cell-x);
+      padding: var(--table-spacing-cellY) var(--table-spacing-cellX);
       white-space: nowrap;
 
       &.truncate {
@@ -125,13 +125,13 @@
     // Checkbox column adjustments
     .head:has([role='checkbox']),
     .cell:has([role='checkbox']) {
-      width: var(--table-size-checkbox-column);
+      width: var(--table-size-checkboxColumn);
       padding-right: 0;
     }
 
     .head [role='checkbox'],
     .cell [role='checkbox'] {
-      transform: translateY(var(--table-spacing-checkbox-offset));
+      transform: translateY(var(--table-spacing-checkboxOffset));
     }
   }
 }

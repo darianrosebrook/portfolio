@@ -1,0 +1,13 @@
+{
+  "$schema": "../designTokens.schema.json",
+  "opacity": {
+    "disabled": {
+      "$type": "opacity",
+      "$value": "{opacity.400}"
+    },
+    "overlay": {
+      "$type": "opacity",
+      "$value": "{opacity.600}"
+    }
+  }
+}

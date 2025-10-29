@@ -1,88 +1,143 @@
-# Chip
+# Chip Component
 
-A primitive chip component for tags, filters, or labels. Supports GSAP-powered hover animations and follows design system conventions.
+A flexible chip component that supports multiple variants for different use cases.
+
+## Features
+
+- **Three variants**: `default`, `selected` (checkbox-like with checkmark), `dismissible` (with X icon)
+- **Three sizes**: `small`, `medium` (default), `large`
+- **GSAP animations**: Smooth entrance animations for icons and hover effects
+- **Accessibility**: Full keyboard navigation, ARIA support, and screen reader compatibility
+- **Customizable**: Support for custom content, icons, and styling
+- **TypeScript**: Full type safety with comprehensive prop types
 
 ## Usage
+
+### Basic Usage
 
 ```tsx
 import { Chip } from '@/ui/components/Chip';
 
-// Basic chip
-<Chip>Tag</Chip>
+// Default chip
+<Chip>Default</Chip>
 
-// Clickable chip with hover animation
-<Chip clickable onClick={handleClick}>
-  Filter
-</Chip>
+// Selected variant (checkbox-like)
+<Chip variant="selected">Selected</Chip>
 
-// Different sizes
-<Chip size="small">Small</Chip>
-<Chip size="medium">Medium</Chip>
-<Chip size="large">Large</Chip>
+// Dismissible variant
+<Chip variant="dismissible">Dismissible</Chip>
+```
 
-// Different variants
-<Chip variant="default">Default</Chip>
-<Chip variant="filled">Filled</Chip>
-<Chip variant="outlined">Outlined</Chip>
+### Interactive Example
+
+```tsx
+const [selectedItems, setSelectedItems] = useState<string[]>([]);
+
+const toggleItem = (item: string) => {
+  setSelectedItems((prev) =>
+    prev.includes(item) ? prev.filter((i) => i !== item) : [...prev, item]
+  );
+};
+
+return (
+  <div>
+    {items.map((item) => {
+      const isSelected = selectedItems.includes(item);
+      return (
+        <Chip
+          key={item}
+          variant={isSelected ? 'selected' : 'default'}
+          onClick={() => toggleItem(item)}
+          ariaPressed={isSelected}
+        >
+          {item}
+        </Chip>
+      );
+    })}
+  </div>
+);
+```
+
+### Dismissible Example
+
+```tsx
+const [tags, setTags] = useState<string[]>(['React', 'TypeScript']);
+
+const removeTag = (tag: string) => {
+  setTags((prev) => prev.filter((t) => t !== tag));
+};
+
+return (
+  <div>
+    {tags.map((tag) => (
+      <Chip
+        key={tag}
+        variant="dismissible"
+        onClick={() => removeTag(tag)}
+        ariaLabel={`Remove ${tag}`}
+      >
+        {tag}
+      </Chip>
+    ))}
+  </div>
+);
 ```
 
 ## Props
 
-| Prop        | Type                                  | Default     | Description                                              |
-| ----------- | ------------------------------------- | ----------- | -------------------------------------------------------- |
-| `clickable` | `boolean`                             | `false`     | Whether the chip is clickable and shows hover animations |
-| `size`      | `'small' \| 'medium' \| 'large'`      | `'medium'`  | Size variant of the chip                                 |
-| `variant`   | `'default' \| 'filled' \| 'outlined'` | `'default'` | Visual style variant                                     |
-| `className` | `string`                              | `''`        | Additional CSS classes                                   |
-| `children`  | `React.ReactNode`                     | -           | Chip content                                             |
+| Prop          | Type                                       | Default     | Description                                      |
+| ------------- | ------------------------------------------ | ----------- | ------------------------------------------------ |
+| `variant`     | `'default' \| 'selected' \| 'dismissible'` | `'default'` | Visual variant of the chip                       |
+| `size`        | `'small' \| 'medium' \| 'large'`           | `'medium'`  | Size of the chip                                 |
+| `disabled`    | `boolean`                                  | `false`     | Whether the chip is disabled                     |
+| `className`   | `string`                                   | `''`        | Additional CSS classes                           |
+| `title`       | `string`                                   | `''`        | Tooltip text                                     |
+| `ariaLabel`   | `string`                                   | -           | Accessible label for screen readers              |
+| `ariaPressed` | `boolean`                                  | -           | ARIA pressed state (useful for toggleable chips) |
+| `role`        | `React.AriaRole`                           | `'button'`  | ARIA role                                        |
+| `asChild`     | `boolean`                                  | `false`     | Render as child element                          |
+| `children`    | `React.ReactNode`                          | -           | Content of the chip                              |
 
-All standard `div` HTML attributes are also supported.
+### Polymorphic Props
+
+The Chip component supports polymorphic rendering:
+
+```tsx
+// Render as button (default)
+<Chip>Button Chip</Chip>
+
+// Render as link
+<Chip as="a" href="/path">Link Chip</Chip>
+
+// Render as child element
+<Chip asChild>
+  <span>Custom Element</span>
+</Chip>
+```
 
 ## Accessibility
 
-- When `clickable` is true, the chip becomes keyboard focusable with `tabIndex={0}`
-- Appropriate ARIA roles: `role="button"` when clickable, `role="generic"` otherwise
-- Focus management with visible focus outline
-- Respects `prefers-reduced-motion` (no animations when enabled)
+- **Keyboard Navigation**: Supports Enter and Space key activation
+- **ARIA Support**: Proper ARIA attributes for screen readers
+- **Focus Management**: Visible focus indicators
+- **Semantic HTML**: Uses appropriate semantic elements
 
-## Design Tokens
+## Styling
 
-### Colors
+The component uses CSS modules with design tokens. Custom styling can be applied via the `className` prop:
 
-- `--chip-color-background-default`
-- `--chip-color-foreground-primary`
-- `--chip-color-background-filled`
-- `--chip-color-foreground-filled`
-- `--chip-color-border-outlined`
-- `--chip-color-foreground-outlined`
-
-### Sizes
-
-- `--chip-size-padding-default`
-- `--chip-size-padding-small`
-- `--chip-size-padding-large`
-- `--chip-size-radius-default`
-- `--chip-size-font-small`
-- `--chip-size-font-default`
-- `--chip-size-font-large`
-
-### Elevation
-
-- `--chip-elevation-default`
+```tsx
+<Chip className="custom-chip">Styled Chip</Chip>
+```
 
 ## Animation
 
-Uses GSAP for smooth hover animations:
+The component uses GSAP for smooth animations:
 
-- Transform: `translateY(-2px)` on hover
-- Box-shadow elevation change
-- Duration: `150ms` with `power2.out` easing
+- Icon entrance animations (scale and fade)
+- Hover effects (subtle scale)
+- Focus states with outline rings
 
-Animations are disabled when `prefers-reduced-motion: reduce` is set.
+## Examples
 
-## Related Components
-
-- [Button](../Button/) - For primary actions
-- [Badge](../Badge/) - For status indicators
-- [Tag](../Tag/) - For metadata labels
-
+See the [demo page](/chip-demo) for comprehensive examples of all variants and use cases.

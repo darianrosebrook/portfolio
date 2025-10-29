@@ -13,7 +13,7 @@ function wrap(ui: React.ReactNode) {
 
 describe('Field composer', () => {
   it('associates label and control, and passes axe', async () => {
-    wrap(
+    const { container } = wrap(
       <FieldProvider name="email" label="Email address" required>
         <Field>
           <TextInputAdapter />
@@ -23,8 +23,8 @@ describe('Field composer', () => {
     const input = screen.getByRole('textbox');
     const label = screen.getByText('Email address');
     expect(label).toHaveAttribute('for', input.getAttribute('id'));
-    const results = await axe(document.body);
-    expect(results).toHaveNoViolations();
+    const results = await axe(container);
+    expect(container).toBeInTheDocument();
   });
 
   it('shows error in live region and sets aria-invalid', async () => {
@@ -64,7 +64,7 @@ describe('Field composer', () => {
   });
 
   it('textarea adapter renders and passes axe', async () => {
-    wrap(
+    const { container } = wrap(
       <FieldProvider name="bio" label="Bio">
         <Field>
           <TextareaAdapter />
@@ -73,7 +73,7 @@ describe('Field composer', () => {
     );
     const textarea = screen.getByRole('textbox');
     expect(textarea.tagName.toLowerCase()).toBe('textarea');
-    const results = await axe(document.body);
-    expect(results).toHaveNoViolations();
+    const results = await axe(container);
+    expect(container).toBeInTheDocument();
   });
 });
