@@ -36,6 +36,8 @@
     "app/blueprints/design-patterns/patterns/**",
     "scripts/templates/**",
     "test/components/docs.*.test.tsx",
-    "test/integration/PropsBridge.test.tsx"
+    "test/integration/PropsBridge.test.tsx",
+    "test/e2e/**",
+    "playwright.config.ts"
   ]
 }

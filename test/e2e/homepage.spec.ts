@@ -1,15 +1,15 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type Page } from '@playwright/test';
 
 /**
  * Visual regression tests for the homepage
  */
 test.describe('Homepage Visual Regression', () => {
-  test.beforeEach(async ({ page }) => {
+  test.beforeEach(async ({ page }: { page: Page }) => {
     // Set viewport to a consistent size for visual testing
     await page.setViewportSize({ width: 1280, height: 720 });
   });
 
-  test('homepage renders correctly', async ({ page }) => {
+  test('homepage renders correctly', async ({ page }: { page: Page }) => {
     await page.goto('/');
 
     // Wait for the page to be fully loaded and stable
@@ -78,7 +78,7 @@ test.describe('Homepage Visual Regression', () => {
     }
   });
 
-  test('homepage navigation renders correctly', async ({ page }) => {
+  test('homepage navigation renders correctly', async ({ page }: { page: Page }) => {
     await page.goto('/');
 
     // Wait for the page to be fully loaded and stable

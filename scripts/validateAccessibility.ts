@@ -15,7 +15,7 @@ import {
   validateDesignTokens,
   generateAccessibilityReport,
   runAccessibilityValidation 
-} from '../utils/accessibility/tokenValidator.mjs';
+} from '../utils/accessibility/tokenValidator';
 
 const require = createRequire(import.meta.url);
 const PROJECT_ROOT = process.cwd();
@@ -88,9 +88,9 @@ class AccessibilityValidator {
     try {
       this.globalValidation = validateDesignTokens(GLOBAL_TOKENS_FILE);
       
-      if (this.globalValidation.invalidPairs === 0) {
+      if (this.globalValidation && this.globalValidation.invalidPairs === 0) {
         logSuccess(`All ${this.globalValidation.totalPairs} global token color pairs pass accessibility requirements`);
-      } else {
+      } else if (this.globalValidation) {
         logWarning(`${this.globalValidation.invalidPairs} of ${this.globalValidation.totalPairs} global token pairs fail accessibility requirements`);
         this.overallValid = false;
       }
