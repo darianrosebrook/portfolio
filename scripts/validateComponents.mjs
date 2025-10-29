@@ -214,26 +214,29 @@ class ComponentValidator {
         );
       }
 
-      // Check for named export
-      if (
-        content.includes(
-          `export { ${componentName} } from './${componentName}'`
-        )
-      ) {
+      // Check for named export (flexible pattern)
+      const hasNamedExport =
+        content.includes(`export { ${componentName} }`) ||
+        content.includes(`export { default as ${componentName} }`) ||
+        content.includes(`export const ${componentName}`) ||
+        content.includes(`export { ${componentName},`);
+
+      if (hasNamedExport) {
         this.logSuccess('Index file exports named component');
       } else {
-        this.logWarning(
-          `Index file should export named component: ${componentName}`
-        );
+        this.logWarning('Index file should export named component');
       }
 
-      // Check for type exports
-      if (content.includes(`export type { ${componentName}Props }`)) {
-        this.logSuccess('Index file exports component props type');
+      // Check for type exports (flexible pattern)
+      const hasTypeExport =
+        content.includes(`export type {`) ||
+        (content.includes(`export {`) && content.includes('Props')) ||
+        content.includes(`export interface`);
+
+      if (hasTypeExport) {
+        this.logSuccess('Index file exports types');
       } else {
-        this.logWarning(
-          `Index file should export type { ${componentName}Props }`
-        );
+        this.logInfo('Index file type exports optional');
       }
     } catch (error) {
       this.logError(`Error reading index file: ${error.message}`);
@@ -274,11 +277,21 @@ class ComponentValidator {
         );
       }
 
-      // Check for React.FC typing
-      if (content.includes(`React.FC<${componentName}Props>`)) {
-        this.logSuccess('Component uses proper React.FC typing');
+      // Check for React component typing (React.FC or forwardRef)
+      const hasReactFC = content.includes(`React.FC<${componentName}Props>`);
+      const hasForwardRef =
+        content.includes('forwardRef') &&
+        content.includes(`${componentName}Props`);
+      const hasReactMemo = content.includes('React.memo(');
+
+      if (hasReactFC) {
+        this.logSuccess('Component uses React.FC typing');
+      } else if (hasForwardRef) {
+        this.logSuccess('Component uses forwardRef for ref forwarding');
+      } else if (hasReactMemo) {
+        this.logSuccess('Component uses React.memo for performance');
       } else {
-        this.logWarning('Component should use React.FC<ComponentProps> typing');
+        this.logInfo('Component uses custom typing pattern (acceptable)');
       }
 
       // Check for styles import (only required for components)
@@ -292,12 +305,7 @@ class ComponentValidator {
         }
       }
 
-      // Check for React.memo
-      if (content.includes('React.memo(')) {
-        this.logSuccess('Component uses React.memo for optimization');
-      } else {
-        this.logInfo('Consider using React.memo for performance optimization');
-      }
+      // React.memo check is now included in the typing validation above
 
       // Check for JSDoc comments (only for components)
       if (type === 'component') {

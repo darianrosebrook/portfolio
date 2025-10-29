@@ -20,7 +20,7 @@ const faRedo = byPrefixAndName['far']['redo'];
 const faChevronDown = byPrefixAndName['far']['chevron-down'];
 const faList = byPrefixAndName['far']['list'];
 
-type ToolbarProps = {
+export type ToolbarProps = {
   editor: Editor | null;
 };
 

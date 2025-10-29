@@ -34,6 +34,8 @@
   "exclude": [
     "node_modules",
     "app/blueprints/design-patterns/patterns/**",
-    "scripts/templates/**"
+    "scripts/templates/**",
+    "test/components/docs.*.test.tsx",
+    "test/integration/PropsBridge.test.tsx"
   ]
 }

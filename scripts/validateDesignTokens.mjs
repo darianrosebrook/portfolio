@@ -12,10 +12,10 @@
  * - Missing token warnings
  */
 
-import fs from 'node:fs';
-import path from 'node:path';
-import { createRequire } from 'node:module';
 import { glob } from 'glob';
+import fs from 'node:fs';
+import { createRequire } from 'node:module';
+import path from 'node:path';
 
 const require = createRequire(import.meta.url);
 const PROJECT_ROOT = process.cwd();
@@ -637,6 +637,15 @@ class DesignTokenValidator {
 
     if (isValid) {
       logSuccess('\n🎉 All design tokens are valid!');
+
+      // Suggest running accessibility validation
+      console.log(
+        '\n' + colors.bold + colors.cyan + '💡 Next Step:' + colors.reset
+      );
+      console.log(
+        '  Run accessibility validation: npm run validate:accessibility'
+      );
+
       process.exit(0);
     } else {
       logError('\n💥 Validation failed. Please fix the issues above.');

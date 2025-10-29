@@ -1,0 +1,28 @@
+{
+  "name": "PageTransition",
+  "layer": "composer",
+  "anatomy": ["root"],
+  "variants": {},
+  "states": ["default", "transitioning", "mounted"],
+  "slots": {},
+  "a11y": {
+    "role": "generic",
+    "labeling": [],
+    "keyboard": [],
+    "apgPattern": null
+  },
+  "tokens": {
+    "root": [
+      "transition.animation.duration",
+      "transition.animation.easing",
+      "transition.color.background"
+    ]
+  },
+  "ssr": {
+    "hydrateOn": "none"
+  },
+  "rtl": {
+    "flipIcon": false
+  }
+}
+

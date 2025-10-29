@@ -3,12 +3,24 @@ import React from 'react';
 import styles from './Breadcrumbs.module.scss';
 
 export type Crumb = {
+  /**
+   * The label of the crumb
+   */
   label: string;
+  /**
+   * The href of the crumb
+   */
   href: string;
 };
 
 export interface BreadcrumbsProps {
+  /**
+   * The base crumb
+   */
   base: Crumb; // e.g., Home or Foundations
+  /**
+   * The ordered path from base to current
+   */
   crumbs: Crumb[]; // ordered path from base to current
 }
 
