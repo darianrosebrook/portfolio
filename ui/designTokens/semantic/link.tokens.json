@@ -1,0 +1,29 @@
+{
+  "$schema": "../designTokens.schema.json",
+  "link": {
+    "text": {
+      "$type": "color",
+      "$value": "{color.palette.blue.500}"
+    },
+    "decorationColor": {
+      "$type": "color",
+      "$value": "{color.palette.blue.500}"
+    },
+    "decorationThickness": {
+      "$type": "dimension",
+      "$value": "1px"
+    },
+    "decorationOffset": {
+      "$type": "dimension",
+      "$value": "2px"
+    },
+    "hover.text": {
+      "$type": "color",
+      "$value": "{color.palette.blue.600}"
+    },
+    "visited.text": {
+      "$type": "color",
+      "$value": "{color.palette.blue.700}"
+    }
+  }
+}

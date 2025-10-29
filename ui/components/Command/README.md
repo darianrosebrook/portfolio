@@ -1,107 +1,97 @@
 # Command
 
-Command palette component with search, keyboard navigation, and grouping support.
+A command palette component that provides a searchable interface for executing commands and actions. Built with a composer pattern using context for state management.
 
 ## Usage
 
 ```tsx
 import { Command } from '@/ui/components/Command';
 
-// Basic command palette
-<Command.Root>
-  <Command.Input placeholder="Search commands..." />
-  <Command.List>
-    <Command.Empty>No results found.</Command.Empty>
-    <Command.Group heading="Actions">
-      <Command.Item onSelect={() => console.log('Selected')}>
-        Create new file
-      </Command.Item>
-      <Command.Item onSelect={() => console.log('Selected')}>
-        Open file
-      </Command.Item>
-    </Command.Group>
-    <Command.Group heading="Navigation">
-      <Command.Item onSelect={() => navigate('/dashboard')}>
-        Go to Dashboard
-      </Command.Item>
-    </Command.Group>
-  </Command.List>
-</Command.Root>
-
-// With controlled search
-<Command.Root value={searchValue} onValueChange={setSearchValue}>
-  {/* command content */}
-</Command.Root>
+function CommandPalette() {
+  return (
+    <Command>
+      <Command.Input placeholder="Search commands..." />
+      <Command.List>
+        <Command.Item>Command 1</Command.Item>
+        <Command.Item>Command 2</Command.Item>
+      </Command.List>
+    </Command>
+  );
+}
 ```
 
-## Components
+## Props
 
-### Command.Root
+| Prop      | Type      | Default | Description             |
+| --------- | --------- | ------- | ----------------------- |
+| children  | ReactNode | -       | Command palette content |
+| className | string    | ''      | Additional CSS classes  |
 
-Main command container.
+## Examples
 
-**Props:**
+### Basic Command Palette
 
-- `value?: string` - Search value
-- `onValueChange?: (value) => void` - Search change handler
-- `loop?: boolean` - Loop navigation at boundaries
+```tsx
+<Command>
+  <Command.Input placeholder="Type a command..." />
+  <Command.List>
+    <Command.Empty>No results found.</Command.Empty>
+    <Command.Item>Navigate to settings</Command.Item>
+    <Command.Item>Create new item</Command.Item>
+  </Command.List>
+</Command>
+```
 
-### Command.Input
+### With Groups
 
-Search input field.
-
-### Command.List
-
-Scrollable command list.
-
-### Command.Empty
-
-Empty state when no results.
-
-### Command.Group
-
-Group commands with heading.
-
-**Props:**
-
-- `heading?: string` - Group title
-
-### Command.Item
-
-Individual command item.
-
-**Props:**
-
-- `onSelect?: () => void` - Selection handler
-- `disabled?: boolean` - Disable item
-
-## Accessibility
-
-- Full keyboard navigation (Arrow keys, Enter, Escape)
-- Screen reader support with proper ARIA
-- Focus management and trapping
-- Search filtering announcements
+```tsx
+<Command>
+  <Command.Group heading="Navigation">
+    <Command.Item>Go to dashboard</Command.Item>
+    <Command.Item>Go to settings</Command.Item>
+  </Command.Group>
+  <Command.Group heading="Actions">
+    <Command.Item>Create project</Command.Item>
+    <Command.Item>Delete item</Command.Item>
+  </Command.Group>
+</Command>
+```
 
 ## Design Tokens
 
-### Colors
+This component uses the following design tokens:
 
-- `--command-color-background`
-- `--command-color-foreground`
-- `--command-color-border`
+- `--color-background-primary` - Command palette background
+- `--color-text-primary` - Text color
+- `--color-border-subtle` - Border colors
+- `--border-radius-medium` - Border radius
+- `--space-sm`, `--space-md` - Spacing
+- `--font-family-base` - Font family
+- `--shadow-level-2` - Elevation shadow
 
-### Spacing
+## Accessibility
 
-- `--command-spacing-padding`
-- `--command-spacing-gap`
+### Keyboard Navigation
 
-### Typography
+- Tab to navigate between sections
+- Arrow keys to navigate within lists
+- Enter/Space to select items
+- Escape to close palette
 
-- `--command-typography-font-size`
-- `--command-typography-line-height`
+### Screen Reader Support
+
+- Proper ARIA roles and labels
+- Live region announcements for search results
+- Semantic structure with headings and groups
+
+### States
+
+- Loading states announced to screen readers
+- Empty states clearly communicated
+- Focus management for modal-like behavior
 
 ## Related Components
 
-- [Combobox](../Combobox/) - Select with search
-- [Autocomplete](../Autocomplete/) - Search input with suggestions
-
+- **Input** - For search input functionality
+- **List** - For list rendering patterns
+- **Popover** - For similar overlay patterns

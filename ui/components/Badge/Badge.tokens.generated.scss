@@ -5,17 +5,33 @@
   /* === Color Tokens === */
   --badge-color-background-default: var(--semantic-color-background-secondary);
   --badge-color-background-info: var(--semantic-color-background-info-subtle);
-  --badge-color-background-success: var(--semantic-color-background-success-subtle);
-  --badge-color-background-warning: var(--semantic-color-background-warning-subtle);
-  --badge-color-background-danger: var(--semantic-color-background-danger-subtle);
+  --badge-color-background-success: var(
+    --semantic-color-background-success-subtle
+  );
+  --badge-color-background-warning: var(
+    --semantic-color-background-warning-subtle
+  );
+  --badge-color-background-danger: var(
+    --semantic-color-background-danger-subtle
+  );
   --badge-color-background-counter: var(--semantic-color-background-accent);
   --badge-color-background-tag: var(--semantic-color-background-tertiary);
   --badge-color-foreground-primary: var(--semantic-color-foreground-primary);
-  --badge-color-foreground-secondary: var(--semantic-color-foreground-secondary);
-  --badge-color-foreground-info: var(--semantic-color-foreground-on-info-subtle);
-  --badge-color-foreground-success: var(--semantic-color-foreground-on-success-subtle);
-  --badge-color-foreground-warning: var(--semantic-color-foreground-on-warning-subtle);
-  --badge-color-foreground-danger: var(--semantic-color-foreground-on-danger-subtle);
+  --badge-color-foreground-secondary: var(
+    --semantic-color-foreground-secondary
+  );
+  --badge-color-foreground-info: var(
+    --semantic-color-foreground-on-info-subtle
+  );
+  --badge-color-foreground-success: var(
+    --semantic-color-foreground-on-success-subtle
+  );
+  --badge-color-foreground-warning: var(
+    --semantic-color-foreground-on-warning-subtle
+  );
+  --badge-color-foreground-danger: var(
+    --semantic-color-foreground-on-danger-subtle
+  );
   --badge-color-foreground-accent: var(--semantic-color-foreground-accent);
   --badge-color-foreground-onColor: var(--semantic-color-foreground-on-color);
   --badge-color-border-default: var(--semantic-color-border-light);

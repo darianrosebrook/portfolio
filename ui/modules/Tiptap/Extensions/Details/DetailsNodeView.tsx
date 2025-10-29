@@ -1,3 +1,5 @@
+'use client';
+
 import { NodeViewWrapper, NodeViewContent } from '@tiptap/react';
 import { NodeViewProps } from '@tiptap/core';
 import { Details } from '@/ui/components/Details';

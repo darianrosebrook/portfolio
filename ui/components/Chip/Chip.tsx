@@ -1,175 +1,311 @@
-/**
- * Chip (Primitive)
- *
- * A simple chip component for tags, filters, or labels.
- * Supports hover animations with GSAP and follows design system conventions.
- */
-'use client';
+import React, { useRef, useEffect, useMemo } from 'react';
 import { gsap } from 'gsap';
-import React, { forwardRef, useCallback, useLayoutEffect, useRef } from 'react';
 import styles from './Chip.module.scss';
 
-export interface ChipProps extends React.HTMLAttributes<HTMLDivElement> {
-  /**
-   * Whether the chip is clickable
-   */
-  clickable?: boolean;
-  /**
-   * Chip size variant
-   */
-  size?: 'small' | 'medium' | 'large';
-  /**
-   * Chip variant for different visual styles
-   */
-  variant?: 'default' | 'filled' | 'outlined';
+// Simple Slot implementation to avoid Radix dependency
+const Slot = React.forwardRef<
+  HTMLElement,
+  React.HTMLAttributes<HTMLElement> & { children: React.ReactElement }
+>(({ children, ...props }, ref) => {
+  if (React.isValidElement(children)) {
+    const childProps = children.props as Record<string, unknown>;
+    return React.cloneElement(children, {
+      ...childProps,
+      ...props,
+      ref,
+      className: [props.className, childProps.className]
+        .filter(Boolean)
+        .join(' '),
+    } as any);
+  }
+  return null;
+});
+
+export type ChipVariant = 'default' | 'selected' | 'dismissible';
+export type ChipSize = 'small' | 'medium' | 'large';
+
+interface ChipBaseProps {
+  variant?: ChipVariant;
+  size?: ChipSize;
+  disabled?: boolean;
+  className?: string;
+  title?: string;
+  ariaLabel?: string;
+  ariaExpanded?: boolean;
+  ariaPressed?: boolean;
+  role?: React.AriaRole;
+  asChild?: boolean;
+  children: React.ReactNode;
 }
 
-export const Chip = forwardRef<HTMLDivElement, ChipProps>(
+interface ChipAsButton
+  extends ChipBaseProps,
+    Omit<
+      React.ButtonHTMLAttributes<HTMLButtonElement>,
+      'className' | 'type' | 'onClick' | 'disabled' | 'children'
+    > {
+  as?: 'button';
+  type?: 'button' | 'submit' | 'reset';
+  form?: string;
+  autoFocus?: boolean;
+  tabIndex?: number;
+  'data-testid'?: string;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+}
+
+interface ChipAsAnchor
+  extends ChipBaseProps,
+    Omit<
+      React.AnchorHTMLAttributes<HTMLAnchorElement>,
+      'className' | 'href' | 'onClick' | 'children'
+    > {
+  as: 'a';
+  href: string;
+  tabIndex?: number;
+  'data-testid'?: string;
+  onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
+}
+
+export type ChipProps = ChipAsButton | ChipAsAnchor;
+
+// Check icon component (inline SVG)
+const CheckIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <polyline points="20,6 9,17 4,12" />
+  </svg>
+);
+
+// X icon component (inline SVG)
+const XIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <line x1="18" y1="6" x2="6" y2="18" />
+    <line x1="6" y1="6" x2="18" y2="18" />
+  </svg>
+);
+
+const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
   (
     {
-      className = '',
-      clickable = false,
-      size = 'medium',
+      as = 'button',
       variant = 'default',
+      size = 'medium',
+      disabled = false,
+      className = '',
+      title = '',
+      ariaLabel,
+      ariaExpanded,
+      ariaPressed,
+      role,
+      asChild = false,
       children,
-      onMouseEnter,
-      onMouseLeave,
-      onFocus,
-      onBlur,
       ...rest
     },
     ref
   ) => {
-    const chipRef = useRef<HTMLDivElement>(null);
-    const animationRef = useRef<gsap.core.Tween | null>(null);
-    const isHoveringRef = useRef(false);
-    const isFocusedRef = useRef(false);
-
-    // Combine refs
-    const setRefs = useCallback(
-      (node: HTMLDivElement | null) => {
-        chipRef.current = node;
-        if (typeof ref === 'function') {
-          ref(node);
-        } else if (ref) {
-          ref.current = node;
-        }
-      },
-      [ref]
-    );
-
-    // GSAP hover animation
-    const handleHover = useCallback(
-      (isHover: boolean) => {
-        if (!chipRef.current || !clickable) return;
-
-        isHoveringRef.current = isHover;
-
-        if (animationRef.current) {
-          animationRef.current.kill();
-        }
-
-        const targetY = isHover ? -2 : 0;
-        const targetShadow = isHover
-          ? 'var(--semantic-elevation-depth-2)'
-          : 'var(--chip-elevation-default)';
-
-        animationRef.current = gsap.to(chipRef.current, {
-          duration: 0.15,
-          y: targetY,
-          ease: 'power2.out',
-          onUpdate: () => {
-            // Update box-shadow during animation
-            if (chipRef.current) {
-              chipRef.current.style.boxShadow = `${targetShadow} var(--semantic-color-background-imageOverlay)`;
-            }
-          },
-        });
-      },
-      [clickable]
-    );
-
-    // Handle mouse events
-    const handleMouseEnter = useCallback(
-      (e: React.MouseEvent<HTMLDivElement>) => {
-        onMouseEnter?.(e);
-        handleHover(true);
-      },
-      [onMouseEnter, handleHover]
-    );
-
-    const handleMouseLeave = useCallback(
-      (e: React.MouseEvent<HTMLDivElement>) => {
-        onMouseLeave?.(e);
-        handleHover(false);
-      },
-      [onMouseLeave, handleHover]
-    );
-
-    const handleFocus = useCallback(
-      (e: React.FocusEvent<HTMLDivElement>) => {
-        onFocus?.(e);
-        isFocusedRef.current = true;
-        if (clickable) {
-          handleHover(true);
-        }
-      },
-      [onFocus, clickable, handleHover]
-    );
-
-    const handleBlur = useCallback(
-      (e: React.FocusEvent<HTMLDivElement>) => {
-        onBlur?.(e);
-        isFocusedRef.current = false;
-        if (clickable && !isHoveringRef.current) {
-          handleHover(false);
-        }
-      },
-      [onBlur, clickable, handleHover]
-    );
-
-    // Cleanup animations on unmount
-    useLayoutEffect(() => {
-      return () => {
-        if (animationRef.current) {
-          animationRef.current.kill();
-        }
-      };
-    }, []);
+    const chipRef = useRef<HTMLButtonElement>(null);
+    const iconRef = useRef<HTMLDivElement>(null);
 
     const baseClassName = styles.chip;
-    const clickableClassName = clickable ? styles.clickable : '';
-    const sizeClassName = styles[size];
     const variantClassName = styles[variant];
+    const sizeClassName = styles[size];
+    const isDisabledClassName = disabled ? styles.disabled : '';
 
-    const combinedClassName = [
-      baseClassName,
-      clickableClassName,
-      sizeClassName,
-      variantClassName,
-      className,
-    ]
-      .filter(Boolean)
-      .join(' ');
+    const combinedClassName = useMemo(
+      () =>
+        [
+          baseClassName,
+          variantClassName,
+          sizeClassName,
+          isDisabledClassName,
+          className,
+        ]
+          .filter(Boolean)
+          .join(' '),
+      [
+        baseClassName,
+        variantClassName,
+        sizeClassName,
+        isDisabledClassName,
+        className,
+      ]
+    );
+
+    // GSAP animation for icon entrance
+    useEffect(() => {
+      if (
+        iconRef.current &&
+        (variant === 'selected' || variant === 'dismissible')
+      ) {
+        const tl = gsap.timeline();
+        tl.fromTo(
+          iconRef.current,
+          {
+            scale: 0.8,
+            opacity: 0,
+          },
+          {
+            scale: 1,
+            opacity: 1,
+            duration: 0.3,
+            ease: 'back.out(1.7)',
+          }
+        );
+
+        return () => {
+          tl.kill();
+        };
+      }
+    }, [variant]);
+
+    // Handle hover animations with GSAP
+    useEffect(() => {
+      const chipElement = chipRef.current;
+      if (!chipElement || disabled) return;
+
+      const handleMouseEnter = () => {
+        gsap.to(chipElement, {
+          scale: 1.02,
+          duration: 0.2,
+          ease: 'power2.out',
+        });
+      };
+
+      const handleMouseLeave = () => {
+        gsap.to(chipElement, {
+          scale: 1,
+          duration: 0.2,
+          ease: 'power2.out',
+        });
+      };
+
+      chipElement.addEventListener('mouseenter', handleMouseEnter);
+      chipElement.addEventListener('mouseleave', handleMouseLeave);
+
+      return () => {
+        chipElement.removeEventListener('mouseenter', handleMouseEnter);
+        chipElement.removeEventListener('mouseleave', handleMouseLeave);
+      };
+    }, [disabled]);
+
+    const renderIcon = () => {
+      if (variant === 'selected') {
+        return (
+          <div ref={iconRef} className={styles.icon} aria-hidden="true">
+            <CheckIcon />
+          </div>
+        );
+      }
+
+      if (variant === 'dismissible') {
+        return (
+          <div ref={iconRef} className={styles.icon} aria-hidden="true">
+            <XIcon />
+          </div>
+        );
+      }
+
+      return null;
+    };
+
+    const renderChildren = () => {
+      if (children == null) return null;
+
+      if (typeof children === 'string' || typeof children === 'number') {
+        const stringValue = String(children);
+        if (stringValue.trim() === '') return null;
+
+        return (
+          <>
+            <span className={styles.text}>{children}</span>
+            {renderIcon()}
+          </>
+        );
+      }
+
+      return (
+        <>
+          {children}
+          {renderIcon()}
+        </>
+      );
+    };
+
+    const ariaProps = {
+      ...(ariaLabel && { 'aria-label': ariaLabel }),
+      ...(ariaExpanded !== undefined && { 'aria-expanded': ariaExpanded }),
+      ...(ariaPressed !== undefined && { 'aria-pressed': ariaPressed }),
+      ...(role && { role }),
+    } as const;
+
+    // Handle asChild pattern
+    if (asChild) {
+      return (
+        <Slot
+          className={combinedClassName}
+          title={title}
+          {...ariaProps}
+          data-slot="chip"
+        >
+          {children as React.ReactElement}
+        </Slot>
+      );
+    }
+
+    if (as === 'a') {
+      const { href, ...anchorRest } = rest as ChipAsAnchor;
+      return (
+        <a
+          href={href}
+          className={combinedClassName}
+          title={title}
+          {...ariaProps}
+          {...anchorRest}
+          data-slot="chip"
+          data-variant={variant}
+          data-size={size}
+        >
+          {renderChildren()}
+        </a>
+      );
+    }
 
     return (
-      <div
-        ref={setRefs}
+      <button
+        ref={(node) => {
+          chipRef.current = node;
+          if (typeof ref === 'function') ref(node);
+          else if (ref) ref.current = node;
+        }}
         className={combinedClassName}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        tabIndex={clickable ? 0 : undefined}
-        role={clickable ? 'button' : 'generic'}
-        {...rest}
+        disabled={disabled}
+        title={title}
+        {...(rest as ChipAsButton)}
+        {...ariaProps}
+        data-slot="chip"
+        data-variant={variant}
+        data-size={size}
       >
-        {children}
-      </div>
+        {renderChildren()}
+      </button>
     );
   }
 );
 
 Chip.displayName = 'Chip';
 
+export { Chip };
 export default React.memo(Chip);

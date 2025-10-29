@@ -70,280 +70,344 @@
         "neutral": {
           "100": {
             "$value": "#efefef",
-            "$description": "Level 100 of the neutral color scale, a very light shade."
+            "$description": "Level 100 of the neutral color scale, a very light shade.",
+            "$type": "color"
           },
           "200": {
             "$value": "#cecece",
-            "$description": "Level 200 of the neutral color scale, a light shade."
+            "$description": "Level 200 of the neutral color scale, a light shade.",
+            "$type": "color"
           },
           "300": {
             "$value": "#aeaeae",
-            "$description": "Level 300 of the neutral color scale, a medium-light shade."
+            "$description": "Level 300 of the neutral color scale, a medium-light shade.",
+            "$type": "color"
           },
           "400": {
             "$value": "#8f8f8f",
-            "$description": "Level 400 of the neutral color scale, a medium shade."
+            "$description": "Level 400 of the neutral color scale, a medium shade.",
+            "$type": "color"
           },
           "500": {
             "$value": "#717171",
-            "$description": "Level 500 of the neutral color scale, a medium-dark shade."
+            "$description": "Level 500 of the neutral color scale, a medium-dark shade.",
+            "$type": "color"
           },
           "600": {
             "$value": "#555555",
-            "$description": "Level 600 of the neutral color scale, a dark shade."
+            "$description": "Level 600 of the neutral color scale, a dark shade.",
+            "$type": "color"
           },
           "700": {
             "$value": "#3a3a3a",
-            "$description": "Level 700 of the neutral color scale, a very dark shade."
+            "$description": "Level 700 of the neutral color scale, a very dark shade.",
+            "$type": "color"
           },
           "800": {
             "$value": "#212121",
-            "$description": "Level 800 of the neutral color scale, the darkest shade."
+            "$description": "Level 800 of the neutral color scale, the darkest shade.",
+            "$type": "color"
           },
           "$type": "color"
         },
         "red": {
           "100": {
             "$value": "#fceaea",
-            "$description": "Level 100 of the red color scale, a very light red."
+            "$description": "Level 100 of the red color scale, a very light red.",
+            "$type": "color"
           },
           "200": {
             "$value": "#f7c1c2",
-            "$description": "Level 200 of the red color scale, a light red."
+            "$description": "Level 200 of the red color scale, a light red.",
+            "$type": "color"
           },
           "300": {
             "$value": "#f29495",
-            "$description": "Level 300 of the red color scale, a medium-light red."
+            "$description": "Level 300 of the red color scale, a medium-light red.",
+            "$type": "color"
           },
           "400": {
             "$value": "#ea6465",
-            "$description": "Level 400 of the red color scale, a medium red."
+            "$description": "Level 400 of the red color scale, a medium red.",
+            "$type": "color"
           },
           "500": {
             "$value": "#d9292b",
-            "$description": "Level 500 of the red color scale, a medium-dark red."
+            "$description": "Level 500 of the red color scale, a medium-dark red.",
+            "$type": "color"
           },
           "600": {
             "$value": "#ae0001",
-            "$description": "Level 600 of the red color scale, a dark red."
+            "$description": "Level 600 of the red color scale, a dark red.",
+            "$type": "color"
           },
           "700": {
             "$value": "#7b0000",
-            "$description": "Level 700 of the red color scale, a very dark red."
+            "$description": "Level 700 of the red color scale, a very dark red.",
+            "$type": "color"
           },
           "800": {
             "$value": "#4b0000",
-            "$description": "Level 800 of the red color scale, the darkest red."
+            "$description": "Level 800 of the red color scale, the darkest red.",
+            "$type": "color"
           },
           "$type": "color"
         },
         "orange": {
           "100": {
             "$value": "#ffedcc",
-            "$description": "Level 100 of the orange color scale, a very light orange."
+            "$description": "Level 100 of the orange color scale, a very light orange.",
+            "$type": "color"
           },
           "200": {
             "$value": "#ffc458",
-            "$description": "Level 200 of the orange color scale, a light orange."
+            "$description": "Level 200 of the orange color scale, a light orange.",
+            "$type": "color"
           },
           "300": {
             "$value": "#fe9400",
-            "$description": "Level 300 of the orange color scale, a medium-light orange."
+            "$description": "Level 300 of the orange color scale, a medium-light orange.",
+            "$type": "color"
           },
           "400": {
             "$value": "#d77600",
-            "$description": "Level 400 of the orange color scale, a medium orange."
+            "$description": "Level 400 of the orange color scale, a medium orange.",
+            "$type": "color"
           },
           "500": {
             "$value": "#ac5c00",
-            "$description": "Level 500 of the orange color scale, a medium-dark orange."
+            "$description": "Level 500 of the orange color scale, a medium-dark orange.",
+            "$type": "color"
           },
           "600": {
             "$value": "#824500",
-            "$description": "Level 600 of the orange color scale, a dark orange."
+            "$description": "Level 600 of the orange color scale, a dark orange.",
+            "$type": "color"
           },
           "700": {
             "$value": "#593000",
-            "$description": "Level 700 of the orange color scale, a very dark orange."
+            "$description": "Level 700 of the orange color scale, a very dark orange.",
+            "$type": "color"
           },
           "800": {
             "$value": "#331b00",
-            "$description": "Level 800 of the orange color scale, the darkest orange."
+            "$description": "Level 800 of the orange color scale, the darkest orange.",
+            "$type": "color"
           },
           "$type": "color"
         },
         "yellow": {
           "100": {
             "$value": "#FFF8CC",
-            "$description": "very light yellow"
+            "$description": "very light yellow",
+            "$type": "color"
           },
           "200": {
             "$value": "#FFE680",
-            "$description": "light yellow"
+            "$description": "light yellow",
+            "$type": "color"
           },
           "300": {
             "$value": "#FFCE33",
-            "$description": "medium-light yellow"
+            "$description": "medium-light yellow",
+            "$type": "color"
           },
           "400": {
             "$value": "#FFB300",
-            "$description": "medium yellow"
+            "$description": "medium yellow",
+            "$type": "color"
           },
           "500": {
             "$value": "#DA9A00",
-            "$description": "medium-dark yellow"
+            "$description": "medium-dark yellow",
+            "$type": "color"
           },
           "600": {
             "$value": "#A97A00",
-            "$description": "dark yellow"
+            "$description": "dark yellow",
+            "$type": "color"
           },
           "700": {
             "$value": "#7A5A00",
-            "$description": "very dark yellow"
+            "$description": "very dark yellow",
+            "$type": "color"
           },
           "800": {
             "$value": "#4D3A00",
-            "$description": "darkest yellow"
+            "$description": "darkest yellow",
+            "$type": "color"
           },
           "$type": "color"
         },
         "green": {
           "100": {
             "$value": "#e4f2e0",
-            "$description": "Level 100 of the green color scale, a very light green."
+            "$description": "Level 100 of the green color scale, a very light green.",
+            "$type": "color"
           },
           "200": {
             "$value": "#b0daa4",
-            "$description": "Level 200 of the green color scale, a light green."
+            "$description": "Level 200 of the green color scale, a light green.",
+            "$type": "color"
           },
           "300": {
             "$value": "#79bf65",
-            "$description": "Level 300 of the green color scale, a medium-light green."
+            "$description": "Level 300 of the green color scale, a medium-light green.",
+            "$type": "color"
           },
           "400": {
             "$value": "#609e41",
-            "$description": "Level 400 of the green color scale, a medium green."
+            "$description": "Level 400 of the green color scale, a medium green.",
+            "$type": "color"
           },
           "500": {
             "$value": "#487e1e",
-            "$description": "Level 500 of the green color scale, a medium-dark green."
+            "$description": "Level 500 of the green color scale, a medium-dark green.",
+            "$type": "color"
           },
           "600": {
             "$value": "#336006",
-            "$description": "Level 600 of the green color scale, a dark green."
+            "$description": "Level 600 of the green color scale, a dark green.",
+            "$type": "color"
           },
           "700": {
             "$value": "#234104",
-            "$description": "Level 700 of the green color scale, a very dark green."
+            "$description": "Level 700 of the green color scale, a very dark green.",
+            "$type": "color"
           },
           "800": {
             "$value": "#142502",
-            "$description": "Level 800 of the green color scale, the darkest green."
+            "$description": "Level 800 of the green color scale, the darkest green.",
+            "$type": "color"
           },
           "$type": "color"
         },
         "blue": {
           "100": {
             "$value": "#d9f3fe",
-            "$description": "Level 100 of the blue color scale, a very light blue."
+            "$description": "Level 100 of the blue color scale, a very light blue.",
+            "$type": "color"
           },
           "200": {
             "$value": "#8ad9fc",
-            "$description": "Level 200 of the blue color scale, a light blue."
+            "$description": "Level 200 of the blue color scale, a light blue.",
+            "$type": "color"
           },
           "300": {
             "$value": "#2eb9f9",
-            "$description": "Level 300 of the blue color scale, a medium-light blue."
+            "$description": "Level 300 of the blue color scale, a medium-light blue.",
+            "$type": "color"
           },
           "400": {
             "$value": "#1d91fb",
-            "$description": "Level 400 of the blue color scale, a medium blue."
+            "$description": "Level 400 of the blue color scale, a medium blue.",
+            "$type": "color"
           },
           "500": {
             "$value": "#0a65fe",
-            "$description": "Level 500 of the blue color scale, a medium-dark blue."
+            "$description": "Level 500 of the blue color scale, a medium-dark blue.",
+            "$type": "color"
           },
           "600": {
             "$value": "#0042dc",
-            "$description": "Level 600 of the blue color scale, a dark blue."
+            "$description": "Level 600 of the blue color scale, a dark blue.",
+            "$type": "color"
           },
           "700": {
             "$value": "#002d99",
-            "$description": "Level 700 of the blue color scale, a very dark blue."
+            "$description": "Level 700 of the blue color scale, a very dark blue.",
+            "$type": "color"
           },
           "800": {
             "$value": "#001b5a",
-            "$description": "Level 800 of the blue color scale, the darkest blue."
+            "$description": "Level 800 of the blue color scale, the darkest blue.",
+            "$type": "color"
           },
           "$type": "color"
         },
         "teal": {
           "100": {
             "$value": "#caf8f7",
-            "$description": "Level 100 of the teal color scale, a very light teal."
+            "$description": "Level 100 of the teal color scale, a very light teal.",
+            "$type": "color"
           },
           "200": {
             "$value": "#18dbdb",
-            "$description": "Level 200 of the teal color scale, a light teal."
+            "$description": "Level 200 of the teal color scale, a light teal.",
+            "$type": "color"
           },
           "300": {
             "$value": "#22b4b4",
-            "$description": "Level 300 of the teal color scale, a medium-light teal."
+            "$description": "Level 300 of the teal color scale, a medium-light teal.",
+            "$type": "color"
           },
           "400": {
             "$value": "#258f8e",
-            "$description": "Level 400 of the teal color scale, a medium teal."
+            "$description": "Level 400 of the teal color scale, a medium teal.",
+            "$type": "color"
           },
           "500": {
             "$value": "#236f6f",
-            "$description": "Level 500 of the teal color scale, a medium-dark teal."
+            "$description": "Level 500 of the teal color scale, a medium-dark teal.",
+            "$type": "color"
           },
           "600": {
             "$value": "#205353",
-            "$description": "Level 600 of the teal color scale, a dark teal."
+            "$description": "Level 600 of the teal color scale, a dark teal.",
+            "$type": "color"
           },
           "700": {
             "$value": "#1a3a3a",
-            "$description": "Level 700 of the teal color scale, a very dark teal."
+            "$description": "Level 700 of the teal color scale, a very dark teal.",
+            "$type": "color"
           },
           "800": {
             "$value": "#121d1d",
-            "$description": "Level 800 of the teal color scale, the darkest teal."
+            "$description": "Level 800 of the teal color scale, the darkest teal.",
+            "$type": "color"
           },
           "$type": "color"
         },
         "violet": {
           "100": {
             "$value": "#ffe9fe",
-            "$description": "Level 100 of the violet color scale, a very light violet."
+            "$description": "Level 100 of the violet color scale, a very light violet.",
+            "$type": "color"
           },
           "200": {
             "$value": "#ffb5fc",
-            "$description": "Level 200 of the violet color scale, a light violet."
+            "$description": "Level 200 of the violet color scale, a light violet.",
+            "$type": "color"
           },
           "300": {
             "$value": "#ff7bfa",
-            "$description": "Level 300 of the violet color scale, a medium-light violet."
+            "$description": "Level 300 of the violet color scale, a medium-light violet.",
+            "$type": "color"
           },
           "400": {
             "$value": "#f431ed",
-            "$description": "Level 400 of the violet color scale, a medium violet."
+            "$description": "Level 400 of the violet color scale, a medium violet.",
+            "$type": "color"
           },
           "500": {
             "$value": "#c127bc",
-            "$description": "Level 500 of the violet color scale, a medium-dark violet."
+            "$description": "Level 500 of the violet color scale, a medium-dark violet.",
+            "$type": "color"
           },
           "600": {
             "$value": "#931d8f",
-            "$description": "Level 600 of the violet color scale, a dark violet."
+            "$description": "Level 600 of the violet color scale, a dark violet.",
+            "$type": "color"
           },
           "700": {
             "$value": "#661463",
-            "$description": "Level 700 of the violet color scale, a very dark violet."
+            "$description": "Level 700 of the violet color scale, a very dark violet.",
+            "$type": "color"
           },
           "800": {
             "$value": "#3b0c3a",
-            "$description": "Level 800 of the violet color scale, the darkest violet."
+            "$description": "Level 800 of the violet color scale, the darkest violet.",
+            "$type": "color"
           },
           "$type": "color"
         }
@@ -820,22 +884,28 @@
       "lineHeight": {
         "$type": "number",
         "tight": {
-          "$value": 1.2
+          "$value": 1.2,
+          "$type": "number"
         },
         "normal": {
-          "$value": 1.5
+          "$value": 1.5,
+          "$type": "number"
         },
         "loose": {
-          "$value": 1.7
+          "$value": 1.7,
+          "$type": "number"
         },
         "body": {
-          "$value": 1.5
+          "$value": 1.5,
+          "$type": "number"
         },
         "collapse": {
-          "$value": 1
+          "$value": 1,
+          "$type": "number"
         },
         "heading": {
-          "$value": 1
+          "$value": 1,
+          "$type": "number"
         }
       },
       "letterSpacing": {
@@ -920,38 +990,49 @@
     "spacing": {
       "size": {
         "10": {
-          "$value": "64px"
+          "$value": "64px",
+          "$type": "dimension"
         },
         "$type": "dimension",
         "00": {
-          "$value": "0"
+          "$value": "0",
+          "$type": "dimension"
         },
         "01": {
-          "$value": "1px"
+          "$value": "1px",
+          "$type": "dimension"
         },
         "02": {
-          "$value": "2px"
+          "$value": "2px",
+          "$type": "dimension"
         },
         "03": {
-          "$value": "4px"
+          "$value": "4px",
+          "$type": "dimension"
         },
         "04": {
-          "$value": "8px"
+          "$value": "8px",
+          "$type": "dimension"
         },
         "05": {
-          "$value": "12px"
+          "$value": "12px",
+          "$type": "dimension"
         },
         "06": {
-          "$value": "16px"
+          "$value": "16px",
+          "$type": "dimension"
         },
         "07": {
-          "$value": "24px"
+          "$value": "24px",
+          "$type": "dimension"
         },
         "08": {
-          "$value": "32px"
+          "$value": "32px",
+          "$type": "dimension"
         },
         "09": {
-          "$value": "48px"
+          "$value": "48px",
+          "$type": "dimension"
         }
       }
     },
@@ -998,16 +1079,20 @@
           "$value": 0
         },
         "1": {
-          "$value": 8
+          "$value": 8,
+          "$type": "number"
         },
         "2": {
-          "$value": 16
+          "$value": 16,
+          "$type": "number"
         },
         "3": {
-          "$value": 32
+          "$value": 32,
+          "$type": "number"
         },
         "4": {
-          "$value": 64
+          "$value": 64,
+          "$type": "number"
         },
         "$type": "number"
       }
@@ -1015,49 +1100,60 @@
     "opacity": {
       "50": {
         "$value": 0.04,
-        "$description": "Very subtle transparency."
+        "$description": "Very subtle transparency.",
+        "$type": "opacity"
       },
       "100": {
         "$value": 0.08,
-        "$description": "Subtle transparency."
+        "$description": "Subtle transparency.",
+        "$type": "opacity"
       },
       "200": {
         "$value": 0.12,
-        "$description": "Light transparency."
+        "$description": "Light transparency.",
+        "$type": "opacity"
       },
       "300": {
         "$value": 0.16,
-        "$description": "Moderate transparency."
+        "$description": "Moderate transparency.",
+        "$type": "opacity"
       },
       "400": {
         "$value": 0.24,
-        "$description": "Noticeable transparency."
+        "$description": "Noticeable transparency.",
+        "$type": "opacity"
       },
       "500": {
         "$value": 0.32,
-        "$description": "High transparency."
+        "$description": "High transparency.",
+        "$type": "opacity"
       },
       "600": {
         "$value": 0.48,
-        "$description": "Strong transparency."
+        "$description": "Strong transparency.",
+        "$type": "opacity"
       },
       "700": {
         "$value": 0.64,
-        "$description": "Very strong transparency."
+        "$description": "Very strong transparency.",
+        "$type": "opacity"
       },
       "800": {
         "$value": 0.8,
-        "$description": "Nearly fully transparent."
+        "$description": "Nearly fully transparent.",
+        "$type": "opacity"
       },
       "900": {
         "$value": 0.96,
-        "$description": "Almost opaque."
+        "$description": "Almost opaque.",
+        "$type": "opacity"
       },
       "$type": "opacity",
       "$description": "Opacity values for transparency.",
       "full": {
         "$value": 1,
-        "$description": "Fully opaque."
+        "$description": "Fully opaque.",
+        "$type": "opacity"
       }
     },
     "dimension": {
@@ -1158,8 +1254,8 @@
       "duration": {
         "instant": {
           "$type": "duration",
-          "$value": "17ms",
-          "$description": "1 frame at 60fps - for immediate feedback"
+          "$value": "100ms",
+          "$description": "Instant feedback duration"
         },
         "short1": {
           "$type": "duration",
@@ -1176,6 +1272,16 @@
           "$value": "167ms",
           "$description": "10 frames - standard hover/focus transitions"
         },
+        "short": {
+          "$type": "duration",
+          "$value": "150ms",
+          "$description": "Short transition duration"
+        },
+        "medium": {
+          "$type": "duration",
+          "$value": "250ms",
+          "$description": "Medium transition duration"
+        },
         "medium1": {
           "$type": "duration",
           "$value": "250ms",
@@ -1190,6 +1296,11 @@
           "$type": "duration",
           "$value": "500ms",
           "$description": "Noticeable transitions"
+        },
+        "long": {
+          "$type": "duration",
+          "$value": "400ms",
+          "$description": "Long transition duration"
         },
         "long1": {
           "$type": "duration",
@@ -1210,8 +1321,18 @@
       "easing": {
         "standard": {
           "$type": "cubicBezier",
-          "$value": "cubic-bezier(0.3, 0, 0.1, 1)",
+          "$value": "cubic-bezier(0.4, 0, 0.2, 1)",
           "$description": "Standard easing for most transitions"
+        },
+        "emphasizedIn": {
+          "$type": "cubicBezier",
+          "$value": "cubic-bezier(0.2, 0, 0, 1)",
+          "$description": "Emphasized in easing - sharp start"
+        },
+        "emphasizedOut": {
+          "$type": "cubicBezier",
+          "$value": "cubic-bezier(0.4, 0, 0.2, 1)",
+          "$description": "Emphasized out easing - sharp end"
         },
         "quick": {
           "enter": {
@@ -1562,15 +1683,15 @@
         "color": {
           "text": {
             "$type": "color",
-            "$value": "{core.color.display.foreground.primary}"
+            "$value": "{core.color.palette.neutral.600}"
           },
           "bg": {
             "$type": "color",
-            "$value": "{core.color.display.background.primary}"
+            "$value": "{core.color.palette.neutral.100}"
           },
           "border": {
             "$type": "color",
-            "$value": "{core.color.display.border.subtle}"
+            "$value": "{core.color.palette.neutral.200}"
           },
           "focus": {
             "$type": "color",
@@ -1581,11 +1702,11 @@
       "test": {
         "dsSemanticColorBgPrimary": {
           "$type": "color",
-          "$value": "{core.color.display.background.primary}"
+          "$value": "{core.color.palette.neutral.100}"
         },
         "customSemanticColorBgPrimary": {
           "$type": "color",
-          "$value": "{core.color.display.background.primary}"
+          "$value": "{core.color.palette.neutral.100}"
         },
         "myCustomBg": {
           "$type": "color",
@@ -1613,6 +1734,736 @@
       "source": "Semantic roles (aliases to core)"
     },
     "color": {
+      "foreground": {
+        "primary": {
+          "$type": "color",
+          "$value": "{core.color.mode.dark}",
+          "$extensions": {
+            "design.paths.light": "{core.color.mode.dark}",
+            "design.paths.dark": "{core.color.mode.light}"
+          },
+          "$description": "Primary foreground color"
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "{core.color.palette.neutral.600}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.neutral.600}",
+            "design.paths.dark": "{core.color.palette.neutral.300}"
+          },
+          "$description": "Secondary foreground color"
+        },
+        "tertiary": {
+          "$type": "color",
+          "$value": "{core.color.palette.neutral.500}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.neutral.500}",
+            "design.paths.dark": "{core.color.palette.neutral.400}"
+          },
+          "$description": "Tertiary foreground color"
+        },
+        "accent": {
+          "$type": "color",
+          "$value": "{core.color.palette.red.500}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.red.500}",
+            "design.paths.dark": "{core.color.palette.red.400}"
+          },
+          "$description": "Accent foreground color"
+        },
+        "danger": {
+          "$type": "color",
+          "$value": "{core.color.palette.red.500}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.red.500}",
+            "design.paths.dark": "{core.color.palette.red.400}"
+          },
+          "$description": "Danger foreground color"
+        },
+        "hover": {
+          "$type": "color",
+          "$value": "{core.color.palette.neutral.700}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.neutral.700}",
+            "design.paths.dark": "{core.color.palette.neutral.300}"
+          },
+          "$description": "Hover foreground color"
+        },
+        "link": {
+          "$type": "color",
+          "$value": "{core.color.palette.red.500}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.red.500}",
+            "design.paths.dark": "{core.color.palette.red.400}"
+          },
+          "$description": "Link foreground color"
+        },
+        "linkHover": {
+          "$type": "color",
+          "$value": "{core.color.palette.red.600}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.red.600}",
+            "design.paths.dark": "{core.color.palette.red.300}"
+          },
+          "$description": "Link hover foreground color"
+        },
+        "linkVisited": {
+          "$type": "color",
+          "$value": "{core.color.palette.red.400}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.red.400}",
+            "design.paths.dark": "{core.color.palette.red.500}"
+          },
+          "$description": "Link visited foreground color"
+        },
+        "onBrand": {
+          "$type": "color",
+          "$value": "{core.color.mode.white}",
+          "$extensions": {
+            "design.paths.light": "{core.color.mode.white}",
+            "design.paths.dark": "{core.color.mode.white}"
+          },
+          "$description": "Foreground color for text on brand backgrounds"
+        },
+        "onColor": {
+          "$type": "color",
+          "$value": "{semantic.color.foreground.primary}",
+          "$extensions": {
+            "design.paths.light": "{semantic.color.foreground.primary}",
+            "design.paths.dark": "{semantic.color.foreground.primary}"
+          },
+          "$description": "Foreground color for text on colored backgrounds"
+        },
+        "info": {
+          "$type": "color",
+          "$value": "{core.color.palette.blue.500}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.blue.500}",
+            "design.paths.dark": "{core.color.palette.blue.400}"
+          },
+          "$description": "Info foreground color"
+        },
+        "success": {
+          "$type": "color",
+          "$value": "{core.color.palette.green.500}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.green.500}",
+            "design.paths.dark": "{core.color.palette.green.400}"
+          },
+          "$description": "Success foreground color"
+        },
+        "warning": {
+          "$type": "color",
+          "$value": "{core.color.palette.orange.500}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.orange.500}",
+            "design.paths.dark": "{core.color.palette.orange.400}"
+          },
+          "$description": "Warning foreground color"
+        },
+        "onDangerSubtle": {
+          "$type": "color",
+          "$value": "{core.color.palette.red.700}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.red.700}",
+            "design.paths.dark": "{core.color.palette.red.300}"
+          },
+          "$description": "Foreground color on subtle danger backgrounds"
+        },
+        "onInfoSubtle": {
+          "$type": "color",
+          "$value": "{core.color.palette.blue.700}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.blue.700}",
+            "design.paths.dark": "{core.color.palette.blue.300}"
+          },
+          "$description": "Foreground color on subtle info backgrounds"
+        },
+        "onSuccessSubtle": {
+          "$type": "color",
+          "$value": "{core.color.palette.green.700}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.green.700}",
+            "design.paths.dark": "{core.color.palette.green.300}"
+          },
+          "$description": "Foreground color on subtle success backgrounds"
+        },
+        "onWarningSubtle": {
+          "$type": "color",
+          "$value": "{core.color.palette.orange.700}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.orange.700}",
+            "design.paths.dark": "{core.color.palette.orange.300}"
+          },
+          "$description": "Foreground color on subtle warning backgrounds"
+        },
+        "highlight": {
+          "$type": "color",
+          "$value": "{core.color.palette.red.700}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.red.700}",
+            "design.paths.dark": "{core.color.palette.red.200}"
+          },
+          "$description": "Highlight foreground color"
+        },
+        "syntax": {
+          "plain": {
+            "$type": "color",
+            "$value": "{semantic.color.foreground.primary}",
+            "$extensions": {
+              "design.paths.light": "{semantic.color.foreground.primary}",
+              "design.paths.dark": "{semantic.color.foreground.primary}"
+            },
+            "$description": "Plain text in syntax highlighting"
+          },
+          "comment": {
+            "color": {
+              "$type": "color",
+              "$value": "{semantic.color.foreground.tertiary}",
+              "$extensions": {
+                "design.paths.light": "{semantic.color.foreground.tertiary}",
+                "design.paths.dark": "{semantic.color.foreground.tertiary}"
+              },
+              "$description": "Comment color in syntax highlighting"
+            }
+          },
+          "keyword": {
+            "$type": "color",
+            "$value": "{semantic.color.foreground.info}",
+            "$extensions": {
+              "design.paths.light": "{semantic.color.foreground.info}",
+              "design.paths.dark": "{semantic.color.foreground.info}"
+            },
+            "$description": "Keyword color in syntax highlighting"
+          },
+          "definition": {
+            "$type": "color",
+            "$value": "{semantic.color.foreground.accent}",
+            "$extensions": {
+              "design.paths.light": "{semantic.color.foreground.accent}",
+              "design.paths.dark": "{semantic.color.foreground.accent}"
+            },
+            "$description": "Definition color in syntax highlighting"
+          },
+          "punctuation": {
+            "$type": "color",
+            "$value": "{semantic.color.foreground.info}",
+            "$extensions": {
+              "design.paths.light": "{semantic.color.foreground.info}",
+              "design.paths.dark": "{semantic.color.foreground.info}"
+            },
+            "$description": "Punctuation color in syntax highlighting"
+          },
+          "property": {
+            "$type": "color",
+            "$value": "{semantic.color.foreground.warning}",
+            "$extensions": {
+              "design.paths.light": "{semantic.color.foreground.warning}",
+              "design.paths.dark": "{semantic.color.foreground.warning}"
+            },
+            "$description": "Property color in syntax highlighting"
+          },
+          "tag": {
+            "$type": "color",
+            "$value": "{semantic.color.foreground.danger}",
+            "$extensions": {
+              "design.paths.light": "{semantic.color.foreground.danger}",
+              "design.paths.dark": "{semantic.color.foreground.danger}"
+            },
+            "$description": "Tag color in syntax highlighting"
+          },
+          "static": {
+            "$type": "color",
+            "$value": "{semantic.color.foreground.accent}",
+            "$extensions": {
+              "design.paths.light": "{semantic.color.foreground.accent}",
+              "design.paths.dark": "{semantic.color.foreground.accent}"
+            },
+            "$description": "Static color in syntax highlighting"
+          },
+          "string": {
+            "$type": "color",
+            "$value": "{semantic.color.foreground.highlight}",
+            "$extensions": {
+              "design.paths.light": "{semantic.color.foreground.highlight}",
+              "design.paths.dark": "{semantic.color.foreground.highlight}"
+            },
+            "$description": "String color in syntax highlighting"
+          }
+        },
+        "disabled": {
+          "$type": "color",
+          "$value": "{core.color.palette.neutral.300}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.neutral.300}",
+            "design.paths.dark": "{core.color.palette.neutral.500}"
+          },
+          "$description": "Disabled foreground color"
+        },
+        "placeholder": {
+          "$type": "color",
+          "$value": "{core.color.palette.neutral.400}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.neutral.400}",
+            "design.paths.dark": "{core.color.palette.neutral.500}"
+          },
+          "$description": "Placeholder text color"
+        },
+        "inverse": {
+          "$type": "color",
+          "$value": "{core.color.mode.light}",
+          "$extensions": {
+            "design.paths.light": "{core.color.mode.light}",
+            "design.paths.dark": "{core.color.mode.dark}"
+          },
+          "$description": "Inverse foreground color (opposite of primary)"
+        }
+      },
+      "background": {
+        "primary": {
+          "$type": "color",
+          "$value": "{core.color.mode.white}",
+          "$extensions": {
+            "design.paths.light": "{core.color.mode.white}",
+            "design.paths.dark": "{core.color.mode.black}"
+          },
+          "$description": "Primary background color"
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "{core.color.palette.neutral.100}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.neutral.100}",
+            "design.paths.dark": "{core.color.palette.neutral.800}"
+          },
+          "$description": "Secondary background color"
+        },
+        "tertiary": {
+          "$type": "color",
+          "$value": "{core.color.palette.neutral.200}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.neutral.200}",
+            "design.paths.dark": "{core.color.palette.neutral.700}"
+          },
+          "$description": "Tertiary background color"
+        },
+        "highlight": {
+          "$type": "color",
+          "$value": "{core.color.palette.red.200}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.red.200}",
+            "design.paths.dark": "{core.color.palette.red.700}"
+          },
+          "$description": "Highlight background color"
+        },
+        "accent": {
+          "$type": "color",
+          "$value": "{core.color.palette.red.500}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.red.500}",
+            "design.paths.dark": "{core.color.palette.red.400}"
+          },
+          "$description": "Accent background color"
+        },
+        "hover": {
+          "$type": "color",
+          "$value": "{core.color.palette.neutral.200}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.neutral.200}",
+            "design.paths.dark": "{core.color.palette.neutral.700}"
+          },
+          "$description": "Hover background color"
+        },
+        "dangerStrong": {
+          "$type": "color",
+          "$value": "{core.color.palette.red.600}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.red.600}",
+            "design.paths.dark": "{core.color.palette.red.500}"
+          },
+          "$description": "Strong danger background color"
+        },
+        "dangerSubtle": {
+          "$type": "color",
+          "$value": "{core.color.palette.red.100}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.red.100}",
+            "design.paths.dark": "{core.color.palette.red.800}"
+          },
+          "$description": "Subtle danger background color"
+        },
+        "elevated": {
+          "$type": "color",
+          "$value": "{core.color.mode.white}",
+          "$extensions": {
+            "design.paths.light": "{core.color.mode.white}",
+            "design.paths.dark": "{core.color.mode.dark}"
+          },
+          "$description": "Elevated background color for cards and modals"
+        },
+        "brand": {
+          "$type": "color",
+          "$value": "{core.color.palette.brand.primary.500}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.brand.primary.500}",
+            "design.paths.dark": "{core.color.palette.brand.primary.400}"
+          },
+          "$description": "Brand background color"
+        },
+        "onColor": {
+          "$type": "color",
+          "$value": "{semantic.color.background.primary}",
+          "$extensions": {
+            "design.paths.light": "{semantic.color.background.primary}",
+            "design.paths.dark": "{semantic.color.background.primary}"
+          },
+          "$description": "Background color for elements on colored backgrounds"
+        },
+        "imageOverlay": {
+          "$type": "color",
+          "$value": "rgba(0, 0, 0, 0.5)",
+          "$extensions": {
+            "design.paths.light": "rgba(0, 0, 0, 0.5)",
+            "design.paths.dark": "rgba(0, 0, 0, 0.7)"
+          },
+          "$description": "Image overlay background color"
+        },
+        "infoStrong": {
+          "$type": "color",
+          "$value": "{core.color.palette.blue.600}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.blue.600}",
+            "design.paths.dark": "{core.color.palette.blue.500}"
+          },
+          "$description": "Strong info background color"
+        },
+        "infoSubtle": {
+          "$type": "color",
+          "$value": "{core.color.palette.blue.100}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.blue.100}",
+            "design.paths.dark": "{core.color.palette.blue.800}"
+          },
+          "$description": "Subtle info background color"
+        },
+        "successStrong": {
+          "$type": "color",
+          "$value": "{core.color.palette.green.600}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.green.600}",
+            "design.paths.dark": "{core.color.palette.green.500}"
+          },
+          "$description": "Strong success background color"
+        },
+        "successSubtle": {
+          "$type": "color",
+          "$value": "{core.color.palette.green.100}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.green.100}",
+            "design.paths.dark": "{core.color.palette.green.800}"
+          },
+          "$description": "Subtle success background color"
+        },
+        "warningStrong": {
+          "$type": "color",
+          "$value": "{core.color.palette.orange.400}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.orange.400}",
+            "design.paths.dark": "{core.color.palette.orange.500}"
+          },
+          "$description": "Strong warning background color"
+        },
+        "warningSubtle": {
+          "$type": "color",
+          "$value": "{core.color.palette.orange.100}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.orange.100}",
+            "design.paths.dark": "{core.color.palette.orange.800}"
+          },
+          "$description": "Subtle warning background color"
+        },
+        "active": {
+          "$type": "color",
+          "$value": "{core.color.palette.neutral.300}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.neutral.300}",
+            "design.paths.dark": "{core.color.palette.neutral.600}"
+          },
+          "$description": "Active state background color"
+        },
+        "disabled": {
+          "$type": "color",
+          "$value": "{core.color.palette.neutral.200}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.neutral.200}",
+            "design.paths.dark": "{core.color.palette.neutral.700}"
+          },
+          "$description": "Disabled state background color"
+        },
+        "placeholder": {
+          "$type": "color",
+          "$value": "{core.color.palette.neutral.100}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.neutral.100}",
+            "design.paths.dark": "{core.color.palette.neutral.800}"
+          },
+          "$description": "Placeholder background color"
+        },
+        "readOnly": {
+          "$type": "color",
+          "$value": "{core.color.palette.neutral.100}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.neutral.100}",
+            "design.paths.dark": "{core.color.palette.neutral.800}"
+          },
+          "$description": "Read-only background color"
+        },
+        "inverse": {
+          "$type": "color",
+          "$value": "{core.color.mode.dark}",
+          "$extensions": {
+            "design.paths.light": "{core.color.mode.dark}",
+            "design.paths.dark": "{core.color.mode.light}"
+          },
+          "$description": "Inverse background color (opposite of primary)"
+        }
+      },
+      "border": {
+        "default": {
+          "$type": "color",
+          "$value": "{core.color.palette.neutral.300}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.neutral.300}",
+            "design.paths.dark": "{core.color.palette.neutral.600}"
+          },
+          "$description": "Default border color"
+        },
+        "subtle": {
+          "$type": "color",
+          "$value": "{core.color.palette.neutral.200}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.neutral.200}",
+            "design.paths.dark": "{core.color.palette.neutral.700}"
+          },
+          "$description": "Subtle border color"
+        },
+        "bold": {
+          "$type": "color",
+          "$value": "{core.color.palette.neutral.400}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.neutral.400}",
+            "design.paths.dark": "{core.color.palette.neutral.500}"
+          },
+          "$description": "Bold border color"
+        },
+        "disabled": {
+          "$type": "color",
+          "$value": "{core.color.palette.neutral.200}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.neutral.200}",
+            "design.paths.dark": "{core.color.palette.neutral.700}"
+          },
+          "$description": "Disabled border color"
+        },
+        "light": {
+          "$type": "color",
+          "$value": "{core.color.palette.neutral.200}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.neutral.200}",
+            "design.paths.dark": "{core.color.palette.neutral.700}"
+          },
+          "$description": "Light border color"
+        },
+        "primary": {
+          "$type": "color",
+          "$value": "{core.color.palette.neutral.300}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.neutral.300}",
+            "design.paths.dark": "{core.color.palette.neutral.600}"
+          },
+          "$description": "Primary border color"
+        },
+        "hover": {
+          "$type": "color",
+          "$value": "{core.color.palette.neutral.400}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.neutral.400}",
+            "design.paths.dark": "{core.color.palette.neutral.500}"
+          },
+          "$description": "Hover border color"
+        },
+        "accent": {
+          "$type": "color",
+          "$value": "{core.color.palette.red.500}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.red.500}",
+            "design.paths.dark": "{core.color.palette.red.400}"
+          },
+          "$description": "Accent border color"
+        },
+        "focus": {
+          "$type": "color",
+          "$value": "{core.color.palette.brand.primary.500}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.brand.primary.500}",
+            "design.paths.dark": "{core.color.palette.brand.primary.400}"
+          },
+          "$description": "Focus border color"
+        },
+        "danger": {
+          "$type": "color",
+          "$value": "{core.color.palette.red.600}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.red.600}",
+            "design.paths.dark": "{core.color.palette.red.500}"
+          },
+          "$description": "Danger border color"
+        },
+        "info": {
+          "$type": "color",
+          "$value": "{core.color.palette.blue.600}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.blue.600}",
+            "design.paths.dark": "{core.color.palette.blue.500}"
+          },
+          "$description": "Info border color"
+        },
+        "onColor": {
+          "$type": "color",
+          "$value": "{core.color.mode.white}",
+          "$extensions": {
+            "design.paths.light": "{core.color.mode.white}",
+            "design.paths.dark": "{core.color.mode.white}"
+          },
+          "$description": "Border color for elements on colored backgrounds"
+        },
+        "success": {
+          "$type": "color",
+          "$value": "{core.color.palette.green.600}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.green.600}",
+            "design.paths.dark": "{core.color.palette.green.500}"
+          },
+          "$description": "Success border color"
+        },
+        "warning": {
+          "$type": "color",
+          "$value": "{core.color.palette.orange.600}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.orange.600}",
+            "design.paths.dark": "{core.color.palette.orange.500}"
+          },
+          "$description": "Warning border color"
+        },
+        "strong": {
+          "$type": "color",
+          "$value": "{core.color.palette.neutral.400}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.neutral.400}",
+            "design.paths.dark": "{core.color.palette.neutral.500}"
+          },
+          "$description": "Strong border color for emphasis"
+        }
+      },
+      "status": {
+        "info": {
+          "$type": "color",
+          "$value": "{core.color.palette.blue.500}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.blue.500}",
+            "design.paths.dark": "{core.color.palette.blue.400}"
+          },
+          "$description": "Info status color"
+        },
+        "success": {
+          "$type": "color",
+          "$value": "{core.color.palette.green.500}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.green.500}",
+            "design.paths.dark": "{core.color.palette.green.400}"
+          },
+          "$description": "Success status color"
+        },
+        "warning": {
+          "$type": "color",
+          "$value": "{core.color.palette.orange.500}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.orange.500}",
+            "design.paths.dark": "{core.color.palette.orange.400}"
+          },
+          "$description": "Warning status color"
+        },
+        "danger": {
+          "$type": "color",
+          "$value": "{core.color.palette.red.500}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.red.500}",
+            "design.paths.dark": "{core.color.palette.red.400}"
+          },
+          "$description": "Danger status color"
+        },
+        "highlight": {
+          "$type": "color",
+          "$value": "{core.color.palette.brand.primary.400}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.brand.primary.400}",
+            "design.paths.dark": "{core.color.palette.brand.primary.500}"
+          },
+          "$description": "Highlight status color"
+        }
+      },
+      "data": {
+        "trend": {
+          "default": {
+            "$type": "color",
+            "$value": "{core.color.palette.blue.400}",
+            "$description": "Default trend indicator"
+          },
+          "up": {
+            "$type": "color",
+            "$value": "{core.color.palette.green.500}",
+            "$description": "Positive trend indicator"
+          },
+          "down": {
+            "$type": "color",
+            "$value": "{core.color.palette.red.500}",
+            "$description": "Negative trend indicator"
+          },
+          "neutral": {
+            "$type": "color",
+            "$value": "{core.color.palette.neutral.500}",
+            "$description": "Neutral trend indicator"
+          }
+        }
+      },
+      "gradient": {
+        "brand": {
+          "primary": {
+            "$type": "gradient",
+            "$value": "{core.color.palette.brand.primary.400}",
+            "$description": "Primary brand gradient"
+          }
+        }
+      },
+      "overlay": {
+        "scrim": {
+          "weak": {
+            "$type": "color",
+            "$value": "rgba(0,0,0,0.24)",
+            "$description": "Light overlay scrim"
+          },
+          "medium": {
+            "$type": "color",
+            "$value": "rgba(0,0,0,0.40)",
+            "$description": "Medium overlay scrim"
+          },
+          "strong": {
+            "$type": "color",
+            "$value": "rgba(0,0,0,0.64)",
+            "$description": "Strong overlay scrim"
+          }
+        }
+      },
       "action": {
         "background": {
           "primary": {
@@ -2009,223 +2860,23 @@
           }
         }
       },
-      "display": {
-        "background": {
-          "primary": {
-            "$type": "color",
-            "$value": "{core.color.mode.light}",
-            "$extensions": {
-              "design.paths.light": "{core.color.mode.light}",
-              "design.paths.dark": "{core.color.mode.dark}"
-            },
-            "$description": "Primary page background"
-          },
-          "secondary": {
-            "$type": "color",
-            "$value": "{core.color.palette.neutral.100}",
-            "$extensions": {
-              "design.paths.light": "{core.color.palette.neutral.100}",
-              "design.paths.dark": "{core.color.palette.neutral.800}"
-            },
-            "$description": "Secondary background for cards, panels"
-          },
-          "tertiary": {
-            "$type": "color",
-            "$value": "{core.color.palette.neutral.200}",
-            "$extensions": {
-              "design.paths.light": "{core.color.palette.neutral.200}",
-              "design.paths.dark": "{core.color.palette.neutral.700}"
-            },
-            "$description": "Tertiary background for subtle sections"
-          },
-          "elevated": {
-            "$type": "color",
-            "$value": "{core.color.mode.white}",
-            "$description": "Elevated surfaces like modals"
-          },
-          "brand": {
-            "$type": "color",
-            "$value": "{core.color.palette.brand.primary.500}",
-            "$description": "Brand background"
-          },
-          "accent": {
-            "$type": "color",
-            "$value": "{core.color.palette.red.500}",
-            "$description": "Accent background"
-          },
-          "highlight": {
-            "$type": "color",
-            "$value": "{core.color.palette.blue.200}",
-            "$extensions": {
-              "design.paths.light": "{core.color.palette.blue.200}",
-              "design.paths.dark": "{core.color.palette.blue.800}"
-            },
-            "$description": "Highlight background for selections"
-          },
-          "overlay": {
-            "$type": "color",
-            "$value": "rgba(0, 0, 0, 0.5)",
-            "$description": "Overlay background for images"
-          }
-        },
-        "foreground": {
-          "primary": {
-            "$type": "color",
-            "$value": "{core.color.mode.dark}",
-            "$extensions": {
-              "design.paths.light": "{core.color.mode.dark}",
-              "design.paths.dark": "{core.color.mode.light}"
-            },
-            "$description": "Primary text color"
-          },
-          "secondary": {
-            "$type": "color",
-            "$value": "{core.color.palette.neutral.600}",
-            "$extensions": {
-              "design.paths.light": "{core.color.palette.neutral.600}",
-              "design.paths.dark": "{core.color.palette.neutral.300}"
-            },
-            "$description": "Secondary text color"
-          },
-          "tertiary": {
-            "$type": "color",
-            "$value": "{core.color.palette.neutral.500}",
-            "$description": "Tertiary text color"
-          },
-          "inverse": {
-            "$type": "color",
-            "$value": "{core.color.mode.light}",
-            "$extensions": {
-              "design.paths.light": "{core.color.mode.light}",
-              "design.paths.dark": "{core.color.mode.dark}"
-            },
-            "$description": "Inverse text color"
-          },
-          "onBrand": {
-            "$type": "color",
-            "$value": "{core.color.mode.white}",
-            "$description": "Text on brand backgrounds"
-          },
-          "onColor": {
-            "$type": "color",
-            "$value": "{core.color.display.foreground.primary}",
-            "$description": "Text on colored backgrounds"
-          },
-          "accent": {
-            "$type": "color",
-            "$value": "{core.color.palette.red.500}",
-            "$extensions": {
-              "design.paths.light": "{core.color.palette.red.500}",
-              "design.paths.dark": "{core.color.palette.red.400}"
-            },
-            "$description": "Accent text color"
-          },
-          "disabled": {
-            "$type": "color",
-            "$value": "{core.color.palette.neutral.300}",
-            "$extensions": {
-              "design.paths.light": "{core.color.palette.neutral.300}",
-              "design.paths.dark": "{core.color.palette.neutral.600}"
-            },
-            "$description": "Disabled text color"
-          },
-          "placeholder": {
-            "$type": "color",
-            "$value": "{core.color.palette.neutral.400}",
-            "$description": "Placeholder text color"
-          },
-          "link": {
-            "default": {
-              "$type": "color",
-              "$value": "{core.color.palette.red.500}",
-              "$extensions": {
-                "design.paths.light": "{core.color.palette.red.500}",
-                "design.paths.dark": "{core.color.palette.red.400}"
-              },
-              "$description": "Link text color"
-            },
-            "hover": {
-              "$type": "color",
-              "$value": "{core.color.palette.red.600}",
-              "$extensions": {
-                "design.paths.light": "{core.color.palette.red.600}",
-                "design.paths.dark": "{core.color.palette.red.300}"
-              },
-              "$description": "Link hover color"
-            },
-            "visited": {
-              "$type": "color",
-              "$value": "{core.color.palette.red.400}",
-              "$extensions": {
-                "design.paths.light": "{core.color.palette.red.400}",
-                "design.paths.dark": "{core.color.palette.red.500}"
-              },
-              "$description": "Visited link color"
-            }
-          }
-        },
-        "border": {
-          "subtle": {
-            "$type": "color",
-            "$value": "{core.color.palette.neutral.300}",
-            "$description": "Subtle border color"
-          },
-          "strong": {
-            "$type": "color",
-            "$value": "{core.color.palette.neutral.400}",
-            "$description": "Strong border color"
-          },
-          "bold": {
-            "$type": "color",
-            "$value": "{core.color.palette.neutral.600}",
-            "$extensions": {
-              "design.paths.light": "{core.color.palette.neutral.600}",
-              "design.paths.dark": "{core.color.palette.neutral.300}"
-            },
-            "$description": "Bold border color"
-          },
-          "light": {
-            "$type": "color",
-            "$value": "{core.color.palette.neutral.200}",
-            "$extensions": {
-              "design.paths.light": "{core.color.palette.neutral.200}",
-              "design.paths.dark": "{core.color.palette.neutral.700}"
-            },
-            "$description": "Light border color"
-          },
-          "onColor": {
-            "$type": "color",
-            "$value": "{core.color.mode.white}",
-            "$description": "Border on colored backgrounds"
-          },
-          "disabled": {
-            "$type": "color",
-            "$value": "{core.color.palette.neutral.200}",
-            "$extensions": {
-              "design.paths.light": "{core.color.palette.neutral.200}",
-              "design.paths.dark": "{core.color.palette.neutral.700}"
-            },
-            "$description": "Disabled border color"
-          }
-        }
-      },
       "syntax": {
         "plain": {
           "$type": "color",
-          "$value": "{core.color.display.foreground.primary}",
+          "$value": "{core.color.mode.dark}",
           "$extensions": {
-            "design.paths.light": "{core.color.display.foreground.primary}",
-            "design.paths.dark": "{core.color.display.foreground.primary}"
+            "design.paths.light": "{core.color.mode.dark}",
+            "design.paths.dark": "{core.color.mode.dark}"
           },
           "$description": "Plain syntax text"
         },
         "comment": {
           "color": {
             "$type": "color",
-            "$value": "{core.color.display.foreground.tertiary}",
+            "$value": "{core.color.palette.neutral.500}",
             "$extensions": {
-              "design.paths.light": "{core.color.display.foreground.tertiary}",
-              "design.paths.dark": "{core.color.display.foreground.tertiary}"
+              "design.paths.light": "{core.color.palette.neutral.500}",
+              "design.paths.dark": "{core.color.palette.neutral.500}"
             },
             "$description": "Comment syntax color"
           },
@@ -2233,55 +2884,55 @@
         },
         "keyword": {
           "$type": "color",
-          "$value": "{core.color.feedback.foreground.info.default}",
+          "$value": "{semantic.color.feedback.foreground.info.default}",
           "$extensions": {
-            "design.paths.light": "{core.color.feedback.foreground.info.default}",
-            "design.paths.dark": "{core.color.feedback.foreground.info.default}"
+            "design.paths.light": "{semantic.color.feedback.foreground.info.default}",
+            "design.paths.dark": "{semantic.color.feedback.foreground.info.default}"
           },
           "$description": "Keyword syntax color"
         },
         "definition": {
           "$type": "color",
-          "$value": "{core.color.display.foreground.accent}",
+          "$value": "{core.color.palette.red.500}",
           "$extensions": {
-            "design.paths.light": "{core.color.display.foreground.accent}",
-            "design.paths.dark": "{core.color.display.foreground.accent}"
+            "design.paths.light": "{core.color.palette.red.500}",
+            "design.paths.dark": "{core.color.palette.red.500}"
           },
           "$description": "Definition syntax color"
         },
         "punctuation": {
           "$type": "color",
-          "$value": "{core.color.feedback.foreground.info.default}",
+          "$value": "{semantic.color.feedback.foreground.info.default}",
           "$extensions": {
-            "design.paths.light": "{core.color.feedback.foreground.info.default}",
-            "design.paths.dark": "{core.color.feedback.foreground.info.default}"
+            "design.paths.light": "{semantic.color.feedback.foreground.info.default}",
+            "design.paths.dark": "{semantic.color.feedback.foreground.info.default}"
           },
           "$description": "Punctuation syntax color"
         },
         "property": {
           "$type": "color",
-          "$value": "{core.color.feedback.foreground.warning.default}",
+          "$value": "{semantic.color.feedback.foreground.warning.default}",
           "$extensions": {
-            "design.paths.light": "{core.color.feedback.foreground.warning.default}",
-            "design.paths.dark": "{core.color.feedback.foreground.warning.default}"
+            "design.paths.light": "{semantic.color.feedback.foreground.warning.default}",
+            "design.paths.dark": "{semantic.color.feedback.foreground.warning.default}"
           },
           "$description": "Property syntax color"
         },
         "tag": {
           "$type": "color",
-          "$value": "{core.color.feedback.foreground.danger.default}",
+          "$value": "{semantic.color.feedback.foreground.danger.default}",
           "$extensions": {
-            "design.paths.light": "{core.color.feedback.foreground.danger.default}",
-            "design.paths.dark": "{core.color.feedback.foreground.danger.default}"
+            "design.paths.light": "{semantic.color.feedback.foreground.danger.default}",
+            "design.paths.dark": "{semantic.color.feedback.foreground.danger.default}"
           },
           "$description": "Tag syntax color"
         },
         "static": {
           "$type": "color",
-          "$value": "{core.color.display.foreground.accent}",
+          "$value": "{core.color.palette.red.500}",
           "$extensions": {
-            "design.paths.light": "{core.color.display.foreground.accent}",
-            "design.paths.dark": "{core.color.display.foreground.accent}"
+            "design.paths.light": "{core.color.palette.red.500}",
+            "design.paths.dark": "{core.color.palette.red.500}"
           },
           "$description": "Static syntax color"
         },
@@ -2293,58 +2944,6 @@
             "design.paths.dark": "{core.color.palette.blue.400}"
           },
           "$description": "String syntax color"
-        }
-      },
-      "data": {
-        "trend": {
-          "default": {
-            "$type": "color",
-            "$value": "{core.color.palette.blue.400}",
-            "$description": "Default trend indicator"
-          },
-          "up": {
-            "$type": "color",
-            "$value": "{core.color.palette.green.500}",
-            "$description": "Positive trend indicator"
-          },
-          "down": {
-            "$type": "color",
-            "$value": "{core.color.palette.red.500}",
-            "$description": "Negative trend indicator"
-          },
-          "neutral": {
-            "$type": "color",
-            "$value": "{core.color.palette.neutral.500}",
-            "$description": "Neutral trend indicator"
-          }
-        }
-      },
-      "gradient": {
-        "brand": {
-          "primary": {
-            "$type": "gradient",
-            "$value": "{core.color.palette.brand.primary.400}",
-            "$description": "Primary brand gradient"
-          }
-        }
-      },
-      "overlay": {
-        "scrim": {
-          "weak": {
-            "$type": "color",
-            "$value": "rgba(0,0,0,0.24)",
-            "$description": "Light overlay scrim"
-          },
-          "medium": {
-            "$type": "color",
-            "$value": "rgba(0,0,0,0.40)",
-            "$description": "Medium overlay scrim"
-          },
-          "strong": {
-            "$type": "color",
-            "$value": "rgba(0,0,0,0.64)",
-            "$description": "Strong overlay scrim"
-          }
         }
       }
     },
@@ -3199,124 +3798,6 @@
           }
         }
       },
-      "display": {
-        "padding": {
-          "composite": {
-            "small": {
-              "$type": "composition",
-              "$value": {
-                "paddingTop": "{core.spacing.size.03}",
-                "paddingRight": "{core.spacing.size.04}",
-                "paddingBottom": "{core.spacing.size.03}",
-                "paddingLeft": "{core.spacing.size.04}"
-              },
-              "$description": "Small display padding composite"
-            },
-            "default": {
-              "$type": "composition",
-              "$value": {
-                "paddingTop": "{core.spacing.size.04}",
-                "paddingRight": "{core.spacing.size.06}",
-                "paddingBottom": "{core.spacing.size.04}",
-                "paddingLeft": "{core.spacing.size.06}"
-              },
-              "$description": "Default display padding composite"
-            },
-            "large": {
-              "$type": "composition",
-              "$value": {
-                "paddingTop": "{core.spacing.size.06}",
-                "paddingRight": "{core.spacing.size.08}",
-                "paddingBottom": "{core.spacing.size.06}",
-                "paddingLeft": "{core.spacing.size.08}"
-              },
-              "$description": "Large display padding composite"
-            }
-          },
-          "section": {
-            "vertical": {
-              "$type": "dimension",
-              "$value": "{core.spacing.size.08}",
-              "$description": "Vertical padding for sections"
-            },
-            "horizontal": {
-              "$type": "dimension",
-              "$value": "{core.spacing.size.06}",
-              "$description": "Horizontal padding for sections"
-            }
-          },
-          "card": {
-            "vertical": {
-              "$type": "dimension",
-              "$value": "{core.spacing.size.04}",
-              "$description": "Vertical padding for cards"
-            },
-            "horizontal": {
-              "$type": "dimension",
-              "$value": "{core.spacing.size.04}",
-              "$description": "Horizontal padding for cards"
-            }
-          }
-        },
-        "gap": {
-          "content": {
-            "small": {
-              "$type": "dimension",
-              "$value": "{core.spacing.size.03}",
-              "$description": "Small content gap"
-            },
-            "default": {
-              "$type": "dimension",
-              "$value": "{core.spacing.size.04}",
-              "$description": "Default content gap"
-            },
-            "large": {
-              "$type": "dimension",
-              "$value": "{core.spacing.size.06}",
-              "$description": "Large content gap"
-            }
-          },
-          "section": {
-            "$type": "dimension",
-            "$value": "{core.spacing.size.08}",
-            "$description": "Gap between major sections"
-          },
-          "grid": {
-            "small": {
-              "$type": "dimension",
-              "$value": "{core.spacing.size.03}",
-              "$description": "Small grid gap"
-            },
-            "default": {
-              "$type": "dimension",
-              "$value": "{core.spacing.size.04}",
-              "$description": "Default grid gap"
-            },
-            "large": {
-              "$type": "dimension",
-              "$value": "{core.spacing.size.06}",
-              "$description": "Large grid gap"
-            }
-          }
-        },
-        "radius": {
-          "card": {
-            "$type": "borderRadius",
-            "$value": "{core.shape.radius.03}",
-            "$description": "Card border radius"
-          },
-          "panel": {
-            "$type": "borderRadius",
-            "$value": "{core.shape.radius.04}",
-            "$description": "Panel border radius"
-          },
-          "modal": {
-            "$type": "borderRadius",
-            "$value": "{core.shape.radius.04}",
-            "$description": "Modal border radius"
-          }
-        }
-      },
       "navigation": {
         "padding": {
           "composite": {
@@ -3436,47 +3917,72 @@
       "text": {
         "hover": {
           "$type": "color",
-          "$value": "{core.color.display.foreground.secondary}"
+          "$value": "{core.color.palette.neutral.600}"
         },
         "active": {
           "$type": "color",
-          "$value": "{core.color.display.foreground.primary}"
+          "$value": "{core.color.mode.dark}"
         },
         "disabled": {
           "$type": "color",
-          "$value": "{core.color.display.foreground.disabled}"
+          "$value": "{core.color.palette.neutral.400}"
         }
       },
       "background": {
         "hover": {
           "$type": "color",
-          "$value": "{core.color.action.background.secondary.hover}"
+          "$value": "{core.color.palette.neutral.100}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.neutral.100}",
+            "design.paths.dark": "{core.color.palette.neutral.800}"
+          },
+          "$description": "Secondary action hover state"
         },
         "active": {
           "$type": "color",
-          "$value": "{core.color.action.background.secondary.active}"
+          "$value": "{core.color.palette.neutral.200}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.neutral.200}",
+            "design.paths.dark": "{core.color.palette.neutral.700}"
+          },
+          "$description": "Secondary action active state"
         },
         "selected": {
           "$type": "color",
-          "$value": "{core.color.display.background.highlight}"
+          "$value": "{core.color.palette.blue.200}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.blue.200}",
+            "design.paths.dark": "{core.color.palette.blue.800}"
+          },
+          "$description": "Highlight background for selections"
         },
         "disabled": {
           "$type": "color",
-          "$value": "{core.color.action.background.primary.disabled}"
+          "$value": "{core.color.palette.neutral.200}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.neutral.200}",
+            "design.paths.dark": "{core.color.palette.neutral.700}"
+          },
+          "$description": "Primary action disabled state"
         }
       },
       "border": {
         "hover": {
           "$type": "color",
-          "$value": "{core.color.action.border.secondary.hover}"
+          "$value": "{core.color.palette.neutral.400}",
+          "$extensions": {
+            "design.paths.light": "{core.color.palette.neutral.400}",
+            "design.paths.dark": "{core.color.palette.neutral.500}"
+          },
+          "$description": "Secondary action border hover"
         },
         "active": {
           "$type": "color",
-          "$value": "{core.color.display.border.bold}"
+          "$value": "{core.color.palette.neutral.400}"
         },
         "disabled": {
           "$type": "color",
-          "$value": "{core.color.display.border.disabled}"
+          "$value": "{core.color.palette.neutral.200}"
         }
       }
     },
@@ -3529,11 +4035,11 @@
     "link": {
       "text": {
         "$type": "color",
-        "$value": "{core.color.display.foreground.link.default}"
+        "$value": "{core.color.palette.blue.500}"
       },
       "decorationColor": {
         "$type": "color",
-        "$value": "{core.color.display.foreground.link.default}"
+        "$value": "{core.color.palette.blue.500}"
       },
       "decorationThickness": {
         "$type": "dimension",
@@ -3545,22 +4051,22 @@
       },
       "hover.text": {
         "$type": "color",
-        "$value": "{core.color.display.foreground.link.hover}"
+        "$value": "{core.color.palette.blue.600}"
       },
       "visited.text": {
         "$type": "color",
-        "$value": "{core.color.display.foreground.link.visited}"
+        "$value": "{core.color.palette.blue.700}"
       }
     },
     "skeleton": {
       "background": {
         "$type": "color",
-        "$value": "{core.color.display.background.secondary}",
+        "$value": "{core.color.palette.neutral.100}",
         "$description": "Skeleton loading background"
       },
       "foreground": {
         "$type": "color",
-        "$value": "{core.color.display.background.tertiary}",
+        "$value": "{core.color.palette.neutral.200}",
         "$description": "Skeleton loading shimmer"
       },
       "shineDuration": {
@@ -3598,20 +4104,157 @@
           "$value": "{core.spacing.size.08}",
           "$description": "Space between content sections"
         }
-      }
-    },
-    "focus": {
-      "ring": {
-        "$description": "Focus ring styling for accessibility and interactive elements.",
-        "$type": "composition",
-        "$value": {
-          "border": {
-            "width": "{semantic.interaction.focus.ringWidth}",
-            "style": "solid",
-            "color": "{semantic.color.foreground.accent}"
+      },
+      "editor": {
+        "background": {
+          "$type": "color",
+          "$value": "{semantic.color.background.primary}"
+        },
+        "surface": {
+          "$type": "color",
+          "$value": "{semantic.color.background.elevated}"
+        },
+        "gutter": {
+          "$type": "color",
+          "$value": "{semantic.color.border.light}"
+        },
+        "cursor": {
+          "$type": "color",
+          "$value": "{semantic.color.status.warning}"
+        },
+        "selection": {
+          "$type": "color",
+          "$value": "{semantic.color.background.active}"
+        },
+        "selectionHighlight": {
+          "$type": "color",
+          "$value": "{semantic.color.background.highlight}"
+        },
+        "lineNumber": {
+          "active": {
+            "$type": "color",
+            "$value": "{semantic.color.status.highlight}"
           },
-          "offset": "{semantic.interaction.focus.ringOffset}",
-          "opacity": "{semantic.interaction.focus.ringOpacity}"
+          "default": {
+            "$type": "color",
+            "$value": "{semantic.color.border.primary}"
+          }
+        }
+      },
+      "button": {
+        "primary": {
+          "background": {
+            "$type": "color",
+            "$value": "{semantic.color.background.brand}"
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "{semantic.color.foreground.onBrand}"
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{semantic.color.border.strong}"
+          },
+          "radius": {
+            "$type": "borderRadius",
+            "$value": "{semantic.shape.radius.default}"
+          },
+          "paddingX": {
+            "$type": "dimension",
+            "$value": "{core.spacing.size.04}"
+          },
+          "paddingY": {
+            "$type": "dimension",
+            "$value": "{core.spacing.size.03}"
+          },
+          "height": {
+            "$type": "dimension",
+            "$value": "{semantic.control.size.md.height}"
+          },
+          "elevation": {
+            "$type": "shadow",
+            "$value": "{semantic.elevation.default}"
+          }
+        },
+        "danger": {
+          "background": {
+            "$type": "color",
+            "$value": "{semantic.color.background.dangerStrong}"
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "{semantic.color.foreground.onBrand}"
+          }
+        }
+      },
+      "input": {
+        "background": {
+          "$type": "color",
+          "$value": "{semantic.color.background.primary}"
+        },
+        "foreground": {
+          "$type": "color",
+          "$value": "{semantic.color.foreground.primary}"
+        },
+        "border": {
+          "$type": "color",
+          "$value": "{semantic.color.border.default}"
+        },
+        "radius": {
+          "$type": "borderRadius",
+          "$value": "{semantic.shape.radius.default}"
+        },
+        "paddingX": {
+          "$type": "dimension",
+          "$value": "{core.spacing.size.03}"
+        },
+        "paddingY": {
+          "$type": "dimension",
+          "$value": "{core.spacing.size.02}"
+        }
+      },
+      "badge": {
+        "info": {
+          "background": {
+            "$type": "color",
+            "$value": "{semantic.color.background.infoSubtle}"
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "{semantic.color.foreground.onInfoSubtle}"
+          },
+          "radius": {
+            "$type": "borderRadius",
+            "$value": "{semantic.shape.radius.small}"
+          },
+          "paddingX": {
+            "$type": "dimension",
+            "$value": "{core.spacing.size.02}"
+          }
+        }
+      },
+      "typography": {
+        "displayOversize": {
+          "fontFamily": {
+            "$type": "fontFamily",
+            "$value": "{semantic.typography.semanticFamily.heading}"
+          },
+          "fontWeight": {
+            "$type": "fontWeight",
+            "$value": "{semantic.typography.fontWeight.black}"
+          },
+          "fontSize": {
+            "$type": "dimension",
+            "$value": "{core.typography.ramp.14}"
+          },
+          "lineHeight": {
+            "$type": "number",
+            "$value": "{core.typography.lineHeight.heading}"
+          },
+          "letterSpacing": {
+            "$type": "dimension",
+            "$value": "{core.typography.letterSpacing.tight}"
+          }
         }
       }
     },
@@ -3660,7 +4303,7 @@
       },
       "foreground": {
         "$type": "color",
-        "$value": "{core.color.display.foreground.primary}"
+        "$value": "{core.color.mode.dark}"
       },
       "typography": {
         "variation": {
@@ -3701,15 +4344,15 @@
         },
         "colorText": {
           "$type": "color",
-          "$value": "{core.color.display.foreground.primary}"
+          "$value": "{core.color.mode.dark}"
         },
         "colorBg": {
           "$type": "color",
-          "$value": "{core.color.display.background.primary}"
+          "$value": "{core.color.mode.light}"
         },
         "colorBorder": {
           "$type": "color",
-          "$value": "{core.color.display.border.subtle}"
+          "$value": "{core.color.palette.neutral.200}"
         },
         "colorFocus": {
           "$type": "color",
@@ -3741,6 +4384,59 @@
           "$type": "number",
           "$value": 100
         }
+      }
+    },
+    "focus": {
+      "ring": {
+        "$description": "Focus ring styling for accessibility and interactive elements.",
+        "$type": "composition",
+        "$value": {
+          "border": {
+            "width": "{semantic.interaction.focus.ringWidth}",
+            "style": "solid",
+            "color": "{core.color.palette.red.500}"
+          },
+          "offset": "{semantic.interaction.focus.ringOffset}",
+          "opacity": "{semantic.interaction.focus.ringOpacity}"
+        }
+      },
+      "ringOffset": {
+        "$type": "dimension",
+        "$value": "{core.spacing.size.02}",
+        "$extensions": {
+          "design.paths.light": "{core.spacing.size.02}",
+          "design.paths.dark": "{core.spacing.size.02}"
+        },
+        "$description": "Focus ring offset distance"
+      }
+    },
+    "overlay": {
+      "scrimWeak": {
+        "$type": "color",
+        "$value": "rgba(0,0,0,0.24)",
+        "$extensions": {
+          "design.paths.light": "rgba(0,0,0,0.24)",
+          "design.paths.dark": "rgba(0,0,0,0.40)"
+        },
+        "$description": "Weak overlay scrim"
+      },
+      "scrimMedium": {
+        "$type": "color",
+        "$value": "rgba(0,0,0,0.40)",
+        "$extensions": {
+          "design.paths.light": "rgba(0,0,0,0.40)",
+          "design.paths.dark": "rgba(0,0,0,0.60)"
+        },
+        "$description": "Medium overlay scrim"
+      },
+      "scrimStrong": {
+        "$type": "color",
+        "$value": "rgba(0,0,0,0.64)",
+        "$extensions": {
+          "design.paths.light": "rgba(0,0,0,0.64)",
+          "design.paths.dark": "rgba(0,0,0,0.80)"
+        },
+        "$description": "Strong overlay scrim"
       }
     }
   }

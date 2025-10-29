@@ -1,0 +1,559 @@
+{
+  "$schema": "../designTokens.schema.json",
+  "components": {
+    "action": {
+      "padding": {
+        "composite": {
+          "small": {
+            "$type": "composition",
+            "$value": {
+              "paddingTop": "{spacing.size.02}",
+              "paddingRight": "{spacing.size.03}",
+              "paddingBottom": "{spacing.size.02}",
+              "paddingLeft": "{spacing.size.03}"
+            },
+            "$description": "Small action padding composite"
+          },
+          "default": {
+            "$type": "composition",
+            "$value": {
+              "paddingTop": "{spacing.size.03}",
+              "paddingRight": "{spacing.size.04}",
+              "paddingBottom": "{spacing.size.03}",
+              "paddingLeft": "{spacing.size.04}"
+            },
+            "$description": "Default action padding composite"
+          },
+          "large": {
+            "$type": "composition",
+            "$value": {
+              "paddingTop": "{spacing.size.04}",
+              "paddingRight": "{spacing.size.06}",
+              "paddingBottom": "{spacing.size.04}",
+              "paddingLeft": "{spacing.size.06}"
+            },
+            "$description": "Large action padding composite"
+          }
+        },
+        "vertical": {
+          "small": {
+            "$type": "dimension",
+            "$value": "{spacing.size.02}",
+            "$description": "Small action vertical padding"
+          },
+          "default": {
+            "$type": "dimension",
+            "$value": "{spacing.size.03}",
+            "$description": "Default action vertical padding"
+          },
+          "large": {
+            "$type": "dimension",
+            "$value": "{spacing.size.04}",
+            "$description": "Large action vertical padding"
+          }
+        },
+        "horizontal": {
+          "small": {
+            "$type": "dimension",
+            "$value": "{spacing.size.03}",
+            "$description": "Small action horizontal padding"
+          },
+          "default": {
+            "$type": "dimension",
+            "$value": "{spacing.size.04}",
+            "$description": "Default action horizontal padding"
+          },
+          "large": {
+            "$type": "dimension",
+            "$value": "{spacing.size.06}",
+            "$description": "Large action horizontal padding"
+          }
+        }
+      },
+      "height": {
+        "small": {
+          "$type": "dimension",
+          "$value": "{spacing.size.07}",
+          "$description": "Small action height"
+        },
+        "default": {
+          "$type": "dimension",
+          "$value": "{spacing.size.08}",
+          "$description": "Default action height"
+        },
+        "large": {
+          "$type": "dimension",
+          "$value": "{spacing.size.09}",
+          "$description": "Large action height"
+        }
+      },
+      "radius": {
+        "default": {
+          "$type": "borderRadius",
+          "$value": "{shape.radius.02}",
+          "$description": "Default action border radius"
+        },
+        "rounded": {
+          "$type": "borderRadius",
+          "$value": "{shape.radius.03}",
+          "$description": "Rounded action border radius"
+        },
+        "pill": {
+          "$type": "borderRadius",
+          "$value": "{shape.radius.full}",
+          "$description": "Pill-shaped action border radius"
+        }
+      },
+      "gap": {
+        "icon": {
+          "$type": "dimension",
+          "$value": "{spacing.size.02}",
+          "$description": "Gap between icon and text in actions"
+        },
+        "composite": {
+          "$type": "dimension",
+          "$value": "{spacing.size.03}",
+          "$description": "Gap between action elements"
+        }
+      },
+      "typography": {
+        "fontWeight": {
+          "$type": "fontWeight",
+          "$value": "{typography.weight.medium}",
+          "$description": "Action text font weight"
+        },
+        "fontSize": {
+          "small": {
+            "$type": "dimension",
+            "$value": "{typography.ramp.3}",
+            "$description": "Small action font size"
+          },
+          "default": {
+            "$type": "dimension",
+            "$value": "{typography.ramp.4}",
+            "$description": "Default action font size"
+          },
+          "large": {
+            "$type": "dimension",
+            "$value": "{typography.ramp.5}",
+            "$description": "Large action font size"
+          }
+        }
+      }
+    },
+    "input": {
+      "padding": {
+        "composite": {
+          "small": {
+            "$type": "composition",
+            "$value": {
+              "paddingTop": "{spacing.size.02}",
+              "paddingRight": "{spacing.size.03}",
+              "paddingBottom": "{spacing.size.02}",
+              "paddingLeft": "{spacing.size.03}"
+            },
+            "$description": "Small input padding composite"
+          },
+          "default": {
+            "$type": "composition",
+            "$value": {
+              "paddingTop": "{spacing.size.03}",
+              "paddingRight": "{spacing.size.03}",
+              "paddingBottom": "{spacing.size.03}",
+              "paddingLeft": "{spacing.size.03}"
+            },
+            "$description": "Default input padding composite"
+          },
+          "large": {
+            "$type": "composition",
+            "$value": {
+              "paddingTop": "{spacing.size.04}",
+              "paddingRight": "{spacing.size.04}",
+              "paddingBottom": "{spacing.size.04}",
+              "paddingLeft": "{spacing.size.04}"
+            },
+            "$description": "Large input padding composite"
+          }
+        },
+        "vertical": {
+          "small": {
+            "$type": "dimension",
+            "$value": "{spacing.size.02}",
+            "$description": "Small input vertical padding"
+          },
+          "default": {
+            "$type": "dimension",
+            "$value": "{spacing.size.03}",
+            "$description": "Default input vertical padding"
+          },
+          "large": {
+            "$type": "dimension",
+            "$value": "{spacing.size.04}",
+            "$description": "Large input vertical padding"
+          }
+        },
+        "horizontal": {
+          "small": {
+            "$type": "dimension",
+            "$value": "{spacing.size.03}",
+            "$description": "Small input horizontal padding"
+          },
+          "default": {
+            "$type": "dimension",
+            "$value": "{spacing.size.03}",
+            "$description": "Default input horizontal padding"
+          },
+          "large": {
+            "$type": "dimension",
+            "$value": "{spacing.size.04}",
+            "$description": "Large input horizontal padding"
+          }
+        }
+      },
+      "height": {
+        "small": {
+          "$type": "dimension",
+          "$value": "{spacing.size.07}",
+          "$description": "Small input height"
+        },
+        "default": {
+          "$type": "dimension",
+          "$value": "{spacing.size.08}",
+          "$description": "Default input height"
+        },
+        "large": {
+          "$type": "dimension",
+          "$value": "{spacing.size.09}",
+          "$description": "Large input height"
+        }
+      },
+      "radius": {
+        "default": {
+          "$type": "borderRadius",
+          "$value": "{shape.radius.medium}",
+          "$description": "Default input border radius"
+        },
+        "rounded": {
+          "$type": "borderRadius",
+          "$value": "{shape.radius.03}",
+          "$description": "Rounded input border radius"
+        }
+      },
+      "border": {
+        "width": {
+          "default": {
+            "$type": "borderWidth",
+            "$value": "{shape.border.width.hairline}",
+            "$description": "Default input border width"
+          },
+          "focus": {
+            "$type": "borderWidth",
+            "$value": "{shape.border.width.thick}",
+            "$description": "Input focus border width"
+          }
+        }
+      },
+      "gap": {
+        "icon": {
+          "$type": "dimension",
+          "$value": "{spacing.size.02}",
+          "$description": "Gap between icon and input content"
+        },
+        "label": {
+          "$type": "dimension",
+          "$value": "{spacing.size.01}",
+          "$description": "Gap between label and input"
+        },
+        "help": {
+          "$type": "dimension",
+          "$value": "{spacing.size.01}",
+          "$description": "Gap between input and help text"
+        }
+      },
+      "typography": {
+        "fontSize": {
+          "small": {
+            "$type": "dimension",
+            "$value": "{typography.ramp.3}",
+            "$description": "Small input font size"
+          },
+          "default": {
+            "$type": "dimension",
+            "$value": "{typography.ramp.4}",
+            "$description": "Default input font size"
+          },
+          "large": {
+            "$type": "dimension",
+            "$value": "{typography.ramp.5}",
+            "$description": "Large input font size"
+          }
+        },
+        "fontWeight": {
+          "$type": "fontWeight",
+          "$value": "{typography.weight.regular}",
+          "$description": "Input text font weight"
+        }
+      },
+      "background": {
+        "$type": "color",
+        "$value": "{semantic.color.background.primary}"
+      },
+      "foreground": {
+        "$type": "color",
+        "$value": "{semantic.color.foreground.primary}"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{semantic.color.border.default}"
+      },
+      "paddingX": {
+        "$type": "dimension",
+        "$value": "{core.spacing.size.03}"
+      },
+      "paddingY": {
+        "$type": "dimension",
+        "$value": "{core.spacing.size.02}"
+      }
+    },
+    "navigation": {
+      "padding": {
+        "composite": {
+          "default": {
+            "$type": "composition",
+            "$value": {
+              "paddingTop": "{spacing.size.03}",
+              "paddingRight": "{spacing.size.04}",
+              "paddingBottom": "{spacing.size.03}",
+              "paddingLeft": "{spacing.size.04}"
+            },
+            "$description": "Default navigation padding composite"
+          },
+          "compact": {
+            "$type": "composition",
+            "$value": {
+              "paddingTop": "{spacing.size.02}",
+              "paddingRight": "{spacing.size.03}",
+              "paddingBottom": "{spacing.size.02}",
+              "paddingLeft": "{spacing.size.03}"
+            },
+            "$description": "Compact navigation padding composite"
+          }
+        },
+        "item": {
+          "vertical": {
+            "$type": "dimension",
+            "$value": "{spacing.size.03}",
+            "$description": "Navigation item vertical padding"
+          },
+          "horizontal": {
+            "$type": "dimension",
+            "$value": "{spacing.size.04}",
+            "$description": "Navigation item horizontal padding"
+          }
+        }
+      },
+      "gap": {
+        "items": {
+          "$type": "dimension",
+          "$value": "{spacing.size.02}",
+          "$description": "Gap between navigation items"
+        },
+        "icon": {
+          "$type": "dimension",
+          "$value": "{spacing.size.02}",
+          "$description": "Gap between nav icon and text"
+        }
+      },
+      "height": {
+        "bar": {
+          "$type": "dimension",
+          "$value": "56px",
+          "$description": "Navigation bar height"
+        },
+        "item": {
+          "$type": "dimension",
+          "$value": "{spacing.size.08}",
+          "$description": "Navigation item height"
+        }
+      }
+    },
+    "feedback": {
+      "padding": {
+        "composite": {
+          "default": {
+            "$type": "composition",
+            "$value": {
+              "paddingTop": "{spacing.size.03}",
+              "paddingRight": "{spacing.size.04}",
+              "paddingBottom": "{spacing.size.03}",
+              "paddingLeft": "{spacing.size.04}"
+            },
+            "$description": "Default feedback padding composite"
+          },
+          "compact": {
+            "$type": "composition",
+            "$value": {
+              "paddingTop": "{spacing.size.02}",
+              "paddingRight": "{spacing.size.03}",
+              "paddingBottom": "{spacing.size.02}",
+              "paddingLeft": "{spacing.size.03}"
+            },
+            "$description": "Compact feedback padding composite"
+          }
+        }
+      },
+      "gap": {
+        "icon": {
+          "$type": "dimension",
+          "$value": "{spacing.size.02}",
+          "$description": "Gap between feedback icon and text"
+        },
+        "action": {
+          "$type": "dimension",
+          "$value": "{spacing.size.03}",
+          "$description": "Gap between feedback content and actions"
+        }
+      },
+      "radius": {
+        "default": {
+          "$type": "borderRadius",
+          "$value": "{shape.radius.02}",
+          "$description": "Default feedback border radius"
+        }
+      },
+      "border": {
+        "width": {
+          "$type": "borderWidth",
+          "$value": "{shape.border.width.hairline}",
+          "$description": "Feedback border width"
+        }
+      }
+    },
+    "editor": {
+      "background": {
+        "$type": "color",
+        "$value": "{semantic.color.background.primary}"
+      },
+      "surface": {
+        "$type": "color",
+        "$value": "{semantic.color.background.elevated}"
+      },
+      "gutter": {
+        "$type": "color",
+        "$value": "{semantic.color.border.light}"
+      },
+      "cursor": {
+        "$type": "color",
+        "$value": "{semantic.color.status.warning}"
+      },
+      "selection": {
+        "$type": "color",
+        "$value": "{semantic.color.background.active}"
+      },
+      "selectionHighlight": {
+        "$type": "color",
+        "$value": "{semantic.color.background.highlight}"
+      },
+      "lineNumber": {
+        "active": {
+          "$type": "color",
+          "$value": "{semantic.color.status.highlight}"
+        },
+        "default": {
+          "$type": "color",
+          "$value": "{semantic.color.border.primary}"
+        }
+      }
+    },
+    "button": {
+      "primary": {
+        "background": {
+          "$type": "color",
+          "$value": "{semantic.color.background.brand}"
+        },
+        "foreground": {
+          "$type": "color",
+          "$value": "{semantic.color.foreground.onBrand}"
+        },
+        "border": {
+          "$type": "color",
+          "$value": "{semantic.color.border.strong}"
+        },
+        "radius": {
+          "$type": "borderRadius",
+          "$value": "{semantic.shape.radius.default}"
+        },
+        "paddingX": {
+          "$type": "dimension",
+          "$value": "{core.spacing.size.04}"
+        },
+        "paddingY": {
+          "$type": "dimension",
+          "$value": "{core.spacing.size.03}"
+        },
+        "height": {
+          "$type": "dimension",
+          "$value": "{semantic.control.size.md.height}"
+        },
+        "elevation": {
+          "$type": "shadow",
+          "$value": "{semantic.elevation.default}"
+        }
+      },
+      "danger": {
+        "background": {
+          "$type": "color",
+          "$value": "{semantic.color.background.dangerStrong}"
+        },
+        "foreground": {
+          "$type": "color",
+          "$value": "{semantic.color.foreground.onBrand}"
+        }
+      }
+    },
+    "badge": {
+      "info": {
+        "background": {
+          "$type": "color",
+          "$value": "{semantic.color.background.infoSubtle}"
+        },
+        "foreground": {
+          "$type": "color",
+          "$value": "{semantic.color.foreground.onInfoSubtle}"
+        },
+        "radius": {
+          "$type": "borderRadius",
+          "$value": "{semantic.shape.radius.small}"
+        },
+        "paddingX": {
+          "$type": "dimension",
+          "$value": "{core.spacing.size.02}"
+        }
+      }
+    },
+    "typography": {
+      "displayOversize": {
+        "fontFamily": {
+          "$type": "fontFamily",
+          "$value": "{semantic.typography.semanticFamily.heading}"
+        },
+        "fontWeight": {
+          "$type": "fontWeight",
+          "$value": "{semantic.typography.fontWeight.black}"
+        },
+        "fontSize": {
+          "$type": "dimension",
+          "$value": "{core.typography.ramp.14}"
+        },
+        "lineHeight": {
+          "$type": "number",
+          "$value": "{core.typography.lineHeight.heading}"
+        },
+        "letterSpacing": {
+          "$type": "dimension",
+          "$value": "{core.typography.letterSpacing.tight}"
+        }
+      }
+    }
+  }
+}

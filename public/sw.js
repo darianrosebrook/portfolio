@@ -33,10 +33,34 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     Promise.all([
       caches.open(STATIC_CACHE).then((cache) => {
-        return cache.addAll(STATIC_FILES);
+        // Only try to cache files that exist
+        return Promise.all(
+          STATIC_FILES.map(async (url) => {
+            try {
+              const response = await fetch(url);
+              if (response.ok) {
+                return cache.add(url);
+              }
+            } catch (error) {
+              console.warn(`Failed to cache ${url}:`, error);
+            }
+          })
+        );
       }),
       caches.open(API_CACHE).then((cache) => {
-        return cache.addAll(API_ENDPOINTS);
+        // Only try to cache API endpoints that exist
+        return Promise.all(
+          API_ENDPOINTS.map(async (url) => {
+            try {
+              const response = await fetch(url);
+              if (response.ok) {
+                return cache.add(url);
+              }
+            } catch (error) {
+              console.warn(`Failed to cache ${url}:`, error);
+            }
+          })
+        );
       }),
     ])
   );
@@ -160,15 +184,20 @@ async function handleOtherRequest(request) {
   try {
     const url = new URL(request.url);
     if (url.protocol !== 'http:' && url.protocol !== 'https:') {
-      return fetch(request);
+      // Don't cache non-http(s) requests and return them directly
+      return fetch(request).catch(() => new Response('', { status: 404 }));
     }
   } catch (_) {
     // If URL parsing fails, fall through to network-first handling
   }
+
   try {
     const networkResponse = await fetch(request);
     const cache = await caches.open(DYNAMIC_CACHE);
-    cache.put(request, networkResponse.clone());
+    // Only cache successful responses
+    if (networkResponse.ok) {
+      cache.put(request, networkResponse.clone());
+    }
     return networkResponse;
   } catch (error) {
     const cachedResponse = await caches.match(request);

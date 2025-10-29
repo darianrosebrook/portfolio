@@ -8,7 +8,7 @@
  *   .dark { ... }  // explicit dark overrides
  *   @media (prefers-color-scheme: dark) { :root { ... } .light { ... } }
  *
- * Component token SCSS already generated via utils/designTokens/generateCSSTokens.mjs
+ * Component token SCSS already generated via utils/designTokens/generators/generateCSSTokens.mjs
  * This complements it with system-level globals used by components.
  */
 
@@ -192,7 +192,7 @@ function generate(): void {
   ].join('\n\n');
 
   fs.writeFileSync(OUTPUT_PATH, content, 'utf8');
-  // eslint-disable-next-line no-console
+
   console.log(`[tokens] Wrote ${path.relative(PROJECT_ROOT, OUTPUT_PATH)}`);
 }
 

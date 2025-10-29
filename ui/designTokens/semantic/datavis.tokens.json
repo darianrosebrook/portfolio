@@ -1,0 +1,35 @@
+{
+  "$schema": "../designTokens.schema.json",
+  "datavis": {
+    "onFill": {
+      "default": {
+        "$type": "color",
+        "$value": "{color.mode.white}"
+      },
+      "muted": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.100}"
+      }
+    },
+    "gridline": {
+      "major": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.300}"
+      },
+      "minor": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.200}"
+      }
+    },
+    "strokeWidth": {
+      "series": {
+        "$type": "dimension",
+        "$value": "2px"
+      },
+      "grid": {
+        "$type": "dimension",
+        "$value": "1px"
+      }
+    }
+  }
+}

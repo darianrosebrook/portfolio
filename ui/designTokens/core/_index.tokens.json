@@ -1,0 +1,26 @@
+{
+  "$schema": "../designTokens.schema.json",
+  "meta": {
+    "version": "1.0.0",
+    "source": "Core tokens - modular structure",
+    "modules": [
+      "./color.tokens.json",
+      "./typography.tokens.json",
+      "./scale.tokens.json",
+      "./spacing.tokens.json",
+      "./elevation.tokens.json",
+      "./opacity.tokens.json",
+      "./dimension.tokens.json",
+      "./shape.tokens.json",
+      "./motion.tokens.json",
+      "./density.tokens.json",
+      "./layer.tokens.json",
+      "./layout.tokens.json",
+      "./icon.tokens.json",
+      "./effect.tokens.json",
+      "./content.tokens.json",
+      "./interaction.tokens.json",
+      "./component.tokens.json"
+    ]
+  }
+}

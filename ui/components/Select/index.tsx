@@ -6,8 +6,8 @@
  */
 
 // Main composer components
+export { default } from './Select';
 export {
-  Select as default,
   Select,
   SelectTrigger,
   SelectContent,

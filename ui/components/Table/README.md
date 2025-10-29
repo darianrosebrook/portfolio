@@ -1,101 +1,121 @@
 # Table
 
-Comprehensive table component with proper semantic structure and accessibility.
+A flexible table component for displaying structured data. Supports sorting, selection, and various table patterns with accessible markup.
 
 ## Usage
 
 ```tsx
 import { Table } from '@/ui/components/Table';
 
-// Basic table
-<Table.Root>
+function DataTable() {
+  return (
+    <Table>
+      <Table.Header>
+        <Table.Row>
+          <Table.Head>Name</Table.Head>
+          <Table.Head>Email</Table.Head>
+          <Table.Head>Role</Table.Head>
+        </Table.Row>
+      </Table.Header>
+      <Table.Body>
+        <Table.Row>
+          <Table.Cell>John Doe</Table.Cell>
+          <Table.Cell>john@example.com</Table.Cell>
+          <Table.Cell>Admin</Table.Cell>
+        </Table.Row>
+      </Table.Body>
+    </Table>
+  );
+}
+```
+
+## Props
+
+| Prop      | Type      | Default | Description            |
+| --------- | --------- | ------- | ---------------------- |
+| children  | ReactNode | -       | Table content          |
+| className | string    | ''      | Additional CSS classes |
+
+## Examples
+
+### Basic Table
+
+```tsx
+<Table>
+  <Table.Caption>Employee Directory</Table.Caption>
   <Table.Header>
     <Table.Row>
       <Table.Head>Name</Table.Head>
-      <Table.Head>Email</Table.Head>
-      <Table.Head>Role</Table.Head>
+      <Table.Head>Department</Table.Head>
+      <Table.Head>Status</Table.Head>
     </Table.Row>
   </Table.Header>
   <Table.Body>
     <Table.Row>
-      <Table.Cell>John Doe</Table.Cell>
-      <Table.Cell>john@example.com</Table.Cell>
-      <Table.Cell>Admin</Table.Cell>
+      <Table.Cell>Jane Smith</Table.Cell>
+      <Table.Cell>Engineering</Table.Cell>
+      <Table.Cell>Active</Table.Cell>
     </Table.Row>
   </Table.Body>
-</Table.Root>
-
-// Responsive table
-<Table.Root responsive>
-  {/* table content */}
-</Table.Root>
+</Table>
 ```
 
-## Components
+### With Sorting
 
-### Table.Root
-
-Container component with responsive scrolling.
-
-**Props:**
-
-- `responsive?: boolean` - Enable horizontal scrolling (default: true)
-
-### Table.Header
-
-Table header section.
-
-### Table.Body
-
-Table body section.
-
-### Table.Row
-
-Table row.
-
-### Table.Head
-
-Header cell.
-
-**Props:**
-
-- `align?: 'left' | 'center' | 'right'` - Text alignment
-
-### Table.Cell
-
-Data cell.
-
-**Props:**
-
-- `align?: 'left' | 'center' | 'right'` - Text alignment
-
-## Accessibility
-
-- Proper semantic HTML structure (`<table>`, `<thead>`, `<tbody>`, `<tr>`, `<th>`, `<td>`)
-- ARIA attributes for screen readers
-- Keyboard navigation support
-- Focus management
+```tsx
+<Table>
+  <Table.Header>
+    <Table.Row>
+      <Table.Head sortable onSort={() => console.log('Sort by name')}>
+        Name
+      </Table.Head>
+      <Table.Head>Department</Table.Head>
+    </Table.Row>
+  </Table.Header>
+  <Table.Body>
+    <Table.Row>
+      <Table.Cell>Alice Johnson</Table.Cell>
+      <Table.Cell>Design</Table.Cell>
+    </Table.Row>
+  </Table.Body>
+</Table>
+```
 
 ## Design Tokens
 
-### Colors
+This component uses the following design tokens:
 
-- `--table-color-background`
-- `--table-color-foreground`
-- `--table-color-border`
+- `--color-background-primary` - Table background
+- `--color-border-subtle` - Border colors
+- `--color-text-primary` - Text color
+- `--color-text-secondary` - Secondary text
+- `--space-sm` - Cell padding
+- `--font-family-base` - Font family
+- `--border-radius-small` - Border radius
 
-### Spacing
+## Accessibility
 
-- `--table-spacing-padding-cell`
-- `--table-spacing-padding-head`
+### Keyboard Navigation
 
-### Typography
+- Tab to navigate through table cells
+- Arrow keys for cell navigation in some implementations
+- Enter/Space for interactive elements
 
-- `--table-typography-font-size`
-- `--table-typography-line-height`
+### Screen Reader Support
+
+- Proper table semantics with headers
+- Row and column associations
+- Caption for table description
+- Sort state announcements
+
+### States
+
+- Hover states for interactive rows
+- Selection states clearly indicated
+- Loading states for async data
 
 ## Related Components
 
-- [DataGrid](../DataGrid/) - Advanced data table with sorting/filtering
-- [List](../List/) - Simple list component
-
+- **List** - For simpler list patterns
+- **Card** - For displaying individual items
+- **Pagination** - For large data sets

@@ -1,6 +1,5 @@
-import Field from './Field';
-
-export { default as Field } from './Field';
+export { default } from './Field';
+export { Field } from './Field';
 export { FieldProvider, useFieldCtx } from './FieldProvider';
 export { useField } from './useField';
 export { useFieldControl } from './useFieldControl';
@@ -9,7 +8,10 @@ export { HelpText } from './HelpText';
 export { ErrorText } from './ErrorText';
 export type { FieldProps, FieldStatus, FieldApi } from './types';
 
+// Import Field to access its sub-components
+import { Field as FieldComponent } from './Field';
+
 // Re-export slot components for convenience
-export const FieldLabel = Field.Label;
-export const FieldError = Field.Error;
-export const FieldHelp = Field.Help;
+export const FieldLabel = FieldComponent.Label;
+export const FieldError = FieldComponent.Error;
+export const FieldHelp = FieldComponent.Help;

@@ -29,7 +29,7 @@ describe('Table', () => {
   });
 
   it('handles sortable columns', () => {
-    const mockSort = jest.fn();
+    const mockSort = vi.fn();
 
     render(
       <Table>
@@ -52,7 +52,7 @@ describe('Table', () => {
   });
 
   it('supports keyboard navigation for sortable columns', () => {
-    const mockSort = jest.fn();
+    const mockSort = vi.fn();
 
     render(
       <Table>
@@ -110,4 +110,3 @@ describe('Table', () => {
     expect(row).toHaveAttribute('data-state', 'selected');
   });
 });
-

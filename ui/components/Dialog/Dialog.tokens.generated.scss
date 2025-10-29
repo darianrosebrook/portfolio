@@ -7,7 +7,9 @@
   --dialog-color-background-backdrop: var(--semantic-color-overlay-scrim);
   --dialog-color-foreground-default: var(--semantic-color-foreground-primary);
   --dialog-color-foreground-title: var(--semantic-color-foreground-primary);
-  --dialog-color-foreground-secondary: var(--semantic-color-foreground-secondary);
+  --dialog-color-foreground-secondary: var(
+    --semantic-color-foreground-secondary
+  );
   --dialog-color-border-default: var(--semantic-color-border-subtle);
 
   /* === Size Tokens === */
@@ -49,12 +51,20 @@
 
   /* === Typography Tokens === */
   --dialog-typography-title-fontSize: var(--semantic-typography-heading-04);
-  --dialog-typography-title-fontWeight: var(--semantic-typography-font-weight-bold);
-  --dialog-typography-title-lineHeight: var(--semantic-typography-line-height-heading);
+  --dialog-typography-title-fontWeight: var(
+    --semantic-typography-font-weight-bold
+  );
+  --dialog-typography-title-lineHeight: var(
+    --semantic-typography-line-height-heading
+  );
 
   /* === Motion Tokens === */
-  --dialog-motion-duration-enter: var(--semantic-motion-interaction-enter-duration);
-  --dialog-motion-duration-exit: var(--semantic-motion-interaction-exit-duration);
+  --dialog-motion-duration-enter: var(
+    --semantic-motion-interaction-enter-duration
+  );
+  --dialog-motion-duration-exit: var(
+    --semantic-motion-interaction-exit-duration
+  );
   --dialog-motion-easing-enter: var(--semantic-motion-interaction-enter-easing);
   --dialog-motion-easing-exit: var(--semantic-motion-interaction-exit-easing);
 }

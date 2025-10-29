@@ -39,16 +39,36 @@ const getEnvVar = (key: string, fallback?: string): string => {
   return validateEnvVar(key, value, fallback);
 };
 
+const supabaseUrl = getEnvVar(
+  'NEXT_PUBLIC_SUPABASE_URL',
+  'https://placeholder.supabase.co'
+);
+const supabaseAnonKey = getEnvVar(
+  'NEXT_PUBLIC_SUPABASE_ANON_KEY',
+  'placeholder_anon_key'
+);
+
+// Warn if using placeholder values
+if (
+  process.env.NODE_ENV !== 'test' &&
+  (supabaseUrl.includes('placeholder') ||
+    supabaseAnonKey === 'placeholder_anon_key')
+) {
+  console.error(
+    '\n' +
+      '================================================\n' +
+      'WARNING: Using placeholder Supabase credentials!\n' +
+      'Database operations will fail.\n' +
+      'Create a .env.local file with real credentials.\n' +
+      'See .env.local.example for template.\n' +
+      '================================================\n'
+  );
+}
+
 export const env: Environment = {
   // Client-side variables (available in browser via NEXT_PUBLIC_ prefix)
-  nextPublicSupabaseUrl: getEnvVar(
-    'NEXT_PUBLIC_SUPABASE_URL',
-    'https://placeholder.supabase.co'
-  ),
-  nextPublicSupabaseAnonKey: getEnvVar(
-    'NEXT_PUBLIC_SUPABASE_ANON_KEY',
-    'placeholder_anon_key'
-  ),
+  nextPublicSupabaseUrl: supabaseUrl,
+  nextPublicSupabaseAnonKey: supabaseAnonKey,
 
   nodeEnv: process.env.NODE_ENV || 'development',
   NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,

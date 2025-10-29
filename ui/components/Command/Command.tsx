@@ -34,7 +34,10 @@ const SearchIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
 
 // Root Command Component
 export interface CommandProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'children'>,
+  extends Omit<
+      React.HTMLAttributes<HTMLDivElement>,
+      'defaultValue' | 'children'
+    >,
     CommandProviderProps {}
 
 const CommandRoot: React.FC<CommandProps> = ({

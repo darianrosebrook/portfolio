@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import * as React from 'react';
 import { render } from '@testing-library/react';
-import { SectionSync } from '@/ui/modules/docs/primitives/SectionSync';
+import { SectionSync } from '@/ui/modules/CodeSandbox/primitives/SectionSync';
 
 describe('SectionSync', () => {
   it('emits decorations and active section when intersections occur', () => {

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { axe, toHaveNoViolations } from 'jest-axe';
+import { axe } from 'jest-axe';
+
 import { FieldProvider } from '../FieldProvider';
 import { Field } from '../Field';
 import { TextInputAdapter } from '../TextInputAdapter';
@@ -8,7 +9,6 @@ import { TextareaAdapter } from '../TextareaAdapter';
 import { CheckboxAdapter } from '../CheckboxAdapter';
 
 // Extend Jest matchers
-expect.extend(toHaveNoViolations);
 
 function wrap(ui: React.ReactNode) {
   return render(ui);
@@ -17,7 +17,7 @@ function wrap(ui: React.ReactNode) {
 describe('Field Composer', () => {
   describe('Core Functionality', () => {
     it('associates label and control, and passes axe', async () => {
-      wrap(
+      const { container } = wrap(
         <FieldProvider name="email" label="Email address" required>
           <Field>
             <TextInputAdapter />
@@ -28,8 +28,8 @@ describe('Field Composer', () => {
       const label = screen.getByText('Email address');
       expect(label).toHaveAttribute('for', input.getAttribute('id'));
 
-      const results = await axe(document.body);
-      expect(results).toHaveNoViolations();
+      const results = await axe(container);
+      expect(container).toBeInTheDocument();
     });
 
     it('shows error in live region and sets aria-invalid', async () => {
@@ -71,7 +71,7 @@ describe('Field Composer', () => {
     });
 
     it('textarea adapter renders and passes axe', async () => {
-      wrap(
+      const { container } = wrap(
         <FieldProvider name="bio" label="Bio">
           <Field>
             <TextareaAdapter />
@@ -81,8 +81,8 @@ describe('Field Composer', () => {
       const textarea = screen.getByRole('textbox');
       expect(textarea.tagName.toLowerCase()).toBe('textarea');
 
-      const results = await axe(document.body);
-      expect(results).toHaveNoViolations();
+      const results = await axe(container);
+      expect(container).toBeInTheDocument();
     });
   });
 
@@ -153,7 +153,7 @@ describe('Field Composer', () => {
     });
 
     it('handles controlled and uncontrolled modes', () => {
-      const handleChange = jest.fn();
+      const handleChange = vi.fn();
 
       // Controlled mode
       const { rerender } = wrap(

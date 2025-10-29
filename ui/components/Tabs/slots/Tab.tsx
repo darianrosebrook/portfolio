@@ -6,7 +6,7 @@ import styles from '../Tabs.module.scss';
 
 export interface TabProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  value: TabsValue;
+  value?: TabsValue;
   disabled?: boolean;
 }
 
@@ -26,8 +26,12 @@ export const Tab = React.forwardRef<HTMLButtonElement, TabProps>(
       activationMode,
     } = useTabs();
     const id = React.useId();
-    const index = tabs.findIndex((t) => t.value === value);
-    const isSelected = active === value;
+
+    // Generate a value if none provided - use index-based approach
+    const tabValue = value ?? `tab-${tabs.length}`;
+
+    const index = tabs.findIndex((t) => t.value === tabValue);
+    const isSelected = active === tabValue;
     const tabIndex = disabled
       ? -1
       : isSelected || index === focusedIndex
@@ -45,10 +49,10 @@ export const Tab = React.forwardRef<HTMLButtonElement, TabProps>(
     };
 
     React.useEffect(() => {
-      registerTab({ id, value, disabled });
-      return () => unregisterTab(value);
+      registerTab({ id, value: tabValue, disabled });
+      return () => unregisterTab(tabValue);
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [id, value, disabled]);
+    }, [id, tabValue, disabled]);
 
     // Move DOM focus when focusedIndex points to this tab
     React.useEffect(() => {
@@ -59,7 +63,7 @@ export const Tab = React.forwardRef<HTMLButtonElement, TabProps>(
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
       if (disabled) return;
-      selectByValue(value);
+      selectByValue(tabValue);
       onClick?.(e);
     };
 
@@ -145,7 +149,7 @@ export const Tab = React.forwardRef<HTMLButtonElement, TabProps>(
         }
         case 'Enter':
         case ' ': {
-          selectByValue(value);
+          selectByValue(tabValue);
           e.preventDefault();
           break;
         }
@@ -157,7 +161,7 @@ export const Tab = React.forwardRef<HTMLButtonElement, TabProps>(
       <button
         ref={ref}
         role="tab"
-        data-value={value}
+        data-value={tabValue}
         aria-selected={isSelected}
         aria-disabled={disabled || undefined}
         tabIndex={tabIndex}

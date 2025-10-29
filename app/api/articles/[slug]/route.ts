@@ -14,9 +14,20 @@ export async function GET(
     .eq('slug', slug)
     .single();
 
-  if (error) {
-    return new NextResponse(JSON.stringify({ error: error.message }), {
-      status: 500,
+  if (error && (error.message || error.code || Object.keys(error).length > 0)) {
+    console.error('Article fetch error:', JSON.stringify(error, null, 2));
+    return new NextResponse(
+      JSON.stringify({ error: error.message || 'Database error' }),
+      {
+        status: error.code === 'PGRST116' ? 404 : 500,
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+  }
+
+  if (!data) {
+    return new NextResponse(JSON.stringify({ error: 'Article not found' }), {
+      status: 404,
       headers: { 'Content-Type': 'application/json' },
     });
   }
@@ -62,11 +73,25 @@ export async function PUT(
     .eq('author', user.id)
     .select();
 
-  if (error) {
-    return new NextResponse(JSON.stringify({ error: error.message }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
-    });
+  if (error && (error.message || error.code || Object.keys(error).length > 0)) {
+    console.error('Article update error:', JSON.stringify(error, null, 2));
+    return new NextResponse(
+      JSON.stringify({ error: error.message || 'Database error' }),
+      {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+  }
+
+  if (!data || data.length === 0) {
+    return new NextResponse(
+      JSON.stringify({ error: 'Article not found or unauthorized' }),
+      {
+        status: 404,
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
   }
 
   return new NextResponse(JSON.stringify(data), {
@@ -122,11 +147,28 @@ export async function PATCH(
     .eq('author', user.id)
     .select();
 
-  if (error) {
-    return new NextResponse(JSON.stringify({ error: error.message }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
-    });
+  if (error && (error.message || error.code || Object.keys(error).length > 0)) {
+    console.error(
+      'Article draft update error:',
+      JSON.stringify(error, null, 2)
+    );
+    return new NextResponse(
+      JSON.stringify({ error: error.message || 'Database error' }),
+      {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+  }
+
+  if (!data || data.length === 0) {
+    return new NextResponse(
+      JSON.stringify({ error: 'Article not found or unauthorized' }),
+      {
+        status: 404,
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
   }
 
   return new NextResponse(JSON.stringify(data), {
@@ -159,11 +201,15 @@ export async function DELETE(
     .eq('slug', slug)
     .eq('author', user.id);
 
-  if (error) {
-    return new NextResponse(JSON.stringify({ error: error.message }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
-    });
+  if (error && (error.message || error.code || Object.keys(error).length > 0)) {
+    console.error('Article delete error:', JSON.stringify(error, null, 2));
+    return new NextResponse(
+      JSON.stringify({ error: error.message || 'Database error' }),
+      {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
   }
 
   return new NextResponse(null, {

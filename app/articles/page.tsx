@@ -32,11 +32,19 @@ async function getData(): Promise<ArticleWithAuthor[]> {
     )
     .eq('status', 'published')
     .order('published_at', { ascending: false });
-  console.log(data, error);
-  if (error) {
-    console.error(error);
+
+  // Check for meaningful error (not just empty object)
+  if (error && (error.message || error.code || Object.keys(error).length > 0)) {
+    console.error('Supabase query error:', JSON.stringify(error, null, 2));
     return [] as ArticleWithAuthor[];
   }
+
+  // Handle case where data is null or undefined
+  if (!data) {
+    console.warn('No articles data returned from query');
+    return [] as ArticleWithAuthor[];
+  }
+
   return data as unknown as ArticleWithAuthor[];
 }
 function Card(data: ArticleWithAuthor) {

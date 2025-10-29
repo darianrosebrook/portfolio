@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import * as React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import { DocVariants } from '@/ui/modules/docs/variants/DocVariants';
+import { DocVariants } from '@/ui/modules/CodeSandbox/variants/DocVariants';
 
 describe('DocVariants URL sync', () => {
   it('reads initial selection from URL and updates query on selection', () => {

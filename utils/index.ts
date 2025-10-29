@@ -14,7 +14,13 @@ export * from './gooeyHighlight';
 export * from './helpers';
 
 // Caching utilities
-export * from './caching/caching';
+export * from './caching';
+
+// Performance utilities
+export * from './performance';
+
+// Schema utilities
+export * from './schemas';
 
 // Domain-specific utilities (use explicit imports for better tree-shaking)
 // Example: import { createClient } from '@/utils/supabase';

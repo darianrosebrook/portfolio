@@ -50,6 +50,7 @@ const ToggleSwitch = ({
     <div className={`${styles.toggleSwitch} ${sizeClass} ${className}`}>
       <input
         type="checkbox"
+        role="switch"
         checked={checked}
         onChange={onChange}
         disabled={disabled}
@@ -58,6 +59,7 @@ const ToggleSwitch = ({
         aria-label={
           ariaLabel || (typeof children === 'string' ? children : undefined)
         }
+        aria-checked={checked}
         aria-describedby={ariaDescription ? `${safeId}-description` : undefined}
         {...rest}
       />

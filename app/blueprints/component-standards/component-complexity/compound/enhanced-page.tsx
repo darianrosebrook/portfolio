@@ -327,7 +327,10 @@ export default function EnhancedCompoundPage() {
           },
         }}
       >
-        <article className="content" style={{ padding: '3rem' }}>
+        <article
+          className="content"
+          style={{ padding: '2rem 3rem', maxWidth: '45rem', margin: '0 auto' }}
+        >
           <DocSection id="overview">
             <h1>Deep Dive: Compounds</h1>
             <h2>Why Compounds Exist</h2>

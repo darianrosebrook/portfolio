@@ -67,4 +67,3 @@ describe('Accordion', () => {
     expect(triggers[1]).toHaveAttribute('aria-expanded', 'true');
   });
 });
-

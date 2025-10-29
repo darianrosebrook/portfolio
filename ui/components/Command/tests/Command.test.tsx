@@ -8,21 +8,21 @@ const mockItems = [
     label: 'Create New File',
     description: 'Create a new file in the current directory',
     group: 'File',
-    onSelect: jest.fn(),
+    onSelect: vi.fn(),
   },
   {
     id: '2',
     label: 'Open File',
     description: 'Open an existing file',
     group: 'File',
-    onSelect: jest.fn(),
+    onSelect: vi.fn(),
   },
   {
     id: '3',
     label: 'Search',
     description: 'Search across all files',
     group: 'Navigation',
-    onSelect: jest.fn(),
+    onSelect: vi.fn(),
   },
 ];
 
@@ -90,7 +90,7 @@ describe('Command', () => {
   });
 
   it('calls onSelect when item is clicked', () => {
-    const onSelectMock = jest.fn();
+    const onSelectMock = vi.fn();
     const itemsWithMock = [{ ...mockItems[0], onSelect: onSelectMock }];
 
     render(
@@ -142,4 +142,3 @@ describe('Command', () => {
     expect(screen.getByText('No commands found')).toBeInTheDocument();
   });
 });
-

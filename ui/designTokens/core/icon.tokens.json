@@ -1,0 +1,29 @@
+{
+  "$schema": "../designTokens.schema.json",
+  "icon": {
+    "size": {
+      "sm": {
+        "$type": "dimension",
+        "$value": "16px"
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": "20px"
+      },
+      "lg": {
+        "$type": "dimension",
+        "$value": "24px"
+      },
+      "xl": {
+        "$type": "dimension",
+        "$value": "32px"
+      }
+    },
+    "strokeWidth": {
+      "default": {
+        "$type": "dimension",
+        "$value": "1.5px"
+      }
+    }
+  }
+}

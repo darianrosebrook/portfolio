@@ -33,8 +33,13 @@ const XIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
 
 // Root Sheet Component
 export interface SheetProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'children'>,
-    SheetProviderProps {}
+  extends Omit<
+      React.HTMLAttributes<HTMLDivElement>,
+      'defaultValue' | 'children'
+    >,
+    Omit<SheetProviderProps, 'children'> {
+  children: React.ReactNode;
+}
 
 const SheetRoot: React.FC<SheetProps> = ({
   className = '',

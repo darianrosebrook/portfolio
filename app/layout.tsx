@@ -8,17 +8,20 @@ import PerformanceDashboard from '@/ui/modules/PerformanceDashboard/PerformanceD
 const nohemi = localFont({
   src: '../public/fonts/Nohemi-VF.ttf',
   display: 'swap',
-  fallback: ['sans-serif'],
+  fallback: ['system-ui', 'sans-serif'],
   preload: true,
   weight: '100 900',
   variable: '--font-nohemi',
+  adjustFontFallback: 'Arial',
 });
 const inter = localFont({
   src: '../public/fonts/InterVariable.ttf',
-  fallback: ['sans-serif'],
-  display: 'auto',
+  fallback: ['system-ui', 'sans-serif'],
+  display: 'swap',
+  preload: true,
   weight: '100 900',
   variable: '--font-inter',
+  adjustFontFallback: 'Arial',
 });
 
 export default async function RootLayout({
@@ -29,19 +32,6 @@ export default async function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${nohemi.variable}`}>
       <head>
-        {/* Preload critical resources */}
-        <link
-          rel="preload"
-          href="/darianrosebrook-optimized.webp"
-          as="image"
-          type="image/webp"
-        />
-        <link
-          rel="preload"
-          href="/darian-square.jpg"
-          as="image"
-          type="image/jpeg"
-        />
         {/* DNS prefetch for external domains */}
         <link rel="dns-prefetch" href="//wrgenoqnojvalkscpiib.supabase.co" />
         <link rel="dns-prefetch" href="//lh3.googleusercontent.com" />

@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, waitFor } from '@testing-library/react';
 import * as React from 'react';
-import { PropsBridge } from '@/ui/modules/docs/primitives/PropsBridge';
+import { PropsBridge } from '@/ui/modules/CodeSandbox/primitives/PropsBridge';
 
 // Mock useSandpack hook
 const mockUpdateFile = vi.fn();

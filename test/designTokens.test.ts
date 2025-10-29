@@ -7,8 +7,8 @@ import {
   generate,
   createDefaultConfig,
   formatAsCSS,
-  builtInTransforms,
-} from '../utils/designTokens/componentTokenUtils';
+} from '../utils/designTokens/utils/componentTokenUtils';
+import { builtInTransforms } from '../utils/designTokens/utils/transforms';
 
 // Mock design tokens for testing
 const mockTokens = {
@@ -253,13 +253,13 @@ describe('Enhanced Design Token Resolution', () => {
   it('should provide built-in transforms', () => {
     expect(builtInTransforms).toHaveLength(5);
 
-    const dimensionTransform = builtInTransforms.find((t) =>
-      t.match({ type: 'dimension' } as any)
+    const dimensionTransform = builtInTransforms.find((t: any) =>
+      t.match({ type: 'dimension' })
     );
     expect(dimensionTransform).toBeDefined();
 
-    const colorTransform = builtInTransforms.find((t) =>
-      t.match({ type: 'color' } as any)
+    const colorTransform = builtInTransforms.find((t: any) =>
+      t.match({ type: 'color' })
     );
     expect(colorTransform).toBeDefined();
   });
