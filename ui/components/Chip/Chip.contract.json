@@ -1,0 +1,32 @@
+{
+  "name": "Chip",
+  "layer": "primitive",
+  "anatomy": ["root"],
+  "variants": {
+    "size": ["small", "medium", "large"],
+    "variant": ["default", "filled", "outlined"]
+  },
+  "states": ["default", "clickable", "hover", "focus"],
+  "slots": {},
+  "a11y": {
+    "role": "generic",
+    "labeling": [],
+    "keyboard": [],
+    "apgPattern": null
+  },
+  "tokens": {
+    "root": [
+      "chip.color.background.default",
+      "chip.color.foreground.primary",
+      "chip.size.padding.default",
+      "chip.size.radius.default",
+      "chip.elevation.default"
+    ]
+  },
+  "ssr": {
+    "hydrateOn": "none"
+  },
+  "rtl": {
+    "flipIcon": false
+  }
+}

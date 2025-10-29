@@ -1,0 +1,68 @@
+@import '../../designTokens/index';
+@use './Chip.tokens.generated.scss' as chipTokens;
+
+.chip {
+  @include chipTokens.vars;
+
+  display: inline-flex;
+  align-items: center;
+  padding: var(--chip-size-padding-default);
+  background: var(--chip-color-background-default);
+  border-radius: var(--chip-size-radius-default);
+  box-shadow: var(--chip-elevation-default)
+    var(--semantic-color-background-imageOverlay);
+
+  // Size variants
+  &.small {
+    padding: var(--chip-size-padding-small, 0.5rem 0.75rem);
+    font-size: var(--chip-size-font-small, 0.875rem);
+  }
+
+  &.medium {
+    padding: var(--chip-size-padding-default);
+    font-size: var(--chip-size-font-default, 1rem);
+  }
+
+  &.large {
+    padding: var(--chip-size-padding-large, 0.75rem 1rem);
+    font-size: var(--chip-size-font-large, 1.125rem);
+  }
+
+  // Variant styles
+  &.filled {
+    background: var(
+      --chip-color-background-filled,
+      var(--semantic-color-surface-primary)
+    );
+    color: var(
+      --chip-color-foreground-filled,
+      var(--semantic-color-text-on-primary)
+    );
+  }
+
+  &.outlined {
+    background: transparent;
+    border: 1px solid
+      var(--chip-color-border-outlined, var(--semantic-color-border-default));
+    color: var(
+      --chip-color-foreground-outlined,
+      var(--semantic-color-text-primary)
+    );
+  }
+
+  // Clickable state
+  &.clickable {
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: 2px solid var(--semantic-color-border-accent);
+      outline-offset: 2px;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chip {
+    // No animations for reduced motion
+  }
+}

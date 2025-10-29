@@ -4,16 +4,15 @@
  * Validates individual component token files for accessibility compliance
  */
 
+import fs from 'fs';
+import { glob } from 'glob';
+import path from 'path';
 import {
   validateColorPair,
   type ColorPair,
   type ValidationResult,
-  WCAG_LEVELS,
   type WCAGLevel,
-} from "./tokenValidator";
-import fs from "fs";
-import path from "path";
-import { glob } from "glob";
+} from './tokenValidator.js';
 
 export interface ComponentTokenValidation {
   componentName: string;
@@ -32,108 +31,108 @@ const COMPONENT_COLOR_PATTERNS = {
   // Text-based components
   text: [
     {
-      fg: "color",
-      bg: "background",
-      context: "Text color on background",
-      level: "AA_NORMAL" as WCAGLevel,
+      fg: 'color',
+      bg: 'background',
+      context: 'Text color on background',
+      level: 'AA_NORMAL' as WCAGLevel,
     },
   ],
 
   // Interactive components
   button: [
     {
-      fg: "color",
-      bg: "background",
-      context: "Button text on button background",
-      level: "AA_NORMAL" as WCAGLevel,
+      fg: 'color',
+      bg: 'background',
+      context: 'Button text on button background',
+      level: 'AA_NORMAL' as WCAGLevel,
     },
     {
-      fg: "colorHover",
-      bg: "backgroundHover",
-      context: "Button text on hover background",
-      level: "AA_NORMAL" as WCAGLevel,
+      fg: 'colorHover',
+      bg: 'backgroundHover',
+      context: 'Button text on hover background',
+      level: 'AA_NORMAL' as WCAGLevel,
     },
     {
-      fg: "colorDisabled",
-      bg: "backgroundDisabled",
-      context: "Disabled button text",
-      level: "AA_LARGE" as WCAGLevel,
+      fg: 'colorDisabled',
+      bg: 'backgroundDisabled',
+      context: 'Disabled button text',
+      level: 'AA_LARGE' as WCAGLevel,
     },
   ],
 
   // Input components
   input: [
     {
-      fg: "color",
-      bg: "background",
-      context: "Input text color",
-      level: "AA_NORMAL" as WCAGLevel,
+      fg: 'color',
+      bg: 'background',
+      context: 'Input text color',
+      level: 'AA_NORMAL' as WCAGLevel,
     },
     {
-      fg: "placeholder",
-      bg: "background",
-      context: "Placeholder text",
-      level: "AA_LARGE" as WCAGLevel,
+      fg: 'placeholder',
+      bg: 'background',
+      context: 'Placeholder text',
+      level: 'AA_LARGE' as WCAGLevel,
     },
     {
-      fg: "colorFocused",
-      bg: "backgroundFocused",
-      context: "Focused input text",
-      level: "AA_NORMAL" as WCAGLevel,
+      fg: 'colorFocused',
+      bg: 'backgroundFocused',
+      context: 'Focused input text',
+      level: 'AA_NORMAL' as WCAGLevel,
     },
   ],
 
   // Card/container components
   card: [
     {
-      fg: "color",
-      bg: "background",
-      context: "Card text on card background",
-      level: "AA_NORMAL" as WCAGLevel,
+      fg: 'color',
+      bg: 'background',
+      context: 'Card text on card background',
+      level: 'AA_NORMAL' as WCAGLevel,
     },
     {
-      fg: "colorSecondary",
-      bg: "background",
-      context: "Secondary card text",
-      level: "AA_NORMAL" as WCAGLevel,
+      fg: 'colorSecondary',
+      bg: 'background',
+      context: 'Secondary card text',
+      level: 'AA_NORMAL' as WCAGLevel,
     },
   ],
 
   // Status components
   alert: [
     {
-      fg: "color",
-      bg: "background",
-      context: "Alert text on alert background",
-      level: "AA_NORMAL" as WCAGLevel,
+      fg: 'color',
+      bg: 'background',
+      context: 'Alert text on alert background',
+      level: 'AA_NORMAL' as WCAGLevel,
     },
     {
-      fg: "colorIcon",
-      bg: "background",
-      context: "Alert icon color",
-      level: "AA_NORMAL" as WCAGLevel,
+      fg: 'colorIcon',
+      bg: 'background',
+      context: 'Alert icon color',
+      level: 'AA_NORMAL' as WCAGLevel,
     },
   ],
 
   // Navigation components
   navigation: [
     {
-      fg: "color",
-      bg: "background",
-      context: "Navigation text",
-      level: "AA_NORMAL" as WCAGLevel,
+      fg: 'color',
+      bg: 'background',
+      context: 'Navigation text',
+      level: 'AA_NORMAL' as WCAGLevel,
     },
     {
-      fg: "colorActive",
-      bg: "backgroundActive",
-      context: "Active navigation item",
-      level: "AA_NORMAL" as WCAGLevel,
+      fg: 'colorActive',
+      bg: 'backgroundActive',
+      context: 'Active navigation item',
+      level: 'AA_NORMAL' as WCAGLevel,
     },
     {
-      fg: "colorHover",
-      bg: "backgroundHover",
-      context: "Hovered navigation item",
-      level: "AA_NORMAL" as WCAGLevel,
+      fg: 'colorHover',
+      bg: 'backgroundHover',
+      context: 'Hovered navigation item',
+      level: 'AA_NORMAL' as WCAGLevel,
     },
   ],
 };
@@ -148,7 +147,7 @@ function extractComponentColorPairs(
   const pairs: ColorPair[] = [];
 
   try {
-    const tokenContent = fs.readFileSync(tokenFilePath, "utf8");
+    const tokenContent = fs.readFileSync(tokenFilePath, 'utf8');
     const tokenData = JSON.parse(tokenContent);
     const tokens = tokenData.tokens || {};
 
@@ -180,9 +179,10 @@ function extractComponentColorPairs(
     const commonPairs = extractCommonColorPairs(tokens, componentName);
     pairs.push(...commonPairs);
   } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
     console.warn(
       `Warning: Could not parse component tokens for ${componentName}:`,
-      error.message
+      errorMessage
     );
   }
 
@@ -198,25 +198,25 @@ function inferComponentType(
 ): keyof typeof COMPONENT_COLOR_PATTERNS {
   const name = componentName.toLowerCase();
 
-  if (name.includes("button")) return "button";
+  if (name.includes('button')) return 'button';
   if (
-    name.includes("input") ||
-    name.includes("textarea") ||
-    name.includes("field")
+    name.includes('input') ||
+    name.includes('textarea') ||
+    name.includes('field')
   )
-    return "input";
-  if (name.includes("card")) return "card";
+    return 'input';
+  if (name.includes('card')) return 'card';
   if (
-    name.includes("alert") ||
-    name.includes("toast") ||
-    name.includes("notification")
+    name.includes('alert') ||
+    name.includes('toast') ||
+    name.includes('notification')
   )
-    return "alert";
-  if (name.includes("nav") || name.includes("menu") || name.includes("tab"))
-    return "navigation";
+    return 'alert';
+  if (name.includes('nav') || name.includes('menu') || name.includes('tab'))
+    return 'navigation';
 
   // Default to text for unknown components
-  return "text";
+  return 'text';
 }
 
 /**
@@ -249,7 +249,7 @@ function findTokenValue(tokens: any, key: string): string | null {
  * Gets nested object value by dot notation path
  */
 function getNestedValue(obj: any, path: string): any {
-  return path.split(".").reduce((current, key) => current?.[key], obj);
+  return path.split('.').reduce((current, key) => current?.[key], obj);
 }
 
 /**
@@ -260,7 +260,7 @@ function isColorValue(value: string): boolean {
   if (/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(value)) return true;
 
   // Check for design token references
-  if (value.startsWith("{") && value.endsWith("}")) return true;
+  if (value.startsWith('{') && value.endsWith('}')) return true;
 
   // Check for CSS color functions
   if (/^(rgb|rgba|hsl|hsla)\(/.test(value)) return true;
@@ -274,7 +274,7 @@ function isColorValue(value: string): boolean {
 function resolveColorValue(value: string): string {
   // If it's a token reference, we'd need to resolve it from the global tokens
   // For now, return as-is if it's a direct color value
-  if (value.startsWith("#")) return value;
+  if (value.startsWith('#')) return value;
 
   // For token references, we'll need to resolve them later
   // This is a simplified version - in practice, you'd resolve against global tokens
@@ -293,16 +293,16 @@ function extractCommonColorPairs(
   // Look for color/background combinations
   const colorKeys = Object.keys(tokens).filter(
     (key) =>
-      key.includes("color") ||
-      key.includes("Color") ||
-      key.includes("foreground")
+      key.includes('color') ||
+      key.includes('Color') ||
+      key.includes('foreground')
   );
 
   const backgroundKeys = Object.keys(tokens).filter(
     (key) =>
-      key.includes("background") ||
-      key.includes("Background") ||
-      key.includes("bg")
+      key.includes('background') ||
+      key.includes('Background') ||
+      key.includes('bg')
   );
 
   // Create pairs for each color/background combination
@@ -316,7 +316,7 @@ function extractCommonColorPairs(
           foreground: resolveColorValue(colorValue),
           background: resolveColorValue(bgValue),
           context: `${componentName}: ${colorKey} on ${bgKey}`,
-          requiredLevel: "AA_NORMAL" as WCAGLevel,
+          requiredLevel: 'AA_NORMAL' as WCAGLevel,
         });
       }
     });
@@ -331,14 +331,14 @@ function extractCommonColorPairs(
 export function validateComponentTokens(
   tokenFilePath: string
 ): ComponentTokenValidation {
-  const componentName = path.basename(tokenFilePath, ".tokens.json");
+  const componentName = path.basename(tokenFilePath, '.tokens.json');
   const colorPairs = extractComponentColorPairs(tokenFilePath, componentName);
   const results = colorPairs.map(validateColorPair);
 
   const isValid = results.every((r) => r.isValid);
   const issues = results
     .filter((r) => !r.isValid)
-    .map((r) => r.suggestion || "Unknown issue");
+    .map((r) => r.suggestion || 'Unknown issue');
 
   return {
     componentName,
@@ -356,7 +356,7 @@ export function validateComponentTokens(
 export async function validateAllComponentTokens(
   componentsDir: string
 ): Promise<ComponentTokenValidation[]> {
-  const tokenFiles = await glob("**/*.tokens.json", { cwd: componentsDir });
+  const tokenFiles = await glob('**/*.tokens.json', { cwd: componentsDir });
   const validations: ComponentTokenValidation[] = [];
 
   for (const tokenFile of tokenFiles) {
@@ -374,8 +374,8 @@ export async function validateAllComponentTokens(
 export function generateComponentReport(
   validations: ComponentTokenValidation[]
 ): string {
-  let output = "\n🧩 COMPONENT TOKEN ACCESSIBILITY REPORT\n";
-  output += "═".repeat(50) + "\n\n";
+  let output = '\n🧩 COMPONENT TOKEN ACCESSIBILITY REPORT\n';
+  output += '═'.repeat(50) + '\n\n';
 
   const totalComponents = validations.length;
   const validComponents = validations.filter((v) => v.isValid).length;
@@ -390,7 +390,7 @@ export function generateComponentReport(
   const invalidValidations = validations.filter((v) => !v.isValid);
   if (invalidValidations.length > 0) {
     output += `❌ COMPONENTS WITH ISSUES:\n`;
-    output += "─".repeat(50) + "\n";
+    output += '─'.repeat(50) + '\n';
 
     invalidValidations.forEach((validation) => {
       output += `🧩 ${validation.componentName}\n`;
@@ -406,7 +406,7 @@ export function generateComponentReport(
           )} (required: ${result.requiredRatio})\n`;
           output += `      💡 ${result.suggestion}\n`;
         });
-      output += "\n";
+      output += '\n';
     });
   }
 
@@ -414,7 +414,7 @@ export function generateComponentReport(
   const validValidations = validations.filter((v) => v.isValid);
   if (validValidations.length > 0) {
     output += `✅ VALID COMPONENTS:\n`;
-    output += "─".repeat(50) + "\n";
+    output += '─'.repeat(50) + '\n';
     validValidations.forEach((validation) => {
       output += `🧩 ${validation.componentName} - ${validation.colorPairs.length} pairs validated\n`;
     });

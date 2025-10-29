@@ -3,7 +3,7 @@ import type { JSONContent } from '@tiptap/react';
 
 // Mock generateHTML to work in test environment
 vi.mock('@tiptap/html', () => ({
-  generateHTML: vi.fn((doc, extensions) => {
+  generateHTML: vi.fn((doc: JSONContent, extensions: unknown[]) => {
     // Simple mock that returns basic HTML structure
     const content = doc.content || [];
     const htmlParts = content.map((node: any) => {

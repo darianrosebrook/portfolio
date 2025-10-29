@@ -1,6 +1,6 @@
 'use client';
 // layout for component-standards that contains breadcrumbs
-import { useBreadcrumbs } from '@/hooks/useBreadcrumbs';
+// import { useBreadcrumbs } from '@/hooks/useBreadcrumbs';
 // import { Breadcrumbs } from '@/ui/components/Breadcrumbs/Breadcrumbs';
 import { PageTransition } from '@/ui/components/PageTransition';
 import React from 'react';
@@ -10,49 +10,49 @@ export default function ComponentStandardsLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const base = {
-    label: 'Component Standards',
-    href: '/blueprints/component-standards',
-  };
+  // const base = {
+  //   label: 'Component Standards',
+  //   href: '/blueprints/component-standards',
+  // };
 
   // Map slug segments to friendly labels
-  const labelMap: Record<string, string> = {
-    'component-complexity': 'Component Complexity',
-    primitives: 'Primitives',
-    compound: 'Compound',
-    composer: 'Composer',
-    assemblies: 'Assemblies',
-    'component-contracts': 'Component Contracts',
-    'design-tokens': 'Design Tokens',
-    accessibility: 'Accessibility',
-    testing: 'Testing',
-    documentation: 'Documentation',
-    // Component-specific labels will be handled dynamically
-    button: 'Button',
-    input: 'Input',
-    card: 'Card',
-    dialog: 'Dialog',
-    avatar: 'Avatar',
-    badge: 'Badge',
-    breadcrumbs: 'Breadcrumbs',
-    divider: 'Divider',
-    field: 'Field',
-    icon: 'Icon',
-    image: 'Image',
-    popover: 'Popover',
-    select: 'Select',
-    sidebar: 'Sidebar',
-    spinner: 'Spinner',
-    switch: 'Switch',
-    tabs: 'Tabs',
-    text: 'Text',
-    'text-field': 'Text Field',
-    toast: 'Toast',
-    tooltip: 'Tooltip',
-    toolbar: 'Toolbar',
-  };
+  // const labelMap: Record<string, string> = {
+  //   'component-complexity': 'Component Complexity',
+  //   primitives: 'Primitives',
+  //   compound: 'Compound',
+  //   composer: 'Composer',
+  //   assemblies: 'Assemblies',
+  //   'component-contracts': 'Component Contracts',
+  //   'design-tokens': 'Design Tokens',
+  //   accessibility: 'Accessibility',
+  //   testing: 'Testing',
+  //   documentation: 'Documentation',
+  //   // Component-specific labels will be handled dynamically
+  //   button: 'Button',
+  //   input: 'Input',
+  //   card: 'Card',
+  //   dialog: 'Dialog',
+  //   avatar: 'Avatar',
+  //   badge: 'Badge',
+  //   breadcrumbs: 'Breadcrumbs',
+  //   divider: 'Divider',
+  //   field: 'Field',
+  //   icon: 'Icon',
+  //   image: 'Image',
+  //   popover: 'Popover',
+  //   select: 'Select',
+  //   sidebar: 'Sidebar',
+  //   spinner: 'Spinner',
+  //   switch: 'Switch',
+  //   tabs: 'Tabs',
+  //   text: 'Text',
+  //   'text-field': 'Text Field',
+  //   toast: 'Toast',
+  //   tooltip: 'Tooltip',
+  //   toolbar: 'Toolbar',
+  // };
 
-  const crumbs = useBreadcrumbs({ base, labelMap });
+  // const crumbs = useBreadcrumbs({ base, labelMap });
 
   return (
     <PageTransition transitionName="component-standards-layout" duration={300}>

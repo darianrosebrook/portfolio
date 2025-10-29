@@ -4,8 +4,8 @@ import * as React from 'react';
 import { useSheet, UseSheetOptions, UseSheetReturn } from './useSheet';
 
 interface SheetContextValue extends UseSheetReturn {
-  contentRef: React.RefObject<HTMLDivElement>;
-  triggerRef: React.RefObject<HTMLButtonElement>;
+  contentRef: React.RefObject<HTMLDivElement | null>;
+  triggerRef: React.RefObject<HTMLButtonElement | null>;
 }
 
 const SheetContext = React.createContext<SheetContextValue | null>(null);

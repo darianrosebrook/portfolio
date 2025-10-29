@@ -1562,15 +1562,15 @@
         "color": {
           "text": {
             "$type": "color",
-            "$value": "{semantic.color.foreground.primary}"
+            "$value": "{core.color.display.foreground.primary}"
           },
           "bg": {
             "$type": "color",
-            "$value": "{semantic.color.background.primary}"
+            "$value": "{core.color.display.background.primary}"
           },
           "border": {
             "$type": "color",
-            "$value": "{semantic.color.border.subtle}"
+            "$value": "{core.color.display.border.subtle}"
           },
           "focus": {
             "$type": "color",
@@ -1581,11 +1581,11 @@
       "test": {
         "dsSemanticColorBgPrimary": {
           "$type": "color",
-          "$value": "{semantic.color.background.primary}"
+          "$value": "{core.color.display.background.primary}"
         },
         "customSemanticColorBgPrimary": {
           "$type": "color",
-          "$value": "{semantic.color.background.primary}"
+          "$value": "{core.color.display.background.primary}"
         },
         "myCustomBg": {
           "$type": "color",
@@ -3436,47 +3436,47 @@
       "text": {
         "hover": {
           "$type": "color",
-          "$value": "{semantic.color.foreground.secondary}"
+          "$value": "{core.color.display.foreground.secondary}"
         },
         "active": {
           "$type": "color",
-          "$value": "{semantic.color.foreground.primary}"
+          "$value": "{core.color.display.foreground.primary}"
         },
         "disabled": {
           "$type": "color",
-          "$value": "{semantic.color.foreground.disabled}"
+          "$value": "{core.color.display.foreground.disabled}"
         }
       },
       "background": {
         "hover": {
           "$type": "color",
-          "$value": "{semantic.color.background.hover}"
+          "$value": "{core.color.action.background.secondary.hover}"
         },
         "active": {
           "$type": "color",
-          "$value": "{semantic.color.background.active}"
+          "$value": "{core.color.action.background.secondary.active}"
         },
         "selected": {
           "$type": "color",
-          "$value": "{semantic.color.background.highlight}"
+          "$value": "{core.color.display.background.highlight}"
         },
         "disabled": {
           "$type": "color",
-          "$value": "{semantic.color.background.disabled}"
+          "$value": "{core.color.action.background.primary.disabled}"
         }
       },
       "border": {
         "hover": {
           "$type": "color",
-          "$value": "{semantic.color.border.primary}"
+          "$value": "{core.color.action.border.secondary.hover}"
         },
         "active": {
           "$type": "color",
-          "$value": "{semantic.color.border.bold}"
+          "$value": "{core.color.display.border.bold}"
         },
         "disabled": {
           "$type": "color",
-          "$value": "{semantic.color.border.disabled}"
+          "$value": "{core.color.display.border.disabled}"
         }
       }
     },
@@ -3529,11 +3529,11 @@
     "link": {
       "text": {
         "$type": "color",
-        "$value": "{semantic.color.foreground.link}"
+        "$value": "{core.color.display.foreground.link.default}"
       },
       "decorationColor": {
         "$type": "color",
-        "$value": "{semantic.color.foreground.link}"
+        "$value": "{core.color.display.foreground.link.default}"
       },
       "decorationThickness": {
         "$type": "dimension",
@@ -3545,11 +3545,11 @@
       },
       "hover.text": {
         "$type": "color",
-        "$value": "{semantic.color.foreground.linkHover}"
+        "$value": "{core.color.display.foreground.link.hover}"
       },
       "visited.text": {
         "$type": "color",
-        "$value": "{semantic.color.foreground.linkVisited}"
+        "$value": "{core.color.display.foreground.link.visited}"
       }
     },
     "skeleton": {
@@ -3651,7 +3651,7 @@
       "pagination": {
         "gapX": {
           "$type": "dimension",
-          "$value": "{core.component.pagination.gap.x}"
+          "$value": "{core.spacing.size.02}"
         },
         "minSize": {
           "$type": "dimension",
@@ -3660,7 +3660,7 @@
       },
       "foreground": {
         "$type": "color",
-        "$value": "{core.component.foreground.default}"
+        "$value": "{core.color.display.foreground.primary}"
       },
       "typography": {
         "variation": {
@@ -3677,43 +3677,43 @@
       "otp": {
         "fieldGap": {
           "$type": "dimension",
-          "$value": "{core.component.otp.field.gap}"
+          "$value": "{core.spacing.size.02}"
         },
         "fieldMinWidth": {
           "$type": "dimension",
-          "$value": "{core.component.otp.field.minWidth}"
+          "$value": "48px"
         },
         "fieldHeight": {
           "$type": "dimension",
-          "$value": "{core.component.otp.field.height}"
+          "$value": "48px"
         },
         "fieldFontSize": {
           "$type": "dimension",
-          "$value": "{core.component.otp.field.fontSize}"
+          "$value": "{core.typography.ramp.4}"
         },
         "fieldFontWeight": {
           "$type": "fontWeight",
-          "$value": "{core.component.otp.field.fontWeight}"
+          "$value": "{core.typography.weight.medium}"
         },
         "fieldRadius": {
           "$type": "borderRadius",
-          "$value": "{core.component.otp.field.radius}"
+          "$value": "{core.shape.radius.02}"
         },
         "colorText": {
           "$type": "color",
-          "$value": "{core.component.otp.color.text}"
+          "$value": "{core.color.display.foreground.primary}"
         },
         "colorBg": {
           "$type": "color",
-          "$value": "{core.component.otp.color.bg}"
+          "$value": "{core.color.display.background.primary}"
         },
         "colorBorder": {
           "$type": "color",
-          "$value": "{core.component.otp.color.border}"
+          "$value": "{core.color.display.border.subtle}"
         },
         "colorFocus": {
           "$type": "color",
-          "$value": "{core.component.otp.color.focus}"
+          "$value": "{core.color.palette.red.500}"
         }
       },
       "test": {

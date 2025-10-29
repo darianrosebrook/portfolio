@@ -1,0 +1,49 @@
+{
+  "name": "Checkbox",
+  "layer": "primitive",
+  "anatomy": ["root", "input", "indicator"],
+  "variants": {
+    "size": ["sm", "md", "lg"]
+  },
+  "states": [
+    "default",
+    "checked",
+    "unchecked",
+    "indeterminate",
+    "disabled",
+    "hover",
+    "focus"
+  ],
+  "slots": {},
+  "a11y": {
+    "role": "checkbox",
+    "labeling": ["aria-label", "aria-labelledby"],
+    "keyboard": ["Space", "Enter"],
+    "apgPattern": "checkbox"
+  },
+  "tokens": {
+    "root": [
+      "checkbox.color.background.default",
+      "checkbox.color.background.checked",
+      "checkbox.color.background.indeterminate",
+      "checkbox.color.border.default",
+      "checkbox.color.border.hover",
+      "checkbox.color.border.focus",
+      "checkbox.size.width.sm",
+      "checkbox.size.width.md",
+      "checkbox.size.width.lg",
+      "checkbox.size.height.sm",
+      "checkbox.size.height.md",
+      "checkbox.size.height.lg",
+      "checkbox.size.border-radius",
+      "checkbox.elevation.default"
+    ]
+  },
+  "ssr": {
+    "hydrateOn": "interaction"
+  },
+  "rtl": {
+    "flipIcon": false
+  }
+}
+

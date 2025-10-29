@@ -7,17 +7,35 @@ const Slot = React.forwardRef<
   React.HTMLAttributes<HTMLElement> & { children: React.ReactElement }
 >(({ children, ...props }, ref) => {
   if (React.isValidElement(children)) {
-    return React.cloneElement(children, {
-      ...props,
-      ...children.props,
-      ref,
-      className: [props.className, children.props.className]
-        .filter(Boolean)
-        .join(' '),
-    });
+    const { className, ...rest } = props;
+    const childClassName = [
+      className,
+      (children.props as React.HTMLAttributes<HTMLElement>).className,
+    ]
+      .filter(Boolean)
+      .join(' ');
+
+    const childProps = {
+      ...rest,
+      ...(children.props as React.HTMLAttributes<HTMLElement>),
+      className: childClassName,
+    };
+
+    // Handle ref properly
+    if (ref) {
+      if (typeof ref === 'function') {
+        (childProps as any).ref = ref;
+      } else {
+        (childProps as any).ref = ref;
+      }
+    }
+
+    return React.cloneElement(children, childProps);
   }
   return null;
 });
+
+Slot.displayName = 'Slot';
 
 export type ButtonSize = 'small' | 'medium' | 'large';
 export type ButtonVariant =
@@ -72,7 +90,10 @@ interface ButtonAsAnchor
 
 export type ButtonProps = ButtonAsButton | ButtonAsAnchor;
 
-const Button: React.FC<ButtonProps> = ({
+const Button = React.forwardRef<
+  HTMLButtonElement | HTMLAnchorElement,
+  ButtonProps
+>(({
   as = 'button',
   size = 'medium',
   variant = 'primary',
@@ -87,7 +108,7 @@ const Button: React.FC<ButtonProps> = ({
   asChild = false,
   children,
   ...rest
-}) => {
+}, ref) => {
   const baseClassName = styles.button;
   const sizeClassName = styles[size];
   const variantClassName = styles[variant];
@@ -154,6 +175,9 @@ const Button: React.FC<ButtonProps> = ({
 
   // Handle asChild pattern
   if (asChild) {
+    const childElement = React.isValidElement(children) ? children : null;
+    if (!childElement) return null;
+    
     return (
       <Slot
         className={combinedClassName}
@@ -161,7 +185,9 @@ const Button: React.FC<ButtonProps> = ({
         {...ariaProps}
         data-slot="button"
       >
-        {children as React.ReactElement}
+        {React.cloneElement(childElement, {
+          ref,
+        } as any)}
       </Slot>
     );
   }
@@ -170,6 +196,7 @@ const Button: React.FC<ButtonProps> = ({
     const { href, ...anchorRest } = rest as ButtonAsAnchor;
     return (
       <a
+        ref={ref as React.Ref<HTMLAnchorElement>}
         href={href}
         className={combinedClassName}
         title={title}
@@ -184,6 +211,7 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
+      ref={ref as React.Ref<HTMLButtonElement>}
       className={combinedClassName}
       disabled={disabled}
       title={title}
@@ -194,6 +222,8 @@ const Button: React.FC<ButtonProps> = ({
       {renderChildren()}
     </button>
   );
-};
+});
 
-export default React.memo(Button);
+Button.displayName = 'Button';
+
+export default React.memo(Button) as typeof Button;

@@ -5,9 +5,9 @@
  * focusing on color contrast ratios and other accessibility requirements.
  */
 
-import { contrastRatioHex, hexToRgb, type RGB } from "../helpers/colorHelpers";
-import fs from "fs";
-import path from "path";
+import fs from 'fs';
+import path from 'path';
+import { contrastRatioHex } from '../helpers/colorHelpers';
 
 // WCAG 2.1 Contrast Requirements
 export const WCAG_LEVELS = {
@@ -111,89 +111,127 @@ export function extractColorPairsFromTokens(tokensPath: string): ColorPair[] {
 
   try {
     // Read the composed design tokens
-    const tokensFile = fs.readFileSync(tokensPath, "utf8");
+    const tokensFile = fs.readFileSync(tokensPath, 'utf8');
     const tokens = JSON.parse(tokensFile);
 
     // Extract semantic color tokens
     const semanticColors = tokens.semantic?.color || {};
 
-    // Define common color pair patterns
+    // Helper function to get token value with proper resolution
+    const getTokenValue = (tokenObj: any): string | null => {
+      if (typeof tokenObj === 'string') return tokenObj;
+      if (tokenObj?.$value)
+        return resolveTokenReference(tokenObj.$value, tokens);
+      return null;
+    };
+
+    // Define common color pair patterns based on our actual token structure
     const colorPairPatterns = [
-      // Text on backgrounds
+      // Action (button) tokens
       {
-        fg: semanticColors.foreground?.primary,
-        bg: semanticColors.background?.primary,
-        context: "Primary text on primary background",
-        level: "AA_NORMAL" as WCAGLevel,
+        fg: getTokenValue(semanticColors.action?.foreground?.primary?.default),
+        bg: getTokenValue(semanticColors.action?.background?.primary?.default),
+        context: 'Primary action: text on default background',
+        level: 'AA_NORMAL' as WCAGLevel,
       },
       {
-        fg: semanticColors.foreground?.secondary,
-        bg: semanticColors.background?.primary,
-        context: "Secondary text on primary background",
-        level: "AA_NORMAL" as WCAGLevel,
+        fg: getTokenValue(semanticColors.action?.foreground?.primary?.hover),
+        bg: getTokenValue(semanticColors.action?.background?.primary?.hover),
+        context: 'Primary action: text on hover background',
+        level: 'AA_NORMAL' as WCAGLevel,
       },
       {
-        fg: semanticColors.foreground?.primary,
-        bg: semanticColors.background?.secondary,
-        context: "Primary text on secondary background",
-        level: "AA_NORMAL" as WCAGLevel,
+        fg: getTokenValue(semanticColors.action?.foreground?.primary?.disabled),
+        bg: getTokenValue(semanticColors.action?.background?.primary?.disabled),
+        context: 'Primary action: disabled text',
+        level: 'AA_LARGE' as WCAGLevel, // Lower requirement for disabled state
       },
       {
-        fg: semanticColors.foreground?.primary,
-        bg: semanticColors.background?.elevated,
-        context: "Primary text on elevated background",
-        level: "AA_NORMAL" as WCAGLevel,
+        fg: getTokenValue(
+          semanticColors.action?.foreground?.secondary?.default
+        ),
+        bg: getTokenValue(
+          semanticColors.action?.background?.secondary?.default
+        ),
+        context: 'Secondary action: text on default background',
+        level: 'AA_NORMAL' as WCAGLevel,
       },
-      // Interactive elements
+      // Navigation tokens
       {
-        fg: semanticColors.foreground?.onAccent,
-        bg: semanticColors.background?.accent,
-        context: "Text on accent/primary buttons",
-        level: "AA_NORMAL" as WCAGLevel,
-      },
-      {
-        fg: semanticColors.foreground?.accent,
-        bg: semanticColors.background?.primary,
-        context: "Accent text on primary background",
-        level: "AA_NORMAL" as WCAGLevel,
-      },
-      // Status colors
-      {
-        fg: semanticColors.status?.success,
-        bg: semanticColors.background?.primary,
-        context: "Success status text",
-        level: "AA_NORMAL" as WCAGLevel,
+        fg: getTokenValue(
+          semanticColors.navigation?.foreground?.primary?.default
+        ),
+        bg: getTokenValue(
+          semanticColors.navigation?.background?.primary?.default
+        ),
+        context: 'Navigation: primary text on background',
+        level: 'AA_NORMAL' as WCAGLevel,
       },
       {
-        fg: semanticColors.status?.warning,
-        bg: semanticColors.background?.primary,
-        context: "Warning status text",
-        level: "AA_NORMAL" as WCAGLevel,
+        fg: getTokenValue(
+          semanticColors.navigation?.foreground?.primary?.active
+        ),
+        bg: getTokenValue(
+          semanticColors.navigation?.background?.primary?.active
+        ),
+        context: 'Navigation: active text on background',
+        level: 'AA_NORMAL' as WCAGLevel,
+      },
+      // Feedback (status) tokens
+      {
+        fg: getTokenValue(
+          semanticColors.feedback?.foreground?.success?.default
+        ),
+        bg: getTokenValue(
+          semanticColors.feedback?.background?.success?.default
+        ),
+        context: 'Success feedback: text on background',
+        level: 'AA_NORMAL' as WCAGLevel,
       },
       {
-        fg: semanticColors.status?.danger,
-        bg: semanticColors.background?.primary,
-        context: "Error status text",
-        level: "AA_NORMAL" as WCAGLevel,
+        fg: getTokenValue(
+          semanticColors.feedback?.foreground?.warning?.default
+        ),
+        bg: getTokenValue(
+          semanticColors.feedback?.background?.warning?.default
+        ),
+        context: 'Warning feedback: text on background',
+        level: 'AA_NORMAL' as WCAGLevel,
       },
       {
-        fg: semanticColors.status?.info,
-        bg: semanticColors.background?.primary,
-        context: "Info status text",
-        level: "AA_NORMAL" as WCAGLevel,
-      },
-      // Border contrasts (lower requirement)
-      {
-        fg: semanticColors.border?.subtle,
-        bg: semanticColors.background?.primary,
-        context: "Subtle borders",
-        level: "AA_LARGE" as WCAGLevel, // Lower requirement for non-text
+        fg: getTokenValue(semanticColors.feedback?.foreground?.error?.default),
+        bg: getTokenValue(semanticColors.feedback?.background?.error?.default),
+        context: 'Error feedback: text on background',
+        level: 'AA_NORMAL' as WCAGLevel,
       },
       {
-        fg: semanticColors.border?.primary,
-        bg: semanticColors.background?.primary,
-        context: "Primary borders",
-        level: "AA_LARGE" as WCAGLevel,
+        fg: getTokenValue(semanticColors.feedback?.foreground?.info?.default),
+        bg: getTokenValue(semanticColors.feedback?.background?.info?.default),
+        context: 'Info feedback: text on background',
+        level: 'AA_NORMAL' as WCAGLevel,
+      },
+      // Display (content) tokens
+      {
+        fg: getTokenValue(semanticColors.display?.foreground?.primary?.default),
+        bg: getTokenValue(semanticColors.display?.background?.primary?.default),
+        context: 'Display: primary text on primary background',
+        level: 'AA_NORMAL' as WCAGLevel,
+      },
+      {
+        fg: getTokenValue(
+          semanticColors.display?.foreground?.secondary?.default
+        ),
+        bg: getTokenValue(semanticColors.display?.background?.primary?.default),
+        context: 'Display: secondary text on primary background',
+        level: 'AA_NORMAL' as WCAGLevel,
+      },
+      {
+        fg: getTokenValue(
+          semanticColors.display?.foreground?.tertiary?.default
+        ),
+        bg: getTokenValue(semanticColors.display?.background?.primary?.default),
+        context: 'Display: tertiary text on primary background',
+        level: 'AA_NORMAL' as WCAGLevel,
       },
     ];
 
@@ -214,10 +252,40 @@ export function extractColorPairsFromTokens(tokensPath: string): ColorPair[] {
       }
     });
   } catch (error) {
-    console.error("Error reading design tokens:", error);
+    console.error('Error reading design tokens:', error);
   }
 
   return pairs;
+}
+
+/**
+ * Resolves token references like {core.color.mode.dark}
+ */
+function resolveTokenReference(value: string, tokens: any): string {
+  if (
+    typeof value !== 'string' ||
+    !value.startsWith('{') ||
+    !value.endsWith('}')
+  ) {
+    return value;
+  }
+
+  const path = value.slice(1, -1); // Remove { and }
+  const parts = path.split('.');
+
+  let current = tokens;
+  for (const part of parts) {
+    current = current?.[part];
+    if (!current) return value; // Return original if path not found
+  }
+
+  // If we found a token object, get its $value
+  if (current?.$value) {
+    // Recursively resolve in case of nested references
+    return resolveTokenReference(current.$value, tokens);
+  }
+
+  return current || value;
 }
 
 /**
@@ -275,8 +343,8 @@ export function generateAccessibilityReport(
 ): string {
   const { totalPairs, validPairs, invalidPairs, results, summary } = report;
 
-  let output = "\n🎨 DESIGN TOKEN ACCESSIBILITY REPORT\n";
-  output += "═".repeat(50) + "\n\n";
+  let output = '\n🎨 DESIGN TOKEN ACCESSIBILITY REPORT\n';
+  output += '═'.repeat(50) + '\n\n';
 
   // Summary
   output += `📊 SUMMARY:\n`;
@@ -299,7 +367,7 @@ export function generateAccessibilityReport(
   const failingResults = results.filter((r) => !r.isValid);
   if (failingResults.length > 0) {
     output += `❌ FAILING PAIRS:\n`;
-    output += "─".repeat(50) + "\n";
+    output += '─'.repeat(50) + '\n';
 
     failingResults.forEach((result, index) => {
       output += `${index + 1}. ${result.context}\n`;
@@ -316,11 +384,11 @@ export function generateAccessibilityReport(
   const passingResults = results.filter((r) => r.isValid);
   if (passingResults.length > 0) {
     output += `✅ PASSING PAIRS:\n`;
-    output += "─".repeat(50) + "\n";
+    output += '─'.repeat(50) + '\n';
 
     passingResults.forEach((result, index) => {
       const level =
-        result.contrastRatio >= WCAG_LEVELS.AAA_NORMAL ? "AAA" : "AA";
+        result.contrastRatio >= WCAG_LEVELS.AAA_NORMAL ? 'AAA' : 'AA';
       output += `${index + 1}. ${
         result.context
       } - ${result.contrastRatio.toFixed(2)} (${level})\n`;
@@ -338,7 +406,7 @@ export async function runAccessibilityValidation(
 ): Promise<void> {
   const defaultTokensPath = path.join(
     process.cwd(),
-    "ui/designTokens/designTokens.json"
+    'ui/designTokens/designTokens.json'
   );
   const finalTokensPath = tokensPath || defaultTokensPath;
 
@@ -356,7 +424,7 @@ export async function runAccessibilityValidation(
   console.log(reportText);
 
   // Write report to file
-  const reportPath = path.join(process.cwd(), "accessibility-report.txt");
+  const reportPath = path.join(process.cwd(), 'accessibility-report.txt');
   fs.writeFileSync(reportPath, reportText);
   console.log(`📄 Report saved to: ${reportPath}`);
 

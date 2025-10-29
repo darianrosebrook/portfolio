@@ -3,9 +3,9 @@
 import * as React from 'react';
 import { useCommand, UseCommandOptions, UseCommandReturn } from './useCommand';
 
-interface CommandContextValue extends UseCommandReturn {
-  inputRef: React.RefObject<HTMLInputElement>;
-  listRef: React.RefObject<HTMLDivElement>;
+export interface CommandContextValue extends UseCommandReturn {
+  inputRef: React.RefObject<HTMLInputElement | null>;
+  listRef: React.RefObject<HTMLDivElement | null>;
 }
 
 const CommandContext = React.createContext<CommandContextValue | null>(null);

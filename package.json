@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 3000",
-    "build": "npm run tokens:build && stylelint --fix \"**/*.{css,scss}\" && prettier --write . && stylelint --allow-empty-input \"**/*.{css,scss}\" && prettier --check . && next build",
+    "build": "npm run tokens:build && npm run validate:accessibility && stylelint --fix \"**/*.{css,scss}\" && prettier --write . && stylelint --allow-empty-input \"**/*.{css,scss}\" && prettier --check . && next build",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
@@ -22,7 +22,9 @@
     "tokens:schema": "node utils/designTokens/generateSchema.mjs",
     "tokens:validate": "node utils/designTokens/validateTokens.mjs",
     "tokens:inspect": "node utils/designTokens/inspectTokens.mjs",
+    "tokens:accessibility": "tsx scripts/validateAccessibility.ts",
     "validate:components": "node scripts/validateComponents.mjs",
+    "validate:accessibility": "tsx scripts/validateAccessibility.ts",
     "scaffold:component": "node scripts/scaffoldComponent.mjs",
     "generate:components-docs": "node scripts/generateComponentsAndDocs.mjs",
     "generate:contracts": "node scripts/generateContracts.mjs",
