@@ -1,10 +1,10 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type Page } from '@playwright/test';
 
 /**
  * Visual regression tests for individual components
  */
 test.describe('Component Visual Regression', () => {
-  test.beforeEach(async ({ page }) => {
+  test.beforeEach(async ({ page }: { page: Page }) => {
     // Set viewport to a consistent size for visual testing
     await page.setViewportSize({ width: 800, height: 600 });
   });
@@ -86,7 +86,7 @@ test.describe('Component Visual Regression', () => {
     }
   });
 
-  test('card component renders correctly', async ({ page }) => {
+  test('card component renders correctly', async ({ page }: { page: Page }) => {
     await page.goto('/blueprints');
 
     // Wait for the page to be fully loaded and stable
@@ -143,7 +143,7 @@ test.describe('Component Visual Regression', () => {
     }
   });
 
-  test('form components render correctly', async ({ page }) => {
+  test('form components render correctly', async ({ page }: { page: Page }) => {
     await page.goto('/component-displaycase');
 
     // Wait for the page to be fully loaded and stable
