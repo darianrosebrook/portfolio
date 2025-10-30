@@ -1,6 +1,6 @@
 /**
  * CSS Custom Properties utility for type-safe custom property declarations
- * 
+ *
  * This utility helps avoid 'as any' type assertions when setting CSS custom properties
  * in React components. It provides proper typing while maintaining flexibility.
  */
@@ -9,7 +9,7 @@ import React from 'react';
 /**
  * Creates a CSSProperties object with custom properties
  * Type-safe way to set CSS custom properties without 'as any'
- * 
+ *
  * @example
  * ```tsx
  * const style = createCSSProperties({
@@ -26,7 +26,7 @@ export function createCSSProperties(
 
 /**
  * Type-safe helper for setting a single CSS custom property
- * 
+ *
  * @example
  * ```tsx
  * const style = {
@@ -41,4 +41,3 @@ export function setCSSProperty(
 ): React.CSSProperties {
   return { [name]: value } as React.CSSProperties;
 }
-

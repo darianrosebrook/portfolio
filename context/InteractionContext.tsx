@@ -50,7 +50,7 @@ export const InteractionProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const { prefersReducedMotion, setPrefersReducedMotion } = useReducedMotion();
-  
+
   // Mouse state - use refs for high-frequency updates, state for infrequent ones
   const mouseRef = useRef<MouseState>({ ...defaultMouse });
   const [mouse, setMouse] = useState<MouseState>({ ...defaultMouse });
@@ -78,7 +78,7 @@ export const InteractionProvider: React.FC<{ children: ReactNode }> = ({
   // Mouse/scroll observer
   useEffect(() => {
     if (prefersReducedMotion) return;
-    
+
     const observer = Observer.create({
       target: window,
       type: 'pointer, wheel, touch',
@@ -112,7 +112,7 @@ export const InteractionProvider: React.FC<{ children: ReactNode }> = ({
         setMouse({ ...mouseRef.current });
       },
     });
-    
+
     return () => {
       observer.kill();
       // Clean up pending animation frame
@@ -126,7 +126,7 @@ export const InteractionProvider: React.FC<{ children: ReactNode }> = ({
   // Scroll tracking with throttling
   useEffect(() => {
     if (prefersReducedMotion) return;
-    
+
     let lastScrollY = window.scrollY;
     let lastScrollX = window.scrollX;
     let ticking = false;
@@ -158,7 +158,7 @@ export const InteractionProvider: React.FC<{ children: ReactNode }> = ({
   // Window size listener with throttling
   useEffect(() => {
     let ticking = false;
-    
+
     const handleResize = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
@@ -174,7 +174,7 @@ export const InteractionProvider: React.FC<{ children: ReactNode }> = ({
 
     // Set initial size
     handleResize();
-    
+
     window.addEventListener('resize', handleResize, { passive: true });
     return () => window.removeEventListener('resize', handleResize);
   }, []);

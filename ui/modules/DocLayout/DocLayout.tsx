@@ -80,10 +80,15 @@ export function DocLayoutProvider({
     observerRef.current = new IntersectionObserver((entries) => {
       // Find the most visible section
       let mostVisible = { id: '', ratio: 0 };
-      
+
       entries.forEach((entry) => {
-        const sectionId = entry.target.getAttribute('data-section-id') || entry.target.id;
-        if (sectionId && entry.isIntersecting && entry.intersectionRatio > mostVisible.ratio) {
+        const sectionId =
+          entry.target.getAttribute('data-section-id') || entry.target.id;
+        if (
+          sectionId &&
+          entry.isIntersecting &&
+          entry.intersectionRatio > mostVisible.ratio
+        ) {
           mostVisible = {
             id: sectionId,
             ratio: entry.intersectionRatio,
@@ -112,14 +117,17 @@ export function DocLayoutProvider({
   }, [sections]); // Re-run when sections change
 
   // Register section refs (exposed via context for DocSection to use)
-  const registerSectionRef = useCallback((id: string, element: HTMLElement | null) => {
-    if (element) {
-      sectionRefs.current.set(id, element);
-      observerRef.current?.observe(element);
-    } else {
-      sectionRefs.current.delete(id);
-    }
-  }, []);
+  const registerSectionRef = useCallback(
+    (id: string, element: HTMLElement | null) => {
+      if (element) {
+        sectionRefs.current.set(id, element);
+        observerRef.current?.observe(element);
+      } else {
+        sectionRefs.current.delete(id);
+      }
+    },
+    []
+  );
 
   const contextValue = useMemo(
     () => ({
@@ -297,7 +305,7 @@ interface DocSectionProps {
 
 export function DocSection({ id, children, className = '' }: DocSectionProps) {
   const { activeSection, registerSectionRef } = useDocLayout();
-  
+
   // Register section with IntersectionObserver
   const sectionRef = useCallback(
     (element: HTMLElement | null) => {
@@ -338,7 +346,8 @@ export function DocNavigation({
       if (element) {
         const headerOffset = 80; // Account for sticky elements
         const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        const offsetPosition =
+          elementPosition + window.pageYOffset - headerOffset;
 
         window.scrollTo({
           top: offsetPosition,
@@ -350,16 +359,13 @@ export function DocNavigation({
           window.history.pushState(null, '', `#${id}`);
         }
       }
-      
+
       onSectionClick(id);
     },
     [onSectionClick]
   );
 
-  const memoizedSections = useMemo(
-    () => sections,
-    [sections]
-  );
+  const memoizedSections = useMemo(() => sections, [sections]);
 
   return (
     <nav className={styles.docNavigation}>

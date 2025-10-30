@@ -114,9 +114,13 @@ export function DocInteractive({
   // Stable project reference to prevent CodeWorkbench re-renders
   // Compare by serializing file paths and contents hash
   const projectFilesKey = React.useMemo(
-    () => JSON.stringify(
-      project.files.map((f) => ({ path: f.path, hash: simpleHash(String(f.contents)) }))
-    ),
+    () =>
+      JSON.stringify(
+        project.files.map((f) => ({
+          path: f.path,
+          hash: simpleHash(String(f.contents)),
+        }))
+      ),
     [project.files, simpleHash]
   );
   const stableProject = React.useMemo(() => project, [projectFilesKey]);

@@ -1,18 +1,41 @@
- node_modules
- .next
- .husky
- coverage
- .prettierignore
- .stylelintignore
- .eslintignore
- stories
- storybook-static
- *.log
- playwright-report
- .nyc_output
- test-results
- junit.xml
- docs
-app/designTokens.scss
-scripts/templates/**/*
-.github/workflows/caws.yml
+# Generated files
+**/*.generated.*
+**/*.tokens.generated.*
+
+# Template files (contain template syntax, not valid code)
+**/*.template.*
+scripts/templates/**
+
+# Dependencies
+node_modules
+.next
+out
+build
+coverage
+
+# Build artifacts
+*.tsbuildinfo
+next-env.d.ts
+
+# IDE and system files
+.DS_Store
+.vscode
+.cursorignore
+.cursorrules
+
+# Logs
+*.log
+
+# Environment files
+.env*
+
+# Cache
+**/.cache
+utils/designTokens/.cache
+
+# Test results
+test-results
+playwright-report
+
+# Documentation (can be formatted separately if needed)
+docs/

@@ -1,10 +1,10 @@
 /**
  * Centralized TipTap Extensions Registry
- * 
+ *
  * This module provides a single source of truth for TipTap extensions
  * used across editor and server-side rendering. Ensures consistency
  * between what users can create in the editor and what renders on pages.
- * 
+ *
  * @author @darianrosebrook
  */
 
@@ -57,6 +57,8 @@ export function createEditorExtensions(
   const { articleId } = config;
 
   return [
+    // Cast to Extension[] to satisfy TypeScript
+    // All TipTap extensions (Marks, Nodes) implement Extension
     StarterKit.configure({ codeBlock: false }),
     Dropcursor.configure({
       color: 'var(--color-accent)',
@@ -143,7 +145,7 @@ export function createEditorExtensions(
     CodeBlockExtended,
     SlashCommand,
     CharacterCount,
-  ];
+  ] as Extension[];
 }
 
 /**
@@ -152,6 +154,8 @@ export function createEditorExtensions(
  */
 export function createServerExtensions(): Extension[] {
   return [
+    // Cast to Extension[] to satisfy TypeScript
+    // All TipTap extensions (Marks, Nodes) implement Extension
     StarterKit,
     CharacterCount,
     Image,
@@ -180,7 +184,7 @@ export function createServerExtensions(): Extension[] {
     TaskItem.configure({ nested: true }),
     DetailsServer,
     TableOfContentsServer,
-  ];
+  ] as Extension[];
 }
 
 /**
@@ -190,4 +194,3 @@ export function createServerExtensions(): Extension[] {
 export function createPreviewExtensions(): Extension[] {
   return createServerExtensions();
 }
-

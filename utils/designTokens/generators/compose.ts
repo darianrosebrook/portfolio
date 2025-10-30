@@ -150,12 +150,14 @@ export function composeTokens(incremental = true): boolean {
   if (incremental) {
     const tokenFiles = getTokenFilesToCheck();
     const changedFiles = getChangedFiles(tokenFiles);
-    
+
     if (changedFiles.length === 0 && fs.existsSync(PATHS.tokens)) {
-      console.log('[tokens] ⚡ No token files changed, skipping compose (incremental build)');
+      console.log(
+        '[tokens] ⚡ No token files changed, skipping compose (incremental build)'
+      );
       return true;
     }
-    
+
     if (changedFiles.length > 0) {
       console.log(`[tokens] 📝 ${changedFiles.length} token file(s) changed`);
     }
@@ -216,7 +218,9 @@ export function composeTokens(incremental = true): boolean {
   // Check for deprecated tokens
   const deprecations = findDeprecatedTokens(result);
   if (deprecations.length > 0) {
-    console.log(`\n[tokens] ⚠️  Found ${deprecations.length} deprecated token(s):`);
+    console.log(
+      `\n[tokens] ⚠️  Found ${deprecations.length} deprecated token(s):`
+    );
     deprecations.forEach((dep) => {
       console.log(formatDeprecationWarning(dep.tokenPath, dep));
     });

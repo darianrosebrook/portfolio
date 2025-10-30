@@ -13,19 +13,19 @@ import type { JSONContent } from '@tiptap/react';
 const jsonContentSchema: z.ZodType<JSONContent> = z.lazy(() =>
   z.object({
     type: z.string(),
-    attrs: z.record(z.unknown()).optional(),
+    attrs: z.record(z.string(), z.unknown()).optional(),
     content: z.array(jsonContentSchema).optional(),
     marks: z
       .array(
         z.object({
           type: z.string(),
-          attrs: z.record(z.unknown()).optional(),
+          attrs: z.record(z.string(), z.unknown()).optional(),
         })
       )
       .optional(),
     text: z.string().optional(),
   })
-);
+) as z.ZodType<JSONContent>;
 
 /**
  * Validates that content is a valid TipTap JSONContent document
@@ -50,17 +50,12 @@ export function validateJSONContent(content: unknown): content is JSONContent {
  */
 export const articleBodySchema = z
   .union([
-    jsonContentSchema.refine(
-      (val) => val.type === 'doc',
-      { message: 'Root document must have type "doc"' }
-    ),
+    jsonContentSchema.refine((val) => val.type === 'doc', {
+      message: 'Root document must have type "doc"',
+    }),
     z.null(),
   ])
   .nullable()
-  .refine(
-    (val) => val === null || validateJSONContent(val),
-    {
-      message: 'Invalid TipTap JSONContent structure',
-    }
-  );
-
+  .refine((val) => val === null || validateJSONContent(val), {
+    message: 'Invalid TipTap JSONContent structure',
+  });

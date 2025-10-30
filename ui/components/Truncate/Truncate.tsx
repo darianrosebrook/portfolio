@@ -72,7 +72,8 @@ export const Truncate = React.forwardRef<HTMLElement, TruncateProps>(
     // Merge refs safely - React.createElement needs a ref callback
     const mergedRef = React.useCallback(
       (node: HTMLElement | null) => {
-        (contentRef as React.MutableRefObject<HTMLElement | null>).current = node;
+        (contentRef as React.MutableRefObject<HTMLElement | null>).current =
+          node;
         if (ref) {
           if (typeof ref === 'function') {
             ref(node);

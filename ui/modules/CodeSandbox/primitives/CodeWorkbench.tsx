@@ -30,23 +30,27 @@ function toSandpackFiles(project: VirtualProject): SandpackFiles {
   const out: SandpackFiles = {};
   let needsPropsJson = false;
   const entry = project.entry || '/index.tsx';
-  
+
   // Check if any file imports /props.json
   for (const f of project.files) {
-    const contents = typeof f.contents === 'string' ? f.contents : String(f.contents);
+    const contents =
+      typeof f.contents === 'string' ? f.contents : String(f.contents);
     out[f.path] = contents;
-    
+
     // Check for imports of /props.json
-    if (contents.includes("from '/props.json'") || contents.includes('from "/props.json"')) {
+    if (
+      contents.includes("from '/props.json'") ||
+      contents.includes('from "/props.json"')
+    ) {
       needsPropsJson = true;
     }
   }
-  
+
   // Add /props.json if needed and not already present
   if (needsPropsJson && !out['/props.json']) {
     out['/props.json'] = '{}';
   }
-  
+
   // If entry is /App.tsx, create /index.tsx to render it
   // Sandpack's react-ts template expects index.tsx to be the entry point
   if (entry === '/App.tsx' && !out['/index.tsx']) {
@@ -60,7 +64,7 @@ if (container) {
   root.render(React.createElement(App));
 }`;
   }
-  
+
   return out;
 }
 
@@ -199,12 +203,13 @@ export function CodeWorkbench({
   // Stabilize files reference to prevent unnecessary SandpackProvider re-renders
   // Compare by file paths and content hash to detect actual changes
   const filesKey = React.useMemo(
-    () => JSON.stringify(
-      project.files.map((f) => ({
-        path: f.path,
-        hash: simpleHash(String(f.contents)),
-      }))
-    ),
+    () =>
+      JSON.stringify(
+        project.files.map((f) => ({
+          path: f.path,
+          hash: simpleHash(String(f.contents)),
+        }))
+      ),
     [project.files, simpleHash]
   );
   const files = React.useMemo(() => toSandpackFiles(project), [filesKey]);
@@ -213,10 +218,11 @@ export function CodeWorkbench({
   // Note: When using a template, Sandpack uses its default entry point
   // For react-ts template, that's /index.tsx, which we create automatically
   const customSetupKey = React.useMemo(
-    () => JSON.stringify({
-      dependencies: project.dependencies,
-      devDependencies: project.devDependencies,
-    }),
+    () =>
+      JSON.stringify({
+        dependencies: project.dependencies,
+        devDependencies: project.devDependencies,
+      }),
     [project.dependencies, project.devDependencies]
   );
   const customSetup = React.useMemo(

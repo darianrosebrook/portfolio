@@ -28,7 +28,7 @@ export function useTabs(options: UseTabsOptions = {}): TabsContextValue {
 
   const isControlled = typeof value === 'string';
   const [internalValue, setInternalValue] = React.useState<TabsValue | null>(
-    isControlled ? value! : defaultValue ?? null
+    isControlled ? value! : (defaultValue ?? null)
   );
   React.useEffect(() => {
     if (isControlled && value !== undefined) {

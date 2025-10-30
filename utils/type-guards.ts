@@ -49,4 +49,3 @@ export function supportsViewTransitions(): boolean {
     typeof (document as any).startViewTransition === 'function'
   );
 }
-

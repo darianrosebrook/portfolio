@@ -50,11 +50,11 @@ export function usePopover(options: UsePopoverOptions = {}): UsePopoverReturn {
       if (content?.contains(target)) return;
       setIsOpen(false);
     }
-      window.addEventListener('mousedown', handlePointerDown, { capture: true });
-      return () =>
-        window.removeEventListener('mousedown', handlePointerDown, {
-          capture: true,
-        } as EventListenerOptions);
+    window.addEventListener('mousedown', handlePointerDown, { capture: true });
+    return () =>
+      window.removeEventListener('mousedown', handlePointerDown, {
+        capture: true,
+      } as EventListenerOptions);
   }, [isOpen, closeOnOutsideClick]);
 
   // Handle Escape key

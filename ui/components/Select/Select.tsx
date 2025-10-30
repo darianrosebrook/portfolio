@@ -192,39 +192,39 @@ export const SelectContent = React.forwardRef<
     { children, className = '', maxHeight = '200px', position = 'bottom' },
     ref
   ) => {
-  const { isOpen, close, listboxRef, triggerRef } = useSelectContext();
+    const { isOpen, close, listboxRef, triggerRef } = useSelectContext();
 
-  // Combine refs using utility
-  const combinedRef = mergeRefs(listboxRef, ref);
+    // Combine refs using utility
+    const combinedRef = mergeRefs(listboxRef, ref);
 
-  // Close on outside click
-  useEffect(() => {
-    if (!isOpen) return;
+    // Close on outside click
+    useEffect(() => {
+      if (!isOpen) return;
 
-    const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target;
-      // Check if target is an Element first, then if it's an HTMLElement
-      if (!target || !(target instanceof Element) || !isHTMLElement(target)) {
-        return;
-      }
+      const handleClickOutside = (event: MouseEvent) => {
+        const target = event.target;
+        // Check if target is an Element first, then if it's an HTMLElement
+        if (!target || !(target instanceof Element) || !isHTMLElement(target)) {
+          return;
+        }
 
-      const content = listboxRef?.current;
-      const trigger = triggerRef?.current;
+        const content = listboxRef?.current;
+        const trigger = triggerRef?.current;
 
-      if (
-        content &&
-        !content.contains(target) &&
-        trigger &&
-        !trigger.contains(target)
-      ) {
-        close();
-      }
-    };
+        if (
+          content &&
+          !content.contains(target) &&
+          trigger &&
+          !trigger.contains(target)
+        ) {
+          close();
+        }
+      };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () =>
-      document.removeEventListener('mousedown', handleClickOutside);
-  }, [isOpen, close, listboxRef, triggerRef]);
+      document.addEventListener('mousedown', handleClickOutside);
+      return () =>
+        document.removeEventListener('mousedown', handleClickOutside);
+    }, [isOpen, close, listboxRef, triggerRef]);
 
     if (!isOpen) return null;
 

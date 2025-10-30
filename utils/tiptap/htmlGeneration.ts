@@ -1,9 +1,9 @@
 /**
  * Unified TipTap HTML Generation Utilities
- * 
+ *
  * Provides consistent HTML generation for articles and case studies
  * using the centralized extension registry.
- * 
+ *
  * @author @darianrosebrook
  */
 
@@ -14,9 +14,7 @@ import { createServerExtensions } from '@/ui/modules/Tiptap/extensionsRegistry';
 /**
  * Validates JSONContent structure
  */
-export function isValidJSONContent(
-  content: unknown
-): content is JSONContent {
+export function isValidJSONContent(content: unknown): content is JSONContent {
   if (!content || typeof content !== 'object') {
     return false;
   }
@@ -39,9 +37,7 @@ export function isValidJSONContent(
 /**
  * Normalizes JSONContent to ensure it has the correct structure
  */
-export function normalizeJSONContent(
-  content: unknown
-): JSONContent {
+export function normalizeJSONContent(content: unknown): JSONContent {
   if (isValidJSONContent(content)) {
     return content;
   }
@@ -117,7 +113,11 @@ export function extractFirstHeading(
     (node) => node.type === 'heading' && node.attrs?.level === level
   );
 
-  if (!headingNode || !headingNode.content || !Array.isArray(headingNode.content)) {
+  if (
+    !headingNode ||
+    !headingNode.content ||
+    !Array.isArray(headingNode.content)
+  ) {
     return null;
   }
 
@@ -146,7 +146,9 @@ export function extractFirstImage(content: JSONContent): string | null {
     return null;
   }
 
-  const src = (imageNode.attrs as Record<string, unknown>).src as string | undefined;
+  const src = (imageNode.attrs as Record<string, unknown>).src as
+    | string
+    | undefined;
   return src ?? null;
 }
 
@@ -175,9 +177,7 @@ export interface ArticleContentResult {
   imageSrc: string | null;
 }
 
-export function processArticleContent(
-  content: unknown
-): ArticleContentResult {
+export function processArticleContent(content: unknown): ArticleContentResult {
   const normalized = normalizeJSONContent(content);
 
   // Extract metadata before removing nodes
@@ -200,9 +200,7 @@ export function processArticleContent(
 /**
  * Processes case study content: removes first h1 and image, generates HTML
  */
-export function processCaseStudyContent(
-  content: unknown
-): { html: string } {
+export function processCaseStudyContent(content: unknown): { html: string } {
   const normalized = normalizeJSONContent(content);
 
   // Remove first h1 and image for rendering
@@ -213,4 +211,3 @@ export function processCaseStudyContent(
 
   return { html };
 }
-

@@ -75,4 +75,3 @@ export function resolveConflictByMerge(
     modified_at: serverRecord.modified_at,
   } as RecordType;
 }
-

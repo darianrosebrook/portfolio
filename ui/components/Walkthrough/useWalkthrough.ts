@@ -10,7 +10,9 @@ interface WindowWithWalkthrough extends Window {
 }
 
 function getWindowWithWalkthrough(): WindowWithWalkthrough | undefined {
-  return typeof window !== 'undefined' ? (window as WindowWithWalkthrough) : undefined;
+  return typeof window !== 'undefined'
+    ? (window as WindowWithWalkthrough)
+    : undefined;
 }
 
 const storage = {

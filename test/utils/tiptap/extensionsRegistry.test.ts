@@ -42,16 +42,18 @@ describe('TipTap Extension Registry', () => {
     it('should return consistent extensions for same config', () => {
       const extensions1 = createEditorExtensions({ articleId: 123 });
       const extensions2 = createEditorExtensions({ articleId: 123 });
-      
+
       expect(extensions1.length).toBe(extensions2.length);
     });
 
     it('should return extensions with proper structure', () => {
       const extensions = createEditorExtensions();
-      
+
       extensions.forEach((ext) => {
         expect(ext).toBeDefined();
-        expect(typeof ext.name === 'string' || ext.name === undefined).toBe(true);
+        expect(typeof ext.name === 'string' || ext.name === undefined).toBe(
+          true
+        );
       });
     });
   });
@@ -76,7 +78,7 @@ describe('TipTap Extension Registry', () => {
     it('should return consistent extensions', () => {
       const extensions1 = createServerExtensions();
       const extensions2 = createServerExtensions();
-      
+
       expect(extensions1.length).toBe(extensions2.length);
     });
 
@@ -98,7 +100,7 @@ describe('TipTap Extension Registry', () => {
     it('should match server extensions', () => {
       const previewExtensions = createPreviewExtensions();
       const serverExtensions = createServerExtensions();
-      
+
       // Preview should use same extensions as server for accurate preview
       expect(previewExtensions.length).toBe(serverExtensions.length);
     });
@@ -106,7 +108,7 @@ describe('TipTap Extension Registry', () => {
     it('should return consistent extensions', () => {
       const extensions1 = createPreviewExtensions();
       const extensions2 = createPreviewExtensions();
-      
+
       expect(extensions1.length).toBe(extensions2.length);
     });
   });
@@ -122,7 +124,7 @@ describe('TipTap Extension Registry', () => {
 
       expect(editorNames.length).toBeGreaterThan(0);
       expect(serverNames.length).toBeGreaterThan(0);
-      
+
       // Server should have basic extensions that editor also has
       const commonExtensions = editorNames.filter((name) =>
         serverNames.includes(name)
@@ -133,9 +135,8 @@ describe('TipTap Extension Registry', () => {
     it('should handle empty articleId', () => {
       const extensions1 = createEditorExtensions({ articleId: undefined });
       const extensions2 = createEditorExtensions();
-      
+
       expect(extensions1.length).toBe(extensions2.length);
     });
   });
 });
-

@@ -140,9 +140,7 @@ class DesignTokenValidator {
           this.issues.push(...fileIssues);
         }
 
-        logSuccess(
-          `Loaded ${this.allTokens.size} tokens from composed file`
-        );
+        logSuccess(`Loaded ${this.allTokens.size} tokens from composed file`);
         this.stats.totalTokens = this.allTokens.size;
         this.stats.totalReferences = Array.from(
           this.allReferences.values()
@@ -242,7 +240,9 @@ class DesignTokenValidator {
       if (!node || typeof node !== 'object') return;
 
       if (Object.prototype.hasOwnProperty.call(node, '$value')) {
-        const fullPath = namespace ? `${namespace}.${currentPath}` : currentPath;
+        const fullPath = namespace
+          ? `${namespace}.${currentPath}`
+          : currentPath;
         definitions.set(fullPath, {
           value: node.$value,
           type: node.$type,
@@ -286,7 +286,10 @@ class DesignTokenValidator {
               const extRef = this.parseTokenReference(value);
               if (extRef) {
                 let resolvedRef = extRef;
-                if (!extRef.startsWith('core.') && !extRef.startsWith('semantic.')) {
+                if (
+                  !extRef.startsWith('core.') &&
+                  !extRef.startsWith('semantic.')
+                ) {
                   resolvedRef = namespace ? `${namespace}.${extRef}` : extRef;
                 }
                 references.push({
@@ -474,7 +477,7 @@ class DesignTokenValidator {
           const name = `$${match[1]}`;
           // Skip if this is a definition
           if (defMatches.has(name)) continue;
-          
+
           if (!scssUses.has(name)) {
             scssUses.set(name, []);
           }
@@ -500,7 +503,9 @@ class DesignTokenValidator {
     }
 
     this.stats.totalScssVars = this.scssVariables.size;
-    logSuccess(`Found ${scssDefs.size} SCSS variable definitions, ${scssUses.size} unique variables in use`);
+    logSuccess(
+      `Found ${scssDefs.size} SCSS variable definitions, ${scssUses.size} unique variables in use`
+    );
   }
 
   /**
@@ -519,7 +524,10 @@ class DesignTokenValidator {
 
         // Try without namespace prefixes
         const parts = ref.to.split('.');
-        if (parts.length > 1 && (parts[0] === 'core' || parts[0] === 'semantic')) {
+        if (
+          parts.length > 1 &&
+          (parts[0] === 'core' || parts[0] === 'semantic')
+        ) {
           const withoutNs = parts.slice(1).join('.');
           if (this.allTokens.has(withoutNs)) {
             continue;
@@ -530,7 +538,10 @@ class DesignTokenValidator {
         if (!ref.to.startsWith('core.') && !ref.to.startsWith('semantic.')) {
           const coreVersion = `core.${ref.to}`;
           const semanticVersion = `semantic.${ref.to}`;
-          if (this.allTokens.has(coreVersion) || this.allTokens.has(semanticVersion)) {
+          if (
+            this.allTokens.has(coreVersion) ||
+            this.allTokens.has(semanticVersion)
+          ) {
             continue;
           }
         }
@@ -575,11 +586,11 @@ class DesignTokenValidator {
     // Note: scssVariables contains both definitions and uses, need to separate
     const scssDefs = new Map();
     const scssUses = new Map();
-    
+
     // Separate definitions from uses (uses have file/line, defs have value)
     for (const [name, entries] of this.scssVariables) {
-      const defs = entries.filter(e => e.value !== undefined);
-      const uses = entries.filter(e => e.value === undefined);
+      const defs = entries.filter((e) => e.value !== undefined);
+      const uses = entries.filter((e) => e.value === undefined);
       if (defs.length > 0) scssDefs.set(name, defs);
       if (uses.length > 0) scssUses.set(name, uses);
     }

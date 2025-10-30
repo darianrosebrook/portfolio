@@ -58,8 +58,8 @@ describe('TipTap JSONContent Schema', () => {
             type: 'paragraph',
             content: [
               { type: 'text', text: 'Hello ' },
-              { 
-                type: 'text', 
+              {
+                type: 'text',
                 text: 'World',
               },
             ],
@@ -195,4 +195,3 @@ describe('TipTap JSONContent Schema', () => {
     });
   });
 });
-

@@ -36,9 +36,8 @@ const checkMediaPreference = (): boolean => {
 export const ReducedMotionProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [prefersReducedMotion, setPrefersReducedMotionState] = useState(
-    checkMediaPreference
-  );
+  const [prefersReducedMotion, setPrefersReducedMotionState] =
+    useState(checkMediaPreference);
 
   const setPrefersReducedMotion = useCallback((value: boolean) => {
     if (typeof window !== 'undefined') {
@@ -52,7 +51,7 @@ export const ReducedMotionProvider: React.FC<{ children: React.ReactNode }> = ({
     if (typeof window === 'undefined') return;
 
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    
+
     const handleChange = (e: MediaQueryListEvent) => {
       // Only update if user hasn't explicitly set a preference
       if (localStorage.getItem(REDUCE_MOTION_KEY) === null) {

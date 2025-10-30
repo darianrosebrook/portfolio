@@ -7,7 +7,7 @@ import { createEditorExtensions } from './extensionsRegistry';
 /**
  * Creates optimized Tiptap extensions configuration
  * This function was part of the bundle optimization to reduce initial load
- * 
+ *
  * @deprecated Use createEditorExtensions from './extensionsRegistry' instead
  */
 export const createExtensions = (articleId?: number) => {

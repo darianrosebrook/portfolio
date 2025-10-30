@@ -14,7 +14,11 @@ export interface FieldComponentProps {
 const FieldComponent = React.forwardRef<HTMLDivElement, FieldComponentProps>(
   ({ children, className }, ref) => {
     const f = useFieldCtx();
-    const cls = [styles.root, f.status === 'invalid' && styles.invalid, className]
+    const cls = [
+      styles.root,
+      f.status === 'invalid' && styles.invalid,
+      className,
+    ]
       .filter(Boolean)
       .join(' ');
     return (

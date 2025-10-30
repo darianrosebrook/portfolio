@@ -143,7 +143,8 @@ export function TransitionLink({
 }: TransitionLinkProps) {
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     // Check if View Transitions API is supported and user hasn't disabled animations
-    const supportsViewTransitionsAPI = supportsViewTransitions() && document.startViewTransition;
+    const supportsViewTransitionsAPI =
+      supportsViewTransitions() && document.startViewTransition;
     const prefersReducedMotion = window.matchMedia(
       '(prefers-reduced-motion: reduce)'
     ).matches;
