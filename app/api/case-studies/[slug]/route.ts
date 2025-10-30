@@ -252,3 +252,4 @@ export async function DELETE(
     status: 204,
     headers: { 'Cache-Control': CacheHeaders.MUTATION },
   });
+}
