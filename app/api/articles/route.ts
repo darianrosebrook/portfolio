@@ -94,3 +94,4 @@ export async function GET() {
   }
 
   return createCachedResponse(data, 200, CacheHeaders.LIST);
+}
