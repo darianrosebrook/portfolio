@@ -35,36 +35,85 @@ export function DocVariants({
   };
 
   // Initialize default values from controls
+  // Use stable controls reference to prevent infinite loops
+  const controlsKey = React.useMemo(
+    () => JSON.stringify(controls.map((c) => `${c.id}:${c.defaultValue}`).sort()),
+    [controls]
+  );
+  
   React.useEffect(() => {
-    const defaults: Record<string, any> = {};
-    controls.forEach((control) => {
-      if (control.defaultValue !== undefined && values[control.id] === undefined) {
-        defaults[control.id] = control.defaultValue;
+    // Use functional update to check previous state and avoid including values in deps
+    setValues((prev) => {
+      const defaults: Record<string, any> = {};
+      controls.forEach((control) => {
+        if (control.defaultValue !== undefined && prev[control.id] === undefined) {
+          defaults[control.id] = control.defaultValue;
+        }
+      });
+      if (Object.keys(defaults).length > 0) {
+        return { ...prev, ...defaults };
       }
+      return prev;
     });
-    if (Object.keys(defaults).length > 0) {
-      setValues((prev) => ({ ...prev, ...defaults }));
-    }
-  }, [controls]);
+  }, [controlsKey, controls]);
 
   // Initialize from URL query if enabled
+  // Use stable grid reference to prevent re-initialization loops
+  const gridKey = React.useMemo(
+    () => JSON.stringify({
+      rowsId: grid.rows.id,
+      colsId: grid.cols?.id,
+      rowsDefault: grid.rows.defaultValue,
+      colsDefault: grid.cols?.defaultValue,
+      rowsValues: grid.rows.values.join(','),
+      colsValues: grid.cols?.values.join(','),
+    }),
+    [grid.rows.id, grid.rows.defaultValue, grid.rows.values, grid.cols?.id, grid.cols?.defaultValue, grid.cols?.values]
+  );
+  
   React.useEffect(() => {
     if (!linkSelectionToURL) return;
     if (typeof window === 'undefined') return;
-    const params = new URLSearchParams(window.location.search);
-    const init: Record<string, any> = {};
-    init[grid.rows.id] =
-      params.get(grid.rows.id) ?? grid.rows.defaultValue ?? grid.rows.values[0];
-    if (grid.cols) {
-      init[grid.cols.id] =
-        params.get(grid.cols.id) ??
-        grid.cols.defaultValue ??
-        grid.cols.values[0];
-    }
-    if (Object.keys(init).length) setValues((prev) => ({ ...prev, ...init }));
-  }, [linkSelectionToURL, grid.rows, grid.cols]);
+    
+    // Use functional update to check previous state and avoid including values in deps
+    setValues((prev) => {
+      const params = new URLSearchParams(window.location.search);
+      const init: Record<string, any> = {};
+      const rowVal = params.get(grid.rows.id) ?? grid.rows.defaultValue ?? grid.rows.values[0];
+      const colVal = grid.cols ? (params.get(grid.cols.id) ?? grid.cols.defaultValue ?? grid.cols.values[0]) : undefined;
+      
+      // Only update if values are different from current
+      if (prev[grid.rows.id] !== rowVal || (grid.cols && prev[grid.cols.id] !== colVal)) {
+        init[grid.rows.id] = rowVal;
+        if (grid.cols && colVal !== undefined) {
+          init[grid.cols.id] = colVal;
+        }
+        return Object.keys(init).length > 0 ? { ...prev, ...init } : prev;
+      }
+      return prev;
+    });
+  }, [linkSelectionToURL, gridKey]);
 
   // Reflect selection in URL if enabled (debounced)
+  // Use stable values reference to prevent unnecessary updates
+  const valuesKey = React.useMemo(
+    () => JSON.stringify(values),
+    [values]
+  );
+  
+  // Capture grid properties in refs to avoid dependency issues
+  const gridRowsIdRef = React.useRef(grid.rows.id);
+  const gridRowsDefaultRef = React.useRef(grid.rows.defaultValue);
+  const gridRowsValuesRef = React.useRef(grid.rows.values);
+  const gridColsRef = React.useRef(grid.cols);
+  
+  React.useEffect(() => {
+    gridRowsIdRef.current = grid.rows.id;
+    gridRowsDefaultRef.current = grid.rows.defaultValue;
+    gridRowsValuesRef.current = grid.rows.values;
+    gridColsRef.current = grid.cols;
+  }, [grid.rows.id, grid.rows.defaultValue, grid.rows.values, grid.cols]);
+  
   React.useEffect(() => {
     if (!linkSelectionToURL) return;
     if (typeof window === 'undefined') return;
@@ -77,19 +126,19 @@ export function DocVariants({
     // Debounce URL updates to prevent history spam
     timeoutRef.current = setTimeout(() => {
       const params = new URLSearchParams(window.location.search);
-      const rowVal = values[grid.rows.id];
+      const rowVal = values[gridRowsIdRef.current];
       if (rowVal) {
-        params.set(grid.rows.id, String(rowVal));
+        params.set(gridRowsIdRef.current, String(rowVal));
       } else {
-        params.delete(grid.rows.id);
+        params.delete(gridRowsIdRef.current);
       }
 
-      if (grid.cols) {
-        const colVal = values[grid.cols.id];
+      if (gridColsRef.current) {
+        const colVal = values[gridColsRef.current.id];
         if (colVal) {
-          params.set(grid.cols.id, String(colVal));
+          params.set(gridColsRef.current.id, String(colVal));
         } else {
-          params.delete(grid.cols.id);
+          params.delete(gridColsRef.current.id);
         }
       }
 
@@ -108,16 +157,16 @@ export function DocVariants({
         clearTimeout(timeoutRef.current);
       }
     };
-  }, [linkSelectionToURL, values, grid.rows, grid.cols]);
+  }, [linkSelectionToURL, valuesKey]);
 
   // Create reset keys from identifiers
-  const projectKey = JSON.stringify(project.files.map((f) => f.path).sort());
-  const controlsKey = JSON.stringify(controls.map((c) => c.id).sort());
-  const gridKey = JSON.stringify(grid);
+  const resetProjectKey = JSON.stringify(project.files.map((f) => f.path).sort());
+  const resetControlsKey = JSON.stringify(controls.map((c) => c.id).sort());
+  const resetGridKey = JSON.stringify(grid);
 
   return (
     <ErrorBoundary
-      resetKeys={[projectKey, controlsKey, gridKey]}
+      resetKeys={[resetProjectKey, resetControlsKey, resetGridKey]}
       onError={(error, errorInfo) => {
         console.error('DocVariants Error:', error, errorInfo);
         onSelectionChange?.({ error: error.message });

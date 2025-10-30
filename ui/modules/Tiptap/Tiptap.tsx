@@ -1,34 +1,138 @@
 'use client';
 
-import { useEditor, EditorContent, JSONContent } from '@tiptap/react';
+import { useEffect, useMemo, useRef } from 'react';
+import { useEditor, EditorContent } from '@tiptap/react';
+import type { Editor } from '@tiptap/core';
+import type { JSONContent } from '@tiptap/core';
 import styles from './tiptap.module.css';
 
-import { createExtensions } from './extensionsConfig';
+import { createEditorExtensions } from './extensionsRegistry';
 import ImageBubbleMenu from './ImageBubbleMenu';
 import VideoBubbleMenu from './VideoBubbleMenu';
 import ToolbarWrapper from './ToolbarWrapper';
 
 import { Article } from '@/types';
+import { normalizeJSONContent } from '@/utils/tiptap/htmlGeneration';
 
-const Tiptap = ({
-  article,
-  handleUpdate = () => {},
-}: {
+interface TiptapProps {
   article: Article;
   handleUpdate?: (article: Article) => void;
-}) => {
-  const content = article.articleBody as JSONContent | undefined;
+  editable?: boolean;
+  autofocus?: boolean | 'start' | 'end' | 'all';
+  placeholder?: string;
+  onCreate?: (props: { editor: Editor }) => void;
+  onFocus?: (props: { editor: Editor }) => void;
+  onBlur?: (props: { editor: Editor }) => void;
+}
+
+const Tiptap = ({ 
+  article, 
+  handleUpdate = () => {},
+  editable = true,
+  autofocus = false,
+  placeholder,
+  onCreate,
+  onFocus,
+  onBlur,
+}: TiptapProps) => {
+  // Normalize content and memoize to prevent unnecessary re-renders
+  const normalizedContent = useMemo(() => {
+    return normalizeJSONContent(article.articleBody);
+  }, [article.articleBody]);
+
+  // Track previous content to detect external changes
+  const previousContentRef = useRef<JSONContent | null>(null);
+  
   const editor = useEditor({
-    extensions: createExtensions(article?.id as unknown as number),
+    extensions: createEditorExtensions({
+      articleId: article?.id as number | undefined,
+    }),
     immediatelyRender: false,
-    content: content,
+    editable,
+    autofocus,
+    content: normalizedContent,
     onUpdate: ({ editor }) => {
-      if (handleUpdate) {
-        const articleBody = editor.getJSON();
-        handleUpdate({ ...article, articleBody });
+      if (handleUpdate && !editor.isDestroyed && editable) {
+        try {
+          const articleBody = editor.getJSON();
+          handleUpdate({ ...article, articleBody });
+        } catch (error) {
+          console.error('Error updating article:', error);
+        }
+      }
+    },
+    onCreate: ({ editor }) => {
+      // Store initial content for comparison
+      previousContentRef.current = editor.getJSON();
+      onCreate?.({ editor });
+    },
+    onFocus: ({ editor }) => {
+      onFocus?.({ editor });
+    },
+    onBlur: ({ editor }) => {
+      onBlur?.({ editor });
+    },
+    onError: ({ editor, error }) => {
+      console.error('TipTap editor error:', error);
+      // Prevent editor from crashing the app
+      if (editor.isDestroyed) {
+        return;
       }
     },
   });
+
+  // Sync content when article prop changes externally
+  useEffect(() => {
+    if (!editor || editor.isDestroyed) return;
+
+    const currentContent = editor.getJSON();
+    const newContent = normalizedContent;
+
+    // Deep comparison to avoid unnecessary updates
+    // Only update if content actually changed externally
+    if (
+      JSON.stringify(currentContent) !== JSON.stringify(newContent) &&
+      JSON.stringify(previousContentRef.current) !== JSON.stringify(newContent)
+    ) {
+      // Preserve selection when updating content
+      const { from, to } = editor.state.selection;
+      editor.commands.setContent(newContent, false);
+      
+      // Restore selection if possible
+      try {
+        if (from <= editor.state.doc.content.size && to <= editor.state.doc.content.size) {
+          editor.commands.setTextSelection({ from, to });
+        }
+      } catch (error) {
+        // Selection may be invalid after content update, that's okay
+      }
+      
+      previousContentRef.current = newContent;
+    }
+  }, [editor, normalizedContent]);
+
+  // Update editable state when prop changes
+  useEffect(() => {
+    if (!editor || editor.isDestroyed) return;
+    editor.setEditable(editable);
+  }, [editor, editable]);
+
+  // Cleanup editor on unmount
+  useEffect(() => {
+    return () => {
+      if (editor && !editor.isDestroyed) {
+        editor.destroy();
+      }
+    };
+  }, [editor]);
+
+  if (!editor) {
+    return (
+      <div className={styles.editor} style={{ padding: '1rem' }}>
+        <p>Loading editor...</p>
+      </div>
+    );
+  }
 
   return (
     <>

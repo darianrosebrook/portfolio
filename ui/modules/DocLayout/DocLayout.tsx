@@ -11,6 +11,8 @@ import React, {
   useEffect,
   useRef,
   useState,
+  useCallback,
+  useMemo,
 } from 'react';
 import styles from './DocLayout.module.scss';
 
@@ -27,6 +29,7 @@ interface DocLayoutContextType {
   activeSection: string;
   setActiveSection: (id: string) => void;
   sections: DocSection[];
+  registerSectionRef?: (id: string, element: HTMLElement | null) => void;
 }
 
 const DocLayoutContext = createContext<DocLayoutContextType | null>(null);
@@ -49,6 +52,9 @@ export function DocLayoutProvider({
   sections,
 }: DocLayoutProviderProps) {
   const [activeSection, setActiveSection] = useState(sections[0]?.id || '');
+  const observerRef = useRef<IntersectionObserver | null>(null);
+  const sectionRefs = useRef<Map<string, HTMLElement>>(new Map());
+
   // Keep activeSection valid when sections prop changes
   useEffect(() => {
     if (!sections.length) return;
@@ -57,14 +63,76 @@ export function DocLayoutProvider({
     }
   }, [sections, activeSection]);
 
+  // Set up IntersectionObserver for scroll-based section tracking
+  useEffect(() => {
+    // Cleanup previous observer
+    if (observerRef.current) {
+      observerRef.current.disconnect();
+    }
+
+    // Create optimized observer
+    const observerOptions: IntersectionObserverInit = {
+      root: null,
+      rootMargin: '-20% 0px -70% 0px', // Trigger when section is 20% from top
+      threshold: [0, 0.25, 0.5, 0.75, 1],
+    };
+
+    observerRef.current = new IntersectionObserver((entries) => {
+      // Find the most visible section
+      let mostVisible = { id: '', ratio: 0 };
+      
+      entries.forEach((entry) => {
+        const sectionId = entry.target.getAttribute('data-section-id') || entry.target.id;
+        if (sectionId && entry.isIntersecting && entry.intersectionRatio > mostVisible.ratio) {
+          mostVisible = {
+            id: sectionId,
+            ratio: entry.intersectionRatio,
+          };
+        }
+      });
+
+      // Update active section if we found a more visible one
+      if (mostVisible.id && mostVisible.ratio > 0) {
+        setActiveSection(mostVisible.id);
+      }
+    }, observerOptions);
+
+    // Observe all registered sections
+    sectionRefs.current.forEach((element) => {
+      if (element) {
+        observerRef.current?.observe(element);
+      }
+    });
+
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
+    };
+  }, [sections]); // Re-run when sections change
+
+  // Register section refs (exposed via context for DocSection to use)
+  const registerSectionRef = useCallback((id: string, element: HTMLElement | null) => {
+    if (element) {
+      sectionRefs.current.set(id, element);
+      observerRef.current?.observe(element);
+    } else {
+      sectionRefs.current.delete(id);
+    }
+  }, []);
+
+  const contextValue = useMemo(
+    () => ({
+      activeSection,
+      setActiveSection,
+      sections,
+      registerSectionRef,
+    }),
+    [activeSection, sections, registerSectionRef]
+  );
+
   return (
-    <DocLayoutContext.Provider
-      value={{
-        activeSection,
-        setActiveSection,
-        sections,
-      }}
-    >
+    <DocLayoutContext.Provider value={contextValue}>
       {children}
     </DocLayoutContext.Provider>
   );
@@ -228,9 +296,21 @@ interface DocSectionProps {
 }
 
 export function DocSection({ id, children, className = '' }: DocSectionProps) {
-  const { activeSection } = useDocLayout();
+  const { activeSection, registerSectionRef } = useDocLayout();
+  
+  // Register section with IntersectionObserver
+  const sectionRef = useCallback(
+    (element: HTMLElement | null) => {
+      if (registerSectionRef) {
+        registerSectionRef(id, element);
+      }
+    },
+    [id, registerSectionRef]
+  );
+
   return (
     <section
+      ref={sectionRef}
       data-section-id={id}
       data-highlighted={activeSection === id ? 'true' : 'false'}
       className={`${styles.docSection} ${className}`}
@@ -252,17 +332,46 @@ export function DocNavigation({
   activeSection,
   onSectionClick,
 }: DocNavigationProps) {
+  const handleClick = useCallback(
+    (id: string) => {
+      const element = document.getElementById(id);
+      if (element) {
+        const headerOffset = 80; // Account for sticky elements
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth',
+        });
+
+        // Update URL hash without triggering scroll
+        if (window.history.pushState) {
+          window.history.pushState(null, '', `#${id}`);
+        }
+      }
+      
+      onSectionClick(id);
+    },
+    [onSectionClick]
+  );
+
+  const memoizedSections = useMemo(
+    () => sections,
+    [sections]
+  );
+
   return (
     <nav className={styles.docNavigation}>
       <ul>
-        {sections.map((section) => (
+        {memoizedSections.map((section) => (
           <li key={section.id}>
             <button
               className={`${styles.navItem} ${
                 activeSection === section.id ? styles.active : ''
               }`}
-              onClick={() => onSectionClick(section.id)}
-              aria-current={activeSection === section.id ? 'true' : undefined}
+              onClick={() => handleClick(section.id)}
+              aria-current={activeSection === section.id ? 'page' : undefined}
             >
               {section.title}
             </button>

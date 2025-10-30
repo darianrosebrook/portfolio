@@ -36,34 +36,40 @@ export interface AccordionProps
     >,
     AccordionProviderProps {}
 
-const AccordionRoot: React.FC<AccordionProps> = ({
-  className = '',
-  children,
-  type,
-  defaultValue,
-  value,
-  onValueChange,
-  collapsible,
-  ...rest
-}) => {
-  return (
-    <AccordionProvider
-      type={type}
-      defaultValue={defaultValue}
-      value={value}
-      onValueChange={onValueChange}
-      collapsible={collapsible}
-    >
-      <div
-        className={[styles.accordion, className].filter(Boolean).join(' ')}
-        data-slot="accordion"
-        {...rest}
+const AccordionRoot = React.forwardRef<HTMLDivElement, AccordionProps>(
+  (
+    {
+      className = '',
+      children,
+      type,
+      defaultValue,
+      value,
+      onValueChange,
+      collapsible,
+      ...rest
+    },
+    ref
+  ) => {
+    return (
+      <AccordionProvider
+        type={type}
+        defaultValue={defaultValue}
+        value={value}
+        onValueChange={onValueChange}
+        collapsible={collapsible}
       >
-        {children}
-      </div>
-    </AccordionProvider>
-  );
-};
+        <div
+          ref={ref}
+          className={[styles.accordion, className].filter(Boolean).join(' ')}
+          data-slot="accordion"
+          {...rest}
+        >
+          {children}
+        </div>
+      </AccordionProvider>
+    );
+  }
+);
 
 // Accordion Item Component
 export interface AccordionItemProps
@@ -144,6 +150,19 @@ const AccordionContent: React.FC<AccordionContentProps> = ({
   const { isItemOpen } = useAccordionContext();
   const isOpen = isItemOpen(value);
   const contentRef = React.useRef<HTMLDivElement>(null);
+  const [height, setHeight] = React.useState<number>(0);
+
+  // Measure height after mount/layout
+  React.useLayoutEffect(() => {
+    if (contentRef.current) {
+      if (isOpen) {
+        // Measure the actual scroll height
+        setHeight(contentRef.current.scrollHeight);
+      } else {
+        setHeight(0);
+      }
+    }
+  }, [isOpen, children]);
 
   return (
     <div
@@ -153,9 +172,7 @@ const AccordionContent: React.FC<AccordionContentProps> = ({
       data-state={isOpen ? 'open' : 'closed'}
       style={
         {
-          '--accordion-content-height': isOpen
-            ? `${contentRef.current?.scrollHeight}px`
-            : '0px',
+          '--accordion-content-height': `${height}px`,
         } as React.CSSProperties
       }
       {...rest}

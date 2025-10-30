@@ -99,13 +99,25 @@ export function DocInteractive({
   );
   const stableSections = React.useMemo(() => sections, [sectionsKey]);
 
+  // Simple hash function for content comparison
+  const simpleHash = React.useCallback((str: string): string => {
+    let hash = 0;
+    const content = String(str);
+    for (let i = 0; i < Math.min(content.length, 100); i++) {
+      const char = content.charCodeAt(i);
+      hash = (hash << 5) - hash + char;
+      hash = hash & hash; // Convert to 32-bit integer
+    }
+    return hash.toString(36);
+  }, []);
+
   // Stable project reference to prevent CodeWorkbench re-renders
   // Compare by serializing file paths and contents hash
   const projectFilesKey = React.useMemo(
     () => JSON.stringify(
-      project.files.map((f) => ({ path: f.path, hash: String(f.contents).slice(0, 50) }))
+      project.files.map((f) => ({ path: f.path, hash: simpleHash(String(f.contents)) }))
     ),
-    [project.files]
+    [project.files, simpleHash]
   );
   const stableProject = React.useMemo(() => project, [projectFilesKey]);
 

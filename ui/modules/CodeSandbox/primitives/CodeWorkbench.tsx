@@ -20,16 +20,47 @@ export type CodeWorkbenchProps = {
 /**
  * Converts a VirtualProject to Sandpack's file format.
  * Ensures all file contents are strings as required by Sandpack.
+ * Automatically adds /props.json if any file imports it.
+ * Creates /index.tsx to render the App component if entry is /App.tsx.
  *
  * @param project - The virtual project containing files and metadata
  * @returns Sandpack-compatible file object
  */
 function toSandpackFiles(project: VirtualProject): SandpackFiles {
   const out: SandpackFiles = {};
+  let needsPropsJson = false;
+  const entry = project.entry || '/index.tsx';
+  
+  // Check if any file imports /props.json
   for (const f of project.files) {
-    out[f.path] =
-      typeof f.contents === 'string' ? f.contents : String(f.contents);
+    const contents = typeof f.contents === 'string' ? f.contents : String(f.contents);
+    out[f.path] = contents;
+    
+    // Check for imports of /props.json
+    if (contents.includes("from '/props.json'") || contents.includes('from "/props.json"')) {
+      needsPropsJson = true;
+    }
   }
+  
+  // Add /props.json if needed and not already present
+  if (needsPropsJson && !out['/props.json']) {
+    out['/props.json'] = '{}';
+  }
+  
+  // If entry is /App.tsx, create /index.tsx to render it
+  // Sandpack's react-ts template expects index.tsx to be the entry point
+  if (entry === '/App.tsx' && !out['/index.tsx']) {
+    out['/index.tsx'] = `import React from 'react';
+import { createRoot } from 'react-dom/client';
+import App from './App';
+
+const container = document.getElementById('root');
+if (container) {
+  const root = createRoot(container);
+  root.render(React.createElement(App));
+}`;
+  }
+  
   return out;
 }
 
@@ -73,12 +104,23 @@ const tokenTheme: SandpackTheme = {
 function SandpackLoadingWrapper({ children }: { children: React.ReactNode }) {
   const { sandpack } = useSandpack();
   const [isInitializing, setIsInitializing] = React.useState(true);
+  const sandpackRef = React.useRef(sandpack);
+
+  // Update ref when sandpack changes
+  React.useEffect(() => {
+    if (sandpack && sandpack !== sandpackRef.current) {
+      sandpackRef.current = sandpack;
+    }
+  }, [sandpack]);
 
   React.useEffect(() => {
     // Check if Sandpack is ready
     const checkReady = () => {
-      // Use sandpack.files to check if it's initialized instead of status
-      if (sandpack.files && Object.keys(sandpack.files).length > 0) {
+      // Use ref to access files without dependency on object reference
+      if (
+        sandpackRef.current.files &&
+        Object.keys(sandpackRef.current.files).length > 0
+      ) {
         setIsInitializing(false);
       }
     };
@@ -91,7 +133,7 @@ function SandpackLoadingWrapper({ children }: { children: React.ReactNode }) {
     }, 3000);
 
     return () => clearTimeout(timeout);
-  }, [sandpack.files]);
+  }, []); // Empty deps - we use ref to access sandpack
 
   return (
     <LoadingState
@@ -143,30 +185,45 @@ export function CodeWorkbench({
     return <>{children}</>;
   }
 
+  // Simple hash function for content comparison
+  const simpleHash = React.useCallback((str: string): string => {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+      const char = str.charCodeAt(i);
+      hash = (hash << 5) - hash + char;
+      hash = hash & hash; // Convert to 32-bit integer
+    }
+    return hash.toString(36);
+  }, []);
+
   // Stabilize files reference to prevent unnecessary SandpackProvider re-renders
-  // Compare by file paths and content length to detect actual changes
+  // Compare by file paths and content hash to detect actual changes
   const filesKey = React.useMemo(
     () => JSON.stringify(
-      project.files.map((f) => ({ path: f.path, length: String(f.contents).length }))
+      project.files.map((f) => ({
+        path: f.path,
+        hash: simpleHash(String(f.contents)),
+      }))
     ),
-    [project.files]
+    [project.files, simpleHash]
   );
   const files = React.useMemo(() => toSandpackFiles(project), [filesKey]);
 
   // Stabilize customSetup to prevent SandpackProvider re-renders
+  // Note: When using a template, Sandpack uses its default entry point
+  // For react-ts template, that's /index.tsx, which we create automatically
   const customSetupKey = React.useMemo(
     () => JSON.stringify({
       dependencies: project.dependencies,
       devDependencies: project.devDependencies,
-      entry: project.entry,
     }),
-    [project.dependencies, project.devDependencies, project.entry]
+    [project.dependencies, project.devDependencies]
   );
   const customSetup = React.useMemo(
     () => ({
       dependencies: project.dependencies,
       devDependencies: project.devDependencies,
-      entry: project.entry,
+      // Don't set entry when using template - let Sandpack use its default
     }),
     [customSetupKey]
   );

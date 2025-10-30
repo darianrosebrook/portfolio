@@ -13,14 +13,29 @@ gsap.registerPlugin(ScrollTrigger);
 export default function GlossaryCards() {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  let glossaryItems = terms.slice(0, 14);
-  //if container is less than 800px wide, slice the glossaryItems to 10
-  if (
-    containerRef.current?.clientWidth &&
-    containerRef.current.clientWidth < 800
-  ) {
-    glossaryItems = glossaryItems.slice(0, 10);
-  }
+  // Memoize glossary items based on container width
+  const [glossaryItems, setGlossaryItems] = useState(() => terms.slice(0, 14));
+  
+  // Update glossary items count based on container width
+  useEffect(() => {
+    if (!containerRef.current) return;
+    
+    const updateItems = () => {
+      const width = containerRef.current?.clientWidth || 0;
+      setGlossaryItems(
+        width < 800 ? terms.slice(0, 10) : terms.slice(0, 14)
+      );
+    };
+    
+    updateItems();
+    
+    // Use ResizeObserver for responsive updates
+    if (containerRef.current && 'ResizeObserver' in window) {
+      const resizeObserver = new ResizeObserver(updateItems);
+      resizeObserver.observe(containerRef.current);
+      return () => resizeObserver.disconnect();
+    }
+  }, []);
   const cardsRef = useRef<HTMLDivElement[]>([]);
   /**
    * Each card's transform and center, cached after entrance animation.
@@ -36,11 +51,10 @@ export default function GlossaryCards() {
     }[]
   >([]);
   const { mouse, prefersReducedMotion } = useInteraction();
-  const wasInRange = useRef<boolean[]>(
-    new Array(glossaryItems.length).fill(false)
-  );
+  const wasInRange = useRef<boolean[]>([]);
   // IntersectionObserver: track if container is in view
   const [isInView, setIsInView] = useState(false);
+  const observerRef = useRef<IntersectionObserver | null>(null);
   // quickTo setters for each card
   const quickToX = useRef<((v: number) => void)[]>([]);
   const quickToY = useRef<((v: number) => void)[]>([]);
@@ -126,20 +140,45 @@ export default function GlossaryCards() {
     return () => ctx.revert();
   }, [prefersReducedMotion]);
 
+  // Optimized IntersectionObserver with better options
   useEffect(() => {
-    if (!containerRef.current) return;
-    const observer = new window.IntersectionObserver((entries) => {
-      setIsInView(
-        entries[0].isIntersecting && entries[0].intersectionRatio > 0.05
-      );
-    });
-    observer.observe(containerRef.current);
-    return () => observer.disconnect();
-  }, [containerRef]);
+    const container = containerRef.current;
+    if (!container) return;
 
-  // Build quickTo setters on mount
+    // Cleanup previous observer
+    if (observerRef.current) {
+      observerRef.current.disconnect();
+    }
+
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        setIsInView(
+          entries[0].isIntersecting && entries[0].intersectionRatio > 0.05
+        );
+      },
+      {
+        root: null,
+        rootMargin: '0px',
+        threshold: [0, 0.05, 0.5, 1],
+      }
+    );
+
+    observerRef.current.observe(container);
+
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
+    };
+  }, []);
+
+  // Build quickTo setters on mount and when glossary items change
   useEffect(() => {
-    if (!containerRef.current) return;
+    if (!containerRef.current || !glossaryItems.length) return;
+    
+    // Initialize wasInRange array when items change
+    wasInRange.current = new Array(glossaryItems.length).fill(false);
+    
     quickToX.current = cardsRef.current
       .filter((el) => el !== null)
       .map((el) =>
@@ -167,17 +206,23 @@ export default function GlossaryCards() {
           overwrite: 'auto',
         })
       );
-  }, [prefersReducedMotion, isInView]);
+  }, [prefersReducedMotion, isInView, glossaryItems.length]);
 
   // 2) Pointer-driven "knock" effect, per-card, using only cached values
   useEffect(() => {
     if (!containerRef.current || prefersReducedMotion || !isInView) return;
+    
     let lastMouse = { x: 0, y: 0 };
     let rafId: number;
+    let rafRunning = true;
     const radius = 100; // px
 
     const loop = () => {
-      if (!containerRef.current) return;
+      if (!rafRunning || !containerRef.current) {
+        rafRunning = false;
+        return;
+      }
+      
       const { left, top } = containerRef.current.getBoundingClientRect();
       const px = mouse.x - left;
       const py = mouse.y - top;
@@ -256,66 +301,73 @@ export default function GlossaryCards() {
       });
 
       lastMouse = { x: px, y: py };
-      rafId = requestAnimationFrame(loop);
+      
+      if (rafRunning) {
+        rafId = requestAnimationFrame(loop);
+      }
     };
 
     loop();
-    return () => cancelAnimationFrame(rafId);
+    
+    return () => {
+      rafRunning = false;
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+      }
+    };
   }, [mouse, prefersReducedMotion, isInView, draggedCard]);
 
-  // Drag event handlers
-  const handleMouseDown = (e: React.MouseEvent, cardIndex: number) => {
-    if (prefersReducedMotion) return;
+  // Drag event handlers - optimized with useCallback
+  const handleMouseDown = useCallback(
+    (e: React.MouseEvent, cardIndex: number) => {
+      if (prefersReducedMotion) return;
 
-    e.preventDefault();
-    const card = cardsRef.current[cardIndex];
-    if (!card || !containerRef.current) return;
+      e.preventDefault();
+      const card = cardsRef.current[cardIndex];
+      if (!card || !containerRef.current) return;
 
-    // Stop any entrance/ongoing tweens that could fight the drag
-    gsap.killTweensOf(card);
+      // Stop any entrance/ongoing tweens that could fight the drag
+      gsap.killTweensOf(card);
 
-    const containerRect = containerRef.current.getBoundingClientRect();
-    const cardRect = card.getBoundingClientRect();
-    const startPx = mouse.x - containerRect.left;
-    const startPy = mouse.y - containerRect.top;
+      const containerRect = containerRef.current.getBoundingClientRect();
+      const cardRect = card.getBoundingClientRect();
+      const startPx = mouse.x - containerRect.left;
+      const startPy = mouse.y - containerRect.top;
 
-    // Calculate offset from mouse to card center
-    const cardCenterX =
-      (cardRect.left + cardRect.right) / 2 - containerRect.left;
-    const cardCenterY =
-      (cardRect.top + cardRect.bottom) / 2 - containerRect.top;
+      // Calculate offset from mouse to card center
+      const cardCenterX =
+        (cardRect.left + cardRect.right) / 2 - containerRect.left;
+      const cardCenterY =
+        (cardRect.top + cardRect.bottom) / 2 - containerRect.top;
 
-    dragOffset.current = {
-      x: mouse.x - containerRect.left - cardCenterX,
-      y: mouse.y - containerRect.top - cardCenterY,
-    };
+      dragOffset.current = {
+        x: mouse.x - containerRect.left - cardCenterX,
+        y: mouse.y - containerRect.top - cardCenterY,
+      };
 
-    // Record starting mouse position and element transform for delta-based dragging
-    dragStartMouse.current = { x: startPx, y: startPy };
-    dragStartTransform.current = {
-      x: (Number(gsap.getProperty(card, 'x')) as number) || 0,
-      y: (Number(gsap.getProperty(card, 'y')) as number) || 0,
-    };
-    console.log('dragOffset', dragOffset.current);
-    console.log('mouse', mouse);
-    console.log('containerRect', containerRect);
-    console.log('cardRect', cardRect);
-    console.log('cardCenterX', cardCenterX);
-    console.log('cardCenterY', cardCenterY);
-    // Visually scale on drag start without interfering with translation
-    currentScale.current = 1.05;
-    gsap.to(card, {
-      scale: 1.05,
-      duration: 0.15,
-      ease: 'power2.out',
-      overwrite: 'auto',
-      transformOrigin: '50% 50%',
-    });
+      // Record starting mouse position and element transform for delta-based dragging
+      dragStartMouse.current = { x: startPx, y: startPy };
+      dragStartTransform.current = {
+        x: (Number(gsap.getProperty(card, 'x')) as number) || 0,
+        y: (Number(gsap.getProperty(card, 'y')) as number) || 0,
+      };
 
-    setDraggedCard(cardIndex);
-    isDragging.current = true;
-    setIsDraggingState(true);
-  };
+      // Visually scale on drag start without interfering with translation
+      currentScale.current = 1.05;
+      gsap.to(card, {
+        scale: 1.05,
+        duration: 0.15,
+        ease: 'power2.out',
+        overwrite: 'auto',
+        transformOrigin: '50% 50%',
+      });
+
+      setDraggedCard(cardIndex);
+      isDragging.current = true;
+      setIsDraggingState(true);
+    },
+    [prefersReducedMotion, mouse]
+  );
 
   const handleMouseUp = useCallback(() => {
     if (isDragging.current && draggedCard !== null) {

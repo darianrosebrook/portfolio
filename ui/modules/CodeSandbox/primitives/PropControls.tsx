@@ -88,11 +88,18 @@ export const PropControls = React.memo(function PropControls({
   values,
   onChange,
 }: PropControlsProps) {
+  // Store latest values in ref to avoid dependency
+  const valuesRef = React.useRef(values);
+  React.useEffect(() => {
+    valuesRef.current = values;
+  }, [values]);
+
+  // Use ref to access latest values without dependency
   const handleSet = React.useCallback(
     (id: string, v: unknown) => {
-      onChange({ ...values, [id]: v });
+      onChange({ ...valuesRef.current, [id]: v });
     },
-    [onChange, values]
+    [onChange]
   );
 
   return (

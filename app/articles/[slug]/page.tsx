@@ -1,34 +1,12 @@
 import { createClient } from '@/utils/supabase/server';
-// Next
 import NextImage from 'next/image';
-
-// TipTap
-
-import StarterKit from '@tiptap/starter-kit';
-import CharacterCount from '@tiptap/extension-character-count';
-import Image from '@tiptap/extension-image';
-
-import { generateHTML } from '@tiptap/html';
-import { JSONContent } from '@tiptap/react';
+import type { JSONContent } from '@tiptap/react';
 import { generateLDJson } from '@/utils/ldjson';
+import { processArticleContent } from '@/utils/tiptap/htmlGeneration';
 
 import styles from './styles.module.scss';
 import ProfileFlag from '@/ui/components/ProfileFlag';
 import ShareLinks from './ShareLinks';
-
-function getArticleContent(data: JSONContent) {
-  let html: string = generateHTML(data, [CharacterCount, Image, StarterKit]);
-  const h1FromHTML = html.match(/<h1>(.*?)<\/h1>/);
-  const imageFromHTML = html.match(/<img(.*?)>/);
-  if (h1FromHTML) {
-    html = html.replace(h1FromHTML[0], '');
-  }
-  if (imageFromHTML) {
-    html = html.replace(imageFromHTML[0], '');
-  }
-  const content = { h1FromHTML, imageFromHTML, html };
-  return content;
-}
 
 async function getData(slug: string) {
   const supabase = await createClient();
@@ -61,8 +39,13 @@ async function getData(slug: string) {
     .limit(1)
     .single();
 
-  const contents = getArticleContent(article.articleBody);
-  const { h1FromHTML, imageFromHTML, html } = contents;
+  const contents = processArticleContent(article.articleBody);
+  const { html, h1Text, imageSrc } = contents;
+  
+  // Convert to legacy format for backward compatibility
+  const h1FromHTML = h1Text ? [`<h1>${h1Text}</h1>`] : null;
+  const imageFromHTML = imageSrc ? [`<img src="${imageSrc}" />`] : null;
+  
   return {
     ...article,
     html,

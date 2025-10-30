@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/utils/supabase/server';
 import { createArticleSchema } from '@/utils/schemas/article.schema';
+import { createMutationResponse, createCachedResponse, CacheHeaders, revalidateEditorPaths } from '@/utils/editor/cache';
 
 export async function POST(request: Request) {
   const supabase = await createClient();
@@ -49,10 +50,10 @@ export async function POST(request: Request) {
     });
   }
 
-  return new NextResponse(JSON.stringify(data), {
-    status: 201,
-    headers: { 'Content-Type': 'application/json' },
-  });
+  // Revalidate paths after creation
+  revalidateEditorPaths('articles');
+
+  return createMutationResponse(data, 201);
 }
 
 export async function GET() {
@@ -92,8 +93,4 @@ export async function GET() {
     });
   }
 
-  return new NextResponse(JSON.stringify(data), {
-    status: 200,
-    headers: { 'Content-Type': 'application/json' },
-  });
-}
+  return createCachedResponse(data, 200, CacheHeaders.LIST);

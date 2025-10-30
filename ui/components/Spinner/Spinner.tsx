@@ -1,5 +1,6 @@
 'use client';
 import * as React from 'react';
+import { createCSSProperties } from '@/utils/css-custom-properties';
 import styles from './Spinner.module.scss';
 
 export type SpinnerVariant = 'ring' | 'dots' | 'bars';
@@ -47,10 +48,10 @@ export const Spinner: React.FC<SpinnerProps> = ({
       typeof thickness === 'number'
         ? `${thickness}px`
         : `var(--spinner-thickness-${thickness})`;
-    return {
-      ['--spinner-size-value' as any]: resolvedSize,
-      ['--spinner-thickness-value' as any]: resolvedThickness,
-    } as React.CSSProperties;
+    return createCSSProperties({
+      '--spinner-size-value': resolvedSize,
+      '--spinner-thickness-value': resolvedThickness,
+    });
   }, [size, thickness]);
 
   if (!visible) return null;

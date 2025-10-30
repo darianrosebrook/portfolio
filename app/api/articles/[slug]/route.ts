@@ -1,6 +1,12 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/utils/supabase/server';
 import { updateArticleSchema } from '@/utils/schemas/article.schema';
+import { 
+  createCachedResponse, 
+  createMutationResponse,
+  CacheHeaders,
+  revalidateEditorPaths 
+} from '@/utils/editor/cache';
 
 export async function GET(
   _request: Request,
@@ -32,10 +38,7 @@ export async function GET(
     });
   }
 
-  return new NextResponse(JSON.stringify(data), {
-    status: 200,
-    headers: { 'Content-Type': 'application/json' },
-  });
+  return createCachedResponse(data, 200, CacheHeaders.EDITOR_GET);
 }
 
 export async function PUT(
@@ -66,9 +69,42 @@ export async function PUT(
     });
   }
 
+  // If publishing (status === 'published'), copy working columns to published columns
+  const updateData: Record<string, unknown> = { ...validation.data };
+  
+  if (validation.data.status === 'published') {
+    // First, get current record to check for working columns
+    const { data: currentRecord } = await supabase
+      .from('articles')
+      .select('is_dirty, workingbody, workingheadline, workingdescription, workingimage, workingkeywords, workingarticlesection')
+      .eq('slug', slug)
+      .eq('author', user.id)
+      .single();
+
+    if (currentRecord?.is_dirty) {
+      // Copy working columns to published columns
+      updateData.articleBody = currentRecord.workingbody ?? updateData.articleBody;
+      updateData.headline = currentRecord.workingheadline ?? updateData.headline;
+      updateData.description = currentRecord.workingdescription ?? updateData.description;
+      updateData.image = currentRecord.workingimage ?? updateData.image;
+      updateData.keywords = currentRecord.workingkeywords ?? updateData.keywords;
+      updateData.articleSection = currentRecord.workingarticlesection ?? updateData.articleSection;
+      
+      // Clear working columns and dirty flag
+      updateData.workingbody = null;
+      updateData.workingheadline = null;
+      updateData.workingdescription = null;
+      updateData.workingimage = null;
+      updateData.workingkeywords = null;
+      updateData.workingarticlesection = null;
+      updateData.working_modified_at = null;
+      updateData.is_dirty = false;
+    }
+  }
+
   const { data, error } = await supabase
     .from('articles')
-    .update(validation.data)
+    .update(updateData)
     .eq('slug', slug)
     .eq('author', user.id)
     .select();
@@ -94,10 +130,10 @@ export async function PUT(
     );
   }
 
-  return new NextResponse(JSON.stringify(data), {
-    status: 200,
-    headers: { 'Content-Type': 'application/json' },
-  });
+  // Revalidate paths after successful mutation
+  revalidateEditorPaths('articles');
+
+  return createMutationResponse(data);
 }
 
 // Save working draft fields without overwriting published content
@@ -121,8 +157,7 @@ export async function PATCH(
 
   const body = await request.json();
 
-  // For now, save working draft to the main fields since working columns don't exist yet
-  // To enable proper draft functionality, run utils/supabase/migrations/add-working-columns.sql
+  // Use working columns to preserve published content
   const {
     workingBody,
     workingHeadline,
@@ -135,13 +170,14 @@ export async function PATCH(
   const { data, error } = await supabase
     .from('articles')
     .update({
-      articleBody: workingBody,
-      headline: workingHeadline,
-      description: workingDescription,
-      image: workingImage,
-      keywords: workingKeywords,
-      articleSection: workingArticleSection,
-      modified_at: new Date().toISOString(),
+      workingbody: workingBody,
+      workingheadline: workingHeadline,
+      workingdescription: workingDescription,
+      workingimage: workingImage,
+      workingkeywords: workingKeywords,
+      workingarticlesection: workingArticleSection,
+      working_modified_at: new Date().toISOString(),
+      is_dirty: true,
     })
     .eq('slug', slug)
     .eq('author', user.id)
@@ -171,10 +207,10 @@ export async function PATCH(
     );
   }
 
-  return new NextResponse(JSON.stringify(data), {
-    status: 200,
-    headers: { 'Content-Type': 'application/json' },
-  });
+  // Revalidate paths after successful autosave
+  revalidateEditorPaths('articles');
+
+  return createMutationResponse(data);
 }
 
 export async function DELETE(
@@ -214,5 +250,6 @@ export async function DELETE(
 
   return new NextResponse(null, {
     status: 204,
+    headers: { 'Cache-Control': CacheHeaders.MUTATION },
   });
 }

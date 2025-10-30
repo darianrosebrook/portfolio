@@ -4,6 +4,8 @@ import React, {
   useEffect,
   useRef,
   useState,
+  useCallback,
+  useMemo,
   ReactNode,
 } from 'react';
 import { Observer } from 'gsap/Observer';
@@ -44,11 +46,38 @@ const InteractionContext = createContext<InteractionContextValue | undefined>(
   undefined
 );
 
+/**
+ * Throttles a function call to limit execution frequency
+ */
+function throttle<T extends (...args: unknown[]) => void>(
+  func: T,
+  limit: number
+): (...args: Parameters<T>) => void {
+  let lastRun: number;
+  let lastFunc: ReturnType<typeof setTimeout>;
+  return function (this: unknown, ...args: Parameters<T>) {
+    const context = this;
+    if (!lastRun) {
+      func.apply(context, args);
+      lastRun = Date.now();
+    } else {
+      clearTimeout(lastFunc);
+      lastFunc = setTimeout(() => {
+        if (Date.now() - lastRun >= limit) {
+          func.apply(context, args);
+          lastRun = Date.now();
+        }
+      }, limit - (Date.now() - lastRun));
+    }
+  };
+}
+
 export const InteractionProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const { prefersReducedMotion, setPrefersReducedMotion } = useReducedMotion();
-  // Mouse state
+  
+  // Mouse state - use refs for high-frequency updates, state for infrequent ones
   const mouseRef = useRef<MouseState>({ ...defaultMouse });
   const [mouse, setMouse] = useState<MouseState>({ ...defaultMouse });
 
@@ -61,9 +90,17 @@ export const InteractionProvider: React.FC<{ children: ReactNode }> = ({
     ...defaultWindow,
   });
 
+  // Throttled update function for mouse position (high-frequency updates)
+  const updateMousePosition = useRef(
+    throttle(() => {
+      setMouse({ ...mouseRef.current });
+    }, 16) // ~60fps
+  );
+
   // Mouse/scroll observer
   useEffect(() => {
     if (prefersReducedMotion) return;
+    
     const observer = Observer.create({
       target: window,
       type: 'pointer, wheel, touch',
@@ -76,7 +113,8 @@ export const InteractionProvider: React.FC<{ children: ReactNode }> = ({
           velocityY: self.velocityY,
           hasMouseMoved: true,
         };
-        setMouse({ ...mouseRef.current });
+        // Use throttled update for position to reduce re-renders
+        updateMousePosition.current();
       },
       onPress: () => {
         mouseRef.current.isPressed = true;
@@ -96,49 +134,74 @@ export const InteractionProvider: React.FC<{ children: ReactNode }> = ({
         setMouse({ ...mouseRef.current });
       },
     });
+    
     return () => observer.kill();
   }, [prefersReducedMotion]);
 
-  // Scroll tracking
+  // Scroll tracking with throttling
   useEffect(() => {
     if (prefersReducedMotion) return;
+    
     let lastScrollY = window.scrollY;
     let lastScrollX = window.scrollX;
+    let ticking = false;
+
     const handleScroll = () => {
-      const x = window.scrollX;
-      const y = window.scrollY;
-      let direction: ScrollState['direction'] = null;
-      if (y > lastScrollY) direction = 'down';
-      else if (y < lastScrollY) direction = 'up';
-      else if (x > lastScrollX) direction = 'right';
-      else if (x < lastScrollX) direction = 'left';
-      lastScrollY = y;
-      lastScrollX = x;
-      scrollRef.current = { x, y, direction };
-      setScroll({ ...scrollRef.current });
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const x = window.scrollX;
+          const y = window.scrollY;
+          let direction: ScrollState['direction'] = null;
+          if (y > lastScrollY) direction = 'down';
+          else if (y < lastScrollY) direction = 'up';
+          else if (x > lastScrollX) direction = 'right';
+          else if (x < lastScrollX) direction = 'left';
+          lastScrollY = y;
+          lastScrollX = x;
+          scrollRef.current = { x, y, direction };
+          setScroll({ ...scrollRef.current });
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
-    window.addEventListener('scroll', handleScroll);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [prefersReducedMotion]);
 
-  // Window size listener
+  // Window size listener with throttling
   useEffect(() => {
+    let ticking = false;
+    
     const handleResize = () => {
-      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setWindowSize({
+            width: window.innerWidth,
+            height: window.innerHeight,
+          });
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
+
+    // Set initial size
     handleResize();
-    window.addEventListener('resize', handleResize);
+    
+    window.addEventListener('resize', handleResize, { passive: true });
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   // Provide setHoveredTarget to update hoveredTarget in mouse state
-  const setHoveredTarget = (target: string | undefined) => {
+  const setHoveredTarget = useCallback((target: string | undefined) => {
     mouseRef.current.hoveredTarget = target;
     setMouse((prev) => ({ ...prev, hoveredTarget: target }));
-  };
+  }, []);
 
-  // Provide context value
-  const contextValue = React.useMemo(
+  // Provide context value - memoized to prevent unnecessary re-renders
+  const contextValue = useMemo<InteractionContextValue>(
     () => ({
       mouse,
       scroll,
@@ -147,7 +210,14 @@ export const InteractionProvider: React.FC<{ children: ReactNode }> = ({
       setPrefersReducedMotion,
       setHoveredTarget,
     }),
-    [mouse, scroll, windowSize, prefersReducedMotion, setPrefersReducedMotion]
+    [
+      mouse,
+      scroll,
+      windowSize,
+      prefersReducedMotion,
+      setPrefersReducedMotion,
+      setHoveredTarget,
+    ]
   );
 
   return (

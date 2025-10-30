@@ -14,6 +14,8 @@ import React, {
 } from 'react';
 import { createPortal } from 'react-dom';
 import { gsap } from 'gsap';
+import { mergeRefs } from '@/utils/refs';
+import { isHTMLElement } from '@/utils/type-guards';
 import { OpenStateProps, DismissibleProps } from '@/types/ui';
 import styles from './Dialog.module.scss';
 
@@ -109,16 +111,37 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
     useEffect(() => {
       if (!isOpen) return;
 
-      // Store currently focused element
-      previousActiveElement.current = document.activeElement as HTMLElement;
+      // Store currently focused element safely
+      const activeElement = document.activeElement;
+      if (isHTMLElement(activeElement)) {
+        previousActiveElement.current = activeElement;
+      }
 
       // Set initial focus
-      const focusElement = initialFocus
-        ? (document.querySelector(initialFocus) as HTMLElement)
-        : (dialogRef.current?.querySelector('[autofocus]') as HTMLElement) ||
-          (dialogRef.current?.querySelector(
-            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-          ) as HTMLElement);
+      let focusElement: HTMLElement | null = null;
+
+      if (initialFocus) {
+        const element = document.querySelector<HTMLElement>(initialFocus);
+        if (isHTMLElement(element)) {
+          focusElement = element;
+        }
+      } else {
+        // Try autofocus first
+        const autofocusEl = dialogRef.current?.querySelector<HTMLElement>(
+          '[autofocus]'
+        );
+        if (isHTMLElement(autofocusEl)) {
+          focusElement = autofocusEl;
+        } else {
+          // Fallback to first focusable element
+          const firstFocusable = dialogRef.current?.querySelector<HTMLElement>(
+            'button:not([disabled]), [href]:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"]):not([disabled])'
+          );
+          if (isHTMLElement(firstFocusable)) {
+            focusElement = firstFocusable;
+          }
+        }
+      }
 
       if (focusElement) {
         focusElement.focus();
@@ -126,11 +149,22 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
 
       return () => {
         // Return focus when dialog closes
-        const returnElement = returnFocus
-          ? (document.querySelector(returnFocus) as HTMLElement)
-          : previousActiveElement.current;
+        let returnElement: HTMLElement | null = null;
 
-        if (returnElement && document.contains(returnElement)) {
+        if (returnFocus) {
+          const element = document.querySelector<HTMLElement>(returnFocus);
+          if (isHTMLElement(element)) {
+            returnElement = element;
+          }
+        } else if (previousActiveElement.current) {
+          returnElement = previousActiveElement.current;
+        }
+
+        if (
+          returnElement &&
+          document.contains(returnElement) &&
+          isHTMLElement(returnElement)
+        ) {
           returnElement.focus();
         }
       };
@@ -148,16 +182,16 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
 
         // Trap focus for modal dialogs
         if (modal && e.key === 'Tab') {
-          const focusableElements = dialogRef.current?.querySelectorAll(
-            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-          );
+          const focusableElements = Array.from(
+            dialogRef.current?.querySelectorAll<HTMLElement>(
+              'button:not([disabled]), [href]:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"]):not([disabled])'
+            ) || []
+          ).filter(isHTMLElement);
 
-          if (!focusableElements || focusableElements.length === 0) return;
+          if (focusableElements.length === 0) return;
 
-          const firstElement = focusableElements[0] as HTMLElement;
-          const lastElement = focusableElements[
-            focusableElements.length - 1
-          ] as HTMLElement;
+          const firstElement = focusableElements[0];
+          const lastElement = focusableElements[focusableElements.length - 1];
 
           if (e.shiftKey) {
             if (document.activeElement === firstElement) {
@@ -247,6 +281,7 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
       return () => {
         if (animationRef.current) {
           animationRef.current.kill();
+          animationRef.current = null;
         }
       };
     }, [isOpen]);
@@ -281,16 +316,12 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
         onClick={handleBackdropClick}
       >
         <div
-          ref={(node) => {
-            dialogRef.current = node;
-            if (forwardedRef) {
-              if (typeof forwardedRef === 'function') {
-                forwardedRef(node);
-              } else {
-                forwardedRef.current = node;
-              }
-            }
-          }}
+          ref={mergeRefs(
+            (node: HTMLDivElement | null) => {
+              dialogRef.current = node;
+            },
+            forwardedRef
+          )}
           id={dialogId}
           role="dialog"
           aria-modal={modal}
@@ -313,40 +344,56 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
 Dialog.displayName = 'Dialog';
 
 // Dialog subcomponents
-const Header = ({
-  children,
-  className = '',
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) => <div className={`${styles.header} ${className}`}>{children}</div>;
+const Header = forwardRef<
+  HTMLDivElement,
+  {
+    children: React.ReactNode;
+    className?: string;
+  }
+>(({ children, className = '' }, ref) => (
+  <div ref={ref} className={`${styles.header} ${className}`}>
+    {children}
+  </div>
+));
 Header.displayName = 'Dialog.Header';
 
-const Title = ({
-  children,
-  className = '',
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) => <h2 className={`${styles.title} ${className}`}>{children}</h2>;
+const Title = forwardRef<
+  HTMLHeadingElement,
+  {
+    children: React.ReactNode;
+    className?: string;
+  }
+>(({ children, className = '' }, ref) => (
+  <h2 ref={ref} className={`${styles.title} ${className}`}>
+    {children}
+  </h2>
+));
 Title.displayName = 'Dialog.Title';
 
-const Body = ({
-  children,
-  className = '',
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) => <div className={`${styles.body} ${className}`}>{children}</div>;
+const Body = forwardRef<
+  HTMLDivElement,
+  {
+    children: React.ReactNode;
+    className?: string;
+  }
+>(({ children, className = '' }, ref) => (
+  <div ref={ref} className={`${styles.body} ${className}`}>
+    {children}
+  </div>
+));
 Body.displayName = 'Dialog.Body';
 
-const Footer = ({
-  children,
-  className = '',
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) => <div className={`${styles.footer} ${className}`}>{children}</div>;
+const Footer = forwardRef<
+  HTMLDivElement,
+  {
+    children: React.ReactNode;
+    className?: string;
+  }
+>(({ children, className = '' }, ref) => (
+  <div ref={ref} className={`${styles.footer} ${className}`}>
+    {children}
+  </div>
+));
 Footer.displayName = 'Dialog.Footer';
 
 const CloseButton = ({

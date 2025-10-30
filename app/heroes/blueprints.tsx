@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import Styles from './blueprints.module.scss';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -15,7 +15,7 @@ const Blueprints: React.FC = () => {
 
   const numRows = 9;
   const numCols = 12;
-  const middleRowIndex = Math.floor(numRows / 2);
+  const middleRowIndex = useMemo(() => Math.floor(numRows / 2), []);
 
   const [svgs, setSvgs] = useState<string[]>([]);
 
@@ -32,37 +32,64 @@ const Blueprints: React.FC = () => {
     );
   }, [svgs.length]);
 
-  // Animation loop for mouse movement
+  // Memoize animation calculations
+  const calculateTargetX = useCallback(
+    (interactionX: number, distanceFromMiddle: number) => {
+      const distanceModifier = 0.2;
+      const normalizedMouseX = (interactionX / winsize.width) * 2 - 1;
+      const targetTranslateX = normalizedMouseX * 12 * (winsize.width / 80);
+      const factor = 1 - distanceModifier * distanceFromMiddle;
+      return targetTranslateX * factor;
+    },
+    [winsize.width]
+  );
+
+  // Animation loop for mouse movement - optimized
   useEffect(() => {
     let frameId: number;
+    let rafRunning = true;
+    
     const animate = () => {
-      if (!gridRef.current) return;
-      const rows = Array.from(gridRef.current.children) as HTMLElement[];
-      const distanceModifier = 0.2;
+      if (!rafRunning) return;
+      
+      const grid = gridRef.current;
+      if (!grid) {
+        rafRunning = false;
+        return;
+      }
+      
+      const rows = Array.from(grid.children) as HTMLElement[];
       const { x, hasMouseMoved } = mouse;
+      
       let interactionX: number;
       if (hasMouseMoved) {
         interactionX = x;
       } else {
-        const rect = gridRef.current.getBoundingClientRect();
+        const rect = grid.getBoundingClientRect();
         interactionX = rect.left + rect.width / 2 + (scroll.y * rect.width) / 2;
       }
-      const normalizedMouseX = (interactionX / winsize.width) * 2 - 1;
-      const targetTranslateX = normalizedMouseX * 12 * (winsize.width / 80);
+      
       rows.forEach((row, index) => {
         const distanceFromMiddle = Math.abs(index - middleRowIndex);
-        const factor = 1 - distanceModifier * distanceFromMiddle;
-        const targetX = targetTranslateX * factor;
+        const targetX = calculateTargetX(interactionX, distanceFromMiddle);
         const tweenFn = toX.current[index];
         if (tweenFn) tweenFn(targetX);
       });
-      frameId = requestAnimationFrame(animate);
+      
+      if (rafRunning) {
+        frameId = requestAnimationFrame(animate);
+      }
     };
+    
     animate();
+    
     return () => {
-      cancelAnimationFrame(frameId);
+      rafRunning = false;
+      if (frameId) {
+        cancelAnimationFrame(frameId);
+      }
     };
-  }, [mouse, winsize.width, gridRef, middleRowIndex, scroll.y, svgs.length]);
+  }, [mouse, scroll.y, middleRowIndex, calculateTargetX]);
 
   useEffect(() => {
     const dsSprite = document.getElementById('DSSPRITE') as HTMLDivElement;

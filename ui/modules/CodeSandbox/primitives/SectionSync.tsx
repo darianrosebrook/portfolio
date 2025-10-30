@@ -51,6 +51,15 @@ export function SectionSync({
   threshold = [0, 0.25, 0.5, 0.75, 1],
   rootMargin = '0px',
 }: SectionSyncProps) {
+  // Use refs to store callbacks to avoid dependency issues
+  const onActiveSectionRef = React.useRef(onActiveSection);
+  const onDecorateRef = React.useRef(onDecorate);
+
+  React.useEffect(() => {
+    onActiveSectionRef.current = onActiveSection;
+    onDecorateRef.current = onDecorate;
+  }, [onActiveSection, onDecorate]);
+
   React.useEffect(() => {
     const observeRoot = root ?? null;
     const nodeList = (root ?? document).querySelectorAll('[data-section-id]');
@@ -91,18 +100,18 @@ export function SectionSync({
             const decos: Decoration[] = [];
             for (let i = start; i <= end; i++)
               decos.push({ file, line: i, className: 'highlighted-line' });
-            onDecorate?.(decos);
+            onDecorateRef.current?.(decos);
           } else {
-            onDecorate?.([]);
+            onDecorateRef.current?.([]);
           }
-          onActiveSection?.(best.id);
+          onActiveSectionRef.current?.(best.id);
         }
       },
       { root: observeRoot, threshold, rootMargin }
     );
     nodeList.forEach((n) => observer.observe(n));
     return () => observer.disconnect();
-  }, [sections, root, onActiveSection, onDecorate, threshold, rootMargin]);
+  }, [sections, root, threshold, rootMargin]);
 
   // Also emit initial decorators from the first section for non-observed mounts
   React.useEffect(() => {
@@ -113,8 +122,8 @@ export function SectionSync({
       const decos: Decoration[] = [];
       for (let i = start; i <= end; i++)
         decos.push({ file, line: i, className: 'highlighted-line' });
-      onDecorate?.(decos);
-      onActiveSection?.(s.id);
+      onDecorateRef.current?.(decos);
+      onActiveSectionRef.current?.(s.id);
     }
     // run once on sections seed
     // eslint-disable-next-line react-hooks/exhaustive-deps

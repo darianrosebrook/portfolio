@@ -126,10 +126,28 @@
         font-weight: 500;
         text-decoration: none;
         transition: all 0.2s ease;
+        position: relative;
 
         &:hover {
           background: var(--semantic-color-background-hover);
           color: var(--semantic-color-foreground-accent);
+        }
+
+        &.active {
+          color: var(--semantic-color-foreground-accent);
+          font-weight: 600;
+          
+          &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 3px;
+            height: 60%;
+            background: var(--semantic-color-background-highlight);
+            border-radius: 0 2px 2px 0;
+          }
         }
       }
     }

@@ -23,7 +23,7 @@ const canViewTransition = () =>
 const TabsComponent: React.FC<TabsProps> = ({
   className = '',
   children,
-  defaultValue = 'tab1',
+  defaultValue,
   value,
   onValueChange,
   activationMode = 'auto',
