@@ -138,8 +138,10 @@
 
 .section {
   position: relative;
+  isolation: isolate; // Create new stacking context
   z-index: 1;
   margin-bottom: 3rem;
+  contain: layout style; // Prevent layout interference
 
   h2 {
     margin: 0 0 1.5rem;
@@ -188,10 +190,15 @@
 }
 
 .liveExample {
+  isolation: isolate; // Create new stacking context
+  contain: layout;
+  
   .exampleContainer {
+    position: relative;
     overflow: hidden;
     border: 1px solid var(--semantic-color-border-subtle);
     border-radius: 0.5rem;
+    min-height: 400px;
   }
 }
 
@@ -230,12 +237,18 @@
 }
 
 .apiContent {
+  isolation: isolate;
+  contain: layout;
+  
   .propsTable,
   .methodsTable {
+    position: relative;
     padding: 1.5rem;
     background: var(--semantic-color-background-secondary);
     border: 1px solid var(--semantic-color-border-subtle);
     border-radius: 0.5rem;
+    margin-bottom: 2rem;
+    contain: layout style;
   }
 }
 
@@ -335,6 +348,9 @@
 }
 
 .examplesContent {
+  isolation: isolate; // Create new stacking context
+  contain: layout;
+  
   .exampleGrid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -346,15 +362,21 @@
   }
 
   .example {
+    position: relative;
+    isolation: isolate;
     overflow: hidden;
     border: 1px solid var(--semantic-color-border-subtle);
     border-radius: 0.5rem;
+    contain: layout style;
+    min-height: 300px;
 
     h3 {
       margin: 0;
       padding: 1rem;
       background: var(--semantic-color-background-secondary);
       border-bottom: 1px solid var(--semantic-color-border-subtle);
+      position: relative;
+      z-index: 1;
     }
   }
 }
