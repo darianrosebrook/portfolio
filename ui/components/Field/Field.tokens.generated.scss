@@ -21,4 +21,7 @@
   --field-color-focus-border: var(--semantic-color-border-focus);
   --field-color-invalid-border: var(--semantic-color-border-danger);
   --field-color-invalid-text: var(--semantic-color-foreground-danger);
+
+  /* === Other Tokens === */
+  --field-radius: var(--semantic-shape-control-radius-default);
 }

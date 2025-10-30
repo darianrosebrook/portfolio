@@ -14,15 +14,18 @@ import { generateTokenTypes } from '../generators/types';
 interface BuildStep {
   name: string;
   description: string;
-  fn: () => boolean | Promise<boolean>;
+  fn: (incremental?: boolean) => boolean | Promise<boolean>;
   required: boolean;
 }
 
 /**
  * Design tokens build pipeline
  */
-export async function buildTokens(): Promise<boolean> {
+export async function buildTokens(incremental = true): Promise<boolean> {
   console.log('🎨 Design Tokens Build Pipeline\n');
+  if (incremental) {
+    console.log('⚡ Incremental build enabled\n');
+  }
 
   const steps: BuildStep[] = [
     {
@@ -55,7 +58,7 @@ export async function buildTokens(): Promise<boolean> {
     console.log(`[${step.name}] ${step.description}...`);
 
     try {
-      const success = await step.fn();
+      const success = await step.fn(incremental);
       const duration = Date.now() - startTime;
 
       results.push({ step: step.name, success, duration });

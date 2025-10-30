@@ -9,9 +9,9 @@
     "color": {
       "fg": "{semantic.color.foreground.primary}",
       "active-fg": "{semantic.color.foreground.primary}",
-      "active-bg": "{semantic.color.background.surface}",
+      "active-bg": "{semantic.color.background.secondary}",
       "disabled-fg": "{semantic.color.foreground.disabled}",
-      "indicator": "{semantic.color.accent.info}",
+      "indicator": "{semantic.color.border.accent}",
       "focus": "{semantic.color.border.accent}",
       "hover": {
         "bg": "{semantic.color.background.hover}",
@@ -19,10 +19,10 @@
       }
     },
     "shape": {
-      "radius": "{semantic.shape.radius.default}"
+      "radius": "{core.shape.radius.medium}"
     },
     "motion": {
-      "indicator": "{semantic.motion.duration.fast}"
+      "indicator": "{core.motion.duration.short}"
     }
   }
 }

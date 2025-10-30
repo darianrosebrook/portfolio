@@ -2,19 +2,19 @@
   "prefix": "walkthrough",
   "tokens": {
     "surface": {
-      "bg": "{semantic.color.background.layer}",
+      "bg": "{semantic.color.background.secondary}",
       "border": "{semantic.color.border.subtle}",
-      "radius": "{core.shape.radius.large}",
-      "shadow": "{semantic.elevation.depth.3}",
+      "radius": "{core.shape.radius.04}",
+      "shadow": "{semantic.elevation.surface.floating}",
       "padding": "{core.spacing.size.08}"
     },
     "title": {
-      "fontSize": "{semantic.typography.size.300}",
-      "fontWeight": "{semantic.typography.weight.semibold}",
+      "fontSize": "{semantic.typography.heading.03}",
+      "fontWeight": "{semantic.typography.fontWeight.bold}",
       "color": "{semantic.color.foreground.primary}"
     },
     "description": {
-      "fontSize": "{semantic.typography.size.200}",
+      "fontSize": "{semantic.typography.body.02}",
       "color": "{semantic.color.foreground.secondary}",
       "marginTop": "{core.spacing.size.04}"
     },
@@ -25,13 +25,13 @@
     "dots": {
       "size": "{core.spacing.size.02}",
       "gap": "{core.spacing.size.03}",
-      "active": "{semantic.color.brand.500}",
+      "active": "{semantic.color.action.background.primary.default}",
       "idle": "{semantic.color.border.subtle}"
     },
     "button": {
       "primary": {
-        "bg": "{semantic.color.brand.500}",
-        "color": "{semantic.color.foreground.onBrand}",
+        "bg": "{semantic.color.action.background.primary.default}",
+        "color": "{semantic.color.action.foreground.primary.default}",
         "radius": "{core.shape.radius.medium}",
         "paddingY": "{core.spacing.size.04}",
         "paddingX": "{core.spacing.size.06}"

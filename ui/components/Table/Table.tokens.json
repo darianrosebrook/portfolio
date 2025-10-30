@@ -28,10 +28,10 @@
     },
     "text": {
       "size": "{semantic.typography.body.03}",
-      "lineHeight": "{semantic.typography.lineHeight.default}",
+      "lineHeight": "{semantic.typography.lineHeight.normal}",
       "sizeCaption": "{semantic.typography.body.04}",
       "sizeSort": "{semantic.typography.body.04}",
-      "weightHead": "{semantic.typography.fontWeight.semibold}",
+      "weightHead": "{semantic.typography.fontWeight.bold}",
       "weightFooter": "{semantic.typography.fontWeight.medium}"
     },
     "motion": {

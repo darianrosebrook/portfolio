@@ -36,18 +36,38 @@ export function ComprehensiveComponentDoc({
   const complexityLabel = String(layer).replace(/s$/, '');
   const isBuilt = status === 'Built' && paths?.component;
 
+  // Stable preview config to prevent re-renders
+  const previewConfig = React.useMemo(
+    () => ({
+      runtime: 'iframe' as const,
+      device: 'desktop' as const,
+      theme: 'system' as const,
+    }),
+    []
+  );
+
   // Generate interactive examples based on component status
+  // Use stable primitive values instead of object reference to prevent infinite loops
+  const componentKey = React.useMemo(
+    () => `${component.component}-${component.status}-${component.paths?.component || ''}`,
+    [component.component, component.status, component.paths?.component]
+  );
+
   const interactiveProject = React.useMemo(
     () => generateEnhancedInteractiveProject(component),
-    [component]
+    [componentKey, component.component, component.status]
   );
   const variantGrid = React.useMemo(
     () => generateEnhancedVariantGrid(component),
-    [component]
+    [component.component]
   );
   const sections = React.useMemo(
     () => generateSections(component),
-    [component]
+    [component.component]
+  );
+  const controls = React.useMemo(
+    () => generateEnhancedControls(component),
+    [component.component]
   );
 
   return (
@@ -155,11 +175,7 @@ export function ComprehensiveComponentDoc({
                   project={interactiveProject}
                   sections={sections}
                   height="400px"
-                  preview={{
-                    runtime: 'iframe',
-                    device: 'desktop',
-                    theme: 'system',
-                  }}
+                  preview={previewConfig}
                 />
               </div>
             </div>
@@ -207,7 +223,7 @@ export function ComprehensiveComponentDoc({
             componentName={name}
             grid={variantGrid}
             height="500px"
-            controls={generateEnhancedControls(component)}
+            controls={controls}
           />
         ) : (
           <div className={styles.plannedContent}>

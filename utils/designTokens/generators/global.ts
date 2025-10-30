@@ -6,6 +6,7 @@
  * TypeScript-based generator for global design tokens.
  */
 
+import fs from 'fs';
 import {
   PATHS,
   readTokenFile,
@@ -16,6 +17,11 @@ import {
   logSummary,
   type TokenGroup,
 } from '../core/index';
+import { hasFileChanged, updateFileCache } from '../core/cache';
+import {
+  isTokenDeprecated,
+  formatDeprecationWarning,
+} from '../deprecation/index';
 
 interface ThemeMaps {
   root: Record<string, string>;
@@ -37,7 +43,8 @@ function collectTokens(
   obj: TokenGroup,
   path: string[] = [],
   context: CollectionContext,
-  maps: ThemeMaps
+  maps: ThemeMaps,
+  tokens: TokenGroup
 ): void {
   for (const [key, value] of Object.entries(obj)) {
     if (key.startsWith('$')) continue; // Skip metadata
@@ -68,12 +75,22 @@ function collectTokens(
 
           // Light theme value (from extension or default)
           const lightValue = extensions!['design.paths.light'] || tokenValue;
-          const processedLightValue = processTokenValue(lightValue, context);
+          const processedLightValue = processTokenValue(
+            lightValue,
+            context,
+            currentPath.join('.'),
+            tokens
+          );
           maps.lightColors[cssVar] = processedLightValue;
 
           // Dark theme value (from extension or default)
           const darkValue = extensions!['design.paths.dark'] || tokenValue;
-          const processedDarkValue = processTokenValue(darkValue, context);
+          const processedDarkValue = processTokenValue(
+            darkValue,
+            context,
+            currentPath.join('.'),
+            tokens
+          );
           maps.darkColors[cssVar] = processedDarkValue;
         } else if (typeof tokenValue === 'object' && tokenValue !== null) {
           const themeObj = tokenValue as Record<string, unknown>;
@@ -83,23 +100,43 @@ function collectTokens(
 
             // Light theme value
             if ('light' in themeObj) {
-              const lightValue = processTokenValue(themeObj.light, context);
+              const lightValue = processTokenValue(
+                themeObj.light,
+                context,
+                currentPath.join('.'),
+                tokens
+              );
               maps.lightColors[cssVar] = lightValue;
             }
 
             // Dark theme value
             if ('dark' in themeObj) {
-              const darkValue = processTokenValue(themeObj.dark, context);
+              const darkValue = processTokenValue(
+                themeObj.dark,
+                context,
+                currentPath.join('.'),
+                tokens
+              );
               maps.darkColors[cssVar] = darkValue;
             }
           } else {
             // Regular object value (not theme-specific)
-            const processedValue = processTokenValue(tokenValue, context);
+            const processedValue = processTokenValue(
+              tokenValue,
+              context,
+              currentPath.join('.'),
+              tokens
+            );
             maps.root[cssVar] = processedValue;
           }
         } else {
           // Simple value
-          const processedValue = processTokenValue(tokenValue, context);
+          const processedValue = processTokenValue(
+            tokenValue,
+            context,
+            currentPath.join('.'),
+            tokens
+          );
 
           // Determine where to place based on token type or path
           if (
@@ -115,7 +152,7 @@ function collectTokens(
         }
       } else {
         // This is a group, recurse
-        collectTokens(value as TokenGroup, currentPath, context, maps);
+        collectTokens(value as TokenGroup, currentPath, context, maps, tokens);
       }
     }
   }
@@ -124,11 +161,24 @@ function collectTokens(
 /**
  * Process token value and handle references
  */
-function processTokenValue(value: unknown, context: CollectionContext): string {
+function processTokenValue(
+  value: unknown,
+  context: CollectionContext,
+  tokenPath?: string,
+  tokens?: TokenGroup
+): string {
   if (typeof value === 'string') {
     // Handle token references like {core.color.blue.500}
-    const processedValue = value.replace(/\{([^}]+)\}/g, (match, tokenPath) => {
-      const cssVar = tokenPathToCSSVar(tokenPath);
+    const processedValue = value.replace(/\{([^}]+)\}/g, (match, refTokenPath) => {
+      // Check for deprecation warnings
+      if (tokens) {
+        const deprecation = isTokenDeprecated(tokens, refTokenPath);
+        if (deprecation) {
+          console.warn(formatDeprecationWarning(refTokenPath, deprecation));
+        }
+      }
+
+      const cssVar = tokenPathToCSSVar(refTokenPath);
       context.referencedVars.add(cssVar);
       return `var(${cssVar})`;
     });
@@ -156,8 +206,19 @@ function validateReferences(context: CollectionContext): string[] {
 /**
  * Generate global design tokens CSS
  */
-export function generateGlobalTokens(): boolean {
+export function generateGlobalTokens(incremental = true): boolean {
   console.log('[tokens] Generating global tokens...');
+
+  // Check for incremental build
+  if (incremental) {
+    if (
+      !hasFileChanged(PATHS.tokens) &&
+      fs.existsSync(PATHS.outputScss)
+    ) {
+      console.log('[tokens] ⚡ Design tokens unchanged, skipping global generation (incremental build)');
+      return true;
+    }
+  }
 
   // Read source tokens
   const tokens = readTokenFile(PATHS.tokens);
@@ -181,7 +242,7 @@ export function generateGlobalTokens(): boolean {
   };
 
   // Collect all tokens
-  collectTokens(tokens, [], context, maps);
+  collectTokens(tokens, [], context, maps, tokens);
 
   // Validate references
   const referenceErrors = validateReferences(context);
@@ -212,6 +273,9 @@ export function generateGlobalTokens(): boolean {
 
   // Write output file
   writeOutputFile(PATHS.outputScss, content, 'global design tokens');
+  
+  // Update cache after file is written
+  updateFileCache(PATHS.outputScss);
 
   // Log summary
   logSummary({

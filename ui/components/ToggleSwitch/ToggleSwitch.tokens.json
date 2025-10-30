@@ -7,7 +7,7 @@
         "default": "{semantic.color.background.secondary}",
         "hover": "{semantic.interaction.background.hover}",
         "active": "{semantic.interaction.background.active}",
-        "checked": "{semantic.color.action.background.default}",
+        "checked": "{semantic.color.action.background.primary.default}",
         "checkedHover": "{semantic.interaction.background.hover}",
         "disabled": "{semantic.color.background.disabled}"
       },
@@ -32,9 +32,9 @@
     },
     "size": {
       "width": {
-        "small": "{semantic.control.size.sm.width}",
-        "medium": "{semantic.control.size.md.width}",
-        "large": "{semantic.control.size.lg.width}"
+        "small": "calc({semantic.control.size.sm.height} + {semantic.control.size.sm.paddingX} * 2)",
+        "medium": "calc({semantic.control.size.md.height} + {semantic.control.size.md.paddingX} * 2)",
+        "large": "calc({semantic.control.size.lg.height} + {semantic.control.size.lg.paddingX} * 2)"
       },
       "height": {
         "small": "{semantic.control.size.sm.height}",
@@ -42,9 +42,9 @@
         "large": "{semantic.control.size.lg.height}"
       },
       "thumb": {
-        "small": "{semantic.control.size.sm.thumb}",
-        "medium": "{semantic.control.size.md.thumb}",
-        "large": "{semantic.control.size.lg.thumb}"
+        "small": "calc({semantic.control.size.sm.height} - {semantic.control.size.sm.paddingY} * 2)",
+        "medium": "calc({semantic.control.size.md.height} - {semantic.control.size.md.paddingY} * 2)",
+        "large": "calc({semantic.control.size.lg.height} - {semantic.control.size.lg.paddingY} * 2)"
       },
       "padding": {
         "small": "{core.spacing.size.01}",
@@ -67,11 +67,11 @@
     "border": {
       "width": {
         "default": "{core.shape.border.width.hairline}",
-        "thick": "{core.shape.border.width.thin}"
+        "thick": "{core.shape.border.width.thick}"
       },
       "radius": {
-        "default": "{semantic.shape.radius.full}",
-        "thumb": "{semantic.shape.radius.full}"
+        "default": "{core.shape.radius.full}",
+        "thumb": "{core.shape.radius.full}"
       }
     },
     "motion": {
@@ -82,18 +82,18 @@
       },
       "easing": {
         "standard": "{core.motion.easing.standard}",
-        "decelerate": "{core.motion.easing.decelerate}",
-        "accelerate": "{core.motion.easing.accelerate}"
+        "decelerate": "{core.motion.easing.emphasizedOut}",
+        "accelerate": "{core.motion.easing.emphasizedIn}"
       }
     },
     "typography": {
       "fontSize": {
-        "small": "{semantic.typography.body.05}",
-        "medium": "{semantic.typography.body.04}",
-        "large": "{semantic.typography.body.03}"
+        "small": "{semantic.typography.body.04}",
+        "medium": "{semantic.typography.body.03}",
+        "large": "{semantic.typography.body.02}"
       },
       "fontWeight": {
-        "default": "{semantic.typography.fontWeight.normal}",
+        "default": "{semantic.typography.fontWeight.regular}",
         "medium": "{semantic.typography.fontWeight.medium}"
       },
       "lineHeight": {

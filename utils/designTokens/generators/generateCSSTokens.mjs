@@ -85,7 +85,7 @@ function buildScssForComponent({ cssVarPrefix, tokenData }) {
   const { groups, flat } = tokenData;
   const lines = [];
 
-  // If we have groups, organize by groups with documentation
+  // Process groups first
   if (Object.keys(groups).length > 0) {
     Object.entries(groups).forEach(([groupName, groupData]) => {
       // Add group documentation header
@@ -100,16 +100,43 @@ function buildScssForComponent({ cssVarPrefix, tokenData }) {
       // Add spacing between groups
       lines.push('');
     });
+  }
 
-    // Remove the last empty line
-    if (lines[lines.length - 1] === '') {
-      lines.pop();
+  // Also process top-level tokens that aren't in groups (e.g., "shadow", "opacity")
+  // These are tokens at the root level of the tokens object
+  const topLevelTokens = {};
+  for (const [key, val] of Object.entries(flat)) {
+    // Check if this token is NOT already in any group
+    let inGroup = false;
+    for (const groupData of Object.values(groups)) {
+      if (key in groupData.tokens) {
+        inGroup = true;
+        break;
+      }
     }
-  } else {
+    if (!inGroup) {
+      topLevelTokens[key] = val;
+    }
+  }
+
+  if (Object.keys(topLevelTokens).length > 0) {
+    // Add a section for top-level tokens if we have groups
+    if (Object.keys(groups).length > 0) {
+      lines.push('  /* === Other Tokens === */');
+    }
+    Object.entries(topLevelTokens).forEach(([name, raw]) => {
+      lines.push(`  --${cssVarPrefix}-${name}: ${refToCssVar(raw)};`);
+    });
+  } else if (Object.keys(groups).length === 0) {
     // Fallback to flat structure if no groups detected
     Object.entries(flat).forEach(([name, raw]) => {
       lines.push(`  --${cssVarPrefix}-${name}: ${refToCssVar(raw)};`);
     });
+  }
+
+  // Remove trailing empty line
+  if (lines[lines.length - 1] === '') {
+    lines.pop();
   }
 
   return `@mixin vars {\n${lines.join('\n')}\n}`;

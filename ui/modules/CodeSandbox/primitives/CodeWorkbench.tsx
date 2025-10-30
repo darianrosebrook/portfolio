@@ -143,17 +143,39 @@ export function CodeWorkbench({
     return <>{children}</>;
   }
 
-  const files = React.useMemo(() => toSandpackFiles(project), [project]);
+  // Stabilize files reference to prevent unnecessary SandpackProvider re-renders
+  // Compare by file paths and content length to detect actual changes
+  const filesKey = React.useMemo(
+    () => JSON.stringify(
+      project.files.map((f) => ({ path: f.path, length: String(f.contents).length }))
+    ),
+    [project.files]
+  );
+  const files = React.useMemo(() => toSandpackFiles(project), [filesKey]);
+
+  // Stabilize customSetup to prevent SandpackProvider re-renders
+  const customSetupKey = React.useMemo(
+    () => JSON.stringify({
+      dependencies: project.dependencies,
+      devDependencies: project.devDependencies,
+      entry: project.entry,
+    }),
+    [project.dependencies, project.devDependencies, project.entry]
+  );
+  const customSetup = React.useMemo(
+    () => ({
+      dependencies: project.dependencies,
+      devDependencies: project.devDependencies,
+      entry: project.entry,
+    }),
+    [customSetupKey]
+  );
 
   return (
     <SandpackProvider
       template="react-ts"
       files={files}
-      customSetup={{
-        dependencies: project.dependencies,
-        devDependencies: project.devDependencies,
-        entry: project.entry,
-      }}
+      customSetup={customSetup}
     >
       <div className={themeClassName} style={{ height: '100%' }}>
         <SandpackThemeProvider theme={tokenTheme}>

@@ -11,8 +11,8 @@
         "disabled": "{semantic.color.background.disabled}",
         "readOnly": "{semantic.color.background.readOnly}",
         "checked": "{semantic.color.background.primary}",
-        "error": "{semantic.color.background.danger-subtle}",
-        "success": "{semantic.color.background.success-subtle}"
+        "error": "{semantic.color.background.dangerSubtle}",
+        "success": "{semantic.color.background.successSubtle}"
       },
       "foreground": {
         "default": "{semantic.color.foreground.primary}",
@@ -70,7 +70,7 @@
         "checked": "{core.spacing.size.03}"
       },
       "radius": {
-        "default": "{semantic.shape.control.radius.default}"
+        "default": "{core.shape.radius.medium}"
       },
       "border": {
         "default": "{core.shape.border.width.hairline}"
@@ -89,10 +89,10 @@
     },
     "motion": {
       "duration": {
-        "fast": "{semantic.duration.fast}"
+        "fast": "{core.motion.duration.short}"
       },
       "easing": {
-        "standard": "{semantic.easing.standard}"
+        "standard": "{core.motion.easing.standard}"
       }
     }
   }

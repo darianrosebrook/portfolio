@@ -42,14 +42,14 @@
         "lineHeight": "{semantic.typography.lineHeight.normal}"
       },
       "helper": {
-        "fontSize": "{semantic.typography.body.05}",
+        "fontSize": "{semantic.typography.body.04}",
         "fontWeight": "{semantic.typography.fontWeight.regular}",
         "lineHeight": "{semantic.typography.lineHeight.tight}"
       }
     },
     "border": {
       "width": "{core.shape.border.width.hairline}",
-      "radius": "{semantic.shape.radius.medium}"
+      "radius": "{core.shape.radius.medium}"
     },
     "focus": {
       "ring": {
