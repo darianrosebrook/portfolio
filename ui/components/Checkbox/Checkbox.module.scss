@@ -1,4 +1,4 @@
-@import './Checkbox.tokens.generated';
+@use './Checkbox.tokens.generated' as *;
 
 .indicator {
   @include vars;
