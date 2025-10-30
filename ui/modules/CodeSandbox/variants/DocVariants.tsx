@@ -34,6 +34,19 @@ export function DocVariants({
     onSelectionChange?.(next);
   };
 
+  // Initialize default values from controls
+  React.useEffect(() => {
+    const defaults: Record<string, any> = {};
+    controls.forEach((control) => {
+      if (control.defaultValue !== undefined && values[control.id] === undefined) {
+        defaults[control.id] = control.defaultValue;
+      }
+    });
+    if (Object.keys(defaults).length > 0) {
+      setValues((prev) => ({ ...prev, ...defaults }));
+    }
+  }, [controls]);
+
   // Initialize from URL query if enabled
   React.useEffect(() => {
     if (!linkSelectionToURL) return;
@@ -97,17 +110,6 @@ export function DocVariants({
     };
   }, [linkSelectionToURL, values, grid.rows, grid.cols]);
 
-  // Template: render preview using the current props (inline preview only for MVP)
-  const template = React.useCallback(
-    (propsForTile: Record<string, any>) => (
-      <CodeWorkbench project={project} engine="sandpack" height="40dvh">
-        <PropsBridge values={{ ...values, ...propsForTile }} />
-        <CodePreview height="100%" />
-      </CodeWorkbench>
-    ),
-    [project, values]
-  );
-
   // Create reset keys from identifiers
   const projectKey = JSON.stringify(project.files.map((f) => f.path).sort());
   const controlsKey = JSON.stringify(controls.map((c) => c.id).sort());
@@ -132,12 +134,10 @@ export function DocVariants({
           />
         </div>
         <div style={{ minHeight: 320, height }}>
-          <VariantMatrix
-            rows={grid.rows}
-            cols={grid.cols}
-            template={template}
-            onTileSelect={handleChange}
-          />
+          <CodeWorkbench project={project} engine="sandpack" height={height}>
+            <PropsBridge values={values} />
+            <CodePreview height="100%" />
+          </CodeWorkbench>
         </div>
       </div>
     </ErrorBoundary>
