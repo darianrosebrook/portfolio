@@ -15,20 +15,18 @@ export default function GlossaryCards() {
 
   // Memoize glossary items based on container width
   const [glossaryItems, setGlossaryItems] = useState(() => terms.slice(0, 14));
-  
+
   // Update glossary items count based on container width
   useEffect(() => {
     if (!containerRef.current) return;
-    
+
     const updateItems = () => {
       const width = containerRef.current?.clientWidth || 0;
-      setGlossaryItems(
-        width < 800 ? terms.slice(0, 10) : terms.slice(0, 14)
-      );
+      setGlossaryItems(width < 800 ? terms.slice(0, 10) : terms.slice(0, 14));
     };
-    
+
     updateItems();
-    
+
     // Use ResizeObserver for responsive updates
     if (containerRef.current && 'ResizeObserver' in window) {
       const resizeObserver = new ResizeObserver(updateItems);
@@ -175,10 +173,10 @@ export default function GlossaryCards() {
   // Build quickTo setters on mount and when glossary items change
   useEffect(() => {
     if (!containerRef.current || !glossaryItems.length) return;
-    
+
     // Initialize wasInRange array when items change
     wasInRange.current = new Array(glossaryItems.length).fill(false);
-    
+
     quickToX.current = cardsRef.current
       .filter((el) => el !== null)
       .map((el) =>
@@ -211,7 +209,7 @@ export default function GlossaryCards() {
   // 2) Pointer-driven "knock" effect, per-card, using only cached values
   useEffect(() => {
     if (!containerRef.current || prefersReducedMotion || !isInView) return;
-    
+
     let lastMouse = { x: 0, y: 0 };
     let rafId: number;
     let rafRunning = true;
@@ -222,7 +220,7 @@ export default function GlossaryCards() {
         rafRunning = false;
         return;
       }
-      
+
       const { left, top } = containerRef.current.getBoundingClientRect();
       const px = mouse.x - left;
       const py = mouse.y - top;
@@ -301,14 +299,14 @@ export default function GlossaryCards() {
       });
 
       lastMouse = { x: px, y: py };
-      
+
       if (rafRunning) {
         rafId = requestAnimationFrame(loop);
       }
     };
 
     loop();
-    
+
     return () => {
       rafRunning = false;
       if (rafId) {

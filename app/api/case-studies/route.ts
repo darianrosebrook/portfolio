@@ -1,7 +1,12 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/utils/supabase/server';
 import { createCaseStudySchema } from '@/utils/schemas/case-study.schema';
-import { createMutationResponse, createCachedResponse, CacheHeaders, revalidateEditorPaths } from '@/utils/editor/cache';
+import {
+  createMutationResponse,
+  createCachedResponse,
+  CacheHeaders,
+  revalidateEditorPaths,
+} from '@/utils/editor/cache';
 
 export async function POST(request: Request) {
   const supabase = await createClient();

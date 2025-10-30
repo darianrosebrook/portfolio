@@ -4,7 +4,13 @@ import { type SectionSpec } from '@/ui/modules/CodeSandbox/types';
 import { DocInteractive } from '@/ui/modules/CodeSandbox/variants/DocInteractive';
 import { DocVariants } from '@/ui/modules/CodeSandbox/variants/DocVariants';
 import Link from 'next/link';
-import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+  useMemo,
+} from 'react';
 import {
   generateEnhancedControls,
   generateEnhancedInteractiveProject,
@@ -49,7 +55,8 @@ export function ComprehensiveComponentDoc({
   // Generate interactive examples based on component status
   // Use stable primitive values instead of object reference to prevent infinite loops
   const componentKey = React.useMemo(
-    () => `${component.component}-${component.status}-${component.paths?.component || ''}`,
+    () =>
+      `${component.component}-${component.status}-${component.paths?.component || ''}`,
     [component.component, component.status, component.paths?.component]
   );
 
@@ -85,7 +92,9 @@ export function ComprehensiveComponentDoc({
   );
 
   // Active section tracking with IntersectionObserver
-  const [activeSection, setActiveSection] = useState<string>(navSections[0]?.id || '');
+  const [activeSection, setActiveSection] = useState<string>(
+    navSections[0]?.id || ''
+  );
   const observerRef = useRef<IntersectionObserver | null>(null);
   const sectionRefs = useRef<Map<string, HTMLElement>>(new Map());
 
@@ -106,9 +115,12 @@ export function ComprehensiveComponentDoc({
     observerRef.current = new IntersectionObserver((entries) => {
       // Find the most visible section
       let mostVisible = { id: '', ratio: 0 };
-      
+
       entries.forEach((entry) => {
-        if (entry.isIntersecting && entry.intersectionRatio > mostVisible.ratio) {
+        if (
+          entry.isIntersecting &&
+          entry.intersectionRatio > mostVisible.ratio
+        ) {
           mostVisible = {
             id: entry.target.id,
             ratio: entry.intersectionRatio,
@@ -138,43 +150,50 @@ export function ComprehensiveComponentDoc({
   }, []); // Empty deps - sections are stable
 
   // Register section refs
-  const registerSectionRef = useCallback((id: string, element: HTMLElement | null) => {
-    if (element) {
-      sectionRefs.current.set(id, element);
-      // Observe immediately if observer is ready, otherwise it will be observed in useEffect
-      if (observerRef.current) {
-        observerRef.current.observe(element);
+  const registerSectionRef = useCallback(
+    (id: string, element: HTMLElement | null) => {
+      if (element) {
+        sectionRefs.current.set(id, element);
+        // Observe immediately if observer is ready, otherwise it will be observed in useEffect
+        if (observerRef.current) {
+          observerRef.current.observe(element);
+        }
+      } else {
+        // Cleanup: unobserve before removing from map
+        const existingElement = sectionRefs.current.get(id);
+        if (existingElement && observerRef.current) {
+          observerRef.current.unobserve(existingElement);
+        }
+        sectionRefs.current.delete(id);
       }
-    } else {
-      // Cleanup: unobserve before removing from map
-      const existingElement = sectionRefs.current.get(id);
-      if (existingElement && observerRef.current) {
-        observerRef.current.unobserve(existingElement);
-      }
-      sectionRefs.current.delete(id);
-    }
-  }, []);
+    },
+    []
+  );
 
   // Handle smooth scroll navigation
-  const handleNavClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
-    e.preventDefault();
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const headerOffset = 80; // Account for sticky nav
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+  const handleNavClick = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+      e.preventDefault();
+      const element = document.getElementById(sectionId);
+      if (element) {
+        const headerOffset = 80; // Account for sticky nav
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition =
+          elementPosition + window.pageYOffset - headerOffset;
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      });
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth',
+        });
 
-      // Update URL hash without triggering scroll
-      if (window.history.pushState) {
-        window.history.pushState(null, '', `#${sectionId}`);
+        // Update URL hash without triggering scroll
+        if (window.history.pushState) {
+          window.history.pushState(null, '', `#${sectionId}`);
+        }
       }
-    }
-  }, []);
+    },
+    []
+  );
 
   return (
     <div className={styles.componentDoc}>

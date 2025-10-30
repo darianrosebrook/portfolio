@@ -1,5 +1,11 @@
 'use client';
-import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+  useMemo,
+} from 'react';
 import Style from './swatches.module.scss';
 import { useInteraction } from '@/context';
 import { gsap } from 'gsap';
@@ -19,7 +25,7 @@ const Swatches = () => {
 
   // track if container is in view, if in view, allow animation
   const [isInView, setIsInView] = useState(false);
-  
+
   // Optimized IntersectionObserver with better options
   useEffect(() => {
     const grid = gridRef.current;
@@ -37,7 +43,7 @@ const Swatches = () => {
         threshold: [0, 0.05, 0.5, 1],
       }
     );
-    
+
     observer.observe(grid);
     return () => observer.disconnect();
   }, []); // Empty deps - only set up once
@@ -70,30 +76,33 @@ const Swatches = () => {
   // Animation loop for mouse movement - optimized with early returns
   useEffect(() => {
     if (!isInView) return;
-    
+
     let frameId: number;
     let rafRunning = true;
-    
+
     const animate = () => {
       if (!rafRunning) return;
-      
+
       const grid = gridRef.current;
       if (!grid) {
         rafRunning = false;
         return;
       }
-      
+
       const rect = grid.getBoundingClientRect();
       const { x, hasMouseMoved } = mouse;
-      
+
       let interactionX: number;
       if (hasMouseMoved) {
         interactionX = x;
       } else {
         interactionX = rect.left + rect.width / 2 + (scroll.y * rect.width) / 2;
       }
-      
-      const { mousePercent, mouseCenter } = calculateAnimationValues(rect, interactionX);
+
+      const { mousePercent, mouseCenter } = calculateAnimationValues(
+        rect,
+        interactionX
+      );
       const amplitude = 256;
       const freq = 0.14;
 
@@ -101,7 +110,7 @@ const Swatches = () => {
       toX.current.forEach((tweenFn, i) => {
         const sw = swatches[i];
         if (!sw) return;
-        
+
         const x = linearInterpolation(
           0,
           rect.width - sw.offsetWidth,
@@ -114,14 +123,14 @@ const Swatches = () => {
         const y = Math.sin(i * freq + mouseCenter * Math.PI) * amplitude;
         tweenFn(y);
       });
-      
+
       if (rafRunning) {
         frameId = requestAnimationFrame(animate);
       }
     };
-    
+
     animate();
-    
+
     return () => {
       rafRunning = false;
       if (frameId) {
@@ -139,7 +148,11 @@ const Swatches = () => {
         {colors.map((swatch, i) => {
           const zIndex = 100 - i;
           return (
-            <div key={swatch.token} className={Style.colorSwatch} style={{ zIndex }}>
+            <div
+              key={swatch.token}
+              className={Style.colorSwatch}
+              style={{ zIndex }}
+            >
               <ColorSwatch {...swatch} />
             </div>
           );

@@ -6,7 +6,10 @@ import ToggleSwitch from '@/ui/components/ToggleSwitch';
 import { extractMetadata } from '@/utils/metadata';
 import type { JSONContent } from '@tiptap/react';
 import { generateArticleHTML } from '@/utils/tiptap/htmlGeneration';
-import { getEffectiveContent, hasWorkingDraft } from '@/utils/editor/workingDraft';
+import {
+  getEffectiveContent,
+  hasWorkingDraft,
+} from '@/utils/editor/workingDraft';
 import { checkConflict } from '@/utils/editor/conflict';
 import dynamic from 'next/dynamic';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
@@ -27,9 +30,12 @@ export default function ContentEditor({
   entity: Entity;
 }) {
   // Load effective content (working draft if is_dirty, otherwise published)
-  const effectiveContent = useMemo(() => getEffectiveContent(initial), [initial]);
+  const effectiveContent = useMemo(
+    () => getEffectiveContent(initial),
+    [initial]
+  );
   const hasDraft = hasWorkingDraft(initial);
-  
+
   const [record, setRecord] = useState<RecordType>(() => {
     // Merge effective content into initial record
     return {
@@ -37,7 +43,7 @@ export default function ContentEditor({
       ...effectiveContent,
     } as RecordType;
   });
-  
+
   const [preview, setPreview] = useState<boolean>(false);
   const [updatePublishDateOnPublish, setUpdatePublishDateOnPublish] =
     useState<boolean>(false);
@@ -62,47 +68,51 @@ export default function ContentEditor({
     return generateArticleHTML(record.articleBody);
   }, [record.articleBody]);
 
-  const save = useCallback(async (payload: Partial<RecordType>) => {
-    const urlBase =
-      entity === 'articles' ? '/api/articles' : '/api/case-studies';
-    const method = initial.id ? 'PUT' : 'POST';
-    const url = initial.id ? `${urlBase}/${record.slug}` : urlBase;
-    
-    try {
-      setSaveError(null);
-      
-      // Check for conflicts before saving
-      if (initial.id && record.modified_at && initial.modified_at) {
-        const conflict = checkConflict(record, initial);
-        if (conflict.hasConflict) {
-          setSaveError(conflict.message);
-          throw new Error(conflict.message);
+  const save = useCallback(
+    async (payload: Partial<RecordType>) => {
+      const urlBase =
+        entity === 'articles' ? '/api/articles' : '/api/case-studies';
+      const method = initial.id ? 'PUT' : 'POST';
+      const url = initial.id ? `${urlBase}/${record.slug}` : urlBase;
+
+      try {
+        setSaveError(null);
+
+        // Check for conflicts before saving
+        if (initial.id && record.modified_at && initial.modified_at) {
+          const conflict = checkConflict(record, initial);
+          if (conflict.hasConflict) {
+            setSaveError(conflict.message);
+            throw new Error(conflict.message);
+          }
         }
-      }
-      
-      const response = await fetch(url, {
-        method,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
 
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`Save failed: ${errorText}`);
-      }
+        const response = await fetch(url, {
+          method,
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
 
-      const savedData = await response.json();
-      setSaveSuccess(true);
-      setTimeout(() => setSaveSuccess(false), 2000);
-      
-      return savedData;
-    } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'Save failed';
-      setSaveError(errorMessage);
-      console.error('Save error:', error);
-      throw error;
-    }
-  }, [entity, initial, record]);
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(`Save failed: ${errorText}`);
+        }
+
+        const savedData = await response.json();
+        setSaveSuccess(true);
+        setTimeout(() => setSaveSuccess(false), 2000);
+
+        return savedData;
+      } catch (error) {
+        const errorMessage =
+          error instanceof Error ? error.message : 'Save failed';
+        setSaveError(errorMessage);
+        console.error('Save error:', error);
+        throw error;
+      }
+    },
+    [entity, initial, record]
+  );
 
   const handleUpdateArticle = useCallback((updated: RecordType) => {
     setRecord(updated);
@@ -273,7 +283,7 @@ export default function ContentEditor({
         }}
       >
         <h3 style={{ margin: 0 }}>Settings</h3>
-        
+
         {/* Working Draft Indicator */}
         {hasDraft && (
           <div
@@ -286,10 +296,12 @@ export default function ContentEditor({
           >
             <small style={{ fontWeight: 'bold' }}>⚠️ Working Draft</small>
             <br />
-            <small>You have unsaved changes. Editing will continue from your draft.</small>
+            <small>
+              You have unsaved changes. Editing will continue from your draft.
+            </small>
           </div>
         )}
-        
+
         {/* Save Status Messages */}
         {saveError && (
           <div
@@ -305,7 +317,7 @@ export default function ContentEditor({
             <small>{saveError}</small>
           </div>
         )}
-        
+
         {saveSuccess && (
           <div
             style={{
@@ -318,7 +330,7 @@ export default function ContentEditor({
             <small style={{ fontWeight: 'bold' }}>✅ Saved</small>
           </div>
         )}
-        
+
         <div>
           <label className="small" htmlFor="draftToggle">
             Draft
