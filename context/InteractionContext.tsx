@@ -46,32 +46,6 @@ const InteractionContext = createContext<InteractionContextValue | undefined>(
   undefined
 );
 
-/**
- * Throttles a function call to limit execution frequency
- */
-function throttle<T extends (...args: unknown[]) => void>(
-  func: T,
-  limit: number
-): (...args: Parameters<T>) => void {
-  let lastRun: number;
-  let lastFunc: ReturnType<typeof setTimeout>;
-  return function (this: unknown, ...args: Parameters<T>) {
-    const context = this;
-    if (!lastRun) {
-      func.apply(context, args);
-      lastRun = Date.now();
-    } else {
-      clearTimeout(lastFunc);
-      lastFunc = setTimeout(() => {
-        if (Date.now() - lastRun >= limit) {
-          func.apply(context, args);
-          lastRun = Date.now();
-        }
-      }, limit - (Date.now() - lastRun));
-    }
-  };
-}
-
 export const InteractionProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
@@ -90,12 +64,16 @@ export const InteractionProvider: React.FC<{ children: ReactNode }> = ({
     ...defaultWindow,
   });
 
-  // Throttled update function for mouse position (high-frequency updates)
-  const updateMousePosition = useRef(
-    throttle(() => {
-      setMouse({ ...mouseRef.current });
-    }, 16) // ~60fps
-  );
+  // Use requestAnimationFrame for smooth, frame-synced cursor updates
+  const rafIdRef = useRef<number | null>(null);
+  const updateMousePosition = useCallback(() => {
+    if (rafIdRef.current === null) {
+      rafIdRef.current = requestAnimationFrame(() => {
+        setMouse({ ...mouseRef.current });
+        rafIdRef.current = null;
+      });
+    }
+  }, []);
 
   // Mouse/scroll observer
   useEffect(() => {
@@ -113,8 +91,8 @@ export const InteractionProvider: React.FC<{ children: ReactNode }> = ({
           velocityY: self.velocityY,
           hasMouseMoved: true,
         };
-        // Use throttled update for position to reduce re-renders
-        updateMousePosition.current();
+        // Use requestAnimationFrame for smooth, frame-synced updates
+        updateMousePosition();
       },
       onPress: () => {
         mouseRef.current.isPressed = true;
@@ -135,8 +113,15 @@ export const InteractionProvider: React.FC<{ children: ReactNode }> = ({
       },
     });
     
-    return () => observer.kill();
-  }, [prefersReducedMotion]);
+    return () => {
+      observer.kill();
+      // Clean up pending animation frame
+      if (rafIdRef.current !== null) {
+        cancelAnimationFrame(rafIdRef.current);
+        rafIdRef.current = null;
+      }
+    };
+  }, [prefersReducedMotion, updateMousePosition]);
 
   // Scroll tracking with throttling
   useEffect(() => {
