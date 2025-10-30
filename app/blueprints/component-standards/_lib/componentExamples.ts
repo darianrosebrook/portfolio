@@ -288,38 +288,22 @@ function generateButtonProject(): VirtualProject {
       },
       {
         path: '/App.tsx',
-        contents: `import React, { useState } from 'react';
+        contents: `import React from 'react';
 import Button from './components/Button';
+// PropsBridge writes props to /props.json
+import props from '/props.json';
 
 export default function App() {
-  const [loading, setLoading] = useState(false);
-
-  const handleClick = () => {
-    setLoading(true);
-    setTimeout(() => setLoading(false), 2000);
-  };
-
   return (
-    <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-      <section>
-        <h2>Button States</h2>
-        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-          <Button>Default</Button>
-          <Button disabled>Disabled</Button>
-          <Button loading={loading} onClick={handleClick}>
-            {loading ? 'Loading...' : 'Click to Load'}
-          </Button>
-        </div>
-      </section>
-
-      <section>
-        <h2>Button Variants</h2>
-        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-          <Button variant="primary">Primary</Button>
-          <Button variant="secondary">Secondary</Button>
-          <Button variant="tertiary">Tertiary</Button>
-        </div>
-      </section>
+    <div style={{ padding: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>
+      <Button
+        variant={props.variant || 'primary'}
+        size={props.size || 'medium'}
+        disabled={props.disabled || false}
+        loading={props.loading || false}
+      >
+        Button Example
+      </Button>
     </div>
   );
 }`,
@@ -344,36 +328,18 @@ function generateAvatarProject(): VirtualProject {
         path: '/App.tsx',
         contents: `import React from 'react';
 import Avatar from './components/Avatar';
+import props from '/props.json';
 
 export default function App() {
   return (
-    <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-      <section>
-        <h2>Avatar Sizes</h2>
-        <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-          <Avatar size="small" src="/darian-profile.webp" alt="Small avatar" />
-          <Avatar size="medium" src="/darian-profile.webp" alt="Medium avatar" />
-          <Avatar size="large" src="/darian-profile.webp" alt="Large avatar" />
-        </div>
-      </section>
-
-      <section>
-        <h2>Avatar Fallbacks</h2>
-        <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-          <Avatar initials="DR" alt="Darian Rosebrook" />
-          <Avatar initials="JS" alt="Jane Smith" />
-          <Avatar initials="AB" alt="Alex Brown" />
-        </div>
-      </section>
-
-      <section>
-        <h2>Avatar States</h2>
-        <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-          <Avatar src="/darian-profile.webp" alt="Online user" status="online" />
-          <Avatar src="/darian-profile.webp" alt="Away user" status="away" />
-          <Avatar src="/darian-profile.webp" alt="Offline user" status="offline" />
-        </div>
-      </section>
+    <div style={{ padding: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>
+      <Avatar
+        size={props.size || 'medium'}
+        src={props.src}
+        alt={props.alt || 'Avatar'}
+        initials={props.initials}
+        status={props.status}
+      />
     </div>
   );
 }`,
@@ -538,72 +504,20 @@ export default function Switch({ checked = false, onChange, size = 'medium', dis
       },
       {
         path: '/App.tsx',
-        contents: `import React, { useState } from 'react';
+        contents: `import React from 'react';
 import Switch from './components/Switch';
+import props from '/props.json';
 
 export default function App() {
-  const [notifications, setNotifications] = useState(true);
-  const [darkMode, setDarkMode] = useState(false);
-  const [autoSave, setAutoSave] = useState(true);
-
   return (
-    <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-      <section>
-        <h2>Switch Sizes</h2>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <Switch size="small" checked={true} onChange={() => {}}>
-            Small switch
-          </Switch>
-          <Switch size="medium" checked={true} onChange={() => {}}>
-            Medium switch
-          </Switch>
-          <Switch size="large" checked={true} onChange={() => {}}>
-            Large switch
-          </Switch>
-        </div>
-      </section>
-
-      <section>
-        <h2>Interactive Switches</h2>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <Switch 
-            checked={notifications} 
-            onChange={setNotifications}
-          >
-            Enable notifications
-          </Switch>
-          <Switch 
-            checked={darkMode} 
-            onChange={setDarkMode}
-          >
-            Dark mode
-          </Switch>
-          <Switch 
-            checked={autoSave} 
-            onChange={setAutoSave}
-          >
-            Auto-save documents
-          </Switch>
-        </div>
-      </section>
-
-      <section>
-        <h2>Switch States</h2>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <Switch checked={false} onChange={() => {}}>
-            Unchecked switch
-          </Switch>
-          <Switch checked={true} onChange={() => {}}>
-            Checked switch
-          </Switch>
-          <Switch checked={false} disabled onChange={() => {}}>
-            Disabled unchecked
-          </Switch>
-          <Switch checked={true} disabled onChange={() => {}}>
-            Disabled checked
-          </Switch>
-        </div>
-      </section>
+    <div style={{ padding: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>
+      <Switch
+        checked={props.checked || false}
+        size={props.size || 'medium'}
+        disabled={props.disabled || false}
+      >
+        {props.children || 'Toggle Switch'}
+      </Switch>
     </div>
   );
 }`,
@@ -621,9 +535,10 @@ function generateGenericProject(component: ComponentItem): VirtualProject {
 
 interface ${componentName}Props {
   children?: React.ReactNode;
+  [key: string]: any;
 }
 
-export default function ${componentName}({ children }: ${componentName}Props) {
+export default function ${componentName}({ children, ...props }: ${componentName}Props) {
   return (
     <div style={{ padding: '1rem', border: '1px solid #e5e7eb', borderRadius: '0.5rem' }}>
       {children || \`${componentName} Component\`}
@@ -641,13 +556,13 @@ export default function ${componentName}({ children }: ${componentName}Props) {
         path: '/App.tsx',
         contents: `import React from 'react';
 import ${componentName} from './components/${componentName}';
+import props from '/props.json';
 
 export default function App() {
   return (
-    <div style={{ padding: '2rem' }}>
-      <h2>${componentName} Example</h2>
-      <${componentName}>
-        Example ${componentName.toLowerCase()} content
+    <div style={{ padding: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>
+      <${componentName} {...props}>
+        {props.children || 'Example ${componentName.toLowerCase()} content'}
       </${componentName}>
     </div>
   );
@@ -759,38 +674,20 @@ export default function Badge({ variant = 'default', size = 'medium', count, max
         path: '/App.tsx',
         contents: `import React from 'react';
 import Badge from './components/Badge';
+import props from '/props.json';
 
 export default function App() {
   return (
-    <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-      <section>
-        <h2>Badge Variants</h2>
-        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-          <Badge variant="default">Default</Badge>
-          <Badge variant="success">Success</Badge>
-          <Badge variant="warning">Warning</Badge>
-          <Badge variant="danger">Danger</Badge>
-        </div>
-      </section>
-
-      <section>
-        <h2>Badge Sizes</h2>
-        <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
-          <Badge size="small">Small</Badge>
-          <Badge size="medium">Medium</Badge>
-          <Badge size="large">Large</Badge>
-        </div>
-      </section>
-
-      <section>
-        <h2>Notification Badges</h2>
-        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-          <Badge count={5} />
-          <Badge count={99} />
-          <Badge count={999} max={99} />
-          <Badge dot />
-        </div>
-      </section>
+    <div style={{ padding: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>
+      <Badge
+        variant={props.variant || 'default'}
+        size={props.size || 'medium'}
+        count={props.count}
+        max={props.max}
+        dot={props.dot}
+      >
+        {props.children || 'Badge'}
+      </Badge>
     </div>
   );
 }`,
@@ -839,58 +736,22 @@ export default function Input({ size = 'medium', error, success, ...props }: Inp
       },
       {
         path: '/App.tsx',
-        contents: `import React, { useState } from 'react';
+        contents: `import React from 'react';
 import Input from './components/Input';
+import props from '/props.json';
 
 export default function App() {
-  const [value, setValue] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
   return (
-    <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem', maxWidth: '400px' }}>
-      <section>
-        <h2>Input Types</h2>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <Input 
-            type="text" 
-            placeholder="Enter text..." 
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-          />
-          <Input 
-            type="email" 
-            placeholder="Enter email..." 
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <Input 
-            type="password" 
-            placeholder="Enter password..." 
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-      </section>
-
-      <section>
-        <h2>Input Sizes</h2>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <Input size="small" placeholder="Small input" />
-          <Input size="medium" placeholder="Medium input" />
-          <Input size="large" placeholder="Large input" />
-        </div>
-      </section>
-
-      <section>
-        <h2>Input States</h2>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <Input placeholder="Default input" />
-          <Input placeholder="Disabled input" disabled />
-          <Input placeholder="Error input" error />
-          <Input placeholder="Success input" success />
-        </div>
-      </section>
+    <div style={{ padding: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', maxWidth: '400px', width: '100%' }}>
+      <Input
+        size={props.size || 'medium'}
+        error={props.error || false}
+        success={props.success || false}
+        disabled={props.disabled || false}
+        placeholder={props.placeholder || 'Enter text...'}
+        type={props.type || 'text'}
+        value={props.value || ''}
+      />
     </div>
   );
 }`,
@@ -965,12 +826,12 @@ export default Tabs;`;
         path: '/App.tsx',
         contents: `import React from 'react';
 import Tabs from './components/Tabs';
+import props from '/props.json';
 
 export default function App() {
   return (
-    <div style={{ padding: '2rem' }}>
-      <h2>Tabs Example</h2>
-      <Tabs defaultValue="tab1">
+    <div style={{ padding: '2rem', minHeight: '100vh' }}>
+      <Tabs defaultValue={props.defaultValue || 'tab1'}>
         <Tabs.List>
           <Tabs.Trigger value="tab1">Overview</Tabs.Trigger>
           <Tabs.Trigger value="tab2">Details</Tabs.Trigger>
@@ -980,26 +841,21 @@ export default function App() {
         <Tabs.Content value="tab1">
           <div style={{ padding: '1rem' }}>
             <h3>Overview</h3>
-            <p>This is the overview tab content. It provides a general summary of the information.</p>
+            <p>This is the overview tab content.</p>
           </div>
         </Tabs.Content>
         
         <Tabs.Content value="tab2">
           <div style={{ padding: '1rem' }}>
             <h3>Details</h3>
-            <p>This tab contains detailed information and specifications.</p>
-            <ul>
-              <li>Feature 1</li>
-              <li>Feature 2</li>
-              <li>Feature 3</li>
-            </ul>
+            <p>This tab contains detailed information.</p>
           </div>
         </Tabs.Content>
         
         <Tabs.Content value="tab3">
           <div style={{ padding: '1rem' }}>
             <h3>Settings</h3>
-            <p>Configure your preferences and options here.</p>
+            <p>Configure your preferences here.</p>
           </div>
         </Tabs.Content>
       </Tabs>
@@ -1064,34 +920,18 @@ export default Toast;`;
         contents: `import React from 'react';
 import Toast from './components/Toast';
 import Button from './components/Button';
+import props from '/props.json';
 
 export default function App() {
-  const showToast = (type: string) => {
-    Toast.show({
-      title: \`\${type.charAt(0).toUpperCase() + type.slice(1)} Toast\`,
-      description: \`This is a \${type} toast notification.\`,
-      variant: type,
-    });
-  };
-
   return (
-    <div style={{ padding: '2rem' }}>
-      <h2>Toast Examples</h2>
-      <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-        <Button onClick={() => showToast('success')}>
-          Show Success Toast
-        </Button>
-        <Button onClick={() => showToast('error')}>
-          Show Error Toast
-        </Button>
-        <Button onClick={() => showToast('warning')}>
-          Show Warning Toast
-        </Button>
-        <Button onClick={() => showToast('info')}>
-          Show Info Toast
-        </Button>
-      </div>
-      
+    <div style={{ padding: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>
+      <Button onClick={() => Toast.show({ 
+        title: props.title || 'Toast Notification', 
+        description: props.description || 'This is a toast message.', 
+        variant: props.variant || 'info' 
+      })}>
+        Show Toast
+      </Button>
       <Toast.Container />
     </div>
   );
@@ -1167,42 +1007,18 @@ export default function Tooltip({ content, position = 'top', variant = 'default'
         contents: `import React from 'react';
 import Tooltip from './components/Tooltip';
 import Button from './components/Button';
+import props from '/props.json';
 
 export default function App() {
   return (
-    <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-      <section>
-        <h2>Tooltip Positions</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem', textAlign: 'center' }}>
-          <Tooltip content="Top tooltip" position="top">
-            <Button>Top</Button>
-          </Tooltip>
-          <Tooltip content="Right tooltip" position="right">
-            <Button>Right</Button>
-          </Tooltip>
-          <Tooltip content="Bottom tooltip" position="bottom">
-            <Button>Bottom</Button>
-          </Tooltip>
-          <Tooltip content="Left tooltip" position="left">
-            <Button>Left</Button>
-          </Tooltip>
-        </div>
-      </section>
-
-      <section>
-        <h2>Tooltip Variants</h2>
-        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-          <Tooltip content="Default tooltip">
-            <Button>Default</Button>
-          </Tooltip>
-          <Tooltip content="Dark tooltip" variant="dark">
-            <Button>Dark</Button>
-          </Tooltip>
-          <Tooltip content="Light tooltip" variant="light">
-            <Button>Light</Button>
-          </Tooltip>
-        </div>
-      </section>
+    <div style={{ padding: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>
+      <Tooltip
+        content={props.content || 'Tooltip content'}
+        position={props.position || 'top'}
+        variant={props.variant || 'default'}
+      >
+        <Button>{props.children || 'Hover me'}</Button>
+      </Tooltip>
     </div>
   );
 }`,
