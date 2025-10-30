@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/utils/supabase/server';
 import { updateCaseStudySchema } from '@/utils/schemas/case-study.schema';
-import { 
-  createCachedResponse, 
+import {
+  createCachedResponse,
   createMutationResponse,
   CacheHeaders,
-  revalidateEditorPaths 
+  revalidateEditorPaths,
 } from '@/utils/editor/cache';
 
 export async function GET(
@@ -148,25 +148,32 @@ export async function PUT(
 
   // If publishing (status === 'published'), copy working columns to published columns
   const updateData: Record<string, unknown> = { ...validation.data };
-  
+
   if (validation.data.status === 'published') {
     // First, get current record to check for working columns
     const { data: currentRecord } = await supabase
       .from('case_studies')
-      .select('is_dirty, workingbody, workingheadline, workingdescription, workingimage, workingkeywords, workingarticlesection')
+      .select(
+        'is_dirty, workingbody, workingheadline, workingdescription, workingimage, workingkeywords, workingarticlesection'
+      )
       .eq('slug', slug)
       .eq('author', user.id)
       .single();
 
     if (currentRecord?.is_dirty) {
       // Copy working columns to published columns
-      updateData.articleBody = currentRecord.workingbody ?? updateData.articleBody;
-      updateData.headline = currentRecord.workingheadline ?? updateData.headline;
-      updateData.description = currentRecord.workingdescription ?? updateData.description;
+      updateData.articleBody =
+        currentRecord.workingbody ?? updateData.articleBody;
+      updateData.headline =
+        currentRecord.workingheadline ?? updateData.headline;
+      updateData.description =
+        currentRecord.workingdescription ?? updateData.description;
       updateData.image = currentRecord.workingimage ?? updateData.image;
-      updateData.keywords = currentRecord.workingkeywords ?? updateData.keywords;
-      updateData.articleSection = currentRecord.workingarticlesection ?? updateData.articleSection;
-      
+      updateData.keywords =
+        currentRecord.workingkeywords ?? updateData.keywords;
+      updateData.articleSection =
+        currentRecord.workingarticlesection ?? updateData.articleSection;
+
       // Clear working columns and dirty flag
       updateData.workingbody = null;
       updateData.workingheadline = null;

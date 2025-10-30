@@ -1,5 +1,11 @@
 'use client';
-import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+  useMemo,
+} from 'react';
 import Styles from './blueprints.module.scss';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -48,19 +54,19 @@ const Blueprints: React.FC = () => {
   useEffect(() => {
     let frameId: number;
     let rafRunning = true;
-    
+
     const animate = () => {
       if (!rafRunning) return;
-      
+
       const grid = gridRef.current;
       if (!grid) {
         rafRunning = false;
         return;
       }
-      
+
       const rows = Array.from(grid.children) as HTMLElement[];
       const { x, hasMouseMoved } = mouse;
-      
+
       let interactionX: number;
       if (hasMouseMoved) {
         interactionX = x;
@@ -68,21 +74,21 @@ const Blueprints: React.FC = () => {
         const rect = grid.getBoundingClientRect();
         interactionX = rect.left + rect.width / 2 + (scroll.y * rect.width) / 2;
       }
-      
+
       rows.forEach((row, index) => {
         const distanceFromMiddle = Math.abs(index - middleRowIndex);
         const targetX = calculateTargetX(interactionX, distanceFromMiddle);
         const tweenFn = toX.current[index];
         if (tweenFn) tweenFn(targetX);
       });
-      
+
       if (rafRunning) {
         frameId = requestAnimationFrame(animate);
       }
     };
-    
+
     animate();
-    
+
     return () => {
       rafRunning = false;
       if (frameId) {

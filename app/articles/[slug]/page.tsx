@@ -1,6 +1,5 @@
 import { createClient } from '@/utils/supabase/server';
 import NextImage from 'next/image';
-import type { JSONContent } from '@tiptap/react';
 import { generateLDJson } from '@/utils/ldjson';
 import { processArticleContent } from '@/utils/tiptap/htmlGeneration';
 
@@ -41,11 +40,11 @@ async function getData(slug: string) {
 
   const contents = processArticleContent(article.articleBody);
   const { html, h1Text, imageSrc } = contents;
-  
+
   // Convert to legacy format for backward compatibility
   const h1FromHTML = h1Text ? [`<h1>${h1Text}</h1>`] : null;
   const imageFromHTML = imageSrc ? [`<img src="${imageSrc}" />`] : null;
-  
+
   return {
     ...article,
     html,
