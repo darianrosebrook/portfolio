@@ -6,6 +6,7 @@
     "dev": "next dev -p 3000",
     "build": "npm run tokens:build && next build",
     "build:check": "npm run tokens:build && stylelint --allow-empty-input \"**/*.{css,scss}\" && prettier --check . && next build",
+    "pre-push:check": "npm run typecheck && prettier --check . && npm run lint",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
@@ -38,7 +39,8 @@
     "generate:components-docs": "node scripts/generateComponentsAndDocs.mjs",
     "generate:contracts": "node scripts/generateContracts.mjs",
     "components:setup": "npm run generate:contracts && npm run validate:components",
-    "components:health": "node scripts/componentHealthCheck.mjs"
+    "components:health": "node scripts/componentHealthCheck.mjs",
+    "setup:hooks": "bash scripts/setup-hooks.sh"
   },
   "dependencies": {
     "@atproto/api": "^0.16.9",

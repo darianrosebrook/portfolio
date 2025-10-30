@@ -258,12 +258,9 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
 
     const childProps = children.props as TooltipChildProps;
     const childRef = 'ref' in childProps ? childProps.ref : undefined;
-    const mergedTriggerRef = mergeRefs(
-      (node: HTMLElement | null) => {
-        triggerRef.current = node;
-      },
-      childRef
-    );
+    const mergedTriggerRef = mergeRefs((node: HTMLElement | null) => {
+      triggerRef.current = node;
+    }, childRef);
 
     const triggerElement = React.cloneElement(
       children as React.ReactElement<TooltipChildProps>,
@@ -297,12 +294,9 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
 
     const tooltipNode = isVisible && (
       <div
-        ref={mergeRefs(
-          (node: HTMLDivElement | null) => {
-            tooltipRef.current = node;
-          },
-          forwardedRef
-        )}
+        ref={mergeRefs((node: HTMLDivElement | null) => {
+          tooltipRef.current = node;
+        }, forwardedRef)}
         id={tooltipId}
         role="tooltip"
         className={`${styles.tooltip} ${className}`}

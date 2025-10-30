@@ -169,19 +169,22 @@ function processTokenValue(
 ): string {
   if (typeof value === 'string') {
     // Handle token references like {core.color.blue.500}
-    const processedValue = value.replace(/\{([^}]+)\}/g, (match, refTokenPath) => {
-      // Check for deprecation warnings
-      if (tokens) {
-        const deprecation = isTokenDeprecated(tokens, refTokenPath);
-        if (deprecation) {
-          console.warn(formatDeprecationWarning(refTokenPath, deprecation));
+    const processedValue = value.replace(
+      /\{([^}]+)\}/g,
+      (match, refTokenPath) => {
+        // Check for deprecation warnings
+        if (tokens) {
+          const deprecation = isTokenDeprecated(tokens, refTokenPath);
+          if (deprecation) {
+            console.warn(formatDeprecationWarning(refTokenPath, deprecation));
+          }
         }
-      }
 
-      const cssVar = tokenPathToCSSVar(refTokenPath);
-      context.referencedVars.add(cssVar);
-      return `var(${cssVar})`;
-    });
+        const cssVar = tokenPathToCSSVar(refTokenPath);
+        context.referencedVars.add(cssVar);
+        return `var(${cssVar})`;
+      }
+    );
     return processedValue;
   }
 
@@ -211,11 +214,10 @@ export function generateGlobalTokens(incremental = true): boolean {
 
   // Check for incremental build
   if (incremental) {
-    if (
-      !hasFileChanged(PATHS.tokens) &&
-      fs.existsSync(PATHS.outputScss)
-    ) {
-      console.log('[tokens] ⚡ Design tokens unchanged, skipping global generation (incremental build)');
+    if (!hasFileChanged(PATHS.tokens) && fs.existsSync(PATHS.outputScss)) {
+      console.log(
+        '[tokens] ⚡ Design tokens unchanged, skipping global generation (incremental build)'
+      );
       return true;
     }
   }
@@ -273,7 +275,7 @@ export function generateGlobalTokens(incremental = true): boolean {
 
   // Write output file
   writeOutputFile(PATHS.outputScss, content, 'global design tokens');
-  
+
   // Update cache after file is written
   updateFileCache(PATHS.outputScss);
 

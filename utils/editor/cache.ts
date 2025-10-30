@@ -14,19 +14,19 @@ export const CacheHeaders = {
    * Allows fast reads while ensuring fresh data
    */
   EDITOR_GET: 'private, max-age=60, stale-while-revalidate=300',
-  
+
   /**
    * For mutation responses - no cache
    * Ensures mutations are never cached
    */
   MUTATION: 'no-cache, no-store, must-revalidate',
-  
+
   /**
    * For public article/case study pages - longer cache
    * Published content changes less frequently
    */
   PUBLIC_CONTENT: 'public, max-age=300, stale-while-revalidate=3600',
-  
+
   /**
    * For listing pages - moderate cache
    * Lists update more frequently than individual items
@@ -38,13 +38,15 @@ export const CacheHeaders = {
  * Revalidates editor-related paths after mutations
  * Note: This must be called from a Server Action or Route Handler
  */
-export function revalidateEditorPaths(entity: 'articles' | 'case-studies'): void {
+export function revalidateEditorPaths(
+  entity: 'articles' | 'case-studies'
+): void {
   const basePath = entity === 'articles' ? 'articles' : 'case-studies';
-  
+
   // Revalidate editor pages
   revalidatePath(`/dashboard/${basePath}`, 'layout');
   revalidatePath(`/dashboard/${basePath}/[slug]`, 'page');
-  
+
   // Revalidate public pages if published
   const publicPath = entity === 'articles' ? 'articles' : 'work';
   revalidatePath(`/${publicPath}/[slug]`, 'page');
@@ -77,4 +79,3 @@ export function createMutationResponse(
 ): Response {
   return createCachedResponse(data, status, CacheHeaders.MUTATION);
 }
-

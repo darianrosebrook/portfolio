@@ -2,7 +2,7 @@
 
 /**
  * Comprehensive Design Token Accessibility Validator
- * 
+ *
  * This script validates design tokens for WCAG 2.1 accessibility compliance,
  * including both global semantic tokens and component-specific tokens.
  */
@@ -11,10 +11,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
 import type { TokenValidationReport } from '../utils/accessibility/tokenValidator';
-import { 
+import {
   validateDesignTokens,
   generateAccessibilityReport,
-  runAccessibilityValidation 
+  runAccessibilityValidation,
 } from '../utils/accessibility/tokenValidator';
 
 const require = createRequire(import.meta.url);
@@ -87,15 +87,20 @@ class AccessibilityValidator {
 
     try {
       this.globalValidation = validateDesignTokens(GLOBAL_TOKENS_FILE);
-      
+
       if (this.globalValidation && this.globalValidation.invalidPairs === 0) {
-        logSuccess(`All ${this.globalValidation.totalPairs} global token color pairs pass accessibility requirements`);
+        logSuccess(
+          `All ${this.globalValidation.totalPairs} global token color pairs pass accessibility requirements`
+        );
       } else if (this.globalValidation) {
-        logWarning(`${this.globalValidation.invalidPairs} of ${this.globalValidation.totalPairs} global token pairs fail accessibility requirements`);
+        logWarning(
+          `${this.globalValidation.invalidPairs} of ${this.globalValidation.totalPairs} global token pairs fail accessibility requirements`
+        );
         this.overallValid = false;
       }
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : String(error);
+      const errorMessage =
+        error instanceof Error ? error.message : String(error);
       logError(`Failed to validate global tokens: ${errorMessage}`);
       this.overallValid = false;
     }
@@ -117,7 +122,10 @@ class AccessibilityValidator {
     }
 
     // Write comprehensive report to file
-    const reportPath = path.join(PROJECT_ROOT, 'accessibility-validation-report.txt');
+    const reportPath = path.join(
+      PROJECT_ROOT,
+      'accessibility-validation-report.txt'
+    );
     const timestamp = new Date().toISOString();
     const fullReport = `Design Token Accessibility Validation Report
 Generated: ${timestamp}
@@ -128,7 +136,8 @@ ${reportContent}`;
       fs.writeFileSync(reportPath, fullReport);
       logInfo(`Full report saved to: ${reportPath}`);
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : String(error);
+      const errorMessage =
+        error instanceof Error ? error.message : String(error);
       logError(`Failed to save report: ${errorMessage}`);
     }
 
@@ -145,22 +154,28 @@ ${reportContent}`;
     );
 
     await this.validateGlobalTokens();
-    
+
     this.generateReport();
 
     if (this.overallValid) {
       logSuccess('\n🎉 All design tokens pass accessibility validation!');
       process.exit(0);
     } else {
-      logError('\n💥 Accessibility validation failed. Please fix the issues above.');
-      
+      logError(
+        '\n💥 Accessibility validation failed. Please fix the issues above.'
+      );
+
       // Provide helpful guidance
-      console.log('\n' + colors.bold + colors.yellow + '💡 Quick Fixes:' + colors.reset);
+      console.log(
+        '\n' + colors.bold + colors.yellow + '💡 Quick Fixes:' + colors.reset
+      );
       console.log('  1. Check color contrast ratios for failing pairs');
       console.log('  2. Darken foreground colors or lighten background colors');
-      console.log('  3. Use our color palette tools to find accessible alternatives');
+      console.log(
+        '  3. Use our color palette tools to find accessible alternatives'
+      );
       console.log('  4. Consider using semantic tokens that are pre-validated');
-      
+
       process.exit(1);
     }
   }

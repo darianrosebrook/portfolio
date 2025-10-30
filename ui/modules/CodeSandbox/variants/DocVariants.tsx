@@ -37,16 +37,20 @@ export function DocVariants({
   // Initialize default values from controls
   // Use stable controls reference to prevent infinite loops
   const controlsKey = React.useMemo(
-    () => JSON.stringify(controls.map((c) => `${c.id}:${c.defaultValue}`).sort()),
+    () =>
+      JSON.stringify(controls.map((c) => `${c.id}:${c.defaultValue}`).sort()),
     [controls]
   );
-  
+
   React.useEffect(() => {
     // Use functional update to check previous state and avoid including values in deps
     setValues((prev) => {
       const defaults: Record<string, any> = {};
       controls.forEach((control) => {
-        if (control.defaultValue !== undefined && prev[control.id] === undefined) {
+        if (
+          control.defaultValue !== undefined &&
+          prev[control.id] === undefined
+        ) {
           defaults[control.id] = control.defaultValue;
         }
       });
@@ -60,30 +64,48 @@ export function DocVariants({
   // Initialize from URL query if enabled
   // Use stable grid reference to prevent re-initialization loops
   const gridKey = React.useMemo(
-    () => JSON.stringify({
-      rowsId: grid.rows.id,
-      colsId: grid.cols?.id,
-      rowsDefault: grid.rows.defaultValue,
-      colsDefault: grid.cols?.defaultValue,
-      rowsValues: grid.rows.values.join(','),
-      colsValues: grid.cols?.values.join(','),
-    }),
-    [grid.rows.id, grid.rows.defaultValue, grid.rows.values, grid.cols?.id, grid.cols?.defaultValue, grid.cols?.values]
+    () =>
+      JSON.stringify({
+        rowsId: grid.rows.id,
+        colsId: grid.cols?.id,
+        rowsDefault: grid.rows.defaultValue,
+        colsDefault: grid.cols?.defaultValue,
+        rowsValues: grid.rows.values.join(','),
+        colsValues: grid.cols?.values.join(','),
+      }),
+    [
+      grid.rows.id,
+      grid.rows.defaultValue,
+      grid.rows.values,
+      grid.cols?.id,
+      grid.cols?.defaultValue,
+      grid.cols?.values,
+    ]
   );
-  
+
   React.useEffect(() => {
     if (!linkSelectionToURL) return;
     if (typeof window === 'undefined') return;
-    
+
     // Use functional update to check previous state and avoid including values in deps
     setValues((prev) => {
       const params = new URLSearchParams(window.location.search);
       const init: Record<string, any> = {};
-      const rowVal = params.get(grid.rows.id) ?? grid.rows.defaultValue ?? grid.rows.values[0];
-      const colVal = grid.cols ? (params.get(grid.cols.id) ?? grid.cols.defaultValue ?? grid.cols.values[0]) : undefined;
-      
+      const rowVal =
+        params.get(grid.rows.id) ??
+        grid.rows.defaultValue ??
+        grid.rows.values[0];
+      const colVal = grid.cols
+        ? (params.get(grid.cols.id) ??
+          grid.cols.defaultValue ??
+          grid.cols.values[0])
+        : undefined;
+
       // Only update if values are different from current
-      if (prev[grid.rows.id] !== rowVal || (grid.cols && prev[grid.cols.id] !== colVal)) {
+      if (
+        prev[grid.rows.id] !== rowVal ||
+        (grid.cols && prev[grid.cols.id] !== colVal)
+      ) {
         init[grid.rows.id] = rowVal;
         if (grid.cols && colVal !== undefined) {
           init[grid.cols.id] = colVal;
@@ -96,24 +118,21 @@ export function DocVariants({
 
   // Reflect selection in URL if enabled (debounced)
   // Use stable values reference to prevent unnecessary updates
-  const valuesKey = React.useMemo(
-    () => JSON.stringify(values),
-    [values]
-  );
-  
+  const valuesKey = React.useMemo(() => JSON.stringify(values), [values]);
+
   // Capture grid properties in refs to avoid dependency issues
   const gridRowsIdRef = React.useRef(grid.rows.id);
   const gridRowsDefaultRef = React.useRef(grid.rows.defaultValue);
   const gridRowsValuesRef = React.useRef(grid.rows.values);
   const gridColsRef = React.useRef(grid.cols);
-  
+
   React.useEffect(() => {
     gridRowsIdRef.current = grid.rows.id;
     gridRowsDefaultRef.current = grid.rows.defaultValue;
     gridRowsValuesRef.current = grid.rows.values;
     gridColsRef.current = grid.cols;
   }, [grid.rows.id, grid.rows.defaultValue, grid.rows.values, grid.cols]);
-  
+
   React.useEffect(() => {
     if (!linkSelectionToURL) return;
     if (typeof window === 'undefined') return;
@@ -160,7 +179,9 @@ export function DocVariants({
   }, [linkSelectionToURL, valuesKey]);
 
   // Create reset keys from identifiers
-  const resetProjectKey = JSON.stringify(project.files.map((f) => f.path).sort());
+  const resetProjectKey = JSON.stringify(
+    project.files.map((f) => f.path).sort()
+  );
   const resetControlsKey = JSON.stringify(controls.map((c) => c.id).sort());
   const resetGridKey = JSON.stringify(grid);
 

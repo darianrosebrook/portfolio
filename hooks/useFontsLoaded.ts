@@ -57,20 +57,18 @@ export function useFontsLoaded(): boolean {
       cleanupRef.current = cleanup;
 
       // Listen for font loading completion
-      document.fonts.ready
-        .then(handleFontsReady)
-        .catch((error) => {
-          console.warn('Font loading detection failed:', error);
-          // Fallback to timeout if promise fails
-          if (!isCleanedUp) {
-            fallbackTimeout = setTimeout(() => {
-              if (!isCleanedUp) {
-                setFontsLoaded(true);
-                cleanup();
-              }
-            }, 500);
-          }
-        });
+      document.fonts.ready.then(handleFontsReady).catch((error) => {
+        console.warn('Font loading detection failed:', error);
+        // Fallback to timeout if promise fails
+        if (!isCleanedUp) {
+          fallbackTimeout = setTimeout(() => {
+            if (!isCleanedUp) {
+              setFontsLoaded(true);
+              cleanup();
+            }
+          }, 500);
+        }
+      });
 
       // Fallback: check periodically in case the promise doesn't resolve
       checkInterval = setInterval(() => {

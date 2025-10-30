@@ -127,9 +127,8 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
         }
       } else {
         // Try autofocus first
-        const autofocusEl = dialogRef.current?.querySelector<HTMLElement>(
-          '[autofocus]'
-        );
+        const autofocusEl =
+          dialogRef.current?.querySelector<HTMLElement>('[autofocus]');
         if (isHTMLElement(autofocusEl)) {
           focusElement = autofocusEl;
         } else {
@@ -316,12 +315,9 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
         onClick={handleBackdropClick}
       >
         <div
-          ref={mergeRefs(
-            (node: HTMLDivElement | null) => {
-              dialogRef.current = node;
-            },
-            forwardedRef
-          )}
+          ref={mergeRefs((node: HTMLDivElement | null) => {
+            dialogRef.current = node;
+          }, forwardedRef)}
           id={dialogId}
           role="dialog"
           aria-modal={modal}

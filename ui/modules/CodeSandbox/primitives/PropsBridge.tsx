@@ -51,14 +51,14 @@ export function PropsBridge({
   React.useEffect(() => {
     try {
       const json = JSON.stringify(values ?? {}, null, 2);
-      
+
       // Compare serialized values to avoid unnecessary updates
       if (json === lastValuesRef.current) {
         return;
       }
-      
+
       lastValuesRef.current = json;
-      
+
       // Use ref to avoid dependency on sandpack object reference
       if (
         sandpackRef.current &&

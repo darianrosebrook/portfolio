@@ -35,7 +35,7 @@ export function mergeRefs<T>(
  * ```tsx
  * const inputRef = useRef<HTMLInputElement>(null);
  * const forwardedRefCallback = useForwardedRef(forwardedRef);
- * 
+ *
  * return (
  *   <input
  *     ref={(node) => {
@@ -74,4 +74,3 @@ export function setRef<T>(
     (ref as React.MutableRefObject<T | null>).current = value;
   }
 }
-

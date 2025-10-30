@@ -39,7 +39,9 @@ vi.mock('@tiptap/html', () => ({
         htmlParts.push(`<h${level}>${text}</h${level}>`);
       } else if (node.type === 'image' && node.attrs) {
         const attrs = node.attrs as { src?: string; alt?: string };
-        htmlParts.push(`<img src="${attrs.src || ''}" alt="${attrs.alt || ''}" />`);
+        htmlParts.push(
+          `<img src="${attrs.src || ''}" alt="${attrs.alt || ''}" />`
+        );
       } else if (node.type === 'video' && node.attrs) {
         const attrs = node.attrs as { src?: string };
         htmlParts.push(`<video src="${attrs.src || ''}"></video>`);
@@ -237,7 +239,9 @@ describe('TipTap HTML Generation Utilities', () => {
       const result = removeFirstImage(content);
       expect(result.content).toHaveLength(2);
       expect(result.content?.[0]?.type).toBe('image');
-      expect((result.content?.[0]?.attrs as { src?: string })?.src).toBe('image2.jpg');
+      expect((result.content?.[0]?.attrs as { src?: string })?.src).toBe(
+        'image2.jpg'
+      );
     });
 
     it('should handle content without images', () => {
@@ -404,9 +408,11 @@ describe('TipTap HTML Generation Utilities', () => {
         content: [],
       };
 
-      const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+      const consoleSpy = vi
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
       const result = generateArticleHTML(content);
-      
+
       expect(result).toBe('');
       expect(consoleSpy).toHaveBeenCalled();
       consoleSpy.mockRestore();
@@ -508,4 +514,3 @@ describe('TipTap HTML Generation Utilities', () => {
     });
   });
 });
-

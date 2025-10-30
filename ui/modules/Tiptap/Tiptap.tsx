@@ -25,8 +25,8 @@ interface TiptapProps {
   onBlur?: (props: { editor: Editor }) => void;
 }
 
-const Tiptap = ({ 
-  article, 
+const Tiptap = ({
+  article,
   handleUpdate = () => {},
   editable = true,
   autofocus = false,
@@ -42,7 +42,7 @@ const Tiptap = ({
 
   // Track previous content to detect external changes
   const previousContentRef = useRef<JSONContent | null>(null);
-  
+
   const editor = useEditor({
     extensions: createEditorExtensions({
       articleId: article?.id as number | undefined,
@@ -72,13 +72,6 @@ const Tiptap = ({
     onBlur: ({ editor }) => {
       onBlur?.({ editor });
     },
-    onError: ({ editor, error }) => {
-      console.error('TipTap editor error:', error);
-      // Prevent editor from crashing the app
-      if (editor.isDestroyed) {
-        return;
-      }
-    },
   });
 
   // Sync content when article prop changes externally
@@ -96,17 +89,20 @@ const Tiptap = ({
     ) {
       // Preserve selection when updating content
       const { from, to } = editor.state.selection;
-      editor.commands.setContent(newContent, false);
-      
+      editor.commands.setContent(newContent, { emitUpdate: false });
+
       // Restore selection if possible
       try {
-        if (from <= editor.state.doc.content.size && to <= editor.state.doc.content.size) {
+        if (
+          from <= editor.state.doc.content.size &&
+          to <= editor.state.doc.content.size
+        ) {
           editor.commands.setTextSelection({ from, to });
         }
-      } catch (error) {
+      } catch {
         // Selection may be invalid after content update, that's okay
       }
-      
+
       previousContentRef.current = newContent;
     }
   }, [editor, normalizedContent]);

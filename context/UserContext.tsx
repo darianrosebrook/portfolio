@@ -107,7 +107,9 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
       } catch (err) {
         if (isMounted) {
           console.error('Error in getInitialSession:', err);
-          setError(err instanceof Error ? err.message : 'Failed to get session');
+          setError(
+            err instanceof Error ? err.message : 'Failed to get session'
+          );
           setLoading(false);
         }
       }

@@ -26,9 +26,10 @@ export const Divider = React.forwardRef<HTMLHRElement, DividerProps>(
   ) => {
     const customStyle: React.CSSProperties = {
       ...style,
-      ...(thickness && createCSSProperties({
-        '--divider-thickness': thickness,
-      })),
+      ...(thickness &&
+        createCSSProperties({
+          '--divider-thickness': thickness,
+        })),
     };
 
     return (

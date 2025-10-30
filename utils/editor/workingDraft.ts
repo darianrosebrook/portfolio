@@ -8,6 +8,13 @@ import type { JSONContent } from '@tiptap/react';
 
 type RecordType = Article | CaseStudy;
 
+// Type guard to access is_dirty property
+function hasIsDirty(
+  record: RecordType
+): record is RecordType & { is_dirty?: boolean | null } {
+  return true;
+}
+
 /**
  * Gets the effective content for editing
  * Returns working draft if is_dirty is true, otherwise published content
@@ -20,25 +27,31 @@ export function getEffectiveContent(record: RecordType): {
   keywords: string | null;
   articleSection: string | null;
 } {
-  const isDirty = record.is_dirty ?? false;
-  
+  const isDirty = hasIsDirty(record) ? (record.is_dirty ?? false) : false;
+
   // Database uses snake_case for working columns
   const workingBody = (record as unknown as { workingbody?: unknown })
     .workingbody as JSONContent | null | undefined;
-  const workingHeadline = (record as unknown as { workingheadline?: string | null })
-    .workingheadline;
-  const workingDescription = (record as unknown as { workingdescription?: string | null })
-    .workingdescription;
+  const workingHeadline = (
+    record as unknown as { workingheadline?: string | null }
+  ).workingheadline;
+  const workingDescription = (
+    record as unknown as { workingdescription?: string | null }
+  ).workingdescription;
   const workingImage = (record as unknown as { workingimage?: string | null })
     .workingimage;
-  const workingKeywords = (record as unknown as { workingkeywords?: string | null })
-    .workingkeywords;
-  const workingArticleSection = (record as unknown as { workingarticlesection?: string | null })
-    .workingarticlesection;
+  const workingKeywords = (
+    record as unknown as { workingkeywords?: string | null }
+  ).workingkeywords;
+  const workingArticleSection = (
+    record as unknown as { workingarticlesection?: string | null }
+  ).workingarticlesection;
 
   if (isDirty) {
     return {
-      articleBody: workingBody ?? record.articleBody,
+      articleBody:
+        (workingBody as JSONContent | null) ??
+        (record.articleBody as JSONContent | null),
       headline: workingHeadline ?? record.headline,
       description: workingDescription ?? record.description,
       image: workingImage ?? record.image,
@@ -48,7 +61,7 @@ export function getEffectiveContent(record: RecordType): {
   }
 
   return {
-    articleBody: record.articleBody,
+    articleBody: record.articleBody as JSONContent | null,
     headline: record.headline,
     description: record.description,
     image: record.image,
@@ -61,8 +74,8 @@ export function getEffectiveContent(record: RecordType): {
  * Prepares record for publishing by copying working columns to published columns
  */
 export function prepareForPublish(record: RecordType): Partial<RecordType> {
-  const isDirty = record.is_dirty ?? false;
-  
+  const isDirty = hasIsDirty(record) ? (record.is_dirty ?? false) : false;
+
   if (!isDirty) {
     // No working draft, just return current published content
     return {};
@@ -71,19 +84,25 @@ export function prepareForPublish(record: RecordType): Partial<RecordType> {
   // Copy working columns to published columns
   const workingBody = (record as unknown as { workingbody?: unknown })
     .workingbody as JSONContent | null | undefined;
-  const workingHeadline = (record as unknown as { workingheadline?: string | null })
-    .workingheadline;
-  const workingDescription = (record as unknown as { workingdescription?: string | null })
-    .workingdescription;
+  const workingHeadline = (
+    record as unknown as { workingheadline?: string | null }
+  ).workingheadline;
+  const workingDescription = (
+    record as unknown as { workingdescription?: string | null }
+  ).workingdescription;
   const workingImage = (record as unknown as { workingimage?: string | null })
     .workingimage;
-  const workingKeywords = (record as unknown as { workingkeywords?: string | null })
-    .workingkeywords;
-  const workingArticleSection = (record as unknown as { workingarticlesection?: string | null })
-    .workingarticlesection;
+  const workingKeywords = (
+    record as unknown as { workingkeywords?: string | null }
+  ).workingkeywords;
+  const workingArticleSection = (
+    record as unknown as { workingarticlesection?: string | null }
+  ).workingarticlesection;
 
   return {
-    articleBody: workingBody ?? record.articleBody,
+    articleBody:
+      (workingBody as JSONContent | null) ??
+      (record.articleBody as JSONContent | null),
     headline: workingHeadline ?? record.headline,
     description: workingDescription ?? record.description,
     image: workingImage ?? record.image,
@@ -98,6 +117,5 @@ export function prepareForPublish(record: RecordType): Partial<RecordType> {
  * Checks if record has unsaved working draft
  */
 export function hasWorkingDraft(record: RecordType): boolean {
-  return record.is_dirty ?? false;
+  return hasIsDirty(record) ? (record.is_dirty ?? false) : false;
 }
-

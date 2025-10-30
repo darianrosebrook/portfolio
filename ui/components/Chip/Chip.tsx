@@ -21,9 +21,10 @@ const Slot = React.forwardRef<HTMLElement, SlotProps>(
       .join(' ');
 
     // Merge refs safely
-    const childRef = 'ref' in childProps
-      ? (childProps.ref as React.Ref<HTMLElement> | undefined)
-      : undefined;
+    const childRef =
+      'ref' in childProps
+        ? (childProps.ref as React.Ref<HTMLElement> | undefined)
+        : undefined;
     const mergedRef = ref ? mergeRefs(ref, childRef) : childRef;
 
     return React.cloneElement(children, {
@@ -301,12 +302,9 @@ const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
 
     return (
       <button
-        ref={mergeRefs(
-          (node: HTMLButtonElement | null) => {
-            chipRef.current = node;
-          },
-          ref
-        )}
+        ref={mergeRefs((node: HTMLButtonElement | null) => {
+          chipRef.current = node;
+        }, ref)}
         className={combinedClassName}
         disabled={disabled}
         title={title}

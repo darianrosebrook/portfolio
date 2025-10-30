@@ -78,7 +78,11 @@ test.describe('Homepage Visual Regression', () => {
     }
   });
 
-  test('homepage navigation renders correctly', async ({ page }: { page: Page }) => {
+  test('homepage navigation renders correctly', async ({
+    page,
+  }: {
+    page: Page;
+  }) => {
     await page.goto('/');
 
     // Wait for the page to be fully loaded and stable
