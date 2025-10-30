@@ -3,9 +3,7 @@
  */
 @mixin vars {
   /* === Color Tokens === */
-  --accordion-color-background-hover: var(
-    --semantic-interaction-background-hover
-  );
+  --accordion-color-background-hover: var(--semantic-interaction-background-hover);
   --accordion-color-text: var(--semantic-color-foreground-primary);
   --accordion-color-textHover: var(--semantic-interaction-text-hover);
   --accordion-color-textSecondary: var(--semantic-color-foreground-secondary);
@@ -26,9 +24,7 @@
   --accordion-text-size: var(--semantic-typography-body-02);
   --accordion-text-lineHeight: var(--semantic-typography-line-height-default);
   --accordion-text-sizeContent: var(--semantic-typography-body-03);
-  --accordion-text-lineHeightContent: var(
-    --semantic-typography-line-height-relaxed
-  );
+  --accordion-text-lineHeightContent: var(--semantic-typography-line-height-relaxed);
 
   /* === Icon Tokens === */
   --accordion-icon-size: var(--core-spacing-size-04);

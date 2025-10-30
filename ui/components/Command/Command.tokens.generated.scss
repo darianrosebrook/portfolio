@@ -3,7 +3,7 @@
  */
 @mixin vars {
   /* === Color Tokens === */
-  --command-color-overlay: rgb(0 0 0 / 60%);
+  --command-color-overlay: rgba(0, 0, 0, 0.6);
   --command-color-background: var(--semantic-color-background-primary);
   --command-color-backgroundHover: var(--semantic-interaction-background-hover);
   --command-color-border: var(--semantic-color-border-light);
@@ -57,4 +57,7 @@
 
   /* === Opacity Tokens === */
   --command-opacity-disabled: 0.5;
+
+  /* === Other Tokens === */
+  --command-shadow: var(--semantic-elevation-surface-floating);
 }

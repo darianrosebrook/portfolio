@@ -43,3 +43,6 @@ next-env.d.ts
 .vscode/
 **/TODO.md
 docs/
+
+# design tokens cache
+utils/designTokens/.cache/

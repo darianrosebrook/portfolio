@@ -3,114 +3,70 @@
  */
 @mixin vars {
   /* === Color Tokens === */
-  --chip-color-background-default: var(
-    --color-action-background-secondary-default
-  );
-  --chip-color-background-hover: var(--color-action-background-secondary-hover);
-  --chip-color-background-active: var(
-    --color-action-background-secondary-active
-  );
-  --chip-color-background-focus: var(--color-mode-white);
-  --chip-color-background-selected: var(
-    --color-action-background-primary-default
-  );
-  --chip-color-background-selectedHover: var(
-    --color-action-background-primary-hover
-  );
-  --chip-color-background-selectedActive: var(
-    --color-action-background-primary-active
-  );
-  --chip-color-background-dismissible: var(
-    --color-action-background-secondary-default
-  );
-  --chip-color-background-dismissibleHover: var(
-    --color-action-background-secondary-hover
-  );
-  --chip-color-background-dismissibleActive: var(
-    --color-action-background-secondary-active
-  );
-  --chip-color-foreground-default: var(
-    --color-action-foreground-secondary-default
-  );
-  --chip-color-foreground-hover: var(
-    --color-action-foreground-secondary-default
-  );
-  --chip-color-foreground-active: var(
-    --color-action-foreground-secondary-default
-  );
-  --chip-color-foreground-focus: var(--color-action-foreground-primary-default);
-  --chip-color-foreground-selected: var(
-    --color-action-foreground-primary-default
-  );
-  --chip-color-foreground-selectedHover: var(
-    --color-action-foreground-primary-default
-  );
-  --chip-color-foreground-selectedActive: var(
-    --color-action-foreground-primary-default
-  );
-  --chip-color-foreground-dismissible: var(
-    --color-action-foreground-secondary-default
-  );
-  --chip-color-foreground-dismissibleHover: var(
-    --color-action-foreground-secondary-default
-  );
-  --chip-color-foreground-dismissibleActive: var(
-    --color-action-foreground-secondary-default
-  );
-  --chip-color-border-default: var(--color-action-border-secondary-default);
-  --chip-color-border-hover: var(--color-action-border-secondary-hover);
-  --chip-color-border-active: var(--color-action-border-secondary-default);
-  --chip-color-border-focus: var(--color-action-border-primary-focus);
-  --chip-color-border-selected: var(--color-action-border-primary-default);
-  --chip-color-border-selectedHover: var(--color-action-border-primary-default);
-  --chip-color-border-selectedActive: var(
-    --color-action-border-primary-default
-  );
-  --chip-color-border-dismissible: var(--color-action-border-secondary-default);
-  --chip-color-border-dismissibleHover: var(
-    --color-action-border-secondary-hover
-  );
-  --chip-color-border-dismissibleActive: var(
-    --color-action-border-secondary-default
-  );
-  --chip-color-icon-default: var(--color-action-foreground-secondary-default);
-  --chip-color-icon-hover: var(--color-action-foreground-secondary-default);
-  --chip-color-icon-active: var(--color-action-foreground-secondary-default);
-  --chip-color-icon-selected: var(--color-action-foreground-primary-default);
-  --chip-color-icon-dismissible: var(
-    --color-action-foreground-secondary-default
-  );
-  --chip-color-icon-dismissibleHover: var(
-    --color-action-foreground-secondary-default
-  );
+  --chip-color-background-default: var(--semantic-color-action-background-secondary-default);
+  --chip-color-background-hover: var(--semantic-color-action-background-secondary-hover);
+  --chip-color-background-active: var(--semantic-color-action-background-secondary-active);
+  --chip-color-background-focus: var(--semantic-color-mode-white);
+  --chip-color-background-selected: var(--semantic-color-action-background-primary-default);
+  --chip-color-background-selectedHover: var(--semantic-color-action-background-primary-hover);
+  --chip-color-background-selectedActive: var(--semantic-color-action-background-primary-active);
+  --chip-color-background-dismissible: var(--semantic-color-action-background-secondary-default);
+  --chip-color-background-dismissibleHover: var(--semantic-color-action-background-secondary-hover);
+  --chip-color-background-dismissibleActive: var(--semantic-color-action-background-secondary-active);
+  --chip-color-foreground-default: var(--semantic-color-action-foreground-secondary-default);
+  --chip-color-foreground-hover: var(--semantic-color-action-foreground-secondary-default);
+  --chip-color-foreground-active: var(--semantic-color-action-foreground-secondary-default);
+  --chip-color-foreground-focus: var(--semantic-color-action-foreground-primary-default);
+  --chip-color-foreground-selected: var(--semantic-color-action-foreground-primary-default);
+  --chip-color-foreground-selectedHover: var(--semantic-color-action-foreground-primary-default);
+  --chip-color-foreground-selectedActive: var(--semantic-color-action-foreground-primary-default);
+  --chip-color-foreground-dismissible: var(--semantic-color-action-foreground-secondary-default);
+  --chip-color-foreground-dismissibleHover: var(--semantic-color-action-foreground-secondary-default);
+  --chip-color-foreground-dismissibleActive: var(--semantic-color-action-foreground-secondary-default);
+  --chip-color-border-default: var(--semantic-color-action-border-secondary-default);
+  --chip-color-border-hover: var(--semantic-color-action-border-secondary-hover);
+  --chip-color-border-active: var(--semantic-color-action-border-secondary-default);
+  --chip-color-border-focus: var(--semantic-color-action-border-primary-focus);
+  --chip-color-border-selected: var(--semantic-color-action-border-primary-default);
+  --chip-color-border-selectedHover: var(--semantic-color-action-border-primary-default);
+  --chip-color-border-selectedActive: var(--semantic-color-action-border-primary-default);
+  --chip-color-border-dismissible: var(--semantic-color-action-border-secondary-default);
+  --chip-color-border-dismissibleHover: var(--semantic-color-action-border-secondary-hover);
+  --chip-color-border-dismissibleActive: var(--semantic-color-action-border-secondary-default);
+  --chip-color-icon-default: var(--semantic-color-action-foreground-secondary-default);
+  --chip-color-icon-hover: var(--semantic-color-action-foreground-secondary-default);
+  --chip-color-icon-active: var(--semantic-color-action-foreground-secondary-default);
+  --chip-color-icon-selected: var(--semantic-color-action-foreground-primary-default);
+  --chip-color-icon-dismissible: var(--semantic-color-action-foreground-secondary-default);
+  --chip-color-icon-dismissibleHover: var(--semantic-color-action-foreground-secondary-default);
 
   /* === Size Tokens === */
-  --chip-size-padding-horizontal: var(--spacing-size-04);
-  --chip-size-padding-vertical: var(--spacing-size-02);
-  --chip-size-gap: var(--spacing-size-02);
-  --chip-size-radius: var(--shape-radius-full);
-  --chip-size-border: var(--shape-border-width-hairline);
-  --chip-size-icon-size: var(--spacing-size-04);
-  --chip-size-icon-margin: var(--spacing-size-01);
+  --chip-size-padding-horizontal: var(--core-spacing-size-04);
+  --chip-size-padding-vertical: var(--core-spacing-size-02);
+  --chip-size-gap: var(--core-spacing-size-02);
+  --chip-size-radius: var(--core-shape-radius-full);
+  --chip-size-border: var(--core-shape-border-width-hairline);
+  --chip-size-icon-size: var(--core-spacing-size-04);
+  --chip-size-icon-margin: var(--core-spacing-size-01);
 
   /* === Text Tokens === */
-  --chip-text-size: var(--typography-body-04);
-  --chip-text-weight: var(--typography-font-weight-medium);
-  --chip-text-lineHeight: var(--typography-line-height-tight);
+  --chip-text-size: var(--semantic-typography-body-04);
+  --chip-text-weight: var(--semantic-typography-font-weight-medium);
+  --chip-text-lineHeight: var(--semantic-typography-line-height-tight);
 
   /* === Motion Tokens === */
-  --chip-motion-duration-fast: var(--motion-duration-short);
-  --chip-motion-duration-medium: var(--motion-duration-medium);
-  --chip-motion-duration-slow: var(--motion-duration-long);
-  --chip-motion-easing-standard: var(--motion-easing-standard);
-  --chip-motion-easing-in: var(--motion-easing-in);
-  --chip-motion-easing-out: var(--motion-easing-out);
+  --chip-motion-duration-fast: var(--core-motion-duration-short);
+  --chip-motion-duration-medium: var(--core-motion-duration-medium);
+  --chip-motion-duration-slow: var(--core-motion-duration-long);
+  --chip-motion-easing-standard: var(--core-motion-easing-standard);
+  --chip-motion-easing-in: var(--core-motion-easing-in);
+  --chip-motion-easing-out: var(--core-motion-easing-out);
   --chip-motion-scale-pressed: 0.98;
   --chip-motion-scale-iconEnter: 0.8;
   --chip-motion-scale-iconExit: 0.8;
 
   /* === Focus Tokens === */
-  --chip-focus-outlineWidth: var(--shape-border-width-thick);
-  --chip-focus-outlineOffset: var(--spacing-size-02);
-  --chip-focus-outlineColor: var(--color-action-border-primary-focus);
+  --chip-focus-outlineWidth: var(--core-shape-border-width-thick);
+  --chip-focus-outlineOffset: var(--core-spacing-size-02);
+  --chip-focus-outlineColor: var(--semantic-color-action-border-primary-focus);
 }

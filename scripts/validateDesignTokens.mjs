@@ -86,6 +86,78 @@ class DesignTokenValidator {
   parseJsonTokens() {
     logSection('Parsing JSON Token Files');
 
+    const COMPOSED_TOKENS_FILE = path.join(TOKENS_DIR, 'designTokens.json');
+
+    // Try to use composed file first (has namespaces)
+    if (fs.existsSync(COMPOSED_TOKENS_FILE)) {
+      try {
+        const tokens = JSON.parse(
+          fs.readFileSync(COMPOSED_TOKENS_FILE, 'utf8')
+        );
+
+        // Process core and semantic separately
+        if (tokens.core) {
+          const {
+            definitions,
+            references,
+            issues: fileIssues,
+          } = this.extractTokensFromObject(
+            tokens.core,
+            'designTokens.json',
+            'core'
+          );
+          for (const [p, d] of definitions) {
+            this.allTokens.set(p, d);
+          }
+          const existingRefs =
+            this.allReferences.get('designTokens.json') || [];
+          this.allReferences.set('designTokens.json', [
+            ...existingRefs,
+            ...references,
+          ]);
+          this.issues.push(...fileIssues);
+        }
+
+        if (tokens.semantic) {
+          const {
+            definitions,
+            references,
+            issues: fileIssues,
+          } = this.extractTokensFromObject(
+            tokens.semantic,
+            'designTokens.json',
+            'semantic'
+          );
+          for (const [p, d] of definitions) {
+            this.allTokens.set(p, d);
+          }
+          const existingRefs =
+            this.allReferences.get('designTokens.json') || [];
+          this.allReferences.set('designTokens.json', [
+            ...existingRefs,
+            ...references,
+          ]);
+          this.issues.push(...fileIssues);
+        }
+
+        logSuccess(
+          `Loaded ${this.allTokens.size} tokens from composed file`
+        );
+        this.stats.totalTokens = this.allTokens.size;
+        this.stats.totalReferences = Array.from(
+          this.allReferences.values()
+        ).flat().length;
+        return;
+      } catch (error) {
+        this.issues.push({
+          type: 'parse-error',
+          severity: 'error',
+          file: 'designTokens.json',
+          message: `Failed to parse: ${error.message}`,
+        });
+      }
+    }
+
     if (!fs.existsSync(TOKENS_DIR)) {
       this.issues.push({
         type: 'missing-directory',
@@ -95,22 +167,41 @@ class DesignTokenValidator {
       return;
     }
 
-    const files = fs
-      .readdirSync(TOKENS_DIR)
-      .filter((f) => f.endsWith('.tokens.json'))
-      .map((f) => path.join(TOKENS_DIR, f));
+    // Fallback: Read modular files recursively
+    const files = [];
+    function readDir(dir, namespace = '') {
+      const entries = fs.readdirSync(dir, { withFileTypes: true });
+      for (const dirent of entries) {
+        const fullPath = path.join(dir, dirent.name);
+        if (dirent.isDirectory() && !dirent.name.startsWith('_')) {
+          const subNamespace = namespace
+            ? `${namespace}.${dirent.name}`
+            : dirent.name;
+          readDir(fullPath, subNamespace);
+        } else if (
+          dirent.isFile() &&
+          dirent.name.endsWith('.tokens.json') &&
+          !dirent.name.startsWith('_')
+        ) {
+          files.push({ path: fullPath, namespace });
+        }
+      }
+    }
+    readDir(TOKENS_DIR);
 
     logInfo(`Found ${files.length} token files`);
 
-    for (const filePath of files) {
+    for (const fileInfo of files) {
       try {
-        const fileName = path.basename(filePath);
+        const filePath = fileInfo.path || fileInfo;
+        const namespace = fileInfo.namespace || '';
+        const fileName = path.relative(TOKENS_DIR, filePath);
         const tokens = JSON.parse(fs.readFileSync(filePath, 'utf8'));
         const {
           definitions,
           references,
           issues: fileIssues,
-        } = this.extractTokensFromObject(tokens, fileName);
+        } = this.extractTokensFromObject(tokens, fileName, namespace);
 
         // Check for duplicates and circular references
         this.validateTokenDefinitions(definitions, fileName);
@@ -142,7 +233,7 @@ class DesignTokenValidator {
   /**
    * Extract token definitions and references from a token object
    */
-  extractTokensFromObject(obj, fileName) {
+  extractTokensFromObject(obj, fileName, namespace = '') {
     const definitions = new Map();
     const references = [];
     const issues = [];
@@ -151,16 +242,27 @@ class DesignTokenValidator {
       if (!node || typeof node !== 'object') return;
 
       if (Object.prototype.hasOwnProperty.call(node, '$value')) {
-        definitions.set(currentPath, {
+        const fullPath = namespace ? `${namespace}.${currentPath}` : currentPath;
+        definitions.set(fullPath, {
           value: node.$value,
           type: node.$type,
           file: fileName,
-          path: currentPath,
+          path: fullPath,
         });
 
         const ref = this.parseTokenReference(node.$value);
         if (ref) {
-          references.push({ from: currentPath, to: ref, file: fileName });
+          // Resolve reference namespace
+          let resolvedRef = ref;
+          if (!ref.startsWith('core.') && !ref.startsWith('semantic.')) {
+            resolvedRef = namespace ? `${namespace}.${ref}` : ref;
+          }
+          references.push({
+            from: fullPath,
+            to: resolvedRef,
+            original: ref,
+            file: fileName,
+          });
         }
 
         if (
@@ -171,9 +273,31 @@ class DesignTokenValidator {
             type: 'interpolated-reference',
             severity: 'error',
             file: fileName,
-            path: currentPath,
+            path: fullPath,
             message: `Interpolated references not allowed: ${node.$value}`,
           });
+        }
+
+        // Also check $extensions for references
+        if (node.$extensions?.design?.paths) {
+          const paths = node.$extensions.design.paths;
+          for (const [key, value] of Object.entries(paths)) {
+            if (typeof value === 'string') {
+              const extRef = this.parseTokenReference(value);
+              if (extRef) {
+                let resolvedRef = extRef;
+                if (!extRef.startsWith('core.') && !extRef.startsWith('semantic.')) {
+                  resolvedRef = namespace ? `${namespace}.${extRef}` : extRef;
+                }
+                references.push({
+                  from: `${fullPath}[${key}]`,
+                  to: resolvedRef,
+                  original: extRef,
+                  file: fileName,
+                });
+              }
+            }
+          }
         }
       }
 
@@ -314,6 +438,10 @@ class DesignTokenValidator {
 
     logInfo(`Scanning ${files.length} SCSS files`);
 
+    // Separate maps for definitions and uses
+    const scssDefs = new Map();
+    const scssUses = new Map();
+
     for (const file of files) {
       try {
         const content = fs.readFileSync(path.join(PROJECT_ROOT, file), 'utf8');
@@ -323,13 +451,36 @@ class DesignTokenValidator {
         let match;
         while ((match = defRe.exec(content)) !== null) {
           const name = `$${match[1]}`;
-          if (!this.scssVariables.has(name)) {
-            this.scssVariables.set(name, []);
+          if (!scssDefs.has(name)) {
+            scssDefs.set(name, []);
           }
-          this.scssVariables.get(name).push({
+          scssDefs.get(name).push({
             file: file,
             line: content.slice(0, match.index).split('\n').length,
             value: match[2].trim(),
+          });
+        }
+
+        // Find variable uses (but exclude definitions)
+        const useRe = /\$([a-zA-Z0-9-_]+)/g;
+        const defMatches = new Set();
+        defRe.lastIndex = 0; // Reset regex
+        while ((match = defRe.exec(content)) !== null) {
+          defMatches.add(`$${match[1]}`);
+        }
+
+        useRe.lastIndex = 0; // Reset regex
+        while ((match = useRe.exec(content)) !== null) {
+          const name = `$${match[1]}`;
+          // Skip if this is a definition
+          if (defMatches.has(name)) continue;
+          
+          if (!scssUses.has(name)) {
+            scssUses.set(name, []);
+          }
+          scssUses.get(name).push({
+            file: file,
+            line: content.slice(0, match.index).split('\n').length,
           });
         }
       } catch (error) {
@@ -337,8 +488,19 @@ class DesignTokenValidator {
       }
     }
 
+    // Store both in scssVariables for backwards compatibility
+    // But structure it so we can separate them
+    this.scssVariables = new Map();
+    for (const [name, defs] of scssDefs) {
+      this.scssVariables.set(name, defs);
+    }
+    for (const [name, uses] of scssUses) {
+      const existing = this.scssVariables.get(name) || [];
+      this.scssVariables.set(name, [...existing, ...uses]);
+    }
+
     this.stats.totalScssVars = this.scssVariables.size;
-    logSuccess(`Found ${this.scssVariables.size} SCSS variables`);
+    logSuccess(`Found ${scssDefs.size} SCSS variable definitions, ${scssUses.size} unique variables in use`);
   }
 
   /**
@@ -347,19 +509,42 @@ class DesignTokenValidator {
   validateReferences() {
     logSection('Validating Token References');
 
-    // Validate JSON token references
+    // Validate JSON token references with namespace resolution
     for (const [file, refs] of this.allReferences) {
       for (const ref of refs) {
-        if (!this.allTokens.has(ref.to)) {
-          this.issues.push({
-            type: 'unresolved-token-reference',
-            severity: 'error',
-            file: file,
-            from: ref.from,
-            to: ref.to,
-            message: `Token reference '${ref.to}' not found`,
-          });
+        // Try exact match first
+        if (this.allTokens.has(ref.to)) {
+          continue;
         }
+
+        // Try without namespace prefixes
+        const parts = ref.to.split('.');
+        if (parts.length > 1 && (parts[0] === 'core' || parts[0] === 'semantic')) {
+          const withoutNs = parts.slice(1).join('.');
+          if (this.allTokens.has(withoutNs)) {
+            continue;
+          }
+        }
+
+        // Try with namespace prefix
+        if (!ref.to.startsWith('core.') && !ref.to.startsWith('semantic.')) {
+          const coreVersion = `core.${ref.to}`;
+          const semanticVersion = `semantic.${ref.to}`;
+          if (this.allTokens.has(coreVersion) || this.allTokens.has(semanticVersion)) {
+            continue;
+          }
+        }
+
+        // Not found
+        this.issues.push({
+          type: 'unresolved-token-reference',
+          severity: 'error',
+          file: file,
+          from: ref.from,
+          to: ref.to,
+          original: ref.original || ref.to,
+          message: `Token reference '${ref.to}' not found`,
+        });
       }
     }
 
@@ -386,9 +571,22 @@ class DesignTokenValidator {
       }
     }
 
-    // Validate SCSS variables
-    for (const [name, uses] of this.scssVariables) {
-      if (!this.scssVariables.has(name)) {
+    // Validate SCSS variables - FIXED: Check usage against definitions
+    // Note: scssVariables contains both definitions and uses, need to separate
+    const scssDefs = new Map();
+    const scssUses = new Map();
+    
+    // Separate definitions from uses (uses have file/line, defs have value)
+    for (const [name, entries] of this.scssVariables) {
+      const defs = entries.filter(e => e.value !== undefined);
+      const uses = entries.filter(e => e.value === undefined);
+      if (defs.length > 0) scssDefs.set(name, defs);
+      if (uses.length > 0) scssUses.set(name, uses);
+    }
+
+    // Check uses against definitions
+    for (const [name, uses] of scssUses) {
+      if (!scssDefs.has(name)) {
         for (const use of uses) {
           this.issues.push({
             type: 'undefined-scss-variable',

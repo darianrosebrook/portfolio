@@ -83,6 +83,32 @@ export function DocInteractive({
     []
   );
 
+  // Stable callback for section changes to prevent infinite loops
+  const handleActiveSection = React.useCallback(
+    (id: string) => {
+      onEvent?.({ type: 'sectionChange', id });
+    },
+    [onEvent]
+  );
+
+  // Stable sections reference to prevent unnecessary re-renders
+  // Compare by serializing IDs to detect actual changes
+  const sectionsKey = React.useMemo(
+    () => sections.map((s) => s.id).join(','),
+    [sections]
+  );
+  const stableSections = React.useMemo(() => sections, [sectionsKey]);
+
+  // Stable project reference to prevent CodeWorkbench re-renders
+  // Compare by serializing file paths and contents hash
+  const projectFilesKey = React.useMemo(
+    () => JSON.stringify(
+      project.files.map((f) => ({ path: f.path, hash: String(f.contents).slice(0, 50) }))
+    ),
+    [project.files]
+  );
+  const stableProject = React.useMemo(() => project, [projectFilesKey]);
+
   const decorators = React.useMemo(() => {
     if (!activeFile || !highlight) return undefined;
     const [start, end] = highlight;
@@ -96,13 +122,13 @@ export function DocInteractive({
   // Debounce URL hash updates when active section changes
   const hashUpdateRef = React.useRef<number | null>(null);
   const currentSectionId = React.useMemo(() => {
-    return sections.find(
+    return stableSections.find(
       (s) =>
         s.code?.file === activeFile &&
         s.code?.lines[0] === highlight?.[0] &&
         s.code?.lines[1] === highlight?.[1]
     )?.id;
-  }, [sections, activeFile, highlight]);
+  }, [stableSections, activeFile, highlight]);
 
   React.useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -121,20 +147,26 @@ export function DocInteractive({
   const themeClassName =
     preview?.theme && preview.theme !== 'system' ? preview.theme : undefined;
 
-  // Create reset keys from project and sections identifiers
-  const projectKey = JSON.stringify(project.files.map((f) => f.path).sort());
-  const sectionsKey = JSON.stringify(sections?.map((s) => s.id) || []);
+  // Create reset keys from project and sections identifiers - use stable references
+  const projectKey = React.useMemo(
+    () => JSON.stringify(stableProject.files.map((f) => f.path).sort()),
+    [stableProject.files]
+  );
+  const sectionsResetKey = React.useMemo(
+    () => JSON.stringify(stableSections?.map((s) => s.id) || []),
+    [stableSections]
+  );
 
   return (
     <ErrorBoundary
-      resetKeys={[projectKey, sectionsKey]}
+      resetKeys={[projectKey, sectionsResetKey]}
       onError={(error, errorInfo) => {
         console.error('DocInteractive Error:', error, errorInfo);
         onEvent?.({ type: 'compileError', payload: { error: error.message } });
       }}
     >
       <CodeWorkbench
-        project={project}
+        project={stableProject}
         engine="sandpack"
         height={height}
         themeClassName={`docs-workbench ${themeClassName || ''}`.trim()}
@@ -149,14 +181,9 @@ export function DocInteractive({
           ref={setRootEl as unknown as React.Ref<HTMLDivElement>}
         >
           <SectionSync
-            sections={sections}
+            sections={stableSections}
             root={rootEl}
-            onActiveSection={React.useCallback(
-              (id: string) => {
-                onEvent?.({ type: 'sectionChange', id });
-              },
-              [onEvent]
-            )}
+            onActiveSection={handleActiveSection}
             onDecorate={handleDecorate as any}
           />
           <SectionDriver rootRef={containerRef} activeFile={activeFile} />

@@ -23,7 +23,7 @@
       }
     },
     "elevation": {
-      "default": "{semantic.elevation.depth.1}"
+      "default": "{semantic.elevation.default}"
     }
   }
 }

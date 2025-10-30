@@ -19,6 +19,16 @@ import {
   logSummary,
   type TokenGroup,
 } from '../core/index';
+import {
+  getChangedFiles,
+  updateFileCache,
+  getTokenFilesToCheck,
+} from '../core/cache';
+import {
+  findDeprecatedTokens,
+  validateDeprecations,
+  formatDeprecationWarning,
+} from '../deprecation/index';
 
 /**
  * Transform token references in an object
@@ -133,8 +143,23 @@ function loadModularTokens(baseDir: string): TokenGroup | null {
 /**
  * Compose core and semantic tokens into unified token file
  */
-export function composeTokens(): boolean {
+export function composeTokens(incremental = true): boolean {
   console.log('[tokens] Composing token files...');
+
+  // Check for incremental build
+  if (incremental) {
+    const tokenFiles = getTokenFilesToCheck();
+    const changedFiles = getChangedFiles(tokenFiles);
+    
+    if (changedFiles.length === 0 && fs.existsSync(PATHS.tokens)) {
+      console.log('[tokens] ⚡ No token files changed, skipping compose (incremental build)');
+      return true;
+    }
+    
+    if (changedFiles.length > 0) {
+      console.log(`[tokens] 📝 ${changedFiles.length} token file(s) changed`);
+    }
+  }
 
   // Try loading from modular structure first, fall back to monolithic files
   let coreTokens = loadModularTokens('core');
@@ -182,6 +207,30 @@ export function composeTokens(): boolean {
   const content = JSON.stringify(result, null, 2) + '\n';
 
   writeOutputFile(PATHS.tokens, content, 'composed design tokens');
+
+  // Update cache for all token files
+  const tokenFiles = getTokenFilesToCheck();
+  tokenFiles.forEach(updateFileCache);
+  updateFileCache(PATHS.tokens);
+
+  // Check for deprecated tokens
+  const deprecations = findDeprecatedTokens(result);
+  if (deprecations.length > 0) {
+    console.log(`\n[tokens] ⚠️  Found ${deprecations.length} deprecated token(s):`);
+    deprecations.forEach((dep) => {
+      console.log(formatDeprecationWarning(dep.tokenPath, dep));
+    });
+
+    const validation = validateDeprecations(deprecations);
+    if (validation.errors.length > 0) {
+      console.error('\n[tokens] ❌ Deprecation errors:');
+      validation.errors.forEach((err) => console.error(`  - ${err}`));
+    }
+    if (validation.warnings.length > 0) {
+      console.warn('\n[tokens] ⚠️  Deprecation warnings:');
+      validation.warnings.forEach((warn) => console.warn(`  - ${warn}`));
+    }
+  }
 
   // Log summary
   const coreCount = JSON.stringify(coreTokens).match(/"\$value"/g)?.length || 0;

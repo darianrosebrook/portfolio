@@ -54,7 +54,7 @@
     "zIndex": {
       "overlay": 50
     },
-    "shadow": "{semantic.elevation.depth.4}",
+    "shadow": "{semantic.elevation.surface.floating}",
     "opacity": {
       "disabled": 0.5
     }

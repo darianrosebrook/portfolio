@@ -23,18 +23,10 @@
   --pageTransition-spacing-margin-large: var(--core-spacing-size-05);
 
   /* === Color Tokens === */
-  --pageTransition-color-background-default: var(
-    --semantic-color-background-primary
-  );
-  --pageTransition-color-background-overlay: var(
-    --semantic-color-background-overlay
-  );
-  --pageTransition-color-foreground-default: var(
-    --semantic-color-foreground-primary
-  );
-  --pageTransition-color-foreground-secondary: var(
-    --semantic-color-foreground-secondary
-  );
+  --pageTransition-color-background-default: var(--semantic-color-background-primary);
+  --pageTransition-color-background-overlay: var(--semantic-color-background-overlay);
+  --pageTransition-color-foreground-default: var(--semantic-color-foreground-primary);
+  --pageTransition-color-foreground-secondary: var(--semantic-color-foreground-secondary);
 
   /* === Opacity Tokens === */
   --pageTransition-opacity-overlay-default: 0.8;

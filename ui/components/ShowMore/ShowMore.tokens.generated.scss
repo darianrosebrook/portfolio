@@ -3,13 +3,9 @@
  */
 @mixin vars {
   /* === Color Tokens === */
-  --showmore-color-background-default: var(
-    --semantic-color-background-secondary
-  );
+  --showmore-color-background-default: var(--semantic-color-background-secondary);
   --showmore-color-foreground-primary: var(--semantic-color-foreground-primary);
-  --showmore-color-foreground-secondary: var(
-    --semantic-color-foreground-secondary
-  );
+  --showmore-color-foreground-secondary: var(--semantic-color-foreground-secondary);
   --showmore-color-border-default: var(--semantic-color-border-light);
   --showmore-color-border-accent: var(--semantic-color-border-accent);
 
@@ -18,5 +14,5 @@
   --showmore-size-radius-default: var(--core-shape-radius-medium);
 
   /* === Elevation Tokens === */
-  --showmore-elevation-default: var(--semantic-elevation-depth-1);
+  --showmore-elevation-default: var(--semantic-elevation-default);
 }
