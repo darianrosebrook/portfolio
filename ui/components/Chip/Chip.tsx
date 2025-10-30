@@ -1,25 +1,41 @@
 import React, { useRef, useEffect, useMemo } from 'react';
 import { gsap } from 'gsap';
+import { mergeRefs } from '@/utils/refs';
+import { isValidReactElement } from '@/utils/type-guards';
 import styles from './Chip.module.scss';
 
 // Simple Slot implementation to avoid Radix dependency
-const Slot = React.forwardRef<
-  HTMLElement,
-  React.HTMLAttributes<HTMLElement> & { children: React.ReactElement }
->(({ children, ...props }, ref) => {
-  if (React.isValidElement(children)) {
-    const childProps = children.props as Record<string, unknown>;
+interface SlotProps extends React.HTMLAttributes<HTMLElement> {
+  children: React.ReactElement;
+}
+
+const Slot = React.forwardRef<HTMLElement, SlotProps>(
+  ({ children, ...props }, ref) => {
+    if (!isValidReactElement(children)) {
+      return null;
+    }
+
+    const childProps = children.props as React.HTMLAttributes<HTMLElement>;
+    const childClassName = [props.className, childProps.className]
+      .filter(Boolean)
+      .join(' ');
+
+    // Merge refs safely
+    const childRef = 'ref' in childProps
+      ? (childProps.ref as React.Ref<HTMLElement> | undefined)
+      : undefined;
+    const mergedRef = ref ? mergeRefs(ref, childRef) : childRef;
+
     return React.cloneElement(children, {
-      ...childProps,
       ...props,
-      ref,
-      className: [props.className, childProps.className]
-        .filter(Boolean)
-        .join(' '),
-    } as any);
+      ...childProps,
+      className: childClassName,
+      ref: mergedRef,
+    } as React.HTMLAttributes<HTMLElement> & { ref?: React.Ref<HTMLElement> });
   }
-  return null;
-});
+);
+
+Slot.displayName = 'Slot';
 
 export type ChipVariant = 'default' | 'selected' | 'dismissible';
 export type ChipSize = 'small' | 'medium' | 'large';
@@ -285,11 +301,12 @@ const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
 
     return (
       <button
-        ref={(node) => {
-          chipRef.current = node;
-          if (typeof ref === 'function') ref(node);
-          else if (ref) ref.current = node;
-        }}
+        ref={mergeRefs(
+          (node: HTMLButtonElement | null) => {
+            chipRef.current = node;
+          },
+          ref
+        )}
         className={combinedClassName}
         disabled={disabled}
         title={title}

@@ -2,6 +2,8 @@
 
 import React, { ReactNode, useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { createCSSProperties } from '@/utils/css-custom-properties';
+import { supportsViewTransitions } from '@/utils/type-guards';
 import styles from './PageTransition.module.scss';
 
 interface PageTransitionProps {
@@ -47,8 +49,7 @@ export function PageTransition({
   const [mounted, setMounted] = useState(false);
 
   // Check if View Transitions API is supported
-  const supportsViewTransitions =
-    typeof document !== 'undefined' && 'startViewTransition' in document;
+  const supportsViewTransitionsAPI = supportsViewTransitions();
 
   // Check for reduced motion preference
   const prefersReducedMotion =
@@ -68,14 +69,14 @@ export function PageTransition({
     const element = document.querySelector(
       `[data-transition-name="${transitionName || 'main-content'}"]`
     );
-    if (element && supportsViewTransitions) {
+    if (element && supportsViewTransitionsAPI) {
       // Set view-transition-name using CSS custom property for now
       (element as HTMLElement).style.setProperty(
         'view-transition-name',
         transitionName || 'main-content'
       );
     }
-  }, [transitionName, supportsViewTransitions, shouldAnimate]);
+  }, [transitionName, supportsViewTransitionsAPI, shouldAnimate]);
 
   // Handle route changes with transitions
   useEffect(() => {
@@ -99,7 +100,7 @@ export function PageTransition({
     styles.pageTransition,
     shouldAnimate && styles.enabled,
     isTransitioning && styles.transitioning,
-    !supportsViewTransitions && shouldAnimate && styles.fallback,
+    !supportsViewTransitionsAPI && shouldAnimate && styles.fallback,
     className,
   ]
     .filter(Boolean)
@@ -110,11 +111,9 @@ export function PageTransition({
       className={transitionClasses}
       data-transition-name={transitionName || 'main-content'}
       data-transition-duration={duration}
-      style={
-        {
-          '--transition-duration': `${duration}ms`,
-        } as React.CSSProperties
-      }
+      style={createCSSProperties({
+        '--transition-duration': `${duration}ms`,
+      })}
     >
       {children}
     </div>
@@ -144,16 +143,16 @@ export function TransitionLink({
 }: TransitionLinkProps) {
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     // Check if View Transitions API is supported and user hasn't disabled animations
-    const supportsViewTransitions = 'startViewTransition' in document;
+    const supportsViewTransitionsAPI = supportsViewTransitions() && document.startViewTransition;
     const prefersReducedMotion = window.matchMedia(
       '(prefers-reduced-motion: reduce)'
     ).matches;
 
-    if (supportsViewTransitions && !prefersReducedMotion) {
+    if (supportsViewTransitionsAPI && !prefersReducedMotion) {
       e.preventDefault();
 
-      // Start view transition with proper type casting
-      const transition = (document as any).startViewTransition(() => {
+      // Start view transition with proper type
+      const transition = document.startViewTransition!(() => {
         // Navigate to the new page
         if (replace) {
           window.history.replaceState(null, '', href);

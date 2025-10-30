@@ -49,21 +49,21 @@ const supabaseAnonKey = getEnvVar(
 );
 
 // Warn if using placeholder values
-if (
-  process.env.NODE_ENV !== 'test' &&
-  (supabaseUrl.includes('placeholder') ||
-    supabaseAnonKey === 'placeholder_anon_key')
-) {
-  console.error(
-    '\n' +
-      '================================================\n' +
-      'WARNING: Using placeholder Supabase credentials!\n' +
-      'Database operations will fail.\n' +
-      'Create a .env.local file with real credentials.\n' +
-      'See .env.local.example for template.\n' +
-      '================================================\n'
-  );
-}
+// if (
+//   process.env.NODE_ENV !== 'test' &&
+//   (supabaseUrl.includes('placeholder') ||
+//     supabaseAnonKey === 'placeholder_anon_key')
+// ) {
+//   console.error(
+//     '\n' +
+//       '================================================\n' +
+//       'WARNING: Using placeholder Supabase credentials!\n' +
+//       'Database operations will fail.\n' +
+//       'Create a .env.local file with real credentials.\n' +
+//       'See .env.local.example for template.\n' +
+//       '================================================\n'
+//   );
+// }
 
 export const env: Environment = {
   // Client-side variables (available in browser via NEXT_PUBLIC_ prefix)

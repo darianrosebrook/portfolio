@@ -3,19 +3,13 @@ import type { Article, CaseStudy } from '@/types';
 import Button from '@/ui/components/Button';
 import Checkbox from '@/ui/components/Checkbox';
 import ToggleSwitch from '@/ui/components/ToggleSwitch';
-import { VideoExtended } from '@/ui/modules/Tiptap/Extensions/VideoExtended';
 import { extractMetadata } from '@/utils/metadata';
-import CharacterCount from '@tiptap/extension-character-count';
-import Image from '@tiptap/extension-image';
-import { generateHTML } from '@tiptap/html';
-import { JSONContent } from '@tiptap/react';
-import StarterKit from '@tiptap/starter-kit';
-import { Table } from '@tiptap/extension-table';
-import TableRow from '@tiptap/extension-table-row';
-import TableHeader from '@tiptap/extension-table-header';
-import TableCell from '@tiptap/extension-table-cell';
+import type { JSONContent } from '@tiptap/react';
+import { generateArticleHTML } from '@/utils/tiptap/htmlGeneration';
+import { getEffectiveContent, hasWorkingDraft } from '@/utils/editor/workingDraft';
+import { checkConflict } from '@/utils/editor/conflict';
 import dynamic from 'next/dynamic';
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 const Tiptap = dynamic(
   () => import('@/ui/modules/Tiptap').then((mod) => ({ default: mod.Tiptap })),
@@ -32,73 +26,137 @@ export default function ContentEditor({
   initial: RecordType;
   entity: Entity;
 }) {
-  const [record, setRecord] = useState<RecordType>(initial);
+  // Load effective content (working draft if is_dirty, otherwise published)
+  const effectiveContent = useMemo(() => getEffectiveContent(initial), [initial]);
+  const hasDraft = hasWorkingDraft(initial);
+  
+  const [record, setRecord] = useState<RecordType>(() => {
+    // Merge effective content into initial record
+    return {
+      ...initial,
+      ...effectiveContent,
+    } as RecordType;
+  });
+  
   const [preview, setPreview] = useState<boolean>(false);
   const [updatePublishDateOnPublish, setUpdatePublishDateOnPublish] =
     useState<boolean>(false);
   const [draftToggleChecked, setDraftToggleChecked] = useState<boolean>(
     initial.status === 'draft'
   );
+  const [saveError, setSaveError] = useState<string | null>(null);
+  const [saveSuccess, setSaveSuccess] = useState<boolean>(false);
 
   useEffect(() => {
-    setRecord(initial);
+    // When initial changes, reload effective content
+    const effective = getEffectiveContent(initial);
+    setRecord({
+      ...initial,
+      ...effective,
+    } as RecordType);
+    setSaveError(null);
+    setSaveSuccess(false);
   }, [initial]);
 
   const htmlPreview = useMemo(() => {
-    const doc = (record.articleBody as JSONContent) ?? {
-      type: 'doc',
-      content: [],
-    };
-    return generateHTML(doc, [
-      CharacterCount,
-      Image,
-      VideoExtended,
-      StarterKit,
-      Table.configure({
-        resizable: true,
-      }),
-      TableRow,
-      TableHeader,
-      TableCell,
-    ]);
+    return generateArticleHTML(record.articleBody);
   }, [record.articleBody]);
 
-  const save = async (payload: Partial<RecordType>) => {
+  const save = useCallback(async (payload: Partial<RecordType>) => {
     const urlBase =
       entity === 'articles' ? '/api/articles' : '/api/case-studies';
     const method = initial.id ? 'PUT' : 'POST';
     const url = initial.id ? `${urlBase}/${record.slug}` : urlBase;
-    await fetch(url, {
-      method,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    });
-  };
+    
+    try {
+      setSaveError(null);
+      
+      // Check for conflicts before saving
+      if (initial.id && record.modified_at && initial.modified_at) {
+        const conflict = checkConflict(record, initial);
+        if (conflict.hasConflict) {
+          setSaveError(conflict.message);
+          throw new Error(conflict.message);
+        }
+      }
+      
+      const response = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
 
-  const handleUpdateArticle = (updated: RecordType) => {
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Save failed: ${errorText}`);
+      }
+
+      const savedData = await response.json();
+      setSaveSuccess(true);
+      setTimeout(() => setSaveSuccess(false), 2000);
+      
+      return savedData;
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Save failed';
+      setSaveError(errorMessage);
+      console.error('Save error:', error);
+      throw error;
+    }
+  }, [entity, initial, record]);
+
+  const handleUpdateArticle = useCallback((updated: RecordType) => {
     setRecord(updated);
-  };
+  }, []);
 
   // Debounced autosave working draft without affecting published fields
+  const autosaveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
   useEffect(() => {
-    const handle = setTimeout(async () => {
-      if (!record) return;
-      const urlBase =
-        entity === 'articles' ? '/api/articles' : '/api/case-studies';
-      await fetch(`${urlBase}/${record.slug}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          workingBody: record.articleBody,
-          workingHeadline: record.headline,
-          workingDescription: record.description,
-          workingImage: record.image,
-          workingKeywords: record.keywords,
-          workingArticleSection: record.articleSection,
-        }),
-      });
+    // Clear previous timeout
+    if (autosaveTimeoutRef.current) {
+      clearTimeout(autosaveTimeoutRef.current);
+    }
+
+    // Set new timeout for autosave
+    autosaveTimeoutRef.current = setTimeout(async () => {
+      if (!record?.slug) return;
+
+      try {
+        const urlBase =
+          entity === 'articles' ? '/api/articles' : '/api/case-studies';
+        const response = await fetch(`${urlBase}/${record.slug}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            workingBody: record.articleBody,
+            workingHeadline: record.headline,
+            workingDescription: record.description,
+            workingImage: record.image,
+            workingKeywords: record.keywords,
+            workingArticleSection: record.articleSection,
+          }),
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error('Autosave failed:', errorText);
+          setSaveError('Autosave failed');
+        } else {
+          // Clear error on successful autosave
+          setSaveError(null);
+        }
+      } catch (error) {
+        console.error('Autosave error:', error);
+      }
     }, 1000);
-    return () => clearTimeout(handle);
+
+    // Cleanup function
+    return () => {
+      if (autosaveTimeoutRef.current) {
+        clearTimeout(autosaveTimeoutRef.current);
+        autosaveTimeoutRef.current = null;
+      }
+    };
   }, [record, entity]);
 
   const deriveAndSave = async (next: RecordType) => {
@@ -187,8 +245,10 @@ export default function ContentEditor({
       <div>
         {!preview ? (
           <Tiptap
+            key={record.id || record.slug}
             article={record as RecordType}
             handleUpdate={handleUpdateArticle as (article: RecordType) => void}
+            editable={!preview}
           />
         ) : (
           <div
@@ -213,6 +273,52 @@ export default function ContentEditor({
         }}
       >
         <h3 style={{ margin: 0 }}>Settings</h3>
+        
+        {/* Working Draft Indicator */}
+        {hasDraft && (
+          <div
+            style={{
+              padding: '0.5rem',
+              background: 'var(--semantic-color-background-warning)',
+              border: '1px solid var(--semantic-color-border-warning)',
+              borderRadius: 'var(--core-shape-radius-small)',
+            }}
+          >
+            <small style={{ fontWeight: 'bold' }}>⚠️ Working Draft</small>
+            <br />
+            <small>You have unsaved changes. Editing will continue from your draft.</small>
+          </div>
+        )}
+        
+        {/* Save Status Messages */}
+        {saveError && (
+          <div
+            style={{
+              padding: '0.5rem',
+              background: 'var(--semantic-color-background-error)',
+              border: '1px solid var(--semantic-color-border-error)',
+              borderRadius: 'var(--core-shape-radius-small)',
+            }}
+          >
+            <small style={{ fontWeight: 'bold' }}>Error</small>
+            <br />
+            <small>{saveError}</small>
+          </div>
+        )}
+        
+        {saveSuccess && (
+          <div
+            style={{
+              padding: '0.5rem',
+              background: 'var(--semantic-color-background-success)',
+              border: '1px solid var(--semantic-color-border-success)',
+              borderRadius: 'var(--core-shape-radius-small)',
+            }}
+          >
+            <small style={{ fontWeight: 'bold' }}>✅ Saved</small>
+          </div>
+        )}
+        
         <div>
           <label className="small" htmlFor="draftToggle">
             Draft

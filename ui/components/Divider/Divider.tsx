@@ -1,5 +1,6 @@
 'use client';
 import * as React from 'react';
+import { createCSSProperties } from '@/utils/css-custom-properties';
 import styles from './Divider.module.scss';
 
 export interface DividerProps extends React.HTMLAttributes<HTMLHRElement> {
@@ -25,9 +26,9 @@ export const Divider = React.forwardRef<HTMLHRElement, DividerProps>(
   ) => {
     const customStyle: React.CSSProperties = {
       ...style,
-      ...(thickness && {
-        ['--divider-thickness' as any]: thickness,
-      }),
+      ...(thickness && createCSSProperties({
+        '--divider-thickness': thickness,
+      })),
     };
 
     return (

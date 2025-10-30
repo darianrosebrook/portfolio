@@ -7,6 +7,7 @@ import { gsap } from 'gsap';
 import { SplitText } from 'gsap/SplitText';
 import { useGSAP } from '@gsap/react';
 import { useFontsLoaded } from '@/hooks/useFontsLoaded';
+import { supportsViewTransitions } from '@/utils/type-guards';
 import styles from './PageTransition.module.scss';
 
 // Register GSAP plugins
@@ -151,8 +152,8 @@ export function NavigationLink({
     }
 
     // Check if View Transitions API is supported
-    const supportsViewTransitions =
-      typeof document !== 'undefined' && 'startViewTransition' in document;
+    const supportsViewTransitionsAPI =
+      supportsViewTransitions() && document.startViewTransition;
 
     // Check for reduced motion preference
     const prefersReducedMotion =
@@ -160,11 +161,11 @@ export function NavigationLink({
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     // Only use view transitions if supported and user hasn't disabled animations
-    if (supportsViewTransitions && !prefersReducedMotion) {
+    if (supportsViewTransitionsAPI && !prefersReducedMotion) {
       e.preventDefault();
 
-      // Start view transition with proper type casting
-      const transition = (document as any).startViewTransition(() => {
+      // Start view transition with proper type
+      const transition = document.startViewTransition!(() => {
         // Use Next.js router for navigation to maintain client-side routing
         if (replace) {
           router.replace(href);

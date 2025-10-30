@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
 import Style from './swatches.module.scss';
 import { useInteraction } from '@/context';
 import { gsap } from 'gsap';
@@ -8,7 +8,7 @@ import { ColorSwatch } from './ColorSwatch';
 import { colorPalette } from './ColorPalette';
 
 const Swatches = () => {
-  const colors = React.useMemo(() => colorPalette, []);
+  const colors = useMemo(() => colorPalette, []);
   const gridRef = useRef<HTMLDivElement>(null);
 
   // Hold our quickTo functions in refs so they survive re-renders
@@ -19,16 +19,28 @@ const Swatches = () => {
 
   // track if container is in view, if in view, allow animation
   const [isInView, setIsInView] = useState(false);
+  
+  // Optimized IntersectionObserver with better options
   useEffect(() => {
-    if (!gridRef.current) return;
-    const observer = new IntersectionObserver((entries) => {
-      setIsInView(
-        entries[0].isIntersecting && entries[0].intersectionRatio > 0.05
-      );
-    });
-    observer.observe(gridRef.current);
+    const grid = gridRef.current;
+    if (!grid) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        setIsInView(
+          entries[0].isIntersecting && entries[0].intersectionRatio > 0.05
+        );
+      },
+      {
+        root: null,
+        rootMargin: '0px',
+        threshold: [0, 0.05, 0.5, 1],
+      }
+    );
+    
+    observer.observe(grid);
     return () => observer.disconnect();
-  }, [gridRef, scroll]);
+  }, []); // Empty deps - only set up once
 
   // 1) Once on mount: grab each swatch element and build its quickTo tweens
   useEffect(() => {
@@ -42,32 +54,54 @@ const Swatches = () => {
     toY.current = swatches.map((el) =>
       gsap.quickTo(el, 'y', { duration: 0.5, ease: 'power1.out' })
     );
-  }, []);
+  }, [colors.length]); // Only re-run if colors change
 
-  // Animation loop for mouse movement
+  // Memoize animation calculations
+  const calculateAnimationValues = useCallback(
+    (rect: DOMRect, interactionX: number) => {
+      const mouseX = interactionX - rect.left - winsize.width;
+      const mousePercent = mouseX / rect.width / 2;
+      const mouseCenter = mouseX / rect.width;
+      return { mousePercent, mouseCenter };
+    },
+    [winsize.width]
+  );
+
+  // Animation loop for mouse movement - optimized with early returns
   useEffect(() => {
     if (!isInView) return;
+    
     let frameId: number;
+    let rafRunning = true;
+    
     const animate = () => {
+      if (!rafRunning) return;
+      
       const grid = gridRef.current;
-      if (!grid) return;
+      if (!grid) {
+        rafRunning = false;
+        return;
+      }
+      
       const rect = grid.getBoundingClientRect();
       const { x, hasMouseMoved } = mouse;
+      
       let interactionX: number;
       if (hasMouseMoved) {
         interactionX = x;
       } else {
         interactionX = rect.left + rect.width / 2 + (scroll.y * rect.width) / 2;
       }
-      const mouseX = interactionX - rect.left - winsize.width;
-      const mousePercent = mouseX / rect.width / 2;
-      const mouseCenter = mouseX / rect.width;
-
+      
+      const { mousePercent, mouseCenter } = calculateAnimationValues(rect, interactionX);
       const amplitude = 256;
       const freq = 0.14;
 
+      const swatches = Array.from(grid.children) as HTMLElement[];
       toX.current.forEach((tweenFn, i) => {
-        const sw = grid.children[i] as HTMLElement;
+        const sw = swatches[i];
+        if (!sw) return;
+        
         const x = linearInterpolation(
           0,
           rect.width - sw.offsetWidth,
@@ -80,13 +114,21 @@ const Swatches = () => {
         const y = Math.sin(i * freq + mouseCenter * Math.PI) * amplitude;
         tweenFn(y);
       });
-      frameId = requestAnimationFrame(animate);
+      
+      if (rafRunning) {
+        frameId = requestAnimationFrame(animate);
+      }
     };
+    
     animate();
+    
     return () => {
-      cancelAnimationFrame(frameId);
+      rafRunning = false;
+      if (frameId) {
+        cancelAnimationFrame(frameId);
+      }
     };
-  }, [mouse, winsize.width, gridRef, scroll.y, isInView]);
+  }, [mouse, scroll.y, isInView, calculateAnimationValues]);
 
   return (
     <div className={`${Style.gridContainer}`}>
@@ -97,7 +139,7 @@ const Swatches = () => {
         {colors.map((swatch, i) => {
           const zIndex = 100 - i;
           return (
-            <div key={i} className={Style.colorSwatch} style={{ zIndex }}>
+            <div key={swatch.token} className={Style.colorSwatch} style={{ zIndex }}>
               <ColorSwatch {...swatch} />
             </div>
           );

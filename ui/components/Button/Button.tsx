@@ -1,39 +1,39 @@
 import React, { useMemo } from 'react';
+import { mergeRefs } from '@/utils/refs';
+import { isValidReactElement } from '@/utils/type-guards';
 import styles from './Button.module.scss';
 
 // Simple Slot implementation to avoid Radix dependency
-const Slot = React.forwardRef<
-  HTMLElement,
-  React.HTMLAttributes<HTMLElement> & { children: React.ReactElement }
->(({ children, ...props }, ref) => {
-  if (React.isValidElement(children)) {
+interface SlotProps extends React.HTMLAttributes<HTMLElement> {
+  children: React.ReactElement;
+}
+
+const Slot = React.forwardRef<HTMLElement, SlotProps>(
+  ({ children, ...props }, ref) => {
+    if (!isValidReactElement(children)) {
+      return null;
+    }
+
     const { className, ...rest } = props;
-    const childClassName = [
-      className,
-      (children.props as React.HTMLAttributes<HTMLElement>).className,
-    ]
+    const childProps = children.props as React.HTMLAttributes<HTMLElement>;
+    const childClassName = [className, childProps.className]
       .filter(Boolean)
       .join(' ');
 
-    const childProps = {
+    // Merge refs safely
+    const childRef = 'ref' in childProps 
+      ? (childProps.ref as React.Ref<HTMLElement> | undefined)
+      : undefined;
+    const mergedRef = ref ? mergeRefs(ref, childRef) : childRef;
+
+    return React.cloneElement(children, {
       ...rest,
-      ...(children.props as React.HTMLAttributes<HTMLElement>),
+      ...childProps,
       className: childClassName,
-    };
-
-    // Handle ref properly
-    if (ref) {
-      if (typeof ref === 'function') {
-        (childProps as any).ref = ref;
-      } else {
-        (childProps as any).ref = ref;
-      }
-    }
-
-    return React.cloneElement(children, childProps);
+      ref: mergedRef,
+    } as React.HTMLAttributes<HTMLElement> & { ref?: React.Ref<HTMLElement> });
   }
-  return null;
-});
+);
 
 Slot.displayName = 'Slot';
 
@@ -119,11 +119,11 @@ const Button = React.forwardRef<
   const isSingleChild = childCount === 1;
   const hasOnlyIcon =
     isSingleChild &&
-    React.isValidElement(children) &&
+    isValidReactElement(children) &&
     (children.type === 'svg' ||
       (children.props &&
-        ((children.props as any)['aria-label'] ||
-          (children.props as any)['data-icon'])));
+        typeof children.props === 'object' &&
+        ('aria-label' in children.props || 'data-icon' in children.props)));
 
   const combinedClassName = useMemo(
     () =>
@@ -147,12 +147,19 @@ const Button = React.forwardRef<
     ]
   );
 
-  const ariaProps = {
-    ...(hasOnlyIcon && { 'aria-label': title || ariaLabel }),
-    ...(ariaExpanded !== undefined && { 'aria-expanded': ariaExpanded }),
-    ...(ariaPressed !== undefined && { 'aria-pressed': ariaPressed }),
-    ...(role && { role }),
-  } as const;
+  const ariaProps: Record<string, string | boolean | undefined> = {};
+  if (hasOnlyIcon && (title || ariaLabel)) {
+    ariaProps['aria-label'] = title || ariaLabel;
+  }
+  if (ariaExpanded !== undefined) {
+    ariaProps['aria-expanded'] = ariaExpanded;
+  }
+  if (ariaPressed !== undefined) {
+    ariaProps['aria-pressed'] = ariaPressed;
+  }
+  if (role) {
+    ariaProps['role'] = role;
+  }
 
   const renderChildren = () => {
     if (loading) {
@@ -175,19 +182,18 @@ const Button = React.forwardRef<
 
   // Handle asChild pattern
   if (asChild) {
-    const childElement = React.isValidElement(children) ? children : null;
+    const childElement = isValidReactElement(children) ? children : null;
     if (!childElement) return null;
     
     return (
       <Slot
+        ref={ref as React.Ref<HTMLElement>}
         className={combinedClassName}
         title={title}
         {...ariaProps}
         data-slot="button"
       >
-        {React.cloneElement(childElement, {
-          ref,
-        } as any)}
+        {childElement}
       </Slot>
     );
   }

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { supportsViewTransitions } from '@/utils/type-guards';
 import type {
   TabsActivationMode,
   TabsContextValue,
@@ -17,7 +18,7 @@ export interface UseTabsOptions {
 
 export function useTabs(options: UseTabsOptions = {}): TabsContextValue {
   const {
-    defaultValue = null as unknown as TabsValue,
+    defaultValue = null,
     value,
     onValueChange,
     activationMode = 'manual',
@@ -27,10 +28,12 @@ export function useTabs(options: UseTabsOptions = {}): TabsContextValue {
 
   const isControlled = typeof value === 'string';
   const [internalValue, setInternalValue] = React.useState<TabsValue | null>(
-    isControlled ? value! : defaultValue
+    isControlled ? value! : defaultValue ?? null
   );
   React.useEffect(() => {
-    if (isControlled) setInternalValue(value!);
+    if (isControlled && value !== undefined) {
+      setInternalValue(value);
+    }
   }, [isControlled, value]);
 
   const [tabs, setTabs] = React.useState<TabRegistration[]>([]);
@@ -43,9 +46,8 @@ export function useTabs(options: UseTabsOptions = {}): TabsContextValue {
         onValueChange?.(nextVal);
       };
       // View Transitions for content swap
-      const d = document as any;
-      if (typeof document !== 'undefined' && d?.startViewTransition) {
-        d.startViewTransition(() => doUpdate());
+      if (supportsViewTransitions() && document.startViewTransition) {
+        document.startViewTransition(() => doUpdate());
       } else {
         doUpdate();
       }

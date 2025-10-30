@@ -4,7 +4,7 @@ import { type SectionSpec } from '@/ui/modules/CodeSandbox/types';
 import { DocInteractive } from '@/ui/modules/CodeSandbox/variants/DocInteractive';
 import { DocVariants } from '@/ui/modules/CodeSandbox/variants/DocVariants';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
 import {
   generateEnhancedControls,
   generateEnhancedInteractiveProject,
@@ -55,7 +55,7 @@ export function ComprehensiveComponentDoc({
 
   const interactiveProject = React.useMemo(
     () => generateEnhancedInteractiveProject(component),
-    [componentKey, component.component, component.status]
+    [componentKey]
   );
   const variantGrid = React.useMemo(
     () => generateEnhancedVariantGrid(component),
@@ -69,6 +69,112 @@ export function ComprehensiveComponentDoc({
     () => generateEnhancedControls(component),
     [component.component]
   );
+
+  // Navigation sections configuration
+  const navSections = useMemo(
+    () => [
+      { id: 'overview', label: 'Overview' },
+      { id: 'anatomy', label: 'Anatomy' },
+      { id: 'variants', label: 'Variants' },
+      { id: 'api', label: 'API' },
+      { id: 'accessibility', label: 'Accessibility' },
+      { id: 'usage', label: 'Usage' },
+      { id: 'examples', label: 'Examples' },
+    ],
+    []
+  );
+
+  // Active section tracking with IntersectionObserver
+  const [activeSection, setActiveSection] = useState<string>(navSections[0]?.id || '');
+  const observerRef = useRef<IntersectionObserver | null>(null);
+  const sectionRefs = useRef<Map<string, HTMLElement>>(new Map());
+
+  // Set up IntersectionObserver for scroll tracking
+  useEffect(() => {
+    // Cleanup previous observer
+    if (observerRef.current) {
+      observerRef.current.disconnect();
+    }
+
+    // Create new observer with optimized options
+    const observerOptions: IntersectionObserverInit = {
+      root: null,
+      rootMargin: '-20% 0px -70% 0px', // Trigger when section is 20% from top
+      threshold: [0, 0.25, 0.5, 0.75, 1],
+    };
+
+    observerRef.current = new IntersectionObserver((entries) => {
+      // Find the most visible section
+      let mostVisible = { id: '', ratio: 0 };
+      
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && entry.intersectionRatio > mostVisible.ratio) {
+          mostVisible = {
+            id: entry.target.id,
+            ratio: entry.intersectionRatio,
+          };
+        }
+      });
+
+      // Update active section if we found a more visible one
+      if (mostVisible.id && mostVisible.ratio > 0) {
+        setActiveSection(mostVisible.id);
+      }
+    }, observerOptions);
+
+    // Observe all registered sections
+    const currentObserver = observerRef.current;
+    sectionRefs.current.forEach((element) => {
+      if (element && currentObserver) {
+        currentObserver.observe(element);
+      }
+    });
+
+    return () => {
+      if (currentObserver) {
+        currentObserver.disconnect();
+      }
+    };
+  }, []); // Empty deps - sections are stable
+
+  // Register section refs
+  const registerSectionRef = useCallback((id: string, element: HTMLElement | null) => {
+    if (element) {
+      sectionRefs.current.set(id, element);
+      // Observe immediately if observer is ready, otherwise it will be observed in useEffect
+      if (observerRef.current) {
+        observerRef.current.observe(element);
+      }
+    } else {
+      // Cleanup: unobserve before removing from map
+      const existingElement = sectionRefs.current.get(id);
+      if (existingElement && observerRef.current) {
+        observerRef.current.unobserve(existingElement);
+      }
+      sectionRefs.current.delete(id);
+    }
+  }, []);
+
+  // Handle smooth scroll navigation
+  const handleNavClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+    e.preventDefault();
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const headerOffset = 80; // Account for sticky nav
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      });
+
+      // Update URL hash without triggering scroll
+      if (window.history.pushState) {
+        window.history.pushState(null, '', `#${sectionId}`);
+      }
+    }
+  }, []);
 
   return (
     <div className={styles.componentDoc}>
@@ -114,32 +220,27 @@ export function ComprehensiveComponentDoc({
       {/* Quick Navigation */}
       <nav className={styles.quickNav}>
         <ul>
-          <li>
-            <a href="#overview">Overview</a>
-          </li>
-          <li>
-            <a href="#anatomy">Anatomy</a>
-          </li>
-          <li>
-            <a href="#variants">Variants</a>
-          </li>
-          <li>
-            <a href="#api">API</a>
-          </li>
-          <li>
-            <a href="#accessibility">Accessibility</a>
-          </li>
-          <li>
-            <a href="#usage">Usage</a>
-          </li>
-          <li>
-            <a href="#examples">Examples</a>
-          </li>
+          {navSections.map((section) => (
+            <li key={section.id}>
+              <a
+                href={`#${section.id}`}
+                onClick={(e) => handleNavClick(e, section.id)}
+                className={activeSection === section.id ? styles.active : ''}
+                aria-current={activeSection === section.id ? 'page' : undefined}
+              >
+                {section.label}
+              </a>
+            </li>
+          ))}
         </ul>
       </nav>
 
       {/* Overview Section */}
-      <section id="overview" className={styles.section}>
+      <section
+        id="overview"
+        className={styles.section}
+        ref={(el) => registerSectionRef('overview', el)}
+      >
         <h2>Overview</h2>
         <div className={styles.overviewGrid}>
           <div className={styles.overviewContent}>
@@ -184,7 +285,11 @@ export function ComprehensiveComponentDoc({
       </section>
 
       {/* Anatomy Section */}
-      <section id="anatomy" className={styles.section}>
+      <section
+        id="anatomy"
+        className={styles.section}
+        ref={(el) => registerSectionRef('anatomy', el)}
+      >
         <h2>Anatomy</h2>
         <div className={styles.anatomyContent}>
           <p>
@@ -215,7 +320,11 @@ export function ComprehensiveComponentDoc({
       </section>
 
       {/* Variants Section */}
-      <section id="variants" className={styles.section}>
+      <section
+        id="variants"
+        className={styles.section}
+        ref={(el) => registerSectionRef('variants', el)}
+      >
         <h2>Variants & States</h2>
         {isBuilt && interactiveProject ? (
           <DocVariants
@@ -237,7 +346,11 @@ export function ComprehensiveComponentDoc({
       </section>
 
       {/* API Section */}
-      <section id="api" className={styles.section}>
+      <section
+        id="api"
+        className={styles.section}
+        ref={(el) => registerSectionRef('api', el)}
+      >
         <h2>API Reference</h2>
         <div className={styles.apiContent}>
           {isBuilt ? (
@@ -271,7 +384,11 @@ export function ComprehensiveComponentDoc({
       </section>
 
       {/* Accessibility Section */}
-      <section id="accessibility" className={styles.section}>
+      <section
+        id="accessibility"
+        className={styles.section}
+        ref={(el) => registerSectionRef('accessibility', el)}
+      >
         <h2>Accessibility</h2>
         <div className={styles.accessibilityContent}>
           <h3>Standards Compliance</h3>
@@ -306,7 +423,11 @@ export function ComprehensiveComponentDoc({
       </section>
 
       {/* Usage Guidelines Section */}
-      <section id="usage" className={styles.section}>
+      <section
+        id="usage"
+        className={styles.section}
+        ref={(el) => registerSectionRef('usage', el)}
+      >
         <h2>Usage Guidelines</h2>
         <div className={styles.usageContent}>
           <div className={styles.dosAndDonts}>
@@ -333,7 +454,11 @@ export function ComprehensiveComponentDoc({
       </section>
 
       {/* Examples Section */}
-      <section id="examples" className={styles.section}>
+      <section
+        id="examples"
+        className={styles.section}
+        ref={(el) => registerSectionRef('examples', el)}
+      >
         <h2>Examples</h2>
         <div className={styles.examplesContent}>
           {isBuilt && interactiveProject ? (

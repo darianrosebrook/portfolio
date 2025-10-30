@@ -1,5 +1,7 @@
 'use client';
 import * as React from 'react';
+import { mergeRefs } from '@/utils/refs';
+import { createCSSProperties } from '@/utils/css-custom-properties';
 import styles from './Truncate.module.scss';
 
 export interface TruncateProps
@@ -62,20 +64,30 @@ export const Truncate = React.forwardRef<HTMLElement, TruncateProps>(
 
     const customStyle: React.CSSProperties = {
       ...style,
-      ['--truncate-lines' as any]: lines,
+      ...createCSSProperties({
+        '--truncate-lines': lines,
+      }),
     };
+
+    // Merge refs safely - React.createElement needs a ref callback
+    const mergedRef = React.useCallback(
+      (node: HTMLElement | null) => {
+        (contentRef as React.MutableRefObject<HTMLElement | null>).current = node;
+        if (ref) {
+          if (typeof ref === 'function') {
+            ref(node);
+          } else if (ref != null && 'current' in ref) {
+            (ref as React.MutableRefObject<HTMLElement | null>).current = node;
+          }
+        }
+      },
+      [ref]
+    );
 
     return React.createElement(
       Component,
       {
-        ref: (node: HTMLElement | null) => {
-          (contentRef as React.MutableRefObject<HTMLElement | null>).current =
-            node;
-          if (typeof ref === 'function') ref(node);
-          else if (ref && 'current' in (ref as any)) {
-            (ref as React.MutableRefObject<HTMLElement | null>).current = node;
-          }
-        },
+        ref: mergedRef as React.Ref<HTMLElement>,
         className: [
           styles.truncate,
           isExpanded ? styles.expanded : '',
