@@ -1,0 +1,107 @@
+.trackSelector {
+  padding: 1.5rem;
+  background: var(--semantic-color-background-secondary);
+  border: 1px solid var(--semantic-color-border-subtle);
+  border-radius: var(--semantic-radius-medium);
+  margin-bottom: 2rem;
+}
+
+.header {
+  margin-bottom: 1rem;
+}
+
+.title {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--semantic-color-foreground-primary);
+}
+
+.description {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--semantic-color-foreground-secondary);
+}
+
+.trackOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.trackOption {
+  padding: 1rem;
+  border: 2px solid var(--semantic-color-border-subtle);
+  border-radius: var(--semantic-radius-small);
+  background: var(--semantic-color-background-primary);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+
+  &:hover {
+    border-color: var(--semantic-color-border-default);
+    background: var(--semantic-color-background-secondary);
+  }
+
+  &.active {
+    border-color: var(--semantic-color-border-focus);
+    background: var(--semantic-color-background-highlight);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--semantic-color-border-focus);
+    outline-offset: 2px;
+  }
+}
+
+.trackLabel {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--semantic-color-foreground-primary);
+}
+
+.trackDesc {
+  font-size: 0.75rem;
+  color: var(--semantic-color-foreground-secondary);
+}
+
+.trackInfo {
+  padding-top: 1rem;
+  border-top: 1px solid var(--semantic-color-border-subtle);
+}
+
+.trackLink {
+  font-size: 0.875rem;
+  color: var(--semantic-color-foreground-link);
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+
+  &:hover {
+    color: var(--semantic-color-foreground-link-hover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--semantic-color-border-focus);
+    outline-offset: 2px;
+    border-radius: var(--semantic-radius-small);
+  }
+}
+
+@media (width <= 768px) {
+  .trackSelector {
+    padding: 1rem;
+  }
+
+  .trackOptions {
+    gap: 0.5rem;
+  }
+
+  .trackOption {
+    padding: 0.75rem;
+  }
+}
+

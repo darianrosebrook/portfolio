@@ -45,8 +45,14 @@ export const FeatureDetectionConfig = {
   /**
    * Global/shared parameters.
    * - defaultEps: Default epsilon for geometric comparisons.
+   * - intersectionEpsilon: Threshold for duplicate intersection detection (prevents double-counting).
+   * - curveClassificationEpsilon: Threshold for curve direction classification.
+   * - precisionThreshold: Small threshold for near-zero comparisons.
    */
   global: {
     defaultEps: 0.01,
+    intersectionEpsilon: 1e-5,
+    curveClassificationEpsilon: 1e-6,
+    precisionThreshold: 1e-6,
   },
 } as const;

@@ -1,0 +1,146 @@
+.container {
+  position: relative;
+  display: inline;
+}
+
+.trigger {
+  border-bottom: 1px dashed var(--semantic-color-border-subtle);
+  color: var(--semantic-color-foreground-link);
+  transition: all 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    border-bottom-color: var(--semantic-color-border-default);
+    color: var(--semantic-color-foreground-link-hover);
+  }
+
+  &:focus-visible {
+    border-radius: var(--semantic-radius-small);
+    outline: 2px solid var(--semantic-color-border-focus);
+    outline-offset: 2px;
+  }
+}
+
+.popover {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  z-index: 1000;
+  min-width: 280px;
+  max-width: 400px;
+  margin-bottom: 0.5rem;
+  padding: 1rem;
+  background: var(--semantic-color-background-primary);
+  border: 1px solid var(--semantic-color-border-default);
+  border-radius: var(--semantic-radius-medium);
+  box-shadow: var(--semantic-elevation-2);
+  transform: translateX(-50%);
+
+  &::after {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-top: 8px solid var(--semantic-color-border-default);
+    border-right: 8px solid transparent;
+    border-left: 8px solid transparent;
+    transform: translateX(-50%);
+    content: '';
+  }
+}
+
+.popoverHeader {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+}
+
+.popoverTitle {
+  margin: 0;
+  color: var(--semantic-color-foreground-primary);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.closeButton {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: var(--semantic-radius-small);
+  color: var(--semantic-color-foreground-secondary);
+  font-size: 1.5rem;
+  line-height: 1;
+  transition: all 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--semantic-color-background-hover);
+    color: var(--semantic-color-foreground-primary);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--semantic-color-border-focus);
+    outline-offset: 2px;
+  }
+}
+
+.popoverDescription {
+  margin: 0 0 0.75rem;
+  color: var(--semantic-color-foreground-secondary);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.popoverResources {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--semantic-color-border-subtle);
+  color: var(--semantic-color-foreground-tertiary);
+  font-size: 0.75rem;
+
+  strong {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--semantic-color-foreground-secondary);
+    font-weight: 600;
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 1.25rem;
+    list-style: disc;
+  }
+
+  li {
+    margin-bottom: 0.25rem;
+  }
+}
+
+.resourceLink {
+  color: var(--semantic-color-foreground-link);
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+
+  &:hover {
+    color: var(--semantic-color-foreground-link-hover);
+  }
+
+  &:focus-visible {
+    border-radius: var(--semantic-radius-small);
+    outline: 2px solid var(--semantic-color-border-focus);
+    outline-offset: 1px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trigger,
+  .closeButton {
+    transition: none;
+  }
+}

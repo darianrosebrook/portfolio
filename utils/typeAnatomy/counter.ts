@@ -12,6 +12,7 @@ import type { point2d } from '@/utils/geometry/geometry';
 import { Logger } from '@/utils/helpers/logger';
 import { getOvershoot, shapeForV2 } from '@/utils/caching/caching';
 import { isInside, rayHits } from '@/utils/geometry/geometryCore';
+import { filterDuplicateIntersections } from '@/utils/geometry/curveHelpers';
 import type { Metrics } from './index';
 import { FeatureDetectionConfig } from './featureConfig';
 
@@ -28,6 +29,10 @@ export interface FeatureResult {
 /**
  * Finds a seed point inside a counter region of the glyph, if present.
  * Uses scanBands and nudgeSteps from FeatureDetectionConfig.counter.
+ * 
+ * Improved with precision handling to prevent double-counting at curve meeting points.
+ * Filters duplicate intersections before processing to avoid artifacts.
+ * 
  * @param g - The fontkit Glyph object.
  * @param m - Font metrics
  * @returns Point2D inside the counter, or null if not found.
@@ -43,6 +48,8 @@ export function counterSeed(g: Glyph, m: Metrics): point2d | null {
   const gs = shapeForV2(g);
   const overshoot = getOvershoot(g);
   const bands = FeatureDetectionConfig.counter.scanBands;
+  const intersectionEps = FeatureDetectionConfig.global.intersectionEpsilon;
+  
   for (let i = 1; i < bands; i++) {
     const y = m.baseline + (i * (m.xHeight - m.baseline)) / bands;
     const origin = { x: -overshoot, y };
@@ -54,9 +61,16 @@ export function counterSeed(g: Glyph, m: Metrics): point2d | null {
       Logger.warn('[counterSeed] Error in rayHits:', { g, m });
       continue;
     }
-    if ((points.length / 2) % 2 === 1 && points.length >= 2) {
-      for (let j = 0; j < points.length - 1; j += 2) {
-        const x = (points[j].x + points[j + 1].x) / 2;
+    
+    // Filter duplicate intersections to prevent double-counting at curve meeting points
+    // This addresses precision issues where two curves meet exactly
+    const filteredPoints = filterDuplicateIntersections(points, intersectionEps);
+    
+    // Check if we have an odd number of intersections (indicating inside region)
+    // Points come in pairs from rayHits, so we check if filtered pairs indicate interior
+    if (filteredPoints.length >= 2 && (filteredPoints.length / 2) % 2 === 1) {
+      for (let j = 0; j < filteredPoints.length - 1; j += 2) {
+        const x = (filteredPoints[j].x + filteredPoints[j + 1].x) / 2;
         for (const nudge of FeatureDetectionConfig.counter.nudgeSteps.map(
           (n) => n * (g.bbox.maxX - g.bbox.minX)
         )) {

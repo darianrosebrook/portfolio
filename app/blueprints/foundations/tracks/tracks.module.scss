@@ -1,0 +1,206 @@
+.tracksPage {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.header {
+  margin-bottom: 3rem;
+  text-align: center;
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 1rem 0;
+    color: var(--semantic-color-foreground-primary);
+  }
+}
+
+.description {
+  font-size: 1.125rem;
+  color: var(--semantic-color-foreground-secondary);
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.tracksGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.trackCard {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  background: var(--semantic-color-background-primary);
+  border: 2px solid var(--semantic-color-border-subtle);
+  border-radius: var(--semantic-radius-medium);
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: var(--semantic-color-border-default);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--semantic-color-border-focus);
+    outline-offset: 2px;
+  }
+}
+
+.trackHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--semantic-color-border-subtle);
+}
+
+.trackTitle {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--semantic-color-foreground-primary);
+}
+
+.trackIndicator {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+}
+
+.trackDescription {
+  margin: 0 0 1.5rem 0;
+  font-size: 0.9375rem;
+  color: var(--semantic-color-foreground-secondary);
+  line-height: 1.6;
+}
+
+.trackDetails {
+  flex: 1;
+  margin-bottom: 1.5rem;
+}
+
+.trackInfo {
+  margin-bottom: 1rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.trackLabel {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--semantic-color-foreground-primary);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.trackList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    font-size: 0.875rem;
+    color: var(--semantic-color-foreground-secondary);
+    padding: 0.25rem 0;
+    padding-left: 1rem;
+    position: relative;
+
+    &::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--semantic-color-foreground-secondary);
+    }
+  }
+}
+
+.trackFooter {
+  padding-top: 1rem;
+  border-top: 1px solid var(--semantic-color-border-subtle);
+}
+
+.trackLink {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--semantic-color-foreground-link);
+  text-decoration: none;
+
+  .trackCard:hover & {
+    text-decoration: underline;
+  }
+}
+
+.howItWorks {
+  margin-top: 4rem;
+  padding: 2rem;
+  background: var(--semantic-color-background-secondary);
+  border-radius: var(--semantic-radius-medium);
+
+  h2 {
+    margin: 0 0 2rem 0;
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--semantic-color-foreground-primary);
+    text-align: center;
+  }
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.step {
+  h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--semantic-color-foreground-primary);
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.9375rem;
+    color: var(--semantic-color-foreground-secondary);
+    line-height: 1.6;
+  }
+}
+
+@media (width <= 768px) {
+  .tracksPage {
+    padding: 1rem;
+  }
+
+  .header h1 {
+    font-size: 2rem;
+  }
+
+  .tracksGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .trackCard {
+    padding: 1.5rem;
+  }
+
+  .steps {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+

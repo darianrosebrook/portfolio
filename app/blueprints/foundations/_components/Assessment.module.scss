@@ -1,0 +1,218 @@
+.assessment {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: var(--semantic-color-background-primary);
+  border-radius: var(--semantic-radius-medium);
+}
+
+.header {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--semantic-color-border-subtle);
+}
+
+.title {
+  margin: 0 0 0.5rem;
+  color: var(--semantic-color-foreground-primary);
+  font-weight: 600;
+  font-size: 1.75rem;
+}
+
+.description {
+  margin: 0 0 1rem;
+  color: var(--semantic-color-foreground-secondary);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.progress {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.progressBar {
+  overflow: hidden;
+  height: 8px;
+  background: var(--semantic-color-background-secondary);
+  border-radius: var(--semantic-radius-small);
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--semantic-color-background-highlight);
+  border-radius: var(--semantic-radius-small);
+  transition: width 0.3s ease;
+}
+
+.questionSection {
+  margin-bottom: 2rem;
+}
+
+.questionHeader {
+  margin-bottom: 1.5rem;
+}
+
+.questionTitle {
+  margin: 0 0 0.5rem;
+  color: var(--semantic-color-foreground-primary);
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.questionDescription {
+  margin: 0;
+  color: var(--semantic-color-foreground-secondary);
+  font-size: 0.875rem;
+}
+
+.questionContent {
+  margin-bottom: 1rem;
+}
+
+.questionOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.radioOption,
+.checkboxOption {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  padding: 1rem;
+  border: 2px solid var(--semantic-color-border-subtle);
+  border-radius: var(--semantic-radius-small);
+  transition: all 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--semantic-color-background-secondary);
+    border-color: var(--semantic-color-border-default);
+  }
+
+  input[type='radio']:checked + span,
+  input[type='checkbox']:checked + span {
+    color: var(--semantic-color-foreground-primary);
+    font-weight: 600;
+  }
+
+  input[type='radio']:checked ~ &,
+  input[type='checkbox']:checked ~ & {
+    background: var(--semantic-color-background-highlight);
+    border-color: var(--semantic-color-border-focus);
+  }
+
+  input[type='radio'],
+  input[type='checkbox'] {
+    margin-top: 0.25rem;
+    cursor: pointer;
+  }
+
+  span {
+    flex: 1;
+    color: var(--semantic-color-foreground-primary);
+  }
+}
+
+.textarea {
+  width: 100%;
+  padding: 1rem;
+  background: var(--semantic-color-background-primary);
+  border: 2px solid var(--semantic-color-border-subtle);
+  border-radius: var(--semantic-radius-small);
+  color: var(--semantic-color-foreground-primary);
+  font-size: 0.9375rem;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+  resize: vertical;
+
+  &:focus {
+    border-color: var(--semantic-color-border-focus);
+    outline: none;
+  }
+}
+
+.rubricHint {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: var(--semantic-color-background-secondary);
+  border-radius: var(--semantic-radius-small);
+  color: var(--semantic-color-foreground-secondary);
+  font-size: 0.875rem;
+
+  strong {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--semantic-color-foreground-primary);
+  }
+
+  ul {
+    margin: 0.5rem 0 0;
+    padding-left: 1.5rem;
+    list-style: disc;
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+  }
+}
+
+.navigation {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--semantic-color-border-subtle);
+}
+
+.navButton {
+  padding: 0.75rem 1.5rem;
+  background: var(--semantic-color-background-primary);
+  border: 1px solid var(--semantic-color-border-subtle);
+  border-radius: var(--semantic-radius-small);
+  color: var(--semantic-color-foreground-primary);
+  font-weight: 500;
+  font-size: 0.9375rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+
+  &:hover:not(:disabled) {
+    background: var(--semantic-color-background-secondary);
+    border-color: var(--semantic-color-border-default);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--semantic-color-border-focus);
+    outline-offset: 2px;
+  }
+}
+
+.submitButton {
+  background: var(--semantic-color-background-highlight);
+  border-color: var(--semantic-color-border-focus);
+  color: var(--semantic-color-foreground-primary);
+  font-weight: 600;
+}
+
+@media (width <= 768px) {
+  .assessment {
+    padding: 1rem;
+  }
+
+  .questionOptions {
+    gap: 0.5rem;
+  }
+
+  .radioOption,
+  .checkboxOption {
+    padding: 0.75rem;
+  }
+}

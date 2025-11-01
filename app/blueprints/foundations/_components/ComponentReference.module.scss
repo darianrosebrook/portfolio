@@ -1,0 +1,80 @@
+.reference {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: var(--semantic-color-background-info-subtle);
+  border-left: 3px solid var(--semantic-color-border-info);
+  border-radius: var(--semantic-radius-small);
+}
+
+.componentName {
+  color: var(--semantic-color-foreground-primary);
+  font-weight: 600;
+  font-size: 1rem;
+  transition: color 0.2s ease;
+}
+
+.link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    .componentName {
+      color: var(--semantic-color-foreground-link);
+      text-decoration: underline;
+    }
+  }
+
+  &:focus-visible {
+    border-radius: var(--semantic-radius-small);
+    outline: 2px solid var(--semantic-color-border-focus);
+    outline-offset: 2px;
+  }
+}
+
+.description {
+  color: var(--semantic-color-foreground-secondary);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.relatedConcepts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--semantic-color-border-subtle);
+  color: var(--semantic-color-foreground-tertiary);
+  font-size: 0.75rem;
+}
+
+.relatedLabel {
+  font-weight: 500;
+}
+
+.relatedLink {
+  color: var(--semantic-color-foreground-link);
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+
+  &:hover {
+    color: var(--semantic-color-foreground-link-hover);
+  }
+
+  &:focus-visible {
+    border-radius: var(--semantic-radius-small);
+    outline: 2px solid var(--semantic-color-border-focus);
+    outline-offset: 1px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .componentName {
+    transition: none;
+  }
+}

@@ -1,0 +1,203 @@
+.rubric {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: var(--semantic-color-background-primary);
+  border-radius: var(--semantic-radius-medium);
+}
+
+.header {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--semantic-color-border-subtle);
+}
+
+.title {
+  margin: 0 0 0.5rem;
+  color: var(--semantic-color-foreground-primary);
+  font-weight: 600;
+  font-size: 1.75rem;
+}
+
+.description {
+  margin: 0 0 1rem;
+  color: var(--semantic-color-foreground-secondary);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.previousResult {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--semantic-color-background-secondary);
+  border-radius: var(--semantic-radius-small);
+}
+
+.resultLabel {
+  color: var(--semantic-color-foreground-secondary);
+  font-size: 0.875rem;
+}
+
+.resultLevel {
+  color: var(--semantic-color-foreground-primary);
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.criteria {
+  margin-bottom: 2rem;
+}
+
+.criteria h3 {
+  margin: 0 0 1rem;
+  color: var(--semantic-color-foreground-primary);
+  font-weight: 600;
+  font-size: 1.125rem;
+}
+
+.criteriaList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.criterion {
+  padding: 1.5rem;
+  background: var(--semantic-color-background-secondary);
+  border-radius: var(--semantic-radius-medium);
+}
+
+.criterionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.criterionTitle {
+  margin: 0;
+  color: var(--semantic-color-foreground-primary);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.criterionWeight {
+  padding: 0.25rem 0.5rem;
+  background: var(--semantic-color-background-primary);
+  border-radius: var(--semantic-radius-small);
+  color: var(--semantic-color-foreground-secondary);
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.criterionDescription {
+  margin: 0 0 1rem;
+  color: var(--semantic-color-foreground-secondary);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.proficiencyLevels {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.proficiencyLevel {
+  color: var(--semantic-color-foreground-secondary);
+  font-size: 0.875rem;
+  line-height: 1.6;
+
+  strong {
+    margin-right: 0.5rem;
+    color: var(--semantic-color-foreground-primary);
+  }
+}
+
+.thresholds {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: var(--semantic-color-background-secondary);
+  border-radius: var(--semantic-radius-medium);
+}
+
+.thresholds h3 {
+  margin: 0 0 1rem;
+  color: var(--semantic-color-foreground-primary);
+  font-weight: 600;
+  font-size: 1.125rem;
+}
+
+.thresholdList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.threshold {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: var(--semantic-color-background-primary);
+  border-radius: var(--semantic-radius-small);
+}
+
+.thresholdLabel {
+  color: var(--semantic-color-foreground-primary);
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+
+.thresholdValue {
+  color: var(--semantic-color-foreground-secondary);
+  font-size: 0.9375rem;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--semantic-color-border-subtle);
+}
+
+.startButton {
+  padding: 0.75rem 2rem;
+  background: var(--semantic-color-background-highlight);
+  border: none;
+  border-radius: var(--semantic-radius-small);
+  color: var(--semantic-color-foreground-primary);
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--semantic-color-background-secondary);
+    transform: translateY(-1px);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--semantic-color-border-focus);
+    outline-offset: 2px;
+  }
+}
+
+@media (width <= 768px) {
+  .rubric {
+    padding: 1rem;
+  }
+
+  .criterion {
+    padding: 1rem;
+  }
+
+  .thresholds {
+    padding: 1rem;
+  }
+}

@@ -10,11 +10,11 @@
  *
  * NOTE: shapeForV2 and IntersectionQuery must be provided by the consumer or imported from a caching module.
  */
-import './patch-kld';
-import { shape, intersect } from 'svg-intersections';
 import type { Glyph } from 'fontkit';
-import type { Point2D } from './geometry';
+import { intersect, shape } from 'svg-intersections';
 import { Logger } from '../helpers/logger';
+import type { Point2D } from './geometry';
+import './patch-kld';
 
 export type SvgShape = ReturnType<typeof shape>;
 

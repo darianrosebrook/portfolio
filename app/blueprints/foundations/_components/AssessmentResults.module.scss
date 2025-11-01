@@ -1,0 +1,202 @@
+.results {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: var(--semantic-color-background-primary);
+  border-radius: var(--semantic-radius-medium);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--semantic-color-border-subtle);
+}
+
+.title {
+  margin: 0;
+  color: var(--semantic-color-foreground-primary);
+  font-weight: 600;
+  font-size: 1.75rem;
+}
+
+.proficiencyBadge {
+  padding: 0.5rem 1rem;
+  border-radius: var(--semantic-radius-medium);
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.scoreSection {
+  margin-bottom: 2rem;
+}
+
+.overallScore {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 2rem;
+  background: var(--semantic-color-background-secondary);
+  border-radius: var(--semantic-radius-medium);
+}
+
+.scoreLabel {
+  margin-bottom: 0.5rem;
+  color: var(--semantic-color-foreground-secondary);
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.scoreValue {
+  color: var(--semantic-color-foreground-primary);
+  font-weight: 700;
+  font-size: 3rem;
+}
+
+.categoryScores {
+  h3 {
+    margin: 0 0 1rem;
+    color: var(--semantic-color-foreground-primary);
+    font-weight: 600;
+    font-size: 1.125rem;
+  }
+}
+
+.categoryScore {
+  margin-bottom: 1.5rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.categoryHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.categoryName {
+  color: var(--semantic-color-foreground-primary);
+  font-size: 0.9375rem;
+}
+
+.categoryValue {
+  color: var(--semantic-color-foreground-primary);
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+
+.categoryBar {
+  overflow: hidden;
+  height: 8px;
+  background: var(--semantic-color-background-secondary);
+  border-radius: var(--semantic-radius-small);
+}
+
+.categoryBarFill {
+  height: 100%;
+  background: var(--semantic-color-background-highlight);
+  border-radius: var(--semantic-radius-small);
+  transition: width 0.3s ease;
+}
+
+.feedbackSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.strengths,
+.improvements,
+.nextSteps {
+  padding: 1.5rem;
+  background: var(--semantic-color-background-secondary);
+  border-radius: var(--semantic-radius-medium);
+
+  h3 {
+    margin: 0 0 1rem;
+    color: var(--semantic-color-foreground-primary);
+    font-weight: 600;
+    font-size: 1.125rem;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      position: relative;
+      padding: 0.5rem 0;
+      padding-left: 1.5rem;
+      color: var(--semantic-color-foreground-secondary);
+      font-size: 0.9375rem;
+      line-height: 1.6;
+
+      &::before {
+        position: absolute;
+        left: 0;
+        color: var(--semantic-color-foreground-secondary);
+        content: '•';
+      }
+    }
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--semantic-color-border-subtle);
+}
+
+.retakeButton {
+  padding: 0.75rem 1.5rem;
+  background: var(--semantic-color-background-primary);
+  border: 1px solid var(--semantic-color-border-subtle);
+  border-radius: var(--semantic-radius-small);
+  color: var(--semantic-color-foreground-primary);
+  font-weight: 500;
+  font-size: 0.9375rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--semantic-color-background-secondary);
+    border-color: var(--semantic-color-border-default);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--semantic-color-border-focus);
+    outline-offset: 2px;
+  }
+}
+
+@media (width <= 768px) {
+  .results {
+    padding: 1rem;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .overallScore {
+    padding: 1.5rem;
+  }
+
+  .scoreValue {
+    font-size: 2.5rem;
+  }
+}

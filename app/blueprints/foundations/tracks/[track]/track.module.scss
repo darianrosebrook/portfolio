@@ -1,0 +1,188 @@
+.trackPage {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.header {
+  margin-bottom: 3rem;
+}
+
+.backLink {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+  color: var(--semantic-color-foreground-link);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--semantic-color-border-focus);
+    outline-offset: 2px;
+    border-radius: var(--semantic-radius-small);
+  }
+}
+
+.trackHeader {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.trackIndicator {
+  width: 4px;
+  height: 100%;
+  min-height: 3rem;
+  border-radius: var(--semantic-radius-small);
+  flex-shrink: 0;
+}
+
+.trackTitle {
+  margin: 0 0 0.5rem 0;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--semantic-color-foreground-primary);
+}
+
+.trackDescription {
+  margin: 0;
+  font-size: 1.125rem;
+  color: var(--semantic-color-foreground-secondary);
+  line-height: 1.6;
+}
+
+.progressSection {
+  padding: 2rem;
+  background: var(--semantic-color-background-secondary);
+  border-radius: var(--semantic-radius-medium);
+  margin-bottom: 3rem;
+}
+
+.progressHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+
+  h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--semantic-color-foreground-primary);
+  }
+}
+
+.progressPercentage {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--semantic-color-foreground-primary);
+}
+
+.progressBar {
+  height: 8px;
+  background: var(--semantic-color-background-primary);
+  border-radius: var(--semantic-radius-small);
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+}
+
+.progressFill {
+  height: 100%;
+  transition: width 0.3s ease;
+  border-radius: var(--semantic-radius-small);
+}
+
+.progressText {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--semantic-color-foreground-secondary);
+}
+
+.learningPathSection {
+  margin-bottom: 3rem;
+
+  h2 {
+    margin: 0 0 1.5rem 0;
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--semantic-color-foreground-primary);
+  }
+}
+
+.outcomesSection {
+  h2 {
+    margin: 0 0 1.5rem 0;
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--semantic-color-foreground-primary);
+  }
+}
+
+.outcomesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.outcomeCard {
+  padding: 1.5rem;
+  background: var(--semantic-color-background-secondary);
+  border-radius: var(--semantic-radius-medium);
+
+  h3 {
+    margin: 0 0 1rem 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--semantic-color-foreground-primary);
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      padding: 0.5rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.9375rem;
+      color: var(--semantic-color-foreground-secondary);
+      line-height: 1.6;
+
+      &::before {
+        content: '✓';
+        position: absolute;
+        left: 0;
+        color: var(--semantic-color-foreground-link);
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+@media (width <= 768px) {
+  .trackPage {
+    padding: 1rem;
+  }
+
+  .trackTitle {
+    font-size: 2rem;
+  }
+
+  .trackDescription {
+    font-size: 1rem;
+  }
+
+  .progressSection {
+    padding: 1.5rem;
+  }
+
+  .outcomesGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+

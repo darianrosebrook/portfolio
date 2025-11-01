@@ -184,6 +184,412 @@ export default function FoundationsPage() {
       </section>
 
       <section className="content">
+        <h2>Foundations → Philosophy of Design Systems</h2>
+        <p>
+          <strong>Level</strong>: Foundation
+          <strong>Audience</strong>: All design system contributors (design,
+          engineering, PM, accessibility)
+          <strong>Purpose</strong>: Establish shared mental models for how
+          design systems function as socio-technical infrastructure in
+          organizations that build digital products at scale.
+        </p>
+        <hr />
+        <h2>Why This Matters</h2>
+        <p>
+          Digital products are continuously changing ecosystems. New
+          technologies emerge, teams reorganize, brand strategies evolve,
+          accessibility regulations expand, and user needs shift. In this
+          environment, <strong>consistency is not a static goal</strong>—it is a
+          continuously maintained state requiring mechanisms that scale.
+        </p>
+        <p>Design systems are those mechanisms.</p>
+        <p>
+          A design system provides <strong>structural integrity</strong> to
+          product development: a shared visual and interaction language, an
+          agreed set of platform-specific behaviors, and rigorous technical
+          implementations that uphold accessibility, performance, and
+          resilience. It transforms design from an{' '}
+          <strong>artifact-driven activity</strong> into a{' '}
+          <strong>systems-driven discipline</strong>, where decisions propagate
+          predictably and beneficially across an entire ecosystem.
+        </p>
+        <p>
+          This page defines the philosophical foundation: why design systems
+          exist and what principles sustain them.
+        </p>
+        <hr />
+        <h2>Core Concepts</h2>
+        <h3>1. A Design System Is Socio-Technical Infrastructure</h3>
+        <p>
+          It connects <strong>human practice</strong> with{' '}
+          <strong>technical implementation</strong>:
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Social Layer</th>
+              <th>Technical Layer</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Governance decisions</td>
+              <td>Token transformation pipelines</td>
+            </tr>
+            <tr>
+              <td>Design rules and guidelines</td>
+              <td>Reusable components and accessibility hooks</td>
+            </tr>
+            <tr>
+              <td>Organizational alignment</td>
+              <td>Release automation and CI gates</td>
+            </tr>
+            <tr>
+              <td>Shared understanding of intent</td>
+              <td>Platform-native code delivering that intent</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          Both layers must evolve in harmony. When only the code is maintained,
+          the system becomes a <strong>library</strong>. When only documentation
+          is maintained, it becomes <strong>aspirational</strong>. A true design
+          system is <strong>operational</strong>.
+        </p>
+        <hr />
+        <h3>2. Design Systems Are Opinionated</h3>
+        <p>
+          “Every decision is a design decision”—systems make decisions{' '}
+          <strong>on behalf of teams</strong>:
+        </p>
+        <ul>
+          <li>Default focus ring presence and style</li>
+          <li>Minimum tap target size</li>
+          <li>Contrast ratios and color semantics</li>
+          <li>Motion duration, easing, and thresholds</li>
+          <li>Slot architecture and allowed variants</li>
+          <li>Keyboard navigation patterns</li>
+        </ul>
+        <p>
+          Opinionation reduces{' '}
+          <strong>design and engineering cognitive load</strong>, and increases{' '}
+          <strong>ethical consistency</strong>—particularly in accessibility
+          outcomes.
+        </p>
+        <hr />
+        <h3>3. Design Systems Encode Organizational Strategy</h3>
+        <p>
+          The system expresses <strong>who we are</strong> and{' '}
+          <strong>what we value</strong> operationally:
+        </p>
+        <ul>
+          <li>Are we efficiency-driven? → fewer variants, stricter rules</li>
+          <li>Are we brand-expressive? → token overlays and motion patterns</li>
+          <li>Are we multi-product? → composition over inheritance</li>
+          <li>
+            Are we accessibility-first? → guardrails built into primitives
+          </li>
+        </ul>
+        <p>A system is a strategic artifact, not just a UX asset.</p>
+        <hr />
+        <h3>4. A Design System Is a Living Product</h3>
+        <p>It has:</p>
+        <ul>
+          <li>
+            <strong>Roadmaps</strong>
+          </li>
+          <li>
+            <strong>Release cycles</strong>
+          </li>
+          <li>
+            <strong>Adoption metrics</strong>
+          </li>
+          <li>
+            <strong>Lifecycle management</strong>
+          </li>
+          <li>
+            <strong>Debt management</strong>
+          </li>
+        </ul>
+        <p>And like any product, it demands:</p>
+        <ul>
+          <li>Customer empathy (designers and engineers as users)</li>
+          <li>Reliability (stable APIs)</li>
+          <li>Clear communication (change logs, migration guides)</li>
+        </ul>
+        <p>
+          Static systems erode. Operational systems{' '}
+          <strong>continuously improve</strong>.
+        </p>
+        <hr />
+        <h2>System Roles: What Design Systems Do in Practice</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Impact Area</th>
+              <th>System Responsibility</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <strong>Accessibility</strong>
+              </td>
+              <td>
+                Enforce minimum standards by default; eliminate regressions
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Performance</strong>
+              </td>
+              <td>
+                Provide optimized UI primitives and avoid wasteful patterns
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Brand integrity</strong>
+              </td>
+              <td>
+                Maintain unity across products without stifling differentiation
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Velocity</strong>
+              </td>
+              <td>Reduce time spent reinventing UI primitives</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Quality</strong>
+              </td>
+              <td>Prevent inconsistent experiences and interaction failures</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Maintainability</strong>
+              </td>
+              <td>Centralize complexity in components built for reuse</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          A system elevates the <strong>floors</strong>, while enabling teams to
+          push the <strong>ceilings</strong>.
+        </p>
+        <hr />
+        <h2>Design + Engineering Interplay (Dual-Track Literacy)</h2>
+        <p>
+          Design artifacts without technical translation create drift. Code
+          without design rationale collapses into implementation anarchy.
+        </p>
+        <p>
+          Operational design systems{' '}
+          <strong>treat both artifacts as source of truth</strong>:
+        </p>
+        <ul>
+          <li>
+            Figma reflects <strong>intent and anatomy</strong>
+          </li>
+          <li>
+            Code reflects{' '}
+            <strong>constraints, behavior, and accessibility</strong>
+          </li>
+        </ul>
+        <p>
+          Design tokens, shared naming conventions, and synchronized governance{' '}
+          <strong>bind the two</strong>.
+        </p>
+        <hr />
+        <h2>Applied Example (Mini Case)</h2>
+        <p>
+          <strong>Scenario</strong>: Product teams repeatedly rebuild modal
+          dialogs with custom animation behaviors, inconsistent closing
+          interactions, and varying focus management.
+        </p>
+        <p>
+          <strong>Without a system</strong>
+          Teams optimize locally for speed → accessibility is compromised → UX
+          becomes fragmented → QA burden increases → innovation slows because
+          each team solves the same foundational problem.
+        </p>
+        <p>
+          <strong>With a system</strong>
+        </p>
+        <ul>
+          <li>
+            Visual patterns: established modal anatomy (overlay, header, body,
+            footer)
+          </li>
+          <li>
+            Behavioral invariants: focus trap, escape key support, scroll
+            locking
+          </li>
+          <li>
+            Allowed variants: sizes, mobile responsiveness, brand overlays
+          </li>
+          <li>
+            Automated tests: accessibility and performance checks baked in
+          </li>
+        </ul>
+        <p>
+          Innovation shifts <strong>upward</strong> in the stack—teams focus on
+          the <strong>content</strong> and <strong>task flow</strong>, not
+          rebuilding infrastructure.
+        </p>
+        <hr />
+        <h2>Constraints and Trade-offs</h2>
+        <p>Systems must navigate inherent tensions:</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Tension</th>
+              <th>Why It Matters</th>
+              <th>Decision Indicator</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <strong>Flexibility vs. Standardization</strong>
+              </td>
+              <td>Adapting to edge cases</td>
+              <td>Variant explosion? Standardize</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Speed vs. Stability</strong>
+              </td>
+              <td>Supporting rapid iteration</td>
+              <td>Versioning maturity required</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Brand expression vs. Usability</strong>
+              </td>
+              <td>Marketing vs. product coherence</td>
+              <td>Brand overlay must preserve accessibility</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>One-off needs vs. System health</strong>
+              </td>
+              <td>Avoiding bloat</td>
+              <td>If &gt;2 teams need it → system candidate</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          Healthy systems enforce{' '}
+          <strong>constraints as creative boundaries</strong>.
+        </p>
+        <hr />
+        <h2>Verification Checklist</h2>
+        <p>
+          When deciding whether a component, pattern, or token belongs in the
+          system, ask:
+        </p>
+        <ol>
+          <li>
+            Does it <strong>scale</strong> across multiple products or contexts?
+          </li>
+          <li>
+            Does it <strong>reduce cognitive or implementation burden</strong>?
+          </li>
+          <li>
+            Does it <strong>improve accessibility and performance</strong> by
+            default?
+          </li>
+          <li>Can it be governed with clear rules and lifecycles?</li>
+          <li>
+            Does it have <strong>a single clear semantic purpose</strong>?
+          </li>
+          <li>
+            Will it remain <strong>relevant and maintainable</strong> over time?
+          </li>
+        </ol>
+        <p>
+          If the answer to #6 is uncertain → experiment outside the system
+          first.
+        </p>
+        <hr />
+        <h2>Cross-References and System Integration</h2>
+        <p>Foundational Concepts Connected to This Page:</p>
+        <ul>
+          <li>
+            <strong>Design Tokens</strong> → how strategic constraints become
+            encoded
+          </li>
+          <li>
+            <strong>Accessibility Infrastructure</strong> → ethical execution of
+            UI at scale
+          </li>
+          <li>
+            <strong>Spacing &amp; Layout Systems</strong> → invisible structure
+            that creates harmony
+          </li>
+          <li>
+            <strong>Component Architecture Basics</strong> → composable design
+            patterns
+          </li>
+        </ul>
+        <p>Blueprint examples driven by these principles:</p>
+        <ul>
+          <li>Modal</li>
+          <li>Button</li>
+          <li>Alert/Dialog</li>
+          <li>Focus management utilities</li>
+        </ul>
+        <p>
+          This page provides the conceptual architecture those pages implement.
+        </p>
+        <hr />
+        <h2>Reflection &amp; Assessment Prompts</h2>
+        <ol>
+          <li>
+            In your current design system experience, which layer is
+            weaker—social or technical? Why?
+          </li>
+          <li>
+            Where do you see <strong>opinionation</strong> providing meaningful
+            efficiency or quality gains?
+          </li>
+          <li>
+            Think of a recent UI decision—what would a{' '}
+            <strong>design system version</strong> of that decision look like?
+          </li>
+          <li>
+            Which tensions (flexibility vs. standardization, etc.) are most
+            visible in your organization today?
+          </li>
+          <li>
+            How might treating the system as a <strong>product</strong> change
+            your team’s way of working?
+          </li>
+        </ol>
+        <p>
+          Encourage team discussions—philosophy becomes culture only when
+          shared.
+        </p>
+        <hr />
+        <h2>Additional Resources</h2>
+        <ul>
+          <li>
+            <em>Designing Design Systems</em> — Alla Kholmatova
+          </li>
+          <li>
+            <em>Atomic Design</em> — Brad Frost
+          </li>
+          <li>W3C WAI — Accessible Design Standards</li>
+          <li>
+            ACM CSCW — Research on socio-technical systems in organizations
+          </li>
+        </ul>
+      </section>
+
+      <section className="content">
         <h2>Core Foundations</h2>
         <p>
           These atomic elements form the basic building blocks of any design
@@ -201,7 +607,6 @@ export default function FoundationsPage() {
           ))}
         </div>
       </section>
-
       <section className="content">
         <h2>Meta Foundations</h2>
         <p>

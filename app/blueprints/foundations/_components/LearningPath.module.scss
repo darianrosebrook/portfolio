@@ -1,0 +1,131 @@
+.learningPath {
+  margin: 2rem 0;
+}
+
+.pathList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.pathItem {
+  position: relative;
+  padding-left: 3rem;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 1.25rem;
+    top: 2.5rem;
+    bottom: -1rem;
+    width: 2px;
+    background: var(--semantic-color-border-subtle);
+  }
+
+  &:last-child::before {
+    display: none;
+  }
+
+  &.completed::before {
+    background: var(--semantic-color-background-success);
+  }
+
+  &.current::before {
+    background: var(--semantic-color-border-focus);
+  }
+}
+
+.pathStep {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.stepNumber {
+  position: absolute;
+  left: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--semantic-color-background-secondary);
+  border: 2px solid var(--semantic-color-border-subtle);
+  color: var(--semantic-color-foreground-secondary);
+  font-weight: 600;
+  font-size: 0.875rem;
+  flex-shrink: 0;
+  z-index: 1;
+  transition: all 0.2s ease;
+}
+
+.pathItem.completed .stepNumber {
+  background: var(--semantic-color-background-success);
+  border-color: var(--semantic-color-border-success);
+  color: var(--semantic-color-foreground-on-success);
+}
+
+.pathItem.current .stepNumber {
+  background: var(--semantic-color-background-highlight);
+  border-color: var(--semantic-color-border-focus);
+  color: var(--semantic-color-foreground-primary);
+  box-shadow: 0 0 0 4px rgba(var(--semantic-color-border-focus-rgb), 0.1);
+}
+
+.stepContent {
+  flex: 1;
+  padding-top: 0.5rem;
+}
+
+.stepLink {
+  display: block;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--semantic-color-foreground-primary);
+  text-decoration: none;
+  margin-bottom: 0.25rem;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--semantic-color-foreground-link);
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--semantic-color-border-focus);
+    outline-offset: 2px;
+    border-radius: var(--semantic-radius-small);
+  }
+}
+
+.pathItem.completed .stepLink {
+  color: var(--semantic-color-foreground-secondary);
+  text-decoration: line-through;
+}
+
+.stepDescription {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--semantic-color-foreground-secondary);
+}
+
+@media (width <= 768px) {
+  .pathItem {
+    padding-left: 2.5rem;
+  }
+
+  .stepNumber {
+    width: 2rem;
+    height: 2rem;
+    font-size: 0.75rem;
+  }
+
+  .stepLink {
+    font-size: 1rem;
+  }
+}
+
