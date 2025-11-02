@@ -30,11 +30,43 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
+# Run Stylelint check
+echo "🎨 Checking CSS/SCSS formatting..."
+npx stylelint --allow-empty-input "**/*.{css,scss}"
+if [ $? -ne 0 ]; then
+  echo "❌ Stylelint check failed. Please fix CSS/SCSS linting errors before pushing."
+  exit 1
+fi
+
 # Run ESLint
 echo "🔎 Running ESLint..."
 npm run lint
 if [ $? -ne 0 ]; then
   echo "❌ ESLint check failed. Please fix linting errors before pushing."
+  exit 1
+fi
+
+# Run build check (this is the most important - catches build errors)
+echo "🏗️  Checking build..."
+npm run build
+if [ $? -ne 0 ]; then
+  echo "❌ Build check failed. Please fix build errors before pushing."
+  exit 1
+fi
+
+echo "✅ All pre-push checks passed!"
+exit 0
+HOOK_EOF
+
+# Make it executable
+chmod +x .git/hooks/pre-push
+
+echo "✅ Pre-push hook installed successfully!"
+echo ""
+echo "The hook will now run automatically before every git push."
+echo "To bypass (not recommended), use: git push --no-verify"
+
+
   exit 1
 fi
 
