@@ -36,9 +36,7 @@ const ColorPage: React.FC = () => {
       </p>
 
       <h2>The Role of Color in Design Systems</h2>
-      <p>
-        Color serves three primary functions in a design system:
-      </p>
+      <p>Color serves three primary functions in a design system:</p>
       <ul>
         <li>
           <strong>Brand Identity:</strong> Colors communicate personality,
@@ -115,14 +113,14 @@ const ColorPage: React.FC = () => {
 
       <ul>
         <li>
-          <strong>Foreground roles:</strong>{' '}
-          <code>foreground.primary</code>, <code>foreground.secondary</code>,{' '}
-          <code>foreground.danger</code>, <code>foreground.link</code>
+          <strong>Foreground roles:</strong> <code>foreground.primary</code>,{' '}
+          <code>foreground.secondary</code>, <code>foreground.danger</code>,{' '}
+          <code>foreground.link</code>
         </li>
         <li>
-          <strong>Background roles:</strong>{' '}
-          <code>background.primary</code>, <code>background.secondary</code>,{' '}
-          <code>background.elevated</code>, <code>background.brand</code>
+          <strong>Background roles:</strong> <code>background.primary</code>,{' '}
+          <code>background.secondary</code>, <code>background.elevated</code>,{' '}
+          <code>background.brand</code>
         </li>
         <li>
           <strong>Border roles:</strong> <code>border.default</code>,{' '}
@@ -246,8 +244,8 @@ Examples:
           foreground, background, and border
         </li>
         <li>
-          <strong>Keep hierarchy clear:</strong> Avoid skipping levels or
-          mixing naming conventions
+          <strong>Keep hierarchy clear:</strong> Avoid skipping levels or mixing
+          naming conventions
         </li>
         <li>
           <strong>Use semantic modifiers:</strong> <code>danger-strong</code>,{' '}
@@ -298,8 +296,8 @@ Examples:
           regardless of active theme
         </li>
         <li>
-          <strong>Flexible:</strong> Easy to add additional modes (high contrast,
-          brand variations) without breaking existing components
+          <strong>Flexible:</strong> Easy to add additional modes (high
+          contrast, brand variations) without breaking existing components
         </li>
       </ul>
 
@@ -325,9 +323,9 @@ Examples:
         </li>
       </ul>
       <p>
-        WCAG uses a simple ratio calculation: (L1 + 0.05) / (L2 + 0.05) where
-        L1 is the relative luminance of the lighter color and L2 is the
-        relative luminance of the darker color.
+        WCAG uses a simple ratio calculation: (L1 + 0.05) / (L2 + 0.05) where L1
+        is the relative luminance of the lighter color and L2 is the relative
+        luminance of the darker color.
       </p>
 
       <h3>APCA: Advanced Perceptual Contrast Algorithm</h3>
@@ -349,13 +347,12 @@ Examples:
       </ul>
       <p>
         Many design systems are migrating to APCA for more accurate contrast
-        evaluation, especially for dark mode and non-standard color combinations.
+        evaluation, especially for dark mode and non-standard color
+        combinations.
       </p>
 
       <h3>Contrast in Token Design</h3>
-      <p>
-        Design tokens should encode contrast requirements:
-      </p>
+      <p>Design tokens should encode contrast requirements:</p>
       <ul>
         <li>
           Semantic tokens can document minimum contrast ratios in their
@@ -366,16 +363,13 @@ Examples:
           thresholds
         </li>
         <li>
-          Pair tokens explicitly (e.g.,{' '}
-          <code>foreground.primary</code> + <code>background.primary</code>)
-          to ensure accessible combinations
+          Pair tokens explicitly (e.g., <code>foreground.primary</code> +{' '}
+          <code>background.primary</code>) to ensure accessible combinations
         </li>
       </ul>
 
       <h2>Accessibility Considerations</h2>
-      <p>
-        Color accessibility extends beyond contrast ratios:
-      </p>
+      <p>Color accessibility extends beyond contrast ratios:</p>
 
       <h3>Color Independence</h3>
       <p>
@@ -387,8 +381,7 @@ Examples:
           <strong>Icons:</strong> Visual symbols that reinforce meaning
         </li>
         <li>
-          <strong>Text labels:</strong> Explicit text describing state or
-          action
+          <strong>Text labels:</strong> Explicit text describing state or action
         </li>
         <li>
           <strong>Patterns or textures:</strong> For data visualization and
@@ -400,13 +393,10 @@ Examples:
       </ul>
 
       <h3>Focus Indicators</h3>
-      <p>
-        Focus states must be visible and high-contrast:
-      </p>
+      <p>Focus states must be visible and high-contrast:</p>
       <ul>
         <li>
-          Use dedicated focus color tokens (e.g.,{' '}
-          <code>border.focus</code>)
+          Use dedicated focus color tokens (e.g., <code>border.focus</code>)
         </li>
         <li>
           Ensure focus indicators meet WCAG 2.1 Non-text Contrast (3:1 minimum)
@@ -418,9 +408,7 @@ Examples:
       </ul>
 
       <h3>State Communication</h3>
-      <p>
-        Interactive states should be clearly distinguishable:
-      </p>
+      <p>Interactive states should be clearly distinguishable:</p>
       <ul>
         <li>
           <strong>Hover:</strong> Subtle but noticeable color change
@@ -439,9 +427,7 @@ Examples:
       </ul>
 
       <h3>Testing Color Accessibility</h3>
-      <p>
-        Validate color accessibility at multiple stages:
-      </p>
+      <p>Validate color accessibility at multiple stages:</p>
       <ul>
         <li>
           <strong>Design phase:</strong> Use tools like Stark, Able, or Contrast
@@ -462,14 +448,10 @@ Examples:
       </ul>
 
       <h2>Implementation Patterns</h2>
-      <p>
-        Color tokens are consumed in different ways depending on context:
-      </p>
+      <p>Color tokens are consumed in different ways depending on context:</p>
 
       <h3>CSS Custom Properties</h3>
-      <p>
-        Tokens compile to CSS custom properties for runtime theming:
-      </p>
+      <p>Tokens compile to CSS custom properties for runtime theming:</p>
       <pre>
         <code>{`/* Generated CSS variables */
 :root {
@@ -484,9 +466,7 @@ Examples:
       </pre>
 
       <h3>Component Usage</h3>
-      <p>
-        Components reference semantic tokens, not core values:
-      </p>
+      <p>Components reference semantic tokens, not core values:</p>
       <pre>
         <code>{`.button {
   background-color: var(--semantic-color-background-brand);
@@ -503,9 +483,7 @@ Examples:
       </pre>
 
       <h3>TypeScript Integration</h3>
-      <p>
-        Type-safe token paths ensure correctness at compile time:
-      </p>
+      <p>Type-safe token paths ensure correctness at compile time:</p>
       <pre>
         <code>{`import type { TokenPath } from '@/types/designTokens';
 
@@ -554,17 +532,15 @@ const primaryBg = getColorToken(
       </ul>
 
       <h2>Related Foundations</h2>
-      <p>
-        Color intersects with other foundations:
-      </p>
+      <p>Color intersects with other foundations:</p>
       <ul>
         <li>
           <strong>Design Tokens:</strong> Learn about token architecture and
           theming strategies
         </li>
         <li>
-          <strong>Accessibility:</strong> Deep dive into accessibility
-          standards and token-level accessibility
+          <strong>Accessibility:</strong> Deep dive into accessibility standards
+          and token-level accessibility
         </li>
         <li>
           <strong>Typography:</strong> Understand how text color affects

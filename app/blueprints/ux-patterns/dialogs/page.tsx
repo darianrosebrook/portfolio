@@ -69,15 +69,13 @@ const sections: FoundationSection[] = [
     content: (
       <>
         <p>
-          Modal dialogs, popovers, and overlays require careful consideration for
-          accessibility and user experience. When properly implemented, dialogs
-          provide focused interaction without overwhelming users. When poorly
-          implemented, they create barriers that frustrate users and exclude
-          assistive technology users.
+          Modal dialogs, popovers, and overlays require careful consideration
+          for accessibility and user experience. When properly implemented,
+          dialogs provide focused interaction without overwhelming users. When
+          poorly implemented, they create barriers that frustrate users and
+          exclude assistive technology users.
         </p>
-        <p>
-          Dialog patterns serve multiple critical functions:
-        </p>
+        <p>Dialog patterns serve multiple critical functions:</p>
         <ul>
           <li>
             <strong>Focused Interaction:</strong> Dialogs focus user attention
@@ -116,9 +114,7 @@ const sections: FoundationSection[] = [
     content: (
       <>
         <h3>Dialog Types</h3>
-        <p>
-          Different dialog types serve different purposes:
-        </p>
+        <p>Different dialog types serve different purposes:</p>
         <ul>
           <li>
             <strong>Modal dialogs:</strong> Block interaction with background
@@ -169,9 +165,7 @@ const sections: FoundationSection[] = [
         </pre>
 
         <h3>Focus Management</h3>
-        <p>
-          Dialogs must manage focus properly:
-        </p>
+        <p>Dialogs must manage focus properly:</p>
         <ul>
           <li>
             <strong>Focus trap:</strong> Keep focus within dialog when open
@@ -280,9 +274,7 @@ const Dialog = ({ isOpen, onClose, children }) => {
         </pre>
 
         <h3>Overlay Behavior</h3>
-        <p>
-          Overlays provide visual separation and interaction control:
-        </p>
+        <p>Overlays provide visual separation and interaction control:</p>
         <ul>
           <li>
             <strong>Backdrop:</strong> Semi-transparent overlay behind dialog
@@ -315,9 +307,7 @@ const Dialog = ({ isOpen, onClose, children }) => {
     content: (
       <>
         <h3>User Experience Impact</h3>
-        <p>
-          Dialog patterns improve user experience:
-        </p>
+        <p>Dialog patterns improve user experience:</p>
         <ul>
           <li>
             <strong>Focused interaction:</strong> Users focus on specific tasks
@@ -333,14 +323,12 @@ const Dialog = ({ isOpen, onClose, children }) => {
           </li>
         </ul>
         <p>
-          Effective dialog patterns enhance user experience by providing focused,
-          clear interactions.
+          Effective dialog patterns enhance user experience by providing
+          focused, clear interactions.
         </p>
 
         <h3>Accessibility Impact</h3>
-        <p>
-          Dialog patterns improve accessibility:
-        </p>
+        <p>Dialog patterns improve accessibility:</p>
         <ul>
           <li>
             <strong>Keyboard navigation:</strong> Focus management enables
@@ -361,9 +349,7 @@ const Dialog = ({ isOpen, onClose, children }) => {
         </p>
 
         <h3>System Consistency Impact</h3>
-        <p>
-          Consistent dialog patterns improve system consistency:
-        </p>
+        <p>Consistent dialog patterns improve system consistency:</p>
         <ul>
           <li>
             <strong>Predictable behavior:</strong> Users understand dialog
@@ -394,14 +380,12 @@ const Dialog = ({ isOpen, onClose, children }) => {
       <>
         <p>
           Dialog patterns bridge design intent and code implementation. Let's
-          examine how dialog requirements translate from design specifications to
-          working code.
+          examine how dialog requirements translate from design specifications
+          to working code.
         </p>
 
         <h3>Design: Dialog Specifications</h3>
-        <p>
-          Design specifications define dialog requirements:
-        </p>
+        <p>Design specifications define dialog requirements:</p>
         <pre>
           <code>{`// Design specifications
 Dialog Requirements:
@@ -417,9 +401,7 @@ Dialog Requirements:
         </pre>
 
         <h3>Code: Dialog Component Implementation</h3>
-        <p>
-          Code implements dialog with focus management:
-        </p>
+        <p>Code implements dialog with focus management:</p>
         <pre>
           <code>{`// Dialog component with focus management
 export function Dialog({ open, onClose, children }) {
@@ -504,9 +486,7 @@ export function Dialog({ open, onClose, children }) {
         </pre>
 
         <h3>Design: Dialog Variants</h3>
-        <p>
-          Design defines dialog variants:
-        </p>
+        <p>Design defines dialog variants:</p>
         <pre>
           <code>{`// Dialog variants
 - Confirmation: Destructive actions
@@ -517,9 +497,7 @@ export function Dialog({ open, onClose, children }) {
         </pre>
 
         <h3>Code: Dialog Variant Implementation</h3>
-        <p>
-          Code implements variants using composition:
-        </p>
+        <p>Code implements variants using composition:</p>
         <pre>
           <code>{`// Dialog with slot components
 Dialog.Header = ({ children }) => (
@@ -561,8 +539,8 @@ Dialog.Footer = ({ children }) => (
           dialogs effectively. Focus management enables keyboard navigation.
           ARIA attributes enable screen reader navigation. Overlay behavior
           provides visual separation. When dialog patterns are built with
-          accessibility and user experience in mind, they create interfaces
-          that work for everyone.
+          accessibility and user experience in mind, they create interfaces that
+          work for everyone.
         </p>
         <p>
           Understanding dialog patterns helps practitioners create interfaces
@@ -579,14 +557,10 @@ Dialog.Footer = ({ children }) => (
     order: 7,
     content: (
       <>
-        <p>
-          Let's build an accessible dialog component from scratch:
-        </p>
+        <p>Let's build an accessible dialog component from scratch:</p>
 
         <h3>Step 1: Create Dialog Structure</h3>
-        <p>
-          Create dialog component with ARIA attributes:
-        </p>
+        <p>Create dialog component with ARIA attributes:</p>
         <pre>
           <code>{`// Dialog component structure
 export function Dialog({ open, onClose, title, children }) {
@@ -616,9 +590,7 @@ export function Dialog({ open, onClose, title, children }) {
         </pre>
 
         <h3>Step 2: Add Focus Management</h3>
-        <p>
-          Add focus trap and return logic:
-        </p>
+        <p>Add focus trap and return logic:</p>
         <pre>
           <code>{`// Add focus management
 useEffect(() => {
@@ -653,9 +625,7 @@ useEffect(() => {
         </pre>
 
         <h3>Step 3: Add Escape Key Handling</h3>
-        <p>
-          Add Escape key to close dialog:
-        </p>
+        <p>Add Escape key to close dialog:</p>
         <pre>
           <code>{`// Add Escape key handling
 useEffect(() => {
@@ -670,9 +640,7 @@ useEffect(() => {
         </pre>
 
         <h3>Step 4: Add Scroll Lock</h3>
-        <p>
-          Prevent background scrolling when modal open:
-        </p>
+        <p>Prevent background scrolling when modal open:</p>
         <pre>
           <code>{`// Add scroll lock
 useEffect(() => {
@@ -713,14 +681,10 @@ useEffect(() => {
     content: (
       <>
         <h3>Common Challenges</h3>
-        <p>
-          Dialog patterns face several challenges:
-        </p>
+        <p>Dialog patterns face several challenges:</p>
 
         <h4>Focus Management Complexity</h4>
-        <p>
-          Focus management can be complex:
-        </p>
+        <p>Focus management can be complex:</p>
         <ul>
           <li>
             <strong>Problem:</strong> Proper focus trapping requires careful
@@ -737,9 +701,7 @@ useEffect(() => {
         </ul>
 
         <h4>Nested Dialogs</h4>
-        <p>
-          Nested dialogs create complexity:
-        </p>
+        <p>Nested dialogs create complexity:</p>
         <ul>
           <li>
             <strong>Challenge:</strong> Managing focus and z-index with nested
@@ -755,9 +717,7 @@ useEffect(() => {
         </ul>
 
         <h4>Mobile Considerations</h4>
-        <p>
-          Mobile devices require special consideration:
-        </p>
+        <p>Mobile devices require special consideration:</p>
         <ul>
           <li>
             <strong>Challenge:</strong> Full-screen dialogs on mobile, touch
@@ -773,9 +733,7 @@ useEffect(() => {
         </ul>
 
         <h3>Tradeoffs</h3>
-        <p>
-          Dialog patterns involve several tradeoffs:
-        </p>
+        <p>Dialog patterns involve several tradeoffs:</p>
 
         <h4>Modal vs. Non-Modal</h4>
         <ul>
@@ -834,9 +792,7 @@ useEffect(() => {
     order: 9,
     content: (
       <>
-        <p>
-          Continue learning about dialog patterns:
-        </p>
+        <p>Continue learning about dialog patterns:</p>
         <ul>
           <li>
             <Link href="/blueprints/foundations/accessibility/philosophy">
@@ -857,10 +813,8 @@ useEffect(() => {
             : Related feedback patterns
           </li>
           <li>
-            <Link href="/blueprints/ux-patterns/forms">
-              Forms Patterns
-            </Link>
-            : Form dialogs and modals
+            <Link href="/blueprints/ux-patterns/forms">Forms Patterns</Link>:
+            Form dialogs and modals
           </li>
         </ul>
         <p>
@@ -925,7 +879,8 @@ content.verificationChecklist = [
   {
     id: 'aria-attributes-set',
     label: 'ARIA attributes set',
-    description: 'Dialog has proper ARIA attributes (role, aria-modal, aria-labelledby)',
+    description:
+      'Dialog has proper ARIA attributes (role, aria-modal, aria-labelledby)',
     required: true,
   },
 ];

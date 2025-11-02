@@ -11,11 +11,7 @@ interface TrackBadgeProps {
   className?: string;
 }
 
-export function TrackBadge({
-  track,
-  size = 'md',
-  className,
-}: TrackBadgeProps) {
+export function TrackBadge({ track, size = 'md', className }: TrackBadgeProps) {
   const trackDef = getTrack(track);
 
   return (
@@ -48,4 +44,3 @@ export function TrackBadgeList({
     </div>
   );
 }
-

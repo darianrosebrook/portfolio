@@ -15,11 +15,10 @@ import type { ComponentItem } from '@/app/blueprints/component-standards/_lib/co
 /**
  * Find glossary items by ID or name
  */
-export function findGlossaryItem(
-  idOrName: string
-): GlossaryItem | undefined {
+export function findGlossaryItem(idOrName: string): GlossaryItem | undefined {
   return glossaryItems.find(
-    (item) => item.id === idOrName || item.name.toLowerCase() === idOrName.toLowerCase()
+    (item) =>
+      item.id === idOrName || item.name.toLowerCase() === idOrName.toLowerCase()
   );
 }
 
@@ -59,7 +58,9 @@ export function buildComponentReferences(
   relatedSlugs: string[] = []
 ): ComponentReference[] {
   return components
-    .filter((comp) => relatedSlugs.length === 0 || relatedSlugs.includes(comp.slug))
+    .filter(
+      (comp) => relatedSlugs.length === 0 || relatedSlugs.includes(comp.slug)
+    )
     .map((comp) => ({
       slug: comp.slug,
       component: comp.component,
@@ -185,7 +186,7 @@ export function buildCrossReferences(
   contentText?: string
 ): CrossReference {
   const concepts = findRelatedFoundationPages(currentSlug, allPages);
-  
+
   // Extract glossary terms from content if provided
   const glossaryIds = contentText ? extractGlossaryTerms(contentText) : [];
 
@@ -195,4 +196,3 @@ export function buildCrossReferences(
     glossary: glossaryIds,
   };
 }
-

@@ -40,10 +40,10 @@ function checkPage(pagePath, slug) {
     /type: ['"]applied-example['"]/.test(content) ||
     /type: ['"]design-code-interplay['"]/.test(content);
   const hasSystemRoles = /type: ['"]system-roles['"]/.test(content);
-  const hasConstraintsTradeoffs =
-    /type: ['"]constraints-tradeoffs['"]/.test(content);
-  const hasVerificationChecklist =
-    /verificationChecklist\s*=/.test(content);
+  const hasConstraintsTradeoffs = /type: ['"]constraints-tradeoffs['"]/.test(
+    content
+  );
+  const hasVerificationChecklist = /verificationChecklist\s*=/.test(content);
   const hasAssessmentPrompts = /assessmentPrompts\s*=/.test(content);
   const hasCrossReferences = /crossReferences\s*=/.test(content);
   const hasMetadataExport = /export const metadata/.test(content);
@@ -121,8 +121,7 @@ function checkGlossaryIntegration() {
 
   const content = fs.readFileSync(templatePath, 'utf-8');
   return (
-    /GlossaryPopover/.test(content) &&
-    /crossReferences.glossary/.test(content)
+    /GlossaryPopover/.test(content) && /crossReferences.glossary/.test(content)
   );
 }
 
@@ -148,7 +147,9 @@ function checkTemplateImplementation() {
 }
 
 // Run checks
-console.log('\n📋 Foundation Pages Content Guidelines & Success Metrics Check\n');
+console.log(
+  '\n📋 Foundation Pages Content Guidelines & Success Metrics Check\n'
+);
 console.log('='.repeat(70));
 
 const pageChecks = [];
@@ -183,7 +184,9 @@ for (const check of pageChecks) {
   }
 
   if (!check.hasAppliedExample) {
-    issues.push('❌ Missing "Applied Example" or "Design-Code Interplay" section');
+    issues.push(
+      '❌ Missing "Applied Example" or "Design-Code Interplay" section'
+    );
     allGuidelinesMet = false;
   } else {
     console.log('  ✅ Has practical application examples');

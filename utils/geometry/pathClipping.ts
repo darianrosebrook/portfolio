@@ -144,12 +144,13 @@ export function getFeatureClipBoundary(
       const capHeight = metrics.capHeight || 0;
       const xHeight = metrics.xHeight || 0;
       const baseline = metrics.baseline || bbox.minY;
-      
+
       // Use cap height for uppercase, x-height for lowercase
-      const barY = capHeight > 0 
-        ? baseline + (capHeight - baseline) * 0.5 
-        : baseline + (xHeight - baseline) * 0.5;
-      
+      const barY =
+        capHeight > 0
+          ? baseline + (capHeight - baseline) * 0.5
+          : baseline + (xHeight - baseline) * 0.5;
+
       // Highlight the crossbar region itself (small band around the bar)
       return {
         type: 'horizontal',
@@ -157,7 +158,7 @@ export function getFeatureClipBoundary(
         keepAbove: false, // We'll highlight the bar itself, not above/below
       };
     }
-    
+
     case 'Cross stroke': {
       // Cross stroke is different - it's a stroke that crosses through (like in 't', 'f')
       // Typically in x-height region

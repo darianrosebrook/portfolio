@@ -1,6 +1,6 @@
 /**
  * Debug Panel Component for FontInspector
- * 
+ *
  * Displays diagnostic information to help identify rendering issues.
  */
 
@@ -60,8 +60,8 @@ export function DebugPanel() {
           <>
             <dt>Font Metrics:</dt>
             <dd>
-              Units/Em: {fontInstance.unitsPerEm}, Ascent:{' '}
-              {fontInstance.ascent}, Descent: {fontInstance.descent}
+              Units/Em: {fontInstance.unitsPerEm}, Ascent: {fontInstance.ascent}
+              , Descent: {fontInstance.descent}
             </dd>
           </>
         )}
@@ -91,4 +91,3 @@ export function DebugPanel() {
     </div>
   );
 }
-

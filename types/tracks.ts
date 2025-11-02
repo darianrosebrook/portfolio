@@ -28,4 +28,3 @@ export interface TrackPageMapping {
   trackRelevance: TrackId[];
   sectionMappings?: TrackSectionMapping[];
 }
-

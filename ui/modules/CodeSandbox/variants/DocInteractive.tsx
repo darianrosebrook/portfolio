@@ -167,17 +167,15 @@ export function DocInteractive({
   // Apply RTL direction to preview iframe
   React.useEffect(() => {
     if (preview?.dir && preview.runtime === 'iframe') {
-      const iframe = document.querySelector<HTMLIFrameElement>(
-        '.sp-preview-iframe'
-      );
+      const iframe =
+        document.querySelector<HTMLIFrameElement>('.sp-preview-iframe');
       if (iframe?.contentDocument?.documentElement) {
         iframe.contentDocument.documentElement.setAttribute('dir', preview.dir);
       }
       // Also watch for iframe creation (Sandpack may recreate it)
       const observer = new MutationObserver(() => {
-        const iframeEl = document.querySelector<HTMLIFrameElement>(
-          '.sp-preview-iframe'
-        );
+        const iframeEl =
+          document.querySelector<HTMLIFrameElement>('.sp-preview-iframe');
         if (iframeEl?.contentDocument?.documentElement) {
           iframeEl.contentDocument.documentElement.setAttribute(
             'dir',

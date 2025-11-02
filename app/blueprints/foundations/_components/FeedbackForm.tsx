@@ -3,7 +3,12 @@
 import React, { useState } from 'react';
 import styles from './FeedbackForm.module.scss';
 
-export type FeedbackType = 'content' | 'format' | 'structure' | 'navigation' | 'other';
+export type FeedbackType =
+  | 'content'
+  | 'format'
+  | 'structure'
+  | 'navigation'
+  | 'other';
 
 export interface FeedbackData {
   type: FeedbackType;
@@ -109,7 +114,10 @@ export function FeedbackForm({
               id="feedback-type"
               value={formData.type}
               onChange={(e) =>
-                setFormData({ ...formData, type: e.target.value as FeedbackType })
+                setFormData({
+                  ...formData,
+                  type: e.target.value as FeedbackType,
+                })
               }
               required
             >
@@ -188,4 +196,3 @@ export function FeedbackForm({
     </div>
   );
 }
-

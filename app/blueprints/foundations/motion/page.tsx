@@ -37,9 +37,9 @@ const MotionPage: React.FC = () => {
       <h2>Conceptual Understanding: Why Motion Matters</h2>
       <p>
         Motion in interface design is not decorative—it&apos;s a fundamental
-        communication mechanism. When done thoughtfully, motion creates a
-        bridge between user intention and system response, making digital
-        interfaces feel responsive, predictable, and alive.
+        communication mechanism. When done thoughtfully, motion creates a bridge
+        between user intention and system response, making digital interfaces
+        feel responsive, predictable, and alive.
       </p>
 
       <h3>The Psychology of Motion</h3>
@@ -51,13 +51,13 @@ const MotionPage: React.FC = () => {
       <ul>
         <li>
           <strong>Feedback:</strong> Confirms that an action has been registered
-          and processed. Without motion, users may wonder if their click,
-          swipe, or tap was successful.
+          and processed. Without motion, users may wonder if their click, swipe,
+          or tap was successful.
         </li>
         <li>
           <strong>Orientation:</strong> Helps users understand spatial
-          relationships and transitions between states. Motion creates a sense of
-          continuity that static layouts cannot.
+          relationships and transitions between states. Motion creates a sense
+          of continuity that static layouts cannot.
         </li>
         <li>
           <strong>Hierarchy:</strong> Guides attention to important changes or
@@ -127,9 +127,7 @@ const MotionPage: React.FC = () => {
         </li>
       </ul>
 
-      <p>
-        Our duration tokens are frame-aligned for consistency:
-      </p>
+      <p>Our duration tokens are frame-aligned for consistency:</p>
       <pre>
         <code>{`{
   "core.motion.duration.short2": "83ms",   // 5 frames
@@ -166,9 +164,7 @@ const MotionPage: React.FC = () => {
         </li>
       </ul>
 
-      <p>
-        Our easing tokens provide semantic meaning:
-      </p>
+      <p>Our easing tokens provide semantic meaning:</p>
       <pre>
         <code>{`{
   "core.motion.easing.quick.enter": "cubic-bezier(0, 0, 0.1, 1)",
@@ -206,9 +202,7 @@ const MotionPage: React.FC = () => {
 }`}</code>
       </pre>
 
-      <p>
-        This semantic approach enables:
-      </p>
+      <p>This semantic approach enables:</p>
       <ul>
         <li>
           <strong>Consistency:</strong> All buttons use the same press animation
@@ -276,23 +270,23 @@ const MotionPage: React.FC = () => {
         </li>
         <li>
           <strong>Avoid animating:</strong> <code>width</code>,{' '}
-          <code>height</code>, <code>top</code>, <code>left</code>—these
-          trigger layout recalculation
+          <code>height</code>, <code>top</code>, <code>left</code>—these trigger
+          layout recalculation
         </li>
         <li>
           <strong>Limit simultaneous animations:</strong> Too many concurrent
           animations can overwhelm the browser
         </li>
         <li>
-          <strong>Use <code>will-change</code>:</strong> Hint to the browser
-          about upcoming animations, but use sparingly
+          <strong>
+            Use <code>will-change</code>:
+          </strong>{' '}
+          Hint to the browser about upcoming animations, but use sparingly
         </li>
       </ul>
 
       <h3>Motion and Component Architecture</h3>
-      <p>
-        Motion tokens integrate with component tokens:
-      </p>
+      <p>Motion tokens integrate with component tokens:</p>
       <pre>
         <code>{`.button {
   transition: transform var(--semantic-motion-interaction-press-duration)
@@ -315,9 +309,7 @@ const MotionPage: React.FC = () => {
       <h2>Critical Reflection: Trade-offs and Edge Cases</h2>
 
       <h3>Duration Trade-offs</h3>
-      <p>
-        Choosing duration involves balancing multiple factors:
-      </p>
+      <p>Choosing duration involves balancing multiple factors:</p>
       <ul>
         <li>
           <strong>Too fast:</strong> Motion becomes imperceptible, users miss
@@ -335,9 +327,7 @@ const MotionPage: React.FC = () => {
       </ul>
 
       <h3>Easing Trade-offs</h3>
-      <p>
-        Different easing curves communicate different personalities:
-      </p>
+      <p>Different easing curves communicate different personalities:</p>
       <ul>
         <li>
           <strong>Sharp curves:</strong> Feel energetic but can be jarring
@@ -356,9 +346,7 @@ const MotionPage: React.FC = () => {
       </ul>
 
       <h3>Accessibility Edge Cases</h3>
-      <p>
-        Motion accessibility isn&apos;t binary:
-      </p>
+      <p>Motion accessibility isn&apos;t binary:</p>
       <ul>
         <li>
           <strong>Vestibular disorders:</strong> Users may need reduced motion
@@ -373,15 +361,13 @@ const MotionPage: React.FC = () => {
           save data
         </li>
         <li>
-          <strong>Battery constraints:</strong> Complex animations drain
-          battery faster
+          <strong>Battery constraints:</strong> Complex animations drain battery
+          faster
         </li>
       </ul>
 
       <h3>When to Break the Rules</h3>
-      <p>
-        Sometimes, breaking motion conventions is appropriate:
-      </p>
+      <p>Sometimes, breaking motion conventions is appropriate:</p>
       <ul>
         <li>
           <strong>Celebratory moments:</strong> Success animations can be more
@@ -404,9 +390,7 @@ const MotionPage: React.FC = () => {
       <h2>Motion Patterns and Best Practices</h2>
 
       <h3>Enter/Exit Patterns</h3>
-      <p>
-        Entrances and exits should feel different:
-      </p>
+      <p>Entrances and exits should feel different:</p>
       <ul>
         <li>
           <strong>Enter:</strong> Slightly slower, softer easing (ease-out) to
@@ -422,9 +406,7 @@ const MotionPage: React.FC = () => {
       </p>
 
       <h3>Staggered Animations</h3>
-      <p>
-        Staggering creates flow and hierarchy:
-      </p>
+      <p>Staggering creates flow and hierarchy:</p>
       <pre>
         <code>{`.list-item {
   animation-delay: calc(var(--index) * var(--semantic-motion-stagger-list));
@@ -436,9 +418,7 @@ const MotionPage: React.FC = () => {
       </p>
 
       <h3>Choreography</h3>
-      <p>
-        Multiple elements animating together should feel coordinated:
-      </p>
+      <p>Multiple elements animating together should feel coordinated:</p>
       <ul>
         <li>
           <strong>Related elements:</strong> Use similar durations and easing
@@ -456,9 +436,7 @@ const MotionPage: React.FC = () => {
       <h2>Implementation Patterns</h2>
 
       <h3>CSS Transitions</h3>
-      <p>
-        For simple state changes:
-      </p>
+      <p>For simple state changes:</p>
       <pre>
         <code>{`.component {
   transition: transform var(--semantic-motion-interaction-hover-duration)
@@ -471,9 +449,7 @@ const MotionPage: React.FC = () => {
       </pre>
 
       <h3>CSS Animations</h3>
-      <p>
-        For complex, reusable animations:
-      </p>
+      <p>For complex, reusable animations:</p>
       <pre>
         <code>{`@keyframes fadeIn {
   from {
@@ -491,9 +467,7 @@ const MotionPage: React.FC = () => {
       </pre>
 
       <h3>Reduced Motion Implementation</h3>
-      <p>
-        Respect user preferences at multiple levels:
-      </p>
+      <p>Respect user preferences at multiple levels:</p>
       <pre>
         <code>{`/* Component level */
 @media (prefers-reduced-motion: reduce) {
@@ -520,8 +494,8 @@ if (!prefersReducedMotion) {
       <h2>Common Mistakes and Anti-patterns</h2>
       <ul>
         <li>
-          <strong>Motion for motion&apos;s sake:</strong> Every element doesn&apos;t
-          need to animate. Use motion purposefully.
+          <strong>Motion for motion&apos;s sake:</strong> Every element
+          doesn&apos;t need to animate. Use motion purposefully.
         </li>
         <li>
           <strong>Ignoring reduced motion:</strong> Always check{' '}
@@ -532,8 +506,8 @@ if (!prefersReducedMotion) {
           chaotic feel. Use your token system.
         </li>
         <li>
-          <strong>Animating wrong properties:</strong> Animating layout properties
-          causes jank. Use transform and opacity.
+          <strong>Animating wrong properties:</strong> Animating layout
+          properties causes jank. Use transform and opacity.
         </li>
         <li>
           <strong>Too many simultaneous animations:</strong> Overwhelming users
@@ -552,8 +526,8 @@ if (!prefersReducedMotion) {
           hardcoded values
         </li>
         <li>
-          <strong>Test with reduced motion:</strong> Verify your interface
-          works without motion
+          <strong>Test with reduced motion:</strong> Verify your interface works
+          without motion
         </li>
         <li>
           <strong>Measure performance:</strong> Use browser DevTools to identify
@@ -568,8 +542,8 @@ if (!prefersReducedMotion) {
           motion due to performance constraints
         </li>
         <li>
-          <strong>Test with users:</strong> Gather feedback on motion timing
-          and easing preferences
+          <strong>Test with users:</strong> Gather feedback on motion timing and
+          easing preferences
         </li>
         <li>
           <strong>Frame-align durations:</strong> Use multiples of 16.67ms for
@@ -582,9 +556,7 @@ if (!prefersReducedMotion) {
       </ul>
 
       <h2>Related Foundations</h2>
-      <p>
-        Motion intersects with other foundations:
-      </p>
+      <p>Motion intersects with other foundations:</p>
       <ul>
         <li>
           <strong>Accessibility:</strong> Motion must respect user preferences

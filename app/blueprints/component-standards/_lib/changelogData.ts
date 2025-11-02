@@ -37,11 +37,13 @@ export function getChangelog(componentName: string): ComponentChangelog | null {
           changes: [
             {
               type: 'changed',
-              description: 'Renamed `onClick` prop to `onPress` for consistency',
+              description:
+                'Renamed `onClick` prop to `onPress` for consistency',
             },
             {
               type: 'added',
-              description: 'Added `variant` prop with "primary" and "secondary" options',
+              description:
+                'Added `variant` prop with "primary" and "secondary" options',
             },
             {
               type: 'changed',
@@ -113,13 +115,10 @@ export function getChangelog(componentName: string): ComponentChangelog | null {
  * Get the latest version date for a component.
  * Returns null if no changelog exists.
  */
-export function getLastUpdated(
-  componentName: string
-): string | null {
+export function getLastUpdated(componentName: string): string | null {
   const changelog = getChangelog(componentName);
   if (!changelog || changelog.entries.length === 0) {
     return null;
   }
   return changelog.entries[0].date;
 }
-

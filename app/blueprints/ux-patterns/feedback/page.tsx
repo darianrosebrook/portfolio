@@ -42,7 +42,12 @@ const pageMetadata: FoundationPageMetadata = {
   author: {
     name: 'Darian Rosebrook',
     role: 'Staff Design Technologist, Design Systems Architect',
-    expertise: ['Feedback Patterns', 'Status Communication', 'UX', 'Accessibility'],
+    expertise: [
+      'Feedback Patterns',
+      'Status Communication',
+      'UX',
+      'Accessibility',
+    ],
     profileUrl: 'https://darianrosebrook.com',
     imageUrl: 'https://darianrosebrook.com/darianrosebrook.jpg',
   },
@@ -74,9 +79,7 @@ const sections: FoundationSection[] = [
           clarity and reassurance. When poorly implemented, feedback creates
           confusion and frustration.
         </p>
-        <p>
-          Feedback patterns serve multiple critical functions:
-        </p>
+        <p>Feedback patterns serve multiple critical functions:</p>
         <ul>
           <li>
             <strong>Status Communication:</strong> Feedback communicates system
@@ -114,9 +117,7 @@ const sections: FoundationSection[] = [
     content: (
       <>
         <h3>Feedback Types</h3>
-        <p>
-          Different feedback types serve different purposes:
-        </p>
+        <p>Different feedback types serve different purposes:</p>
         <ul>
           <li>
             <strong>Success:</strong> Confirms successful actions
@@ -157,9 +158,7 @@ const sections: FoundationSection[] = [
         </pre>
 
         <h3>Live Regions</h3>
-        <p>
-          ARIA live regions announce feedback to screen readers:
-        </p>
+        <p>ARIA live regions announce feedback to screen readers:</p>
         <ul>
           <li>
             <strong>aria-live:</strong> Announces changes to screen readers
@@ -193,9 +192,7 @@ aria-relevant="text" // Announces text changes`}</code>
         </pre>
 
         <h3>Loading States</h3>
-        <p>
-          Loading states communicate progress and activity:
-        </p>
+        <p>Loading states communicate progress and activity:</p>
         <ul>
           <li>
             <strong>Indeterminate:</strong> Unknown duration, general progress
@@ -231,9 +228,7 @@ aria-relevant="text" // Announces text changes`}</code>
         </pre>
 
         <h3>Toast Notifications</h3>
-        <p>
-          Toast notifications provide temporary feedback:
-        </p>
+        <p>Toast notifications provide temporary feedback:</p>
         <ul>
           <li>
             <strong>Duration:</strong> Auto-dismiss after timeout
@@ -273,9 +268,7 @@ const toasts = [
         </pre>
 
         <h3>Error Messages</h3>
-        <p>
-          Error messages guide users to correct issues:
-        </p>
+        <p>Error messages guide users to correct issues:</p>
         <ul>
           <li>
             <strong>Clear language:</strong> Use plain, understandable language
@@ -322,13 +315,10 @@ const toasts = [
     content: (
       <>
         <h3>User Experience Impact</h3>
-        <p>
-          Feedback patterns improve user experience:
-        </p>
+        <p>Feedback patterns improve user experience:</p>
         <ul>
           <li>
-            <strong>Clarity:</strong> Users understand system state and
-            outcomes
+            <strong>Clarity:</strong> Users understand system state and outcomes
           </li>
           <li>
             <strong>Confidence:</strong> Feedback confirms actions and reduces
@@ -345,17 +335,15 @@ const toasts = [
         </p>
 
         <h3>Accessibility Impact</h3>
-        <p>
-          Feedback patterns improve accessibility:
-        </p>
+        <p>Feedback patterns improve accessibility:</p>
         <ul>
           <li>
             <strong>Screen reader support:</strong> Live regions announce
             feedback to screen readers
           </li>
           <li>
-            <strong>Error association:</strong> Errors associated with form fields
-            enable screen reader navigation
+            <strong>Error association:</strong> Errors associated with form
+            fields enable screen reader navigation
           </li>
           <li>
             <strong>Status communication:</strong> Clear status communication
@@ -368,9 +356,7 @@ const toasts = [
         </p>
 
         <h3>System Consistency Impact</h3>
-        <p>
-          Consistent feedback patterns improve system consistency:
-        </p>
+        <p>Consistent feedback patterns improve system consistency:</p>
         <ul>
           <li>
             <strong>Predictable behavior:</strong> Users understand feedback
@@ -406,9 +392,7 @@ const toasts = [
         </p>
 
         <h3>Design: Feedback Specifications</h3>
-        <p>
-          Design specifications define feedback requirements:
-        </p>
+        <p>Design specifications define feedback requirements:</p>
         <pre>
           <code>{`// Design specifications
 Feedback Requirements:
@@ -422,9 +406,7 @@ Feedback Requirements:
         </pre>
 
         <h3>Code: Feedback Component Implementation</h3>
-        <p>
-          Code implements feedback with live regions:
-        </p>
+        <p>Code implements feedback with live regions:</p>
         <pre>
           <code>{`// Alert component with live region
 export function Alert({ variant, children, onDismiss }) {
@@ -459,9 +441,7 @@ export function Alert({ variant, children, onDismiss }) {
         </pre>
 
         <h3>Design: Loading State Specifications</h3>
-        <p>
-          Design defines loading state requirements:
-        </p>
+        <p>Design defines loading state requirements:</p>
         <pre>
           <code>{`// Loading state specifications
 Loading Requirements:
@@ -473,9 +453,7 @@ Loading Requirements:
         </pre>
 
         <h3>Code: Loading State Implementation</h3>
-        <p>
-          Code implements loading states with accessibility:
-        </p>
+        <p>Code implements loading states with accessibility:</p>
         <pre>
           <code>{`// Loading spinner with accessibility
 export function Spinner({ label }) {
@@ -517,14 +495,15 @@ export function Spinner({ label }) {
         <p>
           A well-implemented feedback pattern ensures users understand system
           state and outcomes. Live regions announce feedback to screen readers.
-          Error messages guide users to correct issues. Loading states communicate
-          progress. When feedback patterns are built with accessibility and user
-          experience in mind, they create interfaces that keep users informed and
-          confident.
+          Error messages guide users to correct issues. Loading states
+          communicate progress. When feedback patterns are built with
+          accessibility and user experience in mind, they create interfaces that
+          keep users informed and confident.
         </p>
         <p>
           Understanding feedback patterns helps practitioners create interfaces
-          that communicate clearly and enable users to complete tasks effectively.
+          that communicate clearly and enable users to complete tasks
+          effectively.
         </p>
       </>
     ),
@@ -536,14 +515,10 @@ export function Spinner({ label }) {
     order: 7,
     content: (
       <>
-        <p>
-          Let's build an accessible feedback system from scratch:
-        </p>
+        <p>Let's build an accessible feedback system from scratch:</p>
 
         <h3>Step 1: Create Alert Component</h3>
-        <p>
-          Create alert component with live regions:
-        </p>
+        <p>Create alert component with live regions:</p>
         <pre>
           <code>{`// Alert component
 export function Alert({ variant, children, onDismiss }) {
@@ -574,9 +549,7 @@ export function Alert({ variant, children, onDismiss }) {
         </pre>
 
         <h3>Step 2: Create Toast System</h3>
-        <p>
-          Create toast notification system:
-        </p>
+        <p>Create toast notification system:</p>
         <pre>
           <code>{`// Toast system
 const [toasts, setToasts] = useState([]);
@@ -602,9 +575,7 @@ function ToastContainer() {
         </pre>
 
         <h3>Step 3: Associate Errors with Form Fields</h3>
-        <p>
-          Associate error messages with form fields:
-        </p>
+        <p>Associate error messages with form fields:</p>
         <pre>
           <code>{`// Form field with error
 <TextField
@@ -627,9 +598,7 @@ function ToastContainer() {
         </pre>
 
         <h3>Step 4: Add Loading States</h3>
-        <p>
-          Add loading states with accessibility:
-        </p>
+        <p>Add loading states with accessibility:</p>
         <pre>
           <code>{`// Loading state component
 export function LoadingState({ label }) {
@@ -649,7 +618,8 @@ export function LoadingState({ label }) {
             regions
           </li>
           <li>
-            <strong>User experience:</strong> Clear feedback for all user actions
+            <strong>User experience:</strong> Clear feedback for all user
+            actions
           </li>
           <li>
             <strong>Consistency:</strong> Predictable feedback patterns across
@@ -670,14 +640,10 @@ export function LoadingState({ label }) {
     content: (
       <>
         <h3>Common Challenges</h3>
-        <p>
-          Feedback patterns face several challenges:
-        </p>
+        <p>Feedback patterns face several challenges:</p>
 
         <h4>Live Region Announcing</h4>
-        <p>
-          Live regions can be noisy:
-        </p>
+        <p>Live regions can be noisy:</p>
         <ul>
           <li>
             <strong>Problem:</strong> Too many announcements overwhelm users
@@ -693,17 +659,15 @@ export function LoadingState({ label }) {
         </ul>
 
         <h4>Toast Queue Management</h4>
-        <p>
-          Managing multiple toasts can be complex:
-        </p>
+        <p>Managing multiple toasts can be complex:</p>
         <ul>
           <li>
             <strong>Challenge:</strong> Displaying multiple toasts without
             overwhelming users
           </li>
           <li>
-            <strong>Approach:</strong> Limit visible toasts, queue others,
-            stack vertically
+            <strong>Approach:</strong> Limit visible toasts, queue others, stack
+            vertically
           </li>
           <li>
             <strong>Tradeoff:</strong> Simplicity vs. functionality
@@ -711,13 +675,11 @@ export function LoadingState({ label }) {
         </ul>
 
         <h4>Error Message Timing</h4>
-        <p>
-          Timing error messages requires care:
-        </p>
+        <p>Timing error messages requires care:</p>
         <ul>
           <li>
-            <strong>Challenge:</strong> When to show errors (on blur, on
-            submit, immediately)
+            <strong>Challenge:</strong> When to show errors (on blur, on submit,
+            immediately)
           </li>
           <li>
             <strong>Approach:</strong> Show on blur for validation, on submit
@@ -729,9 +691,7 @@ export function LoadingState({ label }) {
         </ul>
 
         <h3>Tradeoffs</h3>
-        <p>
-          Feedback patterns involve several tradeoffs:
-        </p>
+        <p>Feedback patterns involve several tradeoffs:</p>
 
         <h4>Polite vs. Assertive Announcements</h4>
         <ul>
@@ -742,8 +702,8 @@ export function LoadingState({ label }) {
             <strong>Assertive:</strong> More noticeable, but can interrupt
           </li>
           <li>
-            <strong>Best practice:</strong> Use assertive for errors, polite
-            for success
+            <strong>Best practice:</strong> Use assertive for errors, polite for
+            success
           </li>
         </ul>
 
@@ -756,8 +716,8 @@ export function LoadingState({ label }) {
             <strong>Manual dismiss:</strong> User control, but requires action
           </li>
           <li>
-            <strong>Best practice:</strong> Auto-dismiss success, manual
-            dismiss errors
+            <strong>Best practice:</strong> Auto-dismiss success, manual dismiss
+            errors
           </li>
         </ul>
 
@@ -784,9 +744,7 @@ export function LoadingState({ label }) {
     order: 9,
     content: (
       <>
-        <p>
-          Continue learning about feedback patterns:
-        </p>
+        <p>Continue learning about feedback patterns:</p>
         <ul>
           <li>
             <Link href="/blueprints/foundations/accessibility/philosophy">
@@ -801,16 +759,12 @@ export function LoadingState({ label }) {
             : ARIA live regions
           </li>
           <li>
-            <Link href="/blueprints/ux-patterns/dialogs">
-              Dialog Patterns
-            </Link>
-            : Related dialog patterns
+            <Link href="/blueprints/ux-patterns/dialogs">Dialog Patterns</Link>:
+            Related dialog patterns
           </li>
           <li>
-            <Link href="/blueprints/ux-patterns/forms">
-              Forms Patterns
-            </Link>
-            : Form feedback patterns
+            <Link href="/blueprints/ux-patterns/forms">Forms Patterns</Link>:
+            Form feedback patterns
           </li>
         </ul>
         <p>
@@ -857,13 +811,15 @@ content.verificationChecklist = [
   {
     id: 'live-regions-implemented',
     label: 'Live regions implemented',
-    description: 'Feedback uses ARIA live regions for screen reader announcements',
+    description:
+      'Feedback uses ARIA live regions for screen reader announcements',
     required: true,
   },
   {
     id: 'error-association',
     label: 'Error association',
-    description: 'Errors are associated with form fields using aria-describedby',
+    description:
+      'Errors are associated with form fields using aria-describedby',
     required: true,
   },
   {

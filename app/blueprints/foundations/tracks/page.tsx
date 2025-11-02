@@ -56,9 +56,7 @@ export default function TracksPage() {
             </div>
 
             <div className={styles.trackFooter}>
-              <span className={styles.trackLink}>
-                Start {track.name} →
-              </span>
+              <span className={styles.trackLink}>Start {track.name} →</span>
             </div>
           </Link>
         ))}
@@ -93,4 +91,3 @@ export default function TracksPage() {
     </div>
   );
 }
-

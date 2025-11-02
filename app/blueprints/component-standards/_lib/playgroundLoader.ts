@@ -1,6 +1,6 @@
 /**
  * Playground File Loader
- * 
+ *
  * Provides type-safe loading of playground files with fallback to generated examples.
  * Playground files should export `*Interactive` and `*Variants` configurations.
  */
@@ -15,9 +15,7 @@ import type { ComponentItem } from './componentsData';
  * Attempts to load a playground file for a component.
  * Returns the playground config if found, null otherwise.
  */
-export async function loadPlaygroundFile(
-  componentName: string
-): Promise<{
+export async function loadPlaygroundFile(componentName: string): Promise<{
   interactive?: DocInteractiveProps;
   variants?: DocVariantsProps;
 } | null> {
@@ -34,9 +32,10 @@ export async function loadPlaygroundFile(
     const variantsKey = `${normalizedName}Variants`;
 
     return {
-      interactive:
-        (playgroundModule[interactiveKey] as DocInteractiveProps | undefined),
-      variants: (playgroundModule[variantsKey] as DocVariantsProps | undefined),
+      interactive: playgroundModule[interactiveKey] as
+        | DocInteractiveProps
+        | undefined,
+      variants: playgroundModule[variantsKey] as DocVariantsProps | undefined,
     };
   } catch {
     // Playground file doesn't exist, return null
@@ -48,9 +47,7 @@ export async function loadPlaygroundFile(
  * Gets the best available project for a component.
  * Tries playground first, falls back to generated example.
  */
-export async function getComponentProject(
-  component: ComponentItem
-): Promise<{
+export async function getComponentProject(component: ComponentItem): Promise<{
   interactive: DocInteractiveProps | null;
   variants: DocVariantsProps | null;
   source: 'playground' | 'generated';
@@ -67,7 +64,7 @@ export async function getComponentProject(
 
   // Fallback to generated
   const generatedProject = generateEnhancedInteractiveProject(component);
-  
+
   return {
     interactive: generatedProject
       ? {
@@ -94,12 +91,19 @@ export function generateSections(component: ComponentItem): SectionSpec[] {
     {
       id: 'overview',
       title: 'Component Overview',
-      code: { file: `/${component.component}.tsx`, lines: [1, 15] as [number, number], focus: true },
+      code: {
+        file: `/${component.component}.tsx`,
+        lines: [1, 15] as [number, number],
+        focus: true,
+      },
     },
     {
       id: 'props',
       title: 'Props',
-      code: { file: `/${component.component}.tsx`, lines: [1, 10] as [number, number] },
+      code: {
+        file: `/${component.component}.tsx`,
+        lines: [1, 10] as [number, number],
+      },
     },
     {
       id: 'basic-usage',
@@ -191,4 +195,3 @@ export function generateSections(component: ComponentItem): SectionSpec[] {
 
   return [...baseSections, ...specificSections];
 }
-

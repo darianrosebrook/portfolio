@@ -40,9 +40,7 @@ export function extractProps(
     );
     const propsMatch =
       basePropsMatch ||
-      content.match(
-        /(?:interface|type)\s+\w*Props[^{]*\{([\s\S]*?)\}/
-      );
+      content.match(/(?:interface|type)\s+\w*Props[^{]*\{([\s\S]*?)\}/);
 
     if (!propsMatch) {
       return [];
@@ -215,12 +213,10 @@ export function getComponentAPI(
 } {
   // If no path provided, try to find it
   const resolvedPath =
-    componentPath ||
-    path.join(process.cwd(), 'ui/components', componentName);
+    componentPath || path.join(process.cwd(), 'ui/components', componentName);
 
   return {
     props: extractProps(resolvedPath, componentName),
     methods: extractMethods(resolvedPath, componentName),
   };
 }
-

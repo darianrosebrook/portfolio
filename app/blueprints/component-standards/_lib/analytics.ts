@@ -186,4 +186,3 @@ export function useComponentTimeTracking(component: string): void {
     };
   }, [component]);
 }
-

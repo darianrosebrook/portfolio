@@ -12,9 +12,7 @@ export type ContentDesign = {
  * Get content design guidelines for a component (if available).
  * Returns null if no guidelines exist.
  */
-export function getContentDesign(
-  componentName: string
-): ContentDesign | null {
+export function getContentDesign(componentName: string): ContentDesign | null {
   // TODO: Implement actual content design data lookup
   // For now, return example data for common components
   const examples: Record<string, ContentDesign> = {
@@ -86,4 +84,3 @@ export function getContentDesign(
 
   return examples[componentName] || null;
 }
-

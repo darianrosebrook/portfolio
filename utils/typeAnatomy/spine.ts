@@ -18,31 +18,31 @@ import { FeatureDetectionConfig } from './featureConfig';
  */
 export function hasSpine(g: Glyph, m: Metrics): boolean {
   if (!isDrawable(g)) return false;
-  
+
   const gs = shapeForV2(g);
   const overshoot = getOvershoot(g);
   const bboxW = g.bbox.maxX - g.bbox.minX;
   const bands = 5; // Vertical scan bands
-  
+
   // Spine typically spans from slightly below baseline to slightly above x-height
   const spineStartY = m.baseline - (m.baseline - m.descent) * 0.2;
   const spineEndY = m.xHeight + (m.ascent - m.xHeight) * 0.2;
   const spineHeight = spineEndY - spineStartY;
-  
+
   let curvedPathCount = 0;
-  
+
   // Scan vertically across the glyph
   for (let i = 1; i < bands; i++) {
     const x = g.bbox.minX + (bboxW * i) / bands;
     const origin = { x, y: -overshoot };
-    
+
     const { points } = rayHits(gs, origin, Math.PI / 2, overshoot * 2);
-    
+
     // Count intersections that fall within the spine region
     const spineIntersections = points.filter(
       (p) => p.y >= spineStartY && p.y <= spineEndY
     );
-    
+
     // A spine should have multiple intersections (S-curve typically has 2+ crossings)
     // and should span a significant portion of the middle region
     if (spineIntersections.length >= 2) {
@@ -50,14 +50,13 @@ export function hasSpine(g: Glyph, m: Metrics): boolean {
       const minY = Math.min(...spineIntersections.map((p) => p.y));
       const maxY = Math.max(...spineIntersections.map((p) => p.y));
       const span = maxY - minY;
-      
+
       if (span > spineHeight * 0.4) {
         curvedPathCount++;
       }
     }
   }
-  
+
   // Require multiple bands to confirm a spine
   return curvedPathCount >= FeatureDetectionConfig.stem.minThickBands;
 }
-

@@ -221,9 +221,7 @@ export function getAllTracks(): TrackDefinition[] {
 /**
  * Get track relevance for a foundation page
  */
-export function getPageTrackRelevance(
-  pageSlug: string
-): TrackId[] {
+export function getPageTrackRelevance(pageSlug: string): TrackId[] {
   const mapping = trackPageMappings[pageSlug];
   return mapping?.trackRelevance || [];
 }
@@ -326,4 +324,3 @@ export function getTrackProgress(
     completedPages: completed,
   };
 }
-

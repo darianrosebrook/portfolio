@@ -34,7 +34,9 @@ export function buildComponentReferencesWithConcepts(
   relatedSlugs: string[] = []
 ): ComponentReference[] {
   return components
-    .filter((comp) => relatedSlugs.length === 0 || relatedSlugs.includes(comp.slug))
+    .filter(
+      (comp) => relatedSlugs.length === 0 || relatedSlugs.includes(comp.slug)
+    )
     .map((comp) => {
       const relatedConcepts: string[] = [];
 
@@ -64,4 +66,3 @@ export function buildComponentReferencesWithConcepts(
       };
     });
 }
-

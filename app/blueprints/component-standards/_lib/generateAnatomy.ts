@@ -95,9 +95,7 @@ export function parseAnatomy(anatomy: string[]): AnatomyPart[] {
 /**
  * Get anatomy data for a component.
  */
-export function getAnatomyData(
-  component: ComponentItem
-): AnatomyPart[] | null {
+export function getAnatomyData(component: ComponentItem): AnatomyPart[] | null {
   const contract = getComponentContract(component);
   if (!contract || !contract.anatomy) {
     return null;
@@ -105,4 +103,3 @@ export function getAnatomyData(
 
   return parseAnatomy(contract.anatomy);
 }
-

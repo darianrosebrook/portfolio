@@ -11,7 +11,9 @@ interface StatusMatrixProps {
   components: ComponentItem[];
 }
 
-export function StatusMatrix({ components: initialComponents }: StatusMatrixProps) {
+export function StatusMatrix({
+  components: initialComponents,
+}: StatusMatrixProps) {
   const components = useMemo(() => initialComponents, [initialComponents]);
   const [searchQuery, setSearchQuery] = useState('');
   const [categoryFilter, setCategoryFilter] = useState<string>('all');
@@ -28,7 +30,9 @@ export function StatusMatrix({ components: initialComponents }: StatusMatrixProp
       const matchesSearch =
         searchQuery === '' ||
         component.component.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        component.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        component.description
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase()) ||
         component.alternativeNames?.some((name) =>
           name.toLowerCase().includes(searchQuery.toLowerCase())
         ) ||
@@ -45,12 +49,7 @@ export function StatusMatrix({ components: initialComponents }: StatusMatrixProp
       const matchesStatus =
         statusFilter === 'all' || component.status === statusFilter;
 
-      return (
-        matchesSearch &&
-        matchesCategory &&
-        matchesLayer &&
-        matchesStatus
-      );
+      return matchesSearch && matchesCategory && matchesLayer && matchesStatus;
     });
   }, [components, searchQuery, categoryFilter, layerFilter, statusFilter]);
 
@@ -205,7 +204,12 @@ export function StatusMatrix({ components: initialComponents }: StatusMatrixProp
       <div className={styles.resultsCount}>
         Showing {filteredComponents.length} of {components.length} components
         {searchQuery && filteredComponents.length === 0 && (
-          <span style={{ marginLeft: '12px', color: 'var(--semantic-color-foreground-warning, #f59e0b)' }}>
+          <span
+            style={{
+              marginLeft: '12px',
+              color: 'var(--semantic-color-foreground-warning, #f59e0b)',
+            }}
+          >
             No results found
           </span>
         )}
@@ -217,7 +221,8 @@ export function StatusMatrix({ components: initialComponents }: StatusMatrixProp
           style={{
             marginTop: '24px',
             padding: '24px',
-            backgroundColor: 'var(--semantic-color-background-info-subtle, #e0f2fe)',
+            backgroundColor:
+              'var(--semantic-color-background-info-subtle, #e0f2fe)',
             border: '1px solid var(--semantic-color-border-info, #bae6fd)',
             borderRadius: '8px',
           }}
@@ -257,7 +262,8 @@ export function StatusMatrix({ components: initialComponents }: StatusMatrixProp
                     <span
                       style={{
                         fontSize: '12px',
-                        color: 'var(--semantic-color-foreground-secondary, #6b7280)',
+                        color:
+                          'var(--semantic-color-foreground-secondary, #6b7280)',
                         fontWeight: 400,
                       }}
                     >
@@ -268,8 +274,14 @@ export function StatusMatrix({ components: initialComponents }: StatusMatrixProp
               ))}
             </ul>
           ) : (
-            <p style={{ fontSize: '14px', color: 'var(--semantic-color-foreground-secondary, #6b7280)' }}>
-              Try searching with different keywords or browse all components above.
+            <p
+              style={{
+                fontSize: '14px',
+                color: 'var(--semantic-color-foreground-secondary, #6b7280)',
+              }}
+            >
+              Try searching with different keywords or browse all components
+              above.
             </p>
           )}
         </div>
@@ -341,10 +353,7 @@ export function StatusMatrix({ components: initialComponents }: StatusMatrixProp
                   </td>
                   <td>
                     {lastUpdated ? (
-                      <time
-                        dateTime={lastUpdated}
-                        className={styles.date}
-                      >
+                      <time dateTime={lastUpdated} className={styles.date}>
                         {new Date(lastUpdated).toLocaleDateString('en-US', {
                           month: 'short',
                           year: 'numeric',
@@ -374,4 +383,3 @@ export function StatusMatrix({ components: initialComponents }: StatusMatrixProp
     </div>
   );
 }
-

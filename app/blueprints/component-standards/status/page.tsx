@@ -5,4 +5,3 @@ export default async function StatusPage() {
   const components = getAllComponents();
   return <StatusMatrix components={components} />;
 }
-
