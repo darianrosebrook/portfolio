@@ -13,15 +13,15 @@
   }
 
   dl {
-    margin: 0;
     display: grid;
     grid-template-columns: auto 1fr;
     gap: var(--core-spacing-size-02) var(--core-spacing-size-04);
+    margin: 0;
   }
 
   dt {
-    font-weight: var(--semantic-typography-font-weight-semibold);
     color: var(--semantic-color-foreground-secondary);
+    font-weight: var(--semantic-typography-font-weight-semibold);
   }
 
   dd {
