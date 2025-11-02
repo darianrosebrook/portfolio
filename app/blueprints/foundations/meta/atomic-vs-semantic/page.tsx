@@ -19,6 +19,8 @@ const pageMetadata: FoundationPageMetadata = {
   slug: 'atomic-vs-semantic',
   canonicalUrl:
     'https://darianrosebrook.com/blueprints/foundations/meta/atomic-vs-semantic',
+  published_at: new Date().toISOString(),
+  image: 'https://darianrosebrook.com/darianrosebrook.jpg',
   keywords:
     'atomic tokens, semantic tokens, token architecture, maintainability, refactoring',
   learning: {

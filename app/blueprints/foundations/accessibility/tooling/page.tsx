@@ -26,7 +26,7 @@ const pageMetadata: FoundationPageMetadata = {
     'accessibility tooling, axe-core, Lighthouse, Figma plugins, testing, validation, automation',
   learning: {
     learning_level: 'foundation',
-    role_relevance: ['design', 'engineering', 'a11y', 'qa'],
+    role_relevance: ['design', 'engineering', 'governance'],
     prerequisites: ['accessibility', 'standards', 'assistive-tech'],
     next_units: ['tokens', 'standards'],
     assessment_required: false,
