@@ -1,9 +1,9 @@
 .trackSelector {
+  margin-bottom: 2rem;
   padding: 1.5rem;
   background: var(--semantic-color-background-secondary);
   border: 1px solid var(--semantic-color-border-subtle);
   border-radius: var(--semantic-radius-medium);
-  margin-bottom: 2rem;
 }
 
 .header {
@@ -11,16 +11,16 @@
 }
 
 .title {
-  margin: 0 0 0.5rem 0;
-  font-size: 1.125rem;
-  font-weight: 600;
+  margin: 0 0 0.5rem;
   color: var(--semantic-color-foreground-primary);
+  font-weight: 600;
+  font-size: 1.125rem;
 }
 
 .description {
   margin: 0;
-  font-size: 0.875rem;
   color: var(--semantic-color-foreground-secondary);
+  font-size: 0.875rem;
 }
 
 .trackOptions {
@@ -31,25 +31,25 @@
 }
 
 .trackOption {
-  padding: 1rem;
-  border: 2px solid var(--semantic-color-border-subtle);
-  border-radius: var(--semantic-radius-small);
-  background: var(--semantic-color-background-primary);
-  cursor: pointer;
-  text-align: left;
-  transition: all 0.2s ease;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  padding: 1rem;
+  background: var(--semantic-color-background-primary);
+  border: 2px solid var(--semantic-color-border-subtle);
+  border-radius: var(--semantic-radius-small);
+  text-align: left;
+  transition: all 0.2s ease;
+  cursor: pointer;
 
   &:hover {
-    border-color: var(--semantic-color-border-default);
     background: var(--semantic-color-background-secondary);
+    border-color: var(--semantic-color-border-default);
   }
 
   &.active {
-    border-color: var(--semantic-color-border-focus);
     background: var(--semantic-color-background-highlight);
+    border-color: var(--semantic-color-border-focus);
   }
 
   &:focus-visible {
@@ -59,14 +59,14 @@
 }
 
 .trackLabel {
-  font-size: 0.875rem;
-  font-weight: 600;
   color: var(--semantic-color-foreground-primary);
+  font-weight: 600;
+  font-size: 0.875rem;
 }
 
 .trackDesc {
-  font-size: 0.75rem;
   color: var(--semantic-color-foreground-secondary);
+  font-size: 0.75rem;
 }
 
 .trackInfo {
@@ -75,8 +75,8 @@
 }
 
 .trackLink {
-  font-size: 0.875rem;
   color: var(--semantic-color-foreground-link);
+  font-size: 0.875rem;
   text-decoration: underline;
   text-underline-offset: 0.25em;
 
@@ -85,9 +85,9 @@
   }
 
   &:focus-visible {
+    border-radius: var(--semantic-radius-small);
     outline: 2px solid var(--semantic-color-border-focus);
     outline-offset: 2px;
-    border-radius: var(--semantic-radius-small);
   }
 }
 

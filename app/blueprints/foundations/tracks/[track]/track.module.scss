@@ -11,8 +11,8 @@
 .backLink {
   display: inline-block;
   margin-bottom: 1.5rem;
-  font-size: 0.875rem;
   color: var(--semantic-color-foreground-link);
+  font-size: 0.875rem;
   text-decoration: none;
 
   &:hover {
@@ -20,9 +20,9 @@
   }
 
   &:focus-visible {
+    border-radius: var(--semantic-radius-small);
     outline: 2px solid var(--semantic-color-border-focus);
     outline-offset: 2px;
-    border-radius: var(--semantic-radius-small);
   }
 }
 
@@ -33,32 +33,32 @@
 }
 
 .trackIndicator {
+  flex-shrink: 0;
   width: 4px;
   height: 100%;
   min-height: 3rem;
   border-radius: var(--semantic-radius-small);
-  flex-shrink: 0;
 }
 
 .trackTitle {
-  margin: 0 0 0.5rem 0;
-  font-size: 2.5rem;
-  font-weight: 700;
+  margin: 0 0 0.5rem;
   color: var(--semantic-color-foreground-primary);
+  font-weight: 700;
+  font-size: 2.5rem;
 }
 
 .trackDescription {
   margin: 0;
-  font-size: 1.125rem;
   color: var(--semantic-color-foreground-secondary);
+  font-size: 1.125rem;
   line-height: 1.6;
 }
 
 .progressSection {
+  margin-bottom: 3rem;
   padding: 2rem;
   background: var(--semantic-color-background-secondary);
   border-radius: var(--semantic-radius-medium);
-  margin-bottom: 3rem;
 }
 
 .progressHeader {
@@ -69,55 +69,55 @@
 
   h2 {
     margin: 0;
-    font-size: 1.25rem;
-    font-weight: 600;
     color: var(--semantic-color-foreground-primary);
+    font-weight: 600;
+    font-size: 1.25rem;
   }
 }
 
 .progressPercentage {
-  font-size: 1.5rem;
-  font-weight: 700;
   color: var(--semantic-color-foreground-primary);
+  font-weight: 700;
+  font-size: 1.5rem;
 }
 
 .progressBar {
+  overflow: hidden;
   height: 8px;
+  margin-bottom: 0.75rem;
   background: var(--semantic-color-background-primary);
   border-radius: var(--semantic-radius-small);
-  overflow: hidden;
-  margin-bottom: 0.75rem;
 }
 
 .progressFill {
   height: 100%;
-  transition: width 0.3s ease;
   border-radius: var(--semantic-radius-small);
+  transition: width 0.3s ease;
 }
 
 .progressText {
   margin: 0;
-  font-size: 0.875rem;
   color: var(--semantic-color-foreground-secondary);
+  font-size: 0.875rem;
 }
 
 .learningPathSection {
   margin-bottom: 3rem;
 
   h2 {
-    margin: 0 0 1.5rem 0;
-    font-size: 1.75rem;
-    font-weight: 600;
+    margin: 0 0 1.5rem;
     color: var(--semantic-color-foreground-primary);
+    font-weight: 600;
+    font-size: 1.75rem;
   }
 }
 
 .outcomesSection {
   h2 {
-    margin: 0 0 1.5rem 0;
-    font-size: 1.75rem;
-    font-weight: 600;
+    margin: 0 0 1.5rem;
     color: var(--semantic-color-foreground-primary);
+    font-weight: 600;
+    font-size: 1.75rem;
   }
 }
 
@@ -133,31 +133,31 @@
   border-radius: var(--semantic-radius-medium);
 
   h3 {
-    margin: 0 0 1rem 0;
-    font-size: 1.125rem;
-    font-weight: 600;
+    margin: 0 0 1rem;
     color: var(--semantic-color-foreground-primary);
+    font-weight: 600;
+    font-size: 1.125rem;
   }
 
   ul {
-    list-style: none;
-    padding: 0;
     margin: 0;
+    padding: 0;
+    list-style: none;
 
     li {
+      position: relative;
       padding: 0.5rem 0;
       padding-left: 1.5rem;
-      position: relative;
-      font-size: 0.9375rem;
       color: var(--semantic-color-foreground-secondary);
+      font-size: 0.9375rem;
       line-height: 1.6;
 
       &::before {
-        content: '✓';
         position: absolute;
         left: 0;
         color: var(--semantic-color-foreground-link);
         font-weight: 600;
+        content: '✓';
       }
     }
   }

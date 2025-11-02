@@ -9,18 +9,18 @@
   text-align: center;
 
   h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin: 0 0 1rem 0;
+    margin: 0 0 1rem;
     color: var(--semantic-color-foreground-primary);
+    font-weight: 700;
+    font-size: 2.5rem;
   }
 }
 
 .description {
-  font-size: 1.125rem;
-  color: var(--semantic-color-foreground-secondary);
   max-width: 800px;
   margin: 0 auto;
+  color: var(--semantic-color-foreground-secondary);
+  font-size: 1.125rem;
   line-height: 1.6;
 }
 
@@ -38,13 +38,13 @@
   background: var(--semantic-color-background-primary);
   border: 2px solid var(--semantic-color-border-subtle);
   border-radius: var(--semantic-radius-medium);
-  text-decoration: none;
   color: inherit;
+  text-decoration: none;
   transition: all 0.2s ease;
 
   &:hover {
     border-color: var(--semantic-color-border-default);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 24px rgb(0 0 0 / 10%);
     transform: translateY(-2px);
   }
 
@@ -65,9 +65,9 @@
 
 .trackTitle {
   margin: 0;
-  font-size: 1.5rem;
-  font-weight: 600;
   color: var(--semantic-color-foreground-primary);
+  font-weight: 600;
+  font-size: 1.5rem;
 }
 
 .trackIndicator {
@@ -77,9 +77,9 @@
 }
 
 .trackDescription {
-  margin: 0 0 1.5rem 0;
-  font-size: 0.9375rem;
+  margin: 0 0 1.5rem;
   color: var(--semantic-color-foreground-secondary);
+  font-size: 0.9375rem;
   line-height: 1.6;
 }
 
@@ -98,31 +98,31 @@
 
 .trackLabel {
   display: block;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--semantic-color-foreground-primary);
   margin-bottom: 0.5rem;
-  text-transform: uppercase;
+  color: var(--semantic-color-foreground-primary);
+  font-weight: 600;
+  font-size: 0.8125rem;
   letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 .trackList {
-  list-style: none;
-  padding: 0;
   margin: 0;
+  padding: 0;
+  list-style: none;
 
   li {
-    font-size: 0.875rem;
-    color: var(--semantic-color-foreground-secondary);
+    position: relative;
     padding: 0.25rem 0;
     padding-left: 1rem;
-    position: relative;
+    color: var(--semantic-color-foreground-secondary);
+    font-size: 0.875rem;
 
     &::before {
-      content: '•';
       position: absolute;
       left: 0;
       color: var(--semantic-color-foreground-secondary);
+      content: '•';
     }
   }
 }
@@ -133,9 +133,9 @@
 }
 
 .trackLink {
-  font-size: 0.875rem;
-  font-weight: 600;
   color: var(--semantic-color-foreground-link);
+  font-weight: 600;
+  font-size: 0.875rem;
   text-decoration: none;
 
   .trackCard:hover & {
@@ -150,10 +150,10 @@
   border-radius: var(--semantic-radius-medium);
 
   h2 {
-    margin: 0 0 2rem 0;
-    font-size: 1.75rem;
-    font-weight: 600;
+    margin: 0 0 2rem;
     color: var(--semantic-color-foreground-primary);
+    font-weight: 600;
+    font-size: 1.75rem;
     text-align: center;
   }
 }
@@ -166,16 +166,16 @@
 
 .step {
   h3 {
-    margin: 0 0 0.5rem 0;
-    font-size: 1.125rem;
-    font-weight: 600;
+    margin: 0 0 0.5rem;
     color: var(--semantic-color-foreground-primary);
+    font-weight: 600;
+    font-size: 1.125rem;
   }
 
   p {
     margin: 0;
-    font-size: 0.9375rem;
     color: var(--semantic-color-foreground-secondary);
+    font-size: 0.9375rem;
     line-height: 1.6;
   }
 }

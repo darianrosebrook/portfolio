@@ -1,26 +1,26 @@
 .feedbackButton {
   position: fixed;
-  bottom: 2rem;
   right: 2rem;
+  bottom: 2rem;
   z-index: 1000;
   display: flex;
-  align-items: center;
   gap: 0.5rem;
+  align-items: center;
   padding: 0.75rem 1rem;
   background: var(--semantic-color-background-primary);
   border: 2px solid var(--semantic-color-border-subtle);
   border-radius: var(--semantic-radius-medium);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: 0.875rem;
-  font-weight: 500;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
   color: var(--semantic-color-foreground-primary);
+  font-weight: 500;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
 
   &:hover {
     background: var(--semantic-color-background-secondary);
     border-color: var(--semantic-color-border-default);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 16px rgb(0 0 0 / 15%);
   }
 
   &:focus-visible {
@@ -41,16 +41,16 @@
 
 .feedbackForm {
   position: fixed;
-  bottom: 2rem;
   right: 2rem;
+  bottom: 2rem;
   z-index: 1001;
   width: 90%;
   max-width: 500px;
+  padding: 1.5rem;
   background: var(--semantic-color-background-primary);
   border: 2px solid var(--semantic-color-border-subtle);
   border-radius: var(--semantic-radius-medium);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  padding: 1.5rem;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 15%);
 }
 
 .feedbackHeader {
@@ -61,22 +61,22 @@
 
   h3 {
     margin: 0;
-    font-size: 1.25rem;
-    font-weight: 600;
     color: var(--semantic-color-foreground-primary);
+    font-weight: 600;
+    font-size: 1.25rem;
   }
 }
 
 .closeButton {
+  padding: 0.25rem 0.5rem;
   background: none;
   border: none;
+  border-radius: var(--semantic-radius-small);
+  color: var(--semantic-color-foreground-secondary);
   font-size: 1.5rem;
   line-height: 1;
-  cursor: pointer;
-  color: var(--semantic-color-foreground-secondary);
-  padding: 0.25rem 0.5rem;
-  border-radius: var(--semantic-radius-small);
   transition: all 0.2s ease;
+  cursor: pointer;
 
   &:hover {
     background: var(--semantic-color-background-secondary);
@@ -101,32 +101,32 @@
   gap: 0.5rem;
 
   label {
-    font-size: 0.875rem;
-    font-weight: 500;
     color: var(--semantic-color-foreground-primary);
+    font-weight: 500;
+    font-size: 0.875rem;
   }
 
   select,
   input[type='text'],
   textarea {
     padding: 0.5rem 0.75rem;
+    background: var(--semantic-color-background-primary);
     border: 1px solid var(--semantic-color-border-subtle);
     border-radius: var(--semantic-radius-small);
+    color: var(--semantic-color-foreground-primary);
     font-size: 0.875rem;
     font-family: inherit;
-    color: var(--semantic-color-foreground-primary);
-    background: var(--semantic-color-background-primary);
 
     &:focus {
+      border-color: var(--semantic-color-border-focus);
       outline: 2px solid var(--semantic-color-border-focus);
       outline-offset: 2px;
-      border-color: var(--semantic-color-border-focus);
     }
   }
 
   textarea {
-    resize: vertical;
     min-height: 100px;
+    resize: vertical;
   }
 }
 
@@ -138,14 +138,14 @@
 .ratingButton {
   width: 2.5rem;
   height: 2.5rem;
+  background: var(--semantic-color-background-primary);
   border: 1px solid var(--semantic-color-border-subtle);
   border-radius: var(--semantic-radius-small);
-  background: var(--semantic-color-background-primary);
   color: var(--semantic-color-foreground-primary);
-  cursor: pointer;
-  font-size: 0.875rem;
   font-weight: 500;
+  font-size: 0.875rem;
   transition: all 0.2s ease;
+  cursor: pointer;
 
   &:hover {
     background: var(--semantic-color-background-secondary);
@@ -175,10 +175,10 @@
 .submitButton {
   padding: 0.5rem 1rem;
   border-radius: var(--semantic-radius-small);
-  font-size: 0.875rem;
   font-weight: 500;
-  cursor: pointer;
+  font-size: 0.875rem;
   transition: all 0.2s ease;
+  cursor: pointer;
 }
 
 .cancelButton {
@@ -218,8 +218,8 @@
 
 .successMessage {
   padding: 1rem;
-  text-align: center;
   color: var(--semantic-color-foreground-primary);
+  text-align: center;
 
   p {
     margin: 0;
@@ -229,8 +229,8 @@
 
 @media (width <= 768px) {
   .feedbackForm {
-    width: calc(100% - 2rem);
     right: 1rem;
     bottom: 1rem;
+    width: calc(100% - 2rem);
   }
 }

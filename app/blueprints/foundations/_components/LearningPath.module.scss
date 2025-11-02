@@ -3,12 +3,12 @@
 }
 
 .pathList {
-  list-style: none;
-  padding: 0;
-  margin: 0;
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .pathItem {
@@ -16,13 +16,13 @@
   padding-left: 3rem;
 
   &::before {
-    content: '';
     position: absolute;
-    left: 1.25rem;
     top: 2.5rem;
     bottom: -1rem;
+    left: 1.25rem;
     width: 2px;
     background: var(--semantic-color-border-subtle);
+    content: '';
   }
 
   &:last-child::before {
@@ -47,19 +47,19 @@
 .stepNumber {
   position: absolute;
   left: 0;
+  z-index: 1;
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
   width: 2.5rem;
   height: 2.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
   background: var(--semantic-color-background-secondary);
   border: 2px solid var(--semantic-color-border-subtle);
+  border-radius: 50%;
   color: var(--semantic-color-foreground-secondary);
   font-weight: 600;
   font-size: 0.875rem;
-  flex-shrink: 0;
-  z-index: 1;
   transition: all 0.2s ease;
 }
 
@@ -72,8 +72,8 @@
 .pathItem.current .stepNumber {
   background: var(--semantic-color-background-highlight);
   border-color: var(--semantic-color-border-focus);
-  color: var(--semantic-color-foreground-primary);
   box-shadow: 0 0 0 4px rgba(var(--semantic-color-border-focus-rgb), 0.1);
+  color: var(--semantic-color-foreground-primary);
 }
 
 .stepContent {
@@ -83,11 +83,11 @@
 
 .stepLink {
   display: block;
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: var(--semantic-color-foreground-primary);
-  text-decoration: none;
   margin-bottom: 0.25rem;
+  color: var(--semantic-color-foreground-primary);
+  font-weight: 600;
+  font-size: 1.125rem;
+  text-decoration: none;
   transition: color 0.2s ease;
 
   &:hover {
@@ -96,9 +96,9 @@
   }
 
   &:focus-visible {
+    border-radius: var(--semantic-radius-small);
     outline: 2px solid var(--semantic-color-border-focus);
     outline-offset: 2px;
-    border-radius: var(--semantic-radius-small);
   }
 }
 
@@ -109,8 +109,8 @@
 
 .stepDescription {
   display: block;
-  font-size: 0.875rem;
   color: var(--semantic-color-foreground-secondary);
+  font-size: 0.875rem;
 }
 
 @media (width <= 768px) {

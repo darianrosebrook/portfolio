@@ -1,8 +1,8 @@
 .anatomyDiagram {
   padding: 24px;
+  background-color: var(--semantic-color-background-secondary, #f9fafb);
   border: 1px solid var(--semantic-color-border-subtle, #e5e7eb);
   border-radius: var(--semantic-border-radius-md, 8px);
-  background-color: var(--semantic-color-background-secondary, #f9fafb);
 }
 
 .diagramContainer {
@@ -16,20 +16,20 @@
 }
 
 .partLabel {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--semantic-color-foreground-secondary, #6b7280);
-  text-transform: capitalize;
   margin-bottom: 4px;
+  color: var(--semantic-color-foreground-secondary, #6b7280);
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: capitalize;
 }
 
 .partBox {
-  border: 2px solid var(--semantic-color-border-default, #d1d5db);
-  border-radius: var(--semantic-border-radius-sm, 4px);
+  position: relative;
+  min-height: 80px;
   padding: 16px;
   background-color: var(--semantic-color-background-primary, #ffffff);
-  min-height: 80px;
-  position: relative;
+  border: 2px solid var(--semantic-color-border-default, #d1d5db);
+  border-radius: var(--semantic-border-radius-sm, 4px);
 }
 
 .childrenContainer {
@@ -44,18 +44,18 @@
   gap: 4px;
 
   .partBox {
-    border-style: dashed;
-    border-color: var(--semantic-color-border-subtle, #e5e7eb);
-    background-color: var(--semantic-color-background-secondary, #f9fafb);
     min-height: 40px;
     padding: 12px;
+    background-color: var(--semantic-color-background-secondary, #f9fafb);
+    border-style: dashed;
+    border-color: var(--semantic-color-border-subtle, #e5e7eb);
   }
 }
 
 .emptyContent {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   min-height: 60px;
   color: var(--semantic-color-foreground-tertiary, #9ca3af);
   font-size: 14px;
@@ -73,53 +73,53 @@
 
 .partItem {
   padding: 8px 12px;
+  background-color: var(--semantic-color-background-primary, #ffffff);
   border: 1px solid var(--semantic-color-border-subtle, #e5e7eb);
   border-radius: var(--semantic-border-radius-sm, 4px);
-  background-color: var(--semantic-color-background-primary, #ffffff);
 }
 
 .partName {
-  font-size: 14px;
-  font-weight: 500;
   color: var(--semantic-color-foreground-primary, #111827);
+  font-weight: 500;
+  font-size: 14px;
   text-transform: capitalize;
 }
 
 .legend {
-  border-top: 1px solid var(--semantic-color-border-subtle, #e5e7eb);
-  padding-top: 16px;
   margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--semantic-color-border-subtle, #e5e7eb);
 }
 
 .legendItem {
   display: flex;
-  align-items: center;
   gap: 8px;
+  align-items: center;
   margin-bottom: 12px;
 }
 
 .legendBox {
   width: 16px;
   height: 16px;
+  background-color: var(--semantic-color-background-primary, #ffffff);
   border: 2px solid var(--semantic-color-border-default, #d1d5db);
   border-radius: 2px;
-  background-color: var(--semantic-color-background-primary, #ffffff);
 }
 
 .legendNote {
   margin-top: 8px;
 
   p {
-    font-size: 13px;
-    color: var(--semantic-color-foreground-secondary, #6b7280);
-    line-height: 1.5;
     margin: 0;
+    color: var(--semantic-color-foreground-secondary, #6b7280);
+    font-size: 13px;
+    line-height: 1.5;
   }
 }
 
 .empty {
   padding: 24px;
-  text-align: center;
   color: var(--semantic-color-foreground-secondary, #6b7280);
   font-size: 14px;
+  text-align: center;
 }

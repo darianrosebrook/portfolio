@@ -56,26 +56,26 @@
 }
 
 .filterGroup label {
-  font-size: 0.875rem;
-  font-weight: 500;
   color: var(--semantic-color-foreground-secondary);
+  font-weight: 500;
+  font-size: 0.875rem;
 }
 
 .select {
   padding: 0.5rem 0.75rem;
+  background: var(--semantic-color-background-primary);
   border: 1px solid var(--semantic-color-border-subtle);
   border-radius: var(--semantic-shape-control-radius-default, 6px);
+  color: var(--semantic-color-foreground-primary);
   font-size: 1rem;
   font-family: inherit;
-  background: var(--semantic-color-background-primary);
-  color: var(--semantic-color-foreground-primary);
   cursor: pointer;
 }
 
 .resultsCount {
   margin-bottom: 1rem;
-  font-size: 0.875rem;
   color: var(--semantic-color-foreground-secondary);
+  font-size: 0.875rem;
 }
 
 .tableContainer {
@@ -96,10 +96,10 @@
 
 .table th {
   padding: 1rem;
-  text-align: left;
-  font-weight: 600;
-  color: var(--semantic-color-foreground-primary);
   border-bottom: 2px solid var(--semantic-color-border-subtle);
+  color: var(--semantic-color-foreground-primary);
+  font-weight: 600;
+  text-align: left;
 }
 
 .table td {
@@ -114,8 +114,8 @@
 
 .componentLink {
   color: var(--semantic-color-foreground-accent);
-  text-decoration: none;
   font-weight: 500;
+  text-decoration: none;
   transition: color 0.2s ease;
 }
 
@@ -126,8 +126,8 @@
 
 .description {
   margin-top: 0.25rem;
-  font-size: 0.75rem;
   color: var(--semantic-color-foreground-secondary);
+  font-size: 0.75rem;
   line-height: 1.4;
 }
 
