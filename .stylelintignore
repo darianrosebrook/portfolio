@@ -2,3 +2,7 @@
 node_modules/**/*
 public/**/*
 scripts/templates/**/*
+# Generated files
+**/*.generated.*
+**/*.tokens.generated.*
+app/designTokens.scss

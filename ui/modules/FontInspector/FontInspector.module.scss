@@ -402,6 +402,11 @@
   transition: background-color 0.2s ease;
   cursor: pointer;
 
+  &:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-ring-offset);
+  }
+
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
@@ -409,10 +414,5 @@
 
   &:hover:not(:disabled) {
     background: var(--semantic-color-background-hover);
-  }
-
-  &:focus-visible {
-    outline: var(--focus-ring);
-    outline-offset: var(--focus-ring-offset);
   }
 }
