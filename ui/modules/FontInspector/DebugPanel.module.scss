@@ -1,0 +1,58 @@
+.debugPanel {
+  padding: var(--core-spacing-size-04);
+  background: var(--semantic-color-background-secondary);
+  border: 1px solid var(--semantic-color-border-primary);
+  border-radius: var(--core-shape-radius-small);
+  font-size: var(--semantic-typography-body-02-fontSize);
+  font-family: monospace;
+
+  h3 {
+    margin: 0 0 var(--core-spacing-size-04) 0;
+    font-size: var(--semantic-typography-body-01-fontSize);
+    font-family: var(--semantic-typography-font-family-body);
+  }
+
+  dl {
+    margin: 0;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--core-spacing-size-02) var(--core-spacing-size-04);
+  }
+
+  dt {
+    font-weight: var(--semantic-typography-font-weight-semibold);
+    color: var(--semantic-color-foreground-secondary);
+  }
+
+  dd {
+    margin: 0;
+    color: var(--semantic-color-foreground-primary);
+
+    &.ok {
+      color: var(--semantic-color-foreground-success);
+    }
+
+    &.error {
+      color: var(--semantic-color-foreground-error);
+    }
+
+    &.warning {
+      color: var(--semantic-color-foreground-warning);
+    }
+  }
+}
+
+.warningBox {
+  margin-top: var(--core-spacing-size-04);
+  padding: var(--core-spacing-size-03);
+  background: var(--semantic-color-background-warning-subtle);
+  border: 1px solid var(--semantic-color-border-warning);
+  border-radius: var(--core-shape-radius-small);
+  color: var(--semantic-color-foreground-warning);
+  font-family: var(--semantic-typography-font-family-body);
+
+  strong {
+    font-weight: var(--semantic-typography-font-weight-semibold);
+  }
+}
+

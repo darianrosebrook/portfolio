@@ -1194,6 +1194,420 @@ Output: "var(--semantic-color-foreground-primary)"
     ),
   },
   {
+    type: 'constraints-tradeoffs',
+    id: 'token-migration-strategies',
+    title: 'Token Migration & Evolution Strategies',
+    order: 8.9,
+    content: (
+      <>
+        <p>
+          Migrating token systems requires careful planning to maintain system
+          integrity:
+        </p>
+
+        <h3>Hardcoded Values → Tokens</h3>
+        <p>Migrate hardcoded values to tokens systematically:</p>
+        <ol>
+          <li>
+            <strong>Audit:</strong> Find all hardcoded values in codebase
+          </li>
+          <li>
+            <strong>Categorize:</strong> Group by type (color, spacing,
+            typography)
+          </li>
+          <li>
+            <strong>Create tokens:</strong> Add missing tokens to core layer
+          </li>
+          <li>
+            <strong>Replace incrementally:</strong> Update components one at a
+            time
+          </li>
+          <li>
+            <strong>Validate:</strong> Ensure visual consistency after each
+            change
+          </li>
+        </ol>
+
+        <h3>Value-Based → Semantic Migration</h3>
+        <p>Migrate from value-based to semantic naming:</p>
+        <pre>
+          <code>{`// Phase 1: Add semantic tokens alongside value-based
+{
+  "color": {
+    "gray": {
+      "900": "#111827"  // Keep existing
+    }
+  },
+  "semantic": {
+    "color": {
+      "foreground": {
+        "primary": "{color.gray.900}"  // Add semantic
+      }
+    }
+  }
+}
+
+// Phase 2: Update components to use semantic
+// Before:
+background: var(--color-gray-900);
+
+// After:
+background: var(--semantic-color-foreground-primary);
+
+// Phase 3: Deprecate value-based tokens
+// Phase 4: Remove value-based tokens after migration`}</code>
+        </pre>
+
+        <h3>Token Refactoring</h3>
+        <p>Refactor tokens without breaking components:</p>
+        <ul>
+          <li>
+            <strong>Alias first:</strong> Create new token that aliases old one
+          </li>
+          <li>
+            <strong>Update references:</strong> Gradually move components to new
+            token
+          </li>
+          <li>
+            <strong>Deprecate:</strong> Mark old token as deprecated
+          </li>
+          <li>
+            <strong>Remove:</strong> Remove old token after migration complete
+          </li>
+        </ul>
+
+        <h3>Token Versioning</h3>
+        <p>Version tokens to enable safe evolution:</p>
+        <pre>
+          <code>{`// Token versions enable parallel evolution
+{
+  "v1": {
+    "semantic": {
+      "color": {
+        "foreground": {
+          "primary": "{core.color.gray.900}"
+        }
+      }
+    }
+  },
+  "v2": {
+    "semantic": {
+      "color": {
+        "foreground": {
+          "primary": "{core.color.gray.950}"  // Updated value
+        }
+      }
+    }
+  }
+}
+
+// Components can opt into new version:
+// Component using v1 tokens (stable)
+.button {
+  color: var(--v1-semantic-color-foreground-primary);
+}
+
+// Component using v2 tokens (new)
+.button-v2 {
+  color: var(--v2-semantic-color-foreground-primary);
+}`}</code>
+        </pre>
+
+        <h3>Build-Time Validation</h3>
+        <p>Use build-time checks to prevent regressions:</p>
+        <ul>
+          <li>
+            <strong>Reference validation:</strong> Ensure all token references
+            resolve
+          </li>
+          <li>
+            <strong>Type checking:</strong> Verify token types match usage
+          </li>
+          <li>
+            <strong>Accessibility:</strong> Validate contrast ratios
+          </li>
+          <li>
+            <strong>Naming conventions:</strong> Enforce naming patterns
+          </li>
+        </ul>
+      </>
+    ),
+  },
+  {
+    type: 'constraints-tradeoffs',
+    id: 'token-validation-strategies',
+    title: 'Token Validation Strategies',
+    order: 8.97,
+    content: (
+      <>
+        <p>Validate tokens to maintain quality and prevent errors:</p>
+
+        <h3>Build-Time Validation</h3>
+        <p>Validate tokens during build process:</p>
+        <pre>
+          <code>{`// Token validation schema
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "tokens": {
+      "type": "object",
+      "patternProperties": {
+        "^[a-z]+\\.[a-z]+(\\.[a-z]+)*$": {
+          "type": "object",
+          "required": ["value", "type"],
+          "properties": {
+            "value": { "type": ["string", "number"] },
+            "type": {
+              "enum": ["color", "dimension", "fontFamily", "fontWeight"]
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Build-time validation script
+import Ajv from 'ajv';
+import tokenSchema from './token-schema.json';
+import tokens from './tokens.json';
+
+const ajv = new Ajv();
+const validate = ajv.compile(tokenSchema);
+
+if (!validate(tokens)) {
+  console.error('Token validation failed:', validate.errors);
+  process.exit(1);
+}`}</code>
+        </pre>
+
+        <h3>Reference Validation</h3>
+        <p>Ensure all token references resolve correctly:</p>
+        <pre>
+          <code>{`// Validate token references
+function validateReferences(tokens) {
+  const tokenPaths = new Set();
+  
+  // Collect all token paths
+  function collectPaths(obj, path = '') {
+    for (const [key, value] of Object.entries(obj)) {
+      const currentPath = path ? \`\${path}.\${key}\` : key;
+      if (value.value && value.type) {
+        tokenPaths.add(currentPath);
+      } else if (typeof value === 'object') {
+        collectPaths(value, currentPath);
+      }
+    }
+  }
+  
+  collectPaths(tokens);
+  
+  // Validate references
+  function validateRefs(obj, path = '') {
+    for (const [key, value] of Object.entries(obj)) {
+      const currentPath = path ? \`\${path}.\${key}\` : key;
+      if (value.value && typeof value.value === 'string' && value.value.startsWith('{')) {
+        const ref = value.value.slice(1, -1); // Remove { }
+        if (!tokenPaths.has(ref)) {
+          throw new Error(\`Token reference \${ref} not found in \${currentPath}\`);
+        }
+      } else if (typeof value === 'object') {
+        validateRefs(value, currentPath);
+      }
+    }
+  }
+  
+  validateRefs(tokens);
+}`}</code>
+        </pre>
+
+        <h3>Contrast Validation</h3>
+        <p>Validate color contrast ratios for accessibility:</p>
+        <pre>
+          <code>{`// Contrast validation
+import { contrast } from 'chroma-js';
+
+function validateContrast(foreground, background) {
+  const ratio = contrast(foreground, background);
+  
+  // WCAG AA requires 4.5:1 for normal text, 3:1 for large text
+  if (ratio < 4.5) {
+    throw new Error(
+      \`Contrast ratio \${ratio}:1 is below WCAG AA minimum (4.5:1)\`
+    );
+  }
+  
+  return ratio;
+}
+
+// Validate semantic color pairs
+const semanticPairs = [
+  ['semantic.color.foreground.primary', 'semantic.color.background.primary'],
+  ['semantic.color.foreground.secondary', 'semantic.color.background.secondary'],
+];
+
+semanticPairs.forEach(([fg, bg]) => {
+  const fgValue = getTokenValue(fg);
+  const bgValue = getTokenValue(bg);
+  validateContrast(fgValue, bgValue);
+});`}</code>
+        </pre>
+
+        <h3>Naming Convention Validation</h3>
+        <p>Enforce consistent naming conventions:</p>
+        <pre>
+          <code>{`// Naming convention validation
+const namingPatterns = {
+  core: /^core\\.(color|spacing|typography)\\.[a-z0-9]+(\\.[a-z0-9]+)*$/,
+  semantic: /^semantic\\.(color|spacing|typography)\\.[a-z]+(\\.[a-z]+)*$/,
+  component: /^[a-z]+\\.[a-z]+(\\.[a-z]+)*$/,
+};
+
+function validateNaming(tokenPath, layer) {
+  const pattern = namingPatterns[layer];
+  if (!pattern) {
+    throw new Error(\`Unknown layer: \${layer}\`);
+  }
+  
+  if (!pattern.test(tokenPath)) {
+    throw new Error(
+      \`Token \${tokenPath} does not match \${layer} naming convention\`
+    );
+  }
+}`}</code>
+        </pre>
+
+        <h3>Type Validation</h3>
+        <p>Validate token types match their values:</p>
+        <pre>
+          <code>{`// Type validation
+function validateTokenType(value, type) {
+  switch (type) {
+    case 'color':
+      // Validate hex, rgb, rgba, hsl, hsla, or named colors
+      if (!/^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(value) &&
+          !/^rgba?\\(/i.test(value) &&
+          !/^hsla?\\(/i.test(value) &&
+          !/^[a-z]+$/i.test(value)) {
+        throw new Error(\`Invalid color value: \${value}\`);
+      }
+      break;
+    case 'dimension':
+      // Validate px, pt, rem, em, etc.
+      if (!/^\\d+(\\.\\d+)?(px|pt|rem|em|%)$/i.test(value)) {
+        throw new Error(\`Invalid dimension value: \${value}\`);
+      }
+      break;
+    case 'fontFamily':
+      // Validate font family string
+      if (typeof value !== 'string') {
+        throw new Error(\`Invalid fontFamily value: \${value}\`);
+      }
+      break;
+    default:
+      throw new Error(\`Unknown token type: \${type}\`);
+  }
+}`}</code>
+        </pre>
+      </>
+    ),
+  },
+  {
+    type: 'applied-example',
+    id: 'token-case-studies',
+    title: 'Real-World Token Case Studies',
+    order: 8.98,
+    content: (
+      <>
+        <p>
+          These case studies demonstrate token system migrations and evolution:
+        </p>
+
+        <h3>Case Study 1: Hardcoded Values → Tokens</h3>
+        <p>
+          <strong>Challenge:</strong> A product team needed to rebrand, but
+          colors were hardcoded in 800+ files.
+        </p>
+        <p>
+          <strong>Process:</strong>
+        </p>
+        <ol>
+          <li>Audited codebase—found 2,000+ hardcoded color values</li>
+          <li>Created core color tokens from existing values</li>
+          <li>Built semantic layer (foreground, background, action colors)</li>
+          <li>Migrated component by component (started with most-used)</li>
+          <li>Added build-time validation to prevent new hardcoded values</li>
+        </ol>
+        <p>
+          <strong>Results:</strong>
+        </p>
+        <ul>
+          <li>Migration completed in 4 months (team of 3)</li>
+          <li>Rebranding took 2 hours (updated semantic tokens)</li>
+          <li>Zero new hardcoded values added (validation caught them)</li>
+          <li>
+            Developer velocity improved (no more "what color should I use?")
+          </li>
+        </ul>
+
+        <h3>Case Study 2: Value-Based → Semantic Migration</h3>
+        <p>
+          <strong>Challenge:</strong> Existing tokens used value-based naming
+          (gray.900, blue.600), making theming impossible.
+        </p>
+        <p>
+          <strong>Process:</strong>
+        </p>
+        <ol>
+          <li>Kept value-based tokens (backward compatibility)</li>
+          <li>Created semantic tokens that referenced value-based</li>
+          <li>Updated components to use semantic tokens incrementally</li>
+          <li>Deprecated value-based tokens after migration</li>
+          <li>Removed value-based tokens after 6-month grace period</li>
+        </ol>
+        <p>
+          <strong>Results:</strong>
+        </p>
+        <ul>
+          <li>Zero breaking changes during migration</li>
+          <li>Dark mode enabled in 1 day (reassigned semantic tokens)</li>
+          <li>Multi-brand support became possible</li>
+          <li>System became more flexible and maintainable</li>
+        </ul>
+
+        <h3>Case Study 3: Token System Health Recovery</h3>
+        <p>
+          <strong>Challenge:</strong> Token system had 50+ duplicate values,
+          broken references, and inconsistent naming.
+        </p>
+        <p>
+          <strong>Process:</strong>
+        </p>
+        <ol>
+          <li>
+            Ran automated audit—found all duplicates and broken references
+          </li>
+          <li>Consolidated duplicates into single tokens</li>
+          <li>
+            Fixed broken references (created missing tokens or updated refs)
+          </li>
+          <li>Standardized naming conventions</li>
+          <li>Added automated validation to prevent regressions</li>
+        </ol>
+        <p>
+          <strong>Results:</strong>
+        </p>
+        <ul>
+          <li>Zero duplicate values (all reference other tokens)</li>
+          <li>Zero broken references (validation prevents them)</li>
+          <li>100% naming convention compliance</li>
+          <li>Token system health improved from 60% to 98%</li>
+        </ul>
+      </>
+    ),
+  },
+  {
     type: 'cross-references',
     id: 'cross-references',
     title: 'Related Concepts',

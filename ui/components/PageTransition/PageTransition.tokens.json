@@ -10,8 +10,8 @@
     },
     "easing": {
       "standard": "{core.motion.easing.standard}",
-      "decelerate": "{core.motion.easing.decelerate}",
-      "accelerate": "{core.motion.easing.accelerate}",
+      "decelerate": "{core.motion.easing.soft.exit}",
+      "accelerate": "{core.motion.easing.quick.enter}",
       "default": "{core.motion.easing.standard}"
     },
     "spacing": {
@@ -29,7 +29,7 @@
     "color": {
       "background": {
         "default": "{semantic.color.background.primary}",
-        "overlay": "{semantic.color.background.overlay}"
+        "overlay": "{semantic.color.overlay.scrim.medium}"
       },
       "foreground": {
         "default": "{semantic.color.foreground.primary}",

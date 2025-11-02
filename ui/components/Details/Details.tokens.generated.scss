@@ -23,8 +23,8 @@
   --details-focus-ring-offset: var(--core-spacing-size-02);
 
   /* === Motion Tokens === */
-  --details-motion-duration-fast: var(--semantic-duration-fast);
-  --details-motion-easing-standard: var(--semantic-easing-standard);
+  --details-motion-duration-fast: var(--core-motion-duration-short);
+  --details-motion-easing-standard: var(--core-motion-easing-standard);
 
   /* === Spacing Tokens === */
   --details-spacing-gap-default: var(--core-spacing-size-02);

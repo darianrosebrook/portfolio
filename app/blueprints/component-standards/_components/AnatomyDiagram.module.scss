@@ -1,0 +1,126 @@
+.anatomyDiagram {
+  padding: 24px;
+  border: 1px solid var(--semantic-color-border-subtle, #e5e7eb);
+  border-radius: var(--semantic-border-radius-md, 8px);
+  background-color: var(--semantic-color-background-secondary, #f9fafb);
+}
+
+.diagramContainer {
+  margin-bottom: 24px;
+}
+
+.rootContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.partLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--semantic-color-foreground-secondary, #6b7280);
+  text-transform: capitalize;
+  margin-bottom: 4px;
+}
+
+.partBox {
+  border: 2px solid var(--semantic-color-border-default, #d1d5db);
+  border-radius: var(--semantic-border-radius-sm, 4px);
+  padding: 16px;
+  background-color: var(--semantic-color-background-primary, #ffffff);
+  min-height: 80px;
+  position: relative;
+}
+
+.childrenContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.childPart {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  .partBox {
+    border-style: dashed;
+    border-color: var(--semantic-color-border-subtle, #e5e7eb);
+    background-color: var(--semantic-color-background-secondary, #f9fafb);
+    min-height: 40px;
+    padding: 12px;
+  }
+}
+
+.emptyContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60px;
+  color: var(--semantic-color-foreground-tertiary, #9ca3af);
+  font-size: 14px;
+}
+
+.placeholder {
+  font-style: italic;
+}
+
+.fallback {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.partItem {
+  padding: 8px 12px;
+  border: 1px solid var(--semantic-color-border-subtle, #e5e7eb);
+  border-radius: var(--semantic-border-radius-sm, 4px);
+  background-color: var(--semantic-color-background-primary, #ffffff);
+}
+
+.partName {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--semantic-color-foreground-primary, #111827);
+  text-transform: capitalize;
+}
+
+.legend {
+  border-top: 1px solid var(--semantic-color-border-subtle, #e5e7eb);
+  padding-top: 16px;
+  margin-top: 16px;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.legendBox {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--semantic-color-border-default, #d1d5db);
+  border-radius: 2px;
+  background-color: var(--semantic-color-background-primary, #ffffff);
+}
+
+.legendNote {
+  margin-top: 8px;
+
+  p {
+    font-size: 13px;
+    color: var(--semantic-color-foreground-secondary, #6b7280);
+    line-height: 1.5;
+    margin: 0;
+  }
+}
+
+.empty {
+  padding: 24px;
+  text-align: center;
+  color: var(--semantic-color-foreground-secondary, #6b7280);
+  font-size: 14px;
+}
+

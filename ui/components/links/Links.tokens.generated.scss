@@ -25,27 +25,27 @@
   --links-spacing-margin-large: var(--core-spacing-size-03);
 
   /* === Typography Tokens === */
-  --links-typography-fontSize-small: var(--semantic-typography-body-05);
-  --links-typography-fontSize-medium: var(--semantic-typography-body-04);
-  --links-typography-fontSize-large: var(--semantic-typography-body-03);
-  --links-typography-fontWeight-default: var(--semantic-typography-font-weight-normal);
+  --links-typography-fontSize-small: var(--semantic-typography-body-03);
+  --links-typography-fontSize-medium: var(--semantic-typography-body-02);
+  --links-typography-fontSize-large: var(--semantic-typography-body-01);
+  --links-typography-fontWeight-default: var(--semantic-typography-font-weight-regular);
   --links-typography-fontWeight-medium: var(--semantic-typography-font-weight-medium);
-  --links-typography-fontWeight-semibold: var(--semantic-typography-font-weight-semibold);
+  --links-typography-fontWeight-semibold: var(--semantic-typography-font-weight-bold);
   --links-typography-lineHeight-default: var(--semantic-typography-line-height-normal);
   --links-typography-lineHeight-tight: var(--semantic-typography-line-height-tight);
-  --links-typography-lineHeight-relaxed: var(--semantic-typography-line-height-relaxed);
+  --links-typography-lineHeight-relaxed: var(--semantic-typography-line-height-loose);
 
   /* === Motion Tokens === */
   --links-motion-duration-fast: var(--core-motion-duration-short);
   --links-motion-duration-normal: var(--core-motion-duration-medium);
   --links-motion-duration-slow: var(--core-motion-duration-long);
   --links-motion-easing-standard: var(--core-motion-easing-standard);
-  --links-motion-easing-decelerate: var(--core-motion-easing-decelerate);
-  --links-motion-easing-accelerate: var(--core-motion-easing-accelerate);
+  --links-motion-easing-decelerate: var(--core-motion-easing-soft-exit);
+  --links-motion-easing-accelerate: var(--core-motion-easing-quick-enter);
 
   /* === Border Tokens === */
   --links-border-width-default: var(--core-shape-border-width-hairline);
-  --links-border-width-thick: var(--core-shape-border-width-thin);
+  --links-border-width-thick: var(--core-shape-border-width-thick);
   --links-border-style-default: solid;
   --links-border-style-dashed: dashed;
   --links-border-style-dotted: dotted;

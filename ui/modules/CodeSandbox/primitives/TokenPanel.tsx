@@ -277,10 +277,7 @@ export function TokenPanel({
                         'var(--semantic-color-background-secondary, #f9f9f9)',
                       borderRadius: '4px',
                       gap: '8px',
-                      cursor: 'pointer',
                     }}
-                    onClick={() => copyToClipboard(token.name, token.value)}
-                    title={`Click to copy: var(${token.name})`}
                   >
                     <div style={{ minWidth: 0 }}>
                       <div
@@ -331,19 +328,47 @@ export function TokenPanel({
                           }}
                         />
                       )}
-                      {/* Copy indicator */}
-                      <div
+                      {/* Copy button */}
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          copyToClipboard(token.name, token.value);
+                        }}
+                        aria-label={`Copy token ${token.name}`}
+                        title={`Copy: var(${token.name})`}
                         style={{
+                          padding: '4px 6px',
+                          border:
+                            '1px solid var(--semantic-color-border-subtle, #ccc)',
+                          borderRadius: '4px',
                           fontSize: '10px',
+                          backgroundColor:
+                            copiedToken === token.name
+                              ? 'var(--semantic-color-background-success-subtle, #d1fae5)'
+                              : 'var(--semantic-color-background-secondary, #f5f5f5)',
                           color:
                             copiedToken === token.name
-                              ? 'var(--semantic-color-status-success, #10b981)'
-                              : 'var(--semantic-color-foreground-tertiary, #999)',
-                          transition: 'color 0.2s ease',
+                              ? 'var(--semantic-color-foreground-success, #10b981)'
+                              : 'var(--semantic-color-foreground-secondary, #666)',
+                          cursor: 'pointer',
+                          transition: 'all 0.2s ease',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '4px',
+                          flexShrink: 0,
+                        }}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            copyToClipboard(token.name, token.value);
+                          }
                         }}
                       >
-                        {copiedToken === token.name ? '✓' : '📋'}
-                      </div>
+                        <span aria-hidden="true">
+                          {copiedToken === token.name ? '✓' : 'Copy'}
+                        </span>
+                      </button>
                     </div>
                   </div>
                 ))}

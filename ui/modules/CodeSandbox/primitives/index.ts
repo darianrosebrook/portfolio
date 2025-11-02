@@ -7,6 +7,7 @@ export * from './ErrorBoundary';
 export * from './FileTabs';
 export * from './LoadingSpinner';
 export * from './PerfPanel';
+export * from './PreviewControls';
 export * from './PropControls';
 export * from './PropsBridge';
 export * from './SectionSync';

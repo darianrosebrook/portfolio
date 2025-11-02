@@ -40,7 +40,12 @@
     "generate:contracts": "node scripts/generateContracts.mjs",
     "components:setup": "npm run generate:contracts && npm run validate:components",
     "components:health": "node scripts/componentHealthCheck.mjs",
-    "setup:hooks": "bash scripts/setup-hooks.sh"
+    "setup:hooks": "bash scripts/setup-hooks.sh",
+    "perf:budgets": "lhci autorun --config=.lighthouserc.js",
+    "perf:budgets:mobile": "lhci autorun --config=lighthouserc.mobile.js",
+    "perf:audit": "lhci autorun --config=.lighthouserc.js --collect.url=http://localhost:3000",
+    "perf:audit:all": "npm run build && npm run start & sleep 10 && npm run perf:budgets && pkill -f 'next start'",
+    "perf:compare": "lhci autorun --config=.lighthouserc.js --collect.numberOfRuns=1"
   },
   "dependencies": {
     "@atproto/api": "^0.16.9",
@@ -101,6 +106,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.35.0",
+    "@lhci/cli": "^0.15.1",
     "@next/bundle-analyzer": "^15.5.3",
     "@playwright/test": "^1.55.1",
     "@stylistic/stylelint-plugin": "^3.1.3",
@@ -127,6 +133,7 @@
     "glob": "^11.0.3",
     "jest-axe": "^10.0.0",
     "jsdom": "^26.1.0",
+    "lighthouse": "^13.0.1",
     "prettier": "^3.6.2",
     "sass": "^1.92.1",
     "stylelint": "^16.24.0",

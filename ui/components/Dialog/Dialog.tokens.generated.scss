@@ -4,7 +4,7 @@
 @mixin vars {
   /* === Color Tokens === */
   --dialog-color-background-default: var(--semantic-color-background-primary);
-  --dialog-color-background-backdrop: var(--semantic-color-overlay-scrim);
+  --dialog-color-background-backdrop: var(--semantic-color-overlay-scrim-medium);
   --dialog-color-foreground-default: var(--semantic-color-foreground-primary);
   --dialog-color-foreground-title: var(--semantic-color-foreground-primary);
   --dialog-color-foreground-secondary: var(--semantic-color-foreground-secondary);

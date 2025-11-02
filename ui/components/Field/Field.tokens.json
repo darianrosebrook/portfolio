@@ -2,17 +2,17 @@
   "prefix": "field",
   "tokens": {
     "gap": {
-      "y": "{semantic.form.density.regular.gapY}",
+      "y": "{core.spacing.size.03}",
       "meta": "{core.spacing.size.03}"
     },
     "label": {
-      "fontSize": "{semantic.form.density.regular.labelFontSize}",
+      "fontSize": "{semantic.typography.body.small.fontSize}",
       "color": "{semantic.color.foreground.secondary}"
     },
     "radius": "{semantic.shape.control.radius.default}",
     "pad": {
-      "x": "{semantic.form.density.regular.padX}",
-      "y": "{semantic.form.density.regular.padY}"
+      "x": "{core.spacing.size.03}",
+      "y": "{core.spacing.size.02}"
     },
     "color": {
       "bg": "{semantic.color.background.elevated}",

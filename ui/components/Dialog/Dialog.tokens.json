@@ -4,7 +4,7 @@
     "color": {
       "background": {
         "default": "{semantic.color.background.primary}",
-        "backdrop": "{semantic.color.overlay.scrim}"
+        "backdrop": "{semantic.color.overlay.scrim.medium}"
       },
       "foreground": {
         "default": "{semantic.color.foreground.primary}",

@@ -5,9 +5,14 @@
 }
 
 .popoverTrigger {
-  all: unset;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
   background: none;
   border: none;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
   cursor: pointer;
 }
 

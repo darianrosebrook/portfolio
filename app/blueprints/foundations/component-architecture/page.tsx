@@ -1319,11 +1319,548 @@ export const EmailInput = () => {
     ),
   },
   {
-    type: 'verification-checklist',
-    id: 'verification-checklist',
-    title: 'Verification Checklist',
-    order: 9,
-    content: null,
+    type: 'constraints-tradeoffs',
+    id: 'architecture-migration-strategies',
+    title: 'Component Architecture Migration & Evolution',
+    order: 8.9,
+    content: (
+      <>
+        <p>
+          Evolving component architecture requires careful refactoring
+          strategies:
+        </p>
+
+        <h3>Layer Refactoring</h3>
+        <p>Move components to correct layers:</p>
+        <ol>
+          <li>
+            <strong>Identify layer violations:</strong> Find components in wrong
+            layers
+          </li>
+          <li>
+            <strong>Extract primitives:</strong> Break down compound components
+            into primitives
+          </li>
+          <li>
+            <strong>Recompose:</strong> Build compounds from primitives
+          </li>
+          <li>
+            <strong>Update consumers:</strong> Migrate usage to new structure
+          </li>
+          <li>
+            <strong>Deprecate old:</strong> Remove old component after migration
+          </li>
+        </ol>
+
+        <h3>Component Refactoring Pattern</h3>
+        <p>Refactor components while maintaining compatibility:</p>
+        <pre>
+          <code>{`// Phase 1: Extract primitives from compound
+// Before: Compound doing too much
+export const TextField = ({ label, error, ...props }) => {
+  return (
+    <div>
+      <label>{label}</label>
+      <input {...props} />
+      {error && <span>{error}</span>}
+    </div>
+  );
+};
+
+// After: Extract primitives
+export const Label = ({ htmlFor, children }) => (
+  <label htmlFor={htmlFor}>{children}</label>
+);
+
+export const Input = ({ ...props }) => (
+  <input {...props} />
+);
+
+export const ErrorText = ({ id, children }) => (
+  <span id={id} role="alert">{children}</span>
+);
+
+// Phase 2: Recompose as compound
+export const TextField = ({ label, error, id, ...props }) => {
+  const inputId = id || useId();
+  const errorId = \`\${inputId}-error\`;
+  
+  return (
+    <div>
+      <Label htmlFor={inputId}>{label}</Label>
+      <Input id={inputId} {...props} />
+      {error && <ErrorText id={errorId}>{error}</ErrorText>}
+    </div>
+  );
+};
+
+// Phase 3: Support both APIs during migration
+// Phase 4: Deprecate old API
+// Phase 5: Remove old API`}</code>
+        </pre>
+
+        <h3>Prop Explosion Recovery</h3>
+        <p>Refactor components with too many props:</p>
+        <ul>
+          <li>
+            <strong>Extract variants:</strong> Create separate components for
+            different variants
+          </li>
+          <li>
+            <strong>Use composition:</strong> Break into smaller composable
+            components
+          </li>
+          <li>
+            <strong>Context API:</strong> Use context for shared state instead
+            of props
+          </li>
+          <li>
+            <strong>Compound pattern:</strong> Use compound components for
+            flexible APIs
+          </li>
+        </ul>
+
+        <h3>Versioning Strategy</h3>
+        <p>Version components to enable safe evolution:</p>
+        <pre>
+          <code>{`// Version components for breaking changes
+// v1: Original API
+export const ButtonV1 = ({ variant, ...props }) => {
+  return <button className={variantStyles[variant]} {...props} />;
+};
+
+// v2: New API (breaking change)
+export const ButtonV2 = ({ appearance, ...props }) => {
+  return <button className={appearanceStyles[appearance]} {...props} />;
+};
+
+// Main export supports both during transition
+export const Button = ({ variant, appearance, ...props }) => {
+  if (appearance) {
+    return <ButtonV2 appearance={appearance} {...props} />;
+  }
+  console.warn('Button variant prop deprecated. Use appearance instead.');
+  return <ButtonV1 variant={variant} {...props} />;
+};
+
+// After migration: Remove v1 support`}</code>
+        </pre>
+      </>
+    ),
+  },
+  {
+    type: 'constraints-tradeoffs',
+    id: 'cross-platform-components',
+    title: 'Cross-Platform Component Considerations',
+    order: 8.95,
+    content: (
+      <>
+        <p>
+          Component architecture must adapt to different platforms while
+          maintaining consistency:
+        </p>
+
+        <h3>Platform-Native Components</h3>
+        <p>Use platform-native primitives when appropriate:</p>
+        <ul>
+          <li>
+            <strong>Web:</strong> HTML elements (button, input, select)
+          </li>
+          <li>
+            <strong>iOS:</strong> UIKit/SwiftUI components (UIButton,
+            UITextField)
+          </li>
+          <li>
+            <strong>Android:</strong> Material Components (Button, TextInput)
+          </li>
+          <li>
+            <strong>React Native:</strong> Cross-platform primitives (View,
+            Text, TouchableOpacity)
+          </li>
+        </ul>
+
+        <h3>Shared Component Contracts</h3>
+        <p>Define consistent APIs across platforms:</p>
+        <pre>
+          <code>{`// Shared component contract (TypeScript interface)
+interface ButtonProps {
+  label: string;
+  variant: 'primary' | 'secondary' | 'ghost';
+  size: 'small' | 'medium' | 'large';
+  disabled?: boolean;
+  loading?: boolean;
+  onPress: () => void;
+}
+
+// Web implementation
+export const Button: React.FC<ButtonProps> = ({
+  label,
+  variant,
+  size,
+  disabled,
+  loading,
+  onPress,
+}) => {
+  return (
+    <button
+      className={\`button button--\${variant} button--\${size}\`}
+      disabled={disabled || loading}
+      onClick={onPress}
+    >
+      {loading ? 'Loading...' : label}
+    </button>
+  );
+};
+
+// iOS implementation (Swift)
+struct Button: View {
+  let label: String
+  let variant: Variant
+  let size: Size
+  let disabled: Bool
+  let loading: Bool
+  let onPress: () -> Void
+  
+  var body: some View {
+    SwiftUI.Button(action: onPress) {
+      Text(loading ? "Loading..." : label)
+    }
+    .buttonStyle(ButtonStyle(variant: variant, size: size))
+    .disabled(disabled || loading)
+  }
+}
+
+// Android implementation (Kotlin)
+class Button(
+  context: Context,
+  attrs: AttributeSet
+) : MaterialButton(context, attrs) {
+  fun setVariant(variant: Variant) { /* ... */ }
+  fun setSize(size: Size) { /* ... */ }
+  fun setLoading(loading: Boolean) { /* ... */ }
+}`}</code>
+        </pre>
+
+        <h3>Layer Consistency Across Platforms</h3>
+        <p>Maintain consistent layer architecture:</p>
+        <ul>
+          <li>
+            <strong>Primitives:</strong> Platform-native elements with
+            consistent APIs
+          </li>
+          <li>
+            <strong>Compounds:</strong> Platform-specific implementations with
+            shared patterns
+          </li>
+          <li>
+            <strong>Composers:</strong> Orchestration logic can be shared
+            (business logic)
+          </li>
+        </ul>
+
+        <h3>Platform-Specific Adaptations</h3>
+        <p>Adapt components for platform conventions:</p>
+        <ul>
+          <li>
+            <strong>Touch targets:</strong> iOS (44pt), Android (48dp), Web
+            (44px)
+          </li>
+          <li>
+            <strong>Navigation:</strong> iOS (back button), Android (system
+            back), Web (browser back)
+          </li>
+          <li>
+            <strong>Typographic scales:</strong> Platform-specific font
+            rendering requires adjustments
+          </li>
+          <li>
+            <strong>Animation:</strong> Platform-specific animation APIs
+          </li>
+        </ul>
+
+        <h3>Cross-Platform Testing</h3>
+        <p>Test components across platforms:</p>
+        <ul>
+          <li>
+            <strong>Visual regression:</strong> Compare screenshots across
+            platforms
+          </li>
+          <li>
+            <strong>Interaction testing:</strong> Verify interactions work
+            correctly on each platform
+          </li>
+          <li>
+            <strong>Accessibility:</strong> Test with platform-specific
+            assistive technologies
+          </li>
+        </ul>
+      </>
+    ),
+  },
+  {
+    type: 'constraints-tradeoffs',
+    id: 'component-testing-strategies',
+    title: 'Component Testing Strategies',
+    order: 8.97,
+    content: (
+      <>
+        <p>
+          Comprehensive testing ensures component quality and prevents
+          regressions:
+        </p>
+
+        <h3>Unit Testing</h3>
+        <p>Test component behavior in isolation:</p>
+        <pre>
+          <code>{`// Component unit test
+import { render, screen, fireEvent } from '@testing-library/react';
+import { Button } from './Button';
+
+describe('Button', () => {
+  it('renders with label', () => {
+    render(<Button label="Click me" onPress={jest.fn()} />);
+    expect(screen.getByText('Click me')).toBeInTheDocument();
+  });
+  
+  it('calls onPress when clicked', () => {
+    const onPress = jest.fn();
+    render(<Button label="Click me" onPress={onPress} />);
+    fireEvent.click(screen.getByText('Click me'));
+    expect(onPress).toHaveBeenCalledTimes(1);
+  });
+  
+  it('disables button when disabled prop is true', () => {
+    render(<Button label="Click me" disabled onPress={jest.fn()} />);
+    expect(screen.getByText('Click me')).toBeDisabled();
+  });
+  
+  it('shows loading state', () => {
+    render(<Button label="Click me" loading onPress={jest.fn()} />);
+    expect(screen.getByText('Loading...')).toBeInTheDocument();
+    expect(screen.getByText('Click me')).toBeDisabled();
+  });
+});`}</code>
+        </pre>
+
+        <h3>Accessibility Testing</h3>
+        <p>Test component accessibility:</p>
+        <pre>
+          <code>{`// Accessibility testing
+import { axe, toHaveNoViolations } from 'jest-axe';
+import { render } from '@testing-library/react';
+import { Button } from './Button';
+
+expect.extend(toHaveNoViolations);
+
+describe('Button accessibility', () => {
+  it('should have no accessibility violations', async () => {
+    const { container } = render(
+      <Button label="Click me" onPress={jest.fn()} />
+    );
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
+  });
+  
+  it('should be keyboard accessible', () => {
+    render(<Button label="Click me" onPress={jest.fn()} />);
+    const button = screen.getByRole('button');
+    button.focus();
+    expect(button).toHaveFocus();
+    fireEvent.keyDown(button, { key: 'Enter' });
+    expect(onPress).toHaveBeenCalled();
+  });
+  
+  it('should have accessible label', () => {
+    render(<Button label="Click me" onPress={jest.fn()} />);
+    expect(screen.getByRole('button', { name: 'Click me' })).toBeInTheDocument();
+  });
+});`}</code>
+        </pre>
+
+        <h3>Visual Regression Testing</h3>
+        <p>Test visual consistency across changes:</p>
+        <pre>
+          <code>{`// Visual regression testing with Chromatic/Storybook
+import { within, userEvent } from '@storybook/testing-library';
+import { expect } from '@storybook/jest';
+
+export default {
+  title: 'Components/Button',
+  component: Button,
+};
+
+export const Primary = {
+  args: {
+    label: 'Click me',
+    variant: 'primary',
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const button = canvas.getByRole('button');
+    await userEvent.click(button);
+    await expect(button).toHaveClass('button--primary');
+  },
+};
+
+// Chromatic captures screenshots automatically
+// Compares against baseline images`}</code>
+        </pre>
+
+        <h3>Integration Testing</h3>
+        <p>Test component interactions with other components:</p>
+        <pre>
+          <code>{`// Integration test: Form with Button
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { Form } from './Form';
+import { Button } from './Button';
+
+describe('Form integration', () => {
+  it('submits form when button is clicked', async () => {
+    const onSubmit = jest.fn();
+    render(
+      <Form onSubmit={onSubmit}>
+        <input name="email" />
+        <Button label="Submit" type="submit" />
+      </Form>
+    );
+    
+    await userEvent.type(screen.getByRole('textbox', { name: /email/i }), 'test@example.com');
+    await userEvent.click(screen.getByRole('button', { name: 'Submit' }));
+    
+    await waitFor(() => {
+      expect(onSubmit).toHaveBeenCalledWith({
+        email: 'test@example.com',
+      });
+    });
+  });
+});`}</code>
+        </pre>
+
+        <h3>Layer-Specific Testing</h3>
+        <p>Test each layer appropriately:</p>
+        <ul>
+          <li>
+            <strong>Primitives:</strong> Test props, rendering, basic
+            interactions
+          </li>
+          <li>
+            <strong>Compounds:</strong> Test composition, relationships between
+            primitives
+          </li>
+          <li>
+            <strong>Composers:</strong> Test state management, context
+            propagation, complex interactions
+          </li>
+        </ul>
+
+        <h3>Test Coverage Goals</h3>
+        <p>Maintain appropriate test coverage:</p>
+        <ul>
+          <li>
+            <strong>Primitives:</strong> 100% coverage—simple, critical building
+            blocks
+          </li>
+          <li>
+            <strong>Compounds:</strong> 90%+ coverage—important conventions
+          </li>
+          <li>
+            <strong>Composers:</strong> 80%+ coverage—complex, prioritize
+            critical paths
+          </li>
+        </ul>
+      </>
+    ),
+  },
+  {
+    type: 'applied-example',
+    id: 'architecture-case-studies',
+    title: 'Real-World Architecture Case Studies',
+    order: 8.98,
+    content: (
+      <>
+        <p>These case studies demonstrate component architecture evolution:</p>
+
+        <h3>Case Study 1: Layer Refactoring</h3>
+        <p>
+          <strong>Challenge:</strong> A "compound" component (TextField) was
+          doing too much—handling validation, styling, layout, and business
+          logic.
+        </p>
+        <p>
+          <strong>Process:</strong>
+        </p>
+        <ol>
+          <li>Identified layer violation (compound doing composer work)</li>
+          <li>Extracted primitives (Input, Label, ErrorText)</li>
+          <li>Recomposed as proper compound (TextField using primitives)</li>
+          <li>Moved business logic to composer layer (FormField)</li>
+          <li>Migrated existing usage incrementally</li>
+        </ol>
+        <p>
+          <strong>Results:</strong>
+        </p>
+        <ul>
+          <li>TextField API simplified (5 props → 3 props)</li>
+          <li>Primitives reusable in other contexts</li>
+          <li>Business logic isolated and testable</li>
+          <li>System became more flexible and maintainable</li>
+        </ul>
+
+        <h3>Case Study 2: Prop Explosion Recovery</h3>
+        <p>
+          <strong>Challenge:</strong> A Button component had 22 props, making it
+          difficult to use and maintain.
+        </p>
+        <p>
+          <strong>Process:</strong>
+        </p>
+        <ol>
+          <li>Analyzed all button usage patterns</li>
+          <li>Identified that props were solving different problems</li>
+          <li>
+            Extracted variants to separate components (IconButton,
+            LoadingButton)
+          </li>
+          <li>Used compound pattern for complex cases (ButtonGroup)</li>
+          <li>Reduced core Button to 5 essential props</li>
+        </ol>
+        <p>
+          <strong>Results:</strong>
+        </p>
+        <ul>
+          <li>Button props: 22 → 5</li>
+          <li>Component usage became clearer</li>
+          <li>Fewer bugs (simpler API = fewer edge cases)</li>
+          <li>Teams adopted new API quickly</li>
+        </ul>
+
+        <h3>Case Study 3: Component Duplication Elimination</h3>
+        <p>
+          <strong>Challenge:</strong> 5 teams had created their own versions of
+          the same component (Card), leading to inconsistency.
+        </p>
+        <p>
+          <strong>Process:</strong>
+        </p>
+        <ol>
+          <li>Audited all duplicate components</li>
+          <li>Identified common patterns and differences</li>
+          <li>Built flexible compound component (Card with slots)</li>
+          <li>Migrated teams to shared component</li>
+          <li>Documented usage patterns</li>
+        </ol>
+        <p>
+          <strong>Results:</strong>
+        </p>
+        <ul>
+          <li>Component duplication: 5 versions → 1 shared component</li>
+          <li>Visual consistency improved across product</li>
+          <li>Maintenance burden reduced (1 component vs. 5)</li>
+          <li>Teams contributed improvements to shared component</li>
+        </ul>
+      </>
+    ),
   },
   {
     type: 'cross-references',

@@ -16,7 +16,7 @@
   /* === Border Tokens === */
   --sheet-border-width: var(--core-shape-border-width-hairline);
   --sheet-border-radius: var(--core-shape-radius-medium);
-  --sheet-border-radiusClose: var(--core-shape-radius-small);
+  --sheet-border-radiusClose: var(--core-shape-radius-02);
 
   /* === Size Tokens === */
   --sheet-size-width: 400px;
@@ -33,12 +33,12 @@
 
   /* === Text Tokens === */
   --sheet-text-size: var(--semantic-typography-body-02);
-  --sheet-text-lineHeight: var(--semantic-typography-line-height-default);
+  --sheet-text-lineHeight: var(--semantic-typography-line-height-normal);
   --sheet-text-sizeTitle: var(--semantic-typography-heading-06);
   --sheet-text-lineHeightTitle: var(--semantic-typography-line-height-tight);
-  --sheet-text-weightTitle: var(--semantic-typography-font-weight-semibold);
+  --sheet-text-weightTitle: var(--semantic-typography-font-weight-bold);
   --sheet-text-sizeDescription: var(--semantic-typography-body-03);
-  --sheet-text-lineHeightDescription: var(--semantic-typography-line-height-relaxed);
+  --sheet-text-lineHeightDescription: var(--semantic-typography-line-height-loose);
 
   /* === Motion Tokens === */
   --sheet-motion-duration: var(--core-motion-duration-medium);

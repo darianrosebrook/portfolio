@@ -36,19 +36,19 @@
     },
     "typography": {
       "fontSize": {
-        "small": "{semantic.typography.body.05}",
-        "medium": "{semantic.typography.body.04}",
-        "large": "{semantic.typography.body.03}"
+        "small": "{semantic.typography.body.03}",
+        "medium": "{semantic.typography.body.02}",
+        "large": "{semantic.typography.body.01}"
       },
       "fontWeight": {
-        "default": "{semantic.typography.fontWeight.normal}",
+        "default": "{semantic.typography.fontWeight.regular}",
         "medium": "{semantic.typography.fontWeight.medium}",
-        "semibold": "{semantic.typography.fontWeight.semibold}"
+        "semibold": "{semantic.typography.fontWeight.bold}"
       },
       "lineHeight": {
         "default": "{semantic.typography.lineHeight.normal}",
         "tight": "{semantic.typography.lineHeight.tight}",
-        "relaxed": "{semantic.typography.lineHeight.relaxed}"
+        "relaxed": "{semantic.typography.lineHeight.loose}"
       }
     },
     "motion": {
@@ -59,14 +59,14 @@
       },
       "easing": {
         "standard": "{core.motion.easing.standard}",
-        "decelerate": "{core.motion.easing.decelerate}",
-        "accelerate": "{core.motion.easing.accelerate}"
+        "decelerate": "{core.motion.easing.soft.exit}",
+        "accelerate": "{core.motion.easing.quick.enter}"
       }
     },
     "border": {
       "width": {
         "default": "{core.shape.border.width.hairline}",
-        "thick": "{core.shape.border.width.thin}"
+        "thick": "{core.shape.border.width.thick}"
       },
       "style": {
         "default": "solid",

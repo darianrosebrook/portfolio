@@ -1082,11 +1082,230 @@ const Button = ({ variant, size, onClick, children }) => {
     ),
   },
   {
-    type: 'verification-checklist',
-    id: 'verification-checklist',
-    title: 'Verification Checklist',
-    order: 9,
-    content: null,
+    type: 'constraints-tradeoffs',
+    id: 'migration-strategies',
+    title: 'Migration & Evolution Strategies',
+    order: 8.9,
+    content: (
+      <>
+        <p>
+          Design systems evolve. Here's how to migrate and evolve while
+          maintaining system integrity:
+        </p>
+
+        <h3>Versioning Strategy</h3>
+        <p>Use semantic versioning to communicate change impact:</p>
+        <ul>
+          <li>
+            <strong>Major (X.0.0):</strong> Breaking changes—requires migration
+          </li>
+          <li>
+            <strong>Minor (0.X.0):</strong> New features—backward compatible
+          </li>
+          <li>
+            <strong>Patch (0.0.X):</strong> Bug fixes—backward compatible
+          </li>
+        </ul>
+
+        <h3>Deprecation Process</h3>
+        <p>Follow a structured deprecation process:</p>
+        <ol>
+          <li>
+            <strong>Announce:</strong> Document deprecation with clear timeline
+            (e.g., 6 months)
+          </li>
+          <li>
+            <strong>Warn:</strong> Add deprecation warnings in code and docs
+          </li>
+          <li>
+            <strong>Support:</strong> Maintain deprecated APIs during transition
+          </li>
+          <li>
+            <strong>Migrate:</strong> Provide migration guides and tools
+          </li>
+          <li>
+            <strong>Remove:</strong> Remove deprecated APIs after grace period
+          </li>
+        </ol>
+
+        <h3>Breaking Change Migration</h3>
+        <p>When breaking changes are necessary:</p>
+        <pre>
+          <code>{`// Step 1: Create new API alongside old
+// Old API (deprecated):
+export const Button = ({ variant, ...props }) => {
+  console.warn('Button variant prop deprecated. Use appearance instead.');
+  return <button className={variantStyles[variant]} {...props} />;
+};
+
+// New API:
+export const Button = ({ appearance, variant, ...props }) => {
+  // Support both during transition
+  const finalAppearance = appearance || variant;
+  return <button className={appearanceStyles[finalAppearance]} {...props} />;
+};
+
+// Step 2: Provide codemod for automated migration
+// codemod: Button variant → appearance
+// transforms: variant="primary" → appearance="primary"
+
+// Step 3: Update documentation with migration guide
+// Step 4: Monitor adoption before removing old API`}</code>
+        </pre>
+
+        <h3>Gradual Migration</h3>
+        <p>Enable gradual migration patterns:</p>
+        <ul>
+          <li>
+            <strong>Feature flags:</strong> Use flags to enable new behavior
+            incrementally
+          </li>
+          <li>
+            <strong>Side-by-side:</strong> Support old and new APIs during
+            transition
+          </li>
+          <li>
+            <strong>Automated tools:</strong> Provide codemods and migration
+            scripts
+          </li>
+          <li>
+            <strong>Documentation:</strong> Clear migration guides with examples
+          </li>
+        </ul>
+
+        <h3>Rollback Strategies</h3>
+        <p>Always have a rollback plan:</p>
+        <ul>
+          <li>
+            <strong>Version pinning:</strong> Allow teams to pin to specific
+            versions
+          </li>
+          <li>
+            <strong>Feature flags:</strong> Quickly disable new features
+          </li>
+          <li>
+            <strong>Gradual rollout:</strong> Release to subset of teams first
+          </li>
+          <li>
+            <strong>Monitoring:</strong> Track adoption and issues before full
+            rollout
+          </li>
+        </ul>
+      </>
+    ),
+  },
+  {
+    type: 'applied-example',
+    id: 'case-studies',
+    title: 'Real-World Case Studies',
+    order: 8.98,
+    content: (
+      <>
+        <p>
+          These case studies demonstrate how design system philosophy plays out
+          in practice:
+        </p>
+
+        <h3>Case Study 1: Component API Evolution</h3>
+        <p>
+          <strong>Challenge:</strong> A Button component had 15+ props, making
+          it difficult to use and maintain.
+        </p>
+        <p>
+          <strong>Systems Thinking Approach:</strong>
+        </p>
+        <ul>
+          <li>Analyzed all button usage patterns across the codebase</li>
+          <li>
+            Identified that props were solving different problems (styling,
+            behavior, content)
+          </li>
+          <li>Recognized that prop explosion indicated wrong layer</li>
+        </ul>
+        <p>
+          <strong>Solution:</strong>
+        </p>
+        <ul>
+          <li>Extracted styling to variants (primary, secondary, ghost)</li>
+          <li>
+            Moved complex behavior to compound components (ButtonGroup,
+            ButtonWithIcon)
+          </li>
+          <li>Reduced props from 15+ to 5 core props</li>
+          <li>Improved developer experience and component maintainability</li>
+        </ul>
+        <p>
+          <strong>Impact:</strong> Component usage became clearer, fewer bugs,
+          easier to maintain. Teams adopted the new API quickly because it was
+          simpler.
+        </p>
+
+        <h3>Case Study 2: Token Migration</h3>
+        <p>
+          <strong>Challenge:</strong> Codebase had 500+ hardcoded color values,
+          making rebranding impossible.
+        </p>
+        <p>
+          <strong>Systems Thinking Approach:</strong>
+        </p>
+        <ul>
+          <li>
+            Recognized that hardcoded values violated single source of truth
+            principle
+          </li>
+          <li>Understood that migration would touch many files—risky change</li>
+          <li>Planned incremental migration with validation at each step</li>
+        </ul>
+        <p>
+          <strong>Solution:</strong>
+        </p>
+        <ul>
+          <li>Created semantic token layer first (before migration)</li>
+          <li>
+            Migrated one component type at a time (buttons, then inputs, etc.)
+          </li>
+          <li>Added build-time validation to prevent new hardcoded values</li>
+          <li>Documented migration pattern for other teams</li>
+        </ul>
+        <p>
+          <strong>Impact:</strong> After 3 months, 95% of values migrated.
+          Rebranding became possible—changed entire color scheme in 1 day by
+          updating semantic tokens.
+        </p>
+
+        <h3>Case Study 3: Accessibility Recovery</h3>
+        <p>
+          <strong>Challenge:</strong> Accessibility audit found 200+ violations
+          across components.
+        </p>
+        <p>
+          <strong>Systems Thinking Approach:</strong>
+        </p>
+        <ul>
+          <li>Recognized accessibility as infrastructure, not feature</li>
+          <li>
+            Identified root causes (missing semantic HTML, no focus management)
+          </li>
+          <li>Fixed root causes first, then individual violations</li>
+        </ul>
+        <p>
+          <strong>Solution:</strong>
+        </p>
+        <ul>
+          <li>
+            Updated primitive components to include accessibility by default
+          </li>
+          <li>Added accessibility testing to CI/CD pipeline</li>
+          <li>Fixed compound components that used inaccessible primitives</li>
+          <li>Trained team on accessibility patterns</li>
+        </ul>
+        <p>
+          <strong>Impact:</strong> Violations reduced from 200+ to 0 in 6
+          months. New components automatically accessible. Team culture shifted
+          to accessibility-first thinking.
+        </p>
+      </>
+    ),
   },
   {
     type: 'cross-references',

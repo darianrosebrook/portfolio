@@ -8,6 +8,8 @@ export type A11yPanelProps = {
   runOnMount?: boolean;
   /** Optional: limit rule tags, e.g. ['wcag2a','wcag2aa'] */
   runTags?: string[];
+  /** Callback when scan results change */
+  onResultsChange?: (violations: AxeViolation[]) => void;
 };
 
 type AxeViolation = {
@@ -43,6 +45,7 @@ export function A11yPanel({
   targetWindow,
   runOnMount = false,
   runTags,
+  onResultsChange,
 }: A11yPanelProps) {
   const [isRunning, setIsRunning] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
@@ -84,6 +87,11 @@ export function A11yPanel({
       }));
       setViolations(v);
 
+      // Notify parent component of results
+      if (onResultsChange) {
+        onResultsChange(v);
+      }
+
       // Announce results to screen readers
       const violationCount = v.length;
       if (violationCount === 0) {
@@ -109,7 +117,7 @@ export function A11yPanel({
     } finally {
       setIsRunning(false);
     }
-  }, [resolveTargetWindow, runTags]);
+  }, [resolveTargetWindow, runTags, onResultsChange]);
 
   React.useEffect(() => {
     if (runOnMount) runAxe();

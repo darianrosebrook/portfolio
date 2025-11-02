@@ -10,8 +10,8 @@
 
   /* === Easing Tokens === */
   --pageTransition-easing-standard: var(--core-motion-easing-standard);
-  --pageTransition-easing-decelerate: var(--core-motion-easing-decelerate);
-  --pageTransition-easing-accelerate: var(--core-motion-easing-accelerate);
+  --pageTransition-easing-decelerate: var(--core-motion-easing-soft-exit);
+  --pageTransition-easing-accelerate: var(--core-motion-easing-quick-enter);
   --pageTransition-easing-default: var(--core-motion-easing-standard);
 
   /* === Spacing Tokens === */
@@ -24,7 +24,7 @@
 
   /* === Color Tokens === */
   --pageTransition-color-background-default: var(--semantic-color-background-primary);
-  --pageTransition-color-background-overlay: var(--semantic-color-background-overlay);
+  --pageTransition-color-background-overlay: var(--semantic-color-overlay-scrim-medium);
   --pageTransition-color-foreground-default: var(--semantic-color-foreground-primary);
   --pageTransition-color-foreground-secondary: var(--semantic-color-foreground-secondary);
 

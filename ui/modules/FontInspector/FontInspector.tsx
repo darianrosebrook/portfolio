@@ -1,21 +1,26 @@
 'use client';
 
+import { DrawColors } from '@/utils/geometry/drawing';
+import type { Metrics } from '@/utils/typeAnatomy';
+import { detectFeatures } from '@/utils/typeAnatomy/detector';
+import { LetterFeatureHints } from '@/utils/typeAnatomy/registry';
+import type { Font, Glyph } from 'fontkit';
+import * as fontkit from 'fontkit';
 import React, {
   createContext,
+  useCallback,
   useContext,
   useEffect,
-  useState,
-  useCallback,
   useMemo,
+  useRef,
+  useState,
 } from 'react';
-import * as fontkit from 'fontkit';
-import type { Font, Glyph } from 'fontkit';
-import styles from './FontInspector.module.scss';
-import { DrawColors } from '@/utils/geometry/drawing';
-import { InspectorControls } from './InspectorControls';
 import { AnatomyControls } from './AnatomyControls';
+import { DebugPanel } from './DebugPanel';
+import styles from './FontInspector.module.scss';
+import { InspectorControls } from './InspectorControls';
+import { SymbolCanvasSVG as SymbolCanvas } from './SymbolCanvasSVG';
 import { SymbolGrid } from './SymbolGrid';
-import { SymbolCanvas } from './SymbolCanvas';
 import { TypographyArticleContent } from './TypographyArticleContent';
 
 // ---------------------------
@@ -60,6 +65,8 @@ interface InspectorContextType {
   anatomyFeatures: AnatomyFeature[];
   selectedAnatomy: Map<string, AnatomyFeature>;
   toggleAnatomy: (feature: AnatomyFeature) => void;
+  autoDetectFeatures: () => void;
+  detectedFeatures: Set<string>;
   colors: DrawColors;
 }
 
@@ -97,6 +104,11 @@ export const InspectorProvider: React.FC<{
   });
   const [glyphUnicode, setGlyphUnicode] = useState<number>(0x0041);
   const [showDetails, setShowDetails] = useState<boolean>(false);
+
+  // Debug logging for showDetails state
+  useEffect(() => {
+    console.log('[InspectorProvider] showDetails state changed:', showDetails);
+  }, [showDetails]);
   const [colorScheme, setColorScheme] = useState<'light' | 'dark'>('light');
   const [colors, setColors] = useState<DrawColors>({
     metricStroke: '',
@@ -119,6 +131,7 @@ export const InspectorProvider: React.FC<{
     lsbFill: '',
     rsbStroke: '',
     rsbFill: '',
+    highlightBackground: '',
   });
   const [selectedAnatomy, setSelectedAnatomy] = useState<
     Map<string, AnatomyFeature>
@@ -227,107 +240,203 @@ export const InspectorProvider: React.FC<{
       },
       {
         feature: 'Apex',
-        label: 'Apex (coming soon)',
+        label: 'Apex',
         labelPosition: 'top',
-        disabled: true,
+        disabled: false,
         selected: false,
-        readonly: true,
+        readonly: false,
       },
       {
         feature: 'Tail',
-        label: 'Tail (coming soon)',
+        label: 'Tail',
         labelPosition: 'bottom',
-        disabled: true,
+        disabled: false,
         selected: false,
-        readonly: true,
+        readonly: false,
       },
       {
         feature: 'Arm',
-        label: 'Arm (coming soon)',
+        label: 'Arm',
         labelPosition: 'top',
-        disabled: true,
+        disabled: false,
         selected: false,
-        readonly: true,
+        readonly: false,
       },
       {
         feature: 'Tittle',
-        label: 'Tittle (coming soon)',
+        label: 'Tittle',
         labelPosition: 'top',
-        disabled: true,
+        disabled: false,
         selected: false,
-        readonly: true,
+        readonly: false,
       },
       {
         feature: 'Bowl',
-        label: 'Bowl (coming soon)',
+        label: 'Bowl',
         labelPosition: 'bottom',
-        disabled: true,
+        disabled: false,
         selected: false,
-        readonly: true,
+        readonly: false,
       },
       {
         feature: 'Counter',
-        label: 'Counter (coming soon)',
+        label: 'Counter',
         labelPosition: 'bottom',
-        disabled: true,
+        disabled: false,
         selected: false,
-        readonly: true,
+        readonly: false,
+      },
+      {
+        feature: 'Crotch',
+        label: 'Crotch',
+        labelPosition: 'bottom',
+        disabled: false,
+        selected: false,
+        readonly: false,
       },
       {
         feature: 'Crossbar',
-        label: 'Crossbar (coming soon)',
+        label: 'Crossbar',
         labelPosition: 'bottom',
-        disabled: true,
+        disabled: false,
         selected: false,
-        readonly: true,
+        readonly: false,
       },
       {
         feature: 'Serif',
-        label: 'Serif (coming soon)',
+        label: 'Serif',
         labelPosition: 'bottom',
-        disabled: true,
+        disabled: false,
         selected: false,
-        readonly: true,
+        readonly: false,
       },
       {
         feature: 'Eye',
-        label: 'Eye (coming soon)',
+        label: 'Eye',
         labelPosition: 'bottom',
-        disabled: true,
+        disabled: false,
         selected: false,
-        readonly: true,
+        readonly: false,
       },
       {
         feature: 'Spine',
-        label: 'Spine (coming soon)',
+        label: 'Spine',
         labelPosition: 'bottom',
-        disabled: true,
+        disabled: false,
         selected: false,
-        readonly: true,
+        readonly: false,
       },
       {
         feature: 'Stem',
-        label: 'Stem (coming soon)',
+        label: 'Stem',
         labelPosition: 'bottom',
-        disabled: true,
+        disabled: false,
         selected: false,
-        readonly: true,
+        readonly: false,
       },
       {
         feature: 'Aperture',
-        label: 'Aperture (coming soon)',
+        label: 'Aperture',
         labelPosition: 'bottom',
-        disabled: true,
+        disabled: false,
         selected: false,
-        readonly: true,
+        readonly: false,
       },
       {
         feature: 'Ear',
-        label: 'Ear (coming soon)',
+        label: 'Ear',
         labelPosition: 'bottom',
-        disabled: true,
+        disabled: false,
         selected: false,
-        readonly: true,
+        readonly: false,
+      },
+      {
+        feature: 'Shoulder',
+        label: 'Shoulder',
+        labelPosition: 'top',
+        disabled: false,
+        selected: false,
+        readonly: false,
+      },
+      {
+        feature: 'Leg',
+        label: 'Leg',
+        labelPosition: 'bottom',
+        disabled: false,
+        selected: false,
+        readonly: false,
+      },
+      {
+        feature: 'Neck',
+        label: 'Neck',
+        labelPosition: 'bottom',
+        disabled: false,
+        selected: false,
+        readonly: false,
+      },
+      {
+        feature: 'Link',
+        label: 'Link',
+        labelPosition: 'bottom',
+        disabled: false,
+        selected: false,
+        readonly: false,
+      },
+      {
+        feature: 'Arc',
+        label: 'Arc',
+        labelPosition: 'bottom',
+        disabled: false,
+        selected: false,
+        readonly: false,
+      },
+      {
+        feature: 'Beak',
+        label: 'Beak',
+        labelPosition: 'top',
+        disabled: false,
+        selected: false,
+        readonly: false,
+      },
+      {
+        feature: 'Bracket',
+        label: 'Bracket',
+        labelPosition: 'bottom',
+        disabled: false,
+        selected: false,
+        readonly: false,
+      },
+      {
+        feature: 'Foot',
+        label: 'Foot',
+        labelPosition: 'bottom',
+        disabled: false,
+        selected: false,
+        readonly: false,
+      },
+      {
+        feature: 'Hook',
+        label: 'Hook',
+        labelPosition: 'bottom',
+        disabled: false,
+        selected: false,
+        readonly: false,
+      },
+      {
+        feature: 'Terminal',
+        label: 'Terminal',
+        labelPosition: 'bottom',
+        disabled: false,
+        selected: false,
+        readonly: false,
+      },
+      {
+        feature: 'Cross stroke',
+        label: 'Cross stroke',
+        labelPosition: 'top',
+        disabled: false,
+        selected: false,
+        readonly: false,
       },
     ],
     []
@@ -335,8 +444,12 @@ export const InspectorProvider: React.FC<{
   const toggleAnatomy = useCallback((feature: AnatomyFeature) => {
     setSelectedAnatomy((s) => {
       const next = new Map(s);
-      if (next.has(feature.feature)) next.delete(feature.feature);
-      else next.set(feature.feature, feature);
+      if (next.has(feature.feature)) {
+        next.delete(feature.feature);
+      } else {
+        // Ensure selected is true when adding to the map
+        next.set(feature.feature, { ...feature, selected: true });
+      }
       return next;
     });
   }, []);
@@ -405,6 +518,9 @@ export const InspectorProvider: React.FC<{
         cursorFill: getPropertyValue('--semantic-color-foreground-primary'),
         labelFill: getPropertyValue('--semantic-color-foreground-primary'),
         labelStroke: getPropertyValue('--semantic-color-background-primary'),
+        highlightBackground: getPropertyValue(
+          '--semantic-color-background-accent'
+        ),
       });
     };
 
@@ -458,6 +574,240 @@ export const InspectorProvider: React.FC<{
     return glyph;
   }, [fontInstance, glyphUnicode]);
 
+  // Track last detected glyph to avoid re-detecting on every render
+  const lastDetectedGlyphRef = useRef<{
+    unicode: number;
+    fontIndex: number;
+  } | null>(null);
+
+  // Track detected features for current glyph
+  const [detectedFeatures, setDetectedFeatures] = useState<Set<string>>(
+    new Set()
+  );
+
+  // Map registry feature names to our feature names
+  const featureNameMap: Record<string, string> = useMemo(
+    () => ({
+      apex: 'Apex',
+      aperture: 'Aperture',
+      arc: 'Arc',
+      arm: 'Arm',
+      bar: 'Bar',
+      beak: 'Beak',
+      bowl: 'Bowl',
+      bracket: 'Bracket',
+      counter: 'Counter',
+      crotch: 'Crotch',
+      crossbar: 'Crossbar',
+      crossstroke: 'Cross stroke',
+      ear: 'Ear',
+      eye: 'Eye',
+      finial: 'Finial',
+      foot: 'Foot',
+      hook: 'Hook',
+      leg: 'Leg',
+      link: 'Link',
+      loop: 'Loop',
+      neck: 'Neck',
+      serif: 'Serif',
+      shoulder: 'Shoulder',
+      spine: 'Spine',
+      spur: 'Spur',
+      stem: 'Stem',
+      tail: 'Tail',
+      terminal: 'Terminal',
+      tittle: 'Tittle',
+      vertex: 'Vertex',
+    }),
+    []
+  );
+  // Auto-detection function - detects features and auto-selects expected ones
+  const autoDetectFeatures = useCallback(() => {
+    // Only run if font and glyph are loaded
+    if (!fontInstance || !glyph) return;
+
+    // Skip if we've already detected for this glyph
+    const currentGlyph = { unicode: glyphUnicode, fontIndex: currentFontIndex };
+    if (
+      lastDetectedGlyphRef.current &&
+      lastDetectedGlyphRef.current.unicode === currentGlyph.unicode &&
+      lastDetectedGlyphRef.current.fontIndex === currentGlyph.fontIndex
+    ) {
+      return;
+    }
+
+    // Mark this glyph as detected
+    lastDetectedGlyphRef.current = currentGlyph;
+
+    // Detect all features first (synchronous)
+    const fontMetrics: Metrics = {
+      baseline: 0,
+      xHeight: fontInstance.xHeight || 0,
+      capHeight: fontInstance.capHeight || 0,
+      ascent: fontInstance.ascent || 0,
+      descent: fontInstance.descent || 0,
+    };
+
+    const allAnatomyFeatures = [
+      'Apex',
+      'Arc',
+      'Aperture',
+      'Arm',
+      'Bar',
+      'Beak',
+      'Bowl',
+      'Bracket',
+      'Counter',
+      'Cross stroke',
+      'Crossbar',
+      'Crotch',
+      'Ear',
+      'Eye',
+      'Finial',
+      'Foot',
+      'Hook',
+      'Leg',
+      'Link',
+      'Loop',
+      'Neck',
+      'Serif',
+      'Shoulder',
+      'Spine',
+      'Spur',
+      'Stem',
+      'Tail',
+      'Terminal',
+      'Tittle',
+      'Vertex',
+    ];
+
+    const detectionResults = detectFeatures(
+      allAnatomyFeatures,
+      glyph,
+      fontMetrics,
+      fontInstance
+    );
+
+    const detected = new Set<string>();
+    for (const [featureName, result] of detectionResults.entries()) {
+      if (result.found) {
+        detected.add(featureName);
+      }
+    }
+
+    console.log('[autoDetectFeatures] Detection complete', {
+      glyphChar: String.fromCodePoint(glyphUnicode),
+      detectedCount: detected.size,
+      detectedFeatures: Array.from(detected),
+      allResults: Array.from(detectionResults.entries()).map(
+        ([name, result]) => ({
+          name,
+          found: result.found,
+        })
+      ),
+    });
+
+    setDetectedFeatures(detected);
+
+    // Convert Unicode code point to character string
+    const char = String.fromCodePoint(glyphUnicode);
+
+    // Look up likely features from registry
+    const likelyFeatures = LetterFeatureHints[char] || [];
+
+    if (likelyFeatures.length === 0) {
+      return;
+    }
+
+    // Auto-select features that are:
+    // 1. Expected for this character (from registry)
+    // 2. Actually detected
+    // 3. Available and not readonly
+    setSelectedAnatomy((prev) => {
+      const next = new Map(prev);
+      let changed = false;
+
+      for (const registryFeature of likelyFeatures) {
+        const featureName = featureNameMap[registryFeature];
+        if (!featureName) {
+          console.warn(
+            `[FontInspector] Unknown feature name: ${registryFeature}`
+          );
+          continue;
+        }
+
+        // Only auto-select if actually detected
+        if (!detected.has(featureName)) {
+          continue;
+        }
+
+        const existingFeature = next.get(featureName);
+        if (
+          existingFeature &&
+          !existingFeature.readonly &&
+          !existingFeature.selected
+        ) {
+          next.set(featureName, { ...existingFeature, selected: true });
+          changed = true;
+        }
+      }
+
+      return changed ? next : prev;
+    });
+  }, [fontInstance, glyph, glyphUnicode, currentFontIndex, featureNameMap]);
+
+  // Auto-select likely features when font and glyph are ready
+  useEffect(() => {
+    autoDetectFeatures();
+  }, [autoDetectFeatures]);
+
+  // Filter anatomy features to show:
+  // 1. Metric features (always shown)
+  // 2. All detected features (or all features if detection hasn't run yet)
+  const filteredAnatomyFeatures = useMemo(() => {
+    const metricFeatures = new Set([
+      'Baseline',
+      'Cap height',
+      'X-height',
+      'Ascender',
+      'Descender',
+    ]);
+
+    console.log('[filteredAnatomyFeatures] Filtering features', {
+      glyphUnicode,
+      detectedFeatures: Array.from(detectedFeatures),
+      detectedCount: detectedFeatures.size,
+      hasFont: !!fontInstance,
+      hasGlyph: !!glyph,
+    });
+
+    // Show all features that are detected, or all features if detection hasn't run yet
+    const filtered = anatomyFeatures.filter((feature) => {
+      // Always show metrics
+      if (metricFeatures.has(feature.feature)) {
+        return true;
+      }
+
+      // If detection hasn't run yet, show all features (user can manually toggle)
+      if (detectedFeatures.size === 0) {
+        return true;
+      }
+
+      // Show features that are detected (regardless of whether they're "expected")
+      // This allows users to explore features even if they're not in the expected list
+      const isDetected = detectedFeatures.has(feature.feature);
+      return isDetected;
+    });
+
+    console.log('[filteredAnatomyFeatures] Filtered result', {
+      originalCount: anatomyFeatures.length,
+      filteredCount: filtered.length,
+      filteredFeatures: filtered.map((f) => f.feature),
+    });
+
+    return filtered;
+  }, [anatomyFeatures, glyphUnicode, detectedFeatures, fontInstance, glyph]);
+
   const contextValue = useMemo(
     (): InspectorContextType => ({
       fonts,
@@ -472,9 +822,11 @@ export const InspectorProvider: React.FC<{
       setAxisValues,
       setGlyphUnicode,
       setCurrentFont,
-      anatomyFeatures,
+      anatomyFeatures: filteredAnatomyFeatures,
       selectedAnatomy,
       toggleAnatomy,
+      autoDetectFeatures,
+      detectedFeatures,
       colorScheme,
       colors,
     }),
@@ -490,9 +842,11 @@ export const InspectorProvider: React.FC<{
       setAxisValues,
       colorScheme,
       colors,
-      anatomyFeatures,
+      filteredAnatomyFeatures,
       selectedAnatomy,
       toggleAnatomy,
+      autoDetectFeatures,
+      detectedFeatures,
       setCurrentFont,
     ]
   );
@@ -535,13 +889,10 @@ export const FontInspector: React.FC = () => (
         <details className={styles.accordion} open>
           <summary>Anatomy Details</summary>
           <AnatomyControls />
-          <p className="caption" style={{ margin: '1rem' }}>
-            Credit where credit is due, this is heavily inspired by Rasmus and
-            their Inter font inspector at{' '}
-            <a href="https://rsms.me/inter/#glyphs">
-              https://rsms.me/inter/#glyphs
-            </a>
-          </p>
+        </details>
+        <details className={styles.accordion}>
+          <summary>Debug Information</summary>
+          <DebugPanel />
         </details>
       </div>
       <div className={styles.symbolContainer}>

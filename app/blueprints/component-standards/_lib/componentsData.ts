@@ -14,6 +14,26 @@ export type ComponentItem = {
   status: 'Planned' | 'Built' | 'DocOnly';
   paths?: { component?: string; docs?: string };
   tags?: string[];
+  contentDesign?: {
+    voice?: string;
+    tone?: string;
+    examples?: { good: string; bad: string }[];
+    patterns?: string[];
+  };
+  changelog?: {
+    version: string;
+    date: string;
+    changes: {
+      type:
+        | 'added'
+        | 'changed'
+        | 'deprecated'
+        | 'removed'
+        | 'fixed'
+        | 'security';
+      description: string;
+    }[];
+  }[];
 };
 
 type ComponentsJson = {

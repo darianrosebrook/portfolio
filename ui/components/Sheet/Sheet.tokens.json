@@ -15,7 +15,7 @@
     "border": {
       "width": "{core.shape.border.width.hairline}",
       "radius": "{core.shape.radius.medium}",
-      "radiusClose": "{core.shape.radius.small}"
+      "radiusClose": "{core.shape.radius.02}"
     },
     "size": {
       "width": "400px",
@@ -32,12 +32,12 @@
     },
     "text": {
       "size": "{semantic.typography.body.02}",
-      "lineHeight": "{semantic.typography.lineHeight.default}",
+      "lineHeight": "{semantic.typography.lineHeight.normal}",
       "sizeTitle": "{semantic.typography.heading.06}",
       "lineHeightTitle": "{semantic.typography.lineHeight.tight}",
-      "weightTitle": "{semantic.typography.fontWeight.semibold}",
+      "weightTitle": "{semantic.typography.fontWeight.bold}",
       "sizeDescription": "{semantic.typography.body.03}",
-      "lineHeightDescription": "{semantic.typography.lineHeight.relaxed}"
+      "lineHeightDescription": "{semantic.typography.lineHeight.loose}"
     },
     "motion": {
       "duration": "{core.motion.duration.medium}",

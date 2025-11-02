@@ -14,7 +14,7 @@
   /* === Border Tokens === */
   --command-border-width: var(--core-shape-border-width-hairline);
   --command-border-radius: var(--core-shape-radius-medium);
-  --command-border-radiusItem: var(--core-shape-radius-small);
+  --command-border-radiusItem: var(--core-shape-radius-02);
 
   /* === Size Tokens === */
   --command-size-maxWidth: 640px;
@@ -24,7 +24,7 @@
 
   /* === Spacing Tokens === */
   --command-spacing-dialogPadding: var(--core-spacing-size-04);
-  --command-spacing-dialogMarginTop: var(--core-spacing-size-12);
+  --command-spacing-dialogMarginTop: var(--core-spacing-size-10);
   --command-spacing-inputPadding: var(--core-spacing-size-04);
   --command-spacing-inputPaddingX: var(--core-spacing-size-03);
   --command-spacing-inputPaddingLeft: var(--core-spacing-size-10);
@@ -42,8 +42,8 @@
 
   /* === Text Tokens === */
   --command-text-size: var(--semantic-typography-body-02);
-  --command-text-lineHeight: var(--semantic-typography-line-height-default);
-  --command-text-weight: var(--semantic-typography-font-weight-normal);
+  --command-text-lineHeight: var(--semantic-typography-line-height-normal);
+  --command-text-weight: var(--semantic-typography-font-weight-regular);
   --command-text-weightMedium: var(--semantic-typography-font-weight-medium);
   --command-text-sizeSmall: var(--semantic-typography-body-04);
   --command-text-lineHeightTight: var(--semantic-typography-line-height-tight);

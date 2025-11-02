@@ -3,14 +3,14 @@ import type { Article, CaseStudy } from '@/types';
 import Button from '@/ui/components/Button';
 import Checkbox from '@/ui/components/Checkbox';
 import ToggleSwitch from '@/ui/components/ToggleSwitch';
-import { extractMetadata } from '@/utils/metadata';
-import type { JSONContent } from '@tiptap/react';
-import { generateArticleHTML } from '@/utils/tiptap/htmlGeneration';
+import { checkConflict } from '@/utils/editor/conflict';
 import {
   getEffectiveContent,
   hasWorkingDraft,
 } from '@/utils/editor/workingDraft';
-import { checkConflict } from '@/utils/editor/conflict';
+import { extractMetadata } from '@/utils/metadata';
+import { generateArticleHTML } from '@/utils/tiptap/htmlGeneration';
+import type { JSONContent } from '@tiptap/react';
 import dynamic from 'next/dynamic';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
@@ -307,8 +307,8 @@ export default function ContentEditor({
           <div
             style={{
               padding: '0.5rem',
-              background: 'var(--semantic-color-background-error)',
-              border: '1px solid var(--semantic-color-border-error)',
+              background: 'var(--semantic-color-background-danger-subtle)',
+              border: '1px solid var(--semantic-color-border-danger)',
               borderRadius: 'var(--core-shape-radius-small)',
             }}
           >

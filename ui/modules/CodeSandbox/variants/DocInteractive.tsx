@@ -18,6 +18,7 @@ export type DocInteractiveProps = {
     device?: 'desktop' | 'tablet' | 'phone' | 'none';
     reducedMotion?: 'system' | 'on' | 'off';
     theme?: 'system' | 'light' | 'dark' | string;
+    dir?: 'ltr' | 'rtl';
   };
   editor?: {
     engine?: 'monaco' | 'codemirror' | 'sandpack';
@@ -162,6 +163,32 @@ export function DocInteractive({
 
   const themeClassName =
     preview?.theme && preview.theme !== 'system' ? preview.theme : undefined;
+
+  // Apply RTL direction to preview iframe
+  React.useEffect(() => {
+    if (preview?.dir && preview.runtime === 'iframe') {
+      const iframe = document.querySelector<HTMLIFrameElement>(
+        '.sp-preview-iframe'
+      );
+      if (iframe?.contentDocument?.documentElement) {
+        iframe.contentDocument.documentElement.setAttribute('dir', preview.dir);
+      }
+      // Also watch for iframe creation (Sandpack may recreate it)
+      const observer = new MutationObserver(() => {
+        const iframeEl = document.querySelector<HTMLIFrameElement>(
+          '.sp-preview-iframe'
+        );
+        if (iframeEl?.contentDocument?.documentElement) {
+          iframeEl.contentDocument.documentElement.setAttribute(
+            'dir',
+            preview.dir || 'ltr'
+          );
+        }
+      });
+      observer.observe(document.body, { childList: true, subtree: true });
+      return () => observer.disconnect();
+    }
+  }, [preview?.dir, preview?.runtime]);
 
   // Create reset keys from project and sections identifiers - use stable references
   const projectKey = React.useMemo(

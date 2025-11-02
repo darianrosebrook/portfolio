@@ -9,9 +9,9 @@
     },
     "color": {
       "info": "{semantic.color.foreground.primary}",
-      "success": "{semantic.color.status.success.fg}",
-      "warning": "{semantic.color.status.warning.fg}",
-      "error": "{semantic.color.status.danger.fg}"
+      "success": "{semantic.color.foreground.success}",
+      "warning": "{semantic.color.foreground.warning}",
+      "error": "{semantic.color.foreground.danger}"
     },
     "accent": {
       "info": "{semantic.color.status.info}",

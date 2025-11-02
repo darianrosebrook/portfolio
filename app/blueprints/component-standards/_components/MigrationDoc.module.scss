@@ -1,0 +1,112 @@
+.migrationDoc {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.header {
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--semantic-color-border-subtle);
+}
+
+.header h1 {
+  margin: 0;
+  color: var(--semantic-color-foreground-primary);
+  font-weight: 700;
+  font-size: 2.5rem;
+}
+
+.subtitle {
+  margin: 0.75rem 0 0;
+  color: var(--semantic-color-foreground-secondary);
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+.section {
+  margin-bottom: 3rem;
+
+  h2 {
+    margin: 0 0 1rem;
+    color: var(--semantic-color-foreground-primary);
+    font-weight: 600;
+    font-size: 1.875rem;
+  }
+
+  h3 {
+    margin: 1.5rem 0 0.75rem;
+    color: var(--semantic-color-foreground-primary);
+    font-weight: 600;
+    font-size: 1.25rem;
+  }
+
+  p {
+    margin: 0 0 1rem;
+    color: var(--semantic-color-foreground-secondary);
+    line-height: 1.6;
+  }
+}
+
+.changesSummary {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background: var(--semantic-color-background-secondary);
+  border-radius: var(--semantic-border-radius-md, 8px);
+}
+
+.changesList {
+  margin: 0.75rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.changeItem {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.5rem 0;
+  color: var(--semantic-color-foreground-primary);
+}
+
+.changeBadge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.notes {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background: var(--semantic-color-background-info-subtle);
+  border-radius: var(--semantic-border-radius-md, 8px);
+
+  ul {
+    margin: 0.75rem 0 0;
+    padding-left: 1.5rem;
+
+    li {
+      margin: 0.5rem 0;
+      color: var(--semantic-color-foreground-primary);
+      line-height: 1.6;
+    }
+  }
+}
+
+.steps {
+  margin: 1rem 0 0;
+  padding-left: 1.5rem;
+
+  li {
+    margin: 1rem 0;
+    color: var(--semantic-color-foreground-primary);
+    line-height: 1.6;
+
+    strong {
+      color: var(--semantic-color-foreground-accent);
+    }
+  }
+}

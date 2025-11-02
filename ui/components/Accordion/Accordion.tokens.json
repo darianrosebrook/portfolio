@@ -13,7 +13,7 @@
     "border": {
       "width": "{core.shape.border.width.hairline}",
       "color": "{semantic.color.border.light}",
-      "radius": "{core.shape.radius.small}"
+      "radius": "{core.shape.radius.02}"
     },
     "spacing": {
       "gap": "{core.spacing.size.04}",
@@ -23,9 +23,9 @@
     "text": {
       "weight": "{semantic.typography.fontWeight.medium}",
       "size": "{semantic.typography.body.02}",
-      "lineHeight": "{semantic.typography.lineHeight.default}",
+      "lineHeight": "{semantic.typography.lineHeight.normal}",
       "sizeContent": "{semantic.typography.body.03}",
-      "lineHeightContent": "{semantic.typography.lineHeight.relaxed}"
+      "lineHeightContent": "{semantic.typography.lineHeight.loose}"
     },
     "icon": {
       "size": "{core.spacing.size.04}",

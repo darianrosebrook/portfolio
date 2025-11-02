@@ -1151,11 +1151,216 @@ gap: var(--core-spacing-size-08); // 32px - Page sections
     ),
   },
   {
-    type: 'cross-references',
-    id: 'cross-references',
-    title: 'Related Concepts',
-    order: 10,
-    content: null,
+    type: 'constraints-tradeoffs',
+    id: 'spacing-migration-strategies',
+    title: 'Spacing Migration & Evolution Strategies',
+    order: 8.9,
+    content: (
+      <>
+        <p>
+          Migrating spacing requires systematic approaches to maintain visual
+          consistency:
+        </p>
+
+        <h3>Hardcoded Values → Tokens</h3>
+        <p>Migrate hardcoded spacing to tokens:</p>
+        <ol>
+          <li>
+            <strong>Audit:</strong> Find all hardcoded spacing values (margin,
+            padding, gap)
+          </li>
+          <li>
+            <strong>Map to scale:</strong> Identify which spacing scale values
+            match
+          </li>
+          <li>
+            <strong>Create semantic tokens:</strong> Define semantic spacing
+            tokens (container, section, stack, etc.)
+          </li>
+          <li>
+            <strong>Replace incrementally:</strong> Update components one at a
+            time
+          </li>
+          <li>
+            <strong>Verify visual:</strong> Ensure no visual regressions
+          </li>
+        </ol>
+
+        <h3>Magic Numbers → Semantic Tokens</h3>
+        <p>Replace magic numbers with semantic tokens:</p>
+        <pre>
+          <code>{`// Before: Magic numbers everywhere
+.card {
+  padding: 16px;
+  margin-bottom: 24px;
+}
+
+.header {
+  padding: 12px;
+  margin-bottom: 20px;
+}
+
+// After: Semantic tokens
+.card {
+  padding: var(--semantic-spacing-padding-container);
+  margin-bottom: var(--semantic-spacing-margin-section);
+}
+
+.header {
+  padding: var(--semantic-spacing-padding-medium);
+  margin-bottom: var(--semantic-spacing-gap-stack);
+}
+
+// Benefits:
+// - Self-documenting code
+// - Consistent spacing
+// - Easy to update globally
+// - Clear spacing relationships`}</code>
+        </pre>
+
+        <h3>Responsive Spacing Migration</h3>
+        <p>Migrate to responsive spacing tokens:</p>
+        <pre>
+          <code>{`// Before: Fixed spacing
+.card {
+  padding: 16px;
+  margin-bottom: 24px;
+}
+
+// After: Responsive spacing tokens
+.card {
+  padding: var(--semantic-spacing-padding-container);
+  margin-bottom: var(--semantic-spacing-margin-section);
+  
+  @media (min-width: 768px) {
+    padding: var(--semantic-spacing-padding-container-large);
+    margin-bottom: var(--semantic-spacing-margin-section-large);
+  }
+}
+
+// Or use CSS custom properties with responsive values:
+:root {
+  --semantic-spacing-padding-container: 16px;
+  --semantic-spacing-margin-section: 24px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --semantic-spacing-padding-container: 24px;
+    --semantic-spacing-margin-section: 32px;
+  }
+}
+
+// Components automatically adapt to responsive values`}</code>
+        </pre>
+
+        <h3>Spacing Scale Evolution</h3>
+        <p>Evolve spacing scale without breaking components:</p>
+        <ul>
+          <li>
+            <strong>Add new values:</strong> Extend scale with new tokens
+          </li>
+          <li>
+            <strong>Deprecate old:</strong> Mark old tokens as deprecated
+          </li>
+          <li>
+            <strong>Migrate gradually:</strong> Update components incrementally
+          </li>
+          <li>
+            <strong>Validate:</strong> Ensure visual consistency after changes
+          </li>
+        </ul>
+      </>
+    ),
+  },
+  {
+    type: 'applied-example',
+    id: 'spacing-case-studies',
+    title: 'Real-World Spacing Case Studies',
+    order: 8.98,
+    content: (
+      <>
+        <p>These case studies demonstrate spacing system improvements:</p>
+
+        <h3>Case Study 1: Magic Numbers Elimination</h3>
+        <p>
+          <strong>Challenge:</strong> Codebase had 300+ hardcoded spacing
+          values, making visual consistency impossible.
+        </p>
+        <p>
+          <strong>Process:</strong>
+        </p>
+        <ol>
+          <li>Audited all spacing values (margin, padding, gap)</li>
+          <li>Identified spacing scale (8px grid)</li>
+          <li>
+            Created semantic spacing tokens (container, section, stack, tight)
+          </li>
+          <li>Migrated components incrementally</li>
+          <li>Added linting rule to prevent new magic numbers</li>
+        </ol>
+        <p>
+          <strong>Results:</strong>
+        </p>
+        <ul>
+          <li>Magic numbers: 300+ → 0</li>
+          <li>Visual consistency improved dramatically</li>
+          <li>Spacing changes became system-wide (update token, update all)</li>
+          <li>New components automatically use consistent spacing</li>
+        </ul>
+
+        <h3>Case Study 2: Responsive Spacing Migration</h3>
+        <p>
+          <strong>Challenge:</strong> Spacing was fixed, causing poor UX on
+          mobile devices.
+        </p>
+        <p>
+          <strong>Process:</strong>
+        </p>
+        <ol>
+          <li>Defined responsive spacing tokens (mobile, tablet, desktop)</li>
+          <li>Updated spacing system to support responsive values</li>
+          <li>Migrated components to use responsive tokens</li>
+          <li>Tested across breakpoints</li>
+        </ol>
+        <p>
+          <strong>Results:</strong>
+        </p>
+        <ul>
+          <li>Mobile UX improved (appropriate spacing for screen size)</li>
+          <li>Responsive spacing: 0% → 90% of components</li>
+          <li>User complaints about mobile spacing: 20/month → 0/month</li>
+          <li>Design system became truly responsive</li>
+        </ul>
+
+        <h3>Case Study 3: Spacing Scale Standardization</h3>
+        <p>
+          <strong>Challenge:</strong> Different teams used different spacing
+          values (8px, 10px, 12px, 16px, 20px, 24px), breaking visual rhythm.
+        </p>
+        <p>
+          <strong>Process:</strong>
+        </p>
+        <ol>
+          <li>
+            Defined standard spacing scale (8px grid: 4, 8, 12, 16, 24, 32, 48,
+            64)
+          </li>
+          <li>Created semantic tokens that map to scale</li>
+          <li>Migrated all components to use scale values</li>
+          <li>Added validation to enforce scale adherence</li>
+        </ol>
+        <p>
+          <strong>Results:</strong>
+        </p>
+        <ul>
+          <li>Spacing scale adherence: 40% → 98%</li>
+          <li>Visual rhythm restored across product</li>
+          <li>Designers and developers aligned on spacing</li>
+          <li>System became more cohesive and professional</li>
+        </ul>
+      </>
+    ),
   },
   {
     type: 'assessment-prompt',

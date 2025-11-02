@@ -7,7 +7,7 @@
         "default": "{semantic.color.action.background.secondary.default}",
         "hover": "{semantic.color.action.background.secondary.hover}",
         "active": "{semantic.color.action.background.secondary.active}",
-        "focus": "{semantic.color.mode.white}",
+        "focus": "{semantic.color.background.primary}",
         "selected": "{semantic.color.action.background.primary.default}",
         "selectedHover": "{semantic.color.action.background.primary.hover}",
         "selectedActive": "{semantic.color.action.background.primary.active}",
@@ -77,8 +77,8 @@
       },
       "easing": {
         "standard": "{core.motion.easing.standard}",
-        "in": "{core.motion.easing.in}",
-        "out": "{core.motion.easing.out}"
+        "in": "{core.motion.easing.quick.enter}",
+        "out": "{core.motion.easing.quick.exit}"
       },
       "scale": {
         "pressed": 0.98,

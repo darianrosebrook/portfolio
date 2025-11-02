@@ -1,0 +1,192 @@
+.statusMatrix {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.header {
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--semantic-color-border-subtle);
+}
+
+.header h1 {
+  margin: 0;
+  color: var(--semantic-color-foreground-primary);
+  font-weight: 700;
+  font-size: 2.5rem;
+}
+
+.subtitle {
+  margin: 0.75rem 0 0;
+  color: var(--semantic-color-foreground-secondary);
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  background: var(--semantic-color-background-secondary);
+  border-radius: var(--semantic-shape-control-radius-default, 8px);
+}
+
+.searchFilter {
+  flex: 1;
+  min-width: 200px;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--semantic-color-border-subtle);
+  border-radius: var(--semantic-shape-control-radius-default, 6px);
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 150px;
+}
+
+.filterGroup label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--semantic-color-foreground-secondary);
+}
+
+.select {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--semantic-color-border-subtle);
+  border-radius: var(--semantic-shape-control-radius-default, 6px);
+  font-size: 1rem;
+  font-family: inherit;
+  background: var(--semantic-color-background-primary);
+  color: var(--semantic-color-foreground-primary);
+  cursor: pointer;
+}
+
+.resultsCount {
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  color: var(--semantic-color-foreground-secondary);
+}
+
+.tableContainer {
+  overflow-x: auto;
+  border: 1px solid var(--semantic-color-border-subtle);
+  border-radius: var(--semantic-shape-control-radius-default, 8px);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.table thead {
+  background: var(--semantic-color-background-secondary);
+}
+
+.table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--semantic-color-foreground-primary);
+  border-bottom: 2px solid var(--semantic-color-border-subtle);
+}
+
+.table td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--semantic-color-border-subtle);
+  color: var(--semantic-color-foreground-primary);
+}
+
+.table tbody tr:hover {
+  background: var(--semantic-color-background-secondary);
+}
+
+.componentLink {
+  color: var(--semantic-color-foreground-accent);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.componentLink:hover {
+  color: var(--semantic-color-foreground-accent-hover);
+  text-decoration: underline;
+}
+
+.description {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--semantic-color-foreground-secondary);
+  line-height: 1.4;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-weight: 500;
+  font-size: 0.75rem;
+  text-transform: capitalize;
+
+  &[data-type='category'] {
+    background: var(--semantic-color-background-info-subtle);
+    color: var(--semantic-color-foreground-info);
+  }
+
+  &[data-type='layer'] {
+    background: var(--semantic-color-background-highlight);
+    color: var(--semantic-color-foreground-info);
+  }
+
+  &[data-type='status'] {
+    &[data-status='built'] {
+      background: var(--semantic-color-background-success-subtle);
+      color: var(--semantic-color-foreground-success);
+    }
+
+    &[data-status='planned'] {
+      background: var(--semantic-color-background-warning-subtle);
+      color: var(--semantic-color-foreground-warning);
+    }
+
+    &[data-status='doconly'] {
+      background: var(--semantic-color-background-neutral-subtle);
+      color: var(--semantic-color-foreground-secondary);
+    }
+  }
+
+  &[data-type='updated'] {
+    background: var(--semantic-color-background-info-subtle);
+    color: var(--semantic-color-foreground-info);
+  }
+}
+
+.checkmark {
+  color: var(--semantic-color-foreground-success);
+  font-weight: 600;
+  font-size: 1.125rem;
+}
+
+.cross {
+  color: var(--semantic-color-foreground-tertiary);
+}
+
+.date {
+  color: var(--semantic-color-foreground-secondary);
+}
+
+.noData {
+  color: var(--semantic-color-foreground-tertiary);
+}
+

@@ -10,9 +10,9 @@
 
   /* === Color Tokens === */
   --toast-color-info: var(--semantic-color-foreground-primary);
-  --toast-color-success: var(--semantic-color-status-success-fg);
-  --toast-color-warning: var(--semantic-color-status-warning-fg);
-  --toast-color-error: var(--semantic-color-status-danger-fg);
+  --toast-color-success: var(--semantic-color-foreground-success);
+  --toast-color-warning: var(--semantic-color-foreground-warning);
+  --toast-color-error: var(--semantic-color-foreground-danger);
 
   /* === Accent Tokens === */
   --toast-accent-info: var(--semantic-color-status-info);

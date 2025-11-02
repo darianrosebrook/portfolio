@@ -84,6 +84,7 @@ const ALLOWED_CSS_VARIABLES = [
   '--dialog-',
   '--elevation',
   '--view-transition-name', // CSS View Transitions API
+  '--accordion-content-height', // Dynamically set in Accordion component
 ];
 
 function isAllowedCssVariable(varName) {

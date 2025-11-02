@@ -2,18 +2,18 @@
   "prefix": "input",
   "tokens": {
     "color": {
-      "bg": { "default": "{semantic.color.background.surface}" },
+      "bg": { "default": "{semantic.color.background.secondary}" },
       "text": { "default": "{semantic.color.foreground.primary}" },
       "border": { "default": "{semantic.color.border.default}" },
       "focus": { "default": "{semantic.color.border.focus}" },
       "invalid": { "default": "{semantic.color.border.danger}" }
     },
     "size": {
-      "height": { "default": "{size.12}" },
-      "radius": { "default": "{radius.md}" }
+      "height": { "default": "{core.spacing.size.06}" },
+      "radius": { "default": "{core.shape.radius.medium}" }
     },
     "space": {
-      "inline": { "default": "{space.300}" }
+      "inline": { "default": "{core.spacing.size.03}" }
     }
   }
 }

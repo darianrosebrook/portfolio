@@ -6,7 +6,7 @@
   --chip-color-background-default: var(--semantic-color-action-background-secondary-default);
   --chip-color-background-hover: var(--semantic-color-action-background-secondary-hover);
   --chip-color-background-active: var(--semantic-color-action-background-secondary-active);
-  --chip-color-background-focus: var(--semantic-color-mode-white);
+  --chip-color-background-focus: var(--semantic-color-background-primary);
   --chip-color-background-selected: var(--semantic-color-action-background-primary-default);
   --chip-color-background-selectedHover: var(--semantic-color-action-background-primary-hover);
   --chip-color-background-selectedActive: var(--semantic-color-action-background-primary-active);
@@ -59,8 +59,8 @@
   --chip-motion-duration-medium: var(--core-motion-duration-medium);
   --chip-motion-duration-slow: var(--core-motion-duration-long);
   --chip-motion-easing-standard: var(--core-motion-easing-standard);
-  --chip-motion-easing-in: var(--core-motion-easing-in);
-  --chip-motion-easing-out: var(--core-motion-easing-out);
+  --chip-motion-easing-in: var(--core-motion-easing-quick-enter);
+  --chip-motion-easing-out: var(--core-motion-easing-quick-exit);
   --chip-motion-scale-pressed: 0.98;
   --chip-motion-scale-iconEnter: 0.8;
   --chip-motion-scale-iconExit: 0.8;

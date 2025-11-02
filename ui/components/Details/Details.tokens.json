@@ -35,10 +35,10 @@
     },
     "motion": {
       "duration": {
-        "fast": "{semantic.duration.fast}"
+        "fast": "{core.motion.duration.short}"
       },
       "easing": {
-        "standard": "{semantic.easing.standard}"
+        "standard": "{core.motion.easing.standard}"
       }
     },
     "spacing": {

@@ -13,7 +13,7 @@
     "border": {
       "width": "{core.shape.border.width.hairline}",
       "radius": "{core.shape.radius.medium}",
-      "radiusItem": "{core.shape.radius.small}"
+      "radiusItem": "{core.shape.radius.02}"
     },
     "size": {
       "maxWidth": "640px",
@@ -23,7 +23,7 @@
     },
     "spacing": {
       "dialogPadding": "{core.spacing.size.04}",
-      "dialogMarginTop": "{core.spacing.size.12}",
+      "dialogMarginTop": "{core.spacing.size.10}",
       "inputPadding": "{core.spacing.size.04}",
       "inputPaddingX": "{core.spacing.size.03}",
       "inputPaddingLeft": "{core.spacing.size.10}",
@@ -41,8 +41,8 @@
     },
     "text": {
       "size": "{semantic.typography.body.02}",
-      "lineHeight": "{semantic.typography.lineHeight.default}",
-      "weight": "{semantic.typography.fontWeight.normal}",
+      "lineHeight": "{semantic.typography.lineHeight.normal}",
+      "weight": "{semantic.typography.fontWeight.regular}",
       "weightMedium": "{semantic.typography.fontWeight.medium}",
       "sizeSmall": "{semantic.typography.body.04}",
       "lineHeightTight": "{semantic.typography.lineHeight.tight}"

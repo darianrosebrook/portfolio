@@ -84,9 +84,9 @@
   }
 
   &.deprecated {
-    background-color: var(--semantic-color-background-errorSubtle);
-    border-color: var(--semantic-color-border-error);
-    color: var(--semantic-color-foreground-onErrorSubtle);
+    background-color: var(--semantic-color-background-danger-subtle);
+    border-color: var(--semantic-color-border-danger);
+    color: var(--semantic-color-foreground-on-danger-subtle);
   }
 }
 

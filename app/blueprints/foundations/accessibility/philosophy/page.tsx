@@ -1310,6 +1310,335 @@ export const Button = ({
     ),
   },
   {
+    type: 'constraints-tradeoffs',
+    id: 'accessibility-migration-strategies',
+    title: 'Accessibility Migration & Evolution Strategies',
+    order: 8.9,
+    content: (
+      <>
+        <p>Improving accessibility requires systematic migration strategies:</p>
+
+        <h3>Incremental Accessibility Improvements</h3>
+        <p>Fix accessibility issues incrementally:</p>
+        <ol>
+          <li>
+            <strong>Audit:</strong> Run automated accessibility scans (axe-core,
+            Lighthouse)
+          </li>
+          <li>
+            <strong>Prioritize:</strong> Focus on critical violations first
+            (WCAG AA requirements)
+          </li>
+          <li>
+            <strong>Fix systematically:</strong> Address one component type at a
+            time
+          </li>
+          <li>
+            <strong>Test:</strong> Verify fixes with screen readers and keyboard
+            navigation
+          </li>
+          <li>
+            <strong>Document:</strong> Record patterns and solutions for future
+            reference
+          </li>
+        </ol>
+
+        <h3>Component Accessibility Migration</h3>
+        <p>Migrate components from inaccessible to accessible:</p>
+        <pre>
+          <code>{`// Phase 1: Fix semantic HTML
+// Before:
+<div onClick={handleClick}>Click me</div>
+
+// After:
+<button onClick={handleClick}>Click me</button>
+
+// Phase 2: Add accessibility attributes
+<button 
+  onClick={handleClick}
+  aria-label="Submit form"
+  aria-busy={isLoading}
+>
+  {isLoading ? 'Loading...' : 'Click me'}
+</button>
+
+// Phase 3: Ensure keyboard support
+// Button element already has native keyboard support
+
+// Phase 4: Add focus management
+.button:focus-visible {
+  outline: 2px solid var(--semantic-color-border-accent);
+  outline-offset: 2px;
+}
+
+// Phase 5: Test with assistive technologies`}</code>
+        </pre>
+
+        <h3>Accessibility Regression Prevention</h3>
+        <p>Prevent accessibility regressions:</p>
+        <ul>
+          <li>
+            <strong>Automated testing:</strong> Run accessibility tests in CI/CD
+          </li>
+          <li>
+            <strong>Component contracts:</strong> Require accessibility props in
+            component APIs
+          </li>
+          <li>
+            <strong>Code reviews:</strong> Include accessibility in review
+            checklist
+          </li>
+          <li>
+            <strong>Documentation:</strong> Document accessibility requirements
+            per component
+          </li>
+        </ul>
+
+        <h3>Accessibility Testing Strategy</h3>
+        <p>Implement comprehensive accessibility testing:</p>
+        <pre>
+          <code>{`// Automated accessibility tests
+import { axe, toHaveNoViolations } from 'jest-axe';
+
+expect.extend(toHaveNoViolations);
+
+it('should have no accessibility violations', async () => {
+  const { container } = render(<Button>Click me</Button>);
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
+});
+
+// Manual keyboard testing checklist:
+// - Tab to component
+// - Enter/Space activates component
+// - Focus indicator visible
+// - Screen reader announces correctly
+
+// Screen reader testing:
+// - Test with VoiceOver (macOS/iOS)
+// - Test with NVDA (Windows)
+// - Test with JAWS (Windows)
+// - Verify all announcements are correct`}</code>
+        </pre>
+      </>
+    ),
+  },
+  {
+    type: 'constraints-tradeoffs',
+    id: 'cross-platform-accessibility',
+    title: 'Cross-Platform Accessibility Considerations',
+    order: 8.95,
+    content: (
+      <>
+        <p>
+          Accessibility requirements and implementations vary across platforms:
+        </p>
+
+        <h3>Platform-Specific Accessibility APIs</h3>
+        <p>Each platform has its own accessibility API:</p>
+        <ul>
+          <li>
+            <strong>Web:</strong> ARIA attributes, semantic HTML, keyboard
+            navigation
+          </li>
+          <li>
+            <strong>iOS:</strong> Accessibility labels, traits, hints
+            (VoiceOver)
+          </li>
+          <li>
+            <strong>Android:</strong> Content descriptions, accessibility
+            actions (TalkBack)
+          </li>
+          <li>
+            <strong>React Native:</strong> Accessibility props that map to
+            platform APIs
+          </li>
+        </ul>
+
+        <h3>Consistent Accessibility Patterns</h3>
+        <p>Maintain consistent accessibility patterns across platforms:</p>
+        <pre>
+          <code>{`// Shared accessibility contract
+interface AccessibleComponent {
+  accessibilityLabel: string;
+  accessibilityHint?: string;
+  accessibilityRole: 'button' | 'link' | 'text' | 'image';
+  accessibilityState?: {
+    disabled?: boolean;
+    selected?: boolean;
+    checked?: boolean;
+  };
+}
+
+// Web implementation
+<button
+  aria-label={accessibilityLabel}
+  aria-describedby={accessibilityHint ? hintId : undefined}
+  role={accessibilityRole}
+  aria-disabled={accessibilityState?.disabled}
+>
+  {children}
+</button>
+
+// iOS implementation (SwiftUI)
+Button(action: onPress) {
+  Text(children)
+}
+.accessibilityLabel(accessibilityLabel)
+.accessibilityHint(accessibilityHint ?? "")
+.accessibilityRole(.button)
+.accessibilityState(.disabled(isDisabled))
+
+// Android implementation (Kotlin)
+button.contentDescription = accessibilityLabel
+button.hint = accessibilityHint
+button.stateDescription = accessibilityState?.description`}</code>
+        </pre>
+
+        <h3>Platform-Specific Requirements</h3>
+        <p>Adapt to platform-specific accessibility requirements:</p>
+        <ul>
+          <li>
+            <strong>Touch targets:</strong> iOS (44pt minimum), Android (48dp
+            minimum), Web (44px minimum)
+          </li>
+          <li>
+            <strong>Screen readers:</strong> VoiceOver (iOS), TalkBack
+            (Android), NVDA/JAWS/VoiceOver (Web)
+          </li>
+          <li>
+            <strong>Keyboard navigation:</strong> Web (Tab, Enter, Space), iOS
+            (external keyboard), Android (external keyboard)
+          </li>
+          <li>
+            <strong>Dynamic type:</strong> iOS (Dynamic Type), Android (Font
+            scaling), Web (zoom, font-size adjustment)
+          </li>
+        </ul>
+
+        <h3>Cross-Platform Testing</h3>
+        <p>Test accessibility across platforms:</p>
+        <ul>
+          <li>
+            <strong>Automated testing:</strong> axe-core (Web), XCUITest (iOS),
+            Espresso (Android)
+          </li>
+          <li>
+            <strong>Manual testing:</strong> Screen readers on each platform
+          </li>
+          <li>
+            <strong>Keyboard testing:</strong> Verify keyboard navigation works
+            correctly
+          </li>
+          <li>
+            <strong>Assistive technology testing:</strong> Test with platform
+            assistive technologies
+          </li>
+        </ul>
+      </>
+    ),
+  },
+  {
+    type: 'applied-example',
+    id: 'accessibility-case-studies',
+    title: 'Real-World Accessibility Case Studies',
+    order: 8.98,
+    content: (
+      <>
+        <p>
+          These case studies demonstrate accessibility improvements in practice:
+        </p>
+
+        <h3>Case Study 1: Component Accessibility Overhaul</h3>
+        <p>
+          <strong>Challenge:</strong> A form component library had 0%
+          accessibility compliance—users couldn't complete forms with assistive
+          technologies.
+        </p>
+        <p>
+          <strong>Process:</strong>
+        </p>
+        <ol>
+          <li>Ran automated accessibility scan (axe-core, Lighthouse)</li>
+          <li>Manual testing with screen readers (VoiceOver, NVDA)</li>
+          <li>Keyboard-only testing across all form components</li>
+          <li>Fixed primitives first (Input, Label, ErrorText)</li>
+          <li>
+            Updated compounds (TextField, SelectField) to use accessible
+            primitives
+          </li>
+          <li>Added accessibility tests to CI/CD</li>
+        </ol>
+        <p>
+          <strong>Results:</strong>
+        </p>
+        <ul>
+          <li>Accessibility compliance: 0% → 100% WCAG AA</li>
+          <li>Form completion rate for assistive tech users: 0% → 95%</li>
+          <li>Zero accessibility regressions (CI/CD catches them)</li>
+          <li>Team culture shifted to accessibility-first</li>
+        </ul>
+
+        <h3>Case Study 2: Keyboard Navigation Recovery</h3>
+        <p>
+          <strong>Challenge:</strong> Users couldn't navigate dashboard with
+          keyboard—keyboard users abandoned the product.
+        </p>
+        <p>
+          <strong>Process:</strong>
+        </p>
+        <ol>
+          <li>Mapped keyboard navigation paths</li>
+          <li>Identified all interactive elements missing keyboard support</li>
+          <li>Fixed focus management (tab order, focus trapping)</li>
+          <li>Added visible focus indicators</li>
+          <li>Tested complete keyboard workflows</li>
+        </ol>
+        <p>
+          <strong>Results:</strong>
+        </p>
+        <ul>
+          <li>Keyboard navigation coverage: 40% → 100%</li>
+          <li>User complaints about keyboard navigation: 50/month → 0/month</li>
+          <li>Keyboard user retention improved by 30%</li>
+          <li>Better UX for all users (mouse, touch, keyboard)</li>
+        </ul>
+
+        <h3>Case Study 3: Screen Reader Support</h3>
+        <p>
+          <strong>Challenge:</strong> Screen reader users couldn't understand
+          complex data visualizations and interactive components.
+        </p>
+        <p>
+          <strong>Process:</strong>
+        </p>
+        <ol>
+          <li>Tested with actual screen reader users (user research)</li>
+          <li>Added descriptive ARIA labels and live regions</li>
+          <li>Implemented proper ARIA roles and states</li>
+          <li>Added skip links and landmarks</li>
+          <li>Provided alternative text formats for data visualizations</li>
+        </ol>
+        <p>
+          <strong>Results:</strong>
+        </p>
+        <ul>
+          <li>Screen reader user satisfaction: 2/10 → 9/10</li>
+          <li>Task completion rate: 20% → 85%</li>
+          <li>Accessibility complaints: 30/month → 1/month</li>
+          <li>Legal compliance achieved (WCAG AA)</li>
+        </ul>
+      </>
+    ),
+  },
+  {
+    type: 'verification-checklist',
+    id: 'verification-checklist',
+    title: 'Verification Checklist',
+    order: 9,
+    content: null,
+  },
+  {
     type: 'cross-references',
     id: 'cross-references',
     title: 'Related Concepts',

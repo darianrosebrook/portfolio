@@ -1,11 +1,13 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { ComprehensiveComponentDoc } from '../_components/ComprehensiveComponentDoc';
+import { getComponentAPIData } from '../_lib/componentAPI';
 import {
   getAllComponents,
   getComponentBySlug,
   getRelatedComponents,
 } from '../_lib/componentsData';
+import { getAnatomyData } from '../_lib/generateAnatomy';
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -50,11 +52,15 @@ export default async function ComponentPage({ params }: Props) {
   }
 
   const relatedComponents = getRelatedComponents(slug, { limit: 6 });
+  const apiData = getComponentAPIData(component);
+  const anatomyData = getAnatomyData(component);
 
   return (
     <ComprehensiveComponentDoc
       component={component}
       relatedComponents={relatedComponents}
+      apiData={apiData}
+      anatomyData={anatomyData}
     />
   );
 }
