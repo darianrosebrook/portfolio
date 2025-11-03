@@ -64,6 +64,26 @@ const nextConfig = {
       };
     }
 
+    // Resolve .playground.ts files when importing .playground
+    config.resolve.extensions = [
+      ...(config.resolve.extensions || []),
+      '.playground.ts',
+      '.playground.tsx',
+      '.playground.js',
+      '.playground.jsx',
+    ];
+
+    // Add extension alias for .playground imports
+    if (!config.resolve.extensionAlias) {
+      config.resolve.extensionAlias = {};
+    }
+    config.resolve.extensionAlias['.playground'] = [
+      '.playground.ts',
+      '.playground.tsx',
+      '.playground.js',
+      '.playground.jsx',
+    ];
+
     if (!dev && !isServer) {
       config.optimization = {
         ...config.optimization,
