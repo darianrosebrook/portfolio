@@ -19,7 +19,7 @@ import { AnatomyControls } from './AnatomyControls';
 import { DebugPanel } from './DebugPanel';
 import styles from './FontInspector.module.scss';
 import { InspectorControls } from './InspectorControls';
-import { SymbolCanvasSVG as SymbolCanvas } from './SymbolCanvasSVG';
+import { SymbolCanvas } from './SymbolCanvas';
 import { SymbolGrid } from './SymbolGrid';
 import { TypographyArticleContent } from './TypographyArticleContent';
 
@@ -444,10 +444,15 @@ export const InspectorProvider: React.FC<{
   const toggleAnatomy = useCallback((feature: AnatomyFeature) => {
     setSelectedAnatomy((s) => {
       const next = new Map(s);
-      if (next.has(feature.feature)) {
-        next.delete(feature.feature);
+      const existing = next.get(feature.feature);
+      if (existing) {
+        // Toggle selected state instead of removing
+        next.set(feature.feature, {
+          ...existing,
+          selected: !existing.selected,
+        });
       } else {
-        // Ensure selected is true when adding to the map
+        // Add new feature with selected: true
         next.set(feature.feature, { ...feature, selected: true });
       }
       return next;
@@ -727,6 +732,11 @@ export const InspectorProvider: React.FC<{
       const next = new Map(prev);
       let changed = false;
 
+      console.log('[autoDetectFeatures] Auto-selecting features', {
+        likelyFeatures,
+        detectedFeatures: Array.from(detected),
+      });
+
       for (const registryFeature of likelyFeatures) {
         const featureName = featureNameMap[registryFeature];
         if (!featureName) {
@@ -738,23 +748,60 @@ export const InspectorProvider: React.FC<{
 
         // Only auto-select if actually detected
         if (!detected.has(featureName)) {
+          console.log(
+            `[autoDetectFeatures] Skipping ${featureName} - not detected (expected from registry: ${registryFeature})`
+          );
+          continue;
+        }
+
+        // Find the feature definition from anatomyFeatures array
+        const featureDef = anatomyFeatures.find(
+          (f) => f.feature === featureName
+        );
+        if (!featureDef) {
+          console.warn(
+            `[FontInspector] Feature definition not found for: ${featureName}`
+          );
           continue;
         }
 
         const existingFeature = next.get(featureName);
-        if (
-          existingFeature &&
-          !existingFeature.readonly &&
-          !existingFeature.selected
-        ) {
-          next.set(featureName, { ...existingFeature, selected: true });
+
+        // If feature exists in map, update it if needed
+        if (existingFeature) {
+          if (!existingFeature.readonly && !existingFeature.selected) {
+            console.log(
+              `[autoDetectFeatures] Auto-selecting existing feature: ${featureName}`
+            );
+            next.set(featureName, { ...existingFeature, selected: true });
+            changed = true;
+          }
+        } else {
+          // Feature doesn't exist in map yet - add it with selected: true
+          console.log(
+            `[autoDetectFeatures] Adding new feature to map: ${featureName}`
+          );
+          next.set(featureName, { ...featureDef, selected: true });
           changed = true;
         }
       }
 
+      console.log('[autoDetectFeatures] Auto-selection complete', {
+        changed,
+        selectedCount: Array.from(next.values()).filter((f) => f.selected)
+          .length,
+      });
+
       return changed ? next : prev;
     });
-  }, [fontInstance, glyph, glyphUnicode, currentFontIndex, featureNameMap]);
+  }, [
+    fontInstance,
+    glyph,
+    glyphUnicode,
+    currentFontIndex,
+    featureNameMap,
+    anatomyFeatures,
+  ]);
 
   // Auto-select likely features when font and glyph are ready
   useEffect(() => {
@@ -762,6 +809,7 @@ export const InspectorProvider: React.FC<{
   }, [autoDetectFeatures]);
 
   // Filter anatomy features to show:
+  // TEMPORARILY DISABLED: Show all features regardless of detection
   // 1. Metric features (always shown)
   // 2. All detected features (or all features if detection hasn't run yet)
   const filteredAnatomyFeatures = useMemo(() => {
@@ -773,39 +821,46 @@ export const InspectorProvider: React.FC<{
       'Descender',
     ]);
 
-    console.log('[filteredAnatomyFeatures] Filtering features', {
-      glyphUnicode,
-      detectedFeatures: Array.from(detectedFeatures),
-      detectedCount: detectedFeatures.size,
-      hasFont: !!fontInstance,
-      hasGlyph: !!glyph,
-    });
-
-    // Show all features that are detected, or all features if detection hasn't run yet
-    const filtered = anatomyFeatures.filter((feature) => {
-      // Always show metrics
-      if (metricFeatures.has(feature.feature)) {
-        return true;
+    console.log(
+      '[filteredAnatomyFeatures] Filtering features (TEMPORARILY SHOWING ALL)',
+      {
+        glyphUnicode,
+        detectedFeatures: Array.from(detectedFeatures),
+        detectedCount: detectedFeatures.size,
+        hasFont: !!fontInstance,
+        hasGlyph: !!glyph,
+        showingAllFeatures: true,
       }
+    );
 
-      // If detection hasn't run yet, show all features (user can manually toggle)
-      if (detectedFeatures.size === 0) {
-        return true;
-      }
+    // TEMPORARILY: Show all features regardless of detection
+    return anatomyFeatures;
 
-      // Show features that are detected (regardless of whether they're "expected")
-      // This allows users to explore features even if they're not in the expected list
-      const isDetected = detectedFeatures.has(feature.feature);
-      return isDetected;
-    });
+    // ORIGINAL FILTERING LOGIC (commented out):
+    // const filtered = anatomyFeatures.filter((feature) => {
+    //   // Always show metrics
+    //   if (metricFeatures.has(feature.feature)) {
+    //     return true;
+    //   }
 
-    console.log('[filteredAnatomyFeatures] Filtered result', {
-      originalCount: anatomyFeatures.length,
-      filteredCount: filtered.length,
-      filteredFeatures: filtered.map((f) => f.feature),
-    });
+    //   // If detection hasn't run yet, show all features (user can manually toggle)
+    //   if (detectedFeatures.size === 0) {
+    //     return true;
+    //   }
 
-    return filtered;
+    //   // Show features that are detected (regardless of whether they're "expected")
+    //   // This allows users to explore features even if they're not in the expected list
+    //   const isDetected = detectedFeatures.has(feature.feature);
+    //   return isDetected;
+    // });
+
+    // console.log('[filteredAnatomyFeatures] Filtered result', {
+    //   originalCount: anatomyFeatures.length,
+    //   filteredCount: filtered.length,
+    //   filteredFeatures: filtered.map((f) => f.feature),
+    // });
+
+    // return filtered;
   }, [anatomyFeatures, glyphUnicode, detectedFeatures, fontInstance, glyph]);
 
   const contextValue = useMemo(
