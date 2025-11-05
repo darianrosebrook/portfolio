@@ -47,7 +47,10 @@ class PerformanceMonitor {
   }
 
   /**
-   * Initialize performance observers for Core Web Vitals
+   * Initialize performance observers for Core Web Vitals and custom metrics.
+   *
+   * Sets up observers for LCP, FID, CLS, and other performance metrics.
+   * Only initializes if running in browser environment.
    */
   private initializeObservers() {
     // First Contentful Paint
@@ -123,6 +126,12 @@ class PerformanceMonitor {
   /**
    * Track component load time
    */
+  /**
+   * Track component load time for performance monitoring.
+   *
+   * @param componentName - Name/identifier of the component
+   * @param startTime - Timestamp when component loading started (performance.now())
+   */
   trackComponentLoad(componentName: string, startTime: number) {
     const loadTime = performance.now() - startTime;
     this.customMetrics.componentLoadTime[componentName] = loadTime;
@@ -131,6 +140,12 @@ class PerformanceMonitor {
 
   /**
    * Track API response time
+   */
+  /**
+   * Track API response time for performance monitoring.
+   *
+   * @param endpoint - API endpoint URL or identifier
+   * @param responseTime - Response time in milliseconds
    */
   trackApiResponse(endpoint: string, responseTime: number) {
     this.customMetrics.apiResponseTime[endpoint] = responseTime;
@@ -189,6 +204,11 @@ class PerformanceMonitor {
   /**
    * Get all performance metrics
    */
+  /**
+   * Get current performance metrics snapshot.
+   *
+   * @returns Combined Core Web Vitals and custom performance metrics
+   */
   getMetrics(): PerformanceMetrics & CustomMetrics {
     return {
       ...this.metrics,
@@ -198,6 +218,11 @@ class PerformanceMonitor {
 
   /**
    * Get performance report
+   */
+  /**
+   * Generate a comprehensive performance report.
+   *
+   * @returns Human-readable performance report with scores and recommendations
    */
   getReport() {
     const metrics = this.getMetrics();

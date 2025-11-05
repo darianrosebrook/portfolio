@@ -9,12 +9,21 @@ import { contrastRatioHex, hexToRgb, type RGB } from '../helpers/colorHelpers';
 import fs from 'fs';
 import path from 'path';
 
-// WCAG 2.1 Contrast Requirements
+/**
+ * WCAG 2.1 contrast ratio requirements.
+ *
+ * Minimum contrast ratios required for different text sizes and compliance levels.
+ * Based on Web Content Accessibility Guidelines (WCAG) 2.1 specifications.
+ */
 export const WCAG_LEVELS = {
-  AA_NORMAL: 4.5, // WCAG AA for normal text (14pt+)
-  AA_LARGE: 3.0, // WCAG AA for large text (18pt+ or 14pt+ bold)
-  AAA_NORMAL: 7.0, // WCAG AAA for normal text
-  AAA_LARGE: 4.5, // WCAG AAA for large text
+  /** WCAG AA for normal text (14pt and smaller) */
+  AA_NORMAL: 4.5,
+  /** WCAG AA for large text (18pt+ or 14pt+ bold) */
+  AA_LARGE: 3.0,
+  /** WCAG AAA for normal text (enhanced accessibility) */
+  AAA_NORMAL: 7.0,
+  /** WCAG AAA for large text (enhanced accessibility) */
+  AAA_LARGE: 4.5,
 } as const;
 
 export type WCAGLevel = keyof typeof WCAG_LEVELS;
@@ -51,6 +60,26 @@ export interface TokenValidationReport {
 
 /**
  * Validates a single color pair for WCAG compliance
+ */
+/**
+ * Validate a color pair for WCAG accessibility compliance.
+ *
+ * Calculates the contrast ratio between foreground and background colors
+ * and determines if it meets the required WCAG level.
+ *
+ * @param pair - Color pair to validate
+ * @returns Detailed validation result with compliance status and suggestions
+ *
+ * @example
+ * ```typescript
+ * const result = validateColorPair({
+ *   foreground: '#000000',
+ *   background: '#ffffff',
+ *   context: 'Primary button text',
+ *   requiredLevel: 'AA_NORMAL'
+ * });
+ * // Returns { isValid: true, contrastRatio: 21, ... }
+ * ```
  */
 export function validateColorPair(pair: ColorPair): ValidationResult {
   const contrastRatio = contrastRatioHex(pair.foreground, pair.background);

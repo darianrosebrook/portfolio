@@ -1,60 +1,131 @@
-// /**
-//  * Color space conversion utilities and helpers.
-//  * This module provides functions for converting between different color spaces
-//  * including RGB, HSL, LAB, LCH, XYZ, HSV, and more.
-//  */
+/**
+ * Color space conversion utilities and helpers.
+ *
+ * This module provides comprehensive functions for converting between different color spaces
+ * including RGB, HSL, LAB, LCH, XYZ, HSV, and more. All conversions follow standard
+ * color science formulas and CIE specifications.
+ *
+ * @example
+ * ```typescript
+ * import { rgbToHex, hslToRgb, labToRgb } from '@/utils/helpers/colorHelpers';
+ *
+ * const hex = rgbToHex({ r: 255, g: 0, b: 128 }); // '#ff0080'
+ * const rgb = hslToRgb({ h: 330, s: 100, l: 50 }); // { r: 255, g: 0, b: 128 }
+ * ```
+ */
 
-// Color spaces
+/**
+ * RGB color space representation.
+ * Standard sRGB color space with 8-bit precision (0-255 range).
+ */
 export interface RGB {
-  r: number; // Red component (0-255)
-  g: number; // Green component (0-255)
-  b: number; // Blue component (0-255)
+  /** Red component (0-255) */
+  r: number;
+  /** Green component (0-255) */
+  g: number;
+  /** Blue component (0-255) */
+  b: number;
 }
 
+/**
+ * HSL color space representation.
+ * Hue-Saturation-Lightness color model, commonly used in CSS.
+ */
 export interface HSL {
-  h: number; // Hue angle (0-360)
-  s: number; // Saturation (0-100)
-  l: number; // Lightness (0-100)
+  /** Hue angle in degrees (0-360) */
+  h: number;
+  /** Saturation percentage (0-100) */
+  s: number;
+  /** Lightness percentage (0-100) */
+  l: number;
 }
 
+/**
+ * LAB color space representation.
+ * CIELAB color space with perceptually uniform color differences.
+ */
 export interface LAB {
-  l: number; // Lightness (0-100)
-  a: number; // Green-Red axis (-128 to 127)
-  b: number; // Blue-Yellow axis (-128 to 127)
+  /** Lightness (0-100) */
+  l: number;
+  /** Green-Red axis (-128 to 127) */
+  a: number;
+  /** Blue-Yellow axis (-128 to 127) */
+  b: number;
 }
 
+/**
+ * LCH color space representation.
+ * CIELCH color space - cylindrical version of LAB with better hue control.
+ */
 export interface LCH {
-  l: number; // Lightness (0-100)
-  c: number; // Chroma (>= 0)
-  h: number; // Hue angle (0-360)
+  /** Lightness (0-100) */
+  l: number;
+  /** Chroma (color intensity, >= 0) */
+  c: number;
+  /** Hue angle in degrees (0-360) */
+  h: number;
 }
 
+/**
+ * XYZ color space representation.
+ * CIE 1931 XYZ color space - device-independent color specification.
+ */
 export interface XYZ {
-  x: number; // X component (D65 reference white: 0.95047)
-  y: number; // Y component (D65 reference white: 1.00000)
-  z: number; // Z component (D65 reference white: 1.08883)
+  /** X component (D65 reference white: ~0.95047) */
+  x: number;
+  /** Y component (D65 reference white: 1.00000) */
+  y: number;
+  /** Z component (D65 reference white: ~1.08883) */
+  z: number;
 }
 
-// /**
-//  * D65 reference white point in XYZ color space
-//  * @constant
-//  * @type {XYZ}
-//  */
+/**
+ * D65 reference white point in XYZ color space.
+ *
+ * The CIE standard illuminant D65 represents average daylight with a color temperature of 6504K.
+ * Used as the reference white point for most color space conversions.
+ *
+ * @constant
+ * @type {XYZ}
+ */
 export const D65_WHITE_POINT: XYZ = {
   x: 0.95047,
   y: 1.0,
   z: 1.08883,
 };
 
-// /**
-//  * CIE standard constants
-//  * @constant
-//  * @type {number}
-//  */
-const KAPPA = 24389 / 27; // (29/3)^3
-const EPSILON = 216 / 24389; // (6/29)^3 = ~0.008856
+/**
+ * CIE standard constants for color space conversions.
+ *
+ * These constants are used in LAB/XYZ color space conversions as defined
+ * by the CIE (Commission Internationale de l'Éclairage) standards.
+ *
+ * @see https://en.wikipedia.org/wiki/CIELAB_color_space
+ */
+
+/** CIE kappa constant: (29/3)^3 ≈ 24389/27 */
+const KAPPA = 24389 / 27;
+
+/** CIE epsilon constant: (6/29)^3 ≈ 0.008856 */
+const EPSILON = 216 / 24389;
 
 // --- Core Conversion Helpers (Internal) ---
+/**
+ * Calculate the contrast ratio of a color against white.
+ *
+ * Returns a value indicating how well the color contrasts with white background.
+ * Higher values indicate better contrast (better readability).
+ *
+ * @param hexcolor - Hex color string (with or without #)
+ * @returns Contrast ratio (1-21 range, where 1 = no contrast, 21 = maximum contrast)
+ *
+ * @example
+ * ```typescript
+ * calculateContrast('#000000'); // 21 (black on white)
+ * calculateContrast('#ffffff'); // 1 (white on white)
+ * calculateContrast('#666666'); // ~5.9 (medium gray)
+ * ```
+ */
 export const calculateContrast = (hexcolor: string) => {
   let r: number, g: number, b: number;
   if (hexcolor.startsWith('#')) hexcolor = hexcolor.slice(1);
@@ -207,6 +278,22 @@ export function xyzToRgb({ x, y, z }: XYZ): RGB {
 //  * @param hex - The hex color string (e.g., "#ff0000", "f00").
 //  * @returns An RGB object { r, g, b } or null if invalid.
 //  */
+/**
+ * Convert hex color string to RGB object.
+ *
+ * Supports 3-digit, 6-digit, and 8-digit hex colors.
+ * Returns null for invalid hex strings.
+ *
+ * @param hex - Hex color string (with or without #)
+ * @returns RGB object or null if invalid
+ *
+ * @example
+ * ```typescript
+ * hexToRgb('#ff0000'); // { r: 255, g: 0, b: 0 }
+ * hexToRgb('3366cc'); // { r: 51, g: 102, b: 204 }
+ * hexToRgb('abc'); // { r: 170, g: 187, b: 204 }
+ * ```
+ */
 export function hexToRgb(hex: string): RGB | null {
   if (!hex || typeof hex !== 'string') {
     return null;
@@ -258,6 +345,21 @@ export function hexToRgb(hex: string): RGB | null {
 //  * @param rgb - An object with r, g, b properties (0-255).
 //  * @returns A hex color string (e.g., "#ff0000").
 //  */
+/**
+ * Convert RGB object to hex color string.
+ *
+ * Always returns a 6-digit hex color string (without # prefix).
+ * Values are clamped to 0-255 range.
+ *
+ * @param rgb - RGB color object
+ * @returns 6-digit hex color string
+ *
+ * @example
+ * ```typescript
+ * rgbToHex({ r: 255, g: 0, b: 128 }); // 'ff0080'
+ * rgbToHex({ r: 51, g: 102, b: 204 }); // '3366cc'
+ * ```
+ */
 export function rgbToHex({ r, g, b }: RGB): string {
   // Helper to convert a single channel, clamp, round, and pad with zero if needed.
   const toHex = (c: number): string => {
@@ -640,6 +742,27 @@ export function contrastRatio(foreground: RGB, background: RGB): number {
 
 /**
  * Convenience: contrast ratio from hex inputs
+ */
+/**
+ * Calculate WCAG contrast ratio between two hex colors.
+ *
+ * Returns the contrast ratio as defined by WCAG guidelines.
+ * Ratio of 1 = no contrast, 21 = maximum contrast.
+ * WCAG AA requires 4.5:1 for normal text, 3:1 for large text.
+ * WCAG AAA requires 7:1 for normal text, 4.5:1 for large text.
+ *
+ * @param fgHex - Foreground color as hex string
+ * @param bgHex - Background color as hex string
+ * @returns Contrast ratio or null if either color is invalid
+ *
+ * @example
+ * ```typescript
+ * contrastRatioHex('#000000', '#ffffff'); // 21 (black on white)
+ * contrastRatioHex('#666666', '#ffffff'); // ~5.9 (medium gray on white)
+ * contrastRatioHex('#ffffff', '#ffffff'); // 1 (white on white)
+ * ```
+ *
+ * @see https://www.w3.org/TR/WCAG21/#contrast-minimum
  */
 export function contrastRatioHex(fgHex: string, bgHex: string): number | null {
   const fg = hexToRgb(fgHex);

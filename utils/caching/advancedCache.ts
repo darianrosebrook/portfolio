@@ -1,18 +1,27 @@
 /**
- * Advanced Caching Strategy for Portfolio Site
- * Implements multiple caching layers for optimal performance
+ * Advanced caching strategy with intelligent eviction and stale-while-revalidate.
+ *
+ * Implements multiple caching layers with configurable TTL, LRU eviction,
+ * and background refresh capabilities for optimal performance.
  */
 
 interface CacheConfig {
+  /** Maximum age of cache entries in milliseconds */
   maxAge: number;
+  /** Stale-while-revalidate period in milliseconds */
   staleWhileRevalidate: number;
+  /** Maximum number of cache entries */
   maxSize: number;
 }
 
 interface CacheEntry<T> {
+  /** Cached data */
   data: T;
+  /** Timestamp when entry was created */
   timestamp: number;
+  /** Number of times entry has been accessed */
   accessCount: number;
+  /** Timestamp of last access */
   lastAccessed: number;
 }
 
@@ -20,6 +29,11 @@ class AdvancedCache<T> {
   private cache = new Map<string, CacheEntry<T>>();
   private config: CacheConfig;
 
+  /**
+   * Create a new advanced cache instance.
+   *
+   * @param config - Cache configuration options
+   */
   constructor(config: Partial<CacheConfig> = {}) {
     this.config = {
       maxAge: 5 * 60 * 1000, // 5 minutes
@@ -30,7 +44,14 @@ class AdvancedCache<T> {
   }
 
   /**
-   * Get cached data with intelligent stale-while-revalidate logic
+   * Get cached data with intelligent stale-while-revalidate logic.
+   *
+   * Returns cached data if fresh, stale data if within revalidate window,
+   * or fetches new data if no valid cache exists.
+   *
+   * @param key - Cache key
+   * @param fetcher - Optional function to fetch fresh data if cache miss
+   * @returns Cached data or null if not found and no fetcher provided
    */
   async get(key: string, fetcher?: () => Promise<T>): Promise<T | null> {
     const entry = this.cache.get(key);
@@ -69,6 +90,16 @@ class AdvancedCache<T> {
 
   /**
    * Set cache entry with automatic cleanup
+   */
+  /**
+   * Store data in cache.
+   *
+   * Adds or updates a cache entry with the provided data.
+   * Handles cache size limits by evicting least recently used entries.
+   *
+   * @param key - Cache key
+   * @param data - Data to cache
+   * @returns The cached data
    */
   set(key: string, data: T): T {
     const now = Date.now();

@@ -12,19 +12,31 @@
     "breakpoint": {
       "sm": {
         "$type": "dimension",
-        "$value": "640px"
+        "$value": {
+          "value": 640,
+          "unit": "px"
+        }
       },
       "md": {
         "$type": "dimension",
-        "$value": "768px"
+        "$value": {
+          "value": 768,
+          "unit": "px"
+        }
       },
       "lg": {
         "$type": "dimension",
-        "$value": "1024px"
+        "$value": {
+          "value": 1024,
+          "unit": "px"
+        }
       },
       "xl": {
         "$type": "dimension",
-        "$value": "1280px"
+        "$value": {
+          "value": 1280,
+          "unit": "px"
+        }
       }
     }
   }

@@ -35,6 +35,8 @@ export function ComprehensiveComponentDoc({
 
   const complexityLabel = String(layer).replace(/s$/, '');
   const isBuilt = status === 'Built' && paths?.component;
+  // Temporary disable for interactive previews on Button page to isolate render loop
+  const disableInteractive = component.slug === 'button';
 
   // Stable preview config to prevent re-renders
   const previewConfig = React.useMemo(
@@ -49,7 +51,8 @@ export function ComprehensiveComponentDoc({
   // Generate interactive examples based on component status
   // Use stable primitive values instead of object reference to prevent infinite loops
   const componentKey = React.useMemo(
-    () => `${component.component}-${component.status}-${component.paths?.component || ''}`,
+    () =>
+      `${component.component}-${component.status}-${component.paths?.component || ''}`,
     [component.component, component.status, component.paths?.component]
   );
 
@@ -167,7 +170,7 @@ export function ComprehensiveComponentDoc({
             </ul>
           </div>
 
-          {isBuilt && interactiveProject && (
+          {isBuilt && interactiveProject && !disableInteractive && (
             <div className={styles.liveExample}>
               <h3>Live Example</h3>
               <div className={styles.exampleContainer}>
@@ -217,7 +220,7 @@ export function ComprehensiveComponentDoc({
       {/* Variants Section */}
       <section id="variants" className={styles.section}>
         <h2>Variants & States</h2>
-        {isBuilt && interactiveProject ? (
+        {isBuilt && interactiveProject && !disableInteractive ? (
           <DocVariants
             project={interactiveProject}
             componentName={name}
@@ -336,7 +339,7 @@ export function ComprehensiveComponentDoc({
       <section id="examples" className={styles.section}>
         <h2>Examples</h2>
         <div className={styles.examplesContent}>
-          {isBuilt && interactiveProject ? (
+          {isBuilt && interactiveProject && !disableInteractive ? (
             <div className={styles.exampleGrid}>
               <div className={styles.example}>
                 <h3>Basic Usage</h3>

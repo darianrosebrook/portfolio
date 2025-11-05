@@ -4,29 +4,44 @@
     "maxWidth": {
       "prose": {
         "$type": "dimension",
-        "$value": "65ch",
+        "$value": {
+          "value": 520,
+          "unit": "px"
+        },
         "$description": "Optimal reading width for body text"
       },
       "narrow": {
         "$type": "dimension",
-        "$value": "45ch",
+        "$value": {
+          "value": 360,
+          "unit": "px"
+        },
         "$description": "Narrow content for captions and asides"
       },
       "wide": {
         "$type": "dimension",
-        "$value": "75ch",
+        "$value": {
+          "value": 600,
+          "unit": "px"
+        },
         "$description": "Wide content for technical documentation"
       }
     },
     "measure": {
       "comfortable": {
         "$type": "dimension",
-        "$value": "60ch",
+        "$value": {
+          "value": 480,
+          "unit": "px"
+        },
         "$description": "Comfortable reading measure"
       },
       "compact": {
         "$type": "dimension",
-        "$value": "45ch",
+        "$value": {
+          "value": 360,
+          "unit": "px"
+        },
         "$description": "Compact measure for sidebars"
       }
     }

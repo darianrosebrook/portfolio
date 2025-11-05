@@ -49,6 +49,16 @@ export default async function ComponentPage({ params }: Props) {
     notFound();
   }
 
+  // TEMP: isolate infinite render by short-circuiting Button page to minimal content
+  if (component.slug === 'button') {
+    return (
+      <section className="content">
+        <h1>Button</h1>
+        <p>Temporary minimal content to isolate render loop.</p>
+      </section>
+    );
+  }
+
   const relatedComponents = getRelatedComponents(slug, { limit: 6 });
 
   return (

@@ -45,6 +45,13 @@ export function DocInteractive({
   // MVP: vertically stacked editor + preview using Sandpack-backed workbench
   const containerRef = React.useRef<HTMLDivElement>(null);
   const [rootEl, setRootEl] = React.useState<HTMLDivElement | null>(null);
+  const rootHolderRef = React.useRef<HTMLDivElement | null>(null);
+  const handleRootRef = React.useCallback((node: HTMLDivElement | null) => {
+    if (rootHolderRef.current !== node) {
+      rootHolderRef.current = node;
+      setRootEl(node);
+    }
+  }, []);
   const [activeFile, setActiveFile] = React.useState<string | undefined>(
     undefined
   );
@@ -102,9 +109,13 @@ export function DocInteractive({
   // Stable project reference to prevent CodeWorkbench re-renders
   // Compare by serializing file paths and contents hash
   const projectFilesKey = React.useMemo(
-    () => JSON.stringify(
-      project.files.map((f) => ({ path: f.path, hash: String(f.contents).slice(0, 50) }))
-    ),
+    () =>
+      JSON.stringify(
+        project.files.map((f) => ({
+          path: f.path,
+          hash: String(f.contents).slice(0, 50),
+        }))
+      ),
     [project.files]
   );
   const stableProject = React.useMemo(() => project, [projectFilesKey]);
@@ -178,7 +189,7 @@ export function DocInteractive({
             height: '100%',
             minHeight: 320,
           }}
-          ref={setRootEl as unknown as React.Ref<HTMLDivElement>}
+          ref={handleRootRef}
         >
           <SectionSync
             sections={stableSections}

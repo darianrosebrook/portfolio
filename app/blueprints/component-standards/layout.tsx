@@ -54,18 +54,10 @@ export default function ComponentStandardsLayout({
 
   const _crumbs = useBreadcrumbs({ base, labelMap });
 
+  // TEMP: disable PageTransition wrappers to isolate render loop on component pages
   return (
-    <PageTransition transitionName="component-standards-layout" duration={300}>
-      <section className="content">
-        <PageTransition transitionName="breadcrumb" duration={200}>
-          <div>{/* <Breadcrumbs base={base} crumbs={crumbs} /> */}</div>
-        </PageTransition>
-        <PageTransition transitionName="doc-content" duration={250}>
-          <div>
-            <div>{children}</div>
-          </div>
-        </PageTransition>
-      </section>
-    </PageTransition>
+    <section className="content">
+      <div>{children}</div>
+    </section>
   );
 }

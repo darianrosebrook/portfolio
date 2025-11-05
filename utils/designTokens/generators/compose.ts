@@ -15,7 +15,7 @@ import {
   readTokenFile,
   writeOutputFile,
   deepMerge,
-  generateBanner,
+  // generateBanner,
   logSummary,
   type TokenGroup,
 } from '../core/index';
@@ -29,9 +29,22 @@ import {
   validateDeprecations,
   formatDeprecationWarning,
 } from '../deprecation/index';
+import {
+  Resolver,
+  loadResolverDocument,
+  // type ResolutionInput,
+} from '../utils/resolver-module';
 
 /**
- * Transform token references in an object
+ * Transform token references in an object to use prefixed paths.
+ *
+ * Recursively walks through token objects and updates all token references
+ * (e.g., "{color.primary}") to use the appropriate namespace prefix
+ * (e.g., "{core.color.primary}" or "{semantic.color.primary}").
+ *
+ * @param obj - Object containing token references to transform
+ * @param prefixer - Function that adds namespace prefix to token paths
+ * @returns Object with transformed token references
  */
 function transformReferences(
   obj: unknown,
@@ -61,7 +74,12 @@ function transformReferences(
 }
 
 /**
- * Smart token path prefixing based on semantic patterns
+ * Create a smart token path prefixer based on semantic patterns.
+ *
+ * Analyzes token paths and determines whether they should be prefixed with
+ * "core." or "semantic." based on their content and usage patterns.
+ *
+ * @returns Function that prefixes token paths with appropriate namespace
  */
 function createTokenPrefixer(): (path: string) => string {
   // Patterns that indicate semantic tokens
@@ -141,21 +159,99 @@ function loadModularTokens(baseDir: string): TokenGroup | null {
 }
 
 /**
- * Compose core and semantic tokens into unified token file
+ * Check for and use DTCG 1.0 resolver document if available.
+ *
+ * Looks for a resolver.json file in the design tokens directory and uses
+ * the DTCG 1.0 Resolver Module to compose tokens instead of legacy logic.
+ *
+ * @returns Resolved token group from resolver module, or null if not available
+ */
+function tryResolverDocumentComposition(): TokenGroup | null {
+  const resolverDocPath = path.join(
+    PROJECT_ROOT,
+    'ui',
+    'designTokens',
+    'resolver.json'
+  );
+
+  if (!fs.existsSync(resolverDocPath)) {
+    return null; // No resolver document found
+  }
+
+  console.log('[tokens] 🔧 Using DTCG 1.0 Resolver Module...');
+
+  try {
+    const resolverDoc = loadResolverDocument(resolverDocPath);
+    if (!resolverDoc) {
+      console.warn('[tokens] ⚠️  Failed to load resolver document');
+      return null;
+    }
+
+    const resolver = new Resolver(resolverDoc, {
+      basePath: path.dirname(resolverDocPath),
+      onWarn: (d) => console.warn(`[resolver] ⚠️  ${d.message}`),
+      onError: (d) => console.error(`[resolver] ❌ ${d.message}`),
+    });
+
+    // Resolve tokens for default context (no theme/brand/platform specified)
+    const result = resolver.resolve({});
+    console.log('[tokens] ✅ Resolver composition successful');
+
+    return result.tokens as TokenGroup;
+  } catch (error) {
+    console.error(
+      `[tokens] ❌ Resolver composition failed: ${error instanceof Error ? error.message : 'Unknown error'}`
+    );
+    console.log('[tokens] 🔄 Falling back to legacy composition...');
+    return null;
+  }
+}
+
+/**
+ * Compose core and semantic tokens into unified token file.
+ *
+ * Supports both legacy modular token composition and DTCG 1.0 Resolver Module.
+ * When a resolver.json document is present, uses the resolver module for composition.
+ * Otherwise, falls back to legacy modular token loading and merging.
+ *
+ * @param incremental - Whether to use incremental building (skip if no changes)
+ * @returns Success status of the composition operation
  */
 export function composeTokens(incremental = true): boolean {
   console.log('[tokens] Composing token files...');
+
+  // Try DTCG 1.0 Resolver Module first
+  const resolverTokens = tryResolverDocumentComposition();
+  if (resolverTokens) {
+    // Write resolved tokens directly (no banner for JSON files)
+    const content = JSON.stringify(resolverTokens, null, 2);
+
+    writeOutputFile(PATHS.tokens, content, 'composed design tokens');
+    updateFileCache(PATHS.tokens);
+
+    logSummary({
+      totalTokens: Object.keys(resolverTokens).length,
+      generatedFiles: 1,
+    });
+
+    return true;
+  }
+
+  // Fall back to legacy composition logic
+  console.log('[tokens] 🔄 Using legacy composition...');
 
   // Check for incremental build
   if (incremental) {
     const tokenFiles = getTokenFilesToCheck();
     const changedFiles = getChangedFiles(tokenFiles);
-    
+
     if (changedFiles.length === 0 && fs.existsSync(PATHS.tokens)) {
-      console.log('[tokens] ⚡ No token files changed, skipping compose (incremental build)');
+      console.log(
+        '[tokens] ⚡ No token files changed, skipping compose (incremental build)'
+      );
       return true;
     }
-    
+
     if (changedFiles.length > 0) {
       console.log(`[tokens] 📝 ${changedFiles.length} token file(s) changed`);
     }
@@ -216,7 +312,9 @@ export function composeTokens(incremental = true): boolean {
   // Check for deprecated tokens
   const deprecations = findDeprecatedTokens(result);
   if (deprecations.length > 0) {
-    console.log(`\n[tokens] ⚠️  Found ${deprecations.length} deprecated token(s):`);
+    console.log(
+      `\n[tokens] ⚠️  Found ${deprecations.length} deprecated token(s):`
+    );
     deprecations.forEach((dep) => {
       console.log(formatDeprecationWarning(dep.tokenPath, dep));
     });

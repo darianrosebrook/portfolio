@@ -2,11 +2,11 @@
   "$schema": "../designTokens.schema.json",
   "opacity": {
     "disabled": {
-      "$type": "opacity",
+      "$type": "number",
       "$value": "{opacity.400}"
     },
     "overlay": {
-      "$type": "opacity",
+      "$type": "number",
       "$value": "{opacity.600}"
     }
   }

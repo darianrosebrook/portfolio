@@ -3,8 +3,22 @@ import { cookies } from 'next/headers';
 import { env } from '@/utils/env';
 
 /**
- * Creates a Supabase client for server-side operations.
- * @returns {Promise<SupabaseClient>} A promise that resolves to a Supabase client instance.
+ * Supabase client factory for server-side operations.
+ *
+ * Creates a Supabase client instance configured for server-side usage
+ * with automatic cookie handling for authentication state. Uses environment
+ * variables for URL and anonymous key configuration.
+ *
+ * @returns Promise resolving to Supabase client instance for server operations
+ *
+ * @example
+ * ```typescript
+ * // In a server component or API route
+ * import { createClient } from '@/utils/supabase/server';
+ *
+ * const supabase = await createClient();
+ * const { data: { user } } = await supabase.auth.getUser();
+ * ```
  */
 export async function createClient() {
   const cookieStore = await cookies();

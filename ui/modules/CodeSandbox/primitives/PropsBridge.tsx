@@ -16,13 +16,16 @@ export function PropsBridge({
   path = '/props.json',
 }: PropsBridgeProps) {
   const { sandpack } = useSandpack();
+  const lastJsonRef = React.useRef<string | null>(null);
 
   React.useEffect(() => {
     try {
       const json = JSON.stringify(values ?? {}, null, 2);
+      if (lastJsonRef.current === json) return; // no-op if unchanged
       // Prefer updateFile when available; fallback to openFile no-op semantics if needed
       if (typeof sandpack.updateFile === 'function') {
         sandpack.updateFile(path, json);
+        lastJsonRef.current = json;
       }
     } catch {
       // ignore

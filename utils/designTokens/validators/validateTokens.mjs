@@ -15,12 +15,13 @@ import addFormats from 'ajv-formats';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const PROJECT_ROOT = path.resolve(__dirname, '..', '..');
+const PROJECT_ROOT = path.resolve(__dirname, '..', '..', '..');
 
 const SCHEMA_PATH = path.join(
   PROJECT_ROOT,
-  'ui',
+  'utils',
   'designTokens',
+  'validators',
   'designTokens.schema.json'
 );
 
@@ -346,8 +347,15 @@ export function validateTokenDirectory(dirPath) {
 
 // CLI interface
 if (import.meta.url === `file://${process.argv[1]}`) {
-  const targetPath =
-    process.argv[2] || path.join(PROJECT_ROOT, 'ui', 'designTokens');
+  const defaultPath = path.join(PROJECT_ROOT, 'ui', 'designTokens');
+  const targetPath = process.argv[2] || defaultPath;
+
+  // Check if target exists
+  if (!fs.existsSync(targetPath)) {
+    console.error(`[validation] Target not found: ${targetPath}`);
+    console.error(`[validation] Try running: npm run tokens:compose first`);
+    process.exit(1);
+  }
 
   if (fs.statSync(targetPath).isDirectory()) {
     const results = validateTokenDirectory(targetPath);

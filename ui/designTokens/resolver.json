@@ -1,0 +1,47 @@
+{
+  "$schema": "../utils/designTokens/validators/resolver.schema.json",
+  "name": "Portfolio Design System Resolver",
+  "version": "2025-10-01",
+  "description": "Resolver document for managing design tokens across themes and contexts using DTCG 1.0 Resolver Module",
+  "sets": {
+    "foundation": {
+      "description": "Core design tokens (colors, typography, spacing, etc.)",
+      "sources": [
+        { "$ref": "core.tokens.json" }
+      ]
+    },
+    "semantic": {
+      "description": "Semantic tokens that reference foundation tokens",
+      "sources": [
+        { "$ref": "semantic.tokens.json" }
+      ]
+    }
+  },
+  "modifiers": {
+    "theme": {
+      "description": "Color theme modifier (light/dark mode)",
+      "default": "light",
+      "contexts": {
+        "light": {
+          "description": "Light theme color overrides",
+          "sources": [
+            { "$ref": "#/sets/foundation" },
+            { "$ref": "#/sets/semantic" }
+          ]
+        },
+        "dark": {
+          "description": "Dark theme color overrides",
+          "sources": [
+            { "$ref": "#/sets/foundation" },
+            { "$ref": "#/sets/semantic" }
+          ]
+        }
+      }
+    }
+  },
+  "resolutionOrder": [
+    { "$ref": "#/sets/foundation" },
+    { "$ref": "#/sets/semantic" },
+    { "$ref": "#/modifiers/theme" }
+  ]
+}

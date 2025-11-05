@@ -6,20 +6,20 @@ import styles from '../page.module.scss';
  * @type {import('next').Metadata}
  */
 export const metadata = {
-  title: 'Theming & Modes | Darian Rosebrook',
+  title: 'Multi-Brand Theming | Darian Rosebrook',
   description:
-    'Light/dark support with $extensions.design.paths plus explicit mode files when needed. How aliasing enables multi-brand.',
+    'How structured DTCG tokens enable brand switching, platform variants, and scalable theming across products with semantic aliasing.',
   openGraph: {
-    title: 'Theming & Modes | Darian Rosebrook',
+    title: 'Multi-Brand Theming | Darian Rosebrook',
     description:
-      'Light/dark support with $extensions.design.paths plus explicit mode files when needed. How aliasing enables multi-brand.',
+      'How structured DTCG tokens enable brand switching, platform variants, and scalable theming across products with semantic aliasing.',
     images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Theming & Modes | Darian Rosebrook',
+    title: 'Multi-Brand Theming | Darian Rosebrook',
     description:
-      'Light/dark support with $extensions.design.paths plus explicit mode files when needed. How aliasing enables multi-brand.',
+      'How structured DTCG tokens enable brand switching, platform variants, and scalable theming across products with semantic aliasing.',
     images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
   },
 };

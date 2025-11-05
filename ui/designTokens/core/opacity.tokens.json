@@ -4,59 +4,59 @@
     "50": {
       "$value": 0.04,
       "$description": "Very subtle transparency.",
-      "$type": "opacity"
+      "$type": "number"
     },
     "100": {
       "$value": 0.08,
       "$description": "Subtle transparency.",
-      "$type": "opacity"
+      "$type": "number"
     },
     "200": {
       "$value": 0.12,
       "$description": "Light transparency.",
-      "$type": "opacity"
+      "$type": "number"
     },
     "300": {
       "$value": 0.16,
       "$description": "Moderate transparency.",
-      "$type": "opacity"
+      "$type": "number"
     },
     "400": {
       "$value": 0.24,
       "$description": "Noticeable transparency.",
-      "$type": "opacity"
+      "$type": "number"
     },
     "500": {
       "$value": 0.32,
       "$description": "High transparency.",
-      "$type": "opacity"
+      "$type": "number"
     },
     "600": {
       "$value": 0.48,
       "$description": "Strong transparency.",
-      "$type": "opacity"
+      "$type": "number"
     },
     "700": {
       "$value": 0.64,
       "$description": "Very strong transparency.",
-      "$type": "opacity"
+      "$type": "number"
     },
     "800": {
       "$value": 0.8,
       "$description": "Nearly fully transparent.",
-      "$type": "opacity"
+      "$type": "number"
     },
     "900": {
       "$value": 0.96,
       "$description": "Almost opaque.",
-      "$type": "opacity"
+      "$type": "number"
     },
-    "$type": "opacity",
+    "$type": "number",
     "$description": "Opacity values for transparency.",
     "full": {
       "$value": 1,
       "$description": "Fully opaque.",
-      "$type": "opacity"
+      "$type": "number"
     }
   }
 }

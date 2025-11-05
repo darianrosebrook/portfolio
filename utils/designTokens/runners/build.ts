@@ -6,7 +6,6 @@
  * in the correct order with proper error handling and reporting.
  */
 
-import { logSummary } from '../core/index';
 import { composeTokens } from '../generators/compose';
 import { generateGlobalTokens } from '../generators/global';
 import { generateTokenTypes } from '../generators/types';
@@ -163,11 +162,21 @@ async function main() {
   const args = process.argv.slice(2);
 
   if (args.length > 0) {
-    // Run specific steps
-    const success = await runSteps(args);
-    process.exit(success ? 0 : 1);
+    // Check for flags
+    const incremental = !args.includes('--no-incremental');
+    const filteredArgs = args.filter((arg) => arg !== '--no-incremental');
+
+    if (filteredArgs.length > 0) {
+      // Run specific steps
+      const success = await runSteps(filteredArgs);
+      process.exit(success ? 0 : 1);
+    } else {
+      // Run full build with incremental flag
+      const success = await buildTokens(incremental);
+      process.exit(success ? 0 : 1);
+    }
   } else {
-    // Run full build
+    // Run full build (incremental by default)
     const success = await buildTokens();
     process.exit(success ? 0 : 1);
   }

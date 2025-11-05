@@ -7,6 +7,7 @@
  */
 
 import fs from 'fs';
+import path from 'path';
 import {
   PATHS,
   readTokenFile,
@@ -22,6 +23,17 @@ import {
   isTokenDeprecated,
   formatDeprecationWarning,
 } from '../deprecation/index';
+import {
+  Resolver,
+  loadResolverDocument,
+  type ResolutionInput,
+} from '../utils/resolver-module';
+import {
+  isStructuredColorValue,
+  isStructuredDimensionValue,
+  colorValueToCSS,
+  dimensionValueToCSS,
+} from '../utils/transforms';
 
 interface ThemeMaps {
   root: Record<string, string>;
@@ -159,7 +171,16 @@ function collectTokens(
 }
 
 /**
- * Process token value and handle references
+ * Process token value and handle references.
+ *
+ * Converts DTCG 1.0 structured values to CSS strings and resolves token references.
+ * Supports both legacy string values and new structured objects.
+ *
+ * @param value - Raw token value to process
+ * @param context - Collection context for tracking variables and references
+ * @param tokenPath - Current token path (for reference resolution)
+ * @param tokens - Full token tree (for reference validation)
+ * @returns Processed CSS value string
  */
 function processTokenValue(
   value: unknown,
@@ -167,22 +188,41 @@ function processTokenValue(
   tokenPath?: string,
   tokens?: TokenGroup
 ): string {
+  // Handle DTCG 1.0 structured values first
+  if (isStructuredColorValue(value)) {
+    return colorValueToCSS(value);
+  }
+
+  if (isStructuredDimensionValue(value)) {
+    return dimensionValueToCSS(value);
+  }
+
   if (typeof value === 'string') {
     // Handle token references like {core.color.blue.500}
-    const processedValue = value.replace(/\{([^}]+)\}/g, (match, refTokenPath) => {
-      // Check for deprecation warnings
-      if (tokens) {
-        const deprecation = isTokenDeprecated(tokens, refTokenPath);
-        if (deprecation) {
-          console.warn(formatDeprecationWarning(refTokenPath, deprecation));
+    const processedValue = value.replace(
+      /\{([^}]+)\}/g,
+      (_match: string, refTokenPath: string) => {
+        // Check for deprecation warnings
+        if (tokens) {
+          const deprecation = isTokenDeprecated(tokens, refTokenPath);
+          if (deprecation) {
+            console.warn(formatDeprecationWarning(refTokenPath, deprecation));
+          }
         }
-      }
 
-      const cssVar = tokenPathToCSSVar(refTokenPath);
-      context.referencedVars.add(cssVar);
-      return `var(${cssVar})`;
-    });
+        const cssVar = tokenPathToCSSVar(refTokenPath);
+        context.referencedVars.add(cssVar);
+        return `var(${cssVar})`;
+      }
+    );
     return processedValue;
+  }
+
+  // Handle legacy DTCG structured values (objects that are token references)
+  if (typeof value === 'object' && value !== null && '$value' in value) {
+    const tokenValue = (value as { $value: unknown }).$value;
+    // Recursively process the actual value
+    return processTokenValue(tokenValue, context, tokenPath, tokens);
   }
 
   return String(value);
@@ -204,21 +244,162 @@ function validateReferences(context: CollectionContext): string[] {
 }
 
 /**
- * Generate global design tokens CSS
+ * Generate CSS from resolved token tree (used by resolver module).
+ *
+ * Converts DTCG 1.0 structured token values to CSS custom properties.
+ * Handles color conversions, dimension formatting, and reference validation.
+ *
+ * @param tokens - Resolved token tree from resolver module
+ * @returns Success status of CSS generation
+ */
+function generateCSSFromTokens(tokens: TokenGroup): boolean {
+  const context: CollectionContext = {
+    definedVars: new Set(),
+    referencedVars: new Set(),
+  };
+
+  const maps: ThemeMaps = {
+    root: {},
+    lightColors: {},
+    darkColors: {},
+    hasDarkOverride: false,
+  };
+
+  // Collect all tokens into CSS variables
+  collectTokens(tokens, [], context, maps, tokens);
+
+  // Validate references
+  const referenceErrors = validateReferences(context);
+  if (referenceErrors.length > 0) {
+    console.warn('[tokens] Reference validation warnings:');
+    referenceErrors.forEach((error) => console.warn(`  - ${error}`));
+  }
+
+  // Generate CSS content
+  const banner = generateBanner('Resolver Module');
+
+  // Merge light colors into root as defaults
+  const rootWithDefaults = { ...maps.root, ...maps.lightColors };
+  const rootBlock = formatCSSBlock(':root', rootWithDefaults);
+
+  const lightBlock = formatCSSBlock('.light', maps.lightColors);
+  const darkBlock = formatCSSBlock('.dark', maps.darkColors);
+
+  // Generate prefers-color-scheme media query
+  const prefersBlock = maps.hasDarkOverride
+    ? `@media (prefers-color-scheme: dark) {\n${formatCSSBlock('  :root', maps.darkColors)}\n${formatCSSBlock('  .light', maps.lightColors)}\n}`
+    : '';
+
+  // Combine all blocks
+  const content = [banner, rootBlock, prefersBlock, lightBlock, darkBlock, '']
+    .filter(Boolean)
+    .join('\n\n');
+
+  // Write output file
+  writeOutputFile(PATHS.outputScss, content, 'CSS variables');
+
+  // Update cache after file is written
+  updateFileCache(PATHS.outputScss);
+
+  // Log summary
+  logSummary({
+    totalTokens: context.definedVars.size,
+    referencedTokens: context.referencedVars.size,
+    generatedFiles: 1,
+    errors: referenceErrors.length,
+  });
+
+  return referenceErrors.length === 0;
+}
+
+/**
+ * Check for and use DTCG 1.0 resolver document for CSS generation.
+ *
+ * Loads resolver document and resolves tokens for the specified theme context.
+ * Returns resolved tokens that can be directly converted to CSS.
+ *
+ * @param theme - Theme context to resolve ('light' or 'dark')
+ * @returns Resolved token group for the specified theme, or null if resolver unavailable
+ */
+function tryResolverDocumentCSSGeneration(
+  theme?: 'light' | 'dark'
+): TokenGroup | null {
+  const resolverDocPath = path.join(
+    PATHS.tokens.replace('designTokens.json', 'resolver.json')
+  );
+
+  if (!fs.existsSync(resolverDocPath)) {
+    return null; // No resolver document found
+  }
+
+  console.log(
+    `[tokens] 🔧 Using DTCG 1.0 Resolver Module for ${theme || 'default'} theme...`
+  );
+
+  try {
+    const resolverDoc = loadResolverDocument(resolverDocPath);
+    if (!resolverDoc) {
+      console.warn('[tokens] ⚠️  Failed to load resolver document');
+      return null;
+    }
+
+    const resolver = new Resolver(resolverDoc, {
+      basePath: path.dirname(resolverDocPath),
+      onWarn: (d) => console.warn(`[resolver] ⚠️  ${d.message}`),
+      onError: (d) => console.error(`[resolver] ❌ ${d.message}`),
+    });
+
+    // Resolve tokens for specified theme context
+    const input: ResolutionInput = {};
+    if (theme) input.theme = theme;
+
+    const result = resolver.resolve(input);
+    console.log(
+      `[tokens] ✅ Resolver CSS generation successful for ${theme || 'default'}`
+    );
+
+    return result.tokens as TokenGroup;
+  } catch (error) {
+    console.error(
+      `[tokens] ❌ Resolver CSS generation failed: ${error instanceof Error ? error.message : 'Unknown error'}`
+    );
+    console.log('[tokens] 🔄 Falling back to legacy CSS generation...');
+    return null;
+  }
+}
+
+/**
+ * Generate global design tokens CSS.
+ *
+ * Supports both legacy token processing and DTCG 1.0 Resolver Module.
+ * When a resolver document is present, uses resolver module output directly.
+ * Otherwise, processes tokens through legacy collection and transformation pipeline.
+ *
+ * @param incremental - Whether to use incremental building (skip if no changes)
+ * @returns Success status of CSS generation
  */
 export function generateGlobalTokens(incremental = true): boolean {
   console.log('[tokens] Generating global tokens...');
 
   // Check for incremental build
   if (incremental) {
-    if (
-      !hasFileChanged(PATHS.tokens) &&
-      fs.existsSync(PATHS.outputScss)
-    ) {
-      console.log('[tokens] ⚡ Design tokens unchanged, skipping global generation (incremental build)');
+    if (!hasFileChanged(PATHS.tokens) && fs.existsSync(PATHS.outputScss)) {
+      console.log(
+        '[tokens] ⚡ Design tokens unchanged, skipping global generation (incremental build)'
+      );
       return true;
     }
   }
+
+  // Try resolver document approach first
+  const resolverTokens = tryResolverDocumentCSSGeneration();
+  if (resolverTokens) {
+    // Generate CSS from resolved tokens
+    return generateCSSFromTokens(resolverTokens);
+  }
+
+  // Fall back to legacy approach
+  console.log('[tokens] 🔄 Using legacy CSS generation...');
 
   // Read source tokens
   const tokens = readTokenFile(PATHS.tokens);
@@ -273,7 +454,7 @@ export function generateGlobalTokens(incremental = true): boolean {
 
   // Write output file
   writeOutputFile(PATHS.outputScss, content, 'global design tokens');
-  
+
   // Update cache after file is written
   updateFileCache(PATHS.outputScss);
 

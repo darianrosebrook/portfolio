@@ -69,8 +69,6 @@ class UtilsCleanup {
     this.log('\n🎨 Analyzing design token utilities...', 'info');
 
     const tokenFiles = [
-      'generateGlobalTokens.mjs',
-      'generateGlobalTokens.ts',
       'generateCSSTokens.mjs',
       'generateTypes.mjs',
       'generateSchema.mjs',
@@ -85,10 +83,6 @@ class UtilsCleanup {
     this.log(`Found ${existingFiles.length} design token files`, 'info');
 
     // Recommend consolidation strategy
-    this.addAction(
-      'consolidate',
-      'Merge generateGlobalTokens.mjs and .ts into single implementation'
-    );
     this.addAction('organize', 'Group generation scripts vs runtime utilities');
     this.addAction(
       'simplify',

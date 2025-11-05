@@ -3,36 +3,60 @@
   "shape": {
     "radius": {
       "none": {
-        "$type": "borderRadius",
-        "$value": "0"
+        "$type": "dimension",
+        "$value": {
+          "value": 0,
+          "unit": "px"
+        }
       },
       "01": {
-        "$type": "borderRadius",
-        "$value": "2px"
+        "$type": "dimension",
+        "$value": {
+          "value": 2,
+          "unit": "px"
+        }
       },
       "02": {
-        "$type": "borderRadius",
-        "$value": "4px"
+        "$type": "dimension",
+        "$value": {
+          "value": 4,
+          "unit": "px"
+        }
       },
       "medium": {
-        "$type": "borderRadius",
-        "$value": "6px"
+        "$type": "dimension",
+        "$value": {
+          "value": 6,
+          "unit": "px"
+        }
       },
       "03": {
-        "$type": "borderRadius",
-        "$value": "8px"
+        "$type": "dimension",
+        "$value": {
+          "value": 8,
+          "unit": "px"
+        }
       },
       "04": {
-        "$type": "borderRadius",
-        "$value": "16px"
+        "$type": "dimension",
+        "$value": {
+          "value": 16,
+          "unit": "px"
+        }
       },
       "05": {
-        "$type": "borderRadius",
-        "$value": "32px"
+        "$type": "dimension",
+        "$value": {
+          "value": 32,
+          "unit": "px"
+        }
       },
       "full": {
-        "$type": "borderRadius",
-        "$value": "9999px"
+        "$type": "dimension",
+        "$value": {
+          "value": 9999,
+          "unit": "px"
+        }
       }
     },
     "border": {

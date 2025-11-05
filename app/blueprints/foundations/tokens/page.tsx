@@ -22,6 +22,11 @@ export const metadata = {
 
 const sections = [
   {
+    title: 'DTCG 1.0 Structured Formats',
+    desc: 'How we use DTCG 1.0 specification with structured values: color objects, dimension units, and composite tokens.',
+    href: '/blueprints/foundations/tokens/dtcg-formats',
+  },
+  {
     title: 'Core vs Semantic',
     desc: 'How primitives in core.* power purpose-driven semantic.* roles. Why aliases, not copies, improve scale and theming.',
     href: '/blueprints/foundations/tokens/core-vs-semantic',
@@ -32,13 +37,13 @@ const sections = [
     href: '/blueprints/foundations/tokens/token-naming',
   },
   {
-    title: 'Theming & Modes',
-    desc: 'Our approach to light/dark via $extensions.design.paths and when to use explicit mode files.',
+    title: 'Multi-Brand Theming',
+    desc: 'How structured tokens enable brand switching, platform variants, and scalable theming across products.',
     href: '/blueprints/foundations/tokens/theming',
   },
   {
     title: 'Schema & Validation',
-    desc: 'Local JSON Schema for IntelliSense and AJV-based validation with custom lint rules and safe defaults.',
+    desc: 'DTCG 1.0 JSON Schema for IntelliSense and AJV validation with structured value enforcement.',
     href: '/blueprints/foundations/tokens/schema-validation',
   },
   {
@@ -61,13 +66,17 @@ export default function TokensFoundationPage() {
       <p>
         Design tokens are more than variables. They are the language that allows
         designers and developers to describe decisions in a way that scales
-        across time, platforms, and brands. When a system reaches a certain
-        level of maturity, repeating decisions—what shade of neutral to use,
-        what radius applies to a control, how long a motion easing should last—
-        becomes a liability. Tokens transform those repeating decisions into a
-        durable vocabulary. They are not the design itself, but the encoded
-        reference points from which design can be consistently rebuilt, audited,
-        and evolved.
+        across time, platforms, and brands. Our implementation follows the
+        <strong>
+          W3C Design Tokens Community Group (DTCG) 1.0 specification
+        </strong>
+        , using structured object formats instead of simple strings. When a
+        system reaches a certain level of maturity, repeating decisions—what
+        shade of neutral to use, what radius applies to a control, how long a
+        motion easing should last—becomes a liability. Tokens transform those
+        repeating decisions into a durable vocabulary. They are not the design
+        itself, but the encoded reference points from which design can be
+        consistently rebuilt, audited, and evolved.
       </p>
 
       <p>
@@ -102,6 +111,30 @@ export default function TokensFoundationPage() {
         just efficiency but a structural guarantee of consistency.
       </p>
 
+      <h2>DTCG 1.0 Structured Values</h2>
+      <p>
+        Unlike traditional CSS variables, our tokens use the DTCG 1.0
+        specification's structured value format. Colors are objects with{' '}
+        <code>colorSpace</code> and
+        <code>components</code>, dimensions have explicit <code>value</code> and
+        <code>unit</code> properties, and composite tokens like typography and
+        borders reference these structured primitives. This approach enables:
+      </p>
+      <ul>
+        <li>
+          <strong>Type safety</strong> through structured validation
+        </li>
+        <li>
+          <strong>Platform flexibility</strong> with format-aware transforms
+        </li>
+        <li>
+          <strong>Brand scalability</strong> through semantic aliasing
+        </li>
+        <li>
+          <strong>Tool interoperability</strong> with DTCG-compliant tooling
+        </li>
+      </ul>
+
       <h2>The Layered Model</h2>
       <p>
         Our philosophy of tokens follows a layered approach. Each layer has a
@@ -111,7 +144,9 @@ export default function TokensFoundationPage() {
         The <strong>core layer</strong> contains primitives—the building blocks
         like palette scales, spacing increments, type ramps, and motion
         durations. These rarely change across brands or products; they are the
-        physics of our system.
+        physics of our system. Core tokens use DTCG 1.0 structured formats:
+        colors with color spaces, dimensions with explicit units, and base
+        typography scales.
       </p>
       <p>
         On top of this sits the <strong>semantic layer</strong>. Here tokens are
@@ -120,6 +155,8 @@ export default function TokensFoundationPage() {
         theming surface, where core values are aliased into meaningful roles.
         This layer is where brands diverge, where accessibility constraints are
         enforced, and where most product designers interact with the system.
+        Semantic tokens can override values for different themes while
+        maintaining consistent structure.
       </p>
       <p>
         Finally, there is an optional <strong>component layer</strong>. Here

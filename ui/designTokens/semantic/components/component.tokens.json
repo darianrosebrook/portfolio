@@ -8,7 +8,10 @@
       },
       "minSize": {
         "$type": "dimension",
-        "$value": "32px"
+        "$value": {
+          "value": 32,
+          "unit": "px"
+        }
       }
     },
     "foreground": {
@@ -34,11 +37,17 @@
       },
       "fieldMinWidth": {
         "$type": "dimension",
-        "$value": "48px"
+        "$value": {
+          "value": 48,
+          "unit": "px"
+        }
       },
       "fieldHeight": {
         "$type": "dimension",
-        "$value": "48px"
+        "$value": {
+          "value": 48,
+          "unit": "px"
+        }
       },
       "fieldFontSize": {
         "$type": "dimension",
@@ -49,7 +58,7 @@
         "$value": "{typography.weight.medium}"
       },
       "fieldRadius": {
-        "$type": "borderRadius",
+        "$type": "dimension",
         "$value": "{shape.radius.02}"
       },
       "colorText": {
@@ -72,15 +81,36 @@
     "test": {
       "dsSemanticColorBgPrimary": {
         "$type": "color",
-        "$value": "#ffffff"
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            1,
+            1
+          ]
+        }
       },
       "customSemanticColorBgPrimary": {
         "$type": "color",
-        "$value": "#ffffff"
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            1,
+            1
+          ]
+        }
       },
       "myCustomBg": {
         "$type": "color",
-        "$value": "#007bff"
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0,
+            0.4823529411764706,
+            1
+          ]
+        }
       },
       "path": {
         "$type": "string",

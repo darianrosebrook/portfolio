@@ -1,11 +1,13 @@
 /**
  * Design Token Usage Analytics
- * 
+ *
  * Tracks token usage across the codebase to identify:
  * - Unused tokens
  * - Most used tokens
  * - Token adoption patterns
  * - Breaking change impact
+ *
+ * @author Darian Rosebrook <hello@darianrosebrook.com>
  */
 
 import fs from 'fs';
@@ -48,7 +50,7 @@ function extractAllTokenPaths(
     if (value && typeof value === 'object') {
       if ('$value' in value) {
         paths.push(currentPath);
-        
+
         // Check if deprecated
         const extensions = (value as any).$extensions;
         if (extensions?.design?.deprecated) {
@@ -77,7 +79,9 @@ function scanFileForTokens(filePath: string): string[] {
   }
 
   // Match var(--token-name) usage
-  const cssVarRefs = content.matchAll(/var\(--([a-zA-Z0-9_-]+(?:-[a-zA-Z0-9_-]+)*)\)/g);
+  const cssVarRefs = content.matchAll(
+    /var\(--([a-zA-Z0-9_-]+(?:-[a-zA-Z0-9_-]+)*)\)/g
+  );
   for (const match of cssVarRefs) {
     // Convert CSS var name back to token path
     const tokenPath = match[1].replace(/-/g, '.');
@@ -105,7 +109,9 @@ export async function analyzeTokenUsage(): Promise<UsageReport> {
 
   // Extract all token paths
   const allTokenPaths = extractAllTokenPaths(tokens);
-  const tokenSet = new Set(allTokenPaths.filter((p) => !p.endsWith('@deprecated')));
+  const tokenSet = new Set(
+    allTokenPaths.filter((p) => !p.endsWith('@deprecated'))
+  );
 
   // Find all files to scan
   const scanPatterns = [
@@ -197,7 +203,10 @@ export async function analyzeTokenUsage(): Promise<UsageReport> {
 
   if (unusedTokens.length > 0) {
     recommendations.push(
-      `Found ${unusedTokens.length} unused tokens. Consider removing: ${unusedTokens.slice(0, 5).map((u) => u.tokenPath).join(', ')}`
+      `Found ${unusedTokens.length} unused tokens. Consider removing: ${unusedTokens
+        .slice(0, 5)
+        .map((u) => u.tokenPath)
+        .join(', ')}`
     );
   }
 
@@ -207,7 +216,10 @@ export async function analyzeTokenUsage(): Promise<UsageReport> {
 
   if (deprecatedUsage.length > 0) {
     recommendations.push(
-      `Found ${deprecatedUsage.length} deprecated tokens still in use. Plan migration: ${deprecatedUsage.slice(0, 5).map((u) => u.tokenPath).join(', ')}`
+      `Found ${deprecatedUsage.length} deprecated tokens still in use. Plan migration: ${deprecatedUsage
+        .slice(0, 5)
+        .map((u) => u.tokenPath)
+        .join(', ')}`
     );
   }
 
@@ -296,4 +308,3 @@ export function generateUsageReport(report: UsageReport): string {
 
   return lines.join('\n');
 }
-
