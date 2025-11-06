@@ -25,7 +25,10 @@
       "stackGap": "{core.spacing.size.04}"
     },
     "size": {
-      "maxWidth": "400px"
+      "maxWidth": {
+        "value": 400,
+        "unit": "px"
+      }
     },
     "motion": {
       "enter": "{core.motion.duration.short}",

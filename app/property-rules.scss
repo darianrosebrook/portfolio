@@ -1,0 +1,231 @@
+/**
+ * CSS @property Rules
+ *
+ * Defines typed custom properties with syntax, inheritance, and initial values.
+ * Enables smooth animations and better design token management.
+ */
+
+// Color properties for smooth color transitions
+@property --color-primary {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #007acc;
+}
+
+@property --color-secondary {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #6c757d;
+}
+
+@property --color-background {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #ffffff;
+}
+
+@property --color-foreground {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #333333;
+}
+
+@property --color-border {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #cccccc;
+}
+
+@property --color-accent {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #007acc;
+}
+
+@property --color-success {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #28a745;
+}
+
+@property --color-warning {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #ffc107;
+}
+
+@property --color-danger {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #dc3545;
+}
+
+@property --color-info {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #17a2b8;
+}
+
+// Spacing properties
+@property --spacing-xs {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0.25rem;
+}
+
+@property --spacing-sm {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0.5rem;
+}
+
+@property --spacing-md {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 1rem;
+}
+
+@property --spacing-lg {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 1.5rem;
+}
+
+@property --spacing-xl {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 3rem;
+}
+
+// Border radius properties
+@property --border-radius-sm {
+  syntax: '<length> | <percentage>';
+  inherits: false;
+  initial-value: 0.125rem;
+}
+
+@property --border-radius-md {
+  syntax: '<length> | <percentage>';
+  inherits: false;
+  initial-value: 0.25rem;
+}
+
+@property --border-radius-lg {
+  syntax: '<length> | <percentage>';
+  inherits: false;
+  initial-value: 0.5rem;
+}
+
+@property --border-radius-xl {
+  syntax: '<length> | <percentage>';
+  inherits: false;
+  initial-value: 1rem;
+}
+
+@property --border-radius-full {
+  syntax: '<length> | <percentage>';
+  inherits: false;
+  initial-value: 9999px;
+}
+
+// Opacity properties for smooth transitions
+@property --opacity-hover {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 1;
+}
+
+@property --opacity-disabled {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0.6;
+}
+
+@property --opacity-overlay {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0.5;
+}
+
+// Transform properties
+@property --scale-hover {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 1;
+}
+
+@property --scale-active {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0.98;
+}
+
+@property --translate-y-hover {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0;
+}
+
+// Shadow properties (using color-mix for dynamic shadows)
+@property --shadow-opacity {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0.1;
+}
+
+// Z-index properties (for dynamic stacking contexts)
+@property --z-index-base {
+  syntax: '<integer>';
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --z-index-overlay {
+  syntax: '<integer>';
+  inherits: false;
+  initial-value: 1000;
+}
+
+@property --z-index-modal {
+  syntax: '<integer>';
+  inherits: false;
+  initial-value: 2000;
+}
+
+// Animation duration properties
+@property --animation-duration-fast {
+  syntax: '<time>';
+  inherits: false;
+  initial-value: 0.15s;
+}
+
+@property --animation-duration-normal {
+  syntax: '<time>';
+  inherits: false;
+  initial-value: 0.3s;
+}
+
+@property --animation-duration-slow {
+  syntax: '<time>';
+  inherits: false;
+  initial-value: 0.5s;
+}
+
+// Easing function properties (as string for now, could be enhanced)
+@property --easing-standard {
+  syntax: '<easing-function>';
+  inherits: false;
+  initial-value: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@property --easing-decelerate {
+  syntax: '<easing-function>';
+  inherits: false;
+  initial-value: cubic-bezier(0, 0, 0.2, 1);
+}
+
+@property --easing-accelerate {
+  syntax: '<easing-function>';
+  inherits: false;
+  initial-value: cubic-bezier(0.4, 0, 1, 1);
+}

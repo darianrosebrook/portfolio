@@ -2,8 +2,14 @@
   "component": {
     "divider": {
       "thickness": {
-        "default": "1px",
-        "thick": "2px"
+        "default": {
+          "value": 1,
+          "unit": "px"
+        },
+        "thick": {
+          "value": 2,
+          "unit": "px"
+        }
       },
       "color": {
         "default": "{color.border.default}",

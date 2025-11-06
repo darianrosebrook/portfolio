@@ -2,61 +2,83 @@
 
 .root {
   @include tabsTokens.vars;
+
+  // CSS Containment - layout containment for tabs
+  contain: layout;
 }
 
-.list {
-  position: relative;
-  display: inline-flex;
-  gap: var(--tabs-spacing-gap);
-}
+// Scoped styles for tabs sub-components
+@supports selector(:scope) {
+  @scope (.root) {
+    .list {
+      position: relative;
+      display: inline-flex;
+      gap: var(--tabs-spacing-gap);
+    }
 
-.indicator {
-  position: absolute;
-  height: 2px;
-  background: var(--tabs-color-indicator);
-  transition: transform var(--tabs-motion-indicator);
-  transform: translateX(0%);
-  inline-size: 100px;
-  inset-block-end: 0;
-}
+    .indicator {
+      position: absolute;
+      height: 2px;
+      background: var(--tabs-color-indicator);
+      transition: transform var(--tabs-motion-indicator);
+      transform: translateX(0%);
+      inline-size: 100px;
+      inset-block-end: 0;
+    }
 
-.tab {
-  padding: var(--tabs-spacing-padding);
-  background: transparent;
-  border: none;
-  color: var(--tabs-color-fg);
-  cursor: pointer;
+    .tab {
+      padding: var(--tabs-spacing-padding);
+      background: transparent;
+      border: none;
+      color: var(--tabs-color-fg);
+      cursor: pointer;
 
-  &:focus-visible {
-    border-radius: var(--tabs-shape-radius, 0.25rem);
-    outline: 2px solid var(--tabs-color-focus, var(--color-focus-ring));
-    outline-offset: 2px;
+      &:focus-visible {
+        border-radius: var(--tabs-shape-radius, 0.25rem);
+        outline: 2px solid var(--tabs-color-focus, var(--color-focus-ring));
+        outline-offset: 2px;
+      }
+
+      &:hover:not(.tabDisabled) {
+        background: var(--tabs-color-hover-bg, oklch(0% 0 0deg / 5%));
+        color: var(--tabs-color-hover-fg, var(--tabs-color-active-fg));
+      }
+    }
+
+    .tabActive {
+      background: var(--tabs-color-active-bg);
+      color: var(--tabs-color-active-fg);
+    }
+
+    .tabDisabled {
+      color: var(--tabs-color-disabled-fg);
+      cursor: not-allowed;
+    }
+
+    .panel {
+      margin-block-start: var(--tabs-spacing-panelGap);
+    }
+
+    .panelActive {
+      opacity: 1;
+    }
+
+    .panelInactive {
+      opacity: 0;
+    }
   }
+}
 
-  &:hover:not(.tabDisabled) {
-    background: var(--tabs-color-hover-bg, oklch(0% 0 0deg / 5%));
-    color: var(--tabs-color-hover-fg, var(--tabs-color-active-fg));
+// Fallback for browsers without @scope support
+@supports not selector(:scope) {
+  .list,
+  .indicator,
+  .tab,
+  .tabActive,
+  .tabDisabled,
+  .panel,
+  .panelActive,
+  .panelInactive {
+    // Styles remain scoped via SCSS nesting (defined above)
   }
-}
-
-.tabActive {
-  background: var(--tabs-color-active-bg);
-  color: var(--tabs-color-active-fg);
-}
-
-.tabDisabled {
-  color: var(--tabs-color-disabled-fg);
-  cursor: not-allowed;
-}
-
-.panel {
-  margin-block-start: var(--tabs-spacing-panelGap);
-}
-
-.panelActive {
-  opacity: 1;
-}
-
-.panelInactive {
-  opacity: 0;
 }

@@ -14,6 +14,9 @@
 .popoverContent {
   @include popoverTokens.vars;
 
+  // CSS Containment - strict for isolated popover
+  contain: strict;
+
   z-index: 1000;
   display: flex;
   flex-direction: column;

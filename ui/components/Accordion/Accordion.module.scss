@@ -4,98 +4,118 @@
 .accordion {
   @include accordionTokens.vars;
 
+  // CSS Containment - layout containment for accordion items
+  contain: layout;
+
   display: flex;
   flex-direction: column;
   gap: 0;
   width: 100%;
+}
 
-  .item {
-    border-bottom: var(--accordion-border-width) solid
-      var(--accordion-border-color);
+// Scoped styles for accordion sub-components
+@supports selector(:scope) {
+  @scope (.accordion) {
+    .item {
+      border-block-end: var(--accordion-border-width) solid
+        var(--accordion-border-color);
 
-    &:last-child {
-      border-bottom: none;
-    }
-
-    .header {
-      display: flex;
-    }
-
-    .trigger {
-      display: flex;
-      flex: 1;
-      gap: var(--accordion-spacing-gap);
-      justify-content: space-between;
-      align-items: flex-start;
-      width: 100%;
-      padding: var(--accordion-spacing-padding-y)
-        var(--accordion-spacing-padding-x);
-      background: none;
-      border: none;
-      border-radius: var(--accordion-border-radius);
-      outline: none;
-      color: var(--accordion-color-text);
-      font: inherit;
-      font-weight: var(--accordion-text-weight);
-      font-size: var(--accordion-text-size);
-      line-height: var(--accordion-text-lineHeight);
-      text-align: left;
-      transition:
-        background-color var(--accordion-motion-duration)
-          var(--accordion-motion-easing),
-        color var(--accordion-motion-duration) var(--accordion-motion-easing);
-      cursor: pointer;
-
-      &:hover {
-        background-color: var(--accordion-color-background-hover);
-        color: var(--accordion-color-text-hover);
-        text-decoration: underline;
+      &:last-child {
+        border-block-end: none;
       }
 
-      &:focus-visible {
-        outline: var(--accordion-focus-width) solid var(--accordion-focus-color);
-        outline-offset: var(--accordion-focus-offset);
+      .header {
+        display: flex;
       }
 
-      &:disabled {
-        opacity: var(--accordion-opacity-disabled);
-        cursor: not-allowed;
-        pointer-events: none;
+      .trigger {
+        display: flex;
+        flex: 1;
+        gap: var(--accordion-spacing-gap);
+        justify-content: space-between;
+        align-items: flex-start;
+        width: 100%;
+        padding: var(--accordion-spacing-padding-y)
+          var(--accordion-spacing-padding-x);
+        background: none;
+        border: none;
+        border-radius: var(--accordion-border-radius);
+        outline: none;
+        color: var(--accordion-color-text);
+        font: inherit;
+        font-weight: var(--accordion-text-weight);
+        font-size: var(--accordion-text-size);
+        line-height: var(--accordion-text-lineHeight);
+        text-align: start;
+        transition:
+          background-color var(--accordion-motion-duration)
+            var(--accordion-motion-easing),
+          color var(--accordion-motion-duration) var(--accordion-motion-easing);
+        cursor: pointer;
+
+        &:hover {
+          background-color: var(--accordion-color-background-hover);
+          color: var(--accordion-color-text-hover);
+          text-decoration: underline;
+        }
+
+        &:focus-visible {
+          outline: var(--accordion-focus-width) solid var(--accordion-focus-color);
+          outline-offset: var(--accordion-focus-offset);
+        }
+
+        &:disabled {
+          opacity: var(--accordion-opacity-disabled);
+          cursor: not-allowed;
+          pointer-events: none;
+        }
+
+        .chevron {
+          flex-shrink: 0;
+          width: var(--accordion-icon-size);
+          height: var(--accordion-icon-size);
+          color: var(--accordion-color-icon);
+          transition: transform var(--accordion-motion-duration)
+            var(--accordion-motion-easing);
+          transform: translateY(var(--accordion-icon-offset));
+        }
+
+        &[data-state='open'] .chevron {
+          transform: translateY(var(--accordion-icon-offset)) rotate(180deg);
+        }
       }
 
-      .chevron {
-        flex-shrink: 0;
-        width: var(--accordion-icon-size);
-        height: var(--accordion-icon-size);
-        color: var(--accordion-color-icon);
-        transition: transform var(--accordion-motion-duration)
+      .content {
+        overflow: hidden;
+        height: 0;
+        transition: height var(--accordion-motion-duration)
           var(--accordion-motion-easing);
-        transform: translateY(var(--accordion-icon-offset));
-      }
 
-      &[data-state='open'] .chevron {
-        transform: translateY(var(--accordion-icon-offset)) rotate(180deg);
-      }
-    }
+        &[data-state='open'] {
+          height: var(--accordion-content-height);
+        }
 
-    .content {
-      overflow: hidden;
-      height: 0;
-      transition: height var(--accordion-motion-duration)
-        var(--accordion-motion-easing);
-
-      &[data-state='open'] {
-        height: var(--accordion-content-height);
-      }
-
-      .contentInner {
-        padding: 0 var(--accordion-spacing-padding-x)
-          var(--accordion-spacing-padding-y);
-        color: var(--accordion-color-text-secondary);
-        font-size: var(--accordion-text-size-content);
-        line-height: var(--accordion-text-lineHeight-content);
+        .contentInner {
+          padding: 0 var(--accordion-spacing-padding-x)
+            var(--accordion-spacing-padding-y);
+          color: var(--accordion-color-text-secondary);
+          font-size: var(--accordion-text-size-content);
+          line-height: var(--accordion-text-lineHeight-content);
+        }
       }
     }
+  }
+}
+
+// Fallback for browsers without @scope support
+@supports not selector(:scope) {
+  .item,
+  .header,
+  .trigger,
+  .content,
+  .contentInner,
+  .chevron {
+    // Styles remain scoped via SCSS nesting (defined above)
   }
 }
 

@@ -17,6 +17,9 @@
 }
 
 .dialog {
+  // CSS Containment - strict for isolated modal
+  contain: strict;
+
   position: relative;
   display: flex;
   flex-direction: column;
@@ -61,81 +64,167 @@
   }
 }
 
-.header {
-  position: relative;
-  flex-shrink: 0;
-  padding: var(--dialog-spacing-header-paddingTop)
-    var(--dialog-spacing-header-paddingRight)
-    var(--dialog-spacing-header-paddingBottom)
-    var(--dialog-spacing-header-paddingLeft);
-  border-bottom: 1px solid var(--dialog-color-border-default);
+// Scoped styles for dialog sub-components
+@supports selector(:scope) {
+  @scope (.dialog) {
+    .header {
+      position: relative;
+      flex-shrink: 0;
+      padding: var(--dialog-spacing-header-paddingTop)
+        var(--dialog-spacing-header-paddingRight)
+        var(--dialog-spacing-header-paddingBottom)
+        var(--dialog-spacing-header-paddingLeft);
+      border-block-end: 1px solid var(--dialog-color-border-default);
+    }
+
+    .title {
+      margin: 0;
+      color: var(--dialog-color-foreground-title);
+      font-weight: var(--dialog-typography-title-fontWeight);
+      font-size: var(--dialog-typography-title-fontSize);
+      line-height: var(--dialog-typography-title-lineHeight);
+    }
+
+    .body {
+      flex: 1;
+      overflow-y: auto;
+      padding: var(--dialog-spacing-body-paddingTop)
+        var(--dialog-spacing-body-paddingRight)
+        var(--dialog-spacing-body-paddingBottom)
+        var(--dialog-spacing-body-paddingLeft);
+      color: var(--dialog-color-foreground-default);
+    }
+
+    .footer {
+      display: flex;
+      flex-shrink: 0;
+      gap: var(--dialog-spacing-footer-gap);
+      justify-content: flex-end;
+      align-items: center;
+      padding: var(--dialog-spacing-footer-paddingTop)
+        var(--dialog-spacing-footer-paddingRight)
+        var(--dialog-spacing-footer-paddingBottom)
+        var(--dialog-spacing-footer-paddingLeft);
+      border-block-start: 1px solid var(--dialog-color-border-default);
+    }
+
+    .closeButton {
+      position: absolute;
+      inset-block-start: var(--core-spacing-size-04);
+      inset-inline-end: var(--core-spacing-size-04);
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: var(--core-spacing-size-08);
+      height: var(--core-spacing-size-08);
+      padding: 0;
+      background: transparent;
+      border: none;
+      border-radius: var(--semantic-shape-radius-small);
+      color: var(--dialog-color-foreground-secondary);
+      font-size: 1.25rem;
+      line-height: 1;
+      transition:
+        background-color var(--dialog-motion-duration-enter)
+          var(--dialog-motion-easing-enter),
+        color var(--dialog-motion-duration-enter) var(--dialog-motion-easing-enter);
+      cursor: pointer;
+
+      &:hover {
+        background: var(--semantic-color-background-hover);
+        color: var(--dialog-color-foreground-default);
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--semantic-color-border-focus);
+        outline-offset: 2px;
+      }
+
+      &:active {
+        background: var(--semantic-color-background-active);
+      }
+    }
+  }
 }
 
-.title {
-  margin: 0;
-  color: var(--dialog-color-foreground-title);
-  font-weight: var(--dialog-typography-title-fontWeight);
-  font-size: var(--dialog-typography-title-fontSize);
-  line-height: var(--dialog-typography-title-lineHeight);
-}
+// Fallback for browsers without @scope support
+@supports not selector(:scope) {
+  .header {
+    position: relative;
+    flex-shrink: 0;
+    padding: var(--dialog-spacing-header-paddingTop)
+      var(--dialog-spacing-header-paddingRight)
+      var(--dialog-spacing-header-paddingBottom)
+      var(--dialog-spacing-header-paddingLeft);
+    border-block-end: 1px solid var(--dialog-color-border-default);
+  }
 
-.body {
-  flex: 1;
-  overflow-y: auto;
-  padding: var(--dialog-spacing-body-paddingTop)
-    var(--dialog-spacing-body-paddingRight)
-    var(--dialog-spacing-body-paddingBottom)
-    var(--dialog-spacing-body-paddingLeft);
-  color: var(--dialog-color-foreground-default);
-}
+  .title {
+    margin: 0;
+    color: var(--dialog-color-foreground-title);
+    font-weight: var(--dialog-typography-title-fontWeight);
+    font-size: var(--dialog-typography-title-fontSize);
+    line-height: var(--dialog-typography-title-lineHeight);
+  }
 
-.footer {
-  display: flex;
-  flex-shrink: 0;
-  gap: var(--dialog-spacing-footer-gap);
-  justify-content: flex-end;
-  align-items: center;
-  padding: var(--dialog-spacing-footer-paddingTop)
-    var(--dialog-spacing-footer-paddingRight)
-    var(--dialog-spacing-footer-paddingBottom)
-    var(--dialog-spacing-footer-paddingLeft);
-  border-top: 1px solid var(--dialog-color-border-default);
-}
-
-.closeButton {
-  position: absolute;
-  top: var(--core-spacing-size-04);
-  right: var(--core-spacing-size-04);
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: var(--core-spacing-size-08);
-  height: var(--core-spacing-size-08);
-  padding: 0;
-  background: transparent;
-  border: none;
-  border-radius: var(--semantic-shape-radius-small);
-  color: var(--dialog-color-foreground-secondary);
-  font-size: 1.25rem;
-  line-height: 1;
-  transition:
-    background-color var(--dialog-motion-duration-enter)
-      var(--dialog-motion-easing-enter),
-    color var(--dialog-motion-duration-enter) var(--dialog-motion-easing-enter);
-  cursor: pointer;
-
-  &:hover {
-    background: var(--semantic-color-background-hover);
+  .body {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--dialog-spacing-body-paddingTop)
+      var(--dialog-spacing-body-paddingRight)
+      var(--dialog-spacing-body-paddingBottom)
+      var(--dialog-spacing-body-paddingLeft);
     color: var(--dialog-color-foreground-default);
   }
 
-  &:focus-visible {
-    outline: 2px solid var(--semantic-color-border-focus);
-    outline-offset: 2px;
+  .footer {
+    display: flex;
+    flex-shrink: 0;
+    gap: var(--dialog-spacing-footer-gap);
+    justify-content: flex-end;
+    align-items: center;
+    padding: var(--dialog-spacing-footer-paddingTop)
+      var(--dialog-spacing-footer-paddingRight)
+      var(--dialog-spacing-footer-paddingBottom)
+      var(--dialog-spacing-footer-paddingLeft);
+    border-block-start: 1px solid var(--dialog-color-border-default);
   }
 
-  &:active {
-    background: var(--semantic-color-background-active);
+  .closeButton {
+    position: absolute;
+    inset-block-start: var(--core-spacing-size-04);
+    inset-inline-end: var(--core-spacing-size-04);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: var(--core-spacing-size-08);
+    height: var(--core-spacing-size-08);
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: var(--semantic-shape-radius-small);
+    color: var(--dialog-color-foreground-secondary);
+    font-size: 1.25rem;
+    line-height: 1;
+    transition:
+      background-color var(--dialog-motion-duration-enter)
+        var(--dialog-motion-easing-enter),
+      color var(--dialog-motion-duration-enter) var(--dialog-motion-easing-enter);
+    cursor: pointer;
+
+    &:hover {
+      background: var(--semantic-color-background-hover);
+      color: var(--dialog-color-foreground-default);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--semantic-color-border-focus);
+      outline-offset: 2px;
+    }
+
+    &:active {
+      background: var(--semantic-color-background-active);
+    }
   }
 }
 

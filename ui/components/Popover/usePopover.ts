@@ -63,5 +63,34 @@ export function usePopover(options: UsePopoverOptions = {}): UsePopoverReturn {
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [isOpen, closeOnEscape]);
 
+  // Focus management
+  React.useEffect(() => {
+    if (!isOpen) return;
+
+    const trigger = triggerRef.current;
+    const content = contentRef.current;
+
+    // Store previously focused element for return focus
+    const previousFocusedElement = document.activeElement as HTMLElement;
+
+    // Set initial focus to first focusable element in content
+    const focusableElement = content?.querySelector(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    ) as HTMLElement;
+
+    if (focusableElement) {
+      focusableElement.focus();
+    }
+
+    return () => {
+      // Return focus to trigger when popover closes
+      if (trigger && document.contains(trigger)) {
+        trigger.focus();
+      } else if (previousFocusedElement && document.contains(previousFocusedElement)) {
+        previousFocusedElement.focus();
+      }
+    };
+  }, [isOpen]);
+
   return { isOpen, open, close, toggle, triggerRef, contentRef };
 }

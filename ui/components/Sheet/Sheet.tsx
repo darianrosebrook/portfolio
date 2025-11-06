@@ -206,6 +206,9 @@ const SheetContent = React.forwardRef<HTMLDivElement, SheetContentProps>(
       const content = contentRef?.current;
       if (!content) return;
 
+      // Store previously focused element for return focus
+      const previousFocusedElement = document.activeElement as HTMLElement;
+
       // Focus first focusable element
       const focusableElement = content.querySelector(
         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
@@ -216,6 +219,7 @@ const SheetContent = React.forwardRef<HTMLDivElement, SheetContentProps>(
       }
 
       // Focus trap for modal sheets
+      let focusTrapCleanup: (() => void) | undefined;
       if (modal) {
         const handleKeyDown = (e: KeyboardEvent) => {
           if (e.key === 'Tab') {
@@ -245,9 +249,21 @@ const SheetContent = React.forwardRef<HTMLDivElement, SheetContentProps>(
         };
 
         document.addEventListener('keydown', handleKeyDown);
-        return () => document.removeEventListener('keydown', handleKeyDown);
+        focusTrapCleanup = () => document.removeEventListener('keydown', handleKeyDown);
       }
-    }, [isOpen, modal, contentRef]);
+
+      return () => {
+        // Cleanup focus trap
+        focusTrapCleanup?.();
+        
+        // Return focus to trigger when sheet closes
+        if (triggerRef?.current && document.contains(triggerRef.current)) {
+          triggerRef.current.focus();
+        } else if (previousFocusedElement && document.contains(previousFocusedElement)) {
+          previousFocusedElement.focus();
+        }
+      };
+    }, [isOpen, modal, contentRef, triggerRef]);
 
     // Body scroll lock for modal sheets
     React.useEffect(() => {

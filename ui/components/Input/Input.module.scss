@@ -3,6 +3,9 @@
 .input {
   @include inputTokens.vars;
 
+  // Container queries for responsive sizing
+  container-type: inline-size;
+
   padding-inline: var(--input-space-inline);
   padding-block: 0;
   background: var(--input-color-bg);
@@ -12,15 +15,47 @@
   appearance: none;
   block-size: var(--input-size-height);
   inline-size: 100%;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+
+  &:hover:not(:disabled):not(:read-only) {
+    // Use color-mix() for subtle hover effect
+    background-color: color-mix(in srgb, var(--input-color-bg) 95%, var(--input-color-focus) 5%);
+    border-color: color-mix(in srgb, var(--input-color-border) 80%, var(--input-color-focus) 20%);
+  }
+
+  &:focus-visible {
+    border-color: var(--input-color-focus);
+    box-shadow: 0 0 0 3px
+      color-mix(in oklab, var(--input-color-focus) 25%, transparent);
+    outline: none;
+  }
+
+  &.invalid {
+    border-color: var(--input-color-invalid);
+    
+    &:focus-visible {
+      // Use color-mix() for invalid focus state
+      box-shadow: 0 0 0 3px
+        color-mix(in oklab, var(--input-color-invalid) 25%, transparent);
+    }
+  }
 }
 
-.input:focus-visible {
-  border-color: var(--input-color-focus);
-  box-shadow: 0 0 0 3px
-    color-mix(in oklab, var(--input-color-focus) 25%, transparent);
-  outline: none;
-}
+// Container queries for responsive input sizing
+@supports (container-type: inline-size) {
+  .input {
+    @container (max-width: 20rem) {
+      // Compact input for small containers
+      padding-inline: calc(var(--input-space-inline) * 0.75);
+      block-size: calc(var(--input-size-height) * 0.95);
+      font-size: calc(1rem * 0.9);
+    }
 
-.invalid {
-  border-color: var(--input-color-invalid);
+    @container (max-width: 15rem) {
+      // Minimal input for very small containers
+      padding-inline: calc(var(--input-space-inline) * 0.5);
+      block-size: calc(var(--input-size-height) * 0.9);
+      font-size: calc(1rem * 0.85);
+    }
+  }
 }

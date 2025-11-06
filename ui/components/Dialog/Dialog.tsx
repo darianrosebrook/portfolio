@@ -8,6 +8,7 @@ import React, {
   useId,
   useEffect,
   useCallback,
+  useMemo,
   forwardRef,
   createContext,
   useContext,
@@ -297,7 +298,9 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
           className={dialogClassName}
           onClick={(e) => e.stopPropagation()}
         >
-          <DialogContext.Provider value={{ dialogId, close }}>
+          <DialogContext.Provider
+            value={useMemo(() => ({ dialogId, close }), [dialogId, close])}
+          >
             {children}
           </DialogContext.Provider>
         </div>

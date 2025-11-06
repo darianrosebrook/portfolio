@@ -2,7 +2,15 @@
   "prefix": "sheet",
   "tokens": {
     "color": {
-      "overlay": "rgba(0, 0, 0, 0.5)",
+      "overlay": {
+        "colorSpace": "srgb",
+        "components": [
+          0,
+          0,
+          0
+        ],
+        "alpha": 0.5
+      },
       "background": "{semantic.color.background.primary}",
       "backgroundHover": "{semantic.interaction.background.hover}",
       "border": "{semantic.color.border.light}",
@@ -18,8 +26,14 @@
       "radiusClose": "{core.shape.radius.small}"
     },
     "size": {
-      "width": "400px",
-      "height": "300px",
+      "width": {
+        "value": 400,
+        "unit": "px"
+      },
+      "height": {
+        "value": 300,
+        "unit": "px"
+      },
       "close": "{core.spacing.size.06}"
     },
     "spacing": {

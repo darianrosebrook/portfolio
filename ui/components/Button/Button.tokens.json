@@ -10,15 +10,12 @@
         "focus": "{semantic.color.action.background.focus}",
         "focusVisible": "{semantic.color.action.background.focusVisible}",
         "disabled": "{semantic.color.action.background.disabled}",
-
         "primary": "{semantic.color.background.primary}",
         "primaryHover": "{semantic.interaction.background.hover}",
         "primaryActive": "{semantic.interaction.background.active}",
-
         "secondary": "{semantic.color.background.secondary}",
         "secondaryHover": "{semantic.interaction.background.hover}",
         "secondaryActive": "{semantic.interaction.background.active}",
-
         "tertiary": "{core.color.mode.transparent}",
         "tertiaryHover": "{semantic.interaction.background.hover}",
         "tertiaryActive": "{semantic.interaction.background.active}"
@@ -30,27 +27,21 @@
         "focus": "{semantic.color.foreground.inverse}",
         "focusVisible": "{semantic.color.foreground.inverse}",
         "disabled": "{semantic.color.foreground.disabled}",
-
         "primary": "{semantic.color.foreground.primary}",
         "primaryHover": "{semantic.color.foreground.onBrand}",
         "primaryActive": "{semantic.color.foreground.onBrand}",
-
         "secondary": "{semantic.color.foreground.primary }",
         "secondaryHover": "{semantic.interaction.text.hover}",
         "secondaryActive": "{semantic.interaction.text.active}",
-
         "tertiary": "{semantic.color.foreground.primary}",
         "tertiaryHover": "{semantic.interaction.text.hover}",
         "tertiaryActive": "{semantic.interaction.text.active}",
-
         "ghost": "{semantic.color.foreground.primary}",
         "ghostHover": "{semantic.interaction.text.hover}",
         "ghostActive": "{semantic.interaction.text.active}",
-
         "destructive": "{semantic.color.feedback.error.foreground}",
         "destructiveHover": "{semantic.color.feedback.error.foreground}",
         "destructiveActive": "{semantic.color.feedback.error.foreground}",
-
         "outline": "{semantic.color.foreground.secondary}",
         "outlineHover": "{semantic.interaction.text.hover}",
         "outlineActive": "{semantic.interaction.text.active}"
@@ -62,27 +53,21 @@
         "focus": "{semantic.color.border.accent}",
         "focusVisible": "{semantic.color.border.accent}",
         "disabled": "{semantic.color.border.disabled}",
-
         "primary": "{semantic.color.border.accent}",
         "primaryHover": "{semantic.color.border.accent}",
         "primaryActive": "{semantic.color.border.accent}",
-
         "secondary": "{semantic.color.border.light}",
         "secondaryHover": "{semantic.interaction.border.hover}",
         "secondaryActive": "{semantic.interaction.border.active}",
-
         "tertiary": "{semantic.color.border.light}",
         "tertiaryHover": "{semantic.interaction.border.hover}",
         "tertiaryActive": "{semantic.interaction.border.active}",
-
         "ghost": "{core.color.mode.transparent}",
         "ghostHover": "{semantic.interaction.border.hover}",
         "ghostActive": "{semantic.interaction.border.active}",
-
         "destructive": "{semantic.color.feedback.error.border}",
         "destructiveHover": "{semantic.color.feedback.error.border}",
         "destructiveActive": "{semantic.color.feedback.error.border}",
-
         "outline": "{semantic.color.border.secondary}",
         "outlineHover": "{semantic.interaction.border.hover}",
         "outlineActive": "{semantic.interaction.border.active}"
@@ -92,7 +77,6 @@
         "borderAccent": "{semantic.color.border.accent}"
       }
     },
-
     "size": {
       "gap": {
         "default": "{core.spacing.size.04}",
@@ -118,7 +102,6 @@
       },
       "margin": "{core.spacing.size.04}"
     },
-
     "text": {
       "weight": "{semantic.typography.fontWeight.medium}",
       "size": {
@@ -130,7 +113,6 @@
         "collapse": "{semantic.typography.lineHeight.collapse}"
       }
     },
-
     "motion": {
       "duration": {
         "fast": "{core.motion.duration.short}",
@@ -139,9 +121,10 @@
       "easing": {
         "standard": "{core.motion.easing.standard}"
       },
-      "scale": { "pressed": 0.98 }
+      "scale": {
+        "pressed": 0.98
+      }
     },
-
     "focus": {
       "outlineWidth": "{core.shape.border.width.thick}",
       "outlineOffset": "{core.spacing.size.02}",

@@ -1,3 +1,4 @@
+'use client';
 import React, { useRef, useEffect, useMemo } from 'react';
 import { gsap } from 'gsap';
 import styles from './Chip.module.scss';
@@ -176,8 +177,12 @@ const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
       const chipElement = chipRef.current;
       if (!chipElement || disabled) return;
 
+      let enterAnimation: gsap.core.Tween | null = null;
+      let leaveAnimation: gsap.core.Tween | null = null;
+
       const handleMouseEnter = () => {
-        gsap.to(chipElement, {
+        if (enterAnimation) enterAnimation.kill();
+        enterAnimation = gsap.to(chipElement, {
           scale: 1.02,
           duration: 0.2,
           ease: 'power2.out',
@@ -185,7 +190,8 @@ const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
       };
 
       const handleMouseLeave = () => {
-        gsap.to(chipElement, {
+        if (leaveAnimation) leaveAnimation.kill();
+        leaveAnimation = gsap.to(chipElement, {
           scale: 1,
           duration: 0.2,
           ease: 'power2.out',
@@ -198,6 +204,8 @@ const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
       return () => {
         chipElement.removeEventListener('mouseenter', handleMouseEnter);
         chipElement.removeEventListener('mouseleave', handleMouseLeave);
+        if (enterAnimation) enterAnimation.kill();
+        if (leaveAnimation) leaveAnimation.kill();
       };
     }, [disabled]);
 

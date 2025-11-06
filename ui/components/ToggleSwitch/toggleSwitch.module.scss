@@ -64,13 +64,13 @@
 }
 
 .label {
-  margin-left: 0.25rem;
+  margin-inline-start: 0.25rem;
   cursor: pointer;
 }
 
 .label::before {
   position: absolute;
-  top: 50%;
+  inset-block-start: 50%;
   display: inline-block;
   width: 1rem;
   height: 1rem;
@@ -78,7 +78,7 @@
   border: 1px solid var(--toggle-color-border-thumb);
   border-radius: var(--toggle-size-radius-full);
   transition:
-    left var(--toggle-motion-duration-fast) var(--toggle-motion-easing-standard),
+    inset-inline-start var(--toggle-motion-duration-fast) var(--toggle-motion-easing-standard),
     background-color var(--toggle-motion-duration-fast)
       var(--toggle-motion-easing-standard),
     border-color var(--toggle-motion-duration-fast)
@@ -87,29 +87,29 @@
 }
 
 .label.checked::before {
-  left: 1.75rem;
+  inset-inline-start: 1.75rem;
   background-color: var(--toggle-color-background-thumbChecked);
 }
 
 // Size variants for labels
 .toggleSwitch.small .label::before {
-  top: 50%;
+  inset-block-start: 50%;
   width: 0.875rem;
   height: 0.875rem;
 }
 
 .toggleSwitch.small .label.checked::before {
-  left: 1.5rem;
+  inset-inline-start: 1.5rem;
 }
 
 .toggleSwitch.large .label::before {
-  top: 50%;
+  inset-block-start: 50%;
   width: 1.25rem;
   height: 1.25rem;
 }
 
 .toggleSwitch.large .label.checked::before {
-  left: 2rem;
+  inset-inline-start: 2rem;
 }
 
 .disabled {

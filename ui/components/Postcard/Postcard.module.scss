@@ -7,7 +7,7 @@ a:has(.post) {
 .post {
   @include postcardTokens.vars;
 
-  margin-bottom: var(--postcard-size-margin-bottom);
+  margin-block-end: var(--postcard-size-margin-bottom);
   padding: var(--postcard-size-padding-default);
   background-color: var(--postcard-color-background-default);
   border: var(--border-weight-thin) solid var(--postcard-color-border-default);
@@ -24,7 +24,7 @@ a:has(.post) {
   display: flex;
   gap: var(--postcard-size-gap-default);
   align-items: center;
-  margin-bottom: var(--postcard-size-gap-default);
+  margin-block-end: var(--postcard-size-gap-default);
 }
 
 .userInfo {
@@ -53,13 +53,13 @@ a:has(.post) {
 }
 
 .timestamp {
-  margin-left: auto;
+  margin-inline-start: auto;
   color: var(--postcard-color-foreground-secondary);
   font-size: var(--body-03);
 }
 
 .content {
-  margin-bottom: var(--postcard-size-gap-default);
+  margin-block-end: var(--postcard-size-gap-default);
   color: var(--postcard-color-foreground-primary);
   font-size: var(--body-02);
   line-height: var(--line-height-body);
@@ -72,7 +72,7 @@ a:has(.post) {
   display: block;
   width: 100%;
   height: auto;
-  margin-top: var(--postcard-size-gap-default);
+  margin-block-start: var(--postcard-size-gap-default);
   border-radius: var(--postcard-size-radius-medium);
 }
 

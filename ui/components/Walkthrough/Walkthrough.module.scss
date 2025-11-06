@@ -19,8 +19,8 @@
 }
 
 .description {
-  margin-top: var(--walkthrough-description-marginTop);
-  margin-bottom: 0;
+  margin-block-start: var(--walkthrough-description-marginTop);
+  margin-block-end: 0;
   color: var(--walkthrough-description-color);
   font-size: var(--walkthrough-description-fontSize);
 }
@@ -29,7 +29,7 @@
   display: flex;
   gap: var(--walkthrough-controls-gap);
   justify-content: flex-end;
-  margin-top: var(--walkthrough-controls-marginTop);
+  margin-block-start: var(--walkthrough-controls-marginTop);
 }
 
 .skip,
@@ -76,7 +76,7 @@
   display: inline-flex;
   gap: var(--walkthrough-dots-gap);
   justify-content: center;
-  margin-bottom: var(--walkthrough-controls-marginTop);
+  margin-block-end: var(--walkthrough-controls-marginTop);
 }
 
 .dot,
@@ -94,7 +94,7 @@
 }
 
 .counter {
-  margin-bottom: var(--walkthrough-controls-marginTop);
+  margin-block-end: var(--walkthrough-controls-marginTop);
   color: var(--walkthrough-description-color);
   font-size: var(--walkthrough-description-fontSize);
   text-align: center;

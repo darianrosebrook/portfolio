@@ -42,6 +42,11 @@ const sections = [
     href: '/blueprints/foundations/tokens/theming',
   },
   {
+    title: 'Resolver Module',
+    desc: 'DTCG 1.0 Resolver Module for context-aware token resolution with sets, modifiers, and resolution orders.',
+    href: '/blueprints/foundations/tokens/resolver-module',
+  },
+  {
     title: 'Schema & Validation',
     desc: 'DTCG 1.0 JSON Schema for IntelliSense and AJV validation with structured value enforcement.',
     href: '/blueprints/foundations/tokens/schema-validation',

@@ -20,7 +20,9 @@
   cursor: pointer;
 
   &:hover {
-    border-color: var(--checkbox-color-border-hover);
+    // Use color-mix() for subtle hover effect
+    border-color: color-mix(in srgb, var(--checkbox-color-border-default) 80%, var(--checkbox-color-border-hover) 20%);
+    background-color: color-mix(in srgb, var(--checkbox-color-background-default) 95%, var(--checkbox-color-border-hover) 5%);
   }
 }
 
@@ -92,8 +94,9 @@
   }
 
   &:checked + .indicator {
-    background-color: var(--checkbox-color-background-checked);
-    border-color: var(--checkbox-color-border-checked);
+    // Use color-mix() for checked state variations
+    background-color: color-mix(in srgb, var(--checkbox-color-background-checked) 100%, transparent);
+    border-color: color-mix(in srgb, var(--checkbox-color-border-checked) 100%, transparent);
     color: var(--checkbox-color-icon-default);
 
     .checkIcon,

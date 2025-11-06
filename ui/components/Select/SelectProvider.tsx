@@ -20,8 +20,14 @@ export const useSelectContext = () => {
 export const SelectProvider: React.FC<
   { children: React.ReactNode } & UseSelectOptions
 > = ({ children, ...options }) => {
-  const value = useSelect(options);
+  // Fix: Hooks must be called unconditionally at the top level
+  // Cannot call hooks inside useMemo, useCallback, or conditionally
+  const selectValue = useSelect(options);
+  
+  // useSelect already returns stable function references (via useCallback)
+  // and manages state properly. The context value will update when state changes,
+  // which is the correct behavior. No additional memoization needed.
   return (
-    <SelectContext.Provider value={value}>{children}</SelectContext.Provider>
+    <SelectContext.Provider value={selectValue}>{children}</SelectContext.Provider>
   );
 };

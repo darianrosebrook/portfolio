@@ -53,7 +53,7 @@ export interface SwitchProps
   size?: ControlSize;
 }
 
-const Switch = ({
+const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(({
   children,
   checked,
   onChange,
@@ -64,7 +64,7 @@ const Switch = ({
   ariaDescription,
   size = 'md',
   ...rest
-}: SwitchProps) => {
+}, ref) => {
   const safeId = useMemo(() => {
     if (id) return id;
     if (typeof children === 'string') {
@@ -86,6 +86,7 @@ const Switch = ({
   return (
     <div className={switchClassName}>
       <input
+        ref={ref}
         type="checkbox"
         role="switch"
         checked={checked}
@@ -113,7 +114,7 @@ const Switch = ({
       </label>
     </div>
   );
-};
+});
 
 Switch.displayName = 'Switch';
 

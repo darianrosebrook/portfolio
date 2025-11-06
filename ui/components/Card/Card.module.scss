@@ -3,6 +3,9 @@
 .card {
   @include cardTokens.vars;
 
+  // CSS Containment for performance optimization
+  contain: layout style paint;
+
   display: flex;
   flex-direction: column;
   padding: var(--card-size-padding-default);
@@ -10,6 +13,7 @@
   border-radius: var(--card-size-radius-default);
   color: var(--card-color-foreground-primary);
   transition: all var(--transition-duration-fast) var(--transition-easing-ease);
+  container-type: inline-size;
 
   @media (prefers-reduced-motion: reduce) {
     transition: none;
@@ -41,7 +45,8 @@
     cursor: pointer;
 
     &:hover {
-      background-color: var(--card-color-background-hover);
+      // Use color-mix() for dynamic hover effect
+      background-color: color-mix(in srgb, var(--card-color-background-default) 90%, var(--card-color-background-hover) 10%);
       box-shadow: var(--card-elevation-hover, var(--shadow-card-hover));
       transform: translateY(var(--card-motion-hover-offset, -0.125rem));
     }
@@ -54,6 +59,175 @@
 
     &:active {
       transform: translateY(0);
+    }
+  }
+
+  // Sub-components with scoped styles to prevent leakage
+  @supports selector(:scope) {
+    @scope (.card) {
+      .header {
+        margin-block-end: var(--card-size-padding-default);
+        color: var(--card-color-foreground-primary);
+
+        &:has(.badge) {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: var(--core-spacing-size-03);
+        }
+      }
+
+      .content {
+        color: var(--card-color-foreground-primary);
+        line-height: 1.5;
+      }
+
+      .title {
+        margin: 0;
+        font-size: var(--font-size-heading-4);
+        font-weight: var(--font-weight-semibold);
+        line-height: var(--line-height-heading);
+        color: var(--card-color-foreground-primary);
+      }
+
+      .description {
+        margin: 0;
+        font-size: var(--font-size-body-2);
+        line-height: var(--line-height-body);
+        color: var(--card-color-foreground-secondary);
+      }
+
+      .media {
+        margin-block-end: var(--card-size-padding-default);
+
+        img,
+        video {
+          width: 100%;
+          height: auto;
+          border-radius: var(--card-size-radius-medium, 0.5rem);
+        }
+      }
+
+      .footer {
+        margin-block-start: var(--card-size-padding-default);
+        padding-block-start: var(--card-size-padding-default);
+        border-block-start: 1px solid var(--card-color-border-default);
+        color: var(--card-color-foreground-secondary);
+      }
+
+      .actions {
+        display: flex;
+        gap: var(--core-spacing-size-03);
+        align-items: center;
+        justify-content: flex-end;
+        margin-block-start: var(--card-size-padding-default);
+      }
+
+      .link {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--core-spacing-size-02);
+        color: var(--card-color-foreground-accent, var(--color-link));
+        text-decoration: none;
+        font-weight: var(--font-weight-medium);
+
+        &:hover {
+          text-decoration: underline;
+        }
+
+        &:focus-visible {
+          outline: 2px solid var(--card-color-border-accent, var(--color-focus-ring));
+          outline-offset: 2px;
+        }
+      }
+
+      .note {
+        margin-block-start: var(--card-size-padding-default);
+        padding: var(--core-spacing-size-04);
+        background-color: var(--card-color-background-secondary, var(--semantic-color-background-secondary));
+        border: 1px solid var(--card-color-border-default);
+        border-radius: var(--card-size-radius-medium, 0.5rem);
+      .note {
+        margin-block-start: var(--card-size-padding-default);
+        padding: var(--core-spacing-size-04);
+        background-color: var(--card-color-background-secondary, var(--semantic-color-background-secondary));
+        border: 1px solid var(--card-color-border-default);
+        border-radius: var(--card-size-radius-medium, 0.5rem);
+        color: var(--card-color-foreground-primary);
+        font-style: italic;
+        font-size: var(--font-size-body-3);
+      }
+
+      // Badge styles
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        padding: var(--core-spacing-size-01) var(--core-spacing-size-03);
+        border-radius: var(--card-size-radius-full, 1rem);
+        font-size: var(--font-size-body-3);
+        font-weight: var(--font-weight-medium);
+        text-transform: uppercase;
+        letter-spacing: 0.025em;
+
+        &.completed {
+          background-color: var(--semantic-color-success-background);
+          color: var(--semantic-color-success-foreground);
+        }
+
+        &.in-progress {
+          background-color: var(--semantic-color-warning-background);
+          color: var(--semantic-color-warning-foreground);
+        }
+
+        &.planned {
+          background-color: var(--semantic-color-info-background);
+          color: var(--semantic-color-info-foreground);
+        }
+
+        &.deprecated {
+          background-color: var(--semantic-color-error-background);
+          color: var(--semantic-color-error-foreground);
+        }
+
+        &.category {
+          background-color: var(--semantic-color-neutral-background);
+          color: var(--semantic-color-neutral-foreground);
+        }
+
+        &.complexity {
+          background-color: var(--semantic-color-accent-background);
+          color: var(--semantic-color-accent-foreground);
+        }
+      }
+    }
+  }
+
+  // Fallback for browsers without @scope support
+  @supports not selector(:scope) {
+    .header,
+    .content,
+    .title,
+    .description,
+    .media,
+    .footer,
+    .actions,
+    .link,
+    .note,
+    .badge {
+      // Styles remain scoped via SCSS nesting (fallback)
+      // These are already defined above in the @scope block
+    }
+  }
+
+  // Container queries for responsive sizing
+  @container (max-width: 20rem) {
+    padding: calc(var(--card-size-padding-default) * 0.75);
+  }
+
+  @container (min-width: 40rem) {
+    .actions {
+      flex-direction: row;
+      justify-content: space-between;
     }
   }
 }

@@ -5,48 +5,176 @@
 
   display: grid;
   gap: var(--field-gap-y);
+  container-type: inline-size;
 }
 
-.header {
-  color: var(--field-label-color);
-  font-size: var(--field-label-fontSize);
+// Scoped styles for field sub-components
+@supports selector(:scope) {
+  @scope (.root) {
+    .header {
+      color: var(--field-label-color);
+      font-size: var(--field-label-fontSize);
+    }
+
+    .control :is(input, select, textarea) {
+      padding: var(--field-pad-y) var(--field-pad-x);
+      background: var(--field-color-bg);
+      border: 1px solid var(--field-color-border);
+      border-radius: var(
+        --field-radius,
+        var(--semantic-shape-control-radius-default)
+      );
+      outline: none;
+      color: var(--field-color-fg);
+    }
+
+    .control :is(input, select, textarea):focus-visible {
+      border-color: var(--field-color-focus-border);
+      box-shadow: 0 0 0 3px
+        color-mix(in oklab, var(--field-color-focus-border) 30%, transparent);
+    }
+
+    .meta {
+      display: grid;
+      gap: var(--field-gap-meta);
+    }
+
+    .meta [role='alert'] {
+      color: var(--field-color-invalid-text);
+    }
+
+    .validatingIndicator {
+      display: inline-flex;
+      align-items: center;
+      margin-inline-start: var(--core-spacing-size-03);
+    }
+  }
 }
 
-.control :is(input, select, textarea) {
-  padding: var(--field-pad-y) var(--field-pad-x);
-  background: var(--field-color-bg);
-  border: 1px solid var(--field-color-border);
-  border-radius: var(
-    --field-radius,
-    var(--semantic-shape-control-radius-default)
-  );
-  outline: none;
-  color: var(--field-color-fg);
+// Fallback for browsers without @scope support
+@supports not selector(:scope) {
+  .header {
+    color: var(--field-label-color);
+    font-size: var(--field-label-fontSize);
+  }
+
+  .control :is(input, select, textarea) {
+    padding: var(--field-pad-y) var(--field-pad-x);
+    background: var(--field-color-bg);
+    border: 1px solid var(--field-color-border);
+    border-radius: var(
+      --field-radius,
+      var(--semantic-shape-control-radius-default)
+    );
+    outline: none;
+    color: var(--field-color-fg);
+  }
+
+  .control :is(input, select, textarea):focus-visible {
+    border-color: var(--field-color-focus-border);
+    box-shadow: 0 0 0 3px
+      color-mix(in oklab, var(--field-color-focus-border) 30%, transparent);
+  }
+
+  .meta {
+    display: grid;
+    gap: var(--field-gap-meta);
+  }
+
+  .meta [role='alert'] {
+    color: var(--field-color-invalid-text);
+  }
+
+  .validatingIndicator {
+    display: inline-flex;
+    align-items: center;
+    margin-inline-start: var(--core-spacing-size-03);
+  }
 }
 
-.control :is(input, select, textarea):focus-visible {
-  border-color: var(--field-color-focus-border);
-  box-shadow: 0 0 0 3px
-    color-mix(in oklab, var(--field-color-focus-border) 30%, transparent);
+// Enhanced validation states using :has() selector
+@supports selector(:has(*)) {
+  .root:has([data-status='invalid']) {
+    .header {
+      color: var(--field-color-invalid-text);
+    }
+
+    .control :is(input, select, textarea) {
+      border-color: var(--field-color-invalid-border);
+      box-shadow: 0 0 0 2px color-mix(in oklab, var(--field-color-invalid-border) 20%, transparent);
+    }
+  }
+
+  .root:has([data-status='valid']) {
+    .control :is(input, select, textarea) {
+      border-color: var(--field-color-valid-border, var(--semantic-color-feedback-success-border));
+      box-shadow: 0 0 0 2px color-mix(in oklab, var(--field-color-valid-border, var(--semantic-color-feedback-success-border)) 20%, transparent);
+    }
+  }
+
+  .root:has(.control :is(input, select, textarea):focus-visible) {
+    .header {
+      color: var(--field-color-focus-text, var(--semantic-color-interactive-primary));
+    }
+  }
+
+  .root:has(.validatingIndicator) {
+    .control :is(input, select, textarea) {
+      padding-inline-end: calc(var(--field-pad-x) + 2rem); // Make room for spinner
+    }
+  }
 }
 
-[data-status='invalid'] .control :is(input, select, textarea) {
-  border-color: var(--field-color-invalid-border);
-}
+// Container queries for responsive field layouts
+@supports (container-type: inline-size) {
+  .root {
+    @container (max-width: 25rem) {
+      // Compact layout for small containers
+      gap: calc(var(--field-gap-y) * 0.75);
 
-.meta {
-  display: grid;
-  gap: var(--field-gap-meta);
-}
+      .header {
+        font-size: calc(var(--field-label-fontSize) * 0.9);
+      }
 
-.meta [role='alert'] {
-  color: var(--field-color-invalid-text);
-}
+      .control :is(input, select, textarea) {
+        padding: calc(var(--field-pad-y) * 0.75) calc(var(--field-pad-x) * 0.75);
+      }
 
-.validatingIndicator {
-  display: inline-flex;
-  align-items: center;
-  margin-inline-start: var(--core-spacing-size-03);
+      .meta {
+        gap: calc(var(--field-gap-meta) * 0.75);
+        font-size: calc(var(--field-meta-fontSize, 0.875rem) * 0.9);
+      }
+    }
+
+    @container (max-width: 20rem) {
+      // Minimal layout for very small containers
+      gap: calc(var(--field-gap-y) * 0.5);
+
+      .header {
+        font-size: calc(var(--field-label-fontSize) * 0.85);
+      }
+
+      .control :is(input, select, textarea) {
+        padding: calc(var(--field-pad-y) * 0.5) calc(var(--field-pad-x) * 0.5);
+        font-size: calc(var(--field-input-fontSize, 1rem) * 0.9);
+      }
+
+      .meta {
+        font-size: calc(var(--field-meta-fontSize, 0.875rem) * 0.85);
+      }
+    }
+
+    @container (min-width: 40rem) {
+      // Enhanced layout for larger containers
+      .control :is(input, select, textarea) {
+        padding: calc(var(--field-pad-y) * 1.25) calc(var(--field-pad-x) * 1.25);
+      }
+
+      .validatingIndicator {
+        margin-inline-start: calc(var(--core-spacing-size-03) * 1.25);
+      }
+    }
+  }
 }
 
 @media (prefers-contrast: more) {

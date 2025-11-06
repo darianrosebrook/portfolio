@@ -67,7 +67,7 @@ const CardBadge = React.forwardRef<HTMLSpanElement, CardBadgeProps>(
         className={[
           styles.badge,
           status
-            ? styles[`badge__${status.replace(/\s+/g, '-')}` as const]
+            ? styles[status.replace(/\s+/g, '-')]
             : '',
           className,
         ]

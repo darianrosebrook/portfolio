@@ -32,16 +32,34 @@
       },
       "circular": {
         "sm": {
-          "size": "32px",
-          "strokeWidth": "2px"
+          "size": {
+            "value": 32,
+            "unit": "px"
+          },
+          "strokeWidth": {
+            "value": 2,
+            "unit": "px"
+          }
         },
         "md": {
-          "size": "40px",
-          "strokeWidth": "3px"
+          "size": {
+            "value": 40,
+            "unit": "px"
+          },
+          "strokeWidth": {
+            "value": 3,
+            "unit": "px"
+          }
         },
         "lg": {
-          "size": "48px",
-          "strokeWidth": "4px"
+          "size": {
+            "value": 48,
+            "unit": "px"
+          },
+          "strokeWidth": {
+            "value": 4,
+            "unit": "px"
+          }
         }
       }
     },

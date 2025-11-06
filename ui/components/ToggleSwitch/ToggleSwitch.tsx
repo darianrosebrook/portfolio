@@ -12,14 +12,13 @@ export type ToggleSwitchProps = Omit<
   disabled?: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   children: ReactNode;
-  className?: string;
   id?: string;
   ariaLabel?: string;
   ariaDescription?: string;
   size?: 'small' | 'medium' | 'large';
 };
 
-const ToggleSwitch = ({
+const ToggleSwitch = React.forwardRef<HTMLInputElement, ToggleSwitchProps>(({
   children,
   checked,
   onChange,
@@ -30,7 +29,7 @@ const ToggleSwitch = ({
   ariaDescription,
   size = 'medium',
   ...rest
-}: ToggleSwitchProps) => {
+}, ref) => {
   const safeId = useMemo(() => {
     if (id) return id;
     if (typeof children === 'string') {
@@ -49,6 +48,7 @@ const ToggleSwitch = ({
   return (
     <div className={`${styles.toggleSwitch} ${sizeClass} ${className}`}>
       <input
+        ref={ref}
         type="checkbox"
         role="switch"
         checked={checked}
@@ -76,7 +76,9 @@ const ToggleSwitch = ({
       </label>
     </div>
   );
-};
+});
+
+ToggleSwitch.displayName = 'ToggleSwitch';
 
 export default ToggleSwitch;
 

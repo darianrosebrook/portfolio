@@ -35,15 +35,30 @@
     },
     "spacing": {
       "gap": {
-        "default": "0.5rem",
-        "small": "0.25rem"
+        "default": {
+          "value": 0.5,
+          "unit": "rem"
+        },
+        "small": {
+          "value": 0.25,
+          "unit": "rem"
+        }
       },
       "padding": {
-        "default": "0.5rem",
-        "small": "0.25rem"
+        "default": {
+          "value": 0.5,
+          "unit": "rem"
+        },
+        "small": {
+          "value": 0.25,
+          "unit": "rem"
+        }
       },
       "margin": {
-        "top": "0.25rem"
+        "top": {
+          "value": 0.25,
+          "unit": "rem"
+        }
       }
     }
   }

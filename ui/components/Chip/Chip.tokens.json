@@ -48,7 +48,6 @@
         "dismissibleHover": "{semantic.color.action.foreground.secondary.default}"
       }
     },
-
     "size": {
       "padding": {
         "horizontal": "{core.spacing.size.04}",
@@ -62,13 +61,11 @@
         "margin": "{core.spacing.size.01}"
       }
     },
-
     "text": {
       "size": "{semantic.typography.body.04}",
       "weight": "{semantic.typography.fontWeight.medium}",
       "lineHeight": "{semantic.typography.lineHeight.tight}"
     },
-
     "motion": {
       "duration": {
         "fast": "{core.motion.duration.short}",
@@ -86,7 +83,6 @@
         "iconExit": 0.8
       }
     },
-
     "focus": {
       "outlineWidth": "{core.shape.border.width.thick}",
       "outlineOffset": "{core.spacing.size.02}",

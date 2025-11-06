@@ -66,11 +66,11 @@ details.overflow[open] summary::after {
 
 .popover {
   position: absolute;
-  top: 100%;
-  left: 0;
+  inset-block-start: 100%;
+  inset-inline-start: 0;
   z-index: 10;
   min-width: 200px;
-  margin-top: var(--breadcrumbs-spacing-margin-top);
+  margin-block-start: var(--breadcrumbs-spacing-margin-top);
   padding: var(--breadcrumbs-spacing-padding-default);
   background: var(--breadcrumbs-color-background-elevated);
   border: 1px solid var(--breadcrumbs-color-border-subtle);

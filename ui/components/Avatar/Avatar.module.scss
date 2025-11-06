@@ -17,34 +17,34 @@
       var(--avatar-color-border-info);
     outline-offset: var(--avatar-size-border-offset);
   }
-}
 
-.avatar_small {
-  width: var(--avatar-size-small);
-  height: var(--avatar-size-small);
-}
+  &.small {
+    width: var(--avatar-size-small);
+    height: var(--avatar-size-small);
+  }
 
-.avatar_medium {
-  width: var(--avatar-size-default);
-  height: var(--avatar-size-default);
-}
+  &.medium {
+    width: var(--avatar-size-default);
+    height: var(--avatar-size-default);
+  }
 
-.avatar_large {
-  width: var(--avatar-size-medium);
-  height: var(--avatar-size-medium);
-}
+  &.large {
+    width: var(--avatar-size-medium);
+    height: var(--avatar-size-medium);
+  }
 
-.avatar_extra-large {
-  width: var(--avatar-size-large);
-  height: var(--avatar-size-large);
-}
+  &.extra-large {
+    width: var(--avatar-size-large);
+    height: var(--avatar-size-large);
+  }
 
-.avatar_rounded {
-  border-radius: var(--avatar-size-radius-default);
-}
+  &.rounded {
+    border-radius: var(--avatar-size-radius-default);
+  }
 
-.avatar_square {
-  border-radius: var(--avatar-size-radius-small);
+  &.square {
+    border-radius: var(--avatar-size-radius-small);
+  }
 }
 
 .avatar_image {
@@ -68,8 +68,8 @@
 
 .status {
   position: absolute;
-  right: 0;
-  bottom: 0;
+  inset-inline-end: 0;
+  inset-block-end: 0;
   width: var(--avatar-size-status);
   height: var(--avatar-size-status);
   border: var(--avatar-size-border-default) solid

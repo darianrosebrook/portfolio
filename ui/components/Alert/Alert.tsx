@@ -44,8 +44,8 @@ const Container = React.forwardRef<HTMLDivElement, AlertProps>(
   ) => {
     const alertClassName = [
       styles.alert,
-      styles[`alert__${level}`],
-      styles[`alert__${level}--${intent}`],
+      styles[level],
+      styles[intent],
       className,
     ]
       .filter(Boolean)
@@ -55,7 +55,7 @@ const Container = React.forwardRef<HTMLDivElement, AlertProps>(
       <div ref={ref} role="alert" className={alertClassName} {...rest}>
         {children}
         {dismissible && onDismiss && (
-          <div className={styles['__dismiss']}>
+          <div className={styles.dismiss}>
             <Button
               variant="tertiary"
               onClick={onDismiss}
@@ -74,12 +74,12 @@ const Container = React.forwardRef<HTMLDivElement, AlertProps>(
 Container.displayName = 'Alert.Container';
 
 const Title = ({ children }: { children: React.ReactNode }) => (
-  <h6 className={styles['__title']}>{children}</h6>
+  <h6 className={styles.title}>{children}</h6>
 );
 Title.displayName = 'Alert.Title';
 
 const Body = ({ children }: { children: React.ReactNode }) => (
-  <div className={styles['__body']}>{children}</div>
+  <div className={styles.body}>{children}</div>
 );
 Body.displayName = 'Alert.Body';
 
@@ -94,7 +94,7 @@ const Icon = ({ intent }: { intent: Intent }) => {
   const IconComponent = LocalIcons[icons[intent]];
 
   return (
-    <div className={styles['__icon']}>
+    <div className={styles.icon}>
       <IconComponent aria-hidden={true} />
     </div>
   );

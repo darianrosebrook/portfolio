@@ -3,7 +3,7 @@
  */
 @mixin vars {
   /* === Color Tokens === */
-  --sheet-color-overlay: rgba(0, 0, 0, 0.5);
+  --sheet-color-overlay: #00000080;
   --sheet-color-background: var(--semantic-color-background-primary);
   --sheet-color-backgroundHover: var(--semantic-interaction-background-hover);
   --sheet-color-border: var(--semantic-color-border-light);

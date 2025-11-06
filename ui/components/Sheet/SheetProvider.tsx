@@ -29,13 +29,17 @@ export const SheetProvider: React.FC<SheetProviderProps> = ({
   const contentRef = React.useRef<HTMLDivElement>(null);
   const triggerRef = React.useRef<HTMLButtonElement>(null);
 
+  // Memoize context value with proper dependencies
+  // Functions from useSheet are already stable (useCallback), but the object reference changes
+  // Track the actual changing values: isOpen, side, modal
+  // Refs are stable and don't need to be in dependencies
   const value = React.useMemo<SheetContextValue>(
     () => ({
       ...sheet,
       contentRef,
       triggerRef,
     }),
-    [sheet]
+    [sheet.isOpen, sheet.side, sheet.modal, sheet.open, sheet.close, sheet.toggle]
   );
 
   return (

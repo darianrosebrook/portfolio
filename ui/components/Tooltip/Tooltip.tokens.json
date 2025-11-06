@@ -20,7 +20,10 @@
       "radius": {
         "default": "{semantic.shape.radius.small}"
       },
-      "maxWidth": "200px"
+      "maxWidth": {
+        "value": 200,
+        "unit": "px"
+      }
     },
     "elevation": {
       "default": "{semantic.elevation.surface.floating}"

@@ -13,7 +13,7 @@ export type Crumb = {
   href: string;
 };
 
-export interface BreadcrumbsProps {
+export interface BreadcrumbsProps extends React.HTMLAttributes<HTMLElement> {
   /**
    * The base crumb
    */
@@ -31,12 +31,17 @@ export interface BreadcrumbsProps {
  * - prev link when crumbs.length > 2
  * - current label (non-link)
  */
-export function Breadcrumbs({ base, crumbs }: BreadcrumbsProps) {
+export const Breadcrumbs = React.forwardRef<HTMLElement, BreadcrumbsProps>(({
+  base,
+  crumbs,
+  className = '',
+  ...rest
+}, ref) => {
   const total = crumbs.length;
 
   if (total === 0) {
     return (
-      <nav className={styles.root} aria-label="Breadcrumb">
+      <nav ref={ref} className={`${styles.root} ${className}`} aria-label="Breadcrumb" {...rest}>
         <ul className={styles.list}>
           <li>
             <BreadcrumbNavigationLink href={base.href}>
@@ -56,7 +61,7 @@ export function Breadcrumbs({ base, crumbs }: BreadcrumbsProps) {
   const overflowItems = showOverflow ? crumbs.slice(0, total - 2) : [];
 
   return (
-    <nav className={styles.root} aria-label="Breadcrumb">
+    <nav ref={ref} className={`${styles.root} ${className}`} aria-label="Breadcrumb" {...rest}>
       <ul className={styles.list}>
         <li>
           <BreadcrumbNavigationLink href={base.href}>
@@ -114,6 +119,8 @@ export function Breadcrumbs({ base, crumbs }: BreadcrumbsProps) {
       </ul>
     </nav>
   );
-}
+});
+
+Breadcrumbs.displayName = 'Breadcrumbs';
 
 export default Breadcrumbs;
