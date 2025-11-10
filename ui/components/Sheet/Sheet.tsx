@@ -165,6 +165,7 @@ const SheetContent = React.forwardRef<HTMLDivElement, SheetContentProps>(
       side: contextSide,
       modal,
       contentRef,
+      triggerRef,
     } = useSheetContext();
     const side = propSide || contextSide;
 
@@ -249,17 +250,21 @@ const SheetContent = React.forwardRef<HTMLDivElement, SheetContentProps>(
         };
 
         document.addEventListener('keydown', handleKeyDown);
-        focusTrapCleanup = () => document.removeEventListener('keydown', handleKeyDown);
+        focusTrapCleanup = () =>
+          document.removeEventListener('keydown', handleKeyDown);
       }
 
       return () => {
         // Cleanup focus trap
         focusTrapCleanup?.();
-        
+
         // Return focus to trigger when sheet closes
         if (triggerRef?.current && document.contains(triggerRef.current)) {
           triggerRef.current.focus();
-        } else if (previousFocusedElement && document.contains(previousFocusedElement)) {
+        } else if (
+          previousFocusedElement &&
+          document.contains(previousFocusedElement)
+        ) {
           previousFocusedElement.focus();
         }
       };

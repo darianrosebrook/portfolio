@@ -32,6 +32,7 @@ interface CacheStats {
 interface CacheConfig {
   maxSize?: number;
   ttl?: number;
+  staleWhileRevalidate?: number; // Time after TTL expires but data is still usable
   strategy?: 'lru' | 'lfu' | 'fifo';
   compression?: boolean;
   persistence?: boolean;
@@ -58,6 +59,7 @@ interface CacheBackend<T = any> {
   has(key: string): Promise<boolean>;
   keys(): Promise<string[]>;
   size(): Promise<number>;
+  getStats?(): CacheStats;
 }
 
 // Memory-based cache implementation
@@ -71,17 +73,18 @@ class MemoryCache<T = any> implements CacheBackend<T> {
     totalRequests: 0,
     hitRate: 0,
     entries: 0,
-    totalSize: 0
+    totalSize: 0,
   };
 
   constructor(config: CacheConfig = {}) {
     this.config = {
       maxSize: config.maxSize ?? 100,
       ttl: config.ttl ?? 0,
+      staleWhileRevalidate: config.staleWhileRevalidate ?? 0,
       strategy: config.strategy ?? 'lru',
       compression: config.compression ?? false,
       persistence: config.persistence ?? false,
-      namespace: config.namespace ?? 'memory'
+      namespace: config.namespace ?? 'memory',
     };
   }
 
@@ -94,8 +97,16 @@ class MemoryCache<T = any> implements CacheBackend<T> {
       return undefined;
     }
 
-    // Check TTL
-    if (entry.ttl && Date.now() - entry.timestamp > entry.ttl) {
+    const now = Date.now();
+    const age = now - entry.timestamp;
+    const isExpired = entry.ttl && age > entry.ttl;
+    const isStale =
+      entry.ttl && this.config.staleWhileRevalidate
+        ? age > entry.ttl && age <= entry.ttl + this.config.staleWhileRevalidate
+        : false;
+
+    // If expired beyond stale-while-revalidate window, delete and return undefined
+    if (isExpired && !isStale) {
       await this.delete(key);
       this.stats.misses++;
       this.stats.totalRequests++;
@@ -104,7 +115,7 @@ class MemoryCache<T = any> implements CacheBackend<T> {
 
     // Update access metadata
     entry.hits++;
-    entry.lastAccessed = Date.now();
+    entry.lastAccessed = now;
 
     this.stats.hits++;
     this.stats.totalRequests++;
@@ -120,7 +131,7 @@ class MemoryCache<T = any> implements CacheBackend<T> {
       ttl: ttl ?? this.config.ttl,
       hits: 0,
       lastAccessed: Date.now(),
-      size: this.estimateSize(value)
+      size: this.estimateSize(value),
     };
 
     // Check size limits
@@ -161,7 +172,9 @@ class MemoryCache<T = any> implements CacheBackend<T> {
 
   async has(key: string): Promise<boolean> {
     const entry = this.cache.get(key);
-    return entry ? !(entry.ttl && Date.now() - entry.timestamp > entry.ttl) : false;
+    return entry
+      ? !(entry.ttl && Date.now() - entry.timestamp > entry.ttl)
+      : false;
   }
 
   async keys(): Promise<string[]> {
@@ -176,13 +189,14 @@ class MemoryCache<T = any> implements CacheBackend<T> {
   private async evict(): Promise<void> {
     if (this.cache.size === 0) return;
 
-    let keyToEvict: string;
+    let keyToEvict: string | undefined;
 
     switch (this.config.strategy) {
       case 'lfu':
         // Least Frequently Used
-        keyToEvict = Array.from(this.cache.entries())
-          .sort(([,a], [,b]) => a.hits - b.hits)[0][0];
+        keyToEvict = Array.from(this.cache.entries()).sort(
+          ([, a], [, b]) => a.hits - b.hits
+        )[0]?.[0];
         break;
 
       case 'fifo':
@@ -193,16 +207,19 @@ class MemoryCache<T = any> implements CacheBackend<T> {
       case 'lru':
       default:
         // Least Recently Used
-        keyToEvict = Array.from(this.cache.entries())
-          .sort(([,a], [,b]) => a.lastAccessed - b.lastAccessed)[0][0];
+        keyToEvict = Array.from(this.cache.entries()).sort(
+          ([, a], [, b]) => a.lastAccessed - b.lastAccessed
+        )[0]?.[0];
         break;
     }
 
-    const entry = this.cache.get(keyToEvict);
-    if (entry) {
-      this.cache.delete(keyToEvict);
-      this.stats.evictions++;
-      this.stats.totalSize -= entry.size ?? 0;
+    if (keyToEvict) {
+      const entry = this.cache.get(keyToEvict);
+      if (entry) {
+        this.cache.delete(keyToEvict);
+        this.stats.evictions++;
+        this.stats.totalSize -= entry.size ?? 0;
+      }
     }
   }
 
@@ -215,9 +232,10 @@ class MemoryCache<T = any> implements CacheBackend<T> {
   }
 
   private updateHitRate(): void {
-    this.stats.hitRate = this.stats.totalRequests > 0
-      ? this.stats.hits / this.stats.totalRequests
-      : 0;
+    this.stats.hitRate =
+      this.stats.totalRequests > 0
+        ? this.stats.hits / this.stats.totalRequests
+        : 0;
   }
 
   private persistToStorage(): void {
@@ -225,7 +243,10 @@ class MemoryCache<T = any> implements CacheBackend<T> {
 
     try {
       const data = Array.from(this.cache.entries());
-      localStorage.setItem(`cache_${this.config.namespace}`, JSON.stringify(data));
+      localStorage.setItem(
+        `cache_${this.config.namespace}`,
+        JSON.stringify(data)
+      );
     } catch (error) {
       console.warn('Failed to persist cache to localStorage:', error);
     }
@@ -251,8 +272,10 @@ class MemoryCache<T = any> implements CacheBackend<T> {
         const data = JSON.parse(stored) as [string, CacheEntry<T>][];
         this.cache = new Map(data);
         this.stats.entries = this.cache.size;
-        this.stats.totalSize = Array.from(this.cache.values())
-          .reduce((sum, entry) => sum + (entry.size ?? 0), 0);
+        this.stats.totalSize = Array.from(this.cache.values()).reduce(
+          (sum, entry) => sum + (entry.size ?? 0),
+          0
+        );
       }
     } catch (error) {
       console.warn('Failed to load cache from localStorage:', error);
@@ -262,9 +285,25 @@ class MemoryCache<T = any> implements CacheBackend<T> {
   getStats(): CacheStats {
     return { ...this.stats };
   }
+
+  // Helper to check if a key is stale (expired but within revalidate window)
+  isStale(key: string): boolean {
+    const entry = this.cache.get(key);
+    if (!entry || !entry.ttl) return false;
+
+    const now = Date.now();
+    const age = now - entry.timestamp;
+    return (
+      age > entry.ttl &&
+      this.config.staleWhileRevalidate > 0 &&
+      age <= entry.ttl + this.config.staleWhileRevalidate
+    );
+  }
 }
 
 // File-based cache for design tokens and static assets
+// NOTE: FileCache is not fully implemented. Only memory caching is currently supported.
+// This stub exists for API compatibility but always returns undefined.
 class FileCache<T = any> implements CacheBackend<T> {
   private config: Required<CacheConfig>;
   private stats: CacheStats = {
@@ -274,30 +313,32 @@ class FileCache<T = any> implements CacheBackend<T> {
     totalRequests: 0,
     hitRate: 0,
     entries: 0,
-    totalSize: 0
+    totalSize: 0,
   };
 
   constructor(config: CacheConfig = {}) {
     this.config = {
       maxSize: config.maxSize ?? 1000,
       ttl: config.ttl ?? 24 * 60 * 60 * 1000, // 24 hours
+      staleWhileRevalidate: config.staleWhileRevalidate ?? 0,
       strategy: config.strategy ?? 'lru',
       compression: config.compression ?? false,
       persistence: config.persistence ?? true,
-      namespace: config.namespace ?? 'file'
+      namespace: config.namespace ?? 'file',
     };
   }
 
   async get(key: string): Promise<T | undefined> {
-    // Implementation would use file system or IndexedDB
-    // This is a simplified version
+    // FileCache is not implemented - always return undefined
+    // TODO: Implement file-based caching using IndexedDB or filesystem API
     this.stats.misses++;
     this.stats.totalRequests++;
     return undefined;
   }
 
   async set(key: string, value: T, ttl?: number): Promise<void> {
-    // Implementation would write to file system or IndexedDB
+    // FileCache is not implemented - no-op
+    // TODO: Implement file-based caching using IndexedDB or filesystem API
     this.stats.entries++;
   }
 
@@ -339,7 +380,7 @@ export class UnifiedCache {
     totalRequests: 0,
     hitRate: 0,
     entries: 0,
-    totalSize: 0
+    totalSize: 0,
   };
 
   constructor() {
@@ -365,9 +406,15 @@ export class UnifiedCache {
       cache?: string;
       fallback?: () => Promise<T>;
       ttl?: number;
+      staleWhileRevalidate?: boolean; // Enable stale-while-revalidate behavior
     } = {}
   ): Promise<T | undefined> {
-    const { cache = 'memory', fallback, ttl } = options;
+    const {
+      cache = 'memory',
+      fallback,
+      ttl,
+      staleWhileRevalidate = false,
+    } = options;
     const cacheInstance = this.caches.get(cache);
 
     if (!cacheInstance) {
@@ -377,6 +424,16 @@ export class UnifiedCache {
     // Try cache first
     const cached = await cacheInstance.get(key);
     if (cached !== undefined) {
+      // Check if stale but within revalidate window and trigger background refresh
+      if (staleWhileRevalidate && fallback) {
+        const memoryCache = cacheInstance as MemoryCache<T>;
+        if (memoryCache && memoryCache.isStale && memoryCache.isStale(key)) {
+          // Return stale data immediately and refresh in background
+          this.refreshInBackground(key, fallback, { cache, ttl }).catch(() => {
+            // Silently fail background refresh
+          });
+        }
+      }
       this.emitEvent({ type: 'hit', key, data: cached, timestamp: Date.now() });
       return cached;
     }
@@ -395,6 +452,19 @@ export class UnifiedCache {
 
     this.emitEvent({ type: 'miss', key, timestamp: Date.now() });
     return undefined;
+  }
+
+  private async refreshInBackground<T>(
+    key: string,
+    fetcher: () => Promise<T>,
+    options: { cache: string; ttl?: number }
+  ): Promise<void> {
+    try {
+      const data = await fetcher();
+      await this.set(key, data, options);
+    } catch (error) {
+      console.warn(`Background refresh failed for key: ${key}`, error);
+    }
   }
 
   async set<T = any>(
@@ -456,7 +526,7 @@ export class UnifiedCache {
   }
 
   private emitEvent(event: CacheEvent): void {
-    this.eventListeners.forEach(listener => {
+    this.eventListeners.forEach((listener) => {
       try {
         listener(event);
       } catch (error) {
@@ -483,17 +553,19 @@ export class UnifiedCache {
         break;
     }
 
-    this.globalStats.hitRate = this.globalStats.totalRequests > 0
-      ? this.globalStats.hits / this.globalStats.totalRequests
-      : 0;
+    this.globalStats.hitRate =
+      this.globalStats.totalRequests > 0
+        ? this.globalStats.hits / this.globalStats.totalRequests
+        : 0;
   }
 
   getStats(cache?: string): CacheStats {
     if (cache) {
       const cacheInstance = this.caches.get(cache);
-      return cacheInstance && 'getStats' in cacheInstance
-        ? cacheInstance.getStats()
-        : { ...this.globalStats };
+      if (cacheInstance && typeof cacheInstance.getStats === 'function') {
+        return cacheInstance.getStats();
+      }
+      return { ...this.globalStats };
     }
     return { ...this.globalStats };
   }
@@ -501,7 +573,7 @@ export class UnifiedCache {
   getCacheStats(): Record<string, CacheStats> {
     const stats: Record<string, CacheStats> = {};
     for (const [name, cache] of this.caches) {
-      if ('getStats' in cache) {
+      if (cache && typeof cache.getStats === 'function') {
         stats[name] = cache.getStats();
       }
     }
@@ -532,7 +604,7 @@ export class UnifiedCache {
     keys: string[],
     cache: string = 'memory'
   ): Promise<(T | undefined)[]> {
-    return Promise.all(keys.map(key => this.get<T>(key, { cache })));
+    return Promise.all(keys.map((key) => this.get<T>(key, { cache })));
   }
 
   async setMany<T = any>(
@@ -540,9 +612,7 @@ export class UnifiedCache {
     cache: string = 'memory'
   ): Promise<void> {
     await Promise.all(
-      entries.map(({ key, value, ttl }) =>
-        this.set(key, value, { cache, ttl })
-      )
+      entries.map(({ key, value, ttl }) => this.set(key, value, { cache, ttl }))
     );
   }
 }
@@ -552,16 +622,131 @@ export const unifiedCache = new UnifiedCache();
 
 // Specialized cache instances for different use cases
 export const memoryCache = unifiedCache; // Default memory cache
+
+// File cache wrapper (currently not implemented - uses memory cache)
 export const fileCache = {
   get: (key: string) => unifiedCache.get(key, { cache: 'file' }),
   set: (key: string, value: any, ttl?: number) =>
     unifiedCache.set(key, value, { cache: 'file', ttl }),
   delete: (key: string) => unifiedCache.delete(key, 'file'),
   clear: () => unifiedCache.clear('file'),
-  has: (key: string) => unifiedCache.has(key, 'file')
+  has: (key: string) => unifiedCache.has(key, 'file'),
 };
+
+// Migrated cache instances from advancedCache.ts
+// These use UnifiedCache with stale-while-revalidate support
+
+// Article cache: 10min TTL, 30min stale-while-revalidate, max 50 entries
+const articleCacheBackend = new MemoryCache<any>({
+  maxSize: 50,
+  ttl: 10 * 60 * 1000, // 10 minutes
+  staleWhileRevalidate: 30 * 60 * 1000, // 30 minutes
+  namespace: 'article',
+});
+unifiedCache.registerCache('article', articleCacheBackend);
+
+export const articleCache = {
+  get: <T = any>(
+    key: string,
+    fetcher?: () => Promise<T>
+  ): Promise<T | null> => {
+    return unifiedCache
+      .get<T>(key, {
+        cache: 'article',
+        fallback: fetcher,
+        staleWhileRevalidate: !!fetcher,
+      })
+      .then((result) => result ?? null);
+  },
+  set: (key: string, data: any): any => {
+    unifiedCache.set(key, data, { cache: 'article' }).catch(() => {
+      // Silently handle async errors
+    });
+    return data;
+  },
+  cleanup: () => {
+    // Cleanup is handled automatically by TTL
+  },
+  getStats: () => unifiedCache.getStats('article'),
+};
+
+// Image cache: 1hr TTL, 24hr stale-while-revalidate, max 100 entries
+const imageCacheBackend = new MemoryCache<string>({
+  maxSize: 100,
+  ttl: 60 * 60 * 1000, // 1 hour
+  staleWhileRevalidate: 24 * 60 * 60 * 1000, // 24 hours
+  namespace: 'image',
+});
+unifiedCache.registerCache('image', imageCacheBackend);
+
+export const imageCache = {
+  get: <T = string>(
+    key: string,
+    fetcher?: () => Promise<T>
+  ): Promise<T | null> => {
+    return unifiedCache
+      .get<T>(key, {
+        cache: 'image',
+        fallback: fetcher,
+        staleWhileRevalidate: !!fetcher,
+      })
+      .then((result) => result ?? null);
+  },
+  set: (key: string, data: string): string => {
+    unifiedCache.set(key, data, { cache: 'image' }).catch(() => {
+      // Silently handle async errors
+    });
+    return data;
+  },
+  cleanup: () => {
+    // Cleanup is handled automatically by TTL
+  },
+  getStats: () => unifiedCache.getStats('image'),
+};
+
+// API cache: 5min TTL, 15min stale-while-revalidate, max 200 entries
+const apiCacheBackend = new MemoryCache<any>({
+  maxSize: 200,
+  ttl: 5 * 60 * 1000, // 5 minutes
+  staleWhileRevalidate: 15 * 60 * 1000, // 15 minutes
+  namespace: 'api',
+});
+unifiedCache.registerCache('api', apiCacheBackend);
+
+export const apiCache = {
+  get: <T = any>(
+    key: string,
+    fetcher?: () => Promise<T>
+  ): Promise<T | null> => {
+    return unifiedCache
+      .get<T>(key, {
+        cache: 'api',
+        fallback: fetcher,
+        staleWhileRevalidate: !!fetcher,
+      })
+      .then((result) => result ?? null);
+  },
+  set: (key: string, data: any): any => {
+    unifiedCache.set(key, data, { cache: 'api' }).catch(() => {
+      // Silently handle async errors
+    });
+    return data;
+  },
+  cleanup: () => {
+    // Cleanup is handled automatically by TTL
+  },
+  getStats: () => unifiedCache.getStats('api'),
+};
+
+// Periodic cleanup for migrated caches (replaces setInterval in advancedCache.ts)
+if (typeof window !== 'undefined') {
+  setInterval(() => {
+    // Cleanup is handled automatically by TTL, but we can trigger stats updates
+    unifiedCache.getStats('article');
+    unifiedCache.getStats('image');
+    unifiedCache.getStats('api');
+  }, 60 * 1000); // Every minute
+}
 
 // Export types
 export type { CacheConfig, CacheStats, CacheEvent, CacheBackend };
-
-

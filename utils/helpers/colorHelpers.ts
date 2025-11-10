@@ -1,5 +1,30 @@
 /**
+ * @deprecated This file is deprecated. Use colorFromTo.ts instead.
+ *
+ * This module has been replaced with a hub-based architecture in colorFromTo.ts
+ * that uses RGB and XYZ as intermediate color spaces for all conversions.
+ *
+ * Migration guide:
+ * ```typescript
+ * // Old
+ * import { hslToLab } from '@/utils/helpers/colorHelpers';
+ * const lab = hslToLab(hsl);
+ *
+ * // New
+ * import { convertColor } from '@/utils/helpers/colorFromTo';
+ * const lab = convertColor(hsl, 'hsl', 'lab');
+ * ```
+ *
+ * This file is kept for backward compatibility and type exports only.
+ * All new code should use colorFromTo.ts.
+ *
+ * @see colorFromTo.ts for the new hub-based conversion system
+ */
+
+/**
  * Color space conversion utilities and helpers.
+ *
+ * @deprecated Use colorFromTo.ts instead
  *
  * This module provides comprehensive functions for converting between different color spaces
  * including RGB, HSL, LAB, LCH, XYZ, HSV, and more. All conversions follow standard
@@ -109,7 +134,10 @@ const KAPPA = 24389 / 27;
 /** CIE epsilon constant: (6/29)^3 ≈ 0.008856 */
 const EPSILON = 216 / 24389;
 
-// --- Core Conversion Helpers (Internal) ---
+/**
+ * Core Conversion Helpers (Internal)
+ * Internal utility functions for color space conversions.
+ */
 /**
  * Calculate the contrast ratio of a color against white.
  *
@@ -269,15 +297,6 @@ export function xyzToRgb({ x, y, z }: XYZ): RGB {
   return { r, g, b };
 }
 
-// // --- Main API Functions (Exported) ---
-
-// /**
-//  * Converts a HEX color string to an RGB object.
-//  * Handles optional '#' prefix and 3/6 digit hex codes.
-//  * Returns null if the hex string is invalid.
-//  * @param hex - The hex color string (e.g., "#ff0000", "f00").
-//  * @returns An RGB object { r, g, b } or null if invalid.
-//  */
 /**
  * Convert hex color string to RGB object.
  *
@@ -323,28 +342,8 @@ export function hexToRgb(hex: string): RGB | null {
 
   // Invalid format
   return null;
-
-  /* Alternative Regex approach (slightly less explicit error checking) */
-  /*
-    const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-    const fullHex = hex.replace(shorthandRegex, (m, r, g, b) => r + r + g + g + b + b);
-
-    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(fullHex);
-    return result
-      ? {
-          r: parseInt(result[1], 16),
-          g: parseInt(result[2], 16),
-          b: parseInt(result[3], 16),
-        }
-      : null;
-    */
 }
 
-// /**
-//  * Converts an RGB color object to a HEX color string.
-//  * @param rgb - An object with r, g, b properties (0-255).
-//  * @returns A hex color string (e.g., "#ff0000").
-//  */
 /**
  * Convert RGB object to hex color string.
  *
@@ -371,11 +370,6 @@ export function rgbToHex({ r, g, b }: RGB): string {
   return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
 }
 
-// /**
-//  * Converts an RGB color object to an HSL object.
-//  * @param rgb - An object with r, g, b properties (0-255).
-//  * @returns An HSL object { h (0-360), s (0-100), l (0-100) }, rounded.
-//  */
 export function rgbToHsl({ r, g, b }: RGB): HSL {
   // Normalize RGB values to the range [0, 1]
   r /= 255;
@@ -414,11 +408,6 @@ export function rgbToHsl({ r, g, b }: RGB): HSL {
   };
 }
 
-// /**
-//  * Converts an HSL color object to an RGB object.
-//  * @param hsl - An HSL object { h (0-360), s (0-100), l (0-100) }.
-//  * @returns An RGB object { r, g, b } (0-255), rounded.
-//  */
 export function hslToRgb({ h, s, l }: HSL): RGB {
   // Normalize HSL values
   h = (((h % 360) + 360) % 360) / 360; // Ensure h is in [0, 1)
@@ -483,12 +472,6 @@ export function labToRgb(lab: LAB): RGB {
   return rgb;
 }
 
-// /**
-//  * Converts an RGB color object to a CIE LCH object (D65 illuminant).
-//  * LCH is the cylindrical representation of L*a*b*.
-//  * @param rgb - An object with r, g, b properties (0-255).
-//  * @returns An LCH object { l, c, h } with precise (unrounded) values, except for hue (h) which is normalized to [0, 360).
-//  */
 export function rgbToLch(rgb: RGB): LCH {
   // Calculate precise LAB values first
   const preciseLab = xyzToLab(rgbToXyz(rgb));
@@ -510,11 +493,6 @@ export function rgbToLch(rgb: RGB): LCH {
   return { l, c, h };
 }
 
-// /**
-//  * Converts a CIE LCH object (D65 illuminant) to an RGB object.
-//  * @param lch - An LCH object { l, c, h }.
-//  * @returns An RGB object { r, g, b } (0-255), rounded and clamped.
-//  */
 /**
  * Converts LAB color space to LCH color space
  * @param lab - LAB color object
@@ -547,13 +525,6 @@ export function lchToRgb({ l, c, h }: LCH): RGB {
   return labToRgb(lab);
 }
 
-// /**
-//  * Converts RGB values to HSV color space
-//  * @param {number} r - Red component (0-255)
-//  * @param {number} g - Green component (0-255)
-//  * @param {number} b - Blue component (0-255)
-//  * @returns {{h: number, s: number, v: number}} HSV color object
-//  */
 export function rgbToHsv(r: number, g: number, b: number) {
   // 1) normalize to [0,1]
   r /= 255;
@@ -583,13 +554,6 @@ export function rgbToHsv(r: number, g: number, b: number) {
   return { h, s: s * 100, v: v * 100 };
 }
 
-// /**
-//  * Converts HSV values to RGB color space
-//  * @param {number} h - Hue angle (0-360)
-//  * @param {number} s - Saturation (0-100)
-//  * @param {number} v - Value (0-100)
-//  * @returns {RGB} RGB color object
-//  */
 export function hsvToRgb(h: number, s: number, v: number) {
   h = ((h % 360) + 360) / 360; // wrap
   s = Math.max(0, Math.min(1, s / 100));
@@ -669,9 +633,6 @@ export function rgbToOklab(r: number, g: number, b: number) {
   };
 }
 
-// /**
-//  * Reverse of above
-//  */
 export function oklabToRgb(L: number, a: number, b: number) {
   // matrix from OKLab → LMSʹ
   const l_ = L + 0.3963377774 * a + 0.2158037573 * b;
@@ -693,9 +654,6 @@ export function oklabToRgb(L: number, a: number, b: number) {
   return { r: to255(R), g: to255(G), b: to255(B) };
 }
 
-// /**
-//  * OKLab → OKLCh
-//  */
 export function oklabToOklch(L: number, a: number, b: number) {
   const c = Math.hypot(a, b);
   let h = (Math.atan2(b, a) * 180) / Math.PI;
@@ -703,9 +661,6 @@ export function oklabToOklch(L: number, a: number, b: number) {
   return { L, c, h };
 }
 
-// /**
-//  * OKLCh → OKLab → RGB
-//  */
 export function oklchToOklab(L: number, c: number, h: number) {
   const rad = (h * Math.PI) / 180;
   return {
@@ -715,7 +670,10 @@ export function oklchToOklab(L: number, c: number, h: number) {
   };
 }
 
-// --- WCAG Relative Luminance and Contrast ---
+/**
+ * WCAG Relative Luminance and Contrast
+ * Functions for calculating color contrast ratios per WCAG guidelines.
+ */
 
 /**
  * Computes WCAG relative luminance (0-1) for an sRGB color
@@ -740,9 +698,6 @@ export function contrastRatio(foreground: RGB, background: RGB): number {
   return (lighter + 0.05) / (darker + 0.05);
 }
 
-/**
- * Convenience: contrast ratio from hex inputs
- */
 /**
  * Calculate WCAG contrast ratio between two hex colors.
  *
@@ -771,7 +726,10 @@ export function contrastRatioHex(fgHex: string, bgHex: string): number | null {
   return contrastRatio(fg, bg);
 }
 
-// --- OKLCH Convenience Conversions ---
+/**
+ * OKLCH Convenience Conversions
+ * Modern color space conversions using OKLCH (perceptually uniform).
+ */
 
 export function rgbToOklch(rgb: RGB) {
   const { L, a, b } = rgbToOklab(rgb.r, rgb.g, rgb.b);
@@ -783,7 +741,10 @@ export function oklchToRgb(L: number, c: number, h: number): RGB {
   return oklabToRgb(L, a, b);
 }
 
-// --- Color Difference ---
+/**
+ * Color Difference
+ * Functions for calculating perceptual color differences (delta E).
+ */
 
 /**
  * CIE76 color difference (ΔE*ab 1976) between two LAB colors
@@ -921,7 +882,6 @@ class CIECAM02 {
     };
   }
 }
-// export function rgbToCam02JCh(...) { ... }
 export function rgbToCam02JCh(rgb: RGB) {
   // Convert RGB to LAB first, then to LCH for CIECAM02
   const lab = rgbToLab(rgb);

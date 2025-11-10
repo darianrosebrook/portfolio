@@ -15,6 +15,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { tokenPathToCSSVar } from './core/index';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -32,11 +33,6 @@ interface ResolveOptions {
 const PROJECT_ROOT = path.resolve(__dirname, '..', '..');
 const TOKENS_PATH = path.join(PROJECT_ROOT, 'components', 'designTokens.json');
 const OUTPUT_PATH = path.join(PROJECT_ROOT, 'app', 'designTokens.scss');
-
-// Converts a dot path into a CSS custom property name
-function tokenPathToCSSVar(pathStr: string): string {
-  return `--${pathStr.replace(/\./g, '-')}`;
-}
 
 // Resolve a token node considering $value, $extensions with design.paths.{theme} and viewport scaling
 function resolveNode(

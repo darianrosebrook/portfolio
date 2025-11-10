@@ -12,6 +12,7 @@ import {
   type ResolutionInput,
 } from './resolver-module';
 import type { ResolverConfig } from './types';
+import { getNestedValue } from './pathUtils';
 
 /**
  * Check if a resolver document exists and use it, otherwise fall back to legacy resolution
@@ -63,21 +64,6 @@ export function createResolver(
     onError: options?.onError,
     strict: options?.strict,
   });
-}
-
-/**
- * Helper to get nested value by dot path
- */
-export function getNestedValue(
-  obj: Record<string, unknown>,
-  path: string
-): unknown {
-  return path.split('.').reduce((current, segment) => {
-    if (current && typeof current === 'object' && segment in current) {
-      return (current as Record<string, unknown>)[segment];
-    }
-    return undefined;
-  }, obj as unknown);
 }
 
 /**

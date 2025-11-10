@@ -11,6 +11,7 @@ import {
   WCAG_LEVELS,
   type WCAGLevel,
 } from './tokenValidator';
+import { getNestedValue } from '../designTokens/utils/pathUtils';
 import fs from 'fs';
 import path from 'path';
 import { glob } from 'glob';
@@ -239,17 +240,10 @@ function findTokenValue(tokens: any, key: string): string | null {
 
   for (const path of nestedPaths) {
     const value = getNestedValue(tokens, path);
-    if (value) return value;
+    if (value && typeof value === 'string') return value;
   }
 
   return null;
-}
-
-/**
- * Gets nested object value by dot notation path
- */
-function getNestedValue(obj: any, path: string): any {
-  return path.split('.').reduce((current, key) => current?.[key], obj);
 }
 
 /**

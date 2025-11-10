@@ -66,6 +66,7 @@ export function A11yPanel({
     try {
       const win = resolveTargetWindow() ?? window;
       // Dynamic import to avoid SSR/edge issues
+      // @ts-ignore - axe-core may not have types
       const axeModule = (await import('axe-core')).default;
       const options =
         runTags && runTags.length

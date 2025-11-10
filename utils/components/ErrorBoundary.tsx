@@ -16,7 +16,7 @@ interface ErrorBoundaryState {
   errorInfo?: React.ErrorInfo;
 }
 
-interface ErrorBoundaryProps {
+export interface ErrorBoundaryProps {
   children: React.ReactNode;
   /**
    * Custom fallback component to render when an error occurs
@@ -40,11 +40,11 @@ interface ErrorBoundaryProps {
   className?: string;
 }
 
-const DefaultErrorFallback: React.FC<{
+export const DefaultErrorFallback: React.FC<{
   error: Error;
   errorInfo?: React.ErrorInfo;
   resetError: () => void;
-}> = ({ error, resetError }) => (
+}> = ({ error, errorInfo, resetError }) => (
   <div className={styles.errorFallback}>
     <div className={styles.errorIcon}>
       <svg
@@ -80,11 +80,7 @@ const DefaultErrorFallback: React.FC<{
         </pre>
       </details>
     )}
-    <button
-      className={styles.errorReset}
-      onClick={resetError}
-      type="button"
-    >
+    <button className={styles.errorReset} onClick={resetError} type="button">
       Try Again
     </button>
   </div>
@@ -109,7 +105,8 @@ export class ErrorBoundary extends React.Component<
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    const { onError, logErrors = process.env.NODE_ENV === 'development' } = this.props;
+    const { onError, logErrors = process.env.NODE_ENV === 'development' } =
+      this.props;
 
     this.setState({
       error,
@@ -157,7 +154,11 @@ export class ErrorBoundary extends React.Component<
 
   render() {
     const { hasError, error, errorInfo } = this.state;
-    const { children, fallback: Fallback = DefaultErrorFallback, className } = this.props;
+    const {
+      children,
+      fallback: Fallback = DefaultErrorFallback,
+      className,
+    } = this.props;
 
     if (hasError && error) {
       return (

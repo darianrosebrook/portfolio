@@ -20,8 +20,8 @@ export const bundleAnalyzer = {
     }
 
     // Send to analytics
-    if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('event', 'bundle_chunk', {
+    if (typeof window !== 'undefined' && 'gtag' in window) {
+      (window as any).gtag('event', 'bundle_chunk', {
         chunk_name: chunkName,
         size_kb: kb,
         timestamp: Date.now(),
@@ -338,12 +338,3 @@ function getComponentDependencies(
     { name: 'framer-motion', size: 15000 },
   ];
 }
-
-// Export comprehensive monitoring interface
-export {
-  bundleAnalyzer,
-  cssPerformanceMonitor,
-  modernCSSMonitor,
-  runtimePerformanceObserver,
-  componentPerformanceMonitor,
-};

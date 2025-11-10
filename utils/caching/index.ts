@@ -11,6 +11,9 @@ export {
   unifiedCache,
   memoryCache,
   fileCache,
+  articleCache,
+  imageCache,
+  apiCache,
   type CacheConfig,
   type CacheStats,
   type CacheEvent,
@@ -19,4 +22,3 @@ export {
 
 // Legacy exports for backward compatibility
 export { shapeForV2, getOvershoot, type SvgShape } from './caching';
-export { articleCache, imageCache, apiCache } from './advancedCache';

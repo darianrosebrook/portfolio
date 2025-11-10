@@ -1,5 +1,12 @@
 'use client';
-import { createContext, useContext, ReactNode, useEffect, useRef } from 'react';
+import React, {
+  createContext,
+  useContext,
+  ReactNode,
+  useEffect,
+  useRef,
+  useMemo,
+} from 'react';
 import styles from './Postcard.module.scss';
 import Image from 'next/image';
 import Icon from '../Icon';
@@ -73,7 +80,7 @@ const Postcard: React.FC<PostcardProps> & {
   Repost: React.FC;
   ExternalLink: React.FC<{ link: string }>;
 } = ({ children, ...props }) => {
-  const contextValue = React.useMemo(() => props, [props]);
+  const contextValue = useMemo(() => props, [props]);
   return (
     <PostcardContext.Provider value={contextValue}>
       <article className={styles.post}>{children}</article>

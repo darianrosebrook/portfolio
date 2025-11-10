@@ -5,41 +5,14 @@
  * themes, platforms, transforms, and fallback chains.
  */
 
-import { Logger } from '../../helpers/logger';
 import {
   Resolver,
   loadResolverDocument,
   type ResolutionInput,
 } from './resolver-module';
-import type {
-  // ResolverConfig,
-  ResolveContext,
-  // Transform,
-  // Diagnostic,
-} from './types';
-
-// Helper function to get nested object values by dot path
-function get(obj: Record<string, unknown>, path: string): unknown {
-  return path.split('.').reduce((current, segment) => {
-    if (current && typeof current === 'object' && segment in current) {
-      return (current as Record<string, unknown>)[segment];
-    }
-    return undefined;
-  }, obj as unknown);
-}
-
-// Helper function to select values by theme/brand/platform keys
-function selectByKeys(
-  obj: Record<string, unknown>,
-  keys: (string | undefined)[]
-): unknown {
-  for (const key of keys) {
-    if (key && key in obj) {
-      return obj[key];
-    }
-  }
-  return undefined;
-}
+import type { ResolveContext } from './types';
+import { getNestedValue, selectByKeys } from './pathUtils';
+import { tokenPathToCSSVar } from '../core/index';
 
 /**
  * Apply transformation pipeline to a token value.
@@ -66,13 +39,6 @@ export function applyTransforms(value: unknown, ctx: ResolveContext): unknown {
 
 // Default reference pattern for interpolation
 export const DEFAULT_REF = /\{([^}]+)\}/g;
-
-/**
- * Converts a token path to a CSS custom property name
- */
-function tokenPathToCSSVar(path: string, prefix: string = '--'): string {
-  return `${prefix}${path.replace(/\./g, '-')}`;
-}
 
 /**
  * Resolves interpolated strings with embedded references and fallbacks
@@ -202,7 +168,7 @@ export function resolvePath(
         const result = resolver.resolve(input);
 
         // Extract value from resolved tokens
-        const value = get(result.tokens, path);
+        const value = getNestedValue(result.tokens, path);
         if (value !== undefined) {
           // Apply transforms if configured
           let transformed = applyTransforms(value, ctx);
@@ -264,7 +230,7 @@ export function resolvePath(
 
   visited.push(path);
 
-  const node = get(ctx.tokens, path);
+  const node = getNestedValue(ctx.tokens, path);
   if (node == null) {
     // In reference mode, emit a CSS var reference rather than failing. This
     // allows late-bound BYODS overrides without flooding warnings.
@@ -377,118 +343,3 @@ export function resolvePath(
   visited.pop();
   return next;
 }
-
-/**
- * Recursively resolves a design token reference to its final value
- * @deprecated Use the new configurable resolver with resolvePath instead
- */
-export const resolveToken = (
-  tokenPath: string,
-  fallback: string,
-  designTokens: Record<string, unknown>,
-  visited = new Set<string>()
-): string => {
-  try {
-    // Prevent infinite recursion
-    if (visited.has(tokenPath)) {
-      Logger.warn(
-        `Circular reference detected: ${tokenPath}, using fallback: ${fallback}`
-      );
-      return fallback;
-    }
-    visited.add(tokenPath);
-
-    // Remove curly braces if present
-    const cleanPath = tokenPath.replace(/[{}]/g, '');
-    const pathSegments = cleanPath.split('.');
-
-    // Navigate through the design tokens object
-    let current: Record<string, unknown> = designTokens;
-    for (const segment of pathSegments) {
-      if (current && typeof current === 'object' && segment in current) {
-        current = current[segment] as Record<string, unknown>;
-      } else {
-        Logger.warn(
-          `Token path not found: ${tokenPath}, using fallback: ${fallback}`
-        );
-        return fallback;
-      }
-    }
-
-    // Get the value
-    let value: unknown;
-    if (current && typeof current === 'object' && '$value' in current) {
-      value = current.$value;
-    } else if (typeof current === 'string' || typeof current === 'number') {
-      value = current;
-    } else {
-      Logger.warn(
-        `Token value not found: ${tokenPath}, using fallback: ${fallback}`
-      );
-      return fallback;
-    }
-
-    // If the value is a string that looks like a token reference, resolve it recursively
-    if (typeof value === 'string' && value.match(/^\{[^}]+\}$/)) {
-      const refPath = value.replace(/[{}]/g, '');
-      // Prevent infinite recursion
-      if (visited.has(refPath)) {
-        Logger.warn(
-          `Circular reference detected: ${refPath}, using fallback: ${fallback}`
-        );
-        return fallback;
-      }
-      visited.add(refPath);
-
-      // Navigate through the design tokens object for the reference
-      const refSegments = refPath.split('.');
-      let refCurrent: Record<string, unknown> = designTokens;
-      for (const segment of refSegments) {
-        if (
-          refCurrent &&
-          typeof refCurrent === 'object' &&
-          segment in refCurrent
-        ) {
-          refCurrent = refCurrent[segment] as Record<string, unknown>;
-        } else {
-          Logger.warn(
-            `Referenced token path not found: ${refPath}, using fallback: ${fallback}`
-          );
-          return fallback;
-        }
-      }
-
-      // Get the referenced value
-      let refValue: unknown;
-      if (
-        refCurrent &&
-        typeof refCurrent === 'object' &&
-        '$value' in refCurrent
-      ) {
-        refValue = refCurrent.$value;
-      } else if (
-        typeof refCurrent === 'string' ||
-        typeof refCurrent === 'number'
-      ) {
-        refValue = refCurrent;
-      } else {
-        Logger.warn(
-          `Referenced token value not found: ${refPath}, using fallback: ${fallback}`
-        );
-        return fallback;
-      }
-
-      return String(refValue);
-    }
-
-    return String(value);
-  } catch (error) {
-    Logger.error(
-      `Could not resolve any fallback for: ${tokenPath}, using fallback: ${fallback}`,
-      error
-    );
-    return fallback;
-  }
-};
-
-// Design tokens should be passed as parameter to avoid circular imports

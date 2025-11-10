@@ -8,7 +8,9 @@
 import React from 'react';
 import { render, RenderOptions } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+// @ts-ignore - axe-core types may not be available
 import axe from 'axe-core';
+import { vi } from 'vitest';
 
 // Test providers wrapper
 interface TestProvidersProps {
@@ -22,7 +24,7 @@ const TestProviders: React.FC<TestProvidersProps> = ({
   children,
   theme,
   router,
-  user
+  user,
 }) => {
   // This would wrap with actual providers when implemented
   return <>{children}</>;
@@ -45,28 +47,28 @@ export const renderWithProviders = (
         {children}
       </TestProviders>
     ),
-    ...renderOptions
+    ...renderOptions,
   });
 };
 
 // User event setup with common configuration
 export const setupUserEvent = () => {
   return userEvent.setup({
-    advanceTimers: jest.advanceTimersByTime,
+    advanceTimers: vi.advanceTimersByTime,
     delay: null, // Disable delays for faster tests
   });
 };
 
 // Mock utilities
 export const createMockHandlers = () => ({
-  onChange: jest.fn(),
-  onClick: jest.fn(),
-  onFocus: jest.fn(),
-  onBlur: jest.fn(),
-  onSubmit: jest.fn(),
-  onKeyDown: jest.fn(),
-  onMouseEnter: jest.fn(),
-  onMouseLeave: jest.fn(),
+  onChange: vi.fn(),
+  onClick: vi.fn(),
+  onFocus: vi.fn(),
+  onBlur: vi.fn(),
+  onSubmit: vi.fn(),
+  onKeyDown: vi.fn(),
+  onMouseEnter: vi.fn(),
+  onMouseLeave: vi.fn(),
 });
 
 export const createMockProps = <T extends Record<string, any>>(
@@ -75,8 +77,8 @@ export const createMockProps = <T extends Record<string, any>>(
   const baseProps = {
     className: 'test-class',
     'data-testid': 'test-component',
-    ...overrides
-  } as T;
+    ...overrides,
+  } as unknown as T;
 
   return baseProps;
 };
@@ -115,7 +117,9 @@ export const componentTestUtils = {
       renderWithProviders(
         <Component {...baseProps} data-testid="custom-test-id" />
       );
-      expect(document.querySelector('[data-testid="custom-test-id"]')).toBeInTheDocument();
+      expect(
+        document.querySelector('[data-testid="custom-test-id"]')
+      ).toBeInTheDocument();
     });
   },
 
@@ -139,7 +143,7 @@ export const componentTestUtils = {
 
       expectedBehavior();
     });
-  }
+  },
 };
 
 // Performance testing utilities
@@ -165,7 +169,7 @@ export const performanceTestUtils = {
       const { rerender, unmount } = renderWithProviders(component);
 
       // Wait for render to complete
-      await new Promise(resolve => setTimeout(resolve, 0));
+      await new Promise((resolve) => setTimeout(resolve, 0));
 
       const end = performance.now();
       times.push(end - start);
@@ -180,14 +184,17 @@ export const performanceTestUtils = {
       min: times[0],
       max: times[times.length - 1],
       median: times[Math.floor(times.length / 2)],
-      iterations
+      iterations,
     };
   },
 
   // Measure interaction performance
   measureInteractionTime: async (
     component: React.ReactElement,
-    interaction: (container: HTMLElement, user: ReturnType<typeof setupUserEvent>) => Promise<void>,
+    interaction: (
+      container: HTMLElement,
+      user: ReturnType<typeof setupUserEvent>
+    ) => Promise<void>,
     options: { warmupRuns?: number; measureRuns?: number } = {}
   ): Promise<{
     average: number;
@@ -223,7 +230,7 @@ export const performanceTestUtils = {
       average: times.reduce((a, b) => a + b) / times.length,
       min: Math.min(...times),
       max: Math.max(...times),
-      samples: measureRuns
+      samples: measureRuns,
     };
   },
 
@@ -258,7 +265,7 @@ export const performanceTestUtils = {
     }
 
     // Small delay for GC
-    await new Promise(resolve => setTimeout(resolve, 100));
+    await new Promise((resolve) => setTimeout(resolve, 100));
 
     const after = getMemoryUsage();
 
@@ -266,9 +273,9 @@ export const performanceTestUtils = {
       before,
       after,
       delta: after - before,
-      iterations
+      iterations,
     };
-  }
+  },
 };
 
 // Accessibility testing utilities
@@ -283,16 +290,25 @@ export const accessibilityTestUtils = {
   ): Promise<axe.AxeResults> => {
     const { container } = renderWithProviders(component);
 
-    const results = await axe.run(container, {
-      rules: options.rules,
-      runOnly: options.disableRules
-        ? { type: 'tag', values: ['wcag2a', 'wcag2aa', 'best-practice'] }
-        : undefined,
-      rules: options.disableRules?.reduce((acc, rule) => {
-        acc[rule] = { enabled: false };
-        return acc;
-      }, {} as Record<string, axe.Rule>),
-    });
+    const axeOptions: any = {};
+    if (options.rules) {
+      axeOptions.rules = options.rules;
+    }
+    if (options.disableRules) {
+      axeOptions.runOnly = {
+        type: 'tag',
+        values: ['wcag2a', 'wcag2aa', 'best-practice'],
+      };
+      axeOptions.rules = options.disableRules.reduce(
+        (acc, rule) => {
+          acc[rule] = { enabled: false };
+          return acc;
+        },
+        {} as Record<string, axe.Rule>
+      );
+    }
+
+    const results = await axe.run(container, axeOptions);
 
     return results;
   },
@@ -314,8 +330,8 @@ export const accessibilityTestUtils = {
         'button-name': { enabled: true },
         'image-alt': { enabled: true },
         'heading-order': { enabled: true },
-        'keyboard': { enabled: true },
-      }
+        keyboard: { enabled: true },
+      },
     });
 
     const passes = results.violations.length === 0;
@@ -325,7 +341,7 @@ export const accessibilityTestUtils = {
       passes,
       summary: passes
         ? `✅ WCAG ${level} compliant`
-        : `❌ ${results.violations.length} WCAG ${level} violations found`
+        : `❌ ${results.violations.length} WCAG ${level} violations found`,
     };
   },
 
@@ -358,10 +374,11 @@ export const accessibilityTestUtils = {
       const activeElement = document.activeElement;
 
       if (activeElement) {
-        const identifier = activeElement.getAttribute('data-testid') ||
-                          activeElement.getAttribute('aria-label') ||
-                          activeElement.textContent?.slice(0, 20) ||
-                          activeElement.tagName.toLowerCase();
+        const identifier =
+          activeElement.getAttribute('data-testid') ||
+          activeElement.getAttribute('aria-label') ||
+          activeElement.textContent?.slice(0, 20) ||
+          activeElement.tagName.toLowerCase();
         tabOrder.push(identifier);
       }
     }
@@ -372,7 +389,7 @@ export const accessibilityTestUtils = {
     return {
       navigableElements: focusableElements.length,
       tabOrder,
-      errors
+      errors,
     };
   },
 
@@ -395,7 +412,7 @@ export const accessibilityTestUtils = {
       elements.forEach((element, index) => {
         const elementKey = `${selector}[${index}]`;
 
-        attributes.forEach(attr => {
+        attributes.forEach((attr) => {
           if (!element.hasAttribute(attr)) {
             if (!missingAttributes[elementKey]) {
               missingAttributes[elementKey] = [];
@@ -404,7 +421,10 @@ export const accessibilityTestUtils = {
           } else {
             // Validate attribute values
             const value = element.getAttribute(attr);
-            if (attr === 'aria-checked' && !['true', 'false', 'mixed'].includes(value || '')) {
+            if (
+              attr === 'aria-checked' &&
+              !['true', 'false', 'mixed'].includes(value || '')
+            ) {
               if (!invalidAttributes[elementKey]) {
                 invalidAttributes[elementKey] = [];
               }
@@ -416,7 +436,7 @@ export const accessibilityTestUtils = {
     });
 
     return { missingAttributes, invalidAttributes };
-  }
+  },
 };
 
 // Visual regression testing utilities
@@ -446,30 +466,30 @@ export const visualTestUtils = {
     // This would use a visual diffing library
     return {
       matches: true,
-      difference: 0
+      difference: 0,
     };
-  }
+  },
 };
 
 // Integration testing utilities
 export const integrationTestUtils = {
   // Mock API responses
   createMockApi: <T extends Record<string, any>>(responses: T) => {
-    const mockFetch = jest.fn();
+    const mockFetch = vi.fn();
 
     Object.entries(responses).forEach(([endpoint, response]) => {
       mockFetch.mockImplementationOnce((url: string) => {
         if (url.includes(endpoint)) {
           return Promise.resolve({
             ok: true,
-            json: () => Promise.resolve(response)
+            json: () => Promise.resolve(response),
           });
         }
         return Promise.reject(new Error(`Unexpected URL: ${url}`));
       });
     });
 
-    global.fetch = mockFetch;
+    global.fetch = mockFetch as any;
     return mockFetch;
   },
 
@@ -477,28 +497,28 @@ export const integrationTestUtils = {
   createMockStorage: (initialData: Record<string, string> = {}) => {
     const mockStorage = {
       data: { ...initialData },
-      getItem: jest.fn((key: string) => mockStorage.data[key] || null),
-      setItem: jest.fn((key: string, value: string) => {
+      getItem: vi.fn((key: string) => mockStorage.data[key] || null),
+      setItem: vi.fn((key: string, value: string) => {
         mockStorage.data[key] = value;
       }),
-      removeItem: jest.fn((key: string) => {
+      removeItem: vi.fn((key: string) => {
         delete mockStorage.data[key];
       }),
-      clear: jest.fn(() => {
+      clear: vi.fn(() => {
         mockStorage.data = {};
       }),
       get length() {
         return Object.keys(mockStorage.data).length;
       },
-      key: jest.fn((index: number) => {
+      key: vi.fn((index: number) => {
         const keys = Object.keys(mockStorage.data);
         return keys[index] || null;
-      })
+      }),
     };
 
     Object.defineProperty(window, 'localStorage', {
       value: mockStorage,
-      writable: true
+      writable: true,
     });
 
     return mockStorage;
@@ -506,27 +526,27 @@ export const integrationTestUtils = {
 
   // Mock Intersection Observer
   createMockIntersectionObserver: () => {
-    const mockIntersectionObserver = jest.fn();
+    const mockIntersectionObserver = vi.fn();
     mockIntersectionObserver.mockReturnValue({
-      observe: jest.fn(),
-      disconnect: jest.fn(),
-      unobserve: jest.fn()
+      observe: vi.fn(),
+      disconnect: vi.fn(),
+      unobserve: vi.fn(),
     });
 
     Object.defineProperty(window, 'IntersectionObserver', {
       writable: true,
       configurable: true,
-      value: mockIntersectionObserver
+      value: mockIntersectionObserver,
     });
 
     Object.defineProperty(global, 'IntersectionObserver', {
       writable: true,
       configurable: true,
-      value: mockIntersectionObserver
+      value: mockIntersectionObserver,
     });
 
     return mockIntersectionObserver;
-  }
+  },
 };
 
 // Export commonly used testing utilities
@@ -535,7 +555,5 @@ export {
   performanceTestUtils as performanceTests,
   accessibilityTestUtils as accessibilityTests,
   visualTestUtils as visualTests,
-  integrationTestUtils as integrationTests
+  integrationTestUtils as integrationTests,
 };
-
-

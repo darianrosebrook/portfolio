@@ -161,10 +161,8 @@ const Popover: React.FC<PopoverProps> & {
 
       const newPosition = { top, left };
       setPosition(newPosition);
-      // Call onPositionUpdate with fresh position value
-      onPositionUpdate?.(newPosition);
     }
-  }, [offset, placement, anchorEl, onPositionUpdate]);
+  }, [offset, placement, anchorEl]);
 
   // Open/Close side effects
   useLayoutEffect(() => {
@@ -248,7 +246,10 @@ const Popover: React.FC<PopoverProps> & {
         '[autofocus], button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
       ) || contentRef.current;
 
-    if (focusElement && typeof (focusElement as HTMLElement).focus === 'function') {
+    if (
+      focusElement &&
+      typeof (focusElement as HTMLElement).focus === 'function'
+    ) {
       (focusElement as HTMLElement).focus();
     }
 
@@ -256,10 +257,7 @@ const Popover: React.FC<PopoverProps> & {
       // Return focus to trigger or previous element
       if (triggerRef.current && document.contains(triggerRef.current)) {
         triggerRef.current.focus();
-      } else if (
-        previousFocus &&
-        document.contains(previousFocus)
-      ) {
+      } else if (previousFocus && document.contains(previousFocus)) {
         previousFocus.focus();
       }
     };
@@ -390,7 +388,6 @@ const Content: React.FC<ContentProps> = ({
       // Setup resize observer to handle content size changes
       const resizeObserver = new ResizeObserver(() => {
         updatePosition();
-        onPositionUpdate?.(position);
       });
       resizeObserver.observe(contentRef.current);
 
@@ -453,6 +450,13 @@ const Content: React.FC<ContentProps> = ({
       };
     }
   }, [isOpen, contentRef, getMotionTokens]);
+
+  // Call onPositionUpdate when position changes
+  useEffect(() => {
+    if (isOpen && onPositionUpdate) {
+      onPositionUpdate(position);
+    }
+  }, [position, isOpen, onPositionUpdate]);
 
   if (!isOpen) return null;
 

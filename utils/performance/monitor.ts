@@ -187,6 +187,39 @@ class PerformanceMonitor {
   }
 
   /**
+   * Track a custom performance metric with optional metadata.
+   *
+   * This is a generic method for tracking any performance metric that doesn't
+   * fit into the predefined tracking methods. Used by advanced monitoring
+   * utilities for CSS features, bundle analysis, and runtime metrics.
+   *
+   * @param name - Name/identifier of the metric
+   * @param value - Numeric value of the metric
+   * @param metadata - Optional metadata object for additional context
+   *
+   * @example
+   * ```typescript
+   * performanceMonitor.trackMetric('css_computation_time', 15.5, {
+   *   componentName: 'Button'
+   * });
+   * ```
+   */
+  trackMetric(name: string, value: number, metadata?: Record<string, unknown>) {
+    // Store metric in a custom metrics store if needed
+    // For now, we'll log it and send to analytics
+    this.logMetric(name, value);
+
+    // Send to analytics if available
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      (window as any).gtag('event', 'performance_metric', {
+        metric_name: name,
+        value: value,
+        ...metadata,
+      });
+    }
+  }
+
+  /**
    * Log performance metric
    */
   private logMetric(name: string, value: number) {

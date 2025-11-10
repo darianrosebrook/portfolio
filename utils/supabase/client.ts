@@ -1,3 +1,6 @@
+import { createBrowserClient } from '@supabase/ssr';
+import { env } from '@/utils/env';
+
 /**
  * Supabase client factory for browser environment.
  *

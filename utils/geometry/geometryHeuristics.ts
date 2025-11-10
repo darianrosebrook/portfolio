@@ -8,7 +8,15 @@ import type { Glyph, Font } from 'fontkit';
 import type { Point2D } from './geometry';
 import { Bezier } from 'bezier-js';
 import { Metrics } from '@/utils/typeAnatomy';
-import { getOvershoot, shapeForV2, isDrawable, dFor } from './geometryCore';
+import {
+  getOvershoot,
+  shapeForV2,
+  isDrawable,
+  dFor,
+  rayHits,
+  windingNumber,
+  isInside,
+} from './geometryCore';
 
 // Declare IntersectionQuery as global (for kld >= 0.4 point-in-path support)
 declare const IntersectionQuery: unknown;
@@ -343,34 +351,7 @@ function hits(
   }
 }
 
-/**
- * Checks if a point is inside the glyph outline using the fastest available method.
- * Uses IntersectionQuery.pointInPath if available (kld >= 0.4), else falls back to ray/winding number.
- * @param {Glyph} g - The fontkit Glyph object.
- * @param {Point2D} pt - The point to test.
- * @returns {boolean}
- */
-export function isInside(g: Glyph, pt: Point2D): boolean {
-  const gs = shapeForV2(g);
-  // Feature check for IntersectionQuery.pointInPath (kld >= 0.4)
-  const insideFast =
-    typeof IntersectionQuery === 'object' &&
-    IntersectionQuery !== null &&
-    typeof (IntersectionQuery as { pointInPath?: unknown }).pointInPath ===
-      'function'
-      ? (
-          IntersectionQuery as {
-            pointInPath: (shape: SvgShape, pt: Point2D) => boolean;
-          }
-        ).pointInPath
-      : null;
-  if (insideFast) {
-    return insideFast(gs, pt);
-  }
-  // Legacy fallback: cast a long horizontal ray from far left to pt.x
-  const probe = shape('line', { x1: -1e6, y1: pt.y, x2: pt.x, y2: pt.y });
-  return Math.abs(windingNumber(gs, probe)) % 2 === 1;
-}
+// isInside is now imported from geometryCore.ts
 
 /**
  * Measures stroke thickness at (x, y) along the vertical direction.
@@ -990,51 +971,7 @@ function getEPS(font: Font): number {
   return (font.unitsPerEm ?? 1000) * 1e-4;
 }
 
-/**
- * Casts a ray (line probe) at a glyph shape and returns intersection points.
- * Always creates a new probe shape to avoid mutation issues with svg-intersections.
- * Fail-safe: If intersection fails or returns invalid data, returns an empty array.
- * Logs glyph outline/path and probe parameters on error for debugging.
- * @param gs - SvgShape for the glyph
- * @param origin - Start point of the ray
- * @param angle - Angle in radians
- * @param len - Length of the ray
- * @returns { points: Point2D[] } Intersection points (empty if error)
- */
-export function rayHits(
-  gs: SvgShape,
-  origin: Point2D,
-  angle: number,
-  len: number
-): { points: Point2D[] } {
-  // Always create a new probe shape to avoid mutation issues
-  const dx = Math.cos(angle) * len;
-  const dy = Math.sin(angle) * len;
-  const probe = shape('line', {
-    x1: origin.x,
-    y1: origin.y,
-    x2: origin.x + dx,
-    y2: origin.y + dy,
-  });
-  let result: { points?: Point2D[] } | null | undefined;
-  try {
-    result = safeIntersect(gs, probe);
-  } catch {
-    // Fail-safe: log and return empty points
-    console.error('[rayHits] Error during intersection:', {
-      origin,
-      angle,
-      len,
-      probe,
-    });
-    return { points: [] };
-  }
-  if (!result || !Array.isArray(result.points)) {
-    // Defensive: always return a points array
-    return { points: [] };
-  }
-  return { points: result.points ?? [] };
-}
+// rayHits is now imported from geometryCore.ts
 
 /**
  * Caches parsed path segments (IntersectionParams[]) for each glyph.
@@ -1138,32 +1075,9 @@ export function segmentsFor(g: Glyph): SegmentWithMeta[] {
   return segCache.get(g)!;
 }
 
-/**
- * Computes the signed winding number for a probe intersecting a glyph shape.
- * Uses segment1 index to look up _segmentDir from segmentsFor.
- * @param gs - The glyph SvgShape
- * @param probe - The probe SvgShape
- * @param segments - Precomputed segment metadata array
- * @returns signed winding number (0 = outside, ±N = inside)
- */
-export function windingNumber(
-  gs: SvgShape,
-  probe: SvgShape,
-  segments?: SegmentWithMeta[]
-): number {
-  const result = safeIntersect(gs, probe) as {
-    points: (Point2D & { segment1?: number })[];
-  };
-  let wn = 0;
-  for (const p of result.points) {
-    let dir = 1;
-    if (segments && typeof p.segment1 === 'number' && segments[p.segment1]) {
-      dir = Math.sign(segments[p.segment1]._segmentDir ?? 1);
-    }
-    wn += dir;
-  }
-  return wn;
-}
+// windingNumber is now imported from geometryCore.ts
+// Note: The version in geometryCore.ts accepts segments with _segmentDir property
+// which matches the SegmentWithMeta type used here
 
 /**
  * Converts an SVG elliptical arc to an array of cubic Bezier curves.

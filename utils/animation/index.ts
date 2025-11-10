@@ -16,49 +16,49 @@ export const ANIMATION_PRESETS = {
     opacity: 0,
     y: 10,
     duration: 0.3,
-    ease: 'power2.out'
+    ease: 'power2.out',
   },
 
   slideIn: {
     x: -20,
     opacity: 0,
     duration: 0.3,
-    ease: 'power2.out'
+    ease: 'power2.out',
   },
 
   slideInRight: {
     x: 20,
     opacity: 0,
     duration: 0.3,
-    ease: 'power2.out'
+    ease: 'power2.out',
   },
 
   slideInUp: {
     y: 20,
     opacity: 0,
     duration: 0.3,
-    ease: 'power2.out'
+    ease: 'power2.out',
   },
 
   slideInDown: {
     y: -20,
     opacity: 0,
     duration: 0.3,
-    ease: 'power2.out'
+    ease: 'power2.out',
   },
 
   scaleIn: {
     scale: 0.9,
     opacity: 0,
     duration: 0.3,
-    ease: 'back.out(1.7)'
+    ease: 'back.out(1.7)',
   },
 
   bounceIn: {
     scale: 0.3,
     opacity: 0,
     duration: 0.5,
-    ease: 'back.out(1.7)'
+    ease: 'back.out(1.7)',
   },
 
   // Exit animations
@@ -66,54 +66,54 @@ export const ANIMATION_PRESETS = {
     opacity: 0,
     y: -10,
     duration: 0.2,
-    ease: 'power2.in'
+    ease: 'power2.in',
   },
 
   slideOut: {
     x: -20,
     opacity: 0,
     duration: 0.2,
-    ease: 'power2.in'
+    ease: 'power2.in',
   },
 
   slideOutRight: {
     x: 20,
     opacity: 0,
     duration: 0.2,
-    ease: 'power2.in'
+    ease: 'power2.in',
   },
 
   scaleOut: {
     scale: 0.9,
     opacity: 0,
     duration: 0.2,
-    ease: 'power2.in'
+    ease: 'power2.in',
   },
 
   // State change animations
   press: {
     scale: 0.98,
     duration: 0.1,
-    ease: 'power2.out'
+    ease: 'power2.out',
   },
 
   release: {
     scale: 1,
     duration: 0.2,
-    ease: 'back.out(1.5)'
+    ease: 'back.out(1.5)',
   },
 
   // Hover animations
   lift: {
     y: -2,
     duration: 0.2,
-    ease: 'power2.out'
+    ease: 'power2.out',
   },
 
   settle: {
     y: 0,
     duration: 0.3,
-    ease: 'power2.out'
+    ease: 'power2.out',
   },
 
   // Loading animations
@@ -122,14 +122,14 @@ export const ANIMATION_PRESETS = {
     duration: 0.8,
     ease: 'power2.inOut',
     repeat: -1,
-    yoyo: true
+    yoyo: true,
   },
 
   spin: {
     rotation: 360,
     duration: 1,
     ease: 'none',
-    repeat: -1
+    repeat: -1,
   },
 
   // Notification animations
@@ -137,14 +137,14 @@ export const ANIMATION_PRESETS = {
     y: -100,
     opacity: 0,
     duration: 0.4,
-    ease: 'back.out(1.2)'
+    ease: 'back.out(1.2)',
   },
 
   slideOutTop: {
     y: -100,
     opacity: 0,
     duration: 0.3,
-    ease: 'power2.in'
+    ease: 'power2.in',
   },
 
   // Modal animations
@@ -152,27 +152,27 @@ export const ANIMATION_PRESETS = {
     scale: 0.9,
     opacity: 0,
     duration: 0.3,
-    ease: 'back.out(1.7)'
+    ease: 'back.out(1.7)',
   },
 
   modalExit: {
     scale: 0.9,
     opacity: 0,
     duration: 0.2,
-    ease: 'power2.in'
+    ease: 'power2.in',
   },
 
   backdropEnter: {
     opacity: 0,
     duration: 0.3,
-    ease: 'power2.out'
+    ease: 'power2.out',
   },
 
   backdropExit: {
     opacity: 0,
     duration: 0.2,
-    ease: 'power2.in'
-  }
+    ease: 'power2.in',
+  },
 } as const;
 
 // Animation duration presets
@@ -181,7 +181,7 @@ export const ANIMATION_DURATIONS = {
   fast: 0.2,
   normal: 0.3,
   slow: 0.5,
-  slower: 0.8
+  slower: 0.8,
 } as const;
 
 // Easing presets
@@ -190,7 +190,7 @@ export const EASING_PRESETS = {
   bouncy: 'back.out(1.7)',
   snappy: 'power3.out',
   gentle: 'power1.out',
-  linear: 'none'
+  linear: 'none',
 } as const;
 
 // Stagger utilities for sequential animations
@@ -200,14 +200,19 @@ export const createStaggerConfig = (
 ) => ({
   stagger: {
     amount,
-    from
-  }
+    from,
+  },
 });
 
 // Animation controller for complex sequences
 export class AnimationController {
-  private animations: Map<string, gsap.core.Timeline | gsap.core.Tween> = new Map();
+  private animations: Map<string, gsap.core.Timeline | gsap.core.Tween> =
+    new Map();
   private isDestroyed = false;
+
+  constructor() {
+    // Constructor for initialization if needed
+  }
 
   animate(
     element: Element | string,
@@ -222,7 +227,7 @@ export class AnimationController {
     if (this.isDestroyed) return;
 
     const { id, delay = 0, onComplete, onStart } = options;
-    const config = { ...ANIMATION_PRESETS[preset] };
+    const config: any = { ...ANIMATION_PRESETS[preset] };
 
     if (delay > 0) {
       config.delay = delay;
@@ -263,7 +268,7 @@ export class AnimationController {
     const timeline = gsap.timeline({ onComplete });
 
     sequence.forEach((item, index) => {
-      const delay = item.delay ?? (index * stagger);
+      const delay = item.delay ?? index * stagger;
       timeline.to(
         item.element,
         { ...ANIMATION_PRESETS[item.preset], delay },
@@ -299,7 +304,7 @@ export class AnimationController {
 
 // Hook for using animation controller
 export function useAnimationController() {
-  const controllerRef = React.useRef<AnimationController>();
+  const controllerRef = React.useRef<AnimationController | null>(null);
 
   if (!controllerRef.current) {
     controllerRef.current = new AnimationController();
@@ -338,7 +343,7 @@ export const animationUtils = {
       { opacity: 0, x: -20 },
       {
         ...ANIMATION_PRESETS[preset],
-        stagger: 0.1
+        stagger: 0.1,
       }
     );
   },
@@ -353,13 +358,17 @@ export const animationUtils = {
         duration: 0.1,
         ease: 'power2.inOut',
         repeat: 3,
-        yoyo: true
+        yoyo: true,
       })
-      .to(element, {
-        borderColor: '#dc3545',
-        duration: 0.3,
-        ease: 'power2.out'
-      }, 0);
+      .to(
+        element,
+        {
+          borderColor: '#dc3545',
+          duration: 0.3,
+          ease: 'power2.out',
+        },
+        0
+      );
 
     return timeline;
   },
@@ -371,7 +380,7 @@ export const animationUtils = {
       duration: 0.3,
       ease: 'power2.out',
       repeat: -1,
-      yoyo: true
+      yoyo: true,
     });
   },
 
@@ -380,30 +389,36 @@ export const animationUtils = {
     return gsap.to(element, {
       boxShadow: '0 0 0 3px rgba(59, 130, 246, 0.5)',
       duration: 0.2,
-      ease: 'power2.out'
+      ease: 'power2.out',
     });
   },
 
   // Animate hover states
-  createHoverAnimation: (element: Element, direction: 'up' | 'down' | 'left' | 'right' = 'up') => {
+  createHoverAnimation: (
+    element: Element,
+    direction: 'up' | 'down' | 'left' | 'right' = 'up'
+  ) => {
     const transforms = {
       up: { y: -2 },
       down: { y: 2 },
       left: { x: -2 },
-      right: { x: 2 }
+      right: { x: 2 },
     };
 
     return gsap.to(element, {
       ...transforms[direction],
       duration: 0.2,
-      ease: 'power2.out'
+      ease: 'power2.out',
     });
-  }
+  },
 };
 
 // Performance monitoring for animations
 export const animationMonitor = {
-  trackAnimation: (name: string, animation: gsap.core.Tween | gsap.core.Timeline) => {
+  trackAnimation: (
+    name: string,
+    animation: gsap.core.Tween | gsap.core.Timeline
+  ) => {
     if (process.env.NODE_ENV === 'development') {
       console.log(`🎬 Animation started: ${name}`);
 
@@ -415,17 +430,23 @@ export const animationMonitor = {
 
   // Check for transform/opacity usage (performance best practice)
   validatePerformance: (config: any): boolean => {
-    const hasLayoutTriggeringProps = ['width', 'height', 'margin', 'padding', 'border'].some(prop =>
-      Object.keys(config).includes(prop)
-    );
+    const hasLayoutTriggeringProps = [
+      'width',
+      'height',
+      'margin',
+      'padding',
+      'border',
+    ].some((prop) => Object.keys(config).includes(prop));
 
     if (hasLayoutTriggeringProps && !config.force3D !== false) {
-      console.warn('⚠️ Animation uses layout-triggering properties. Consider using transform/opacity instead.');
+      console.warn(
+        '⚠️ Animation uses layout-triggering properties. Consider using transform/opacity instead.'
+      );
       return false;
     }
 
     return true;
-  }
+  },
 };
 
 // Re-export GSAP for convenience
