@@ -149,18 +149,62 @@ export function writeOutputFile(
 }
 
 /**
- * Convert token path to CSS custom property name
+ * Determine if a token path belongs to semantic or core namespace based on patterns
+ */
+function determineNamespace(tokenPath: string): 'core' | 'semantic' | null {
+  // Already prefixed
+  if (tokenPath.startsWith('core.')) return 'core';
+  if (tokenPath.startsWith('semantic.')) return 'semantic';
+
+  // Core token patterns (these are primitives/palettes)
+  const corePatterns = [
+    /^color\.(mode|palette|datavis)/, // color.mode.*, color.palette.*, color.datavis.*
+    /^typography\.(fontFamily|weight|ramp|lineHeight|letterSpacing|features)/, // typography.fontFamily.*, typography.weight.*, etc.
+    /^spacing\.size/, // spacing.size.*
+    /^elevation\.(level|offset|blur|spread)/, // elevation.level.*, elevation.offset.*, etc.
+    /^opacity\.(50|100|200|300|400|500|600|700|800|900|full)/, // opacity.50, opacity.100, etc.
+    /^dimension\.(breakpoint|tapTarget|actionMinHeight)/, // dimension.breakpoint.*, etc.
+    /^shape\.(radius|borderWidth|borderStyle)/, // shape.radius.*, shape.borderWidth.*, etc.
+    /^motion\.(duration|easing|keyframes|delay|stagger)/, // motion.duration.*, motion.easing.*, etc.
+    /^scale\./, // scale.*
+    /^density\./, // density.*
+    /^layer\./, // layer.*
+    /^layout\./, // layout.*
+    /^icon\./, // icon.*
+    /^effect\./, // effect.*
+  ];
+
+  // If it matches core patterns, it's core
+  if (corePatterns.some((pattern) => pattern.test(tokenPath))) {
+    return 'core';
+  }
+
+  // Everything else is semantic (foreground, background, border, action, feedback, etc.)
+  return 'semantic';
+}
+
+/**
+ * Convert token path to CSS custom property name with namespace prefix
  */
 export function tokenPathToCSSVar(tokenPath: string, prefix = '--'): string {
-  return (
-    prefix +
-    tokenPath
-      .replace(/\./g, '-') // Convert dots to hyphens first
-      .replace(/[A-Z]/g, (m) => '-' + m.toLowerCase()) // Convert camelCase
-      .replace(/[\s_]/g, '-') // Convert spaces and underscores
-      .replace(/[^a-z0-9-]/g, '') // Remove any remaining invalid characters
-      .replace(/-+/g, '-') // Collapse multiple hyphens into one
-  );
+  // Determine namespace
+  const namespace = determineNamespace(tokenPath);
+  
+  // Remove namespace prefix if present (we'll add it back)
+  const pathWithoutNamespace = tokenPath.replace(/^(core|semantic)\./, '');
+  
+  // Convert path to CSS variable format
+  const cssVarName = pathWithoutNamespace
+    .replace(/\./g, '-') // Convert dots to hyphens first
+    .replace(/[A-Z]/g, (m) => '-' + m.toLowerCase()) // Convert camelCase
+    .replace(/[\s_]/g, '-') // Convert spaces and underscores
+    .replace(/[^a-z0-9-]/g, '') // Remove any remaining invalid characters
+    .replace(/-+/g, '-'); // Collapse multiple hyphens into one
+  
+  // Add namespace prefix if determined
+  const namespacePrefix = namespace ? `${namespace}-` : '';
+  
+  return prefix + namespacePrefix + cssVarName;
 }
 
 /**
