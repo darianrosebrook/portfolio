@@ -1,4 +1,4 @@
-@use './Toggle.tokens.generated.scss' as toggleTokens;
+@use './ToggleSwitch.tokens.generated.scss' as toggleTokens;
 
 .toggleSwitch {
   @include toggleTokens.vars;
@@ -9,7 +9,7 @@
   align-content: center;
   align-items: center;
   max-height: 1.5rem;
-  border-radius: var(--toggle-size-radius-full);
+  border-radius: var(--toggleSwitch-size-radius-full);
   line-height: 1;
 
   &:focus-within {
@@ -26,7 +26,7 @@
     max-height: 1.5rem;
     background-color: var(--toggle-color-background-track);
     border: 1px solid var(--toggle-color-border-track);
-    border-radius: var(--toggle-size-radius-full);
+    border-radius: var(--toggleSwitch-size-radius-full);
     transition:
       background-color var(--toggle-motion-duration-fast)
         var(--toggle-motion-easing-standard),
@@ -76,7 +76,7 @@
   height: 1rem;
   background-color: var(--toggle-color-background-thumb);
   border: 1px solid var(--toggle-color-border-thumb);
-  border-radius: var(--toggle-size-radius-full);
+  border-radius: var(--toggleSwitch-size-radius-full);
   transition:
     inset-inline-start var(--toggle-motion-duration-fast) var(--toggle-motion-easing-standard),
     background-color var(--toggle-motion-duration-fast)
