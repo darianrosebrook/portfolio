@@ -189,6 +189,14 @@ function collectTokens(
     } else if (value !== undefined && value !== null) {
       // Handle plain values from resolver module (not DTCG structure)
       // These are already resolved values, not token objects
+      
+      // Check if value is actually undefined (from unresolved references)
+      // The resolver may return undefined for tokens that couldn't be resolved
+      if (value === undefined) {
+        // Skip undefined values - they're unresolved references
+        return;
+      }
+      
       const processedValue = processTokenValue(
         value,
         context,
@@ -196,8 +204,8 @@ function collectTokens(
         tokens
       );
 
-      // Skip if value is empty/undefined
-      if (!processedValue) {
+      // Skip if processed value is empty (but allow 0, false, etc.)
+      if (processedValue === '' && value !== '' && value !== 0 && value !== false) {
         return;
       }
 
@@ -212,6 +220,11 @@ function collectTokens(
       } else {
         maps.root[cssVar] = processedValue;
       }
+    } else if (value === undefined) {
+      // Explicitly handle undefined values from resolver
+      // These are tokens that exist but couldn't be resolved
+      // Skip them entirely - they're not valid CSS
+      return;
     }
   }
 }

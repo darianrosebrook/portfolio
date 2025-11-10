@@ -376,6 +376,18 @@ export class Resolver {
         return value;
       }
 
+      // Check if the referenced token exists
+      if (!(aliasPath in tokens)) {
+        this.warn({
+          code: 'MISSING',
+          path: String(currentPath),
+          message: `Token reference not found: ${aliasPath}`,
+          hint: `Referenced token "${aliasPath}" does not exist in resolved tokens`,
+        });
+        // Return undefined to indicate unresolved reference
+        return undefined;
+      }
+
       visited.add(aliasPath);
       const resolved = this.resolveAliasRecursive(
         tokens[aliasPath],
@@ -384,6 +396,8 @@ export class Resolver {
         aliasPath
       );
       visited.delete(aliasPath);
+      
+      // If resolution resulted in undefined, return undefined (unresolved reference)
       return resolved;
     }
 
