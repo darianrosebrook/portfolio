@@ -33,7 +33,7 @@
   font: inherit;
   font-weight: var(--button-text-weight, 500);
   font-size: var(--button-text-size-medium);
-  line-height: var(--button-text-lineHeight-collapse);
+  line-height: normal;
   text-decoration: none;
   transition:
     transform var(--button-motion-duration-fast)
