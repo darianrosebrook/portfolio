@@ -10,6 +10,7 @@
 import fs from 'fs';
 import path from 'path';
 import type { Diagnostic } from './types';
+import { getNestedValue } from './pathUtils';
 
 /**
  * Reference object for JSON Pointer syntax
@@ -376,8 +377,10 @@ export class Resolver {
         return value;
       }
 
-      // Check if the referenced token exists
-      if (!(aliasPath in tokens)) {
+      // Check if the referenced token exists using nested path lookup
+      // Tokens are stored as nested objects, so we need to check the nested structure
+      const referencedValue = getNestedValue(tokens as Record<string, unknown>, aliasPath);
+      if (referencedValue === undefined) {
         this.warn({
           code: 'MISSING',
           path: String(currentPath),
@@ -390,7 +393,7 @@ export class Resolver {
 
       visited.add(aliasPath);
       const resolved = this.resolveAliasRecursive(
-        tokens[aliasPath],
+        referencedValue,
         tokens,
         visited,
         aliasPath
