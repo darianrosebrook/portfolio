@@ -2,7 +2,7 @@
 // layout for component-standards that contains breadcrumbs
 import { useBreadcrumbs } from '@/hooks/useBreadcrumbs';
 // import { Breadcrumbs } from '@/ui/components/Breadcrumbs/Breadcrumbs';
-import { PageTransition } from '@/ui/components/PageTransition';
+// import { PageTransition } from '@/ui/components/PageTransition';
 import React from 'react';
 
 export default function ComponentStandardsLayout({

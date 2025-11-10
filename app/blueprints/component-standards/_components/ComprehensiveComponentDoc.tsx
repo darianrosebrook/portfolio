@@ -49,28 +49,21 @@ export function ComprehensiveComponentDoc({
   );
 
   // Generate interactive examples based on component status
-  // Use stable primitive values instead of object reference to prevent infinite loops
-  const componentKey = React.useMemo(
-    () =>
-      `${component.component}-${component.status}-${component.paths?.component || ''}`,
-    [component.component, component.status, component.paths?.component]
-  );
-
   const interactiveProject = React.useMemo(
     () => generateEnhancedInteractiveProject(component),
-    [componentKey, component.component, component.status]
+    [component]
   );
   const variantGrid = React.useMemo(
     () => generateEnhancedVariantGrid(component),
-    [component.component]
+    [component]
   );
   const sections = React.useMemo(
     () => generateSections(component),
-    [component.component]
+    [component]
   );
   const controls = React.useMemo(
     () => generateEnhancedControls(component),
-    [component.component]
+    [component]
   );
 
   return (
