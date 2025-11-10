@@ -10,7 +10,7 @@
     },
     "shape": {
       "radius": {
-        "full": "{semantic.shape.radius.full}"
+        "full": "{core.shape.radius.full}"
       }
     }
   }

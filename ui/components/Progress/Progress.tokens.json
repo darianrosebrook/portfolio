@@ -19,15 +19,15 @@
       "linear": {
         "sm": {
           "height": "{core.spacing.size.02}",
-          "radius": "{semantic.shape.radius.full}"
+          "radius": "{core.shape.radius.full}"
         },
         "md": {
           "height": "{core.spacing.size.03}",
-          "radius": "{semantic.shape.radius.full}"
+          "radius": "{core.shape.radius.full}"
         },
         "lg": {
           "height": "{core.spacing.size.04}",
-          "radius": "{semantic.shape.radius.full}"
+          "radius": "{core.shape.radius.full}"
         }
       },
       "circular": {

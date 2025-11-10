@@ -8,7 +8,7 @@
       },
       "radius": {
         "default": "{semantic.shape.control.radius.default}",
-        "full": "{semantic.shape.radius.full}"
+        "full": "{core.shape.radius.full}"
       },
       "gap": {
         "default": "{core.spacing.size.04}"

@@ -8,7 +8,7 @@
       "large": "{core.spacing.size.10}",
       "status": "{core.spacing.size.03}",
       "radius": {
-        "default": "{semantic.shape.radius.full}",
+        "default": "{core.shape.radius.full}",
         "small": "{core.shape.radius.small}",
         "full": "{core.shape.radius.full}"
       },

@@ -23,7 +23,7 @@
     },
     "size": {
       "radius": {
-        "default": "{semantic.shape.radius.full}"
+        "default": "{core.shape.radius.full}"
       },
       "padding": {
         "default": "{core.spacing.size.04}"

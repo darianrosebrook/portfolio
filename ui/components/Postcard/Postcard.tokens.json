@@ -25,7 +25,7 @@
       "radius": {
         "default": "{semantic.shape.control.radius.default}",
         "medium": "{semantic.shape.radius.medium}",
-        "full": "{semantic.shape.radius.full}"
+        "full": "{core.shape.radius.full}"
       },
       "margin": {
         "bottom": "{core.spacing.size.06}"
