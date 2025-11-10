@@ -6,9 +6,6 @@
   // CSS Containment for performance optimization
   contain: layout style paint;
 
-  // Container queries for responsive sizing
-  container-type: inline-size;
-
   // Selective reset - only reset what we need to control
   display: inline-flex;
   gap: var(--button-size-gap-default);
