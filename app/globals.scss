@@ -5,17 +5,13 @@
 @use 'blueprints/component-standards/_components/codesandbox-theming';
 
 // Base component styles with low specificity using :where()
-@use '../../utils/styles/base-components';
+@use '../utils/styles/base-components';
 
 // CSS Cascade Layers Architecture
 @use 'cascade-layers';
 
 // CSS @property Rules for typed custom properties
 @use 'property-rules';
-
-@view-transition {
-  navigation: auto;
-}
 
 *,
 *::before,
