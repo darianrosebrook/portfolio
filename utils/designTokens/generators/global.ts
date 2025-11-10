@@ -70,6 +70,11 @@ function collectTokens(
         const tokenValue = value.$value;
         const tokenType = value.$type;
 
+        // Skip tokens with undefined/null values
+        if (tokenValue === undefined || tokenValue === null) {
+          return;
+        }
+
         // Track defined variables
         context.definedVars.add(cssVar);
 
@@ -93,7 +98,9 @@ function collectTokens(
             currentPath.join('.'),
             tokens
           );
-          maps.lightColors[cssVar] = processedLightValue;
+          if (processedLightValue) {
+            maps.lightColors[cssVar] = processedLightValue;
+          }
 
           // Dark theme value (from extension or default)
           const darkValue = extensions!['design.paths.dark'] || tokenValue;
@@ -103,7 +110,9 @@ function collectTokens(
             currentPath.join('.'),
             tokens
           );
-          maps.darkColors[cssVar] = processedDarkValue;
+          if (processedDarkValue) {
+            maps.darkColors[cssVar] = processedDarkValue;
+          }
         } else if (typeof tokenValue === 'object' && tokenValue !== null) {
           const themeObj = tokenValue as Record<string, unknown>;
 
@@ -118,7 +127,9 @@ function collectTokens(
                 currentPath.join('.'),
                 tokens
               );
-              maps.lightColors[cssVar] = lightValue;
+              if (lightValue) {
+                maps.lightColors[cssVar] = lightValue;
+              }
             }
 
             // Dark theme value
@@ -129,7 +140,9 @@ function collectTokens(
                 currentPath.join('.'),
                 tokens
               );
-              maps.darkColors[cssVar] = darkValue;
+              if (darkValue) {
+                maps.darkColors[cssVar] = darkValue;
+              }
             }
           } else {
             // Regular object value (not theme-specific)
@@ -139,7 +152,9 @@ function collectTokens(
               currentPath.join('.'),
               tokens
             );
-            maps.root[cssVar] = processedValue;
+            if (processedValue) {
+              maps.root[cssVar] = processedValue;
+            }
           }
         } else {
           // Simple value
@@ -149,6 +164,11 @@ function collectTokens(
             currentPath.join('.'),
             tokens
           );
+
+          // Skip if value is empty/undefined
+          if (!processedValue) {
+            return;
+          }
 
           // Determine where to place based on token type or path
           if (
@@ -165,6 +185,32 @@ function collectTokens(
       } else {
         // This is a group, recurse
         collectTokens(value as TokenGroup, currentPath, context, maps, tokens);
+      }
+    } else if (value !== undefined && value !== null) {
+      // Handle plain values from resolver module (not DTCG structure)
+      // These are already resolved values, not token objects
+      const processedValue = processTokenValue(
+        value,
+        context,
+        currentPath.join('.'),
+        tokens
+      );
+
+      // Skip if value is empty/undefined
+      if (!processedValue) {
+        return;
+      }
+
+      // Track defined variables
+      context.definedVars.add(cssVar);
+
+      // Determine where to place based on path
+      if (currentPath.some((p) => p.includes('color'))) {
+        // For color tokens, use default value for both themes
+        maps.lightColors[cssVar] = processedValue;
+        maps.darkColors[cssVar] = processedValue;
+      } else {
+        maps.root[cssVar] = processedValue;
       }
     }
   }
@@ -188,6 +234,11 @@ function processTokenValue(
   tokenPath?: string,
   tokens?: TokenGroup
 ): string {
+  // Handle undefined/null values - skip them
+  if (value === undefined || value === null) {
+    return '';
+  }
+
   // Handle DTCG 1.0 structured values first
   if (isStructuredColorValue(value)) {
     return colorValueToCSS(value);
