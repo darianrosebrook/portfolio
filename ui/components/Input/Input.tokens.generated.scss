@@ -10,9 +10,9 @@
   --input-color-invalid-default: var(--semantic-color-border-danger);
 
   /* === Size Tokens === */
-  --input-size-height-default: var(--size-12);
-  --input-size-radius-default: var(--radius-md);
+  --input-size-height-default: var(--semantic-size-12);
+  --input-size-radius-default: var(--semantic-radius-md);
 
   /* === Space Tokens === */
-  --input-space-inline-default: var(--space-300);
+  --input-space-inline-default: var(--semantic-space-300);
 }

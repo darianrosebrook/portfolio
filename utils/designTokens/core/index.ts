@@ -164,7 +164,7 @@ function determineNamespace(tokenPath: string): 'core' | 'semantic' | null {
     /^elevation\.(level|offset|blur|spread)/, // elevation.level.*, elevation.offset.*, etc.
     /^opacity\.(50|100|200|300|400|500|600|700|800|900|full)/, // opacity.50, opacity.100, etc.
     /^dimension\.(breakpoint|tapTarget|actionMinHeight)/, // dimension.breakpoint.*, etc.
-    /^shape\.(radius|borderWidth|borderStyle)/, // shape.radius.*, shape.borderWidth.*, etc.
+    /^shape\.(radius|borderWidth|borderStyle|border\.width|border\.style)/, // shape.radius.*, shape.borderWidth.*, shape.border.width.*, etc.
     /^motion\.(duration|easing|keyframes|delay|stagger)/, // motion.duration.*, motion.easing.*, etc.
     /^scale\./, // scale.*
     /^density\./, // density.*
