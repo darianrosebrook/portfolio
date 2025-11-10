@@ -50,6 +50,9 @@
         "small": "{core.spacing.size.01}",
         "medium": "{core.spacing.size.02}",
         "large": "{core.spacing.size.03}"
+      },
+      "radius": {
+        "full": "{core.shape.radius.full}"
       }
     },
     "spacing": {
