@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 3000",
-    "build": "npm run tokens:build && next build",
+    "build": "npm run tokens:build && npm run typecheck && next build",
     "build:check": "npm run tokens:build && stylelint --allow-empty-input \"**/*.{css,scss}\" && prettier --check . && next build",
     "start": "next start",
     "lint": "next lint",

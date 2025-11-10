@@ -91,7 +91,10 @@ export type PolymorphicRef<T extends React.ElementType> =
   React.ComponentPropsWithRef<T>['ref'];
 
 // Event handler types
-export type ChangeHandler<T = any> = (value: T, event?: React.ChangeEvent) => void;
+export type ChangeHandler<T = any> = (
+  value: T,
+  event?: React.ChangeEvent
+) => void;
 export type ClickHandler = (event: React.MouseEvent) => void;
 export type FocusHandler = (event: React.FocusEvent) => void;
 export type KeyboardHandler = (event: React.KeyboardEvent) => void;
@@ -99,8 +102,9 @@ export type MouseHandler = (event: React.MouseEvent) => void;
 export type TouchHandler = (event: React.TouchEvent) => void;
 
 // Generic event handler
-export type EventHandler<T extends React.SyntheticEvent = React.SyntheticEvent> =
-  (event: T) => void;
+export type EventHandler<
+  T extends React.SyntheticEvent = React.SyntheticEvent,
+> = (event: T) => void;
 
 // Component state types
 export interface LoadingState {
@@ -211,10 +215,12 @@ export interface ComponentMetrics {
 }
 
 // Utility types for component composition
-export type ComponentWithRef<T extends React.ElementType, P = {}> =
-  React.ForwardRefExoticComponent<
-    React.ComponentPropsWithoutRef<T> & P & React.RefAttributes<React.ElementRef<T>>
-  >;
+export type ComponentWithRef<
+  T extends React.ElementType,
+  P = {},
+> = React.ForwardRefExoticComponent<
+  React.ComponentPropsWithoutRef<T> & P & React.RefAttributes<any>
+>;
 
 export type MergeProps<T, U> = Omit<T, keyof U> & U;
 
