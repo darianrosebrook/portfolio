@@ -3,25 +3,25 @@
   "meta": {
     "version": "1.0.0",
     "source": "Semantic tokens - modular structure",
-    "modules": [
-      "./color.tokens.json",
-      "./typography.tokens.json",
-      "./spacing.tokens.json",
-      "./elevation.tokens.json",
-      "./opacity.tokens.json",
-      "./dimension.tokens.json",
-      "./shape.tokens.json",
-      "./motion.tokens.json",
-      "./components/components.tokens.json",
-      "./interaction.tokens.json",
-      "./control.tokens.json",
-      "./link.tokens.json",
-      "./skeleton.tokens.json",
-      "./content.tokens.json",
-      "./focus.tokens.json",
-      "./datavis.tokens.json",
-      "./components/component.tokens.json",
-      "./overlay.tokens.json"
-    ]
+    "modules": {
+      "0": "./color.tokens.json",
+      "1": "./typography.tokens.json",
+      "2": "./spacing.tokens.json",
+      "3": "./elevation.tokens.json",
+      "4": "./opacity.tokens.json",
+      "5": "./dimension.tokens.json",
+      "6": "./shape.tokens.json",
+      "7": "./motion.tokens.json",
+      "8": "./components/components.tokens.json",
+      "9": "./interaction.tokens.json",
+      "10": "./control.tokens.json",
+      "11": "./link.tokens.json",
+      "12": "./skeleton.tokens.json",
+      "13": "./content.tokens.json",
+      "14": "./focus.tokens.json",
+      "15": "./datavis.tokens.json",
+      "16": "./components/component.tokens.json",
+      "17": "./overlay.tokens.json"
+    }
   }
 }

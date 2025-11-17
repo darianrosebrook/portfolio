@@ -1,12 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/utils/supabase/server';
 import { createCaseStudySchema } from '@/utils/schemas/case-study.schema';
-import {
-  createMutationResponse,
-  createCachedResponse,
-  CacheHeaders,
-  revalidateEditorPaths,
-} from '@/utils/editor/cache';
 
 export async function POST(request: Request) {
   const supabase = await createClient();
@@ -37,28 +31,17 @@ export async function POST(request: Request) {
     .insert([{ ...validation.data, author: user.id, editor: user.id }])
     .select();
 
-  if (error && (error.message || error.code || Object.keys(error).length > 0)) {
-    console.error('Case study insert error:', JSON.stringify(error, null, 2));
-    return new NextResponse(
-      JSON.stringify({ error: error.message || 'Database error' }),
-      {
-        status: 500,
-        headers: { 'Content-Type': 'application/json' },
-      }
-    );
-  }
-
-  if (!data) {
-    return new NextResponse(JSON.stringify({ error: 'No data returned' }), {
+  if (error) {
+    return new NextResponse(JSON.stringify({ error: error.message }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });
   }
 
-  // Revalidate paths after creation
-  revalidateEditorPaths('case-studies');
-
-  return createMutationResponse(data, 201);
+  return new NextResponse(JSON.stringify(data), {
+    status: 201,
+    headers: { 'Content-Type': 'application/json' },
+  });
 }
 
 export async function GET() {
@@ -80,23 +63,15 @@ export async function GET() {
     .select('*')
     .eq('author', user.id);
 
-  if (error && (error.message || error.code || Object.keys(error).length > 0)) {
-    console.error('Case studies fetch error:', JSON.stringify(error, null, 2));
-    return new NextResponse(
-      JSON.stringify({ error: error.message || 'Database error' }),
-      {
-        status: 500,
-        headers: { 'Content-Type': 'application/json' },
-      }
-    );
-  }
-
-  if (!data) {
-    return new NextResponse(JSON.stringify({ error: 'No data returned' }), {
+  if (error) {
+    return new NextResponse(JSON.stringify({ error: error.message }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });
   }
 
-  return createCachedResponse(data, 200, CacheHeaders.LIST);
+  return new NextResponse(JSON.stringify(data), {
+    status: 200,
+    headers: { 'Content-Type': 'application/json' },
+  });
 }

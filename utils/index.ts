@@ -18,6 +18,22 @@ export * from './caching';
 
 // Performance utilities
 export * from './performance';
+export * from './performance/advanced-monitor';
+
+// Component utilities
+export * from './components';
+
+// Focus management utilities
+export * from './focus';
+
+// Animation utilities
+export * from './animation';
+
+// Lazy loading utilities
+export * from './lazy';
+
+// Testing utilities
+export * from './test';
 
 // Schema utilities
 export * from './schemas';

@@ -4,8 +4,12 @@
 .container {
   @include tableTokens.vars;
 
+  // CSS Containment - content containment for frequently updated table
+  contain: layout style paint;
+
   position: relative;
   width: 100%;
+  container-type: inline-size;
 
   &.responsive {
     overflow-x: auto;
@@ -20,26 +24,26 @@
     caption-side: bottom;
 
     .caption {
-      margin-top: var(--table-spacing-caption);
+      margin-block-start: var(--table-spacing-caption);
       color: var(--table-color-textMuted);
       font-size: var(--table-text-sizeCaption);
-      text-align: left;
+      text-align: start;
     }
 
     .header {
       .row {
-        border-bottom: var(--table-border-width) solid var(--table-color-border);
+        border-block-end: var(--table-border-width) solid var(--table-color-border);
       }
     }
 
     .body {
       .row {
-        border-bottom: var(--table-border-width) solid var(--table-color-border);
+        border-block-end: var(--table-border-width) solid var(--table-color-border);
         transition: background-color var(--table-motion-duration)
           var(--table-motion-easing);
 
         &:last-child {
-          border-bottom: none;
+          border-block-end: none;
         }
 
         &.interactive:hover {
@@ -54,11 +58,11 @@
 
     .footer {
       background-color: var(--table-color-background-footer);
-      border-top: var(--table-border-width) solid var(--table-color-border);
+      border-block-start: var(--table-border-width) solid var(--table-color-border);
       font-weight: var(--table-text-weightFooter);
 
       .row:last-child {
-        border-bottom: none;
+        border-block-end: none;
       }
     }
 
@@ -68,7 +72,7 @@
       padding: var(--table-spacing-cellY) var(--table-spacing-cellX);
       color: var(--table-color-textHead);
       font-weight: var(--table-text-weightHead);
-      text-align: left;
+      text-align: start;
       white-space: nowrap;
 
       &.sortable {
@@ -126,12 +130,248 @@
     .head:has([role='checkbox']),
     .cell:has([role='checkbox']) {
       width: var(--table-size-checkboxColumn);
-      padding-right: 0;
+      padding-inline-end: 0;
     }
 
     .head [role='checkbox'],
     .cell [role='checkbox'] {
       transform: translateY(var(--table-spacing-checkboxOffset));
+    }
+  }
+}
+
+// Scoped styles for table sub-components
+@supports selector(:scope) {
+  @scope (.container) {
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      color: var(--table-color-text);
+      font-size: var(--table-text-size);
+      line-height: var(--table-text-lineHeight);
+      caption-side: bottom;
+
+      .caption {
+        margin-block-start: var(--table-spacing-caption);
+        color: var(--table-color-textMuted);
+        font-size: var(--table-text-sizeCaption);
+        text-align: start;
+      }
+
+      .header {
+        .row {
+          border-block-end: var(--table-border-width) solid var(--table-color-border);
+        }
+      }
+
+      .body {
+        .row {
+          border-block-end: var(--table-border-width) solid var(--table-color-border);
+          transition: background-color var(--table-motion-duration)
+            var(--table-motion-easing);
+
+          &:last-child {
+            border-block-end: none;
+          }
+
+          &.interactive:hover {
+            background-color: var(--table-color-background-hover);
+          }
+
+          &.selected {
+            background-color: var(--table-color-background-selected);
+          }
+        }
+      }
+
+      .footer {
+        background-color: var(--table-color-background-footer);
+        border-block-start: var(--table-border-width) solid var(--table-color-border);
+        font-weight: var(--table-text-weightFooter);
+
+        .row:last-child {
+          border-block-end: none;
+        }
+      }
+
+      .head {
+        vertical-align: middle;
+        height: var(--table-size-cellHeight);
+        padding: var(--table-spacing-cellY) var(--table-spacing-cellX);
+        color: var(--table-color-textHead);
+        font-weight: var(--table-text-weightHead);
+        text-align: start;
+        white-space: nowrap;
+
+        &.sortable {
+          outline: none;
+          transition: background-color var(--table-motion-duration)
+            var(--table-motion-easing);
+          cursor: pointer;
+          user-select: none;
+
+          &:hover {
+            background-color: var(--table-color-background-hover);
+          }
+
+          &:focus-visible {
+            outline: var(--table-focus-width) solid var(--table-focus-color);
+            outline-offset: var(--table-focus-offset);
+          }
+        }
+
+        .headContent {
+          display: flex;
+          gap: var(--table-spacing-sortGap);
+          justify-content: space-between;
+          align-items: center;
+
+          .sortIcon {
+            flex-shrink: 0;
+            opacity: 0.7;
+            color: var(--table-color-textMuted);
+            font-size: var(--table-text-sizeSort);
+          }
+        }
+
+        &[data-sort-direction='asc'] .sortIcon,
+        &[data-sort-direction='desc'] .sortIcon {
+          opacity: 1;
+          color: var(--table-color-textHead);
+        }
+      }
+
+      .cell {
+        vertical-align: middle;
+        padding: var(--table-spacing-cellY) var(--table-spacing-cellX);
+        white-space: nowrap;
+
+        &.truncate {
+          overflow: hidden;
+          max-width: 0;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+
+      // Checkbox column adjustments
+      .head:has([role='checkbox']),
+      .cell:has([role='checkbox']) {
+        width: var(--table-size-checkboxColumn);
+        padding-inline-end: 0;
+      }
+
+      .head [role='checkbox'],
+      .cell [role='checkbox'] {
+        transform: translateY(var(--table-spacing-checkboxOffset));
+      }
+    }
+  }
+}
+
+// Fallback for browsers without @scope support
+@supports not selector(:scope) {
+  .table,
+  .caption,
+  .header,
+  .body,
+  .footer,
+  .head,
+  .cell {
+    // Styles remain scoped via SCSS nesting (defined above)
+  }
+}
+
+// Container queries for responsive table behavior
+@supports (container-type: inline-size) {
+  .container {
+    @container (max-width: 40rem) {
+      // Compact table for small containers
+      .table {
+        .head {
+          // Hide less critical columns on small screens
+          &:nth-child(n+4) {
+            display: none;
+          }
+
+          .headContent {
+            // Simplify header content
+            .sortIcon {
+              display: none;
+            }
+          }
+        }
+
+        .data {
+          // Hide corresponding data cells
+          &:nth-child(n+4) {
+            display: none;
+          }
+        }
+      }
+    }
+
+    @container (max-width: 30rem) {
+      // Minimal table for very small containers
+      .table {
+        .head {
+          // Keep only first column
+          &:nth-child(n+2) {
+            display: none;
+          }
+        }
+
+        .data {
+          // Keep only first column
+          &:nth-child(n+2) {
+            display: none;
+          }
+        }
+
+        // Stack rows vertically for mobile
+        .row {
+          display: block;
+          border: 1px solid var(--table-color-border);
+          margin-block-end: var(--table-spacing-rowGap);
+          border-radius: var(--table-radius-cell);
+
+          .head,
+          .data {
+            display: block;
+            padding: var(--table-spacing-cellY) var(--table-spacing-cellX);
+            border: none;
+
+            &::before {
+              content: attr(data-label) ': ';
+              font-weight: var(--table-text-weightHead);
+              color: var(--table-color-textHead);
+              display: inline-block;
+              min-width: 6rem;
+            }
+          }
+        }
+      }
+    }
+
+    @container (min-width: 60rem) {
+      // Enhanced table for large containers
+      .table {
+        .head {
+          // Show all columns with enhanced spacing
+          padding: var(--table-spacing-cellY) calc(var(--table-spacing-cellX) * 1.5);
+        }
+
+        .data {
+          // Enhanced data cell spacing
+          padding: var(--table-spacing-cellY) calc(var(--table-spacing-cellX) * 1.5);
+        }
+
+        // Add hover effects for large screens
+        .row.interactive:hover {
+          transform: translateY(-1px);
+          box-shadow: var(--table-shadow-hover);
+        }
+      }
     }
   }
 }

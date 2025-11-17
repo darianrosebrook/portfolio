@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import styles from './Avatar.module.scss';
 
-export interface AvatarProps {
+export interface AvatarProps extends React.HTMLAttributes<HTMLDivElement> {
   src?: string;
   name: string;
   size: 'small' | 'medium' | 'large' | 'extra-large';
@@ -24,17 +24,19 @@ const sizeMap = {
   'extra-large': { width: 128, height: 128, sizes: '128px' },
 } as const;
 
-const Avatar: React.FC<AvatarProps> = ({
+const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(({
   src,
   name,
   size,
   priority = false,
-}) => {
+  className = '',
+  ...rest
+}, ref) => {
   const displayInitials = name ? initials(name) : '';
   const dimensions = sizeMap[size];
 
   return (
-    <div className={`${styles.avatar} ${styles['avatar_' + size]}`}>
+    <div ref={ref} className={`${styles.avatar} ${styles[size]} ${className}`} {...rest}>
       {src ? (
         <Image
           src={src}
@@ -50,7 +52,9 @@ const Avatar: React.FC<AvatarProps> = ({
       )}
     </div>
   );
-};
+});
+
+Avatar.displayName = 'Avatar';
 
 export { Avatar };
 export default Avatar;

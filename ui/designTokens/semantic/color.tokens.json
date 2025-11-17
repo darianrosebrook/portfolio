@@ -388,7 +388,15 @@
       },
       "imageOverlay": {
         "$type": "color",
-        "$value": "rgba(0, 0, 0, 0.5)",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0,
+            0,
+            0
+          ],
+          "alpha": 0.5
+        },
         "$extensions": {
           "design.paths.light": "rgba(0, 0, 0, 0.5)",
           "design.paths.dark": "rgba(0, 0, 0, 0.7)"
@@ -716,17 +724,41 @@
       "scrim": {
         "weak": {
           "$type": "color",
-          "$value": "rgba(0,0,0,0.24)",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0,
+              0,
+              0
+            ],
+            "alpha": 0.24
+          },
           "$description": "Light overlay scrim"
         },
         "medium": {
           "$type": "color",
-          "$value": "rgba(0,0,0,0.40)",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0,
+              0,
+              0
+            ],
+            "alpha": 0.4
+          },
           "$description": "Medium overlay scrim"
         },
         "strong": {
           "$type": "color",
-          "$value": "rgba(0,0,0,0.64)",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0,
+              0,
+              0
+            ],
+            "alpha": 0.64
+          },
           "$description": "Strong overlay scrim"
         }
       }

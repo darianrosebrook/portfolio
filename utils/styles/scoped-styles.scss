@@ -1,0 +1,207 @@
+/**
+ * CSS Scoped Styles (@scope)
+ *
+ * Utilities and examples for using @scope to create
+ * component-encapsulated styles that don't leak.
+ */
+
+// Scope mixin helper (for documentation/preparation)
+// Note: @scope is a CSS at-rule, not a mixin, but this documents usage patterns
+
+// Example: Card component with scoped styles
+// This prevents .card .title from affecting titles outside .card
+@scope (.card) {
+  .title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0 0 1rem;
+  }
+  
+  .content {
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+  }
+  
+  .footer {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border);
+  }
+  
+  // These styles only apply within .card
+  // Won't affect .title, .content, or .footer outside .card
+}
+
+// Example: Form field with scoped styles
+@scope (.field) {
+  .label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--color-text-primary);
+  }
+  
+  .input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.25rem;
+  }
+  
+  .error {
+    color: var(--color-error);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+  }
+  
+  // Styles scoped to .field, won't affect other .label/.input/.error
+}
+
+// Example: Scoped with donut hole (exclude certain areas)
+@scope (.card) to (.card-actions) {
+  .button {
+    // Styles apply to buttons in card, but not in .card-actions
+    padding: 0.5rem 1rem;
+    background: var(--color-primary);
+  }
+}
+
+// Example: Modal with scoped styles
+@scope (.modal) {
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+  
+  .body {
+    padding: 1rem;
+  }
+  
+  .footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    padding: 1rem;
+    border-top: 1px solid var(--color-border);
+  }
+  
+  // Modal styles don't leak to page-level .header, .body, .footer
+}
+
+// Example: Navigation with scoped styles
+@scope (.nav) {
+  .list {
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .item {
+    padding: 0.5rem 1rem;
+  }
+  
+  .link {
+    color: var(--color-text-primary);
+    text-decoration: none;
+    
+    &:hover {
+      color: var(--color-primary);
+    }
+  }
+  
+  // Navigation styles don't affect other lists/items/links
+}
+
+// Example: Table with scoped styles
+@scope (.table-container) {
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .header {
+    background: var(--color-background-secondary);
+  }
+  
+  .row {
+    border-bottom: 1px solid var(--color-border);
+    
+    &:hover {
+      background: var(--color-background-hover);
+    }
+  }
+  
+  .cell {
+    padding: 0.75rem;
+  }
+  
+  // Table styles scoped to .table-container
+}
+
+// Example: Alert/Notification with scoped styles
+@scope (.alert) {
+  .icon {
+    flex-shrink: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  
+  .title {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  
+  .message {
+    color: var(--color-text-secondary);
+  }
+  
+  .dismiss {
+    margin-left: auto;
+    padding: 0.25rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  // Alert styles don't affect page-level elements
+}
+
+// Example: Breadcrumb with scoped styles
+@scope (.breadcrumb) {
+  .list {
+    display: flex;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .separator {
+    color: var(--color-text-tertiary);
+  }
+  
+  .link {
+    color: var(--color-text-primary);
+    text-decoration: none;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  
+  // Breadcrumb styles scoped to component
+}
+
+
+
+

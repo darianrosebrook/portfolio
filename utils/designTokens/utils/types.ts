@@ -13,41 +13,78 @@ export type OutputFormat =
   | 'ios'
   | 'ref-map';
 
+/**
+ * Configuration for the design token resolver.
+ *
+ * Supports both legacy token resolution and DTCG 1.0 Resolver Module.
+ * When resolverDocumentPath is provided, uses the new resolver module.
+ */
 export interface ResolverConfig {
-  // reference syntax & parsing
-  referencePattern?: RegExp; // default: /\{([^}]+)\}/g (supports interpolation)
-  fallbackDelimiter?: string; // default: '||'
-  maxDepth?: number; // default: 32
+  /** Path to DTCG 1.0 resolver document. When provided, uses resolver module instead of legacy resolution. */
+  resolverDocumentPath?: string;
 
-  // theming/brands/platforms
-  theme?: string; // 'light' | 'dark' | 'hc' | 'brandX'
+  /** Pattern for matching token references. Default: /\{([^}]+)\}/g */
+  referencePattern?: RegExp;
+
+  /** Delimiter for fallback chains (e.g., "{tokenA} || {tokenB} || default"). Default: '||' */
+  fallbackDelimiter?: string;
+
+  /** Maximum recursion depth for token resolution. Default: 32 */
+  maxDepth?: number;
+
+  /** Theme context (e.g., 'light', 'dark'). Used for both legacy and resolver module. */
+  theme?: string;
+
+  /** Platform context (e.g., 'web', 'ios', 'android'). Used for both legacy and resolver module. */
   platform?: 'web' | 'ios' | 'android' | 'rn';
+
+  /** Brand context. Used for both legacy and resolver module. */
   brand?: string;
 
-  // naming & output
+  /** Output format for resolved tokens. */
   output?: OutputFormat;
-  cssVarPrefix?: string; // e.g., '--qx'
+
+  /** Prefix for CSS custom properties. Default: '--' */
+  cssVarPrefix?: string;
+
+  /** Casing convention for output names. */
   nameCase?: 'kebab' | 'camel' | 'pascal';
-  includeMeta?: boolean; // include $type/$description in diagnostics
 
-  // resolution behavior
-  resolveToReferences?: boolean; // default: true - output CSS var references instead of resolved values
-  systemTokenPrefix?: string; // default: '--' - prefix for system-level tokens
-  emitVarFallbackChain?: boolean; // default: true - preserve A || B || literal as nested var() fallbacks
-  emitVarsOnly?: boolean; // default: false - emit only var names with empty values (for class-driven mapping)
-  referenceNamespace?: (path: string) => string; // custom function to transform token paths to CSS var names
-  scopeSelector?: string; // CSS selector for scoped output (e.g., '.theme-dark')
+  /** Whether to include $type and $description in diagnostics. */
+  includeMeta?: boolean;
 
-  // transforms pipeline: by $type or by path matchers
+  /** Whether to output CSS var() references instead of resolved values. Default: true */
+  resolveToReferences?: boolean;
+
+  /** Prefix for system-level tokens. Default: '--' */
+  systemTokenPrefix?: string;
+
+  /** Whether to emit nested var() fallbacks for reference chains. Default: true */
+  emitVarFallbackChain?: boolean;
+
+  /** Whether to emit only variable names with empty values. Default: false */
+  emitVarsOnly?: boolean;
+
+  /** Custom function to transform token paths to CSS variable names. */
+  referenceNamespace?: (path: string) => string;
+
+  /** CSS selector for scoped output (e.g., '.theme-dark'). */
+  scopeSelector?: string;
+
+  /** Transform pipeline applied during resolution. */
   transforms?: Transform[];
 
-  // error handling & diagnostics
+  /** Warning callback for diagnostics. */
   onWarn?: (d: Diagnostic) => void;
-  onError?: (d: Diagnostic) => void;
-  strict?: boolean; // throw on unresolved / circular
 
-  // numeric formatting
-  numberPrecision?: number; // e.g., 3 (for LCH/OKLCH etc.)
+  /** Error callback for diagnostics. */
+  onError?: (d: Diagnostic) => void;
+
+  /** Whether to throw exceptions on errors instead of logging. Default: false */
+  strict?: boolean;
+
+  /** Number precision for numeric values (e.g., for LCH/OKLCH colors). */
+  numberPrecision?: number;
   unitPreferences?: {
     dimension?: 'px' | 'rem';
     duration?: 'ms' | 's';

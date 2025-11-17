@@ -2,18 +2,34 @@
   "prefix": "input",
   "tokens": {
     "color": {
-      "bg": { "default": "{semantic.color.background.secondary}" },
-      "text": { "default": "{semantic.color.foreground.primary}" },
-      "border": { "default": "{semantic.color.border.default}" },
-      "focus": { "default": "{semantic.color.border.focus}" },
-      "invalid": { "default": "{semantic.color.border.danger}" }
+      "bg": {
+        "default": "{semantic.color.background.surface}"
+      },
+      "text": {
+        "default": "{semantic.color.foreground.primary}"
+      },
+      "border": {
+        "default": "{semantic.color.border.default}"
+      },
+      "focus": {
+        "default": "{semantic.color.border.focus}"
+      },
+      "invalid": {
+        "default": "{semantic.color.border.danger}"
+      }
     },
     "size": {
-      "height": { "default": "{core.spacing.size.06}" },
-      "radius": { "default": "{core.shape.radius.medium}" }
+      "height": {
+        "default": "{size.12}"
+      },
+      "radius": {
+        "default": "{radius.md}"
+      }
     },
     "space": {
-      "inline": { "default": "{core.spacing.size.03}" }
+      "inline": {
+        "default": "{space.300}"
+      }
     }
   }
 }

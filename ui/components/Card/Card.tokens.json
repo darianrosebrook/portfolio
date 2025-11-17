@@ -25,11 +25,14 @@
     },
     "elevation": {
       "default": "{semantic.elevation.default}",
-      "hover": "{semantic.elevation.surface.raised}"
+      "hover": "{semantic.elevation.hover}"
     },
     "motion": {
       "hover": {
-        "offset": "-0.125rem"
+        "offset": {
+          "value": -0.125,
+          "unit": "rem"
+        }
       }
     }
   }

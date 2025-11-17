@@ -23,6 +23,9 @@
 }
 
 .content {
+  // CSS Containment - strict for isolated sidebar
+  contain: strict;
+
   position: fixed;
   z-index: var(--sheet-zIndex-content);
   display: flex;
@@ -38,12 +41,12 @@
 
   // Side-specific positioning and animations
   &.top {
-    top: 0;
-    right: 0;
-    left: 0;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+    inset-inline-start: 0;
     height: var(--sheet-size-height);
-    border-top: none;
-    border-bottom: var(--sheet-border-width) solid var(--sheet-color-border);
+    border-block-start: none;
+    border-block-end: var(--sheet-border-width) solid var(--sheet-color-border);
     border-radius: 0 0 var(--sheet-border-radius) var(--sheet-border-radius);
     transform: translateY(-100%);
 
@@ -53,12 +56,12 @@
   }
 
   &.right {
-    top: 0;
-    right: 0;
-    bottom: 0;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+    inset-block-end: 0;
     width: var(--sheet-size-width);
-    border-right: none;
-    border-left: var(--sheet-border-width) solid var(--sheet-color-border);
+    border-inline-end: none;
+    border-inline-start: var(--sheet-border-width) solid var(--sheet-color-border);
     border-radius: var(--sheet-border-radius) 0 0 var(--sheet-border-radius);
     transform: translateX(100%);
 
@@ -68,12 +71,12 @@
   }
 
   &.bottom {
-    right: 0;
-    bottom: 0;
-    left: 0;
+    inset-inline-end: 0;
+    inset-block-end: 0;
+    inset-inline-start: 0;
     height: var(--sheet-size-height);
-    border-top: var(--sheet-border-width) solid var(--sheet-color-border);
-    border-bottom: none;
+    border-block-start: var(--sheet-border-width) solid var(--sheet-color-border);
+    border-block-end: none;
     border-radius: var(--sheet-border-radius) var(--sheet-border-radius) 0 0;
     transform: translateY(100%);
 
@@ -83,12 +86,12 @@
   }
 
   &.left {
-    top: 0;
-    bottom: 0;
-    left: 0;
+    inset-block-start: 0;
+    inset-block-end: 0;
+    inset-inline-start: 0;
     width: var(--sheet-size-width);
-    border-right: var(--sheet-border-width) solid var(--sheet-color-border);
-    border-left: none;
+    border-inline-end: var(--sheet-border-width) solid var(--sheet-color-border);
+    border-inline-start: none;
     border-radius: 0 var(--sheet-border-radius) var(--sheet-border-radius) 0;
     transform: translateX(-100%);
 
@@ -101,8 +104,8 @@
     display: flex;
     flex-direction: column;
     gap: var(--sheet-spacing-headerGap);
-    padding-bottom: var(--sheet-spacing-section);
-    border-bottom: var(--sheet-border-width) solid
+    padding-block-end: var(--sheet-spacing-section);
+    border-block-end: var(--sheet-border-width) solid
       var(--sheet-color-borderLight);
 
     .title {
@@ -133,14 +136,14 @@
     display: flex;
     gap: var(--sheet-spacing-footerGap);
     justify-content: flex-end;
-    padding-top: var(--sheet-spacing-section);
-    border-top: var(--sheet-border-width) solid var(--sheet-color-borderLight);
+    padding-block-start: var(--sheet-spacing-section);
+    border-block-start: var(--sheet-border-width) solid var(--sheet-color-borderLight);
   }
 
   .close {
     position: absolute;
-    top: var(--sheet-spacing-closeOffset);
-    right: var(--sheet-spacing-closeOffset);
+    inset-block-start: var(--sheet-spacing-closeOffset);
+    inset-inline-end: var(--sheet-spacing-closeOffset);
     display: flex;
     justify-content: center;
     align-items: center;

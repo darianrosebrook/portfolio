@@ -1,0 +1,67 @@
+/**
+ * CSS Containment Utilities
+ *
+ * Applies CSS containment to components for performance optimization.
+ * Containment isolates rendering calculations, enabling browser optimizations.
+ */
+
+// Containment mixin for easy application
+@mixin contain($type: layout style paint) {
+  contain: #{$type};
+}
+
+// Strict containment (all types) - use for isolated components
+@mixin contain-strict {
+  contain: strict;
+}
+
+// Layout containment - isolate layout calculations
+@mixin contain-layout {
+  contain: layout;
+}
+
+// Style containment - isolate style calculations (counters, quotes)
+@mixin contain-style {
+  contain: style;
+}
+
+// Paint containment - isolate paint operations
+@mixin contain-paint {
+  contain: paint;
+}
+
+// Size containment - size is independent of children
+@mixin contain-size {
+  contain: size;
+}
+
+// Content containment (Level 2) - optimize for frequently changing content
+@mixin contain-content {
+  contain: layout style paint;
+}
+
+// Component-specific containment recommendations
+// Use these in component SCSS files
+
+// Buttons - strict containment (isolated interactive elements)
+// @include contain-strict;
+
+// Cards - layout and paint containment (frequently updated)
+// @include contain-layout;
+// @include contain-paint;
+
+// Modals/Dialogs - strict containment (completely isolated)
+// @include contain-strict;
+
+// Lists/Feeds - content containment (frequently changing)
+// @include contain-content;
+
+// Forms - layout containment (form fields don't affect outside)
+// @include contain-layout;
+
+// Navigation - paint containment (menus shouldn't overflow)
+// @include contain-paint;
+
+
+
+

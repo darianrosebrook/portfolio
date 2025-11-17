@@ -12,7 +12,7 @@
   /* === Border Tokens === */
   --accordion-border-width: var(--core-shape-border-width-hairline);
   --accordion-border-color: var(--semantic-color-border-light);
-  --accordion-border-radius: var(--core-shape-radius-02);
+  --accordion-border-radius: var(--core-shape-radius-small);
 
   /* === Spacing Tokens === */
   --accordion-spacing-gap: var(--core-spacing-size-04);
@@ -22,9 +22,9 @@
   /* === Text Tokens === */
   --accordion-text-weight: var(--semantic-typography-font-weight-medium);
   --accordion-text-size: var(--semantic-typography-body-02);
-  --accordion-text-lineHeight: var(--semantic-typography-line-height-normal);
+  --accordion-text-lineHeight: var(--semantic-typography-line-height-default);
   --accordion-text-sizeContent: var(--semantic-typography-body-03);
-  --accordion-text-lineHeightContent: var(--semantic-typography-line-height-loose);
+  --accordion-text-lineHeightContent: var(--semantic-typography-line-height-relaxed);
 
   /* === Icon Tokens === */
   --accordion-icon-size: var(--core-spacing-size-04);

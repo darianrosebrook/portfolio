@@ -1,11 +1,10 @@
 'use client';
 import * as React from 'react';
-import { createCSSProperties } from '@/utils/css-custom-properties';
 import styles from './Spinner.module.scss';
 
 export type SpinnerVariant = 'ring' | 'dots' | 'bars';
 
-export interface SpinnerProps {
+export interface SpinnerProps extends React.HTMLAttributes<HTMLSpanElement> {
   /** Size token key or explicit px (e.g., 16). Default: 'md' */
   size?: 'xs' | 'sm' | 'md' | 'lg' | number;
   /** Stroke thickness token or px. Default: 'regular' */
@@ -20,10 +19,9 @@ export interface SpinnerProps {
   inline?: boolean;
   /** Delay before showing (ms) to avoid spinner flash */
   showAfterMs?: number;
-  className?: string;
 }
 
-export const Spinner: React.FC<SpinnerProps> = ({
+export const Spinner = React.forwardRef<HTMLSpanElement, SpinnerProps>(({
   size = 'md',
   thickness = 'regular',
   variant = 'ring',
@@ -32,7 +30,8 @@ export const Spinner: React.FC<SpinnerProps> = ({
   inline = false,
   showAfterMs = 150,
   className,
-}) => {
+  ...rest
+}, ref) => {
   const [visible, setVisible] = React.useState(showAfterMs === 0);
 
   React.useEffect(() => {
@@ -48,10 +47,10 @@ export const Spinner: React.FC<SpinnerProps> = ({
       typeof thickness === 'number'
         ? `${thickness}px`
         : `var(--spinner-thickness-${thickness})`;
-    return createCSSProperties({
-      '--spinner-size-value': resolvedSize,
-      '--spinner-thickness-value': resolvedThickness,
-    });
+    return {
+      ['--spinner-size-value' as any]: resolvedSize,
+      ['--spinner-thickness-value' as any]: resolvedThickness,
+    } as React.CSSProperties;
   }, [size, thickness]);
 
   if (!visible) return null;
@@ -70,15 +69,17 @@ export const Spinner: React.FC<SpinnerProps> = ({
 
   return (
     <span
+      ref={ref}
       className={rootClassName}
       style={styleVars}
       data-variant={variant}
       {...a11yProps}
+      {...rest}
     >
       <span className={styles.visual} />
     </span>
   );
-};
+});
 
 Spinner.displayName = 'Spinner';
 export default Spinner;

@@ -16,61 +16,21 @@ export function PropsBridge({
   path = '/props.json',
 }: PropsBridgeProps) {
   const { sandpack } = useSandpack();
-  const sandpackRef = React.useRef(sandpack);
-  const lastValuesRef = React.useRef<string>('');
-  const fileCreatedRef = React.useRef(false);
+  const lastJsonRef = React.useRef<string | null>(null);
 
-  // Update ref when sandpack changes, but only if it's actually different
-  React.useEffect(() => {
-    if (sandpack && sandpack !== sandpackRef.current) {
-      sandpackRef.current = sandpack;
-      fileCreatedRef.current = false; // Reset flag when sandpack instance changes
-    }
-  }, [sandpack]);
-
-  // Create file immediately when sandpack is ready (before module parsing)
-  // This ensures the file exists when App.tsx tries to import it
-  React.useLayoutEffect(() => {
-    if (
-      sandpackRef.current &&
-      typeof sandpackRef.current.updateFile === 'function' &&
-      !fileCreatedRef.current
-    ) {
-      try {
-        const initialJson = JSON.stringify(values ?? {}, null, 2);
-        sandpackRef.current.updateFile(path, initialJson);
-        lastValuesRef.current = initialJson;
-        fileCreatedRef.current = true;
-      } catch {
-        // ignore
-      }
-    }
-  }, [sandpack, path, values]);
-
-  // Update file when values actually change
   React.useEffect(() => {
     try {
       const json = JSON.stringify(values ?? {}, null, 2);
-
-      // Compare serialized values to avoid unnecessary updates
-      if (json === lastValuesRef.current) {
-        return;
-      }
-
-      lastValuesRef.current = json;
-
-      // Use ref to avoid dependency on sandpack object reference
-      if (
-        sandpackRef.current &&
-        typeof sandpackRef.current.updateFile === 'function'
-      ) {
-        sandpackRef.current.updateFile(path, json);
-        fileCreatedRef.current = true;
+      if (lastJsonRef.current === json) return; // no-op if unchanged
+      // Prefer updateFile when available; fallback to openFile no-op semantics if needed
+      if (typeof sandpack.updateFile === 'function') {
+        sandpack.updateFile(path, json);
+        lastJsonRef.current = json;
       }
     } catch {
       // ignore
     }
-  }, [values, path]);
+  }, [sandpack, values, path]);
 
   return null;
 }

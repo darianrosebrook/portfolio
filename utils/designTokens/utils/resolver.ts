@@ -5,44 +5,25 @@
  * themes, platforms, transforms, and fallback chains.
  */
 
-import { Logger } from '../../helpers/logger';
 import {
-  parseCssColorToRgb,
-  formatHsl,
-  formatOklch,
-} from '../../helpers/colorFormat';
-import { rgbToHex, rgbToHsl, rgbToOklch } from '../../helpers/colorHelpers';
-import type {
-  ResolverConfig,
-  ResolveContext,
-  Transform,
-  Diagnostic,
-} from './types';
+  Resolver,
+  loadResolverDocument,
+  type ResolutionInput,
+} from './resolver-module';
+import type { ResolveContext } from './types';
+import { getNestedValue, selectByKeys } from './pathUtils';
+import { tokenPathToCSSVar } from '../core/index';
 
-// Helper function to get nested object values by dot path
-function get(obj: Record<string, unknown>, path: string): unknown {
-  return path.split('.').reduce((current, segment) => {
-    if (current && typeof current === 'object' && segment in current) {
-      return (current as Record<string, unknown>)[segment];
-    }
-    return undefined;
-  }, obj as unknown);
-}
-
-// Helper function to select values by theme/brand/platform keys
-function selectByKeys(
-  obj: Record<string, unknown>,
-  keys: (string | undefined)[]
-): unknown {
-  for (const key of keys) {
-    if (key && key in obj) {
-      return obj[key];
-    }
-  }
-  return undefined;
-}
-
-// Helper function to apply transforms
+/**
+ * Apply transformation pipeline to a token value.
+ *
+ * Runs through all configured transforms that match the current context,
+ * allowing for type-specific conversions and custom processing.
+ *
+ * @param value - The token value to transform
+ * @param ctx - Resolution context containing transforms and metadata
+ * @returns Transformed value after applying all matching transforms
+ */
 export function applyTransforms(value: unknown, ctx: ResolveContext): unknown {
   const transforms = ctx.config.transforms ?? [];
   let result = value;
@@ -58,13 +39,6 @@ export function applyTransforms(value: unknown, ctx: ResolveContext): unknown {
 
 // Default reference pattern for interpolation
 export const DEFAULT_REF = /\{([^}]+)\}/g;
-
-/**
- * Converts a token path to a CSS custom property name
- */
-function tokenPathToCSSVar(path: string, prefix: string = '--'): string {
-  return `${prefix}${path.replace(/\./g, '-')}`;
-}
 
 /**
  * Resolves interpolated strings with embedded references and fallbacks
@@ -93,7 +67,7 @@ export function resolveInterpolated(
     const processedParts = parts.map((part) => {
       // If the part contains references, replace them with var() calls
       if (pattern.test(part)) {
-        return part.replace(pattern, (_, path) => {
+        return part.replace(pattern, (match, path) => {
           return `var(${tokenPathToCSSVar(path, systemPrefix)})`;
         });
       }
@@ -122,7 +96,7 @@ export function resolveInterpolated(
     try {
       const resolved = candidate.replace(
         ctx.config.referencePattern ?? DEFAULT_REF,
-        (_, path) => {
+        (match, path) => {
           const v = resolvePath(path, ctx, visited);
           if (v == null) throw new Error(`Unresolved ${path}`);
           return String(v);
@@ -149,13 +123,87 @@ export function resolveInterpolated(
 }
 
 /**
- * Enhanced path resolution with theme/mode/platform support and aliases
+ * Enhanced path resolution with theme/mode/platform support and aliases.
+ *
+ * Supports both legacy token resolution and DTCG 1.0 Resolver Module.
+ * When resolverDocumentPath is configured, uses the new resolver module.
+ *
+ * @param path - Token path to resolve (e.g., "color.primary.base")
+ * @param ctx - Resolution context with theme, platform, config, etc.
+ * @param visited - Array of already visited paths (for cycle detection)
+ * @returns Resolved token value or CSS variable reference
+ *
+ * @example
+ * ```typescript
+ * const value = resolvePath("color.primary.base", {
+ *   theme: "light",
+ *   tokens: myTokens,
+ *   config: { resolveToReferences: true }
+ * }, []);
+ * ```
  */
 export function resolvePath(
   path: string,
   ctx: ResolveContext,
   visited: string[]
 ): unknown {
+  // Check if we should use the DTCG 1.0 Resolver Module
+  if (ctx.config.resolverDocumentPath) {
+    try {
+      const resolverDoc = loadResolverDocument(ctx.config.resolverDocumentPath);
+      if (resolverDoc) {
+        const resolver = new Resolver(resolverDoc, {
+          basePath: ctx.config.resolverDocumentPath.replace(/[^/]+$/, ''),
+          onWarn: ctx.config.onWarn,
+          onError: ctx.config.onError,
+          strict: ctx.config.strict,
+        });
+
+        // Build input from context
+        const input: ResolutionInput = {};
+        if (ctx.theme) input.theme = ctx.theme;
+        if (ctx.brand) input.brand = ctx.brand;
+        if (ctx.platform) input.platform = ctx.platform;
+
+        const result = resolver.resolve(input);
+
+        // Extract value from resolved tokens
+        const value = getNestedValue(result.tokens, path);
+        if (value !== undefined) {
+          // Apply transforms if configured
+          let transformed = applyTransforms(value, ctx);
+
+          // If resolveToReferences is true, return CSS custom property reference
+          if (ctx.config.resolveToReferences !== false) {
+            const systemPrefix = ctx.config.systemTokenPrefix ?? '--';
+            const cssVarName = ctx.config.referenceNamespace
+              ? ctx.config.referenceNamespace(path)
+              : tokenPathToCSSVar(path, systemPrefix);
+            return `var(${cssVarName})`;
+          }
+
+          return transformed;
+        }
+
+        // Fall through to legacy resolver if path not found
+        ctx.config.onWarn?.({
+          code: 'MISSING',
+          path,
+          message: 'Token path not found in resolver document',
+          hint: 'Verify the token path exists in your resolver document',
+        });
+      }
+    } catch (error) {
+      ctx.config.onWarn?.({
+        code: 'UNRESOLVED_FALLBACK',
+        path,
+        message: `Could not resolve any fallback for: ${path}`,
+        hint: 'Falling back to legacy resolver',
+      });
+    }
+  }
+
+  // Legacy resolver logic
   const key = `@${ctx.theme}|${ctx.platform}|${ctx.brand}|${path}`;
   const cache = ctx.config.cache;
   if (cache?.has(key)) return cache.get(key)!;
@@ -182,7 +230,7 @@ export function resolvePath(
 
   visited.push(path);
 
-  const node = get(ctx.tokens, path);
+  const node = getNestedValue(ctx.tokens, path);
   if (node == null) {
     // In reference mode, emit a CSS var reference rather than failing. This
     // allows late-bound BYODS overrides without flooding warnings.
@@ -295,70 +343,3 @@ export function resolvePath(
   visited.pop();
   return next;
 }
-
-/**
- * Recursively resolves a design token reference to its final value
- * @deprecated Use the new configurable resolver with resolvePath instead
- */
-export const resolveToken = (
-  tokenPath: string,
-  fallback: string,
-  designTokens: Record<string, unknown>,
-  visited = new Set<string>()
-): string => {
-  try {
-    // Prevent infinite recursion
-    if (visited.has(tokenPath)) {
-      Logger.warn(
-        `Circular reference detected: ${tokenPath}, using fallback: ${fallback}`
-      );
-      return fallback;
-    }
-    visited.add(tokenPath);
-
-    // Remove curly braces if present
-    const cleanPath = tokenPath.replace(/[{}]/g, '');
-    const pathSegments = cleanPath.split('.');
-
-    // Navigate through the design tokens object
-    let current: Record<string, unknown> = designTokens;
-    for (const segment of pathSegments) {
-      if (current && typeof current === 'object' && segment in current) {
-        current = current[segment] as Record<string, unknown>;
-      } else {
-        Logger.warn(
-          `Token path not found: ${tokenPath}, using fallback: ${fallback}`
-        );
-        return fallback;
-      }
-    }
-
-    // Get the value
-    let value: unknown;
-    if (current && typeof current === 'object' && '$value' in current) {
-      value = current.$value;
-    } else if (typeof current === 'string' || typeof current === 'number') {
-      value = current;
-    } else {
-      Logger.warn(
-        `Token value not found: ${tokenPath}, using fallback: ${fallback}`
-      );
-      return fallback;
-    }
-
-    // If the value is a string that looks like a token reference, resolve it recursively
-    if (typeof value === 'string' && value.match(/^\{[^}]+\}$/)) {
-      return resolveToken(value, fallback, designTokens, visited);
-    }
-
-    return String(value);
-  } catch (error) {
-    Logger.error(
-      `Error resolving token: ${tokenPath}, using fallback: ${fallback}`,
-      error
-    );
-    return fallback;
-  }
-};
-
-// Design tokens should be passed as parameter to avoid circular imports

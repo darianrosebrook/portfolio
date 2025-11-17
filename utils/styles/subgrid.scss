@@ -1,0 +1,147 @@
+/**
+ * CSS Subgrid Utilities
+ *
+ * Utilities and examples for using CSS Subgrid to create
+ * perfectly aligned nested grid layouts.
+ */
+
+// Subgrid mixin for easy application
+@mixin subgrid($direction: both) {
+  @supports (grid-template-columns: subgrid) {
+    display: grid;
+    
+    @if $direction == columns or $direction == both {
+      grid-template-columns: subgrid;
+    }
+    
+    @if $direction == rows or $direction == both {
+      grid-template-rows: subgrid;
+    }
+  }
+}
+
+// Subgrid columns only
+@mixin subgrid-columns {
+  @include subgrid(columns);
+}
+
+// Subgrid rows only
+@mixin subgrid-rows {
+  @include subgrid(rows);
+}
+
+// Subgrid both directions
+@mixin subgrid-both {
+  @include subgrid(both);
+}
+
+// Example: Card grid with subgrid for card content
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  
+  .card {
+    // Card inherits parent grid columns
+    @include subgrid-columns;
+    grid-column: span 1;
+    
+    // Card content aligns with parent grid
+    .card-header,
+    .card-content,
+    .card-footer {
+      grid-column: span 1;
+    }
+  }
+}
+
+// Example: Dashboard layout with subgrid
+.dashboard {
+  display: grid;
+  grid-template-columns: 250px 1fr 300px;
+  grid-template-rows: auto 1fr auto;
+  gap: 1rem;
+  
+  .sidebar {
+    @include subgrid-columns;
+    grid-column: 1;
+    grid-row: 1 / -1;
+  }
+  
+  .main {
+    @include subgrid-columns;
+    grid-column: 2;
+    grid-row: 2;
+  }
+  
+  .aside {
+    @include subgrid-columns;
+    grid-column: 3;
+    grid-row: 1 / -1;
+  }
+}
+
+// Example: Form layout with subgrid
+.form-grid {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 1rem;
+  
+  .form-row {
+    @include subgrid-columns;
+    grid-column: 1 / -1;
+    
+    .label {
+      grid-column: 1;
+    }
+    
+    .input {
+      grid-column: 2;
+    }
+  }
+}
+
+// Example: Experience/Timeline list with subgrid
+.experience-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 3fr;
+  gap: 2rem;
+  
+  .experience-item {
+    @include subgrid-columns;
+    grid-column: 1 / -1;
+    
+    .date {
+      grid-column: 1;
+    }
+    
+    .location {
+      grid-column: 2;
+    }
+    
+    .description {
+      grid-column: 3;
+    }
+  }
+}
+
+// Example: Glossary list with subgrid (already in use)
+.glossary-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 3fr;
+  gap: var(--core-spacing-size-06);
+  
+  .sub-list {
+    @include subgrid-columns;
+    grid-column: span 3;
+    
+    dl {
+      @include subgrid-columns;
+      grid-column: span 2;
+    }
+  }
+}
+
+
+
+

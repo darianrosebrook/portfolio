@@ -4,10 +4,10 @@
     "color": {
       "background": {
         "primary": "{semantic.color.background.primary}",
-        "info": "{semantic.color.background.infoStrong}",
-        "success": "{semantic.color.feedback.background.success.subtle}",
-        "warning": "{semantic.color.feedback.background.warning.subtle}",
-        "danger": "{semantic.color.background.dangerStrong}",
+        "info": "{semantic.color.background.info}",
+        "success": "{semantic.color.background.success}",
+        "warning": "{semantic.color.background.warning}",
+        "danger": "{semantic.color.background.danger}",
         "infoSubtle": "{semantic.color.background.infoSubtle}",
         "warningSubtle": "{semantic.color.background.warningSubtle}",
         "dangerSubtle": "{semantic.color.background.dangerSubtle}",
@@ -55,10 +55,10 @@
       }
     },
     "shadow": {
-      "default": "{semantic.elevation.surface.floating}"
+      "default": "{semantic.elevation.02}"
     },
     "text": {
-      "font": "{semantic.typography.body.default.fontSize}",
+      "font": "{semantic.typography.body.default}",
       "size": "{core.spacing.size.06}",
       "weight": "{semantic.typography.fontWeight.regular}"
     },
@@ -75,7 +75,7 @@
         "top": "{core.spacing.size.04}"
       },
       "minHeight": {
-        "default": "{core.spacing.size.10}"
+        "default": "{core.spacing.size.12}"
       }
     },
     "radius": {

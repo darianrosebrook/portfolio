@@ -1,12 +1,12 @@
-/**
- * @deprecated This canvas-based implementation has been replaced by SymbolCanvasSVG.
- * The SVG version provides better performance, accessibility, and maintainability.
- * This file is kept temporarily for reference but should not be used in new code.
- *
- * Migration: Import SymbolCanvasSVG instead:
- *   import { SymbolCanvasSVG as SymbolCanvas } from './SymbolCanvasSVG';
- */
-
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
+import { useInspector, AxisValues } from './FontInspector';
+import styles from './FontInspector.module.scss';
 import {
   drawAnatomyOverlay,
   drawAxisValues,
@@ -15,104 +15,6 @@ import {
   drawMetricLine,
   drawPathDetails,
 } from '@/utils/geometry/drawing';
-import type { DetectionResult } from '@/utils/typeAnatomy/detector';
-import { detectFeatures } from '@/utils/typeAnatomy/detector';
-import type { Metrics } from '@/utils/typeAnatomy/index';
-import type { Glyph } from 'fontkit';
-import {
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from 'react';
-import type { FeatureZone } from './FeatureCoachmark';
-import { FeatureCoachmark } from './FeatureCoachmark';
-import { AxisValues, useInspector } from './FontInspector';
-import styles from './FontInspector.module.scss';
-
-// Helper to create feature zones from detection results
-function createFeatureZones(
-  detectionResults: Map<string, DetectionResult>,
-  glyph: Glyph,
-  scale: number,
-  xOffset: number,
-  baseline: number,
-  metrics: Metrics,
-  anatomyFeatures: Array<{ feature: string; label: string }>
-): FeatureZone[] {
-  const zones: FeatureZone[] = [];
-
-  for (const [featureName, result] of detectionResults.entries()) {
-    if (!result.found) continue;
-
-    const featureConfig = anatomyFeatures.find(
-      (f) => f.feature === featureName
-    );
-    if (!featureConfig) continue;
-
-    // Try to get location from detection result
-    let x = 0;
-    let y = 0;
-    let width = 40;
-    let height = 40;
-
-    if (result.location) {
-      x = result.location.x;
-      y = result.location.y;
-      width = 30;
-      height = 30;
-    } else if (result.shape) {
-      // For shape-based features, use bounding box
-      if (result.shape.type === 'circle') {
-        x = result.shape.cx;
-        y = result.shape.cy;
-        width = result.shape.r * 2;
-        height = result.shape.r * 2;
-      } else if (result.shape.type === 'polyline') {
-        // Use bounding box of polyline points
-        const points = result.shape.points;
-        if (points.length > 0) {
-          const xs = points.map((p) => p.x);
-          const ys = points.map((p) => p.y);
-          const minX = Math.min(...xs);
-          const maxX = Math.max(...xs);
-          const minY = Math.min(...ys);
-          const maxY = Math.max(...ys);
-          x = (minX + maxX) / 2;
-          y = (minY + maxY) / 2;
-          width = maxX - minX || 40;
-          height = maxY - minY || 40;
-        }
-      }
-    } else {
-      // Fallback: estimate location based on feature type
-      const bbox = glyph.bbox;
-      if (featureName.includes('Apex') || featureName.includes('top')) {
-        x = (bbox.minX + bbox.maxX) / 2;
-        y = bbox.maxY;
-      } else if (featureName.includes('Foot') || featureName.includes('base')) {
-        x = (bbox.minX + bbox.maxX) / 2;
-        y = bbox.minY;
-      } else {
-        x = (bbox.minX + bbox.maxX) / 2;
-        y = (bbox.minY + bbox.maxY) / 2;
-      }
-    }
-
-    zones.push({
-      featureName,
-      label: featureConfig.label,
-      x,
-      y,
-      width,
-      height,
-      description: `The ${featureName.toLowerCase()} is a typographic feature of this glyph.`,
-    });
-  }
-
-  return zones;
-}
 
 export const SymbolCanvas: React.FC = () => {
   const {
@@ -123,17 +25,11 @@ export const SymbolCanvas: React.FC = () => {
     setAxisValues,
     colors,
     selectedAnatomy,
-    autoDetectFeatures,
-    anatomyFeatures,
-    detectedFeatures,
   } = useInspector();
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const pixelRatio = useRef(1);
   const drawScheduled = useRef(false);
-  const [canvasRect, setCanvasRect] = useState<DOMRect | null>(null);
-  const [featureZones, setFeatureZones] = useState<FeatureZone[]>([]);
-  const [lastDetectionKey, setLastDetectionKey] = useState<string>('');
 
   const dragStartX = useRef(0);
   const dragStartAxis = useRef<AxisValues>(axisValues);
@@ -156,87 +52,10 @@ export const SymbolCanvas: React.FC = () => {
     dragStartX: 0,
     dragStartAxis: axisValues,
   });
-
-  // Store canvas metrics for coachmark positioning
-  const canvasMetricsRef = useRef<{
-    scale: number;
-    xOffset: number;
-    baseline: number;
-  }>({ scale: 1, xOffset: 0, baseline: 0 });
-
-  // Detect features and create zones (only once per glyph change)
-  useEffect(() => {
-    if (!fontInstance || !glyph || detectedFeatures.size === 0) {
-      setFeatureZones([]);
-      return;
-    }
-
-    const detectionKey = `${glyph.id}-${fontInstance.familyName}`;
-    if (detectionKey === lastDetectionKey) return;
-
-    setLastDetectionKey(detectionKey);
-
-    // Detect all features once
-    const fontMetrics: Metrics = {
-      baseline: 0,
-      xHeight: fontInstance.xHeight || 0,
-      capHeight: fontInstance.capHeight || 0,
-      ascent: fontInstance.ascent || 0,
-      descent: fontInstance.descent || 0,
-    };
-
-    const allFeatureNames = Array.from(detectedFeatures);
-    const detectionResults = detectFeatures(
-      allFeatureNames,
-      glyph,
-      fontMetrics,
-      fontInstance
-    );
-
-    // Create zones - will be positioned when canvas is drawn
-    const zones = createFeatureZones(
-      detectionResults,
-      glyph,
-      canvasMetricsRef.current.scale,
-      canvasMetricsRef.current.xOffset,
-      canvasMetricsRef.current.baseline,
-      fontMetrics,
-      anatomyFeatures
-    );
-
-    setFeatureZones(zones);
-  }, [
-    glyph,
-    fontInstance,
-    detectedFeatures,
-    anatomyFeatures,
-    lastDetectionKey,
-  ]);
-
-  // Update canvas rect for positioning
-  useEffect(() => {
-    const updateRect = () => {
-      if (canvasRef.current) {
-        setCanvasRect(canvasRef.current.getBoundingClientRect());
-      }
-    };
-    updateRect();
-    window.addEventListener('resize', updateRect);
-    window.addEventListener('scroll', updateRect, true);
-    return () => {
-      window.removeEventListener('resize', updateRect);
-      window.removeEventListener('scroll', updateRect, true);
-    };
-  }, [glyph, fontInstance]);
   const drawGlyph = useCallback(
     (ctx: CanvasRenderingContext2D, w: number, h: number) => {
       if (!fontInstance || !glyph || !glyph.path) {
         return;
-      }
-
-      // Auto-detect features when drawing (font-aware detection)
-      if (typeof autoDetectFeatures === 'function') {
-        autoDetectFeatures();
       }
       const units = fontInstance.unitsPerEm;
 
@@ -252,10 +71,6 @@ export const SymbolCanvas: React.FC = () => {
       const baseline =
         h - (Math.abs(fontInstance.descent) * scale + canvasBottomPadding);
 
-      // Store metrics for coachmark positioning
-      const xOffset = Math.round((w - glyph.advanceWidth * scale) / 2);
-      canvasMetricsRef.current = { scale, xOffset, baseline };
-
       const metrics = {
         Baseline: baseline,
         'Cap height': baseline - fontInstance.capHeight * scale,
@@ -263,6 +78,8 @@ export const SymbolCanvas: React.FC = () => {
         Ascender: baseline - fontInstance.ascent * scale,
         Descender: baseline - fontInstance.descent * scale,
       };
+
+      const xOffset = Math.round((w - glyph.advanceWidth * scale) / 2);
 
       ctx.save();
 
@@ -331,9 +148,6 @@ export const SymbolCanvas: React.FC = () => {
         ctx.fill();
       }
 
-      ctx.restore();
-
-      // Draw anatomy overlay AFTER restoring context so it works in untransformed canvas space
       drawAnatomyOverlay(
         ctx,
         w,
@@ -342,10 +156,10 @@ export const SymbolCanvas: React.FC = () => {
         scale,
         colors,
         metrics,
-        selectedAnatomy,
-        fontInstance,
-        showDetails
+        selectedAnatomy
       );
+
+      ctx.restore();
     },
 
     [
@@ -356,7 +170,6 @@ export const SymbolCanvas: React.FC = () => {
       cursor,
       selectedAnatomy,
       showDetails,
-      autoDetectFeatures,
     ]
   );
 
@@ -380,12 +193,7 @@ export const SymbolCanvas: React.FC = () => {
     if (fontInstance && glyph) {
       drawGlyph(ctx, w, h);
     } else {
-      console.warn('No font or glyph', {
-        hasFontInstance: !!fontInstance,
-        hasGlyph: !!glyph,
-        fontInstance: fontInstance ? { name: fontInstance.familyName } : null,
-        glyph: glyph ? { name: glyph.name, id: glyph.id } : null,
-      });
+      console.warn('No font or glyph');
     }
   }, [glyph, fontInstance, drawGlyph]);
 
@@ -522,21 +330,10 @@ export const SymbolCanvas: React.FC = () => {
   }, [axisValues, setAxisValues, scheduleDraw, onDown, onMove, onUp]);
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: '50vh' }}>
-      <canvas
-        className={styles.canvas}
-        ref={canvasRef}
-        style={{ width: '100%', height: '100%' }}
-      />
-      {canvasRect && featureZones.length > 0 && (
-        <FeatureCoachmark
-          zones={featureZones}
-          canvasRect={canvasRect}
-          canvasScale={canvasMetricsRef.current.scale}
-          xOffset={canvasMetricsRef.current.xOffset}
-          baseline={canvasMetricsRef.current.baseline}
-        />
-      )}
-    </div>
+    <canvas
+      className={styles.canvas}
+      ref={canvasRef}
+      style={{ width: '100%', height: '50vh' }}
+    />
   );
 };

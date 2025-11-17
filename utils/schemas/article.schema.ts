@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { articleBodySchema } from './tiptap.schema';
 
 const articleStatusEnum = z.enum(['draft', 'published', 'archived']);
 
@@ -30,7 +29,7 @@ export const articleSchema = z.object({
     .transform((val) => (val === '' ? null : val)),
   author: z.string().uuid().nullable(),
   editor: z.string().uuid().nullable(),
-  articleBody: articleBodySchema,
+  articleBody: z.any().nullable(), // Corresponds to JSONContent
   articleSection: z
     .string()
     .nullable()

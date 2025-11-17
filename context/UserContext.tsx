@@ -1,15 +1,7 @@
 'use client';
 
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  useCallback,
-  useMemo,
-  useRef,
-} from 'react';
-import { User } from '@supabase/supabase-js';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { User, AuthChangeEvent, Session } from '@supabase/supabase-js';
 import { createClient } from '@/utils/supabase/client';
 import { Profile } from '@/types';
 
@@ -31,34 +23,29 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Store supabase client in ref to avoid recreating on every render
-  const supabaseRef = useRef(createClient());
-  const supabase = supabaseRef.current;
+  const supabase = createClient();
 
-  const fetchProfile = useCallback(
-    async (userId: string): Promise<Profile | null> => {
-      try {
-        const { data, error: fetchError } = await supabase
-          .from('profiles')
-          .select('*')
-          .eq('id', userId)
-          .single();
+  const fetchProfile = async (userId: string): Promise<Profile | null> => {
+    try {
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', userId)
+        .single();
 
-        if (fetchError) {
-          console.error('Error fetching profile:', fetchError);
-          return null;
-        }
-
-        return data;
-      } catch (err) {
-        console.error('Error in fetchProfile:', err);
+      if (error) {
+        console.error('Error fetching profile:', error);
         return null;
       }
-    },
-    [supabase]
-  );
 
-  const refreshProfile = useCallback(async () => {
+      return data;
+    } catch (err) {
+      console.error('Error in fetchProfile:', err);
+      return null;
+    }
+  };
+
+  const refreshProfile = async () => {
     if (!user) return;
 
     setLoading(true);
@@ -72,46 +59,33 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
     } finally {
       setLoading(false);
     }
-  }, [user, fetchProfile]);
+  };
 
   useEffect(() => {
-    let isMounted = true;
-
     // Get initial session
     const getInitialSession = async () => {
       try {
         const {
           data: { session },
-          error: sessionError,
+          error,
         } = await supabase.auth.getSession();
 
-        if (!isMounted) return;
-
-        if (sessionError) {
-          console.error('Error getting session:', sessionError);
-          setError(sessionError.message);
-          setLoading(false);
+        if (error) {
+          console.error('Error getting session:', error);
+          setError(error.message);
           return;
         }
 
         if (session?.user) {
           setUser(session.user);
           const profileData = await fetchProfile(session.user.id);
-          if (isMounted) {
-            setProfile(profileData);
-            setLoading(false);
-          }
-        } else {
-          setLoading(false);
+          setProfile(profileData);
         }
       } catch (err) {
-        if (isMounted) {
-          console.error('Error in getInitialSession:', err);
-          setError(
-            err instanceof Error ? err.message : 'Failed to get session'
-          );
-          setLoading(false);
-        }
+        console.error('Error in getInitialSession:', err);
+        setError(err instanceof Error ? err.message : 'Failed to get session');
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -120,45 +94,36 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
     // Listen for auth changes
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange(async (event, session) => {
+    } = supabase.auth.onAuthStateChange(async (event: AuthChangeEvent, session: Session | null) => {
       console.log('Auth state changed:', event);
-
-      if (!isMounted) return;
 
       if (session?.user) {
         setUser(session.user);
         setLoading(true);
-        setError(null);
         const profileData = await fetchProfile(session.user.id);
-        if (isMounted) {
-          setProfile(profileData);
-          setLoading(false);
-        }
+        setProfile(profileData);
+        setLoading(false);
       } else {
         setUser(null);
         setProfile(null);
         setLoading(false);
-        setError(null);
       }
+
+      setError(null);
     });
 
     return () => {
-      isMounted = false;
       subscription.unsubscribe();
     };
-  }, [supabase, fetchProfile]);
+  }, []);
 
-  // Memoize context value to prevent unnecessary re-renders
-  const contextValue = useMemo<UserContextType>(
-    () => ({
-      user,
-      profile,
-      loading,
-      error,
-      refreshProfile,
-    }),
-    [user, profile, loading, error, refreshProfile]
-  );
+  const contextValue: UserContextType = {
+    user,
+    profile,
+    loading,
+    error,
+    refreshProfile,
+  };
 
   return (
     <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>
@@ -179,18 +144,15 @@ export const useUser = (): UserContextType => {
 export const useProfile = () => {
   const { profile, loading, error } = useUser();
 
-  return useMemo(
-    () => ({
-      profile,
-      loading,
-      error,
-      displayName: profile?.full_name || profile?.username || 'User',
-      avatar: profile?.avatar_url,
-      bio: profile?.bio,
-      occupation: profile?.occupation,
-      socialMedia: profile?.social_media || [],
-      isPublic: profile?.privacy === 'public',
-    }),
-    [profile, loading, error]
-  );
+  return {
+    profile,
+    loading,
+    error,
+    displayName: profile?.full_name || profile?.username || 'User',
+    avatar: profile?.avatar_url,
+    bio: profile?.bio,
+    occupation: profile?.occupation,
+    socialMedia: profile?.social_media || [],
+    isPublic: profile?.privacy === 'public',
+  };
 };

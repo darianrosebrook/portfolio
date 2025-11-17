@@ -7,81 +7,61 @@
 
 // Core types and interfaces
 export type Point2D = { x: number; y: number };
-export type { DrawColors } from './drawing';
 export type { point2d } from './geometry';
 export type SvgShape = ReturnType<typeof import('svg-intersections').shape>;
+export type { DrawColors } from './drawing';
 
 // Core geometry functions
 export {
-  dFor,
-  getOvershoot,
-  isDrawable,
-  isInside,
   rayHits,
-  safeIntersect,
-  shapeForV2,
   windingNumber,
+  isInside,
+  safeIntersect,
+  getOvershoot,
+  shapeForV2,
+  isDrawable,
+  dFor,
 } from './geometryCore';
-
-// Curve direction and precision helpers
-export {
-  allPointsAbove,
-  allPointsBelow,
-  bezierGradient,
-  classifyCurveDirection,
-  curveCrossingDirection,
-  filterDuplicateIntersections,
-} from './curveHelpers';
 
 // Feature detection and analysis
 export {
-  batchScanlines,
   counterSeed,
-  filterDegenerateBeziers,
-  getBowl,
-  getCounter,
-  getEye,
-  getTittle,
-  hasApex,
-  hasArm,
-  hasBar,
-  hasBowl,
-  hasCounter,
-  hasCrotch,
-  hasEar,
-  hasEye,
-  hasFinial,
-  hasLoop,
-  hasSerif,
-  hasSpur,
-  hasStem,
-  hasTail,
-  hasVertex,
-  precomputeScanlines,
-  segmentsFor,
-  strokeThickness,
   traceRegion,
-  type FeatureResult,
+  getCounter,
+  getBowl,
+  getTittle,
+  getEye,
+  strokeThickness,
+  hasCounter,
+  hasStem,
+  hasBowl,
+  hasArm,
+  hasTail,
+  hasLoop,
+  hasApex,
+  hasVertex,
+  hasSerif,
+  hasFinial,
+  hasEar,
+  hasSpur,
+  hasCrotch,
+  hasBar,
+  hasEye,
+  segmentsFor,
+  precomputeScanlines,
+  batchScanlines,
+  filterDegenerateBeziers,
   type FeatureShape,
+  type FeatureResult,
 } from './geometryHeuristics';
 
 // Drawing and visualization utilities
 export {
-  drawAnatomyOverlay,
+  drawMetricLine,
+  getDotPattern,
+  drawGlyphBounds,
+  drawPathDetails,
   drawAxisValues,
   drawCursorLabel,
-  drawGlyphBounds,
-  drawMetricLine,
-  drawPathDetails,
-  getDotPattern,
+  drawAnatomyOverlay,
 } from './drawing';
-
-// Path clipping and masked geometry utilities
-export {
-  canvasYToFontY,
-  clipGlyphPathHorizontal,
-  createCanvasClipMask,
-  fontYToCanvasY,
-  getFeatureClipBoundary,
-  type ClipBoundary,
-} from './pathClipping';

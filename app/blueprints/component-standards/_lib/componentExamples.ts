@@ -529,7 +529,7 @@ export default function App() {
 
 function generateGenericProject(component: ComponentItem): VirtualProject {
   const componentName = component.component;
-
+  
   // Create a simple placeholder component
   const SimpleComponent = `import React from 'react';
 

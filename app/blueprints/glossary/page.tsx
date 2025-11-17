@@ -78,86 +78,79 @@ const Page: NextPage = () => {
                 </Link>
               </div>
               <dl>
-                {items.map((item) => {
-                  // Generate anchor ID from glossary item name (lowercase, hyphenated)
-                  const anchorId = item.name
-                    .toLowerCase()
-                    .replace(/[^a-z0-9]+/g, '-');
-                  return (
-                    <React.Fragment key={item.id}>
-                      <dt
-                        id={anchorId}
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '0.5em',
-                          fontWeight: 600,
-                        }}
-                        className="glossary-item"
-                      >
-                        <h4>
-                          {item.icon && (
-                            <span style={{ display: 'inline-block' }}>
-                              <Icon icon={item.icon} width={44} height={44} />
-                            </span>
-                          )}
-                          {item.name}
-                        </h4>
-                      </dt>
-                      <dd
-                        className="content glossary-item"
-                        style={{ marginBottom: '1em', marginLeft: '1.5em' }}
-                      >
-                        {item.description}
-                        {item.resources && item.resources.length > 0 && (
-                          <div
-                            className="glossary-resources"
-                            style={{ marginTop: '0.75em' }}
-                          >
-                            <strong>Resources:</strong>
-                            <ul>
-                              {item.resources.map((res, idx) => (
-                                <li
-                                  key={res.href + idx}
-                                  style={{ marginBottom: '0.5em' }}
-                                >
-                                  <Link
-                                    href={res.href}
-                                    target={res.external ? '_blank' : undefined}
-                                    rel={
-                                      res.external
-                                        ? 'noopener noreferrer'
-                                        : undefined
-                                    }
-                                  >
-                                    {res.label}
-                                    {res.external && (
-                                      <span
-                                        style={{ marginLeft: 4 }}
-                                        title="External link"
-                                      >
-                                        <Icon
-                                          icon={
-                                            byPrefixAndName['far'][
-                                              'arrow-up-right-from-square'
-                                            ]
-                                          }
-                                        />
-                                      </span>
-                                    )}
-                                  </Link>
-                                  <p className="glossary-resource-description">
-                                    {res.description}
-                                  </p>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
+                {items.map((item) => (
+                  <React.Fragment key={item.id}>
+                    <dt
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5em',
+                        fontWeight: 600,
+                      }}
+                      className="glossary-item"
+                    >
+                      <h4>
+                        {item.icon && (
+                          <span style={{ display: 'inline-block' }}>
+                            <Icon icon={item.icon} width={44} height={44} />
+                          </span>
                         )}
-                      </dd>
-                    </React.Fragment>
-                  );
-                })}
+                        {item.name}
+                      </h4>
+                    </dt>
+                    <dd
+                      className="content glossary-item"
+                      style={{ marginBottom: '1em', marginLeft: '1.5em' }}
+                    >
+                      {item.description}
+                      {item.resources && item.resources.length > 0 && (
+                        <div
+                          className="glossary-resources"
+                          style={{ marginTop: '0.75em' }}
+                        >
+                          <strong>Resources:</strong>
+                          <ul>
+                            {item.resources.map((res, idx) => (
+                              <li
+                                key={res.href + idx}
+                                style={{ marginBottom: '0.5em' }}
+                              >
+                                <Link
+                                  href={res.href}
+                                  target={res.external ? '_blank' : undefined}
+                                  rel={
+                                    res.external
+                                      ? 'noopener noreferrer'
+                                      : undefined
+                                  }
+                                >
+                                  {res.label}
+                                  {res.external && (
+                                    <span
+                                      style={{ marginLeft: 4 }}
+                                      title="External link"
+                                    >
+                                      <Icon
+                                        icon={
+                                          byPrefixAndName['far'][
+                                            'arrow-up-right-from-square'
+                                          ]
+                                        }
+                                      />
+                                    </span>
+                                  )}
+                                </Link>
+                                <p className="glossary-resource-description">
+                                  {res.description}
+                                </p>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </dd>
+                  </React.Fragment>
+                ))}
               </dl>
             </li>
           ))}

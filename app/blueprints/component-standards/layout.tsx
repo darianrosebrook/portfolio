@@ -2,7 +2,7 @@
 // layout for component-standards that contains breadcrumbs
 import { useBreadcrumbs } from '@/hooks/useBreadcrumbs';
 // import { Breadcrumbs } from '@/ui/components/Breadcrumbs/Breadcrumbs';
-import { PageTransition } from '@/ui/components/PageTransition';
+// import { PageTransition } from '@/ui/components/PageTransition';
 import React from 'react';
 
 export default function ComponentStandardsLayout({
@@ -54,18 +54,10 @@ export default function ComponentStandardsLayout({
 
   const _crumbs = useBreadcrumbs({ base, labelMap });
 
+  // TEMP: disable PageTransition wrappers to isolate render loop on component pages
   return (
-    <PageTransition transitionName="component-standards-layout" duration={300}>
-      <section className="content">
-        <PageTransition transitionName="breadcrumb" duration={200}>
-          <div>{/* <Breadcrumbs base={base} crumbs={crumbs} /> */}</div>
-        </PageTransition>
-        <PageTransition transitionName="doc-content" duration={250}>
-          <div>
-            <div>{children}</div>
-          </div>
-        </PageTransition>
-      </section>
-    </PageTransition>
+    <section className="content">
+      <div>{children}</div>
+    </section>
   );
 }

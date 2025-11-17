@@ -16,7 +16,10 @@
         }
       },
       "spacing": {
-        "none": "0",
+        "none": {
+          "value": 0,
+          "unit": "px"
+        },
         "sm": "{space.100}",
         "md": "{space.200}",
         "lg": "{space.300}",
@@ -28,7 +31,10 @@
       },
       "divider": {
         "color": "{color.border.subtle}",
-        "width": "1px"
+        "width": {
+          "value": 1,
+          "unit": "px"
+        }
       },
       "surface": {
         "color": "{color.foreground.default}"

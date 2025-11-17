@@ -9,11 +9,14 @@
       },
       "ringOffset": {
         "$type": "dimension",
-        "$value": "2px",
+        "$value": {
+          "value": 2,
+          "unit": "px"
+        },
         "$description": "Space between element and focus ring"
       },
       "ringOpacity": {
-        "$type": "opacity",
+        "$type": "number",
         "$value": 0.5,
         "$description": "Focus ring transparency"
       }
@@ -31,7 +34,7 @@
     },
     "disabled": {
       "opacity": {
-        "$type": "opacity",
+        "$type": "number",
         "$value": 0.4,
         "$description": "Opacity for disabled elements"
       }

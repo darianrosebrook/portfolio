@@ -13,6 +13,9 @@
 }
 
 .item {
+  // CSS Containment - paint containment prevents overflow
+  contain: paint;
+
   display: grid;
   gap: var(--toast-spacing-gap);
   padding: var(--toast-spacing-padding);

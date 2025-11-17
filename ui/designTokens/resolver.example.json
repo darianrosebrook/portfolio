@@ -1,0 +1,57 @@
+{
+  "$schema": "./resolver.schema.json",
+  "name": "Portfolio Design System Resolver",
+  "version": "2025-10-01",
+  "description": "Resolver document for managing design tokens across themes and contexts",
+  "sets": {
+    "foundation": {
+      "description": "Core design tokens (colors, typography, spacing, etc.)",
+      "sources": [
+        { "$ref": "core/color.tokens.json" },
+        { "$ref": "core/typography.tokens.json" },
+        { "$ref": "core/spacing.tokens.json" },
+        { "$ref": "core/dimension.tokens.json" },
+        { "$ref": "core/shape.tokens.json" },
+        { "$ref": "core/motion.tokens.json" }
+      ]
+    },
+    "semantic": {
+      "description": "Semantic tokens that reference foundation tokens",
+      "sources": [
+        { "$ref": "semantic/color.tokens.json" },
+        { "$ref": "semantic/typography.tokens.json" },
+        { "$ref": "semantic/spacing.tokens.json" },
+        { "$ref": "semantic/elevation.tokens.json" },
+        { "$ref": "semantic/opacity.tokens.json" }
+      ]
+    }
+  },
+  "modifiers": {
+    "theme": {
+      "description": "Color theme modifier (light/dark mode)",
+      "default": "light",
+      "contexts": {
+        "light": {
+          "description": "Light theme color overrides",
+          "sources": [
+            { "$ref": "#/sets/foundation" },
+            { "$ref": "#/sets/semantic" }
+          ]
+        },
+        "dark": {
+          "description": "Dark theme color overrides",
+          "sources": [
+            { "$ref": "#/sets/foundation" },
+            { "$ref": "#/sets/semantic" },
+            { "$ref": "semantic/color.dark.tokens.json" }
+          ]
+        }
+      }
+    }
+  },
+  "resolutionOrder": [
+    { "$ref": "#/sets/foundation" },
+    { "$ref": "#/sets/semantic" },
+    { "$ref": "#/modifiers/theme" }
+  ]
+}

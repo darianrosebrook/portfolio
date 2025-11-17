@@ -10,7 +10,7 @@
     align-items: center;
     width: fit-content;
     padding: var(--profileFlag-spacing-padding-default);
-    padding-right: var(--profileFlag-spacing-padding-right);
+    padding-inline-end: var(--profileFlag-spacing-padding-right);
     background-color: var(--profileFlag-color-background-default);
     border: 1px solid var(--profileFlag-color-border-default);
     border-radius: var(--profileFlag-size-radius-default);
@@ -20,7 +20,7 @@
     transition: border-color 0.2s ease;
 
     small {
-      margin-top: var(--profileFlag-spacing-margin-top);
+      margin-block-start: var(--profileFlag-spacing-margin-top);
     }
 
     &:hover {

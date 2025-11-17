@@ -3,6 +3,9 @@
 .button {
   @include buttonTokens.vars;
 
+  // CSS Containment for performance optimization
+  contain: layout style paint;
+
   // Selective reset - only reset what we need to control
   display: inline-flex;
   gap: var(--button-size-gap-default);
@@ -27,7 +30,8 @@
   font: inherit;
   font-weight: var(--button-text-weight, 500);
   font-size: var(--button-text-size-medium);
-  line-height: var(--button-text-lineHeight-collapse);
+  line-height: normal;
+  white-space: nowrap;
   text-decoration: none;
   transition:
     transform var(--button-motion-duration-fast)
@@ -121,14 +125,16 @@
     color: var(--button-color-foreground-primary);
 
     &:hover {
-      background-color: var(--button-color-background-primaryHover);
-      border-color: var(--button-color-border-primaryHover);
+      // Use color-mix() for dynamic hover effect (lighter background)
+      background-color: color-mix(in srgb, var(--button-color-background-primary) 85%, white);
+      border-color: color-mix(in srgb, var(--button-color-border-primary) 85%, white);
       color: var(--button-color-foreground-primaryHover);
     }
 
     &:active {
-      background-color: var(--button-color-background-primaryActive);
-      border-color: var(--button-color-border-primaryActive);
+      // Use color-mix() for dynamic active effect (darker background)
+      background-color: color-mix(in srgb, var(--button-color-background-primary) 85%, black);
+      border-color: color-mix(in srgb, var(--button-color-border-primary) 85%, black);
       color: var(--button-color-foreground-primaryActive);
     }
   }
@@ -186,21 +192,19 @@
   }
 
   &.destructive {
-    background-color: var(--semantic-color-action-background-danger-default);
+    background-color: var(--semantic-color-feedback-error-background);
     border: var(--button-size-border) solid
-      var(--button-color-border-destructive);
-    color: var(--button-color-foreground-destructive);
+      var(--semantic-color-feedback-error-border);
+    color: var(--semantic-color-feedback-error-foreground);
 
     &:hover {
-      background-color: var(--semantic-color-action-background-danger-hover);
-      border-color: var(--button-color-border-destructiveHover);
-      color: var(--button-color-foreground-destructiveHover);
+      background-color: var(--semantic-color-feedback-error-background-hover);
+      border-color: var(--semantic-color-feedback-error-border-hover);
     }
 
     &:active {
-      background-color: var(--semantic-color-action-background-danger-active);
-      border-color: var(--button-color-border-destructiveActive);
-      color: var(--button-color-foreground-destructiveActive);
+      background-color: var(--semantic-color-feedback-error-background-active);
+      border-color: var(--semantic-color-feedback-error-border-active);
     }
   }
 
@@ -219,6 +223,52 @@
       background-color: var(--button-color-background-active);
       border-color: var(--button-color-border-active);
       color: var(--button-color-foreground-active);
+    }
+  }
+}
+
+// Container queries for responsive button sizing
+@supports (container-type: inline-size) {
+  .button {
+    @container (max-width: 12rem) {
+      // Compact button for small containers
+      gap: calc(var(--button-size-gap-default) * 0.75);
+      min-width: calc(var(--button-size-min-medium) * 0.9);
+      min-height: calc(var(--button-size-min-medium) * 0.9);
+      padding: calc(var(--button-size-padding-small) * 0.75) calc(var(--button-size-padding-small) * 0.75);
+      font-size: calc(var(--button-text-size-medium) * 0.9);
+
+      &.small {
+        min-width: calc(var(--button-size-min-small) * 0.9);
+        min-height: calc(var(--button-size-min-small) * 0.9);
+        padding: calc(var(--button-size-padding-small, var(--button-size-gap-small)) * 0.75);
+        font-size: calc(var(--button-text-size-small) * 0.9);
+      }
+
+      &.large {
+        min-width: calc(var(--button-size-min-large) * 0.9);
+        min-height: calc(var(--button-size-min-large) * 0.9);
+        padding: calc(var(--button-size-padding-large, var(--button-size-gap-large)) * 0.75);
+        font-size: calc(var(--button-text-size-large) * 0.9);
+      }
+    }
+
+    @container (max-width: 8rem) {
+      // Minimal button for very small containers
+      gap: calc(var(--button-size-gap-default) * 0.5);
+      min-width: calc(var(--button-size-min-medium) * 0.8);
+      min-height: calc(var(--button-size-min-medium) * 0.8);
+      padding: calc(var(--button-size-padding-small) * 0.5) calc(var(--button-size-padding-small) * 0.5);
+      font-size: calc(var(--button-text-size-medium) * 0.85);
+
+      &.small,
+      &.medium,
+      &.large {
+        min-width: calc(var(--button-size-min-small) * 0.8);
+        min-height: calc(var(--button-size-min-small) * 0.8);
+        padding: calc(var(--button-size-padding-small, var(--button-size-gap-small)) * 0.5);
+        font-size: calc(var(--button-text-size-small) * 0.85);
+      }
     }
   }
 }

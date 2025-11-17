@@ -3,16 +3,16 @@
  */
 @mixin vars {
   /* === Color Tokens === */
-  --input-color-bg-default: var(--semantic-color-background-secondary);
+  --input-color-bg-default: var(--semantic-color-background-surface);
   --input-color-text-default: var(--semantic-color-foreground-primary);
   --input-color-border-default: var(--semantic-color-border-default);
   --input-color-focus-default: var(--semantic-color-border-focus);
   --input-color-invalid-default: var(--semantic-color-border-danger);
 
   /* === Size Tokens === */
-  --input-size-height-default: var(--core-spacing-size-06);
-  --input-size-radius-default: var(--core-shape-radius-medium);
+  --input-size-height-default: var(--semantic-size-12);
+  --input-size-radius-default: var(--semantic-radius-md);
 
   /* === Space Tokens === */
-  --input-space-inline-default: var(--core-spacing-size-03);
+  --input-space-inline-default: var(--semantic-space-300);
 }

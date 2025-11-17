@@ -76,7 +76,7 @@ The schema validates both patterns so editors provide IntelliSense and inline er
 ### Build outputs and where they are used
 
 - Composed JSON: `ui/designTokens/designTokens.json` from `utils/designTokens/generators/compose.ts`.
-- Global CSS variables: `app/designTokens.scss` from `utils/designTokens/generators/generateGlobalTokens.mjs`.
+- Global CSS variables: `app/designTokens.scss` from `utils/designTokens/generators/global.ts`.
 - Component-scoped SCSS: `ui/components/**/**.tokens.generated.scss` from `utils/designTokens/generators/generateCSSTokens.mjs`.
 - TypeScript token paths: `types/designTokens.ts` from `utils/designTokens/generators/generateTypes.mjs` for code-time autocomplete via `TokenPath` and helpers.
 

@@ -24,11 +24,17 @@
     "strokeWidth": {
       "series": {
         "$type": "dimension",
-        "$value": "2px"
+        "$value": {
+          "value": 2,
+          "unit": "px"
+        }
       },
       "grid": {
         "$type": "dimension",
-        "$value": "1px"
+        "$value": {
+          "value": 1,
+          "unit": "px"
+        }
       }
     }
   }

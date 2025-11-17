@@ -65,7 +65,7 @@ const upload = async ({
   bucket: string;
   articleId?: number;
 }) => {
-  const supabase = await createClient();
+  const supabase = createClient();
 
   try {
     const { name, data: fileData } = file.media;
@@ -199,7 +199,7 @@ const upload = async ({
  * @returns {Promise<void>}
  */
 const removeImageFromArticle = async (imageUrl: string, articleId: number) => {
-  const supabase = await createClient();
+  const supabase = createClient();
 
   try {
     // Find the image record by URL
@@ -252,7 +252,7 @@ const removeImageFromArticle = async (imageUrl: string, articleId: number) => {
  * @returns {Promise<void>}
  */
 const cleanupArticleImages = async (articleId: number) => {
-  const supabase = await createClient();
+  const supabase = createClient();
 
   try {
     // Get all images used by this article
@@ -312,7 +312,7 @@ const cleanupArticleImages = async (articleId: number) => {
  * @returns {Promise<void>}
  */
 const cleanupOrphanedImages = async () => {
-  const supabase = await createClient();
+  const supabase = createClient();
 
   try {
     const { data: orphanedImages } = await supabase

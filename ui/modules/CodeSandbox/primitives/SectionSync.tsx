@@ -43,23 +43,29 @@ export type SectionSyncProps = {
  *
  * @param props - Configuration options for section synchronization
  */
+const DEFAULT_THRESHOLDS = [0, 0.25, 0.5, 0.75, 1] as const;
+
 export function SectionSync({
   sections,
   root,
   onActiveSection,
   onDecorate,
-  threshold = [0, 0.25, 0.5, 0.75, 1],
+  threshold,
   rootMargin = '0px',
 }: SectionSyncProps) {
-  // Use refs to store callbacks to avoid dependency issues
-  const onActiveSectionRef = React.useRef(onActiveSection);
-  const onDecorateRef = React.useRef(onDecorate);
-
-  React.useEffect(() => {
-    onActiveSectionRef.current = onActiveSection;
-    onDecorateRef.current = onDecorate;
-  }, [onActiveSection, onDecorate]);
-
+  // Stabilize thresholds to avoid effect churn from array identity changes
+  const thresholds = React.useMemo(
+    () => threshold ?? [...DEFAULT_THRESHOLDS],
+    [
+      // Use a string key to memoize caller-provided arrays by value
+      threshold ? JSON.stringify(threshold) : 'default',
+    ]
+  );
+  const thresholdKey = React.useMemo(
+    () => (threshold ? JSON.stringify(threshold) : 'default'),
+    [threshold ? JSON.stringify(threshold) : 'default']
+  );
+  const lastDecoKeyRef = React.useRef<string>('');
   React.useEffect(() => {
     const observeRoot = root ?? null;
     const nodeList = (root ?? document).querySelectorAll('[data-section-id]');
@@ -100,18 +106,25 @@ export function SectionSync({
             const decos: Decoration[] = [];
             for (let i = start; i <= end; i++)
               decos.push({ file, line: i, className: 'highlighted-line' });
-            onDecorateRef.current?.(decos);
+            const nextKey = `${file}:${start}-${end}`;
+            if (lastDecoKeyRef.current !== nextKey) {
+              lastDecoKeyRef.current = nextKey;
+              onDecorate?.(decos);
+            }
           } else {
-            onDecorateRef.current?.([]);
+            if (lastDecoKeyRef.current !== '') {
+              lastDecoKeyRef.current = '';
+              onDecorate?.([]);
+            }
           }
-          onActiveSectionRef.current?.(best.id);
+          onActiveSection?.(best.id);
         }
       },
-      { root: observeRoot, threshold, rootMargin }
+      { root: observeRoot, threshold: thresholds, rootMargin }
     );
     nodeList.forEach((n) => observer.observe(n));
     return () => observer.disconnect();
-  }, [sections, root, threshold, rootMargin]);
+  }, [sections, root, onActiveSection, onDecorate, thresholdKey, rootMargin]);
 
   // Also emit initial decorators from the first section for non-observed mounts
   React.useEffect(() => {
@@ -122,8 +135,8 @@ export function SectionSync({
       const decos: Decoration[] = [];
       for (let i = start; i <= end; i++)
         decos.push({ file, line: i, className: 'highlighted-line' });
-      onDecorateRef.current?.(decos);
-      onActiveSectionRef.current?.(s.id);
+      onDecorate?.(decos);
+      onActiveSection?.(s.id);
     }
     // run once on sections seed
     // eslint-disable-next-line react-hooks/exhaustive-deps

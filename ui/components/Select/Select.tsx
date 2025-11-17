@@ -9,8 +9,6 @@
  */
 'use client';
 import React, { useCallback, useRef, useEffect } from 'react';
-import { mergeRefs } from '@/utils/refs';
-import { isHTMLElement } from '@/utils/type-guards';
 import { useSelectContext } from './SelectProvider';
 import { ControlSize } from '@/types/ui';
 import styles from './Select.module.scss';
@@ -65,8 +63,23 @@ export const SelectTrigger = React.forwardRef<
     triggerRef,
   } = useSelectContext();
 
-  // Combine refs using utility
-  const combinedRef = mergeRefs(triggerRef, ref);
+  // Combine refs
+  const combinedRef = useCallback(
+    (node: HTMLButtonElement) => {
+      if (triggerRef) {
+        (triggerRef as React.MutableRefObject<HTMLButtonElement>).current =
+          node;
+      }
+      if (ref) {
+        if (typeof ref === 'function') {
+          ref(node);
+        } else {
+          ref.current = node;
+        }
+      }
+    },
+    [triggerRef, ref]
+  );
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent) => {
@@ -192,24 +205,35 @@ export const SelectContent = React.forwardRef<
     { children, className = '', maxHeight = '200px', position = 'bottom' },
     ref
   ) => {
-    const { isOpen, close, listboxRef, triggerRef } = useSelectContext();
+    const { isOpen, close, listboxRef } = useSelectContext();
 
-    // Combine refs using utility
-    const combinedRef = mergeRefs(listboxRef, ref);
+    // Combine refs
+    const combinedRef = useCallback(
+      (node: HTMLDivElement) => {
+        if (listboxRef) {
+          (listboxRef as React.MutableRefObject<HTMLDivElement>).current = node;
+        }
+        if (ref) {
+          if (typeof ref === 'function') {
+            ref(node);
+          } else {
+            ref.current = node;
+          }
+        }
+      },
+      [listboxRef, ref]
+    );
 
     // Close on outside click
     useEffect(() => {
       if (!isOpen) return;
 
       const handleClickOutside = (event: MouseEvent) => {
-        const target = event.target;
-        // Check if target is an Element first, then if it's an HTMLElement
-        if (!target || !(target instanceof Element) || !isHTMLElement(target)) {
-          return;
-        }
-
+        const target = event.target as Node;
         const content = listboxRef?.current;
-        const trigger = triggerRef?.current;
+        const trigger = (listboxRef as any)?.current
+          ?.closest('[data-select-root]')
+          ?.querySelector('[role="combobox"]');
 
         if (
           content &&
@@ -224,7 +248,7 @@ export const SelectContent = React.forwardRef<
       document.addEventListener('mousedown', handleClickOutside);
       return () =>
         document.removeEventListener('mousedown', handleClickOutside);
-    }, [isOpen, close, listboxRef, triggerRef]);
+    }, [isOpen, close, listboxRef]);
 
     if (!isOpen) return null;
 

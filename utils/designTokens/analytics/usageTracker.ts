@@ -6,6 +6,8 @@
  * - Most used tokens
  * - Token adoption patterns
  * - Breaking change impact
+ *
+ * @author Darian Rosebrook <hello@darianrosebrook.com>
  */
 
 import fs from 'fs';

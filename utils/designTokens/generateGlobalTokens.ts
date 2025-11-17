@@ -15,6 +15,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { tokenPathToCSSVar } from './core/index';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -32,11 +33,6 @@ interface ResolveOptions {
 const PROJECT_ROOT = path.resolve(__dirname, '..', '..');
 const TOKENS_PATH = path.join(PROJECT_ROOT, 'components', 'designTokens.json');
 const OUTPUT_PATH = path.join(PROJECT_ROOT, 'app', 'designTokens.scss');
-
-// Converts a dot path into a CSS custom property name
-function tokenPathToCSSVar(pathStr: string): string {
-  return `--${pathStr.replace(/\./g, '-')}`;
-}
 
 // Resolve a token node considering $value, $extensions with design.paths.{theme} and viewport scaling
 function resolveNode(
@@ -104,13 +100,65 @@ function resolveNode(
     }
   }
 
+  // Handle DTCG 1.0 structured values
+  if (typeof raw === 'object' && raw !== null) {
+    // Check for structured color value
+    if (
+      'colorSpace' in raw &&
+      'components' in raw &&
+      Array.isArray((raw as { components: unknown }).components)
+    ) {
+      const colorValue = raw as {
+        colorSpace: string;
+        components: number[];
+        alpha?: number;
+      };
+      // Convert to CSS color string (simplified - use hex by default)
+      const components = colorValue.components;
+      if (colorValue.colorSpace === 'srgb' && components.length >= 3) {
+        const r = Math.round(components[0] * 255)
+          .toString(16)
+          .padStart(2, '0');
+        const g = Math.round(components[1] * 255)
+          .toString(16)
+          .padStart(2, '0');
+        const b = Math.round(components[2] * 255)
+          .toString(16)
+          .padStart(2, '0');
+        const alpha =
+          colorValue.alpha !== undefined && colorValue.alpha < 1
+            ? Math.round(colorValue.alpha * 255)
+                .toString(16)
+                .padStart(2, '0')
+            : '';
+        return `#${r}${g}${b}${alpha}`;
+      }
+      // For other color spaces, construct CSS color string directly
+      return `${colorValue.colorSpace}(${components.join(' ')}${
+        colorValue.alpha !== undefined && colorValue.alpha < 1
+          ? ` / ${colorValue.alpha}`
+          : ''
+      })`;
+    }
+    // Check for structured dimension value
+    if (
+      'value' in raw &&
+      'unit' in raw &&
+      typeof (raw as { value: unknown }).value === 'number' &&
+      typeof (raw as { unit: unknown }).unit === 'string'
+    ) {
+      const dimensionValue = raw as { value: number; unit: string };
+      return `${dimensionValue.value}${dimensionValue.unit}`;
+    }
+  }
+
   // Strings can be references like {semantic.color.background.primary}
   if (typeof raw === 'string') {
     const refPattern = /\{([^}]+)\}/g;
     // If the value contains any references, rewrite them to proper token references
     return raw.replace(
       refPattern,
-      (_, refPath: string) => `var(--component-test-path)`
+      (_, refPath: string) => `var(${tokenPathToCSSVar(refPath)})`
     );
   }
 

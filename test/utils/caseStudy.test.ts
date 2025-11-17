@@ -1,8 +1,7 @@
 import { getCaseStudyContent } from '@/utils/caseStudy';
 import type { JSONContent } from '@tiptap/react';
-import { processCaseStudyContent } from '@/utils/tiptap/htmlGeneration';
 
-// Mock TipTap HTML generation
+// Mock generateHTML to work in test environment
 vi.mock('@tiptap/html', () => ({
   generateHTML: vi.fn((doc: any, extensions: any) => {
     // Simple mock that returns basic HTML structure
@@ -14,9 +13,6 @@ vi.mock('@tiptap/html', () => ({
       if (node.type === 'heading' && node.content) {
         const level = node.attrs?.level || 1;
         return `<h${level}>${node.content.map((c: any) => c.text || '').join('')}</h${level}>`;
-      }
-      if (node.type === 'image') {
-        return '';
       }
       return '';
     });
@@ -100,32 +96,5 @@ describe('getCaseStudyContent', () => {
 
     const result = getCaseStudyContent(mockContent);
     expect(result.html).toContain('Just a paragraph.');
-  });
-
-  it('should match processCaseStudyContent behavior', () => {
-    const mockContent: JSONContent = {
-      type: 'doc',
-      content: [
-        {
-          type: 'heading',
-          attrs: { level: 1 },
-          content: [{ type: 'text', text: 'Title' }],
-        },
-        {
-          type: 'image',
-          attrs: { src: 'image.jpg' },
-        },
-        {
-          type: 'paragraph',
-          content: [{ type: 'text', text: 'Content' }],
-        },
-      ],
-    };
-
-    const legacyResult = getCaseStudyContent(mockContent);
-    const newResult = processCaseStudyContent(mockContent);
-
-    // Both should produce same result
-    expect(legacyResult.html).toBe(newResult.html);
   });
 });

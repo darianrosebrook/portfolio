@@ -4,36 +4,60 @@
     "breakpoint": {
       "sm": {
         "$type": "dimension",
-        "$value": "640px"
+        "$value": {
+          "value": 640,
+          "unit": "px"
+        }
       },
       "md": {
         "$type": "dimension",
-        "$value": "768px"
+        "$value": {
+          "value": 768,
+          "unit": "px"
+        }
       },
       "lg": {
         "$type": "dimension",
-        "$value": "1024px"
+        "$value": {
+          "value": 1024,
+          "unit": "px"
+        }
       },
       "xl": {
         "$type": "dimension",
-        "$value": "1440px"
+        "$value": {
+          "value": 1440,
+          "unit": "px"
+        }
       },
       "xxl": {
         "$type": "dimension",
-        "$value": "1536px"
+        "$value": {
+          "value": 1536,
+          "unit": "px"
+        }
       },
       "xxxl": {
         "$type": "dimension",
-        "$value": "1920px"
+        "$value": {
+          "value": 1920,
+          "unit": "px"
+        }
       }
     },
     "tapTargetMin": {
       "$type": "dimension",
-      "$value": "44px"
+      "$value": {
+        "value": 44,
+        "unit": "px"
+      }
     },
     "actionMinHeight": {
       "$type": "dimension",
-      "$value": "36px"
+      "$value": {
+        "value": 36,
+        "unit": "px"
+      }
     }
   }
 }

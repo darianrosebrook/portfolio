@@ -1,7 +1,6 @@
 'use server';
 
 import { createClient } from './server';
-import { unstable_noStore as noStore } from 'next/cache';
 
 /**
  * Checks for an active user session.
@@ -19,6 +18,6 @@ export async function checkForAuth() {
   if (session) {
     return session;
   } else {
-    return noStore;
+    return null;
   }
 }

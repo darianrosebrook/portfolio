@@ -1,42 +1,26 @@
+'use client';
 import React, { useRef, useEffect, useMemo } from 'react';
 import { gsap } from 'gsap';
-import { mergeRefs } from '@/utils/refs';
-import { isValidReactElement } from '@/utils/type-guards';
 import styles from './Chip.module.scss';
 
 // Simple Slot implementation to avoid Radix dependency
-interface SlotProps extends React.HTMLAttributes<HTMLElement> {
-  children: React.ReactElement;
-}
-
-const Slot = React.forwardRef<HTMLElement, SlotProps>(
-  ({ children, ...props }, ref) => {
-    if (!isValidReactElement(children)) {
-      return null;
-    }
-
-    const childProps = children.props as React.HTMLAttributes<HTMLElement>;
-    const childClassName = [props.className, childProps.className]
-      .filter(Boolean)
-      .join(' ');
-
-    // Merge refs safely
-    const childRef =
-      'ref' in childProps
-        ? (childProps.ref as React.Ref<HTMLElement> | undefined)
-        : undefined;
-    const mergedRef = ref ? mergeRefs(ref, childRef) : childRef;
-
+const Slot = React.forwardRef<
+  HTMLElement,
+  React.HTMLAttributes<HTMLElement> & { children: React.ReactElement }
+>(({ children, ...props }, ref) => {
+  if (React.isValidElement(children)) {
+    const childProps = children.props as Record<string, unknown>;
     return React.cloneElement(children, {
-      ...props,
       ...childProps,
-      className: childClassName,
-      ref: mergedRef,
-    } as React.HTMLAttributes<HTMLElement> & { ref?: React.Ref<HTMLElement> });
+      ...props,
+      ref,
+      className: [props.className, childProps.className]
+        .filter(Boolean)
+        .join(' '),
+    } as any);
   }
-);
-
-Slot.displayName = 'Slot';
+  return null;
+});
 
 export type ChipVariant = 'default' | 'selected' | 'dismissible';
 export type ChipSize = 'small' | 'medium' | 'large';
@@ -193,8 +177,12 @@ const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
       const chipElement = chipRef.current;
       if (!chipElement || disabled) return;
 
+      let enterAnimation: gsap.core.Tween | null = null;
+      let leaveAnimation: gsap.core.Tween | null = null;
+
       const handleMouseEnter = () => {
-        gsap.to(chipElement, {
+        if (enterAnimation) enterAnimation.kill();
+        enterAnimation = gsap.to(chipElement, {
           scale: 1.02,
           duration: 0.2,
           ease: 'power2.out',
@@ -202,7 +190,8 @@ const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
       };
 
       const handleMouseLeave = () => {
-        gsap.to(chipElement, {
+        if (leaveAnimation) leaveAnimation.kill();
+        leaveAnimation = gsap.to(chipElement, {
           scale: 1,
           duration: 0.2,
           ease: 'power2.out',
@@ -215,6 +204,8 @@ const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
       return () => {
         chipElement.removeEventListener('mouseenter', handleMouseEnter);
         chipElement.removeEventListener('mouseleave', handleMouseLeave);
+        if (enterAnimation) enterAnimation.kill();
+        if (leaveAnimation) leaveAnimation.kill();
       };
     }, [disabled]);
 
@@ -302,9 +293,11 @@ const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
 
     return (
       <button
-        ref={mergeRefs((node: HTMLButtonElement | null) => {
+        ref={(node) => {
           chipRef.current = node;
-        }, ref)}
+          if (typeof ref === 'function') ref(node);
+          else if (ref) ref.current = node;
+        }}
         className={combinedClassName}
         disabled={disabled}
         title={title}

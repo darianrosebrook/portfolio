@@ -38,25 +38,47 @@
     background-color: var(--alert-color-background-primary);
     border-radius: var(--alert-size-section-radius);
     box-shadow: var(--alert-shadow-default);
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      // Use color-mix() for subtle hover effect
+      box-shadow: color-mix(in srgb, var(--alert-shadow-default) 80%, transparent 20%);
+    }
 
     &.info {
       background: var(--alert-color-background-infoSubtle);
       color: var(--alert-color-foreground-onInfoSubtle);
+
+      &:hover {
+        background: color-mix(in srgb, var(--alert-color-background-infoSubtle) 95%, white 5%);
+      }
     }
 
     &.warning {
       background: var(--alert-color-background-warningSubtle);
       color: var(--alert-color-foreground-onWarningSubtle);
+
+      &:hover {
+        background: color-mix(in srgb, var(--alert-color-background-warningSubtle) 95%, white 5%);
+      }
     }
 
     &.danger {
       background: var(--alert-color-background-dangerSubtle);
       color: var(--alert-color-foreground-onDangerSubtle);
+
+      &:hover {
+        background: color-mix(in srgb, var(--alert-color-background-dangerSubtle) 95%, white 5%);
+      }
     }
 
     &.success {
       background: var(--alert-color-background-successSubtle);
       color: var(--alert-color-foreground-onSuccessSubtle);
+
+      &:hover {
+        background: color-mix(in srgb, var(--alert-color-background-successSubtle) 95%, white 5%);
+      }
     }
   }
 
@@ -70,31 +92,48 @@
     margin: 0 -1rem;
     padding: var(--alert-size-page-padding);
     border-radius: var(--alert-size-page-radius);
+    transition: background-color 0.2s ease;
 
     &.info {
       background: var(--alert-color-background-infoStrong);
       color: var(--alert-color-foreground-onColor);
+
+      &:hover {
+        // Use color-mix() for dynamic hover effect
+        background: color-mix(in srgb, var(--alert-color-background-infoStrong) 90%, white 10%);
+      }
     }
 
     &.warning {
       background: var(--alert-color-background-warningStrong);
       color: var(--alert-color-foreground-onColor);
+
+      &:hover {
+        background: color-mix(in srgb, var(--alert-color-background-warningStrong) 90%, white 10%);
+      }
     }
 
     &.danger {
       background: var(--alert-color-background-dangerStrong);
       color: var(--alert-color-foreground-onColor);
+
+      &:hover {
+        background: color-mix(in srgb, var(--alert-color-background-dangerStrong) 90%, white 10%);
+      }
     }
 
     &.success {
       background: var(--alert-color-background-successStrong);
       color: var(--alert-color-foreground-onColor);
+
+      &:hover {
+        background: color-mix(in srgb, var(--alert-color-background-successStrong) 90%, white 10%);
+      }
     }
   }
 
   & + .alert {
-    margin-top: var(--alert-spacing-margin-top);
-  }
+    margin-block-start: var(--alert-spacing-margin-top);
 }
 
 .icon {
@@ -130,10 +169,18 @@
   grid-column: span 1;
   grid-column-end: -1;
   cursor: pointer;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .alert {
     transition: none;
+
+    .icon,
+    .title,
+    .body,
+    .dismiss {
+      transition: none;
+    }
   }
 }

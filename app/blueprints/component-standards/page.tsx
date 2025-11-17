@@ -81,13 +81,6 @@ const ComponentStandardsPage: React.FC = () => {
 
       <section className="content">
         <h2>Component Library</h2>
-        <p style={{ marginBottom: '1rem' }}>
-          Browse all components in the design system. For a detailed status
-          overview including playground availability and last updated dates,{' '}
-          <Link href="/blueprints/component-standards/status">
-            view the Status Matrix →
-          </Link>
-        </p>
         <div className={styles.tableContainer}>
           <table className={styles.table}>
             <thead>

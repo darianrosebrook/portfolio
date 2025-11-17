@@ -9,9 +9,9 @@
     },
     "color": {
       "info": "{semantic.color.foreground.primary}",
-      "success": "{semantic.color.foreground.success}",
-      "warning": "{semantic.color.foreground.warning}",
-      "error": "{semantic.color.foreground.danger}"
+      "success": "{semantic.color.status.success.fg}",
+      "warning": "{semantic.color.status.warning.fg}",
+      "error": "{semantic.color.status.danger.fg}"
     },
     "accent": {
       "info": "{semantic.color.status.info}",
@@ -25,7 +25,10 @@
       "stackGap": "{core.spacing.size.04}"
     },
     "size": {
-      "maxWidth": "400px"
+      "maxWidth": {
+        "value": 400,
+        "unit": "px"
+      }
     },
     "motion": {
       "enter": "{core.motion.duration.short}",

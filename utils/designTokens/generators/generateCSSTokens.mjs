@@ -14,26 +14,168 @@ const COMPONENTS_DIR = path.join(projectRoot, 'ui');
 const SYSTEM_TOKENS_PATH = path.join(COMPONENTS_DIR, 'designTokens.json');
 
 /**
+ * Convert DTCG 1.0 structured color value to CSS string
+ */
+function colorValueToCSS(colorValue) {
+  const { colorSpace, components, alpha } = colorValue;
+  const hasAlpha = alpha !== undefined && alpha < 1;
+
+  // Convert to RGB first for most color spaces
+  let rgb = null;
+
+  if (colorSpace === 'srgb' && components.length >= 3) {
+    rgb = {
+      r: Math.round(components[0] * 255),
+      g: Math.round(components[1] * 255),
+      b: Math.round(components[2] * 255),
+    };
+  }
+
+  if (!rgb) {
+    // Fallback: construct CSS color string directly
+    return `${colorSpace}(${components.join(' ')}${
+      hasAlpha ? ` / ${alpha}` : ''
+    })`;
+  }
+
+  // Convert to hex (default format for component tokens)
+  const toHex = (n) => n.toString(16).padStart(2, '0');
+  const hex = `#${toHex(rgb.r)}${toHex(rgb.g)}${toHex(rgb.b)}`;
+  return hasAlpha && alpha !== undefined
+    ? hex + toHex(Math.round(alpha * 255))
+    : hex;
+}
+
+/**
+ * Convert DTCG 1.0 structured dimension value to CSS string
+ */
+function dimensionValueToCSS(dimensionValue) {
+  return `${dimensionValue.value}${dimensionValue.unit}`;
+}
+
+/**
+ * Check if value is a structured color value
+ */
+function isStructuredColorValue(value) {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    'colorSpace' in value &&
+    'components' in value &&
+    Array.isArray(value.components)
+  );
+}
+
+/**
+ * Check if value is a structured dimension value
+ */
+function isStructuredDimensionValue(value) {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    'value' in value &&
+    'unit' in value &&
+    typeof value.value === 'number' &&
+    typeof value.unit === 'string'
+  );
+}
+
+/**
+ * Determine if a token path belongs to semantic or core namespace based on patterns
+ * This matches the logic in utils/designTokens/core/index.ts
+ */
+function determineNamespace(tokenPath) {
+  // Already prefixed
+  if (tokenPath.startsWith('core.')) return 'core';
+  if (tokenPath.startsWith('semantic.')) return 'semantic';
+
+  // Core token patterns (these are primitives/palettes)
+  const corePatterns = [
+    /^color\.(mode|palette|datavis)/, // color.mode.*, color.palette.*, color.datavis.*
+    /^typography\.(fontFamily|weight|ramp|lineHeight|letterSpacing|features)/, // typography.fontFamily.*, typography.weight.*, etc.
+    /^spacing\.size/, // spacing.size.*
+    /^elevation\.(level|offset|blur|spread)/, // elevation.level.*, elevation.offset.*, etc.
+    /^opacity\.(50|100|200|300|400|500|600|700|800|900|full)/, // opacity.50, opacity.100, etc.
+    /^dimension\.(breakpoint|tapTarget|actionMinHeight)/, // dimension.breakpoint.*, etc.
+    /^shape\.(radius|borderWidth|borderStyle|border\.width|border\.style)/, // shape.radius.*, shape.borderWidth.*, shape.border.width.*, etc.
+    /^motion\.(duration|easing|keyframes|delay|stagger)/, // motion.duration.*, motion.easing.*, etc.
+    /^scale\./, // scale.*
+    /^density\./, // density.*
+    /^layer\./, // layer.*
+    /^layout\./, // layout.*
+    /^icon\./, // icon.*
+    /^effect\./, // effect.*
+  ];
+
+  // If it matches core patterns, it's core
+  if (corePatterns.some((pattern) => pattern.test(tokenPath))) {
+    return 'core';
+  }
+
+  // Everything else is semantic (foreground, background, border, action, feedback, etc.)
+  return 'semantic';
+}
+
+/**
+ * Convert token path to CSS custom property name with namespace prefix
+ * This matches the logic in utils/designTokens/core/index.ts
+ */
+function tokenPathToCSSVar(tokenPath, prefix = '--') {
+  // Determine namespace
+  const namespace = determineNamespace(tokenPath);
+  
+  // Remove namespace prefix if present (we'll add it back)
+  const pathWithoutNamespace = tokenPath.replace(/^(core|semantic)\./, '');
+  
+  // Convert path to CSS variable format
+  const cssVarName = pathWithoutNamespace
+    .replace(/\./g, '-') // Convert dots to hyphens first
+    .replace(/[A-Z]/g, (m) => '-' + m.toLowerCase()) // Convert camelCase
+    .replace(/[\s_]/g, '-') // Convert spaces and underscores
+    .replace(/[^a-z0-9-]/g, '') // Remove any remaining invalid characters
+    .replace(/-+/g, '-'); // Collapse multiple hyphens into one
+  
+  // Add namespace prefix if determined
+  const namespacePrefix = namespace ? `${namespace}-` : '';
+  
+  return prefix + namespacePrefix + cssVarName;
+}
+
+/**
  * Convert a token reference string like "{semantic.color.background.primary}"
- * into a CSS variable reference using the same naming convention as the global generator
+ * into a CSS variable reference using the same naming convention as the global generator.
+ * Also handles DTCG 1.0 structured values (color and dimension objects).
  */
 function refToCssVar(value) {
-  if (typeof value !== 'string') return String(value);
-  const refMatch = value.match(/^\{([^}]+)\}$/);
-  if (!refMatch) return value; // literal value (number/dimension/string)
-  const tokenPath = refMatch[1];
+  // Handle DTCG 1.0 structured values
+  if (isStructuredColorValue(value)) {
+    return colorValueToCSS(value);
+  }
 
-  // Use the same CSS variable naming convention as the global generator
-  const cssVarName =
-    '--' +
-    tokenPath
-      .replace(/\./g, '-') // Convert dots to hyphens first
-      .replace(/[A-Z]/g, (m) => '-' + m.toLowerCase()) // Convert camelCase
-      .replace(/[\s_]/g, '-') // Convert spaces and underscores
-      .replace(/[^a-z0-9-]/g, '') // Remove any remaining invalid characters
-      .replace(/-+/g, '-'); // Collapse multiple hyphens into one
+  if (isStructuredDimensionValue(value)) {
+    return dimensionValueToCSS(value);
+  }
 
-  return `var(${cssVarName})`;
+  // Handle string values (references or literals)
+  if (typeof value === 'string') {
+    const refMatch = value.match(/^\{([^}]+)\}$/);
+    if (!refMatch) return value; // literal value (number/dimension/string)
+    const tokenPath = refMatch[1];
+
+    // Use the same CSS variable naming convention as the global generator
+    // This now includes namespace prefixes (--semantic- or --core-)
+    const cssVarName = tokenPathToCSSVar(tokenPath);
+
+    return `var(${cssVarName})`;
+  }
+
+  // Handle numbers and other primitives
+  if (typeof value === 'number' || typeof value === 'boolean') {
+    return String(value);
+  }
+
+  // Fallback: convert to string
+  return String(value);
 }
 
 /**
@@ -46,6 +188,13 @@ function flattenTokens(obj, prefixSegments) {
 
   for (const [key, val] of Object.entries(obj)) {
     const nextPath = [...prefixSegments, key];
+
+    // Check if this is a structured DTCG 1.0 value (don't flatten these)
+    if (isStructuredColorValue(val) || isStructuredDimensionValue(val)) {
+      const tokenName = nextPath.join('-');
+      flat[tokenName] = val;
+      continue;
+    }
 
     if (val && typeof val === 'object' && !Array.isArray(val)) {
       // This is a group - recurse and collect its tokens

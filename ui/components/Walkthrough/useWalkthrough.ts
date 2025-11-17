@@ -4,17 +4,6 @@ import type { WalkthroughStepSpec } from './types';
 
 type PersistedState = { index?: number; completed?: boolean };
 
-// Type augmentation for window global state
-interface WindowWithWalkthrough extends Window {
-  __walkthrough_open__?: boolean;
-}
-
-function getWindowWithWalkthrough(): WindowWithWalkthrough | undefined {
-  return typeof window !== 'undefined'
-    ? (window as WindowWithWalkthrough)
-    : undefined;
-}
-
 const storage = {
   get(key?: string) {
     if (!key || typeof window === 'undefined') return null;
@@ -103,14 +92,12 @@ export function useWalkthrough(opts: UseWalkthroughOptions) {
     const key = '__walkthrough_open__';
     return {
       canOpen: (): boolean => {
-        const win = getWindowWithWalkthrough();
-        if (!win) return true;
-        return allowConcurrent || !win[key];
+        if (typeof window === 'undefined') return true;
+        return allowConcurrent || !(window as any)[key];
       },
       setOpen: (value: boolean) => {
-        const win = getWindowWithWalkthrough();
-        if (!win) return;
-        win[key] = value;
+        if (typeof window === 'undefined') return;
+        (window as any)[key] = value;
       },
     };
   }, [allowConcurrent]);

@@ -1,5 +1,12 @@
 'use client';
-import { createContext, useContext, ReactNode, useEffect, useRef } from 'react';
+import React, {
+  createContext,
+  useContext,
+  ReactNode,
+  useEffect,
+  useRef,
+  useMemo,
+} from 'react';
 import styles from './Postcard.module.scss';
 import Image from 'next/image';
 import Icon from '../Icon';
@@ -73,8 +80,9 @@ const Postcard: React.FC<PostcardProps> & {
   Repost: React.FC;
   ExternalLink: React.FC<{ link: string }>;
 } = ({ children, ...props }) => {
+  const contextValue = useMemo(() => props, [props]);
   return (
-    <PostcardContext.Provider value={props}>
+    <PostcardContext.Provider value={contextValue}>
       <article className={styles.post}>{children}</article>
     </PostcardContext.Provider>
   );
@@ -148,20 +156,16 @@ const Embed: React.FC = () => {
     if (embed?.type === 'video' && videoRef.current) {
       const video = videoRef.current;
       const isHLS = embed.url.includes('.m3u8');
+      let hls: any = null;
 
       if (isHLS) {
         // Handle HLS streams
         import('hls.js')
           .then(({ default: Hls }) => {
             if (Hls.isSupported()) {
-              const hls = new Hls();
+              hls = new Hls();
               hls.loadSource(embed.url);
               hls.attachMedia(video);
-
-              // Cleanup on unmount
-              return () => {
-                hls.destroy();
-              };
             } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
               // Safari native HLS support
               video.src = embed.url;
@@ -176,6 +180,18 @@ const Embed: React.FC = () => {
         // Regular video file
         video.src = embed.url;
       }
+
+      // Cleanup function
+      return () => {
+        if (hls) {
+          hls.destroy();
+        }
+        // Clear video source to stop loading
+        if (video) {
+          video.src = '';
+          video.load();
+        }
+      };
     }
   }, [embed]);
 

@@ -2,18 +2,39 @@
   "prefix": "spinner",
   "tokens": {
     "size": {
-      "xs": "12px",
-      "sm": "16px",
-      "md": "20px",
-      "lg": "28px"
+      "xs": {
+        "value": 12,
+        "unit": "px"
+      },
+      "sm": {
+        "value": 16,
+        "unit": "px"
+      },
+      "md": {
+        "value": 20,
+        "unit": "px"
+      },
+      "lg": {
+        "value": 28,
+        "unit": "px"
+      }
     },
     "thickness": {
-      "hairline": "2px",
-      "regular": "3px",
-      "bold": "4px"
+      "hairline": {
+        "value": 2,
+        "unit": "px"
+      },
+      "regular": {
+        "value": 3,
+        "unit": "px"
+      },
+      "bold": {
+        "value": 4,
+        "unit": "px"
+      }
     },
     "color": {
-      "accent": "{semantic.color.foreground.accent}",
+      "accent": "{semantic.color.accent.brand}",
       "track": "{semantic.color.border.subtle}"
     },
     "dots": {

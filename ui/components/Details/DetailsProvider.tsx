@@ -102,13 +102,16 @@ export function DetailsProvider({
     [allowMultiple, onToggle]
   );
 
-  const contextValue: DetailsContextValue = {
-    registerDetails,
-    unregisterDetails,
-    handleToggle,
-    allowMultiple,
-    openDetails,
-  };
+  const contextValue = React.useMemo<DetailsContextValue>(
+    () => ({
+      registerDetails,
+      unregisterDetails,
+      handleToggle,
+      allowMultiple,
+      openDetails,
+    }),
+    [registerDetails, unregisterDetails, handleToggle, allowMultiple, openDetails]
+  );
 
   return (
     <DetailsContext.Provider value={contextValue}>

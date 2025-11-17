@@ -97,6 +97,23 @@ const CommandDialog: React.FC<CommandDialogProps> = ({
     };
   }, [modal, isOpen]);
 
+  // Focus management for modal command
+  React.useEffect(() => {
+    if (!isOpen || !modal) return;
+
+    // Store previously focused element for return focus
+    const previousFocusedElement = document.activeElement as HTMLElement;
+
+    // Focus will be set to input by CommandInput component with autofocus
+
+    return () => {
+      // Return focus when command closes
+      if (previousFocusedElement && document.contains(previousFocusedElement)) {
+        previousFocusedElement.focus();
+      }
+    };
+  }, [isOpen, modal]);
+
   if (!isOpen) return null;
 
   const content = (

@@ -1,6 +1,5 @@
 'use client';
 import * as React from 'react';
-import { createCSSProperties } from '@/utils/css-custom-properties';
 import styles from './Skeleton.module.scss';
 
 export interface SkeletonShapeProps {
@@ -21,15 +20,13 @@ export const SkeletonShape: React.FC<SkeletonShapeProps> = ({
   className,
 }) => {
   const style: React.CSSProperties = {
-    ...createCSSProperties({
-      '--skeleton-wipe-delay': `${delayMs}ms`,
-      '--skeleton-radius-override': radius
-        ? `var(--skeleton-radius-${radius})`
-        : undefined,
-    }),
+    ['--skeleton-wipe-delay' as any]: `${delayMs}ms`,
+    ['--skeleton-radius-override' as any]: radius
+      ? `var(--skeleton-radius-${radius})`
+      : undefined,
     width: typeof width === 'number' ? `${width}px` : width,
     height: typeof height === 'number' ? `${height}px` : height,
-  };
+  } as React.CSSProperties;
 
   return (
     <span

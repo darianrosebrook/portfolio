@@ -6,3 +6,6 @@
 
 // Core utilities
 export * from './componentTokenUtils';
+
+// Path utilities
+export * from './pathUtils';

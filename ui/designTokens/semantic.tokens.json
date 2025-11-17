@@ -4,7 +4,6 @@
     "version": "1.0.0",
     "source": "Semantic roles (aliases to core)"
   },
-
   "color": {
     "foreground": {
       "primary": {
@@ -279,7 +278,7 @@
           "design.paths.light": "{color.palette.neutral.400}",
           "design.paths.dark": "{color.palette.neutral.500}"
         },
-        "$description": "Placeholder foreground color"
+        "$description": "Placeholder text color"
       },
       "inverse": {
         "$type": "color",
@@ -289,15 +288,6 @@
           "design.paths.dark": "{color.mode.dark}"
         },
         "$description": "Inverse foreground color (opposite of primary)"
-      },
-      "placeholder": {
-        "$type": "color",
-        "$value": "{color.palette.neutral.400}",
-        "$extensions": {
-          "design.paths.light": "{color.palette.neutral.400}",
-          "design.paths.dark": "{color.palette.neutral.500}"
-        },
-        "$description": "Placeholder text color"
       }
     },
     "background": {
@@ -402,7 +392,15 @@
       },
       "imageOverlay": {
         "$type": "color",
-        "$value": "rgba(0, 0, 0, 0.5)",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0,
+            0,
+            0
+          ],
+          "alpha": 0.5
+        },
         "$extensions": {
           "design.paths.light": "rgba(0, 0, 0, 0.5)",
           "design.paths.dark": "rgba(0, 0, 0, 0.7)"
@@ -644,15 +642,6 @@
           "design.paths.dark": "{color.palette.neutral.500}"
         },
         "$description": "Strong border color for emphasis"
-      },
-      "disabled": {
-        "$type": "color",
-        "$value": "{color.palette.neutral.200}",
-        "$extensions": {
-          "design.paths.light": "{color.palette.neutral.200}",
-          "design.paths.dark": "{color.palette.neutral.700}"
-        },
-        "$description": "Disabled border color"
       }
     },
     "status": {
@@ -703,90 +692,79 @@
       }
     },
     "data": {
-      "trendDefault": {
-        "$type": "color",
-        "$value": "{color.palette.blue.400}",
-        "$extensions": {
-          "design.paths.light": "{color.palette.blue.400}",
-          "design.paths.dark": "{color.palette.blue.300}"
+      "trend": {
+        "default": {
+          "$type": "color",
+          "$value": "{color.palette.blue.400}",
+          "$description": "Default trend indicator"
         },
-        "$description": "Default trend color for data visualization"
-      },
-      "trendDown": {
-        "$type": "color",
-        "$value": "{color.palette.red.500}",
-        "$extensions": {
-          "design.paths.light": "{color.palette.red.500}",
-          "design.paths.dark": "{color.palette.red.400}"
+        "up": {
+          "$type": "color",
+          "$value": "{color.palette.green.500}",
+          "$description": "Positive trend indicator"
         },
-        "$description": "Downward trend color for data visualization"
-      },
-      "trendNeutral": {
-        "$type": "color",
-        "$value": "{color.palette.neutral.500}",
-        "$extensions": {
-          "design.paths.light": "{color.palette.neutral.500}",
-          "design.paths.dark": "{color.palette.neutral.400}"
+        "down": {
+          "$type": "color",
+          "$value": "{color.palette.red.500}",
+          "$description": "Negative trend indicator"
         },
-        "$description": "Neutral trend color for data visualization"
-      },
-      "trendUp": {
-        "$type": "color",
-        "$value": "{color.palette.green.500}",
-        "$extensions": {
-          "design.paths.light": "{color.palette.green.500}",
-          "design.paths.dark": "{color.palette.green.400}"
-        },
-        "$description": "Upward trend color for data visualization"
+        "neutral": {
+          "$type": "color",
+          "$value": "{color.palette.neutral.500}",
+          "$description": "Neutral trend indicator"
+        }
       }
     },
     "gradient": {
-      "brandPrimary": {
-        "$type": "color",
-        "$value": "{color.palette.brand.primary.400}",
-        "$extensions": {
-          "design.paths.light": "{color.palette.brand.primary.400}",
-          "design.paths.dark": "{color.palette.brand.primary.500}"
-        },
-        "$description": "Brand primary gradient color"
+      "brand": {
+        "primary": {
+          "$type": "gradient",
+          "$value": "{color.palette.brand.primary.400}",
+          "$description": "Primary brand gradient"
+        }
       }
     },
     "overlay": {
       "scrim": {
-        "$type": "color",
-        "$value": "rgba(0,0,0,0.40)",
-        "$extensions": {
-          "design.paths.light": "rgba(0,0,0,0.40)",
-          "design.paths.dark": "rgba(0,0,0,0.60)"
+        "weak": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0,
+              0,
+              0
+            ],
+            "alpha": 0.24
+          },
+          "$description": "Light overlay scrim"
         },
-        "$description": "Standard overlay scrim color"
-      },
-      "scrimWeak": {
-        "$type": "color",
-        "$value": "rgba(0,0,0,0.24)",
-        "$extensions": {
-          "design.paths.light": "rgba(0,0,0,0.24)",
-          "design.paths.dark": "rgba(0,0,0,0.40)"
+        "medium": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0,
+              0,
+              0
+            ],
+            "alpha": 0.4
+          },
+          "$description": "Medium overlay scrim"
         },
-        "$description": "Weak overlay scrim color"
-      },
-      "scrimMedium": {
-        "$type": "color",
-        "$value": "rgba(0,0,0,0.40)",
-        "$extensions": {
-          "design.paths.light": "rgba(0,0,0,0.40)",
-          "design.paths.dark": "rgba(0,0,0,0.60)"
-        },
-        "$description": "Medium overlay scrim color"
-      },
-      "scrimStrong": {
-        "$type": "color",
-        "$value": "rgba(0,0,0,0.64)",
-        "$extensions": {
-          "design.paths.light": "rgba(0,0,0,0.64)",
-          "design.paths.dark": "rgba(0,0,0,0.80)"
-        },
-        "$description": "Strong overlay scrim color"
+        "strong": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0,
+              0,
+              0
+            ],
+            "alpha": 0.64
+          },
+          "$description": "Strong overlay scrim"
+        }
       }
     },
     "action": {
@@ -938,7 +916,6 @@
         }
       }
     },
-
     "feedback": {
       "background": {
         "success": {
@@ -1115,7 +1092,6 @@
         }
       }
     },
-
     "navigation": {
       "background": {
         "primary": {
@@ -1187,7 +1163,6 @@
         }
       }
     },
-
     "syntax": {
       "plain": {
         "$type": "color",
@@ -1273,64 +1248,8 @@
         },
         "$description": "String syntax color"
       }
-    },
-
-    "data": {
-      "trend": {
-        "default": {
-          "$type": "color",
-          "$value": "{color.palette.blue.400}",
-          "$description": "Default trend indicator"
-        },
-        "up": {
-          "$type": "color",
-          "$value": "{color.palette.green.500}",
-          "$description": "Positive trend indicator"
-        },
-        "down": {
-          "$type": "color",
-          "$value": "{color.palette.red.500}",
-          "$description": "Negative trend indicator"
-        },
-        "neutral": {
-          "$type": "color",
-          "$value": "{color.palette.neutral.500}",
-          "$description": "Neutral trend indicator"
-        }
-      }
-    },
-
-    "gradient": {
-      "brand": {
-        "primary": {
-          "$type": "gradient",
-          "$value": "{color.palette.brand.primary.400}",
-          "$description": "Primary brand gradient"
-        }
-      }
-    },
-
-    "overlay": {
-      "scrim": {
-        "weak": {
-          "$type": "color",
-          "$value": "rgba(0,0,0,0.24)",
-          "$description": "Light overlay scrim"
-        },
-        "medium": {
-          "$type": "color",
-          "$value": "rgba(0,0,0,0.40)",
-          "$description": "Medium overlay scrim"
-        },
-        "strong": {
-          "$type": "color",
-          "$value": "rgba(0,0,0,0.64)",
-          "$description": "Strong overlay scrim"
-        }
-      }
     }
   },
-
   "typography": {
     "semanticFamily": {
       "heading": {
@@ -1351,10 +1270,22 @@
       }
     },
     "body": {
-      "01": { "$type": "dimension", "$value": "{typography.ramp.5}" },
-      "02": { "$type": "dimension", "$value": "{typography.ramp.4}" },
-      "03": { "$type": "dimension", "$value": "{typography.ramp.3}" },
-      "04": { "$type": "dimension", "$value": "{typography.ramp.2}" },
+      "01": {
+        "$type": "dimension",
+        "$value": "{typography.ramp.5}"
+      },
+      "02": {
+        "$type": "dimension",
+        "$value": "{typography.ramp.4}"
+      },
+      "03": {
+        "$type": "dimension",
+        "$value": "{typography.ramp.3}"
+      },
+      "04": {
+        "$type": "dimension",
+        "$value": "{typography.ramp.2}"
+      },
       "default": {
         "fontFamily": {
           "$type": "fontFamily",
@@ -1374,7 +1305,10 @@
         },
         "letterSpacing": {
           "$type": "dimension",
-          "$value": "0em"
+          "$value": {
+            "value": 0,
+            "unit": "rem"
+          }
         }
       },
       "small": {
@@ -1397,14 +1331,32 @@
       }
     },
     "button": {
-      "01": { "$type": "dimension", "$value": "{typography.ramp.5}" },
-      "02": { "$type": "dimension", "$value": "{typography.ramp.4}" },
-      "03": { "$type": "dimension", "$value": "{typography.ramp.3}" }
+      "01": {
+        "$type": "dimension",
+        "$value": "{typography.ramp.5}"
+      },
+      "02": {
+        "$type": "dimension",
+        "$value": "{typography.ramp.4}"
+      },
+      "03": {
+        "$type": "dimension",
+        "$value": "{typography.ramp.3}"
+      }
     },
     "caption": {
-      "01": { "$type": "dimension", "$value": "{typography.ramp.3}" },
-      "02": { "$type": "dimension", "$value": "{typography.ramp.2}" },
-      "03": { "$type": "dimension", "$value": "{typography.ramp.1}" }
+      "01": {
+        "$type": "dimension",
+        "$value": "{typography.ramp.3}"
+      },
+      "02": {
+        "$type": "dimension",
+        "$value": "{typography.ramp.2}"
+      },
+      "03": {
+        "$type": "dimension",
+        "$value": "{typography.ramp.1}"
+      }
     },
     "fontWeight": {
       "black": {
@@ -1457,15 +1409,24 @@
     "letterSpacing": {
       "normal": {
         "$type": "dimension",
-        "$value": "0em"
+        "$value": {
+          "value": 0,
+          "unit": "rem"
+        }
       },
       "tight": {
         "$type": "dimension",
-        "$value": "-0.018em"
+        "$value": {
+          "value": -0.018,
+          "unit": "rem"
+        }
       },
       "wide": {
         "$type": "dimension",
-        "$value": "0.018em"
+        "$value": {
+          "value": 0.018,
+          "unit": "rem"
+        }
       }
     },
     "lineHeight": {
@@ -1551,48 +1512,106 @@
       }
     }
   },
-
   "spacing": {
     "padding": {
-      "container": { "$type": "dimension", "$value": "{spacing.size.06}" },
-      "card": { "$type": "dimension", "$value": "{spacing.size.04}" }
+      "container": {
+        "$type": "dimension",
+        "$value": "{spacing.size.06}"
+      },
+      "card": {
+        "$type": "dimension",
+        "$value": "{spacing.size.04}"
+      }
     },
     "gap": {
-      "grid": { "$type": "dimension", "$value": "{spacing.size.04}" },
-      "gridLarge": { "$type": "dimension", "$value": "{spacing.size.09}" },
-      "gridMedium": { "$type": "dimension", "$value": "{spacing.size.07}" },
-      "gridSmall": { "$type": "dimension", "$value": "{spacing.size.04}" }
+      "grid": {
+        "$type": "dimension",
+        "$value": "{spacing.size.04}"
+      },
+      "gridLarge": {
+        "$type": "dimension",
+        "$value": "{spacing.size.09}"
+      },
+      "gridMedium": {
+        "$type": "dimension",
+        "$value": "{spacing.size.07}"
+      },
+      "gridSmall": {
+        "$type": "dimension",
+        "$value": "{spacing.size.04}"
+      }
     }
   },
-
   "elevation": {
-    "default": { "$type": "shadow", "$value": "{elevation.level.1}" },
-    "depth": { "$type": "number", "$value": "{elevation.depth.0}" },
+    "default": {
+      "$type": "shadow",
+      "$value": "{elevation.level.1}"
+    },
+    "depth": {
+      "$type": "number",
+      "$value": "{elevation.depth.0}"
+    },
     "surface": {
-      "raised": { "$type": "shadow", "$value": "{elevation.level.1}" },
-      "floating": { "$type": "shadow", "$value": "{elevation.level.2}" }
+      "raised": {
+        "$type": "shadow",
+        "$value": "{elevation.level.1}"
+      },
+      "floating": {
+        "$type": "shadow",
+        "$value": "{elevation.level.2}"
+      }
     }
   },
-
   "opacity": {
-    "disabled": { "$type": "opacity", "$value": "{opacity.400}" },
-    "overlay": { "$type": "opacity", "$value": "{opacity.600}" }
+    "disabled": {
+      "$type": "opacity",
+      "$value": "{opacity.400}"
+    },
+    "overlay": {
+      "$type": "opacity",
+      "$value": "{opacity.600}"
+    }
   },
-
   "dimension": {
-    "minTarget": { "$type": "dimension", "$value": "{dimension.tapTargetMin}" },
+    "minTarget": {
+      "$type": "dimension",
+      "$value": "{dimension.tapTargetMin}"
+    },
     "buttonMinHeight": {
       "$type": "dimension",
       "$value": "{dimension.actionMinHeight}"
     },
     "breakpoint": {
-      "sm": { "$type": "dimension", "$value": "640px" },
-      "md": { "$type": "dimension", "$value": "768px" },
-      "lg": { "$type": "dimension", "$value": "1024px" },
-      "xl": { "$type": "dimension", "$value": "1280px" }
+      "sm": {
+        "$type": "dimension",
+        "$value": {
+          "value": 640,
+          "unit": "px"
+        }
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": {
+          "value": 768,
+          "unit": "px"
+        }
+      },
+      "lg": {
+        "$type": "dimension",
+        "$value": {
+          "value": 1024,
+          "unit": "px"
+        }
+      },
+      "xl": {
+        "$type": "dimension",
+        "$value": {
+          "value": 1280,
+          "unit": "px"
+        }
+      }
     }
   },
-
   "shape": {
     "radius": {
       "full": {
@@ -1634,7 +1653,10 @@
           "$type": "borderRadius",
           "$value": "{shape.radius.medium}"
         },
-        "pill": { "$type": "borderRadius", "$value": "{shape.radius.full}" }
+        "pill": {
+          "$type": "borderRadius",
+          "$value": "{shape.radius.full}"
+        }
       },
       "border": {
         "defaultWidth": {
@@ -1652,7 +1674,6 @@
       }
     }
   },
-
   "motion": {
     "interaction": {
       "press": {
@@ -1809,7 +1830,6 @@
       }
     }
   },
-
   "components": {
     "action": {
       "padding": {
@@ -1951,7 +1971,6 @@
         }
       }
     },
-
     "input": {
       "padding": {
         "composite": {
@@ -2106,7 +2125,6 @@
         }
       }
     },
-
     "navigation": {
       "padding": {
         "composite": {
@@ -2159,7 +2177,10 @@
       "height": {
         "bar": {
           "$type": "dimension",
-          "$value": "56px",
+          "$value": {
+            "value": 56,
+            "unit": "px"
+          },
           "$description": "Navigation bar height"
         },
         "item": {
@@ -2169,7 +2190,6 @@
         }
       }
     },
-
     "feedback": {
       "padding": {
         "composite": {
@@ -2223,7 +2243,6 @@
       }
     }
   },
-
   "interaction": {
     "text": {
       "hover": {
@@ -2287,14 +2306,16 @@
         },
         "$description": "Secondary action border hover"
       },
-      "active": { "$type": "color", "$value": "{color.palette.neutral.400}" },
+      "active": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.400}"
+      },
       "disabled": {
         "$type": "color",
         "$value": "{color.palette.neutral.200}"
       }
     }
   },
-
   "control": {
     "size": {
       "sm": {
@@ -2302,25 +2323,45 @@
           "$type": "dimension",
           "$value": "{spacing.size.07}"
         },
-        "paddingX": { "$type": "dimension", "$value": "{spacing.size.03}" },
-        "paddingY": { "$type": "dimension", "$value": "{spacing.size.02}" }
+        "paddingX": {
+          "$type": "dimension",
+          "$value": "{spacing.size.03}"
+        },
+        "paddingY": {
+          "$type": "dimension",
+          "$value": "{spacing.size.02}"
+        }
       },
       "md": {
         "height": {
           "$type": "dimension",
           "$value": "{spacing.size.08}"
         },
-        "paddingX": { "$type": "dimension", "$value": "{spacing.size.04}" },
-        "paddingY": { "$type": "dimension", "$value": "{spacing.size.03}" }
+        "paddingX": {
+          "$type": "dimension",
+          "$value": "{spacing.size.04}"
+        },
+        "paddingY": {
+          "$type": "dimension",
+          "$value": "{spacing.size.03}"
+        }
       },
       "lg": {
-        "height": { "$type": "dimension", "$value": "{spacing.size.09}" },
-        "paddingX": { "$type": "dimension", "$value": "{spacing.size.06}" },
-        "paddingY": { "$type": "dimension", "$value": "{spacing.size.04}" }
+        "height": {
+          "$type": "dimension",
+          "$value": "{spacing.size.09}"
+        },
+        "paddingX": {
+          "$type": "dimension",
+          "$value": "{spacing.size.06}"
+        },
+        "paddingY": {
+          "$type": "dimension",
+          "$value": "{spacing.size.04}"
+        }
       }
     }
   },
-
   "link": {
     "text": {
       "$type": "color",
@@ -2330,8 +2371,20 @@
       "$type": "color",
       "$value": "{color.palette.blue.500}"
     },
-    "decorationThickness": { "$type": "dimension", "$value": "1px" },
-    "decorationOffset": { "$type": "dimension", "$value": "2px" },
+    "decorationThickness": {
+      "$type": "dimension",
+      "$value": {
+        "value": 1,
+        "unit": "px"
+      }
+    },
+    "decorationOffset": {
+      "$type": "dimension",
+      "$value": {
+        "value": 2,
+        "unit": "px"
+      }
+    },
     "hover.text": {
       "$type": "color",
       "$value": "{color.palette.blue.600}"
@@ -2341,7 +2394,6 @@
       "$value": "{color.palette.blue.700}"
     }
   },
-
   "skeleton": {
     "background": {
       "$type": "color",
@@ -2359,7 +2411,6 @@
       "$description": "Duration of skeleton shine animation"
     }
   },
-
   "content": {
     "maxWidth": {
       "article": {
@@ -2543,29 +2594,57 @@
       }
     }
   },
-
   "datavis": {
     "onFill": {
-      "default": { "$type": "color", "$value": "{color.mode.white}" },
-      "muted": { "$type": "color", "$value": "{color.palette.neutral.100}" }
+      "default": {
+        "$type": "color",
+        "$value": "{color.mode.white}"
+      },
+      "muted": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.100}"
+      }
     },
     "gridline": {
-      "major": { "$type": "color", "$value": "{color.palette.neutral.300}" },
-      "minor": { "$type": "color", "$value": "{color.palette.neutral.200}" }
+      "major": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.300}"
+      },
+      "minor": {
+        "$type": "color",
+        "$value": "{color.palette.neutral.200}"
+      }
     },
     "strokeWidth": {
-      "series": { "$type": "dimension", "$value": "2px" },
-      "grid": { "$type": "dimension", "$value": "1px" }
+      "series": {
+        "$type": "dimension",
+        "$value": {
+          "value": 2,
+          "unit": "px"
+        }
+      },
+      "grid": {
+        "$type": "dimension",
+        "$value": {
+          "value": 1,
+          "unit": "px"
+        }
+      }
     }
   },
-
   "component": {
     "pagination": {
       "gapX": {
         "$type": "dimension",
         "$value": "{spacing.size.02}"
       },
-      "minSize": { "$type": "dimension", "$value": "32px" }
+      "minSize": {
+        "$type": "dimension",
+        "$value": {
+          "value": 32,
+          "unit": "px"
+        }
+      }
     },
     "foreground": {
       "$type": "color",
@@ -2573,8 +2652,14 @@
     },
     "typography": {
       "variation": {
-        "wghtHeading": { "$type": "number", "$value": 700 },
-        "wdthResponsive": { "$type": "number", "$value": 100 }
+        "wghtHeading": {
+          "$type": "number",
+          "$value": 700
+        },
+        "wdthResponsive": {
+          "$type": "number",
+          "$value": 100
+        }
       }
     },
     "otp": {
@@ -2584,11 +2669,17 @@
       },
       "fieldMinWidth": {
         "$type": "dimension",
-        "$value": "48px"
+        "$value": {
+          "value": 48,
+          "unit": "px"
+        }
       },
       "fieldHeight": {
         "$type": "dimension",
-        "$value": "48px"
+        "$value": {
+          "value": 48,
+          "unit": "px"
+        }
       },
       "fieldFontSize": {
         "$type": "dimension",
@@ -2620,12 +2711,51 @@
       }
     },
     "test": {
-      "dsSemanticColorBgPrimary": { "$type": "color", "$value": "#ffffff" },
-      "customSemanticColorBgPrimary": { "$type": "color", "$value": "#ffffff" },
-      "myCustomBg": { "$type": "color", "$value": "#007bff" },
-      "path": { "$type": "string", "$value": "test-path" },
-      "typeWghtHeading": { "$type": "number", "$value": 700 },
-      "typeWdthResponsive": { "$type": "number", "$value": 100 }
+      "dsSemanticColorBgPrimary": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      "customSemanticColorBgPrimary": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      "myCustomBg": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0,
+            0.4823529411764706,
+            1
+          ]
+        }
+      },
+      "path": {
+        "$type": "string",
+        "$value": "test-path"
+      },
+      "typeWghtHeading": {
+        "$type": "number",
+        "$value": 700
+      },
+      "typeWdthResponsive": {
+        "$type": "number",
+        "$value": 100
+      }
     }
   },
   "focus": {
@@ -2655,7 +2785,15 @@
   "overlay": {
     "scrimWeak": {
       "$type": "color",
-      "$value": "rgba(0,0,0,0.24)",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0,
+          0,
+          0
+        ],
+        "alpha": 0.24
+      },
       "$extensions": {
         "design.paths.light": "rgba(0,0,0,0.24)",
         "design.paths.dark": "rgba(0,0,0,0.40)"
@@ -2664,7 +2802,15 @@
     },
     "scrimMedium": {
       "$type": "color",
-      "$value": "rgba(0,0,0,0.40)",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0,
+          0,
+          0
+        ],
+        "alpha": 0.4
+      },
       "$extensions": {
         "design.paths.light": "rgba(0,0,0,0.40)",
         "design.paths.dark": "rgba(0,0,0,0.60)"
@@ -2673,7 +2819,15 @@
     },
     "scrimStrong": {
       "$type": "color",
-      "$value": "rgba(0,0,0,0.64)",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0,
+          0,
+          0
+        ],
+        "alpha": 0.64
+      },
       "$extensions": {
         "design.paths.light": "rgba(0,0,0,0.64)",
         "design.paths.dark": "rgba(0,0,0,0.80)"

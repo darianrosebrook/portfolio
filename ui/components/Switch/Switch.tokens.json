@@ -60,7 +60,7 @@
       },
       "md": {
         "track": {
-          "width": "{core.spacing.size.10}",
+          "width": "{core.spacing.size.12}",
           "height": "{core.spacing.size.06}",
           "radius": "{core.shape.radius.full}"
         },
@@ -73,7 +73,7 @@
       },
       "lg": {
         "track": {
-          "width": "{core.spacing.size.10}",
+          "width": "{core.spacing.size.14}",
           "height": "{core.spacing.size.07}",
           "radius": "{core.shape.radius.full}"
         },

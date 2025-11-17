@@ -8,6 +8,7 @@ import React, {
   useEffect,
   useState,
   useCallback,
+  useMemo,
   forwardRef,
   MutableRefObject,
 } from 'react';
@@ -158,7 +159,8 @@ const Popover: React.FC<PopoverProps> & {
         }
       }
 
-      setPosition({ top, left });
+      const newPosition = { top, left };
+      setPosition(newPosition);
     }
   }, [offset, placement, anchorEl]);
 
@@ -198,24 +200,71 @@ const Popover: React.FC<PopoverProps> & {
     };
   }, [isOpen, closeOnOutsideClick, closeOnEscape, anchorEl, setIsOpen]);
 
+  // Memoize context value to avoid unnecessary re-renders
+  const contextValue = useMemo(
+    () => ({
+      popoverId,
+      triggerRef,
+      contentRef,
+      position,
+      updatePosition,
+      isOpen,
+      setIsOpen,
+      offset,
+      placement,
+      triggerStrategy,
+      closeOnOutsideClick,
+      closeOnEscape,
+      anchorEl,
+    }),
+    [
+      popoverId,
+      triggerRef,
+      contentRef,
+      position,
+      updatePosition,
+      isOpen,
+      setIsOpen,
+      offset,
+      placement,
+      triggerStrategy,
+      closeOnOutsideClick,
+      closeOnEscape,
+      anchorEl,
+    ]
+  );
+
+  // Focus management: store previous focus and return it on close
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const previousFocus = document.activeElement as HTMLElement;
+
+    // Set initial focus to content or first focusable element
+    const focusElement =
+      contentRef.current?.querySelector(
+        '[autofocus], button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      ) || contentRef.current;
+
+    if (
+      focusElement &&
+      typeof (focusElement as HTMLElement).focus === 'function'
+    ) {
+      (focusElement as HTMLElement).focus();
+    }
+
+    return () => {
+      // Return focus to trigger or previous element
+      if (triggerRef.current && document.contains(triggerRef.current)) {
+        triggerRef.current.focus();
+      } else if (previousFocus && document.contains(previousFocus)) {
+        previousFocus.focus();
+      }
+    };
+  }, [isOpen, contentRef, triggerRef]);
+
   return (
-    <PopoverContext.Provider
-      value={{
-        popoverId,
-        triggerRef,
-        contentRef,
-        position,
-        updatePosition,
-        isOpen,
-        setIsOpen,
-        offset,
-        placement,
-        triggerStrategy,
-        closeOnOutsideClick,
-        closeOnEscape,
-        anchorEl,
-      }}
-    >
+    <PopoverContext.Provider value={contextValue}>
       <div className={`${styles.popoverContainer} ${className || ''}`}>
         {children}
       </div>
@@ -339,7 +388,6 @@ const Content: React.FC<ContentProps> = ({
       // Setup resize observer to handle content size changes
       const resizeObserver = new ResizeObserver(() => {
         updatePosition();
-        onPositionUpdate?.(position);
       });
       resizeObserver.observe(contentRef.current);
 
@@ -362,7 +410,6 @@ const Content: React.FC<ContentProps> = ({
       // Event listeners for window resize and scroll
       const handleUpdate = () => {
         updatePosition();
-        onPositionUpdate?.(position);
       };
       window.addEventListener('resize', handleUpdate);
       window.addEventListener('scroll', handleUpdate);
@@ -371,11 +418,19 @@ const Content: React.FC<ContentProps> = ({
         resizeObserver.disconnect();
         window.removeEventListener('resize', handleUpdate);
         window.removeEventListener('scroll', handleUpdate);
-        if (animationRef.current) animationRef.current.kill();
+        if (animationRef.current) {
+          animationRef.current.kill();
+        }
         contentElement.style.transform = '';
         contentElement.style.opacity = '';
       };
     }
+    // Ensure cleanup even if contentRef.current is null
+    return () => {
+      if (animationRef.current) {
+        animationRef.current.kill();
+      }
+    };
   }, [updatePosition, isOpen, contentRef, getMotionTokens]);
 
   useLayoutEffect(() => {
@@ -395,6 +450,13 @@ const Content: React.FC<ContentProps> = ({
       };
     }
   }, [isOpen, contentRef, getMotionTokens]);
+
+  // Call onPositionUpdate when position changes
+  useEffect(() => {
+    if (isOpen && onPositionUpdate) {
+      onPositionUpdate(position);
+    }
+  }, [position, isOpen, onPositionUpdate]);
 
   if (!isOpen) return null;
 

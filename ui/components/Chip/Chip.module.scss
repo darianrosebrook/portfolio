@@ -42,15 +42,17 @@
 
   // Hover and active states
   &:hover {
-    background-color: var(--chip-color-background-hover);
-    border-color: var(--chip-color-border-hover);
+    // Use color-mix() for dynamic hover effect
+    background-color: color-mix(in srgb, var(--chip-color-background-default) 90%, var(--chip-color-background-hover) 10%);
+    border-color: color-mix(in srgb, var(--chip-color-border-default) 80%, var(--chip-color-border-hover) 20%);
     color: var(--chip-color-foreground-hover);
     text-decoration: none;
   }
 
   &:active {
-    background-color: var(--chip-color-background-active);
-    border-color: var(--chip-color-border-active);
+    // Use color-mix() for dynamic active effect
+    background-color: color-mix(in srgb, var(--chip-color-background-default) 85%, black 15%);
+    border-color: color-mix(in srgb, var(--chip-color-border-default) 85%, black 15%);
     color: var(--chip-color-foreground-active);
     transform: scale(var(--chip-motion-scale-pressed));
   }
@@ -62,14 +64,15 @@
     color: var(--chip-color-foreground-selected);
 
     &:hover {
-      background-color: var(--chip-color-background-selectedHover);
-      border-color: var(--chip-color-border-selectedHover);
+      // Use color-mix() for selected hover effect
+      background-color: color-mix(in srgb, var(--chip-color-background-selected) 90%, white 10%);
+      border-color: color-mix(in srgb, var(--chip-color-border-selected) 85%, white 15%);
       color: var(--chip-color-foreground-selectedHover);
     }
 
     &:active {
-      background-color: var(--chip-color-background-selectedActive);
-      border-color: var(--chip-color-border-selectedActive);
+      background-color: color-mix(in srgb, var(--chip-color-background-selected) 85%, black 15%);
+      border-color: color-mix(in srgb, var(--chip-color-border-selected) 85%, black 15%);
       color: var(--chip-color-foreground-selectedActive);
     }
   }
@@ -100,7 +103,7 @@
     align-items: center;
     width: var(--chip-size-icon-size);
     height: var(--chip-size-icon-size);
-    margin-left: var(--chip-size-icon-margin);
+    margin-inline-start: var(--chip-size-icon-margin);
     color: var(--chip-color-icon-default);
     transition: color var(--chip-motion-duration-fast)
       var(--chip-motion-easing-standard);

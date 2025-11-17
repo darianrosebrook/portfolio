@@ -89,17 +89,17 @@
       },
       "radius": {
         "default": {
-          "$type": "borderRadius",
+          "$type": "dimension",
           "$value": "{shape.radius.02}",
           "$description": "Default action border radius"
         },
         "rounded": {
-          "$type": "borderRadius",
+          "$type": "dimension",
           "$value": "{shape.radius.03}",
           "$description": "Rounded action border radius"
         },
         "pill": {
-          "$type": "borderRadius",
+          "$type": "dimension",
           "$value": "{shape.radius.full}",
           "$description": "Pill-shaped action border radius"
         }
@@ -229,29 +229,19 @@
       },
       "radius": {
         "default": {
-          "$type": "borderRadius",
+          "$type": "dimension",
           "$value": "{shape.radius.medium}",
           "$description": "Default input border radius"
         },
         "rounded": {
-          "$type": "borderRadius",
+          "$type": "dimension",
           "$value": "{shape.radius.03}",
           "$description": "Rounded input border radius"
         }
       },
       "border": {
-        "width": {
-          "default": {
-            "$type": "borderWidth",
-            "$value": "{shape.border.width.hairline}",
-            "$description": "Default input border width"
-          },
-          "focus": {
-            "$type": "borderWidth",
-            "$value": "{shape.border.width.thick}",
-            "$description": "Input focus border width"
-          }
-        }
+        "$type": "color",
+        "$value": "{semantic.color.border.default}"
       },
       "gap": {
         "icon": {
@@ -301,10 +291,6 @@
       "foreground": {
         "$type": "color",
         "$value": "{semantic.color.foreground.primary}"
-      },
-      "border": {
-        "$type": "color",
-        "$value": "{semantic.color.border.default}"
       },
       "paddingX": {
         "$type": "dimension",
@@ -367,7 +353,10 @@
       "height": {
         "bar": {
           "$type": "dimension",
-          "$value": "56px",
+          "$value": {
+            "value": 56,
+            "unit": "px"
+          },
           "$description": "Navigation bar height"
         },
         "item": {
@@ -416,7 +405,7 @@
       },
       "radius": {
         "default": {
-          "$type": "borderRadius",
+          "$type": "dimension",
           "$value": "{shape.radius.02}",
           "$description": "Default feedback border radius"
         }
@@ -480,7 +469,7 @@
           "$value": "{semantic.color.border.strong}"
         },
         "radius": {
-          "$type": "borderRadius",
+          "$type": "dimension",
           "$value": "{semantic.shape.radius.default}"
         },
         "paddingX": {
@@ -522,7 +511,7 @@
           "$value": "{semantic.color.foreground.onInfoSubtle}"
         },
         "radius": {
-          "$type": "borderRadius",
+          "$type": "dimension",
           "$value": "{semantic.shape.radius.small}"
         },
         "paddingX": {

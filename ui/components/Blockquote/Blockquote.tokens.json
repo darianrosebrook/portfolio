@@ -23,7 +23,10 @@
         "indent": "{space.500}"
       },
       "border": {
-        "width": "3px",
+        "width": {
+          "value": 3,
+          "unit": "px"
+        },
         "style": "solid",
         "color": "{color.border.accent}",
         "radius": "{radius.md}"

@@ -1,7 +1,5 @@
 import { calculateContrast } from '@/utils/helpers/colorHelpers';
-import { useMemo } from 'react';
 import Style from './swatches.module.scss';
-
 type ColorSwatchProps = {
   token: string;
   value: string;
@@ -13,12 +11,8 @@ export const ColorSwatch: React.FC<ColorSwatchProps> = ({
   value,
   colorName,
 }) => {
-  // Memoize contrast calculation to avoid recalculation on re-renders
-  const { textColor, borderColor } = useMemo(() => {
-    const contrast = calculateContrast(value);
-    const textColor = contrast > 128 ? 'black' : 'white';
-    return { textColor, borderColor: textColor };
-  }, [value]);
+  const textColor = calculateContrast(value) > 128 ? 'black' : 'white';
+  const borderColor = textColor;
 
   return (
     <div className={Style.isometricContainer}>

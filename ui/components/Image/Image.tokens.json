@@ -2,29 +2,59 @@
   "component": {
     "image": {
       "size": {
-        "xs": "4rem",
-        "sm": "6rem",
-        "md": "8rem",
-        "lg": "12rem",
-        "xl": "16rem",
-        "full": "100%"
+        "xs": {
+          "value": 4,
+          "unit": "rem"
+        },
+        "sm": {
+          "value": 6,
+          "unit": "rem"
+        },
+        "md": {
+          "value": 8,
+          "unit": "rem"
+        },
+        "lg": {
+          "value": 12,
+          "unit": "rem"
+        },
+        "xl": {
+          "value": 16,
+          "unit": "rem"
+        },
+        "full": {
+          "value": 100,
+          "unit": "%"
+        }
       },
       "radius": {
-        "none": "0",
+        "none": {
+          "value": 0,
+          "unit": "px"
+        },
         "sm": "{radius.sm}",
         "md": "{radius.md}",
         "lg": "{radius.lg}",
-        "full": "999px"
+        "full": {
+          "value": 999,
+          "unit": "px"
+        }
       },
       "placeholder": {
         "bg": "{color.background.muted}",
         "color": "{color.foreground.subtle}",
-        "iconSize": "2rem"
+        "iconSize": {
+          "value": 2,
+          "unit": "rem"
+        }
       },
       "error": {
         "bg": "{color.background.subtle}",
         "color": "{color.foreground.muted}",
-        "iconSize": "1.5rem",
+        "iconSize": {
+          "value": 1.5,
+          "unit": "rem"
+        },
         "fontSize": "{font.size.200}"
       },
       "loading": {

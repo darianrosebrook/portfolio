@@ -1,6 +1,5 @@
 /** Headless logic hook for Popover */
 import * as React from 'react';
-import { isHTMLElement } from '@/utils/type-guards';
 
 export interface UsePopoverOptions {
   /** Initial open state */
@@ -39,13 +38,10 @@ export function usePopover(options: UsePopoverOptions = {}): UsePopoverReturn {
   React.useEffect(() => {
     if (!isOpen || !closeOnOutsideClick) return;
     function handlePointerDown(event: MouseEvent) {
-      const target = event.target;
-      // Check if target is an Element first, then if it's an HTMLElement
-      if (!target || !(target instanceof Element) || !isHTMLElement(target)) {
-        return;
-      }
+      const target = event.target as Node | null;
       const trigger = triggerRef.current;
       const content = contentRef.current;
+      if (!target) return;
       if (trigger?.contains(target)) return;
       if (content?.contains(target)) return;
       setIsOpen(false);
@@ -54,7 +50,7 @@ export function usePopover(options: UsePopoverOptions = {}): UsePopoverReturn {
     return () =>
       window.removeEventListener('mousedown', handlePointerDown, {
         capture: true,
-      } as EventListenerOptions);
+      } as any);
   }, [isOpen, closeOnOutsideClick]);
 
   // Handle Escape key
@@ -66,6 +62,35 @@ export function usePopover(options: UsePopoverOptions = {}): UsePopoverReturn {
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [isOpen, closeOnEscape]);
+
+  // Focus management
+  React.useEffect(() => {
+    if (!isOpen) return;
+
+    const trigger = triggerRef.current;
+    const content = contentRef.current;
+
+    // Store previously focused element for return focus
+    const previousFocusedElement = document.activeElement as HTMLElement;
+
+    // Set initial focus to first focusable element in content
+    const focusableElement = content?.querySelector(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    ) as HTMLElement;
+
+    if (focusableElement) {
+      focusableElement.focus();
+    }
+
+    return () => {
+      // Return focus to trigger when popover closes
+      if (trigger && document.contains(trigger)) {
+        trigger.focus();
+      } else if (previousFocusedElement && document.contains(previousFocusedElement)) {
+        previousFocusedElement.focus();
+      }
+    };
+  }, [isOpen]);
 
   return { isOpen, open, close, toggle, triggerRef, contentRef };
 }

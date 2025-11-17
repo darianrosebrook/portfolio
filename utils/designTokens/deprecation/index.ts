@@ -1,6 +1,6 @@
 /**
  * Design Token Deprecation System
- *
+ * 
  * Provides warnings and migration guidance for deprecated tokens
  */
 
@@ -137,7 +137,9 @@ export function formatDeprecationWarning(
 /**
  * Validate deprecation dates
  */
-export function validateDeprecations(deprecations: DeprecationInfo[]): {
+export function validateDeprecations(
+  deprecations: DeprecationInfo[]
+): {
   warnings: string[];
   errors: string[];
 } {
@@ -175,3 +177,4 @@ export function validateDeprecations(deprecations: DeprecationInfo[]): {
 
   return { warnings, errors };
 }
+

@@ -10,7 +10,10 @@
       },
       "minSize": {
         "$type": "dimension",
-        "$value": "32px"
+        "$value": {
+          "value": 32,
+          "unit": "px"
+        }
       }
     },
     "foreground": {
@@ -39,11 +42,17 @@
         },
         "minWidth": {
           "$type": "dimension",
-          "$value": "48px"
+          "$value": {
+            "value": 48,
+            "unit": "px"
+          }
         },
         "height": {
           "$type": "dimension",
-          "$value": "48px"
+          "$value": {
+            "value": 48,
+            "unit": "px"
+          }
         },
         "fontSize": {
           "$type": "dimension",
@@ -54,7 +63,7 @@
           "$value": "{typography.fontWeight.medium}"
         },
         "radius": {
-          "$type": "borderRadius",
+          "$type": "dimension",
           "$value": "{shape.radius.02}"
         }
       },
@@ -88,7 +97,14 @@
       },
       "myCustomBg": {
         "$type": "color",
-        "$value": "#007bff"
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0,
+            0.4823529411764706,
+            1
+          ]
+        }
       },
       "path": {
         "$type": "string",

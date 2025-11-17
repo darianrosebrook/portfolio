@@ -3,6 +3,9 @@
 .badge {
   @include badgeTokens.vars;
 
+  // Container queries for responsive sizing
+  container-type: inline-size;
+
   display: inline-flex;
   vertical-align: baseline;
   gap: var(--badge-spacing-gap);
@@ -20,6 +23,13 @@
     box-shadow: var(--badge-elevation-default);
     color: var(--badge-color-foreground-primary);
     font-size: var(--badge-size-md-fontSize);
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+
+    &:hover {
+      // Use color-mix() for dynamic hover effect
+      background-color: color-mix(in srgb, var(--badge-color-background-default) 90%, var(--badge-color-border-default) 10%);
+      border-color: color-mix(in srgb, var(--badge-color-border-default) 80%, var(--badge-color-foreground-primary) 20%);
+    }
   }
 
   // Status variant (replaces Status component)
@@ -29,29 +39,51 @@
     border-radius: var(--badge-size-md-radius);
     box-shadow: var(--badge-elevation-status);
     font-size: var(--badge-size-md-fontSize);
+    transition: background-color 0.2s ease, border-color 0.2s ease;
 
     &.info {
       background: var(--badge-color-background-info);
       border-color: var(--badge-color-border-info);
       color: var(--badge-color-foreground-info);
+
+      &:hover {
+        // Use color-mix() for dynamic hover effect
+        background-color: color-mix(in srgb, var(--badge-color-background-info) 85%, white 15%);
+        border-color: color-mix(in srgb, var(--badge-color-border-info) 80%, white 20%);
+      }
     }
 
     &.success {
       background: var(--badge-color-background-success);
       border-color: var(--badge-color-border-success);
       color: var(--badge-color-foreground-success);
+
+      &:hover {
+        background-color: color-mix(in srgb, var(--badge-color-background-success) 85%, white 15%);
+        border-color: color-mix(in srgb, var(--badge-color-border-success) 80%, white 20%);
+      }
     }
 
     &.warning {
       background: var(--badge-color-background-warning);
       border-color: var(--badge-color-border-warning);
       color: var(--badge-color-foreground-warning);
+
+      &:hover {
+        background-color: color-mix(in srgb, var(--badge-color-background-warning) 85%, white 15%);
+        border-color: color-mix(in srgb, var(--badge-color-border-warning) 80%, white 20%);
+      }
     }
 
     &.danger {
       background: var(--badge-color-background-danger);
       border-color: var(--badge-color-border-danger);
       color: var(--badge-color-foreground-danger);
+
+      &:hover {
+        background-color: color-mix(in srgb, var(--badge-color-background-danger) 85%, white 15%);
+        border-color: color-mix(in srgb, var(--badge-color-border-danger) 80%, white 20%);
+      }
     }
   }
 
@@ -127,6 +159,50 @@
 .badge.lg .icon {
   width: var(--badge-size-lg-iconSize);
   height: var(--badge-size-lg-iconSize);
+}
+
+// Container queries for responsive badge sizing
+@supports (container-type: inline-size) {
+  .badge {
+    @container (max-width: 10rem) {
+      // Compact badge for small containers
+      gap: calc(var(--badge-spacing-gap) * 0.75);
+      font-size: calc(var(--badge-size-md-fontSize) * 0.9);
+
+      &.sm {
+        padding: calc(var(--badge-size-sm-paddingY) * 0.75) calc(var(--badge-size-sm-paddingX) * 0.75);
+        font-size: calc(var(--badge-size-sm-fontSize) * 0.9);
+      }
+
+      &.md {
+        padding: calc(var(--badge-size-md-paddingY) * 0.75) calc(var(--badge-size-md-paddingX) * 0.75);
+        font-size: calc(var(--badge-size-md-fontSize) * 0.9);
+      }
+
+      &.lg {
+        padding: calc(var(--badge-size-lg-paddingY) * 0.75) calc(var(--badge-size-lg-paddingX) * 0.75);
+        font-size: calc(var(--badge-size-lg-fontSize) * 0.9);
+      }
+    }
+
+    @container (max-width: 6rem) {
+      // Minimal badge for very small containers
+      gap: calc(var(--badge-spacing-gap) * 0.5);
+      font-size: calc(var(--badge-size-md-fontSize) * 0.8);
+
+      &.sm,
+      &.md,
+      &.lg {
+        padding: calc(var(--badge-size-sm-paddingY) * 0.5) calc(var(--badge-size-sm-paddingX) * 0.5);
+        font-size: calc(var(--badge-size-sm-fontSize) * 0.8);
+      }
+
+      .icon {
+        width: calc(var(--badge-size-sm-iconSize) * 0.8);
+        height: calc(var(--badge-size-sm-iconSize) * 0.8);
+      }
+    }
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

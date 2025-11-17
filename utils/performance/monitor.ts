@@ -47,7 +47,10 @@ class PerformanceMonitor {
   }
 
   /**
-   * Initialize performance observers for Core Web Vitals
+   * Initialize performance observers for Core Web Vitals and custom metrics.
+   *
+   * Sets up observers for LCP, FID, CLS, and other performance metrics.
+   * Only initializes if running in browser environment.
    */
   private initializeObservers() {
     // First Contentful Paint
@@ -123,6 +126,12 @@ class PerformanceMonitor {
   /**
    * Track component load time
    */
+  /**
+   * Track component load time for performance monitoring.
+   *
+   * @param componentName - Name/identifier of the component
+   * @param startTime - Timestamp when component loading started (performance.now())
+   */
   trackComponentLoad(componentName: string, startTime: number) {
     const loadTime = performance.now() - startTime;
     this.customMetrics.componentLoadTime[componentName] = loadTime;
@@ -131,6 +140,12 @@ class PerformanceMonitor {
 
   /**
    * Track API response time
+   */
+  /**
+   * Track API response time for performance monitoring.
+   *
+   * @param endpoint - API endpoint URL or identifier
+   * @param responseTime - Response time in milliseconds
    */
   trackApiResponse(endpoint: string, responseTime: number) {
     this.customMetrics.apiResponseTime[endpoint] = responseTime;
@@ -172,6 +187,39 @@ class PerformanceMonitor {
   }
 
   /**
+   * Track a custom performance metric with optional metadata.
+   *
+   * This is a generic method for tracking any performance metric that doesn't
+   * fit into the predefined tracking methods. Used by advanced monitoring
+   * utilities for CSS features, bundle analysis, and runtime metrics.
+   *
+   * @param name - Name/identifier of the metric
+   * @param value - Numeric value of the metric
+   * @param metadata - Optional metadata object for additional context
+   *
+   * @example
+   * ```typescript
+   * performanceMonitor.trackMetric('css_computation_time', 15.5, {
+   *   componentName: 'Button'
+   * });
+   * ```
+   */
+  trackMetric(name: string, value: number, metadata?: Record<string, unknown>) {
+    // Store metric in a custom metrics store if needed
+    // For now, we'll log it and send to analytics
+    this.logMetric(name, value);
+
+    // Send to analytics if available
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      (window as any).gtag('event', 'performance_metric', {
+        metric_name: name,
+        value: value,
+        ...metadata,
+      });
+    }
+  }
+
+  /**
    * Log performance metric
    */
   private logMetric(name: string, value: number) {
@@ -189,6 +237,11 @@ class PerformanceMonitor {
   /**
    * Get all performance metrics
    */
+  /**
+   * Get current performance metrics snapshot.
+   *
+   * @returns Combined Core Web Vitals and custom performance metrics
+   */
   getMetrics(): PerformanceMetrics & CustomMetrics {
     return {
       ...this.metrics,
@@ -198,6 +251,11 @@ class PerformanceMonitor {
 
   /**
    * Get performance report
+   */
+  /**
+   * Generate a comprehensive performance report.
+   *
+   * @returns Human-readable performance report with scores and recommendations
    */
   getReport() {
     const metrics = this.getMetrics();

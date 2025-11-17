@@ -7,7 +7,7 @@
         "default": "{semantic.color.action.background.secondary.default}",
         "hover": "{semantic.color.action.background.secondary.hover}",
         "active": "{semantic.color.action.background.secondary.active}",
-        "focus": "{semantic.color.background.primary}",
+        "focus": "{semantic.color.mode.white}",
         "selected": "{semantic.color.action.background.primary.default}",
         "selectedHover": "{semantic.color.action.background.primary.hover}",
         "selectedActive": "{semantic.color.action.background.primary.active}",
@@ -48,7 +48,6 @@
         "dismissibleHover": "{semantic.color.action.foreground.secondary.default}"
       }
     },
-
     "size": {
       "padding": {
         "horizontal": "{core.spacing.size.04}",
@@ -62,13 +61,11 @@
         "margin": "{core.spacing.size.01}"
       }
     },
-
     "text": {
       "size": "{semantic.typography.body.04}",
       "weight": "{semantic.typography.fontWeight.medium}",
       "lineHeight": "{semantic.typography.lineHeight.tight}"
     },
-
     "motion": {
       "duration": {
         "fast": "{core.motion.duration.short}",
@@ -77,8 +74,8 @@
       },
       "easing": {
         "standard": "{core.motion.easing.standard}",
-        "in": "{core.motion.easing.quick.enter}",
-        "out": "{core.motion.easing.quick.exit}"
+        "in": "{core.motion.easing.in}",
+        "out": "{core.motion.easing.out}"
       },
       "scale": {
         "pressed": 0.98,
@@ -86,7 +83,6 @@
         "iconExit": 0.8
       }
     },
-
     "focus": {
       "outlineWidth": "{core.shape.border.width.thick}",
       "outlineOffset": "{core.spacing.size.02}",

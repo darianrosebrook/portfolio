@@ -18,7 +18,6 @@ export type DocInteractiveProps = {
     device?: 'desktop' | 'tablet' | 'phone' | 'none';
     reducedMotion?: 'system' | 'on' | 'off';
     theme?: 'system' | 'light' | 'dark' | string;
-    dir?: 'ltr' | 'rtl';
   };
   editor?: {
     engine?: 'monaco' | 'codemirror' | 'sandpack';
@@ -46,6 +45,13 @@ export function DocInteractive({
   // MVP: vertically stacked editor + preview using Sandpack-backed workbench
   const containerRef = React.useRef<HTMLDivElement>(null);
   const [rootEl, setRootEl] = React.useState<HTMLDivElement | null>(null);
+  const rootHolderRef = React.useRef<HTMLDivElement | null>(null);
+  const handleRootRef = React.useCallback((node: HTMLDivElement | null) => {
+    if (rootHolderRef.current !== node) {
+      rootHolderRef.current = node;
+      setRootEl(node);
+    }
+  }, []);
   const [activeFile, setActiveFile] = React.useState<string | undefined>(
     undefined
   );
@@ -100,18 +106,6 @@ export function DocInteractive({
   );
   const stableSections = React.useMemo(() => sections, [sectionsKey]);
 
-  // Simple hash function for content comparison
-  const simpleHash = React.useCallback((str: string): string => {
-    let hash = 0;
-    const content = String(str);
-    for (let i = 0; i < Math.min(content.length, 100); i++) {
-      const char = content.charCodeAt(i);
-      hash = (hash << 5) - hash + char;
-      hash = hash & hash; // Convert to 32-bit integer
-    }
-    return hash.toString(36);
-  }, []);
-
   // Stable project reference to prevent CodeWorkbench re-renders
   // Compare by serializing file paths and contents hash
   const projectFilesKey = React.useMemo(
@@ -119,10 +113,10 @@ export function DocInteractive({
       JSON.stringify(
         project.files.map((f) => ({
           path: f.path,
-          hash: simpleHash(String(f.contents)),
+          hash: String(f.contents).slice(0, 50),
         }))
       ),
-    [project.files, simpleHash]
+    [project.files]
   );
   const stableProject = React.useMemo(() => project, [projectFilesKey]);
 
@@ -164,30 +158,6 @@ export function DocInteractive({
   const themeClassName =
     preview?.theme && preview.theme !== 'system' ? preview.theme : undefined;
 
-  // Apply RTL direction to preview iframe
-  React.useEffect(() => {
-    if (preview?.dir && preview.runtime === 'iframe') {
-      const iframe =
-        document.querySelector<HTMLIFrameElement>('.sp-preview-iframe');
-      if (iframe?.contentDocument?.documentElement) {
-        iframe.contentDocument.documentElement.setAttribute('dir', preview.dir);
-      }
-      // Also watch for iframe creation (Sandpack may recreate it)
-      const observer = new MutationObserver(() => {
-        const iframeEl =
-          document.querySelector<HTMLIFrameElement>('.sp-preview-iframe');
-        if (iframeEl?.contentDocument?.documentElement) {
-          iframeEl.contentDocument.documentElement.setAttribute(
-            'dir',
-            preview.dir || 'ltr'
-          );
-        }
-      });
-      observer.observe(document.body, { childList: true, subtree: true });
-      return () => observer.disconnect();
-    }
-  }, [preview?.dir, preview?.runtime]);
-
   // Create reset keys from project and sections identifiers - use stable references
   const projectKey = React.useMemo(
     () => JSON.stringify(stableProject.files.map((f) => f.path).sort()),
@@ -219,7 +189,7 @@ export function DocInteractive({
             height: '100%',
             minHeight: 320,
           }}
-          ref={setRootEl as unknown as React.Ref<HTMLDivElement>}
+          ref={handleRootRef}
         >
           <SectionSync
             sections={stableSections}

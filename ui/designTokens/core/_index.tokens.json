@@ -3,24 +3,24 @@
   "meta": {
     "version": "1.0.0",
     "source": "Core tokens - modular structure",
-    "modules": [
-      "./color.tokens.json",
-      "./typography.tokens.json",
-      "./scale.tokens.json",
-      "./spacing.tokens.json",
-      "./elevation.tokens.json",
-      "./opacity.tokens.json",
-      "./dimension.tokens.json",
-      "./shape.tokens.json",
-      "./motion.tokens.json",
-      "./density.tokens.json",
-      "./layer.tokens.json",
-      "./layout.tokens.json",
-      "./icon.tokens.json",
-      "./effect.tokens.json",
-      "./content.tokens.json",
-      "./interaction.tokens.json",
-      "./component.tokens.json"
-    ]
+    "modules": {
+      "0": "./color.tokens.json",
+      "1": "./typography.tokens.json",
+      "2": "./scale.tokens.json",
+      "3": "./spacing.tokens.json",
+      "4": "./elevation.tokens.json",
+      "5": "./opacity.tokens.json",
+      "6": "./dimension.tokens.json",
+      "7": "./shape.tokens.json",
+      "8": "./motion.tokens.json",
+      "9": "./density.tokens.json",
+      "10": "./layer.tokens.json",
+      "11": "./layout.tokens.json",
+      "12": "./icon.tokens.json",
+      "13": "./effect.tokens.json",
+      "14": "./content.tokens.json",
+      "15": "./interaction.tokens.json",
+      "16": "./component.tokens.json"
+    }
   }
 }

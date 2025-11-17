@@ -17,20 +17,8 @@ import {
 } from './resolver';
 import { builtInTransforms } from './transforms';
 import { Logger } from '../../helpers/logger';
-
-// ComponentTokenConfig is now imported from types.ts
-
-/**
- * Helper function to get nested object values by dot path
- */
-function get(obj: Record<string, unknown>, path: string): unknown {
-  return path.split('.').reduce((current, segment) => {
-    if (current && typeof current === 'object' && segment in current) {
-      return (current as Record<string, unknown>)[segment];
-    }
-    return undefined;
-  }, obj as unknown);
-}
+import { getNestedValue } from './pathUtils';
+import { extractTokenPaths } from '../core/index';
 
 /**
  * Builds CSS variable names with configurable casing and prefixes
@@ -217,7 +205,7 @@ export const validateTokenPath = (
 ): boolean => {
   try {
     const cleanPath = tokenPath.replace(/[{}]/g, '');
-    const node = get(designTokens, cleanPath);
+    const node = getNestedValue(designTokens, cleanPath);
 
     if (node == null) return false;
 
@@ -249,37 +237,9 @@ export function formatAsCSS(
 /**
  * Gets all available token paths from the design system
  *
+ * @deprecated Use extractTokenPaths from '../core/index' instead
  * @param designTokens - Object to traverse
  * @param prefix - Current path prefix
  * @returns Array of all available token paths
  */
-export const getAvailableTokenPaths = (
-  designTokens: Record<string, unknown>,
-  prefix = ''
-): string[] => {
-  const paths: string[] = [];
-
-  for (const [key, value] of Object.entries(designTokens)) {
-    const currentPath = prefix ? `${prefix}.${key}` : key;
-
-    if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
-      if ('$value' in value) {
-        // This is a token with a value
-        paths.push(currentPath);
-      } else {
-        // This is a nested object, recurse
-        paths.push(
-          ...getAvailableTokenPaths(
-            value as Record<string, unknown>,
-            currentPath
-          )
-        );
-      }
-    } else if (typeof value === 'string' || typeof value === 'number') {
-      // This is a direct value
-      paths.push(currentPath);
-    }
-  }
-
-  return paths;
-};
+export const getAvailableTokenPaths = extractTokenPaths;

@@ -14,8 +14,6 @@ import React, {
   useState,
 } from 'react';
 import { createPortal } from 'react-dom';
-import { mergeRefs } from '@/utils/refs';
-import { isValidReactElement } from '@/utils/type-guards';
 import styles from './Tooltip.module.scss';
 
 export interface TooltipProps {
@@ -52,17 +50,6 @@ export interface TooltipProps {
 interface Position {
   top: number;
   left: number;
-}
-
-// Type for child element props that can be merged
-interface TooltipChildProps extends React.HTMLAttributes<HTMLElement> {
-  ref?: React.Ref<HTMLElement>;
-  onMouseEnter?: (e: React.MouseEvent<HTMLElement>) => void;
-  onMouseLeave?: (e: React.MouseEvent<HTMLElement>) => void;
-  onFocus?: (e: React.FocusEvent<HTMLElement>) => void;
-  onBlur?: (e: React.FocusEvent<HTMLElement>) => void;
-  onClick?: (e: React.MouseEvent<HTMLElement>) => void;
-  'aria-describedby'?: string;
 }
 
 const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
@@ -252,51 +239,58 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     }, []);
 
     // Clone child with event handlers
-    if (!isValidReactElement(children)) {
-      throw new Error('Tooltip children must be a valid React element');
-    }
-
-    const childProps = children.props as TooltipChildProps;
-    const childRef = 'ref' in childProps ? childProps.ref : undefined;
-    const mergedTriggerRef = mergeRefs((node: HTMLElement | null) => {
-      triggerRef.current = node;
-    }, childRef);
-
     const triggerElement = React.cloneElement(
-      children as React.ReactElement<TooltipChildProps>,
+      children as React.ReactElement<any>,
       {
-        ref: mergedTriggerRef,
-        onMouseEnter: (e: React.MouseEvent<HTMLElement>) => {
-          childProps.onMouseEnter?.(e);
+        ref: (node: HTMLElement | null) => {
+          triggerRef.current = node;
+
+          // Handle forwarded ref from child
+          const childRef = (children as any).ref;
+          if (typeof childRef === 'function') {
+            childRef(node);
+          } else if (childRef) {
+            childRef.current = node;
+          }
+        },
+        onMouseEnter: (e: React.MouseEvent) => {
+          (children as any).props?.onMouseEnter?.(e);
           handleMouseEnter();
         },
-        onMouseLeave: (e: React.MouseEvent<HTMLElement>) => {
-          childProps.onMouseLeave?.(e);
+        onMouseLeave: (e: React.MouseEvent) => {
+          (children as any).props?.onMouseLeave?.(e);
           handleMouseLeave();
         },
-        onFocus: (e: React.FocusEvent<HTMLElement>) => {
-          childProps.onFocus?.(e);
+        onFocus: (e: React.FocusEvent) => {
+          (children as any).props?.onFocus?.(e);
           handleFocus();
         },
-        onBlur: (e: React.FocusEvent<HTMLElement>) => {
-          childProps.onBlur?.(e);
+        onBlur: (e: React.FocusEvent) => {
+          (children as any).props?.onBlur?.(e);
           handleBlur();
         },
-        onClick: (e: React.MouseEvent<HTMLElement>) => {
-          childProps.onClick?.(e);
+        onClick: (e: React.MouseEvent) => {
+          (children as any).props?.onClick?.(e);
           handleClick();
         },
         'aria-describedby': isVisible
           ? tooltipId
-          : childProps['aria-describedby'],
+          : (children as any).props?.['aria-describedby'],
       }
     );
 
     const tooltipNode = isVisible && (
       <div
-        ref={mergeRefs((node: HTMLDivElement | null) => {
+        ref={(node) => {
           tooltipRef.current = node;
-        }, forwardedRef)}
+          if (forwardedRef) {
+            if (typeof forwardedRef === 'function') {
+              forwardedRef(node);
+            } else {
+              forwardedRef.current = node;
+            }
+          }
+        }}
         id={tooltipId}
         role="tooltip"
         className={`${styles.tooltip} ${className}`}

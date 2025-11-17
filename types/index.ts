@@ -27,6 +27,53 @@ export type {
 
 export { normalizeStatusIntent } from './ui';
 
+// Component types
+export type {
+  BaseComponentProps,
+  InteractiveComponentProps,
+  FormFieldProps,
+  ComponentSize,
+  ComponentVariant,
+  ComponentIntent,
+  Orientation,
+  Alignment,
+  PolymorphicRef,
+  ChangeHandler,
+  ClickHandler,
+  FocusHandler,
+  KeyboardHandler,
+  MouseHandler,
+  TouchHandler,
+  EventHandler,
+  LoadingState,
+  ErrorState,
+  ValidationState,
+  AriaAttributes,
+  SelectOption,
+  CheckboxOption,
+  RadioOption,
+  ModalState,
+  DialogProps,
+  Position,
+  PositioningOptions,
+  AnimationConfig,
+  TransitionConfig,
+  ComponentMetrics,
+  ComponentWithRef,
+  MergeProps,
+  DistributiveOmit,
+  UseToggleReturn,
+  UseDisclosureReturn,
+  UseControllableStateReturn,
+  ThemeColors,
+  ThemeSpacing,
+  ThemeTypography,
+  Theme,
+  ButtonProps,
+  InputProps,
+  SelectProps,
+} from './components';
+
 // Bluesky types
 export type {
   BlueskyProfile,

@@ -4,10 +4,10 @@
 @mixin vars {
   /* === Color Tokens === */
   --alert-color-background-primary: var(--semantic-color-background-primary);
-  --alert-color-background-info: var(--semantic-color-background-info-strong);
-  --alert-color-background-success: var(--semantic-color-feedback-background-success-subtle);
-  --alert-color-background-warning: var(--semantic-color-feedback-background-warning-subtle);
-  --alert-color-background-danger: var(--semantic-color-background-danger-strong);
+  --alert-color-background-info: var(--semantic-color-background-info);
+  --alert-color-background-success: var(--semantic-color-background-success);
+  --alert-color-background-warning: var(--semantic-color-background-warning);
+  --alert-color-background-danger: var(--semantic-color-background-danger);
   --alert-color-background-infoSubtle: var(--semantic-color-background-info-subtle);
   --alert-color-background-warningSubtle: var(--semantic-color-background-warning-subtle);
   --alert-color-background-dangerSubtle: var(--semantic-color-background-danger-subtle);
@@ -44,10 +44,10 @@
   --alert-size-page-iconSize: var(--core-spacing-size-06);
 
   /* === Shadow Tokens === */
-  --alert-shadow-default: var(--semantic-elevation-surface-floating);
+  --alert-shadow-default: var(--semantic-elevation-02);
 
   /* === Text Tokens === */
-  --alert-text-font: var(--semantic-typography-body-default-font-size);
+  --alert-text-font: var(--semantic-typography-body-default);
   --alert-text-size: var(--core-spacing-size-06);
   --alert-text-weight: var(--semantic-typography-font-weight-regular);
 
@@ -59,7 +59,7 @@
   --alert-spacing-padding-horizontal: var(--core-spacing-size-06);
   --alert-spacing-padding-vertical: var(--core-spacing-size-08);
   --alert-spacing-margin-top: var(--core-spacing-size-04);
-  --alert-spacing-minHeight-default: var(--core-spacing-size-10);
+  --alert-spacing-minHeight-default: var(--core-spacing-size-12);
 
   /* === Radius Tokens === */
   --alert-radius-medium: var(--core-shape-radius-medium);

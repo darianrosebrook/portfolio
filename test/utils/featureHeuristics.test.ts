@@ -5,8 +5,8 @@ import {
   getBowl,
   getTittle,
   getEye,
-  isInside,
 } from '@/utils/geometry/geometryHeuristics';
+import { isInside } from '@/utils/geometry/geometryCore';
 
 // Minimal mock Glyph with path and bbox sufficient for heuristics that only use d/path
 function mockGlyphFromPath(

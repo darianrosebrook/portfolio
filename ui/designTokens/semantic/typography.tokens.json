@@ -55,7 +55,10 @@
         },
         "letterSpacing": {
           "$type": "dimension",
-          "$value": "0em"
+          "$value": {
+            "value": 0,
+            "unit": "em"
+          }
         }
       },
       "small": {
@@ -156,15 +159,24 @@
     "letterSpacing": {
       "normal": {
         "$type": "dimension",
-        "$value": "0em"
+        "$value": {
+          "value": 0,
+          "unit": "em"
+        }
       },
       "tight": {
         "$type": "dimension",
-        "$value": "-0.018em"
+        "$value": {
+          "value": -0.018,
+          "unit": "rem"
+        }
       },
       "wide": {
         "$type": "dimension",
-        "$value": "0.018em"
+        "$value": {
+          "value": 0.018,
+          "unit": "em"
+        }
       }
     },
     "lineHeight": {

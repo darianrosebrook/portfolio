@@ -4,15 +4,24 @@
     "backdropBlur": {
       "sm": {
         "$type": "dimension",
-        "$value": "4px"
+        "$value": {
+          "value": 4,
+          "unit": "px"
+        }
       },
       "md": {
         "$type": "dimension",
-        "$value": "8px"
+        "$value": {
+          "value": 8,
+          "unit": "px"
+        }
       },
       "lg": {
         "$type": "dimension",
-        "$value": "12px"
+        "$value": {
+          "value": 12,
+          "unit": "px"
+        }
       }
     }
   }

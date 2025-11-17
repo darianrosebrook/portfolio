@@ -1,14 +1,45 @@
+import { DetailsServer } from '@/ui/modules/Tiptap/Extensions/Details/DetailsServer';
+import { TableOfContentsServer } from '@/ui/modules/Tiptap/Extensions/TableOfContents/TableOfContentsServer';
+import { VideoServer } from '@/ui/modules/Tiptap/Extensions/VideoExtended/VideoServer';
+import Image from '@tiptap/extension-image';
+import { generateHTML } from '@tiptap/html';
 import type { JSONContent } from '@tiptap/react';
-import { processCaseStudyContent } from '@/utils/tiptap/htmlGeneration';
+import StarterKit from '@tiptap/starter-kit';
 
 /**
  * Process case study content by removing the first h1 and first image,
  * then converting to HTML
- *
- * @deprecated Use processCaseStudyContent from '@/utils/tiptap/htmlGeneration' directly
  */
-export function getCaseStudyContent(data: JSONContent | unknown): {
-  html: string;
-} {
-  return processCaseStudyContent(data);
+export function getCaseStudyContent(data: JSONContent): { html: string } {
+  if (!data || !data.content) {
+    return { html: '' };
+  }
+
+  // Create a copy of the content array
+  const content = [...data.content];
+
+  // Remove first h1 if it exists
+  const firstH1Index = content.findIndex(
+    (node) => node.type === 'heading' && node.attrs?.level === 1
+  );
+  if (firstH1Index !== -1) {
+    content.splice(firstH1Index, 1);
+  }
+
+  // Remove first image if it exists
+  const firstImageIndex = content.findIndex((node) => node.type === 'image');
+  if (firstImageIndex !== -1) {
+    content.splice(firstImageIndex, 1);
+  }
+
+  // Generate HTML from the modified content using server-side extensions
+  const html = generateHTML(
+    {
+      type: 'doc',
+      content,
+    },
+    [StarterKit, Image, DetailsServer, TableOfContentsServer, VideoServer]
+  );
+
+  return { html };
 }
