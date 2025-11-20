@@ -105,3 +105,7 @@ export function getAnatomyData(component: ComponentItem): AnatomyPart[] | null {
 }
 
 
+
+
+
+

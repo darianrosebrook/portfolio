@@ -7,7 +7,7 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--checkbox-color-background-default);
+  background-color: var(--checkbox-color-background-default, #fff);
   border: var(--checkbox-border-width) solid
     var(--checkbox-color-border-default);
   border-radius: var(--checkbox-border-radius);

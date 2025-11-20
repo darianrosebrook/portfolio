@@ -160,12 +160,9 @@ export const SymbolCanvasSVG: React.FC = () => {
     };
   }, [glyph, fontInstance]);
 
-  // Auto-detect features
-  useEffect(() => {
-    if (typeof autoDetectFeatures === 'function') {
-      autoDetectFeatures();
-    }
-  }, [autoDetectFeatures]);
+  // Auto-detect features (if enabled)
+  // Note: autoDetectFeatures is a boolean flag, not a function
+  // Feature detection is handled elsewhere in the component
 
   // Create viewport transform
   const viewportTransform = useMemo(() => {

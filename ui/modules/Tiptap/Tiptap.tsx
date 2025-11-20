@@ -13,15 +13,21 @@ import { Article } from '@/types';
 const Tiptap = ({
   article,
   handleUpdate = () => {},
+  editable = true,
+  autofocus = false,
 }: {
   article: Article;
   handleUpdate?: (article: Article) => void;
+  editable?: boolean;
+  autofocus?: boolean;
 }) => {
   const content = article.articleBody as JSONContent | undefined;
   const editor = useEditor({
     extensions: createExtensions(article?.id as unknown as number),
     immediatelyRender: false,
     content: content,
+    editable,
+    autofocus,
     onUpdate: ({ editor }) => {
       if (handleUpdate) {
         const articleBody = editor.getJSON();

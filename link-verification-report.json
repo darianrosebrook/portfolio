@@ -1,0 +1,442 @@
+{
+  "generated": "2025-11-03T02:31:02.362Z",
+  "summary": {
+    "totalRoutes": 86,
+    "totalLinks": 250,
+    "brokenLinks": 0,
+    "validLinks": 250
+  },
+  "routes": [
+    {
+      "path": "/about",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/about/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/articles/[slug]",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/articles/[slug]/page.tsx",
+      "isDynamic": true
+    },
+    {
+      "path": "/articles",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/articles/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/component-standards/[slug]",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/component-standards/[slug]/page.tsx",
+      "isDynamic": true
+    },
+    {
+      "path": "/blueprints/component-standards/accessibility",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/component-standards/accessibility/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/component-standards/anatomy",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/component-standards/anatomy/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/component-standards/component-complexity/assemblies",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/component-standards/component-complexity/assemblies/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/component-standards/component-complexity/composer",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/component-standards/component-complexity/composer/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/component-standards/component-complexity/compound",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/component-standards/component-complexity/compound/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/component-standards/component-complexity",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/component-standards/component-complexity/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/component-standards/component-complexity/primitives",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/component-standards/component-complexity/primitives/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/component-standards/i18n/date-formatting",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/component-standards/i18n/date-formatting/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/component-standards/i18n/long-text-example",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/component-standards/i18n/long-text-example/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/component-standards/i18n/rtl-example",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/component-standards/i18n/rtl-example/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/component-standards/migrations/[migration]",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/component-standards/migrations/[migration]/page.tsx",
+      "isDynamic": true
+    },
+    {
+      "path": "/blueprints/component-standards",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/component-standards/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/component-standards/props",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/component-standards/props/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/component-standards/states",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/component-standards/states/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/component-standards/status",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/component-standards/status/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/component-standards/usage",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/component-standards/usage/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/design-patterns",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/design-patterns/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/foundations/accessibility/assistive-tech",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/foundations/accessibility/assistive-tech/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/foundations/accessibility/philosophy",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/foundations/accessibility/philosophy/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/foundations/accessibility/standards",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/foundations/accessibility/standards/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/foundations/accessibility/tokens",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/foundations/accessibility/tokens/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/foundations/accessibility/tooling",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/foundations/accessibility/tooling/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/foundations/borders",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/foundations/borders/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/foundations/color",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/foundations/color/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/foundations/component-architecture",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/foundations/component-architecture/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/foundations/elevation",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/foundations/elevation/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/foundations/grid",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/foundations/grid/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/foundations/icons",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/foundations/icons/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/foundations/layout",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/foundations/layout/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/foundations/meta/atomic-vs-semantic",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/foundations/meta/atomic-vs-semantic/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/foundations/meta/component-mapping",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/foundations/meta/component-mapping/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/foundations/meta/system-vs-style",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/foundations/meta/system-vs-style/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/foundations/meta/theming",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/foundations/meta/theming/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/foundations/meta/token-naming",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/foundations/meta/token-naming/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/foundations/motion",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/foundations/motion/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/foundations",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/foundations/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/foundations/philosophy",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/foundations/philosophy/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/foundations/radius",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/foundations/radius/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/foundations/spacing",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/foundations/spacing/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/foundations/tokens/accessibility",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/foundations/tokens/accessibility/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/foundations/tokens/build-outputs",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/foundations/tokens/build-outputs/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/foundations/tokens/core-vs-semantic",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/foundations/tokens/core-vs-semantic/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/foundations/tokens",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/foundations/tokens/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/foundations/tokens/schema-validation",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/foundations/tokens/schema-validation/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/foundations/tokens/theming",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/foundations/tokens/theming/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/foundations/tokens/token-naming",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/foundations/tokens/token-naming/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/foundations/tooling/automation",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/foundations/tooling/automation/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/foundations/tooling/code",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/foundations/tooling/code/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/foundations/tooling/design",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/foundations/tooling/design/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/foundations/tracks/[track]",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/foundations/tracks/[track]/page.tsx",
+      "isDynamic": true
+    },
+    {
+      "path": "/blueprints/foundations/tracks",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/foundations/tracks/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/foundations/typography",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/foundations/typography/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/glossary",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/glossary/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/interaction-patterns",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/interaction-patterns/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/ux-patterns/dialogs",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/ux-patterns/dialogs/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/ux-patterns/feedback",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/ux-patterns/feedback/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/ux-patterns/forms",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/ux-patterns/forms/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/ux-patterns/navigation",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/ux-patterns/navigation/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/blueprints/ux-patterns/selection",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/blueprints/ux-patterns/selection/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/chip-demo",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/chip-demo/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/component-displaycase",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/component-displaycase/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/darianrosebrook",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/darianrosebrook/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/dashboard/analytics",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/dashboard/analytics/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/dashboard/articles/[slug]",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/dashboard/articles/[slug]/page.tsx",
+      "isDynamic": true
+    },
+    {
+      "path": "/dashboard/articles/new",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/dashboard/articles/new/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/dashboard/articles",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/dashboard/articles/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/dashboard/case-studies/[slug]",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/dashboard/case-studies/[slug]/page.tsx",
+      "isDynamic": true
+    },
+    {
+      "path": "/dashboard/case-studies",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/dashboard/case-studies/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/dashboard",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/dashboard/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/dashboard/performance",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/dashboard/performance/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/dashboard/profile",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/dashboard/profile/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/dev/glyph-compare",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/dev/glyph-compare/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/dev/interaction-test",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/dev/interaction-test/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/docs/playground",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/docs/playground/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/ha",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/ha/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/links",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/links/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/offline",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/offline/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/tools",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/tools/page.tsx",
+      "isDynamic": false
+    },
+    {
+      "path": "/work/[slug]",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/work/[slug]/page.tsx",
+      "isDynamic": true
+    },
+    {
+      "path": "/work",
+      "file": "/Users/drosebrook/Desktop/Projects/portfolio/app/work/page.tsx",
+      "isDynamic": false
+    }
+  ],
+  "brokenLinks": []
+}

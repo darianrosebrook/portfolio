@@ -18,6 +18,7 @@ export type DocInteractiveProps = {
     device?: 'desktop' | 'tablet' | 'phone' | 'none';
     reducedMotion?: 'system' | 'on' | 'off';
     theme?: 'system' | 'light' | 'dark' | string;
+    dir?: 'ltr' | 'rtl';
   };
   editor?: {
     engine?: 'monaco' | 'codemirror' | 'sandpack';

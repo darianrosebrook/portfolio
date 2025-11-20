@@ -16,7 +16,7 @@
       "radius": "{core.shape.radius.small}"
     },
     "spacing": {
-      "gap": "{core.spacing.size.04}",
+      "gap": "{core.spacing.size.07}",
       "paddingX": "{core.spacing.size.00}",
       "paddingY": "{core.spacing.size.04}"
     },

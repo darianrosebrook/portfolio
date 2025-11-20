@@ -7,6 +7,8 @@
  * @returns The LD+JSON object
  */
 
+export { generateFoundationLDJson } from './foundation';
+
 export function generateLDJson({
   article,
   canonical,

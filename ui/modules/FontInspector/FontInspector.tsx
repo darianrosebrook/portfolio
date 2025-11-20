@@ -61,6 +61,7 @@ interface InspectorContextType {
   selectedAnatomy: Map<string, AnatomyFeature>;
   toggleAnatomy: (feature: AnatomyFeature) => void;
   colors: DrawColors;
+  autoDetectFeatures?: boolean;
 }
 
 // ---------------------------
@@ -119,6 +120,7 @@ export const InspectorProvider: React.FC<{
     lsbFill: '',
     rsbStroke: '',
     rsbFill: '',
+    highlightBackground: '',
   });
   const [selectedAnatomy, setSelectedAnatomy] = useState<
     Map<string, AnatomyFeature>
@@ -405,6 +407,7 @@ export const InspectorProvider: React.FC<{
         cursorFill: getPropertyValue('--semantic-color-foreground-primary'),
         labelFill: getPropertyValue('--semantic-color-foreground-primary'),
         labelStroke: getPropertyValue('--semantic-color-background-primary'),
+        highlightBackground: getPropertyValue('--semantic-color-background-highlight'),
       });
     };
 

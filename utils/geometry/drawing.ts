@@ -21,6 +21,7 @@ export interface DrawColors {
   cursorFill: string;
   labelFill: string;
   labelStroke: string;
+  highlightBackground: string;
 }
 
 export function drawMetricLine(

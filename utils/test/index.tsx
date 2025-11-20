@@ -301,7 +301,7 @@ export const accessibilityTestUtils = {
       };
       axeOptions.rules = options.disableRules.reduce(
         (acc, rule) => {
-          acc[rule] = { enabled: false };
+          acc[rule] = { id: rule, enabled: false };
           return acc;
         },
         {} as Record<string, axe.Rule>
@@ -310,7 +310,7 @@ export const accessibilityTestUtils = {
 
     const results = await axe.run(container, axeOptions);
 
-    return results;
+    return results as axe.AxeResults;
   },
 
   // Test for WCAG compliance
@@ -325,12 +325,12 @@ export const accessibilityTestUtils = {
     const results = await accessibilityTestUtils.testAccessibility(component, {
       rules: {
         // Custom rules for specific WCAG level
-        'color-contrast': { enabled: level === 'AAA' },
-        'link-name': { enabled: true },
-        'button-name': { enabled: true },
-        'image-alt': { enabled: true },
-        'heading-order': { enabled: true },
-        keyboard: { enabled: true },
+        'color-contrast': { id: 'color-contrast', enabled: level === 'AAA' },
+        'link-name': { id: 'link-name', enabled: true },
+        'button-name': { id: 'button-name', enabled: true },
+        'image-alt': { id: 'image-alt', enabled: true },
+        'heading-order': { id: 'heading-order', enabled: true },
+        keyboard: { id: 'keyboard', enabled: true },
       },
     });
 

@@ -7,6 +7,9 @@
  * mode-aware overrides (design.paths.light|dark). Produces:
  *  - CLI inspection for a specific token path
  *  - Full report JSON mapping token paths → { chain, valueByMode, errors }
+ *
+ * @author Darian Rosebrook
+ * @version 1.0.0
  */
 
 import fs from 'fs';
@@ -252,4 +255,4 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   main();
 }
 
-export { loadTokenTree, resolveToken, generateReport };
+export { generateReport, loadTokenTree, resolveToken };
