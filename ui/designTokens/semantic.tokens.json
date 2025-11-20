@@ -394,11 +394,7 @@
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
-          "components": [
-            0,
-            0,
-            0
-          ],
+          "components": [0, 0, 0],
           "alpha": 0.5
         },
         "$extensions": {
@@ -730,11 +726,7 @@
           "$type": "color",
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              0,
-              0,
-              0
-            ],
+            "components": [0, 0, 0],
             "alpha": 0.24
           },
           "$description": "Light overlay scrim"
@@ -743,11 +735,7 @@
           "$type": "color",
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              0,
-              0,
-              0
-            ],
+            "components": [0, 0, 0],
             "alpha": 0.4
           },
           "$description": "Medium overlay scrim"
@@ -756,11 +744,7 @@
           "$type": "color",
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              0,
-              0,
-              0
-            ],
+            "components": [0, 0, 0],
             "alpha": 0.64
           },
           "$description": "Strong overlay scrim"
@@ -2715,33 +2699,21 @@
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
-          "components": [
-            1,
-            1,
-            1
-          ]
+          "components": [1, 1, 1]
         }
       },
       "customSemanticColorBgPrimary": {
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
-          "components": [
-            1,
-            1,
-            1
-          ]
+          "components": [1, 1, 1]
         }
       },
       "myCustomBg": {
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
-          "components": [
-            0,
-            0.4823529411764706,
-            1
-          ]
+          "components": [0, 0.4823529411764706, 1]
         }
       },
       "path": {
@@ -2787,11 +2759,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0,
-          0,
-          0
-        ],
+        "components": [0, 0, 0],
         "alpha": 0.24
       },
       "$extensions": {
@@ -2804,11 +2772,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0,
-          0,
-          0
-        ],
+        "components": [0, 0, 0],
         "alpha": 0.4
       },
       "$extensions": {
@@ -2821,11 +2785,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0,
-          0,
-          0
-        ],
+        "components": [0, 0, 0],
         "alpha": 0.64
       },
       "$extensions": {

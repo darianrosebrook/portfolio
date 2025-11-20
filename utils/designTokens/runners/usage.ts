@@ -1,18 +1,23 @@
 #!/usr/bin/env node
 /**
  * Design Token Usage Analytics CLI
- * 
+ *
  * Analyzes token usage across the codebase and generates reports
  */
 
-import { analyzeTokenUsage, generateUsageReport } from '../analytics/usageTracker';
+import {
+  analyzeTokenUsage,
+  generateUsageReport,
+} from '../analytics/usageTracker';
 import fs from 'fs';
 import path from 'path';
 import { PROJECT_ROOT } from '../core/index';
 
 async function main() {
   const args = process.argv.slice(2);
-  const outputFile = args.find((arg) => arg.startsWith('--output='))?.split('=')[1];
+  const outputFile = args
+    .find((arg) => arg.startsWith('--output='))
+    ?.split('=')[1];
   const format = args.includes('--json') ? 'json' : 'markdown';
 
   console.log('🔍 Analyzing design token usage...\n');
@@ -71,4 +76,3 @@ async function main() {
 }
 
 main();
-

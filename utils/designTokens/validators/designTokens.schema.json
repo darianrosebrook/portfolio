@@ -201,10 +201,7 @@
           "maximum": 1
         }
       },
-      "required": [
-        "colorSpace",
-        "components"
-      ]
+      "required": ["colorSpace", "components"]
     },
     "dimensionValue": {
       "description": "A DTCG 1.0-compliant dimension value object",
@@ -217,16 +214,10 @@
         "unit": {
           "type": "string",
           "description": "The unit of measurement (DTCG 1.0 standard units)",
-          "enum": [
-            "px",
-            "rem"
-          ]
+          "enum": ["px", "rem"]
         }
       },
-      "required": [
-        "value",
-        "unit"
-      ]
+      "required": ["value", "unit"]
     },
     "fontFamilyValue": {
       "description": "A DTCG 1.0-compliant font family value",
@@ -418,13 +409,7 @@
           "description": "Whether the shadow is inset"
         }
       },
-      "required": [
-        "offsetX",
-        "offsetY",
-        "blur",
-        "spread",
-        "color"
-      ]
+      "required": ["offsetX", "offsetY", "blur", "spread", "color"]
     },
     "typographyValue": {
       "description": "A DTCG 1.0-compliant typography composite value",
@@ -492,10 +477,7 @@
           ]
         }
       },
-      "required": [
-        "fontFamily",
-        "fontSize"
-      ]
+      "required": ["fontFamily", "fontSize"]
     },
     "borderValue": {
       "description": "A DTCG 1.0-compliant border composite value",
@@ -538,11 +520,7 @@
           ]
         }
       },
-      "required": [
-        "color",
-        "width",
-        "style"
-      ]
+      "required": ["color", "width", "style"]
     },
     "strokeStyleValue": {
       "description": "A DTCG 1.0-compliant stroke style value",
@@ -573,11 +551,7 @@
             },
             "lineCap": {
               "type": "string",
-              "enum": [
-                "butt",
-                "round",
-                "square"
-              ],
+              "enum": ["butt", "round", "square"],
               "description": "Line cap style"
             },
             "miterLimit": {
@@ -586,9 +560,7 @@
               "minimum": 0
             }
           },
-          "required": [
-            "dashArray"
-          ]
+          "required": ["dashArray"]
         },
         {
           "type": "string",
@@ -631,9 +603,7 @@
             ]
           }
         },
-        "required": [
-          "color"
-        ]
+        "required": ["color"]
       },
       "minItems": 2
     },
@@ -678,10 +648,7 @@
           ]
         }
       },
-      "required": [
-        "duration",
-        "timingFunction"
-      ]
+      "required": ["duration", "timingFunction"]
     },
     "colorToken": {
       "allOf": [
@@ -706,10 +673,7 @@
               ]
             }
           },
-          "required": [
-            "$type",
-            "$value"
-          ]
+          "required": ["$type", "$value"]
         }
       ]
     },
@@ -736,10 +700,7 @@
               ]
             }
           },
-          "required": [
-            "$type",
-            "$value"
-          ]
+          "required": ["$type", "$value"]
         }
       ]
     },
@@ -757,10 +718,7 @@
               "$ref": "#/$defs/fontFamilyValue"
             }
           },
-          "required": [
-            "$type",
-            "$value"
-          ]
+          "required": ["$type", "$value"]
         }
       ]
     },
@@ -778,10 +736,7 @@
               "$ref": "#/$defs/fontWeightValue"
             }
           },
-          "required": [
-            "$type",
-            "$value"
-          ]
+          "required": ["$type", "$value"]
         }
       ]
     },
@@ -799,10 +754,7 @@
               "$ref": "#/$defs/shadowValue"
             }
           },
-          "required": [
-            "$type",
-            "$value"
-          ]
+          "required": ["$type", "$value"]
         }
       ]
     },
@@ -820,10 +772,7 @@
               "$ref": "#/$defs/typographyValue"
             }
           },
-          "required": [
-            "$type",
-            "$value"
-          ]
+          "required": ["$type", "$value"]
         }
       ]
     },
@@ -841,10 +790,7 @@
               "$ref": "#/$defs/borderValue"
             }
           },
-          "required": [
-            "$type",
-            "$value"
-          ]
+          "required": ["$type", "$value"]
         }
       ]
     },
@@ -862,10 +808,7 @@
               "$ref": "#/$defs/gradientValue"
             }
           },
-          "required": [
-            "$type",
-            "$value"
-          ]
+          "required": ["$type", "$value"]
         }
       ]
     },
@@ -883,10 +826,7 @@
               "$ref": "#/$defs/transitionValue"
             }
           },
-          "required": [
-            "$type",
-            "$value"
-          ]
+          "required": ["$type", "$value"]
         }
       ]
     },
@@ -904,10 +844,7 @@
               "$ref": "#/$defs/strokeStyleValue"
             }
           },
-          "required": [
-            "$type",
-            "$value"
-          ]
+          "required": ["$type", "$value"]
         }
       ]
     }

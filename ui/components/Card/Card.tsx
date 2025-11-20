@@ -66,9 +66,7 @@ const CardBadge = React.forwardRef<HTMLSpanElement, CardBadgeProps>(
         ref={ref}
         className={[
           styles.badge,
-          status
-            ? styles[status.replace(/\s+/g, '-')]
-            : '',
+          status ? styles[status.replace(/\s+/g, '-')] : '',
           className,
         ]
           .filter(Boolean)

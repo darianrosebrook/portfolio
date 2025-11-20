@@ -379,7 +379,10 @@ export class Resolver {
 
       // Check if the referenced token exists using nested path lookup
       // Tokens are stored as nested objects, so we need to check the nested structure
-      const referencedValue = getNestedValue(tokens as Record<string, unknown>, aliasPath);
+      const referencedValue = getNestedValue(
+        tokens as Record<string, unknown>,
+        aliasPath
+      );
       if (referencedValue === undefined) {
         this.warn({
           code: 'MISSING',
@@ -399,7 +402,7 @@ export class Resolver {
         aliasPath
       );
       visited.delete(aliasPath);
-      
+
       // If resolution resulted in undefined, return undefined (unresolved reference)
       return resolved;
     }

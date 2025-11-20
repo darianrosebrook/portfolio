@@ -6,15 +6,11 @@
   "sets": {
     "foundation": {
       "description": "Core design tokens (colors, typography, spacing, etc.)",
-      "sources": [
-        { "$ref": "core.tokens.json" }
-      ]
+      "sources": [{ "$ref": "core.tokens.json" }]
     },
     "semantic": {
       "description": "Semantic tokens that reference foundation tokens",
-      "sources": [
-        { "$ref": "semantic.tokens.json" }
-      ]
+      "sources": [{ "$ref": "semantic.tokens.json" }]
     }
   },
   "modifiers": {

@@ -15,10 +15,7 @@ export {
 } from './ErrorBoundary';
 
 // Form field abstraction
-export {
-  FormField,
-  type FormFieldProps,
-} from './FormField';
+export { FormField, type FormFieldProps } from './FormField';
 
 // Re-export performance monitoring for component use
 export { performanceMonitor } from '../performance/monitor';

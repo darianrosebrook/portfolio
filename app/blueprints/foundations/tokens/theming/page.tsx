@@ -30,17 +30,19 @@ export default function ThemingPage() {
       <h1>Multi-Brand Theming</h1>
 
       <p>
-        DTCG 1.0 structured tokens enable powerful multi-brand theming through semantic
-        aliasing. Core tokens define brand-agnostic primitives, while semantic tokens
-        create brand-specific aliases. This architecture supports unlimited brands
-        while maintaining consistent structure and validation.
+        DTCG 1.0 structured tokens enable powerful multi-brand theming through
+        semantic aliasing. Core tokens define brand-agnostic primitives, while
+        semantic tokens create brand-specific aliases. This architecture
+        supports unlimited brands while maintaining consistent structure and
+        validation.
       </p>
 
       <h2>Brand-Agnostic Core Layer</h2>
       <p>
-        The core layer contains structured primitives that rarely change across brands:
-        color palettes, spacing scales, typography ramps, and motion durations. These
-        use DTCG structured formats for type safety and platform flexibility.
+        The core layer contains structured primitives that rarely change across
+        brands: color palettes, spacing scales, typography ramps, and motion
+        durations. These use DTCG structured formats for type safety and
+        platform flexibility.
       </p>
 
       <h3>Universal Color Palette</h3>
@@ -98,9 +100,10 @@ export default function ThemingPage() {
 
       <h2>Brand-Specific Semantic Layer</h2>
       <p>
-        Semantic tokens create brand identity by aliasing core primitives to meaningful
-        roles. Each brand maintains its own semantic layer while sharing the same core
-        foundation, enabling consistent structure across brands.
+        Semantic tokens create brand identity by aliasing core primitives to
+        meaningful roles. Each brand maintains its own semantic layer while
+        sharing the same core foundation, enabling consistent structure across
+        brands.
       </p>
 
       <h3>Brand A Semantic Colors</h3>
@@ -149,9 +152,9 @@ export default function ThemingPage() {
 
       <h2>Theme Variants with Extensions</h2>
       <p>
-        The <code>$extensions.design.paths</code> property enables theme-specific
-        overrides within the same semantic token, supporting light/dark modes and
-        other variant dimensions.
+        The <code>$extensions.design.paths</code> property enables
+        theme-specific overrides within the same semantic token, supporting
+        light/dark modes and other variant dimensions.
       </p>
 
       <h3>Light/Dark Mode Support</h3>
@@ -180,8 +183,8 @@ export default function ThemingPage() {
 
       <h3>Brand + Theme Combinations</h3>
       <p>
-        Extensions can handle complex theming scenarios where brands have different
-        theme requirements or variant dimensions.
+        Extensions can handle complex theming scenarios where brands have
+        different theme requirements or variant dimensions.
       </p>
 
       <pre>
@@ -211,9 +214,9 @@ export default function ThemingPage() {
 
       <h2>Platform-Specific Variants</h2>
       <p>
-        DTCG structured tokens support platform-specific theming through different
-        resolution strategies, enabling consistent semantics across iOS, Android,
-        web, and desktop platforms.
+        DTCG structured tokens support platform-specific theming through
+        different resolution strategies, enabling consistent semantics across
+        iOS, Android, web, and desktop platforms.
       </p>
 
       <h3>Platform-Aware Spacing</h3>
@@ -244,30 +247,40 @@ export default function ThemingPage() {
       <h2>Resolver Module Integration</h2>
       <p>
         For complex multi-brand scenarios, our DTCG 1.0 Resolver Module enables
-        context-aware token resolution with sets, modifiers, and resolution orders.
-        This supports sophisticated theming requirements across brands, platforms,
-        and themes.
+        context-aware token resolution with sets, modifiers, and resolution
+        orders. This supports sophisticated theming requirements across brands,
+        platforms, and themes.
       </p>
 
       <div className={styles.placeholder}>
         <p>
           See <code>ui/designTokens/resolver.example.json</code> for resolver
-          document structure and <code>utils/designTokens/utils/resolver-module.ts</code>{' '}
-          for implementation details.
+          document structure and{' '}
+          <code>utils/designTokens/utils/resolver-module.ts</code> for
+          implementation details.
         </p>
       </div>
 
       <h2>Build System Brand Switching</h2>
       <p>
-        Our build pipeline supports brand switching through configuration, generating
-        brand-specific CSS variables and TypeScript types on-demand.
+        Our build pipeline supports brand switching through configuration,
+        generating brand-specific CSS variables and TypeScript types on-demand.
       </p>
 
       <ul>
-        <li><strong>Global CSS</strong>: Brand-specific CSS custom properties</li>
-        <li><strong>Component SCSS</strong>: Scoped variables per component</li>
-        <li><strong>TypeScript</strong>: Type-safe token access with brand context</li>
-        <li><strong>Platform exports</strong>: Format-aware outputs for native platforms</li>
+        <li>
+          <strong>Global CSS</strong>: Brand-specific CSS custom properties
+        </li>
+        <li>
+          <strong>Component SCSS</strong>: Scoped variables per component
+        </li>
+        <li>
+          <strong>TypeScript</strong>: Type-safe token access with brand context
+        </li>
+        <li>
+          <strong>Platform exports</strong>: Format-aware outputs for native
+          platforms
+        </li>
       </ul>
 
       <p>

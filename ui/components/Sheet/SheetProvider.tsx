@@ -39,7 +39,14 @@ export const SheetProvider: React.FC<SheetProviderProps> = ({
       contentRef,
       triggerRef,
     }),
-    [sheet.isOpen, sheet.side, sheet.modal, sheet.open, sheet.close, sheet.toggle]
+    [
+      sheet.isOpen,
+      sheet.side,
+      sheet.modal,
+      sheet.open,
+      sheet.close,
+      sheet.toggle,
+    ]
   );
 
   return (

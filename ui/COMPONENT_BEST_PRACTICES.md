@@ -14,6 +14,7 @@ This document provides reference patterns for React hooks, providers, portals, a
 **Rule**: All useEffect, useCallback, and useMemo dependencies must be complete.
 
 **Anti-pattern**:
+
 ```typescript
 const updatePosition = useCallback(() => {
   setPosition({ top, left });
@@ -22,6 +23,7 @@ const updatePosition = useCallback(() => {
 ```
 
 **Correct Pattern**:
+
 ```typescript
 const updatePosition = useCallback(() => {
   const newPosition = { top, left };
@@ -35,19 +37,23 @@ const updatePosition = useCallback(() => {
 **Rule**: All side effects must have cleanup functions.
 
 **Pattern for Event Listeners**:
+
 ```typescript
 useEffect(() => {
-  const handler = (e: Event) => { /* ... */ };
+  const handler = (e: Event) => {
+    /* ... */
+  };
   document.addEventListener('click', handler);
   return () => document.removeEventListener('click', handler);
 }, [dependencies]);
 ```
 
 **Pattern for ResizeObserver**:
+
 ```typescript
 useLayoutEffect(() => {
   if (!contentRef.current) return;
-  
+
   const resizeObserver = new ResizeObserver(() => {
     updatePosition();
   });
@@ -60,12 +66,15 @@ useLayoutEffect(() => {
 ```
 
 **Pattern for GSAP Animations**:
+
 ```typescript
 useEffect(() => {
   if (!element) return;
-  
-  const animation = gsap.to(element, { /* ... */ });
-  
+
+  const animation = gsap.to(element, {
+    /* ... */
+  });
+
   return () => {
     animation.kill();
   };
@@ -77,17 +86,21 @@ useEffect(() => {
 **Rule**: Support both controlled and uncontrolled usage.
 
 **Pattern**:
+
 ```typescript
 const isControlled = typeof value !== 'undefined';
 const [internalValue, setInternalValue] = useState(defaultValue);
 const currentValue = isControlled ? value : internalValue;
 
-const handleChange = useCallback((newValue) => {
-  if (!isControlled) {
-    setInternalValue(newValue);
-  }
-  onChange?.(newValue);
-}, [isControlled, onChange]);
+const handleChange = useCallback(
+  (newValue) => {
+    if (!isControlled) {
+      setInternalValue(newValue);
+    }
+    onChange?.(newValue);
+  },
+  [isControlled, onChange]
+);
 ```
 
 ### useId Usage
@@ -95,6 +108,7 @@ const handleChange = useCallback((newValue) => {
 **Rule**: Use useId() for consistent ID generation for ARIA relationships.
 
 **Pattern**:
+
 ```typescript
 const generatedId = useId();
 const id = providedId || `component-${generatedId}`;
@@ -107,6 +121,7 @@ const errorId = `error-${id}`;
 **Rule**: All components must forwardRef to the native element.
 
 **Pattern**:
+
 ```typescript
 const Component = forwardRef<HTMLDivElement, ComponentProps>(
   ({ children, ...props }, ref) => {
@@ -118,6 +133,7 @@ Component.displayName = 'Component';
 ```
 
 **Pattern for Multiple Refs**:
+
 ```typescript
 const combinedRef = useCallback(
   (node: HTMLElement) => {
@@ -145,6 +161,7 @@ const combinedRef = useCallback(
 **Rule**: Contexts must have null default values and proper type safety.
 
 **Pattern**:
+
 ```typescript
 interface ContextValue {
   id: string;
@@ -160,22 +177,25 @@ const ComponentContext = createContext<ContextValue | null>(null);
 **Rule**: Context values must be memoized to avoid unnecessary re-renders.
 
 **Anti-pattern** (Hook in useMemo):
+
 ```typescript
 // ❌ WRONG - Cannot call hooks inside useMemo
 const value = useMemo(() => useSelect(options), [options]);
 ```
 
 **Correct Pattern** (Hook at top level):
+
 ```typescript
 // ✅ CORRECT - Hook called at top level
 const selectValue = useSelect(options);
 const value = useMemo(
   () => selectValue,
-  [selectValue.isOpen, selectValue.selectedOptions, /* ... */]
+  [selectValue.isOpen, selectValue.selectedOptions /* ... */]
 );
 ```
 
 **Alternative Pattern** (If hook returns stable values):
+
 ```typescript
 // ✅ CORRECT - Hook already returns stable references
 const selectValue = useSelect(options);
@@ -184,6 +204,7 @@ return <Context.Provider value={selectValue}>{children}</Context.Provider>;
 ```
 
 **Pattern for Simple Context Values**:
+
 ```typescript
 const contextValue = useMemo(
   () => ({ id, isOpen, toggle }),
@@ -197,11 +218,14 @@ return <Context.Provider value={contextValue}>{children}</Context.Provider>;
 **Rule**: Use custom hooks for context access with error boundaries.
 
 **Pattern**:
+
 ```typescript
 export const useComponentContext = () => {
   const ctx = useContext(ComponentContext);
   if (!ctx) {
-    throw new Error('useComponentContext must be used within ComponentProvider');
+    throw new Error(
+      'useComponentContext must be used within ComponentProvider'
+    );
   }
   return ctx;
 };
@@ -216,6 +240,7 @@ export const useComponentContext = () => {
 **Rule**: All portals must have SSR safety checks.
 
 **Pattern**:
+
 ```typescript
 return typeof document !== 'undefined'
   ? createPortal(content, document.body)
@@ -227,6 +252,7 @@ return typeof document !== 'undefined'
 **Rule**: Portal components must manage focus (initial, return, trap).
 
 **Pattern for Initial and Return Focus**:
+
 ```typescript
 useEffect(() => {
   if (!isOpen) return;
@@ -241,7 +267,10 @@ useEffect(() => {
     ) ||
     contentRef.current;
 
-  if (focusElement && typeof (focusElement as HTMLElement).focus === 'function') {
+  if (
+    focusElement &&
+    typeof (focusElement as HTMLElement).focus === 'function'
+  ) {
     (focusElement as HTMLElement).focus();
   }
 
@@ -257,6 +286,7 @@ useEffect(() => {
 ```
 
 **Pattern for Focus Trap**:
+
 ```typescript
 useEffect(() => {
   if (!isOpen || !modal) return;
@@ -270,7 +300,9 @@ useEffect(() => {
       if (!focusableElements || focusableElements.length === 0) return;
 
       const firstElement = focusableElements[0] as HTMLElement;
-      const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement;
+      const lastElement = focusableElements[
+        focusableElements.length - 1
+      ] as HTMLElement;
 
       if (e.shiftKey) {
         if (document.activeElement === firstElement) {
@@ -296,6 +328,7 @@ useEffect(() => {
 **Rule**: Outside click and escape key handling must be properly cleaned up.
 
 **Pattern**:
+
 ```typescript
 useEffect(() => {
   if (!isOpen) return;
@@ -335,24 +368,33 @@ useEffect(() => {
 **Rule**: Use modern SCSS nesting instead of BEM-style class names.
 
 **Anti-pattern (BEM)**:
+
 ```scss
 .button {
-  .button__icon { }
-  .button__text { }
-  &.button--primary { }
+  .button__icon {
+  }
+  .button__text {
+  }
+  &.button--primary {
+  }
 }
 ```
 
 **Correct Pattern (Modern Nesting)**:
+
 ```scss
 .button {
-  .icon { }
-  .text { }
-  &.primary { }
+  .icon {
+  }
+  .text {
+  }
+  &.primary {
+  }
 }
 ```
 
 **TypeScript Usage**:
+
 ```typescript
 // ❌ BEM
 <div className={styles['__title']}>
@@ -366,6 +408,7 @@ useEffect(() => {
 **Rule**: Use logical properties instead of directional properties.
 
 **Mapping**:
+
 - `left` → `inset-inline-start`
 - `right` → `inset-inline-end`
 - `top` → `inset-block-start`
@@ -384,6 +427,7 @@ useEffect(() => {
 - `border-bottom` → `border-block-end`
 
 **Pattern**:
+
 ```scss
 // ❌ Directional
 .status {
@@ -405,10 +449,11 @@ useEffect(() => {
 **Rule**: Use container queries for component-level responsive design.
 
 **Pattern** (Future enhancement):
+
 ```scss
 .card {
   container-type: inline-size;
-  
+
   @container (min-width: 400px) {
     .header {
       flex-direction: row;
@@ -422,6 +467,7 @@ useEffect(() => {
 **Rule**: Use `:has()` for component state styling and `:where()` for low specificity.
 
 **Pattern for `:has()`**:
+
 ```scss
 .card {
   &:has(.badge) {
@@ -431,6 +477,7 @@ useEffect(() => {
 ```
 
 **Pattern for `:where()`**:
+
 ```scss
 :where(.button) {
   /* Low specificity base styles */
@@ -442,6 +489,7 @@ useEffect(() => {
 **Rule**: Prefer transform and opacity over layout properties.
 
 **Pattern**:
+
 ```typescript
 // ✅ Good - uses transform/opacity
 gsap.to(element, {
@@ -463,6 +511,7 @@ gsap.to(element, {
 ## Common Pitfalls to Avoid
 
 ### 1. Calling Hooks Conditionally or Inside Other Hooks
+
 ```typescript
 // ❌ WRONG
 const value = useMemo(() => useSelect(options), [options]);
@@ -472,6 +521,7 @@ const selectValue = useSelect(options);
 ```
 
 ### 2. Missing Dependencies in useCallback/useMemo
+
 ```typescript
 // ❌ WRONG - missing dependencies
 const handler = useCallback(() => {
@@ -485,6 +535,7 @@ const handler = useCallback(() => {
 ```
 
 ### 3. Creating New Context Values on Every Render
+
 ```typescript
 // ❌ WRONG - new object every render
 <Context.Provider value={{ id, isOpen, toggle }}>
@@ -495,6 +546,7 @@ const contextValue = useMemo(() => ({ id, isOpen, toggle }), [id, isOpen, toggle
 ```
 
 ### 4. Missing Cleanup in useEffect
+
 ```typescript
 // ❌ WRONG - no cleanup
 useEffect(() => {
@@ -509,6 +561,7 @@ useEffect(() => {
 ```
 
 ### 5. Using Directional Properties Instead of Logical
+
 ```scss
 // ❌ WRONG
 margin-left: 1rem;
@@ -524,6 +577,7 @@ padding-inline-end: 1rem;
 ## Testing Checklist
 
 After implementing fixes, verify:
+
 - [ ] Component renders correctly
 - [ ] No console errors
 - [ ] No TypeScript errors

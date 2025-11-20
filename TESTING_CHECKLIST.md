@@ -114,9 +114,3 @@ Test in:
 - ✅ Smooth animations and transitions
 - ✅ Clean, Notion-like appearance
 - ✅ All formatting options work correctly
-
-
-
-
-
-

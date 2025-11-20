@@ -10,17 +10,31 @@
   font-weight: var(--animatedLink-typography-fontWeight-regular);
   line-height: var(--animatedLink-typography-lineHeight-collapse);
   text-decoration: none;
-  color: var(--animatedLink-color-default, var(--semantic-color-foreground-accent));
+  color: var(
+    --animatedLink-color-default,
+    var(--semantic-color-foreground-accent)
+  );
   transition: color 0.2s ease;
 
   &:hover {
     // Use color-mix() for dynamic hover effect
-    color: color-mix(in srgb, var(--animatedLink-color-default, var(--semantic-color-foreground-accent)) 80%, var(--animatedLink-color-hover, var(--semantic-color-foreground-accent)) 20%);
+    color: color-mix(
+      in srgb,
+      var(--animatedLink-color-default, var(--semantic-color-foreground-accent))
+        80%,
+      var(--animatedLink-color-hover, var(--semantic-color-foreground-accent))
+        20%
+    );
   }
 
   &:focus-visible {
     border-radius: var(--animatedLink-shape-radius, 0.125rem);
-    outline: 2px solid color-mix(in oklab, var(--animatedLink-color-focus, var(--color-focus-ring)) 40%, transparent);
+    outline: 2px solid
+      color-mix(
+        in oklab,
+        var(--animatedLink-color-focus, var(--color-focus-ring)) 40%,
+        transparent
+      );
     outline-offset: 2px;
   }
 }

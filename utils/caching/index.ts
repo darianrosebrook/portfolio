@@ -17,7 +17,7 @@ export {
   type CacheConfig,
   type CacheStats,
   type CacheEvent,
-  type CacheBackend
+  type CacheBackend,
 } from './unified';
 
 // Legacy exports for backward compatibility

@@ -407,7 +407,9 @@ export const InspectorProvider: React.FC<{
         cursorFill: getPropertyValue('--semantic-color-foreground-primary'),
         labelFill: getPropertyValue('--semantic-color-foreground-primary'),
         labelStroke: getPropertyValue('--semantic-color-background-primary'),
-        highlightBackground: getPropertyValue('--semantic-color-background-highlight'),
+        highlightBackground: getPropertyValue(
+          '--semantic-color-background-highlight'
+        ),
       });
     };
 

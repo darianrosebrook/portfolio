@@ -127,7 +127,8 @@
       transition:
         background-color var(--dialog-motion-duration-enter)
           var(--dialog-motion-easing-enter),
-        color var(--dialog-motion-duration-enter) var(--dialog-motion-easing-enter);
+        color var(--dialog-motion-duration-enter)
+          var(--dialog-motion-easing-enter);
       cursor: pointer;
 
       &:hover {
@@ -209,7 +210,8 @@
     transition:
       background-color var(--dialog-motion-duration-enter)
         var(--dialog-motion-easing-enter),
-      color var(--dialog-motion-duration-enter) var(--dialog-motion-easing-enter);
+      color var(--dialog-motion-duration-enter)
+        var(--dialog-motion-easing-enter);
     cursor: pointer;
 
     &:hover {

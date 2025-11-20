@@ -1,6 +1,6 @@
 /**
  * Design Tokens Cache System
- * 
+ *
  * Provides file hash caching and incremental build support
  */
 
@@ -46,7 +46,7 @@ function calculateFileHash(filePath: string): string {
  */
 function loadCache(): FileCache {
   ensureCacheDir();
-  
+
   if (!fs.existsSync(CACHE_FILE)) {
     return {};
   }
@@ -88,7 +88,7 @@ export function hasFileChanged(filePath: string): boolean {
 export function updateFileCache(filePath: string): void {
   const cache = loadCache();
   const hash = calculateFileHash(filePath);
-  
+
   cache[filePath] = {
     hash,
     timestamp: Date.now(),
@@ -191,12 +191,7 @@ export function getTokenFilesToCheck(): string[] {
   }
 
   // Semantic token files - check modular structure first
-  const semanticDir = path.join(
-    PROJECT_ROOT,
-    'ui',
-    'designTokens',
-    'semantic'
-  );
+  const semanticDir = path.join(PROJECT_ROOT, 'ui', 'designTokens', 'semantic');
   if (fs.existsSync(semanticDir)) {
     const semanticFiles = fs.readdirSync(semanticDir, { recursive: true });
     const hasModularFiles = semanticFiles.some(
@@ -232,4 +227,3 @@ export function getTokenFilesToCheck(): string[] {
 
   return files;
 }
-

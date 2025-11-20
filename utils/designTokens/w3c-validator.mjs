@@ -291,7 +291,9 @@ function logValidationResult(result) {
   if (warnings.length > 0) {
     console.log(`[validator] ⚠️  ${fileName} - ${warnings.length} warning(s)`);
     warnings.forEach((warning) => {
-      console.log(`  Warning [${warning.type}] ${warning.path}: ${warning.message}`);
+      console.log(
+        `  Warning [${warning.type}] ${warning.path}: ${warning.message}`
+      );
     });
   }
 
@@ -337,7 +339,9 @@ function validateTokenDirectory(dirPath) {
 const targetPath = process.argv[2];
 
 if (!targetPath) {
-  console.error('[validator] Usage: node w3c-validator.mjs <file-or-directory>');
+  console.error(
+    '[validator] Usage: node w3c-validator.mjs <file-or-directory>'
+  );
   console.error('[validator] Example: node w3c-validator.mjs tokens.json');
   process.exit(1);
 }
@@ -360,4 +364,3 @@ if (stats.isDirectory()) {
 }
 
 process.exit(hasErrors ? 1 : 0);
-

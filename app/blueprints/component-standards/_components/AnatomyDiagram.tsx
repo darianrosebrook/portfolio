@@ -81,9 +81,3 @@ export function AnatomyDiagram({ parts, componentName }: AnatomyDiagramProps) {
     </div>
   );
 }
-
-
-
-
-
-

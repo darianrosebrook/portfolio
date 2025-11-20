@@ -189,14 +189,14 @@ function collectTokens(
     } else if (value !== undefined && value !== null) {
       // Handle plain values from resolver module (not DTCG structure)
       // These are already resolved values, not token objects
-      
+
       // Check if value is actually undefined (from unresolved references)
       // The resolver may return undefined for tokens that couldn't be resolved
       if (value === undefined) {
         // Skip undefined values - they're unresolved references
         return;
       }
-      
+
       const processedValue = processTokenValue(
         value,
         context,
@@ -205,7 +205,12 @@ function collectTokens(
       );
 
       // Skip if processed value is empty (but allow 0, false, etc.)
-      if (processedValue === '' && value !== '' && value !== 0 && value !== false) {
+      if (
+        processedValue === '' &&
+        value !== '' &&
+        value !== 0 &&
+        value !== false
+      ) {
         return;
       }
 

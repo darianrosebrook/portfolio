@@ -152,12 +152,12 @@ function initializeValidator(
   addFormats(ajv);
 
   const schemaToUse = options.customSchema || defaultSchema;
-  
+
   if (!schemaToUse) {
     console.error(
       '[validator] No schema provided. ' +
-      'Use setDefaultSchema() or provide customSchema in options. ' +
-      'Example: import schema from "./w3c-schema.json"; setDefaultSchema(schema);'
+        'Use setDefaultSchema() or provide customSchema in options. ' +
+        'Example: import schema from "./w3c-schema.json"; setDefaultSchema(schema);'
     );
     return null;
   }
@@ -271,10 +271,7 @@ function performCustomValidations(tokens: unknown): {
     }
   }
 
-  function validateToken(
-    token: Record<string, unknown>,
-    path: string
-  ): void {
+  function validateToken(token: Record<string, unknown>, path: string): void {
     // Check for required properties
     if (!token.$type && !token.$value) {
       warnings.push({
@@ -285,10 +282,7 @@ function performCustomValidations(tokens: unknown): {
     }
 
     // Validate token references
-    if (
-      typeof token.$value === 'string' &&
-      token.$value.match(/^\{[^}]+\}$/)
-    ) {
+    if (typeof token.$value === 'string' && token.$value.match(/^\{[^}]+\}$/)) {
       const refPath = token.$value.slice(1, -1);
       tokenRefs.set(path, refPath);
 
@@ -308,10 +302,7 @@ function performCustomValidations(tokens: unknown): {
     }
   }
 
-  function validateGroup(
-    group: Record<string, unknown>,
-    path: string
-  ): void {
+  function validateGroup(group: Record<string, unknown>, path: string): void {
     // Groups should have meaningful names
     if (path.length === 0) {
       warnings.push({
@@ -393,9 +384,7 @@ function performCustomValidations(tokens: unknown): {
 /**
  * Detect circular references in token dependencies
  */
-function detectCircularReferences(
-  tokenRefs: Map<string, string>
-): string[][] {
+function detectCircularReferences(tokenRefs: Map<string, string>): string[][] {
   const cycles: string[][] = [];
   const visited = new Set<string>();
   const recursionStack = new Set<string>();
@@ -445,7 +434,9 @@ export function formatValidationResult(result: ValidationResult): string {
   if (result.warnings.length > 0) {
     lines.push(`⚠️  ${result.warnings.length} warning(s):`);
     result.warnings.forEach((warning) => {
-      lines.push(`  Warning [${warning.type}] ${warning.path}: ${warning.message}`);
+      lines.push(
+        `  Warning [${warning.type}] ${warning.path}: ${warning.message}`
+      );
     });
   }
 
@@ -491,4 +482,3 @@ export async function validateDesignTokensFromFile(
     };
   }
 }
-

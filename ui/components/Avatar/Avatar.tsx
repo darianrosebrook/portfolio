@@ -24,35 +24,34 @@ const sizeMap = {
   'extra-large': { width: 128, height: 128, sizes: '128px' },
 } as const;
 
-const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(({
-  src,
-  name,
-  size,
-  priority = false,
-  className = '',
-  ...rest
-}, ref) => {
-  const displayInitials = name ? initials(name) : '';
-  const dimensions = sizeMap[size];
+const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
+  ({ src, name, size, priority = false, className = '', ...rest }, ref) => {
+    const displayInitials = name ? initials(name) : '';
+    const dimensions = sizeMap[size];
 
-  return (
-    <div ref={ref} className={`${styles.avatar} ${styles[size]} ${className}`} {...rest}>
-      {src ? (
-        <Image
-          src={src}
-          alt={name}
-          width={dimensions.width}
-          height={dimensions.height}
-          sizes={dimensions.sizes}
-          priority={priority}
-          className={styles.avatar_image}
-        />
-      ) : (
-        <span>{displayInitials}</span>
-      )}
-    </div>
-  );
-});
+    return (
+      <div
+        ref={ref}
+        className={`${styles.avatar} ${styles[size]} ${className}`}
+        {...rest}
+      >
+        {src ? (
+          <Image
+            src={src}
+            alt={name}
+            width={dimensions.width}
+            height={dimensions.height}
+            sizes={dimensions.sizes}
+            priority={priority}
+            className={styles.avatar_image}
+          />
+        ) : (
+          <span>{displayInitials}</span>
+        )}
+      </div>
+    );
+  }
+);
 
 Avatar.displayName = 'Avatar';
 

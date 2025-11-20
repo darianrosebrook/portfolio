@@ -123,10 +123,10 @@ function determineNamespace(tokenPath) {
 function tokenPathToCSSVar(tokenPath, prefix = '--') {
   // Determine namespace
   const namespace = determineNamespace(tokenPath);
-  
+
   // Remove namespace prefix if present (we'll add it back)
   const pathWithoutNamespace = tokenPath.replace(/^(core|semantic)\./, '');
-  
+
   // Convert path to CSS variable format
   const cssVarName = pathWithoutNamespace
     .replace(/\./g, '-') // Convert dots to hyphens first
@@ -134,10 +134,10 @@ function tokenPathToCSSVar(tokenPath, prefix = '--') {
     .replace(/[\s_]/g, '-') // Convert spaces and underscores
     .replace(/[^a-z0-9-]/g, '') // Remove any remaining invalid characters
     .replace(/-+/g, '-'); // Collapse multiple hyphens into one
-  
+
   // Add namespace prefix if determined
   const namespacePrefix = namespace ? `${namespace}-` : '';
-  
+
   return prefix + namespacePrefix + cssVarName;
 }
 

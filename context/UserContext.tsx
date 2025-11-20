@@ -94,23 +94,25 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
     // Listen for auth changes
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange(async (event: AuthChangeEvent, session: Session | null) => {
-      console.log('Auth state changed:', event);
+    } = supabase.auth.onAuthStateChange(
+      async (event: AuthChangeEvent, session: Session | null) => {
+        console.log('Auth state changed:', event);
 
-      if (session?.user) {
-        setUser(session.user);
-        setLoading(true);
-        const profileData = await fetchProfile(session.user.id);
-        setProfile(profileData);
-        setLoading(false);
-      } else {
-        setUser(null);
-        setProfile(null);
-        setLoading(false);
+        if (session?.user) {
+          setUser(session.user);
+          setLoading(true);
+          const profileData = await fetchProfile(session.user.id);
+          setProfile(profileData);
+          setLoading(false);
+        } else {
+          setUser(null);
+          setProfile(null);
+          setLoading(false);
+        }
+
+        setError(null);
       }
-
-      setError(null);
-    });
+    );
 
     return () => {
       subscription.unsubscribe();

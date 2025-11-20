@@ -43,16 +43,32 @@
   // Hover and active states
   &:hover {
     // Use color-mix() for dynamic hover effect
-    background-color: color-mix(in srgb, var(--chip-color-background-default) 90%, var(--chip-color-background-hover) 10%);
-    border-color: color-mix(in srgb, var(--chip-color-border-default) 80%, var(--chip-color-border-hover) 20%);
+    background-color: color-mix(
+      in srgb,
+      var(--chip-color-background-default) 90%,
+      var(--chip-color-background-hover) 10%
+    );
+    border-color: color-mix(
+      in srgb,
+      var(--chip-color-border-default) 80%,
+      var(--chip-color-border-hover) 20%
+    );
     color: var(--chip-color-foreground-hover);
     text-decoration: none;
   }
 
   &:active {
     // Use color-mix() for dynamic active effect
-    background-color: color-mix(in srgb, var(--chip-color-background-default) 85%, black 15%);
-    border-color: color-mix(in srgb, var(--chip-color-border-default) 85%, black 15%);
+    background-color: color-mix(
+      in srgb,
+      var(--chip-color-background-default) 85%,
+      black 15%
+    );
+    border-color: color-mix(
+      in srgb,
+      var(--chip-color-border-default) 85%,
+      black 15%
+    );
     color: var(--chip-color-foreground-active);
     transform: scale(var(--chip-motion-scale-pressed));
   }
@@ -65,14 +81,30 @@
 
     &:hover {
       // Use color-mix() for selected hover effect
-      background-color: color-mix(in srgb, var(--chip-color-background-selected) 90%, white 10%);
-      border-color: color-mix(in srgb, var(--chip-color-border-selected) 85%, white 15%);
+      background-color: color-mix(
+        in srgb,
+        var(--chip-color-background-selected) 90%,
+        white 10%
+      );
+      border-color: color-mix(
+        in srgb,
+        var(--chip-color-border-selected) 85%,
+        white 15%
+      );
       color: var(--chip-color-foreground-selectedHover);
     }
 
     &:active {
-      background-color: color-mix(in srgb, var(--chip-color-background-selected) 85%, black 15%);
-      border-color: color-mix(in srgb, var(--chip-color-border-selected) 85%, black 15%);
+      background-color: color-mix(
+        in srgb,
+        var(--chip-color-background-selected) 85%,
+        black 15%
+      );
+      border-color: color-mix(
+        in srgb,
+        var(--chip-color-border-selected) 85%,
+        black 15%
+      );
       color: var(--chip-color-foreground-selectedActive);
     }
   }

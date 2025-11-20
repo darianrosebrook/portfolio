@@ -21,65 +21,74 @@ export interface SpinnerProps extends React.HTMLAttributes<HTMLSpanElement> {
   showAfterMs?: number;
 }
 
-export const Spinner = React.forwardRef<HTMLSpanElement, SpinnerProps>(({
-  size = 'md',
-  thickness = 'regular',
-  variant = 'ring',
-  ariaHidden,
-  label = 'Loading',
-  inline = false,
-  showAfterMs = 150,
-  className,
-  ...rest
-}, ref) => {
-  const [visible, setVisible] = React.useState(showAfterMs === 0);
+export const Spinner = React.forwardRef<HTMLSpanElement, SpinnerProps>(
+  (
+    {
+      size = 'md',
+      thickness = 'regular',
+      variant = 'ring',
+      ariaHidden,
+      label = 'Loading',
+      inline = false,
+      showAfterMs = 150,
+      className,
+      ...rest
+    },
+    ref
+  ) => {
+    const [visible, setVisible] = React.useState(showAfterMs === 0);
 
-  React.useEffect(() => {
-    if (showAfterMs === 0) return;
-    const t = setTimeout(() => setVisible(true), showAfterMs);
-    return () => clearTimeout(t);
-  }, [showAfterMs]);
+    React.useEffect(() => {
+      if (showAfterMs === 0) return;
+      const t = setTimeout(() => setVisible(true), showAfterMs);
+      return () => clearTimeout(t);
+    }, [showAfterMs]);
 
-  const styleVars = React.useMemo(() => {
-    const resolvedSize =
-      typeof size === 'number' ? `${size}px` : `var(--spinner-size-${size})`;
-    const resolvedThickness =
-      typeof thickness === 'number'
-        ? `${thickness}px`
-        : `var(--spinner-thickness-${thickness})`;
-    return {
-      ['--spinner-size-value' as any]: resolvedSize,
-      ['--spinner-thickness-value' as any]: resolvedThickness,
-    } as React.CSSProperties;
-  }, [size, thickness]);
+    const styleVars = React.useMemo(() => {
+      const resolvedSize =
+        typeof size === 'number' ? `${size}px` : `var(--spinner-size-${size})`;
+      const resolvedThickness =
+        typeof thickness === 'number'
+          ? `${thickness}px`
+          : `var(--spinner-thickness-${thickness})`;
+      return {
+        ['--spinner-size-value' as any]: resolvedSize,
+        ['--spinner-thickness-value' as any]: resolvedThickness,
+      } as React.CSSProperties;
+    }, [size, thickness]);
 
-  if (!visible) return null;
+    if (!visible) return null;
 
-  const a11yProps = ariaHidden
-    ? { 'aria-hidden': true as const }
-    : ({ role: 'status', 'aria-live': 'polite', 'aria-label': label } as const);
+    const a11yProps = ariaHidden
+      ? { 'aria-hidden': true as const }
+      : ({
+          role: 'status',
+          'aria-live': 'polite',
+          'aria-label': label,
+        } as const);
 
-  const rootClassName = [
-    styles.root,
-    inline ? styles.inline : '',
-    className || '',
-  ]
-    .filter(Boolean)
-    .join(' ');
+    const rootClassName = [
+      styles.root,
+      inline ? styles.inline : '',
+      className || '',
+    ]
+      .filter(Boolean)
+      .join(' ');
 
-  return (
-    <span
-      ref={ref}
-      className={rootClassName}
-      style={styleVars}
-      data-variant={variant}
-      {...a11yProps}
-      {...rest}
-    >
-      <span className={styles.visual} />
-    </span>
-  );
-});
+    return (
+      <span
+        ref={ref}
+        className={rootClassName}
+        style={styleVars}
+        data-variant={variant}
+        {...a11yProps}
+        {...rest}
+      >
+        <span className={styles.visual} />
+      </span>
+    );
+  }
+);
 
 Spinner.displayName = 'Spinner';
 export default Spinner;

@@ -86,7 +86,10 @@ export function usePopover(options: UsePopoverOptions = {}): UsePopoverReturn {
       // Return focus to trigger when popover closes
       if (trigger && document.contains(trigger)) {
         trigger.focus();
-      } else if (previousFocusedElement && document.contains(previousFocusedElement)) {
+      } else if (
+        previousFocusedElement &&
+        document.contains(previousFocusedElement)
+      ) {
         previousFocusedElement.focus();
       }
     };

@@ -38,7 +38,10 @@ export function DocVariants({
   React.useEffect(() => {
     const defaults: Record<string, any> = {};
     controls.forEach((control) => {
-      if (control.defaultValue !== undefined && values[control.id] === undefined) {
+      if (
+        control.defaultValue !== undefined &&
+        values[control.id] === undefined
+      ) {
         defaults[control.id] = control.defaultValue;
       }
     });

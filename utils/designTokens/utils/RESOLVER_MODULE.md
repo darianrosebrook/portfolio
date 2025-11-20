@@ -16,6 +16,7 @@ The Resolver Module provides a standardized way to manage design tokens across m
 ## Key Features
 
 ### 1. Sets
+
 Collections of design tokens that can be referenced and reused:
 
 ```json
@@ -32,6 +33,7 @@ Collections of design tokens that can be referenced and reused:
 ```
 
 ### 2. Modifiers
+
 Define contexts for different values (themes, platforms, etc.):
 
 ```json
@@ -40,9 +42,7 @@ Define contexts for different values (themes, platforms, etc.):
     "theme": {
       "contexts": {
         "light": {
-          "sources": [
-            { "$ref": "#/sets/foundation" }
-          ]
+          "sources": [{ "$ref": "#/sets/foundation" }]
         },
         "dark": {
           "sources": [
@@ -57,6 +57,7 @@ Define contexts for different values (themes, platforms, etc.):
 ```
 
 ### 3. Resolution Order
+
 Defines the order in which sets and modifiers are applied:
 
 ```json
@@ -88,7 +89,7 @@ const resolver = new Resolver(doc, {
 // Resolve tokens for specific input
 const result = resolver.resolve({
   theme: 'dark',
-  brand: 'brandA'
+  brand: 'brandA',
 });
 
 // Access resolved tokens
@@ -121,9 +122,7 @@ Create a `resolver.json` file following the example structure:
   "version": "2025-10-01",
   "sets": {
     "foundation": {
-      "sources": [
-        { "$ref": "core/color.tokens.json" }
-      ]
+      "sources": [{ "$ref": "core/color.tokens.json" }]
     }
   },
   "modifiers": {
@@ -158,6 +157,7 @@ if (resolver) {
 ### Step 3: Gradual Migration
 
 You can migrate gradually:
+
 - Keep existing token files working
 - Create resolver documents for new contexts
 - Update generators to prefer resolver module when available
@@ -183,6 +183,7 @@ The resolver module supports JSON Pointer syntax for references:
 ## Compliance
 
 This implementation follows the DTCG 1.0 Resolver Module specification:
+
 - ✅ Input validation
 - ✅ Resolution ordering
 - ✅ Set and modifier resolution

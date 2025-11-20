@@ -28,12 +28,24 @@
   --links-typography-fontSize-small: var(--semantic-typography-body-05);
   --links-typography-fontSize-medium: var(--semantic-typography-body-04);
   --links-typography-fontSize-large: var(--semantic-typography-body-03);
-  --links-typography-fontWeight-default: var(--semantic-typography-font-weight-normal);
-  --links-typography-fontWeight-medium: var(--semantic-typography-font-weight-medium);
-  --links-typography-fontWeight-semibold: var(--semantic-typography-font-weight-semibold);
-  --links-typography-lineHeight-default: var(--semantic-typography-line-height-normal);
-  --links-typography-lineHeight-tight: var(--semantic-typography-line-height-tight);
-  --links-typography-lineHeight-relaxed: var(--semantic-typography-line-height-relaxed);
+  --links-typography-fontWeight-default: var(
+    --semantic-typography-font-weight-normal
+  );
+  --links-typography-fontWeight-medium: var(
+    --semantic-typography-font-weight-medium
+  );
+  --links-typography-fontWeight-semibold: var(
+    --semantic-typography-font-weight-semibold
+  );
+  --links-typography-lineHeight-default: var(
+    --semantic-typography-line-height-normal
+  );
+  --links-typography-lineHeight-tight: var(
+    --semantic-typography-line-height-tight
+  );
+  --links-typography-lineHeight-relaxed: var(
+    --semantic-typography-line-height-relaxed
+  );
 
   /* === Motion Tokens === */
   --links-motion-duration-fast: var(--core-motion-duration-short);

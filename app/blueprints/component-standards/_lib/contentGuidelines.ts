@@ -84,9 +84,3 @@ export function getContentDesign(componentName: string): ContentDesign | null {
 
   return examples[componentName] || null;
 }
-
-
-
-
-
-

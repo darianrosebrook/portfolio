@@ -14,7 +14,9 @@
       flex-shrink: 0;
       min-width: 120px;
       margin-bottom: 0;
-      padding-top: calc(var(--space-xs, 0.25rem) + 1px); // Align with input baseline
+      padding-top: calc(
+        var(--space-xs, 0.25rem) + 1px
+      ); // Align with input baseline
     }
 
     .inputContainer {

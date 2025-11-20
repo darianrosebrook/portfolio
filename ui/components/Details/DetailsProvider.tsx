@@ -110,7 +110,13 @@ export function DetailsProvider({
       allowMultiple,
       openDetails,
     }),
-    [registerDetails, unregisterDetails, handleToggle, allowMultiple, openDetails]
+    [
+      registerDetails,
+      unregisterDetails,
+      handleToggle,
+      allowMultiple,
+      openDetails,
+    ]
   );
 
   return (

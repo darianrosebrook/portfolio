@@ -101,26 +101,44 @@
 
     .control :is(input, select, textarea) {
       border-color: var(--field-color-invalid-border);
-      box-shadow: 0 0 0 2px color-mix(in oklab, var(--field-color-invalid-border) 20%, transparent);
+      box-shadow: 0 0 0 2px
+        color-mix(in oklab, var(--field-color-invalid-border) 20%, transparent);
     }
   }
 
   .root:has([data-status='valid']) {
     .control :is(input, select, textarea) {
-      border-color: var(--field-color-valid-border, var(--semantic-color-feedback-success-border));
-      box-shadow: 0 0 0 2px color-mix(in oklab, var(--field-color-valid-border, var(--semantic-color-feedback-success-border)) 20%, transparent);
+      border-color: var(
+        --field-color-valid-border,
+        var(--semantic-color-feedback-success-border)
+      );
+      box-shadow: 0 0 0 2px
+        color-mix(
+          in oklab,
+          var(
+              --field-color-valid-border,
+              var(--semantic-color-feedback-success-border)
+            )
+            20%,
+          transparent
+        );
     }
   }
 
   .root:has(.control :is(input, select, textarea):focus-visible) {
     .header {
-      color: var(--field-color-focus-text, var(--semantic-color-interactive-primary));
+      color: var(
+        --field-color-focus-text,
+        var(--semantic-color-interactive-primary)
+      );
     }
   }
 
   .root:has(.validatingIndicator) {
     .control :is(input, select, textarea) {
-      padding-inline-end: calc(var(--field-pad-x) + 2rem); // Make room for spinner
+      padding-inline-end: calc(
+        var(--field-pad-x) + 2rem
+      ); // Make room for spinner
     }
   }
 }

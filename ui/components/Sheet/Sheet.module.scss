@@ -61,7 +61,8 @@
     inset-block-end: 0;
     width: var(--sheet-size-width);
     border-inline-end: none;
-    border-inline-start: var(--sheet-border-width) solid var(--sheet-color-border);
+    border-inline-start: var(--sheet-border-width) solid
+      var(--sheet-color-border);
     border-radius: var(--sheet-border-radius) 0 0 var(--sheet-border-radius);
     transform: translateX(100%);
 
@@ -75,7 +76,8 @@
     inset-block-end: 0;
     inset-inline-start: 0;
     height: var(--sheet-size-height);
-    border-block-start: var(--sheet-border-width) solid var(--sheet-color-border);
+    border-block-start: var(--sheet-border-width) solid
+      var(--sheet-color-border);
     border-block-end: none;
     border-radius: var(--sheet-border-radius) var(--sheet-border-radius) 0 0;
     transform: translateY(100%);
@@ -137,7 +139,8 @@
     gap: var(--sheet-spacing-footerGap);
     justify-content: flex-end;
     padding-block-start: var(--sheet-spacing-section);
-    border-block-start: var(--sheet-border-width) solid var(--sheet-color-borderLight);
+    border-block-start: var(--sheet-border-width) solid
+      var(--sheet-color-borderLight);
   }
 
   .close {

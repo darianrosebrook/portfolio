@@ -4,11 +4,7 @@
     "color": {
       "overlay": {
         "colorSpace": "srgb",
-        "components": [
-          0,
-          0,
-          0
-        ],
+        "components": [0, 0, 0],
         "alpha": 0.6
       },
       "background": "{semantic.color.background.primary}",

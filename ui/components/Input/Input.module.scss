@@ -15,12 +15,22 @@
   appearance: none;
   block-size: var(--input-size-height);
   inline-size: 100%;
-  transition: border-color 0.2s ease, background-color 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
 
   &:hover:not(:disabled):not(:read-only) {
     // Use color-mix() for subtle hover effect
-    background-color: color-mix(in srgb, var(--input-color-bg) 95%, var(--input-color-focus) 5%);
-    border-color: color-mix(in srgb, var(--input-color-border) 80%, var(--input-color-focus) 20%);
+    background-color: color-mix(
+      in srgb,
+      var(--input-color-bg) 95%,
+      var(--input-color-focus) 5%
+    );
+    border-color: color-mix(
+      in srgb,
+      var(--input-color-border) 80%,
+      var(--input-color-focus) 20%
+    );
   }
 
   &:focus-visible {
@@ -32,7 +42,7 @@
 
   &.invalid {
     border-color: var(--input-color-invalid);
-    
+
     &:focus-visible {
       // Use color-mix() for invalid focus state
       box-shadow: 0 0 0 3px

@@ -16,3 +16,9 @@
 app/designTokens.scss
 scripts/templates/**/*
 .github/workflows/caws.yml
+# Cache directories
+**/.cache
+**/*.cache
+# Generated files
+**/*.generated.*
+**/*.generated

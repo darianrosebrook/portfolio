@@ -8,7 +8,9 @@
   --status-color-background-active: var(--semantic-color-background-active);
   --status-color-background-disabled: var(--semantic-color-background-disabled);
   --status-color-foreground-primary: var(--semantic-color-foreground-primary);
-  --status-color-foreground-secondary: var(--semantic-color-foreground-secondary);
+  --status-color-foreground-secondary: var(
+    --semantic-color-foreground-secondary
+  );
   --status-color-foreground-accent: var(--semantic-color-foreground-accent);
   --status-color-foreground-disabled: var(--semantic-color-foreground-disabled);
   --status-color-border-default: var(--semantic-color-border-primary);

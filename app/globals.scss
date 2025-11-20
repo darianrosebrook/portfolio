@@ -1122,14 +1122,14 @@ header + main {
     /* date place description */
     grid-template-columns: 1fr 1fr 3fr;
     gap: 2rem;
-    
+
     // Use subgrid for perfect alignment
     @supports (grid-template-columns: subgrid) {
       grid-template-columns: subgrid;
       grid-column: span 3;
     }
   }
-  
+
   // Parent grid for experience list
   .experience {
     display: grid;

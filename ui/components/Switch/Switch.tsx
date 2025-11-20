@@ -53,68 +53,75 @@ export interface SwitchProps
   size?: ControlSize;
 }
 
-const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(({
-  children,
-  checked,
-  onChange,
-  disabled = false,
-  className = '',
-  id,
-  ariaLabel,
-  ariaDescription,
-  size = 'md',
-  ...rest
-}, ref) => {
-  const safeId = useMemo(() => {
-    if (id) return id;
-    if (typeof children === 'string') {
-      return `switch-${children.replace(/[^\w-]/g, '-')}`;
-    }
-    return `switch-${Math.random().toString(36).substring(2, 9)}`;
-  }, [id, children]);
+const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
+  (
+    {
+      children,
+      checked,
+      onChange,
+      disabled = false,
+      className = '',
+      id,
+      ariaLabel,
+      ariaDescription,
+      size = 'md',
+      ...rest
+    },
+    ref
+  ) => {
+    const safeId = useMemo(() => {
+      if (id) return id;
+      if (typeof children === 'string') {
+        return `switch-${children.replace(/[^\w-]/g, '-')}`;
+      }
+      return `switch-${Math.random().toString(36).substring(2, 9)}`;
+    }, [id, children]);
 
-  const switchClassName = [
-    styles.switch,
-    styles[size],
-    checked && styles.checked,
-    disabled && styles.disabled,
-    className,
-  ]
-    .filter(Boolean)
-    .join(' ');
+    const switchClassName = [
+      styles.switch,
+      styles[size],
+      checked && styles.checked,
+      disabled && styles.disabled,
+      className,
+    ]
+      .filter(Boolean)
+      .join(' ');
 
-  return (
-    <div className={switchClassName}>
-      <input
-        ref={ref}
-        type="checkbox"
-        role="switch"
-        checked={checked}
-        onChange={onChange}
-        disabled={disabled}
-        id={safeId}
-        className={`${styles.input} ${checked ? styles.checked : ''}`}
-        aria-label={
-          ariaLabel || (typeof children === 'string' ? children : undefined)
-        }
-        aria-checked={checked}
-        aria-describedby={ariaDescription ? `${safeId}-description` : undefined}
-        {...rest}
-      />
-      <label
-        className={`${styles.label} ${checked ? styles.checked : ''} ${disabled ? styles.disabled : ''}`}
-        htmlFor={safeId}
-      >
-        {children}
-        {ariaDescription && (
-          <span id={`${safeId}-description`} className={styles.description}>
-            {ariaDescription}
-          </span>
-        )}
-      </label>
-    </div>
-  );
-});
+    return (
+      <div className={switchClassName}>
+        <input
+          ref={ref}
+          type="checkbox"
+          role="switch"
+          checked={checked}
+          onChange={onChange}
+          disabled={disabled}
+          id={safeId}
+          className={`${styles.input} ${checked ? styles.checked : ''}`}
+          aria-label={
+            ariaLabel || (typeof children === 'string' ? children : undefined)
+          }
+          aria-checked={checked}
+          aria-describedby={
+            ariaDescription ? `${safeId}-description` : undefined
+          }
+          {...rest}
+        />
+        <label
+          className={`${styles.label} ${checked ? styles.checked : ''} ${disabled ? styles.disabled : ''}`}
+          htmlFor={safeId}
+        >
+          {children}
+          {ariaDescription && (
+            <span id={`${safeId}-description`} className={styles.description}>
+              {ariaDescription}
+            </span>
+          )}
+        </label>
+      </div>
+    );
+  }
+);
 
 Switch.displayName = 'Switch';
 

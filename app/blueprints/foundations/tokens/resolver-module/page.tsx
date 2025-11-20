@@ -42,15 +42,28 @@ export default function ResolverModulePage() {
         The Resolver Module introduces:
       </p>
       <ul>
-        <li><strong>Context awareness</strong>: Resolve tokens based on brand, theme, platform</li>
-        <li><strong>Modifier application</strong>: Transform token values (lighten, scale, etc.)</li>
-        <li><strong>Resolution ordering</strong>: Control precedence of different contexts</li>
-        <li><strong>Reference validation</strong>: JSON Pointer support for external references</li>
+        <li>
+          <strong>Context awareness</strong>: Resolve tokens based on brand,
+          theme, platform
+        </li>
+        <li>
+          <strong>Modifier application</strong>: Transform token values
+          (lighten, scale, etc.)
+        </li>
+        <li>
+          <strong>Resolution ordering</strong>: Control precedence of different
+          contexts
+        </li>
+        <li>
+          <strong>Reference validation</strong>: JSON Pointer support for
+          external references
+        </li>
       </ul>
 
       <h2>Resolver Document Structure</h2>
       <p>
-        A resolver document defines how tokens are resolved across different contexts.
+        A resolver document defines how tokens are resolved across different
+        contexts.
       </p>
 
       <h3>Basic Resolver Document</h3>
@@ -298,8 +311,8 @@ export default function ResolverModulePage() {
 
       <h2>Integration with Build System</h2>
       <p>
-        Our build system integrates the resolver module to generate context-specific
-        outputs for different brands and platforms.
+        Our build system integrates the resolver module to generate
+        context-specific outputs for different brands and platforms.
       </p>
 
       <h3>Build Configuration</h3>
@@ -336,8 +349,12 @@ const tokens = resolver.resolve({
 
       <div className={styles.placeholder}>
         <p>
-          Implementation: <code>utils/designTokens/utils/resolver-module.ts</code><br/>
-          Schema: <code>utils/designTokens/validators/resolver.schema.json</code><br/>
+          Implementation:{' '}
+          <code>utils/designTokens/utils/resolver-module.ts</code>
+          <br />
+          Schema:{' '}
+          <code>utils/designTokens/validators/resolver.schema.json</code>
+          <br />
           Example: <code>ui/designTokens/resolver.example.json</code>
         </p>
       </div>
@@ -351,10 +368,3 @@ const tokens = resolver.resolve({
     </section>
   );
 }
-
-
-
-
-
-
-

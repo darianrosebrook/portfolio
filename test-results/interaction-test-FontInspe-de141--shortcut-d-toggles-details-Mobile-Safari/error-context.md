@@ -2,538 +2,538 @@
 
 ```yaml
 - generic [active] [ref=e1]:
-  - img
-  - img
-  - banner [ref=e2]:
-    - navigation [ref=e3]:
-      - generic [ref=e4]:
-        - img [ref=e5]
-        - heading "Darian Rosebrook" [level=1] [ref=e13]:
-          - link "Darian Rosebrook" [ref=e14]:
-            - /url: /
-      - list [ref=e15]:
-        - listitem [ref=e16]:
-          - link "Blueprints" [ref=e17]:
-            - /url: /blueprints
-        - listitem [ref=e18]:
-          - link "Articles" [ref=e19]:
-            - /url: /articles
-        - listitem [ref=e20]:
-          - link "Work" [ref=e21]:
-            - /url: /work
-        - listitem [ref=e22]:
-          - link "Design Tools" [ref=e23]:
-            - /url: /tools
-        - listitem [ref=e24]:
-          - button [ref=e26] [cursor=pointer]:
-            - img [ref=e28] [cursor=pointer]
-  - main [ref=e30]:
-    - generic [ref=e31]:
-      - generic [ref=e32]:
-        - heading "Interaction Test Suite" [level=1] [ref=e33]
-        - paragraph [ref=e34]: Test pointer events, keyboard shortcuts, and SVG interactions
-      - generic [ref=e35]:
-        - generic [ref=e36]:
-          - heading "SVG Canvas" [level=2] [ref=e37]
-          - generic [ref=e39]:
-            - img "Glyph \"A\" U+0041 Font inspector showing glyph A with baseline, cap height, and control points. Use keyboard to toggle features." [ref=e40]:
-              - generic: Font inspector showing glyph A with baseline, cap height, and control points. Use keyboard to toggle features.
-              - generic "Font metrics" [ref=e49]:
-                - generic [ref=e51]: Baseline
-                - generic [ref=e53]: Cap height
-                - generic [ref=e55]: X-height
-                - generic [ref=e57]: Ascender
-                - generic [ref=e59]: Descender
-              - generic "Axis values" [ref=e60]: Weight 400.00 | Optical size 32.00
-            - generic [ref=e61]:
-              - button "Copy SVG to clipboard" [ref=e62] [cursor=pointer]: Copy SVG
-              - button "Export PNG at 1x scale" [ref=e63] [cursor=pointer]: Export PNG 1x
-              - button "Export PNG at 2x scale" [ref=e64] [cursor=pointer]: Export PNG 2x
-              - button "Export PNG at 4x scale" [ref=e65] [cursor=pointer]: Export PNG 4x
-          - generic [ref=e66]:
-            - paragraph [ref=e67]:
-              - strong [ref=e68]: "Try:"
-            - list [ref=e69]:
-              - listitem [ref=e70]: Drag horizontally to adjust weight axis
-              - listitem [ref=e71]:
-                - text: Press
-                - generic [ref=e72]: d
-                - text: to toggle details
-              - listitem [ref=e73]:
-                - text: Press
-                - generic [ref=e74]: "`"
-                - text: to toggle debug overlay
-              - listitem [ref=e75]:
-                - text: Press
-                - generic [ref=e76]: "?"
-                - text: for help
-              - listitem [ref=e77]: Hover over glyph to see cursor position
-        - generic [ref=e78]:
-          - heading "Interaction Log" [level=2] [ref=e79]
-          - list [ref=e81]:
-            - listitem [ref=e82]: "7:01:47 PM: Axis values changed: Weight=400.00, Opsz=32.00"
-          - button "Clear Log" [ref=e83] [cursor=pointer]
-        - generic [ref=e84]:
-          - heading "Current State" [level=2] [ref=e85]
-          - generic [ref=e86]:
-            - generic [ref=e87]:
-              - generic [ref=e88]: "Details Visible:"
-              - generic [ref=e89]: "No"
-            - generic [ref=e90]:
-              - generic [ref=e91]: "Weight:"
-              - generic [ref=e92]: "400.00"
-            - generic [ref=e93]:
-              - generic [ref=e94]: "Optical Size:"
-              - generic [ref=e95]: "32.00"
-            - generic [ref=e96]:
-              - generic [ref=e97]: "Hover Position:"
-              - generic [ref=e98]: None
-            - generic [ref=e99]:
-              - generic [ref=e100]: "Drag State:"
-              - generic [ref=e101]: Inactive
-        - generic [ref=e102]:
-          - heading "Keyboard Shortcuts" [level=2] [ref=e103]
-          - generic [ref=e104]:
-            - term [ref=e105]:
-              - generic [ref=e106]: d
-            - definition [ref=e107]: Toggle details view (anchors, handles, metrics)
-            - term [ref=e108]:
-              - generic [ref=e109]: "`"
-              - text: or
-              - generic [ref=e110]: ~
-            - definition [ref=e111]: Toggle debug overlay
-            - term [ref=e112]:
-              - generic [ref=e113]: "?"
-            - definition [ref=e114]: Show help (console)
-            - term [ref=e115]:
-              - generic [ref=e116]: Ctrl/Cmd
-              - text: +
-              - generic [ref=e117]: +
-            - definition [ref=e118]: Zoom in (placeholder)
-            - term [ref=e119]:
-              - generic [ref=e120]: Ctrl/Cmd
-              - text: +
-              - generic [ref=e121]: "-"
-            - definition [ref=e122]: Zoom out (placeholder)
-            - term [ref=e123]:
-              - generic [ref=e124]: Ctrl/Cmd
-              - text: +
-              - generic [ref=e125]: Arrow Keys
-            - definition [ref=e126]: Pan (placeholder)
-        - generic [ref=e127]:
-          - heading "Pointer Event Test" [level=2] [ref=e128]
-          - paragraph [ref=e130]: Move and drag in this area
-  - contentinfo [ref=e131]:
-    - heading "Elsewhere" [level=2] [ref=e133]
-    - list [ref=e134]:
-      - listitem [ref=e135]:
-        - link "RESUME RESUME RESUME RESUME RESUME RESUME RESUME RESUME RESUME RESUME RESUME RESUME RESUME RESUME RESUME RESUME RESUME RESUME RESUME RESUME RESUME" [ref=e136]:
-          - /url: https://drive.google.com/file/d/1h2QH7K7153QGbW59CHWWt07Dzhgzst3a/view?usp=sharing
-          - heading "RESUME" [level=4] [ref=e137]:
-            - text: RESUME
-            - img [ref=e139]
-          - generic:
-            - paragraph [ref=e142] [cursor=pointer]:
-              - text: RESUME
-              - img [ref=e144] [cursor=pointer]
-            - paragraph [ref=e147] [cursor=pointer]:
-              - text: RESUME
-              - img [ref=e149] [cursor=pointer]
-            - paragraph [ref=e152] [cursor=pointer]:
-              - text: RESUME
-              - img [ref=e154] [cursor=pointer]
-            - paragraph [ref=e157] [cursor=pointer]:
-              - text: RESUME
-              - img [ref=e159] [cursor=pointer]
-            - paragraph [ref=e162] [cursor=pointer]:
-              - text: RESUME
-              - img [ref=e164] [cursor=pointer]
-            - paragraph [ref=e167] [cursor=pointer]:
-              - text: RESUME
-              - img [ref=e169] [cursor=pointer]
-            - paragraph [ref=e172] [cursor=pointer]:
-              - text: RESUME
-              - img [ref=e174] [cursor=pointer]
-            - paragraph [ref=e177] [cursor=pointer]:
-              - text: RESUME
-              - img [ref=e179] [cursor=pointer]
-            - paragraph [ref=e182] [cursor=pointer]:
-              - text: RESUME
-              - img [ref=e184] [cursor=pointer]
-            - paragraph [ref=e187] [cursor=pointer]:
-              - text: RESUME
-              - img [ref=e189] [cursor=pointer]
-            - paragraph [ref=e192] [cursor=pointer]:
-              - text: RESUME
-              - img [ref=e194] [cursor=pointer]
-            - paragraph [ref=e197] [cursor=pointer]:
-              - text: RESUME
-              - img [ref=e199] [cursor=pointer]
-            - paragraph [ref=e202] [cursor=pointer]:
-              - text: RESUME
-              - img [ref=e204] [cursor=pointer]
-            - paragraph [ref=e207] [cursor=pointer]:
-              - text: RESUME
-              - img [ref=e209] [cursor=pointer]
-            - paragraph [ref=e212] [cursor=pointer]:
-              - text: RESUME
-              - img [ref=e214] [cursor=pointer]
-            - paragraph [ref=e217] [cursor=pointer]:
-              - text: RESUME
-              - img [ref=e219] [cursor=pointer]
-            - paragraph [ref=e222] [cursor=pointer]:
-              - text: RESUME
-              - img [ref=e224] [cursor=pointer]
-            - paragraph [ref=e227] [cursor=pointer]:
-              - text: RESUME
-              - img [ref=e229] [cursor=pointer]
-            - paragraph [ref=e232] [cursor=pointer]:
-              - text: RESUME
-              - img [ref=e234] [cursor=pointer]
-            - paragraph [ref=e237] [cursor=pointer]:
-              - text: RESUME
-              - img [ref=e239] [cursor=pointer]
-      - listitem [ref=e241]:
-        - link "GITHUB GITHUB GITHUB GITHUB GITHUB GITHUB GITHUB GITHUB GITHUB GITHUB GITHUB GITHUB GITHUB GITHUB GITHUB GITHUB GITHUB GITHUB GITHUB GITHUB GITHUB" [ref=e242]:
-          - /url: https://github.com/darianrosebrook
-          - heading "GITHUB" [level=4] [ref=e243]:
-            - text: GITHUB
-            - img [ref=e245]
-          - generic:
-            - paragraph [ref=e248] [cursor=pointer]:
-              - text: GITHUB
-              - img [ref=e250] [cursor=pointer]
-            - paragraph [ref=e253] [cursor=pointer]:
-              - text: GITHUB
-              - img [ref=e255] [cursor=pointer]
-            - paragraph [ref=e258] [cursor=pointer]:
-              - text: GITHUB
-              - img [ref=e260] [cursor=pointer]
-            - paragraph [ref=e263] [cursor=pointer]:
-              - text: GITHUB
-              - img [ref=e265] [cursor=pointer]
-            - paragraph [ref=e268] [cursor=pointer]:
-              - text: GITHUB
-              - img [ref=e270] [cursor=pointer]
-            - paragraph [ref=e273] [cursor=pointer]:
-              - text: GITHUB
-              - img [ref=e275] [cursor=pointer]
-            - paragraph [ref=e278] [cursor=pointer]:
-              - text: GITHUB
-              - img [ref=e280] [cursor=pointer]
-            - paragraph [ref=e283] [cursor=pointer]:
-              - text: GITHUB
-              - img [ref=e285] [cursor=pointer]
-            - paragraph [ref=e288] [cursor=pointer]:
-              - text: GITHUB
-              - img [ref=e290] [cursor=pointer]
-            - paragraph [ref=e293] [cursor=pointer]:
-              - text: GITHUB
-              - img [ref=e295] [cursor=pointer]
-            - paragraph [ref=e298] [cursor=pointer]:
-              - text: GITHUB
-              - img [ref=e300] [cursor=pointer]
-            - paragraph [ref=e303] [cursor=pointer]:
-              - text: GITHUB
-              - img [ref=e305] [cursor=pointer]
-            - paragraph [ref=e308] [cursor=pointer]:
-              - text: GITHUB
-              - img [ref=e310] [cursor=pointer]
-            - paragraph [ref=e313] [cursor=pointer]:
-              - text: GITHUB
-              - img [ref=e315] [cursor=pointer]
-            - paragraph [ref=e318] [cursor=pointer]:
-              - text: GITHUB
-              - img [ref=e320] [cursor=pointer]
-            - paragraph [ref=e323] [cursor=pointer]:
-              - text: GITHUB
-              - img [ref=e325] [cursor=pointer]
-            - paragraph [ref=e328] [cursor=pointer]:
-              - text: GITHUB
-              - img [ref=e330] [cursor=pointer]
-            - paragraph [ref=e333] [cursor=pointer]:
-              - text: GITHUB
-              - img [ref=e335] [cursor=pointer]
-            - paragraph [ref=e338] [cursor=pointer]:
-              - text: GITHUB
-              - img [ref=e340] [cursor=pointer]
-            - paragraph [ref=e343] [cursor=pointer]:
-              - text: GITHUB
-              - img [ref=e345] [cursor=pointer]
-      - listitem [ref=e347]:
-        - link "LINKEDIN LINKEDIN LINKEDIN LINKEDIN LINKEDIN LINKEDIN LINKEDIN LINKEDIN LINKEDIN LINKEDIN LINKEDIN LINKEDIN LINKEDIN LINKEDIN LINKEDIN LINKEDIN LINKEDIN LINKEDIN LINKEDIN LINKEDIN LINKEDIN" [ref=e348]:
-          - /url: https://linkedin.com/in/darianrosebrook
-          - heading "LINKEDIN" [level=4] [ref=e349]:
-            - text: LINKEDIN
-            - img [ref=e351]
-          - generic:
-            - paragraph [ref=e354] [cursor=pointer]:
-              - text: LINKEDIN
-              - img [ref=e356] [cursor=pointer]
-            - paragraph [ref=e359] [cursor=pointer]:
-              - text: LINKEDIN
-              - img [ref=e361] [cursor=pointer]
-            - paragraph [ref=e364] [cursor=pointer]:
-              - text: LINKEDIN
-              - img [ref=e366] [cursor=pointer]
-            - paragraph [ref=e369] [cursor=pointer]:
-              - text: LINKEDIN
-              - img [ref=e371] [cursor=pointer]
-            - paragraph [ref=e374] [cursor=pointer]:
-              - text: LINKEDIN
-              - img [ref=e376] [cursor=pointer]
-            - paragraph [ref=e379] [cursor=pointer]:
-              - text: LINKEDIN
-              - img [ref=e381] [cursor=pointer]
-            - paragraph [ref=e384] [cursor=pointer]:
-              - text: LINKEDIN
-              - img [ref=e386] [cursor=pointer]
-            - paragraph [ref=e389] [cursor=pointer]:
-              - text: LINKEDIN
-              - img [ref=e391] [cursor=pointer]
-            - paragraph [ref=e394] [cursor=pointer]:
-              - text: LINKEDIN
-              - img [ref=e396] [cursor=pointer]
-            - paragraph [ref=e399] [cursor=pointer]:
-              - text: LINKEDIN
-              - img [ref=e401] [cursor=pointer]
-            - paragraph [ref=e404] [cursor=pointer]:
-              - text: LINKEDIN
-              - img [ref=e406] [cursor=pointer]
-            - paragraph [ref=e409] [cursor=pointer]:
-              - text: LINKEDIN
-              - img [ref=e411] [cursor=pointer]
-            - paragraph [ref=e414] [cursor=pointer]:
-              - text: LINKEDIN
-              - img [ref=e416] [cursor=pointer]
-            - paragraph [ref=e419] [cursor=pointer]:
-              - text: LINKEDIN
-              - img [ref=e421] [cursor=pointer]
-            - paragraph [ref=e424] [cursor=pointer]:
-              - text: LINKEDIN
-              - img [ref=e426] [cursor=pointer]
-            - paragraph [ref=e429] [cursor=pointer]:
-              - text: LINKEDIN
-              - img [ref=e431] [cursor=pointer]
-            - paragraph [ref=e434] [cursor=pointer]:
-              - text: LINKEDIN
-              - img [ref=e436] [cursor=pointer]
-            - paragraph [ref=e439] [cursor=pointer]:
-              - text: LINKEDIN
-              - img [ref=e441] [cursor=pointer]
-            - paragraph [ref=e444] [cursor=pointer]:
-              - text: LINKEDIN
-              - img [ref=e446] [cursor=pointer]
-            - paragraph [ref=e449] [cursor=pointer]:
-              - text: LINKEDIN
-              - img [ref=e451] [cursor=pointer]
-      - listitem [ref=e453]:
-        - link "TWITTER TWITTER TWITTER TWITTER TWITTER TWITTER TWITTER TWITTER TWITTER TWITTER TWITTER TWITTER TWITTER TWITTER TWITTER TWITTER TWITTER TWITTER TWITTER TWITTER TWITTER" [ref=e454]:
-          - /url: https://twitter.com/darianrosebrook
-          - heading "TWITTER" [level=4] [ref=e455]:
-            - text: TWITTER
-            - img [ref=e457]
-          - generic:
-            - paragraph [ref=e460] [cursor=pointer]:
-              - text: TWITTER
-              - img [ref=e462] [cursor=pointer]
-            - paragraph [ref=e465] [cursor=pointer]:
-              - text: TWITTER
-              - img [ref=e467] [cursor=pointer]
-            - paragraph [ref=e470] [cursor=pointer]:
-              - text: TWITTER
-              - img [ref=e472] [cursor=pointer]
-            - paragraph [ref=e475] [cursor=pointer]:
-              - text: TWITTER
-              - img [ref=e477] [cursor=pointer]
-            - paragraph [ref=e480] [cursor=pointer]:
-              - text: TWITTER
-              - img [ref=e482] [cursor=pointer]
-            - paragraph [ref=e485] [cursor=pointer]:
-              - text: TWITTER
-              - img [ref=e487] [cursor=pointer]
-            - paragraph [ref=e490] [cursor=pointer]:
-              - text: TWITTER
-              - img [ref=e492] [cursor=pointer]
-            - paragraph [ref=e495] [cursor=pointer]:
-              - text: TWITTER
-              - img [ref=e497] [cursor=pointer]
-            - paragraph [ref=e500] [cursor=pointer]:
-              - text: TWITTER
-              - img [ref=e502] [cursor=pointer]
-            - paragraph [ref=e505] [cursor=pointer]:
-              - text: TWITTER
-              - img [ref=e507] [cursor=pointer]
-            - paragraph [ref=e510] [cursor=pointer]:
-              - text: TWITTER
-              - img [ref=e512] [cursor=pointer]
-            - paragraph [ref=e515] [cursor=pointer]:
-              - text: TWITTER
-              - img [ref=e517] [cursor=pointer]
-            - paragraph [ref=e520] [cursor=pointer]:
-              - text: TWITTER
-              - img [ref=e522] [cursor=pointer]
-            - paragraph [ref=e525] [cursor=pointer]:
-              - text: TWITTER
-              - img [ref=e527] [cursor=pointer]
-            - paragraph [ref=e530] [cursor=pointer]:
-              - text: TWITTER
-              - img [ref=e532] [cursor=pointer]
-            - paragraph [ref=e535] [cursor=pointer]:
-              - text: TWITTER
-              - img [ref=e537] [cursor=pointer]
-            - paragraph [ref=e540] [cursor=pointer]:
-              - text: TWITTER
-              - img [ref=e542] [cursor=pointer]
-            - paragraph [ref=e545] [cursor=pointer]:
-              - text: TWITTER
-              - img [ref=e547] [cursor=pointer]
-            - paragraph [ref=e550] [cursor=pointer]:
-              - text: TWITTER
-              - img [ref=e552] [cursor=pointer]
-            - paragraph [ref=e555] [cursor=pointer]:
-              - text: TWITTER
-              - img [ref=e557] [cursor=pointer]
-      - listitem [ref=e559]:
-        - link "YOUTUBE YOUTUBE YOUTUBE YOUTUBE YOUTUBE YOUTUBE YOUTUBE YOUTUBE YOUTUBE YOUTUBE YOUTUBE YOUTUBE YOUTUBE YOUTUBE YOUTUBE YOUTUBE YOUTUBE YOUTUBE YOUTUBE YOUTUBE YOUTUBE" [ref=e560]:
-          - /url: https://youtube.com/@darian.rosebrook
-          - heading "YOUTUBE" [level=4] [ref=e561]:
-            - text: YOUTUBE
-            - img [ref=e563]
-          - generic:
-            - paragraph [ref=e566] [cursor=pointer]:
-              - text: YOUTUBE
-              - img [ref=e568] [cursor=pointer]
-            - paragraph [ref=e571] [cursor=pointer]:
-              - text: YOUTUBE
-              - img [ref=e573] [cursor=pointer]
-            - paragraph [ref=e576] [cursor=pointer]:
-              - text: YOUTUBE
-              - img [ref=e578] [cursor=pointer]
-            - paragraph [ref=e581] [cursor=pointer]:
-              - text: YOUTUBE
-              - img [ref=e583] [cursor=pointer]
-            - paragraph [ref=e586] [cursor=pointer]:
-              - text: YOUTUBE
-              - img [ref=e588] [cursor=pointer]
-            - paragraph [ref=e591] [cursor=pointer]:
-              - text: YOUTUBE
-              - img [ref=e593] [cursor=pointer]
-            - paragraph [ref=e596] [cursor=pointer]:
-              - text: YOUTUBE
-              - img [ref=e598] [cursor=pointer]
-            - paragraph [ref=e601] [cursor=pointer]:
-              - text: YOUTUBE
-              - img [ref=e603] [cursor=pointer]
-            - paragraph [ref=e606] [cursor=pointer]:
-              - text: YOUTUBE
-              - img [ref=e608] [cursor=pointer]
-            - paragraph [ref=e611] [cursor=pointer]:
-              - text: YOUTUBE
-              - img [ref=e613] [cursor=pointer]
-            - paragraph [ref=e616] [cursor=pointer]:
-              - text: YOUTUBE
-              - img [ref=e618] [cursor=pointer]
-            - paragraph [ref=e621] [cursor=pointer]:
-              - text: YOUTUBE
-              - img [ref=e623] [cursor=pointer]
-            - paragraph [ref=e626] [cursor=pointer]:
-              - text: YOUTUBE
-              - img [ref=e628] [cursor=pointer]
-            - paragraph [ref=e631] [cursor=pointer]:
-              - text: YOUTUBE
-              - img [ref=e633] [cursor=pointer]
-            - paragraph [ref=e636] [cursor=pointer]:
-              - text: YOUTUBE
-              - img [ref=e638] [cursor=pointer]
-            - paragraph [ref=e641] [cursor=pointer]:
-              - text: YOUTUBE
-              - img [ref=e643] [cursor=pointer]
-            - paragraph [ref=e646] [cursor=pointer]:
-              - text: YOUTUBE
-              - img [ref=e648] [cursor=pointer]
-            - paragraph [ref=e651] [cursor=pointer]:
-              - text: YOUTUBE
-              - img [ref=e653] [cursor=pointer]
-            - paragraph [ref=e656] [cursor=pointer]:
-              - text: YOUTUBE
-              - img [ref=e658] [cursor=pointer]
-            - paragraph [ref=e661] [cursor=pointer]:
-              - text: YOUTUBE
-              - img [ref=e663] [cursor=pointer]
-      - listitem [ref=e665]:
-        - link "INSTAGRAM INSTAGRAM INSTAGRAM INSTAGRAM INSTAGRAM INSTAGRAM INSTAGRAM INSTAGRAM INSTAGRAM INSTAGRAM INSTAGRAM INSTAGRAM INSTAGRAM INSTAGRAM INSTAGRAM INSTAGRAM INSTAGRAM INSTAGRAM INSTAGRAM INSTAGRAM INSTAGRAM" [ref=e666]:
-          - /url: https://instagram.com/darianrosebrook
-          - heading "INSTAGRAM" [level=4] [ref=e667]:
-            - text: INSTAGRAM
-            - img [ref=e669]
-          - generic:
-            - paragraph [ref=e672] [cursor=pointer]:
-              - text: INSTAGRAM
-              - img [ref=e674] [cursor=pointer]
-            - paragraph [ref=e677] [cursor=pointer]:
-              - text: INSTAGRAM
-              - img [ref=e679] [cursor=pointer]
-            - paragraph [ref=e682] [cursor=pointer]:
-              - text: INSTAGRAM
-              - img [ref=e684] [cursor=pointer]
-            - paragraph [ref=e687] [cursor=pointer]:
-              - text: INSTAGRAM
-              - img [ref=e689] [cursor=pointer]
-            - paragraph [ref=e692] [cursor=pointer]:
-              - text: INSTAGRAM
-              - img [ref=e694] [cursor=pointer]
-            - paragraph [ref=e697] [cursor=pointer]:
-              - text: INSTAGRAM
-              - img [ref=e699] [cursor=pointer]
-            - paragraph [ref=e702] [cursor=pointer]:
-              - text: INSTAGRAM
-              - img [ref=e704] [cursor=pointer]
-            - paragraph [ref=e707] [cursor=pointer]:
-              - text: INSTAGRAM
-              - img [ref=e709] [cursor=pointer]
-            - paragraph [ref=e712] [cursor=pointer]:
-              - text: INSTAGRAM
-              - img [ref=e714] [cursor=pointer]
-            - paragraph [ref=e717] [cursor=pointer]:
-              - text: INSTAGRAM
-              - img [ref=e719] [cursor=pointer]
-            - paragraph [ref=e722] [cursor=pointer]:
-              - text: INSTAGRAM
-              - img [ref=e724] [cursor=pointer]
-            - paragraph [ref=e727] [cursor=pointer]:
-              - text: INSTAGRAM
-              - img [ref=e729] [cursor=pointer]
-            - paragraph [ref=e732] [cursor=pointer]:
-              - text: INSTAGRAM
-              - img [ref=e734] [cursor=pointer]
-            - paragraph [ref=e737] [cursor=pointer]:
-              - text: INSTAGRAM
-              - img [ref=e739] [cursor=pointer]
-            - paragraph [ref=e742] [cursor=pointer]:
-              - text: INSTAGRAM
-              - img [ref=e744] [cursor=pointer]
-            - paragraph [ref=e747] [cursor=pointer]:
-              - text: INSTAGRAM
-              - img [ref=e749] [cursor=pointer]
-            - paragraph [ref=e752] [cursor=pointer]:
-              - text: INSTAGRAM
-              - img [ref=e754] [cursor=pointer]
-            - paragraph [ref=e757] [cursor=pointer]:
-              - text: INSTAGRAM
-              - img [ref=e759] [cursor=pointer]
-            - paragraph [ref=e762] [cursor=pointer]:
-              - text: INSTAGRAM
-              - img [ref=e764] [cursor=pointer]
-            - paragraph [ref=e767] [cursor=pointer]:
-              - text: INSTAGRAM
-              - img [ref=e769] [cursor=pointer]
-    - generic [ref=e771]:
-      - paragraph [ref=e772]:
-        - generic [ref=e773]: © 2015 - 2025 Darian Rosebrook.
-      - paragraph [ref=e774]:
-        - generic [ref=e775]: All rights reserved.
-  - button "Open Next.js Dev Tools" [ref=e781] [cursor=pointer]:
-    - img [ref=e782] [cursor=pointer]
-  - alert [ref=e787]
+    - img
+    - img
+    - banner [ref=e2]:
+        - navigation [ref=e3]:
+            - generic [ref=e4]:
+                - img [ref=e5]
+                - heading "Darian Rosebrook" [level=1] [ref=e13]:
+                    - link "Darian Rosebrook" [ref=e14]:
+                        - /url: /
+            - list [ref=e15]:
+                - listitem [ref=e16]:
+                    - link "Blueprints" [ref=e17]:
+                        - /url: /blueprints
+                - listitem [ref=e18]:
+                    - link "Articles" [ref=e19]:
+                        - /url: /articles
+                - listitem [ref=e20]:
+                    - link "Work" [ref=e21]:
+                        - /url: /work
+                - listitem [ref=e22]:
+                    - link "Design Tools" [ref=e23]:
+                        - /url: /tools
+                - listitem [ref=e24]:
+                    - button [ref=e26] [cursor=pointer]:
+                        - img [ref=e28] [cursor=pointer]
+    - main [ref=e30]:
+        - generic [ref=e31]:
+            - generic [ref=e32]:
+                - heading "Interaction Test Suite" [level=1] [ref=e33]
+                - paragraph [ref=e34]: Test pointer events, keyboard shortcuts, and SVG interactions
+            - generic [ref=e35]:
+                - generic [ref=e36]:
+                    - heading "SVG Canvas" [level=2] [ref=e37]
+                    - generic [ref=e39]:
+                        - img "Glyph \"A\" U+0041 Font inspector showing glyph A with baseline, cap height, and control points. Use keyboard to toggle features." [ref=e40]:
+                            - generic: Font inspector showing glyph A with baseline, cap height, and control points. Use keyboard to toggle features.
+                            - generic "Font metrics" [ref=e49]:
+                                - generic [ref=e51]: Baseline
+                                - generic [ref=e53]: Cap height
+                                - generic [ref=e55]: X-height
+                                - generic [ref=e57]: Ascender
+                                - generic [ref=e59]: Descender
+                            - generic "Axis values" [ref=e60]: Weight 400.00 | Optical size 32.00
+                        - generic [ref=e61]:
+                            - button "Copy SVG to clipboard" [ref=e62] [cursor=pointer]: Copy SVG
+                            - button "Export PNG at 1x scale" [ref=e63] [cursor=pointer]: Export PNG 1x
+                            - button "Export PNG at 2x scale" [ref=e64] [cursor=pointer]: Export PNG 2x
+                            - button "Export PNG at 4x scale" [ref=e65] [cursor=pointer]: Export PNG 4x
+                    - generic [ref=e66]:
+                        - paragraph [ref=e67]:
+                            - strong [ref=e68]: 'Try:'
+                        - list [ref=e69]:
+                            - listitem [ref=e70]: Drag horizontally to adjust weight axis
+                            - listitem [ref=e71]:
+                                - text: Press
+                                - generic [ref=e72]: d
+                                - text: to toggle details
+                            - listitem [ref=e73]:
+                                - text: Press
+                                - generic [ref=e74]: '`'
+                                - text: to toggle debug overlay
+                            - listitem [ref=e75]:
+                                - text: Press
+                                - generic [ref=e76]: '?'
+                                - text: for help
+                            - listitem [ref=e77]: Hover over glyph to see cursor position
+                - generic [ref=e78]:
+                    - heading "Interaction Log" [level=2] [ref=e79]
+                    - list [ref=e81]:
+                        - listitem [ref=e82]: '7:01:47 PM: Axis values changed: Weight=400.00, Opsz=32.00'
+                    - button "Clear Log" [ref=e83] [cursor=pointer]
+                - generic [ref=e84]:
+                    - heading "Current State" [level=2] [ref=e85]
+                    - generic [ref=e86]:
+                        - generic [ref=e87]:
+                            - generic [ref=e88]: 'Details Visible:'
+                            - generic [ref=e89]: 'No'
+                        - generic [ref=e90]:
+                            - generic [ref=e91]: 'Weight:'
+                            - generic [ref=e92]: '400.00'
+                        - generic [ref=e93]:
+                            - generic [ref=e94]: 'Optical Size:'
+                            - generic [ref=e95]: '32.00'
+                        - generic [ref=e96]:
+                            - generic [ref=e97]: 'Hover Position:'
+                            - generic [ref=e98]: None
+                        - generic [ref=e99]:
+                            - generic [ref=e100]: 'Drag State:'
+                            - generic [ref=e101]: Inactive
+                - generic [ref=e102]:
+                    - heading "Keyboard Shortcuts" [level=2] [ref=e103]
+                    - generic [ref=e104]:
+                        - term [ref=e105]:
+                            - generic [ref=e106]: d
+                        - definition [ref=e107]: Toggle details view (anchors, handles, metrics)
+                        - term [ref=e108]:
+                            - generic [ref=e109]: '`'
+                            - text: or
+                            - generic [ref=e110]: ~
+                        - definition [ref=e111]: Toggle debug overlay
+                        - term [ref=e112]:
+                            - generic [ref=e113]: '?'
+                        - definition [ref=e114]: Show help (console)
+                        - term [ref=e115]:
+                            - generic [ref=e116]: Ctrl/Cmd
+                            - text: +
+                            - generic [ref=e117]: +
+                        - definition [ref=e118]: Zoom in (placeholder)
+                        - term [ref=e119]:
+                            - generic [ref=e120]: Ctrl/Cmd
+                            - text: +
+                            - generic [ref=e121]: '-'
+                        - definition [ref=e122]: Zoom out (placeholder)
+                        - term [ref=e123]:
+                            - generic [ref=e124]: Ctrl/Cmd
+                            - text: +
+                            - generic [ref=e125]: Arrow Keys
+                        - definition [ref=e126]: Pan (placeholder)
+                - generic [ref=e127]:
+                    - heading "Pointer Event Test" [level=2] [ref=e128]
+                    - paragraph [ref=e130]: Move and drag in this area
+    - contentinfo [ref=e131]:
+        - heading "Elsewhere" [level=2] [ref=e133]
+        - list [ref=e134]:
+            - listitem [ref=e135]:
+                - link "RESUME RESUME RESUME RESUME RESUME RESUME RESUME RESUME RESUME RESUME RESUME RESUME RESUME RESUME RESUME RESUME RESUME RESUME RESUME RESUME RESUME" [ref=e136]:
+                    - /url: https://drive.google.com/file/d/1h2QH7K7153QGbW59CHWWt07Dzhgzst3a/view?usp=sharing
+                    - heading "RESUME" [level=4] [ref=e137]:
+                        - text: RESUME
+                        - img [ref=e139]
+                    - generic:
+                        - paragraph [ref=e142] [cursor=pointer]:
+                            - text: RESUME
+                            - img [ref=e144] [cursor=pointer]
+                        - paragraph [ref=e147] [cursor=pointer]:
+                            - text: RESUME
+                            - img [ref=e149] [cursor=pointer]
+                        - paragraph [ref=e152] [cursor=pointer]:
+                            - text: RESUME
+                            - img [ref=e154] [cursor=pointer]
+                        - paragraph [ref=e157] [cursor=pointer]:
+                            - text: RESUME
+                            - img [ref=e159] [cursor=pointer]
+                        - paragraph [ref=e162] [cursor=pointer]:
+                            - text: RESUME
+                            - img [ref=e164] [cursor=pointer]
+                        - paragraph [ref=e167] [cursor=pointer]:
+                            - text: RESUME
+                            - img [ref=e169] [cursor=pointer]
+                        - paragraph [ref=e172] [cursor=pointer]:
+                            - text: RESUME
+                            - img [ref=e174] [cursor=pointer]
+                        - paragraph [ref=e177] [cursor=pointer]:
+                            - text: RESUME
+                            - img [ref=e179] [cursor=pointer]
+                        - paragraph [ref=e182] [cursor=pointer]:
+                            - text: RESUME
+                            - img [ref=e184] [cursor=pointer]
+                        - paragraph [ref=e187] [cursor=pointer]:
+                            - text: RESUME
+                            - img [ref=e189] [cursor=pointer]
+                        - paragraph [ref=e192] [cursor=pointer]:
+                            - text: RESUME
+                            - img [ref=e194] [cursor=pointer]
+                        - paragraph [ref=e197] [cursor=pointer]:
+                            - text: RESUME
+                            - img [ref=e199] [cursor=pointer]
+                        - paragraph [ref=e202] [cursor=pointer]:
+                            - text: RESUME
+                            - img [ref=e204] [cursor=pointer]
+                        - paragraph [ref=e207] [cursor=pointer]:
+                            - text: RESUME
+                            - img [ref=e209] [cursor=pointer]
+                        - paragraph [ref=e212] [cursor=pointer]:
+                            - text: RESUME
+                            - img [ref=e214] [cursor=pointer]
+                        - paragraph [ref=e217] [cursor=pointer]:
+                            - text: RESUME
+                            - img [ref=e219] [cursor=pointer]
+                        - paragraph [ref=e222] [cursor=pointer]:
+                            - text: RESUME
+                            - img [ref=e224] [cursor=pointer]
+                        - paragraph [ref=e227] [cursor=pointer]:
+                            - text: RESUME
+                            - img [ref=e229] [cursor=pointer]
+                        - paragraph [ref=e232] [cursor=pointer]:
+                            - text: RESUME
+                            - img [ref=e234] [cursor=pointer]
+                        - paragraph [ref=e237] [cursor=pointer]:
+                            - text: RESUME
+                            - img [ref=e239] [cursor=pointer]
+            - listitem [ref=e241]:
+                - link "GITHUB GITHUB GITHUB GITHUB GITHUB GITHUB GITHUB GITHUB GITHUB GITHUB GITHUB GITHUB GITHUB GITHUB GITHUB GITHUB GITHUB GITHUB GITHUB GITHUB GITHUB" [ref=e242]:
+                    - /url: https://github.com/darianrosebrook
+                    - heading "GITHUB" [level=4] [ref=e243]:
+                        - text: GITHUB
+                        - img [ref=e245]
+                    - generic:
+                        - paragraph [ref=e248] [cursor=pointer]:
+                            - text: GITHUB
+                            - img [ref=e250] [cursor=pointer]
+                        - paragraph [ref=e253] [cursor=pointer]:
+                            - text: GITHUB
+                            - img [ref=e255] [cursor=pointer]
+                        - paragraph [ref=e258] [cursor=pointer]:
+                            - text: GITHUB
+                            - img [ref=e260] [cursor=pointer]
+                        - paragraph [ref=e263] [cursor=pointer]:
+                            - text: GITHUB
+                            - img [ref=e265] [cursor=pointer]
+                        - paragraph [ref=e268] [cursor=pointer]:
+                            - text: GITHUB
+                            - img [ref=e270] [cursor=pointer]
+                        - paragraph [ref=e273] [cursor=pointer]:
+                            - text: GITHUB
+                            - img [ref=e275] [cursor=pointer]
+                        - paragraph [ref=e278] [cursor=pointer]:
+                            - text: GITHUB
+                            - img [ref=e280] [cursor=pointer]
+                        - paragraph [ref=e283] [cursor=pointer]:
+                            - text: GITHUB
+                            - img [ref=e285] [cursor=pointer]
+                        - paragraph [ref=e288] [cursor=pointer]:
+                            - text: GITHUB
+                            - img [ref=e290] [cursor=pointer]
+                        - paragraph [ref=e293] [cursor=pointer]:
+                            - text: GITHUB
+                            - img [ref=e295] [cursor=pointer]
+                        - paragraph [ref=e298] [cursor=pointer]:
+                            - text: GITHUB
+                            - img [ref=e300] [cursor=pointer]
+                        - paragraph [ref=e303] [cursor=pointer]:
+                            - text: GITHUB
+                            - img [ref=e305] [cursor=pointer]
+                        - paragraph [ref=e308] [cursor=pointer]:
+                            - text: GITHUB
+                            - img [ref=e310] [cursor=pointer]
+                        - paragraph [ref=e313] [cursor=pointer]:
+                            - text: GITHUB
+                            - img [ref=e315] [cursor=pointer]
+                        - paragraph [ref=e318] [cursor=pointer]:
+                            - text: GITHUB
+                            - img [ref=e320] [cursor=pointer]
+                        - paragraph [ref=e323] [cursor=pointer]:
+                            - text: GITHUB
+                            - img [ref=e325] [cursor=pointer]
+                        - paragraph [ref=e328] [cursor=pointer]:
+                            - text: GITHUB
+                            - img [ref=e330] [cursor=pointer]
+                        - paragraph [ref=e333] [cursor=pointer]:
+                            - text: GITHUB
+                            - img [ref=e335] [cursor=pointer]
+                        - paragraph [ref=e338] [cursor=pointer]:
+                            - text: GITHUB
+                            - img [ref=e340] [cursor=pointer]
+                        - paragraph [ref=e343] [cursor=pointer]:
+                            - text: GITHUB
+                            - img [ref=e345] [cursor=pointer]
+            - listitem [ref=e347]:
+                - link "LINKEDIN LINKEDIN LINKEDIN LINKEDIN LINKEDIN LINKEDIN LINKEDIN LINKEDIN LINKEDIN LINKEDIN LINKEDIN LINKEDIN LINKEDIN LINKEDIN LINKEDIN LINKEDIN LINKEDIN LINKEDIN LINKEDIN LINKEDIN LINKEDIN" [ref=e348]:
+                    - /url: https://linkedin.com/in/darianrosebrook
+                    - heading "LINKEDIN" [level=4] [ref=e349]:
+                        - text: LINKEDIN
+                        - img [ref=e351]
+                    - generic:
+                        - paragraph [ref=e354] [cursor=pointer]:
+                            - text: LINKEDIN
+                            - img [ref=e356] [cursor=pointer]
+                        - paragraph [ref=e359] [cursor=pointer]:
+                            - text: LINKEDIN
+                            - img [ref=e361] [cursor=pointer]
+                        - paragraph [ref=e364] [cursor=pointer]:
+                            - text: LINKEDIN
+                            - img [ref=e366] [cursor=pointer]
+                        - paragraph [ref=e369] [cursor=pointer]:
+                            - text: LINKEDIN
+                            - img [ref=e371] [cursor=pointer]
+                        - paragraph [ref=e374] [cursor=pointer]:
+                            - text: LINKEDIN
+                            - img [ref=e376] [cursor=pointer]
+                        - paragraph [ref=e379] [cursor=pointer]:
+                            - text: LINKEDIN
+                            - img [ref=e381] [cursor=pointer]
+                        - paragraph [ref=e384] [cursor=pointer]:
+                            - text: LINKEDIN
+                            - img [ref=e386] [cursor=pointer]
+                        - paragraph [ref=e389] [cursor=pointer]:
+                            - text: LINKEDIN
+                            - img [ref=e391] [cursor=pointer]
+                        - paragraph [ref=e394] [cursor=pointer]:
+                            - text: LINKEDIN
+                            - img [ref=e396] [cursor=pointer]
+                        - paragraph [ref=e399] [cursor=pointer]:
+                            - text: LINKEDIN
+                            - img [ref=e401] [cursor=pointer]
+                        - paragraph [ref=e404] [cursor=pointer]:
+                            - text: LINKEDIN
+                            - img [ref=e406] [cursor=pointer]
+                        - paragraph [ref=e409] [cursor=pointer]:
+                            - text: LINKEDIN
+                            - img [ref=e411] [cursor=pointer]
+                        - paragraph [ref=e414] [cursor=pointer]:
+                            - text: LINKEDIN
+                            - img [ref=e416] [cursor=pointer]
+                        - paragraph [ref=e419] [cursor=pointer]:
+                            - text: LINKEDIN
+                            - img [ref=e421] [cursor=pointer]
+                        - paragraph [ref=e424] [cursor=pointer]:
+                            - text: LINKEDIN
+                            - img [ref=e426] [cursor=pointer]
+                        - paragraph [ref=e429] [cursor=pointer]:
+                            - text: LINKEDIN
+                            - img [ref=e431] [cursor=pointer]
+                        - paragraph [ref=e434] [cursor=pointer]:
+                            - text: LINKEDIN
+                            - img [ref=e436] [cursor=pointer]
+                        - paragraph [ref=e439] [cursor=pointer]:
+                            - text: LINKEDIN
+                            - img [ref=e441] [cursor=pointer]
+                        - paragraph [ref=e444] [cursor=pointer]:
+                            - text: LINKEDIN
+                            - img [ref=e446] [cursor=pointer]
+                        - paragraph [ref=e449] [cursor=pointer]:
+                            - text: LINKEDIN
+                            - img [ref=e451] [cursor=pointer]
+            - listitem [ref=e453]:
+                - link "TWITTER TWITTER TWITTER TWITTER TWITTER TWITTER TWITTER TWITTER TWITTER TWITTER TWITTER TWITTER TWITTER TWITTER TWITTER TWITTER TWITTER TWITTER TWITTER TWITTER TWITTER" [ref=e454]:
+                    - /url: https://twitter.com/darianrosebrook
+                    - heading "TWITTER" [level=4] [ref=e455]:
+                        - text: TWITTER
+                        - img [ref=e457]
+                    - generic:
+                        - paragraph [ref=e460] [cursor=pointer]:
+                            - text: TWITTER
+                            - img [ref=e462] [cursor=pointer]
+                        - paragraph [ref=e465] [cursor=pointer]:
+                            - text: TWITTER
+                            - img [ref=e467] [cursor=pointer]
+                        - paragraph [ref=e470] [cursor=pointer]:
+                            - text: TWITTER
+                            - img [ref=e472] [cursor=pointer]
+                        - paragraph [ref=e475] [cursor=pointer]:
+                            - text: TWITTER
+                            - img [ref=e477] [cursor=pointer]
+                        - paragraph [ref=e480] [cursor=pointer]:
+                            - text: TWITTER
+                            - img [ref=e482] [cursor=pointer]
+                        - paragraph [ref=e485] [cursor=pointer]:
+                            - text: TWITTER
+                            - img [ref=e487] [cursor=pointer]
+                        - paragraph [ref=e490] [cursor=pointer]:
+                            - text: TWITTER
+                            - img [ref=e492] [cursor=pointer]
+                        - paragraph [ref=e495] [cursor=pointer]:
+                            - text: TWITTER
+                            - img [ref=e497] [cursor=pointer]
+                        - paragraph [ref=e500] [cursor=pointer]:
+                            - text: TWITTER
+                            - img [ref=e502] [cursor=pointer]
+                        - paragraph [ref=e505] [cursor=pointer]:
+                            - text: TWITTER
+                            - img [ref=e507] [cursor=pointer]
+                        - paragraph [ref=e510] [cursor=pointer]:
+                            - text: TWITTER
+                            - img [ref=e512] [cursor=pointer]
+                        - paragraph [ref=e515] [cursor=pointer]:
+                            - text: TWITTER
+                            - img [ref=e517] [cursor=pointer]
+                        - paragraph [ref=e520] [cursor=pointer]:
+                            - text: TWITTER
+                            - img [ref=e522] [cursor=pointer]
+                        - paragraph [ref=e525] [cursor=pointer]:
+                            - text: TWITTER
+                            - img [ref=e527] [cursor=pointer]
+                        - paragraph [ref=e530] [cursor=pointer]:
+                            - text: TWITTER
+                            - img [ref=e532] [cursor=pointer]
+                        - paragraph [ref=e535] [cursor=pointer]:
+                            - text: TWITTER
+                            - img [ref=e537] [cursor=pointer]
+                        - paragraph [ref=e540] [cursor=pointer]:
+                            - text: TWITTER
+                            - img [ref=e542] [cursor=pointer]
+                        - paragraph [ref=e545] [cursor=pointer]:
+                            - text: TWITTER
+                            - img [ref=e547] [cursor=pointer]
+                        - paragraph [ref=e550] [cursor=pointer]:
+                            - text: TWITTER
+                            - img [ref=e552] [cursor=pointer]
+                        - paragraph [ref=e555] [cursor=pointer]:
+                            - text: TWITTER
+                            - img [ref=e557] [cursor=pointer]
+            - listitem [ref=e559]:
+                - link "YOUTUBE YOUTUBE YOUTUBE YOUTUBE YOUTUBE YOUTUBE YOUTUBE YOUTUBE YOUTUBE YOUTUBE YOUTUBE YOUTUBE YOUTUBE YOUTUBE YOUTUBE YOUTUBE YOUTUBE YOUTUBE YOUTUBE YOUTUBE YOUTUBE" [ref=e560]:
+                    - /url: https://youtube.com/@darian.rosebrook
+                    - heading "YOUTUBE" [level=4] [ref=e561]:
+                        - text: YOUTUBE
+                        - img [ref=e563]
+                    - generic:
+                        - paragraph [ref=e566] [cursor=pointer]:
+                            - text: YOUTUBE
+                            - img [ref=e568] [cursor=pointer]
+                        - paragraph [ref=e571] [cursor=pointer]:
+                            - text: YOUTUBE
+                            - img [ref=e573] [cursor=pointer]
+                        - paragraph [ref=e576] [cursor=pointer]:
+                            - text: YOUTUBE
+                            - img [ref=e578] [cursor=pointer]
+                        - paragraph [ref=e581] [cursor=pointer]:
+                            - text: YOUTUBE
+                            - img [ref=e583] [cursor=pointer]
+                        - paragraph [ref=e586] [cursor=pointer]:
+                            - text: YOUTUBE
+                            - img [ref=e588] [cursor=pointer]
+                        - paragraph [ref=e591] [cursor=pointer]:
+                            - text: YOUTUBE
+                            - img [ref=e593] [cursor=pointer]
+                        - paragraph [ref=e596] [cursor=pointer]:
+                            - text: YOUTUBE
+                            - img [ref=e598] [cursor=pointer]
+                        - paragraph [ref=e601] [cursor=pointer]:
+                            - text: YOUTUBE
+                            - img [ref=e603] [cursor=pointer]
+                        - paragraph [ref=e606] [cursor=pointer]:
+                            - text: YOUTUBE
+                            - img [ref=e608] [cursor=pointer]
+                        - paragraph [ref=e611] [cursor=pointer]:
+                            - text: YOUTUBE
+                            - img [ref=e613] [cursor=pointer]
+                        - paragraph [ref=e616] [cursor=pointer]:
+                            - text: YOUTUBE
+                            - img [ref=e618] [cursor=pointer]
+                        - paragraph [ref=e621] [cursor=pointer]:
+                            - text: YOUTUBE
+                            - img [ref=e623] [cursor=pointer]
+                        - paragraph [ref=e626] [cursor=pointer]:
+                            - text: YOUTUBE
+                            - img [ref=e628] [cursor=pointer]
+                        - paragraph [ref=e631] [cursor=pointer]:
+                            - text: YOUTUBE
+                            - img [ref=e633] [cursor=pointer]
+                        - paragraph [ref=e636] [cursor=pointer]:
+                            - text: YOUTUBE
+                            - img [ref=e638] [cursor=pointer]
+                        - paragraph [ref=e641] [cursor=pointer]:
+                            - text: YOUTUBE
+                            - img [ref=e643] [cursor=pointer]
+                        - paragraph [ref=e646] [cursor=pointer]:
+                            - text: YOUTUBE
+                            - img [ref=e648] [cursor=pointer]
+                        - paragraph [ref=e651] [cursor=pointer]:
+                            - text: YOUTUBE
+                            - img [ref=e653] [cursor=pointer]
+                        - paragraph [ref=e656] [cursor=pointer]:
+                            - text: YOUTUBE
+                            - img [ref=e658] [cursor=pointer]
+                        - paragraph [ref=e661] [cursor=pointer]:
+                            - text: YOUTUBE
+                            - img [ref=e663] [cursor=pointer]
+            - listitem [ref=e665]:
+                - link "INSTAGRAM INSTAGRAM INSTAGRAM INSTAGRAM INSTAGRAM INSTAGRAM INSTAGRAM INSTAGRAM INSTAGRAM INSTAGRAM INSTAGRAM INSTAGRAM INSTAGRAM INSTAGRAM INSTAGRAM INSTAGRAM INSTAGRAM INSTAGRAM INSTAGRAM INSTAGRAM INSTAGRAM" [ref=e666]:
+                    - /url: https://instagram.com/darianrosebrook
+                    - heading "INSTAGRAM" [level=4] [ref=e667]:
+                        - text: INSTAGRAM
+                        - img [ref=e669]
+                    - generic:
+                        - paragraph [ref=e672] [cursor=pointer]:
+                            - text: INSTAGRAM
+                            - img [ref=e674] [cursor=pointer]
+                        - paragraph [ref=e677] [cursor=pointer]:
+                            - text: INSTAGRAM
+                            - img [ref=e679] [cursor=pointer]
+                        - paragraph [ref=e682] [cursor=pointer]:
+                            - text: INSTAGRAM
+                            - img [ref=e684] [cursor=pointer]
+                        - paragraph [ref=e687] [cursor=pointer]:
+                            - text: INSTAGRAM
+                            - img [ref=e689] [cursor=pointer]
+                        - paragraph [ref=e692] [cursor=pointer]:
+                            - text: INSTAGRAM
+                            - img [ref=e694] [cursor=pointer]
+                        - paragraph [ref=e697] [cursor=pointer]:
+                            - text: INSTAGRAM
+                            - img [ref=e699] [cursor=pointer]
+                        - paragraph [ref=e702] [cursor=pointer]:
+                            - text: INSTAGRAM
+                            - img [ref=e704] [cursor=pointer]
+                        - paragraph [ref=e707] [cursor=pointer]:
+                            - text: INSTAGRAM
+                            - img [ref=e709] [cursor=pointer]
+                        - paragraph [ref=e712] [cursor=pointer]:
+                            - text: INSTAGRAM
+                            - img [ref=e714] [cursor=pointer]
+                        - paragraph [ref=e717] [cursor=pointer]:
+                            - text: INSTAGRAM
+                            - img [ref=e719] [cursor=pointer]
+                        - paragraph [ref=e722] [cursor=pointer]:
+                            - text: INSTAGRAM
+                            - img [ref=e724] [cursor=pointer]
+                        - paragraph [ref=e727] [cursor=pointer]:
+                            - text: INSTAGRAM
+                            - img [ref=e729] [cursor=pointer]
+                        - paragraph [ref=e732] [cursor=pointer]:
+                            - text: INSTAGRAM
+                            - img [ref=e734] [cursor=pointer]
+                        - paragraph [ref=e737] [cursor=pointer]:
+                            - text: INSTAGRAM
+                            - img [ref=e739] [cursor=pointer]
+                        - paragraph [ref=e742] [cursor=pointer]:
+                            - text: INSTAGRAM
+                            - img [ref=e744] [cursor=pointer]
+                        - paragraph [ref=e747] [cursor=pointer]:
+                            - text: INSTAGRAM
+                            - img [ref=e749] [cursor=pointer]
+                        - paragraph [ref=e752] [cursor=pointer]:
+                            - text: INSTAGRAM
+                            - img [ref=e754] [cursor=pointer]
+                        - paragraph [ref=e757] [cursor=pointer]:
+                            - text: INSTAGRAM
+                            - img [ref=e759] [cursor=pointer]
+                        - paragraph [ref=e762] [cursor=pointer]:
+                            - text: INSTAGRAM
+                            - img [ref=e764] [cursor=pointer]
+                        - paragraph [ref=e767] [cursor=pointer]:
+                            - text: INSTAGRAM
+                            - img [ref=e769] [cursor=pointer]
+        - generic [ref=e771]:
+            - paragraph [ref=e772]:
+                - generic [ref=e773]: © 2015 - 2025 Darian Rosebrook.
+            - paragraph [ref=e774]:
+                - generic [ref=e775]: All rights reserved.
+    - button "Open Next.js Dev Tools" [ref=e781] [cursor=pointer]:
+        - img [ref=e782] [cursor=pointer]
+    - alert [ref=e787]
 ```

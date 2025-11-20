@@ -390,11 +390,7 @@
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
-          "components": [
-            0,
-            0,
-            0
-          ],
+          "components": [0, 0, 0],
           "alpha": 0.5
         },
         "$extensions": {
@@ -726,11 +722,7 @@
           "$type": "color",
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              0,
-              0,
-              0
-            ],
+            "components": [0, 0, 0],
             "alpha": 0.24
           },
           "$description": "Light overlay scrim"
@@ -739,11 +731,7 @@
           "$type": "color",
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              0,
-              0,
-              0
-            ],
+            "components": [0, 0, 0],
             "alpha": 0.4
           },
           "$description": "Medium overlay scrim"
@@ -752,11 +740,7 @@
           "$type": "color",
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              0,
-              0,
-              0
-            ],
+            "components": [0, 0, 0],
             "alpha": 0.64
           },
           "$description": "Strong overlay scrim"

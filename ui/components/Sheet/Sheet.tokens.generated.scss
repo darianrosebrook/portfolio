@@ -38,7 +38,9 @@
   --sheet-text-lineHeightTitle: var(--semantic-typography-line-height-tight);
   --sheet-text-weightTitle: var(--semantic-typography-font-weight-semibold);
   --sheet-text-sizeDescription: var(--semantic-typography-body-03);
-  --sheet-text-lineHeightDescription: var(--semantic-typography-line-height-relaxed);
+  --sheet-text-lineHeightDescription: var(
+    --semantic-typography-line-height-relaxed
+  );
 
   /* === Motion Tokens === */
   --sheet-motion-duration: var(--core-motion-duration-medium);

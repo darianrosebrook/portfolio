@@ -223,7 +223,10 @@ function parseJsonTokens() {
           allTokens.set(p, d);
         }
         const existingRefs = allReferences.get('designTokens.json') || [];
-        allReferences.set('designTokens.json', [...existingRefs, ...references]);
+        allReferences.set('designTokens.json', [
+          ...existingRefs,
+          ...references,
+        ]);
         issues.push(...fileIssues);
       }
 
@@ -241,11 +244,17 @@ function parseJsonTokens() {
           allTokens.set(p, d);
         }
         const existingRefs = allReferences.get('designTokens.json') || [];
-        allReferences.set('designTokens.json', [...existingRefs, ...references]);
+        allReferences.set('designTokens.json', [
+          ...existingRefs,
+          ...references,
+        ]);
         issues.push(...fileIssues);
       }
 
-      log(colors.green, `✅ Loaded ${allTokens.size} tokens from composed file`);
+      log(
+        colors.green,
+        `✅ Loaded ${allTokens.size} tokens from composed file`
+      );
       return { allTokens, allReferences, issues };
     } catch (e) {
       issues.push({
@@ -361,13 +370,13 @@ async function parseComponentTokens() {
     try {
       const fullPath = path.join(PROJECT_ROOT, tokenFile);
       const tokens = JSON.parse(fs.readFileSync(fullPath, 'utf8'));
-      
+
       if (!tokens.prefix || !tokens.tokens) {
         continue; // Not a component token file
       }
 
       const prefix = tokens.prefix;
-      
+
       // Extract references from component tokens
       function extractRefs(obj, namespace = '') {
         for (const [key, value] of Object.entries(obj)) {
@@ -380,7 +389,11 @@ async function parseComponentTokens() {
                 file: tokenFile,
               });
             }
-          } else if (value && typeof value === 'object' && !Array.isArray(value)) {
+          } else if (
+            value &&
+            typeof value === 'object' &&
+            !Array.isArray(value)
+          ) {
             extractRefs(value, namespace ? `${namespace}.${key}` : key);
           }
         }
@@ -389,7 +402,10 @@ async function parseComponentTokens() {
       extractRefs(tokens.tokens);
 
       // Check for generated SCSS file and extract CSS variables from it
-      const generatedScssPath = fullPath.replace('.tokens.json', '.tokens.generated.scss');
+      const generatedScssPath = fullPath.replace(
+        '.tokens.json',
+        '.tokens.generated.scss'
+      );
       if (fs.existsSync(generatedScssPath)) {
         const scssContent = fs.readFileSync(generatedScssPath, 'utf8');
         // Match CSS variables inside @mixin vars { ... } blocks
@@ -399,8 +415,10 @@ async function parseComponentTokens() {
         while ((match = varRe.exec(scssContent)) !== null) {
           const name = `--${match[1]}`;
           // Also register kebab-case version if camelCase
-          const kebabName = name.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
-          
+          const kebabName = name
+            .replace(/([a-z])([A-Z])/g, '$1-$2')
+            .toLowerCase();
+
           if (!componentCssVars.has(name)) {
             componentCssVars.set(name, {
               value: match[2].trim(),
@@ -408,7 +426,7 @@ async function parseComponentTokens() {
               component: prefix,
             });
           }
-          
+
           // Also add kebab-case variant if different
           if (kebabName !== name && !componentCssVars.has(kebabName)) {
             componentCssVars.set(kebabName, {
@@ -485,7 +503,16 @@ async function findScssVariables() {
   return { defs, uses };
 }
 
-function validate(allTokens, allReferences, cssProps, cssVarUsage, scssDefs, scssUses, componentCssVars, componentTokenRefs) {
+function validate(
+  allTokens,
+  allReferences,
+  cssProps,
+  cssVarUsage,
+  scssDefs,
+  scssUses,
+  componentCssVars,
+  componentTokenRefs
+) {
   const issues = [];
 
   // JSON token refs - check with namespace resolution
@@ -498,7 +525,10 @@ function validate(allTokens, allReferences, cssProps, cssVarUsage, scssDefs, scs
 
       // Try without namespace prefixes
       const parts = r.to.split('.');
-      if (parts.length > 1 && (parts[0] === 'core' || parts[0] === 'semantic')) {
+      if (
+        parts.length > 1 &&
+        (parts[0] === 'core' || parts[0] === 'semantic')
+      ) {
         const withoutNs = parts.slice(1).join('.');
         if (allTokens.has(withoutNs)) {
           // Reference uses namespace but token doesn't - this is OK
@@ -532,15 +562,22 @@ function validate(allTokens, allReferences, cssProps, cssVarUsage, scssDefs, scs
       // Try namespace resolution
       const parts = ref.to.split('.');
       let found = false;
-      
-      if (parts.length > 1 && (parts[0] === 'core' || parts[0] === 'semantic')) {
+
+      if (
+        parts.length > 1 &&
+        (parts[0] === 'core' || parts[0] === 'semantic')
+      ) {
         const withoutNs = parts.slice(1).join('.');
         if (allTokens.has(withoutNs)) {
           found = true;
         }
       }
-      
-      if (!found && !ref.to.startsWith('core.') && !ref.to.startsWith('semantic.')) {
+
+      if (
+        !found &&
+        !ref.to.startsWith('core.') &&
+        !ref.to.startsWith('semantic.')
+      ) {
         const coreVersion = `core.${ref.to}`;
         const semanticVersion = `semantic.${ref.to}`;
         if (allTokens.has(coreVersion) || allTokens.has(semanticVersion)) {
@@ -573,24 +610,26 @@ function validate(allTokens, allReferences, cssProps, cssVarUsage, scssDefs, scs
     if (allCssProps.has(name)) {
       continue;
     }
-    
+
     // Try kebab-case variant if camelCase
     const kebabName = name.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
     if (kebabName !== name && allCssProps.has(kebabName)) {
       continue;
     }
-    
+
     // Try camelCase variant if kebab-case
-    const camelName = name.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
+    const camelName = name.replace(/-([a-z])/g, (_, letter) =>
+      letter.toUpperCase()
+    );
     if (camelName !== name && allCssProps.has(camelName)) {
       continue;
     }
-    
+
     // Check if it's an allowed variable
     if (isAllowedCssVariable(name)) {
       continue;
     }
-    
+
     // Not found
     for (const u of uses)
       issues.push({
@@ -647,7 +686,8 @@ function summarize(issues, counts) {
       if (i.variable) details.push(` ${i.variable}`);
       if (i.from) details.push(` ${i.from}`);
       if (i.to) details.push(` → ${i.to}`);
-      if (i.original && i.original !== i.to) details.push(` (original: ${i.original})`);
+      if (i.original && i.original !== i.to)
+        details.push(` (original: ${i.original})`);
       if (i.message) details.push(` (${i.message})`);
       console.log(`  -${details.join('')}`);
     }
@@ -666,7 +706,11 @@ async function main() {
   const { properties: cssProps } = await parseCssCustomProperties();
   const cssVarUsage = await findCssVarUsage();
   const { defs: scssDefs, uses: scssUses } = await findScssVariables();
-  const { cssVars: componentCssVars, refs: componentTokenRefs, issues: componentIssues } = await parseComponentTokens();
+  const {
+    cssVars: componentCssVars,
+    refs: componentTokenRefs,
+    issues: componentIssues,
+  } = await parseComponentTokens();
 
   const issues = [
     ...jsonIssues,

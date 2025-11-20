@@ -60,7 +60,8 @@
         }
 
         &:focus-visible {
-          outline: var(--accordion-focus-width) solid var(--accordion-focus-color);
+          outline: var(--accordion-focus-width) solid
+            var(--accordion-focus-color);
           outline-offset: var(--accordion-focus-offset);
         }
 

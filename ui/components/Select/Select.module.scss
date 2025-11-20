@@ -72,15 +72,31 @@
 
   &:hover {
     // Use color-mix() for dynamic hover effect
-    background-color: color-mix(in srgb, var(--select-color-background-default, #fafafa) 90%, var(--select-color-background-hover, #cecece) 10%);
-    border-color: color-mix(in srgb, var(--select-color-border-default, #aeaeae) 70%, var(--select-color-border-hover, #555555) 30%);
+    background-color: color-mix(
+      in srgb,
+      var(--select-color-background-default, #fafafa) 90%,
+      var(--select-color-background-hover, #cecece) 10%
+    );
+    border-color: color-mix(
+      in srgb,
+      var(--select-color-border-default, #aeaeae) 70%,
+      var(--select-color-border-hover, #555555) 30%
+    );
     color: var(--select-color-foreground-hover, #141414);
   }
 
   &:focus {
     // Use color-mix() for subtle focus effect
-    background-color: color-mix(in srgb, var(--select-color-background-default, #fafafa) 95%, var(--select-color-background-focus, #fafafa) 5%);
-    border-color: color-mix(in srgb, var(--select-color-border-default, #aeaeae) 80%, var(--select-color-border-focus, #aeaeae) 20%);
+    background-color: color-mix(
+      in srgb,
+      var(--select-color-background-default, #fafafa) 95%,
+      var(--select-color-background-focus, #fafafa) 5%
+    );
+    border-color: color-mix(
+      in srgb,
+      var(--select-color-border-default, #aeaeae) 80%,
+      var(--select-color-border-focus, #aeaeae) 20%
+    );
     outline: none;
     color: var(--select-color-foreground-focus, #141414);
   }
@@ -89,7 +105,12 @@
     background-color: var(--select-color-background-focusVisible, #fafafa);
     border-color: var(--select-color-border-focusVisible, #d9292b);
     // Use color-mix() for focus ring
-    outline: 2px solid color-mix(in oklab, var(--select-color-border-focusVisible, #d9292b) 40%, transparent);
+    outline: 2px solid
+      color-mix(
+        in oklab,
+        var(--select-color-border-focusVisible, #d9292b) 40%,
+        transparent
+      );
     outline-offset: -1px;
     color: var(--select-color-foreground-focusVisible, #141414);
   }
@@ -358,15 +379,18 @@
         font-size: calc(var(--select-font-size-default, 16px) * 0.9);
 
         &--sm {
-          padding: calc(var(--semantic-control-size-sm-paddingY) * 0.75) calc(var(--semantic-control-size-sm-paddingX) * 0.75);
+          padding: calc(var(--semantic-control-size-sm-paddingY) * 0.75)
+            calc(var(--semantic-control-size-sm-paddingX) * 0.75);
         }
 
         &--md {
-          padding: calc(var(--semantic-control-size-md-paddingY) * 0.75) calc(var(--semantic-control-size-md-paddingX) * 0.75);
+          padding: calc(var(--semantic-control-size-md-paddingY) * 0.75)
+            calc(var(--semantic-control-size-md-paddingX) * 0.75);
         }
 
         &--lg {
-          padding: calc(var(--semantic-control-size-lg-paddingY) * 0.75) calc(var(--semantic-control-size-lg-paddingX) * 0.75);
+          padding: calc(var(--semantic-control-size-lg-paddingY) * 0.75)
+            calc(var(--semantic-control-size-lg-paddingX) * 0.75);
         }
       }
     }
@@ -380,8 +404,11 @@
         &--sm,
         &--md,
         &--lg {
-          padding: calc(var(--semantic-control-size-sm-paddingY) * 0.5) calc(var(--semantic-control-size-sm-paddingX) * 0.5);
-          font-size: calc(var(--semantic-typography-body-small-fontSize) * 0.85);
+          padding: calc(var(--semantic-control-size-sm-paddingY) * 0.5)
+            calc(var(--semantic-control-size-sm-paddingX) * 0.5);
+          font-size: calc(
+            var(--semantic-typography-body-small-fontSize) * 0.85
+          );
         }
       }
     }

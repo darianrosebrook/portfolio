@@ -32,13 +32,15 @@
 
     .header {
       .row {
-        border-block-end: var(--table-border-width) solid var(--table-color-border);
+        border-block-end: var(--table-border-width) solid
+          var(--table-color-border);
       }
     }
 
     .body {
       .row {
-        border-block-end: var(--table-border-width) solid var(--table-color-border);
+        border-block-end: var(--table-border-width) solid
+          var(--table-color-border);
         transition: background-color var(--table-motion-duration)
           var(--table-motion-easing);
 
@@ -58,7 +60,8 @@
 
     .footer {
       background-color: var(--table-color-background-footer);
-      border-block-start: var(--table-border-width) solid var(--table-color-border);
+      border-block-start: var(--table-border-width) solid
+        var(--table-color-border);
       font-weight: var(--table-text-weightFooter);
 
       .row:last-child {
@@ -160,13 +163,15 @@
 
       .header {
         .row {
-          border-block-end: var(--table-border-width) solid var(--table-color-border);
+          border-block-end: var(--table-border-width) solid
+            var(--table-color-border);
         }
       }
 
       .body {
         .row {
-          border-block-end: var(--table-border-width) solid var(--table-color-border);
+          border-block-end: var(--table-border-width) solid
+            var(--table-color-border);
           transition: background-color var(--table-motion-duration)
             var(--table-motion-easing);
 
@@ -186,7 +191,8 @@
 
       .footer {
         background-color: var(--table-color-background-footer);
-        border-block-start: var(--table-border-width) solid var(--table-color-border);
+        border-block-start: var(--table-border-width) solid
+          var(--table-color-border);
         font-weight: var(--table-text-weightFooter);
 
         .row:last-child {
@@ -290,7 +296,7 @@
       .table {
         .head {
           // Hide less critical columns on small screens
-          &:nth-child(n+4) {
+          &:nth-child(n + 4) {
             display: none;
           }
 
@@ -304,7 +310,7 @@
 
         .data {
           // Hide corresponding data cells
-          &:nth-child(n+4) {
+          &:nth-child(n + 4) {
             display: none;
           }
         }
@@ -316,14 +322,14 @@
       .table {
         .head {
           // Keep only first column
-          &:nth-child(n+2) {
+          &:nth-child(n + 2) {
             display: none;
           }
         }
 
         .data {
           // Keep only first column
-          &:nth-child(n+2) {
+          &:nth-child(n + 2) {
             display: none;
           }
         }
@@ -358,12 +364,14 @@
       .table {
         .head {
           // Show all columns with enhanced spacing
-          padding: var(--table-spacing-cellY) calc(var(--table-spacing-cellX) * 1.5);
+          padding: var(--table-spacing-cellY)
+            calc(var(--table-spacing-cellX) * 1.5);
         }
 
         .data {
           // Enhanced data cell spacing
-          padding: var(--table-spacing-cellY) calc(var(--table-spacing-cellX) * 1.5);
+          padding: var(--table-spacing-cellY)
+            calc(var(--table-spacing-cellX) * 1.5);
         }
 
         // Add hover effects for large screens

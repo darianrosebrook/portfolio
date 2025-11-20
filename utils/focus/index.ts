@@ -23,7 +23,9 @@ export function getFocusableElements(container: Element): HTMLElement[] {
 
   return Array.from(container.querySelectorAll(focusableSelectors))
     .filter((el): el is HTMLElement => el instanceof HTMLElement)
-    .filter((el) => !el.hasAttribute('disabled') && !el.getAttribute('aria-disabled'));
+    .filter(
+      (el) => !el.hasAttribute('disabled') && !el.getAttribute('aria-disabled')
+    );
 }
 
 /**
@@ -62,10 +64,13 @@ export function useFocusTrap(
     if (focusableElements.length === 0) return;
 
     // Set initial focus
-    const initialFocusElement = initialFocusRef?.current ||
-                               focusableElements[0];
+    const initialFocusElement =
+      initialFocusRef?.current || focusableElements[0];
 
-    if (initialFocusElement && typeof initialFocusElement.focus === 'function') {
+    if (
+      initialFocusElement &&
+      typeof initialFocusElement.focus === 'function'
+    ) {
       // Small delay to ensure DOM is ready
       setTimeout(() => initialFocusElement.focus(), 10);
     }
@@ -111,8 +116,10 @@ export function useFocusTrap(
       if (restoreFocus && previousFocusRef.current) {
         // Small delay to ensure cleanup is complete
         setTimeout(() => {
-          if (previousFocusRef.current &&
-              document.contains(previousFocusRef.current)) {
+          if (
+            previousFocusRef.current &&
+            document.contains(previousFocusRef.current)
+          ) {
             previousFocusRef.current.focus();
           }
         }, 10);
@@ -132,8 +139,10 @@ export function useFocusRestoration() {
   }, []);
 
   const restoreFocus = useCallback(() => {
-    if (previousFocusRef.current &&
-        document.contains(previousFocusRef.current)) {
+    if (
+      previousFocusRef.current &&
+      document.contains(previousFocusRef.current)
+    ) {
       previousFocusRef.current.focus();
     }
   }, []);
@@ -154,64 +163,73 @@ export function useArrowNavigation(
 ) {
   const { orientation = 'vertical', loop = false, onNavigate } = options;
 
-  return useCallback((e: KeyboardEvent) => {
-    const currentIndex = items.findIndex(item => item === document.activeElement);
-    if (currentIndex === -1) return;
+  return useCallback(
+    (e: KeyboardEvent) => {
+      const currentIndex = items.findIndex(
+        (item) => item === document.activeElement
+      );
+      if (currentIndex === -1) return;
 
-    let nextIndex = currentIndex;
+      let nextIndex = currentIndex;
 
-    switch (e.key) {
-      case 'ArrowUp':
-        if (orientation === 'vertical' || orientation === 'both') {
-          nextIndex = loop && currentIndex === 0
-            ? items.length - 1
-            : Math.max(0, currentIndex - 1);
-        }
-        break;
+      switch (e.key) {
+        case 'ArrowUp':
+          if (orientation === 'vertical' || orientation === 'both') {
+            nextIndex =
+              loop && currentIndex === 0
+                ? items.length - 1
+                : Math.max(0, currentIndex - 1);
+          }
+          break;
 
-      case 'ArrowDown':
-        if (orientation === 'vertical' || orientation === 'both') {
-          nextIndex = loop && currentIndex === items.length - 1
-            ? 0
-            : Math.min(items.length - 1, currentIndex + 1);
-        }
-        break;
+        case 'ArrowDown':
+          if (orientation === 'vertical' || orientation === 'both') {
+            nextIndex =
+              loop && currentIndex === items.length - 1
+                ? 0
+                : Math.min(items.length - 1, currentIndex + 1);
+          }
+          break;
 
-      case 'ArrowLeft':
-        if (orientation === 'horizontal' || orientation === 'both') {
-          nextIndex = loop && currentIndex === 0
-            ? items.length - 1
-            : Math.max(0, currentIndex - 1);
-        }
-        break;
+        case 'ArrowLeft':
+          if (orientation === 'horizontal' || orientation === 'both') {
+            nextIndex =
+              loop && currentIndex === 0
+                ? items.length - 1
+                : Math.max(0, currentIndex - 1);
+          }
+          break;
 
-      case 'ArrowRight':
-        if (orientation === 'horizontal' || orientation === 'both') {
-          nextIndex = loop && currentIndex === items.length - 1
-            ? 0
-            : Math.min(items.length - 1, currentIndex + 1);
-        }
-        break;
+        case 'ArrowRight':
+          if (orientation === 'horizontal' || orientation === 'both') {
+            nextIndex =
+              loop && currentIndex === items.length - 1
+                ? 0
+                : Math.min(items.length - 1, currentIndex + 1);
+          }
+          break;
 
-      case 'Home':
-        nextIndex = 0;
-        break;
+        case 'Home':
+          nextIndex = 0;
+          break;
 
-      case 'End':
-        nextIndex = items.length - 1;
-        break;
+        case 'End':
+          nextIndex = items.length - 1;
+          break;
 
-      default:
-        return;
-    }
+        default:
+          return;
+      }
 
-    e.preventDefault();
-    const nextElement = items[nextIndex];
-    if (nextElement) {
-      nextElement.focus();
-      onNavigate?.(nextIndex, nextElement);
-    }
-  }, [items, orientation, loop, onNavigate]);
+      e.preventDefault();
+      const nextElement = items[nextIndex];
+      if (nextElement) {
+        nextElement.focus();
+        onNavigate?.(nextIndex, nextElement);
+      }
+    },
+    [items, orientation, loop, onNavigate]
+  );
 }
 
 /**
@@ -262,15 +280,13 @@ export function createSkipLink(
 
   // Focus behavior
   link.addEventListener('focus', () => {
-    link.style.transform = position === 'top-left'
-      ? 'translateY(0)'
-      : 'translateY(0)';
+    link.style.transform =
+      position === 'top-left' ? 'translateY(0)' : 'translateY(0)';
   });
 
   link.addEventListener('blur', () => {
-    link.style.transform = position === 'top-left'
-      ? 'translateY(-100%)'
-      : 'translateY(-100%)';
+    link.style.transform =
+      position === 'top-left' ? 'translateY(-100%)' : 'translateY(-100%)';
   });
 
   return link;
@@ -323,8 +339,10 @@ export function useModalFocus(
 
       if (restoreFocus && previousFocusRef.current) {
         setTimeout(() => {
-          if (previousFocusRef.current &&
-              document.contains(previousFocusRef.current)) {
+          if (
+            previousFocusRef.current &&
+            document.contains(previousFocusRef.current)
+          ) {
             previousFocusRef.current.focus();
           }
         }, 10);
@@ -377,9 +395,7 @@ export const focusScope = {
       ? elements.indexOf(current as HTMLElement)
       : -1;
 
-    const nextIndex = currentIndex < elements.length - 1
-      ? currentIndex + 1
-      : 0;
+    const nextIndex = currentIndex < elements.length - 1 ? currentIndex + 1 : 0;
 
     elements[nextIndex].focus();
     return true;
@@ -396,9 +412,7 @@ export const focusScope = {
       ? elements.indexOf(current as HTMLElement)
       : elements.length;
 
-    const prevIndex = currentIndex > 0
-      ? currentIndex - 1
-      : elements.length - 1;
+    const prevIndex = currentIndex > 0 ? currentIndex - 1 : elements.length - 1;
 
     elements[prevIndex].focus();
     return true;

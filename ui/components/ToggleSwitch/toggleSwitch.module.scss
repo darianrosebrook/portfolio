@@ -78,7 +78,8 @@
   border: 1px solid var(--toggle-color-border-thumb);
   border-radius: var(--toggleSwitch-size-radius-full);
   transition:
-    inset-inline-start var(--toggle-motion-duration-fast) var(--toggle-motion-easing-standard),
+    inset-inline-start var(--toggle-motion-duration-fast)
+      var(--toggle-motion-easing-standard),
     background-color var(--toggle-motion-duration-fast)
       var(--toggle-motion-easing-standard),
     border-color var(--toggle-motion-duration-fast)

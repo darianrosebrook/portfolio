@@ -192,7 +192,7 @@
 .liveExample {
   isolation: isolate; // Create new stacking context
   contain: layout;
-  
+
   .exampleContainer {
     position: relative;
     overflow: hidden;
@@ -239,7 +239,7 @@
 .apiContent {
   isolation: isolate;
   contain: layout;
-  
+
   .propsTable,
   .methodsTable {
     position: relative;
@@ -350,7 +350,7 @@
 .examplesContent {
   isolation: isolate; // Create new stacking context
   contain: layout;
-  
+
   .exampleGrid {
     display: grid;
     grid-template-columns: 1fr 1fr;

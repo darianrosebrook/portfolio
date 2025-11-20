@@ -23,12 +23,22 @@
     box-shadow: var(--badge-elevation-default);
     color: var(--badge-color-foreground-primary);
     font-size: var(--badge-size-md-fontSize);
-    transition: background-color 0.2s ease, border-color 0.2s ease;
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease;
 
     &:hover {
       // Use color-mix() for dynamic hover effect
-      background-color: color-mix(in srgb, var(--badge-color-background-default) 90%, var(--badge-color-border-default) 10%);
-      border-color: color-mix(in srgb, var(--badge-color-border-default) 80%, var(--badge-color-foreground-primary) 20%);
+      background-color: color-mix(
+        in srgb,
+        var(--badge-color-background-default) 90%,
+        var(--badge-color-border-default) 10%
+      );
+      border-color: color-mix(
+        in srgb,
+        var(--badge-color-border-default) 80%,
+        var(--badge-color-foreground-primary) 20%
+      );
     }
   }
 
@@ -39,7 +49,9 @@
     border-radius: var(--badge-size-md-radius);
     box-shadow: var(--badge-elevation-status);
     font-size: var(--badge-size-md-fontSize);
-    transition: background-color 0.2s ease, border-color 0.2s ease;
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease;
 
     &.info {
       background: var(--badge-color-background-info);
@@ -48,8 +60,16 @@
 
       &:hover {
         // Use color-mix() for dynamic hover effect
-        background-color: color-mix(in srgb, var(--badge-color-background-info) 85%, white 15%);
-        border-color: color-mix(in srgb, var(--badge-color-border-info) 80%, white 20%);
+        background-color: color-mix(
+          in srgb,
+          var(--badge-color-background-info) 85%,
+          white 15%
+        );
+        border-color: color-mix(
+          in srgb,
+          var(--badge-color-border-info) 80%,
+          white 20%
+        );
       }
     }
 
@@ -59,8 +79,16 @@
       color: var(--badge-color-foreground-success);
 
       &:hover {
-        background-color: color-mix(in srgb, var(--badge-color-background-success) 85%, white 15%);
-        border-color: color-mix(in srgb, var(--badge-color-border-success) 80%, white 20%);
+        background-color: color-mix(
+          in srgb,
+          var(--badge-color-background-success) 85%,
+          white 15%
+        );
+        border-color: color-mix(
+          in srgb,
+          var(--badge-color-border-success) 80%,
+          white 20%
+        );
       }
     }
 
@@ -70,8 +98,16 @@
       color: var(--badge-color-foreground-warning);
 
       &:hover {
-        background-color: color-mix(in srgb, var(--badge-color-background-warning) 85%, white 15%);
-        border-color: color-mix(in srgb, var(--badge-color-border-warning) 80%, white 20%);
+        background-color: color-mix(
+          in srgb,
+          var(--badge-color-background-warning) 85%,
+          white 15%
+        );
+        border-color: color-mix(
+          in srgb,
+          var(--badge-color-border-warning) 80%,
+          white 20%
+        );
       }
     }
 
@@ -81,8 +117,16 @@
       color: var(--badge-color-foreground-danger);
 
       &:hover {
-        background-color: color-mix(in srgb, var(--badge-color-background-danger) 85%, white 15%);
-        border-color: color-mix(in srgb, var(--badge-color-border-danger) 80%, white 20%);
+        background-color: color-mix(
+          in srgb,
+          var(--badge-color-background-danger) 85%,
+          white 15%
+        );
+        border-color: color-mix(
+          in srgb,
+          var(--badge-color-border-danger) 80%,
+          white 20%
+        );
       }
     }
   }
@@ -170,17 +214,20 @@
       font-size: calc(var(--badge-size-md-fontSize) * 0.9);
 
       &.sm {
-        padding: calc(var(--badge-size-sm-paddingY) * 0.75) calc(var(--badge-size-sm-paddingX) * 0.75);
+        padding: calc(var(--badge-size-sm-paddingY) * 0.75)
+          calc(var(--badge-size-sm-paddingX) * 0.75);
         font-size: calc(var(--badge-size-sm-fontSize) * 0.9);
       }
 
       &.md {
-        padding: calc(var(--badge-size-md-paddingY) * 0.75) calc(var(--badge-size-md-paddingX) * 0.75);
+        padding: calc(var(--badge-size-md-paddingY) * 0.75)
+          calc(var(--badge-size-md-paddingX) * 0.75);
         font-size: calc(var(--badge-size-md-fontSize) * 0.9);
       }
 
       &.lg {
-        padding: calc(var(--badge-size-lg-paddingY) * 0.75) calc(var(--badge-size-lg-paddingX) * 0.75);
+        padding: calc(var(--badge-size-lg-paddingY) * 0.75)
+          calc(var(--badge-size-lg-paddingX) * 0.75);
         font-size: calc(var(--badge-size-lg-fontSize) * 0.9);
       }
     }
@@ -193,7 +240,8 @@
       &.sm,
       &.md,
       &.lg {
-        padding: calc(var(--badge-size-sm-paddingY) * 0.5) calc(var(--badge-size-sm-paddingX) * 0.5);
+        padding: calc(var(--badge-size-sm-paddingY) * 0.5)
+          calc(var(--badge-size-sm-paddingX) * 0.5);
         font-size: calc(var(--badge-size-sm-fontSize) * 0.8);
       }
 

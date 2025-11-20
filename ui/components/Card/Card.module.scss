@@ -46,7 +46,11 @@
 
     &:hover {
       // Use color-mix() for dynamic hover effect
-      background-color: color-mix(in srgb, var(--card-color-background-default) 90%, var(--card-color-background-hover) 10%);
+      background-color: color-mix(
+        in srgb,
+        var(--card-color-background-default) 90%,
+        var(--card-color-background-hover) 10%
+      );
       box-shadow: var(--card-elevation-hover, var(--shadow-card-hover));
       transform: translateY(var(--card-motion-hover-offset, -0.125rem));
     }
@@ -134,7 +138,8 @@
     }
 
     &:focus-visible {
-      outline: 2px solid var(--card-color-border-accent, var(--color-focus-ring));
+      outline: 2px solid
+        var(--card-color-border-accent, var(--color-focus-ring));
       outline-offset: 2px;
     }
   }
@@ -142,7 +147,10 @@
   .note {
     margin-block-start: var(--card-size-padding-default);
     padding: var(--core-spacing-size-04);
-    background-color: var(--card-color-background-secondary, var(--semantic-color-background-secondary));
+    background-color: var(
+      --card-color-background-secondary,
+      var(--semantic-color-background-secondary)
+    );
     border: 1px solid var(--card-color-border-default);
     border-radius: var(--card-size-radius-medium, 0.5rem);
     color: var(--card-color-foreground-primary);
@@ -191,7 +199,6 @@
       color: var(--semantic-color-accent-foreground);
     }
   }
-
 
   // Container queries for responsive sizing
   @container (max-width: 20rem) {

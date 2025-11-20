@@ -126,15 +126,31 @@
 
     &:hover {
       // Use color-mix() for dynamic hover effect (lighter background)
-      background-color: color-mix(in srgb, var(--button-color-background-primary) 85%, white);
-      border-color: color-mix(in srgb, var(--button-color-border-primary) 85%, white);
+      background-color: color-mix(
+        in srgb,
+        var(--button-color-background-primary) 85%,
+        white
+      );
+      border-color: color-mix(
+        in srgb,
+        var(--button-color-border-primary) 85%,
+        white
+      );
       color: var(--button-color-foreground-primaryHover);
     }
 
     &:active {
       // Use color-mix() for dynamic active effect (darker background)
-      background-color: color-mix(in srgb, var(--button-color-background-primary) 85%, black);
-      border-color: color-mix(in srgb, var(--button-color-border-primary) 85%, black);
+      background-color: color-mix(
+        in srgb,
+        var(--button-color-background-primary) 85%,
+        black
+      );
+      border-color: color-mix(
+        in srgb,
+        var(--button-color-border-primary) 85%,
+        black
+      );
       color: var(--button-color-foreground-primaryActive);
     }
   }
@@ -235,20 +251,25 @@
       gap: calc(var(--button-size-gap-default) * 0.75);
       min-width: calc(var(--button-size-min-medium) * 0.9);
       min-height: calc(var(--button-size-min-medium) * 0.9);
-      padding: calc(var(--button-size-padding-small) * 0.75) calc(var(--button-size-padding-small) * 0.75);
+      padding: calc(var(--button-size-padding-small) * 0.75)
+        calc(var(--button-size-padding-small) * 0.75);
       font-size: calc(var(--button-text-size-medium) * 0.9);
 
       &.small {
         min-width: calc(var(--button-size-min-small) * 0.9);
         min-height: calc(var(--button-size-min-small) * 0.9);
-        padding: calc(var(--button-size-padding-small, var(--button-size-gap-small)) * 0.75);
+        padding: calc(
+          var(--button-size-padding-small, var(--button-size-gap-small)) * 0.75
+        );
         font-size: calc(var(--button-text-size-small) * 0.9);
       }
 
       &.large {
         min-width: calc(var(--button-size-min-large) * 0.9);
         min-height: calc(var(--button-size-min-large) * 0.9);
-        padding: calc(var(--button-size-padding-large, var(--button-size-gap-large)) * 0.75);
+        padding: calc(
+          var(--button-size-padding-large, var(--button-size-gap-large)) * 0.75
+        );
         font-size: calc(var(--button-text-size-large) * 0.9);
       }
     }
@@ -258,7 +279,8 @@
       gap: calc(var(--button-size-gap-default) * 0.5);
       min-width: calc(var(--button-size-min-medium) * 0.8);
       min-height: calc(var(--button-size-min-medium) * 0.8);
-      padding: calc(var(--button-size-padding-small) * 0.5) calc(var(--button-size-padding-small) * 0.5);
+      padding: calc(var(--button-size-padding-small) * 0.5)
+        calc(var(--button-size-padding-small) * 0.5);
       font-size: calc(var(--button-text-size-medium) * 0.85);
 
       &.small,
@@ -266,7 +288,9 @@
       &.large {
         min-width: calc(var(--button-size-min-small) * 0.8);
         min-height: calc(var(--button-size-min-small) * 0.8);
-        padding: calc(var(--button-size-padding-small, var(--button-size-gap-small)) * 0.5);
+        padding: calc(
+          var(--button-size-padding-small, var(--button-size-gap-small)) * 0.5
+        );
         font-size: calc(var(--button-text-size-small) * 0.85);
       }
     }

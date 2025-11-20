@@ -39,7 +39,7 @@ const DTCG_TYPES = [
   'shadow',
   'gradient',
   'typography',
-  'strokeStyle'
+  'strokeStyle',
 ];
 
 /**
@@ -50,7 +50,8 @@ function generateTokenSchema() {
     type: 'object',
     properties: {
       $value: {
-        description: 'The value of the design token. Structure depends on $type.',
+        description:
+          'The value of the design token. Structure depends on $type.',
         oneOf: [
           { $ref: '#/$defs/colorValue' },
           { $ref: '#/$defs/dimensionValue' },
@@ -68,9 +69,9 @@ function generateTokenSchema() {
           {
             type: 'string',
             pattern: '^\\{[^}]+\\}$',
-            description: 'An alias reference to another token'
-          }
-        ]
+            description: 'An alias reference to another token',
+          },
+        ],
       },
       $type: {
         description: 'The type of the design token (DTCG 1.0 standard types)',
@@ -79,7 +80,7 @@ function generateTokenSchema() {
       },
       $description: {
         description: 'A human-readable description of the design token',
-        type: 'string'
+        type: 'string',
       },
       $extensions: {
         description: 'Platform-specific extensions',
@@ -91,34 +92,38 @@ function generateTokenSchema() {
             properties: {
               paths: {
                 type: 'object',
-                description: 'Theme-specific token references for light/dark modes',
+                description:
+                  'Theme-specific token references for light/dark modes',
                 properties: {
                   light: {
                     type: 'string',
-                    description: 'Token reference for light mode (e.g., "{core.color.palette.neutral.600}")',
-                    pattern: '^\\{[^}]+\\}$'
+                    description:
+                      'Token reference for light mode (e.g., "{core.color.palette.neutral.600}")',
+                    pattern: '^\\{[^}]+\\}$',
                   },
                   dark: {
                     type: 'string',
-                    description: 'Token reference for dark mode (e.g., "{core.color.palette.neutral.300}")',
-                    pattern: '^\\{[^}]+\\}$'
-                  }
+                    description:
+                      'Token reference for dark mode (e.g., "{core.color.palette.neutral.300}")',
+                    pattern: '^\\{[^}]+\\}$',
+                  },
                 },
-                additionalProperties: true
+                additionalProperties: true,
               },
               calc: {
                 type: 'string',
-                description: 'CSS calc() expression with token substitution (e.g., "calc({spacing.size.04} + 2px)")',
-                pattern: '^calc\\(.*\\{.*\\}.*\\)$'
-              }
+                description:
+                  'CSS calc() expression with token substitution (e.g., "calc({spacing.size.04} + 2px)")',
+                pattern: '^calc\\(.*\\{.*\\}.*\\)$',
+              },
             },
-            additionalProperties: true
-          }
+            additionalProperties: true,
+          },
         },
-        additionalProperties: true
-      }
+        additionalProperties: true,
+      },
     },
-    additionalProperties: true
+    additionalProperties: true,
   };
 }
 
@@ -136,19 +141,19 @@ function generateGroupSchema() {
       },
       $description: {
         description: 'A human-readable description of the token group',
-        type: 'string'
-      }
+        type: 'string',
+      },
     },
     patternProperties: {
       '^(?!\\$).*': {
         anyOf: [
           { $ref: '#/$defs/token' },
           { $ref: '#/$defs/group' },
-          { type: 'object' }
-        ]
-      }
+          { type: 'object' },
+        ],
+      },
     },
-    additionalProperties: true
+    additionalProperties: true,
   };
 }
 
@@ -163,7 +168,8 @@ function generateValueSchemas() {
       properties: {
         colorSpace: {
           type: 'string',
-          description: 'The color space (e.g., srgb, display-p3, oklch, lab, etc.)',
+          description:
+            'The color space (e.g., srgb, display-p3, oklch, lab, etc.)',
           enum: [
             'srgb',
             'srgb-linear',
@@ -176,24 +182,25 @@ function generateValueSchemas() {
             'oklab',
             'oklch',
             'lab',
-            'lch'
-          ]
+            'lch',
+          ],
         },
         components: {
           type: 'array',
           items: { type: 'number' },
-          description: 'The channel values for the specified color space (typically 3-4 components)',
+          description:
+            'The channel values for the specified color space (typically 3-4 components)',
           minItems: 3,
-          maxItems: 4
+          maxItems: 4,
         },
         alpha: {
           type: 'number',
           description: 'The alpha channel value, typically 0 to 1',
           minimum: 0,
-          maximum: 1
-        }
+          maximum: 1,
+        },
       },
-      required: ['colorSpace', 'components']
+      required: ['colorSpace', 'components'],
     },
     dimensionValue: {
       description: 'A DTCG 1.0-compliant dimension value object',
@@ -201,58 +208,105 @@ function generateValueSchemas() {
       properties: {
         value: {
           type: 'number',
-          description: 'The numeric value'
+          description: 'The numeric value',
         },
         unit: {
           type: 'string',
           description: 'The unit of measurement (DTCG 1.0 standard units)',
-          enum: ['px', 'rem']
-        }
+          enum: ['px', 'rem'],
+        },
       },
-      required: ['value', 'unit']
+      required: ['value', 'unit'],
     },
     fontFamilyValue: {
       description: 'A DTCG 1.0-compliant font family value',
       oneOf: [
-        { type: 'string', description: 'A single font family name or comma-separated font stack' },
-        { type: 'string', pattern: '^\\{[^}]+\\}$', description: 'An alias to another fontFamily token' }
-      ]
+        {
+          type: 'string',
+          description:
+            'A single font family name or comma-separated font stack',
+        },
+        {
+          type: 'string',
+          pattern: '^\\{[^}]+\\}$',
+          description: 'An alias to another fontFamily token',
+        },
+      ],
     },
     fontWeightValue: {
       description: 'A DTCG 1.0-compliant font weight value',
       oneOf: [
-        { type: 'number', minimum: 1, maximum: 1000, description: 'Numeric font weight (1-1000)' },
+        {
+          type: 'number',
+          minimum: 1,
+          maximum: 1000,
+          description: 'Numeric font weight (1-1000)',
+        },
         {
           type: 'string',
-          enum: ['thin', 'extra-light', 'light', 'regular', 'medium', 'semi-bold', 'bold', 'extra-bold', 'black', 'extra-black'],
-          description: 'Named font weight'
+          enum: [
+            'thin',
+            'extra-light',
+            'light',
+            'regular',
+            'medium',
+            'semi-bold',
+            'bold',
+            'extra-bold',
+            'black',
+            'extra-black',
+          ],
+          description: 'Named font weight',
         },
-        { type: 'string', pattern: '^\\{[^}]+\\}$', description: 'An alias to another fontWeight token' }
-      ]
+        {
+          type: 'string',
+          pattern: '^\\{[^}]+\\}$',
+          description: 'An alias to another fontWeight token',
+        },
+      ],
     },
     numberValue: {
       description: 'A DTCG 1.0-compliant number value',
       oneOf: [
         { type: 'number' },
-        { type: 'string', pattern: '^\\{[^}]+\\}$', description: 'An alias to another number token' }
-      ]
+        {
+          type: 'string',
+          pattern: '^\\{[^}]+\\}$',
+          description: 'An alias to another number token',
+        },
+      ],
     },
     durationValue: {
       description: 'A DTCG 1.0-compliant duration value',
       oneOf: [
         { type: 'number', minimum: 0, description: 'Duration in milliseconds' },
-        { type: 'string', pattern: '^\\{[^}]+\\}$', description: 'An alias to another duration token' }
-      ]
+        {
+          type: 'string',
+          pattern: '^\\{[^}]+\\}$',
+          description: 'An alias to another duration token',
+        },
+      ],
     },
     cubicBezierValue: {
       description: 'A DTCG 1.0-compliant cubic bezier value',
       oneOf: [
-        { type: 'array', items: { type: 'number' }, minItems: 4, maxItems: 4, description: 'Array of 4 numbers [x1, y1, x2, y2]' },
-        { type: 'string', pattern: '^\\{[^}]+\\}$', description: 'An alias to another cubicBezier token' }
-      ]
+        {
+          type: 'array',
+          items: { type: 'number' },
+          minItems: 4,
+          maxItems: 4,
+          description: 'Array of 4 numbers [x1, y1, x2, y2]',
+        },
+        {
+          type: 'string',
+          pattern: '^\\{[^}]+\\}$',
+          description: 'An alias to another cubicBezier token',
+        },
+      ],
     },
     shadowValue: {
-      description: 'A DTCG 1.0-compliant shadow value (single shadow or array of shadows)',
+      description:
+        'A DTCG 1.0-compliant shadow value (single shadow or array of shadows)',
       oneOf: [
         { $ref: '#/$defs/singleShadowValue' },
         {
@@ -260,50 +314,79 @@ function generateValueSchemas() {
           items: {
             oneOf: [
               { $ref: '#/$defs/singleShadowValue' },
-              { type: 'string', pattern: '^\\{[^}]+\\}$', description: 'An alias to another shadow token' }
-            ]
-          }
+              {
+                type: 'string',
+                pattern: '^\\{[^}]+\\}$',
+                description: 'An alias to another shadow token',
+              },
+            ],
+          },
         },
-        { type: 'string', pattern: '^\\{[^}]+\\}$', description: 'An alias to another shadow token' }
-      ]
+        {
+          type: 'string',
+          pattern: '^\\{[^}]+\\}$',
+          description: 'An alias to another shadow token',
+        },
+      ],
     },
     singleShadowValue: {
-      description: 'A single shadow object with structured dimension and color values',
+      description:
+        'A single shadow object with structured dimension and color values',
       type: 'object',
       properties: {
         offsetX: {
           oneOf: [
             { $ref: '#/$defs/dimensionValue' },
-            { type: 'string', pattern: '^\\{[^}]+\\}$', description: 'An alias to a dimension token' }
-          ]
+            {
+              type: 'string',
+              pattern: '^\\{[^}]+\\}$',
+              description: 'An alias to a dimension token',
+            },
+          ],
         },
         offsetY: {
           oneOf: [
             { $ref: '#/$defs/dimensionValue' },
-            { type: 'string', pattern: '^\\{[^}]+\\}$', description: 'An alias to a dimension token' }
-          ]
+            {
+              type: 'string',
+              pattern: '^\\{[^}]+\\}$',
+              description: 'An alias to a dimension token',
+            },
+          ],
         },
         blur: {
           oneOf: [
             { $ref: '#/$defs/dimensionValue' },
-            { type: 'string', pattern: '^\\{[^}]+\\}$', description: 'An alias to a dimension token' }
-          ]
+            {
+              type: 'string',
+              pattern: '^\\{[^}]+\\}$',
+              description: 'An alias to a dimension token',
+            },
+          ],
         },
         spread: {
           oneOf: [
             { $ref: '#/$defs/dimensionValue' },
-            { type: 'string', pattern: '^\\{[^}]+\\}$', description: 'An alias to a dimension token' }
-          ]
+            {
+              type: 'string',
+              pattern: '^\\{[^}]+\\}$',
+              description: 'An alias to a dimension token',
+            },
+          ],
         },
         color: {
           oneOf: [
             { $ref: '#/$defs/colorValue' },
-            { type: 'string', pattern: '^\\{[^}]+\\}$', description: 'An alias to a color token' }
-          ]
+            {
+              type: 'string',
+              pattern: '^\\{[^}]+\\}$',
+              description: 'An alias to a color token',
+            },
+          ],
         },
-        inset: { type: 'boolean', description: 'Whether the shadow is inset' }
+        inset: { type: 'boolean', description: 'Whether the shadow is inset' },
       },
-      required: ['offsetX', 'offsetY', 'blur', 'spread', 'color']
+      required: ['offsetX', 'offsetY', 'blur', 'spread', 'color'],
     },
     typographyValue: {
       description: 'A DTCG 1.0-compliant typography composite value',
@@ -312,35 +395,55 @@ function generateValueSchemas() {
         fontFamily: {
           oneOf: [
             { $ref: '#/$defs/fontFamilyValue' },
-            { type: 'string', pattern: '^\\{[^}]+\\}$', description: 'An alias to a fontFamily token' }
-          ]
+            {
+              type: 'string',
+              pattern: '^\\{[^}]+\\}$',
+              description: 'An alias to a fontFamily token',
+            },
+          ],
         },
         fontSize: {
           oneOf: [
             { $ref: '#/$defs/dimensionValue' },
-            { type: 'string', pattern: '^\\{[^}]+\\}$', description: 'An alias to a dimension token' }
-          ]
+            {
+              type: 'string',
+              pattern: '^\\{[^}]+\\}$',
+              description: 'An alias to a dimension token',
+            },
+          ],
         },
         fontWeight: {
           oneOf: [
             { $ref: '#/$defs/fontWeightValue' },
-            { type: 'string', pattern: '^\\{[^}]+\\}$', description: 'An alias to a fontWeight token' }
-          ]
+            {
+              type: 'string',
+              pattern: '^\\{[^}]+\\}$',
+              description: 'An alias to a fontWeight token',
+            },
+          ],
         },
         letterSpacing: {
           oneOf: [
             { $ref: '#/$defs/dimensionValue' },
-            { type: 'string', pattern: '^\\{[^}]+\\}$', description: 'An alias to a dimension token' }
-          ]
+            {
+              type: 'string',
+              pattern: '^\\{[^}]+\\}$',
+              description: 'An alias to a dimension token',
+            },
+          ],
         },
         lineHeight: {
           oneOf: [
             { type: 'number', description: 'Unitless line height multiplier' },
-            { type: 'string', pattern: '^\\{[^}]+\\}$', description: 'An alias to a number token' }
-          ]
-        }
+            {
+              type: 'string',
+              pattern: '^\\{[^}]+\\}$',
+              description: 'An alias to a number token',
+            },
+          ],
+        },
       },
-      required: ['fontFamily', 'fontSize']
+      required: ['fontFamily', 'fontSize'],
     },
     borderValue: {
       description: 'A DTCG 1.0-compliant border composite value',
@@ -349,31 +452,52 @@ function generateValueSchemas() {
         color: {
           oneOf: [
             { $ref: '#/$defs/colorValue' },
-            { type: 'string', pattern: '^\\{[^}]+\\}$', description: 'An alias to a color token' }
-          ]
+            {
+              type: 'string',
+              pattern: '^\\{[^}]+\\}$',
+              description: 'An alias to a color token',
+            },
+          ],
         },
         width: {
           oneOf: [
             { $ref: '#/$defs/dimensionValue' },
-            { type: 'string', pattern: '^\\{[^}]+\\}$', description: 'An alias to a dimension token' }
-          ]
+            {
+              type: 'string',
+              pattern: '^\\{[^}]+\\}$',
+              description: 'An alias to a dimension token',
+            },
+          ],
         },
         style: {
           oneOf: [
             { $ref: '#/$defs/strokeStyleValue' },
-            { type: 'string', pattern: '^\\{[^}]+\\}$', description: 'An alias to a strokeStyle token' }
-          ]
-        }
+            {
+              type: 'string',
+              pattern: '^\\{[^}]+\\}$',
+              description: 'An alias to a strokeStyle token',
+            },
+          ],
+        },
       },
-      required: ['color', 'width', 'style']
+      required: ['color', 'width', 'style'],
     },
     strokeStyleValue: {
       description: 'A DTCG 1.0-compliant stroke style value',
       oneOf: [
         {
           type: 'string',
-          enum: ['solid', 'dashed', 'dotted', 'double', 'groove', 'ridge', 'inset', 'outset'],
-          description: 'Standard CSS border style'
+          enum: [
+            'solid',
+            'dashed',
+            'dotted',
+            'double',
+            'groove',
+            'ridge',
+            'inset',
+            'outset',
+          ],
+          description: 'Standard CSS border style',
         },
         {
           type: 'object',
@@ -381,23 +505,27 @@ function generateValueSchemas() {
             dashArray: {
               type: 'array',
               items: { $ref: '#/$defs/dimensionValue' },
-              description: 'Array of dimension values for custom dash pattern'
+              description: 'Array of dimension values for custom dash pattern',
             },
             lineCap: {
               type: 'string',
               enum: ['butt', 'round', 'square'],
-              description: 'Line cap style'
+              description: 'Line cap style',
             },
             miterLimit: {
               type: 'number',
               description: 'Miter limit for line joins',
-              minimum: 0
-            }
+              minimum: 0,
+            },
           },
-          required: ['dashArray']
+          required: ['dashArray'],
         },
-        { type: 'string', pattern: '^\\{[^}]+\\}$', description: 'An alias to a strokeStyle token' }
-      ]
+        {
+          type: 'string',
+          pattern: '^\\{[^}]+\\}$',
+          description: 'An alias to a strokeStyle token',
+        },
+      ],
     },
     gradientValue: {
       description: 'A DTCG 1.0-compliant gradient value (array of color stops)',
@@ -408,19 +536,32 @@ function generateValueSchemas() {
           color: {
             oneOf: [
               { $ref: '#/$defs/colorValue' },
-              { type: 'string', pattern: '^\\{[^}]+\\}$', description: 'An alias to a color token' }
-            ]
+              {
+                type: 'string',
+                pattern: '^\\{[^}]+\\}$',
+                description: 'An alias to a color token',
+              },
+            ],
           },
           position: {
             oneOf: [
-              { type: 'number', minimum: 0, maximum: 1, description: 'Position as a number between 0 and 1' },
-              { type: 'string', pattern: '^\\{[^}]+\\}$', description: 'An alias to a number token' }
-            ]
-          }
+              {
+                type: 'number',
+                minimum: 0,
+                maximum: 1,
+                description: 'Position as a number between 0 and 1',
+              },
+              {
+                type: 'string',
+                pattern: '^\\{[^}]+\\}$',
+                description: 'An alias to a number token',
+              },
+            ],
+          },
         },
-        required: ['color']
+        required: ['color'],
       },
-      minItems: 2
+      minItems: 2,
     },
     transitionValue: {
       description: 'A DTCG 1.0-compliant transition composite value',
@@ -429,24 +570,36 @@ function generateValueSchemas() {
         duration: {
           oneOf: [
             { $ref: '#/$defs/durationValue' },
-            { type: 'string', pattern: '^\\{[^}]+\\}$', description: 'An alias to a duration token' }
-          ]
+            {
+              type: 'string',
+              pattern: '^\\{[^}]+\\}$',
+              description: 'An alias to a duration token',
+            },
+          ],
         },
         delay: {
           oneOf: [
             { $ref: '#/$defs/durationValue' },
-            { type: 'string', pattern: '^\\{[^}]+\\}$', description: 'An alias to a duration token' }
-          ]
+            {
+              type: 'string',
+              pattern: '^\\{[^}]+\\}$',
+              description: 'An alias to a duration token',
+            },
+          ],
         },
         timingFunction: {
           oneOf: [
             { $ref: '#/$defs/cubicBezierValue' },
-            { type: 'string', pattern: '^\\{[^}]+\\}$', description: 'An alias to a cubicBezier token' }
-          ]
-        }
+            {
+              type: 'string',
+              pattern: '^\\{[^}]+\\}$',
+              description: 'An alias to a cubicBezier token',
+            },
+          ],
+        },
       },
-      required: ['duration', 'timingFunction']
-    }
+      required: ['duration', 'timingFunction'],
+    },
   };
 }
 
@@ -464,13 +617,17 @@ function generateTypeSchemas() {
             $value: {
               oneOf: [
                 { $ref: '#/$defs/colorValue' },
-                { type: 'string', pattern: '^\\{[^}]+\\}$', description: 'An alias to another color token' }
-              ]
-            }
+                {
+                  type: 'string',
+                  pattern: '^\\{[^}]+\\}$',
+                  description: 'An alias to another color token',
+                },
+              ],
+            },
           },
-          required: ['$type', '$value']
-        }
-      ]
+          required: ['$type', '$value'],
+        },
+      ],
     },
     dimensionToken: {
       allOf: [
@@ -481,13 +638,17 @@ function generateTypeSchemas() {
             $value: {
               oneOf: [
                 { $ref: '#/$defs/dimensionValue' },
-                { type: 'string', pattern: '^\\{[^}]+\\}$', description: 'An alias to another dimension token' }
-              ]
-            }
+                {
+                  type: 'string',
+                  pattern: '^\\{[^}]+\\}$',
+                  description: 'An alias to another dimension token',
+                },
+              ],
+            },
           },
-          required: ['$type', '$value']
-        }
-      ]
+          required: ['$type', '$value'],
+        },
+      ],
     },
     fontFamilyToken: {
       allOf: [
@@ -495,11 +656,11 @@ function generateTypeSchemas() {
         {
           properties: {
             $type: { const: 'fontFamily' },
-            $value: { $ref: '#/$defs/fontFamilyValue' }
+            $value: { $ref: '#/$defs/fontFamilyValue' },
           },
-          required: ['$type', '$value']
-        }
-      ]
+          required: ['$type', '$value'],
+        },
+      ],
     },
     fontWeightToken: {
       allOf: [
@@ -507,11 +668,11 @@ function generateTypeSchemas() {
         {
           properties: {
             $type: { const: 'fontWeight' },
-            $value: { $ref: '#/$defs/fontWeightValue' }
+            $value: { $ref: '#/$defs/fontWeightValue' },
           },
-          required: ['$type', '$value']
-        }
-      ]
+          required: ['$type', '$value'],
+        },
+      ],
     },
     shadowToken: {
       allOf: [
@@ -519,11 +680,11 @@ function generateTypeSchemas() {
         {
           properties: {
             $type: { const: 'shadow' },
-            $value: { $ref: '#/$defs/shadowValue' }
+            $value: { $ref: '#/$defs/shadowValue' },
           },
-          required: ['$type', '$value']
-        }
-      ]
+          required: ['$type', '$value'],
+        },
+      ],
     },
     typographyToken: {
       allOf: [
@@ -531,11 +692,11 @@ function generateTypeSchemas() {
         {
           properties: {
             $type: { const: 'typography' },
-            $value: { $ref: '#/$defs/typographyValue' }
+            $value: { $ref: '#/$defs/typographyValue' },
           },
-          required: ['$type', '$value']
-        }
-      ]
+          required: ['$type', '$value'],
+        },
+      ],
     },
     borderToken: {
       allOf: [
@@ -543,11 +704,11 @@ function generateTypeSchemas() {
         {
           properties: {
             $type: { const: 'border' },
-            $value: { $ref: '#/$defs/borderValue' }
+            $value: { $ref: '#/$defs/borderValue' },
           },
-          required: ['$type', '$value']
-        }
-      ]
+          required: ['$type', '$value'],
+        },
+      ],
     },
     gradientToken: {
       allOf: [
@@ -555,11 +716,11 @@ function generateTypeSchemas() {
         {
           properties: {
             $type: { const: 'gradient' },
-            $value: { $ref: '#/$defs/gradientValue' }
+            $value: { $ref: '#/$defs/gradientValue' },
           },
-          required: ['$type', '$value']
-        }
-      ]
+          required: ['$type', '$value'],
+        },
+      ],
     },
     transitionToken: {
       allOf: [
@@ -567,11 +728,11 @@ function generateTypeSchemas() {
         {
           properties: {
             $type: { const: 'transition' },
-            $value: { $ref: '#/$defs/transitionValue' }
+            $value: { $ref: '#/$defs/transitionValue' },
           },
-          required: ['$type', '$value']
-        }
-      ]
+          required: ['$type', '$value'],
+        },
+      ],
     },
     strokeStyleToken: {
       allOf: [
@@ -579,12 +740,12 @@ function generateTypeSchemas() {
         {
           properties: {
             $type: { const: 'strokeStyle' },
-            $value: { $ref: '#/$defs/strokeStyleValue' }
+            $value: { $ref: '#/$defs/strokeStyleValue' },
           },
-          required: ['$type', '$value']
-        }
-      ]
-    }
+          required: ['$type', '$value'],
+        },
+      ],
+    },
   };
 }
 
@@ -596,7 +757,8 @@ function generateCompleteSchema() {
     $schema: 'http://json-schema.org/draft-07/schema#',
     $id: 'https://darianrosebrook.com/ui/designTokens/designTokens.schema.json',
     title: 'Design Tokens Schema',
-    description: 'A JSON schema for validating design token files according to the W3C Design Tokens Community Group (DTCG) 1.0 (2025.10) specification with custom extensions',
+    description:
+      'A JSON schema for validating design token files according to the W3C Design Tokens Community Group (DTCG) 1.0 (2025.10) specification with custom extensions',
     type: 'object',
 
     $defs: {
@@ -626,7 +788,9 @@ function generateCompleteSchema() {
  * Main function to generate and write the DTCG 1.0 compliant schema
  */
 function generateSchema() {
-  console.log('[schema] Generating DTCG 1.0 compliant design tokens JSON schema...');
+  console.log(
+    '[schema] Generating DTCG 1.0 compliant design tokens JSON schema...'
+  );
 
   const schema = generateCompleteSchema();
 
