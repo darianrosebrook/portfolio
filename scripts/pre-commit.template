@@ -133,7 +133,7 @@ for FILE in $STAGED_FILES; do
   
   # Check for secret patterns
   for PATTERN in "${SECRET_PATTERNS[@]}"; do
-    MATCHES=$(echo "$STAGED_CONTENT" | grep -oiE "$PATTERN" | head -10)
+    MATCHES=$(echo "$STAGED_CONTENT" | grep -oiE -- "$PATTERN" | head -10)
     
     if [ -n "$MATCHES" ]; then
       EXCLUDED=false
@@ -144,7 +144,7 @@ for FILE in $STAGED_FILES; do
       fi
       
       # Exclude comments (but still warn for secrets in comments)
-      LINE_CONTEXT=$(echo "$STAGED_CONTENT" | grep -oiE "$PATTERN" -B 2 -A 2 | grep -E "^[[:space:]]*[#/]" | head -1)
+      LINE_CONTEXT=$(echo "$STAGED_CONTENT" | grep -oiE -- "$PATTERN" -B 2 -A 2 | grep -E "^[[:space:]]*[#/]" | head -1)
       if [ -n "$LINE_CONTEXT" ]; then
         # Allow if it's a documentation example or clearly marked
         if echo "$LINE_CONTEXT" | grep -qiE "(example|sample|documentation|test|mock|placeholder)"; then
@@ -166,7 +166,7 @@ for FILE in $STAGED_FILES; do
       done
       
       # Exclude if it's in a string literal that's clearly a variable name or example
-      if echo "$STAGED_CONTENT" | grep -qiE "(['\"].*$PATTERN.*['\"])" && \
+      if echo "$STAGED_CONTENT" | grep -qiE -- "(['\"].*$PATTERN.*['\"])" && \
          echo "$STAGED_CONTENT" | grep -qiE "(example|sample|placeholder|test|mock|fixture)"; then
         EXCLUDED=true
       fi
