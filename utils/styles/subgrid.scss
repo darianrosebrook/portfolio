@@ -8,7 +8,6 @@
 // Subgrid mixin for easy application
 @mixin subgrid($direction: both) {
   @supports (grid-template-columns: subgrid) {
-
     @if $direction == columns or $direction == both {
       grid-template-columns: subgrid;
     }
