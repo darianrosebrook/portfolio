@@ -222,7 +222,7 @@ function generateContrastSuggestion(
  */
 function extractColorPairsFromTokens(
   tokens: unknown
-): Array<{ foreground: string; background: string; context?: string }> {
+): Array<{ foreground: string; background: string; context?: string; level?: WCAGLevel }> {
   const pairs: Array<{ foreground: string; background: string; context?: string }> = [];
 
   if (typeof tokens !== 'object' || tokens === null) {
@@ -271,11 +271,11 @@ export function validateTokenContrast(
   const colorPairs = options.colorPairs || extractColorPairsFromTokens(tokens);
 
   colorPairs.forEach((pair) => {
-    const level = pair.level || options.level || 'AA_NORMAL';
+    const level = ('level' in pair ? pair.level : undefined) || options.level || 'AA_NORMAL';
     const result = validateContrastPair(pair.foreground, pair.background, {
       ...options,
       level,
-      colorPairs: [pair],
+      colorPairs: [pair as { foreground: string; background: string; context?: string; level?: WCAGLevel }],
     });
 
     if (result) {
