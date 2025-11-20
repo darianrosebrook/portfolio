@@ -310,7 +310,7 @@ export const accessibilityTestUtils = {
 
     const results = await axe.run(container, axeOptions);
 
-    return results as axe.AxeResults;
+    return results as unknown as axe.AxeResults;
   },
 
   // Test for WCAG compliance
