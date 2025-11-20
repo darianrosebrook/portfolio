@@ -119,7 +119,9 @@ tests.forEach((test) => {
   } else {
     failed++;
     console.log(`❌ ${test.name}`);
-    console.log(`   Expected: ${test.expectValid ? 'valid' : 'invalid'}, Got: ${result.isValid ? 'valid' : 'invalid'}`);
+    console.log(
+      `   Expected: ${test.expectValid ? 'valid' : 'invalid'}, Got: ${result.isValid ? 'valid' : 'invalid'}`
+    );
     if (result.errors.length > 0) {
       result.errors.slice(0, 2).forEach((err) => {
         console.log(`   - ${err.path}: ${err.message}`);
@@ -134,4 +136,3 @@ console.log(`\n📊 Results: ${passed}/${tests.length} passed`);
 if (failed > 0) {
   process.exit(1);
 }
-

@@ -123,18 +123,18 @@ function colorValueToHex(colorValue: unknown): string | null {
 
   if (typeof colorValue === 'object' && colorValue !== null) {
     const cv = colorValue as Record<string, unknown>;
-    
+
     // DTCG structured color value
     if ('colorSpace' in cv && 'components' in cv) {
       const colorSpace = cv.colorSpace as string;
       const components = cv.components as number[];
-      
+
       // Only support srgb for now (most common)
       if (colorSpace === 'srgb' && components.length >= 3) {
         const r = Math.round(components[0] * 255);
         const g = Math.round(components[1] * 255);
         const b = Math.round(components[2] * 255);
-        return `#${[r, g, b].map(x => x.toString(16).padStart(2, '0')).join('')}`;
+        return `#${[r, g, b].map((x) => x.toString(16).padStart(2, '0')).join('')}`;
       }
     }
   }
@@ -220,10 +220,17 @@ function generateContrastSuggestion(
 /**
  * Extract color pairs from design tokens
  */
-function extractColorPairsFromTokens(
-  tokens: unknown
-): Array<{ foreground: string; background: string; context?: string; level?: WCAGLevel }> {
-  const pairs: Array<{ foreground: string; background: string; context?: string }> = [];
+function extractColorPairsFromTokens(tokens: unknown): Array<{
+  foreground: string;
+  background: string;
+  context?: string;
+  level?: WCAGLevel;
+}> {
+  const pairs: Array<{
+    foreground: string;
+    background: string;
+    context?: string;
+  }> = [];
 
   if (typeof tokens !== 'object' || tokens === null) {
     return pairs;
@@ -232,14 +239,17 @@ function extractColorPairsFromTokens(
   const tokensObj = tokens as Record<string, unknown>;
 
   // Look for common semantic color patterns
-  const semanticColors = (tokensObj.semantic as Record<string, unknown>)?.color as
-    | Record<string, unknown>
-    | undefined;
+  const semanticColors = (tokensObj.semantic as Record<string, unknown>)
+    ?.color as Record<string, unknown> | undefined;
 
   if (semanticColors) {
     // Text on background patterns
-    const foreground = semanticColors.foreground as Record<string, unknown> | undefined;
-    const background = semanticColors.background as Record<string, unknown> | undefined;
+    const foreground = semanticColors.foreground as
+      | Record<string, unknown>
+      | undefined;
+    const background = semanticColors.background as
+      | Record<string, unknown>
+      | undefined;
 
     if (foreground && background) {
       const fgPrimary = colorValueToHex(foreground.primary);
@@ -271,11 +281,21 @@ export function validateTokenContrast(
   const colorPairs = options.colorPairs || extractColorPairsFromTokens(tokens);
 
   colorPairs.forEach((pair) => {
-    const level = ('level' in pair ? pair.level : undefined) || options.level || 'AA_NORMAL';
+    const level =
+      ('level' in pair ? pair.level : undefined) ||
+      options.level ||
+      'AA_NORMAL';
     const result = validateContrastPair(pair.foreground, pair.background, {
       ...options,
       level,
-      colorPairs: [pair as { foreground: string; background: string; context?: string; level?: WCAGLevel }],
+      colorPairs: [
+        pair as {
+          foreground: string;
+          background: string;
+          context?: string;
+          level?: WCAGLevel;
+        },
+      ],
     });
 
     if (result) {
@@ -315,7 +335,9 @@ export function formatContrastReport(report: ContrastValidationReport): string {
       lines.push(`   ${i + 1}. ${result.context || 'Color pair'}`);
       lines.push(`      Foreground: ${result.foreground}`);
       lines.push(`      Background: ${result.background}`);
-      lines.push(`      Contrast: ${result.contrastRatio.toFixed(2)} (required: ${result.requiredRatio})`);
+      lines.push(
+        `      Contrast: ${result.contrastRatio.toFixed(2)} (required: ${result.requiredRatio})`
+      );
       if (result.suggestion) {
         lines.push(`      💡 ${result.suggestion}`);
       }
@@ -325,4 +347,3 @@ export function formatContrastReport(report: ContrastValidationReport): string {
 
   return lines.join('\n');
 }
-

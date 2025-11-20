@@ -59,4 +59,3 @@ export {
   type ExtendedValidationOptions,
   type ExtendedValidationResult,
 } from './w3c-validator-with-contrast';
-

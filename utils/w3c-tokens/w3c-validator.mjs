@@ -24,7 +24,10 @@ const __dirname = path.dirname(__filename);
 
 // Load schema (defaults to strict, can be overridden via W3C_SCHEMA env var)
 // Options: 'w3c-schema-strict.json' (default) or 'w3c-schema-permissive.json'
-const SCHEMA_PATH = path.join(__dirname, process.env.W3C_SCHEMA || 'w3c-schema-strict.json');
+const SCHEMA_PATH = path.join(
+  __dirname,
+  process.env.W3C_SCHEMA || 'w3c-schema-strict.json'
+);
 let schema;
 try {
   const schemaContent = fs.readFileSync(SCHEMA_PATH, 'utf8');
@@ -180,21 +183,38 @@ function performCustomValidations(tokens, filePath) {
 
     // Detect schema mode from schema file name
     const isPermissive = SCHEMA_PATH.includes('permissive');
-    
+
     // Check for non-standard types (warn but don't error)
     const standardTypes = [
-      'color', 'dimension', 'fontFamily', 'fontWeight', 'duration',
-      'cubicBezier', 'number', 'border', 'transition', 'shadow',
-      'gradient', 'typography', 'strokeStyle'
+      'color',
+      'dimension',
+      'fontFamily',
+      'fontWeight',
+      'duration',
+      'cubicBezier',
+      'number',
+      'border',
+      'transition',
+      'shadow',
+      'gradient',
+      'typography',
+      'strokeStyle',
     ];
-    
+
     // Permissive schema types
     const permissiveTypes = [
       ...standardTypes,
-      'opacity', 'spacing', 'radius', 'elevation', 'motion',
-      'layout', 'interaction', 'string', 'keyframes'
+      'opacity',
+      'spacing',
+      'radius',
+      'elevation',
+      'motion',
+      'layout',
+      'interaction',
+      'string',
+      'keyframes',
     ];
-    
+
     if ($type && !standardTypes.includes($type)) {
       // Only warn if using strict schema
       if (!isPermissive) {
@@ -216,13 +236,26 @@ function performCustomValidations(tokens, filePath) {
     switch ($type) {
       case 'color':
         // Validate color value structure
-        if (typeof $value === 'object' && $value !== null && !Array.isArray($value)) {
+        if (
+          typeof $value === 'object' &&
+          $value !== null &&
+          !Array.isArray($value)
+        ) {
           const colorValue = $value;
           if ('colorSpace' in colorValue) {
             const validColorSpaces = [
-              'srgb', 'srgb-linear', 'display-p3', 'a98-rgb',
-              'prophoto-rgb', 'rec2020', 'xyz-d50', 'xyz-d65',
-              'oklab', 'oklch', 'lab', 'lch'
+              'srgb',
+              'srgb-linear',
+              'display-p3',
+              'a98-rgb',
+              'prophoto-rgb',
+              'rec2020',
+              'xyz-d50',
+              'xyz-d65',
+              'oklab',
+              'oklch',
+              'lab',
+              'lch',
             ];
             if (!validColorSpaces.includes(colorValue.colorSpace)) {
               errors.push({
@@ -234,7 +267,11 @@ function performCustomValidations(tokens, filePath) {
           }
           if ('components' in colorValue) {
             const components = colorValue.components;
-            if (!Array.isArray(components) || components.length < 3 || components.length > 4) {
+            if (
+              !Array.isArray(components) ||
+              components.length < 3 ||
+              components.length > 4
+            ) {
               errors.push({
                 type: 'custom',
                 path,
@@ -257,7 +294,11 @@ function performCustomValidations(tokens, filePath) {
 
       case 'dimension':
         // Validate dimension value structure
-        if (typeof $value === 'object' && $value !== null && !Array.isArray($value)) {
+        if (
+          typeof $value === 'object' &&
+          $value !== null &&
+          !Array.isArray($value)
+        ) {
           const dimValue = $value;
           if ('unit' in dimValue && !['px', 'rem'].includes(dimValue.unit)) {
             errors.push({
@@ -288,7 +329,11 @@ function performCustomValidations(tokens, filePath) {
 
       case 'number':
         // Handle nested $value structures (non-standard but common)
-        if (typeof $value === 'object' && $value !== null && !Array.isArray($value)) {
+        if (
+          typeof $value === 'object' &&
+          $value !== null &&
+          !Array.isArray($value)
+        ) {
           const nestedValue = $value.$value;
           if (nestedValue !== undefined) {
             warnings.push({
@@ -297,11 +342,15 @@ function performCustomValidations(tokens, filePath) {
               message: 'Nested $value structure detected. Consider flattening.',
             });
             // Validate the nested value
-            if (typeof nestedValue !== 'number' && typeof nestedValue !== 'string') {
+            if (
+              typeof nestedValue !== 'number' &&
+              typeof nestedValue !== 'string'
+            ) {
               warnings.push({
                 type: 'number-format',
                 path: `${path}.$value.$value`,
-                message: 'Nested number value should be numeric or a token reference',
+                message:
+                  'Nested number value should be numeric or a token reference',
               });
             }
           }
@@ -317,7 +366,7 @@ function performCustomValidations(tokens, filePath) {
           });
         }
         break;
-      
+
       // Handle non-standard types that might be used
       default:
         // For unknown types, just validate basic structure
@@ -402,7 +451,9 @@ function logValidationResult(result) {
   if (warnings.length > 0) {
     console.log(`[validator] ⚠️  ${fileName} - ${warnings.length} warning(s)`);
     warnings.forEach((warning) => {
-      console.log(`  Warning [${warning.type}] ${warning.path}: ${warning.message}`);
+      console.log(
+        `  Warning [${warning.type}] ${warning.path}: ${warning.message}`
+      );
     });
   }
 
@@ -448,7 +499,9 @@ function validateTokenDirectory(dirPath) {
 const targetPath = process.argv[2];
 
 if (!targetPath) {
-  console.error('[validator] Usage: node w3c-validator.mjs <file-or-directory>');
+  console.error(
+    '[validator] Usage: node w3c-validator.mjs <file-or-directory>'
+  );
   console.error('[validator] Example: node w3c-validator.mjs tokens.json');
   process.exit(1);
 }
@@ -471,4 +524,3 @@ if (stats.isDirectory()) {
 }
 
 process.exit(hasErrors ? 1 : 0);
-

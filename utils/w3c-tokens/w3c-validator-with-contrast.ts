@@ -86,7 +86,9 @@ export function formatExtendedValidationResult(
     if (result.warnings.length > 0) {
       lines.push(`⚠️  ${result.warnings.length} warning(s):`);
       result.warnings.forEach((warning) => {
-        lines.push(`  Warning [${warning.type}] ${warning.path}: ${warning.message}`);
+        lines.push(
+          `  Warning [${warning.type}] ${warning.path}: ${warning.message}`
+        );
       });
     }
 
@@ -105,4 +107,3 @@ export function formatExtendedValidationResult(
 
   return lines.join('\n');
 }
-

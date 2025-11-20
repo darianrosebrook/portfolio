@@ -2,7 +2,10 @@
  * Test Contrast Validation
  */
 
-import { validateDesignTokensWithContrast, formatExtendedValidationResult } from './w3c-validator-with-contrast';
+import {
+  validateDesignTokensWithContrast,
+  formatExtendedValidationResult,
+} from './w3c-validator-with-contrast';
 import { setDefaultSchema } from './w3c-validator';
 import schema from './w3c-schema-strict.json';
 import { contrastRatioHex } from './w3c-contrast-validator';
@@ -22,7 +25,9 @@ const ratios = [
 
 ratios.forEach(({ fg, bg, expected }) => {
   const ratio = contrastRatioHex(fg, bg);
-  console.log(`   ${fg} on ${bg}: ${ratio?.toFixed(2)} (expected ~${expected})`);
+  console.log(
+    `   ${fg} on ${bg}: ${ratio?.toFixed(2)} (expected ~${expected})`
+  );
 });
 
 // Test contrast validation
@@ -83,4 +88,3 @@ if (result.contrast) {
 }
 
 console.log('\n' + '='.repeat(60));
-

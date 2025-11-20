@@ -51,10 +51,13 @@ let schemaMode: 'strict' | 'permissive' | 'unknown' = 'unknown';
  */
 export function setDefaultSchema(schema: object): void {
   defaultSchema = schema;
-  
+
   // Detect schema mode by checking if it includes custom types
   const schemaStr = JSON.stringify(schema);
-  const hasCustomTypes = /"opacity"|"spacing"|"radius"|"elevation"|"motion"|"layout"|"interaction"|"string"|"keyframes"|"composition"|"borderRadius"|"borderWidth"|"borderStyle"/.test(schemaStr);
+  const hasCustomTypes =
+    /"opacity"|"spacing"|"radius"|"elevation"|"motion"|"layout"|"interaction"|"string"|"keyframes"|"composition"|"borderRadius"|"borderWidth"|"borderStyle"/.test(
+      schemaStr
+    );
   schemaMode = hasCustomTypes ? 'permissive' : 'strict';
 }
 
@@ -161,12 +164,12 @@ function initializeValidator(
   addFormats(ajv);
 
   const schemaToUse = options.customSchema || defaultSchema;
-  
+
   if (!schemaToUse) {
     console.error(
       '[validator] No schema provided. ' +
-      'Use setDefaultSchema() or provide customSchema in options. ' +
-      'Example: import schema from "./w3c-schema-strict.json"; setDefaultSchema(schema);'
+        'Use setDefaultSchema() or provide customSchema in options. ' +
+        'Example: import schema from "./w3c-schema-strict.json"; setDefaultSchema(schema);'
     );
     return null;
   }
@@ -280,10 +283,7 @@ function performCustomValidations(tokens: unknown): {
     }
   }
 
-  function validateToken(
-    token: Record<string, unknown>,
-    path: string
-  ): void {
+  function validateToken(token: Record<string, unknown>, path: string): void {
     // Check for required properties
     if (!token.$type && !token.$value) {
       warnings.push({
@@ -294,10 +294,7 @@ function performCustomValidations(tokens: unknown): {
     }
 
     // Validate token references
-    if (
-      typeof token.$value === 'string' &&
-      token.$value.match(/^\{[^}]+\}$/)
-    ) {
+    if (typeof token.$value === 'string' && token.$value.match(/^\{[^}]+\}$/)) {
       const refPath = token.$value.slice(1, -1);
       tokenRefs.set(path, refPath);
 
@@ -317,10 +314,7 @@ function performCustomValidations(tokens: unknown): {
     }
   }
 
-  function validateGroup(
-    group: Record<string, unknown>,
-    path: string
-  ): void {
+  function validateGroup(group: Record<string, unknown>, path: string): void {
     // Groups should have meaningful names
     if (path.length === 0) {
       warnings.push({
@@ -341,18 +335,35 @@ function performCustomValidations(tokens: unknown): {
     // Check for non-standard types (warn but don't error)
     // Only warn if using strict schema - permissive schema accepts custom types
     const standardTypes = [
-      'color', 'dimension', 'fontFamily', 'fontWeight', 'duration',
-      'cubicBezier', 'number', 'border', 'transition', 'shadow',
-      'gradient', 'typography', 'strokeStyle'
+      'color',
+      'dimension',
+      'fontFamily',
+      'fontWeight',
+      'duration',
+      'cubicBezier',
+      'number',
+      'border',
+      'transition',
+      'shadow',
+      'gradient',
+      'typography',
+      'strokeStyle',
     ];
-    
+
     // Permissive schema types (from w3c-schema-permissive.json)
     const permissiveTypes = [
       ...standardTypes,
-      'opacity', 'spacing', 'radius', 'elevation', 'motion',
-      'layout', 'interaction', 'string', 'keyframes'
+      'opacity',
+      'spacing',
+      'radius',
+      'elevation',
+      'motion',
+      'layout',
+      'interaction',
+      'string',
+      'keyframes',
     ];
-    
+
     if ($type && !standardTypes.includes($type)) {
       // Only warn if using strict schema
       if (schemaMode === 'strict') {
@@ -361,7 +372,10 @@ function performCustomValidations(tokens: unknown): {
           path,
           message: `Non-standard token type "${$type}". Standard types are: ${standardTypes.join(', ')}`,
         });
-      } else if (schemaMode === 'permissive' && !permissiveTypes.includes($type)) {
+      } else if (
+        schemaMode === 'permissive' &&
+        !permissiveTypes.includes($type)
+      ) {
         // Warn about truly unknown types even in permissive mode
         warnings.push({
           type: 'unknown-type',
@@ -374,13 +388,26 @@ function performCustomValidations(tokens: unknown): {
     switch ($type) {
       case 'color':
         // Validate color value structure
-        if (typeof $value === 'object' && $value !== null && !Array.isArray($value)) {
+        if (
+          typeof $value === 'object' &&
+          $value !== null &&
+          !Array.isArray($value)
+        ) {
           const colorValue = $value as Record<string, unknown>;
           if ('colorSpace' in colorValue) {
             const validColorSpaces = [
-              'srgb', 'srgb-linear', 'display-p3', 'a98-rgb',
-              'prophoto-rgb', 'rec2020', 'xyz-d50', 'xyz-d65',
-              'oklab', 'oklch', 'lab', 'lch'
+              'srgb',
+              'srgb-linear',
+              'display-p3',
+              'a98-rgb',
+              'prophoto-rgb',
+              'rec2020',
+              'xyz-d50',
+              'xyz-d65',
+              'oklab',
+              'oklch',
+              'lab',
+              'lch',
             ];
             if (!validColorSpaces.includes(colorValue.colorSpace as string)) {
               errors.push({
@@ -392,7 +419,11 @@ function performCustomValidations(tokens: unknown): {
           }
           if ('components' in colorValue) {
             const components = colorValue.components;
-            if (!Array.isArray(components) || components.length < 3 || components.length > 4) {
+            if (
+              !Array.isArray(components) ||
+              components.length < 3 ||
+              components.length > 4
+            ) {
               errors.push({
                 type: 'custom',
                 path,
@@ -415,9 +446,16 @@ function performCustomValidations(tokens: unknown): {
 
       case 'dimension':
         // Validate dimension value structure
-        if (typeof $value === 'object' && $value !== null && !Array.isArray($value)) {
+        if (
+          typeof $value === 'object' &&
+          $value !== null &&
+          !Array.isArray($value)
+        ) {
           const dimValue = $value as Record<string, unknown>;
-          if ('unit' in dimValue && !['px', 'rem'].includes(dimValue.unit as string)) {
+          if (
+            'unit' in dimValue &&
+            !['px', 'rem'].includes(dimValue.unit as string)
+          ) {
             errors.push({
               type: 'custom',
               path,
@@ -446,7 +484,11 @@ function performCustomValidations(tokens: unknown): {
 
       case 'number':
         // Handle nested $value structures (non-standard but common)
-        if (typeof $value === 'object' && $value !== null && !Array.isArray($value)) {
+        if (
+          typeof $value === 'object' &&
+          $value !== null &&
+          !Array.isArray($value)
+        ) {
           const nestedValue = ($value as Record<string, unknown>).$value;
           if (nestedValue !== undefined) {
             warnings.push({
@@ -455,11 +497,15 @@ function performCustomValidations(tokens: unknown): {
               message: 'Nested $value structure detected. Consider flattening.',
             });
             // Validate the nested value
-            if (typeof nestedValue !== 'number' && typeof nestedValue !== 'string') {
+            if (
+              typeof nestedValue !== 'number' &&
+              typeof nestedValue !== 'string'
+            ) {
               warnings.push({
                 type: 'number-format',
                 path: `${path}.$value.$value`,
-                message: 'Nested number value should be numeric or a token reference',
+                message:
+                  'Nested number value should be numeric or a token reference',
               });
             }
           }
@@ -475,7 +521,7 @@ function performCustomValidations(tokens: unknown): {
           });
         }
         break;
-      
+
       // Handle non-standard types that might be used
       default:
         // For unknown types, just validate basic structure
@@ -509,9 +555,7 @@ function performCustomValidations(tokens: unknown): {
 /**
  * Detect circular references in token dependencies
  */
-function detectCircularReferences(
-  tokenRefs: Map<string, string>
-): string[][] {
+function detectCircularReferences(tokenRefs: Map<string, string>): string[][] {
   const cycles: string[][] = [];
   const visited = new Set<string>();
   const recursionStack = new Set<string>();
@@ -561,7 +605,9 @@ export function formatValidationResult(result: ValidationResult): string {
   if (result.warnings.length > 0) {
     lines.push(`⚠️  ${result.warnings.length} warning(s):`);
     result.warnings.forEach((warning) => {
-      lines.push(`  Warning [${warning.type}] ${warning.path}: ${warning.message}`);
+      lines.push(
+        `  Warning [${warning.type}] ${warning.path}: ${warning.message}`
+      );
     });
   }
 
@@ -607,4 +653,3 @@ export async function validateDesignTokensFromFile(
     };
   }
 }
-

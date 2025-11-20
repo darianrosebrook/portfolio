@@ -2,7 +2,11 @@
  * Test script for the W3C Design Tokens Validator
  */
 
-import { validateDesignTokens, setDefaultSchema, formatValidationResult } from './w3c-validator';
+import {
+  validateDesignTokens,
+  setDefaultSchema,
+  formatValidationResult,
+} from './w3c-validator';
 import schema from './w3c-schema-strict.json';
 import fs from 'fs';
 
@@ -77,7 +81,9 @@ const circularTokens = {
 const circularResult = validateDesignTokens(circularTokens);
 console.log(formatValidationResult(circularResult));
 console.log(`Valid: ${circularResult.isValid}`);
-console.log(`Circular reference errors: ${circularResult.errors.filter(e => e.type === 'circular-reference').length}`);
+console.log(
+  `Circular reference errors: ${circularResult.errors.filter((e) => e.type === 'circular-reference').length}`
+);
 
 // Test 4: From file
 console.log('\n4. Testing file validation:');
@@ -91,4 +97,3 @@ if (fs.existsSync('./test-tokens.json')) {
 
 console.log('\n' + '='.repeat(50));
 console.log('All tests completed!');
-
