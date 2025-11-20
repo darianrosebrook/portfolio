@@ -1,5 +1,4 @@
 <!-- d95a3062-7f0b-477f-bfd3-e2032d64a7bc 3e3906b7-5750-44be-8a22-e09316515a07 -->
-
 # Best-in-Class Documentation: Implementation Plan
 
 ## Overview

@@ -1,0 +1,22 @@
+{
+  "color": {
+    "primary": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "invalid-space",
+        "components": [1, 0, 0]
+      }
+    },
+    "self-reference": {
+      "$type": "color",
+      "$value": "{color.self-reference}"
+    }
+  },
+  "spacing": {
+    "invalid": {
+      "$type": "dimension",
+      "$value": "not-a-dimension"
+    }
+  }
+}
+

@@ -1,0 +1,73 @@
+{
+  "name": "@w3c-design-tokens/validator",
+  "version": "1.0.0",
+  "description": "W3C Design Tokens Community Group (DTCG) 1.0 schema and validator",
+  "type": "module",
+  "main": "./w3c-validator.mjs",
+  "types": "./w3c-index.ts",
+  "exports": {
+    ".": {
+      "import": "./w3c-validator.mjs",
+      "types": "./w3c-index.ts"
+    },
+    "./schema": "./w3c-schema-strict.json",
+    "./schema-strict": "./w3c-schema-strict.json",
+    "./schema-permissive": "./w3c-schema-permissive.json",
+    "./types": "./w3c-types.ts",
+    "./validator": {
+      "import": "./w3c-validator.mjs",
+      "types": "./w3c-validator.ts"
+    },
+    "./contrast": {
+      "types": "./w3c-contrast-validator.ts"
+    },
+    "./with-contrast": {
+      "types": "./w3c-validator-with-contrast.ts"
+    }
+  },
+  "files": [
+    "w3c-schema-strict.json",
+    "w3c-schema-permissive.json",
+    "w3c-validator.ts",
+    "w3c-validator.mjs",
+    "w3c-types.ts",
+    "README.md"
+  ],
+  "scripts": {
+    "validate": "node w3c-validator.mjs"
+  },
+  "keywords": [
+    "design-tokens",
+    "w3c",
+    "dtcg",
+    "design-system",
+    "tokens",
+    "validation",
+    "schema",
+    "json-schema"
+  ],
+  "author": {
+    "name": "Darian Rosebrook",
+    "url": "https://github.com/darianrosebrook"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/darianrosebrook/portfolio"
+  },
+  "peerDependencies": {
+    "ajv": "^8.0.0 || ^9.0.0",
+    "ajv-formats": "^2.0.0 || ^3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "ajv": {
+      "optional": false
+    },
+    "ajv-formats": {
+      "optional": false
+    }
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

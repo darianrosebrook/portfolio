@@ -122,3 +122,5 @@ export function getLastUpdated(componentName: string): string | null {
   }
   return changelog.entries[0].date;
 }
+
+

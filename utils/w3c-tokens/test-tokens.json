@@ -1,0 +1,49 @@
+{
+  "color": {
+    "primary": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [0.2, 0.4, 0.8]
+      },
+      "$description": "Primary brand color"
+    },
+    "secondary": {
+      "$type": "color",
+      "$value": "{color.primary}"
+    }
+  },
+  "spacing": {
+    "$type": "dimension",
+    "small": {
+      "$value": {
+        "value": 8,
+        "unit": "px"
+      }
+    },
+    "medium": {
+      "$value": {
+        "value": 16,
+        "unit": "px"
+      }
+    },
+    "large": {
+      "$value": "{spacing.medium}"
+    }
+  },
+  "typography": {
+    "heading": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Inter, sans-serif",
+        "fontSize": {
+          "value": 24,
+          "unit": "px"
+        },
+        "fontWeight": "bold",
+        "lineHeight": 1.5
+      }
+    }
+  }
+}
+

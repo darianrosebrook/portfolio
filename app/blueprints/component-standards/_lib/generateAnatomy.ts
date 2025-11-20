@@ -103,3 +103,5 @@ export function getAnatomyData(component: ComponentItem): AnatomyPart[] | null {
 
   return parseAnatomy(contract.anatomy);
 }
+
+

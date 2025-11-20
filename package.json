@@ -38,7 +38,14 @@
     "generate:components-docs": "node scripts/generateComponentsAndDocs.mjs",
     "generate:contracts": "node scripts/generateContracts.mjs",
     "components:setup": "npm run generate:contracts && npm run validate:components",
-    "components:health": "node scripts/componentHealthCheck.mjs"
+    "components:health": "node scripts/componentHealthCheck.mjs",
+    "setup:hooks": "bash scripts/setup-hooks.sh",
+    "hook:audit": "bash scripts/audit-hook-bypasses.sh",
+    "perf:budgets": "lhci autorun --config=.lighthouserc.js",
+    "perf:budgets:mobile": "lhci autorun --config=lighthouserc.mobile.js",
+    "perf:audit": "lhci autorun --config=.lighthouserc.js --collect.url=http://localhost:3000",
+    "perf:audit:all": "npm run build && npm run start & sleep 10 && npm run perf:budgets && pkill -f 'next start'",
+    "perf:compare": "lhci autorun --config=.lighthouserc.js --collect.numberOfRuns=1"
   },
   "dependencies": {
     "@atproto/api": "^0.16.9",
