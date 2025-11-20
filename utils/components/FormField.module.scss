@@ -120,6 +120,7 @@
   font-weight: var(--font-weight-medium, 500);
   font-size: var(--text-size-sm, 0.875rem);
   line-height: var(--text-line-height-relaxed, 1.6);
+  animation: errorAppear 0.2s ease-out;
 
   @media (prefers-color-scheme: dark) {
     color: var(--color-feedback-error-dark, #ff6b7a);
@@ -155,10 +156,6 @@
 }
 
 // Animation for error appearance
-.error {
-  animation: errorAppear 0.2s ease-out;
-}
-
 @keyframes errorAppear {
   from {
     opacity: 0;
