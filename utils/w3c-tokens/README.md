@@ -430,7 +430,9 @@ const result = validateDesignTokensWithContrast(tokens, {
 });
 
 if (result.contrast) {
-  console.log(`Contrast validation: ${result.contrast.validPairs}/${result.contrast.totalPairs} pairs passing`);
+  console.log(
+    `Contrast validation: ${result.contrast.validPairs}/${result.contrast.totalPairs} pairs passing`
+  );
 }
 ```
 

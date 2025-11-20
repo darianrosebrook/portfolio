@@ -12,9 +12,11 @@ This package includes two schema variants for different use cases:
 - ✅ **Best for**: Generic validation, tooling, interoperability
 
 **Token Types:**
+
 - `color`, `dimension`, `fontFamily`, `fontWeight`, `duration`, `cubicBezier`, `number`, `border`, `transition`, `shadow`, `gradient`, `typography`, `strokeStyle`
 
 **Example:**
+
 ```json
 {
   "color": {
@@ -39,16 +41,18 @@ This package includes two schema variants for different use cases:
 - ✅ **Best for**: Repository-specific validation, legacy token migration, custom design systems
 
 **Token Types:**
+
 - Standard: `color`, `dimension`, `fontFamily`, `fontWeight`, `duration`, `cubicBezier`, `number`, `border`, `transition`, `shadow`, `gradient`, `typography`, `strokeStyle`
 - Custom: `opacity`, `spacing`, `radius`, `elevation`, `motion`, `layout`, `interaction`, `string`, `keyframes`
 
 **Example:**
+
 ```json
 {
   "color": {
     "primary": {
       "$type": "color",
-      "$value": "#ff0000"  // String format allowed
+      "$value": "#ff0000" // String format allowed
     }
   },
   "opacity": {
@@ -63,6 +67,7 @@ This package includes two schema variants for different use cases:
 ## Usage
 
 ### Default (Strict)
+
 ```typescript
 import { validateDesignTokens, setDefaultSchema } from './w3c-validator';
 import schema from './w3c-schema-strict.json';
@@ -72,6 +77,7 @@ const result = validateDesignTokens(tokens);
 ```
 
 ### Permissive
+
 ```typescript
 import { validateDesignTokens, setDefaultSchema } from './w3c-validator';
 import schema from './w3c-schema-permissive.json';
@@ -81,11 +87,13 @@ const result = validateDesignTokens(tokens);
 ```
 
 ### CLI (Strict - Default)
+
 ```bash
 node w3c-validator.mjs tokens.json
 ```
 
 ### CLI (Permissive)
+
 ```bash
 W3C_SCHEMA=w3c-schema-permissive.json node w3c-validator.mjs tokens.json
 ```
@@ -109,10 +117,11 @@ W3C_SCHEMA=w3c-schema-permissive.json node w3c-validator.mjs tokens.json
 If you're using the permissive schema and want to migrate to strict:
 
 1. Convert string colors to structured:
+
    ```json
    // Permissive
    "$value": "#ff0000"
-   
+
    // Strict
    "$value": {
      "colorSpace": "srgb",
@@ -121,10 +130,11 @@ If you're using the permissive schema and want to migrate to strict:
    ```
 
 2. Convert string dimensions to structured:
+
    ```json
    // Permissive
    "$value": "16px"
-   
+
    // Strict
    "$value": {
      "value": 16,
@@ -137,4 +147,3 @@ If you're using the permissive schema and want to migrate to strict:
    - `borderRadius` → `dimension`
    - `borderWidth` → `dimension`
    - `borderStyle` → `strokeStyle`
-
