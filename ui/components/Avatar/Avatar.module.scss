@@ -68,13 +68,13 @@
 
 .status {
   position: absolute;
-  inset-inline-end: 0;
-  inset-block-end: 0;
   width: var(--avatar-size-status);
   height: var(--avatar-size-status);
   border: var(--avatar-size-border-default) solid
     var(--avatar-color-background-inverse);
   border-radius: var(--avatar-size-radius-full);
+  inset-block-end: 0;
+  inset-inline-end: 0;
 }
 
 .status_online {

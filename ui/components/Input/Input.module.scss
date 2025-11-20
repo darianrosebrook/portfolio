@@ -3,23 +3,23 @@
 .input {
   @include inputTokens.vars;
 
-  // Container queries for responsive sizing
-  container-type: inline-size;
-
   padding-inline: var(--input-space-inline);
   padding-block: 0;
   background: var(--input-color-bg);
   border: 1px solid var(--input-color-border);
   border-radius: var(--input-size-radius);
   color: var(--input-color-text);
-  appearance: none;
-  block-size: var(--input-size-height);
-  inline-size: 100%;
   transition:
     border-color 0.2s ease,
     background-color 0.2s ease;
+  appearance: none;
+  block-size: var(--input-size-height);
 
-  &:hover:not(:disabled):not(:read-only) {
+  // Container queries for responsive sizing
+  container-type: inline-size;
+  inline-size: 100%;
+
+  &:hover:not(:disabled, :read-only) {
     // Use color-mix() for subtle hover effect
     background-color: color-mix(
       in srgb,
@@ -57,15 +57,15 @@
     @container (max-width: 20rem) {
       // Compact input for small containers
       padding-inline: calc(var(--input-space-inline) * 0.75);
-      block-size: calc(var(--input-size-height) * 0.95);
       font-size: calc(1rem * 0.9);
+      block-size: calc(var(--input-size-height) * 0.95);
     }
 
     @container (max-width: 15rem) {
       // Minimal input for very small containers
       padding-inline: calc(var(--input-space-inline) * 0.5);
-      block-size: calc(var(--input-size-height) * 0.9);
       font-size: calc(1rem * 0.85);
+      block-size: calc(var(--input-size-height) * 0.9);
     }
   }
 }

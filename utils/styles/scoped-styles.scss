@@ -12,14 +12,14 @@
 // This prevents .card .title from affecting titles outside .card
 @scope (.card) {
   .title {
-    font-size: 1.5rem;
-    font-weight: 600;
     margin: 0 0 1rem;
+    font-weight: 600;
+    font-size: 1.5rem;
   }
 
   .content {
-    line-height: 1.6;
     color: var(--color-text-secondary);
+    line-height: 1.6;
   }
 
   .footer {
@@ -35,9 +35,9 @@
 // Example: Form field with scoped styles
 @scope (.field) {
   .label {
-    font-weight: 600;
     margin-bottom: 0.5rem;
     color: var(--color-text-primary);
+    font-weight: 600;
   }
 
   .input {
@@ -48,9 +48,9 @@
   }
 
   .error {
+    margin-top: 0.25rem;
     color: var(--color-error);
     font-size: 0.875rem;
-    margin-top: 0.25rem;
   }
 
   // Styles scoped to .field, won't affect other .label/.input/.error
@@ -81,8 +81,8 @@
 
   .footer {
     display: flex;
-    justify-content: flex-end;
     gap: 0.5rem;
+    justify-content: flex-end;
     padding: 1rem;
     border-top: 1px solid var(--color-border);
   }
@@ -95,9 +95,9 @@
   .list {
     display: flex;
     gap: 1rem;
-    list-style: none;
     margin: 0;
     padding: 0;
+    list-style: none;
   }
 
   .item {
@@ -151,8 +151,8 @@
   }
 
   .title {
-    font-weight: 600;
     margin-bottom: 0.5rem;
+    font-weight: 600;
   }
 
   .message {
@@ -175,15 +175,15 @@
   .list {
     display: flex;
     gap: 0.5rem;
-    list-style: none;
     margin: 0;
     padding: 0;
+    list-style: none;
   }
 
   .item {
     display: flex;
-    align-items: center;
     gap: 0.5rem;
+    align-items: center;
   }
 
   .separator {

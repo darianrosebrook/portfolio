@@ -17,9 +17,6 @@
 }
 
 .dialog {
-  // CSS Containment - strict for isolated modal
-  contain: strict;
-
   position: relative;
   display: flex;
   flex-direction: column;
@@ -30,6 +27,9 @@
   border-radius: var(--dialog-size-radius-default);
   box-shadow: var(--dialog-elevation-default);
   color: var(--dialog-color-foreground-default);
+
+  // CSS Containment - strict for isolated modal
+  contain: strict;
 
   &--modal {
     // Modal-specific styles if needed
@@ -110,8 +110,6 @@
 
     .closeButton {
       position: absolute;
-      inset-block-start: var(--core-spacing-size-04);
-      inset-inline-end: var(--core-spacing-size-04);
       display: inline-flex;
       justify-content: center;
       align-items: center;
@@ -130,6 +128,8 @@
         color var(--dialog-motion-duration-enter)
           var(--dialog-motion-easing-enter);
       cursor: pointer;
+      inset-block-start: var(--core-spacing-size-04);
+      inset-inline-end: var(--core-spacing-size-04);
 
       &:hover {
         background: var(--semantic-color-background-hover);
@@ -193,8 +193,6 @@
 
   .closeButton {
     position: absolute;
-    inset-block-start: var(--core-spacing-size-04);
-    inset-inline-end: var(--core-spacing-size-04);
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -213,6 +211,8 @@
       color var(--dialog-motion-duration-enter)
         var(--dialog-motion-easing-enter);
     cursor: pointer;
+    inset-block-start: var(--core-spacing-size-04);
+    inset-inline-end: var(--core-spacing-size-04);
 
     &:hover {
       background: var(--semantic-color-background-hover);

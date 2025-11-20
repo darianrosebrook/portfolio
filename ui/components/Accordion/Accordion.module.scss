@@ -4,13 +4,13 @@
 .accordion {
   @include accordionTokens.vars;
 
-  // CSS Containment - layout containment for accordion items
-  contain: layout;
-
   display: flex;
   flex-direction: column;
   gap: 0;
   width: 100%;
+
+  // CSS Containment - layout containment for accordion items
+  contain: layout;
 }
 
 // Scoped styles for accordion sub-components

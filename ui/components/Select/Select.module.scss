@@ -12,9 +12,6 @@
 .select {
   @include selectTokens.vars;
 
-  // CSS Containment - paint containment prevents dropdown overflow
-  contain: paint;
-
   box-sizing: border-box;
   width: 100%;
   padding: var(--select-size-padding-default, 8px);
@@ -35,6 +32,9 @@
       var(--select-motion-easing-standard);
   cursor: pointer;
   appearance: base-select;
+
+  // CSS Containment - paint containment prevents dropdown overflow
+  contain: paint;
 
   &--sm {
     height: var(--semantic-control-size-sm-height);
@@ -104,6 +104,7 @@
   &:focus-visible {
     background-color: var(--select-color-background-focusVisible, #fafafa);
     border-color: var(--select-color-border-focusVisible, #d9292b);
+
     // Use color-mix() for focus ring
     outline: 2px solid
       color-mix(
@@ -131,7 +132,6 @@
   }
 
   &::picker(select) {
-    margin-block-start: 0.25rem;
     padding: var(--select-size-padding-default, 8px);
     background-color: var(--select-color-background-default, #fafafa);
     border: var(--select-size-border-default, 2px) solid
@@ -148,6 +148,7 @@
     transform-origin: top;
     cursor: default;
     appearance: base-select;
+    margin-block-start: 0.25rem;
 
     @starting-style {
       opacity: 0;
@@ -172,11 +173,11 @@
     &::after {
       width: 1rem;
       height: 1.5rem;
-      margin-inline-start: auto;
       background: center / contain no-repeat
         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23d9292b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'%3E%3C/path%3E%3C/svg%3E");
       opacity: 0;
       content: '';
+      margin-inline-start: auto;
     }
 
     &::checkmark {
@@ -208,10 +209,10 @@
 
 .selectIndicator {
   position: absolute;
-  inset-block-start: 50%;
-  inset-inline-end: 0.75rem;
   transform: translateY(-50%);
   pointer-events: none;
+  inset-block-start: 50%;
+  inset-inline-end: 0.75rem;
 
   .indicatorIcon {
     width: 16px;
@@ -222,14 +223,14 @@
 
 .clearButton {
   position: absolute;
-  inset-block-start: 50%;
-  inset-inline-end: 2rem;
   padding: 0.25rem;
   background: none;
   border: none;
   border-radius: 50%;
   transform: translateY(-50%);
   cursor: pointer;
+  inset-block-start: 50%;
+  inset-inline-end: 2rem;
 
   &:hover {
     background-color: var(--select-color-background-hover, #f3f4f6);
@@ -310,9 +311,6 @@
 
 .comboboxList {
   position: absolute;
-  inset-block-start: 100%;
-  inset-inline-end: 0;
-  inset-inline-start: 0;
   z-index: 1000;
   overflow-y: auto;
   max-height: 200px;
@@ -321,11 +319,13 @@
   background: var(--select-color-background-default, #fafafa);
   border: var(--select-size-border-default, 2px) solid
     var(--select-color-border-default, #aeaeae);
-  border-block-start: none;
   border-radius: 0 0 var(--select-size-radius-default, 8px)
     var(--select-size-radius-default, 8px);
   box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
   list-style: none;
+  border-block-start: none;
+  inset-block-start: 100%;
+  inset-inline: 0;
 }
 
 .comboboxOption {
@@ -362,11 +362,11 @@
 
 .searchInput {
   width: 100%;
-  margin-block-end: 0.5rem;
   padding: 0.5rem 0.75rem;
   border: 1px solid var(--select-color-border-default, #e5e7eb);
   border-radius: 0.375rem;
   font-size: 0.875rem;
+  margin-block-end: 0.5rem;
 }
 
 // Container queries for responsive select sizing

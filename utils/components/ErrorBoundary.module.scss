@@ -1,7 +1,7 @@
 .errorBoundary {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   min-height: 200px;
   padding: var(--space-lg, 2rem);
 }
@@ -10,13 +10,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
   max-width: 400px;
   padding: var(--space-xl, 3rem);
   background: var(--color-surface-elevated, #ffffff);
   border: 1px solid var(--color-border-subtle, #e0e0e0);
   border-radius: var(--radius-lg, 12px);
-  box-shadow: var(--shadow-lg, 0 10px 25px rgba(0, 0, 0, 0.1));
+  box-shadow: var(--shadow-lg, 0 10px 25px rgb(0 0 0 / 10%));
+  text-align: center;
 
   @media (prefers-color-scheme: dark) {
     background: var(--color-surface-elevated-dark, #2a2a2a);
@@ -38,9 +38,9 @@
 
 .errorTitle {
   margin: 0 0 var(--space-sm, 0.5rem) 0;
-  font-size: var(--text-size-lg, 1.25rem);
-  font-weight: var(--font-weight-semibold, 600);
   color: var(--color-text-primary, #333333);
+  font-weight: var(--font-weight-semibold, 600);
+  font-size: var(--text-size-lg, 1.25rem);
 
   @media (prefers-color-scheme: dark) {
     color: var(--color-text-primary-dark, #e0e0e0);
@@ -49,9 +49,9 @@
 
 .errorMessage {
   margin: 0 0 var(--space-lg, 2rem) 0;
+  color: var(--color-text-secondary, #666666);
   font-size: var(--text-size-base, 1rem);
   line-height: var(--text-line-height-relaxed, 1.6);
-  color: var(--color-text-secondary, #666666);
 
   @media (prefers-color-scheme: dark) {
     color: var(--color-text-secondary-dark, #cccccc);
@@ -64,15 +64,11 @@
   text-align: left;
 
   summary {
-    cursor: pointer;
-    font-size: var(--text-size-sm, 0.875rem);
-    font-weight: var(--font-weight-medium, 500);
-    color: var(--color-text-secondary, #666666);
     margin-bottom: var(--space-sm, 0.5rem);
-
-    &:hover {
-      color: var(--color-text-primary, #333333);
-    }
+    color: var(--color-text-secondary, #666666);
+    font-weight: var(--font-weight-medium, 500);
+    font-size: var(--text-size-sm, 0.875rem);
+    cursor: pointer;
 
     @media (prefers-color-scheme: dark) {
       color: var(--color-text-secondary-dark, #cccccc);
@@ -81,22 +77,26 @@
         color: var(--color-text-primary-dark, #e0e0e0);
       }
     }
+
+    &:hover {
+      color: var(--color-text-primary, #333333);
+    }
   }
 }
 
 .errorStack {
+  overflow-y: auto;
+  max-height: 300px;
+  padding: var(--space-md, 1rem);
   background: var(--color-surface-secondary, #f8f9fa);
   border: 1px solid var(--color-border-subtle, #e0e0e0);
   border-radius: var(--radius-md, 8px);
-  padding: var(--space-md, 1rem);
-  font-family: var(--font-family-mono, 'Monaco', 'Menlo', monospace);
-  font-size: var(--text-size-xs, 0.75rem);
-  line-height: var(--text-line-height-normal, 1.4);
   color: var(--color-text-primary, #333333);
+  font-size: var(--text-size-xs, 0.75rem);
+  font-family: var(--font-family-mono, 'Monaco', 'Menlo', monospace);
+  line-height: var(--text-line-height-normal, 1.4);
   white-space: pre-wrap;
   word-break: break-word;
-  max-height: 300px;
-  overflow-y: auto;
 
   @media (prefers-color-scheme: dark) {
     background: var(--color-surface-secondary-dark, #1a1a1a);
@@ -108,13 +108,13 @@
 .errorReset {
   padding: var(--space-sm, 0.5rem) var(--space-lg, 2rem);
   background: var(--color-interactive-primary, #007acc);
-  color: var(--color-text-on-primary, #ffffff);
   border: none;
   border-radius: var(--radius-md, 8px);
-  font-size: var(--text-size-sm, 0.875rem);
+  color: var(--color-text-on-primary, #ffffff);
   font-weight: var(--font-weight-medium, 500);
-  cursor: pointer;
+  font-size: var(--text-size-sm, 0.875rem);
   transition: all 0.2s ease;
+  cursor: pointer;
 
   &:hover {
     background: var(--color-interactive-primary-hover, #005999);

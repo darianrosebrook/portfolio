@@ -3,9 +3,6 @@
 .tooltip {
   @include tooltipTokens.vars;
 
-  // CSS Containment - paint containment prevents overflow
-  contain: paint;
-
   z-index: 9999;
   max-width: var(--tooltip-size-maxWidth);
   padding: var(--tooltip-size-padding-y) var(--tooltip-size-padding-x);
@@ -23,6 +20,9 @@
   // Ensure tooltip appears above other content
   pointer-events: none;
   user-select: none;
+
+  // CSS Containment - paint containment prevents overflow
+  contain: paint;
 }
 
 @media (prefers-reduced-motion: reduce) {

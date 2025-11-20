@@ -14,9 +14,6 @@
 .popoverContent {
   @include popoverTokens.vars;
 
-  // CSS Containment - strict for isolated popover
-  contain: strict;
-
   z-index: 1000;
   display: flex;
   flex-direction: column;
@@ -27,6 +24,9 @@
   background: var(--popover-color-background-content);
   border-radius: var(--popover-size-radius-default);
   box-shadow: var(--popover-elevation-default, var(--elevation));
+
+  // CSS Containment - strict for isolated popover
+  contain: strict;
   will-change: transform, opacity;
 }
 

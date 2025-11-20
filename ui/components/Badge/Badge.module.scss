@@ -3,9 +3,6 @@
 .badge {
   @include badgeTokens.vars;
 
-  // Container queries for responsive sizing
-  container-type: inline-size;
-
   display: inline-flex;
   vertical-align: baseline;
   gap: var(--badge-spacing-gap);
@@ -13,6 +10,9 @@
   font-weight: 500;
   line-height: 1;
   white-space: nowrap;
+
+  // Container queries for responsive sizing
+  container-type: inline-size;
 
   // Default variant
   &.default {

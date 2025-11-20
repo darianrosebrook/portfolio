@@ -35,12 +35,12 @@
 .summary {
   padding: var(--details-size-padding-default);
   background: var(--details-color-background-subtle);
-  border-block-end: 1px solid var(--details-color-border-default);
   list-style: none;
   transition: background-color var(--details-motion-duration-fast)
     var(--details-motion-easing-standard);
   cursor: pointer;
   user-select: none;
+  border-block-end: 1px solid var(--details-color-border-default);
 
   &:hover {
     background: var(--details-color-background-hover);
@@ -132,8 +132,8 @@
       padding: var(--details-spacing-gap-default)
         var(--details-size-padding-default);
       background: var(--details-color-background-subtle);
-      border-inline-start: 4px solid var(--details-color-border-accent);
       font-style: italic;
+      border-inline-start: 4px solid var(--details-color-border-accent);
     }
 
     code {

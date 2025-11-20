@@ -64,13 +64,12 @@
 }
 
 .label {
-  margin-inline-start: 0.25rem;
   cursor: pointer;
+  margin-inline-start: 0.25rem;
 }
 
 .label::before {
   position: absolute;
-  inset-block-start: 50%;
   display: inline-block;
   width: 1rem;
   height: 1rem;
@@ -85,18 +84,19 @@
     border-color var(--toggle-motion-duration-fast)
       var(--toggle-motion-easing-standard);
   content: ' ';
+  inset-block-start: 50%;
 }
 
 .label.checked::before {
-  inset-inline-start: 1.75rem;
   background-color: var(--toggle-color-background-thumbChecked);
+  inset-inline-start: 1.75rem;
 }
 
 // Size variants for labels
 .toggleSwitch.small .label::before {
-  inset-block-start: 50%;
   width: 0.875rem;
   height: 0.875rem;
+  inset-block-start: 50%;
 }
 
 .toggleSwitch.small .label.checked::before {
@@ -104,9 +104,9 @@
 }
 
 .toggleSwitch.large .label::before {
-  inset-block-start: 50%;
   width: 1.25rem;
   height: 1.25rem;
+  inset-block-start: 50%;
 }
 
 .toggleSwitch.large .label.checked::before {

@@ -10,7 +10,6 @@
     align-items: center;
     width: fit-content;
     padding: var(--profileFlag-spacing-padding-default);
-    padding-inline-end: var(--profileFlag-spacing-padding-right);
     background-color: var(--profileFlag-color-background-default);
     border: 1px solid var(--profileFlag-color-border-default);
     border-radius: var(--profileFlag-size-radius-default);
@@ -18,6 +17,7 @@
     line-height: 1;
     text-decoration: none;
     transition: border-color 0.2s ease;
+    padding-inline-end: var(--profileFlag-spacing-padding-right);
 
     small {
       margin-block-start: var(--profileFlag-spacing-margin-top);

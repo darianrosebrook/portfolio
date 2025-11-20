@@ -7,7 +7,7 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--checkbox-color-background-default, #fff);
+  background-color: var(--checkbox-color-background-default, #ffffff);
   border: var(--checkbox-border-width) solid
     var(--checkbox-color-border-default);
   border-radius: var(--checkbox-border-radius);
@@ -20,16 +20,17 @@
   cursor: pointer;
 
   &:hover {
+    background-color: color-mix(
+      in srgb,
+      var(--checkbox-color-background-default) 95%,
+      var(--checkbox-color-border-hover) 5%
+    );
+
     // Use color-mix() for subtle hover effect
     border-color: color-mix(
       in srgb,
       var(--checkbox-color-border-default) 80%,
       var(--checkbox-color-border-hover) 20%
-    );
-    background-color: color-mix(
-      in srgb,
-      var(--checkbox-color-background-default) 95%,
-      var(--checkbox-color-border-hover) 5%
     );
   }
 }

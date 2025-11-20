@@ -7,26 +7,26 @@
 
 // Form controls with low specificity
 :where(button, [role='button']) {
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
+  display: inline-flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
   margin: 0;
   padding: 0.5rem 1rem;
+  background: transparent;
   border: 1px solid transparent;
   border-radius: 0.25rem;
-  background: transparent;
   color: inherit;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
+  font-size: inherit;
+  font-family: inherit;
+  line-height: inherit;
   text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
 
   &:disabled {
-    cursor: not-allowed;
     opacity: 0.6;
+    cursor: not-allowed;
   }
 
   &:focus-visible {
@@ -37,33 +37,33 @@
 
 // Form inputs with low specificity
 :where(input, select, textarea) {
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
   margin: 0;
   padding: 0.5rem 0.75rem;
-  border: 1px solid #ccc;
+  background: #ffffff;
+  border: 1px solid #cccccc;
   border-radius: 0.25rem;
-  background: #fff;
   color: inherit;
+  font-size: inherit;
+  font-family: inherit;
+  line-height: inherit;
   transition:
     border-color 0.2s ease,
     box-shadow 0.2s ease;
 
   &:focus {
-    outline: none;
     border-color: #007acc;
-    box-shadow: 0 0 0 3px rgba(0, 122, 204, 0.1);
+    box-shadow: 0 0 0 3px rgb(0 122 204 / 10%);
+    outline: none;
   }
 
   &:disabled {
     background: #f5f5f5;
-    cursor: not-allowed;
     opacity: 0.6;
+    cursor: not-allowed;
   }
 
   &::placeholder {
-    color: #999;
+    color: #999999;
   }
 }
 
@@ -79,15 +79,15 @@
   }
 
   &:focus-visible {
+    border-radius: 2px;
     outline: 2px solid #007acc;
     outline-offset: 2px;
-    border-radius: 2px;
   }
 }
 
 // Lists with low specificity
 :where(ul, ol) {
-  margin: 0 0 1rem 0;
+  margin: 0 0 1rem;
   padding-left: 1.5rem;
 }
 
@@ -97,65 +97,65 @@
 
 // Headings with low specificity
 :where(h1, h2, h3, h4, h5, h6) {
-  margin: 0 0 1rem 0;
-  line-height: 1.2;
-  font-weight: 600;
+  margin: 0 0 1rem;
   color: inherit;
+  font-weight: 600;
+  line-height: 1.2;
 }
 
 // Paragraphs with low specificity
 :where(p) {
-  margin: 0 0 1rem 0;
+  margin: 0 0 1rem;
   line-height: 1.6;
 }
 
 // Images with low specificity
 :where(img) {
+  display: block;
   max-width: 100%;
   height: auto;
-  display: block;
 }
 
 // Tables with low specificity
 :where(table) {
   width: 100%;
-  border-collapse: collapse;
   margin-bottom: 1rem;
+  border-collapse: collapse;
 }
 
 :where(th, td) {
   padding: 0.5rem 1rem;
+  border-bottom: 1px solid #dddddd;
   text-align: left;
-  border-bottom: 1px solid #ddd;
 }
 
 :where(th) {
-  font-weight: 600;
   background: #f8f9fa;
+  font-weight: 600;
 }
 
 // Code blocks with low specificity
 :where(code) {
-  font-family: 'Monaco', 'Menlo', monospace;
-  font-size: 0.875em;
   padding: 0.125rem 0.25rem;
   background: #f1f3f4;
   border-radius: 3px;
   color: #d73a49;
+  font-size: 0.875em;
+  font-family: Monaco, Menlo, monospace;
 }
 
 :where(pre) {
-  font-family: 'Monaco', 'Menlo', monospace;
-  font-size: 0.875em;
+  overflow-x: auto;
+  margin: 0 0 1rem;
   padding: 1rem;
   background: #f8f9fa;
   border-radius: 4px;
-  overflow-x: auto;
-  margin: 0 0 1rem 0;
+  font-size: 0.875em;
+  font-family: Monaco, Menlo, monospace;
 
   :where(code) {
-    background: transparent;
     padding: 0;
+    background: transparent;
     border-radius: 0;
   }
 }
@@ -163,14 +163,14 @@
 // Utility classes with low specificity
 :where(.sr-only) {
   position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
   border: 0;
+  white-space: nowrap;
 }
 
 :where(.container) {
@@ -208,18 +208,23 @@
 :where(.m-0) {
   margin: 0;
 }
+
 :where(.m-1) {
   margin: 0.25rem;
 }
+
 :where(.m-2) {
   margin: 0.5rem;
 }
+
 :where(.m-3) {
   margin: 1rem;
 }
+
 :where(.m-4) {
   margin: 1.5rem;
 }
+
 :where(.m-5) {
   margin: 3rem;
 }
@@ -227,18 +232,23 @@
 :where(.p-0) {
   padding: 0;
 }
+
 :where(.p-1) {
   padding: 0.25rem;
 }
+
 :where(.p-2) {
   padding: 0.5rem;
 }
+
 :where(.p-3) {
   padding: 1rem;
 }
+
 :where(.p-4) {
   padding: 1.5rem;
 }
+
 :where(.p-5) {
   padding: 3rem;
 }
@@ -247,9 +257,11 @@
 :where(.text-left) {
   text-align: left;
 }
+
 :where(.text-center) {
   text-align: center;
 }
+
 :where(.text-right) {
   text-align: end;
 } // Use logical property
@@ -260,12 +272,15 @@
 :where(.font-normal) {
   font-weight: 400;
 }
+
 :where(.font-medium) {
   font-weight: 500;
 }
+
 :where(.font-semibold) {
   font-weight: 600;
 }
+
 :where(.font-bold) {
   font-weight: 700;
 }
@@ -273,74 +288,93 @@
 :where(.text-sm) {
   font-size: 0.875rem;
 }
+
 :where(.text-base) {
   font-size: 1rem;
 }
+
 :where(.text-lg) {
   font-size: 1.125rem;
 }
+
 :where(.text-xl) {
   font-size: 1.25rem;
 }
+
 :where(.text-2xl) {
   font-size: 1.5rem;
 }
+
 :where(.text-3xl) {
   font-size: 1.875rem;
 }
+
 :where(.text-4xl) {
   font-size: 2.25rem;
 }
 
 // Color utilities with low specificity (using CSS custom properties)
 :where(.text-primary) {
-  color: var(--color-text-primary, #333);
+  color: var(--color-text-primary, #333333);
 }
+
 :where(.text-secondary) {
-  color: var(--color-text-secondary, #666);
+  color: var(--color-text-secondary, #666666);
 }
+
 :where(.text-muted) {
-  color: var(--color-text-muted, #999);
+  color: var(--color-text-muted, #999999);
 }
+
 :where(.text-white) {
-  color: #fff;
+  color: #ffffff;
 }
+
 :where(.text-black) {
-  color: #000;
+  color: #000000;
 }
 
 :where(.bg-transparent) {
   background: transparent;
 }
+
 :where(.bg-white) {
-  background: #fff;
+  background: #ffffff;
 }
+
 :where(.bg-black) {
-  background: #000;
+  background: #000000;
 }
+
 :where(.bg-primary) {
   background: var(--color-primary, #007acc);
 }
+
 :where(.bg-secondary) {
   background: var(--color-secondary, #6c757d);
 }
 
 // Border utilities with low specificity
 :where(.border) {
-  border: 1px solid #ddd;
+  border: 1px solid #dddddd;
 }
+
 :where(.border-top) {
-  border-block-start: 1px solid #ddd;
+  border-block-start: 1px solid #dddddd;
 }
+
 :where(.border-bottom) {
-  border-block-end: 1px solid #ddd;
+  border-block-end: 1px solid #dddddd;
 }
+
 :where(.border-left) {
-  border-inline-start: 1px solid #ddd;
+  border-inline-start: 1px solid #dddddd;
 }
+
 :where(.border-right) {
-  border-inline-end: 1px solid #ddd;
+  border-inline-end: 1px solid #dddddd;
 }
+
 :where(.border-none) {
   border: none;
 }
@@ -349,38 +383,48 @@
 :where(.rounded) {
   border-radius: 0.25rem;
 }
+
 :where(.rounded-sm) {
   border-radius: 0.125rem;
 }
+
 :where(.rounded-md) {
   border-radius: 0.375rem;
 }
+
 :where(.rounded-lg) {
   border-radius: 0.5rem;
 }
+
 :where(.rounded-xl) {
   border-radius: 0.75rem;
 }
+
 :where(.rounded-2xl) {
   border-radius: 1rem;
 }
+
 :where(.rounded-full) {
   border-radius: 9999px;
 }
 
 // Shadow utilities with low specificity
 :where(.shadow) {
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 10%);
 }
+
 :where(.shadow-md) {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
 }
+
 :where(.shadow-lg) {
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 15px rgb(0 0 0 / 10%);
 }
+
 :where(.shadow-xl) {
-  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 20px 25px rgb(0 0 0 / 10%);
 }
+
 :where(.shadow-none) {
   box-shadow: none;
 }

@@ -31,13 +31,13 @@
   overflow: hidden;
   width: 100%;
   max-width: var(--command-size-max-width);
-  margin-block-start: var(--command-spacing-dialog-margin-top);
   background-color: var(--command-color-background);
   border: var(--command-border-width) solid var(--command-color-border);
   border-radius: var(--command-border-radius);
   box-shadow: var(--command-shadow);
   animation: commandDialogIn var(--command-motion-duration)
     var(--command-motion-easing);
+  margin-block-start: var(--command-spacing-dialog-margin-top);
 }
 
 @keyframes commandDialogIn {
@@ -63,23 +63,23 @@
 
   .searchIcon {
     position: absolute;
-    inset-inline-start: var(--command-spacing-input-icon-offset);
     width: var(--command-size-icon);
     height: var(--command-size-icon);
     color: var(--command-color-text-muted);
     pointer-events: none;
+    inset-inline-start: var(--command-spacing-input-icon-offset);
   }
 
   .input {
     width: 100%;
     padding: 0 var(--command-spacing-input-padding-x);
-    padding-inline-start: var(--command-spacing-input-padding-left);
     background: none;
     border: none;
     outline: none;
     color: var(--command-color-text);
     font-size: var(--command-text-size);
     line-height: var(--command-text-line-height);
+    padding-inline-start: var(--command-spacing-input-padding-left);
 
     &::placeholder {
       color: var(--command-color-text-muted);
@@ -179,10 +179,10 @@
     }
 
     .itemDescription {
-      margin-block-start: var(--command-spacing-description-gap);
       color: var(--command-color-text-muted);
       font-size: var(--command-text-size-small);
       line-height: var(--command-text-line-height-tight);
+      margin-block-start: var(--command-spacing-description-gap);
     }
   }
 }

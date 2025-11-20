@@ -3,9 +3,6 @@
 .button {
   @include buttonTokens.vars;
 
-  // CSS Containment for performance optimization
-  contain: layout style paint;
-
   // Selective reset - only reset what we need to control
   display: inline-flex;
   gap: var(--button-size-gap-default);
@@ -31,8 +28,8 @@
   font-weight: var(--button-text-weight, 500);
   font-size: var(--button-text-size-medium);
   line-height: normal;
-  white-space: nowrap;
   text-decoration: none;
+  white-space: nowrap;
   transition:
     transform var(--button-motion-duration-fast)
       var(--button-motion-easing-standard),
@@ -45,6 +42,9 @@
 
   // Interaction
   cursor: pointer;
+
+  // CSS Containment for performance optimization
+  contain: layout style paint;
 
   &:active {
     transform: scale(var(--button-motion-scale-pressed));
@@ -251,8 +251,7 @@
       gap: calc(var(--button-size-gap-default) * 0.75);
       min-width: calc(var(--button-size-min-medium) * 0.9);
       min-height: calc(var(--button-size-min-medium) * 0.9);
-      padding: calc(var(--button-size-padding-small) * 0.75)
-        calc(var(--button-size-padding-small) * 0.75);
+      padding: calc(var(--button-size-padding-small) * 0.75);
       font-size: calc(var(--button-text-size-medium) * 0.9);
 
       &.small {
@@ -279,8 +278,7 @@
       gap: calc(var(--button-size-gap-default) * 0.5);
       min-width: calc(var(--button-size-min-medium) * 0.8);
       min-height: calc(var(--button-size-min-medium) * 0.8);
-      padding: calc(var(--button-size-padding-small) * 0.5)
-        calc(var(--button-size-padding-small) * 0.5);
+      padding: calc(var(--button-size-padding-small) * 0.5);
       font-size: calc(var(--button-text-size-medium) * 0.85);
 
       &.small,

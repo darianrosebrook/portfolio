@@ -19,10 +19,9 @@
 }
 
 .description {
-  margin-block-start: var(--walkthrough-description-marginTop);
-  margin-block-end: 0;
   color: var(--walkthrough-description-color);
   font-size: var(--walkthrough-description-fontSize);
+  margin-block: var(--walkthrough-description-marginTop) 0;
 }
 
 .controls {
@@ -94,11 +93,11 @@
 }
 
 .counter {
-  margin-block-end: var(--walkthrough-controls-marginTop);
   color: var(--walkthrough-description-color);
   font-size: var(--walkthrough-description-fontSize);
   text-align: center;
   font-variant-numeric: tabular-nums;
+  margin-block-end: var(--walkthrough-controls-marginTop);
 }
 
 @media (prefers-reduced-motion: reduce) {

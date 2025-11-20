@@ -23,9 +23,6 @@
 }
 
 .content {
-  // CSS Containment - strict for isolated sidebar
-  contain: strict;
-
   position: fixed;
   z-index: var(--sheet-zIndex-content);
   display: flex;
@@ -39,16 +36,18 @@
   box-shadow: var(--sheet-shadow);
   transition: transform var(--sheet-motion-duration) var(--sheet-motion-easing);
 
+  // CSS Containment - strict for isolated sidebar
+  contain: strict;
+
   // Side-specific positioning and animations
   &.top {
-    inset-block-start: 0;
-    inset-inline-end: 0;
-    inset-inline-start: 0;
     height: var(--sheet-size-height);
-    border-block-start: none;
-    border-block-end: var(--sheet-border-width) solid var(--sheet-color-border);
     border-radius: 0 0 var(--sheet-border-radius) var(--sheet-border-radius);
     transform: translateY(-100%);
+    border-block-end: var(--sheet-border-width) solid var(--sheet-color-border);
+    border-block-start: none;
+    inset-block-start: 0;
+    inset-inline: 0;
 
     &[data-state='open'] {
       transform: translateY(0);
@@ -56,15 +55,14 @@
   }
 
   &.right {
-    inset-block-start: 0;
-    inset-inline-end: 0;
-    inset-block-end: 0;
     width: var(--sheet-size-width);
+    border-radius: var(--sheet-border-radius) 0 0 var(--sheet-border-radius);
+    transform: translateX(100%);
     border-inline-end: none;
     border-inline-start: var(--sheet-border-width) solid
       var(--sheet-color-border);
-    border-radius: var(--sheet-border-radius) 0 0 var(--sheet-border-radius);
-    transform: translateX(100%);
+    inset-block: 0;
+    inset-inline-end: 0;
 
     &[data-state='open'] {
       transform: translateX(0);
@@ -72,15 +70,14 @@
   }
 
   &.bottom {
-    inset-inline-end: 0;
-    inset-block-end: 0;
-    inset-inline-start: 0;
     height: var(--sheet-size-height);
-    border-block-start: var(--sheet-border-width) solid
-      var(--sheet-color-border);
-    border-block-end: none;
     border-radius: var(--sheet-border-radius) var(--sheet-border-radius) 0 0;
     transform: translateY(100%);
+    border-block-end: none;
+    border-block-start: var(--sheet-border-width) solid
+      var(--sheet-color-border);
+    inset-block-end: 0;
+    inset-inline: 0;
 
     &[data-state='open'] {
       transform: translateY(0);
@@ -88,14 +85,13 @@
   }
 
   &.left {
-    inset-block-start: 0;
-    inset-block-end: 0;
-    inset-inline-start: 0;
     width: var(--sheet-size-width);
-    border-inline-end: var(--sheet-border-width) solid var(--sheet-color-border);
-    border-inline-start: none;
     border-radius: 0 var(--sheet-border-radius) var(--sheet-border-radius) 0;
     transform: translateX(-100%);
+    border-inline-end: var(--sheet-border-width) solid var(--sheet-color-border);
+    border-inline-start: none;
+    inset-block: 0;
+    inset-inline-start: 0;
 
     &[data-state='open'] {
       transform: translateX(0);
@@ -106,9 +102,9 @@
     display: flex;
     flex-direction: column;
     gap: var(--sheet-spacing-headerGap);
-    padding-block-end: var(--sheet-spacing-section);
     border-block-end: var(--sheet-border-width) solid
       var(--sheet-color-borderLight);
+    padding-block-end: var(--sheet-spacing-section);
 
     .title {
       margin: 0;
@@ -138,15 +134,13 @@
     display: flex;
     gap: var(--sheet-spacing-footerGap);
     justify-content: flex-end;
-    padding-block-start: var(--sheet-spacing-section);
     border-block-start: var(--sheet-border-width) solid
       var(--sheet-color-borderLight);
+    padding-block-start: var(--sheet-spacing-section);
   }
 
   .close {
     position: absolute;
-    inset-block-start: var(--sheet-spacing-closeOffset);
-    inset-inline-end: var(--sheet-spacing-closeOffset);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -162,6 +156,8 @@
       background-color var(--sheet-motion-duration) var(--sheet-motion-easing),
       color var(--sheet-motion-duration) var(--sheet-motion-easing);
     cursor: pointer;
+    inset-block-start: var(--sheet-spacing-closeOffset);
+    inset-inline-end: var(--sheet-spacing-closeOffset);
 
     &:hover {
       background-color: var(--sheet-color-backgroundHover);

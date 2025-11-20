@@ -19,13 +19,11 @@
 }
 
 .label {
-  margin-inline-start: 0.25rem;
   cursor: pointer;
+  margin-inline-start: 0.25rem;
 
   &::before {
     position: absolute;
-    inset-block-start: 50%;
-    inset-inline-start: 0.25rem;
     display: inline-block;
     width: 1rem;
     height: 1rem;
@@ -40,14 +38,16 @@
       inset-inline-end var(--switch-motion-duration) var(--switch-motion-easing);
     transform: translateY(-50%);
     content: ' ';
+    inset-block-start: 50%;
+    inset-inline-start: 0.25rem;
   }
 
   &.checked::before {
+    background-color: var(--switch-color-thumb-background-checked);
+    transform: translate(50%, -50%);
     inset-inline-start: calc(
       var(--switch-size-md-gap) + var(--switch-size-md-thumb-size)
     );
-    background-color: var(--switch-color-thumb-background-checked);
-    transform: translate(50%, -50%);
   }
 }
 
@@ -95,11 +95,11 @@
   }
 
   .label::before {
-    inset-block-start: 50%;
-    inset-inline-start: var(--switch-size-sm-gap);
     width: 0.875rem;
     height: 0.875rem;
     transform: translateY(-50%);
+    inset-block-start: 50%;
+    inset-inline-start: var(--switch-size-sm-gap);
   }
 
   .label.checked::before {
@@ -118,10 +118,10 @@
   }
 
   .label::before {
-    inset-block-start: 50%;
-    inset-inline-start: var(--switch-size-lg-gap);
     width: 1.25rem;
     height: 1.25rem;
+    inset-block-start: 50%;
+    inset-inline-start: var(--switch-size-lg-gap);
   }
 
   .label.checked::before {

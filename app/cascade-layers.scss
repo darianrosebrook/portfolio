@@ -601,6 +601,38 @@
     navigation: auto;
   }
 
+  // Mobile spacing adjustment
+  @media screen and (width < 1000px) {
+    header + main {
+      margin-top: 8vh;
+    }
+  }
+
+  // Desktop overrides
+  @media screen and (width >= 1000px) {
+    .content {
+      max-width: 1440px;
+      padding: 0 var(--core-spacing-size-06);
+    }
+
+    section.home {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    main section + section {
+      display: block;
+      margin-top: var(--core-spacing-size-07);
+    }
+
+    main .hero {
+      align-self: center;
+    }
+  }
+
   // Body background overlay (needs to override base)
   body::before {
     position: fixed;
@@ -675,13 +707,6 @@
     margin-top: 5vh;
   }
 
-  // Mobile spacing adjustment
-  @media screen and (width < 1000px) {
-    header + main {
-      margin-top: 8vh;
-    }
-  }
-
   // Article spacing
   article > * + * {
     margin-top: var(--core-spacing-size-06);
@@ -692,31 +717,6 @@
       & > * + *:not(li) {
         margin-top: var(--core-spacing-size-03);
       }
-    }
-  }
-
-  // Desktop overrides
-  @media screen and (width >= 1000px) {
-    .content {
-      max-width: 1440px;
-      padding: 0 var(--core-spacing-size-06);
-    }
-
-    section.home {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      max-width: 1440px;
-      margin: 0 auto;
-    }
-
-    main section + section {
-      display: block;
-      margin-top: var(--core-spacing-size-07);
-    }
-
-    main .hero {
-      align-self: center;
     }
   }
 }

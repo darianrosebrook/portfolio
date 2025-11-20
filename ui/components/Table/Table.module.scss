@@ -4,11 +4,11 @@
 .container {
   @include tableTokens.vars;
 
-  // CSS Containment - content containment for frequently updated table
-  contain: layout style paint;
-
   position: relative;
   width: 100%;
+
+  // CSS Containment - content containment for frequently updated table
+  contain: layout style paint;
   container-type: inline-size;
 
   &.responsive {
@@ -24,10 +24,10 @@
     caption-side: bottom;
 
     .caption {
-      margin-block-start: var(--table-spacing-caption);
       color: var(--table-color-textMuted);
       font-size: var(--table-text-sizeCaption);
       text-align: start;
+      margin-block-start: var(--table-spacing-caption);
     }
 
     .header {
@@ -39,10 +39,10 @@
 
     .body {
       .row {
-        border-block-end: var(--table-border-width) solid
-          var(--table-color-border);
         transition: background-color var(--table-motion-duration)
           var(--table-motion-easing);
+        border-block-end: var(--table-border-width) solid
+          var(--table-color-border);
 
         &:last-child {
           border-block-end: none;
@@ -60,9 +60,9 @@
 
     .footer {
       background-color: var(--table-color-background-footer);
+      font-weight: var(--table-text-weightFooter);
       border-block-start: var(--table-border-width) solid
         var(--table-color-border);
-      font-weight: var(--table-text-weightFooter);
 
       .row:last-child {
         border-block-end: none;
@@ -155,10 +155,10 @@
       caption-side: bottom;
 
       .caption {
-        margin-block-start: var(--table-spacing-caption);
         color: var(--table-color-textMuted);
         font-size: var(--table-text-sizeCaption);
         text-align: start;
+        margin-block-start: var(--table-spacing-caption);
       }
 
       .header {
@@ -170,10 +170,10 @@
 
       .body {
         .row {
-          border-block-end: var(--table-border-width) solid
-            var(--table-color-border);
           transition: background-color var(--table-motion-duration)
             var(--table-motion-easing);
+          border-block-end: var(--table-border-width) solid
+            var(--table-color-border);
 
           &:last-child {
             border-block-end: none;
@@ -191,9 +191,9 @@
 
       .footer {
         background-color: var(--table-color-background-footer);
+        font-weight: var(--table-text-weightFooter);
         border-block-start: var(--table-border-width) solid
           var(--table-color-border);
-        font-weight: var(--table-text-weightFooter);
 
         .row:last-child {
           border-block-end: none;
@@ -338,8 +338,8 @@
         .row {
           display: block;
           border: 1px solid var(--table-color-border);
-          margin-block-end: var(--table-spacing-rowGap);
           border-radius: var(--table-radius-cell);
+          margin-block-end: var(--table-spacing-rowGap);
 
           .head,
           .data {
@@ -348,11 +348,11 @@
             border: none;
 
             &::before {
-              content: attr(data-label) ': ';
-              font-weight: var(--table-text-weightHead);
-              color: var(--table-color-textHead);
               display: inline-block;
               min-width: 6rem;
+              color: var(--table-color-textHead);
+              font-weight: var(--table-text-weightHead);
+              content: attr(data-label) ': ';
             }
           }
         }
@@ -376,8 +376,8 @@
 
         // Add hover effects for large screens
         .row.interactive:hover {
-          transform: translateY(-1px);
           box-shadow: var(--table-shadow-hover);
+          transform: translateY(-1px);
         }
       }
     }

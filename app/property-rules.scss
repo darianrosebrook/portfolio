@@ -7,225 +7,225 @@
 
 // Color properties for smooth color transitions
 @property --color-primary {
-  syntax: '<color>';
   inherits: false;
   initial-value: #007acc;
+  syntax: '<color>';
 }
 
 @property --color-secondary {
-  syntax: '<color>';
   inherits: false;
   initial-value: #6c757d;
+  syntax: '<color>';
 }
 
 @property --color-background {
-  syntax: '<color>';
   inherits: false;
   initial-value: #ffffff;
+  syntax: '<color>';
 }
 
 @property --color-foreground {
-  syntax: '<color>';
   inherits: false;
   initial-value: #333333;
+  syntax: '<color>';
 }
 
 @property --color-border {
-  syntax: '<color>';
   inherits: false;
   initial-value: #cccccc;
+  syntax: '<color>';
 }
 
 @property --color-accent {
-  syntax: '<color>';
   inherits: false;
   initial-value: #007acc;
+  syntax: '<color>';
 }
 
 @property --color-success {
-  syntax: '<color>';
   inherits: false;
   initial-value: #28a745;
+  syntax: '<color>';
 }
 
 @property --color-warning {
-  syntax: '<color>';
   inherits: false;
   initial-value: #ffc107;
+  syntax: '<color>';
 }
 
 @property --color-danger {
-  syntax: '<color>';
   inherits: false;
   initial-value: #dc3545;
+  syntax: '<color>';
 }
 
 @property --color-info {
-  syntax: '<color>';
   inherits: false;
   initial-value: #17a2b8;
+  syntax: '<color>';
 }
 
 // Spacing properties
 @property --spacing-xs {
-  syntax: '<length>';
   inherits: false;
   initial-value: 0.25rem;
+  syntax: '<length>';
 }
 
 @property --spacing-sm {
-  syntax: '<length>';
   inherits: false;
   initial-value: 0.5rem;
+  syntax: '<length>';
 }
 
 @property --spacing-md {
-  syntax: '<length>';
   inherits: false;
   initial-value: 1rem;
+  syntax: '<length>';
 }
 
 @property --spacing-lg {
-  syntax: '<length>';
   inherits: false;
   initial-value: 1.5rem;
+  syntax: '<length>';
 }
 
 @property --spacing-xl {
-  syntax: '<length>';
   inherits: false;
   initial-value: 3rem;
+  syntax: '<length>';
 }
 
 // Border radius properties
 @property --border-radius-sm {
-  syntax: '<length> | <percentage>';
   inherits: false;
   initial-value: 0.125rem;
+  syntax: '<length> | <percentage>';
 }
 
 @property --border-radius-md {
-  syntax: '<length> | <percentage>';
   inherits: false;
   initial-value: 0.25rem;
+  syntax: '<length> | <percentage>';
 }
 
 @property --border-radius-lg {
-  syntax: '<length> | <percentage>';
   inherits: false;
   initial-value: 0.5rem;
+  syntax: '<length> | <percentage>';
 }
 
 @property --border-radius-xl {
-  syntax: '<length> | <percentage>';
   inherits: false;
   initial-value: 1rem;
+  syntax: '<length> | <percentage>';
 }
 
 @property --border-radius-full {
-  syntax: '<length> | <percentage>';
   inherits: false;
   initial-value: 9999px;
+  syntax: '<length> | <percentage>';
 }
 
 // Opacity properties for smooth transitions
 @property --opacity-hover {
-  syntax: '<number>';
   inherits: false;
   initial-value: 1;
+  syntax: '<number>';
 }
 
 @property --opacity-disabled {
-  syntax: '<number>';
   inherits: false;
   initial-value: 0.6;
+  syntax: '<number>';
 }
 
 @property --opacity-overlay {
-  syntax: '<number>';
   inherits: false;
   initial-value: 0.5;
+  syntax: '<number>';
 }
 
 // Transform properties
 @property --scale-hover {
-  syntax: '<number>';
   inherits: false;
   initial-value: 1;
+  syntax: '<number>';
 }
 
 @property --scale-active {
-  syntax: '<number>';
   inherits: false;
   initial-value: 0.98;
+  syntax: '<number>';
 }
 
 @property --translate-y-hover {
-  syntax: '<length>';
   inherits: false;
   initial-value: 0;
+  syntax: '<length>';
 }
 
 // Shadow properties (using color-mix for dynamic shadows)
 @property --shadow-opacity {
-  syntax: '<number>';
   inherits: false;
   initial-value: 0.1;
+  syntax: '<number>';
 }
 
 // Z-index properties (for dynamic stacking contexts)
 @property --z-index-base {
-  syntax: '<integer>';
   inherits: false;
   initial-value: 0;
+  syntax: '<integer>';
 }
 
 @property --z-index-overlay {
-  syntax: '<integer>';
   inherits: false;
   initial-value: 1000;
+  syntax: '<integer>';
 }
 
 @property --z-index-modal {
-  syntax: '<integer>';
   inherits: false;
   initial-value: 2000;
+  syntax: '<integer>';
 }
 
 // Animation duration properties
 @property --animation-duration-fast {
-  syntax: '<time>';
   inherits: false;
   initial-value: 0.15s;
+  syntax: '<time>';
 }
 
 @property --animation-duration-normal {
-  syntax: '<time>';
   inherits: false;
   initial-value: 0.3s;
+  syntax: '<time>';
 }
 
 @property --animation-duration-slow {
-  syntax: '<time>';
   inherits: false;
   initial-value: 0.5s;
+  syntax: '<time>';
 }
 
 // Easing function properties (as string for now, could be enhanced)
 @property --easing-standard {
-  syntax: '<easing-function>';
   inherits: false;
   initial-value: cubic-bezier(0.4, 0, 0.2, 1);
+  syntax: '<easing-function>';
 }
 
 @property --easing-decelerate {
-  syntax: '<easing-function>';
   inherits: false;
   initial-value: cubic-bezier(0, 0, 0.2, 1);
+  syntax: '<easing-function>';
 }
 
 @property --easing-accelerate {
-  syntax: '<easing-function>';
   inherits: false;
   initial-value: cubic-bezier(0.4, 0, 1, 1);
+  syntax: '<easing-function>';
 }

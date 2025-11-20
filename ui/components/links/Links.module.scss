@@ -7,13 +7,13 @@
   vertical-align: baseline;
   gap: var(--animatedLink-spacing-gap-default);
   align-items: center;
-  font-weight: var(--animatedLink-typography-fontWeight-regular);
-  line-height: var(--animatedLink-typography-lineHeight-collapse);
-  text-decoration: none;
   color: var(
     --animatedLink-color-default,
     var(--semantic-color-foreground-accent)
   );
+  font-weight: var(--animatedLink-typography-fontWeight-regular);
+  line-height: var(--animatedLink-typography-lineHeight-collapse);
+  text-decoration: none;
   transition: color 0.2s ease;
 
   &:hover {
@@ -55,8 +55,8 @@
 
 .clone {
   position: absolute;
+  display: block;
   inset-block-start: 0;
   inset-inline-start: 0;
-  display: block;
   will-change: transform;
 }

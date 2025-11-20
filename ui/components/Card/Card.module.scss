@@ -3,9 +3,6 @@
 .card {
   @include cardTokens.vars;
 
-  // CSS Containment for performance optimization
-  contain: layout style paint;
-
   display: flex;
   flex-direction: column;
   padding: var(--card-size-padding-default);
@@ -13,7 +10,22 @@
   border-radius: var(--card-size-radius-default);
   color: var(--card-color-foreground-primary);
   transition: all var(--transition-duration-fast) var(--transition-easing-ease);
+
+  // CSS Containment for performance optimization
+  contain: layout style paint;
   container-type: inline-size;
+
+  // Container queries for responsive sizing
+  @container (max-width: 20rem) {
+    padding: calc(var(--card-size-padding-default) * 0.75);
+  }
+
+  @container (min-width: 40rem) {
+    .actions {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
 
   @media (prefers-reduced-motion: reduce) {
     transition: none;
@@ -68,14 +80,14 @@
 
   // Sub-components with scoped styles to prevent leakage
   .header {
-    margin-block-end: var(--card-size-padding-default);
     color: var(--card-color-foreground-primary);
+    margin-block-end: var(--card-size-padding-default);
 
     &:has(.badge) {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
       gap: var(--core-spacing-size-03);
+      justify-content: space-between;
+      align-items: center;
     }
   }
 
@@ -86,17 +98,17 @@
 
   .title {
     margin: 0;
-    font-size: var(--font-size-heading-4);
-    font-weight: var(--font-weight-semibold);
-    line-height: var(--line-height-heading);
     color: var(--card-color-foreground-primary);
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-heading-4);
+    line-height: var(--line-height-heading);
   }
 
   .description {
     margin: 0;
+    color: var(--card-color-foreground-secondary);
     font-size: var(--font-size-body-2);
     line-height: var(--line-height-body);
-    color: var(--card-color-foreground-secondary);
   }
 
   .media {
@@ -111,27 +123,27 @@
   }
 
   .footer {
+    color: var(--card-color-foreground-secondary);
+    border-block-start: 1px solid var(--card-color-border-default);
     margin-block-start: var(--card-size-padding-default);
     padding-block-start: var(--card-size-padding-default);
-    border-block-start: 1px solid var(--card-color-border-default);
-    color: var(--card-color-foreground-secondary);
   }
 
   .actions {
     display: flex;
     gap: var(--core-spacing-size-03);
-    align-items: center;
     justify-content: flex-end;
+    align-items: center;
     margin-block-start: var(--card-size-padding-default);
   }
 
   .link {
     display: inline-flex;
-    align-items: center;
     gap: var(--core-spacing-size-02);
+    align-items: center;
     color: var(--card-color-foreground-accent, var(--color-link));
-    text-decoration: none;
     font-weight: var(--font-weight-medium);
+    text-decoration: none;
 
     &:hover {
       text-decoration: underline;
@@ -145,7 +157,6 @@
   }
 
   .note {
-    margin-block-start: var(--card-size-padding-default);
     padding: var(--core-spacing-size-04);
     background-color: var(
       --card-color-background-secondary,
@@ -156,6 +167,7 @@
     color: var(--card-color-foreground-primary);
     font-style: italic;
     font-size: var(--font-size-body-3);
+    margin-block-start: var(--card-size-padding-default);
   }
 
   // Badge styles
@@ -164,10 +176,10 @@
     align-items: center;
     padding: var(--core-spacing-size-01) var(--core-spacing-size-03);
     border-radius: var(--card-size-radius-full, 1rem);
-    font-size: var(--font-size-body-3);
     font-weight: var(--font-weight-medium);
-    text-transform: uppercase;
+    font-size: var(--font-size-body-3);
     letter-spacing: 0.025em;
+    text-transform: uppercase;
 
     &.completed {
       background-color: var(--semantic-color-success-background);
@@ -197,18 +209,6 @@
     &.complexity {
       background-color: var(--semantic-color-accent-background);
       color: var(--semantic-color-accent-foreground);
-    }
-  }
-
-  // Container queries for responsive sizing
-  @container (max-width: 20rem) {
-    padding: calc(var(--card-size-padding-default) * 0.75);
-  }
-
-  @container (min-width: 40rem) {
-    .actions {
-      flex-direction: row;
-      justify-content: space-between;
     }
   }
 }

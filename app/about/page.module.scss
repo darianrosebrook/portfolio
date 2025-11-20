@@ -4,19 +4,19 @@
 
 .hero img {
   width: 100%;
-  height: auto;
   max-width: 540px;
+  height: auto;
   border-radius: var(--core-radius-size-03);
 }
 
 .actions {
   display: flex;
-  gap: var(--core-spacing-size-04);
   flex-wrap: wrap;
+  gap: var(--core-spacing-size-04);
   margin-top: var(--core-spacing-size-06);
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .actions {
     flex-direction: column;
   }

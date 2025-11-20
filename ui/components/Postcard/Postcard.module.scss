@@ -7,12 +7,12 @@ a:has(.post) {
 .post {
   @include postcardTokens.vars;
 
-  margin-block-end: var(--postcard-size-margin-bottom);
   padding: var(--postcard-size-padding-default);
   background-color: var(--postcard-color-background-default);
   border: var(--border-weight-thin) solid var(--postcard-color-border-default);
   border-radius: var(--postcard-size-radius-default);
   transition: background-color 0.2s ease;
+  margin-block-end: var(--postcard-size-margin-bottom);
 
   &:hover {
     background-color: var(--postcard-color-background-hover);
@@ -53,17 +53,17 @@ a:has(.post) {
 }
 
 .timestamp {
-  margin-inline-start: auto;
   color: var(--postcard-color-foreground-secondary);
   font-size: var(--body-03);
+  margin-inline-start: auto;
 }
 
 .content {
-  margin-block-end: var(--postcard-size-gap-default);
   color: var(--postcard-color-foreground-primary);
   font-size: var(--body-02);
   line-height: var(--line-height-body);
   white-space: pre-wrap;
+  margin-block-end: var(--postcard-size-gap-default);
 }
 
 .video,
@@ -72,8 +72,8 @@ a:has(.post) {
   display: block;
   width: 100%;
   height: auto;
-  margin-block-start: var(--postcard-size-gap-default);
   border-radius: var(--postcard-size-radius-medium);
+  margin-block-start: var(--postcard-size-gap-default);
 }
 
 .footer {
