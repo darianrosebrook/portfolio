@@ -1,6 +1,6 @@
 'use client';
 
-import { longTextExampleInteractive } from '@/docs/examples/i18n/long-text-example.playground';
+import { longTextExampleInteractive } from '../../_lib/examples/i18n/long-text-example.playground';
 import { DocInteractive } from '@/ui/modules/CodeSandbox';
 
 export default function LongTextExamplePage() {

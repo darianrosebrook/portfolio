@@ -1,6 +1,6 @@
 'use client';
 
-import { dateFormattingExampleInteractive } from '@/docs/examples/i18n/date-formatting.playground';
+import { dateFormattingExampleInteractive } from '../../_lib/examples/i18n/date-formatting.playground';
 import { DocInteractive } from '@/ui/modules/CodeSandbox';
 
 export default function DateFormattingExamplePage() {

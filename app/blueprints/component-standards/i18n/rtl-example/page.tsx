@@ -1,6 +1,6 @@
 'use client';
 
-import { rtlExampleInteractive } from '@/docs/examples/i18n/rtl-example.playground';
+import { rtlExampleInteractive } from '../../_lib/examples/i18n/rtl-example.playground';
 import { DocInteractive } from '@/ui/modules/CodeSandbox';
 
 export default function RTLExamplePage() {
