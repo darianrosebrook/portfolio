@@ -25,8 +25,8 @@
   border-radius: var(--popover-size-radius-default);
   box-shadow: var(--popover-elevation-default, var(--elevation));
 
-  // CSS Containment - strict for isolated popover
-  contain: strict;
+  // CSS Containment - layout paint style (not size) to allow intrinsic sizing
+  contain: layout paint style;
   will-change: transform, opacity;
 }
 

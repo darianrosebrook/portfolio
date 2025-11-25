@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import Link from 'next/link';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import Styles from './index.module.css';
+import Styles from './Footer.module.css';
 import { horizontalLoop } from '@/utils/helpers';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { byPrefixAndName } from '@awesome.me/kit-0ba7f5fefb/icons';
