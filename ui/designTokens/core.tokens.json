@@ -1807,6 +1807,24 @@
       "$type": "number"
     }
   },
+  "depth": {
+    "1": {
+      "$type": "number",
+      "$value": "{elevation.depth.1}"
+    },
+    "2": {
+      "$type": "number",
+      "$value": "{elevation.depth.2}"
+    },
+    "3": {
+      "$type": "number",
+      "$value": "{elevation.depth.3}"
+    },
+    "4": {
+      "$type": "number",
+      "$value": "{elevation.depth.4}"
+    }
+  },
   "opacity": {
     "50": {
       "$value": 0.04,

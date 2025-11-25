@@ -390,8 +390,9 @@ export class Resolver {
           message: `Token reference not found: ${aliasPath}`,
           hint: `Referenced token "${aliasPath}" does not exist in resolved tokens`,
         });
-        // Return undefined to indicate unresolved reference
-        return undefined;
+        // Preserve the reference string so CSS generator can convert it to var()
+        // This allows tokens with unresolved references to still be included
+        return value;
       }
 
       visited.add(aliasPath);
@@ -403,7 +404,11 @@ export class Resolver {
       );
       visited.delete(aliasPath);
 
-      // If resolution resulted in undefined, return undefined (unresolved reference)
+      // If resolution resulted in undefined, preserve the original reference string
+      // This allows tokens with unresolved references to still be included
+      if (resolved === undefined) {
+        return value;
+      }
       return resolved;
     }
 

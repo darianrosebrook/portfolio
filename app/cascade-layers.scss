@@ -50,7 +50,7 @@
     font-size: var(--core-typography-ramp-5);
     font-family: var(--semantic-font-inter), sans-serif;
     line-height: var(--semantic-typography-line-height-body);
-    letter-spacing: var(--semantic-typography-letterSpacing-tight);
+    letter-spacing: var(--semantic-typography-letter-spacing-tight);
     font-feature-settings:
       'case' 0,
       'dlig',
@@ -135,7 +135,7 @@
     font-weight: 300;
     font-family: var(--semantic-font-nohemi), sans-serif;
     line-height: var(--semantic-typography-line-height-collapse);
-    letter-spacing: var(--semantic-typography-letterSpacing-wide);
+    letter-spacing: var(--semantic-typography-letter-spacing-wide);
     text-wrap: balance;
 
     & strong {
@@ -366,12 +366,12 @@
   textarea:focus-visible {
     border-color: var(--semantic-color-border-bold);
     outline: 2px solid var(--semantic-color-border-accent);
-    outline-offset: var(--semantic-focus-ringOffset);
+    outline-offset: var(--semantic-interaction-focus-ring-offset);
   }
 
   input:read-only,
   textarea:read-only {
-    background: var(--semantic-color-background-readOnly);
+    background: var(--semantic-color-background-read-only);
     outline: none;
     color: var(--semantic-color-foreground-secondary);
   }
@@ -548,19 +548,19 @@
   }
 
   .elevation-1 {
-    --depth: var(--core-depth-1);
+    --depth: var(--semantic-depth-1);
   }
 
   .elevation-2 {
-    --depth: var(--core-depth-2);
+    --depth: var(--semantic-depth-2);
   }
 
   .elevation-3 {
-    --depth: var(--core-depth-3);
+    --depth: var(--semantic-depth-3);
   }
 
   .elevation-4 {
-    --depth: var(--core-depth-4);
+    --depth: var(--semantic-depth-4);
   }
 
   // Accessibility utilities
@@ -601,13 +601,6 @@
     navigation: auto;
   }
 
-  // Mobile spacing adjustment
-  @media screen and (width < 1000px) {
-    header + main {
-      margin-top: 8vh;
-    }
-  }
-
   // Desktop overrides
   @media screen and (width >= 1000px) {
     .content {
@@ -630,6 +623,13 @@
 
     main .hero {
       align-self: center;
+    }
+  }
+
+  // Mobile spacing adjustment (must come after base rule to override)
+  @media screen and (width < 1000px) {
+    header + main {
+      margin-top: 8vh;
     }
   }
 

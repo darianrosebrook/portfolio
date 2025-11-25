@@ -4,7 +4,7 @@
 
 /**
  * Design Token Paths
- *
+ * 
  * Auto-generated TypeScript types for design token paths.
  * Use these types to ensure type safety when referencing tokens.
  */
@@ -167,6 +167,7 @@ export type TokenPath =
   | 'color.foreground.linkHover'
   | 'color.foreground.linkVisited'
   | 'color.foreground.onBrand'
+  | 'color.foreground.onColor'
   | 'color.foreground.info'
   | 'color.foreground.success'
   | 'color.foreground.warning'
@@ -175,6 +176,15 @@ export type TokenPath =
   | 'color.foreground.onSuccessSubtle'
   | 'color.foreground.onWarningSubtle'
   | 'color.foreground.highlight'
+  | 'color.foreground.syntax.plain'
+  | 'color.foreground.syntax.comment.color'
+  | 'color.foreground.syntax.keyword'
+  | 'color.foreground.syntax.definition'
+  | 'color.foreground.syntax.punctuation'
+  | 'color.foreground.syntax.property'
+  | 'color.foreground.syntax.tag'
+  | 'color.foreground.syntax.static'
+  | 'color.foreground.syntax.string'
   | 'color.foreground.disabled'
   | 'color.foreground.placeholder'
   | 'color.foreground.inverse'
@@ -188,6 +198,7 @@ export type TokenPath =
   | 'color.background.dangerSubtle'
   | 'color.background.elevated'
   | 'color.background.brand'
+  | 'color.background.onColor'
   | 'color.background.imageOverlay'
   | 'color.background.infoStrong'
   | 'color.background.infoSubtle'
@@ -405,6 +416,10 @@ export type TokenPath =
   | 'elevation.default'
   | 'elevation.surface.raised'
   | 'elevation.surface.floating'
+  | 'depth.1'
+  | 'depth.2'
+  | 'depth.3'
+  | 'depth.4'
   | 'opacity.50'
   | 'opacity.100'
   | 'opacity.200'
@@ -541,6 +556,39 @@ export type TokenPath =
   | 'content.measure.compact'
   | 'content.spacing.paragraph'
   | 'content.spacing.section'
+  | 'content.editor.background'
+  | 'content.editor.surface'
+  | 'content.editor.gutter'
+  | 'content.editor.cursor'
+  | 'content.editor.selection'
+  | 'content.editor.selectionHighlight'
+  | 'content.editor.lineNumber.active'
+  | 'content.editor.lineNumber.default'
+  | 'content.button.primary.background'
+  | 'content.button.primary.foreground'
+  | 'content.button.primary.border'
+  | 'content.button.primary.radius'
+  | 'content.button.primary.paddingX'
+  | 'content.button.primary.paddingY'
+  | 'content.button.primary.height'
+  | 'content.button.primary.elevation'
+  | 'content.button.danger.background'
+  | 'content.button.danger.foreground'
+  | 'content.input.background'
+  | 'content.input.foreground'
+  | 'content.input.border'
+  | 'content.input.radius'
+  | 'content.input.paddingX'
+  | 'content.input.paddingY'
+  | 'content.badge.info.background'
+  | 'content.badge.info.foreground'
+  | 'content.badge.info.radius'
+  | 'content.badge.info.paddingX'
+  | 'content.typography.displayOversize.fontFamily'
+  | 'content.typography.displayOversize.fontWeight'
+  | 'content.typography.displayOversize.fontSize'
+  | 'content.typography.displayOversize.lineHeight'
+  | 'content.typography.displayOversize.letterSpacing'
   | 'interaction.focus.ringWidth'
   | 'interaction.focus.ringOffset'
   | 'interaction.focus.ringOpacity'
@@ -582,6 +630,7 @@ export type TokenPath =
   | 'component.otp.colorText'
   | 'component.otp.colorBg'
   | 'component.otp.colorBorder'
+  | 'component.otp.colorFocus'
   | 'component.test.dsSemanticColorBgPrimary'
   | 'component.test.customSemanticColorBgPrimary'
   | 'component.test.myCustomBg'
@@ -834,6 +883,7 @@ export type ColorTokenPath =
   | 'color.foreground.linkHover'
   | 'color.foreground.linkVisited'
   | 'color.foreground.onBrand'
+  | 'color.foreground.onColor'
   | 'color.foreground.info'
   | 'color.foreground.success'
   | 'color.foreground.warning'
@@ -842,6 +892,15 @@ export type ColorTokenPath =
   | 'color.foreground.onSuccessSubtle'
   | 'color.foreground.onWarningSubtle'
   | 'color.foreground.highlight'
+  | 'color.foreground.syntax.plain'
+  | 'color.foreground.syntax.comment.color'
+  | 'color.foreground.syntax.keyword'
+  | 'color.foreground.syntax.definition'
+  | 'color.foreground.syntax.punctuation'
+  | 'color.foreground.syntax.property'
+  | 'color.foreground.syntax.tag'
+  | 'color.foreground.syntax.static'
+  | 'color.foreground.syntax.string'
   | 'color.foreground.disabled'
   | 'color.foreground.placeholder'
   | 'color.foreground.inverse'
@@ -855,6 +914,7 @@ export type ColorTokenPath =
   | 'color.background.dangerSubtle'
   | 'color.background.elevated'
   | 'color.background.brand'
+  | 'color.background.onColor'
   | 'color.background.imageOverlay'
   | 'color.background.infoStrong'
   | 'color.background.infoSubtle'
@@ -1094,6 +1154,15 @@ export type ElevationTokenPath =
   | 'elevation.surface.floating';
 
 /**
+ * depth token paths
+ */
+export type DepthTokenPath =
+  | 'depth.1'
+  | 'depth.2'
+  | 'depth.3'
+  | 'depth.4';
+
+/**
  * opacity token paths
  */
 export type OpacityTokenPath =
@@ -1277,7 +1346,40 @@ export type ContentTokenPath =
   | 'content.measure.comfortable'
   | 'content.measure.compact'
   | 'content.spacing.paragraph'
-  | 'content.spacing.section';
+  | 'content.spacing.section'
+  | 'content.editor.background'
+  | 'content.editor.surface'
+  | 'content.editor.gutter'
+  | 'content.editor.cursor'
+  | 'content.editor.selection'
+  | 'content.editor.selectionHighlight'
+  | 'content.editor.lineNumber.active'
+  | 'content.editor.lineNumber.default'
+  | 'content.button.primary.background'
+  | 'content.button.primary.foreground'
+  | 'content.button.primary.border'
+  | 'content.button.primary.radius'
+  | 'content.button.primary.paddingX'
+  | 'content.button.primary.paddingY'
+  | 'content.button.primary.height'
+  | 'content.button.primary.elevation'
+  | 'content.button.danger.background'
+  | 'content.button.danger.foreground'
+  | 'content.input.background'
+  | 'content.input.foreground'
+  | 'content.input.border'
+  | 'content.input.radius'
+  | 'content.input.paddingX'
+  | 'content.input.paddingY'
+  | 'content.badge.info.background'
+  | 'content.badge.info.foreground'
+  | 'content.badge.info.radius'
+  | 'content.badge.info.paddingX'
+  | 'content.typography.displayOversize.fontFamily'
+  | 'content.typography.displayOversize.fontWeight'
+  | 'content.typography.displayOversize.fontSize'
+  | 'content.typography.displayOversize.lineHeight'
+  | 'content.typography.displayOversize.letterSpacing';
 
 /**
  * interaction token paths
@@ -1329,6 +1431,7 @@ export type ComponentTokenPath =
   | 'component.otp.colorText'
   | 'component.otp.colorBg'
   | 'component.otp.colorBorder'
+  | 'component.otp.colorFocus'
   | 'component.test.dsSemanticColorBgPrimary'
   | 'component.test.customSemanticColorBgPrimary'
   | 'component.test.myCustomBg'
@@ -1446,7 +1549,9 @@ export type DatavisTokenPath =
 /**
  * focus token paths
  */
-export type FocusTokenPath = 'focus.ring' | 'focus.ringOffset';
+export type FocusTokenPath =
+  | 'focus.ring'
+  | 'focus.ringOffset';
 
 /**
  * overlay token paths
@@ -1493,14 +1598,14 @@ export interface TokenGroup {
 
 /**
  * Usage Examples:
- *
+ * 
  * ```typescript
  * import type { TokenPath, CoreTokenPath } from "@/types/designTokens";
- *
+ * 
  * // Type-safe token references
  * const primaryColor: TokenPath = "core.color.blue.500";
  * const semanticBg: TokenPath = "semantic.color.background.primary";
- *
+ * 
  * // In token resolution functions
  * function resolveToken(path: TokenPath): string {
  *   // implementation...

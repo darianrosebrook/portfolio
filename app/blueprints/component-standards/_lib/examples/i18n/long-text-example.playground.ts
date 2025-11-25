@@ -121,7 +121,6 @@ export default function LongTextExample() {
     {
       id: 'translations',
       title: 'Translation Strings',
-      prose: 'Different languages have varying text lengths for the same content.',
       code: {
         file: '/App.tsx',
         lines: [3, 27],
@@ -130,7 +129,6 @@ export default function LongTextExample() {
     {
       id: 'fixed-width',
       title: 'Fixed Width Elements',
-      prose: 'Fixed-width containers may truncate longer translations.',
       code: {
         file: '/App.tsx',
         lines: [54, 66],
@@ -139,7 +137,6 @@ export default function LongTextExample() {
     {
       id: 'flexible-width',
       title: 'Flexible Elements',
-      prose: 'Flexible containers adapt to content length automatically.',
       code: {
         file: '/App.tsx',
         lines: [69, 79],
@@ -152,4 +149,3 @@ export default function LongTextExample() {
     theme: 'system',
   },
 };
-

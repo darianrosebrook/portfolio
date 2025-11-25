@@ -136,7 +136,6 @@ export default function RTLExample() {
     {
       id: 'direction-toggle',
       title: 'Direction Toggle',
-      prose: 'The dir attribute controls the text direction for the entire container.',
       code: {
         file: '/App.tsx',
         lines: [24, 30],
@@ -145,7 +144,6 @@ export default function RTLExample() {
     {
       id: 'logical-properties',
       title: 'Logical Properties',
-      prose: 'CSS logical properties like margin-inline-start adapt to text direction automatically.',
       code: {
         file: '/App.tsx',
         lines: [46, 52],
@@ -154,7 +152,6 @@ export default function RTLExample() {
     {
       id: 'border-inline',
       title: 'Directional Borders',
-      prose: 'border-inline-start creates a border on the starting edge regardless of direction.',
       code: {
         file: '/App.tsx',
         lines: [57, 61],
@@ -168,4 +165,3 @@ export default function RTLExample() {
     dir: 'ltr',
   },
 };
-

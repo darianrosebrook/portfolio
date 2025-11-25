@@ -157,9 +157,11 @@ function determineNamespace(tokenPath: string): 'core' | 'semantic' | null {
   if (tokenPath.startsWith('semantic.')) return 'semantic';
 
   // Core token patterns (these are primitives/palettes)
+  // Note: typography.lineHeight and typography.letterSpacing are semantic (body, collapse, heading, etc.)
+  // while typography.ramp, typography.weight, typography.fontFamily are core primitives
   const corePatterns = [
     /^color\.(mode|palette|datavis)/, // color.mode.*, color.palette.*, color.datavis.*
-    /^typography\.(fontFamily|weight|ramp|lineHeight|letterSpacing|features)/, // typography.fontFamily.*, typography.weight.*, etc.
+    /^typography\.(fontFamily|weight|ramp|features)/, // typography.fontFamily.*, typography.weight.*, typography.ramp.*, etc.
     /^spacing\.size/, // spacing.size.*
     /^elevation\.(level|offset|blur|spread)/, // elevation.level.*, elevation.offset.*, etc.
     /^opacity\.(50|100|200|300|400|500|600|700|800|900|full)/, // opacity.50, opacity.100, etc.

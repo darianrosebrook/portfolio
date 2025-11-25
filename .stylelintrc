@@ -7,6 +7,12 @@
   "rules": {
     "color-hex-length": "long",
     "declaration-block-single-line-max-declarations": 3,
+    "value-keyword-case": [
+      "lower",
+      {
+        "ignoreProperties": ["font-family", "animation-name", "animation"]
+      }
+    ],
     "no-descending-specificity": [
       true,
       {

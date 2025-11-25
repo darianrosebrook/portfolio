@@ -40,7 +40,7 @@
   --checkbox-transition-easing: var(--core-motion-easing-standard);
 
   /* === Focus Tokens === */
-  --checkbox-focus-ring-width: var(--semantic-focus-ring-width);
-  --checkbox-focus-ring-color: var(--semantic-focus-ring-color);
-  --checkbox-focus-ring-offset: var(--semantic-focus-ring-offset);
+  --checkbox-focus-ring-width: var(--semantic-interaction-focus-ring-width);
+  --checkbox-focus-ring-color: var(--semantic-color-border-accent);
+  --checkbox-focus-ring-offset: var(--semantic-interaction-focus-ring-offset);
 }

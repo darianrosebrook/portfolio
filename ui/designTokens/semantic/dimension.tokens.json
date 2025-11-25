@@ -5,6 +5,20 @@
       "$type": "dimension",
       "$value": "{dimension.tapTargetMin}"
     },
+    "tapTarget": {
+      "min": {
+        "$type": "dimension",
+        "$value": "{dimension.tapTargetMin}"
+      },
+      "large": {
+        "$type": "dimension",
+        "$value": {
+          "value": 48,
+          "unit": "px"
+        },
+        "$description": "Large tap target size for better accessibility"
+      }
+    },
     "buttonMinHeight": {
       "$type": "dimension",
       "$value": "{dimension.actionMinHeight}"

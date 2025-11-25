@@ -81,7 +81,6 @@ export default function DateFormattingExample() {
     {
       id: 'locale-selection',
       title: 'Locale Selection',
-      prose: 'Users can select different locales to see how formatting changes.',
       code: {
         file: '/App.tsx',
         lines: [6, 6],
@@ -90,7 +89,6 @@ export default function DateFormattingExample() {
     {
       id: 'date-formatting',
       title: 'Date Formatting',
-      prose: 'Intl.DateTimeFormat provides locale-aware date and time formatting.',
       code: {
         file: '/App.tsx',
         lines: [10, 13],
@@ -99,7 +97,6 @@ export default function DateFormattingExample() {
     {
       id: 'number-formatting',
       title: 'Number & Currency',
-      prose: 'Intl.NumberFormat handles numbers, percentages, and currencies.',
       code: {
         file: '/App.tsx',
         lines: [15, 18],
@@ -112,4 +109,3 @@ export default function DateFormattingExample() {
     theme: 'system',
   },
 };
-

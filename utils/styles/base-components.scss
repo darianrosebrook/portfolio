@@ -107,6 +107,12 @@
 :where(p) {
   margin: 0 0 1rem;
   line-height: 1.6;
+  
+  // Reset line-height for inline elements that should use their own
+  // These elements have their own line-height defined
+  :where(a, button, [role="button"]) {
+    line-height: initial;
+  }
 }
 
 // Images with low specificity
