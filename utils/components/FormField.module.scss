@@ -1,41 +1,34 @@
 @use '../../ui/designTokens' as tokens;
 
+// Base selectors must come before nested ones for proper specificity ordering
+.label {
+  display: block;
+  margin-bottom: var(--space-xs, 0.25rem);
+  color: var(--color-text-primary, #333333);
+  font-weight: var(--font-weight-medium, 500);
+  font-size: var(--text-size-base, 1rem);
+  line-height: var(--text-line-height-tight, 1.25);
+
+  @media (prefers-color-scheme: dark) {
+    color: var(--color-text-primary-dark, #e0e0e0);
+  }
+}
+
+.inputContainer {
+  position: relative;
+
+  // Ensure proper spacing for absolute positioned elements (like icons)
+  :global(.input),
+  :global(.select),
+  :global(.textarea) {
+    width: 100%;
+  }
+}
+
 .field {
   display: flex;
   flex-direction: column;
   gap: var(--space-sm, 0.5rem);
-
-  &.horizontal {
-    flex-direction: row;
-    gap: var(--space-md, 1rem);
-    align-items: flex-start;
-
-    .label {
-      flex-shrink: 0;
-      min-width: 120px;
-      margin-bottom: 0;
-      padding-top: calc(
-        var(--space-xs, 0.25rem) + 1px
-      ); // Align with input baseline
-    }
-
-    .inputContainer {
-      flex: 1;
-      min-width: 0; // Allow flex shrinking
-    }
-
-    &.sm {
-      .label {
-        min-width: 100px;
-      }
-    }
-
-    &.lg {
-      .label {
-        min-width: 140px;
-      }
-    }
-  }
 
   &.hasError {
     .inputContainer :global(.input),
@@ -75,31 +68,50 @@
     .description,
     .error {
       font-size: var(--text-size-base, 1rem);
-    }
   }
 }
 
+  // Focus styles for enhanced accessibility
+  &:focus-within {
 .label {
-  display: block;
-  margin-bottom: var(--space-xs, 0.25rem);
-  color: var(--color-text-primary, #333333);
-  font-weight: var(--font-weight-medium, 500);
-  font-size: var(--text-size-base, 1rem);
-  line-height: var(--text-line-height-tight, 1.25);
+      color: var(--color-interactive-primary, #007acc);
 
   @media (prefers-color-scheme: dark) {
-    color: var(--color-text-primary-dark, #e0e0e0);
+        color: var(--color-interactive-primary-dark, #4da6ff);
   }
+    }
+  }
+
+  &.horizontal {
+    flex-direction: row;
+    gap: var(--space-md, 1rem);
+    align-items: flex-start;
+
+    .label {
+      flex-shrink: 0;
+      min-width: 120px;
+      margin-bottom: 0;
+      padding-top: calc(
+        var(--space-xs, 0.25rem) + 1px
+      ); // Align with input baseline
 }
 
 .inputContainer {
-  position: relative;
+      flex: 1;
+      min-width: 0; // Allow flex shrinking
+    }
 
-  // Ensure proper spacing for absolute positioned elements (like icons)
-  :global(.input),
-  :global(.select),
-  :global(.textarea) {
-    width: 100%;
+    &.sm {
+      .label {
+        min-width: 100px;
+      }
+    }
+
+    &.lg {
+      .label {
+        min-width: 140px;
+      }
+    }
   }
 }
 
@@ -144,18 +156,6 @@
   }
 }
 
-// Focus styles for enhanced accessibility
-.field:focus-within {
-  .label {
-    color: var(--color-interactive-primary, #007acc);
-
-    @media (prefers-color-scheme: dark) {
-      color: var(--color-interactive-primary-dark, #4da6ff);
-    }
-  }
-}
-
-// Animation for error appearance
 @keyframes errorAppear {
   from {
     opacity: 0;

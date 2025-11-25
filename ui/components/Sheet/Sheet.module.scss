@@ -41,13 +41,13 @@
 
   // Side-specific positioning and animations
   &.top {
+    inset-inline: 0;
     height: var(--sheet-size-height);
     border-radius: 0 0 var(--sheet-border-radius) var(--sheet-border-radius);
     transform: translateY(-100%);
     border-block-end: var(--sheet-border-width) solid var(--sheet-color-border);
     border-block-start: none;
     inset-block-start: 0;
-    inset-inline: 0;
 
     &[data-state='open'] {
       transform: translateY(0);
@@ -55,13 +55,13 @@
   }
 
   &.right {
+    inset-block: 0;
     width: var(--sheet-size-width);
     border-radius: var(--sheet-border-radius) 0 0 var(--sheet-border-radius);
     transform: translateX(100%);
     border-inline-end: none;
     border-inline-start: var(--sheet-border-width) solid
       var(--sheet-color-border);
-    inset-block: 0;
     inset-inline-end: 0;
 
     &[data-state='open'] {
@@ -70,6 +70,7 @@
   }
 
   &.bottom {
+    inset-inline: 0;
     height: var(--sheet-size-height);
     border-radius: var(--sheet-border-radius) var(--sheet-border-radius) 0 0;
     transform: translateY(100%);
@@ -77,7 +78,6 @@
     border-block-start: var(--sheet-border-width) solid
       var(--sheet-color-border);
     inset-block-end: 0;
-    inset-inline: 0;
 
     &[data-state='open'] {
       transform: translateY(0);
@@ -85,12 +85,12 @@
   }
 
   &.left {
+    inset-block: 0;
     width: var(--sheet-size-width);
     border-radius: 0 var(--sheet-border-radius) var(--sheet-border-radius) 0;
     transform: translateX(-100%);
     border-inline-end: var(--sheet-border-width) solid var(--sheet-color-border);
     border-inline-start: none;
-    inset-block: 0;
     inset-inline-start: 0;
 
     &[data-state='open'] {

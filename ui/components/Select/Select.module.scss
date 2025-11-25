@@ -311,6 +311,7 @@
 
 .comboboxList {
   position: absolute;
+  inset-inline: 0;
   z-index: 1000;
   overflow-y: auto;
   max-height: 200px;
@@ -325,7 +326,6 @@
   list-style: none;
   border-block-start: none;
   inset-block-start: 100%;
-  inset-inline: 0;
 }
 
 .comboboxOption {

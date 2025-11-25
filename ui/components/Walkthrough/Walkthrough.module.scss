@@ -19,9 +19,9 @@
 }
 
 .description {
+  margin-block: var(--walkthrough-description-marginTop) 0;
   color: var(--walkthrough-description-color);
   font-size: var(--walkthrough-description-fontSize);
-  margin-block: var(--walkthrough-description-marginTop) 0;
 }
 
 .controls {
