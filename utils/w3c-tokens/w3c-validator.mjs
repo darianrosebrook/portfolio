@@ -22,43 +22,84 @@ import addFormats from 'ajv-formats';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Load schema (defaults to strict, can be overridden via W3C_SCHEMA env var)
-// Options: 'w3c-schema-strict.json' (default) or 'w3c-schema-permissive.json'
-const SCHEMA_PATH = path.join(
-  __dirname,
-  process.env.W3C_SCHEMA || 'w3c-schema-strict.json'
-);
-let schema;
-try {
-  const schemaContent = fs.readFileSync(SCHEMA_PATH, 'utf8');
-  schema = JSON.parse(schemaContent);
-} catch (error) {
-  console.error(`[validator] Failed to load schema from ${SCHEMA_PATH}`);
-  console.error(`[validator] Error: ${error.message}`);
-  process.exit(1);
+/**
+ * Parse command-line arguments
+ */
+function parseArgs() {
+  const args = process.argv.slice(2);
+  const options = {
+    strict: false,
+    schema: process.env.W3C_SCHEMA || 'w3c-schema-strict.json',
+    target: null,
+  };
+
+  for (let i = 0; i < args.length; i++) {
+    const arg = args[i];
+    if (arg === '--strict' || arg === '-s') {
+      options.strict = true;
+    } else if (arg === '--permissive' || arg === '-p') {
+      options.schema = 'w3c-schema-permissive.json';
+    } else if (arg === '--schema' && i + 1 < args.length) {
+      options.schema = args[++i];
+    } else if (!arg.startsWith('-')) {
+      options.target = arg;
+    }
+  }
+
+  return options;
 }
 
-// Initialize validator
-const ajv = new Ajv({
-  allErrors: true,
-  verbose: true,
-  strict: false,
-  allowUnionTypes: true,
-});
+/**
+ * Initialize validator with options
+ */
+function createValidator(options = {}) {
+  const {
+    strict = false,
+    schema: schemaName = process.env.W3C_SCHEMA || 'w3c-schema-strict.json',
+  } = options;
 
-addFormats(ajv);
-const validate = ajv.compile(schema);
+  // Load schema
+  const SCHEMA_PATH = path.join(__dirname, schemaName);
+  let schema;
+  try {
+    const schemaContent = fs.readFileSync(SCHEMA_PATH, 'utf8');
+    schema = JSON.parse(schemaContent);
+  } catch (error) {
+    console.error(`[validator] Failed to load schema from ${SCHEMA_PATH}`);
+    console.error(`[validator] Error: ${error.message}`);
+    process.exit(1);
+  }
+
+  // Initialize validator
+  const ajv = new Ajv({
+    allErrors: true,
+    verbose: true,
+    strict: strict,
+    allowUnionTypes: true,
+  });
+
+  addFormats(ajv);
+  const validate = ajv.compile(schema);
+
+  return { validate, schema, strict };
+}
 
 /**
  * Validate a token file against the schema
  */
-function validateTokenFile(filePath) {
+function validateTokenFile(
+  filePath,
+  validator,
+  schemaPath = null,
+  strictMode = false
+) {
   const result = {
     isValid: true,
     errors: [],
     warnings: [],
     tokens: null,
     filePath,
+    stats: null,
   };
 
   try {
@@ -68,25 +109,73 @@ function validateTokenFile(filePath) {
     result.tokens = tokens;
 
     // Validate against schema
-    const isSchemaValid = validate(tokens);
+    const isSchemaValid = validator.validate(tokens);
 
     if (!isSchemaValid) {
       result.isValid = false;
-      result.errors.push(
-        ...(validate.errors || []).map((error) => ({
-          type: 'schema',
-          path: error.instancePath || 'root',
-          message: error.message,
-          data: error.data,
-          schema: error.schema,
-        }))
-      );
+      // Deduplicate and simplify schema errors
+      // Group errors by path and pick the most relevant one
+      const errorsByPath = new Map();
+      for (const error of validator.validate.errors || []) {
+        const path = error.instancePath || 'root';
+        if (!errorsByPath.has(path)) {
+          errorsByPath.set(path, []);
+        }
+        errorsByPath.get(path).push(error);
+      }
+
+      // For each path, pick the most actionable error
+      for (const [path, errors] of errorsByPath) {
+        // Prioritize additionalProperties errors as they're most actionable
+        const additionalPropsError = errors.find(
+          (e) => e.keyword === 'additionalProperties'
+        );
+        // Also check for oneOf failures at the end
+        const oneOfError = errors.find((e) => e.keyword === 'oneOf');
+
+        if (additionalPropsError) {
+          // Find what the additional property is
+          const additionalProp =
+            additionalPropsError.params?.additionalProperty;
+          result.errors.push({
+            type: 'schema',
+            path,
+            message: additionalProp
+              ? `Additional property "${additionalProp}" not allowed`
+              : 'Additional properties not allowed',
+            data: additionalPropsError.data,
+          });
+        } else if (oneOfError && errors.length > 5) {
+          // If there are many errors and a oneOf failure, just report the oneOf
+          result.errors.push({
+            type: 'schema',
+            path,
+            message: 'Value does not match any allowed type',
+            data: oneOfError.data,
+          });
+        } else {
+          // Report first error only for this path
+          const firstError = errors[0];
+          result.errors.push({
+            type: 'schema',
+            path,
+            message: firstError.message,
+            data: firstError.data,
+          });
+        }
+      }
     }
 
     // Additional custom validations
-    const customValidation = performCustomValidations(tokens, filePath);
+    const customValidation = performCustomValidations(
+      tokens,
+      filePath,
+      schemaPath,
+      strictMode
+    );
     result.errors.push(...customValidation.errors);
     result.warnings.push(...customValidation.warnings);
+    result.stats = customValidation.stats;
 
     if (customValidation.errors.length > 0) {
       result.isValid = false;
@@ -107,13 +196,64 @@ function validateTokenFile(filePath) {
 /**
  * Perform custom validation rules beyond schema validation
  */
-function performCustomValidations(tokens, filePath) {
+function performCustomValidations(
+  tokens,
+  filePath,
+  schemaPath = null,
+  strictMode = false
+) {
   const errors = [];
   const warnings = [];
 
   // Track token references for circular dependency detection
   const tokenRefs = new Map();
   const visited = new Set();
+
+  // Track optional properties used (for strict mode reporting)
+  const optionalPropsUsed = {
+    color: { alpha: 0, hex: 0 },
+    shadow: { inset: 0 },
+    typography: { fontWeight: 0, letterSpacing: 0, lineHeight: 0 },
+    transition: { delay: 0 },
+    gradient: { position: 0 },
+    token: { $description: 0, $deprecated: 0, $extensions: 0 },
+    group: { $description: 0, $extensions: 0 },
+  };
+  let totalTokens = 0;
+  let totalGroups = 0;
+
+  // DTCG 2025.10 allowed properties per type (Section 4.1)
+  const allowedProps = {
+    colorValue: new Set(['colorSpace', 'components', 'alpha', 'hex']),
+    dimensionValue: new Set(['value', 'unit']),
+    shadowValue: new Set([
+      'offsetX',
+      'offsetY',
+      'blur',
+      'spread',
+      'color',
+      'inset',
+    ]),
+    typographyValue: new Set([
+      'fontFamily',
+      'fontSize',
+      'fontWeight',
+      'letterSpacing',
+      'lineHeight',
+    ]),
+    borderValue: new Set(['color', 'width', 'style']),
+    transitionValue: new Set(['duration', 'delay', 'timingFunction']),
+    strokeStyleObject: new Set(['dashArray', 'lineCap']),
+    gradientStop: new Set(['color', 'position']),
+    token: new Set([
+      '$value',
+      '$type',
+      '$description',
+      '$deprecated',
+      '$extensions',
+    ]),
+    group: new Set(['$type', '$description', '$extensions']),
+  };
 
   function validateNode(node, path = '') {
     if (!node || typeof node !== 'object') return;
@@ -137,6 +277,14 @@ function performCustomValidations(tokens, filePath) {
   }
 
   function validateToken(token, path) {
+    totalTokens++;
+
+    // Track optional token-level properties
+    if (token.$description !== undefined)
+      optionalPropsUsed.token.$description++;
+    if (token.$deprecated !== undefined) optionalPropsUsed.token.$deprecated++;
+    if (token.$extensions !== undefined) optionalPropsUsed.token.$extensions++;
+
     // Check for required properties
     if (!token.$type && !token.$value) {
       warnings.push({
@@ -144,6 +292,25 @@ function performCustomValidations(tokens, filePath) {
         path,
         message: 'Token should have a $type property for better validation',
       });
+    }
+
+    // In strict mode, check for additional properties on token
+    if (strictMode) {
+      const tokenProps = Object.keys(token);
+      const additionalTokenProps = tokenProps.filter(
+        (key) => !allowedProps.token.has(key) && !key.startsWith('$')
+      );
+      // Check for non-standard $ properties
+      const nonStandardDollarProps = tokenProps.filter(
+        (key) => key.startsWith('$') && !allowedProps.token.has(key)
+      );
+      if (nonStandardDollarProps.length > 0) {
+        errors.push({
+          type: 'additional-properties',
+          path,
+          message: `Non-standard $-prefixed properties should be in $extensions: ${nonStandardDollarProps.join(', ')}`,
+        });
+      }
     }
 
     // Validate token references
@@ -168,6 +335,13 @@ function performCustomValidations(tokens, filePath) {
   }
 
   function validateGroup(group, path) {
+    totalGroups++;
+
+    // Track optional group-level properties
+    if (group.$description !== undefined)
+      optionalPropsUsed.group.$description++;
+    if (group.$extensions !== undefined) optionalPropsUsed.group.$extensions++;
+
     // Groups should have meaningful names
     if (path.length === 0) {
       warnings.push({
@@ -176,13 +350,30 @@ function performCustomValidations(tokens, filePath) {
         message: 'Root level groups should have descriptive names',
       });
     }
+
+    // In strict mode, check for non-standard $ properties on groups
+    if (strictMode) {
+      const groupProps = Object.keys(group).filter((key) =>
+        key.startsWith('$')
+      );
+      const nonStandardDollarProps = groupProps.filter(
+        (key) => !allowedProps.group.has(key)
+      );
+      if (nonStandardDollarProps.length > 0) {
+        errors.push({
+          type: 'additional-properties',
+          path,
+          message: `Non-standard $-prefixed properties on group should be in $extensions: ${nonStandardDollarProps.join(', ')}`,
+        });
+      }
+    }
   }
 
   function validateTokenType(token, path) {
     const { $type, $value } = token;
 
     // Detect schema mode from schema file name
-    const isPermissive = SCHEMA_PATH.includes('permissive');
+    const isPermissive = schemaPath ? schemaPath.includes('permissive') : false;
 
     // Check for non-standard types (warn but don't error)
     const standardTypes = [
@@ -242,20 +433,28 @@ function performCustomValidations(tokens, filePath) {
           !Array.isArray($value)
         ) {
           const colorValue = $value;
+
+          // Track optional color properties
+          if ('alpha' in colorValue) optionalPropsUsed.color.alpha++;
+          if ('hex' in colorValue) optionalPropsUsed.color.hex++;
+
           if ('colorSpace' in colorValue) {
+            // Color spaces per DTCG 2025.10 Color Module (Section 4.2)
             const validColorSpaces = [
               'srgb',
               'srgb-linear',
+              'hsl',
+              'hwb',
+              'lab',
+              'lch',
+              'oklab',
+              'oklch',
               'display-p3',
               'a98-rgb',
               'prophoto-rgb',
               'rec2020',
-              'xyz-d50',
               'xyz-d65',
-              'oklab',
-              'oklch',
-              'lab',
-              'lch',
+              'xyz-d50',
             ];
             if (!validColorSpaces.includes(colorValue.colorSpace)) {
               errors.push({
@@ -267,15 +466,49 @@ function performCustomValidations(tokens, filePath) {
           }
           if ('components' in colorValue) {
             const components = colorValue.components;
-            if (
-              !Array.isArray(components) ||
-              components.length < 3 ||
-              components.length > 4
-            ) {
+            if (!Array.isArray(components) || components.length !== 3) {
               errors.push({
                 type: 'custom',
                 path,
-                message: 'Color components must be an array of 3-4 numbers',
+                message:
+                  'Color components must be an array of exactly 3 values (numbers or "none")',
+              });
+            } else {
+              // Validate each component is a number or "none" (Section 4.1.1)
+              for (let i = 0; i < components.length; i++) {
+                const comp = components[i];
+                if (typeof comp !== 'number' && comp !== 'none') {
+                  errors.push({
+                    type: 'custom',
+                    path,
+                    message: `Component ${i} must be a number or "none", got ${typeof comp}`,
+                  });
+                }
+              }
+            }
+          }
+
+          // Validate hex format if present (Section 4.1)
+          if ('hex' in colorValue && typeof colorValue.hex === 'string') {
+            if (!/^#[0-9A-Fa-f]{6}$/.test(colorValue.hex)) {
+              errors.push({
+                type: 'custom',
+                path,
+                message: `hex must be in 6-digit CSS hex notation (e.g., "#ff00ff"), got "${colorValue.hex}"`,
+              });
+            }
+          }
+
+          // In strict mode, check for additional properties not allowed by DTCG 2025.10
+          if (strictMode) {
+            const additionalProps = Object.keys(colorValue).filter(
+              (key) => !allowedProps.colorValue.has(key)
+            );
+            if (additionalProps.length > 0) {
+              errors.push({
+                type: 'additional-properties',
+                path: `${path}.$value`,
+                message: `Additional properties not allowed in strict mode: ${additionalProps.join(', ')}. DTCG 2025.10 only allows: ${Array.from(allowedProps.colorValue).join(', ')}`,
               });
             }
           }
@@ -313,6 +546,20 @@ function performCustomValidations(tokens, filePath) {
               path,
               message: 'Dimension value must be a number',
             });
+          }
+
+          // In strict mode, check for additional properties
+          if (strictMode) {
+            const additionalProps = Object.keys(dimValue).filter(
+              (key) => !allowedProps.dimensionValue.has(key)
+            );
+            if (additionalProps.length > 0) {
+              errors.push({
+                type: 'additional-properties',
+                path: `${path}.$value`,
+                message: `Additional properties not allowed: ${additionalProps.join(', ')}. DTCG 2025.10 only allows: ${Array.from(allowedProps.dimensionValue).join(', ')}`,
+              });
+            }
           }
         } else if (
           typeof $value === 'string' &&
@@ -394,7 +641,14 @@ function performCustomValidations(tokens, filePath) {
     }))
   );
 
-  return { errors, warnings };
+  // Build stats object
+  const stats = {
+    totalTokens,
+    totalGroups,
+    optionalPropsUsed,
+  };
+
+  return { errors, warnings, stats };
 }
 
 /**
@@ -439,28 +693,98 @@ function detectCircularReferences(tokenRefs) {
 /**
  * Log validation results in a user-friendly format
  */
-function logValidationResult(result) {
-  const { isValid, errors, warnings, filePath } = result;
+function logValidationResult(result, strictMode = false) {
+  const { isValid, errors, warnings, filePath, stats } = result;
   const fileName = path.basename(filePath);
 
   if (isValid && warnings.length === 0) {
     console.log(`[validator] ✅ ${fileName} - Valid`);
-    return;
+  } else {
+    if (warnings.length > 0) {
+      console.log(
+        `[validator] ⚠️  ${fileName} - ${warnings.length} warning(s)`
+      );
+      warnings.forEach((warning) => {
+        console.log(
+          `  Warning [${warning.type}] ${warning.path}: ${warning.message}`
+        );
+      });
+    }
+
+    if (!isValid) {
+      console.log(`[validator] ❌ ${fileName} - ${errors.length} error(s)`);
+      errors.forEach((error) => {
+        console.log(`  Error [${error.type}] ${error.path}: ${error.message}`);
+      });
+    }
   }
 
-  if (warnings.length > 0) {
-    console.log(`[validator] ⚠️  ${fileName} - ${warnings.length} warning(s)`);
-    warnings.forEach((warning) => {
-      console.log(
-        `  Warning [${warning.type}] ${warning.path}: ${warning.message}`
-      );
+  // In strict mode, show optional property usage stats
+  if (strictMode && stats) {
+    logOptionalPropsStats(stats);
+  }
+}
+
+/**
+ * Log optional properties usage statistics
+ */
+function logOptionalPropsStats(stats) {
+  const { totalTokens, totalGroups, optionalPropsUsed } = stats;
+
+  console.log('\n[validator] 📊 Optional Properties Usage (DTCG 2025.10):');
+  console.log(`  Tokens: ${totalTokens}, Groups: ${totalGroups}`);
+
+  // Color optional props
+  const colorOptional = optionalPropsUsed.color;
+  if (colorOptional.alpha > 0 || colorOptional.hex > 0) {
+    console.log('  Color:');
+    if (colorOptional.alpha > 0)
+      console.log(`    • alpha: ${colorOptional.alpha} token(s)`);
+    if (colorOptional.hex > 0)
+      console.log(`    • hex (fallback): ${colorOptional.hex} token(s)`);
+  }
+
+  // Shadow optional props
+  const shadowOptional = optionalPropsUsed.shadow;
+  if (shadowOptional.inset > 0) {
+    console.log('  Shadow:');
+    console.log(`    • inset: ${shadowOptional.inset} token(s)`);
+  }
+
+  // Typography optional props
+  const typoOptional = optionalPropsUsed.typography;
+  const typoUsed = Object.entries(typoOptional).filter(([_, v]) => v > 0);
+  if (typoUsed.length > 0) {
+    console.log('  Typography:');
+    typoUsed.forEach(([prop, count]) => {
+      console.log(`    • ${prop}: ${count} token(s)`);
     });
   }
 
-  if (!isValid) {
-    console.log(`[validator] ❌ ${fileName} - ${errors.length} error(s)`);
-    errors.forEach((error) => {
-      console.log(`  Error [${error.type}] ${error.path}: ${error.message}`);
+  // Transition optional props
+  const transOptional = optionalPropsUsed.transition;
+  if (transOptional.delay > 0) {
+    console.log('  Transition:');
+    console.log(`    • delay: ${transOptional.delay} token(s)`);
+  }
+
+  // Token-level optional props
+  const tokenOptional = optionalPropsUsed.token;
+  const tokenUsed = Object.entries(tokenOptional).filter(([_, v]) => v > 0);
+  if (tokenUsed.length > 0) {
+    console.log('  Token Metadata:');
+    tokenUsed.forEach(([prop, count]) => {
+      console.log(`    • ${prop}: ${count} token(s)`);
+    });
+  }
+
+  // Group-level optional props
+  const groupOptional = optionalPropsUsed.group;
+  const groupUsed = Object.entries(groupOptional).filter(([_, v]) => v > 0);
+  if (groupUsed.length > 0) {
+    console.log('  Group Metadata:');
+    groupUsed.forEach(([prop, count]) => {
+      console.log(`    • ${prop}: ${count} group(s)`);
     });
   }
 }
@@ -468,7 +792,12 @@ function logValidationResult(result) {
 /**
  * Validate all token files in a directory
  */
-function validateTokenDirectory(dirPath) {
+function validateTokenDirectory(
+  dirPath,
+  validator,
+  schemaPath,
+  strictMode = false
+) {
   const results = [];
 
   if (!fs.existsSync(dirPath)) {
@@ -487,40 +816,78 @@ function validateTokenDirectory(dirPath) {
   }
 
   for (const filePath of files) {
-    const result = validateTokenFile(filePath);
+    const result = validateTokenFile(
+      filePath,
+      validator,
+      schemaPath,
+      strictMode
+    );
     results.push(result);
-    logValidationResult(result);
+    logValidationResult(result, strictMode);
   }
 
   return results;
 }
 
 // CLI interface
-const targetPath = process.argv[2];
+const options = parseArgs();
 
-if (!targetPath) {
+if (!options.target) {
   console.error(
-    '[validator] Usage: node w3c-validator.mjs <file-or-directory>'
+    '[validator] Usage: node w3c-validator.mjs [options] <file-or-directory>'
   );
-  console.error('[validator] Example: node w3c-validator.mjs tokens.json');
+  console.error('[validator] Options:');
+  console.error(
+    '  --strict, -s          Enable strict mode (enforce additionalProperties: false)'
+  );
+  console.error('  --permissive, -p      Use permissive schema');
+  console.error('  --schema <name>        Specify schema file name');
+  console.error('[validator] Examples:');
+  console.error('  node w3c-validator.mjs tokens.json');
+  console.error('  node w3c-validator.mjs --strict tokens.json');
+  console.error('  node w3c-validator.mjs --permissive tokens.json');
   process.exit(1);
 }
 
-if (!fs.existsSync(targetPath)) {
-  console.error(`[validator] Target not found: ${targetPath}`);
+if (!fs.existsSync(options.target)) {
+  console.error(`[validator] Target not found: ${options.target}`);
   process.exit(1);
 }
 
-const stats = fs.statSync(targetPath);
+// Create validator with options
+const { validate, schema, strict } = createValidator({
+  strict: options.strict,
+  schema: options.schema,
+});
+
+const schemaPath = path.join(__dirname, options.schema);
+
+const stats = fs.statSync(options.target);
 let hasErrors = false;
 
 if (stats.isDirectory()) {
-  const results = validateTokenDirectory(targetPath);
+  const results = validateTokenDirectory(
+    options.target,
+    { validate },
+    schemaPath,
+    strict
+  );
   hasErrors = results.some((r) => !r.isValid);
 } else {
-  const result = validateTokenFile(targetPath);
-  logValidationResult(result);
+  const result = validateTokenFile(
+    options.target,
+    { validate },
+    schemaPath,
+    strict
+  );
+  logValidationResult(result, strict);
   hasErrors = !result.isValid;
+}
+
+if (strict) {
+  console.log(
+    '\n[validator] Strict mode enabled - additionalProperties will be enforced'
+  );
 }
 
 process.exit(hasErrors ? 1 : 0);

@@ -54,15 +54,15 @@
       },
       "border": {
         "defaultWidth": {
-          "$type": "borderWidth",
+          "$type": "dimension",
           "$value": "{shape.border.width.hairline}"
         },
         "defaultStyle": {
-          "$type": "borderStyle",
+          "$type": "strokeStyle",
           "$value": "{shape.border.style.solid}"
         },
         "focusWidth": {
-          "$type": "borderWidth",
+          "$type": "dimension",
           "$value": "{shape.border.width.thick}"
         }
       }

@@ -43,7 +43,11 @@ const validateEnvVar = (
 ): string => {
   if (!value) {
     if (fallback) {
-      if (process.env.NODE_ENV !== 'production') {
+      // Only warn on server-side (browser warnings aren't actionable - vars need to be embedded at build time)
+      if (
+        process.env.NODE_ENV !== 'production' &&
+        typeof window === 'undefined'
+      ) {
         console.warn(
           `Warning: Using fallback for missing environment variable: ${key}`
         );
@@ -72,21 +76,54 @@ const supabaseAnonKey = getEnvVar(
   'placeholder_anon_key'
 );
 
-// Warn if using placeholder values
+// Warn if using placeholder values (server-side only)
+// Browser warnings aren't actionable - NEXT_PUBLIC_* vars must be embedded at build time
 if (
+  typeof window === 'undefined' &&
   process.env.NODE_ENV !== 'test' &&
   (supabaseUrl.includes('placeholder') ||
     supabaseAnonKey === 'placeholder_anon_key')
 ) {
-  console.error(
+  // Check if .env.local exists to provide better guidance
+  let envLocalExists = false;
+  try {
+    const fs = require('fs');
+    const path = require('path');
+    const envLocalPath = path.join(process.cwd(), '.env.local');
+    envLocalExists = fs.existsSync(envLocalPath);
+  } catch {
+    // fs not available (edge runtime, etc.)
+  }
+
+  let message =
     '\n' +
-      '================================================\n' +
-      'WARNING: Using placeholder Supabase credentials!\n' +
-      'Database operations will fail.\n' +
-      'Create a .env.local file with real credentials.\n' +
-      'See .env.local.example for template.\n' +
-      '================================================\n'
-  );
+    '================================================\n' +
+    'WARNING: Using placeholder Supabase credentials!\n' +
+    'Database operations will fail.\n';
+
+  if (envLocalExists) {
+    message +=
+      '\n' +
+      'NOTE: .env.local file exists but credentials may not be loaded.\n' +
+      'Make sure your .env.local contains:\n' +
+      '  NEXT_PUBLIC_SUPABASE_URL=your-project-url\n' +
+      '  NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key\n' +
+      '\n' +
+      'If credentials are in .env.local, restart your dev server.\n' +
+      '(Next.js embeds NEXT_PUBLIC_* variables at build/start time)\n';
+  } else {
+    message +=
+      '\n' +
+      'Create a .env.local file with real credentials:\n' +
+      '  NEXT_PUBLIC_SUPABASE_URL=your-project-url\n' +
+      '  NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key\n' +
+      '\n' +
+      'See .env.local.example for template.\n';
+  }
+
+  message += '================================================\n';
+
+  console.error(message);
 }
 
 export const env: Environment = {

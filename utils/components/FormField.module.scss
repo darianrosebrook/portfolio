@@ -68,17 +68,17 @@
     .description,
     .error {
       font-size: var(--text-size-base, 1rem);
+    }
   }
-}
 
   // Focus styles for enhanced accessibility
   &:focus-within {
-.label {
+    .label {
       color: var(--color-interactive-primary, #007acc);
 
-  @media (prefers-color-scheme: dark) {
+      @media (prefers-color-scheme: dark) {
         color: var(--color-interactive-primary-dark, #4da6ff);
-  }
+      }
     }
   }
 
@@ -94,9 +94,9 @@
       padding-top: calc(
         var(--space-xs, 0.25rem) + 1px
       ); // Align with input baseline
-}
+    }
 
-.inputContainer {
+    .inputContainer {
       flex: 1;
       min-width: 0; // Allow flex shrinking
     }

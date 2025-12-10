@@ -4,6 +4,7 @@
  * Comprehensive Test Suite for W3C Design Tokens Validator
  *
  * Tests various scenarios including valid tokens, invalid tokens, edge cases, and error handling.
+ * Uses both schema validation AND custom semantic validation for complete DTCG 2025.10 compliance.
  */
 
 import fs from 'fs';
@@ -20,7 +21,140 @@ const SCHEMA_PATH = path.join(__dirname, 'w3c-schema-strict.json');
 const schema = JSON.parse(fs.readFileSync(SCHEMA_PATH, 'utf8'));
 const ajv = new Ajv({ allErrors: true, verbose: true });
 addFormats(ajv);
-const validate = ajv.compile(schema);
+const schemaValidate = ajv.compile(schema);
+
+// Custom validation (mirrors w3c-validator.mjs logic)
+function performCustomValidations(tokens, strictMode = true) {
+  const errors = [];
+
+  const allowedColorSpaces = [
+    'srgb',
+    'srgb-linear',
+    'hsl',
+    'hwb',
+    'lab',
+    'lch',
+    'oklab',
+    'oklch',
+    'display-p3',
+    'a98-rgb',
+    'prophoto-rgb',
+    'rec2020',
+    'xyz-d65',
+    'xyz-d50',
+  ];
+
+  function validateNode(node, path = '') {
+    if (!node || typeof node !== 'object') return;
+
+    // Check if this is a token (has $value OR has $type which implies it should have $value)
+    if ('$value' in node || '$type' in node) {
+      validateToken(node, path);
+    }
+
+    // Recursively validate children
+    for (const [key, value] of Object.entries(node)) {
+      if (!key.startsWith('$') && typeof value === 'object') {
+        validateNode(value, path ? `${path}.${key}` : key);
+      }
+    }
+  }
+
+  function validateToken(token, path) {
+    const { $type, $value } = token;
+
+    // Check for missing $value (but only if there's a $type AND no child tokens)
+    // Groups can have $type without $value (for type inheritance)
+    if ($type && $value === undefined) {
+      // Check if this is a group (has non-$ children) or a token (should have $value)
+      const hasChildTokens = Object.keys(token).some((k) => !k.startsWith('$'));
+      if (!hasChildTokens) {
+        errors.push({ path, message: 'Missing required $value property' });
+        return;
+      }
+      // It's a group with type inheritance, which is valid
+      return;
+    }
+
+    // Validate based on type
+    if (
+      $type === 'color' &&
+      typeof $value === 'object' &&
+      !Array.isArray($value)
+    ) {
+      // Check colorSpace
+      if (
+        'colorSpace' in $value &&
+        !allowedColorSpaces.includes($value.colorSpace)
+      ) {
+        errors.push({
+          path,
+          message: `Invalid colorSpace: "${$value.colorSpace}"`,
+        });
+      }
+      // Check components count
+      if ('components' in $value) {
+        if (
+          !Array.isArray($value.components) ||
+          $value.components.length !== 3
+        ) {
+          errors.push({
+            path,
+            message: 'Color components must have exactly 3 values',
+          });
+        }
+      }
+      // Check alpha range
+      if (
+        'alpha' in $value &&
+        (typeof $value.alpha !== 'number' ||
+          $value.alpha < 0 ||
+          $value.alpha > 1)
+      ) {
+        errors.push({
+          path,
+          message: 'Alpha must be a number between 0 and 1',
+        });
+      }
+    }
+
+    if (
+      $type === 'dimension' &&
+      typeof $value === 'object' &&
+      !Array.isArray($value)
+    ) {
+      if ('unit' in $value && !['px', 'rem'].includes($value.unit)) {
+        errors.push({
+          path,
+          message: `Invalid dimension unit: "${$value.unit}"`,
+        });
+      }
+    }
+
+    // Check for invalid token reference format (string without braces)
+    if (
+      $type === 'color' &&
+      typeof $value === 'string' &&
+      !$value.match(/^\{[^}]+\}$/)
+    ) {
+      // It's a string but not a valid reference - check if it looks like a reference attempt
+      if (
+        $value.includes('.') &&
+        !$value.startsWith('#') &&
+        !$value.startsWith('rgb') &&
+        !$value.startsWith('hsl')
+      ) {
+        errors.push({
+          path,
+          message: 'Invalid token reference format (missing braces)',
+        });
+      }
+    }
+  }
+
+  validateNode(tokens);
+  return errors;
+}
 
 // Test results tracking
 let testsRun = 0;
@@ -30,29 +164,41 @@ const failures = [];
 
 function test(name, tokens, shouldPass = true, expectedErrors = []) {
   testsRun++;
-  const result = validate(tokens);
-  const isValid = result === shouldPass;
 
-  if (isValid) {
+  // Run schema validation
+  const schemaResult = schemaValidate(tokens);
+  const schemaErrors = schemaValidate.errors || [];
+
+  // Run custom semantic validation
+  const customErrors = performCustomValidations(tokens, true);
+
+  // Combine results
+  const allErrors = [
+    ...schemaErrors.map((e) => ({ path: e.instancePath, message: e.message })),
+    ...customErrors,
+  ];
+  const isValid = schemaResult && customErrors.length === 0;
+  const testPassed = isValid === shouldPass;
+
+  if (testPassed) {
     testsPassed++;
     console.log(`✅ ${name}`);
   } else {
     testsFailed++;
-    const errors = validate.errors || [];
-    failures.push({ name, errors, expectedErrors });
+    failures.push({ name, errors: allErrors, expectedErrors });
     console.log(`❌ ${name}`);
-    if (errors.length > 0) {
-      console.log(
-        `   Expected: ${shouldPass ? 'valid' : 'invalid'}, Got: ${shouldPass ? 'invalid' : 'valid'}`
-      );
-      errors.slice(0, 3).forEach((err) => {
-        console.log(`   - ${err.instancePath || 'root'}: ${err.message}`);
+    console.log(
+      `   Expected: ${shouldPass ? 'valid' : 'invalid'}, Got: ${isValid ? 'valid' : 'invalid'}`
+    );
+    if (allErrors.length > 0) {
+      allErrors.slice(0, 3).forEach((err) => {
+        console.log(`   - ${err.path || 'root'}: ${err.message}`);
       });
     }
   }
 
   // Reset validator state
-  validate.errors = null;
+  schemaValidate.errors = null;
 }
 
 console.log('🧪 W3C Design Tokens Validator Test Suite\n');
@@ -315,7 +461,7 @@ test(
   true
 );
 
-// Test 14: Valid transition token
+// Test 14: Valid transition token (DTCG 2025.10 format)
 test(
   'Valid transition token',
   {
@@ -323,7 +469,10 @@ test(
       default: {
         $type: 'transition',
         $value: {
-          duration: 200,
+          duration: {
+            value: 200,
+            unit: 'ms',
+          },
           timingFunction: [0.4, 0, 0.2, 1],
         },
       },
@@ -421,14 +570,17 @@ test(
   true
 );
 
-// Test 20: Valid duration token
+// Test 20: Valid duration token (DTCG 2025.10 format)
 test(
   'Valid duration token',
   {
     timing: {
       fast: {
         $type: 'duration',
-        $value: 150,
+        $value: {
+          value: 150,
+          unit: 'ms',
+        },
       },
     },
   },

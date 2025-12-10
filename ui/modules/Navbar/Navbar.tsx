@@ -11,8 +11,8 @@ import Avatar from '../../components/Avatar';
 import Button from '../../components/Button';
 import Popover from '../../components/Popover/Popover';
 import ToggleSwitch from '../../components/ToggleSwitch';
-import styles from './Navbar.module.css';
 import Logo from './Logo';
+import styles from './Navbar.module.css';
 
 const faBars = byPrefixAndName['far']['bars'];
 const faUser = byPrefixAndName['far']['user'];
@@ -25,7 +25,20 @@ export type NavbarProps = {
 };
 
 export default function Navbar({ pages = [] }: NavbarProps) {
-  const { user, profile, loading } = useUser();
+  const { user, profile, loading, error } = useUser();
+
+  // Debug logging - check browser console
+  useEffect(() => {
+    console.log('[Navbar] Auth state:', {
+      hasUser: !!user,
+      userId: user?.id,
+      userEmail: user?.email,
+      hasProfile: !!profile,
+      loading,
+      error,
+    });
+  }, [user, profile, loading, error]);
+
   const [slider, setSlider] = useState(false);
   const [theme, setTheme] = useState('dark');
   const pathname = usePathname();

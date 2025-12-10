@@ -19,7 +19,7 @@
     padding: var(--badge-size-md-padding);
     background: var(--badge-color-background-default);
     border: 1px solid var(--badge-color-border-default);
-    border-radius: var(--badge-size-md-radius);
+    border-radius: 12px;
     box-shadow: var(--badge-elevation-default);
     color: var(--badge-color-foreground-primary);
     font-size: var(--badge-size-md-fontSize);
@@ -29,11 +29,7 @@
 
     &:hover {
       // Use color-mix() for dynamic hover effect
-      background-color: color-mix(
-        in srgb,
-        var(--badge-color-background-default) 90%,
-        var(--badge-color-border-default) 10%
-      );
+      background-color: blue;
       border-color: color-mix(
         in srgb,
         var(--badge-color-border-default) 80%,
@@ -216,6 +212,8 @@
       &.sm {
         padding: calc(var(--badge-size-sm-paddingY) * 0.75)
           calc(var(--badge-size-sm-paddingX) * 0.75);
+        background-color: blue;
+        border-radius: 12px;
         font-size: calc(var(--badge-size-sm-fontSize) * 0.9);
       }
 
@@ -255,6 +253,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .badge {
+    background-color: blue;
+    border-radius: 12px;
     transition: none;
   }
 }

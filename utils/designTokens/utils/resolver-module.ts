@@ -9,8 +9,8 @@
 
 import fs from 'fs';
 import path from 'path';
-import type { Diagnostic } from './types';
 import { getNestedValue } from './pathUtils';
+import type { Diagnostic } from './types';
 
 /**
  * Reference object for JSON Pointer syntax
@@ -316,7 +316,7 @@ export class Resolver {
     baseTokens: Record<string, unknown>,
     input: ResolutionInput
   ): Record<string, unknown> {
-    let tokens = { ...baseTokens };
+    const tokens = { ...baseTokens };
 
     // Apply modifiers in resolution order
     for (const item of this.document.resolutionOrder) {
@@ -409,6 +409,17 @@ export class Resolver {
       if (resolved === undefined) {
         return value;
       }
+
+      // If the resolved value is a token object (has $value), extract just the $value
+      // This prevents nested $value structures when resolving token references
+      if (
+        typeof resolved === 'object' &&
+        resolved !== null &&
+        '$value' in (resolved as Record<string, unknown>)
+      ) {
+        return (resolved as Record<string, unknown>).$value;
+      }
+
       return resolved;
     }
 

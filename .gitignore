@@ -47,3 +47,6 @@ docs/
 
 # design tokens cache
 utils/designTokens/.cache/
+
+# Designer preview
+.designer/

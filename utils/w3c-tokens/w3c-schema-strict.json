@@ -1,8 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://design-tokens.github.io/schema/w3c-design-tokens.schema.json",
-  "title": "W3C Design Tokens Schema",
-  "description": "A JSON schema for validating design token files according to the W3C Design Tokens Community Group (DTCG) 1.0 specification. Created by Darian Rosebrook (@darianrosebrook)",
+  "title": "W3C Design Tokens Schema (DTCG 2025.10)",
+  "description": "A JSON schema for validating design token files according to the W3C Design Tokens Community Group (DTCG) 2025.10 specification. Created by Darian Rosebrook (@darianrosebrook)",
   "type": "object",
   "$defs": {
     "token": {
@@ -58,7 +58,7 @@
           ]
         },
         "$type": {
-          "description": "The type of the design token (DTCG 1.0 standard types)",
+          "description": "The type of the design token (DTCG 2025.10 standard types)",
           "type": "string",
           "enum": [
             "color",
@@ -80,8 +80,20 @@
           "description": "A human-readable description of the design token",
           "type": "string"
         },
+        "$deprecated": {
+          "description": "Indicates if the token is deprecated",
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "string",
+              "description": "Deprecation message or reason"
+            }
+          ]
+        },
         "$extensions": {
-          "description": "Platform-specific extensions",
+          "description": "Platform-specific extensions and custom properties",
           "type": "object",
           "additionalProperties": true
         }
@@ -92,12 +104,32 @@
       "type": "object",
       "properties": {
         "$type": {
-          "description": "The type inherited by all tokens in this group (standard or custom)",
-          "type": "string"
+          "description": "The type inherited by all tokens in this group",
+          "type": "string",
+          "enum": [
+            "color",
+            "dimension",
+            "fontFamily",
+            "fontWeight",
+            "duration",
+            "cubicBezier",
+            "number",
+            "border",
+            "transition",
+            "shadow",
+            "gradient",
+            "typography",
+            "strokeStyle"
+          ]
         },
         "$description": {
           "description": "A human-readable description of the token group",
           "type": "string"
+        },
+        "$extensions": {
+          "description": "Platform-specific extensions and custom properties",
+          "type": "object",
+          "additionalProperties": true
         }
       },
       "patternProperties": {
@@ -108,9 +140,6 @@
             },
             {
               "$ref": "#/$defs/group"
-            },
-            {
-              "type": "object"
             }
           ]
         }
@@ -118,48 +147,64 @@
       "additionalProperties": true
     },
     "colorValue": {
-      "description": "A DTCG 1.0-compliant color value object",
+      "description": "A DTCG 2025.10-compliant color value object (Section 4.1)",
       "type": "object",
       "properties": {
         "colorSpace": {
           "type": "string",
-          "description": "The color space (e.g., srgb, display-p3, oklch, lab, etc.)",
+          "description": "The color space (Section 4.2)",
           "enum": [
             "srgb",
             "srgb-linear",
+            "hsl",
+            "hwb",
+            "lab",
+            "lch",
+            "oklab",
+            "oklch",
             "display-p3",
             "a98-rgb",
             "prophoto-rgb",
             "rec2020",
-            "xyz-d50",
             "xyz-d65",
-            "oklab",
-            "oklch",
-            "lab",
-            "lch"
+            "xyz-d50"
           ]
         },
         "components": {
           "type": "array",
           "items": {
-            "type": "number"
+            "oneOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string",
+                "enum": ["none"],
+                "description": "The 'none' keyword for missing/not applicable components (Section 4.1.1)"
+              }
+            ]
           },
-          "description": "The channel values for the specified color space (typically 3-4 components)",
+          "description": "The channel values for the specified color space (3 components, numbers or 'none')",
           "minItems": 3,
-          "maxItems": 4
+          "maxItems": 3
         },
         "alpha": {
           "type": "number",
-          "description": "The alpha channel value, typically 0 to 1",
+          "description": "The alpha channel value (0 to 1, default 1 if omitted)",
           "minimum": 0,
           "maximum": 1
+        },
+        "hex": {
+          "type": "string",
+          "description": "Optional fallback color in 6-digit CSS hex notation (Section 4.1)",
+          "pattern": "^#[0-9A-Fa-f]{6}$"
         }
       },
       "required": ["colorSpace", "components"],
       "additionalProperties": false
     },
     "dimensionValue": {
-      "description": "A DTCG 1.0-compliant dimension value object",
+      "description": "A DTCG 2025.10-compliant dimension value object",
       "type": "object",
       "properties": {
         "value": {
@@ -168,18 +213,27 @@
         },
         "unit": {
           "type": "string",
-          "description": "The unit of measurement (DTCG 1.0 standard units)",
+          "description": "The unit of measurement (DTCG 2025.10 standard units)",
           "enum": ["px", "rem"]
         }
       },
-      "required": ["value", "unit"]
+      "required": ["value", "unit"],
+      "additionalProperties": true
     },
     "fontFamilyValue": {
-      "description": "A DTCG 1.0-compliant font family value",
+      "description": "A DTCG 2025.10-compliant font family value",
       "oneOf": [
         {
           "type": "string",
-          "description": "A single font family name or comma-separated font stack"
+          "description": "A single font family name"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "description": "An array of font family names (font stack)"
         },
         {
           "type": "string",
@@ -189,7 +243,7 @@
       ]
     },
     "fontWeightValue": {
-      "description": "A DTCG 1.0-compliant font weight value",
+      "description": "A DTCG 2025.10-compliant font weight value",
       "oneOf": [
         {
           "type": "number",
@@ -201,15 +255,23 @@
           "type": "string",
           "enum": [
             "thin",
+            "hairline",
             "extra-light",
+            "ultra-light",
             "light",
+            "normal",
             "regular",
+            "book",
             "medium",
             "semi-bold",
+            "demi-bold",
             "bold",
             "extra-bold",
+            "ultra-bold",
             "black",
-            "extra-black"
+            "heavy",
+            "extra-black",
+            "ultra-black"
           ],
           "description": "Named font weight"
         },
@@ -221,7 +283,7 @@
       ]
     },
     "numberValue": {
-      "description": "A DTCG 1.0-compliant number value",
+      "description": "A DTCG 2025.10-compliant number value",
       "oneOf": [
         {
           "type": "number"
@@ -234,12 +296,24 @@
       ]
     },
     "durationValue": {
-      "description": "A DTCG 1.0-compliant duration value",
+      "description": "A DTCG 2025.10-compliant duration value (Section 8.5)",
       "oneOf": [
         {
-          "type": "number",
-          "minimum": 0,
-          "description": "Duration in milliseconds"
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "number",
+              "minimum": 0,
+              "description": "An integer or floating-point value representing the numeric value"
+            },
+            "unit": {
+              "type": "string",
+              "enum": ["ms", "s"],
+              "description": "Unit of time: 'ms' (millisecond) or 's' (second)"
+            }
+          },
+          "required": ["value", "unit"],
+          "additionalProperties": false
         },
         {
           "type": "string",
@@ -249,7 +323,7 @@
       ]
     },
     "cubicBezierValue": {
-      "description": "A DTCG 1.0-compliant cubic bezier value",
+      "description": "A DTCG 2025.10-compliant cubic bezier value",
       "oneOf": [
         {
           "type": "array",
@@ -268,7 +342,7 @@
       ]
     },
     "shadowValue": {
-      "description": "A DTCG 1.0-compliant shadow value (single shadow or array of shadows)",
+      "description": "A DTCG 2025.10-compliant shadow value (single shadow or array of shadows)",
       "oneOf": [
         {
           "$ref": "#/$defs/singleShadowValue"
@@ -286,7 +360,8 @@
                 "description": "An alias to another shadow token"
               }
             ]
-          }
+          },
+          "minItems": 1
         },
         {
           "type": "string",
@@ -296,7 +371,7 @@
       ]
     },
     "singleShadowValue": {
-      "description": "A single shadow object with structured dimension and color values",
+      "description": "A DTCG 2025.10-compliant single shadow object",
       "type": "object",
       "properties": {
         "offsetX": {
@@ -364,10 +439,11 @@
           "description": "Whether the shadow is inset"
         }
       },
-      "required": ["offsetX", "offsetY", "blur", "spread", "color"]
+      "required": ["offsetX", "offsetY", "blur", "spread", "color"],
+      "additionalProperties": true
     },
     "typographyValue": {
-      "description": "A DTCG 1.0-compliant typography composite value",
+      "description": "A DTCG 2025.10-compliant typography composite value",
       "type": "object",
       "properties": {
         "fontFamily": {
@@ -425,17 +501,21 @@
               "description": "Unitless line height multiplier"
             },
             {
+              "$ref": "#/$defs/dimensionValue"
+            },
+            {
               "type": "string",
               "pattern": "^\\{[^}]+\\}$",
-              "description": "An alias to a number token"
+              "description": "An alias to a number or dimension token"
             }
           ]
         }
       },
-      "required": ["fontFamily", "fontSize"]
+      "required": ["fontFamily", "fontSize"],
+      "additionalProperties": true
     },
     "borderValue": {
-      "description": "A DTCG 1.0-compliant border composite value",
+      "description": "A DTCG 2025.10-compliant border composite value",
       "type": "object",
       "properties": {
         "color": {
@@ -475,10 +555,11 @@
           ]
         }
       },
-      "required": ["color", "width", "style"]
+      "required": ["color", "width", "style"],
+      "additionalProperties": true
     },
     "strokeStyleValue": {
-      "description": "A DTCG 1.0-compliant stroke style value",
+      "description": "A DTCG 2025.10-compliant stroke style value",
       "oneOf": [
         {
           "type": "string",
@@ -500,22 +581,28 @@
             "dashArray": {
               "type": "array",
               "items": {
-                "$ref": "#/$defs/dimensionValue"
+                "oneOf": [
+                  {
+                    "$ref": "#/$defs/dimensionValue"
+                  },
+                  {
+                    "type": "string",
+                    "pattern": "^\\{[^}]+\\}$",
+                    "description": "An alias to a dimension token"
+                  }
+                ]
               },
+              "minItems": 1,
               "description": "Array of dimension values for custom dash pattern"
             },
             "lineCap": {
               "type": "string",
               "enum": ["butt", "round", "square"],
               "description": "Line cap style"
-            },
-            "miterLimit": {
-              "type": "number",
-              "description": "Miter limit for line joins",
-              "minimum": 0
             }
           },
-          "required": ["dashArray"]
+          "required": ["dashArray"],
+          "additionalProperties": true
         },
         {
           "type": "string",
@@ -525,7 +612,7 @@
       ]
     },
     "gradientValue": {
-      "description": "A DTCG 1.0-compliant gradient value (array of color stops)",
+      "description": "A DTCG 2025.10-compliant gradient value (array of color stops)",
       "type": "array",
       "items": {
         "type": "object",
@@ -558,12 +645,13 @@
             ]
           }
         },
-        "required": ["color"]
+        "required": ["color"],
+        "additionalProperties": true
       },
       "minItems": 2
     },
     "transitionValue": {
-      "description": "A DTCG 1.0-compliant transition composite value",
+      "description": "A DTCG 2025.10-compliant transition composite value",
       "type": "object",
       "properties": {
         "duration": {
@@ -603,7 +691,8 @@
           ]
         }
       },
-      "required": ["duration", "timingFunction"]
+      "required": ["duration", "timingFunction"],
+      "additionalProperties": true
     }
   },
   "properties": {
@@ -611,14 +700,14 @@
       "type": "string",
       "description": "JSON Schema reference (optional)"
     },
-    "meta": {
+    "$extensions": {
       "type": "object",
-      "description": "Metadata about the token file (optional, non-standard)",
+      "description": "File-level extensions and custom properties",
       "additionalProperties": true
     }
   },
   "patternProperties": {
-    "^(?!\\$|meta).*": {
+    "^(?!\\$).*": {
       "anyOf": [
         {
           "$ref": "#/$defs/token"

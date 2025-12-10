@@ -40,7 +40,11 @@ export async function createClient() {
         ) {
           try {
             cookiesToSet.forEach(({ name, value, options }) =>
-              cookieStore.set(name, value, options)
+              // Ensure cookies are NOT httpOnly so browser client can read them
+              cookieStore.set(name, value, {
+                ...options,
+                httpOnly: false,
+              })
             );
           } catch {
             // The `setAll` method was called from a Server Component.

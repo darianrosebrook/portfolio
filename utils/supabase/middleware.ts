@@ -7,6 +7,23 @@ export async function updateSession(request: NextRequest) {
     request,
   });
 
+  // Check if we have auth cookies (without making network calls)
+  const allCookies = request.cookies.getAll();
+  const supabaseCookies = allCookies.filter((c) => c.name.startsWith('sb-'));
+
+  // Debug logging
+  if (supabaseCookies.length > 0) {
+    console.log('[Middleware] Found Supabase cookies:', {
+      count: supabaseCookies.length,
+      names: supabaseCookies.map((c) => c.name),
+    });
+  }
+
+  // Check for actual auth token cookies (not just code-verifier)
+  const hasAuthTokenCookies = supabaseCookies.some(
+    (c) => c.name.includes('-auth-token') && !c.name.includes('code-verifier')
+  );
+
   const supabase = createServerClient(
     env.nextPublicSupabaseUrl,
     env.nextPublicSupabaseAnonKey,
@@ -23,40 +40,34 @@ export async function updateSession(request: NextRequest) {
             request,
           });
           cookiesToSet.forEach(({ name, value, options }) =>
-            supabaseResponse.cookies.set(name, value, options)
+            // Ensure cookies are NOT httpOnly so browser client can read them
+            supabaseResponse.cookies.set(name, value, {
+              ...options,
+              httpOnly: false,
+            })
           );
         },
       },
     }
   );
 
-  // IMPORTANT: Avoid writing any logic between createServerClient and
-  // supabase.auth.getUser(). A simple mistake could make it very hard to debug
-  // issues with users being randomly logged out.
+  // Only protect /dashboard routes - skip network calls for other routes
+  // This avoids Edge Runtime network issues on every request
+  if (request.nextUrl.pathname.startsWith('/dashboard')) {
+    if (!hasAuthTokenCookies) {
+      // No auth cookies, redirect to home
+      console.log('[Middleware] No auth cookies, redirecting from dashboard');
+      const url = request.nextUrl.clone();
+      url.pathname = '/';
+      return NextResponse.redirect(url);
+    }
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user && request.nextUrl.pathname.startsWith('/dashboard')) {
-    // no user, potentially respond by redirecting the user to the login page
-    const url = request.nextUrl.clone();
-    url.pathname = '/';
-    return NextResponse.redirect(url);
+    // We have cookies - trust them and let the client validate
+    // This avoids network issues in Edge Runtime
+    console.log('[Middleware] Auth cookies present, allowing dashboard access');
   }
 
-  // IMPORTANT: You *must* return the supabaseResponse object as it is. If you're
-  // creating a new response object with NextResponse.next() make sure to:
-  // 1. Pass the request in it, like so:
-  //    const myNewResponse = NextResponse.next({ request })
-  // 2. Copy over the cookies, like so:
-  //    myNewResponse.cookies.setAll(supabaseResponse.cookies.getAll())
-  // 3. Change the myNewResponse object to fit your needs, but avoid changing
-  //    the cookies!
-  // 4. Finally:
-  //    return myNewResponse
-  // If this is not done, you may be causing the browser and server to go out
-  // of sync and terminate the user's session prematurely!
-
+  // For non-protected routes, just pass through
+  // The client-side will handle session validation
   return supabaseResponse;
 }

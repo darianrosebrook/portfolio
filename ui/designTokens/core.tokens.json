@@ -1826,62 +1826,62 @@
     }
   },
   "opacity": {
+    "$type": "number",
+    "$description": "Opacity values for transparency.",
     "50": {
       "$value": 0.04,
       "$description": "Very subtle transparency.",
-      "$type": "opacity"
+      "$type": "number"
     },
     "100": {
       "$value": 0.08,
       "$description": "Subtle transparency.",
-      "$type": "opacity"
+      "$type": "number"
     },
     "200": {
       "$value": 0.12,
       "$description": "Light transparency.",
-      "$type": "opacity"
+      "$type": "number"
     },
     "300": {
       "$value": 0.16,
       "$description": "Moderate transparency.",
-      "$type": "opacity"
+      "$type": "number"
     },
     "400": {
       "$value": 0.24,
       "$description": "Noticeable transparency.",
-      "$type": "opacity"
+      "$type": "number"
     },
     "500": {
       "$value": 0.32,
       "$description": "High transparency.",
-      "$type": "opacity"
+      "$type": "number"
     },
     "600": {
       "$value": 0.48,
       "$description": "Strong transparency.",
-      "$type": "opacity"
+      "$type": "number"
     },
     "700": {
       "$value": 0.64,
       "$description": "Very strong transparency.",
-      "$type": "opacity"
+      "$type": "number"
     },
     "800": {
       "$value": 0.8,
       "$description": "Nearly fully transparent.",
-      "$type": "opacity"
+      "$type": "number"
     },
     "900": {
       "$value": 0.96,
       "$description": "Almost opaque.",
-      "$type": "opacity"
+      "$type": "number"
     },
-    "$type": "opacity",
-    "$description": "Opacity values for transparency.",
     "full": {
       "$value": 1,
       "$description": "Fully opaque.",
-      "$type": "opacity"
+      "$type": "number"
     }
   },
   "dimension": {
@@ -1947,56 +1947,56 @@
   "shape": {
     "radius": {
       "none": {
-        "$type": "borderRadius",
-        "$value": "0"
+        "$type": "dimension",
+        "$value": { "value": 0, "unit": "px" }
       },
       "01": {
-        "$type": "borderRadius",
-        "$value": "2px"
+        "$type": "dimension",
+        "$value": { "value": 2, "unit": "px" }
       },
       "02": {
-        "$type": "borderRadius",
-        "$value": "4px"
+        "$type": "dimension",
+        "$value": { "value": 4, "unit": "px" }
       },
       "medium": {
-        "$type": "borderRadius",
-        "$value": "6px"
+        "$type": "dimension",
+        "$value": { "value": 6, "unit": "px" }
       },
       "03": {
-        "$type": "borderRadius",
-        "$value": "8px"
+        "$type": "dimension",
+        "$value": { "value": 8, "unit": "px" }
       },
       "04": {
-        "$type": "borderRadius",
-        "$value": "16px"
+        "$type": "dimension",
+        "$value": { "value": 16, "unit": "px" }
       },
       "05": {
-        "$type": "borderRadius",
-        "$value": "32px"
+        "$type": "dimension",
+        "$value": { "value": 32, "unit": "px" }
       },
       "full": {
-        "$type": "borderRadius",
-        "$value": "9999px"
+        "$type": "dimension",
+        "$value": { "value": 9999, "unit": "px" }
       }
     },
     "border": {
       "width": {
         "hairline": {
-          "$type": "borderWidth",
-          "$value": "1px"
+          "$type": "dimension",
+          "$value": { "value": 1, "unit": "px" }
         },
         "thick": {
-          "$type": "borderWidth",
-          "$value": "2px"
+          "$type": "dimension",
+          "$value": { "value": 2, "unit": "px" }
         }
       },
       "style": {
         "solid": {
-          "$type": "borderStyle",
+          "$type": "strokeStyle",
           "$value": "solid"
         },
         "dashed": {
-          "$type": "borderStyle",
+          "$type": "strokeStyle",
           "$value": "dashed"
         }
       }
@@ -2394,8 +2394,8 @@
   "interaction": {
     "focus": {
       "ringWidth": {
-        "$type": "borderWidth",
-        "$value": "2px",
+        "$type": "dimension",
+        "$value": { "value": 2, "unit": "px" },
         "$description": "Focus ring thickness"
       },
       "ringOffset": {
@@ -2407,7 +2407,7 @@
         "$description": "Space between element and focus ring"
       },
       "ringOpacity": {
-        "$type": "opacity",
+        "$type": "number",
         "$value": 0.5,
         "$description": "Focus ring transparency"
       }
@@ -2425,7 +2425,7 @@
     },
     "disabled": {
       "opacity": {
-        "$type": "opacity",
+        "$type": "number",
         "$value": 0.4,
         "$description": "Opacity for disabled elements"
       }
@@ -2494,7 +2494,7 @@
           "$value": "{typography.fontWeight.medium}"
         },
         "radius": {
-          "$type": "borderRadius",
+          "$type": "dimension",
           "$value": "{shape.radius.02}"
         }
       },
