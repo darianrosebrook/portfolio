@@ -15,7 +15,7 @@ import Progress from '@/ui/components/Progress';
 import Spinner from '@/ui/components/Spinner';
 import Divider from '@/ui/components/Divider';
 import Blockquote from '@/ui/components/Blockquote';
-import Switch from '@/ui/components/Switch';
+import { SwitchField } from '@/ui/components/Switch';
 import { FieldProvider, Field } from '@/ui/components/Field';
 import TextInputAdapter from '@/ui/components/Field/TextInputAdapter';
 import CheckboxAdapter from '@/ui/components/Field/CheckboxAdapter';
@@ -98,25 +98,21 @@ function SwitchDemo() {
         gap: 'var(--core-spacing-size-03)',
       }}
     >
-      <Switch
+      <SwitchField
         checked={checked1}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           setChecked1(e.target.checked)
         }
-      >
-        Enable notifications
-      </Switch>
-      <Switch
+        label="Enable notifications"
+      />
+      <SwitchField
         checked={checked2}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           setChecked2(e.target.checked)
         }
-      >
-        Dark mode
-      </Switch>
-      <Switch checked={false} disabled onChange={() => {}}>
-        Disabled switch
-      </Switch>
+        label="Dark mode"
+      />
+      <SwitchField checked={false} disabled onChange={() => {}} label="Disabled switch" />
     </div>
   );
 }
