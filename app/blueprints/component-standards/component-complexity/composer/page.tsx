@@ -1191,8 +1191,12 @@ function OTPField({ index }: { index: number }) {
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Backspace') {
       if (!chars[index]) {
-        const prev = e.currentTarget.previousElementSibling as HTMLInputElement;
-        prev?.focus();
+        // Traverse siblings backwards to find the previous input, skipping separators
+        let prev: Element | null = e.currentTarget.previousElementSibling;
+        while (prev && prev.tagName !== 'INPUT') {
+          prev = prev.previousElementSibling;
+        }
+        (prev as HTMLInputElement)?.focus();
       } else {
         clearChar(index);
       }
