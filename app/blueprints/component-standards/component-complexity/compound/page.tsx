@@ -866,15 +866,15 @@ export default function Page() {
 
         <h2>Why Compounds Exist</h2>
         <p>
-          If primitives are the raw parts, compounds are the predictable bundles.
-          They emerge when teams repeatedly combine the same primitives in the
-          same ways. Instead of asking designers and developers to reinvent the
-          bundle every time, the system codifies the convention.
+          If primitives are the raw parts, compounds are the predictable
+          bundles. They emerge when teams repeatedly combine the same primitives
+          in the same ways. Instead of asking designers and developers to
+          reinvent the bundle every time, the system codifies the convention.
         </p>
 
         <p>
-          Compounds give structure to combinations that look obvious in hindsight
-          but are fragile in practice:
+          Compounds give structure to combinations that look obvious in
+          hindsight but are fragile in practice:
         </p>
         <ul>
           <li>A text input always needs a label for accessibility.</li>
@@ -939,8 +939,8 @@ export default function Page() {
             semantics tied to the parent Table context.
           </li>
           <li>
-            <strong>ListItem:</strong> Bundles leading content, primary/secondary
-            text, and trailing actions in a consistent layout.
+            <strong>ListItem:</strong> Bundles leading content,
+            primary/secondary text, and trailing actions in a consistent layout.
           </li>
           <li>
             <strong>Avatar:</strong> Bundles image, fallback initials, and
@@ -1251,8 +1251,8 @@ export default function Page() {
 
         <ul>
           <li>
-            <strong>Examples:</strong> TextField, Card, Chip, TableRow, ListItem,
-            Avatar
+            <strong>Examples:</strong> TextField, Card, Chip, TableRow,
+            ListItem, Avatar
           </li>
           <li>
             <strong>Work of the system:</strong> Define conventions, encode
