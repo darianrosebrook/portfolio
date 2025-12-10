@@ -27,7 +27,7 @@ export const metadata = {
 import Avatar from '@/ui/components/Avatar';
 import Button from '@/ui/components/Button';
 // import { AnimatedLink } from '@/ui/components/Links/Links';
-import Badge from '@/ui/components/Badge';
+import Status from '@/ui/components/Status';
 import LogoMaruqee from '@/ui/modules/LogoMarquee';
 import Image from 'next/image';
 import BlueprintsWrapper from './BlueprintsWrapper';
@@ -86,7 +86,7 @@ export default function Home() {
         </div>
         <div className={styles.headingHero}>
           <div className="gooey">
-            <Badge variant="status" intent="danger">Not looking for work</Badge>
+            <Status status="error">Not looking for work</Status>
           </div>
           <h1 className="gooey">
             <span>Staff Design Technologist</span>
