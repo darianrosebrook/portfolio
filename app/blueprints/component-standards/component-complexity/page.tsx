@@ -1,11 +1,13 @@
 import Link from 'next/link';
+import styles from './page.module.scss';
 
 export const metadata = {
   title: 'Designing with Layers | Component Standards',
   description:
-    'A systems approach to components: primitives → compounds → composers → assemblies, with meta-patterns and case studies.',
+    'A systems approach to components: primitives, compounds, composers, and assemblies. Learn how layered component architecture scales design systems.',
   keywords: [
     'Design System',
+    'Component Architecture',
     'Layered Components',
     'Primitives',
     'Compounds',
@@ -16,211 +18,179 @@ export const metadata = {
 
 export default function Page() {
   return (
-    <section>
-      <article className="content">
-        <h1>Designing with Layers: A Systems Approach to Components</h1>
+    <section className="content">
+      <article>
+        <h1>Designing with Layers</h1>
+        <p className={styles.lead}>
+          A systems approach to component architecture that anticipates
+          complexity before it manifests in code.
+        </p>
+
+        <h2>The Problem with Flat Component Libraries</h2>
         <p>
           When design systems first take root, they begin with components:
           buttons, inputs, icons, toggles. The goal is consistency, but
-          consistency alone doesn’t explain why complexity creeps in. Over time,
-          you notice the neat catalog breaks down: forms behave differently
-          across contexts, toolbars overflow with actions, editors sprout
-          feature walk-throughs, and pagination mutates with ellipses and
+          consistency alone doesn&apos;t explain why complexity creeps in. Over
+          time, you notice the neat catalog breaks down: forms behave
+          differently across contexts, toolbars overflow with actions, editors
+          sprout feature walk-throughs, and pagination mutates with ellipses and
           compact modes.
         </p>
         <p>
-          The problem isn’t that your system is &quot;messy.&quot; The problem
-          is that you’re seeing composition at work. Complexity in digital
-          interfaces rarely comes from primitives themselves—it emerges when
-          small parts are combined, orchestrated, and pushed against application
+          The problem isn&apos;t that your system is &quot;messy.&quot; The
+          problem is that you&apos;re seeing{' '}
+          <strong>composition at work</strong>. Complexity in digital interfaces
+          rarely comes from primitives themselves&mdash;it emerges when small
+          parts are combined, orchestrated, and pushed against application
           workflows.
         </p>
         <p>
           To build systems that endure, you need a lens that helps you
-          anticipate this layering before it manifests in code. That’s what the
-          layered component methodology provides: a way to classify, compose,
-          and govern components across four levels of scale.
-        </p>
-        <h2>The Four Layers of Components</h2>
-        <h3>
-          1.{' '}
-          <Link href="/blueprints/component-standards/component-complexity/primitives">
-            Primitives
-          </Link>
-        </h3>
-        <p>
-          Primitives are the ground floor: irreducible building blocks like
-          buttons, text inputs, checkboxes, icons, and typographic elements.
-          Their goals are stability, accessibility, and consistency. They should
-          be as &quot;boring&quot; as possible.
-        </p>
-        <p> Examples: </p>
-        <ul>
-          <li>Button, Input, Checkbox, Icon</li>
-        </ul>
-        <p>Work of the system:</p>
-        <ul>
-          <li>naming, tokens, accessibility patterns</li>
-        </ul>
-        <p>Pitfalls:</p>
-        <ul>
-          <li>
-            bloated props, reinventing label or error logic inside each input
-          </li>
-        </ul>
-        <p>
-          <Link href="/blueprints/component-standards/component-complexity/primitives">
-            → Deep dive into Primitives
-          </Link>
+          anticipate this layering before it manifests in code. That&apos;s what
+          the layered component methodology provides: a way to classify,
+          compose, and govern components across four levels of scale.
         </p>
 
-        <h3>
-          2.{' '}
-          <Link href="/blueprints/component-standards/component-complexity/compound">
-            Compounds
-          </Link>
-        </h3>
+        <h2>The Four Layers</h2>
         <p>
-          Compounds bundle{' '}
-          <Link href="/blueprints/component-standards/component-complexity/primitives">
-            primitives
-          </Link>{' '}
-          into predictable, reusable groupings. They codify conventions and
-          reduce repeated decision-making.
-        </p>
-        <p>Examples:</p>
-        <ul>
-          <li>TextField (input + label + error), TableRow, Card</li>
-        </ul>
-        <p>Work of the system:</p>
-        <ul>
-          <li>defining which sub-parts exist, providing safe variations</li>
-        </ul>
-        <p>Pitfalls:</p>
-        <ul>
-          <li>
-            &quot;mega-props&quot; that attempt to account for every variation
-          </li>
-        </ul>
-        <p>
-          <Link href="/blueprints/component-standards/component-complexity/compound">
-            → Deep dive into Compounds
-          </Link>
+          Each layer represents a different level of complexity, responsibility,
+          and governance. Understanding where a component belongs helps teams
+          make better decisions about APIs, ownership, and extensibility.
         </p>
 
-        <h3>
-          3.{' '}
-          <Link href="/blueprints/component-standards/component-complexity/composer">
-            Composers
-          </Link>
-        </h3>
-        <p>
-          Composers orchestrate state, interaction, and context across multiple
-          children. This is where systems meet complexity: modals, toolbars,
-          message composers, pagination. They often contain{' '}
-          <Link href="/blueprints/component-standards/component-complexity/compound">
-            compounds
-          </Link>{' '}
-          and{' '}
-          <Link href="/blueprints/component-standards/component-complexity/primitives">
-            primitives
-          </Link>
-          .
-        </p>
-        <p>Examples:</p>
-        <ul>
-          <li>
-            Modal, Form Field (with label/error orchestration), Toolbar,
-            Pagination, Rich Text Editor
-          </li>
-        </ul>
-        <p>Work of the system:</p>
-        <ul>
-          <li>
-            governing orchestration, exposing slots, avoiding prop explosion
-          </li>
-        </ul>
-        <p>Pitfalls:</p>
-        <ul>
-          <li>
-            burying orchestration in ad-hoc props instead of a clear context
-            model
-          </li>
-        </ul>
-        <p>
-          <Link href="/blueprints/component-standards/component-complexity/composer">
-            → Deep dive into Composers
-          </Link>
-        </p>
+        <div className={styles.layerGrid}>
+          <div className={styles.layerCard}>
+            <span className={styles.layerNumber}>1</span>
+            <h3>
+              <Link href="/blueprints/component-standards/component-complexity/primitives">
+                Primitives
+              </Link>
+            </h3>
+            <p className={styles.layerTagline}>
+              The boring building blocks that make everything else possible.
+            </p>
+            <p>
+              Irreducible components like buttons, inputs, checkboxes, and
+              icons. Their goals are stability, accessibility, and consistency.
+              They should be as &quot;boring&quot; as possible.
+            </p>
+            <dl>
+              <dt>Examples</dt>
+              <dd>Button, Input, Checkbox, Icon, Typography</dd>
+              <dt>Work of the System</dt>
+              <dd>Naming, tokens, accessibility patterns</dd>
+              <dt>Watch for</dt>
+              <dd>Bloated props, reinventing label or error logic</dd>
+            </dl>
+            <hr />
+            <Link
+              href="/blueprints/component-standards/component-complexity/primitives"
+              className={styles.layerLink}
+            >
+              Deep dive into Primitives
+            </Link>
+          </div>
 
-        <h3>
-          4.{' '}
-          <Link href="/blueprints/component-standards/component-complexity/assemblies">
-            Assemblies
-          </Link>
-        </h3>
-        <p>
-          Assemblies are application-specific flows encoded as components. They
-          aren&apos;t universal system primitives; they&apos;re product
-          constructs that use the system's{' '}
-          <Link href="/blueprints/component-standards/component-complexity/primitives">
-            primitives
-          </Link>
-          ,{' '}
-          <Link href="/blueprints/component-standards/component-complexity/compound">
-            compounds
-          </Link>
-          , and{' '}
-          <Link href="/blueprints/component-standards/component-complexity/composer">
-            composers
-          </Link>
-          .
-        </p>
-        <p>Examples:</p>
-        <ul>
-          <li>Checkout Flow, Project Board, Analytics Dashboard</li>
-        </ul>
-        <p>Work of the system:</p>
-        <ul>
-          <li>provide the building blocks; assemblies live at the app layer</li>
-        </ul>
-        <p>Pitfalls:</p>
-        <ul>
-          <li>
-            accidentally &quot;baking in&quot; assemblies as universal
-            components, which ossifies the system which ossifies the system
-          </li>
-        </ul>
-        <p>
-          <Link href="/blueprints/component-standards/component-complexity/assemblies">
-            → Deep dive into Assemblies
-          </Link>
-        </p>
+          <div className={styles.layerCard}>
+            <span className={styles.layerNumber}>2</span>
+            <h3>
+              <Link href="/blueprints/component-standards/component-complexity/compound">
+                Compounds
+              </Link>
+            </h3>
+            <p className={styles.layerTagline}>
+              Blessed combinations with baked-in conventions.
+            </p>
+            <p>
+              Compounds bundle primitives into predictable, reusable groupings.
+              They codify conventions and reduce repeated decision-making across
+              teams.
+            </p>
+            <dl>
+              <dt>Examples</dt>
+              <dd>TextField, Card, TableRow, Chip, Avatar</dd>
+              <dt>Work of the System</dt>
+              <dd>Defining which sub-parts exist, providing safe variations</dd>
+              <dt>Watch for</dt>
+              <dd>&quot;Mega-props&quot; that account for every variation</dd>
+            </dl>
+            <hr />
+            <Link
+              href="/blueprints/component-standards/component-complexity/compound"
+              className={styles.layerLink}
+            >
+              Deep dive into Compounds
+            </Link>
+          </div>
 
-        <h3>Meta-Patterns Across All Layers</h3>
-        <p>Regardless of layer, three meta-patterns ensure scalability:</p>
-        <ul>
-          <li>
-            Slotting & Substitution: anticipate replaceable regions (children,
-            slots, render props).
-          </li>
-          <li>
-            Headless Abstractions: separate logic (hooks, providers) from
-            presentation (styled components).
-          </li>
-          <li>
-            Contextual Orchestration: treat composers as state providers, not
-            just visual containers.
-          </li>
-        </ul>
-        <p>
-          These aren&apos;t just coding tricks—they&apos;re governance
-          strategies. They help a design system resist collapse under
-          exceptions.
-        </p>
-        <h3>Designing with Layers: A Systems Approach to Components</h3>
-        <p>(excerpt with added section)</p>
-        <h3>Why Composition Matters</h3>
+          <div className={styles.layerCard}>
+            <span className={styles.layerNumber}>3</span>
+            <h3>
+              <Link href="/blueprints/component-standards/component-complexity/composer">
+                Composers
+              </Link>
+            </h3>
+            <p className={styles.layerTagline}>
+              Orchestration of state, interaction, and context.
+            </p>
+            <p>
+              Composers orchestrate state, focus, and behavior across multiple
+              children. This is where systems meet complexity: modals, toolbars,
+              message composers, pagination.
+            </p>
+            <dl>
+              <dt>Examples</dt>
+              <dd>Modal, FormField, Toolbar, Pagination, Rich Text Editor</dd>
+              <dt>Work of the System</dt>
+              <dd>
+                Governing orchestration, exposing slots, avoiding prop explosion
+              </dd>
+              <dt>Watch for</dt>
+              <dd>Burying orchestration in ad-hoc props instead of context</dd>
+            </dl>
+            <hr />
+            <Link
+              href="/blueprints/component-standards/component-complexity/composer"
+              className={styles.layerLink}
+            >
+              Deep dive into Composers
+            </Link>
+          </div>
+
+          <div className={styles.layerCard}>
+            <span className={styles.layerNumber}>4</span>
+            <h3>
+              <Link href="/blueprints/component-standards/component-complexity/assemblies">
+                Assemblies
+              </Link>
+            </h3>
+            <p className={styles.layerTagline}>
+              Product-level flows that live outside the system.
+            </p>
+            <p>
+              Assemblies are application-specific flows encoded as components.
+              They aren&apos;t universal system primitives; they&apos;re product
+              constructs that use the system&apos;s building blocks.
+            </p>
+            <dl>
+              <dt>Examples</dt>
+              <dd>Checkout Flow, Project Board, Analytics Dashboard</dd>
+              <dt>Work of the System</dt>
+              <dd>Provide building blocks; assemblies live at the app layer</dd>
+              <dt>Watch for</dt>
+              <dd>Accidentally &quot;baking in&quot; product-specific flows</dd>
+            </dl>
+            <hr />
+            <Link
+              href="/blueprints/component-standards/component-complexity/assemblies"
+              className={styles.layerLink}
+            >
+              Deep dive into Assemblies
+            </Link>
+          </div>
+        </div>
+
+        <h2>Why Composition Matters</h2>
         <p>
           Design systems cannot anticipate every product problem, every variant,
           or every edge case. If they try, they either collapse under prop bloat
@@ -229,136 +199,183 @@ export default function Page() {
           outcomes slow teams and erode trust.
         </p>
         <p>
-          Composition is the release valve. By leaning into patterns like
-          compound components in React, or slotting and substitution at the
-          system layer, you give product teams a way to:
+          <strong>Composition is the release valve.</strong> By leaning into
+          patterns like compound components, slotting, and substitution, you
+          give product teams a way to:
         </p>
         <ul>
           <li>
-            Use the system a la carte: pull in primitives and compounds without
-            committing to a rigid, monolithic API.
+            <strong>Use the system a la carte:</strong> Pull in primitives and
+            compounds without committing to a rigid, monolithic API.
           </li>
           <li>
-            Insert what they need: slot in custom behavior, add a
-            product-specific sub-control, or override presentation while still
+            <strong>Insert what they need:</strong> Slot in custom behavior, add
+            a product-specific sub-control, or override presentation while still
             sitting inside the system&apos;s orchestrator.
           </li>
           <li>
-            Omit what they don&apos;t: drop optional slots or props that
-            aren&apos;t relevant, without violating conventions.
+            <strong>Omit what they don&apos;t:</strong> Drop optional slots or
+            props that aren&apos;t relevant, without violating conventions.
           </li>
           <li>
-            Stay unblocked: product timelines aren&apos;t gated by triage
-            queues; teams compose from known parts and keep shipping.
+            <strong>Stay unblocked:</strong> Product timelines aren&apos;t gated
+            by triage queues; teams compose from known parts and keep shipping.
           </li>
           <li>
-            Adhere where possible: because orchestration is handled by the
-            composer (Field, Toolbar, Pagination), the accessibility, ARIA, and
-            state management rules are inherited &quot;for free.&quot;
+            <strong>Adhere where possible:</strong> Because orchestration is
+            handled by composers, accessibility, ARIA, and state management
+            rules are inherited &quot;for free.&quot;
           </li>
         </ul>
         <p>
-          This is why composition is a governance strategy, not just a coding
-          trick. It creates a continuum: the system team defines boundaries and
-          patterns, and product teams compose solutions inside those boundaries
-          without waiting for new one-off components.
+          This is why composition is a <em>governance strategy</em>, not just a
+          coding trick. It creates a continuum: the system team defines
+          boundaries and patterns, and product teams compose solutions inside
+          those boundaries without waiting for new one-off components.
         </p>
-        <h3>Case Studies in Complexity</h3>
-        <p>One-Time Passcode Input (Compound → Composer)</p>
+
+        <h2>Meta-Patterns Across All Layers</h2>
         <p>
-          What seems like &quot;just six inputs&quot; quickly becomes a
-          coordination problem: auto-advancing focus, backspacing, accessibility
-          for screen readers. By elevating the &quot;field state&quot; to a
-          composer with shared context, you allow each input cell to remain
-          simple while the container manages orchestration.
+          Regardless of layer, three meta-patterns ensure scalability and
+          prevent system collapse under exceptions:
         </p>
-        <p>Coachmarks & Product Walkthroughs (Composer)</p>
+        <dl>
+          <dt>Slotting &amp; Substitution</dt>
+          <dd>
+            Anticipate replaceable regions (children, slots, render props). This
+            allows product teams to customize without forking. The system
+            defines the shape; teams fill in the content.
+          </dd>
+          <dt>Headless Abstractions</dt>
+          <dd>
+            Separate logic (hooks, providers) from presentation (styled
+            components). This enables theming, testing, and platform-specific
+            implementations without duplicating behavior.
+          </dd>
+          <dt>Contextual Orchestration</dt>
+          <dd>
+            Treat composers as state providers, not just visual containers.
+            Context APIs share state between sub-parts without prop drilling,
+            making complex interactions manageable.
+          </dd>
+        </dl>
         <p>
-          Onboarding experiences often break system rules because they&apos;re
-          built in isolation. A coachmark composer integrates with your Popover
-          primitive, tracks step state, and ensures consistent keyboard
-          navigation and focus management. This prevents ad-hoc, inaccessible
-          walkthroughs.
+          These aren&apos;t just coding tricks&mdash;they&apos;re governance
+          strategies. They help a design system resist collapse under
+          exceptions.
         </p>
-        <p>Skeletons & Spinners (Primitives with Nuance)</p>
+
+        <h2>Thinking in Layers</h2>
         <p>
-          Loading indicators are &quot;simple,&quot; but their nuances matter:
-          skeletons must respect the shape of the eventual content (text vs
-          media vs datavis), and spinners must scale with container context. By
-          treating them as tokenized primitives with animation policies, you
-          avoid teams inventing divergent loaders.
+          For junior designers, the natural unit of thinking is the{' '}
+          <strong>screen</strong>: what needs to be drawn to make this flow
+          work? For system designers, the unit shifts to{' '}
+          <strong>grammar</strong>: what are the rules of combination, and how
+          do we prepare for emergent complexity?
         </p>
-        <p>Form Fields (Composer)</p>
-        <p>
-          Every control needs a label and error messaging. Instead of
-          duplicating logic in each input, a Field composer provides a context:
-          labels associate automatically, error messages announce via ARIA, and
-          useFieldControl() ensures consistency across text, select, and
-          checkbox controls. This is orchestration as governance.
-        </p>
-        <p>Toolbars & Filter Action Bars (Composer)</p>
-        <p>
-          Toolbars fail when they&apos;re just a row of buttons. The system
-          approach: actions are registered with priorities, measured with
-          ResizeObserver, and overflowed into a “More” menu. The composer
-          orchestrates roving tabindex and ARIA roles, keeping unknown sets of
-          actions consistent with app conventions.
-        </p>
-        <p>Pagination (Composer)</p>
-        <p>
-          Pagination looks trivial until totals grow. The composer governs page
-          windows, ellipses insertion, compact breakpoints, and cursor mode (for
-          unknown totals). By making layout policy explicit, you prevent every
-          product from reinventing &quot;pagination rules.&quot;
-        </p>
-        <p>Rich Text Editor (Composer with Plugins)</p>
-        <p>
-          The richest example of orchestration: schema, commands, plugins, and
-          UI slots (toolbar, bubble, slash, mentions). By isolating the engine
-          (ProseMirror, Slate, Lexical) behind a stable API, you give your
-          system resilience to vendor shifts. Complexity here is not
-          eliminated—it&apos;s governed.
-        </p>
-        <h3>Why This Matters</h3>
-        <p>
-          For junior designers, the natural unit of thinking is the screen: what
-          needs to be drawn to make this flow work? For system designers, the
-          unit shifts to grammar: what are the rules of combination, and how do
-          we prepare for emergent complexity?
-        </p>
-        <ul>
-          <li>Primitives demand standards.</li>
-          <li>Compounds demand conventions.</li>
-          <li>Composers demand orchestration.</li>
-          <li>Assemblies demand boundaries.</li>
-        </ul>
-        <p>Compounds demand conventions.</p>
-        <p>Composers demand orchestration.</p>
-        <p>Assemblies demand boundaries.</p>
+        <table className={styles.table}>
+          <thead>
+            <tr>
+              <th>Layer</th>
+              <th>Demand</th>
+              <th>Focus</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Primitives</td>
+              <td>Standards</td>
+              <td>Stability, tokens, accessibility</td>
+            </tr>
+            <tr>
+              <td>Compounds</td>
+              <td>Conventions</td>
+              <td>Blessed combinations, consistent spacing</td>
+            </tr>
+            <tr>
+              <td>Composers</td>
+              <td>Orchestration</td>
+              <td>State management, focus, context</td>
+            </tr>
+            <tr>
+              <td>Assemblies</td>
+              <td>Boundaries</td>
+              <td>Product-specific flows, business logic</td>
+            </tr>
+          </tbody>
+        </table>
         <p>
           When you apply this layered lens, your system stops being a library of
-          parts and becomes a language for products.
+          parts and becomes a <strong>language for products</strong>.
         </p>
-        <h3>Composition Makes Complexity Manageable</h3>
+
+        <h2>Complexity is Inevitable. Chaos is Optional.</h2>
         <p>
-          Complexity is inevitable. The goal isn&apos;t to eliminate it, but to
-          channel it into structures that remain legible, maintainable, and
-          extensible. Composition makes that channel possible. A button is
-          stable. A field is orchestrated. A toolbar overflows gracefully. A
-          rich text editor governs the chaos of paste and plugins. And
-          crucially: when product teams need something new, they don&apos;t need
-          to break the system—they compose with it.
+          The goal isn&apos;t to eliminate complexity&mdash;it&apos;s to channel
+          it into structures that remain legible, maintainable, and extensible.
+          Composition makes that channel possible:
+        </p>
+        <ul>
+          <li>A button is stable.</li>
+          <li>A field is orchestrated.</li>
+          <li>A toolbar overflows gracefully.</li>
+          <li>A rich text editor governs the chaos of paste and plugins.</li>
+        </ul>
+        <p>
+          And crucially: when product teams need something new, they don&apos;t
+          need to break the system&mdash;they compose with it.
         </p>
         <p>
           By recognizing components not as flat things, but as layered patterns,
-          you prepare your system for growth. You teach teams not only what to
-          build, but how to think about building—and that&apos;s the difference
-          between a component library and a true design system.
+          you prepare your system for growth. You teach teams not only{' '}
+          <em>what</em> to build, but <em>how</em> to think about
+          building&mdash;and that&apos;s the difference between a component
+          library and a true design system.
         </p>
-        <p>
-          That&apos;s how a design system grows from a catalog of parts into a
-          library for products.
-        </p>
+
+        <h2>Start Exploring</h2>
+        <nav className={styles.layerNav}>
+          <Link
+            href="/blueprints/component-standards/component-complexity/primitives"
+            className={styles.layerNavLink}
+          >
+            <span className={styles.layerNavNumber}>1</span>
+            <div>
+              <span className={styles.layerNavTitle}>Primitives</span>
+              <span className={styles.layerNavDesc}>The boring DNA</span>
+            </div>
+          </Link>
+          <Link
+            href="/blueprints/component-standards/component-complexity/compound"
+            className={styles.layerNavLink}
+          >
+            <span className={styles.layerNavNumber}>2</span>
+            <div>
+              <span className={styles.layerNavTitle}>Compounds</span>
+              <span className={styles.layerNavDesc}>Blessed bundles</span>
+            </div>
+          </Link>
+          <Link
+            href="/blueprints/component-standards/component-complexity/composer"
+            className={styles.layerNavLink}
+          >
+            <span className={styles.layerNavNumber}>3</span>
+            <div>
+              <span className={styles.layerNavTitle}>Composers</span>
+              <span className={styles.layerNavDesc}>Orchestrators</span>
+            </div>
+          </Link>
+          <Link
+            href="/blueprints/component-standards/component-complexity/assemblies"
+            className={styles.layerNavLink}
+          >
+            <span className={styles.layerNavNumber}>4</span>
+            <div>
+              <span className={styles.layerNavTitle}>Assemblies</span>
+              <span className={styles.layerNavDesc}>Product flows</span>
+            </div>
+          </Link>
+        </nav>
       </article>
     </section>
   );
