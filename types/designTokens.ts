@@ -4,7 +4,7 @@
 
 /**
  * Design Token Paths
- *
+ * 
  * Auto-generated TypeScript types for design token paths.
  * Use these types to ensure type safety when referencing tokens.
  */
@@ -1156,7 +1156,11 @@ export type ElevationTokenPath =
 /**
  * depth token paths
  */
-export type DepthTokenPath = 'depth.1' | 'depth.2' | 'depth.3' | 'depth.4';
+export type DepthTokenPath =
+  | 'depth.1'
+  | 'depth.2'
+  | 'depth.3'
+  | 'depth.4';
 
 /**
  * opacity token paths
@@ -1545,7 +1549,9 @@ export type DatavisTokenPath =
 /**
  * focus token paths
  */
-export type FocusTokenPath = 'focus.ring' | 'focus.ringOffset';
+export type FocusTokenPath =
+  | 'focus.ring'
+  | 'focus.ringOffset';
 
 /**
  * overlay token paths
@@ -1592,14 +1598,14 @@ export interface TokenGroup {
 
 /**
  * Usage Examples:
- *
+ * 
  * ```typescript
  * import type { TokenPath, CoreTokenPath } from "@/types/designTokens";
- *
+ * 
  * // Type-safe token references
  * const primaryColor: TokenPath = "core.color.blue.500";
  * const semanticBg: TokenPath = "semantic.color.background.primary";
- *
+ * 
  * // In token resolution functions
  * function resolveToken(path: TokenPath): string {
  *   // implementation...
