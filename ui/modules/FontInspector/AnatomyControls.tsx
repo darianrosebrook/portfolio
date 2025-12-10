@@ -1,4 +1,4 @@
-import ToggleSwitch from '../../components/ToggleSwitch';
+import { SwitchField } from '../../components/Switch';
 import { useInspector } from './FontInspector';
 import styles from './FontInspector.module.scss';
 /*
@@ -20,24 +20,22 @@ export const AnatomyControls: React.FC = () => {
       <div>
         <ul>
           <li>
-            <ToggleSwitch
+            <SwitchField
               checked={showDetails}
               onChange={(e) => setShowDetails(e.target.checked)}
-            >
-              Show Details
-            </ToggleSwitch>
+              label="Show Details"
+            />
           </li>
         </ul>
         <ul>
           {anatomyFeatures.map((feature) => (
             <li key={feature.feature}>
-              <ToggleSwitch
+              <SwitchField
                 checked={selectedAnatomy.has(feature.feature)}
                 onChange={() => toggleAnatomy(feature)}
                 disabled={feature.disabled}
-              >
-                {feature.label}
-              </ToggleSwitch>
+                label={feature.label}
+              />
             </li>
           ))}
         </ul>

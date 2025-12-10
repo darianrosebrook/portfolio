@@ -1,9 +1,28 @@
+/**
+ * @deprecated Use SwitchField from '@/ui/components/Switch' instead.
+ *
+ * Migration:
+ * ```tsx
+ * // Before:
+ * <ToggleSwitch checked={value} onChange={handler}>
+ *   Label text
+ * </ToggleSwitch>
+ *
+ * // After:
+ * <SwitchField
+ *   checked={value}
+ *   onChange={handler}
+ *   label="Label text"
+ * />
+ * ```
+ */
 'use client';
 import React, { ReactNode, useMemo } from 'react';
 import styles from './ToggleSwitch.module.scss';
 
 type NativeInputProps = React.ComponentProps<'input'>;
 
+/** @deprecated Use SwitchField instead */
 export type ToggleSwitchProps = Omit<
   NativeInputProps,
   'checked' | 'onChange' | 'type' | 'size'

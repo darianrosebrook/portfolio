@@ -10,7 +10,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import Avatar from '../../components/Avatar';
 import Button from '../../components/Button';
 import Popover from '../../components/Popover/Popover';
-import ToggleSwitch from '../../components/ToggleSwitch';
+import { SwitchField } from '../../components/Switch';
 import Logo from './Logo';
 import styles from './Navbar.module.css';
 
@@ -161,34 +161,31 @@ export default function Navbar({ pages = [] }: NavbarProps) {
               <Popover.Content>
                 <ul className="menuList">
                   <li>
-                    <ToggleSwitch
+                    <SwitchField
                       checked={prefersReducedMotion}
                       onChange={handlePrefersReducedMotion}
                       size="lg"
-                    >
-                      Reduce motion
-                    </ToggleSwitch>
+                      label="Reduce motion"
+                    />
                   </li>
                   <li>
-                    <ToggleSwitch
+                    <SwitchField
                       checked={slider}
                       onChange={handleTheme}
                       size="lg"
-                    >
-                      Use {theme} theme
-                    </ToggleSwitch>
+                      label={`Use ${theme} theme`}
+                    />
                   </li>
                   {process.env.NODE_ENV === 'development' && (
                     <li>
-                      <ToggleSwitch
+                      <SwitchField
                         checked={performanceEnabled}
                         onChange={(e) =>
                           togglePerformanceMonitor(e.target.checked)
                         }
                         size="lg"
-                      >
-                        Performance monitor
-                      </ToggleSwitch>
+                        label="Performance monitor"
+                      />
                     </li>
                   )}
                 </ul>

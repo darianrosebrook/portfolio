@@ -2,7 +2,7 @@
 import type { Article, CaseStudy } from '@/types';
 import Button from '@/ui/components/Button';
 import Checkbox from '@/ui/components/Checkbox';
-import ToggleSwitch from '@/ui/components/ToggleSwitch';
+import { SwitchField } from '@/ui/components/Switch';
 import { VideoExtended } from '@/ui/modules/Tiptap/Extensions/VideoExtended';
 import { extractMetadata } from '@/utils/metadata';
 import CharacterCount from '@tiptap/extension-character-count';
@@ -218,13 +218,12 @@ export default function ContentEditor({
             Draft
           </label>
           <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-            <ToggleSwitch
+            <SwitchField
               checked={draftToggleChecked}
               onChange={toggleDraft}
               id="draftToggle"
-            >
-              Draft Mode
-            </ToggleSwitch>
+              label="Draft Mode"
+            />
             <small>
               Current:{' '}
               {(record.status as RecordType['status']) === 'published'
