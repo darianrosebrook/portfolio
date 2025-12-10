@@ -10,22 +10,14 @@
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
-          "components": [
-            0,
-            0,
-            0
-          ]
+          "components": [0, 0, 0]
         }
       },
       "white": {
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
-          "components": [
-            1,
-            1,
-            1
-          ]
+          "components": [1, 1, 1]
         }
       },
       "light": {
@@ -33,9 +25,7 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.9803921568627451,
-            0.9803921568627451,
-            0.9803921568627451
+            0.9803921568627451, 0.9803921568627451, 0.9803921568627451
           ]
         }
       },
@@ -44,9 +34,7 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.0784313725490196,
-            0.0784313725490196,
-            0.0784313725490196
+            0.0784313725490196, 0.0784313725490196, 0.0784313725490196
           ]
         }
       },
@@ -54,11 +42,7 @@
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
-          "components": [
-            0,
-            0,
-            0
-          ],
+          "components": [0, 0, 0],
           "alpha": 0
         }
       }
@@ -73,9 +57,7 @@
             "$value": {
               "colorSpace": "srgb",
               "components": [
-                0.8509803921568627,
-                0.9529411764705882,
-                0.996078431372549
+                0.8509803921568627, 0.9529411764705882, 0.996078431372549
               ]
             }
           },
@@ -84,9 +66,7 @@
             "$value": {
               "colorSpace": "srgb",
               "components": [
-                0.5411764705882353,
-                0.8509803921568627,
-                0.9882352941176471
+                0.5411764705882353, 0.8509803921568627, 0.9882352941176471
               ]
             }
           },
@@ -95,9 +75,7 @@
             "$value": {
               "colorSpace": "srgb",
               "components": [
-                0.1803921568627451,
-                0.7254901960784313,
-                0.9764705882352941
+                0.1803921568627451, 0.7254901960784313, 0.9764705882352941
               ]
             }
           },
@@ -106,9 +84,7 @@
             "$value": {
               "colorSpace": "srgb",
               "components": [
-                0.11372549019607843,
-                0.5686274509803921,
-                0.984313725490196
+                0.11372549019607843, 0.5686274509803921, 0.984313725490196
               ]
             }
           },
@@ -117,9 +93,7 @@
             "$value": {
               "colorSpace": "srgb",
               "components": [
-                0.0392156862745098,
-                0.396078431372549,
-                0.996078431372549
+                0.0392156862745098, 0.396078431372549, 0.996078431372549
               ]
             }
           },
@@ -127,33 +101,21 @@
             "$type": "color",
             "$value": {
               "colorSpace": "srgb",
-              "components": [
-                0,
-                0.25882352941176473,
-                0.8627450980392157
-              ]
+              "components": [0, 0.25882352941176473, 0.8627450980392157]
             }
           },
           "700": {
             "$type": "color",
             "$value": {
               "colorSpace": "srgb",
-              "components": [
-                0,
-                0.17647058823529413,
-                0.6
-              ]
+              "components": [0, 0.17647058823529413, 0.6]
             }
           },
           "800": {
             "$type": "color",
             "$value": {
               "colorSpace": "srgb",
-              "components": [
-                0,
-                0.10588235294117647,
-                0.35294117647058826
-              ]
+              "components": [0, 0.10588235294117647, 0.35294117647058826]
             }
           }
         }
@@ -163,9 +125,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.9372549019607843,
-              0.9372549019607843,
-              0.9372549019607843
+              0.9372549019607843, 0.9372549019607843, 0.9372549019607843
             ]
           },
           "$description": "Level 100 of the neutral color scale, a very light shade.",
@@ -175,9 +135,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.807843137254902,
-              0.807843137254902,
-              0.807843137254902
+              0.807843137254902, 0.807843137254902, 0.807843137254902
             ]
           },
           "$description": "Level 200 of the neutral color scale, a light shade.",
@@ -187,9 +145,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.6823529411764706,
-              0.6823529411764706,
-              0.6823529411764706
+              0.6823529411764706, 0.6823529411764706, 0.6823529411764706
             ]
           },
           "$description": "Level 300 of the neutral color scale, a medium-light shade.",
@@ -199,9 +155,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.5607843137254902,
-              0.5607843137254902,
-              0.5607843137254902
+              0.5607843137254902, 0.5607843137254902, 0.5607843137254902
             ]
           },
           "$description": "Level 400 of the neutral color scale, a medium shade.",
@@ -211,9 +165,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.44313725490196076,
-              0.44313725490196076,
-              0.44313725490196076
+              0.44313725490196076, 0.44313725490196076, 0.44313725490196076
             ]
           },
           "$description": "Level 500 of the neutral color scale, a medium-dark shade.",
@@ -223,9 +175,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.3333333333333333,
-              0.3333333333333333,
-              0.3333333333333333
+              0.3333333333333333, 0.3333333333333333, 0.3333333333333333
             ]
           },
           "$description": "Level 600 of the neutral color scale, a dark shade.",
@@ -235,9 +185,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.22745098039215686,
-              0.22745098039215686,
-              0.22745098039215686
+              0.22745098039215686, 0.22745098039215686, 0.22745098039215686
             ]
           },
           "$description": "Level 700 of the neutral color scale, a very dark shade.",
@@ -247,9 +195,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.12941176470588237,
-              0.12941176470588237,
-              0.12941176470588237
+              0.12941176470588237, 0.12941176470588237, 0.12941176470588237
             ]
           },
           "$description": "Level 800 of the neutral color scale, the darkest shade.",
@@ -262,9 +208,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.9882352941176471,
-              0.9176470588235294,
-              0.9176470588235294
+              0.9882352941176471, 0.9176470588235294, 0.9176470588235294
             ]
           },
           "$description": "Level 100 of the red color scale, a very light red.",
@@ -274,9 +218,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.9686274509803922,
-              0.7568627450980392,
-              0.7607843137254902
+              0.9686274509803922, 0.7568627450980392, 0.7607843137254902
             ]
           },
           "$description": "Level 200 of the red color scale, a light red.",
@@ -286,9 +228,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.9490196078431372,
-              0.5803921568627451,
-              0.5843137254901961
+              0.9490196078431372, 0.5803921568627451, 0.5843137254901961
             ]
           },
           "$description": "Level 300 of the red color scale, a medium-light red.",
@@ -298,9 +238,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.9176470588235294,
-              0.39215686274509803,
-              0.396078431372549
+              0.9176470588235294, 0.39215686274509803, 0.396078431372549
             ]
           },
           "$description": "Level 400 of the red color scale, a medium red.",
@@ -310,9 +248,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.8509803921568627,
-              0.1607843137254902,
-              0.16862745098039217
+              0.8509803921568627, 0.1607843137254902, 0.16862745098039217
             ]
           },
           "$description": "Level 500 of the red color scale, a medium-dark red.",
@@ -321,11 +257,7 @@
         "600": {
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              0.6823529411764706,
-              0,
-              0.00392156862745098
-            ]
+            "components": [0.6823529411764706, 0, 0.00392156862745098]
           },
           "$description": "Level 600 of the red color scale, a dark red.",
           "$type": "color"
@@ -333,11 +265,7 @@
         "700": {
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              0.4823529411764706,
-              0,
-              0
-            ]
+            "components": [0.4823529411764706, 0, 0]
           },
           "$description": "Level 700 of the red color scale, a very dark red.",
           "$type": "color"
@@ -345,11 +273,7 @@
         "800": {
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              0.29411764705882354,
-              0,
-              0
-            ]
+            "components": [0.29411764705882354, 0, 0]
           },
           "$description": "Level 800 of the red color scale, the darkest red.",
           "$type": "color"
@@ -360,11 +284,7 @@
         "100": {
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              1,
-              0.9294117647058824,
-              0.8
-            ]
+            "components": [1, 0.9294117647058824, 0.8]
           },
           "$description": "Level 100 of the orange color scale, a very light orange.",
           "$type": "color"
@@ -372,11 +292,7 @@
         "200": {
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              1,
-              0.7686274509803922,
-              0.34509803921568627
-            ]
+            "components": [1, 0.7686274509803922, 0.34509803921568627]
           },
           "$description": "Level 200 of the orange color scale, a light orange.",
           "$type": "color"
@@ -384,11 +300,7 @@
         "300": {
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              0.996078431372549,
-              0.5803921568627451,
-              0
-            ]
+            "components": [0.996078431372549, 0.5803921568627451, 0]
           },
           "$description": "Level 300 of the orange color scale, a medium-light orange.",
           "$type": "color"
@@ -396,11 +308,7 @@
         "400": {
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              0.8431372549019608,
-              0.4627450980392157,
-              0
-            ]
+            "components": [0.8431372549019608, 0.4627450980392157, 0]
           },
           "$description": "Level 400 of the orange color scale, a medium orange.",
           "$type": "color"
@@ -408,11 +316,7 @@
         "500": {
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              0.6745098039215687,
-              0.3607843137254902,
-              0
-            ]
+            "components": [0.6745098039215687, 0.3607843137254902, 0]
           },
           "$description": "Level 500 of the orange color scale, a medium-dark orange.",
           "$type": "color"
@@ -420,11 +324,7 @@
         "600": {
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              0.5098039215686274,
-              0.27058823529411763,
-              0
-            ]
+            "components": [0.5098039215686274, 0.27058823529411763, 0]
           },
           "$description": "Level 600 of the orange color scale, a dark orange.",
           "$type": "color"
@@ -432,11 +332,7 @@
         "700": {
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              0.34901960784313724,
-              0.18823529411764706,
-              0
-            ]
+            "components": [0.34901960784313724, 0.18823529411764706, 0]
           },
           "$description": "Level 700 of the orange color scale, a very dark orange.",
           "$type": "color"
@@ -444,11 +340,7 @@
         "800": {
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              0.2,
-              0.10588235294117647,
-              0
-            ]
+            "components": [0.2, 0.10588235294117647, 0]
           },
           "$description": "Level 800 of the orange color scale, the darkest orange.",
           "$type": "color"
@@ -459,11 +351,7 @@
         "100": {
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              1,
-              0.9725490196078431,
-              0.8
-            ]
+            "components": [1, 0.9725490196078431, 0.8]
           },
           "$description": "very light yellow",
           "$type": "color"
@@ -471,11 +359,7 @@
         "200": {
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              1,
-              0.9019607843137255,
-              0.5019607843137255
-            ]
+            "components": [1, 0.9019607843137255, 0.5019607843137255]
           },
           "$description": "light yellow",
           "$type": "color"
@@ -483,11 +367,7 @@
         "300": {
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              1,
-              0.807843137254902,
-              0.2
-            ]
+            "components": [1, 0.807843137254902, 0.2]
           },
           "$description": "medium-light yellow",
           "$type": "color"
@@ -495,11 +375,7 @@
         "400": {
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              1,
-              0.7019607843137254,
-              0
-            ]
+            "components": [1, 0.7019607843137254, 0]
           },
           "$description": "medium yellow",
           "$type": "color"
@@ -507,11 +383,7 @@
         "500": {
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              0.8549019607843137,
-              0.6039215686274509,
-              0
-            ]
+            "components": [0.8549019607843137, 0.6039215686274509, 0]
           },
           "$description": "medium-dark yellow",
           "$type": "color"
@@ -519,11 +391,7 @@
         "600": {
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              0.6627450980392157,
-              0.47843137254901963,
-              0
-            ]
+            "components": [0.6627450980392157, 0.47843137254901963, 0]
           },
           "$description": "dark yellow",
           "$type": "color"
@@ -531,11 +399,7 @@
         "700": {
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              0.47843137254901963,
-              0.35294117647058826,
-              0
-            ]
+            "components": [0.47843137254901963, 0.35294117647058826, 0]
           },
           "$description": "very dark yellow",
           "$type": "color"
@@ -543,11 +407,7 @@
         "800": {
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              0.30196078431372547,
-              0.22745098039215686,
-              0
-            ]
+            "components": [0.30196078431372547, 0.22745098039215686, 0]
           },
           "$description": "darkest yellow",
           "$type": "color"
@@ -559,9 +419,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.8941176470588236,
-              0.9490196078431372,
-              0.8784313725490196
+              0.8941176470588236, 0.9490196078431372, 0.8784313725490196
             ]
           },
           "$description": "Level 100 of the green color scale, a very light green.",
@@ -571,9 +429,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.6901960784313725,
-              0.8549019607843137,
-              0.6431372549019608
+              0.6901960784313725, 0.8549019607843137, 0.6431372549019608
             ]
           },
           "$description": "Level 200 of the green color scale, a light green.",
@@ -583,9 +439,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.4745098039215686,
-              0.7490196078431373,
-              0.396078431372549
+              0.4745098039215686, 0.7490196078431373, 0.396078431372549
             ]
           },
           "$description": "Level 300 of the green color scale, a medium-light green.",
@@ -595,9 +449,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.3764705882352941,
-              0.6196078431372549,
-              0.2549019607843137
+              0.3764705882352941, 0.6196078431372549, 0.2549019607843137
             ]
           },
           "$description": "Level 400 of the green color scale, a medium green.",
@@ -607,9 +459,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.2823529411764706,
-              0.49411764705882355,
-              0.11764705882352941
+              0.2823529411764706, 0.49411764705882355, 0.11764705882352941
             ]
           },
           "$description": "Level 500 of the green color scale, a medium-dark green.",
@@ -618,11 +468,7 @@
         "600": {
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              0.2,
-              0.3764705882352941,
-              0.023529411764705882
-            ]
+            "components": [0.2, 0.3764705882352941, 0.023529411764705882]
           },
           "$description": "Level 600 of the green color scale, a dark green.",
           "$type": "color"
@@ -631,9 +477,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.13725490196078433,
-              0.2549019607843137,
-              0.01568627450980392
+              0.13725490196078433, 0.2549019607843137, 0.01568627450980392
             ]
           },
           "$description": "Level 700 of the green color scale, a very dark green.",
@@ -643,9 +487,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.0784313725490196,
-              0.1450980392156863,
-              0.00784313725490196
+              0.0784313725490196, 0.1450980392156863, 0.00784313725490196
             ]
           },
           "$description": "Level 800 of the green color scale, the darkest green.",
@@ -658,9 +500,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.8509803921568627,
-              0.9529411764705882,
-              0.996078431372549
+              0.8509803921568627, 0.9529411764705882, 0.996078431372549
             ]
           },
           "$description": "Level 100 of the blue color scale, a very light blue.",
@@ -670,9 +510,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.5411764705882353,
-              0.8509803921568627,
-              0.9882352941176471
+              0.5411764705882353, 0.8509803921568627, 0.9882352941176471
             ]
           },
           "$description": "Level 200 of the blue color scale, a light blue.",
@@ -682,9 +520,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.1803921568627451,
-              0.7254901960784313,
-              0.9764705882352941
+              0.1803921568627451, 0.7254901960784313, 0.9764705882352941
             ]
           },
           "$description": "Level 300 of the blue color scale, a medium-light blue.",
@@ -694,9 +530,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.11372549019607843,
-              0.5686274509803921,
-              0.984313725490196
+              0.11372549019607843, 0.5686274509803921, 0.984313725490196
             ]
           },
           "$description": "Level 400 of the blue color scale, a medium blue.",
@@ -706,9 +540,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.0392156862745098,
-              0.396078431372549,
-              0.996078431372549
+              0.0392156862745098, 0.396078431372549, 0.996078431372549
             ]
           },
           "$description": "Level 500 of the blue color scale, a medium-dark blue.",
@@ -717,11 +549,7 @@
         "600": {
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              0,
-              0.25882352941176473,
-              0.8627450980392157
-            ]
+            "components": [0, 0.25882352941176473, 0.8627450980392157]
           },
           "$description": "Level 600 of the blue color scale, a dark blue.",
           "$type": "color"
@@ -729,11 +557,7 @@
         "700": {
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              0,
-              0.17647058823529413,
-              0.6
-            ]
+            "components": [0, 0.17647058823529413, 0.6]
           },
           "$description": "Level 700 of the blue color scale, a very dark blue.",
           "$type": "color"
@@ -741,11 +565,7 @@
         "800": {
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              0,
-              0.10588235294117647,
-              0.35294117647058826
-            ]
+            "components": [0, 0.10588235294117647, 0.35294117647058826]
           },
           "$description": "Level 800 of the blue color scale, the darkest blue.",
           "$type": "color"
@@ -757,9 +577,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.792156862745098,
-              0.9725490196078431,
-              0.9686274509803922
+              0.792156862745098, 0.9725490196078431, 0.9686274509803922
             ]
           },
           "$description": "Level 100 of the teal color scale, a very light teal.",
@@ -769,9 +587,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.09411764705882353,
-              0.8588235294117647,
-              0.8588235294117647
+              0.09411764705882353, 0.8588235294117647, 0.8588235294117647
             ]
           },
           "$description": "Level 200 of the teal color scale, a light teal.",
@@ -781,9 +597,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.13333333333333333,
-              0.7058823529411765,
-              0.7058823529411765
+              0.13333333333333333, 0.7058823529411765, 0.7058823529411765
             ]
           },
           "$description": "Level 300 of the teal color scale, a medium-light teal.",
@@ -793,9 +607,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.1450980392156863,
-              0.5607843137254902,
-              0.5568627450980392
+              0.1450980392156863, 0.5607843137254902, 0.5568627450980392
             ]
           },
           "$description": "Level 400 of the teal color scale, a medium teal.",
@@ -805,9 +617,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.13725490196078433,
-              0.43529411764705883,
-              0.43529411764705883
+              0.13725490196078433, 0.43529411764705883, 0.43529411764705883
             ]
           },
           "$description": "Level 500 of the teal color scale, a medium-dark teal.",
@@ -817,9 +627,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.12549019607843137,
-              0.3254901960784314,
-              0.3254901960784314
+              0.12549019607843137, 0.3254901960784314, 0.3254901960784314
             ]
           },
           "$description": "Level 600 of the teal color scale, a dark teal.",
@@ -829,9 +637,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.10196078431372549,
-              0.22745098039215686,
-              0.22745098039215686
+              0.10196078431372549, 0.22745098039215686, 0.22745098039215686
             ]
           },
           "$description": "Level 700 of the teal color scale, a very dark teal.",
@@ -841,9 +647,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.07058823529411765,
-              0.11372549019607843,
-              0.11372549019607843
+              0.07058823529411765, 0.11372549019607843, 0.11372549019607843
             ]
           },
           "$description": "Level 800 of the teal color scale, the darkest teal.",
@@ -855,11 +659,7 @@
         "100": {
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              1,
-              0.9137254901960784,
-              0.996078431372549
-            ]
+            "components": [1, 0.9137254901960784, 0.996078431372549]
           },
           "$description": "Level 100 of the violet color scale, a very light violet.",
           "$type": "color"
@@ -867,11 +667,7 @@
         "200": {
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              1,
-              0.7098039215686275,
-              0.9882352941176471
-            ]
+            "components": [1, 0.7098039215686275, 0.9882352941176471]
           },
           "$description": "Level 200 of the violet color scale, a light violet.",
           "$type": "color"
@@ -879,11 +675,7 @@
         "300": {
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              1,
-              0.4823529411764706,
-              0.9803921568627451
-            ]
+            "components": [1, 0.4823529411764706, 0.9803921568627451]
           },
           "$description": "Level 300 of the violet color scale, a medium-light violet.",
           "$type": "color"
@@ -892,9 +684,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.9568627450980393,
-              0.19215686274509805,
-              0.9294117647058824
+              0.9568627450980393, 0.19215686274509805, 0.9294117647058824
             ]
           },
           "$description": "Level 400 of the violet color scale, a medium violet.",
@@ -904,9 +694,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.7568627450980392,
-              0.15294117647058825,
-              0.7372549019607844
+              0.7568627450980392, 0.15294117647058825, 0.7372549019607844
             ]
           },
           "$description": "Level 500 of the violet color scale, a medium-dark violet.",
@@ -916,9 +704,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.5764705882352941,
-              0.11372549019607843,
-              0.5607843137254902
+              0.5764705882352941, 0.11372549019607843, 0.5607843137254902
             ]
           },
           "$description": "Level 600 of the violet color scale, a dark violet.",
@@ -927,11 +713,7 @@
         "700": {
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              0.4,
-              0.0784313725490196,
-              0.38823529411764707
-            ]
+            "components": [0.4, 0.0784313725490196, 0.38823529411764707]
           },
           "$description": "Level 700 of the violet color scale, a very dark violet.",
           "$type": "color"
@@ -940,9 +722,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.23137254901960785,
-              0.047058823529411764,
-              0.22745098039215686
+              0.23137254901960785, 0.047058823529411764, 0.22745098039215686
             ]
           },
           "$description": "Level 800 of the violet color scale, the darkest violet.",
@@ -958,9 +738,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.26666666666666666,
-              0.00392156862745098,
-              0.32941176470588235
+              0.26666666666666666, 0.00392156862745098, 0.32941176470588235
             ]
           },
           "$description": "Viridis scale step 1 - darkest purple"
@@ -970,9 +748,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.2823529411764706,
-              0.15294117647058825,
-              0.4666666666666667
+              0.2823529411764706, 0.15294117647058825, 0.4666666666666667
             ]
           },
           "$description": "Viridis scale step 2 - dark purple"
@@ -982,9 +758,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.24705882352941178,
-              0.2901960784313726,
-              0.5411764705882353
+              0.24705882352941178, 0.2901960784313726, 0.5411764705882353
             ]
           },
           "$description": "Viridis scale step 3 - purple-blue"
@@ -994,9 +768,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.19215686274509805,
-              0.403921568627451,
-              0.5568627450980392
+              0.19215686274509805, 0.403921568627451, 0.5568627450980392
             ]
           },
           "$description": "Viridis scale step 4 - blue"
@@ -1006,9 +778,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.14901960784313725,
-              0.5137254901960784,
-              0.5607843137254902
+              0.14901960784313725, 0.5137254901960784, 0.5607843137254902
             ]
           },
           "$description": "Viridis scale step 5 - teal-blue"
@@ -1018,9 +788,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.12156862745098039,
-              0.615686274509804,
-              0.5411764705882353
+              0.12156862745098039, 0.615686274509804, 0.5411764705882353
             ]
           },
           "$description": "Viridis scale step 6 - teal"
@@ -1030,9 +798,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.4235294117647059,
-              0.807843137254902,
-              0.35294117647058826
+              0.4235294117647059, 0.807843137254902, 0.35294117647058826
             ]
           },
           "$description": "Viridis scale step 7 - green"
@@ -1042,9 +808,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.7137254901960784,
-              0.8705882352941177,
-              0.16862745098039217
+              0.7137254901960784, 0.8705882352941177, 0.16862745098039217
             ]
           },
           "$description": "Viridis scale step 8 - yellow-green"
@@ -1054,9 +818,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.996078431372549,
-              0.9098039215686274,
-              0.1450980392156863
+              0.996078431372549, 0.9098039215686274, 0.1450980392156863
             ]
           },
           "$description": "Viridis scale step 9 - yellow"
@@ -1065,11 +827,7 @@
           "$type": "color",
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              1,
-              0.9176470588235294,
-              0.27450980392156865
-            ]
+            "components": [1, 0.9176470588235294, 0.27450980392156865]
           },
           "$description": "Viridis scale step 10 - bright yellow"
         }
@@ -1079,11 +837,7 @@
           "$type": "color",
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              0,
-              0,
-              0.01568627450980392
-            ]
+            "components": [0, 0, 0.01568627450980392]
           },
           "$description": "Magma scale step 1 - black"
         },
@@ -1092,9 +846,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.10588235294117647,
-              0.047058823529411764,
-              0.25882352941176473
+              0.10588235294117647, 0.047058823529411764, 0.25882352941176473
             ]
           },
           "$description": "Magma scale step 2 - dark purple"
@@ -1104,9 +856,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.29411764705882354,
-              0.047058823529411764,
-              0.4196078431372549
+              0.29411764705882354, 0.047058823529411764, 0.4196078431372549
             ]
           },
           "$description": "Magma scale step 3 - purple"
@@ -1116,9 +866,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.47058823529411764,
-              0.10980392156862745,
-              0.42745098039215684
+              0.47058823529411764, 0.10980392156862745, 0.42745098039215684
             ]
           },
           "$description": "Magma scale step 4 - magenta-purple"
@@ -1128,9 +876,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.6470588235294118,
-              0.17254901960784313,
-              0.3764705882352941
+              0.6470588235294118, 0.17254901960784313, 0.3764705882352941
             ]
           },
           "$description": "Magma scale step 5 - magenta"
@@ -1140,9 +886,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.8117647058823529,
-              0.26666666666666666,
-              0.27450980392156865
+              0.8117647058823529, 0.26666666666666666, 0.27450980392156865
             ]
           },
           "$description": "Magma scale step 6 - red"
@@ -1152,9 +896,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.9294117647058824,
-              0.4117647058823529,
-              0.1450980392156863
+              0.9294117647058824, 0.4117647058823529, 0.1450980392156863
             ]
           },
           "$description": "Magma scale step 7 - orange-red"
@@ -1164,9 +906,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.984313725490196,
-              0.6039215686274509,
-              0.023529411764705882
+              0.984313725490196, 0.6039215686274509, 0.023529411764705882
             ]
           },
           "$description": "Magma scale step 8 - orange"
@@ -1176,9 +916,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.9686274509803922,
-              0.8156862745098039,
-              0.23529411764705882
+              0.9686274509803922, 0.8156862745098039, 0.23529411764705882
             ]
           },
           "$description": "Magma scale step 9 - yellow-orange"
@@ -1187,11 +925,7 @@
           "$type": "color",
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              0.9882352941176471,
-              1,
-              0.6431372549019608
-            ]
+            "components": [0.9882352941176471, 1, 0.6431372549019608]
           },
           "$description": "Magma scale step 10 - light yellow"
         }
@@ -1202,9 +936,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.050980392156862744,
-              0.03137254901960784,
-              0.5294117647058824
+              0.050980392156862744, 0.03137254901960784, 0.5294117647058824
             ]
           },
           "$description": "Plasma scale step 1 - dark blue"
@@ -1214,9 +946,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.27450980392156865,
-              0.011764705882352941,
-              0.6235294117647059
+              0.27450980392156865, 0.011764705882352941, 0.6235294117647059
             ]
           },
           "$description": "Plasma scale step 2 - purple-blue"
@@ -1226,9 +956,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.4470588235294118,
-              0.00392156862745098,
-              0.6588235294117647
+              0.4470588235294118, 0.00392156862745098, 0.6588235294117647
             ]
           },
           "$description": "Plasma scale step 3 - purple"
@@ -1238,9 +966,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.611764705882353,
-              0.09019607843137255,
-              0.6196078431372549
+              0.611764705882353, 0.09019607843137255, 0.6196078431372549
             ]
           },
           "$description": "Plasma scale step 4 - magenta-purple"
@@ -1250,9 +976,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.7411764705882353,
-              0.21568627450980393,
-              0.5254901960784314
+              0.7411764705882353, 0.21568627450980393, 0.5254901960784314
             ]
           },
           "$description": "Plasma scale step 5 - magenta"
@@ -1262,9 +986,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.8470588235294118,
-              0.3411764705882353,
-              0.4196078431372549
+              0.8470588235294118, 0.3411764705882353, 0.4196078431372549
             ]
           },
           "$description": "Plasma scale step 6 - pink-red"
@@ -1274,9 +996,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.9294117647058824,
-              0.4745098039215686,
-              0.3254901960784314
+              0.9294117647058824, 0.4745098039215686, 0.3254901960784314
             ]
           },
           "$description": "Plasma scale step 7 - orange-red"
@@ -1286,9 +1006,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.984313725490196,
-              0.6235294117647059,
-              0.22745098039215686
+              0.984313725490196, 0.6235294117647059, 0.22745098039215686
             ]
           },
           "$description": "Plasma scale step 8 - orange"
@@ -1298,9 +1016,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.9921568627450981,
-              0.792156862745098,
-              0.14901960784313725
+              0.9921568627450981, 0.792156862745098, 0.14901960784313725
             ]
           },
           "$description": "Plasma scale step 9 - yellow"
@@ -1310,9 +1026,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.9411764705882353,
-              0.9764705882352941,
-              0.12941176470588237
+              0.9411764705882353, 0.9764705882352941, 0.12941176470588237
             ]
           },
           "$description": "Plasma scale step 10 - bright yellow"
@@ -1323,11 +1037,7 @@
           "$type": "color",
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              0,
-              0,
-              0.01568627450980392
-            ]
+            "components": [0, 0, 0.01568627450980392]
           },
           "$description": "Inferno scale step 1 - black"
         },
@@ -1336,9 +1046,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.10588235294117647,
-              0.047058823529411764,
-              0.25882352941176473
+              0.10588235294117647, 0.047058823529411764, 0.25882352941176473
             ]
           },
           "$description": "Inferno scale step 2 - dark purple"
@@ -1348,9 +1056,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.2901960784313726,
-              0.047058823529411764,
-              0.4196078431372549
+              0.2901960784313726, 0.047058823529411764, 0.4196078431372549
             ]
           },
           "$description": "Inferno scale step 3 - purple"
@@ -1360,9 +1066,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.47058823529411764,
-              0.10980392156862745,
-              0.42745098039215684
+              0.47058823529411764, 0.10980392156862745, 0.42745098039215684
             ]
           },
           "$description": "Inferno scale step 4 - magenta-purple"
@@ -1372,9 +1076,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.6470588235294118,
-              0.17254901960784313,
-              0.3764705882352941
+              0.6470588235294118, 0.17254901960784313, 0.3764705882352941
             ]
           },
           "$description": "Inferno scale step 5 - magenta"
@@ -1384,9 +1086,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.8117647058823529,
-              0.26666666666666666,
-              0.27450980392156865
+              0.8117647058823529, 0.26666666666666666, 0.27450980392156865
             ]
           },
           "$description": "Inferno scale step 6 - red"
@@ -1396,9 +1096,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.9294117647058824,
-              0.4117647058823529,
-              0.1450980392156863
+              0.9294117647058824, 0.4117647058823529, 0.1450980392156863
             ]
           },
           "$description": "Inferno scale step 7 - orange-red"
@@ -1407,11 +1105,7 @@
           "$type": "color",
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              0.984313725490196,
-              0.6,
-              0.023529411764705882
-            ]
+            "components": [0.984313725490196, 0.6, 0.023529411764705882]
           },
           "$description": "Inferno scale step 8 - orange"
         },
@@ -1420,9 +1114,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.9686274509803922,
-              0.8156862745098039,
-              0.23529411764705882
+              0.9686274509803922, 0.8156862745098039, 0.23529411764705882
             ]
           },
           "$description": "Inferno scale step 9 - yellow"
@@ -1431,11 +1123,7 @@
           "$type": "color",
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              0.9882352941176471,
-              1,
-              0.6431372549019608
-            ]
+            "components": [0.9882352941176471, 1, 0.6431372549019608]
           },
           "$description": "Inferno scale step 10 - light yellow"
         }
@@ -1445,11 +1133,7 @@
           "$type": "color",
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              0,
-              0.13333333333333333,
-              0.3058823529411765
-            ]
+            "components": [0, 0.13333333333333333, 0.3058823529411765]
           },
           "$description": "Cividis scale step 1 - dark blue (colorblind-optimized)"
         },
@@ -1458,9 +1142,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.07058823529411765,
-              0.20784313725490197,
-              0.4392156862745098
+              0.07058823529411765, 0.20784313725490197, 0.4392156862745098
             ]
           },
           "$description": "Cividis scale step 2 - blue"
@@ -1470,9 +1152,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.23137254901960785,
-              0.28627450980392155,
-              0.4235294117647059
+              0.23137254901960785, 0.28627450980392155, 0.4235294117647059
             ]
           },
           "$description": "Cividis scale step 3 - blue-gray"
@@ -1482,9 +1162,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.3411764705882353,
-              0.36470588235294116,
-              0.42745098039215684
+              0.3411764705882353, 0.36470588235294116, 0.42745098039215684
             ]
           },
           "$description": "Cividis scale step 4 - gray-blue"
@@ -1494,9 +1172,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.4392156862745098,
-              0.44313725490196076,
-              0.45098039215686275
+              0.4392156862745098, 0.44313725490196076, 0.45098039215686275
             ]
           },
           "$description": "Cividis scale step 5 - gray"
@@ -1506,9 +1182,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.5411764705882353,
-              0.5254901960784314,
-              0.47058823529411764
+              0.5411764705882353, 0.5254901960784314, 0.47058823529411764
             ]
           },
           "$description": "Cividis scale step 6 - brown-gray"
@@ -1518,9 +1192,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.6470588235294118,
-              0.611764705882353,
-              0.4549019607843137
+              0.6470588235294118, 0.611764705882353, 0.4549019607843137
             ]
           },
           "$description": "Cividis scale step 7 - brown"
@@ -1530,9 +1202,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.7647058823529411,
-              0.7019607843137254,
-              0.4117647058823529
+              0.7647058823529411, 0.7019607843137254, 0.4117647058823529
             ]
           },
           "$description": "Cividis scale step 8 - olive"
@@ -1541,11 +1211,7 @@
           "$type": "color",
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              0.8823529411764706,
-              0.8,
-              0.3333333333333333
-            ]
+            "components": [0.8823529411764706, 0.8, 0.3333333333333333]
           },
           "$description": "Cividis scale step 9 - yellow-olive"
         },
@@ -1553,11 +1219,7 @@
           "$type": "color",
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              1,
-              0.9176470588235294,
-              0.27450980392156865
-            ]
+            "components": [1, 0.9176470588235294, 0.27450980392156865]
           },
           "$description": "Cividis scale step 10 - yellow"
         }
@@ -1568,9 +1230,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.26666666666666666,
-              0.00392156862745098,
-              0.32941176470588235
+              0.26666666666666666, 0.00392156862745098, 0.32941176470588235
             ]
           },
           "$description": "Categorical color 1 - viridis purple"
@@ -1580,9 +1240,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.19215686274509805,
-              0.403921568627451,
-              0.5568627450980392
+              0.19215686274509805, 0.403921568627451, 0.5568627450980392
             ]
           },
           "$description": "Categorical color 2 - viridis blue"
@@ -1592,9 +1250,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.14901960784313725,
-              0.5137254901960784,
-              0.5607843137254902
+              0.14901960784313725, 0.5137254901960784, 0.5607843137254902
             ]
           },
           "$description": "Categorical color 3 - viridis teal"
@@ -1604,9 +1260,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.4235294117647059,
-              0.807843137254902,
-              0.35294117647058826
+              0.4235294117647059, 0.807843137254902, 0.35294117647058826
             ]
           },
           "$description": "Categorical color 4 - viridis green"
@@ -1616,9 +1270,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.996078431372549,
-              0.9098039215686274,
-              0.1450980392156863
+              0.996078431372549, 0.9098039215686274, 0.1450980392156863
             ]
           },
           "$description": "Categorical color 5 - viridis yellow"
@@ -1628,9 +1280,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.8117647058823529,
-              0.26666666666666666,
-              0.27450980392156865
+              0.8117647058823529, 0.26666666666666666, 0.27450980392156865
             ]
           },
           "$description": "Categorical color 6 - magma red"
@@ -1640,9 +1290,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.611764705882353,
-              0.09019607843137255,
-              0.6196078431372549
+              0.611764705882353, 0.09019607843137255, 0.6196078431372549
             ]
           },
           "$description": "Categorical color 7 - plasma magenta"
@@ -1651,11 +1299,7 @@
           "$type": "color",
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              0.984313725490196,
-              0.6,
-              0.023529411764705882
-            ]
+            "components": [0.984313725490196, 0.6, 0.023529411764705882]
           },
           "$description": "Categorical color 8 - inferno orange"
         }
@@ -1666,9 +1310,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.26666666666666666,
-              0.00392156862745098,
-              0.32941176470588235
+              0.26666666666666666, 0.00392156862745098, 0.32941176470588235
             ]
           },
           "$description": "Divergent negative - viridis dark purple"
@@ -1678,9 +1320,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.14901960784313725,
-              0.5137254901960784,
-              0.5607843137254902
+              0.14901960784313725, 0.5137254901960784, 0.5607843137254902
             ]
           },
           "$description": "Divergent neutral - viridis teal"
@@ -1690,9 +1330,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.996078431372549,
-              0.9098039215686274,
-              0.1450980392156863
+              0.996078431372549, 0.9098039215686274, 0.1450980392156863
             ]
           },
           "$description": "Divergent positive - viridis yellow"
@@ -1705,9 +1343,7 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.11372549019607843,
-            0.5686274509803921,
-            0.984313725490196
+            0.11372549019607843, 0.5686274509803921, 0.984313725490196
           ]
         }
       },
@@ -1717,9 +1353,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.11372549019607843,
-              0.5686274509803921,
-              0.984313725490196
+              0.11372549019607843, 0.5686274509803921, 0.984313725490196
             ]
           },
           "$description": "Primary brand gradient"
@@ -1731,22 +1365,14 @@
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
-          "components": [
-            0,
-            0,
-            0
-          ],
+          "components": [0, 0, 0],
           "alpha": 0.4
         },
         "weak": {
           "$type": "color",
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              0,
-              0,
-              0
-            ],
+            "components": [0, 0, 0],
             "alpha": 0.24
           },
           "$description": "Light overlay scrim"
@@ -1755,11 +1381,7 @@
           "$type": "color",
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              0,
-              0,
-              0
-            ],
+            "components": [0, 0, 0],
             "alpha": 0.4
           },
           "$description": "Medium overlay scrim"
@@ -1768,11 +1390,7 @@
           "$type": "color",
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              0,
-              0,
-              0
-            ],
+            "components": [0, 0, 0],
             "alpha": 0.64
           },
           "$description": "Strong overlay scrim"
@@ -1791,9 +1409,7 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.5411764705882353,
-            0.8509803921568627,
-            0.9882352941176471
+            0.5411764705882353, 0.8509803921568627, 0.9882352941176471
           ]
         }
       },
@@ -1802,9 +1418,7 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.0784313725490196,
-            0.0784313725490196,
-            0.0784313725490196
+            0.0784313725490196, 0.0784313725490196, 0.0784313725490196
           ]
         }
       }
@@ -1815,26 +1429,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.0784313725490196,
-            0.0784313725490196,
-            0.0784313725490196
+            0.0784313725490196, 0.0784313725490196, 0.0784313725490196
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.0784313725490196,
-              0.0784313725490196,
-              0.0784313725490196
+              0.0784313725490196, 0.0784313725490196, 0.0784313725490196
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.9803921568627451,
-              0.9803921568627451,
-              0.9803921568627451
+              0.9803921568627451, 0.9803921568627451, 0.9803921568627451
             ]
           }
         },
@@ -1845,26 +1453,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.3333333333333333,
-            0.3333333333333333,
-            0.3333333333333333
+            0.3333333333333333, 0.3333333333333333, 0.3333333333333333
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.3333333333333333,
-              0.3333333333333333,
-              0.3333333333333333
+              0.3333333333333333, 0.3333333333333333, 0.3333333333333333
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.6823529411764706,
-              0.6823529411764706,
-              0.6823529411764706
+              0.6823529411764706, 0.6823529411764706, 0.6823529411764706
             ]
           }
         },
@@ -1875,26 +1477,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.44313725490196076,
-            0.44313725490196076,
-            0.44313725490196076
+            0.44313725490196076, 0.44313725490196076, 0.44313725490196076
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.44313725490196076,
-              0.44313725490196076,
-              0.44313725490196076
+              0.44313725490196076, 0.44313725490196076, 0.44313725490196076
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.5607843137254902,
-              0.5607843137254902,
-              0.5607843137254902
+              0.5607843137254902, 0.5607843137254902, 0.5607843137254902
             ]
           }
         },
@@ -1905,26 +1501,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.8509803921568627,
-            0.1607843137254902,
-            0.16862745098039217
+            0.8509803921568627, 0.1607843137254902, 0.16862745098039217
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.8509803921568627,
-              0.1607843137254902,
-              0.16862745098039217
+              0.8509803921568627, 0.1607843137254902, 0.16862745098039217
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.9176470588235294,
-              0.39215686274509803,
-              0.396078431372549
+              0.9176470588235294, 0.39215686274509803, 0.396078431372549
             ]
           }
         },
@@ -1935,26 +1525,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.8509803921568627,
-            0.1607843137254902,
-            0.16862745098039217
+            0.8509803921568627, 0.1607843137254902, 0.16862745098039217
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.8509803921568627,
-              0.1607843137254902,
-              0.16862745098039217
+              0.8509803921568627, 0.1607843137254902, 0.16862745098039217
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.9176470588235294,
-              0.39215686274509803,
-              0.396078431372549
+              0.9176470588235294, 0.39215686274509803, 0.396078431372549
             ]
           }
         },
@@ -1965,26 +1549,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.22745098039215686,
-            0.22745098039215686,
-            0.22745098039215686
+            0.22745098039215686, 0.22745098039215686, 0.22745098039215686
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.22745098039215686,
-              0.22745098039215686,
-              0.22745098039215686
+              0.22745098039215686, 0.22745098039215686, 0.22745098039215686
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.6823529411764706,
-              0.6823529411764706,
-              0.6823529411764706
+              0.6823529411764706, 0.6823529411764706, 0.6823529411764706
             ]
           }
         },
@@ -1995,26 +1573,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.8509803921568627,
-            0.1607843137254902,
-            0.16862745098039217
+            0.8509803921568627, 0.1607843137254902, 0.16862745098039217
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.8509803921568627,
-              0.1607843137254902,
-              0.16862745098039217
+              0.8509803921568627, 0.1607843137254902, 0.16862745098039217
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.9176470588235294,
-              0.39215686274509803,
-              0.396078431372549
+              0.9176470588235294, 0.39215686274509803, 0.396078431372549
             ]
           }
         },
@@ -2024,27 +1596,17 @@
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
-          "components": [
-            0.6823529411764706,
-            0,
-            0.00392156862745098
-          ]
+          "components": [0.6823529411764706, 0, 0.00392156862745098]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
-            "components": [
-              0.6823529411764706,
-              0,
-              0.00392156862745098
-            ]
+            "components": [0.6823529411764706, 0, 0.00392156862745098]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.9490196078431372,
-              0.5803921568627451,
-              0.5843137254901961
+              0.9490196078431372, 0.5803921568627451, 0.5843137254901961
             ]
           }
         },
@@ -2055,26 +1617,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.9176470588235294,
-            0.39215686274509803,
-            0.396078431372549
+            0.9176470588235294, 0.39215686274509803, 0.396078431372549
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.9176470588235294,
-              0.39215686274509803,
-              0.396078431372549
+              0.9176470588235294, 0.39215686274509803, 0.396078431372549
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.8509803921568627,
-              0.1607843137254902,
-              0.16862745098039217
+              0.8509803921568627, 0.1607843137254902, 0.16862745098039217
             ]
           }
         },
@@ -2084,28 +1640,16 @@
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
-          "components": [
-            1,
-            1,
-            1
-          ]
+          "components": [1, 1, 1]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
-            "components": [
-              1,
-              1,
-              1
-            ]
+            "components": [1, 1, 1]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
-            "components": [
-              1,
-              1,
-              1
-            ]
+            "components": [1, 1, 1]
           }
         },
         "$description": "Foreground color for text on brand backgrounds"
@@ -2124,26 +1668,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.0392156862745098,
-            0.396078431372549,
-            0.996078431372549
+            0.0392156862745098, 0.396078431372549, 0.996078431372549
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.0392156862745098,
-              0.396078431372549,
-              0.996078431372549
+              0.0392156862745098, 0.396078431372549, 0.996078431372549
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.11372549019607843,
-              0.5686274509803921,
-              0.984313725490196
+              0.11372549019607843, 0.5686274509803921, 0.984313725490196
             ]
           }
         },
@@ -2154,26 +1692,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.2823529411764706,
-            0.49411764705882355,
-            0.11764705882352941
+            0.2823529411764706, 0.49411764705882355, 0.11764705882352941
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.2823529411764706,
-              0.49411764705882355,
-              0.11764705882352941
+              0.2823529411764706, 0.49411764705882355, 0.11764705882352941
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.3764705882352941,
-              0.6196078431372549,
-              0.2549019607843137
+              0.3764705882352941, 0.6196078431372549, 0.2549019607843137
             ]
           }
         },
@@ -2183,28 +1715,16 @@
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
-          "components": [
-            0.6745098039215687,
-            0.3607843137254902,
-            0
-          ]
+          "components": [0.6745098039215687, 0.3607843137254902, 0]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
-            "components": [
-              0.6745098039215687,
-              0.3607843137254902,
-              0
-            ]
+            "components": [0.6745098039215687, 0.3607843137254902, 0]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
-            "components": [
-              0.8431372549019608,
-              0.4627450980392157,
-              0
-            ]
+            "components": [0.8431372549019608, 0.4627450980392157, 0]
           }
         },
         "$description": "Warning foreground color"
@@ -2213,27 +1733,17 @@
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
-          "components": [
-            0.4823529411764706,
-            0,
-            0
-          ]
+          "components": [0.4823529411764706, 0, 0]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
-            "components": [
-              0.4823529411764706,
-              0,
-              0
-            ]
+            "components": [0.4823529411764706, 0, 0]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.9490196078431372,
-              0.5803921568627451,
-              0.5843137254901961
+              0.9490196078431372, 0.5803921568627451, 0.5843137254901961
             ]
           }
         },
@@ -2243,27 +1753,17 @@
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
-          "components": [
-            0,
-            0.17647058823529413,
-            0.6
-          ]
+          "components": [0, 0.17647058823529413, 0.6]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
-            "components": [
-              0,
-              0.17647058823529413,
-              0.6
-            ]
+            "components": [0, 0.17647058823529413, 0.6]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.1803921568627451,
-              0.7254901960784313,
-              0.9764705882352941
+              0.1803921568627451, 0.7254901960784313, 0.9764705882352941
             ]
           }
         },
@@ -2274,26 +1774,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.13725490196078433,
-            0.2549019607843137,
-            0.01568627450980392
+            0.13725490196078433, 0.2549019607843137, 0.01568627450980392
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.13725490196078433,
-              0.2549019607843137,
-              0.01568627450980392
+              0.13725490196078433, 0.2549019607843137, 0.01568627450980392
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.4745098039215686,
-              0.7490196078431373,
-              0.396078431372549
+              0.4745098039215686, 0.7490196078431373, 0.396078431372549
             ]
           }
         },
@@ -2303,28 +1797,16 @@
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
-          "components": [
-            0.34901960784313724,
-            0.18823529411764706,
-            0
-          ]
+          "components": [0.34901960784313724, 0.18823529411764706, 0]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
-            "components": [
-              0.34901960784313724,
-              0.18823529411764706,
-              0
-            ]
+            "components": [0.34901960784313724, 0.18823529411764706, 0]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
-            "components": [
-              0.996078431372549,
-              0.5803921568627451,
-              0
-            ]
+            "components": [0.996078431372549, 0.5803921568627451, 0]
           }
         },
         "$description": "Foreground color on subtle warning backgrounds"
@@ -2333,27 +1815,17 @@
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
-          "components": [
-            0.4823529411764706,
-            0,
-            0
-          ]
+          "components": [0.4823529411764706, 0, 0]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
-            "components": [
-              0.4823529411764706,
-              0,
-              0
-            ]
+            "components": [0.4823529411764706, 0, 0]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.9686274509803922,
-              0.7568627450980392,
-              0.7607843137254902
+              0.9686274509803922, 0.7568627450980392, 0.7607843137254902
             ]
           }
         },
@@ -2449,26 +1921,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.6823529411764706,
-            0.6823529411764706,
-            0.6823529411764706
+            0.6823529411764706, 0.6823529411764706, 0.6823529411764706
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.6823529411764706,
-              0.6823529411764706,
-              0.6823529411764706
+              0.6823529411764706, 0.6823529411764706, 0.6823529411764706
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.44313725490196076,
-              0.44313725490196076,
-              0.44313725490196076
+              0.44313725490196076, 0.44313725490196076, 0.44313725490196076
             ]
           }
         },
@@ -2479,26 +1945,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.5607843137254902,
-            0.5607843137254902,
-            0.5607843137254902
+            0.5607843137254902, 0.5607843137254902, 0.5607843137254902
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.5607843137254902,
-              0.5607843137254902,
-              0.5607843137254902
+              0.5607843137254902, 0.5607843137254902, 0.5607843137254902
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.44313725490196076,
-              0.44313725490196076,
-              0.44313725490196076
+              0.44313725490196076, 0.44313725490196076, 0.44313725490196076
             ]
           }
         },
@@ -2509,26 +1969,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.9803921568627451,
-            0.9803921568627451,
-            0.9803921568627451
+            0.9803921568627451, 0.9803921568627451, 0.9803921568627451
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.9803921568627451,
-              0.9803921568627451,
-              0.9803921568627451
+              0.9803921568627451, 0.9803921568627451, 0.9803921568627451
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.0784313725490196,
-              0.0784313725490196,
-              0.0784313725490196
+              0.0784313725490196, 0.0784313725490196, 0.0784313725490196
             ]
           }
         },
@@ -2540,28 +1994,16 @@
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
-          "components": [
-            1,
-            1,
-            1
-          ]
+          "components": [1, 1, 1]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
-            "components": [
-              1,
-              1,
-              1
-            ]
+            "components": [1, 1, 1]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
-            "components": [
-              0,
-              0,
-              0
-            ]
+            "components": [0, 0, 0]
           }
         },
         "$description": "Primary background color"
@@ -2571,26 +2013,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.9372549019607843,
-            0.9372549019607843,
-            0.9372549019607843
+            0.9372549019607843, 0.9372549019607843, 0.9372549019607843
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.9372549019607843,
-              0.9372549019607843,
-              0.9372549019607843
+              0.9372549019607843, 0.9372549019607843, 0.9372549019607843
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.12941176470588237,
-              0.12941176470588237,
-              0.12941176470588237
+              0.12941176470588237, 0.12941176470588237, 0.12941176470588237
             ]
           }
         },
@@ -2601,26 +2037,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.807843137254902,
-            0.807843137254902,
-            0.807843137254902
+            0.807843137254902, 0.807843137254902, 0.807843137254902
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.807843137254902,
-              0.807843137254902,
-              0.807843137254902
+              0.807843137254902, 0.807843137254902, 0.807843137254902
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.22745098039215686,
-              0.22745098039215686,
-              0.22745098039215686
+              0.22745098039215686, 0.22745098039215686, 0.22745098039215686
             ]
           }
         },
@@ -2631,27 +2061,19 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.9686274509803922,
-            0.7568627450980392,
-            0.7607843137254902
+            0.9686274509803922, 0.7568627450980392, 0.7607843137254902
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.9686274509803922,
-              0.7568627450980392,
-              0.7607843137254902
+              0.9686274509803922, 0.7568627450980392, 0.7607843137254902
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
-            "components": [
-              0.4823529411764706,
-              0,
-              0
-            ]
+            "components": [0.4823529411764706, 0, 0]
           }
         },
         "$description": "Highlight background color"
@@ -2661,26 +2083,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.8509803921568627,
-            0.1607843137254902,
-            0.16862745098039217
+            0.8509803921568627, 0.1607843137254902, 0.16862745098039217
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.8509803921568627,
-              0.1607843137254902,
-              0.16862745098039217
+              0.8509803921568627, 0.1607843137254902, 0.16862745098039217
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.9176470588235294,
-              0.39215686274509803,
-              0.396078431372549
+              0.9176470588235294, 0.39215686274509803, 0.396078431372549
             ]
           }
         },
@@ -2691,26 +2107,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.807843137254902,
-            0.807843137254902,
-            0.807843137254902
+            0.807843137254902, 0.807843137254902, 0.807843137254902
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.807843137254902,
-              0.807843137254902,
-              0.807843137254902
+              0.807843137254902, 0.807843137254902, 0.807843137254902
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.22745098039215686,
-              0.22745098039215686,
-              0.22745098039215686
+              0.22745098039215686, 0.22745098039215686, 0.22745098039215686
             ]
           }
         },
@@ -2720,27 +2130,17 @@
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
-          "components": [
-            0.6823529411764706,
-            0,
-            0.00392156862745098
-          ]
+          "components": [0.6823529411764706, 0, 0.00392156862745098]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
-            "components": [
-              0.6823529411764706,
-              0,
-              0.00392156862745098
-            ]
+            "components": [0.6823529411764706, 0, 0.00392156862745098]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.8509803921568627,
-              0.1607843137254902,
-              0.16862745098039217
+              0.8509803921568627, 0.1607843137254902, 0.16862745098039217
             ]
           }
         },
@@ -2751,27 +2151,19 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.9882352941176471,
-            0.9176470588235294,
-            0.9176470588235294
+            0.9882352941176471, 0.9176470588235294, 0.9176470588235294
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.9882352941176471,
-              0.9176470588235294,
-              0.9176470588235294
+              0.9882352941176471, 0.9176470588235294, 0.9176470588235294
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
-            "components": [
-              0.29411764705882354,
-              0,
-              0
-            ]
+            "components": [0.29411764705882354, 0, 0]
           }
         },
         "$description": "Subtle danger background color"
@@ -2780,27 +2172,17 @@
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
-          "components": [
-            1,
-            1,
-            1
-          ]
+          "components": [1, 1, 1]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
-            "components": [
-              1,
-              1,
-              1
-            ]
+            "components": [1, 1, 1]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.0784313725490196,
-              0.0784313725490196,
-              0.0784313725490196
+              0.0784313725490196, 0.0784313725490196, 0.0784313725490196
             ]
           }
         },
@@ -2811,26 +2193,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.0392156862745098,
-            0.396078431372549,
-            0.996078431372549
+            0.0392156862745098, 0.396078431372549, 0.996078431372549
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.0392156862745098,
-              0.396078431372549,
-              0.996078431372549
+              0.0392156862745098, 0.396078431372549, 0.996078431372549
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.11372549019607843,
-              0.5686274509803921,
-              0.984313725490196
+              0.11372549019607843, 0.5686274509803921, 0.984313725490196
             ]
           }
         },
@@ -2849,11 +2225,7 @@
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
-          "components": [
-            0,
-            0,
-            0
-          ],
+          "components": [0, 0, 0],
           "alpha": 0.5
         },
         "$extensions": {
@@ -2866,27 +2238,17 @@
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
-          "components": [
-            0,
-            0.25882352941176473,
-            0.8627450980392157
-          ]
+          "components": [0, 0.25882352941176473, 0.8627450980392157]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
-            "components": [
-              0,
-              0.25882352941176473,
-              0.8627450980392157
-            ]
+            "components": [0, 0.25882352941176473, 0.8627450980392157]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.0392156862745098,
-              0.396078431372549,
-              0.996078431372549
+              0.0392156862745098, 0.396078431372549, 0.996078431372549
             ]
           }
         },
@@ -2897,27 +2259,19 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.8509803921568627,
-            0.9529411764705882,
-            0.996078431372549
+            0.8509803921568627, 0.9529411764705882, 0.996078431372549
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.8509803921568627,
-              0.9529411764705882,
-              0.996078431372549
+              0.8509803921568627, 0.9529411764705882, 0.996078431372549
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
-            "components": [
-              0,
-              0.10588235294117647,
-              0.35294117647058826
-            ]
+            "components": [0, 0.10588235294117647, 0.35294117647058826]
           }
         },
         "$description": "Subtle info background color"
@@ -2926,27 +2280,17 @@
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
-          "components": [
-            0.2,
-            0.3764705882352941,
-            0.023529411764705882
-          ]
+          "components": [0.2, 0.3764705882352941, 0.023529411764705882]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
-            "components": [
-              0.2,
-              0.3764705882352941,
-              0.023529411764705882
-            ]
+            "components": [0.2, 0.3764705882352941, 0.023529411764705882]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.2823529411764706,
-              0.49411764705882355,
-              0.11764705882352941
+              0.2823529411764706, 0.49411764705882355, 0.11764705882352941
             ]
           }
         },
@@ -2957,26 +2301,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.8941176470588236,
-            0.9490196078431372,
-            0.8784313725490196
+            0.8941176470588236, 0.9490196078431372, 0.8784313725490196
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.8941176470588236,
-              0.9490196078431372,
-              0.8784313725490196
+              0.8941176470588236, 0.9490196078431372, 0.8784313725490196
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.0784313725490196,
-              0.1450980392156863,
-              0.00784313725490196
+              0.0784313725490196, 0.1450980392156863, 0.00784313725490196
             ]
           }
         },
@@ -2986,28 +2324,16 @@
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
-          "components": [
-            0.8431372549019608,
-            0.4627450980392157,
-            0
-          ]
+          "components": [0.8431372549019608, 0.4627450980392157, 0]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
-            "components": [
-              0.8431372549019608,
-              0.4627450980392157,
-              0
-            ]
+            "components": [0.8431372549019608, 0.4627450980392157, 0]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
-            "components": [
-              0.6745098039215687,
-              0.3607843137254902,
-              0
-            ]
+            "components": [0.6745098039215687, 0.3607843137254902, 0]
           }
         },
         "$description": "Strong warning background color"
@@ -3016,28 +2342,16 @@
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
-          "components": [
-            1,
-            0.9294117647058824,
-            0.8
-          ]
+          "components": [1, 0.9294117647058824, 0.8]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
-            "components": [
-              1,
-              0.9294117647058824,
-              0.8
-            ]
+            "components": [1, 0.9294117647058824, 0.8]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
-            "components": [
-              0.2,
-              0.10588235294117647,
-              0
-            ]
+            "components": [0.2, 0.10588235294117647, 0]
           }
         },
         "$description": "Subtle warning background color"
@@ -3047,26 +2361,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.6823529411764706,
-            0.6823529411764706,
-            0.6823529411764706
+            0.6823529411764706, 0.6823529411764706, 0.6823529411764706
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.6823529411764706,
-              0.6823529411764706,
-              0.6823529411764706
+              0.6823529411764706, 0.6823529411764706, 0.6823529411764706
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.3333333333333333,
-              0.3333333333333333,
-              0.3333333333333333
+              0.3333333333333333, 0.3333333333333333, 0.3333333333333333
             ]
           }
         },
@@ -3077,26 +2385,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.807843137254902,
-            0.807843137254902,
-            0.807843137254902
+            0.807843137254902, 0.807843137254902, 0.807843137254902
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.807843137254902,
-              0.807843137254902,
-              0.807843137254902
+              0.807843137254902, 0.807843137254902, 0.807843137254902
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.22745098039215686,
-              0.22745098039215686,
-              0.22745098039215686
+              0.22745098039215686, 0.22745098039215686, 0.22745098039215686
             ]
           }
         },
@@ -3107,26 +2409,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.9372549019607843,
-            0.9372549019607843,
-            0.9372549019607843
+            0.9372549019607843, 0.9372549019607843, 0.9372549019607843
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.9372549019607843,
-              0.9372549019607843,
-              0.9372549019607843
+              0.9372549019607843, 0.9372549019607843, 0.9372549019607843
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.12941176470588237,
-              0.12941176470588237,
-              0.12941176470588237
+              0.12941176470588237, 0.12941176470588237, 0.12941176470588237
             ]
           }
         },
@@ -3137,26 +2433,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.9372549019607843,
-            0.9372549019607843,
-            0.9372549019607843
+            0.9372549019607843, 0.9372549019607843, 0.9372549019607843
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.9372549019607843,
-              0.9372549019607843,
-              0.9372549019607843
+              0.9372549019607843, 0.9372549019607843, 0.9372549019607843
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.12941176470588237,
-              0.12941176470588237,
-              0.12941176470588237
+              0.12941176470588237, 0.12941176470588237, 0.12941176470588237
             ]
           }
         },
@@ -3167,26 +2457,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.0784313725490196,
-            0.0784313725490196,
-            0.0784313725490196
+            0.0784313725490196, 0.0784313725490196, 0.0784313725490196
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.0784313725490196,
-              0.0784313725490196,
-              0.0784313725490196
+              0.0784313725490196, 0.0784313725490196, 0.0784313725490196
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.9803921568627451,
-              0.9803921568627451,
-              0.9803921568627451
+              0.9803921568627451, 0.9803921568627451, 0.9803921568627451
             ]
           }
         },
@@ -3199,26 +2483,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.6823529411764706,
-            0.6823529411764706,
-            0.6823529411764706
+            0.6823529411764706, 0.6823529411764706, 0.6823529411764706
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.6823529411764706,
-              0.6823529411764706,
-              0.6823529411764706
+              0.6823529411764706, 0.6823529411764706, 0.6823529411764706
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.3333333333333333,
-              0.3333333333333333,
-              0.3333333333333333
+              0.3333333333333333, 0.3333333333333333, 0.3333333333333333
             ]
           }
         },
@@ -3229,26 +2507,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.807843137254902,
-            0.807843137254902,
-            0.807843137254902
+            0.807843137254902, 0.807843137254902, 0.807843137254902
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.807843137254902,
-              0.807843137254902,
-              0.807843137254902
+              0.807843137254902, 0.807843137254902, 0.807843137254902
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.22745098039215686,
-              0.22745098039215686,
-              0.22745098039215686
+              0.22745098039215686, 0.22745098039215686, 0.22745098039215686
             ]
           }
         },
@@ -3259,26 +2531,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.5607843137254902,
-            0.5607843137254902,
-            0.5607843137254902
+            0.5607843137254902, 0.5607843137254902, 0.5607843137254902
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.5607843137254902,
-              0.5607843137254902,
-              0.5607843137254902
+              0.5607843137254902, 0.5607843137254902, 0.5607843137254902
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.44313725490196076,
-              0.44313725490196076,
-              0.44313725490196076
+              0.44313725490196076, 0.44313725490196076, 0.44313725490196076
             ]
           }
         },
@@ -3289,26 +2555,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.807843137254902,
-            0.807843137254902,
-            0.807843137254902
+            0.807843137254902, 0.807843137254902, 0.807843137254902
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.807843137254902,
-              0.807843137254902,
-              0.807843137254902
+              0.807843137254902, 0.807843137254902, 0.807843137254902
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.22745098039215686,
-              0.22745098039215686,
-              0.22745098039215686
+              0.22745098039215686, 0.22745098039215686, 0.22745098039215686
             ]
           }
         },
@@ -3319,26 +2579,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.807843137254902,
-            0.807843137254902,
-            0.807843137254902
+            0.807843137254902, 0.807843137254902, 0.807843137254902
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.807843137254902,
-              0.807843137254902,
-              0.807843137254902
+              0.807843137254902, 0.807843137254902, 0.807843137254902
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.22745098039215686,
-              0.22745098039215686,
-              0.22745098039215686
+              0.22745098039215686, 0.22745098039215686, 0.22745098039215686
             ]
           }
         },
@@ -3349,26 +2603,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.6823529411764706,
-            0.6823529411764706,
-            0.6823529411764706
+            0.6823529411764706, 0.6823529411764706, 0.6823529411764706
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.6823529411764706,
-              0.6823529411764706,
-              0.6823529411764706
+              0.6823529411764706, 0.6823529411764706, 0.6823529411764706
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.3333333333333333,
-              0.3333333333333333,
-              0.3333333333333333
+              0.3333333333333333, 0.3333333333333333, 0.3333333333333333
             ]
           }
         },
@@ -3379,26 +2627,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.5607843137254902,
-            0.5607843137254902,
-            0.5607843137254902
+            0.5607843137254902, 0.5607843137254902, 0.5607843137254902
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.5607843137254902,
-              0.5607843137254902,
-              0.5607843137254902
+              0.5607843137254902, 0.5607843137254902, 0.5607843137254902
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.44313725490196076,
-              0.44313725490196076,
-              0.44313725490196076
+              0.44313725490196076, 0.44313725490196076, 0.44313725490196076
             ]
           }
         },
@@ -3409,26 +2651,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.8509803921568627,
-            0.1607843137254902,
-            0.16862745098039217
+            0.8509803921568627, 0.1607843137254902, 0.16862745098039217
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.8509803921568627,
-              0.1607843137254902,
-              0.16862745098039217
+              0.8509803921568627, 0.1607843137254902, 0.16862745098039217
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.9176470588235294,
-              0.39215686274509803,
-              0.396078431372549
+              0.9176470588235294, 0.39215686274509803, 0.396078431372549
             ]
           }
         },
@@ -3439,26 +2675,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.0392156862745098,
-            0.396078431372549,
-            0.996078431372549
+            0.0392156862745098, 0.396078431372549, 0.996078431372549
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.0392156862745098,
-              0.396078431372549,
-              0.996078431372549
+              0.0392156862745098, 0.396078431372549, 0.996078431372549
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.11372549019607843,
-              0.5686274509803921,
-              0.984313725490196
+              0.11372549019607843, 0.5686274509803921, 0.984313725490196
             ]
           }
         },
@@ -3468,27 +2698,17 @@
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
-          "components": [
-            0.6823529411764706,
-            0,
-            0.00392156862745098
-          ]
+          "components": [0.6823529411764706, 0, 0.00392156862745098]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
-            "components": [
-              0.6823529411764706,
-              0,
-              0.00392156862745098
-            ]
+            "components": [0.6823529411764706, 0, 0.00392156862745098]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.8509803921568627,
-              0.1607843137254902,
-              0.16862745098039217
+              0.8509803921568627, 0.1607843137254902, 0.16862745098039217
             ]
           }
         },
@@ -3498,27 +2718,17 @@
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
-          "components": [
-            0,
-            0.25882352941176473,
-            0.8627450980392157
-          ]
+          "components": [0, 0.25882352941176473, 0.8627450980392157]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
-            "components": [
-              0,
-              0.25882352941176473,
-              0.8627450980392157
-            ]
+            "components": [0, 0.25882352941176473, 0.8627450980392157]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.0392156862745098,
-              0.396078431372549,
-              0.996078431372549
+              0.0392156862745098, 0.396078431372549, 0.996078431372549
             ]
           }
         },
@@ -3528,28 +2738,16 @@
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
-          "components": [
-            1,
-            1,
-            1
-          ]
+          "components": [1, 1, 1]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
-            "components": [
-              1,
-              1,
-              1
-            ]
+            "components": [1, 1, 1]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
-            "components": [
-              1,
-              1,
-              1
-            ]
+            "components": [1, 1, 1]
           }
         },
         "$description": "Border color for elements on colored backgrounds"
@@ -3558,27 +2756,17 @@
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
-          "components": [
-            0.2,
-            0.3764705882352941,
-            0.023529411764705882
-          ]
+          "components": [0.2, 0.3764705882352941, 0.023529411764705882]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
-            "components": [
-              0.2,
-              0.3764705882352941,
-              0.023529411764705882
-            ]
+            "components": [0.2, 0.3764705882352941, 0.023529411764705882]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.2823529411764706,
-              0.49411764705882355,
-              0.11764705882352941
+              0.2823529411764706, 0.49411764705882355, 0.11764705882352941
             ]
           }
         },
@@ -3588,28 +2776,16 @@
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
-          "components": [
-            0.5098039215686274,
-            0.27058823529411763,
-            0
-          ]
+          "components": [0.5098039215686274, 0.27058823529411763, 0]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
-            "components": [
-              0.5098039215686274,
-              0.27058823529411763,
-              0
-            ]
+            "components": [0.5098039215686274, 0.27058823529411763, 0]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
-            "components": [
-              0.6745098039215687,
-              0.3607843137254902,
-              0
-            ]
+            "components": [0.6745098039215687, 0.3607843137254902, 0]
           }
         },
         "$description": "Warning border color"
@@ -3619,26 +2795,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.5607843137254902,
-            0.5607843137254902,
-            0.5607843137254902
+            0.5607843137254902, 0.5607843137254902, 0.5607843137254902
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.5607843137254902,
-              0.5607843137254902,
-              0.5607843137254902
+              0.5607843137254902, 0.5607843137254902, 0.5607843137254902
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.44313725490196076,
-              0.44313725490196076,
-              0.44313725490196076
+              0.44313725490196076, 0.44313725490196076, 0.44313725490196076
             ]
           }
         },
@@ -3651,26 +2821,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.0392156862745098,
-            0.396078431372549,
-            0.996078431372549
+            0.0392156862745098, 0.396078431372549, 0.996078431372549
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.0392156862745098,
-              0.396078431372549,
-              0.996078431372549
+              0.0392156862745098, 0.396078431372549, 0.996078431372549
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.11372549019607843,
-              0.5686274509803921,
-              0.984313725490196
+              0.11372549019607843, 0.5686274509803921, 0.984313725490196
             ]
           }
         },
@@ -3681,26 +2845,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.2823529411764706,
-            0.49411764705882355,
-            0.11764705882352941
+            0.2823529411764706, 0.49411764705882355, 0.11764705882352941
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.2823529411764706,
-              0.49411764705882355,
-              0.11764705882352941
+              0.2823529411764706, 0.49411764705882355, 0.11764705882352941
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.3764705882352941,
-              0.6196078431372549,
-              0.2549019607843137
+              0.3764705882352941, 0.6196078431372549, 0.2549019607843137
             ]
           }
         },
@@ -3710,28 +2868,16 @@
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
-          "components": [
-            0.6745098039215687,
-            0.3607843137254902,
-            0
-          ]
+          "components": [0.6745098039215687, 0.3607843137254902, 0]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
-            "components": [
-              0.6745098039215687,
-              0.3607843137254902,
-              0
-            ]
+            "components": [0.6745098039215687, 0.3607843137254902, 0]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
-            "components": [
-              0.8431372549019608,
-              0.4627450980392157,
-              0
-            ]
+            "components": [0.8431372549019608, 0.4627450980392157, 0]
           }
         },
         "$description": "Warning status color"
@@ -3741,26 +2887,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.8509803921568627,
-            0.1607843137254902,
-            0.16862745098039217
+            0.8509803921568627, 0.1607843137254902, 0.16862745098039217
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.8509803921568627,
-              0.1607843137254902,
-              0.16862745098039217
+              0.8509803921568627, 0.1607843137254902, 0.16862745098039217
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.9176470588235294,
-              0.39215686274509803,
-              0.396078431372549
+              0.9176470588235294, 0.39215686274509803, 0.396078431372549
             ]
           }
         },
@@ -3771,26 +2911,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.11372549019607843,
-            0.5686274509803921,
-            0.984313725490196
+            0.11372549019607843, 0.5686274509803921, 0.984313725490196
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.11372549019607843,
-              0.5686274509803921,
-              0.984313725490196
+              0.11372549019607843, 0.5686274509803921, 0.984313725490196
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.0392156862745098,
-              0.396078431372549,
-              0.996078431372549
+              0.0392156862745098, 0.396078431372549, 0.996078431372549
             ]
           }
         },
@@ -3804,9 +2938,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.11372549019607843,
-              0.5686274509803921,
-              0.984313725490196
+              0.11372549019607843, 0.5686274509803921, 0.984313725490196
             ]
           },
           "$description": "Default trend indicator"
@@ -3816,9 +2948,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.2823529411764706,
-              0.49411764705882355,
-              0.11764705882352941
+              0.2823529411764706, 0.49411764705882355, 0.11764705882352941
             ]
           },
           "$description": "Positive trend indicator"
@@ -3828,9 +2958,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.8509803921568627,
-              0.1607843137254902,
-              0.16862745098039217
+              0.8509803921568627, 0.1607843137254902, 0.16862745098039217
             ]
           },
           "$description": "Negative trend indicator"
@@ -3840,9 +2968,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.44313725490196076,
-              0.44313725490196076,
-              0.44313725490196076
+              0.44313725490196076, 0.44313725490196076, 0.44313725490196076
             ]
           },
           "$description": "Neutral trend indicator"
@@ -3857,9 +2983,7 @@
             "$value": {
               "colorSpace": "srgb",
               "components": [
-                0.0392156862745098,
-                0.396078431372549,
-                0.996078431372549
+                0.0392156862745098, 0.396078431372549, 0.996078431372549
               ]
             },
             "$description": "Primary action background"
@@ -3868,11 +2992,7 @@
             "$type": "color",
             "$value": {
               "colorSpace": "srgb",
-              "components": [
-                0,
-                0.25882352941176473,
-                0.8627450980392157
-              ]
+              "components": [0, 0.25882352941176473, 0.8627450980392157]
             },
             "$description": "Primary action hover state"
           },
@@ -3880,11 +3000,7 @@
             "$type": "color",
             "$value": {
               "colorSpace": "srgb",
-              "components": [
-                0,
-                0.17647058823529413,
-                0.6
-              ]
+              "components": [0, 0.17647058823529413, 0.6]
             },
             "$description": "Primary action active state"
           },
@@ -3893,26 +3009,20 @@
             "$value": {
               "colorSpace": "srgb",
               "components": [
-                0.807843137254902,
-                0.807843137254902,
-                0.807843137254902
+                0.807843137254902, 0.807843137254902, 0.807843137254902
               ]
             },
             "$extensions": {
               "design.paths.light": {
                 "colorSpace": "srgb",
                 "components": [
-                  0.807843137254902,
-                  0.807843137254902,
-                  0.807843137254902
+                  0.807843137254902, 0.807843137254902, 0.807843137254902
                 ]
               },
               "design.paths.dark": {
                 "colorSpace": "srgb",
                 "components": [
-                  0.22745098039215686,
-                  0.22745098039215686,
-                  0.22745098039215686
+                  0.22745098039215686, 0.22745098039215686, 0.22745098039215686
                 ]
               }
             },
@@ -3925,26 +3035,20 @@
             "$value": {
               "colorSpace": "srgb",
               "components": [
-                0.9803921568627451,
-                0.9803921568627451,
-                0.9803921568627451
+                0.9803921568627451, 0.9803921568627451, 0.9803921568627451
               ]
             },
             "$extensions": {
               "design.paths.light": {
                 "colorSpace": "srgb",
                 "components": [
-                  0.9803921568627451,
-                  0.9803921568627451,
-                  0.9803921568627451
+                  0.9803921568627451, 0.9803921568627451, 0.9803921568627451
                 ]
               },
               "design.paths.dark": {
                 "colorSpace": "srgb",
                 "components": [
-                  0.0784313725490196,
-                  0.0784313725490196,
-                  0.0784313725490196
+                  0.0784313725490196, 0.0784313725490196, 0.0784313725490196
                 ]
               }
             },
@@ -3955,26 +3059,20 @@
             "$value": {
               "colorSpace": "srgb",
               "components": [
-                0.9372549019607843,
-                0.9372549019607843,
-                0.9372549019607843
+                0.9372549019607843, 0.9372549019607843, 0.9372549019607843
               ]
             },
             "$extensions": {
               "design.paths.light": {
                 "colorSpace": "srgb",
                 "components": [
-                  0.9372549019607843,
-                  0.9372549019607843,
-                  0.9372549019607843
+                  0.9372549019607843, 0.9372549019607843, 0.9372549019607843
                 ]
               },
               "design.paths.dark": {
                 "colorSpace": "srgb",
                 "components": [
-                  0.12941176470588237,
-                  0.12941176470588237,
-                  0.12941176470588237
+                  0.12941176470588237, 0.12941176470588237, 0.12941176470588237
                 ]
               }
             },
@@ -3985,26 +3083,20 @@
             "$value": {
               "colorSpace": "srgb",
               "components": [
-                0.807843137254902,
-                0.807843137254902,
-                0.807843137254902
+                0.807843137254902, 0.807843137254902, 0.807843137254902
               ]
             },
             "$extensions": {
               "design.paths.light": {
                 "colorSpace": "srgb",
                 "components": [
-                  0.807843137254902,
-                  0.807843137254902,
-                  0.807843137254902
+                  0.807843137254902, 0.807843137254902, 0.807843137254902
                 ]
               },
               "design.paths.dark": {
                 "colorSpace": "srgb",
                 "components": [
-                  0.22745098039215686,
-                  0.22745098039215686,
-                  0.22745098039215686
+                  0.22745098039215686, 0.22745098039215686, 0.22745098039215686
                 ]
               }
             },
@@ -4017,9 +3109,7 @@
             "$value": {
               "colorSpace": "srgb",
               "components": [
-                0.8509803921568627,
-                0.1607843137254902,
-                0.16862745098039217
+                0.8509803921568627, 0.1607843137254902, 0.16862745098039217
               ]
             },
             "$description": "Destructive action background"
@@ -4028,11 +3118,7 @@
             "$type": "color",
             "$value": {
               "colorSpace": "srgb",
-              "components": [
-                0.6823529411764706,
-                0,
-                0.00392156862745098
-              ]
+              "components": [0.6823529411764706, 0, 0.00392156862745098]
             },
             "$description": "Destructive action hover state"
           },
@@ -4040,11 +3126,7 @@
             "$type": "color",
             "$value": {
               "colorSpace": "srgb",
-              "components": [
-                0.4823529411764706,
-                0,
-                0
-              ]
+              "components": [0.4823529411764706, 0, 0]
             },
             "$description": "Destructive action active state"
           }
@@ -4056,11 +3138,7 @@
             "$type": "color",
             "$value": {
               "colorSpace": "srgb",
-              "components": [
-                1,
-                1,
-                1
-              ]
+              "components": [1, 1, 1]
             },
             "$description": "Primary action text"
           },
@@ -4069,9 +3147,7 @@
             "$value": {
               "colorSpace": "srgb",
               "components": [
-                0.5607843137254902,
-                0.5607843137254902,
-                0.5607843137254902
+                0.5607843137254902, 0.5607843137254902, 0.5607843137254902
               ]
             },
             "$description": "Primary action disabled text"
@@ -4083,26 +3159,20 @@
             "$value": {
               "colorSpace": "srgb",
               "components": [
-                0.0784313725490196,
-                0.0784313725490196,
-                0.0784313725490196
+                0.0784313725490196, 0.0784313725490196, 0.0784313725490196
               ]
             },
             "$extensions": {
               "design.paths.light": {
                 "colorSpace": "srgb",
                 "components": [
-                  0.0784313725490196,
-                  0.0784313725490196,
-                  0.0784313725490196
+                  0.0784313725490196, 0.0784313725490196, 0.0784313725490196
                 ]
               },
               "design.paths.dark": {
                 "colorSpace": "srgb",
                 "components": [
-                  0.9803921568627451,
-                  0.9803921568627451,
-                  0.9803921568627451
+                  0.9803921568627451, 0.9803921568627451, 0.9803921568627451
                 ]
               }
             },
@@ -4114,11 +3184,7 @@
             "$type": "color",
             "$value": {
               "colorSpace": "srgb",
-              "components": [
-                1,
-                1,
-                1
-              ]
+              "components": [1, 1, 1]
             },
             "$description": "Destructive action text"
           }
@@ -4131,9 +3197,7 @@
             "$value": {
               "colorSpace": "srgb",
               "components": [
-                0.0392156862745098,
-                0.396078431372549,
-                0.996078431372549
+                0.0392156862745098, 0.396078431372549, 0.996078431372549
               ]
             },
             "$description": "Primary action border"
@@ -4143,9 +3207,7 @@
             "$value": {
               "colorSpace": "srgb",
               "components": [
-                0.11372549019607843,
-                0.5686274509803921,
-                0.984313725490196
+                0.11372549019607843, 0.5686274509803921, 0.984313725490196
               ]
             },
             "$description": "Primary action focus ring"
@@ -4157,26 +3219,20 @@
             "$value": {
               "colorSpace": "srgb",
               "components": [
-                0.6823529411764706,
-                0.6823529411764706,
-                0.6823529411764706
+                0.6823529411764706, 0.6823529411764706, 0.6823529411764706
               ]
             },
             "$extensions": {
               "design.paths.light": {
                 "colorSpace": "srgb",
                 "components": [
-                  0.6823529411764706,
-                  0.6823529411764706,
-                  0.6823529411764706
+                  0.6823529411764706, 0.6823529411764706, 0.6823529411764706
                 ]
               },
               "design.paths.dark": {
                 "colorSpace": "srgb",
                 "components": [
-                  0.3333333333333333,
-                  0.3333333333333333,
-                  0.3333333333333333
+                  0.3333333333333333, 0.3333333333333333, 0.3333333333333333
                 ]
               }
             },
@@ -4187,26 +3243,20 @@
             "$value": {
               "colorSpace": "srgb",
               "components": [
-                0.5607843137254902,
-                0.5607843137254902,
-                0.5607843137254902
+                0.5607843137254902, 0.5607843137254902, 0.5607843137254902
               ]
             },
             "$extensions": {
               "design.paths.light": {
                 "colorSpace": "srgb",
                 "components": [
-                  0.5607843137254902,
-                  0.5607843137254902,
-                  0.5607843137254902
+                  0.5607843137254902, 0.5607843137254902, 0.5607843137254902
                 ]
               },
               "design.paths.dark": {
                 "colorSpace": "srgb",
                 "components": [
-                  0.44313725490196076,
-                  0.44313725490196076,
-                  0.44313725490196076
+                  0.44313725490196076, 0.44313725490196076, 0.44313725490196076
                 ]
               }
             },
@@ -4219,9 +3269,7 @@
             "$value": {
               "colorSpace": "srgb",
               "components": [
-                0.8509803921568627,
-                0.1607843137254902,
-                0.16862745098039217
+                0.8509803921568627, 0.1607843137254902, 0.16862745098039217
               ]
             },
             "$description": "Destructive action border"
@@ -4236,11 +3284,7 @@
             "$type": "color",
             "$value": {
               "colorSpace": "srgb",
-              "components": [
-                0.2,
-                0.3764705882352941,
-                0.023529411764705882
-              ]
+              "components": [0.2, 0.3764705882352941, 0.023529411764705882]
             },
             "$description": "Strong success background"
           },
@@ -4249,26 +3293,20 @@
             "$value": {
               "colorSpace": "srgb",
               "components": [
-                0.8941176470588236,
-                0.9490196078431372,
-                0.8784313725490196
+                0.8941176470588236, 0.9490196078431372, 0.8784313725490196
               ]
             },
             "$extensions": {
               "design.paths.light": {
                 "colorSpace": "srgb",
                 "components": [
-                  0.8941176470588236,
-                  0.9490196078431372,
-                  0.8784313725490196
+                  0.8941176470588236, 0.9490196078431372, 0.8784313725490196
                 ]
               },
               "design.paths.dark": {
                 "colorSpace": "srgb",
                 "components": [
-                  0.0784313725490196,
-                  0.1450980392156863,
-                  0.00784313725490196
+                  0.0784313725490196, 0.1450980392156863, 0.00784313725490196
                 ]
               }
             },
@@ -4280,28 +3318,16 @@
             "$type": "color",
             "$value": {
               "colorSpace": "srgb",
-              "components": [
-                0.8431372549019608,
-                0.4627450980392157,
-                0
-              ]
+              "components": [0.8431372549019608, 0.4627450980392157, 0]
             },
             "$extensions": {
               "design.paths.light": {
                 "colorSpace": "srgb",
-                "components": [
-                  0.8431372549019608,
-                  0.4627450980392157,
-                  0
-                ]
+                "components": [0.8431372549019608, 0.4627450980392157, 0]
               },
               "design.paths.dark": {
                 "colorSpace": "srgb",
-                "components": [
-                  0.5098039215686274,
-                  0.27058823529411763,
-                  0
-                ]
+                "components": [0.5098039215686274, 0.27058823529411763, 0]
               }
             },
             "$description": "Strong warning background"
@@ -4310,28 +3336,16 @@
             "$type": "color",
             "$value": {
               "colorSpace": "srgb",
-              "components": [
-                1,
-                0.9294117647058824,
-                0.8
-              ]
+              "components": [1, 0.9294117647058824, 0.8]
             },
             "$extensions": {
               "design.paths.light": {
                 "colorSpace": "srgb",
-                "components": [
-                  1,
-                  0.9294117647058824,
-                  0.8
-                ]
+                "components": [1, 0.9294117647058824, 0.8]
               },
               "design.paths.dark": {
                 "colorSpace": "srgb",
-                "components": [
-                  0.2,
-                  0.10588235294117647,
-                  0
-                ]
+                "components": [0.2, 0.10588235294117647, 0]
               }
             },
             "$description": "Subtle warning background"
@@ -4342,11 +3356,7 @@
             "$type": "color",
             "$value": {
               "colorSpace": "srgb",
-              "components": [
-                0.6823529411764706,
-                0,
-                0.00392156862745098
-              ]
+              "components": [0.6823529411764706, 0, 0.00392156862745098]
             },
             "$description": "Strong danger background"
           },
@@ -4355,27 +3365,19 @@
             "$value": {
               "colorSpace": "srgb",
               "components": [
-                0.9882352941176471,
-                0.9176470588235294,
-                0.9176470588235294
+                0.9882352941176471, 0.9176470588235294, 0.9176470588235294
               ]
             },
             "$extensions": {
               "design.paths.light": {
                 "colorSpace": "srgb",
                 "components": [
-                  0.9882352941176471,
-                  0.9176470588235294,
-                  0.9176470588235294
+                  0.9882352941176471, 0.9176470588235294, 0.9176470588235294
                 ]
               },
               "design.paths.dark": {
                 "colorSpace": "srgb",
-                "components": [
-                  0.29411764705882354,
-                  0,
-                  0
-                ]
+                "components": [0.29411764705882354, 0, 0]
               }
             },
             "$description": "Subtle danger background"
@@ -4386,11 +3388,7 @@
             "$type": "color",
             "$value": {
               "colorSpace": "srgb",
-              "components": [
-                0,
-                0.25882352941176473,
-                0.8627450980392157
-              ]
+              "components": [0, 0.25882352941176473, 0.8627450980392157]
             },
             "$description": "Strong info background"
           },
@@ -4399,27 +3397,19 @@
             "$value": {
               "colorSpace": "srgb",
               "components": [
-                0.8509803921568627,
-                0.9529411764705882,
-                0.996078431372549
+                0.8509803921568627, 0.9529411764705882, 0.996078431372549
               ]
             },
             "$extensions": {
               "design.paths.light": {
                 "colorSpace": "srgb",
                 "components": [
-                  0.8509803921568627,
-                  0.9529411764705882,
-                  0.996078431372549
+                  0.8509803921568627, 0.9529411764705882, 0.996078431372549
                 ]
               },
               "design.paths.dark": {
                 "colorSpace": "srgb",
-                "components": [
-                  0,
-                  0.10588235294117647,
-                  0.35294117647058826
-                ]
+                "components": [0, 0.10588235294117647, 0.35294117647058826]
               }
             },
             "$description": "Subtle info background"
@@ -4433,26 +3423,20 @@
             "$value": {
               "colorSpace": "srgb",
               "components": [
-                0.2823529411764706,
-                0.49411764705882355,
-                0.11764705882352941
+                0.2823529411764706, 0.49411764705882355, 0.11764705882352941
               ]
             },
             "$extensions": {
               "design.paths.light": {
                 "colorSpace": "srgb",
                 "components": [
-                  0.2823529411764706,
-                  0.49411764705882355,
-                  0.11764705882352941
+                  0.2823529411764706, 0.49411764705882355, 0.11764705882352941
                 ]
               },
               "design.paths.dark": {
                 "colorSpace": "srgb",
                 "components": [
-                  0.3764705882352941,
-                  0.6196078431372549,
-                  0.2549019607843137
+                  0.3764705882352941, 0.6196078431372549, 0.2549019607843137
                 ]
               }
             },
@@ -4463,26 +3447,20 @@
             "$value": {
               "colorSpace": "srgb",
               "components": [
-                0.13725490196078433,
-                0.2549019607843137,
-                0.01568627450980392
+                0.13725490196078433, 0.2549019607843137, 0.01568627450980392
               ]
             },
             "$extensions": {
               "design.paths.light": {
                 "colorSpace": "srgb",
                 "components": [
-                  0.13725490196078433,
-                  0.2549019607843137,
-                  0.01568627450980392
+                  0.13725490196078433, 0.2549019607843137, 0.01568627450980392
                 ]
               },
               "design.paths.dark": {
                 "colorSpace": "srgb",
                 "components": [
-                  0.6901960784313725,
-                  0.8549019607843137,
-                  0.6431372549019608
+                  0.6901960784313725, 0.8549019607843137, 0.6431372549019608
                 ]
               }
             },
@@ -4494,28 +3472,16 @@
             "$type": "color",
             "$value": {
               "colorSpace": "srgb",
-              "components": [
-                0.6745098039215687,
-                0.3607843137254902,
-                0
-              ]
+              "components": [0.6745098039215687, 0.3607843137254902, 0]
             },
             "$extensions": {
               "design.paths.light": {
                 "colorSpace": "srgb",
-                "components": [
-                  0.6745098039215687,
-                  0.3607843137254902,
-                  0
-                ]
+                "components": [0.6745098039215687, 0.3607843137254902, 0]
               },
               "design.paths.dark": {
                 "colorSpace": "srgb",
-                "components": [
-                  0.8431372549019608,
-                  0.4627450980392157,
-                  0
-                ]
+                "components": [0.8431372549019608, 0.4627450980392157, 0]
               }
             },
             "$description": "Warning text color"
@@ -4524,28 +3490,16 @@
             "$type": "color",
             "$value": {
               "colorSpace": "srgb",
-              "components": [
-                0.34901960784313724,
-                0.18823529411764706,
-                0
-              ]
+              "components": [0.34901960784313724, 0.18823529411764706, 0]
             },
             "$extensions": {
               "design.paths.light": {
                 "colorSpace": "srgb",
-                "components": [
-                  0.34901960784313724,
-                  0.18823529411764706,
-                  0
-                ]
+                "components": [0.34901960784313724, 0.18823529411764706, 0]
               },
               "design.paths.dark": {
                 "colorSpace": "srgb",
-                "components": [
-                  1,
-                  0.7686274509803922,
-                  0.34509803921568627
-                ]
+                "components": [1, 0.7686274509803922, 0.34509803921568627]
               }
             },
             "$description": "Warning text on subtle background"
@@ -4557,26 +3511,20 @@
             "$value": {
               "colorSpace": "srgb",
               "components": [
-                0.8509803921568627,
-                0.1607843137254902,
-                0.16862745098039217
+                0.8509803921568627, 0.1607843137254902, 0.16862745098039217
               ]
             },
             "$extensions": {
               "design.paths.light": {
                 "colorSpace": "srgb",
                 "components": [
-                  0.8509803921568627,
-                  0.1607843137254902,
-                  0.16862745098039217
+                  0.8509803921568627, 0.1607843137254902, 0.16862745098039217
                 ]
               },
               "design.paths.dark": {
                 "colorSpace": "srgb",
                 "components": [
-                  0.9176470588235294,
-                  0.39215686274509803,
-                  0.396078431372549
+                  0.9176470588235294, 0.39215686274509803, 0.396078431372549
                 ]
               }
             },
@@ -4586,27 +3534,17 @@
             "$type": "color",
             "$value": {
               "colorSpace": "srgb",
-              "components": [
-                0.4823529411764706,
-                0,
-                0
-              ]
+              "components": [0.4823529411764706, 0, 0]
             },
             "$extensions": {
               "design.paths.light": {
                 "colorSpace": "srgb",
-                "components": [
-                  0.4823529411764706,
-                  0,
-                  0
-                ]
+                "components": [0.4823529411764706, 0, 0]
               },
               "design.paths.dark": {
                 "colorSpace": "srgb",
                 "components": [
-                  0.9686274509803922,
-                  0.7568627450980392,
-                  0.7607843137254902
+                  0.9686274509803922, 0.7568627450980392, 0.7607843137254902
                 ]
               }
             },
@@ -4619,26 +3557,20 @@
             "$value": {
               "colorSpace": "srgb",
               "components": [
-                0.0392156862745098,
-                0.396078431372549,
-                0.996078431372549
+                0.0392156862745098, 0.396078431372549, 0.996078431372549
               ]
             },
             "$extensions": {
               "design.paths.light": {
                 "colorSpace": "srgb",
                 "components": [
-                  0.0392156862745098,
-                  0.396078431372549,
-                  0.996078431372549
+                  0.0392156862745098, 0.396078431372549, 0.996078431372549
                 ]
               },
               "design.paths.dark": {
                 "colorSpace": "srgb",
                 "components": [
-                  0.11372549019607843,
-                  0.5686274509803921,
-                  0.984313725490196
+                  0.11372549019607843, 0.5686274509803921, 0.984313725490196
                 ]
               }
             },
@@ -4648,27 +3580,17 @@
             "$type": "color",
             "$value": {
               "colorSpace": "srgb",
-              "components": [
-                0,
-                0.17647058823529413,
-                0.6
-              ]
+              "components": [0, 0.17647058823529413, 0.6]
             },
             "$extensions": {
               "design.paths.light": {
                 "colorSpace": "srgb",
-                "components": [
-                  0,
-                  0.17647058823529413,
-                  0.6
-                ]
+                "components": [0, 0.17647058823529413, 0.6]
               },
               "design.paths.dark": {
                 "colorSpace": "srgb",
                 "components": [
-                  0.5411764705882353,
-                  0.8509803921568627,
-                  0.9882352941176471
+                  0.5411764705882353, 0.8509803921568627, 0.9882352941176471
                 ]
               }
             },
@@ -4681,11 +3603,7 @@
           "$type": "color",
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              0.2,
-              0.3764705882352941,
-              0.023529411764705882
-            ]
+            "components": [0.2, 0.3764705882352941, 0.023529411764705882]
           },
           "$description": "Success border color"
         },
@@ -4693,11 +3611,7 @@
           "$type": "color",
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              0.5098039215686274,
-              0.27058823529411763,
-              0
-            ]
+            "components": [0.5098039215686274, 0.27058823529411763, 0]
           },
           "$description": "Warning border color"
         },
@@ -4705,11 +3619,7 @@
           "$type": "color",
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              0.6823529411764706,
-              0,
-              0.00392156862745098
-            ]
+            "components": [0.6823529411764706, 0, 0.00392156862745098]
           },
           "$description": "Danger border color"
         },
@@ -4717,11 +3627,7 @@
           "$type": "color",
           "$value": {
             "colorSpace": "srgb",
-            "components": [
-              0,
-              0.25882352941176473,
-              0.8627450980392157
-            ]
+            "components": [0, 0.25882352941176473, 0.8627450980392157]
           },
           "$description": "Info border color"
         }
@@ -4734,26 +3640,20 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.9803921568627451,
-              0.9803921568627451,
-              0.9803921568627451
+              0.9803921568627451, 0.9803921568627451, 0.9803921568627451
             ]
           },
           "$extensions": {
             "design.paths.light": {
               "colorSpace": "srgb",
               "components": [
-                0.9803921568627451,
-                0.9803921568627451,
-                0.9803921568627451
+                0.9803921568627451, 0.9803921568627451, 0.9803921568627451
               ]
             },
             "design.paths.dark": {
               "colorSpace": "srgb",
               "components": [
-                0.0784313725490196,
-                0.0784313725490196,
-                0.0784313725490196
+                0.0784313725490196, 0.0784313725490196, 0.0784313725490196
               ]
             }
           },
@@ -4764,26 +3664,20 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.9372549019607843,
-              0.9372549019607843,
-              0.9372549019607843
+              0.9372549019607843, 0.9372549019607843, 0.9372549019607843
             ]
           },
           "$extensions": {
             "design.paths.light": {
               "colorSpace": "srgb",
               "components": [
-                0.9372549019607843,
-                0.9372549019607843,
-                0.9372549019607843
+                0.9372549019607843, 0.9372549019607843, 0.9372549019607843
               ]
             },
             "design.paths.dark": {
               "colorSpace": "srgb",
               "components": [
-                0.12941176470588237,
-                0.12941176470588237,
-                0.12941176470588237
+                0.12941176470588237, 0.12941176470588237, 0.12941176470588237
               ]
             }
           },
@@ -4796,26 +3690,20 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.0784313725490196,
-              0.0784313725490196,
-              0.0784313725490196
+              0.0784313725490196, 0.0784313725490196, 0.0784313725490196
             ]
           },
           "$extensions": {
             "design.paths.light": {
               "colorSpace": "srgb",
               "components": [
-                0.0784313725490196,
-                0.0784313725490196,
-                0.0784313725490196
+                0.0784313725490196, 0.0784313725490196, 0.0784313725490196
               ]
             },
             "design.paths.dark": {
               "colorSpace": "srgb",
               "components": [
-                0.9803921568627451,
-                0.9803921568627451,
-                0.9803921568627451
+                0.9803921568627451, 0.9803921568627451, 0.9803921568627451
               ]
             }
           },
@@ -4826,26 +3714,20 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.3333333333333333,
-              0.3333333333333333,
-              0.3333333333333333
+              0.3333333333333333, 0.3333333333333333, 0.3333333333333333
             ]
           },
           "$extensions": {
             "design.paths.light": {
               "colorSpace": "srgb",
               "components": [
-                0.3333333333333333,
-                0.3333333333333333,
-                0.3333333333333333
+                0.3333333333333333, 0.3333333333333333, 0.3333333333333333
               ]
             },
             "design.paths.dark": {
               "colorSpace": "srgb",
               "components": [
-                0.6823529411764706,
-                0.6823529411764706,
-                0.6823529411764706
+                0.6823529411764706, 0.6823529411764706, 0.6823529411764706
               ]
             }
           },
@@ -4856,26 +3738,20 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.8509803921568627,
-              0.1607843137254902,
-              0.16862745098039217
+              0.8509803921568627, 0.1607843137254902, 0.16862745098039217
             ]
           },
           "$extensions": {
             "design.paths.light": {
               "colorSpace": "srgb",
               "components": [
-                0.8509803921568627,
-                0.1607843137254902,
-                0.16862745098039217
+                0.8509803921568627, 0.1607843137254902, 0.16862745098039217
               ]
             },
             "design.paths.dark": {
               "colorSpace": "srgb",
               "components": [
-                0.9176470588235294,
-                0.39215686274509803,
-                0.396078431372549
+                0.9176470588235294, 0.39215686274509803, 0.396078431372549
               ]
             }
           },
@@ -4886,26 +3762,20 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.22745098039215686,
-              0.22745098039215686,
-              0.22745098039215686
+              0.22745098039215686, 0.22745098039215686, 0.22745098039215686
             ]
           },
           "$extensions": {
             "design.paths.light": {
               "colorSpace": "srgb",
               "components": [
-                0.22745098039215686,
-                0.22745098039215686,
-                0.22745098039215686
+                0.22745098039215686, 0.22745098039215686, 0.22745098039215686
               ]
             },
             "design.paths.dark": {
               "colorSpace": "srgb",
               "components": [
-                0.6823529411764706,
-                0.6823529411764706,
-                0.6823529411764706
+                0.6823529411764706, 0.6823529411764706, 0.6823529411764706
               ]
             }
           },
@@ -4918,26 +3788,20 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.6823529411764706,
-              0.6823529411764706,
-              0.6823529411764706
+              0.6823529411764706, 0.6823529411764706, 0.6823529411764706
             ]
           },
           "$extensions": {
             "design.paths.light": {
               "colorSpace": "srgb",
               "components": [
-                0.6823529411764706,
-                0.6823529411764706,
-                0.6823529411764706
+                0.6823529411764706, 0.6823529411764706, 0.6823529411764706
               ]
             },
             "design.paths.dark": {
               "colorSpace": "srgb",
               "components": [
-                0.3333333333333333,
-                0.3333333333333333,
-                0.3333333333333333
+                0.3333333333333333, 0.3333333333333333, 0.3333333333333333
               ]
             }
           },
@@ -4951,26 +3815,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.0784313725490196,
-            0.0784313725490196,
-            0.0784313725490196
+            0.0784313725490196, 0.0784313725490196, 0.0784313725490196
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.0784313725490196,
-              0.0784313725490196,
-              0.0784313725490196
+              0.0784313725490196, 0.0784313725490196, 0.0784313725490196
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.0784313725490196,
-              0.0784313725490196,
-              0.0784313725490196
+              0.0784313725490196, 0.0784313725490196, 0.0784313725490196
             ]
           }
         },
@@ -4982,26 +3840,20 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.44313725490196076,
-              0.44313725490196076,
-              0.44313725490196076
+              0.44313725490196076, 0.44313725490196076, 0.44313725490196076
             ]
           },
           "$extensions": {
             "design.paths.light": {
               "colorSpace": "srgb",
               "components": [
-                0.44313725490196076,
-                0.44313725490196076,
-                0.44313725490196076
+                0.44313725490196076, 0.44313725490196076, 0.44313725490196076
               ]
             },
             "design.paths.dark": {
               "colorSpace": "srgb",
               "components": [
-                0.44313725490196076,
-                0.44313725490196076,
-                0.44313725490196076
+                0.44313725490196076, 0.44313725490196076, 0.44313725490196076
               ]
             }
           },
@@ -5014,26 +3866,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.0392156862745098,
-            0.396078431372549,
-            0.996078431372549
+            0.0392156862745098, 0.396078431372549, 0.996078431372549
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.0392156862745098,
-              0.396078431372549,
-              0.996078431372549
+              0.0392156862745098, 0.396078431372549, 0.996078431372549
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.0392156862745098,
-              0.396078431372549,
-              0.996078431372549
+              0.0392156862745098, 0.396078431372549, 0.996078431372549
             ]
           }
         },
@@ -5044,26 +3890,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.8509803921568627,
-            0.1607843137254902,
-            0.16862745098039217
+            0.8509803921568627, 0.1607843137254902, 0.16862745098039217
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.8509803921568627,
-              0.1607843137254902,
-              0.16862745098039217
+              0.8509803921568627, 0.1607843137254902, 0.16862745098039217
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.8509803921568627,
-              0.1607843137254902,
-              0.16862745098039217
+              0.8509803921568627, 0.1607843137254902, 0.16862745098039217
             ]
           }
         },
@@ -5074,26 +3914,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.0392156862745098,
-            0.396078431372549,
-            0.996078431372549
+            0.0392156862745098, 0.396078431372549, 0.996078431372549
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.0392156862745098,
-              0.396078431372549,
-              0.996078431372549
+              0.0392156862745098, 0.396078431372549, 0.996078431372549
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.0392156862745098,
-              0.396078431372549,
-              0.996078431372549
+              0.0392156862745098, 0.396078431372549, 0.996078431372549
             ]
           }
         },
@@ -5103,28 +3937,16 @@
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
-          "components": [
-            0.6745098039215687,
-            0.3607843137254902,
-            0
-          ]
+          "components": [0.6745098039215687, 0.3607843137254902, 0]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
-            "components": [
-              0.6745098039215687,
-              0.3607843137254902,
-              0
-            ]
+            "components": [0.6745098039215687, 0.3607843137254902, 0]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
-            "components": [
-              0.6745098039215687,
-              0.3607843137254902,
-              0
-            ]
+            "components": [0.6745098039215687, 0.3607843137254902, 0]
           }
         },
         "$description": "Property syntax color"
@@ -5134,26 +3956,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.8509803921568627,
-            0.1607843137254902,
-            0.16862745098039217
+            0.8509803921568627, 0.1607843137254902, 0.16862745098039217
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.8509803921568627,
-              0.1607843137254902,
-              0.16862745098039217
+              0.8509803921568627, 0.1607843137254902, 0.16862745098039217
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.8509803921568627,
-              0.1607843137254902,
-              0.16862745098039217
+              0.8509803921568627, 0.1607843137254902, 0.16862745098039217
             ]
           }
         },
@@ -5164,26 +3980,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.8509803921568627,
-            0.1607843137254902,
-            0.16862745098039217
+            0.8509803921568627, 0.1607843137254902, 0.16862745098039217
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.8509803921568627,
-              0.1607843137254902,
-              0.16862745098039217
+              0.8509803921568627, 0.1607843137254902, 0.16862745098039217
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.8509803921568627,
-              0.1607843137254902,
-              0.16862745098039217
+              0.8509803921568627, 0.1607843137254902, 0.16862745098039217
             ]
           }
         },
@@ -5193,27 +4003,17 @@
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
-          "components": [
-            0,
-            0.17647058823529413,
-            0.6
-          ]
+          "components": [0, 0.17647058823529413, 0.6]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
-            "components": [
-              0,
-              0.17647058823529413,
-              0.6
-            ]
+            "components": [0, 0.17647058823529413, 0.6]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.11372549019607843,
-              0.5686274509803921,
-              0.984313725490196
+              0.11372549019607843, 0.5686274509803921, 0.984313725490196
             ]
           }
         },
@@ -7083,9 +5883,7 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.3333333333333333,
-            0.3333333333333333,
-            0.3333333333333333
+            0.3333333333333333, 0.3333333333333333, 0.3333333333333333
           ]
         }
       },
@@ -7094,9 +5892,7 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.0784313725490196,
-            0.0784313725490196,
-            0.0784313725490196
+            0.0784313725490196, 0.0784313725490196, 0.0784313725490196
           ]
         }
       },
@@ -7105,9 +5901,7 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.5607843137254902,
-            0.5607843137254902,
-            0.5607843137254902
+            0.5607843137254902, 0.5607843137254902, 0.5607843137254902
           ]
         }
       }
@@ -7118,26 +5912,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.9372549019607843,
-            0.9372549019607843,
-            0.9372549019607843
+            0.9372549019607843, 0.9372549019607843, 0.9372549019607843
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.9372549019607843,
-              0.9372549019607843,
-              0.9372549019607843
+              0.9372549019607843, 0.9372549019607843, 0.9372549019607843
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.12941176470588237,
-              0.12941176470588237,
-              0.12941176470588237
+              0.12941176470588237, 0.12941176470588237, 0.12941176470588237
             ]
           }
         },
@@ -7148,26 +5936,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.807843137254902,
-            0.807843137254902,
-            0.807843137254902
+            0.807843137254902, 0.807843137254902, 0.807843137254902
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.807843137254902,
-              0.807843137254902,
-              0.807843137254902
+              0.807843137254902, 0.807843137254902, 0.807843137254902
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.22745098039215686,
-              0.22745098039215686,
-              0.22745098039215686
+              0.22745098039215686, 0.22745098039215686, 0.22745098039215686
             ]
           }
         },
@@ -7178,27 +5960,19 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.5411764705882353,
-            0.8509803921568627,
-            0.9882352941176471
+            0.5411764705882353, 0.8509803921568627, 0.9882352941176471
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.5411764705882353,
-              0.8509803921568627,
-              0.9882352941176471
+              0.5411764705882353, 0.8509803921568627, 0.9882352941176471
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
-            "components": [
-              0,
-              0.10588235294117647,
-              0.35294117647058826
-            ]
+            "components": [0, 0.10588235294117647, 0.35294117647058826]
           }
         },
         "$description": "Highlight background for selections"
@@ -7208,26 +5982,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.807843137254902,
-            0.807843137254902,
-            0.807843137254902
+            0.807843137254902, 0.807843137254902, 0.807843137254902
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.807843137254902,
-              0.807843137254902,
-              0.807843137254902
+              0.807843137254902, 0.807843137254902, 0.807843137254902
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.22745098039215686,
-              0.22745098039215686,
-              0.22745098039215686
+              0.22745098039215686, 0.22745098039215686, 0.22745098039215686
             ]
           }
         },
@@ -7240,26 +6008,20 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.5607843137254902,
-            0.5607843137254902,
-            0.5607843137254902
+            0.5607843137254902, 0.5607843137254902, 0.5607843137254902
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.5607843137254902,
-              0.5607843137254902,
-              0.5607843137254902
+              0.5607843137254902, 0.5607843137254902, 0.5607843137254902
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.44313725490196076,
-              0.44313725490196076,
-              0.44313725490196076
+              0.44313725490196076, 0.44313725490196076, 0.44313725490196076
             ]
           }
         },
@@ -7270,9 +6032,7 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.5607843137254902,
-            0.5607843137254902,
-            0.5607843137254902
+            0.5607843137254902, 0.5607843137254902, 0.5607843137254902
           ]
         }
       },
@@ -7281,9 +6041,7 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.807843137254902,
-            0.807843137254902,
-            0.807843137254902
+            0.807843137254902, 0.807843137254902, 0.807843137254902
           ]
         }
       }
@@ -7321,9 +6079,7 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.0784313725490196,
-            0.0784313725490196,
-            0.0784313725490196
+            0.0784313725490196, 0.0784313725490196, 0.0784313725490196
           ]
         }
       },
@@ -7331,9 +6087,7 @@
       "$value": {
         "colorSpace": "srgb",
         "components": [
-          0.0784313725490196,
-          0.0784313725490196,
-          0.0784313725490196
+          0.0784313725490196, 0.0784313725490196, 0.0784313725490196
         ]
       }
     },
@@ -7397,9 +6151,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.3333333333333333,
-              0.3333333333333333,
-              0.3333333333333333
+              0.3333333333333333, 0.3333333333333333, 0.3333333333333333
             ]
           }
         },
@@ -7408,9 +6160,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.9372549019607843,
-              0.9372549019607843,
-              0.9372549019607843
+              0.9372549019607843, 0.9372549019607843, 0.9372549019607843
             ]
           }
         },
@@ -7419,9 +6169,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.807843137254902,
-              0.807843137254902,
-              0.807843137254902
+              0.807843137254902, 0.807843137254902, 0.807843137254902
             ]
           }
         },
@@ -7430,9 +6178,7 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.8509803921568627,
-              0.1607843137254902,
-              0.16862745098039217
+              0.8509803921568627, 0.1607843137254902, 0.16862745098039217
             ]
           }
         }
@@ -7481,9 +6227,7 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.0784313725490196,
-            0.0784313725490196,
-            0.0784313725490196
+            0.0784313725490196, 0.0784313725490196, 0.0784313725490196
           ]
         }
       },
@@ -7492,9 +6236,7 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.9803921568627451,
-            0.9803921568627451,
-            0.9803921568627451
+            0.9803921568627451, 0.9803921568627451, 0.9803921568627451
           ]
         }
       },
@@ -7503,9 +6245,7 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.807843137254902,
-            0.807843137254902,
-            0.807843137254902
+            0.807843137254902, 0.807843137254902, 0.807843137254902
           ]
         }
       },
@@ -7519,33 +6259,21 @@
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
-          "components": [
-            1,
-            1,
-            1
-          ]
+          "components": [1, 1, 1]
         }
       },
       "customSemanticColorBgPrimary": {
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
-          "components": [
-            1,
-            1,
-            1
-          ]
+          "components": [1, 1, 1]
         }
       },
       "myCustomBg": {
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
-          "components": [
-            0,
-            0.4823529411764706,
-            1
-          ]
+          "components": [0, 0.4823529411764706, 1]
         }
       },
       "path": {
@@ -8308,22 +7036,14 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.0392156862745098,
-          0.396078431372549,
-          0.996078431372549
-        ]
+        "components": [0.0392156862745098, 0.396078431372549, 0.996078431372549]
       }
     },
     "decorationColor": {
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.0392156862745098,
-          0.396078431372549,
-          0.996078431372549
-        ]
+        "components": [0.0392156862745098, 0.396078431372549, 0.996078431372549]
       }
     },
     "decorationThickness": {
@@ -8344,22 +7064,14 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0,
-          0.25882352941176473,
-          0.8627450980392157
-        ]
+        "components": [0, 0.25882352941176473, 0.8627450980392157]
       }
     },
     "visited.text": {
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0,
-          0.17647058823529413,
-          0.6
-        ]
+        "components": [0, 0.17647058823529413, 0.6]
       }
     }
   },
@@ -8369,9 +7081,7 @@
       "$value": {
         "colorSpace": "srgb",
         "components": [
-          0.9372549019607843,
-          0.9372549019607843,
-          0.9372549019607843
+          0.9372549019607843, 0.9372549019607843, 0.9372549019607843
         ]
       },
       "$description": "Skeleton loading background"
@@ -8380,11 +7090,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.807843137254902,
-          0.807843137254902,
-          0.807843137254902
-        ]
+        "components": [0.807843137254902, 0.807843137254902, 0.807843137254902]
       },
       "$description": "Skeleton loading shimmer"
     },
@@ -8400,11 +7106,7 @@
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
-          "components": [
-            1,
-            1,
-            1
-          ]
+          "components": [1, 1, 1]
         }
       },
       "muted": {
@@ -8412,9 +7114,7 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.9372549019607843,
-            0.9372549019607843,
-            0.9372549019607843
+            0.9372549019607843, 0.9372549019607843, 0.9372549019607843
           ]
         }
       }
@@ -8425,9 +7125,7 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.6823529411764706,
-            0.6823529411764706,
-            0.6823529411764706
+            0.6823529411764706, 0.6823529411764706, 0.6823529411764706
           ]
         }
       },
@@ -8436,9 +7134,7 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.807843137254902,
-            0.807843137254902,
-            0.807843137254902
+            0.807843137254902, 0.807843137254902, 0.807843137254902
           ]
         }
       }
@@ -8474,9 +7170,7 @@
           "color": {
             "colorSpace": "srgb",
             "components": [
-              0.8509803921568627,
-              0.1607843137254902,
-              0.16862745098039217
+              0.8509803921568627, 0.1607843137254902, 0.16862745098039217
             ]
           }
         },
@@ -8511,11 +7205,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0,
-          0,
-          0
-        ],
+        "components": [0, 0, 0],
         "alpha": 0.24
       },
       "$extensions": {
@@ -8528,11 +7218,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0,
-          0,
-          0
-        ],
+        "components": [0, 0, 0],
         "alpha": 0.4
       },
       "$extensions": {
@@ -8545,11 +7231,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0,
-          0,
-          0
-        ],
+        "components": [0, 0, 0],
         "alpha": 0.64
       },
       "$extensions": {
