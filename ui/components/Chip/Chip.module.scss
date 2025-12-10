@@ -138,11 +138,11 @@
     color: var(--chip-color-icon-default);
     transition: color var(--chip-motion-duration-fast)
       var(--chip-motion-easing-standard);
-    margin-inline-start: var(--chip-size-icon-margin);
 
     // Apply entrance animation
     animation: chip-icon-enter var(--chip-motion-duration-fast)
-      var(--chip-motion-easing-emphasized) forwards;
+      var(--chip-motion-easing-out) forwards;
+    margin-inline-start: var(--chip-size-icon-margin);
 
     svg {
       width: 100%;

@@ -5,7 +5,7 @@
 
   &.inline {
     display: inline-flex;
-    gap: var(--grid-gap-small) var(--grid-gap-small);
+    gap: var(--semantic-spacing-gap-grid-small);
     align-items: baseline;
     padding: var(--alert-size-inline-padding);
     background-color: var(--alert-color-background-primary);
@@ -32,7 +32,8 @@
     display: grid;
     grid-template-areas: 'icon title body dismiss';
     grid-template-columns: auto auto 1fr auto;
-    gap: var(--grid-gap-small) var(--grid-gap-medium);
+    gap: var(--alert-spacing-padding-default)
+      var(--alert-spacing-padding-horizontal);
     align-items: baseline;
     padding: var(--alert-size-section-padding);
     background-color: var(--alert-color-background-primary);
@@ -108,7 +109,8 @@
     display: grid;
     grid-template-areas: 'icon title dismiss' 'icon body dismiss';
     grid-template-columns: auto 1fr auto;
-    gap: var(--grid-gap-small) var(--grid-gap-medium);
+    gap: var(--alert-spacing-padding-default)
+      var(--alert-spacing-padding-horizontal);
     align-items: baseline;
     min-height: var(--alert-spacing-minHeight-default);
     margin: 0 -1rem;

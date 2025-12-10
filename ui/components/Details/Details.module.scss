@@ -47,7 +47,7 @@
   }
 
   &:focus {
-    outline: var(--details-focus-ring-width) var(--details-focus-ring-style)
+    outline: var(--details-focus-ring-width) solid
       var(--details-focus-ring-color);
     outline-offset: var(--details-focus-ring-offset);
   }

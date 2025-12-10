@@ -16,7 +16,7 @@
 
   // Default variant
   &.default {
-    padding: var(--badge-size-md-padding);
+    padding: var(--badge-size-md-paddingY) var(--badge-size-md-paddingX);
     background: var(--badge-color-background-default);
     border: 1px solid var(--badge-color-border-default);
     border-radius: 12px;
@@ -44,7 +44,7 @@
 
   // Status variant (replaces Status component)
   &.status {
-    padding: var(--badge-size-md-padding);
+    padding: var(--badge-size-md-paddingY) var(--badge-size-md-paddingX);
     border: 1px solid transparent;
     border-radius: var(--badge-size-md-radius);
     box-shadow: var(--badge-elevation-status);
@@ -135,7 +135,7 @@
   &.counter {
     justify-content: center;
     min-width: var(--badge-size-sm-iconSize);
-    padding: var(--badge-size-sm-padding);
+    padding: var(--badge-size-sm-paddingY) var(--badge-size-sm-paddingX);
     background: var(--badge-color-background-counter);
     border-radius: var(--badge-size-sm-radius);
     color: var(--badge-color-foreground-onColor);
@@ -144,7 +144,7 @@
 
   // Tag variant
   &.tag {
-    padding: var(--badge-size-sm-padding);
+    padding: var(--badge-size-sm-paddingY) var(--badge-size-sm-paddingX);
     background: var(--badge-color-background-tag);
     border: 1px solid var(--badge-color-border-default);
     border-radius: var(--badge-size-sm-radius);

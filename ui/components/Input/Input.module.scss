@@ -3,26 +3,26 @@
 .input {
   @include inputTokens.vars;
 
-  padding-inline: var(--input-space-inline);
+  padding-inline: var(--input-space-inline-default);
   padding-block: 0;
-  background: var(--input-color-bg);
-  border: 1px solid var(--input-color-border);
-  border-radius: var(--input-size-radius);
-  color: var(--input-color-text);
+  background: var(--input-color-bg-default);
+  border: 1px solid var(--input-color-border-default);
+  border-radius: var(--input-size-radius-default);
+  color: var(--input-color-text-default);
   transition:
     border-color 0.2s ease,
     background-color 0.2s ease;
   appearance: none;
-  block-size: var(--input-size-height);
+  block-size: var(--input-size-height-default);
 
   // Container queries for responsive sizing
   container-type: inline-size;
   inline-size: 100%;
 
   &:focus-visible {
-    border-color: var(--input-color-focus);
+    border-color: var(--input-color-focus-default);
     box-shadow: 0 0 0 3px
-      color-mix(in oklab, var(--input-color-focus) 25%, transparent);
+      color-mix(in oklab, var(--input-color-focus-default) 25%, transparent);
     outline: none;
   }
 
@@ -30,23 +30,23 @@
     // Use color-mix() for subtle hover effect
     background-color: color-mix(
       in srgb,
-      var(--input-color-bg) 95%,
-      var(--input-color-focus) 5%
+      var(--input-color-bg-default) 95%,
+      var(--input-color-focus-default) 5%
     );
     border-color: color-mix(
       in srgb,
-      var(--input-color-border) 80%,
-      var(--input-color-focus) 20%
+      var(--input-color-border-default) 80%,
+      var(--input-color-focus-default) 20%
     );
   }
 
   &.invalid {
-    border-color: var(--input-color-invalid);
+    border-color: var(--input-color-invalid-default);
 
     &:focus-visible {
       // Use color-mix() for invalid focus state
       box-shadow: 0 0 0 3px
-        color-mix(in oklab, var(--input-color-invalid) 25%, transparent);
+        color-mix(in oklab, var(--input-color-invalid-default) 25%, transparent);
     }
   }
 }
@@ -56,16 +56,16 @@
   .input {
     @container (max-width: 20rem) {
       // Compact input for small containers
-      padding-inline: calc(var(--input-space-inline) * 0.75);
+      padding-inline: calc(var(--input-space-inline-default) * 0.75);
       font-size: calc(1rem * 0.9);
-      block-size: calc(var(--input-size-height) * 0.95);
+      block-size: calc(var(--input-size-height-default) * 0.95);
     }
 
     @container (max-width: 15rem) {
       // Minimal input for very small containers
-      padding-inline: calc(var(--input-space-inline) * 0.5);
+      padding-inline: calc(var(--input-space-inline-default) * 0.5);
       font-size: calc(1rem * 0.85);
-      block-size: calc(var(--input-size-height) * 0.9);
+      block-size: calc(var(--input-size-height-default) * 0.9);
     }
   }
 }

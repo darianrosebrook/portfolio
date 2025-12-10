@@ -5,13 +5,13 @@
 
   margin: 0;
   padding: 0;
-  color: var(--list-surface-color);
+  color: var(--list-color-foreground-primary);
 }
 
 /* List type styles */
 .ul,
 .ol {
-  padding-inline-start: var(--list-spacing-indent);
+  padding-inline-start: var(--list-size-padding-default);
 }
 
 .dl {
@@ -44,7 +44,7 @@
 .inline {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--list-marker-spacing);
+  gap: var(--core-spacing-size-04);
   list-style: none;
   padding-inline-start: 0;
 }
@@ -54,15 +54,16 @@
   padding-inline-start: 0;
 
   li:not(:last-child) {
-    border-block-end: var(--list-divider-width) solid var(--list-divider-color);
-    margin-block-end: var(--list-spacing-md);
-    padding-block-end: var(--list-spacing-md);
+    border-block-end: var(--core-shape-border-width-hairline) solid
+      var(--list-color-border-default);
+    margin-block-end: var(--core-spacing-size-05);
+    padding-block-end: var(--core-spacing-size-05);
   }
 }
 
 .spaced {
   li:not(:last-child) {
-    margin-block-end: var(--list-spacing-lg);
+    margin-block-end: var(--core-spacing-size-06);
   }
 }
 
@@ -98,36 +99,36 @@
 
 /* Spacing variants */
 .spacing-none li :not(:last-child) {
-  margin-block-end: var(--list-spacing-none);
+  margin-block-end: 0;
 }
 
 .spacing-sm li :not(:last-child) {
-  margin-block-end: var(--list-spacing-sm);
+  margin-block-end: var(--core-spacing-size-03);
 }
 
 .spacing-md li :not(:last-child) {
-  margin-block-end: var(--list-spacing-md);
+  margin-block-end: var(--core-spacing-size-05);
 }
 
 .spacing-lg li :not(:last-child) {
-  margin-block-end: var(--list-spacing-lg);
+  margin-block-end: var(--core-spacing-size-06);
 }
 
 /* Custom marker colors */
 .list ::marker {
-  color: var(--list-marker-color);
+  color: var(--list-color-foreground-secondary);
 }
 
 /* Definition list specific styles */
 .dl.default {
   dt {
     font-weight: 600;
-    margin-block-end: var(--list-spacing-sm);
+    margin-block-end: var(--core-spacing-size-03);
   }
 
   dd {
-    margin-block-end: var(--list-spacing-md);
-    margin-inline-start: var(--list-spacing-indent);
+    margin-block-end: var(--core-spacing-size-05);
+    margin-inline-start: var(--list-size-padding-default);
   }
 
   dd:first-child {
@@ -142,7 +143,7 @@
 .dl.inline {
   display: grid;
   grid-template-columns: max-content 1fr;
-  gap: var(--list-spacing-sm) var(--list-spacing-md);
+  gap: var(--core-spacing-size-03) var(--core-spacing-size-05);
 
   dt {
     font-weight: 600;

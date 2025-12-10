@@ -338,8 +338,8 @@
         .row {
           display: block;
           border: 1px solid var(--table-color-border);
-          border-radius: var(--table-radius-cell);
-          margin-block-end: var(--table-spacing-rowGap);
+          border-radius: var(--semantic-shape-control-radius-default);
+          margin-block-end: var(--table-spacing-caption);
 
           .head,
           .data {
@@ -376,7 +376,7 @@
 
         // Add hover effects for large screens
         .row.interactive:hover {
-          box-shadow: var(--table-shadow-hover);
+          box-shadow: var(--semantic-elevation-surface-raised);
           transform: translateY(-1px);
         }
       }

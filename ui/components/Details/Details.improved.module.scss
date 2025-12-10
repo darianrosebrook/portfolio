@@ -20,9 +20,8 @@
   }
 
   &:focus-visible {
-    outline: var(--details-focus-ring-width, 2px)
-      var(--details-focus-ring-style, solid)
-      var(--details-focus-ring-color, var(--color-focus-ring));
+    outline: var(--details-focus-ring-width, 2px) solid
+      var(--details-focus-ring-color);
     outline-offset: var(--details-focus-ring-offset, 2px);
   }
 
@@ -38,11 +37,11 @@
   line-height: var(--details-typography-lineHeight-relaxed);
 
   // Animation for opening/closing
-  animation: details-content-show var(--details-motion-duration-normal)
+  animation: details-content-show var(--details-motion-duration-fast)
     var(--details-motion-easing-standard);
 
   .details:not([open]) & {
-    animation: details-content-hide var(--details-motion-duration-normal)
+    animation: details-content-hide var(--details-motion-duration-fast)
       var(--details-motion-easing-standard);
   }
 }
@@ -81,21 +80,21 @@
     border-radius: 0;
 
     .summary {
-      padding: var(--details-size-padding-small);
+      padding: var(--details-size-padding-default);
       background: transparent;
       border: none;
     }
   }
 
   &[data-variant='compact'] {
-    margin: var(--details-size-padding-small) 0;
+    margin: var(--core-spacing-size-04) 0;
 
     .summary {
-      padding: var(--details-size-padding-small);
+      padding: var(--details-size-padding-default);
     }
 
     .content {
-      padding: var(--details-size-padding-small);
+      padding: var(--details-size-padding-default);
     }
   }
 
@@ -107,7 +106,7 @@
 
 .summaryContent {
   display: flex;
-  gap: var(--details-size-gap-default);
+  gap: var(--details-spacing-gap-default);
   align-items: center;
   color: var(--details-color-foreground-primary);
   font-weight: var(--details-typography-fontWeight-medium);
@@ -120,9 +119,9 @@
 
 .icon {
   flex-shrink: 0;
-  width: var(--details-icon-size-default);
-  height: var(--details-icon-size-default);
-  color: var(--details-color-icon-default);
+  width: var(--core-spacing-size-05);
+  height: var(--core-spacing-size-05);
+  color: var(--details-color-foreground-secondary);
   transition:
     transform var(--details-motion-duration-fast)
       var(--details-motion-easing-standard),
@@ -140,7 +139,7 @@
 
   // Rotate icon when open
   .details[data-state='open'] & {
-    color: var(--details-color-icon-active);
+    color: var(--details-color-foreground-primary);
     transform: rotate(var(--details-icon-rotation-open, 0deg));
   }
 }

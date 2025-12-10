@@ -6,7 +6,7 @@
  * This replaces the deprecated Status component.
  */
 'use client';
-import * as React from 'react';
+import React from 'react';
 import { Intent, ControlSize } from '@/types/ui';
 import styles from './Badge.module.scss';
 

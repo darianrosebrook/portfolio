@@ -36,15 +36,15 @@
   padding: 0;
   background: none;
   border: none;
-  color: var(--truncate-toggle-color);
-  font-weight: var(--truncate-toggle-fontWeight);
-  font-size: var(--truncate-toggle-fontSize);
+  color: var(--semantic-color-foreground-link);
+  font-weight: var(--semantic-typography-font-weight-medium);
+  font-size: inherit;
   text-decoration: underline;
   cursor: pointer;
-  margin-inline-start: var(--truncate-toggle-spacing);
+  margin-inline-start: var(--core-spacing-size-02);
 
   &:hover {
-    color: var(--truncate-toggle-colorHover);
+    color: var(--semantic-color-foreground-link-hover);
   }
 
   &:focus-visible {
@@ -56,7 +56,11 @@
 /* Fade effect for single line (optional enhancement) */
 .truncate:not(.expandable, .expanded)::after {
   position: absolute;
-  background: var(--truncate-fade-gradient);
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    var(--semantic-color-background-primary) 100%
+  );
   pointer-events: none;
   block-size: 1.2em;
   content: '';

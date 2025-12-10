@@ -35,8 +35,8 @@
         justify-content: space-between;
         align-items: flex-start;
         width: 100%;
-        padding: var(--accordion-spacing-padding-y)
-          var(--accordion-spacing-padding-x);
+        padding: var(--accordion-spacing-paddingY)
+          var(--accordion-spacing-paddingX);
         background: none;
         border: none;
         border-radius: var(--accordion-border-radius);
@@ -55,7 +55,7 @@
 
         &:hover {
           background-color: var(--accordion-color-background-hover);
-          color: var(--accordion-color-text-hover);
+          color: var(--accordion-color-textHover);
           text-decoration: underline;
         }
 
@@ -93,15 +93,15 @@
           var(--accordion-motion-easing);
 
         &[data-state='open'] {
-          height: var(--accordion-content-height);
+          height: auto;
         }
 
         .contentInner {
-          padding: 0 var(--accordion-spacing-padding-x)
-            var(--accordion-spacing-padding-y);
-          color: var(--accordion-color-text-secondary);
-          font-size: var(--accordion-text-size-content);
-          line-height: var(--accordion-text-lineHeight-content);
+          padding: 0 var(--accordion-spacing-paddingX)
+            var(--accordion-spacing-paddingY);
+          color: var(--accordion-color-textSecondary);
+          font-size: var(--accordion-text-sizeContent);
+          line-height: var(--accordion-text-lineHeightContent);
         }
       }
     }

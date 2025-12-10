@@ -1,11 +1,11 @@
 @use './Skeleton.tokens.generated.scss' as sk;
 
 .root {
-  --skeleton-bg: var(--skeleton-color-base, var(--skeleton-surface-bg));
-  --skeleton-hi: var(--skeleton-color-highlight, var(--skeleton-shimmer-c2));
-  --skeleton-hi2: var(--skeleton-color-highlight-2, var(--skeleton-shimmer-c3));
-  --skeleton-radius-cur: var(--skeleton-radius-md, var(--skeleton-radius));
-  --skeleton-gap-cur: var(--skeleton-gap-md, var(--skeleton-spacing-gap));
+  --skeleton-bg: var(--skeleton-color-base);
+  --skeleton-hi: var(--skeleton-color-highlight);
+  --skeleton-hi2: var(--skeleton-color-highlight-2);
+  --skeleton-radius-cur: var(--skeleton-radius-md);
+  --skeleton-gap-cur: var(--skeleton-gap-md);
   @include sk.vars;
 
   display: block;

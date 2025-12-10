@@ -8,7 +8,7 @@
   flex-direction: column;
   overflow: hidden;
   width: 100%;
-  max-width: var(--command-size-max-width);
+  max-width: var(--command-size-maxWidth);
   background-color: var(--command-color-background);
   border: var(--command-border-width) solid var(--command-color-border);
   border-radius: var(--command-border-radius);
@@ -19,25 +19,25 @@
 .overlay {
   position: fixed;
   inset: 0;
-  z-index: var(--command-z-index-overlay);
+  z-index: var(--command-zIndex-overlay);
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding: var(--command-spacing-dialog-padding);
+  padding: var(--command-spacing-dialogPadding);
   background-color: var(--command-color-overlay);
 }
 
 .dialog {
   overflow: hidden;
   width: 100%;
-  max-width: var(--command-size-max-width);
+  max-width: var(--command-size-maxWidth);
   background-color: var(--command-color-background);
   border: var(--command-border-width) solid var(--command-color-border);
   border-radius: var(--command-border-radius);
   box-shadow: var(--command-shadow);
   animation: commandDialogIn var(--command-motion-duration)
     var(--command-motion-easing);
-  margin-block-start: var(--command-spacing-dialog-margin-top);
+  margin-block-start: var(--command-spacing-dialogMarginTop);
 }
 
 @keyframes commandDialogIn {
@@ -57,32 +57,32 @@
   position: relative;
   display: flex;
   align-items: center;
-  padding: var(--command-spacing-input-padding);
+  padding: var(--command-spacing-inputPadding);
   border-block-end: var(--command-border-width) solid
-    var(--command-color-border-light);
+    var(--command-color-borderLight);
 
   .searchIcon {
     position: absolute;
     width: var(--command-size-icon);
     height: var(--command-size-icon);
-    color: var(--command-color-text-muted);
+    color: var(--command-color-textMuted);
     pointer-events: none;
-    inset-inline-start: var(--command-spacing-input-icon-offset);
+    inset-inline-start: var(--command-spacing-inputIconOffset);
   }
 
   .input {
     width: 100%;
-    padding: 0 var(--command-spacing-input-padding-x);
+    padding: 0 var(--command-spacing-inputPaddingX);
     background: none;
     border: none;
     outline: none;
     color: var(--command-color-text);
     font-size: var(--command-text-size);
-    line-height: var(--command-text-line-height);
-    padding-inline-start: var(--command-spacing-input-padding-left);
+    line-height: var(--command-text-lineHeight);
+    padding-inline-start: var(--command-spacing-inputPaddingLeft);
 
     &::placeholder {
-      color: var(--command-color-text-muted);
+      color: var(--command-color-textMuted);
     }
   }
 }
@@ -90,16 +90,16 @@
 // List and items
 .list {
   overflow-y: auto;
-  max-height: var(--command-size-max-height);
-  padding: var(--command-spacing-list-padding);
+  max-height: var(--command-size-maxHeight);
+  padding: var(--command-spacing-listPadding);
 
   .empty {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: var(--command-spacing-empty-padding);
-    color: var(--command-color-text-muted);
-    font-size: var(--command-text-size-small);
+    padding: var(--command-spacing-emptyPadding);
+    color: var(--command-color-textMuted);
+    font-size: var(--command-text-sizeSmall);
     text-align: center;
   }
 }
@@ -111,15 +111,15 @@
 
 .group {
   &:not(:first-child) {
-    margin-block-start: var(--command-spacing-group-gap);
+    margin-block-start: var(--command-spacing-groupGap);
   }
 
   .groupHeading {
-    padding: var(--command-spacing-group-heading-padding);
-    color: var(--command-color-text-muted);
-    font-weight: var(--command-text-weight-medium);
-    font-size: var(--command-text-size-small);
-    line-height: var(--command-text-line-height-tight);
+    padding: var(--command-spacing-groupHeadingPadding);
+    color: var(--command-color-textMuted);
+    font-weight: var(--command-text-weightMedium);
+    font-size: var(--command-text-sizeSmall);
+    line-height: var(--command-text-lineHeightTight);
     letter-spacing: 0.05em;
     text-transform: uppercase;
   }
@@ -132,10 +132,10 @@
 
 .item {
   display: flex;
-  gap: var(--command-spacing-item-gap);
+  gap: var(--command-spacing-itemGap);
   align-items: center;
-  padding: var(--command-spacing-item-padding);
-  border-radius: var(--command-border-radius-item);
+  padding: var(--command-spacing-itemPadding);
+  border-radius: var(--command-border-radiusItem);
   outline: none;
   color: var(--command-color-text);
   transition: background-color var(--command-motion-duration)
@@ -144,7 +144,7 @@
 
   &:hover,
   &.selected {
-    background-color: var(--command-color-background-hover);
+    background-color: var(--command-color-backgroundHover);
   }
 
   &.disabled {
@@ -162,7 +162,7 @@
     align-items: center;
     width: var(--command-size-icon);
     height: var(--command-size-icon);
-    color: var(--command-color-text-muted);
+    color: var(--command-color-textMuted);
   }
 
   .itemContent {
@@ -175,37 +175,37 @@
       color: inherit;
       font-weight: var(--command-text-weight);
       font-size: var(--command-text-size);
-      line-height: var(--command-text-line-height);
+      line-height: var(--command-text-lineHeight);
     }
 
     .itemDescription {
-      color: var(--command-color-text-muted);
-      font-size: var(--command-text-size-small);
-      line-height: var(--command-text-line-height-tight);
-      margin-block-start: var(--command-spacing-description-gap);
+      color: var(--command-color-textMuted);
+      font-size: var(--command-text-sizeSmall);
+      line-height: var(--command-text-lineHeightTight);
+      margin-block-start: var(--command-spacing-descriptionGap);
     }
   }
 }
 
 .separator {
   height: var(--command-border-width);
-  margin: var(--command-spacing-separator-margin) 0;
-  background-color: var(--command-color-border-light);
+  margin: var(--command-spacing-separatorMargin) 0;
+  background-color: var(--command-color-borderLight);
 }
 
 // Responsive adjustments
 @media (width <= 640px) {
   .overlay {
     align-items: flex-start;
-    padding: var(--command-spacing-mobile-padding);
+    padding: var(--command-spacing-mobilePadding);
   }
 
   .dialog {
-    margin-block-start: var(--command-spacing-mobile-margin-top);
+    margin-block-start: var(--command-spacing-mobileMarginTop);
   }
 
   .list {
-    max-height: var(--command-size-max-height-mobile);
+    max-height: var(--command-size-maxHeightMobile);
   }
 }
 

@@ -3,8 +3,8 @@
 .label {
   @include labelTokens.vars;
 
-  color: var(--label-color-text);
+  color: var(--label-color-text-default);
   font: inherit;
-  font-weight: var(--label-typo-weight);
-  line-height: var(--label-typo-lineHeight);
+  font-weight: var(--label-typo-weight-default);
+  line-height: var(--label-typo-lineHeight-default);
 }

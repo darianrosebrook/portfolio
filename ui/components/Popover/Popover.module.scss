@@ -31,14 +31,14 @@
   padding: var(--popover-size-padding-default);
   background: var(--popover-color-background-content);
   border-radius: var(--popover-size-radius-default);
-  box-shadow: var(--popover-elevation-default, var(--elevation));
-
-  // CSS Containment - layout paint style (not size) to allow intrinsic sizing
-  contain: layout paint style;
+  box-shadow: var(--popover-elevation-default);
 
   // Animation
   animation: popover-enter var(--popover-motion-duration, 200ms)
     var(--popover-motion-easing, cubic-bezier(0.34, 1.56, 0.64, 1)) forwards;
+
+  // CSS Containment - layout paint style (not size) to allow intrinsic sizing
+  contain: layout paint style;
 
   &.leaving {
     animation: popover-exit var(--popover-motion-duration-exit, 150ms)

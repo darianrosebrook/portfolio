@@ -3,9 +3,9 @@
 .blockquote {
   @include blockquoteTokens.vars;
 
-  margin: var(--blockquote-spacing-margin);
-  padding: var(--blockquote-spacing-padding);
-  color: var(--blockquote-surface-color);
+  margin: var(--blockquote-size-padding-default) 0;
+  padding: var(--blockquote-size-padding-default);
+  color: var(--blockquote-color-foreground-primary);
   font-weight: var(--blockquote-typography-fontWeight);
   font-style: var(--blockquote-typography-fontStyle);
 }
@@ -26,21 +26,21 @@
 }
 
 .default {
-  border-inline-start: var(--blockquote-border-width)
-    var(--blockquote-border-style) var(--blockquote-border-color);
-  padding-inline-start: var(--blockquote-spacing-indent);
+  border-inline-start: var(--core-shape-border-width-thick) solid
+    var(--blockquote-color-border-default);
+  padding-inline-start: var(--blockquote-size-padding-default);
 }
 
 .bordered {
-  background: var(--blockquote-surface-bg);
-  border: 1px solid var(--blockquote-border-color);
-  border-radius: var(--blockquote-border-radius);
-  border-inline-start-width: var(--blockquote-border-width);
+  background: var(--blockquote-color-background-default);
+  border: 1px solid var(--blockquote-color-border-default);
+  border-radius: var(--blockquote-size-radius-default);
+  border-inline-start-width: var(--core-shape-border-width-thick);
 }
 
 .highlighted {
-  background: var(--blockquote-surface-bg);
-  border-radius: var(--blockquote-border-radius);
-  border-inline-start: var(--blockquote-border-width)
-    var(--blockquote-border-style) var(--blockquote-accent-color);
+  background: var(--blockquote-color-background-default);
+  border-radius: var(--blockquote-size-radius-default);
+  border-inline-start: var(--core-shape-border-width-thick) solid
+    var(--blockquote-color-border-accent);
 }

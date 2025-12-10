@@ -9,7 +9,8 @@
   background-color: var(--card-color-background-default);
   border-radius: var(--card-size-radius-default);
   color: var(--card-color-foreground-primary);
-  transition: all var(--transition-duration-fast) var(--transition-easing-ease);
+  transition: all var(--semantic-motion-interaction-press-duration)
+    var(--semantic-motion-interaction-press-easing);
 
   // CSS Containment for performance optimization
   contain: layout style paint;
@@ -63,13 +64,12 @@
         var(--card-color-background-default) 90%,
         var(--card-color-background-hover) 10%
       );
-      box-shadow: var(--card-elevation-hover, var(--shadow-card-hover));
+      box-shadow: var(--card-elevation-hover);
       transform: translateY(var(--card-motion-hover-offset, -0.125rem));
     }
 
     &:focus-visible {
-      outline: 2px solid
-        var(--card-color-border-accent, var(--color-focus-ring));
+      outline: 2px solid var(--card-color-border-accent);
       outline-offset: 2px;
     }
 
@@ -101,14 +101,14 @@
     color: var(--card-color-foreground-primary);
     font-weight: var(--font-weight-semibold);
     font-size: var(--font-size-heading-4);
-    line-height: var(--line-height-heading);
+    line-height: var(--semantic-typography-line-height-heading);
   }
 
   .description {
     margin: 0;
     color: var(--card-color-foreground-secondary);
     font-size: var(--font-size-body-2);
-    line-height: var(--line-height-body);
+    line-height: var(--semantic-typography-line-height-normal);
   }
 
   .media {
@@ -141,7 +141,7 @@
     display: inline-flex;
     gap: var(--core-spacing-size-02);
     align-items: center;
-    color: var(--card-color-foreground-accent, var(--color-link));
+    color: var(--semantic-color-foreground-link);
     font-weight: var(--font-weight-medium);
     text-decoration: none;
 
@@ -150,8 +150,7 @@
     }
 
     &:focus-visible {
-      outline: 2px solid
-        var(--card-color-border-accent, var(--color-focus-ring));
+      outline: 2px solid var(--card-color-border-accent);
       outline-offset: 2px;
     }
   }

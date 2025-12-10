@@ -9,8 +9,8 @@
 
   position: relative;
   display: inline-flex;
-  align-items: center;
   vertical-align: middle;
+  align-items: center;
 }
 
 // Hidden native input
@@ -45,8 +45,10 @@
   border: 1px solid var(--switch-color-track-border-default);
   border-radius: var(--switch-size-md-track-radius, 9999px);
   transition:
-    background-color var(--switch-motion-duration, 150ms) var(--switch-motion-easing, ease-out),
-    border-color var(--switch-motion-duration, 150ms) var(--switch-motion-easing, ease-out);
+    background-color var(--switch-motion-duration, 150ms)
+      var(--switch-motion-easing, ease-out),
+    border-color var(--switch-motion-duration, 150ms)
+      var(--switch-motion-easing, ease-out);
 
   // Hover state
   .input:not(:disabled):hover + & {
@@ -73,14 +75,23 @@
   height: var(--switch-size-md-thumb-size, 1.125rem);
   background-color: var(--switch-color-thumb-background-default);
   border-radius: 50%;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  transition: transform var(--switch-motion-duration, 150ms) var(--switch-motion-easing, ease-out);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 10%);
+  transition: transform var(--switch-motion-duration, 150ms)
+    var(--switch-motion-easing, ease-out);
   inset-inline-start: var(--switch-size-md-gap, 0.125rem);
 
   // Checked state - move to the right
   .input:checked ~ .track & {
-    transform: translateX(calc(var(--switch-size-md-track-width, 3rem) - var(--switch-size-md-thumb-size, 1.125rem) - var(--switch-size-md-gap, 0.125rem) * 2));
     background-color: var(--switch-color-thumb-background-checked);
+    transform: translateX(
+      calc(
+        var(--switch-size-md-track-width, 3rem) - var(
+            --switch-size-md-thumb-size,
+            1.125rem
+          ) - var(--switch-size-md-gap, 0.125rem) *
+          2
+      )
+    );
   }
 }
 
@@ -98,7 +109,15 @@
   }
 
   .input:checked ~ .track .thumb {
-    transform: translateX(calc(var(--switch-size-sm-track-width, 2.25rem) - var(--switch-size-sm-thumb-size, 0.875rem) - var(--switch-size-sm-gap, 0.125rem) * 2));
+    transform: translateX(
+      calc(
+        var(--switch-size-sm-track-width, 2.25rem) - var(
+            --switch-size-sm-thumb-size,
+            0.875rem
+          ) - var(--switch-size-sm-gap, 0.125rem) *
+          2
+      )
+    );
   }
 }
 
@@ -115,7 +134,15 @@
   }
 
   .input:checked ~ .track .thumb {
-    transform: translateX(calc(var(--switch-size-lg-track-width, 3.5rem) - var(--switch-size-lg-thumb-size, 1.375rem) - var(--switch-size-lg-gap, 0.125rem) * 2));
+    transform: translateX(
+      calc(
+        var(--switch-size-lg-track-width, 3.5rem) - var(
+            --switch-size-lg-thumb-size,
+            1.375rem
+          ) - var(--switch-size-lg-gap, 0.125rem) *
+          2
+      )
+    );
   }
 }
 
@@ -131,13 +158,13 @@
 
 .switchField {
   display: inline-flex;
-  align-items: flex-start;
   gap: 0.75rem;
+  align-items: flex-start;
   cursor: pointer;
 
   &.disabled {
-    cursor: not-allowed;
     opacity: 0.5;
+    cursor: not-allowed;
   }
 
   // Label before switch
@@ -154,22 +181,22 @@
 }
 
 .label {
-  font-size: var(--switch-text-label-size, 0.875rem);
-  font-weight: var(--switch-text-label-weight, 500);
-  line-height: var(--switch-text-label-lineHeight, 1.4);
   color: var(--switch-color-text-default);
+  font-weight: var(--switch-text-label-weight, 500);
+  font-size: var(--switch-text-label-size, 0.875rem);
+  line-height: var(--switch-text-label-lineHeight, 1.4);
   cursor: pointer;
 
   .switchField.disabled & {
-    cursor: not-allowed;
     color: var(--switch-color-text-disabled);
+    cursor: not-allowed;
   }
 }
 
 .description {
+  color: var(--switch-color-text-default);
   font-size: var(--switch-text-description-size, 0.8125rem);
   line-height: var(--switch-text-description-lineHeight, 1.4);
-  color: var(--switch-color-text-description);
 
   .switchField.disabled & {
     color: var(--switch-color-text-disabled);
