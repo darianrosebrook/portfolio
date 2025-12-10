@@ -32,7 +32,6 @@ const config = [
     languageOptions: {
       parser: tsParser,
       parserOptions: {
-        project: ['./tsconfig.json'],
         projectService: true,
         allowDefaultProject: true,
         tsconfigRootDir: __dirname,
