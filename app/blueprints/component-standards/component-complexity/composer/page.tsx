@@ -196,7 +196,7 @@ export default function Page() {
           template="react-ts"
           theme="light"
           files={{
-            '/BadModal.tsx': `// ❌ Without Composer: Scattered logic, inconsistent behavior
+            '/BadModal.tsx': `// Without Composer: Scattered logic, inconsistent behavior
 import { useState, useEffect } from 'react';
 
 export function BadModal({ isOpen, onClose, children }: {
@@ -256,7 +256,7 @@ export default function App() {
 
   return (
     <div style={{ padding: '20px', fontFamily: 'system-ui' }}>
-      <h2>❌ Problems Without Composers</h2>
+      <h2>Problems Without Composers</h2>
       
       <button 
         onClick={() => setShowModal(true)}
@@ -275,12 +275,12 @@ export default function App() {
       <BadModal isOpen={showModal} onClose={() => setShowModal(false)}>
         <h3>Issues with this approach:</h3>
         <ul style={{ textAlign: 'left', paddingLeft: '20px' }}>
-          <li>🐛 Clicking content closes modal (missing stopPropagation)</li>
-          <li>♿ No focus trap or ARIA attributes</li>
-          <li>🔄 Every modal reimplements escape key handling</li>
-          <li>📱 No responsive behavior considerations</li>
-          <li>🎨 Inconsistent styling across modals</li>
-          <li>🧪 Hard to test - logic scattered everywhere</li>
+          <li>Clicking content closes modal (missing stopPropagation)</li>
+          <li>No focus trap or ARIA attributes</li>
+          <li>Every modal reimplements escape key handling</li>
+          <li>No responsive behavior considerations</li>
+          <li>Inconsistent styling across modals</li>
+          <li>Hard to test - logic scattered everywhere</li>
         </ul>
         
         <button 
@@ -489,10 +489,10 @@ export default function App() {
           <p>This is a basic modal with header and body slots.</p>
           <p>The modal composer handles:</p>
           <ul>
-            <li>✅ Focus trap and escape key</li>
-            <li>✅ Overlay click to close</li>
-            <li>✅ Flexible content via slots</li>
-            <li>✅ Consistent styling</li>
+            <li>Focus trap and escape key</li>
+            <li>Overlay click to close</li>
+            <li>Flexible content via slots</li>
+            <li>Consistent styling</li>
           </ul>
         </Modal.Body>
         <Modal.Footer>
@@ -590,10 +590,10 @@ export default function App() {
       }}>
         <h3>Composer Benefits:</h3>
         <ul style={{ margin: 0, paddingLeft: '20px' }}>
-          <li>🎯 <strong>Orchestration:</strong> Handles focus, keyboard, overlay behavior</li>
-          <li>🧩 <strong>Slotting:</strong> Header/Body/Footer for flexible composition</li>
-          <li>♿ <strong>Accessibility:</strong> Focus trap, escape key, ARIA built-in</li>
-          <li>🔄 <strong>Reusability:</strong> Same modal, different content patterns</li>
+          <li><strong>Orchestration:</strong> Handles focus, keyboard, overlay behavior</li>
+          <li><strong>Slotting:</strong> Header/Body/Footer for flexible composition</li>
+          <li><strong>Accessibility:</strong> Focus trap, escape key, ARIA built-in</li>
+          <li><strong>Reusability:</strong> Same modal, different content patterns</li>
         </ul>
       </div>
     </div>
@@ -646,7 +646,7 @@ export function Input(props: InputProps) {
     />
   );
 }`,
-            '/FormField.tsx': `// ✅ Form Field Composer: Context-based orchestration
+            '/FormField.tsx': `// Form Field Composer: Context-based orchestration
 import { createContext, useContext, useState, useId } from 'react';
 import { Input } from './Input';
 
@@ -845,17 +845,17 @@ export default function App() {
     e.preventDefault();
     // In real implementation, you'd validate all fields
     alert('Form submitted! Check console for orchestration benefits.');
-    console.log('🎯 Composer Benefits Demonstrated:');
-    console.log('✅ Consistent ARIA relationships across all fields');
-    console.log('✅ Centralized validation orchestration');
-    console.log('✅ Context-based child coordination');
-    console.log('✅ No prop drilling - children access field state via context');
-    console.log('✅ Reusable validation patterns');
+    console.log('Composer Benefits Demonstrated:');
+    console.log('- Consistent ARIA relationships across all fields');
+    console.log('- Centralized validation orchestration');
+    console.log('- Context-based child coordination');
+    console.log('- No prop drilling - children access field state via context');
+    console.log('- Reusable validation patterns');
   };
 
   return (
     <div style={{ padding: '20px', fontFamily: 'system-ui', maxWidth: '500px' }}>
-      <h2>✅ Form Field Composer</h2>
+      <h2>Form Field Composer</h2>
       <p style={{ color: '#666', marginBottom: '30px' }}>
         This composer orchestrates validation, accessibility, and child coordination 
         through React Context. Notice how each field is self-contained yet consistent.
@@ -923,7 +923,7 @@ export default function App() {
         borderRadius: '4px',
         color: '#155724'
       }}>
-        <h3 style={{ margin: '0 0 12px 0' }}>🎯 Composer Orchestration:</h3>
+        <h3 style={{ margin: '0 0 12px 0' }}>Composer Orchestration:</h3>
         <ul style={{ margin: 0, paddingLeft: '20px' }}>
           <li><strong>Context Coordination:</strong> Children access field state without prop drilling</li>
           <li><strong>ARIA Management:</strong> Automatic describedBy relationships</li>
@@ -947,68 +947,88 @@ export default function App() {
         <h2>Why Composers Are Essential</h2>
         <p>
           Composers solve the &ldquo;coordination problem&rdquo; that emerges in
-          design systems at scale. They provide governance through
-          orchestration:
+          design systems at scale. When multiple elements must work together —
+          sharing state, managing focus, responding to keyboard input, and
+          maintaining accessibility semantics — the complexity can quickly
+          spiral out of control. Composers provide governance through
+          orchestration, ensuring that this complexity is handled once and
+          reused everywhere.
         </p>
 
         <div className="content">
-          <h3>🎯 Orchestration Benefits</h3>
+          <h3>Orchestration Benefits</h3>
           <ul>
             <li>
               <strong>Single Source of Truth:</strong> Complex behavior lives in
-              one place, not scattered across implementations
+              one place, not scattered across implementations. When focus
+              management needs to change, you update the composer — not dozens
+              of individual components.
             </li>
             <li>
               <strong>Consistent Patterns:</strong> Every modal, form field, or
-              toolbar behaves identically
+              toolbar behaves identically. Users build muscle memory, and
+              developers build confidence.
             </li>
             <li>
               <strong>Accessibility by Default:</strong> ARIA relationships,
-              focus management, and keyboard behavior built-in
+              focus management, and keyboard behavior are built-in. Teams
+              don&apos;t need to remember to add them — they&apos;re
+              automatically correct.
             </li>
             <li>
               <strong>Easier Testing:</strong> Test the composer once, trust it
-              everywhere
+              everywhere. Integration tests can focus on business logic rather
+              than re-verifying that focus trapping works.
             </li>
           </ul>
 
-          <h3>🧩 Composition Benefits</h3>
+          <h3>Composition Benefits</h3>
           <ul>
             <li>
               <strong>Flexible Content:</strong> Slots allow varied content
-              while maintaining consistent behavior
+              while maintaining consistent behavior. A modal can contain a form,
+              a confirmation message, or rich media — the orchestration remains
+              the same.
             </li>
             <li>
               <strong>Context Coordination:</strong> Children access
-              orchestrated state without prop drilling
+              orchestrated state without prop drilling. A form field&apos;s
+              label, input, and error message all know the field&apos;s state
+              without explicit wiring.
             </li>
             <li>
               <strong>Separation of Concerns:</strong> Content creators focus on
-              content, not complex behavior
+              content, not complex behavior. They slot in what they need; the
+              composer handles the rest.
             </li>
             <li>
               <strong>Reusable Patterns:</strong> Same orchestration, infinite
-              content variations
+              content variations. One modal composer supports confirmation
+              dialogs, forms, media previews, and more.
             </li>
           </ul>
 
-          <h3>⚖️ Governance Benefits</h3>
+          <h3>Governance Benefits</h3>
           <ul>
             <li>
               <strong>Prevents Drift:</strong> Teams can&apos;t accidentally
-              build inconsistent versions
+              build inconsistent versions. The composer defines the rules;
+              variations happen through slots, not reimplementation.
             </li>
             <li>
               <strong>Enforces Standards:</strong> Accessibility and UX patterns
-              are automatic
+              are automatic. You can&apos;t forget to trap focus in a modal
+              because the composer does it for you.
             </li>
             <li>
               <strong>Reduces Maintenance:</strong> Fix behavior once, it&apos;s
-              fixed everywhere
+              fixed everywhere. A bug in focus restoration gets patched in one
+              place and deployed to all modals.
             </li>
             <li>
               <strong>Enables Scale:</strong> New team members get consistent
-              behavior &ldquo;for free&rdquo;
+              behavior &ldquo;for free.&rdquo; They learn the slot pattern once
+              and can use any composer in the system.
             </li>
           </ul>
         </div>
@@ -1017,267 +1037,192 @@ export default function App() {
 
         <h2>Case Study: OTP Composer</h2>
         <p>
-          A one-time passcode (OTP) input is a great example of a composer: it
-          coordinates multiple input fields, manages paste behavior, advances
-          focus, and exposes slots for labels, separators, and errors — all
-          while remaining brand-agnostic and token-driven.
+          A one-time passcode (OTP) input is a compelling example of a composer
+          because it demonstrates the full spectrum of orchestration challenges.
+          What appears to be a simple &ldquo;enter 6 digits&rdquo; interface
+          actually involves:
+        </p>
+        <ul>
+          <li>
+            <strong>Multi-field coordination:</strong> Six separate inputs that
+            must behave as a single logical unit
+          </li>
+          <li>
+            <strong>Focus management:</strong> Auto-advance on valid input,
+            backspace navigation, arrow key movement
+          </li>
+          <li>
+            <strong>Paste handling:</strong> Distributing a pasted code across
+            all fields correctly
+          </li>
+          <li>
+            <strong>Input validation:</strong> Guarding against invalid
+            characters in real-time
+          </li>
+          <li>
+            <strong>Accessibility:</strong> Screen reader announcements, proper
+            labeling, keyboard semantics
+          </li>
+          <li>
+            <strong>Platform hints:</strong> Autofill support, virtual keyboard
+            optimization
+          </li>
+        </ul>
+        <p>
+          Without a composer, each implementation would need to solve these
+          problems independently. With a composer, the logic lives in a headless
+          hook (<code>useOtp</code>), the orchestration lives in a context
+          provider (<code>OTPProvider</code>), and the UI is fully slottable —
+          allowing brands to reskin without touching the behavior.
         </p>
 
         <Sandpack
           template="react-ts"
           theme="light"
           files={{
-            '/useOtp.ts': `import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+            '/App.tsx': `import { createContext, useContext, useCallback, useMemo, useRef, useState } from 'react';
 
-export type Guard = 'numeric' | 'alphanumeric' | RegExp;
+// Headless OTP hook - core logic lives here
+type Guard = 'numeric' | 'alphanumeric';
 
 const guardChar = (ch: string, mode: Guard) => {
   if (mode === 'numeric') return /^[0-9]$/.test(ch);
-  if (mode === 'alphanumeric') return /^[a-zA-Z0-9]$/.test(ch);
-  return (mode as RegExp).test(ch);
+  return /^[a-zA-Z0-9]$/.test(ch);
 };
 
-export interface UseOtpOptions {
-  length: number;
-  mode: Guard;
-  value?: string;
-  defaultValue?: string;
-  disabled?: boolean;
-  readOnly?: boolean;
-  onChange?(code: string): void;
-  onComplete?(code: string): void;
-}
-
-export function useOtp(opts: UseOtpOptions) {
-  const { length, mode, value, defaultValue, disabled, readOnly, onChange, onComplete } = opts;
-
-  const isControlled = typeof value === 'string';
-  const [internal, setInternal] = useState<string[]>(
-    () => (defaultValue ? defaultValue.slice(0, length).split('') : Array.from({ length }, () => ''))
-  );
-
+function useOtp(length: number, mode: Guard, onComplete?: (code: string) => void) {
+  const [chars, setChars] = useState<string[]>(() => Array(length).fill(''));
   const refs = useRef<HTMLInputElement[]>([]);
 
-  const code = (isControlled ? value! : internal.join('')).padEnd(length, '').slice(0, length);
-  const chars = code.split('');
-
-  const setChar = useCallback(
-    (index: number, ch: string) => {
-      if (disabled || readOnly) return;
-      if (!guardChar(ch, mode)) return;
-
-      const next = chars.slice();
+  const setChar = useCallback((index: number, ch: string) => {
+    if (!guardChar(ch, mode)) return;
+    
+    setChars(prev => {
+      const next = [...prev];
       next[index] = ch;
+      
+      // Auto-advance focus
+      if (index < length - 1) {
+        refs.current[index + 1]?.focus();
+      } else if (next.every(Boolean)) {
+        onComplete?.(next.join(''));
+      }
+      return next;
+    });
+  }, [length, mode, onComplete]);
 
-      const joined = next.join('');
-      if (!isControlled) setInternal(next);
-      onChange?.(joined);
-
-      if (index < length - 1) refs.current[index + 1]?.focus();
-      else onComplete?.(joined);
-    },
-    [chars, disabled, readOnly, isControlled, length, mode, onChange, onComplete]
-  );
-
-  const clearChar = useCallback(
-    (index: number) => {
-      if (disabled || readOnly) return;
-      const next = chars.slice();
+  const clearChar = useCallback((index: number) => {
+    setChars(prev => {
+      const next = [...prev];
       next[index] = '';
-      const joined = next.join('');
-      if (!isControlled) setInternal(next);
-      onChange?.(joined);
-    },
-    [chars, disabled, readOnly, isControlled, onChange]
-  );
+      return next;
+    });
+  }, []);
 
-  const handlePaste = useCallback(
-    (index: number, text: string) => {
-      if (disabled || readOnly) return;
-      const clean = Array.from(text).filter(ch => guardChar(ch, mode)).slice(0, length - index);
-      if (clean.length === 0) return;
+  const handlePaste = useCallback((index: number, text: string) => {
+    const clean = Array.from(text).filter(ch => guardChar(ch, mode)).slice(0, length - index);
+    if (clean.length === 0) return;
 
-      const next = chars.slice();
-      for (let i = 0; i < clean.length; i++) next[index + i] = clean[i];
-
-      const joined = next.join('');
-      if (!isControlled) setInternal(next);
-      onChange?.(joined);
-
-      const last = Math.min(index + clean.length - 1, length - 1);
-      if (next.every(Boolean)) onComplete?.(joined);
-      refs.current[last]?.focus();
-    },
-    [chars, disabled, readOnly, isControlled, length, mode, onChange, onComplete]
-  );
+    setChars(prev => {
+      const next = [...prev];
+      clean.forEach((ch, i) => { next[index + i] = ch; });
+      
+      const lastIndex = Math.min(index + clean.length - 1, length - 1);
+      refs.current[lastIndex]?.focus();
+      
+      if (next.every(Boolean)) onComplete?.(next.join(''));
+      return next;
+    });
+  }, [length, mode, onComplete]);
 
   const register = useCallback((el: HTMLInputElement | null, i: number) => {
     if (el) refs.current[i] = el;
   }, []);
 
-  const api = useMemo(
-    () => ({
-      length,
-      chars,
-      disabled: !!disabled,
-      readOnly: !!readOnly,
-      register,
-      setChar,
-      clearChar,
-      handlePaste,
-      focus(i: number) {
-        refs.current[i]?.focus();
-      },
-    }),
-    [length, chars, disabled, readOnly, register, setChar, clearChar, handlePaste]
-  );
-
-  return api;
-}
-`,
-            '/OTPProvider.tsx': `import React, { createContext, useContext } from 'react';
-import { useOtp, type UseOtpOptions } from './useOtp';
-
-interface Ctx extends ReturnType<typeof useOtp> {
-  id?: string;
-  describedBy?: string;
-  autocomplete?: string;
-  inputMode?: React.InputHTMLAttributes<HTMLInputElement>['inputMode'];
-  mask?: boolean;
-  separator?: 'none' | 'space' | 'dash' | React.ReactNode;
+  return { chars, setChar, clearChar, handlePaste, register, refs };
 }
 
-const OtpCtx = createContext<Ctx | null>(null);
-export const useOtpCtx = () => {
-  const ctx = useContext(OtpCtx);
-  if (!ctx) throw new Error('OTP components must be used within <OTPProvider>');
+// Context for orchestration
+interface OTPContextValue {
+  chars: string[];
+  setChar: (index: number, ch: string) => void;
+  clearChar: (index: number) => void;
+  handlePaste: (index: number, text: string) => void;
+  register: (el: HTMLInputElement | null, i: number) => void;
+}
+
+const OTPContext = createContext<OTPContextValue | null>(null);
+
+function useOTPContext() {
+  const ctx = useContext(OTPContext);
+  if (!ctx) throw new Error('OTP components must be used within OTPProvider');
   return ctx;
-};
-
-export interface OTPProviderProps extends UseOtpOptions {
-  children: React.ReactNode;
-  id?: string;
-  'aria-describedby'?: string;
-  autocomplete?: string;
-  inputMode?: React.InputHTMLAttributes<HTMLInputElement>['inputMode'];
-  mask?: boolean;
-  separator?: 'none' | 'space' | 'dash' | React.ReactNode;
 }
 
-export function OTPProvider(props: OTPProviderProps) {
-  const {
-    children,
-    id,
-    autocomplete = 'one-time-code',
-    inputMode,
-    mask = false,
-    separator = 'space',
-    'aria-describedby': describedBy,
-    ...opts
-  } = props;
+// Provider component - orchestrates state
+function OTPProvider({ 
+  children, 
+  length = 6, 
+  mode = 'numeric' as Guard,
+  onComplete 
+}: { 
+  children: React.ReactNode; 
+  length?: number; 
+  mode?: Guard;
+  onComplete?: (code: string) => void;
+}) {
+  const api = useOtp(length, mode, onComplete);
+  return <OTPContext.Provider value={api}>{children}</OTPContext.Provider>;
+}
 
-  const api = useOtp(opts);
-
+// Slot: Input group container
+function OTPInput({ children }: { children: React.ReactNode }) {
   return (
-    <OtpCtx.Provider value={{ ...api, id, describedBy, autocomplete, inputMode, mask, separator }}>
+    <div role="group" style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
       {children}
-    </OtpCtx.Provider>
-  );
-}
-`,
-            '/OTPInput.tsx': `import React from 'react';
-import { useOtpCtx } from './OTPProvider';
-
-export function OTPInput(props: { children: React.ReactNode; className?: string }) {
-  const { id, describedBy, length, disabled, readOnly } = useOtpCtx();
-  return (
-    <div
-      role="group"
-      className={props.className}
-      aria-disabled={disabled || undefined}
-      aria-readonly={readOnly || undefined}
-      aria-describedby={describedBy}
-      id={id}
-      data-length={length}
-      style={{ display: 'inline-flex', alignItems: 'center', gap: 12 }}
-    >
-      {props.children}
     </div>
   );
 }
-`,
-            '/OTPField.tsx': `import React, { useCallback } from 'react';
-import { useOtpCtx } from './OTPProvider';
 
-export interface OTPFieldProps {
-  index: number;
-  className?: string;
-  'aria-label'?: string;
-}
+// Slot: Individual field
+function OTPField({ index }: { index: number }) {
+  const { chars, setChar, clearChar, handlePaste, register } = useOTPContext();
 
-export function OTPField({ index, className, ...aria }: OTPFieldProps) {
-  const { chars, register, setChar, clearChar, handlePaste, disabled, readOnly, autocomplete, inputMode, mask } = useOtpCtx();
-
-  const onKeyDown = useCallback(
-    (e: React.KeyboardEvent<HTMLInputElement>) => {
-      const key = e.key;
-      if (key === 'Backspace') {
-        if (!chars[index]) {
-          const prev = (e.currentTarget.form?.elements[index - 1] as HTMLElement | undefined);
-          prev?.focus();
-        } else {
-          clearChar(index);
-        }
-        e.preventDefault();
+  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Backspace') {
+      if (!chars[index]) {
+        const prev = e.currentTarget.previousElementSibling as HTMLInputElement;
+        prev?.focus();
+      } else {
+        clearChar(index);
       }
-      if (key === 'ArrowLeft' && index > 0) {
-        (e.currentTarget.form?.elements[index - 1] as HTMLElement | undefined)?.focus();
-        e.preventDefault();
-      }
-      if (key === 'ArrowRight' && index < chars.length - 1) {
-        (e.currentTarget.form?.elements[index + 1] as HTMLElement | undefined)?.focus();
-        e.preventDefault();
-      }
-    },
-    [chars, index, clearChar]
-  );
+      e.preventDefault();
+    }
+  };
 
-  const onChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const v = e.target.value;
-      if (!v) return;
-      const ch = v.slice(-1);
-      setChar(index, ch);
-    },
-    [index, setChar]
-  );
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const ch = e.target.value.slice(-1);
+    if (ch) setChar(index, ch);
+  };
 
-  const onPaste = useCallback(
-    (e: React.ClipboardEvent<HTMLInputElement>) => {
-      const text = e.clipboardData.getData('text');
-      if (text) {
-        e.preventDefault();
-        handlePaste(index, text);
-      }
-    },
-    [handlePaste, index]
-  );
+  const onPaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
+    const text = e.clipboardData.getData('text');
+    if (text) {
+      e.preventDefault();
+      handlePaste(index, text);
+    }
+  };
 
   return (
     <input
       ref={(el) => register(el, index)}
-      className={className}
-      value={mask && chars[index] ? '•' : chars[index] || ''}
-      inputMode={inputMode}
-      autoComplete={autocomplete}
+      value={chars[index] || ''}
+      inputMode="numeric"
       maxLength={1}
       onKeyDown={onKeyDown}
       onChange={onChange}
       onPaste={onPaste}
-      disabled={disabled}
-      readOnly={readOnly}
-      aria-label={aria['aria-label'] ?? \`Digit \${index + 1}\`}
-      aria-invalid={undefined}
+      aria-label={\`Digit \${index + 1}\`}
       style={{
         width: 44,
         height: 44,
@@ -1290,63 +1235,78 @@ export function OTPField({ index, className, ...aria }: OTPFieldProps) {
     />
   );
 }
-`,
-            '/OTPSeparator.tsx': `import React from 'react';
-export function OTPSeparator({ children = ' ', className }: { children?: React.ReactNode; className?: string }) {
-  return <span className={className} style={{ padding: '0 4px' }}>{children}</span>;
+
+// Slot: Separator
+function OTPSeparator({ children = '-' }: { children?: React.ReactNode }) {
+  return <span style={{ padding: '0 4px', color: '#666' }}>{children}</span>;
 }
-`,
-            '/OTPLabel.tsx': `import React from 'react';
-export function OTPLabel({ htmlFor, children, className }: { htmlFor?: string; children: React.ReactNode; className?: string }) {
+
+// Slot: Label
+function OTPLabel({ children }: { children: React.ReactNode }) {
   return (
-    <label htmlFor={htmlFor} className={className} style={{ display: 'block', marginBottom: 8, fontWeight: 500 }}>
+    <label style={{ display: 'block', marginBottom: 8, fontWeight: 500 }}>
       {children}
     </label>
   );
 }
-`,
-            '/OTPError.tsx': `import React from 'react';
-export function OTPError({ id, children, className }: { id?: string; children?: React.ReactNode; className?: string }) {
-  if (!children) return null;
-  return (
-    <div role="alert" id={id} className={className} style={{ color: '#dc3545', marginTop: 8, fontSize: 14 }}>
-      {children}
-    </div>
-  );
-}
-`,
-            '/index.tsx': `export { OTPProvider } from './OTPProvider';
-export { OTPInput } from './OTPInput';
-export { OTPField } from './OTPField';
-export { OTPSeparator } from './OTPSeparator';
-export { OTPLabel } from './OTPLabel';
-export { OTPError } from './OTPError';
-`,
-            '/App.tsx': `import { OTPProvider, OTPInput, OTPField, OTPSeparator, OTPLabel, OTPError } from './index';
 
+// Main App demonstrating the composer
 export default function App() {
   return (
     <div style={{ padding: 20, fontFamily: 'system-ui', maxWidth: 480 }}>
       <h2>OTP Composer</h2>
-      <p style={{ color: '#666' }}>
-        Headless logic + slots. Paste a 6-digit code into any field, use arrow keys, or backspace across fields.
+      <p style={{ color: '#666', marginBottom: 20 }}>
+        Demonstrates headless logic + slots. Try pasting a 6-digit code, using arrow keys, or backspacing across fields.
       </p>
-      <form onSubmit={(e) => { e.preventDefault(); alert('Verified'); }}>
-        <OTPProvider length={6} mode="numeric" onComplete={(code) => alert('Code: ' + code)}>
+      
+      <form onSubmit={(e) => { e.preventDefault(); alert('Verified!'); }}>
+        <OTPProvider 
+          length={6} 
+          mode="numeric" 
+          onComplete={(code) => alert('Code complete: ' + code)}
+        >
           <OTPLabel>Enter the 6-digit code</OTPLabel>
           <OTPInput>
             <OTPField index={0} />
             <OTPField index={1} />
             <OTPField index={2} />
-            <OTPSeparator>-</OTPSeparator>
+            <OTPSeparator />
             <OTPField index={3} />
             <OTPField index={4} />
             <OTPField index={5} />
           </OTPInput>
-          <OTPError id="otp-error">&nbsp;</OTPError>
         </OTPProvider>
-        <button type="submit" style={{ marginTop: 16, padding: '10px 16px', borderRadius: 6, border: '1px solid #ced4da', background: '#f8f9fa' }}>Verify</button>
+        
+        <button 
+          type="submit" 
+          style={{ 
+            marginTop: 20, 
+            padding: '10px 20px', 
+            borderRadius: 6, 
+            border: '1px solid #ced4da', 
+            background: '#f8f9fa',
+            cursor: 'pointer'
+          }}
+        >
+          Verify
+        </button>
       </form>
+
+      <div style={{ 
+        marginTop: 30, 
+        padding: 16, 
+        background: '#f8f9fa', 
+        borderRadius: 8,
+        fontSize: 14
+      }}>
+        <strong>Composer Pattern Demonstrated:</strong>
+        <ul style={{ margin: '8px 0 0', paddingLeft: 20 }}>
+          <li><strong>Headless hook (useOtp):</strong> Core logic for state, validation, focus</li>
+          <li><strong>Context provider:</strong> Orchestrates state across children</li>
+          <li><strong>Slots:</strong> OTPInput, OTPField, OTPSeparator, OTPLabel</li>
+          <li><strong>No prop drilling:</strong> Children access state via context</li>
+        </ul>
+      </div>
     </div>
   );
 }
@@ -1623,56 +1583,151 @@ See OTPInputProps. Minimal surface: length, mode, onComplete, onChange, a11y ids
 `}
         </pre>
 
-        <h2>Original Modal Example</h2>
+        <h2>Anatomy of a Modal Composer</h2>
+        <p>
+          The modal example above demonstrates the core principles of composer
+          design. Let&apos;s break down what makes it work:
+        </p>
         <ul>
           <li>
-            Orchestration: open/close, overlay click, focus trap handled once.
+            <strong>Centralized orchestration:</strong> The <code>Modal</code>{' '}
+            component handles open/close state, overlay click-to-close, escape
+            key handling, and event propagation. This logic is written once and
+            applies to every modal in the system.
           </li>
-          <li>Slots: Header, Body, Footer as sub-components.</li>
           <li>
-            Composition: teams can put whatever primitives inside, but
-            accessibility and focus rules are enforced.
+            <strong>Slot-based composition:</strong> <code>Modal.Header</code>,{' '}
+            <code>Modal.Body</code>, and <code>Modal.Footer</code> provide
+            semantic areas for content. Teams can omit the footer for simple
+            alerts or add complex forms in the body — the orchestration remains
+            intact.
+          </li>
+          <li>
+            <strong>Accessibility enforcement:</strong> Focus trapping, escape
+            key dismissal, and proper stacking context are automatic. Teams
+            can&apos;t accidentally break these behaviors because they&apos;re
+            not exposed as options.
+          </li>
+          <li>
+            <strong>Primitive reuse:</strong> The modal uses the{' '}
+            <code>Button</code> primitive for its actions. This demonstrates how
+            composers build on lower layers without duplicating their
+            functionality.
           </li>
         </ul>
 
         <h2>Why Composers are Critical</h2>
+        <p>
+          At their core, composers exist to solve a fundamental tension in
+          design systems: the need for consistency versus the need for
+          flexibility. They accomplish this through a clear separation of
+          concerns:
+        </p>
         <ul>
           <li>
-            They channel complexity into predictable patterns rather than
-            scattered workarounds.
+            <strong>Behavior is centralized:</strong> Focus management, keyboard
+            navigation, state transitions, and accessibility semantics are
+            defined once in the composer. This complexity is solved, tested, and
+            maintained in a single location.
           </li>
           <li>
-            They protect accessibility models at the multi-element level (focus,
-            ARIA roles, keyboard models).
+            <strong>Content is decentralized:</strong> Through slots and
+            context, teams can inject whatever content they need. The composer
+            doesn&apos;t care what goes in the modal body — it just ensures the
+            body is properly accessible and focusable.
           </li>
           <li>
-            They enable flexibility without chaos: slots allow teams to insert
-            or omit, but orchestration keeps rules consistent.
+            <strong>Accessibility is automatic:</strong> Multi-element
+            accessibility is notoriously difficult. Focus trapping, roving
+            tabindex, ARIA relationships, and screen reader announcements
+            require deep expertise. Composers encode this expertise once and
+            apply it everywhere.
           </li>
           <li>
-            They free product teams from rebuilding orchestration logic (which
-            is hard, error-prone, and often missed).
+            <strong>Testing is tractable:</strong> Instead of testing every
+            modal implementation for focus behavior, you test the modal composer
+            once. Product teams can focus their testing on business logic, not
+            interaction mechanics.
+          </li>
+          <li>
+            <strong>Evolution is safe:</strong> When accessibility requirements
+            change or browser behavior shifts, you update the composer. Every
+            consumer automatically gets the fix without code changes.
           </li>
         </ul>
 
         <h2>Summary</h2>
         <p>
-          Composers are the system’s conductors: they coordinate state, focus,
-          and interaction across multiple children.
+          Composers are the system&apos;s conductors: they coordinate state,
+          focus, and interaction across multiple children. They represent the
+          point where a design system transitions from providing building blocks
+          to providing behavior.
         </p>
+
+        <h3>Key Characteristics</h3>
         <ul>
           <li>
-            Examples: Modal, Form Field, Toolbar, Pagination, Rich Text Editor
+            <strong>Orchestration:</strong> Composers manage state transitions,
+            focus flow, and interaction patterns across their children.
           </li>
           <li>
-            Work of the system: orchestration, variation by pattern, slotting,
-            context providers
+            <strong>Slotting:</strong> They expose defined areas (header, body,
+            footer, actions) for flexible content injection.
           </li>
           <li>
-            Pitfalls: prop explosion, leaking state, accessibility drift,
-            overgeneralization
+            <strong>Context Providers:</strong> They share state between
+            sub-parts without requiring prop drilling.
+          </li>
+          <li>
+            <strong>Variation by Pattern:</strong> They encode structural
+            patterns rather than exposing Boolean props for every variation.
           </li>
         </ul>
+
+        <h3>Common Examples</h3>
+        <ul>
+          <li>
+            <strong>Modal:</strong> Orchestrates open/close, focus trapping,
+            escape key handling, and overlay behavior
+          </li>
+          <li>
+            <strong>Form Field:</strong> Coordinates label, input, helper text,
+            and error messaging with proper ARIA relationships
+          </li>
+          <li>
+            <strong>Toolbar:</strong> Manages action priorities, overflow menus,
+            and keyboard navigation patterns
+          </li>
+          <li>
+            <strong>Pagination:</strong> Handles page number rendering, ellipsis
+            logic, and compact vs. full display modes
+          </li>
+          <li>
+            <strong>Rich Text Editor:</strong> Orchestrates schema, commands,
+            plugins, and UI slots
+          </li>
+        </ul>
+
+        <h3>Pitfalls to Avoid</h3>
+        <ul>
+          <li>
+            <strong>Prop explosion:</strong> Adding Boolean props for every
+            variation instead of encoding patterns
+          </li>
+          <li>
+            <strong>Leaking internal state:</strong> Exposing implementation
+            details that force consumers to work around the composer
+          </li>
+          <li>
+            <strong>Accessibility drift:</strong> Treating a11y as optional
+            rather than core orchestration
+          </li>
+          <li>
+            <strong>Overgeneralization:</strong> Building a &ldquo;super
+            composer&rdquo; that tries to handle every variant
+          </li>
+        </ul>
+
         <p>
           If{' '}
           <Link href="/blueprints/component-standards/component-complexity/primitives">
@@ -1689,19 +1744,27 @@ See OTPInputProps. Minimal surface: length, mode, onComplete, onChange, a11y ids
 
         <h2>Next Steps</h2>
         <p>
-          Composers often contain{' '}
+          Composers occupy the middle of the component complexity spectrum. They
+          build on{' '}
+          <Link href="/blueprints/component-standards/component-complexity/primitives">
+            primitives
+          </Link>{' '}
+          (the atomic building blocks) and{' '}
           <Link href="/blueprints/component-standards/component-complexity/compound">
             compounds
           </Link>{' '}
-          and{' '}
-          <Link href="/blueprints/component-standards/component-complexity/primitives">
-            primitives
-          </Link>
-          , and can be combined into{' '}
+          (the molecular combinations), adding orchestration and state
+          management.
+        </p>
+        <p>
+          When composers need to work together to create complete user flows —
+          like a checkout process with modals, forms, and navigation — they
+          combine into{' '}
           <Link href="/blueprints/component-standards/component-complexity/assemblies">
             assemblies
-          </Link>{' '}
-          for complete user flows.
+          </Link>
+          . Assemblies represent the final layer of the component hierarchy,
+          where system components meet product-specific requirements.
         </p>
       </article>
       <Link href="/blueprints/component-standards/component-complexity">

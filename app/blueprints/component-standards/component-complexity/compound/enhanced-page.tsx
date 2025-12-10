@@ -30,7 +30,7 @@ const sections: DocSectionType[] = [
     id: 'overview',
     title: 'Why Compounds Exist',
     codeHighlight: {
-      file: '/TextField.tsx',
+      file: '/App.tsx',
       lines: [1, 25],
     },
   },
@@ -38,8 +38,8 @@ const sections: DocSectionType[] = [
     id: 'characteristics',
     title: 'Characteristics',
     codeHighlight: {
-      file: '/TextField.tsx',
-      lines: [200, 230],
+      file: '/App.tsx',
+      lines: [27, 50],
     },
   },
   {
@@ -47,23 +47,23 @@ const sections: DocSectionType[] = [
     title: 'Examples',
     codeHighlight: {
       file: '/App.tsx',
-      lines: [15, 40],
+      lines: [52, 100],
     },
   },
   {
     id: 'system-work',
     title: 'System Work',
     codeHighlight: {
-      file: '/TextField.tsx',
-      lines: [40, 80],
+      file: '/App.tsx',
+      lines: [102, 140],
     },
   },
   {
     id: 'pitfalls',
     title: 'Pitfalls',
     codeHighlight: {
-      file: '/TextField.tsx',
-      lines: [100, 150],
+      file: '/App.tsx',
+      lines: [142, 180],
     },
   },
   {
@@ -71,50 +71,41 @@ const sections: DocSectionType[] = [
     title: 'TextField Example',
     codeHighlight: {
       file: '/App.tsx',
-      lines: [1, 60],
+      lines: [1, 180],
     },
   },
 ];
 
 const codeFiles = {
-  '/Input.tsx': `// Primitive Input component (from previous layer)
-export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  size?: 'sm' | 'md' | 'lg';
+  '/App.tsx': `import { useState } from 'react';
+
+// Primitive Input component (from previous layer)
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  hasError?: boolean;
 }
 
-export function Input(props: InputProps) {
-  const { size = 'md', ...inputProps } = props;
-  
+function Input({ hasError, ...props }: InputProps) {
   return (
     <input 
-      {...inputProps} 
+      {...props} 
       style={{
-        padding: size === 'sm' ? '6px 8px' : size === 'lg' ? '12px 16px' : '8px 12px',
-        fontSize: size === 'sm' ? '14px' : size === 'lg' ? '18px' : '16px',
-        border: '1px solid #ccc',
+        padding: '8px 12px',
+        fontSize: '16px',
+        border: \`1px solid \${hasError ? '#dc3545' : '#ccc'}\`,
         borderRadius: '4px',
         outline: 'none',
         width: '100%',
         boxSizing: 'border-box',
-        ...props.disabled && { 
-          backgroundColor: '#f5f5f5', 
-          cursor: 'not-allowed' 
-        }
-      }}
-      onFocus={(e) => {
-        e.target.style.borderColor = '#007bff';
-        e.target.style.boxShadow = '0 0 0 2px rgba(0, 123, 255, 0.25)';
-      }}
-      onBlur={(e) => {
-        e.target.style.borderColor = '#ccc';
-        e.target.style.boxShadow = 'none';
+        backgroundColor: props.disabled ? '#f5f5f5' : 'white',
+        cursor: props.disabled ? 'not-allowed' : 'text',
+        ...props.style,
       }}
     />
   );
-}`,
-  '/TextField.tsx': `import { Input } from './Input';
+}
 
-export interface TextFieldProps {
+// TextField Compound - bundles Input + Label + Error + Helper
+interface TextFieldProps {
   id: string;
   label: string;
   error?: string;
@@ -122,17 +113,22 @@ export interface TextFieldProps {
   required?: boolean;
   placeholder?: string;
   disabled?: boolean;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export function TextField({ 
+function TextField({ 
   id, 
   label, 
   error, 
   helperText, 
   required, 
   placeholder,
-  disabled 
+  disabled,
+  value,
+  onChange,
 }: TextFieldProps) {
+  // Build aria-describedby for accessibility
   const describedBy = [
     error ? \`\${id}-error\` : null,
     helperText ? \`\${id}-helper\` : null
@@ -140,6 +136,7 @@ export function TextField({
 
   return (
     <div style={{ marginBottom: '16px' }}>
+      {/* Label with required indicator */}
       <label 
         htmlFor={id}
         style={{
@@ -150,21 +147,23 @@ export function TextField({
         }}
       >
         {label}
-        {required && <span style={{ color: '#dc3545' }}>*</span>}
+        {required && <span style={{ color: '#dc3545', marginLeft: '2px' }}>*</span>}
       </label>
       
+      {/* Input primitive with accessibility attributes */}
       <Input 
         id={id}
         placeholder={placeholder}
         disabled={disabled}
+        value={value}
+        onChange={onChange}
         aria-describedby={describedBy}
         aria-invalid={!!error}
-        style={{
-          borderColor: error ? '#dc3545' : undefined
-        }}
+        hasError={!!error}
       />
       
-      {helperText && (
+      {/* Helper text */}
+      {helperText && !error && (
         <p 
           id={\`\${id}-helper\`}
           style={{
@@ -177,9 +176,11 @@ export function TextField({
         </p>
       )}
       
+      {/* Error message */}
       {error && (
         <p 
           id={\`\${id}-error\`}
+          role="alert"
           style={{
             margin: '4px 0 0 0',
             fontSize: '14px',
@@ -191,14 +192,13 @@ export function TextField({
       )}
     </div>
   );
-}`,
-  '/App.tsx': `import { TextField } from './TextField';
-import { useState } from 'react';
+}
 
+// Demo App showing the TextField compound in action
 export default function App() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [formData, setFormData] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState<{email?: string; password?: string}>({});
+  const [submitted, setSubmitted] = useState(false);
 
   const validateEmail = (value: string) => {
     if (!value) return 'Email is required';
@@ -214,22 +214,23 @@ export default function App() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const emailError = validateEmail(email);
-    const passwordError = validatePassword(password);
+    const emailError = validateEmail(formData.email);
+    const passwordError = validatePassword(formData.password);
     
-    setErrors({
-      email: emailError,
-      password: passwordError
-    });
+    setErrors({ email: emailError, password: passwordError });
     
     if (!emailError && !passwordError) {
-      alert('Form submitted successfully!');
+      setSubmitted(true);
+      setTimeout(() => setSubmitted(false), 2000);
     }
   };
 
   return (
     <div style={{ padding: '20px', fontFamily: 'system-ui', maxWidth: '400px' }}>
-      <h2>TextField Compound Examples</h2>
+      <h2>TextField Compound</h2>
+      <p style={{ color: '#666', marginBottom: '20px' }}>
+        Demonstrates how compounds bundle primitives with consistent accessibility and styling.
+      </p>
       
       <form onSubmit={handleSubmit}>
         <TextField
@@ -237,6 +238,8 @@ export default function App() {
           label="Email Address"
           placeholder="Enter your email"
           required
+          value={formData.email}
+          onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
           error={errors.email}
           helperText="We'll never share your email"
         />
@@ -246,15 +249,10 @@ export default function App() {
           label="Password"
           placeholder="Enter your password"
           required
+          value={formData.password}
+          onChange={(e) => setFormData(prev => ({ ...prev, password: e.target.value }))}
           error={errors.password}
           helperText="Must be at least 6 characters"
-        />
-        
-        <TextField
-          id="optional"
-          label="Optional Field"
-          placeholder="This field is optional"
-          helperText="You can skip this if you want"
         />
         
         <TextField
@@ -274,20 +272,39 @@ export default function App() {
             border: 'none',
             borderRadius: '4px',
             cursor: 'pointer',
-            marginTop: '16px'
+            marginTop: '8px',
+            width: '100%',
           }}
         >
           Submit
         </button>
       </form>
       
-      <div style={{ marginTop: '20px', padding: '16px', backgroundColor: '#f8f9fa', borderRadius: '4px' }}>
-        <h3>Compound Benefits:</h3>
-        <ul style={{ margin: 0, paddingLeft: '20px' }}>
-          <li>✅ Bundles Input + Label + Error + Helper</li>
-          <li>✅ Consistent accessibility (aria-describedby)</li>
-          <li>✅ Standardized spacing and styling</li>
-          <li>✅ Reduces repetitive markup</li>
+      {submitted && (
+        <div style={{ 
+          marginTop: '16px', 
+          padding: '12px', 
+          backgroundColor: '#d4edda', 
+          borderRadius: '4px',
+          color: '#155724'
+        }}>
+          Form submitted successfully!
+        </div>
+      )}
+      
+      <div style={{ 
+        marginTop: '20px', 
+        padding: '16px', 
+        backgroundColor: '#f8f9fa', 
+        borderRadius: '4px',
+        fontSize: '14px'
+      }}>
+        <strong>Compound Benefits:</strong>
+        <ul style={{ margin: '8px 0 0', paddingLeft: '20px' }}>
+          <li>Bundles Input + Label + Error + Helper</li>
+          <li>Consistent accessibility (aria-describedby)</li>
+          <li>Standardized spacing and styling</li>
+          <li>Reduces repetitive markup</li>
         </ul>
       </div>
     </div>
