@@ -1,5 +1,5 @@
 import React from 'react';
-import Switch from '@/ui/components/Switch';
+import { SwitchField } from '@/ui/components/Switch';
 import { useFieldControl } from './useFieldControl';
 
 export interface SwitchAdapterProps {
@@ -21,28 +21,17 @@ export function SwitchAdapter({
     [controlProps['aria-describedby'] as string | undefined, descriptionId]
       .filter(Boolean)
       .join(' ') || undefined;
+
   return (
-    <Switch
+    <SwitchField
       id={controlProps.id}
+      label={children}
+      description={ariaDescription}
       checked={!!field.value}
       onChange={(e) => field.setValue(e.currentTarget.checked)}
-      onBlur={controlProps.onBlur as React.FocusEventHandler<HTMLInputElement>}
       disabled={!!controlProps.disabled}
-      required={controlProps.required}
-      readOnly={!!controlProps.readOnly}
-      ariaLabel={typeof children === 'string' ? children : undefined}
-      ariaDescription={ariaDescription}
-      name={controlProps.name as string}
-      aria-labelledby={controlProps['aria-labelledby'] as string}
-      aria-describedby={ariaDescribedBy}
-      aria-errormessage={
-        controlProps['aria-errormessage'] as string | undefined
-      }
-      aria-invalid={controlProps['aria-invalid'] as boolean | undefined}
       className={className}
-    >
-      {children}
-    </Switch>
+    />
   );
 }
 

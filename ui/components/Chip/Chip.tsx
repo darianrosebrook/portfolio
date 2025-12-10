@@ -1,6 +1,5 @@
 'use client';
-import React, { useRef, useEffect, useMemo } from 'react';
-import { gsap } from 'gsap';
+import React, { useMemo } from 'react';
 import styles from './Chip.module.scss';
 
 // Simple Slot implementation to avoid Radix dependency
@@ -17,10 +16,11 @@ const Slot = React.forwardRef<
       className: [props.className, childProps.className]
         .filter(Boolean)
         .join(' '),
-    } as any);
+    } as React.HTMLAttributes<HTMLElement>);
   }
   return null;
 });
+Slot.displayName = 'Slot';
 
 export type ChipVariant = 'default' | 'selected' | 'dismissible';
 export type ChipSize = 'small' | 'medium' | 'large';
@@ -40,8 +40,7 @@ interface ChipBaseProps {
 }
 
 interface ChipAsButton
-  extends
-    ChipBaseProps,
+  extends ChipBaseProps,
     Omit<
       React.ButtonHTMLAttributes<HTMLButtonElement>,
       'className' | 'type' | 'onClick' | 'disabled' | 'children'
@@ -56,8 +55,7 @@ interface ChipAsButton
 }
 
 interface ChipAsAnchor
-  extends
-    ChipBaseProps,
+  extends ChipBaseProps,
     Omit<
       React.AnchorHTMLAttributes<HTMLAnchorElement>,
       'className' | 'href' | 'onClick' | 'children'
@@ -119,9 +117,6 @@ const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
     },
     ref
   ) => {
-    const chipRef = useRef<HTMLButtonElement>(null);
-    const iconRef = useRef<HTMLDivElement>(null);
-
     const baseClassName = styles.chip;
     const variantClassName = styles[variant];
     const sizeClassName = styles[size];
@@ -147,84 +142,20 @@ const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
       ]
     );
 
-    // GSAP animation for icon entrance
-    useEffect(() => {
-      if (
-        iconRef.current &&
-        (variant === 'selected' || variant === 'dismissible')
-      ) {
-        const tl = gsap.timeline();
-        tl.fromTo(
-          iconRef.current,
-          {
-            scale: 0.8,
-            opacity: 0,
-          },
-          {
-            scale: 1,
-            opacity: 1,
-            duration: 0.3,
-            ease: 'back.out(1.7)',
-          }
-        );
-
-        return () => {
-          tl.kill();
-        };
-      }
-    }, [variant]);
-
-    // Handle hover animations with GSAP
-    useEffect(() => {
-      const chipElement = chipRef.current;
-      if (!chipElement || disabled) return;
-
-      let enterAnimation: gsap.core.Tween | null = null;
-      let leaveAnimation: gsap.core.Tween | null = null;
-
-      const handleMouseEnter = () => {
-        if (enterAnimation) enterAnimation.kill();
-        enterAnimation = gsap.to(chipElement, {
-          scale: 1.02,
-          duration: 0.2,
-          ease: 'power2.out',
-        });
-      };
-
-      const handleMouseLeave = () => {
-        if (leaveAnimation) leaveAnimation.kill();
-        leaveAnimation = gsap.to(chipElement, {
-          scale: 1,
-          duration: 0.2,
-          ease: 'power2.out',
-        });
-      };
-
-      chipElement.addEventListener('mouseenter', handleMouseEnter);
-      chipElement.addEventListener('mouseleave', handleMouseLeave);
-
-      return () => {
-        chipElement.removeEventListener('mouseenter', handleMouseEnter);
-        chipElement.removeEventListener('mouseleave', handleMouseLeave);
-        if (enterAnimation) enterAnimation.kill();
-        if (leaveAnimation) leaveAnimation.kill();
-      };
-    }, [disabled]);
-
     const renderIcon = () => {
       if (variant === 'selected') {
         return (
-          <div ref={iconRef} className={styles.icon} aria-hidden="true">
+          <span className={styles.icon} aria-hidden="true">
             <CheckIcon />
-          </div>
+          </span>
         );
       }
 
       if (variant === 'dismissible') {
         return (
-          <div ref={iconRef} className={styles.icon} aria-hidden="true">
+          <span className={styles.icon} aria-hidden="true">
             <XIcon />
-          </div>
+          </span>
         );
       }
 
@@ -295,11 +226,7 @@ const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
 
     return (
       <button
-        ref={(node) => {
-          chipRef.current = node;
-          if (typeof ref === 'function') ref(node);
-          else if (ref) ref.current = node;
-        }}
+        ref={ref}
         className={combinedClassName}
         disabled={disabled}
         title={title}

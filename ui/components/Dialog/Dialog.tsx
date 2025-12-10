@@ -1,6 +1,8 @@
 /**
  * Dialog - Modal and non-modal dialog component
  * Supports both blocking modal dialogs and non-blocking overlays
+ *
+ * Uses CSS animations instead of GSAP for boring, predictable behavior.
  */
 'use client';
 import React, {
@@ -12,9 +14,9 @@ import React, {
   forwardRef,
   createContext,
   useContext,
+  useState,
 } from 'react';
 import { createPortal } from 'react-dom';
-import { gsap } from 'gsap';
 import { OpenStateProps, DismissibleProps } from '@/types/ui';
 import styles from './Dialog.module.scss';
 
@@ -90,25 +92,35 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
     const dialogRef = useRef<HTMLDivElement | null>(null);
     const backdropRef = useRef<HTMLDivElement | null>(null);
     const previousActiveElement = useRef<HTMLElement | null>(null);
-    const animationRef = useRef<gsap.core.Timeline | null>(null);
 
     const isControlled = typeof open === 'boolean';
-    const [internalOpen, setInternalOpen] = React.useState(defaultOpen);
+    const [internalOpen, setInternalOpen] = useState(defaultOpen);
+    const [isLeaving, setIsLeaving] = useState(false);
+
     const isOpen = isControlled ? open : internalOpen;
+    const shouldRender = isOpen || isLeaving;
 
     const close = useCallback(() => {
-      if (isControlled) {
-        onOpenChange?.(false);
-      } else {
-        setInternalOpen(false);
-      }
-      onClose?.();
-      onDismiss?.({} as React.MouseEvent<HTMLButtonElement>);
+      // Start exit animation
+      setIsLeaving(true);
+
+      // Wait for animation to complete before actually closing
+      const animationDuration = 200; // matches CSS animation
+      setTimeout(() => {
+        setIsLeaving(false);
+        if (isControlled) {
+          onOpenChange?.(false);
+        } else {
+          setInternalOpen(false);
+        }
+        onClose?.();
+        onDismiss?.({} as React.MouseEvent<HTMLButtonElement>);
+      }, animationDuration);
     }, [isControlled, onOpenChange, onClose, onDismiss]);
 
     // Focus management
     useEffect(() => {
-      if (!isOpen) return;
+      if (!isOpen || isLeaving) return;
 
       // Store currently focused element
       previousActiveElement.current = document.activeElement as HTMLElement;
@@ -135,11 +147,11 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
           returnElement.focus();
         }
       };
-    }, [isOpen, initialFocus, returnFocus]);
+    }, [isOpen, isLeaving, initialFocus, returnFocus]);
 
     // Keyboard event handling
     useEffect(() => {
-      if (!isOpen) return;
+      if (!isOpen || isLeaving) return;
 
       const handleKeyDown = (e: KeyboardEvent) => {
         if (e.key === 'Escape' && closeOnEscape) {
@@ -176,7 +188,7 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
 
       document.addEventListener('keydown', handleKeyDown);
       return () => document.removeEventListener('keydown', handleKeyDown);
-    }, [isOpen, modal, closeOnEscape, close]);
+    }, [isOpen, isLeaving, modal, closeOnEscape, close]);
 
     // Backdrop click handling
     const handleBackdropClick = useCallback(
@@ -187,70 +199,6 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
       },
       [modal, closeOnBackdropClick, close]
     );
-
-    // Animation effects
-    useEffect(() => {
-      if (!dialogRef.current || !backdropRef.current) return;
-
-      const dialogElement = dialogRef.current;
-      const backdropElement = backdropRef.current;
-
-      if (isOpen) {
-        // Show animation
-        backdropElement.style.opacity = '0';
-        dialogElement.style.opacity = '0';
-        dialogElement.style.transform = 'translateY(-20px) scale(0.95)';
-
-        animationRef.current = gsap
-          .timeline()
-          .to(backdropElement, {
-            duration: 0.2,
-            opacity: 1,
-            ease: 'power2.out',
-          })
-          .to(
-            dialogElement,
-            {
-              duration: 0.3,
-              opacity: 1,
-              y: 0,
-              scale: 1,
-              ease: 'back.out(1.7)',
-            },
-            '-=0.1'
-          );
-      } else {
-        // Hide animation
-        if (animationRef.current) {
-          animationRef.current.kill();
-        }
-
-        animationRef.current = gsap
-          .timeline()
-          .to(dialogElement, {
-            duration: 0.2,
-            opacity: 0,
-            y: -10,
-            scale: 0.95,
-            ease: 'power2.in',
-          })
-          .to(
-            backdropElement,
-            {
-              duration: 0.15,
-              opacity: 0,
-              ease: 'power2.in',
-            },
-            '-=0.1'
-          );
-      }
-
-      return () => {
-        if (animationRef.current) {
-          animationRef.current.kill();
-        }
-      };
-    }, [isOpen]);
 
     // Body scroll lock for modal dialogs
     useEffect(() => {
@@ -264,12 +212,21 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
       };
     }, [modal, isOpen]);
 
-    if (!isOpen) return null;
+    if (!shouldRender) return null;
+
+    const backdropClassName = [
+      styles.backdrop,
+      modal && styles.modal,
+      isLeaving && styles.leaving,
+    ]
+      .filter(Boolean)
+      .join(' ');
 
     const dialogClassName = [
       styles.dialog,
       styles[size],
       modal && styles.modal,
+      isLeaving && styles.leaving,
       className,
     ]
       .filter(Boolean)
@@ -278,7 +235,7 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
     const dialogNode = (
       <div
         ref={backdropRef}
-        className={`${styles.backdrop} ${modal ? styles.modal : ''}`}
+        className={backdropClassName}
         onClick={handleBackdropClick}
       >
         <div

@@ -1,13 +1,27 @@
+/**
+ * @deprecated Use Badge with variant="status" instead. Status will be removed in a future version.
+ *
+ * Migration:
+ * ```tsx
+ * // Before:
+ * <Status status="error">Not available</Status>
+ *
+ * // After:
+ * <Badge variant="status" intent="danger">Not available</Badge>
+ * ```
+ */
 'use client';
 import React from 'react';
 import Styles from './Status.module.scss';
 import { Intent, StatusIntent, normalizeStatusIntent } from '@/types';
 
+/** @deprecated Use Badge with variant="status" instead */
 type StatusProps = React.HTMLAttributes<HTMLDivElement> & {
   status: StatusIntent;
   children: string;
 };
 
+/** @deprecated Use Badge with variant="status" instead */
 const Status = React.forwardRef<HTMLDivElement, StatusProps>(
   ({ status, children, className = '', ...rest }, ref) => {
     const intent: Intent = normalizeStatusIntent(status);

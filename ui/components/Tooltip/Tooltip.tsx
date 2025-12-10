@@ -1,10 +1,12 @@
 /**
  * Tooltip - Non-interactive overlay for labels and descriptions
  * Complements Popover (which is for interactive content)
+ *
+ * Layer: Compound
+ * Uses CSS animations instead of GSAP for boring, predictable behavior.
  */
 'use client';
 import { Placement, TriggerStrategy } from '@/types/ui';
-import { gsap } from 'gsap';
 import React, {
   forwardRef,
   useCallback,
@@ -69,7 +71,6 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     const triggerRef = useRef<HTMLElement | null>(null);
     const tooltipRef = useRef<HTMLDivElement | null>(null);
     const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-    const animationRef = useRef<gsap.core.Tween | null>(null);
 
     const [isVisible, setIsVisible] = useState(false);
     const [position, setPosition] = useState<Position>({ top: 0, left: 0 });
@@ -173,45 +174,11 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       }
     }, [trigger, isVisible, showTooltip, hideTooltip]);
 
-    // Animation effects
+    // Update position when visible
     useLayoutEffect(() => {
-      if (!tooltipRef.current) return;
-
-      const tooltipElement = tooltipRef.current;
-
       if (isVisible) {
         updatePosition();
-
-        // Show animation
-        tooltipElement.style.opacity = '0';
-        tooltipElement.style.transform = 'translateY(-4px) scale(0.95)';
-
-        animationRef.current = gsap.to(tooltipElement, {
-          duration: 0.15,
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          ease: 'back.out(1.7)',
-        });
-      } else {
-        // Hide animation
-        if (animationRef.current) {
-          animationRef.current.kill();
-        }
-
-        animationRef.current = gsap.to(tooltipElement, {
-          duration: 0.1,
-          opacity: 0,
-          scale: 0.95,
-          ease: 'power2.in',
-        });
       }
-
-      return () => {
-        if (animationRef.current) {
-          animationRef.current.kill();
-        }
-      };
     }, [isVisible, updatePosition]);
 
     // Handle window resize and scroll
@@ -239,44 +206,47 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     }, []);
 
     // Clone child with event handlers
+    type ChildProps = React.HTMLAttributes<HTMLElement> & {
+      ref?: React.Ref<HTMLElement>;
+    };
+    const childProps = (children.props || {}) as ChildProps;
+
     const triggerElement = React.cloneElement(
-      children as React.ReactElement<any>,
+      children,
       {
         ref: (node: HTMLElement | null) => {
           triggerRef.current = node;
 
           // Handle forwarded ref from child
-          const childRef = (children as any).ref;
+          const childRef = (children as React.ReactElement & { ref?: React.Ref<HTMLElement> }).ref;
           if (typeof childRef === 'function') {
             childRef(node);
           } else if (childRef) {
-            childRef.current = node;
+            (childRef as React.MutableRefObject<HTMLElement | null>).current = node;
           }
         },
-        onMouseEnter: (e: React.MouseEvent) => {
-          (children as any).props?.onMouseEnter?.(e);
+        onMouseEnter: (e: React.MouseEvent<HTMLElement>) => {
+          childProps.onMouseEnter?.(e);
           handleMouseEnter();
         },
-        onMouseLeave: (e: React.MouseEvent) => {
-          (children as any).props?.onMouseLeave?.(e);
+        onMouseLeave: (e: React.MouseEvent<HTMLElement>) => {
+          childProps.onMouseLeave?.(e);
           handleMouseLeave();
         },
-        onFocus: (e: React.FocusEvent) => {
-          (children as any).props?.onFocus?.(e);
+        onFocus: (e: React.FocusEvent<HTMLElement>) => {
+          childProps.onFocus?.(e);
           handleFocus();
         },
-        onBlur: (e: React.FocusEvent) => {
-          (children as any).props?.onBlur?.(e);
+        onBlur: (e: React.FocusEvent<HTMLElement>) => {
+          childProps.onBlur?.(e);
           handleBlur();
         },
-        onClick: (e: React.MouseEvent) => {
-          (children as any).props?.onClick?.(e);
+        onClick: (e: React.MouseEvent<HTMLElement>) => {
+          childProps.onClick?.(e);
           handleClick();
         },
-        'aria-describedby': isVisible
-          ? tooltipId
-          : (children as any).props?.['aria-describedby'],
-      }
+        'aria-describedby': isVisible ? tooltipId : childProps['aria-describedby'],
+      } as ChildProps
     );
 
     const tooltipNode = isVisible && (

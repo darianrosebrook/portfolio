@@ -29,7 +29,11 @@
 
     &:hover {
       // Use color-mix() for dynamic hover effect
-      background-color: blue;
+      background-color: color-mix(
+        in srgb,
+        var(--badge-color-background-default) 90%,
+        var(--badge-color-foreground-primary) 10%
+      );
       border-color: color-mix(
         in srgb,
         var(--badge-color-border-default) 80%,
@@ -212,8 +216,6 @@
       &.sm {
         padding: calc(var(--badge-size-sm-paddingY) * 0.75)
           calc(var(--badge-size-sm-paddingX) * 0.75);
-        background-color: blue;
-        border-radius: 12px;
         font-size: calc(var(--badge-size-sm-fontSize) * 0.9);
       }
 
@@ -253,8 +255,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .badge {
-    background-color: blue;
-    border-radius: 12px;
     transition: none;
   }
 }

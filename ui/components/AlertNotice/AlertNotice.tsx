@@ -1,9 +1,34 @@
+/**
+ * @deprecated Use Alert instead. AlertNotice will be removed in a future version.
+ *
+ * Migration:
+ * - Replace `status` prop with `intent`
+ * - Replace AlertNotice.Container with Alert
+ * - Replace AlertNotice.Title with Alert.Title
+ * - Replace AlertNotice.Body with Alert.Body
+ * - Replace AlertNotice.Icon with Alert.Icon
+ *
+ * Example:
+ * ```tsx
+ * // Before:
+ * <AlertNotice.Container status="error" level="page">
+ *   <AlertNotice.Title>Error</AlertNotice.Title>
+ * </AlertNotice.Container>
+ *
+ * // After:
+ * <Alert intent="danger" level="page">
+ *   <Alert.Title>Error</Alert.Title>
+ * </Alert>
+ * ```
+ */
 'use client';
 import * as React from 'react';
 import Button from '../Button';
 import Styles from './AlertNotice.module.scss';
 import { TimesIcon, LocalIcons } from '@/ui/components/Icon/LocalIcons';
 import { Intent, StatusIntent, normalizeStatusIntent } from '@/types';
+
+/** @deprecated Use Alert instead */
 export interface AlertNoticeProps {
   status?: StatusIntent;
   level?: 'page' | 'section' | 'inline';

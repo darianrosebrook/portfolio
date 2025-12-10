@@ -10,9 +10,16 @@
   justify-content: center;
   align-items: center;
   padding: var(--core-spacing-size-04);
+  animation: backdrop-enter var(--dialog-motion-duration-enter, 200ms)
+    var(--dialog-motion-easing-enter, ease-out) forwards;
 
-  &--modal {
+  &.modal {
     background: var(--dialog-color-background-backdrop);
+  }
+
+  &.leaving {
+    animation: backdrop-exit var(--dialog-motion-duration-exit, 150ms)
+      var(--dialog-motion-easing-exit, ease-in) forwards;
   }
 }
 
@@ -27,12 +34,15 @@
   border-radius: var(--dialog-size-radius-default);
   box-shadow: var(--dialog-elevation-default);
   color: var(--dialog-color-foreground-default);
+  animation: dialog-enter var(--dialog-motion-duration-enter, 300ms)
+    var(--dialog-motion-easing-enter, cubic-bezier(0.34, 1.56, 0.64, 1)) forwards;
 
   // CSS Containment - strict for isolated modal
   contain: strict;
 
-  &--modal {
-    // Modal-specific styles if needed
+  &.leaving {
+    animation: dialog-exit var(--dialog-motion-duration-exit, 200ms)
+      var(--dialog-motion-easing-exit, ease-in) forwards;
   }
 
   // Size variants
@@ -230,7 +240,62 @@
   }
 }
 
+// Animation keyframes
+@keyframes backdrop-enter {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes backdrop-exit {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes dialog-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes dialog-exit {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .backdrop,
+  .dialog {
+    animation: none;
+  }
+
+  .backdrop.leaving,
+  .dialog.leaving {
+    animation: none;
+  }
+
   .closeButton {
     transition: none;
   }

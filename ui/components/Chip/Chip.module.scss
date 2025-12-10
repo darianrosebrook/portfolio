@@ -140,22 +140,28 @@
       var(--chip-motion-easing-standard);
     margin-inline-start: var(--chip-size-icon-margin);
 
-    .chip.selected & {
-      color: var(--chip-color-icon-selected);
-    }
-
-    .chip.dismissible & {
-      color: var(--chip-color-icon-dismissible);
-
-      &:hover {
-        color: var(--chip-color-icon-dismissibleHover);
-      }
-    }
+    // Apply entrance animation
+    animation: chip-icon-enter var(--chip-motion-duration-fast)
+      var(--chip-motion-easing-emphasized) forwards;
 
     svg {
       width: 100%;
       height: 100%;
     }
+  }
+
+  // Selected variant icon color
+  &.selected .icon {
+    color: var(--chip-color-icon-selected);
+  }
+
+  // Dismissible variant icon color
+  &.dismissible .icon {
+    color: var(--chip-color-icon-dismissible);
+  }
+
+  &.dismissible:hover .icon {
+    color: var(--chip-color-icon-dismissibleHover);
   }
 
   // Text content

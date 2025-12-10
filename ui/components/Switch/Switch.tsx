@@ -1,85 +1,65 @@
 /**
- * Switch - Binary toggle control component
- * Replaces ToggleSwitch with improved API and design token integration
+ * Switch Primitive - Binary toggle control
+ *
+ * Layer: Primitive
+ * Characteristics: Boring, stable, minimal props, design tokens only
+ *
+ * This is a pure primitive - just the toggle track and thumb.
+ * Labels and descriptions belong in SwitchField (compound layer).
  */
 'use client';
-import React, { ReactNode, useMemo } from 'react';
+import React, { useId } from 'react';
 import styles from './Switch.module.scss';
 
-type ControlSize = 'sm' | 'md' | 'lg';
+export type SwitchSize = 'sm' | 'md' | 'lg';
 
-type NativeInputProps = React.ComponentProps<'input'>;
-
-export interface SwitchProps extends Omit<
-  NativeInputProps,
-  'checked' | 'onChange' | 'type' | 'className' | 'size'
-> {
-  /**
-   * Whether the switch is checked
-   */
-  checked: boolean;
-  /**
-   * Whether the switch is disabled
-   */
+export interface SwitchProps
+  extends Omit<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    'size' | 'type' | 'role'
+  > {
+  /** Size variant using design tokens */
+  size?: SwitchSize;
+  /** Controlled checked state */
+  checked?: boolean;
+  /** Default checked state for uncontrolled usage */
+  defaultChecked?: boolean;
+  /** Whether the switch is disabled */
   disabled?: boolean;
-  /**
-   * Change handler
-   */
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  /**
-   * Label content
-   */
-  children: ReactNode;
-  /**
-   * Additional CSS classes
-   */
+  /** Change handler */
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  /** Additional CSS classes */
   className?: string;
-  /**
-   * Unique identifier
-   */
+  /** Custom id (auto-generated if not provided) */
   id?: string;
-  /**
-   * Accessible label
-   */
-  ariaLabel?: string;
-  /**
-   * Accessible description
-   */
-  ariaDescription?: string;
-  /**
-   * Size of the switch (using design tokens)
-   */
-  size?: ControlSize;
 }
 
-const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
+export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
   (
     {
-      children,
-      checked,
-      onChange,
-      disabled = false,
-      className = '',
-      id,
-      ariaLabel,
-      ariaDescription,
       size = 'md',
+      checked,
+      defaultChecked,
+      disabled = false,
+      onChange,
+      className = '',
+      id: providedId,
+      'aria-label': ariaLabel,
+      'aria-labelledby': ariaLabelledBy,
+      'aria-describedby': ariaDescribedBy,
       ...rest
     },
     ref
   ) => {
-    const safeId = useMemo(() => {
-      if (id) return id;
-      if (typeof children === 'string') {
-        return `switch-${children.replace(/[^\w-]/g, '-')}`;
-      }
-      return `switch-${Math.random().toString(36).substring(2, 9)}`;
-    }, [id, children]);
+    const generatedId = useId();
+    const id = providedId || generatedId;
+
+    // Determine if checked (controlled vs uncontrolled)
+    const isControlled = checked !== undefined;
 
     const switchClassName = [
-      styles.switch,
+      styles.switchPrimitive,
       styles[size],
-      checked && styles.checked,
       disabled && styles.disabled,
       className,
     ]
@@ -87,60 +67,63 @@ const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
       .join(' ');
 
     return (
-      <div className={switchClassName}>
+      <span className={switchClassName} data-slot="switch">
         <input
           ref={ref}
           type="checkbox"
           role="switch"
-          checked={checked}
-          onChange={onChange}
+          id={id}
+          className={styles.input}
+          checked={isControlled ? checked : undefined}
+          defaultChecked={!isControlled ? defaultChecked : undefined}
           disabled={disabled}
-          id={safeId}
-          className={`${styles.input} ${checked ? styles.checked : ''}`}
-          aria-label={
-            ariaLabel || (typeof children === 'string' ? children : undefined)
-          }
+          onChange={onChange}
           aria-checked={checked}
-          aria-describedby={
-            ariaDescription ? `${safeId}-description` : undefined
-          }
+          aria-label={ariaLabel}
+          aria-labelledby={ariaLabelledBy}
+          aria-describedby={ariaDescribedBy}
           {...rest}
         />
-        <label
-          className={`${styles.label} ${checked ? styles.checked : ''} ${disabled ? styles.disabled : ''}`}
-          htmlFor={safeId}
-        >
-          {children}
-          {ariaDescription && (
-            <span id={`${safeId}-description`} className={styles.description}>
-              {ariaDescription}
-            </span>
-          )}
-        </label>
-      </div>
+        <span className={styles.track} aria-hidden="true">
+          <span className={styles.thumb} />
+        </span>
+      </span>
     );
   }
 );
 
 Switch.displayName = 'Switch';
 
-export default Switch;
+// =============================================================================
+// SwitchGroup - For grouping multiple switches
+// =============================================================================
 
-// Group component for multiple switches
 export interface SwitchGroupProps {
   children: React.ReactNode;
   className?: string;
   orientation?: 'vertical' | 'horizontal';
 }
 
-export const SwitchGroup = ({
+export const SwitchGroup: React.FC<SwitchGroupProps> = ({
   children,
   className = '',
   orientation = 'vertical',
-}: SwitchGroupProps) => {
-  const groupClassName = [styles.switchGroup, styles[orientation], className]
+}) => {
+  const groupClassName = [
+    styles.switchGroup,
+    styles[orientation],
+    className,
+  ]
     .filter(Boolean)
     .join(' ');
 
-  return <div className={groupClassName}>{children}</div>;
+  return (
+    <div className={groupClassName} role="group">
+      {children}
+    </div>
+  );
 };
+
+SwitchGroup.displayName = 'SwitchGroup';
+
+export default Switch;

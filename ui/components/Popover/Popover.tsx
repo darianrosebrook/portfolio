@@ -12,7 +12,6 @@ import React, {
   forwardRef,
   MutableRefObject,
 } from 'react';
-import { gsap } from 'gsap';
 import styles from './Popover.module.scss';
 import { createPortal } from 'react-dom';
 
@@ -60,7 +59,9 @@ interface PopoverContextType {
   position: Position;
   updatePosition: () => void;
   isOpen: boolean;
+  isLeaving: boolean;
   setIsOpen: (isOpen: boolean) => void;
+  close: () => void;
   offset: number;
   placement: Required<NonNullable<PopoverProps['placement']>>;
   triggerStrategy: Required<NonNullable<PopoverProps['triggerStrategy']>>;
@@ -93,6 +94,7 @@ const Popover: React.FC<PopoverProps> & {
   const contentRef = useRef<HTMLDivElement | null>(null);
   const [position, setPosition] = useState<Position>({ top: 0, left: 0 });
   const [internalOpen, setInternalOpen] = useState(false);
+  const [isLeaving, setIsLeaving] = useState(false);
 
   const isControlled = typeof open === 'boolean';
   const isOpen = isControlled ? (open as boolean) : internalOpen;
@@ -109,6 +111,18 @@ const Popover: React.FC<PopoverProps> & {
     },
     [isControlled, onOpenChange]
   );
+
+  const close = useCallback(() => {
+    // Start exit animation
+    setIsLeaving(true);
+
+    // Wait for animation to complete
+    const animationDuration = 150;
+    setTimeout(() => {
+      setIsLeaving(false);
+      setIsOpen(false);
+    }, animationDuration);
+  }, [setIsOpen]);
 
   const updatePosition = useCallback(() => {
     const reference = anchorEl ?? triggerRef.current;
@@ -166,24 +180,24 @@ const Popover: React.FC<PopoverProps> & {
 
   // Open/Close side effects
   useLayoutEffect(() => {
-    if (isOpen) onOpen?.();
-    else onClose?.();
-  }, [isOpen, onOpen, onClose]);
+    if (isOpen && !isLeaving) onOpen?.();
+    if (!isOpen && !isLeaving) onClose?.();
+  }, [isOpen, isLeaving, onOpen, onClose]);
 
   // Outside click and Escape handlers
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (!isOpen) return;
+      if (!isOpen || isLeaving) return;
       const targetNode = e.target as Node;
       const insideContent = contentRef.current?.contains(targetNode);
       const insideTrigger = triggerRef.current?.contains(targetNode);
       const insideAnchor = anchorEl?.contains(targetNode);
       const isInside = Boolean(insideContent || insideTrigger || insideAnchor);
-      if (!isInside) setIsOpen(false);
+      if (!isInside) close();
     };
 
     const handleEscapeKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isOpen) setIsOpen(false);
+      if (e.key === 'Escape' && isOpen && !isLeaving) close();
     };
 
     if (closeOnOutsideClick)
@@ -198,7 +212,7 @@ const Popover: React.FC<PopoverProps> & {
         document.removeEventListener('keydown', handleEscapeKey);
       }
     };
-  }, [isOpen, closeOnOutsideClick, closeOnEscape, anchorEl, setIsOpen]);
+  }, [isOpen, isLeaving, closeOnOutsideClick, closeOnEscape, anchorEl, close]);
 
   // Memoize context value to avoid unnecessary re-renders
   const contextValue = useMemo(
@@ -209,7 +223,9 @@ const Popover: React.FC<PopoverProps> & {
       position,
       updatePosition,
       isOpen,
+      isLeaving,
       setIsOpen,
+      close,
       offset,
       placement,
       triggerStrategy,
@@ -224,7 +240,9 @@ const Popover: React.FC<PopoverProps> & {
       position,
       updatePosition,
       isOpen,
+      isLeaving,
       setIsOpen,
+      close,
       offset,
       placement,
       triggerStrategy,
@@ -236,7 +254,7 @@ const Popover: React.FC<PopoverProps> & {
 
   // Focus management: store previous focus and return it on close
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen || isLeaving) return;
 
     const previousFocus = document.activeElement as HTMLElement;
 
@@ -261,7 +279,7 @@ const Popover: React.FC<PopoverProps> & {
         previousFocus.focus();
       }
     };
-  }, [isOpen, contentRef, triggerRef]);
+  }, [isOpen, isLeaving, contentRef, triggerRef]);
 
   return (
     <PopoverContext.Provider value={contextValue}>
@@ -285,7 +303,8 @@ const Trigger = forwardRef<HTMLElement, TriggerProps>(
       );
     }
 
-    const { triggerRef, isOpen, setIsOpen, triggerStrategy } = context;
+    const { triggerRef, isOpen, setIsOpen, triggerStrategy, isLeaving } =
+      context;
 
     const handleRefs = (element: HTMLElement | null) => {
       triggerRef.current = element;
@@ -300,16 +319,18 @@ const Trigger = forwardRef<HTMLElement, TriggerProps>(
     };
 
     const handleClick = (e: React.MouseEvent) => {
-      if (triggerStrategy === 'click') setIsOpen(!isOpen);
+      if (triggerStrategy === 'click' && !isLeaving) {
+        setIsOpen(!isOpen);
+      }
       onClick?.(e);
     };
 
     const handleMouseEnter = () => {
-      if (triggerStrategy === 'hover') setIsOpen(true);
+      if (triggerStrategy === 'hover' && !isLeaving) setIsOpen(true);
     };
 
     const handleMouseLeave = () => {
-      if (triggerStrategy === 'hover') setIsOpen(false);
+      if (triggerStrategy === 'hover') context.close();
     };
 
     const isNonButtonElement = Component !== 'button';
@@ -346,39 +367,18 @@ const Content: React.FC<ContentProps> = ({
     throw new Error('Popover.Content must be used within a Popover component');
   }
 
-  const { popoverId, position, updatePosition, isOpen, contentRef } = context;
-  const animationRef = useRef<gsap.core.Tween | null>(null);
+  const { popoverId, position, updatePosition, isOpen, isLeaving, contentRef } =
+    context;
 
-  // Get motion tokens from CSS variables
-  const getMotionTokens = useCallback(() => {
-    const style = getComputedStyle(document.documentElement);
-    const prefersReducedMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)'
-    ).matches;
-
-    return {
-      duration: {
-        fast: prefersReducedMotion
-          ? 0
-          : parseFloat(style.getPropertyValue('--semantic-duration-fast')) /
-            1000,
-        medium: prefersReducedMotion
-          ? 0
-          : parseFloat(style.getPropertyValue('--semantic-duration-medium')) /
-            1000,
-      },
-      easing: {
-        standard: style.getPropertyValue('--semantic-easing-standard').trim(),
-        emphasized: style
-          .getPropertyValue('--semantic-easing-emphasized')
-          .trim(),
-        decelerated: style
-          .getPropertyValue('--semantic-easing-decelerated')
-          .trim(),
-      },
-      prefersReducedMotion,
-    };
-  }, []);
+  // Combine refs
+  const combinedRef = useCallback(
+    (node: HTMLDivElement) => {
+      if (contentRef) {
+        (contentRef as React.MutableRefObject<HTMLDivElement>).current = node;
+      }
+    },
+    [contentRef]
+  );
 
   useLayoutEffect(() => {
     if (contentRef.current && isOpen) {
@@ -391,22 +391,6 @@ const Content: React.FC<ContentProps> = ({
       });
       resizeObserver.observe(contentRef.current);
 
-      // Animation
-      const contentElement = contentRef.current;
-      const tokens = getMotionTokens();
-
-      contentElement.style.opacity = '0';
-      contentElement.style.transform = 'translateY(-10px) scale(0.95)';
-
-      animationRef.current = gsap.to(contentElement, {
-        duration: tokens.duration.medium,
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        ease: tokens.prefersReducedMotion ? 'none' : 'back.out(1.7)',
-        onComplete: () => {},
-      });
-
       // Event listeners for window resize and scroll
       const handleUpdate = () => {
         updatePosition();
@@ -418,38 +402,9 @@ const Content: React.FC<ContentProps> = ({
         resizeObserver.disconnect();
         window.removeEventListener('resize', handleUpdate);
         window.removeEventListener('scroll', handleUpdate);
-        if (animationRef.current) {
-          animationRef.current.kill();
-        }
-        contentElement.style.transform = '';
-        contentElement.style.opacity = '';
       };
     }
-    // Ensure cleanup even if contentRef.current is null
-    return () => {
-      if (animationRef.current) {
-        animationRef.current.kill();
-      }
-    };
-  }, [updatePosition, isOpen, contentRef, getMotionTokens]);
-
-  useLayoutEffect(() => {
-    if (!isOpen && contentRef.current) {
-      const contentElement = contentRef.current;
-      const tokens = getMotionTokens();
-
-      const animation = gsap.to(contentElement, {
-        duration: tokens.duration.fast,
-        opacity: 0,
-        scale: 0.95,
-        ease: tokens.prefersReducedMotion ? 'none' : 'power2.in',
-        onComplete: () => {},
-      });
-      return () => {
-        animation.kill();
-      };
-    }
-  }, [isOpen, contentRef, getMotionTokens]);
+  }, [updatePosition, isOpen, contentRef]);
 
   // Call onPositionUpdate when position changes
   useEffect(() => {
@@ -458,13 +413,21 @@ const Content: React.FC<ContentProps> = ({
     }
   }, [position, isOpen, onPositionUpdate]);
 
-  if (!isOpen) return null;
+  if (!isOpen && !isLeaving) return null;
+
+  const contentClassName = [
+    styles.popoverContent,
+    isLeaving && styles.leaving,
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   const node = (
     <div
-      ref={contentRef}
+      ref={combinedRef}
       id={popoverId}
-      className={`${styles.popoverContent} ${className || ''}`}
+      className={contentClassName}
       style={{
         position: 'fixed',
         top: `${position.top}px`,
