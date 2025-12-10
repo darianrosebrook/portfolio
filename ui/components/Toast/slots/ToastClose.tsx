@@ -1,8 +1,7 @@
 'use client';
 import * as React from 'react';
 
-export interface ToastCloseProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
+export interface ToastCloseProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
 export const ToastClose: React.FC<ToastCloseProps> = ({
   children = 'Dismiss',

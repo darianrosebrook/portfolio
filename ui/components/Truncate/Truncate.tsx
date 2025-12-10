@@ -2,8 +2,10 @@
 import * as React from 'react';
 import styles from './Truncate.module.scss';
 
-export interface TruncateProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onToggle'> {
+export interface TruncateProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  'onToggle'
+> {
   /** Element type to render */
   as?: keyof React.JSX.IntrinsicElements;
   /** Number of lines to show before truncating */

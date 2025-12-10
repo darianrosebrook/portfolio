@@ -2,8 +2,7 @@
 import * as React from 'react';
 import styles from './VisuallyHidden.module.scss';
 
-export interface VisuallyHiddenProps
-  extends React.HTMLAttributes<HTMLSpanElement> {
+export interface VisuallyHiddenProps extends React.HTMLAttributes<HTMLSpanElement> {
   /** Element type to render */
   as?: keyof React.JSX.IntrinsicElements;
   /** Whether to show content when focused (for skip links) */

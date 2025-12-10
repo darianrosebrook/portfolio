@@ -62,7 +62,8 @@ interface ButtonBaseProps {
 }
 
 interface ButtonAsButton
-  extends ButtonBaseProps,
+  extends
+    ButtonBaseProps,
     Omit<
       React.ButtonHTMLAttributes<HTMLButtonElement>,
       'className' | 'type' | 'onClick' | 'disabled'
@@ -77,7 +78,8 @@ interface ButtonAsButton
 }
 
 interface ButtonAsAnchor
-  extends ButtonBaseProps,
+  extends
+    ButtonBaseProps,
     Omit<
       React.AnchorHTMLAttributes<HTMLAnchorElement>,
       'className' | 'href' | 'onClick'

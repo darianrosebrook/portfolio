@@ -10,11 +10,10 @@ type ControlSize = 'sm' | 'md' | 'lg';
 
 type NativeInputProps = React.ComponentProps<'input'>;
 
-export interface SwitchProps
-  extends Omit<
-    NativeInputProps,
-    'checked' | 'onChange' | 'type' | 'className' | 'size'
-  > {
+export interface SwitchProps extends Omit<
+  NativeInputProps,
+  'checked' | 'onChange' | 'type' | 'className' | 'size'
+> {
   /**
    * Whether the switch is checked
    */

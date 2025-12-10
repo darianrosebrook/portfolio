@@ -14,9 +14,8 @@ describe('PropsBridge', () => {
     vi.doMock('@codesandbox/sandpack-react', () => ({
       useSandpack: () => ({ sandpack: { updateFile } }),
     }));
-    const { PropsBridge: TestedBridge } = await import(
-      '@/ui/modules/CodeSandbox/primitives/PropsBridge'
-    );
+    const { PropsBridge: TestedBridge } =
+      await import('@/ui/modules/CodeSandbox/primitives/PropsBridge');
     const { rerender } = render(<TestedBridge values={{ a: 1 }} />);
     rerender(<TestedBridge values={{ a: 2 }} />);
     expect(updateFile).toHaveBeenCalled();

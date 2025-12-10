@@ -120,8 +120,10 @@ function DisabledExample() {
 ## API Reference
 
 ```tsx
-interface CheckboxProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'type'> {
+interface CheckboxProps extends Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  'size' | 'type'
+> {
   // Size using design tokens
   size?: 'sm' | 'md' | 'lg'; // Default: 'md'
 
