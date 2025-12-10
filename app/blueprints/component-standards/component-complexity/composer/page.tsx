@@ -1104,8 +1104,12 @@ function useOtp(length: number, mode: Guard, onComplete?: (code: string) => void
       // Auto-advance focus
       if (index < length - 1) {
         refs.current[index + 1]?.focus();
-      } else if (next.every(Boolean)) {
-        onComplete?.(next.join(''));
+      } else {
+        // Validate completion: all positions filled AND length matches expected length
+        const filled = next.filter(Boolean);
+        if (filled.length === length && next.length === length) {
+          onComplete?.(next.join(''));
+        }
       }
       return next;
     });
@@ -1125,12 +1129,20 @@ function useOtp(length: number, mode: Guard, onComplete?: (code: string) => void
 
     setChars(prev => {
       const next = [...prev];
-      clean.forEach((ch, i) => { next[index + i] = ch; });
+      clean.forEach((ch, i) => { 
+        if (index + i < length) {
+          next[index + i] = ch; 
+        }
+      });
       
       const lastIndex = Math.min(index + clean.length - 1, length - 1);
       refs.current[lastIndex]?.focus();
       
-      if (next.every(Boolean)) onComplete?.(next.join(''));
+      // Validate completion: all positions filled AND length matches expected length
+      const filled = next.filter(Boolean);
+      if (filled.length === length && next.length === length) {
+        onComplete?.(next.join(''));
+      }
       return next;
     });
   }, [length, mode, onComplete]);

@@ -517,7 +517,7 @@ interface CheckoutContextType {
   setUseSameAddress: (same: boolean) => void;
   setShippingMethod: (methodId: string) => void;
   updatePaymentMethod: (updates: Partial<PaymentMethod>) => void;
-  applyPromoCode: (code: string) => Promise<boolean>;
+  applyPromoCode: (code: string) => Promise<{ success: boolean; error?: string }>;
   removePromoCode: () => void;
   setIsGift: (isGift: boolean) => void;
   setGiftMessage: (message: string) => void;
@@ -662,16 +662,26 @@ function CheckoutProvider({ children }: { children: React.ReactNode }) {
     setState(prev => ({ ...prev, paymentMethod: { ...prev.paymentMethod, ...updates } }));
   }, []);
 
-  const applyPromoCode = useCallback(async (code: string): Promise<boolean> => {
+  const applyPromoCode = useCallback(async (code: string): Promise<{ success: boolean; error?: string }> => {
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 500));
     const promo = PROMO_CODES[code.toUpperCase()];
-    if (promo) {
-      setState(prev => ({ ...prev, promoCode: promo, promoInput: '' }));
-      return true;
+    if (!promo) {
+      return { success: false, error: 'Invalid promo code' };
     }
-    return false;
-  }, []);
+    
+    // Validate minimum order value before applying
+    const currentSubtotal = state.cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    if (promo.minOrderValue && currentSubtotal < promo.minOrderValue) {
+      return { 
+        success: false, 
+        error: \`This promo code requires a minimum order of $\${promo.minOrderValue}\` 
+      };
+    }
+    
+    setState(prev => ({ ...prev, promoCode: promo, promoInput: '' }));
+    return { success: true };
+  }, [state.cart]);
 
   const removePromoCode = useCallback(() => {
     setState(prev => ({ ...prev, promoCode: null }));
@@ -805,14 +815,19 @@ function ShippingStep() {
   ]);
 
   const handleApplyPromo = async () => {
-    if (!promoInput.trim()) return;
+    if (!promoInput.trim() || applyingPromo) return; // Prevent multiple simultaneous calls
     setApplyingPromo(true);
     setPromoError('');
-    const success = await applyPromoCode(promoInput);
-    if (!success) {
-      setPromoError('Invalid promo code');
+    try {
+      const result = await applyPromoCode(promoInput);
+      if (!result.success) {
+        setPromoError(result.error || 'Invalid promo code');
+      }
+    } catch (error) {
+      setPromoError('Failed to apply promo code. Please try again.');
+    } finally {
+      setApplyingPromo(false);
     }
-    setApplyingPromo(false);
   };
 
   const handleContinue = () => {
