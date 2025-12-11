@@ -795,22 +795,22 @@ function ShippingStep() {
   const { applyPromoCode, removePromoCode } = useCheckout();
   
   const { errors, validateAll, touchField } = useFormValidation<ShippingAddress>([
-    { name: 'firstName', rules: [{ validate: v => v.length > 0, message: 'First name is required' }] },
-    { name: 'lastName', rules: [{ validate: v => v.length > 0, message: 'Last name is required' }] },
+    { name: 'firstName', rules: [{ validate: (v: string) => v.length > 0, message: 'First name is required' }] },
+    { name: 'lastName', rules: [{ validate: (v: string) => v.length > 0, message: 'Last name is required' }] },
     { name: 'email', rules: [
-      { validate: v => v.length > 0, message: 'Email is required' },
-      { validate: v => /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(v), message: 'Enter a valid email address' }
+      { validate: (v: string) => v.length > 0, message: 'Email is required' },
+      { validate: (v: string) => new RegExp('^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$').test(v), message: 'Enter a valid email address' }
     ]},
     { name: 'phone', rules: [
-      { validate: v => v.length > 0, message: 'Phone is required' },
-      { validate: v => /^[\d\s\-\(\)\+]{10,}$/.test(v), message: 'Enter a valid phone number' }
+      { validate: (v: string) => v.length > 0, message: 'Phone is required' },
+      { validate: (v: string) => new RegExp('^[\\d\\s()\\+\\-]{10,}$').test(v), message: 'Enter a valid phone number' }
     ]},
-    { name: 'address1', rules: [{ validate: v => v.length > 0, message: 'Address is required' }] },
-    { name: 'city', rules: [{ validate: v => v.length > 0, message: 'City is required' }] },
-    { name: 'state', rules: [{ validate: v => v.length > 0, message: 'State is required' }] },
+    { name: 'address1', rules: [{ validate: (v: string) => v.length > 0, message: 'Address is required' }] },
+    { name: 'city', rules: [{ validate: (v: string) => v.length > 0, message: 'City is required' }] },
+    { name: 'state', rules: [{ validate: (v: string) => v.length > 0, message: 'State is required' }] },
     { name: 'zipCode', rules: [
-      { validate: v => v.length > 0, message: 'ZIP code is required' },
-      { validate: v => /^\\d{5}(-\\d{4})?$/.test(v), message: 'Enter a valid ZIP code' }
+      { validate: (v: string) => v.length > 0, message: 'ZIP code is required' },
+      { validate: (v: string) => new RegExp('^\\d{5}(-\\d{4})?$').test(v), message: 'Enter a valid ZIP code' }
     ]}
   ]);
 
@@ -910,19 +910,26 @@ function ShippingStep() {
 function PaymentStep() {
   const { state, updatePaymentMethod, setUseSameAddress, updateBillingAddress, setIsGift, setGiftMessage, goToStep } = useCheckout();
   
-  const { errors, validateAll, touchField } = useFormValidation<{ cardNumber: string; expiryDate: string; cvv: string; cardholderName: string }>([
-    { name: 'cardholderName', rules: [{ validate: v => v.length > 0, message: 'Cardholder name is required' }] },
+  type PaymentFormData = {
+    cardNumber: string;
+    expiryDate: string;
+    cvv: string;
+    cardholderName: string;
+  };
+  
+  const { errors, validateAll, touchField } = useFormValidation<PaymentFormData>([
+    { name: 'cardholderName', rules: [{ validate: (v: string) => v.length > 0, message: 'Cardholder name is required' }] },
     { name: 'cardNumber', rules: [
-      { validate: v => v.length > 0, message: 'Card number is required' },
-      { validate: v => /^\d{13,19}$/.test(v.replace(/\s/g, '')), message: 'Enter a valid card number' }
+      { validate: (v: string) => v.length > 0, message: 'Card number is required' },
+      { validate: (v: string) => new RegExp('^\\d{13,19}$').test(v.replace(/\s/g, '')), message: 'Enter a valid card number' }
     ]},
     { name: 'expiryDate', rules: [
-      { validate: v => v.length > 0, message: 'Expiry date is required' },
-      { validate: v => /^(0[1-9]|1[0-2])\/\d{2}$/.test(v), message: 'Use MM/YY format' }
+      { validate: (v: string) => v.length > 0, message: 'Expiry date is required' },
+      { validate: (v: string) => new RegExp('^(0[1-9]|1[0-2])/\\d{2}$').test(v), message: 'Use MM/YY format' }
     ]},
     { name: 'cvv', rules: [
-      { validate: v => v.length > 0, message: 'CVV is required' },
-      { validate: v => /^\\d{3,4}$/.test(v), message: 'Enter a valid CVV' }
+      { validate: (v: string) => v.length > 0, message: 'CVV is required' },
+      { validate: (v: string) => new RegExp('^\\d{3,4}$').test(v), message: 'Enter a valid CVV' }
     ]}
   ]);
 
