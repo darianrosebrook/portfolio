@@ -11,18 +11,18 @@
 }
 
 .sm {
-  font-size: var(--blockquote-typography-sm-fontSize);
-  line-height: var(--blockquote-typography-sm-lineHeight);
+  font-size: var(--semantic-typography-body-03);
+  line-height: var(--semantic-typography-line-height-body);
 }
 
 .md {
-  font-size: var(--blockquote-typography-md-fontSize);
-  line-height: var(--blockquote-typography-md-lineHeight);
+  font-size: var(--semantic-typography-body-02);
+  line-height: var(--semantic-typography-line-height-body);
 }
 
 .lg {
-  font-size: var(--blockquote-typography-lg-fontSize);
-  line-height: var(--blockquote-typography-lg-lineHeight);
+  font-size: var(--semantic-typography-body-01);
+  line-height: var(--semantic-typography-line-height-body);
 }
 
 .default {

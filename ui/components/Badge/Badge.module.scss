@@ -16,13 +16,13 @@
 
   // Default variant
   &.default {
-    padding: var(--badge-size-md-paddingY) var(--badge-size-md-paddingX);
+    padding: var(--badge-size-md-padding-y) var(--badge-size-md-padding-x);
     background: var(--badge-color-background-default);
     border: 1px solid var(--badge-color-border-default);
     border-radius: 12px;
     box-shadow: var(--badge-elevation-default);
     color: var(--badge-color-foreground-primary);
-    font-size: var(--badge-size-md-fontSize);
+    font-size: var(--badge-size-md-font-size);
     transition:
       background-color 0.2s ease,
       border-color 0.2s ease;
@@ -44,11 +44,11 @@
 
   // Status variant (replaces Status component)
   &.status {
-    padding: var(--badge-size-md-paddingY) var(--badge-size-md-paddingX);
+    padding: var(--badge-size-md-padding-y) var(--badge-size-md-padding-x);
     border: 1px solid transparent;
     border-radius: var(--badge-size-md-radius);
     box-shadow: var(--badge-elevation-status);
-    font-size: var(--badge-size-md-fontSize);
+    font-size: var(--badge-size-md-font-size);
     transition:
       background-color 0.2s ease,
       border-color 0.2s ease;
@@ -134,41 +134,41 @@
   // Counter variant
   &.counter {
     justify-content: center;
-    min-width: var(--badge-size-sm-iconSize);
-    padding: var(--badge-size-sm-paddingY) var(--badge-size-sm-paddingX);
+    min-width: var(--badge-size-sm-icon-size);
+    padding: var(--badge-size-sm-padding-y) var(--badge-size-sm-padding-x);
     background: var(--badge-color-background-counter);
     border-radius: var(--badge-size-sm-radius);
     color: var(--badge-color-foreground-onColor);
-    font-size: var(--badge-size-sm-fontSize);
+    font-size: var(--badge-size-sm-font-size);
   }
 
   // Tag variant
   &.tag {
-    padding: var(--badge-size-sm-paddingY) var(--badge-size-sm-paddingX);
+    padding: var(--badge-size-sm-padding-y) var(--badge-size-sm-padding-x);
     background: var(--badge-color-background-tag);
     border: 1px solid var(--badge-color-border-default);
     border-radius: var(--badge-size-sm-radius);
     color: var(--badge-color-foreground-secondary);
-    font-size: var(--badge-size-sm-fontSize);
+    font-size: var(--badge-size-sm-font-size);
   }
 
   // Size variants
   &.sm {
-    padding: var(--badge-size-sm-paddingY) var(--badge-size-sm-paddingX);
+    padding: var(--badge-size-sm-padding-y) var(--badge-size-sm-padding-x);
     border-radius: var(--badge-size-sm-radius);
-    font-size: var(--badge-size-sm-fontSize);
+    font-size: var(--badge-size-sm-font-size);
   }
 
   &.md {
-    padding: var(--badge-size-md-paddingY) var(--badge-size-md-paddingX);
+    padding: var(--badge-size-md-padding-y) var(--badge-size-md-padding-x);
     border-radius: var(--badge-size-md-radius);
-    font-size: var(--badge-size-md-fontSize);
+    font-size: var(--badge-size-md-font-size);
   }
 
   &.lg {
-    padding: var(--badge-size-lg-paddingY) var(--badge-size-lg-paddingX);
+    padding: var(--badge-size-lg-padding-y) var(--badge-size-lg-padding-x);
     border-radius: var(--badge-size-lg-radius);
-    font-size: var(--badge-size-lg-fontSize);
+    font-size: var(--badge-size-lg-font-size);
   }
 }
 
@@ -191,18 +191,18 @@
 
 // Size-specific icon sizing
 .badge.sm .icon {
-  width: var(--badge-size-sm-iconSize);
-  height: var(--badge-size-sm-iconSize);
+  width: var(--badge-size-sm-icon-size);
+  height: var(--badge-size-sm-icon-size);
 }
 
 .badge.md .icon {
-  width: var(--badge-size-md-iconSize);
-  height: var(--badge-size-md-iconSize);
+  width: var(--badge-size-md-icon-size);
+  height: var(--badge-size-md-icon-size);
 }
 
 .badge.lg .icon {
-  width: var(--badge-size-lg-iconSize);
-  height: var(--badge-size-lg-iconSize);
+  width: var(--badge-size-lg-icon-size);
+  height: var(--badge-size-lg-icon-size);
 }
 
 // Container queries for responsive badge sizing
@@ -211,43 +211,43 @@
     @container (max-width: 10rem) {
       // Compact badge for small containers
       gap: calc(var(--badge-spacing-gap) * 0.75);
-      font-size: calc(var(--badge-size-md-fontSize) * 0.9);
+      font-size: calc(var(--badge-size-md-font-size) * 0.9);
 
       &.sm {
-        padding: calc(var(--badge-size-sm-paddingY) * 0.75)
-          calc(var(--badge-size-sm-paddingX) * 0.75);
-        font-size: calc(var(--badge-size-sm-fontSize) * 0.9);
+        padding: calc(var(--badge-size-sm-padding-y) * 0.75)
+          calc(var(--badge-size-sm-padding-x) * 0.75);
+        font-size: calc(var(--badge-size-sm-font-size) * 0.9);
       }
 
       &.md {
-        padding: calc(var(--badge-size-md-paddingY) * 0.75)
-          calc(var(--badge-size-md-paddingX) * 0.75);
-        font-size: calc(var(--badge-size-md-fontSize) * 0.9);
+        padding: calc(var(--badge-size-md-padding-y) * 0.75)
+          calc(var(--badge-size-md-padding-x) * 0.75);
+        font-size: calc(var(--badge-size-md-font-size) * 0.9);
       }
 
       &.lg {
-        padding: calc(var(--badge-size-lg-paddingY) * 0.75)
-          calc(var(--badge-size-lg-paddingX) * 0.75);
-        font-size: calc(var(--badge-size-lg-fontSize) * 0.9);
+        padding: calc(var(--badge-size-lg-padding-y) * 0.75)
+          calc(var(--badge-size-lg-padding-x) * 0.75);
+        font-size: calc(var(--badge-size-lg-font-size) * 0.9);
       }
     }
 
     @container (max-width: 6rem) {
       // Minimal badge for very small containers
       gap: calc(var(--badge-spacing-gap) * 0.5);
-      font-size: calc(var(--badge-size-md-fontSize) * 0.8);
+      font-size: calc(var(--badge-size-md-font-size) * 0.8);
 
       &.sm,
       &.md,
       &.lg {
-        padding: calc(var(--badge-size-sm-paddingY) * 0.5)
-          calc(var(--badge-size-sm-paddingX) * 0.5);
-        font-size: calc(var(--badge-size-sm-fontSize) * 0.8);
+        padding: calc(var(--badge-size-sm-padding-y) * 0.5)
+          calc(var(--badge-size-sm-padding-x) * 0.5);
+        font-size: calc(var(--badge-size-sm-font-size) * 0.8);
       }
 
       .icon {
-        width: calc(var(--badge-size-sm-iconSize) * 0.8);
-        height: calc(var(--badge-size-sm-iconSize) * 0.8);
+        width: calc(var(--badge-size-sm-icon-size) * 0.8);
+        height: calc(var(--badge-size-sm-icon-size) * 0.8);
       }
     }
   }

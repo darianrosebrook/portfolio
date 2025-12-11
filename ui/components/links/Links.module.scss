@@ -12,7 +12,7 @@
     var(--semantic-color-foreground-accent)
   );
   font-weight: var(--animatedLink-typography-fontWeight-regular);
-  line-height: var(--animatedLink-typography-lineHeight-collapse);
+  line-height: var(--animatedLink-typography-line-height-collapse);
   text-decoration: none;
   transition: color 0.2s ease;
 
@@ -32,7 +32,7 @@
     outline: 2px solid
       color-mix(
         in oklab,
-        var(--animatedLink-color-focus, var(--color-focus-ring)) 40%,
+        var(--animatedLink-color-focus, var(--semantic-color-border-accent)) 40%,
         transparent
       );
     outline-offset: 2px;
@@ -45,7 +45,7 @@
   vertical-align: baseline;
   overflow: hidden;
   width: 100%;
-  line-height: var(--animatedLink-typography-lineHeight-collapse);
+  line-height: var(--animatedLink-typography-line-height-collapse);
 }
 
 .text {

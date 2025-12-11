@@ -3,12 +3,10 @@
  */
 @mixin vars {
   /* === Color Tokens === */
-  --accordion-color-background-hover: var(
-    --semantic-interaction-background-hover
-  );
+  --accordion-color-background-hover: var(--semantic-interaction-background-hover);
   --accordion-color-text: var(--semantic-color-foreground-primary);
-  --accordion-color-textHover: var(--semantic-interaction-text-hover);
-  --accordion-color-textSecondary: var(--semantic-color-foreground-secondary);
+  --accordion-color-text-hover: var(--semantic-interaction-text-hover);
+  --accordion-color-text-secondary: var(--semantic-color-foreground-secondary);
   --accordion-color-icon: var(--semantic-color-foreground-tertiary);
 
   /* === Border Tokens === */
@@ -17,18 +15,16 @@
   --accordion-border-radius: var(--core-shape-radius-small);
 
   /* === Spacing Tokens === */
-  --accordion-spacing-gap: var(--core-spacing-size-04);
-  --accordion-spacing-paddingX: var(--core-spacing-size-00);
-  --accordion-spacing-paddingY: var(--core-spacing-size-04);
+  --accordion-spacing-gap: var(--core-spacing-size-07);
+  --accordion-spacing-padding-x: var(--core-spacing-size-00);
+  --accordion-spacing-padding-y: var(--core-spacing-size-04);
 
   /* === Text Tokens === */
   --accordion-text-weight: var(--semantic-typography-font-weight-medium);
   --accordion-text-size: var(--semantic-typography-body-02);
-  --accordion-text-lineHeight: var(--semantic-typography-line-height-default);
-  --accordion-text-sizeContent: var(--semantic-typography-body-03);
-  --accordion-text-lineHeightContent: var(
-    --semantic-typography-line-height-relaxed
-  );
+  --accordion-text-line-height: var(--semantic-typography-line-height-default);
+  --accordion-text-size-content: var(--semantic-typography-body-03);
+  --accordion-text-line-height-content: var(--semantic-typography-line-height-relaxed);
 
   /* === Icon Tokens === */
   --accordion-icon-size: var(--core-spacing-size-04);

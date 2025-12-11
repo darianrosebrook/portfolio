@@ -20,18 +20,18 @@
 
 /* Size variants */
 .sm {
-  font-size: var(--list-typography-sm-fontSize);
-  line-height: var(--list-typography-sm-lineHeight);
+  font-size: var(--semantic-typography-body-04);
+  line-height: var(--semantic-typography-line-height-body);
 }
 
 .md {
-  font-size: var(--list-typography-md-fontSize);
-  line-height: var(--list-typography-md-lineHeight);
+  font-size: var(--semantic-typography-body-03);
+  line-height: var(--semantic-typography-line-height-body);
 }
 
 .lg {
-  font-size: var(--list-typography-lg-fontSize);
-  line-height: var(--list-typography-lg-lineHeight);
+  font-size: var(--semantic-typography-body-02);
+  line-height: var(--semantic-typography-line-height-body);
 }
 
 /* Variant styles */

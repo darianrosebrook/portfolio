@@ -35,7 +35,8 @@
   box-shadow: var(--dialog-elevation-default);
   color: var(--dialog-color-foreground-default);
   animation: dialog-enter var(--dialog-motion-duration-enter, 300ms)
-    var(--dialog-motion-easing-enter, cubic-bezier(0.34, 1.56, 0.64, 1)) forwards;
+    var(--dialog-motion-easing-enter, cubic-bezier(0.34, 1.56, 0.64, 1))
+    forwards;
 
   // CSS Containment - strict for isolated modal
   contain: strict;
@@ -48,27 +49,27 @@
   // Size variants
   &--sm {
     width: var(--dialog-size-sm-width);
-    max-width: var(--dialog-size-sm-maxWidth);
+    max-width: var(--dialog-size-sm-max-width);
   }
 
   &--md {
     width: var(--dialog-size-md-width);
-    max-width: var(--dialog-size-md-maxWidth);
+    max-width: var(--dialog-size-md-max-width);
   }
 
   &--lg {
     width: var(--dialog-size-lg-width);
-    max-width: var(--dialog-size-lg-maxWidth);
+    max-width: var(--dialog-size-lg-max-width);
   }
 
   &--xl {
     width: var(--dialog-size-xl-width);
-    max-width: var(--dialog-size-xl-maxWidth);
+    max-width: var(--dialog-size-xl-max-width);
   }
 
   &--full {
     width: var(--dialog-size-full-width);
-    max-width: var(--dialog-size-full-maxWidth);
+    max-width: var(--dialog-size-full-max-width);
     height: var(--dialog-size-full-height);
     border-radius: 0;
   }
@@ -91,8 +92,8 @@
       margin: 0;
       color: var(--dialog-color-foreground-title);
       font-weight: var(--dialog-typography-title-fontWeight);
-      font-size: var(--dialog-typography-title-fontSize);
-      line-height: var(--dialog-typography-title-lineHeight);
+      font-size: var(--dialog-typography-title-font-size);
+      line-height: var(--dialog-typography-title-line-height);
     }
 
     .body {
@@ -174,8 +175,8 @@
     margin: 0;
     color: var(--dialog-color-foreground-title);
     font-weight: var(--dialog-typography-title-fontWeight);
-    font-size: var(--dialog-typography-title-fontSize);
-    line-height: var(--dialog-typography-title-lineHeight);
+    font-size: var(--dialog-typography-title-font-size);
+    line-height: var(--dialog-typography-title-line-height);
   }
 
   .body {

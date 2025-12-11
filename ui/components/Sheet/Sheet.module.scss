@@ -111,14 +111,14 @@
       color: var(--sheet-color-textTitle);
       font-weight: var(--sheet-text-weightTitle);
       font-size: var(--sheet-text-sizeTitle);
-      line-height: var(--sheet-text-lineHeightTitle);
+      line-height: var(--sheet-text-line-heightTitle);
     }
 
     .description {
       margin: 0;
       color: var(--sheet-color-textDescription);
       font-size: var(--sheet-text-sizeDescription);
-      line-height: var(--sheet-text-lineHeightDescription);
+      line-height: var(--sheet-text-line-heightDescription);
     }
   }
 
@@ -127,7 +127,7 @@
     overflow-y: auto;
     color: var(--sheet-color-text);
     font-size: var(--sheet-text-size);
-    line-height: var(--sheet-text-lineHeight);
+    line-height: var(--sheet-text-line-height);
   }
 
   .footer {
@@ -151,7 +151,7 @@
     border: none;
     border-radius: var(--sheet-border-radiusClose);
     outline: none;
-    color: var(--sheet-color-textMuted);
+    color: var(--sheet-color-text-muted);
     transition:
       background-color var(--sheet-motion-duration) var(--sheet-motion-easing),
       color var(--sheet-motion-duration) var(--sheet-motion-easing);
@@ -160,7 +160,7 @@
     inset-inline-end: var(--sheet-spacing-closeOffset);
 
     &:hover {
-      background-color: var(--sheet-color-backgroundHover);
+      background-color: var(--sheet-color-background-hover);
       color: var(--sheet-color-text);
     }
 

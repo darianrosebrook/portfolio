@@ -21,7 +21,7 @@
 
 .link {
   color: var(--breadcrumbs-color-foreground-link);
-  line-height: var(--breadcrumbs-typography-lineHeight-collapse);
+  line-height: var(--breadcrumbs-typography-line-height-collapse);
   text-decoration: none;
 
   &:hover {
@@ -31,7 +31,7 @@
 
   &:focus-visible {
     border-radius: var(--breadcrumbs-shape-radius-small, 0.125rem);
-    outline: 2px solid var(--breadcrumbs-color-focus, var(--color-focus-ring));
+    outline: 2px solid var(--breadcrumbs-color-focus);
     outline-offset: 2px;
   }
 }
@@ -55,7 +55,7 @@ details.overflow summary {
 
   &:focus-visible {
     border-radius: var(--breadcrumbs-shape-radius-small, 0.125rem);
-    outline: 2px solid var(--breadcrumbs-color-focus, var(--color-focus-ring));
+    outline: 2px solid var(--breadcrumbs-color-focus);
     outline-offset: 2px;
   }
 }

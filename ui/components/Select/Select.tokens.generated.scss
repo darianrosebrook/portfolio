@@ -5,84 +5,58 @@
   /* === Color Tokens === */
   --select-color-background-default: var(--semantic-color-background-primary);
   --select-color-background-hover: var(--semantic-color-background-hover);
-  --select-color-background-isOpen: var(--semantic-color-background-active);
+  --select-color-background-is-open: var(--semantic-color-background-active);
   --select-color-background-focus: var(--semantic-color-background-primary);
-  --select-color-background-focusVisible: var(
-    --semantic-color-background-primary
-  );
+  --select-color-background-focus-visible: var(--semantic-color-background-primary);
   --select-color-background-disabled: var(--semantic-color-background-disabled);
-  --select-color-background-readOnly: var(
-    --semantic-color-background-read-only
-  );
+  --select-color-background-read-only: var(--semantic-color-background-read-only);
   --select-color-background-checked: var(--semantic-color-background-primary);
-  --select-color-background-error: var(
-    --semantic-color-background-danger-subtle
-  );
-  --select-color-background-success: var(
-    --semantic-color-background-success-subtle
-  );
+  --select-color-background-error: var(--semantic-color-background-danger-subtle);
+  --select-color-background-success: var(--semantic-color-background-success-subtle);
   --select-color-foreground-default: var(--semantic-color-foreground-primary);
   --select-color-foreground-hover: var(--semantic-color-foreground-hover);
-  --select-color-foreground-isOpen: var(--semantic-color-foreground-primary);
+  --select-color-foreground-is-open: var(--semantic-color-foreground-primary);
   --select-color-foreground-focus: var(--semantic-color-foreground-primary);
-  --select-color-foreground-focusVisible: var(
-    --semantic-color-foreground-primary
-  );
+  --select-color-foreground-focus-visible: var(--semantic-color-foreground-primary);
   --select-color-foreground-disabled: var(--semantic-color-foreground-disabled);
-  --select-color-foreground-readOnly: var(--semantic-color-foreground-primary);
+  --select-color-foreground-read-only: var(--semantic-color-foreground-primary);
   --select-color-foreground-checked: var(--semantic-color-foreground-primary);
   --select-color-foreground-error: var(--semantic-color-foreground-danger);
   --select-color-foreground-success: var(--semantic-color-foreground-success);
   --select-color-border-default: var(--semantic-color-border-primary);
   --select-color-border-hover: var(--semantic-color-border-bold);
-  --select-color-border-isOpen: var(--semantic-color-border-accent);
+  --select-color-border-is-open: var(--semantic-color-border-accent);
   --select-color-border-focus: var(--semantic-color-border-primary);
-  --select-color-border-focusVisible: var(--semantic-color-border-accent);
+  --select-color-border-focus-visible: var(--semantic-color-border-accent);
   --select-color-border-disabled: var(--semantic-color-border-disabled);
-  --select-color-border-readOnly: var(--semantic-color-border-light);
+  --select-color-border-read-only: var(--semantic-color-border-light);
   --select-color-border-checked: var(--semantic-color-border-accent);
   --select-color-border-error: var(--semantic-color-border-danger);
   --select-color-border-success: var(--semantic-color-border-success);
   --select-color-icon-default: var(--semantic-color-foreground-secondary);
   --select-color-icon-hover: var(--semantic-color-foreground-primary);
-  --select-color-icon-isOpen: var(--semantic-color-foreground-accent);
+  --select-color-icon-is-open: var(--semantic-color-foreground-accent);
   --select-color-icon-focus: var(--semantic-color-foreground-secondary);
-  --select-color-icon-focusVisible: var(--semantic-color-foreground-accent);
+  --select-color-icon-focus-visible: var(--semantic-color-foreground-accent);
   --select-color-icon-disabled: var(--semantic-color-foreground-disabled);
-  --select-color-icon-readOnly: var(--semantic-color-foreground-secondary);
+  --select-color-icon-read-only: var(--semantic-color-foreground-secondary);
   --select-color-icon-checked: var(--semantic-color-foreground-accent);
-  --select-color-placeholder-default: var(
-    --semantic-color-foreground-placeholder
-  );
-  --select-color-placeholder-hover: var(
-    --semantic-color-foreground-placeholder
-  );
-  --select-color-placeholder-isOpen: var(
-    --semantic-color-foreground-placeholder
-  );
-  --select-color-placeholder-focus: var(
-    --semantic-color-foreground-placeholder
-  );
-  --select-color-placeholder-focusVisible: var(
-    --semantic-color-foreground-placeholder
-  );
-  --select-color-placeholder-disabled: var(
-    --semantic-color-foreground-disabled
-  );
-  --select-color-placeholder-readOnly: var(
-    --semantic-color-foreground-placeholder
-  );
-  --select-color-placeholder-checked: var(
-    --semantic-color-foreground-placeholder
-  );
+  --select-color-placeholder-default: var(--semantic-color-foreground-placeholder);
+  --select-color-placeholder-hover: var(--semantic-color-foreground-placeholder);
+  --select-color-placeholder-is-open: var(--semantic-color-foreground-placeholder);
+  --select-color-placeholder-focus: var(--semantic-color-foreground-placeholder);
+  --select-color-placeholder-focus-visible: var(--semantic-color-foreground-placeholder);
+  --select-color-placeholder-disabled: var(--semantic-color-foreground-disabled);
+  --select-color-placeholder-read-only: var(--semantic-color-foreground-placeholder);
+  --select-color-placeholder-checked: var(--semantic-color-foreground-placeholder);
 
   /* === Size Tokens === */
   --select-size-padding-default: var(--core-spacing-size-03);
   --select-size-padding-hover: var(--core-spacing-size-03);
   --select-size-padding-focus: var(--core-spacing-size-03);
-  --select-size-padding-focusVisible: var(--core-spacing-size-03);
+  --select-size-padding-focus-visible: var(--core-spacing-size-03);
   --select-size-padding-disabled: var(--core-spacing-size-03);
-  --select-size-padding-readOnly: var(--core-spacing-size-03);
+  --select-size-padding-read-only: var(--core-spacing-size-03);
   --select-size-padding-checked: var(--core-spacing-size-03);
   --select-size-radius-default: var(--core-shape-radius-medium);
   --select-size-border-default: var(--core-shape-border-width-hairline);
@@ -90,7 +64,7 @@
   /* === Font Tokens === */
   --select-font-size-default: var(--semantic-typography-body-02);
   --select-font-weight-default: var(--semantic-typography-font-weight-regular);
-  --select-font-lineHeight-default: var(--semantic-typography-line-height-body);
+  --select-font-line-height-default: var(--semantic-typography-line-height-body);
 
   /* === Motion Tokens === */
   --select-motion-duration-fast: var(--core-motion-duration-short);

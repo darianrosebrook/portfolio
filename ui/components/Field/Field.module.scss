@@ -13,7 +13,7 @@
   @scope (.root) {
     .header {
       color: var(--field-label-color);
-      font-size: var(--field-label-fontSize);
+      font-size: var(--field-label-font-size);
     }
 
     .control :is(input, select, textarea) {
@@ -55,7 +55,7 @@
 @supports not selector(:scope) {
   .header {
     color: var(--field-label-color);
-    font-size: var(--field-label-fontSize);
+    font-size: var(--field-label-font-size);
   }
 
   .control :is(input, select, textarea) {
@@ -151,7 +151,7 @@
       gap: calc(var(--field-gap-y) * 0.75);
 
       .header {
-        font-size: calc(var(--field-label-fontSize) * 0.9);
+        font-size: calc(var(--field-label-font-size) * 0.9);
       }
 
       .control :is(input, select, textarea) {
@@ -160,7 +160,7 @@
 
       .meta {
         gap: calc(var(--field-gap-meta) * 0.75);
-        font-size: calc(var(--field-meta-fontSize, 0.875rem) * 0.9);
+        font-size: calc(var(--field-meta-font-size, 0.875rem) * 0.9);
       }
     }
 
@@ -169,16 +169,16 @@
       gap: calc(var(--field-gap-y) * 0.5);
 
       .header {
-        font-size: calc(var(--field-label-fontSize) * 0.85);
+        font-size: calc(var(--field-label-font-size) * 0.85);
       }
 
       .control :is(input, select, textarea) {
         padding: calc(var(--field-pad-y) * 0.5) calc(var(--field-pad-x) * 0.5);
-        font-size: calc(var(--field-input-fontSize, 1rem) * 0.9);
+        font-size: calc(var(--field-input-font-size, 1rem) * 0.9);
       }
 
       .meta {
-        font-size: calc(var(--field-meta-fontSize, 0.875rem) * 0.85);
+        font-size: calc(var(--field-meta-font-size, 0.875rem) * 0.85);
       }
     }
 

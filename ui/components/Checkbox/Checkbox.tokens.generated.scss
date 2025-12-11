@@ -5,21 +5,19 @@
   /* === Size Tokens === */
   --checkbox-size-sm-width: var(--semantic-size-4);
   --checkbox-size-sm-height: var(--semantic-size-4);
-  --checkbox-size-sm-iconSize: var(--semantic-size-3);
+  --checkbox-size-sm-icon-size: var(--semantic-size-3);
   --checkbox-size-md-width: var(--semantic-size-5);
   --checkbox-size-md-height: var(--semantic-size-5);
-  --checkbox-size-md-iconSize: var(--semantic-size-4);
+  --checkbox-size-md-icon-size: var(--semantic-size-4);
   --checkbox-size-lg-width: var(--semantic-size-6);
   --checkbox-size-lg-height: var(--semantic-size-6);
-  --checkbox-size-lg-iconSize: var(--semantic-size-5);
+  --checkbox-size-lg-icon-size: var(--semantic-size-5);
 
   /* === Color Tokens === */
   --checkbox-color-background-default: var(--semantic-color-background-surface);
   --checkbox-color-background-checked: var(--semantic-color-brand-500);
   --checkbox-color-background-indeterminate: var(--semantic-color-brand-500);
-  --checkbox-color-background-disabled: var(
-    --semantic-color-background-disabled
-  );
+  --checkbox-color-background-disabled: var(--semantic-color-background-disabled);
   --checkbox-color-border-default: var(--semantic-color-border-default);
   --checkbox-color-border-hover: var(--semantic-color-border-hover);
   --checkbox-color-border-focus: var(--semantic-color-border-focus);
@@ -40,7 +38,7 @@
   --checkbox-transition-easing: var(--core-motion-easing-standard);
 
   /* === Focus Tokens === */
-  --checkbox-focus-ring-width: var(--semantic-interaction-focus-ring-width);
-  --checkbox-focus-ring-color: var(--semantic-color-border-accent);
-  --checkbox-focus-ring-offset: var(--semantic-interaction-focus-ring-offset);
+  --checkbox-focus-ring-width: var(--semantic-focus-ring-width);
+  --checkbox-focus-ring-color: var(--semantic-focus-ring-color);
+  --checkbox-focus-ring-offset: var(--semantic-focus-ring-offset);
 }

@@ -184,7 +184,7 @@
   color: var(--switch-color-text-default);
   font-weight: var(--switch-text-label-weight, 500);
   font-size: var(--switch-text-label-size, 0.875rem);
-  line-height: var(--switch-text-label-lineHeight, 1.4);
+  line-height: var(--switch-text-label-line-height, 1.4);
   cursor: pointer;
 
   .switchField.disabled & {
@@ -196,7 +196,7 @@
 .description {
   color: var(--switch-color-text-default);
   font-size: var(--switch-text-description-size, 0.8125rem);
-  line-height: var(--switch-text-description-lineHeight, 1.4);
+  line-height: var(--switch-text-description-line-height, 1.4);
 
   .switchField.disabled & {
     color: var(--switch-color-text-disabled);

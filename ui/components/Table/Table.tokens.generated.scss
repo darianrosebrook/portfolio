@@ -4,8 +4,8 @@
 @mixin vars {
   /* === Color Tokens === */
   --table-color-text: var(--semantic-color-foreground-primary);
-  --table-color-textHead: var(--semantic-color-foreground-primary);
-  --table-color-textMuted: var(--semantic-color-foreground-secondary);
+  --table-color-text-head: var(--semantic-color-foreground-primary);
+  --table-color-text-muted: var(--semantic-color-foreground-secondary);
   --table-color-border: var(--semantic-color-border-light);
   --table-color-background-hover: var(--semantic-interaction-background-hover);
   --table-color-background-selected: var(--semantic-color-background-accent);
@@ -15,23 +15,23 @@
   --table-border-width: var(--core-shape-border-width-hairline);
 
   /* === Spacing Tokens === */
-  --table-spacing-cellX: var(--core-spacing-size-03);
-  --table-spacing-cellY: var(--core-spacing-size-02);
+  --table-spacing-cell-x: var(--core-spacing-size-03);
+  --table-spacing-cell-y: var(--core-spacing-size-02);
   --table-spacing-caption: var(--core-spacing-size-04);
-  --table-spacing-sortGap: var(--core-spacing-size-02);
-  --table-spacing-checkboxOffset: var(--core-spacing-size-01);
+  --table-spacing-sort-gap: var(--core-spacing-size-02);
+  --table-spacing-checkbox-offset: var(--core-spacing-size-01);
 
   /* === Size Tokens === */
-  --table-size-cellHeight: var(--semantic-control-size-md-height);
-  --table-size-checkboxColumn: var(--core-spacing-size-09);
+  --table-size-cell-height: var(--semantic-control-size-md-height);
+  --table-size-checkbox-column: var(--core-spacing-size-09);
 
   /* === Text Tokens === */
   --table-text-size: var(--semantic-typography-body-03);
-  --table-text-lineHeight: var(--semantic-typography-line-height-normal);
-  --table-text-sizeCaption: var(--semantic-typography-body-04);
-  --table-text-sizeSort: var(--semantic-typography-body-04);
-  --table-text-weightHead: var(--semantic-typography-font-weight-bold);
-  --table-text-weightFooter: var(--semantic-typography-font-weight-medium);
+  --table-text-line-height: var(--semantic-typography-line-height-normal);
+  --table-text-size-caption: var(--semantic-typography-body-04);
+  --table-text-size-sort: var(--semantic-typography-body-04);
+  --table-text-weight-head: var(--semantic-typography-font-weight-bold);
+  --table-text-weight-footer: var(--semantic-typography-font-weight-medium);
 
   /* === Motion Tokens === */
   --table-motion-duration: var(--core-motion-duration-short);

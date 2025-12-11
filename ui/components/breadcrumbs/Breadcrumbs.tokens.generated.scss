@@ -3,35 +3,23 @@
  */
 @mixin vars {
   /* === Color Tokens === */
-  --breadcrumbs-color-foreground-secondary: var(
-    --semantic-color-foreground-secondary
-  );
+  --breadcrumbs-color-foreground-secondary: var(--semantic-color-foreground-secondary);
   --breadcrumbs-color-foreground-link: var(--semantic-color-foreground-link);
-  --breadcrumbs-color-foreground-primary: var(
-    --semantic-color-foreground-primary
-  );
-  --breadcrumbs-color-foreground-tertiary: var(
-    --semantic-color-foreground-tertiary
-  );
-  --breadcrumbs-color-background-elevated: var(
-    --semantic-color-background-elevated
-  );
+  --breadcrumbs-color-foreground-primary: var(--semantic-color-foreground-primary);
+  --breadcrumbs-color-foreground-tertiary: var(--semantic-color-foreground-tertiary);
+  --breadcrumbs-color-background-elevated: var(--semantic-color-background-elevated);
   --breadcrumbs-color-border-subtle: var(--semantic-color-border-subtle);
   --breadcrumbs-color-focus: var(--semantic-color-border-accent);
 
   /* === Typography Tokens === */
-  --breadcrumbs-typography-lineHeight-collapse: var(
-    --core-typography-line-height-collapse
-  );
+  --breadcrumbs-typography-line-height-collapse: var(--core-typography-line-height-collapse);
 
   /* === Shape Tokens === */
   --breadcrumbs-shape-radius-medium: var(--semantic-shape-radius-medium);
   --breadcrumbs-shape-radius-small: var(--semantic-shape-radius-small);
 
   /* === Elevation Tokens === */
-  --breadcrumbs-elevation-surface-raised: var(
-    --semantic-elevation-surface-raised
-  );
+  --breadcrumbs-elevation-surface-raised: var(--semantic-elevation-surface-raised);
 
   /* === Spacing Tokens === */
   --breadcrumbs-spacing-gap-default: 0.5rem;

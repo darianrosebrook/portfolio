@@ -7,27 +7,25 @@
   --dialog-color-background-backdrop: var(--semantic-color-overlay-scrim);
   --dialog-color-foreground-default: var(--semantic-color-foreground-primary);
   --dialog-color-foreground-title: var(--semantic-color-foreground-primary);
-  --dialog-color-foreground-secondary: var(
-    --semantic-color-foreground-secondary
-  );
+  --dialog-color-foreground-secondary: var(--semantic-color-foreground-secondary);
   --dialog-color-border-default: var(--semantic-color-border-subtle);
 
   /* === Size Tokens === */
   --dialog-size-sm-width: 400px;
-  --dialog-size-sm-maxWidth: 90vw;
+  --dialog-size-sm-max-width: 90vw;
   --dialog-size-sm-padding: var(--core-spacing-size-06);
   --dialog-size-md-width: 500px;
-  --dialog-size-md-maxWidth: 90vw;
+  --dialog-size-md-max-width: 90vw;
   --dialog-size-md-padding: var(--core-spacing-size-07);
   --dialog-size-lg-width: 700px;
-  --dialog-size-lg-maxWidth: 90vw;
+  --dialog-size-lg-max-width: 90vw;
   --dialog-size-lg-padding: var(--core-spacing-size-08);
   --dialog-size-xl-width: 900px;
-  --dialog-size-xl-maxWidth: 95vw;
+  --dialog-size-xl-max-width: 95vw;
   --dialog-size-xl-padding: var(--core-spacing-size-09);
   --dialog-size-full-width: 100vw;
   --dialog-size-full-height: 100vh;
-  --dialog-size-full-maxWidth: 100vw;
+  --dialog-size-full-max-width: 100vw;
   --dialog-size-full-padding: var(--core-spacing-size-08);
   --dialog-size-radius-default: var(--semantic-shape-radius-large);
 
@@ -35,36 +33,28 @@
   --dialog-elevation-default: var(--semantic-elevation-surface-floating);
 
   /* === Spacing Tokens === */
-  --dialog-spacing-header-paddingTop: var(--core-spacing-size-06);
-  --dialog-spacing-header-paddingRight: var(--core-spacing-size-07);
-  --dialog-spacing-header-paddingBottom: var(--core-spacing-size-04);
-  --dialog-spacing-header-paddingLeft: var(--core-spacing-size-07);
-  --dialog-spacing-body-paddingTop: var(--core-spacing-size-04);
-  --dialog-spacing-body-paddingRight: var(--core-spacing-size-07);
-  --dialog-spacing-body-paddingBottom: var(--core-spacing-size-04);
-  --dialog-spacing-body-paddingLeft: var(--core-spacing-size-07);
-  --dialog-spacing-footer-paddingTop: var(--core-spacing-size-04);
-  --dialog-spacing-footer-paddingRight: var(--core-spacing-size-07);
-  --dialog-spacing-footer-paddingBottom: var(--core-spacing-size-06);
-  --dialog-spacing-footer-paddingLeft: var(--core-spacing-size-07);
+  --dialog-spacing-header-padding-top: var(--core-spacing-size-06);
+  --dialog-spacing-header-padding-right: var(--core-spacing-size-07);
+  --dialog-spacing-header-padding-bottom: var(--core-spacing-size-04);
+  --dialog-spacing-header-padding-left: var(--core-spacing-size-07);
+  --dialog-spacing-body-padding-top: var(--core-spacing-size-04);
+  --dialog-spacing-body-padding-right: var(--core-spacing-size-07);
+  --dialog-spacing-body-padding-bottom: var(--core-spacing-size-04);
+  --dialog-spacing-body-padding-left: var(--core-spacing-size-07);
+  --dialog-spacing-footer-padding-top: var(--core-spacing-size-04);
+  --dialog-spacing-footer-padding-right: var(--core-spacing-size-07);
+  --dialog-spacing-footer-padding-bottom: var(--core-spacing-size-06);
+  --dialog-spacing-footer-padding-left: var(--core-spacing-size-07);
   --dialog-spacing-footer-gap: var(--core-spacing-size-03);
 
   /* === Typography Tokens === */
-  --dialog-typography-title-fontSize: var(--semantic-typography-heading-04);
-  --dialog-typography-title-fontWeight: var(
-    --semantic-typography-font-weight-bold
-  );
-  --dialog-typography-title-lineHeight: var(
-    --semantic-typography-line-height-heading
-  );
+  --dialog-typography-title-font-size: var(--semantic-typography-heading-04);
+  --dialog-typography-title-font-weight: var(--semantic-typography-font-weight-bold);
+  --dialog-typography-title-line-height: var(--semantic-typography-line-height-heading);
 
   /* === Motion Tokens === */
-  --dialog-motion-duration-enter: var(
-    --semantic-motion-interaction-enter-duration
-  );
-  --dialog-motion-duration-exit: var(
-    --semantic-motion-interaction-exit-duration
-  );
+  --dialog-motion-duration-enter: var(--semantic-motion-interaction-enter-duration);
+  --dialog-motion-duration-exit: var(--semantic-motion-interaction-exit-duration);
   --dialog-motion-easing-enter: var(--semantic-motion-interaction-enter-easing);
   --dialog-motion-easing-exit: var(--semantic-motion-interaction-exit-easing);
 }

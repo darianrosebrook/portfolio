@@ -13,39 +13,25 @@
   --textfield-color-label-disabled: var(--semantic-color-foreground-disabled);
   --textfield-color-input-background: var(--semantic-color-background-primary);
   --textfield-color-input-border: var(--semantic-color-border-light);
-  --textfield-color-input-borderHover: var(--semantic-color-border-primary);
-  --textfield-color-input-borderFocus: var(--semantic-color-border-accent);
-  --textfield-color-input-borderError: var(--semantic-color-status-danger);
+  --textfield-color-input-border-hover: var(--semantic-color-border-primary);
+  --textfield-color-input-border-focus: var(--semantic-color-border-accent);
+  --textfield-color-input-border-error: var(--semantic-color-status-danger);
   --textfield-color-input-text: var(--semantic-color-foreground-primary);
-  --textfield-color-input-placeholder: var(
-    --semantic-color-foreground-tertiary
-  );
+  --textfield-color-input-placeholder: var(--semantic-color-foreground-tertiary);
   --textfield-color-input-disabled: var(--semantic-color-background-disabled);
   --textfield-color-helper-default: var(--semantic-color-foreground-tertiary);
   --textfield-color-helper-error: var(--semantic-color-status-danger);
 
   /* === Typography Tokens === */
-  --textfield-typography-label-fontSize: var(--semantic-typography-body-04);
-  --textfield-typography-label-fontWeight: var(
-    --semantic-typography-font-weight-medium
-  );
-  --textfield-typography-label-lineHeight: var(
-    --semantic-typography-line-height-tight
-  );
-  --textfield-typography-input-fontSize: var(--semantic-typography-body-01);
-  --textfield-typography-input-fontWeight: var(
-    --semantic-typography-font-weight-regular
-  );
-  --textfield-typography-input-lineHeight: var(
-    --semantic-typography-line-height-normal
-  );
-  --textfield-typography-helper-fontSize: var(--semantic-typography-body-04);
-  --textfield-typography-helper-fontWeight: var(
-    --semantic-typography-font-weight-regular
-  );
-  --textfield-typography-helper-lineHeight: var(
-    --semantic-typography-line-height-tight
-  );
+  --textfield-typography-label-font-size: var(--semantic-typography-body-04);
+  --textfield-typography-label-font-weight: var(--semantic-typography-font-weight-medium);
+  --textfield-typography-label-line-height: var(--semantic-typography-line-height-tight);
+  --textfield-typography-input-font-size: var(--semantic-typography-body-01);
+  --textfield-typography-input-font-weight: var(--semantic-typography-font-weight-regular);
+  --textfield-typography-input-line-height: var(--semantic-typography-line-height-normal);
+  --textfield-typography-helper-font-size: var(--semantic-typography-body-04);
+  --textfield-typography-helper-font-weight: var(--semantic-typography-font-weight-regular);
+  --textfield-typography-helper-line-height: var(--semantic-typography-line-height-tight);
 
   /* === Border Tokens === */
   --textfield-border-width: var(--core-shape-border-width-hairline);

@@ -27,7 +27,7 @@
   flex-direction: column;
   gap: var(--popover-size-gap-default);
   min-width: 256px;
-  max-width: calc(100vw - var(--popover-size-maxWidth-default));
+  max-width: calc(100vw - var(--popover-size-max-width-default));
   padding: var(--popover-size-padding-default);
   background: var(--popover-color-background-content);
   border-radius: var(--popover-size-radius-default);

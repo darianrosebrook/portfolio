@@ -28,7 +28,7 @@
 
   // CSS Containment - paint containment prevents overflow
   contain: paint;
-  max-inline-size: var(--toast-size-maxWidth);
+  max-inline-size: var(--toast-size-max-width);
 }
 
 .item.entering {
@@ -44,40 +44,40 @@
 
 // Slot styles
 .title {
+  color: var(--toast-text-title-color, inherit);
   font-weight: 600;
   font-size: var(--toast-text-title-size, 0.9375rem);
-  line-height: var(--toast-text-title-lineHeight, 1.4);
-  color: var(--toast-text-title-color, inherit);
+  line-height: var(--toast-text-title-line-height, 1.4);
 }
 
 .description {
-  font-size: var(--toast-text-description-size, 0.875rem);
-  line-height: var(--toast-text-description-lineHeight, 1.5);
-  color: var(--toast-text-description-color, inherit);
   opacity: 0.85;
+  color: var(--toast-text-description-color, inherit);
+  font-size: var(--toast-text-description-size, 0.875rem);
+  line-height: var(--toast-text-description-line-height, 1.5);
 }
 
 .row {
   display: flex;
   gap: var(--toast-spacing-gap);
-  align-items: center;
   justify-content: flex-end;
+  align-items: center;
 }
 
 .action {
   padding: 0.375rem 0.75rem;
-  font-size: 0.8125rem;
-  font-weight: 500;
   background: transparent;
   border: 1px solid var(--toast-surface-border);
   border-radius: 0.25rem;
-  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.8125rem;
   transition:
     background-color 150ms ease,
     border-color 150ms ease;
+  cursor: pointer;
 
   &:hover {
-    background: rgba(0, 0, 0, 0.05);
+    background: rgb(0 0 0 / 5%);
   }
 
   &:focus-visible {
@@ -88,24 +88,24 @@
 
 .close {
   display: inline-flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   width: 1.5rem;
   height: 1.5rem;
   padding: 0;
   background: transparent;
   border: none;
   border-radius: 0.25rem;
-  cursor: pointer;
-  color: inherit;
   opacity: 0.6;
+  color: inherit;
   transition:
     opacity 150ms ease,
     background-color 150ms ease;
+  cursor: pointer;
 
   &:hover {
+    background: rgb(0 0 0 / 5%);
     opacity: 1;
-    background: rgba(0, 0, 0, 0.05);
   }
 
   &:focus-visible {

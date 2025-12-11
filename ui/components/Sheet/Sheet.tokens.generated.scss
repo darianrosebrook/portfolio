@@ -5,18 +5,18 @@
   /* === Color Tokens === */
   --sheet-color-overlay: #00000080;
   --sheet-color-background: var(--semantic-color-background-primary);
-  --sheet-color-backgroundHover: var(--semantic-interaction-background-hover);
+  --sheet-color-background-hover: var(--semantic-interaction-background-hover);
   --sheet-color-border: var(--semantic-color-border-light);
-  --sheet-color-borderLight: var(--semantic-color-border-subtle);
+  --sheet-color-border-light: var(--semantic-color-border-subtle);
   --sheet-color-text: var(--semantic-color-foreground-primary);
-  --sheet-color-textTitle: var(--semantic-color-foreground-primary);
-  --sheet-color-textDescription: var(--semantic-color-foreground-secondary);
-  --sheet-color-textMuted: var(--semantic-color-foreground-tertiary);
+  --sheet-color-text-title: var(--semantic-color-foreground-primary);
+  --sheet-color-text-description: var(--semantic-color-foreground-secondary);
+  --sheet-color-text-muted: var(--semantic-color-foreground-tertiary);
 
   /* === Border Tokens === */
   --sheet-border-width: var(--core-shape-border-width-hairline);
   --sheet-border-radius: var(--core-shape-radius-medium);
-  --sheet-border-radiusClose: var(--core-shape-radius-small);
+  --sheet-border-radius-close: var(--core-shape-radius-small);
 
   /* === Size Tokens === */
   --sheet-size-width: 400px;
@@ -27,28 +27,26 @@
   --sheet-spacing-padding: var(--core-spacing-size-06);
   --sheet-spacing-gap: var(--core-spacing-size-04);
   --sheet-spacing-section: var(--core-spacing-size-04);
-  --sheet-spacing-headerGap: var(--core-spacing-size-02);
-  --sheet-spacing-footerGap: var(--core-spacing-size-03);
-  --sheet-spacing-closeOffset: var(--core-spacing-size-04);
+  --sheet-spacing-header-gap: var(--core-spacing-size-02);
+  --sheet-spacing-footer-gap: var(--core-spacing-size-03);
+  --sheet-spacing-close-offset: var(--core-spacing-size-04);
 
   /* === Text Tokens === */
   --sheet-text-size: var(--semantic-typography-body-02);
-  --sheet-text-lineHeight: var(--semantic-typography-line-height-default);
-  --sheet-text-sizeTitle: var(--semantic-typography-heading-06);
-  --sheet-text-lineHeightTitle: var(--semantic-typography-line-height-tight);
-  --sheet-text-weightTitle: var(--semantic-typography-font-weight-semibold);
-  --sheet-text-sizeDescription: var(--semantic-typography-body-03);
-  --sheet-text-lineHeightDescription: var(
-    --semantic-typography-line-height-relaxed
-  );
+  --sheet-text-line-height: var(--semantic-typography-line-height-default);
+  --sheet-text-size-title: var(--semantic-typography-heading-06);
+  --sheet-text-line-height-title: var(--semantic-typography-line-height-tight);
+  --sheet-text-weight-title: var(--semantic-typography-font-weight-semibold);
+  --sheet-text-size-description: var(--semantic-typography-body-03);
+  --sheet-text-line-height-description: var(--semantic-typography-line-height-relaxed);
 
   /* === Motion Tokens === */
   --sheet-motion-duration: var(--core-motion-duration-medium);
   --sheet-motion-easing: var(--core-motion-easing-standard);
 
   /* === ZIndex Tokens === */
-  --sheet-zIndex-overlay: 50;
-  --sheet-zIndex-content: 51;
+  --sheet-z-index-overlay: 50;
+  --sheet-z-index-content: 51;
 
   /* === Focus Tokens === */
   --sheet-focus-width: var(--core-shape-border-width-thick);

@@ -3,67 +3,35 @@
  */
 @mixin vars {
   /* === Color Tokens === */
-  --toggleSwitch-color-background-default: var(
-    --semantic-color-background-secondary
-  );
-  --toggleSwitch-color-background-hover: var(
-    --semantic-interaction-background-hover
-  );
-  --toggleSwitch-color-background-active: var(
-    --semantic-interaction-background-active
-  );
-  --toggleSwitch-color-background-checked: var(
-    --semantic-color-action-background-primary-default
-  );
-  --toggleSwitch-color-background-checkedHover: var(
-    --semantic-interaction-background-hover
-  );
-  --toggleSwitch-color-background-disabled: var(
-    --semantic-color-background-disabled
-  );
-  --toggleSwitch-color-foreground-default: var(
-    --semantic-color-foreground-primary
-  );
+  --toggleSwitch-color-background-default: var(--semantic-color-background-secondary);
+  --toggleSwitch-color-background-hover: var(--semantic-interaction-background-hover);
+  --toggleSwitch-color-background-active: var(--semantic-interaction-background-active);
+  --toggleSwitch-color-background-checked: var(--semantic-color-action-background-primary-default);
+  --toggleSwitch-color-background-checked-hover: var(--semantic-interaction-background-hover);
+  --toggleSwitch-color-background-disabled: var(--semantic-color-background-disabled);
+  --toggleSwitch-color-foreground-default: var(--semantic-color-foreground-primary);
   --toggleSwitch-color-foreground-hover: var(--semantic-interaction-text-hover);
-  --toggleSwitch-color-foreground-active: var(
-    --semantic-interaction-text-active
-  );
-  --toggleSwitch-color-foreground-disabled: var(
-    --semantic-color-foreground-disabled
-  );
+  --toggleSwitch-color-foreground-active: var(--semantic-interaction-text-active);
+  --toggleSwitch-color-foreground-disabled: var(--semantic-color-foreground-disabled);
   --toggleSwitch-color-thumb-default: var(--semantic-color-foreground-inverse);
   --toggleSwitch-color-thumb-hover: var(--semantic-interaction-text-hover);
   --toggleSwitch-color-thumb-active: var(--semantic-interaction-text-active);
-  --toggleSwitch-color-thumb-disabled: var(
-    --semantic-color-foreground-disabled
-  );
+  --toggleSwitch-color-thumb-disabled: var(--semantic-color-foreground-disabled);
   --toggleSwitch-color-border-default: var(--semantic-color-border-light);
   --toggleSwitch-color-border-hover: var(--semantic-interaction-border-hover);
   --toggleSwitch-color-border-active: var(--semantic-interaction-border-active);
   --toggleSwitch-color-border-disabled: var(--semantic-color-border-disabled);
 
   /* === Size Tokens === */
-  --toggleSwitch-size-width-small: calc(
-    {semantic.control.size.sm.height} + {semantic.control.size.sm.paddingX} * 2
-  );
-  --toggleSwitch-size-width-medium: calc(
-    {semantic.control.size.md.height} + {semantic.control.size.md.paddingX} * 2
-  );
-  --toggleSwitch-size-width-large: calc(
-    {semantic.control.size.lg.height} + {semantic.control.size.lg.paddingX} * 2
-  );
+  --toggleSwitch-size-width-small: calc({semantic.control.size.sm.height} + {semantic.control.size.sm.paddingX} * 2);
+  --toggleSwitch-size-width-medium: calc({semantic.control.size.md.height} + {semantic.control.size.md.paddingX} * 2);
+  --toggleSwitch-size-width-large: calc({semantic.control.size.lg.height} + {semantic.control.size.lg.paddingX} * 2);
   --toggleSwitch-size-height-small: var(--semantic-control-size-sm-height);
   --toggleSwitch-size-height-medium: var(--semantic-control-size-md-height);
   --toggleSwitch-size-height-large: var(--semantic-control-size-lg-height);
-  --toggleSwitch-size-thumb-small: calc(
-    {semantic.control.size.sm.height} - {semantic.control.size.sm.paddingY} * 2
-  );
-  --toggleSwitch-size-thumb-medium: calc(
-    {semantic.control.size.md.height} - {semantic.control.size.md.paddingY} * 2
-  );
-  --toggleSwitch-size-thumb-large: calc(
-    {semantic.control.size.lg.height} - {semantic.control.size.lg.paddingY} * 2
-  );
+  --toggleSwitch-size-thumb-small: calc({semantic.control.size.sm.height} - {semantic.control.size.sm.paddingY} * 2);
+  --toggleSwitch-size-thumb-medium: calc({semantic.control.size.md.height} - {semantic.control.size.md.paddingY} * 2);
+  --toggleSwitch-size-thumb-large: calc({semantic.control.size.lg.height} - {semantic.control.size.lg.paddingY} * 2);
   --toggleSwitch-size-padding-small: var(--core-spacing-size-01);
   --toggleSwitch-size-padding-medium: var(--core-spacing-size-02);
   --toggleSwitch-size-padding-large: var(--core-spacing-size-03);
@@ -88,27 +56,15 @@
   --toggleSwitch-motion-duration-normal: var(--core-motion-duration-medium);
   --toggleSwitch-motion-duration-slow: var(--core-motion-duration-long);
   --toggleSwitch-motion-easing-standard: var(--core-motion-easing-standard);
-  --toggleSwitch-motion-easing-decelerate: var(
-    --core-motion-easing-emphasized-out
-  );
-  --toggleSwitch-motion-easing-accelerate: var(
-    --core-motion-easing-emphasized-in
-  );
+  --toggleSwitch-motion-easing-decelerate: var(--core-motion-easing-emphasized-out);
+  --toggleSwitch-motion-easing-accelerate: var(--core-motion-easing-emphasized-in);
 
   /* === Typography Tokens === */
-  --toggleSwitch-typography-fontSize-small: var(--semantic-typography-body-04);
-  --toggleSwitch-typography-fontSize-medium: var(--semantic-typography-body-03);
-  --toggleSwitch-typography-fontSize-large: var(--semantic-typography-body-02);
-  --toggleSwitch-typography-fontWeight-default: var(
-    --semantic-typography-font-weight-regular
-  );
-  --toggleSwitch-typography-fontWeight-medium: var(
-    --semantic-typography-font-weight-medium
-  );
-  --toggleSwitch-typography-lineHeight-default: var(
-    --semantic-typography-line-height-normal
-  );
-  --toggleSwitch-typography-lineHeight-tight: var(
-    --semantic-typography-line-height-tight
-  );
+  --toggleSwitch-typography-font-size-small: var(--semantic-typography-body-04);
+  --toggleSwitch-typography-font-size-medium: var(--semantic-typography-body-03);
+  --toggleSwitch-typography-font-size-large: var(--semantic-typography-body-02);
+  --toggleSwitch-typography-font-weight-default: var(--semantic-typography-font-weight-regular);
+  --toggleSwitch-typography-font-weight-medium: var(--semantic-typography-font-weight-medium);
+  --toggleSwitch-typography-line-height-default: var(--semantic-typography-line-height-normal);
+  --toggleSwitch-typography-line-height-tight: var(--semantic-typography-line-height-tight);
 }

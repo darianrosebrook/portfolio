@@ -179,6 +179,22 @@ function refToCssVar(value) {
 }
 
 /**
+ * Convert camelCase string to kebab-case
+ * Example: "paddingY" -> "padding-y", "maxWidth" -> "max-width"
+ */
+function camelToKebab(str) {
+  return str.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`);
+}
+
+/**
+ * Normalize a path segment array to kebab-case
+ * Converts camelCase keys to kebab-case for CSS custom property naming
+ */
+function normalizePathToKebab(pathSegments) {
+  return pathSegments.map((segment) => camelToKebab(segment)).join('-');
+}
+
+/**
  * Walk a nested token object producing a grouped structure with flat tokens
  * Returns: { groups: { groupName: { tokens: {}, path: [] } }, flat: {} }
  */
@@ -191,7 +207,7 @@ function flattenTokens(obj, prefixSegments) {
 
     // Check if this is a structured DTCG 1.0 value (don't flatten these)
     if (isStructuredColorValue(val) || isStructuredDimensionValue(val)) {
-      const tokenName = nextPath.join('-');
+      const tokenName = normalizePathToKebab(nextPath);
       flat[tokenName] = val;
       continue;
     }
@@ -218,8 +234,8 @@ function flattenTokens(obj, prefixSegments) {
         Object.assign(groups, result.groups);
       }
     } else {
-      // Leaf token
-      const tokenName = nextPath.join('-');
+      // Leaf token - normalize to kebab-case
+      const tokenName = normalizePathToKebab(nextPath);
       flat[tokenName] = val;
     }
   }

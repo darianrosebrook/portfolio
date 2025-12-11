@@ -11,20 +11,13 @@ export async function updateSession(request: NextRequest) {
   const allCookies = request.cookies.getAll();
   const supabaseCookies = allCookies.filter((c) => c.name.startsWith('sb-'));
 
-  // Debug logging
-  if (supabaseCookies.length > 0) {
-    console.log('[Middleware] Found Supabase cookies:', {
-      count: supabaseCookies.length,
-      names: supabaseCookies.map((c) => c.name),
-    });
-  }
-
   // Check for actual auth token cookies (not just code-verifier)
   const hasAuthTokenCookies = supabaseCookies.some(
     (c) => c.name.includes('-auth-token') && !c.name.includes('code-verifier')
   );
 
-  const supabase = createServerClient(
+  // Create supabase client for cookie management (not used directly but needed for cookie handlers)
+  const _supabase = createServerClient(
     env.nextPublicSupabaseUrl,
     env.nextPublicSupabaseAnonKey,
     {

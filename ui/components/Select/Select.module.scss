@@ -22,7 +22,7 @@
   color: var(--select-color-foreground-default, #141414);
   font-weight: var(--select-font-weight-default, 400);
   font-size: var(--select-font-size-default, 16px);
-  line-height: var(--select-font-lineHeight-default, 1.5);
+  line-height: var(--select-font-line-height-default, 1.5);
   transition:
     background-color var(--select-motion-duration-fast)
       var(--select-motion-easing-standard),
@@ -38,23 +38,23 @@
 
   &--sm {
     height: var(--semantic-control-size-sm-height);
-    padding: var(--semantic-control-size-sm-paddingY)
-      var(--semantic-control-size-sm-paddingX);
-    font-size: var(--semantic-typography-body-small-fontSize);
+    padding: var(--semantic-control-size-sm-padding-y)
+      var(--semantic-control-size-sm-padding-x);
+    font-size: var(--semantic-typography-body-small-font-size);
   }
 
   &--md {
     height: var(--semantic-control-size-md-height);
-    padding: var(--semantic-control-size-md-paddingY)
-      var(--semantic-control-size-md-paddingX);
-    font-size: var(--semantic-typography-body-default-fontSize);
+    padding: var(--semantic-control-size-md-padding-y)
+      var(--semantic-control-size-md-padding-x);
+    font-size: var(--semantic-typography-body-default-font-size);
   }
 
   &--lg {
     height: var(--semantic-control-size-lg-height);
-    padding: var(--semantic-control-size-lg-paddingY)
-      var(--semantic-control-size-lg-paddingX);
-    font-size: var(--semantic-typography-body-default-fontSize);
+    padding: var(--semantic-control-size-lg-padding-y)
+      var(--semantic-control-size-lg-padding-x);
+    font-size: var(--semantic-typography-body-default-font-size);
   }
 
   & > button {
@@ -263,7 +263,7 @@
   border-radius: var(--select-size-radius-default, 8px);
   color: var(--select-color-foreground-default, #141414);
   font-weight: var(--select-font-weight-default, 400);
-  line-height: var(--select-font-lineHeight-default, 1.5);
+  line-height: var(--select-font-line-height-default, 1.5);
   transition:
     background-color var(--select-motion-duration-fast)
       var(--select-motion-easing-standard),
@@ -275,23 +275,23 @@
 
   &--sm {
     height: var(--semantic-control-size-sm-height);
-    padding: var(--semantic-control-size-sm-paddingY)
-      var(--semantic-control-size-sm-paddingX);
-    font-size: var(--semantic-typography-body-small-fontSize);
+    padding: var(--semantic-control-size-sm-padding-y)
+      var(--semantic-control-size-sm-padding-x);
+    font-size: var(--semantic-typography-body-small-font-size);
   }
 
   &--md {
     height: var(--semantic-control-size-md-height);
-    padding: var(--semantic-control-size-md-paddingY)
-      var(--semantic-control-size-md-paddingX);
-    font-size: var(--semantic-typography-body-default-fontSize);
+    padding: var(--semantic-control-size-md-padding-y)
+      var(--semantic-control-size-md-padding-x);
+    font-size: var(--semantic-typography-body-default-font-size);
   }
 
   &--lg {
     height: var(--semantic-control-size-lg-height);
-    padding: var(--semantic-control-size-lg-paddingY)
-      var(--semantic-control-size-lg-paddingX);
-    font-size: var(--semantic-typography-body-default-fontSize);
+    padding: var(--semantic-control-size-lg-padding-y)
+      var(--semantic-control-size-lg-padding-x);
+    font-size: var(--semantic-typography-body-default-font-size);
   }
 
   &:focus {
@@ -379,18 +379,18 @@
         font-size: calc(var(--select-font-size-default, 16px) * 0.9);
 
         &--sm {
-          padding: calc(var(--semantic-control-size-sm-paddingY) * 0.75)
-            calc(var(--semantic-control-size-sm-paddingX) * 0.75);
+          padding: calc(var(--semantic-control-size-sm-padding-y) * 0.75)
+            calc(var(--semantic-control-size-sm-padding-x) * 0.75);
         }
 
         &--md {
-          padding: calc(var(--semantic-control-size-md-paddingY) * 0.75)
-            calc(var(--semantic-control-size-md-paddingX) * 0.75);
+          padding: calc(var(--semantic-control-size-md-padding-y) * 0.75)
+            calc(var(--semantic-control-size-md-padding-x) * 0.75);
         }
 
         &--lg {
-          padding: calc(var(--semantic-control-size-lg-paddingY) * 0.75)
-            calc(var(--semantic-control-size-lg-paddingX) * 0.75);
+          padding: calc(var(--semantic-control-size-lg-padding-y) * 0.75)
+            calc(var(--semantic-control-size-lg-padding-x) * 0.75);
         }
       }
     }
@@ -404,10 +404,10 @@
         &--sm,
         &--md,
         &--lg {
-          padding: calc(var(--semantic-control-size-sm-paddingY) * 0.5)
-            calc(var(--semantic-control-size-sm-paddingX) * 0.5);
+          padding: calc(var(--semantic-control-size-sm-padding-y) * 0.5)
+            calc(var(--semantic-control-size-sm-padding-x) * 0.5);
           font-size: calc(
-            var(--semantic-typography-body-small-fontSize) * 0.85
+            var(--semantic-typography-body-small-font-size) * 0.85
           );
         }
       }

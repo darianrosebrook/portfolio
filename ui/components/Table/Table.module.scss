@@ -20,11 +20,11 @@
     border-collapse: collapse;
     color: var(--table-color-text);
     font-size: var(--table-text-size);
-    line-height: var(--table-text-lineHeight);
+    line-height: var(--table-text-line-height);
     caption-side: bottom;
 
     .caption {
-      color: var(--table-color-textMuted);
+      color: var(--table-color-text-muted);
       font-size: var(--table-text-sizeCaption);
       text-align: start;
       margin-block-start: var(--table-spacing-caption);
@@ -104,7 +104,7 @@
         .sortIcon {
           flex-shrink: 0;
           opacity: 0.7;
-          color: var(--table-color-textMuted);
+          color: var(--table-color-text-muted);
           font-size: var(--table-text-sizeSort);
         }
       }
@@ -151,11 +151,11 @@
       border-collapse: collapse;
       color: var(--table-color-text);
       font-size: var(--table-text-size);
-      line-height: var(--table-text-lineHeight);
+      line-height: var(--table-text-line-height);
       caption-side: bottom;
 
       .caption {
-        color: var(--table-color-textMuted);
+        color: var(--table-color-text-muted);
         font-size: var(--table-text-sizeCaption);
         text-align: start;
         margin-block-start: var(--table-spacing-caption);
@@ -235,7 +235,7 @@
           .sortIcon {
             flex-shrink: 0;
             opacity: 0.7;
-            color: var(--table-color-textMuted);
+            color: var(--table-color-text-muted);
             font-size: var(--table-text-sizeSort);
           }
         }

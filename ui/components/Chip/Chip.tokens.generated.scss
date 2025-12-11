@@ -3,110 +3,42 @@
  */
 @mixin vars {
   /* === Color Tokens === */
-  --chip-color-background-default: var(
-    --semantic-color-action-background-secondary-default
-  );
-  --chip-color-background-hover: var(
-    --semantic-color-action-background-secondary-hover
-  );
-  --chip-color-background-active: var(
-    --semantic-color-action-background-secondary-active
-  );
+  --chip-color-background-default: var(--semantic-color-action-background-secondary-default);
+  --chip-color-background-hover: var(--semantic-color-action-background-secondary-hover);
+  --chip-color-background-active: var(--semantic-color-action-background-secondary-active);
   --chip-color-background-focus: var(--semantic-color-mode-white);
-  --chip-color-background-selected: var(
-    --semantic-color-action-background-primary-default
-  );
-  --chip-color-background-selectedHover: var(
-    --semantic-color-action-background-primary-hover
-  );
-  --chip-color-background-selectedActive: var(
-    --semantic-color-action-background-primary-active
-  );
-  --chip-color-background-dismissible: var(
-    --semantic-color-action-background-secondary-default
-  );
-  --chip-color-background-dismissibleHover: var(
-    --semantic-color-action-background-secondary-hover
-  );
-  --chip-color-background-dismissibleActive: var(
-    --semantic-color-action-background-secondary-active
-  );
-  --chip-color-foreground-default: var(
-    --semantic-color-action-foreground-secondary-default
-  );
-  --chip-color-foreground-hover: var(
-    --semantic-color-action-foreground-secondary-default
-  );
-  --chip-color-foreground-active: var(
-    --semantic-color-action-foreground-secondary-default
-  );
-  --chip-color-foreground-focus: var(
-    --semantic-color-action-foreground-primary-default
-  );
-  --chip-color-foreground-selected: var(
-    --semantic-color-action-foreground-primary-default
-  );
-  --chip-color-foreground-selectedHover: var(
-    --semantic-color-action-foreground-primary-default
-  );
-  --chip-color-foreground-selectedActive: var(
-    --semantic-color-action-foreground-primary-default
-  );
-  --chip-color-foreground-dismissible: var(
-    --semantic-color-action-foreground-secondary-default
-  );
-  --chip-color-foreground-dismissibleHover: var(
-    --semantic-color-action-foreground-secondary-default
-  );
-  --chip-color-foreground-dismissibleActive: var(
-    --semantic-color-action-foreground-secondary-default
-  );
-  --chip-color-border-default: var(
-    --semantic-color-action-border-secondary-default
-  );
-  --chip-color-border-hover: var(
-    --semantic-color-action-border-secondary-hover
-  );
-  --chip-color-border-active: var(
-    --semantic-color-action-border-secondary-default
-  );
+  --chip-color-background-selected: var(--semantic-color-action-background-primary-default);
+  --chip-color-background-selected-hover: var(--semantic-color-action-background-primary-hover);
+  --chip-color-background-selected-active: var(--semantic-color-action-background-primary-active);
+  --chip-color-background-dismissible: var(--semantic-color-action-background-secondary-default);
+  --chip-color-background-dismissible-hover: var(--semantic-color-action-background-secondary-hover);
+  --chip-color-background-dismissible-active: var(--semantic-color-action-background-secondary-active);
+  --chip-color-foreground-default: var(--semantic-color-action-foreground-secondary-default);
+  --chip-color-foreground-hover: var(--semantic-color-action-foreground-secondary-default);
+  --chip-color-foreground-active: var(--semantic-color-action-foreground-secondary-default);
+  --chip-color-foreground-focus: var(--semantic-color-action-foreground-primary-default);
+  --chip-color-foreground-selected: var(--semantic-color-action-foreground-primary-default);
+  --chip-color-foreground-selected-hover: var(--semantic-color-action-foreground-primary-default);
+  --chip-color-foreground-selected-active: var(--semantic-color-action-foreground-primary-default);
+  --chip-color-foreground-dismissible: var(--semantic-color-action-foreground-secondary-default);
+  --chip-color-foreground-dismissible-hover: var(--semantic-color-action-foreground-secondary-default);
+  --chip-color-foreground-dismissible-active: var(--semantic-color-action-foreground-secondary-default);
+  --chip-color-border-default: var(--semantic-color-action-border-secondary-default);
+  --chip-color-border-hover: var(--semantic-color-action-border-secondary-hover);
+  --chip-color-border-active: var(--semantic-color-action-border-secondary-default);
   --chip-color-border-focus: var(--semantic-color-action-border-primary-focus);
-  --chip-color-border-selected: var(
-    --semantic-color-action-border-primary-default
-  );
-  --chip-color-border-selectedHover: var(
-    --semantic-color-action-border-primary-default
-  );
-  --chip-color-border-selectedActive: var(
-    --semantic-color-action-border-primary-default
-  );
-  --chip-color-border-dismissible: var(
-    --semantic-color-action-border-secondary-default
-  );
-  --chip-color-border-dismissibleHover: var(
-    --semantic-color-action-border-secondary-hover
-  );
-  --chip-color-border-dismissibleActive: var(
-    --semantic-color-action-border-secondary-default
-  );
-  --chip-color-icon-default: var(
-    --semantic-color-action-foreground-secondary-default
-  );
-  --chip-color-icon-hover: var(
-    --semantic-color-action-foreground-secondary-default
-  );
-  --chip-color-icon-active: var(
-    --semantic-color-action-foreground-secondary-default
-  );
-  --chip-color-icon-selected: var(
-    --semantic-color-action-foreground-primary-default
-  );
-  --chip-color-icon-dismissible: var(
-    --semantic-color-action-foreground-secondary-default
-  );
-  --chip-color-icon-dismissibleHover: var(
-    --semantic-color-action-foreground-secondary-default
-  );
+  --chip-color-border-selected: var(--semantic-color-action-border-primary-default);
+  --chip-color-border-selected-hover: var(--semantic-color-action-border-primary-default);
+  --chip-color-border-selected-active: var(--semantic-color-action-border-primary-default);
+  --chip-color-border-dismissible: var(--semantic-color-action-border-secondary-default);
+  --chip-color-border-dismissible-hover: var(--semantic-color-action-border-secondary-hover);
+  --chip-color-border-dismissible-active: var(--semantic-color-action-border-secondary-default);
+  --chip-color-icon-default: var(--semantic-color-action-foreground-secondary-default);
+  --chip-color-icon-hover: var(--semantic-color-action-foreground-secondary-default);
+  --chip-color-icon-active: var(--semantic-color-action-foreground-secondary-default);
+  --chip-color-icon-selected: var(--semantic-color-action-foreground-primary-default);
+  --chip-color-icon-dismissible: var(--semantic-color-action-foreground-secondary-default);
+  --chip-color-icon-dismissible-hover: var(--semantic-color-action-foreground-secondary-default);
 
   /* === Size Tokens === */
   --chip-size-padding-horizontal: var(--core-spacing-size-04);
@@ -120,7 +52,7 @@
   /* === Text Tokens === */
   --chip-text-size: var(--semantic-typography-body-04);
   --chip-text-weight: var(--semantic-typography-font-weight-medium);
-  --chip-text-lineHeight: var(--semantic-typography-line-height-tight);
+  --chip-text-line-height: var(--semantic-typography-line-height-tight);
 
   /* === Motion Tokens === */
   --chip-motion-duration-fast: var(--core-motion-duration-short);
@@ -130,11 +62,11 @@
   --chip-motion-easing-in: var(--core-motion-easing-in);
   --chip-motion-easing-out: var(--core-motion-easing-out);
   --chip-motion-scale-pressed: 0.98;
-  --chip-motion-scale-iconEnter: 0.8;
-  --chip-motion-scale-iconExit: 0.8;
+  --chip-motion-scale-icon-enter: 0.8;
+  --chip-motion-scale-icon-exit: 0.8;
 
   /* === Focus Tokens === */
-  --chip-focus-outlineWidth: var(--core-shape-border-width-thick);
-  --chip-focus-outlineOffset: var(--core-spacing-size-02);
-  --chip-focus-outlineColor: var(--semantic-color-action-border-primary-focus);
+  --chip-focus-outline-width: var(--core-shape-border-width-thick);
+  --chip-focus-outline-offset: var(--core-spacing-size-02);
+  --chip-focus-outline-color: var(--semantic-color-action-border-primary-focus);
 }

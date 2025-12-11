@@ -8,7 +8,7 @@
   flex-direction: column;
   overflow: hidden;
   width: 100%;
-  max-width: var(--command-size-maxWidth);
+  max-width: var(--command-size-max-width);
   background-color: var(--command-color-background);
   border: var(--command-border-width) solid var(--command-color-border);
   border-radius: var(--command-border-radius);
@@ -23,21 +23,21 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding: var(--command-spacing-dialogPadding);
+  padding: var(--command-spacing-dialog-padding);
   background-color: var(--command-color-overlay);
 }
 
 .dialog {
   overflow: hidden;
   width: 100%;
-  max-width: var(--command-size-maxWidth);
+  max-width: var(--command-size-max-width);
   background-color: var(--command-color-background);
   border: var(--command-border-width) solid var(--command-color-border);
   border-radius: var(--command-border-radius);
   box-shadow: var(--command-shadow);
   animation: commandDialogIn var(--command-motion-duration)
     var(--command-motion-easing);
-  margin-block-start: var(--command-spacing-dialogMarginTop);
+  margin-block-start: var(--command-spacing-dialog-margin-top);
 }
 
 @keyframes commandDialogIn {
@@ -57,7 +57,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  padding: var(--command-spacing-inputPadding);
+  padding: var(--command-spacing-input-padding);
   border-block-end: var(--command-border-width) solid
     var(--command-color-borderLight);
 
@@ -65,24 +65,24 @@
     position: absolute;
     width: var(--command-size-icon);
     height: var(--command-size-icon);
-    color: var(--command-color-textMuted);
+    color: var(--command-color-text-muted);
     pointer-events: none;
-    inset-inline-start: var(--command-spacing-inputIconOffset);
+    inset-inline-start: var(--command-spacing-input-icon-offset);
   }
 
   .input {
     width: 100%;
-    padding: 0 var(--command-spacing-inputPaddingX);
+    padding: 0 var(--command-spacing-input-padding-x);
     background: none;
     border: none;
     outline: none;
     color: var(--command-color-text);
     font-size: var(--command-text-size);
-    line-height: var(--command-text-lineHeight);
-    padding-inline-start: var(--command-spacing-inputPaddingLeft);
+    line-height: var(--command-text-line-height);
+    padding-inline-start: var(--command-spacing-input-padding-left);
 
     &::placeholder {
-      color: var(--command-color-textMuted);
+      color: var(--command-color-text-muted);
     }
   }
 }
@@ -90,16 +90,16 @@
 // List and items
 .list {
   overflow-y: auto;
-  max-height: var(--command-size-maxHeight);
-  padding: var(--command-spacing-listPadding);
+  max-height: var(--command-size-max-height);
+  padding: var(--command-spacing-list-padding);
 
   .empty {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: var(--command-spacing-emptyPadding);
-    color: var(--command-color-textMuted);
-    font-size: var(--command-text-sizeSmall);
+    padding: var(--command-spacing-empty-padding);
+    color: var(--command-color-text-muted);
+    font-size: var(--command-text-size-small);
     text-align: center;
   }
 }
@@ -111,15 +111,15 @@
 
 .group {
   &:not(:first-child) {
-    margin-block-start: var(--command-spacing-groupGap);
+    margin-block-start: var(--command-spacing-group-gap);
   }
 
   .groupHeading {
-    padding: var(--command-spacing-groupHeadingPadding);
-    color: var(--command-color-textMuted);
-    font-weight: var(--command-text-weightMedium);
-    font-size: var(--command-text-sizeSmall);
-    line-height: var(--command-text-lineHeightTight);
+    padding: var(--command-spacing-group-heading-padding);
+    color: var(--command-color-text-muted);
+    font-weight: var(--command-text-weight-medium);
+    font-size: var(--command-text-size-small);
+    line-height: var(--command-text-line-height-tight);
     letter-spacing: 0.05em;
     text-transform: uppercase;
   }
@@ -132,10 +132,10 @@
 
 .item {
   display: flex;
-  gap: var(--command-spacing-itemGap);
+  gap: var(--command-spacing-item-gap);
   align-items: center;
-  padding: var(--command-spacing-itemPadding);
-  border-radius: var(--command-border-radiusItem);
+  padding: var(--command-spacing-item-padding);
+  border-radius: var(--command-border-radius-item);
   outline: none;
   color: var(--command-color-text);
   transition: background-color var(--command-motion-duration)
@@ -144,7 +144,7 @@
 
   &:hover,
   &.selected {
-    background-color: var(--command-color-backgroundHover);
+    background-color: var(--command-color-background-hover);
   }
 
   &.disabled {
@@ -162,7 +162,7 @@
     align-items: center;
     width: var(--command-size-icon);
     height: var(--command-size-icon);
-    color: var(--command-color-textMuted);
+    color: var(--command-color-text-muted);
   }
 
   .itemContent {
@@ -175,21 +175,21 @@
       color: inherit;
       font-weight: var(--command-text-weight);
       font-size: var(--command-text-size);
-      line-height: var(--command-text-lineHeight);
+      line-height: var(--command-text-line-height);
     }
 
     .itemDescription {
-      color: var(--command-color-textMuted);
-      font-size: var(--command-text-sizeSmall);
-      line-height: var(--command-text-lineHeightTight);
-      margin-block-start: var(--command-spacing-descriptionGap);
+      color: var(--command-color-text-muted);
+      font-size: var(--command-text-size-small);
+      line-height: var(--command-text-line-height-tight);
+      margin-block-start: var(--command-spacing-description-gap);
     }
   }
 }
 
 .separator {
   height: var(--command-border-width);
-  margin: var(--command-spacing-separatorMargin) 0;
+  margin: var(--command-spacing-separator-margin) 0;
   background-color: var(--command-color-borderLight);
 }
 
@@ -197,15 +197,15 @@
 @media (width <= 640px) {
   .overlay {
     align-items: flex-start;
-    padding: var(--command-spacing-mobilePadding);
+    padding: var(--command-spacing-mobile-padding);
   }
 
   .dialog {
-    margin-block-start: var(--command-spacing-mobileMarginTop);
+    margin-block-start: var(--command-spacing-mobile-margin-top);
   }
 
   .list {
-    max-height: var(--command-size-maxHeightMobile);
+    max-height: var(--command-size-max-height-mobile);
   }
 }
 

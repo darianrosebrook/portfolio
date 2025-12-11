@@ -15,13 +15,13 @@
   margin: 0;
   color: var(--walkthrough-title-color);
   font-weight: var(--walkthrough-title-fontWeight);
-  font-size: var(--walkthrough-title-fontSize);
+  font-size: var(--walkthrough-title-font-size);
 }
 
 .description {
   margin-block: var(--walkthrough-description-marginTop) 0;
   color: var(--walkthrough-description-color);
-  font-size: var(--walkthrough-description-fontSize);
+  font-size: var(--walkthrough-description-font-size);
 }
 
 .controls {
@@ -33,8 +33,8 @@
 
 .skip,
 .prev {
-  padding: var(--walkthrough-button-secondary-paddingY)
-    var(--walkthrough-button-secondary-paddingX);
+  padding: var(--walkthrough-button-secondary-padding-y)
+    var(--walkthrough-button-secondary-padding-x);
   background: var(--walkthrough-button-secondary-bg);
   border: 1px solid var(--walkthrough-button-secondary-border);
   border-radius: var(--walkthrough-button-secondary-radius);
@@ -56,8 +56,8 @@
 }
 
 .next {
-  padding: var(--walkthrough-button-primary-paddingY)
-    var(--walkthrough-button-primary-paddingX);
+  padding: var(--walkthrough-button-primary-padding-y)
+    var(--walkthrough-button-primary-padding-x);
   background: var(--walkthrough-button-primary-bg);
   border: none;
   border-radius: var(--walkthrough-button-primary-radius);
@@ -96,7 +96,7 @@
 
 .counter {
   color: var(--walkthrough-description-color);
-  font-size: var(--walkthrough-description-fontSize);
+  font-size: var(--walkthrough-description-font-size);
   text-align: center;
   font-variant-numeric: tabular-nums;
   margin-block-end: var(--walkthrough-controls-marginTop);

@@ -7,12 +7,10 @@
   --popover-size-radius-default: var(--semantic-shape-control-radius-default);
   --popover-size-radius-full: var(--core-shape-radius-full);
   --popover-size-gap-default: var(--core-spacing-size-04);
-  --popover-size-maxWidth-default: var(--core-spacing-size-06);
+  --popover-size-max-width-default: var(--core-spacing-size-06);
 
   /* === Color Tokens === */
-  --popover-color-background-content: var(
-    --semantic-color-background-secondary
-  );
+  --popover-color-background-content: var(--semantic-color-background-secondary);
   --popover-color-border-accent: var(--semantic-color-border-accent);
 
   /* === Elevation Tokens === */

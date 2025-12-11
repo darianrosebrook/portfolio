@@ -48,8 +48,8 @@
 
     .checkIcon,
     .indeterminateIcon {
-      width: var(--checkbox-size-sm-iconSize);
-      height: var(--checkbox-size-sm-iconSize);
+      width: var(--checkbox-size-sm-icon-size);
+      height: var(--checkbox-size-sm-icon-size);
     }
   }
 
@@ -59,8 +59,8 @@
 
     .checkIcon,
     .indeterminateIcon {
-      width: var(--checkbox-size-md-iconSize);
-      height: var(--checkbox-size-md-iconSize);
+      width: var(--checkbox-size-md-icon-size);
+      height: var(--checkbox-size-md-icon-size);
     }
   }
 
@@ -70,8 +70,8 @@
 
     .checkIcon,
     .indeterminateIcon {
-      width: var(--checkbox-size-lg-iconSize);
-      height: var(--checkbox-size-lg-iconSize);
+      width: var(--checkbox-size-lg-icon-size);
+      height: var(--checkbox-size-lg-icon-size);
     }
   }
 }

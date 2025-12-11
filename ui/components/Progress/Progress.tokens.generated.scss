@@ -18,17 +18,15 @@
   --progress-size-linear-lg-height: var(--core-spacing-size-04);
   --progress-size-linear-lg-radius: var(--core-shape-radius-full);
   --progress-size-circular-sm-size: 32px;
-  --progress-size-circular-sm-strokeWidth: 2px;
+  --progress-size-circular-sm-stroke-width: 2px;
   --progress-size-circular-md-size: 40px;
-  --progress-size-circular-md-strokeWidth: 3px;
+  --progress-size-circular-md-stroke-width: 3px;
   --progress-size-circular-lg-size: 48px;
-  --progress-size-circular-lg-strokeWidth: 4px;
+  --progress-size-circular-lg-stroke-width: 4px;
 
   /* === Typography Tokens === */
-  --progress-typography-value-fontSize: var(--semantic-typography-caption-01);
-  --progress-typography-value-fontWeight: var(
-    --semantic-typography-font-weight-medium
-  );
+  --progress-typography-value-font-size: var(--semantic-typography-caption-01);
+  --progress-typography-value-font-weight: var(--semantic-typography-font-weight-medium);
 
   /* === Motion Tokens === */
   --progress-motion-duration-indeterminate: 1.5s;
