@@ -48,8 +48,9 @@ const nextConfig = {
       '@tiptap/extension-image',
       '@tiptap/extension-link',
       '@tiptap/html',
-      'gsap',
-      '@gsap/react',
+      // NOTE: gsap and @gsap/react removed - causes webpack module factory issues with dynamic imports
+      // 'gsap',
+      // '@gsap/react',
     ],
     // Enable View Transitions API support for page transitions
     viewTransition: true,

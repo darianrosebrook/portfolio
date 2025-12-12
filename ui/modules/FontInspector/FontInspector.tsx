@@ -1,21 +1,21 @@
 'use client';
 
+import { DrawColors } from '@/utils/geometry/drawing';
+import type { Font, Glyph } from 'fontkit';
+import * as fontkit from 'fontkit';
 import React, {
   createContext,
+  useCallback,
   useContext,
   useEffect,
-  useState,
-  useCallback,
   useMemo,
+  useState,
 } from 'react';
-import * as fontkit from 'fontkit';
-import type { Font, Glyph } from 'fontkit';
-import styles from './FontInspector.module.scss';
-import { DrawColors } from '@/utils/geometry/drawing';
-import { InspectorControls } from './InspectorControls';
 import { AnatomyControls } from './AnatomyControls';
-import { SymbolGrid } from './SymbolGrid';
+import styles from './FontInspector.module.scss';
+import { InspectorControls } from './InspectorControls';
 import { SymbolCanvas } from './SymbolCanvas';
+import { SymbolGrid } from './SymbolGrid';
 import { TypographyArticleContent } from './TypographyArticleContent';
 
 // ---------------------------
@@ -372,43 +372,145 @@ export const InspectorProvider: React.FC<{
 
     // Handler shared by both media‑query and mutation events
     const updateScheme = () => {
-      const classDark = document.body.classList.contains('dark');
-      const newScheme = classDark ? 'dark' : 'light';
+      // Read CSS variables from root to infer theme
+      // Check both CSS variable AND actual computed background color to determine theme
+      const rootElement = document.documentElement;
+      const rootStyle = getComputedStyle(rootElement);
+      const bodyStyle = getComputedStyle(document.body);
+      const foregroundPrimaryValue = rootStyle
+        .getPropertyValue('--semantic-color-foreground-primary')
+        .trim();
+
+      // Check actual background color to determine real theme (more reliable than CSS variables)
+      const backgroundColor = bodyStyle.backgroundColor;
+      // Parse RGB to determine if background is light or dark
+      // Light backgrounds are closer to white (high RGB values), dark are closer to black (low RGB values)
+      const rgbMatch = backgroundColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+      let isDark = false;
+      if (rgbMatch) {
+        const [, r, g, b] = rgbMatch.map(Number);
+        const brightness = (r + g + b) / 3;
+        // If average brightness < 128, it's dark mode
+        isDark = brightness < 128;
+      } else {
+        // Fallback: infer from CSS variable if RGB parsing fails
+        isDark = foregroundPrimaryValue === '#fafafa';
+      }
+
+      const newScheme = isDark ? 'dark' : 'light';
       setColorScheme(newScheme);
 
-      const root = document.body;
-      const style = getComputedStyle(root);
-      const getPropertyValue = (property: string) =>
-        style.getPropertyValue(property).trim();
+      const getPropertyValue = (property: string, fallback: string = '') => {
+        // Try root first, then body
+        let value = rootStyle.getPropertyValue(property).trim();
+        if (!value) {
+          value = bodyStyle.getPropertyValue(property).trim();
+        }
+
+        // If this is the foreground-primary property and the value doesn't match the detected theme,
+        // use the fallback instead (CSS variables might be wrong)
+        let shouldUseFallback = !value;
+        if (property === '--semantic-color-foreground-primary' && value) {
+          const valueIsDarkMode = value === '#fafafa';
+          if (valueIsDarkMode !== isDark) {
+            // CSS variable doesn't match detected theme, use fallback
+            shouldUseFallback = true;
+          }
+        }
+
+        // getComputedStyle should resolve CSS variables to actual color values
+        // Use fallback if value is empty OR if CSS variable doesn't match detected theme
+        return shouldUseFallback ? fallback : value;
+      };
+
+      // Fallback colors based on theme (only used if CSS variables aren't available)
+      const foregroundPrimary = isDark ? '#fafafa' : '#141414';
+      const backgroundPrimary = isDark ? '#000000' : '#ffffff';
+
       setColors({
-        anchorFill: getPropertyValue('--semantic-color-background-secondary'),
-        anchorStroke: getPropertyValue('--semantic-color-foreground-info'),
-        metricStroke: getPropertyValue('--semantic-color-border-primary'),
-        metricFill: getPropertyValue('--semantic-color-foreground-primary'),
+        anchorFill: getPropertyValue(
+          '--semantic-color-background-tertiary',
+          isDark ? '#3a3a3a' : '#cecece'
+        ),
+        anchorStroke: getPropertyValue(
+          '--semantic-color-foreground-info',
+          '#0a65fe'
+        ),
+        metricStroke: getPropertyValue(
+          '--semantic-color-border-primary',
+          isDark ? '#555555' : '#aeaeae'
+        ),
+        metricFill: getPropertyValue(
+          '--semantic-color-foreground-primary',
+          foregroundPrimary
+        ),
         checkerFill: getPropertyValue(
-          '--semantic-color-background-image-overlay'
+          '--semantic-color-background-image-overlay',
+          isDark ? 'rgb(0 0 0 / 70%)' : 'rgb(0 0 0 / 50%)'
         ),
         checkerStroke: getPropertyValue(
-          '--semantic-color-background-secondary'
+          '--semantic-color-background-tertiary',
+          isDark ? '#3a3a3a' : '#cecece'
         ),
-        boundsStroke: getPropertyValue('--semantic-color-foreground-info'),
-        boundsFill: getPropertyValue('--semantic-color-background-infoSubtle'),
-        lsbStroke: getPropertyValue('--semantic-color-foreground-info'),
-        lsbFill: getPropertyValue('--semantic-color-background-infoSubtle'),
-        rsbStroke: getPropertyValue('--semantic-color-foreground-warning'),
-        rsbFill: getPropertyValue('--semantic-color-background-warning-subtle'),
-        pathStroke: getPropertyValue('--semantic-color-foreground-warning'),
-        pathFill: getPropertyValue('--semantic-color-foreground-primary'),
+        boundsStroke: getPropertyValue(
+          '--semantic-color-foreground-info',
+          '#0a65fe'
+        ),
+        boundsFill: getPropertyValue(
+          '--semantic-color-background-info-subtle',
+          isDark ? '#001b5a' : '#d9f3fe'
+        ),
+        lsbStroke: getPropertyValue(
+          '--semantic-color-foreground-info',
+          '#0a65fe'
+        ),
+        lsbFill: getPropertyValue(
+          '--semantic-color-background-info-subtle',
+          isDark ? '#001b5a' : '#d9f3fe'
+        ),
+        rsbStroke: getPropertyValue(
+          '--semantic-color-foreground-warning',
+          '#ac5c00'
+        ),
+        rsbFill: getPropertyValue(
+          '--semantic-color-background-warning-subtle',
+          isDark ? '#331b00' : '#ffedcc'
+        ),
+        pathStroke: getPropertyValue(
+          '--semantic-color-foreground-warning',
+          '#ac5c00'
+        ),
+        pathFill: getPropertyValue(
+          '--semantic-color-foreground-primary',
+          foregroundPrimary
+        ),
         handleStroke: getPropertyValue(
-          '--semantic-color-background-warning-strong'
+          '--semantic-color-background-warning-strong',
+          '#d77600'
         ),
-        handleFill: getPropertyValue('--semantic-color-background-warning'),
-        cursorStroke: getPropertyValue('--color-core-transparent'),
-        cursorFill: getPropertyValue('--semantic-color-foreground-primary'),
-        labelFill: getPropertyValue('--semantic-color-foreground-primary'),
-        labelStroke: getPropertyValue('--semantic-color-background-primary'),
+        handleFill: getPropertyValue(
+          '--semantic-color-background-warning',
+          '#ac5c00'
+        ),
+        cursorStroke: getPropertyValue(
+          '--color-core-transparent',
+          'transparent'
+        ),
+        cursorFill: getPropertyValue(
+          '--semantic-color-foreground-primary',
+          foregroundPrimary
+        ),
+        labelFill: getPropertyValue(
+          '--semantic-color-foreground-primary',
+          foregroundPrimary
+        ),
+        labelStroke: getPropertyValue(
+          '--semantic-color-background-primary',
+          backgroundPrimary
+        ),
         highlightBackground: getPropertyValue(
-          '--semantic-color-background-highlight'
+          '--semantic-color-background-highlight',
+          isDark ? '#7b0000' : '#f7c1c2'
         ),
       });
     };

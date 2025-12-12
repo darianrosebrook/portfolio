@@ -95,7 +95,10 @@ export function drawGlyphBounds(
 
   ctx.fillStyle = colors.lsbFill;
   ctx.strokeStyle = colors.lsbStroke;
-  const lsbX = xMin - lsb * -scale;
+  // lsbX is where the glyph actually starts (leftmost point)
+  // xMin is where the advance width starts (glyph origin)
+  // LSB region is the space between lsbX and xMin
+  const lsbX = xMin + lsb * scale;
   ctx.beginPath();
   ctx.moveTo(xMin, descY + 4);
   ctx.lineTo(xMin, descY + 12);
@@ -131,13 +134,30 @@ export function drawGlyphBounds(
 
   if (pattern) {
     ctx.save();
-    ctx.fillStyle = pattern;
-    ctx.fillRect(0, ascY, xMin, descY - ascY);
-    ctx.fillRect(xMax, ascY, ctx.canvas.width - xMax, descY - ascY);
+    // Fill LSB region first (before checker pattern to ensure it's visible)
     ctx.fillStyle = colors.lsbFill;
-    ctx.fillRect(lsbX - lsb * scale, ascY, lsb * scale, descY - ascY);
+    // LSB region: from lsbX (glyph start) to xMin (advance width start)
+    if (lsbX < xMin) {
+      // Normal case: glyph extends to the left of advance width start
+      ctx.fillRect(lsbX, ascY, xMin - lsbX, descY - ascY);
+    } else if (lsbX > xMin) {
+      // Rare case: glyph starts to the right of advance width start
+      ctx.fillRect(xMin, ascY, lsbX - xMin, descY - ascY);
+    }
+
+    // Fill RSB region
     ctx.fillStyle = colors.rsbFill;
     ctx.fillRect(rsbX, ascY, rsb * scale, descY - ascY);
+
+    // Fill checker pattern for areas outside advance width
+    ctx.fillStyle = pattern;
+    // Left side (from canvas edge to glyph start, or to xMin if glyph starts after xMin)
+    const leftCheckerStart = Math.min(lsbX, xMin);
+    if (leftCheckerStart > 0) {
+      ctx.fillRect(0, ascY, leftCheckerStart, descY - ascY);
+    }
+    // Right side (from advance width end to canvas edge)
+    ctx.fillRect(xMax, ascY, ctx.canvas.width - xMax, descY - ascY);
 
     ctx.stroke();
     ctx.restore();

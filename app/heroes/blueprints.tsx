@@ -1,12 +1,10 @@
 'use client';
+
 import React, { useState, useRef, useEffect } from 'react';
 import Styles from './blueprints.module.scss';
 import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
 import SvgIllustration from './svgIllustration';
 import { useInteraction } from '@/context';
-
-gsap.registerPlugin(useGSAP);
 
 const Blueprints: React.FC = () => {
   const { window: winsize, scroll, mouse } = useInteraction();
@@ -98,4 +96,7 @@ const Blueprints: React.FC = () => {
   );
 };
 
-export default React.memo(Blueprints);
+// Export component directly - React 19 handles memoization more efficiently
+// Removing React.memo to avoid compatibility issues with dynamic imports
+Blueprints.displayName = 'Blueprints';
+export default Blueprints;

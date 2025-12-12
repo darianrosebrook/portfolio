@@ -44,8 +44,10 @@ const Footer = () => {
     },
   ];
 
+  // suppressHydrationWarning: Cursor dev tools add data-cursor-element-id attributes
+  // client-side which don't exist during SSR, causing hydration mismatches
   return (
-    <footer className={styles.footer}>
+    <footer className={styles.footer} suppressHydrationWarning>
       <div className={styles.social}>
         <h2 className="light">Elsewhere</h2>
       </div>

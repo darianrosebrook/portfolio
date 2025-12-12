@@ -3,22 +3,22 @@
  */
 @mixin vars {
   /* === Color Tokens === */
-  --switch-color-track-background-default: var(--semantic-color-background-secondary);
+  --switch-color-track-background-default: var(--semantic-color-background-tertiary);
   --switch-color-track-background-hover: var(--semantic-color-background-hover);
   --switch-color-track-background-focus: var(--semantic-color-background-secondary);
   --switch-color-track-background-disabled: var(--semantic-color-background-disabled);
-  --switch-color-track-background-checked: var(--semantic-color-background-primary);
+  --switch-color-track-background-checked: var(--semantic-color-foreground-accent);
   --switch-color-track-background-error: var(--semantic-color-background-danger-subtle);
   --switch-color-track-border-default: var(--semantic-color-border-primary);
   --switch-color-track-border-hover: var(--semantic-color-border-bold);
   --switch-color-track-border-focus: var(--semantic-color-border-accent);
   --switch-color-track-border-disabled: var(--semantic-color-border-disabled);
   --switch-color-track-border-error: var(--semantic-color-border-danger);
-  --switch-color-thumb-background-default: var(--semantic-color-background-secondary);
+  --switch-color-thumb-background-default: var(--semantic-color-background-primary);
   --switch-color-thumb-background-hover: var(--semantic-color-background-hover);
   --switch-color-thumb-background-focus: var(--semantic-color-background-primary);
   --switch-color-thumb-background-disabled: var(--semantic-color-background-disabled);
-  --switch-color-thumb-background-checked: var(--semantic-color-background-accent);
+  --switch-color-thumb-background-checked: var(--semantic-color-foreground-on-brand);
   --switch-color-thumb-background-error: var(--semantic-color-background-danger-strong);
   --switch-color-thumb-border-default: var(--semantic-color-border-primary);
   --switch-color-thumb-border-hover: var(--semantic-color-border-bold);
@@ -32,25 +32,25 @@
   --switch-color-text-error: var(--semantic-color-foreground-danger);
 
   /* === Size Tokens === */
-  --switch-size-sm-track-width: var(--core-spacing-size-10);
-  --switch-size-sm-track-height: var(--core-spacing-size-05);
+  --switch-size-sm-track-width: var(--core-spacing-size-08);
+  --switch-size-sm-track-height: var(--core-spacing-size-06);
   --switch-size-sm-track-radius: var(--core-shape-radius-full);
-  --switch-size-sm-thumb-size: var(--core-spacing-size-04);
-  --switch-size-sm-thumb-offset: var(--core-spacing-size-01);
+  --switch-size-sm-thumb-size: var(--core-spacing-size-05);
+  --switch-size-sm-thumb-offset: var(--core-spacing-size-02);
   --switch-size-sm-gap: var(--core-spacing-size-04);
   --switch-size-sm-font-size: var(--semantic-typography-caption-01);
-  --switch-size-md-track-width: var(--core-spacing-size-12);
-  --switch-size-md-track-height: var(--core-spacing-size-06);
+  --switch-size-md-track-width: var(--core-spacing-size-09);
+  --switch-size-md-track-height: var(--core-spacing-size-07);
   --switch-size-md-track-radius: var(--core-shape-radius-full);
-  --switch-size-md-thumb-size: var(--core-spacing-size-05);
-  --switch-size-md-thumb-offset: var(--core-spacing-size-01);
+  --switch-size-md-thumb-size: var(--core-spacing-size-06);
+  --switch-size-md-thumb-offset: var(--core-spacing-size-02);
   --switch-size-md-gap: var(--core-spacing-size-04);
   --switch-size-md-font-size: var(--semantic-typography-body-small-font-size);
-  --switch-size-lg-track-width: var(--core-spacing-size-14);
-  --switch-size-lg-track-height: var(--core-spacing-size-07);
+  --switch-size-lg-track-width: var(--core-spacing-size-10);
+  --switch-size-lg-track-height: var(--core-spacing-size-08);
   --switch-size-lg-track-radius: var(--core-shape-radius-full);
-  --switch-size-lg-thumb-size: var(--core-spacing-size-06);
-  --switch-size-lg-thumb-offset: var(--core-spacing-size-01);
+  --switch-size-lg-thumb-size: var(--core-spacing-size-07);
+  --switch-size-lg-thumb-offset: var(--core-spacing-size-02);
   --switch-size-lg-gap: var(--core-spacing-size-04);
   --switch-size-lg-font-size: var(--semantic-typography-body-default-font-size);
 

@@ -20,12 +20,12 @@ export const metadata = {
     images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
   },
 };
-import styles from './page.module.scss';
-import { Top, Middle, Bottom, Props, Faceplate, Table } from './svgs';
-import { Swatches } from '../heroes/swatches';
-import Blueprints from '../heroes/blueprints';
 import Link from 'next/link';
-import GlossaryCardStack from '../heroes/glossaryCards';
+import BlueprintsWrapper from '../BlueprintsWrapper';
+import GlossaryCardsWrapper from '../heroes/GlossaryCardsWrapper';
+import SwatchesWrapper from '../heroes/SwatchesWrapper';
+import styles from './page.module.scss';
+import { Bottom, Faceplate, Middle, Props, Table, Top } from './svgs';
 
 const Page: React.FC = () => {
   return (
@@ -69,7 +69,7 @@ const Page: React.FC = () => {
       <section className={`${styles.hero} `}>
         <div className={styles.heroImage}>
           <div className={`${styles.cardsBackdrop} backdropContainer`}>
-            <GlossaryCardStack />
+            <GlossaryCardsWrapper />
           </div>
         </div>
         <div className={styles.headingHero}>
@@ -87,7 +87,7 @@ const Page: React.FC = () => {
       <section className={`${styles.hero} ${styles.tokens}`}>
         <div className={styles.heroImage}>
           <div className="backdropContainer">
-            <Swatches />
+            <SwatchesWrapper />
           </div>
         </div>
         <div className={`${styles.headingHero}`}>
@@ -105,7 +105,7 @@ const Page: React.FC = () => {
       <section className={`${styles.hero} ${styles.tokens}`}>
         <div className={styles.heroImage}>
           <div className="backdropContainer">
-            <Blueprints />
+            <BlueprintsWrapper />
           </div>
         </div>
         <div className={`${styles.headingHero}`}>

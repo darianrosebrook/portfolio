@@ -11,11 +11,16 @@
   display: inline-flex;
   vertical-align: middle;
   align-items: center;
+
+  // Explicit dimensions ensure absolutely positioned .input can inherit correctly
+  width: var(--switch-size-md-track-width, 3rem);
+  height: var(--switch-size-md-track-height, 1.5rem);
 }
 
 // Hidden native input
 .input {
   position: absolute;
+  z-index: 1; // Ensure input is on top of track for click events
   width: 100%;
   height: 100%;
   margin: 0;
@@ -26,12 +31,6 @@
   &:disabled {
     cursor: not-allowed;
   }
-
-  // Focus visible on track
-  &:focus-visible + .track {
-    outline: var(--switch-focus-ring);
-    outline-offset: var(--switch-focus-offset);
-  }
 }
 
 // Track (the background pill)
@@ -41,6 +40,7 @@
   align-items: center;
   width: var(--switch-size-md-track-width, 3rem);
   height: var(--switch-size-md-track-height, 1.5rem);
+  min-height: var(--switch-size-md-track-height, 1.5rem);
   background-color: var(--switch-color-track-background-default);
   border: 1px solid var(--switch-color-track-border-default);
   border-radius: var(--switch-size-md-track-radius, 9999px);
@@ -50,35 +50,49 @@
     border-color var(--switch-motion-duration, 150ms)
       var(--switch-motion-easing, ease-out);
 
-  // Hover state
+  // Focus visible state (one pseudo-class)
+  .input:focus-visible + & {
+    outline: var(--switch-focus-ring);
+    outline-offset: var(--switch-focus-offset);
+  }
+
+  // Disabled state (lowest specificity - one pseudo-class)
+  .input:disabled + & {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  // Checked state (one pseudo-class)
+  .input:checked + & {
+    background-color: var(--switch-color-track-background-checked);
+    border-color: var(--switch-color-track-border-default);
+  }
+
+  // Hover state (higher specificity - two pseudo-classes)
   .input:not(:disabled):hover + & {
     background-color: var(--switch-color-track-background-hover);
   }
 
-  // Checked state
-  .input:checked + & {
+  // Checked + hover state (highest specificity - three pseudo-classes, overrides hover)
+  .input:checked:not(:disabled):hover + & {
     background-color: var(--switch-color-track-background-checked);
     border-color: var(--switch-color-track-background-checked);
-  }
-
-  // Disabled state
-  .input:disabled + & {
-    opacity: 0.5;
-    cursor: not-allowed;
   }
 }
 
 // Thumb (the circle that moves)
 .thumb {
   position: absolute;
-  width: var(--switch-size-md-thumb-size, 1.125rem);
-  height: var(--switch-size-md-thumb-size, 1.125rem);
+  width: var(--switch-size-md-thumb-size, 1rem);
+  height: var(--switch-size-md-thumb-size, 1rem);
+  min-height: var(--switch-size-md-thumb-size, 1rem);
   background-color: var(--switch-color-thumb-background-default);
+  border: 1px solid var(--switch-color-thumb-border-default);
   border-radius: 50%;
   box-shadow: 0 1px 3px rgb(0 0 0 / 10%);
   transition: transform var(--switch-motion-duration, 150ms)
     var(--switch-motion-easing, ease-out);
-  inset-inline-start: var(--switch-size-md-gap, 0.125rem);
+  inset-inline-start: var(--switch-size-md-thumb-offset, 4px);
 
   // Checked state - move to the right
   .input:checked ~ .track & {
@@ -87,8 +101,8 @@
       calc(
         var(--switch-size-md-track-width, 3rem) - var(
             --switch-size-md-thumb-size,
-            1.125rem
-          ) - var(--switch-size-md-gap, 0.125rem) *
+            1rem
+          ) - var(--switch-size-md-thumb-offset, 4px) *
           2
       )
     );
@@ -97,24 +111,29 @@
 
 // Size variants
 .switchPrimitive.sm {
+  width: var(--switch-size-sm-track-width, 2rem);
+  height: var(--switch-size-sm-track-height, 1rem);
+
   .track {
-    width: var(--switch-size-sm-track-width, 2.25rem);
-    height: var(--switch-size-sm-track-height, 1.25rem);
+    width: var(--switch-size-sm-track-width, 2rem);
+    height: var(--switch-size-sm-track-height, 1rem);
+    min-height: var(--switch-size-sm-track-height, 1rem);
   }
 
   .thumb {
-    width: var(--switch-size-sm-thumb-size, 0.875rem);
-    height: var(--switch-size-sm-thumb-size, 0.875rem);
-    inset-inline-start: var(--switch-size-sm-gap, 0.125rem);
+    width: var(--switch-size-sm-thumb-size, 0.75rem);
+    height: var(--switch-size-sm-thumb-size, 0.75rem);
+    min-height: var(--switch-size-sm-thumb-size, 0.75rem);
+    inset-inline-start: var(--switch-size-sm-thumb-offset, 2px);
   }
 
   .input:checked ~ .track .thumb {
     transform: translateX(
       calc(
-        var(--switch-size-sm-track-width, 2.25rem) - var(
+        var(--switch-size-sm-track-width, 2rem) - var(
             --switch-size-sm-thumb-size,
-            0.875rem
-          ) - var(--switch-size-sm-gap, 0.125rem) *
+            0.75rem
+          ) - var(--switch-size-sm-thumb-offset, 2px) *
           2
       )
     );
@@ -122,24 +141,29 @@
 }
 
 .switchPrimitive.lg {
+  width: var(--switch-size-lg-track-width, 4rem);
+  height: var(--switch-size-lg-track-height, 2rem);
+
   .track {
-    width: var(--switch-size-lg-track-width, 3.5rem);
-    height: var(--switch-size-lg-track-height, 1.75rem);
+    width: var(--switch-size-lg-track-width, 4rem);
+    height: var(--switch-size-lg-track-height, 2rem);
+    min-height: var(--switch-size-lg-track-height, 2rem);
   }
 
   .thumb {
-    width: var(--switch-size-lg-thumb-size, 1.375rem);
-    height: var(--switch-size-lg-thumb-size, 1.375rem);
-    inset-inline-start: var(--switch-size-lg-gap, 0.125rem);
+    width: var(--switch-size-lg-thumb-size, 1.5rem);
+    height: var(--switch-size-lg-thumb-size, 1.5rem);
+    min-height: var(--switch-size-lg-thumb-size, 1.5rem);
+    inset-inline-start: var(--switch-size-lg-thumb-offset, 4px);
   }
 
   .input:checked ~ .track .thumb {
     transform: translateX(
       calc(
-        var(--switch-size-lg-track-width, 3.5rem) - var(
+        var(--switch-size-lg-track-width, 4rem) - var(
             --switch-size-lg-thumb-size,
-            1.375rem
-          ) - var(--switch-size-lg-gap, 0.125rem) *
+            1.5rem
+          ) - var(--switch-size-lg-thumb-offset, 4px) *
           2
       )
     );

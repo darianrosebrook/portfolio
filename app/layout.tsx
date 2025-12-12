@@ -46,15 +46,31 @@ export default async function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html: `
-                if ('serviceWorker' in navigator) {
-                  window.addEventListener('load', function() {
-                    navigator.serviceWorker.register('/sw.js')
-                      .then(function(registration) {
-                        console.log('SW registered: ', registration);
-                      })
-                      .catch(function(registrationError) {
-                        console.log('SW registration failed: ', registrationError);
+                // Cleanup: Unregister any existing service workers (one-time migration)
+                if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
+                  navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                    if (registrations.length > 0) {
+                      console.log('🧹 Cleaning up old service workers...');
+                      Promise.all(
+                        registrations.map(function(registration) {
+                          return registration.unregister();
+                        })
+                      ).then(function() {
+                        console.log('✅ Service Workers unregistered');
+                        // Clear all caches after unregistering
+                        if ('caches' in window) {
+                          caches.keys().then(function(cacheNames) {
+                            return Promise.all(
+                              cacheNames.map(function(cacheName) {
+                                return caches.delete(cacheName);
+                              })
+                            );
+                          }).then(function() {
+                            console.log('✅ All caches cleared - please refresh the page');
+                          });
+                        }
                       });
+                    }
                   });
                 }
                 

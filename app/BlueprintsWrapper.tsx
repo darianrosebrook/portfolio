@@ -1,23 +1,34 @@
 'use client';
 
-import React from 'react';
-import dynamic from 'next/dynamic';
+import React, { useEffect, useState } from 'react';
+import Blueprints from '@/app/heroes/blueprints';
 
-// Dynamic import for the Blueprints component to reduce initial bundle size
-const Blueprints = dynamic(() => import('@/app/heroes/blueprints'), {
-  loading: () => (
-    <div style={{ height: '400px', background: 'transparent' }}>
-      {/* Placeholder to prevent layout shift */}
-    </div>
-  ),
-  ssr: false,
-});
+const LoadingPlaceholder = () => (
+  <div
+    style={{ height: '400px', background: 'transparent' }}
+    aria-hidden="true"
+  >
+    {/* Placeholder to prevent layout shift while Blueprints loads */}
+  </div>
+);
 
 /**
- * Client-side wrapper for dynamically importing the Blueprints component
- * This optimization was part of the performance improvements to reduce initial bundle size
+ * Client-side wrapper for the Blueprints component
+ * Uses static import instead of dynamic to avoid webpack chunk loading issues
+ * The mounted state ensures we only render on the client to prevent hydration mismatch
  */
 const BlueprintsWrapper: React.FC = () => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Only render Blueprints on the client to avoid hydration mismatch
+  if (!mounted) {
+    return <LoadingPlaceholder />;
+  }
+
   return <Blueprints />;
 };
 
