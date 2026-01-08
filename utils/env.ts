@@ -78,50 +78,25 @@ const supabaseAnonKey = getEnvVar(
 
 // Warn if using placeholder values (server-side only)
 // Browser warnings aren't actionable - NEXT_PUBLIC_* vars must be embedded at build time
+// Note: File existence check removed in Next.js 16 to avoid Edge Runtime compatibility issues
 if (
   typeof window === 'undefined' &&
   process.env.NODE_ENV !== 'test' &&
   (supabaseUrl.includes('placeholder') ||
     supabaseAnonKey === 'placeholder_anon_key')
 ) {
-  // Check if .env.local exists to provide better guidance
-  let envLocalExists = false;
-  try {
-    const fs = require('fs');
-    const path = require('path');
-    const envLocalPath = path.join(process.cwd(), '.env.local');
-    envLocalExists = fs.existsSync(envLocalPath);
-  } catch {
-    // fs not available (edge runtime, etc.)
-  }
-
-  let message =
+  const message =
     '\n' +
     '================================================\n' +
     'WARNING: Using placeholder Supabase credentials!\n' +
-    'Database operations will fail.\n';
-
-  if (envLocalExists) {
-    message +=
-      '\n' +
-      'NOTE: .env.local file exists but credentials may not be loaded.\n' +
-      'Make sure your .env.local contains:\n' +
-      '  NEXT_PUBLIC_SUPABASE_URL=your-project-url\n' +
-      '  NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key\n' +
-      '\n' +
-      'If credentials are in .env.local, restart your dev server.\n' +
-      '(Next.js embeds NEXT_PUBLIC_* variables at build/start time)\n';
-  } else {
-    message +=
-      '\n' +
-      'Create a .env.local file with real credentials:\n' +
-      '  NEXT_PUBLIC_SUPABASE_URL=your-project-url\n' +
-      '  NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key\n' +
-      '\n' +
-      'See .env.local.example for template.\n';
-  }
-
-  message += '================================================\n';
+    'Database operations will fail.\n' +
+    '\n' +
+    'Create a .env.local file with real credentials:\n' +
+    '  NEXT_PUBLIC_SUPABASE_URL=your-project-url\n' +
+    '  NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key\n' +
+    '\n' +
+    'See .env.local.example for template.\n' +
+    '================================================\n';
 
   console.error(message);
 }

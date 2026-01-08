@@ -86,7 +86,7 @@
     outline: none;
   }
 
-  &:matches(:focus-visible, :focus) {
+  &:is(:focus-visible, :focus) {
     outline: var(--button-focus-outlineWidth) solid
       var(--button-focus-outlineColor);
     outline-offset: var(--button-focus-outlineOffset);

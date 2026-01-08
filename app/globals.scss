@@ -359,18 +359,20 @@ h3 {
 }
 
 /* Enhanced selection styling for gooey effect */
-::highlight(gooey-highlight) {
-  padding: var(--core-spacing-size-01) var(--core-spacing-size-02);
-  background: var(--semantic-color-background-highlight);
-  border-radius: var(--core-shape-radius-small);
-  box-decoration-break: clone;
-  color: var(--semantic-color-foreground-highlight);
-  transition: all 0.2s ease;
-  animation: gooeyHighlightFadeIn 0.3s ease-out;
-
-  /* Use a very subtle blur to avoid text obscuring */
-  filter: url('#goo-text-subtle');
-}
+/* CSS Custom Highlight API - removed for Next.js 16 compatibility
+   TODO: Re-enable when CSS parser supports ::highlight() pseudo-element
+   Original code:
+   ::highlight(gooey-highlight) {
+     padding: var(--core-spacing-size-01) var(--core-spacing-size-02);
+     background: var(--semantic-color-background-highlight);
+     border-radius: var(--core-shape-radius-small);
+     box-decoration-break: clone;
+     color: var(--semantic-color-foreground-highlight);
+     transition: all 0.2s ease;
+     animation: gooeyHighlightFadeIn 0.3s ease-out;
+     filter: url('#goo-text-subtle');
+   }
+*/
 
 /* Fallback for browsers that don't support CSS Custom Highlight API */
 // @supports not (CSS.highlights) {

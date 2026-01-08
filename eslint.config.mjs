@@ -1,11 +1,12 @@
 import typescriptEslint from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
-import jsxA11y from 'eslint-plugin-jsx-a11y';
+// jsx-a11y is included in next/core-web-vitals, no need to import separately
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import js from '@eslint/js';
 import { FlatCompat } from '@eslint/eslintrc';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
+import nextConfig from 'eslint-config-next/core-web-vitals';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -15,11 +16,36 @@ const compat = new FlatCompat({
   allConfig: js.configs.all,
 });
 
+// Load configs once to avoid circular references
+// Use direct import for Next.js config if it's flat config, otherwise use compat
+let nextConfigFlat;
+try {
+  // Try to use Next.js config directly if it exports flat config
+  if (typeof nextConfig === 'function') {
+    nextConfigFlat = nextConfig();
+  } else if (Array.isArray(nextConfig)) {
+    nextConfigFlat = nextConfig;
+  } else {
+    // Fallback to compat if direct import doesn't work
+    nextConfigFlat = compat.extends('next/core-web-vitals');
+  }
+} catch {
+  // Fallback to compat
+  nextConfigFlat = compat.extends('next/core-web-vitals');
+}
+
+const prettierConfig = compat.extends('prettier');
+const tsRecommendedConfig = compat.extends(
+  'plugin:@typescript-eslint/recommended'
+);
+
 const config = [
   // Ignore blueprint pattern samples from lint for now
   { ignores: ['app/blueprints/design-patterns/patterns/**'] },
-  // Base configuration for all files
-  ...compat.extends('next/core-web-vitals', 'prettier'),
+
+  // Base Next.js configuration
+  ...(Array.isArray(nextConfigFlat) ? nextConfigFlat : [nextConfigFlat]),
+  ...prettierConfig,
   eslintPluginPrettierRecommended,
 
   // TypeScript and React configuration
@@ -27,7 +53,8 @@ const config = [
     files: ['**/*.ts', '**/*.tsx'],
     plugins: {
       '@typescript-eslint': typescriptEslint,
-      'jsx-a11y': jsxA11y,
+      // Note: jsx-a11y is already included in next/core-web-vitals config
+      // Only add jsx-a11y rules, not the plugin itself to avoid conflicts
     },
     languageOptions: {
       parser: tsParser,
@@ -64,16 +91,10 @@ const config = [
   },
 
   // Apply TypeScript recommended rules
-  ...compat
-    .extends(
-      'next/core-web-vitals',
-      'plugin:@typescript-eslint/recommended',
-      'prettier'
-    )
-    .map((config) => ({
-      ...config,
-      files: ['**/*.ts', '**/*.tsx'],
-    })),
+  ...tsRecommendedConfig.map((config) => ({
+    ...config,
+    files: ['**/*.ts', '**/*.tsx'],
+  })),
 
   // Overrides for blueprint docs content to reduce noise during authoring
   {

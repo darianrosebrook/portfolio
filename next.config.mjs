@@ -6,6 +6,14 @@ const nextConfig = {
     // Enable optimizations
     removeConsole: process.env.NODE_ENV === 'production',
   },
+  // Suppress webpack cache warnings for large strings (fonts, geometry data)
+  // This warning is expected when caching large binary/text data and is acceptable
+  onDemandEntries: {
+    // Period in ms to keep pages in the buffer
+    maxInactiveAge: 25 * 1000,
+    // Number of pages that should be kept simultaneously without being disposed
+    pagesBufferLength: 2,
+  },
   sassOptions: {
     silenceDeprecations: ['legacy-js-api'],
   },
@@ -55,8 +63,44 @@ const nextConfig = {
     // Enable View Transitions API support for page transitions
     viewTransition: true,
   },
+  // Turbopack configuration (Next.js 16+)
+  // Empty config to silence error - we're using webpack config for now
+  turbopack: {},
   // Webpack optimizations
   webpack: (config, { dev, isServer, isEdge }) => {
+    // Disable webpack cache in development if issues occur
+    // Set DISABLE_WEBPACK_CACHE=true to force fresh builds
+    if (dev && process.env.DISABLE_WEBPACK_CACHE === 'true') {
+      config.cache = false;
+    } else if (dev && config.cache) {
+      // Optimize webpack cache for large strings (fonts, geometry data)
+      // The warning about serializing big strings is expected when caching
+      // large font files and geometry data - this is acceptable for dev performance
+      config.cache = {
+        ...config.cache,
+        // Compress cache to reduce I/O overhead for large strings
+        compression: config.cache.compression || 'gzip',
+      };
+    }
+
+    // Mark fontkit as external for client bundles to avoid webpack resolution issues
+    // We use dynamic import at runtime instead
+    if (!isServer) {
+      const originalExternals = config.externals || [];
+      config.externals = [
+        ...(Array.isArray(originalExternals)
+          ? originalExternals
+          : [originalExternals]),
+        ({ request }, callback) => {
+          // Mark fontkit as external for client - we'll use dynamic import
+          if (request === 'fontkit') {
+            return callback(null, 'commonjs ' + request);
+          }
+          callback();
+        },
+      ].filter(Boolean);
+    }
+
     // Handle Supabase in Edge Runtime
     if (isEdge) {
       config.resolve.alias = {

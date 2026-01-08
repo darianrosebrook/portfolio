@@ -25,6 +25,11 @@ declare module '@codesandbox/sandpack-react' {
       closableTabs?: boolean;
       /** Custom addition used in our docs to highlight a line range like "10-20" */
       highlightedLines?: string;
+      /** Sandpack initialization and execution options */
+      initMode?: 'lazy' | 'immediate' | 'user-visible';
+      autorun?: boolean;
+      recompileMode?: 'lazy' | 'immediate';
+      autoReload?: boolean;
     };
     customSetup?: {
       dependencies?: Record<string, string>;
