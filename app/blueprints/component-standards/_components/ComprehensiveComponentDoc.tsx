@@ -159,7 +159,10 @@ export function ComprehensiveComponentDoc({
                   template="react-ts"
                   theme="light"
                   files={Object.fromEntries(
-                    interactiveProject.files.map((f) => [f.path, String(f.contents)])
+                    interactiveProject.files.map((f) => [
+                      f.path,
+                      String(f.contents),
+                    ])
                   )}
                   options={{
                     showTabs: true,
@@ -432,7 +435,10 @@ export function ComprehensiveComponentDoc({
                   template="react-ts"
                   theme="light"
                   files={Object.fromEntries(
-                    interactiveProject.files.map((f) => [f.path, String(f.contents)])
+                    interactiveProject.files.map((f) => [
+                      f.path,
+                      String(f.contents),
+                    ])
                   )}
                   options={{
                     showTabs: true,
@@ -451,7 +457,10 @@ export function ComprehensiveComponentDoc({
                   template="react-ts"
                   theme="light"
                   files={Object.fromEntries(
-                    advancedProject.files.map((f) => [f.path, String(f.contents)])
+                    advancedProject.files.map((f) => [
+                      f.path,
+                      String(f.contents),
+                    ])
                   )}
                   options={{
                     showTabs: true,

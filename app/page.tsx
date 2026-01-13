@@ -1,9 +1,10 @@
+import type { Metadata } from 'next';
+
 /**
  * Metadata for the main page (Home).
  * Provides SEO, Open Graph, and Twitter card information for the homepage.
- * @type {import('next').Metadata}
  */
-export const metadata = {
+export const metadata: Metadata = {
   title:
     'Darian Rosebrook: Staff Design Technologist | Design Systems, Seattle Washington',
   description:
@@ -13,7 +14,18 @@ export const metadata = {
       'Darian Rosebrook: Staff Design Technologist | Design Systems, Seattle Washington',
     description:
       "Hey! I'm Darian Rosebrook 👋🏼 I am a staff design technologist in the Seattle, Washington area. I make design systems, custom design tooling, Figma plugins, and design ops stuff for product teams.",
-    images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
+    url: 'https://darianrosebrook.com',
+    siteName: 'Darian Rosebrook',
+    images: [
+      {
+        url: 'https://darianrosebrook.com/darianrosebrook.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Darian Rosebrook',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
@@ -22,6 +34,10 @@ export const metadata = {
     description:
       "Hey! I'm Darian Rosebrook 👋🏼 I am a staff design technologist in the Seattle, Washington area. I make design systems, custom design tooling, Figma plugins, and design ops stuff for product teams.",
     images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
+    creator: '@darianrosebrook',
+  },
+  alternates: {
+    canonical: 'https://darianrosebrook.com',
   },
 };
 import Avatar from '@/ui/components/Avatar';
@@ -49,8 +65,7 @@ export default function Home() {
       'Staff Design Technologist and Design Systems Architect focused on scalable UI component libraries, accessibility, and cross-platform tooling for web, iOS, and Android.',
     worksFor: {
       '@type': 'Organization',
-      name: 'Paths.design',
-      url: 'https://paths.design',
+      name: 'Qualtrics',
     },
     knowsAbout: [
       'Design Systems',
@@ -269,11 +284,13 @@ export default function Home() {
             <li>Web Components</li>
             <li>Backend Development</li>
             <li>API Design</li>
+            <li>Rust</li>
+            <li>Python</li>
+            <li>Node.js</li>
             <li>Mobile Development</li>
             <li>Kotlin</li>
             <li>SwiftUI</li>
             <li>Java</li>
-            <li>Objective-C</li>
           </ul>
         </div>
       </section>

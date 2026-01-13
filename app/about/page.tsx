@@ -12,7 +12,18 @@ export const metadata: Metadata = {
     title: 'About | Darian Rosebrook',
     description:
       'Learn more about Darian Rosebrook, a Staff Design Technologist focused on design systems, custom tooling, and bridging the gap between design and development.',
-    images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
+    url: 'https://darianrosebrook.com/about',
+    siteName: 'Darian Rosebrook',
+    images: [
+      {
+        url: 'https://darianrosebrook.com/darianrosebrook.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Darian Rosebrook',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
@@ -20,6 +31,10 @@ export const metadata: Metadata = {
     description:
       'Learn more about Darian Rosebrook, a Staff Design Technologist focused on design systems, custom tooling, and bridging the gap between design and development.',
     images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
+    creator: '@darianrosebrook',
+  },
+  alternates: {
+    canonical: 'https://darianrosebrook.com/about',
   },
 };
 

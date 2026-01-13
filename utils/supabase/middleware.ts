@@ -45,19 +45,18 @@ export async function updateSession(request: NextRequest) {
   );
 
   // Only protect /dashboard routes - skip network calls for other routes
-  // This avoids Edge Runtime network issues on every request
+  // Note: As of Next.js 16, proxy runs on Node.js runtime (not Edge)
   if (request.nextUrl.pathname.startsWith('/dashboard')) {
     if (!hasAuthTokenCookies) {
       // No auth cookies, redirect to home
-      console.log('[Middleware] No auth cookies, redirecting from dashboard');
+      console.log('[Proxy] No auth cookies, redirecting from dashboard');
       const url = request.nextUrl.clone();
       url.pathname = '/';
       return NextResponse.redirect(url);
     }
 
     // We have cookies - trust them and let the client validate
-    // This avoids network issues in Edge Runtime
-    console.log('[Middleware] Auth cookies present, allowing dashboard access');
+    console.log('[Proxy] Auth cookies present, allowing dashboard access');
   }
 
   // For non-protected routes, just pass through

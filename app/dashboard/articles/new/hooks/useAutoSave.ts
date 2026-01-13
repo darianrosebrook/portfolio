@@ -2,7 +2,7 @@ import type { Article } from '@/types';
 import type { JSONContent } from '@tiptap/react';
 import { useEffect, useRef, useState } from 'react';
 
-export type SaveStatus = 'idle' | 'saving' | 'saved' | 'error';
+export type SaveStatus = 'idle' | 'saving' | 'saved' | 'error' | 'local';
 
 interface UseAutoSaveOptions {
   article: Partial<Article> & { articleBody?: JSONContent | null | unknown };
@@ -37,7 +37,17 @@ export function useAutoSave({
   const previousContentRef = useRef<string | null>(null);
 
   const performSave = async () => {
-    if (!enabled || !article.slug) {
+    if (!enabled) {
+      return;
+    }
+
+    // If no slug, we can't save to server but content is saved locally
+    if (!article.slug) {
+      setSaveStatus('local');
+      setLastSaved(new Date());
+      setTimeout(() => {
+        setSaveStatus('idle');
+      }, 2000);
       return;
     }
 
@@ -54,8 +64,18 @@ export function useAutoSave({
         setSaveStatus('idle');
       }, 2000);
     } catch (err) {
-      setSaveStatus('error');
-      setError(err instanceof Error ? err.message : 'Failed to save');
+      // Check if this is a "skipped" save (waiting for valid slug)
+      const errorMessage = err instanceof Error ? err.message : 'Failed to save';
+      if (errorMessage.includes('Skipping server save')) {
+        setSaveStatus('local');
+        setLastSaved(new Date());
+        setTimeout(() => {
+          setSaveStatus('idle');
+        }, 2000);
+      } else {
+        setSaveStatus('error');
+        setError(errorMessage);
+      }
     }
   };
 
@@ -68,7 +88,7 @@ export function useAutoSave({
   };
 
   useEffect(() => {
-    if (!enabled || !article.slug) {
+    if (!enabled) {
       return;
     }
 

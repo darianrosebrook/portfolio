@@ -1,8 +1,9 @@
+import type { Metadata } from 'next';
+
 /**
  * Metadata for the /blueprints page.
- * @type {import('next').Metadata}
  */
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Design System Blueprints | Darian Rosebrook',
   description:
     'Explore the foundational decisions, principles, and frameworks that shape robust, scalable, and inclusive design systems.',
@@ -10,7 +11,18 @@ export const metadata = {
     title: 'Design System Blueprints | Darian Rosebrook',
     description:
       'Explore the foundational decisions, principles, and frameworks that shape robust, scalable, and inclusive design systems.',
-    images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
+    url: 'https://darianrosebrook.com/blueprints',
+    siteName: 'Darian Rosebrook',
+    images: [
+      {
+        url: 'https://darianrosebrook.com/darianrosebrook.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Darian Rosebrook',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
@@ -18,6 +30,10 @@ export const metadata = {
     description:
       'Explore the foundational decisions, principles, and frameworks that shape robust, scalable, and inclusive design systems.',
     images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
+    creator: '@darianrosebrook',
+  },
+  alternates: {
+    canonical: 'https://darianrosebrook.com/blueprints',
   },
 };
 import dynamic from 'next/dynamic';

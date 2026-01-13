@@ -1,9 +1,44 @@
+import type { Metadata } from 'next';
 import ProfileFlag from '@/ui/components/ProfileFlag';
 import { createClient } from '@/utils/supabase/server';
 import Image from 'next/image';
 import Link from 'next/link';
 import Styles from './styles.module.scss';
 import { Profile } from '@/types';
+
+export const metadata: Metadata = {
+  title: 'Articles | Darian Rosebrook',
+  description:
+    'Read articles about design systems, design tooling, Figma plugins, UX engineering, and design ops written by Darian Rosebrook, Staff Design Technologist.',
+  openGraph: {
+    title: 'Articles | Darian Rosebrook',
+    description:
+      'Read articles about design systems, design tooling, Figma plugins, UX engineering, and design ops written by Darian Rosebrook, Staff Design Technologist.',
+    url: 'https://darianrosebrook.com/articles',
+    siteName: 'Darian Rosebrook',
+    images: [
+      {
+        url: 'https://darianrosebrook.com/darianrosebrook.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Darian Rosebrook',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Articles | Darian Rosebrook',
+    description:
+      'Read articles about design systems, design tooling, Figma plugins, UX engineering, and design ops written by Darian Rosebrook, Staff Design Technologist.',
+    images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
+    creator: '@darianrosebrook',
+  },
+  alternates: {
+    canonical: 'https://darianrosebrook.com/articles',
+  },
+};
 
 // Type for the specific fields we select in the query
 type ArticleWithAuthor = {

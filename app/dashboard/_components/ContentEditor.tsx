@@ -15,7 +15,7 @@ import TableRow from '@tiptap/extension-table-row';
 import TableHeader from '@tiptap/extension-table-header';
 import TableCell from '@tiptap/extension-table-cell';
 import dynamic from 'next/dynamic';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 const Tiptap = dynamic(
   () => import('@/ui/modules/Tiptap').then((mod) => ({ default: mod.Tiptap })),
@@ -24,6 +24,7 @@ const Tiptap = dynamic(
 
 type Entity = 'articles' | 'case-studies';
 type RecordType = Article | CaseStudy;
+type SaveStatus = 'idle' | 'saving' | 'saved' | 'error';
 
 export default function ContentEditor({
   initial,
@@ -39,6 +40,9 @@ export default function ContentEditor({
   const [draftToggleChecked, setDraftToggleChecked] = useState<boolean>(
     initial.status === 'draft'
   );
+  const [saveStatus, setSaveStatus] = useState<SaveStatus>('idle');
+  const [saveError, setSaveError] = useState<string | null>(null);
+  const previousContentRef = useRef<string | null>(null);
 
   useEffect(() => {
     setRecord(initial);
@@ -81,22 +85,57 @@ export default function ContentEditor({
 
   // Debounced autosave working draft without affecting published fields
   useEffect(() => {
+    if (!record || !record.slug) return;
+
+    // Serialize content for comparison to avoid unnecessary saves
+    const currentContent = JSON.stringify({
+      articleBody: record.articleBody,
+      headline: record.headline,
+      description: record.description,
+      image: record.image,
+      keywords: record.keywords,
+      articleSection: record.articleSection,
+    });
+
+    // Skip if content hasn't changed
+    if (currentContent === previousContentRef.current) {
+      return;
+    }
+
+    previousContentRef.current = currentContent;
+
     const handle = setTimeout(async () => {
-      if (!record) return;
-      const urlBase =
-        entity === 'articles' ? '/api/articles' : '/api/case-studies';
-      await fetch(`${urlBase}/${record.slug}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          workingBody: record.articleBody,
-          workingHeadline: record.headline,
-          workingDescription: record.description,
-          workingImage: record.image,
-          workingKeywords: record.keywords,
-          workingArticleSection: record.articleSection,
-        }),
-      });
+      setSaveStatus('saving');
+      setSaveError(null);
+
+      try {
+        const urlBase =
+          entity === 'articles' ? '/api/articles' : '/api/case-studies';
+        const response = await fetch(`${urlBase}/${record.slug}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            workingBody: record.articleBody,
+            workingHeadline: record.headline,
+            workingDescription: record.description,
+            workingImage: record.image,
+            workingKeywords: record.keywords,
+            workingArticleSection: record.articleSection,
+          }),
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(errorText || 'Save failed');
+        }
+
+        setSaveStatus('saved');
+        setTimeout(() => setSaveStatus('idle'), 2000);
+      } catch (err) {
+        setSaveStatus('error');
+        setSaveError(err instanceof Error ? err.message : 'Failed to save');
+        console.error('Auto-save failed:', err);
+      }
     }, 1000);
     return () => clearTimeout(handle);
   }, [record, entity]);
@@ -365,6 +404,30 @@ export default function ContentEditor({
               ? new Date(record.published_at).toLocaleString()
               : '—'}
           </small>
+        </div>
+        {/* Save status indicator */}
+        <div
+          style={{
+            fontSize: '12px',
+            color:
+              saveStatus === 'error'
+                ? 'var(--semantic-color-foreground-destructive, #ef4444)'
+                : saveStatus === 'saved'
+                  ? 'var(--semantic-color-foreground-success, #22c55e)'
+                  : 'var(--semantic-color-foreground-secondary)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '4px',
+          }}
+        >
+          {saveStatus === 'saving' && (
+            <span style={{ animation: 'pulse 1.5s ease-in-out infinite' }}>
+              Saving...
+            </span>
+          )}
+          {saveStatus === 'saved' && <span>✓ Saved</span>}
+          {saveStatus === 'error' && <span>✕ {saveError || 'Error saving'}</span>}
+          {saveStatus === 'idle' && <span>Auto-save enabled</span>}
         </div>
       </aside>
     </div>

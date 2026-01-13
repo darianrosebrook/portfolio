@@ -4,7 +4,7 @@ import type { Article } from '@/types';
 import Tiptap from '@/ui/modules/Tiptap/Tiptap';
 import { slugify } from '@/utils/slugify';
 import type { JSONContent } from '@tiptap/react';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { ArticleMetadataForm } from './components/ArticleMetadataForm';
 import { ArticlePreview } from './components/ArticlePreview';
 import { EditorActions } from './components/EditorActions';
@@ -13,29 +13,64 @@ import { SaveStatus } from './components/SaveStatus';
 import { useAutoSave } from './hooks/useAutoSave';
 import { useMetadataExtraction } from './hooks/useMetadataExtraction';
 
+const LOCAL_STORAGE_KEY = 'draft-article-new';
+
+/**
+ * Generate a temporary slug for new articles
+ * Uses timestamp to ensure uniqueness
+ */
+function generateTempSlug(): string {
+  const timestamp = Date.now();
+  return `draft-${timestamp}`;
+}
+
 /**
  * Notion-like article editor page
  * Full-featured editor with auto-save, metadata extraction, and preview
  */
 export default function NewArticlePage() {
-  const [article, setArticle] = useState<Partial<Article>>({
-    slug: '',
-    headline: '',
-    articleBody: {
-      type: 'doc',
-      content: [
-        {
-          type: 'paragraph',
-          content: [],
-        },
-      ],
-    },
-    status: 'draft',
-    wordCount: 0,
+  // Generate a temporary slug immediately so auto-save can work
+  const tempSlugRef = useRef<string>(generateTempSlug());
+  
+  const [article, setArticle] = useState<Partial<Article>>(() => {
+    // Try to restore from localStorage on initial load
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          // Restore the saved draft
+          return {
+            ...parsed,
+            // Use saved slug or generate new temp slug
+            slug: parsed.slug || tempSlugRef.current,
+          };
+        } catch {
+          // Invalid JSON, ignore
+        }
+      }
+    }
+    
+    return {
+      slug: tempSlugRef.current,
+      headline: '',
+      articleBody: {
+        type: 'doc',
+        content: [
+          {
+            type: 'paragraph',
+            content: [],
+          },
+        ],
+      },
+      status: 'draft',
+      wordCount: 0,
+    };
   });
   const [articleId, setArticleId] = useState<number | undefined>();
   const [showPreview, setShowPreview] = useState(false);
   const [isManualSaving, setIsManualSaving] = useState(false);
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
 
   // Extract metadata from content
   const extractedMetadata = useMetadataExtraction(
@@ -44,18 +79,47 @@ export default function NewArticlePage() {
 
   // Auto-update article with extracted metadata
   useEffect(() => {
-    setArticle((prev) => ({
-      ...prev,
-      headline: prev.headline || extractedMetadata.headline || null,
-      description: prev.description || extractedMetadata.description || null,
-      image: prev.image || extractedMetadata.coverImage || null,
-      wordCount: extractedMetadata.wordCount,
-      // Auto-generate slug if empty and headline exists
-      slug:
-        prev.slug ||
-        (extractedMetadata.headline ? slugify(extractedMetadata.headline) : ''),
-    }));
+    setArticle((prev) => {
+      const newHeadline = prev.headline || extractedMetadata.headline || null;
+      
+      // Generate a proper slug from headline if we still have a temp slug
+      let newSlug = prev.slug;
+      if (extractedMetadata.headline && prev.slug?.startsWith('draft-')) {
+        const generatedSlug = slugify(extractedMetadata.headline);
+        if (generatedSlug && generatedSlug.length > 0) {
+          newSlug = generatedSlug;
+        }
+      }
+      
+      return {
+        ...prev,
+        headline: newHeadline,
+        description: prev.description || extractedMetadata.description || null,
+        image: prev.image || extractedMetadata.coverImage || null,
+        wordCount: extractedMetadata.wordCount,
+        slug: newSlug || prev.slug,
+      };
+    });
   }, [extractedMetadata]);
+
+  // Save to localStorage as a fallback for unsaved work
+  useEffect(() => {
+    if (typeof window !== 'undefined' && hasUnsavedChanges) {
+      const toSave = {
+        ...article,
+        _savedAt: new Date().toISOString(),
+      };
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(toSave));
+    }
+  }, [article, hasUnsavedChanges]);
+
+  // Clear localStorage when article is successfully saved to server
+  const clearLocalDraft = useCallback(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem(LOCAL_STORAGE_KEY);
+    }
+    setHasUnsavedChanges(false);
+  }, []);
 
   // Save function for auto-save
   const handleSave = useCallback(
@@ -92,6 +156,7 @@ export default function NewArticlePage() {
         const saved = await response.json();
         if (saved && Array.isArray(saved) && saved.length > 0) {
           setArticleId(saved[0].id);
+          clearLocalDraft();
         }
       } else {
         // Create new article
@@ -109,13 +174,13 @@ export default function NewArticlePage() {
         };
 
         // Validate slug format before sending
-        if (
-          !cleanedData.slug ||
-          !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(cleanedData.slug)
-        ) {
-          throw new Error(
-            'Invalid slug format. Slug must be lowercase letters, numbers, and hyphens only.'
-          );
+        // Allow temp slugs (draft-timestamp) for auto-save
+        const isValidSlug = /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(cleanedData.slug);
+        if (!cleanedData.slug || !isValidSlug) {
+          // Don't throw for temp slugs during auto-save - just skip server save
+          // The content is still saved to localStorage
+          console.log('Skipping server save - waiting for valid slug');
+          return;
         }
 
         const response = await fetch('/api/articles', {
@@ -147,13 +212,14 @@ export default function NewArticlePage() {
             ...prev,
             ...saved[0],
           }));
+          clearLocalDraft();
         }
       }
     },
-    [articleId]
+    [articleId, clearLocalDraft]
   );
 
-  // Auto-save hook
+  // Auto-save hook - always enabled since we have a temp slug
   const {
     saveStatus,
     lastSaved,
@@ -163,7 +229,7 @@ export default function NewArticlePage() {
     article,
     onSave: handleSave,
     debounceMs: 2000,
-    enabled: !!article.slug && article.slug !== '',
+    enabled: true, // Always enabled - we always have a slug (temp or real)
   });
 
   // Manual save handler with better error handling
@@ -350,6 +416,7 @@ export default function NewArticlePage() {
           key={`editor-${articleId || 'new'}`}
           article={article as Article}
           handleUpdate={(updated) => {
+            setHasUnsavedChanges(true);
             setArticle((prev) => ({
               ...prev,
               ...updated,

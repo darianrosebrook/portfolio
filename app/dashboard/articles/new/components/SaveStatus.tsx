@@ -18,7 +18,9 @@ export function SaveStatus({ status, lastSaved, error }: SaveStatusProps) {
       case 'saving':
         return 'Saving...';
       case 'saved':
-        return 'Saved';
+        return 'Saved to server';
+      case 'local':
+        return 'Saved locally (add a title to sync)';
       case 'error':
         return error || 'Error saving';
       default:
@@ -32,6 +34,8 @@ export function SaveStatus({ status, lastSaved, error }: SaveStatusProps) {
         return 'var(--semantic-color-foreground-secondary)';
       case 'saved':
         return 'var(--semantic-color-foreground-success)';
+      case 'local':
+        return 'var(--semantic-color-foreground-warning, #f59e0b)';
       case 'error':
         return 'var(--semantic-color-foreground-destructive)';
       default:
@@ -63,6 +67,11 @@ export function SaveStatus({ status, lastSaved, error }: SaveStatusProps) {
       {status === 'saved' && (
         <span style={{ color: 'var(--semantic-color-foreground-success)' }}>
           ✓
+        </span>
+      )}
+      {status === 'local' && (
+        <span style={{ color: 'var(--semantic-color-foreground-warning, #f59e0b)' }}>
+          ⚡
         </span>
       )}
       {status === 'error' && (
