@@ -19,7 +19,7 @@ export type CodeWorkbenchProps = {
 
 /**
  * Converts a VirtualProject to Sandpack's file format.
- * Ensures all file contents are strings as required by Sandpack.
+ * Preserves the hidden property for files that should be hidden from the editor.
  *
  * @param project - The virtual project containing files and metadata
  * @returns Sandpack-compatible file object
@@ -27,8 +27,13 @@ export type CodeWorkbenchProps = {
 function toSandpackFiles(project: VirtualProject): SandpackFiles {
   const out: SandpackFiles = {};
   for (const f of project.files) {
-    out[f.path] =
-      typeof f.contents === 'string' ? f.contents : String(f.contents);
+    const content = typeof f.contents === 'string' ? f.contents : String(f.contents);
+    // If file is marked as hidden, use object format with hidden property
+    if (f.hidden === true) {
+      out[f.path] = { code: content, hidden: true };
+    } else {
+      out[f.path] = content;
+    }
   }
   return out;
 }

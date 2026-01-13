@@ -39,8 +39,8 @@ export default function AboutPage() {
     },
     address: {
       '@type': 'PostalAddress',
-      addressLocality: 'Portland',
-      addressRegion: 'Oregon',
+      addressLocality: 'Seattle',
+      addressRegion: 'Washington',
       addressCountry: 'US',
     },
     sameAs: [
@@ -99,7 +99,7 @@ export default function AboutPage() {
                     />
                   </svg>
                 </span>
-                Portland, Oregon
+                Seattle, Washington
               </p>
             </div>
           </div>
@@ -125,10 +125,10 @@ export default function AboutPage() {
             As a seasoned Product Designer with a strong background in UX
             engineering, I specialize in crafting robust design systems and
             developing custom design tooling for Figma that revolutionizes
-            product development workflows. Based in Portland, Oregon, I thrive
-            at the intersection of design and development, where I dedicate my
-            efforts to streamlining collaboration and optimizing product
-            development cycles.
+            product development workflows. Based in Seattle, Washington, I
+            thrive at the intersection of design and development, where I
+            dedicate my efforts to streamlining collaboration and optimizing
+            product development cycles.
           </p>
           <p>
             With a unique blend of design and development expertise, I excel at

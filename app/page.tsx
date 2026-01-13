@@ -5,22 +5,22 @@
  */
 export const metadata = {
   title:
-    'Darian Rosebrook: Staff Design Technologist | Design Systems, Portland Oregon',
+    'Darian Rosebrook: Staff Design Technologist | Design Systems, Seattle Washington',
   description:
-    "Hey! I'm Darian Rosebrook 👋🏼 I am a staff design technologist in the Portland, Oregon area. I make design systems, custom design tooling, Figma plugins, and design ops stuff for product teams.",
+    "Hey! I'm Darian Rosebrook 👋🏼 I am a staff design technologist in the Seattle, Washington area. I make design systems, custom design tooling, Figma plugins, and design ops stuff for product teams.",
   openGraph: {
     title:
-      'Darian Rosebrook: Staff Design Technologist | Design Systems, Portland Oregon',
+      'Darian Rosebrook: Staff Design Technologist | Design Systems, Seattle Washington',
     description:
-      "Hey! I'm Darian Rosebrook 👋🏼 I am a staff design technologist in the Portland, Oregon area. I make design systems, custom design tooling, Figma plugins, and design ops stuff for product teams.",
+      "Hey! I'm Darian Rosebrook 👋🏼 I am a staff design technologist in the Seattle, Washington area. I make design systems, custom design tooling, Figma plugins, and design ops stuff for product teams.",
     images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
   },
   twitter: {
     card: 'summary_large_image',
     title:
-      'Darian Rosebrook: Staff Design Technologist | Design Systems, Portland Oregon',
+      'Darian Rosebrook: Staff Design Technologist | Design Systems, Seattle Washington',
     description:
-      "Hey! I'm Darian Rosebrook 👋🏼 I am a staff design technologist in the Portland, Oregon area. I make design systems, custom design tooling, Figma plugins, and design ops stuff for product teams.",
+      "Hey! I'm Darian Rosebrook 👋🏼 I am a staff design technologist in the Seattle, Washington area. I make design systems, custom design tooling, Figma plugins, and design ops stuff for product teams.",
     images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
   },
 };
@@ -142,7 +142,7 @@ export default function Home() {
                     />
                   </svg>
                 </span>
-                Portland, Oregon
+                Seattle, Washington
               </p>
             </div>
           </div>
@@ -150,10 +150,10 @@ export default function Home() {
             As a seasoned Product Designer with a strong background in UX
             engineering, I specialize in crafting robust design systems and
             developing custom design tooling for Figma that revolutionizes
-            product development workflows. Based in Portland, Oregon, I thrive
-            at the intersection of design and development, where I dedicate my
-            efforts to streamlining collaboration and optimizing product
-            development cycles.
+            product development workflows. Based in Seattle, Washington, I
+            thrive at the intersection of design and development, where I
+            dedicate my efforts to streamlining collaboration and optimizing
+            product development cycles.
           </p>
 
           <p>

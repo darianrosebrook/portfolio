@@ -1,7 +1,9 @@
 declare module '@codesandbox/sandpack-react' {
   import * as React from 'react';
 
-  export type SandpackFiles = Record<string, string>;
+  // Sandpack files can be strings or objects with code and hidden properties
+  export type SandpackFileContent = string | { code: string; hidden?: boolean };
+  export type SandpackFiles = Record<string, SandpackFileContent>;
 
   export interface SandpackTheme {
     colors?: Record<string, unknown>;
