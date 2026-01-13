@@ -73,7 +73,7 @@ export function useAutoSave({
           setSaveStatus('idle');
         }, 2000);
       } else {
-        setSaveStatus('error');
+      setSaveStatus('error');
         setError(errorMessage);
       }
     }

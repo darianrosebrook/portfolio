@@ -61,18 +61,23 @@ const validateEnvVar = (
 
 /**
  * Get environment variables with proper client/server handling
+ * 
+ * IMPORTANT: For NEXT_PUBLIC_* variables to work in the browser,
+ * they MUST be accessed directly as process.env.NEXT_PUBLIC_XXX
+ * (not dynamically via process.env[key]) because Next.js inlines
+ * these values at build time through static analysis.
  */
-const getEnvVar = (key: string, fallback?: string): string => {
-  const value = process.env[key];
-  return validateEnvVar(key, value, fallback);
-};
 
-const supabaseUrl = getEnvVar(
+// Access NEXT_PUBLIC_* variables directly for browser compatibility
+// These are inlined at build time by Next.js
+const supabaseUrl = validateEnvVar(
   'NEXT_PUBLIC_SUPABASE_URL',
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
   'https://placeholder.supabase.co'
 );
-const supabaseAnonKey = getEnvVar(
+const supabaseAnonKey = validateEnvVar(
   'NEXT_PUBLIC_SUPABASE_ANON_KEY',
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
   'placeholder_anon_key'
 );
 

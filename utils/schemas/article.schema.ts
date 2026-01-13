@@ -44,11 +44,19 @@ export const articleSchema = z.object({
   index: z.number().nullable(),
 });
 
-export const createArticleSchema = articleSchema.omit({
-  id: true,
-  created_at: true,
-  modified_at: true,
-  published_at: true,
-});
+export const createArticleSchema = articleSchema
+  .omit({
+    id: true,
+    created_at: true,
+    modified_at: true,
+    published_at: true,
+  })
+  .partial({
+    // These fields are optional when creating - they have sensible defaults
+    author: true,
+    editor: true,
+    alternativeHeadline: true,
+    index: true,
+  });
 
 export const updateArticleSchema = createArticleSchema.partial();

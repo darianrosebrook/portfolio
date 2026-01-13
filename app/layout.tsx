@@ -50,13 +50,11 @@ export default async function RootLayout({
                 if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
                   navigator.serviceWorker.getRegistrations().then(function(registrations) {
                     if (registrations.length > 0) {
-                      console.log('🧹 Cleaning up old service workers...');
                       Promise.all(
                         registrations.map(function(registration) {
                           return registration.unregister();
                         })
                       ).then(function() {
-                        console.log('✅ Service Workers unregistered');
                         // Clear all caches after unregistering
                         if ('caches' in window) {
                           caches.keys().then(function(cacheNames) {
@@ -65,8 +63,6 @@ export default async function RootLayout({
                                 return caches.delete(cacheName);
                               })
                             );
-                          }).then(function() {
-                            console.log('✅ All caches cleared - please refresh the page');
                           });
                         }
                       });
@@ -79,7 +75,6 @@ export default async function RootLayout({
                   window.addEventListener('load', function() {
                     // Track page load performance
                     const loadTime = performance.now();
-                    console.log('📊 Page Load Time:', loadTime.toFixed(2) + 'ms');
                     
                     // Track bundle size (approximate)
                     const scripts = document.querySelectorAll('script[src]');
@@ -90,7 +85,6 @@ export default async function RootLayout({
                         totalSize += 100; // Approximate size per chunk
                       }
                     });
-                    console.log('📦 Estimated Bundle Size:', totalSize + 'kB');
                   });
                 }
               `,

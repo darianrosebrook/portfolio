@@ -58,7 +58,6 @@ export async function PATCH(
     workingKeywords,
     workingArticleSection,
   } = body;
-  console.log('workingBody', workingBody);
   const { data, error } = await supabase
     .from('case_studies')
     .update({

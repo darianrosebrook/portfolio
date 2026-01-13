@@ -59,7 +59,14 @@ export function createEditorExtensions(
   return [
     // Cast to Extension[] to satisfy TypeScript
     // All TipTap extensions (Marks, Nodes) implement Extension
-    StarterKit.configure({ codeBlock: false }),
+    // Configure StarterKit to disable extensions we'll add separately
+    StarterKit.configure({
+      codeBlock: false,
+      dropcursor: false, // Added separately with custom config
+      link: false, // Added separately with custom config
+      horizontalRule: false, // Added separately
+      underline: false, // Added separately
+    }),
     Dropcursor.configure({
       color: 'var(--color-accent)',
       width: 2,
@@ -156,7 +163,13 @@ export function createServerExtensions(): Extension[] {
   return [
     // Cast to Extension[] to satisfy TypeScript
     // All TipTap extensions (Marks, Nodes) implement Extension
-    StarterKit,
+    // Configure StarterKit to disable extensions we'll add separately
+    StarterKit.configure({
+      dropcursor: false, // Not needed for server rendering
+      link: false, // Added separately with custom config
+      horizontalRule: false, // Added separately
+      underline: false, // Added separately
+    }),
     CharacterCount,
     Image,
     VideoServer,

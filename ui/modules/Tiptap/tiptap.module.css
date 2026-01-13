@@ -3,14 +3,14 @@
 }
 
 .editor > div {
-  overflow-y: scroll;
-  max-width: 1440px;
-  height: 80vh;
+  overflow-y: auto;
+  max-width: 900px;
   margin: 0 auto;
-  padding: var(--core-spacing-size-06);
-  background: var(--semantic-color-background-secondary);
-  border: 1px solid var(--semantic-color-border-primary);
-  border-radius: var(--core-shape-radius-large);
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  min-height: 400px;
 }
 
 .editor > div * + * {

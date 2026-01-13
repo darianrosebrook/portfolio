@@ -55,7 +55,7 @@ export function EditorActions({
     <div
       style={{
         display: 'flex',
-        gap: '8px',
+        gap: '0.5rem',
         alignItems: 'center',
         flexWrap: 'wrap',
       }}

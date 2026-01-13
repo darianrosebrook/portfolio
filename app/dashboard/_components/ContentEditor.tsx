@@ -5,15 +5,9 @@ import Checkbox from '@/ui/components/Checkbox';
 import { SwitchField } from '@/ui/components/Switch';
 import { VideoExtended } from '@/ui/modules/Tiptap/Extensions/VideoExtended';
 import { extractMetadata } from '@/utils/metadata';
-import CharacterCount from '@tiptap/extension-character-count';
-import Image from '@tiptap/extension-image';
 import { generateHTML } from '@tiptap/html';
 import { JSONContent } from '@tiptap/react';
-import StarterKit from '@tiptap/starter-kit';
-import { Table } from '@tiptap/extension-table';
-import TableRow from '@tiptap/extension-table-row';
-import TableHeader from '@tiptap/extension-table-header';
-import TableCell from '@tiptap/extension-table-cell';
+import { createPreviewExtensions } from '@/ui/modules/Tiptap/extensionsRegistry';
 import dynamic from 'next/dynamic';
 import { useEffect, useMemo, useRef, useState } from 'react';
 
@@ -53,18 +47,8 @@ export default function ContentEditor({
       type: 'doc',
       content: [],
     };
-    return generateHTML(doc, [
-      CharacterCount,
-      Image,
-      VideoExtended,
-      StarterKit,
-      Table.configure({
-        resizable: true,
-      }),
-      TableRow,
-      TableHeader,
-      TableCell,
-    ]);
+    // Use preview extensions from registry to ensure consistency
+    return generateHTML(doc, createPreviewExtensions());
   }, [record.articleBody]);
 
   const save = async (payload: Partial<RecordType>) => {
@@ -109,20 +93,20 @@ export default function ContentEditor({
       setSaveError(null);
 
       try {
-        const urlBase =
-          entity === 'articles' ? '/api/articles' : '/api/case-studies';
+      const urlBase =
+        entity === 'articles' ? '/api/articles' : '/api/case-studies';
         const response = await fetch(`${urlBase}/${record.slug}`, {
-          method: 'PATCH',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            workingBody: record.articleBody,
-            workingHeadline: record.headline,
-            workingDescription: record.description,
-            workingImage: record.image,
-            workingKeywords: record.keywords,
-            workingArticleSection: record.articleSection,
-          }),
-        });
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          workingBody: record.articleBody,
+          workingHeadline: record.headline,
+          workingDescription: record.description,
+          workingImage: record.image,
+          workingKeywords: record.keywords,
+          workingArticleSection: record.articleSection,
+        }),
+      });
 
         if (!response.ok) {
           const errorText = await response.text();

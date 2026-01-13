@@ -29,7 +29,7 @@ const EditorErrorBoundary: React.FC<EditorErrorBoundaryProps> = ({
       : 'editor-autosave';
     const saved = localStorage.getItem(storageKey);
     if (saved) {
-      console.log('Recovered data:', JSON.parse(saved));
+      // Recovery logic could be added here to restore the editor state
     }
   };
 

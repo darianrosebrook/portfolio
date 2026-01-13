@@ -2,6 +2,8 @@
 
 import type { Article } from '@/types';
 import { slugify } from '@/utils/slugify';
+import styles from './ArticleMetadataForm.module.scss';
+import { EditorActions } from './EditorActions';
 
 interface ArticleMetadataFormProps {
   article: Partial<Article>;
@@ -12,6 +14,11 @@ interface ArticleMetadataFormProps {
     coverImage: string | null;
     wordCount: number;
   };
+  onSave?: () => Promise<void>;
+  onPublish?: () => Promise<void>;
+  onUnpublish?: () => Promise<void>;
+  onPreview?: () => void;
+  isSaving?: boolean;
 }
 
 /**
@@ -22,6 +29,11 @@ export function ArticleMetadataForm({
   article,
   onChange,
   extractedMetadata,
+  onSave,
+  onPublish,
+  onUnpublish,
+  onPreview,
+  isSaving = false,
 }: ArticleMetadataFormProps) {
   const handleSlugChange = (value: string) => {
     onChange({ slug: slugify(value) });
@@ -36,30 +48,24 @@ export function ArticleMetadataForm({
   };
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '16px',
-        padding: '16px',
-        background: 'var(--semantic-color-background-secondary)',
-        borderRadius: 'var(--core-shape-radius-medium)',
-        border: '1px solid var(--semantic-color-border-primary)',
-      }}
-    >
-      <div>
-        <label
-          htmlFor="headline"
-          style={{
-            display: 'block',
-            fontSize: '12px',
-            fontWeight: '600',
-            marginBottom: '4px',
-            color: 'var(--semantic-color-foreground-secondary)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.5px',
-          }}
-        >
+    <div>
+      <h3 className={styles.title}>Settings</h3>
+      {(onSave || onPublish || onPreview) && (
+        <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '24px' }}>
+          <EditorActions
+            article={article}
+            onSave={onSave || (async () => {})}
+            onPublish={onPublish || (async () => {})}
+            onUnpublish={onUnpublish || (async () => {})}
+            onPreview={onPreview || (() => {})}
+            isSaving={isSaving}
+            status={article.status || 'draft'}
+          />
+        </div>
+      )}
+      <div className={styles.form}>
+        <div className={styles.field}>
+        <label htmlFor="headline" className={styles.label}>
           Headline
         </label>
         <input
@@ -68,31 +74,12 @@ export function ArticleMetadataForm({
           value={article.headline || extractedMetadata.headline || ''}
           onChange={(e) => handleHeadlineChange(e.target.value)}
           placeholder={extractedMetadata.headline || 'Enter headline...'}
-          style={{
-            width: '100%',
-            padding: '8px 12px',
-            fontSize: '14px',
-            border: '1px solid var(--semantic-color-border-primary)',
-            borderRadius: 'var(--core-shape-radius-small)',
-            background: 'var(--semantic-color-background-primary)',
-            color: 'var(--semantic-color-foreground-primary)',
-          }}
+          className={styles.input}
         />
       </div>
 
-      <div>
-        <label
-          htmlFor="alternativeHeadline"
-          style={{
-            display: 'block',
-            fontSize: '12px',
-            fontWeight: '600',
-            marginBottom: '4px',
-            color: 'var(--semantic-color-foreground-secondary)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.5px',
-          }}
-        >
+      <div className={styles.field}>
+        <label htmlFor="alternativeHeadline" className={styles.label}>
           Alternative Headline
         </label>
         <input
@@ -103,31 +90,12 @@ export function ArticleMetadataForm({
             onChange({ alternativeHeadline: e.target.value || null })
           }
           placeholder="Optional subtitle..."
-          style={{
-            width: '100%',
-            padding: '8px 12px',
-            fontSize: '14px',
-            border: '1px solid var(--semantic-color-border-primary)',
-            borderRadius: 'var(--core-shape-radius-small)',
-            background: 'var(--semantic-color-background-primary)',
-            color: 'var(--semantic-color-foreground-primary)',
-          }}
+          className={styles.input}
         />
       </div>
 
-      <div>
-        <label
-          htmlFor="description"
-          style={{
-            display: 'block',
-            fontSize: '12px',
-            fontWeight: '600',
-            marginBottom: '4px',
-            color: 'var(--semantic-color-foreground-secondary)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.5px',
-          }}
-        >
+      <div className={styles.field}>
+        <label htmlFor="description" className={styles.label}>
           Description
         </label>
         <textarea
@@ -136,32 +104,12 @@ export function ArticleMetadataForm({
           onChange={(e) => onChange({ description: e.target.value || null })}
           placeholder={extractedMetadata.description || 'Enter description...'}
           rows={3}
-          style={{
-            width: '100%',
-            padding: '8px 12px',
-            fontSize: '14px',
-            border: '1px solid var(--semantic-color-border-primary)',
-            borderRadius: 'var(--core-shape-radius-small)',
-            background: 'var(--semantic-color-background-primary)',
-            color: 'var(--semantic-color-foreground-primary)',
-            resize: 'vertical',
-          }}
+          className={styles.textarea}
         />
       </div>
 
-      <div>
-        <label
-          htmlFor="keywords"
-          style={{
-            display: 'block',
-            fontSize: '12px',
-            fontWeight: '600',
-            marginBottom: '4px',
-            color: 'var(--semantic-color-foreground-secondary)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.5px',
-          }}
-        >
+      <div className={styles.field}>
+        <label htmlFor="keywords" className={styles.label}>
           Keywords
         </label>
         <input
@@ -170,31 +118,12 @@ export function ArticleMetadataForm({
           value={article.keywords || ''}
           onChange={(e) => onChange({ keywords: e.target.value || null })}
           placeholder="design, systems, ui"
-          style={{
-            width: '100%',
-            padding: '8px 12px',
-            fontSize: '14px',
-            border: '1px solid var(--semantic-color-border-primary)',
-            borderRadius: 'var(--core-shape-radius-small)',
-            background: 'var(--semantic-color-background-primary)',
-            color: 'var(--semantic-color-foreground-primary)',
-          }}
+          className={styles.input}
         />
       </div>
 
-      <div>
-        <label
-          htmlFor="articleSection"
-          style={{
-            display: 'block',
-            fontSize: '12px',
-            fontWeight: '600',
-            marginBottom: '4px',
-            color: 'var(--semantic-color-foreground-secondary)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.5px',
-          }}
-        >
+      <div className={styles.field}>
+        <label htmlFor="articleSection" className={styles.label}>
           Section
         </label>
         <input
@@ -203,31 +132,12 @@ export function ArticleMetadataForm({
           value={article.articleSection || ''}
           onChange={(e) => onChange({ articleSection: e.target.value || null })}
           placeholder="Design Systems"
-          style={{
-            width: '100%',
-            padding: '8px 12px',
-            fontSize: '14px',
-            border: '1px solid var(--semantic-color-border-primary)',
-            borderRadius: 'var(--core-shape-radius-small)',
-            background: 'var(--semantic-color-background-primary)',
-            color: 'var(--semantic-color-foreground-primary)',
-          }}
+          className={styles.input}
         />
       </div>
 
-      <div>
-        <label
-          htmlFor="slug"
-          style={{
-            display: 'block',
-            fontSize: '12px',
-            fontWeight: '600',
-            marginBottom: '4px',
-            color: 'var(--semantic-color-foreground-secondary)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.5px',
-          }}
-        >
+      <div className={styles.field}>
+        <label htmlFor="slug" className={styles.label}>
           Slug
         </label>
         <input
@@ -236,32 +146,12 @@ export function ArticleMetadataForm({
           value={article.slug || ''}
           onChange={(e) => handleSlugChange(e.target.value)}
           placeholder="article-slug"
-          style={{
-            width: '100%',
-            padding: '8px 12px',
-            fontSize: '14px',
-            fontFamily: 'monospace',
-            border: '1px solid var(--semantic-color-border-primary)',
-            borderRadius: 'var(--core-shape-radius-small)',
-            background: 'var(--semantic-color-background-primary)',
-            color: 'var(--semantic-color-foreground-primary)',
-          }}
+          className={`${styles.input} ${styles.monospace}`}
         />
       </div>
 
-      <div>
-        <label
-          htmlFor="image"
-          style={{
-            display: 'block',
-            fontSize: '12px',
-            fontWeight: '600',
-            marginBottom: '4px',
-            color: 'var(--semantic-color-foreground-secondary)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.5px',
-          }}
-        >
+      <div className={styles.field}>
+        <label htmlFor="image" className={styles.label}>
           Cover Image URL
         </label>
         <input
@@ -272,28 +162,13 @@ export function ArticleMetadataForm({
           placeholder={
             extractedMetadata.coverImage || 'https://example.com/image.jpg'
           }
-          style={{
-            width: '100%',
-            padding: '8px 12px',
-            fontSize: '14px',
-            border: '1px solid var(--semantic-color-border-primary)',
-            borderRadius: 'var(--core-shape-radius-small)',
-            background: 'var(--semantic-color-background-primary)',
-            color: 'var(--semantic-color-foreground-primary)',
-          }}
+          className={styles.input}
         />
       </div>
 
-      <div
-        style={{
-          padding: '8px 12px',
-          background: 'var(--semantic-color-background-tertiary)',
-          borderRadius: 'var(--core-shape-radius-small)',
-          fontSize: '12px',
-          color: 'var(--semantic-color-foreground-secondary)',
-        }}
-      >
-        <strong>Word Count:</strong> {extractedMetadata.wordCount}
+        <div className={styles.wordCount}>
+          <strong>Word Count:</strong> {extractedMetadata.wordCount}
+        </div>
       </div>
     </div>
   );

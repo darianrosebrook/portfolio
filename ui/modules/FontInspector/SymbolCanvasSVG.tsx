@@ -501,14 +501,6 @@ export const SymbolCanvasSVG: React.FC = () => {
           if (!isModifier) {
             ev.preventDefault();
             // Show help - could display a tooltip or modal
-            console.log(
-              'Keyboard shortcuts:\n' +
-                '  d - Toggle details view\n' +
-                '  ? - Show this help\n' +
-                '  Ctrl/Cmd + + - Zoom in\n' +
-                '  Ctrl/Cmd + - - Zoom out\n' +
-                '  Ctrl/Cmd + Arrow keys - Pan'
-            );
           }
           break;
 
@@ -525,8 +517,6 @@ export const SymbolCanvasSVG: React.FC = () => {
           if (ev.ctrlKey || ev.metaKey) {
             ev.preventDefault();
             // Zoom in (could be implemented with viewBox)
-            // For now, just log
-            console.log('Zoom in (not yet implemented)');
           }
           break;
 
@@ -535,7 +525,6 @@ export const SymbolCanvasSVG: React.FC = () => {
           if (ev.ctrlKey || ev.metaKey) {
             ev.preventDefault();
             // Zoom out (could be implemented with viewBox)
-            console.log('Zoom out (not yet implemented)');
           }
           break;
 
@@ -546,7 +535,6 @@ export const SymbolCanvasSVG: React.FC = () => {
           if (ev.ctrlKey || ev.metaKey) {
             ev.preventDefault();
             // Pan (could be implemented with viewBox)
-            console.log('Pan (not yet implemented)');
           }
           break;
       }
@@ -570,7 +558,6 @@ export const SymbolCanvasSVG: React.FC = () => {
       const svgString = serializer.serializeToString(svgClone);
 
       await navigator.clipboard.writeText(svgString);
-      console.log('SVG copied to clipboard');
     } catch (error) {
       console.error('Failed to copy SVG:', error);
     }

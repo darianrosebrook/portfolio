@@ -112,7 +112,7 @@ export function EditorLayout({
               width: '320px',
               borderLeft: '1px solid var(--semantic-color-border-primary)',
               overflow: 'auto',
-              background: 'var(--semantic-color-background-secondary)',
+              background: 'var(--semantic-color-background-primary)',
               padding: '24px',
             }}
           >

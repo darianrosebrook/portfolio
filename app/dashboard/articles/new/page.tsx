@@ -31,7 +31,7 @@ function generateTempSlug(): string {
 export default function NewArticlePage() {
   // Generate a temporary slug immediately so auto-save can work
   const tempSlugRef = useRef<string>(generateTempSlug());
-  
+
   const [article, setArticle] = useState<Partial<Article>>(() => {
     // Try to restore from localStorage on initial load
     if (typeof window !== 'undefined') {
@@ -50,7 +50,7 @@ export default function NewArticlePage() {
         }
       }
     }
-    
+
     return {
       slug: tempSlugRef.current,
       headline: '',
@@ -81,7 +81,7 @@ export default function NewArticlePage() {
   useEffect(() => {
     setArticle((prev) => {
       const newHeadline = prev.headline || extractedMetadata.headline || null;
-      
+
       // Generate a proper slug from headline if we still have a temp slug
       let newSlug = prev.slug;
       if (extractedMetadata.headline && prev.slug?.startsWith('draft-')) {
@@ -90,7 +90,7 @@ export default function NewArticlePage() {
           newSlug = generatedSlug;
         }
       }
-      
+
       return {
         ...prev,
         headline: newHeadline,
@@ -179,7 +179,6 @@ export default function NewArticlePage() {
         if (!cleanedData.slug || !isValidSlug) {
           // Don't throw for temp slugs during auto-save - just skip server save
           // The content is still saved to localStorage
-          console.log('Skipping server save - waiting for valid slug');
           return;
         }
 
@@ -189,23 +188,25 @@ export default function NewArticlePage() {
           body: JSON.stringify(cleanedData),
         });
 
+        // Clone response before reading body to avoid "body stream already read" error
+        const responseText = await response.text();
+
         if (!response.ok) {
           let errorMessage = 'Save failed';
           try {
-            const errorData = await response.json();
+            const errorData = JSON.parse(responseText);
             errorMessage = errorData.error || errorMessage;
             if (errorData.details) {
               console.error('Validation errors:', errorData.details);
               errorMessage += `: ${JSON.stringify(errorData.details)}`;
             }
           } catch {
-            const errorText = await response.text();
-            errorMessage = errorText || errorMessage;
+            errorMessage = responseText || errorMessage;
           }
           throw new Error(errorMessage);
         }
 
-        const saved = await response.json();
+        const saved = JSON.parse(responseText);
         if (saved && Array.isArray(saved) && saved.length > 0) {
           setArticleId(saved[0].id);
           setArticle((prev) => ({
@@ -386,6 +387,11 @@ export default function NewArticlePage() {
             setArticle((prev) => ({ ...prev, ...updates }))
           }
           extractedMetadata={extractedMetadata}
+          onSave={handleManualSave}
+          onPublish={handlePublish}
+          onUnpublish={handleUnpublish}
+          onPreview={() => setShowPreview(true)}
+          isSaving={isManualSaving || saveStatus === 'saving'}
         />
       }
       actions={

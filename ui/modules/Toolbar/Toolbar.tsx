@@ -54,41 +54,55 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
 
   return (
     <div className={styles.toolbar}>
+      {/* Text style selector */}
       <select value={getActiveTextStyle()} onChange={handleTextStyleChange}>
         <option value="0">Paragraph</option>
         <option value="1">Heading 1</option>
         <option value="2">Heading 2</option>
         <option value="3">Heading 3</option>
       </select>
+      
+      <div className={styles.separator} />
+      
+      {/* Text formatting */}
       <button
         onClick={() => editor.chain().focus().toggleBold().run()}
         className={editor.isActive('bold') ? styles.isActive : ''}
+        title="Bold"
       >
         <Icon icon={faBold} />
       </button>
       <button
         onClick={() => editor.chain().focus().toggleItalic().run()}
         className={editor.isActive('italic') ? styles.isActive : ''}
+        title="Italic"
       >
         <Icon icon={faItalic} />
       </button>
       <button
         onClick={() => editor.chain().focus().toggleUnderline().run()}
         className={editor.isActive('underline') ? styles.isActive : ''}
+        title="Underline"
       >
         <Icon icon={faUnderline} />
       </button>
       <button
         onClick={() => editor.chain().focus().toggleStrike().run()}
         className={editor.isActive('strike') ? styles.isActive : ''}
+        title="Strikethrough"
       >
         <Icon icon={faStrikethrough} />
       </button>
+      
+      <div className={styles.separator} />
+      
+      {/* Alignment */}
       <button
         onClick={() => editor.chain().focus().setTextAlign('left').run()}
         className={
           editor.isActive({ textAlign: 'left' }) ? styles.isActive : ''
         }
+        title="Align left"
       >
         <Icon icon={faAlignLeft} />
       </button>
@@ -97,6 +111,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
         className={
           editor.isActive({ textAlign: 'center' }) ? styles.isActive : ''
         }
+        title="Align center"
       >
         <Icon icon={faAlignCenter} />
       </button>
@@ -105,28 +120,44 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
         className={
           editor.isActive({ textAlign: 'right' }) ? styles.isActive : ''
         }
+        title="Align right"
       >
         <Icon icon={faAlignRight} />
       </button>
+      
+      <div className={styles.separator} />
+      
+      {/* Color picker */}
       <input
         type="color"
         onInput={(event: React.ChangeEvent<HTMLInputElement>) =>
           editor.chain().focus().setColor(event.target.value).run()
         }
         value={editor.getAttributes('textStyle').color || '#000000'}
+        title="Text color"
       />
+      
+      <div className={styles.separator} />
+      
+      {/* Lists */}
       <button
         onClick={() => editor.chain().focus().toggleBulletList().run()}
         className={editor.isActive('bulletList') ? styles.isActive : ''}
+        title="Bullet list"
       >
         <Icon icon={faListUl} />
       </button>
       <button
         onClick={() => editor.chain().focus().toggleOrderedList().run()}
         className={editor.isActive('orderedList') ? styles.isActive : ''}
+        title="Numbered list"
       >
         <Icon icon={faListOl} />
       </button>
+      
+      <div className={styles.separator} />
+      
+      {/* Blocks */}
       <button
         onClick={() =>
           editor
@@ -135,16 +166,21 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
             .insertTable({ rows: 3, cols: 3, withHeaderRow: true })
             .run()
         }
+        title="Insert table"
       >
         <Icon icon={faTable} />
       </button>
       <button
         onClick={() => editor.chain().focus().toggleBlockquote().run()}
         className={editor.isActive('blockquote') ? styles.isActive : ''}
+        title="Quote"
       >
         <Icon icon={faQuoteLeft} />
       </button>
-      <button onClick={() => editor.chain().focus().setHorizontalRule().run()}>
+      <button 
+        onClick={() => editor.chain().focus().setHorizontalRule().run()}
+        title="Horizontal rule"
+      >
         <Icon icon={faMinus} />
       </button>
       <button
@@ -159,10 +195,20 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
       >
         <Icon icon={faList} />
       </button>
-      <button onClick={() => editor.chain().focus().undo().run()}>
+      
+      <div className={styles.separator} />
+      
+      {/* History */}
+      <button 
+        onClick={() => editor.chain().focus().undo().run()}
+        title="Undo"
+      >
         <Icon icon={faUndo} />
       </button>
-      <button onClick={() => editor.chain().focus().redo().run()}>
+      <button 
+        onClick={() => editor.chain().focus().redo().run()}
+        title="Redo"
+      >
         <Icon icon={faRedo} />
       </button>
     </div>

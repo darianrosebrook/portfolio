@@ -75,24 +75,8 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   }, [user, fetchProfile]);
 
-  useEffect(() => {
+    useEffect(() => {
     let isMounted = true;
-
-    // Debug: Log what cookies the browser sees (development only)
-    if (
-      process.env.NODE_ENV === 'development' &&
-      typeof document !== 'undefined'
-    ) {
-      const allCookies = document.cookie;
-      const supabaseCookies = allCookies
-        .split(';')
-        .filter((c) => c.trim().startsWith('sb-'));
-      console.log('[UserContext] Browser cookies:', {
-        totalCookies: allCookies.split(';').length,
-        supabaseCookies: supabaseCookies.length,
-        cookieNames: supabaseCookies.map((c) => c.trim().split('=')[0]),
-      });
-    }
 
     // Get initial session
     const getInitialSession = async () => {
@@ -161,13 +145,6 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
       data: { subscription },
     } = supabase.auth.onAuthStateChange(
       async (event: AuthChangeEvent, session: Session | null) => {
-        if (process.env.NODE_ENV === 'development') {
-          console.log('Auth state changed:', event, {
-            hasSession: !!session,
-            hasUser: !!session?.user,
-          });
-        }
-
         if (!isMounted) return;
 
         if (session?.user) {

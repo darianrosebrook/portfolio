@@ -1,20 +1,41 @@
 .tabs {
-  margin-bottom: var(--core-spacing-size-05);
-  border-bottom: 1px solid var(--semantic-color-border-primary);
+  display: flex;
+  gap: var(--core-spacing-size-04);
+  padding-block: var(--core-spacing-size-04);
+  border-bottom: 1px solid var(--semantic-color-border-subtle);
+  margin-bottom: var(--core-spacing-size-07);
 }
 
 .tabs ul {
   display: flex;
   gap: var(--core-spacing-size-04);
   margin: 0;
-  padding: 0 0 var(--core-spacing-size-03) 0;
+  padding: 0;
   list-style: none;
 }
 
-.tabs a {
+.tabLink {
   display: inline-block;
-  padding: var(--core-spacing-size-02) var(--core-spacing-size-03);
-  border-radius: var(--core-shape-radius-medium);
+  padding: var(--core-spacing-size-03) var(--core-spacing-size-05);
+  font-size: var(--semantic-typography-body-03);
+  font-weight: var(--semantic-typography-font-weight-medium);
+  color: var(--semantic-color-foreground-secondary);
+  background: transparent;
+  border: none;
+  border-radius: var(--core-shape-radius-full);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--core-motion-duration-short) var(--core-motion-easing-standard);
+
+  &:hover {
+    color: var(--semantic-color-foreground-primary);
+    background: var(--semantic-color-background-secondary);
+  }
+
+  &[data-active='true'] {
+    color: var(--semantic-color-foreground-primary);
+    background: var(--semantic-color-background-secondary);
+  }
 }
 
 .container {
