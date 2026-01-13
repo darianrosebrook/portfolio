@@ -209,6 +209,54 @@
     border: 1px solid var(--semantic-color-border-subtle);
     border-radius: 0.5rem;
   }
+
+  .anatomyList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .anatomyPart {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: var(--semantic-color-background-primary);
+    border: 1px solid var(--semantic-color-border-subtle);
+    border-radius: 0.375rem;
+    transition: border-color 0.2s;
+
+    &:hover {
+      border-color: var(--semantic-color-border-hover);
+    }
+  }
+
+  .anatomyNumber {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    background: var(--semantic-color-background-tertiary);
+    border-radius: 50%;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--semantic-color-foreground-secondary);
+  }
+
+  .anatomyName {
+    font-family: var(--core-typography-font-family-mono);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--semantic-color-foreground-primary);
+  }
+
+  .anatomyDescription {
+    margin-left: auto;
+    font-size: 0.8125rem;
+    color: var(--semantic-color-foreground-tertiary);
+  }
 }
 
 .plannedContent {
@@ -244,11 +292,48 @@
   .methodsTable {
     position: relative;
     margin-bottom: 2rem;
-    padding: 1.5rem;
     background: var(--semantic-color-background-secondary);
     border: 1px solid var(--semantic-color-border-subtle);
     border-radius: 0.5rem;
     contain: layout style;
+    overflow-x: auto;
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+
+      th,
+      td {
+        padding: 0.75rem 1rem;
+        text-align: left;
+        border-bottom: 1px solid var(--semantic-color-border-subtle);
+      }
+
+      th {
+        background: var(--semantic-color-background-tertiary);
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      td code {
+        padding: 0.125rem 0.375rem;
+        background: var(--semantic-color-background-primary);
+        border-radius: 0.25rem;
+        font-family: var(--core-typography-font-family-mono);
+        font-size: 0.8125rem;
+      }
+
+      tr:last-child td {
+        border-bottom: none;
+      }
+    }
+  }
+
+  .noData {
+    padding: 1.5rem;
+    color: var(--semantic-color-foreground-tertiary);
+    font-style: italic;
   }
 }
 
@@ -374,9 +459,19 @@
       position: relative;
       z-index: 1;
       margin: 0;
-      padding: 1rem;
+      padding: 1rem 1rem 0;
+      background: var(--semantic-color-background-secondary);
+    }
+
+    .exampleDescription {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      padding: 0.5rem 1rem 1rem;
       background: var(--semantic-color-background-secondary);
       border-bottom: 1px solid var(--semantic-color-border-subtle);
+      color: var(--semantic-color-foreground-secondary);
+      font-size: 0.875rem;
     }
   }
 }

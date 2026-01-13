@@ -34,7 +34,8 @@ const TableRoot = React.forwardRef<HTMLDivElement, TableProps>(
 );
 
 // Table Element Component
-export interface TableElementProps extends React.TableHTMLAttributes<HTMLTableElement> {}
+export interface TableElementProps
+  extends React.TableHTMLAttributes<HTMLTableElement> {}
 
 const TableElement = React.forwardRef<HTMLTableElement, TableElementProps>(
   ({ className = '', children, ...rest }, ref) => {
@@ -52,7 +53,8 @@ const TableElement = React.forwardRef<HTMLTableElement, TableElementProps>(
 );
 
 // Table Header Component
-export interface TableHeaderProps extends React.HTMLAttributes<HTMLTableSectionElement> {}
+export interface TableHeaderProps
+  extends React.HTMLAttributes<HTMLTableSectionElement> {}
 
 const TableHeader = React.forwardRef<HTMLTableSectionElement, TableHeaderProps>(
   ({ className = '', children, ...rest }, ref) => {
@@ -70,7 +72,8 @@ const TableHeader = React.forwardRef<HTMLTableSectionElement, TableHeaderProps>(
 );
 
 // Table Body Component
-export interface TableBodyProps extends React.HTMLAttributes<HTMLTableSectionElement> {}
+export interface TableBodyProps
+  extends React.HTMLAttributes<HTMLTableSectionElement> {}
 
 const TableBody = React.forwardRef<HTMLTableSectionElement, TableBodyProps>(
   ({ className = '', children, ...rest }, ref) => {
@@ -88,7 +91,8 @@ const TableBody = React.forwardRef<HTMLTableSectionElement, TableBodyProps>(
 );
 
 // Table Footer Component
-export interface TableFooterProps extends React.HTMLAttributes<HTMLTableSectionElement> {}
+export interface TableFooterProps
+  extends React.HTMLAttributes<HTMLTableSectionElement> {}
 
 const TableFooter = React.forwardRef<HTMLTableSectionElement, TableFooterProps>(
   ({ className = '', children, ...rest }, ref) => {
@@ -106,7 +110,8 @@ const TableFooter = React.forwardRef<HTMLTableSectionElement, TableFooterProps>(
 );
 
 // Table Row Component
-export interface TableRowProps extends React.HTMLAttributes<HTMLTableRowElement> {
+export interface TableRowProps
+  extends React.HTMLAttributes<HTMLTableRowElement> {
   /** Whether the row is selected */
   selected?: boolean;
   /** Whether the row is interactive (hoverable) */
@@ -140,7 +145,8 @@ const TableRow = React.forwardRef<HTMLTableRowElement, TableRowProps>(
 );
 
 // Table Head Cell Component
-export interface TableHeadProps extends React.ThHTMLAttributes<HTMLTableCellElement> {
+export interface TableHeadProps
+  extends React.ThHTMLAttributes<HTMLTableCellElement> {
   /** Whether the column is sortable */
   sortable?: boolean;
   /** Current sort direction */
@@ -216,7 +222,8 @@ const TableHead = React.forwardRef<HTMLTableCellElement, TableHeadProps>(
 );
 
 // Table Cell Component
-export interface TableCellProps extends React.TdHTMLAttributes<HTMLTableCellElement> {
+export interface TableCellProps
+  extends React.TdHTMLAttributes<HTMLTableCellElement> {
   /** Whether the cell content should be truncated */
   truncate?: boolean;
 }
@@ -239,7 +246,8 @@ const TableCell = React.forwardRef<HTMLTableCellElement, TableCellProps>(
 );
 
 // Table Caption Component
-export interface TableCaptionProps extends React.HTMLAttributes<HTMLTableCaptionElement> {}
+export interface TableCaptionProps
+  extends React.HTMLAttributes<HTMLTableCaptionElement> {}
 
 const TableCaption = React.forwardRef<
   HTMLTableCaptionElement,

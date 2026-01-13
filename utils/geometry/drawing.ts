@@ -1,5 +1,5 @@
-import { AnatomyFeature } from '@/ui/modules/FontInspector/FontInspector';
-import type { Glyph } from 'fontkit';
+import type { AnatomyFeature } from '@/ui/modules/FontInspector/types';
+import type { Glyph } from '@/ui/modules/FontInspector/fontkit-types';
 export interface DrawColors {
   anchorFill: string;
   anchorStroke: string;
@@ -479,5 +479,333 @@ function drawMarker(
   ctx.textAlign = 'left';
   ctx.textBaseline = 'middle';
   ctx.fillText(label, x + 8, y);
+  ctx.restore();
+}
+
+// ===================================================================
+// Feature Shape Rendering - Unified detector output rendering
+// ===================================================================
+
+import type {
+  FeatureInstance,
+  FeatureShape,
+  Point2D,
+} from '@/utils/typeAnatomy/types';
+
+/**
+ * Transform parameters for converting glyph space to canvas space.
+ */
+export interface TransformParams {
+  /** Scale factor (font units to pixels) */
+  scale: number;
+  /** X offset for centering */
+  xOffset: number;
+  /** Baseline Y position in canvas coordinates */
+  baseline: number;
+}
+
+/**
+ * Transforms a point from glyph design space to canvas space.
+ * Glyph space: Y increases upward, origin at baseline left
+ * Canvas space: Y increases downward, origin at top-left
+ */
+export function transformPoint(
+  point: Point2D,
+  params: TransformParams
+): Point2D {
+  return {
+    x: point.x * params.scale + params.xOffset,
+    y: params.baseline - point.y * params.scale,
+  };
+}
+
+/**
+ * Transforms a shape from glyph design space to canvas space.
+ */
+export function transformShape(
+  shape: FeatureShape,
+  params: TransformParams
+): FeatureShape {
+  switch (shape.type) {
+    case 'circle': {
+      const center = transformPoint({ x: shape.cx, y: shape.cy }, params);
+      return {
+        type: 'circle',
+        cx: center.x,
+        cy: center.y,
+        r: shape.r * params.scale,
+      };
+    }
+
+    case 'point': {
+      const pt = transformPoint({ x: shape.x, y: shape.y }, params);
+      return {
+        type: 'point',
+        x: pt.x,
+        y: pt.y,
+        label: shape.label,
+      };
+    }
+
+    case 'line': {
+      const p1 = transformPoint({ x: shape.x1, y: shape.y1 }, params);
+      const p2 = transformPoint({ x: shape.x2, y: shape.y2 }, params);
+      return {
+        type: 'line',
+        x1: p1.x,
+        y1: p1.y,
+        x2: p2.x,
+        y2: p2.y,
+      };
+    }
+
+    case 'rect': {
+      const topLeft = transformPoint(
+        { x: shape.x, y: shape.y + shape.height },
+        params
+      );
+      return {
+        type: 'rect',
+        x: topLeft.x,
+        y: topLeft.y,
+        width: shape.width * params.scale,
+        height: shape.height * params.scale,
+      };
+    }
+
+    case 'polyline': {
+      return {
+        type: 'polyline',
+        points: shape.points.map((p) => transformPoint(p, params)),
+      };
+    }
+
+    case 'path': {
+      // Path data would need SVG transform - keep as-is for now
+      // TODO: Implement path transformation if needed
+      return shape;
+    }
+
+    default:
+      return shape;
+  }
+}
+
+/**
+ * Draws a circle shape.
+ */
+function drawCircleShape(
+  ctx: CanvasRenderingContext2D,
+  shape: Extract<FeatureShape, { type: 'circle' }>,
+  colors: DrawColors
+): void {
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(shape.cx, shape.cy, shape.r, 0, Math.PI * 2);
+  ctx.fillStyle = colors.highlightBackground;
+  ctx.globalAlpha = 0.4;
+  ctx.fill();
+  ctx.globalAlpha = 1;
+  ctx.strokeStyle = colors.boundsStroke;
+  ctx.lineWidth = 2;
+  ctx.stroke();
+  ctx.restore();
+}
+
+/**
+ * Draws a point shape with optional label.
+ */
+function drawPointShape(
+  ctx: CanvasRenderingContext2D,
+  shape: Extract<FeatureShape, { type: 'point' }>,
+  colors: DrawColors
+): void {
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(shape.x, shape.y, 5, 0, Math.PI * 2);
+  ctx.fillStyle = colors.boundsStroke;
+  ctx.fill();
+
+  if (shape.label) {
+    ctx.font = '11px sans-serif';
+    ctx.fillStyle = colors.labelFill;
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(shape.label, shape.x + 8, shape.y);
+  }
+  ctx.restore();
+}
+
+/**
+ * Draws a line shape.
+ */
+function drawLineShape(
+  ctx: CanvasRenderingContext2D,
+  shape: Extract<FeatureShape, { type: 'line' }>,
+  colors: DrawColors
+): void {
+  ctx.save();
+  ctx.beginPath();
+  ctx.moveTo(shape.x1, shape.y1);
+  ctx.lineTo(shape.x2, shape.y2);
+  ctx.strokeStyle = colors.boundsStroke;
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Draw endpoints
+  ctx.beginPath();
+  ctx.arc(shape.x1, shape.y1, 3, 0, Math.PI * 2);
+  ctx.fillStyle = colors.boundsStroke;
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(shape.x2, shape.y2, 3, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+}
+
+/**
+ * Draws a rectangle shape.
+ */
+function drawRectShape(
+  ctx: CanvasRenderingContext2D,
+  shape: Extract<FeatureShape, { type: 'rect' }>,
+  colors: DrawColors
+): void {
+  ctx.save();
+  ctx.fillStyle = colors.highlightBackground;
+  ctx.globalAlpha = 0.3;
+  ctx.fillRect(shape.x, shape.y, shape.width, shape.height);
+  ctx.globalAlpha = 1;
+  ctx.strokeStyle = colors.boundsStroke;
+  ctx.lineWidth = 2;
+  ctx.strokeRect(shape.x, shape.y, shape.width, shape.height);
+  ctx.restore();
+}
+
+/**
+ * Draws a polyline shape.
+ */
+function drawPolylineShape(
+  ctx: CanvasRenderingContext2D,
+  shape: Extract<FeatureShape, { type: 'polyline' }>,
+  colors: DrawColors
+): void {
+  if (shape.points.length < 2) return;
+
+  ctx.save();
+  ctx.beginPath();
+  ctx.moveTo(shape.points[0].x, shape.points[0].y);
+
+  for (let i = 1; i < shape.points.length; i++) {
+    ctx.lineTo(shape.points[i].x, shape.points[i].y);
+  }
+
+  // Close the path
+  ctx.closePath();
+
+  ctx.fillStyle = colors.highlightBackground;
+  ctx.globalAlpha = 0.4;
+  ctx.fill();
+  ctx.globalAlpha = 1;
+  ctx.strokeStyle = colors.boundsStroke;
+  ctx.lineWidth = 2;
+  ctx.stroke();
+  ctx.restore();
+}
+
+/**
+ * Draws an SVG path shape.
+ */
+function drawPathShape(
+  ctx: CanvasRenderingContext2D,
+  shape: Extract<FeatureShape, { type: 'path' }>,
+  colors: DrawColors
+): void {
+  ctx.save();
+  const path = new Path2D(shape.d);
+  ctx.fillStyle = colors.highlightBackground;
+  ctx.globalAlpha = 0.4;
+  ctx.fill(path);
+  ctx.globalAlpha = 1;
+  ctx.strokeStyle = colors.boundsStroke;
+  ctx.lineWidth = 2;
+  ctx.stroke(path);
+  ctx.restore();
+}
+
+/**
+ * Unified shape dispatcher - draws any FeatureShape type.
+ *
+ * @param ctx - Canvas context
+ * @param shape - The shape to draw (already in canvas coordinates)
+ * @param colors - Color scheme
+ */
+export function drawShape(
+  ctx: CanvasRenderingContext2D,
+  shape: FeatureShape,
+  colors: DrawColors
+): void {
+  switch (shape.type) {
+    case 'circle':
+      drawCircleShape(ctx, shape, colors);
+      break;
+    case 'point':
+      drawPointShape(ctx, shape, colors);
+      break;
+    case 'line':
+      drawLineShape(ctx, shape, colors);
+      break;
+    case 'rect':
+      drawRectShape(ctx, shape, colors);
+      break;
+    case 'polyline':
+      drawPolylineShape(ctx, shape, colors);
+      break;
+    case 'path':
+      drawPathShape(ctx, shape, colors);
+      break;
+  }
+}
+
+/**
+ * Draws a feature instance with coordinate transformation.
+ *
+ * @param ctx - Canvas context
+ * @param instance - Feature instance from detector
+ * @param params - Transform parameters (scale, xOffset, baseline)
+ * @param colors - Color scheme
+ */
+export function drawFeatureInstance(
+  ctx: CanvasRenderingContext2D,
+  instance: FeatureInstance,
+  params: TransformParams,
+  colors: DrawColors
+): void {
+  const transformed = transformShape(instance.shape, params);
+  drawShape(ctx, transformed, colors);
+}
+
+/**
+ * Draws all feature instances from a detection result.
+ *
+ * @param ctx - Canvas context
+ * @param instances - Map of feature ID to instances
+ * @param params - Transform parameters
+ * @param colors - Color scheme
+ */
+export function drawFeatureInstances(
+  ctx: CanvasRenderingContext2D,
+  instances: Map<string, FeatureInstance[]>,
+  params: TransformParams,
+  colors: DrawColors
+): void {
+  ctx.save();
+
+  for (const [_featureId, featureInstances] of instances) {
+    for (const instance of featureInstances) {
+      drawFeatureInstance(ctx, instance, params, colors);
+    }
+  }
+
   ctx.restore();
 }

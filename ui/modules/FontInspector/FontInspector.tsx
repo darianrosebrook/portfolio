@@ -1,8 +1,8 @@
 'use client';
 
 import { DrawColors } from '@/utils/geometry/drawing';
-import type { Font, Glyph } from 'fontkit';
-import * as fontkit from 'fontkit';
+import type { Font, Glyph } from './fontkit-types';
+import type { AnatomyFeature } from './types';
 import React, {
   createContext,
   useCallback,
@@ -17,6 +17,18 @@ import { InspectorControls } from './InspectorControls';
 import { SymbolCanvas } from './SymbolCanvas';
 import { SymbolGrid } from './SymbolGrid';
 import { TypographyArticleContent } from './TypographyArticleContent';
+
+// New unified detection system imports
+import { detectGlyphFeatures } from '@/utils/typeAnatomy/detectorRegistry';
+import { buildGeometryCache } from '@/utils/typeAnatomy/geometryCache';
+import { getFeatureHints } from '@/utils/typeAnatomy/glyphFeatureHints';
+import type {
+  DetectionContext,
+  FeatureID,
+  FeatureInstance,
+  GeometryCache,
+} from '@/utils/typeAnatomy/types';
+import { toFeatureID } from '@/utils/typeAnatomy/types';
 
 // ---------------------------
 // Types & Interfaces
@@ -34,14 +46,8 @@ interface FontInfo {
   font: Font | null;
 }
 
-export interface AnatomyFeature {
-  feature: string;
-  label: string;
-  labelPosition: string;
-  disabled: boolean;
-  selected: boolean;
-  readonly: boolean;
-}
+// Re-export AnatomyFeature for external use
+export type { AnatomyFeature } from './types';
 
 interface InspectorContextType {
   colorScheme: string;
@@ -62,6 +68,11 @@ interface InspectorContextType {
   toggleAnatomy: (feature: AnatomyFeature) => void;
   colors: DrawColors;
   autoDetectFeatures?: boolean;
+  // New unified detection system
+  geometryCache: GeometryCache | null;
+  detectionContext: DetectionContext | null;
+  detectedFeatures: Map<FeatureID, FeatureInstance[]>;
+  availableFeatureIds: FeatureID[];
 }
 
 // ---------------------------
@@ -187,6 +198,7 @@ export const InspectorProvider: React.FC<{
 
   const anatomyFeatures = useMemo(
     () => [
+      // Metric lines (always available)
       {
         feature: 'Baseline',
         label: 'Baseline',
@@ -227,109 +239,150 @@ export const InspectorProvider: React.FC<{
         selected: true,
         readonly: false,
       },
+      // Glyph anatomy features (now enabled!)
       {
         feature: 'Apex',
-        label: 'Apex (coming soon)',
+        label: 'Apex',
         labelPosition: 'top',
-        disabled: true,
+        disabled: false,
         selected: false,
-        readonly: true,
+        readonly: false,
       },
       {
-        feature: 'Tail',
-        label: 'Tail (coming soon)',
+        feature: 'Vertex',
+        label: 'Vertex',
         labelPosition: 'bottom',
-        disabled: true,
+        disabled: false,
         selected: false,
-        readonly: true,
-      },
-      {
-        feature: 'Arm',
-        label: 'Arm (coming soon)',
-        labelPosition: 'top',
-        disabled: true,
-        selected: false,
-        readonly: true,
-      },
-      {
-        feature: 'Tittle',
-        label: 'Tittle (coming soon)',
-        labelPosition: 'top',
-        disabled: true,
-        selected: false,
-        readonly: true,
-      },
-      {
-        feature: 'Bowl',
-        label: 'Bowl (coming soon)',
-        labelPosition: 'bottom',
-        disabled: true,
-        selected: false,
-        readonly: true,
-      },
-      {
-        feature: 'Counter',
-        label: 'Counter (coming soon)',
-        labelPosition: 'bottom',
-        disabled: true,
-        selected: false,
-        readonly: true,
+        readonly: false,
       },
       {
         feature: 'Crossbar',
-        label: 'Crossbar (coming soon)',
+        label: 'Crossbar',
         labelPosition: 'bottom',
-        disabled: true,
+        disabled: false,
         selected: false,
-        readonly: true,
-      },
-      {
-        feature: 'Serif',
-        label: 'Serif (coming soon)',
-        labelPosition: 'bottom',
-        disabled: true,
-        selected: false,
-        readonly: true,
-      },
-      {
-        feature: 'Eye',
-        label: 'Eye (coming soon)',
-        labelPosition: 'bottom',
-        disabled: true,
-        selected: false,
-        readonly: true,
-      },
-      {
-        feature: 'Spine',
-        label: 'Spine (coming soon)',
-        labelPosition: 'bottom',
-        disabled: true,
-        selected: false,
-        readonly: true,
+        readonly: false,
       },
       {
         feature: 'Stem',
-        label: 'Stem (coming soon)',
+        label: 'Stem',
         labelPosition: 'bottom',
-        disabled: true,
+        disabled: false,
         selected: false,
-        readonly: true,
+        readonly: false,
       },
       {
-        feature: 'Aperture',
-        label: 'Aperture (coming soon)',
+        feature: 'Bowl',
+        label: 'Bowl',
         labelPosition: 'bottom',
-        disabled: true,
+        disabled: false,
         selected: false,
-        readonly: true,
+        readonly: false,
+      },
+      {
+        feature: 'Counter',
+        label: 'Counter',
+        labelPosition: 'bottom',
+        disabled: false,
+        selected: false,
+        readonly: false,
+      },
+      {
+        feature: 'Tittle',
+        label: 'Tittle',
+        labelPosition: 'top',
+        disabled: false,
+        selected: false,
+        readonly: false,
+      },
+      {
+        feature: 'Arm',
+        label: 'Arm',
+        labelPosition: 'top',
+        disabled: false,
+        selected: false,
+        readonly: false,
+      },
+      {
+        feature: 'Tail',
+        label: 'Tail',
+        labelPosition: 'bottom',
+        disabled: false,
+        selected: false,
+        readonly: false,
+      },
+      {
+        feature: 'Loop',
+        label: 'Loop',
+        labelPosition: 'bottom',
+        disabled: false,
+        selected: false,
+        readonly: false,
+      },
+      {
+        feature: 'Serif',
+        label: 'Serif',
+        labelPosition: 'bottom',
+        disabled: false,
+        selected: false,
+        readonly: false,
+      },
+      {
+        feature: 'Finial',
+        label: 'Finial',
+        labelPosition: 'bottom',
+        disabled: false,
+        selected: false,
+        readonly: false,
       },
       {
         feature: 'Ear',
-        label: 'Ear (coming soon)',
-        labelPosition: 'bottom',
-        disabled: true,
+        label: 'Ear',
+        labelPosition: 'top',
+        disabled: false,
         selected: false,
-        readonly: true,
+        readonly: false,
+      },
+      {
+        feature: 'Spur',
+        label: 'Spur',
+        labelPosition: 'bottom',
+        disabled: false,
+        selected: false,
+        readonly: false,
+      },
+      {
+        feature: 'Crotch',
+        label: 'Crotch',
+        labelPosition: 'bottom',
+        disabled: false,
+        selected: false,
+        readonly: false,
+      },
+      {
+        feature: 'Eye',
+        label: 'Eye',
+        labelPosition: 'bottom',
+        disabled: false,
+        selected: false,
+        readonly: false,
+      },
+      {
+        feature: 'Spine',
+        label: 'Spine',
+        labelPosition: 'bottom',
+        disabled: false,
+        selected: false,
+        readonly: false,
+      },
+      {
+        feature: 'Aperture',
+        label: 'Aperture',
+        labelPosition: 'bottom',
+        disabled: false,
+        selected: false,
+        readonly: false,
       },
     ],
     []
@@ -348,12 +401,28 @@ export const InspectorProvider: React.FC<{
     if (fontsLoaded) return;
 
     async function loadFonts() {
+      // Dynamically import fontkit to avoid bundling issues in client components
+      let fontkit: typeof import('fontkit') | null = null;
+      try {
+        const fontkitModule = await import('fontkit');
+        fontkit = fontkitModule;
+      } catch (importError: unknown) {
+        console.error('Failed to import fontkit:', importError);
+        return;
+      }
+
+      if (!fontkit || !fontkit.create) {
+        console.error('fontkit.create is not available');
+        return;
+      }
+
       const loadedFonts = await Promise.all(
         fonts.map(async (fontInfo) => {
           try {
             const response = await fetch(fontInfo.url);
             const arrayBuffer = await response.arrayBuffer();
-            const font = fontkit.create(new Uint8Array(arrayBuffer)) as Font;
+            // fontkit is guaranteed to be non-null here due to check above
+            const font = fontkit!.create(new Uint8Array(arrayBuffer)) as Font;
             return { ...fontInfo, font };
           } catch (error) {
             console.error(`Error loading font ${fontInfo.name}:`, error);
@@ -565,6 +634,86 @@ export const InspectorProvider: React.FC<{
     return glyph;
   }, [fontInstance, glyphUnicode]);
 
+  // Build detection context from font
+  const detectionContext = useMemo((): DetectionContext | null => {
+    if (!fontInstance) return null;
+
+    const fontAny = fontInstance as Font & {
+      post?: { italicAngle?: number; isFixedPitch?: boolean };
+      'OS/2'?: { usWeightClass?: number };
+    };
+
+    const fontName = (
+      fontInstance.fullName ||
+      fontInstance.familyName ||
+      ''
+    ).toLowerCase();
+    const isSerif =
+      fontName.includes('serif') &&
+      !fontName.includes('sans') &&
+      !fontName.includes('grotesk');
+
+    const italicAngle = fontAny.post?.italicAngle || 0;
+
+    return {
+      isSerif,
+      isItalic: Math.abs(italicAngle) > 0.5,
+      italicAngle,
+      isMono: fontAny.post?.isFixedPitch || false,
+      weight: fontAny['OS/2']?.usWeightClass || 400,
+      unitsPerEm: fontInstance.unitsPerEm || 1000,
+    };
+  }, [fontInstance]);
+
+  // Build geometry cache for current glyph
+  const geometryCache = useMemo((): GeometryCache | null => {
+    if (!glyph || !fontInstance) return null;
+
+    try {
+      return buildGeometryCache(glyph, fontInstance, axisValues);
+    } catch (error) {
+      console.warn('[FontInspector] Error building geometry cache:', error);
+      return null;
+    }
+  }, [glyph, fontInstance, axisValues]);
+
+  // Get current character for hints
+  const currentChar = useMemo(() => {
+    return String.fromCodePoint(glyphUnicode);
+  }, [glyphUnicode]);
+
+  // Get available feature IDs for this glyph based on hints
+  const availableFeatureIds = useMemo((): FeatureID[] => {
+    if (!detectionContext) return [];
+
+    const hints = getFeatureHints(currentChar, detectionContext);
+    return hints.map((h) => h.id);
+  }, [currentChar, detectionContext]);
+
+  // Get selected feature IDs from anatomy selection
+  const selectedFeatureIds = useMemo((): FeatureID[] => {
+    const ids: FeatureID[] = [];
+    for (const [name] of selectedAnatomy) {
+      const id = toFeatureID(name);
+      if (id) ids.push(id);
+    }
+    return ids;
+  }, [selectedAnatomy]);
+
+  // Run detection for selected features
+  const detectedFeatures = useMemo((): Map<FeatureID, FeatureInstance[]> => {
+    if (!geometryCache || !showDetails || selectedFeatureIds.length === 0) {
+      return new Map();
+    }
+
+    try {
+      return detectGlyphFeatures(geometryCache, selectedFeatureIds);
+    } catch (error) {
+      console.warn('[FontInspector] Error detecting features:', error);
+      return new Map();
+    }
+  }, [geometryCache, showDetails, selectedFeatureIds]);
+
   const contextValue = useMemo(
     (): InspectorContextType => ({
       fonts,
@@ -584,6 +733,11 @@ export const InspectorProvider: React.FC<{
       toggleAnatomy,
       colorScheme,
       colors,
+      // New unified detection system
+      geometryCache,
+      detectionContext,
+      detectedFeatures,
+      availableFeatureIds,
     }),
     [
       fonts,
@@ -601,6 +755,10 @@ export const InspectorProvider: React.FC<{
       selectedAnatomy,
       toggleAnatomy,
       setCurrentFont,
+      geometryCache,
+      detectionContext,
+      detectedFeatures,
+      availableFeatureIds,
     ]
   );
 

@@ -844,13 +844,9 @@ export default function App() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // In real implementation, you'd validate all fields
-    alert('Form submitted! Check console for orchestration benefits.');
-    console.log('Composer Benefits Demonstrated:');
-    console.log('- Consistent ARIA relationships across all fields');
-    console.log('- Centralized validation orchestration');
-    console.log('- Context-based child coordination');
-    console.log('- No prop drilling - children access field state via context');
-    console.log('- Reusable validation patterns');
+    alert(
+      'Form submitted successfully!\n\nComposer Benefits:\n- Consistent ARIA relationships\n- Centralized validation\n- Context-based coordination\n- No prop drilling'
+    );
   };
 
   return (

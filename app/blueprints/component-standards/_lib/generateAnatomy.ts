@@ -48,10 +48,12 @@ export function getComponentContract(
     const content = fs.readFileSync(contractPath, 'utf8');
     return JSON.parse(content) as ComponentContract;
   } catch (error) {
-    console.warn(
-      `Error reading contract for ${component.component}:`,
-      error instanceof Error ? error.message : String(error)
-    );
+    if (process.env.NODE_ENV === 'development') {
+      console.warn(
+        `Error reading contract for ${component.component}:`,
+        error instanceof Error ? error.message : String(error)
+      );
+    }
     return null;
   }
 }

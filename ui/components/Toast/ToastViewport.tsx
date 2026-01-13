@@ -4,7 +4,8 @@ import { useToast } from './ToastProvider';
 import { ToastItem } from './ToastItem';
 import styles from './Toast.module.scss';
 
-export interface ToastViewportProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ToastViewportProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   politeness?: 'polite' | 'assertive';
 }
 

@@ -14,6 +14,8 @@ import {
   drawGlyphBounds,
   drawMetricLine,
   drawPathDetails,
+  drawFeatureInstances,
+  type TransformParams,
 } from '@/utils/geometry/drawing';
 
 export const SymbolCanvas: React.FC = () => {
@@ -25,6 +27,7 @@ export const SymbolCanvas: React.FC = () => {
     setAxisValues,
     colors,
     selectedAnatomy,
+    detectedFeatures,
   } = useInspector();
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -159,6 +162,26 @@ export const SymbolCanvas: React.FC = () => {
         selectedAnatomy
       );
 
+      // Draw detected feature instances from the new unified detection system
+      if (showDetails && detectedFeatures.size > 0) {
+        const transformParams: TransformParams = {
+          scale,
+          xOffset: 0, // Already translated to xOffset
+          baseline: 0, // Already translated to baseline
+        };
+
+        // Convert Map<FeatureID, FeatureInstance[]> to Map<string, FeatureInstance[]>
+        const instancesMap = new Map<
+          string,
+          typeof detectedFeatures extends Map<unknown, infer V> ? V : never
+        >();
+        for (const [featureId, instances] of detectedFeatures) {
+          instancesMap.set(featureId, instances);
+        }
+
+        drawFeatureInstances(ctx, instancesMap, transformParams, colors);
+      }
+
       ctx.restore();
     },
 
@@ -170,6 +193,7 @@ export const SymbolCanvas: React.FC = () => {
       cursor,
       selectedAnatomy,
       showDetails,
+      detectedFeatures,
     ]
   );
 

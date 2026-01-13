@@ -171,7 +171,7 @@ export function resolvePath(
         const value = getNestedValue(result.tokens, path);
         if (value !== undefined) {
           // Apply transforms if configured
-          let transformed = applyTransforms(value, ctx);
+          const transformed = applyTransforms(value, ctx);
 
           // If resolveToReferences is true, return CSS custom property reference
           if (ctx.config.resolveToReferences !== false) {

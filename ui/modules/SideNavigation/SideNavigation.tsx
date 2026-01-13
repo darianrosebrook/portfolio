@@ -6,7 +6,8 @@
 import * as React from 'react';
 import styles from './SideNavigation.module.scss';
 
-export interface SideNavigationProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface SideNavigationProps
+  extends React.HTMLAttributes<HTMLDivElement> {}
 
 export const SideNavigation = React.forwardRef<
   HTMLDivElement,

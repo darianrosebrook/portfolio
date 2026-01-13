@@ -10,7 +10,8 @@ import styles from './Links.module.scss';
 
 gsap.registerPlugin(useGSAP, SplitText);
 
-export interface AnimatedLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface AnimatedLinkProps
+  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   href: string;
   children: string; // plain text; we split into characters
   className?: string;

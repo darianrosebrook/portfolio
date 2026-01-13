@@ -12,7 +12,8 @@ import styles from './Alert.module.scss';
 export type AlertLevel = 'inline' | 'section' | 'page';
 
 export interface AlertProps
-  extends React.HTMLAttributes<HTMLDivElement>, DismissibleProps {
+  extends React.HTMLAttributes<HTMLDivElement>,
+    DismissibleProps {
   /**
    * Visual intent/severity of the alert
    */

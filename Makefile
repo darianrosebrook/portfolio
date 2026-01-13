@@ -60,4 +60,15 @@ clean:
 	rm -rf test-results
 	rm -rf playwright-report
 	rm -rf coverage
+	rm -rf utils/designTokens/.cache
+	rm -f tsconfig.tsbuildinfo
+
+# Clean all caches (use when webpack/module resolution issues occur)
+clean-cache:
+	rm -rf .next
+	rm -rf .next/cache
+	rm -rf node_modules/.cache
+	rm -rf utils/designTokens/.cache
+	rm -f tsconfig.tsbuildinfo
+	@echo "✅ All caches cleared. Restart your dev server."
 

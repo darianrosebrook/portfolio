@@ -15,14 +15,14 @@ const rootDir = join(__dirname, '..');
 function findComponentDirs() {
   const componentsDir = join(rootDir, 'ui/components');
   const dirs = [];
-  
+
   for (const item of readdirSync(componentsDir)) {
     const itemPath = join(componentsDir, item);
     if (statSync(itemPath).isDirectory()) {
       dirs.push(itemPath);
     }
   }
-  
+
   return dirs;
 }
 
@@ -66,28 +66,28 @@ function findScssFiles(componentDir) {
 function extractTokenNames(tokenFile) {
   const content = readFileSync(tokenFile, 'utf-8');
   const tokenNames = new Set();
-  
+
   // Match CSS variable declarations: --token-name: ...
   const regex = /--([a-z0-9-]+):/g;
   let match;
   while ((match = regex.exec(content)) !== null) {
     tokenNames.add(`--${match[1]}`);
   }
-  
+
   return tokenNames;
 }
 
 function extractUsedTokens(scssFile) {
   const content = readFileSync(scssFile, 'utf-8');
   const usedTokens = new Set();
-  
+
   // Match var(--token-name) or var(--token-name, fallback)
   const regex = /var\((--[a-z0-9-]+)\)/g;
   let match;
   while ((match = regex.exec(content)) !== null) {
     usedTokens.add(match[1]);
   }
-  
+
   return usedTokens;
 }
 
@@ -95,55 +95,59 @@ function checkComponent(componentDir) {
   const componentName = basename(componentDir);
   const tokenFiles = findTokenFiles(componentDir);
   const scssFiles = findScssFiles(componentDir);
-  
+
   if (tokenFiles.length === 0 || scssFiles.length === 0) {
     return null; // Skip components without tokens or SCSS
   }
-  
+
   // Get all available tokens from generated files
   const availableTokens = new Set();
   for (const tokenFile of tokenFiles) {
     const tokens = extractTokenNames(tokenFile);
-    tokens.forEach(t => availableTokens.add(t));
+    tokens.forEach((t) => availableTokens.add(t));
   }
-  
+
   // Check all SCSS files for broken references
   const brokenRefs = [];
   for (const scssFile of scssFiles) {
     const usedTokens = extractUsedTokens(scssFile);
-    
+
     for (const usedToken of usedTokens) {
       // Skip semantic/core tokens (they're external)
-      if (usedToken.startsWith('--semantic-') || 
-          usedToken.startsWith('--core-') ||
-          usedToken.startsWith('--font-')) {
+      if (
+        usedToken.startsWith('--semantic-') ||
+        usedToken.startsWith('--core-') ||
+        usedToken.startsWith('--font-')
+      ) {
         continue;
       }
-      
+
       // Check if token exists in available tokens
       if (!availableTokens.has(usedToken)) {
         // Check if there's a similar token (maybe missing -default suffix)
-        const hasSimilar = Array.from(availableTokens).some(available => {
-          return available.includes(usedToken.replace('--', '')) ||
-                 usedToken.includes(available.replace('--', ''));
+        const hasSimilar = Array.from(availableTokens).some((available) => {
+          return (
+            available.includes(usedToken.replace('--', '')) ||
+            usedToken.includes(available.replace('--', ''))
+          );
         });
-        
+
         brokenRefs.push({
           file: scssFile.replace(rootDir + '/', ''),
           token: usedToken,
-          hasSimilar
+          hasSimilar,
         });
       }
     }
   }
-  
+
   if (brokenRefs.length > 0) {
     return {
       component: componentName,
-      brokenRefs
+      brokenRefs,
     };
   }
-  
+
   return null;
 }
 
@@ -165,7 +169,9 @@ if (issues.length === 0) {
   process.exit(0);
 }
 
-console.log(`❌ Found ${issues.length} component(s) with broken token references:\n`);
+console.log(
+  `❌ Found ${issues.length} component(s) with broken token references:\n`
+);
 
 for (const issue of issues) {
   console.log(`📦 ${issue.component}:`);
@@ -178,4 +184,3 @@ for (const issue of issues) {
 }
 
 process.exit(1);
-

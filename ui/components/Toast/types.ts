@@ -22,9 +22,10 @@ export interface ToastOptions {
 
 export type ToastState = 'entering' | 'visible' | 'leaving';
 
-export interface ToastRecord extends Required<
-  Pick<ToastOptions, 'variant' | 'autoDismiss' | 'durationMs' | 'dismissible'>
-> {
+export interface ToastRecord
+  extends Required<
+    Pick<ToastOptions, 'variant' | 'autoDismiss' | 'durationMs' | 'dismissible'>
+  > {
   id: ToastId;
   title?: React.ReactNode;
   description?: React.ReactNode;

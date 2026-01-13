@@ -296,12 +296,6 @@ export default function GlossaryCards() {
       x: (Number(gsap.getProperty(card, 'x')) as number) || 0,
       y: (Number(gsap.getProperty(card, 'y')) as number) || 0,
     };
-    console.log('dragOffset', dragOffset.current);
-    console.log('mouse', mouse);
-    console.log('containerRect', containerRect);
-    console.log('cardRect', cardRect);
-    console.log('cardCenterX', cardCenterX);
-    console.log('cardCenterY', cardCenterY);
     // Visually scale on drag start without interfering with translation
     currentScale.current = 1.05;
     gsap.to(card, {

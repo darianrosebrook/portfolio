@@ -16,19 +16,21 @@ export const contentType = 'image/png';
 export default async function Image() {
   // Font
   return new ImageResponse(
-    <div
-      style={{
-        fontSize: 128,
-        background: 'white',
-        width: '100%',
-        height: '100%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      About Acme
-    </div>,
+    (
+      <div
+        style={{
+          fontSize: 128,
+          background: 'white',
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        About Acme
+      </div>
+    ),
     // ImageResponse options
     {
       // For convenience, we can re-use the exported opengraph-image

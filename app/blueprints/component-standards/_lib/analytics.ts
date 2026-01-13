@@ -47,7 +47,9 @@ export function trackEvent(data: AnalyticsEventData): void {
       });
       return;
     } catch (error) {
-      console.warn('Vercel Analytics tracking failed:', error);
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('Vercel Analytics tracking failed:', error);
+      }
     }
   }
 

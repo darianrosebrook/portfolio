@@ -9,7 +9,8 @@ import styles from './Shuttle.module.scss';
 export interface ShuttleProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 // Shuttle Item Component
-export interface ShuttleItemProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface ShuttleItemProps
+  extends React.HTMLAttributes<HTMLDivElement> {}
 
 export const ShuttleItem = React.forwardRef<HTMLDivElement, ShuttleItemProps>(
   ({ className = '', children, ...rest }, ref) => {

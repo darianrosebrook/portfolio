@@ -1,9 +1,27 @@
 import {
   type ControlDef,
   type VariantGrid,
+  type VirtualFile,
   type VirtualProject,
 } from '@/ui/modules/CodeSandbox/types';
 import { type ComponentItem } from './componentsData';
+
+// Default props.json file for Sandpack - used to provide default values
+const defaultPropsFile: VirtualFile = {
+  path: '/props.json',
+  contents: JSON.stringify({}, null, 2),
+  hidden: true,
+};
+
+// Helper to add props.json to a project
+function withPropsFile(project: VirtualProject): VirtualProject {
+  const hasPropsFile = project.files.some((f) => f.path === '/props.json');
+  if (hasPropsFile) return project;
+  return {
+    ...project,
+    files: [...project.files, defaultPropsFile],
+  };
+}
 
 // Enhanced component example generators based on actual component implementations
 export function generateEnhancedInteractiveProject(
@@ -54,13 +72,15 @@ export function generateEnhancedInteractiveProject(
 
   // Ensure we always return a valid project with files array
   if (!project || !project.files || !Array.isArray(project.files)) {
-    console.warn(
-      `Invalid project generated for component ${componentName}, falling back to generic project`
-    );
-    return generateGenericProject(component);
+    if (process.env.NODE_ENV === 'development') {
+      console.warn(
+        `Invalid project generated for component ${componentName}, falling back to generic project`
+      );
+    }
+    return withPropsFile(generateGenericProject(component));
   }
 
-  return project;
+  return withPropsFile(project);
 }
 
 export function generateEnhancedVariantGrid(
@@ -1019,6 +1039,131 @@ export default function App() {
       >
         <Button>{props.children || 'Hover me'}</Button>
       </Tooltip>
+    </div>
+  );
+}`,
+      },
+    ],
+    entry: '/App.tsx',
+  };
+}
+
+// Generate advanced example projects with more complex usage patterns
+export function generateAdvancedProject(
+  component: ComponentItem
+): VirtualProject {
+  const componentName = component.component;
+  const isBuilt = component.status === 'Built';
+
+  if (!isBuilt) {
+    return withPropsFile(generatePlaceholderProject(component));
+  }
+
+  switch (componentName) {
+    case 'Button':
+      return withPropsFile(generateButtonAdvancedProject());
+    case 'Card':
+      return withPropsFile(generateCardProject()); // Card already shows advanced patterns
+    case 'Tabs':
+      return withPropsFile(generateTabsProject()); // Tabs already shows composition
+    default:
+      return withPropsFile(generateAdvancedGenericProject(component));
+  }
+}
+
+function generateButtonAdvancedProject(): VirtualProject {
+  return {
+    files: [
+      {
+        path: '/components/Button.tsx',
+        contents: SimpleButton,
+      },
+      {
+        path: '/App.tsx',
+        contents: `import React, { useState } from 'react';
+import Button from './components/Button';
+
+export default function App() {
+  const [loading, setLoading] = useState(false);
+  const [count, setCount] = useState(0);
+  
+  const handleClick = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setCount(c => c + 1);
+      setLoading(false);
+    }, 1000);
+  };
+  
+  return (
+    <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}>
+      <h3>Button Group Example</h3>
+      <div style={{ display: 'flex', gap: '0.5rem' }}>
+        <Button variant="primary" size="medium">Primary</Button>
+        <Button variant="secondary" size="medium">Secondary</Button>
+        <Button variant="tertiary" size="medium">Tertiary</Button>
+      </div>
+      
+      <h3>Async Action</h3>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+        <Button 
+          variant="primary" 
+          loading={loading} 
+          onClick={handleClick}
+        >
+          Click to Increment
+        </Button>
+        <span>Count: {count}</span>
+      </div>
+      
+      <h3>Size Comparison</h3>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        <Button size="small">Small</Button>
+        <Button size="medium">Medium</Button>
+        <Button size="large">Large</Button>
+      </div>
+    </div>
+  );
+}`,
+      },
+    ],
+    entry: '/App.tsx',
+    dependencies: {
+      react: '^18.0.0',
+      'react-dom': '^18.0.0',
+    },
+  };
+}
+
+function generateAdvancedGenericProject(component: ComponentItem): VirtualProject {
+  const componentName = component.component;
+
+  return {
+    files: [
+      {
+        path: '/App.tsx',
+        contents: `import React from 'react';
+
+export default function App() {
+  return (
+    <div style={{ 
+      padding: '2rem', 
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '1.5rem'
+    }}>
+      <h3>${componentName} - Advanced Patterns</h3>
+      <p>Advanced usage patterns for ${componentName} include:</p>
+      <ul>
+        <li>Composition with other components</li>
+        <li>Custom styling and theming</li>
+        <li>Controlled vs uncontrolled patterns</li>
+        <li>Form integration</li>
+        <li>Accessibility enhancements</li>
+      </ul>
+      <p style={{ color: '#6b7280', fontStyle: 'italic' }}>
+        Full advanced examples coming soon.
+      </p>
     </div>
   );
 }`,

@@ -33,8 +33,10 @@ const XIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
 
 // Root Sheet Component
 export interface SheetProps
-  extends
-    Omit<React.HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'children'>,
+  extends Omit<
+      React.HTMLAttributes<HTMLDivElement>,
+      'defaultValue' | 'children'
+    >,
     Omit<SheetProviderProps, 'children'> {
   children: React.ReactNode;
 }
@@ -57,7 +59,8 @@ const SheetRoot: React.FC<SheetProps> = ({
 };
 
 // Sheet Trigger Component
-export interface SheetTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
+export interface SheetTriggerProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
 const SheetTrigger = React.forwardRef<HTMLButtonElement, SheetTriggerProps>(
   ({ className = '', children, ...rest }, ref) => {
@@ -109,7 +112,8 @@ const SheetPortal: React.FC<SheetPortalProps> = ({
 };
 
 // Sheet Overlay Component
-export interface SheetOverlayProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface SheetOverlayProps
+  extends React.HTMLAttributes<HTMLDivElement> {}
 
 const SheetOverlay = React.forwardRef<HTMLDivElement, SheetOverlayProps>(
   ({ className = '', ...rest }, ref) => {
@@ -136,7 +140,8 @@ const SheetOverlay = React.forwardRef<HTMLDivElement, SheetOverlayProps>(
 );
 
 // Sheet Content Component
-export interface SheetContentProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface SheetContentProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   side?: SheetSide;
   closeOnEscape?: boolean;
   closeOnOverlayClick?: boolean;
@@ -302,7 +307,8 @@ const SheetContent = React.forwardRef<HTMLDivElement, SheetContentProps>(
 );
 
 // Sheet Header Component
-export interface SheetHeaderProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface SheetHeaderProps
+  extends React.HTMLAttributes<HTMLDivElement> {}
 
 const SheetHeader: React.FC<SheetHeaderProps> = ({
   className = '',
@@ -319,7 +325,8 @@ const SheetHeader: React.FC<SheetHeaderProps> = ({
 );
 
 // Sheet Title Component
-export interface SheetTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {}
+export interface SheetTitleProps
+  extends React.HTMLAttributes<HTMLHeadingElement> {}
 
 const SheetTitle: React.FC<SheetTitleProps> = ({
   className = '',
@@ -336,7 +343,8 @@ const SheetTitle: React.FC<SheetTitleProps> = ({
 );
 
 // Sheet Description Component
-export interface SheetDescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {}
+export interface SheetDescriptionProps
+  extends React.HTMLAttributes<HTMLParagraphElement> {}
 
 const SheetDescription: React.FC<SheetDescriptionProps> = ({
   className = '',
@@ -370,7 +378,8 @@ const SheetBody: React.FC<SheetBodyProps> = ({
 );
 
 // Sheet Footer Component
-export interface SheetFooterProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface SheetFooterProps
+  extends React.HTMLAttributes<HTMLDivElement> {}
 
 const SheetFooter: React.FC<SheetFooterProps> = ({
   className = '',
@@ -387,7 +396,8 @@ const SheetFooter: React.FC<SheetFooterProps> = ({
 );
 
 // Sheet Close Button Component
-export interface SheetCloseProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
+export interface SheetCloseProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
 const SheetClose = React.forwardRef<HTMLButtonElement, SheetCloseProps>(
   ({ className = '', children, ...rest }, ref) => {

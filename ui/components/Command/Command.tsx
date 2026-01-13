@@ -34,8 +34,10 @@ const SearchIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
 
 // Root Command Component
 export interface CommandProps
-  extends
-    Omit<React.HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'children'>,
+  extends Omit<
+      React.HTMLAttributes<HTMLDivElement>,
+      'defaultValue' | 'children'
+    >,
     CommandProviderProps {}
 
 const CommandRoot: React.FC<CommandProps> = ({
@@ -136,7 +138,8 @@ const CommandDialog: React.FC<CommandDialogProps> = ({
 };
 
 // Command Input Component
-export interface CommandInputProps extends React.InputHTMLAttributes<HTMLInputElement> {}
+export interface CommandInputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {}
 
 const CommandInput = React.forwardRef<HTMLInputElement, CommandInputProps>(
   ({ className = '', ...rest }, ref) => {
@@ -228,7 +231,8 @@ const CommandList = React.forwardRef<HTMLDivElement, CommandListProps>(
 );
 
 // Command Group Component
-export interface CommandGroupProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface CommandGroupProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   heading?: string;
 }
 
@@ -305,7 +309,8 @@ const CommandItemComponent = React.forwardRef<HTMLDivElement, CommandItemProps>(
 );
 
 // Command Items Component (renders filtered items)
-export interface CommandItemsProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface CommandItemsProps
+  extends React.HTMLAttributes<HTMLDivElement> {}
 
 const CommandItems: React.FC<CommandItemsProps> = ({
   className = '',
@@ -352,7 +357,8 @@ const CommandItems: React.FC<CommandItemsProps> = ({
 };
 
 // Command Separator Component
-export interface CommandSeparatorProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface CommandSeparatorProps
+  extends React.HTMLAttributes<HTMLDivElement> {}
 
 const CommandSeparator: React.FC<CommandSeparatorProps> = ({
   className = '',

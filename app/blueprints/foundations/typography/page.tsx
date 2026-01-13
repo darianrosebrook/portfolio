@@ -6,9 +6,14 @@ import { InteractiveErrorBoundary } from '@/ui/modules/ErrorBoundary';
 // Dynamically import FontInspector for better performance
 const FontInspector = dynamic(
   () =>
-    import('@/ui/modules/FontInspector').then((mod) => ({
-      default: mod.FontInspector,
-    })),
+    import('@/ui/modules/FontInspector')
+      .then((mod) => ({
+        default: mod.FontInspector,
+      }))
+      .catch((error) => {
+        console.error('Failed to load FontInspector:', error);
+        throw error;
+      }),
   {
     loading: () => (
       <div

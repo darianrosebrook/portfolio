@@ -4,7 +4,8 @@ import { useTabs } from '../TabsProvider';
 import type { TabsValue } from '../types';
 import styles from '../Tabs.module.scss';
 
-export interface TabProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface TabProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   value?: TabsValue;
   disabled?: boolean;
 }

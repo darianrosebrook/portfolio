@@ -181,6 +181,12 @@ export function CodeWorkbench({
       template="react-ts"
       files={files}
       customSetup={customSetup}
+      options={{
+        initMode: 'immediate',
+        autorun: true,
+        recompileMode: 'immediate',
+        autoReload: true,
+      }}
     >
       <div className={themeClassName} style={{ height: '100%' }}>
         <SandpackThemeProvider theme={tokenTheme}>

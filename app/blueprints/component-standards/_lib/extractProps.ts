@@ -131,10 +131,12 @@ export function extractProps(
 
     return props;
   } catch (error) {
-    console.warn(
-      `Error extracting props for ${componentName}:`,
-      error instanceof Error ? error.message : String(error)
-    );
+    if (process.env.NODE_ENV === 'development') {
+      console.warn(
+        `Error extracting props for ${componentName}:`,
+        error instanceof Error ? error.message : String(error)
+      );
+    }
     return [];
   }
 }
@@ -193,10 +195,12 @@ export function extractMethods(
 
     return methods;
   } catch (error) {
-    console.warn(
-      `Error extracting methods for ${componentName}:`,
-      error instanceof Error ? error.message : String(error)
-    );
+    if (process.env.NODE_ENV === 'development') {
+      console.warn(
+        `Error extracting methods for ${componentName}:`,
+        error instanceof Error ? error.message : String(error)
+      );
+    }
     return [];
   }
 }

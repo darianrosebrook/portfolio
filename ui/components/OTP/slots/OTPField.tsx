@@ -3,10 +3,11 @@ import * as React from 'react';
 import { useOTPContext } from '../OTPProvider';
 import styles from '../OTP.module.scss';
 
-export interface OTPFieldProps extends Omit<
-  React.InputHTMLAttributes<HTMLInputElement>,
-  'size' | 'value' | 'onChange'
-> {
+export interface OTPFieldProps
+  extends Omit<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    'size' | 'value' | 'onChange'
+  > {
   index: number;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }

@@ -109,11 +109,7 @@ export const SwitchGroup: React.FC<SwitchGroupProps> = ({
   className = '',
   orientation = 'vertical',
 }) => {
-  const groupClassName = [
-    styles.switchGroup,
-    styles[orientation],
-    className,
-  ]
+  const groupClassName = [styles.switchGroup, styles[orientation], className]
     .filter(Boolean)
     .join(' ');
 

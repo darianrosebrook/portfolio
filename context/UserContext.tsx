@@ -78,8 +78,11 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
   useEffect(() => {
     let isMounted = true;
 
-    // Debug: Log what cookies the browser sees
-    if (typeof document !== 'undefined') {
+    // Debug: Log what cookies the browser sees (development only)
+    if (
+      process.env.NODE_ENV === 'development' &&
+      typeof document !== 'undefined'
+    ) {
       const allCookies = document.cookie;
       const supabaseCookies = allCookies
         .split(';')
@@ -103,10 +106,12 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
 
         if (userError) {
           // If getUser fails, fall back to getSession for cached data
-          console.warn(
-            'getUser failed, falling back to getSession:',
-            userError.message
-          );
+          if (process.env.NODE_ENV === 'development') {
+            console.warn(
+              'getUser failed, falling back to getSession:',
+              userError.message
+            );
+          }
           const {
             data: { session },
             error: sessionError,
@@ -156,10 +161,12 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
       data: { subscription },
     } = supabase.auth.onAuthStateChange(
       async (event: AuthChangeEvent, session: Session | null) => {
-        console.log('Auth state changed:', event, {
-          hasSession: !!session,
-          hasUser: !!session?.user,
-        });
+        if (process.env.NODE_ENV === 'development') {
+          console.log('Auth state changed:', event, {
+            hasSession: !!session,
+            hasUser: !!session?.user,
+          });
+        }
 
         if (!isMounted) return;
 

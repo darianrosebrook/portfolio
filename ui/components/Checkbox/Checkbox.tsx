@@ -14,10 +14,8 @@ import styles from './Checkbox.module.scss';
 
 export type CheckboxSize = 'sm' | 'md' | 'lg';
 
-export interface CheckboxProps extends Omit<
-  React.InputHTMLAttributes<HTMLInputElement>,
-  'size' | 'type'
-> {
+export interface CheckboxProps
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'type'> {
   /** Size variant using design tokens */
   size?: CheckboxSize;
   /** Checked state (controlled) */

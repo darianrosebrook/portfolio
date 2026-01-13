@@ -44,10 +44,12 @@ export function getComponentAPIData(
       methods,
     };
   } catch (error) {
-    console.warn(
-      `Error getting API data for ${component.component}:`,
-      error instanceof Error ? error.message : String(error)
-    );
+    if (process.env.NODE_ENV === 'development') {
+      console.warn(
+        `Error getting API data for ${component.component}:`,
+        error instanceof Error ? error.message : String(error)
+      );
+    }
     return null;
   }
 }

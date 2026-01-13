@@ -12,7 +12,7 @@
 
 import { getSVGDefIds } from '@/utils/geometry/svgDefs';
 import type { ViewportTransform } from '@/utils/geometry/transforms';
-import type { Glyph } from 'fontkit';
+import type { Glyph } from './fontkit-types';
 import { useMemo } from 'react';
 
 export interface GlyphBoundsData {

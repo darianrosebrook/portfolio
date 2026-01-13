@@ -27,16 +27,18 @@ export type NavbarProps = {
 export default function Navbar({ pages = [] }: NavbarProps) {
   const { user, profile, loading, error } = useUser();
 
-  // Debug logging - check browser console
+  // Debug logging - check browser console (development only)
   useEffect(() => {
-    console.log('[Navbar] Auth state:', {
-      hasUser: !!user,
-      userId: user?.id,
-      userEmail: user?.email,
-      hasProfile: !!profile,
-      loading,
-      error,
-    });
+    if (process.env.NODE_ENV === 'development') {
+      console.log('[Navbar] Auth state:', {
+        hasUser: !!user,
+        userId: user?.id,
+        userEmail: user?.email,
+        hasProfile: !!profile,
+        loading,
+        error,
+      });
+    }
   }, [user, profile, loading, error]);
 
   const [slider, setSlider] = useState(false);

@@ -11,32 +11,94 @@
  *
  * NOTE: shapeForV2 and IntersectionQuery must be provided by the consumer or imported from a caching module.
  */
-import './patch-kld';
-import { shape, intersect } from 'svg-intersections';
 import type { Glyph } from 'fontkit';
-import type { Point2D } from './geometry';
+import { intersect, shape } from 'svg-intersections';
 import { Logger } from '../helpers/logger';
-import { Bezier } from 'bezier-js';
+import type { Point2D } from './geometry';
+import './patch-kld';
 
 export type SvgShape = ReturnType<typeof shape>;
 
 // IntersectionQuery is declared globally in patch-kld.ts
-declare const IntersectionQuery: unknown;
+// Used indirectly via pointInPathFn setter
+declare const _IntersectionQuery: unknown;
+
+/**
+ * Optional point-in-path function for fast inside checks.
+ * Set via setPointInPath() from patch-kld.ts when available.
+ */
+let pointInPathFn: ((shape: SvgShape, pt: Point2D) => boolean) | null = null;
+
+/**
+ * Registers a point-in-path function for fast inside checks.
+ * Called from patch-kld.ts when IntersectionQuery is available.
+ */
+export function setPointInPath(
+  fn: (shape: SvgShape, pt: Point2D) => boolean
+): void {
+  pointInPathFn = fn;
+}
+
+/**
+ * Default epsilon for deduplication (will be scaled by ray length)
+ */
+const RAY_DEDUP_EPS = 0.5;
+
+/**
+ * Sorts points along a ray direction and deduplicates near-equal points.
+ * @param points - Array of intersection points
+ * @param angle - Ray angle in radians
+ * @param eps - Deduplication tolerance
+ * @returns Sorted and deduplicated points
+ */
+function sortAndDedupeAlongRay(
+  points: Point2D[],
+  angle: number,
+  eps: number
+): Point2D[] {
+  if (points.length <= 1) return points;
+
+  const ux = Math.cos(angle);
+  const uy = Math.sin(angle);
+
+  // Project each point onto ray direction and sort
+  const sorted = points
+    .slice()
+    .sort((a, b) => a.x * ux + a.y * uy - (b.x * ux + b.y * uy));
+
+  // Deduplicate: keep first point of each cluster
+  const result: Point2D[] = [];
+  for (const pt of sorted) {
+    if (result.length === 0) {
+      result.push(pt);
+      continue;
+    }
+    const last = result[result.length - 1];
+    const dist = Math.hypot(pt.x - last.x, pt.y - last.y);
+    if (dist > eps) {
+      result.push(pt);
+    }
+  }
+
+  return result;
+}
 
 /**
  * Casts a ray (line probe) at a glyph shape and returns intersection points.
- * Uses Logger for errors.
+ * Points are sorted along the ray direction and deduplicated.
  * @param gs - SvgShape for the glyph
  * @param origin - Start point of the ray
  * @param angle - Angle in radians
  * @param len - Length of the ray
- * @returns { points: Point2D[] } Intersection points (empty if error)
+ * @param dedupEps - Optional deduplication epsilon (default: RAY_DEDUP_EPS)
+ * @returns { points: Point2D[] } Sorted, deduplicated intersection points
  */
 export function rayHits(
   gs: SvgShape,
   origin: Point2D,
   angle: number,
-  len: number
+  len: number,
+  dedupEps?: number
 ): { points: Point2D[] } {
   const dx = Math.cos(angle) * len;
   const dy = Math.sin(angle) * len;
@@ -62,7 +124,12 @@ export function rayHits(
   if (!result || !Array.isArray(result.points)) {
     return { points: [] };
   }
-  return { points: result.points ?? [] };
+
+  // Sort along ray direction and deduplicate
+  const eps = dedupEps ?? Math.max(RAY_DEDUP_EPS, len * 0.001);
+  const sorted = sortAndDedupeAlongRay(result.points, angle, eps);
+
+  return { points: sorted };
 }
 
 /**
@@ -93,52 +160,64 @@ export function windingNumber(
 
 /**
  * Checks if a point is inside the glyph outline using the fastest available method.
- * Uses IntersectionQuery.pointInPath if available, else falls back to ray/winding number.
+ * Uses registered pointInPath function if available, else falls back to ray/parity check.
  * @param g - The fontkit Glyph object.
  * @param pt - The point to test.
  * @returns boolean
  */
 export function isInside(g: Glyph, pt: Point2D): boolean {
   const gs = shapeForV2(g);
-  // Feature check for IntersectionQuery.pointInPath (kld >= 0.4)
-  const insideFast =
-    typeof IntersectionQuery === 'object' &&
-    IntersectionQuery !== null &&
-    typeof (IntersectionQuery as { pointInPath?: unknown }).pointInPath ===
-      'function'
-      ? (
-          IntersectionQuery as {
-            pointInPath: (shape: SvgShape, pt: Point2D) => boolean;
-          }
-        ).pointInPath
-      : null;
-  if (insideFast) {
-    return insideFast(gs, pt);
+
+  // Fast path: use registered pointInPath function
+  if (pointInPathFn) {
+    return pointInPathFn(gs, pt);
   }
-  // Legacy fallback: cast a long horizontal ray from far left to pt.x
-  const probe = shape('line', { x1: -1e6, y1: pt.y, x2: pt.x, y2: pt.y });
+
+  // Fallback: horizontal ray cast with parity check
+  // Use bbox-aware far-left position instead of fixed -1e6
+  const bboxLeft = g.bbox ? g.bbox.minX - (g.bbox.maxX - g.bbox.minX) : -1e6;
+  // Jitter Y slightly to avoid grazing vertices exactly
+  const EPS = 0.01;
+  const jitteredY = pt.y + EPS;
+  const probe = shape('line', {
+    x1: bboxLeft,
+    y1: jitteredY,
+    x2: pt.x,
+    y2: jitteredY,
+  });
+
+  // Parity check: odd number of crossings = inside
   return Math.abs(windingNumber(gs, probe)) % 2 === 1;
 }
 
 /**
  * Performs a robust intersection, falling back to poly-line tessellation if the result is unstable.
+ * NOTE: Tessellation fallback is currently disabled until real implementation exists.
  * @param a - First SvgShape
  * @param b - Second SvgShape
  * @returns intersection result
  */
+const tessellationEnabled = false; // Set to true when tessellate() is implemented
+
 export function safeIntersect(
   a: SvgShape,
   b: SvgShape
 ): { status: string; points: Point2D[] } {
   try {
-    try {
-      const res = intersect(a, b) as { status: string; points: Point2D[] };
-      if (!res || typeof res !== 'object' || !Array.isArray(res.points)) {
-        return { status: 'Error', points: [] };
-      }
-      if (res.status !== 'Intersection') return res;
-      if (Number.isNaN(res.points[0]?.x)) {
-        // fallback: poly-line tessellation with caching
+    const res = intersect(a, b) as { status: string; points: Point2D[] };
+    if (!res || typeof res !== 'object' || !Array.isArray(res.points)) {
+      return { status: 'Error', points: [] };
+    }
+    if (res.status !== 'Intersection') return res;
+
+    // Validate all points for NaN/infinity (not just first point)
+    const hasInvalidPoints = res.points.some(
+      (p) => !Number.isFinite(p.x) || !Number.isFinite(p.y)
+    );
+
+    if (hasInvalidPoints) {
+      if (tessellationEnabled) {
+        // Fallback: poly-line tessellation with caching
         try {
           const fallback = intersect(flatMemo(a, 0.25), flatMemo(b, 0.25)) as {
             status: string;
@@ -156,9 +235,18 @@ export function safeIntersect(
           Logger.warn('[safeIntersect] Fallback tessellation failed', { a, b });
           return { status: 'Error', points: [] };
         }
+      } else {
+        // Tessellation not implemented - return error
+        Logger.warn(
+          '[safeIntersect] Invalid points detected but tessellation disabled',
+          { a, b }
+        );
+        return { status: 'Error', points: [] };
       }
-      return res;
-    } catch {
+    }
+    return res;
+  } catch (err) {
+    if (tessellationEnabled) {
       // If intersect throws, fallback to tessellation
       try {
         const fallback = intersect(flatMemo(a, 0.25), flatMemo(b, 0.25)) as {
@@ -178,8 +266,7 @@ export function safeIntersect(
         return { status: 'Error', points: [] };
       }
     }
-  } catch (finalErr) {
-    Logger.error('[safeIntersect] Unrecoverable error:', finalErr, { a, b });
+    Logger.error('[safeIntersect] Intersection failed:', err, { a, b });
     return { status: 'Error', points: [] };
   }
 }
@@ -201,7 +288,7 @@ function flatMemo(s: SvgShape, tol = 0.25): SvgShape {
  * This is a simplified version - full tessellation with bezier flattening
  * is available in geometryHeuristics.ts for more complex cases.
  */
-function tessellate(s: SvgShape, tol = 0.25): SvgShape {
+function tessellate(s: SvgShape, _tol = 0.25): SvgShape {
   // For now, return the shape as-is
   // Full tessellation implementation exists in geometryHeuristics.ts
   // but requires SegmentWithMeta types and bezier-js integration
@@ -280,4 +367,61 @@ export function dFor(g: Glyph): string {
     Logger.error('[dFor] Error generating SVG path for glyph:', { g });
     return 'M0 0';
   }
+}
+
+/**
+ * Scale helpers for consistent thresholding across detectors.
+ */
+
+/**
+ * Returns a base epsilon value for a glyph based on UPM and bbox.
+ * @param upm - Units per em
+ * @param bbox - Optional bounding box for scale-aware epsilon
+ * @returns Base epsilon value
+ */
+export function epsFor(
+  upm: number,
+  bbox?: { minX: number; maxX: number; minY: number; maxY: number }
+): number {
+  const baseEps = upm * 0.001;
+  if (!bbox) return baseEps;
+  const width = bbox.maxX - bbox.minX;
+  const height = bbox.maxY - bbox.minY;
+  // Use 0.1% of the smaller dimension as a scale-aware epsilon
+  return Math.max(baseEps, Math.min(width, height) * 0.001);
+}
+
+/**
+ * Returns cap-band bounds for filtering apex candidates.
+ * @param capHeight - Cap height metric
+ * @param glyphHeight - Total glyph height (bbox.maxY - bbox.minY)
+ * @returns Object with min and max Y values for cap band
+ */
+export function capBand(
+  capHeight: number,
+  glyphHeight: number
+): { min: number; max: number } {
+  // Cap band extends slightly below cap height (for overshoot) and above
+  const overshootPad = glyphHeight * 0.06;
+  const undershootPad = glyphHeight * 0.12;
+  return {
+    min: capHeight - undershootPad,
+    max: capHeight + overshootPad,
+  };
+}
+
+/**
+ * Checks if a point is within the cap band.
+ * @param pt - Point to check
+ * @param capHeight - Cap height metric
+ * @param glyphHeight - Total glyph height
+ * @returns boolean
+ */
+export function isInCapBand(
+  pt: Point2D,
+  capHeight: number,
+  glyphHeight: number
+): boolean {
+  const band = capBand(capHeight, glyphHeight);
+  return pt.y >= band.min && pt.y <= band.max;
 }

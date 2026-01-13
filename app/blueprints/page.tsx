@@ -20,12 +20,20 @@ export const metadata = {
     images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
   },
 };
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import BlueprintsWrapper from '../BlueprintsWrapper';
-import GlossaryCardsWrapper from '../heroes/GlossaryCardsWrapper';
-import SwatchesWrapper from '../heroes/SwatchesWrapper';
 import styles from './page.module.scss';
 import { Bottom, Faceplate, Middle, Props, Table, Top } from './svgs';
+
+// Use dynamic imports to avoid webpack module loading issues
+// Components handle client-side mounting internally, so SSR is fine
+const GlossaryCardsWrapper = dynamic(
+  () => import('../heroes/GlossaryCardsWrapper')
+);
+const SwatchesWrapper = dynamic(
+  () => import('../heroes/SwatchesWrapper')
+);
 
 const Page: React.FC = () => {
   return (

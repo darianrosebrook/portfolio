@@ -30,8 +30,10 @@ const ChevronDownIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
 
 // Root Accordion Component
 export interface AccordionProps
-  extends
-    Omit<React.HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'children'>,
+  extends Omit<
+      React.HTMLAttributes<HTMLDivElement>,
+      'defaultValue' | 'children'
+    >,
     AccordionProviderProps {}
 
 const AccordionRoot: React.FC<AccordionProps> = ({
@@ -64,7 +66,8 @@ const AccordionRoot: React.FC<AccordionProps> = ({
 };
 
 // Accordion Item Component
-export interface AccordionItemProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface AccordionItemProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   value: string;
 }
 
@@ -90,7 +93,8 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
 };
 
 // Accordion Trigger Component
-export interface AccordionTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface AccordionTriggerProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   value: string;
 }
 
@@ -126,7 +130,8 @@ const AccordionTrigger: React.FC<AccordionTriggerProps> = ({
 };
 
 // Accordion Content Component
-export interface AccordionContentProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface AccordionContentProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   value: string;
 }
 

@@ -1,26 +1,34 @@
 'use client';
 
-import { type SectionSpec } from '@/ui/modules/CodeSandbox/types';
-import { DocInteractive } from '@/ui/modules/CodeSandbox/variants/DocInteractive';
-import { DocVariants } from '@/ui/modules/CodeSandbox/variants/DocVariants';
+import { Sandpack } from '@codesandbox/sandpack-react';
 import Link from 'next/link';
 import React from 'react';
 import {
-  generateEnhancedControls,
+  generateAdvancedProject,
   generateEnhancedInteractiveProject,
-  generateEnhancedVariantGrid,
 } from '../_lib/componentExamples';
 import { type ComponentItem } from '../_lib/componentsData';
+import type { ExtractedProp, ExtractedMethod } from '../_lib/extractProps';
+import type { AnatomyPart } from '../_lib/generateAnatomy';
 import styles from './ComprehensiveComponentDoc.module.scss';
+
+interface ComponentAPIData {
+  props: ExtractedProp[];
+  methods: ExtractedMethod[];
+}
 
 interface ComprehensiveComponentDocProps {
   component: ComponentItem;
   relatedComponents: ComponentItem[];
+  componentAPI?: ComponentAPIData;
+  anatomyParts?: AnatomyPart[] | null;
 }
 
 export function ComprehensiveComponentDoc({
   component,
   relatedComponents,
+  componentAPI,
+  anatomyParts,
 }: ComprehensiveComponentDocProps) {
   const {
     component: name,
@@ -36,31 +44,13 @@ export function ComprehensiveComponentDoc({
   const complexityLabel = String(layer).replace(/s$/, '');
   const isBuilt = status === 'Built' && paths?.component;
 
-  // Stable preview config to prevent re-renders
-  const previewConfig = React.useMemo(
-    () => ({
-      runtime: 'iframe' as const,
-      device: 'desktop' as const,
-      theme: 'system' as const,
-    }),
-    []
-  );
-
   // Generate interactive examples based on component status
   const interactiveProject = React.useMemo(
     () => generateEnhancedInteractiveProject(component),
     [component]
   );
-  const variantGrid = React.useMemo(
-    () => generateEnhancedVariantGrid(component),
-    [component]
-  );
-  const sections = React.useMemo(
-    () => generateSections(component),
-    [component]
-  );
-  const controls = React.useMemo(
-    () => generateEnhancedControls(component),
+  const advancedProject = React.useMemo(
+    () => generateAdvancedProject(component),
     [component]
   );
 
@@ -165,11 +155,17 @@ export function ComprehensiveComponentDoc({
             <div className={styles.liveExample}>
               <h3>Live Example</h3>
               <div className={styles.exampleContainer}>
-                <DocInteractive
-                  project={interactiveProject}
-                  sections={sections}
-                  height="400px"
-                  preview={previewConfig}
+                <Sandpack
+                  template="react-ts"
+                  theme="light"
+                  files={Object.fromEntries(
+                    interactiveProject.files.map((f) => [f.path, String(f.contents)])
+                  )}
+                  options={{
+                    showTabs: true,
+                    showLineNumbers: true,
+                    editorHeight: 400,
+                  }}
                 />
               </div>
             </div>
@@ -186,15 +182,33 @@ export function ComprehensiveComponentDoc({
             proper implementation and customization.
           </p>
 
-          {isBuilt ? (
+          {anatomyParts && anatomyParts.length > 0 ? (
             <div className={styles.anatomyDiagram}>
-              {/* This would be populated with actual component anatomy */}
-              <div className={styles.placeholder}>
-                <p>
-                  Component anatomy diagram will be generated based on the
-                  actual component structure.
-                </p>
+              <div className={styles.anatomyList}>
+                {anatomyParts.map((part, index) => (
+                  <div
+                    key={part.name}
+                    className={styles.anatomyPart}
+                    style={{ marginLeft: `${part.level * 1.5}rem` }}
+                  >
+                    <span className={styles.anatomyNumber}>{index + 1}</span>
+                    <span className={styles.anatomyName}>{part.name}</span>
+                    {part.description && (
+                      <span className={styles.anatomyDescription}>
+                        {part.description}
+                      </span>
+                    )}
+                  </div>
+                ))}
               </div>
+            </div>
+          ) : isBuilt ? (
+            <div className={styles.plannedContent}>
+              <p>
+                Anatomy data not yet defined for this component. Define anatomy
+                in the component contract file (
+                <code>{name}.contract.json</code>).
+              </p>
             </div>
           ) : (
             <div className={styles.plannedContent}>
@@ -212,12 +226,17 @@ export function ComprehensiveComponentDoc({
       <section id="variants" className={styles.section}>
         <h2>Variants & States</h2>
         {isBuilt && interactiveProject ? (
-          <DocVariants
-            project={interactiveProject}
-            componentName={name}
-            grid={variantGrid}
-            height="500px"
-            controls={controls}
+          <Sandpack
+            template="react-ts"
+            theme="light"
+            files={Object.fromEntries(
+              interactiveProject.files.map((f) => [f.path, String(f.contents)])
+            )}
+            options={{
+              showTabs: true,
+              showLineNumbers: true,
+              editorHeight: 400,
+            }}
           />
         ) : (
           <div className={styles.plannedContent}>
@@ -237,21 +256,92 @@ export function ComprehensiveComponentDoc({
           {isBuilt ? (
             <div>
               <h3>Props</h3>
-              <div className={styles.propsTable}>
-                {/* This would be auto-generated from the actual component */}
-                <p>
-                  Props documentation will be auto-generated from the component
-                  implementation.
+              {componentAPI?.props && componentAPI.props.length > 0 ? (
+                <div className={styles.propsTable}>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Required</th>
+                        <th>Default</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {componentAPI.props.map((prop) => (
+                        <tr key={prop.name}>
+                          <td>
+                            <code>{prop.name}</code>
+                          </td>
+                          <td>
+                            <code>{prop.type}</code>
+                          </td>
+                          <td>{prop.required ? 'Yes' : 'No'}</td>
+                          <td>
+                            {prop.defaultValue ? (
+                              <code>{prop.defaultValue}</code>
+                            ) : (
+                              '—'
+                            )}
+                          </td>
+                          <td>{prop.description || '—'}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              ) : (
+                <p className={styles.noData}>
+                  No props extracted. Props may be inherited or use complex
+                  types.
                 </p>
-              </div>
+              )}
 
-              <h3>Methods</h3>
-              <div className={styles.methodsTable}>
-                <p>
-                  Method documentation will be extracted from the component
-                  interface.
-                </p>
-              </div>
+              {componentAPI?.methods && componentAPI.methods.length > 0 && (
+                <>
+                  <h3>Methods</h3>
+                  <div className={styles.methodsTable}>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Parameters</th>
+                          <th>Returns</th>
+                          <th>Description</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {componentAPI.methods.map((method) => (
+                          <tr key={method.name}>
+                            <td>
+                              <code>{method.name}</code>
+                            </td>
+                            <td>
+                              {method.parameters.length > 0 ? (
+                                <code>
+                                  {method.parameters
+                                    .map(
+                                      (p) =>
+                                        `${p.name}${p.required ? '' : '?'}: ${p.type}`
+                                    )
+                                    .join(', ')}
+                                </code>
+                              ) : (
+                                '—'
+                              )}
+                            </td>
+                            <td>
+                              <code>{method.returnType}</code>
+                            </td>
+                            <td>{method.description || '—'}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </>
+              )}
             </div>
           ) : (
             <div className={styles.plannedContent}>
@@ -334,18 +424,40 @@ export function ComprehensiveComponentDoc({
             <div className={styles.exampleGrid}>
               <div className={styles.example}>
                 <h3>Basic Usage</h3>
-                <DocInteractive
-                  project={interactiveProject}
-                  sections={sections}
-                  height="300px"
+                <p className={styles.exampleDescription}>
+                  Simple implementation with default props and common
+                  configurations.
+                </p>
+                <Sandpack
+                  template="react-ts"
+                  theme="light"
+                  files={Object.fromEntries(
+                    interactiveProject.files.map((f) => [f.path, String(f.contents)])
+                  )}
+                  options={{
+                    showTabs: true,
+                    showLineNumbers: true,
+                    editorHeight: 300,
+                  }}
                 />
               </div>
               <div className={styles.example}>
                 <h3>Advanced Usage</h3>
-                <DocInteractive
-                  project={interactiveProject}
-                  sections={sections}
-                  height="300px"
+                <p className={styles.exampleDescription}>
+                  Complex patterns including composition, state management, and
+                  real-world scenarios.
+                </p>
+                <Sandpack
+                  template="react-ts"
+                  theme="light"
+                  files={Object.fromEntries(
+                    advancedProject.files.map((f) => [f.path, String(f.contents)])
+                  )}
+                  options={{
+                    showTabs: true,
+                    showLineNumbers: true,
+                    editorHeight: 400,
+                  }}
                 />
               </div>
             </div>
@@ -421,14 +533,4 @@ function getAntiPatterns(component: ComponentItem): string {
     antiPatterns[component.category as keyof typeof antiPatterns] ||
     'inappropriate contexts'
   );
-}
-
-function generateSections(_component: ComponentItem): SectionSpec[] {
-  return [
-    {
-      id: 'basic-usage',
-      title: 'Basic Usage',
-      code: { file: '/App.tsx', lines: [1, 15] },
-    },
-  ];
 }

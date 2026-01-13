@@ -2,7 +2,8 @@
 import * as React from 'react';
 import styles from './Blockquote.module.scss';
 
-export interface BlockquoteProps extends React.HTMLAttributes<HTMLQuoteElement> {
+export interface BlockquoteProps
+  extends React.HTMLAttributes<HTMLQuoteElement> {
   /** Citation or source of the quote */
   cite?: string;
   /** Visual variant of the blockquote */
