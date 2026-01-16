@@ -1,24 +1,38 @@
-'use client';
-
 import * as React from 'react';
-import { ThemeSwitcher } from './ThemeSwitcher';
 
 export type PreviewControlsProps = {
-  theme: 'system' | 'light' | 'dark';
-  onThemeChange: (theme: 'system' | 'light' | 'dark') => void;
-  rtl: boolean;
-  onRTLChange: (rtl: boolean) => void;
+  /** Current theme value */
+  theme: 'system' | 'light' | 'dark' | string;
+  /** Theme change handler */
+  onThemeChange: (v: 'system' | 'light' | 'dark' | string) => void;
+  /** Current RTL state */
+  isRTL: boolean;
+  /** RTL toggle handler */
+  onRTLChange: (isRTL: boolean) => void;
+  /** Theme options */
+  themeOptions?: Array<{ label: string; value: string }>;
+  /** Whether to show RTL toggle */
+  showRTLToggle?: boolean;
+  /** Whether to show theme switcher */
+  showThemeSwitcher?: boolean;
 };
 
 /**
- * Combined preview controls for theme and RTL direction.
- * Provides a unified interface for controlling preview appearance.
+ * Preview controls for documentation playgrounds.
+ * Provides theme switching and RTL toggle in a unified control bar.
  */
 export function PreviewControls({
   theme,
   onThemeChange,
-  rtl,
+  isRTL,
   onRTLChange,
+  themeOptions = [
+    { label: 'System', value: 'system' },
+    { label: 'Light', value: 'light' },
+    { label: 'Dark', value: 'dark' },
+  ],
+  showRTLToggle = true,
+  showThemeSwitcher = true,
 }: PreviewControlsProps) {
   return (
     <div
@@ -26,66 +40,145 @@ export function PreviewControls({
         display: 'flex',
         alignItems: 'center',
         gap: '16px',
-        flexWrap: 'wrap',
+        padding: '8px 12px',
+        backgroundColor: 'var(--semantic-color-background-secondary, #f5f5f5)',
+        borderRadius: 'var(--semantic-border-radius-md, 8px)',
+        border: '1px solid var(--semantic-color-border-subtle, #e5e7eb)',
       }}
     >
-      <ThemeSwitcher
-        value={theme}
-        onChange={(v) => onThemeChange(v as 'system' | 'light' | 'dark')}
-      />
-      <div
-        role="group"
-        aria-label="Text direction"
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-        }}
-      >
-        <span
+      {/* Theme Switcher */}
+      {showThemeSwitcher && (
+        <div
           style={{
-            fontSize: '14px',
-            color: 'var(--semantic-color-foreground-secondary, #6b7280)',
-            marginRight: '4px',
-          }}
-        >
-          Direction:
-        </span>
-        <button
-          type="button"
-          role="switch"
-          aria-checked={rtl}
-          aria-label={rtl ? 'Right-to-left' : 'Left-to-right'}
-          onClick={() => {
-            onRTLChange(!rtl);
-            // Persist preference
-            if (typeof window !== 'undefined') {
-              localStorage.setItem('preview-rtl', String(!rtl));
-            }
-          }}
-          style={{
-            appearance: 'none',
-            border: '1px solid var(--semantic-color-border-default, #d1d5db)',
-            padding: '4px 12px',
-            borderRadius: '6px',
-            background: rtl
-              ? 'var(--semantic-color-background-accent-subtle, #e0e7ff)'
-              : 'var(--semantic-color-background-primary, #ffffff)',
-            color: rtl
-              ? 'var(--semantic-color-foreground-accent, #4f46e5)'
-              : 'var(--semantic-color-foreground-secondary, #6b7280)',
-            cursor: 'pointer',
-            fontSize: '14px',
-            fontWeight: rtl ? 600 : 400,
-            transition: 'all 0.2s ease',
             display: 'flex',
             alignItems: 'center',
-            gap: '4px',
+            gap: '8px',
           }}
         >
-          <span aria-hidden="true">{rtl ? 'RTL' : 'LTR'}</span>
-        </button>
-      </div>
+          <span
+            style={{
+              fontSize: '12px',
+              fontWeight: 500,
+              color: 'var(--semantic-color-foreground-secondary, #6b7280)',
+            }}
+          >
+            Theme:
+          </span>
+          <div role="radiogroup" aria-label="Theme" style={{ display: 'flex', gap: '4px' }}>
+            {themeOptions.map((opt) => (
+              <button
+                key={opt.value}
+                type="button"
+                role="radio"
+                aria-checked={theme === opt.value}
+                onClick={() => onThemeChange(opt.value)}
+                style={{
+                  appearance: 'none',
+                  border: '1px solid transparent',
+                  padding: '4px 10px',
+                  borderRadius: '4px',
+                  backgroundColor:
+                    theme === opt.value
+                      ? 'var(--semantic-color-background-accent, #0a65fe)'
+                      : 'var(--semantic-color-background-primary, #ffffff)',
+                  color:
+                    theme === opt.value
+                      ? 'var(--semantic-color-foreground-on-accent, #ffffff)'
+                      : 'var(--semantic-color-foreground-secondary, #6b7280)',
+                  fontSize: '12px',
+                  fontWeight: 500,
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                }}
+              >
+                {opt.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Separator */}
+      {showThemeSwitcher && showRTLToggle && (
+        <div
+          style={{
+            width: '1px',
+            height: '24px',
+            backgroundColor: 'var(--semantic-color-border-subtle, #e5e7eb)',
+          }}
+        />
+      )}
+
+      {/* RTL Toggle */}
+      {showRTLToggle && (
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+          }}
+        >
+          <span
+            style={{
+              fontSize: '12px',
+              fontWeight: 500,
+              color: 'var(--semantic-color-foreground-secondary, #6b7280)',
+            }}
+          >
+            Direction:
+          </span>
+          <div role="radiogroup" aria-label="Text direction" style={{ display: 'flex', gap: '4px' }}>
+            <button
+              type="button"
+              role="radio"
+              aria-checked={!isRTL}
+              onClick={() => onRTLChange(false)}
+              style={{
+                appearance: 'none',
+                border: '1px solid transparent',
+                padding: '4px 10px',
+                borderRadius: '4px',
+                backgroundColor: !isRTL
+                  ? 'var(--semantic-color-background-accent, #0a65fe)'
+                  : 'var(--semantic-color-background-primary, #ffffff)',
+                color: !isRTL
+                  ? 'var(--semantic-color-foreground-on-accent, #ffffff)'
+                  : 'var(--semantic-color-foreground-secondary, #6b7280)',
+                fontSize: '12px',
+                fontWeight: 500,
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
+              }}
+            >
+              LTR
+            </button>
+            <button
+              type="button"
+              role="radio"
+              aria-checked={isRTL}
+              onClick={() => onRTLChange(true)}
+              style={{
+                appearance: 'none',
+                border: '1px solid transparent',
+                padding: '4px 10px',
+                borderRadius: '4px',
+                backgroundColor: isRTL
+                  ? 'var(--semantic-color-background-accent, #0a65fe)'
+                  : 'var(--semantic-color-background-primary, #ffffff)',
+                color: isRTL
+                  ? 'var(--semantic-color-foreground-on-accent, #ffffff)'
+                  : 'var(--semantic-color-foreground-secondary, #6b7280)',
+                fontSize: '12px',
+                fontWeight: 500,
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
+              }}
+            >
+              RTL
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -30,6 +30,11 @@ const ComponentStandardsPage: React.FC = () => {
               desc: 'Understanding the four-layer architecture: primitives, compounds, composers, and assemblies.',
               href: '/blueprints/component-standards/component-complexity',
             },
+            {
+              title: 'Component Status Matrix',
+              desc: 'View the status, documentation, and implementation details of all components in the design system.',
+              href: '/blueprints/component-standards/status',
+            },
           ].map(({ title, desc, href }) => (
             <div key={title}>
               <h3>{title}</h3>

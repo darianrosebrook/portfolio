@@ -512,6 +512,389 @@
   }
 }
 
+// Last Updated
+.lastUpdated {
+  color: var(--semantic-color-foreground-tertiary);
+  font-size: 0.875rem;
+
+  time {
+    font-weight: 500;
+  }
+}
+
+// Panel sections (for A11y, Perf, Token panels)
+.panelSection {
+  margin-top: 1.5rem;
+  border: 1px solid var(--semantic-color-border-subtle);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.panelToggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 1rem;
+  background: var(--semantic-color-background-secondary);
+  border: none;
+  color: var(--semantic-color-foreground-primary);
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: var(--semantic-color-background-hover);
+  }
+
+  &[aria-expanded='true'] {
+    border-bottom: 1px solid var(--semantic-color-border-subtle);
+  }
+}
+
+.panelContent {
+  padding: 1rem;
+  background: var(--semantic-color-background-primary);
+}
+
+.panelDescription {
+  margin: 0 0 1rem;
+  color: var(--semantic-color-foreground-secondary);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+// Development Tools Section
+.devToolsSection {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: var(--semantic-color-background-secondary);
+  border: 1px solid var(--semantic-color-border-subtle);
+  border-radius: 0.5rem;
+
+  h3 {
+    margin: 0 0 0.5rem;
+    color: var(--semantic-color-foreground-primary);
+    font-size: 1.125rem;
+  }
+}
+
+.devToolsDescription {
+  margin: 0 0 1.5rem;
+  color: var(--semantic-color-foreground-secondary);
+  font-size: 0.875rem;
+}
+
+.devToolsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+// Content Guidelines Section
+.contentGuidelinesSection {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.voiceTone {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+
+  @media (width <= 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.voiceBox,
+.toneBox {
+  padding: 1.25rem;
+  background: var(--semantic-color-background-secondary);
+  border: 1px solid var(--semantic-color-border-subtle);
+  border-radius: 0.5rem;
+
+  h3 {
+    margin: 0 0 0.5rem;
+    color: var(--semantic-color-foreground-primary);
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  p {
+    margin: 0;
+    color: var(--semantic-color-foreground-secondary);
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+}
+
+.contentExamples {
+  h3 {
+    margin: 0 0 1rem;
+    color: var(--semantic-color-foreground-primary);
+    font-size: 1rem;
+    font-weight: 600;
+  }
+}
+
+.examplesGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.examplePair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+
+  @media (width <= 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.goodExample,
+.badExample {
+  padding: 1rem;
+  border-radius: 0.375rem;
+
+  p {
+    margin: 0;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+}
+
+.goodExample {
+  background: var(--semantic-color-background-success-subtle);
+  border: 1px solid var(--semantic-color-border-success);
+}
+
+.badExample {
+  background: var(--semantic-color-background-danger-subtle);
+  border: 1px solid var(--semantic-color-border-danger);
+}
+
+.exampleLabel {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+
+  .goodExample & {
+    background: var(--semantic-color-background-success);
+    color: var(--semantic-color-foreground-on-success, #fff);
+  }
+
+  .badExample & {
+    background: var(--semantic-color-background-danger);
+    color: var(--semantic-color-foreground-on-danger, #fff);
+  }
+}
+
+.contentPatterns {
+  h3 {
+    margin: 0 0 1rem;
+    color: var(--semantic-color-foreground-primary);
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 1.5rem;
+
+    li {
+      margin-bottom: 0.5rem;
+      color: var(--semantic-color-foreground-secondary);
+      font-size: 0.9375rem;
+      line-height: 1.5;
+    }
+  }
+}
+
+// Changelog Section
+.changelogSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.changelogEntry {
+  padding: 1.25rem;
+  background: var(--semantic-color-background-secondary);
+  border: 1px solid var(--semantic-color-border-subtle);
+  border-radius: 0.5rem;
+}
+
+.changelogHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.changelogVersion {
+  padding: 0.25rem 0.75rem;
+  background: var(--semantic-color-background-accent);
+  border-radius: 0.25rem;
+  color: var(--semantic-color-foreground-on-accent, #fff);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.changelogDate {
+  color: var(--semantic-color-foreground-tertiary);
+  font-size: 0.875rem;
+}
+
+.changelogList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.changelogItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+  color: var(--semantic-color-foreground-secondary);
+  font-size: 0.875rem;
+  line-height: 1.5;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.changeType {
+  flex-shrink: 0;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+
+  [data-type='added'] & {
+    background: var(--semantic-color-background-success-subtle);
+    color: var(--semantic-color-foreground-success);
+  }
+
+  [data-type='changed'] & {
+    background: var(--semantic-color-background-warning-subtle);
+    color: var(--semantic-color-foreground-warning);
+  }
+
+  [data-type='deprecated'] & {
+    background: var(--semantic-color-background-info-subtle);
+    color: var(--semantic-color-foreground-info);
+  }
+
+  [data-type='removed'] & {
+    background: var(--semantic-color-background-danger-subtle);
+    color: var(--semantic-color-foreground-danger);
+  }
+
+  [data-type='fixed'] & {
+    background: var(--semantic-color-background-success-subtle);
+    color: var(--semantic-color-foreground-success);
+  }
+
+  [data-type='security'] & {
+    background: var(--semantic-color-background-danger-subtle);
+    color: var(--semantic-color-foreground-danger);
+  }
+}
+
+.migrationLink {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: var(--semantic-color-background-info-subtle);
+  border: 1px solid var(--semantic-color-border-info);
+  border-radius: 0.5rem;
+
+  p {
+    margin: 0;
+    color: var(--semantic-color-foreground-info);
+    font-size: 0.875rem;
+
+    a {
+      color: var(--semantic-color-foreground-accent);
+      font-weight: 500;
+      text-decoration: underline;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+// Contribution Section
+.contributeSection {
+  padding: 1.5rem;
+  background: var(--semantic-color-background-secondary);
+  border: 1px solid var(--semantic-color-border-subtle);
+  border-radius: 0.5rem;
+
+  p {
+    margin: 0 0 1rem;
+    color: var(--semantic-color-foreground-secondary);
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+}
+
+.contributeLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.contributeLink {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: var(--semantic-color-background-primary);
+  border: 1px solid var(--semantic-color-border-subtle);
+  border-radius: 0.375rem;
+  color: var(--semantic-color-foreground-accent);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: var(--semantic-color-background-hover);
+    border-color: var(--semantic-color-foreground-accent);
+  }
+}
+
+// Accessibility checklist status states
+.accessibilityChecklist ul li {
+  &[data-status='pass'] {
+    color: var(--semantic-color-foreground-success);
+  }
+
+  &[data-status='fail'] {
+    color: var(--semantic-color-foreground-danger);
+  }
+
+  &[data-status='pending'] {
+    color: var(--semantic-color-foreground-tertiary);
+  }
+}
+
 // CodeSandbox component theming will be handled via CSS custom properties
 // These styles are applied at the component level instead of global selectors
 
