@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+. "$(dirname "$0")/_/h"
+
+echo "Running build check before push..."
+
+# Run TypeScript type checking (faster than full build)
+npm run build 2>&1
+
+if [ $? -ne 0 ]; then
+  echo ""
+  echo "Build failed. Push aborted."
+  echo "Fix the errors above before pushing."
+  exit 1
+fi
+
+echo "Build passed!"
