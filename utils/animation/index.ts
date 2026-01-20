@@ -173,6 +173,43 @@ export const ANIMATION_PRESETS = {
     duration: 0.2,
     ease: 'power2.in',
   },
+
+  // Editorial animations - sophisticated, magazine-like feel
+  editorialBlurIn: {
+    opacity: 0,
+    y: 20,
+    filter: 'blur(4px)',
+    duration: 0.8,
+    ease: 'M0,0 C0.2,0.65 0.3,0.9 1,1', // Custom "settling" bezier
+  },
+
+  editorialFadeIn: {
+    opacity: 0,
+    y: 30,
+    duration: 0.7,
+    ease: 'power2.out',
+  },
+
+  cardImageZoom: {
+    scale: 1.05,
+    duration: 0.7,
+    ease: 'power2.out',
+  },
+
+  imageReveal: {
+    opacity: 0,
+    scale: 1.02,
+    duration: 0.8,
+    ease: 'power2.out',
+  },
+
+  // Editorial card entry
+  cardEntry: {
+    opacity: 0,
+    y: 20,
+    duration: 0.7,
+    ease: 'power2.out',
+  },
 } as const;
 
 // Animation duration presets
@@ -191,6 +228,16 @@ export const EASING_PRESETS = {
   snappy: 'power3.out',
   gentle: 'power1.out',
   linear: 'none',
+  // Editorial easing - smooth "settling" effect
+  editorial: 'M0,0 C0.2,0.65 0.3,0.9 1,1',
+} as const;
+
+// Editorial stagger configurations for sequential animations
+export const EDITORIAL_STAGGER = {
+  words: 0.08, // Between words in headline
+  sections: 0.1, // Between content sections
+  cards: 0.08, // Between cards in grid
+  listItems: 0.05, // Between list items
 } as const;
 
 // Stagger utilities for sequential animations
@@ -411,6 +458,103 @@ export const animationUtils = {
       ease: 'power2.out',
     });
   },
+
+  // Editorial text reveal animation (word by word with blur)
+  createEditorialTextReveal: (
+    words: Element[],
+    options: { stagger?: number; delay?: number } = {}
+  ) => {
+    const { stagger = EDITORIAL_STAGGER.words, delay = 0 } = options;
+
+    return gsap.fromTo(
+      words,
+      {
+        opacity: 0,
+        y: 20,
+        filter: 'blur(4px)',
+      },
+      {
+        opacity: 1,
+        y: 0,
+        filter: 'blur(0px)',
+        duration: 0.8,
+        ease: EASING_PRESETS.editorial,
+        stagger,
+        delay,
+      }
+    );
+  },
+
+  // Editorial section reveal animation
+  createEditorialSectionReveal: (
+    sections: Element[],
+    options: { stagger?: number; delay?: number } = {}
+  ) => {
+    const { stagger = EDITORIAL_STAGGER.sections, delay = 0 } = options;
+
+    return gsap.fromTo(
+      sections,
+      {
+        opacity: 0,
+        y: 30,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        ease: 'power2.out',
+        stagger,
+        delay,
+      }
+    );
+  },
+
+  // Editorial image reveal animation
+  createEditorialImageReveal: (
+    element: Element,
+    options: { delay?: number } = {}
+  ) => {
+    const { delay = 0 } = options;
+
+    return gsap.fromTo(
+      element,
+      {
+        opacity: 0,
+        scale: 1.02,
+      },
+      {
+        opacity: 1,
+        scale: 1,
+        duration: 0.8,
+        ease: 'power2.out',
+        delay,
+      }
+    );
+  },
+
+  // Editorial card grid stagger animation
+  createEditorialCardStagger: (
+    cards: Element[],
+    options: { stagger?: number; delay?: number } = {}
+  ) => {
+    const { stagger = EDITORIAL_STAGGER.cards, delay = 0 } = options;
+
+    return gsap.fromTo(
+      cards,
+      {
+        opacity: 0,
+        y: 20,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        ease: 'power2.out',
+        stagger,
+        delay,
+      }
+    );
+  },
 };
 
 // Performance monitoring for animations
@@ -456,3 +600,4 @@ export { gsap, useGSAP };
 export type AnimationPreset = keyof typeof ANIMATION_PRESETS;
 export type AnimationDuration = keyof typeof ANIMATION_DURATIONS;
 export type EasingPreset = keyof typeof EASING_PRESETS;
+export type EditorialStagger = keyof typeof EDITORIAL_STAGGER;

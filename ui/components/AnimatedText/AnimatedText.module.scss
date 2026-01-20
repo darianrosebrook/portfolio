@@ -1,0 +1,10 @@
+.animatedText {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25em;
+}
+
+.word {
+  display: inline-block;
+  will-change: transform, opacity, filter;
+}

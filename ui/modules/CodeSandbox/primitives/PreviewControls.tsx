@@ -49,26 +49,26 @@ export function PreviewControls({
       {/* Theme Switcher */}
       {showThemeSwitcher && (
         <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+        }}
+      >
+        <span
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-          }}
-        >
-          <span
-            style={{
               fontSize: '12px',
               fontWeight: 500,
-              color: 'var(--semantic-color-foreground-secondary, #6b7280)',
-            }}
-          >
+            color: 'var(--semantic-color-foreground-secondary, #6b7280)',
+          }}
+        >
             Theme:
-          </span>
+        </span>
           <div role="radiogroup" aria-label="Theme" style={{ display: 'flex', gap: '4px' }}>
             {themeOptions.map((opt) => (
-              <button
+        <button
                 key={opt.value}
-                type="button"
+          type="button"
                 role="radio"
                 aria-checked={theme === opt.value}
                 onClick={() => onThemeChange(opt.value)}
@@ -175,8 +175,8 @@ export function PreviewControls({
               }}
             >
               RTL
-            </button>
-          </div>
+        </button>
+      </div>
         </div>
       )}
     </div>

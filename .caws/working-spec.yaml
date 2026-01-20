@@ -1,0 +1,56 @@
+id: ARTICLE-PUBLISH-AUDIT
+title: 'Article Publishing Pipeline Audit and Draft System Fix'
+risk_tier: 2
+profile: web-ui
+rationale: >
+  The current article publishing pipeline incorrectly overwrites published content during autosave 
+  because it maps draft fields to production columns. The draft system (working columns) is 
+  partially implemented in the DB but unused in the API. This audit fixes the data integrity 
+  issue and completes the draft/publish lifecycle.
+dependencies: []
+feature_flags: []
+scope:
+  in: 
+    - 'Correctly map autosave (PATCH) to working* database columns'
+    - 'Implement promote-to-published logic in PUT endpoint'
+    - 'Update Zod schemas to include working draft fields'
+    - 'Align TypeScript types across the project'
+    - 'Add basic integration tests for the draft/publish flow'
+  out:
+    - 'Redesigning the editor UI'
+    - 'Multi-user concurrent editing (locks)'
+invariants:
+  - 'Autosave (PATCH) MUST NOT modify published columns (headline, articleBody, etc.)'
+  - 'Publishing (PUT) MUST promote working draft content to published columns'
+  - 'Status MUST be "published" only when promote-to-published succeeds'
+acceptance:
+  - id: A1
+    given: 'An existing published article'
+    when: 'Autosave occurs (PATCH)'
+    then: 'Only working* columns are updated; public article remains unchanged'
+  - id: A2
+    given: 'An article with unsaved working draft changes'
+    when: 'User clicks Publish (PUT)'
+    then: 'Working* columns are copied to main columns, status becomes "published", and working_modified_at is updated'
+  - id: A3
+    given: 'A new article'
+    when: 'First save occurs'
+    then: 'Article is created in "draft" status'
+non_functional:
+  perf: { api_p95_ms: 300 }
+  security: ['Ensure only author/editor can PATCH/PUT']
+  security_policy:
+    sast_max_severity: 'none'
+    secret_scan_block: true
+    dep_policy: 'strict'
+contracts:
+  - type: jsonschema
+    role: both
+    path: 'utils/schemas/article.schema.ts'
+observability:
+  logs: ['article.draft.save', 'article.publish.success', 'article.publish.error']
+  metrics: ['article_publish_count']
+migrations:
+  - 'Ensure add-working-columns.sql has been applied (verified via database.types.ts)'
+rollback:
+  - 'The changes are additive/corrective and do not require DDL reverts if columns already exist'

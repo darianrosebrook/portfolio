@@ -34,7 +34,14 @@ import { VideoExtended } from './Extensions/VideoExtended';
  */
 export const createExtensions = (articleId?: number) => {
   return [
-    StarterKit.configure({ codeBlock: false }),
+    StarterKit.configure({
+      codeBlock: false,
+      // Disable extensions we configure separately with custom options
+      dropcursor: false,
+      horizontalRule: false,
+      link: false,
+      underline: false,
+    }),
     Dropcursor.configure({
       color: 'var(--color-accent)',
       width: 2,

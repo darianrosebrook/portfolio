@@ -1,4 +1,4 @@
-import { Database } from './supabase';
+import { Database } from '../database.types';
 import { JSONContent } from '@tiptap/core';
 
 export type Article = Database['public']['Tables']['articles']['Row'];

@@ -54,7 +54,7 @@ const Tiptap = ({
       
       // Only update if content is actually different to avoid cursor jumps
       if (currentContent !== newContent) {
-        editor.commands.setContent(content, false);
+        editor.commands.setContent(content, { emitUpdate: false });
       }
     }
   }, [editor, content]);

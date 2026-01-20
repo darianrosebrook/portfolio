@@ -1,9 +1,6 @@
 import { createClient } from '@/utils/supabase/server';
-// Next
-import NextImage from 'next/image';
 
 // TipTap
-
 import StarterKit from '@tiptap/starter-kit';
 import CharacterCount from '@tiptap/extension-character-count';
 import Image from '@tiptap/extension-image';
@@ -12,9 +9,7 @@ import { generateHTML } from '@tiptap/html';
 import { JSONContent } from '@tiptap/react';
 import { generateLDJson } from '@/utils/ldjson';
 
-import styles from './styles.module.scss';
-import ProfileFlag from '@/ui/components/ProfileFlag';
-import ShareLinks from './ShareLinks';
+import ArticleDetailClient from './ArticleDetailClient';
 
 function getArticleContent(data: JSONContent) {
   let html: string = generateHTML(data, [CharacterCount, Image, StarterKit]);
@@ -132,96 +127,10 @@ export default async function Page(props: { params: Params }) {
   });
 
   return (
-    <section className="content">
-      <article className={styles.articleContent}>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }}
-        />
-        <div className={styles.articleLede}>
-          {article.articleSection && (
-            <p className="small uppercase">
-              {article.articleSection}
-              {article.keywords &&
-                ` |  ${article.keywords.split(',').join(' | ')}`}
-            </p>
-          )}
-          <h1>{article.headline}</h1>
-          {article.alternativeHeadline && (
-            <h2 className="medium light">{article.alternativeHeadline}</h2>
-          )}
-          <hr />
-          <div className={styles.meta}>
-            <div className={styles.byline}>
-              <p className="small">
-                Published on{' '}
-                <time dateTime={article.published_at}>
-                  <small className="bold">
-                    {new Date(article.published_at).toLocaleDateString(
-                      'en-US',
-                      {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                      }
-                    )}
-                  </small>
-                </time>{' '}
-                by
-              </p>
-              <ProfileFlag profile={article.author} />
-            </div>
-            <ShareLinks url={canonical} article={article} />
-          </div>
-        </div>
-        <NextImage
-          src={article.image}
-          alt={article.headline}
-          width={500}
-          height={300}
-          loading="lazy"
-          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 75vw, 500px"
-        />
-        <p className="caption"></p>
-        <div
-          className={styles.articleContent}
-          dangerouslySetInnerHTML={{ __html: article.html }}
-        />
-        <div className={styles.prev_next}>
-          {article.beforeArticle ? (
-            <article className="card">
-              <h3>Previous</h3>
-              <a href={`/articles/${article.beforeArticle.slug}`}>
-                <NextImage
-                  src={article.beforeArticle.image}
-                  alt={article.beforeArticle.headline}
-                  width={100}
-                  height={100}
-                />
-                <h5>{article.beforeArticle.headline}</h5>
-              </a>
-            </article>
-          ) : (
-            <span></span>
-          )}
-          {article.afterArticle ? (
-            <article className="card">
-              <h3>Next</h3>
-              <a href={`/articles/${article.afterArticle.slug}`}>
-                <NextImage
-                  src={article.afterArticle.image}
-                  alt={article.afterArticle.headline}
-                  width={100}
-                  height={100}
-                />
-                <h5>{article.afterArticle.headline}</h5>
-              </a>
-            </article>
-          ) : (
-            <span></span>
-          )}
-        </div>
-      </article>
-    </section>
+    <ArticleDetailClient
+      article={article}
+      canonical={canonical}
+      ldJson={ldJson}
+    />
   );
 }

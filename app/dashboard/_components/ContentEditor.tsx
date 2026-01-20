@@ -10,6 +10,7 @@ import { JSONContent } from '@tiptap/react';
 import { createPreviewExtensions } from '@/ui/modules/Tiptap/extensionsRegistry';
 import dynamic from 'next/dynamic';
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { getEffectiveContent } from '@/utils/editor/workingDraft';
 
 const Tiptap = dynamic(
   () => import('@/ui/modules/Tiptap').then((mod) => ({ default: mod.Tiptap })),
@@ -27,7 +28,13 @@ export default function ContentEditor({
   initial: RecordType;
   entity: Entity;
 }) {
-  const [record, setRecord] = useState<RecordType>(initial);
+  const [record, setRecord] = useState<RecordType>(() => {
+    const effective = getEffectiveContent(initial);
+    return {
+      ...initial,
+      ...effective,
+    };
+  });
   const [preview, setPreview] = useState<boolean>(false);
   const [updatePublishDateOnPublish, setUpdatePublishDateOnPublish] =
     useState<boolean>(false);
@@ -39,7 +46,11 @@ export default function ContentEditor({
   const previousContentRef = useRef<string | null>(null);
 
   useEffect(() => {
-    setRecord(initial);
+    const effective = getEffectiveContent(initial);
+    setRecord({
+      ...initial,
+      ...effective,
+    });
   }, [initial]);
 
   const htmlPreview = useMemo(() => {
@@ -99,12 +110,12 @@ export default function ContentEditor({
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          workingBody: record.articleBody,
-          workingHeadline: record.headline,
-          workingDescription: record.description,
-          workingImage: record.image,
-          workingKeywords: record.keywords,
-          workingArticleSection: record.articleSection,
+          workingbody: record.articleBody,
+          workingheadline: record.headline,
+          workingdescription: record.description,
+          workingimage: record.image,
+          workingkeywords: record.keywords,
+          workingarticlesection: record.articleSection,
         }),
       });
 

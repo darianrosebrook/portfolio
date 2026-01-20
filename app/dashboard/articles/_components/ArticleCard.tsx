@@ -58,13 +58,23 @@ export function ArticleCard({ article, onDelete }: ArticleCardProps) {
   };
 
   const confirmDelete = async () => {
+    if (!article.slug) {
+      console.error('Cannot delete article: slug is missing', article);
+      setIsDeleting(false);
+      return;
+    }
+
     try {
-      const response = await fetch(`/api/articles/${article.slug}`, {
+      const url = `/api/articles/${encodeURIComponent(article.slug)}`;
+      const response = await fetch(url, {
         method: 'DELETE',
       });
       if (response.ok) {
         onDelete?.(article.slug);
         router.refresh();
+      } else {
+        const errorText = await response.text();
+        console.error('Delete failed:', response.status, errorText);
       }
     } catch (error) {
       console.error('Failed to delete article:', error);

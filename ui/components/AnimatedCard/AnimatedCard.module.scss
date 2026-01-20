@@ -1,0 +1,56 @@
+.animatedCard {
+  will-change: transform, opacity;
+  cursor: default;
+}
+
+.hoverable {
+  cursor: pointer;
+
+  &:hover,
+  &:focus-within {
+    .cardImage {
+      transform: scale(1.05);
+    }
+
+    .cardTitle {
+      color: var(--color-brand-primary, #3b82f6);
+    }
+
+    .cardOverlay {
+      opacity: 1;
+    }
+  }
+}
+
+.cardImageWrapper {
+  overflow: hidden;
+  border-radius: var(--radius-md, 8px);
+}
+
+.cardImage {
+  transition: transform 0.7s cubic-bezier(0.2, 0.65, 0.3, 0.9);
+  will-change: transform;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
+.cardTitle {
+  transition: color 0.3s ease-out;
+}
+
+.cardOverlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  border-radius: var(--radius-md, 8px);
+}

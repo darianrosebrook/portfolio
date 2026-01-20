@@ -6,6 +6,7 @@ import type { Article } from '@/types';
 import {
   createArticleSchema,
   updateArticleSchema,
+  patchArticleDraftSchema,
 } from '@/utils/schemas/article.schema';
 
 type RouteContext = { params: Promise<{ slug: string }> };
@@ -54,6 +55,9 @@ vi.mock('@/utils/schemas/article.schema', () => ({
   updateArticleSchema: {
     safeParse: vi.fn(),
   },
+  patchArticleDraftSchema: {
+    safeParse: vi.fn(),
+  },
 }));
 
 const mockUser = {
@@ -79,6 +83,14 @@ const mockArticle: Article = {
   keywords: null,
   published_at: null,
   wordCount: null,
+  workingbody: null,
+  workingheadline: null,
+  workingdescription: null,
+  workingimage: null,
+  workingkeywords: null,
+  workingarticlesection: null,
+  working_modified_at: null,
+  is_dirty: false,
 };
 
 describe('Articles API Integration Tests', () => {
@@ -138,6 +150,14 @@ describe('Articles API Integration Tests', () => {
           ...mockArticle,
           author: mockUser.id,
           editor: mockUser.id,
+          workingbody: mockArticle.articleBody,
+          workingheadline: mockArticle.headline,
+          workingdescription: mockArticle.description,
+          workingimage: mockArticle.image,
+          workingkeywords: mockArticle.keywords,
+          workingarticlesection: mockArticle.articleSection,
+          working_modified_at: expect.any(String),
+          is_dirty: false,
         },
       ]);
     });
@@ -407,6 +427,87 @@ describe('Articles API Integration Tests', () => {
       expect(responseData[0].headline).toBe('Updated Title');
     });
 
+    it('should publish by copying working columns to main fields', async () => {
+      mockSupabase.auth.getUser.mockResolvedValue({
+        data: { user: mockUser },
+        error: null,
+      });
+
+      (updateArticleSchema.safeParse as any).mockReturnValue({
+        success: true,
+        data: { status: 'published' },
+      });
+
+      const existing = {
+        ...mockArticle,
+        workingbody: { type: 'doc', content: [{ type: 'paragraph' }] },
+        workingheadline: 'Draft Headline',
+        workingdescription: 'Draft description',
+        workingimage: 'https://example.com/image.jpg',
+        workingkeywords: 'draft,keywords',
+        workingarticlesection: 'Draft Section',
+      };
+
+      const mockSelect = vi.fn().mockReturnValue({
+        eq: vi.fn().mockReturnValue({
+          eq: vi.fn().mockReturnValue({
+            single: vi.fn().mockResolvedValue({
+              data: existing,
+              error: null,
+            }),
+          }),
+        }),
+      });
+
+      const mockUpdate = vi.fn().mockReturnValue({
+        eq: vi.fn().mockReturnValue({
+          eq: vi.fn().mockReturnValue({
+            select: vi.fn().mockResolvedValue({
+              data: [{ ...existing, status: 'published', is_dirty: false }],
+              error: null,
+            }),
+          }),
+        }),
+      });
+
+      mockSupabase.from.mockReturnValue({
+        select: mockSelect,
+        update: mockUpdate,
+        delete: vi.fn(),
+        insert: vi.fn(),
+      });
+
+      const request = new Request(
+        'http://localhost:3000/api/articles/test-article',
+        {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status: 'published' }),
+        }
+      );
+
+      const response = await ArticleSlugAPI.PUT(request, mockContext);
+      const responseData = await response.json();
+
+      expect(response.status).toBe(200);
+      expect(responseData[0].status).toBe('published');
+      expect(mockSelect).toHaveBeenCalled();
+      expect(mockUpdate).toHaveBeenCalledWith(
+        expect.objectContaining({
+          status: 'published',
+          articleBody: existing.workingbody,
+          headline: existing.workingheadline,
+          description: existing.workingdescription,
+          image: existing.workingimage,
+          keywords: existing.workingkeywords,
+          articleSection: existing.workingarticlesection,
+          is_dirty: false,
+          working_modified_at: expect.any(String),
+          published_at: expect.any(String),
+        })
+      );
+    });
+
     it('should return 401 for unauthenticated requests', async () => {
       mockSupabase.auth.getUser.mockResolvedValue({
         data: { user: null },
@@ -551,6 +652,69 @@ describe('Articles API Integration Tests', () => {
 
       expect(response.status).toBe(500);
       expect(responseData.error).toBe('Delete failed');
+    });
+  });
+
+  describe('PATCH /api/articles/[slug]', () => {
+    const mockContext: RouteContext = {
+      params: Promise.resolve({ slug: 'test-article' }),
+    };
+
+    it('should update working draft columns and mark dirty', async () => {
+      mockSupabase.auth.getUser.mockResolvedValue({
+        data: { user: mockUser },
+        error: null,
+      });
+
+      const patchPayload = {
+        workingheadline: 'Draft Headline',
+        workingdescription: 'Draft description',
+      };
+
+      (patchArticleDraftSchema.safeParse as any).mockReturnValue({
+        success: true,
+        data: patchPayload,
+      });
+
+      const mockUpdate = vi.fn().mockReturnValue({
+        eq: vi.fn().mockReturnValue({
+          eq: vi.fn().mockReturnValue({
+            select: vi.fn().mockResolvedValue({
+              data: [{ ...mockArticle, ...patchPayload, is_dirty: true }],
+              error: null,
+            }),
+          }),
+        }),
+      });
+
+      mockSupabase.from.mockReturnValue({
+        update: mockUpdate,
+        select: vi.fn(),
+        delete: vi.fn(),
+        insert: vi.fn(),
+      });
+
+      const request = new Request(
+        'http://localhost:3000/api/articles/test-article',
+        {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(patchPayload),
+        }
+      );
+
+      const response = await ArticleSlugAPI.PATCH(request, mockContext);
+      const responseData = await response.json();
+
+      expect(response.status).toBe(200);
+      expect(responseData[0].workingheadline).toBe('Draft Headline');
+      expect(mockUpdate).toHaveBeenCalledWith(
+        expect.objectContaining({
+          ...patchPayload,
+          is_dirty: true,
+          working_modified_at: expect.any(String),
+        })
+      );
     });
   });
 });

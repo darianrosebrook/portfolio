@@ -608,52 +608,52 @@ export function ComprehensiveComponentDoc({
         <div className={styles.examplesContent}>
           {isBuilt && interactiveProject ? (
             <>
-              <div className={styles.exampleGrid}>
-                <div className={styles.example}>
-                  <h3>Basic Usage</h3>
-                  <p className={styles.exampleDescription}>
-                    Simple implementation with default props and common
-                    configurations.
-                  </p>
-                  <Sandpack
-                    template="react-ts"
-                    theme="light"
-                    files={Object.fromEntries(
-                      interactiveProject.files.map((f) => [
-                        f.path,
-                        String(f.contents),
-                      ])
-                    )}
-                    options={{
-                      showTabs: true,
-                      showLineNumbers: true,
-                      editorHeight: 300,
-                    }}
-                  />
-                </div>
-                <div className={styles.example}>
-                  <h3>Advanced Usage</h3>
-                  <p className={styles.exampleDescription}>
-                    Complex patterns including composition, state management, and
-                    real-world scenarios.
-                  </p>
-                  <Sandpack
-                    template="react-ts"
-                    theme="light"
-                    files={Object.fromEntries(
-                      advancedProject.files.map((f) => [
-                        f.path,
-                        String(f.contents),
-                      ])
-                    )}
-                    options={{
-                      showTabs: true,
-                      showLineNumbers: true,
-                      editorHeight: 400,
-                    }}
-                  />
-                </div>
+            <div className={styles.exampleGrid}>
+              <div className={styles.example}>
+                <h3>Basic Usage</h3>
+                <p className={styles.exampleDescription}>
+                  Simple implementation with default props and common
+                  configurations.
+                </p>
+                <Sandpack
+                  template="react-ts"
+                  theme="light"
+                  files={Object.fromEntries(
+                    interactiveProject.files.map((f) => [
+                      f.path,
+                      String(f.contents),
+                    ])
+                  )}
+                  options={{
+                    showTabs: true,
+                    showLineNumbers: true,
+                    editorHeight: 300,
+                  }}
+                />
               </div>
+              <div className={styles.example}>
+                <h3>Advanced Usage</h3>
+                <p className={styles.exampleDescription}>
+                  Complex patterns including composition, state management, and
+                  real-world scenarios.
+                </p>
+                <Sandpack
+                  template="react-ts"
+                  theme="light"
+                  files={Object.fromEntries(
+                    advancedProject.files.map((f) => [
+                      f.path,
+                      String(f.contents),
+                    ])
+                  )}
+                  options={{
+                    showTabs: true,
+                    showLineNumbers: true,
+                    editorHeight: 400,
+                  }}
+                />
+              </div>
+            </div>
 
               {/* Development Tools Panels */}
               <div className={styles.devToolsSection}>

@@ -28,13 +28,23 @@
   letter-spacing: var(--core-typography-letter-spacing-tight);
 }
 
-.headingHero h1 span:first-of-type {
+.headingHero h1 > span:first-of-type {
   z-index: 1;
   display: inline-block;
   margin-bottom: 0;
+}
+
+/* First line styling - small red text */
+.headingHero h1 > span:first-of-type .firstLine {
   color: var(--semantic-color-foreground-accent);
   font-size: var(--semantic-typography-heading-06);
   letter-spacing: var(--core-typography-letter-spacing-normal);
+  gap: 0.15em;
+}
+
+/* Second line styling - normal spacing */
+.headingHero h1 .secondLine {
+  gap: 0.05em;
 }
 
 .heroImage {

@@ -12,6 +12,7 @@ import { EditorLayout } from './components/EditorLayout';
 import { SaveStatus } from './components/SaveStatus';
 import { useAutoSave } from './hooks/useAutoSave';
 import { useMetadataExtraction } from './hooks/useMetadataExtraction';
+import { useToast } from '@/ui/components/Toast';
 
 const LOCAL_STORAGE_KEY = 'draft-article-new';
 
@@ -31,6 +32,7 @@ function generateTempSlug(): string {
 export default function NewArticlePage() {
   // Generate a temporary slug immediately so auto-save can work
   const tempSlugRef = useRef<string>(generateTempSlug());
+  const { enqueue } = useToast();
 
   const [article, setArticle] = useState<Partial<Article>>(() => {
     // Try to restore from localStorage on initial load
@@ -139,12 +141,12 @@ export default function NewArticlePage() {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            workingBody: articleToSave.articleBody,
-            workingHeadline: articleToSave.headline,
-            workingDescription: articleToSave.description,
-            workingImage: articleToSave.image,
-            workingKeywords: articleToSave.keywords,
-            workingArticleSection: articleToSave.articleSection,
+            workingbody: articleToSave.articleBody,
+            workingheadline: articleToSave.headline,
+            workingdescription: articleToSave.description,
+            workingimage: articleToSave.image,
+            workingkeywords: articleToSave.keywords,
+            workingarticlesection: articleToSave.articleSection,
           }),
         });
 
@@ -156,11 +158,15 @@ export default function NewArticlePage() {
         const saved = await response.json();
         if (saved && Array.isArray(saved) && saved.length > 0) {
           setArticleId(saved[0].id);
+          // Sync with server state (this will include lowercase working* columns)
+          setArticle((prev) => ({
+            ...prev,
+            ...saved[0],
+          }));
           clearLocalDraft();
         }
       } else {
         // Create new article
-        // Clean up data: convert undefined to null, ensure slug is valid
         const cleanedData = {
           slug: articleToSave.slug || '',
           headline: articleToSave.headline || null,
@@ -173,12 +179,8 @@ export default function NewArticlePage() {
           wordCount: articleToSave.wordCount || null,
         };
 
-        // Validate slug format before sending
-        // Allow temp slugs (draft-timestamp) for auto-save
         const isValidSlug = /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(cleanedData.slug);
         if (!cleanedData.slug || !isValidSlug) {
-          // Don't throw for temp slugs during auto-save - just skip server save
-          // The content is still saved to localStorage
           return;
         }
 
@@ -188,7 +190,6 @@ export default function NewArticlePage() {
           body: JSON.stringify(cleanedData),
         });
 
-        // Clone response before reading body to avoid "body stream already read" error
         const responseText = await response.text();
 
         if (!response.ok) {
@@ -197,7 +198,6 @@ export default function NewArticlePage() {
             const errorData = JSON.parse(responseText);
             errorMessage = errorData.error || errorMessage;
             if (errorData.details) {
-              console.error('Validation errors:', errorData.details);
               errorMessage += `: ${JSON.stringify(errorData.details)}`;
             }
           } catch {
@@ -214,10 +214,14 @@ export default function NewArticlePage() {
             ...saved[0],
           }));
           clearLocalDraft();
+          enqueue({
+            title: 'Article Created',
+            description: 'Your draft has been created successfully.',
+          });
         }
       }
     },
-    [articleId, clearLocalDraft]
+    [articleId, clearLocalDraft, enqueue]
   );
 
   // Auto-save hook - always enabled since we have a temp slug
@@ -236,29 +240,39 @@ export default function NewArticlePage() {
   // Manual save handler with better error handling
   const handleManualSave = useCallback(async () => {
     if (!article.slug) {
-      alert('Please provide a slug before saving.');
+      enqueue({
+        title: 'Slug required',
+        description: 'Please provide a slug before saving.',
+      });
       return;
     }
 
     setIsManualSaving(true);
     try {
       await manualSave();
+      enqueue({
+        title: 'Draft Saved',
+        description: 'Your changes have been saved to the server.',
+      });
     } catch (err) {
       console.error('Manual save failed:', err);
-      alert(
-        err instanceof Error
-          ? err.message
-          : 'Failed to save article. Please try again.'
-      );
+      enqueue({
+        title: 'Save Failed',
+        description:
+          err instanceof Error ? err.message : 'Failed to save article.',
+      });
     } finally {
       setIsManualSaving(false);
     }
-  }, [manualSave, article.slug]);
+  }, [manualSave, article.slug, enqueue]);
 
   // Publish handler with validation
   const handlePublish = useCallback(async () => {
     if (!article.slug || !article.headline) {
-      alert('Please provide a headline and slug before publishing.');
+      enqueue({
+        title: 'Missing information',
+        description: 'Please provide a headline and slug before publishing.',
+      });
       return;
     }
 
@@ -284,7 +298,7 @@ export default function NewArticlePage() {
           const errorText = await response.text();
           errorMessage = errorText || errorMessage;
         }
-        throw new Error(`Publish failed: ${errorMessage}`);
+        throw new Error(errorMessage);
       }
 
       const saved = await response.json();
@@ -293,18 +307,22 @@ export default function NewArticlePage() {
           ...prev,
           ...saved[0],
         }));
+        enqueue({
+          title: 'Article Published',
+          description: 'Your article is now live!',
+        });
       }
     } catch (err) {
       console.error('Publish failed:', err);
-      alert(
-        err instanceof Error
-          ? err.message
-          : 'Failed to publish article. Please try again.'
-      );
+      enqueue({
+        title: 'Publish Failed',
+        description:
+          err instanceof Error ? err.message : 'Failed to publish article.',
+      });
     } finally {
       setIsManualSaving(false);
     }
-  }, [article]);
+  }, [article, enqueue]);
 
   // Unpublish handler
   const handleUnpublish = useCallback(async () => {

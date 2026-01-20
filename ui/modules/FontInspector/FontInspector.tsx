@@ -700,19 +700,29 @@ export const InspectorProvider: React.FC<{
     return ids;
   }, [selectedAnatomy]);
 
-  // Run detection for selected features
+  // Filter selected features to only include those available for current glyph
+  const filteredSelectedFeatureIds = useMemo((): FeatureID[] => {
+    if (availableFeatureIds.length === 0) return [];
+    return selectedFeatureIds.filter((id) => availableFeatureIds.includes(id));
+  }, [selectedFeatureIds, availableFeatureIds]);
+
+  // Run detection for selected features (filtered by glyph availability)
   const detectedFeatures = useMemo((): Map<FeatureID, FeatureInstance[]> => {
-    if (!geometryCache || !showDetails || selectedFeatureIds.length === 0) {
+    if (
+      !geometryCache ||
+      !showDetails ||
+      filteredSelectedFeatureIds.length === 0
+    ) {
       return new Map();
     }
 
     try {
-      return detectGlyphFeatures(geometryCache, selectedFeatureIds);
+      return detectGlyphFeatures(geometryCache, filteredSelectedFeatureIds);
     } catch (error) {
       console.warn('[FontInspector] Error detecting features:', error);
       return new Map();
     }
-  }, [geometryCache, showDetails, selectedFeatureIds]);
+  }, [geometryCache, showDetails, filteredSelectedFeatureIds]);
 
   const contextValue = useMemo(
     (): InspectorContextType => ({

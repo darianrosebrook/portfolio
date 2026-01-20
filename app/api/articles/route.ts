@@ -28,7 +28,22 @@ export async function POST(request: Request) {
 
   const { data, error } = await supabase
     .from('articles')
-    .insert([{ ...validation.data, author: user.id, editor: user.id }])
+    .insert([
+      {
+        ...validation.data,
+        author: user.id,
+        editor: user.id,
+        // Also initialize working draft with the same content
+        workingbody: validation.data.articleBody,
+        workingheadline: validation.data.headline,
+        workingdescription: validation.data.description,
+        workingimage: validation.data.image,
+        workingkeywords: validation.data.keywords,
+        workingarticlesection: validation.data.articleSection,
+        working_modified_at: new Date().toISOString(),
+        is_dirty: false,
+      },
+    ])
     .select();
 
   if (error && (error.message || error.code || Object.keys(error).length > 0)) {
