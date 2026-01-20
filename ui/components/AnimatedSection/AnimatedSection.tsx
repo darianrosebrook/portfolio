@@ -206,22 +206,27 @@ export const AnimatedSection = React.forwardRef<
       variant === 'stagger-children'
         ? Children.map(children, (child, index) => {
             if (isValidElement(child)) {
-              return cloneElement(child as React.ReactElement, {
-                ref: (el: HTMLElement) => {
-                  if (el) childrenRef.current[index] = el;
-                },
-                className: [
-                  (child.props as { className?: string }).className,
-                  styles.animatedChild,
-                ]
-                  .filter(Boolean)
-                  .join(' '),
-                style: {
-                  ...(child.props as { style?: React.CSSProperties }).style,
-                  // Set initial state for SSR/hydration
-                  opacity: prefersReducedMotion ? 1 : 0,
-                },
-              });
+              const childProps = child.props as Record<string, unknown>;
+              return cloneElement(
+                child as React.ReactElement<{
+                  ref?: React.Ref<HTMLElement>;
+                  className?: string;
+                  style?: React.CSSProperties;
+                }>,
+                {
+                  ref: (el: HTMLElement | null) => {
+                    if (el) childrenRef.current[index] = el;
+                  },
+                  className: [childProps.className, styles.animatedChild]
+                    .filter(Boolean)
+                    .join(' '),
+                  style: {
+                    ...(childProps.style as React.CSSProperties | undefined),
+                    // Set initial state for SSR/hydration
+                    opacity: prefersReducedMotion ? 1 : 0,
+                  },
+                }
+              );
             }
             return child;
           })

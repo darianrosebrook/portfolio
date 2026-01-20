@@ -115,14 +115,28 @@ export async function PUT(
   let updateData: (typeof validation.data & {
     modified_at: string;
     published_at?: string | null;
-    working_modified_at?: string;
-    is_dirty?: boolean;
+    working_modified_at?: string | null;
+    is_dirty?: boolean | null;
   }) = {
     ...validation.data,
     modified_at: nowIso,
   };
 
   if (updateData.status === 'published') {
+    type CaseStudyWorkingFields = {
+      workingbody: string | null;
+      workingheadline: string | null;
+      workingdescription: string | null;
+      workingimage: string | null;
+      workingkeywords: string | null;
+      workingarticlesection: string | null;
+      articleBody: string | null;
+      headline: string | null;
+      description: string | null;
+      image: string | null;
+      keywords: string | null;
+      articleSection: string | null;
+    };
     const { data: existing, error: existingError } = await supabase
       .from('case_studies')
       .select(
@@ -143,7 +157,7 @@ export async function PUT(
       )
       .eq('slug', slug)
       .eq('author', user.id)
-      .single();
+      .single<CaseStudyWorkingFields>();
 
     if (
       existingError &&
