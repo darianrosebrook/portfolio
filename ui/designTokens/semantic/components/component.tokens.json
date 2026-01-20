@@ -75,7 +75,7 @@
       },
       "colorFocus": {
         "$type": "color",
-        "$value": "{core.color.palette.red.500}"
+        "$value": "{color.palette.red.500}"
       }
     },
     "test": {

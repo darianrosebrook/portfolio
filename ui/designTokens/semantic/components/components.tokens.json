@@ -241,7 +241,7 @@
       },
       "border": {
         "$type": "color",
-        "$value": "{semantic.color.border.default}"
+        "$value": "{color.border.default}"
       },
       "gap": {
         "icon": {
@@ -286,19 +286,19 @@
       },
       "background": {
         "$type": "color",
-        "$value": "{semantic.color.background.primary}"
+        "$value": "{color.background.primary}"
       },
       "foreground": {
         "$type": "color",
-        "$value": "{semantic.color.foreground.primary}"
+        "$value": "{color.foreground.primary}"
       },
       "paddingX": {
         "$type": "dimension",
-        "$value": "{core.spacing.size.03}"
+        "$value": "{spacing.size.03}"
       },
       "paddingY": {
         "$type": "dimension",
-        "$value": "{core.spacing.size.02}"
+        "$value": "{spacing.size.02}"
       }
     },
     "navigation": {
@@ -421,36 +421,36 @@
     "editor": {
       "background": {
         "$type": "color",
-        "$value": "{semantic.color.background.primary}"
+        "$value": "{color.background.primary}"
       },
       "surface": {
         "$type": "color",
-        "$value": "{semantic.color.background.elevated}"
+        "$value": "{color.background.elevated}"
       },
       "gutter": {
         "$type": "color",
-        "$value": "{semantic.color.border.light}"
+        "$value": "{color.border.light}"
       },
       "cursor": {
         "$type": "color",
-        "$value": "{semantic.color.status.warning}"
+        "$value": "{color.status.warning}"
       },
       "selection": {
         "$type": "color",
-        "$value": "{semantic.color.background.active}"
+        "$value": "{color.background.active}"
       },
       "selectionHighlight": {
         "$type": "color",
-        "$value": "{semantic.color.background.highlight}"
+        "$value": "{color.background.highlight}"
       },
       "lineNumber": {
         "active": {
           "$type": "color",
-          "$value": "{semantic.color.status.highlight}"
+          "$value": "{color.status.highlight}"
         },
         "default": {
           "$type": "color",
-          "$value": "{semantic.color.border.primary}"
+          "$value": "{color.border.primary}"
         }
       }
     },
@@ -458,45 +458,45 @@
       "primary": {
         "background": {
           "$type": "color",
-          "$value": "{semantic.color.background.brand}"
+          "$value": "{color.background.brand}"
         },
         "foreground": {
           "$type": "color",
-          "$value": "{semantic.color.foreground.onBrand}"
+          "$value": "{color.foreground.onBrand}"
         },
         "border": {
           "$type": "color",
-          "$value": "{semantic.color.border.strong}"
+          "$value": "{color.border.strong}"
         },
         "radius": {
           "$type": "dimension",
-          "$value": "{semantic.shape.radius.default}"
+          "$value": "{shape.radius.default}"
         },
         "paddingX": {
           "$type": "dimension",
-          "$value": "{core.spacing.size.04}"
+          "$value": "{spacing.size.04}"
         },
         "paddingY": {
           "$type": "dimension",
-          "$value": "{core.spacing.size.03}"
+          "$value": "{spacing.size.03}"
         },
         "height": {
           "$type": "dimension",
-          "$value": "{semantic.control.size.md.height}"
+          "$value": "{control.size.md.height}"
         },
         "elevation": {
           "$type": "shadow",
-          "$value": "{semantic.elevation.default}"
+          "$value": "{elevation.default}"
         }
       },
       "danger": {
         "background": {
           "$type": "color",
-          "$value": "{semantic.color.background.dangerStrong}"
+          "$value": "{color.background.dangerStrong}"
         },
         "foreground": {
           "$type": "color",
-          "$value": "{semantic.color.foreground.onBrand}"
+          "$value": "{color.foreground.onBrand}"
         }
       }
     },
@@ -504,19 +504,19 @@
       "info": {
         "background": {
           "$type": "color",
-          "$value": "{semantic.color.background.infoSubtle}"
+          "$value": "{color.background.infoSubtle}"
         },
         "foreground": {
           "$type": "color",
-          "$value": "{semantic.color.foreground.onInfoSubtle}"
+          "$value": "{color.foreground.onInfoSubtle}"
         },
         "radius": {
           "$type": "dimension",
-          "$value": "{semantic.shape.radius.small}"
+          "$value": "{shape.radius.small}"
         },
         "paddingX": {
           "$type": "dimension",
-          "$value": "{core.spacing.size.02}"
+          "$value": "{spacing.size.02}"
         }
       }
     },
@@ -524,23 +524,23 @@
       "displayOversize": {
         "fontFamily": {
           "$type": "fontFamily",
-          "$value": "{semantic.typography.semanticFamily.heading}"
+          "$value": "{typography.semanticFamily.heading}"
         },
         "fontWeight": {
           "$type": "fontWeight",
-          "$value": "{semantic.typography.fontWeight.black}"
+          "$value": "{typography.fontWeight.black}"
         },
         "fontSize": {
           "$type": "dimension",
-          "$value": "{core.typography.ramp.14}"
+          "$value": "{typography.ramp.14}"
         },
         "lineHeight": {
           "$type": "number",
-          "$value": "{core.typography.lineHeight.heading}"
+          "$value": "{typography.lineHeight.heading}"
         },
         "letterSpacing": {
           "$type": "dimension",
-          "$value": "{core.typography.letterSpacing.tight}"
+          "$value": "{typography.letterSpacing.tight}"
         }
       }
     }

@@ -2112,10 +2112,31 @@
       },
       "onColor": {
         "$type": "color",
-        "$value": "{semantic.color.foreground.primary}",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0784313725490196,
+            0.0784313725490196,
+            0.0784313725490196
+          ]
+        },
         "$extensions": {
-          "design.paths.light": "{semantic.color.foreground.primary}",
-          "design.paths.dark": "{semantic.color.foreground.primary}"
+          "design.paths.light": {
+            "colorSpace": "srgb",
+            "components": [
+              0.0784313725490196,
+              0.0784313725490196,
+              0.0784313725490196
+            ]
+          },
+          "design.paths.dark": {
+            "colorSpace": "srgb",
+            "components": [
+              0.0784313725490196,
+              0.0784313725490196,
+              0.0784313725490196
+            ]
+          }
         },
         "$description": "Foreground color for text on colored backgrounds"
       },
@@ -2362,84 +2383,273 @@
       "syntax": {
         "plain": {
           "$type": "color",
-          "$value": "{semantic.color.foreground.primary}",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.0784313725490196,
+              0.0784313725490196,
+              0.0784313725490196
+            ]
+          },
           "$extensions": {
-            "design.paths.light": "{semantic.color.foreground.primary}",
-            "design.paths.dark": "{semantic.color.foreground.primary}"
+            "design.paths.light": {
+              "colorSpace": "srgb",
+              "components": [
+                0.0784313725490196,
+                0.0784313725490196,
+                0.0784313725490196
+              ]
+            },
+            "design.paths.dark": {
+              "colorSpace": "srgb",
+              "components": [
+                0.0784313725490196,
+                0.0784313725490196,
+                0.0784313725490196
+              ]
+            }
           },
           "$description": "Plain text in syntax highlighting"
         },
         "comment": {
           "color": {
             "$type": "color",
-            "$value": "{semantic.color.foreground.tertiary}",
+            "$value": {
+              "colorSpace": "srgb",
+              "components": [
+                0.44313725490196076,
+                0.44313725490196076,
+                0.44313725490196076
+              ]
+            },
             "$extensions": {
-              "design.paths.light": "{semantic.color.foreground.tertiary}",
-              "design.paths.dark": "{semantic.color.foreground.tertiary}"
+              "design.paths.light": {
+                "colorSpace": "srgb",
+                "components": [
+                  0.44313725490196076,
+                  0.44313725490196076,
+                  0.44313725490196076
+                ]
+              },
+              "design.paths.dark": {
+                "colorSpace": "srgb",
+                "components": [
+                  0.44313725490196076,
+                  0.44313725490196076,
+                  0.44313725490196076
+                ]
+              }
             },
             "$description": "Comment color in syntax highlighting"
           }
         },
         "keyword": {
           "$type": "color",
-          "$value": "{semantic.color.foreground.info}",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.0392156862745098,
+              0.396078431372549,
+              0.996078431372549
+            ]
+          },
           "$extensions": {
-            "design.paths.light": "{semantic.color.foreground.info}",
-            "design.paths.dark": "{semantic.color.foreground.info}"
+            "design.paths.light": {
+              "colorSpace": "srgb",
+              "components": [
+                0.0392156862745098,
+                0.396078431372549,
+                0.996078431372549
+              ]
+            },
+            "design.paths.dark": {
+              "colorSpace": "srgb",
+              "components": [
+                0.0392156862745098,
+                0.396078431372549,
+                0.996078431372549
+              ]
+            }
           },
           "$description": "Keyword color in syntax highlighting"
         },
         "definition": {
           "$type": "color",
-          "$value": "{semantic.color.foreground.accent}",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.8509803921568627,
+              0.1607843137254902,
+              0.16862745098039217
+            ]
+          },
           "$extensions": {
-            "design.paths.light": "{semantic.color.foreground.accent}",
-            "design.paths.dark": "{semantic.color.foreground.accent}"
+            "design.paths.light": {
+              "colorSpace": "srgb",
+              "components": [
+                0.8509803921568627,
+                0.1607843137254902,
+                0.16862745098039217
+              ]
+            },
+            "design.paths.dark": {
+              "colorSpace": "srgb",
+              "components": [
+                0.8509803921568627,
+                0.1607843137254902,
+                0.16862745098039217
+              ]
+            }
           },
           "$description": "Definition color in syntax highlighting"
         },
         "punctuation": {
           "$type": "color",
-          "$value": "{semantic.color.foreground.info}",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.0392156862745098,
+              0.396078431372549,
+              0.996078431372549
+            ]
+          },
           "$extensions": {
-            "design.paths.light": "{semantic.color.foreground.info}",
-            "design.paths.dark": "{semantic.color.foreground.info}"
+            "design.paths.light": {
+              "colorSpace": "srgb",
+              "components": [
+                0.0392156862745098,
+                0.396078431372549,
+                0.996078431372549
+              ]
+            },
+            "design.paths.dark": {
+              "colorSpace": "srgb",
+              "components": [
+                0.0392156862745098,
+                0.396078431372549,
+                0.996078431372549
+              ]
+            }
           },
           "$description": "Punctuation color in syntax highlighting"
         },
         "property": {
           "$type": "color",
-          "$value": "{semantic.color.foreground.warning}",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.6745098039215687,
+              0.3607843137254902,
+              0
+            ]
+          },
           "$extensions": {
-            "design.paths.light": "{semantic.color.foreground.warning}",
-            "design.paths.dark": "{semantic.color.foreground.warning}"
+            "design.paths.light": {
+              "colorSpace": "srgb",
+              "components": [
+                0.6745098039215687,
+                0.3607843137254902,
+                0
+              ]
+            },
+            "design.paths.dark": {
+              "colorSpace": "srgb",
+              "components": [
+                0.6745098039215687,
+                0.3607843137254902,
+                0
+              ]
+            }
           },
           "$description": "Property color in syntax highlighting"
         },
         "tag": {
           "$type": "color",
-          "$value": "{semantic.color.foreground.danger}",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.8509803921568627,
+              0.1607843137254902,
+              0.16862745098039217
+            ]
+          },
           "$extensions": {
-            "design.paths.light": "{semantic.color.foreground.danger}",
-            "design.paths.dark": "{semantic.color.foreground.danger}"
+            "design.paths.light": {
+              "colorSpace": "srgb",
+              "components": [
+                0.8509803921568627,
+                0.1607843137254902,
+                0.16862745098039217
+              ]
+            },
+            "design.paths.dark": {
+              "colorSpace": "srgb",
+              "components": [
+                0.8509803921568627,
+                0.1607843137254902,
+                0.16862745098039217
+              ]
+            }
           },
           "$description": "Tag color in syntax highlighting"
         },
         "static": {
           "$type": "color",
-          "$value": "{semantic.color.foreground.accent}",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.8509803921568627,
+              0.1607843137254902,
+              0.16862745098039217
+            ]
+          },
           "$extensions": {
-            "design.paths.light": "{semantic.color.foreground.accent}",
-            "design.paths.dark": "{semantic.color.foreground.accent}"
+            "design.paths.light": {
+              "colorSpace": "srgb",
+              "components": [
+                0.8509803921568627,
+                0.1607843137254902,
+                0.16862745098039217
+              ]
+            },
+            "design.paths.dark": {
+              "colorSpace": "srgb",
+              "components": [
+                0.8509803921568627,
+                0.1607843137254902,
+                0.16862745098039217
+              ]
+            }
           },
           "$description": "Static color in syntax highlighting"
         },
         "string": {
           "$type": "color",
-          "$value": "{semantic.color.foreground.highlight}",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.4823529411764706,
+              0,
+              0
+            ]
+          },
           "$extensions": {
-            "design.paths.light": "{semantic.color.foreground.highlight}",
-            "design.paths.dark": "{semantic.color.foreground.highlight}"
+            "design.paths.light": {
+              "colorSpace": "srgb",
+              "components": [
+                0.4823529411764706,
+                0,
+                0
+              ]
+            },
+            "design.paths.dark": {
+              "colorSpace": "srgb",
+              "components": [
+                0.4823529411764706,
+                0,
+                0
+              ]
+            }
           },
           "$description": "String color in syntax highlighting"
         }
@@ -2838,10 +3048,31 @@
       },
       "onColor": {
         "$type": "color",
-        "$value": "{semantic.color.background.primary}",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            1,
+            1
+          ]
+        },
         "$extensions": {
-          "design.paths.light": "{semantic.color.background.primary}",
-          "design.paths.dark": "{semantic.color.background.primary}"
+          "design.paths.light": {
+            "colorSpace": "srgb",
+            "components": [
+              1,
+              1,
+              1
+            ]
+          },
+          "design.paths.dark": {
+            "colorSpace": "srgb",
+            "components": [
+              1,
+              1,
+              1
+            ]
+          }
         },
         "$description": "Background color for elements on colored backgrounds"
       },
@@ -6885,36 +7116,92 @@
     "editor": {
       "background": {
         "$type": "color",
-        "$value": "{semantic.color.background.primary}"
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            1,
+            1
+          ]
+        }
       },
       "surface": {
         "$type": "color",
-        "$value": "{semantic.color.background.elevated}"
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            1,
+            1
+          ]
+        }
       },
       "gutter": {
         "$type": "color",
-        "$value": "{semantic.color.border.light}"
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.807843137254902,
+            0.807843137254902,
+            0.807843137254902
+          ]
+        }
       },
       "cursor": {
         "$type": "color",
-        "$value": "{semantic.color.status.warning}"
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.6745098039215687,
+            0.3607843137254902,
+            0
+          ]
+        }
       },
       "selection": {
         "$type": "color",
-        "$value": "{semantic.color.background.active}"
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.6823529411764706,
+            0.6823529411764706,
+            0.6823529411764706
+          ]
+        }
       },
       "selectionHighlight": {
         "$type": "color",
-        "$value": "{semantic.color.background.highlight}"
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9686274509803922,
+            0.7568627450980392,
+            0.7607843137254902
+          ]
+        }
       },
       "lineNumber": {
         "active": {
           "$type": "color",
-          "$value": "{semantic.color.status.highlight}"
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.11372549019607843,
+              0.5686274509803921,
+              0.984313725490196
+            ]
+          }
         },
         "default": {
           "$type": "color",
-          "$value": "{semantic.color.border.primary}"
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.6823529411764706,
+              0.6823529411764706,
+              0.6823529411764706
+            ]
+          }
         }
       }
     },
@@ -6922,91 +7209,188 @@
       "primary": {
         "background": {
           "$type": "color",
-          "$value": "{semantic.color.background.brand}"
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.0392156862745098,
+              0.396078431372549,
+              0.996078431372549
+            ]
+          }
         },
         "foreground": {
           "$type": "color",
-          "$value": "{semantic.color.foreground.onBrand}"
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              1,
+              1,
+              1
+            ]
+          }
         },
         "border": {
           "$type": "color",
-          "$value": "{semantic.color.border.strong}"
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.5607843137254902,
+              0.5607843137254902,
+              0.5607843137254902
+            ]
+          }
         },
         "radius": {
           "$type": "dimension",
-          "$value": "{semantic.shape.radius.default}"
+          "$value": {
+            "value": 4,
+            "unit": "px"
+          }
         },
         "paddingX": {
           "$type": "dimension",
-          "$value": "{core.spacing.size.04}"
+          "$value": {
+            "value": 8,
+            "unit": "px"
+          }
         },
         "paddingY": {
           "$type": "dimension",
-          "$value": "{core.spacing.size.03}"
+          "$value": {
+            "value": 4,
+            "unit": "px"
+          }
         },
         "height": {
           "$type": "dimension",
-          "$value": "{semantic.control.size.md.height}"
+          "$value": {
+            "value": 32,
+            "unit": "px"
+          }
         },
         "elevation": {
           "$type": "shadow",
-          "$value": "{semantic.elevation.default}"
+          "$value": "0px 1px 3px rgba(0,0,0,0.12), 0px 1px 2px rgba(0,0,0,0.08)"
         }
       },
       "danger": {
         "background": {
           "$type": "color",
-          "$value": "{semantic.color.background.dangerStrong}"
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.6823529411764706,
+              0,
+              0.00392156862745098
+            ]
+          }
         },
         "foreground": {
           "$type": "color",
-          "$value": "{semantic.color.foreground.onBrand}"
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              1,
+              1,
+              1
+            ]
+          }
         }
       }
     },
     "input": {
       "background": {
         "$type": "color",
-        "$value": "{semantic.color.background.primary}"
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            1,
+            1
+          ]
+        }
       },
       "foreground": {
         "$type": "color",
-        "$value": "{semantic.color.foreground.primary}"
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0784313725490196,
+            0.0784313725490196,
+            0.0784313725490196
+          ]
+        }
       },
       "border": {
         "$type": "color",
-        "$value": "{semantic.color.border.default}"
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.6823529411764706,
+            0.6823529411764706,
+            0.6823529411764706
+          ]
+        }
       },
       "radius": {
         "$type": "dimension",
-        "$value": "{semantic.shape.radius.default}"
+        "$value": {
+          "value": 4,
+          "unit": "px"
+        }
       },
       "paddingX": {
         "$type": "dimension",
-        "$value": "{core.spacing.size.03}"
+        "$value": {
+          "value": 4,
+          "unit": "px"
+        }
       },
       "paddingY": {
         "$type": "dimension",
-        "$value": "{core.spacing.size.02}"
+        "$value": {
+          "value": 2,
+          "unit": "px"
+        }
       }
     },
     "badge": {
       "info": {
         "background": {
           "$type": "color",
-          "$value": "{semantic.color.background.infoSubtle}"
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.8509803921568627,
+              0.9529411764705882,
+              0.996078431372549
+            ]
+          }
         },
         "foreground": {
           "$type": "color",
-          "$value": "{semantic.color.foreground.onInfoSubtle}"
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0,
+              0.17647058823529413,
+              0.6
+            ]
+          }
         },
         "radius": {
           "$type": "dimension",
-          "$value": "{semantic.shape.radius.small}"
+          "$value": {
+            "value": 4,
+            "unit": "px"
+          }
         },
         "paddingX": {
           "$type": "dimension",
-          "$value": "{core.spacing.size.02}"
+          "$value": {
+            "value": 2,
+            "unit": "px"
+          }
         }
       }
     },
@@ -7014,23 +7398,29 @@
       "displayOversize": {
         "fontFamily": {
           "$type": "fontFamily",
-          "$value": "{semantic.typography.semanticFamily.heading}"
+          "$value": "\"Inter\", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif"
         },
         "fontWeight": {
           "$type": "fontWeight",
-          "$value": "{semantic.typography.fontWeight.black}"
+          "$value": 900
         },
         "fontSize": {
           "$type": "dimension",
-          "$value": "{core.typography.ramp.14}"
+          "$value": {
+            "value": 128,
+            "unit": "px"
+          }
         },
         "lineHeight": {
           "$type": "number",
-          "$value": "{core.typography.lineHeight.heading}"
+          "$value": 1
         },
         "letterSpacing": {
           "$type": "dimension",
-          "$value": "{core.typography.letterSpacing.tight}"
+          "$value": {
+            "value": -0.018,
+            "unit": "rem"
+          }
         }
       }
     }
@@ -7511,7 +7901,14 @@
       },
       "colorFocus": {
         "$type": "color",
-        "$value": "{core.color.palette.red.500}"
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8509803921568627,
+            0.1607843137254902,
+            0.16862745098039217
+          ]
+        }
       }
     },
     "test": {

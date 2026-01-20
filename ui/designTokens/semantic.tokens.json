@@ -98,10 +98,10 @@
       },
       "onColor": {
         "$type": "color",
-        "$value": "{semantic.color.foreground.primary}",
+        "$value": "{color.foreground.primary}",
         "$extensions": {
-          "design.paths.light": "{semantic.color.foreground.primary}",
-          "design.paths.dark": "{semantic.color.foreground.primary}"
+          "design.paths.light": "{color.foreground.primary}",
+          "design.paths.dark": "{color.foreground.primary}"
         },
         "$description": "Foreground color for text on colored backgrounds"
       },
@@ -180,84 +180,84 @@
       "syntax": {
         "plain": {
           "$type": "color",
-          "$value": "{semantic.color.foreground.primary}",
+          "$value": "{color.foreground.primary}",
           "$extensions": {
-            "design.paths.light": "{semantic.color.foreground.primary}",
-            "design.paths.dark": "{semantic.color.foreground.primary}"
+            "design.paths.light": "{color.foreground.primary}",
+            "design.paths.dark": "{color.foreground.primary}"
           },
           "$description": "Plain text in syntax highlighting"
         },
         "comment": {
           "color": {
             "$type": "color",
-            "$value": "{semantic.color.foreground.tertiary}",
+            "$value": "{color.foreground.tertiary}",
             "$extensions": {
-              "design.paths.light": "{semantic.color.foreground.tertiary}",
-              "design.paths.dark": "{semantic.color.foreground.tertiary}"
+              "design.paths.light": "{color.foreground.tertiary}",
+              "design.paths.dark": "{color.foreground.tertiary}"
             },
             "$description": "Comment color in syntax highlighting"
           }
         },
         "keyword": {
           "$type": "color",
-          "$value": "{semantic.color.foreground.info}",
+          "$value": "{color.foreground.info}",
           "$extensions": {
-            "design.paths.light": "{semantic.color.foreground.info}",
-            "design.paths.dark": "{semantic.color.foreground.info}"
+            "design.paths.light": "{color.foreground.info}",
+            "design.paths.dark": "{color.foreground.info}"
           },
           "$description": "Keyword color in syntax highlighting"
         },
         "definition": {
           "$type": "color",
-          "$value": "{semantic.color.foreground.accent}",
+          "$value": "{color.foreground.accent}",
           "$extensions": {
-            "design.paths.light": "{semantic.color.foreground.accent}",
-            "design.paths.dark": "{semantic.color.foreground.accent}"
+            "design.paths.light": "{color.foreground.accent}",
+            "design.paths.dark": "{color.foreground.accent}"
           },
           "$description": "Definition color in syntax highlighting"
         },
         "punctuation": {
           "$type": "color",
-          "$value": "{semantic.color.foreground.info}",
+          "$value": "{color.foreground.info}",
           "$extensions": {
-            "design.paths.light": "{semantic.color.foreground.info}",
-            "design.paths.dark": "{semantic.color.foreground.info}"
+            "design.paths.light": "{color.foreground.info}",
+            "design.paths.dark": "{color.foreground.info}"
           },
           "$description": "Punctuation color in syntax highlighting"
         },
         "property": {
           "$type": "color",
-          "$value": "{semantic.color.foreground.warning}",
+          "$value": "{color.foreground.warning}",
           "$extensions": {
-            "design.paths.light": "{semantic.color.foreground.warning}",
-            "design.paths.dark": "{semantic.color.foreground.warning}"
+            "design.paths.light": "{color.foreground.warning}",
+            "design.paths.dark": "{color.foreground.warning}"
           },
           "$description": "Property color in syntax highlighting"
         },
         "tag": {
           "$type": "color",
-          "$value": "{semantic.color.foreground.danger}",
+          "$value": "{color.foreground.danger}",
           "$extensions": {
-            "design.paths.light": "{semantic.color.foreground.danger}",
-            "design.paths.dark": "{semantic.color.foreground.danger}"
+            "design.paths.light": "{color.foreground.danger}",
+            "design.paths.dark": "{color.foreground.danger}"
           },
           "$description": "Tag color in syntax highlighting"
         },
         "static": {
           "$type": "color",
-          "$value": "{semantic.color.foreground.accent}",
+          "$value": "{color.foreground.accent}",
           "$extensions": {
-            "design.paths.light": "{semantic.color.foreground.accent}",
-            "design.paths.dark": "{semantic.color.foreground.accent}"
+            "design.paths.light": "{color.foreground.accent}",
+            "design.paths.dark": "{color.foreground.accent}"
           },
           "$description": "Static color in syntax highlighting"
         },
         "string": {
           "$type": "color",
-          "$value": "{semantic.color.foreground.highlight}",
+          "$value": "{color.foreground.highlight}",
           "$extensions": {
-            "design.paths.light": "{semantic.color.foreground.highlight}",
-            "design.paths.dark": "{semantic.color.foreground.highlight}"
+            "design.paths.light": "{color.foreground.highlight}",
+            "design.paths.dark": "{color.foreground.highlight}"
           },
           "$description": "String color in syntax highlighting"
         }
@@ -383,10 +383,10 @@
       },
       "onColor": {
         "$type": "color",
-        "$value": "{semantic.color.background.primary}",
+        "$value": "{color.background.primary}",
         "$extensions": {
-          "design.paths.light": "{semantic.color.background.primary}",
-          "design.paths.dark": "{semantic.color.background.primary}"
+          "design.paths.light": "{color.background.primary}",
+          "design.paths.dark": "{color.background.primary}"
         },
         "$description": "Background color for elements on colored backgrounds"
       },
@@ -2428,36 +2428,36 @@
     "editor": {
       "background": {
         "$type": "color",
-        "$value": "{semantic.color.background.primary}"
+        "$value": "{color.background.primary}"
       },
       "surface": {
         "$type": "color",
-        "$value": "{semantic.color.background.elevated}"
+        "$value": "{color.background.elevated}"
       },
       "gutter": {
         "$type": "color",
-        "$value": "{semantic.color.border.light}"
+        "$value": "{color.border.light}"
       },
       "cursor": {
         "$type": "color",
-        "$value": "{semantic.color.status.warning}"
+        "$value": "{color.status.warning}"
       },
       "selection": {
         "$type": "color",
-        "$value": "{semantic.color.background.active}"
+        "$value": "{color.background.active}"
       },
       "selectionHighlight": {
         "$type": "color",
-        "$value": "{semantic.color.background.highlight}"
+        "$value": "{color.background.highlight}"
       },
       "lineNumber": {
         "active": {
           "$type": "color",
-          "$value": "{semantic.color.status.highlight}"
+          "$value": "{color.status.highlight}"
         },
         "default": {
           "$type": "color",
-          "$value": "{semantic.color.border.primary}"
+          "$value": "{color.border.primary}"
         }
       }
     },
@@ -2465,91 +2465,91 @@
       "primary": {
         "background": {
           "$type": "color",
-          "$value": "{semantic.color.background.brand}"
+          "$value": "{color.background.brand}"
         },
         "foreground": {
           "$type": "color",
-          "$value": "{semantic.color.foreground.onBrand}"
+          "$value": "{color.foreground.onBrand}"
         },
         "border": {
           "$type": "color",
-          "$value": "{semantic.color.border.strong}"
+          "$value": "{color.border.strong}"
         },
         "radius": {
           "$type": "dimension",
-          "$value": "{semantic.shape.radius.default}"
+          "$value": "{shape.radius.default}"
         },
         "paddingX": {
           "$type": "dimension",
-          "$value": "{core.spacing.size.04}"
+          "$value": "{spacing.size.04}"
         },
         "paddingY": {
           "$type": "dimension",
-          "$value": "{core.spacing.size.03}"
+          "$value": "{spacing.size.03}"
         },
         "height": {
           "$type": "dimension",
-          "$value": "{semantic.control.size.md.height}"
+          "$value": "{control.size.md.height}"
         },
         "elevation": {
           "$type": "shadow",
-          "$value": "{semantic.elevation.default}"
+          "$value": "{elevation.default}"
         }
       },
       "danger": {
         "background": {
           "$type": "color",
-          "$value": "{semantic.color.background.dangerStrong}"
+          "$value": "{color.background.dangerStrong}"
         },
         "foreground": {
           "$type": "color",
-          "$value": "{semantic.color.foreground.onBrand}"
+          "$value": "{color.foreground.onBrand}"
         }
       }
     },
     "input": {
       "background": {
         "$type": "color",
-        "$value": "{semantic.color.background.primary}"
+        "$value": "{color.background.primary}"
       },
       "foreground": {
         "$type": "color",
-        "$value": "{semantic.color.foreground.primary}"
+        "$value": "{color.foreground.primary}"
       },
       "border": {
         "$type": "color",
-        "$value": "{semantic.color.border.default}"
+        "$value": "{color.border.default}"
       },
       "radius": {
         "$type": "dimension",
-        "$value": "{semantic.shape.radius.default}"
+        "$value": "{shape.radius.default}"
       },
       "paddingX": {
         "$type": "dimension",
-        "$value": "{core.spacing.size.03}"
+        "$value": "{spacing.size.03}"
       },
       "paddingY": {
         "$type": "dimension",
-        "$value": "{core.spacing.size.02}"
+        "$value": "{spacing.size.02}"
       }
     },
     "badge": {
       "info": {
         "background": {
           "$type": "color",
-          "$value": "{semantic.color.background.infoSubtle}"
+          "$value": "{color.background.infoSubtle}"
         },
         "foreground": {
           "$type": "color",
-          "$value": "{semantic.color.foreground.onInfoSubtle}"
+          "$value": "{color.foreground.onInfoSubtle}"
         },
         "radius": {
           "$type": "dimension",
-          "$value": "{semantic.shape.radius.small}"
+          "$value": "{shape.radius.small}"
         },
         "paddingX": {
           "$type": "dimension",
-          "$value": "{core.spacing.size.02}"
+          "$value": "{spacing.size.02}"
         }
       }
     },
@@ -2557,23 +2557,23 @@
       "displayOversize": {
         "fontFamily": {
           "$type": "fontFamily",
-          "$value": "{semantic.typography.semanticFamily.heading}"
+          "$value": "{typography.semanticFamily.heading}"
         },
         "fontWeight": {
           "$type": "fontWeight",
-          "$value": "{semantic.typography.fontWeight.black}"
+          "$value": "{typography.fontWeight.black}"
         },
         "fontSize": {
           "$type": "dimension",
-          "$value": "{core.typography.ramp.14}"
+          "$value": "{typography.ramp.14}"
         },
         "lineHeight": {
           "$type": "number",
-          "$value": "{core.typography.lineHeight.heading}"
+          "$value": "{typography.lineHeight.heading}"
         },
         "letterSpacing": {
           "$type": "dimension",
-          "$value": "{core.typography.letterSpacing.tight}"
+          "$value": "{typography.letterSpacing.tight}"
         }
       }
     }
@@ -2691,7 +2691,7 @@
       },
       "colorFocus": {
         "$type": "color",
-        "$value": "{core.color.palette.red.500}"
+        "$value": "{color.palette.red.500}"
       }
     },
     "test": {

@@ -94,10 +94,10 @@
       },
       "onColor": {
         "$type": "color",
-        "$value": "{semantic.color.foreground.primary}",
+        "$value": "{color.foreground.primary}",
         "$extensions": {
-          "design.paths.light": "{semantic.color.foreground.primary}",
-          "design.paths.dark": "{semantic.color.foreground.primary}"
+          "design.paths.light": "{color.foreground.primary}",
+          "design.paths.dark": "{color.foreground.primary}"
         },
         "$description": "Foreground color for text on colored backgrounds"
       },
@@ -176,84 +176,84 @@
       "syntax": {
         "plain": {
           "$type": "color",
-          "$value": "{semantic.color.foreground.primary}",
+          "$value": "{color.foreground.primary}",
           "$extensions": {
-            "design.paths.light": "{semantic.color.foreground.primary}",
-            "design.paths.dark": "{semantic.color.foreground.primary}"
+            "design.paths.light": "{color.foreground.primary}",
+            "design.paths.dark": "{color.foreground.primary}"
           },
           "$description": "Plain text in syntax highlighting"
         },
         "comment": {
           "color": {
             "$type": "color",
-            "$value": "{semantic.color.foreground.tertiary}",
+            "$value": "{color.foreground.tertiary}",
             "$extensions": {
-              "design.paths.light": "{semantic.color.foreground.tertiary}",
-              "design.paths.dark": "{semantic.color.foreground.tertiary}"
+              "design.paths.light": "{color.foreground.tertiary}",
+              "design.paths.dark": "{color.foreground.tertiary}"
             },
             "$description": "Comment color in syntax highlighting"
           }
         },
         "keyword": {
           "$type": "color",
-          "$value": "{semantic.color.foreground.info}",
+          "$value": "{color.foreground.info}",
           "$extensions": {
-            "design.paths.light": "{semantic.color.foreground.info}",
-            "design.paths.dark": "{semantic.color.foreground.info}"
+            "design.paths.light": "{color.foreground.info}",
+            "design.paths.dark": "{color.foreground.info}"
           },
           "$description": "Keyword color in syntax highlighting"
         },
         "definition": {
           "$type": "color",
-          "$value": "{semantic.color.foreground.accent}",
+          "$value": "{color.foreground.accent}",
           "$extensions": {
-            "design.paths.light": "{semantic.color.foreground.accent}",
-            "design.paths.dark": "{semantic.color.foreground.accent}"
+            "design.paths.light": "{color.foreground.accent}",
+            "design.paths.dark": "{color.foreground.accent}"
           },
           "$description": "Definition color in syntax highlighting"
         },
         "punctuation": {
           "$type": "color",
-          "$value": "{semantic.color.foreground.info}",
+          "$value": "{color.foreground.info}",
           "$extensions": {
-            "design.paths.light": "{semantic.color.foreground.info}",
-            "design.paths.dark": "{semantic.color.foreground.info}"
+            "design.paths.light": "{color.foreground.info}",
+            "design.paths.dark": "{color.foreground.info}"
           },
           "$description": "Punctuation color in syntax highlighting"
         },
         "property": {
           "$type": "color",
-          "$value": "{semantic.color.foreground.warning}",
+          "$value": "{color.foreground.warning}",
           "$extensions": {
-            "design.paths.light": "{semantic.color.foreground.warning}",
-            "design.paths.dark": "{semantic.color.foreground.warning}"
+            "design.paths.light": "{color.foreground.warning}",
+            "design.paths.dark": "{color.foreground.warning}"
           },
           "$description": "Property color in syntax highlighting"
         },
         "tag": {
           "$type": "color",
-          "$value": "{semantic.color.foreground.danger}",
+          "$value": "{color.foreground.danger}",
           "$extensions": {
-            "design.paths.light": "{semantic.color.foreground.danger}",
-            "design.paths.dark": "{semantic.color.foreground.danger}"
+            "design.paths.light": "{color.foreground.danger}",
+            "design.paths.dark": "{color.foreground.danger}"
           },
           "$description": "Tag color in syntax highlighting"
         },
         "static": {
           "$type": "color",
-          "$value": "{semantic.color.foreground.accent}",
+          "$value": "{color.foreground.accent}",
           "$extensions": {
-            "design.paths.light": "{semantic.color.foreground.accent}",
-            "design.paths.dark": "{semantic.color.foreground.accent}"
+            "design.paths.light": "{color.foreground.accent}",
+            "design.paths.dark": "{color.foreground.accent}"
           },
           "$description": "Static color in syntax highlighting"
         },
         "string": {
           "$type": "color",
-          "$value": "{semantic.color.foreground.highlight}",
+          "$value": "{color.foreground.highlight}",
           "$extensions": {
-            "design.paths.light": "{semantic.color.foreground.highlight}",
-            "design.paths.dark": "{semantic.color.foreground.highlight}"
+            "design.paths.light": "{color.foreground.highlight}",
+            "design.paths.dark": "{color.foreground.highlight}"
           },
           "$description": "String color in syntax highlighting"
         }
@@ -379,10 +379,10 @@
       },
       "onColor": {
         "$type": "color",
-        "$value": "{semantic.color.background.primary}",
+        "$value": "{color.background.primary}",
         "$extensions": {
-          "design.paths.light": "{semantic.color.background.primary}",
-          "design.paths.dark": "{semantic.color.background.primary}"
+          "design.paths.light": "{color.background.primary}",
+          "design.paths.dark": "{color.background.primary}"
         },
         "$description": "Background color for elements on colored backgrounds"
       },
