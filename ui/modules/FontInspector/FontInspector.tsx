@@ -132,6 +132,9 @@ export const InspectorProvider: React.FC<{
     rsbStroke: '',
     rsbFill: '',
     highlightBackground: '',
+    glyphBackground: '',
+    featureHighlightFill: '',
+    featureHighlightStroke: '',
   });
   const [selectedAnatomy, setSelectedAnatomy] = useState<
     Map<string, AnatomyFeature>
@@ -578,8 +581,20 @@ export const InspectorProvider: React.FC<{
           backgroundPrimary
         ),
         highlightBackground: getPropertyValue(
-          '--semantic-color-background-highlight',
-          isDark ? '#7b0000' : '#f7c1c2'
+          '--semantic-color-foreground-warning',
+          isDark ? '#f59e0b' : '#d97706'
+        ),
+        glyphBackground: getPropertyValue(
+          '--semantic-color-background-secondary',
+          isDark ? '#1a1a1a' : '#f5f5f5'
+        ),
+        featureHighlightFill: getPropertyValue(
+          '--semantic-color-background-danger-subtle',
+          isDark ? '#4b0000' : '#fceaea'
+        ),
+        featureHighlightStroke: getPropertyValue(
+          '--semantic-color-foreground-danger',
+          isDark ? '#ea6465' : '#d9292b'
         ),
       });
     };
@@ -708,21 +723,54 @@ export const InspectorProvider: React.FC<{
 
   // Run detection for selected features (filtered by glyph availability)
   const detectedFeatures = useMemo((): Map<FeatureID, FeatureInstance[]> => {
+    console.log('[FontInspector] detectedFeatures memo:', {
+      hasGeometryCache: !!geometryCache,
+      showDetails,
+      filteredSelectedFeatureIds,
+      selectedFeatureIds,
+      availableFeatureIds,
+      selectedAnatomy: Array.from(selectedAnatomy.entries()),
+    });
+
     if (
       !geometryCache ||
       !showDetails ||
       filteredSelectedFeatureIds.length === 0
     ) {
+      console.log('[FontInspector] Returning empty map due to:', {
+        noCache: !geometryCache,
+        noDetails: !showDetails,
+        noFeatures: filteredSelectedFeatureIds.length === 0,
+      });
       return new Map();
     }
 
     try {
-      return detectGlyphFeatures(geometryCache, filteredSelectedFeatureIds);
+      const result = detectGlyphFeatures(
+        geometryCache,
+        filteredSelectedFeatureIds
+      );
+      console.log('[FontInspector] Detection result:', {
+        size: result.size,
+        features: Array.from(result.entries()).map(([id, instances]) => ({
+          id,
+          count: instances.length,
+          instances,
+        })),
+      });
+      return result;
     } catch (error) {
       console.warn('[FontInspector] Error detecting features:', error);
       return new Map();
     }
-  }, [geometryCache, showDetails, filteredSelectedFeatureIds]);
+  }, [
+    geometryCache,
+    showDetails,
+    filteredSelectedFeatureIds,
+    selectedFeatureIds,
+    availableFeatureIds,
+    selectedAnatomy,
+  ]);
 
   const contextValue = useMemo(
     (): InspectorContextType => ({
