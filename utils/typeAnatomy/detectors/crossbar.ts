@@ -158,6 +158,49 @@ export function detectCrossbar(geo: GeometryCache): FeatureInstance[] {
     }
   }
 
+  // Filter to return only the best crossbar candidate(s)
+  // Most letters have only one crossbar (A, H, e, f, t)
+  // Letters like E, F might have multiple bars, but they're at different Y positions
+  if (instances.length > 1) {
+    // Sort by confidence (descending) then by proximity to the mid-height
+    const midY = metrics.baseline + (metrics.capHeight - metrics.baseline) * 0.5;
+
+    instances.sort((a, b) => {
+      // Primary sort: confidence
+      if (b.confidence !== a.confidence) {
+        return b.confidence - a.confidence;
+      }
+      // Secondary sort: proximity to mid-height
+      const aY = a.shape.type === 'line' ? a.shape.y1 : 0;
+      const bY = b.shape.type === 'line' ? b.shape.y1 : 0;
+      return Math.abs(aY - midY) - Math.abs(bY - midY);
+    });
+
+    // Keep only the highest confidence instance
+    // If there are multiple with same high confidence, they're likely overlapping
+    const topConfidence = instances[0].confidence;
+    const filtered = instances.filter(
+      (inst) => inst.confidence >= topConfidence - 0.05
+    );
+
+    // If multiple remain, merge overlapping ones or just keep the best
+    if (filtered.length > 1) {
+      // Check if they're at similar Y positions (overlapping detections)
+      const tolerance = bboxH * 0.1;
+      const firstY =
+        filtered[0].shape.type === 'line' ? filtered[0].shape.y1 : 0;
+      const overlapping = filtered.filter((inst) => {
+        const y = inst.shape.type === 'line' ? inst.shape.y1 : 0;
+        return Math.abs(y - firstY) < tolerance;
+      });
+
+      // Return only the first (best) of overlapping ones
+      return overlapping.length > 0 ? [overlapping[0]] : [filtered[0]];
+    }
+
+    return filtered;
+  }
+
   return instances;
 }
 
