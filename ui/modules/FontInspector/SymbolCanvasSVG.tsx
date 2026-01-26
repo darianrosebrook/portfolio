@@ -21,7 +21,9 @@ import {
 import { SVGDefs } from '@/utils/geometry/svgDefs';
 import { featureHighlightToPath } from '@/utils/geometry/svgPathBuilder';
 import { createViewportTransform } from '@/utils/geometry/transforms';
-import type { FeatureShape, Metrics } from '@/utils/typeAnatomy';
+import type { UnifiedFeatureShape, Metrics } from '@/utils/typeAnatomy';
+// Use UnifiedFeatureShape which includes 'line' type
+type FeatureShape = UnifiedFeatureShape;
 import { detectFeature } from '@/utils/typeAnatomy/detector';
 import { extractFeatureSegments } from '@/utils/typeAnatomy/featureHighlight';
 import React, {
@@ -300,85 +302,85 @@ export const SymbolCanvasSVG: React.FC = () => {
 
         // Anatomy feature highlights
         if (showDetails) {
-          // Try masked geometry highlight first (clipped glyph path)
-          const clipBoundary = getFeatureClipBoundary(
-            featureName,
-            glyph,
-            fontMetrics
-          );
-
-          if (clipBoundary && glyphPathData && clipBoundary.y !== undefined) {
-            const clipPathId = `clip-${featureName.replace(/\s+/g, '-')}`;
-            const clipY = metrics.baseline - clipBoundary.y * metrics.scale;
-
-            elements.push(
-              <defs key={`defs-${featureName}`}>
-                <clipPath id={clipPathId}>
-                  <rect
-                    x="-1000"
-                    y={clipBoundary.keepAbove ? -1000 : clipY}
-                    width="2000"
-                    height={clipBoundary.keepAbove ? clipY + 1000 : 1000}
-                  />
-                </clipPath>
-              </defs>
-            );
-
-            elements.push(
-              <path
-                key={`highlight-${featureName}`}
-                d={glyphPathData}
-                transform={viewportTransform.toSVGTransform()}
-                fill={colors.highlightBackground}
-                clipPath={`url(#${clipPathId})`}
-                opacity={1.0}
-                aria-label={`${feature.label} highlight`}
-                aria-hidden={!feature.selected}
-              />
-            );
-          } else {
-            // Fallback to segment-based highlighting
-            const highlight = extractFeatureSegments(
-              featureName,
-              glyph,
-              fontMetrics,
-              fontInstance
-            );
-
-            if (highlight && highlight.segments.length > 0) {
-              // featureHighlightToPath outputs in font coordinates (no scale/Y inversion)
-              // The transform handles all coordinate conversion
-              const pathData = featureHighlightToPath(highlight, 1); // Scale of 1 = font coords
-              if (pathData) {
-                elements.push(
-                  <path
-                    key={`highlight-${featureName}`}
-                    d={pathData}
-                    transform={viewportTransform.toSVGTransform()}
-                    fill="none"
-                    stroke={colors.highlightBackground}
-                    strokeWidth={6 * metrics.scale}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    opacity={0.4}
-                    aria-label={`${feature.label} highlight`}
-                    aria-hidden={!feature.selected}
-                  />
-                );
-              }
-            }
-          }
-
-          // Draw shape-based features
+          // Priority 1: If we have a precise shape from detection, use it directly
           if (result.shape) {
             elements.push(
-              <FeatureShape
+              <FeatureShapeRenderer
                 key={`shape-${featureName}`}
                 shape={result.shape}
                 scale={metrics.scale}
                 colors={colors}
               />
             );
+          } else {
+            // Priority 2: Try masked geometry highlight (clipped glyph path)
+            const clipBoundary = getFeatureClipBoundary(
+              featureName,
+              glyph,
+              fontMetrics
+            );
+
+            if (clipBoundary && glyphPathData && clipBoundary.y !== undefined) {
+              const clipPathId = `clip-${featureName.replace(/\s+/g, '-')}`;
+              const clipY = metrics.baseline - clipBoundary.y * metrics.scale;
+
+              elements.push(
+                <defs key={`defs-${featureName}`}>
+                  <clipPath id={clipPathId}>
+                    <rect
+                      x="-1000"
+                      y={clipBoundary.keepAbove ? -1000 : clipY}
+                      width="2000"
+                      height={clipBoundary.keepAbove ? clipY + 1000 : 1000}
+                    />
+                  </clipPath>
+                </defs>
+              );
+
+              elements.push(
+                <path
+                  key={`highlight-${featureName}`}
+                  d={glyphPathData}
+                  transform={viewportTransform.toSVGTransform()}
+                  fill={colors.highlightBackground}
+                  clipPath={`url(#${clipPathId})`}
+                  opacity={0.5}
+                  aria-label={`${feature.label} highlight`}
+                  aria-hidden={!feature.selected}
+                />
+              );
+            } else {
+              // Priority 3: Fallback to segment-based highlighting
+              const highlight = extractFeatureSegments(
+                featureName,
+                glyph,
+                fontMetrics,
+                fontInstance
+              );
+
+              if (highlight && highlight.segments.length > 0) {
+                // featureHighlightToPath outputs in font coordinates (no scale/Y inversion)
+                // The transform handles all coordinate conversion
+                const pathData = featureHighlightToPath(highlight, 1); // Scale of 1 = font coords
+                if (pathData) {
+                  elements.push(
+                    <path
+                      key={`highlight-${featureName}`}
+                      d={pathData}
+                      transform={viewportTransform.toSVGTransform()}
+                      fill="none"
+                      stroke={colors.highlightBackground}
+                      strokeWidth={6 * metrics.scale}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      opacity={0.6}
+                      aria-label={`${feature.label} highlight`}
+                      aria-hidden={!feature.selected}
+                    />
+                  );
+                }
+              }
+            }
           }
         } else {
           // Simple markers when not showing details
@@ -735,9 +737,18 @@ export const SymbolCanvasSVG: React.FC = () => {
         {/* SVG Definitions */}
         <SVGDefs idPrefix="fi" />
 
-        {/* Layer 1: Background (checker pattern) */}
+        {/* Layer 1: Background */}
         <g id="bg" aria-hidden="true">
-          {/* Background is handled by SVGGlyphBounds */}
+          {/* Secondary background when showing details */}
+          {showDetails && (
+            <rect
+              x={0}
+              y={0}
+              width={metrics.width}
+              height={metrics.height}
+              fill={colors.glyphBackground}
+            />
+          )}
         </g>
 
         {/* Layer 2: Side bearings */}
@@ -993,16 +1004,16 @@ export const SymbolCanvasSVG: React.FC = () => {
 };
 
 /**
- * Renders a feature shape (circle, polyline, or path) as SVG elements.
+ * Renders a feature shape (circle, polyline, path, line, etc.) as SVG elements.
  */
-function FeatureShape({
+function FeatureShapeRenderer({
   shape,
   scale,
   colors,
 }: {
   shape: FeatureShape;
   scale: number;
-  colors: { anchorFill: string; anchorStroke: string };
+  colors: { anchorFill: string; anchorStroke: string; highlightBackground?: string };
 }) {
   switch (shape.type) {
     case 'circle':
@@ -1039,6 +1050,47 @@ function FeatureShape({
           d={shape.d}
           fill={colors.anchorFill}
           fillOpacity={0.2}
+          stroke={colors.anchorStroke}
+          strokeWidth={2}
+        />
+      );
+
+    case 'line':
+      // Line shape for features like crossbar
+      return (
+        <line
+          x1={shape.x1 * scale}
+          y1={-shape.y1 * scale}
+          x2={shape.x2 * scale}
+          y2={-shape.y2 * scale}
+          stroke={colors.highlightBackground || colors.anchorStroke}
+          strokeWidth={4}
+          strokeLinecap="round"
+          opacity={0.7}
+        />
+      );
+
+    case 'rect':
+      return (
+        <rect
+          x={shape.x * scale}
+          y={-shape.y * scale - shape.height * scale}
+          width={shape.width * scale}
+          height={shape.height * scale}
+          fill={colors.anchorFill}
+          fillOpacity={0.2}
+          stroke={colors.anchorStroke}
+          strokeWidth={2}
+        />
+      );
+
+    case 'point':
+      return (
+        <circle
+          cx={shape.x * scale}
+          cy={-shape.y * scale}
+          r={4}
+          fill={colors.anchorFill}
           stroke={colors.anchorStroke}
           strokeWidth={2}
         />

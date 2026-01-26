@@ -15,12 +15,15 @@ import { hasBracket } from './bracket';
 import { getCounter } from './counter';
 import { hasCrossStroke } from './crossStroke';
 import { hasCrotch } from './crotch';
+import { detectCrossbar } from './detectors/crossbar';
 import { hasEar } from './ear';
 import { hasEye } from './eye';
 import { hasFinial } from './finial';
 import { hasFoot } from './foot';
 import { hasHook } from './hook';
-import type { FeatureResult, FeatureShape, Metrics } from './index';
+import type { FeatureResult, Metrics, UnifiedFeatureShape } from './index';
+// Use UnifiedFeatureShape which includes 'line' type
+type FeatureShape = UnifiedFeatureShape;
 import { hasLeg } from './leg';
 import { hasLink } from './link';
 import { hasLoop } from './loop';
@@ -33,6 +36,7 @@ import { hasStem } from './stem';
 import { hasTail } from './tail';
 import { getTerminal } from './terminal';
 import { getTittle } from './tittle';
+import { buildGeometryCache } from './geometryCache';
 import { hasVertex } from './vertex';
 
 export interface DetectionResult {
@@ -46,6 +50,58 @@ export type FeatureDetector = (
   metrics: Metrics,
   font?: Font
 ) => DetectionResult | boolean;
+
+/**
+ * Helper function to get crossbar detection with proper shape data.
+ * Uses the new detectCrossbar from detectors/crossbar.ts which returns
+ * FeatureInstance[] with line shapes.
+ */
+function getCrossbar(g: Glyph, m: Metrics, font?: Font): DetectionResult {
+  // Need font to build geometry cache
+  if (!font) {
+    return { found: hasBar(g, m) };
+  }
+
+  try {
+    // Build geometry cache required by new detector
+    const geo = buildGeometryCache(g, font);
+
+    // Run the new detector
+    const instances = detectCrossbar(geo);
+
+    if (instances.length === 0) {
+      return { found: false };
+    }
+
+    // Get the highest confidence instance
+    const best = instances.reduce((a, b) =>
+      b.confidence > a.confidence ? b : a
+    );
+
+    // Convert FeatureInstance shape to FeatureShape format
+    if (best.shape && best.shape.type === 'line') {
+      return {
+        found: true,
+        shape: {
+          type: 'line',
+          x1: best.shape.x1,
+          y1: best.shape.y1,
+          x2: best.shape.x2,
+          y2: best.shape.y2,
+        },
+        location: {
+          x: (best.shape.x1 + best.shape.x2) / 2,
+          y: best.shape.y1,
+        },
+      };
+    }
+
+    return { found: true };
+  } catch (error) {
+    console.warn('[getCrossbar] Error:', error);
+    return { found: hasBar(g, m) }; // Fallback to simple detection
+  }
+}
 
 /**
  * Maps feature names to their detection functions.
@@ -62,7 +118,7 @@ const featureDetectors: Map<string, FeatureDetector> = new Map([
   ['Bracket', (g, m) => ({ found: hasBracket(g, m) })],
   ['Counter', (g, m) => getCounter(g, m)],
   ['Cross stroke', (g, m) => ({ found: hasCrossStroke(g, m) })],
-  ['Crossbar', (g, m) => ({ found: hasBar(g, m) })], // Crossbar maps to Bar
+  ['Crossbar', (g, m, font) => getCrossbar(g, m, font)], // Uses new detector with shapes
   ['Crotch', (g, m) => ({ found: hasCrotch(g, m) })],
   ['Ear', (g, m) => ({ found: hasEar(g, m) })],
   ['Eye', (g, m) => ({ found: hasEye(g, m) })],

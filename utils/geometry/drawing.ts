@@ -22,6 +22,12 @@ export interface DrawColors {
   labelFill: string;
   labelStroke: string;
   highlightBackground: string;
+  /** Background color for the glyph canvas area */
+  glyphBackground: string;
+  /** Fill color for feature highlights (danger/red tone) */
+  featureHighlightFill: string;
+  /** Stroke color for feature highlights */
+  featureHighlightStroke: string;
 }
 
 export function drawMetricLine(
@@ -602,11 +608,11 @@ function drawCircleShape(
   ctx.save();
   ctx.beginPath();
   ctx.arc(shape.cx, shape.cy, shape.r, 0, Math.PI * 2);
-  ctx.fillStyle = colors.highlightBackground;
-  ctx.globalAlpha = 0.4;
+  ctx.fillStyle = colors.featureHighlightFill || colors.highlightBackground;
+  ctx.globalAlpha = 0.6;
   ctx.fill();
   ctx.globalAlpha = 1;
-  ctx.strokeStyle = colors.boundsStroke;
+  ctx.strokeStyle = colors.featureHighlightStroke || colors.boundsStroke;
   ctx.lineWidth = 2;
   ctx.stroke();
   ctx.restore();
@@ -622,44 +628,79 @@ function drawPointShape(
 ): void {
   ctx.save();
   ctx.beginPath();
-  ctx.arc(shape.x, shape.y, 5, 0, Math.PI * 2);
-  ctx.fillStyle = colors.boundsStroke;
+  ctx.arc(shape.x, shape.y, 6, 0, Math.PI * 2);
+  ctx.fillStyle = colors.featureHighlightFill || colors.highlightBackground;
+  ctx.globalAlpha = 0.6;
   ctx.fill();
+  ctx.globalAlpha = 1;
+  ctx.strokeStyle = colors.featureHighlightStroke || colors.boundsStroke;
+  ctx.lineWidth = 2;
+  ctx.stroke();
 
   if (shape.label) {
     ctx.font = '11px sans-serif';
     ctx.fillStyle = colors.labelFill;
     ctx.textAlign = 'left';
     ctx.textBaseline = 'middle';
-    ctx.fillText(shape.label, shape.x + 8, shape.y);
+    ctx.fillText(shape.label, shape.x + 10, shape.y);
   }
   ctx.restore();
 }
 
 /**
- * Draws a line shape.
+ * Draws a line shape as a filled rectangle with thickness.
+ * This creates a closed shape that can be properly filled.
  */
 function drawLineShape(
   ctx: CanvasRenderingContext2D,
   shape: Extract<FeatureShape, { type: 'line' }>,
-  colors: DrawColors
+  colors: DrawColors,
+  thickness: number = 8
 ): void {
   ctx.save();
+
+  // Calculate the line direction and perpendicular
+  const dx = shape.x2 - shape.x1;
+  const dy = shape.y2 - shape.y1;
+  const length = Math.sqrt(dx * dx + dy * dy);
+
+  if (length === 0) {
+    ctx.restore();
+    return;
+  }
+
+  // Normalized perpendicular vector
+  const perpX = (-dy / length) * (thickness / 2);
+  const perpY = (dx / length) * (thickness / 2);
+
+  // Draw filled rectangle representing the line with thickness
   ctx.beginPath();
-  ctx.moveTo(shape.x1, shape.y1);
-  ctx.lineTo(shape.x2, shape.y2);
-  ctx.strokeStyle = colors.boundsStroke;
+  ctx.moveTo(shape.x1 + perpX, shape.y1 + perpY);
+  ctx.lineTo(shape.x2 + perpX, shape.y2 + perpY);
+  ctx.lineTo(shape.x2 - perpX, shape.y2 - perpY);
+  ctx.lineTo(shape.x1 - perpX, shape.y1 - perpY);
+  ctx.closePath();
+
+  // Fill with feature highlight color
+  ctx.fillStyle = colors.featureHighlightFill || colors.highlightBackground;
+  ctx.globalAlpha = 0.6;
+  ctx.fill();
+  ctx.globalAlpha = 1;
+
+  // Stroke the outline
+  ctx.strokeStyle = colors.featureHighlightStroke || colors.boundsStroke;
   ctx.lineWidth = 2;
   ctx.stroke();
 
-  // Draw endpoints
+  // Draw endpoints as circles
   ctx.beginPath();
-  ctx.arc(shape.x1, shape.y1, 3, 0, Math.PI * 2);
-  ctx.fillStyle = colors.boundsStroke;
+  ctx.arc(shape.x1, shape.y1, 4, 0, Math.PI * 2);
+  ctx.fillStyle = colors.featureHighlightStroke || colors.boundsStroke;
   ctx.fill();
   ctx.beginPath();
-  ctx.arc(shape.x2, shape.y2, 3, 0, Math.PI * 2);
+  ctx.arc(shape.x2, shape.y2, 4, 0, Math.PI * 2);
   ctx.fill();
+
   ctx.restore();
 }
 
@@ -672,11 +713,11 @@ function drawRectShape(
   colors: DrawColors
 ): void {
   ctx.save();
-  ctx.fillStyle = colors.highlightBackground;
-  ctx.globalAlpha = 0.3;
+  ctx.fillStyle = colors.featureHighlightFill || colors.highlightBackground;
+  ctx.globalAlpha = 0.6;
   ctx.fillRect(shape.x, shape.y, shape.width, shape.height);
   ctx.globalAlpha = 1;
-  ctx.strokeStyle = colors.boundsStroke;
+  ctx.strokeStyle = colors.featureHighlightStroke || colors.boundsStroke;
   ctx.lineWidth = 2;
   ctx.strokeRect(shape.x, shape.y, shape.width, shape.height);
   ctx.restore();
@@ -703,11 +744,11 @@ function drawPolylineShape(
   // Close the path
   ctx.closePath();
 
-  ctx.fillStyle = colors.highlightBackground;
-  ctx.globalAlpha = 0.4;
+  ctx.fillStyle = colors.featureHighlightFill || colors.highlightBackground;
+  ctx.globalAlpha = 0.6;
   ctx.fill();
   ctx.globalAlpha = 1;
-  ctx.strokeStyle = colors.boundsStroke;
+  ctx.strokeStyle = colors.featureHighlightStroke || colors.boundsStroke;
   ctx.lineWidth = 2;
   ctx.stroke();
   ctx.restore();
@@ -723,11 +764,11 @@ function drawPathShape(
 ): void {
   ctx.save();
   const path = new Path2D(shape.d);
-  ctx.fillStyle = colors.highlightBackground;
-  ctx.globalAlpha = 0.4;
+  ctx.fillStyle = colors.featureHighlightFill || colors.highlightBackground;
+  ctx.globalAlpha = 0.6;
   ctx.fill(path);
   ctx.globalAlpha = 1;
-  ctx.strokeStyle = colors.boundsStroke;
+  ctx.strokeStyle = colors.featureHighlightStroke || colors.boundsStroke;
   ctx.lineWidth = 2;
   ctx.stroke(path);
   ctx.restore();
