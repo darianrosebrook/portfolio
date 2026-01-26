@@ -214,12 +214,18 @@ export const SymbolCanvas: React.FC = () => {
     ctx.scale(pixelRatio.current, pixelRatio.current);
     ctx.clearRect(0, 0, w, h);
 
+    // Draw secondary background when features are detected
+    if (showDetails && detectedFeatures.size > 0 && colors.glyphBackground) {
+      ctx.fillStyle = colors.glyphBackground;
+      ctx.fillRect(0, 0, w, h);
+    }
+
     if (fontInstance && glyph) {
       drawGlyph(ctx, w, h);
     } else {
       console.warn('No font or glyph');
     }
-  }, [glyph, fontInstance, drawGlyph]);
+  }, [glyph, fontInstance, drawGlyph, showDetails, detectedFeatures, colors.glyphBackground]);
 
   const scheduleDraw = useCallback(() => {
     if (!drawScheduled.current) {

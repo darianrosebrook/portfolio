@@ -564,9 +564,20 @@ export function classifyContours(
   for (let i = 0; i < segments.length; i++) {
     const seg = segments[i];
 
-    // Collect points for area calculation
-    if (seg.type !== 'closePath' && seg.params.length > 0) {
-      currentContourPoints.push(...seg.params);
+    // Collect only the endpoint of each segment for area/bbox calculation
+    // This avoids including Bezier control points which can extend bbox incorrectly
+    if (seg.type === 'moveTo' && seg.params.length > 0) {
+      // Start of a new sub-path - add the starting point
+      currentContourPoints.push(seg.params[0]);
+    } else if (seg.type === 'lineTo' && seg.params.length >= 2) {
+      // For lines, params[1] is the endpoint
+      currentContourPoints.push(seg.params[1]);
+    } else if (seg.type === 'quadraticCurveTo' && seg.params.length >= 3) {
+      // For quadratic curves, params[2] is the endpoint
+      currentContourPoints.push(seg.params[2]);
+    } else if (seg.type === 'bezierCurveTo' && seg.params.length >= 4) {
+      // For cubic curves, params[3] is the endpoint
+      currentContourPoints.push(seg.params[3]);
     }
 
     // End of contour
