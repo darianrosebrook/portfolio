@@ -1,0 +1,1856 @@
+/**
+ * Comprehensive UI Showcase Styles
+ * Full-bleed masonry grid layout inspired by Radix Themes live examples
+ */
+
+.showcase {
+  // position: absolute;
+  display: flex;
+  grid-template-columns: repeat(auto-fill, minmax(40px, 4fr));
+  grid-auto-rows: max-content;
+  gap: var(--semantic-spacing-gap-grid);
+  width: auto;
+  flex-wrap: wrap;
+  max-width: 1920px;
+  align-items: start;
+  z-index: 0; 
+  // top: -50vh;
+  // right: -35vw;
+
+  /* Fallback for browsers without masonry support */
+  @supports not (grid-template-rows: masonry) {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  }
+
+  /* Modern browsers with masonry support */
+  @supports (grid-template-rows: masonry) {
+    grid-template-rows: masonry;
+  }
+
+  @media (width <= 768px) {
+    grid-template-columns: 1fr;
+    gap: var(--semantic-spacing-gap-grid);
+  }
+}
+
+/* Hero Section - Spans full width in masonry */
+.heroSection {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--semantic-spacing-gap-grid);
+  width: 100%;
+}
+
+.heroCard {
+  display: flex;
+  flex-direction: column;
+  background: var(--semantic-color-background-primary);
+  border-radius: var(--semantic-shape-card-radius, 12px);
+  overflow: hidden;
+  border: 1px solid var(--semantic-color-border-default);
+  height: fit-content;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px hsl(from var(--semantic-color-foreground-primary) h s l / 8%);
+  }
+}
+
+.cardImage {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  background: var(--semantic-color-background-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imagePlaceholder {
+  color: var(--semantic-color-foreground-tertiary);
+}
+
+.cardContent {
+  padding: var(--semantic-spacing-padding-card);
+  display: flex;
+  flex-direction: column;
+  gap: var(--semantic-spacing-gap-component);
+
+  h3 {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--semantic-color-foreground-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  h4 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--semantic-color-foreground-primary);
+  }
+
+  p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--semantic-color-foreground-secondary);
+    line-height: 1.5;
+  }
+}
+
+.price {
+  font-size: 24px !important;
+  font-weight: 700 !important;
+  color: var(--semantic-color-foreground-primary) !important;
+}
+
+.description {
+  font-size: 13px !important;
+  line-height: 1.6 !important;
+}
+
+.cardActions {
+  display: flex;
+  gap: var(--semantic-spacing-gap-component);
+  margin-top: var(--semantic-spacing-margin-component);
+  flex-wrap: wrap;
+}
+
+.cardButton {
+  padding: var(--semantic-spacing-padding-component) var(--semantic-spacing-padding-card);
+  background: var(--semantic-color-background-secondary);
+  border: 1px solid var(--semantic-color-border-default);
+  border-radius: var(--semantic-shape-button-radius, 8px);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--semantic-color-foreground-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: var(--semantic-color-background-tertiary);
+  }
+}
+
+.select {
+  padding: var(--semantic-spacing-padding-component) var(--semantic-spacing-padding-component);
+  background: var(--semantic-color-background-secondary);
+  border: 1px solid var(--semantic-color-border-default);
+  border-radius: var(--semantic-shape-control-radius-default, 6px);
+  font-size: 14px;
+  color: var(--semantic-color-foreground-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: var(--semantic-color-border-hover);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--semantic-color-border-focus);
+    box-shadow: 0 0 0 2px var(--semantic-color-background-accent);
+  }
+}
+
+.primaryButton {
+  padding: var(--semantic-spacing-padding-component) var(--semantic-spacing-padding-card);
+  background: var(--semantic-color-background-accent);
+  border: none;
+  border-radius: var(--semantic-shape-button-radius, 8px);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--semantic-color-foreground-inverse);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    filter: brightness(1.1);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+/* Forms Section - Individual cards in masonry */
+.formsSection {
+  display: contents;
+}
+
+.formCard {
+  background: var(--semantic-color-background-primary);
+  border: 1px solid var(--semantic-color-border-default);
+  border-radius: var(--core-shape-radius-03);
+  padding: var(--semantic-spacing-padding-section);
+  height: fit-content;
+
+  h3 {
+    margin: 0 0 var(--semantic-spacing-margin-section);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--semantic-color-foreground-primary);
+  }
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--semantic-spacing-gap-grid);
+  margin-bottom: var(--semantic-spacing-margin-component);
+}
+
+.formRow {
+  display: flex;
+  gap: var(--semantic-spacing-gap-grid);
+  margin-bottom: var(--semantic-spacing-margin-component);
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--semantic-spacing-gap-gridSmall);
+  flex: 1;
+
+  label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--semantic-color-foreground-secondary);
+  }
+}
+
+.input {
+  padding: var(--semantic-spacing-padding-component) var(--semantic-spacing-padding-component);
+  background: var(--semantic-color-background-secondary);
+  border: 1px solid var(--semantic-color-border-default);
+  border-radius: var(--semantic-shape-control-radius-default, 6px);
+  font-size: 14px;
+  color: var(--semantic-color-foreground-primary);
+  transition: all 0.2s ease;
+
+  &:focus {
+    outline: none;
+    border-color: var(--semantic-color-border-focus);
+    box-shadow: 0 0 0 2px var(--semantic-color-background-accent);
+  }
+}
+
+.mediaGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: var(--semantic-spacing-gap-component);
+}
+
+.mediaItem {
+  aspect-ratio: 1;
+  background: var(--semantic-color-background-secondary);
+  border: 1px solid var(--semantic-color-border-default);
+  border-radius: var(--semantic-shape-element-radius, 8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--semantic-color-foreground-tertiary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: var(--semantic-color-border-hover);
+  }
+}
+
+.textEditor {
+  border: 1px solid var(--semantic-color-border-default);
+  border-radius: var(--semantic-shape-control-radius-default, 6px);
+  overflow: hidden;
+}
+
+.editorToolbar {
+  display: flex;
+  gap: var(--semantic-spacing-gap-gridSmall);
+  padding: var(--semantic-spacing-padding-component);
+  background: var(--semantic-color-background-secondary);
+  border-bottom: 1px solid var(--semantic-color-border-default);
+}
+
+.toolButton {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  color: var(--semantic-color-foreground-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: var(--semantic-color-background-tertiary);
+  }
+}
+
+.textarea {
+  width: 100%;
+  padding: var(--semantic-spacing-padding-component);
+  background: var(--semantic-color-background-primary);
+  border: none;
+  font-size: 14px;
+  color: var(--semantic-color-foreground-primary);
+  font-family: inherit;
+  resize: vertical;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.chipGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--semantic-spacing-gap-component);
+}
+
+.chip {
+  padding: var(--semantic-spacing-padding-component) var(--semantic-spacing-padding-component);
+  background: var(--semantic-color-background-secondary);
+  border: 1px solid var(--semantic-color-border-default);
+  border-radius: var(--semantic-shape-badge-radius, 16px);
+  font-size: 13px;
+  color: var(--semantic-color-foreground-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: var(--semantic-color-border-hover);
+  }
+
+  &.chipActive {
+    background: var(--semantic-color-background-accent);
+    border-color: var(--semantic-color-background-accent);
+    color: var(--semantic-color-foreground-inverse);
+  }
+}
+
+.colorGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(32px, 1fr));
+  gap: var(--semantic-spacing-gap-component);
+}
+
+.colorSwatch {
+  width: 32px;
+  height: 32px;
+  border: 2px solid var(--semantic-color-border-default);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &.white { background: #ffffff; }
+  &.gray { background: #9ca3af; }
+  &.black { background: #1f2937; }
+  &.red { background: #ef4444; }
+  &.pink { background: #ec4899; }
+  &.violet { background: #8b5cf6; }
+  &.blue { background: #3b82f6; }
+  &.green { background: #10b981; }
+  &.beige { background: #d4b896; }
+}
+
+.sizeGrid {
+  display: flex;
+  gap: var(--semantic-spacing-gap-component);
+  flex-wrap: wrap;
+}
+
+.sizeButton {
+  padding: var(--semantic-spacing-padding-component) var(--semantic-spacing-padding-card);
+  background: var(--semantic-color-background-secondary);
+  border: 1px solid var(--semantic-color-border-default);
+  border-radius: var(--semantic-shape-control-radius-default, 6px);
+  font-size: 14px;
+  color: var(--semantic-color-foreground-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: var(--semantic-color-border-hover);
+  }
+}
+
+/* Size Card */
+.sizeCard {
+  background: var(--semantic-color-background-primary);
+  border: 1px solid var(--semantic-color-border-default);
+  border-radius: var(--semantic-shape-card-radius, 12px);
+  padding: var(--semantic-spacing-padding-section);
+  height: fit-content;
+
+  h4 {
+    margin: 0 0 var(--semantic-spacing-margin-component);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--semantic-color-foreground-primary);
+  }
+}
+
+.sizeSelector {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--semantic-spacing-gap-component);
+  margin-bottom: var(--semantic-spacing-margin-section);
+}
+
+.sizeOption {
+  padding: var(--semantic-spacing-padding-component);
+  background: var(--semantic-color-background-secondary);
+  border: 1px solid var(--semantic-color-border-default);
+  border-radius: var(--semantic-shape-control-radius-default, 6px);
+  font-size: 14px;
+  color: var(--semantic-color-foreground-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: var(--semantic-color-border-hover);
+  }
+
+  &.active {
+    background: var(--semantic-color-background-accent);
+    border-color: var(--semantic-color-background-accent);
+    color: var(--semantic-color-foreground-inverse);
+  }
+}
+
+.materialSelector {
+  display: flex;
+  gap: var(--semantic-spacing-gap-component);
+  flex-wrap: wrap;
+  margin-bottom: var(--semantic-spacing-margin-section);
+}
+
+.materialButton {
+  padding: var(--semantic-spacing-padding-component) var(--semantic-spacing-padding-card);
+  background: var(--semantic-color-background-secondary);
+  border: 1px solid var(--semantic-color-border-default);
+  border-radius: var(--semantic-shape-control-radius-default, 6px);
+  font-size: 14px;
+  color: var(--semantic-color-foreground-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: var(--semantic-color-border-hover);
+  }
+}
+
+.colorSelector {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--semantic-spacing-gap-component);
+}
+
+.colorButton {
+  padding: var(--semantic-spacing-padding-component) var(--semantic-spacing-padding-component);
+  background: var(--semantic-color-background-secondary);
+  border: 1px solid var(--semantic-color-border-default);
+  border-radius: var(--semantic-shape-control-radius-default, 6px);
+  font-size: 13px;
+  color: var(--semantic-color-foreground-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+
+  &:hover {
+    border-color: var(--semantic-color-border-hover);
+  }
+
+  &.white { border-left: 3px solid #ffffff; }
+  &.gray { border-left: 3px solid #9ca3af; }
+  &.black { border-left: 3px solid #1f2937; }
+  &.red { border-left: 3px solid #ef4444; }
+  &.pink { border-left: 3px solid #ec4899; }
+  &.violet { border-left: 3px solid #8b5cf6; }
+  &.blue { border-left: 3px solid #3b82f6; }
+  &.green { border-left: 3px solid #10b981; }
+  &.beige { border-left: 3px solid #d4b896; }
+}
+
+/* Data Section - Individual cards in masonry */
+.dataSection {
+  display: contents;
+}
+
+.ordersTable {
+  background: var(--semantic-color-background-primary);
+  border: 1px solid var(--semantic-color-border-default);
+  border-radius: var(--semantic-shape-card-radius, 12px);
+  padding: var(--semantic-spacing-padding-section);
+  height: fit-content;
+}
+
+.tableHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--semantic-spacing-margin-component);
+
+  h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--semantic-color-foreground-primary);
+  }
+}
+
+.dateLabel {
+  font-size: 13px;
+  color: var(--semantic-color-foreground-secondary);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+
+  th,
+  td {
+    padding: var(--semantic-spacing-padding-component) var(--semantic-spacing-padding-component);
+    text-align: left;
+  }
+
+  th {
+    font-weight: 600;
+    color: var(--semantic-color-foreground-secondary);
+    border-bottom: 1px solid var(--semantic-color-border-default);
+  }
+
+  td {
+    font-weight: 400;
+    color: var(--semantic-color-foreground-primary);
+    border-bottom: 1px solid var(--semantic-color-border-default);
+  }
+
+  tbody tr {
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: var(--semantic-color-background-secondary);
+    }
+
+    &:last-child td {
+      border-bottom: none;
+    }
+  }
+}
+
+.badge {
+  display: inline-block;
+  padding: var(--semantic-spacing-padding-component) var(--semantic-spacing-padding-component);
+  font-size: 11px;
+  font-weight: 500;
+  border-radius: var(--semantic-shape-badge-radius, 12px);
+
+  &.success {
+    color: var(--semantic-color-feedback-success-default);
+    background: var(--semantic-color-feedback-success-background);
+  }
+
+  &.warning {
+    color: var(--semantic-color-feedback-warning-default);
+    background: var(--semantic-color-feedback-warning-background);
+  }
+
+  &.error {
+    color: var(--semantic-color-feedback-error-default);
+    background: var(--semantic-color-feedback-error-background);
+  }
+
+  &.neutral {
+    color: var(--semantic-color-foreground-secondary);
+    background: var(--semantic-color-background-tertiary);
+  }
+}
+
+.showMoreButton {
+  width: 100%;
+  padding: var(--semantic-spacing-padding-component);
+  margin-top: var(--semantic-spacing-margin-component);
+  background: transparent;
+  border: 1px solid var(--semantic-color-border-default);
+  border-radius: var(--semantic-shape-button-radius, 8px);
+  font-size: 14px;
+  color: var(--semantic-color-foreground-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: var(--semantic-color-background-secondary);
+  }
+}
+
+/* Shopping Cart */
+.cartCard {
+  background: var(--semantic-color-background-primary);
+  border: 1px solid var(--semantic-color-border-default);
+  border-radius: var(--semantic-shape-card-radius, 12px);
+  padding: var(--semantic-spacing-padding-section);
+  height: fit-content;
+
+  h3 {
+    margin: 0 0 var(--semantic-spacing-margin-component);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--semantic-color-foreground-primary);
+  }
+}
+
+.cartItems {
+  display: flex;
+  flex-direction: column;
+  gap: var(--semantic-spacing-gap-grid-medium);
+  margin-bottom: var(--semantic-spacing-margin-component);
+}
+
+.cartItem {
+  display: flex;
+  align-items: center;
+  gap: var(--semantic-spacing-gap-grid-medium);
+  padding: var(--semantic-spacing-padding-component);
+  background: var(--semantic-color-background-secondary);
+  border-radius: var(--semantic-shape-element-radius, 8px);
+}
+
+.itemImage {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--semantic-color-background-tertiary);
+  border-radius: var(--semantic-shape-element-radius, 6px);
+  color: var(--semantic-color-foreground-tertiary);
+  flex-shrink: 0;
+}
+
+.itemDetails {
+  flex: 1;
+  min-width: 0;
+}
+
+.itemName {
+  margin: 0 0 2px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--semantic-color-foreground-primary);
+}
+
+.itemSize {
+  margin: 0;
+  font-size: 12px;
+  color: var(--semantic-color-foreground-secondary);
+}
+
+.quantitySelect {
+  padding: 6px 10px;
+  background: var(--semantic-color-background-primary);
+  border: 1px solid var(--semantic-color-border-default);
+  border-radius: var(--semantic-shape-control-radius-default, 6px);
+  font-size: 13px;
+  color: var(--semantic-color-foreground-primary);
+  cursor: pointer;
+}
+
+.itemPrice {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--semantic-color-foreground-primary);
+  white-space: nowrap;
+}
+
+.cartTotal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--semantic-spacing-padding-card) 0;
+  border-top: 1px solid var(--semantic-color-border-default);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--semantic-color-foreground-primary);
+}
+
+.totalAmount {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--semantic-color-foreground-primary);
+}
+
+.checkoutButton {
+  width: 100%;
+  padding: var(--semantic-spacing-padding-component);
+  background: var(--semantic-color-background-accent);
+  border: none;
+  border-radius: var(--semantic-shape-button-radius, 8px);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--semantic-color-foreground-inverse);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    filter: brightness(1.1);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+/* Bottom Section - Individual cards in masonry */
+.bottomSection {
+  display: contents;
+}
+
+.deliveryCard {
+  background: var(--semantic-color-background-primary);
+  border: 1px solid var(--semantic-color-border-default);
+  border-radius: var(--semantic-shape-card-radius, 12px);
+  padding: var(--semantic-spacing-padding-section);
+  height: fit-content;
+
+  h3 {
+    margin: 0 0 var(--semantic-spacing-margin-component);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--semantic-color-foreground-primary);
+  }
+}
+
+.deliveryOptions {
+  display: flex;
+  gap: var(--semantic-spacing-gap-component);
+  margin-bottom: var(--semantic-spacing-margin-component);
+}
+
+.deliveryOption {
+  padding: var(--semantic-spacing-padding-component) var(--semantic-spacing-padding-card);
+  background: var(--semantic-color-background-secondary);
+  border: 1px solid var(--semantic-color-border-default);
+  border-radius: var(--semantic-shape-control-radius-default, 6px);
+  font-size: 14px;
+  color: var(--semantic-color-foreground-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: var(--semantic-color-border-hover);
+  }
+}
+
+.deliveryTime {
+  margin-bottom: var(--semantic-spacing-margin-component);
+
+  .label {
+    margin: 0 0 4px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--semantic-color-foreground-primary);
+  }
+
+  .time {
+    margin: 0;
+    font-size: 13px;
+    color: var(--semantic-color-foreground-secondary);
+  }
+}
+
+.deliveryAddress {
+  margin-bottom: var(--semantic-spacing-margin-component);
+
+  .name {
+    margin: 0 0 4px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--semantic-color-foreground-primary);
+  }
+
+  .address {
+    margin: 0;
+    font-size: 13px;
+    color: var(--semantic-color-foreground-secondary);
+  }
+}
+
+.mapPlaceholder {
+  margin-bottom: var(--semantic-spacing-margin-component);
+  border-radius: var(--semantic-shape-element-radius, 8px);
+  overflow: hidden;
+  border: 1px solid var(--semantic-color-border-default);
+}
+
+.deliveryActions {
+  display: flex;
+  gap: var(--semantic-spacing-gap-component);
+}
+
+.secondaryButton {
+  flex: 1;
+  padding: var(--semantic-spacing-padding-component) var(--semantic-spacing-padding-card);
+  background: var(--semantic-color-background-secondary);
+  border: 1px solid var(--semantic-color-border-default);
+  border-radius: var(--semantic-shape-button-radius, 8px);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--semantic-color-foreground-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: var(--semantic-color-background-tertiary);
+  }
+}
+
+.bookmarksCard {
+  background: var(--semantic-color-background-primary);
+  border: 1px solid var(--semantic-color-border-default);
+  border-radius: var(--semantic-shape-card-radius, 12px);
+  padding: var(--semantic-spacing-padding-section);
+  height: fit-content;
+
+  h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--semantic-color-foreground-primary);
+  }
+}
+
+.bookmarksHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--semantic-spacing-margin-component);
+}
+
+.linkButton {
+  padding: 0;
+  background: none;
+  border: none;
+  font-size: 14px;
+  color: var(--semantic-color-foreground-accent);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.bookmarkGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--semantic-spacing-gap-grid-medium);
+}
+
+.bookmarkItem {
+  display: flex;
+  flex-direction: column;
+  gap: var(--semantic-spacing-gap-component);
+}
+
+.bookmarkImage {
+  aspect-ratio: 1;
+  border-radius: var(--semantic-shape-element-radius, 8px);
+  max-width: 256px;
+  overflow: hidden;
+  border: 1px solid var(--semantic-color-border-default);
+}
+
+.bookmarkName {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--semantic-color-foreground-primary);
+}
+
+.bookmarkPrice {
+  margin: 0;
+  font-size: 13px;
+  color: var(--semantic-color-foreground-secondary);
+}
+
+/* Search Card */
+.searchCard {
+  background: var(--semantic-color-background-primary);
+  border: 1px solid var(--semantic-color-border-default);
+  border-radius: var(--semantic-shape-card-radius, 12px);
+  padding: var(--semantic-spacing-padding-section);
+  height: fit-content;
+
+  h3 {
+    margin: 0 0 var(--semantic-spacing-margin-component);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--semantic-color-foreground-primary);
+  }
+}
+
+.searchInput {
+  display: flex;
+  align-items: center;
+  gap: var(--semantic-spacing-gap-grid-medium);
+  padding: var(--semantic-spacing-padding-component);
+  background: var(--semantic-color-background-secondary);
+  border: 1px solid var(--semantic-color-border-default);
+  border-radius: var(--semantic-shape-control-radius-default, 8px);
+  margin-bottom: var(--semantic-spacing-margin-component);
+  color: var(--semantic-color-foreground-tertiary);
+}
+
+.searchField {
+  flex: 1;
+  background: none;
+  border: none;
+  font-size: 14px;
+  color: var(--semantic-color-foreground-primary);
+
+  &:focus {
+    outline: none;
+  }
+
+  &::placeholder {
+    color: var(--semantic-color-foreground-tertiary);
+  }
+}
+
+.filterTags {
+  display: flex;
+  gap: var(--semantic-spacing-gap-component);
+  flex-wrap: wrap;
+}
+
+.filterTag {
+  padding: var(--semantic-spacing-padding-component) var(--semantic-spacing-padding-component);
+  background: var(--semantic-color-background-secondary);
+  border: 1px solid var(--semantic-color-border-default);
+  border-radius: var(--semantic-shape-badge-radius, 16px);
+  font-size: 13px;
+  color: var(--semantic-color-foreground-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: var(--semantic-color-border-hover);
+  }
+
+  &.active {
+    background: var(--semantic-color-background-accent);
+    border-color: var(--semantic-color-background-accent);
+    color: var(--semantic-color-foreground-inverse);
+  }
+}
+
+/* Notification Card */
+.notificationCard {
+  background: var(--semantic-color-background-primary);
+  border: 1px solid var(--semantic-color-border-default);
+  border-radius: var(--semantic-shape-card-radius, 12px);
+  padding: 20px;
+  height: fit-content;
+}
+
+.notificationHeader {
+  display: flex;
+  gap: var(--semantic-spacing-gap-grid-medium);
+  margin-bottom: var(--semantic-spacing-margin-component);
+}
+
+.notificationIcon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--semantic-color-background-accent);
+  border-radius: var(--semantic-shape-element-radius, 8px);
+  color: var(--semantic-color-foreground-inverse);
+  flex-shrink: 0;
+}
+
+.notificationContent {
+  flex: 1;
+
+  h4 {
+    margin: 0 0 4px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--semantic-color-foreground-primary);
+  }
+
+  p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--semantic-color-foreground-secondary);
+  }
+}
+
+.closeButton {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: var(--semantic-shape-element-radius, 6px);
+  color: var(--semantic-color-foreground-tertiary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: var(--semantic-color-background-secondary);
+    color: var(--semantic-color-foreground-primary);
+  }
+}
+
+.notificationActions {
+  display: flex;
+  gap: var(--semantic-spacing-gap-component);
+}
+
+/* Profile Card */
+.profileCard {
+  background: var(--semantic-color-background-primary);
+  border: 1px solid var(--semantic-color-border-default);
+  border-radius: var(--semantic-shape-card-radius, 12px);
+  padding: var(--semantic-spacing-padding-section);
+  height: fit-content;
+}
+
+.profileHeader {
+  display: flex;
+  gap: var(--semantic-spacing-gap-grid-medium);
+  margin-bottom: var(--semantic-spacing-margin-section);
+}
+
+.profileAvatar {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--semantic-color-background-accent);
+  border-radius: var(--semantic-shape-element-radius, 12px);
+  color: var(--semantic-color-foreground-inverse);
+  font-size: 18px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.profileInfo {
+  flex: 1;
+
+  h4 {
+    margin: 0 0 4px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--semantic-color-foreground-primary);
+  }
+
+  p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--semantic-color-foreground-secondary);
+  }
+}
+
+.profileStats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--semantic-spacing-gap-grid);
+  margin-bottom: var(--semantic-spacing-margin-section);
+  padding: var(--semantic-spacing-padding-card) 0;
+  border-top: 1px solid var(--semantic-color-border-default);
+  border-bottom: 1px solid var(--semantic-color-border-default);
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--semantic-spacing-gap-gridSmall);
+}
+
+.statValue {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--semantic-color-foreground-primary);
+}
+
+.statLabel {
+  font-size: 12px;
+  color: var(--semantic-color-foreground-secondary);
+}
+
+/* Stats Card */
+.statsCard {
+  background: var(--semantic-color-background-primary);
+  border: 1px solid var(--semantic-color-border-default);
+  border-radius: var(--semantic-shape-card-radius, 12px);
+  padding: var(--semantic-spacing-padding-section);
+  height: fit-content;
+
+  h3 {
+    margin: 0 0 var(--semantic-spacing-margin-section);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--semantic-color-foreground-primary);
+  }
+}
+
+.metricList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--semantic-spacing-gap-gridLarge);
+}
+
+.metricItem {
+  display: flex;
+  flex-direction: column;
+  gap: var(--semantic-spacing-gap-component);
+}
+
+.metricHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.metricLabel {
+  font-size: 13px;
+  color: var(--semantic-color-foreground-secondary);
+}
+
+.metricChange {
+  font-size: 12px;
+  font-weight: 600;
+
+  &.positive {
+    color: var(--semantic-color-feedback-success-default);
+  }
+
+  &.negative {
+    color: var(--semantic-color-feedback-error-default);
+  }
+}
+
+.metricValue {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--semantic-color-foreground-primary);
+}
+
+.metricBar {
+  height: 6px;
+  background: var(--semantic-color-background-tertiary);
+  border-radius: var(--semantic-shape-badge-radius, 9999px);
+  overflow: hidden;
+}
+
+.metricBarFill {
+  height: 100%;
+  background: var(--semantic-color-background-accent);
+  border-radius: var(--semantic-shape-badge-radius, 9999px);
+  transition: width 0.3s ease;
+}
+
+/* Activity Card */
+.activityCard {
+  background: var(--semantic-color-background-primary);
+  border: 1px solid var(--semantic-color-border-default);
+  border-radius: var(--semantic-shape-card-radius, 12px);
+  padding: var(--semantic-spacing-padding-section);
+  height: fit-content;
+
+  h3 {
+    margin: 0 0 var(--semantic-spacing-margin-component);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--semantic-color-foreground-primary);
+  }
+}
+
+.activityList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--semantic-spacing-gap-grid);
+  margin-bottom: var(--semantic-spacing-margin-component);
+}
+
+.activityItem {
+  display: flex;
+  gap: var(--semantic-spacing-gap-grid-medium);
+}
+
+.activityIcon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--semantic-color-background-secondary);
+  border-radius: var(--semantic-shape-element-radius, 6px);
+  color: var(--semantic-color-foreground-accent);
+  flex-shrink: 0;
+}
+
+.activityContent {
+  flex: 1;
+}
+
+.activityText {
+  margin: 0 0 4px;
+  font-size: 14px;
+  color: var(--semantic-color-foreground-primary);
+}
+
+.activityTime {
+  margin: 0;
+  font-size: 12px;
+  color: var(--semantic-color-foreground-tertiary);
+}
+
+/* Settings Card */
+.settingsCard {
+  background: var(--semantic-color-background-primary);
+  border: 1px solid var(--semantic-color-border-default);
+  border-radius: var(--semantic-shape-card-radius, 12px);
+  padding: var(--semantic-spacing-padding-section);
+  height: fit-content;
+
+  h3 {
+    margin: 0 0 var(--semantic-spacing-margin-section);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--semantic-color-foreground-primary);
+  }
+}
+
+.settingItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--semantic-spacing-padding-card) 0;
+  border-bottom: 1px solid var(--semantic-color-border-default);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.settingLabel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--semantic-spacing-gap-gridSmall);
+  flex: 1;
+
+  span:first-child {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--semantic-color-foreground-primary);
+  }
+}
+
+.settingDescription {
+  font-size: 12px;
+  color: var(--semantic-color-foreground-secondary);
+}
+
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggleSlider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--semantic-color-background-tertiary);
+  border-radius: var(--semantic-shape-badge-radius, 9999px);
+  transition: all 0.3s ease;
+
+  &::before {
+    content: '';
+    position: absolute;
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background: var(--semantic-color-background-primary);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+}
+
+.toggle input:checked + .toggleSlider {
+  background: var(--semantic-color-background-accent);
+}
+
+.toggle input:checked + .toggleSlider::before {
+  transform: translateX(20px);
+}
+
+/* Tabs Card */
+.tabsCard {
+  background: var(--semantic-color-background-primary);
+  border: 1px solid var(--semantic-color-border-default);
+  border-radius: var(--semantic-shape-card-radius, 12px);
+  padding: var(--semantic-spacing-padding-section);
+  height: fit-content;
+}
+
+.tabList {
+  display: flex;
+  gap: var(--semantic-spacing-gap-gridSmall);
+  margin-bottom: var(--semantic-spacing-margin-section);
+  border-bottom: 1px solid var(--semantic-color-border-default);
+}
+
+.tab {
+  padding: var(--semantic-spacing-padding-component) var(--semantic-spacing-padding-card);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  font-size: 14px;
+  color: var(--semantic-color-foreground-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: -1px;
+
+  &:hover {
+    color: var(--semantic-color-foreground-primary);
+  }
+
+  &.tabActive {
+    color: var(--semantic-color-foreground-accent);
+    border-bottom-color: var(--semantic-color-background-accent);
+  }
+}
+
+.tabContent {
+  h4 {
+    margin: 0 0 8px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--semantic-color-foreground-primary);
+  }
+
+  p {
+    margin: 0 0 var(--semantic-spacing-margin-component);
+    font-size: 14px;
+    color: var(--semantic-color-foreground-secondary);
+  }
+}
+
+.quickStats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--semantic-spacing-gap-grid);
+}
+
+.quickStat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--semantic-spacing-gap-gridSmall);
+  padding: var(--semantic-spacing-padding-component);
+  background: var(--semantic-color-background-secondary);
+  border-radius: var(--semantic-shape-element-radius, 8px);
+}
+
+.quickStatValue {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--semantic-color-foreground-primary);
+}
+
+.quickStatLabel {
+  font-size: 12px;
+  color: var(--semantic-color-foreground-secondary);
+}
+
+/* Progress Card */
+.progressCard {
+  background: var(--semantic-color-background-primary);
+  border: 1px solid var(--semantic-color-border-default);
+  border-radius: var(--semantic-shape-card-radius, 12px);
+  padding: var(--semantic-spacing-padding-section);
+  height: fit-content;
+
+  h3 {
+    margin: 0 0 var(--semantic-spacing-margin-section);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--semantic-color-foreground-primary);
+  }
+}
+
+.progressItem {
+  display: flex;
+  flex-direction: column;
+  gap: var(--semantic-spacing-gap-component);
+  margin-bottom: var(--semantic-spacing-margin-component);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.progressHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.progressLabel {
+  font-size: 13px;
+  color: var(--semantic-color-foreground-primary);
+}
+
+.progressPercent {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--semantic-color-foreground-accent);
+}
+
+.progressTrack {
+  height: 8px;
+  background: var(--semantic-color-background-tertiary);
+  border-radius: var(--semantic-shape-badge-radius, 9999px);
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--semantic-color-background-accent);
+  border-radius: var(--semantic-shape-badge-radius, 9999px);
+  transition: width 0.3s ease;
+}
+
+/* Tags Card */
+.tagsCard {
+  background: var(--semantic-color-background-primary);
+  border: 1px solid var(--semantic-color-border-default);
+  border-radius: var(--semantic-shape-card-radius, 12px);
+  padding: var(--semantic-spacing-padding-section);
+  height: fit-content;
+
+  h3 {
+    margin: 0 0 var(--semantic-spacing-margin-component);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--semantic-color-foreground-primary);
+  }
+}
+
+.tagCollection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--semantic-spacing-gap-component);
+  margin-bottom: var(--semantic-spacing-margin-component);
+}
+
+.tag {
+  display: inline-block;
+  padding: var(--semantic-spacing-padding-component) var(--semantic-spacing-padding-component);
+  background: var(--semantic-color-background-secondary);
+  border: 1px solid var(--semantic-color-border-default);
+  border-radius: var(--semantic-shape-badge-radius, 16px);
+  font-size: 12px;
+  color: var(--semantic-color-foreground-primary);
+
+  &.tagActive {
+    background: var(--semantic-color-background-accent);
+    border-color: var(--semantic-color-background-accent);
+    color: var(--semantic-color-foreground-inverse);
+  }
+}
+
+/* Alert Card */
+.alertCard {
+  display: flex;
+  gap: var(--semantic-spacing-gap-grid);
+  background: var(--semantic-color-feedback-warning-background);
+  border: 1px solid var(--semantic-color-feedback-warning-default);
+  border-radius: var(--semantic-shape-card-radius, 12px);
+  padding: 20px;
+  height: fit-content;
+}
+
+.alertIcon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--semantic-color-feedback-warning-default);
+  border-radius: var(--semantic-shape-element-radius, 8px);
+  color: var(--semantic-color-foreground-inverse);
+  flex-shrink: 0;
+}
+
+.alertContent {
+  flex: 1;
+
+  h4 {
+    margin: 0 0 4px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--semantic-color-feedback-warning-default);
+  }
+
+  p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--semantic-color-foreground-secondary);
+  }
+}
+
+.alertAction {
+  padding: var(--semantic-spacing-padding-component) var(--semantic-spacing-padding-card);
+  background: var(--semantic-color-feedback-warning-default);
+  border: none;
+  border-radius: var(--semantic-shape-button-radius, 8px);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--semantic-color-foreground-inverse);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  align-self: flex-start;
+
+  &:hover {
+    filter: brightness(1.1);
+  }
+}
+
+/* Slider Card */
+.sliderCard {
+  background: var(--semantic-color-background-primary);
+  border: 1px solid var(--semantic-color-border-default);
+  border-radius: var(--semantic-shape-card-radius, 12px);
+  padding: var(--semantic-spacing-padding-section);
+  height: fit-content;
+
+  h3 {
+    margin: 0 0 var(--semantic-spacing-margin-section);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--semantic-color-foreground-primary);
+  }
+}
+
+.sliderGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--semantic-spacing-gap-component);
+  margin-bottom: var(--semantic-spacing-margin-section);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--semantic-color-foreground-secondary);
+  }
+}
+
+.sliderContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--semantic-spacing-gap-grid-medium);
+}
+
+.slider {
+  flex: 1;
+  height: 6px;
+  background: var(--semantic-color-background-tertiary);
+  border-radius: var(--semantic-shape-badge-radius, 9999px);
+  outline: none;
+  -webkit-appearance: none;
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    background: var(--semantic-color-background-accent);
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  &::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    background: var(--semantic-color-background-accent);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+}
+
+.sliderValue {
+  min-width: 40px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--semantic-color-foreground-primary);
+  text-align: right;
+}
+
+/* Brand-Specific Variations */
+
+/* Corporate: Flat, minimal, business-focused */
+:global([data-brand='corporate']) {
+  .heroCard,
+  .formCard,
+  .sizeCard,
+  .ordersTable,
+  .cartCard,
+  .deliveryCard,
+  .bookmarksCard {
+    box-shadow: inset 0 0 0 1px hsl(from var(--semantic-color-foreground-primary) h s l / 8%);
+
+    &:hover {
+      box-shadow: inset 0 0 0 1px hsl(from var(--semantic-color-foreground-primary) h s l / 12%),
+        0 4px 12px hsl(from var(--semantic-color-foreground-primary) h s l / 6%);
+    }
+  }
+}
+
+/* Forest: Soft, organic, natural */
+:global([data-brand='forest']) {
+  .heroCard,
+  .formCard,
+  .sizeCard,
+  .ordersTable,
+  .cartCard,
+  .deliveryCard,
+  .bookmarksCard {
+    &:hover {
+      box-shadow: 0 8px 32px hsl(from var(--semantic-color-background-accent) h s l / 12%);
+    }
+  }
+
+  .primaryButton,
+  .checkoutButton {
+    box-shadow: 0 2px 8px hsl(from var(--semantic-color-background-accent) h s l / 25%);
+
+    &:hover {
+      box-shadow: 0 4px 12px hsl(from var(--semantic-color-background-accent) h s l / 35%);
+    }
+  }
+}
+
+/* Sunset: Warm, elevated, playful */
+:global([data-brand='sunset']) {
+  .heroCard,
+  .formCard,
+  .sizeCard,
+  .ordersTable,
+  .cartCard,
+  .deliveryCard,
+  .bookmarksCard {
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px hsl(from var(--semantic-color-background-accent) h s l / 15%);
+    }
+  }
+
+  .primaryButton,
+  .checkoutButton {
+    box-shadow: 0 4px 16px hsl(from var(--semantic-color-background-accent) h s l / 40%);
+
+    &:hover {
+      box-shadow: 0 6px 24px hsl(from var(--semantic-color-background-accent) h s l / 50%);
+    }
+  }
+}
+
+/* Midnight: Deep, dramatic, sophisticated */
+:global([data-brand='midnight']) {
+  .heroCard,
+  .formCard,
+  .sizeCard,
+  .ordersTable,
+  .cartCard,
+  .deliveryCard,
+  .bookmarksCard {
+    box-shadow: 0 2px 12px hsl(from var(--semantic-color-foreground-primary) h s l / 20%);
+
+    &:hover {
+      box-shadow: 0 8px 32px hsl(from var(--semantic-color-foreground-primary) h s l / 30%);
+    }
+  }
+
+  .primaryButton,
+  .checkoutButton {
+    box-shadow: 0 2px 12px hsl(from var(--semantic-color-background-accent) h s l / 50%),
+      inset 0 1px 0 hsl(from var(--semantic-color-background-accent) h s calc(l + 20%) / 30%);
+  }
+}
+
+/* Ocean: Glassy, fluid, spacious */
+:global([data-brand='ocean']) {
+  .heroCard,
+  .formCard,
+  .sizeCard,
+  .ordersTable,
+  .cartCard,
+  .deliveryCard,
+  .bookmarksCard {
+    background: hsl(from var(--semantic-color-background-primary) h s l / 80%);
+    backdrop-filter: blur(12px);
+    border: 1px solid hsl(from var(--semantic-color-background-accent) h s l / 20%);
+    
+    &:hover {
+      box-shadow: 0 8px 32px hsl(from var(--semantic-color-background-accent) h s l / 15%);
+      border-color: hsl(from var(--semantic-color-background-accent) h s l / 40%);
+    }
+  }
+}
+
+/* Canary: Pop, brutalist, high contrast */
+:global([data-brand='canary']) {
+  .heroCard,
+  .formCard,
+  .sizeCard,
+  .ordersTable,
+  .cartCard,
+  .deliveryCard,
+  .bookmarksCard,
+  .input,
+  .select,
+  .cardButton,
+  .sizeOption,
+  .materialButton {
+    border: 2px solid var(--semantic-color-border-default);
+    box-shadow: 2px 2px 0 var(--semantic-color-border-default);
+    
+    &:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: 4px 4px 0 var(--semantic-color-border-default);
+    }
+  }
+
+  .primaryButton,
+  .checkoutButton {
+    border: 2px solid var(--semantic-color-foreground-primary);
+    box-shadow: 2px 2px 0 var(--semantic-color-foreground-primary);
+    color: var(--semantic-color-foreground-primary);
+    
+    &:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: 4px 4px 0 var(--semantic-color-foreground-primary);
+    }
+    
+    &:active {
+      transform: translate(1px, 1px);
+      box-shadow: 0 0 0 var(--semantic-color-foreground-primary);
+    }
+  }
+}
+
+/* Monochrome: Minimal, technical, grid-like */
+:global([data-brand='monochrome']) {
+  .heroCard,
+  .formCard,
+  .sizeCard,
+  .ordersTable,
+  .cartCard,
+  .deliveryCard,
+  .bookmarksCard {
+    border: 1px solid var(--semantic-color-border-default);
+    box-shadow: none;
+    border-radius: 0;
+    
+    &:hover {
+      border-color: var(--semantic-color-foreground-primary);
+      box-shadow: none;
+    }
+  }
+  
+  .cardButton, .sizeOption, .materialButton, .input, .select {
+    border-radius: 0;
+  }
+}
+
+/* Rose: Soft, inner glow, gentle */
+:global([data-brand='rose']) {
+  .heroCard,
+  .formCard,
+  .sizeCard,
+  .ordersTable,
+  .cartCard,
+  .deliveryCard,
+  .bookmarksCard {
+    border: 1px solid transparent;
+    box-shadow: 0 4px 20px hsl(from var(--semantic-color-background-accent) h s l / 8%),
+                inset 0 0 0 1px hsl(from var(--semantic-color-background-accent) h s l / 20%);
+    
+    &:hover {
+      box-shadow: 0 8px 30px hsl(from var(--semantic-color-background-accent) h s l / 12%),
+                  inset 0 0 0 1px hsl(from var(--semantic-color-background-accent) h s l / 30%);
+    }
+  }
+}
+
+/* Slate: Beveled, crisp, mechanical */
+:global([data-brand='slate']) {
+  .heroCard,
+  .formCard,
+  .sizeCard,
+  .ordersTable,
+  .cartCard,
+  .deliveryCard,
+  .bookmarksCard {
+    box-shadow: 
+      inset 1px 1px 0 hsl(from var(--semantic-color-background-primary) h s l / 100%),
+      inset -1px -1px 0 hsl(from var(--semantic-color-foreground-primary) h s l / 10%),
+      0 2px 4px hsl(from var(--semantic-color-foreground-primary) h s l / 5%);
+      
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 
+        inset 1px 1px 0 hsl(from var(--semantic-color-background-primary) h s l / 100%),
+        inset -1px -1px 0 hsl(from var(--semantic-color-foreground-primary) h s l / 10%),
+        0 4px 8px hsl(from var(--semantic-color-foreground-primary) h s l / 10%);
+    }
+  }
+  
+  .primaryButton, .checkoutButton {
+    background: linear-gradient(180deg, 
+      hsl(from var(--semantic-color-background-accent) h s l / 100%) 0%, 
+      hsl(from var(--semantic-color-background-accent) h s l / 90%) 100%);
+    border: 1px solid hsl(from var(--semantic-color-background-accent) h s l / 80%);
+    box-shadow: inset 0 1px 0 hsl(from var(--semantic-color-background-primary) h s l / 20%);
+  }
+}

@@ -1,0 +1,40 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/BrandSwitcher/BrandSwitcher.tokens.json
+ */
+@mixin vars {
+  /* === Color Tokens === */
+  --brandSwitcher-color-background-primary: var(--semantic-color-background-primary);
+  --brandSwitcher-color-background-secondary: var(--semantic-color-background-secondary);
+  --brandSwitcher-color-background-tertiary: var(--semantic-color-background-tertiary);
+  --brandSwitcher-color-background-accent: var(--semantic-color-background-accent);
+  --brandSwitcher-color-background-highlight: var(--semantic-color-background-highlight);
+  --brandSwitcher-color-foreground-primary: var(--semantic-color-foreground-primary);
+  --brandSwitcher-color-foreground-secondary: var(--semantic-color-foreground-secondary);
+  --brandSwitcher-color-foreground-tertiary: var(--semantic-color-foreground-tertiary);
+  --brandSwitcher-color-border-default: var(--semantic-color-border-default);
+  --brandSwitcher-color-border-hover: var(--semantic-color-border-hover);
+  --brandSwitcher-color-border-focus: var(--semantic-color-border-focus);
+  --brandSwitcher-color-border-accent: var(--semantic-color-border-accent);
+
+  /* === Spacing Tokens === */
+  --brandSwitcher-spacing-gap-xs: var(--semantic-spacing-gap-component);
+  --brandSwitcher-spacing-gap-sm: var(--semantic-spacing-gap-grid);
+  --brandSwitcher-spacing-gap-md: var(--semantic-spacing-gap-grid-medium);
+  --brandSwitcher-spacing-padding-xs: var(--semantic-spacing-padding-component);
+  --brandSwitcher-spacing-padding-sm: var(--semantic-spacing-padding-card);
+  --brandSwitcher-spacing-padding-md: var(--semantic-spacing-padding-component);
+  --brandSwitcher-spacing-padding-lg: var(--semantic-spacing-padding-section);
+
+  /* === Size Tokens === */
+  --brandSwitcher-size-radius-01: var(--core-shape-radius-01);
+  --brandSwitcher-size-radius-02: var(--core-shape-radius-02);
+  --brandSwitcher-size-radius-03: var(--core-shape-radius-03);
+
+  /* === Typography Tokens === */
+  --brandSwitcher-typography-font-size-xs: var(--semantic-typography-font-size-body-xs);
+  --brandSwitcher-typography-font-size-sm: var(--semantic-typography-font-size-body-sm);
+  --brandSwitcher-typography-font-size-default: var(--semantic-typography-font-size-body-default);
+  --brandSwitcher-typography-font-weight-default: var(--semantic-typography-font-weight-body-default);
+  --brandSwitcher-typography-font-weight-strong: var(--semantic-typography-font-weight-body-strong);
+  --brandSwitcher-typography-line-height-default: var(--semantic-typography-line-height-body-default);
+}

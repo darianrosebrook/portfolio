@@ -1,0 +1,264 @@
+/**
+ * Theming Page Styles
+ * Hero section with side-by-side layout inspired by Radix UI
+ */
+
+.themingHero {
+  position: relative;
+  max-width: 80ch;
+  margin: 0 auto;
+  padding: var(--core-spacing-size-08) var(--core-spacing-size-05);
+
+  @media (width <= 1200px) {
+    padding: var(--core-spacing-size-06) var(--core-spacing-size-05);
+  }
+
+  .demoHero {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100vw;
+    max-width: 100vw;
+    transform: scale(.75);
+    z-index: -1;
+  }
+}
+
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--core-spacing-size-05);
+}
+
+.heroLabel {
+  display: inline-block;
+  margin: 0;
+  color: var(--semantic-color-foreground-accent);
+  font-weight: var(--semantic-typography-font-weight-medium);
+  font-size: var(--semantic-typography-caption-01);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.heroTitle {
+  margin: 0;
+  color: var(--semantic-color-foreground-primary);
+  font-weight: var(--semantic-typography-font-weight-bold);
+  font-size: var(--semantic-typography-heading-02);
+  line-height: 1.2;
+  letter-spacing: var(--core-typography-letter-spacing-tight);
+}
+
+.heroDescription {
+  margin: 0;
+  color: var(--semantic-color-foreground-secondary);
+  font-size: var(--semantic-typography-body-02);
+  line-height: 1.6;
+}
+
+.heroFeatures {
+  display: flex;
+  flex-direction: column;
+  gap: var(--core-spacing-size-03);
+  margin-top: var(--core-spacing-size-02);
+}
+
+.heroFeature {
+  display: flex;
+  gap: var(--core-spacing-size-03);
+  align-items: center;
+  color: var(--semantic-color-foreground-secondary);
+  font-size: var(--semantic-typography-body-03);
+}
+
+.featureIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: var(--semantic-color-foreground-accent);
+}
+
+.heroBrandSwitcher {
+  margin-bottom: var(--semantic-spacing-margin-section);
+  padding-bottom: var(--semantic-spacing-padding-section);
+}
+
+/* Full Bleed Demo Section */
+.demoHero {
+  position: relative;
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding: var(--core-spacing-size-09) 0;
+  overflow: hidden;
+
+  @media (width <= 1200px) {
+    padding: var(--core-spacing-size-08) 0;
+  }
+}
+
+.demoContainer { 
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 var(--core-spacing-size-05);  
+  z-index: -1;
+  @media (width <= 1200px) {
+    padding: 0 var(--core-spacing-size-04);
+  }
+}
+
+/* Tabs section */
+.tabsSection {
+  max-width: 100%;
+  margin: var(--core-spacing-size-09) auto;
+  padding: 0 var(--core-spacing-size-05);
+}
+
+.tabs {
+  width: 100%;
+}
+
+.tabList {
+  margin-bottom: var(--core-spacing-size-06);
+}
+
+.tabPanel {
+  min-height: 60vh;
+}
+
+.playgroundSection {
+  position: relative;
+  width: 100%;
+  min-height: 800px;
+  overflow-x: auto;
+  padding: var(--core-spacing-size-06) 0;
+  
+  /* Ensure the showcase demo is visible in the tab */
+  :global(.showcase) {
+    position: relative;
+    top: 0;
+    right: 0;
+    transform: scale(1);
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+
+/* Content section styling */
+.contentSection {
+  max-width: 80ch;
+  margin: 0 auto;
+  padding: 0;
+
+  h2 {
+    margin: var(--core-spacing-size-08) 0 var(--core-spacing-size-04);
+    color: var(--semantic-color-foreground-primary);
+    font-weight: var(--semantic-typography-font-weight-semibold);
+    font-size: var(--semantic-typography-heading-03);
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  h3 {
+    margin: var(--core-spacing-size-06) 0 var(--core-spacing-size-03);
+    color: var(--semantic-color-foreground-primary);
+    font-weight: var(--semantic-typography-font-weight-medium);
+    font-size: var(--semantic-typography-heading-04);
+  }
+
+  p {
+    margin: 0 0 var(--core-spacing-size-04);
+    color: var(--semantic-color-foreground-secondary);
+    font-size: var(--semantic-typography-body-02);
+    line-height: 1.7;
+  }
+
+  ul {
+    margin: 0 0 var(--core-spacing-size-05);
+    padding-left: var(--core-spacing-size-05);
+
+    li {
+      margin-bottom: var(--core-spacing-size-03);
+      color: var(--semantic-color-foreground-secondary);
+      font-size: var(--semantic-typography-body-02);
+      line-height: 1.6;
+
+      strong {
+        color: var(--semantic-color-foreground-primary);
+      }
+    }
+  }
+}
+
+/* Code block styling */
+.codeBlock {
+  overflow-x: auto;
+  margin: var(--core-spacing-size-05) 0;
+  padding: var(--core-spacing-size-05);
+  background: var(--semantic-color-background-secondary);
+  border-radius: var(--core-shape-radius-03);
+  box-shadow: inset 0 1px 3px hsl(from var(--semantic-color-foreground-primary) h s l / 8%);
+
+  code {
+    font-family: var(--core-typography-font-family-mono);
+    font-size: var(--semantic-typography-body-03);
+    line-height: 1.6;
+  }
+}
+
+/* File tree styling */
+.fileTree {
+  overflow-x: auto;
+  margin: var(--core-spacing-size-05) 0;
+  padding: var(--core-spacing-size-05);
+  background: var(--semantic-color-background-secondary);
+  border-radius: var(--core-shape-radius-03);
+  box-shadow: inset 0 1px 3px hsl(from var(--semantic-color-foreground-primary) h s l / 8%);
+
+  pre {
+    margin: 0;
+  }
+
+  code {
+    font-family: var(--core-typography-font-family-mono);
+    font-size: var(--semantic-typography-body-03);
+    line-height: 1.8;
+  }
+}
+
+/* Navigation footer */
+.navFooter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--core-spacing-size-04);
+  justify-content: space-between;
+  max-width: 80ch;
+  margin: var(--core-spacing-size-09) auto var(--core-spacing-size-06);
+  padding: var(--core-spacing-size-05);
+  background: var(--semantic-color-background-secondary);
+  border-radius: var(--core-shape-radius-03);
+}
+
+.navLink {
+  display: flex;
+  gap: var(--core-spacing-size-02);
+  align-items: center;
+  color: var(--semantic-color-foreground-accent);
+  font-weight: var(--semantic-typography-font-weight-medium);
+  font-size: var(--semantic-typography-body-02);
+  text-decoration: none;
+  transition: gap 0.2s ease;
+
+  &:hover {
+    gap: var(--core-spacing-size-03);
+    text-decoration: underline;
+  }
+}
