@@ -47,6 +47,14 @@
           "design.paths.dark": "{color.palette.neutral.200}"
         }
       },
+      "onColor": {
+        "$type": "color",
+        "$value": "{color.mode.dark}",
+        "$extensions": {
+          "design.paths.light": "{color.mode.dark}",
+          "design.paths.dark": "{color.mode.light}"
+        }
+      }
 
     },
     "background": {

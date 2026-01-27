@@ -872,12 +872,12 @@ function generateCSSFromTokens(tokens: TokenGroup): boolean {
   // Collect all tokens into CSS variables
   collectTokens(tokens, [], context, maps, tokens);
 
-  // Validate references
-  const referenceErrors = validateReferences(context);
-  if (referenceErrors.length > 0) {
-    console.warn('[tokens] Reference validation warnings:');
-    referenceErrors.forEach((error) => console.warn(`  - ${error}`));
-  }
+  // Skip reference validation when using resolver module
+  // The resolver module already validates references during resolution
+  // and resolves aliases inline, so there are no {token.path} patterns
+  // left to validate. The resolver's diagnostics handle missing token warnings.
+  // Reference validation is only meaningful for legacy token processing
+  // where references remain as {token.path} strings.
 
   // Load brand tokens
   const brands = loadBrandTokens();

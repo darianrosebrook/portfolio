@@ -442,8 +442,10 @@ export type TokenPath =
   | 'spacing.card.padding'
   | 'spacing.margin.component'
   | 'spacing.margin.section'
+  | 'elevation.level.0'
   | 'elevation.level.1'
   | 'elevation.level.2'
+  | 'elevation.level.3'
   | 'elevation.offset.y1'
   | 'elevation.offset.y2'
   | 'elevation.blur.sm'
@@ -453,10 +455,6 @@ export type TokenPath =
   | 'elevation.default'
   | 'elevation.surface.raised'
   | 'elevation.surface.floating'
-  | 'depth.1'
-  | 'depth.2'
-  | 'depth.3'
-  | 'depth.4'
   | 'opacity.50'
   | 'opacity.100'
   | 'opacity.200'
@@ -503,9 +501,24 @@ export type TokenPath =
   | 'shape.control.border.defaultStyle'
   | 'shape.control.border.focusWidth'
   | 'shape.card.radius'
+  | 'shape.card.border.light'
+  | 'shape.card.border.medium'
+  | 'shape.card.border.dark'
+  | 'shape.card.border.transparent'
+  | 'shape.card.elevation.near'
+  | 'shape.card.elevation.default'
+  | 'shape.card.elevation.far'
+  | 'shape.card.elevation.none'
   | 'shape.element.radius'
   | 'shape.button.radius'
   | 'shape.badge.radius'
+  | 'shape.input.radius.default'
+  | 'shape.input.border.defaultWidth'
+  | 'shape.input.border.defaultStyle'
+  | 'shape.input.border.focusWidth'
+  | 'shape.field.radius.default'
+  | 'shape.field.border.defaultWidth'
+  | 'shape.field.border.focusWidth'
   | 'motion.duration.instant'
   | 'motion.duration.short1'
   | 'motion.duration.short2'
@@ -1221,8 +1234,10 @@ export type SpacingTokenPath =
  * elevation token paths
  */
 export type ElevationTokenPath =
+  | 'elevation.level.0'
   | 'elevation.level.1'
   | 'elevation.level.2'
+  | 'elevation.level.3'
   | 'elevation.offset.y1'
   | 'elevation.offset.y2'
   | 'elevation.blur.sm'
@@ -1232,15 +1247,6 @@ export type ElevationTokenPath =
   | 'elevation.default'
   | 'elevation.surface.raised'
   | 'elevation.surface.floating';
-
-/**
- * depth token paths
- */
-export type DepthTokenPath =
-  | 'depth.1'
-  | 'depth.2'
-  | 'depth.3'
-  | 'depth.4';
 
 /**
  * opacity token paths
@@ -1302,9 +1308,24 @@ export type ShapeTokenPath =
   | 'shape.control.border.defaultStyle'
   | 'shape.control.border.focusWidth'
   | 'shape.card.radius'
+  | 'shape.card.border.light'
+  | 'shape.card.border.medium'
+  | 'shape.card.border.dark'
+  | 'shape.card.border.transparent'
+  | 'shape.card.elevation.near'
+  | 'shape.card.elevation.default'
+  | 'shape.card.elevation.far'
+  | 'shape.card.elevation.none'
   | 'shape.element.radius'
   | 'shape.button.radius'
-  | 'shape.badge.radius';
+  | 'shape.badge.radius'
+  | 'shape.input.radius.default'
+  | 'shape.input.border.defaultWidth'
+  | 'shape.input.border.defaultStyle'
+  | 'shape.input.border.focusWidth'
+  | 'shape.field.radius.default'
+  | 'shape.field.border.defaultWidth'
+  | 'shape.field.border.focusWidth';
 
 /**
  * motion token paths

@@ -1,9 +1,5 @@
 {
   "$schema": "./designTokens.schema.json",
-  "meta": {
-    "version": "1.0.0",
-    "source": "Semantic roles (aliases to core)"
-  },
   "color": {
     "mode": {
       "black": {
@@ -3430,30 +3426,30 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.6823529411764706,
-            0.6823529411764706,
-            0.6823529411764706
+            0.9686274509803922,
+            0.7568627450980392,
+            0.7607843137254902
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.6823529411764706,
-              0.6823529411764706,
-              0.6823529411764706
+              0.9686274509803922,
+              0.7568627450980392,
+              0.7607843137254902
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.3333333333333333,
-              0.3333333333333333,
-              0.3333333333333333
+              0.6823529411764706,
+              0,
+              0.00392156862745098
             ]
           }
         },
-        "$description": "Default border color"
+        "$description": "Default input border - subtle red tint"
       },
       "subtle": {
         "$type": "color",
@@ -3550,90 +3546,90 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.807843137254902,
-            0.807843137254902,
-            0.807843137254902
+            0.9882352941176471,
+            0.9176470588235294,
+            0.9176470588235294
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.807843137254902,
-              0.807843137254902,
-              0.807843137254902
+              0.9882352941176471,
+              0.9176470588235294,
+              0.9176470588235294
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.22745098039215686,
-              0.22745098039215686,
-              0.22745098039215686
+              0.4823529411764706,
+              0,
+              0
             ]
           }
         },
-        "$description": "Light border color"
+        "$description": "Light input border - very subtle red"
       },
       "primary": {
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.6823529411764706,
-            0.6823529411764706,
-            0.6823529411764706
+            0.9490196078431372,
+            0.5803921568627451,
+            0.5843137254901961
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.6823529411764706,
-              0.6823529411764706,
-              0.6823529411764706
+              0.9490196078431372,
+              0.5803921568627451,
+              0.5843137254901961
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.3333333333333333,
-              0.3333333333333333,
-              0.3333333333333333
+              0.8509803921568627,
+              0.1607843137254902,
+              0.16862745098039217
             ]
           }
         },
-        "$description": "Primary border color"
+        "$description": "Primary input border - medium red"
       },
       "hover": {
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.5607843137254902,
-            0.5607843137254902,
-            0.5607843137254902
+            0.9490196078431372,
+            0.5803921568627451,
+            0.5843137254901961
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.5607843137254902,
-              0.5607843137254902,
-              0.5607843137254902
+              0.9490196078431372,
+              0.5803921568627451,
+              0.5843137254901961
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.44313725490196076,
-              0.44313725490196076,
-              0.44313725490196076
+              0.8509803921568627,
+              0.1607843137254902,
+              0.16862745098039217
             ]
           }
         },
-        "$description": "Hover border color"
+        "$description": "Input hover border - warmer red"
       },
       "accent": {
         "$type": "color",
@@ -3670,30 +3666,30 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.0392156862745098,
-            0.396078431372549,
-            0.996078431372549
+            0.8509803921568627,
+            0.1607843137254902,
+            0.16862745098039217
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.0392156862745098,
-              0.396078431372549,
-              0.996078431372549
+              0.8509803921568627,
+              0.1607843137254902,
+              0.16862745098039217
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.11372549019607843,
-              0.5686274509803921,
-              0.984313725490196
+              0.9176470588235294,
+              0.39215686274509803,
+              0.396078431372549
             ]
           }
         },
-        "$description": "Focus border color"
+        "$description": "Input focus border - bold red accent"
       },
       "danger": {
         "$type": "color",
@@ -6038,7 +6034,10 @@
       },
       "$type": "dimension",
       "00": {
-        "$value": "0",
+        "$value": {
+          "value": 0,
+          "unit": "px"
+        },
         "$type": "dimension"
       },
       "01": {
@@ -6456,13 +6455,109 @@
   },
   "elevation": {
     "level": {
+      "0": {
+        "$type": "shadow",
+        "$value": {
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 0,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 0,
+            "unit": "px"
+          },
+          "color": {
+            "colorSpace": "srgb",
+            "components": [
+              0,
+              0,
+              0
+            ],
+            "alpha": 0
+          }
+        }
+      },
       "1": {
         "$type": "shadow",
-        "$value": "0px 1px 3px rgba(0,0,0,0.12), 0px 1px 2px rgba(0,0,0,0.08)"
+        "$value": {
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 1,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 3,
+            "unit": "px"
+          },
+          "color": {
+            "colorSpace": "srgb",
+            "components": [
+              0,
+              0,
+              0
+            ],
+            "alpha": 0.12
+          }
+        }
       },
       "2": {
         "$type": "shadow",
-        "$value": "0px 3px 6px rgba(0,0,0,0.14), 0px 2px 4px rgba(0,0,0,0.10)"
+        "$value": {
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 3,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 6,
+            "unit": "px"
+          },
+          "color": {
+            "colorSpace": "srgb",
+            "components": [
+              0,
+              0,
+              0
+            ],
+            "alpha": 0.14
+          }
+        }
+      },
+      "3": {
+        "$type": "shadow",
+        "$value": {
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 8,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 16,
+            "unit": "px"
+          },
+          "color": {
+            "colorSpace": "srgb",
+            "components": [
+              0,
+              0,
+              0
+            ],
+            "alpha": 0.18
+          }
+        }
       }
     },
     "offset": {
@@ -6532,35 +6627,83 @@
     },
     "default": {
       "$type": "shadow",
-      "$value": "0px 1px 3px rgba(0,0,0,0.12), 0px 1px 2px rgba(0,0,0,0.08)"
+      "$value": {
+        "offsetX": {
+          "value": 0,
+          "unit": "px"
+        },
+        "offsetY": {
+          "value": 1,
+          "unit": "px"
+        },
+        "blur": {
+          "value": 3,
+          "unit": "px"
+        },
+        "color": {
+          "colorSpace": "srgb",
+          "components": [
+            0,
+            0,
+            0
+          ],
+          "alpha": 0.12
+        }
+      }
     },
     "surface": {
       "raised": {
         "$type": "shadow",
-        "$value": "0px 1px 3px rgba(0,0,0,0.12), 0px 1px 2px rgba(0,0,0,0.08)"
+        "$value": {
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 1,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 3,
+            "unit": "px"
+          },
+          "color": {
+            "colorSpace": "srgb",
+            "components": [
+              0,
+              0,
+              0
+            ],
+            "alpha": 0.12
+          }
+        }
       },
       "floating": {
         "$type": "shadow",
-        "$value": "0px 3px 6px rgba(0,0,0,0.14), 0px 2px 4px rgba(0,0,0,0.10)"
+        "$value": {
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 3,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 6,
+            "unit": "px"
+          },
+          "color": {
+            "colorSpace": "srgb",
+            "components": [
+              0,
+              0,
+              0
+            ],
+            "alpha": 0.14
+          }
+        }
       }
-    }
-  },
-  "depth": {
-    "1": {
-      "$type": "number",
-      "$value": 8
-    },
-    "2": {
-      "$type": "number",
-      "$value": 16
-    },
-    "3": {
-      "$type": "number",
-      "$value": 32
-    },
-    "4": {
-      "$type": "number",
-      "$value": 64
     }
   },
   "opacity": {
@@ -6801,27 +6944,21 @@
     "border": {
       "width": {
         "hairline": {
-          "$type": "dimension",
-          "$value": {
-            "value": 1,
-            "unit": "px"
-          }
+          "$type": "borderWidth",
+          "$value": "1px"
         },
         "thick": {
-          "$type": "dimension",
-          "$value": {
-            "value": 2,
-            "unit": "px"
-          }
+          "$type": "borderWidth",
+          "$value": "2px"
         }
       },
       "style": {
         "solid": {
-          "$type": "strokeStyle",
+          "$type": "borderStyle",
           "$value": "solid"
         },
         "dashed": {
-          "$type": "strokeStyle",
+          "$type": "borderStyle",
           "$value": "dashed"
         }
       }
@@ -6847,10 +6984,7 @@
       "border": {
         "defaultWidth": {
           "$type": "dimension",
-          "$value": {
-            "value": 1,
-            "unit": "px"
-          }
+          "$value": "1px"
         },
         "defaultStyle": {
           "$type": "strokeStyle",
@@ -6858,10 +6992,7 @@
         },
         "focusWidth": {
           "$type": "dimension",
-          "$value": {
-            "value": 2,
-            "unit": "px"
-          }
+          "$value": "2px"
         }
       }
     },
@@ -6873,6 +7004,241 @@
           "unit": "px"
         },
         "$description": "Card border radius (16px)"
+      },
+      "border": {
+        "light": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9882352941176471,
+              0.9176470588235294,
+              0.9176470588235294
+            ]
+          },
+          "$extensions": {
+            "design.paths.light": {
+              "colorSpace": "srgb",
+              "components": [
+                0.9882352941176471,
+                0.9176470588235294,
+                0.9176470588235294
+              ]
+            },
+            "design.paths.dark": {
+              "colorSpace": "srgb",
+              "components": [
+                0.29411764705882354,
+                0,
+                0
+              ]
+            }
+          },
+          "$description": "Light card border - very subtle red"
+        },
+        "medium": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9686274509803922,
+              0.7568627450980392,
+              0.7607843137254902
+            ]
+          },
+          "$extensions": {
+            "design.paths.light": {
+              "colorSpace": "srgb",
+              "components": [
+                0.9686274509803922,
+                0.7568627450980392,
+                0.7607843137254902
+              ]
+            },
+            "design.paths.dark": {
+              "colorSpace": "srgb",
+              "components": [
+                0.4823529411764706,
+                0,
+                0
+              ]
+            }
+          },
+          "$description": "Medium card border - subtle red"
+        },
+        "dark": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9176470588235294,
+              0.39215686274509803,
+              0.396078431372549
+            ]
+          },
+          "$extensions": {
+            "design.paths.light": {
+              "colorSpace": "srgb",
+              "components": [
+                0.9176470588235294,
+                0.39215686274509803,
+                0.396078431372549
+              ]
+            },
+            "design.paths.dark": {
+              "colorSpace": "srgb",
+              "components": [
+                0.8509803921568627,
+                0.1607843137254902,
+                0.16862745098039217
+              ]
+            }
+          },
+          "$description": "Dark card border - visible red"
+        },
+        "transparent": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0,
+              0,
+              0
+            ],
+            "alpha": 0
+          },
+          "$extensions": {
+            "design.paths.light": {
+              "colorSpace": "srgb",
+              "components": [
+                0,
+                0,
+                0
+              ],
+              "alpha": 0
+            },
+            "design.paths.dark": {
+              "colorSpace": "srgb",
+              "components": [
+                0,
+                0,
+                0
+              ],
+              "alpha": 0
+            }
+          },
+          "$description": "Transparent card border - no border"
+        }
+      },
+      "elevation": {
+        "near": {
+          "$type": "shadow",
+          "$value": {
+            "offsetX": {
+              "value": 0,
+              "unit": "px"
+            },
+            "offsetY": {
+              "value": 1,
+              "unit": "px"
+            },
+            "blur": {
+              "value": 3,
+              "unit": "px"
+            },
+            "color": {
+              "colorSpace": "srgb",
+              "components": [
+                0,
+                0,
+                0
+              ],
+              "alpha": 0.12
+            }
+          },
+          "$description": "Near elevation - subtle shadow"
+        },
+        "default": {
+          "$type": "shadow",
+          "$value": {
+            "offsetX": {
+              "value": 0,
+              "unit": "px"
+            },
+            "offsetY": {
+              "value": 3,
+              "unit": "px"
+            },
+            "blur": {
+              "value": 6,
+              "unit": "px"
+            },
+            "color": {
+              "colorSpace": "srgb",
+              "components": [
+                0,
+                0,
+                0
+              ],
+              "alpha": 0.14
+            }
+          },
+          "$description": "Default elevation - standard shadow"
+        },
+        "far": {
+          "$type": "shadow",
+          "$value": {
+            "offsetX": {
+              "value": 0,
+              "unit": "px"
+            },
+            "offsetY": {
+              "value": 8,
+              "unit": "px"
+            },
+            "blur": {
+              "value": 16,
+              "unit": "px"
+            },
+            "color": {
+              "colorSpace": "srgb",
+              "components": [
+                0,
+                0,
+                0
+              ],
+              "alpha": 0.18
+            }
+          },
+          "$description": "Far elevation - prominent shadow"
+        },
+        "none": {
+          "$type": "shadow",
+          "$value": {
+            "offsetX": {
+              "value": 0,
+              "unit": "px"
+            },
+            "offsetY": {
+              "value": 0,
+              "unit": "px"
+            },
+            "blur": {
+              "value": 0,
+              "unit": "px"
+            },
+            "color": {
+              "colorSpace": "srgb",
+              "components": [
+                0,
+                0,
+                0
+              ],
+              "alpha": 0
+            }
+          },
+          "$description": "No elevation - flat cards"
+        }
       }
     },
     "element": {
@@ -6903,6 +7269,59 @@
           "unit": "px"
         },
         "$description": "Badge/chip radius (pill)"
+      }
+    },
+    "input": {
+      "radius": {
+        "default": {
+          "$type": "dimension",
+          "$value": {
+            "value": 8,
+            "unit": "px"
+          },
+          "$description": "Input border radius - balanced, approachable (8px)"
+        }
+      },
+      "border": {
+        "defaultWidth": {
+          "$type": "dimension",
+          "$value": "1px",
+          "$description": "Input border width - standard (1px)"
+        },
+        "defaultStyle": {
+          "$type": "strokeStyle",
+          "$value": "solid",
+          "$description": "Input border style - solid"
+        },
+        "focusWidth": {
+          "$type": "dimension",
+          "$value": "2px",
+          "$description": "Input focus border width - emphasized (2px)"
+        }
+      }
+    },
+    "field": {
+      "radius": {
+        "default": {
+          "$type": "dimension",
+          "$value": {
+            "value": 8,
+            "unit": "px"
+          },
+          "$description": "Field border radius - balanced (8px)"
+        }
+      },
+      "border": {
+        "defaultWidth": {
+          "$type": "dimension",
+          "$value": "1px",
+          "$description": "Field border width - standard (1px)"
+        },
+        "focusWidth": {
+          "$type": "dimension",
+          "$value": "2px",
+          "$description": "Field focus border width - emphasized (2px)"
+        }
       }
     }
   },
@@ -7504,9 +7923,9 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.807843137254902,
-            0.807843137254902,
-            0.807843137254902
+            0.9882352941176471,
+            0.9176470588235294,
+            0.9176470588235294
           ]
         }
       },
@@ -7560,9 +7979,9 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.6823529411764706,
-              0.6823529411764706,
-              0.6823529411764706
+              0.9490196078431372,
+              0.5803921568627451,
+              0.5843137254901961
             ]
           }
         }
@@ -7633,7 +8052,29 @@
         },
         "elevation": {
           "$type": "shadow",
-          "$value": "0px 1px 3px rgba(0,0,0,0.12), 0px 1px 2px rgba(0,0,0,0.08)"
+          "$value": {
+            "offsetX": {
+              "value": 0,
+              "unit": "px"
+            },
+            "offsetY": {
+              "value": 1,
+              "unit": "px"
+            },
+            "blur": {
+              "value": 3,
+              "unit": "px"
+            },
+            "color": {
+              "colorSpace": "srgb",
+              "components": [
+                0,
+                0,
+                0
+              ],
+              "alpha": 0.12
+            }
+          }
         }
       },
       "danger": {
@@ -7689,9 +8130,9 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.6823529411764706,
-            0.6823529411764706,
-            0.6823529411764706
+            0.9686274509803922,
+            0.7568627450980392,
+            0.7607843137254902
           ]
         }
       },
@@ -7791,11 +8232,8 @@
   "interaction": {
     "focus": {
       "ringWidth": {
-        "$type": "dimension",
-        "$value": {
-          "value": 2,
-          "unit": "px"
-        },
+        "$type": "borderWidth",
+        "$value": "2px",
         "$description": "Focus ring thickness"
       },
       "ringOffset": {
@@ -8322,6 +8760,10 @@
       }
     }
   },
+  "meta": {
+    "version": "1.0.0",
+    "source": "Semantic roles (aliases to core)"
+  },
   "components": {
     "action": {
       "padding": {
@@ -8721,18 +9163,12 @@
         "width": {
           "default": {
             "$type": "dimension",
-            "$value": {
-              "value": 1,
-              "unit": "px"
-            },
+            "$value": "1px",
             "$description": "Default input border width"
           },
           "focus": {
             "$type": "dimension",
-            "$value": {
-              "value": 2,
-              "unit": "px"
-            },
+            "$value": "2px",
             "$description": "Input focus border width"
           }
         }
@@ -8981,10 +9417,7 @@
       "border": {
         "width": {
           "$type": "dimension",
-          "$value": {
-            "value": 1,
-            "unit": "px"
-          },
+          "$value": "1px",
           "$description": "Feedback border width"
         }
       }
@@ -9226,10 +9659,7 @@
       "$type": "composition",
       "$value": {
         "border": {
-          "width": {
-            "value": 2,
-            "unit": "px"
-          },
+          "width": "2px",
           "style": "solid",
           "color": {
             "colorSpace": "srgb",
