@@ -1,32 +1,87 @@
 {
   "$schema": "../designTokens.schema.json",
   "spacing": {
+    "density": {
+      "mode": {
+        "$type": "string",
+        "$value": "default",
+        "$description": "Active spacing density mode (tight, compact, default, spacious)"
+      }
+    },
     "padding": {
       "container": {
         "$type": "dimension",
-        "$value": "{spacing.size.06}"
+        "$value": "{spacing.density.default.md}",
+        "$description": "Container padding - maps to density mode"
       },
       "card": {
         "$type": "dimension",
-        "$value": "{spacing.size.04}"
+        "$value": "{spacing.density.default.sm}",
+        "$description": "Card padding - maps to density mode"
+      },
+      "component": {
+        "$type": "dimension",
+        "$value": "{spacing.density.default.sm}",
+        "$description": "Component padding - maps to density mode"
+      },
+      "section": {
+        "$type": "dimension",
+        "$value": "{spacing.density.default.lg}",
+        "$description": "Section padding - maps to density mode"
+      },
+      "page": {
+        "$type": "dimension",
+        "$value": "{spacing.density.default.xl}",
+        "$description": "Page padding - maps to density mode"
       }
     },
     "gap": {
       "grid": {
         "$type": "dimension",
-        "$value": "{spacing.size.04}"
+        "$value": "{spacing.density.default.sm}",
+        "$description": "Grid gap - maps to density mode"
       },
       "gridLarge": {
         "$type": "dimension",
-        "$value": "{spacing.size.09}"
+        "$value": "{spacing.density.default.xl}",
+        "$description": "Large grid gap - maps to density mode"
       },
       "gridMedium": {
         "$type": "dimension",
-        "$value": "{spacing.size.07}"
+        "$value": "{spacing.density.default.md}",
+        "$description": "Medium grid gap - maps to density mode"
       },
       "gridSmall": {
         "$type": "dimension",
-        "$value": "{spacing.size.04}"
+        "$value": "{spacing.density.default.xs}",
+        "$description": "Small grid gap - maps to density mode"
+      },
+      "component": {
+        "$type": "dimension",
+        "$value": "{spacing.density.default.xs}",
+        "$description": "Component gap - maps to density mode"
+      },
+      "section": {
+        "$type": "dimension",
+        "$value": "{spacing.density.default.lg}",
+        "$description": "Section gap - maps to density mode"
+      },
+      "stack": {
+        "$type": "dimension",
+        "$value": "{spacing.density.default.sm}",
+        "$description": "Stack gap (vertical spacing) - maps to density mode"
+      }
+    },
+    "margin": {
+      "component": {
+        "$type": "dimension",
+        "$value": "{spacing.density.default.sm}",
+        "$description": "Component margin - maps to density mode"
+      },
+      "section": {
+        "$type": "dimension",
+        "$value": "{spacing.density.default.lg}",
+        "$description": "Section margin - maps to density mode"
       }
     }
   }

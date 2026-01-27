@@ -1,16 +1,20 @@
 {
-  "component": {
-    "truncate": {
-      "toggle": {
-        "color": "{color.accent.primary}",
-        "colorHover": "{color.accent.primaryHover}",
-        "fontSize": "inherit",
-        "fontWeight": "{font.weight.medium}",
-        "spacing": "{space.100}"
+  "prefix": "truncate",
+  "tokens": {
+    "color": {
+      "foreground": {
+        "link": "{semantic.color.foreground.link}",
+        "linkHover": "{semantic.color.foreground.linkHover}"
       },
-      "fade": {
-        "gradient": "linear-gradient(to right, transparent 0%, {color.background.default} 100%)"
+      "background": {
+        "primary": "{semantic.color.background.primary}"
       }
+    },
+    "typography": {
+      "fontWeight": "{semantic.typography.fontWeight.medium}"
+    },
+    "spacing": {
+      "toggle": "{core.spacing.size.02}"
     }
   }
 }

@@ -11,22 +11,22 @@
 }
 
 .sm {
-  font-size: var(--semantic-typography-body-03);
-  line-height: var(--semantic-typography-line-height-body);
+  font-size: var(--blockquote-typography-sm-fontSize);
+  line-height: var(--blockquote-typography-sm-lineHeight);
 }
 
 .md {
-  font-size: var(--semantic-typography-body-02);
-  line-height: var(--semantic-typography-line-height-body);
+  font-size: var(--blockquote-typography-md-fontSize);
+  line-height: var(--blockquote-typography-md-lineHeight);
 }
 
 .lg {
-  font-size: var(--semantic-typography-body-01);
-  line-height: var(--semantic-typography-line-height-body);
+  font-size: var(--blockquote-typography-lg-fontSize);
+  line-height: var(--blockquote-typography-lg-lineHeight);
 }
 
 .default {
-  border-inline-start: var(--core-shape-border-width-thick) solid
+  border-inline-start: var(--blockquote-size-border-thick) solid
     var(--blockquote-color-border-default);
   padding-inline-start: var(--blockquote-size-padding-default);
 }
@@ -35,12 +35,12 @@
   background: var(--blockquote-color-background-default);
   border: 1px solid var(--blockquote-color-border-default);
   border-radius: var(--blockquote-size-radius-default);
-  border-inline-start-width: var(--core-shape-border-width-thick);
+  border-inline-start-width: var(--blockquote-size-border-thick);
 }
 
 .highlighted {
   background: var(--blockquote-color-background-default);
   border-radius: var(--blockquote-size-radius-default);
-  border-inline-start: var(--core-shape-border-width-thick) solid
+  border-inline-start: var(--blockquote-size-border-thick) solid
     var(--blockquote-color-border-accent);
 }

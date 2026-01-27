@@ -5,19 +5,46 @@
   /* === Color Tokens === */
   --card-color-background-default: var(--semantic-color-background-primary);
   --card-color-background-hover: var(--semantic-color-background-secondary);
+  --card-color-background-secondary: var(--semantic-color-background-secondary);
   --card-color-border-default: var(--semantic-color-border-light);
   --card-color-border-accent: var(--semantic-color-border-accent);
   --card-color-foreground-primary: var(--semantic-color-foreground-primary);
   --card-color-foreground-secondary: var(--semantic-color-foreground-secondary);
+  --card-color-foreground-link: var(--semantic-color-foreground-link);
+  --card-color-badge-success-background: var(--semantic-color-background-success-subtle);
+  --card-color-badge-success-foreground: var(--semantic-color-foreground-on-success-subtle);
+  --card-color-badge-warning-background: var(--semantic-color-background-warning-subtle);
+  --card-color-badge-warning-foreground: var(--semantic-color-foreground-on-warning-subtle);
+  --card-color-badge-info-background: var(--semantic-color-background-info-subtle);
+  --card-color-badge-info-foreground: var(--semantic-color-foreground-on-info-subtle);
+  --card-color-badge-error-background: var(--semantic-color-background-danger-subtle);
+  --card-color-badge-error-foreground: var(--semantic-color-foreground-on-danger-subtle);
+  --card-color-badge-neutral-background: var(--semantic-color-background-secondary);
+  --card-color-badge-neutral-foreground: var(--semantic-color-foreground-secondary);
+  --card-color-badge-accent-background: var(--semantic-color-background-accent);
+  --card-color-badge-accent-foreground: var(--semantic-color-foreground-on-brand);
 
   /* === Size Tokens === */
   --card-size-padding-default: var(--core-spacing-size-06);
+  --card-size-padding-note: var(--core-spacing-size-04);
+  --card-size-padding-badge-y: var(--core-spacing-size-01);
+  --card-size-padding-badge-x: var(--core-spacing-size-03);
   --card-size-radius-default: var(--semantic-shape-control-radius-default);
+  --card-size-radius-medium: var(--core-shape-radius-medium);
+  --card-size-radius-full: var(--core-shape-radius-full);
+  --card-size-gap-small: var(--core-spacing-size-02);
+  --card-size-gap-default: var(--core-spacing-size-03);
 
   /* === Elevation Tokens === */
   --card-elevation-default: var(--semantic-elevation-default);
   --card-elevation-hover: var(--semantic-elevation-hover);
 
   /* === Motion Tokens === */
+  --card-motion-duration: var(--semantic-motion-interaction-press-duration);
+  --card-motion-easing: var(--semantic-motion-interaction-press-easing);
   --card-motion-hover-offset: -0.125rem;
+
+  /* === Typography Tokens === */
+  --card-typography-line-height-heading: var(--semantic-typography-line-height-heading);
+  --card-typography-line-height-normal: var(--semantic-typography-line-height-normal);
 }

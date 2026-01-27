@@ -24,6 +24,9 @@
     },
     "elevation": {
       "default": "{semantic.elevation.default}"
+    },
+    "overlay": {
+      "imageOverlay": "{semantic.color.background.imageOverlay}"
     }
   }
 }

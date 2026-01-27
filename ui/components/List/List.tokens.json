@@ -1,43 +1,49 @@
 {
-  "component": {
-    "list": {
-      "typography": {
-        "sm": {
-          "fontSize": "{font.size.200}",
-          "lineHeight": "{font.lineHeight.200}"
-        },
-        "md": {
-          "fontSize": "{font.size.300}",
-          "lineHeight": "{font.lineHeight.300}"
-        },
-        "lg": {
-          "fontSize": "{font.size.400}",
-          "lineHeight": "{font.lineHeight.400}"
-        }
+  "prefix": "list",
+  "tokens": {
+    "color": {
+      "foreground": {
+        "primary": "{semantic.color.foreground.primary}",
+        "secondary": "{semantic.color.foreground.secondary}"
       },
-      "spacing": {
-        "none": {
-          "value": 0,
-          "unit": "px"
-        },
-        "sm": "{space.100}",
-        "md": "{space.200}",
-        "lg": "{space.300}",
-        "indent": "{space.400}"
+      "border": {
+        "default": "{semantic.color.border.subtle}"
+      }
+    },
+    "typography": {
+      "sm": {
+        "fontSize": "{semantic.typography.body.04}",
+        "lineHeight": "{semantic.typography.lineHeight.body}"
       },
-      "marker": {
-        "color": "{color.foreground.muted}",
-        "spacing": "{space.200}"
+      "md": {
+        "fontSize": "{semantic.typography.body.03}",
+        "lineHeight": "{semantic.typography.lineHeight.body}"
       },
-      "divider": {
-        "color": "{color.border.subtle}",
-        "width": {
-          "value": 1,
-          "unit": "px"
-        }
+      "lg": {
+        "fontSize": "{semantic.typography.body.02}",
+        "lineHeight": "{semantic.typography.lineHeight.body}"
+      }
+    },
+    "size": {
+      "padding": {
+        "default": "{core.spacing.size.06}"
       },
-      "surface": {
-        "color": "{color.foreground.default}"
+      "border": {
+        "default": "{core.shape.border.width.hairline}"
+      }
+    },
+    "spacing": {
+      "inline": "{core.spacing.size.04}",
+      "divided": "{core.spacing.size.05}",
+      "spaced": "{core.spacing.size.06}",
+      "sm": "{core.spacing.size.03}",
+      "md": "{core.spacing.size.05}",
+      "lg": "{core.spacing.size.06}",
+      "dl": {
+        "dt": "{core.spacing.size.03}",
+        "dd": "{core.spacing.size.05}",
+        "gap": "{core.spacing.size.03}",
+        "gapX": "{core.spacing.size.05}"
       }
     }
   }

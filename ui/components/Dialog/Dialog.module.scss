@@ -9,7 +9,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: var(--core-spacing-size-04);
+  padding: var(--dialog-spacing-backdrop-padding);
   animation: backdrop-enter var(--dialog-motion-duration-enter, 200ms)
     var(--dialog-motion-easing-enter, ease-out) forwards;
 
@@ -124,12 +124,12 @@
       display: inline-flex;
       justify-content: center;
       align-items: center;
-      width: var(--core-spacing-size-08);
-      height: var(--core-spacing-size-08);
+      width: var(--dialog-size-closeButton-size);
+      height: var(--dialog-size-closeButton-size);
       padding: 0;
       background: transparent;
       border: none;
-      border-radius: var(--semantic-shape-radius-small);
+      border-radius: var(--dialog-size-radius-small);
       color: var(--dialog-color-foreground-secondary);
       font-size: 1.25rem;
       line-height: 1;
@@ -139,21 +139,21 @@
         color var(--dialog-motion-duration-enter)
           var(--dialog-motion-easing-enter);
       cursor: pointer;
-      inset-block-start: var(--core-spacing-size-04);
-      inset-inline-end: var(--core-spacing-size-04);
+      inset-block-start: var(--dialog-size-closeButton-offset);
+      inset-inline-end: var(--dialog-size-closeButton-offset);
 
       &:hover {
-        background: var(--semantic-color-background-hover);
+        background: var(--dialog-color-background-hover);
         color: var(--dialog-color-foreground-default);
       }
 
       &:focus-visible {
-        outline: 2px solid var(--semantic-color-border-focus);
+        outline: 2px solid var(--dialog-color-border-focus);
         outline-offset: 2px;
       }
 
       &:active {
-        background: var(--semantic-color-background-active);
+        background: var(--dialog-color-background-active);
       }
     }
   }
@@ -207,12 +207,12 @@
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    width: var(--core-spacing-size-08);
-    height: var(--core-spacing-size-08);
+    width: var(--dialog-size-closeButton-size);
+    height: var(--dialog-size-closeButton-size);
     padding: 0;
     background: transparent;
     border: none;
-    border-radius: var(--semantic-shape-radius-small);
+    border-radius: var(--dialog-size-radius-small);
     color: var(--dialog-color-foreground-secondary);
     font-size: 1.25rem;
     line-height: 1;
@@ -222,21 +222,21 @@
       color var(--dialog-motion-duration-enter)
         var(--dialog-motion-easing-enter);
     cursor: pointer;
-    inset-block-start: var(--core-spacing-size-04);
-    inset-inline-end: var(--core-spacing-size-04);
+    inset-block-start: var(--dialog-size-closeButton-offset);
+    inset-inline-end: var(--dialog-size-closeButton-offset);
 
     &:hover {
-      background: var(--semantic-color-background-hover);
+      background: var(--dialog-color-background-hover);
       color: var(--dialog-color-foreground-default);
     }
 
     &:focus-visible {
-      outline: 2px solid var(--semantic-color-border-focus);
+      outline: 2px solid var(--dialog-color-border-focus);
       outline-offset: 2px;
     }
 
     &:active {
-      background: var(--semantic-color-background-active);
+      background: var(--dialog-color-background-active);
     }
   }
 }
@@ -305,7 +305,7 @@
 // Mobile responsive adjustments
 @media (width <= 640px) {
   .backdrop {
-    padding: var(--core-spacing-size-02);
+    padding: var(--dialog-spacing-backdrop-paddingMobile);
   }
 
   .dialog {
@@ -320,18 +320,20 @@
   }
 
   .header {
-    padding: var(--core-spacing-size-05);
+    padding: var(--dialog-spacing-header-paddingMobile);
   }
 
   .body {
-    padding: var(--core-spacing-size-03) var(--core-spacing-size-05);
+    padding: var(--dialog-spacing-body-paddingYMobile)
+      var(--dialog-spacing-body-paddingXMobile);
   }
 
   .footer {
     flex-direction: column-reverse;
-    gap: var(--core-spacing-size-02);
-    padding: var(--core-spacing-size-03) var(--core-spacing-size-05)
-      var(--core-spacing-size-05);
+    gap: var(--dialog-spacing-footer-gapMobile);
+    padding: var(--dialog-spacing-footer-paddingYMobile)
+      var(--dialog-spacing-footer-paddingXMobile)
+      var(--dialog-spacing-footer-paddingBottomMobile);
 
     > * {
       width: 100%;

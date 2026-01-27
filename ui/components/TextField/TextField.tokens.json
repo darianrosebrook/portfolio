@@ -28,7 +28,8 @@
       "helper": {
         "default": "{semantic.color.foreground.tertiary}",
         "error": "{semantic.color.status.danger}"
-      }
+      },
+      "error": "{semantic.color.foreground.danger}"
     },
     "typography": {
       "label": {

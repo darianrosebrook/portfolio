@@ -18,9 +18,15 @@
   --field-color-bg: var(--semantic-color-background-elevated);
   --field-color-fg: var(--semantic-color-foreground-primary);
   --field-color-border: var(--semantic-color-border-subtle);
+  --field-color-border-bold: var(--semantic-color-border-bold);
   --field-color-focus-border: var(--semantic-color-border-focus);
+  --field-color-focus-text: var(--semantic-color-interactive-primary);
   --field-color-invalid-border: var(--semantic-color-border-danger);
   --field-color-invalid-text: var(--semantic-color-foreground-danger);
+  --field-color-valid-border: var(--semantic-color-feedback-success-border);
+
+  /* === Spacing Tokens === */
+  --field-spacing-indicator: var(--core-spacing-size-03);
 
   /* === Other Tokens === */
   --field-radius: var(--semantic-shape-control-radius-default);

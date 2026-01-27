@@ -76,6 +76,9 @@
       },
       "minHeight": {
         "default": "{core.spacing.size.12}"
+      },
+      "gap": {
+        "small": "{semantic.spacing.gap.grid.small}"
       }
     },
     "radius": {

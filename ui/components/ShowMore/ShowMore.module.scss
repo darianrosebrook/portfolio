@@ -8,7 +8,7 @@
   background: var(--showmore-color-background-default);
   border-radius: var(--showmore-size-radius-default);
   box-shadow: var(--showmore-elevation-default)
-    var(--semantic-color-background-imageOverlay);
+    var(--showmore-overlay-imageOverlay);
 }
 
 @media (prefers-reduced-motion: reduce) {

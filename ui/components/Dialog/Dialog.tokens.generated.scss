@@ -5,10 +5,13 @@
   /* === Color Tokens === */
   --dialog-color-background-default: var(--semantic-color-background-primary);
   --dialog-color-background-backdrop: var(--semantic-color-overlay-scrim);
+  --dialog-color-background-hover: var(--semantic-color-background-hover);
+  --dialog-color-background-active: var(--semantic-color-background-active);
   --dialog-color-foreground-default: var(--semantic-color-foreground-primary);
   --dialog-color-foreground-title: var(--semantic-color-foreground-primary);
   --dialog-color-foreground-secondary: var(--semantic-color-foreground-secondary);
   --dialog-color-border-default: var(--semantic-color-border-subtle);
+  --dialog-color-border-focus: var(--semantic-color-border-focus);
 
   /* === Size Tokens === */
   --dialog-size-sm-width: 400px;
@@ -28,24 +31,36 @@
   --dialog-size-full-max-width: 100vw;
   --dialog-size-full-padding: var(--core-spacing-size-08);
   --dialog-size-radius-default: var(--semantic-shape-radius-large);
+  --dialog-size-radius-small: var(--semantic-shape-radius-small);
+  --dialog-size-close-button-size: var(--core-spacing-size-08);
+  --dialog-size-close-button-offset: var(--core-spacing-size-04);
 
   /* === Elevation Tokens === */
   --dialog-elevation-default: var(--semantic-elevation-surface-floating);
 
   /* === Spacing Tokens === */
+  --dialog-spacing-backdrop-padding: var(--core-spacing-size-04);
+  --dialog-spacing-backdrop-padding-mobile: var(--core-spacing-size-02);
   --dialog-spacing-header-padding-top: var(--core-spacing-size-06);
   --dialog-spacing-header-padding-right: var(--core-spacing-size-07);
   --dialog-spacing-header-padding-bottom: var(--core-spacing-size-04);
   --dialog-spacing-header-padding-left: var(--core-spacing-size-07);
+  --dialog-spacing-header-padding-mobile: var(--core-spacing-size-05);
   --dialog-spacing-body-padding-top: var(--core-spacing-size-04);
   --dialog-spacing-body-padding-right: var(--core-spacing-size-07);
   --dialog-spacing-body-padding-bottom: var(--core-spacing-size-04);
   --dialog-spacing-body-padding-left: var(--core-spacing-size-07);
+  --dialog-spacing-body-padding-y-mobile: var(--core-spacing-size-03);
+  --dialog-spacing-body-padding-x-mobile: var(--core-spacing-size-05);
   --dialog-spacing-footer-padding-top: var(--core-spacing-size-04);
   --dialog-spacing-footer-padding-right: var(--core-spacing-size-07);
   --dialog-spacing-footer-padding-bottom: var(--core-spacing-size-06);
   --dialog-spacing-footer-padding-left: var(--core-spacing-size-07);
   --dialog-spacing-footer-gap: var(--core-spacing-size-03);
+  --dialog-spacing-footer-gap-mobile: var(--core-spacing-size-02);
+  --dialog-spacing-footer-padding-y-mobile: var(--core-spacing-size-03);
+  --dialog-spacing-footer-padding-x-mobile: var(--core-spacing-size-05);
+  --dialog-spacing-footer-padding-bottom-mobile: var(--core-spacing-size-05);
 
   /* === Typography Tokens === */
   --dialog-typography-title-font-size: var(--semantic-typography-heading-04);

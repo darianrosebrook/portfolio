@@ -5,7 +5,7 @@
 
   &.inline {
     display: inline-flex;
-    gap: var(--semantic-spacing-gap-grid-small);
+    gap: var(--alert-spacing-gap-small);
     align-items: baseline;
     padding: var(--alert-size-inline-padding);
     background-color: var(--alert-color-background-primary);

@@ -36,15 +36,15 @@
   padding: 0;
   background: none;
   border: none;
-  color: var(--semantic-color-foreground-link);
-  font-weight: var(--semantic-typography-font-weight-medium);
+  color: var(--truncate-color-foreground-link);
+  font-weight: var(--truncate-typography-fontWeight);
   font-size: inherit;
   text-decoration: underline;
   cursor: pointer;
-  margin-inline-start: var(--core-spacing-size-02);
+  margin-inline-start: var(--truncate-spacing-toggle);
 
   &:hover {
-    color: var(--semantic-color-foreground-link-hover);
+    color: var(--truncate-color-foreground-linkHover);
   }
 
   &:focus-visible {
@@ -59,7 +59,7 @@
   background: linear-gradient(
     to right,
     transparent 0%,
-    var(--semantic-color-background-primary) 100%
+    var(--truncate-color-background-primary) 100%
   );
   pointer-events: none;
   block-size: 1.2em;

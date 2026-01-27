@@ -4,7 +4,9 @@
     "color": {
       "background": {
         "default": "{semantic.color.background.primary}",
-        "backdrop": "{semantic.color.overlay.scrim}"
+        "backdrop": "{semantic.color.overlay.scrim}",
+        "hover": "{semantic.color.background.hover}",
+        "active": "{semantic.color.background.active}"
       },
       "foreground": {
         "default": "{semantic.color.foreground.primary}",
@@ -12,7 +14,8 @@
         "secondary": "{semantic.color.foreground.secondary}"
       },
       "border": {
-        "default": "{semantic.color.border.subtle}"
+        "default": "{semantic.color.border.subtle}",
+        "focus": "{semantic.color.border.focus}"
       }
     },
     "size": {
@@ -76,31 +79,47 @@
         "padding": "{core.spacing.size.08}"
       },
       "radius": {
-        "default": "{semantic.shape.radius.large}"
+        "default": "{semantic.shape.radius.large}",
+        "small": "{semantic.shape.radius.small}"
+      },
+      "closeButton": {
+        "size": "{core.spacing.size.08}",
+        "offset": "{core.spacing.size.04}"
       }
     },
     "elevation": {
       "default": "{semantic.elevation.surface.floating}"
     },
     "spacing": {
+      "backdrop": {
+        "padding": "{core.spacing.size.04}",
+        "paddingMobile": "{core.spacing.size.02}"
+      },
       "header": {
         "paddingTop": "{core.spacing.size.06}",
         "paddingRight": "{core.spacing.size.07}",
         "paddingBottom": "{core.spacing.size.04}",
-        "paddingLeft": "{core.spacing.size.07}"
+        "paddingLeft": "{core.spacing.size.07}",
+        "paddingMobile": "{core.spacing.size.05}"
       },
       "body": {
         "paddingTop": "{core.spacing.size.04}",
         "paddingRight": "{core.spacing.size.07}",
         "paddingBottom": "{core.spacing.size.04}",
-        "paddingLeft": "{core.spacing.size.07}"
+        "paddingLeft": "{core.spacing.size.07}",
+        "paddingYMobile": "{core.spacing.size.03}",
+        "paddingXMobile": "{core.spacing.size.05}"
       },
       "footer": {
         "paddingTop": "{core.spacing.size.04}",
         "paddingRight": "{core.spacing.size.07}",
         "paddingBottom": "{core.spacing.size.06}",
         "paddingLeft": "{core.spacing.size.07}",
-        "gap": "{core.spacing.size.03}"
+        "gap": "{core.spacing.size.03}",
+        "gapMobile": "{core.spacing.size.02}",
+        "paddingYMobile": "{core.spacing.size.03}",
+        "paddingXMobile": "{core.spacing.size.05}",
+        "paddingBottomMobile": "{core.spacing.size.05}"
       }
     },
     "typography": {

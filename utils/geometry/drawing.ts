@@ -28,6 +28,8 @@ export interface DrawColors {
   featureHighlightFill: string;
   /** Stroke color for feature highlights */
   featureHighlightStroke: string;
+  /** Secondary background color used when feature detection is active */
+  featureBackground: string;
 }
 
 export function drawMetricLine(
@@ -526,6 +528,66 @@ export function transformPoint(
 }
 
 /**
+ * Transforms SVG path data from glyph design space to canvas space.
+ * Handles M, L, Q, C, and Z commands.
+ */
+function transformPathData(d: string, params: TransformParams): string {
+  // Parse and transform each coordinate in the path
+  // Path commands: M x y, L x y, Q cx cy x y, C c1x c1y c2x c2y x y, Z
+  const { scale, xOffset, baseline } = params;
+
+  // Transform a single coordinate pair
+  const tx = (x: number) => x * scale + xOffset;
+  const ty = (y: number) => baseline - y * scale;
+
+  // Regex to match path commands and their arguments
+  const commandRegex = /([MLQCZ])\s*([-\d.\s,]*)/gi;
+  const parts: string[] = [];
+
+  let match;
+  while ((match = commandRegex.exec(d)) !== null) {
+    const cmd = match[1].toUpperCase();
+    const argsStr = match[2].trim();
+
+    if (cmd === 'Z') {
+      parts.push('Z');
+      continue;
+    }
+
+    // Parse numeric arguments
+    const args = argsStr
+      .split(/[\s,]+/)
+      .filter((s) => s.length > 0)
+      .map(parseFloat);
+
+    switch (cmd) {
+      case 'M':
+      case 'L':
+        if (args.length >= 2) {
+          parts.push(`${cmd} ${tx(args[0])} ${ty(args[1])}`);
+        }
+        break;
+      case 'Q':
+        if (args.length >= 4) {
+          parts.push(
+            `Q ${tx(args[0])} ${ty(args[1])} ${tx(args[2])} ${ty(args[3])}`
+          );
+        }
+        break;
+      case 'C':
+        if (args.length >= 6) {
+          parts.push(
+            `C ${tx(args[0])} ${ty(args[1])} ${tx(args[2])} ${ty(args[3])} ${tx(args[4])} ${ty(args[5])}`
+          );
+        }
+        break;
+    }
+  }
+
+  return parts.join(' ');
+}
+
+/**
  * Transforms a shape from glyph design space to canvas space.
  */
 export function transformShape(
@@ -587,9 +649,13 @@ export function transformShape(
     }
 
     case 'path': {
-      // Path data would need SVG transform - keep as-is for now
-      // TODO: Implement path transformation if needed
-      return shape;
+      // Transform SVG path data from glyph space to canvas space
+      // This involves scaling and flipping Y coordinates
+      const transformedD = transformPathData(shape.d, params);
+      return {
+        type: 'path',
+        d: transformedD,
+      };
     }
 
     default:
@@ -724,6 +790,71 @@ function drawRectShape(
 }
 
 /**
+ * Draws a glyph feature using canvas clipping to show the actual glyph geometry
+ * within the feature bounds. This provides pixel-perfect precision by using the
+ * glyph's actual path curves rather than simple rectangles.
+ *
+ * Uses 'evenodd' fill rule to properly handle glyphs with holes (like 'D', 'O', 'e').
+ * This ensures only the solid stroke portions are filled, not the counter spaces.
+ *
+ * @param ctx - Canvas context (already translated to glyph origin)
+ * @param glyph - Fontkit glyph object
+ * @param scale - Scale factor from font units to pixels
+ * @param clipRect - Rectangle bounds in canvas space to clip to
+ * @param colors - Color scheme for rendering
+ */
+export function drawClippedGlyphFeature(
+  ctx: CanvasRenderingContext2D,
+  glyph: Glyph,
+  scale: number,
+  clipRect: { x: number; y: number; width: number; height: number },
+  colors: DrawColors
+): void {
+  if (!glyph?.path?.commands) return;
+
+  ctx.save();
+
+  // Create clip region from feature bounds
+  ctx.beginPath();
+  ctx.rect(clipRect.x, clipRect.y, clipRect.width, clipRect.height);
+  ctx.clip();
+
+  // Draw glyph path - only portion within clip shows
+  ctx.beginPath();
+  for (const cmd of glyph.path.commands) {
+    const args = cmd.args.map((a: number, i: number) =>
+      i % 2 === 0 ? a * scale : -a * scale
+    );
+    (ctx[cmd.command as keyof CanvasPath] as (...args: number[]) => void)(
+      ...args
+    );
+  }
+
+  // Fill with highlight color using evenodd rule
+  // This properly handles holes in glyphs (like the counter in 'D', 'O', etc.)
+  ctx.fillStyle = colors.highlightBackground;
+  ctx.globalAlpha = 0.5;
+  ctx.fill('evenodd');
+
+  // Stroke the visible glyph outline within the clip
+  ctx.globalAlpha = 1;
+  ctx.strokeStyle = colors.boundsStroke;
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  ctx.restore();
+
+  // Draw bounds outline (not clipped) - dashed to show feature region
+  ctx.save();
+  ctx.strokeStyle = colors.boundsStroke;
+  ctx.lineWidth = 1;
+  ctx.globalAlpha = 0.5;
+  ctx.setLineDash([4, 4]);
+  ctx.strokeRect(clipRect.x, clipRect.y, clipRect.width, clipRect.height);
+  ctx.restore();
+}
+
+/**
  * Draws a polyline shape.
  */
 function drawPolylineShape(
@@ -809,21 +940,49 @@ export function drawShape(
 }
 
 /**
+ * Options for drawing feature instances.
+ */
+export interface DrawFeatureOptions {
+  /** Glyph for clipped rendering (optional) */
+  glyph?: Glyph;
+  /** Whether to use clipped glyph geometry for rect shapes */
+  useClipping?: boolean;
+}
+
+/**
  * Draws a feature instance with coordinate transformation.
  *
  * @param ctx - Canvas context
  * @param instance - Feature instance from detector
  * @param params - Transform parameters (scale, xOffset, baseline)
  * @param colors - Color scheme
+ * @param options - Optional drawing options (glyph for clipping, etc.)
  */
 export function drawFeatureInstance(
   ctx: CanvasRenderingContext2D,
   instance: FeatureInstance,
   params: TransformParams,
-  colors: DrawColors
+  colors: DrawColors,
+  options?: DrawFeatureOptions
 ): void {
   const transformed = transformShape(instance.shape, params);
-  drawShape(ctx, transformed, colors);
+
+  // For rect shapes, optionally use glyph clipping for precise geometry
+  if (
+    transformed.type === 'rect' &&
+    options?.useClipping &&
+    options?.glyph
+  ) {
+    const clipRect = {
+      x: transformed.x,
+      y: transformed.y,
+      width: transformed.width,
+      height: transformed.height,
+    };
+    drawClippedGlyphFeature(ctx, options.glyph, params.scale, clipRect, colors);
+  } else {
+    drawShape(ctx, transformed, colors);
+  }
 }
 
 /**
@@ -833,20 +992,63 @@ export function drawFeatureInstance(
  * @param instances - Map of feature ID to instances
  * @param params - Transform parameters
  * @param colors - Color scheme
+ * @param options - Optional drawing options (glyph for clipping, etc.)
  */
 export function drawFeatureInstances(
   ctx: CanvasRenderingContext2D,
   instances: Map<string, FeatureInstance[]>,
   params: TransformParams,
-  colors: DrawColors
+  colors: DrawColors,
+  options?: DrawFeatureOptions
 ): void {
   ctx.save();
 
   for (const [_featureId, featureInstances] of instances) {
+    // Skip empty arrays for efficiency
+    if (featureInstances.length === 0) continue;
+    
     for (const instance of featureInstances) {
-      drawFeatureInstance(ctx, instance, params, colors);
+      drawFeatureInstance(ctx, instance, params, colors, options);
     }
   }
+
+  ctx.restore();
+}
+
+/**
+ * Draws the glyph with a secondary background color to indicate
+ * that feature detection is active. The highlighted features will
+ * then be drawn on top with the primary highlight color.
+ *
+ * @param ctx - Canvas context (already translated to glyph origin)
+ * @param glyph - Fontkit glyph object
+ * @param scale - Scale factor
+ * @param colors - Color scheme
+ */
+export function drawGlyphWithFeatureBackground(
+  ctx: CanvasRenderingContext2D,
+  glyph: Glyph,
+  scale: number,
+  colors: DrawColors
+): void {
+  if (!glyph?.path?.commands) return;
+
+  ctx.save();
+  ctx.beginPath();
+
+  for (const cmd of glyph.path.commands) {
+    const args = cmd.args.map((a: number, i: number) =>
+      i % 2 === 0 ? a * scale : -a * scale
+    );
+    (ctx[cmd.command as keyof CanvasPath] as (...args: number[]) => void)(
+      ...args
+    );
+  }
+  ctx.closePath();
+
+  // Fill with the secondary/feature background color
+  ctx.fillStyle = colors.featureBackground;
+  ctx.fill();
 
   ctx.restore();
 }

@@ -8,7 +8,7 @@
   background: var(--shuttle-color-background-default);
   border-radius: var(--shuttle-size-radius-default);
   box-shadow: var(--shuttle-elevation-default)
-    var(--semantic-color-background-imageOverlay);
+    var(--shuttle-overlay-imageOverlay);
 }
 
 @media (prefers-reduced-motion: reduce) {

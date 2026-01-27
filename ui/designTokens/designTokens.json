@@ -4002,26 +4002,26 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.11372549019607843,
-            0.5686274509803921,
-            0.984313725490196
+            0.9176470588235294,
+            0.39215686274509803,
+            0.396078431372549
           ]
         },
         "$extensions": {
           "design.paths.light": {
             "colorSpace": "srgb",
             "components": [
-              0.11372549019607843,
-              0.5686274509803921,
-              0.984313725490196
+              0.9176470588235294,
+              0.39215686274509803,
+              0.396078431372549
             ]
           },
           "design.paths.dark": {
             "colorSpace": "srgb",
             "components": [
-              0.0392156862745098,
-              0.396078431372549,
-              0.996078431372549
+              0.8509803921568627,
+              0.1607843137254902,
+              0.16862745098039217
             ]
           }
         },
@@ -4088,9 +4088,9 @@
             "$value": {
               "colorSpace": "srgb",
               "components": [
-                0.0392156862745098,
-                0.396078431372549,
-                0.996078431372549
+                0.8509803921568627,
+                0.1607843137254902,
+                0.16862745098039217
               ]
             },
             "$description": "Primary action background"
@@ -4100,9 +4100,9 @@
             "$value": {
               "colorSpace": "srgb",
               "components": [
+                0.6823529411764706,
                 0,
-                0.25882352941176473,
-                0.8627450980392157
+                0.00392156862745098
               ]
             },
             "$description": "Primary action hover state"
@@ -4112,9 +4112,9 @@
             "$value": {
               "colorSpace": "srgb",
               "components": [
+                0.4823529411764706,
                 0,
-                0.17647058823529413,
-                0.6
+                0
               ]
             },
             "$description": "Primary action active state"
@@ -4362,9 +4362,9 @@
             "$value": {
               "colorSpace": "srgb",
               "components": [
-                0.0392156862745098,
-                0.396078431372549,
-                0.996078431372549
+                0.8509803921568627,
+                0.1607843137254902,
+                0.16862745098039217
               ]
             },
             "$description": "Primary action border"
@@ -4374,9 +4374,9 @@
             "$value": {
               "colorSpace": "srgb",
               "components": [
-                0.11372549019607843,
-                0.5686274509803921,
-                0.984313725490196
+                0.9176470588235294,
+                0.39215686274509803,
+                0.396078431372549
               ]
             },
             "$description": "Primary action focus ring"
@@ -5774,6 +5774,11 @@
           "$type": "number",
           "$value": 1.5
         }
+      },
+      "fontWeight": {
+        "$type": "fontWeight",
+        "$value": 400,
+        "$description": "Regular body weight (400)"
       }
     },
     "button": {
@@ -5886,6 +5891,11 @@
           "value": 14,
           "unit": "px"
         }
+      },
+      "fontWeight": {
+        "$type": "fontWeight",
+        "$value": 500,
+        "$description": "Medium heading weight (500)"
       }
     },
     "oversize": {
@@ -6095,50 +6105,352 @@
         "$type": "dimension"
       }
     },
+    "density": {
+      "tight": {
+        "xs": {
+          "$type": "dimension",
+          "$value": {
+            "value": 2,
+            "unit": "px"
+          },
+          "$description": "Tight density - extra small (2px)"
+        },
+        "sm": {
+          "$type": "dimension",
+          "$value": {
+            "value": 4,
+            "unit": "px"
+          },
+          "$description": "Tight density - small (4px)"
+        },
+        "md": {
+          "$type": "dimension",
+          "$value": {
+            "value": 6,
+            "unit": "px"
+          },
+          "$description": "Tight density - medium (6px)"
+        },
+        "lg": {
+          "$type": "dimension",
+          "$value": {
+            "value": 8,
+            "unit": "px"
+          },
+          "$description": "Tight density - large (8px)"
+        },
+        "xl": {
+          "$type": "dimension",
+          "$value": {
+            "value": 12,
+            "unit": "px"
+          },
+          "$description": "Tight density - extra large (12px)"
+        },
+        "2xl": {
+          "$type": "dimension",
+          "$value": {
+            "value": 16,
+            "unit": "px"
+          },
+          "$description": "Tight density - 2x large (16px)"
+        }
+      },
+      "compact": {
+        "xs": {
+          "$type": "dimension",
+          "$value": {
+            "value": 4,
+            "unit": "px"
+          },
+          "$description": "Compact density - extra small (4px)"
+        },
+        "sm": {
+          "$type": "dimension",
+          "$value": {
+            "value": 8,
+            "unit": "px"
+          },
+          "$description": "Compact density - small (8px)"
+        },
+        "md": {
+          "$type": "dimension",
+          "$value": {
+            "value": 12,
+            "unit": "px"
+          },
+          "$description": "Compact density - medium (12px)"
+        },
+        "lg": {
+          "$type": "dimension",
+          "$value": {
+            "value": 16,
+            "unit": "px"
+          },
+          "$description": "Compact density - large (16px)"
+        },
+        "xl": {
+          "$type": "dimension",
+          "$value": {
+            "value": 20,
+            "unit": "px"
+          },
+          "$description": "Compact density - extra large (20px)"
+        },
+        "2xl": {
+          "$type": "dimension",
+          "$value": {
+            "value": 24,
+            "unit": "px"
+          },
+          "$description": "Compact density - 2x large (24px)"
+        }
+      },
+      "default": {
+        "xs": {
+          "$type": "dimension",
+          "$value": {
+            "value": 8,
+            "unit": "px"
+          },
+          "$description": "Default density - extra small (8px)"
+        },
+        "sm": {
+          "$type": "dimension",
+          "$value": {
+            "value": 16,
+            "unit": "px"
+          },
+          "$description": "Default density - small (16px)"
+        },
+        "md": {
+          "$type": "dimension",
+          "$value": {
+            "value": 24,
+            "unit": "px"
+          },
+          "$description": "Default density - medium (24px)"
+        },
+        "lg": {
+          "$type": "dimension",
+          "$value": {
+            "value": 32,
+            "unit": "px"
+          },
+          "$description": "Default density - large (32px)"
+        },
+        "xl": {
+          "$type": "dimension",
+          "$value": {
+            "value": 40,
+            "unit": "px"
+          },
+          "$description": "Default density - extra large (40px)"
+        },
+        "2xl": {
+          "$type": "dimension",
+          "$value": {
+            "value": 48,
+            "unit": "px"
+          },
+          "$description": "Default density - 2x large (48px)"
+        }
+      },
+      "spacious": {
+        "xs": {
+          "$type": "dimension",
+          "$value": {
+            "value": 16,
+            "unit": "px"
+          },
+          "$description": "Spacious density - extra small (16px)"
+        },
+        "sm": {
+          "$type": "dimension",
+          "$value": {
+            "value": 32,
+            "unit": "px"
+          },
+          "$description": "Spacious density - small (32px)"
+        },
+        "md": {
+          "$type": "dimension",
+          "$value": {
+            "value": 48,
+            "unit": "px"
+          },
+          "$description": "Spacious density - medium (48px)"
+        },
+        "lg": {
+          "$type": "dimension",
+          "$value": {
+            "value": 64,
+            "unit": "px"
+          },
+          "$description": "Spacious density - large (64px)"
+        },
+        "xl": {
+          "$type": "dimension",
+          "$value": {
+            "value": 80,
+            "unit": "px"
+          },
+          "$description": "Spacious density - extra large (80px)"
+        },
+        "2xl": {
+          "$type": "dimension",
+          "$value": {
+            "value": 96,
+            "unit": "px"
+          },
+          "$description": "Spacious density - 2x large (96px)"
+        }
+      }
+    },
     "padding": {
       "container": {
         "$type": "dimension",
         "$value": {
-          "value": 16,
+          "value": 24,
           "unit": "px"
-        }
+        },
+        "$description": "Container padding (24px) - default density"
       },
       "card": {
         "$type": "dimension",
         "$value": {
-          "value": 8,
+          "value": 16,
           "unit": "px"
-        }
+        },
+        "$description": "Card padding (16px) - default density"
+      },
+      "component": {
+        "$type": "dimension",
+        "$value": {
+          "value": 16,
+          "unit": "px"
+        },
+        "$description": "Component padding (16px) - default density"
+      },
+      "section": {
+        "$type": "dimension",
+        "$value": {
+          "value": 32,
+          "unit": "px"
+        },
+        "$description": "Section padding (32px) - default density"
+      },
+      "page": {
+        "$type": "dimension",
+        "$value": {
+          "value": 40,
+          "unit": "px"
+        },
+        "$description": "Page padding (40px) - default density"
       }
     },
     "gap": {
       "grid": {
         "$type": "dimension",
         "$value": {
-          "value": 8,
+          "value": 16,
           "unit": "px"
-        }
+        },
+        "$description": "Grid gap (16px) - default density"
       },
       "gridLarge": {
         "$type": "dimension",
         "$value": {
-          "value": 48,
+          "value": 40,
           "unit": "px"
-        }
+        },
+        "$description": "Large grid gap (40px) - default density"
       },
       "gridMedium": {
         "$type": "dimension",
         "$value": {
           "value": 24,
           "unit": "px"
-        }
+        },
+        "$description": "Medium grid gap (24px) - default density"
       },
       "gridSmall": {
         "$type": "dimension",
         "$value": {
           "value": 8,
           "unit": "px"
-        }
+        },
+        "$description": "Small grid gap (8px) - default density"
+      },
+      "component": {
+        "$type": "dimension",
+        "$value": {
+          "value": 8,
+          "unit": "px"
+        },
+        "$description": "Component gap (8px) - default density"
+      },
+      "section": {
+        "$type": "dimension",
+        "$value": {
+          "value": 32,
+          "unit": "px"
+        },
+        "$description": "Section gap (32px) - default density"
+      },
+      "stack": {
+        "$type": "dimension",
+        "$value": {
+          "value": 16,
+          "unit": "px"
+        },
+        "$description": "Stack gap (16px) - default density"
+      }
+    },
+    "component": {
+      "padding": {
+        "$type": "dimension",
+        "$value": {
+          "value": 16,
+          "unit": "px"
+        },
+        "$description": "Comfortable component padding (16px)"
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": {
+          "value": 12,
+          "unit": "px"
+        },
+        "$description": "Comfortable component gap (12px)"
+      }
+    },
+    "card": {
+      "padding": {
+        "$type": "dimension",
+        "$value": {
+          "value": 24,
+          "unit": "px"
+        },
+        "$description": "Card padding (24px)"
+      }
+    },
+    "margin": {
+      "component": {
+        "$type": "dimension",
+        "$value": {
+          "value": 16,
+          "unit": "px"
+        },
+        "$description": "Component margin (16px) - default density"
+      },
+      "section": {
+        "$type": "dimension",
+        "$value": {
+          "value": 32,
+          "unit": "px"
+        },
+        "$description": "Section margin (32px) - default density"
       }
     }
   },
@@ -6521,7 +6833,8 @@
           "$value": {
             "value": 8,
             "unit": "px"
-          }
+          },
+          "$description": "Medium radius (8px) - balanced, approachable"
         },
         "pill": {
           "$type": "dimension",
@@ -6550,6 +6863,46 @@
             "unit": "px"
           }
         }
+      }
+    },
+    "card": {
+      "radius": {
+        "$type": "dimension",
+        "$value": {
+          "value": 16,
+          "unit": "px"
+        },
+        "$description": "Card border radius (16px)"
+      }
+    },
+    "element": {
+      "radius": {
+        "$type": "dimension",
+        "$value": {
+          "value": 8,
+          "unit": "px"
+        },
+        "$description": "Internal element radius (8px) - nests inside cards"
+      }
+    },
+    "button": {
+      "radius": {
+        "$type": "dimension",
+        "$value": {
+          "value": 8,
+          "unit": "px"
+        },
+        "$description": "Button radius (8px)"
+      }
+    },
+    "badge": {
+      "radius": {
+        "$type": "dimension",
+        "$value": {
+          "value": 9999,
+          "unit": "px"
+        },
+        "$description": "Badge/chip radius (pill)"
       }
     }
   },
@@ -6876,6 +7229,16 @@
             "$value": "cubic-bezier(1, 0, 1, 1)"
           }
         }
+      },
+      "duration": {
+        "$type": "duration",
+        "$value": "250ms",
+        "$description": "Standard transition speed (250ms)"
+      },
+      "easing": {
+        "$type": "cubicBezier",
+        "$value": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "$description": "Standard easing curve"
       }
     }
   },
@@ -7186,9 +7549,9 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.11372549019607843,
-              0.5686274509803921,
-              0.984313725490196
+              0.9176470588235294,
+              0.39215686274509803,
+              0.396078431372549
             ]
           }
         },
@@ -8955,5 +9318,16 @@
       },
       "$description": "Strong overlay scrim"
     }
+  },
+  "$brand": {
+    "name": "default",
+    "description": "Default brand theme with red/coral accents - the current site identity",
+    "accent": "red",
+    "density": "default"
+  },
+  "$density": {
+    "name": "default",
+    "description": "Default spacing density - 8px linear for standard form layout, card content, UI padding",
+    "base": "8px"
   }
 }

@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import {
+  BrandProvider,
   ReducedMotionProvider,
   InteractionProvider,
   UserProvider,
@@ -99,16 +100,18 @@ const Template: React.FC<TemplateProps> = ({ children }) => {
   }, []);
 
   return (
-    <ReducedMotionProvider>
-      <InteractionProvider>
-        <UserProvider>
-          <Navbar pages={pages} />
-          <main ref={ref}>{children}</main>
-          <Footer />
-          <SlinkyCursor />
-        </UserProvider>
-      </InteractionProvider>
-    </ReducedMotionProvider>
+    <BrandProvider>
+      <ReducedMotionProvider>
+        <InteractionProvider>
+          <UserProvider>
+            <Navbar pages={pages} />
+            <main ref={ref}>{children}</main>
+            <Footer />
+            <SlinkyCursor />
+          </UserProvider>
+        </InteractionProvider>
+      </ReducedMotionProvider>
+    </BrandProvider>
   );
 };
 

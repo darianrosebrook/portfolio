@@ -60,7 +60,14 @@
   --alert-spacing-padding-vertical: var(--core-spacing-size-08);
   --alert-spacing-margin-top: var(--core-spacing-size-04);
   --alert-spacing-min-height-default: var(--core-spacing-size-12);
+  --alert-spacing-gap-small: var(--semantic-spacing-gap-grid-small);
+  --alert-spacing-gap-medium: var(--semantic-spacing-gap-grid-medium);
 
   /* === Radius Tokens === */
   --alert-radius-medium: var(--core-shape-radius-medium);
+
+  /* === Typography Tokens === */
+  --alert-typography-title-font-weight: var(--semantic-typography-font-weight-bold);
+  --alert-typography-title-font-size: var(--semantic-typography-body-02);
+  --alert-typography-body-font-size: var(--semantic-typography-body-03);
 }

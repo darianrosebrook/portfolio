@@ -13,6 +13,7 @@
   --select-color-background-checked: var(--semantic-color-background-primary);
   --select-color-background-error: var(--semantic-color-background-danger-subtle);
   --select-color-background-success: var(--semantic-color-background-success-subtle);
+  --select-color-background-selected: var(--semantic-color-background-accent-subtle);
   --select-color-foreground-default: var(--semantic-color-foreground-primary);
   --select-color-foreground-hover: var(--semantic-color-foreground-hover);
   --select-color-foreground-is-open: var(--semantic-color-foreground-primary);
@@ -23,11 +24,13 @@
   --select-color-foreground-checked: var(--semantic-color-foreground-primary);
   --select-color-foreground-error: var(--semantic-color-foreground-danger);
   --select-color-foreground-success: var(--semantic-color-foreground-success);
+  --select-color-foreground-selected: var(--semantic-color-foreground-accent);
   --select-color-border-default: var(--semantic-color-border-primary);
   --select-color-border-hover: var(--semantic-color-border-bold);
   --select-color-border-is-open: var(--semantic-color-border-accent);
   --select-color-border-focus: var(--semantic-color-border-primary);
   --select-color-border-focus-visible: var(--semantic-color-border-accent);
+  --select-color-border-focus-ring: var(--semantic-color-border-focus-ring);
   --select-color-border-disabled: var(--semantic-color-border-disabled);
   --select-color-border-read-only: var(--semantic-color-border-light);
   --select-color-border-checked: var(--semantic-color-border-accent);
@@ -59,10 +62,23 @@
   --select-size-padding-read-only: var(--core-spacing-size-03);
   --select-size-padding-checked: var(--core-spacing-size-03);
   --select-size-radius-default: var(--core-shape-radius-medium);
+  --select-size-radius-small: var(--core-shape-radius-small);
   --select-size-border-default: var(--core-shape-border-width-hairline);
+  --select-size-sm-height: var(--semantic-control-size-sm-height);
+  --select-size-sm-padding-y: var(--semantic-control-size-sm-padding-y);
+  --select-size-sm-padding-x: var(--semantic-control-size-sm-padding-x);
+  --select-size-md-height: var(--semantic-control-size-md-height);
+  --select-size-md-padding-y: var(--semantic-control-size-md-padding-y);
+  --select-size-md-padding-x: var(--semantic-control-size-md-padding-x);
+  --select-size-lg-height: var(--semantic-control-size-lg-height);
+  --select-size-lg-padding-y: var(--semantic-control-size-lg-padding-y);
+  --select-size-lg-padding-x: var(--semantic-control-size-lg-padding-x);
 
   /* === Font Tokens === */
   --select-font-size-default: var(--semantic-typography-body-02);
+  --select-font-size-sm: var(--semantic-typography-body-small);
+  --select-font-size-md: var(--semantic-typography-body-02);
+  --select-font-size-lg: var(--semantic-typography-body-02);
   --select-font-weight-default: var(--semantic-typography-font-weight-regular);
   --select-font-line-height-default: var(--semantic-typography-line-height-body);
 

@@ -208,19 +208,19 @@
   }
 
   &.destructive {
-    background-color: var(--semantic-color-feedback-error-background);
+    background-color: var(--button-color-background-destructive);
     border: var(--button-size-border) solid
-      var(--semantic-color-feedback-error-border);
-    color: var(--semantic-color-feedback-error-foreground);
+      var(--button-color-border-destructive);
+    color: var(--button-color-foreground-destructive);
 
     &:hover {
-      background-color: var(--semantic-color-feedback-error-background-hover);
-      border-color: var(--semantic-color-feedback-error-border-hover);
+      background-color: var(--button-color-background-destructiveHover);
+      border-color: var(--button-color-border-destructiveHover);
     }
 
     &:active {
-      background-color: var(--semantic-color-feedback-error-background-active);
-      border-color: var(--semantic-color-feedback-error-border-active);
+      background-color: var(--button-color-background-destructiveActive);
+      border-color: var(--button-color-border-destructiveActive);
     }
   }
 

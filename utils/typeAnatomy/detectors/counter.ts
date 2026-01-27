@@ -4,8 +4,9 @@
  * A counter is an enclosed or partially enclosed space within a letter
  * (e.g., the hole in 'o', 'e', 'd', 'p', 'a').
  *
- * Fixed in v1:
- * - Uses contour classification (hole contours) as primary detection
+ * v2 improvements:
+ * - Extracts actual hole contour path for precise geometry
+ * - Returns path shapes that render the exact counter outline
  * - Scanline fallback only if no hole contours found
  * - Scale-aware step sizes for radial sweep
  */
@@ -16,7 +17,7 @@ import type { FeatureInstance, GeometryCache, Point2D } from '../types';
 
 /**
  * Detects counter features on a glyph.
- * Returns polyline shapes tracing the counter regions.
+ * Returns path shapes tracing the actual counter (hole) geometry.
  */
 export function detectCounter(geo: GeometryCache): FeatureInstance[] {
   const { glyph } = geo;
@@ -32,31 +33,69 @@ export function detectCounter(geo: GeometryCache): FeatureInstance[] {
 
   if (holeContours.length > 0) {
     for (const hole of holeContours) {
-      // Convert hole bbox to a point at center
       const cx = (hole.bbox.minX + hole.bbox.maxX) / 2;
       const cy = (hole.bbox.minY + hole.bbox.maxY) / 2;
-      const width = hole.bbox.maxX - hole.bbox.minX;
-      const height = hole.bbox.maxY - hole.bbox.minY;
 
-      // Create a simple representation of the counter
-      instances.push({
-        id: 'counter',
-        shape: {
-          type: 'circle',
-          cx,
-          cy,
-          r: Math.min(width, height) / 2,
-        },
-        confidence: 0.85,
-        anchors: {
-          center: { x: cx, y: cy },
-        },
-        debug: {
-          source: 'hole-contour',
-          contourIndex: hole.index,
-          area: hole.area,
-        },
-      });
+      // Extract the actual path commands for this hole contour
+      const holePath = extractContourPath(glyph, hole.startIndex, hole.endIndex);
+
+      if (holePath) {
+        // Use path shape for exact counter geometry
+        instances.push({
+          id: 'counter',
+          shape: {
+            type: 'path',
+            d: holePath,
+          },
+          confidence: 0.9,
+          anchors: {
+            center: { x: cx, y: cy },
+          },
+          debug: {
+            source: 'hole-contour-path',
+            contourIndex: hole.index,
+            area: hole.area,
+          },
+        });
+      } else {
+        // Fallback to polyline if path extraction fails
+        const outline = traceHoleContour(geo, { x: cx, y: cy });
+        if (outline && outline.length >= 6) {
+          instances.push({
+            id: 'counter',
+            shape: { type: 'polyline', points: outline },
+            confidence: 0.8,
+            anchors: {
+              center: { x: cx, y: cy },
+            },
+            debug: {
+              source: 'hole-contour-traced',
+              contourIndex: hole.index,
+            },
+          });
+        } else {
+          // Last resort: circle approximation
+          const width = hole.bbox.maxX - hole.bbox.minX;
+          const height = hole.bbox.maxY - hole.bbox.minY;
+          instances.push({
+            id: 'counter',
+            shape: {
+              type: 'circle',
+              cx,
+              cy,
+              r: Math.min(width, height) / 2,
+            },
+            confidence: 0.7,
+            anchors: {
+              center: { x: cx, y: cy },
+            },
+            debug: {
+              source: 'hole-contour-circle',
+              contourIndex: hole.index,
+            },
+          });
+        }
+      }
     }
     return instances;
   }
@@ -204,6 +243,76 @@ function traceCounterRegion(
 
     if (lastValid) {
       outline.push(lastValid);
+    }
+  }
+
+  return outline.length >= 6 ? outline : null;
+}
+
+/**
+ * Extracts SVG path data for a specific contour from glyph path commands.
+ * Returns an SVG path string (d attribute) for the contour.
+ */
+function extractContourPath(
+  glyph: { path: { commands: Array<{ command: string; args: number[] }> } },
+  startIndex: number,
+  endIndex: number
+): string | null {
+  if (!glyph?.path?.commands) return null;
+
+  const commands = glyph.path.commands.slice(startIndex, endIndex + 1);
+  if (commands.length === 0) return null;
+
+  const pathParts: string[] = [];
+
+  for (const cmd of commands) {
+    switch (cmd.command) {
+      case 'moveTo':
+        pathParts.push(`M ${cmd.args[0]} ${cmd.args[1]}`);
+        break;
+      case 'lineTo':
+        pathParts.push(`L ${cmd.args[0]} ${cmd.args[1]}`);
+        break;
+      case 'quadraticCurveTo':
+        pathParts.push(
+          `Q ${cmd.args[0]} ${cmd.args[1]} ${cmd.args[2]} ${cmd.args[3]}`
+        );
+        break;
+      case 'bezierCurveTo':
+        pathParts.push(
+          `C ${cmd.args[0]} ${cmd.args[1]} ${cmd.args[2]} ${cmd.args[3]} ${cmd.args[4]} ${cmd.args[5]}`
+        );
+        break;
+      case 'closePath':
+        pathParts.push('Z');
+        break;
+    }
+  }
+
+  return pathParts.length > 0 ? pathParts.join(' ') : null;
+}
+
+/**
+ * Traces a hole contour by radiating inward from the center.
+ * Used as fallback when path extraction fails.
+ */
+function traceHoleContour(
+  geo: GeometryCache,
+  center: Point2D
+): Point2D[] | null {
+  const { svgShape, scale } = geo;
+  const { overshoot } = scale;
+
+  const angularStep = 10;
+  const outline: Point2D[] = [];
+
+  for (let angleDeg = 0; angleDeg < 360; angleDeg += angularStep) {
+    const rad = (angleDeg * Math.PI) / 180;
+    const { points } = rayHits(svgShape, center, rad, overshoot);
+
+    // For a counter (hole), the first hit is the inner boundary
+    if (points.length >= 1) {
+      outline.push(points[0]);
     }
   }
 

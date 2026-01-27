@@ -5,6 +5,7 @@
   /* === Size Tokens === */
   --details-size-padding-default: var(--core-spacing-size-06);
   --details-size-radius-default: var(--semantic-shape-control-radius-default);
+  --details-size-icon: var(--core-spacing-size-05);
 
   /* === Color Tokens === */
   --details-color-background-default: var(--semantic-color-background-primary);
@@ -31,4 +32,10 @@
   --details-spacing-padding-left: var(--core-spacing-size-06);
   --details-spacing-margin-bottom: var(--core-spacing-size-02);
   --details-spacing-margin-top: var(--core-spacing-size-01);
+  --details-spacing-margin-compact: var(--core-spacing-size-04);
+
+  /* === Typography Tokens === */
+  --details-typography-line-height-body: var(--semantic-typography-line-height-body);
+  --details-typography-line-height-tight: var(--semantic-typography-line-height-tight);
+  --details-typography-font-weight-medium: var(--semantic-typography-font-weight-medium);
 }

@@ -9,8 +9,8 @@
   background-color: var(--card-color-background-default);
   border-radius: var(--card-size-radius-default);
   color: var(--card-color-foreground-primary);
-  transition: all var(--semantic-motion-interaction-press-duration)
-    var(--semantic-motion-interaction-press-easing);
+  transition: all var(--card-motion-duration)
+    var(--card-motion-easing);
 
   // CSS Containment for performance optimization
   contain: layout style paint;
@@ -85,7 +85,7 @@
 
     &:has(.badge) {
       display: flex;
-      gap: var(--core-spacing-size-03);
+      gap: var(--card-size-gap-default);
       justify-content: space-between;
       align-items: center;
     }
@@ -101,14 +101,14 @@
     color: var(--card-color-foreground-primary);
     font-weight: var(--font-weight-semibold);
     font-size: var(--font-size-heading-4);
-    line-height: var(--semantic-typography-line-height-heading);
+    line-height: var(--card-typography-lineHeight-heading);
   }
 
   .description {
     margin: 0;
     color: var(--card-color-foreground-secondary);
     font-size: var(--font-size-body-2);
-    line-height: var(--semantic-typography-line-height-normal);
+    line-height: var(--card-typography-lineHeight-normal);
   }
 
   .media {
@@ -131,7 +131,7 @@
 
   .actions {
     display: flex;
-    gap: var(--core-spacing-size-03);
+    gap: var(--card-size-gap-default);
     justify-content: flex-end;
     align-items: center;
     margin-block-start: var(--card-size-padding-default);
@@ -139,9 +139,9 @@
 
   .link {
     display: inline-flex;
-    gap: var(--core-spacing-size-02);
+    gap: var(--card-size-gap-small);
     align-items: center;
-    color: var(--semantic-color-foreground-link);
+    color: var(--card-color-foreground-link);
     font-weight: var(--font-weight-medium);
     text-decoration: none;
 
@@ -156,13 +156,10 @@
   }
 
   .note {
-    padding: var(--core-spacing-size-04);
-    background-color: var(
-      --card-color-background-secondary,
-      var(--semantic-color-background-secondary)
-    );
+    padding: var(--card-size-padding-note);
+    background-color: var(--card-color-background-secondary);
     border: 1px solid var(--card-color-border-default);
-    border-radius: var(--card-size-radius-medium, 0.5rem);
+    border-radius: var(--card-size-radius-medium);
     color: var(--card-color-foreground-primary);
     font-style: italic;
     font-size: var(--font-size-body-3);
@@ -173,41 +170,41 @@
   .badge {
     display: inline-flex;
     align-items: center;
-    padding: var(--core-spacing-size-01) var(--core-spacing-size-03);
-    border-radius: var(--card-size-radius-full, 1rem);
+    padding: var(--card-size-padding-badgeY) var(--card-size-padding-badgeX);
+    border-radius: var(--card-size-radius-full);
     font-weight: var(--font-weight-medium);
     font-size: var(--font-size-body-3);
     letter-spacing: 0.025em;
     text-transform: uppercase;
 
     &.completed {
-      background-color: var(--semantic-color-success-background);
-      color: var(--semantic-color-success-foreground);
+      background-color: var(--card-color-badge-success-background);
+      color: var(--card-color-badge-success-foreground);
     }
 
     &.in-progress {
-      background-color: var(--semantic-color-warning-background);
-      color: var(--semantic-color-warning-foreground);
+      background-color: var(--card-color-badge-warning-background);
+      color: var(--card-color-badge-warning-foreground);
     }
 
     &.planned {
-      background-color: var(--semantic-color-info-background);
-      color: var(--semantic-color-info-foreground);
+      background-color: var(--card-color-badge-info-background);
+      color: var(--card-color-badge-info-foreground);
     }
 
     &.deprecated {
-      background-color: var(--semantic-color-error-background);
-      color: var(--semantic-color-error-foreground);
+      background-color: var(--card-color-badge-error-background);
+      color: var(--card-color-badge-error-foreground);
     }
 
     &.category {
-      background-color: var(--semantic-color-neutral-background);
-      color: var(--semantic-color-neutral-foreground);
+      background-color: var(--card-color-badge-neutral-background);
+      color: var(--card-color-badge-neutral-foreground);
     }
 
     &.complexity {
-      background-color: var(--semantic-color-accent-background);
-      color: var(--semantic-color-accent-foreground);
+      background-color: var(--card-color-badge-accent-background);
+      color: var(--card-color-badge-accent-foreground);
     }
   }
 }

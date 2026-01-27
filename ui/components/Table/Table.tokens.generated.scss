@@ -24,6 +24,7 @@
   /* === Size Tokens === */
   --table-size-cell-height: var(--semantic-control-size-md-height);
   --table-size-checkbox-column: var(--core-spacing-size-09);
+  --table-size-radius: var(--semantic-shape-control-radius-default);
 
   /* === Text Tokens === */
   --table-text-size: var(--semantic-typography-body-03);
@@ -41,4 +42,7 @@
   --table-focus-width: var(--core-shape-border-width-thick);
   --table-focus-color: var(--semantic-color-border-accent);
   --table-focus-offset: var(--core-spacing-size-01);
+
+  /* === Elevation Tokens === */
+  --table-elevation-raised: var(--semantic-elevation-surface-raised);
 }

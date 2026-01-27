@@ -22,4 +22,13 @@
   --postcard-size-gap-default: var(--core-spacing-size-05);
   --postcard-size-gap-small: var(--core-spacing-size-03);
   --postcard-size-gap-large: var(--core-spacing-size-07);
+  --postcard-size-border-default: var(--core-shape-border-width-hairline);
+
+  /* === Typography Tokens === */
+  --postcard-typography-display-name-font-size: var(--semantic-typography-body-02);
+  --postcard-typography-display-name-font-weight: var(--semantic-typography-font-weight-semibold);
+  --postcard-typography-handle-font-size: var(--semantic-typography-body-03);
+  --postcard-typography-content-font-size: var(--semantic-typography-body-02);
+  --postcard-typography-content-line-height: var(--semantic-typography-line-height-body);
+  --postcard-typography-footer-font-size: var(--semantic-typography-body-03);
 }

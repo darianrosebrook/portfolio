@@ -1,16 +1,33 @@
-/* AUTO-GENERATED: Scaffolding placeholder. Replace via tokens build. */
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/List/List.tokens.json
+ */
 @mixin vars {
-  /* === Color === */
-  --list-color-background-default: var(--semantic-color-background-secondary);
+  /* === Color Tokens === */
   --list-color-foreground-primary: var(--semantic-color-foreground-primary);
   --list-color-foreground-secondary: var(--semantic-color-foreground-secondary);
-  --list-color-border-default: var(--semantic-color-border-light);
-  --list-color-border-accent: var(--semantic-color-border-accent);
+  --list-color-border-default: var(--semantic-color-border-subtle);
 
-  /* === Size === */
-  --list-size-padding-default: var(--core-spacing-size-07);
-  --list-size-radius-default: var(--core-shape-radius-medium);
+  /* === Typography Tokens === */
+  --list-typography-sm-font-size: var(--semantic-typography-body-04);
+  --list-typography-sm-line-height: var(--semantic-typography-line-height-body);
+  --list-typography-md-font-size: var(--semantic-typography-body-03);
+  --list-typography-md-line-height: var(--semantic-typography-line-height-body);
+  --list-typography-lg-font-size: var(--semantic-typography-body-02);
+  --list-typography-lg-line-height: var(--semantic-typography-line-height-body);
 
-  /* === Elevation === */
-  --list-elevation-default: var(--semantic-elevation-depth-1);
+  /* === Size Tokens === */
+  --list-size-padding-default: var(--core-spacing-size-06);
+  --list-size-border-default: var(--core-shape-border-width-hairline);
+
+  /* === Spacing Tokens === */
+  --list-spacing-inline: var(--core-spacing-size-04);
+  --list-spacing-divided: var(--core-spacing-size-05);
+  --list-spacing-spaced: var(--core-spacing-size-06);
+  --list-spacing-sm: var(--core-spacing-size-03);
+  --list-spacing-md: var(--core-spacing-size-05);
+  --list-spacing-lg: var(--core-spacing-size-06);
+  --list-spacing-dl-dt: var(--core-spacing-size-03);
+  --list-spacing-dl-dd: var(--core-spacing-size-05);
+  --list-spacing-dl-gap: var(--core-spacing-size-03);
+  --list-spacing-dl-gap-x: var(--core-spacing-size-05);
 }

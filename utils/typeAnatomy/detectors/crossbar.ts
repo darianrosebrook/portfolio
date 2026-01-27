@@ -4,12 +4,14 @@
  * A crossbar is a horizontal stroke that connects two stems or parts
  * of a letter (e.g., in 'A', 'H', 'e', 'f', 't').
  *
- * Fixed in v1: Uses filled spans (intersection pairs) instead of gaps.
- * Rays are sorted and deduped by geometryCore.rayHits.
+ * v2 improvements:
+ * - Returns rect shapes for consistent closed-shape rendering
+ * - Estimates crossbar height from nearby scanlines
+ * - Uses filled spans (intersection pairs)
  */
 
 import { rayHits } from '@/utils/geometry/geometryCore';
-import type { FeatureInstance, GeometryCache, Point2D } from '../types';
+import type { FeatureInstance, FeatureShape, GeometryCache } from '../types';
 
 /**
  * Represents a filled span (stroke region) on a scanline.
@@ -24,7 +26,7 @@ interface FilledSpan {
 
 /**
  * Detects crossbar features on a glyph.
- * Returns line shapes at detected crossbar locations.
+ * Returns rect shapes at detected crossbar locations.
  */
 export function detectCrossbar(geo: GeometryCache): FeatureInstance[] {
   const { glyph, metrics, svgShape, scale } = geo;
@@ -34,16 +36,20 @@ export function detectCrossbar(geo: GeometryCache): FeatureInstance[] {
   }
 
   const instances: FeatureInstance[] = [];
-  const { eps, bboxW, bboxH, stemWidth, overshoot } = scale;
+  const { bboxW, bboxH, stemWidth, overshoot } = scale;
 
   // Target Y bands for crossbar detection
   // For uppercase (A, H, E, F): around 40-60% of cap height
   // For lowercase (e, f, t): around 40-60% of x-height
   const targetBands = [
     // Uppercase mid-zone
+    metrics.baseline + (metrics.capHeight - metrics.baseline) * 0.35,
     metrics.baseline + (metrics.capHeight - metrics.baseline) * 0.4,
+    metrics.baseline + (metrics.capHeight - metrics.baseline) * 0.45,
     metrics.baseline + (metrics.capHeight - metrics.baseline) * 0.5,
+    metrics.baseline + (metrics.capHeight - metrics.baseline) * 0.55,
     metrics.baseline + (metrics.capHeight - metrics.baseline) * 0.6,
+    metrics.baseline + (metrics.capHeight - metrics.baseline) * 0.65,
     // Lowercase mid-zone
     metrics.baseline + (metrics.xHeight - metrics.baseline) * 0.4,
     metrics.baseline + (metrics.xHeight - metrics.baseline) * 0.5,
@@ -91,7 +97,7 @@ export function detectCrossbar(geo: GeometryCache): FeatureInstance[] {
   const yTolerance = bboxH * 0.08;
   const groups = groupSpansByY(allSpans, yTolerance);
 
-  // For each group, compute the most consistent span
+  // For each group, compute the most consistent span and estimate height
   for (const group of groups) {
     if (group.length < 2) continue; // Need multiple samples for confidence
 
@@ -99,6 +105,13 @@ export function detectCrossbar(geo: GeometryCache): FeatureInstance[] {
     const avgY = group.reduce((s, sp) => s + sp.y, 0) / group.length;
     const avgX1 = group.reduce((s, sp) => s + sp.x1, 0) / group.length;
     const avgX2 = group.reduce((s, sp) => s + sp.x2, 0) / group.length;
+
+    // Estimate crossbar height from the Y spread of the group
+    const yPositions = group.map((sp) => sp.y);
+    const minY = Math.min(...yPositions);
+    const maxY = Math.max(...yPositions);
+    // Use the Y spread as a proxy for height, with a minimum based on stemWidth
+    const estimatedHeight = Math.max(maxY - minY, stemWidth * 0.6);
 
     // Check for consistent width across samples
     const widths = group.map((sp) => sp.width);
@@ -116,11 +129,11 @@ export function detectCrossbar(geo: GeometryCache): FeatureInstance[] {
     instances.push({
       id: 'crossbar',
       shape: {
-        type: 'line',
-        x1: avgX1,
-        y1: avgY,
-        x2: avgX2,
-        y2: avgY,
+        type: 'rect',
+        x: avgX1,
+        y: avgY - estimatedHeight / 2,
+        width: avgX2 - avgX1,
+        height: estimatedHeight,
       },
       confidence,
       anchors: {
@@ -131,6 +144,7 @@ export function detectCrossbar(geo: GeometryCache): FeatureInstance[] {
         sampleCount: group.length,
         avgWidth,
         widthStdDev,
+        estimatedHeight,
       },
     });
   }
@@ -139,14 +153,16 @@ export function detectCrossbar(geo: GeometryCache): FeatureInstance[] {
   if (instances.length === 0) {
     const segmentBars = findHorizontalSegments(geo);
     for (const seg of segmentBars) {
+      // For fallback, use stemWidth as height estimate
+      const barHeight = stemWidth * 0.6;
       instances.push({
         id: 'crossbar',
         shape: {
-          type: 'line',
-          x1: seg.x1,
-          y1: seg.y,
-          x2: seg.x2,
-          y2: seg.y,
+          type: 'rect',
+          x: seg.x1,
+          y: seg.y - barHeight / 2,
+          width: seg.x2 - seg.x1,
+          height: barHeight,
         },
         confidence: 0.5,
         anchors: {
@@ -158,50 +174,116 @@ export function detectCrossbar(geo: GeometryCache): FeatureInstance[] {
     }
   }
 
-  // Filter to return only the best crossbar candidate(s)
-  // Most letters have only one crossbar (A, H, e, f, t)
-  // Letters like E, F might have multiple bars, but they're at different Y positions
-  if (instances.length > 1) {
-    // Sort by confidence (descending) then by proximity to the mid-height
-    const midY = metrics.baseline + (metrics.capHeight - metrics.baseline) * 0.5;
+  // Merge overlapping/adjacent crossbar instances at similar Y positions
+  const mergedInstances = mergeCrossbarInstances(instances, bboxH * 0.12);
 
-    instances.sort((a, b) => {
-      // Primary sort: confidence
-      if (b.confidence !== a.confidence) {
-        return b.confidence - a.confidence;
-      }
-      // Secondary sort: proximity to mid-height
-      const aY = a.shape.type === 'line' ? a.shape.y1 : 0;
-      const bY = b.shape.type === 'line' ? b.shape.y1 : 0;
-      return Math.abs(aY - midY) - Math.abs(bY - midY);
-    });
+  return mergedInstances;
+}
 
-    // Keep only the highest confidence instance
-    // If there are multiple with same high confidence, they're likely overlapping
-    const topConfidence = instances[0].confidence;
-    const filtered = instances.filter(
-      (inst) => inst.confidence >= topConfidence - 0.05
-    );
+/**
+ * Merges crossbar instances that are at similar Y positions.
+ * This handles cases where the same crossbar is detected multiple times
+ * (e.g., in 'H' where scanlines above and below the bar both detect it).
+ */
+function mergeCrossbarInstances(
+  instances: FeatureInstance[],
+  yTolerance: number
+): FeatureInstance[] {
+  if (instances.length <= 1) return instances;
 
-    // If multiple remain, merge overlapping ones or just keep the best
-    if (filtered.length > 1) {
-      // Check if they're at similar Y positions (overlapping detections)
-      const tolerance = bboxH * 0.1;
-      const firstY =
-        filtered[0].shape.type === 'line' ? filtered[0].shape.y1 : 0;
-      const overlapping = filtered.filter((inst) => {
-        const y = inst.shape.type === 'line' ? inst.shape.y1 : 0;
-        return Math.abs(y - firstY) < tolerance;
-      });
+  // Sort by Y position (center of rect)
+  const sorted = [...instances].sort((a, b) => {
+    const aShape = a.shape as Extract<FeatureShape, { type: 'rect' }>;
+    const bShape = b.shape as Extract<FeatureShape, { type: 'rect' }>;
+    const aCenterY = aShape.y + aShape.height / 2;
+    const bCenterY = bShape.y + bShape.height / 2;
+    return aCenterY - bCenterY;
+  });
 
-      // Return only the first (best) of overlapping ones
-      return overlapping.length > 0 ? [overlapping[0]] : [filtered[0]];
+  const merged: FeatureInstance[] = [];
+  let currentGroup: FeatureInstance[] = [sorted[0]];
+
+  for (let i = 1; i < sorted.length; i++) {
+    const current = sorted[i];
+    const prev = currentGroup[currentGroup.length - 1];
+
+    const currentShape = current.shape as Extract<FeatureShape, { type: 'rect' }>;
+    const prevShape = prev.shape as Extract<FeatureShape, { type: 'rect' }>;
+
+    const currentCenterY = currentShape.y + currentShape.height / 2;
+    const prevCenterY = prevShape.y + prevShape.height / 2;
+
+    if (Math.abs(currentCenterY - prevCenterY) < yTolerance) {
+      // Same crossbar - add to group
+      currentGroup.push(current);
+    } else {
+      // Different crossbar - merge current group and start new
+      merged.push(mergeGroup(currentGroup));
+      currentGroup = [current];
     }
-
-    return filtered;
   }
 
-  return instances;
+  // Merge the last group
+  if (currentGroup.length > 0) {
+    merged.push(mergeGroup(currentGroup));
+  }
+
+  return merged;
+}
+
+/**
+ * Merges a group of crossbar instances into a single instance.
+ * Uses the average position and maximum extents.
+ */
+function mergeGroup(group: FeatureInstance[]): FeatureInstance {
+  if (group.length === 1) return group[0];
+
+  const shapes = group.map(
+    (inst) => inst.shape as Extract<FeatureShape, { type: 'rect' }>
+  );
+
+  // Compute merged bounds
+  const minX = Math.min(...shapes.map((s) => s.x));
+  const maxX = Math.max(...shapes.map((s) => s.x + s.width));
+  const minY = Math.min(...shapes.map((s) => s.y));
+  const maxY = Math.max(...shapes.map((s) => s.y + s.height));
+
+  // Average confidence, weighted by sample count
+  const getSampleCount = (inst: FeatureInstance): number => {
+    const debug = inst.debug as { sampleCount?: number } | undefined;
+    return debug?.sampleCount ?? 1;
+  };
+  const totalSamples = group.reduce(
+    (sum, inst) => sum + getSampleCount(inst),
+    0
+  );
+  const weightedConfidence =
+    group.reduce(
+      (sum, inst) => sum + inst.confidence * getSampleCount(inst),
+      0
+    ) / totalSamples;
+
+  const avgY = (minY + maxY) / 2;
+
+  return {
+    id: 'crossbar',
+    shape: {
+      type: 'rect',
+      x: minX,
+      y: minY,
+      width: maxX - minX,
+      height: maxY - minY,
+    },
+    confidence: Math.min(0.95, weightedConfidence + 0.1), // Boost for merged detection
+    anchors: {
+      left: { x: minX, y: avgY },
+      right: { x: maxX, y: avgY },
+    },
+    debug: {
+      mergedFrom: group.length,
+      totalSamples,
+    },
+  };
 }
 
 /**

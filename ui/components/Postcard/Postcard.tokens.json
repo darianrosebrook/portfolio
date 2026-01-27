@@ -34,6 +34,25 @@
         "default": "{core.spacing.size.05}",
         "small": "{core.spacing.size.03}",
         "large": "{core.spacing.size.07}"
+      },
+      "border": {
+        "default": "{core.shape.border.width.hairline}"
+      }
+    },
+    "typography": {
+      "displayName": {
+        "fontSize": "{semantic.typography.body.02}",
+        "fontWeight": "{semantic.typography.fontWeight.semibold}"
+      },
+      "handle": {
+        "fontSize": "{semantic.typography.body.03}"
+      },
+      "content": {
+        "fontSize": "{semantic.typography.body.02}",
+        "lineHeight": "{semantic.typography.lineHeight.body}"
+      },
+      "footer": {
+        "fontSize": "{semantic.typography.body.03}"
       }
     }
   }
