@@ -85,12 +85,12 @@
       },
       "default": {
         "$type": "color",
-        "$value": "{color.palette.orange.200}",
+        "$value": "{color.palette.neutral.300}",
         "$extensions": {
-          "design.paths.light": "{color.palette.orange.200}",
-          "design.paths.dark": "{color.palette.orange.600}"
+          "design.paths.light": "{color.palette.neutral.300}",
+          "design.paths.dark": "{color.palette.neutral.600}"
         },
-        "$description": "Default input border - warm orange tint"
+        "$description": "Default input border - simple neutral gray"
       },
       "hover": {
         "$type": "color",

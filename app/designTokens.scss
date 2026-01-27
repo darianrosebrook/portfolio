@@ -515,7 +515,7 @@
   --semantic-content-button-danger-foreground: #ffffff;
   --semantic-content-input-background: #ffffff;
   --semantic-content-input-foreground: #141414;
-  --semantic-content-input-border: #f7c1c2;
+  --semantic-content-input-border: #aeaeae;
   --semantic-content-input-radius: 4px;
   --semantic-content-input-padding-x: 4px;
   --semantic-content-input-padding-y: 2px;
@@ -693,7 +693,7 @@
   --semantic-color-background-placeholder: #efefef;
   --semantic-color-background-read-only: #efefef;
   --semantic-color-background-inverse: #141414;
-  --semantic-color-border-default: #f7c1c2;
+  --semantic-color-border-default: #aeaeae;
   --semantic-color-border-subtle: #cecece;
   --semantic-color-border-bold: #8f8f8f;
   --semantic-color-border-disabled: #cecece;
@@ -822,7 +822,7 @@
   --semantic-color-background-placeholder: #efefef;
   --semantic-color-background-read-only: #efefef;
   --semantic-color-background-inverse: #141414;
-  --semantic-color-border-default: #f7c1c2;
+  --semantic-color-border-default: #aeaeae;
   --semantic-color-border-subtle: #cecece;
   --semantic-color-border-bold: #8f8f8f;
   --semantic-color-border-disabled: #cecece;
@@ -949,7 +949,7 @@
   --semantic-color-background-placeholder: #212121;
   --semantic-color-background-read-only: #212121;
   --semantic-color-background-inverse: #fafafa;
-  --semantic-color-border-default: #ae0001;
+  --semantic-color-border-default: #555555;
   --semantic-color-border-subtle: #3a3a3a;
   --semantic-color-border-bold: #717171;
   --semantic-color-border-disabled: #3a3a3a;
@@ -1077,7 +1077,7 @@
   --semantic-color-background-placeholder: #212121;
   --semantic-color-background-read-only: #212121;
   --semantic-color-background-inverse: #fafafa;
-  --semantic-color-border-default: #ae0001;
+  --semantic-color-border-default: #555555;
   --semantic-color-border-subtle: #3a3a3a;
   --semantic-color-border-bold: #717171;
   --semantic-color-border-disabled: #3a3a3a;
@@ -1203,7 +1203,7 @@
   --semantic-color-background-placeholder: #efefef;
   --semantic-color-background-read-only: #efefef;
   --semantic-color-background-inverse: #141414;
-  --semantic-color-border-default: #f7c1c2;
+  --semantic-color-border-default: #aeaeae;
   --semantic-color-border-subtle: #cecece;
   --semantic-color-border-bold: #8f8f8f;
   --semantic-color-border-disabled: #cecece;
@@ -1287,7 +1287,7 @@
     --semantic-color-background-accent: var(--core-color-palette-yellow-500);
     --semantic-color-background-highlight: var(--core-color-palette-yellow-200);
     --semantic-color-border-accent: var(--core-color-palette-yellow-500);
-    --semantic-color-border-default: var(--core-color-palette-yellow-300);
+    --semantic-color-border-default: var(--core-color-palette-neutral-300);
     --semantic-color-border-hover: var(--core-color-palette-yellow-400);
     --semantic-color-border-focus: var(--core-color-palette-yellow-500);
     --semantic-color-border-light: var(--core-color-palette-yellow-200);
@@ -1338,7 +1338,7 @@
       --semantic-color-background-accent: var(--core-color-palette-yellow-400);
       --semantic-color-background-highlight: var(--core-color-palette-yellow-700);
       --semantic-color-border-accent: var(--core-color-palette-yellow-400);
-      --semantic-color-border-default: var(--core-color-palette-yellow-600);
+      --semantic-color-border-default: var(--core-color-palette-neutral-600);
       --semantic-color-border-hover: var(--core-color-palette-yellow-500);
       --semantic-color-border-focus: var(--core-color-palette-yellow-400);
       --semantic-color-border-light: var(--core-color-palette-yellow-700);
@@ -1389,7 +1389,7 @@
     --semantic-color-background-accent: var(--core-color-palette-yellow-400);
     --semantic-color-background-highlight: var(--core-color-palette-yellow-700);
     --semantic-color-border-accent: var(--core-color-palette-yellow-400);
-    --semantic-color-border-default: var(--core-color-palette-yellow-600);
+    --semantic-color-border-default: var(--core-color-palette-neutral-600);
     --semantic-color-border-hover: var(--core-color-palette-yellow-500);
     --semantic-color-border-focus: var(--core-color-palette-yellow-400);
     --semantic-color-border-light: var(--core-color-palette-yellow-700);
@@ -1440,7 +1440,7 @@
     --semantic-color-background-highlight: var(--core-color-palette-blue-100);
     --semantic-color-background-brand: var(--core-color-palette-blue-500);
     --semantic-color-border-accent: var(--core-color-palette-blue-500);
-    --semantic-color-border-default: var(--core-color-palette-blue-200);
+    --semantic-color-border-default: var(--core-color-palette-neutral-300);
     --semantic-color-border-hover: var(--core-color-palette-blue-300);
     --semantic-color-border-focus: var(--core-color-palette-blue-500);
     --semantic-color-border-light: var(--core-color-palette-blue-100);
@@ -1492,7 +1492,7 @@
       --semantic-color-background-highlight: var(--core-color-palette-blue-800);
       --semantic-color-background-brand: var(--core-color-palette-blue-400);
       --semantic-color-border-accent: var(--core-color-palette-blue-400);
-      --semantic-color-border-default: var(--core-color-palette-blue-600);
+      --semantic-color-border-default: var(--core-color-palette-neutral-600);
       --semantic-color-border-hover: var(--core-color-palette-blue-500);
       --semantic-color-border-focus: var(--core-color-palette-blue-400);
       --semantic-color-border-light: var(--core-color-palette-blue-700);
@@ -1544,7 +1544,7 @@
     --semantic-color-background-highlight: var(--core-color-palette-blue-800);
     --semantic-color-background-brand: var(--core-color-palette-blue-400);
     --semantic-color-border-accent: var(--core-color-palette-blue-400);
-    --semantic-color-border-default: var(--core-color-palette-blue-600);
+    --semantic-color-border-default: var(--core-color-palette-neutral-600);
     --semantic-color-border-hover: var(--core-color-palette-blue-500);
     --semantic-color-border-focus: var(--core-color-palette-blue-400);
     --semantic-color-border-light: var(--core-color-palette-blue-700);
@@ -1594,7 +1594,7 @@
     --semantic-color-background-accent: var(--core-color-palette-red-500);
     --semantic-color-background-highlight: var(--core-color-palette-red-200);
     --semantic-color-border-accent: var(--core-color-palette-red-500);
-    --semantic-color-border-default: var(--core-color-palette-red-200);
+    --semantic-color-border-default: var(--core-color-palette-neutral-300);
     --semantic-color-border-hover: var(--core-color-palette-red-300);
     --semantic-color-border-focus: var(--core-color-palette-red-500);
     --semantic-color-border-light: var(--core-color-palette-red-100);
@@ -1645,7 +1645,7 @@
       --semantic-color-background-accent: var(--core-color-palette-red-400);
       --semantic-color-background-highlight: var(--core-color-palette-red-700);
       --semantic-color-border-accent: var(--core-color-palette-red-400);
-      --semantic-color-border-default: var(--core-color-palette-red-600);
+      --semantic-color-border-default: var(--core-color-palette-neutral-600);
       --semantic-color-border-hover: var(--core-color-palette-red-500);
       --semantic-color-border-focus: var(--core-color-palette-red-400);
       --semantic-color-border-light: var(--core-color-palette-red-700);
@@ -1696,7 +1696,7 @@
     --semantic-color-background-accent: var(--core-color-palette-red-400);
     --semantic-color-background-highlight: var(--core-color-palette-red-700);
     --semantic-color-border-accent: var(--core-color-palette-red-400);
-    --semantic-color-border-default: var(--core-color-palette-red-600);
+    --semantic-color-border-default: var(--core-color-palette-neutral-600);
     --semantic-color-border-hover: var(--core-color-palette-red-500);
     --semantic-color-border-focus: var(--core-color-palette-red-400);
     --semantic-color-border-light: var(--core-color-palette-red-700);
@@ -1747,7 +1747,7 @@
     --semantic-color-background-highlight: var(--core-color-palette-green-100);
     --semantic-color-background-brand: var(--core-color-palette-green-500);
     --semantic-color-border-accent: var(--core-color-palette-green-500);
-    --semantic-color-border-default: var(--core-color-palette-green-200);
+    --semantic-color-border-default: var(--core-color-palette-neutral-300);
     --semantic-color-border-hover: var(--core-color-palette-green-300);
     --semantic-color-border-focus: var(--core-color-palette-green-500);
     --semantic-color-border-light: var(--core-color-palette-green-100);
@@ -1799,7 +1799,7 @@
       --semantic-color-background-highlight: var(--core-color-palette-green-800);
       --semantic-color-background-brand: var(--core-color-palette-green-400);
       --semantic-color-border-accent: var(--core-color-palette-green-400);
-      --semantic-color-border-default: var(--core-color-palette-green-600);
+      --semantic-color-border-default: var(--core-color-palette-neutral-600);
       --semantic-color-border-hover: var(--core-color-palette-green-500);
       --semantic-color-border-focus: var(--core-color-palette-green-400);
       --semantic-color-border-light: var(--core-color-palette-green-700);
@@ -1851,7 +1851,7 @@
     --semantic-color-background-highlight: var(--core-color-palette-green-800);
     --semantic-color-background-brand: var(--core-color-palette-green-400);
     --semantic-color-border-accent: var(--core-color-palette-green-400);
-    --semantic-color-border-default: var(--core-color-palette-green-600);
+    --semantic-color-border-default: var(--core-color-palette-neutral-600);
     --semantic-color-border-hover: var(--core-color-palette-green-500);
     --semantic-color-border-focus: var(--core-color-palette-green-400);
     --semantic-color-border-light: var(--core-color-palette-green-700);
@@ -1902,7 +1902,7 @@
     --semantic-color-background-highlight: var(--core-color-palette-violet-100);
     --semantic-color-background-brand: var(--core-color-palette-violet-500);
     --semantic-color-border-accent: var(--core-color-palette-violet-500);
-    --semantic-color-border-default: var(--core-color-palette-violet-300);
+    --semantic-color-border-default: var(--core-color-palette-neutral-300);
     --semantic-color-border-hover: var(--core-color-palette-violet-400);
     --semantic-color-border-focus: var(--core-color-palette-violet-500);
     --semantic-color-border-light: var(--core-color-palette-violet-200);
@@ -1954,7 +1954,7 @@
       --semantic-color-background-highlight: var(--core-color-palette-violet-800);
       --semantic-color-background-brand: var(--core-color-palette-violet-400);
       --semantic-color-border-accent: var(--core-color-palette-violet-400);
-      --semantic-color-border-default: var(--core-color-palette-violet-600);
+      --semantic-color-border-default: var(--core-color-palette-neutral-600);
       --semantic-color-border-hover: var(--core-color-palette-violet-500);
       --semantic-color-border-focus: var(--core-color-palette-violet-400);
       --semantic-color-border-light: var(--core-color-palette-violet-700);
@@ -2006,7 +2006,7 @@
     --semantic-color-background-highlight: var(--core-color-palette-violet-800);
     --semantic-color-background-brand: var(--core-color-palette-violet-400);
     --semantic-color-border-accent: var(--core-color-palette-violet-400);
-    --semantic-color-border-default: var(--core-color-palette-violet-600);
+    --semantic-color-border-default: var(--core-color-palette-neutral-600);
     --semantic-color-border-hover: var(--core-color-palette-violet-500);
     --semantic-color-border-focus: var(--core-color-palette-violet-400);
     --semantic-color-border-light: var(--core-color-palette-violet-700);
@@ -2211,7 +2211,7 @@
     --semantic-color-background-accent: var(--core-color-palette-teal-500);
     --semantic-color-background-highlight: var(--core-color-palette-teal-200);
     --semantic-color-border-accent: var(--core-color-palette-teal-500);
-    --semantic-color-border-default: var(--core-color-palette-teal-200);
+    --semantic-color-border-default: var(--core-color-palette-neutral-300);
     --semantic-color-border-hover: var(--core-color-palette-teal-300);
     --semantic-color-border-focus: var(--core-color-palette-teal-500);
     --semantic-color-border-light: var(--core-color-palette-teal-100);
@@ -2262,7 +2262,7 @@
       --semantic-color-background-accent: var(--core-color-palette-teal-400);
       --semantic-color-background-highlight: var(--core-color-palette-teal-700);
       --semantic-color-border-accent: var(--core-color-palette-teal-400);
-      --semantic-color-border-default: var(--core-color-palette-teal-600);
+      --semantic-color-border-default: var(--core-color-palette-neutral-600);
       --semantic-color-border-hover: var(--core-color-palette-teal-500);
       --semantic-color-border-focus: var(--core-color-palette-teal-400);
       --semantic-color-border-light: var(--core-color-palette-teal-700);
@@ -2313,7 +2313,7 @@
     --semantic-color-background-accent: var(--core-color-palette-teal-400);
     --semantic-color-background-highlight: var(--core-color-palette-teal-700);
     --semantic-color-border-accent: var(--core-color-palette-teal-400);
-    --semantic-color-border-default: var(--core-color-palette-teal-600);
+    --semantic-color-border-default: var(--core-color-palette-neutral-600);
     --semantic-color-border-hover: var(--core-color-palette-teal-500);
     --semantic-color-border-focus: var(--core-color-palette-teal-400);
     --semantic-color-border-light: var(--core-color-palette-teal-700);
@@ -2515,7 +2515,7 @@
     --semantic-color-background-accent: var(--core-color-palette-blue-600);
     --semantic-color-background-highlight: var(--core-color-palette-blue-100);
     --semantic-color-border-accent: var(--core-color-palette-blue-500);
-    --semantic-color-border-default: var(--core-color-palette-blue-300);
+    --semantic-color-border-default: var(--core-color-palette-neutral-300);
     --semantic-color-border-hover: var(--core-color-palette-blue-400);
     --semantic-color-border-focus: var(--core-color-palette-blue-600);
     --semantic-color-border-light: var(--core-color-palette-blue-200);
@@ -2566,7 +2566,7 @@
       --semantic-color-background-accent: var(--core-color-palette-blue-400);
       --semantic-color-background-highlight: var(--core-color-palette-blue-800);
       --semantic-color-border-accent: var(--core-color-palette-blue-400);
-      --semantic-color-border-default: var(--core-color-palette-blue-600);
+      --semantic-color-border-default: var(--core-color-palette-neutral-600);
       --semantic-color-border-hover: var(--core-color-palette-blue-500);
       --semantic-color-border-focus: var(--core-color-palette-blue-400);
       --semantic-color-border-light: var(--core-color-palette-blue-700);
@@ -2617,7 +2617,7 @@
     --semantic-color-background-accent: var(--core-color-palette-blue-400);
     --semantic-color-background-highlight: var(--core-color-palette-blue-800);
     --semantic-color-border-accent: var(--core-color-palette-blue-400);
-    --semantic-color-border-default: var(--core-color-palette-blue-600);
+    --semantic-color-border-default: var(--core-color-palette-neutral-600);
     --semantic-color-border-hover: var(--core-color-palette-blue-500);
     --semantic-color-border-focus: var(--core-color-palette-blue-400);
     --semantic-color-border-light: var(--core-color-palette-blue-700);
@@ -2668,7 +2668,7 @@
     --semantic-color-background-highlight: var(--core-color-palette-orange-100);
     --semantic-color-background-brand: var(--core-color-palette-orange-400);
     --semantic-color-border-accent: var(--core-color-palette-orange-400);
-    --semantic-color-border-default: var(--core-color-palette-orange-200);
+    --semantic-color-border-default: var(--core-color-palette-neutral-300);
     --semantic-color-border-hover: var(--core-color-palette-orange-300);
     --semantic-color-border-focus: var(--core-color-palette-orange-400);
     --semantic-color-border-light: var(--core-color-palette-orange-100);
@@ -2721,7 +2721,7 @@
       --semantic-color-background-highlight: var(--core-color-palette-orange-800);
       --semantic-color-background-brand: var(--core-color-palette-orange-500);
       --semantic-color-border-accent: var(--core-color-palette-orange-500);
-      --semantic-color-border-default: var(--core-color-palette-orange-600);
+      --semantic-color-border-default: var(--core-color-palette-neutral-600);
       --semantic-color-border-hover: var(--core-color-palette-orange-500);
       --semantic-color-border-focus: var(--core-color-palette-orange-500);
       --semantic-color-border-light: var(--core-color-palette-orange-700);
@@ -2774,7 +2774,7 @@
     --semantic-color-background-highlight: var(--core-color-palette-orange-800);
     --semantic-color-background-brand: var(--core-color-palette-orange-500);
     --semantic-color-border-accent: var(--core-color-palette-orange-500);
-    --semantic-color-border-default: var(--core-color-palette-orange-600);
+    --semantic-color-border-default: var(--core-color-palette-neutral-600);
     --semantic-color-border-hover: var(--core-color-palette-orange-500);
     --semantic-color-border-focus: var(--core-color-palette-orange-500);
     --semantic-color-border-light: var(--core-color-palette-orange-700);

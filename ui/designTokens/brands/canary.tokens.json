@@ -77,12 +77,12 @@
       },
       "default": {
         "$type": "color",
-        "$value": "{color.palette.yellow.300}",
+        "$value": "{color.palette.neutral.300}",
         "$extensions": {
-          "design.paths.light": "{color.palette.yellow.300}",
-          "design.paths.dark": "{color.palette.yellow.600}"
+          "design.paths.light": "{color.palette.neutral.300}",
+          "design.paths.dark": "{color.palette.neutral.600}"
         },
-        "$description": "Default input border - cheerful yellow tint"
+        "$description": "Default input border - simple neutral gray"
       },
       "hover": {
         "$type": "color",
