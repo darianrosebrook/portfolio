@@ -6,7 +6,25 @@
   "sets": {
     "foundation": {
       "description": "Core design tokens (colors, typography, spacing, etc.)",
-      "sources": [{ "$ref": "core.tokens.json" }]
+      "sources": [
+        { "$ref": "core/color.tokens.json" },
+        { "$ref": "core/typography.tokens.json" },
+        { "$ref": "core/scale.tokens.json" },
+        { "$ref": "core/spacing.tokens.json" },
+        { "$ref": "core/elevation.tokens.json" },
+        { "$ref": "core/opacity.tokens.json" },
+        { "$ref": "core/dimension.tokens.json" },
+        { "$ref": "core/shape.tokens.json" },
+        { "$ref": "core/motion.tokens.json" },
+        { "$ref": "core/density.tokens.json" },
+        { "$ref": "core/layer.tokens.json" },
+        { "$ref": "core/layout.tokens.json" },
+        { "$ref": "core/icon.tokens.json" },
+        { "$ref": "core/effect.tokens.json" },
+        { "$ref": "core/content.tokens.json" },
+        { "$ref": "core/interaction.tokens.json" },
+        { "$ref": "core/component.tokens.json" }
+      ]
     },
     "semantic": {
       "description": "Semantic tokens that reference foundation tokens",

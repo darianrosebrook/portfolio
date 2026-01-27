@@ -8,10 +8,10 @@
 }
 
 .sectionCard {
-  background: white;
+  background: var(--semantic-color-background-primary);
   border-radius: 20px;
   padding: 28px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.03);
+  // box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.03);
 }
 
 .sectionHeader {
@@ -34,7 +34,7 @@
   align-items: center;
   gap: 8px;
   padding: 6px 14px;
-  background: var(--semantic-color-background-secondary);
+  background: var(--semantic-color-background-primary);
   border-radius: 100px;
   font-size: 13px;
   font-weight: 500;
@@ -133,12 +133,12 @@
   &:focus {
     outline: none;
     border-color: var(--semantic-color-border-focus);
-    box-shadow: 0 0 0 2px var(--semantic-color-background-accent);
+    box-shadow: 0 0 0 2px var(--semantic-color-background-secondary);
   }
 
   &.selected {
     border-color: var(--theme-color, var(--semantic-color-background-accent));
-    background: color-mix(in srgb, var(--theme-color, var(--semantic-color-background-accent)) 10%, white);
+    background: color-mix(in srgb, var(--theme-color, var(--semantic-color-background-secondary)) 10%, white);
     color: var(--semantic-color-foreground-primary);
   }
 }
