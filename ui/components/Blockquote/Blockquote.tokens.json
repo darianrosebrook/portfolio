@@ -1,42 +1,43 @@
 {
-  "component": {
-    "blockquote": {
-      "typography": {
-        "sm": {
-          "fontSize": "{font.size.300}",
-          "lineHeight": "{font.lineHeight.300}"
-        },
-        "md": {
-          "fontSize": "{font.size.400}",
-          "lineHeight": "{font.lineHeight.400}"
-        },
-        "lg": {
-          "fontSize": "{font.size.500}",
-          "lineHeight": "{font.lineHeight.500}"
-        },
-        "fontStyle": "italic",
-        "fontWeight": "{font.weight.medium}"
+  "prefix": "blockquote",
+  "tokens": {
+    "color": {
+      "foreground": {
+        "primary": "{semantic.color.foreground.secondary}"
       },
-      "spacing": {
-        "padding": "{space.400}",
-        "margin": "{space.400} 0",
-        "indent": "{space.500}"
+      "background": {
+        "default": "{semantic.color.background.secondary}"
       },
       "border": {
-        "width": {
-          "value": 3,
-          "unit": "px"
-        },
-        "style": "solid",
-        "color": "{color.border.accent}",
-        "radius": "{radius.md}"
+        "default": "{semantic.color.border.accent}",
+        "accent": "{semantic.color.border.accent}"
+      }
+    },
+    "typography": {
+      "fontStyle": "italic",
+      "fontWeight": "{semantic.typography.fontWeight.medium}",
+      "sm": {
+        "fontSize": "{semantic.typography.body.03}",
+        "lineHeight": "{semantic.typography.lineHeight.body}"
       },
-      "surface": {
-        "bg": "{color.background.subtle}",
-        "color": "{color.foreground.muted}"
+      "md": {
+        "fontSize": "{semantic.typography.body.02}",
+        "lineHeight": "{semantic.typography.lineHeight.body}"
       },
-      "accent": {
-        "color": "{color.accent.primary}"
+      "lg": {
+        "fontSize": "{semantic.typography.body.01}",
+        "lineHeight": "{semantic.typography.lineHeight.body}"
+      }
+    },
+    "size": {
+      "padding": {
+        "default": "{core.spacing.size.05}"
+      },
+      "radius": {
+        "default": "{core.shape.radius.medium}"
+      },
+      "border": {
+        "thick": "{core.shape.border.width.thick}"
       }
     }
   }

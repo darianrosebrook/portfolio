@@ -24,7 +24,8 @@
     },
     "size": {
       "cellHeight": "{semantic.control.size.md.height}",
-      "checkboxColumn": "{core.spacing.size.09}"
+      "checkboxColumn": "{core.spacing.size.09}",
+      "radius": "{semantic.shape.control.radius.default}"
     },
     "text": {
       "size": "{semantic.typography.body.03}",
@@ -42,6 +43,9 @@
       "width": "{core.shape.border.width.thick}",
       "color": "{semantic.color.border.accent}",
       "offset": "{core.spacing.size.01}"
+    },
+    "elevation": {
+      "raised": "{semantic.elevation.surface.raised}"
     }
   }
 }

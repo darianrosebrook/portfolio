@@ -1,20 +1,16 @@
-/* AUTO-GENERATED: Scaffolding placeholder. Replace via tokens build. */
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Divider/Divider.tokens.json
+ */
 @mixin vars {
-  /* === Color === */
-  --divider-color-background-default: var(
-    --semantic-color-background-secondary
-  );
-  --divider-color-foreground-primary: var(--semantic-color-foreground-primary);
-  --divider-color-foreground-secondary: var(
-    --semantic-color-foreground-secondary
-  );
-  --divider-color-border-default: var(--semantic-color-border-light);
-  --divider-color-border-accent: var(--semantic-color-border-accent);
+  /* === Color Tokens === */
+  --divider-color-default: var(--semantic-color-border-light);
+  --divider-color-subtle: var(--semantic-color-border-subtle);
+  --divider-color-muted: var(--semantic-color-border-light);
 
-  /* === Size === */
-  --divider-size-padding-default: var(--core-spacing-size-07);
-  --divider-size-radius-default: var(--core-shape-radius-medium);
+  /* === Size Tokens === */
+  --divider-size-thickness: var(--core-shape-border-width-hairline);
+  --divider-size-thickness-thick: var(--core-shape-border-width-thin);
 
-  /* === Elevation === */
-  --divider-elevation-default: var(--semantic-elevation-depth-1);
+  /* === Spacing Tokens === */
+  --divider-spacing-margin: var(--core-spacing-size-04);
 }

@@ -20,4 +20,7 @@
   --status-size-radius-default: var(--core-shape-radius-full);
   --status-size-padding-default: var(--core-spacing-size-04);
   --status-size-border-default: var(--core-shape-border-width-hairline);
+
+  /* === Typography Tokens === */
+  --status-typography-line-height: var(--core-typography-line-height-collapse);
 }

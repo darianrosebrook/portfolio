@@ -1,18 +1,29 @@
-/* AUTO-GENERATED: Scaffolding placeholder. Replace via tokens build. */
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Image/Image.tokens.json
+ */
 @mixin vars {
-  /* === Color === */
+  /* === Color Tokens === */
   --image-color-background-default: var(--semantic-color-background-secondary);
+  --image-color-background-error: var(--semantic-color-background-danger-subtle);
   --image-color-foreground-primary: var(--semantic-color-foreground-primary);
-  --image-color-foreground-secondary: var(
-    --semantic-color-foreground-secondary
-  );
-  --image-color-border-default: var(--semantic-color-border-light);
-  --image-color-border-accent: var(--semantic-color-border-accent);
+  --image-color-foreground-secondary: var(--semantic-color-foreground-secondary);
+  --image-color-foreground-error: var(--semantic-color-foreground-danger);
 
-  /* === Size === */
-  --image-size-padding-default: var(--core-spacing-size-07);
-  --image-size-radius-default: var(--core-shape-radius-medium);
+  /* === Size Tokens === */
+  --image-size-xs: var(--core-spacing-size-08);
+  --image-size-sm: var(--core-spacing-size-10);
+  --image-size-md: var(--core-spacing-size-12);
+  --image-size-lg: var(--core-spacing-size-14);
+  --image-size-xl: var(--core-spacing-size-16);
+  --image-size-icon: var(--core-spacing-size-08);
 
-  /* === Elevation === */
-  --image-elevation-default: var(--semantic-elevation-depth-1);
+  /* === Radius Tokens === */
+  --image-radius-none: 0px;
+  --image-radius-sm: var(--core-shape-radius-small);
+  --image-radius-md: var(--core-shape-radius-medium);
+  --image-radius-lg: var(--core-shape-radius-large);
+  --image-radius-full: var(--core-shape-radius-full);
+
+  /* === Typography Tokens === */
+  --image-typography-error-font-size: var(--semantic-typography-body-04);
 }

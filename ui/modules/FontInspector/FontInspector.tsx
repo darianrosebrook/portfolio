@@ -135,6 +135,7 @@ export const InspectorProvider: React.FC<{
     glyphBackground: '',
     featureHighlightFill: '',
     featureHighlightStroke: '',
+    featureBackground: '',
   });
   const [selectedAnatomy, setSelectedAnatomy] = useState<
     Map<string, AnatomyFeature>
@@ -595,6 +596,10 @@ export const InspectorProvider: React.FC<{
         featureHighlightStroke: getPropertyValue(
           '--semantic-color-foreground-danger',
           isDark ? '#ea6465' : '#d9292b'
+        ),
+        featureBackground: getPropertyValue(
+          '--semantic-color-background-secondary',
+          isDark ? '#1a1a1a' : '#e5e5e5'
         ),
       });
     };

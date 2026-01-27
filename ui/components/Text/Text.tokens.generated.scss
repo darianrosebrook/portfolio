@@ -1,16 +1,77 @@
-/* AUTO-GENERATED: Scaffolding placeholder. Replace via tokens build. */
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Text/Text.tokens.json
+ */
 @mixin vars {
-  /* === Color === */
-  --text-color-background-default: var(--semantic-color-background-secondary);
+  /* === Color Tokens === */
   --text-color-foreground-primary: var(--semantic-color-foreground-primary);
   --text-color-foreground-secondary: var(--semantic-color-foreground-secondary);
-  --text-color-border-default: var(--semantic-color-border-light);
-  --text-color-border-accent: var(--semantic-color-border-accent);
+  --text-color-foreground-accent: var(--semantic-color-foreground-accent);
+  --text-color-foreground-success: var(--semantic-color-foreground-success);
+  --text-color-foreground-warning: var(--semantic-color-foreground-warning);
+  --text-color-foreground-danger: var(--semantic-color-foreground-danger);
+  --text-color-background-default: var(--semantic-color-background-secondary);
 
-  /* === Size === */
-  --text-size-padding-default: var(--core-spacing-size-07);
-  --text-size-radius-default: var(--core-shape-radius-medium);
+  /* === Typography Tokens === */
+  --text-typography-font-weight-light: var(--semantic-typography-font-weight-light);
+  --text-typography-font-weight-regular: var(--semantic-typography-font-weight-regular);
+  --text-typography-font-weight-medium: var(--semantic-typography-font-weight-medium);
+  --text-typography-font-weight-semibold: var(--semantic-typography-font-weight-semibold);
+  --text-typography-font-weight-bold: var(--semantic-typography-font-weight-bold);
+  --text-typography-line-height-heading: var(--semantic-typography-line-height-heading);
+  --text-typography-line-height-body: var(--semantic-typography-line-height-body);
+  --text-typography-display-xs: var(--semantic-typography-heading-03);
+  --text-typography-display-sm: var(--semantic-typography-heading-02);
+  --text-typography-display-md: var(--semantic-typography-heading-01);
+  --text-typography-display-lg: var(--semantic-typography-display-01);
+  --text-typography-display-xl: var(--semantic-typography-display-02);
+  --text-typography-display-2xl: var(--semantic-typography-display-03);
+  --text-typography-display-3xl: var(--semantic-typography-display-04);
+  --text-typography-headline-xs: var(--semantic-typography-heading-04);
+  --text-typography-headline-sm: var(--semantic-typography-heading-03);
+  --text-typography-headline-md: var(--semantic-typography-heading-02);
+  --text-typography-headline-lg: var(--semantic-typography-heading-01);
+  --text-typography-headline-xl: var(--semantic-typography-display-01);
+  --text-typography-headline-2xl: var(--semantic-typography-display-02);
+  --text-typography-headline-3xl: var(--semantic-typography-display-03);
+  --text-typography-title-xs: var(--semantic-typography-body-03);
+  --text-typography-title-sm: var(--semantic-typography-body-02);
+  --text-typography-title-md: var(--semantic-typography-body-01);
+  --text-typography-title-lg: var(--semantic-typography-heading-04);
+  --text-typography-title-xl: var(--semantic-typography-heading-03);
+  --text-typography-title-2xl: var(--semantic-typography-heading-02);
+  --text-typography-title-3xl: var(--semantic-typography-heading-01);
+  --text-typography-body-xs: var(--semantic-typography-body-05);
+  --text-typography-body-sm: var(--semantic-typography-body-04);
+  --text-typography-body-md: var(--semantic-typography-body-03);
+  --text-typography-body-lg: var(--semantic-typography-body-02);
+  --text-typography-body-xl: var(--semantic-typography-body-01);
+  --text-typography-body-2xl: var(--semantic-typography-heading-04);
+  --text-typography-body-3xl: var(--semantic-typography-heading-03);
+  --text-typography-caption-xs: var(--semantic-typography-caption-02);
+  --text-typography-caption-sm: var(--semantic-typography-caption-01);
+  --text-typography-caption-md: var(--semantic-typography-body-05);
+  --text-typography-caption-lg: var(--semantic-typography-body-04);
+  --text-typography-caption-xl: var(--semantic-typography-body-03);
+  --text-typography-caption-2xl: var(--semantic-typography-body-02);
+  --text-typography-caption-3xl: var(--semantic-typography-body-01);
+  --text-typography-overline-xs: var(--semantic-typography-caption-02);
+  --text-typography-overline-sm: var(--semantic-typography-caption-01);
+  --text-typography-overline-md: var(--semantic-typography-body-05);
+  --text-typography-overline-lg: var(--semantic-typography-body-04);
+  --text-typography-overline-xl: var(--semantic-typography-body-03);
+  --text-typography-overline-2xl: var(--semantic-typography-body-02);
+  --text-typography-overline-3xl: var(--semantic-typography-body-01);
+  --text-typography-code-xs: var(--semantic-typography-body-05);
+  --text-typography-code-sm: var(--semantic-typography-body-04);
+  --text-typography-code-md: var(--semantic-typography-body-03);
+  --text-typography-code-lg: var(--semantic-typography-body-02);
+  --text-typography-code-xl: var(--semantic-typography-body-01);
+  --text-typography-code-2xl: var(--semantic-typography-heading-04);
+  --text-typography-code-3xl: var(--semantic-typography-heading-03);
 
-  /* === Elevation === */
-  --text-elevation-default: var(--semantic-elevation-depth-1);
+  /* === Code Tokens === */
+  --text-code-font-family: var(--core-typography-font-family-mono);
+  --text-code-padding-y: var(--core-spacing-size-02);
+  --text-code-padding-x: var(--core-spacing-size-03);
+  --text-code-radius: var(--core-shape-radius-small);
 }

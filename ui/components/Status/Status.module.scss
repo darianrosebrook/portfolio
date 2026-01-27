@@ -14,10 +14,7 @@
     var(--status-color-border-default);
   border-radius: var(--status-size-radius-default);
   color: var(--status-color-foreground-primary);
-  line-height: var(
-    --semantic-typography-line-height-collapse,
-    var(--core-typography-line-height-collapse, 1)
-  );
+  line-height: var(--status-typography-lineHeight, 1);
   fill: var(--status-color-foreground-accent);
 }
 

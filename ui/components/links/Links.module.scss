@@ -7,12 +7,9 @@
   vertical-align: baseline;
   gap: var(--animatedLink-spacing-gap-default);
   align-items: center;
-  color: var(
-    --animatedLink-color-default,
-    var(--semantic-color-foreground-accent)
-  );
+  color: var(--animatedLink-color-default);
   font-weight: var(--animatedLink-typography-fontWeight-regular);
-  line-height: var(--animatedLink-typography-line-height-collapse);
+  line-height: var(--animatedLink-typography-lineHeight-collapse);
   text-decoration: none;
   transition: color 0.2s ease;
 
@@ -20,21 +17,15 @@
     // Use color-mix() for dynamic hover effect
     color: color-mix(
       in srgb,
-      var(--animatedLink-color-default, var(--semantic-color-foreground-accent))
-        80%,
-      var(--animatedLink-color-hover, var(--semantic-color-foreground-accent))
-        20%
+      var(--animatedLink-color-default) 80%,
+      var(--animatedLink-color-hover) 20%
     );
   }
 
   &:focus-visible {
     border-radius: var(--animatedLink-shape-radius, 0.125rem);
     outline: 2px solid
-      color-mix(
-        in oklab,
-        var(--animatedLink-color-focus, var(--semantic-color-border-accent)) 40%,
-        transparent
-      );
+      color-mix(in oklab, var(--animatedLink-color-focus) 40%, transparent);
     outline-offset: 2px;
   }
 }
@@ -45,7 +36,7 @@
   vertical-align: baseline;
   overflow: hidden;
   width: 100%;
-  line-height: var(--animatedLink-typography-line-height-collapse);
+  line-height: var(--animatedLink-typography-lineHeight-collapse);
 }
 
 .text {

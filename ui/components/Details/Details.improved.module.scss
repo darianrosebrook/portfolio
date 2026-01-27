@@ -34,7 +34,7 @@
 .content {
   padding: var(--details-size-padding-default);
   color: var(--details-color-foreground-secondary);
-  line-height: var(--semantic-typography-line-height-body);
+  line-height: var(--details-typography-lineHeight-body);
 
   // Animation for opening/closing
   animation: details-content-show var(--details-motion-duration-fast)
@@ -87,7 +87,7 @@
   }
 
   &[data-variant='compact'] {
-    margin: var(--core-spacing-size-04) 0;
+    margin: var(--details-spacing-margin-compact) 0;
 
     .summary {
       padding: var(--details-size-padding-default);
@@ -109,8 +109,8 @@
   gap: var(--details-spacing-gap-default);
   align-items: center;
   color: var(--details-color-foreground-primary);
-  font-weight: var(--semantic-typography-font-weight-medium);
-  line-height: var(--semantic-typography-line-height-tight);
+  font-weight: var(--details-typography-fontWeight-medium);
+  line-height: var(--details-typography-lineHeight-tight);
 }
 
 .summaryText {
@@ -119,8 +119,8 @@
 
 .icon {
   flex-shrink: 0;
-  width: var(--core-spacing-size-05);
-  height: var(--core-spacing-size-05);
+  width: var(--details-size-icon);
+  height: var(--details-size-icon);
   color: var(--details-color-foreground-secondary);
   transition:
     transform var(--details-motion-duration-fast)

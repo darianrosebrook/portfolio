@@ -1,65 +1,38 @@
 {
-  "component": {
-    "image": {
-      "size": {
-        "xs": {
-          "value": 4,
-          "unit": "rem"
-        },
-        "sm": {
-          "value": 6,
-          "unit": "rem"
-        },
-        "md": {
-          "value": 8,
-          "unit": "rem"
-        },
-        "lg": {
-          "value": 12,
-          "unit": "rem"
-        },
-        "xl": {
-          "value": 16,
-          "unit": "rem"
-        },
-        "full": {
-          "value": 100,
-          "unit": "%"
-        }
+  "prefix": "image",
+  "tokens": {
+    "color": {
+      "background": {
+        "default": "{semantic.color.background.secondary}",
+        "error": "{semantic.color.background.dangerSubtle}"
       },
-      "radius": {
-        "none": {
-          "value": 0,
-          "unit": "px"
-        },
-        "sm": "{radius.sm}",
-        "md": "{radius.md}",
-        "lg": "{radius.lg}",
-        "full": {
-          "value": 999,
-          "unit": "px"
-        }
+      "foreground": {
+        "primary": "{semantic.color.foreground.primary}",
+        "secondary": "{semantic.color.foreground.secondary}",
+        "error": "{semantic.color.foreground.danger}"
+      }
+    },
+    "size": {
+      "xs": "{core.spacing.size.08}",
+      "sm": "{core.spacing.size.10}",
+      "md": "{core.spacing.size.12}",
+      "lg": "{core.spacing.size.14}",
+      "xl": "{core.spacing.size.16}",
+      "icon": "{core.spacing.size.08}"
+    },
+    "radius": {
+      "none": {
+        "value": 0,
+        "unit": "px"
       },
-      "placeholder": {
-        "bg": "{color.background.muted}",
-        "color": "{color.foreground.subtle}",
-        "iconSize": {
-          "value": 2,
-          "unit": "rem"
-        }
-      },
+      "sm": "{core.shape.radius.small}",
+      "md": "{core.shape.radius.medium}",
+      "lg": "{core.shape.radius.large}",
+      "full": "{core.shape.radius.full}"
+    },
+    "typography": {
       "error": {
-        "bg": "{color.background.subtle}",
-        "color": "{color.foreground.muted}",
-        "iconSize": {
-          "value": 1.5,
-          "unit": "rem"
-        },
-        "fontSize": "{font.size.200}"
-      },
-      "loading": {
-        "opacity": "0.7",
-        "transition": "opacity 0.2s ease"
+        "fontSize": "{semantic.typography.body.04}"
       }
     }
   }

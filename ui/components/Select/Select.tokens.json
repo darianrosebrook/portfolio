@@ -12,7 +12,8 @@
         "readOnly": "{semantic.color.background.readOnly}",
         "checked": "{semantic.color.background.primary}",
         "error": "{semantic.color.background.dangerSubtle}",
-        "success": "{semantic.color.background.successSubtle}"
+        "success": "{semantic.color.background.successSubtle}",
+        "selected": "{semantic.color.background.accentSubtle}"
       },
       "foreground": {
         "default": "{semantic.color.foreground.primary}",
@@ -24,7 +25,8 @@
         "readOnly": "{semantic.color.foreground.primary}",
         "checked": "{semantic.color.foreground.primary}",
         "error": "{semantic.color.foreground.danger}",
-        "success": "{semantic.color.foreground.success}"
+        "success": "{semantic.color.foreground.success}",
+        "selected": "{semantic.color.foreground.accent}"
       },
       "border": {
         "default": "{semantic.color.border.primary}",
@@ -32,6 +34,7 @@
         "isOpen": "{semantic.color.border.accent}",
         "focus": "{semantic.color.border.primary}",
         "focusVisible": "{semantic.color.border.accent}",
+        "focusRing": "{semantic.color.border.focusRing}",
         "disabled": "{semantic.color.border.disabled}",
         "readOnly": "{semantic.color.border.light}",
         "checked": "{semantic.color.border.accent}",
@@ -70,15 +73,34 @@
         "checked": "{core.spacing.size.03}"
       },
       "radius": {
-        "default": "{core.shape.radius.medium}"
+        "default": "{core.shape.radius.medium}",
+        "small": "{core.shape.radius.small}"
       },
       "border": {
         "default": "{core.shape.border.width.hairline}"
+      },
+      "sm": {
+        "height": "{semantic.control.size.sm.height}",
+        "paddingY": "{semantic.control.size.sm.paddingY}",
+        "paddingX": "{semantic.control.size.sm.paddingX}"
+      },
+      "md": {
+        "height": "{semantic.control.size.md.height}",
+        "paddingY": "{semantic.control.size.md.paddingY}",
+        "paddingX": "{semantic.control.size.md.paddingX}"
+      },
+      "lg": {
+        "height": "{semantic.control.size.lg.height}",
+        "paddingY": "{semantic.control.size.lg.paddingY}",
+        "paddingX": "{semantic.control.size.lg.paddingX}"
       }
     },
     "font": {
       "size": {
-        "default": "{semantic.typography.body.02}"
+        "default": "{semantic.typography.body.02}",
+        "sm": "{semantic.typography.body.small}",
+        "md": "{semantic.typography.body.02}",
+        "lg": "{semantic.typography.body.02}"
       },
       "weight": {
         "default": "{semantic.typography.fontWeight.regular}"

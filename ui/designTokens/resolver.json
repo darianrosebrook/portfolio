@@ -2,7 +2,7 @@
   "$schema": "../utils/designTokens/validators/resolver.schema.json",
   "name": "Portfolio Design System Resolver",
   "version": "2025-10-01",
-  "description": "Resolver document for managing design tokens across themes and contexts using DTCG 1.0 Resolver Module",
+  "description": "Resolver document for managing design tokens across themes, brands, and contexts using DTCG 1.0 Resolver Module",
   "sets": {
     "foundation": {
       "description": "Core design tokens (colors, typography, spacing, etc.)",
@@ -11,6 +11,30 @@
     "semantic": {
       "description": "Semantic tokens that reference foundation tokens",
       "sources": [{ "$ref": "semantic.tokens.json" }]
+    },
+    "brands": {
+      "description": "Brand-specific token override sets",
+      "sources": [
+        { "$ref": "brands/default.tokens.json" },
+        { "$ref": "brands/corporate.tokens.json" },
+        { "$ref": "brands/forest.tokens.json" },
+        { "$ref": "brands/sunset.tokens.json" },
+        { "$ref": "brands/midnight.tokens.json" },
+        { "$ref": "brands/ocean.tokens.json" },
+        { "$ref": "brands/canary.tokens.json" },
+        { "$ref": "brands/monochrome.tokens.json" },
+        { "$ref": "brands/rose.tokens.json" },
+        { "$ref": "brands/slate.tokens.json" }
+      ]
+    },
+    "densities": {
+      "description": "Spacing density override sets",
+      "sources": [
+        { "$ref": "density/tight.tokens.json" },
+        { "$ref": "density/compact.tokens.json" },
+        { "$ref": "density/default.tokens.json" },
+        { "$ref": "density/spacious.tokens.json" }
+      ]
     }
   },
   "modifiers": {
@@ -33,11 +57,137 @@
           ]
         }
       }
+    },
+    "brand": {
+      "description": "Brand identity modifier for multi-brand theming",
+      "default": "default",
+      "contexts": {
+        "default": {
+          "description": "Default brand with red/coral accents",
+          "sources": [
+            { "$ref": "#/sets/foundation" },
+            { "$ref": "#/sets/semantic" },
+            { "$ref": "brands/default.tokens.json" }
+          ]
+        },
+        "corporate": {
+          "description": "Corporate brand with blue accents",
+          "sources": [
+            { "$ref": "#/sets/foundation" },
+            { "$ref": "#/sets/semantic" },
+            { "$ref": "brands/corporate.tokens.json" }
+          ]
+        },
+        "forest": {
+          "description": "Forest brand with green accents",
+          "sources": [
+            { "$ref": "#/sets/foundation" },
+            { "$ref": "#/sets/semantic" },
+            { "$ref": "brands/forest.tokens.json" }
+          ]
+        },
+        "sunset": {
+          "description": "Sunset brand with orange/amber accents",
+          "sources": [
+            { "$ref": "#/sets/foundation" },
+            { "$ref": "#/sets/semantic" },
+            { "$ref": "brands/sunset.tokens.json" }
+          ]
+        },
+        "midnight": {
+          "description": "Midnight brand with purple/violet accents",
+          "sources": [
+            { "$ref": "#/sets/foundation" },
+            { "$ref": "#/sets/semantic" },
+            { "$ref": "brands/midnight.tokens.json" }
+          ]
+        },
+        "ocean": {
+          "description": "Ocean brand with teal/cyan accents",
+          "sources": [
+            { "$ref": "#/sets/foundation" },
+            { "$ref": "#/sets/semantic" },
+            { "$ref": "brands/ocean.tokens.json" }
+          ]
+        },
+        "canary": {
+          "description": "Canary brand with yellow accents",
+          "sources": [
+            { "$ref": "#/sets/foundation" },
+            { "$ref": "#/sets/semantic" },
+            { "$ref": "brands/canary.tokens.json" }
+          ]
+        },
+        "monochrome": {
+          "description": "Monochrome brand with neutral gray accents",
+          "sources": [
+            { "$ref": "#/sets/foundation" },
+            { "$ref": "#/sets/semantic" },
+            { "$ref": "brands/monochrome.tokens.json" }
+          ]
+        },
+        "rose": {
+          "description": "Rose brand with pink/rose accents",
+          "sources": [
+            { "$ref": "#/sets/foundation" },
+            { "$ref": "#/sets/semantic" },
+            { "$ref": "brands/rose.tokens.json" }
+          ]
+        },
+        "slate": {
+          "description": "Slate brand with steel blue accents",
+          "sources": [
+            { "$ref": "#/sets/foundation" },
+            { "$ref": "#/sets/semantic" },
+            { "$ref": "brands/slate.tokens.json" }
+          ]
+        }
+      }
+    },
+    "density": {
+      "description": "Spacing density modifier for adjusting spacing scale",
+      "default": "default",
+      "contexts": {
+        "tight": {
+          "description": "Tight spacing density - 2px/4px base for dense data, mobile, small components",
+          "sources": [
+            { "$ref": "#/sets/foundation" },
+            { "$ref": "#/sets/semantic" },
+            { "$ref": "density/tight.tokens.json" }
+          ]
+        },
+        "compact": {
+          "description": "Compact spacing density - 4px linear for data grids, tables, toolbars",
+          "sources": [
+            { "$ref": "#/sets/foundation" },
+            { "$ref": "#/sets/semantic" },
+            { "$ref": "density/compact.tokens.json" }
+          ]
+        },
+        "default": {
+          "description": "Default spacing density - 8px linear for standard layouts",
+          "sources": [
+            { "$ref": "#/sets/foundation" },
+            { "$ref": "#/sets/semantic" },
+            { "$ref": "density/default.tokens.json" }
+          ]
+        },
+        "spacious": {
+          "description": "Spacious spacing density - 8px/12px+ for hero sections, landing pages",
+          "sources": [
+            { "$ref": "#/sets/foundation" },
+            { "$ref": "#/sets/semantic" },
+            { "$ref": "density/spacious.tokens.json" }
+          ]
+        }
+      }
     }
   },
   "resolutionOrder": [
     { "$ref": "#/sets/foundation" },
     { "$ref": "#/sets/semantic" },
-    { "$ref": "#/modifiers/theme" }
+    { "$ref": "#/modifiers/theme" },
+    { "$ref": "#/modifiers/brand" },
+    { "$ref": "#/modifiers/density" }
   ]
 }

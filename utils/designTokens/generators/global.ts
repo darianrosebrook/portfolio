@@ -4,12 +4,18 @@
  *
  * Consolidates both .mjs and .ts implementations into a single,
  * TypeScript-based generator for global design tokens.
+ *
+ * Supports:
+ * - CSS Cascade Layers (@layer core, semantic, theme, brand)
+ * - Multi-brand theming via [data-brand] attribute selectors
+ * - Light/dark theme variants
  */
 
 import fs from 'fs';
 import path from 'path';
 import {
   PATHS,
+  PROJECT_ROOT,
   readTokenFile,
   writeOutputFile,
   tokenPathToCSSVar,
@@ -34,6 +40,40 @@ import {
   colorValueToCSS,
   dimensionValueToCSS,
 } from '../utils/transforms';
+
+/** Available brand identifiers */
+export type BrandId = 'default' | 'corporate' | 'forest' | 'sunset' | 'midnight' | 'ocean' | 'canary' | 'monochrome' | 'rose' | 'slate';
+
+/** Available density identifiers */
+export type DensityId = 'tight' | 'compact' | 'default' | 'spacious';
+
+/** Brand metadata from token files */
+export interface BrandMetadata {
+  name: string;
+  description: string;
+  accent: string;
+}
+
+/** Density metadata from token files */
+export interface DensityMetadata {
+  name: string;
+  description: string;
+  base: string;
+}
+
+/** Processed brand token overrides */
+export interface BrandOverrides {
+  metadata: BrandMetadata;
+  lightVars: Record<string, string>;
+  darkVars: Record<string, string>;
+}
+
+/** Processed density token overrides */
+export interface DensityOverrides {
+  metadata: DensityMetadata;
+  lightVars: Record<string, string>;
+  darkVars: Record<string, string>;
+}
 
 interface ThemeMaps {
   root: Record<string, string>;
@@ -486,10 +526,332 @@ function validateReferences(context: CollectionContext): string[] {
 }
 
 /**
+ * Load all brand token files from the brands directory
+ */
+function loadBrandTokens(): Map<BrandId, BrandOverrides> {
+  const brands = new Map<BrandId, BrandOverrides>();
+  const brandsDir = path.join(PROJECT_ROOT, 'ui', 'designTokens', 'brands');
+
+  if (!fs.existsSync(brandsDir)) {
+    console.log('[tokens] No brands directory found, skipping brand tokens');
+    return brands;
+  }
+
+  const brandFiles = fs.readdirSync(brandsDir).filter(
+    (f) => f.endsWith('.tokens.json') && !f.startsWith('_')
+  );
+
+  for (const file of brandFiles) {
+    const brandName = file.replace('.tokens.json', '') as BrandId;
+    const filePath = path.join(brandsDir, file);
+
+    try {
+      const content = fs.readFileSync(filePath, 'utf8');
+      const brandData = JSON.parse(content);
+
+      if (!brandData.$brand) {
+        console.warn(`[tokens] Brand file ${file} missing $brand metadata, skipping`);
+        continue;
+      }
+
+      const context: CollectionContext = {
+        definedVars: new Set(),
+        referencedVars: new Set(),
+      };
+
+      const lightVars: Record<string, string> = {};
+      const darkVars: Record<string, string> = {};
+
+      // Process brand token overrides (skip $brand metadata)
+      processBrandTokens(brandData, [], context, lightVars, darkVars);
+
+      brands.set(brandName, {
+        metadata: brandData.$brand,
+        lightVars,
+        darkVars,
+      });
+
+      console.log(`[tokens] Loaded brand: ${brandName} (${Object.keys(lightVars).length} overrides)`);
+    } catch (error) {
+      console.error(`[tokens] Failed to load brand ${file}:`, error);
+    }
+  }
+
+  return brands;
+}
+
+/**
+ * Process brand token overrides into CSS variables
+ */
+function processBrandTokens(
+  obj: Record<string, unknown>,
+  pathArr: string[],
+  context: CollectionContext,
+  lightVars: Record<string, string>,
+  darkVars: Record<string, string>
+): void {
+  for (const [key, value] of Object.entries(obj)) {
+    if (key.startsWith('$')) continue; // Skip metadata
+
+    const currentPath = [...pathArr, key];
+
+    if (value && typeof value === 'object' && !Array.isArray(value)) {
+      const valueObj = value as Record<string, unknown>;
+
+      if ('$value' in valueObj || '$type' in valueObj) {
+        // This is a token definition
+        const tokenValue = valueObj.$value;
+        const extensions = valueObj.$extensions as Record<string, unknown> | undefined;
+
+        // Build semantic path (brand tokens override semantic layer)
+        const semanticPath = `semantic.${currentPath.join('.')}`;
+        const cssVar = tokenPathToCSSVar(semanticPath);
+
+        // Process light value
+        const lightValue = extensions?.['design.paths.light'] || tokenValue;
+        if (lightValue !== undefined) {
+          const processedLight = processTokenValue(lightValue, context, semanticPath, undefined);
+          if (processedLight) {
+            lightVars[cssVar] = processedLight;
+          }
+        }
+
+        // Process dark value
+        const darkValue = extensions?.['design.paths.dark'] || tokenValue;
+        if (darkValue !== undefined) {
+          const processedDark = processTokenValue(darkValue, context, semanticPath, undefined);
+          if (processedDark) {
+            darkVars[cssVar] = processedDark;
+          }
+        }
+      } else {
+        // Nested group, recurse
+        processBrandTokens(valueObj, currentPath, context, lightVars, darkVars);
+      }
+    }
+  }
+}
+
+/**
+ * Format CSS block for brand selector
+ */
+function formatBrandBlock(
+  brandId: string,
+  properties: Record<string, string>,
+  indent = ''
+): string {
+  if (Object.keys(properties).length === 0) return '';
+
+  const lines = Object.entries(properties)
+    .map(([prop, value]) => `${indent}    ${prop}: ${value};`)
+    .join('\n');
+
+  return `${indent}  [data-brand="${brandId}"] {\n${lines}\n${indent}  }`;
+}
+
+/**
+ * Generate CSS layers declaration
+ */
+function generateLayerDeclaration(): string {
+  return '/* CSS Cascade Layers - order defines precedence */\n@layer core, semantic, theme, brand, density;';
+}
+
+/**
+ * Generate brand layer CSS with all brand overrides
+ */
+function generateBrandLayerCSS(brands: Map<BrandId, BrandOverrides>): string {
+  if (brands.size === 0) return '';
+
+  const blocks: string[] = ['@layer brand {'];
+
+  for (const [brandId, overrides] of brands) {
+    if (Object.keys(overrides.lightVars).length === 0) continue;
+
+    // Light mode overrides (default)
+    const lightBlock = formatBrandBlock(brandId, overrides.lightVars);
+    if (lightBlock) {
+      blocks.push(lightBlock);
+    }
+
+    // Dark mode overrides within brand
+    if (Object.keys(overrides.darkVars).length > 0) {
+      const darkBlock = Object.entries(overrides.darkVars)
+        .map(([prop, value]) => `      ${prop}: ${value};`)
+        .join('\n');
+
+      blocks.push(`  @media (prefers-color-scheme: dark) {\n    [data-brand="${brandId}"] {\n${darkBlock}\n    }\n  }`);
+      blocks.push(`  .dark[data-brand="${brandId}"], .dark [data-brand="${brandId}"] {\n${Object.entries(overrides.darkVars).map(([p, v]) => `    ${p}: ${v};`).join('\n')}\n  }`);
+    }
+  }
+
+  blocks.push('}');
+
+  return blocks.join('\n\n');
+}
+
+/**
+ * Load all density token files from the density directory
+ */
+function loadDensityTokens(): Map<DensityId, DensityOverrides> {
+  const densities = new Map<DensityId, DensityOverrides>();
+  const densityDir = path.join(PROJECT_ROOT, 'ui', 'designTokens', 'density');
+
+  if (!fs.existsSync(densityDir)) {
+    console.log('[tokens] No density directory found, skipping density tokens');
+    return densities;
+  }
+
+  const densityFiles = fs.readdirSync(densityDir).filter(
+    (f) => f.endsWith('.tokens.json') && !f.startsWith('_')
+  );
+
+  for (const file of densityFiles) {
+    const densityName = file.replace('.tokens.json', '') as DensityId;
+    const filePath = path.join(densityDir, file);
+
+    try {
+      const content = fs.readFileSync(filePath, 'utf8');
+      const densityData = JSON.parse(content);
+
+      if (!densityData.$density) {
+        console.warn(`[tokens] Density file ${file} missing $density metadata, skipping`);
+        continue;
+      }
+
+      const context: CollectionContext = {
+        definedVars: new Set(),
+        referencedVars: new Set(),
+      };
+
+      const lightVars: Record<string, string> = {};
+      const darkVars: Record<string, string> = {};
+
+      // Process density token overrides (skip $density metadata)
+      processDensityTokens(densityData, [], context, lightVars, darkVars);
+
+      densities.set(densityName, {
+        metadata: densityData.$density,
+        lightVars,
+        darkVars,
+      });
+
+      console.log(`[tokens] Loaded density: ${densityName} (${Object.keys(lightVars).length} overrides)`);
+    } catch (error) {
+      console.error(`[tokens] Failed to load density ${file}:`, error);
+    }
+  }
+
+  return densities;
+}
+
+/**
+ * Process density token overrides into CSS variables
+ */
+function processDensityTokens(
+  obj: Record<string, unknown>,
+  pathArr: string[],
+  context: CollectionContext,
+  lightVars: Record<string, string>,
+  darkVars: Record<string, string>
+): void {
+  for (const [key, value] of Object.entries(obj)) {
+    if (key.startsWith('$')) continue; // Skip metadata
+
+    const currentPath = [...pathArr, key];
+
+    if (value && typeof value === 'object' && !Array.isArray(value)) {
+      const valueObj = value as Record<string, unknown>;
+
+      if ('$value' in valueObj || '$type' in valueObj) {
+        // This is a token definition
+        const tokenValue = valueObj.$value;
+        const extensions = valueObj.$extensions as Record<string, unknown> | undefined;
+
+        // Build semantic path (density tokens override semantic layer)
+        const semanticPath = `semantic.${currentPath.join('.')}`;
+        const cssVar = tokenPathToCSSVar(semanticPath);
+
+        // Process light value
+        const lightValue = extensions?.['design.paths.light'] || tokenValue;
+        if (lightValue !== undefined) {
+          const processedLight = processTokenValue(lightValue, context, semanticPath, undefined);
+          if (processedLight) {
+            lightVars[cssVar] = processedLight;
+          }
+        }
+
+        // Process dark value
+        const darkValue = extensions?.['design.paths.dark'] || tokenValue;
+        if (darkValue !== undefined) {
+          const processedDark = processTokenValue(darkValue, context, semanticPath, undefined);
+          if (processedDark) {
+            darkVars[cssVar] = processedDark;
+          }
+        }
+      } else {
+        // Nested group, recurse
+        processDensityTokens(valueObj, currentPath, context, lightVars, darkVars);
+      }
+    }
+  }
+}
+
+/**
+ * Format CSS block for density selector
+ */
+function formatDensityBlock(
+  densityId: string,
+  properties: Record<string, string>,
+  indent = ''
+): string {
+  if (Object.keys(properties).length === 0) return '';
+
+  const lines = Object.entries(properties)
+    .map(([prop, value]) => `${indent}    ${prop}: ${value};`)
+    .join('\n');
+
+  return `${indent}  [data-density="${densityId}"] {\n${lines}\n${indent}  }`;
+}
+
+/**
+ * Generate density layer CSS with all density overrides
+ */
+function generateDensityLayerCSS(densities: Map<DensityId, DensityOverrides>): string {
+  if (densities.size === 0) return '';
+
+  const blocks: string[] = ['@layer density {'];
+
+  for (const [densityId, overrides] of densities) {
+    if (Object.keys(overrides.lightVars).length === 0) continue;
+
+    // Light mode overrides (default)
+    const lightBlock = formatDensityBlock(densityId, overrides.lightVars);
+    if (lightBlock) {
+      blocks.push(lightBlock);
+    }
+
+    // Dark mode overrides within density
+    if (Object.keys(overrides.darkVars).length > 0) {
+      const darkBlock = Object.entries(overrides.darkVars)
+        .map(([prop, value]) => `      ${prop}: ${value};`)
+        .join('\n');
+
+      blocks.push(`  @media (prefers-color-scheme: dark) {\n    [data-density="${densityId}"] {\n${darkBlock}\n    }\n  }`);
+      blocks.push(`  .dark[data-density="${densityId}"], .dark [data-density="${densityId}"] {\n${Object.entries(overrides.darkVars).map(([p, v]) => `    ${p}: ${v};`).join('\n')}\n  }`);
+    }
+  }
+
+  blocks.push('}');
+
+  return blocks.join('\n\n');
+}
+
+/**
  * Generate CSS from resolved token tree (used by resolver module).
  *
  * Converts DTCG 1.0 structured token values to CSS custom properties.
  * Handles color conversions, dimension formatting, and reference validation.
+ * Supports CSS Cascade Layers and multi-brand theming.
  *
  * @param tokens - Resolved token tree from resolver module
  * @returns Success status of CSS generation
@@ -517,28 +879,95 @@ function generateCSSFromTokens(tokens: TokenGroup): boolean {
     referenceErrors.forEach((error) => console.warn(`  - ${error}`));
   }
 
-  // Generate CSS content
+  // Load brand tokens
+  const brands = loadBrandTokens();
+
+  // Load density tokens
+  const densities = loadDensityTokens();
+
+  // Generate CSS content with layers
   const banner = generateBanner('Resolver Module');
+  const layerDeclaration = generateLayerDeclaration();
 
-  // Merge light colors into root as defaults
-  const rootWithDefaults = { ...maps.root, ...maps.lightColors };
-  const rootBlock = formatCSSBlock(':root', rootWithDefaults);
+  // Separate core and semantic tokens for layering
+  const coreVars: Record<string, string> = {};
+  const semanticVars: Record<string, string> = {};
 
-  const lightBlock = formatCSSBlock('.light', maps.lightColors);
-  const darkBlock = formatCSSBlock('.dark', maps.darkColors);
+  for (const [cssVar, value] of Object.entries({ ...maps.root, ...maps.lightColors })) {
+    if (cssVar.startsWith('--core-')) {
+      coreVars[cssVar] = value;
+    } else {
+      semanticVars[cssVar] = value;
+    }
+  }
 
-  // Generate prefers-color-scheme media query
-  const prefersBlock = maps.hasDarkOverride
-    ? `@media (prefers-color-scheme: dark) {\n${formatCSSBlock('  :root', maps.darkColors)}\n${formatCSSBlock('  .light', maps.lightColors)}\n}`
+  // Generate layered CSS blocks
+  const coreLayer = Object.keys(coreVars).length > 0
+    ? `@layer core {\n${formatCSSBlock('  :root', coreVars)}\n}`
     : '';
 
+  const semanticLayer = Object.keys(semanticVars).length > 0
+    ? `@layer semantic {\n${formatCSSBlock('  :root', semanticVars)}\n}`
+    : '';
+
+  // Theme layer for light/dark variants
+  const themeLayerContent: string[] = [];
+
+  if (maps.hasDarkOverride) {
+    // Dark mode vars for theme layer
+    const darkSemanticVars: Record<string, string> = {};
+    for (const [cssVar, value] of Object.entries(maps.darkColors)) {
+      if (!cssVar.startsWith('--core-')) {
+        darkSemanticVars[cssVar] = value;
+      }
+    }
+
+    // Light mode vars for theme layer
+    const lightSemanticVars: Record<string, string> = {};
+    for (const [cssVar, value] of Object.entries(maps.lightColors)) {
+      if (!cssVar.startsWith('--core-')) {
+        lightSemanticVars[cssVar] = value;
+      }
+    }
+
+    if (Object.keys(lightSemanticVars).length > 0) {
+      themeLayerContent.push(formatCSSBlock('  .light', lightSemanticVars));
+    }
+
+    if (Object.keys(darkSemanticVars).length > 0) {
+      themeLayerContent.push(formatCSSBlock('  .dark', darkSemanticVars));
+      themeLayerContent.push(
+        `  @media (prefers-color-scheme: dark) {\n${formatCSSBlock('    :root', darkSemanticVars)}\n${formatCSSBlock('    .light', lightSemanticVars)}\n  }`
+      );
+    }
+  }
+
+  const themeLayer = themeLayerContent.length > 0
+    ? `@layer theme {\n${themeLayerContent.join('\n\n')}\n}`
+    : '';
+
+  // Brand layer
+  const brandLayer = generateBrandLayerCSS(brands);
+
+  // Density layer
+  const densityLayer = generateDensityLayerCSS(densities);
+
   // Combine all blocks
-  const content = [banner, rootBlock, prefersBlock, lightBlock, darkBlock, '']
+  const content = [
+    banner,
+    layerDeclaration,
+    coreLayer,
+    semanticLayer,
+    themeLayer,
+    brandLayer,
+    densityLayer,
+    '',
+  ]
     .filter(Boolean)
     .join('\n\n');
 
   // Write output file
-  writeOutputFile(PATHS.outputScss, content, 'CSS variables');
+  writeOutputFile(PATHS.outputScss, content, 'CSS variables with layers');
 
   // Update cache after file is written
   updateFileCache(PATHS.outputScss);
@@ -550,6 +979,9 @@ function generateCSSFromTokens(tokens: TokenGroup): boolean {
     generatedFiles: 1,
     errors: 0, // Reference warnings don't count as errors - they're handled at CSS generation time
   });
+
+  console.log(`[tokens] Loaded ${brands.size} brand theme(s)`);
+  console.log(`[tokens] Loaded ${densities.size} density mode(s)`);
 
   // Always return true - reference warnings don't fail the build
   // Unresolved references are converted to CSS var() calls
@@ -676,28 +1108,95 @@ export function generateGlobalTokens(incremental = true): boolean {
     referenceErrors.forEach((error) => console.warn(`  - ${error}`));
   }
 
-  // Generate CSS content
+  // Load brand tokens
+  const brands = loadBrandTokens();
+
+  // Load density tokens
+  const densities = loadDensityTokens();
+
+  // Generate CSS content with layers
   const banner = generateBanner(PATHS.tokens);
+  const layerDeclaration = generateLayerDeclaration();
 
-  // Merge light colors into root as defaults
-  const rootWithDefaults = { ...maps.root, ...maps.lightColors };
-  const rootBlock = formatCSSBlock(':root', rootWithDefaults);
+  // Separate core and semantic tokens for layering
+  const coreVars: Record<string, string> = {};
+  const semanticVars: Record<string, string> = {};
 
-  const lightBlock = formatCSSBlock('.light', maps.lightColors);
-  const darkBlock = formatCSSBlock('.dark', maps.darkColors);
+  for (const [cssVar, value] of Object.entries({ ...maps.root, ...maps.lightColors })) {
+    if (cssVar.startsWith('--core-')) {
+      coreVars[cssVar] = value;
+    } else {
+      semanticVars[cssVar] = value;
+    }
+  }
 
-  // Generate prefers-color-scheme media query
-  const prefersBlock = maps.hasDarkOverride
-    ? `@media (prefers-color-scheme: dark) {\n${formatCSSBlock('  :root', maps.darkColors)}\n${formatCSSBlock('  .light', maps.lightColors)}\n}`
+  // Generate layered CSS blocks
+  const coreLayer = Object.keys(coreVars).length > 0
+    ? `@layer core {\n${formatCSSBlock('  :root', coreVars)}\n}`
     : '';
 
+  const semanticLayer = Object.keys(semanticVars).length > 0
+    ? `@layer semantic {\n${formatCSSBlock('  :root', semanticVars)}\n}`
+    : '';
+
+  // Theme layer for light/dark variants
+  const themeLayerContent: string[] = [];
+
+  if (maps.hasDarkOverride) {
+    // Dark mode vars for theme layer
+    const darkSemanticVars: Record<string, string> = {};
+    for (const [cssVar, value] of Object.entries(maps.darkColors)) {
+      if (!cssVar.startsWith('--core-')) {
+        darkSemanticVars[cssVar] = value;
+      }
+    }
+
+    // Light mode vars for theme layer
+    const lightSemanticVars: Record<string, string> = {};
+    for (const [cssVar, value] of Object.entries(maps.lightColors)) {
+      if (!cssVar.startsWith('--core-')) {
+        lightSemanticVars[cssVar] = value;
+      }
+    }
+
+    if (Object.keys(lightSemanticVars).length > 0) {
+      themeLayerContent.push(formatCSSBlock('  .light', lightSemanticVars));
+    }
+
+    if (Object.keys(darkSemanticVars).length > 0) {
+      themeLayerContent.push(formatCSSBlock('  .dark', darkSemanticVars));
+      themeLayerContent.push(
+        `  @media (prefers-color-scheme: dark) {\n${formatCSSBlock('    :root', darkSemanticVars)}\n${formatCSSBlock('    .light', lightSemanticVars)}\n  }`
+      );
+    }
+  }
+
+  const themeLayer = themeLayerContent.length > 0
+    ? `@layer theme {\n${themeLayerContent.join('\n\n')}\n}`
+    : '';
+
+  // Brand layer
+  const brandLayer = generateBrandLayerCSS(brands);
+
+  // Density layer
+  const densityLayer = generateDensityLayerCSS(densities);
+
   // Combine all blocks
-  const content = [banner, rootBlock, prefersBlock, lightBlock, darkBlock, '']
+  const content = [
+    banner,
+    layerDeclaration,
+    coreLayer,
+    semanticLayer,
+    themeLayer,
+    brandLayer,
+    densityLayer,
+    '',
+  ]
     .filter(Boolean)
     .join('\n\n');
 
   // Write output file
-  writeOutputFile(PATHS.outputScss, content, 'global design tokens');
+  writeOutputFile(PATHS.outputScss, content, 'global design tokens with layers');
 
   // Update cache after file is written
   updateFileCache(PATHS.outputScss);
@@ -709,6 +1208,9 @@ export function generateGlobalTokens(incremental = true): boolean {
     generatedFiles: 1,
     errors: 0, // Reference warnings don't count as errors - they're handled at CSS generation time
   });
+
+  console.log(`[tokens] Loaded ${brands.size} brand theme(s)`);
+  console.log(`[tokens] Loaded ${densities.size} density mode(s)`);
 
   // Always return true - reference warnings don't fail the build
   // Unresolved references are converted to CSS var() calls

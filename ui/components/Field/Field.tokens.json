@@ -18,9 +18,15 @@
       "bg": "{semantic.color.background.elevated}",
       "fg": "{semantic.color.foreground.primary}",
       "border": "{semantic.color.border.subtle}",
+      "borderBold": "{semantic.color.border.bold}",
       "focus-border": "{semantic.color.border.focus}",
+      "focus-text": "{semantic.color.interactive.primary}",
       "invalid-border": "{semantic.color.border.danger}",
-      "invalid-text": "{semantic.color.foreground.danger}"
+      "invalid-text": "{semantic.color.foreground.danger}",
+      "valid-border": "{semantic.color.feedback.success.border}"
+    },
+    "spacing": {
+      "indicator": "{core.spacing.size.03}"
     }
   }
 }

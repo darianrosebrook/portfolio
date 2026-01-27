@@ -2,6 +2,19 @@
   "$schema": "../../../ui/designTokens/designTokens.schema.json",
   "prefix": "animatedLink",
   "tokens": {
+    "color": {
+      "default": "{semantic.color.foreground.accent}",
+      "hover": "{semantic.color.foreground.accent}",
+      "focus": "{semantic.color.border.accent}"
+    },
+    "spacing": {
+      "gap": {
+        "default": "{core.spacing.size.02}"
+      }
+    },
+    "shape": {
+      "radius": "{core.shape.radius.small}"
+    },
     "typography": {
       "fontWeight": {
         "regular": "{semantic.typography.fontWeight.regular}"

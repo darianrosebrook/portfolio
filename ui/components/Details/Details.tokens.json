@@ -7,7 +7,8 @@
       },
       "radius": {
         "default": "{semantic.shape.control.radius.default}"
-      }
+      },
+      "icon": "{core.spacing.size.05}"
     },
     "color": {
       "background": {
@@ -50,7 +51,17 @@
       },
       "margin": {
         "bottom": "{core.spacing.size.02}",
-        "top": "{core.spacing.size.01}"
+        "top": "{core.spacing.size.01}",
+        "compact": "{core.spacing.size.04}"
+      }
+    },
+    "typography": {
+      "lineHeight": {
+        "body": "{semantic.typography.lineHeight.body}",
+        "tight": "{semantic.typography.lineHeight.tight}"
+      },
+      "fontWeight": {
+        "medium": "{semantic.typography.fontWeight.medium}"
       }
     }
   }

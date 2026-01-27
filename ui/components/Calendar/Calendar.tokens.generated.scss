@@ -4,6 +4,7 @@
 @mixin vars {
   /* === Color Tokens === */
   --calendar-color-background-default: var(--semantic-color-background-secondary);
+  --calendar-color-background-image-overlay: var(--semantic-color-background-image-overlay);
   --calendar-color-foreground-primary: var(--semantic-color-foreground-primary);
   --calendar-color-foreground-secondary: var(--semantic-color-foreground-secondary);
   --calendar-color-border-default: var(--semantic-color-border-light);
@@ -15,4 +16,9 @@
 
   /* === Elevation Tokens === */
   --calendar-elevation-default: var(--semantic-elevation-default);
+  --calendar-elevation-hover: var(--semantic-elevation-depth-2);
+
+  /* === Motion Tokens === */
+  --calendar-motion-duration: var(--core-motion-duration-short);
+  --calendar-motion-easing: var(--core-motion-easing-standard);
 }

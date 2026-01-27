@@ -15,7 +15,9 @@ import {
   drawMetricLine,
   drawPathDetails,
   drawFeatureInstances,
+  drawGlyphWithFeatureBackground,
   type TransformParams,
+  type DrawFeatureOptions,
 } from '@/utils/geometry/drawing';
 
 export const SymbolCanvas: React.FC = () => {
@@ -128,6 +130,9 @@ export const SymbolCanvas: React.FC = () => {
       ctx.save();
       ctx.translate(xOffset, baseline);
 
+      // Check if we have detected features to display
+      const hasActiveFeatures = showDetails && detectedFeatures.size > 0;
+
       ctx.beginPath();
       for (const cmd of glyph.path.commands) {
         const args = cmd.args.map((a, i) =>
@@ -140,7 +145,13 @@ export const SymbolCanvas: React.FC = () => {
       ctx.closePath();
 
       if (showDetails) {
-        ctx.fillStyle = colors.boundsFill;
+        // When features are detected, use a secondary background for the glyph
+        // so the feature highlights stand out
+        if (hasActiveFeatures) {
+          ctx.fillStyle = colors.featureBackground;
+        } else {
+          ctx.fillStyle = colors.boundsFill;
+        }
         ctx.fill();
         ctx.strokeStyle = colors.boundsStroke;
         ctx.lineWidth = 1;
@@ -163,7 +174,7 @@ export const SymbolCanvas: React.FC = () => {
       );
 
       // Draw detected feature instances from the new unified detection system
-      if (showDetails && detectedFeatures.size > 0) {
+      if (hasActiveFeatures) {
         const transformParams: TransformParams = {
           scale,
           xOffset: 0, // Already translated to xOffset
@@ -179,7 +190,13 @@ export const SymbolCanvas: React.FC = () => {
           instancesMap.set(featureId, instances);
         }
 
-        drawFeatureInstances(ctx, instancesMap, transformParams, colors);
+        // Use clipped glyph geometry for precise feature highlighting
+        const drawOptions: DrawFeatureOptions = {
+          glyph,
+          useClipping: true,
+        };
+
+        drawFeatureInstances(ctx, instancesMap, transformParams, colors, drawOptions);
       }
 
       ctx.restore();

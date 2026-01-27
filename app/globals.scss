@@ -56,7 +56,7 @@
 
   /* Typography */
 
-  font-family: var(--semantic-font-inter), sans-serif;
+  font-family: var(--font-family-body, var(--semantic-font-inter)), sans-serif;
   line-height: var(--semantic-typography-line-height-body);
   letter-spacing: var(--semantic-typography-letter-spacing-tight);
   font-feature-settings:
@@ -117,7 +117,7 @@
   h5,
   h6 {
     font-weight: 300;
-    font-family: var(--semantic-font-nohemi), sans-serif;
+    font-family: var(--font-family-heading, var(--semantic-font-nohemi)), sans-serif;
     line-height: var(--semantic-typography-line-height-collapse);
     letter-spacing: var(--semantic-typography-letter-spacing-wide);
     text-wrap: balance;

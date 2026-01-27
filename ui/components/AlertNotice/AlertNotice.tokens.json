@@ -76,10 +76,23 @@
       },
       "minHeight": {
         "default": "{core.spacing.size.12}"
+      },
+      "gap": {
+        "small": "{semantic.spacing.gap.grid.small}",
+        "medium": "{semantic.spacing.gap.grid.medium}"
       }
     },
     "radius": {
       "medium": "{core.shape.radius.medium}"
+    },
+    "typography": {
+      "title": {
+        "fontWeight": "{semantic.typography.fontWeight.bold}",
+        "fontSize": "{semantic.typography.body.02}"
+      },
+      "body": {
+        "fontSize": "{semantic.typography.body.03}"
+      }
     }
   }
 }

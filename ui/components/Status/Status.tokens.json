@@ -31,6 +31,9 @@
       "border": {
         "default": "{core.shape.border.width.hairline}"
       }
+    },
+    "typography": {
+      "lineHeight": "{core.typography.lineHeight.collapse}"
     }
   }
 }

@@ -18,7 +18,10 @@
         "secondaryActive": "{semantic.interaction.background.active}",
         "tertiary": "{core.color.mode.transparent}",
         "tertiaryHover": "{semantic.interaction.background.hover}",
-        "tertiaryActive": "{semantic.interaction.background.active}"
+        "tertiaryActive": "{semantic.interaction.background.active}",
+        "destructive": "{semantic.color.feedback.error.background}",
+        "destructiveHover": "{semantic.color.feedback.error.background.hover}",
+        "destructiveActive": "{semantic.color.feedback.error.background.active}"
       },
       "foreground": {
         "default": "{semantic.color.foreground.inverse}",

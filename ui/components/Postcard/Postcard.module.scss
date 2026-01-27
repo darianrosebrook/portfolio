@@ -9,7 +9,7 @@ a:has(.post) {
 
   padding: var(--postcard-size-padding-default);
   background-color: var(--postcard-color-background-default);
-  border: var(--core-shape-border-width-hairline) solid
+  border: var(--postcard-size-border-default) solid
     var(--postcard-color-border-default);
   border-radius: var(--postcard-size-radius-default);
   transition: background-color 0.2s ease;
@@ -43,26 +43,26 @@ a:has(.post) {
 .displayName {
   margin: 0;
   color: var(--postcard-color-foreground-primary);
-  font-weight: var(--font-weight-semibold);
-  font-size: var(--semantic-typography-body-02);
+  font-weight: var(--postcard-typography-displayName-fontWeight);
+  font-size: var(--postcard-typography-displayName-fontSize);
 }
 
 .handle {
   margin: 0;
   color: var(--postcard-color-foreground-secondary);
-  font-size: var(--semantic-typography-body-03);
+  font-size: var(--postcard-typography-handle-fontSize);
 }
 
 .timestamp {
   color: var(--postcard-color-foreground-secondary);
-  font-size: var(--semantic-typography-body-03);
+  font-size: var(--postcard-typography-handle-fontSize);
   margin-inline-start: auto;
 }
 
 .content {
   color: var(--postcard-color-foreground-primary);
-  font-size: var(--semantic-typography-body-02);
-  line-height: var(--semantic-typography-line-height-body);
+  font-size: var(--postcard-typography-content-fontSize);
+  line-height: var(--postcard-typography-content-lineHeight);
   white-space: pre-wrap;
   margin-block-end: var(--postcard-size-gap-default);
 }
@@ -81,7 +81,7 @@ a:has(.post) {
   display: flex;
   gap: var(--postcard-size-gap-large);
   color: var(--postcard-color-foreground-secondary);
-  font-size: var(--semantic-typography-body-03);
+  font-size: var(--postcard-typography-footer-fontSize);
 }
 
 .stats {
@@ -98,7 +98,7 @@ a:has(.post) {
   border: 2px solid var(--postcard-color-border-default);
   border-radius: var(--postcard-size-radius-full);
   color: var(--postcard-color-foreground-secondary);
-  font-size: var(--semantic-typography-body-03);
+  font-size: var(--postcard-typography-footer-fontSize);
   transition: color 0.2s ease;
   cursor: pointer;
 

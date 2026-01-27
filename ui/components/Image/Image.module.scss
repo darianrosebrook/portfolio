@@ -22,28 +22,28 @@
 
 /* Size variants */
 .xs {
-  block-size: var(--core-spacing-size-08);
-  inline-size: var(--core-spacing-size-08);
+  block-size: var(--image-size-xs);
+  inline-size: var(--image-size-xs);
 }
 
 .sm {
-  block-size: var(--core-spacing-size-10);
-  inline-size: var(--core-spacing-size-10);
+  block-size: var(--image-size-sm);
+  inline-size: var(--image-size-sm);
 }
 
 .md {
-  block-size: var(--core-spacing-size-12);
-  inline-size: var(--core-spacing-size-12);
+  block-size: var(--image-size-md);
+  inline-size: var(--image-size-md);
 }
 
 .lg {
-  block-size: var(--core-spacing-size-14);
-  inline-size: var(--core-spacing-size-14);
+  block-size: var(--image-size-lg);
+  inline-size: var(--image-size-lg);
 }
 
 .xl {
-  block-size: var(--core-spacing-size-16);
-  inline-size: var(--core-spacing-size-16);
+  block-size: var(--image-size-xl);
+  inline-size: var(--image-size-xl);
 }
 
 .full {
@@ -52,23 +52,23 @@
 
 /* Radius variants */
 .radius-none {
-  border-radius: 0;
+  border-radius: var(--image-radius-none);
 }
 
 .radius-sm {
-  border-radius: var(--core-shape-radius-small);
+  border-radius: var(--image-radius-sm);
 }
 
 .radius-md {
-  border-radius: var(--core-shape-radius-medium);
+  border-radius: var(--image-radius-md);
 }
 
 .radius-lg {
-  border-radius: var(--core-shape-radius-large);
+  border-radius: var(--image-radius-lg);
 }
 
 .radius-full {
-  border-radius: var(--core-shape-radius-full);
+  border-radius: var(--image-radius-full);
 }
 
 /* Loading state */
@@ -90,8 +90,8 @@
 .placeholderIcon {
   background: currentcolor;
   opacity: 0.5;
-  block-size: var(--core-spacing-size-08);
-  inline-size: var(--core-spacing-size-08);
+  block-size: var(--image-size-icon);
+  inline-size: var(--image-size-icon);
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'%3E%3Cpath stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m15 8 5 5-5 5M21 13H3'/%3E%3C/svg%3E")
     no-repeat center;
   mask-size: contain;
@@ -107,16 +107,16 @@
   justify-content: center;
   align-items: center;
   padding: 1rem;
-  background: var(--semantic-color-background-danger-subtle);
-  color: var(--semantic-color-foreground-danger);
+  background: var(--image-color-background-error);
+  color: var(--image-color-foreground-error);
   text-align: center;
 }
 
 .errorIcon {
   background: currentcolor;
   opacity: 0.7;
-  block-size: var(--core-spacing-size-08);
-  inline-size: var(--core-spacing-size-08);
+  block-size: var(--image-size-icon);
+  inline-size: var(--image-size-icon);
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'%3E%3Cpath stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z'/%3E%3C/svg%3E")
     no-repeat center;
   mask-size: contain;
@@ -124,7 +124,7 @@
 
 .errorText {
   opacity: 0.8;
-  font-size: var(--semantic-typography-body-04);
+  font-size: var(--image-typography-error-fontSize);
 }
 
 /* Hide error state when image is present */

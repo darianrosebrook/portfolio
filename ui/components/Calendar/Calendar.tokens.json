@@ -3,7 +3,8 @@
   "tokens": {
     "color": {
       "background": {
-        "default": "{semantic.color.background.secondary}"
+        "default": "{semantic.color.background.secondary}",
+        "imageOverlay": "{semantic.color.background.imageOverlay}"
       },
       "foreground": {
         "primary": "{semantic.color.foreground.primary}",
@@ -23,7 +24,12 @@
       }
     },
     "elevation": {
-      "default": "{semantic.elevation.default}"
+      "default": "{semantic.elevation.default}",
+      "hover": "{semantic.elevation.depth.2}"
+    },
+    "motion": {
+      "duration": "{core.motion.duration.short}",
+      "easing": "{core.motion.easing.standard}"
     }
   }
 }

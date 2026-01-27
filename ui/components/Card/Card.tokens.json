@@ -4,7 +4,8 @@
     "color": {
       "background": {
         "default": "{semantic.color.background.primary}",
-        "hover": "{semantic.color.background.secondary}"
+        "hover": "{semantic.color.background.secondary}",
+        "secondary": "{semantic.color.background.secondary}"
       },
       "border": {
         "default": "{semantic.color.border.light}",
@@ -12,15 +13,51 @@
       },
       "foreground": {
         "primary": "{semantic.color.foreground.primary}",
-        "secondary": "{semantic.color.foreground.secondary}"
+        "secondary": "{semantic.color.foreground.secondary}",
+        "link": "{semantic.color.foreground.link}"
+      },
+      "badge": {
+        "success": {
+          "background": "{semantic.color.background.successSubtle}",
+          "foreground": "{semantic.color.foreground.onSuccessSubtle}"
+        },
+        "warning": {
+          "background": "{semantic.color.background.warningSubtle}",
+          "foreground": "{semantic.color.foreground.onWarningSubtle}"
+        },
+        "info": {
+          "background": "{semantic.color.background.infoSubtle}",
+          "foreground": "{semantic.color.foreground.onInfoSubtle}"
+        },
+        "error": {
+          "background": "{semantic.color.background.dangerSubtle}",
+          "foreground": "{semantic.color.foreground.onDangerSubtle}"
+        },
+        "neutral": {
+          "background": "{semantic.color.background.secondary}",
+          "foreground": "{semantic.color.foreground.secondary}"
+        },
+        "accent": {
+          "background": "{semantic.color.background.accent}",
+          "foreground": "{semantic.color.foreground.onBrand}"
+        }
       }
     },
     "size": {
       "padding": {
-        "default": "{core.spacing.size.06}"
+        "default": "{core.spacing.size.06}",
+        "note": "{core.spacing.size.04}",
+        "badgeY": "{core.spacing.size.01}",
+        "badgeX": "{core.spacing.size.03}"
       },
       "radius": {
-        "default": "{semantic.shape.control.radius.default}"
+        "default": "{semantic.shape.control.radius.default}",
+        "medium": "{core.shape.radius.medium}",
+        "full": "{core.shape.radius.full}"
+      },
+      "gap": {
+        "small": "{core.spacing.size.02}",
+        "default": "{core.spacing.size.03}"
       }
     },
     "elevation": {
@@ -28,11 +65,19 @@
       "hover": "{semantic.elevation.hover}"
     },
     "motion": {
+      "duration": "{semantic.motion.interaction.press.duration}",
+      "easing": "{semantic.motion.interaction.press.easing}",
       "hover": {
         "offset": {
           "value": -0.125,
           "unit": "rem"
         }
+      }
+    },
+    "typography": {
+      "lineHeight": {
+        "heading": "{semantic.typography.lineHeight.heading}",
+        "normal": "{semantic.typography.lineHeight.normal}"
       }
     }
   }

@@ -20,18 +20,18 @@
 
 /* Size variants */
 .sm {
-  font-size: var(--semantic-typography-body-04);
-  line-height: var(--semantic-typography-line-height-body);
+  font-size: var(--list-typography-sm-fontSize);
+  line-height: var(--list-typography-sm-lineHeight);
 }
 
 .md {
-  font-size: var(--semantic-typography-body-03);
-  line-height: var(--semantic-typography-line-height-body);
+  font-size: var(--list-typography-md-fontSize);
+  line-height: var(--list-typography-md-lineHeight);
 }
 
 .lg {
-  font-size: var(--semantic-typography-body-02);
-  line-height: var(--semantic-typography-line-height-body);
+  font-size: var(--list-typography-lg-fontSize);
+  line-height: var(--list-typography-lg-lineHeight);
 }
 
 /* Variant styles */
@@ -44,7 +44,7 @@
 .inline {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--core-spacing-size-04);
+  gap: var(--list-spacing-inline);
   list-style: none;
   padding-inline-start: 0;
 }
@@ -54,16 +54,16 @@
   padding-inline-start: 0;
 
   li:not(:last-child) {
-    border-block-end: var(--core-shape-border-width-hairline) solid
+    border-block-end: var(--list-size-border-default) solid
       var(--list-color-border-default);
-    margin-block-end: var(--core-spacing-size-05);
-    padding-block-end: var(--core-spacing-size-05);
+    margin-block-end: var(--list-spacing-divided);
+    padding-block-end: var(--list-spacing-divided);
   }
 }
 
 .spaced {
   li:not(:last-child) {
-    margin-block-end: var(--core-spacing-size-06);
+    margin-block-end: var(--list-spacing-spaced);
   }
 }
 
@@ -103,15 +103,15 @@
 }
 
 .spacing-sm li :not(:last-child) {
-  margin-block-end: var(--core-spacing-size-03);
+  margin-block-end: var(--list-spacing-sm);
 }
 
 .spacing-md li :not(:last-child) {
-  margin-block-end: var(--core-spacing-size-05);
+  margin-block-end: var(--list-spacing-md);
 }
 
 .spacing-lg li :not(:last-child) {
-  margin-block-end: var(--core-spacing-size-06);
+  margin-block-end: var(--list-spacing-lg);
 }
 
 /* Custom marker colors */
@@ -123,11 +123,11 @@
 .dl.default {
   dt {
     font-weight: 600;
-    margin-block-end: var(--core-spacing-size-03);
+    margin-block-end: var(--list-spacing-dl-dt);
   }
 
   dd {
-    margin-block-end: var(--core-spacing-size-05);
+    margin-block-end: var(--list-spacing-dl-dd);
     margin-inline-start: var(--list-size-padding-default);
   }
 
@@ -143,7 +143,7 @@
 .dl.inline {
   display: grid;
   grid-template-columns: max-content 1fr;
-  gap: var(--core-spacing-size-03) var(--core-spacing-size-05);
+  gap: var(--list-spacing-dl-gap) var(--list-spacing-dl-gapX);
 
   dt {
     font-weight: 600;

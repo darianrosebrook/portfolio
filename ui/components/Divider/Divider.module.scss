@@ -5,18 +5,18 @@
 
   flex-shrink: 0;
   margin: 0;
-  background-color: var(--divider-color-border-default);
+  background-color: var(--divider-color-default);
   border: none;
 }
 
 .horizontal {
-  margin-block: var(--divider-size-padding-default);
-  block-size: var(--core-shape-border-width-hairline);
+  margin-block: var(--divider-spacing-margin);
+  block-size: var(--divider-size-thickness);
   inline-size: 100%;
 }
 
 .vertical {
-  margin-inline: var(--divider-size-padding-default);
+  margin-inline: var(--divider-spacing-margin);
   block-size: 100%;
-  inline-size: var(--core-shape-border-width-hairline);
+  inline-size: var(--divider-size-thickness);
 }

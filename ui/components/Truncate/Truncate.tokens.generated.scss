@@ -3,20 +3,13 @@
  */
 @mixin vars {
   /* === Color Tokens === */
-  --truncate-color-background-default: var(
-    --semantic-color-background-secondary
-  );
-  --truncate-color-foreground-primary: var(--semantic-color-foreground-primary);
-  --truncate-color-foreground-secondary: var(
-    --semantic-color-foreground-secondary
-  );
-  --truncate-color-border-default: var(--semantic-color-border-light);
-  --truncate-color-border-accent: var(--semantic-color-border-accent);
+  --truncate-color-foreground-link: var(--semantic-color-foreground-link);
+  --truncate-color-foreground-link-hover: var(--semantic-color-foreground-link-hover);
+  --truncate-color-background-primary: var(--semantic-color-background-primary);
 
-  /* === Size Tokens === */
-  --truncate-size-padding-default: var(--core-spacing-size-07);
-  --truncate-size-radius-default: var(--core-shape-radius-medium);
+  /* === Typography Tokens === */
+  --truncate-typography-font-weight: var(--semantic-typography-font-weight-medium);
 
-  /* === Elevation Tokens === */
-  --truncate-elevation-default: var(--semantic-elevation-depth-1);
+  /* === Spacing Tokens === */
+  --truncate-spacing-toggle: var(--core-spacing-size-02);
 }

@@ -1,10 +1,6 @@
 import Link from 'next/link';
 import styles from '../page.module.scss';
 
-/**
- * Metadata for the /blueprints/foundations/tokens/dtcg-formats page.
- * @type {import('next').Metadata}
- */
 export const metadata = {
   title: 'DTCG 1.0 Structured Formats | Darian Rosebrook',
   description:
@@ -27,290 +23,662 @@ export const metadata = {
 export default function DTCGFormatsPage() {
   return (
     <section className="content">
-      <h1>DTCG 1.0 Structured Formats</h1>
+      <article>
+        <h1>Deep Dive: DTCG 1.0 Structured Formats</h1>
 
-      <p>
-        Our design tokens follow the{' '}
-        <strong>
-          W3C Design Tokens Community Group (DTCG) 1.0 specification
-        </strong>
-        , which mandates structured object formats instead of simple strings.
-        This enables type safety, platform flexibility, and scalable theming
-        while maintaining interoperability with DTCG-compliant tools.
-      </p>
+        <h2>Why Follow DTCG?</h2>
+        <p>
+          The{' '}
+          <strong>
+            W3C Design Tokens Community Group (DTCG) 1.0 specification
+          </strong>{' '}
+          defines a standard format for design tokens that enables
+          interoperability between tools, platforms, and organizations. By
+          following this specification, our tokens work with Figma, Style
+          Dictionary, Tokens Studio, and any other DTCG-compliant tool.
+        </p>
 
-      <h2>Why Structured Values Matter</h2>
-      <p>
-        Traditional approaches store token values as strings like{' '}
-        <code>"#ff0000"</code> or <code>"16px"</code>. DTCG 1.0 requires
-        structured objects that explicitly declare their components, enabling:
-      </p>
-      <ul>
-        <li>
-          <strong>Validation</strong> against expected value structures
-        </li>
-        <li>
-          <strong>Transform flexibility</strong> for different output formats
-        </li>
-        <li>
-          <strong>Type safety</strong> through explicit property definitions
-        </li>
-        <li>
-          <strong>Platform adaptability</strong> with format-aware processing
-        </li>
-      </ul>
+        <p>
+          More importantly, DTCG mandates structured object formats instead of
+          simple strings. This enables type safety, platform flexibility, and
+          scalable theming that wouldn&apos;t be possible with primitive string
+          values.
+        </p>
 
-      <h2>Color Values</h2>
-      <p>
-        Colors use structured objects with <code>colorSpace</code> and{' '}
-        <code>components</code> arrays, supporting modern color spaces beyond
-        just sRGB.
-      </p>
+        <h2>Token Anatomy</h2>
+        <p>Every DTCG token is an object with specific properties:</p>
 
-      <h3>Basic sRGB Color</h3>
-      <pre>
-        <code>{`{
+        <pre className={styles.codeBlock}>
+          <code>{`{
+  "tokenName": {
+    "$type": "color",                    // Required: token type
+    "$value": "#0a65fe",                 // Required: token value
+    "$description": "Primary brand blue", // Optional: documentation
+    "$extensions": {                     // Optional: custom metadata
+      "design.paths.dark": "#4d9fff"
+    }
+  }
+}`}</code>
+        </pre>
+
+        <table className={styles.table}>
+          <thead>
+            <tr>
+              <th>Property</th>
+              <th>Required</th>
+              <th>Purpose</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <code>$type</code>
+              </td>
+              <td>Yes</td>
+              <td>Declares the token&apos;s data type for validation</td>
+            </tr>
+            <tr>
+              <td>
+                <code>$value</code>
+              </td>
+              <td>Yes</td>
+              <td>The token&apos;s value (format depends on type)</td>
+            </tr>
+            <tr>
+              <td>
+                <code>$description</code>
+              </td>
+              <td>No</td>
+              <td>Human-readable documentation</td>
+            </tr>
+            <tr>
+              <td>
+                <code>$extensions</code>
+              </td>
+              <td>No</td>
+              <td>Custom metadata (theming, platform variants)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>DTCG Type System</h2>
+        <p>
+          DTCG defines a fixed set of token types. Each type has specific value
+          format requirements:
+        </p>
+
+        <table className={styles.table}>
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Value Format</th>
+              <th>Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <code>color</code>
+              </td>
+              <td>Hex string or color object</td>
+              <td>
+                <code>&quot;#0a65fe&quot;</code>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>dimension</code>
+              </td>
+              <td>Number with unit (px, rem)</td>
+              <td>
+                <code>&quot;16px&quot;</code>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>number</code>
+              </td>
+              <td>Unitless number</td>
+              <td>
+                <code>1.5</code>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>duration</code>
+              </td>
+              <td>Time with unit (ms, s)</td>
+              <td>
+                <code>&quot;250ms&quot;</code>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>cubicBezier</code>
+              </td>
+              <td>Array of 4 numbers</td>
+              <td>
+                <code>[0.4, 0, 0.2, 1]</code>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>fontFamily</code>
+              </td>
+              <td>String or array of strings</td>
+              <td>
+                <code>&quot;Inter, sans-serif&quot;</code>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>fontWeight</code>
+              </td>
+              <td>Number or keyword</td>
+              <td>
+                <code>700</code> or <code>&quot;bold&quot;</code>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>typography</code>
+              </td>
+              <td>Composite object</td>
+              <td>See below</td>
+            </tr>
+            <tr>
+              <td>
+                <code>shadow</code>
+              </td>
+              <td>Composite object</td>
+              <td>See below</td>
+            </tr>
+            <tr>
+              <td>
+                <code>border</code>
+              </td>
+              <td>Composite object</td>
+              <td>See below</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>Color Values</h2>
+        <p>
+          Colors can be specified as hex strings or structured objects. We
+          primarily use hex strings for simplicity, but structured objects
+          enable advanced color space support.
+        </p>
+
+        <h3>Hex String (Simple)</h3>
+        <pre className={styles.codeBlock}>
+          <code>{`{
+  "$type": "color",
+  "$value": "#0a65fe"
+}`}</code>
+        </pre>
+
+        <h3>Structured Color Object</h3>
+        <p>
+          For advanced use cases, DTCG supports structured color objects with
+          explicit color space and components:
+        </p>
+
+        <pre className={styles.codeBlock}>
+          <code>{`{
   "$type": "color",
   "$value": {
     "colorSpace": "srgb",
-    "components": [0.8, 0.2, 0.2]
+    "components": [0.04, 0.4, 0.996]
   }
 }`}</code>
-      </pre>
-      <p>
-        This represents an sRGB color with 80% red, 20% green, and 20% blue
-        components. The build system converts this to CSS formats like{' '}
-        <code>rgb(204, 51, 51)</code> or <code>#cc3333</code>.
-      </p>
+        </pre>
 
-      <h3>Color with Alpha</h3>
-      <pre>
-        <code>{`{
-  "$type": "color",
-  "$value": {
-    "colorSpace": "srgb",
-    "components": [0, 0.5, 1, 0.8],
-    "alpha": 0.8
-  }
-}`}</code>
-      </pre>
-      <p>
-        Four-component arrays include alpha, or it can be specified separately
-        as shown. This enables precise control over transparency in the color
-        space.
-      </p>
+        <h3>Modern Color Spaces</h3>
+        <p>
+          Structured objects support modern color spaces like OKLCH for better
+          perceptual uniformity:
+        </p>
 
-      <h3>Modern Color Spaces</h3>
-      <pre>
-        <code>{`{
+        <pre className={styles.codeBlock}>
+          <code>{`{
   "$type": "color",
   "$value": {
     "colorSpace": "oklch",
     "components": [0.65, 0.25, 240]
-  }
+  },
+  "$description": "OKLCH blue - perceptually uniform"
 }`}</code>
-      </pre>
-      <p>
-        DTCG supports advanced color spaces like OKLCH for better perceptual
-        uniformity and broader color gamuts (Display P3, Rec.2020, etc.).
-      </p>
+        </pre>
 
-      <h2>Dimension Values</h2>
-      <p>
-        Dimensions explicitly declare both numeric value and unit, limited to
-        DTCG 1.0 standard units: <code>px</code> and <code>rem</code>.
-      </p>
+        <h3>Color with Alpha</h3>
+        <pre className={styles.codeBlock}>
+          <code>{`// Hex with alpha
+{
+  "$type": "color",
+  "$value": "#0a65fe80"  // 50% opacity
+}
 
-      <h3>Pixel Dimensions</h3>
-      <pre>
-        <code>{`{
-  "$type": "dimension",
+// Structured with alpha
+{
+  "$type": "color",
   "$value": {
-    "value": 16,
-    "unit": "px"
+    "colorSpace": "srgb",
+    "components": [0.04, 0.4, 0.996],
+    "alpha": 0.5
   }
 }`}</code>
-      </pre>
+        </pre>
 
-      <h3>Relative Dimensions</h3>
-      <pre>
-        <code>{`{
+        <h2>Dimension Values</h2>
+        <p>
+          Dimensions represent spatial values with units. DTCG 1.0 restricts
+          units to <code>px</code> and <code>rem</code> for consistency.
+        </p>
+
+        <pre className={styles.codeBlock}>
+          <code>{`// Pixel dimension
+{
   "$type": "dimension",
-  "$value": {
-    "value": 1,
-    "unit": "rem"
+  "$value": "16px"
+}
+
+// Relative dimension
+{
+  "$type": "dimension",
+  "$value": "1rem"
+}
+
+// Zero (no unit required)
+{
+  "$type": "dimension",
+  "$value": "0"
+}`}</code>
+        </pre>
+
+        <h3>Dimension vs Number</h3>
+        <p>
+          Use <code>dimension</code> for spatial values that need units. Use{' '}
+          <code>number</code> for unitless values like line-height multipliers:
+        </p>
+
+        <pre className={styles.codeBlock}>
+          <code>{`// Dimension: has unit
+{
+  "fontSize": {
+    "$type": "dimension",
+    "$value": "16px"
+  }
+}
+
+// Number: unitless multiplier
+{
+  "lineHeight": {
+    "$type": "number",
+    "$value": 1.5
   }
 }`}</code>
-      </pre>
-      <p>
-        The build system generates appropriate CSS output (<code>16px</code>,{' '}
-        <code>1rem</code>) while validation ensures only compliant units are
-        used.
-      </p>
+        </pre>
 
-      <h2>Composite Tokens</h2>
-      <p>
-        Complex tokens like typography and shadows reference structured
-        primitives, creating type-safe relationships between token values.
-      </p>
+        <h2>Composite Tokens</h2>
+        <p>
+          Complex tokens like typography and shadows combine multiple values
+          into a single token. These are called composite tokens.
+        </p>
 
-      <h3>Typography Composite</h3>
-      <pre>
-        <code>{`{
+        <h3>Typography Composite</h3>
+        <pre className={styles.codeBlock}>
+          <code>{`{
   "$type": "typography",
   "$value": {
-    "fontFamily": "{typography.fontFamily.inter}",
-    "fontSize": {
-      "value": 16,
-      "unit": "px"
-    },
-    "fontWeight": "{typography.weight.regular}",
+    "fontFamily": "{core.typography.family.inter}",
+    "fontSize": "16px",
+    "fontWeight": 400,
     "lineHeight": 1.5,
-    "letterSpacing": {
-      "value": 0,
-      "unit": "em"
-    }
-  }
+    "letterSpacing": "0em"
+  },
+  "$description": "Body text style"
 }`}</code>
-      </pre>
-      <p>
-        Typography tokens reference font family and weight tokens, use
-        structured dimensions for sizing and spacing, and specify line height as
-        a unitless number (multiplier).
-      </p>
+        </pre>
 
-      <h3>Shadow Composite</h3>
-      <pre>
-        <code>{`{
+        <h3>Shadow Composite</h3>
+        <pre className={styles.codeBlock}>
+          <code>{`{
   "$type": "shadow",
   "$value": {
-    "offsetX": { "value": 0, "unit": "px" },
-    "offsetY": { "value": 4, "unit": "px" },
-    "blur": { "value": 8, "unit": "px" },
-    "spread": { "value": 0, "unit": "px" },
-    "color": {
-      "colorSpace": "srgb",
-      "components": [0, 0, 0, 0.1]
-    }
-  }
+    "offsetX": "0px",
+    "offsetY": "4px",
+    "blur": "8px",
+    "spread": "0px",
+    "color": "#00000014"
+  },
+  "$description": "Subtle elevation shadow"
 }`}</code>
-      </pre>
-      <p>
-        Shadows use structured dimensions for all spatial properties and
-        structured colors for the shadow color, enabling precise control and
-        validation.
-      </p>
+        </pre>
 
-      <h3>Border Composite</h3>
-      <pre>
-        <code>{`{
+        <h3>Border Composite</h3>
+        <pre className={styles.codeBlock}>
+          <code>{`{
   "$type": "border",
   "$value": {
     "color": "{semantic.color.border.default}",
-    "width": { "value": 1, "unit": "px" },
+    "width": "1px",
     "style": "solid"
-  }
+  },
+  "$description": "Standard border"
 }`}</code>
-      </pre>
-      <p>
-        Borders combine color references, structured dimensions, and standard
-        CSS border styles for complete border definitions.
-      </p>
+        </pre>
 
-      <h2>Token References</h2>
-      <p>
-        Tokens can reference other tokens using the{' '}
-        <code>{'{token.path}'}</code> syntax, creating a graph of dependencies
-        that the build system resolves.
-      </p>
+        <h2>Token References</h2>
+        <p>
+          Tokens can reference other tokens using the{' '}
+          <code>{'{token.path}'}</code> syntax. This creates a graph of
+          dependencies that the build system resolves.
+        </p>
 
-      <pre>
-        <code>{`{
-  "$type": "color",
-  "$value": "{color.palette.primary.500}"
-}`}</code>
-      </pre>
-      <p>
-        References enable semantic aliasing where{' '}
-        <code>semantic.color.background.primary</code>
-        might reference <code>color.palette.neutral.50</code> for light themes
-        and
-        <code>color.palette.neutral.900</code> for dark themes.
-      </p>
-
-      <h2>Extensions for Advanced Features</h2>
-      <p>
-        The <code>$extensions</code> property provides additional metadata for
-        advanced token behaviors like theming and conditional values.
-      </p>
-
-      <h3>Theme-Specific Overrides</h3>
-      <pre>
-        <code>{`{
-  "$type": "color",
-  "$value": "{color.palette.neutral.600}",
-  "$extensions": {
-    "design": {
-      "paths": {
-        "light": "{color.palette.neutral.600}",
-        "dark": "{color.palette.neutral.300}"
+        <pre className={styles.codeBlock}>
+          <code>{`// Core token (leaf node)
+{
+  "palette": {
+    "blue": {
+      "500": {
+        "$type": "color",
+        "$value": "#0a65fe"
       }
     }
   }
-}`}</code>
-      </pre>
-      <p>
-        The <code>design.paths</code> extension enables theme-specific token
-        resolution, allowing the same semantic token to reference different core
-        values based on theme.
-      </p>
+}
 
-      <h3>CSS Calculations</h3>
-      <pre>
-        <code>{`{
-  "$type": "dimension",
-  "$value": { "value": 16, "unit": "px" },
-  "$extensions": {
-    "design": {
-      "calc": "calc({spacing.size.04} + 2px)"
+// Semantic token (references core)
+{
+  "background": {
+    "brand": {
+      "$type": "color",
+      "$value": "{core.color.palette.blue.500}"
     }
   }
 }`}</code>
-      </pre>
-      <p>
-        The <code>design.calc</code> extension enables CSS <code>calc()</code>{' '}
-        expressions with token interpolation for complex dimensional
-        relationships.
-      </p>
+        </pre>
 
-      <h2>Build System Integration</h2>
-      <p>
-        Our build pipeline automatically converts DTCG structured values to
-        appropriate output formats for different platforms and use cases.
-      </p>
-
-      <div className={styles.placeholder}>
+        <h3>Reference Resolution</h3>
         <p>
-          <strong>Structured → CSS:</strong> Color objects become{' '}
-          <code>rgb()</code> or <code>hex</code>
-          <br />
-          <strong>Structured → SCSS:</strong> Dimensions become{' '}
-          <code>16px</code>, <code>1rem</code>
-          <br />
-          <strong>Structured → TypeScript:</strong> Type-safe value access with
-          IntelliSense
-          <br />
-          <strong>Structured → Platform:</strong> Format-aware transforms for
-          iOS, Android, etc.
+          References are resolved at build time. The build system follows the
+          reference chain and substitutes the final value:
         </p>
-      </div>
 
-      <p>
-        Next:{' '}
-        <Link href="/blueprints/foundations/tokens/core-vs-semantic">
-          Core vs Semantic →
-        </Link>
-      </p>
+        <pre className={styles.codeBlock}>
+          <code>{`// Source
+semantic.color.background.brand = "{core.color.palette.blue.500}"
+
+// Resolved
+semantic.color.background.brand = "#0a65fe"`}</code>
+        </pre>
+
+        <h2>Extensions for Advanced Features</h2>
+        <p>
+          The <code>$extensions</code> property provides custom metadata for
+          features beyond the DTCG spec. We use it for theming and calculations.
+        </p>
+
+        <h3>Theme-Specific Overrides</h3>
+        <pre className={styles.codeBlock}>
+          <code>{`{
+  "$type": "color",
+  "$value": "{core.color.palette.neutral.600}",
+  "$extensions": {
+    "design.paths.light": "{core.color.palette.neutral.600}",
+    "design.paths.dark": "{core.color.palette.neutral.300}"
+  }
+}`}</code>
+        </pre>
+
+        <h3>CSS Calculations</h3>
+        <pre className={styles.codeBlock}>
+          <code>{`{
+  "$type": "dimension",
+  "$value": "16px",
+  "$extensions": {
+    "design.calc": "calc({core.spacing.size.04} + 2px)"
+  }
+}`}</code>
+        </pre>
+
+        <h2>Pitfalls to Avoid</h2>
+
+        <h3>1. Wrong Type for Value</h3>
+        <p>
+          The <code>$type</code> must match the <code>$value</code> format.
+          Mismatches cause validation errors.
+        </p>
+
+        <pre className={styles.codeBlock}>
+          <code>{`// ❌ BAD: Type/value mismatch
+{
+  "$type": "dimension",
+  "$value": "#0a65fe"  // Color value with dimension type!
+}
+
+// ✅ GOOD: Matching type and value
+{
+  "$type": "color",
+  "$value": "#0a65fe"
+}`}</code>
+        </pre>
+
+        <h3>2. Missing Units on Dimensions</h3>
+        <p>
+          Dimensions require units (except zero). Numbers are for unitless
+          values.
+        </p>
+
+        <pre className={styles.codeBlock}>
+          <code>{`// ❌ BAD: Dimension without unit
+{
+  "$type": "dimension",
+  "$value": "16"  // Missing unit!
+}
+
+// ✅ GOOD: Dimension with unit
+{
+  "$type": "dimension",
+  "$value": "16px"
+}
+
+// ✅ GOOD: Zero doesn't need unit
+{
+  "$type": "dimension",
+  "$value": "0"
+}`}</code>
+        </pre>
+
+        <h3>3. Invalid Unit Types</h3>
+        <p>
+          DTCG 1.0 only allows <code>px</code> and <code>rem</code> for
+          dimensions. Other units like <code>em</code>, <code>%</code>, or{' '}
+          <code>vh</code> are not valid.
+        </p>
+
+        <pre className={styles.codeBlock}>
+          <code>{`// ❌ BAD: Invalid units
+{
+  "$type": "dimension",
+  "$value": "1em"     // em not allowed
+}
+{
+  "$type": "dimension",
+  "$value": "100%"    // % not allowed
+}
+
+// ✅ GOOD: Valid units
+{
+  "$type": "dimension",
+  "$value": "16px"
+}
+{
+  "$type": "dimension",
+  "$value": "1rem"
+}`}</code>
+        </pre>
+
+        <h3>4. Circular References</h3>
+        <p>
+          References cannot form cycles. The validator catches these at build
+          time.
+        </p>
+
+        <pre className={styles.codeBlock}>
+          <code>{`// ❌ BAD: Circular reference
+{
+  "primary": { "$value": "{semantic.color.secondary}" },
+  "secondary": { "$value": "{semantic.color.primary}" }
+}
+
+// ✅ GOOD: Linear reference chain
+{
+  "primary": { "$value": "{core.color.palette.blue.500}" },
+  "secondary": { "$value": "{core.color.palette.blue.400}" }
+}`}</code>
+        </pre>
+
+        <h3>5. Referencing Non-Existent Tokens</h3>
+        <p>
+          References must point to tokens that exist. Typos in paths cause build
+          failures.
+        </p>
+
+        <pre className={styles.codeBlock}>
+          <code>{`// ❌ BAD: Typo in reference
+{
+  "$value": "{core.color.pallete.blue.500}"  // "pallete" typo!
+}
+
+// ✅ GOOD: Correct path
+{
+  "$value": "{core.color.palette.blue.500}"
+}`}</code>
+        </pre>
+
+        <h2>Build System Integration</h2>
+        <p>
+          Our build pipeline transforms DTCG tokens into platform-specific
+          formats:
+        </p>
+
+        <table className={styles.table}>
+          <thead>
+            <tr>
+              <th>DTCG Format</th>
+              <th>CSS Output</th>
+              <th>TypeScript Output</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <code>#0a65fe</code>
+              </td>
+              <td>
+                <code>#0a65fe</code>
+              </td>
+              <td>
+                <code>&apos;#0a65fe&apos;</code>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>16px</code>
+              </td>
+              <td>
+                <code>16px</code>
+              </td>
+              <td>
+                <code>&apos;16px&apos;</code>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>250ms</code>
+              </td>
+              <td>
+                <code>250ms</code>
+              </td>
+              <td>
+                <code>&apos;250ms&apos;</code>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>[0.4, 0, 0.2, 1]</code>
+              </td>
+              <td>
+                <code>cubic-bezier(0.4, 0, 0.2, 1)</code>
+              </td>
+              <td>
+                <code>[0.4, 0, 0.2, 1]</code>
+              </td>
+            </tr>
+            <tr>
+              <td>Typography composite</td>
+              <td>Multiple CSS properties</td>
+              <td>Typed object</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>Summary</h2>
+        <ul>
+          <li>
+            <strong>DTCG 1.0</strong> provides a standard format for
+            interoperability
+          </li>
+          <li>
+            <strong>Every token</strong> has <code>$type</code> and{' '}
+            <code>$value</code>; <code>$description</code> and{' '}
+            <code>$extensions</code> are optional
+          </li>
+          <li>
+            <strong>Colors</strong> can be hex strings or structured objects
+            with color space
+          </li>
+          <li>
+            <strong>Dimensions</strong> require units (<code>px</code>,{' '}
+            <code>rem</code>) except for zero
+          </li>
+          <li>
+            <strong>Composite tokens</strong> combine multiple values
+            (typography, shadow, border)
+          </li>
+          <li>
+            <strong>References</strong> use <code>{'{token.path}'}</code> syntax
+            and cannot be circular
+          </li>
+          <li>
+            <strong>Extensions</strong> enable theming and custom features
+            beyond the spec
+          </li>
+        </ul>
+
+        <h2>Next Steps</h2>
+        <p>
+          Understanding DTCG formats is foundational. From here, explore how the{' '}
+          <Link href="/blueprints/foundations/tokens/core-vs-semantic">
+            core vs semantic model
+          </Link>{' '}
+          uses these formats, how{' '}
+          <Link href="/blueprints/foundations/tokens/schema-validation">
+            schema validation
+          </Link>{' '}
+          enforces them, and how the{' '}
+          <Link href="/blueprints/foundations/tokens/build-outputs">
+            build pipeline
+          </Link>{' '}
+          transforms them into CSS and TypeScript.
+        </p>
+      </article>
+
+      <Link href="/blueprints/foundations/tokens">
+        &larr; Back to Design Tokens
+      </Link>
     </section>
   );
 }

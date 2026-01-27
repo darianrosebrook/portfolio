@@ -18,6 +18,9 @@
   --button-color-background-tertiary: var(--core-color-mode-transparent);
   --button-color-background-tertiary-hover: var(--semantic-interaction-background-hover);
   --button-color-background-tertiary-active: var(--semantic-interaction-background-active);
+  --button-color-background-destructive: var(--semantic-color-feedback-error-background);
+  --button-color-background-destructive-hover: var(--semantic-color-feedback-error-background-hover);
+  --button-color-background-destructive-active: var(--semantic-color-feedback-error-background-active);
   --button-color-foreground-default: var(--semantic-color-foreground-inverse);
   --button-color-foreground-hover: var(--semantic-interaction-text-hover);
   --button-color-foreground-active: var(--semantic-interaction-text-active);

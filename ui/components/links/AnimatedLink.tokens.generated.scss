@@ -2,6 +2,17 @@
  * Source: ui/components/Links/AnimatedLink.tokens.json
  */
 @mixin vars {
+  /* === Color Tokens === */
+  --animatedLink-color-default: var(--semantic-color-foreground-accent);
+  --animatedLink-color-hover: var(--semantic-color-foreground-accent);
+  --animatedLink-color-focus: var(--semantic-color-border-accent);
+
+  /* === Spacing Tokens === */
+  --animatedLink-spacing-gap-default: var(--core-spacing-size-02);
+
+  /* === Shape Tokens === */
+  --animatedLink-shape-radius: var(--core-shape-radius-small);
+
   /* === Typography Tokens === */
   --animatedLink-typography-font-weight-regular: var(--semantic-typography-font-weight-regular);
   --animatedLink-typography-line-height-collapse: var(--core-typography-line-height-collapse);

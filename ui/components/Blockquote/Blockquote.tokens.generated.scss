@@ -1,22 +1,25 @@
-/* AUTO-GENERATED: Scaffolding placeholder. Replace via tokens build. */
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Blockquote/Blockquote.tokens.json
+ */
 @mixin vars {
-  /* === Color === */
-  --blockquote-color-background-default: var(
-    --semantic-color-background-secondary
-  );
-  --blockquote-color-foreground-primary: var(
-    --semantic-color-foreground-primary
-  );
-  --blockquote-color-foreground-secondary: var(
-    --semantic-color-foreground-secondary
-  );
-  --blockquote-color-border-default: var(--semantic-color-border-light);
+  /* === Color Tokens === */
+  --blockquote-color-foreground-primary: var(--semantic-color-foreground-secondary);
+  --blockquote-color-background-default: var(--semantic-color-background-secondary);
+  --blockquote-color-border-default: var(--semantic-color-border-accent);
   --blockquote-color-border-accent: var(--semantic-color-border-accent);
 
-  /* === Size === */
-  --blockquote-size-padding-default: var(--core-spacing-size-07);
-  --blockquote-size-radius-default: var(--core-shape-radius-medium);
+  /* === Typography Tokens === */
+  --blockquote-typography-font-style: italic;
+  --blockquote-typography-font-weight: var(--semantic-typography-font-weight-medium);
+  --blockquote-typography-sm-font-size: var(--semantic-typography-body-03);
+  --blockquote-typography-sm-line-height: var(--semantic-typography-line-height-body);
+  --blockquote-typography-md-font-size: var(--semantic-typography-body-02);
+  --blockquote-typography-md-line-height: var(--semantic-typography-line-height-body);
+  --blockquote-typography-lg-font-size: var(--semantic-typography-body-01);
+  --blockquote-typography-lg-line-height: var(--semantic-typography-line-height-body);
 
-  /* === Elevation === */
-  --blockquote-elevation-default: var(--semantic-elevation-depth-1);
+  /* === Size Tokens === */
+  --blockquote-size-padding-default: var(--core-spacing-size-05);
+  --blockquote-size-radius-default: var(--core-shape-radius-medium);
+  --blockquote-size-border-thick: var(--core-shape-border-width-thick);
 }
