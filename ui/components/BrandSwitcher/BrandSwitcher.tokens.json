@@ -1,0 +1,59 @@
+{
+  "prefix": "brandSwitcher",
+  "tokens": {
+    "color": {
+      "background": {
+        "primary": "{semantic.color.background.primary}",
+        "secondary": "{semantic.color.background.secondary}",
+        "tertiary": "{semantic.color.background.tertiary}",
+        "accent": "{semantic.color.background.accent}",
+        "highlight": "{semantic.color.background.highlight}"
+      },
+      "foreground": {
+        "primary": "{semantic.color.foreground.primary}",
+        "secondary": "{semantic.color.foreground.secondary}",
+        "tertiary": "{semantic.color.foreground.tertiary}"
+      },
+      "border": {
+        "default": "{semantic.color.border.default}",
+        "hover": "{semantic.color.border.hover}",
+        "focus": "{semantic.color.border.focus}",
+        "accent": "{semantic.color.border.accent}"
+      }
+    },
+    "spacing": {
+      "gap": {
+        "xs": "{semantic.spacing.gap.component}",
+        "sm": "{semantic.spacing.gap.grid}",
+        "md": "{semantic.spacing.gap.gridMedium}"
+      },
+      "padding": {
+        "xs": "{semantic.spacing.padding.component}",
+        "sm": "{semantic.spacing.padding.card}",
+        "md": "{semantic.spacing.padding.component}",
+        "lg": "{semantic.spacing.padding.section}"
+      }
+    },
+    "size": {
+      "radius": {
+        "01": "{core.shape.radius.01}",
+        "02": "{core.shape.radius.02}",
+        "03": "{core.shape.radius.03}"
+      }
+    },
+    "typography": {
+      "fontSize": {
+        "xs": "{semantic.typography.fontSize.body.xs}",
+        "sm": "{semantic.typography.fontSize.body.sm}",
+        "default": "{semantic.typography.fontSize.body.default}"
+      },
+      "fontWeight": {
+        "default": "{semantic.typography.fontWeight.body.default}",
+        "strong": "{semantic.typography.fontWeight.body.strong}"
+      },
+      "lineHeight": {
+        "default": "{semantic.typography.lineHeight.body.default}"
+      }
+    }
+  }
+}
