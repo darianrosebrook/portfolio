@@ -80,11 +80,11 @@ export default function Navbar({ pages = [] }: NavbarProps) {
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const enabled = e.target.checked;
       setSlider(enabled);
-      const body = document.querySelector('body');
-      if (enabled && body) {
-        body.classList.add(theme);
-      } else if (body) {
-        body.classList.remove(theme);
+      const html = document.documentElement;
+      if (enabled) {
+        html.classList.add(theme);
+      } else {
+        html.classList.remove(theme);
       }
     },
     [theme]
@@ -95,16 +95,13 @@ export default function Navbar({ pages = [] }: NavbarProps) {
     const prefersColorSchemeDarkQuery = window?.matchMedia(
       '(prefers-color-scheme: dark)'
     );
-    const body = document.querySelector('body');
     if (prefersColorSchemeDarkQuery.matches) {
       setTheme('light');
     }
     prefersColorSchemeDarkQuery.onchange = (e) => {
       setSlider(false);
       setTheme(e.matches ? 'light' : 'dark');
-      if (body) {
-        body.classList.remove(theme);
-      }
+      document.documentElement.classList.remove(theme);
     };
   }, [theme]);
 

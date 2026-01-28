@@ -72,6 +72,8 @@ export interface BrandContextValue {
   bodyFont: FontFamilyId;
   /** Set body font family */
   setBodyFont: (font: FontFamilyId) => void;
+  /** Reset brand, density, and fonts to defaults (for playground cleanup) */
+  resetBrand: () => void;
 }
 
 const STORAGE_KEY = 'portfolio-brand-preference';
@@ -373,6 +375,15 @@ export const BrandProvider: React.FC<BrandProviderProps> = ({
     }
   }, []);
 
+  // Reset brand, density, and fonts to defaults (for playground cleanup)
+  const resetBrand = useCallback(() => {
+    setBrandState('default');
+    setDensityState(DEFAULT_DENSITY);
+    setHeadingFontState(DEFAULT_HEADING_FONT);
+    setBodyFontState(DEFAULT_BODY_FONT);
+    localStorage.removeItem(STORAGE_KEY);
+  }, []);
+
   // Auto-cycle effect
   useEffect(() => {
     if (!isAutoCycling || !isHydrated) return;
@@ -401,6 +412,7 @@ export const BrandProvider: React.FC<BrandProviderProps> = ({
       setHeadingFont,
       bodyFont,
       setBodyFont,
+      resetBrand,
     }),
     [
       brand,
@@ -415,6 +427,7 @@ export const BrandProvider: React.FC<BrandProviderProps> = ({
       setHeadingFont,
       bodyFont,
       setBodyFont,
+      resetBrand,
     ]
   );
 
@@ -442,6 +455,7 @@ const DEFAULT_BRAND_VALUE: BrandContextValue = {
   setAutoCycleInterval: () => {},
   density: DEFAULT_DENSITY,
   setDensity: () => {},
+  resetBrand: () => {},
 };
 
 /**

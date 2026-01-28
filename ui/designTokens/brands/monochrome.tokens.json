@@ -376,7 +376,7 @@
       "fontWeight": {
         "$type": "fontWeight",
         "$value": "{typography.weight.medium}",
-        "$description": "Medium heading weight (500)"
+        "$description": "Medium heading weight (500) - understated, minimal"
       }
     }
   }

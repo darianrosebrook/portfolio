@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import styles from './page.module.scss';
 import { DashboardDemo } from './_components';
+import { PlaygroundWrapper } from './_components/PlaygroundWrapper';
 import { BrandSwitcher } from '@/ui/components/BrandSwitcher';
 import { Tabs, TabList, Tab, TabPanel } from '@/ui/components/Tabs';
 
@@ -91,10 +92,33 @@ export default function ThemingPage() {
             <div className={`${styles.contentSection} content`}>
               <h2>The Theming Model</h2>
               <p>
-                Multi-brand theming works by maintaining a stable core layer
-                while allowing the semantic layer to vary per brand. Beyond
-                colors, brands can customize shape (radius), spacing (density),
-                motion (timing), and typography (weight).
+                Multi-brand theming works through three layers. Core tokens
+                define raw primitives (palettes, scales). Semantic tokens give
+                those primitives meaning (accent, background, border). Brand
+                tokens remap semantic values to different core primitives.
+              </p>
+
+              <div className={styles.fileTree}>
+                <pre>
+                  <code>{`Semantic Token                       Default (red)         Corporate (blue)
+─────────────────                    ─────────────         ────────────────
+--semantic-color-foreground-accent   → palette.red.500     → palette.blue.500
+--semantic-color-background-accent   → palette.red.500     → palette.blue.500
+--semantic-color-border-accent       → palette.red.500     → palette.blue.500
+--semantic-color-foreground-link     → palette.red.500     → palette.blue.600
+--semantic-shape-control-radius      → shape.radius.04     → shape.radius.02
+--semantic-spacing-component-padding → spacing.size.05     → spacing.size.04
+--semantic-motion-interaction-dur.   → motion.dur.short    → motion.dur.short2
+
+Components always reference --semantic-* tokens.
+Brand files remap which core primitives those tokens resolve to.`}</code>
+                </pre>
+              </div>
+
+              <p>
+                The source files mirror this structure. Core token files define
+                the shared primitives, and each brand file selectively overrides
+                the semantic mappings:
               </p>
 
               <div className={styles.fileTree}>
@@ -102,14 +126,16 @@ export default function ThemingPage() {
                   <code>{`Core Layer (Shared)              Brand Layer (Overrides)
 ────────────────────              ─────────────────────
 core/                             brands/
-├── color.tokens.json      →      ├── default.tokens.json
-├── spacing.tokens.json    →      ├── corporate.tokens.json
-├── shape.tokens.json      →      ├── forest.tokens.json
-├── motion.tokens.json     →      ├── sunset.tokens.json
-└── typography.tokens.json →      └── midnight.tokens.json
-
-Components reference semantic tokens via CSS variables.
-Brand layer overrides semantic values when [data-brand] is set.`}</code>
+├── color.tokens.json              ├── default.tokens.json
+├── spacing.tokens.json            ├── corporate.tokens.json
+├── shape.tokens.json              ├── forest.tokens.json
+├── motion.tokens.json             ├── sunset.tokens.json
+└── typography.tokens.json         ├── midnight.tokens.json
+                                   ├── ocean.tokens.json
+                                   ├── canary.tokens.json
+                                   ├── monochrome.tokens.json
+                                   ├── rose.tokens.json
+                                   └── slate.tokens.json`}</code>
                 </pre>
               </div>
 
@@ -140,34 +166,57 @@ Brand layer overrides semantic values when [data-brand] is set.`}</code>
               </ul>
 
               <h3>Brand Token Structure</h3>
+              <p>
+                Each brand token file references core primitives using the DTCG
+                token reference syntax. The <code>$extensions</code> object
+                provides separate light and dark values for color tokens,
+                enabling per-brand dark mode adjustments:
+              </p>
               <pre className={styles.codeBlock}>
                 <code>{`// brands/corporate.tokens.json
 {
   "$brand": {
     "name": "corporate",
-    "description": "Professional, efficient, compact"
+    "description": "Professional corporate brand with blue accents"
   },
   "color": {
     "foreground": {
-      "accent": { "$value": "{color.palette.blue.500}" }
+      "accent": {
+        "$type": "color",
+        "$value": "{color.palette.blue.500}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.blue.500}",
+          "design.paths.dark": "{color.palette.blue.400}"
+        }
+      }
+    },
+    "background": {
+      "accent": {
+        "$type": "color",
+        "$value": "{color.palette.blue.500}",
+        "$extensions": {
+          "design.paths.light": "{color.palette.blue.500}",
+          "design.paths.dark": "{color.palette.blue.400}"
+        }
+      }
     }
   },
   "shape": {
     "control": {
       "radius": {
-        "default": { "$value": "{shape.radius.02}" } // 4px - small
+        "default": { "$value": "{shape.radius.02}" }  // 4px
       }
     }
   },
   "spacing": {
     "component": {
-      "padding": { "$value": "{spacing.size.05}" }, // 12px - compact
-      "gap": { "$value": "{spacing.size.04}" }      // 8px
+      "padding": { "$value": "{spacing.size.04}" },    // 8px
+      "gap": { "$value": "{spacing.size.03}" }         // 4px
     }
   },
   "motion": {
     "interaction": {
-      "duration": { "$value": "{motion.duration.short}" } // 150ms
+      "duration": { "$value": "{motion.duration.short2}" } // 83ms
     }
   },
   "typography": {
@@ -180,26 +229,51 @@ Brand layer overrides semantic values when [data-brand] is set.`}</code>
 
               <h2>CSS Output with Cascade Layers</h2>
               <p>
-                The build system generates CSS with cascade layers that ensure
-                brand overrides take precedence:
+                The build system generates CSS with cascade layers. Each layer
+                has increasing precedence&mdash;brand overrides always win over
+                theme defaults, and theme defaults win over semantic defaults:
               </p>
 
               <pre className={styles.codeBlock}>
-                <code>{`@layer core, semantic, theme, brand;
+                <code>{`@layer core, semantic, theme, brand, density;
+
+@layer theme {
+  /* Light/dark theme defaults (applied via class on <html>) */
+  .light {
+    --semantic-color-foreground-accent: #d9292b;   /* default red */
+    --semantic-color-background-primary: #ffffff;
+    /* ...all semantic color tokens for light mode... */
+  }
+  .dark { /* dark mode overrides */ }
+
+  @media (prefers-color-scheme: dark) {
+    :root { /* system dark mode */ }
+    .light { /* manual light override when system prefers dark */ }
+  }
+}
 
 @layer brand {
+  /* Base brand overrides (light mode default) */
   [data-brand="corporate"] {
     --semantic-color-foreground-accent: var(--core-color-palette-blue-500);
+    --semantic-color-background-accent: var(--core-color-palette-blue-500);
     --semantic-shape-control-radius-default: var(--core-shape-radius-02);
-    --semantic-spacing-component-padding: var(--core-spacing-size-05);
-    --semantic-motion-interaction-duration: var(--core-motion-duration-short);
+    --semantic-spacing-component-padding: var(--core-spacing-size-04);
+    --semantic-motion-interaction-duration: var(--core-motion-duration-short2);
     --semantic-typography-body-font-weight: var(--core-typography-weight-medium);
   }
 
+  /* Manual light toggle override (when system prefers dark) */
+  .light[data-brand="corporate"] {
+    --semantic-color-foreground-accent: var(--core-color-palette-blue-500);
+    /* ...same light values, ensuring brand wins over theme layer... */
+  }
+
+  /* Dark mode overrides for this brand */
   @media (prefers-color-scheme: dark) {
     [data-brand="corporate"] {
       --semantic-color-foreground-accent: var(--core-color-palette-blue-400);
-      /* Dark mode adjustments */
+      /* ...shifted palette values for dark backgrounds... */
     }
   }
 }`}</code>
@@ -207,54 +281,59 @@ Brand layer overrides semantic values when [data-brand] is set.`}</code>
 
               <h2>Runtime Brand Switching</h2>
               <p>
-                Brand switching at runtime is handled by updating a data
-                attribute on the document element:
+                Brand switching at runtime is handled by updating a{' '}
+                <code>data-brand</code> attribute on the document element. CSS
+                selectors like <code>[data-brand=&quot;corporate&quot;]</code>{' '}
+                activate the correct brand overrides instantly, with no
+                JavaScript style recalculation needed:
               </p>
 
               <pre className={styles.codeBlock}>
-                <code>{`// React context for brand management
+                <code>{`// BrandContext sets the data attribute on <html>
 function setBrand(brand: BrandId) {
   document.documentElement.setAttribute('data-brand', brand);
   localStorage.setItem('brand', brand);
 }
 
-// Usage
-setBrand('corporate'); // Instantly switches all brand tokens`}</code>
+// Density uses the same pattern
+function setDensity(density: DensityId) {
+  document.documentElement.setAttribute('data-density', density);
+}
+
+// The light/dark toggle adds a class to <html>,
+// which the brand layer accounts for:
+//   .light[data-brand="corporate"] { ... }
+//   .dark[data-brand="corporate"]  { ... }`}</code>
               </pre>
 
               <h2>Core Layer: Brand-Agnostic Primitives</h2>
               <p>
                 The core layer contains primitives that all brands share. These
                 are the raw materials&mdash;color palettes, spacing scales,
-                typography ramps&mdash;that brands draw from.
+                typography ramps&mdash;that brands draw from. No brand defines
+                its own palette; each one references values from this shared set.
               </p>
 
               <pre className={styles.codeBlock}>
-                <code>{`// core/color.tokens.json - Universal palette
-{
-  "palette": {
-    "red": {
-      "500": { "$type": "color", "$value": "#d9292b" }
-    },
-    "blue": {
-      "500": { "$type": "color", "$value": "#0a65fe" }
-    },
-    "green": {
-      "500": { "$type": "color", "$value": "#22c55e" }
-    }
-  }
-}
+                <code>{`// Core primitives generate CSS variables like:
+--core-color-palette-red-500: #d9292b;
+--core-color-palette-blue-500: #0a65fe;
+--core-color-palette-green-500: #487e1e;
 
-// core/shape.tokens.json - Radius scale
-{
-  "radius": {
-    "01": { "$value": "2px" },  // Sharp
-    "02": { "$value": "4px" },  // Small
-    "03": { "$value": "8px" },  // Medium
-    "04": { "$value": "16px" }, // Large
-    "full": { "$value": "9999px" } // Pill
-  }
-}`}</code>
+--core-shape-radius-01: 2px;    // Sharp
+--core-shape-radius-02: 4px;    // Small
+--core-shape-radius-03: 8px;    // Medium
+--core-shape-radius-04: 16px;   // Large
+
+--core-spacing-size-03: 4px;
+--core-spacing-size-04: 8px;
+--core-spacing-size-05: 12px;
+
+--core-motion-duration-short: 150ms;
+--core-motion-duration-short2: 83ms;
+
+// Brands reference these via var(), so changing a core
+// primitive updates every brand that uses it.`}</code>
               </pre>
 
               <h2>Pitfalls to Avoid</h2>
@@ -345,16 +424,21 @@ setBrand('corporate'); // Instantly switches all brand tokens`}</code>
             </div>
           </TabPanel>
           <TabPanel value="playground" className={styles.tabPanel}>
-            <div className={styles.heroBrandSwitcher}>
-              <BrandSwitcher
-                showDensity={true}
-                showPersonality={true}
-                showFonts={true}
-              />
-            </div>
-            <div className={styles.playgroundSection}>
-              <DashboardDemo />
-            </div>
+            <PlaygroundWrapper>
+              <div className={styles.playgroundLayout}>
+                <aside className={styles.playgroundAside}>
+                  <BrandSwitcher
+                    showDensity
+                    showPersonality
+                    showFonts
+                    sticky
+                  />
+                </aside>
+                <div className={styles.playgroundSection}>
+                  <DashboardDemo />
+                </div>
+              </div>
+            </PlaygroundWrapper>
           </TabPanel>
         </Tabs>
       </section>

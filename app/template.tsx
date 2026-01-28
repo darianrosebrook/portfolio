@@ -32,6 +32,8 @@ const Template: React.FC<TemplateProps> = ({ children }) => {
   ];
   useEffect(() => {
     if (!handleSelectionChange.current) {
+      // Fires on every selectionchange event. When selection text is empty,
+      // the user just deselected — pick a random highlight color on deselect.
       handleSelectionChange.current = () => {
         const selection = document.getSelection();
         if (selection && '' === selection.toString()) {
@@ -39,11 +41,11 @@ const Template: React.FC<TemplateProps> = ({ children }) => {
           let isDarkTheme = window.matchMedia(
             '(prefers-color-scheme: dark)'
           ).matches;
-          const bodyClassOverride = rootElement.classList;
-          if (bodyClassOverride.contains('light')) {
+          const htmlClassList = document.documentElement.classList;
+          if (htmlClassList.contains('light')) {
             isDarkTheme = false;
           }
-          if (bodyClassOverride.contains('dark')) {
+          if (htmlClassList.contains('dark')) {
             isDarkTheme = true;
           }
 

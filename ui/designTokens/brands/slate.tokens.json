@@ -187,8 +187,8 @@
     "card": {
       "radius": {
         "$type": "dimension",
-        "$value": "{shape.radius.03}",
-        "$description": "Card border radius (8px) - crisp, clean"
+        "$value": "{shape.radius.02}",
+        "$description": "Card border radius (4px) - crisp, mechanical"
       },
       "border": {
         "light": {
@@ -366,8 +366,8 @@
     "heading": {
       "fontWeight": {
         "$type": "fontWeight",
-        "$value": "{typography.weight.semibold}",
-        "$description": "Semibold heading weight (600) - professional"
+        "$value": "{typography.weight.bold}",
+        "$description": "Bold heading weight (700) - professional"
       }
     }
   }

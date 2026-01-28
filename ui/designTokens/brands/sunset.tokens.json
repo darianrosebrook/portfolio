@@ -203,8 +203,8 @@
     "card": {
       "radius": {
         "$type": "dimension",
-        "$value": "{shape.radius.05}",
-        "$description": "Card border radius (32px) - very rounded"
+        "$value": "{shape.radius.04}",
+        "$description": "Card border radius (16px) - warm, rounded"
       },
       "border": {
         "light": {

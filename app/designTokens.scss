@@ -412,12 +412,12 @@
   --semantic-spacing-density-default-lg: 32px;
   --semantic-spacing-density-default-xl: 40px;
   --semantic-spacing-density-default-2xl: 48px;
-  --semantic-spacing-density-spacious-xs: 16px;
-  --semantic-spacing-density-spacious-sm: 32px;
-  --semantic-spacing-density-spacious-md: 48px;
-  --semantic-spacing-density-spacious-lg: 64px;
-  --semantic-spacing-density-spacious-xl: 80px;
-  --semantic-spacing-density-spacious-2xl: 96px;
+  --semantic-spacing-density-spacious-xs: 12px;
+  --semantic-spacing-density-spacious-sm: 20px;
+  --semantic-spacing-density-spacious-md: 32px;
+  --semantic-spacing-density-spacious-lg: 40px;
+  --semantic-spacing-density-spacious-xl: 56px;
+  --semantic-spacing-density-spacious-2xl: 64px;
   --semantic-spacing-padding-container: 24px;
   --semantic-spacing-padding-card: 16px;
   --semantic-spacing-padding-component: 16px;
@@ -1299,8 +1299,8 @@
     --semantic-color-action-border-primary-default: var(--core-color-palette-yellow-500);
     --semantic-color-action-border-primary-focus: var(--core-color-palette-yellow-400);
     --semantic-color-status-highlight: var(--core-color-palette-yellow-400);
-    --semantic-shape-control-radius-default: var(--core-shape-radius-05);
-    --semantic-shape-card-radius: var(--core-shape-radius-05);
+    --semantic-shape-control-radius-default: var(--core-shape-radius-03);
+    --semantic-shape-card-radius: var(--core-shape-radius-03);
     --semantic-shape-card-border-light: var(--core-color-palette-yellow-100);
     --semantic-shape-card-border-medium: var(--core-color-palette-yellow-200);
     --semantic-shape-card-border-dark: var(--core-color-palette-yellow-400);
@@ -1309,23 +1309,73 @@
     --semantic-shape-card-elevation-default: var(--core-elevation-level-2);
     --semantic-shape-card-elevation-far: var(--core-elevation-level-3);
     --semantic-shape-card-elevation-none: var(--core-elevation-level-0);
-    --semantic-shape-element-radius: var(--core-shape-radius-05);
-    --semantic-shape-button-radius: var(--core-shape-radius-05);
-    --semantic-shape-badge-radius: var(--core-shape-radius-05);
-    --semantic-shape-input-radius-default: var(--core-shape-radius-05);
+    --semantic-shape-element-radius: var(--core-shape-radius-03);
+    --semantic-shape-button-radius: var(--core-shape-radius-03);
+    --semantic-shape-badge-radius: var(--core-shape-radius-03);
+    --semantic-shape-input-radius-default: var(--core-shape-radius-03);
     --semantic-shape-input-border-default-width: var(--core-shape-border-width-thick);
     --semantic-shape-input-border-default-style: var(--core-shape-border-style-solid);
     --semantic-shape-input-border-focus-width: var(--core-shape-border-width-thick);
-    --semantic-shape-field-radius-default: var(--core-shape-radius-05);
+    --semantic-shape-field-radius-default: var(--core-shape-radius-03);
     --semantic-shape-field-border-default-width: var(--core-shape-border-width-thick);
     --semantic-shape-field-border-focus-width: var(--core-shape-border-width-thick);
     --semantic-spacing-component-padding: var(--core-spacing-size-07);
     --semantic-spacing-component-gap: var(--core-spacing-size-06);
     --semantic-spacing-card-padding: var(--core-spacing-size-08);
-    --semantic-motion-interaction-duration: var(--core-motion-duration-medium3);
-    --semantic-motion-interaction-easing: var(--core-motion-easing-bounce);
+    --semantic-motion-interaction-duration: var(--core-motion-duration-short3);
+    --semantic-motion-interaction-easing: var(--core-motion-easing-standard);
     --semantic-typography-body-font-weight: var(--core-typography-weight-medium);
-    --semantic-typography-heading-font-weight: var(--core-typography-weight-semibold);
+    --semantic-typography-heading-font-weight: var(--core-typography-weight-bold);
+  }
+
+  .light[data-brand="canary"], .light [data-brand="canary"] {
+    --semantic-color-foreground-accent: var(--core-color-palette-yellow-600);
+    --semantic-color-foreground-link: var(--core-color-palette-yellow-600);
+    --semantic-color-foreground-link-hover: var(--core-color-palette-yellow-700);
+    --semantic-color-foreground-link-visited: var(--core-color-palette-yellow-500);
+    --semantic-color-foreground-highlight: var(--core-color-palette-yellow-700);
+    --semantic-color-background-accent: var(--core-color-palette-yellow-500);
+    --semantic-color-background-highlight: var(--core-color-palette-yellow-200);
+    --semantic-color-border-accent: var(--core-color-palette-yellow-500);
+    --semantic-color-border-default: var(--core-color-palette-neutral-300);
+    --semantic-color-border-hover: var(--core-color-palette-yellow-400);
+    --semantic-color-border-focus: var(--core-color-palette-yellow-500);
+    --semantic-color-border-light: var(--core-color-palette-yellow-200);
+    --semantic-color-border-primary: var(--core-color-palette-yellow-400);
+    --semantic-color-navigation-foreground-active: var(--core-color-palette-yellow-600);
+    --semantic-color-action-background-primary-default: var(--core-color-palette-yellow-500);
+    --semantic-color-action-background-primary-hover: var(--core-color-palette-yellow-600);
+    --semantic-color-action-background-primary-active: var(--core-color-palette-yellow-700);
+    --semantic-color-action-border-primary-default: var(--core-color-palette-yellow-500);
+    --semantic-color-action-border-primary-focus: var(--core-color-palette-yellow-400);
+    --semantic-color-status-highlight: var(--core-color-palette-yellow-400);
+    --semantic-shape-control-radius-default: var(--core-shape-radius-03);
+    --semantic-shape-card-radius: var(--core-shape-radius-03);
+    --semantic-shape-card-border-light: var(--core-color-palette-yellow-100);
+    --semantic-shape-card-border-medium: var(--core-color-palette-yellow-200);
+    --semantic-shape-card-border-dark: var(--core-color-palette-yellow-400);
+    --semantic-shape-card-border-transparent: var(--core-color-mode-transparent);
+    --semantic-shape-card-elevation-near: var(--core-elevation-level-1);
+    --semantic-shape-card-elevation-default: var(--core-elevation-level-2);
+    --semantic-shape-card-elevation-far: var(--core-elevation-level-3);
+    --semantic-shape-card-elevation-none: var(--core-elevation-level-0);
+    --semantic-shape-element-radius: var(--core-shape-radius-03);
+    --semantic-shape-button-radius: var(--core-shape-radius-03);
+    --semantic-shape-badge-radius: var(--core-shape-radius-03);
+    --semantic-shape-input-radius-default: var(--core-shape-radius-03);
+    --semantic-shape-input-border-default-width: var(--core-shape-border-width-thick);
+    --semantic-shape-input-border-default-style: var(--core-shape-border-style-solid);
+    --semantic-shape-input-border-focus-width: var(--core-shape-border-width-thick);
+    --semantic-shape-field-radius-default: var(--core-shape-radius-03);
+    --semantic-shape-field-border-default-width: var(--core-shape-border-width-thick);
+    --semantic-shape-field-border-focus-width: var(--core-shape-border-width-thick);
+    --semantic-spacing-component-padding: var(--core-spacing-size-07);
+    --semantic-spacing-component-gap: var(--core-spacing-size-06);
+    --semantic-spacing-card-padding: var(--core-spacing-size-08);
+    --semantic-motion-interaction-duration: var(--core-motion-duration-short3);
+    --semantic-motion-interaction-easing: var(--core-motion-easing-standard);
+    --semantic-typography-body-font-weight: var(--core-typography-weight-medium);
+    --semantic-typography-heading-font-weight: var(--core-typography-weight-bold);
   }
 
   @media (prefers-color-scheme: dark) {
@@ -1350,8 +1400,8 @@
       --semantic-color-action-border-primary-default: var(--core-color-palette-yellow-500);
       --semantic-color-action-border-primary-focus: var(--core-color-palette-yellow-400);
       --semantic-color-status-highlight: var(--core-color-palette-yellow-500);
-      --semantic-shape-control-radius-default: var(--core-shape-radius-05);
-      --semantic-shape-card-radius: var(--core-shape-radius-05);
+      --semantic-shape-control-radius-default: var(--core-shape-radius-03);
+      --semantic-shape-card-radius: var(--core-shape-radius-03);
       --semantic-shape-card-border-light: var(--core-color-palette-yellow-800);
       --semantic-shape-card-border-medium: var(--core-color-palette-yellow-700);
       --semantic-shape-card-border-dark: var(--core-color-palette-yellow-500);
@@ -1360,23 +1410,23 @@
       --semantic-shape-card-elevation-default: var(--core-elevation-level-2);
       --semantic-shape-card-elevation-far: var(--core-elevation-level-3);
       --semantic-shape-card-elevation-none: var(--core-elevation-level-0);
-      --semantic-shape-element-radius: var(--core-shape-radius-05);
-      --semantic-shape-button-radius: var(--core-shape-radius-05);
-      --semantic-shape-badge-radius: var(--core-shape-radius-05);
-      --semantic-shape-input-radius-default: var(--core-shape-radius-05);
+      --semantic-shape-element-radius: var(--core-shape-radius-03);
+      --semantic-shape-button-radius: var(--core-shape-radius-03);
+      --semantic-shape-badge-radius: var(--core-shape-radius-03);
+      --semantic-shape-input-radius-default: var(--core-shape-radius-03);
       --semantic-shape-input-border-default-width: var(--core-shape-border-width-thick);
       --semantic-shape-input-border-default-style: var(--core-shape-border-style-solid);
       --semantic-shape-input-border-focus-width: var(--core-shape-border-width-thick);
-      --semantic-shape-field-radius-default: var(--core-shape-radius-05);
+      --semantic-shape-field-radius-default: var(--core-shape-radius-03);
       --semantic-shape-field-border-default-width: var(--core-shape-border-width-thick);
       --semantic-shape-field-border-focus-width: var(--core-shape-border-width-thick);
       --semantic-spacing-component-padding: var(--core-spacing-size-07);
       --semantic-spacing-component-gap: var(--core-spacing-size-06);
       --semantic-spacing-card-padding: var(--core-spacing-size-08);
-      --semantic-motion-interaction-duration: var(--core-motion-duration-medium3);
-      --semantic-motion-interaction-easing: var(--core-motion-easing-bounce);
+      --semantic-motion-interaction-duration: var(--core-motion-duration-short3);
+      --semantic-motion-interaction-easing: var(--core-motion-easing-standard);
       --semantic-typography-body-font-weight: var(--core-typography-weight-medium);
-      --semantic-typography-heading-font-weight: var(--core-typography-weight-semibold);
+      --semantic-typography-heading-font-weight: var(--core-typography-weight-bold);
     }
   }
 
@@ -1401,8 +1451,8 @@
     --semantic-color-action-border-primary-default: var(--core-color-palette-yellow-500);
     --semantic-color-action-border-primary-focus: var(--core-color-palette-yellow-400);
     --semantic-color-status-highlight: var(--core-color-palette-yellow-500);
-    --semantic-shape-control-radius-default: var(--core-shape-radius-05);
-    --semantic-shape-card-radius: var(--core-shape-radius-05);
+    --semantic-shape-control-radius-default: var(--core-shape-radius-03);
+    --semantic-shape-card-radius: var(--core-shape-radius-03);
     --semantic-shape-card-border-light: var(--core-color-palette-yellow-800);
     --semantic-shape-card-border-medium: var(--core-color-palette-yellow-700);
     --semantic-shape-card-border-dark: var(--core-color-palette-yellow-500);
@@ -1411,23 +1461,23 @@
     --semantic-shape-card-elevation-default: var(--core-elevation-level-2);
     --semantic-shape-card-elevation-far: var(--core-elevation-level-3);
     --semantic-shape-card-elevation-none: var(--core-elevation-level-0);
-    --semantic-shape-element-radius: var(--core-shape-radius-05);
-    --semantic-shape-button-radius: var(--core-shape-radius-05);
-    --semantic-shape-badge-radius: var(--core-shape-radius-05);
-    --semantic-shape-input-radius-default: var(--core-shape-radius-05);
+    --semantic-shape-element-radius: var(--core-shape-radius-03);
+    --semantic-shape-button-radius: var(--core-shape-radius-03);
+    --semantic-shape-badge-radius: var(--core-shape-radius-03);
+    --semantic-shape-input-radius-default: var(--core-shape-radius-03);
     --semantic-shape-input-border-default-width: var(--core-shape-border-width-thick);
     --semantic-shape-input-border-default-style: var(--core-shape-border-style-solid);
     --semantic-shape-input-border-focus-width: var(--core-shape-border-width-thick);
-    --semantic-shape-field-radius-default: var(--core-shape-radius-05);
+    --semantic-shape-field-radius-default: var(--core-shape-radius-03);
     --semantic-shape-field-border-default-width: var(--core-shape-border-width-thick);
     --semantic-shape-field-border-focus-width: var(--core-shape-border-width-thick);
     --semantic-spacing-component-padding: var(--core-spacing-size-07);
     --semantic-spacing-component-gap: var(--core-spacing-size-06);
     --semantic-spacing-card-padding: var(--core-spacing-size-08);
-    --semantic-motion-interaction-duration: var(--core-motion-duration-medium3);
-    --semantic-motion-interaction-easing: var(--core-motion-easing-bounce);
+    --semantic-motion-interaction-duration: var(--core-motion-duration-short3);
+    --semantic-motion-interaction-easing: var(--core-motion-easing-standard);
     --semantic-typography-body-font-weight: var(--core-typography-weight-medium);
-    --semantic-typography-heading-font-weight: var(--core-typography-weight-semibold);
+    --semantic-typography-heading-font-weight: var(--core-typography-weight-bold);
   }
 
   [data-brand="corporate"] {
@@ -1452,8 +1502,8 @@
     --semantic-color-action-border-primary-default: var(--core-color-palette-blue-500);
     --semantic-color-action-border-primary-focus: var(--core-color-palette-blue-400);
     --semantic-color-status-highlight: var(--core-color-palette-blue-400);
-    --semantic-shape-control-radius-default: var(--core-shape-radius-01);
-    --semantic-shape-card-radius: var(--core-shape-radius-01);
+    --semantic-shape-control-radius-default: var(--core-shape-radius-02);
+    --semantic-shape-card-radius: var(--core-shape-radius-02);
     --semantic-shape-card-border-light: var(--core-color-palette-blue-100);
     --semantic-shape-card-border-medium: var(--core-color-palette-blue-200);
     --semantic-shape-card-border-dark: var(--core-color-palette-blue-400);
@@ -1462,14 +1512,65 @@
     --semantic-shape-card-elevation-default: var(--core-elevation-level-1);
     --semantic-shape-card-elevation-far: var(--core-elevation-level-2);
     --semantic-shape-card-elevation-none: var(--core-elevation-level-0);
-    --semantic-shape-element-radius: var(--core-shape-radius-none);
-    --semantic-shape-button-radius: var(--core-shape-radius-01);
-    --semantic-shape-badge-radius: var(--core-shape-radius-01);
-    --semantic-shape-input-radius-default: var(--core-shape-radius-01);
+    --semantic-shape-element-radius: var(--core-shape-radius-01);
+    --semantic-shape-button-radius: var(--core-shape-radius-02);
+    --semantic-shape-badge-radius: var(--core-shape-radius-02);
+    --semantic-shape-input-radius-default: var(--core-shape-radius-02);
     --semantic-shape-input-border-default-width: var(--core-shape-border-width-hairline);
     --semantic-shape-input-border-default-style: var(--core-shape-border-style-solid);
     --semantic-shape-input-border-focus-width: var(--core-shape-border-width-thick);
-    --semantic-shape-field-radius-default: var(--core-shape-radius-01);
+    --semantic-shape-field-radius-default: var(--core-shape-radius-02);
+    --semantic-shape-field-border-default-width: var(--core-shape-border-width-hairline);
+    --semantic-shape-field-border-focus-width: var(--core-shape-border-width-thick);
+    --semantic-spacing-component-padding: var(--core-spacing-size-04);
+    --semantic-spacing-component-gap: var(--core-spacing-size-03);
+    --semantic-spacing-card-padding: var(--core-spacing-size-05);
+    --semantic-motion-interaction-duration: var(--core-motion-duration-short2);
+    --semantic-motion-interaction-easing: var(--core-motion-easing-quick-enter);
+    --semantic-typography-body-font-weight: var(--core-typography-weight-medium);
+    --semantic-typography-heading-font-weight: var(--core-typography-weight-bold);
+  }
+
+  .light[data-brand="corporate"], .light [data-brand="corporate"] {
+    --semantic-color-foreground-accent: var(--core-color-palette-blue-500);
+    --semantic-color-foreground-link: var(--core-color-palette-blue-600);
+    --semantic-color-foreground-link-hover: var(--core-color-palette-blue-700);
+    --semantic-color-foreground-link-visited: var(--core-color-palette-blue-500);
+    --semantic-color-foreground-highlight: var(--core-color-palette-blue-700);
+    --semantic-color-background-accent: var(--core-color-palette-blue-500);
+    --semantic-color-background-highlight: var(--core-color-palette-blue-100);
+    --semantic-color-background-brand: var(--core-color-palette-blue-500);
+    --semantic-color-border-accent: var(--core-color-palette-blue-500);
+    --semantic-color-border-default: var(--core-color-palette-neutral-300);
+    --semantic-color-border-hover: var(--core-color-palette-blue-300);
+    --semantic-color-border-focus: var(--core-color-palette-blue-500);
+    --semantic-color-border-light: var(--core-color-palette-blue-100);
+    --semantic-color-border-primary: var(--core-color-palette-blue-300);
+    --semantic-color-navigation-foreground-active: var(--core-color-palette-blue-600);
+    --semantic-color-action-background-primary-default: var(--core-color-palette-blue-500);
+    --semantic-color-action-background-primary-hover: var(--core-color-palette-blue-600);
+    --semantic-color-action-background-primary-active: var(--core-color-palette-blue-700);
+    --semantic-color-action-border-primary-default: var(--core-color-palette-blue-500);
+    --semantic-color-action-border-primary-focus: var(--core-color-palette-blue-400);
+    --semantic-color-status-highlight: var(--core-color-palette-blue-400);
+    --semantic-shape-control-radius-default: var(--core-shape-radius-02);
+    --semantic-shape-card-radius: var(--core-shape-radius-02);
+    --semantic-shape-card-border-light: var(--core-color-palette-blue-100);
+    --semantic-shape-card-border-medium: var(--core-color-palette-blue-200);
+    --semantic-shape-card-border-dark: var(--core-color-palette-blue-400);
+    --semantic-shape-card-border-transparent: var(--core-color-mode-transparent);
+    --semantic-shape-card-elevation-near: var(--core-elevation-level-0);
+    --semantic-shape-card-elevation-default: var(--core-elevation-level-1);
+    --semantic-shape-card-elevation-far: var(--core-elevation-level-2);
+    --semantic-shape-card-elevation-none: var(--core-elevation-level-0);
+    --semantic-shape-element-radius: var(--core-shape-radius-01);
+    --semantic-shape-button-radius: var(--core-shape-radius-02);
+    --semantic-shape-badge-radius: var(--core-shape-radius-02);
+    --semantic-shape-input-radius-default: var(--core-shape-radius-02);
+    --semantic-shape-input-border-default-width: var(--core-shape-border-width-hairline);
+    --semantic-shape-input-border-default-style: var(--core-shape-border-style-solid);
+    --semantic-shape-input-border-focus-width: var(--core-shape-border-width-thick);
+    --semantic-shape-field-radius-default: var(--core-shape-radius-02);
     --semantic-shape-field-border-default-width: var(--core-shape-border-width-hairline);
     --semantic-shape-field-border-focus-width: var(--core-shape-border-width-thick);
     --semantic-spacing-component-padding: var(--core-spacing-size-04);
@@ -1504,8 +1605,8 @@
       --semantic-color-action-border-primary-default: var(--core-color-palette-blue-500);
       --semantic-color-action-border-primary-focus: var(--core-color-palette-blue-400);
       --semantic-color-status-highlight: var(--core-color-palette-blue-500);
-      --semantic-shape-control-radius-default: var(--core-shape-radius-01);
-      --semantic-shape-card-radius: var(--core-shape-radius-01);
+      --semantic-shape-control-radius-default: var(--core-shape-radius-02);
+      --semantic-shape-card-radius: var(--core-shape-radius-02);
       --semantic-shape-card-border-light: var(--core-color-palette-blue-800);
       --semantic-shape-card-border-medium: var(--core-color-palette-blue-700);
       --semantic-shape-card-border-dark: var(--core-color-palette-blue-500);
@@ -1514,14 +1615,14 @@
       --semantic-shape-card-elevation-default: var(--core-elevation-level-1);
       --semantic-shape-card-elevation-far: var(--core-elevation-level-2);
       --semantic-shape-card-elevation-none: var(--core-elevation-level-0);
-      --semantic-shape-element-radius: var(--core-shape-radius-none);
-      --semantic-shape-button-radius: var(--core-shape-radius-01);
-      --semantic-shape-badge-radius: var(--core-shape-radius-01);
-      --semantic-shape-input-radius-default: var(--core-shape-radius-01);
+      --semantic-shape-element-radius: var(--core-shape-radius-01);
+      --semantic-shape-button-radius: var(--core-shape-radius-02);
+      --semantic-shape-badge-radius: var(--core-shape-radius-02);
+      --semantic-shape-input-radius-default: var(--core-shape-radius-02);
       --semantic-shape-input-border-default-width: var(--core-shape-border-width-hairline);
       --semantic-shape-input-border-default-style: var(--core-shape-border-style-solid);
       --semantic-shape-input-border-focus-width: var(--core-shape-border-width-thick);
-      --semantic-shape-field-radius-default: var(--core-shape-radius-01);
+      --semantic-shape-field-radius-default: var(--core-shape-radius-02);
       --semantic-shape-field-border-default-width: var(--core-shape-border-width-hairline);
       --semantic-shape-field-border-focus-width: var(--core-shape-border-width-thick);
       --semantic-spacing-component-padding: var(--core-spacing-size-04);
@@ -1556,8 +1657,8 @@
     --semantic-color-action-border-primary-default: var(--core-color-palette-blue-500);
     --semantic-color-action-border-primary-focus: var(--core-color-palette-blue-400);
     --semantic-color-status-highlight: var(--core-color-palette-blue-500);
-    --semantic-shape-control-radius-default: var(--core-shape-radius-01);
-    --semantic-shape-card-radius: var(--core-shape-radius-01);
+    --semantic-shape-control-radius-default: var(--core-shape-radius-02);
+    --semantic-shape-card-radius: var(--core-shape-radius-02);
     --semantic-shape-card-border-light: var(--core-color-palette-blue-800);
     --semantic-shape-card-border-medium: var(--core-color-palette-blue-700);
     --semantic-shape-card-border-dark: var(--core-color-palette-blue-500);
@@ -1566,14 +1667,14 @@
     --semantic-shape-card-elevation-default: var(--core-elevation-level-1);
     --semantic-shape-card-elevation-far: var(--core-elevation-level-2);
     --semantic-shape-card-elevation-none: var(--core-elevation-level-0);
-    --semantic-shape-element-radius: var(--core-shape-radius-none);
-    --semantic-shape-button-radius: var(--core-shape-radius-01);
-    --semantic-shape-badge-radius: var(--core-shape-radius-01);
-    --semantic-shape-input-radius-default: var(--core-shape-radius-01);
+    --semantic-shape-element-radius: var(--core-shape-radius-01);
+    --semantic-shape-button-radius: var(--core-shape-radius-02);
+    --semantic-shape-badge-radius: var(--core-shape-radius-02);
+    --semantic-shape-input-radius-default: var(--core-shape-radius-02);
     --semantic-shape-input-border-default-width: var(--core-shape-border-width-hairline);
     --semantic-shape-input-border-default-style: var(--core-shape-border-style-solid);
     --semantic-shape-input-border-focus-width: var(--core-shape-border-width-thick);
-    --semantic-shape-field-radius-default: var(--core-shape-radius-01);
+    --semantic-shape-field-radius-default: var(--core-shape-radius-02);
     --semantic-shape-field-border-default-width: var(--core-shape-border-width-hairline);
     --semantic-shape-field-border-focus-width: var(--core-shape-border-width-thick);
     --semantic-spacing-component-padding: var(--core-spacing-size-04);
@@ -1586,6 +1687,56 @@
   }
 
   [data-brand="default"] {
+    --semantic-color-foreground-accent: var(--core-color-palette-red-500);
+    --semantic-color-foreground-link: var(--core-color-palette-red-500);
+    --semantic-color-foreground-link-hover: var(--core-color-palette-red-600);
+    --semantic-color-foreground-link-visited: var(--core-color-palette-red-400);
+    --semantic-color-foreground-highlight: var(--core-color-palette-red-700);
+    --semantic-color-background-accent: var(--core-color-palette-red-500);
+    --semantic-color-background-highlight: var(--core-color-palette-red-200);
+    --semantic-color-border-accent: var(--core-color-palette-red-500);
+    --semantic-color-border-default: var(--core-color-palette-neutral-300);
+    --semantic-color-border-hover: var(--core-color-palette-red-300);
+    --semantic-color-border-focus: var(--core-color-palette-red-500);
+    --semantic-color-border-light: var(--core-color-palette-red-100);
+    --semantic-color-border-primary: var(--core-color-palette-red-300);
+    --semantic-color-navigation-foreground-active: var(--core-color-palette-red-500);
+    --semantic-color-action-background-primary-default: var(--core-color-palette-red-500);
+    --semantic-color-action-background-primary-hover: var(--core-color-palette-red-600);
+    --semantic-color-action-background-primary-active: var(--core-color-palette-red-700);
+    --semantic-color-action-border-primary-default: var(--core-color-palette-red-500);
+    --semantic-color-action-border-primary-focus: var(--core-color-palette-red-400);
+    --semantic-color-status-highlight: var(--core-color-palette-red-400);
+    --semantic-shape-control-radius-default: var(--core-shape-radius-03);
+    --semantic-shape-card-radius: var(--core-shape-radius-04);
+    --semantic-shape-card-border-light: var(--core-color-palette-red-100);
+    --semantic-shape-card-border-medium: var(--core-color-palette-red-200);
+    --semantic-shape-card-border-dark: var(--core-color-palette-red-400);
+    --semantic-shape-card-border-transparent: var(--core-color-mode-transparent);
+    --semantic-shape-card-elevation-near: var(--core-elevation-level-1);
+    --semantic-shape-card-elevation-default: var(--core-elevation-level-2);
+    --semantic-shape-card-elevation-far: var(--core-elevation-level-3);
+    --semantic-shape-card-elevation-none: var(--core-elevation-level-0);
+    --semantic-shape-element-radius: var(--core-shape-radius-03);
+    --semantic-shape-button-radius: var(--core-shape-radius-03);
+    --semantic-shape-badge-radius: var(--core-shape-radius-full);
+    --semantic-shape-input-radius-default: var(--core-shape-radius-03);
+    --semantic-shape-input-border-default-width: var(--core-shape-border-width-hairline);
+    --semantic-shape-input-border-default-style: var(--core-shape-border-style-solid);
+    --semantic-shape-input-border-focus-width: var(--core-shape-border-width-thick);
+    --semantic-shape-field-radius-default: var(--core-shape-radius-03);
+    --semantic-shape-field-border-default-width: var(--core-shape-border-width-hairline);
+    --semantic-shape-field-border-focus-width: var(--core-shape-border-width-thick);
+    --semantic-spacing-component-padding: var(--core-spacing-size-06);
+    --semantic-spacing-component-gap: var(--core-spacing-size-05);
+    --semantic-spacing-card-padding: var(--core-spacing-size-07);
+    --semantic-motion-interaction-duration: var(--core-motion-duration-medium1);
+    --semantic-motion-interaction-easing: var(--core-motion-easing-standard);
+    --semantic-typography-body-font-weight: var(--core-typography-weight-regular);
+    --semantic-typography-heading-font-weight: var(--core-typography-weight-medium);
+  }
+
+  .light[data-brand="default"], .light [data-brand="default"] {
     --semantic-color-foreground-accent: var(--core-color-palette-red-500);
     --semantic-color-foreground-link: var(--core-color-palette-red-500);
     --semantic-color-foreground-link-hover: var(--core-color-palette-red-600);
@@ -1760,7 +1911,7 @@
     --semantic-color-action-border-primary-focus: var(--core-color-palette-green-400);
     --semantic-color-status-highlight: var(--core-color-palette-green-400);
     --semantic-shape-control-radius-default: var(--core-shape-radius-04);
-    --semantic-shape-card-radius: var(--core-shape-radius-05);
+    --semantic-shape-card-radius: var(--core-shape-radius-04);
     --semantic-shape-card-border-light: var(--core-color-palette-green-100);
     --semantic-shape-card-border-medium: var(--core-color-palette-green-200);
     --semantic-shape-card-border-dark: var(--core-color-palette-green-400);
@@ -1769,7 +1920,7 @@
     --semantic-shape-card-elevation-default: var(--core-elevation-level-2);
     --semantic-shape-card-elevation-far: var(--core-elevation-level-3);
     --semantic-shape-card-elevation-none: var(--core-elevation-level-0);
-    --semantic-shape-element-radius: var(--core-shape-radius-04);
+    --semantic-shape-element-radius: var(--core-shape-radius-03);
     --semantic-shape-button-radius: var(--core-shape-radius-full);
     --semantic-shape-badge-radius: var(--core-shape-radius-full);
     --semantic-shape-input-radius-default: var(--core-shape-radius-04);
@@ -1779,9 +1930,60 @@
     --semantic-shape-field-radius-default: var(--core-shape-radius-04);
     --semantic-shape-field-border-default-width: var(--core-shape-border-width-hairline);
     --semantic-shape-field-border-focus-width: var(--core-shape-border-width-thick);
-    --semantic-spacing-component-padding: var(--core-spacing-size-08);
-    --semantic-spacing-component-gap: var(--core-spacing-size-07);
-    --semantic-spacing-card-padding: var(--core-spacing-size-09);
+    --semantic-spacing-component-padding: var(--core-spacing-size-07);
+    --semantic-spacing-component-gap: var(--core-spacing-size-06);
+    --semantic-spacing-card-padding: var(--core-spacing-size-08);
+    --semantic-motion-interaction-duration: var(--core-motion-duration-long1);
+    --semantic-motion-interaction-easing: var(--core-motion-easing-soft-enter);
+    --semantic-typography-body-font-weight: var(--core-typography-weight-regular);
+    --semantic-typography-heading-font-weight: var(--core-typography-weight-medium);
+  }
+
+  .light[data-brand="forest"], .light [data-brand="forest"] {
+    --semantic-color-foreground-accent: var(--core-color-palette-green-500);
+    --semantic-color-foreground-link: var(--core-color-palette-green-600);
+    --semantic-color-foreground-link-hover: var(--core-color-palette-green-700);
+    --semantic-color-foreground-link-visited: var(--core-color-palette-green-500);
+    --semantic-color-foreground-highlight: var(--core-color-palette-green-700);
+    --semantic-color-background-accent: var(--core-color-palette-green-500);
+    --semantic-color-background-highlight: var(--core-color-palette-green-100);
+    --semantic-color-background-brand: var(--core-color-palette-green-500);
+    --semantic-color-border-accent: var(--core-color-palette-green-500);
+    --semantic-color-border-default: var(--core-color-palette-neutral-300);
+    --semantic-color-border-hover: var(--core-color-palette-green-300);
+    --semantic-color-border-focus: var(--core-color-palette-green-500);
+    --semantic-color-border-light: var(--core-color-palette-green-100);
+    --semantic-color-border-primary: var(--core-color-palette-green-300);
+    --semantic-color-navigation-foreground-active: var(--core-color-palette-green-600);
+    --semantic-color-action-background-primary-default: var(--core-color-palette-green-500);
+    --semantic-color-action-background-primary-hover: var(--core-color-palette-green-600);
+    --semantic-color-action-background-primary-active: var(--core-color-palette-green-700);
+    --semantic-color-action-border-primary-default: var(--core-color-palette-green-500);
+    --semantic-color-action-border-primary-focus: var(--core-color-palette-green-400);
+    --semantic-color-status-highlight: var(--core-color-palette-green-400);
+    --semantic-shape-control-radius-default: var(--core-shape-radius-04);
+    --semantic-shape-card-radius: var(--core-shape-radius-04);
+    --semantic-shape-card-border-light: var(--core-color-palette-green-100);
+    --semantic-shape-card-border-medium: var(--core-color-palette-green-200);
+    --semantic-shape-card-border-dark: var(--core-color-palette-green-400);
+    --semantic-shape-card-border-transparent: var(--core-color-mode-transparent);
+    --semantic-shape-card-elevation-near: var(--core-elevation-level-1);
+    --semantic-shape-card-elevation-default: var(--core-elevation-level-2);
+    --semantic-shape-card-elevation-far: var(--core-elevation-level-3);
+    --semantic-shape-card-elevation-none: var(--core-elevation-level-0);
+    --semantic-shape-element-radius: var(--core-shape-radius-03);
+    --semantic-shape-button-radius: var(--core-shape-radius-full);
+    --semantic-shape-badge-radius: var(--core-shape-radius-full);
+    --semantic-shape-input-radius-default: var(--core-shape-radius-04);
+    --semantic-shape-input-border-default-width: var(--core-shape-border-width-hairline);
+    --semantic-shape-input-border-default-style: var(--core-shape-border-style-solid);
+    --semantic-shape-input-border-focus-width: var(--core-shape-border-width-thick);
+    --semantic-shape-field-radius-default: var(--core-shape-radius-04);
+    --semantic-shape-field-border-default-width: var(--core-shape-border-width-hairline);
+    --semantic-shape-field-border-focus-width: var(--core-shape-border-width-thick);
+    --semantic-spacing-component-padding: var(--core-spacing-size-07);
+    --semantic-spacing-component-gap: var(--core-spacing-size-06);
+    --semantic-spacing-card-padding: var(--core-spacing-size-08);
     --semantic-motion-interaction-duration: var(--core-motion-duration-long1);
     --semantic-motion-interaction-easing: var(--core-motion-easing-soft-enter);
     --semantic-typography-body-font-weight: var(--core-typography-weight-regular);
@@ -1812,7 +2014,7 @@
       --semantic-color-action-border-primary-focus: var(--core-color-palette-green-400);
       --semantic-color-status-highlight: var(--core-color-palette-green-500);
       --semantic-shape-control-radius-default: var(--core-shape-radius-04);
-      --semantic-shape-card-radius: var(--core-shape-radius-05);
+      --semantic-shape-card-radius: var(--core-shape-radius-04);
       --semantic-shape-card-border-light: var(--core-color-palette-green-800);
       --semantic-shape-card-border-medium: var(--core-color-palette-green-700);
       --semantic-shape-card-border-dark: var(--core-color-palette-green-500);
@@ -1821,7 +2023,7 @@
       --semantic-shape-card-elevation-default: var(--core-elevation-level-2);
       --semantic-shape-card-elevation-far: var(--core-elevation-level-3);
       --semantic-shape-card-elevation-none: var(--core-elevation-level-0);
-      --semantic-shape-element-radius: var(--core-shape-radius-04);
+      --semantic-shape-element-radius: var(--core-shape-radius-03);
       --semantic-shape-button-radius: var(--core-shape-radius-full);
       --semantic-shape-badge-radius: var(--core-shape-radius-full);
       --semantic-shape-input-radius-default: var(--core-shape-radius-04);
@@ -1831,9 +2033,9 @@
       --semantic-shape-field-radius-default: var(--core-shape-radius-04);
       --semantic-shape-field-border-default-width: var(--core-shape-border-width-hairline);
       --semantic-shape-field-border-focus-width: var(--core-shape-border-width-thick);
-      --semantic-spacing-component-padding: var(--core-spacing-size-08);
-      --semantic-spacing-component-gap: var(--core-spacing-size-07);
-      --semantic-spacing-card-padding: var(--core-spacing-size-09);
+      --semantic-spacing-component-padding: var(--core-spacing-size-07);
+      --semantic-spacing-component-gap: var(--core-spacing-size-06);
+      --semantic-spacing-card-padding: var(--core-spacing-size-08);
       --semantic-motion-interaction-duration: var(--core-motion-duration-long1);
       --semantic-motion-interaction-easing: var(--core-motion-easing-soft-enter);
       --semantic-typography-body-font-weight: var(--core-typography-weight-regular);
@@ -1864,7 +2066,7 @@
     --semantic-color-action-border-primary-focus: var(--core-color-palette-green-400);
     --semantic-color-status-highlight: var(--core-color-palette-green-500);
     --semantic-shape-control-radius-default: var(--core-shape-radius-04);
-    --semantic-shape-card-radius: var(--core-shape-radius-05);
+    --semantic-shape-card-radius: var(--core-shape-radius-04);
     --semantic-shape-card-border-light: var(--core-color-palette-green-800);
     --semantic-shape-card-border-medium: var(--core-color-palette-green-700);
     --semantic-shape-card-border-dark: var(--core-color-palette-green-500);
@@ -1873,7 +2075,7 @@
     --semantic-shape-card-elevation-default: var(--core-elevation-level-2);
     --semantic-shape-card-elevation-far: var(--core-elevation-level-3);
     --semantic-shape-card-elevation-none: var(--core-elevation-level-0);
-    --semantic-shape-element-radius: var(--core-shape-radius-04);
+    --semantic-shape-element-radius: var(--core-shape-radius-03);
     --semantic-shape-button-radius: var(--core-shape-radius-full);
     --semantic-shape-badge-radius: var(--core-shape-radius-full);
     --semantic-shape-input-radius-default: var(--core-shape-radius-04);
@@ -1883,9 +2085,9 @@
     --semantic-shape-field-radius-default: var(--core-shape-radius-04);
     --semantic-shape-field-border-default-width: var(--core-shape-border-width-hairline);
     --semantic-shape-field-border-focus-width: var(--core-shape-border-width-thick);
-    --semantic-spacing-component-padding: var(--core-spacing-size-08);
-    --semantic-spacing-component-gap: var(--core-spacing-size-07);
-    --semantic-spacing-card-padding: var(--core-spacing-size-09);
+    --semantic-spacing-component-padding: var(--core-spacing-size-07);
+    --semantic-spacing-component-gap: var(--core-spacing-size-06);
+    --semantic-spacing-card-padding: var(--core-spacing-size-08);
     --semantic-motion-interaction-duration: var(--core-motion-duration-long1);
     --semantic-motion-interaction-easing: var(--core-motion-easing-soft-enter);
     --semantic-typography-body-font-weight: var(--core-typography-weight-regular);
@@ -1925,7 +2127,7 @@
     --semantic-shape-card-elevation-far: var(--core-elevation-level-3);
     --semantic-shape-card-elevation-none: var(--core-elevation-level-0);
     --semantic-shape-element-radius: var(--core-shape-radius-none);
-    --semantic-shape-button-radius: var(--core-shape-radius-none);
+    --semantic-shape-button-radius: var(--core-shape-radius-01);
     --semantic-shape-badge-radius: var(--core-shape-radius-01);
     --semantic-shape-input-radius-default: var(--core-shape-radius-none);
     --semantic-shape-input-border-default-width: var(--core-shape-border-width-thick);
@@ -1939,7 +2141,58 @@
     --semantic-spacing-card-padding: var(--core-spacing-size-04);
     --semantic-motion-interaction-duration: var(--core-motion-duration-short1);
     --semantic-motion-interaction-easing: var(--core-motion-easing-emphasized-in);
-    --semantic-typography-body-font-weight: var(--core-typography-weight-semibold);
+    --semantic-typography-body-font-weight: var(--core-typography-weight-bold);
+    --semantic-typography-heading-font-weight: var(--core-typography-weight-bold);
+  }
+
+  .light[data-brand="midnight"], .light [data-brand="midnight"] {
+    --semantic-color-foreground-accent: var(--core-color-palette-violet-500);
+    --semantic-color-foreground-link: var(--core-color-palette-violet-500);
+    --semantic-color-foreground-link-hover: var(--core-color-palette-violet-600);
+    --semantic-color-foreground-link-visited: var(--core-color-palette-violet-400);
+    --semantic-color-foreground-highlight: var(--core-color-palette-violet-700);
+    --semantic-color-background-accent: var(--core-color-palette-violet-500);
+    --semantic-color-background-highlight: var(--core-color-palette-violet-100);
+    --semantic-color-background-brand: var(--core-color-palette-violet-500);
+    --semantic-color-border-accent: var(--core-color-palette-violet-500);
+    --semantic-color-border-default: var(--core-color-palette-neutral-300);
+    --semantic-color-border-hover: var(--core-color-palette-violet-400);
+    --semantic-color-border-focus: var(--core-color-palette-violet-500);
+    --semantic-color-border-light: var(--core-color-palette-violet-200);
+    --semantic-color-border-primary: var(--core-color-palette-violet-400);
+    --semantic-color-navigation-foreground-active: var(--core-color-palette-violet-500);
+    --semantic-color-action-background-primary-default: var(--core-color-palette-violet-500);
+    --semantic-color-action-background-primary-hover: var(--core-color-palette-violet-600);
+    --semantic-color-action-background-primary-active: var(--core-color-palette-violet-700);
+    --semantic-color-action-border-primary-default: var(--core-color-palette-violet-500);
+    --semantic-color-action-border-primary-focus: var(--core-color-palette-violet-400);
+    --semantic-color-status-highlight: var(--core-color-palette-violet-400);
+    --semantic-shape-control-radius-default: var(--core-shape-radius-none);
+    --semantic-shape-card-radius: var(--core-shape-radius-none);
+    --semantic-shape-card-border-light: var(--core-color-palette-violet-200);
+    --semantic-shape-card-border-medium: var(--core-color-palette-violet-300);
+    --semantic-shape-card-border-dark: var(--core-color-palette-violet-500);
+    --semantic-shape-card-border-transparent: var(--core-color-mode-transparent);
+    --semantic-shape-card-elevation-near: var(--core-elevation-level-1);
+    --semantic-shape-card-elevation-default: var(--core-elevation-level-2);
+    --semantic-shape-card-elevation-far: var(--core-elevation-level-3);
+    --semantic-shape-card-elevation-none: var(--core-elevation-level-0);
+    --semantic-shape-element-radius: var(--core-shape-radius-none);
+    --semantic-shape-button-radius: var(--core-shape-radius-01);
+    --semantic-shape-badge-radius: var(--core-shape-radius-01);
+    --semantic-shape-input-radius-default: var(--core-shape-radius-none);
+    --semantic-shape-input-border-default-width: var(--core-shape-border-width-thick);
+    --semantic-shape-input-border-default-style: var(--core-shape-border-style-solid);
+    --semantic-shape-input-border-focus-width: var(--core-shape-border-width-thick);
+    --semantic-shape-field-radius-default: var(--core-shape-radius-none);
+    --semantic-shape-field-border-default-width: var(--core-shape-border-width-thick);
+    --semantic-shape-field-border-focus-width: var(--core-shape-border-width-thick);
+    --semantic-spacing-component-padding: var(--core-spacing-size-03);
+    --semantic-spacing-component-gap: var(--core-spacing-size-02);
+    --semantic-spacing-card-padding: var(--core-spacing-size-04);
+    --semantic-motion-interaction-duration: var(--core-motion-duration-short1);
+    --semantic-motion-interaction-easing: var(--core-motion-easing-emphasized-in);
+    --semantic-typography-body-font-weight: var(--core-typography-weight-bold);
     --semantic-typography-heading-font-weight: var(--core-typography-weight-bold);
   }
 
@@ -1977,7 +2230,7 @@
       --semantic-shape-card-elevation-far: var(--core-elevation-level-3);
       --semantic-shape-card-elevation-none: var(--core-elevation-level-0);
       --semantic-shape-element-radius: var(--core-shape-radius-none);
-      --semantic-shape-button-radius: var(--core-shape-radius-none);
+      --semantic-shape-button-radius: var(--core-shape-radius-01);
       --semantic-shape-badge-radius: var(--core-shape-radius-01);
       --semantic-shape-input-radius-default: var(--core-shape-radius-none);
       --semantic-shape-input-border-default-width: var(--core-shape-border-width-thick);
@@ -1991,7 +2244,7 @@
       --semantic-spacing-card-padding: var(--core-spacing-size-04);
       --semantic-motion-interaction-duration: var(--core-motion-duration-short1);
       --semantic-motion-interaction-easing: var(--core-motion-easing-emphasized-in);
-      --semantic-typography-body-font-weight: var(--core-typography-weight-semibold);
+      --semantic-typography-body-font-weight: var(--core-typography-weight-bold);
       --semantic-typography-heading-font-weight: var(--core-typography-weight-bold);
     }
   }
@@ -2029,7 +2282,7 @@
     --semantic-shape-card-elevation-far: var(--core-elevation-level-3);
     --semantic-shape-card-elevation-none: var(--core-elevation-level-0);
     --semantic-shape-element-radius: var(--core-shape-radius-none);
-    --semantic-shape-button-radius: var(--core-shape-radius-none);
+    --semantic-shape-button-radius: var(--core-shape-radius-01);
     --semantic-shape-badge-radius: var(--core-shape-radius-01);
     --semantic-shape-input-radius-default: var(--core-shape-radius-none);
     --semantic-shape-input-border-default-width: var(--core-shape-border-width-thick);
@@ -2043,11 +2296,62 @@
     --semantic-spacing-card-padding: var(--core-spacing-size-04);
     --semantic-motion-interaction-duration: var(--core-motion-duration-short1);
     --semantic-motion-interaction-easing: var(--core-motion-easing-emphasized-in);
-    --semantic-typography-body-font-weight: var(--core-typography-weight-semibold);
+    --semantic-typography-body-font-weight: var(--core-typography-weight-bold);
     --semantic-typography-heading-font-weight: var(--core-typography-weight-bold);
   }
 
   [data-brand="monochrome"] {
+    --semantic-color-foreground-accent: var(--core-color-palette-neutral-700);
+    --semantic-color-foreground-link: var(--core-color-palette-neutral-600);
+    --semantic-color-foreground-link-hover: var(--core-color-palette-neutral-900);
+    --semantic-color-foreground-link-visited: var(--core-color-palette-neutral-500);
+    --semantic-color-foreground-highlight: var(--core-color-palette-neutral-800);
+    --semantic-color-foreground-on-color: var(--core-color-mode-dark);
+    --semantic-color-background-accent: var(--core-color-palette-neutral-800);
+    --semantic-color-background-highlight: var(--core-color-palette-neutral-200);
+    --semantic-color-border-accent: var(--core-color-palette-neutral-500);
+    --semantic-color-border-default: var(--core-color-palette-neutral-400);
+    --semantic-color-border-hover: var(--core-color-palette-neutral-500);
+    --semantic-color-border-focus: var(--core-color-palette-neutral-700);
+    --semantic-color-border-light: var(--core-color-palette-neutral-300);
+    --semantic-color-border-primary: var(--core-color-palette-neutral-500);
+    --semantic-color-navigation-foreground-active: var(--core-color-palette-neutral-900);
+    --semantic-color-action-background-primary-default: var(--core-color-palette-neutral-800);
+    --semantic-color-action-background-primary-hover: var(--core-color-palette-neutral-900);
+    --semantic-color-action-background-primary-active: var(--core-color-palette-neutral-900);
+    --semantic-color-action-border-primary-default: var(--core-color-palette-neutral-700);
+    --semantic-color-action-border-primary-focus: var(--core-color-palette-neutral-600);
+    --semantic-color-status-highlight: var(--core-color-palette-neutral-600);
+    --semantic-shape-control-radius-default: var(--core-shape-radius-none);
+    --semantic-shape-card-radius: var(--core-shape-radius-none);
+    --semantic-shape-card-border-light: var(--core-color-palette-neutral-200);
+    --semantic-shape-card-border-medium: var(--core-color-palette-neutral-300);
+    --semantic-shape-card-border-dark: var(--core-color-palette-neutral-500);
+    --semantic-shape-card-border-transparent: var(--core-color-mode-transparent);
+    --semantic-shape-card-elevation-near: var(--core-elevation-level-0);
+    --semantic-shape-card-elevation-default: var(--core-elevation-level-0);
+    --semantic-shape-card-elevation-far: var(--core-elevation-level-1);
+    --semantic-shape-card-elevation-none: var(--core-elevation-level-0);
+    --semantic-shape-element-radius: var(--core-shape-radius-none);
+    --semantic-shape-button-radius: var(--core-shape-radius-none);
+    --semantic-shape-badge-radius: var(--core-shape-radius-none);
+    --semantic-shape-input-radius-default: var(--core-shape-radius-none);
+    --semantic-shape-input-border-default-width: var(--core-shape-border-width-hairline);
+    --semantic-shape-input-border-default-style: var(--core-shape-border-style-solid);
+    --semantic-shape-input-border-focus-width: var(--core-shape-border-width-hairline);
+    --semantic-shape-field-radius-default: var(--core-shape-radius-none);
+    --semantic-shape-field-border-default-width: var(--core-shape-border-width-hairline);
+    --semantic-shape-field-border-focus-width: var(--core-shape-border-width-hairline);
+    --semantic-spacing-component-padding: var(--core-spacing-size-03);
+    --semantic-spacing-component-gap: var(--core-spacing-size-02);
+    --semantic-spacing-card-padding: var(--core-spacing-size-04);
+    --semantic-motion-interaction-duration: var(--core-motion-duration-short1);
+    --semantic-motion-interaction-easing: var(--core-motion-easing-linear);
+    --semantic-typography-body-font-weight: var(--core-typography-weight-regular);
+    --semantic-typography-heading-font-weight: var(--core-typography-weight-medium);
+  }
+
+  .light[data-brand="monochrome"], .light [data-brand="monochrome"] {
     --semantic-color-foreground-accent: var(--core-color-palette-neutral-700);
     --semantic-color-foreground-link: var(--core-color-palette-neutral-600);
     --semantic-color-foreground-link-hover: var(--core-color-palette-neutral-900);
@@ -2224,7 +2528,7 @@
     --semantic-color-action-border-primary-focus: var(--core-color-palette-teal-400);
     --semantic-color-status-highlight: var(--core-color-palette-teal-400);
     --semantic-shape-control-radius-default: var(--core-shape-radius-05);
-    --semantic-shape-card-radius: var(--core-shape-radius-05);
+    --semantic-shape-card-radius: var(--core-shape-radius-04);
     --semantic-shape-card-border-light: var(--core-color-palette-teal-100);
     --semantic-shape-card-border-medium: var(--core-color-palette-teal-200);
     --semantic-shape-card-border-dark: var(--core-color-palette-teal-400);
@@ -2233,7 +2537,7 @@
     --semantic-shape-card-elevation-default: var(--core-elevation-level-2);
     --semantic-shape-card-elevation-far: var(--core-elevation-level-3);
     --semantic-shape-card-elevation-none: var(--core-elevation-level-0);
-    --semantic-shape-element-radius: var(--core-shape-radius-05);
+    --semantic-shape-element-radius: var(--core-shape-radius-04);
     --semantic-shape-button-radius: var(--core-shape-radius-full);
     --semantic-shape-badge-radius: var(--core-shape-radius-full);
     --semantic-shape-input-radius-default: var(--core-shape-radius-05);
@@ -2243,10 +2547,60 @@
     --semantic-shape-field-radius-default: var(--core-shape-radius-05);
     --semantic-shape-field-border-default-width: var(--core-shape-border-width-hairline);
     --semantic-shape-field-border-focus-width: var(--core-shape-border-width-hairline);
-    --semantic-spacing-component-padding: var(--core-spacing-size-09);
-    --semantic-spacing-component-gap: var(--core-spacing-size-08);
-    --semantic-spacing-card-padding: var(--core-spacing-size-10);
-    --semantic-motion-interaction-duration: var(--core-motion-duration-long2);
+    --semantic-spacing-component-padding: var(--core-spacing-size-07);
+    --semantic-spacing-component-gap: var(--core-spacing-size-06);
+    --semantic-spacing-card-padding: var(--core-spacing-size-08);
+    --semantic-motion-interaction-duration: var(--core-motion-duration-medium2);
+    --semantic-motion-interaction-easing: var(--core-motion-easing-continuous);
+    --semantic-typography-body-font-weight: var(--core-typography-weight-regular);
+    --semantic-typography-heading-font-weight: var(--core-typography-weight-medium);
+  }
+
+  .light[data-brand="ocean"], .light [data-brand="ocean"] {
+    --semantic-color-foreground-accent: var(--core-color-palette-teal-500);
+    --semantic-color-foreground-link: var(--core-color-palette-teal-500);
+    --semantic-color-foreground-link-hover: var(--core-color-palette-teal-600);
+    --semantic-color-foreground-link-visited: var(--core-color-palette-teal-400);
+    --semantic-color-foreground-highlight: var(--core-color-palette-teal-700);
+    --semantic-color-background-accent: var(--core-color-palette-teal-500);
+    --semantic-color-background-highlight: var(--core-color-palette-teal-200);
+    --semantic-color-border-accent: var(--core-color-palette-teal-500);
+    --semantic-color-border-default: var(--core-color-palette-neutral-300);
+    --semantic-color-border-hover: var(--core-color-palette-teal-300);
+    --semantic-color-border-focus: var(--core-color-palette-teal-500);
+    --semantic-color-border-light: var(--core-color-palette-teal-100);
+    --semantic-color-border-primary: var(--core-color-palette-teal-300);
+    --semantic-color-navigation-foreground-active: var(--core-color-palette-teal-500);
+    --semantic-color-action-background-primary-default: var(--core-color-palette-teal-500);
+    --semantic-color-action-background-primary-hover: var(--core-color-palette-teal-600);
+    --semantic-color-action-background-primary-active: var(--core-color-palette-teal-700);
+    --semantic-color-action-border-primary-default: var(--core-color-palette-teal-500);
+    --semantic-color-action-border-primary-focus: var(--core-color-palette-teal-400);
+    --semantic-color-status-highlight: var(--core-color-palette-teal-400);
+    --semantic-shape-control-radius-default: var(--core-shape-radius-05);
+    --semantic-shape-card-radius: var(--core-shape-radius-04);
+    --semantic-shape-card-border-light: var(--core-color-palette-teal-100);
+    --semantic-shape-card-border-medium: var(--core-color-palette-teal-200);
+    --semantic-shape-card-border-dark: var(--core-color-palette-teal-400);
+    --semantic-shape-card-border-transparent: var(--core-color-mode-transparent);
+    --semantic-shape-card-elevation-near: var(--core-elevation-level-1);
+    --semantic-shape-card-elevation-default: var(--core-elevation-level-2);
+    --semantic-shape-card-elevation-far: var(--core-elevation-level-3);
+    --semantic-shape-card-elevation-none: var(--core-elevation-level-0);
+    --semantic-shape-element-radius: var(--core-shape-radius-04);
+    --semantic-shape-button-radius: var(--core-shape-radius-full);
+    --semantic-shape-badge-radius: var(--core-shape-radius-full);
+    --semantic-shape-input-radius-default: var(--core-shape-radius-05);
+    --semantic-shape-input-border-default-width: var(--core-shape-border-width-hairline);
+    --semantic-shape-input-border-default-style: var(--core-shape-border-style-solid);
+    --semantic-shape-input-border-focus-width: var(--core-shape-border-width-hairline);
+    --semantic-shape-field-radius-default: var(--core-shape-radius-05);
+    --semantic-shape-field-border-default-width: var(--core-shape-border-width-hairline);
+    --semantic-shape-field-border-focus-width: var(--core-shape-border-width-hairline);
+    --semantic-spacing-component-padding: var(--core-spacing-size-07);
+    --semantic-spacing-component-gap: var(--core-spacing-size-06);
+    --semantic-spacing-card-padding: var(--core-spacing-size-08);
+    --semantic-motion-interaction-duration: var(--core-motion-duration-medium2);
     --semantic-motion-interaction-easing: var(--core-motion-easing-continuous);
     --semantic-typography-body-font-weight: var(--core-typography-weight-regular);
     --semantic-typography-heading-font-weight: var(--core-typography-weight-medium);
@@ -2275,7 +2629,7 @@
       --semantic-color-action-border-primary-focus: var(--core-color-palette-teal-400);
       --semantic-color-status-highlight: var(--core-color-palette-teal-500);
       --semantic-shape-control-radius-default: var(--core-shape-radius-05);
-      --semantic-shape-card-radius: var(--core-shape-radius-05);
+      --semantic-shape-card-radius: var(--core-shape-radius-04);
       --semantic-shape-card-border-light: var(--core-color-palette-teal-800);
       --semantic-shape-card-border-medium: var(--core-color-palette-teal-700);
       --semantic-shape-card-border-dark: var(--core-color-palette-teal-500);
@@ -2284,7 +2638,7 @@
       --semantic-shape-card-elevation-default: var(--core-elevation-level-2);
       --semantic-shape-card-elevation-far: var(--core-elevation-level-3);
       --semantic-shape-card-elevation-none: var(--core-elevation-level-0);
-      --semantic-shape-element-radius: var(--core-shape-radius-05);
+      --semantic-shape-element-radius: var(--core-shape-radius-04);
       --semantic-shape-button-radius: var(--core-shape-radius-full);
       --semantic-shape-badge-radius: var(--core-shape-radius-full);
       --semantic-shape-input-radius-default: var(--core-shape-radius-05);
@@ -2294,10 +2648,10 @@
       --semantic-shape-field-radius-default: var(--core-shape-radius-05);
       --semantic-shape-field-border-default-width: var(--core-shape-border-width-hairline);
       --semantic-shape-field-border-focus-width: var(--core-shape-border-width-hairline);
-      --semantic-spacing-component-padding: var(--core-spacing-size-09);
-      --semantic-spacing-component-gap: var(--core-spacing-size-08);
-      --semantic-spacing-card-padding: var(--core-spacing-size-10);
-      --semantic-motion-interaction-duration: var(--core-motion-duration-long2);
+      --semantic-spacing-component-padding: var(--core-spacing-size-07);
+      --semantic-spacing-component-gap: var(--core-spacing-size-06);
+      --semantic-spacing-card-padding: var(--core-spacing-size-08);
+      --semantic-motion-interaction-duration: var(--core-motion-duration-medium2);
       --semantic-motion-interaction-easing: var(--core-motion-easing-continuous);
       --semantic-typography-body-font-weight: var(--core-typography-weight-regular);
       --semantic-typography-heading-font-weight: var(--core-typography-weight-medium);
@@ -2326,7 +2680,7 @@
     --semantic-color-action-border-primary-focus: var(--core-color-palette-teal-400);
     --semantic-color-status-highlight: var(--core-color-palette-teal-500);
     --semantic-shape-control-radius-default: var(--core-shape-radius-05);
-    --semantic-shape-card-radius: var(--core-shape-radius-05);
+    --semantic-shape-card-radius: var(--core-shape-radius-04);
     --semantic-shape-card-border-light: var(--core-color-palette-teal-800);
     --semantic-shape-card-border-medium: var(--core-color-palette-teal-700);
     --semantic-shape-card-border-dark: var(--core-color-palette-teal-500);
@@ -2335,7 +2689,7 @@
     --semantic-shape-card-elevation-default: var(--core-elevation-level-2);
     --semantic-shape-card-elevation-far: var(--core-elevation-level-3);
     --semantic-shape-card-elevation-none: var(--core-elevation-level-0);
-    --semantic-shape-element-radius: var(--core-shape-radius-05);
+    --semantic-shape-element-radius: var(--core-shape-radius-04);
     --semantic-shape-button-radius: var(--core-shape-radius-full);
     --semantic-shape-badge-radius: var(--core-shape-radius-full);
     --semantic-shape-input-radius-default: var(--core-shape-radius-05);
@@ -2345,10 +2699,10 @@
     --semantic-shape-field-radius-default: var(--core-shape-radius-05);
     --semantic-shape-field-border-default-width: var(--core-shape-border-width-hairline);
     --semantic-shape-field-border-focus-width: var(--core-shape-border-width-hairline);
-    --semantic-spacing-component-padding: var(--core-spacing-size-09);
-    --semantic-spacing-component-gap: var(--core-spacing-size-08);
-    --semantic-spacing-card-padding: var(--core-spacing-size-10);
-    --semantic-motion-interaction-duration: var(--core-motion-duration-long2);
+    --semantic-spacing-component-padding: var(--core-spacing-size-07);
+    --semantic-spacing-component-gap: var(--core-spacing-size-06);
+    --semantic-spacing-card-padding: var(--core-spacing-size-08);
+    --semantic-motion-interaction-duration: var(--core-motion-duration-medium2);
     --semantic-motion-interaction-easing: var(--core-motion-easing-continuous);
     --semantic-typography-body-font-weight: var(--core-typography-weight-regular);
     --semantic-typography-heading-font-weight: var(--core-typography-weight-medium);
@@ -2385,8 +2739,8 @@
     --semantic-shape-card-elevation-default: var(--core-elevation-level-2);
     --semantic-shape-card-elevation-far: var(--core-elevation-level-3);
     --semantic-shape-card-elevation-none: var(--core-elevation-level-0);
-    --semantic-shape-element-radius: var(--core-shape-radius-full);
-    --semantic-shape-button-radius: var(--core-shape-radius-full);
+    --semantic-shape-element-radius: var(--core-shape-radius-04);
+    --semantic-shape-button-radius: var(--core-shape-radius-04);
     --semantic-shape-badge-radius: var(--core-shape-radius-full);
     --semantic-shape-input-radius-default: var(--core-shape-radius-full);
     --semantic-shape-input-border-default-width: var(--core-shape-border-width-hairline);
@@ -2395,9 +2749,59 @@
     --semantic-shape-field-radius-default: var(--core-shape-radius-full);
     --semantic-shape-field-border-default-width: var(--core-shape-border-width-hairline);
     --semantic-shape-field-border-focus-width: var(--core-shape-border-width-hairline);
-    --semantic-spacing-component-padding: var(--core-spacing-size-08);
-    --semantic-spacing-component-gap: var(--core-spacing-size-07);
-    --semantic-spacing-card-padding: var(--core-spacing-size-09);
+    --semantic-spacing-component-padding: var(--core-spacing-size-07);
+    --semantic-spacing-component-gap: var(--core-spacing-size-06);
+    --semantic-spacing-card-padding: var(--core-spacing-size-08);
+    --semantic-motion-interaction-duration: var(--core-motion-duration-long3);
+    --semantic-motion-interaction-easing: var(--core-motion-easing-soft-enter);
+    --semantic-typography-body-font-weight: var(--core-typography-weight-light);
+    --semantic-typography-heading-font-weight: var(--core-typography-weight-light);
+  }
+
+  .light[data-brand="rose"], .light [data-brand="rose"] {
+    --semantic-color-foreground-accent: var(--core-color-palette-red-400);
+    --semantic-color-foreground-link: var(--core-color-palette-red-400);
+    --semantic-color-foreground-link-hover: var(--core-color-palette-red-500);
+    --semantic-color-foreground-link-visited: var(--core-color-palette-red-300);
+    --semantic-color-foreground-highlight: var(--core-color-palette-red-600);
+    --semantic-color-background-accent: var(--core-color-palette-red-400);
+    --semantic-color-background-highlight: var(--core-color-palette-red-100);
+    --semantic-color-border-accent: var(--core-color-palette-red-400);
+    --semantic-color-border-default: var(--core-color-palette-red-200);
+    --semantic-color-border-hover: var(--core-color-palette-red-300);
+    --semantic-color-border-focus: var(--core-color-palette-red-400);
+    --semantic-color-border-light: var(--core-color-palette-red-100);
+    --semantic-color-border-primary: var(--core-color-palette-red-300);
+    --semantic-color-navigation-foreground-active: var(--core-color-palette-red-400);
+    --semantic-color-action-background-primary-default: var(--core-color-palette-red-400);
+    --semantic-color-action-background-primary-hover: var(--core-color-palette-red-500);
+    --semantic-color-action-background-primary-active: var(--core-color-palette-red-600);
+    --semantic-color-action-border-primary-default: var(--core-color-palette-red-400);
+    --semantic-color-action-border-primary-focus: var(--core-color-palette-red-300);
+    --semantic-color-status-highlight: var(--core-color-palette-red-300);
+    --semantic-shape-control-radius-default: var(--core-shape-radius-full);
+    --semantic-shape-card-radius: var(--core-shape-radius-05);
+    --semantic-shape-card-border-light: var(--core-color-palette-red-100);
+    --semantic-shape-card-border-medium: var(--core-color-palette-red-200);
+    --semantic-shape-card-border-dark: var(--core-color-palette-red-300);
+    --semantic-shape-card-border-transparent: var(--core-color-mode-transparent);
+    --semantic-shape-card-elevation-near: var(--core-elevation-level-1);
+    --semantic-shape-card-elevation-default: var(--core-elevation-level-2);
+    --semantic-shape-card-elevation-far: var(--core-elevation-level-3);
+    --semantic-shape-card-elevation-none: var(--core-elevation-level-0);
+    --semantic-shape-element-radius: var(--core-shape-radius-04);
+    --semantic-shape-button-radius: var(--core-shape-radius-04);
+    --semantic-shape-badge-radius: var(--core-shape-radius-full);
+    --semantic-shape-input-radius-default: var(--core-shape-radius-full);
+    --semantic-shape-input-border-default-width: var(--core-shape-border-width-hairline);
+    --semantic-shape-input-border-default-style: var(--core-shape-border-style-solid);
+    --semantic-shape-input-border-focus-width: var(--core-shape-border-width-hairline);
+    --semantic-shape-field-radius-default: var(--core-shape-radius-full);
+    --semantic-shape-field-border-default-width: var(--core-shape-border-width-hairline);
+    --semantic-shape-field-border-focus-width: var(--core-shape-border-width-hairline);
+    --semantic-spacing-component-padding: var(--core-spacing-size-07);
+    --semantic-spacing-component-gap: var(--core-spacing-size-06);
+    --semantic-spacing-card-padding: var(--core-spacing-size-08);
     --semantic-motion-interaction-duration: var(--core-motion-duration-long3);
     --semantic-motion-interaction-easing: var(--core-motion-easing-soft-enter);
     --semantic-typography-body-font-weight: var(--core-typography-weight-light);
@@ -2436,8 +2840,8 @@
       --semantic-shape-card-elevation-default: var(--core-elevation-level-2);
       --semantic-shape-card-elevation-far: var(--core-elevation-level-3);
       --semantic-shape-card-elevation-none: var(--core-elevation-level-0);
-      --semantic-shape-element-radius: var(--core-shape-radius-full);
-      --semantic-shape-button-radius: var(--core-shape-radius-full);
+      --semantic-shape-element-radius: var(--core-shape-radius-04);
+      --semantic-shape-button-radius: var(--core-shape-radius-04);
       --semantic-shape-badge-radius: var(--core-shape-radius-full);
       --semantic-shape-input-radius-default: var(--core-shape-radius-full);
       --semantic-shape-input-border-default-width: var(--core-shape-border-width-hairline);
@@ -2446,9 +2850,9 @@
       --semantic-shape-field-radius-default: var(--core-shape-radius-full);
       --semantic-shape-field-border-default-width: var(--core-shape-border-width-hairline);
       --semantic-shape-field-border-focus-width: var(--core-shape-border-width-hairline);
-      --semantic-spacing-component-padding: var(--core-spacing-size-08);
-      --semantic-spacing-component-gap: var(--core-spacing-size-07);
-      --semantic-spacing-card-padding: var(--core-spacing-size-09);
+      --semantic-spacing-component-padding: var(--core-spacing-size-07);
+      --semantic-spacing-component-gap: var(--core-spacing-size-06);
+      --semantic-spacing-card-padding: var(--core-spacing-size-08);
       --semantic-motion-interaction-duration: var(--core-motion-duration-long3);
       --semantic-motion-interaction-easing: var(--core-motion-easing-soft-enter);
       --semantic-typography-body-font-weight: var(--core-typography-weight-light);
@@ -2487,8 +2891,8 @@
     --semantic-shape-card-elevation-default: var(--core-elevation-level-2);
     --semantic-shape-card-elevation-far: var(--core-elevation-level-3);
     --semantic-shape-card-elevation-none: var(--core-elevation-level-0);
-    --semantic-shape-element-radius: var(--core-shape-radius-full);
-    --semantic-shape-button-radius: var(--core-shape-radius-full);
+    --semantic-shape-element-radius: var(--core-shape-radius-04);
+    --semantic-shape-button-radius: var(--core-shape-radius-04);
     --semantic-shape-badge-radius: var(--core-shape-radius-full);
     --semantic-shape-input-radius-default: var(--core-shape-radius-full);
     --semantic-shape-input-border-default-width: var(--core-shape-border-width-hairline);
@@ -2497,9 +2901,9 @@
     --semantic-shape-field-radius-default: var(--core-shape-radius-full);
     --semantic-shape-field-border-default-width: var(--core-shape-border-width-hairline);
     --semantic-shape-field-border-focus-width: var(--core-shape-border-width-hairline);
-    --semantic-spacing-component-padding: var(--core-spacing-size-08);
-    --semantic-spacing-component-gap: var(--core-spacing-size-07);
-    --semantic-spacing-card-padding: var(--core-spacing-size-09);
+    --semantic-spacing-component-padding: var(--core-spacing-size-07);
+    --semantic-spacing-component-gap: var(--core-spacing-size-06);
+    --semantic-spacing-card-padding: var(--core-spacing-size-08);
     --semantic-motion-interaction-duration: var(--core-motion-duration-long3);
     --semantic-motion-interaction-easing: var(--core-motion-easing-soft-enter);
     --semantic-typography-body-font-weight: var(--core-typography-weight-light);
@@ -2528,7 +2932,7 @@
     --semantic-color-action-border-primary-focus: var(--core-color-palette-blue-500);
     --semantic-color-status-highlight: var(--core-color-palette-blue-500);
     --semantic-shape-control-radius-default: var(--core-shape-radius-medium);
-    --semantic-shape-card-radius: var(--core-shape-radius-03);
+    --semantic-shape-card-radius: var(--core-shape-radius-02);
     --semantic-shape-card-border-light: var(--core-color-palette-blue-200);
     --semantic-shape-card-border-medium: var(--core-color-palette-blue-300);
     --semantic-shape-card-border-dark: var(--core-color-palette-blue-500);
@@ -2553,7 +2957,57 @@
     --semantic-motion-interaction-duration: var(--core-motion-duration-short3);
     --semantic-motion-interaction-easing: var(--core-motion-easing-quick-enter);
     --semantic-typography-body-font-weight: var(--core-typography-weight-regular);
-    --semantic-typography-heading-font-weight: var(--core-typography-weight-semibold);
+    --semantic-typography-heading-font-weight: var(--core-typography-weight-bold);
+  }
+
+  .light[data-brand="slate"], .light [data-brand="slate"] {
+    --semantic-color-foreground-accent: var(--core-color-palette-blue-600);
+    --semantic-color-foreground-link: var(--core-color-palette-blue-600);
+    --semantic-color-foreground-link-hover: var(--core-color-palette-blue-700);
+    --semantic-color-foreground-link-visited: var(--core-color-palette-blue-500);
+    --semantic-color-foreground-highlight: var(--core-color-palette-blue-800);
+    --semantic-color-background-accent: var(--core-color-palette-blue-600);
+    --semantic-color-background-highlight: var(--core-color-palette-blue-100);
+    --semantic-color-border-accent: var(--core-color-palette-blue-500);
+    --semantic-color-border-default: var(--core-color-palette-neutral-300);
+    --semantic-color-border-hover: var(--core-color-palette-blue-400);
+    --semantic-color-border-focus: var(--core-color-palette-blue-600);
+    --semantic-color-border-light: var(--core-color-palette-blue-200);
+    --semantic-color-border-primary: var(--core-color-palette-blue-400);
+    --semantic-color-navigation-foreground-active: var(--core-color-palette-blue-600);
+    --semantic-color-action-background-primary-default: var(--core-color-palette-blue-600);
+    --semantic-color-action-background-primary-hover: var(--core-color-palette-blue-700);
+    --semantic-color-action-background-primary-active: var(--core-color-palette-blue-800);
+    --semantic-color-action-border-primary-default: var(--core-color-palette-blue-600);
+    --semantic-color-action-border-primary-focus: var(--core-color-palette-blue-500);
+    --semantic-color-status-highlight: var(--core-color-palette-blue-500);
+    --semantic-shape-control-radius-default: var(--core-shape-radius-medium);
+    --semantic-shape-card-radius: var(--core-shape-radius-02);
+    --semantic-shape-card-border-light: var(--core-color-palette-blue-200);
+    --semantic-shape-card-border-medium: var(--core-color-palette-blue-300);
+    --semantic-shape-card-border-dark: var(--core-color-palette-blue-500);
+    --semantic-shape-card-border-transparent: var(--core-color-mode-transparent);
+    --semantic-shape-card-elevation-near: var(--core-elevation-level-0);
+    --semantic-shape-card-elevation-default: var(--core-elevation-level-1);
+    --semantic-shape-card-elevation-far: var(--core-elevation-level-2);
+    --semantic-shape-card-elevation-none: var(--core-elevation-level-0);
+    --semantic-shape-element-radius: var(--core-shape-radius-medium);
+    --semantic-shape-button-radius: var(--core-shape-radius-medium);
+    --semantic-shape-badge-radius: var(--core-shape-radius-medium);
+    --semantic-shape-input-radius-default: var(--core-shape-radius-medium);
+    --semantic-shape-input-border-default-width: var(--core-shape-border-width-hairline);
+    --semantic-shape-input-border-default-style: var(--core-shape-border-style-solid);
+    --semantic-shape-input-border-focus-width: var(--core-shape-border-width-thick);
+    --semantic-shape-field-radius-default: var(--core-shape-radius-medium);
+    --semantic-shape-field-border-default-width: var(--core-shape-border-width-hairline);
+    --semantic-shape-field-border-focus-width: var(--core-shape-border-width-thick);
+    --semantic-spacing-component-padding: var(--core-spacing-size-05);
+    --semantic-spacing-component-gap: var(--core-spacing-size-04);
+    --semantic-spacing-card-padding: var(--core-spacing-size-06);
+    --semantic-motion-interaction-duration: var(--core-motion-duration-short3);
+    --semantic-motion-interaction-easing: var(--core-motion-easing-quick-enter);
+    --semantic-typography-body-font-weight: var(--core-typography-weight-regular);
+    --semantic-typography-heading-font-weight: var(--core-typography-weight-bold);
   }
 
   @media (prefers-color-scheme: dark) {
@@ -2579,7 +3033,7 @@
       --semantic-color-action-border-primary-focus: var(--core-color-palette-blue-500);
       --semantic-color-status-highlight: var(--core-color-palette-blue-400);
       --semantic-shape-control-radius-default: var(--core-shape-radius-medium);
-      --semantic-shape-card-radius: var(--core-shape-radius-03);
+      --semantic-shape-card-radius: var(--core-shape-radius-02);
       --semantic-shape-card-border-light: var(--core-color-palette-blue-700);
       --semantic-shape-card-border-medium: var(--core-color-palette-blue-600);
       --semantic-shape-card-border-dark: var(--core-color-palette-blue-400);
@@ -2604,7 +3058,7 @@
       --semantic-motion-interaction-duration: var(--core-motion-duration-short3);
       --semantic-motion-interaction-easing: var(--core-motion-easing-quick-enter);
       --semantic-typography-body-font-weight: var(--core-typography-weight-regular);
-      --semantic-typography-heading-font-weight: var(--core-typography-weight-semibold);
+      --semantic-typography-heading-font-weight: var(--core-typography-weight-bold);
     }
   }
 
@@ -2630,7 +3084,7 @@
     --semantic-color-action-border-primary-focus: var(--core-color-palette-blue-500);
     --semantic-color-status-highlight: var(--core-color-palette-blue-400);
     --semantic-shape-control-radius-default: var(--core-shape-radius-medium);
-    --semantic-shape-card-radius: var(--core-shape-radius-03);
+    --semantic-shape-card-radius: var(--core-shape-radius-02);
     --semantic-shape-card-border-light: var(--core-color-palette-blue-700);
     --semantic-shape-card-border-medium: var(--core-color-palette-blue-600);
     --semantic-shape-card-border-dark: var(--core-color-palette-blue-400);
@@ -2655,7 +3109,7 @@
     --semantic-motion-interaction-duration: var(--core-motion-duration-short3);
     --semantic-motion-interaction-easing: var(--core-motion-easing-quick-enter);
     --semantic-typography-body-font-weight: var(--core-typography-weight-regular);
-    --semantic-typography-heading-font-weight: var(--core-typography-weight-semibold);
+    --semantic-typography-heading-font-weight: var(--core-typography-weight-bold);
   }
 
   [data-brand="sunset"] {
@@ -2682,7 +3136,59 @@
     --semantic-color-action-border-primary-focus: var(--core-color-palette-orange-300);
     --semantic-color-status-highlight: var(--core-color-palette-orange-300);
     --semantic-shape-control-radius-default: var(--core-shape-radius-full);
-    --semantic-shape-card-radius: var(--core-shape-radius-05);
+    --semantic-shape-card-radius: var(--core-shape-radius-04);
+    --semantic-shape-card-border-light: var(--core-color-palette-orange-100);
+    --semantic-shape-card-border-medium: var(--core-color-palette-orange-200);
+    --semantic-shape-card-border-dark: var(--core-color-palette-orange-400);
+    --semantic-shape-card-border-transparent: var(--core-color-mode-transparent);
+    --semantic-shape-card-elevation-near: var(--core-elevation-level-1);
+    --semantic-shape-card-elevation-default: var(--core-elevation-level-2);
+    --semantic-shape-card-elevation-far: var(--core-elevation-level-3);
+    --semantic-shape-card-elevation-none: var(--core-elevation-level-0);
+    --semantic-shape-element-radius: var(--core-shape-radius-full);
+    --semantic-shape-button-radius: var(--core-shape-radius-full);
+    --semantic-shape-badge-radius: var(--core-shape-radius-full);
+    --semantic-shape-input-radius-default: var(--core-shape-radius-full);
+    --semantic-shape-input-border-default-width: var(--core-shape-border-width-hairline);
+    --semantic-shape-input-border-default-style: var(--core-shape-border-style-solid);
+    --semantic-shape-input-border-focus-width: var(--core-shape-border-width-thick);
+    --semantic-shape-field-radius-default: var(--core-shape-radius-full);
+    --semantic-shape-field-border-default-width: var(--core-shape-border-width-hairline);
+    --semantic-shape-field-border-focus-width: var(--core-shape-border-width-thick);
+    --semantic-spacing-component-padding: var(--core-spacing-size-07);
+    --semantic-spacing-component-gap: var(--core-spacing-size-06);
+    --semantic-spacing-card-padding: var(--core-spacing-size-08);
+    --semantic-motion-interaction-duration: var(--core-motion-duration-medium3);
+    --semantic-motion-interaction-easing: var(--core-motion-easing-bounce);
+    --semantic-typography-body-font-weight: var(--core-typography-weight-light);
+    --semantic-typography-heading-font-weight: var(--core-typography-weight-light);
+  }
+
+  .light[data-brand="sunset"], .light [data-brand="sunset"] {
+    --semantic-color-foreground-accent: var(--core-color-palette-orange-400);
+    --semantic-color-foreground-link: var(--core-color-palette-orange-500);
+    --semantic-color-foreground-link-hover: var(--core-color-palette-orange-600);
+    --semantic-color-foreground-link-visited: var(--core-color-palette-orange-400);
+    --semantic-color-foreground-highlight: var(--core-color-palette-orange-700);
+    --semantic-color-background-accent: var(--core-color-palette-orange-400);
+    --semantic-color-background-highlight: var(--core-color-palette-orange-100);
+    --semantic-color-background-brand: var(--core-color-palette-orange-400);
+    --semantic-color-border-accent: var(--core-color-palette-orange-400);
+    --semantic-color-border-default: var(--core-color-palette-neutral-300);
+    --semantic-color-border-hover: var(--core-color-palette-orange-300);
+    --semantic-color-border-focus: var(--core-color-palette-orange-400);
+    --semantic-color-border-light: var(--core-color-palette-orange-100);
+    --semantic-color-border-primary: var(--core-color-palette-orange-300);
+    --semantic-color-navigation-foreground-active: var(--core-color-palette-orange-500);
+    --semantic-color-action-background-primary-default: var(--core-color-palette-orange-400);
+    --semantic-color-action-background-primary-hover: var(--core-color-palette-orange-500);
+    --semantic-color-action-background-primary-active: var(--core-color-palette-orange-600);
+    --semantic-color-action-foreground-primary-default: var(--core-color-mode-dark);
+    --semantic-color-action-border-primary-default: var(--core-color-palette-orange-400);
+    --semantic-color-action-border-primary-focus: var(--core-color-palette-orange-300);
+    --semantic-color-status-highlight: var(--core-color-palette-orange-300);
+    --semantic-shape-control-radius-default: var(--core-shape-radius-full);
+    --semantic-shape-card-radius: var(--core-shape-radius-04);
     --semantic-shape-card-border-light: var(--core-color-palette-orange-100);
     --semantic-shape-card-border-medium: var(--core-color-palette-orange-200);
     --semantic-shape-card-border-dark: var(--core-color-palette-orange-400);
@@ -2735,7 +3241,7 @@
       --semantic-color-action-border-primary-focus: var(--core-color-palette-orange-300);
       --semantic-color-status-highlight: var(--core-color-palette-orange-400);
       --semantic-shape-control-radius-default: var(--core-shape-radius-full);
-      --semantic-shape-card-radius: var(--core-shape-radius-05);
+      --semantic-shape-card-radius: var(--core-shape-radius-04);
       --semantic-shape-card-border-light: var(--core-color-palette-orange-800);
       --semantic-shape-card-border-medium: var(--core-color-palette-orange-700);
       --semantic-shape-card-border-dark: var(--core-color-palette-orange-500);
@@ -2788,7 +3294,7 @@
     --semantic-color-action-border-primary-focus: var(--core-color-palette-orange-300);
     --semantic-color-status-highlight: var(--core-color-palette-orange-400);
     --semantic-shape-control-radius-default: var(--core-shape-radius-full);
-    --semantic-shape-card-radius: var(--core-shape-radius-05);
+    --semantic-shape-card-radius: var(--core-shape-radius-04);
     --semantic-shape-card-border-light: var(--core-color-palette-orange-800);
     --semantic-shape-card-border-medium: var(--core-color-palette-orange-700);
     --semantic-shape-card-border-dark: var(--core-color-palette-orange-500);
@@ -2821,6 +3327,23 @@
 @layer density {
 
   [data-density="compact"] {
+    --semantic-spacing-padding-container: var(--semantic-spacing-density-compact-lg);
+    --semantic-spacing-padding-card: var(--semantic-spacing-density-compact-sm);
+    --semantic-spacing-padding-component: var(--semantic-spacing-density-compact-sm);
+    --semantic-spacing-padding-section: var(--semantic-spacing-density-compact-xl);
+    --semantic-spacing-padding-page: var(--semantic-spacing-density-compact-2xl);
+    --semantic-spacing-gap-grid: var(--semantic-spacing-density-compact-sm);
+    --semantic-spacing-gap-grid-large: var(--semantic-spacing-density-compact-xl);
+    --semantic-spacing-gap-grid-medium: var(--semantic-spacing-density-compact-md);
+    --semantic-spacing-gap-grid-small: var(--semantic-spacing-density-compact-xs);
+    --semantic-spacing-gap-component: var(--semantic-spacing-density-compact-xs);
+    --semantic-spacing-gap-section: var(--semantic-spacing-density-compact-xl);
+    --semantic-spacing-gap-stack: var(--semantic-spacing-density-compact-sm);
+    --semantic-spacing-margin-component: var(--semantic-spacing-density-compact-sm);
+    --semantic-spacing-margin-section: var(--semantic-spacing-density-compact-xl);
+  }
+
+  .light[data-density="compact"], .light [data-density="compact"] {
     --semantic-spacing-padding-container: var(--semantic-spacing-density-compact-lg);
     --semantic-spacing-padding-card: var(--semantic-spacing-density-compact-sm);
     --semantic-spacing-padding-component: var(--semantic-spacing-density-compact-sm);
@@ -2890,6 +3413,23 @@
     --semantic-spacing-margin-section: var(--semantic-spacing-density-default-lg);
   }
 
+  .light[data-density="default"], .light [data-density="default"] {
+    --semantic-spacing-padding-container: var(--semantic-spacing-density-default-md);
+    --semantic-spacing-padding-card: var(--semantic-spacing-density-default-sm);
+    --semantic-spacing-padding-component: var(--semantic-spacing-density-default-sm);
+    --semantic-spacing-padding-section: var(--semantic-spacing-density-default-lg);
+    --semantic-spacing-padding-page: var(--semantic-spacing-density-default-xl);
+    --semantic-spacing-gap-grid: var(--semantic-spacing-density-default-sm);
+    --semantic-spacing-gap-grid-large: var(--semantic-spacing-density-default-xl);
+    --semantic-spacing-gap-grid-medium: var(--semantic-spacing-density-default-md);
+    --semantic-spacing-gap-grid-small: var(--semantic-spacing-density-default-xs);
+    --semantic-spacing-gap-component: var(--semantic-spacing-density-default-xs);
+    --semantic-spacing-gap-section: var(--semantic-spacing-density-default-lg);
+    --semantic-spacing-gap-stack: var(--semantic-spacing-density-default-sm);
+    --semantic-spacing-margin-component: var(--semantic-spacing-density-default-sm);
+    --semantic-spacing-margin-section: var(--semantic-spacing-density-default-lg);
+  }
+
   @media (prefers-color-scheme: dark) {
     [data-density="default"] {
       --semantic-spacing-padding-container: var(--semantic-spacing-density-default-md);
@@ -2943,6 +3483,23 @@
     --semantic-spacing-margin-section: var(--semantic-spacing-density-spacious-lg);
   }
 
+  .light[data-density="spacious"], .light [data-density="spacious"] {
+    --semantic-spacing-padding-container: var(--semantic-spacing-density-spacious-md);
+    --semantic-spacing-padding-card: var(--semantic-spacing-density-spacious-sm);
+    --semantic-spacing-padding-component: var(--semantic-spacing-density-spacious-sm);
+    --semantic-spacing-padding-section: var(--semantic-spacing-density-spacious-lg);
+    --semantic-spacing-padding-page: var(--semantic-spacing-density-spacious-xl);
+    --semantic-spacing-gap-grid: var(--semantic-spacing-density-spacious-sm);
+    --semantic-spacing-gap-grid-large: var(--semantic-spacing-density-spacious-xl);
+    --semantic-spacing-gap-grid-medium: var(--semantic-spacing-density-spacious-md);
+    --semantic-spacing-gap-grid-small: var(--semantic-spacing-density-spacious-xs);
+    --semantic-spacing-gap-component: var(--semantic-spacing-density-spacious-xs);
+    --semantic-spacing-gap-section: var(--semantic-spacing-density-spacious-lg);
+    --semantic-spacing-gap-stack: var(--semantic-spacing-density-spacious-sm);
+    --semantic-spacing-margin-component: var(--semantic-spacing-density-spacious-sm);
+    --semantic-spacing-margin-section: var(--semantic-spacing-density-spacious-lg);
+  }
+
   @media (prefers-color-scheme: dark) {
     [data-density="spacious"] {
       --semantic-spacing-padding-container: var(--semantic-spacing-density-spacious-md);
@@ -2980,6 +3537,23 @@
   }
 
   [data-density="tight"] {
+    --semantic-spacing-padding-container: var(--semantic-spacing-density-tight-lg);
+    --semantic-spacing-padding-card: var(--semantic-spacing-density-tight-sm);
+    --semantic-spacing-padding-component: var(--semantic-spacing-density-tight-sm);
+    --semantic-spacing-padding-section: var(--semantic-spacing-density-tight-xl);
+    --semantic-spacing-padding-page: var(--semantic-spacing-density-tight-2xl);
+    --semantic-spacing-gap-grid: var(--semantic-spacing-density-tight-sm);
+    --semantic-spacing-gap-grid-large: var(--semantic-spacing-density-tight-xl);
+    --semantic-spacing-gap-grid-medium: var(--semantic-spacing-density-tight-lg);
+    --semantic-spacing-gap-grid-small: var(--semantic-spacing-density-tight-xs);
+    --semantic-spacing-gap-component: var(--semantic-spacing-density-tight-xs);
+    --semantic-spacing-gap-section: var(--semantic-spacing-density-tight-xl);
+    --semantic-spacing-gap-stack: var(--semantic-spacing-density-tight-sm);
+    --semantic-spacing-margin-component: var(--semantic-spacing-density-tight-sm);
+    --semantic-spacing-margin-section: var(--semantic-spacing-density-tight-xl);
+  }
+
+  .light[data-density="tight"], .light [data-density="tight"] {
     --semantic-spacing-padding-container: var(--semantic-spacing-density-tight-lg);
     --semantic-spacing-padding-card: var(--semantic-spacing-density-tight-sm);
     --semantic-spacing-padding-component: var(--semantic-spacing-density-tight-sm);
