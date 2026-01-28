@@ -148,7 +148,7 @@ export const TableOfContentsNodeView: React.FC<NodeViewProps> = ({
         )}
       </div>
 
-      <style jsx>{`
+      <style>{`
         .table-of-contents-node {
           margin: 24px 0;
           border: 2px solid transparent;

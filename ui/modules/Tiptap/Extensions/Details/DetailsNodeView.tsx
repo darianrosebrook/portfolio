@@ -60,7 +60,7 @@ export const DetailsNodeView: React.FC<NodeViewProps> = ({
         </Details>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .details-node-view {
           margin: 16px 0;
           border: 2px solid transparent;

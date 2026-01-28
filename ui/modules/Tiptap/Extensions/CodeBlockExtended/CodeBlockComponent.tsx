@@ -44,7 +44,7 @@ const codeBlock: React.FC<CodeBlockProps> = ({
     <pre>
       <NodeViewContent />
     </pre>
-    <style jsx>{`
+    <style>{`
       .code-block select {
         margin-bottom: 8px;
         padding: 4px 6px;
