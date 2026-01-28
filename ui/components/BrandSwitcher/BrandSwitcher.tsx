@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useId, useEffect, useCallback, useRef } from 'react';
+import React, { useEffect, useCallback, useRef } from 'react';
 import { useBrand, type BrandId, type BrandInfo } from '@/context/BrandContext';
 import styles from './BrandSwitcher.module.scss';
 
@@ -17,6 +17,16 @@ const brandMoods: Record<BrandId, string> = {
   rose: 'Soft • Approachable',
   slate: 'Neutral • Modern',
 };
+
+const densityOptions = ['tight', 'compact', 'default', 'spacious'] as const;
+
+const fontOptions = ['inter', 'newsreader', 'monaspace'] as const;
+
+function getFontFamily(font: string) {
+  if (font === 'monaspace') return 'monospace';
+  if (font === 'newsreader') return 'serif';
+  return 'sans-serif';
+}
 
 export interface BrandSwitcherProps {
   /** Show the auto-cycle controls */
@@ -74,7 +84,6 @@ export const BrandSwitcher: React.FC<BrandSwitcherProps> = ({
     setBodyFont,
   } = useBrand();
 
-  const labelId = useId();
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Keyboard navigation
@@ -89,7 +98,6 @@ export const BrandSwitcher: React.FC<BrandSwitcherProps> = ({
     if (!enableKeyboard) return;
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      // Only handle if focus is within the component or body (for global shortcuts)
       const isWithinComponent = containerRef.current?.contains(
         document.activeElement
       );
@@ -130,6 +138,7 @@ export const BrandSwitcher: React.FC<BrandSwitcherProps> = ({
 
   const currentBrand = availableBrands.find((b) => b.id === brand);
   const currentMood = brandMoods[brand];
+  const densityIndex = densityOptions.indexOf(density);
 
   const containerClasses = [
     styles.brandSwitcher,
@@ -181,26 +190,39 @@ export const BrandSwitcher: React.FC<BrandSwitcherProps> = ({
     >
       {/* Brand Theme Section */}
       <div className={styles.sectionCard}>
-        <div className={styles.sectionHeader}>
-          <h2 className={styles.sectionTitle}>Brand Theme</h2>
-          <div className={styles.currentBadge}>
-            <div
-              className={styles.currentBadgeDot}
-              style={{ background: currentBrand?.accentColor }}
-            />
-            {currentBrand?.name}
+        <h2 className={styles.sectionTitle}>Brand Theme</h2>
+
+        {/* Selected brand info */}
+        <div className={styles.selectedBrandInfo}>
+          <div
+            className={styles.selectedBrandDot}
+            style={{ background: currentBrand?.accentColor }}
+          />
+          <div>
+            <div className={styles.selectedBrandName}>
+              {currentBrand?.name}
+            </div>
+            <div className={styles.selectedBrandMood}>{currentMood}</div>
           </div>
         </div>
 
-        <div className={styles.themeGrid}>
+        {/* Swatch dot grid */}
+        <div className={styles.swatchGrid}>
           {availableBrands.map((brandInfo) => (
-            <BrandSwatchButton
+            <button
               key={brandInfo.id}
-              brandInfo={brandInfo}
-              mood={brandMoods[brandInfo.id]}
-              isActive={brand === brandInfo.id}
+              type="button"
+              className={`${styles.swatchBtn} ${brand === brandInfo.id ? styles.selected : ''}`}
               onClick={() => setBrand(brandInfo.id)}
-            />
+              aria-pressed={brand === brandInfo.id}
+              aria-label={`Switch to ${brandInfo.name} theme`}
+              title={brandInfo.name}
+            >
+              <span
+                className={styles.swatchDot}
+                style={{ background: brandInfo.accentColor }}
+              />
+            </button>
           ))}
         </div>
       </div>
@@ -242,24 +264,32 @@ export const BrandSwitcher: React.FC<BrandSwitcherProps> = ({
       {showDensity && (
         <div className={styles.sectionCard}>
           <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>Spacing Density</h2>
+            <h2 className={styles.sectionTitle}>Density</h2>
+            <span className={styles.densityLabel}>
+              {density.charAt(0).toUpperCase() + density.slice(1)}
+            </span>
           </div>
 
-          <div className={styles.optionRow}>
-            {(['tight', 'compact', 'default', 'spacious'] as const).map(
-              (densityOption) => (
-                <button
-                  key={densityOption}
-                  type="button"
-                  className={`${styles.optionBtn} ${density === densityOption ? styles.selected : ''}`}
-                  onClick={() => setDensity(densityOption)}
-                  aria-pressed={density === densityOption}
-                  aria-label={`Set density to ${densityOption}`}
-                >
-                  {densityOption.charAt(0).toUpperCase() + densityOption.slice(1)}
-                </button>
-              )
-            )}
+          <div className={styles.densitySlider}>
+            <input
+              type="range"
+              min={0}
+              max={3}
+              step={1}
+              value={densityIndex}
+              onChange={(e) =>
+                setDensity(densityOptions[Number(e.target.value)])
+              }
+              className={styles.rangeInput}
+              aria-label="Spacing density"
+            />
+            <div className={styles.densityTicks}>
+              {densityOptions.map((opt) => (
+                <span key={opt} className={styles.densityTick}>
+                  {opt.charAt(0).toUpperCase() + opt.slice(1)}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       )}
@@ -267,63 +297,43 @@ export const BrandSwitcher: React.FC<BrandSwitcherProps> = ({
       {/* Typography Section */}
       {showFonts && (
         <div className={styles.sectionCard}>
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>Typography</h2>
-          </div>
+          <h2 className={styles.sectionTitle}>Typography</h2>
 
           <div className={styles.subsection}>
-            <div className={styles.subsectionLabel}>Heading Font</div>
-            <div className={styles.optionRow}>
-              {(['inter', 'newsreader', 'monaspace'] as const).map(
-                (fontOption) => (
-                  <button
-                    key={fontOption}
-                    type="button"
-                    className={`${styles.optionBtn} ${headingFont === fontOption ? styles.selected : ''}`}
-                    onClick={() => setHeadingFont(fontOption)}
-                    aria-pressed={headingFont === fontOption}
-                    aria-label={`Set heading font to ${fontOption}`}
-                    style={{
-                      fontFamily:
-                        fontOption === 'monaspace'
-                          ? 'monospace'
-                          : fontOption === 'newsreader'
-                            ? 'serif'
-                            : 'sans-serif',
-                    }}
-                  >
-                    {fontOption.charAt(0).toUpperCase() + fontOption.slice(1)}
-                  </button>
-                )
-              )}
+            <div className={styles.subsectionLabel}>Heading</div>
+            <div className={styles.segmentedControl}>
+              {fontOptions.map((fontOption) => (
+                <button
+                  key={fontOption}
+                  type="button"
+                  className={`${styles.segment} ${headingFont === fontOption ? styles.segmentActive : ''}`}
+                  onClick={() => setHeadingFont(fontOption)}
+                  aria-pressed={headingFont === fontOption}
+                  aria-label={`Set heading font to ${fontOption}`}
+                  style={{ fontFamily: getFontFamily(fontOption) }}
+                >
+                  {fontOption.charAt(0).toUpperCase() + fontOption.slice(1)}
+                </button>
+              ))}
             </div>
           </div>
 
           <div className={styles.subsection}>
-            <div className={styles.subsectionLabel}>Body Font</div>
-            <div className={styles.optionRow}>
-              {(['inter', 'newsreader', 'monaspace'] as const).map(
-                (fontOption) => (
-                  <button
-                    key={fontOption}
-                    type="button"
-                    className={`${styles.optionBtn} ${bodyFont === fontOption ? styles.selected : ''}`}
-                    onClick={() => setBodyFont(fontOption)}
-                    aria-pressed={bodyFont === fontOption}
-                    aria-label={`Set body font to ${fontOption}`}
-                    style={{
-                      fontFamily:
-                        fontOption === 'monaspace'
-                          ? 'monospace'
-                          : fontOption === 'newsreader'
-                            ? 'serif'
-                            : 'sans-serif',
-                    }}
-                  >
-                    {fontOption.charAt(0).toUpperCase() + fontOption.slice(1)}
-                  </button>
-                )
-              )}
+            <div className={styles.subsectionLabel}>Body</div>
+            <div className={styles.segmentedControl}>
+              {fontOptions.map((fontOption) => (
+                <button
+                  key={fontOption}
+                  type="button"
+                  className={`${styles.segment} ${bodyFont === fontOption ? styles.segmentActive : ''}`}
+                  onClick={() => setBodyFont(fontOption)}
+                  aria-pressed={bodyFont === fontOption}
+                  aria-label={`Set body font to ${fontOption}`}
+                  style={{ fontFamily: getFontFamily(fontOption) }}
+                >
+                  {fontOption.charAt(0).toUpperCase() + fontOption.slice(1)}
+                </button>
+              ))}
             </div>
           </div>
         </div>
@@ -339,42 +349,6 @@ export const BrandSwitcher: React.FC<BrandSwitcherProps> = ({
         </div>
       )}
     </div>
-  );
-};
-
-interface BrandSwatchButtonProps {
-  brandInfo: BrandInfo;
-  mood: string;
-  isActive: boolean;
-  onClick: () => void;
-}
-
-const BrandSwatchButton: React.FC<BrandSwatchButtonProps> = ({
-  brandInfo,
-  mood,
-  isActive,
-  onClick,
-}) => {
-  return (
-    <button
-      type="button"
-      className={`${styles.themeCard} ${isActive ? styles.selected : ''}`}
-      style={
-        {
-          '--theme-color': brandInfo.accentColor,
-        } as React.CSSProperties
-      }
-      onClick={onClick}
-      aria-pressed={isActive}
-      aria-label={`Switch to ${brandInfo.name} theme`}
-    >
-      <div
-        className={styles.themeSwatch}
-        style={{ background: brandInfo.accentColor }}
-      />
-      <div className={styles.themeName}>{brandInfo.name}</div>
-      <div className={styles.themeMood}>{mood}</div>
-    </button>
   );
 };
 

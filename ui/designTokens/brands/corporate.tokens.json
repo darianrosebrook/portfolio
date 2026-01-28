@@ -187,16 +187,16 @@
       "radius": {
         "default": {
           "$type": "dimension",
-          "$value": "{shape.radius.01}",
-          "$description": "Sharp radius (2px) - ultra-crisp, professional"
+          "$value": "{shape.radius.02}",
+          "$description": "Small radius (4px) - crisp, professional"
         }
       }
     },
     "card": {
       "radius": {
         "$type": "dimension",
-        "$value": "{shape.radius.01}",
-        "$description": "Card border radius (2px) - minimal, efficient"
+        "$value": "{shape.radius.02}",
+        "$description": "Card border radius (4px) - minimal, efficient"
       },
       "border": {
         "light": {
@@ -262,30 +262,30 @@
     "element": {
       "radius": {
         "$type": "dimension",
-        "$value": "{shape.radius.none}",
-        "$description": "Internal element radius (0px) - sharp corners"
+        "$value": "{shape.radius.01}",
+        "$description": "Internal element radius (2px) - minimal rounding"
       }
     },
     "button": {
       "radius": {
         "$type": "dimension",
-        "$value": "{shape.radius.01}",
-        "$description": "Button radius (2px) - precise"
+        "$value": "{shape.radius.02}",
+        "$description": "Button radius (4px) - precise"
       }
     },
     "badge": {
       "radius": {
         "$type": "dimension",
-        "$value": "{shape.radius.01}",
-        "$description": "Badge/chip radius (2px) - angular"
+        "$value": "{shape.radius.02}",
+        "$description": "Badge/chip radius (4px) - compact"
       }
     },
     "input": {
       "radius": {
         "default": {
           "$type": "dimension",
-          "$value": "{shape.radius.01}",
-          "$description": "Input border radius - sharp, professional (2px)"
+          "$value": "{shape.radius.02}",
+          "$description": "Input border radius - professional (4px)"
         }
       },
       "border": {
@@ -310,8 +310,8 @@
       "radius": {
         "default": {
           "$type": "dimension",
-          "$value": "{shape.radius.01}",
-          "$description": "Field border radius - crisp, professional (2px)"
+          "$value": "{shape.radius.02}",
+          "$description": "Field border radius - crisp, professional (4px)"
         }
       },
       "border": {

@@ -195,8 +195,8 @@
     "card": {
       "radius": {
         "$type": "dimension",
-        "$value": "{shape.radius.05}",
-        "$description": "Card border radius (32px) - very rounded"
+        "$value": "{shape.radius.04}",
+        "$description": "Card border radius (16px) - organic, rounded"
       },
       "border": {
         "light": {
@@ -262,8 +262,8 @@
     "element": {
       "radius": {
         "$type": "dimension",
-        "$value": "{shape.radius.04}",
-        "$description": "Internal element radius (16px) - soft, organic edges"
+        "$value": "{shape.radius.03}",
+        "$description": "Internal element radius (8px) - organic edges"
       }
     },
     "button": {
@@ -332,20 +332,20 @@
     "component": {
       "padding": {
         "$type": "dimension",
-        "$value": "{spacing.size.08}",
-        "$description": "Very relaxed component padding (32px)"
+        "$value": "{spacing.size.07}",
+        "$description": "Relaxed component padding (24px)"
       },
       "gap": {
         "$type": "dimension",
-        "$value": "{spacing.size.07}",
-        "$description": "Very relaxed component gap (24px)"
+        "$value": "{spacing.size.06}",
+        "$description": "Relaxed component gap (16px)"
       }
     },
     "card": {
       "padding": {
         "$type": "dimension",
-        "$value": "{spacing.size.09}",
-        "$description": "Card padding (48px)"
+        "$value": "{spacing.size.08}",
+        "$description": "Card padding (32px)"
       }
     }
   },

@@ -445,7 +445,7 @@ function compositionValueToCSS(
   ) {
     // Focus ring can't be represented as a single CSS value
     // It should be used via individual properties or excluded from CSS generation
-    // For now, return empty string to skip it (or could serialize as CSS outline/box-shadow)
+    console.warn('[tokens] Skipping focus ring composition — cannot serialize to single CSS value');
     return '';
   }
 
@@ -565,6 +565,13 @@ function loadBrandTokens(): Map<BrandId, BrandOverrides> {
       // Process brand token overrides (skip $brand metadata)
       processBrandTokens(brandData, [], context, lightVars, darkVars);
 
+      // Validate that brand token references resolve to known vars
+      const brandRefErrors = validateReferences(context);
+      if (brandRefErrors.length > 0) {
+        console.warn(`[tokens] Brand "${brandName}" has unresolved references:`);
+        brandRefErrors.forEach((err) => console.warn(`  - ${err}`));
+      }
+
       brands.set(brandName, {
         metadata: brandData.$brand,
         lightVars,
@@ -671,6 +678,11 @@ function generateBrandLayerCSS(brands: Map<BrandId, BrandOverrides>): string {
     const lightBlock = formatBrandBlock(brandId, overrides.lightVars);
     if (lightBlock) {
       blocks.push(lightBlock);
+    }
+
+    // Light mode class overrides (for manual .light toggle when system prefers dark)
+    if (Object.keys(overrides.lightVars).length > 0) {
+      blocks.push(`  .light[data-brand="${brandId}"], .light [data-brand="${brandId}"] {\n${Object.entries(overrides.lightVars).map(([p, v]) => `    ${p}: ${v};`).join('\n')}\n  }`);
     }
 
     // Dark mode overrides within brand
@@ -828,6 +840,11 @@ function generateDensityLayerCSS(densities: Map<DensityId, DensityOverrides>): s
     const lightBlock = formatDensityBlock(densityId, overrides.lightVars);
     if (lightBlock) {
       blocks.push(lightBlock);
+    }
+
+    // Light mode class overrides (for manual .light toggle when system prefers dark)
+    if (Object.keys(overrides.lightVars).length > 0) {
+      blocks.push(`  .light[data-density="${densityId}"], .light [data-density="${densityId}"] {\n${Object.entries(overrides.lightVars).map(([p, v]) => `    ${p}: ${v};`).join('\n')}\n  }`);
     }
 
     // Dark mode overrides within density

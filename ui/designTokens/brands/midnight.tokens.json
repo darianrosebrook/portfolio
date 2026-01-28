@@ -269,8 +269,8 @@
     "button": {
       "radius": {
         "$type": "dimension",
-        "$value": "{shape.radius.none}",
-        "$description": "Button radius (0px) - sharp, sophisticated"
+        "$value": "{shape.radius.01}",
+        "$description": "Button radius (2px) - barely rounded, sharp"
       }
     },
     "badge": {
@@ -367,8 +367,8 @@
     "body": {
       "fontWeight": {
         "$type": "fontWeight",
-        "$value": "{typography.weight.semibold}",
-        "$description": "Semibold body weight (600) - strong, confident"
+        "$value": "{typography.weight.bold}",
+        "$description": "Bold body weight (700) - strong, confident"
       }
     },
     "heading": {

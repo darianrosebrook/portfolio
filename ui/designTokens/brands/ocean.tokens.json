@@ -187,8 +187,8 @@
     "card": {
       "radius": {
         "$type": "dimension",
-        "$value": "{shape.radius.05}",
-        "$description": "Card border radius (32px) - very rounded"
+        "$value": "{shape.radius.04}",
+        "$description": "Card border radius (16px) - fluid, rounded"
       },
       "border": {
         "light": {
@@ -254,8 +254,8 @@
     "element": {
       "radius": {
         "$type": "dimension",
-        "$value": "{shape.radius.05}",
-        "$description": "Internal element radius (32px) - spacious curves"
+        "$value": "{shape.radius.04}",
+        "$description": "Internal element radius (16px) - fluid curves"
       }
     },
     "button": {
@@ -324,20 +324,20 @@
     "component": {
       "padding": {
         "$type": "dimension",
-        "$value": "{spacing.size.09}",
-        "$description": "Very spacious component padding (48px)"
+        "$value": "{spacing.size.07}",
+        "$description": "Generous component padding (24px)"
       },
       "gap": {
         "$type": "dimension",
-        "$value": "{spacing.size.08}",
-        "$description": "Very spacious component gap (32px)"
+        "$value": "{spacing.size.06}",
+        "$description": "Generous component gap (16px)"
       }
     },
     "card": {
       "padding": {
         "$type": "dimension",
-        "$value": "{spacing.size.10}",
-        "$description": "Card padding (64px)"
+        "$value": "{spacing.size.08}",
+        "$description": "Card padding (32px)"
       }
     }
   },
@@ -345,8 +345,8 @@
     "interaction": {
       "duration": {
         "$type": "duration",
-        "$value": "{motion.duration.long2}",
-        "$description": "Very fluid, slow transitions (833ms)"
+        "$value": "{motion.duration.medium2}",
+        "$description": "Flowing transitions (333ms) - fluid but responsive"
       },
       "easing": {
         "$type": "cubicBezier",

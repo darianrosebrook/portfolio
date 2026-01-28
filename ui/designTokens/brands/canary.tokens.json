@@ -179,16 +179,16 @@
       "radius": {
         "default": {
           "$type": "dimension",
-          "$value": "{shape.radius.05}",
-          "$description": "Medium radius - cheerful, playful"
+          "$value": "{shape.radius.03}",
+          "$description": "Medium radius (8px) - cheerful, playful"
         }
       }
     },
     "card": {
       "radius": {
         "$type": "dimension",
-        "$value": "{shape.radius.05}",
-        "$description": "Card border radius - playful"
+        "$value": "{shape.radius.03}",
+        "$description": "Card border radius (8px) - playful"
       },
       "border": {
         "light": {
@@ -254,30 +254,30 @@
     "element": {
       "radius": {
         "$type": "dimension",
-        "$value": "{shape.radius.05}",
-        "$description": "Internal element radius - cheerful curves"
+        "$value": "{shape.radius.03}",
+        "$description": "Internal element radius (8px) - cheerful curves"
       }
     },
     "button": {
       "radius": {
         "$type": "dimension",
-        "$value": "{shape.radius.05}",
-        "$description": "Button radius - playful"
+        "$value": "{shape.radius.03}",
+        "$description": "Button radius (8px) - playful"
       }
     },
     "badge": {
       "radius": {
         "$type": "dimension",
-        "$value": "{shape.radius.05}",
-        "$description": "Badge/chip radius"
+        "$value": "{shape.radius.03}",
+        "$description": "Badge/chip radius (8px)"
       }
     },
     "input": {
       "radius": {
         "default": {
           "$type": "dimension",
-          "$value": "{shape.radius.05}",
-          "$description": "Input border radius - playful, rounded (32px)"
+          "$value": "{shape.radius.03}",
+          "$description": "Input border radius - playful, rounded (8px)"
         }
       },
       "border": {
@@ -302,8 +302,8 @@
       "radius": {
         "default": {
           "$type": "dimension",
-          "$value": "{shape.radius.05}",
-          "$description": "Field border radius - rounded, cheerful (32px)"
+          "$value": "{shape.radius.03}",
+          "$description": "Field border radius - rounded, cheerful (8px)"
         }
       },
       "border": {
@@ -345,13 +345,13 @@
     "interaction": {
       "duration": {
         "$type": "duration",
-        "$value": "{motion.duration.medium3}",
-        "$description": "Bouncy transitions (500ms) - energetic"
+        "$value": "{motion.duration.short3}",
+        "$description": "Snappy transitions (167ms) - energetic"
       },
       "easing": {
         "$type": "cubicBezier",
-        "$value": "{motion.easing.bounce}",
-        "$description": "Bouncy easing curve - playful overshoot"
+        "$value": "{motion.easing.standard}",
+        "$description": "Standard easing curve - crisp, direct"
       }
     }
   },
@@ -366,8 +366,8 @@
     "heading": {
       "fontWeight": {
         "$type": "fontWeight",
-        "$value": "{typography.weight.semibold}",
-        "$description": "Semibold heading weight (600) - bright, cheerful"
+        "$value": "{typography.weight.bold}",
+        "$description": "Bold heading weight (700) - bright, cheerful"
       }
     }
   }

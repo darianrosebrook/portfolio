@@ -6259,50 +6259,50 @@
         "xs": {
           "$type": "dimension",
           "$value": {
-            "value": 16,
+            "value": 12,
             "unit": "px"
           },
-          "$description": "Spacious density - extra small (16px)"
+          "$description": "Spacious density - extra small (12px)"
         },
         "sm": {
+          "$type": "dimension",
+          "$value": {
+            "value": 20,
+            "unit": "px"
+          },
+          "$description": "Spacious density - small (20px)"
+        },
+        "md": {
           "$type": "dimension",
           "$value": {
             "value": 32,
             "unit": "px"
           },
-          "$description": "Spacious density - small (32px)"
-        },
-        "md": {
-          "$type": "dimension",
-          "$value": {
-            "value": 48,
-            "unit": "px"
-          },
-          "$description": "Spacious density - medium (48px)"
+          "$description": "Spacious density - medium (32px)"
         },
         "lg": {
+          "$type": "dimension",
+          "$value": {
+            "value": 40,
+            "unit": "px"
+          },
+          "$description": "Spacious density - large (40px)"
+        },
+        "xl": {
+          "$type": "dimension",
+          "$value": {
+            "value": 56,
+            "unit": "px"
+          },
+          "$description": "Spacious density - extra large (56px)"
+        },
+        "2xl": {
           "$type": "dimension",
           "$value": {
             "value": 64,
             "unit": "px"
           },
-          "$description": "Spacious density - large (64px)"
-        },
-        "xl": {
-          "$type": "dimension",
-          "$value": {
-            "value": 80,
-            "unit": "px"
-          },
-          "$description": "Spacious density - extra large (80px)"
-        },
-        "2xl": {
-          "$type": "dimension",
-          "$value": {
-            "value": 96,
-            "unit": "px"
-          },
-          "$description": "Spacious density - 2x large (96px)"
+          "$description": "Spacious density - 2x large (64px)"
         }
       }
     },

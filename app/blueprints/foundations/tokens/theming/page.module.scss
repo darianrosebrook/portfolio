@@ -81,9 +81,29 @@
   color: var(--semantic-color-foreground-accent);
 }
 
-.heroBrandSwitcher {
-  margin-bottom: var(--semantic-spacing-margin-section);
-  padding-bottom: var(--semantic-spacing-padding-section);
+.playgroundLayout {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.playgroundAside {
+  flex: 0 0 260px;
+  position: sticky;
+  top: 12px;
+  max-height: calc(100vh - 24px);
+  overflow-y: auto;
+
+  @media (max-width: 768px) {
+    flex: none;
+    width: 100%;
+    position: static;
+    max-height: none;
+  }
 }
 
 /* Full Bleed Demo Section */
@@ -132,12 +152,12 @@
 }
 
 .playgroundSection {
+  flex: 1;
+  min-width: 0;
   position: relative;
-  width: 100%;
   min-height: 800px;
   overflow-x: auto;
-  padding: var(--core-spacing-size-06) 0;
-  
+
   /* Ensure the showcase demo is visible in the tab */
   :global(.showcase) {
     position: relative;
