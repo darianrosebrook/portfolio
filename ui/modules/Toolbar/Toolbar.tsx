@@ -130,7 +130,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
       {/* Color picker */}
       <input
         type="color"
-        onInput={(event: React.ChangeEvent<HTMLInputElement>) =>
+        onChange={(event) =>
           editor.chain().focus().setColor(event.target.value).run()
         }
         value={editor.getAttributes('textStyle').color || '#000000'}
