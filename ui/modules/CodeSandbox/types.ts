@@ -17,6 +17,7 @@ export type VirtualProject = {
 export type SectionSpec = {
   id: string;
   title?: string;
+  prose?: string;
   code?: { file: string; lines: [number, number]; focus?: boolean };
 };
 
