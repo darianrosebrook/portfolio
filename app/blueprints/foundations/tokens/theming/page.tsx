@@ -63,7 +63,9 @@ export default function ThemingPage() {
               <span className={styles.featureIcon}>
                 <CheckIcon />
               </span>
-              <span>Five dimensions: color, shape, spacing, motion, type</span>
+              <span>
+                Six dimensions: color, shape, spacing, motion, type, density
+              </span>
             </div>
             <div className={styles.heroFeature}>
               <span className={styles.featureIcon}>
@@ -76,6 +78,12 @@ export default function ThemingPage() {
                 <CheckIcon />
               </span>
               <span>Semantic tokens as the theming surface</span>
+            </div>
+            <div className={styles.heroFeature}>
+              <span className={styles.featureIcon}>
+                <CheckIcon />
+              </span>
+              <span>Ten brand themes with distinct personalities</span>
             </div>
           </div>
         </div>
@@ -123,45 +131,55 @@ Brand files remap which core primitives those tokens resolve to.`}</code>
 
               <div className={styles.fileTree}>
                 <pre>
-                  <code>{`Core Layer (Shared)              Brand Layer (Overrides)
-────────────────────              ─────────────────────
-core/                             brands/
-├── color.tokens.json              ├── default.tokens.json
-├── spacing.tokens.json            ├── corporate.tokens.json
-├── shape.tokens.json              ├── forest.tokens.json
-├── motion.tokens.json             ├── sunset.tokens.json
-└── typography.tokens.json         ├── midnight.tokens.json
-                                   ├── ocean.tokens.json
-                                   ├── canary.tokens.json
-                                   ├── monochrome.tokens.json
-                                   ├── rose.tokens.json
-                                   └── slate.tokens.json`}</code>
+                  <code>{`Token Architecture
+──────────────────────────────────────────────────────────────────
+core/                    semantic/                brands/
+├── color.tokens.json    ├── color.tokens.json    ├── default.tokens.json
+├── spacing.tokens.json  ├── spacing.tokens.json  ├── corporate.tokens.json
+├── shape.tokens.json    ├── shape.tokens.json    ├── forest.tokens.json
+├── motion.tokens.json   ├── motion.tokens.json   ├── sunset.tokens.json
+├── typography.tokens.json└── typography.tokens.json├── midnight.tokens.json
+├── elevation.tokens.json                         ├── ocean.tokens.json
+└── density.tokens.json                           ├── canary.tokens.json
+                                                  ├── monochrome.tokens.json
+density/                                          ├── rose.tokens.json
+├── tight.tokens.json                             └── slate.tokens.json
+├── compact.tokens.json
+├── default.tokens.json
+└── spacious.tokens.json
+
+Components reference semantic tokens. Brand and density layers override
+semantic values when [data-brand] and [data-density] attributes are set.`}</code>
                 </pre>
               </div>
 
               <h2>What Changes Per Brand</h2>
-              <p>Each brand can customize five categories of tokens:</p>
+              <p>Each brand can customize six categories of tokens:</p>
 
               <ul>
                 <li>
                   <strong>Color</strong> &mdash; Primary accent, link colors,
-                  highlights
+                  highlights, action states
                 </li>
                 <li>
-                  <strong>Shape</strong> &mdash; Border radius (sharp, medium,
-                  rounded, pill)
+                  <strong>Shape</strong> &mdash; Border radius (none, sharp,
+                  medium, rounded, pill), card borders, elevation
                 </li>
                 <li>
-                  <strong>Spacing</strong> &mdash; Component padding and gaps
-                  (compact, comfortable, relaxed)
+                  <strong>Spacing</strong> &mdash; Component padding, gaps, and
+                  card spacing
                 </li>
                 <li>
                   <strong>Motion</strong> &mdash; Transition duration and easing
-                  (snappy, standard, slow)
+                  curves
                 </li>
                 <li>
-                  <strong>Typography</strong> &mdash; Font weights (light,
-                  regular, medium, bold)
+                  <strong>Typography</strong> &mdash; Font weights for body and
+                  headings
+                </li>
+                <li>
+                  <strong>Density</strong> &mdash; Spacing scale multipliers
+                  (tight, compact, default, spacious)
                 </li>
               </ul>
 
@@ -177,7 +195,9 @@ core/                             brands/
 {
   "$brand": {
     "name": "corporate",
-    "description": "Professional corporate brand with blue accents"
+    "description": "Professional corporate brand with blue accents",
+    "accent": "blue",
+    "density": "compact"
   },
   "color": {
     "foreground": {
@@ -204,14 +224,23 @@ core/                             brands/
   "shape": {
     "control": {
       "radius": {
-        "default": { "$value": "{shape.radius.02}" }  // 4px
+        "default": { "$value": "{shape.radius.01}" } // 2px - sharp
+      }
+    },
+    "card": {
+      "radius": { "$value": "{shape.radius.01}" },
+      "elevation": {
+        "default": { "$value": "{elevation.level.1}" }
       }
     }
   },
   "spacing": {
     "component": {
-      "padding": { "$value": "{spacing.size.04}" },    // 8px
-      "gap": { "$value": "{spacing.size.03}" }         // 4px
+      "padding": { "$value": "{spacing.size.04}" }, // 8px - compact
+      "gap": { "$value": "{spacing.size.03}" }      // 4px
+    },
+    "card": {
+      "padding": { "$value": "{spacing.size.05}" } // 12px
     }
   },
   "motion": {
@@ -220,9 +249,8 @@ core/                             brands/
     }
   },
   "typography": {
-    "body": {
-      "fontWeight": { "$value": "{typography.weight.medium}" } // 500
-    }
+    "body": { "fontWeight": { "$value": "{typography.weight.medium}" } },
+    "heading": { "fontWeight": { "$value": "{typography.weight.bold}" } }
   }
 }`}</code>
               </pre>
@@ -257,53 +285,58 @@ core/                             brands/
   [data-brand="corporate"] {
     --semantic-color-foreground-accent: var(--core-color-palette-blue-500);
     --semantic-color-background-accent: var(--core-color-palette-blue-500);
-    --semantic-shape-control-radius-default: var(--core-shape-radius-02);
+    --semantic-shape-control-radius-default: var(--core-shape-radius-01);
+    --semantic-shape-card-radius: var(--core-shape-radius-01);
     --semantic-spacing-component-padding: var(--core-spacing-size-04);
     --semantic-motion-interaction-duration: var(--core-motion-duration-short2);
     --semantic-typography-body-font-weight: var(--core-typography-weight-medium);
-  }
-
-  /* Manual light toggle override (when system prefers dark) */
-  .light[data-brand="corporate"] {
-    --semantic-color-foreground-accent: var(--core-color-palette-blue-500);
-    /* ...same light values, ensuring brand wins over theme layer... */
   }
 
   /* Dark mode overrides for this brand */
   @media (prefers-color-scheme: dark) {
     [data-brand="corporate"] {
       --semantic-color-foreground-accent: var(--core-color-palette-blue-400);
-      /* ...shifted palette values for dark backgrounds... */
     }
+  }
+}
+
+@layer density {
+  [data-density="compact"] {
+    --semantic-spacing-padding-container: var(--semantic-spacing-density-compact-lg);
+    --semantic-spacing-padding-card: var(--semantic-spacing-density-compact-sm);
+    --semantic-spacing-gap-grid: var(--semantic-spacing-density-compact-sm);
   }
 }`}</code>
               </pre>
 
               <h2>Runtime Brand Switching</h2>
               <p>
-                Brand switching at runtime is handled by updating a{' '}
-                <code>data-brand</code> attribute on the document element. CSS
-                selectors like <code>[data-brand=&quot;corporate&quot;]</code>{' '}
-                activate the correct brand overrides instantly, with no
-                JavaScript style recalculation needed:
+                Brand and density switching at runtime is handled by updating
+                data attributes on the document element. The BrandContext
+                manages state and persistence:
               </p>
 
               <pre className={styles.codeBlock}>
-                <code>{`// BrandContext sets the data attribute on <html>
+                <code>{`// BrandContext manages brand, density, and font preferences
+type BrandId = 'default' | 'corporate' | 'forest' | 'sunset' |
+               'midnight' | 'ocean' | 'canary' | 'monochrome' |
+               'rose' | 'slate';
+
+type DensityId = 'tight' | 'compact' | 'default' | 'spacious';
+
 function setBrand(brand: BrandId) {
   document.documentElement.setAttribute('data-brand', brand);
   localStorage.setItem('brand', brand);
 }
 
-// Density uses the same pattern
 function setDensity(density: DensityId) {
   document.documentElement.setAttribute('data-density', density);
+  localStorage.setItem('density', density);
 }
 
-// The light/dark toggle adds a class to <html>,
-// which the brand layer accounts for:
-//   .light[data-brand="corporate"] { ... }
-//   .dark[data-brand="corporate"]  { ... }`}</code>
+// Usage - instantly switches all tokens
+setBrand('corporate');
+setDensity('compact');`}</code>
               </pre>
 
               <h2>Core Layer: Brand-Agnostic Primitives</h2>
@@ -315,25 +348,42 @@ function setDensity(density: DensityId) {
               </p>
 
               <pre className={styles.codeBlock}>
-                <code>{`// Core primitives generate CSS variables like:
---core-color-palette-red-500: #d9292b;
---core-color-palette-blue-500: #0a65fe;
---core-color-palette-green-500: #487e1e;
+                <code>{`// core/color.tokens.json - Universal palette
+{
+  "palette": {
+    "red": { "500": { "$type": "color", "$value": "#d9292b" } },
+    "blue": { "500": { "$type": "color", "$value": "#0a65fe" } },
+    "green": { "500": { "$type": "color", "$value": "#22c55e" } },
+    "teal": { "500": { "$type": "color", "$value": "#14b8a6" } },
+    "purple": { "500": { "$type": "color", "$value": "#a855f7" } },
+    "yellow": { "500": { "$type": "color", "$value": "#eab308" } },
+    "neutral": { "500": { "$type": "color", "$value": "#737373" } }
+  }
+}
 
---core-shape-radius-01: 2px;    // Sharp
---core-shape-radius-02: 4px;    // Small
---core-shape-radius-03: 8px;    // Medium
---core-shape-radius-04: 16px;   // Large
+// core/shape.tokens.json - Radius scale
+{
+  "radius": {
+    "none": { "$value": "0px" },   // No radius
+    "01": { "$value": "2px" },     // Sharp
+    "02": { "$value": "4px" },     // Small
+    "medium": { "$value": "6px" }, // Medium-small
+    "03": { "$value": "8px" },     // Medium
+    "04": { "$value": "16px" },    // Large
+    "05": { "$value": "32px" },    // Extra large
+    "full": { "$value": "9999px" } // Pill
+  }
+}
 
---core-spacing-size-03: 4px;
---core-spacing-size-04: 8px;
---core-spacing-size-05: 12px;
-
---core-motion-duration-short: 150ms;
---core-motion-duration-short2: 83ms;
-
-// Brands reference these via var(), so changing a core
-// primitive updates every brand that uses it.`}</code>
+// core/density.tokens.json - Spacing density scales
+{
+  "density": {
+    "tight": { "sm": "4px", "md": "6px", "lg": "8px" },
+    "compact": { "sm": "8px", "md": "12px", "lg": "16px" },
+    "default": { "sm": "12px", "md": "16px", "lg": "24px" },
+    "spacious": { "sm": "16px", "md": "24px", "lg": "32px" }
+  }
+}`}</code>
               </pre>
 
               <h2>Pitfalls to Avoid</h2>
@@ -391,16 +441,20 @@ function setDensity(density: DensityId) {
                   &mdash; Where brands diverge
                 </li>
                 <li>
-                  <strong>Five dimensions of variation</strong> &mdash; Color,
-                  shape, spacing, motion, typography
+                  <strong>Six dimensions of variation</strong> &mdash; Color,
+                  shape, spacing, motion, typography, density
                 </li>
                 <li>
-                  <strong>CSS cascade layers</strong> &mdash; Ensure brand
-                  overrides take precedence
+                  <strong>CSS cascade layers</strong> &mdash; Ensure brand and
+                  density overrides take precedence
                 </li>
                 <li>
                   <strong>Runtime switching via data attributes</strong> &mdash;
-                  Instant brand changes
+                  Instant brand and density changes
+                </li>
+                <li>
+                  <strong>Ten brand themes</strong> &mdash; Each with distinct
+                  color, shape, and motion personalities
                 </li>
               </ul>
 
