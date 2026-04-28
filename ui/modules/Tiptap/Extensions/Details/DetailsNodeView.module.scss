@@ -1,0 +1,53 @@
+.detailsNodeView {
+  margin: 16px 0;
+  border: 2px solid transparent;
+  border-radius: var(--core-shape-radius-medium);
+  transition: border-color 0.2s ease;
+
+  &.selected {
+    border-color: var(--color-accent);
+  }
+}
+
+.detailsEditor {
+  position: relative;
+}
+
+.summaryEditor {
+  margin-bottom: 8px;
+}
+
+.summaryInput {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--semantic-color-border-primary);
+  border-radius: var(--core-shape-radius-medium);
+  font-size: 14px;
+  font-weight: 600;
+  background: var(--semantic-color-background-secondary);
+  transition: all 0.2s ease;
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    background: var(--semantic-color-background-primary);
+    box-shadow: 0 0 0 3px
+      color-mix(in srgb, var(--color-accent) 10%, transparent);
+  }
+}
+
+.detailsContent {
+  border: 1px solid var(--semantic-color-border-primary);
+  border-radius: var(--core-shape-radius-medium);
+  overflow: hidden;
+
+  // Inner classes come from the Details component itself; reach in with :global.
+  :global(.summary) {
+    background: var(--semantic-color-background-tertiary);
+    border-bottom: 1px solid var(--semantic-color-border-primary);
+  }
+
+  :global(.content) {
+    background: var(--semantic-color-background-primary);
+  }
+}

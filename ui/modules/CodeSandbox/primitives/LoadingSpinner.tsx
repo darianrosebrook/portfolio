@@ -1,4 +1,5 @@
 import * as React from 'react';
+import styles from './LoadingSpinner.module.scss';
 
 export type LoadingSpinnerProps = {
   size?: 'small' | 'medium' | 'large';
@@ -31,13 +32,13 @@ export function LoadingSpinner({
       }}
     >
       <div
+        className={styles.spinner}
         style={{
           width: spinnerSize,
           height: spinnerSize,
           border: `2px solid var(--semantic-color-border-subtle)`,
           borderTop: `2px solid ${color}`,
           borderRadius: '50%',
-          animation: 'spin 1s linear infinite',
         }}
       />
       {message && (
@@ -51,16 +52,6 @@ export function LoadingSpinner({
           {message}
         </span>
       )}
-      <style>{`
-        @keyframes spin {
-          0% {
-            transform: rotate(0deg);
-          }
-          100% {
-            transform: rotate(360deg);
-          }
-        }
-      `}</style>
     </div>
   );
 
