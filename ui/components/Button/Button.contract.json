@@ -1,17 +1,57 @@
 {
   "name": "Button",
   "layer": "primitive",
-  "anatomy": ["root", "isLoading", "spinner", "loadingText", "small", "medium"],
-  "variants": {},
-  "states": ["default", "hover", "focus", "active", "disabled"],
-  "slots": {},
+  "anatomy": [
+    "root",
+    "spinner",
+    "loadingText"
+  ],
+  "variants": {
+    "size": [
+      "small",
+      "medium",
+      "large"
+    ],
+    "variant": [
+      "primary",
+      "secondary",
+      "tertiary",
+      "ghost",
+      "destructive",
+      "outline"
+    ],
+    "as": [
+      "button"
+    ],
+    "type": [
+      "button",
+      "submit",
+      "reset"
+    ]
+  },
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "active",
+    "disabled"
+  ],
+  "slots": {
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"button\"]"
+    }
+  },
   "a11y": {
     "role": "button",
-    "labeling": ["aria-label", "aria-labelledby"],
+    "labeling": [
+      "aria-label",
+      "title"
+    ],
     "keyboard": [
       {
         "key": "Enter|Space",
-        "when": "root",
+        "when": "trigger",
         "then": "activate"
       }
     ],
@@ -20,13 +60,112 @@
   "tokens": {
     "root": [
       "button.color.background.default",
+      "button.color.background.hover",
+      "button.color.background.active",
+      "button.color.background.focus",
+      "button.color.background.focusVisible",
+      "button.color.background.disabled",
+      "button.color.background.primary",
+      "button.color.background.primaryHover",
+      "button.color.background.primaryActive",
+      "button.color.background.secondary",
+      "button.color.background.secondaryHover",
+      "button.color.background.secondaryActive",
+      "button.color.background.tertiary",
+      "button.color.background.tertiaryHover",
+      "button.color.background.tertiaryActive",
+      "button.color.background.destructive",
+      "button.color.background.destructiveHover",
+      "button.color.background.destructiveActive",
+      "button.color.foreground.default",
+      "button.color.foreground.hover",
+      "button.color.foreground.active",
+      "button.color.foreground.focus",
+      "button.color.foreground.focusVisible",
+      "button.color.foreground.disabled",
       "button.color.foreground.primary",
-      "button.size.padding.default",
-      "button.size.radius.default"
+      "button.color.foreground.primaryHover",
+      "button.color.foreground.primaryActive",
+      "button.color.foreground.secondary",
+      "button.color.foreground.secondaryHover",
+      "button.color.foreground.secondaryActive",
+      "button.color.foreground.tertiary",
+      "button.color.foreground.tertiaryHover",
+      "button.color.foreground.tertiaryActive",
+      "button.color.foreground.ghost",
+      "button.color.foreground.ghostHover",
+      "button.color.foreground.ghostActive",
+      "button.color.foreground.destructive",
+      "button.color.foreground.destructiveHover",
+      "button.color.foreground.destructiveActive",
+      "button.color.foreground.outline",
+      "button.color.foreground.outlineHover",
+      "button.color.foreground.outlineActive",
+      "button.color.border.default",
+      "button.color.border.hover",
+      "button.color.border.active",
+      "button.color.border.focus",
+      "button.color.border.focusVisible",
+      "button.color.border.disabled",
+      "button.color.border.primary",
+      "button.color.border.primaryHover",
+      "button.color.border.primaryActive",
+      "button.color.border.secondary",
+      "button.color.border.secondaryHover",
+      "button.color.border.secondaryActive",
+      "button.color.border.tertiary",
+      "button.color.border.tertiaryHover",
+      "button.color.border.tertiaryActive",
+      "button.color.border.ghost",
+      "button.color.border.ghostHover",
+      "button.color.border.ghostActive",
+      "button.color.border.destructive",
+      "button.color.border.destructiveHover",
+      "button.color.border.destructiveActive",
+      "button.color.border.outline",
+      "button.color.border.outlineHover",
+      "button.color.border.outlineActive",
+      "button.color.spinner.border",
+      "button.color.spinner.borderAccent",
+      "button.size.gap.default",
+      "button.size.gap.small",
+      "button.size.gap.large",
+      "button.size.padding.small",
+      "button.size.padding.large",
+      "button.size.min.small",
+      "button.size.min.medium",
+      "button.size.min.large",
+      "button.size.radius",
+      "button.size.border",
+      "button.size.spinner.width",
+      "button.size.spinner.height",
+      "button.size.spinner.borderWidth",
+      "button.size.spinner.borderRadius",
+      "button.size.margin",
+      "button.text.weight",
+      "button.text.size.small",
+      "button.text.size.medium",
+      "button.text.size.large",
+      "button.text.lineHeight.collapse",
+      "button.motion.duration.fast",
+      "button.motion.duration.spinner",
+      "button.motion.easing.standard",
+      "button.motion.scale.pressed",
+      "button.focus.outlineWidth",
+      "button.focus.outlineOffset",
+      "button.focus.outlineColor"
+    ],
+    "spinner": [
+      "button.color.spinner.border",
+      "button.color.spinner.borderAccent",
+      "button.size.spinner.width",
+      "button.size.spinner.height",
+      "button.size.spinner.borderWidth",
+      "button.size.spinner.borderRadius"
     ]
   },
   "ssr": {
-    "hydrateOn": "none"
+    "hydrateOn": "interaction"
   },
   "rtl": {
     "flipIcon": false

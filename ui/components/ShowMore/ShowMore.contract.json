@@ -1,26 +1,50 @@
 {
   "name": "ShowMore",
-  "layer": "primitive",
-  "anatomy": ["root"],
+  "layer": "composer",
+  "anatomy": [
+    "root",
+    "content",
+    "trigger"
+  ],
   "variants": {},
-  "states": ["default", "hover", "focus", "active", "disabled"],
-  "slots": {},
+  "states": [
+    "default"
+  ],
+  "slots": {
+    "content": {
+      "required": false
+    },
+    "trigger": {
+      "required": false
+    }
+  },
   "a11y": {
-    "role": "generic",
-    "labeling": ["aria-label"],
-    "keyboard": [],
-    "apgPattern": null
+    "role": "button",
+    "labeling": [],
+    "keyboard": [
+      {
+        "key": "Enter|Space",
+        "when": "trigger",
+        "then": "activate"
+      }
+    ],
+    "apgPattern": "button"
   },
   "tokens": {
     "root": [
       "showmore.color.background.default",
       "showmore.color.foreground.primary",
+      "showmore.color.foreground.secondary",
+      "showmore.color.border.default",
+      "showmore.color.border.accent",
       "showmore.size.padding.default",
-      "showmore.size.radius.default"
+      "showmore.size.radius.default",
+      "showmore.elevation.default",
+      "showmore.overlay.imageOverlay"
     ]
   },
   "ssr": {
-    "hydrateOn": "none"
+    "hydrateOn": "interaction"
   },
   "rtl": {
     "flipIcon": false

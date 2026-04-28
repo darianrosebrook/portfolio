@@ -1,28 +1,69 @@
 {
   "name": "Image",
   "layer": "primitive",
-  "anatomy": ["root", "container", "xs", "sm", "md", "lg"],
+  "anatomy": [
+    "root",
+    "container",
+    "aspectRatio",
+    "radius-none",
+    "radius-sm",
+    "radius-md",
+    "radius-lg",
+    "radius-full",
+    "placeholder",
+    "placeholderIcon",
+    "errorState",
+    "errorIcon",
+    "errorText"
+  ],
   "variants": {
-    "size": ["xs", "sm", "md", "lg", "xl", "full"]
+    "size": [
+      "xs",
+      "sm",
+      "md",
+      "lg",
+      "xl",
+      "full"
+    ]
   },
-  "states": ["default", "hover", "focus", "active", "disabled"],
+  "states": [
+    "default",
+    "loading",
+    "error"
+  ],
   "slots": {},
   "a11y": {
-    "role": "generic",
-    "labeling": ["aria-label"],
+    "role": "img",
+    "labeling": [
+      "aria-label"
+    ],
     "keyboard": [],
-    "apgPattern": null
+    "apgPattern": "image"
   },
   "tokens": {
     "root": [
       "image.color.background.default",
+      "image.color.background.error",
       "image.color.foreground.primary",
-      "image.size.padding.default",
-      "image.size.radius.default"
+      "image.color.foreground.secondary",
+      "image.color.foreground.error",
+      "image.size.xs",
+      "image.size.sm",
+      "image.size.md",
+      "image.size.lg",
+      "image.size.xl",
+      "image.size.icon",
+      "image.radius.none.value",
+      "image.radius.none.unit",
+      "image.radius.sm",
+      "image.radius.md",
+      "image.radius.lg",
+      "image.radius.full",
+      "image.typography.error.fontSize"
     ]
   },
   "ssr": {
-    "hydrateOn": "none"
+    "hydrateOn": "interaction"
   },
   "rtl": {
     "flipIcon": false

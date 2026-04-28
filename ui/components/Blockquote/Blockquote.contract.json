@@ -1,29 +1,52 @@
 {
   "name": "Blockquote",
   "layer": "primitive",
-  "anatomy": ["root", "sm", "md", "lg", "default", "bordered"],
+  "anatomy": [
+    "root"
+  ],
   "variants": {
-    "variant": ["default", "bordered", "highlighted"],
-    "size": ["sm", "md", "lg"]
+    "variant": [
+      "default",
+      "bordered",
+      "highlighted"
+    ],
+    "size": [
+      "sm",
+      "md",
+      "lg"
+    ]
   },
-  "states": ["default", "hover", "focus", "active", "disabled"],
+  "states": [
+    "default"
+  ],
   "slots": {},
   "a11y": {
     "role": "generic",
-    "labeling": ["aria-label"],
+    "labeling": [],
     "keyboard": [],
     "apgPattern": null
   },
   "tokens": {
     "root": [
-      "blockquote.color.background.default",
       "blockquote.color.foreground.primary",
+      "blockquote.color.background.default",
+      "blockquote.color.border.default",
+      "blockquote.color.border.accent",
+      "blockquote.typography.fontStyle",
+      "blockquote.typography.fontWeight",
+      "blockquote.typography.sm.fontSize",
+      "blockquote.typography.sm.lineHeight",
+      "blockquote.typography.md.fontSize",
+      "blockquote.typography.md.lineHeight",
+      "blockquote.typography.lg.fontSize",
+      "blockquote.typography.lg.lineHeight",
       "blockquote.size.padding.default",
-      "blockquote.size.radius.default"
+      "blockquote.size.radius.default",
+      "blockquote.size.border.thick"
     ]
   },
   "ssr": {
-    "hydrateOn": "none"
+    "hydrateOn": "interaction"
   },
   "rtl": {
     "flipIcon": false

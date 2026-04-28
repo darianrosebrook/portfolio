@@ -1,26 +1,72 @@
 {
   "name": "PageTransition",
-  "layer": "composer",
-  "anatomy": ["root", "content"],
-  "variants": {
-    "duration": ["fast", "normal", "slow"],
-    "enabled": [true, false]
-  },
-  "states": ["default", "transitioning", "mounted", "unmounted"],
-  "slots": {
-    "content": { "required": true }
-  },
+  "layer": "primitive",
+  "anatomy": [
+    "root",
+    "pageTransition",
+    "enabled",
+    "fallback",
+    "transitioning",
+    "transitionLink",
+    "maskLine",
+    "text",
+    "clone"
+  ],
+  "variants": {},
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "active",
+    "loading"
+  ],
+  "slots": {},
   "a11y": {
-    "role": "region",
-    "labeling": ["aria-label"],
+    "role": "generic",
+    "labeling": [
+      "aria-label"
+    ],
     "keyboard": [],
     "apgPattern": null
   },
   "tokens": {
-    "root": ["pageTransition.duration.default", "pageTransition.easing.default"]
+    "root": [
+      "pageTransition.duration.fast",
+      "pageTransition.duration.normal",
+      "pageTransition.duration.slow",
+      "pageTransition.duration.default",
+      "pageTransition.easing.standard",
+      "pageTransition.easing.decelerate",
+      "pageTransition.easing.accelerate",
+      "pageTransition.easing.default",
+      "pageTransition.spacing.padding.default",
+      "pageTransition.spacing.padding.small",
+      "pageTransition.spacing.padding.large",
+      "pageTransition.spacing.margin.default",
+      "pageTransition.spacing.margin.small",
+      "pageTransition.spacing.margin.large",
+      "pageTransition.color.background.default",
+      "pageTransition.color.background.overlay",
+      "pageTransition.color.foreground.default",
+      "pageTransition.color.foreground.secondary",
+      "pageTransition.opacity.overlay.default",
+      "pageTransition.opacity.overlay.light",
+      "pageTransition.opacity.overlay.heavy",
+      "pageTransition.opacity.content.default",
+      "pageTransition.opacity.content.fade",
+      "pageTransition.transform.scale.default",
+      "pageTransition.transform.scale.zoom",
+      "pageTransition.transform.scale.shrink",
+      "pageTransition.transform.translate.default",
+      "pageTransition.transform.translate.slide",
+      "pageTransition.transform.translate.bounce",
+      "pageTransition.zIndex.overlay",
+      "pageTransition.zIndex.content",
+      "pageTransition.zIndex.max"
+    ]
   },
   "ssr": {
-    "hydrateOn": "immediate"
+    "hydrateOn": "interaction"
   },
   "rtl": {
     "flipIcon": false

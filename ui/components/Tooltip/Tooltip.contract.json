@@ -1,26 +1,55 @@
 {
   "name": "Tooltip",
   "layer": "primitive",
-  "anatomy": ["root"],
-  "variants": {},
-  "states": ["default", "hover", "focus", "active", "disabled"],
+  "anatomy": [
+    "root"
+  ],
+  "variants": {
+    "placement": [
+      "top",
+      "bottom",
+      "left",
+      "right",
+      "auto"
+    ]
+  },
+  "states": [
+    "default",
+    "hover",
+    "entering",
+    "leaving"
+  ],
   "slots": {},
   "a11y": {
-    "role": "generic",
-    "labeling": ["aria-label"],
+    "role": "tooltip",
+    "labeling": [
+      "aria-describedby"
+    ],
     "keyboard": [],
-    "apgPattern": null
+    "apgPattern": "tooltip"
   },
   "tokens": {
     "root": [
       "tooltip.color.background.default",
-      "tooltip.color.foreground.primary",
-      "tooltip.size.padding.default",
-      "tooltip.size.radius.default"
+      "tooltip.color.foreground.default",
+      "tooltip.color.border.default",
+      "tooltip.size.padding.y",
+      "tooltip.size.padding.x",
+      "tooltip.size.radius.default",
+      "tooltip.size.maxWidth.value",
+      "tooltip.size.maxWidth.unit",
+      "tooltip.elevation.default",
+      "tooltip.typography.fontSize",
+      "tooltip.typography.fontWeight",
+      "tooltip.typography.lineHeight",
+      "tooltip.motion.duration.enter",
+      "tooltip.motion.duration.exit",
+      "tooltip.motion.easing.enter",
+      "tooltip.motion.easing.exit"
     ]
   },
   "ssr": {
-    "hydrateOn": "none"
+    "hydrateOn": "interaction"
   },
   "rtl": {
     "flipIcon": false

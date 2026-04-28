@@ -1,28 +1,99 @@
 {
   "name": "Walkthrough",
   "layer": "composer",
-  "anatomy": ["root", "content", "title", "description", "controls", "prev"],
-  "variants": {},
-  "states": ["default", "hover", "focus", "active", "disabled"],
+  "anatomy": [
+    "root",
+    "content",
+    "title",
+    "description",
+    "controls",
+    "skip",
+    "prev",
+    "next",
+    "dots",
+    "dot",
+    "dotActive",
+    "counter"
+  ],
+  "variants": {
+    "placement": [
+      "top",
+      "bottom",
+      "left",
+      "right",
+      "auto"
+    ]
+  },
+  "states": [
+    "default",
+    "hover",
+    "disabled"
+  ],
   "slots": {},
   "a11y": {
-    "role": "region",
-    "labeling": ["aria-label", "aria-labelledby"],
+    "role": "status",
+    "labeling": [
+      "aria-label"
+    ],
     "keyboard": [
       {
-        "key": "Tab",
-        "when": "any",
-        "then": "navigate children"
+        "key": "Enter|Space",
+        "when": "trigger",
+        "then": "activate"
       }
     ],
-    "apgPattern": null
+    "apgPattern": "status"
   },
   "tokens": {
     "root": [
-      "walkthrough.color.background.default",
-      "walkthrough.color.foreground.primary",
-      "walkthrough.size.padding.default",
-      "walkthrough.size.radius.default"
+      "walkthrough.surface.bg",
+      "walkthrough.surface.border",
+      "walkthrough.surface.radius",
+      "walkthrough.surface.shadow",
+      "walkthrough.surface.padding",
+      "walkthrough.title.fontSize",
+      "walkthrough.title.fontWeight",
+      "walkthrough.title.color",
+      "walkthrough.description.fontSize",
+      "walkthrough.description.color",
+      "walkthrough.description.marginTop",
+      "walkthrough.controls.gap",
+      "walkthrough.controls.marginTop",
+      "walkthrough.dots.size",
+      "walkthrough.dots.gap",
+      "walkthrough.dots.active",
+      "walkthrough.dots.idle",
+      "walkthrough.button.primary.bg",
+      "walkthrough.button.primary.color",
+      "walkthrough.button.primary.radius",
+      "walkthrough.button.primary.paddingY",
+      "walkthrough.button.primary.paddingX",
+      "walkthrough.button.secondary.bg",
+      "walkthrough.button.secondary.color",
+      "walkthrough.button.secondary.border",
+      "walkthrough.button.secondary.radius",
+      "walkthrough.button.secondary.paddingY",
+      "walkthrough.button.secondary.paddingX"
+    ],
+    "title": [
+      "walkthrough.title.fontSize",
+      "walkthrough.title.fontWeight",
+      "walkthrough.title.color"
+    ],
+    "description": [
+      "walkthrough.description.fontSize",
+      "walkthrough.description.color",
+      "walkthrough.description.marginTop"
+    ],
+    "controls": [
+      "walkthrough.controls.gap",
+      "walkthrough.controls.marginTop"
+    ],
+    "dots": [
+      "walkthrough.dots.size",
+      "walkthrough.dots.gap",
+      "walkthrough.dots.active",
+      "walkthrough.dots.idle"
     ]
   },
   "ssr": {

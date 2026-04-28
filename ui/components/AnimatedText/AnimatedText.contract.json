@@ -1,11 +1,29 @@
 {
-  "name": "AspectRatio",
+  "name": "AnimatedText",
   "layer": "primitive",
   "anatomy": [
     "root",
-    "container"
+    "animatedText",
+    "word"
   ],
-  "variants": {},
+  "variants": {
+    "as": [
+      "h1",
+      "h2",
+      "h3",
+      "h4",
+      "h5",
+      "h6",
+      "p",
+      "span",
+      "div"
+    ],
+    "variant": [
+      "blur-in",
+      "fade-up",
+      "slide-in"
+    ]
+  },
   "states": [
     "default"
   ],

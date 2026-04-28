@@ -1,26 +1,57 @@
 {
   "name": "Skeleton",
-  "layer": "compound",
-  "anatomy": ["root", "stack", "row", "media", "shape"],
-  "variants": {},
-  "states": ["default", "hover", "focus", "active", "disabled"],
+  "layer": "primitive",
+  "anatomy": [
+    "root",
+    "stack",
+    "row",
+    "shape",
+    "kind-circle",
+    "kind-line"
+  ],
+  "variants": {
+    "variant": [
+      "block",
+      "text",
+      "avatar",
+      "media",
+      "dataviz",
+      "actions"
+    ]
+  },
+  "states": [
+    "default"
+  ],
   "slots": {},
   "a11y": {
-    "role": "group",
-    "labeling": ["aria-label", "aria-labelledby"],
+    "role": "generic",
+    "labeling": [
+      "aria-label"
+    ],
     "keyboard": [],
     "apgPattern": null
   },
   "tokens": {
     "root": [
-      "skeleton.color.background.default",
-      "skeleton.color.foreground.primary",
-      "skeleton.size.padding.default",
-      "skeleton.size.radius.default"
+      "skeleton.color.base",
+      "skeleton.color.highlight",
+      "skeleton.color.highlight-2",
+      "skeleton.color.static",
+      "skeleton.color.contrast-base",
+      "skeleton.radius.sm",
+      "skeleton.radius.md",
+      "skeleton.radius.lg",
+      "skeleton.gap.sm",
+      "skeleton.gap.md",
+      "skeleton.gap.lg",
+      "skeleton.anim.duration",
+      "skeleton.anim.duration-alt",
+      "skeleton.anim.duration-pulse",
+      "skeleton.anim.easing"
     ]
   },
   "ssr": {
-    "hydrateOn": "none"
+    "hydrateOn": "interaction"
   },
   "rtl": {
     "flipIcon": false

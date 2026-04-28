@@ -1,22 +1,53 @@
 {
   "name": "Breadcrumbs",
   "layer": "primitive",
-  "anatomy": ["root", "list", "link", "current", "separator"],
+  "anatomy": [
+    "root",
+    "list",
+    "link",
+    "current",
+    "separator",
+    "overflow",
+    "popover"
+  ],
   "variants": {},
-  "states": ["default", "hover", "focus", "active", "disabled"],
+  "states": [
+    "default",
+    "hover",
+    "focus"
+  ],
   "slots": {},
   "a11y": {
-    "role": "generic",
-    "labeling": ["aria-label"],
+    "role": "menu",
+    "labeling": [
+      "aria-label"
+    ],
     "keyboard": [],
     "apgPattern": null
   },
   "tokens": {
     "root": [
-      "breadcrumbs.color.background.default",
+      "breadcrumbs.color.foreground.secondary",
+      "breadcrumbs.color.foreground.link",
       "breadcrumbs.color.foreground.primary",
-      "breadcrumbs.size.padding.default",
-      "breadcrumbs.size.radius.default"
+      "breadcrumbs.color.foreground.tertiary",
+      "breadcrumbs.color.background.elevated",
+      "breadcrumbs.color.border.subtle",
+      "breadcrumbs.color.focus",
+      "breadcrumbs.typography.lineHeight.collapse",
+      "breadcrumbs.shape.radius.medium",
+      "breadcrumbs.shape.radius.small",
+      "breadcrumbs.elevation.surface.raised",
+      "breadcrumbs.spacing.gap.default.value",
+      "breadcrumbs.spacing.gap.default.unit",
+      "breadcrumbs.spacing.gap.small.value",
+      "breadcrumbs.spacing.gap.small.unit",
+      "breadcrumbs.spacing.padding.default.value",
+      "breadcrumbs.spacing.padding.default.unit",
+      "breadcrumbs.spacing.padding.small.value",
+      "breadcrumbs.spacing.padding.small.unit",
+      "breadcrumbs.spacing.margin.top.value",
+      "breadcrumbs.spacing.margin.top.unit"
     ]
   },
   "ssr": {

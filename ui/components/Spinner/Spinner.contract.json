@@ -1,28 +1,60 @@
 {
   "name": "Spinner",
   "layer": "primitive",
-  "anatomy": ["root", "inline", "visual"],
+  "anatomy": [
+    "root",
+    "inline",
+    "visual"
+  ],
   "variants": {
-    "size": ["xs", "sm", "md", "lg"]
+    "size": [
+      "xs",
+      "sm",
+      "md",
+      "lg"
+    ],
+    "variant": [
+      "ring",
+      "dots",
+      "bars"
+    ]
   },
-  "states": ["default", "hover", "focus", "active", "disabled"],
+  "states": [
+    "default"
+  ],
   "slots": {},
   "a11y": {
     "role": "generic",
-    "labeling": ["aria-label"],
+    "labeling": [
+      "aria-label"
+    ],
     "keyboard": [],
     "apgPattern": null
   },
   "tokens": {
     "root": [
-      "spinner.color.background.default",
-      "spinner.color.foreground.primary",
-      "spinner.size.padding.default",
-      "spinner.size.radius.default"
+      "spinner.size.xs.value",
+      "spinner.size.xs.unit",
+      "spinner.size.sm.value",
+      "spinner.size.sm.unit",
+      "spinner.size.md.value",
+      "spinner.size.md.unit",
+      "spinner.size.lg.value",
+      "spinner.size.lg.unit",
+      "spinner.thickness.hairline.value",
+      "spinner.thickness.hairline.unit",
+      "spinner.thickness.regular.value",
+      "spinner.thickness.regular.unit",
+      "spinner.thickness.bold.value",
+      "spinner.thickness.bold.unit",
+      "spinner.color.accent",
+      "spinner.color.track",
+      "spinner.dots.gap",
+      "spinner.anim.duration"
     ]
   },
   "ssr": {
-    "hydrateOn": "none"
+    "hydrateOn": "interaction"
   },
   "rtl": {
     "flipIcon": false

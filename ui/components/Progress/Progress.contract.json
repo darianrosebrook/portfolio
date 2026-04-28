@@ -3,29 +3,91 @@
   "layer": "primitive",
   "anatomy": [
     "root",
-    "progressTrack",
-    "progressFill",
-    "progressCircleForeground"
+    "track",
+    "fill",
+    "circleForeground",
+    "indeterminate",
+    "circle",
+    "circleBackground",
+    "value"
   ],
-  "variants": {},
-  "states": ["default", "hover", "focus", "active", "disabled"],
+  "variants": {
+    "variant": [
+      "linear",
+      "circular"
+    ],
+    "size": [
+      "sm",
+      "md",
+      "lg"
+    ],
+    "intent": [
+      "info",
+      "success",
+      "warning",
+      "danger"
+    ]
+  },
+  "states": [
+    "default"
+  ],
   "slots": {},
   "a11y": {
     "role": "generic",
-    "labeling": ["aria-label"],
+    "labeling": [
+      "aria-label"
+    ],
     "keyboard": [],
     "apgPattern": null
   },
   "tokens": {
     "root": [
-      "progress.color.background.default",
-      "progress.color.foreground.primary",
-      "progress.size.padding.default",
-      "progress.size.radius.default"
+      "progress.color.track.background",
+      "progress.color.fill.info",
+      "progress.color.fill.success",
+      "progress.color.fill.warning",
+      "progress.color.fill.danger",
+      "progress.color.text.default",
+      "progress.size.linear.sm.height",
+      "progress.size.linear.sm.radius",
+      "progress.size.linear.md.height",
+      "progress.size.linear.md.radius",
+      "progress.size.linear.lg.height",
+      "progress.size.linear.lg.radius",
+      "progress.size.circular.sm.size.value",
+      "progress.size.circular.sm.size.unit",
+      "progress.size.circular.sm.strokeWidth.value",
+      "progress.size.circular.sm.strokeWidth.unit",
+      "progress.size.circular.md.size.value",
+      "progress.size.circular.md.size.unit",
+      "progress.size.circular.md.strokeWidth.value",
+      "progress.size.circular.md.strokeWidth.unit",
+      "progress.size.circular.lg.size.value",
+      "progress.size.circular.lg.size.unit",
+      "progress.size.circular.lg.strokeWidth.value",
+      "progress.size.circular.lg.strokeWidth.unit",
+      "progress.typography.value.fontSize",
+      "progress.typography.value.fontWeight",
+      "progress.motion.duration.indeterminate",
+      "progress.motion.easing.indeterminate",
+      "progress.spacing.gap"
+    ],
+    "track": [
+      "progress.color.track.background"
+    ],
+    "fill": [
+      "progress.color.fill.info",
+      "progress.color.fill.success",
+      "progress.color.fill.warning",
+      "progress.color.fill.danger"
+    ],
+    "value": [
+      "progress.typography.value.fontSize",
+      "progress.typography.value.fontWeight"
     ]
   },
   "ssr": {
-    "hydrateOn": "none"
+    "hydrateOn": "interaction"
   },
   "rtl": {
     "flipIcon": false

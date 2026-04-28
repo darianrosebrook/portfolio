@@ -1,37 +1,140 @@
 {
   "name": "Chip",
   "layer": "primitive",
-  "anatomy": ["root", "text", "icon"],
+  "anatomy": [
+    "root",
+    "icon",
+    "text"
+  ],
   "variants": {
-    "variant": ["default", "selected", "dismissible"],
-    "size": ["small", "medium", "large"]
+    "variant": [
+      "default",
+      "selected",
+      "dismissible"
+    ],
+    "size": [
+      "small",
+      "medium",
+      "large"
+    ],
+    "as": [
+      "button"
+    ],
+    "type": [
+      "button",
+      "submit",
+      "reset"
+    ]
   },
-  "states": ["default", "hover", "focus", "active", "disabled"],
-  "slots": {},
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "active",
+    "disabled"
+  ],
+  "slots": {
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"chip\"]"
+    }
+  },
   "a11y": {
-    "role": "button",
-    "labeling": ["aria-label", "aria-labelledby"],
+    "role": "generic",
+    "labeling": [
+      "aria-label",
+      "title"
+    ],
     "keyboard": [
       {
         "key": "Enter|Space",
-        "when": "root",
+        "when": "trigger",
         "then": "activate"
       }
     ],
-    "apgPattern": "button"
+    "apgPattern": null
   },
   "tokens": {
     "root": [
       "chip.color.background.default",
+      "chip.color.background.hover",
+      "chip.color.background.active",
+      "chip.color.background.focus",
+      "chip.color.background.selected",
+      "chip.color.background.selectedHover",
+      "chip.color.background.selectedActive",
+      "chip.color.background.dismissible",
+      "chip.color.background.dismissibleHover",
+      "chip.color.background.dismissibleActive",
       "chip.color.foreground.default",
-      "chip.size.padding.default",
-      "chip.size.radius.default"
+      "chip.color.foreground.hover",
+      "chip.color.foreground.active",
+      "chip.color.foreground.focus",
+      "chip.color.foreground.selected",
+      "chip.color.foreground.selectedHover",
+      "chip.color.foreground.selectedActive",
+      "chip.color.foreground.dismissible",
+      "chip.color.foreground.dismissibleHover",
+      "chip.color.foreground.dismissibleActive",
+      "chip.color.border.default",
+      "chip.color.border.hover",
+      "chip.color.border.active",
+      "chip.color.border.focus",
+      "chip.color.border.selected",
+      "chip.color.border.selectedHover",
+      "chip.color.border.selectedActive",
+      "chip.color.border.dismissible",
+      "chip.color.border.dismissibleHover",
+      "chip.color.border.dismissibleActive",
+      "chip.color.icon.default",
+      "chip.color.icon.hover",
+      "chip.color.icon.active",
+      "chip.color.icon.selected",
+      "chip.color.icon.dismissible",
+      "chip.color.icon.dismissibleHover",
+      "chip.size.padding.horizontal",
+      "chip.size.padding.vertical",
+      "chip.size.gap",
+      "chip.size.radius",
+      "chip.size.border",
+      "chip.size.icon.size",
+      "chip.size.icon.margin",
+      "chip.text.size",
+      "chip.text.weight",
+      "chip.text.lineHeight",
+      "chip.motion.duration.fast",
+      "chip.motion.duration.medium",
+      "chip.motion.duration.slow",
+      "chip.motion.easing.standard",
+      "chip.motion.easing.in",
+      "chip.motion.easing.out",
+      "chip.motion.scale.pressed",
+      "chip.motion.scale.iconEnter",
+      "chip.motion.scale.iconExit",
+      "chip.focus.outlineWidth",
+      "chip.focus.outlineOffset",
+      "chip.focus.outlineColor"
+    ],
+    "icon": [
+      "chip.color.icon.default",
+      "chip.color.icon.hover",
+      "chip.color.icon.active",
+      "chip.color.icon.selected",
+      "chip.color.icon.dismissible",
+      "chip.color.icon.dismissibleHover",
+      "chip.size.icon.size",
+      "chip.size.icon.margin"
+    ],
+    "text": [
+      "chip.text.size",
+      "chip.text.weight",
+      "chip.text.lineHeight"
     ]
   },
   "ssr": {
-    "hydrateOn": "none"
+    "hydrateOn": "interaction"
   },
   "rtl": {
-    "flipIcon": false
+    "flipIcon": true
   }
 }

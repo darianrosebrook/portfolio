@@ -1,26 +1,75 @@
 {
   "name": "Tabs",
-  "layer": "compound",
-  "anatomy": ["root", "list", "indicator", "tab", "tabActive"],
-  "variants": {},
-  "states": ["default", "hover", "focus", "active", "disabled"],
+  "layer": "composer",
+  "anatomy": [
+    "root",
+    "list",
+    "indicator",
+    "tab",
+    "tabActive",
+    "tabDisabled",
+    "panel",
+    "panelActive",
+    "panelInactive"
+  ],
+  "variants": {
+    "orientation": [
+      "horizontal",
+      "vertical"
+    ]
+  },
+  "states": [
+    "default",
+    "hover",
+    "focus"
+  ],
   "slots": {},
   "a11y": {
-    "role": "group",
-    "labeling": ["aria-label", "aria-labelledby"],
-    "keyboard": [],
+    "role": "tablist",
+    "roles": [
+      "tablist",
+      "tab",
+      "tabpanel"
+    ],
+    "labeling": [],
+    "keyboard": [
+      {
+        "key": "Enter|Space",
+        "when": "trigger",
+        "then": "activate"
+      },
+      {
+        "key": "ArrowLeft|ArrowRight",
+        "when": "tablist",
+        "then": "move focus"
+      },
+      {
+        "key": "Enter|Space",
+        "when": "tab",
+        "then": "activate tab"
+      }
+    ],
     "apgPattern": null
   },
   "tokens": {
     "root": [
-      "tabs.color.background.default",
-      "tabs.color.foreground.primary",
-      "tabs.size.padding.default",
-      "tabs.size.radius.default"
+      "tabs.spacing.gap",
+      "tabs.spacing.padding",
+      "tabs.spacing.panelGap",
+      "tabs.color.fg",
+      "tabs.color.active-fg",
+      "tabs.color.active-bg",
+      "tabs.color.disabled-fg",
+      "tabs.color.indicator",
+      "tabs.color.focus",
+      "tabs.color.hover.bg",
+      "tabs.color.hover.fg",
+      "tabs.shape.radius",
+      "tabs.motion.indicator"
     ]
   },
   "ssr": {
-    "hydrateOn": "none"
+    "hydrateOn": "interaction"
   },
   "rtl": {
     "flipIcon": false

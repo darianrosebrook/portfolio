@@ -1,0 +1,43 @@
+{
+  "name": "AnimatedSection",
+  "layer": "primitive",
+  "anatomy": [
+    "root",
+    "animatedSection",
+    "animatedChild"
+  ],
+  "variants": {
+    "as": [
+      "section",
+      "div",
+      "article",
+      "main",
+      "aside",
+      "header",
+      "footer"
+    ],
+    "variant": [
+      "fade-up",
+      "fade-in",
+      "slide-in",
+      "stagger-children"
+    ]
+  },
+  "states": [
+    "default"
+  ],
+  "slots": {},
+  "a11y": {
+    "role": "generic",
+    "labeling": [],
+    "keyboard": [],
+    "apgPattern": null
+  },
+  "tokens": {},
+  "ssr": {
+    "hydrateOn": "interaction"
+  },
+  "rtl": {
+    "flipIcon": false
+  }
+}

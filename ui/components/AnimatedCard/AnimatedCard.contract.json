@@ -1,13 +1,29 @@
 {
-  "name": "AspectRatio",
+  "name": "AnimatedCard",
   "layer": "primitive",
   "anatomy": [
     "root",
-    "container"
+    "animatedCard",
+    "hoverable",
+    "cardImage",
+    "cardTitle",
+    "cardOverlay",
+    "cardImageWrapper"
   ],
-  "variants": {},
+  "variants": {
+    "as": [
+      "h1",
+      "h2",
+      "h3",
+      "h4",
+      "h5",
+      "h6"
+    ]
+  },
   "states": [
-    "default"
+    "default",
+    "hover",
+    "focus"
   ],
   "slots": {},
   "a11y": {

@@ -1,26 +1,39 @@
 {
   "name": "Divider",
   "layer": "primitive",
-  "anatomy": ["root", "horizontal", "vertical"],
-  "variants": {},
-  "states": ["default", "hover", "focus", "active", "disabled"],
+  "anatomy": [
+    "root"
+  ],
+  "variants": {
+    "orientation": [
+      "horizontal",
+      "vertical"
+    ]
+  },
+  "states": [
+    "default"
+  ],
   "slots": {},
   "a11y": {
     "role": "generic",
-    "labeling": ["aria-label"],
+    "labeling": [
+      "aria-orientation"
+    ],
     "keyboard": [],
     "apgPattern": null
   },
   "tokens": {
     "root": [
-      "divider.color.background.default",
-      "divider.color.foreground.primary",
-      "divider.size.padding.default",
-      "divider.size.radius.default"
+      "divider.color.default",
+      "divider.color.subtle",
+      "divider.color.muted",
+      "divider.size.thickness",
+      "divider.size.thicknessThick",
+      "divider.spacing.margin"
     ]
   },
   "ssr": {
-    "hydrateOn": "none"
+    "hydrateOn": "interaction"
   },
   "rtl": {
     "flipIcon": false

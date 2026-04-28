@@ -1,18 +1,39 @@
 {
   "name": "Postcard",
   "layer": "composer",
-  "anatomy": ["root", "post", "header", "userInfo", "displayName", "handle"],
-  "variants": {},
-  "states": ["default", "hover", "focus", "active", "disabled"],
+  "anatomy": [
+    "root",
+    "post",
+    "header",
+    "userInfo",
+    "displayName",
+    "handle",
+    "timestamp",
+    "content",
+    "footer",
+    "stats",
+    "stat"
+  ],
+  "variants": {
+    "type": [
+      "image",
+      "video",
+      "audio"
+    ]
+  },
+  "states": [
+    "default",
+    "hover"
+  ],
   "slots": {},
   "a11y": {
     "role": "region",
-    "labeling": ["aria-label", "aria-labelledby"],
+    "labeling": [],
     "keyboard": [
       {
-        "key": "Tab",
-        "when": "any",
-        "then": "navigate children"
+        "key": "Enter|Space",
+        "when": "trigger",
+        "then": "activate"
       }
     ],
     "apgPattern": null
@@ -20,9 +41,43 @@
   "tokens": {
     "root": [
       "postcard.color.background.default",
+      "postcard.color.background.hover",
+      "postcard.color.background.active",
+      "postcard.color.border.default",
+      "postcard.color.border.accent",
+      "postcard.color.border.hover",
       "postcard.color.foreground.primary",
+      "postcard.color.foreground.secondary",
+      "postcard.color.foreground.muted",
       "postcard.size.padding.default",
-      "postcard.size.radius.default"
+      "postcard.size.radius.default",
+      "postcard.size.radius.medium",
+      "postcard.size.radius.full",
+      "postcard.size.margin.bottom",
+      "postcard.size.gap.default",
+      "postcard.size.gap.small",
+      "postcard.size.gap.large",
+      "postcard.size.border.default",
+      "postcard.typography.displayName.fontSize",
+      "postcard.typography.displayName.fontWeight",
+      "postcard.typography.handle.fontSize",
+      "postcard.typography.content.fontSize",
+      "postcard.typography.content.lineHeight",
+      "postcard.typography.footer.fontSize"
+    ],
+    "displayName": [
+      "postcard.typography.displayName.fontSize",
+      "postcard.typography.displayName.fontWeight"
+    ],
+    "handle": [
+      "postcard.typography.handle.fontSize"
+    ],
+    "content": [
+      "postcard.typography.content.fontSize",
+      "postcard.typography.content.lineHeight"
+    ],
+    "footer": [
+      "postcard.typography.footer.fontSize"
     ]
   },
   "ssr": {

@@ -1,32 +1,73 @@
 {
   "name": "TextField",
   "layer": "primitive",
-  "anatomy": ["root", "field", "description", "error"],
+  "anatomy": [
+    "root",
+    "field",
+    "description",
+    "label"
+  ],
   "variants": {},
-  "states": ["default", "hover", "focus", "active", "disabled"],
+  "states": [
+    "default",
+    "error"
+  ],
   "slots": {},
   "a11y": {
-    "role": "textbox",
-    "labeling": ["aria-label", "aria-labelledby", "aria-describedby"],
-    "keyboard": [
-      {
-        "key": "Tab",
-        "when": "root",
-        "then": "focus"
-      }
+    "role": "alert",
+    "labeling": [
+      "aria-describedby"
     ],
-    "apgPattern": "textbox"
+    "keyboard": [],
+    "apgPattern": "alert"
   },
   "tokens": {
     "root": [
-      "textfield.color.background.default",
-      "textfield.color.foreground.primary",
-      "textfield.size.padding.default",
-      "textfield.size.radius.default"
+      "textfield.spacing.gap",
+      "textfield.spacing.padding.input",
+      "textfield.spacing.padding.label",
+      "textfield.color.label.default",
+      "textfield.color.label.required",
+      "textfield.color.label.disabled",
+      "textfield.color.input.background",
+      "textfield.color.input.border",
+      "textfield.color.input.borderHover",
+      "textfield.color.input.borderFocus",
+      "textfield.color.input.borderError",
+      "textfield.color.input.text",
+      "textfield.color.input.placeholder",
+      "textfield.color.input.disabled",
+      "textfield.color.helper.default",
+      "textfield.color.helper.error",
+      "textfield.color.error",
+      "textfield.typography.label.fontSize",
+      "textfield.typography.label.fontWeight",
+      "textfield.typography.label.lineHeight",
+      "textfield.typography.input.fontSize",
+      "textfield.typography.input.fontWeight",
+      "textfield.typography.input.lineHeight",
+      "textfield.typography.helper.fontSize",
+      "textfield.typography.helper.fontWeight",
+      "textfield.typography.helper.lineHeight",
+      "textfield.border.width",
+      "textfield.border.radius",
+      "textfield.focus.ring.width",
+      "textfield.focus.ring.color",
+      "textfield.focus.ring.offset",
+      "textfield.transition.duration",
+      "textfield.transition.easing"
+    ],
+    "label": [
+      "textfield.color.label.default",
+      "textfield.color.label.required",
+      "textfield.color.label.disabled",
+      "textfield.typography.label.fontSize",
+      "textfield.typography.label.fontWeight",
+      "textfield.typography.label.lineHeight"
     ]
   },
   "ssr": {
-    "hydrateOn": "none"
+    "hydrateOn": "interaction"
   },
   "rtl": {
     "flipIcon": false

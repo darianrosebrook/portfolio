@@ -1,32 +1,93 @@
 {
   "name": "Toast",
-  "layer": "compound",
-  "anatomy": ["root", "viewport", "item", "entering", "leaving", "row"],
-  "variants": {},
-  "states": ["default", "hover", "focus", "active", "disabled"],
-  "slots": {},
+  "layer": "composer",
+  "anatomy": [
+    "root",
+    "action",
+    "close",
+    "description",
+    "title",
+    "viewport",
+    "item",
+    "row"
+  ],
+  "variants": {
+    "politeness": [
+      "polite",
+      "assertive"
+    ],
+    "variant": [
+      "info",
+      "success",
+      "warning",
+      "error"
+    ]
+  },
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "entering",
+    "visible",
+    "leaving"
+  ],
+  "slots": {
+    "action": {
+      "required": false
+    },
+    "close": {
+      "required": false
+    },
+    "description": {
+      "required": false
+    },
+    "title": {
+      "required": false
+    }
+  },
   "a11y": {
-    "role": "status",
-    "labeling": ["aria-label"],
+    "role": "alert",
+    "roles": [
+      "alert",
+      "status"
+    ],
+    "labeling": [
+      "aria-label"
+    ],
     "keyboard": [
       {
-        "key": "Escape",
-        "when": "focused",
-        "then": "dismiss"
+        "key": "Enter|Space",
+        "when": "trigger",
+        "then": "activate"
       }
     ],
     "apgPattern": "alert"
   },
   "tokens": {
     "root": [
-      "toast.color.background.default",
-      "toast.color.foreground.primary",
-      "toast.size.padding.default",
-      "toast.size.radius.default"
+      "toast.surface.bg",
+      "toast.surface.border",
+      "toast.surface.radius",
+      "toast.surface.shadow",
+      "toast.color.info",
+      "toast.color.success",
+      "toast.color.warning",
+      "toast.color.error",
+      "toast.accent.info",
+      "toast.accent.success",
+      "toast.accent.warning",
+      "toast.accent.error",
+      "toast.spacing.padding",
+      "toast.spacing.gap",
+      "toast.spacing.stackGap",
+      "toast.size.maxWidth.value",
+      "toast.size.maxWidth.unit",
+      "toast.motion.enter",
+      "toast.motion.leave"
     ]
   },
   "ssr": {
-    "hydrateOn": "none"
+    "hydrateOn": "interaction"
   },
   "rtl": {
     "flipIcon": false

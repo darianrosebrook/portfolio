@@ -1,58 +1,66 @@
 {
   "name": "Checkbox",
   "layer": "primitive",
-  "anatomy": ["root", "input", "indicator", "checkIcon", "indeterminateIcon"],
+  "anatomy": [
+    "root",
+    "indicator",
+    "checkboxWrapper",
+    "checkIcon",
+    "indeterminateIcon",
+    "checkboxIndicator"
+  ],
   "variants": {
-    "size": ["sm", "md", "lg"]
+    "size": [
+      "sm",
+      "md",
+      "lg"
+    ]
   },
   "states": [
     "default",
     "hover",
     "focus",
-    "active",
-    "disabled",
-    "checked",
-    "indeterminate"
+    "disabled"
   ],
-  "slots": {
-    "checkIcon": { "optional": true },
-    "indeterminateIcon": { "optional": true }
-  },
+  "slots": {},
   "a11y": {
-    "role": "checkbox",
-    "labeling": ["aria-label", "aria-labelledby", "aria-describedby"],
-    "keyboard": [
-      {
-        "key": "Space",
-        "when": "root",
-        "then": "toggle"
-      },
-      {
-        "key": "Enter",
-        "when": "root",
-        "then": "toggle"
-      }
+    "role": "generic",
+    "labeling": [
+      "aria-checked"
     ],
-    "apgPattern": "checkbox"
+    "keyboard": [],
+    "apgPattern": null
   },
   "tokens": {
     "root": [
+      "checkbox.size.sm.width",
+      "checkbox.size.sm.height",
+      "checkbox.size.sm.iconSize",
+      "checkbox.size.md.width",
+      "checkbox.size.md.height",
+      "checkbox.size.md.iconSize",
+      "checkbox.size.lg.width",
+      "checkbox.size.lg.height",
+      "checkbox.size.lg.iconSize",
       "checkbox.color.background.default",
-      "checkbox.color.border.default",
-      "checkbox.size.width.md",
-      "checkbox.size.height.md",
-      "checkbox.border.radius",
-      "checkbox.border.width"
-    ],
-    "indicator": [
       "checkbox.color.background.checked",
+      "checkbox.color.background.indeterminate",
+      "checkbox.color.background.disabled",
+      "checkbox.color.border.default",
+      "checkbox.color.border.hover",
+      "checkbox.color.border.focus",
       "checkbox.color.border.checked",
-      "checkbox.color.icon.default"
-    ],
-    "checkIcon": ["checkbox.color.icon.default", "checkbox.size.icon.md"],
-    "indeterminateIcon": [
+      "checkbox.color.border.disabled",
       "checkbox.color.icon.default",
-      "checkbox.size.icon.md"
+      "checkbox.color.icon.disabled",
+      "checkbox.border.width",
+      "checkbox.border.radius",
+      "checkbox.spacing.gap",
+      "checkbox.transition.duration",
+      "checkbox.transition.easing",
+      "checkbox.focus.ring.width",
+      "checkbox.focus.ring.color",
+      "checkbox.focus.ring.offset"
     ]
   },
   "ssr": {

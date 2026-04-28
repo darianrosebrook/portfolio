@@ -1,28 +1,88 @@
 {
   "name": "Badge",
   "layer": "primitive",
-  "anatomy": ["root"],
-  "variants": {},
-  "states": ["default", "hover", "focus", "active", "disabled"],
+  "anatomy": [
+    "root",
+    "icon",
+    "content"
+  ],
+  "variants": {
+    "variant": [
+      "default",
+      "status",
+      "counter",
+      "tag"
+    ],
+    "intent": [
+      "info",
+      "success",
+      "warning",
+      "danger"
+    ],
+    "size": [
+      "sm",
+      "md",
+      "lg"
+    ]
+  },
+  "states": [
+    "default",
+    "hover"
+  ],
   "slots": {},
   "a11y": {
     "role": "generic",
-    "labeling": ["aria-label"],
+    "labeling": [],
     "keyboard": [],
     "apgPattern": null
   },
   "tokens": {
     "root": [
       "badge.color.background.default",
+      "badge.color.background.info",
+      "badge.color.background.success",
+      "badge.color.background.warning",
+      "badge.color.background.danger",
+      "badge.color.background.counter",
+      "badge.color.background.tag",
       "badge.color.foreground.primary",
-      "badge.size.padding.default",
-      "badge.size.radius.default"
+      "badge.color.foreground.secondary",
+      "badge.color.foreground.info",
+      "badge.color.foreground.success",
+      "badge.color.foreground.warning",
+      "badge.color.foreground.danger",
+      "badge.color.foreground.accent",
+      "badge.color.foreground.onColor",
+      "badge.color.border.default",
+      "badge.color.border.accent",
+      "badge.color.border.info",
+      "badge.color.border.success",
+      "badge.color.border.warning",
+      "badge.color.border.danger",
+      "badge.size.sm.paddingY",
+      "badge.size.sm.paddingX",
+      "badge.size.sm.fontSize",
+      "badge.size.sm.radius",
+      "badge.size.sm.iconSize",
+      "badge.size.md.paddingY",
+      "badge.size.md.paddingX",
+      "badge.size.md.fontSize",
+      "badge.size.md.radius",
+      "badge.size.md.iconSize",
+      "badge.size.lg.paddingY",
+      "badge.size.lg.paddingX",
+      "badge.size.lg.fontSize",
+      "badge.size.lg.radius",
+      "badge.size.lg.iconSize",
+      "badge.elevation.default",
+      "badge.elevation.status",
+      "badge.spacing.gap"
     ]
   },
   "ssr": {
-    "hydrateOn": "none"
+    "hydrateOn": "interaction"
   },
   "rtl": {
-    "flipIcon": false
+    "flipIcon": true
   }
 }

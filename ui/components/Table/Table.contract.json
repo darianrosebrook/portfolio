@@ -1,26 +1,121 @@
 {
   "name": "Table",
   "layer": "compound",
-  "anatomy": ["root"],
+  "anatomy": [
+    "root",
+    "body",
+    "caption",
+    "cell",
+    "container",
+    "element",
+    "footer",
+    "head",
+    "header",
+    "row",
+    "responsive",
+    "interactive",
+    "sortable",
+    "headContent",
+    "sortIcon",
+    "truncate",
+    "data"
+  ],
   "variants": {},
-  "states": ["default"],
-  "slots": {},
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "selected"
+  ],
+  "slots": {
+    "body": {
+      "required": false,
+      "selector": "[data-slot=\"table-body\"]"
+    },
+    "caption": {
+      "required": false,
+      "selector": "[data-slot=\"table-caption\"]"
+    },
+    "cell": {
+      "required": false,
+      "selector": "[data-slot=\"table-cell\"]"
+    },
+    "container": {
+      "required": false,
+      "selector": "[data-slot=\"table-container\"]"
+    },
+    "element": {
+      "required": false
+    },
+    "footer": {
+      "required": false,
+      "selector": "[data-slot=\"table-footer\"]"
+    },
+    "head": {
+      "required": false,
+      "selector": "[data-slot=\"table-head\"]"
+    },
+    "header": {
+      "required": false,
+      "selector": "[data-slot=\"table-header\"]"
+    },
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"table\"]"
+    },
+    "row": {
+      "required": false,
+      "selector": "[data-slot=\"table-row\"]"
+    }
+  },
   "a11y": {
-    "role": "region",
-    "labeling": [],
-    "keyboard": [],
+    "role": "generic",
+    "labeling": [
+      "aria-sort"
+    ],
+    "keyboard": [
+      {
+        "key": "KeyboardEvent",
+        "when": "root",
+        "then": "handled by component"
+      }
+    ],
     "apgPattern": null
   },
   "tokens": {
     "root": [
-      "table.color.background.default",
-      "table.color.foreground.primary",
-      "table.size.padding.default",
-      "table.size.radius.default"
+      "table.color.text",
+      "table.color.textHead",
+      "table.color.textMuted",
+      "table.color.border",
+      "table.color.background.hover",
+      "table.color.background.selected",
+      "table.color.background.footer",
+      "table.border.width",
+      "table.spacing.cellX",
+      "table.spacing.cellY",
+      "table.spacing.caption",
+      "table.spacing.sortGap",
+      "table.spacing.checkboxOffset",
+      "table.size.cellHeight",
+      "table.size.checkboxColumn",
+      "table.size.radius",
+      "table.text.size",
+      "table.text.lineHeight",
+      "table.text.sizeCaption",
+      "table.text.sizeSort",
+      "table.text.weightHead",
+      "table.text.weightFooter",
+      "table.motion.duration",
+      "table.motion.easing",
+      "table.focus.width",
+      "table.focus.color",
+      "table.focus.offset",
+      "table.elevation.raised"
     ]
   },
   "ssr": {
-    "hydrateOn": "none"
+    "hydrateOn": "interaction"
   },
   "rtl": {
     "flipIcon": false

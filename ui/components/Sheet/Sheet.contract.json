@@ -1,26 +1,159 @@
 {
   "name": "Sheet",
   "layer": "composer",
-  "anatomy": ["root"],
-  "variants": {},
-  "states": ["default"],
-  "slots": {},
+  "anatomy": [
+    "root",
+    "body",
+    "close",
+    "content",
+    "description",
+    "footer",
+    "header",
+    "overlay",
+    "portal",
+    "title",
+    "trigger",
+    "modal"
+  ],
+  "variants": {
+    "side": [
+      "top",
+      "right",
+      "bottom",
+      "left"
+    ]
+  },
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "open",
+    "closed"
+  ],
+  "slots": {
+    "body": {
+      "required": false,
+      "selector": "[data-slot=\"sheet-body\"]"
+    },
+    "close": {
+      "required": false,
+      "selector": "[data-slot=\"sheet-close\"]"
+    },
+    "content": {
+      "required": false,
+      "selector": "[data-slot=\"sheet-content\"]"
+    },
+    "description": {
+      "required": false,
+      "selector": "[data-slot=\"sheet-description\"]"
+    },
+    "footer": {
+      "required": false,
+      "selector": "[data-slot=\"sheet-footer\"]"
+    },
+    "header": {
+      "required": false,
+      "selector": "[data-slot=\"sheet-header\"]"
+    },
+    "overlay": {
+      "required": false,
+      "selector": "[data-slot=\"sheet-overlay\"]"
+    },
+    "portal": {
+      "required": false
+    },
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"sheet\"]"
+    },
+    "title": {
+      "required": false,
+      "selector": "[data-slot=\"sheet-title\"]"
+    },
+    "trigger": {
+      "required": false,
+      "selector": "[data-slot=\"sheet-trigger\"]"
+    }
+  },
   "a11y": {
-    "role": "region",
-    "labeling": [],
-    "keyboard": [],
-    "apgPattern": null
+    "role": "dialog",
+    "labeling": [
+      "aria-label"
+    ],
+    "keyboard": [
+      {
+        "key": "Enter|Space",
+        "when": "trigger",
+        "then": "activate"
+      },
+      {
+        "key": "Escape",
+        "when": "open",
+        "then": "close"
+      },
+      {
+        "key": "Tab",
+        "when": "open",
+        "then": "cycle focus within"
+      }
+    ],
+    "apgPattern": "dialog-modal"
   },
   "tokens": {
     "root": [
-      "sheet.color.background.default",
-      "sheet.color.foreground.primary",
-      "sheet.size.padding.default",
-      "sheet.size.radius.default"
+      "sheet.color.overlay.colorSpace",
+      "sheet.color.overlay.components.0",
+      "sheet.color.overlay.components.1",
+      "sheet.color.overlay.components.2",
+      "sheet.color.overlay.alpha",
+      "sheet.color.background",
+      "sheet.color.backgroundHover",
+      "sheet.color.border",
+      "sheet.color.borderLight",
+      "sheet.color.text",
+      "sheet.color.textTitle",
+      "sheet.color.textDescription",
+      "sheet.color.textMuted",
+      "sheet.border.width",
+      "sheet.border.radius",
+      "sheet.border.radiusClose",
+      "sheet.size.width.value",
+      "sheet.size.width.unit",
+      "sheet.size.height.value",
+      "sheet.size.height.unit",
+      "sheet.size.close",
+      "sheet.spacing.padding",
+      "sheet.spacing.gap",
+      "sheet.spacing.section",
+      "sheet.spacing.headerGap",
+      "sheet.spacing.footerGap",
+      "sheet.spacing.closeOffset",
+      "sheet.text.size",
+      "sheet.text.lineHeight",
+      "sheet.text.sizeTitle",
+      "sheet.text.lineHeightTitle",
+      "sheet.text.weightTitle",
+      "sheet.text.sizeDescription",
+      "sheet.text.lineHeightDescription",
+      "sheet.motion.duration",
+      "sheet.motion.easing",
+      "sheet.zIndex.overlay",
+      "sheet.zIndex.content",
+      "sheet.shadow",
+      "sheet.focus.width",
+      "sheet.focus.color",
+      "sheet.focus.offset"
+    ],
+    "overlay": [
+      "sheet.color.overlay.colorSpace",
+      "sheet.color.overlay.components.0",
+      "sheet.color.overlay.components.1",
+      "sheet.color.overlay.components.2",
+      "sheet.color.overlay.alpha"
     ]
   },
   "ssr": {
-    "hydrateOn": "none"
+    "hydrateOn": "interaction"
   },
   "rtl": {
     "flipIcon": false

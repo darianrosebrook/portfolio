@@ -1,26 +1,162 @@
 {
   "name": "Switch",
   "layer": "primitive",
-  "anatomy": ["root", "switchGroup"],
-  "variants": {},
-  "states": ["default", "hover", "focus", "active", "disabled"],
-  "slots": {},
+  "anatomy": [
+    "root",
+    "field",
+    "switchPrimitive",
+    "input",
+    "track",
+    "thumb",
+    "switchField",
+    "labelStart",
+    "labelWrapper",
+    "label",
+    "description",
+    "switchGroup"
+  ],
+  "variants": {
+    "size": [
+      "sm",
+      "md",
+      "lg"
+    ],
+    "orientation": [
+      "vertical",
+      "horizontal"
+    ]
+  },
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "disabled"
+  ],
+  "slots": {
+    "field": {
+      "required": false,
+      "selector": "[data-slot=\"switch-field\"]"
+    },
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"switch\"]"
+    }
+  },
   "a11y": {
-    "role": "generic",
-    "labeling": ["aria-label"],
+    "role": "switch",
+    "roles": [
+      "switch",
+      "group"
+    ],
+    "labeling": [
+      "aria-checked",
+      "aria-label",
+      "aria-labelledby",
+      "aria-describedby"
+    ],
     "keyboard": [],
-    "apgPattern": null
+    "apgPattern": "switch"
   },
   "tokens": {
     "root": [
-      "switch.color.background.default",
-      "switch.color.foreground.primary",
-      "switch.size.padding.default",
-      "switch.size.radius.default"
+      "switch.color.track.background.default",
+      "switch.color.track.background.hover",
+      "switch.color.track.background.focus",
+      "switch.color.track.background.disabled",
+      "switch.color.track.background.checked",
+      "switch.color.track.background.error",
+      "switch.color.track.border.default",
+      "switch.color.track.border.hover",
+      "switch.color.track.border.focus",
+      "switch.color.track.border.disabled",
+      "switch.color.track.border.error",
+      "switch.color.thumb.background.default",
+      "switch.color.thumb.background.hover",
+      "switch.color.thumb.background.focus",
+      "switch.color.thumb.background.disabled",
+      "switch.color.thumb.background.checked",
+      "switch.color.thumb.background.error",
+      "switch.color.thumb.border.default",
+      "switch.color.thumb.border.hover",
+      "switch.color.thumb.border.focus",
+      "switch.color.thumb.border.disabled",
+      "switch.color.thumb.border.error",
+      "switch.color.thumb.shadow",
+      "switch.color.text.default",
+      "switch.color.text.hover",
+      "switch.color.text.disabled",
+      "switch.color.text.error",
+      "switch.size.sm.track.width",
+      "switch.size.sm.track.height",
+      "switch.size.sm.track.radius",
+      "switch.size.sm.thumb.size",
+      "switch.size.sm.thumb.offset",
+      "switch.size.sm.gap",
+      "switch.size.sm.fontSize",
+      "switch.size.md.track.width",
+      "switch.size.md.track.height",
+      "switch.size.md.track.radius",
+      "switch.size.md.thumb.size",
+      "switch.size.md.thumb.offset",
+      "switch.size.md.gap",
+      "switch.size.md.fontSize",
+      "switch.size.lg.track.width",
+      "switch.size.lg.track.height",
+      "switch.size.lg.track.radius",
+      "switch.size.lg.thumb.size",
+      "switch.size.lg.thumb.offset",
+      "switch.size.lg.gap",
+      "switch.size.lg.fontSize",
+      "switch.motion.duration",
+      "switch.motion.easing",
+      "switch.focus.ring",
+      "switch.focus.offset"
+    ],
+    "track": [
+      "switch.color.track.background.default",
+      "switch.color.track.background.hover",
+      "switch.color.track.background.focus",
+      "switch.color.track.background.disabled",
+      "switch.color.track.background.checked",
+      "switch.color.track.background.error",
+      "switch.color.track.border.default",
+      "switch.color.track.border.hover",
+      "switch.color.track.border.focus",
+      "switch.color.track.border.disabled",
+      "switch.color.track.border.error",
+      "switch.size.sm.track.width",
+      "switch.size.sm.track.height",
+      "switch.size.sm.track.radius",
+      "switch.size.md.track.width",
+      "switch.size.md.track.height",
+      "switch.size.md.track.radius",
+      "switch.size.lg.track.width",
+      "switch.size.lg.track.height",
+      "switch.size.lg.track.radius"
+    ],
+    "thumb": [
+      "switch.color.thumb.background.default",
+      "switch.color.thumb.background.hover",
+      "switch.color.thumb.background.focus",
+      "switch.color.thumb.background.disabled",
+      "switch.color.thumb.background.checked",
+      "switch.color.thumb.background.error",
+      "switch.color.thumb.border.default",
+      "switch.color.thumb.border.hover",
+      "switch.color.thumb.border.focus",
+      "switch.color.thumb.border.disabled",
+      "switch.color.thumb.border.error",
+      "switch.color.thumb.shadow",
+      "switch.size.sm.thumb.size",
+      "switch.size.sm.thumb.offset",
+      "switch.size.md.thumb.size",
+      "switch.size.md.thumb.offset",
+      "switch.size.lg.thumb.size",
+      "switch.size.lg.thumb.offset"
     ]
   },
   "ssr": {
-    "hydrateOn": "none"
+    "hydrateOn": "interaction"
   },
   "rtl": {
     "flipIcon": false

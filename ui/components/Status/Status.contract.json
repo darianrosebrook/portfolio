@@ -1,26 +1,50 @@
 {
   "name": "Status",
   "layer": "primitive",
-  "anatomy": ["root"],
-  "variants": {},
-  "states": ["default", "hover", "focus", "active", "disabled"],
+  "anatomy": [
+    "root"
+  ],
+  "variants": {
+    "status": [
+      "info",
+      "success",
+      "warning",
+      "danger",
+      "error"
+    ]
+  },
+  "states": [
+    "default"
+  ],
   "slots": {},
   "a11y": {
     "role": "generic",
-    "labeling": ["aria-label"],
+    "labeling": [],
     "keyboard": [],
     "apgPattern": null
   },
   "tokens": {
     "root": [
       "status.color.background.default",
+      "status.color.background.hover",
+      "status.color.background.active",
+      "status.color.background.disabled",
       "status.color.foreground.primary",
+      "status.color.foreground.secondary",
+      "status.color.foreground.accent",
+      "status.color.foreground.disabled",
+      "status.color.border.default",
+      "status.color.border.hover",
+      "status.color.border.accent",
+      "status.color.border.disabled",
+      "status.size.radius.default",
       "status.size.padding.default",
-      "status.size.radius.default"
+      "status.size.border.default",
+      "status.typography.lineHeight"
     ]
   },
   "ssr": {
-    "hydrateOn": "none"
+    "hydrateOn": "interaction"
   },
   "rtl": {
     "flipIcon": false

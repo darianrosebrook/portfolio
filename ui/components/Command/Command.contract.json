@@ -1,26 +1,152 @@
 {
   "name": "Command",
   "layer": "composer",
-  "anatomy": ["root"],
+  "anatomy": [
+    "root",
+    "dialog",
+    "group",
+    "input",
+    "item",
+    "items",
+    "list",
+    "separator",
+    "overlay",
+    "inputWrapper",
+    "searchIcon",
+    "empty",
+    "groupHeading",
+    "groupItems",
+    "itemIcon",
+    "itemContent",
+    "itemLabel",
+    "itemDescription"
+  ],
   "variants": {},
-  "states": ["default"],
-  "slots": {},
+  "states": [
+    "default",
+    "hover",
+    "disabled",
+    "selected"
+  ],
+  "slots": {
+    "dialog": {
+      "required": false,
+      "selector": "[data-slot=\"command-dialog\"]"
+    },
+    "group": {
+      "required": false,
+      "selector": "[data-slot=\"command-group\"]"
+    },
+    "input": {
+      "required": false,
+      "selector": "[data-slot=\"command-input\"]"
+    },
+    "item": {
+      "required": false,
+      "selector": "[data-slot=\"command-item\"]"
+    },
+    "items": {
+      "required": false,
+      "selector": "[data-slot=\"command-items\"]"
+    },
+    "list": {
+      "required": false,
+      "selector": "[data-slot=\"command-list\"]"
+    },
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"command\"]"
+    },
+    "separator": {
+      "required": false,
+      "selector": "[data-slot=\"command-separator\"]"
+    }
+  },
   "a11y": {
-    "role": "region",
+    "role": "dialog",
+    "roles": [
+      "dialog",
+      "listbox",
+      "option",
+      "presentation",
+      "separator"
+    ],
     "labeling": [],
-    "keyboard": [],
-    "apgPattern": null
+    "keyboard": [
+      {
+        "key": "Escape",
+        "when": "open",
+        "then": "close"
+      },
+      {
+        "key": "Tab",
+        "when": "open",
+        "then": "cycle focus within"
+      }
+    ],
+    "apgPattern": "dialog-modal"
   },
   "tokens": {
     "root": [
-      "command.color.background.default",
-      "command.color.foreground.primary",
-      "command.size.padding.default",
-      "command.size.radius.default"
+      "command.color.overlay.colorSpace",
+      "command.color.overlay.components.0",
+      "command.color.overlay.components.1",
+      "command.color.overlay.components.2",
+      "command.color.overlay.alpha",
+      "command.color.background",
+      "command.color.backgroundHover",
+      "command.color.border",
+      "command.color.borderLight",
+      "command.color.text",
+      "command.color.textMuted",
+      "command.border.width",
+      "command.border.radius",
+      "command.border.radiusItem",
+      "command.size.maxWidth.value",
+      "command.size.maxWidth.unit",
+      "command.size.maxHeight.value",
+      "command.size.maxHeight.unit",
+      "command.size.maxHeightMobile.value",
+      "command.size.maxHeightMobile.unit",
+      "command.size.icon",
+      "command.spacing.dialogPadding",
+      "command.spacing.dialogMarginTop",
+      "command.spacing.inputPadding",
+      "command.spacing.inputPaddingX",
+      "command.spacing.inputPaddingLeft",
+      "command.spacing.inputIconOffset",
+      "command.spacing.listPadding",
+      "command.spacing.emptyPadding",
+      "command.spacing.groupGap",
+      "command.spacing.groupHeadingPadding",
+      "command.spacing.itemGap",
+      "command.spacing.itemPadding",
+      "command.spacing.descriptionGap",
+      "command.spacing.separatorMargin",
+      "command.spacing.mobilePadding",
+      "command.spacing.mobileMarginTop",
+      "command.text.size",
+      "command.text.lineHeight",
+      "command.text.weight",
+      "command.text.weightMedium",
+      "command.text.sizeSmall",
+      "command.text.lineHeightTight",
+      "command.motion.duration",
+      "command.motion.easing",
+      "command.zIndex.overlay",
+      "command.shadow",
+      "command.opacity.disabled"
+    ],
+    "overlay": [
+      "command.color.overlay.colorSpace",
+      "command.color.overlay.components.0",
+      "command.color.overlay.components.1",
+      "command.color.overlay.components.2",
+      "command.color.overlay.alpha"
     ]
   },
   "ssr": {
-    "hydrateOn": "none"
+    "hydrateOn": "interaction"
   },
   "rtl": {
     "flipIcon": false

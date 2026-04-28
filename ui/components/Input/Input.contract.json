@@ -1,32 +1,38 @@
 {
   "name": "Input",
   "layer": "primitive",
-  "anatomy": ["root", "invalid"],
+  "anatomy": [
+    "root"
+  ],
   "variants": {},
-  "states": ["default", "hover", "focus", "active", "disabled"],
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "disabled",
+    "invalid"
+  ],
   "slots": {},
   "a11y": {
-    "role": "textbox",
-    "labeling": ["aria-label", "aria-labelledby", "aria-describedby"],
-    "keyboard": [
-      {
-        "key": "Tab",
-        "when": "root",
-        "then": "focus"
-      }
-    ],
-    "apgPattern": "textbox"
+    "role": "generic",
+    "labeling": [],
+    "keyboard": [],
+    "apgPattern": null
   },
   "tokens": {
     "root": [
-      "input.color.background.default",
-      "input.color.foreground.primary",
-      "input.size.padding.default",
-      "input.size.radius.default"
+      "input.color.bg.default",
+      "input.color.text.default",
+      "input.color.border.default",
+      "input.color.focus.default",
+      "input.color.invalid.default",
+      "input.size.height.default",
+      "input.size.radius.default",
+      "input.space.inline.default"
     ]
   },
   "ssr": {
-    "hydrateOn": "none"
+    "hydrateOn": "interaction"
   },
   "rtl": {
     "flipIcon": false

@@ -1,29 +1,76 @@
 {
   "name": "List",
   "layer": "primitive",
-  "anatomy": ["root", "ol", "dl", "sm", "md", "lg"],
+  "anatomy": [
+    "root",
+    "marker-none",
+    "marker-disc",
+    "marker-circle",
+    "marker-square",
+    "marker-decimal",
+    "marker-alpha",
+    "marker-roman",
+    "spacing-none",
+    "spacing-sm",
+    "spacing-md",
+    "spacing-lg"
+  ],
   "variants": {
-    "variant": ["default", "unstyled", "inline", "divided", "spaced"],
-    "size": ["sm", "md", "lg"]
+    "as": [
+      "ul",
+      "ol",
+      "dl"
+    ],
+    "variant": [
+      "default",
+      "unstyled",
+      "inline",
+      "divided",
+      "spaced"
+    ],
+    "size": [
+      "sm",
+      "md",
+      "lg"
+    ]
   },
-  "states": ["default", "hover", "focus", "active", "disabled"],
+  "states": [
+    "default"
+  ],
   "slots": {},
   "a11y": {
     "role": "generic",
-    "labeling": ["aria-label"],
+    "labeling": [],
     "keyboard": [],
     "apgPattern": null
   },
   "tokens": {
     "root": [
-      "list.color.background.default",
       "list.color.foreground.primary",
+      "list.color.foreground.secondary",
+      "list.color.border.default",
+      "list.typography.sm.fontSize",
+      "list.typography.sm.lineHeight",
+      "list.typography.md.fontSize",
+      "list.typography.md.lineHeight",
+      "list.typography.lg.fontSize",
+      "list.typography.lg.lineHeight",
       "list.size.padding.default",
-      "list.size.radius.default"
+      "list.size.border.default",
+      "list.spacing.inline",
+      "list.spacing.divided",
+      "list.spacing.spaced",
+      "list.spacing.sm",
+      "list.spacing.md",
+      "list.spacing.lg",
+      "list.spacing.dl.dt",
+      "list.spacing.dl.dd",
+      "list.spacing.dl.gap",
+      "list.spacing.dl.gapX"
     ]
   },
   "ssr": {
-    "hydrateOn": "none"
+    "hydrateOn": "interaction"
   },
   "rtl": {
     "flipIcon": false

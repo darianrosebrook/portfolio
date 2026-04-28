@@ -1,33 +1,183 @@
 {
   "name": "Select",
-  "layer": "compound",
+  "layer": "composer",
   "anatomy": [
     "root",
+    "content",
+    "options",
+    "search",
+    "trigger",
     "selectContainer",
     "selectIndicator",
     "indicatorIcon",
     "clearButton",
-    "clearIcon"
+    "clearIcon",
+    "comboboxContainer",
+    "comboboxInput",
+    "comboboxList",
+    "comboboxOption",
+    "searchInput",
+    "text",
+    "icons",
+    "clear",
+    "chevronIcon",
+    "searchContainer",
+    "emptyState",
+    "option",
+    "check"
   ],
-  "variants": {},
-  "states": ["default", "hover", "focus", "active", "disabled"],
-  "slots": {},
+  "variants": {
+    "size": [
+      "sm",
+      "md",
+      "lg"
+    ],
+    "position": [
+      "bottom",
+      "top",
+      "auto"
+    ]
+  },
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "active",
+    "disabled",
+    "open",
+    "closed",
+    "selected"
+  ],
+  "slots": {
+    "content": {
+      "required": false
+    },
+    "options": {
+      "required": false
+    },
+    "search": {
+      "required": false
+    },
+    "trigger": {
+      "required": false
+    }
+  },
   "a11y": {
-    "role": "group",
-    "labeling": ["aria-label", "aria-labelledby"],
-    "keyboard": [],
-    "apgPattern": null
+    "role": "combobox",
+    "roles": [
+      "combobox",
+      "listbox",
+      "option"
+    ],
+    "labeling": [
+      "aria-label"
+    ],
+    "keyboard": [
+      {
+        "key": "Enter|Space",
+        "when": "trigger",
+        "then": "activate"
+      },
+      {
+        "key": "ArrowDown|ArrowUp",
+        "when": "trigger",
+        "then": "navigate options"
+      },
+      {
+        "key": "Enter|Space",
+        "when": "option",
+        "then": "select option"
+      },
+      {
+        "key": "Escape",
+        "when": "listbox",
+        "then": "close"
+      }
+    ],
+    "apgPattern": "combobox"
   },
   "tokens": {
     "root": [
       "select.color.background.default",
-      "select.color.foreground.primary",
+      "select.color.background.hover",
+      "select.color.background.isOpen",
+      "select.color.background.focus",
+      "select.color.background.focusVisible",
+      "select.color.background.disabled",
+      "select.color.background.readOnly",
+      "select.color.background.checked",
+      "select.color.background.error",
+      "select.color.background.success",
+      "select.color.background.selected",
+      "select.color.foreground.default",
+      "select.color.foreground.hover",
+      "select.color.foreground.isOpen",
+      "select.color.foreground.focus",
+      "select.color.foreground.focusVisible",
+      "select.color.foreground.disabled",
+      "select.color.foreground.readOnly",
+      "select.color.foreground.checked",
+      "select.color.foreground.error",
+      "select.color.foreground.success",
+      "select.color.foreground.selected",
+      "select.color.border.default",
+      "select.color.border.hover",
+      "select.color.border.isOpen",
+      "select.color.border.focus",
+      "select.color.border.focusVisible",
+      "select.color.border.focusRing",
+      "select.color.border.disabled",
+      "select.color.border.readOnly",
+      "select.color.border.checked",
+      "select.color.border.error",
+      "select.color.border.success",
+      "select.color.icon.default",
+      "select.color.icon.hover",
+      "select.color.icon.isOpen",
+      "select.color.icon.focus",
+      "select.color.icon.focusVisible",
+      "select.color.icon.disabled",
+      "select.color.icon.readOnly",
+      "select.color.icon.checked",
+      "select.color.placeholder.default",
+      "select.color.placeholder.hover",
+      "select.color.placeholder.isOpen",
+      "select.color.placeholder.focus",
+      "select.color.placeholder.focusVisible",
+      "select.color.placeholder.disabled",
+      "select.color.placeholder.readOnly",
+      "select.color.placeholder.checked",
       "select.size.padding.default",
-      "select.size.radius.default"
+      "select.size.padding.hover",
+      "select.size.padding.focus",
+      "select.size.padding.focusVisible",
+      "select.size.padding.disabled",
+      "select.size.padding.readOnly",
+      "select.size.padding.checked",
+      "select.size.radius.default",
+      "select.size.radius.small",
+      "select.size.border.default",
+      "select.size.sm.height",
+      "select.size.sm.paddingY",
+      "select.size.sm.paddingX",
+      "select.size.md.height",
+      "select.size.md.paddingY",
+      "select.size.md.paddingX",
+      "select.size.lg.height",
+      "select.size.lg.paddingY",
+      "select.size.lg.paddingX",
+      "select.font.size.default",
+      "select.font.size.sm",
+      "select.font.size.md",
+      "select.font.size.lg",
+      "select.font.weight.default",
+      "select.font.lineHeight.default",
+      "select.motion.duration.fast",
+      "select.motion.easing.standard"
     ]
   },
   "ssr": {
-    "hydrateOn": "none"
+    "hydrateOn": "interaction"
   },
   "rtl": {
     "flipIcon": false

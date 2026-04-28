@@ -1,7 +1,10 @@
 #!/usr/bin/env node
 /**
- * Generate Contract Files for Existing Components
- * Creates ComponentName.contract.json files following the schema in COMPONENT_STANDARDS.md
+ * Generate or refresh component contract files.
+ *
+ * Contracts are derived from implementation, SCSS module classes, slot markers,
+ * accessibility attributes, and component token files. Existing contracts are
+ * updated by default so they do not drift into boilerplate.
  */
 
 import fs from 'fs';
@@ -10,317 +13,663 @@ import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
 const COMPONENTS_DIR = path.join(__dirname, '../ui/components');
 
-// Component layer classification heuristics
-function classifyComponent(componentName, componentPath) {
-  const mainFile = path.join(componentPath, `${componentName}.tsx`);
+const args = new Set(process.argv.slice(2));
+const CHECK_ONLY = args.has('--check');
+const DRY_RUN = args.has('--dry-run') || CHECK_ONLY;
+const CREATE_MISSING_ONLY = args.has('--missing-only');
 
-  if (!fs.existsSync(mainFile)) {
-    return 'primitive'; // default fallback
-  }
+const STATE_NAMES = [
+  'default',
+  'hover',
+  'focus',
+  'focusVisible',
+  'active',
+  'disabled',
+  'loading',
+  'open',
+  'closed',
+  'checked',
+  'unchecked',
+  'selected',
+  'expanded',
+  'collapsed',
+  'entering',
+  'visible',
+  'leaving',
+  'invalid',
+  'valid',
+  'error',
+  'success',
+];
 
-  try {
-    const content = fs.readFileSync(mainFile, 'utf8');
+const NON_ANATOMY_CLASS_NAMES = new Set([
+  'tokens',
+  'generated',
+  'scss',
+  'vars',
+  'module',
+  'as',
+  'from',
+]);
 
-    // Composer indicators
-    if (
-      content.includes('Provider') ||
-      content.includes('Context') ||
-      content.includes('createContext')
-    ) {
-      return 'composer';
-    }
+const VARIANT_PROP_NAMES = [
+  'variant',
+  'size',
+  'intent',
+  'status',
+  'level',
+  'type',
+  'orientation',
+  'placement',
+  'side',
+  'align',
+  'position',
+  'tone',
+  'mode',
+  'politeness',
+  'as',
+];
 
-    // Compound indicators - multiple sub-components
-    const subComponentFiles = fs
-      .readdirSync(componentPath)
-      .filter(
-        (file) =>
-          file.endsWith('.tsx') &&
-          file !== 'index.tsx' &&
-          file !== `${componentName}.tsx`
-      );
+const A11Y_PATTERNS = new Map([
+  ['button', 'button'],
+  ['dialog', 'dialog-modal'],
+  ['alert', 'alert'],
+  ['status', 'status'],
+  ['progressbar', 'progressbar'],
+  ['tab', 'tabs'],
+  ['tabpanel', 'tabs'],
+  ['listbox', 'listbox'],
+  ['option', 'listbox'],
+  ['combobox', 'combobox'],
+  ['switch', 'switch'],
+  ['checkbox', 'checkbox'],
+  ['separator', 'separator'],
+  ['img', 'image'],
+  ['tooltip', 'tooltip'],
+]);
 
-    if (subComponentFiles.length > 0) {
-      return 'compound';
-    }
+const SHARED_TYPE_ALIASES = new Map([
+  ['Intent', ['info', 'success', 'warning', 'danger']],
+  ['ErrorIntent', ['error']],
+  ['StatusIntent', ['info', 'success', 'warning', 'danger', 'error']],
+  ['ControlSize', ['sm', 'md', 'lg']],
+  ['EmphasisVariant', ['primary', 'secondary', 'tertiary']],
+  ['Placement', ['top', 'bottom', 'left', 'right', 'auto']],
+  ['TriggerStrategy', ['click', 'hover']],
+  ['AriaPoliteness', ['polite', 'assertive']],
+]);
 
-    return 'primitive';
-  } catch (error) {
-    console.warn(`Error reading ${componentName}: ${error.message}`);
-    return 'primitive';
-  }
+function read(filePath) {
+  return fs.existsSync(filePath) ? fs.readFileSync(filePath, 'utf8') : '';
 }
 
-// Extract component anatomy from implementation
-function extractAnatomy(componentName, componentPath) {
-  const scssFile = path.join(componentPath, `${componentName}.module.scss`);
-  const anatomy = ['root'];
+function readJson(filePath) {
+  if (!fs.existsSync(filePath)) return null;
+  return JSON.parse(fs.readFileSync(filePath, 'utf8'));
+}
 
-  if (fs.existsSync(scssFile)) {
-    try {
-      const content = fs.readFileSync(scssFile, 'utf8');
+function sortUnique(values) {
+  return [...new Set(values.filter(Boolean))].sort((a, b) =>
+    a.localeCompare(b)
+  );
+}
 
-      // Look for common anatomy patterns in CSS classes
-      const classMatches = content.match(
-        /\.[a-zA-Z][a-zA-Z0-9]*(?:[A-Z][a-z]*)*\s*{/g
-      );
-      if (classMatches) {
-        const classes = classMatches.map((match) =>
-          match.replace(/^\./, '').replace(/\s*{$/, '')
-        );
+function orderedUnique(values) {
+  return [...new Set(values.filter(Boolean))];
+}
 
-        // Filter out the main component class and add unique parts
-        const componentClass = componentName.toLowerCase();
-        const parts = classes
-          .filter(
-            (cls) =>
-              cls !== componentClass &&
-              !cls.includes('hover') &&
-              !cls.includes('focus')
-          )
-          .slice(0, 5); // limit to reasonable number
+function normalizePart(value) {
+  return value
+    .replace(/^__+/, '')
+    .replace(/^[-_]+/, '')
+    .replace(/["'`]/g, '')
+    .trim();
+}
 
-        anatomy.push(...parts);
+function camelFromDataSlot(slot) {
+  return slot
+    .split(/[-_]/)
+    .filter(Boolean)
+    .map((part, index) =>
+      index === 0 ? part : part.charAt(0).toUpperCase() + part.slice(1)
+    )
+    .join('');
+}
+
+function stripComments(content) {
+  return content.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/.*$/gm, '');
+}
+
+function componentFiles(componentPath) {
+  const files = [];
+
+  function walk(dir) {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      if (entry.name === 'tests' || entry.name === 'node_modules') continue;
+      const fullPath = path.join(dir, entry.name);
+      if (entry.isDirectory()) {
+        walk(fullPath);
+      } else if (/\.(tsx|ts|scss)$/.test(entry.name)) {
+        files.push(fullPath);
       }
-    } catch (error) {
-      console.warn(`Error reading SCSS for ${componentName}: ${error.message}`);
     }
   }
 
-  return [...new Set(anatomy)]; // remove duplicates
+  walk(componentPath);
+  return files;
 }
 
-// Extract variants from TypeScript interface
-function extractVariants(componentName, componentPath) {
-  const mainFile = path.join(componentPath, `${componentName}.tsx`);
+function sourceFiles(componentPath) {
+  return componentFiles(componentPath).filter((file) =>
+    /\.(tsx|ts)$/.test(file)
+  );
+}
+
+function allSource(componentPath) {
+  return sourceFiles(componentPath)
+    .map((file) => stripComments(read(file)))
+    .join('\n');
+}
+
+function classifyComponent(componentName, componentPath, source) {
+  const providerFile = path.join(componentPath, `${componentName}Provider.tsx`);
+  const hasProvider = fs.existsSync(providerFile);
+  const hasContext =
+    /\b(createContext|useContext|Provider)\b/.test(source) || hasProvider;
+  const hasCompound =
+    /Object\.assign\s*\(/.test(source) ||
+    new RegExp(`${componentName}\\.[A-Z]`).test(source) ||
+    fs.existsSync(path.join(componentPath, 'slots'));
+
+  if (hasContext) return 'composer';
+  if (hasCompound) return 'compound';
+  return 'primitive';
+}
+
+function extractTypeAliases(source) {
+  const aliases = new Map(SHARED_TYPE_ALIASES);
+  const aliasPattern =
+    /(?:export\s+)?type\s+([A-Z][A-Za-z0-9_]*)\s*=\s*([^;\n]+(?:\n\s*\|[^;\n]+)*)/g;
+
+  for (const match of source.matchAll(aliasPattern)) {
+    const values = [...match[2].matchAll(/['"`]([^'"`]+)['"`]/g)].map(
+      (value) => value[1]
+    );
+    if (values.length > 0) aliases.set(match[1], values);
+  }
+
+  return aliases;
+}
+
+function extractPropBlocks(source) {
+  const blocks = [];
+  const interfacePattern =
+    /(?:export\s+)?interface\s+[A-Z][A-Za-z0-9_]*(?:Props|Options|Config)?[^{]*\{([\s\S]*?)\n\}/g;
+  const typePattern =
+    /(?:export\s+)?type\s+[A-Z][A-Za-z0-9_]*(?:Props|Options|Config)?\s*=\s*\{([\s\S]*?)\n\}/g;
+
+  for (const match of source.matchAll(interfacePattern)) {
+    blocks.push(match[1]);
+  }
+
+  for (const match of source.matchAll(typePattern)) {
+    blocks.push(match[1]);
+  }
+
+  return blocks.join('\n');
+}
+
+function extractObjectLiteralKeys(source, objectName) {
+  const objectPattern = new RegExp(
+    `(?:const|let|var)\\s+${objectName}\\s*=\\s*\\{([\\s\\S]*?)\\}\\s*(?:as\\s+const)?\\s*;`,
+    'm'
+  );
+  const match = source.match(objectPattern);
+  if (!match) return [];
+
+  return [...match[1].matchAll(/^\s*([A-Za-z][A-Za-z0-9_-]*)\s*:/gm)].map(
+    (key) => key[1]
+  );
+}
+
+function extractVariants(source) {
   const variants = {};
+  const aliases = extractTypeAliases(source);
+  const propsSource = extractPropBlocks(source) || source;
+  const propPattern = /([A-Za-z][A-Za-z0-9_]*)\??\s*:\s*([^;\n]+)/g;
 
-  if (fs.existsSync(mainFile)) {
-    try {
-      const content = fs.readFileSync(mainFile, 'utf8');
+  for (const match of propsSource.matchAll(propPattern)) {
+    const propName = match[1];
+    if (!VARIANT_PROP_NAMES.includes(propName)) continue;
 
-      // Look for variant prop definitions
-      const variantMatch = content.match(
-        /variant\?\s*:\s*['"`]([^'"`]+)['"`](?:\s*\|\s*['"`]([^'"`]+)['"`])*/
-      );
-      if (variantMatch) {
-        const variantValues = content.match(
-          /variant\?\s*:\s*(['"`][^'"`]+['"`](?:\s*\|\s*['"`][^'"`]+['"`])*)/
-        );
-        if (variantValues) {
-          const values = variantValues[1]
-            .match(/['"`]([^'"`]+)['"`]/g)
-            ?.map((v) => v.replace(/['"`]/g, ''));
-          if (values) {
-            variants.variant = values;
-          }
-        }
-      }
+    const rawType = match[2].trim();
+    let values = [...rawType.matchAll(/['"`]([^'"`]+)['"`]/g)].map(
+      (value) => value[1]
+    );
 
-      // Look for size prop definitions
-      const sizeMatch = content.match(
-        /size\?\s*:\s*(['"`][^'"`]+['"`](?:\s*\|\s*['"`][^'"`]+['"`])*)/
-      );
-      if (sizeMatch) {
-        const values = sizeMatch[1]
-          .match(/['"`]([^'"`]+)['"`]/g)
-          ?.map((v) => v.replace(/['"`]/g, ''));
-        if (values) {
-          variants.size = values;
-        }
-      }
-    } catch (error) {
-      console.warn(
-        `Error extracting variants for ${componentName}: ${error.message}`
-      );
+    if (values.length === 0 && aliases.has(rawType)) {
+      values = aliases.get(rawType);
+    }
+
+    if (
+      values.length > 0 &&
+      values.length <= 20 &&
+      (!variants[propName] || values.length > variants[propName].length)
+    ) {
+      variants[propName] = orderedUnique(values);
     }
   }
 
   return variants;
 }
 
-// Generate accessibility info based on component type
-function generateA11yInfo(componentName, layer) {
-  const name = componentName.toLowerCase();
+function extractSlots(source, componentName) {
+  const slots = {};
 
-  // Interactive components
-  if (name.includes('button')) {
-    return {
-      role: 'button',
-      labeling: ['aria-label', 'aria-labelledby'],
-      keyboard: [{ key: 'Enter|Space', when: 'root', then: 'activate' }],
-      apgPattern: 'button',
+  for (const match of source.matchAll(/data-slot=["'`]([^"'`]+)["'`]/g)) {
+    const rawSlot = match[1];
+    const localName = rawSlot
+      .replace(new RegExp(`^${componentName.toLowerCase()}-?`), '')
+      .replace(/^root$/, '');
+    const name = localName ? camelFromDataSlot(localName) : 'root';
+    slots[name] = {
+      required: name === 'root',
+      selector: `[data-slot="${rawSlot}"]`,
     };
   }
 
-  if (name.includes('input') || name.includes('field')) {
-    return {
-      role: 'textbox',
-      labeling: ['aria-label', 'aria-labelledby', 'aria-describedby'],
-      keyboard: [{ key: 'Tab', when: 'root', then: 'focus' }],
-      apgPattern: 'textbox',
-    };
+  for (const match of source.matchAll(
+    /\.displayName\s*=\s*['"`]([^'"`]+)['"`]/g
+  )) {
+    const displayName = match[1];
+    if (!displayName.includes('.')) continue;
+    const slotName = displayName.split('.').pop();
+    const name = slotName.charAt(0).toLowerCase() + slotName.slice(1);
+    slots[name] ||= { required: false };
   }
 
-  if (name.includes('modal') || name.includes('dialog')) {
-    return {
-      role: 'dialog',
-      labeling: ['aria-label', 'aria-labelledby'],
-      keyboard: [
-        { key: 'Escape', when: 'any', then: 'close' },
-        { key: 'Tab', when: 'any', then: 'cycle focus within' },
-      ],
-      apgPattern: 'dialog',
-    };
-  }
-
-  if (name.includes('toast')) {
-    return {
-      role: 'status',
-      labeling: ['aria-label'],
-      keyboard: [{ key: 'Escape', when: 'focused', then: 'dismiss' }],
-      apgPattern: 'alert',
-    };
-  }
-
-  // Default based on layer
-  switch (layer) {
-    case 'composer':
-      return {
-        role: 'region',
-        labeling: ['aria-label', 'aria-labelledby'],
-        keyboard: [{ key: 'Tab', when: 'any', then: 'navigate children' }],
-        apgPattern: null,
-      };
-    case 'compound':
-      return {
-        role: 'group',
-        labeling: ['aria-label', 'aria-labelledby'],
-        keyboard: [],
-        apgPattern: null,
-      };
-    default:
-      return {
-        role: 'generic',
-        labeling: ['aria-label'],
-        keyboard: [],
-        apgPattern: null,
-      };
-  }
+  return Object.fromEntries(
+    Object.entries(slots).sort(([a], [b]) => a.localeCompare(b))
+  );
 }
 
-// Generate token references
-function generateTokenReferences(componentName) {
+function extractStyleReferences(source) {
+  const refs = [];
+  const patterns = [
+    /\bstyles\.([A-Za-z][A-Za-z0-9_]*)/g,
+    /\bStyles\.([A-Za-z][A-Za-z0-9_]*)/g,
+    /\bstyles\[['"`]([^'"`]+)['"`]\]/g,
+    /\bStyles\[['"`]([^'"`]+)['"`]\]/g,
+  ];
+
+  for (const pattern of patterns) {
+    for (const match of source.matchAll(pattern))
+      refs.push(normalizePart(match[1]));
+  }
+
+  return refs;
+}
+
+function extractScssClasses(componentName, componentPath) {
+  const scssFile = path.join(componentPath, `${componentName}.module.scss`);
+  const content = stripComments(read(scssFile));
+  const classes = [];
+
+  for (const match of content.matchAll(
+    /(^|[\s{,&>+~])\.([A-Za-z_][A-Za-z0-9_-]*)/gm
+  )) {
+    const cls = normalizePart(match[2]);
+    if (!cls) continue;
+    classes.push(cls);
+  }
+
+  return classes;
+}
+
+function extractAnatomy(componentName, componentPath, source, variants, slots) {
   const lower = componentName.toLowerCase();
+  const variantValues = new Set(Object.values(variants).flat());
+  const slotNames = Object.keys(slots);
+  const classes = [
+    ...extractScssClasses(componentName, componentPath),
+    ...extractStyleReferences(source),
+  ];
+  const anatomy = ['root', ...slotNames.filter((slot) => slot !== 'root')];
+
+  for (const cls of classes) {
+    if (!cls || cls === lower || cls === componentName) continue;
+    if (NON_ANATOMY_CLASS_NAMES.has(cls)) continue;
+    if (cls.includes('$') || cls.includes('{') || cls.includes('}')) continue;
+    if (cls.startsWith('variant-')) continue;
+    if (variantValues.has(cls)) continue;
+    if (STATE_NAMES.includes(cls)) continue;
+    if (/^(is|has)[A-Z]/.test(cls)) continue;
+    if (/^(sm|md|lg|xl|small|medium|large)$/.test(cls)) continue;
+    anatomy.push(cls);
+  }
+
+  return orderedUnique(anatomy).slice(0, 24);
+}
+
+function extractStates(source, scssSource, variants) {
+  const found = ['default'];
+  const combined = `${source}\n${scssSource}`;
+  const variantValues = new Set(Object.values(variants).flat());
+
+  for (const state of STATE_NAMES) {
+    if (state === 'default') continue;
+    if (variantValues.has(state)) continue;
+    const kebab = state.replace(/[A-Z]/g, (char) => `-${char.toLowerCase()}`);
+    const patterns = [
+      new RegExp(`styles\\.${state}\\b`),
+      new RegExp(`styles\\[['"\`]${state}['"\`]\\]`),
+      new RegExp(`\\.(${state}|${kebab})(?=[\\s{,.#:[>+~])`),
+      new RegExp(`['"\`]${state}['"\`]`),
+      new RegExp(`['"\`]${kebab}['"\`]`),
+      new RegExp(`data-state=\\{[^}]*['"\`]${state}['"\`]`),
+      new RegExp(`data-state=["'\`]${state}["'\`]`),
+    ];
+
+    if (['hover', 'focus', 'active', 'disabled'].includes(state)) {
+      patterns.push(new RegExp(`:${kebab}\\b`));
+    }
+
+    if (patterns.some((pattern) => pattern.test(combined))) found.push(state);
+  }
+
+  return orderedUnique(found);
+}
+
+function extractRoles(source) {
+  const roles = [];
+
+  for (const match of source.matchAll(/role=["'`]([^"'`]+)["'`]/g)) {
+    roles.push(match[1]);
+  }
+
+  if (
+    /role=\{[^}]*\?[^}]*['"`]alert['"`][^}]*:[^}]*['"`]status['"`][^}]*\}/.test(
+      source
+    )
+  ) {
+    roles.push('alert', 'status');
+  }
+
+  return orderedUnique(roles);
+}
+
+function extractLabeling(source) {
+  const labeling = [];
+  for (const match of source.matchAll(/\b(aria-[a-zA-Z-]+)=/g)) {
+    const attr = match[1];
+    if (
+      attr === 'aria-hidden' ||
+      attr === 'aria-expanded' ||
+      attr === 'aria-pressed' ||
+      attr === 'aria-modal' ||
+      attr === 'aria-live' ||
+      attr === 'aria-current' ||
+      attr === 'aria-invalid' ||
+      attr === 'aria-selected' ||
+      attr === 'aria-disabled'
+    ) {
+      continue;
+    }
+    labeling.push(attr);
+  }
+
+  for (const match of source.matchAll(/['"`](aria-[a-zA-Z-]+)['"`]\s*:/g)) {
+    const attr = match[1];
+    if (
+      attr === 'aria-label' ||
+      attr === 'aria-labelledby' ||
+      attr === 'aria-describedby'
+    ) {
+      labeling.push(attr);
+    }
+  }
+
+  if (source.includes('title=')) labeling.push('title');
+  return orderedUnique(labeling);
+}
+
+function keyboardFor(componentName, roles, source) {
+  const name = componentName.toLowerCase();
+  const keys = [];
+
+  if (
+    !name.includes('accordion') &&
+    (roles.includes('button') ||
+      /<button\b/.test(source) ||
+      name.includes('button'))
+  ) {
+    keys.push({ key: 'Enter|Space', when: 'trigger', then: 'activate' });
+  }
+
+  if (
+    roles.includes('dialog') ||
+    name.includes('dialog') ||
+    name.includes('sheet')
+  ) {
+    keys.push({ key: 'Escape', when: 'open', then: 'close' });
+    keys.push({ key: 'Tab', when: 'open', then: 'cycle focus within' });
+  }
+
+  if (name.includes('accordion')) {
+    keys.push({ key: 'Enter|Space', when: 'trigger', then: 'toggle item' });
+  }
+
+  if (name.includes('tabs') || roles.includes('tab')) {
+    keys.push({
+      key: 'ArrowLeft|ArrowRight',
+      when: 'tablist',
+      then: 'move focus',
+    });
+    keys.push({ key: 'Enter|Space', when: 'tab', then: 'activate tab' });
+  }
+
+  if (name.includes('select') || roles.includes('combobox')) {
+    keys.push({
+      key: 'ArrowDown|ArrowUp',
+      when: 'trigger',
+      then: 'navigate options',
+    });
+    keys.push({ key: 'Enter|Space', when: 'option', then: 'select option' });
+    keys.push({ key: 'Escape', when: 'listbox', then: 'close' });
+  }
+
+  if (/onKeyDown|onKeyUp|onKeyPress/.test(source) && keys.length === 0) {
+    keys.push({
+      key: 'KeyboardEvent',
+      when: 'root',
+      then: 'handled by component',
+    });
+  }
+
+  return keys;
+}
+
+function generateA11yInfo(componentName, layer, source) {
+  const roles = extractRoles(source);
+  const primaryRole =
+    roles[0] ||
+    (componentName.toLowerCase().includes('button') ? 'button' : null) ||
+    (layer === 'composer' ? 'region' : 'generic');
+  const labeling = extractLabeling(source);
+  const keyboard = keyboardFor(componentName, roles, source);
 
   return {
-    root: [
-      `${lower}.color.background.default`,
-      `${lower}.color.foreground.primary`,
-      `${lower}.size.padding.default`,
-      `${lower}.size.radius.default`,
-    ],
+    role: primaryRole,
+    ...(roles.length > 1 ? { roles } : {}),
+    labeling,
+    keyboard,
+    apgPattern: A11Y_PATTERNS.get(primaryRole) ?? null,
   };
 }
 
-// Generate contract for a component
+function flattenTokenPaths(node, prefix = []) {
+  if (!node || typeof node !== 'object') return [];
+  const paths = [];
+
+  for (const [key, value] of Object.entries(node)) {
+    if (key.startsWith('$')) continue;
+    if (value && typeof value === 'object' && '$value' in value) {
+      paths.push([...prefix, key].join('.'));
+      continue;
+    }
+    if (value && typeof value === 'object') {
+      const childPaths = flattenTokenPaths(value, [...prefix, key]);
+      if (childPaths.length === 0 && typeof value !== 'string') continue;
+      paths.push(...childPaths);
+    } else {
+      paths.push([...prefix, key].join('.'));
+    }
+  }
+
+  return paths;
+}
+
+function generateTokenReferences(componentName, componentPath, anatomy) {
+  const tokenPath = path.join(componentPath, `${componentName}.tokens.json`);
+  const tokenDoc = readJson(tokenPath);
+  const prefix = tokenDoc?.prefix || componentName.toLowerCase();
+  const tokenPaths = tokenDoc?.tokens
+    ? flattenTokenPaths(tokenDoc.tokens).map((token) => `${prefix}.${token}`)
+    : [];
+
+  if (tokenPaths.length === 0) {
+    return {};
+  }
+
+  const tokens = { root: tokenPaths };
+
+  for (const part of anatomy) {
+    if (part === 'root') continue;
+    const related = tokenPaths.filter((token) => token.includes(`.${part}.`));
+    if (related.length > 0) tokens[part] = related;
+  }
+
+  return tokens;
+}
+
 function generateContract(componentName, componentPath) {
-  const layer = classifyComponent(componentName, componentPath);
-  const anatomy = extractAnatomy(componentName, componentPath);
-  const variants = extractVariants(componentName, componentPath);
-  const a11y = generateA11yInfo(componentName, layer);
-  const tokens = generateTokenReferences(componentName);
+  const source = allSource(componentPath);
+  const scssSource = componentFiles(componentPath)
+    .filter((file) => file.endsWith('.module.scss'))
+    .map((file) => read(file))
+    .join('\n');
+  const layer = classifyComponent(componentName, componentPath, source);
+  const variants = extractVariants(source);
+  const slots = extractSlots(source, componentName);
+  const anatomy = extractAnatomy(
+    componentName,
+    componentPath,
+    source,
+    variants,
+    slots
+  );
+  const states = extractStates(source, scssSource, variants);
+  const a11y = generateA11yInfo(componentName, layer, source);
+  const tokens = generateTokenReferences(componentName, componentPath, anatomy);
 
   return {
     name: componentName,
-    layer: layer,
-    anatomy: anatomy,
-    variants: variants,
-    states: ['default', 'hover', 'focus', 'active', 'disabled'],
-    slots: {},
-    a11y: a11y,
-    tokens: tokens,
+    layer,
+    anatomy,
+    variants,
+    states,
+    slots,
+    a11y,
+    tokens,
     ssr: {
-      hydrateOn: layer === 'composer' ? 'interaction' : 'none',
+      hydrateOn:
+        source.includes("'use client'") || source.includes('"use client"')
+          ? 'interaction'
+          : 'none',
     },
     rtl: {
-      flipIcon: anatomy.includes('icon'),
+      flipIcon: anatomy.includes('icon') || anatomy.includes('chevron'),
     },
   };
 }
 
-// Main execution
-function generateContractsForAllComponents() {
-  if (!fs.existsSync(COMPONENTS_DIR)) {
-    console.error(`Components directory not found: ${COMPONENTS_DIR}`);
-    process.exit(1);
+function writeIfChanged(filePath, contract) {
+  const next = `${JSON.stringify(contract, null, 2)}\n`;
+  const current = read(filePath);
+
+  if (current === next) return false;
+  if (!DRY_RUN) fs.writeFileSync(filePath, next);
+  return true;
+}
+
+function components() {
+  return fs
+    .readdirSync(COMPONENTS_DIR, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name)
+    .filter((componentName) =>
+      fs.existsSync(
+        path.join(COMPONENTS_DIR, componentName, `${componentName}.tsx`)
+      )
+    )
+    .sort((a, b) => a.localeCompare(b));
+}
+
+function main() {
+  if (args.has('--help') || args.has('-h')) {
+    console.log(`
+Generate or refresh component contract files.
+
+Usage:
+  node scripts/generateContracts.mjs [--check] [--dry-run] [--missing-only]
+
+Options:
+  --check         Exit non-zero if any contract would change.
+  --dry-run       Print changes without writing files.
+  --missing-only  Preserve old behavior: only create missing contracts.
+`);
+    return;
   }
 
-  const components = fs.readdirSync(COMPONENTS_DIR).filter((item) => {
-    const itemPath = path.join(COMPONENTS_DIR, item);
-    return fs.statSync(itemPath).isDirectory();
-  });
-
-  console.log(`Found ${components.length} components to process...\n`);
-
-  let created = 0;
+  let changed = 0;
+  let unchanged = 0;
   let skipped = 0;
+  let created = 0;
 
-  components.forEach((componentName) => {
+  for (const componentName of components()) {
     const componentPath = path.join(COMPONENTS_DIR, componentName);
     const contractPath = path.join(
       componentPath,
       `${componentName}.contract.json`
     );
+    const exists = fs.existsSync(contractPath);
 
-    if (fs.existsSync(contractPath)) {
-      console.log(`⏭️  Skipped ${componentName} (contract already exists)`);
+    if (CREATE_MISSING_ONLY && exists) {
       skipped++;
-      return;
+      continue;
     }
 
-    try {
-      const contract = generateContract(componentName, componentPath);
-      fs.writeFileSync(contractPath, JSON.stringify(contract, null, 2) + '\n');
-      console.log(
-        `✅ Created contract for ${componentName} (${contract.layer})`
-      );
-      created++;
-    } catch (error) {
-      console.error(
-        `❌ Failed to create contract for ${componentName}: ${error.message}`
-      );
+    const contract = generateContract(componentName, componentPath);
+    const didChange = writeIfChanged(contractPath, contract);
+
+    if (didChange) {
+      if (exists) changed++;
+      else created++;
+      console.log(`${DRY_RUN ? 'Would update' : 'Updated'} ${componentName}`);
+    } else {
+      unchanged++;
     }
-  });
+  }
 
-  console.log(`\n📊 Summary:`);
-  console.log(`   Created: ${created}`);
-  console.log(`   Skipped: ${skipped}`);
-  console.log(`   Total: ${components.length}`);
+  console.log(
+    `\nContracts: ${changed} updated, ${created} created, ${unchanged} unchanged, ${skipped} skipped.`
+  );
+
+  if (CHECK_ONLY && (changed > 0 || created > 0)) {
+    process.exitCode = 1;
+  }
 }
 
-// CLI execution
-const args = process.argv.slice(2);
-if (args.includes('--help') || args.includes('-h')) {
-  console.log(`
-Generate Contract Files for Components
-
-Usage:
-  node scripts/generateContracts.mjs
-
-This script will:
-- Scan all components in ui/components/
-- Analyze each component to determine layer (primitive/compound/composer)
-- Extract anatomy, variants, and accessibility patterns
-- Generate ComponentName.contract.json files
-- Skip components that already have contracts
-
-The generated contracts follow the schema defined in COMPONENT_STANDARDS.md Section 12.
-`);
-  process.exit(0);
-}
-
-generateContractsForAllComponents();
+main();

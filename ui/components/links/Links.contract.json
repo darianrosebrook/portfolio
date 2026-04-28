@@ -1,26 +1,75 @@
 {
   "name": "Links",
   "layer": "primitive",
-  "anatomy": ["root", "maskLine", "text", "clone"],
+  "anatomy": [
+    "root",
+    "maskLine",
+    "text",
+    "clone"
+  ],
   "variants": {},
-  "states": ["default", "hover", "focus", "active", "disabled"],
+  "states": [
+    "default",
+    "hover",
+    "focus"
+  ],
   "slots": {},
   "a11y": {
     "role": "generic",
-    "labeling": ["aria-label"],
+    "labeling": [],
     "keyboard": [],
     "apgPattern": null
   },
   "tokens": {
     "root": [
-      "links.color.background.default",
-      "links.color.foreground.primary",
-      "links.size.padding.default",
-      "links.size.radius.default"
+      "links.color.foreground.default",
+      "links.color.foreground.hover",
+      "links.color.foreground.active",
+      "links.color.foreground.visited",
+      "links.color.foreground.disabled",
+      "links.color.underline.default",
+      "links.color.underline.hover",
+      "links.color.underline.active",
+      "links.color.underline.disabled",
+      "links.spacing.gap.default",
+      "links.spacing.gap.small",
+      "links.spacing.gap.large",
+      "links.spacing.padding.default",
+      "links.spacing.padding.small",
+      "links.spacing.padding.large",
+      "links.spacing.margin.default",
+      "links.spacing.margin.small",
+      "links.spacing.margin.large",
+      "links.typography.fontSize.small",
+      "links.typography.fontSize.medium",
+      "links.typography.fontSize.large",
+      "links.typography.fontWeight.default",
+      "links.typography.fontWeight.medium",
+      "links.typography.fontWeight.semibold",
+      "links.typography.lineHeight.default",
+      "links.typography.lineHeight.tight",
+      "links.typography.lineHeight.relaxed",
+      "links.motion.duration.fast",
+      "links.motion.duration.normal",
+      "links.motion.duration.slow",
+      "links.motion.easing.standard",
+      "links.motion.easing.decelerate",
+      "links.motion.easing.accelerate",
+      "links.border.width.default",
+      "links.border.width.thick",
+      "links.border.style.default",
+      "links.border.style.dashed",
+      "links.border.style.dotted",
+      "links.animation.stagger.default",
+      "links.animation.stagger.fast",
+      "links.animation.stagger.slow",
+      "links.animation.duration.default",
+      "links.animation.duration.fast",
+      "links.animation.duration.slow"
     ]
   },
   "ssr": {
-    "hydrateOn": "none"
+    "hydrateOn": "interaction"
   },
   "rtl": {
     "flipIcon": false

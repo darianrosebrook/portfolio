@@ -1,22 +1,58 @@
 {
   "name": "Avatar",
   "layer": "primitive",
-  "anatomy": ["root", "status"],
-  "variants": {},
-  "states": ["default", "hover", "focus", "active", "disabled"],
+  "anatomy": [
+    "root",
+    "rounded",
+    "square",
+    "avatar_image",
+    "avatar_initials",
+    "status",
+    "status_online",
+    "status_offline",
+    "status_away"
+  ],
+  "variants": {
+    "size": [
+      "small",
+      "medium",
+      "large",
+      "extra-large"
+    ]
+  },
+  "states": [
+    "default",
+    "focus"
+  ],
   "slots": {},
   "a11y": {
     "role": "generic",
-    "labeling": ["aria-label"],
+    "labeling": [],
     "keyboard": [],
     "apgPattern": null
   },
   "tokens": {
     "root": [
+      "avatar.size.small",
+      "avatar.size.default",
+      "avatar.size.medium",
+      "avatar.size.large",
+      "avatar.size.status",
+      "avatar.size.radius.default",
+      "avatar.size.radius.small",
+      "avatar.size.radius.full",
+      "avatar.size.border.default",
+      "avatar.size.border.offset",
       "avatar.color.background.default",
+      "avatar.color.background.inverse",
+      "avatar.color.background.success",
+      "avatar.color.background.warning",
+      "avatar.color.background.disabled",
       "avatar.color.foreground.primary",
-      "avatar.size.padding.default",
-      "avatar.size.radius.default"
+      "avatar.color.border.default",
+      "avatar.color.border.info",
+      "avatar.typography.fontWeight.medium",
+      "avatar.typography.fontFamily.sans"
     ]
   },
   "ssr": {

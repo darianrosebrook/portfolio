@@ -1,28 +1,91 @@
 {
   "name": "Accordion",
   "layer": "composer",
-  "anatomy": ["root"],
-  "variants": {},
-  "states": ["default"],
-  "slots": {},
+  "anatomy": [
+    "root",
+    "content",
+    "item",
+    "trigger",
+    "header",
+    "chevron",
+    "contentInner"
+  ],
+  "variants": {
+    "type": [
+      "single",
+      "multiple"
+    ]
+  },
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "disabled",
+    "open",
+    "closed"
+  ],
+  "slots": {
+    "content": {
+      "required": false,
+      "selector": "[data-slot=\"accordion-content\"]"
+    },
+    "item": {
+      "required": false,
+      "selector": "[data-slot=\"accordion-item\"]"
+    },
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"accordion\"]"
+    },
+    "trigger": {
+      "required": false,
+      "selector": "[data-slot=\"accordion-trigger\"]"
+    }
+  },
   "a11y": {
     "role": "region",
     "labeling": [],
-    "keyboard": [],
+    "keyboard": [
+      {
+        "key": "Enter|Space",
+        "when": "trigger",
+        "then": "toggle item"
+      }
+    ],
     "apgPattern": null
   },
   "tokens": {
     "root": [
-      "accordion.color.background.default",
-      "accordion.color.foreground.primary",
-      "accordion.size.padding.default",
-      "accordion.size.radius.default"
+      "accordion.color.background.hover",
+      "accordion.color.text",
+      "accordion.color.textHover",
+      "accordion.color.textSecondary",
+      "accordion.color.icon",
+      "accordion.border.width",
+      "accordion.border.color",
+      "accordion.border.radius",
+      "accordion.spacing.gap",
+      "accordion.spacing.paddingX",
+      "accordion.spacing.paddingY",
+      "accordion.text.weight",
+      "accordion.text.size",
+      "accordion.text.lineHeight",
+      "accordion.text.sizeContent",
+      "accordion.text.lineHeightContent",
+      "accordion.icon.size",
+      "accordion.icon.offset",
+      "accordion.motion.duration",
+      "accordion.motion.easing",
+      "accordion.focus.width",
+      "accordion.focus.color",
+      "accordion.focus.offset",
+      "accordion.opacity.disabled"
     ]
   },
   "ssr": {
-    "hydrateOn": "none"
+    "hydrateOn": "interaction"
   },
   "rtl": {
-    "flipIcon": false
+    "flipIcon": true
   }
 }

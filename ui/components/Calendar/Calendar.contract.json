@@ -1,9 +1,15 @@
 {
   "name": "Calendar",
   "layer": "composer",
-  "anatomy": ["root"],
+  "anatomy": [
+    "root"
+  ],
   "variants": {},
-  "states": ["default"],
+  "states": [
+    "default",
+    "hover",
+    "focus"
+  ],
   "slots": {},
   "a11y": {
     "role": "region",
@@ -14,13 +20,21 @@
   "tokens": {
     "root": [
       "calendar.color.background.default",
+      "calendar.color.background.imageOverlay",
       "calendar.color.foreground.primary",
+      "calendar.color.foreground.secondary",
+      "calendar.color.border.default",
+      "calendar.color.border.accent",
       "calendar.size.padding.default",
-      "calendar.size.radius.default"
+      "calendar.size.radius.default",
+      "calendar.elevation.default",
+      "calendar.elevation.hover",
+      "calendar.motion.duration",
+      "calendar.motion.easing"
     ]
   },
   "ssr": {
-    "hydrateOn": "none"
+    "hydrateOn": "interaction"
   },
   "rtl": {
     "flipIcon": false

@@ -1,28 +1,113 @@
 {
   "name": "Alert",
-  "layer": "primitive",
-  "anatomy": ["root"],
-  "variants": {},
-  "states": ["default", "hover", "focus", "active", "disabled"],
-  "slots": {},
+  "layer": "compound",
+  "anatomy": [
+    "root",
+    "body",
+    "container",
+    "icon",
+    "title",
+    "dismiss"
+  ],
+  "variants": {
+    "intent": [
+      "info",
+      "success",
+      "warning",
+      "danger"
+    ],
+    "level": [
+      "inline",
+      "section",
+      "page"
+    ]
+  },
+  "states": [
+    "default",
+    "hover"
+  ],
+  "slots": {
+    "body": {
+      "required": false
+    },
+    "container": {
+      "required": false
+    },
+    "icon": {
+      "required": false
+    },
+    "title": {
+      "required": false
+    }
+  },
   "a11y": {
-    "role": "generic",
-    "labeling": ["aria-label"],
+    "role": "alert",
+    "labeling": [
+      "title"
+    ],
     "keyboard": [],
-    "apgPattern": null
+    "apgPattern": "alert"
   },
   "tokens": {
     "root": [
-      "alert.color.background.default",
+      "alert.color.background.primary",
+      "alert.color.background.info",
+      "alert.color.background.success",
+      "alert.color.background.warning",
+      "alert.color.background.danger",
+      "alert.color.background.infoSubtle",
+      "alert.color.background.warningSubtle",
+      "alert.color.background.dangerSubtle",
+      "alert.color.background.successSubtle",
+      "alert.color.background.infoStrong",
+      "alert.color.background.warningStrong",
+      "alert.color.background.dangerStrong",
+      "alert.color.background.successStrong",
       "alert.color.foreground.primary",
-      "alert.size.padding.default",
-      "alert.size.radius.default"
+      "alert.color.foreground.info",
+      "alert.color.foreground.success",
+      "alert.color.foreground.warning",
+      "alert.color.foreground.danger",
+      "alert.color.foreground.onInfoSubtle",
+      "alert.color.foreground.onWarningSubtle",
+      "alert.color.foreground.onDangerSubtle",
+      "alert.color.foreground.onSuccessSubtle",
+      "alert.color.foreground.onColor",
+      "alert.color.border.primary",
+      "alert.color.border.info",
+      "alert.color.border.success",
+      "alert.color.border.warning",
+      "alert.color.border.danger",
+      "alert.size.inline.padding",
+      "alert.size.inline.radius",
+      "alert.size.inline.iconSize",
+      "alert.size.section.padding",
+      "alert.size.section.radius",
+      "alert.size.section.iconSize",
+      "alert.size.page.padding",
+      "alert.size.page.radius",
+      "alert.size.page.iconSize",
+      "alert.shadow.default",
+      "alert.text.font",
+      "alert.text.size",
+      "alert.text.weight",
+      "alert.icon.size",
+      "alert.spacing.padding.default",
+      "alert.spacing.padding.horizontal",
+      "alert.spacing.padding.vertical",
+      "alert.spacing.margin.top",
+      "alert.spacing.minHeight.default",
+      "alert.spacing.gap.small",
+      "alert.radius.medium"
+    ],
+    "icon": [
+      "alert.icon.size"
     ]
   },
   "ssr": {
-    "hydrateOn": "none"
+    "hydrateOn": "interaction"
   },
   "rtl": {
-    "flipIcon": false
+    "flipIcon": true
   }
 }

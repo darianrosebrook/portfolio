@@ -1,33 +1,185 @@
 {
   "name": "Dialog",
   "layer": "composer",
-  "anatomy": ["root", "backdrop", "header", "title", "body", "footer"],
-  "variants": {},
-  "states": ["default", "hover", "focus", "active", "disabled"],
-  "slots": {},
+  "anatomy": [
+    "root",
+    "body",
+    "closeButton",
+    "footer",
+    "header",
+    "title",
+    "backdrop",
+    "modal",
+    "close"
+  ],
+  "variants": {
+    "size": [
+      "sm",
+      "md",
+      "lg",
+      "xl",
+      "full"
+    ]
+  },
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "active",
+    "leaving"
+  ],
+  "slots": {
+    "body": {
+      "required": false
+    },
+    "closeButton": {
+      "required": false
+    },
+    "footer": {
+      "required": false
+    },
+    "header": {
+      "required": false
+    },
+    "title": {
+      "required": false
+    }
+  },
   "a11y": {
     "role": "dialog",
-    "labeling": ["aria-label", "aria-labelledby"],
+    "labeling": [
+      "aria-label"
+    ],
     "keyboard": [
       {
+        "key": "Enter|Space",
+        "when": "trigger",
+        "then": "activate"
+      },
+      {
         "key": "Escape",
-        "when": "any",
+        "when": "open",
         "then": "close"
       },
       {
         "key": "Tab",
-        "when": "any",
+        "when": "open",
         "then": "cycle focus within"
       }
     ],
-    "apgPattern": "dialog"
+    "apgPattern": "dialog-modal"
   },
   "tokens": {
     "root": [
       "dialog.color.background.default",
-      "dialog.color.foreground.primary",
-      "dialog.size.padding.default",
-      "dialog.size.radius.default"
+      "dialog.color.background.backdrop",
+      "dialog.color.background.hover",
+      "dialog.color.background.active",
+      "dialog.color.foreground.default",
+      "dialog.color.foreground.title",
+      "dialog.color.foreground.secondary",
+      "dialog.color.border.default",
+      "dialog.color.border.focus",
+      "dialog.size.sm.width.value",
+      "dialog.size.sm.width.unit",
+      "dialog.size.sm.maxWidth.value",
+      "dialog.size.sm.maxWidth.unit",
+      "dialog.size.sm.padding",
+      "dialog.size.md.width.value",
+      "dialog.size.md.width.unit",
+      "dialog.size.md.maxWidth.value",
+      "dialog.size.md.maxWidth.unit",
+      "dialog.size.md.padding",
+      "dialog.size.lg.width.value",
+      "dialog.size.lg.width.unit",
+      "dialog.size.lg.maxWidth.value",
+      "dialog.size.lg.maxWidth.unit",
+      "dialog.size.lg.padding",
+      "dialog.size.xl.width.value",
+      "dialog.size.xl.width.unit",
+      "dialog.size.xl.maxWidth.value",
+      "dialog.size.xl.maxWidth.unit",
+      "dialog.size.xl.padding",
+      "dialog.size.full.width.value",
+      "dialog.size.full.width.unit",
+      "dialog.size.full.height.value",
+      "dialog.size.full.height.unit",
+      "dialog.size.full.maxWidth.value",
+      "dialog.size.full.maxWidth.unit",
+      "dialog.size.full.padding",
+      "dialog.size.radius.default",
+      "dialog.size.radius.small",
+      "dialog.size.closeButton.size",
+      "dialog.size.closeButton.offset",
+      "dialog.elevation.default",
+      "dialog.spacing.backdrop.padding",
+      "dialog.spacing.backdrop.paddingMobile",
+      "dialog.spacing.header.paddingTop",
+      "dialog.spacing.header.paddingRight",
+      "dialog.spacing.header.paddingBottom",
+      "dialog.spacing.header.paddingLeft",
+      "dialog.spacing.header.paddingMobile",
+      "dialog.spacing.body.paddingTop",
+      "dialog.spacing.body.paddingRight",
+      "dialog.spacing.body.paddingBottom",
+      "dialog.spacing.body.paddingLeft",
+      "dialog.spacing.body.paddingYMobile",
+      "dialog.spacing.body.paddingXMobile",
+      "dialog.spacing.footer.paddingTop",
+      "dialog.spacing.footer.paddingRight",
+      "dialog.spacing.footer.paddingBottom",
+      "dialog.spacing.footer.paddingLeft",
+      "dialog.spacing.footer.gap",
+      "dialog.spacing.footer.gapMobile",
+      "dialog.spacing.footer.paddingYMobile",
+      "dialog.spacing.footer.paddingXMobile",
+      "dialog.spacing.footer.paddingBottomMobile",
+      "dialog.typography.title.fontSize",
+      "dialog.typography.title.fontWeight",
+      "dialog.typography.title.lineHeight",
+      "dialog.motion.duration.enter",
+      "dialog.motion.duration.exit",
+      "dialog.motion.easing.enter",
+      "dialog.motion.easing.exit"
+    ],
+    "body": [
+      "dialog.spacing.body.paddingTop",
+      "dialog.spacing.body.paddingRight",
+      "dialog.spacing.body.paddingBottom",
+      "dialog.spacing.body.paddingLeft",
+      "dialog.spacing.body.paddingYMobile",
+      "dialog.spacing.body.paddingXMobile"
+    ],
+    "closeButton": [
+      "dialog.size.closeButton.size",
+      "dialog.size.closeButton.offset"
+    ],
+    "footer": [
+      "dialog.spacing.footer.paddingTop",
+      "dialog.spacing.footer.paddingRight",
+      "dialog.spacing.footer.paddingBottom",
+      "dialog.spacing.footer.paddingLeft",
+      "dialog.spacing.footer.gap",
+      "dialog.spacing.footer.gapMobile",
+      "dialog.spacing.footer.paddingYMobile",
+      "dialog.spacing.footer.paddingXMobile",
+      "dialog.spacing.footer.paddingBottomMobile"
+    ],
+    "header": [
+      "dialog.spacing.header.paddingTop",
+      "dialog.spacing.header.paddingRight",
+      "dialog.spacing.header.paddingBottom",
+      "dialog.spacing.header.paddingLeft",
+      "dialog.spacing.header.paddingMobile"
+    ],
+    "title": [
+      "dialog.typography.title.fontSize",
+      "dialog.typography.title.fontWeight",
+      "dialog.typography.title.lineHeight"
+    ],
+    "backdrop": [
+      "dialog.spacing.backdrop.padding",
+      "dialog.spacing.backdrop.paddingMobile"
     ]
   },
   "ssr": {

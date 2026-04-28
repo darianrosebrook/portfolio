@@ -1,33 +1,84 @@
 {
   "name": "Details",
-  "layer": "primitive",
+  "layer": "composer",
   "anatomy": [
     "root",
+    "compact",
+    "inline",
     "summary",
     "summaryContent",
     "icon",
     "summaryText",
     "content"
   ],
-  "variants": {},
-  "states": ["default", "hover", "focus", "active", "disabled"],
-  "slots": {},
+  "variants": {
+    "variant": [
+      "default",
+      "inline",
+      "compact"
+    ]
+  },
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "disabled",
+    "open",
+    "closed"
+  ],
+  "slots": {
+    "compact": {
+      "required": false
+    },
+    "inline": {
+      "required": false
+    }
+  },
   "a11y": {
-    "role": "generic",
-    "labeling": ["aria-label"],
-    "keyboard": [],
+    "role": "group",
+    "labeling": [
+      "aria-label"
+    ],
+    "keyboard": [
+      {
+        "key": "KeyboardEvent",
+        "when": "root",
+        "then": "handled by component"
+      }
+    ],
     "apgPattern": null
   },
   "tokens": {
     "root": [
-      "details.color.background.default",
-      "details.color.foreground.primary",
       "details.size.padding.default",
-      "details.size.radius.default"
+      "details.size.radius.default",
+      "details.size.icon",
+      "details.color.background.default",
+      "details.color.background.subtle",
+      "details.color.background.hover",
+      "details.color.background.code",
+      "details.color.foreground.primary",
+      "details.color.foreground.secondary",
+      "details.color.border.default",
+      "details.color.border.hover",
+      "details.color.border.accent",
+      "details.focus.ring.width",
+      "details.focus.ring.color",
+      "details.focus.ring.offset",
+      "details.motion.duration.fast",
+      "details.motion.easing.standard",
+      "details.spacing.gap.default",
+      "details.spacing.padding.left",
+      "details.spacing.margin.bottom",
+      "details.spacing.margin.top",
+      "details.spacing.margin.compact",
+      "details.typography.lineHeight.body",
+      "details.typography.lineHeight.tight",
+      "details.typography.fontWeight.medium"
     ]
   },
   "ssr": {
-    "hydrateOn": "none"
+    "hydrateOn": "interaction"
   },
   "rtl": {
     "flipIcon": true

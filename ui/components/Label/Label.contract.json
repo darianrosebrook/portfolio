@@ -1,26 +1,29 @@
 {
   "name": "Label",
   "layer": "primitive",
-  "anatomy": ["root"],
+  "anatomy": [
+    "root"
+  ],
   "variants": {},
-  "states": ["default", "hover", "focus", "active", "disabled"],
+  "states": [
+    "default"
+  ],
   "slots": {},
   "a11y": {
     "role": "generic",
-    "labeling": ["aria-label"],
+    "labeling": [],
     "keyboard": [],
     "apgPattern": null
   },
   "tokens": {
     "root": [
-      "label.color.background.default",
-      "label.color.foreground.primary",
-      "label.size.padding.default",
-      "label.size.radius.default"
+      "label.color.text.default",
+      "label.typo.weight.default",
+      "label.typo.lineHeight.default"
     ]
   },
   "ssr": {
-    "hydrateOn": "none"
+    "hydrateOn": "interaction"
   },
   "rtl": {
     "flipIcon": false

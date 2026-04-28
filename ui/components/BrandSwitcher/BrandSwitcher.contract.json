@@ -1,0 +1,92 @@
+{
+  "name": "BrandSwitcher",
+  "layer": "primitive",
+  "anatomy": [
+    "root",
+    "brandSwitcher",
+    "sectionCard",
+    "sectionHeader",
+    "sectionTitle",
+    "selectedBrandInfo",
+    "selectedBrandDot",
+    "selectedBrandName",
+    "selectedBrandMood",
+    "swatchGrid",
+    "swatchBtn",
+    "swatchDot",
+    "densitySlider",
+    "densityLabel",
+    "rangeInput",
+    "densityTicks",
+    "densityTick",
+    "segmentedControl",
+    "segment",
+    "segmentActive",
+    "subsection",
+    "subsectionLabel",
+    "keyboardHint",
+    "kbd"
+  ],
+  "variants": {},
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "active",
+    "selected"
+  ],
+  "slots": {},
+  "a11y": {
+    "role": "generic",
+    "labeling": [
+      "aria-label",
+      "title"
+    ],
+    "keyboard": [
+      {
+        "key": "Enter|Space",
+        "when": "trigger",
+        "then": "activate"
+      }
+    ],
+    "apgPattern": null
+  },
+  "tokens": {
+    "root": [
+      "brandSwitcher.color.background.primary",
+      "brandSwitcher.color.background.secondary",
+      "brandSwitcher.color.background.tertiary",
+      "brandSwitcher.color.background.accent",
+      "brandSwitcher.color.background.highlight",
+      "brandSwitcher.color.foreground.primary",
+      "brandSwitcher.color.foreground.secondary",
+      "brandSwitcher.color.foreground.tertiary",
+      "brandSwitcher.color.border.default",
+      "brandSwitcher.color.border.hover",
+      "brandSwitcher.color.border.focus",
+      "brandSwitcher.color.border.accent",
+      "brandSwitcher.spacing.gap.xs",
+      "brandSwitcher.spacing.gap.sm",
+      "brandSwitcher.spacing.gap.md",
+      "brandSwitcher.spacing.padding.xs",
+      "brandSwitcher.spacing.padding.sm",
+      "brandSwitcher.spacing.padding.md",
+      "brandSwitcher.spacing.padding.lg",
+      "brandSwitcher.size.radius.01",
+      "brandSwitcher.size.radius.02",
+      "brandSwitcher.size.radius.03",
+      "brandSwitcher.typography.fontSize.xs",
+      "brandSwitcher.typography.fontSize.sm",
+      "brandSwitcher.typography.fontSize.default",
+      "brandSwitcher.typography.fontWeight.default",
+      "brandSwitcher.typography.fontWeight.strong",
+      "brandSwitcher.typography.lineHeight.default"
+    ]
+  },
+  "ssr": {
+    "hydrateOn": "interaction"
+  },
+  "rtl": {
+    "flipIcon": false
+  }
+}

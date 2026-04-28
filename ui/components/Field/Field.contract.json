@@ -1,32 +1,82 @@
 {
   "name": "Field",
   "layer": "composer",
-  "anatomy": ["root", "header", "meta", "validatingIndicator"],
-  "variants": {},
-  "states": ["default", "hover", "focus", "active", "disabled"],
-  "slots": {},
+  "anatomy": [
+    "root",
+    "error",
+    "help",
+    "label",
+    "header",
+    "control",
+    "meta",
+    "validatingIndicator"
+  ],
+  "variants": {
+    "status": [
+      "idle",
+      "validating",
+      "valid",
+      "invalid"
+    ]
+  },
+  "states": [
+    "default",
+    "focus",
+    "disabled"
+  ],
+  "slots": {
+    "error": {
+      "required": false
+    },
+    "help": {
+      "required": false
+    },
+    "label": {
+      "required": false
+    }
+  },
   "a11y": {
-    "role": "textbox",
-    "labeling": ["aria-label", "aria-labelledby", "aria-describedby"],
-    "keyboard": [
-      {
-        "key": "Tab",
-        "when": "root",
-        "then": "focus"
-      }
+    "role": "alert",
+    "roles": [
+      "alert",
+      "group",
+      "radiogroup"
     ],
-    "apgPattern": "textbox"
+    "labeling": [
+      "aria-labelledby",
+      "aria-describedby",
+      "aria-errormessage"
+    ],
+    "keyboard": [],
+    "apgPattern": "alert"
   },
   "tokens": {
     "root": [
-      "field.color.background.default",
-      "field.color.foreground.primary",
-      "field.size.padding.default",
-      "field.size.radius.default"
+      "field.gap.y",
+      "field.gap.meta",
+      "field.label.fontSize",
+      "field.label.color",
+      "field.radius",
+      "field.pad.x",
+      "field.pad.y",
+      "field.color.bg",
+      "field.color.fg",
+      "field.color.border",
+      "field.color.borderBold",
+      "field.color.focus-border",
+      "field.color.focus-text",
+      "field.color.invalid-border",
+      "field.color.invalid-text",
+      "field.color.valid-border",
+      "field.spacing.indicator"
+    ],
+    "label": [
+      "field.label.fontSize",
+      "field.label.color"
     ]
   },
   "ssr": {
-    "hydrateOn": "interaction"
+    "hydrateOn": "none"
   },
   "rtl": {
     "flipIcon": false

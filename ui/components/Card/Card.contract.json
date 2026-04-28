@@ -1,26 +1,133 @@
 {
   "name": "Card",
-  "layer": "primitive",
-  "anatomy": ["root", "default", "elevated", "outlined", "clickable"],
-  "variants": {},
-  "states": ["default", "hover", "focus", "active", "disabled"],
-  "slots": {},
+  "layer": "compound",
+  "anatomy": [
+    "root",
+    "actions",
+    "badge",
+    "content",
+    "description",
+    "footer",
+    "header",
+    "link",
+    "media",
+    "note",
+    "title",
+    "interactive",
+    "elevated",
+    "outlined"
+  ],
+  "variants": {
+    "status": [
+      "completed",
+      "in-progress",
+      "planned",
+      "deprecated",
+      "category",
+      "complexity"
+    ]
+  },
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "active"
+  ],
+  "slots": {
+    "actions": {
+      "required": false
+    },
+    "badge": {
+      "required": false
+    },
+    "content": {
+      "required": false
+    },
+    "description": {
+      "required": false
+    },
+    "footer": {
+      "required": false
+    },
+    "header": {
+      "required": false
+    },
+    "link": {
+      "required": false
+    },
+    "media": {
+      "required": false
+    },
+    "note": {
+      "required": false
+    },
+    "title": {
+      "required": false
+    }
+  },
   "a11y": {
     "role": "generic",
-    "labeling": ["aria-label"],
+    "labeling": [],
     "keyboard": [],
     "apgPattern": null
   },
   "tokens": {
     "root": [
       "card.color.background.default",
+      "card.color.background.hover",
+      "card.color.background.secondary",
+      "card.color.border.default",
+      "card.color.border.accent",
       "card.color.foreground.primary",
+      "card.color.foreground.secondary",
+      "card.color.foreground.link",
+      "card.color.badge.success.background",
+      "card.color.badge.success.foreground",
+      "card.color.badge.warning.background",
+      "card.color.badge.warning.foreground",
+      "card.color.badge.info.background",
+      "card.color.badge.info.foreground",
+      "card.color.badge.error.background",
+      "card.color.badge.error.foreground",
+      "card.color.badge.neutral.background",
+      "card.color.badge.neutral.foreground",
+      "card.color.badge.accent.background",
+      "card.color.badge.accent.foreground",
       "card.size.padding.default",
-      "card.size.radius.default"
+      "card.size.padding.note",
+      "card.size.padding.badgeY",
+      "card.size.padding.badgeX",
+      "card.size.radius.default",
+      "card.size.radius.medium",
+      "card.size.radius.full",
+      "card.size.gap.small",
+      "card.size.gap.default",
+      "card.elevation.default",
+      "card.elevation.hover",
+      "card.motion.duration",
+      "card.motion.easing",
+      "card.motion.hover.offset.value",
+      "card.motion.hover.offset.unit",
+      "card.typography.lineHeight.heading",
+      "card.typography.lineHeight.normal"
+    ],
+    "badge": [
+      "card.color.badge.success.background",
+      "card.color.badge.success.foreground",
+      "card.color.badge.warning.background",
+      "card.color.badge.warning.foreground",
+      "card.color.badge.info.background",
+      "card.color.badge.info.foreground",
+      "card.color.badge.error.background",
+      "card.color.badge.error.foreground",
+      "card.color.badge.neutral.background",
+      "card.color.badge.neutral.foreground",
+      "card.color.badge.accent.background",
+      "card.color.badge.accent.foreground"
     ]
   },
   "ssr": {
-    "hydrateOn": "none"
+    "hydrateOn": "interaction"
   },
   "rtl": {
     "flipIcon": false

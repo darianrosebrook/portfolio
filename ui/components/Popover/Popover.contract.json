@@ -8,27 +8,46 @@
     "popoverContent",
     "activeTrigger"
   ],
-  "variants": {},
-  "states": ["default", "hover", "focus", "active", "disabled"],
+  "variants": {
+    "placement": [
+      "top",
+      "bottom",
+      "left",
+      "right",
+      "auto"
+    ]
+  },
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "leaving"
+  ],
   "slots": {},
   "a11y": {
     "role": "region",
-    "labeling": ["aria-label", "aria-labelledby"],
+    "labeling": [
+      "aria-haspopup"
+    ],
     "keyboard": [
       {
-        "key": "Tab",
-        "when": "any",
-        "then": "navigate children"
+        "key": "KeyboardEvent",
+        "when": "root",
+        "then": "handled by component"
       }
     ],
     "apgPattern": null
   },
   "tokens": {
     "root": [
-      "popover.color.background.default",
-      "popover.color.foreground.primary",
       "popover.size.padding.default",
-      "popover.size.radius.default"
+      "popover.size.radius.default",
+      "popover.size.radius.full",
+      "popover.size.gap.default",
+      "popover.size.maxWidth.default",
+      "popover.color.background.content",
+      "popover.color.border.accent",
+      "popover.elevation.default"
     ]
   },
   "ssr": {

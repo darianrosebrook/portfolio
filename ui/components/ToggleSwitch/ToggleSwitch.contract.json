@@ -1,28 +1,103 @@
 {
   "name": "ToggleSwitch",
   "layer": "primitive",
-  "anatomy": ["root", "toggleSwitch", "input", "checked"],
+  "anatomy": [
+    "root",
+    "toggleSwitch",
+    "input",
+    "label",
+    "srOnly",
+    "toggleSwitchGroup"
+  ],
   "variants": {
-    "size": ["small", "medium", "large"]
+    "size": [
+      "small",
+      "medium",
+      "large"
+    ],
+    "orientation": [
+      "vertical",
+      "horizontal"
+    ]
   },
-  "states": ["default", "hover", "focus", "active", "disabled"],
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "disabled",
+    "checked"
+  ],
   "slots": {},
   "a11y": {
-    "role": "generic",
-    "labeling": ["aria-label"],
+    "role": "switch",
+    "labeling": [
+      "aria-label",
+      "aria-checked",
+      "aria-describedby"
+    ],
     "keyboard": [],
-    "apgPattern": null
+    "apgPattern": "switch"
   },
   "tokens": {
     "root": [
-      "toggleswitch.color.background.default",
-      "toggleswitch.color.foreground.primary",
-      "toggleswitch.size.padding.default",
-      "toggleswitch.size.radius.default"
+      "toggleSwitch.color.background.default",
+      "toggleSwitch.color.background.hover",
+      "toggleSwitch.color.background.active",
+      "toggleSwitch.color.background.checked",
+      "toggleSwitch.color.background.checkedHover",
+      "toggleSwitch.color.background.disabled",
+      "toggleSwitch.color.foreground.default",
+      "toggleSwitch.color.foreground.hover",
+      "toggleSwitch.color.foreground.active",
+      "toggleSwitch.color.foreground.disabled",
+      "toggleSwitch.color.thumb.default",
+      "toggleSwitch.color.thumb.hover",
+      "toggleSwitch.color.thumb.active",
+      "toggleSwitch.color.thumb.disabled",
+      "toggleSwitch.color.border.default",
+      "toggleSwitch.color.border.hover",
+      "toggleSwitch.color.border.active",
+      "toggleSwitch.color.border.disabled",
+      "toggleSwitch.size.width.small",
+      "toggleSwitch.size.width.medium",
+      "toggleSwitch.size.width.large",
+      "toggleSwitch.size.height.small",
+      "toggleSwitch.size.height.medium",
+      "toggleSwitch.size.height.large",
+      "toggleSwitch.size.thumb.small",
+      "toggleSwitch.size.thumb.medium",
+      "toggleSwitch.size.thumb.large",
+      "toggleSwitch.size.padding.small",
+      "toggleSwitch.size.padding.medium",
+      "toggleSwitch.size.padding.large",
+      "toggleSwitch.size.radius.full",
+      "toggleSwitch.spacing.gap.default",
+      "toggleSwitch.spacing.gap.small",
+      "toggleSwitch.spacing.gap.large",
+      "toggleSwitch.spacing.margin.default",
+      "toggleSwitch.spacing.margin.small",
+      "toggleSwitch.spacing.margin.large",
+      "toggleSwitch.border.width.default",
+      "toggleSwitch.border.width.thick",
+      "toggleSwitch.border.radius.default",
+      "toggleSwitch.border.radius.thumb",
+      "toggleSwitch.motion.duration.fast",
+      "toggleSwitch.motion.duration.normal",
+      "toggleSwitch.motion.duration.slow",
+      "toggleSwitch.motion.easing.standard",
+      "toggleSwitch.motion.easing.decelerate",
+      "toggleSwitch.motion.easing.accelerate",
+      "toggleSwitch.typography.fontSize.small",
+      "toggleSwitch.typography.fontSize.medium",
+      "toggleSwitch.typography.fontSize.large",
+      "toggleSwitch.typography.fontWeight.default",
+      "toggleSwitch.typography.fontWeight.medium",
+      "toggleSwitch.typography.lineHeight.default",
+      "toggleSwitch.typography.lineHeight.tight"
     ]
   },
   "ssr": {
-    "hydrateOn": "none"
+    "hydrateOn": "interaction"
   },
   "rtl": {
     "flipIcon": false
