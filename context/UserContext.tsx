@@ -75,7 +75,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   }, [user, fetchProfile]);
 
-    useEffect(() => {
+  useEffect(() => {
     let isMounted = true;
 
     // Get initial session

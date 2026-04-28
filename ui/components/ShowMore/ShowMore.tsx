@@ -64,8 +64,7 @@ export const ShowMore = ShowMoreComponent as typeof ShowMoreComponent & {
 };
 
 // Trigger Component
-export interface ShowMoreTriggerProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
+export interface ShowMoreTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
 export const ShowMoreTrigger = React.forwardRef<
   HTMLButtonElement,
@@ -88,8 +87,7 @@ export const ShowMoreTrigger = React.forwardRef<
 });
 
 // Content Component
-export interface ShowMoreContentProps
-  extends React.HTMLAttributes<HTMLDivElement> {}
+export interface ShowMoreContentProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export const ShowMoreContent = React.forwardRef<
   HTMLDivElement,

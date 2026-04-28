@@ -21,7 +21,7 @@ export default function EditArticlePage({
       try {
         const { slug } = await params;
         const res = await fetch(`/api/articles/${slug}`);
-        
+
         if (!res.ok) {
           if (res.status === 404) {
             setError('Article not found');
@@ -30,7 +30,7 @@ export default function EditArticlePage({
           }
           return;
         }
-        
+
         const data = await res.json();
         setArticle(data);
       } catch (err) {
@@ -120,8 +120,8 @@ export default function EditArticlePage({
               color: 'var(--semantic-color-foreground-secondary)',
             }}
           >
-            The article you&apos;re looking for doesn&apos;t exist or you don&apos;t have
-            permission to edit it.
+            The article you&apos;re looking for doesn&apos;t exist or you
+            don&apos;t have permission to edit it.
           </p>
         </div>
         <Button onClick={() => router.push('/dashboard/articles')}>

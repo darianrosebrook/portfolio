@@ -2,8 +2,7 @@
 import * as React from 'react';
 import styles from '../Toast.module.scss';
 
-export interface ToastCloseProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
+export interface ToastCloseProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
 export const ToastClose: React.FC<ToastCloseProps> = ({
   className = '',

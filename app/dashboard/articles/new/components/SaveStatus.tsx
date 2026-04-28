@@ -70,7 +70,9 @@ export function SaveStatus({ status, lastSaved, error }: SaveStatusProps) {
         </span>
       )}
       {status === 'local' && (
-        <span style={{ color: 'var(--semantic-color-foreground-warning, #f59e0b)' }}>
+        <span
+          style={{ color: 'var(--semantic-color-foreground-warning, #f59e0b)' }}
+        >
           ⚡
         </span>
       )}

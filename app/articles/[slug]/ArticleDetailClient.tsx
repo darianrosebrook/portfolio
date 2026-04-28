@@ -82,7 +82,7 @@ export default function ArticleDetailClient({
       if (ledeRef.current) {
         // First, make the container visible
         gsap.set(ledeRef.current, { opacity: 1 });
-        
+
         // Then animate the children
         const children = ledeRef.current.children;
         gsap.fromTo(
@@ -155,10 +155,7 @@ export default function ArticleDetailClient({
             <ShareLinks url={canonical} article={article} />
           </div>
         </div>
-        <div
-          ref={imageRef}
-          style={{ opacity: prefersReducedMotion ? 1 : 0 }}
-        >
+        <div ref={imageRef} style={{ opacity: prefersReducedMotion ? 1 : 0 }}>
           <NextImage
             src={article.image}
             alt={article.headline}

@@ -166,7 +166,7 @@ describe('Temp slug generation', () => {
     const generateTempSlug = () => `draft-${Date.now()}`;
 
     const slug1 = generateTempSlug();
-    
+
     // Small delay to ensure different timestamp
     const slug2 = generateTempSlug();
 

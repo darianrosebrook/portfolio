@@ -13,11 +13,10 @@ import styles from './Switch.module.scss';
 
 export type SwitchSize = 'sm' | 'md' | 'lg';
 
-export interface SwitchProps
-  extends Omit<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    'size' | 'type' | 'role'
-  > {
+export interface SwitchProps extends Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  'size' | 'type' | 'role'
+> {
   /** Size variant using design tokens */
   size?: SwitchSize;
   /** Controlled checked state */

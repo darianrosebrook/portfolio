@@ -104,20 +104,20 @@ export default function ContentEditor({
       setSaveError(null);
 
       try {
-      const urlBase =
-        entity === 'articles' ? '/api/articles' : '/api/case-studies';
+        const urlBase =
+          entity === 'articles' ? '/api/articles' : '/api/case-studies';
         const response = await fetch(`${urlBase}/${record.slug}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          workingbody: record.articleBody,
-          workingheadline: record.headline,
-          workingdescription: record.description,
-          workingimage: record.image,
-          workingkeywords: record.keywords,
-          workingarticlesection: record.articleSection,
-        }),
-      });
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            workingbody: record.articleBody,
+            workingheadline: record.headline,
+            workingdescription: record.description,
+            workingimage: record.image,
+            workingkeywords: record.keywords,
+            workingarticlesection: record.articleSection,
+          }),
+        });
 
         if (!response.ok) {
           const errorText = await response.text();
@@ -421,7 +421,9 @@ export default function ContentEditor({
             </span>
           )}
           {saveStatus === 'saved' && <span>✓ Saved</span>}
-          {saveStatus === 'error' && <span>✕ {saveError || 'Error saving'}</span>}
+          {saveStatus === 'error' && (
+            <span>✕ {saveError || 'Error saving'}</span>
+          )}
           {saveStatus === 'idle' && <span>Auto-save enabled</span>}
         </div>
       </aside>

@@ -40,7 +40,8 @@ interface ChipBaseProps {
 }
 
 interface ChipAsButton
-  extends ChipBaseProps,
+  extends
+    ChipBaseProps,
     Omit<
       React.ButtonHTMLAttributes<HTMLButtonElement>,
       'className' | 'type' | 'onClick' | 'disabled' | 'children'
@@ -55,7 +56,8 @@ interface ChipAsButton
 }
 
 interface ChipAsAnchor
-  extends ChipBaseProps,
+  extends
+    ChipBaseProps,
     Omit<
       React.AnchorHTMLAttributes<HTMLAnchorElement>,
       'className' | 'href' | 'onClick' | 'children'

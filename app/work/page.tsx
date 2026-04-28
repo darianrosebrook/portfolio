@@ -4,11 +4,11 @@ import WorkPageClient from './WorkPageClient';
 export const metadata: Metadata = {
   title: 'Work & Case Studies | Darian Rosebrook',
   description:
-    'Explore Darian Rosebrook\'s portfolio of design system work, custom tooling, and design ops projects at companies like Microsoft, Salesforce, Nike, eBay, Verizon, and Qualtrics.',
+    "Explore Darian Rosebrook's portfolio of design system work, custom tooling, and design ops projects at companies like Microsoft, Salesforce, Nike, eBay, Verizon, and Qualtrics.",
   openGraph: {
     title: 'Work & Case Studies | Darian Rosebrook',
     description:
-      'Explore Darian Rosebrook\'s portfolio of design system work, custom tooling, and design ops projects at companies like Microsoft, Salesforce, Nike, eBay, Verizon, and Qualtrics.',
+      "Explore Darian Rosebrook's portfolio of design system work, custom tooling, and design ops projects at companies like Microsoft, Salesforce, Nike, eBay, Verizon, and Qualtrics.",
     url: 'https://darianrosebrook.com/work',
     siteName: 'Darian Rosebrook',
     images: [
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Work & Case Studies | Darian Rosebrook',
     description:
-      'Explore Darian Rosebrook\'s portfolio of design system work, custom tooling, and design ops projects at companies like Microsoft, Salesforce, Nike, eBay, Verizon, and Qualtrics.',
+      "Explore Darian Rosebrook's portfolio of design system work, custom tooling, and design ops projects at companies like Microsoft, Salesforce, Nike, eBay, Verizon, and Qualtrics.",
     images: ['https://darianrosebrook.com/darianrosebrook.jpg'],
     creator: '@darianrosebrook',
   },

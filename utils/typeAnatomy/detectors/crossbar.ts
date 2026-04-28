@@ -130,7 +130,6 @@ export function detectCrossbar(geo: GeometryCache): FeatureInstance[] {
       thicknessMeasurement.failureReason === 'no_hits' ||
       thicknessMeasurement.failureReason === 'insufficient_pairs'
     ) {
-      if (TRACE) console.log(`[crossbar TRACE]   → skip: no measurement`);
       continue;
     }
 
@@ -156,10 +155,6 @@ export function detectCrossbar(geo: GeometryCache): FeatureInstance[] {
     if (measuredCenterY !== undefined) {
       const distance = Math.abs(measuredCenterY - avgY);
       if (distance > thicknessMeasurement.thickness) {
-        if (TRACE)
-          console.log(
-            `[crossbar TRACE]   → skip: distance ${distance.toFixed(0)} > thickness ${thicknessMeasurement.thickness.toFixed(0)}`
-          );
         continue;
       }
     }
@@ -174,13 +169,8 @@ export function detectCrossbar(geo: GeometryCache): FeatureInstance[] {
         thicknessMeasurement.pairCount === 1
       )
     ) {
-      if (TRACE)
-        console.log(
-          `[crossbar TRACE]   → skip: single-band, contains=${thicknessMeasurement.selectedPairContainsMidpoint} pairs=${thicknessMeasurement.pairCount}`
-        );
       continue;
     }
-    if (TRACE) console.log(`[crossbar TRACE]   → emit`);
 
     const measuredHeight = thicknessMeasurement.thickness;
 

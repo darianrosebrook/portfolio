@@ -24,12 +24,12 @@ const Tiptap = ({
 }) => {
   const content = article.articleBody as JSONContent | undefined;
   const articleRef = useRef(article);
-  
+
   // Keep articleRef in sync with latest article prop
   useEffect(() => {
     articleRef.current = article;
   }, [article]);
-  
+
   const editor = useEditor({
     extensions: createExtensions(article?.id as unknown as number),
     immediatelyRender: false,
@@ -51,7 +51,7 @@ const Tiptap = ({
     if (editor && content) {
       const currentContent = JSON.stringify(editor.getJSON());
       const newContent = JSON.stringify(content);
-      
+
       // Only update if content is actually different to avoid cursor jumps
       if (currentContent !== newContent) {
         editor.commands.setContent(content, { emitUpdate: false });

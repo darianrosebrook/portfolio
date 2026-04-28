@@ -27,7 +27,8 @@ export type CodeWorkbenchProps = {
 function toSandpackFiles(project: VirtualProject): SandpackFiles {
   const out: SandpackFiles = {};
   for (const f of project.files) {
-    const content = typeof f.contents === 'string' ? f.contents : String(f.contents);
+    const content =
+      typeof f.contents === 'string' ? f.contents : String(f.contents);
     // If file is marked as hidden, use object format with hidden property
     if (f.hidden === true) {
       out[f.path] = { code: content, hidden: true };

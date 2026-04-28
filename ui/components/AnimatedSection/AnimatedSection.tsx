@@ -1,7 +1,13 @@
 'use client';
 
 import * as React from 'react';
-import { useRef, useEffect, Children, cloneElement, isValidElement } from 'react';
+import {
+  useRef,
+  useEffect,
+  Children,
+  cloneElement,
+  isValidElement,
+} from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useReducedMotion } from '@/context/ReducedMotionContext';
@@ -236,7 +242,9 @@ export const AnimatedSection = React.forwardRef<
       Component,
       {
         ref: setRefs,
-        className: [styles.animatedSection, className].filter(Boolean).join(' '),
+        className: [styles.animatedSection, className]
+          .filter(Boolean)
+          .join(' '),
         style: {
           // Set initial state for SSR/hydration (non-stagger variants)
           opacity:

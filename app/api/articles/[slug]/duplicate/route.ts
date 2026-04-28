@@ -76,9 +76,14 @@ export async function POST(
     .single();
 
   if (insertError) {
-    console.error('Article duplicate error:', JSON.stringify(insertError, null, 2));
+    console.error(
+      'Article duplicate error:',
+      JSON.stringify(insertError, null, 2)
+    );
     return new NextResponse(
-      JSON.stringify({ error: insertError.message || 'Failed to duplicate article' }),
+      JSON.stringify({
+        error: insertError.message || 'Failed to duplicate article',
+      }),
       {
         status: 500,
         headers: { 'Content-Type': 'application/json' },

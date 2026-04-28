@@ -19,8 +19,10 @@ export interface CardBadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
   status?: CardStatus;
 }
 
-export interface CardLinkProps
-  extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'className'> {
+export interface CardLinkProps extends Omit<
+  React.AnchorHTMLAttributes<HTMLAnchorElement>,
+  'className'
+> {
   className?: string;
 }
 

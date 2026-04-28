@@ -101,7 +101,7 @@ export default function WorkPageClient() {
       if (headerRef.current) {
         // First, make the container visible
         gsap.set(headerRef.current, { opacity: 1 });
-        
+
         // Then animate the children
         const children = headerRef.current.children;
         gsap.fromTo(

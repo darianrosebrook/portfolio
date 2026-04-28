@@ -8,22 +8,30 @@ interface ArticlesPageProps {
   searchParams: Promise<{ status?: string }>;
 }
 
-export default async function ArticlesPage({ searchParams }: ArticlesPageProps) {
+export default async function ArticlesPage({
+  searchParams,
+}: ArticlesPageProps) {
   const params = await searchParams;
   const statusFilter = params.status as 'published' | 'draft' | undefined;
-  
+
   const supabase = await createClient();
-  
+
   // Fetch all articles to get counts
   const { data: allArticles } = await supabase
     .from('articles')
-    .select('id, slug, headline, description, status, modified_at, published_at, wordCount')
+    .select(
+      'id, slug, headline, description, status, modified_at, published_at, wordCount'
+    )
     .order('modified_at', { ascending: false });
 
   // Filter out articles with empty slugs (data integrity issue)
-  const articles = (allArticles ?? []).filter((a) => a.slug && a.slug.trim() !== '');
-  const articlesWithEmptySlugs = (allArticles ?? []).filter((a) => !a.slug || a.slug.trim() === '');
-  
+  const articles = (allArticles ?? []).filter(
+    (a) => a.slug && a.slug.trim() !== ''
+  );
+  const articlesWithEmptySlugs = (allArticles ?? []).filter(
+    (a) => !a.slug || a.slug.trim() === ''
+  );
+
   // Calculate counts
   const counts = {
     all: articles.length,
@@ -41,9 +49,7 @@ export default async function ArticlesPage({ searchParams }: ArticlesPageProps) 
       <header className={styles.header}>
         <div className={styles.headerLeft}>
           <h1 className={styles.title}>Articles</h1>
-          <p className={styles.subtitle}>
-            Manage your blog posts and articles
-          </p>
+          <p className={styles.subtitle}>Manage your blog posts and articles</p>
         </div>
         <Button as="a" href="/dashboard/articles/new">
           <svg
@@ -69,16 +75,21 @@ export default async function ArticlesPage({ searchParams }: ArticlesPageProps) 
       </Suspense>
 
       {articlesWithEmptySlugs.length > 0 && (
-        <div style={{
-          padding: '12px 16px',
-          marginBottom: '16px',
-          backgroundColor: 'var(--semantic-color-background-warning-subtle, #fef3c7)',
-          border: '1px solid var(--semantic-color-border-warning, #f59e0b)',
-          borderRadius: '8px',
-          color: 'var(--semantic-color-foreground-warning, #92400e)',
-        }}>
-          <strong>Warning:</strong> {articlesWithEmptySlugs.length} article(s) have empty slugs and cannot be managed. 
-          These need to be fixed directly in the database (IDs: {articlesWithEmptySlugs.map(a => a.id).join(', ')}).
+        <div
+          style={{
+            padding: '12px 16px',
+            marginBottom: '16px',
+            backgroundColor:
+              'var(--semantic-color-background-warning-subtle, #fef3c7)',
+            border: '1px solid var(--semantic-color-border-warning, #f59e0b)',
+            borderRadius: '8px',
+            color: 'var(--semantic-color-foreground-warning, #92400e)',
+          }}
+        >
+          <strong>Warning:</strong> {articlesWithEmptySlugs.length} article(s)
+          have empty slugs and cannot be managed. These need to be fixed
+          directly in the database (IDs:{' '}
+          {articlesWithEmptySlugs.map((a) => a.id).join(', ')}).
         </div>
       )}
 

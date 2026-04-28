@@ -61,7 +61,7 @@ const validateEnvVar = (
 
 /**
  * Get environment variables with proper client/server handling
- * 
+ *
  * IMPORTANT: For NEXT_PUBLIC_* variables to work in the browser,
  * they MUST be accessed directly as process.env.NEXT_PUBLIC_XXX
  * (not dynamically via process.env[key]) because Next.js inlines

@@ -15,12 +15,11 @@ export function EmptyState({ filter = 'all' }: EmptyStateProps) {
     published: {
       title: 'No published articles',
       description:
-        'You haven\'t published any articles yet. Finish writing a draft and hit publish to see it here.',
+        "You haven't published any articles yet. Finish writing a draft and hit publish to see it here.",
     },
     draft: {
       title: 'No drafts',
-      description:
-        'All caught up! You don\'t have any articles in progress.',
+      description: "All caught up! You don't have any articles in progress.",
     },
   };
 

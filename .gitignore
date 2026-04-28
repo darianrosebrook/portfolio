@@ -50,3 +50,5 @@ utils/designTokens/.cache/
 
 # Designer preview
 .designer/
+
+tmp/

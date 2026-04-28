@@ -2,8 +2,10 @@
 import * as React from 'react';
 import styles from './Input.module.scss';
 
-export interface InputProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
+export interface InputProps extends Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  'size'
+> {
   invalid?: boolean;
 }
 

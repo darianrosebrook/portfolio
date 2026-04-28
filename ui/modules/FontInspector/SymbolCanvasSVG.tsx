@@ -59,7 +59,6 @@ export const SymbolCanvasSVG: React.FC = () => {
     setShowDetails,
     colors,
     selectedAnatomy,
-    autoDetectFeatures,
   } = useInspector();
 
   const svgRef = useRef<SVGSVGElement>(null);
@@ -1013,7 +1012,11 @@ function FeatureShapeRenderer({
 }: {
   shape: FeatureShape;
   scale: number;
-  colors: { anchorFill: string; anchorStroke: string; highlightBackground?: string };
+  colors: {
+    anchorFill: string;
+    anchorStroke: string;
+    highlightBackground?: string;
+  };
 }) {
   switch (shape.type) {
     case 'circle':

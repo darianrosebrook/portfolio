@@ -65,7 +65,8 @@ export function useAutoSave({
       }, 2000);
     } catch (err) {
       // Check if this is a "skipped" save (waiting for valid slug)
-      const errorMessage = err instanceof Error ? err.message : 'Failed to save';
+      const errorMessage =
+        err instanceof Error ? err.message : 'Failed to save';
       if (errorMessage.includes('Skipping server save')) {
         setSaveStatus('local');
         setLastSaved(new Date());
@@ -73,7 +74,7 @@ export function useAutoSave({
           setSaveStatus('idle');
         }, 2000);
       } else {
-      setSaveStatus('error');
+        setSaveStatus('error');
         setError(errorMessage);
       }
     }

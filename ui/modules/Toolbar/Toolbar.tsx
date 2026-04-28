@@ -61,9 +61,9 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
         <option value="2">Heading 2</option>
         <option value="3">Heading 3</option>
       </select>
-      
+
       <div className={styles.separator} />
-      
+
       {/* Text formatting */}
       <button
         onClick={() => editor.chain().focus().toggleBold().run()}
@@ -93,9 +93,9 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
       >
         <Icon icon={faStrikethrough} />
       </button>
-      
+
       <div className={styles.separator} />
-      
+
       {/* Alignment */}
       <button
         onClick={() => editor.chain().focus().setTextAlign('left').run()}
@@ -124,9 +124,9 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
       >
         <Icon icon={faAlignRight} />
       </button>
-      
+
       <div className={styles.separator} />
-      
+
       {/* Color picker */}
       <input
         type="color"
@@ -136,9 +136,9 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
         value={editor.getAttributes('textStyle').color || '#000000'}
         title="Text color"
       />
-      
+
       <div className={styles.separator} />
-      
+
       {/* Lists */}
       <button
         onClick={() => editor.chain().focus().toggleBulletList().run()}
@@ -154,9 +154,9 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
       >
         <Icon icon={faListOl} />
       </button>
-      
+
       <div className={styles.separator} />
-      
+
       {/* Blocks */}
       <button
         onClick={() =>
@@ -177,7 +177,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
       >
         <Icon icon={faQuoteLeft} />
       </button>
-      <button 
+      <button
         onClick={() => editor.chain().focus().setHorizontalRule().run()}
         title="Horizontal rule"
       >
@@ -195,20 +195,14 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
       >
         <Icon icon={faList} />
       </button>
-      
+
       <div className={styles.separator} />
-      
+
       {/* History */}
-      <button 
-        onClick={() => editor.chain().focus().undo().run()}
-        title="Undo"
-      >
+      <button onClick={() => editor.chain().focus().undo().run()} title="Undo">
         <Icon icon={faUndo} />
       </button>
-      <button 
-        onClick={() => editor.chain().focus().redo().run()}
-        title="Redo"
-      >
+      <button onClick={() => editor.chain().focus().redo().run()} title="Redo">
         <Icon icon={faRedo} />
       </button>
     </div>

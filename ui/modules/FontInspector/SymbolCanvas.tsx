@@ -15,7 +15,6 @@ import {
   drawMetricLine,
   drawPathDetails,
   drawFeatureInstances,
-  drawGlyphWithFeatureBackground,
   type TransformParams,
   type DrawFeatureOptions,
 } from '@/utils/geometry/drawing';
@@ -196,7 +195,13 @@ export const SymbolCanvas: React.FC = () => {
           useClipping: true,
         };
 
-        drawFeatureInstances(ctx, instancesMap, transformParams, colors, drawOptions);
+        drawFeatureInstances(
+          ctx,
+          instancesMap,
+          transformParams,
+          colors,
+          drawOptions
+        );
       }
 
       ctx.restore();
@@ -242,7 +247,14 @@ export const SymbolCanvas: React.FC = () => {
     } else {
       console.warn('No font or glyph');
     }
-  }, [glyph, fontInstance, drawGlyph, showDetails, detectedFeatures, colors.glyphBackground]);
+  }, [
+    glyph,
+    fontInstance,
+    drawGlyph,
+    showDetails,
+    detectedFeatures,
+    colors.glyphBackground,
+  ]);
 
   const scheduleDraw = useCallback(() => {
     if (!drawScheduled.current) {

@@ -112,12 +112,12 @@ export async function PUT(
   }
 
   const nowIso = new Date().toISOString();
-  let updateData: (typeof validation.data & {
+  let updateData: typeof validation.data & {
     modified_at: string;
     published_at?: string | null;
     working_modified_at?: string | null;
     is_dirty?: boolean | null;
-  }) = {
+  } = {
     ...validation.data,
     modified_at: nowIso,
   };
@@ -192,14 +192,12 @@ export async function PUT(
 
     updateData = {
       ...updateData,
-      articleBody:
-        (existing.workingbody ?? existing.articleBody) ?? null,
+      articleBody: existing.workingbody ?? existing.articleBody ?? null,
       headline: existing.workingheadline ?? existing.headline,
       description: existing.workingdescription ?? existing.description,
       image: existing.workingimage ?? existing.image,
       keywords: existing.workingkeywords ?? existing.keywords,
-      articleSection:
-        existing.workingarticlesection ?? existing.articleSection,
+      articleSection: existing.workingarticlesection ?? existing.articleSection,
       published_at: updateData.published_at ?? nowIso,
       working_modified_at: nowIso,
       is_dirty: false,
