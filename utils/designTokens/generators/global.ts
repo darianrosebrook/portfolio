@@ -42,7 +42,17 @@ import {
 } from '../utils/transforms';
 
 /** Available brand identifiers */
-export type BrandId = 'default' | 'corporate' | 'forest' | 'sunset' | 'midnight' | 'ocean' | 'canary' | 'monochrome' | 'rose' | 'slate';
+export type BrandId =
+  | 'default'
+  | 'corporate'
+  | 'forest'
+  | 'sunset'
+  | 'midnight'
+  | 'ocean'
+  | 'canary'
+  | 'monochrome'
+  | 'rose'
+  | 'slate';
 
 /** Available density identifiers */
 export type DensityId = 'tight' | 'compact' | 'default' | 'spacious';
@@ -82,7 +92,8 @@ interface ThemeMaps {
   hasDarkOverride: boolean;
 }
 
-interface CollectionContext {
+/** Shared token-walk context. Exported for tests. */
+export interface CollectionContext {
   theme?: 'light' | 'dark';
   definedVars: Set<string>;
   referencedVars: Set<string>;
@@ -445,7 +456,9 @@ function compositionValueToCSS(
   ) {
     // Focus ring can't be represented as a single CSS value
     // It should be used via individual properties or excluded from CSS generation
-    console.warn('[tokens] Skipping focus ring composition — cannot serialize to single CSS value');
+    console.warn(
+      '[tokens] Skipping focus ring composition — cannot serialize to single CSS value'
+    );
     return '';
   }
 
@@ -537,9 +550,9 @@ function loadBrandTokens(): Map<BrandId, BrandOverrides> {
     return brands;
   }
 
-  const brandFiles = fs.readdirSync(brandsDir).filter(
-    (f) => f.endsWith('.tokens.json') && !f.startsWith('_')
-  );
+  const brandFiles = fs
+    .readdirSync(brandsDir)
+    .filter((f) => f.endsWith('.tokens.json') && !f.startsWith('_'));
 
   for (const file of brandFiles) {
     const brandName = file.replace('.tokens.json', '') as BrandId;
@@ -550,7 +563,9 @@ function loadBrandTokens(): Map<BrandId, BrandOverrides> {
       const brandData = JSON.parse(content);
 
       if (!brandData.$brand) {
-        console.warn(`[tokens] Brand file ${file} missing $brand metadata, skipping`);
+        console.warn(
+          `[tokens] Brand file ${file} missing $brand metadata, skipping`
+        );
         continue;
       }
 
@@ -568,7 +583,9 @@ function loadBrandTokens(): Map<BrandId, BrandOverrides> {
       // Validate that brand token references resolve to known vars
       const brandRefErrors = validateReferences(context);
       if (brandRefErrors.length > 0) {
-        console.warn(`[tokens] Brand "${brandName}" has unresolved references:`);
+        console.warn(
+          `[tokens] Brand "${brandName}" has unresolved references:`
+        );
         brandRefErrors.forEach((err) => console.warn(`  - ${err}`));
       }
 
@@ -578,7 +595,9 @@ function loadBrandTokens(): Map<BrandId, BrandOverrides> {
         darkVars,
       });
 
-      console.log(`[tokens] Loaded brand: ${brandName} (${Object.keys(lightVars).length} overrides)`);
+      console.log(
+        `[tokens] Loaded brand: ${brandName} (${Object.keys(lightVars).length} overrides)`
+      );
     } catch (error) {
       console.error(`[tokens] Failed to load brand ${file}:`, error);
     }
@@ -588,9 +607,10 @@ function loadBrandTokens(): Map<BrandId, BrandOverrides> {
 }
 
 /**
- * Process brand token overrides into CSS variables
+ * Process brand token overrides into CSS variables.
+ * Exported for tests; mutates `lightVars` / `darkVars` in place.
  */
-function processBrandTokens(
+export function processBrandTokens(
   obj: Record<string, unknown>,
   pathArr: string[],
   context: CollectionContext,
@@ -608,7 +628,9 @@ function processBrandTokens(
       if ('$value' in valueObj || '$type' in valueObj) {
         // This is a token definition
         const tokenValue = valueObj.$value;
-        const extensions = valueObj.$extensions as Record<string, unknown> | undefined;
+        const extensions = valueObj.$extensions as
+          | Record<string, unknown>
+          | undefined;
 
         // Build semantic path (brand tokens override semantic layer)
         const semanticPath = `semantic.${currentPath.join('.')}`;
@@ -617,16 +639,28 @@ function processBrandTokens(
         // Process light value
         const lightValue = extensions?.['design.paths.light'] || tokenValue;
         if (lightValue !== undefined) {
-          const processedLight = processTokenValue(lightValue, context, semanticPath, undefined);
+          const processedLight = processTokenValue(
+            lightValue,
+            context,
+            semanticPath,
+            undefined
+          );
           if (processedLight) {
             lightVars[cssVar] = processedLight;
           }
         }
 
-        // Process dark value
-        const darkValue = extensions?.['design.paths.dark'] || tokenValue;
+        // Only emit a dark var when an explicit dark extension is provided.
+        // Without one, the unconditional [data-brand=...] block already
+        // covers dark mode via lightVars; duplicating it bloats CSS.
+        const darkValue = extensions?.['design.paths.dark'];
         if (darkValue !== undefined) {
-          const processedDark = processTokenValue(darkValue, context, semanticPath, undefined);
+          const processedDark = processTokenValue(
+            darkValue,
+            context,
+            semanticPath,
+            undefined
+          );
           if (processedDark) {
             darkVars[cssVar] = processedDark;
           }
@@ -682,7 +716,13 @@ function generateBrandLayerCSS(brands: Map<BrandId, BrandOverrides>): string {
 
     // Light mode class overrides (for manual .light toggle when system prefers dark)
     if (Object.keys(overrides.lightVars).length > 0) {
-      blocks.push(`  .light[data-brand="${brandId}"], .light [data-brand="${brandId}"] {\n${Object.entries(overrides.lightVars).map(([p, v]) => `    ${p}: ${v};`).join('\n')}\n  }`);
+      blocks.push(
+        `  .light[data-brand="${brandId}"], .light [data-brand="${brandId}"] {\n${Object.entries(
+          overrides.lightVars
+        )
+          .map(([p, v]) => `    ${p}: ${v};`)
+          .join('\n')}\n  }`
+      );
     }
 
     // Dark mode overrides within brand
@@ -691,8 +731,16 @@ function generateBrandLayerCSS(brands: Map<BrandId, BrandOverrides>): string {
         .map(([prop, value]) => `      ${prop}: ${value};`)
         .join('\n');
 
-      blocks.push(`  @media (prefers-color-scheme: dark) {\n    [data-brand="${brandId}"] {\n${darkBlock}\n    }\n  }`);
-      blocks.push(`  .dark[data-brand="${brandId}"], .dark [data-brand="${brandId}"] {\n${Object.entries(overrides.darkVars).map(([p, v]) => `    ${p}: ${v};`).join('\n')}\n  }`);
+      blocks.push(
+        `  @media (prefers-color-scheme: dark) {\n    [data-brand="${brandId}"] {\n${darkBlock}\n    }\n  }`
+      );
+      blocks.push(
+        `  .dark[data-brand="${brandId}"], .dark [data-brand="${brandId}"] {\n${Object.entries(
+          overrides.darkVars
+        )
+          .map(([p, v]) => `    ${p}: ${v};`)
+          .join('\n')}\n  }`
+      );
     }
   }
 
@@ -713,9 +761,9 @@ function loadDensityTokens(): Map<DensityId, DensityOverrides> {
     return densities;
   }
 
-  const densityFiles = fs.readdirSync(densityDir).filter(
-    (f) => f.endsWith('.tokens.json') && !f.startsWith('_')
-  );
+  const densityFiles = fs
+    .readdirSync(densityDir)
+    .filter((f) => f.endsWith('.tokens.json') && !f.startsWith('_'));
 
   for (const file of densityFiles) {
     const densityName = file.replace('.tokens.json', '') as DensityId;
@@ -726,7 +774,9 @@ function loadDensityTokens(): Map<DensityId, DensityOverrides> {
       const densityData = JSON.parse(content);
 
       if (!densityData.$density) {
-        console.warn(`[tokens] Density file ${file} missing $density metadata, skipping`);
+        console.warn(
+          `[tokens] Density file ${file} missing $density metadata, skipping`
+        );
         continue;
       }
 
@@ -747,7 +797,9 @@ function loadDensityTokens(): Map<DensityId, DensityOverrides> {
         darkVars,
       });
 
-      console.log(`[tokens] Loaded density: ${densityName} (${Object.keys(lightVars).length} overrides)`);
+      console.log(
+        `[tokens] Loaded density: ${densityName} (${Object.keys(lightVars).length} overrides)`
+      );
     } catch (error) {
       console.error(`[tokens] Failed to load density ${file}:`, error);
     }
@@ -757,9 +809,10 @@ function loadDensityTokens(): Map<DensityId, DensityOverrides> {
 }
 
 /**
- * Process density token overrides into CSS variables
+ * Process density token overrides into CSS variables.
+ * Exported for tests; mutates `lightVars` / `darkVars` in place.
  */
-function processDensityTokens(
+export function processDensityTokens(
   obj: Record<string, unknown>,
   pathArr: string[],
   context: CollectionContext,
@@ -777,7 +830,9 @@ function processDensityTokens(
       if ('$value' in valueObj || '$type' in valueObj) {
         // This is a token definition
         const tokenValue = valueObj.$value;
-        const extensions = valueObj.$extensions as Record<string, unknown> | undefined;
+        const extensions = valueObj.$extensions as
+          | Record<string, unknown>
+          | undefined;
 
         // Build semantic path (density tokens override semantic layer)
         const semanticPath = `semantic.${currentPath.join('.')}`;
@@ -786,23 +841,39 @@ function processDensityTokens(
         // Process light value
         const lightValue = extensions?.['design.paths.light'] || tokenValue;
         if (lightValue !== undefined) {
-          const processedLight = processTokenValue(lightValue, context, semanticPath, undefined);
+          const processedLight = processTokenValue(
+            lightValue,
+            context,
+            semanticPath,
+            undefined
+          );
           if (processedLight) {
             lightVars[cssVar] = processedLight;
           }
         }
 
-        // Process dark value
-        const darkValue = extensions?.['design.paths.dark'] || tokenValue;
+        // Only emit a dark var when an explicit dark extension is provided.
+        const darkValue = extensions?.['design.paths.dark'];
         if (darkValue !== undefined) {
-          const processedDark = processTokenValue(darkValue, context, semanticPath, undefined);
+          const processedDark = processTokenValue(
+            darkValue,
+            context,
+            semanticPath,
+            undefined
+          );
           if (processedDark) {
             darkVars[cssVar] = processedDark;
           }
         }
       } else {
         // Nested group, recurse
-        processDensityTokens(valueObj, currentPath, context, lightVars, darkVars);
+        processDensityTokens(
+          valueObj,
+          currentPath,
+          context,
+          lightVars,
+          darkVars
+        );
       }
     }
   }
@@ -828,7 +899,9 @@ function formatDensityBlock(
 /**
  * Generate density layer CSS with all density overrides
  */
-function generateDensityLayerCSS(densities: Map<DensityId, DensityOverrides>): string {
+function generateDensityLayerCSS(
+  densities: Map<DensityId, DensityOverrides>
+): string {
   if (densities.size === 0) return '';
 
   const blocks: string[] = ['@layer density {'];
@@ -844,7 +917,13 @@ function generateDensityLayerCSS(densities: Map<DensityId, DensityOverrides>): s
 
     // Light mode class overrides (for manual .light toggle when system prefers dark)
     if (Object.keys(overrides.lightVars).length > 0) {
-      blocks.push(`  .light[data-density="${densityId}"], .light [data-density="${densityId}"] {\n${Object.entries(overrides.lightVars).map(([p, v]) => `    ${p}: ${v};`).join('\n')}\n  }`);
+      blocks.push(
+        `  .light[data-density="${densityId}"], .light [data-density="${densityId}"] {\n${Object.entries(
+          overrides.lightVars
+        )
+          .map(([p, v]) => `    ${p}: ${v};`)
+          .join('\n')}\n  }`
+      );
     }
 
     // Dark mode overrides within density
@@ -853,8 +932,16 @@ function generateDensityLayerCSS(densities: Map<DensityId, DensityOverrides>): s
         .map(([prop, value]) => `      ${prop}: ${value};`)
         .join('\n');
 
-      blocks.push(`  @media (prefers-color-scheme: dark) {\n    [data-density="${densityId}"] {\n${darkBlock}\n    }\n  }`);
-      blocks.push(`  .dark[data-density="${densityId}"], .dark [data-density="${densityId}"] {\n${Object.entries(overrides.darkVars).map(([p, v]) => `    ${p}: ${v};`).join('\n')}\n  }`);
+      blocks.push(
+        `  @media (prefers-color-scheme: dark) {\n    [data-density="${densityId}"] {\n${darkBlock}\n    }\n  }`
+      );
+      blocks.push(
+        `  .dark[data-density="${densityId}"], .dark [data-density="${densityId}"] {\n${Object.entries(
+          overrides.darkVars
+        )
+          .map(([p, v]) => `    ${p}: ${v};`)
+          .join('\n')}\n  }`
+      );
     }
   }
 
@@ -910,7 +997,10 @@ function generateCSSFromTokens(tokens: TokenGroup): boolean {
   const coreVars: Record<string, string> = {};
   const semanticVars: Record<string, string> = {};
 
-  for (const [cssVar, value] of Object.entries({ ...maps.root, ...maps.lightColors })) {
+  for (const [cssVar, value] of Object.entries({
+    ...maps.root,
+    ...maps.lightColors,
+  })) {
     if (cssVar.startsWith('--core-')) {
       coreVars[cssVar] = value;
     } else {
@@ -919,13 +1009,15 @@ function generateCSSFromTokens(tokens: TokenGroup): boolean {
   }
 
   // Generate layered CSS blocks
-  const coreLayer = Object.keys(coreVars).length > 0
-    ? `@layer core {\n${formatCSSBlock('  :root', coreVars)}\n}`
-    : '';
+  const coreLayer =
+    Object.keys(coreVars).length > 0
+      ? `@layer core {\n${formatCSSBlock('  :root', coreVars)}\n}`
+      : '';
 
-  const semanticLayer = Object.keys(semanticVars).length > 0
-    ? `@layer semantic {\n${formatCSSBlock('  :root', semanticVars)}\n}`
-    : '';
+  const semanticLayer =
+    Object.keys(semanticVars).length > 0
+      ? `@layer semantic {\n${formatCSSBlock('  :root', semanticVars)}\n}`
+      : '';
 
   // Theme layer for light/dark variants
   const themeLayerContent: string[] = [];
@@ -959,9 +1051,10 @@ function generateCSSFromTokens(tokens: TokenGroup): boolean {
     }
   }
 
-  const themeLayer = themeLayerContent.length > 0
-    ? `@layer theme {\n${themeLayerContent.join('\n\n')}\n}`
-    : '';
+  const themeLayer =
+    themeLayerContent.length > 0
+      ? `@layer theme {\n${themeLayerContent.join('\n\n')}\n}`
+      : '';
 
   // Brand layer
   const brandLayer = generateBrandLayerCSS(brands);
@@ -1139,7 +1232,10 @@ export function generateGlobalTokens(incremental = true): boolean {
   const coreVars: Record<string, string> = {};
   const semanticVars: Record<string, string> = {};
 
-  for (const [cssVar, value] of Object.entries({ ...maps.root, ...maps.lightColors })) {
+  for (const [cssVar, value] of Object.entries({
+    ...maps.root,
+    ...maps.lightColors,
+  })) {
     if (cssVar.startsWith('--core-')) {
       coreVars[cssVar] = value;
     } else {
@@ -1148,13 +1244,15 @@ export function generateGlobalTokens(incremental = true): boolean {
   }
 
   // Generate layered CSS blocks
-  const coreLayer = Object.keys(coreVars).length > 0
-    ? `@layer core {\n${formatCSSBlock('  :root', coreVars)}\n}`
-    : '';
+  const coreLayer =
+    Object.keys(coreVars).length > 0
+      ? `@layer core {\n${formatCSSBlock('  :root', coreVars)}\n}`
+      : '';
 
-  const semanticLayer = Object.keys(semanticVars).length > 0
-    ? `@layer semantic {\n${formatCSSBlock('  :root', semanticVars)}\n}`
-    : '';
+  const semanticLayer =
+    Object.keys(semanticVars).length > 0
+      ? `@layer semantic {\n${formatCSSBlock('  :root', semanticVars)}\n}`
+      : '';
 
   // Theme layer for light/dark variants
   const themeLayerContent: string[] = [];
@@ -1188,9 +1286,10 @@ export function generateGlobalTokens(incremental = true): boolean {
     }
   }
 
-  const themeLayer = themeLayerContent.length > 0
-    ? `@layer theme {\n${themeLayerContent.join('\n\n')}\n}`
-    : '';
+  const themeLayer =
+    themeLayerContent.length > 0
+      ? `@layer theme {\n${themeLayerContent.join('\n\n')}\n}`
+      : '';
 
   // Brand layer
   const brandLayer = generateBrandLayerCSS(brands);
@@ -1213,7 +1312,11 @@ export function generateGlobalTokens(incremental = true): boolean {
     .join('\n\n');
 
   // Write output file
-  writeOutputFile(PATHS.outputScss, content, 'global design tokens with layers');
+  writeOutputFile(
+    PATHS.outputScss,
+    content,
+    'global design tokens with layers'
+  );
 
   // Update cache after file is written
   updateFileCache(PATHS.outputScss);
