@@ -6,11 +6,17 @@
  *
  * v2 improvements:
  * - Returns rect shapes for consistent closed-shape rendering
- * - Estimates crossbar height from nearby scanlines
- * - Uses filled spans (intersection pairs)
+ * - Uses filled spans (intersection pairs) for candidate discovery
+ * - Measures bar height by perpendicular raycast through the candidate
+ *   midpoint via the orthogonal-thickness evidence predicate, NOT by the
+ *   Y-spread of detection sampling bands. (The previous Y-spread heuristic
+ *   inflated bar height proportional to how many sampling bands hit the
+ *   bar, which produced over-tall rects on glyphs whose crossbar stayed
+ *   within the y-band window — see Nohemi A and H.)
  */
 
 import { rayHits } from '@/utils/geometry/geometryCore';
+import { measureOrthogonalThickness } from '../evidence/measureOrthogonalThickness';
 import type { FeatureInstance, FeatureShape, GeometryCache } from '../types';
 
 /**
@@ -97,21 +103,46 @@ export function detectCrossbar(geo: GeometryCache): FeatureInstance[] {
   const yTolerance = bboxH * 0.08;
   const groups = groupSpansByY(allSpans, yTolerance);
 
-  // For each group, compute the most consistent span and estimate height
+  // For each group, compute the consensus span and measure thickness
+  // perpendicular to the bar's dominant (horizontal) axis.
   for (const group of groups) {
-    if (group.length < 2) continue; // Need multiple samples for confidence
-
-    // Average position
+    // Consensus midpoint: average of per-span midX and per-band y. This is
+    // more robust than the bbox center of the grouped candidate because the
+    // y-band sampling is uniform but spans may shift slightly between bands.
     const avgY = group.reduce((s, sp) => s + sp.y, 0) / group.length;
     const avgX1 = group.reduce((s, sp) => s + sp.x1, 0) / group.length;
     const avgX2 = group.reduce((s, sp) => s + sp.x2, 0) / group.length;
+    const midX =
+      group.reduce((s, sp) => s + (sp.x1 + sp.x2) / 2, 0) / group.length;
 
-    // Estimate crossbar height from the Y spread of the group
-    const yPositions = group.map((sp) => sp.y);
-    const minY = Math.min(...yPositions);
-    const maxY = Math.max(...yPositions);
-    // Use the Y spread as a proxy for height, with a minimum based on stemWidth
-    const estimatedHeight = Math.max(maxY - minY, stemWidth * 0.6);
+    // Measure bar thickness by casting a vertical ray through the midpoint.
+    // The predicate picks the entry/exit pair containing (or nearest) the
+    // midpoint, which prevents bowl/counter geometry from contaminating the
+    // measurement on glyphs like 'e'.
+    const thicknessMeasurement = measureOrthogonalThickness(geo, {
+      midpoint: { x: midX, y: avgY },
+      dominantAxis: 'horizontal',
+    });
+
+    // If the perpendicular probe couldn't produce a usable reading, skip
+    // this candidate. Fabricating a fake height (the previous behavior)
+    // produced incorrect rect geometry; refusing to emit is more honest.
+    if (
+      thicknessMeasurement.failureReason === 'no_hits' ||
+      thicknessMeasurement.failureReason === 'insufficient_pairs'
+    ) {
+      continue;
+    }
+
+    // Single-band groups are accepted only when the perpendicular probe is
+    // unambiguous (one pair contains the midpoint → confidence === 1). This
+    // lets very thin bars that register in only one sampling band still be
+    // emitted, while filtering out lone noise samples that fail the probe.
+    if (group.length < 2 && thicknessMeasurement.confidence < 1) {
+      continue;
+    }
+
+    const measuredHeight = thicknessMeasurement.thickness;
 
     // Check for consistent width across samples
     const widths = group.map((sp) => sp.width);
@@ -120,20 +151,24 @@ export function detectCrossbar(geo: GeometryCache): FeatureInstance[] {
       widths.reduce((s, w) => s + (w - avgWidth) ** 2, 0) / widths.length;
     const widthStdDev = Math.sqrt(widthVariance);
 
-    // High confidence if width is consistent
+    // Feature confidence combines width consistency (the existing signal)
+    // with the local thickness-measurement confidence from the predicate.
+    // An ambiguous probe (e.g., the probe also hit a counter wall) lowers
+    // the final confidence even when the bar's width is consistent.
     const isConsistent = widthStdDev < avgWidth * 0.3;
-    const confidence = isConsistent
+    const baseConfidence = isConsistent
       ? Math.min(0.9, 0.5 + group.length * 0.1)
       : 0.5;
+    const confidence = baseConfidence * thicknessMeasurement.confidence;
 
     instances.push({
       id: 'crossbar',
       shape: {
         type: 'rect',
         x: avgX1,
-        y: avgY - estimatedHeight / 2,
+        y: avgY - measuredHeight / 2,
         width: avgX2 - avgX1,
-        height: estimatedHeight,
+        height: measuredHeight,
       },
       confidence,
       anchors: {
@@ -144,7 +179,8 @@ export function detectCrossbar(geo: GeometryCache): FeatureInstance[] {
         sampleCount: group.length,
         avgWidth,
         widthStdDev,
-        estimatedHeight,
+        measuredHeight,
+        thicknessConfidence: thicknessMeasurement.confidence,
       },
     });
   }
@@ -207,7 +243,10 @@ function mergeCrossbarInstances(
     const current = sorted[i];
     const prev = currentGroup[currentGroup.length - 1];
 
-    const currentShape = current.shape as Extract<FeatureShape, { type: 'rect' }>;
+    const currentShape = current.shape as Extract<
+      FeatureShape,
+      { type: 'rect' }
+    >;
     const prevShape = prev.shape as Extract<FeatureShape, { type: 'rect' }>;
 
     const currentCenterY = currentShape.y + currentShape.height / 2;
@@ -233,7 +272,16 @@ function mergeCrossbarInstances(
 
 /**
  * Merges a group of crossbar instances into a single instance.
- * Uses the average position and maximum extents.
+ *
+ * Width comes from the union of constituent x-bounds (wider is more
+ * representative of the actual bar extent). Height does NOT come from the
+ * union of y-bounds — taking min/max of y-extents over candidates at
+ * slightly different centerlines re-introduces the spread-as-height bug
+ * the orthogonal-thickness predicate was supposed to fix. Instead, the
+ * merged height is the median of the per-instance perpendicular
+ * measurements (the bar has a single thickness; spread across constituent
+ * centers reflects sampling jitter, not real geometry). The merged center
+ * Y is the average of constituent centers.
  */
 function mergeGroup(group: FeatureInstance[]): FeatureInstance {
   if (group.length === 1) return group[0];
@@ -242,11 +290,23 @@ function mergeGroup(group: FeatureInstance[]): FeatureInstance {
     (inst) => inst.shape as Extract<FeatureShape, { type: 'rect' }>
   );
 
-  // Compute merged bounds
+  // Width: union of x-bounds.
   const minX = Math.min(...shapes.map((s) => s.x));
   const maxX = Math.max(...shapes.map((s) => s.x + s.width));
-  const minY = Math.min(...shapes.map((s) => s.y));
-  const maxY = Math.max(...shapes.map((s) => s.y + s.height));
+
+  // Height: median of constituent heights. Each constituent's height was
+  // measured by perpendicular raycast at its own midpoint, so they should
+  // all reflect the same physical bar thickness. Median is robust to a
+  // single outlier (e.g., a probe that grazed an edge).
+  const heights = shapes.map((s) => s.height).sort((a, b) => a - b);
+  const medianHeight =
+    heights.length % 2 === 1
+      ? heights[(heights.length - 1) / 2]
+      : (heights[heights.length / 2 - 1] + heights[heights.length / 2]) / 2;
+
+  // Center Y: average of constituent center Ys.
+  const avgCenterY =
+    shapes.reduce((s, sh) => s + (sh.y + sh.height / 2), 0) / shapes.length;
 
   // Average confidence, weighted by sample count
   const getSampleCount = (inst: FeatureInstance): number => {
@@ -263,25 +323,24 @@ function mergeGroup(group: FeatureInstance[]): FeatureInstance {
       0
     ) / totalSamples;
 
-  const avgY = (minY + maxY) / 2;
-
   return {
     id: 'crossbar',
     shape: {
       type: 'rect',
       x: minX,
-      y: minY,
+      y: avgCenterY - medianHeight / 2,
       width: maxX - minX,
-      height: maxY - minY,
+      height: medianHeight,
     },
     confidence: Math.min(0.95, weightedConfidence + 0.1), // Boost for merged detection
     anchors: {
-      left: { x: minX, y: avgY },
-      right: { x: maxX, y: avgY },
+      left: { x: minX, y: avgCenterY },
+      right: { x: maxX, y: avgCenterY },
     },
     debug: {
       mergedFrom: group.length,
       totalSamples,
+      medianHeight,
     },
   };
 }
