@@ -1,0 +1,14 @@
+{
+  "version": "1.0.0",
+  "specs": {
+    "CAWS-INIT-001": {
+      "path": "CAWS-INIT-001.yaml",
+      "type": "chore",
+      "status": "draft",
+      "created_at": "2026-04-28T18:06:50.447Z",
+      "updated_at": "2026-04-28T18:06:50.448Z",
+      "owner": "273e3599-1bcc-4887-a186-b2a6f53e720f"
+    }
+  },
+  "lastUpdated": "2026-04-28T18:08:11.127Z"
+}

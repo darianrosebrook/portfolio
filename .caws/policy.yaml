@@ -1,0 +1,45 @@
+version: 1
+risk_tiers:
+  '1':
+    max_files: 25
+    max_loc: 1000
+    description: Critical changes requiring manual review
+  '2':
+    max_files: 50
+    max_loc: 2000
+    description: Standard features with automated gates
+  '3':
+    max_files: 100
+    max_loc: 5000
+    description: Low-risk changes with minimal oversight
+edit_rules:
+  policy_and_code_same_pr: false
+  min_approvers_for_budget_raise: 2
+  require_signed_commits: true
+gates:
+  budget_limit:
+    enabled: true
+    mode: block
+    description: Enforce change budget limits
+  spec_completeness:
+    enabled: true
+    mode: block
+    description: Require complete working specifications
+  scope_boundary:
+    enabled: true
+    mode: block
+    description: Enforce spec scope boundaries
+  god_object:
+    enabled: true
+    mode: warn
+    thresholds:
+      warning: 1750
+      critical: 2000
+    description: Detect oversized source files
+  todo_detection:
+    enabled: true
+    mode: warn
+    thresholds:
+      min_confidence: 0.8
+    description: Scan for TODO/FIXME/HACK/XXX markers
+non_governed_zones: []
