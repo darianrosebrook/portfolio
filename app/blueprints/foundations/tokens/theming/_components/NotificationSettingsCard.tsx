@@ -87,7 +87,10 @@ export const NotificationSettingsCard: React.FC = () => {
                 >
                   {channel}
                 </span>
-                <label className={styles.toggle}>
+                <label
+                  className={styles.toggle}
+                  aria-label={`${channel} notifications for ${category.name}`}
+                >
                   <input type="checkbox" defaultChecked={isOn} />
                   <span className={styles.toggleSlider} />
                 </label>

@@ -2,50 +2,52 @@
 import React from 'react';
 import styles from './DashboardDemo.module.scss';
 
+type SettingRowProps = {
+  label: string;
+  description: string;
+  defaultChecked?: boolean;
+};
+
+const SettingRow: React.FC<SettingRowProps> = ({
+  label,
+  description,
+  defaultChecked,
+}) => (
+  <div className={styles.settingItem}>
+    <div className={styles.settingLabel}>
+      <span>{label}</span>
+      <span className={styles.settingDescription}>{description}</span>
+    </div>
+    <label className={styles.toggle} aria-label={label}>
+      <input type="checkbox" defaultChecked={defaultChecked} />
+      <span className={styles.toggleSlider} />
+    </label>
+  </div>
+);
+
 export const SettingsCard: React.FC = () => {
   return (
     <div className={styles.settingsCard}>
       <h3>Preferences</h3>
-      <div className={styles.settingItem}>
-        <div className={styles.settingLabel}>
-          <span>Email notifications</span>
-          <span className={styles.settingDescription}>Receive updates via email</span>
-        </div>
-        <label className={styles.toggle}>
-          <input type="checkbox" defaultChecked />
-          <span className={styles.toggleSlider} />
-        </label>
-      </div>
-      <div className={styles.settingItem}>
-        <div className={styles.settingLabel}>
-          <span>Marketing emails</span>
-          <span className={styles.settingDescription}>Promotional content</span>
-        </div>
-        <label className={styles.toggle}>
-          <input type="checkbox" />
-          <span className={styles.toggleSlider} />
-        </label>
-      </div>
-      <div className={styles.settingItem}>
-        <div className={styles.settingLabel}>
-          <span>Dark mode</span>
-          <span className={styles.settingDescription}>Use dark theme</span>
-        </div>
-        <label className={styles.toggle}>
-          <input type="checkbox" defaultChecked />
-          <span className={styles.toggleSlider} />
-        </label>
-      </div>
-      <div className={styles.settingItem}>
-        <div className={styles.settingLabel}>
-          <span>Auto-save</span>
-          <span className={styles.settingDescription}>Save changes automatically</span>
-        </div>
-        <label className={styles.toggle}>
-          <input type="checkbox" defaultChecked />
-          <span className={styles.toggleSlider} />
-        </label>
-      </div>
+      <SettingRow
+        label="Email notifications"
+        description="Receive updates via email"
+        defaultChecked
+      />
+      <SettingRow
+        label="Marketing emails"
+        description="Promotional content"
+      />
+      <SettingRow
+        label="Dark mode"
+        description="Use dark theme"
+        defaultChecked
+      />
+      <SettingRow
+        label="Auto-save"
+        description="Save changes automatically"
+        defaultChecked
+      />
     </div>
   );
 };

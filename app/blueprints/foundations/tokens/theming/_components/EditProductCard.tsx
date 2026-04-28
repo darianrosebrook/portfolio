@@ -8,17 +8,27 @@ export const EditProductCard: React.FC = () => {
       <h3>Edit product</h3>
       <div className={styles.formGrid}>
         <div className={styles.formGroup}>
-          <label>Title</label>
-          <input type="text" defaultValue="Skirt #16" className={styles.input} />
+          <label htmlFor="edit-product-title">Title</label>
+          <input
+            id="edit-product-title"
+            type="text"
+            defaultValue="Skirt #16"
+            className={styles.input}
+          />
         </div>
         <div className={styles.formGroup}>
-          <label>Price</label>
-          <input type="text" defaultValue="$99" className={styles.input} />
+          <label htmlFor="edit-product-price">Price</label>
+          <input
+            id="edit-product-price"
+            type="text"
+            defaultValue="$99"
+            className={styles.input}
+          />
         </div>
       </div>
 
       <div className={styles.formGroup}>
-        <label>Media</label>
+        <span className={styles.formLabel}>Media</span>
         <div className={styles.mediaGrid}>
           <div className={styles.mediaItem}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -38,7 +48,7 @@ export const EditProductCard: React.FC = () => {
       </div>
 
       <div className={styles.formGroup}>
-        <label>Description</label>
+        <label htmlFor="edit-product-description">Description</label>
         <div className={styles.textEditor}>
           <div className={styles.editorToolbar}>
             <button className={styles.toolButton}><strong>B</strong></button>
@@ -49,6 +59,7 @@ export const EditProductCard: React.FC = () => {
             <button className={styles.toolButton}>≢</button>
           </div>
           <textarea
+            id="edit-product-description"
             className={styles.textarea}
             defaultValue="Amidst the soft hues and delicate silence, one's gaze is always drawn towards this skirt..."
             rows={4}
@@ -58,7 +69,7 @@ export const EditProductCard: React.FC = () => {
 
       <div className={styles.formRow}>
         <div className={styles.formGroup}>
-          <label>Main material</label>
+          <span className={styles.formLabel}>Main material</span>
           <div className={styles.chipGroup}>
             <button className={`${styles.chip} ${styles.chipActive}`}>Synthetic</button>
             <button className={styles.chip}>Wool</button>
@@ -72,7 +83,7 @@ export const EditProductCard: React.FC = () => {
 
       <div className={styles.formRow}>
         <div className={styles.formGroup}>
-          <label>Main color</label>
+          <span className={styles.formLabel}>Main color</span>
           <div className={styles.colorGrid}>
             <button className={`${styles.colorSwatch} ${styles.white}`} />
             <button className={`${styles.colorSwatch} ${styles.gray}`} />
@@ -88,7 +99,7 @@ export const EditProductCard: React.FC = () => {
       </div>
 
       <div className={styles.formGroup}>
-        <label>Sizes</label>
+        <span className={styles.formLabel}>Sizes</span>
         <div className={styles.sizeGrid}>
           <button className={styles.sizeButton}>XS</button>
           <button className={styles.sizeButton}>S</button>

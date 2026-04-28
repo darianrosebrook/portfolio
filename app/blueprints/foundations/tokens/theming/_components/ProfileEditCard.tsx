@@ -22,16 +22,31 @@ export function ProfileEditCard() {
       {/* Form fields */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
         <div className={styles.formGroup}>
-          <label>Name</label>
-          <input className={styles.input} type="text" defaultValue="Vlad Moroz" />
+          <label htmlFor="profile-edit-name">Name</label>
+          <input
+            id="profile-edit-name"
+            className={styles.input}
+            type="text"
+            defaultValue="Vlad Moroz"
+          />
         </div>
         <div className={styles.formGroup}>
-          <label>Username</label>
-          <input className={styles.input} type="text" defaultValue="@vladmoroz" />
+          <label htmlFor="profile-edit-username">Username</label>
+          <input
+            id="profile-edit-username"
+            className={styles.input}
+            type="text"
+            defaultValue="@vladmoroz"
+          />
         </div>
         <div className={styles.formGroup}>
-          <label>Email</label>
-          <input className={styles.input} type="email" defaultValue="hi@vladmoroz.com" />
+          <label htmlFor="profile-edit-email">Email</label>
+          <input
+            id="profile-edit-email"
+            className={styles.input}
+            type="email"
+            defaultValue="hi@vladmoroz.com"
+          />
         </div>
       </div>
 
