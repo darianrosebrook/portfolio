@@ -2,7 +2,7 @@
  * Tests for geometry core primitives used in typographic feature detection.
  * Covers rayHits, isInside, isDrawable, safeIntersect, shapeForV2, getOvershoot.
  */
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { shape } from 'svg-intersections';
 import {
   rayHits,
@@ -13,18 +13,13 @@ import {
   getOvershoot,
   dFor,
 } from '@/utils/geometry/geometryCore';
-import {
-  mockGlyphFromPath,
-  mockNonDrawableGlyph,
-} from '../fixtures/mockGlyph';
+import { mockGlyphFromPath, mockNonDrawableGlyph } from '../fixtures/mockGlyph';
 import {
   CIRCLE,
   DONUT,
   RECTANGLE,
   VERTICAL_STEM,
   EMPTY_PATH,
-  COLLAPSED_PATH,
-  LINE_PATH,
 } from '../fixtures/svgPaths';
 
 describe('geometryCore', () => {
@@ -39,9 +34,9 @@ describe('geometryCore', () => {
       // Should hit the polygon circle twice (entry and exit)
       expect(result.points.length).toBe(2);
       // Points should include both entry and exit (order depends on algorithm)
-      const xValues = result.points.map(p => p.x);
-      expect(xValues.some(x => x < 0)).toBe(true);
-      expect(xValues.some(x => x > 0)).toBe(true);
+      const xValues = result.points.map((p) => p.x);
+      expect(xValues.some((x) => x < 0)).toBe(true);
+      expect(xValues.some((x) => x > 0)).toBe(true);
     });
 
     it('returns intersection points for vertical ray through rectangle', () => {
@@ -322,7 +317,10 @@ describe('geometryCore', () => {
 
     it('handles small glyphs', () => {
       const smallBbox = { minX: 0, minY: 0, maxX: 10, maxY: 10 };
-      const glyph = mockGlyphFromPath('M 0 0 L 10 0 L 10 10 L 0 10 Z', smallBbox);
+      const glyph = mockGlyphFromPath(
+        'M 0 0 L 10 0 L 10 10 L 0 10 Z',
+        smallBbox
+      );
 
       const overshoot = getOvershoot(glyph);
 

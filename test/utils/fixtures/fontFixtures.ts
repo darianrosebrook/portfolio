@@ -24,7 +24,10 @@ import type {
   FeatureShape,
 } from '@/utils/typeAnatomy/types';
 
-export type FontName = 'Nohemi-VF.ttf' | 'InterVariable.ttf' | 'Newsreader-VF.ttf';
+export type FontName =
+  | 'Nohemi-VF.ttf'
+  | 'InterVariable.ttf'
+  | 'Newsreader-VF.ttf';
 
 export function loadFont(fontName: FontName): Font {
   const fontPath = path.join(process.cwd(), 'public', 'fonts', fontName);

@@ -99,16 +99,14 @@ export function detectArm(geo: GeometryCache): FeatureInstance[] {
         // The arm should start AFTER the stem (x1 > stem.x1)
         // OR the arm should be wider than the stem (extends beyond stem)
         const isArmNotStem = overlappingStem
-          ? x1 >= overlappingStem.x1 - stemWidth * 0.3 && 
+          ? x1 >= overlappingStem.x1 - stemWidth * 0.3 &&
             x2 > overlappingStem.x2 + stemWidth * 0.5
           : distToLeftEdge > bboxW * 0.1; // No stem found, use distance check
 
         if (isArmNotStem) {
           // Adjust x1 to start at stem edge if overlapping
-          const armX1 = overlappingStem 
-            ? Math.max(x1, overlappingStem.x2)
-            : x1;
-          
+          const armX1 = overlappingStem ? Math.max(x1, overlappingStem.x2) : x1;
+
           candidates.push({
             y,
             x1: armX1,
@@ -132,10 +130,8 @@ export function detectArm(geo: GeometryCache): FeatureInstance[] {
 
         if (isArmNotStem) {
           // Adjust x2 to end at stem edge if overlapping
-          const armX2 = overlappingStem 
-            ? Math.min(x2, overlappingStem.x1)
-            : x2;
-          
+          const armX2 = overlappingStem ? Math.min(x2, overlappingStem.x1) : x2;
+
           candidates.push({
             y,
             x1,
@@ -170,7 +166,9 @@ export function detectArm(geo: GeometryCache): FeatureInstance[] {
     // Check for duplicates at this Y
     const isDuplicate = instances.some((inst) => {
       if (inst.shape.type === 'rect') {
-        return Math.abs(inst.shape.y + inst.shape.height / 2 - avgY) < yTolerance;
+        return (
+          Math.abs(inst.shape.y + inst.shape.height / 2 - avgY) < yTolerance
+        );
       }
       return false;
     });
@@ -218,7 +216,7 @@ export function detectArm(geo: GeometryCache): FeatureInstance[] {
  */
 function detectStemRegions(geo: GeometryCache): StemRegion[] {
   const { glyph, metrics, svgShape, scale } = geo;
-  const { bboxH, stemWidth, overshoot } = scale;
+  const { stemWidth, overshoot } = scale;
 
   const stemBottom = Math.max(glyph.bbox.minY, metrics.baseline);
   const stemTop = Math.min(glyph.bbox.maxY, metrics.capHeight);
@@ -260,7 +258,7 @@ function detectStemRegions(geo: GeometryCache): StemRegion[] {
 
   // Stems appear in multiple bands (at least 3)
   const stemRegions: StemRegion[] = [];
-  for (const [key, midXs] of spansByMidX) {
+  for (const midXs of spansByMidX.values()) {
     if (midXs.length >= 3) {
       const avgMidX = midXs.reduce((s, x) => s + x, 0) / midXs.length;
       stemRegions.push({
@@ -291,7 +289,8 @@ function generateArmZones(
   zones.push(metrics.capHeight - bboxH * 0.15);
 
   // Middle arm zone (for E middle bar, around 50% of cap height)
-  const midCapHeight = metrics.baseline + (metrics.capHeight - metrics.baseline) * 0.5;
+  const midCapHeight =
+    metrics.baseline + (metrics.capHeight - metrics.baseline) * 0.5;
   zones.push(midCapHeight - bboxH * 0.05);
   zones.push(midCapHeight);
   zones.push(midCapHeight + bboxH * 0.05);
@@ -305,7 +304,7 @@ function generateArmZones(
   zones.push(metrics.xHeight - bboxH * 0.05);
   zones.push(metrics.xHeight * 0.5);
 
-  return zones.filter(y => y >= bbox.minY && y <= bbox.maxY);
+  return zones.filter((y) => y >= bbox.minY && y <= bbox.maxY);
 }
 
 /**
@@ -339,7 +338,7 @@ function groupCandidatesByY(
  */
 function detectArmBySlide(geo: GeometryCache): FeatureInstance | null {
   const { glyph, metrics, svgShape, scale } = geo;
-  const { bboxW, stemWidth, overshoot } = scale;
+  const { bboxW, overshoot } = scale;
 
   // Start from right edge and slide inward
   let probeX = glyph.bbox.maxX - 2;
@@ -387,7 +386,10 @@ function detectArmBySlide(geo: GeometryCache): FeatureInstance | null {
         confidence: 0.5,
         anchors: {
           free: { x: probeX, y: armY + armHeight / 2 },
-          attached: { x: glyph.bbox.minX + bboxW * 0.3, y: armY + armHeight / 2 },
+          attached: {
+            x: glyph.bbox.minX + bboxW * 0.3,
+            y: armY + armHeight / 2,
+          },
         },
         debug: { source: 'slide-fallback' },
       };

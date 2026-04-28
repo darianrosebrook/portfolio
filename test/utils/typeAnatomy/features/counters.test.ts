@@ -155,7 +155,10 @@ describe('counter features', () => {
 
   describe('hasEye', () => {
     it('returns boolean for lowercase e shape', () => {
-      const glyph = mockGlyphFromPath(LETTER_E_LOWERCASE.d, LETTER_E_LOWERCASE.bbox);
+      const glyph = mockGlyphFromPath(
+        LETTER_E_LOWERCASE.d,
+        LETTER_E_LOWERCASE.bbox
+      );
 
       const result = hasEye(glyph, metrics);
       expect(typeof result).toBe('boolean');
@@ -193,7 +196,10 @@ describe('counter features', () => {
     });
 
     it('works via detector orchestration', () => {
-      const glyph = mockGlyphFromPath(LETTER_E_LOWERCASE.d, LETTER_E_LOWERCASE.bbox);
+      const glyph = mockGlyphFromPath(
+        LETTER_E_LOWERCASE.d,
+        LETTER_E_LOWERCASE.bbox
+      );
 
       const result = detectFeature('Eye', glyph, metrics);
 
@@ -233,7 +239,12 @@ describe('counter features', () => {
     });
 
     it('handles glyph at extreme coordinates', () => {
-      const extremeBbox = { minX: 10000, minY: 10000, maxX: 10600, maxY: 10600 };
+      const extremeBbox = {
+        minX: 10000,
+        minY: 10000,
+        maxX: 10600,
+        maxY: 10600,
+      };
       const d = `M 10300 10000 A 300 300 0 1 0 9700 10000 A 300 300 0 1 0 10300 10000 Z
                  M 10120 10000 A 120 120 0 1 1 9880 10000 A 120 120 0 1 1 10120 10000 Z`;
       const glyph = mockGlyphFromPath(d.replace(/\s+/g, ' '), extremeBbox);

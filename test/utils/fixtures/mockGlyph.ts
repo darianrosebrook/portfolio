@@ -144,14 +144,14 @@ export function mockFont(
     availableFeatures: [],
     glyphsForString: () => [],
     hasGlyphForCodePoint: () => false,
-    glyphForCodePoint: () => ({} as Glyph),
+    glyphForCodePoint: () => ({}) as Glyph,
     layout: () => ({ glyphs: [], positions: [] }),
     stringsForGlyph: () => [],
-    getGlyph: () => ({} as Glyph),
+    getGlyph: () => ({}) as Glyph,
     createSubset: () => ({}),
     variationAxes: {},
     namedVariations: {},
-    getVariation: () => ({} as Font),
+    getVariation: () => ({}) as Font,
   } as unknown as Font;
 }
 

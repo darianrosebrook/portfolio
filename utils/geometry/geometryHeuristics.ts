@@ -1,7 +1,4 @@
 // NOTE: This file is browser-safe and does not import or use any Node.js-only modules.
-// svg-intersections does not provide TypeScript types. See https://github.com/signavio/svg-intersections/issues/41
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore: svg-intersections types may be missing
 import './patch-kld';
 import { shape, intersect } from 'svg-intersections';
 import type { Glyph, Font } from 'fontkit';

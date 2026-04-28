@@ -7,7 +7,6 @@ import {
   detectFeature,
   detectFeatures,
   getAvailableFeatures,
-  type DetectionResult,
 } from '@/utils/typeAnatomy/detector';
 import {
   mockGlyphFromPath,
@@ -15,7 +14,12 @@ import {
   mockFont,
   standardMetrics,
 } from '../fixtures/mockGlyph';
-import { DONUT, CIRCLE, LETTER_I_LOWERCASE, LETTER_A } from '../fixtures/svgPaths';
+import {
+  DONUT,
+  CIRCLE,
+  LETTER_I_LOWERCASE,
+  LETTER_A,
+} from '../fixtures/svgPaths';
 
 describe('detector orchestration', () => {
   const metrics = standardMetrics;
@@ -103,7 +107,7 @@ describe('detector orchestration', () => {
       const glyph = mockGlyphFromPath(DONUT.d, DONUT.bbox);
 
       const resultLower = detectFeature('bowl', glyph, metrics);
-      const resultUpper = detectFeature('Bowl', glyph, metrics);
+      detectFeature('Bowl', glyph, metrics);
 
       // 'bowl' (lowercase) should not match 'Bowl'
       // The actual feature name is 'Bowl'
@@ -139,7 +143,7 @@ describe('detector orchestration', () => {
 
       const results = detectFeatures(featureNames, glyph, metrics);
 
-      results.forEach((result, name) => {
+      results.forEach((result) => {
         expect(result).toHaveProperty('found');
         expect(typeof result.found).toBe('boolean');
       });
@@ -177,7 +181,10 @@ describe('detector orchestration', () => {
     });
 
     it('passes font to all detectors', () => {
-      const glyph = mockGlyphFromPath(LETTER_I_LOWERCASE.d, LETTER_I_LOWERCASE.bbox);
+      const glyph = mockGlyphFromPath(
+        LETTER_I_LOWERCASE.d,
+        LETTER_I_LOWERCASE.bbox
+      );
       const font = mockFont();
       const featureNames = ['Stem', 'Tittle'];
 
@@ -253,12 +260,6 @@ describe('detector orchestration', () => {
       const features = getAvailableFeatures();
       const results = detectFeatures(features, glyph, metrics, font);
 
-      // Letter A should have some features detected
-      let hasAnyFeature = false;
-      results.forEach((result) => {
-        if (result.found) hasAnyFeature = true;
-      });
-
       // At minimum, we should have valid detection results
       expect(results.size).toBe(features.length);
     });
@@ -269,7 +270,7 @@ describe('detector orchestration', () => {
       const features = getAvailableFeatures();
       const results = detectFeatures(features, glyph, metrics);
 
-      results.forEach((result, name) => {
+      results.forEach((result) => {
         expect(result.found).toBe(false);
       });
     });

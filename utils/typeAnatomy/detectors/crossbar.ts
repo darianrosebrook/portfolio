@@ -124,23 +124,63 @@ export function detectCrossbar(geo: GeometryCache): FeatureInstance[] {
       dominantAxis: 'horizontal',
     });
 
-    // If the perpendicular probe couldn't produce a usable reading, skip
-    // this candidate. Fabricating a fake height (the previous behavior)
-    // produced incorrect rect geometry; refusing to emit is more honest.
+    // Reject candidates where the perpendicular probe could not produce a
+    // measurement at all.
     if (
       thicknessMeasurement.failureReason === 'no_hits' ||
       thicknessMeasurement.failureReason === 'insufficient_pairs'
     ) {
+      if (TRACE) console.log(`[crossbar TRACE]   → skip: no measurement`);
       continue;
     }
 
-    // Single-band groups are accepted only when the perpendicular probe is
-    // unambiguous (one pair contains the midpoint → confidence === 1). This
-    // lets very thin bars that register in only one sampling band still be
-    // emitted, while filtering out lone noise samples that fail the probe.
-    if (group.length < 2 && thicknessMeasurement.confidence < 1) {
+    // Reject candidates where the probe found ink but at a y far from where
+    // the candidate said it was looking. This catches the case where a
+    // sampling band lies above/below the bar (e.g., on Nohemi A, an
+    // uppercase mid-zone band at y=1859 intersects the diagonal legs near
+    // the apex) — the probe finds a real pair but its centerline jumps to
+    // the apex region (~y=2634) far from the band y. Threshold is one
+    // measured thickness: a probe whose pair center is within one bar's
+    // thickness of the sampling band is plausibly the same stroke; farther
+    // than that and the probe locked onto a different stroke entirely.
+    //
+    // This is intentionally distinct from rejecting on
+    // `!selectedPairContainsMidpoint`, which would also reject A's
+    // legitimate constituents. A's bar is tilted (diagonals converge
+    // upward), so the consensus midX may sit slightly outside the bar at
+    // some constituent y values — the probe's pair won't bracket the
+    // midpoint in y, even though the result is the same physical bar.
+    // Distance-from-band keeps those constituents and only rejects probes
+    // that found wholly different strokes.
+    const measuredCenterY = thicknessMeasurement.selectedPairCenterOnProbeAxis;
+    if (measuredCenterY !== undefined) {
+      const distance = Math.abs(measuredCenterY - avgY);
+      if (distance > thicknessMeasurement.thickness) {
+        if (TRACE)
+          console.log(
+            `[crossbar TRACE]   → skip: distance ${distance.toFixed(0)} > thickness ${thicknessMeasurement.thickness.toFixed(0)}`
+          );
+        continue;
+      }
+    }
+
+    // Single-band groups carry less internal evidence (no width-consistency
+    // check across multiple bands), so require strict probe unambiguity:
+    // exactly one pair, containing the midpoint.
+    if (
+      group.length < 2 &&
+      !(
+        thicknessMeasurement.selectedPairContainsMidpoint &&
+        thicknessMeasurement.pairCount === 1
+      )
+    ) {
+      if (TRACE)
+        console.log(
+          `[crossbar TRACE]   → skip: single-band, contains=${thicknessMeasurement.selectedPairContainsMidpoint} pairs=${thicknessMeasurement.pairCount}`
+        );
       continue;
     }
+    if (TRACE) console.log(`[crossbar TRACE]   → emit`);
 
     const measuredHeight = thicknessMeasurement.thickness;
 
@@ -161,19 +201,32 @@ export function detectCrossbar(geo: GeometryCache): FeatureInstance[] {
       : 0.5;
     const confidence = baseConfidence * thicknessMeasurement.confidence;
 
+    // Anchor the rect's vertical center on the measured pair's centerline,
+    // not the sampling-band y. The sampling band is where we *looked* for
+    // the bar; the predicate's pair center is where the bar's edges
+    // actually were. They differ when the sampling band lands off-center
+    // within the bar (e.g., Nohemi H: only the y=1573 band passes the
+    // interior filter, but the bar's actual edges are at 1232 and 1622, so
+    // its centerline is 1427 — anchoring at 1573 would push the rect 146
+    // design units high). Falls back to avgY when the predicate did not
+    // produce a measurement (defensive — the failure-reason guards above
+    // already short-circuit the no-pair cases).
+    const centerY =
+      thicknessMeasurement.selectedPairCenterOnProbeAxis ?? avgY;
+
     instances.push({
       id: 'crossbar',
       shape: {
         type: 'rect',
         x: avgX1,
-        y: avgY - measuredHeight / 2,
+        y: centerY - measuredHeight / 2,
         width: avgX2 - avgX1,
         height: measuredHeight,
       },
       confidence,
       anchors: {
-        left: { x: avgX1, y: avgY },
-        right: { x: avgX2, y: avgY },
+        left: { x: avgX1, y: centerY },
+        right: { x: avgX2, y: centerY },
       },
       debug: {
         sampleCount: group.length,
@@ -181,6 +234,8 @@ export function detectCrossbar(geo: GeometryCache): FeatureInstance[] {
         widthStdDev,
         measuredHeight,
         thicknessConfidence: thicknessMeasurement.confidence,
+        samplingBandY: avgY,
+        measuredCenterY: centerY,
       },
     });
   }

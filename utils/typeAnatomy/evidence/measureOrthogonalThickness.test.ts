@@ -51,8 +51,31 @@ describe('measureOrthogonalThickness', () => {
 
     expect(result.thickness).toBeCloseTo(40, 0);
     expect(result.confidence).toBe(1);
+    expect(result.selectedPairContainsMidpoint).toBe(true);
+    expect(result.pairCount).toBe(1);
+    // Rect spans y=80..120; chosen pair's centerline is y=100.
+    expect(result.selectedPairCenterOnProbeAxis).toBeCloseTo(100, 0);
     expect(result.failureReason).toBeUndefined();
     expect(result.hits.length).toBeGreaterThanOrEqual(2);
+  });
+
+  it('reports the chosen pair center off-band when the input midpoint is not centered in the stroke', () => {
+    // Same rect 100..300 / 80..120 (centerline y=100), but caller's input
+    // midpoint is at y=110 — INSIDE the stroke but off-center. The predicate
+    // must report the pair's actual centerline (100), not the caller's
+    // approximate midpoint (110). This is the regression that exposed the
+    // sampling-band-vs-measured-centerline mismatch in the crossbar detector.
+    const path = 'M100 80 L300 80 L300 120 L100 120 Z';
+    const geo = makeCache(path, 400, 200);
+
+    const result = measureOrthogonalThickness(geo, {
+      midpoint: { x: 200, y: 110 },
+      dominantAxis: HORIZONTAL,
+    });
+
+    expect(result.thickness).toBeCloseTo(40, 0);
+    expect(result.selectedPairContainsMidpoint).toBe(true);
+    expect(result.selectedPairCenterOnProbeAxis).toBeCloseTo(100, 0);
   });
 
   it('measures a tall-narrow rect horizontally as its width (vertical candidate)', () => {
@@ -67,6 +90,11 @@ describe('measureOrthogonalThickness', () => {
 
     expect(result.thickness).toBeCloseTo(40, 0);
     expect(result.confidence).toBe(1);
+    expect(result.selectedPairContainsMidpoint).toBe(true);
+    expect(result.pairCount).toBe(1);
+    // Vertical candidate → probe is horizontal → centerOnProbeAxis is X.
+    // Rect spans x=180..220; chosen pair's centerline is x=200.
+    expect(result.selectedPairCenterOnProbeAxis).toBeCloseTo(200, 0);
     expect(result.failureReason).toBeUndefined();
   });
 
@@ -84,6 +112,9 @@ describe('measureOrthogonalThickness', () => {
 
     expect(result.thickness).toBe(0);
     expect(result.confidence).toBe(0);
+    expect(result.selectedPairContainsMidpoint).toBe(false);
+    expect(result.pairCount).toBe(0);
+    expect(result.selectedPairCenterOnProbeAxis).toBeUndefined();
     expect(result.failureReason).toBe('no_hits');
   });
 
@@ -107,6 +138,8 @@ describe('measureOrthogonalThickness', () => {
     expect(result.hits.length).toBeGreaterThanOrEqual(4);
     expect(result.failureReason).toBe('ambiguous_pairs');
     expect(result.confidence).toBeLessThan(0.5);
+    expect(result.selectedPairContainsMidpoint).toBe(false);
+    expect(result.pairCount).toBe(2);
   });
 
   it('reports a single pair with full confidence when only one stroke is in the probe path', () => {
@@ -125,6 +158,8 @@ describe('measureOrthogonalThickness', () => {
 
     expect(result.thickness).toBeCloseTo(40, 0);
     expect(result.confidence).toBe(0.85);
+    expect(result.selectedPairContainsMidpoint).toBe(true);
+    expect(result.pairCount).toBe(2);
     expect(result.failureReason).toBeUndefined();
   });
 
@@ -142,5 +177,8 @@ describe('measureOrthogonalThickness', () => {
     expect(result.failureReason).toBe('insufficient_pairs');
     expect(result.confidence).toBe(0);
     expect(result.thickness).toBe(0);
+    expect(result.selectedPairContainsMidpoint).toBe(false);
+    expect(result.pairCount).toBe(1);
+    expect(result.selectedPairCenterOnProbeAxis).toBeUndefined();
   });
 });

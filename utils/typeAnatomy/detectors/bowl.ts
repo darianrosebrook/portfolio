@@ -10,7 +10,7 @@
  * - Properly distinguishes bowl from counter
  */
 
-import { getBaseContours, getHoleContours } from '../geometryCache';
+import { getHoleContours } from '../geometryCache';
 import { rayHits, isInside } from '@/utils/geometry/geometryCore';
 import type { FeatureInstance, GeometryCache, Point2D } from '../types';
 
@@ -26,11 +26,10 @@ export function detectBowl(geo: GeometryCache): FeatureInstance[] {
   }
 
   const instances: FeatureInstance[] = [];
-  const { eps, bboxW, bboxH, stemWidth, overshoot } = scale;
+  const { stemWidth } = scale;
 
   // Primary method: detect bowls from base contours that are enclosed and curved
   // A bowl is a curved outer contour, while a counter is a hole contour
-  const baseContours = getBaseContours(geo);
   const holeContours = getHoleContours(geo);
 
   // If there are hole contours, the glyph likely has bowls
@@ -161,7 +160,7 @@ function traceBowlFromHole(
   holeCenter: Point2D
 ): Point2D[] | null {
   const { svgShape, scale } = geo;
-  const { eps, stemWidth, overshoot } = scale;
+  const { overshoot } = scale;
 
   const angularStep = 12;
   const outline: Point2D[] = [];

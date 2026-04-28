@@ -57,8 +57,43 @@ export interface OrthogonalThicknessMeasurement {
    * Local measurement confidence in [0, 1]. 0 on failure. ~1 when a single
    * pair contains the midpoint. Lower when multiple pairs are present
    * (ambiguous geometry — the probe likely passed through extra strokes).
+   *
+   * Confidence is intentionally coarse — callers that need a structural
+   * contract (e.g., "accept this measurement only when the probe is
+   * unambiguous") should branch on `selectedPairContainsMidpoint` and
+   * `pairCount` instead. Confidence may be re-tuned over time; the
+   * structural fields will not.
    */
   confidence: number;
+  /**
+   * True when the chosen entry/exit pair brackets the input midpoint
+   * along the probe axis. False when no pair contained the midpoint and
+   * the predicate fell back to the nearest pair (ambiguous geometry).
+   */
+  selectedPairContainsMidpoint: boolean;
+  /**
+   * Number of entry/exit pairs the probe produced. 1 = unambiguous single
+   * stroke crossing. 2+ = probe also crossed counter walls or other
+   * strokes; callers may treat this as a soft warning even when the
+   * chosen pair contains the midpoint.
+   */
+  pairCount: number;
+  /**
+   * Coordinate of the chosen entry/exit pair's center along the *probe*
+   * axis. For a horizontal candidate (vertical probe), this is the Y of
+   * the bar's measured centerline; for a vertical candidate (horizontal
+   * probe), the X of the stem's measured centerline.
+   *
+   * Callers should anchor their rendered shape here, NOT at the input
+   * midpoint or at the caller's sampling-grid coordinate. Sampling can
+   * land off-center within the actual stroke; this field reports where
+   * the stroke's edges *actually were*.
+   *
+   * Undefined on failure (no_hits / insufficient_pairs). When set, comes
+   * exclusively from the chosen pair — not the input midpoint, not the
+   * candidate-group center, not a feature-level aggregate.
+   */
+  selectedPairCenterOnProbeAxis: number | undefined;
   /** Set when the measurement could not be produced. */
   failureReason?: ThicknessFailureReason;
 }
@@ -101,6 +136,9 @@ export function measureOrthogonalThickness(
       thickness: 0,
       hits: [],
       confidence: 0,
+      selectedPairContainsMidpoint: false,
+      pairCount: 0,
+      selectedPairCenterOnProbeAxis: undefined,
       failureReason: 'no_hits',
     };
   }
@@ -134,6 +172,9 @@ export function measureOrthogonalThickness(
       thickness: 0,
       hits: points,
       confidence: 0,
+      selectedPairContainsMidpoint: false,
+      pairCount: pairs.length,
+      selectedPairCenterOnProbeAxis: undefined,
       failureReason: 'insufficient_pairs',
     };
   }
@@ -184,6 +225,9 @@ export function measureOrthogonalThickness(
     thickness: chosen.thickness,
     hits: points,
     confidence,
+    selectedPairContainsMidpoint: containsMidpoint,
+    pairCount: pairs.length,
+    selectedPairCenterOnProbeAxis: chosen.midOnProbe,
     failureReason,
   };
 }

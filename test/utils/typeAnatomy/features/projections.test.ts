@@ -90,7 +90,10 @@ describe('projection features', () => {
 
   describe('hasEar', () => {
     it('returns boolean for lowercase r', () => {
-      const glyph = mockGlyphFromPath(LETTER_R_LOWERCASE.d, LETTER_R_LOWERCASE.bbox);
+      const glyph = mockGlyphFromPath(
+        LETTER_R_LOWERCASE.d,
+        LETTER_R_LOWERCASE.bbox
+      );
 
       const result = hasEar(glyph, metrics);
       expect(typeof result).toBe('boolean');
@@ -115,7 +118,10 @@ describe('projection features', () => {
     });
 
     it('works via detector orchestration', () => {
-      const glyph = mockGlyphFromPath(LETTER_R_LOWERCASE.d, LETTER_R_LOWERCASE.bbox);
+      const glyph = mockGlyphFromPath(
+        LETTER_R_LOWERCASE.d,
+        LETTER_R_LOWERCASE.bbox
+      );
 
       const result = detectFeature('Ear', glyph, metrics);
 
@@ -246,7 +252,9 @@ describe('projection features', () => {
       const tabPath = `
         M -20 0 L 20 0 L 20 100 L 40 100 L 40 120 L 20 120
         L 20 200 L -20 200 L -20 120 L -40 120 L -40 100 L -20 100 Z
-      `.replace(/\s+/g, ' ').trim();
+      `
+        .replace(/\s+/g, ' ')
+        .trim();
       const tabBbox = { minX: -40, minY: 0, maxX: 40, maxY: 200 };
       const glyph = mockGlyphFromPath(tabPath, tabBbox);
 
@@ -260,7 +268,9 @@ describe('projection features', () => {
         M 0 0 L 100 0 L 100 -20 L 120 -20 L 120 20 L 100 20 L 100 100
         L 120 100 L 120 140 L 100 140 L 100 200 L 0 200 L 0 140 L -20 140
         L -20 100 L 0 100 L 0 20 L -20 20 L -20 -20 L 0 -20 Z
-      `.replace(/\s+/g, ' ').trim();
+      `
+        .replace(/\s+/g, ' ')
+        .trim();
       const complexBbox = { minX: -20, minY: -20, maxX: 120, maxY: 200 };
       const glyph = mockGlyphFromPath(complexPath, complexBbox);
 

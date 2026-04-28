@@ -69,9 +69,8 @@ describe('Feature Detection System', () => {
     });
 
     it('should convert between display names and feature IDs', async () => {
-      const { toFeatureID, toDisplayName } = await import(
-        '@/utils/typeAnatomy/types'
-      );
+      const { toFeatureID, toDisplayName } =
+        await import('@/utils/typeAnatomy/types');
 
       expect(toFeatureID('Apex')).toBe('apex');
       expect(toFeatureID('Cross stroke')).toBe('cross-stroke');

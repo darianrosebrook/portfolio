@@ -37,7 +37,11 @@ export function detectCounter(geo: GeometryCache): FeatureInstance[] {
       const cy = (hole.bbox.minY + hole.bbox.maxY) / 2;
 
       // Extract the actual path commands for this hole contour
-      const holePath = extractContourPath(glyph, hole.startIndex, hole.endIndex);
+      const holePath = extractContourPath(
+        glyph,
+        hole.startIndex,
+        hole.endIndex
+      );
 
       if (holePath) {
         // Use path shape for exact counter geometry
@@ -286,6 +290,9 @@ function extractContourPath(
       case 'closePath':
         pathParts.push('Z');
         break;
+      default:
+        // Unknown command (e.g. arc) — bail so caller can fall back to traced polyline
+        return null;
     }
   }
 

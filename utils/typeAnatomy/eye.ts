@@ -154,8 +154,5 @@ function safeIntersect(
   }
 }
 
-// Import svg-intersections types
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore: svg-intersections types may be missing
 import { shape, intersect } from 'svg-intersections';
 type SvgShape = ReturnType<typeof shape>;

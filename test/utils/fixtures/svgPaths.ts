@@ -78,7 +78,9 @@ export const LETTER_I_SERIF = {
     M -100 -300 L 100 -300 L 100 -250 L 30 -250
     L 30 250 L 100 250 L 100 300 L -100 300
     L -100 250 L -30 250 L -30 -250 L -100 -250 Z
-  `.replace(/\s+/g, ' ').trim(),
+  `
+    .replace(/\s+/g, ' ')
+    .trim(),
   bbox: { minX: -100, minY: -300, maxX: 100, maxY: 300 },
 };
 
@@ -99,7 +101,9 @@ export const LETTER_I_LOWERCASE = {
   d: `
     M -30 0 L 30 0 L 30 500 L -30 500 Z
     M -25 620 L 25 620 L 25 680 L -25 680 Z
-  `.replace(/\s+/g, ' ').trim(),
+  `
+    .replace(/\s+/g, ' ')
+    .trim(),
   bbox: { minX: -30, minY: 0, maxX: 30, maxY: 680 },
 };
 
@@ -121,7 +125,9 @@ export const LETTER_A = {
     M 0 -350 L 200 350 L 150 350 L 125 200 L -125 200
     L -150 350 L -200 350 Z
     M -75 100 L 75 100 L 0 -150 Z
-  `.replace(/\s+/g, ' ').trim(),
+  `
+    .replace(/\s+/g, ' ')
+    .trim(),
   bbox: { minX: -200, minY: -350, maxX: 200, maxY: 350 },
 };
 
@@ -133,7 +139,9 @@ export const LETTER_V = {
   d: `
     M -200 -350 L -150 -350 L 0 300 L 150 -350 L 200 -350
     L 25 350 L -25 350 Z
-  `.replace(/\s+/g, ' ').trim(),
+  `
+    .replace(/\s+/g, ' ')
+    .trim(),
   bbox: { minX: -200, minY: -350, maxX: 200, maxY: 350 },
 };
 
@@ -145,7 +153,9 @@ export const LETTER_E_LOWERCASE = {
   d: `
     M 200 0 L 200 -50 L -200 -50 L -250 -100 L -250 100 L -200 150 L 200 150 L 200 100 L -150 100 L -150 -50 L 200 -50 L 200 0 Z
     M -100 -25 L 150 -25 L 150 75 L -100 75 Z
-  `.replace(/\s+/g, ' ').trim(),
+  `
+    .replace(/\s+/g, ' ')
+    .trim(),
   bbox: { minX: -250, minY: -100, maxX: 200, maxY: 150 },
 };
 
@@ -160,7 +170,9 @@ export const LETTER_G_LOWERCASE = {
     M -25 100 L 25 100 L 25 -100 L -25 -100 Z
     ${generatePolygon(0, -200, 150, 16)}
     ${generatePolygon(0, -200, 75, 12, true)}
-  `.replace(/\s+/g, ' ').trim(),
+  `
+    .replace(/\s+/g, ' ')
+    .trim(),
   bbox: { minX: -150, minY: -350, maxX: 150, maxY: 400 },
 };
 
@@ -173,7 +185,9 @@ export const LETTER_E_UPPERCASE = {
     M -150 -350 L 150 -350 L 150 -300 L -100 -300 L -100 -50
     L 100 -50 L 100 50 L -100 50 L -100 300 L 150 300 L 150 350
     L -150 350 Z
-  `.replace(/\s+/g, ' ').trim(),
+  `
+    .replace(/\s+/g, ' ')
+    .trim(),
   bbox: { minX: -150, minY: -350, maxX: 150, maxY: 350 },
 };
 
@@ -185,7 +199,9 @@ export const LETTER_T = {
   d: `
     M -150 -350 L 150 -350 L 150 -300 L 30 -300 L 30 350
     L -30 350 L -30 -300 L -150 -300 Z
-  `.replace(/\s+/g, ' ').trim(),
+  `
+    .replace(/\s+/g, ' ')
+    .trim(),
   bbox: { minX: -150, minY: -350, maxX: 150, maxY: 350 },
 };
 
@@ -196,7 +212,9 @@ export const LETTER_T = {
 export const LETTER_R_LOWERCASE = {
   d: `
     M -30 0 L 30 0 L 30 300 L 100 350 L 150 350 L 150 400 L 100 400 L 30 350 L 30 500 L -30 500 Z
-  `.replace(/\s+/g, ' ').trim(),
+  `
+    .replace(/\s+/g, ' ')
+    .trim(),
   bbox: { minX: -30, minY: 0, maxX: 150, maxY: 500 },
 };
 
@@ -208,7 +226,9 @@ export const LETTER_Y_LOWERCASE = {
   d: `
     M -150 0 L -100 0 L 0 150 L 100 0 L 150 0 L 30 200
     L 30 350 L 50 380 L 50 420 L -50 450 L -100 450 L -100 420 L -30 400 L -30 200 Z
-  `.replace(/\s+/g, ' ').trim(),
+  `
+    .replace(/\s+/g, ' ')
+    .trim(),
   bbox: { minX: -150, minY: 0, maxX: 150, maxY: 450 },
 };
 
@@ -264,7 +284,9 @@ export const FIGURE_EIGHT = {
     ${generatePolygon(0, -175, 75, 12, true)}
     ${generatePolygon(0, 175, 150, 16)}
     ${generatePolygon(0, 175, 75, 12, true)}
-  `.replace(/\s+/g, ' ').trim(),
+  `
+    .replace(/\s+/g, ' ')
+    .trim(),
   bbox: { minX: -150, minY: -325, maxX: 150, maxY: 325 },
 };
 
@@ -275,7 +297,9 @@ export const FIGURE_EIGHT = {
 export const HOOK_SHAPE = {
   d: `
     M -30 0 L 30 0 L 30 250 L 50 300 L 100 350 L 150 350 L 150 400 L 80 400 L 30 350 L -30 300 Z
-  `.replace(/\s+/g, ' ').trim(),
+  `
+    .replace(/\s+/g, ' ')
+    .trim(),
   bbox: { minX: -30, minY: 0, maxX: 150, maxY: 400 },
 };
 
@@ -287,7 +311,9 @@ export const SHOULDER_SHAPE = {
   d: `
     M -30 0 L 30 0 L 30 200 L 50 250 L 100 250 L 120 200 L 120 0 L 180 0
     L 180 500 L 120 500 L 120 300 L 100 300 L 50 300 L 30 350 L 30 500 L -30 500 Z
-  `.replace(/\s+/g, ' ').trim(),
+  `
+    .replace(/\s+/g, ' ')
+    .trim(),
   bbox: { minX: -30, minY: 0, maxX: 180, maxY: 500 },
 };
 
@@ -299,7 +325,9 @@ export const SPINE_SHAPE = {
   d: `
     M 100 -300 L 150 -300 L 175 -250 L 150 -150 L 50 -50 L -50 50 L -100 150 L -150 250 L -150 300
     L -100 300 L -75 250 L -50 150 L 50 50 L 150 -50 L 175 -150 L 150 -250 L 100 -300 Z
-  `.replace(/\s+/g, ' ').trim(),
+  `
+    .replace(/\s+/g, ' ')
+    .trim(),
   bbox: { minX: -150, minY: -300, maxX: 175, maxY: 300 },
 };
 
@@ -311,7 +339,9 @@ export const ARC_SHAPE = {
   d: `
     M -200 50 L -180 -100 L -100 -180 L 0 -200 L 100 -180 L 180 -100 L 200 50
     L 150 50 L 140 -50 L 80 -120 L 0 -150 L -80 -120 L -140 -50 L -150 50 Z
-  `.replace(/\s+/g, ' ').trim(),
+  `
+    .replace(/\s+/g, ' ')
+    .trim(),
   bbox: { minX: -200, minY: -200, maxX: 200, maxY: 50 },
 };
 

@@ -30,7 +30,10 @@ describe('opening features', () => {
 
   describe('hasAperture', () => {
     it('returns boolean for lowercase e', () => {
-      const glyph = mockGlyphFromPath(LETTER_E_LOWERCASE.d, LETTER_E_LOWERCASE.bbox);
+      const glyph = mockGlyphFromPath(
+        LETTER_E_LOWERCASE.d,
+        LETTER_E_LOWERCASE.bbox
+      );
 
       const result = hasAperture(glyph, metrics);
       expect(typeof result).toBe('boolean');
@@ -74,7 +77,10 @@ describe('opening features', () => {
     });
 
     it('works via detector orchestration', () => {
-      const glyph = mockGlyphFromPath(LETTER_E_LOWERCASE.d, LETTER_E_LOWERCASE.bbox);
+      const glyph = mockGlyphFromPath(
+        LETTER_E_LOWERCASE.d,
+        LETTER_E_LOWERCASE.bbox
+      );
 
       const result = detectFeature('Aperture', glyph, metrics);
 
@@ -85,7 +91,10 @@ describe('opening features', () => {
 
   describe('hasLink', () => {
     it('returns boolean for lowercase g', () => {
-      const glyph = mockGlyphFromPath(LETTER_G_LOWERCASE.d, LETTER_G_LOWERCASE.bbox);
+      const glyph = mockGlyphFromPath(
+        LETTER_G_LOWERCASE.d,
+        LETTER_G_LOWERCASE.bbox
+      );
 
       const result = hasLink(glyph, metrics);
       expect(typeof result).toBe('boolean');
@@ -116,7 +125,10 @@ describe('opening features', () => {
     });
 
     it('works via detector orchestration', () => {
-      const glyph = mockGlyphFromPath(LETTER_G_LOWERCASE.d, LETTER_G_LOWERCASE.bbox);
+      const glyph = mockGlyphFromPath(
+        LETTER_G_LOWERCASE.d,
+        LETTER_G_LOWERCASE.bbox
+      );
 
       const result = detectFeature('Link', glyph, metrics);
 
@@ -174,7 +186,9 @@ describe('opening features', () => {
       const cPath = `
         M 150 0 L 200 50 L 200 350 L 150 400 L -150 400 L -200 350 L -200 50 L -150 0 L 50 0 L 50 50
         L -150 50 L -150 350 L 150 350 L 150 50 L 50 50 L 50 0 Z
-      `.replace(/\s+/g, ' ').trim();
+      `
+        .replace(/\s+/g, ' ')
+        .trim();
       const cBbox = { minX: -200, minY: 0, maxX: 200, maxY: 400 };
       const glyph = mockGlyphFromPath(cPath, cBbox);
 
@@ -185,7 +199,9 @@ describe('opening features', () => {
       // Hourglass-like shape with narrow middle
       const hourglassPath = `
         M -100 0 L 100 0 L 20 100 L 100 200 L -100 200 L -20 100 Z
-      `.replace(/\s+/g, ' ').trim();
+      `
+        .replace(/\s+/g, ' ')
+        .trim();
       const hourglassBbox = { minX: -100, minY: 0, maxX: 100, maxY: 200 };
       const glyph = mockGlyphFromPath(hourglassPath, hourglassBbox);
 
@@ -193,7 +209,10 @@ describe('opening features', () => {
     });
 
     it('handles unusual metrics for link detection', () => {
-      const glyph = mockGlyphFromPath(LETTER_G_LOWERCASE.d, LETTER_G_LOWERCASE.bbox);
+      const glyph = mockGlyphFromPath(
+        LETTER_G_LOWERCASE.d,
+        LETTER_G_LOWERCASE.bbox
+      );
       const unusualMetrics = {
         baseline: 100, // Elevated baseline
         xHeight: 400,
@@ -212,7 +231,9 @@ describe('opening features', () => {
         M 0 -250 L 75 -200 L 75 -150 L 0 -100 L -75 -150 L -75 -200 Z
         M 0 325 L 150 250 L 150 100 L 0 25 L -150 100 L -150 250 Z
         M 0 250 L 75 200 L 75 150 L 0 100 L -75 150 L -75 200 Z
-      `.replace(/\s+/g, ' ').trim();
+      `
+        .replace(/\s+/g, ' ')
+        .trim();
       const figure8Bbox = { minX: -150, minY: -325, maxX: 150, maxY: 325 };
       const glyph = mockGlyphFromPath(figure8Path, figure8Bbox);
 

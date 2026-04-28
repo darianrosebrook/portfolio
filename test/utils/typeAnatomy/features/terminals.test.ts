@@ -18,10 +18,8 @@ import {
 } from '../../fixtures/mockGlyph';
 import {
   CIRCLE,
-  SMALL_CIRCLE,
   VERTICAL_STEM,
   LETTER_I_LOWERCASE,
-  LETTER_I_SERIF,
   LETTER_I_SANS,
   DONUT,
   EMPTY_PATH,
@@ -95,7 +93,10 @@ describe('terminal features', () => {
 
   describe('getTittle / hasTittle', () => {
     it('returns FeatureResult for lowercase i', () => {
-      const glyph = mockGlyphFromPath(LETTER_I_LOWERCASE.d, LETTER_I_LOWERCASE.bbox);
+      const glyph = mockGlyphFromPath(
+        LETTER_I_LOWERCASE.d,
+        LETTER_I_LOWERCASE.bbox
+      );
 
       const result = getTittle(glyph, metrics, font);
 
@@ -104,7 +105,10 @@ describe('terminal features', () => {
     });
 
     it('returns circle shape when tittle found', () => {
-      const glyph = mockGlyphFromPath(LETTER_I_LOWERCASE.d, LETTER_I_LOWERCASE.bbox);
+      const glyph = mockGlyphFromPath(
+        LETTER_I_LOWERCASE.d,
+        LETTER_I_LOWERCASE.bbox
+      );
 
       const result = getTittle(glyph, metrics, font);
 
@@ -143,7 +147,10 @@ describe('terminal features', () => {
     });
 
     it('hasTittle returns boolean', () => {
-      const glyph = mockGlyphFromPath(LETTER_I_LOWERCASE.d, LETTER_I_LOWERCASE.bbox);
+      const glyph = mockGlyphFromPath(
+        LETTER_I_LOWERCASE.d,
+        LETTER_I_LOWERCASE.bbox
+      );
 
       const result = hasTittle(glyph, metrics, font);
 
@@ -159,7 +166,10 @@ describe('terminal features', () => {
     });
 
     it('works without font parameter', () => {
-      const glyph = mockGlyphFromPath(LETTER_I_LOWERCASE.d, LETTER_I_LOWERCASE.bbox);
+      const glyph = mockGlyphFromPath(
+        LETTER_I_LOWERCASE.d,
+        LETTER_I_LOWERCASE.bbox
+      );
 
       // Should not throw when font is undefined
       const result = getTittle(glyph, metrics);
@@ -168,7 +178,10 @@ describe('terminal features', () => {
     });
 
     it('works via detector orchestration', () => {
-      const glyph = mockGlyphFromPath(LETTER_I_LOWERCASE.d, LETTER_I_LOWERCASE.bbox);
+      const glyph = mockGlyphFromPath(
+        LETTER_I_LOWERCASE.d,
+        LETTER_I_LOWERCASE.bbox
+      );
 
       const result = detectFeature('Tittle', glyph, metrics, font);
 
@@ -242,7 +255,10 @@ describe('terminal features', () => {
     });
 
     it('handles font with different unitsPerEm', () => {
-      const glyph = mockGlyphFromPath(LETTER_I_LOWERCASE.d, LETTER_I_LOWERCASE.bbox);
+      const glyph = mockGlyphFromPath(
+        LETTER_I_LOWERCASE.d,
+        LETTER_I_LOWERCASE.bbox
+      );
       const font2000 = mockFont({ unitsPerEm: 2000 });
 
       const result = getTittle(glyph, metrics, font2000);

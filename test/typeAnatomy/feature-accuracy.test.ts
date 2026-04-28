@@ -418,7 +418,12 @@ describe('known type anatomy accuracy gaps', () => {
         (barBBox.maxY - barBBox.minY) / (glyph.bbox.maxY - glyph.bbox.minY);
 
       expectInRange(barCenter.x, 0.35, 0.65);
-      expectInRange(barCenter.y, 0.35, 0.65);
+      // Tightened from [0.35, 0.65]: the broad range allowed a y-offset
+      // bug where the rect was anchored at the sampling-band y (0.55)
+      // instead of the measured pair's centerline (~0.50). Nohemi H's
+      // actual bar centerline is at y≈1427 of glyph height 2860 → ratio
+      // ≈ 0.50. Range of ±3% catches the original 5% offset.
+      expectInRange(barCenter.y, 0.47, 0.53);
       expect(widthRatio).toBeGreaterThanOrEqual(0.45);
       expect(heightRatio).toBeLessThanOrEqual(0.2);
     }
@@ -439,8 +444,72 @@ describe('known type anatomy accuracy gaps', () => {
       const heightRatio =
         (barBBox.maxY - barBBox.minY) / (glyph.bbox.maxY - glyph.bbox.minY);
 
-      expect(widthRatio).toBeGreaterThanOrEqual(0.2);
+      // Threshold of 0.18 reflects the bar's actual width on Nohemi A
+      // (~508 of ~2748 glyph width). The previous 0.2 threshold was
+      // calibrated against pre-fix output where the merger combined
+      // legitimate bar candidates with rejected candidates from upper-zone
+      // sampling bands, inflating the apparent width. Post-fix, the rect
+      // reflects only the real bar.
+      expect(widthRatio).toBeGreaterThanOrEqual(0.18);
       expect(heightRatio).toBeLessThanOrEqual(0.15);
+    }
+  );
+
+  // Regression guard against the height-inflation bug. The original bug
+  // used the y-spread of sampling bands as the bar's height, producing rects
+  // that spanned 30%+ of glyph height for ~13%-thick bars. Slice 1 replaced
+  // that with a perpendicular raycast measurement at the candidate midpoint;
+  // mergeGroup uses median of constituent measurements, never min/max of
+  // constituent y-bounds.
+  //
+  // The assertion below couples to `debug.measuredHeight` (the
+  // perpendicular-probe measurement that's *always* present, regardless of
+  // whether a merge ran) or `debug.medianHeight` (present only when
+  // mergeGroup combined multiple inputs). Either is acceptable evidence that
+  // the height came from a measurement, not a bounds operation. If a future
+  // edit reintroduces `Math.min/max` over constituent y-bounds, neither
+  // field will be present and the test fails at the existence check before
+  // the value comparison.
+  //
+  // `debug` is treated as a diagnostic surface, not product API — this test
+  // is brittle on purpose, to lock in the structural contract.
+  it(
+    'anchors A crossbar height on a measured thickness, not a bounds operation',
+    () => {
+      const glyph = glyphFor(nohemi, 'A');
+      const crossbars = detect(nohemi, 'A', 'crossbar');
+      expect(crossbars).toHaveLength(1);
+
+      const debug = crossbars[0].debug as
+        | {
+            measuredHeight?: number;
+            medianHeight?: number;
+          }
+        | undefined;
+
+      // Either path through the detector must surface a measured-thickness
+      // marker. A direct emission carries `measuredHeight`; a merged result
+      // carries `medianHeight` (which itself is computed from constituent
+      // measuredHeights, so still measurement-rooted).
+      const measuredMarker =
+        debug?.measuredHeight ?? debug?.medianHeight;
+      expect(measuredMarker).toBeDefined();
+
+      // The rect's height must equal the marker (within float tolerance).
+      // If the merger ever reverted to `Math.max - Math.min` over rect
+      // bounds, this equality fails.
+      const shape = crossbars[0].shape as Extract<
+        typeof crossbars[0]['shape'],
+        { type: 'rect' }
+      >;
+      expect(shape.height).toBeCloseTo(measuredMarker ?? -1, 4);
+
+      // And the height should be in stem-thickness order of magnitude — well
+      // below the y-spread of the sampling band window. Pre-fix, the rect
+      // height on A was 1127 design units (39% of glyph height); post-fix,
+      // it should be roughly stem-width.
+      const glyphHeight = glyph.bbox.maxY - glyph.bbox.minY;
+      expect((measuredMarker ?? Infinity) / glyphHeight).toBeLessThan(0.2);
     }
   );
 });

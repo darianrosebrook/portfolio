@@ -968,11 +968,7 @@ export function drawFeatureInstance(
   const transformed = transformShape(instance.shape, params);
 
   // For rect shapes, optionally use glyph clipping for precise geometry
-  if (
-    transformed.type === 'rect' &&
-    options?.useClipping &&
-    options?.glyph
-  ) {
+  if (transformed.type === 'rect' && options?.useClipping && options?.glyph) {
     const clipRect = {
       x: transformed.x,
       y: transformed.y,
@@ -1006,7 +1002,7 @@ export function drawFeatureInstances(
   for (const [_featureId, featureInstances] of instances) {
     // Skip empty arrays for efficiency
     if (featureInstances.length === 0) continue;
-    
+
     for (const instance of featureInstances) {
       drawFeatureInstance(ctx, instance, params, colors, options);
     }

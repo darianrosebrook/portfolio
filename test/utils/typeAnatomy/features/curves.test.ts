@@ -36,7 +36,10 @@ describe('curve features', () => {
 
   describe('hasLoop', () => {
     it('returns boolean for lowercase g', () => {
-      const glyph = mockGlyphFromPath(LETTER_G_LOWERCASE.d, LETTER_G_LOWERCASE.bbox);
+      const glyph = mockGlyphFromPath(
+        LETTER_G_LOWERCASE.d,
+        LETTER_G_LOWERCASE.bbox
+      );
 
       const result = hasLoop(glyph, metrics);
       expect(typeof result).toBe('boolean');
@@ -62,7 +65,10 @@ describe('curve features', () => {
     });
 
     it('works via detector orchestration', () => {
-      const glyph = mockGlyphFromPath(LETTER_G_LOWERCASE.d, LETTER_G_LOWERCASE.bbox);
+      const glyph = mockGlyphFromPath(
+        LETTER_G_LOWERCASE.d,
+        LETTER_G_LOWERCASE.bbox
+      );
 
       const result = detectFeature('Loop', glyph, metrics);
 
@@ -226,7 +232,10 @@ describe('curve features', () => {
 
   describe('hasTail', () => {
     it('returns boolean for lowercase y', () => {
-      const glyph = mockGlyphFromPath(LETTER_Y_LOWERCASE.d, LETTER_Y_LOWERCASE.bbox);
+      const glyph = mockGlyphFromPath(
+        LETTER_Y_LOWERCASE.d,
+        LETTER_Y_LOWERCASE.bbox
+      );
 
       const result = hasTail(glyph, metrics);
       expect(typeof result).toBe('boolean');
@@ -252,7 +261,10 @@ describe('curve features', () => {
     });
 
     it('works via detector orchestration', () => {
-      const glyph = mockGlyphFromPath(LETTER_Y_LOWERCASE.d, LETTER_Y_LOWERCASE.bbox);
+      const glyph = mockGlyphFromPath(
+        LETTER_Y_LOWERCASE.d,
+        LETTER_Y_LOWERCASE.bbox
+      );
 
       const result = detectFeature('Tail', glyph, metrics);
 
@@ -274,7 +286,10 @@ describe('curve features', () => {
     });
 
     it('handles extreme descent metrics for loop/tail', () => {
-      const glyph = mockGlyphFromPath(LETTER_G_LOWERCASE.d, LETTER_G_LOWERCASE.bbox);
+      const glyph = mockGlyphFromPath(
+        LETTER_G_LOWERCASE.d,
+        LETTER_G_LOWERCASE.bbox
+      );
       const extremeMetrics = {
         ...standardMetrics,
         descent: -1000, // Very deep descent
@@ -299,7 +314,9 @@ describe('curve features', () => {
       const complexCurve = `
         M 0 0 L 50 25 L 75 75 L 100 100 L 75 125 L 50 175 L 0 200
         L -50 175 L -75 125 L -100 100 L -75 75 L -50 25 Z
-      `.replace(/\s+/g, ' ').trim();
+      `
+        .replace(/\s+/g, ' ')
+        .trim();
       const curveBbox = { minX: -100, minY: 0, maxX: 100, maxY: 200 };
       const glyph = mockGlyphFromPath(complexCurve, curveBbox);
 
