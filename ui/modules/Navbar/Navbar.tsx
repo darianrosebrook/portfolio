@@ -6,7 +6,7 @@ import Icon from '@/ui/components/Icon';
 import { byPrefixAndName } from '@awesome.me/kit-0ba7f5fefb/icons';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState, useSyncExternalStore } from 'react';
 import Avatar from '../../components/Avatar';
 import Button from '../../components/Button';
 import Popover from '../../components/Popover/Popover';
@@ -18,49 +18,41 @@ const faBars = byPrefixAndName['far']['bars'];
 const faUser = byPrefixAndName['far']['user'];
 const faList = byPrefixAndName['far']['list'];
 const faArrowRight = byPrefixAndName['far']['arrow-right'];
-const faChartLine = byPrefixAndName['far']['chart-line'];
 
 export type NavbarProps = {
   pages: { name: string; path: string; admin: boolean }[] | null;
 };
 
+// Subscribe to the OS prefers-color-scheme media query as an external store so
+// theme stays in sync without a setState-in-effect cycle.
+function subscribePrefersDark(onChange: () => void): () => void {
+  if (typeof window === 'undefined') return () => {};
+  const mql = window.matchMedia('(prefers-color-scheme: dark)');
+  mql.addEventListener('change', onChange);
+  return () => mql.removeEventListener('change', onChange);
+}
+
+function getPrefersDark(): boolean {
+  if (typeof window === 'undefined') return false;
+  return window.matchMedia('(prefers-color-scheme: dark)').matches;
+}
+
 export default function Navbar({ pages = [] }: NavbarProps) {
-  const { user, profile, loading, error } = useUser();
+  const { user, profile, loading } = useUser();
 
   const [slider, setSlider] = useState(false);
-  const [theme, setTheme] = useState('dark');
+  const prefersDark = useSyncExternalStore(
+    subscribePrefersDark,
+    getPrefersDark,
+    () => false
+  );
+  // The toggle adds the opposite-of-system class to <html>; preserves prior
+  // semantics where slider on top of a dark system added the "light" class.
+  const theme = prefersDark ? 'light' : 'dark';
   const pathname = usePathname();
   const router = useRouter();
   const { isEnabled: performanceEnabled, togglePerformanceMonitor } =
     usePerformanceMonitor();
-  const slideInOut = useCallback(() => {
-    document.documentElement.animate(
-      [
-        { opacity: 1, transform: 'translatex(0)' },
-        { opacity: 0.0, transform: 'translatex(-35%)' },
-      ],
-      {
-        duration: 500,
-        easing: 'cubic-bezier(0.8, 0, 0.15, 1)',
-        fill: 'forwards',
-        pseudoElement: '::view-transition-old(main)',
-      }
-    );
-    document.documentElement.animate(
-      [
-        // { opacity: 0, clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)" },
-        // { opacity: 1, clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)" },
-        { opacity: 0, transform: 'translatex(35%)' },
-        { opacity: 1, transform: 'translatex(0)' },
-      ],
-      {
-        duration: 500,
-        easing: 'cubic-bezier(0.8, 0, 0.176, 1)',
-        fill: 'forwards',
-        pseudoElement: '::view-transition-new(main)',
-      }
-    );
-  }, []);
   const hanldeRouteChange = (
     event: React.MouseEvent<HTMLAnchorElement>,
     route: string
@@ -89,21 +81,6 @@ export default function Navbar({ pages = [] }: NavbarProps) {
     },
     [theme]
   );
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const prefersColorSchemeDarkQuery = window?.matchMedia(
-      '(prefers-color-scheme: dark)'
-    );
-    if (prefersColorSchemeDarkQuery.matches) {
-      setTheme('light');
-    }
-    prefersColorSchemeDarkQuery.onchange = (e) => {
-      setSlider(false);
-      setTheme(e.matches ? 'light' : 'dark');
-      document.documentElement.classList.remove(theme);
-    };
-  }, [theme]);
 
   return (
     <header className={styles.navContainer}>
