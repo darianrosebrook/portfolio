@@ -41,14 +41,14 @@ const CASES: OverlayCase[] = [
   {
     char: 'H',
     featureId: 'crossbar',
-    label: 'H duplicate crossbar',
-    expected: 'known-gap',
+    label: 'H crossbar',
+    expected: 'pass',
   },
   {
     char: 'A',
     featureId: 'crossbar',
-    label: 'A crossbar geometry',
-    expected: 'known-gap',
+    label: 'A crossbar',
+    expected: 'pass',
   },
 ];
 
