@@ -429,7 +429,6 @@ function setDensity(density: DensityId) {
                 <aside className={styles.playgroundAside}>
                   <BrandSwitcher
                     showDensity
-                    showPersonality
                     showFonts
                     sticky
                   />

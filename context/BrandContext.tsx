@@ -62,15 +62,25 @@ export interface BrandContextValue {
   setAutoCycleInterval: (ms: number) => void;
   /** Current active density mode */
   density: DensityId;
-  /** Set a specific density mode */
+  /**
+   * Set a specific density mode. Manual override that will be reset to the
+   * brand's preferred density the next time `setBrand` (or any brand change)
+   * runs.
+   */
   setDensity: (density: DensityId) => void;
   /** Current active heading font family */
   headingFont: FontFamilyId;
-  /** Set heading font family */
+  /**
+   * Set heading font family. Manual override that will be reset to the
+   * brand's preferred heading font the next time the brand changes.
+   */
   setHeadingFont: (font: FontFamilyId) => void;
   /** Current active body font family */
   bodyFont: FontFamilyId;
-  /** Set body font family */
+  /**
+   * Set body font family. Manual override that will be reset to the brand's
+   * preferred body font the next time the brand changes.
+   */
   setBodyFont: (font: FontFamilyId) => void;
   /** Reset brand, density, and fonts to defaults (for playground cleanup) */
   resetBrand: () => void;
@@ -201,15 +211,24 @@ export const BrandProvider: React.FC<BrandProviderProps> = ({
 }) => {
   const [brand, setBrandState] = useState<BrandId>('default');
   const [density, setDensityState] = useState<DensityId>(DEFAULT_DENSITY);
-  const [headingFont, setHeadingFontState] = useState<FontFamilyId>(DEFAULT_HEADING_FONT);
-  const [bodyFont, setBodyFontState] = useState<FontFamilyId>(DEFAULT_BODY_FONT);
+  const [headingFont, setHeadingFontState] =
+    useState<FontFamilyId>(DEFAULT_HEADING_FONT);
+  const [bodyFont, setBodyFontState] =
+    useState<FontFamilyId>(DEFAULT_BODY_FONT);
   const [isAutoCycling, setIsAutoCycling] = useState(false);
   const [autoCycleInterval, setAutoCycleInterval] = useState(
     DEFAULT_AUTO_CYCLE_INTERVAL
   );
   const [isHydrated, setIsHydrated] = useState(false);
 
-  // Hydrate from localStorage on mount
+  // Hydrate from localStorage on mount.
+  //
+  // The setState calls below trip react-hooks/set-state-in-effect. The
+  // canonical fix is useSyncExternalStore, but localStorage's "storage" event
+  // only fires on OTHER tabs — same-tab writes would need a custom event bus
+  // to drive a subscription. Until that shim exists we keep the documented
+  // mount-time hydration pattern, which React 18+ batches into a single
+  // render and matches the SSR fallback ('default').
   useEffect(() => {
     const storedBrand = localStorage.getItem(STORAGE_KEY) as BrandId | null;
     const storedAutoCycle = localStorage.getItem(AUTO_CYCLE_KEY);
@@ -228,12 +247,13 @@ export const BrandProvider: React.FC<BrandProviderProps> = ({
       activeBrand = 'default';
     }
 
-    setBrandState(activeBrand);
-
-    // Always use brand's preferred density
     const brandInfo = BRANDS.find((b) => b.id === activeBrand);
-    const brandDensity = brandInfo?.density || DEFAULT_DENSITY;
-    setDensityState(brandDensity);
+
+    /* eslint-disable react-hooks/set-state-in-effect -- see comment above */
+    setBrandState(activeBrand);
+    setDensityState(brandInfo?.density || DEFAULT_DENSITY);
+    setHeadingFontState(brandInfo?.headingFont || DEFAULT_HEADING_FONT);
+    setBodyFontState(brandInfo?.bodyFont || DEFAULT_BODY_FONT);
 
     if (storedAutoCycle === 'true') {
       setIsAutoCycling(true);
@@ -246,13 +266,8 @@ export const BrandProvider: React.FC<BrandProviderProps> = ({
       }
     }
 
-    // Always use brand's preferred fonts
-    const brandHeadingFont = brandInfo?.headingFont || DEFAULT_HEADING_FONT;
-    const brandBodyFont = brandInfo?.bodyFont || DEFAULT_BODY_FONT;
-    setHeadingFontState(brandHeadingFont);
-    setBodyFontState(brandBodyFont);
-
     setIsHydrated(true);
+    /* eslint-enable react-hooks/set-state-in-effect */
   }, [initialBrand, randomizeOnLoad]);
 
   // Apply data-brand attribute to document
@@ -280,29 +295,26 @@ export const BrandProvider: React.FC<BrandProviderProps> = ({
       monaspace: 'var(--semantic-typography-semantic-family-mono)',
     };
 
-    document.documentElement.style.setProperty('--font-family-heading', fontMap[headingFont]);
-    document.documentElement.style.setProperty('--font-family-body', fontMap[bodyFont]);
+    document.documentElement.style.setProperty(
+      '--font-family-heading',
+      fontMap[headingFont]
+    );
+    document.documentElement.style.setProperty(
+      '--font-family-body',
+      fontMap[bodyFont]
+    );
   }, [headingFont, bodyFont, isHydrated]);
 
-  // Fonts are managed by brand, no need to persist separately
-
-  // Update density and fonts when brand changes (always follow brand)
-  useEffect(() => {
-    if (!isHydrated) return;
-
-    const brandInfo = BRANDS.find((b) => b.id === brand);
-    if (brandInfo) {
-      // Update density to match brand
-      const brandDensity = brandInfo.density || DEFAULT_DENSITY;
-      setDensityState(brandDensity);
-
-      // Update fonts to match brand
-      const brandHeadingFont = brandInfo.headingFont || DEFAULT_HEADING_FONT;
-      const brandBodyFont = brandInfo.bodyFont || DEFAULT_BODY_FONT;
-      setHeadingFontState(brandHeadingFont);
-      setBodyFontState(brandBodyFont);
-    }
-  }, [brand, isHydrated]);
+  // Apply brand and its preferred density/fonts in a single update. Used by
+  // setBrand/cycleBrand/randomizeBrand so derived state stays in sync without
+  // a brand-watching effect (which trips react-hooks/set-state-in-effect).
+  const applyBrand = useCallback((newBrand: BrandId) => {
+    const brandInfo = BRANDS.find((b) => b.id === newBrand);
+    setBrandState(newBrand);
+    setDensityState(brandInfo?.density || DEFAULT_DENSITY);
+    setHeadingFontState(brandInfo?.headingFont || DEFAULT_HEADING_FONT);
+    setBodyFontState(brandInfo?.bodyFont || DEFAULT_BODY_FONT);
+  }, []);
 
   // Persist auto-cycle settings
   useEffect(() => {
@@ -315,38 +327,32 @@ export const BrandProvider: React.FC<BrandProviderProps> = ({
     localStorage.setItem(AUTO_CYCLE_INTERVAL_KEY, autoCycleInterval.toString());
   }, [autoCycleInterval, isHydrated]);
 
-
   // Set brand with validation
-  const setBrand = useCallback((newBrand: BrandId) => {
-    if (BRANDS.some((b) => b.id === newBrand)) {
-      setBrandState(newBrand);
-    } else {
-      console.warn(`[BrandContext] Unknown brand: ${newBrand}`);
-    }
-  }, []);
+  const setBrand = useCallback(
+    (newBrand: BrandId) => {
+      if (BRANDS.some((b) => b.id === newBrand)) {
+        applyBrand(newBrand);
+      } else {
+        console.warn(`[BrandContext] Unknown brand: ${newBrand}`);
+      }
+    },
+    [applyBrand]
+  );
 
   // Cycle to next brand
   const cycleBrand = useCallback(() => {
-    setBrandState((current) => {
-      const currentIndex = BRANDS.findIndex((b) => b.id === current);
-      const nextIndex = (currentIndex + 1) % BRANDS.length;
-      return BRANDS[nextIndex].id;
-    });
-  }, []);
+    const currentIndex = BRANDS.findIndex((b) => b.id === brand);
+    const nextIndex = (currentIndex + 1) % BRANDS.length;
+    applyBrand(BRANDS[nextIndex].id);
+  }, [brand, applyBrand]);
 
   // Randomize brand (exclude current, select from all available brands)
   const randomizeBrand = useCallback(() => {
-    setBrandState((current) => {
-      // Filter out current brand and select randomly from all remaining brands
-      const otherBrands = BRANDS.filter((b) => b.id !== current);
-      if (otherBrands.length === 0) {
-        // Fallback: if somehow no other brands exist, return current
-        return current;
-      }
-      const randomIndex = Math.floor(Math.random() * otherBrands.length);
-      return otherBrands[randomIndex].id;
-    });
-  }, []);
+    const otherBrands = BRANDS.filter((b) => b.id !== brand);
+    if (otherBrands.length === 0) return;
+    const randomIndex = Math.floor(Math.random() * otherBrands.length);
+    applyBrand(otherBrands[randomIndex].id);
+  }, [brand, applyBrand]);
 
   // Set density with validation (manual override, but will reset when brand changes)
   const setDensity = useCallback((newDensity: DensityId) => {
@@ -375,13 +381,14 @@ export const BrandProvider: React.FC<BrandProviderProps> = ({
     }
   }, []);
 
-  // Reset brand, density, and fonts to defaults (for playground cleanup)
+  // Reset brand, density, and fonts to defaults (for playground cleanup).
+  // The brand apply-effect persists 'default' to localStorage on the next tick,
+  // so no explicit removeItem is needed.
   const resetBrand = useCallback(() => {
     setBrandState('default');
     setDensityState(DEFAULT_DENSITY);
     setHeadingFontState(DEFAULT_HEADING_FONT);
     setBodyFontState(DEFAULT_BODY_FONT);
-    localStorage.removeItem(STORAGE_KEY);
   }, []);
 
   // Auto-cycle effect

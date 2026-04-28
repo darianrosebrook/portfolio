@@ -1,8 +1,10 @@
 'use client';
 
-import React, { useEffect, useCallback, useRef } from 'react';
-import { useBrand, type BrandId, type BrandInfo } from '@/context/BrandContext';
+import React, { useEffect, useCallback, useRef, useState } from 'react';
+import { useBrand, type BrandId } from '@/context/BrandContext';
 import styles from './BrandSwitcher.module.scss';
+
+const MIN_AUTO_CYCLE_INTERVAL_MS = 1000;
 
 /** Brand mood descriptions */
 const brandMoods: Record<BrandId, string> = {
@@ -31,10 +33,6 @@ function getFontFamily(font: string) {
 export interface BrandSwitcherProps {
   /** Show the auto-cycle controls */
   showAutoCycle?: boolean;
-  /** Show brand descriptions */
-  showDescriptions?: boolean;
-  /** Show brand personality preview (radius, spacing, motion icons) */
-  showPersonality?: boolean;
   /** Show density controls */
   showDensity?: boolean;
   /** Show font family controls */
@@ -57,8 +55,6 @@ export interface BrandSwitcherProps {
  */
 export const BrandSwitcher: React.FC<BrandSwitcherProps> = ({
   showAutoCycle = false,
-  showDescriptions = false,
-  showPersonality = false,
   showDensity = false,
   showFonts = false,
   compact = false,
@@ -97,13 +93,10 @@ export const BrandSwitcher: React.FC<BrandSwitcherProps> = ({
   useEffect(() => {
     if (!enableKeyboard) return;
 
+    // Only handle keys when focus is inside the switcher itself; intercepting
+    // arrow keys on body would block normal page scroll.
     const handleKeyDown = (event: KeyboardEvent) => {
-      const isWithinComponent = containerRef.current?.contains(
-        document.activeElement
-      );
-      const isBodyFocused = document.activeElement === document.body;
-
-      if (!isWithinComponent && !isBodyFocused) return;
+      if (!containerRef.current?.contains(document.activeElement)) return;
 
       switch (event.key) {
         case 'ArrowRight':
@@ -129,10 +122,32 @@ export const BrandSwitcher: React.FC<BrandSwitcherProps> = ({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [enableKeyboard, cycleBrand, cyclePrevious, randomizeBrand]);
 
-  const handleIntervalChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseInt(event.target.value, 10);
-    if (!isNaN(value) && value >= 1000) {
-      setAutoCycleInterval(value);
+  // Local draft so the user can type freely (e.g. "5000" via 5→50→500→5000)
+  // without each keystroke being silently dropped or clamped. Commit on blur.
+  const [intervalDraft, setIntervalDraft] = useState<string>(
+    autoCycleInterval.toString()
+  );
+
+  useEffect(() => {
+    setIntervalDraft(autoCycleInterval.toString());
+  }, [autoCycleInterval]);
+
+  const commitInterval = () => {
+    const parsed = parseInt(intervalDraft, 10);
+    if (!isNaN(parsed)) {
+      const clamped = Math.max(MIN_AUTO_CYCLE_INTERVAL_MS, parsed);
+      setAutoCycleInterval(clamped);
+      setIntervalDraft(clamped.toString());
+    } else {
+      setIntervalDraft(autoCycleInterval.toString());
+    }
+  };
+
+  const handleIntervalKeyDown = (
+    event: React.KeyboardEvent<HTMLInputElement>
+  ) => {
+    if (event.key === 'Enter') {
+      event.currentTarget.blur();
     }
   };
 
@@ -199,9 +214,7 @@ export const BrandSwitcher: React.FC<BrandSwitcherProps> = ({
             style={{ background: currentBrand?.accentColor }}
           />
           <div>
-            <div className={styles.selectedBrandName}>
-              {currentBrand?.name}
-            </div>
+            <div className={styles.selectedBrandName}>{currentBrand?.name}</div>
             <div className={styles.selectedBrandMood}>{currentMood}</div>
           </div>
         </div>
@@ -241,16 +254,21 @@ export const BrandSwitcher: React.FC<BrandSwitcherProps> = ({
             </label>
             {isAutoCycling && (
               <div className={styles.intervalControl}>
-                <label htmlFor="cycle-interval" className={styles.intervalLabel}>
+                <label
+                  htmlFor="cycle-interval"
+                  className={styles.intervalLabel}
+                >
                   Interval:
                 </label>
                 <input
                   id="cycle-interval"
                   type="number"
-                  min={1000}
+                  min={MIN_AUTO_CYCLE_INTERVAL_MS}
                   step={500}
-                  value={autoCycleInterval}
-                  onChange={handleIntervalChange}
+                  value={intervalDraft}
+                  onChange={(e) => setIntervalDraft(e.target.value)}
+                  onBlur={commitInterval}
+                  onKeyDown={handleIntervalKeyDown}
                   className={styles.intervalInput}
                 />
                 <span className={styles.intervalUnit}>ms</span>
