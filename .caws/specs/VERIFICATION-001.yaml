@@ -44,12 +44,22 @@ acceptance:
       claim depends on real mark classification, not coincidental geometry.
     test_command: pnpm exec tsx scripts/verify-mutation-resistance.ts --probe A2
   - id: A3
-    given: utils/typeAnatomy/evidence/topology/markPredicates.ts is mutated to make rejectsAsMainBodyFragment always return false
-    when: the H, l, I tittle negative accuracy tests are re-run via the mutation harness
+    given: utils/typeAnatomy/evidence/topology/markPredicates.ts is mutated to make isAboveMainBody always return false
+    when: the i and j tittle positive accuracy tests are re-run via the mutation harness
     then: |
-      at least one of the three negative cases transitions from PASS to
-      FAIL. Confirms the negative-pressure invariant is enforced by the
-      topology predicate, not by some other accidental gate.
+      both i and j tests transition from PASS to FAIL. Confirms the
+      topology layer's vertical-separation gate is load-bearing for
+      tittle detection — without it, detectTittle skips every mark
+      candidate. Mutation-testing finding from harness development:
+      rejectsAsMainBodyFragment, the predicate originally targeted here,
+      has no load-bearing test in the current accuracy suite. The
+      positional gate in geometryCache.isMarkContour
+      (bbox.minY > xHeight * 0.8) independently rejects every H/l/I
+      contour, so disabling rejectsAsMainBodyFragment did not break any
+      negative-pressure case. The invariant remains in code as
+      defense-in-depth; pressure-testing it would require a synthetic
+      glyph fixture with multiple non-hole contours where one falsely
+      passes the positional check, which is out of scope for this slice.
     test_command: pnpm exec tsx scripts/verify-mutation-resistance.ts --probe A3
   - id: A4
     given: utils/typeAnatomy/detectors/crossbar.ts is mutated to make detectCrossbar return []
