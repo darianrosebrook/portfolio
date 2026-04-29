@@ -1,11 +1,11 @@
 id: TYPEANATOMY-003
 type: feature
 title: Seed outline-corner evidence for apex, vertex, and crotch detection
-status: draft
+status: closed
 risk_tier: 2
 mode: feature
 created_at: '2026-04-29T02:57:34.576Z'
-updated_at: '2026-04-29T02:57:34.577Z'
+updated_at: '2026-04-29T19:41:37.605Z'
 blast_radius:
   modules:
     - typeAnatomy/evidence/corners
