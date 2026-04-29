@@ -1,11 +1,11 @@
 id: CAWS-INIT-001
 type: chore
 title: Establish CAWS baseline for portfolio governance
-status: draft
+status: closed
 risk_tier: 3
 mode: chore
 created_at: '2026-04-28T18:06:50.447Z'
-updated_at: '2026-04-28T18:06:50.448Z'
+updated_at: '2026-04-28T18:55:36.561Z'
 blast_radius:
   modules:
     - governance
