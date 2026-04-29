@@ -1,0 +1,57 @@
+id: VERIFICATION-002
+type: chore
+title: Mutation hardening for corner-evidence layer (apex/vertex/crotch)
+status: draft
+risk_tier: 3
+mode: chore
+created_at: '2026-04-29T23:33:02.319Z'
+updated_at: '2026-04-29T23:33:02.320Z'
+blast_radius:
+  modules:
+    - typeAnatomy/evidence/corners
+    - typeAnatomy/detectors/apex
+    - typeAnatomy/detectors/vertex
+    - typeAnatomy/detectors/crotch
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - scripts/verify-mutation-resistance.ts
+    - test/typeAnatomy/feature-accuracy.test.ts
+  out:
+    - utils/typeAnatomy/evidence/corners/
+    - utils/typeAnatomy/detectors/
+    - node_modules/
+    - dist/
+    - build/
+invariants:
+  - No production code changes — this slice only adds mutation probes to the verification harness.
+  - Each probe must cause at least one test to fail; a probe that passes all tests is a false-positive gap in the test suite that must be fixed.
+acceptance:
+  - id: A1
+    given: the mutation harness at scripts/verify-mutation-resistance.ts
+    when: the harness is run with probes targeting the corner-evidence layer
+    then: |
+      the following 4 probes each cause a test failure (exit code != 0):
+      P1 findOutlineCorners-empty: patch findOutlineCorners to return [] — the
+         A apex and V crotch accuracy tests must fail.
+      P2 inJunctionCluster-passthrough: patch inJunctionCluster to return its
+         input unchanged — the V apex negative test must fail (V apex count > 0).
+      P3 interiorPointsDown-alwaysFalse: patch interiorPointsDown to always
+         return false — the A apex and A crotch accuracy tests must fail.
+      P4 dedupeNearbyCorners-passthrough: patch dedupeNearbyCorners to return
+         its input unchanged — the A apex count test must fail (count > 1 when
+         A has a chamfer that produces two near-coincident apex candidates).
+    test_command: npx tsx scripts/verify-mutation-resistance.ts
+  - id: A2
+    given: all 4 probes fail as expected
+    when: the full type-anatomy suite runs on unmodified code
+    then: |
+      pass count is >= 380 (the post-TYPEANATOMY-003 baseline). No previously-
+      passing assertion flips to failing.
+    test_command: pnpm vitest run test/typeAnatomy test/utils/typeAnatomy utils/typeAnatomy/evidence
+non_functional:
+  a11y: []
+  perf: {}
+  security: []
+contracts: []

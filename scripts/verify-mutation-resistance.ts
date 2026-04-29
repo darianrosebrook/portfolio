@@ -152,6 +152,85 @@ const PROBES: Probe[] = [
       },
     ],
   },
+  // -- Corner-evidence family (VERIFICATION-002) ------------------------------
+  {
+    id: 'B1',
+    description:
+      'findOutlineCorners returns [] → A apex and V crotch tests fail',
+    targetFile: 'utils/typeAnatomy/evidence/corners/findOutlineCorners.ts',
+    mutation: {
+      search: /(export function findOutlineCorners\(points: Point2D\[\]\): CornerSample\[\] \{\n)/,
+      replace: '$1  void points; return [];\n',
+    },
+    expectedFlips: [
+      {
+        fullName:
+          'known type anatomy accuracy gaps finds exactly one apex on Nohemi A as a point near the top center',
+        testFile: 'test/typeAnatomy/feature-accuracy.test.ts',
+      },
+      {
+        fullName:
+          'known type anatomy accuracy gaps detects the V crotch at the bottom-center sharp join',
+        testFile: 'test/typeAnatomy/feature-accuracy.test.ts',
+      },
+    ],
+  },
+  {
+    id: 'B2',
+    description:
+      'inJunctionCluster is a passthrough → V apex negative test fails (V top corners pass through)',
+    targetFile: 'utils/typeAnatomy/evidence/corners/clustering.ts',
+    mutation: {
+      search: /(export function inJunctionCluster\(\n  corners: CornerSample\[\],\n  options\?: SharpnessOptions\n\): CornerSample\[\] \{\n)/,
+      replace: '$1  void options; return corners;\n',
+    },
+    expectedFlips: [
+      {
+        fullName:
+          'known type anatomy accuracy gaps does not report an apex on Nohemi V',
+        testFile: 'test/typeAnatomy/feature-accuracy.test.ts',
+      },
+    ],
+  },
+  {
+    id: 'B3',
+    description:
+      'interiorPointsDown always returns false → A apex and A crotch tests fail',
+    targetFile: 'utils/typeAnatomy/evidence/corners/cornerPredicates.ts',
+    mutation: {
+      search: /(export function interiorPointsDown\(\n  corner: CornerSample,\n  eps: number = 0\.05\n\): boolean \{\n)  return corner\.interiorDirection\.y < -eps;/,
+      replace: '$1  void corner; void eps; return false;',
+    },
+    expectedFlips: [
+      {
+        fullName:
+          'known type anatomy accuracy gaps finds exactly one apex on Nohemi A as a point near the top center',
+        testFile: 'test/typeAnatomy/feature-accuracy.test.ts',
+      },
+      {
+        fullName:
+          'known type anatomy accuracy gaps detects the A crotch at the interior of the upper angle',
+        testFile: 'test/typeAnatomy/feature-accuracy.test.ts',
+      },
+    ],
+  },
+  {
+    id: 'B4',
+    description:
+      'dedupeNearbyCorners is a passthrough → A apex count becomes 2 instead of 1',
+    targetFile: 'utils/typeAnatomy/evidence/corners/dedupe.ts',
+    mutation: {
+      search: /(export function dedupeNearbyCorners\(\n  corners: CornerSample\[\],\n  threshold: number\n\): CornerSample\[\] \{\n)  if \(threshold <= 0\) return \[\.\.\.corners\];/,
+      replace: '$1  void threshold; return [...corners];',
+    },
+    expectedFlips: [
+      {
+        fullName:
+          'known type anatomy accuracy gaps finds exactly one apex on Nohemi A as a point near the top center',
+        testFile: 'test/typeAnatomy/feature-accuracy.test.ts',
+      },
+    ],
+  },
 ];
 
 interface VitestTaskResult {

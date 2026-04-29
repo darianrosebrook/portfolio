@@ -36,11 +36,19 @@
     "TYPEANATOMY-003": {
       "path": "TYPEANATOMY-003.yaml",
       "type": "feature",
-      "status": "draft",
+      "status": "closed",
       "created_at": "2026-04-29T02:57:34.576Z",
-      "updated_at": "2026-04-29T02:57:34.577Z",
+      "updated_at": "2026-04-29T19:41:37.605Z",
+      "owner": null
+    },
+    "VERIFICATION-002": {
+      "path": "VERIFICATION-002.yaml",
+      "type": "chore",
+      "status": "draft",
+      "created_at": "2026-04-29T23:33:02.319Z",
+      "updated_at": "2026-04-29T23:33:02.320Z",
       "owner": null
     }
   },
-  "lastUpdated": "2026-04-29T02:57:35.011Z"
+  "lastUpdated": "2026-04-29T23:33:02.780Z"
 }
