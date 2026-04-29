@@ -3,169 +3,113 @@
  *
  * A tittle is the dot above letters like 'i' and 'j'.
  *
- * Fixed in v1:
- * - Added vertical gating: mark.bbox.minY > metrics.xHeight + eps
- * - Uses scale-aware thresholds
- * - Filters marks by area
+ * This detector consumes the disconnected-mark topology evidence family
+ * (utils/typeAnatomy/evidence/topology). It composes four predicates in
+ * fixed order: main-body-fragment rejection (already applied at contour
+ * classification time, see geometryCache.classifyContours), compactness,
+ * above-main-body, and lower-stem alignment. Any candidate that fails any
+ * predicate is rejected — there is no ray-based fallback.
+ *
+ * The previous implementation had a ray-fallback that scanned horizontal
+ * bands above x-height looking for narrow strokes. That fallback fired on
+ * any glyph whose upper region contained narrow ink — including the H,
+ * whose stems happily registered as a "tittle" through the misnamed-by-
+ * accident ray. With topology classification now reliable, the fallback
+ * has no purpose: if no contour was classified as a mark, there is no
+ * tittle. Period.
  */
 
-import { rayHits } from '@/utils/geometry/geometryCore';
-import { getMarkContours } from '../geometryCache';
 import type { FeatureInstance, GeometryCache } from '../types';
+import { getMarkContours } from '../geometryCache';
+import {
+  type ContourGroup,
+  findMainBodyGroup,
+  getConnectedGroups,
+  isAboveMainBody,
+  isAlignedWithLowerStem,
+  isCompactContour,
+} from '../evidence/topology';
 
-/**
- * Detects tittle features on a glyph.
- * Returns circle shapes at detected tittle locations.
- */
 export function detectTittle(geo: GeometryCache): FeatureInstance[] {
-  const { glyph, metrics, scale } = geo;
+  const { glyph, metrics, scale, contours } = geo;
 
   if (!glyph?.path?.commands || !glyph.bbox) {
     return [];
   }
 
-  const instances: FeatureInstance[] = [];
-  const { eps, bboxW, bboxH, stemWidth, overshoot } = scale;
-
-  // Minimum height above x-height for tittle
-  const minHeightAboveXHeight = Math.max(eps * 10, stemWidth * 0.2);
-
-  // First, check mark contours (pre-classified as diacritics)
   const markContours = getMarkContours(geo);
+  if (markContours.length === 0) {
+    return [];
+  }
+
+  // Identify the main body. A glyph with a mark contour but no main body
+  // (theoretical: a path that's only a diacritic) is not a tittle context.
+  const groups = getConnectedGroups(contours, 0.5);
+  const mainBody = findMainBodyGroup(groups);
+  if (!mainBody) {
+    return [];
+  }
+
+  // Vertical-separation epsilon. Sub-design-unit drift is absorbed; anything
+  // larger means a real gap between the main body and the candidate. Scale
+  // off stemWidth so the threshold scales with glyph size.
+  const verticalEpsilon = Math.max(scale.eps * 5, scale.stemWidth * 0.2);
+
+  const instances: FeatureInstance[] = [];
 
   for (const mark of markContours) {
-    // CRITICAL: Vertical gating - tittle must be ABOVE x-height
-    if (mark.bbox.minY <= metrics.xHeight + minHeightAboveXHeight) {
+    // Wrap the mark contour as a one-element group so it satisfies the
+    // ContourGroup-shaped predicates without forcing every predicate to
+    // accept a raw ContourClassification.
+    const candidateGroup: ContourGroup = {
+      contours: [mark],
+      bbox: mark.bbox,
+      area: mark.area,
+    };
+
+    if (
+      !isCompactContour(mark.bbox, {
+        glyphBBox: glyph.bbox,
+        metrics,
+        stemWidth: scale.stemWidth,
+      })
+    ) {
+      continue;
+    }
+
+    if (!isAboveMainBody(candidateGroup, mainBody, verticalEpsilon)) {
+      continue;
+    }
+
+    if (
+      !isAlignedWithLowerStem(candidateGroup, mainBody, {
+        stemWidth: scale.stemWidth,
+      })
+    ) {
       continue;
     }
 
     const width = mark.bbox.maxX - mark.bbox.minX;
     const height = mark.bbox.maxY - mark.bbox.minY;
-    const aspectRatio = width / height;
-    const area = Math.abs(mark.area);
+    const cx = (mark.bbox.minX + mark.bbox.maxX) / 2;
+    const cy = (mark.bbox.minY + mark.bbox.maxY) / 2;
+    const r = Math.max(width, height) / 2;
 
-    // Check if it's roughly circular (aspect ratio near 1)
-    const isRoughlyCircular = aspectRatio > 0.6 && aspectRatio < 1.6;
-
-    // Tittle should be small relative to glyph
-    const isSmall = width < bboxW * 0.4 && height < bboxH * 0.25;
-
-    // Area check: tittle shouldn't be too tiny or too large
-    const areaOK =
-      area > stemWidth * stemWidth * 0.2 && area < bboxW * bboxH * 0.15;
-
-    if (isRoughlyCircular && isSmall && areaOK) {
-      const cx = (mark.bbox.minX + mark.bbox.maxX) / 2;
-      const cy = (mark.bbox.minY + mark.bbox.maxY) / 2;
-      const r = Math.max(width, height) / 2;
-
-      instances.push({
-        id: 'tittle',
-        shape: { type: 'circle', cx, cy, r },
-        confidence: 0.9,
-        anchors: {
-          center: { x: cx, y: cy },
-        },
-        debug: {
-          source: 'mark-contour',
-          contourIndex: mark.index,
-          aspectRatio,
-          area,
-        },
-      });
-    }
-  }
-
-  // If no mark contours found tittle, try ray-based detection
-  if (instances.length === 0) {
-    const tittleResult = findTittleByRay(geo);
-    if (tittleResult) {
-      instances.push(tittleResult);
-    }
+    instances.push({
+      id: 'tittle',
+      shape: { type: 'circle', cx, cy, r },
+      confidence: 0.95,
+      anchors: {
+        center: { x: cx, y: cy },
+      },
+      debug: {
+        source: 'topology',
+        contourIndex: mark.index,
+        markBBox: mark.bbox,
+        mainBodyBBox: mainBody.bbox,
+      },
+    });
   }
 
   return instances;
-}
-
-/**
- * Finds tittle by casting rays above x-height.
- * Fallback when mark contour detection fails.
- */
-function findTittleByRay(geo: GeometryCache): FeatureInstance | null {
-  const { glyph, metrics, svgShape, scale } = geo;
-  const { eps, bboxW, bboxH, stemWidth, overshoot } = scale;
-
-  // Minimum height above x-height
-  const minHeightAboveXHeight = Math.max(eps * 10, stemWidth * 0.2);
-
-  // Scan horizontal bands above x-height
-  const bands = 4;
-  let best: { x1: number; x2: number; y: number; width: number } | null = null;
-
-  for (let i = 1; i <= bands; i++) {
-    const y =
-      metrics.xHeight +
-      minHeightAboveXHeight +
-      (i * (metrics.ascent - metrics.xHeight - minHeightAboveXHeight)) /
-        (bands + 1);
-
-    // Skip if y is above glyph
-    if (y > glyph.bbox.maxY) continue;
-
-    const origin = { x: glyph.bbox.minX - overshoot * 0.1, y };
-    const { points } = rayHits(svgShape, origin, 0, overshoot);
-
-    for (let j = 0; j < points.length - 1; j += 2) {
-      const x1 = points[j].x;
-      const x2 = points[j + 1].x;
-      const w = x2 - x1;
-
-      // Small, near-circular shape
-      if (w > 0 && w < bboxW * 0.35) {
-        if (!best || w < best.width) {
-          best = { x1, x2, y, width: w };
-        }
-      }
-    }
-  }
-
-  if (!best) return null;
-
-  // Estimate height by vertical probe
-  const cx = (best.x1 + best.x2) / 2;
-  const probeRadius = stemWidth * 2;
-  const vProbe = rayHits(
-    svgShape,
-    { x: cx, y: best.y - probeRadius },
-    Math.PI / 2,
-    probeRadius * 2
-  );
-
-  let estimatedHeight = best.width; // Default to width for circle
-  if (vProbe.points.length >= 2) {
-    for (let k = 0; k < vProbe.points.length - 1; k += 2) {
-      const y1 = vProbe.points[k].y;
-      const y2 = vProbe.points[k + 1].y;
-      if (y1 <= best.y && best.y <= y2) {
-        estimatedHeight = y2 - y1;
-        break;
-      }
-    }
-  }
-
-  const r = Math.max(1, Math.min(best.width / 2, estimatedHeight / 2));
-
-  return {
-    id: 'tittle',
-    shape: { type: 'circle', cx, cy: best.y, r },
-    confidence: 0.65,
-    anchors: {
-      center: { x: cx, y: best.y },
-    },
-    debug: {
-      source: 'ray-fallback',
-      width: best.width,
-      estimatedHeight,
-    },
-  };
 }

@@ -25,6 +25,7 @@ import type {
   SegmentWithMeta,
   SvgShape,
 } from './types';
+import { rejectsAsMainBodyFragment } from './evidence/topology';
 
 /**
  * Cache storage using WeakMap for automatic garbage collection.
@@ -546,8 +547,19 @@ function enrichCubic(seg: SegmentWithMeta): void {
  *
  * Classification rules:
  * - Holes: Counter-clockwise winding (negative area)
- * - Marks: Small contours above x-height (diacritics, tittles)
- * - Base: Everything else (main glyph shape)
+ * - Marks: Small disconnected contours above x-height (or below baseline)
+ *   that do NOT overlap any other non-hole contour (negative-pressure
+ *   invariant from TYPEANATOMY-001 — main-body classification first,
+ *   position second; this is what makes `H` produce zero marks even though
+ *   the crossbar opening sits above x-height)
+ * - Base: Everything else (main glyph shape, plus any non-hole contour
+ *   that fails mark classification)
+ *
+ * Two-pass design: collect raw bbox/winding data first, then reclassify
+ * with knowledge of every other non-hole contour's bbox. The single-pass
+ * version that lived here before could not apply main-body-fragment
+ * rejection because each contour was classified before its siblings were
+ * known.
  */
 export function classifyContours(
   glyph: Glyph,
@@ -556,7 +568,15 @@ export function classifyContours(
 ): ContourClassification[] {
   if (!glyph?.path?.commands) return [];
 
-  const contours: ContourClassification[] = [];
+  interface RawContour {
+    index: number;
+    bbox: BBox;
+    area: number;
+    winding: number;
+    startIndex: number;
+    endIndex: number;
+  }
+  const raw: RawContour[] = [];
   let contourIndex = 0;
   let contourStart = 0;
   let currentContourPoints: Point2D[] = [];
@@ -587,23 +607,8 @@ export function classifyContours(
         const bbox = calculateBBox(currentContourPoints);
         const winding = area >= 0 ? 1 : -1;
 
-        // Classify contour type
-        let type: 'base' | 'mark' | 'hole';
-
-        if (winding < 0) {
-          // Counter-clockwise = hole
-          type = 'hole';
-        } else if (isMarkContour(bbox, metrics, glyph.bbox)) {
-          // Small contour above main body = mark/diacritic
-          type = 'mark';
-        } else {
-          // Main glyph shape
-          type = 'base';
-        }
-
-        contours.push({
+        raw.push({
           index: contourIndex,
-          type,
           bbox,
           area: Math.abs(area),
           winding,
@@ -618,7 +623,31 @@ export function classifyContours(
     }
   }
 
-  return contours;
+  // Pass 2: classify with full knowledge of every non-hole contour's bbox
+  // so isMarkContour can apply main-body-fragment rejection.
+  const nonHoleBBoxes: BBox[] = raw
+    .filter((r) => r.winding > 0)
+    .map((r) => r.bbox);
+
+  return raw.map((r) => {
+    let type: 'base' | 'mark' | 'hole';
+    if (r.winding < 0) {
+      type = 'hole';
+    } else if (isMarkContour(r.bbox, metrics, glyph.bbox, nonHoleBBoxes)) {
+      type = 'mark';
+    } else {
+      type = 'base';
+    }
+    return {
+      index: r.index,
+      type,
+      bbox: r.bbox,
+      area: r.area,
+      winding: r.winding,
+      startIndex: r.startIndex,
+      endIndex: r.endIndex,
+    };
+  });
 }
 
 /**
@@ -663,21 +692,32 @@ function calculateBBox(points: Point2D[]): BBox {
 
 /**
  * Determines if a contour is likely a mark/diacritic.
- * Marks are typically small and positioned above or below the main glyph body.
+ *
+ * Two-stage classification:
+ *   1. Topology rejection: a contour overlapping any other non-hole
+ *      contour's bbox is part of the main body, regardless of position.
+ *      0.5-design-unit epsilon absorbs sub-design-unit drift from Bezier
+ *      endpoint extraction in flattenToSegments.
+ *   2. Positional check: the contour sits clearly above x-height (tittle,
+ *      diaeresis, acute) OR below baseline (cedilla, ogonek).
+ *
+ * Compactness checks (size relative to stem width, aspect ratio, height
+ * fraction of x-height) are intentionally NOT applied here. They are the
+ * detector's responsibility via `isCompactContour` from the topology
+ * evidence family. Reasoning: a contour can be classified as a mark
+ * without being tittle-shaped — e.g., a wide diacritic bar above x-height
+ * is still a "mark," just not a tittle. Per-detector compactness gates
+ * keep classification general and detection-specific.
  */
 function isMarkContour(
   bbox: BBox,
   metrics: Metrics,
-  glyphBBox: { minX: number; maxX: number; minY: number; maxY: number }
+  _glyphBBox: { minX: number; maxX: number; minY: number; maxY: number },
+  otherNonHoleBBoxes: BBox[]
 ): boolean {
-  const contourWidth = bbox.maxX - bbox.minX;
-  const contourHeight = bbox.maxY - bbox.minY;
-  const glyphWidth = glyphBBox.maxX - glyphBBox.minX;
-  const glyphHeight = glyphBBox.maxY - glyphBBox.minY;
-
-  // Mark if small relative to glyph size
-  const isSmall =
-    contourWidth < glyphWidth * 0.3 && contourHeight < glyphHeight * 0.3;
+  if (rejectsAsMainBodyFragment(bbox, otherNonHoleBBoxes, 0.5)) {
+    return false;
+  }
 
   // Mark if positioned above x-height (like tittle on i, j)
   const isAboveXHeight = bbox.minY > metrics.xHeight * 0.8;
@@ -685,7 +725,7 @@ function isMarkContour(
   // Mark if positioned below baseline (like cedilla)
   const isBelowBaseline = bbox.maxY < metrics.baseline;
 
-  return isSmall && (isAboveXHeight || isBelowBaseline);
+  return isAboveXHeight || isBelowBaseline;
 }
 
 /**

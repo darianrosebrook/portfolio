@@ -238,28 +238,35 @@ describe('known type anatomy accuracy gaps', () => {
 
   // -- false negatives: detectors return [] on glyphs that have the feature --
 
-  it.fails(
-    'detects the lowercase i tittle above the stem (currently 0 found)',
-    () => {
-      const glyph = glyphFor(nohemi, 'i');
-      const tittles = detect(nohemi, 'i', 'tittle');
+  it('detects the lowercase i tittle above the stem', () => {
+    const glyph = glyphFor(nohemi, 'i');
+    const tittles = detect(nohemi, 'i', 'tittle');
 
-      expect(tittles).toHaveLength(1);
-      expect(tittles[0].shape.type).toBe('circle');
+    expect(tittles).toHaveLength(1);
+    expect(tittles[0].shape.type).toBe('circle');
 
-      const center = normalized(centerOf(tittles[0].shape), glyph.bbox);
-      expectInRange(center.x, 0.25, 0.75);
-      expectInRange(center.y, 0.75, 1);
-    }
-  );
+    const center = normalized(centerOf(tittles[0].shape), glyph.bbox);
+    expectInRange(center.x, 0.25, 0.75);
+    expectInRange(center.y, 0.75, 1);
+  });
 
-  it.fails(
-    'detects the lowercase j tittle above the stem (currently 0 found)',
-    () => {
-      const tittles = detect(nohemi, 'j', 'tittle');
-      expect(tittles).toHaveLength(1);
-    }
-  );
+  it('detects the lowercase j tittle above the stem', () => {
+    const glyph = glyphFor(nohemi, 'j');
+    const tittles = detect(nohemi, 'j', 'tittle');
+
+    expect(tittles).toHaveLength(1);
+    expect(tittles[0].shape.type).toBe('circle');
+
+    // Note: j's glyph bbox is asymmetric — the descender extends far left
+    // (minX is well negative), so the upper stem (and the dot above it)
+    // sits at normalized x ≈ 0.77, not ~0.5 as it would on a symmetric glyph
+    // like i. The detector's alignment is enforced by isAlignedWithLowerStem
+    // at runtime; this test loosens the x range to accommodate the bbox
+    // asymmetry rather than reimplementing stem alignment in the assertion.
+    const center = normalized(centerOf(tittles[0].shape), glyph.bbox);
+    expectInRange(center.x, 0.25, 0.85);
+    expectInRange(center.y, 0.75, 1);
+  });
 
   it.fails(
     'detects the T arm — its horizontal stroke (currently 0 found)',
@@ -397,8 +404,16 @@ describe('known type anatomy accuracy gaps', () => {
 
   // -- crossbar geometry bugs (existing) -----------------------------------
 
-  it.fails('does not report a tittle on an uppercase H', () => {
+  it('does not report a tittle on an uppercase H', () => {
     expect(detect(nohemi, 'H', 'tittle')).toHaveLength(0);
+  });
+
+  it('does not report a tittle on a lowercase l', () => {
+    expect(detect(nohemi, 'l', 'tittle')).toHaveLength(0);
+  });
+
+  it('does not report a tittle on an uppercase I', () => {
+    expect(detect(nohemi, 'I', 'tittle')).toHaveLength(0);
   });
 
   it(

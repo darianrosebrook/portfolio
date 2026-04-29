@@ -1,78 +1,90 @@
-id: CAWS-INIT-001
-type: chore
-title: Establish CAWS baseline for portfolio governance
+id: TYPEANATOMY-001
+type: feature
+title: Seed disconnected-mark topology via tittle detection
 status: draft
-risk_tier: 3
-mode: chore
-created_at: '2026-04-28T18:06:50.447Z'
-updated_at: '2026-04-28T18:06:50.448Z'
+risk_tier: 2
+mode: feature
+created_at: '2026-04-29T01:08:25.797Z'
+updated_at: '2026-04-29T01:08:25.798Z'
 blast_radius:
   modules:
-    - governance
+    - typeAnatomy/evidence
+    - typeAnatomy/detectors/tittle
   data_migration: false
-operational_rollback_slo: 5m
+operational_rollback_slo: 30m
 scope:
   in:
-    - .caws/
-    - .claude/
-    - CLAUDE.md
-    - .gitignore
+    - utils/typeAnatomy/evidence/topology/**
+    - utils/typeAnatomy/detectors/tittle.ts
+    - utils/typeAnatomy/geometryCache.ts
+    - test/typeAnatomy/feature-accuracy.test.ts
+    - utils/typeAnatomy/evidence/topology/**/*.test.ts
   out:
-    - app/
-    - components/
-    - lib/
-    - design-system/
-    - pages/
-    - scripts/
-    - tests/
-    - docs/
-    - public/
-    - utils/
-    - contracts/
-    - node_modules/
-    - .next/
-    - dist/
-    - build/
+    - utils/typeAnatomy/detectors/arm.ts
+    - utils/typeAnatomy/detectors/crotch.ts
+    - utils/typeAnatomy/detectors/serif.ts
+    - utils/typeAnatomy/detectors/vertex.ts
+    - utils/typeAnatomy/detectors/spur.ts
+    - utils/typeAnatomy/detectors/finial.ts
+    - utils/typeAnatomy/detectors/ear.ts
+    - utils/typeAnatomy/detectors/loop.ts
+    - utils/typeAnatomy/detectors/aperture.ts
+    - utils/typeAnatomy/detectors/apex.ts
+    - utils/typeAnatomy/detectors/bowl.ts
+    - utils/typeAnatomy/detectors/counter.ts
+    - utils/typeAnatomy/detectors/crossbar.ts
+    - utils/typeAnatomy/detectors/eye.ts
+    - test/utils/fixtures/svgPaths.ts
+    - test/typeAnatomy/feature-detection.test.ts
+    - test/typeAnatomy/font-properties.test.ts
+    - utils/geometry/
 invariants:
-  - The .caws/ governance layer (policy.yaml, specs/, working-spec.yaml, registry.json) remains the source of truth for project-level CAWS configuration
-  - The .claude/hooks/ scripts stay executable and their settings.json wiring stays valid JSON so Claude Code sessions continue to receive boundary signals
-  - The git hooks installed by caws init (pre-commit, post-commit, pre-push, commit-msg) stay active; --no-verify is blocked on push
+  - The topology evidence family is independent of measureOrthogonalThickness — disconnected-mark detection must not depend on the orthogonal-thickness substrate built for Slice 1
+  - The tittle detector exhibits both positive and negative pressure — `i` and `j` produce exactly one tittle, while `H`, `l`, and `I` produce zero
+  - getMarkContours rejects main-body fragments via topology predicates before any positional gating is applied — main-body classification happens first, position second
 acceptance:
   - id: A1
-    given: an empty .caws/ directory and no project-level .claude/ directory
-    when: caws init runs in non-interactive mode
-    then: .caws/policy.yaml, .caws/working-spec.yaml, .caws/specs/registry.json, .claude/settings.json with 13 hook scripts, .claude/rules/{git-safety,worktree-isolation}.md, and root CLAUDE.md all exist and caws status reports "Detected standard CAWS setup"
+    given: a new reusable topology evidence layer at utils/typeAnatomy/evidence/topology/
+    when: tittle detection is implemented against the layer
+    then: detectTittle consumes topology predicates for disconnected contour detection, compactness, body separation, vertical position, and stem alignment; any predicate omitted from the originally-proposed family is explicitly justified in spec notes or commit messages
   - id: A2
-    given: a fresh caws init install over a non-empty repo
-    when: git diff vs the pre-init HEAD is inspected
-    then: only .gitignore is modified as an append, and .caws/ .claude/ CLAUDE.md appear as untracked additions with no pre-existing tracked files clobbered
+    given: Nohemi-VF.ttf loaded and the lowercase `i` glyph
+    when: detectTittle runs on the glyph
+    then: exactly one tittle is reported, classified as a compact disconnected mark, with normalized center x ∈ [0.25, 0.75] and y ∈ [0.75, 1.0]
   - id: A3
-    given: the auto-generated PROJ-637 stub spec
-    when: CAWS-INIT-001 replaces it as the active spec
-    then: PROJ-637.yaml is removed via caws specs delete, registry.json contains only CAWS-INIT-001, and working-spec.yaml mirrors CAWS-INIT-001 content
+    given: Nohemi-VF.ttf loaded and the lowercase `j` glyph
+    when: detectTittle runs on the glyph
+    then: exactly one tittle is reported with the same compact disconnected-mark classification and position bounds as A2
   - id: A4
-    given: the prior ARTICLE-PUBLISH-AUDIT spec content from before this session
-    when: the wip checkpoint commit at HEAD records the deletions
-    then: the previous spec is recoverable from HEAD~1 via git show 181d7a51:.caws/working-spec.yaml so future work can fold it back if still active
+    given: Nohemi-VF.ttf loaded and the glyphs `H`, `l`, and `I`
+    when: detectTittle runs on each glyph
+    then: zero tittles are reported for each, because every candidate contour is classified as a main-body fragment by the topology predicates before positional gating
   - id: A5
-    given: this spec CAWS-INIT-001
-    when: caws validate --spec-id CAWS-INIT-001 runs
-    then: the spec passes schema validation with zero errors
+    given: the existing `it.fails(...)` cases in test/typeAnatomy/feature-accuracy.test.ts that document the tittle bugs
+    when: Slice 2 lands
+    then: the `i` tittle placement and `H` false-tittle cases flip from `it.fails` to passing `it`; the `j` case flips if it exists in the same `it.fails` form; new passing negative tests for `l` and `I` may be added but are not flips
+  - id: A6
+    given: the topology predicate module
+    when: its unit tests run on synthetic SVG path fixtures
+    then: each predicate has at least one positive case (predicate fires) and one negative case (predicate rejects), independent of any real-font load
 non_functional:
   a11y: []
   perf: {}
-  security:
-    - The .claude/hooks/scan-secrets.sh runs on Read tool calls so secret-shaped strings are flagged before reaching the model
-contracts: []
+  security: []
+contracts:
+  - type: project_setup
+    path: utils/typeAnatomy/evidence/topology/index.ts
+    description: TypeScript-internal contract — the topology evidence module's exported predicate signatures (signatures of getDisconnectedContours, isCompactContour, isAboveMainBody, isAlignedWithLowerStem, rejectMainBodyFragments, etc.). The CAWS schema's API-contract types (openapi/graphql/proto/pact) do not apply to internal TS libraries; project_setup is used here per CAWSFIX-06 schema permissiveness with this rationale recorded.
 observability:
   logs: []
   metrics: []
   traces: []
 migrations: []
 rollback:
-  - rm -rf .caws/ .claude/ CLAUDE.md and run `git checkout HEAD~1 -- .gitignore` to revert
+  - Revert the Slice 2 commits; tittle detection returns to its pre-slice state where `i`/`H` cases are documented as `it.fails`
 ai_assessment:
-  confidence_level: 9
+  confidence_level: 7
   uncertainty_areas:
-    - Whether all 13 .claude/hooks/ scripts add value for solo work today; several (worktree-write-guard, stop-worktree-check, worktree-guard) are scaffolding for the CAWSFIX-31 claim/heartbeat surface that has not yet shipped. Acceptable to keep as install-default until that lands.
+    - The exact touch-up scope on geometryCache.ts — getMarkContours may need either a tighter filter (small disconnected piece above main body's vertical extent) or a full rewrite consuming the new topology predicates. Bounded to that one function regardless.
+    - Whether the proposed topology thresholds (compactness, separation, position bands) generalize to other typefaces. The slice validates only on Nohemi; cross-font generality is a follow-up slice.
   recommended_pairing: false
