@@ -284,20 +284,17 @@ describe('known type anatomy accuracy gaps', () => {
     }
   );
 
-  it.fails(
-    'detects the V crotch at the bottom apex (currently 0 found)',
-    () => {
-      const crotches = detect(nohemi, 'V', 'crotch');
-      expect(crotches).toHaveLength(1);
-    }
-  );
+  it('detects the V crotch at the bottom-center sharp join', () => {
+    const crotches = detect(nohemi, 'V', 'crotch');
+    expect(crotches).toHaveLength(1);
+  });
 
-  it.fails('detects the A crotch at the top apex (currently 0 found)', () => {
+  it('detects the A crotch at the interior of the upper angle', () => {
     const crotches = detect(nohemi, 'A', 'crotch');
     expect(crotches).toHaveLength(1);
   });
 
-  it.fails('detects vertices on Nohemi A (currently 0 found)', () => {
+  it('detects two vertices on Nohemi A at the leg-end region', () => {
     const vertices = detect(nohemi, 'A', 'vertex');
     expect(vertices.length).toBeGreaterThanOrEqual(2);
   });
@@ -340,13 +337,11 @@ describe('known type anatomy accuracy gaps', () => {
     }
   );
 
-  it.fails(
-    'finds exactly one apex on Nohemi A (currently finds 2 line shapes near top)',
-    () => {
-      const apexes = detect(nohemi, 'A', 'apex');
-      expect(apexes).toHaveLength(1);
-    }
-  );
+  it('finds exactly one apex on Nohemi A as a point near the top center', () => {
+    const apexes = detect(nohemi, 'A', 'apex');
+    expect(apexes).toHaveLength(1);
+    expect(apexes[0].shape.type).toBe('point');
+  });
 
   it.fails(
     'returns a bowl smaller than the full glyph for Nohemi b (currently spans entire bbox)',
@@ -416,59 +411,53 @@ describe('known type anatomy accuracy gaps', () => {
     expect(detect(nohemi, 'I', 'tittle')).toHaveLength(0);
   });
 
-  it(
-    'detects one horizontal H crossbar centered between the stems',
-    () => {
-      const glyph = glyphFor(nohemi, 'H');
-      const crossbars = detect(nohemi, 'H', 'crossbar');
+  it('detects one horizontal H crossbar centered between the stems', () => {
+    const glyph = glyphFor(nohemi, 'H');
+    const crossbars = detect(nohemi, 'H', 'crossbar');
 
-      expect(crossbars).toHaveLength(1);
-      expect(crossbars[0].shape.type).toBe('rect');
+    expect(crossbars).toHaveLength(1);
+    expect(crossbars[0].shape.type).toBe('rect');
 
-      const barBBox = shapeBBox(crossbars[0].shape);
-      const barCenter = normalized(centerOf(crossbars[0].shape), glyph.bbox);
-      const widthRatio =
-        (barBBox.maxX - barBBox.minX) / (glyph.bbox.maxX - glyph.bbox.minX);
-      const heightRatio =
-        (barBBox.maxY - barBBox.minY) / (glyph.bbox.maxY - glyph.bbox.minY);
+    const barBBox = shapeBBox(crossbars[0].shape);
+    const barCenter = normalized(centerOf(crossbars[0].shape), glyph.bbox);
+    const widthRatio =
+      (barBBox.maxX - barBBox.minX) / (glyph.bbox.maxX - glyph.bbox.minX);
+    const heightRatio =
+      (barBBox.maxY - barBBox.minY) / (glyph.bbox.maxY - glyph.bbox.minY);
 
-      expectInRange(barCenter.x, 0.35, 0.65);
-      // Tightened from [0.35, 0.65]: the broad range allowed a y-offset
-      // bug where the rect was anchored at the sampling-band y (0.55)
-      // instead of the measured pair's centerline (~0.50). Nohemi H's
-      // actual bar centerline is at y≈1427 of glyph height 2860 → ratio
-      // ≈ 0.50. Range of ±3% catches the original 5% offset.
-      expectInRange(barCenter.y, 0.47, 0.53);
-      expect(widthRatio).toBeGreaterThanOrEqual(0.45);
-      expect(heightRatio).toBeLessThanOrEqual(0.2);
-    }
-  );
+    expectInRange(barCenter.x, 0.35, 0.65);
+    // Tightened from [0.35, 0.65]: the broad range allowed a y-offset
+    // bug where the rect was anchored at the sampling-band y (0.55)
+    // instead of the measured pair's centerline (~0.50). Nohemi H's
+    // actual bar centerline is at y≈1427 of glyph height 2860 → ratio
+    // ≈ 0.50. Range of ±3% catches the original 5% offset.
+    expectInRange(barCenter.y, 0.47, 0.53);
+    expect(widthRatio).toBeGreaterThanOrEqual(0.45);
+    expect(heightRatio).toBeLessThanOrEqual(0.2);
+  });
 
-  it(
-    'detects the A crossbar as a horizontal bar, not a tall vertical region',
-    () => {
-      const glyph = glyphFor(nohemi, 'A');
-      const crossbars = detect(nohemi, 'A', 'crossbar');
+  it('detects the A crossbar as a horizontal bar, not a tall vertical region', () => {
+    const glyph = glyphFor(nohemi, 'A');
+    const crossbars = detect(nohemi, 'A', 'crossbar');
 
-      expect(crossbars).toHaveLength(1);
-      expect(crossbars[0].shape.type).toBe('rect');
+    expect(crossbars).toHaveLength(1);
+    expect(crossbars[0].shape.type).toBe('rect');
 
-      const barBBox = shapeBBox(crossbars[0].shape);
-      const widthRatio =
-        (barBBox.maxX - barBBox.minX) / (glyph.bbox.maxX - glyph.bbox.minX);
-      const heightRatio =
-        (barBBox.maxY - barBBox.minY) / (glyph.bbox.maxY - glyph.bbox.minY);
+    const barBBox = shapeBBox(crossbars[0].shape);
+    const widthRatio =
+      (barBBox.maxX - barBBox.minX) / (glyph.bbox.maxX - glyph.bbox.minX);
+    const heightRatio =
+      (barBBox.maxY - barBBox.minY) / (glyph.bbox.maxY - glyph.bbox.minY);
 
-      // Threshold of 0.18 reflects the bar's actual width on Nohemi A
-      // (~508 of ~2748 glyph width). The previous 0.2 threshold was
-      // calibrated against pre-fix output where the merger combined
-      // legitimate bar candidates with rejected candidates from upper-zone
-      // sampling bands, inflating the apparent width. Post-fix, the rect
-      // reflects only the real bar.
-      expect(widthRatio).toBeGreaterThanOrEqual(0.18);
-      expect(heightRatio).toBeLessThanOrEqual(0.15);
-    }
-  );
+    // Threshold of 0.18 reflects the bar's actual width on Nohemi A
+    // (~508 of ~2748 glyph width). The previous 0.2 threshold was
+    // calibrated against pre-fix output where the merger combined
+    // legitimate bar candidates with rejected candidates from upper-zone
+    // sampling bands, inflating the apparent width. Post-fix, the rect
+    // reflects only the real bar.
+    expect(widthRatio).toBeGreaterThanOrEqual(0.18);
+    expect(heightRatio).toBeLessThanOrEqual(0.15);
+  });
 
   // Regression guard against the height-inflation bug. The original bug
   // used the y-spread of sampling bands as the bar's height, producing rects
@@ -488,43 +477,39 @@ describe('known type anatomy accuracy gaps', () => {
   //
   // `debug` is treated as a diagnostic surface, not product API — this test
   // is brittle on purpose, to lock in the structural contract.
-  it(
-    'anchors A crossbar height on a measured thickness, not a bounds operation',
-    () => {
-      const glyph = glyphFor(nohemi, 'A');
-      const crossbars = detect(nohemi, 'A', 'crossbar');
-      expect(crossbars).toHaveLength(1);
+  it('anchors A crossbar height on a measured thickness, not a bounds operation', () => {
+    const glyph = glyphFor(nohemi, 'A');
+    const crossbars = detect(nohemi, 'A', 'crossbar');
+    expect(crossbars).toHaveLength(1);
 
-      const debug = crossbars[0].debug as
-        | {
-            measuredHeight?: number;
-            medianHeight?: number;
-          }
-        | undefined;
+    const debug = crossbars[0].debug as
+      | {
+          measuredHeight?: number;
+          medianHeight?: number;
+        }
+      | undefined;
 
-      // Either path through the detector must surface a measured-thickness
-      // marker. A direct emission carries `measuredHeight`; a merged result
-      // carries `medianHeight` (which itself is computed from constituent
-      // measuredHeights, so still measurement-rooted).
-      const measuredMarker =
-        debug?.measuredHeight ?? debug?.medianHeight;
-      expect(measuredMarker).toBeDefined();
+    // Either path through the detector must surface a measured-thickness
+    // marker. A direct emission carries `measuredHeight`; a merged result
+    // carries `medianHeight` (which itself is computed from constituent
+    // measuredHeights, so still measurement-rooted).
+    const measuredMarker = debug?.measuredHeight ?? debug?.medianHeight;
+    expect(measuredMarker).toBeDefined();
 
-      // The rect's height must equal the marker (within float tolerance).
-      // If the merger ever reverted to `Math.max - Math.min` over rect
-      // bounds, this equality fails.
-      const shape = crossbars[0].shape as Extract<
-        typeof crossbars[0]['shape'],
-        { type: 'rect' }
-      >;
-      expect(shape.height).toBeCloseTo(measuredMarker ?? -1, 4);
+    // The rect's height must equal the marker (within float tolerance).
+    // If the merger ever reverted to `Math.max - Math.min` over rect
+    // bounds, this equality fails.
+    const shape = crossbars[0].shape as Extract<
+      (typeof crossbars)[0]['shape'],
+      { type: 'rect' }
+    >;
+    expect(shape.height).toBeCloseTo(measuredMarker ?? -1, 4);
 
-      // And the height should be in stem-thickness order of magnitude — well
-      // below the y-spread of the sampling band window. Pre-fix, the rect
-      // height on A was 1127 design units (39% of glyph height); post-fix,
-      // it should be roughly stem-width.
-      const glyphHeight = glyph.bbox.maxY - glyph.bbox.minY;
-      expect((measuredMarker ?? Infinity) / glyphHeight).toBeLessThan(0.2);
-    }
-  );
+    // And the height should be in stem-thickness order of magnitude — well
+    // below the y-spread of the sampling band window. Pre-fix, the rect
+    // height on A was 1127 design units (39% of glyph height); post-fix,
+    // it should be roughly stem-width.
+    const glyphHeight = glyph.bbox.maxY - glyph.bbox.minY;
+    expect((measuredMarker ?? Infinity) / glyphHeight).toBeLessThan(0.2);
+  });
 });
