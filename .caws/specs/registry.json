@@ -24,7 +24,15 @@
       "created_at": "2026-04-29T02:16:19.692Z",
       "updated_at": "2026-04-29T02:17:59.458Z",
       "owner": null
+    },
+    "VERIFICATION-001": {
+      "path": "VERIFICATION-001.yaml",
+      "type": "chore",
+      "status": "draft",
+      "created_at": "2026-04-29T02:19:23.950Z",
+      "updated_at": "2026-04-29T02:19:23.951Z",
+      "owner": null
     }
   },
-  "lastUpdated": "2026-04-29T02:17:59.543Z"
+  "lastUpdated": "2026-04-29T02:19:24.383Z"
 }
