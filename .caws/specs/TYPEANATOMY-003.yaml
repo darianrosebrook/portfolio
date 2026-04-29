@@ -131,6 +131,19 @@ acceptance:
       corner candidates collapse to one. All four cases run on
       hand-built fixtures, independent of any real-font load.
     test_command: pnpm vitest run utils/typeAnatomy/evidence/corners
+  - id: A8
+    given: Nohemi-VF.ttf loaded and the uppercase `V` glyph
+    when: detectApex runs on the glyph
+    then: |
+      zero apexes are reported. V's top outer corners are isolated stroke
+      terminations (sharp turns whose walk-adjacent neighbors are gentle
+      bevels), not apex junctions. Apex must restrict its candidates to
+      junction-cluster members — the same conceptual distinction crotch
+      already uses — so an apex is a stroke-meeting event, not any
+      isolated top-band sharp corner. This pins the asymmetry: vertex
+      may be a leg-end termination OR a junction (A's feet qualify);
+      apex must be a junction.
+    test_command: pnpm vitest run test/typeAnatomy/feature-accuracy.test.ts -t "does not report an apex on Nohemi V"
 non_functional:
   a11y: []
   perf: {}

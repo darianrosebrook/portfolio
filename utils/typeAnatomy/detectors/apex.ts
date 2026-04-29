@@ -28,6 +28,7 @@ import type { FeatureInstance, GeometryCache } from '../types';
 import {
   dedupeNearbyCorners,
   extractContourCorners,
+  inJunctionCluster,
   interiorPointsDown,
   isInTopBand,
   isSharpExteriorCorner,
@@ -39,9 +40,20 @@ export function detectApex(geo: GeometryCache): FeatureInstance[] {
     return [];
   }
 
+  // Junction filter: an apex is where two strokes converge to a sharp
+  // meeting at the top of the letterform. Isolated sharp corners with
+  // gentle walk-neighbors (e.g., V's outer top corners, where each
+  // diagonal terminates) are stroke terminations, NOT apex junctions —
+  // they must be rejected. inJunctionCluster keeps only sharp corners
+  // whose walk-adjacent predecessor or successor is also sharp; clustering
+  // is per-contour so adjacency is meaningful.
+  //
+  // This pins an asymmetry with vertex: vertex accepts leg-end
+  // terminations as well as junctions (A's feet qualify), but apex must
+  // be a junction. Crotch follows the same junction rule.
   const candidates = contours
     .filter((c) => c.type === 'base')
-    .flatMap((c) => extractContourCorners(c, segments))
+    .flatMap((c) => inJunctionCluster(extractContourCorners(c, segments)))
     .filter(
       (c) =>
         isSharpExteriorCorner(c) &&

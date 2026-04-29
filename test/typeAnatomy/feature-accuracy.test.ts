@@ -343,6 +343,14 @@ describe('known type anatomy accuracy gaps', () => {
     expect(apexes[0].shape.type).toBe('point');
   });
 
+  it('does not report an apex on Nohemi V', () => {
+    // V has no apex — its top corners are stroke terminations of the
+    // two diagonals, not a junction. The apex detector must reject
+    // them as isolated sharp corners.
+    const apexes = detect(nohemi, 'V', 'apex');
+    expect(apexes).toHaveLength(0);
+  });
+
   it.fails(
     'returns a bowl smaller than the full glyph for Nohemi b (currently spans entire bbox)',
     () => {
