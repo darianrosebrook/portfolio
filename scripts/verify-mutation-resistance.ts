@@ -161,6 +161,10 @@ interface VitestTaskResult {
 }
 
 interface VitestJsonReport {
+  success?: boolean;
+  numTotalTests?: number;
+  numPassedTests?: number;
+  numFailedTests?: number;
   testResults?: Array<{
     assertionResults: Array<{
       fullName: string;
@@ -220,14 +224,24 @@ function revertMutation(probe: Probe): void {
   exec(`git restore -- "${probe.targetFile}"`);
 }
 
-function runVitest(testFile: string, jsonOutPath: string): {
+function runVitest(testPaths: string, jsonOutPath: string): {
   exitCode: number;
   report: VitestJsonReport;
 } {
+  // testPaths can be one or many space-separated paths. Splitting and
+  // re-joining produces an unquoted list so vitest sees them as separate
+  // path arguments. A single quoted string would be treated as one filename
+  // by the shell — vitest then matches zero tests, which is exactly the
+  // silent-pass mode the spec invariant prohibits.
+  const paths = testPaths
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((p) => `"${p}"`)
+    .join(' ');
   let exitCode = 0;
   try {
     exec(
-      `pnpm vitest run "${testFile}" --reporter=json --outputFile="${jsonOutPath}"`
+      `pnpm vitest run ${paths} --reporter=json --outputFile="${jsonOutPath}"`
     );
   } catch (err) {
     const status = (err as { status?: number }).status;
@@ -323,11 +337,14 @@ function runPostCheck(): ProbeResult {
     reportFile
   );
 
-  if (exitCode !== 0) {
+  // Triple gate against silent-pass: vitest exit code, vitest's own success
+  // flag, and per-assertion counts. Any one zero-match scenario (paths not
+  // resolving, all suites filtered out) trips at least one gate.
+  if (exitCode !== 0 || report.success === false) {
     return {
       id: 'POST',
       status: 'FAIL',
-      detail: `full suite exited ${exitCode} after mutation harness ran. See ${reportFile}.`,
+      detail: `vitest exit=${exitCode}, success=${report.success}. See ${reportFile}.`,
     };
   }
 
@@ -339,6 +356,15 @@ function runPostCheck(): ProbeResult {
       if (a.status === 'failed') failed++;
     }
   }
+
+  if (total === 0 || (report.numPassedTests ?? 0) === 0) {
+    return {
+      id: 'POST',
+      status: 'FAIL',
+      detail: `zero-match: vitest reported 0 tests after the harness ran. The path arguments may have collapsed to an unmatched filename. See ${reportFile}.`,
+    };
+  }
+
   if (failed > 0) {
     return {
       id: 'POST',
