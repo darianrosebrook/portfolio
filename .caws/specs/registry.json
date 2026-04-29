@@ -32,7 +32,15 @@
       "created_at": "2026-04-29T02:19:23.950Z",
       "updated_at": "2026-04-29T02:31:46.401Z",
       "owner": null
+    },
+    "TYPEANATOMY-003": {
+      "path": "TYPEANATOMY-003.yaml",
+      "type": "feature",
+      "status": "draft",
+      "created_at": "2026-04-29T02:57:34.576Z",
+      "updated_at": "2026-04-29T02:57:34.577Z",
+      "owner": null
     }
   },
-  "lastUpdated": "2026-04-29T02:31:46.487Z"
+  "lastUpdated": "2026-04-29T02:57:35.011Z"
 }
