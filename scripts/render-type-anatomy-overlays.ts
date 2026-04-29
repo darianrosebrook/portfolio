@@ -29,14 +29,14 @@ const CASES: OverlayCase[] = [
   {
     char: 'i',
     featureId: 'tittle',
-    label: 'i tittle miss',
-    expected: 'known-gap',
+    label: 'i tittle',
+    expected: 'pass',
   },
   {
     char: 'H',
     featureId: 'tittle',
-    label: 'H false tittle',
-    expected: 'known-gap',
+    label: 'H tittle (negative)',
+    expected: 'pass',
   },
   {
     char: 'H',
