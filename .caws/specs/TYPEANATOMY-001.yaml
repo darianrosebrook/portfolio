@@ -47,26 +47,40 @@ acceptance:
     given: a new reusable topology evidence layer at utils/typeAnatomy/evidence/topology/
     when: tittle detection is implemented against the layer
     then: detectTittle consumes topology predicates for disconnected contour detection, compactness, body separation, vertical position, and stem alignment; any predicate omitted from the originally-proposed family is explicitly justified in spec notes or commit messages
+    test_command: pnpm vitest run utils/typeAnatomy/evidence/topology/disconnectedContours.test.ts
   - id: A2
     given: Nohemi-VF.ttf loaded and the lowercase `i` glyph
     when: detectTittle runs on the glyph
     then: exactly one tittle is reported, classified as a compact disconnected mark, with normalized center x ∈ [0.25, 0.75] and y ∈ [0.75, 1.0]
+    test_command: pnpm vitest run test/typeAnatomy/feature-accuracy.test.ts -t "detects the lowercase i tittle"
   - id: A3
     given: Nohemi-VF.ttf loaded and the lowercase `j` glyph
     when: detectTittle runs on the glyph
-    then: exactly one tittle is reported with the same compact disconnected-mark classification and position bounds as A2
+    then: |
+      exactly one tittle is reported with the same compact disconnected-mark
+      classification as A2 and y ∈ [0.75, 1.0]. Position-bound deviation
+      from A2: x range widened to [0.25, 0.85] in the implementation. Reason:
+      Nohemi `j` has a leftward descender that pulls the glyph bbox center
+      to the left, so the upper stem (and dot above it) lands at normalized
+      x ≈ 0.77. Real alignment with the upper stem is enforced at runtime
+      by isAlignedWithLowerStem (predicate-level), not by this bbox-relative
+      assertion. Recorded at closure rather than amended pre-implementation.
+    test_command: pnpm vitest run test/typeAnatomy/feature-accuracy.test.ts -t "detects the lowercase j tittle"
   - id: A4
     given: Nohemi-VF.ttf loaded and the glyphs `H`, `l`, and `I`
     when: detectTittle runs on each glyph
     then: zero tittles are reported for each, because every candidate contour is classified as a main-body fragment by the topology predicates before positional gating
+    test_command: pnpm vitest run test/typeAnatomy/feature-accuracy.test.ts -t "does not report a tittle"
   - id: A5
     given: the existing `it.fails(...)` cases in test/typeAnatomy/feature-accuracy.test.ts that document the tittle bugs
     when: Slice 2 lands
     then: the `i` tittle placement and `H` false-tittle cases flip from `it.fails` to passing `it`; the `j` case flips if it exists in the same `it.fails` form; new passing negative tests for `l` and `I` may be added but are not flips
+    test_command: pnpm vitest run test/typeAnatomy/feature-accuracy.test.ts -t "tittle"
   - id: A6
     given: the topology predicate module
     when: its unit tests run on synthetic SVG path fixtures
     then: each predicate has at least one positive case (predicate fires) and one negative case (predicate rejects), independent of any real-font load
+    test_command: pnpm vitest run utils/typeAnatomy/evidence/topology
 non_functional:
   a11y: []
   perf: {}
