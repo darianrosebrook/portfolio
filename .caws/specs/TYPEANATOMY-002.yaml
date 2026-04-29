@@ -1,11 +1,11 @@
 id: TYPEANATOMY-002
 type: chore
 title: Reconcile overlay-script labels for tittle cases (Slice 2R)
-status: draft
+status: closed
 risk_tier: 3
 mode: chore
 created_at: '2026-04-29T02:16:19.692Z'
-updated_at: '2026-04-29T02:16:19.693Z'
+updated_at: '2026-04-29T02:17:59.458Z'
 blast_radius:
   modules:
     - typeAnatomy/visual-overlay
