@@ -6,7 +6,12 @@ import Icon from '@/ui/components/Icon';
 import { byPrefixAndName } from '@awesome.me/kit-0ba7f5fefb/icons';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import React, { useCallback, useState, useSyncExternalStore } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useState,
+  useSyncExternalStore,
+} from 'react';
 import Avatar from '../../components/Avatar';
 import Button from '../../components/Button';
 import Popover from '../../components/Popover/Popover';
@@ -73,6 +78,7 @@ export default function Navbar({ pages = [] }: NavbarProps) {
       const enabled = e.target.checked;
       setSlider(enabled);
       const html = document.documentElement;
+      html.classList.remove(theme === 'dark' ? 'light' : 'dark');
       if (enabled) {
         html.classList.add(theme);
       } else {
@@ -81,6 +87,12 @@ export default function Navbar({ pages = [] }: NavbarProps) {
     },
     [theme]
   );
+
+  useEffect(() => {
+    const html = document.documentElement;
+    html.classList.remove('light', 'dark');
+    setSlider(false);
+  }, [prefersDark]);
 
   return (
     <header className={styles.navContainer}>
