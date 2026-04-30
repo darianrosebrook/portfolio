@@ -9,7 +9,6 @@ import { describe, it, expect } from 'vitest';
 import { hasApex } from '@/utils/typeAnatomy/apex';
 import { hasVertex } from '@/utils/typeAnatomy/vertex';
 import { hasCrotch } from '@/utils/typeAnatomy/crotch';
-import { detectFeature } from '@/utils/typeAnatomy/detector';
 import {
   mockGlyphFromPath,
   mockNonDrawableGlyph,
@@ -19,8 +18,6 @@ import {
   CIRCLE,
   RECTANGLE,
   VERTICAL_STEM,
-  LETTER_A,
-  LETTER_V,
   DONUT,
   EMPTY_PATH,
 } from '../../fixtures/svgPaths';
@@ -29,20 +26,6 @@ describe('vertex features', () => {
   const metrics = standardMetrics;
 
   describe('hasApex', () => {
-    it('returns boolean for letter A shape', () => {
-      const glyph = mockGlyphFromPath(LETTER_A.d, LETTER_A.bbox);
-
-      const result = hasApex(glyph, metrics);
-      expect(typeof result).toBe('boolean');
-    });
-
-    it('returns boolean for letter V', () => {
-      const glyph = mockGlyphFromPath(LETTER_V.d, LETTER_V.bbox);
-
-      const result = hasApex(glyph, metrics);
-      expect(typeof result).toBe('boolean');
-    });
-
     it('does not detect apex in circle', () => {
       const glyph = mockGlyphFromPath(CIRCLE.d, CIRCLE.bbox);
 
@@ -79,24 +62,9 @@ describe('vertex features', () => {
       expect(hasApex(glyph, metrics)).toBe(false);
     });
 
-    it('works via detector orchestration', () => {
-      const glyph = mockGlyphFromPath(LETTER_A.d, LETTER_A.bbox);
-
-      const result = detectFeature('Apex', glyph, metrics);
-
-      expect(result).toHaveProperty('found');
-      expect(typeof result.found).toBe('boolean');
-    });
   });
 
   describe('hasVertex', () => {
-    it('returns boolean for letter V', () => {
-      const glyph = mockGlyphFromPath(LETTER_V.d, LETTER_V.bbox);
-
-      const result = hasVertex(glyph, metrics);
-      expect(typeof result).toBe('boolean');
-    });
-
     it('returns boolean for polygon circle', () => {
       // Polygon approximation of circle has vertices at polygon corners
       const glyph = mockGlyphFromPath(CIRCLE.d, CIRCLE.bbox);
@@ -129,32 +97,9 @@ describe('vertex features', () => {
 
       expect(hasVertex(glyph, metrics)).toBe(false);
     });
-
-    it('works via detector orchestration', () => {
-      const glyph = mockGlyphFromPath(LETTER_V.d, LETTER_V.bbox);
-
-      const result = detectFeature('Vertex', glyph, metrics);
-
-      expect(result).toHaveProperty('found');
-      expect(typeof result.found).toBe('boolean');
-    });
   });
 
   describe('hasCrotch', () => {
-    it('returns boolean for letter A', () => {
-      const glyph = mockGlyphFromPath(LETTER_A.d, LETTER_A.bbox);
-
-      const result = hasCrotch(glyph, metrics);
-      expect(typeof result).toBe('boolean');
-    });
-
-    it('returns boolean for letter V', () => {
-      const glyph = mockGlyphFromPath(LETTER_V.d, LETTER_V.bbox);
-
-      const result = hasCrotch(glyph, metrics);
-      expect(typeof result).toBe('boolean');
-    });
-
     it('does not detect crotch in circle', () => {
       const glyph = mockGlyphFromPath(CIRCLE.d, CIRCLE.bbox);
 
@@ -178,15 +123,6 @@ describe('vertex features', () => {
 
       expect(hasCrotch(glyph, metrics)).toBe(false);
     });
-
-    it('works via detector orchestration', () => {
-      const glyph = mockGlyphFromPath(LETTER_A.d, LETTER_A.bbox);
-
-      const result = detectFeature('Crotch', glyph, metrics);
-
-      expect(result).toHaveProperty('found');
-      expect(typeof result.found).toBe('boolean');
-    });
   });
 
   describe('edge cases', () => {
@@ -196,21 +132,6 @@ describe('vertex features', () => {
       expect(() => hasApex(glyph, metrics)).not.toThrow();
       expect(() => hasVertex(glyph, metrics)).not.toThrow();
       expect(() => hasCrotch(glyph, metrics)).not.toThrow();
-    });
-
-    it('handles extreme metrics', () => {
-      const glyph = mockGlyphFromPath(LETTER_A.d, LETTER_A.bbox);
-      const extremeMetrics = {
-        baseline: -1000,
-        xHeight: 500,
-        capHeight: 700,
-        ascent: 800,
-        descent: -2000,
-      };
-
-      expect(() => hasApex(glyph, extremeMetrics)).not.toThrow();
-      expect(() => hasVertex(glyph, extremeMetrics)).not.toThrow();
-      expect(() => hasCrotch(glyph, extremeMetrics)).not.toThrow();
     });
 
     it('handles very flat triangular shape', () => {

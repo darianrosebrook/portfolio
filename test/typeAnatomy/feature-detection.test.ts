@@ -233,23 +233,17 @@ describe('Feature Detection System', () => {
 });
 
 describe('Golden Overlay Tests', () => {
-  let font: Font | null = null;
+  let font!: Font;
 
   beforeAll(() => {
-    font = loadTestFont('Nohemi-VF.ttf');
+    const f = loadTestFont('Nohemi-VF.ttf');
+    if (!f) throw new Error('Nohemi-VF.ttf missing from public/fonts/');
+    font = f;
   });
 
   it('should detect apex in uppercase A', () => {
-    if (!font) {
-      console.warn('Skipping test: Nohemi font not available');
-      return;
-    }
-
     const glyph = getGlyph(font, 'A');
-    if (!glyph) {
-      console.warn('Skipping test: Glyph A not available');
-      return;
-    }
+    if (!glyph) throw new Error('Glyph A missing from Nohemi-VF.ttf');
 
     const cache = buildGeometryCache(glyph, font);
     const apexes = detectFeature(cache, 'apex');
@@ -264,40 +258,24 @@ describe('Golden Overlay Tests', () => {
     }
   });
 
-  it('should detect apex and crotch in uppercase M', () => {
-    if (!font) {
-      console.warn('Skipping test: Nohemi font not available');
-      return;
-    }
-
+  it('should detect vertex and crotch in uppercase M', () => {
     const glyph = getGlyph(font, 'M');
-    if (!glyph) {
-      console.warn('Skipping test: Glyph M not available');
-      return;
-    }
+    if (!glyph) throw new Error('Glyph M missing from Nohemi-VF.ttf');
 
     const cache = buildGeometryCache(glyph, font);
 
-    const apexes = detectFeature(cache, 'apex');
-    if (apexes.length > 0) {
-      expect(apexes[0].confidence).toBeGreaterThanOrEqual(0.5);
-    }
+    // M has corner vertices at its outer strokes
+    const vertices = detectFeature(cache, 'vertex');
+    expect(vertices.length).toBeGreaterThan(0);
 
+    // M's inner V-shape produces a crotch; detection may vary by font
     const crotches = detectFeature(cache, 'crotch');
     expect(crotches.length).toBeGreaterThanOrEqual(0);
   });
 
   it('should detect eye and counter in lowercase e', () => {
-    if (!font) {
-      console.warn('Skipping test: Nohemi font not available');
-      return;
-    }
-
     const glyph = getGlyph(font, 'e');
-    if (!glyph) {
-      console.warn('Skipping test: Glyph e not available');
-      return;
-    }
+    if (!glyph) throw new Error('Glyph e missing from Nohemi-VF.ttf');
 
     const cache = buildGeometryCache(glyph, font);
 
@@ -309,45 +287,25 @@ describe('Golden Overlay Tests', () => {
   });
 
   it('should detect tittle in lowercase i', () => {
-    if (!font) {
-      console.warn('Skipping test: Nohemi font not available');
-      return;
-    }
-
     const glyph = getGlyph(font, 'i');
-    if (!glyph) {
-      console.warn('Skipping test: Glyph i not available');
-      return;
-    }
+    if (!glyph) throw new Error('Glyph i missing from Nohemi-VF.ttf');
 
     const cache = buildGeometryCache(glyph, font);
-
     const tittles = detectFeature(cache, 'tittle');
 
-    if (tittles.length > 0) {
-      expect(tittles[0].confidence).toBeGreaterThanOrEqual(0.5);
+    expect(tittles.length).toBeGreaterThanOrEqual(1);
+    expect(tittles[0].confidence).toBeGreaterThanOrEqual(0.5);
 
-      if (tittles[0].shape.type === 'circle') {
-        const tittleY = tittles[0].shape.cy;
-        const glyphMidY = (cache.glyph.bbox.minY + cache.glyph.bbox.maxY) / 2;
-        expect(tittleY).toBeGreaterThan(glyphMidY);
-      }
-    } else {
-      expect(cache.segments.length).toBeGreaterThan(0);
+    if (tittles[0].shape.type === 'circle') {
+      const tittleY = tittles[0].shape.cy;
+      const glyphMidY = (cache.glyph.bbox.minY + cache.glyph.bbox.maxY) / 2;
+      expect(tittleY).toBeGreaterThan(glyphMidY);
     }
   });
 
   it('should detect bowl, loop, and ear in lowercase g', () => {
-    if (!font) {
-      console.warn('Skipping test: Nohemi font not available');
-      return;
-    }
-
     const glyph = getGlyph(font, 'g');
-    if (!glyph) {
-      console.warn('Skipping test: Glyph g not available');
-      return;
-    }
+    if (!glyph) throw new Error('Glyph g missing from Nohemi-VF.ttf');
 
     const cache = buildGeometryCache(glyph, font);
 
@@ -362,16 +320,8 @@ describe('Golden Overlay Tests', () => {
   });
 
   it('should detect bowl and tail in uppercase Q', () => {
-    if (!font) {
-      console.warn('Skipping test: Nohemi font not available');
-      return;
-    }
-
     const glyph = getGlyph(font, 'Q');
-    if (!glyph) {
-      console.warn('Skipping test: Glyph Q not available');
-      return;
-    }
+    if (!glyph) throw new Error('Glyph Q missing from Nohemi-VF.ttf');
 
     const cache = buildGeometryCache(glyph, font);
 
@@ -395,16 +345,8 @@ describe('Golden Overlay Tests', () => {
   });
 
   it('should detect spine in uppercase S', () => {
-    if (!font) {
-      console.warn('Skipping test: Nohemi font not available');
-      return;
-    }
-
     const glyph = getGlyph(font, 'S');
-    if (!glyph) {
-      console.warn('Skipping test: Glyph S not available');
-      return;
-    }
+    if (!glyph) throw new Error('Glyph S missing from Nohemi-VF.ttf');
 
     const cache = buildGeometryCache(glyph, font);
 

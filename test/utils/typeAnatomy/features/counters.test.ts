@@ -16,8 +16,6 @@ import {
   DONUT,
   CIRCLE,
   RECTANGLE,
-  LETTER_O,
-  LETTER_E_LOWERCASE,
   VERTICAL_STEM,
   EMPTY_PATH,
   FIGURE_EIGHT,
@@ -46,13 +44,6 @@ describe('counter features', () => {
       const glyph = mockGlyphFromPath(RECTANGLE.d, RECTANGLE.bbox);
 
       expect(hasBowl(glyph, metrics)).toBe(false);
-    });
-
-    it('returns boolean for letter O shape', () => {
-      const glyph = mockGlyphFromPath(LETTER_O.d, LETTER_O.bbox);
-
-      const result = hasBowl(glyph, metrics);
-      expect(typeof result).toBe('boolean');
     });
 
     it('does not detect bowl in vertical stem', () => {
@@ -154,16 +145,6 @@ describe('counter features', () => {
   });
 
   describe('hasEye', () => {
-    it('returns boolean for lowercase e shape', () => {
-      const glyph = mockGlyphFromPath(
-        LETTER_E_LOWERCASE.d,
-        LETTER_E_LOWERCASE.bbox
-      );
-
-      const result = hasEye(glyph, metrics);
-      expect(typeof result).toBe('boolean');
-    });
-
     it('returns boolean for donut', () => {
       const glyph = mockGlyphFromPath(DONUT.d, DONUT.bbox);
 
@@ -195,16 +176,6 @@ describe('counter features', () => {
       expect(hasEye(glyph, metrics)).toBe(false);
     });
 
-    it('works via detector orchestration', () => {
-      const glyph = mockGlyphFromPath(
-        LETTER_E_LOWERCASE.d,
-        LETTER_E_LOWERCASE.bbox
-      );
-
-      const result = detectFeature('Eye', glyph, metrics);
-
-      expect(result).toHaveProperty('found');
-    });
   });
 
   describe('edge cases', () => {

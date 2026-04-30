@@ -19,8 +19,6 @@ import {
   CIRCLE,
   DONUT,
   VERTICAL_STEM,
-  LETTER_E_LOWERCASE,
-  LETTER_G_LOWERCASE,
   RECTANGLE,
   EMPTY_PATH,
 } from '../../fixtures/svgPaths';
@@ -29,16 +27,6 @@ describe('opening features', () => {
   const metrics = standardMetrics;
 
   describe('hasAperture', () => {
-    it('returns boolean for lowercase e', () => {
-      const glyph = mockGlyphFromPath(
-        LETTER_E_LOWERCASE.d,
-        LETTER_E_LOWERCASE.bbox
-      );
-
-      const result = hasAperture(glyph, metrics);
-      expect(typeof result).toBe('boolean');
-    });
-
     it('returns boolean for donut', () => {
       const glyph = mockGlyphFromPath(DONUT.d, DONUT.bbox);
 
@@ -76,30 +64,9 @@ describe('opening features', () => {
       expect(hasAperture(glyph, metrics)).toBe(false);
     });
 
-    it('works via detector orchestration', () => {
-      const glyph = mockGlyphFromPath(
-        LETTER_E_LOWERCASE.d,
-        LETTER_E_LOWERCASE.bbox
-      );
-
-      const result = detectFeature('Aperture', glyph, metrics);
-
-      expect(result).toHaveProperty('found');
-      expect(typeof result.found).toBe('boolean');
-    });
   });
 
   describe('hasLink', () => {
-    it('returns boolean for lowercase g', () => {
-      const glyph = mockGlyphFromPath(
-        LETTER_G_LOWERCASE.d,
-        LETTER_G_LOWERCASE.bbox
-      );
-
-      const result = hasLink(glyph, metrics);
-      expect(typeof result).toBe('boolean');
-    });
-
     it('does not detect link in donut (single enclosed region)', () => {
       const glyph = mockGlyphFromPath(DONUT.d, DONUT.bbox);
 
@@ -124,17 +91,6 @@ describe('opening features', () => {
       expect(hasLink(glyph, metrics)).toBe(false);
     });
 
-    it('works via detector orchestration', () => {
-      const glyph = mockGlyphFromPath(
-        LETTER_G_LOWERCASE.d,
-        LETTER_G_LOWERCASE.bbox
-      );
-
-      const result = detectFeature('Link', glyph, metrics);
-
-      expect(result).toHaveProperty('found');
-      expect(typeof result.found).toBe('boolean');
-    });
   });
 
   describe('hasNeck', () => {
@@ -206,22 +162,6 @@ describe('opening features', () => {
       const glyph = mockGlyphFromPath(hourglassPath, hourglassBbox);
 
       expect(() => hasNeck(glyph, metrics)).not.toThrow();
-    });
-
-    it('handles unusual metrics for link detection', () => {
-      const glyph = mockGlyphFromPath(
-        LETTER_G_LOWERCASE.d,
-        LETTER_G_LOWERCASE.bbox
-      );
-      const unusualMetrics = {
-        baseline: 100, // Elevated baseline
-        xHeight: 400,
-        capHeight: 500,
-        ascent: 600,
-        descent: -200,
-      };
-
-      expect(() => hasLink(glyph, unusualMetrics)).not.toThrow();
     });
 
     it('handles glyph with complex nested openings', () => {

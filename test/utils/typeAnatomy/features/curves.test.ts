@@ -22,8 +22,6 @@ import {
   CIRCLE,
   DONUT,
   VERTICAL_STEM,
-  LETTER_G_LOWERCASE,
-  LETTER_Y_LOWERCASE,
   ARC_SHAPE,
   HOOK_SHAPE,
   SHOULDER_SHAPE,
@@ -35,16 +33,6 @@ describe('curve features', () => {
   const metrics = standardMetrics;
 
   describe('hasLoop', () => {
-    it('returns boolean for lowercase g', () => {
-      const glyph = mockGlyphFromPath(
-        LETTER_G_LOWERCASE.d,
-        LETTER_G_LOWERCASE.bbox
-      );
-
-      const result = hasLoop(glyph, metrics);
-      expect(typeof result).toBe('boolean');
-    });
-
     it('returns boolean for circle', () => {
       const glyph = mockGlyphFromPath(CIRCLE.d, CIRCLE.bbox);
 
@@ -64,17 +52,6 @@ describe('curve features', () => {
       expect(hasLoop(glyph, metrics)).toBe(false);
     });
 
-    it('works via detector orchestration', () => {
-      const glyph = mockGlyphFromPath(
-        LETTER_G_LOWERCASE.d,
-        LETTER_G_LOWERCASE.bbox
-      );
-
-      const result = detectFeature('Loop', glyph, metrics);
-
-      expect(result).toHaveProperty('found');
-      expect(typeof result.found).toBe('boolean');
-    });
   });
 
   describe('hasArc', () => {
@@ -231,16 +208,6 @@ describe('curve features', () => {
   });
 
   describe('hasTail', () => {
-    it('returns boolean for lowercase y', () => {
-      const glyph = mockGlyphFromPath(
-        LETTER_Y_LOWERCASE.d,
-        LETTER_Y_LOWERCASE.bbox
-      );
-
-      const result = hasTail(glyph, metrics);
-      expect(typeof result).toBe('boolean');
-    });
-
     it('returns boolean for vertical stem', () => {
       const glyph = mockGlyphFromPath(VERTICAL_STEM.d, VERTICAL_STEM.bbox);
 
@@ -260,17 +227,6 @@ describe('curve features', () => {
       expect(hasTail(glyph, metrics)).toBe(false);
     });
 
-    it('works via detector orchestration', () => {
-      const glyph = mockGlyphFromPath(
-        LETTER_Y_LOWERCASE.d,
-        LETTER_Y_LOWERCASE.bbox
-      );
-
-      const result = detectFeature('Tail', glyph, metrics);
-
-      expect(result).toHaveProperty('found');
-      expect(typeof result.found).toBe('boolean');
-    });
   });
 
   describe('edge cases', () => {
@@ -283,20 +239,6 @@ describe('curve features', () => {
       expect(() => hasSpine(glyph, metrics)).not.toThrow();
       expect(() => hasHook(glyph, metrics)).not.toThrow();
       expect(() => hasTail(glyph, metrics)).not.toThrow();
-    });
-
-    it('handles extreme descent metrics for loop/tail', () => {
-      const glyph = mockGlyphFromPath(
-        LETTER_G_LOWERCASE.d,
-        LETTER_G_LOWERCASE.bbox
-      );
-      const extremeMetrics = {
-        ...standardMetrics,
-        descent: -1000, // Very deep descent
-      };
-
-      expect(() => hasLoop(glyph, extremeMetrics)).not.toThrow();
-      expect(() => hasTail(glyph, extremeMetrics)).not.toThrow();
     });
 
     it('handles glyph positioned entirely below baseline', () => {

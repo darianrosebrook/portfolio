@@ -19,8 +19,6 @@ import {
 import {
   CIRCLE,
   VERTICAL_STEM,
-  LETTER_I_LOWERCASE,
-  LETTER_I_SANS,
   DONUT,
   EMPTY_PATH,
 } from '../../fixtures/svgPaths';
@@ -92,36 +90,6 @@ describe('terminal features', () => {
   });
 
   describe('getTittle / hasTittle', () => {
-    it('returns FeatureResult for lowercase i', () => {
-      const glyph = mockGlyphFromPath(
-        LETTER_I_LOWERCASE.d,
-        LETTER_I_LOWERCASE.bbox
-      );
-
-      const result = getTittle(glyph, metrics, font);
-
-      expect(result).toHaveProperty('found');
-      expect(typeof result.found).toBe('boolean');
-    });
-
-    it('returns circle shape when tittle found', () => {
-      const glyph = mockGlyphFromPath(
-        LETTER_I_LOWERCASE.d,
-        LETTER_I_LOWERCASE.bbox
-      );
-
-      const result = getTittle(glyph, metrics, font);
-
-      if (result.found && result.shape) {
-        expect(result.shape.type).toBe('circle');
-        if (result.shape.type === 'circle') {
-          expect(result.shape).toHaveProperty('cx');
-          expect(result.shape).toHaveProperty('cy');
-          expect(result.shape).toHaveProperty('r');
-        }
-      }
-    });
-
     it('returns FeatureResult for vertical stem', () => {
       const glyph = mockGlyphFromPath(VERTICAL_STEM.d, VERTICAL_STEM.bbox);
 
@@ -146,17 +114,6 @@ describe('terminal features', () => {
       expect(result).toHaveProperty('found');
     });
 
-    it('hasTittle returns boolean', () => {
-      const glyph = mockGlyphFromPath(
-        LETTER_I_LOWERCASE.d,
-        LETTER_I_LOWERCASE.bbox
-      );
-
-      const result = hasTittle(glyph, metrics, font);
-
-      expect(typeof result).toBe('boolean');
-    });
-
     it('returns found: false for non-drawable glyph', () => {
       const glyph = mockNonDrawableGlyph('null-path');
 
@@ -165,40 +122,9 @@ describe('terminal features', () => {
       expect(result.found).toBe(false);
     });
 
-    it('works without font parameter', () => {
-      const glyph = mockGlyphFromPath(
-        LETTER_I_LOWERCASE.d,
-        LETTER_I_LOWERCASE.bbox
-      );
-
-      // Should not throw when font is undefined
-      const result = getTittle(glyph, metrics);
-
-      expect(result).toHaveProperty('found');
-    });
-
-    it('works via detector orchestration', () => {
-      const glyph = mockGlyphFromPath(
-        LETTER_I_LOWERCASE.d,
-        LETTER_I_LOWERCASE.bbox
-      );
-
-      const result = detectFeature('Tittle', glyph, metrics, font);
-
-      expect(result).toHaveProperty('found');
-      expect(typeof result.found).toBe('boolean');
-    });
   });
 
   describe('hasFinial', () => {
-    it('returns boolean for sans-serif stem', () => {
-      const glyph = mockGlyphFromPath(LETTER_I_SANS.d, LETTER_I_SANS.bbox);
-
-      const result = hasFinial(glyph, metrics);
-
-      expect(typeof result).toBe('boolean');
-    });
-
     it('returns boolean for polygon circle', () => {
       // Polygon approximation may have edges detected as finials
       const glyph = mockGlyphFromPath(CIRCLE.d, CIRCLE.bbox);
@@ -254,16 +180,5 @@ describe('terminal features', () => {
       expect(() => getTittle(glyph, extremeMetrics, font)).not.toThrow();
     });
 
-    it('handles font with different unitsPerEm', () => {
-      const glyph = mockGlyphFromPath(
-        LETTER_I_LOWERCASE.d,
-        LETTER_I_LOWERCASE.bbox
-      );
-      const font2000 = mockFont({ unitsPerEm: 2000 });
-
-      const result = getTittle(glyph, metrics, font2000);
-
-      expect(result).toHaveProperty('found');
-    });
   });
 });

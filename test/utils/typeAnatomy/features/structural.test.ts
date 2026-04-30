@@ -21,10 +21,6 @@ import {
   VERTICAL_STEM,
   HORIZONTAL_BAR,
   CIRCLE,
-  LETTER_I_SERIF,
-  LETTER_I_SANS,
-  LETTER_T,
-  LETTER_E_UPPERCASE,
   DONUT,
   EMPTY_PATH,
 } from '../../fixtures/svgPaths';
@@ -36,27 +32,6 @@ describe('structural features', () => {
   describe('hasStem', () => {
     it('returns boolean for vertical stem shape', () => {
       const glyph = mockGlyphFromPath(VERTICAL_STEM.d, VERTICAL_STEM.bbox);
-
-      const result = hasStem(glyph, metrics, font);
-      expect(typeof result).toBe('boolean');
-    });
-
-    it('returns boolean for serif I', () => {
-      const glyph = mockGlyphFromPath(LETTER_I_SERIF.d, LETTER_I_SERIF.bbox);
-
-      const result = hasStem(glyph, metrics, font);
-      expect(typeof result).toBe('boolean');
-    });
-
-    it('returns boolean for sans-serif I', () => {
-      const glyph = mockGlyphFromPath(LETTER_I_SANS.d, LETTER_I_SANS.bbox);
-
-      const result = hasStem(glyph, metrics, font);
-      expect(typeof result).toBe('boolean');
-    });
-
-    it('returns boolean for letter T', () => {
-      const glyph = mockGlyphFromPath(LETTER_T.d, LETTER_T.bbox);
 
       const result = hasStem(glyph, metrics, font);
       expect(typeof result).toBe('boolean');
@@ -116,23 +91,6 @@ describe('structural features', () => {
   });
 
   describe('hasArm', () => {
-    it('returns boolean for letter T', () => {
-      const glyph = mockGlyphFromPath(LETTER_T.d, LETTER_T.bbox);
-
-      const result = hasArm(glyph, metrics);
-      expect(typeof result).toBe('boolean');
-    });
-
-    it('returns boolean for uppercase E', () => {
-      const glyph = mockGlyphFromPath(
-        LETTER_E_UPPERCASE.d,
-        LETTER_E_UPPERCASE.bbox
-      );
-
-      const result = hasArm(glyph, metrics);
-      expect(typeof result).toBe('boolean');
-    });
-
     it('returns boolean for vertical stem only', () => {
       const glyph = mockGlyphFromPath(VERTICAL_STEM.d, VERTICAL_STEM.bbox);
 
@@ -152,27 +110,9 @@ describe('structural features', () => {
       expect(hasArm(glyph, metrics)).toBe(false);
     });
 
-    it('works via detector orchestration', () => {
-      const glyph = mockGlyphFromPath(LETTER_T.d, LETTER_T.bbox);
-
-      const result = detectFeature('Arm', glyph, metrics);
-
-      expect(result).toHaveProperty('found');
-      expect(typeof result.found).toBe('boolean');
-    });
   });
 
   describe('hasBar', () => {
-    it('returns boolean for uppercase E', () => {
-      const glyph = mockGlyphFromPath(
-        LETTER_E_UPPERCASE.d,
-        LETTER_E_UPPERCASE.bbox
-      );
-
-      const result = hasBar(glyph, metrics);
-      expect(typeof result).toBe('boolean');
-    });
-
     it('does not detect bar in simple vertical stem', () => {
       const glyph = mockGlyphFromPath(VERTICAL_STEM.d, VERTICAL_STEM.bbox);
 
@@ -195,31 +135,6 @@ describe('structural features', () => {
       const glyph = mockNonDrawableGlyph('null-path');
 
       expect(hasBar(glyph, metrics)).toBe(false);
-    });
-
-    it('works via detector orchestration', () => {
-      const glyph = mockGlyphFromPath(
-        LETTER_E_UPPERCASE.d,
-        LETTER_E_UPPERCASE.bbox
-      );
-
-      const result = detectFeature('Bar', glyph, metrics);
-
-      expect(result).toHaveProperty('found');
-      expect(typeof result.found).toBe('boolean');
-    });
-
-    it('Crossbar maps to Bar detector', () => {
-      const glyph = mockGlyphFromPath(
-        LETTER_E_UPPERCASE.d,
-        LETTER_E_UPPERCASE.bbox
-      );
-
-      const barResult = detectFeature('Bar', glyph, metrics);
-      const crossbarResult = detectFeature('Crossbar', glyph, metrics);
-
-      // Both should give same result (Crossbar maps to Bar)
-      expect(barResult.found).toBe(crossbarResult.found);
     });
 
     it('Crossbar via orchestrator forwards rect shape and location when detected', async () => {

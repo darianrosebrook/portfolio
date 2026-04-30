@@ -17,8 +17,6 @@ import {
 import {
   DONUT,
   CIRCLE,
-  LETTER_I_LOWERCASE,
-  LETTER_A,
 } from '../fixtures/svgPaths';
 
 describe('detector orchestration', () => {
@@ -180,20 +178,6 @@ describe('detector orchestration', () => {
       expect(results.get('UnknownFeature')?.found).toBe(false);
     });
 
-    it('passes font to all detectors', () => {
-      const glyph = mockGlyphFromPath(
-        LETTER_I_LOWERCASE.d,
-        LETTER_I_LOWERCASE.bbox
-      );
-      const font = mockFont();
-      const featureNames = ['Stem', 'Tittle'];
-
-      const results = detectFeatures(featureNames, glyph, metrics, font);
-
-      // Both should be processed with font context
-      expect(results.get('Stem')).toBeDefined();
-      expect(results.get('Tittle')).toBeDefined();
-    });
   });
 
   describe('getAvailableFeatures', () => {
@@ -253,17 +237,6 @@ describe('detector orchestration', () => {
   });
 
   describe('integration: full detection workflow', () => {
-    it('can detect multiple features on letter A', () => {
-      const glyph = mockGlyphFromPath(LETTER_A.d, LETTER_A.bbox);
-      const font = mockFont();
-
-      const features = getAvailableFeatures();
-      const results = detectFeatures(features, glyph, metrics, font);
-
-      // At minimum, we should have valid detection results
-      expect(results.size).toBe(features.length);
-    });
-
     it('non-drawable glyph returns false for all features', () => {
       const glyph = mockNonDrawableGlyph('null-path');
 

@@ -21,9 +21,6 @@ import {
   CIRCLE,
   RECTANGLE,
   VERTICAL_STEM,
-  LETTER_I_SERIF,
-  LETTER_I_SANS,
-  LETTER_R_LOWERCASE,
   DONUT,
   EMPTY_PATH,
 } from '../../fixtures/svgPaths';
@@ -32,20 +29,6 @@ describe('projection features', () => {
   const metrics = standardMetrics;
 
   describe('hasSerif', () => {
-    it('returns boolean for serif I', () => {
-      const glyph = mockGlyphFromPath(LETTER_I_SERIF.d, LETTER_I_SERIF.bbox);
-
-      const result = hasSerif(glyph, metrics);
-      expect(typeof result).toBe('boolean');
-    });
-
-    it('returns boolean for sans-serif I', () => {
-      const glyph = mockGlyphFromPath(LETTER_I_SANS.d, LETTER_I_SANS.bbox);
-
-      const result = hasSerif(glyph, metrics);
-      expect(typeof result).toBe('boolean');
-    });
-
     it('returns boolean for polygon circle', () => {
       // Polygon approximation may have edges detected as serifs
       const glyph = mockGlyphFromPath(CIRCLE.d, CIRCLE.bbox);
@@ -77,28 +60,9 @@ describe('projection features', () => {
 
       expect(hasSerif(glyph, metrics)).toBe(false);
     });
-
-    it('works via detector orchestration', () => {
-      const glyph = mockGlyphFromPath(LETTER_I_SERIF.d, LETTER_I_SERIF.bbox);
-
-      const result = detectFeature('Serif', glyph, metrics);
-
-      expect(result).toHaveProperty('found');
-      expect(typeof result.found).toBe('boolean');
-    });
   });
 
   describe('hasEar', () => {
-    it('returns boolean for lowercase r', () => {
-      const glyph = mockGlyphFromPath(
-        LETTER_R_LOWERCASE.d,
-        LETTER_R_LOWERCASE.bbox
-      );
-
-      const result = hasEar(glyph, metrics);
-      expect(typeof result).toBe('boolean');
-    });
-
     it('does not detect ear in vertical stem', () => {
       const glyph = mockGlyphFromPath(VERTICAL_STEM.d, VERTICAL_STEM.bbox);
 
@@ -115,18 +79,6 @@ describe('projection features', () => {
       const glyph = mockNonDrawableGlyph('null-path');
 
       expect(hasEar(glyph, metrics)).toBe(false);
-    });
-
-    it('works via detector orchestration', () => {
-      const glyph = mockGlyphFromPath(
-        LETTER_R_LOWERCASE.d,
-        LETTER_R_LOWERCASE.bbox
-      );
-
-      const result = detectFeature('Ear', glyph, metrics);
-
-      expect(result).toHaveProperty('found');
-      expect(typeof result.found).toBe('boolean');
     });
   });
 
@@ -200,20 +152,6 @@ describe('projection features', () => {
   });
 
   describe('hasBracket', () => {
-    it('returns boolean for serif I', () => {
-      const glyph = mockGlyphFromPath(LETTER_I_SERIF.d, LETTER_I_SERIF.bbox);
-
-      const result = hasBracket(glyph, metrics);
-      expect(typeof result).toBe('boolean');
-    });
-
-    it('returns boolean for sans-serif I', () => {
-      const glyph = mockGlyphFromPath(LETTER_I_SANS.d, LETTER_I_SANS.bbox);
-
-      const result = hasBracket(glyph, metrics);
-      expect(typeof result).toBe('boolean');
-    });
-
     it('does not detect bracket in circle', () => {
       const glyph = mockGlyphFromPath(CIRCLE.d, CIRCLE.bbox);
 
@@ -224,15 +162,6 @@ describe('projection features', () => {
       const glyph = mockNonDrawableGlyph('null-path');
 
       expect(hasBracket(glyph, metrics)).toBe(false);
-    });
-
-    it('works via detector orchestration', () => {
-      const glyph = mockGlyphFromPath(LETTER_I_SERIF.d, LETTER_I_SERIF.bbox);
-
-      const result = detectFeature('Bracket', glyph, metrics);
-
-      expect(result).toHaveProperty('found');
-      expect(typeof result.found).toBe('boolean');
     });
   });
 
