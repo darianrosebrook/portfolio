@@ -620,6 +620,17 @@ describe('feature region polygons', () => {
     expectRegionInsideGlyph(tittles[0].region!, glyph.bbox);
   });
 
+  it('traces the actual Nohemi tittle contour, not a circle approximation', () => {
+    // Nohemi's tittle is a 4-sided geometric square. Extracting the actual
+    // contour produces a small-vertex polygon (≤ 12); falling back to a
+    // 32-sided circle approximation would inflate the count and produce a
+    // visibly round overlay where the contour is square.
+    const tittles = detect(nohemi, 'i', 'tittle');
+    expect(tittles).toHaveLength(1);
+    expect(tittles[0].region!.points.length).toBeLessThanOrEqual(12);
+    expect(tittles[0].region!.points.length).toBeGreaterThanOrEqual(3);
+  });
+
   it('emits an enclosed region for the Nohemi e eye', () => {
     const glyph = glyphFor(nohemi, 'e');
     const eyes = detect(nohemi, 'e', 'eye');

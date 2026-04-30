@@ -3,6 +3,7 @@ import {
   rectToPolygon,
   circleToPolygon,
   polylineToPolygon,
+  extractContourPolygon,
 } from './regionFromShape';
 
 describe('rectToPolygon', () => {
@@ -73,5 +74,79 @@ describe('polylineToPolygon', () => {
   it('returns [] for fewer than 2 points', () => {
     expect(polylineToPolygon({ points: [] })).toEqual([]);
     expect(polylineToPolygon({ points: [{ x: 0, y: 0 }] })).toEqual([]);
+  });
+});
+
+describe('extractContourPolygon', () => {
+  function mockGlyphWith(commands: Array<{ command: string; args: number[] }>) {
+    return { path: { commands } };
+  }
+
+  it('extracts a square contour as 4 vertices (Nohemi-style geometric tittle)', () => {
+    const glyph = mockGlyphWith([
+      { command: 'moveTo', args: [100, 700] },
+      { command: 'lineTo', args: [180, 700] },
+      { command: 'lineTo', args: [180, 780] },
+      { command: 'lineTo', args: [100, 780] },
+      { command: 'closePath', args: [] },
+    ]);
+    const poly = extractContourPolygon(glyph, 0, 4);
+    expect(poly).toHaveLength(4);
+    expect(poly).toEqual([
+      { x: 100, y: 700 },
+      { x: 180, y: 700 },
+      { x: 180, y: 780 },
+      { x: 100, y: 780 },
+    ]);
+  });
+
+  it('drops trailing duplicate of first point', () => {
+    const glyph = mockGlyphWith([
+      { command: 'moveTo', args: [0, 0] },
+      { command: 'lineTo', args: [10, 0] },
+      { command: 'lineTo', args: [10, 10] },
+      { command: 'lineTo', args: [0, 0] }, // duplicate of moveTo
+    ]);
+    const poly = extractContourPolygon(glyph, 0, 3);
+    expect(poly).toHaveLength(3);
+  });
+
+  it('records bezier endpoints (not control points)', () => {
+    // Triangle traced via three bezier curves; the helper must record the
+    // ENDPOINT of each curve, not the control points. If it grabbed the
+    // control points instead, the polygon would zigzag through (10,50),
+    // (110,-50), and (-50,50) — entirely outside the actual triangle.
+    const glyph = mockGlyphWith([
+      { command: 'moveTo', args: [0, 0] },
+      { command: 'bezierCurveTo', args: [10, 50, 90, 50, 100, 0] }, // → (100,0)
+      { command: 'bezierCurveTo', args: [110, -50, 60, -50, 50, -50] }, // → (50,-50)
+      { command: 'bezierCurveTo', args: [-50, 50, -50, 0, 0, 0] }, // → (0,0) closure
+    ]);
+    const poly = extractContourPolygon(glyph, 0, 3);
+    expect(poly).toHaveLength(3);
+    expect(poly[0]).toEqual({ x: 0, y: 0 });
+    expect(poly[1]).toEqual({ x: 100, y: 0 });
+    expect(poly[2]).toEqual({ x: 50, y: -50 });
+  });
+
+  it('returns [] on unknown commands (forces caller to use approximation fallback)', () => {
+    const glyph = mockGlyphWith([
+      { command: 'moveTo', args: [0, 0] },
+      { command: 'arcTo', args: [10, 10] },
+      { command: 'lineTo', args: [20, 20] },
+    ]);
+    expect(extractContourPolygon(glyph, 0, 2)).toEqual([]);
+  });
+
+  it('returns [] for a glyph missing path data', () => {
+    expect(extractContourPolygon({}, 0, 0)).toEqual([]);
+  });
+
+  it('returns [] when the slice produces fewer than 3 vertices', () => {
+    const glyph = mockGlyphWith([
+      { command: 'moveTo', args: [0, 0] },
+      { command: 'lineTo', args: [10, 10] },
+    ]);
+    expect(extractContourPolygon(glyph, 0, 1)).toEqual([]);
   });
 });

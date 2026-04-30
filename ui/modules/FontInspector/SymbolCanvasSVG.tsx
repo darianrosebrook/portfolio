@@ -722,6 +722,15 @@ export const SymbolCanvasSVG: React.FC = () => {
         {/* SVG Definitions */}
         <SVGDefs idPrefix="fi" />
 
+        {/* Per-feature clip-path defs.
+         * IMPORTANT: clipPath URL refs (e.g. clip-path="url(#clip-stem-0)")
+         * only resolve when the matching clipPath element is mounted in
+         * the document. They go at the root, NOT inside the highlights
+         * layer where the layer filter would discard them. */}
+        {featureElements.filter((el) =>
+          el.key?.toString().startsWith('defs-')
+        )}
+
         {/* Layer 1: Background */}
         <g id="bg" aria-hidden="true">
           {/* Secondary background when showing details */}
@@ -789,7 +798,8 @@ export const SymbolCanvasSVG: React.FC = () => {
           {featureElements.filter(
             (el) =>
               el.key?.toString().startsWith('highlight-') ||
-              el.key?.toString().startsWith('shape-')
+              el.key?.toString().startsWith('shape-') ||
+              el.key?.toString().startsWith('marker-')
           )}
         </g>
 

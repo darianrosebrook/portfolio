@@ -950,13 +950,90 @@ export interface DrawFeatureOptions {
 }
 
 /**
+ * Clip the glyph fill against an arbitrary polygon region and paint the
+ * intersection in the highlight color. Counterpart to
+ * `drawClippedGlyphFeature`, which only handles rectangular clip regions —
+ * this version supports the polygons emitted by detectors via
+ * `FeatureInstance.region`. Used for stroke-kind regions (stems, bars,
+ * tittles, bowls).
+ *
+ * `regionPoints` must already be in canvas coordinates (transformPoint
+ * applied by the caller).
+ */
+export function drawClippedGlyphRegion(
+  ctx: CanvasRenderingContext2D,
+  glyph: Glyph,
+  scale: number,
+  regionPoints: Point2D[],
+  colors: DrawColors
+): void {
+  if (!glyph?.path?.commands || regionPoints.length < 3) return;
+
+  ctx.save();
+
+  // Build the polygon clip path.
+  ctx.beginPath();
+  ctx.moveTo(regionPoints[0].x, regionPoints[0].y);
+  for (let i = 1; i < regionPoints.length; i++) {
+    ctx.lineTo(regionPoints[i].x, regionPoints[i].y);
+  }
+  ctx.closePath();
+  ctx.clip();
+
+  // Render the glyph fill within the clip.
+  ctx.beginPath();
+  for (const cmd of glyph.path.commands) {
+    const args = cmd.args.map((a: number, i: number) =>
+      i % 2 === 0 ? a * scale : -a * scale
+    );
+    (ctx[cmd.command as keyof CanvasPath] as (...args: number[]) => void)(
+      ...args
+    );
+  }
+  ctx.fillStyle = colors.highlightBackground;
+  ctx.fill('evenodd');
+
+  ctx.restore();
+}
+
+/**
+ * Paint a polygon region directly with the highlight color. Used for
+ * enclosed-kind regions (counters, eyes, apertures) where the polygon IS
+ * the visible feature, not a clip mask against the glyph fill.
+ *
+ * `regionPoints` must already be in canvas coordinates.
+ */
+export function drawEnclosedRegion(
+  ctx: CanvasRenderingContext2D,
+  regionPoints: Point2D[],
+  colors: DrawColors
+): void {
+  if (regionPoints.length < 3) return;
+
+  ctx.save();
+  ctx.beginPath();
+  ctx.moveTo(regionPoints[0].x, regionPoints[0].y);
+  for (let i = 1; i < regionPoints.length; i++) {
+    ctx.lineTo(regionPoints[i].x, regionPoints[i].y);
+  }
+  ctx.closePath();
+
+  ctx.fillStyle = colors.highlightBackground;
+  ctx.fill();
+  ctx.restore();
+}
+
+/**
  * Draws a feature instance with coordinate transformation.
  *
- * @param ctx - Canvas context
- * @param instance - Feature instance from detector
- * @param params - Transform parameters (scale, xOffset, baseline)
- * @param colors - Color scheme
- * @param options - Optional drawing options (glyph for clipping, etc.)
+ * Resolution order:
+ *   1. `instance.region` is preferred when present and valid — it carries
+ *      the actual polygon the renderer should clip or fill. This is how
+ *      detectors communicate "the highlight should look like THIS shape
+ *      inside the glyph silhouette," matching the Coles diagram style.
+ *   2. Fallback: `instance.shape` rendering. For rect shapes with
+ *      useClipping=true, the renderer clips the rect against the glyph
+ *      fill (legacy path). Otherwise, the shape is drawn directly.
  */
 export function drawFeatureInstance(
   ctx: CanvasRenderingContext2D,
@@ -965,6 +1042,28 @@ export function drawFeatureInstance(
   colors: DrawColors,
   options?: DrawFeatureOptions
 ): void {
+  if (
+    instance.region &&
+    instance.region.points.length >= 3 &&
+    options?.glyph
+  ) {
+    const transformedPoints = instance.region.points.map((p) =>
+      transformPoint(p, params)
+    );
+    if (instance.region.kind === 'stroke') {
+      drawClippedGlyphRegion(
+        ctx,
+        options.glyph,
+        params.scale,
+        transformedPoints,
+        colors
+      );
+    } else {
+      drawEnclosedRegion(ctx, transformedPoints, colors);
+    }
+    return;
+  }
+
   const transformed = transformShape(instance.shape, params);
 
   // For rect shapes, optionally use glyph clipping for precise geometry

@@ -21,7 +21,10 @@
 
 import type { FeatureInstance, GeometryCache } from '../types';
 import { getMarkContours } from '../geometryCache';
-import { circleToPolygon } from '../evidence/regionFromShape';
+import {
+  circleToPolygon,
+  extractContourPolygon,
+} from '../evidence/regionFromShape';
 import {
   type ContourGroup,
   findMainBodyGroup,
@@ -97,10 +100,22 @@ export function detectTittle(geo: GeometryCache): FeatureInstance[] {
     const r = Math.max(width, height) / 2;
 
     const circle = { type: 'circle' as const, cx, cy, r };
+    // Prefer the actual mark contour over a circle approximation: Nohemi's
+    // tittle is square, Inter's is round, Newsreader's is teardrop. Fall
+    // back to the circle approximation when extraction can't trace the
+    // contour (e.g., arc commands that the helper rejects).
+    const contourPolygon = extractContourPolygon(
+      geo.glyph,
+      mark.startIndex,
+      mark.endIndex
+    );
+    const regionPoints =
+      contourPolygon.length >= 3 ? contourPolygon : circleToPolygon(circle);
+
     instances.push({
       id: 'tittle',
       shape: circle,
-      region: { kind: 'stroke', points: circleToPolygon(circle) },
+      region: { kind: 'stroke', points: regionPoints },
       confidence: 0.95,
       anchors: {
         center: { x: cx, y: cy },
