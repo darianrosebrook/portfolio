@@ -3,21 +3,20 @@
 import { createClient } from './server';
 
 /**
- * Checks for an active user session.
- * @returns {Promise<Session | null>} A promise that resolves to the user session if it exists, otherwise null.
+ * Checks for a verified authenticated user.
+ *
+ * Server code must not trust `auth.getSession()` because it reads cookie
+ * storage without guaranteeing token revalidation. Verified claims validate
+ * the JWT signature and are safe for auth checks.
+ *
+ * @returns {Promise<boolean>} Whether a verified authenticated user exists.
  */
-export async function checkForAuth() {
+export async function checkForAuth(): Promise<boolean> {
   const client = await createClient();
-  const {
-    data: { session },
-    error,
-  } = await client.auth.getSession();
+  const { data, error } = await client.auth.getClaims();
   if (error) {
-    console.error('Error fetching session:', error);
+    console.error('Error verifying auth claims:', error);
   }
-  if (session) {
-    return session;
-  } else {
-    return null;
-  }
+
+  return Boolean(data?.claims?.sub);
 }

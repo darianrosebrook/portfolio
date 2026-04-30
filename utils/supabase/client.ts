@@ -19,4 +19,7 @@ import { env } from '@/utils/env';
  * ```
  */
 export const createClient = () =>
-  createBrowserClient(env.nextPublicSupabaseUrl, env.nextPublicSupabaseAnonKey);
+  createBrowserClient(
+    env.nextPublicSupabaseUrl,
+    env.nextPublicSupabasePublishableKey
+  );

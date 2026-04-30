@@ -89,33 +89,13 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
         } = await supabase.auth.getUser();
 
         if (userError) {
-          // If getUser fails, fall back to getSession for cached data
           if (process.env.NODE_ENV === 'development') {
-            console.warn(
-              'getUser failed, falling back to getSession:',
-              userError.message
-            );
+            console.warn('getUser failed:', userError.message);
           }
-          const {
-            data: { session },
-            error: sessionError,
-          } = await supabase.auth.getSession();
-
-          if (sessionError) {
-            console.error('Error getting session:', sessionError);
-            if (isMounted) {
-              setError(sessionError.message);
-              setLoading(false);
-            }
-            return;
-          }
-
-          if (session?.user && isMounted) {
-            setUser(session.user);
-            const profileData = await fetchProfile(session.user.id);
-            if (isMounted) {
-              setProfile(profileData);
-            }
+          if (isMounted) {
+            setUser(null);
+            setProfile(null);
+            setError(userError.message);
           }
         } else if (authUser && isMounted) {
           setUser(authUser);

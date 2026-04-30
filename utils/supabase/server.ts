@@ -25,7 +25,7 @@ export async function createClient() {
 
   return createServerClient(
     env.nextPublicSupabaseUrl,
-    env.nextPublicSupabaseAnonKey,
+    env.nextPublicSupabasePublishableKey,
     {
       cookies: {
         getAll() {
@@ -40,11 +40,7 @@ export async function createClient() {
         ) {
           try {
             cookiesToSet.forEach(({ name, value, options }) =>
-              // Ensure cookies are NOT httpOnly so browser client can read them
-              cookieStore.set(name, value, {
-                ...options,
-                httpOnly: false,
-              })
+              cookieStore.set(name, value, options)
             );
           } catch {
             // The `setAll` method was called from a Server Component.

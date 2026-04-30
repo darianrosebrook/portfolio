@@ -13,8 +13,8 @@
 interface Environment {
   /** Supabase project URL (required) */
   nextPublicSupabaseUrl: string;
-  /** Supabase anonymous/public key (required) */
-  nextPublicSupabaseAnonKey: string;
+  /** Supabase publishable key (required; legacy anon key fallback supported) */
+  nextPublicSupabasePublishableKey: string;
   /** Node.js environment (development/production/test) */
   nodeEnv: string;
   /** Custom site URL override (optional) */
@@ -75,10 +75,11 @@ const supabaseUrl = validateEnvVar(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   'https://placeholder.supabase.co'
 );
-const supabaseAnonKey = validateEnvVar(
-  'NEXT_PUBLIC_SUPABASE_ANON_KEY',
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-  'placeholder_anon_key'
+const supabasePublishableKey = validateEnvVar(
+  'NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY',
+  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ??
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+  'placeholder_publishable_key'
 );
 
 // Warn if using placeholder values (server-side only)
@@ -88,7 +89,7 @@ if (
   typeof window === 'undefined' &&
   process.env.NODE_ENV !== 'test' &&
   (supabaseUrl.includes('placeholder') ||
-    supabaseAnonKey === 'placeholder_anon_key')
+    supabasePublishableKey === 'placeholder_publishable_key')
 ) {
   const message =
     '\n' +
@@ -98,7 +99,7 @@ if (
     '\n' +
     'Create a .env.local file with real credentials:\n' +
     '  NEXT_PUBLIC_SUPABASE_URL=your-project-url\n' +
-    '  NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key\n' +
+    '  NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your-publishable-key\n' +
     '\n' +
     'See .env.local.example for template.\n' +
     '================================================\n';
@@ -109,7 +110,7 @@ if (
 export const env: Environment = {
   // Client-side variables (available in browser via NEXT_PUBLIC_ prefix)
   nextPublicSupabaseUrl: supabaseUrl,
-  nextPublicSupabaseAnonKey: supabaseAnonKey,
+  nextPublicSupabasePublishableKey: supabasePublishableKey,
 
   nodeEnv: process.env.NODE_ENV || 'development',
   NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,

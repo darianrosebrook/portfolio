@@ -1,8 +1,7 @@
 import { NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
-// The client you created from the Server-Side Auth instructions
 import { env } from '@/utils/env';
-import { createServerClient, type CookieOptions } from '@supabase/ssr';
+import { createClient } from '@/utils/supabase/server';
+import { getSafeRedirectPath } from '@/utils/supabase/redirect';
 
 // Force Node.js runtime instead of Edge to avoid DNS resolution issues
 export const runtime = 'nodejs';
@@ -10,42 +9,12 @@ export const runtime = 'nodejs';
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get('code');
-  // if "next" is in param, use it as the redirect URL
-  const next = searchParams.get('next') ?? '/';
+  const next = getSafeRedirectPath(searchParams.get('next'));
 
   if (code) {
     try {
-      const cookieStore = await cookies();
-
-      // Create a supabase client that can set cookies on the response
-      const supabase = createServerClient(
-        env.nextPublicSupabaseUrl,
-        env.nextPublicSupabaseAnonKey,
-        {
-          cookies: {
-            getAll() {
-              return cookieStore.getAll();
-            },
-            setAll(
-              cookiesToSet: {
-                name: string;
-                value: string;
-                options: CookieOptions;
-              }[]
-            ) {
-              cookiesToSet.forEach(({ name, value, options }) => {
-                cookieStore.set(name, value, {
-                  ...options,
-                  // Ensure cookies are accessible to browser JS
-                  httpOnly: false,
-                });
-              });
-            },
-          },
-        }
-      );
-
-      const { data, error } = await supabase.auth.exchangeCodeForSession(code);
+      const supabase = await createClient();
+      const { error } = await supabase.auth.exchangeCodeForSession(code);
 
       if (error) {
         console.error('[Auth Callback] Exchange error:', error.message);

@@ -10,7 +10,7 @@ export async function updateSession(request: NextRequest) {
   // Create supabase client that can read and write cookies
   const supabase = createServerClient(
     env.nextPublicSupabaseUrl,
-    env.nextPublicSupabaseAnonKey,
+    env.nextPublicSupabasePublishableKey,
     {
       cookies: {
         getAll() {
@@ -30,26 +30,22 @@ export async function updateSession(request: NextRequest) {
             request,
           });
           cookiesToSet.forEach(({ name, value, options }) =>
-            // Ensure cookies are NOT httpOnly so browser client can read them
-            supabaseResponse.cookies.set(name, value, {
-              ...options,
-              httpOnly: false,
-            })
+            supabaseResponse.cookies.set(name, value, options)
           );
         },
       },
     }
   );
 
-  // IMPORTANT: This call refreshes the session if needed and updates cookies
-  // Without this, the browser client won't be able to read the session
+  // IMPORTANT: This call refreshes the session if needed and updates cookies.
+  // Use verified claims for route protection; request cookies can be spoofed.
   const {
-    data: { user },
-  } = await supabase.auth.getUser();
+    data: claimsData,
+  } = await supabase.auth.getClaims();
 
   // Protect /dashboard routes
   if (request.nextUrl.pathname.startsWith('/dashboard')) {
-    if (!user) {
+    if (!claimsData?.claims?.sub) {
       const url = request.nextUrl.clone();
       url.pathname = '/';
       return NextResponse.redirect(url);
