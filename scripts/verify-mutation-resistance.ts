@@ -231,6 +231,74 @@ const PROBES: Probe[] = [
       },
     ],
   },
+  {
+    id: 'C1',
+    description:
+      'rectToPolygon returns [] → H stem region tests fail (region polygon empty)',
+    targetFile: 'utils/typeAnatomy/evidence/regionFromShape.ts',
+    mutation: {
+      search:
+        /(export function rectToPolygon\(rect: \{\n  x: number;\n  y: number;\n  width: number;\n  height: number;\n\}\): Point2D\[\] \{\n)/,
+      replace: '$1  void rect; return [];\n',
+    },
+    expectedFlips: [
+      {
+        fullName:
+          'feature region polygons emits stroke regions for both Nohemi H stems',
+        testFile: 'test/typeAnatomy/feature-accuracy.test.ts',
+      },
+      {
+        fullName:
+          'feature region polygons emits a stroke region for the Nohemi H crossbar',
+        testFile: 'test/typeAnatomy/feature-accuracy.test.ts',
+      },
+    ],
+  },
+  {
+    id: 'C2',
+    description:
+      'detectStem omits region field → runtime-region Inter H stems test fails',
+    targetFile: 'utils/typeAnatomy/detectors/stem.ts',
+    mutation: {
+      // Strip the `region: { ... }` line from the stem instance push. The
+      // runtime test asserts every stem carries a region; with the field
+      // missing the assertion flips.
+      search:
+        /      region: \{ kind: 'stroke', points: rectToPolygon\(rect\) \},\n/,
+      replace: '',
+    },
+    expectedFlips: [
+      {
+        fullName:
+          'runtime region computation (no precomputed geometry) computes a stroke region for Inter H stems on demand',
+        testFile: 'test/typeAnatomy/runtime-region.test.ts',
+      },
+      {
+        fullName:
+          'feature region polygons emits stroke regions for both Nohemi H stems',
+        testFile: 'test/typeAnatomy/feature-accuracy.test.ts',
+      },
+    ],
+  },
+  {
+    id: 'C3',
+    description:
+      'circleToPolygon returns 0 vertices → tittle region region polygon empty',
+    targetFile: 'utils/typeAnatomy/evidence/regionFromShape.ts',
+    mutation: {
+      // Force the loop bound to 0; result is a 0-vertex polygon, which fails
+      // the `points.length >= 3` assertion in the tittle region test.
+      search: /  for \(let i = 0; i < sides; i\+\+\) \{/,
+      replace: '  for (let i = 0; i < 0; i++) {',
+    },
+    expectedFlips: [
+      {
+        fullName:
+          'feature region polygons emits a stroke region for the Nohemi i tittle',
+        testFile: 'test/typeAnatomy/feature-accuracy.test.ts',
+      },
+    ],
+  },
 ];
 
 interface VitestTaskResult {

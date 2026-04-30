@@ -21,6 +21,7 @@
 
 import type { FeatureInstance, GeometryCache } from '../types';
 import { getMarkContours } from '../geometryCache';
+import { circleToPolygon } from '../evidence/regionFromShape';
 import {
   type ContourGroup,
   findMainBodyGroup,
@@ -95,9 +96,11 @@ export function detectTittle(geo: GeometryCache): FeatureInstance[] {
     const cy = (mark.bbox.minY + mark.bbox.maxY) / 2;
     const r = Math.max(width, height) / 2;
 
+    const circle = { type: 'circle' as const, cx, cy, r };
     instances.push({
       id: 'tittle',
-      shape: { type: 'circle', cx, cy, r },
+      shape: circle,
+      region: { kind: 'stroke', points: circleToPolygon(circle) },
       confidence: 0.95,
       anchors: {
         center: { x: cx, y: cy },

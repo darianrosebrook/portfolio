@@ -65,6 +65,34 @@ export type FeatureShape =
   | { type: 'rect'; x: number; y: number; width: number; height: number };
 
 /**
+ * How a region polygon should be drawn.
+ *
+ * `'stroke'`  — the polygon is a bounding region; the renderer clips the
+ *               glyph fill against it. The visible highlight is the
+ *               intersection of the polygon and the glyph silhouette.
+ *               Used for stems, arms, bars, bowls, tittles — features
+ *               that ARE part of the glyph fill.
+ *
+ * `'enclosed'` — the polygon IS the visible region; the renderer fills it
+ *                directly. Used for counters, eyes — features that
+ *                describe the EMPTY space inside the glyph.
+ */
+export type RegionKind = 'stroke' | 'enclosed';
+
+/**
+ * Closed polygon describing where a feature should be highlighted.
+ * Coordinates are in glyph design space (UPM units); closure is implicit
+ * (the renderer connects the last point to the first).
+ *
+ * Computed at detection time from the geometry cache — never pre-baked
+ * per font.
+ */
+export interface RegionPolygon {
+  points: Point2D[];
+  kind: RegionKind;
+}
+
+/**
  * Result of a single feature detection.
  * Each detector may return zero, one, or multiple instances.
  */
@@ -77,6 +105,14 @@ export interface FeatureInstance {
   confidence: number;
   /** Named anchor points for additional rendering (apex tip, bar endpoints, etc.) */
   anchors?: Record<string, Point2D>;
+  /**
+   * Optional renderable region. When present, the visual overlay highlights
+   * this polygon — clipped against the glyph fill (`kind: 'stroke'`) or
+   * filled directly (`kind: 'enclosed'`) — instead of the marker shape.
+   * Detectors that don't have polygon-shaped geometry leave this undefined;
+   * the renderer falls back to drawing the `shape` field.
+   */
+  region?: RegionPolygon;
   /** Optional debug data for development */
   debug?: unknown;
 }

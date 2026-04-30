@@ -12,6 +12,7 @@
 
 import { getHoleContours } from '../geometryCache';
 import { rayHits, isInside } from '@/utils/geometry/geometryCore';
+import { polylineToPolygon, rectToPolygon } from '../evidence/regionFromShape';
 import type { FeatureInstance, GeometryCache, Point2D } from '../types';
 
 /**
@@ -51,16 +52,21 @@ export function detectBowl(geo: GeometryCache): FeatureInstance[] {
         const minY = Math.min(...bowlOutline.map((p) => p.y));
         const maxY = Math.max(...bowlOutline.map((p) => p.y));
 
-        // Use rect shape for clipping-based rendering
-        // This will show the actual glyph geometry within the bowl region
+        // Region: prefer the traced bowl outline (tighter visual match to
+        // the actual bowl curve) over the bounding rect.
+        const rect = {
+          type: 'rect' as const,
+          x: minX,
+          y: minY,
+          width: maxX - minX,
+          height: maxY - minY,
+        };
         instances.push({
           id: 'bowl',
-          shape: {
-            type: 'rect',
-            x: minX,
-            y: minY,
-            width: maxX - minX,
-            height: maxY - minY,
+          shape: rect,
+          region: {
+            kind: 'stroke',
+            points: polylineToPolygon({ points: bowlOutline }),
           },
           confidence: 0.85,
           anchors: {
@@ -78,16 +84,18 @@ export function detectBowl(geo: GeometryCache): FeatureInstance[] {
         const holeWidth = hole.bbox.maxX - hole.bbox.minX;
         const holeHeight = hole.bbox.maxY - hole.bbox.minY;
         const padding = stemWidth * 1.2;
+        const rect = {
+          type: 'rect' as const,
+          x: hole.bbox.minX - padding,
+          y: hole.bbox.minY - padding,
+          width: holeWidth + padding * 2,
+          height: holeHeight + padding * 2,
+        };
 
         instances.push({
           id: 'bowl',
-          shape: {
-            type: 'rect',
-            x: hole.bbox.minX - padding,
-            y: hole.bbox.minY - padding,
-            width: holeWidth + padding * 2,
-            height: holeHeight + padding * 2,
-          },
+          shape: rect,
+          region: { kind: 'stroke', points: rectToPolygon(rect) },
           confidence: 0.7,
           anchors: {
             center: { x: cx, y: cy },
@@ -126,15 +134,20 @@ export function detectBowl(geo: GeometryCache): FeatureInstance[] {
     const maxY = Math.max(...outline.map((p) => p.y));
     const centroid = calculateCentroid(outline);
 
-    // Use rect shape for clipping-based rendering
+    // Region: prefer the traced outline (tighter than the bounding rect).
+    const rect = {
+      type: 'rect' as const,
+      x: minX,
+      y: minY,
+      width: maxX - minX,
+      height: maxY - minY,
+    };
     instances.push({
       id: 'bowl',
-      shape: {
-        type: 'rect',
-        x: minX,
-        y: minY,
-        width: maxX - minX,
-        height: maxY - minY,
+      shape: rect,
+      region: {
+        kind: 'stroke',
+        points: polylineToPolygon({ points: outline }),
       },
       confidence: 0.65,
       anchors: {

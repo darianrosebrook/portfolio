@@ -13,6 +13,10 @@
 
 import { isInside, rayHits } from '@/utils/geometry/geometryCore';
 import { getHoleContours } from '../geometryCache';
+import {
+  circleToPolygon,
+  polylineToPolygon,
+} from '../evidence/regionFromShape';
 import type { FeatureInstance, GeometryCache, Point2D } from '../types';
 
 /**
@@ -43,14 +47,25 @@ export function detectCounter(geo: GeometryCache): FeatureInstance[] {
         hole.endIndex
       );
 
+      // Always trace a polygon for the region — path shapes can't be filled
+      // as a single SVG polygon, so the region uses the radial trace.
+      const tracedOutline = traceHoleContour(geo, { x: cx, y: cy });
+
       if (holePath) {
-        // Use path shape for exact counter geometry
+        // Use path shape for exact counter geometry; region uses traced polyline.
         instances.push({
           id: 'counter',
           shape: {
             type: 'path',
             d: holePath,
           },
+          region:
+            tracedOutline && tracedOutline.length >= 6
+              ? {
+                  kind: 'enclosed',
+                  points: polylineToPolygon({ points: tracedOutline }),
+                }
+              : undefined,
           confidence: 0.9,
           anchors: {
             center: { x: cx, y: cy },
@@ -61,44 +76,47 @@ export function detectCounter(geo: GeometryCache): FeatureInstance[] {
             area: hole.area,
           },
         });
-      } else {
+      } else if (tracedOutline && tracedOutline.length >= 6) {
         // Fallback to polyline if path extraction fails
-        const outline = traceHoleContour(geo, { x: cx, y: cy });
-        if (outline && outline.length >= 6) {
-          instances.push({
-            id: 'counter',
-            shape: { type: 'polyline', points: outline },
-            confidence: 0.8,
-            anchors: {
-              center: { x: cx, y: cy },
-            },
-            debug: {
-              source: 'hole-contour-traced',
-              contourIndex: hole.index,
-            },
-          });
-        } else {
-          // Last resort: circle approximation
-          const width = hole.bbox.maxX - hole.bbox.minX;
-          const height = hole.bbox.maxY - hole.bbox.minY;
-          instances.push({
-            id: 'counter',
-            shape: {
-              type: 'circle',
-              cx,
-              cy,
-              r: Math.min(width, height) / 2,
-            },
-            confidence: 0.7,
-            anchors: {
-              center: { x: cx, y: cy },
-            },
-            debug: {
-              source: 'hole-contour-circle',
-              contourIndex: hole.index,
-            },
-          });
-        }
+        instances.push({
+          id: 'counter',
+          shape: { type: 'polyline', points: tracedOutline },
+          region: {
+            kind: 'enclosed',
+            points: polylineToPolygon({ points: tracedOutline }),
+          },
+          confidence: 0.8,
+          anchors: {
+            center: { x: cx, y: cy },
+          },
+          debug: {
+            source: 'hole-contour-traced',
+            contourIndex: hole.index,
+          },
+        });
+      } else {
+        // Last resort: circle approximation
+        const width = hole.bbox.maxX - hole.bbox.minX;
+        const height = hole.bbox.maxY - hole.bbox.minY;
+        const circle = {
+          type: 'circle' as const,
+          cx,
+          cy,
+          r: Math.min(width, height) / 2,
+        };
+        instances.push({
+          id: 'counter',
+          shape: circle,
+          region: { kind: 'enclosed', points: circleToPolygon(circle) },
+          confidence: 0.7,
+          anchors: {
+            center: { x: cx, y: cy },
+          },
+          debug: {
+            source: 'hole-contour-circle',
+            contourIndex: hole.index,
+          },
+        });
       }
     }
     return instances;
@@ -125,6 +143,10 @@ export function detectCounter(geo: GeometryCache): FeatureInstance[] {
   instances.push({
     id: 'counter',
     shape: { type: 'polyline', points: outline },
+    region: {
+      kind: 'enclosed',
+      points: polylineToPolygon({ points: outline }),
+    },
     confidence: 0.7,
     anchors: {
       seed,

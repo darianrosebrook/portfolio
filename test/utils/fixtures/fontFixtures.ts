@@ -22,6 +22,8 @@ import type {
   FeatureID,
   FeatureInstance,
   FeatureShape,
+  Point2D,
+  RegionPolygon,
 } from '@/utils/typeAnatomy/types';
 
 export type FontName =
@@ -122,4 +124,29 @@ export function normalized(
 export function expectInRange(value: number, min: number, max: number): void {
   expect(value).toBeGreaterThanOrEqual(min);
   expect(value).toBeLessThanOrEqual(max);
+}
+
+export function regionBBox(region: RegionPolygon): BBox {
+  const xs = region.points.map((p) => p.x);
+  const ys = region.points.map((p) => p.y);
+  return {
+    minX: Math.min(...xs),
+    maxX: Math.max(...xs),
+    minY: Math.min(...ys),
+    maxY: Math.max(...ys),
+  };
+}
+
+/** Even-odd point-in-polygon test. */
+export function pointInPolygon(p: Point2D, polygon: Point2D[]): boolean {
+  let inside = false;
+  for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+    const a = polygon[i];
+    const b = polygon[j];
+    const intersect =
+      a.y > p.y !== b.y > p.y &&
+      p.x < ((b.x - a.x) * (p.y - a.y)) / (b.y - a.y) + a.x;
+    if (intersect) inside = !inside;
+  }
+  return inside;
 }

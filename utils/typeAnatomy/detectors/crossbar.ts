@@ -17,6 +17,7 @@
 
 import { rayHits } from '@/utils/geometry/geometryCore';
 import { measureOrthogonalThickness } from '../evidence/measureOrthogonalThickness';
+import { rectToPolygon } from '../evidence/regionFromShape';
 import type { FeatureInstance, FeatureShape, GeometryCache } from '../types';
 
 /**
@@ -204,15 +205,17 @@ export function detectCrossbar(geo: GeometryCache): FeatureInstance[] {
     const centerY =
       thicknessMeasurement.selectedPairCenterOnProbeAxis ?? avgY;
 
+    const rect = {
+      type: 'rect' as const,
+      x: avgX1,
+      y: centerY - measuredHeight / 2,
+      width: avgX2 - avgX1,
+      height: measuredHeight,
+    };
     instances.push({
       id: 'crossbar',
-      shape: {
-        type: 'rect',
-        x: avgX1,
-        y: centerY - measuredHeight / 2,
-        width: avgX2 - avgX1,
-        height: measuredHeight,
-      },
+      shape: rect,
+      region: { kind: 'stroke', points: rectToPolygon(rect) },
       confidence,
       anchors: {
         left: { x: avgX1, y: centerY },
@@ -236,15 +239,17 @@ export function detectCrossbar(geo: GeometryCache): FeatureInstance[] {
     for (const seg of segmentBars) {
       // For fallback, use stemWidth as height estimate
       const barHeight = stemWidth * 0.6;
+      const rect = {
+        type: 'rect' as const,
+        x: seg.x1,
+        y: seg.y - barHeight / 2,
+        width: seg.x2 - seg.x1,
+        height: barHeight,
+      };
       instances.push({
         id: 'crossbar',
-        shape: {
-          type: 'rect',
-          x: seg.x1,
-          y: seg.y - barHeight / 2,
-          width: seg.x2 - seg.x1,
-          height: barHeight,
-        },
+        shape: rect,
+        region: { kind: 'stroke', points: rectToPolygon(rect) },
         confidence: 0.5,
         anchors: {
           left: { x: seg.x1, y: seg.y },
@@ -368,15 +373,17 @@ function mergeGroup(group: FeatureInstance[]): FeatureInstance {
       0
     ) / totalSamples;
 
+  const rect = {
+    type: 'rect' as const,
+    x: minX,
+    y: avgCenterY - medianHeight / 2,
+    width: maxX - minX,
+    height: medianHeight,
+  };
   return {
     id: 'crossbar',
-    shape: {
-      type: 'rect',
-      x: minX,
-      y: avgCenterY - medianHeight / 2,
-      width: maxX - minX,
-      height: medianHeight,
-    },
+    shape: rect,
+    region: { kind: 'stroke', points: rectToPolygon(rect) },
     confidence: Math.min(0.95, weightedConfidence + 0.1), // Boost for merged detection
     anchors: {
       left: { x: minX, y: avgCenterY },

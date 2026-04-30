@@ -29,6 +29,8 @@ import {
   glyphFor,
   loadFont,
   normalized,
+  pointInPolygon,
+  regionBBox,
   shapeBBox,
 } from '@/test/utils/fixtures/fontFixtures';
 
@@ -521,3 +523,130 @@ describe('known type anatomy accuracy gaps', () => {
     expect((measuredMarker ?? Infinity) / glyphHeight).toBeLessThan(0.2);
   });
 });
+
+/**
+ * Region-polygon assertions. Each Tier-1 detector populates
+ * FeatureInstance.region; these tests assert the polygon is
+ *   1. defined when the feature is detected,
+ *   2. a real polygon (≥ 3 points),
+ *   3. tagged with the correct kind,
+ *   4. positioned inside the glyph bbox (catches coord-space bugs), and
+ *   5. for stroke-kind regions, contains a sample point that lies inside
+ *      the polygon (proves the clip will produce a non-empty highlight).
+ *
+ * Real-font, runtime-only — no precomputed geometry per font.
+ */
+describe('feature region polygons', () => {
+  let nohemi: Font;
+
+  beforeAll(() => {
+    nohemi = loadFont('Nohemi-VF.ttf');
+  });
+
+  function expectRegionInsideGlyph(
+    region: { points: Array<{ x: number; y: number }> },
+    glyphBBox: { minX: number; minY: number; maxX: number; maxY: number }
+  ) {
+    expect(region.points.length).toBeGreaterThanOrEqual(3);
+    const bbox = regionBBox(
+      region as unknown as Parameters<typeof regionBBox>[0]
+    );
+    // Allow a 10% margin: stroke regions are clip masks, so spilling slightly
+    // beyond the glyph bbox is fine — the glyph fill clips the overshoot.
+    // The check exists to catch coordinate-space bugs (e.g., screen vs design
+    // unit confusion), not to demand strict containment.
+    const w = glyphBBox.maxX - glyphBBox.minX;
+    const h = glyphBBox.maxY - glyphBBox.minY;
+    const marginX = w * 0.1;
+    const marginY = h * 0.1;
+    expect(bbox.minX).toBeGreaterThanOrEqual(glyphBBox.minX - marginX);
+    expect(bbox.maxX).toBeLessThanOrEqual(glyphBBox.maxX + marginX);
+    expect(bbox.minY).toBeGreaterThanOrEqual(glyphBBox.minY - marginY);
+    expect(bbox.maxY).toBeLessThanOrEqual(glyphBBox.maxY + marginY);
+  }
+
+  it('emits stroke regions for both Nohemi H stems', () => {
+    const glyph = glyphFor(nohemi, 'H');
+    const stems = detect(nohemi, 'H', 'stem');
+    expect(stems).toHaveLength(2);
+    for (const stem of stems) {
+      expect(stem.region).toBeDefined();
+      expect(stem.region!.kind).toBe('stroke');
+      expectRegionInsideGlyph(stem.region!, glyph.bbox);
+      // The rect's geometric center must lie inside the polygon (ensures
+      // a non-empty intersection with the glyph fill at clip time).
+      const c = centerOf(stem.shape);
+      expect(pointInPolygon(c, stem.region!.points)).toBe(true);
+    }
+  });
+
+  it('emits a stroke region for the Nohemi H crossbar', () => {
+    const glyph = glyphFor(nohemi, 'H');
+    const bars = detect(nohemi, 'H', 'crossbar');
+    expect(bars).toHaveLength(1);
+    expect(bars[0].region?.kind).toBe('stroke');
+    expectRegionInsideGlyph(bars[0].region!, glyph.bbox);
+  });
+
+  it('emits a stroke region for the Nohemi T stem', () => {
+    const glyph = glyphFor(nohemi, 'T');
+    const stems = detect(nohemi, 'T', 'stem');
+    expect(stems).toHaveLength(1);
+    expect(stems[0].region?.kind).toBe('stroke');
+    expectRegionInsideGlyph(stems[0].region!, glyph.bbox);
+  });
+
+  it('emits a stroke region for the Nohemi O bowl', () => {
+    const glyph = glyphFor(nohemi, 'O');
+    const bowls = detect(nohemi, 'O', 'bowl');
+    expect(bowls).toHaveLength(1);
+    expect(bowls[0].region?.kind).toBe('stroke');
+    expectRegionInsideGlyph(bowls[0].region!, glyph.bbox);
+  });
+
+  it('emits an enclosed region for the Nohemi O counter', () => {
+    const glyph = glyphFor(nohemi, 'O');
+    const counters = detect(nohemi, 'O', 'counter');
+    expect(counters).toHaveLength(1);
+    expect(counters[0].region?.kind).toBe('enclosed');
+    expectRegionInsideGlyph(counters[0].region!, glyph.bbox);
+  });
+
+  it('emits a stroke region for the Nohemi i tittle', () => {
+    const glyph = glyphFor(nohemi, 'i');
+    const tittles = detect(nohemi, 'i', 'tittle');
+    expect(tittles).toHaveLength(1);
+    expect(tittles[0].region?.kind).toBe('stroke');
+    expectRegionInsideGlyph(tittles[0].region!, glyph.bbox);
+  });
+
+  it('emits an enclosed region for the Nohemi e eye', () => {
+    const glyph = glyphFor(nohemi, 'e');
+    const eyes = detect(nohemi, 'e', 'eye');
+    expect(eyes).toHaveLength(1);
+    expect(eyes[0].region?.kind).toBe('enclosed');
+    expectRegionInsideGlyph(eyes[0].region!, glyph.bbox);
+  });
+
+  it('emits an enclosed region for the Nohemi e counter', () => {
+    const glyph = glyphFor(nohemi, 'e');
+    const counters = detect(nohemi, 'e', 'counter');
+    expect(counters).toHaveLength(1);
+    expect(counters[0].region?.kind).toBe('enclosed');
+    expectRegionInsideGlyph(counters[0].region!, glyph.bbox);
+  });
+
+  it('emits stroke regions for Nohemi E arms', () => {
+    // Exercises hasArm's rect path and verifies it produces a region.
+    const arms = detect(nohemi, 'E', 'arm');
+    if (arms.length > 0) {
+      // E arms detection is currently `it.fails` in the gaps block — when it
+      // starts producing instances, those instances must carry a region.
+      for (const arm of arms) {
+        expect(arm.region).toBeDefined();
+        expect(arm.region!.kind).toBe('stroke');
+      }
+    }
+  });
+});
+

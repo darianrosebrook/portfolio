@@ -13,6 +13,7 @@
 
 import { rayHits } from '@/utils/geometry/geometryCore';
 import type { FeatureInstance, GeometryCache } from '../types';
+import { rectToPolygon } from '../evidence/regionFromShape';
 
 /**
  * Represents an arm candidate from scanline analysis.
@@ -174,15 +175,17 @@ export function detectArm(geo: GeometryCache): FeatureInstance[] {
     });
 
     if (!isDuplicate) {
+      const rect = {
+        type: 'rect' as const,
+        x: avgX1,
+        y: avgY - armHeight / 2,
+        width: avgWidth,
+        height: armHeight,
+      };
       instances.push({
         id: 'arm',
-        shape: {
-          type: 'rect',
-          x: avgX1,
-          y: avgY - armHeight / 2,
-          width: avgWidth,
-          height: armHeight,
-        },
+        shape: rect,
+        region: { kind: 'stroke', points: rectToPolygon(rect) },
         confidence: Math.min(0.85, 0.5 + group.length * 0.1),
         anchors: {
           free:
@@ -374,15 +377,17 @@ function detectArmBySlide(geo: GeometryCache): FeatureInstance | null {
       const armY = Math.min(y1, y2);
       const armWidth = probeX - (glyph.bbox.minX + bboxW * 0.3);
 
+      const rect = {
+        type: 'rect' as const,
+        x: glyph.bbox.minX + bboxW * 0.3,
+        y: armY,
+        width: armWidth,
+        height: armHeight,
+      };
       return {
         id: 'arm',
-        shape: {
-          type: 'rect',
-          x: glyph.bbox.minX + bboxW * 0.3,
-          y: armY,
-          width: armWidth,
-          height: armHeight,
-        },
+        shape: rect,
+        region: { kind: 'stroke', points: rectToPolygon(rect) },
         confidence: 0.5,
         anchors: {
           free: { x: probeX, y: armY + armHeight / 2 },

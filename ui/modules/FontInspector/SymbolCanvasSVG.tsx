@@ -13,19 +13,20 @@
 'use client';
 
 import { dFor } from '@/utils/geometry/geometryCore';
-import { getFeatureClipBoundary } from '@/utils/geometry/pathClipping';
 import {
   safePathOperation,
   validatePathCommands,
 } from '@/utils/geometry/pathValidation';
 import { SVGDefs } from '@/utils/geometry/svgDefs';
-import { featureHighlightToPath } from '@/utils/geometry/svgPathBuilder';
 import { createViewportTransform } from '@/utils/geometry/transforms';
 import type { UnifiedFeatureShape, Metrics } from '@/utils/typeAnatomy';
 // Use UnifiedFeatureShape which includes 'line' type
 type FeatureShape = UnifiedFeatureShape;
-import { detectFeature } from '@/utils/typeAnatomy/detector';
-import { extractFeatureSegments } from '@/utils/typeAnatomy/featureHighlight';
+import {
+  toFeatureID,
+  type FeatureInstance,
+  type RegionPolygon,
+} from '@/utils/typeAnatomy/types';
 import React, {
   useCallback,
   useEffect,
@@ -59,6 +60,7 @@ export const SymbolCanvasSVG: React.FC = () => {
     setShowDetails,
     colors,
     selectedAnatomy,
+    detectedFeatures,
   } = useInspector();
 
   const svgRef = useRef<SVGSVGElement>(null);
@@ -254,140 +256,124 @@ export const SymbolCanvasSVG: React.FC = () => {
     for (const [featureName, feature] of selectedAnatomy.entries()) {
       if (!feature.selected || feature.disabled) continue;
 
-      try {
-        const result = detectFeature(
-          featureName,
-          glyph,
-          fontMetrics,
-          fontInstance
-        );
-
-        // Metric lines (Baseline, Cap height, etc.)
-        if (metricFeatures.has(featureName)) {
-          const y = canvasMetrics[featureName as keyof typeof canvasMetrics];
-          if (y !== undefined) {
-            elements.push(
-              <g
-                key={`metric-${featureName}`}
-                id={`metric-${featureName}`}
-                className={styles.metricLine}
-                aria-label={feature.label}
-                aria-hidden={!feature.selected}
-                vectorEffect="non-scaling-stroke"
-                shapeRendering="crispEdges"
-              >
-                <line
-                  x1={0}
-                  y1={y}
-                  x2={metrics.width}
-                  y2={y}
-                  stroke={colors.metricStroke}
-                  strokeWidth={1}
-                />
-                <text
-                  x={16}
-                  y={feature.labelPosition === 'top' ? y - 5 : y + 15}
-                  fill={colors.metricFill}
-                  fontSize={12}
-                  fontFamily="sans-serif"
-                >
-                  {feature.label}
-                </text>
-              </g>
-            );
-          }
-          continue;
-        }
-
-        // Anatomy feature highlights
-        if (showDetails) {
-          // Priority 1: If we have a precise shape from detection, use it directly
-          if (result.shape) {
-            elements.push(
-              <FeatureShapeRenderer
-                key={`shape-${featureName}`}
-                shape={result.shape}
-                scale={metrics.scale}
-                colors={colors}
+      // Metric lines (Baseline, Cap height, etc.) — these are font metrics,
+      // not detected features. They short-circuit the detection path.
+      if (metricFeatures.has(featureName)) {
+        const y = canvasMetrics[featureName as keyof typeof canvasMetrics];
+        if (y !== undefined) {
+          elements.push(
+            <g
+              key={`metric-${featureName}`}
+              id={`metric-${featureName}`}
+              className={styles.metricLine}
+              aria-label={feature.label}
+              aria-hidden={!feature.selected}
+              vectorEffect="non-scaling-stroke"
+              shapeRendering="crispEdges"
+            >
+              <line
+                x1={0}
+                y1={y}
+                x2={metrics.width}
+                y2={y}
+                stroke={colors.metricStroke}
+                strokeWidth={1}
               />
-            );
-          } else {
-            // Priority 2: Try masked geometry highlight (clipped glyph path)
-            const clipBoundary = getFeatureClipBoundary(
-              featureName,
-              glyph,
-              fontMetrics
-            );
+              <text
+                x={16}
+                y={feature.labelPosition === 'top' ? y - 5 : y + 15}
+                fill={colors.metricFill}
+                fontSize={12}
+                fontFamily="sans-serif"
+              >
+                {feature.label}
+              </text>
+            </g>
+          );
+        }
+        continue;
+      }
 
-            if (clipBoundary && glyphPathData && clipBoundary.y !== undefined) {
-              const clipPathId = `clip-${featureName.replace(/\s+/g, '-')}`;
-              const clipY = metrics.baseline - clipBoundary.y * metrics.scale;
+      // Look up detected instances from the registry-based detection result.
+      // detectedFeatures is computed in FontInspector via detectGlyphFeatures.
+      const featureId = toFeatureID(featureName);
+      const instances: FeatureInstance[] = featureId
+        ? (detectedFeatures.get(featureId) ?? [])
+        : [];
 
-              elements.push(
-                <defs key={`defs-${featureName}`}>
-                  <clipPath id={clipPathId}>
-                    <rect
-                      x="-1000"
-                      y={clipBoundary.keepAbove ? -1000 : clipY}
-                      width="2000"
-                      height={clipBoundary.keepAbove ? clipY + 1000 : 1000}
-                    />
-                  </clipPath>
-                </defs>
+      if (instances.length === 0) continue;
+
+      try {
+        if (showDetails) {
+          // Region-based highlighting per FeatureInstance.
+          for (let i = 0; i < instances.length; i++) {
+            const inst = instances[i];
+            const idSuffix = `${featureName.replace(/\s+/g, '-')}-${i}`;
+
+            if (inst.region && inst.region.points.length >= 3) {
+              const polygonPoints = polygonToScreenPoints(
+                inst.region,
+                viewportTransform
               );
 
-              elements.push(
-                <path
-                  key={`highlight-${featureName}`}
-                  d={glyphPathData}
-                  transform={viewportTransform.toSVGTransform()}
-                  fill={colors.highlightBackground}
-                  clipPath={`url(#${clipPathId})`}
-                  opacity={0.5}
-                  aria-label={`${feature.label} highlight`}
-                  aria-hidden={!feature.selected}
-                />
-              );
-            } else {
-              // Priority 3: Fallback to segment-based highlighting
-              const highlight = extractFeatureSegments(
-                featureName,
-                glyph,
-                fontMetrics,
-                fontInstance
-              );
-
-              if (highlight && highlight.segments.length > 0) {
-                // featureHighlightToPath outputs in font coordinates (no scale/Y inversion)
-                // The transform handles all coordinate conversion
-                const pathData = featureHighlightToPath(highlight, 1); // Scale of 1 = font coords
-                if (pathData) {
+              if (inst.region.kind === 'stroke') {
+                // Clip the glyph fill against the polygon.
+                const clipPathId = `clip-${idSuffix}`;
+                elements.push(
+                  <defs key={`defs-${idSuffix}`}>
+                    <clipPath id={clipPathId}>
+                      <polygon points={polygonPoints} />
+                    </clipPath>
+                  </defs>
+                );
+                if (glyphPathData) {
                   elements.push(
                     <path
-                      key={`highlight-${featureName}`}
-                      d={pathData}
+                      key={`highlight-${idSuffix}`}
+                      d={glyphPathData}
                       transform={viewportTransform.toSVGTransform()}
-                      fill="none"
-                      stroke={colors.highlightBackground}
-                      strokeWidth={6 * metrics.scale}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      opacity={0.6}
+                      fill={colors.highlightBackground}
+                      clipPath={`url(#${clipPathId})`}
+                      opacity={0.85}
                       aria-label={`${feature.label} highlight`}
                       aria-hidden={!feature.selected}
                     />
                   );
                 }
+              } else {
+                // 'enclosed': fill the polygon directly (counters, eyes).
+                elements.push(
+                  <polygon
+                    key={`highlight-${idSuffix}`}
+                    points={polygonPoints}
+                    fill={colors.highlightBackground}
+                    opacity={0.85}
+                    aria-label={`${feature.label} highlight`}
+                    aria-hidden={!feature.selected}
+                  />
+                );
               }
+            } else {
+              // No region — fall back to the existing shape renderer.
+              // For point features (apex, vertex, crotch), this produces
+              // a small marker recolored to the highlight palette.
+              elements.push(
+                <FeatureShapeRenderer
+                  key={`shape-${idSuffix}`}
+                  shape={inst.shape}
+                  scale={metrics.scale}
+                  colors={colors}
+                />
+              );
             }
           }
         } else {
-          // Simple markers when not showing details
-          if (result.location) {
-            const screenPos = viewportTransform.toScreen({
-              x: result.location.x,
-              y: result.location.y,
-            });
+          // Simple markers when not showing details — pin to the first
+          // instance's anchor (or shape origin) and add a coachmark zone.
+          const inst = instances[0];
+          const loc = anchorPointFor(inst);
+          if (loc) {
+            const screenPos = viewportTransform.toScreen(loc);
             elements.push(
               <circle
                 key={`marker-${featureName}`}
@@ -401,12 +387,11 @@ export const SymbolCanvasSVG: React.FC = () => {
                 aria-hidden={!feature.selected}
               />
             );
-
             zones.push({
               featureName,
               label: feature.label,
-              x: result.location.x,
-              y: result.location.y,
+              x: loc.x,
+              y: loc.y,
               width: 30,
               height: 30,
               description: `The ${featureName.toLowerCase()} is a typographic feature of this glyph.`,
@@ -428,6 +413,7 @@ export const SymbolCanvasSVG: React.FC = () => {
     fontMetrics,
     fontInstance,
     selectedAnatomy,
+    detectedFeatures,
     showDetails,
     colors,
     metrics,
@@ -1003,6 +989,62 @@ export const SymbolCanvasSVG: React.FC = () => {
 };
 
 /**
+ * Convert a region polygon (glyph design units) to an SVG `points` string in
+ * screen coordinates. The clipPath / polygon contents render in the SVG root
+ * coordinate system, so we apply the viewport transform here rather than
+ * relying on a wrapping `transform` attribute.
+ */
+function polygonToScreenPoints(
+  region: RegionPolygon,
+  viewportTransform: ReturnType<typeof createViewportTransform>
+): string {
+  return region.points
+    .map((p) => {
+      const screen = viewportTransform.toScreen(p);
+      return `${screen.x},${screen.y}`;
+    })
+    .join(' ');
+}
+
+/**
+ * Pick a representative anchor point for a feature instance. Used by the
+ * "no details" mode to position a small marker + coachmark zone.
+ */
+function anchorPointFor(
+  inst: FeatureInstance
+): { x: number; y: number } | null {
+  if (inst.anchors) {
+    const a =
+      inst.anchors.center ??
+      inst.anchors.tip ??
+      inst.anchors.position ??
+      Object.values(inst.anchors)[0];
+    if (a) return a;
+  }
+  switch (inst.shape.type) {
+    case 'point':
+      return { x: inst.shape.x, y: inst.shape.y };
+    case 'circle':
+      return { x: inst.shape.cx, y: inst.shape.cy };
+    case 'rect':
+      return {
+        x: inst.shape.x + inst.shape.width / 2,
+        y: inst.shape.y + inst.shape.height / 2,
+      };
+    case 'line':
+      return {
+        x: (inst.shape.x1 + inst.shape.x2) / 2,
+        y: (inst.shape.y1 + inst.shape.y2) / 2,
+      };
+    case 'polyline':
+      if (inst.shape.points.length === 0) return null;
+      return inst.shape.points[Math.floor(inst.shape.points.length / 2)];
+    case 'path':
+      return null;
+  }
+}
+
+/**
  * Renders a feature shape (circle, polyline, path, line, etc.) as SVG elements.
  */
 function FeatureShapeRenderer({
@@ -1088,13 +1130,17 @@ function FeatureShapeRenderer({
       );
 
     case 'point':
+      // Point features (apex, vertex, crotch, …) render in the highlight
+      // palette so they read as part of the same visual family as the
+      // region-clipped fragments. The Stephen Coles diagram doesn't
+      // highlight these as filled regions; a small red dot matches.
       return (
         <circle
           cx={shape.x * scale}
           cy={-shape.y * scale}
           r={4}
-          fill={colors.anchorFill}
-          stroke={colors.anchorStroke}
+          fill={colors.highlightBackground || colors.anchorFill}
+          stroke={colors.highlightBackground || colors.anchorStroke}
           strokeWidth={2}
         />
       );

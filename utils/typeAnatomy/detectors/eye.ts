@@ -12,6 +12,10 @@
 
 import { getHoleContours } from '../geometryCache';
 import { rayHits } from '@/utils/geometry/geometryCore';
+import {
+  circleToPolygon,
+  polylineToPolygon,
+} from '../evidence/regionFromShape';
 import type { FeatureInstance, GeometryCache, Point2D } from '../types';
 
 /**
@@ -57,14 +61,16 @@ export function detectEye(geo: GeometryCache): FeatureInstance[] {
 
       // Eye is typically more horizontal (wider than tall) due to crossbar
       // but we don't require it strictly
+      const circle = {
+        type: 'circle' as const,
+        cx,
+        cy,
+        r: Math.min(width, height) / 2,
+      };
       instances.push({
         id: 'eye',
-        shape: {
-          type: 'circle',
-          cx,
-          cy,
-          r: Math.min(width, height) / 2,
-        },
+        shape: circle,
+        region: { kind: 'enclosed', points: circleToPolygon(circle) },
         confidence: 0.85,
         anchors: {
           center: { x: cx, y: cy },
@@ -91,6 +97,10 @@ export function detectEye(geo: GeometryCache): FeatureInstance[] {
     instances.push({
       id: 'eye',
       shape: { type: 'polyline', points: outline },
+      region: {
+        kind: 'enclosed',
+        points: polylineToPolygon({ points: outline }),
+      },
       confidence: 0.65,
       anchors: {
         seed,

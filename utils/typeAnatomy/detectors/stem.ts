@@ -12,6 +12,7 @@
 
 import { rayHits } from '@/utils/geometry/geometryCore';
 import type { FeatureInstance, GeometryCache, Point2D } from '../types';
+import { rectToPolygon } from '../evidence/regionFromShape';
 
 /**
  * Represents a stem candidate from scanline analysis.
@@ -125,15 +126,18 @@ export function detectStem(geo: GeometryCache): FeatureInstance[] {
     const bottomMidX = avgMidX + (stemBottom - stemBottom) * italicTan;
     const topMidX = avgMidX + (stemTop - stemBottom) * italicTan;
 
+    const rect = {
+      type: 'rect' as const,
+      x: avgX1,
+      y: stemBottom,
+      width: avgWidth,
+      height: stemTop - stemBottom,
+    };
+
     instances.push({
       id: 'stem',
-      shape: {
-        type: 'rect',
-        x: avgX1,
-        y: stemBottom,
-        width: avgWidth,
-        height: stemTop - stemBottom,
-      },
+      shape: rect,
+      region: { kind: 'stroke', points: rectToPolygon(rect) },
       confidence,
       anchors: {
         top: { x: topMidX + avgWidth / 2, y: stemTop },
