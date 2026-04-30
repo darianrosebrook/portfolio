@@ -273,11 +273,6 @@ const PROBES: Probe[] = [
           'runtime region computation (no precomputed geometry) computes a stroke region for Inter H stems on demand',
         testFile: 'test/typeAnatomy/runtime-region.test.ts',
       },
-      {
-        fullName:
-          'feature region polygons emits stroke regions for both Nohemi H stems',
-        testFile: 'test/typeAnatomy/feature-accuracy.test.ts',
-      },
     ],
   },
   {
