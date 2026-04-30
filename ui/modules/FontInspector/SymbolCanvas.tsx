@@ -392,6 +392,7 @@ export const SymbolCanvas: React.FC = () => {
     <canvas
       className={styles.canvas}
       ref={canvasRef}
+      data-testid="symbol-canvas"
       style={{ width: '100%', height: '50vh' }}
     />
   );
