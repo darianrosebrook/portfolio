@@ -1,11 +1,11 @@
-id: TYPEANATOMY-003
-type: feature
-title: Seed outline-corner evidence for apex, vertex, and crotch detection
+id: VERIFICATION-002
+type: chore
+title: Mutation hardening for corner-evidence layer (apex/vertex/crotch)
 status: closed
-risk_tier: 2
-mode: feature
-created_at: '2026-04-29T02:57:34.576Z'
-updated_at: '2026-04-29T19:41:37.605Z'
+risk_tier: 3
+mode: chore
+created_at: '2026-04-29T23:33:02.319Z'
+updated_at: '2026-04-30T00:00:33.294Z'
 blast_radius:
   modules:
     - typeAnatomy/evidence/corners
@@ -13,156 +13,45 @@ blast_radius:
     - typeAnatomy/detectors/vertex
     - typeAnatomy/detectors/crotch
   data_migration: false
-operational_rollback_slo: 30m
+operational_rollback_slo: 5m
 scope:
   in:
-    - utils/typeAnatomy/evidence/corners/**
-    - utils/typeAnatomy/detectors/apex.ts
-    - utils/typeAnatomy/detectors/vertex.ts
-    - utils/typeAnatomy/detectors/crotch.ts
+    - scripts/verify-mutation-resistance.ts
     - test/typeAnatomy/feature-accuracy.test.ts
-    - utils/typeAnatomy/evidence/corners/**/*.test.ts
   out:
-    - utils/typeAnatomy/detectors/arm.ts
-    - utils/typeAnatomy/detectors/serif.ts
-    - utils/typeAnatomy/detectors/finial.ts
-    - utils/typeAnatomy/detectors/ear.ts
-    - utils/typeAnatomy/detectors/spur.ts
-    - utils/typeAnatomy/detectors/bowl.ts
-    - utils/typeAnatomy/detectors/stem.ts
-    - utils/typeAnatomy/detectors/eye.ts
-    - utils/typeAnatomy/detectors/aperture.ts
-    - utils/typeAnatomy/detectors/tittle.ts
-    - utils/typeAnatomy/detectors/loop.ts
-    - utils/typeAnatomy/detectors/counter.ts
-    - utils/typeAnatomy/detectors/crossbar.ts
-    - utils/typeAnatomy/evidence/topology/
-    - utils/typeAnatomy/evidence/measureOrthogonalThickness.ts
-    - utils/typeAnatomy/geometryCache.ts
-    - utils/typeAnatomy/types.ts
-    - utils/geometry/
-    - public/fonts/
-    - test/typeAnatomy/feature-detection.test.ts
-    - test/typeAnatomy/font-properties.test.ts
-    - test/utils/fixtures/svgPaths.ts
+    - utils/typeAnatomy/evidence/corners/
+    - utils/typeAnatomy/detectors/
+    - node_modules/
+    - dist/
+    - build/
 invariants:
-  - Corner evidence operates on existing GeometryCache segment + contour index data; it does not require GeometryCache, ContourClassification, or SegmentWithMeta schema changes.
-  - Corner evidence is anatomy-neutral — the layer emits geometric corner candidates with neutral fields (point, incoming/outgoing tangent, signed turn angle, interior direction). It does not emit `apex`/`vertex`/`crotch` labels; that mapping lives in detectors.
-  - Detector vocabulary may intentionally map the same geometric corner to different anatomy concepts. V's bottom point may legitimately be both a `vertex` and a `crotch`; the evidence layer does not enforce mutual exclusion across detectors.
-  - The slice is limited to straight-stroke, outer-contour behavior on Nohemi A/V. Curved-terminal handling, italic-tangent compensation, and serif/finial/ear behavior are out of scope; curve-segment regions are touched only insofar as A6's regression guard requires them not to break.
-  - Existing passing real-font behavior — especially Newsreader paths touched indirectly by apex, vertex, and crotch detectors — must remain green. Pre-slice baseline of 334 passed tests (post TYPEANATOMY-002 closure) is the floor.
+  - No production code changes — this slice only adds mutation probes to the verification harness.
+  - Each probe must cause at least one test to fail; a probe that passes all tests is a false-positive gap in the test suite that must be fixed.
 acceptance:
   - id: A1
-    given: a reusable outline-corner evidence layer at utils/typeAnatomy/evidence/corners/
-    when: apex, vertex, and crotch detectors need sharp join candidates
+    given: the mutation harness at scripts/verify-mutation-resistance.ts
+    when: the harness is run with probes targeting the corner-evidence layer
     then: |
-      the detectors consume neutral corner candidates from the evidence
-      layer rather than detector-local ray-convergence heuristics. Any
-      corner-evidence primitive that ends up consumed by zero detectors is
-      removed before slice closure.
-    test_command: pnpm vitest run utils/typeAnatomy/evidence/corners
+      the following 4 probes each cause a test failure (exit code != 0):
+      P1 findOutlineCorners-empty: patch findOutlineCorners to return [] — the
+         A apex and V crotch accuracy tests must fail.
+      P2 inJunctionCluster-passthrough: patch inJunctionCluster to return its
+         input unchanged — the V apex negative test must fail (V apex count > 0).
+      P3 interiorPointsDown-alwaysFalse: patch interiorPointsDown to always
+         return false — the A apex and A crotch accuracy tests must fail.
+      P4 dedupeNearbyCorners-passthrough: patch dedupeNearbyCorners to return
+         its input unchanged — the A apex count test must fail (count > 1 when
+         A has a chamfer that produces two near-coincident apex candidates).
+    test_command: npx tsx scripts/verify-mutation-resistance.ts
   - id: A2
-    given: Nohemi-VF.ttf loaded and the uppercase `A` glyph
-    when: detectApex runs on the glyph
+    given: all 4 probes fail as expected
+    when: the full type-anatomy suite runs on unmodified code
     then: |
-      exactly one apex is reported as a point-like feature near the top
-      center, not a long horizontal line/ridge artifact. Replaces the
-      current behavior in which two `line` shapes are emitted (one at
-      glyph top, one ~190 units below) because synthesized rays converge
-      on the outside of the diagonal strokes rather than the apex tip.
-      Whether the shape type is `point` or another point-like
-      representation is an implementation choice; the AC pins the
-      semantic invariant — single, near-tip, not a ridge.
-    test_command: pnpm vitest run test/typeAnatomy/feature-accuracy.test.ts -t "finds exactly one apex on Nohemi A"
-  - id: A3
-    given: Nohemi-VF.ttf loaded and the uppercase `A` glyph
-    when: detectVertex runs on the glyph
-    then: |
-      at least two vertices are reported, drawn from outline corners on
-      the leg-end region. Exact count is not pinned because the corner
-      extractor may legitimately surface inside+outside corners per leg
-      depending on how the contour represents the baseline meeting
-      points. Regression on this loose count is structurally caught by
-      A6.
-    test_command: pnpm vitest run test/typeAnatomy/feature-accuracy.test.ts -t "detects vertices on Nohemi A"
-  - id: A4
-    given: Nohemi-VF.ttf loaded and the uppercase `A` glyph
-    when: detectCrotch runs on the glyph
-    then: |
-      exactly one upper interior crotch is reported, spatially distinct
-      from the outer apex if and only if the glyph geometry supports the
-      distinction. On Nohemi `A`'s pointed apex the interior tip of the
-      `^` sits below the outermost top point; the AC does not pin a
-      hard y-range because the spatial offset depends on stroke
-      thickness in the design.
-    test_command: pnpm vitest run test/typeAnatomy/feature-accuracy.test.ts -t "detects the A crotch"
-  - id: A5
-    given: Nohemi-VF.ttf loaded and the uppercase `V` glyph
-    when: detectCrotch runs on the glyph
-    then: |
-      exactly one bottom crotch is reported at the bottom-center sharp
-      join. This may be the same geometric event reported by detectVertex
-      (per the third invariant); the AC does not require V crotch and V
-      vertex to be different points. detectVertex behavior on V is not
-      a separate AC; it is regression-protected by A6.
-    test_command: pnpm vitest run test/typeAnatomy/feature-accuracy.test.ts -t "detects the V crotch"
-  - id: A6
-    given: the full type-anatomy and evidence suite (test/typeAnatomy + test/utils/typeAnatomy + utils/typeAnatomy/evidence)
-    when: the slice lands
-    then: |
-      total pass count is greater than or equal to the pre-slice baseline
-      of 334. Unrelated detector gaps (arm, serif, finial, ear, spur,
-      bowl, stem, eye, aperture, tittle false-positive on a) remain in
-      whatever it.fails state they currently sit. No previously-passing
-      assertion flips to failing or to it.fails. Newsreader-glyph paths
-      touched indirectly by the corner-evidence rewrite produce
-      equivalent or better output.
+      pass count is >= 380 (the post-TYPEANATOMY-003 baseline). No previously-
+      passing assertion flips to failing.
     test_command: pnpm vitest run test/typeAnatomy test/utils/typeAnatomy utils/typeAnatomy/evidence
-  - id: A7
-    given: the corner evidence module
-    when: its synthetic unit tests run (no real-font load)
-    then: |
-      the tests verify, at minimum: (a) sharp exterior corners are
-      emitted on a triangle's three vertices; (b) sharp interior
-      corners are emitted at the inside tip of an `^`-shaped polyline;
-      (c) ridge / nearly-collinear segment joins are rejected
-      (rectangle's right-angle corners not classified as sharp under
-      default threshold); (d) duplicate suppression — two near-coincident
-      corner candidates collapse to one. All four cases run on
-      hand-built fixtures, independent of any real-font load.
-    test_command: pnpm vitest run utils/typeAnatomy/evidence/corners
-  - id: A8
-    given: Nohemi-VF.ttf loaded and the uppercase `V` glyph
-    when: detectApex runs on the glyph
-    then: |
-      zero apexes are reported. V's top outer corners are isolated stroke
-      terminations (sharp turns whose walk-adjacent neighbors are gentle
-      bevels), not apex junctions. Apex must restrict its candidates to
-      junction-cluster members — the same conceptual distinction crotch
-      already uses — so an apex is a stroke-meeting event, not any
-      isolated top-band sharp corner. This pins the asymmetry: vertex
-      may be a leg-end termination OR a junction (A's feet qualify);
-      apex must be a junction.
-    test_command: pnpm vitest run test/typeAnatomy/feature-accuracy.test.ts -t "does not report an apex on Nohemi V"
 non_functional:
   a11y: []
   perf: {}
   security: []
-contracts:
-  - type: project_setup
-    path: utils/typeAnatomy/evidence/corners/index.ts
-    description: TypeScript-internal contract — the corner evidence module's exported primitive signatures (`extractCornerSamples(contour, segments)`, sharpness predicate, position-band predicates, interior-direction query, duplicate-suppression helper). The CAWS schema's API-contract types (openapi/graphql/proto/pact) do not apply to internal TS libraries; project_setup is used here per CAWSFIX-06 schema permissiveness with this rationale recorded.
-observability:
-  logs: []
-  metrics: []
-  traces: []
-migrations: []
-rollback:
-  - Revert the slice's commits. The detectors return to their pre-slice ray-based implementations; the four currently-failing accuracy cases (A apex, A vertices, A crotch, V crotch) revert to `it.fails`.
-ai_assessment:
-  confidence_level: 7
-  uncertainty_areas:
-    - Whether outline-walking on `geo.segments` produces stable tangents on quadratic and cubic curve segments. Nohemi `A`/`V` are straight-stroke (line segments only), so the slice may sidestep the issue. Newsreader's curved terminals exercise curve segments in tangentially-touched code paths — A6's regression guard is the structural protection there, not a positive accuracy claim.
-    - Whether one sharpness threshold serves all four classes (apex, vertex, A-crotch, V-crotch). Interior corners typically span a larger turn-angle range than exterior tips. The slice may end up exposing per-detector configuration of the threshold, which is acceptable if recorded.
-    - Whether `interiorDirection` is computable correctly from contour winding for inner-loop holes. Holes are out of scope for the four target glyphs (A and V have no interior holes for these features). If a future detector consumes corners-on-holes the API may need extension; not resolved in this slice.
-  recommended_pairing: false
+contracts: []
