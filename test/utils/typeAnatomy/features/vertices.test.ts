@@ -1,9 +1,10 @@
 /**
  * Tests for vertex feature detectors: apex, vertex, crotch.
- * These features detect junction points and angles in glyphs.
  *
- * Note: These tests focus on API contracts, error handling, and type safety.
- * Detection accuracy depends on glyph geometry matching detector heuristics.
+ * Real-font correctness lives in test/typeAnatomy/feature-accuracy.test.ts
+ * (Nohemi A apex, A/V crotch, A vertices). The legacy hasVertex heuristic
+ * fires on any closed polygon with sharp corners — those over-fires are
+ * pinned below as known behavior.
  */
 import { describe, it, expect } from 'vitest';
 import { hasApex } from '@/utils/typeAnatomy/apex';
@@ -22,111 +23,94 @@ import {
   EMPTY_PATH,
 } from '../../fixtures/svgPaths';
 
-describe('vertex features', () => {
+describe('vertex features (synthetic geometry)', () => {
   const metrics = standardMetrics;
 
   describe('hasApex', () => {
-    it('does not detect apex in circle', () => {
+    // None of the synthetic primitives — including a wide flat or tall
+    // narrow triangle — trigger the legacy hasApex detector. Real apex
+    // detection on Nohemi A is verified in feature-accuracy.test.ts.
+    it('rejects a polygon circle', () => {
       const glyph = mockGlyphFromPath(CIRCLE.d, CIRCLE.bbox);
-
       expect(hasApex(glyph, metrics)).toBe(false);
     });
 
-    it('does not detect apex in rectangle', () => {
+    it('rejects a rectangle', () => {
       const glyph = mockGlyphFromPath(RECTANGLE.d, RECTANGLE.bbox);
-
       expect(hasApex(glyph, metrics)).toBe(false);
     });
 
-    it('does not detect apex in vertical stem', () => {
+    it('rejects a vertical stem', () => {
       const glyph = mockGlyphFromPath(VERTICAL_STEM.d, VERTICAL_STEM.bbox);
-
       expect(hasApex(glyph, metrics)).toBe(false);
     });
 
-    it('does not detect apex in donut', () => {
+    it('rejects a polygon donut', () => {
       const glyph = mockGlyphFromPath(DONUT.d, DONUT.bbox);
-
       expect(hasApex(glyph, metrics)).toBe(false);
     });
 
     it('returns false for non-drawable glyph', () => {
-      const glyph = mockNonDrawableGlyph('null-path');
-
-      expect(hasApex(glyph, metrics)).toBe(false);
+      expect(hasApex(mockNonDrawableGlyph('null-path'), metrics)).toBe(false);
     });
 
     it('returns false for empty glyph', () => {
-      const glyph = mockNonDrawableGlyph('empty');
-
-      expect(hasApex(glyph, metrics)).toBe(false);
+      expect(hasApex(mockNonDrawableGlyph('empty'), metrics)).toBe(false);
     });
-
   });
 
   describe('hasVertex', () => {
-    it('returns boolean for polygon circle', () => {
-      // Polygon approximation of circle has vertices at polygon corners
+    // hasVertex over-fires on any closed polygon with sharp corners. This
+    // is calibrated for real typefaces; the synthetic primitives all have
+    // 90° or polygon-approximated corners that match. Real vertex
+    // accuracy on Nohemi A is in feature-accuracy.test.ts.
+    it('over-fires on a polygon circle (corners at every polygon vertex)', () => {
       const glyph = mockGlyphFromPath(CIRCLE.d, CIRCLE.bbox);
-
-      expect(typeof hasVertex(glyph, metrics)).toBe('boolean');
+      expect(hasVertex(glyph, metrics)).toBe(true);
     });
 
-    it('returns boolean for rectangle', () => {
-      // Rectangle has corner vertices
+    it('over-fires on a rectangle (corners at four 90° vertices)', () => {
       const glyph = mockGlyphFromPath(RECTANGLE.d, RECTANGLE.bbox);
-
-      expect(typeof hasVertex(glyph, metrics)).toBe('boolean');
+      expect(hasVertex(glyph, metrics)).toBe(true);
     });
 
-    it('returns boolean for vertical stem', () => {
-      // Vertical stem has corner vertices
+    it('over-fires on a vertical stem (corners at four 90° vertices)', () => {
       const glyph = mockGlyphFromPath(VERTICAL_STEM.d, VERTICAL_STEM.bbox);
-
-      expect(typeof hasVertex(glyph, metrics)).toBe('boolean');
+      expect(hasVertex(glyph, metrics)).toBe(true);
     });
 
     it('returns false for non-drawable glyph', () => {
-      const glyph = mockNonDrawableGlyph('null-path');
-
-      expect(hasVertex(glyph, metrics)).toBe(false);
+      expect(hasVertex(mockNonDrawableGlyph('null-path'), metrics)).toBe(false);
     });
 
     it('returns false for empty glyph', () => {
-      const glyph = mockNonDrawableGlyph('empty');
-
-      expect(hasVertex(glyph, metrics)).toBe(false);
+      expect(hasVertex(mockNonDrawableGlyph('empty'), metrics)).toBe(false);
     });
   });
 
   describe('hasCrotch', () => {
-    it('does not detect crotch in circle', () => {
+    it('rejects a polygon circle', () => {
       const glyph = mockGlyphFromPath(CIRCLE.d, CIRCLE.bbox);
-
       expect(hasCrotch(glyph, metrics)).toBe(false);
     });
 
-    it('does not detect crotch in vertical stem', () => {
+    it('rejects a vertical stem', () => {
       const glyph = mockGlyphFromPath(VERTICAL_STEM.d, VERTICAL_STEM.bbox);
-
       expect(hasCrotch(glyph, metrics)).toBe(false);
     });
 
-    it('does not detect crotch in donut', () => {
+    it('rejects a polygon donut', () => {
       const glyph = mockGlyphFromPath(DONUT.d, DONUT.bbox);
-
       expect(hasCrotch(glyph, metrics)).toBe(false);
     });
 
     it('returns false for non-drawable glyph', () => {
-      const glyph = mockNonDrawableGlyph('null-path');
-
-      expect(hasCrotch(glyph, metrics)).toBe(false);
+      expect(hasCrotch(mockNonDrawableGlyph('null-path'), metrics)).toBe(false);
     });
   });
 
   describe('edge cases', () => {
-    it('handles empty path gracefully', () => {
+    it('does not throw on empty path across all vertex detectors', () => {
       const glyph = mockGlyphFromPath(EMPTY_PATH.d, EMPTY_PATH.bbox);
 
       expect(() => hasApex(glyph, metrics)).not.toThrow();
@@ -134,8 +118,7 @@ describe('vertex features', () => {
       expect(() => hasCrotch(glyph, metrics)).not.toThrow();
     });
 
-    it('handles very flat triangular shape', () => {
-      // Wide, flat triangle
+    it('does not throw on a wide flat triangle', () => {
       const flatTriangle = 'M -200 0 L 200 0 L 0 -50 Z';
       const flatBbox = { minX: -200, minY: -50, maxX: 200, maxY: 0 };
       const glyph = mockGlyphFromPath(flatTriangle, flatBbox);
@@ -144,8 +127,7 @@ describe('vertex features', () => {
       expect(() => hasCrotch(glyph, metrics)).not.toThrow();
     });
 
-    it('handles very tall narrow triangle', () => {
-      // Tall, narrow triangle
+    it('does not throw on a tall narrow triangle', () => {
       const tallTriangle = 'M -20 300 L 20 300 L 0 -300 Z';
       const tallBbox = { minX: -20, minY: -300, maxX: 20, maxY: 300 };
       const glyph = mockGlyphFromPath(tallTriangle, tallBbox);

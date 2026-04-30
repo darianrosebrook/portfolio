@@ -5,6 +5,11 @@
  * and font types (grotesk, slab, didone, italic, script).
  *
  * Golden overlay tests for: A, M, e, i, g, Q, S
+ *
+ * Note: Glyph-level positional assertions live in feature-accuracy.test.ts.
+ * This file proves the orchestration layer (registry, hints, geometry cache,
+ * determinism) and uses the Golden Overlay block as a sanity-check on the
+ * counts the orchestrator surfaces for each known glyph.
  */
 
 import { describe, it, expect, beforeAll } from 'vitest';
@@ -18,43 +23,20 @@ import {
   getRegisteredFeatures,
 } from '@/utils/typeAnatomy/detectorRegistry';
 import { getFeatureHints } from '@/utils/typeAnatomy/glyphFeatureHints';
-import type { FeatureID, FeatureInstance } from '@/utils/typeAnatomy/types';
+import type { FeatureID } from '@/utils/typeAnatomy/types';
 
-// Test font loading helper - uses filesystem instead of fetch for Vitest
-function loadTestFont(fontName: string): Font | null {
-  try {
-    const fontPath = path.join(process.cwd(), 'public', 'fonts', fontName);
-    if (!fs.existsSync(fontPath)) {
-      return null;
-    }
-    const buffer = fs.readFileSync(fontPath);
-    return fontkit.create(buffer as unknown as Uint8Array) as Font;
-  } catch {
-    return null;
-  }
+// Hard-fail helpers: a missing font or glyph is a test setup error, not a
+// silent skip. Mirrors font-properties.test.ts.
+function loadTestFont(fontName: string): Font {
+  const fontPath = path.join(process.cwd(), 'public', 'fonts', fontName);
+  const buffer = fs.readFileSync(fontPath);
+  return fontkit.create(buffer as unknown as Uint8Array) as Font;
 }
 
-// Helper to get glyph by character
-function getGlyph(font: Font, char: string): Glyph | null {
-  try {
-    const codePoint = char.codePointAt(0);
-    if (!codePoint) return null;
-    return font.glyphForCodePoint(codePoint) as Glyph;
-  } catch {
-    return null;
-  }
-}
-
-// Helper to assert feature detection
-function assertFeatureDetected(
-  instances: FeatureInstance[],
-  minCount: number,
-  minConfidence: number
-): void {
-  expect(instances.length).toBeGreaterThanOrEqual(minCount);
-  if (instances.length > 0) {
-    expect(instances[0].confidence).toBeGreaterThanOrEqual(minConfidence);
-  }
+function getGlyph(font: Font, char: string): Glyph {
+  const codePoint = char.codePointAt(0);
+  if (!codePoint) throw new Error(`no code point for '${char}'`);
+  return font.glyphForCodePoint(codePoint) as Glyph;
 }
 
 describe('Feature Detection System', () => {
@@ -232,177 +214,96 @@ describe('Feature Detection System', () => {
   });
 });
 
-describe('Golden Overlay Tests', () => {
+/**
+ * Golden Overlay block — assert the specific counts the orchestrator
+ * surfaces for each glyph in Nohemi. These counts are determined empirically
+ * (see probe in commit history); detector behavior on these glyphs is the
+ * contract between the detector layer and the visual overlay.
+ *
+ * Positional / shape-level assertions live in feature-accuracy.test.ts.
+ * Here we only assert *that* the orchestrator finds N instances — the
+ * accuracy file proves *where* and *how* they are shaped.
+ */
+describe('Golden Overlay Tests (Nohemi-VF)', () => {
   let font!: Font;
 
   beforeAll(() => {
-    const f = loadTestFont('Nohemi-VF.ttf');
-    if (!f) throw new Error('Nohemi-VF.ttf missing from public/fonts/');
-    font = f;
+    font = loadTestFont('Nohemi-VF.ttf');
   });
 
-  it('should detect apex in uppercase A', () => {
-    const glyph = getGlyph(font, 'A');
-    if (!glyph) throw new Error('Glyph A missing from Nohemi-VF.ttf');
-
-    const cache = buildGeometryCache(glyph, font);
-    const apexes = detectFeature(cache, 'apex');
-
-    assertFeatureDetected(apexes, 1, 0.5);
-
-    if (apexes.length > 0 && apexes[0].shape.type === 'point') {
-      const apexY = apexes[0].shape.y;
-      const capHeight = cache.metrics.capHeight;
-      const tolerance = cache.scale.bboxH * 0.15;
-      expect(Math.abs(apexY - capHeight)).toBeLessThan(tolerance);
-    }
+  it('uppercase A: apex=1, crotch=1, vertex=2', () => {
+    const cache = buildGeometryCache(getGlyph(font, 'A'), font);
+    expect(detectFeature(cache, 'apex')).toHaveLength(1);
+    expect(detectFeature(cache, 'crotch')).toHaveLength(1);
+    expect(detectFeature(cache, 'vertex')).toHaveLength(2);
   });
 
-  it('should detect vertex and crotch in uppercase M', () => {
-    const glyph = getGlyph(font, 'M');
-    if (!glyph) throw new Error('Glyph M missing from Nohemi-VF.ttf');
-
-    const cache = buildGeometryCache(glyph, font);
-
-    // M has corner vertices at its outer strokes
-    const vertices = detectFeature(cache, 'vertex');
-    expect(vertices.length).toBeGreaterThan(0);
-
-    // M's inner V-shape produces a crotch; detection may vary by font
-    const crotches = detectFeature(cache, 'crotch');
-    expect(crotches.length).toBeGreaterThanOrEqual(0);
+  it('uppercase M: apex=0, crotch=1, vertex=1', () => {
+    // Nohemi M outer peaks are flat-cut (no apex); the inner V junction at
+    // the bottom registers as both vertex and crotch at the same point.
+    const cache = buildGeometryCache(getGlyph(font, 'M'), font);
+    expect(detectFeature(cache, 'apex')).toHaveLength(0);
+    expect(detectFeature(cache, 'crotch')).toHaveLength(1);
+    expect(detectFeature(cache, 'vertex')).toHaveLength(1);
   });
 
-  it('should detect eye and counter in lowercase e', () => {
-    const glyph = getGlyph(font, 'e');
-    if (!glyph) throw new Error('Glyph e missing from Nohemi-VF.ttf');
-
-    const cache = buildGeometryCache(glyph, font);
-
-    const eyes = detectFeature(cache, 'eye');
-    assertFeatureDetected(eyes, 1, 0.4);
-
-    const counters = detectFeature(cache, 'counter');
-    expect(counters.length).toBeGreaterThanOrEqual(0);
+  it('lowercase e: eye=1, counter=1, aperture=2', () => {
+    const cache = buildGeometryCache(getGlyph(font, 'e'), font);
+    expect(detectFeature(cache, 'eye')).toHaveLength(1);
+    expect(detectFeature(cache, 'counter')).toHaveLength(1);
+    // Nohemi e has two aperture detections (the counter-form opening on the
+    // right surfaces twice through the aperture detector). feature-accuracy
+    // pins the right-side opening's position.
+    expect(detectFeature(cache, 'aperture')).toHaveLength(2);
   });
 
-  it('should detect tittle in lowercase i', () => {
-    const glyph = getGlyph(font, 'i');
-    if (!glyph) throw new Error('Glyph i missing from Nohemi-VF.ttf');
-
-    const cache = buildGeometryCache(glyph, font);
-    const tittles = detectFeature(cache, 'tittle');
-
-    expect(tittles.length).toBeGreaterThanOrEqual(1);
-    expect(tittles[0].confidence).toBeGreaterThanOrEqual(0.5);
-
-    if (tittles[0].shape.type === 'circle') {
-      const tittleY = tittles[0].shape.cy;
-      const glyphMidY = (cache.glyph.bbox.minY + cache.glyph.bbox.maxY) / 2;
-      expect(tittleY).toBeGreaterThan(glyphMidY);
-    }
+  it('lowercase i: tittle=1, stem=1', () => {
+    const cache = buildGeometryCache(getGlyph(font, 'i'), font);
+    expect(detectFeature(cache, 'tittle')).toHaveLength(1);
+    expect(detectFeature(cache, 'stem')).toHaveLength(1);
   });
 
-  it('should detect bowl, loop, and ear in lowercase g', () => {
-    const glyph = getGlyph(font, 'g');
-    if (!glyph) throw new Error('Glyph g missing from Nohemi-VF.ttf');
-
-    const cache = buildGeometryCache(glyph, font);
-
-    const bowls = detectFeature(cache, 'bowl');
-    assertFeatureDetected(bowls, 1, 0.5);
-
-    const loops = detectFeature(cache, 'loop');
-    expect(loops.length).toBeGreaterThanOrEqual(0);
-
-    const ears = detectFeature(cache, 'ear');
-    expect(ears.length).toBeGreaterThanOrEqual(0);
+  it('lowercase g: bowl=1, loop=1, ear=0 (Nohemi has no ear)', () => {
+    const cache = buildGeometryCache(getGlyph(font, 'g'), font);
+    expect(detectFeature(cache, 'bowl')).toHaveLength(1);
+    expect(detectFeature(cache, 'loop')).toHaveLength(1);
+    // Nohemi g is geometric and lacks the ear projection; Newsreader g
+    // does, and feature-accuracy.test.ts covers that case.
+    expect(detectFeature(cache, 'ear')).toHaveLength(0);
   });
 
-  it('should detect bowl and tail in uppercase Q', () => {
-    const glyph = getGlyph(font, 'Q');
-    if (!glyph) throw new Error('Glyph Q missing from Nohemi-VF.ttf');
-
-    const cache = buildGeometryCache(glyph, font);
-
-    const bowls = detectFeature(cache, 'bowl');
-    assertFeatureDetected(bowls, 1, 0.5);
-
-    const tails = detectFeature(cache, 'tail');
-    assertFeatureDetected(tails, 1, 0.4);
-
-    if (tails.length > 0) {
-      const tailShape = tails[0].shape;
-      if (tailShape.type === 'line') {
-        expect(Math.min(tailShape.y1, tailShape.y2)).toBeLessThan(
-          cache.metrics.baseline
-        );
-      } else if (tailShape.type === 'polyline' && tailShape.points.length > 0) {
-        const minY = Math.min(...tailShape.points.map((p) => p.y));
-        expect(minY).toBeLessThan(cache.metrics.baseline);
-      }
-    }
+  it('uppercase Q: bowl=1, tail=1, counter=1', () => {
+    const cache = buildGeometryCache(getGlyph(font, 'Q'), font);
+    expect(detectFeature(cache, 'bowl')).toHaveLength(1);
+    expect(detectFeature(cache, 'tail')).toHaveLength(1);
+    expect(detectFeature(cache, 'counter')).toHaveLength(1);
   });
 
-  it('should detect spine in uppercase S', () => {
-    const glyph = getGlyph(font, 'S');
-    if (!glyph) throw new Error('Glyph S missing from Nohemi-VF.ttf');
-
-    const cache = buildGeometryCache(glyph, font);
-
-    const spines = detectFeature(cache, 'spine');
-    assertFeatureDetected(spines, 1, 0.5);
-
-    if (spines.length > 0 && spines[0].debug) {
-      const debug = spines[0].debug as { curveDirectionChanges?: number };
-      if (typeof debug.curveDirectionChanges === 'number') {
-        expect(debug.curveDirectionChanges).toBeGreaterThanOrEqual(1);
-      }
-    }
+  it('uppercase S: spine=1', () => {
+    const cache = buildGeometryCache(getGlyph(font, 'S'), font);
+    expect(detectFeature(cache, 'spine')).toHaveLength(1);
   });
 });
 
 describe('Determinism Tests', () => {
-  it('should return identical results for same glyph', () => {
-    const mockGlyph = {
-      path: {
-        commands: [
-          { command: 'moveTo', args: [100, 0] },
-          { command: 'lineTo', args: [200, 700] },
-          { command: 'lineTo', args: [300, 0] },
-          { command: 'closePath', args: [] },
-        ],
-        toSVG: () => 'M100 0L200 700L300 0Z',
-      },
-      bbox: { minX: 100, minY: 0, maxX: 300, maxY: 700 },
-      advanceWidth: 400,
-      codePoints: [65],
-      name: 'A',
-    } as unknown as Glyph;
+  it('returns identical apex results for Nohemi A across two cache builds', () => {
+    // Nohemi A reliably produces 1 apex; comparing two runs verifies the
+    // detector is deterministic over the same input. Using a synthetic
+    // fixture would silently pass (0 === 0) if the detector returned [].
+    const font = loadTestFont('Nohemi-VF.ttf');
+    const glyph = getGlyph(font, 'A');
 
-    const mockFont = {
-      unitsPerEm: 1000,
-      xHeight: 500,
-      capHeight: 700,
-      ascent: 800,
-      descent: -200,
-      fullName: 'Test Font',
-      familyName: 'Test',
-    } as unknown as Font;
-
-    const cache1 = buildGeometryCache(mockGlyph, mockFont);
-    const cache2 = buildGeometryCache(mockGlyph, mockFont);
+    const cache1 = buildGeometryCache(glyph, font);
+    const cache2 = buildGeometryCache(glyph, font);
 
     const features1 = detectFeature(cache1, 'apex');
     const features2 = detectFeature(cache2, 'apex');
 
-    expect(features1.length).toBe(features2.length);
-
-    if (features1.length > 0 && features2.length > 0) {
-      expect(features1[0].confidence).toBe(features2[0].confidence);
-      expect(JSON.stringify(features1[0].shape)).toBe(
-        JSON.stringify(features2[0].shape)
-      );
-    }
+    expect(features1).toHaveLength(1);
+    expect(features2).toHaveLength(1);
+    expect(features1[0].confidence).toBe(features2[0].confidence);
+    expect(JSON.stringify(features1[0].shape)).toBe(
+      JSON.stringify(features2[0].shape)
+    );
   });
 });

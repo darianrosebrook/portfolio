@@ -27,11 +27,13 @@ describe('opening features', () => {
   const metrics = standardMetrics;
 
   describe('hasAperture', () => {
-    it('returns boolean for donut', () => {
+    // Aperture detection is calibrated for real typefaces (e.g., the right
+    // opening of a `c` or `e`). Synthetic primitives — including DONUT, which
+    // is fully closed — should not match. Real positive coverage on Nohemi e
+    // is in feature-accuracy.test.ts.
+    it('rejects a polygon donut (closed shape, no opening)', () => {
       const glyph = mockGlyphFromPath(DONUT.d, DONUT.bbox);
-
-      const result = hasAperture(glyph, metrics);
-      expect(typeof result).toBe('boolean');
+      expect(hasAperture(glyph, metrics)).toBe(false);
     });
 
     it('does not detect aperture in solid circle', () => {
@@ -118,13 +120,10 @@ describe('opening features', () => {
       expect(hasNeck(glyph, metrics)).toBe(false);
     });
 
-    it('works via detector orchestration', () => {
+    it('orchestrator returns found: false for Neck on a vertical stem', () => {
       const glyph = mockGlyphFromPath(VERTICAL_STEM.d, VERTICAL_STEM.bbox);
-
       const result = detectFeature('Neck', glyph, metrics);
-
-      expect(result).toHaveProperty('found');
-      expect(typeof result.found).toBe('boolean');
+      expect(result.found).toBe(false);
     });
   });
 

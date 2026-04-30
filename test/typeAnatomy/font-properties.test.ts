@@ -48,12 +48,15 @@ describe('Font Property Detection', () => {
       expect(cache.context.isSerif).toBe(true);
     });
 
-    it('should detect Monaspace as monospace', () => {
-      const font = loadTestFont('MonaspaceNeonVF.ttf');
-      const glyph = getGlyph(font, 'A');
-      const cache = buildGeometryCache(glyph, font);
-      expect(typeof cache.context.isMono).toBe('boolean');
-    });
+    it.fails(
+      'should detect Monaspace as monospace (currently isMono=false; detector bug)',
+      () => {
+        const font = loadTestFont('MonaspaceNeonVF.ttf');
+        const glyph = getGlyph(font, 'A');
+        const cache = buildGeometryCache(glyph, font);
+        expect(cache.context.isMono).toBe(true);
+      }
+    );
   });
 
   describe('Italic Detection', () => {

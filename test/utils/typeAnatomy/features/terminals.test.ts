@@ -1,9 +1,10 @@
 /**
  * Tests for terminal feature detectors: terminal, tittle, finial.
- * These features detect stroke endings and diacritical marks.
  *
- * Note: These tests focus on API contracts, error handling, and type safety.
- * Detection accuracy depends on glyph geometry matching detector heuristics.
+ * The legacy detectors are calibrated for real typeface geometry. Synthetic
+ * primitives generally don't trigger them; some (finial on circle/donut) do
+ * over-fire — those false positives are pinned to lock current behavior.
+ * Real positive coverage on real fonts is in feature-accuracy.test.ts.
  */
 import { describe, it, expect } from 'vitest';
 import { getTerminal, hasTerminal } from '@/utils/typeAnatomy/terminal';
@@ -23,134 +24,95 @@ import {
   EMPTY_PATH,
 } from '../../fixtures/svgPaths';
 
-describe('terminal features', () => {
+describe('terminal features (synthetic geometry)', () => {
   const metrics = standardMetrics;
   const font = mockFont();
 
   describe('getTerminal / hasTerminal', () => {
-    it('returns FeatureResult object', () => {
+    it('returns found: false on a vertical stem (no ball/swash terminal)', () => {
       const glyph = mockGlyphFromPath(VERTICAL_STEM.d, VERTICAL_STEM.bbox);
-
-      const result = getTerminal(glyph, metrics);
-
-      expect(result).toHaveProperty('found');
-      expect(typeof result.found).toBe('boolean');
-    });
-
-    it('returns boolean for vertical stem', () => {
-      const glyph = mockGlyphFromPath(VERTICAL_STEM.d, VERTICAL_STEM.bbox);
-
-      const result = getTerminal(glyph, metrics);
-      expect(result).toHaveProperty('found');
-    });
-
-    it('returns shape for ball terminal when found', () => {
-      const glyph = mockGlyphFromPath(VERTICAL_STEM.d, VERTICAL_STEM.bbox);
-
-      const result = getTerminal(glyph, metrics);
-
-      // If found with shape, should be circle type for ball terminal
-      if (result.found && result.shape) {
-        expect(result.shape.type).toBe('circle');
-      }
-    });
-
-    it('hasTerminal returns boolean', () => {
-      const glyph = mockGlyphFromPath(VERTICAL_STEM.d, VERTICAL_STEM.bbox);
-
-      const result = hasTerminal(glyph, metrics);
-
-      expect(typeof result).toBe('boolean');
+      expect(getTerminal(glyph, metrics).found).toBe(false);
+      expect(hasTerminal(glyph, metrics)).toBe(false);
     });
 
     it('returns found: false for non-drawable glyph', () => {
-      const glyph = mockNonDrawableGlyph('null-path');
-
-      const result = getTerminal(glyph, metrics);
-
-      expect(result.found).toBe(false);
+      expect(getTerminal(mockNonDrawableGlyph('null-path'), metrics).found).toBe(
+        false
+      );
     });
 
     it('returns found: false for empty glyph', () => {
-      const glyph = mockNonDrawableGlyph('empty');
-
-      const result = getTerminal(glyph, metrics);
-
-      expect(result.found).toBe(false);
+      expect(getTerminal(mockNonDrawableGlyph('empty'), metrics).found).toBe(
+        false
+      );
     });
 
-    it('works via detector orchestration', () => {
+    it('orchestrator returns found: false for Terminal on a vertical stem', () => {
       const glyph = mockGlyphFromPath(VERTICAL_STEM.d, VERTICAL_STEM.bbox);
-
-      const result = detectFeature('Terminal', glyph, metrics);
-
-      expect(result).toHaveProperty('found');
-      expect(typeof result.found).toBe('boolean');
+      expect(detectFeature('Terminal', glyph, metrics).found).toBe(false);
     });
   });
 
   describe('getTittle / hasTittle', () => {
-    it('returns FeatureResult for vertical stem', () => {
+    // Tittle requires a disconnected mark contour above x-height. None of the
+    // synthetic primitives qualify — all should reject. Real i/j tittle
+    // detection is verified in feature-accuracy.test.ts on Nohemi.
+    it('rejects a vertical stem', () => {
       const glyph = mockGlyphFromPath(VERTICAL_STEM.d, VERTICAL_STEM.bbox);
-
-      const result = getTittle(glyph, metrics, font);
-
-      expect(result).toHaveProperty('found');
+      expect(getTittle(glyph, metrics, font).found).toBe(false);
+      expect(hasTittle(glyph, metrics, font)).toBe(false);
     });
 
-    it('returns FeatureResult for circle', () => {
+    it('rejects a solid circle', () => {
       const glyph = mockGlyphFromPath(CIRCLE.d, CIRCLE.bbox);
-
-      const result = getTittle(glyph, metrics, font);
-
-      expect(result).toHaveProperty('found');
+      expect(getTittle(glyph, metrics, font).found).toBe(false);
     });
 
-    it('returns FeatureResult for donut', () => {
+    it('rejects a polygon donut', () => {
       const glyph = mockGlyphFromPath(DONUT.d, DONUT.bbox);
-
-      const result = getTittle(glyph, metrics, font);
-
-      expect(result).toHaveProperty('found');
+      expect(getTittle(glyph, metrics, font).found).toBe(false);
     });
 
     it('returns found: false for non-drawable glyph', () => {
-      const glyph = mockNonDrawableGlyph('null-path');
-
-      const result = getTittle(glyph, metrics, font);
-
-      expect(result.found).toBe(false);
+      expect(
+        getTittle(mockNonDrawableGlyph('null-path'), metrics, font).found
+      ).toBe(false);
     });
-
   });
 
   describe('hasFinial', () => {
-    it('returns boolean for polygon circle', () => {
-      // Polygon approximation may have edges detected as finials
+    // Pinned: the legacy hasFinial heuristic over-fires on synthetic polygon
+    // primitives — circle and donut are both reported as having finials. Real
+    // finial detection on Nohemi/Newsreader c is in feature-accuracy.test.ts
+    // (currently `it.fails`). If the heuristic is fixed, the assertions below
+    // will fail and force re-examination.
+    it('over-fires on a polygon circle (legacy heuristic limitation)', () => {
       const glyph = mockGlyphFromPath(CIRCLE.d, CIRCLE.bbox);
-
-      expect(typeof hasFinial(glyph, metrics)).toBe('boolean');
+      expect(hasFinial(glyph, metrics)).toBe(true);
     });
 
-    it('returns false for non-drawable glyph', () => {
-      const glyph = mockNonDrawableGlyph('null-path');
+    it('over-fires on a polygon donut (legacy heuristic limitation)', () => {
+      const glyph = mockGlyphFromPath(DONUT.d, DONUT.bbox);
+      expect(hasFinial(glyph, metrics)).toBe(true);
+    });
 
+    it('rejects a vertical stem', () => {
+      const glyph = mockGlyphFromPath(VERTICAL_STEM.d, VERTICAL_STEM.bbox);
       expect(hasFinial(glyph, metrics)).toBe(false);
     });
 
-    it('works via detector orchestration', () => {
+    it('returns false for non-drawable glyph', () => {
+      expect(hasFinial(mockNonDrawableGlyph('null-path'), metrics)).toBe(false);
+    });
+
+    it('orchestrator returns found: false for Finial on a vertical stem', () => {
       const glyph = mockGlyphFromPath(VERTICAL_STEM.d, VERTICAL_STEM.bbox);
-
-      const result = detectFeature('Finial', glyph, metrics);
-
-      expect(result).toHaveProperty('found');
-      expect(typeof result.found).toBe('boolean');
+      expect(detectFeature('Finial', glyph, metrics).found).toBe(false);
     });
   });
 
   describe('edge cases', () => {
-    it('handles very small tittle-like shape', () => {
-      // Small square positioned above x-height
+    it('does not throw on a small mark-like shape above x-height', () => {
       const smallDot = 'M -20 580 L 20 580 L 20 620 L -20 620 Z';
       const smallBbox = { minX: -20, minY: 580, maxX: 20, maxY: 620 };
       const glyph = mockGlyphFromPath(smallDot, smallBbox);
@@ -158,7 +120,7 @@ describe('terminal features', () => {
       expect(() => getTittle(glyph, metrics, font)).not.toThrow();
     });
 
-    it('handles empty path gracefully', () => {
+    it('does not throw on empty path', () => {
       const glyph = mockGlyphFromPath(EMPTY_PATH.d, EMPTY_PATH.bbox);
 
       expect(() => getTerminal(glyph, metrics)).not.toThrow();
@@ -166,7 +128,7 @@ describe('terminal features', () => {
       expect(() => hasFinial(glyph, metrics)).not.toThrow();
     });
 
-    it('handles metrics with extreme values', () => {
+    it('does not throw on metrics with extreme values', () => {
       const glyph = mockGlyphFromPath(VERTICAL_STEM.d, VERTICAL_STEM.bbox);
       const extremeMetrics = {
         baseline: 0,
@@ -179,6 +141,5 @@ describe('terminal features', () => {
       expect(() => getTerminal(glyph, extremeMetrics)).not.toThrow();
       expect(() => getTittle(glyph, extremeMetrics, font)).not.toThrow();
     });
-
   });
 });

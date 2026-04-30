@@ -1,12 +1,17 @@
 /**
  * Tests for counter-related feature detectors: bowl, counter, eye.
- * These features detect enclosed and semi-enclosed spaces in glyphs.
+ *
+ * These pin behavior of the legacy boolean detectors on synthetic geometric
+ * primitives. Real-font correctness assertions live in
+ * test/typeAnatomy/feature-accuracy.test.ts (e.g., Nohemi O bowl/counter,
+ * Nohemi e eye). The tests below guard the *negative space*: shapes the
+ * detectors must NOT classify as bowls/eyes, plus pinned positive behavior
+ * for fixtures that currently trigger detection.
  */
 import { describe, it, expect } from 'vitest';
 import { hasBowl } from '@/utils/typeAnatomy/bowl';
 import { getCounter } from '@/utils/typeAnatomy/counter';
 import { hasEye } from '@/utils/typeAnatomy/eye';
-import { detectFeature } from '@/utils/typeAnatomy/detector';
 import {
   mockGlyphFromPath,
   mockNonDrawableGlyph,
@@ -21,205 +26,145 @@ import {
   FIGURE_EIGHT,
 } from '../../fixtures/svgPaths';
 
-describe('counter features', () => {
+describe('counter features (synthetic geometry)', () => {
   const metrics = standardMetrics;
 
   describe('hasBowl', () => {
-    it('returns boolean for donut shape', () => {
+    // The legacy hasBowl heuristic is calibrated for real typefaces and does
+    // not fire on synthetic polygon-approximated donuts. Real bowl detection
+    // is verified in feature-accuracy.test.ts on Nohemi O.
+    it('rejects a polygon donut (legacy heuristic only fires on real bowls)', () => {
       const glyph = mockGlyphFromPath(DONUT.d, DONUT.bbox);
-
-      // Detection depends on shape alignment with metrics
-      const result = hasBowl(glyph, metrics);
-      expect(typeof result).toBe('boolean');
-    });
-
-    it('returns boolean for solid circle', () => {
-      const glyph = mockGlyphFromPath(CIRCLE.d, CIRCLE.bbox);
-
-      const result = hasBowl(glyph, metrics);
-      expect(typeof result).toBe('boolean');
-    });
-
-    it('does not detect bowl in rectangle', () => {
-      const glyph = mockGlyphFromPath(RECTANGLE.d, RECTANGLE.bbox);
-
       expect(hasBowl(glyph, metrics)).toBe(false);
     });
 
-    it('does not detect bowl in vertical stem', () => {
-      const glyph = mockGlyphFromPath(VERTICAL_STEM.d, VERTICAL_STEM.bbox);
+    it('rejects a solid circle', () => {
+      const glyph = mockGlyphFromPath(CIRCLE.d, CIRCLE.bbox);
+      expect(hasBowl(glyph, metrics)).toBe(false);
+    });
 
+    it('rejects a rectangle', () => {
+      const glyph = mockGlyphFromPath(RECTANGLE.d, RECTANGLE.bbox);
+      expect(hasBowl(glyph, metrics)).toBe(false);
+    });
+
+    it('rejects a vertical stem', () => {
+      const glyph = mockGlyphFromPath(VERTICAL_STEM.d, VERTICAL_STEM.bbox);
       expect(hasBowl(glyph, metrics)).toBe(false);
     });
 
     it('returns false for non-drawable glyph', () => {
-      const glyph = mockNonDrawableGlyph('null-path');
-
-      expect(hasBowl(glyph, metrics)).toBe(false);
+      expect(hasBowl(mockNonDrawableGlyph('null-path'), metrics)).toBe(false);
     });
 
     it('returns false for empty glyph', () => {
-      const glyph = mockNonDrawableGlyph('empty');
-
-      expect(hasBowl(glyph, metrics)).toBe(false);
+      expect(hasBowl(mockNonDrawableGlyph('empty'), metrics)).toBe(false);
     });
 
-    it('returns boolean for figure-eight shape', () => {
+    it('detects a figure-eight shape (two stacked counters)', () => {
+      // Figure-eight has two enclosed bowl-like regions; the heuristic fires.
       const glyph = mockGlyphFromPath(FIGURE_EIGHT.d, FIGURE_EIGHT.bbox);
-
-      const result = hasBowl(glyph, metrics);
-      expect(typeof result).toBe('boolean');
+      expect(hasBowl(glyph, metrics)).toBe(true);
     });
   });
 
   describe('getCounter', () => {
-    it('returns FeatureResult for donut shape', () => {
+    it('finds a counter in a donut and returns a polyline shape', () => {
       const glyph = mockGlyphFromPath(DONUT.d, DONUT.bbox);
-
       const result = getCounter(glyph, metrics);
 
-      expect(result).toHaveProperty('found');
-      expect(typeof result.found).toBe('boolean');
-      // Counter detection may return shape
-      if (result.found && result.shape) {
-        expect(result.shape).toHaveProperty('type');
+      expect(result.found).toBe(true);
+      expect(result.shape?.type).toBe('polyline');
+      if (result.shape?.type === 'polyline') {
+        expect(result.shape.points.length).toBeGreaterThan(0);
       }
     });
 
-    it('returns FeatureResult for solid circle', () => {
+    it('finds a counter in a solid circle (single enclosed region)', () => {
       const glyph = mockGlyphFromPath(CIRCLE.d, CIRCLE.bbox);
-
       const result = getCounter(glyph, metrics);
-
-      expect(result).toHaveProperty('found');
-      expect(typeof result.found).toBe('boolean');
+      expect(result.found).toBe(true);
     });
 
-    it('returns FeatureResult for rectangle', () => {
+    it('finds a counter in a rectangle (single enclosed region)', () => {
       const glyph = mockGlyphFromPath(RECTANGLE.d, RECTANGLE.bbox);
-
       const result = getCounter(glyph, metrics);
-
-      expect(result).toHaveProperty('found');
-      expect(typeof result.found).toBe('boolean');
-    });
-
-    it('returns polyline shape when counter is found', () => {
-      const glyph = mockGlyphFromPath(DONUT.d, DONUT.bbox);
-
-      const result = getCounter(glyph, metrics);
-
-      // Only check shape structure if found
-      if (result.found && result.shape) {
-        expect(result.shape.type).toBe('polyline');
-        if (result.shape.type === 'polyline') {
-          expect(Array.isArray(result.shape.points)).toBe(true);
-          expect(result.shape.points.length).toBeGreaterThan(0);
-        }
-      }
+      expect(result.found).toBe(true);
     });
 
     it('returns found: false for non-drawable glyph', () => {
-      const glyph = mockNonDrawableGlyph('null-path');
-
-      const result = getCounter(glyph, metrics);
-
+      const result = getCounter(mockNonDrawableGlyph('null-path'), metrics);
       expect(result.found).toBe(false);
     });
 
     it('returns found: false for empty path', () => {
       const glyph = mockGlyphFromPath(EMPTY_PATH.d, EMPTY_PATH.bbox);
-
       const result = getCounter(glyph, metrics);
-
       expect(result.found).toBe(false);
-    });
-
-    it('works via detector orchestration', () => {
-      const glyph = mockGlyphFromPath(DONUT.d, DONUT.bbox);
-
-      const result = detectFeature('Counter', glyph, metrics);
-
-      expect(result).toHaveProperty('found');
     });
   });
 
   describe('hasEye', () => {
-    it('returns boolean for donut', () => {
-      const glyph = mockGlyphFromPath(DONUT.d, DONUT.bbox);
-
-      const result = hasEye(glyph, metrics);
-      expect(typeof result).toBe('boolean');
+    // Eye is a tightly-constrained shape (small enclosed region inside an e).
+    // None of the synthetic primitives match — all should return false.
+    it('rejects a donut', () => {
+      expect(hasEye(mockGlyphFromPath(DONUT.d, DONUT.bbox), metrics)).toBe(
+        false
+      );
     });
 
-    it('does not detect eye in solid circle', () => {
-      const glyph = mockGlyphFromPath(CIRCLE.d, CIRCLE.bbox);
-
-      expect(hasEye(glyph, metrics)).toBe(false);
+    it('rejects a solid circle', () => {
+      expect(hasEye(mockGlyphFromPath(CIRCLE.d, CIRCLE.bbox), metrics)).toBe(
+        false
+      );
     });
 
-    it('does not detect eye in vertical stem', () => {
-      const glyph = mockGlyphFromPath(VERTICAL_STEM.d, VERTICAL_STEM.bbox);
-
-      expect(hasEye(glyph, metrics)).toBe(false);
+    it('rejects a vertical stem', () => {
+      expect(
+        hasEye(mockGlyphFromPath(VERTICAL_STEM.d, VERTICAL_STEM.bbox), metrics)
+      ).toBe(false);
     });
 
     it('returns false for non-drawable glyph', () => {
-      const glyph = mockNonDrawableGlyph('null-path');
-
-      expect(hasEye(glyph, metrics)).toBe(false);
+      expect(hasEye(mockNonDrawableGlyph('null-path'), metrics)).toBe(false);
     });
 
     it('returns false for empty glyph', () => {
-      const glyph = mockNonDrawableGlyph('empty');
-
-      expect(hasEye(glyph, metrics)).toBe(false);
+      expect(hasEye(mockNonDrawableGlyph('empty'), metrics)).toBe(false);
     });
-
   });
 
   describe('edge cases', () => {
-    it('handles unusual metrics (negative baseline)', () => {
+    it('does not throw on unusual metrics (negative baseline)', () => {
       const glyph = mockGlyphFromPath(DONUT.d, DONUT.bbox);
-      const unusualMetrics = {
-        ...standardMetrics,
-        baseline: -100,
-      };
-
-      // Should not throw
+      const unusualMetrics = { ...standardMetrics, baseline: -100 };
       expect(() => hasBowl(glyph, unusualMetrics)).not.toThrow();
     });
 
-    it('handles unusual metrics (xHeight below baseline)', () => {
+    it('does not throw on inverted metrics (xHeight below baseline)', () => {
       const glyph = mockGlyphFromPath(DONUT.d, DONUT.bbox);
-      const unusualMetrics = {
-        ...standardMetrics,
-        xHeight: -100, // Below baseline
-      };
-
-      // Should handle gracefully
+      const unusualMetrics = { ...standardMetrics, xHeight: -100 };
       expect(() => hasBowl(glyph, unusualMetrics)).not.toThrow();
     });
 
-    it('handles very small glyph', () => {
+    it('does not throw on a sub-em-square glyph', () => {
       const smallBbox = { minX: 0, minY: 0, maxX: 5, maxY: 5 };
       const glyph = mockGlyphFromPath('M 0 0 L 5 0 L 5 5 L 0 5 Z', smallBbox);
-
       expect(() => hasBowl(glyph, metrics)).not.toThrow();
       expect(() => getCounter(glyph, metrics)).not.toThrow();
     });
 
-    it('handles glyph at extreme coordinates', () => {
+    it('does not throw on far-from-origin coordinates', () => {
+      // Polygon-approximated donut at extreme coordinates.
       const extremeBbox = {
         minX: 10000,
         minY: 10000,
         maxX: 10600,
         maxY: 10600,
       };
-      const d = `M 10300 10000 A 300 300 0 1 0 9700 10000 A 300 300 0 1 0 10300 10000 Z
-                 M 10120 10000 A 120 120 0 1 1 9880 10000 A 120 120 0 1 1 10120 10000 Z`;
-      const glyph = mockGlyphFromPath(d.replace(/\s+/g, ' '), extremeBbox);
-
+      const outer = `M 10300 10000 L 10600 10300 L 10300 10600 L 10000 10300 Z`;
+      const inner = `M 10300 10180 L 10120 10300 L 10300 10420 L 10480 10300 Z`;
+      const glyph = mockGlyphFromPath(`${outer} ${inner}`, extremeBbox);
       expect(() => hasBowl(glyph, metrics)).not.toThrow();
     });
   });

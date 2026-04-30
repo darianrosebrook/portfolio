@@ -23,17 +23,20 @@ describe('detector orchestration', () => {
   const metrics = standardMetrics;
 
   describe('detectFeature', () => {
-    it('returns DetectionResult with found: true for positive detection', () => {
-      // Donut shape has a bowl (enclosed counter)
+    it('returns found: true on Counter for a donut polygon', () => {
+      // Counter is the canonical positive case for synthetic donut geometry —
+      // the inner polygon's enclosed region surfaces through the detector.
+      // (Bowl, despite the donut's visual appearance, returns false on this
+      // synthetic path because hasBowl uses heuristics calibrated for real
+      // typefaces; that's exercised in feature-accuracy.test.ts on Nohemi O.)
       const glyph = mockGlyphFromPath(DONUT.d, DONUT.bbox);
 
-      const result = detectFeature('Bowl', glyph, metrics);
+      const result = detectFeature('Counter', glyph, metrics);
 
-      expect(result).toHaveProperty('found');
-      expect(typeof result.found).toBe('boolean');
+      expect(result.found).toBe(true);
     });
 
-    it('returns DetectionResult with found: false for unknown feature', () => {
+    it('returns found: false for unknown feature names', () => {
       const glyph = mockGlyphFromPath(CIRCLE.d, CIRCLE.bbox);
 
       const result = detectFeature('UnknownFeature', glyph, metrics);
@@ -41,27 +44,25 @@ describe('detector orchestration', () => {
       expect(result.found).toBe(false);
     });
 
-    it('normalizes boolean detector result to DetectionResult', () => {
-      const glyph = mockGlyphFromPath(DONUT.d, DONUT.bbox);
-
-      const result = detectFeature('Bowl', glyph, metrics);
-
-      // Should be normalized to an object with 'found' property
-      expect(result).toBeTypeOf('object');
-      expect(result).toHaveProperty('found');
-    });
-
-    it('handles detector that returns DetectionResult with shape', () => {
-      // Counter detector returns shape information
+    it('normalizes detector return shape to a DetectionResult object', () => {
       const glyph = mockGlyphFromPath(DONUT.d, DONUT.bbox);
 
       const result = detectFeature('Counter', glyph, metrics);
 
-      expect(result).toHaveProperty('found');
-      // If found, may also have shape
-      if (result.found) {
-        expect(result).toHaveProperty('shape');
-      }
+      // Even when found is true, result must be a plain object with the
+      // documented contract (`found`, optional `shape`/`location`).
+      expect(result).toBeTypeOf('object');
+      expect(result.found).toBe(true);
+    });
+
+    it('forwards a renderable shape on Counter detection', () => {
+      const glyph = mockGlyphFromPath(DONUT.d, DONUT.bbox);
+
+      const result = detectFeature('Counter', glyph, metrics);
+
+      expect(result.found).toBe(true);
+      expect(result.shape).toBeDefined();
+      expect(result.shape?.type).toBe('polyline');
     });
 
     it('returns found: false when detector throws', () => {
@@ -74,23 +75,27 @@ describe('detector orchestration', () => {
       expect(result.found).toBe(false);
     });
 
-    it('passes font parameter to detectors that need it', () => {
+    it('does not detect a tittle on a donut (no disconnected mark above x-height)', () => {
       const glyph = mockGlyphFromPath(DONUT.d, DONUT.bbox);
       const font = mockFont({ unitsPerEm: 1000 });
 
-      // Tittle detector uses font for EPS calculation
+      // Tittle requires a disconnected mark contour above x-height.
+      // A donut is one closed shape — must reject.
       const result = detectFeature('Tittle', glyph, metrics, font);
 
-      expect(result).toHaveProperty('found');
+      expect(result.found).toBe(false);
     });
 
-    it('handles Stem detection which requires font', () => {
+    it('detects a stem on a donut polygon when font is supplied', () => {
+      // hasStem fires on the donut polygon's vertical extent. This proves the
+      // orchestrator threads font through to the detector — without font,
+      // Stem rejects unconditionally (covered by the next test).
       const glyph = mockGlyphFromPath(DONUT.d, DONUT.bbox);
       const font = mockFont();
 
       const result = detectFeature('Stem', glyph, metrics, font);
 
-      expect(result).toHaveProperty('found');
+      expect(result.found).toBe(true);
     });
 
     it('returns found: false for Stem when no font provided', () => {
@@ -147,17 +152,18 @@ describe('detector orchestration', () => {
       });
     });
 
-    it('handles mixed positive and negative detections', () => {
+    it('returns mixed positive/negative DetectionResults for a donut', () => {
       const glyph = mockGlyphFromPath(DONUT.d, DONUT.bbox);
       const font = mockFont();
-      const featureNames = ['Bowl', 'Tittle', 'Apex'];
+      const featureNames = ['Counter', 'Tittle', 'Apex'];
 
       const results = detectFeatures(featureNames, glyph, metrics, font);
 
-      // Bowl should be found in donut, but probably not tittle or apex
-      expect(results.get('Bowl')).toBeDefined();
-      expect(results.get('Tittle')).toBeDefined();
-      expect(results.get('Apex')).toBeDefined();
+      // Counter fires on the donut's enclosed region; Tittle and Apex
+      // require structural features the donut does not have.
+      expect(results.get('Counter')?.found).toBe(true);
+      expect(results.get('Tittle')?.found).toBe(false);
+      expect(results.get('Apex')?.found).toBe(false);
     });
 
     it('handles empty feature names array', () => {

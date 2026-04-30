@@ -1,9 +1,10 @@
 /**
  * Tests for projection feature detectors: serif, ear, spur, beak, bracket.
- * These features detect small projections and decorative elements.
  *
- * Note: These tests focus on API contracts, error handling, and type safety.
- * Detection accuracy depends on glyph geometry matching detector heuristics.
+ * Real-font correctness lives in test/typeAnatomy/feature-accuracy.test.ts.
+ * The legacy hasSpur heuristic is known to over-fire on synthetic geometry —
+ * those false positives are pinned below so a future fix forces the tests
+ * to be re-examined.
  */
 import { describe, it, expect } from 'vitest';
 import { hasSerif } from '@/utils/typeAnatomy/serif';
@@ -25,148 +26,119 @@ import {
   EMPTY_PATH,
 } from '../../fixtures/svgPaths';
 
-describe('projection features', () => {
+describe('projection features (synthetic geometry)', () => {
   const metrics = standardMetrics;
 
   describe('hasSerif', () => {
-    it('returns boolean for polygon circle', () => {
-      // Polygon approximation may have edges detected as serifs
+    it('rejects a polygon circle', () => {
       const glyph = mockGlyphFromPath(CIRCLE.d, CIRCLE.bbox);
-
-      expect(typeof hasSerif(glyph, metrics)).toBe('boolean');
+      expect(hasSerif(glyph, metrics)).toBe(false);
     });
 
-    it('returns boolean for plain rectangle', () => {
+    it('rejects a plain rectangle', () => {
       const glyph = mockGlyphFromPath(RECTANGLE.d, RECTANGLE.bbox);
-
-      expect(typeof hasSerif(glyph, metrics)).toBe('boolean');
+      expect(hasSerif(glyph, metrics)).toBe(false);
     });
 
-    it('returns boolean for donut', () => {
-      // Polygon approximation may have edges detected as serifs
+    it('rejects a polygon donut', () => {
       const glyph = mockGlyphFromPath(DONUT.d, DONUT.bbox);
-
-      expect(typeof hasSerif(glyph, metrics)).toBe('boolean');
+      expect(hasSerif(glyph, metrics)).toBe(false);
     });
 
     it('returns false for non-drawable glyph', () => {
-      const glyph = mockNonDrawableGlyph('null-path');
-
-      expect(hasSerif(glyph, metrics)).toBe(false);
+      expect(hasSerif(mockNonDrawableGlyph('null-path'), metrics)).toBe(false);
     });
 
     it('returns false for empty glyph', () => {
-      const glyph = mockNonDrawableGlyph('empty');
-
-      expect(hasSerif(glyph, metrics)).toBe(false);
+      expect(hasSerif(mockNonDrawableGlyph('empty'), metrics)).toBe(false);
     });
   });
 
   describe('hasEar', () => {
     it('does not detect ear in vertical stem', () => {
       const glyph = mockGlyphFromPath(VERTICAL_STEM.d, VERTICAL_STEM.bbox);
-
       expect(hasEar(glyph, metrics)).toBe(false);
     });
 
     it('does not detect ear in circle', () => {
       const glyph = mockGlyphFromPath(CIRCLE.d, CIRCLE.bbox);
-
       expect(hasEar(glyph, metrics)).toBe(false);
     });
 
     it('returns false for non-drawable glyph', () => {
-      const glyph = mockNonDrawableGlyph('null-path');
-
-      expect(hasEar(glyph, metrics)).toBe(false);
+      expect(hasEar(mockNonDrawableGlyph('null-path'), metrics)).toBe(false);
     });
   });
 
   describe('hasSpur', () => {
-    it('returns boolean for circle', () => {
+    // Pinned: the legacy hasSpur heuristic over-fires on every synthetic
+    // primitive that has a closed contour. Real spur detection on Nohemi G
+    // is currently `it.fails` in feature-accuracy.test.ts. When the
+    // heuristic is repaired the assertions below will fail and force a
+    // matching update here.
+    it('over-fires on a polygon circle (legacy heuristic limitation)', () => {
       const glyph = mockGlyphFromPath(CIRCLE.d, CIRCLE.bbox);
-
-      const result = hasSpur(glyph, metrics);
-      expect(typeof result).toBe('boolean');
+      expect(hasSpur(glyph, metrics)).toBe(true);
     });
 
-    it('returns boolean for vertical stem', () => {
+    it('over-fires on a vertical stem (legacy heuristic limitation)', () => {
       const glyph = mockGlyphFromPath(VERTICAL_STEM.d, VERTICAL_STEM.bbox);
-
-      const result = hasSpur(glyph, metrics);
-      expect(typeof result).toBe('boolean');
+      expect(hasSpur(glyph, metrics)).toBe(true);
     });
 
-    it('returns boolean for rectangle', () => {
+    it('over-fires on a rectangle (legacy heuristic limitation)', () => {
       const glyph = mockGlyphFromPath(RECTANGLE.d, RECTANGLE.bbox);
-
-      const result = hasSpur(glyph, metrics);
-      expect(typeof result).toBe('boolean');
+      expect(hasSpur(glyph, metrics)).toBe(true);
     });
 
     it('returns false for non-drawable glyph', () => {
-      const glyph = mockNonDrawableGlyph('null-path');
-
-      expect(hasSpur(glyph, metrics)).toBe(false);
+      expect(hasSpur(mockNonDrawableGlyph('null-path'), metrics)).toBe(false);
     });
 
-    it('works via detector orchestration', () => {
+    it('orchestrator surfaces hasSpur output via Spur feature', () => {
       const glyph = mockGlyphFromPath(VERTICAL_STEM.d, VERTICAL_STEM.bbox);
-
-      const result = detectFeature('Spur', glyph, metrics);
-
-      expect(result).toHaveProperty('found');
-      expect(typeof result.found).toBe('boolean');
+      // Same over-fire as the unit detector — pinned so the orchestration
+      // path is verified to forward the value.
+      expect(detectFeature('Spur', glyph, metrics).found).toBe(true);
     });
   });
 
   describe('hasBeak', () => {
-    it('returns boolean for circle', () => {
+    it('rejects a polygon circle', () => {
       const glyph = mockGlyphFromPath(CIRCLE.d, CIRCLE.bbox);
-
-      const result = hasBeak(glyph, metrics);
-      expect(typeof result).toBe('boolean');
-    });
-
-    it('returns boolean for vertical stem', () => {
-      const glyph = mockGlyphFromPath(VERTICAL_STEM.d, VERTICAL_STEM.bbox);
-
-      const result = hasBeak(glyph, metrics);
-      expect(typeof result).toBe('boolean');
-    });
-
-    it('returns false for non-drawable glyph', () => {
-      const glyph = mockNonDrawableGlyph('null-path');
-
       expect(hasBeak(glyph, metrics)).toBe(false);
     });
 
-    it('works via detector orchestration', () => {
+    it('rejects a vertical stem', () => {
+      const glyph = mockGlyphFromPath(VERTICAL_STEM.d, VERTICAL_STEM.bbox);
+      expect(hasBeak(glyph, metrics)).toBe(false);
+    });
+
+    it('returns false for non-drawable glyph', () => {
+      expect(hasBeak(mockNonDrawableGlyph('null-path'), metrics)).toBe(false);
+    });
+
+    it('orchestrator returns found: false for Beak on a circle', () => {
       const glyph = mockGlyphFromPath(CIRCLE.d, CIRCLE.bbox);
-
-      const result = detectFeature('Beak', glyph, metrics);
-
-      expect(result).toHaveProperty('found');
-      expect(typeof result.found).toBe('boolean');
+      expect(detectFeature('Beak', glyph, metrics).found).toBe(false);
     });
   });
 
   describe('hasBracket', () => {
     it('does not detect bracket in circle', () => {
       const glyph = mockGlyphFromPath(CIRCLE.d, CIRCLE.bbox);
-
       expect(hasBracket(glyph, metrics)).toBe(false);
     });
 
     it('returns false for non-drawable glyph', () => {
-      const glyph = mockNonDrawableGlyph('null-path');
-
-      expect(hasBracket(glyph, metrics)).toBe(false);
+      expect(hasBracket(mockNonDrawableGlyph('null-path'), metrics)).toBe(
+        false
+      );
     });
   });
 
   describe('edge cases', () => {
-    it('handles empty path gracefully', () => {
+    it('does not throw on empty path across all projection detectors', () => {
       const glyph = mockGlyphFromPath(EMPTY_PATH.d, EMPTY_PATH.bbox);
 
       expect(() => hasSerif(glyph, metrics)).not.toThrow();
@@ -176,8 +148,7 @@ describe('projection features', () => {
       expect(() => hasBracket(glyph, metrics)).not.toThrow();
     });
 
-    it('handles very small projection-like shapes', () => {
-      // Small tab/projection shape
+    it('does not throw on a small tab/projection shape', () => {
       const tabPath = `
         M -20 0 L 20 0 L 20 100 L 40 100 L 40 120 L 20 120
         L 20 200 L -20 200 L -20 120 L -40 120 L -40 100 L -20 100 Z
@@ -191,8 +162,7 @@ describe('projection features', () => {
       expect(() => hasEar(glyph, metrics)).not.toThrow();
     });
 
-    it('handles complex path with multiple projections', () => {
-      // Shape with multiple small projections
+    it('does not throw on a complex multi-projection shape', () => {
       const complexPath = `
         M 0 0 L 100 0 L 100 -20 L 120 -20 L 120 20 L 100 20 L 100 100
         L 120 100 L 120 140 L 100 140 L 100 200 L 0 200 L 0 140 L -20 140
