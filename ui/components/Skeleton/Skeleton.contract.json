@@ -50,6 +50,58 @@
       "skeleton.anim.easing"
     ]
   },
+  "props": {
+    "styled": {
+      "members": [
+        {
+          "name": "variant",
+          "type": "SkeletonVariant | undefined",
+          "description": "",
+          "required": false,
+          "default": "block"
+        },
+        {
+          "name": "animate",
+          "type": "\"shimmer\" | \"wipe\" | \"pulse\" | \"none\" | undefined",
+          "description": "",
+          "required": false,
+          "default": "shimmer"
+        },
+        {
+          "name": "density",
+          "type": "\"compact\" | \"regular\" | \"spacious\" | undefined",
+          "description": "",
+          "required": false,
+          "default": "regular"
+        },
+        {
+          "name": "aspectRatio",
+          "type": "string | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "lines",
+          "type": "number | { min: number; max: number; } | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "radius",
+          "type": "\"sm\" | \"md\" | \"lg\" | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "decorative",
+          "type": "boolean | undefined",
+          "description": "",
+          "required": false,
+          "default": "true"
+        }
+      ]
+    }
+  },
   "ssr": {
     "hydrateOn": "interaction"
   },

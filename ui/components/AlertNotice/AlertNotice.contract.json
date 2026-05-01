@@ -116,6 +116,36 @@
       "alert.typography.title.fontSize"
     ]
   },
+  "props": {
+    "styled": {
+      "members": [
+        {
+          "name": "status",
+          "type": "StatusIntent | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "level",
+          "type": "\"page\" | \"section\" | \"inline\" | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "index",
+          "type": "number",
+          "description": "",
+          "required": true
+        },
+        {
+          "name": "dismissible",
+          "type": "boolean | undefined",
+          "description": "",
+          "required": false
+        }
+      ]
+    }
+  },
   "ssr": {
     "hydrateOn": "interaction"
   },

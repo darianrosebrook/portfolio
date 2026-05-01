@@ -182,6 +182,83 @@
       "dialog.spacing.backdrop.paddingMobile"
     ]
   },
+  "props": {
+    "styled": {
+      "members": [
+        {
+          "name": "modal",
+          "type": "boolean | undefined",
+          "description": "Whether dialog is modal (blocks interaction with background)",
+          "required": false,
+          "default": "true"
+        },
+        {
+          "name": "size",
+          "type": "DialogSize | undefined",
+          "description": "Dialog size",
+          "required": false,
+          "default": "md"
+        },
+        {
+          "name": "closeOnBackdropClick",
+          "type": "boolean | undefined",
+          "description": "Whether to close on backdrop click (modal only)",
+          "required": false,
+          "default": "true"
+        },
+        {
+          "name": "closeOnEscape",
+          "type": "boolean | undefined",
+          "description": "Whether to close on escape key",
+          "required": false,
+          "default": "true"
+        },
+        {
+          "name": "initialFocus",
+          "type": "string | undefined",
+          "description": "Initial focus element selector",
+          "required": false
+        },
+        {
+          "name": "returnFocus",
+          "type": "string | undefined",
+          "description": "Return focus element selector",
+          "required": false
+        },
+        {
+          "name": "open",
+          "type": "boolean | undefined",
+          "description": "",
+          "required": false,
+          "default": "false"
+        },
+        {
+          "name": "defaultOpen",
+          "type": "boolean | undefined",
+          "description": "",
+          "required": false,
+          "default": "false"
+        },
+        {
+          "name": "dismissible",
+          "type": "boolean | undefined",
+          "description": "",
+          "required": false,
+          "default": "true"
+        }
+      ]
+    },
+    "hook": {
+      "members": [
+        {
+          "name": "defaultOpen",
+          "type": "boolean | undefined",
+          "description": "",
+          "required": false
+        }
+      ]
+    }
+  },
   "ssr": {
     "hydrateOn": "interaction"
   },

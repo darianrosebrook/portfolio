@@ -48,6 +48,46 @@
       "tooltip.motion.easing.exit"
     ]
   },
+  "props": {
+    "styled": {
+      "members": [
+        {
+          "name": "content",
+          "type": "ReactNode",
+          "description": "Tooltip content",
+          "required": true
+        },
+        {
+          "name": "placement",
+          "type": "Placement | undefined",
+          "description": "Placement relative to trigger",
+          "required": false,
+          "default": "auto"
+        },
+        {
+          "name": "trigger",
+          "type": "TriggerStrategy | undefined",
+          "description": "How the tooltip is triggered",
+          "required": false,
+          "default": "hover"
+        },
+        {
+          "name": "delay",
+          "type": "number | undefined",
+          "description": "Delay before showing (ms)",
+          "required": false,
+          "default": 500
+        },
+        {
+          "name": "disabled",
+          "type": "boolean | undefined",
+          "description": "Whether tooltip is disabled",
+          "required": false,
+          "default": "false"
+        }
+      ]
+    }
+  },
   "ssr": {
     "hydrateOn": "interaction"
   },

@@ -96,6 +96,54 @@
       "walkthrough.dots.idle"
     ]
   },
+  "props": {
+    "hook": {
+      "members": [
+        {
+          "name": "stepsProp",
+          "type": "WalkthroughStepSpec[] | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "defaultIndex",
+          "type": "number | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "index",
+          "type": "number | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "storageKey",
+          "type": "string | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "autoStart",
+          "type": "boolean | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "allowConcurrent",
+          "type": "boolean | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "closeOnOutsideClick",
+          "type": "boolean | undefined",
+          "description": "",
+          "required": false
+        }
+      ]
+    }
+  },
   "ssr": {
     "hydrateOn": "interaction"
   },

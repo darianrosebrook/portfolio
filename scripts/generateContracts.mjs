@@ -5,11 +5,27 @@
  * Contracts are derived from implementation, SCSS module classes, slot markers,
  * accessibility attributes, and component token files. Existing contracts are
  * updated by default so they do not drift into boilerplate.
+ *
+ * Props are extracted via the TypeScript Compiler API (ts-morph) when available.
+ * Hand-authored sections (channels, focus, dismissal, stateMachine, motion,
+ * portal, relationships) are preserved from the existing contract file.
  */
 
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+
+// Hand-authored contract sections — regenerate never overwrites these if present
+const PRESERVED_KEYS = [
+  'channels',
+  'types',
+  'stateMachine',
+  'focus',
+  'dismissal',
+  'motion',
+  'portal',
+  'relationships',
+];
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -531,6 +547,125 @@ function flattenTokenPaths(node, prefix = []) {
   return paths;
 }
 
+// ── ts-morph prop extraction ─────────────────────────────────────────────────
+
+// Prop names excluded from the agent-facing descriptor (infrastructure, not API)
+const EXCLUDED_PROP_NAMES = new Set([
+  'className', 'style', 'id', 'key', 'ref', 'children',
+  'data-testid', 'tabIndex',
+]);
+const EXCLUDED_PROP_PATTERNS = [/^aria-/, /^data-/, /^on[A-Z]/, /Ref$/];
+
+function isExcludedProp(name) {
+  if (EXCLUDED_PROP_NAMES.has(name)) return true;
+  return EXCLUDED_PROP_PATTERNS.some((re) => re.test(name));
+}
+
+function simplifyType(typeStr) {
+  return typeStr
+    .replace(/React\.(ReactNode|ReactElement|FC[^,)>]*)/g, 'ReactNode')
+    .replace(/React\.CSSProperties/g, 'CSSProperties')
+    .replace(/React\.(MouseEvent|KeyboardEvent|FocusEvent|ChangeEvent)<[^>]+>/g, (_, e) => e)
+    .replace(/import\([^)]+\)\./g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+async function extractPropsViaTs(componentName, componentPath) {
+  let Project;
+  try {
+    ({ Project } = await import('ts-morph'));
+  } catch {
+    return null; // ts-morph not available
+  }
+
+  const tsconfigPath = path.join(__dirname, '..', 'tsconfig.json');
+  const project = new Project({
+    tsConfigFilePath: tsconfigPath,
+    skipAddingFilesFromTsConfig: true,
+  });
+
+  const mainFile = path.join(componentPath, `${componentName}.tsx`);
+  const hookFile = path.join(componentPath, `use${componentName}.ts`);
+  if (!fs.existsSync(mainFile)) return null;
+
+  project.addSourceFileAtPath(mainFile);
+  if (fs.existsSync(hookFile)) project.addSourceFileAtPath(hookFile);
+
+  const result = {};
+
+  function extractMembers(sourceFile, declName) {
+    const propsDecl =
+      sourceFile.getTypeAlias(declName) ||
+      sourceFile.getInterface(declName);
+    if (!propsDecl) return [];
+
+    // getType().getProperties() works for both interfaces and union type aliases
+    const type = propsDecl.getType();
+    const members = [];
+
+    for (const sym of type.getProperties()) {
+      const name = sym.getName();
+      if (isExcludedProp(name)) continue;
+
+      // Get the declaring node (first declaration found)
+      const decls = sym.getDeclarations();
+      const firstDecl = decls[0];
+
+      // Resolve the property type at its declaration site
+      const propType = firstDecl ? firstDecl.getType() : sym.getDeclaredType();
+      const typeStr = simplifyType(propType ? propType.getText(firstDecl) : 'unknown');
+
+      const required = firstDecl?.hasQuestionToken
+        ? !firstDecl.hasQuestionToken()
+        : false;
+
+      let description = '';
+      if (firstDecl?.getJsDocs) {
+        description = firstDecl
+          .getJsDocs()
+          .map((j) => j.getDescription().trim())
+          .join(' ')
+          .trim();
+      }
+
+      const member = { name, type: typeStr, description, required };
+
+      // Infer default from function body destructuring: { foo = 'bar' }
+      const funcVar = sourceFile.getVariableDeclaration(componentName);
+      if (funcVar) {
+        const bodyText = funcVar.getText();
+        const m = new RegExp(`\\b${name}\\s*=\\s*(['"]?)([\\w.]+)\\1`).exec(bodyText);
+        if (m) {
+          const raw = m[2];
+          const asNum = Number(raw);
+          member.default = isNaN(asNum) ? raw : asNum;
+        }
+      }
+
+      members.push(member);
+    }
+
+    return members;
+  }
+
+  const sourceFile = project.getSourceFile(mainFile);
+  if (sourceFile) {
+    const members = extractMembers(sourceFile, `${componentName}Props`);
+    if (members.length > 0) result.styled = { members };
+  }
+
+  if (fs.existsSync(hookFile)) {
+    const hookSource = project.getSourceFile(hookFile);
+    if (hookSource) {
+      const members = extractMembers(hookSource, `Use${componentName}Options`);
+      if (members.length > 0) result.hook = { members };
+    }
+  }
+
+  return Object.keys(result).length > 0 ? result : null;
+}
+
 function generateTokenReferences(componentName, componentPath, anatomy) {
   const tokenPath = path.join(componentPath, `${componentName}.tokens.json`);
   const tokenDoc = readJson(tokenPath);
@@ -554,7 +689,7 @@ function generateTokenReferences(componentName, componentPath, anatomy) {
   return tokens;
 }
 
-function generateContract(componentName, componentPath) {
+async function generateContract(componentName, componentPath) {
   const source = allSource(componentPath);
   const scssSource = componentFiles(componentPath)
     .filter((file) => file.endsWith('.module.scss'))
@@ -573,8 +708,9 @@ function generateContract(componentName, componentPath) {
   const states = extractStates(source, scssSource, variants);
   const a11y = generateA11yInfo(componentName, layer, source);
   const tokens = generateTokenReferences(componentName, componentPath, anatomy);
+  const props = await extractPropsViaTs(componentName, componentPath);
 
-  return {
+  const generated = {
     name: componentName,
     layer,
     anatomy,
@@ -583,6 +719,7 @@ function generateContract(componentName, componentPath) {
     slots,
     a11y,
     tokens,
+    ...(props ? { props } : {}),
     ssr: {
       hydrateOn:
         source.includes("'use client'") || source.includes('"use client"')
@@ -593,6 +730,19 @@ function generateContract(componentName, componentPath) {
       flipIcon: anatomy.includes('icon') || anatomy.includes('chevron'),
     },
   };
+
+  // Preserve hand-authored sections from the existing contract
+  const contractPath = path.join(componentPath, `${componentName}.contract.json`);
+  const existing = readJson(contractPath);
+  if (existing) {
+    for (const key of PRESERVED_KEYS) {
+      if (existing[key] !== undefined && generated[key] === undefined) {
+        generated[key] = existing[key];
+      }
+    }
+  }
+
+  return generated;
 }
 
 function writeIfChanged(filePath, contract) {
@@ -617,7 +767,7 @@ function components() {
     .sort((a, b) => a.localeCompare(b));
 }
 
-function main() {
+async function main() {
   if (args.has('--help') || args.has('-h')) {
     console.log(`
 Generate or refresh component contract files.
@@ -651,7 +801,7 @@ Options:
       continue;
     }
 
-    const contract = generateContract(componentName, componentPath);
+    const contract = await generateContract(componentName, componentPath);
     const didChange = writeIfChanged(contractPath, contract);
 
     if (didChange) {
@@ -672,4 +822,7 @@ Options:
   }
 }
 
-main();
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});

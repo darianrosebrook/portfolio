@@ -50,6 +50,81 @@
       "popover.elevation.default"
     ]
   },
+  "props": {
+    "styled": {
+      "members": [
+        {
+          "name": "offset",
+          "type": "number | undefined",
+          "description": "",
+          "required": false,
+          "default": 8
+        },
+        {
+          "name": "placement",
+          "type": "\"top\" | \"bottom\" | \"left\" | \"right\" | \"auto\" | undefined",
+          "description": "",
+          "required": false,
+          "default": "auto"
+        },
+        {
+          "name": "triggerStrategy",
+          "type": "\"click\" | \"hover\" | undefined",
+          "description": "",
+          "required": false,
+          "default": "click"
+        },
+        {
+          "name": "closeOnOutsideClick",
+          "type": "boolean | undefined",
+          "description": "",
+          "required": false,
+          "default": "true"
+        },
+        {
+          "name": "closeOnEscape",
+          "type": "boolean | undefined",
+          "description": "",
+          "required": false,
+          "default": "true"
+        },
+        {
+          "name": "open",
+          "type": "boolean | undefined",
+          "description": "Controlled open state",
+          "required": false
+        },
+        {
+          "name": "anchor",
+          "type": "HTMLElement | null | undefined",
+          "description": "External anchor element to position against (bypasses Trigger)",
+          "required": false
+        }
+      ]
+    },
+    "hook": {
+      "members": [
+        {
+          "name": "defaultOpen",
+          "type": "boolean | undefined",
+          "description": "Initial open state",
+          "required": false
+        },
+        {
+          "name": "closeOnOutsideClick",
+          "type": "boolean | undefined",
+          "description": "Close when clicking outside content",
+          "required": false
+        },
+        {
+          "name": "closeOnEscape",
+          "type": "boolean | undefined",
+          "description": "Close when pressing Escape",
+          "required": false
+        }
+      ]
+    }
+  },
   "ssr": {
     "hydrateOn": "interaction"
   },

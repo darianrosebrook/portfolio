@@ -80,6 +80,48 @@
       "postcard.typography.footer.fontSize"
     ]
   },
+  "props": {
+    "styled": {
+      "members": [
+        {
+          "name": "postId",
+          "type": "string",
+          "description": "",
+          "required": true
+        },
+        {
+          "name": "author",
+          "type": "{ name: string; handle: string; avatar: string; }",
+          "description": "",
+          "required": true
+        },
+        {
+          "name": "timestamp",
+          "type": "string",
+          "description": "",
+          "required": true
+        },
+        {
+          "name": "content",
+          "type": "string",
+          "description": "",
+          "required": true
+        },
+        {
+          "name": "embed",
+          "type": "{ type: \"image\" | \"video\" | \"audio\"; url: string; aspectRatio: { width: number; height: number; }; } | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "stats",
+          "type": "{ likes: number; replies: number; reposts: number; }",
+          "description": "",
+          "required": true
+        }
+      ]
+    }
+  },
   "ssr": {
     "hydrateOn": "interaction"
   },

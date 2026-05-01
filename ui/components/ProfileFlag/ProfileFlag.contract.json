@@ -30,6 +30,18 @@
       "profileFlag.spacing.margin.top"
     ]
   },
+  "props": {
+    "styled": {
+      "members": [
+        {
+          "name": "profile",
+          "type": "{ account_status: string; avatar_url: string | null; bio: string; created_at: string; first_name: string | null; full_name: string; id: string; images: string[] | null; last_name: string | null; metrics: string; occupation: string | null; privacy: string; settings: string; social_media: string[] | null; spacial_location: string | null; updated_at: string | null; username: string; } | null",
+          "description": "",
+          "required": true
+        }
+      ]
+    }
+  },
   "ssr": {
     "hydrateOn": "none"
   },

@@ -35,6 +35,64 @@
     "apgPattern": null
   },
   "tokens": {},
+  "props": {
+    "styled": {
+      "members": [
+        {
+          "name": "text",
+          "type": "string",
+          "description": "The text content to animate",
+          "required": true
+        },
+        {
+          "name": "as",
+          "type": "\"h1\" | \"h2\" | \"h3\" | \"h4\" | \"h5\" | \"h6\" | \"p\" | \"span\" | \"div\" | undefined",
+          "description": "Element type to render",
+          "required": false
+        },
+        {
+          "name": "variant",
+          "type": "\"blur-in\" | \"fade-up\" | \"slide-in\" | undefined",
+          "description": "Animation variant",
+          "required": false
+        },
+        {
+          "name": "duration",
+          "type": "number | undefined",
+          "description": "Duration of each word animation in seconds",
+          "required": false,
+          "default": "ANIMATION_DURATIONS.slower"
+        },
+        {
+          "name": "stagger",
+          "type": "number | undefined",
+          "description": "Stagger delay between words in seconds",
+          "required": false,
+          "default": "EDITORIAL_STAGGER.words"
+        },
+        {
+          "name": "delay",
+          "type": "number | undefined",
+          "description": "Delay before animation starts in seconds",
+          "required": false,
+          "default": 0
+        },
+        {
+          "name": "triggerOnScroll",
+          "type": "boolean | undefined",
+          "description": "Whether to trigger on scroll into view",
+          "required": false,
+          "default": "false"
+        },
+        {
+          "name": "scrollStart",
+          "type": "string | undefined",
+          "description": "ScrollTrigger start position",
+          "required": false
+        }
+      ]
+    }
+  },
   "ssr": {
     "hydrateOn": "interaction"
   },

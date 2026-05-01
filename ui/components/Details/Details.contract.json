@@ -77,6 +77,72 @@
       "details.typography.fontWeight.medium"
     ]
   },
+  "props": {
+    "styled": {
+      "members": [
+        {
+          "name": "summary",
+          "type": "string",
+          "description": "The summary text displayed in the toggle button",
+          "required": true
+        },
+        {
+          "name": "variant",
+          "type": "\"default\" | \"inline\" | \"compact\" | undefined",
+          "description": "Visual variant - replaces boolean props",
+          "required": false,
+          "default": "default"
+        },
+        {
+          "name": "icon",
+          "type": "\"left\" | \"right\" | \"none\" | undefined",
+          "description": "Icon configuration - replaces showIcon + iconPosition booleans",
+          "required": false,
+          "default": "left"
+        },
+        {
+          "name": "open",
+          "type": "boolean | undefined",
+          "description": "Controlled open state",
+          "required": false
+        },
+        {
+          "name": "defaultOpen",
+          "type": "boolean | undefined",
+          "description": "Default open state for uncontrolled",
+          "required": false
+        },
+        {
+          "name": "disabled",
+          "type": "boolean | undefined",
+          "description": "Disabled state",
+          "required": false
+        }
+      ]
+    },
+    "hook": {
+      "members": [
+        {
+          "name": "open",
+          "type": "boolean | undefined",
+          "description": "Controlled open state",
+          "required": false
+        },
+        {
+          "name": "defaultOpen",
+          "type": "boolean | undefined",
+          "description": "Default open state for uncontrolled",
+          "required": false
+        },
+        {
+          "name": "disabled",
+          "type": "boolean | undefined",
+          "description": "Disabled state",
+          "required": false
+        }
+      ]
+    }
+  },
   "ssr": {
     "hydrateOn": "interaction"
   },

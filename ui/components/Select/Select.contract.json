@@ -176,6 +176,48 @@
       "select.motion.easing.standard"
     ]
   },
+  "props": {
+    "hook": {
+      "members": [
+        {
+          "name": "options",
+          "type": "Option<string>[]",
+          "description": "Available options",
+          "required": true
+        },
+        {
+          "name": "multiple",
+          "type": "boolean | undefined",
+          "description": "Allow multiple selections",
+          "required": false
+        },
+        {
+          "name": "value",
+          "type": "string | string[] | undefined",
+          "description": "Current value(s)",
+          "required": false
+        },
+        {
+          "name": "defaultValue",
+          "type": "string | string[] | undefined",
+          "description": "Default value(s) for uncontrolled",
+          "required": false
+        },
+        {
+          "name": "disabled",
+          "type": "boolean | undefined",
+          "description": "Disabled state",
+          "required": false
+        },
+        {
+          "name": "filterFn",
+          "type": "((option: Option, searchTerm: string) => boolean) | undefined",
+          "description": "Filter function for search",
+          "required": false
+        }
+      ]
+    }
+  },
   "ssr": {
     "hydrateOn": "interaction"
   },

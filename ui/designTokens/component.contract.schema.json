@@ -1,0 +1,360 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "component.contract.schema.json",
+  "title": "Component Contract",
+  "description": "Schema for ui/components/*/*.contract.json files",
+  "type": "object",
+  "required": ["name", "layer"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "name": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+      "description": "Component name — PascalCase preferred, lowercase accepted for legacy components"
+    },
+    "layer": {
+      "type": "string",
+      "enum": ["primitive", "compound", "composer"],
+      "description": "Component abstraction layer"
+    },
+    "anatomy": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "minItems": 1,
+      "maxItems": 24,
+      "description": "Named structural parts. First item must be 'root'."
+    },
+    "variants": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": { "type": "string" },
+        "minItems": 1
+      },
+      "description": "Variant dimensions and their allowed values"
+    },
+    "states": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Visual/interaction states. Must include 'default'."
+    },
+    "slots": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["required"],
+        "additionalProperties": false,
+        "properties": {
+          "required": { "type": "boolean" },
+          "selector": {
+            "type": "string",
+            "description": "CSS selector string, e.g. [data-slot=\"trigger\"]"
+          }
+        }
+      },
+      "description": "Named slot anchors with their DOM selector and required status"
+    },
+    "a11y": {
+      "type": "object",
+      "required": ["role", "labeling", "keyboard"],
+      "additionalProperties": false,
+      "properties": {
+        "role": { "type": "string", "description": "Primary ARIA role" },
+        "roles": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "All ARIA roles when multiple are used"
+        },
+        "labeling": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "ARIA labeling attributes used (aria-label, aria-labelledby, etc.)"
+        },
+        "keyboard": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              { "type": "string" },
+              {
+                "type": "object",
+                "required": ["key", "when", "then"],
+                "additionalProperties": false,
+                "properties": {
+                  "key": { "type": "string" },
+                  "when": { "type": "string" },
+                  "then": { "type": "string" }
+                }
+              }
+            ]
+          },
+          "description": "Keyboard interaction map"
+        },
+        "apgPattern": {
+          "oneOf": [{ "type": "string" }, { "type": "null" }],
+          "description": "ARIA Authoring Practices Guide pattern name"
+        },
+        "screenReader": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Screen reader announcements or live region behavior"
+        }
+      }
+    },
+    "tokens": {
+      "type": "object",
+      "description": "Design tokens per anatomy part. Values are a flat string array (legacy) or a map of token-name to structured resolution.",
+      "additionalProperties": {
+        "oneOf": [
+          {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Legacy flat list of token dot-paths"
+          },
+          {
+            "type": "object",
+            "description": "Structured resolution map: token-name → resolution",
+            "additionalProperties": {
+              "$ref": "#/definitions/tokenResolution"
+            }
+          }
+        ]
+      }
+    },
+    "props": {
+      "type": "object",
+      "description": "Prop API surfaces extracted from TypeScript source",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["members"],
+        "additionalProperties": false,
+        "properties": {
+          "members": {
+            "type": "array",
+            "items": { "$ref": "#/definitions/propMember" }
+          }
+        }
+      }
+    },
+    "channels": {
+      "type": "object",
+      "description": "Controlled/uncontrolled prop pairings",
+      "additionalProperties": {
+        "$ref": "#/definitions/controlledChannel"
+      }
+    },
+    "types": {
+      "type": "object",
+      "description": "Named type aliases referenced by props",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["kind"],
+        "additionalProperties": false,
+        "properties": {
+          "kind": { "type": "string", "enum": ["union", "enum", "alias"] },
+          "values": { "type": "array", "items": { "type": "string" } },
+          "alias": { "type": "string" }
+        }
+      }
+    },
+    "stateMachine": {
+      "type": "object",
+      "required": ["transitions"],
+      "additionalProperties": false,
+      "description": "Declarative state machine for complex interaction patterns",
+      "properties": {
+        "transitions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["event", "to"],
+            "additionalProperties": false,
+            "properties": {
+              "event": { "type": "string" },
+              "from": {
+                "oneOf": [
+                  { "type": "string" },
+                  { "type": "array", "items": { "type": "string" } }
+                ]
+              },
+              "to": { "type": "string" },
+              "guard": { "type": "string" },
+              "effect": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "focus": {
+      "type": "object",
+      "required": ["strategy"],
+      "additionalProperties": false,
+      "description": "Focus management contract",
+      "properties": {
+        "strategy": {
+          "type": "string",
+          "enum": ["trap", "roving", "auto", "manual", "none"]
+        },
+        "orientation": {
+          "type": "string",
+          "enum": ["horizontal", "vertical", "both"]
+        },
+        "initialFocus": { "type": "string" },
+        "returnFocus": { "type": "boolean" },
+        "wrap": { "type": "boolean" },
+        "scrollLock": { "type": "boolean" }
+      }
+    },
+    "dismissal": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["escape", "outsideClick", "blur", "routeChange", "triggerReclick", "userDismiss", "selection"]
+      },
+      "description": "Triggers that close or dismiss this component"
+    },
+    "motion": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Animation contract",
+      "properties": {
+        "transitions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "duration", "easing"],
+            "additionalProperties": false,
+            "properties": {
+              "name": { "type": "string" },
+              "duration": { "type": "string" },
+              "easing": { "type": "string" },
+              "property": { "type": "string" }
+            }
+          }
+        },
+        "reducedMotion": {
+          "type": "string",
+          "enum": ["respect", "ignore"]
+        },
+        "reducedMotionStrategy": { "type": "string" }
+      }
+    },
+    "portal": {
+      "type": "object",
+      "required": ["enabled"],
+      "additionalProperties": false,
+      "description": "Portal / overlay rendering contract",
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "defaultTarget": { "type": "string" },
+        "positioning": {
+          "type": "string",
+          "enum": ["anchored", "fixed", "absolute"]
+        },
+        "layering": {
+          "type": "string",
+          "enum": ["popover", "dialog", "tooltip", "auto"]
+        },
+        "collision": { "type": "string" },
+        "backdrop": { "type": "boolean" }
+      }
+    },
+    "relationships": {
+      "type": "array",
+      "description": "Declarative ARIA relationships between anatomy parts",
+      "items": {
+        "type": "object",
+        "required": ["from", "to", "attribute"],
+        "additionalProperties": false,
+        "properties": {
+          "from": { "type": "string" },
+          "to": { "type": "string" },
+          "attribute": { "type": "string" },
+          "when": { "type": "string" }
+        }
+      }
+    },
+    "ssr": {
+      "type": "object",
+      "required": ["hydrateOn"],
+      "additionalProperties": false,
+      "properties": {
+        "hydrateOn": {
+          "type": "string",
+          "enum": ["interaction", "none", "load"]
+        }
+      }
+    },
+    "rtl": {
+      "type": "object",
+      "required": ["flipIcon"],
+      "additionalProperties": false,
+      "properties": {
+        "flipIcon": { "type": "boolean" }
+      }
+    }
+  },
+  "definitions": {
+    "tokenResolution": {
+      "type": "object",
+      "required": ["resolvesTo", "fallback"],
+      "additionalProperties": false,
+      "properties": {
+        "resolvesTo": {
+          "type": "string",
+          "description": "Semantic token path (no -- prefix), e.g. semantic.color.action.background.primary"
+        },
+        "fallback": {
+          "type": "string",
+          "description": "Literal CSS fallback value when token sheet is not loaded"
+        },
+        "property": {
+          "type": "string",
+          "description": "CSS property this token is applied to, e.g. background-color"
+        },
+        "layer": {
+          "type": "string",
+          "enum": ["core", "semantic"],
+          "description": "Token layer this resolves from"
+        }
+      }
+    },
+    "propMember": {
+      "type": "object",
+      "required": ["name", "type", "description"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "type": { "type": "string" },
+        "description": { "type": "string" },
+        "required": { "type": "boolean", "default": false },
+        "default": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "number" },
+            { "type": "boolean" }
+          ]
+        },
+        "nodeKind": {
+          "type": "string",
+          "enum": ["node-ref", "icon-ref"],
+          "description": "Disambiguates ReactNode: a composed subtree vs a named icon"
+        }
+      }
+    },
+    "controlledChannel": {
+      "type": "object",
+      "required": ["value", "onChange"],
+      "additionalProperties": false,
+      "properties": {
+        "value": { "type": "string", "description": "Controlled value prop name" },
+        "onChange": { "type": "string", "description": "Change handler prop name" },
+        "defaultValue": { "type": "string", "description": "Uncontrolled default prop name" },
+        "enabledBy": { "type": "string", "description": "Prop that enables this channel" },
+        "valueType": { "type": "string", "description": "TypeScript type string for the value" },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}

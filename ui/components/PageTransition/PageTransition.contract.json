@@ -65,6 +65,30 @@
       "pageTransition.zIndex.max"
     ]
   },
+  "props": {
+    "styled": {
+      "members": [
+        {
+          "name": "transitionName",
+          "type": "string | undefined",
+          "description": "Unique identifier for the page/route to enable smooth transitions",
+          "required": false
+        },
+        {
+          "name": "duration",
+          "type": "number | undefined",
+          "description": "Duration of the transition in milliseconds",
+          "required": false
+        },
+        {
+          "name": "enabled",
+          "type": "boolean | undefined",
+          "description": "Enable/disable transitions (useful for reduced motion preferences)",
+          "required": false
+        }
+      ]
+    }
+  },
   "ssr": {
     "hydrateOn": "interaction"
   },

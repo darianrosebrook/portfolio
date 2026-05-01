@@ -83,6 +83,54 @@
       "brandSwitcher.typography.lineHeight.default"
     ]
   },
+  "props": {
+    "styled": {
+      "members": [
+        {
+          "name": "showAutoCycle",
+          "type": "boolean | undefined",
+          "description": "Show the auto-cycle controls",
+          "required": false,
+          "default": "false"
+        },
+        {
+          "name": "showDensity",
+          "type": "boolean | undefined",
+          "description": "Show density controls",
+          "required": false,
+          "default": "false"
+        },
+        {
+          "name": "showFonts",
+          "type": "boolean | undefined",
+          "description": "Show font family controls",
+          "required": false,
+          "default": "false"
+        },
+        {
+          "name": "compact",
+          "type": "boolean | undefined",
+          "description": "Compact mode - just swatches, no labels",
+          "required": false,
+          "default": "false"
+        },
+        {
+          "name": "sticky",
+          "type": "boolean | undefined",
+          "description": "Enable sticky positioning",
+          "required": false,
+          "default": "false"
+        },
+        {
+          "name": "enableKeyboard",
+          "type": "boolean | undefined",
+          "description": "Enable keyboard navigation (arrow keys to cycle)",
+          "required": false,
+          "default": "true"
+        }
+      ]
+    }
+  },
   "ssr": {
     "hydrateOn": "interaction"
   },

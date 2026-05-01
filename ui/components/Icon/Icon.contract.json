@@ -21,6 +21,33 @@
       "icon.size.padding.default"
     ]
   },
+  "props": {
+    "styled": {
+      "members": [
+        {
+          "name": "icon",
+          "type": "IconDefinition",
+          "description": "",
+          "required": true,
+          "default": "true"
+        },
+        {
+          "name": "width",
+          "type": "number | undefined",
+          "description": "",
+          "required": false,
+          "default": 20
+        },
+        {
+          "name": "height",
+          "type": "number | undefined",
+          "description": "",
+          "required": false,
+          "default": 20
+        }
+      ]
+    }
+  },
   "ssr": {
     "hydrateOn": "none"
   },

@@ -1,0 +1,29 @@
+id: CONTRACTS-001
+type: feature
+title: Port component-converter contract authority to portfolio
+status: draft
+risk_tier: 3
+mode: development
+created_at: '2026-05-01T18:59:04.567Z'
+updated_at: '2026-05-01T18:59:04.568Z'
+blast_radius:
+  modules: []
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - src/
+    - tests/
+  out:
+    - node_modules/
+    - dist/
+    - build/
+invariants:
+  - System maintains data consistency
+acceptance: []
+acceptance_criteria: []
+non_functional:
+  a11y: []
+  perf: {}
+  security: []
+contracts: []

@@ -33,6 +33,58 @@
     "apgPattern": null
   },
   "tokens": {},
+  "props": {
+    "styled": {
+      "members": [
+        {
+          "name": "as",
+          "type": "\"article\" | \"div\" | \"li\" | \"a\" | undefined",
+          "description": "Element type to render",
+          "required": false
+        },
+        {
+          "name": "duration",
+          "type": "number | undefined",
+          "description": "Duration of entry animation in seconds",
+          "required": false,
+          "default": "ANIMATION_DURATIONS.slow"
+        },
+        {
+          "name": "delay",
+          "type": "number | undefined",
+          "description": "Delay before animation starts in seconds",
+          "required": false,
+          "default": 0
+        },
+        {
+          "name": "triggerOnScroll",
+          "type": "boolean | undefined",
+          "description": "Whether to trigger on scroll into view",
+          "required": false,
+          "default": "true"
+        },
+        {
+          "name": "scrollStart",
+          "type": "string | undefined",
+          "description": "ScrollTrigger start position",
+          "required": false
+        },
+        {
+          "name": "enableHover",
+          "type": "boolean | undefined",
+          "description": "Enable hover effects",
+          "required": false,
+          "default": "true"
+        },
+        {
+          "name": "href",
+          "type": "string | undefined",
+          "description": "Card href (if as=\"a\")",
+          "required": false
+        }
+      ]
+    }
+  },
   "ssr": {
     "hydrateOn": "interaction"
   },

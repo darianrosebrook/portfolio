@@ -1,11 +1,17 @@
 #!/usr/bin/env sh
 . "$(dirname "$0")/_/h"
 
+echo "Validating component contracts..."
+node scripts/validate-contracts.mjs
+if [ $? -ne 0 ]; then
+  echo ""
+  echo "Contract validation failed. Push aborted."
+  echo "Fix contract errors above, or run: node scripts/validate-contracts.mjs"
+  exit 1
+fi
+
 echo "Running build check before push..."
-
-# Run TypeScript type checking (faster than full build)
 npm run build 2>&1
-
 if [ $? -ne 0 ]; then
   echo ""
   echo "Build failed. Push aborted."

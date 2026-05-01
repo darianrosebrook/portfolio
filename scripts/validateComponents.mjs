@@ -523,12 +523,12 @@ class ComponentValidator {
       });
 
       // Validate layer
-      const validLayers = ['primitive', 'compound', 'composer', 'assembly'];
+      const validLayers = ['primitive', 'compound', 'composer'];
       if (contract.layer && validLayers.includes(contract.layer)) {
         this.logSuccess(`Contract has valid layer: ${contract.layer}`);
       } else {
         this.logError(
-          `Contract has invalid layer. Must be one of: ${validLayers.join(', ')}`
+          `Contract has invalid layer — must be one of: ${validLayers.join(', ')}`
         );
       }
 

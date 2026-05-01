@@ -34,6 +34,58 @@
     "apgPattern": null
   },
   "tokens": {},
+  "props": {
+    "styled": {
+      "members": [
+        {
+          "name": "as",
+          "type": "\"section\" | \"div\" | \"article\" | \"main\" | \"aside\" | \"header\" | \"footer\" | undefined",
+          "description": "Element type to render",
+          "required": false
+        },
+        {
+          "name": "variant",
+          "type": "\"fade-up\" | \"fade-in\" | \"slide-in\" | \"stagger-children\" | undefined",
+          "description": "Animation variant",
+          "required": false
+        },
+        {
+          "name": "duration",
+          "type": "number | undefined",
+          "description": "Duration of animation in seconds",
+          "required": false,
+          "default": "ANIMATION_DURATIONS.slow"
+        },
+        {
+          "name": "stagger",
+          "type": "number | undefined",
+          "description": "Stagger delay between children in seconds (for stagger-children variant)",
+          "required": false,
+          "default": "EDITORIAL_STAGGER.sections"
+        },
+        {
+          "name": "delay",
+          "type": "number | undefined",
+          "description": "Delay before animation starts in seconds",
+          "required": false,
+          "default": 0
+        },
+        {
+          "name": "triggerOnScroll",
+          "type": "boolean | undefined",
+          "description": "Whether to trigger on scroll into view",
+          "required": false,
+          "default": "true"
+        },
+        {
+          "name": "scrollStart",
+          "type": "string | undefined",
+          "description": "ScrollTrigger start position",
+          "required": false
+        }
+      ]
+    }
+  },
   "ssr": {
     "hydrateOn": "interaction"
   },

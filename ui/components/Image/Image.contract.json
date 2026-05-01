@@ -62,6 +62,440 @@
       "image.typography.error.fontSize"
     ]
   },
+  "props": {
+    "styled": {
+      "members": [
+        {
+          "name": "aspectRatio",
+          "type": "number | \"square\" | \"video\" | \"photo\" | \"wide\" | \"portrait\" | undefined",
+          "description": "Aspect ratio preset",
+          "required": false
+        },
+        {
+          "name": "objectFit",
+          "type": "\"cover\" | \"contain\" | \"fill\" | \"scale-down\" | \"none\" | undefined",
+          "description": "Object fit behavior",
+          "required": false,
+          "default": "cover"
+        },
+        {
+          "name": "objectPosition",
+          "type": "string | undefined",
+          "description": "Object position",
+          "required": false,
+          "default": "center"
+        },
+        {
+          "name": "loading",
+          "type": "\"lazy\" | \"eager\" | undefined",
+          "description": "Loading behavior",
+          "required": false,
+          "default": "lazy"
+        },
+        {
+          "name": "size",
+          "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"full\" | undefined",
+          "description": "Size variant",
+          "required": false,
+          "default": "full"
+        },
+        {
+          "name": "radius",
+          "type": "\"none\" | \"sm\" | \"md\" | \"lg\" | \"full\" | undefined",
+          "description": "Border radius variant",
+          "required": false,
+          "default": "none"
+        },
+        {
+          "name": "showPlaceholder",
+          "type": "boolean | undefined",
+          "description": "Whether to show a placeholder while loading",
+          "required": false,
+          "default": "true"
+        },
+        {
+          "name": "fallbackSrc",
+          "type": "string | undefined",
+          "description": "Fallback image source",
+          "required": false
+        },
+        {
+          "name": "alt",
+          "type": "string | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "crossOrigin",
+          "type": "CrossOrigin",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "decoding",
+          "type": "\"async\" | \"auto\" | \"sync\" | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "fetchPriority",
+          "type": "\"auto\" | \"high\" | \"low\" | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "height",
+          "type": "string | number | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "referrerPolicy",
+          "type": "HTMLAttributeReferrerPolicy | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "sizes",
+          "type": "string | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "src",
+          "type": "string | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "srcSet",
+          "type": "string | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "useMap",
+          "type": "string | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "width",
+          "type": "string | number | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "defaultChecked",
+          "type": "boolean | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "defaultValue",
+          "type": "string | number | readonly string[] | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "suppressContentEditableWarning",
+          "type": "boolean | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "suppressHydrationWarning",
+          "type": "boolean | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "accessKey",
+          "type": "string | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "autoCapitalize",
+          "type": "\"none\" | \"off\" | \"on\" | \"sentences\" | \"words\" | \"characters\" | (string & {}) | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "autoFocus",
+          "type": "boolean | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "contentEditable",
+          "type": "Booleanish | \"inherit\" | \"plaintext-only\" | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "contextMenu",
+          "type": "string | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "dir",
+          "type": "string | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "draggable",
+          "type": "Booleanish | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "enterKeyHint",
+          "type": "\"enter\" | \"done\" | \"go\" | \"next\" | \"previous\" | \"search\" | \"send\" | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "hidden",
+          "type": "boolean | undefined",
+          "description": "",
+          "required": false,
+          "default": "true"
+        },
+        {
+          "name": "lang",
+          "type": "string | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "nonce",
+          "type": "string | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "slot",
+          "type": "string | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "spellCheck",
+          "type": "Booleanish | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "title",
+          "type": "string | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "translate",
+          "type": "\"yes\" | \"no\" | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "radioGroup",
+          "type": "string | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "role",
+          "type": "AriaRole | undefined",
+          "description": "",
+          "required": false,
+          "default": "img"
+        },
+        {
+          "name": "about",
+          "type": "string | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "content",
+          "type": "string | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "datatype",
+          "type": "string | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "inlist",
+          "type": "any",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "prefix",
+          "type": "string | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "property",
+          "type": "string | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "rel",
+          "type": "string | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "resource",
+          "type": "string | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "rev",
+          "type": "string | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "typeof",
+          "type": "string | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "vocab",
+          "type": "string | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "autoCorrect",
+          "type": "string | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "autoSave",
+          "type": "string | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "color",
+          "type": "string | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "itemProp",
+          "type": "string | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "itemScope",
+          "type": "boolean | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "itemType",
+          "type": "string | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "itemID",
+          "type": "string | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "results",
+          "type": "number | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "security",
+          "type": "string | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "unselectable",
+          "type": "\"off\" | \"on\" | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "popover",
+          "type": "\"\" | \"auto\" | \"manual\" | \"hint\" | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "popoverTargetAction",
+          "type": "\"toggle\" | \"show\" | \"hide\" | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "popoverTarget",
+          "type": "string | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "inert",
+          "type": "boolean | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "inputMode",
+          "type": "\"none\" | \"search\" | \"text\" | \"tel\" | \"url\" | \"email\" | \"numeric\" | \"decimal\" | undefined",
+          "description": "Hints at the type of data that might be entered by the user while editing the element or its contents",
+          "required": false
+        },
+        {
+          "name": "is",
+          "type": "string | undefined",
+          "description": "Specify that a standard HTML element should behave like a defined custom built-in element",
+          "required": false
+        },
+        {
+          "name": "exportparts",
+          "type": "string | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "part",
+          "type": "string | undefined",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "dangerouslySetInnerHTML",
+          "type": "{ __html: string | TrustedHTML; } | undefined",
+          "description": "",
+          "required": false
+        }
+      ]
+    }
+  },
   "ssr": {
     "hydrateOn": "interaction"
   },
