@@ -154,6 +154,39 @@
         "$value": "{motion.stagger.lg}",
         "$description": "Stagger for section reveals"
       }
+    },
+    "transition": {
+      "scale": {
+        "identity": {
+          "$type": "number",
+          "$value": "{scale.100}",
+          "$description": "No-op scale — base / resting state"
+        },
+        "zoom": {
+          "$type": "number",
+          "$value": "{scale.105}",
+          "$description": "Zoom-in entrance scale"
+        },
+        "shrink": {
+          "$type": "number",
+          "$value": "{scale.095}",
+          "$description": "Shrink-out exit scale"
+        }
+      }
+    },
+    "icon": {
+      "scale": {
+        "enter": {
+          "$type": "number",
+          "$value": "{scale.080}",
+          "$description": "Icon initial scale when entering (grows to full size)"
+        },
+        "exit": {
+          "$type": "number",
+          "$value": "{scale.080}",
+          "$description": "Icon final scale when exiting (shrinks from full size)"
+        }
+      }
     }
   }
 }

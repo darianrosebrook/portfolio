@@ -41,7 +41,7 @@
       "offset": "{core.spacing.size.01}"
     },
     "opacity": {
-      "disabled": 0.5
+      "disabled": "{interaction.disabled.opacity}"
     }
   }
 }

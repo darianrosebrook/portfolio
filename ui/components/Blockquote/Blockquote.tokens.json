@@ -14,7 +14,7 @@
       }
     },
     "typography": {
-      "fontStyle": "italic",
+      "fontStyle": "{semantic.typography.fontStyle.italic}",
       "fontWeight": "{semantic.typography.fontWeight.medium}",
       "sm": {
         "fontSize": "{semantic.typography.body.03}",

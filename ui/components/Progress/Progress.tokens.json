@@ -71,7 +71,7 @@
     },
     "motion": {
       "duration": {
-        "indeterminate": "1.5s"
+        "indeterminate": "{core.motion.duration.extraLong1}"
       },
       "easing": {
         "indeterminate": "ease-in-out"

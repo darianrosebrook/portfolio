@@ -679,50 +679,43 @@
           "name": "variant",
           "type": "\"display\" | \"headline\" | \"title\" | \"body\" | \"caption\" | \"overline\" | \"code\" | undefined",
           "description": "Typography variant",
-          "required": false,
-          "default": "body"
+          "required": false
         },
         {
           "name": "size",
           "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"2xl\" | \"3xl\" | undefined",
           "description": "Size within variant",
-          "required": false,
-          "default": "md"
+          "required": false
         },
         {
           "name": "weight",
           "type": "\"light\" | \"normal\" | \"medium\" | \"semibold\" | \"bold\" | undefined",
           "description": "Font weight",
-          "required": false,
-          "default": "normal"
+          "required": false
         },
         {
           "name": "align",
           "type": "\"left\" | \"center\" | \"right\" | \"justify\" | undefined",
           "description": "Text alignment",
-          "required": false,
-          "default": "left"
+          "required": false
         },
         {
           "name": "color",
           "type": "\"default\" | \"muted\" | \"subtle\" | \"accent\" | \"success\" | \"warning\" | \"error\" | undefined",
           "description": "Text color variant",
-          "required": false,
-          "default": "default"
+          "required": false
         },
         {
           "name": "truncate",
           "type": "boolean | undefined",
           "description": "Whether text should be truncated",
-          "required": false,
-          "default": "false"
+          "required": false
         },
         {
           "name": "transform",
           "type": "\"none\" | \"uppercase\" | \"lowercase\" | \"capitalize\" | undefined",
           "description": "Transform text case",
-          "required": false,
-          "default": "none"
+          "required": false
         },
         {
           "name": "defaultChecked",

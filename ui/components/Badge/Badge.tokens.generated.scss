@@ -44,7 +44,7 @@
 
   /* === Elevation Tokens === */
   --badge-elevation-default: var(--semantic-elevation-surface-raised);
-  --badge-elevation-status: none;
+  --badge-elevation-status: var(--semantic-elevation-none);
 
   /* === Spacing Tokens === */
   --badge-spacing-gap: var(--core-spacing-size-02);

@@ -557,8 +557,7 @@
           "name": "role",
           "type": "AriaRole | undefined",
           "description": "",
-          "required": false,
-          "default": "alert"
+          "required": false
         },
         {
           "name": "about",

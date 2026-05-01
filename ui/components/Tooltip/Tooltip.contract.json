@@ -61,29 +61,25 @@
           "name": "placement",
           "type": "Placement | undefined",
           "description": "Placement relative to trigger",
-          "required": false,
-          "default": "auto"
+          "required": false
         },
         {
           "name": "trigger",
           "type": "TriggerStrategy | undefined",
           "description": "How the tooltip is triggered",
-          "required": false,
-          "default": "hover"
+          "required": false
         },
         {
           "name": "delay",
           "type": "number | undefined",
           "description": "Delay before showing (ms)",
-          "required": false,
-          "default": 500
+          "required": false
         },
         {
           "name": "disabled",
           "type": "boolean | undefined",
           "description": "Whether tooltip is disabled",
-          "required": false,
-          "default": "false"
+          "required": false
         }
       ]
     }

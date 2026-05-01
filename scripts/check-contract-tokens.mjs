@@ -106,7 +106,11 @@ for (const { name, contractPath, scssPath } of contractFiles()) {
 
       // Load SCSS on demand (only when we have structured tokens to verify)
       if (scssContent === null) {
-        scssContent = fs.existsSync(scssPath) ? fs.readFileSync(scssPath, 'utf8') : '';
+        const raw = fs.existsSync(scssPath) ? fs.readFileSync(scssPath, 'utf8') : '';
+        // Normalize camelCase CSS var names to kebab-case for consistent lookup
+        scssContent = raw === '' ? '' : raw.replace(/--([a-zA-Z][a-zA-Z0-9-]+)/g, (_, v) =>
+          '--' + v.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()
+        );
       }
 
       if (scssContent === '') {

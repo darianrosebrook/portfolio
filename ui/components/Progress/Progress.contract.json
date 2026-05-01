@@ -128,29 +128,25 @@
           "name": "max",
           "type": "number | undefined",
           "description": "Maximum value (default: 100)",
-          "required": false,
-          "default": 100
+          "required": false
         },
         {
           "name": "variant",
           "type": "ProgressVariant | undefined",
           "description": "Progress variant",
-          "required": false,
-          "default": "linear"
+          "required": false
         },
         {
           "name": "size",
           "type": "ControlSize | undefined",
           "description": "Size of the progress indicator",
-          "required": false,
-          "default": "md"
+          "required": false
         },
         {
           "name": "intent",
           "type": "Intent | undefined",
           "description": "Visual intent/color",
-          "required": false,
-          "default": "info"
+          "required": false
         },
         {
           "name": "label",
@@ -162,8 +158,7 @@
           "name": "showValue",
           "type": "boolean | undefined",
           "description": "Whether to show percentage text",
-          "required": false,
-          "default": "false"
+          "required": false
         },
         {
           "name": "formatValue",

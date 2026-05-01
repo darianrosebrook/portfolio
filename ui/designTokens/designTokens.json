@@ -5823,6 +5823,18 @@
         }
       }
     },
+    "fontStyle": {
+      "italic": {
+        "$type": "string",
+        "$value": "italic",
+        "$description": "Italic font style for emphasis, quotes, and decorative text"
+      },
+      "normal": {
+        "$type": "string",
+        "$value": "normal",
+        "$description": "Normal (upright) font style"
+      }
+    },
     "fontWeight": {
       "black": {
         "$type": "fontWeight",
@@ -5974,6 +5986,10 @@
       "$type": "number",
       "$value": 1
     },
+    "105": {
+      "$type": "number",
+      "$value": 1.05
+    },
     "110": {
       "$type": "number",
       "$value": 1.1
@@ -6017,6 +6033,26 @@
     "050": {
       "$type": "number",
       "$value": 0.5
+    },
+    "060": {
+      "$type": "number",
+      "$value": 0.6
+    },
+    "070": {
+      "$type": "number",
+      "$value": 0.7
+    },
+    "080": {
+      "$type": "number",
+      "$value": 0.8
+    },
+    "090": {
+      "$type": "number",
+      "$value": 0.9
+    },
+    "095": {
+      "$type": "number",
+      "$value": 0.95
     },
     "000": {
       "$type": "number",
@@ -6625,6 +6661,11 @@
       "$type": "number",
       "$value": 0
     },
+    "none": {
+      "$type": "string",
+      "$value": "none",
+      "$description": "No elevation — explicitly removes any box-shadow"
+    },
     "default": {
       "$type": "shadow",
       "$value": {
@@ -6960,6 +7001,10 @@
         "dashed": {
           "$type": "borderStyle",
           "$value": "dashed"
+        },
+        "dotted": {
+          "$type": "borderStyle",
+          "$value": "dotted"
         }
       }
     },
@@ -7391,6 +7436,21 @@
         "$type": "duration",
         "$value": "1000ms",
         "$description": "Full second - very slow transitions"
+      },
+      "medium0": {
+        "$type": "duration",
+        "$value": "300ms",
+        "$description": "Pre-long - common transition speed between medium and long"
+      },
+      "long0": {
+        "$type": "duration",
+        "$value": "600ms",
+        "$description": "Post-long - common transition speed between long and long1"
+      },
+      "extraLong1": {
+        "$type": "duration",
+        "$value": "1500ms",
+        "$description": "Extra long - indeterminate loaders, complex entrance sequences"
       }
     },
     "easing": {
@@ -7508,6 +7568,11 @@
         "$type": "duration",
         "$value": "30ms",
         "$description": "Small stagger for list items"
+      },
+      "slow": {
+        "$type": "duration",
+        "$value": "40ms",
+        "$description": "Slow stagger — between sm and md, for deliberate sequencing"
       },
       "md": {
         "$type": "duration",
@@ -7659,6 +7724,39 @@
         "$value": "cubic-bezier(0.4, 0, 0.2, 1)",
         "$description": "Standard easing curve"
       }
+    },
+    "transition": {
+      "scale": {
+        "identity": {
+          "$type": "number",
+          "$value": 1,
+          "$description": "No-op scale — base / resting state"
+        },
+        "zoom": {
+          "$type": "number",
+          "$value": 1.05,
+          "$description": "Zoom-in entrance scale"
+        },
+        "shrink": {
+          "$type": "number",
+          "$value": 0.95,
+          "$description": "Shrink-out exit scale"
+        }
+      }
+    },
+    "icon": {
+      "scale": {
+        "enter": {
+          "$type": "number",
+          "$value": 0.8,
+          "$description": "Icon initial scale when entering (grows to full size)"
+        },
+        "exit": {
+          "$type": "number",
+          "$value": 0.8,
+          "$description": "Icon final scale when exiting (shrinks from full size)"
+        }
+      }
     }
   },
   "density": {
@@ -7682,6 +7780,16 @@
       "$type": "number",
       "$value": 0
     },
+    "component": {
+      "$type": "number",
+      "$value": 50,
+      "$description": "Component-level z-index for overlays within a layout"
+    },
+    "above": {
+      "$type": "number",
+      "$value": 51,
+      "$description": "One layer above component overlays"
+    },
     "dropdown": {
       "$type": "number",
       "$value": 1000
@@ -7701,6 +7809,11 @@
     "tooltip": {
       "$type": "number",
       "$value": 1800
+    },
+    "max": {
+      "$type": "number",
+      "$value": 9999,
+      "$description": "Maximum z-index for top-of-stack elements"
     }
   },
   "layout": {
@@ -8264,8 +8377,8 @@
     "disabled": {
       "opacity": {
         "$type": "number",
-        "$value": 0.4,
-        "$description": "Opacity for disabled elements"
+        "$value": 0.5,
+        "$description": "Opacity for disabled interactive elements"
       }
     },
     "text": {
@@ -9747,6 +9860,40 @@
         "design.paths.dark": "rgba(0,0,0,0.80)"
       },
       "$description": "Strong overlay scrim"
+    },
+    "scrimSheet": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0,
+          0,
+          0
+        ],
+        "alpha": 0.5
+      },
+      "$extensions": {
+        "design.paths.light": "rgba(0,0,0,0.50)",
+        "design.paths.dark": "rgba(0,0,0,0.70)"
+      },
+      "$description": "Backdrop scrim for sheet and drawer components"
+    },
+    "scrimDialog": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0,
+          0,
+          0
+        ],
+        "alpha": 0.6
+      },
+      "$extensions": {
+        "design.paths.light": "rgba(0,0,0,0.60)",
+        "design.paths.dark": "rgba(0,0,0,0.80)"
+      },
+      "$description": "Backdrop scrim for dialog and command palette overlays"
     }
   },
   "$brand": {

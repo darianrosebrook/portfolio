@@ -29,7 +29,7 @@
   --progress-typography-value-font-weight: var(--semantic-typography-font-weight-medium);
 
   /* === Motion Tokens === */
-  --progress-motion-duration-indeterminate: 1.5s;
+  --progress-motion-duration-indeterminate: var(--core-motion-duration-extra-long1);
   --progress-motion-easing-indeterminate: ease-in-out;
 
   /* === Spacing Tokens === */

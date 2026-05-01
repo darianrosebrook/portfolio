@@ -63,15 +63,13 @@
           "name": "orientation",
           "type": "\"horizontal\" | \"vertical\" | undefined",
           "description": "Visual orientation of the divider",
-          "required": false,
-          "default": "horizontal"
+          "required": false
         },
         {
           "name": "decorative",
           "type": "boolean | undefined",
           "description": "Semantic role - separator (default) or presentation for purely decorative",
-          "required": false,
-          "default": "false"
+          "required": false
         },
         {
           "name": "thickness",

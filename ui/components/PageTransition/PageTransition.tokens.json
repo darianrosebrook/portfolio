@@ -38,7 +38,7 @@
     },
     "opacity": {
       "overlay": {
-        "default": 0.8,
+        "default": "{core.opacity.800}",
         "light": 0.6,
         "heavy": 0.9
       },
@@ -49,9 +49,9 @@
     },
     "transform": {
       "scale": {
-        "default": 1,
-        "zoom": 1.05,
-        "shrink": 0.95
+        "default": "{semantic.motion.transition.scale.identity}",
+        "zoom": "{semantic.motion.transition.scale.zoom}",
+        "shrink": "{semantic.motion.transition.scale.shrink}"
       },
       "translate": {
         "default": 0,
@@ -60,9 +60,9 @@
       }
     },
     "zIndex": {
-      "overlay": 1000,
+      "overlay": "{core.layer.dropdown}",
       "content": 1001,
-      "max": 9999
+      "max": "{core.layer.max}"
     }
   }
 }

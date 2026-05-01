@@ -154,7 +154,8 @@
           "name": "lines",
           "type": "number | { min: number; max: number; } | undefined",
           "description": "",
-          "required": false
+          "required": false,
+          "default": "{ min: 2, max: 3 }"
         },
         {
           "name": "radius",

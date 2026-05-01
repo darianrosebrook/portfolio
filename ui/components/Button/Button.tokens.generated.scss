@@ -100,7 +100,7 @@
   --button-motion-duration-fast: var(--core-motion-duration-short);
   --button-motion-duration-spinner: var(--core-motion-duration-short);
   --button-motion-easing-standard: var(--core-motion-easing-standard);
-  --button-motion-scale-pressed: 0.98;
+  --button-motion-scale-pressed: var(--semantic-motion-interaction-press-scale);
 
   /* === Focus Tokens === */
   --button-focus-outline-width: var(--core-shape-border-width-thick);

@@ -101,11 +101,7 @@
   },
   "tokens": {
     "root": [
-      "sheet.color.overlay.colorSpace",
-      "sheet.color.overlay.components.0",
-      "sheet.color.overlay.components.1",
-      "sheet.color.overlay.components.2",
-      "sheet.color.overlay.alpha",
+      "sheet.color.overlay",
       "sheet.color.background",
       "sheet.color.backgroundHover",
       "sheet.color.border",
@@ -143,13 +139,6 @@
       "sheet.focus.width",
       "sheet.focus.color",
       "sheet.focus.offset"
-    ],
-    "overlay": [
-      "sheet.color.overlay.colorSpace",
-      "sheet.color.overlay.components.0",
-      "sheet.color.overlay.components.1",
-      "sheet.color.overlay.components.2",
-      "sheet.color.overlay.alpha"
     ]
   },
   "props": {

@@ -52,36 +52,171 @@
     "apgPattern": null
   },
   "tokens": {
-    "root": [
-      "brandSwitcher.color.background.primary",
-      "brandSwitcher.color.background.secondary",
-      "brandSwitcher.color.background.tertiary",
-      "brandSwitcher.color.background.accent",
-      "brandSwitcher.color.background.highlight",
-      "brandSwitcher.color.foreground.primary",
-      "brandSwitcher.color.foreground.secondary",
-      "brandSwitcher.color.foreground.tertiary",
-      "brandSwitcher.color.border.default",
-      "brandSwitcher.color.border.hover",
-      "brandSwitcher.color.border.focus",
-      "brandSwitcher.color.border.accent",
-      "brandSwitcher.spacing.gap.xs",
-      "brandSwitcher.spacing.gap.sm",
-      "brandSwitcher.spacing.gap.md",
-      "brandSwitcher.spacing.padding.xs",
-      "brandSwitcher.spacing.padding.sm",
-      "brandSwitcher.spacing.padding.md",
-      "brandSwitcher.spacing.padding.lg",
-      "brandSwitcher.size.radius.01",
-      "brandSwitcher.size.radius.02",
-      "brandSwitcher.size.radius.03",
-      "brandSwitcher.typography.fontSize.xs",
-      "brandSwitcher.typography.fontSize.sm",
-      "brandSwitcher.typography.fontSize.default",
-      "brandSwitcher.typography.fontWeight.default",
-      "brandSwitcher.typography.fontWeight.strong",
-      "brandSwitcher.typography.lineHeight.default"
-    ]
+    "root": {
+      "brandSwitcher.color.background.primary": {
+        "resolvesTo": "semantic.color.background.primary",
+        "fallback": "#ffffff",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "brandSwitcher.color.background.secondary": {
+        "resolvesTo": "semantic.color.background.secondary",
+        "fallback": "#efefef",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "brandSwitcher.color.background.tertiary": {
+        "resolvesTo": "semantic.color.background.tertiary",
+        "fallback": "#cecece",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "brandSwitcher.color.background.accent": {
+        "resolvesTo": "semantic.color.background.accent",
+        "fallback": "#d9292b",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "brandSwitcher.color.background.highlight": {
+        "resolvesTo": "semantic.color.background.highlight",
+        "fallback": "#f7c1c2",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "brandSwitcher.color.foreground.primary": {
+        "resolvesTo": "semantic.color.foreground.primary",
+        "fallback": "#141414",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "brandSwitcher.color.foreground.secondary": {
+        "resolvesTo": "semantic.color.foreground.secondary",
+        "fallback": "#555555",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "brandSwitcher.color.foreground.tertiary": {
+        "resolvesTo": "semantic.color.foreground.tertiary",
+        "fallback": "#717171",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "brandSwitcher.color.border.default": {
+        "resolvesTo": "semantic.color.border.default",
+        "fallback": "#aeaeae",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "brandSwitcher.color.border.hover": {
+        "resolvesTo": "semantic.color.border.hover",
+        "fallback": "#f29495",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "brandSwitcher.color.border.focus": {
+        "resolvesTo": "semantic.color.border.focus",
+        "fallback": "#d9292b",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "brandSwitcher.color.border.accent": {
+        "resolvesTo": "semantic.color.border.accent",
+        "fallback": "#d9292b",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "brandSwitcher.spacing.gap.xs": {
+        "resolvesTo": "semantic.spacing.gap.component",
+        "fallback": "8px",
+        "property": "gap",
+        "layer": "semantic"
+      },
+      "brandSwitcher.spacing.gap.sm": {
+        "resolvesTo": "semantic.spacing.gap.grid",
+        "fallback": "16px",
+        "property": "gap",
+        "layer": "semantic"
+      },
+      "brandSwitcher.spacing.gap.md": {
+        "resolvesTo": "semantic.spacing.gap.grid.medium",
+        "fallback": "24px",
+        "property": "gap",
+        "layer": "semantic"
+      },
+      "brandSwitcher.spacing.padding.xs": {
+        "resolvesTo": "semantic.spacing.padding.component",
+        "fallback": "16px",
+        "property": "padding",
+        "layer": "semantic"
+      },
+      "brandSwitcher.spacing.padding.sm": {
+        "resolvesTo": "semantic.spacing.padding.card",
+        "fallback": "16px",
+        "property": "padding",
+        "layer": "semantic"
+      },
+      "brandSwitcher.spacing.padding.md": {
+        "resolvesTo": "semantic.spacing.padding.component",
+        "fallback": "16px",
+        "property": "padding",
+        "layer": "semantic"
+      },
+      "brandSwitcher.spacing.padding.lg": {
+        "resolvesTo": "semantic.spacing.padding.section",
+        "fallback": "32px",
+        "property": "padding",
+        "layer": "semantic"
+      },
+      "brandSwitcher.size.radius.01": {
+        "resolvesTo": "core.shape.radius.01",
+        "fallback": "2px",
+        "property": "border-radius",
+        "layer": "core"
+      },
+      "brandSwitcher.size.radius.02": {
+        "resolvesTo": "core.shape.radius.02",
+        "fallback": "4px",
+        "property": "border-radius",
+        "layer": "core"
+      },
+      "brandSwitcher.size.radius.03": {
+        "resolvesTo": "core.shape.radius.03",
+        "fallback": "8px",
+        "property": "border-radius",
+        "layer": "core"
+      },
+      "brandSwitcher.typography.fontSize.xs": {
+        "resolvesTo": "semantic.typography.meta.caption.font.size",
+        "fallback": "12px",
+        "layer": "semantic"
+      },
+      "brandSwitcher.typography.fontSize.sm": {
+        "resolvesTo": "semantic.typography.body.small.font.size",
+        "fallback": "14px",
+        "layer": "semantic"
+      },
+      "brandSwitcher.typography.fontSize.default": {
+        "resolvesTo": "semantic.typography.body.default.font.size",
+        "fallback": "16px",
+        "layer": "semantic"
+      },
+      "brandSwitcher.typography.fontWeight.default": {
+        "resolvesTo": "semantic.typography.font.weight.regular",
+        "fallback": "400",
+        "layer": "semantic"
+      },
+      "brandSwitcher.typography.fontWeight.strong": {
+        "resolvesTo": "semantic.typography.font.weight.bold",
+        "fallback": "700",
+        "layer": "semantic"
+      },
+      "brandSwitcher.typography.lineHeight.default": {
+        "resolvesTo": "semantic.typography.body.default.line.height",
+        "fallback": "1.5",
+        "property": "line-height",
+        "layer": "semantic"
+      }
+    }
   },
   "props": {
     "styled": {

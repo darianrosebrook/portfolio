@@ -69,21 +69,21 @@
         "thick": "{core.shape.border.width.hairline}"
       },
       "style": {
-        "default": "solid",
-        "dashed": "dashed",
-        "dotted": "dotted"
+        "default": "{core.shape.border.style.solid}",
+        "dashed": "{core.shape.border.style.dashed}",
+        "dotted": "{core.shape.border.style.dotted}"
       }
     },
     "animation": {
       "stagger": {
-        "default": 28,
-        "fast": 20,
-        "slow": 40
+        "default": "{core.motion.stagger.sm}",
+        "fast": "{core.motion.stagger.xs}",
+        "slow": "{core.motion.stagger.slow}"
       },
       "duration": {
-        "default": 400,
-        "fast": 300,
-        "slow": 600
+        "default": "{core.motion.duration.long}",
+        "fast": "{core.motion.duration.medium0}",
+        "slow": "{core.motion.duration.long0}"
       }
     }
   }

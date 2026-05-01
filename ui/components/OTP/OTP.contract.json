@@ -221,8 +221,7 @@
           "name": "role",
           "type": "AriaRole | undefined",
           "description": "",
-          "required": false,
-          "default": "group"
+          "required": false
         },
         {
           "name": "about",

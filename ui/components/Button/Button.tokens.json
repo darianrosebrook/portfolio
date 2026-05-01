@@ -125,7 +125,7 @@
         "standard": "{core.motion.easing.standard}"
       },
       "scale": {
-        "pressed": 0.98
+        "pressed": "{semantic.motion.interaction.press.scale}"
       }
     },
     "focus": {

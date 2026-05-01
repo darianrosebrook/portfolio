@@ -176,6 +176,7 @@
   --core-typography-features-tabular-nums: 'tnum' on;
   --core-typography-features-lining-nums: 'lnum' on;
   --core-scale-100: 1;
+  --core-scale-105: 1.05;
   --core-scale-110: 1.1;
   --core-scale-125: 1.25;
   --core-scale-150: 1.5;
@@ -187,6 +188,11 @@
   --core-scale-300: 3;
   --core-scale-base: 1;
   --core-scale-050: 0.5;
+  --core-scale-060: 0.6;
+  --core-scale-070: 0.7;
+  --core-scale-080: 0.8;
+  --core-scale-090: 0.9;
+  --core-scale-095: 0.95;
   --core-scale-000: 0;
   --core-spacing-size-10: 64px;
   --core-spacing-size-00: 0px;
@@ -244,6 +250,7 @@
   --core-shape-border-width-thick: 2px;
   --core-shape-border-style-solid: solid;
   --core-shape-border-style-dashed: dashed;
+  --core-shape-border-style-dotted: dotted;
   --core-motion-duration-instant: 100ms;
   --core-motion-duration-short1: 50ms;
   --core-motion-duration-short2: 83ms;
@@ -257,6 +264,9 @@
   --core-motion-duration-long1: 667ms;
   --core-motion-duration-long2: 833ms;
   --core-motion-duration-long3: 1000ms;
+  --core-motion-duration-medium0: 300ms;
+  --core-motion-duration-long0: 600ms;
+  --core-motion-duration-extra-long1: 1500ms;
   --core-motion-easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
   --core-motion-easing-emphasized-in: cubic-bezier(0.2, 0, 0, 1);
   --core-motion-easing-emphasized-out: cubic-bezier(0.4, 0, 0.2, 1);
@@ -278,6 +288,7 @@
   --core-motion-delay-long: 150ms;
   --core-motion-stagger-xs: 17ms;
   --core-motion-stagger-sm: 30ms;
+  --core-motion-stagger-slow: 40ms;
   --core-motion-stagger-md: 60ms;
   --core-motion-stagger-lg: 100ms;
   --core-motion-stagger-list: 30ms;
@@ -287,11 +298,14 @@
   --core-density-scale-comfortable: 1;
   --core-density-scale-spacious: 1.125;
   --core-layer-base: 0;
+  --core-layer-component: 50;
+  --core-layer-above: 51;
   --core-layer-dropdown: 1000;
   --core-layer-overlay: 1300;
   --core-layer-modal: 1500;
   --core-layer-toast: 1700;
   --core-layer-tooltip: 1800;
+  --core-layer-max: 9999;
   --core-layout-container-sm: 640px;
   --core-layout-container-md: 768px;
   --core-layout-container-lg: 1024px;
@@ -370,6 +384,8 @@
   --semantic-typography-caption-01: 14px;
   --semantic-typography-caption-02: 12px;
   --semantic-typography-caption-03: 10px;
+  --semantic-typography-font-style-italic: italic;
+  --semantic-typography-font-style-normal: normal;
   --semantic-typography-font-weight-black: 900;
   --semantic-typography-font-weight-bold: 700;
   --semantic-typography-font-weight-light: 300;
@@ -436,6 +452,7 @@
   --semantic-spacing-margin-component: 16px;
   --semantic-spacing-margin-section: 32px;
   --semantic-elevation-depth: 0;
+  --semantic-elevation-none: none;
   --semantic-elevation-default: [object Object];
   --semantic-elevation-surface-raised: [object Object];
   --semantic-elevation-surface-floating: [object Object];
@@ -485,6 +502,11 @@
   --semantic-motion-interaction-tooltip-exit-easing: cubic-bezier(1, 0, 1, 1);
   --semantic-motion-interaction-duration: 250ms;
   --semantic-motion-interaction-easing: cubic-bezier(0.4, 0, 0.2, 1);
+  --semantic-motion-transition-scale-identity: 1;
+  --semantic-motion-transition-scale-zoom: 1.05;
+  --semantic-motion-transition-scale-shrink: 0.95;
+  --semantic-motion-icon-scale-enter: 0.8;
+  --semantic-motion-icon-scale-exit: 0.8;
   --semantic-content-max-width-prose: 520px;
   --semantic-content-max-width-narrow: 360px;
   --semantic-content-max-width-wide: 600px;
@@ -533,7 +555,7 @@
   --semantic-interaction-focus-ring-opacity: 0.5;
   --semantic-interaction-press-scale: 0.98;
   --semantic-interaction-press-duration: 100ms;
-  --semantic-interaction-disabled-opacity: 0.4;
+  --semantic-interaction-disabled-opacity: 0.5;
   --semantic-interaction-text-hover: #555555;
   --semantic-interaction-text-active: #141414;
   --semantic-interaction-text-disabled: #8f8f8f;
@@ -762,6 +784,8 @@
   --semantic-overlay-scrim-weak: rgba(0,0,0,0.24);
   --semantic-overlay-scrim-medium: rgba(0,0,0,0.40);
   --semantic-overlay-scrim-strong: rgba(0,0,0,0.64);
+  --semantic-overlay-scrim-sheet: rgba(0,0,0,0.50);
+  --semantic-overlay-scrim-dialog: rgba(0,0,0,0.60);
 }
 }
 
@@ -891,6 +915,8 @@
   --semantic-overlay-scrim-weak: rgba(0,0,0,0.24);
   --semantic-overlay-scrim-medium: rgba(0,0,0,0.40);
   --semantic-overlay-scrim-strong: rgba(0,0,0,0.64);
+  --semantic-overlay-scrim-sheet: rgba(0,0,0,0.50);
+  --semantic-overlay-scrim-dialog: rgba(0,0,0,0.60);
 }
 
   .dark {
@@ -1018,6 +1044,8 @@
   --semantic-overlay-scrim-weak: rgba(0,0,0,0.40);
   --semantic-overlay-scrim-medium: rgba(0,0,0,0.60);
   --semantic-overlay-scrim-strong: rgba(0,0,0,0.80);
+  --semantic-overlay-scrim-sheet: rgba(0,0,0,0.70);
+  --semantic-overlay-scrim-dialog: rgba(0,0,0,0.80);
 }
 
   @media (prefers-color-scheme: dark) {
@@ -1146,6 +1174,8 @@
   --semantic-overlay-scrim-weak: rgba(0,0,0,0.40);
   --semantic-overlay-scrim-medium: rgba(0,0,0,0.60);
   --semantic-overlay-scrim-strong: rgba(0,0,0,0.80);
+  --semantic-overlay-scrim-sheet: rgba(0,0,0,0.70);
+  --semantic-overlay-scrim-dialog: rgba(0,0,0,0.80);
 }
     .light {
   --semantic-color-opacity-50: 0.5;
@@ -1272,6 +1302,8 @@
   --semantic-overlay-scrim-weak: rgba(0,0,0,0.24);
   --semantic-overlay-scrim-medium: rgba(0,0,0,0.40);
   --semantic-overlay-scrim-strong: rgba(0,0,0,0.64);
+  --semantic-overlay-scrim-sheet: rgba(0,0,0,0.50);
+  --semantic-overlay-scrim-dialog: rgba(0,0,0,0.60);
 }
   }
 }

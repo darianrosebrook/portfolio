@@ -9,7 +9,7 @@
   --blockquote-color-border-accent: var(--semantic-color-border-accent);
 
   /* === Typography Tokens === */
-  --blockquote-typography-font-style: italic;
+  --blockquote-typography-font-style: var(--semantic-typography-font-style-italic);
   --blockquote-typography-font-weight: var(--semantic-typography-font-weight-medium);
   --blockquote-typography-sm-font-size: var(--semantic-typography-body-03);
   --blockquote-typography-sm-line-height: var(--semantic-typography-line-height-body);

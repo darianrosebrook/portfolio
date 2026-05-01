@@ -22,8 +22,10 @@ for (const [, varName, value] of cssContent.matchAll(/--([a-z][a-z0-9-]+):\s*([^
 const scssPath = path.join(COMPONENTS_DIR, componentName, `${componentName}.tokens.generated.scss`);
 const scss = readFileSync(scssPath, 'utf8');
 const bridge = new Map();
-for (const [, lv, rv] of scss.matchAll(/--([a-z][a-z0-9-]+):\s*var\(--([a-z][a-z0-9-]+)\)/g)) {
-  bridge.set(lv, rv);
+for (const [, lv, rv] of scss.matchAll(/--([a-zA-Z][a-zA-Z0-9-]+):\s*var\(--([a-zA-Z][a-zA-Z0-9-]+)\)/g)) {
+  const nlv = lv.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+  const nrv = rv.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+  bridge.set(nlv, nrv);
 }
 
 // Load contract

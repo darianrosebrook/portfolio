@@ -88,11 +88,7 @@
   },
   "tokens": {
     "root": [
-      "command.color.overlay.colorSpace",
-      "command.color.overlay.components.0",
-      "command.color.overlay.components.1",
-      "command.color.overlay.components.2",
-      "command.color.overlay.alpha",
+      "command.color.overlay",
       "command.color.background",
       "command.color.backgroundHover",
       "command.color.border",
@@ -136,13 +132,6 @@
       "command.zIndex.overlay",
       "command.shadow",
       "command.opacity.disabled"
-    ],
-    "overlay": [
-      "command.color.overlay.colorSpace",
-      "command.color.overlay.components.0",
-      "command.color.overlay.components.1",
-      "command.color.overlay.components.2",
-      "command.color.overlay.alpha"
     ]
   },
   "props": {

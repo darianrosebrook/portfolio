@@ -3,7 +3,7 @@
  */
 @mixin vars {
   /* === Color Tokens === */
-  --sheet-color-overlay: #00000080;
+  --sheet-color-overlay: var(--semantic-overlay-scrim-sheet);
   --sheet-color-background: var(--semantic-color-background-primary);
   --sheet-color-background-hover: var(--semantic-interaction-background-hover);
   --sheet-color-border: var(--semantic-color-border-light);
@@ -45,8 +45,8 @@
   --sheet-motion-easing: var(--core-motion-easing-standard);
 
   /* === ZIndex Tokens === */
-  --sheet-z-index-overlay: 50;
-  --sheet-z-index-content: 51;
+  --sheet-z-index-overlay: var(--core-layer-component);
+  --sheet-z-index-content: var(--core-layer-above);
 
   /* === Focus Tokens === */
   --sheet-focus-width: var(--core-shape-border-width-thick);

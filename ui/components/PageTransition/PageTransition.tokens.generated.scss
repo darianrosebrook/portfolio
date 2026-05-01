@@ -29,22 +29,22 @@
   --pageTransition-color-foreground-secondary: var(--semantic-color-foreground-secondary);
 
   /* === Opacity Tokens === */
-  --pageTransition-opacity-overlay-default: 0.8;
+  --pageTransition-opacity-overlay-default: var(--core-opacity-800);
   --pageTransition-opacity-overlay-light: 0.6;
   --pageTransition-opacity-overlay-heavy: 0.9;
   --pageTransition-opacity-content-default: 1;
   --pageTransition-opacity-content-fade: 0.7;
 
   /* === Transform Tokens === */
-  --pageTransition-transform-scale-default: 1;
-  --pageTransition-transform-scale-zoom: 1.05;
-  --pageTransition-transform-scale-shrink: 0.95;
+  --pageTransition-transform-scale-default: var(--semantic-motion-transition-scale-identity);
+  --pageTransition-transform-scale-zoom: var(--semantic-motion-transition-scale-zoom);
+  --pageTransition-transform-scale-shrink: var(--semantic-motion-transition-scale-shrink);
   --pageTransition-transform-translate-default: 0;
   --pageTransition-transform-translate-slide: 20;
   --pageTransition-transform-translate-bounce: 10;
 
   /* === ZIndex Tokens === */
-  --pageTransition-z-index-overlay: 1000;
+  --pageTransition-z-index-overlay: var(--core-layer-dropdown);
   --pageTransition-z-index-content: 1001;
-  --pageTransition-z-index-max: 9999;
+  --pageTransition-z-index-max: var(--core-layer-max);
 }

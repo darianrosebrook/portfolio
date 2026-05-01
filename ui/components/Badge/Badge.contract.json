@@ -37,47 +37,234 @@
     "apgPattern": null
   },
   "tokens": {
-    "root": [
-      "badge.color.background.default",
-      "badge.color.background.info",
-      "badge.color.background.success",
-      "badge.color.background.warning",
-      "badge.color.background.danger",
-      "badge.color.background.counter",
-      "badge.color.background.tag",
-      "badge.color.foreground.primary",
-      "badge.color.foreground.secondary",
-      "badge.color.foreground.info",
-      "badge.color.foreground.success",
-      "badge.color.foreground.warning",
-      "badge.color.foreground.danger",
-      "badge.color.foreground.accent",
-      "badge.color.foreground.onColor",
-      "badge.color.border.default",
-      "badge.color.border.accent",
-      "badge.color.border.info",
-      "badge.color.border.success",
-      "badge.color.border.warning",
-      "badge.color.border.danger",
-      "badge.size.sm.paddingY",
-      "badge.size.sm.paddingX",
-      "badge.size.sm.fontSize",
-      "badge.size.sm.radius",
-      "badge.size.sm.iconSize",
-      "badge.size.md.paddingY",
-      "badge.size.md.paddingX",
-      "badge.size.md.fontSize",
-      "badge.size.md.radius",
-      "badge.size.md.iconSize",
-      "badge.size.lg.paddingY",
-      "badge.size.lg.paddingX",
-      "badge.size.lg.fontSize",
-      "badge.size.lg.radius",
-      "badge.size.lg.iconSize",
-      "badge.elevation.default",
-      "badge.elevation.status",
-      "badge.spacing.gap"
-    ]
+    "root": {
+      "badge.color.background.default": {
+        "resolvesTo": "semantic.color.background.secondary",
+        "fallback": "#efefef",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "badge.color.background.info": {
+        "resolvesTo": "semantic.color.background.info.subtle",
+        "fallback": "#d9f3fe",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "badge.color.background.success": {
+        "resolvesTo": "semantic.color.background.success.subtle",
+        "fallback": "#e4f2e0",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "badge.color.background.warning": {
+        "resolvesTo": "semantic.color.background.warning.subtle",
+        "fallback": "#ffedcc",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "badge.color.background.danger": {
+        "resolvesTo": "semantic.color.background.danger.subtle",
+        "fallback": "#fceaea",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "badge.color.background.counter": {
+        "resolvesTo": "semantic.color.background.accent",
+        "fallback": "#d9292b",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "badge.color.background.tag": {
+        "resolvesTo": "semantic.color.background.tertiary",
+        "fallback": "#cecece",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "badge.color.foreground.primary": {
+        "resolvesTo": "semantic.color.foreground.primary",
+        "fallback": "#141414",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "badge.color.foreground.secondary": {
+        "resolvesTo": "semantic.color.foreground.secondary",
+        "fallback": "#555555",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "badge.color.foreground.info": {
+        "resolvesTo": "semantic.color.foreground.on.info.subtle",
+        "fallback": "#002d99",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "badge.color.foreground.success": {
+        "resolvesTo": "semantic.color.foreground.on.success.subtle",
+        "fallback": "#234104",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "badge.color.foreground.warning": {
+        "resolvesTo": "semantic.color.foreground.on.warning.subtle",
+        "fallback": "#593000",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "badge.color.foreground.danger": {
+        "resolvesTo": "semantic.color.foreground.on.danger.subtle",
+        "fallback": "#7b0000",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "badge.color.foreground.accent": {
+        "resolvesTo": "semantic.color.foreground.accent",
+        "fallback": "#d9292b",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "badge.color.foreground.onColor": {
+        "resolvesTo": "semantic.color.foreground.on.color",
+        "fallback": "#141414",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "badge.color.border.default": {
+        "resolvesTo": "semantic.color.border.light",
+        "fallback": "#fceaea",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "badge.color.border.accent": {
+        "resolvesTo": "semantic.color.border.accent",
+        "fallback": "#d9292b",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "badge.color.border.info": {
+        "resolvesTo": "semantic.color.border.info",
+        "fallback": "#0042dc",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "badge.color.border.success": {
+        "resolvesTo": "semantic.color.border.success",
+        "fallback": "#336006",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "badge.color.border.warning": {
+        "resolvesTo": "semantic.color.border.warning",
+        "fallback": "#824500",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "badge.color.border.danger": {
+        "resolvesTo": "semantic.color.border.danger",
+        "fallback": "#ae0001",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "badge.size.sm.paddingY": {
+        "resolvesTo": "core.spacing.size.02",
+        "fallback": "2px",
+        "property": "padding",
+        "layer": "core"
+      },
+      "badge.size.sm.paddingX": {
+        "resolvesTo": "core.spacing.size.03",
+        "fallback": "4px",
+        "property": "padding",
+        "layer": "core"
+      },
+      "badge.size.sm.fontSize": {
+        "resolvesTo": "semantic.typography.caption.01",
+        "fallback": "14px",
+        "layer": "semantic"
+      },
+      "badge.size.sm.radius": {
+        "resolvesTo": "core.shape.radius.small",
+        "fallback": "4px",
+        "property": "border-radius",
+        "layer": "core"
+      },
+      "badge.size.sm.iconSize": {
+        "resolvesTo": "core.icon.size.sm",
+        "fallback": "16px",
+        "layer": "core"
+      },
+      "badge.size.md.paddingY": {
+        "resolvesTo": "core.spacing.size.03",
+        "fallback": "4px",
+        "property": "padding",
+        "layer": "core"
+      },
+      "badge.size.md.paddingX": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "property": "padding",
+        "layer": "core"
+      },
+      "badge.size.md.fontSize": {
+        "resolvesTo": "semantic.typography.body.small.font.size",
+        "fallback": "14px",
+        "layer": "semantic"
+      },
+      "badge.size.md.radius": {
+        "resolvesTo": "core.shape.radius.default",
+        "fallback": "4px",
+        "property": "border-radius",
+        "layer": "core"
+      },
+      "badge.size.md.iconSize": {
+        "resolvesTo": "core.icon.size.md",
+        "fallback": "20px",
+        "layer": "core"
+      },
+      "badge.size.lg.paddingY": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "property": "padding",
+        "layer": "core"
+      },
+      "badge.size.lg.paddingX": {
+        "resolvesTo": "core.spacing.size.05",
+        "fallback": "12px",
+        "property": "padding",
+        "layer": "core"
+      },
+      "badge.size.lg.fontSize": {
+        "resolvesTo": "semantic.typography.body.default.font.size",
+        "fallback": "16px",
+        "layer": "semantic"
+      },
+      "badge.size.lg.radius": {
+        "resolvesTo": "core.shape.radius.medium",
+        "fallback": "8px",
+        "property": "border-radius",
+        "layer": "core"
+      },
+      "badge.size.lg.iconSize": {
+        "resolvesTo": "core.icon.size.lg",
+        "fallback": "24px",
+        "layer": "core"
+      },
+      "badge.elevation.default": {
+        "resolvesTo": "semantic.elevation.surface.raised",
+        "fallback": "[object Object]",
+        "layer": "semantic"
+      },
+      "badge.elevation.status": {
+        "resolvesTo": "semantic.elevation.none",
+        "fallback": "none",
+        "layer": "semantic"
+      },
+      "badge.spacing.gap": {
+        "resolvesTo": "core.spacing.size.02",
+        "fallback": "2px",
+        "property": "gap",
+        "layer": "core"
+      }
+    }
   },
   "props": {
     "styled": {
@@ -86,22 +273,19 @@
           "name": "variant",
           "type": "BadgeVariant | undefined",
           "description": "Visual variant of the badge",
-          "required": false,
-          "default": "default"
+          "required": false
         },
         {
           "name": "intent",
           "type": "Intent | undefined",
           "description": "Intent/severity for status badges",
-          "required": false,
-          "default": "info"
+          "required": false
         },
         {
           "name": "size",
           "type": "ControlSize | undefined",
           "description": "Size of the badge",
-          "required": false,
-          "default": "md"
+          "required": false
         },
         {
           "name": "icon",
@@ -113,8 +297,7 @@
           "name": "showStatusIcon",
           "type": "boolean | undefined",
           "description": "Whether to show the default status icon (only applies to status variant)",
-          "required": false,
-          "default": "true"
+          "required": false
         },
         {
           "name": "defaultChecked",

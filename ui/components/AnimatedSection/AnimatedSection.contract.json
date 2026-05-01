@@ -53,29 +53,25 @@
           "name": "duration",
           "type": "number | undefined",
           "description": "Duration of animation in seconds",
-          "required": false,
-          "default": "ANIMATION_DURATIONS.slow"
+          "required": false
         },
         {
           "name": "stagger",
           "type": "number | undefined",
           "description": "Stagger delay between children in seconds (for stagger-children variant)",
-          "required": false,
-          "default": "EDITORIAL_STAGGER.sections"
+          "required": false
         },
         {
           "name": "delay",
           "type": "number | undefined",
           "description": "Delay before animation starts in seconds",
-          "required": false,
-          "default": 0
+          "required": false
         },
         {
           "name": "triggerOnScroll",
           "type": "boolean | undefined",
           "description": "Whether to trigger on scroll into view",
-          "required": false,
-          "default": "true"
+          "required": false
         },
         {
           "name": "scrollStart",

@@ -353,6 +353,8 @@ export type TokenPath =
   | 'typography.caption.01'
   | 'typography.caption.02'
   | 'typography.caption.03'
+  | 'typography.fontStyle.italic'
+  | 'typography.fontStyle.normal'
   | 'typography.fontWeight.black'
   | 'typography.fontWeight.bold'
   | 'typography.fontWeight.light'
@@ -378,6 +380,7 @@ export type TokenPath =
   | 'typography.meta.legal.fontSize'
   | 'typography.meta.legal.lineHeight'
   | 'scale.100'
+  | 'scale.105'
   | 'scale.110'
   | 'scale.125'
   | 'scale.150'
@@ -389,6 +392,11 @@ export type TokenPath =
   | 'scale.300'
   | 'scale.base'
   | 'scale.050'
+  | 'scale.060'
+  | 'scale.070'
+  | 'scale.080'
+  | 'scale.090'
+  | 'scale.095'
   | 'scale.000'
   | 'spacing.size.10'
   | 'spacing.size.00'
@@ -452,6 +460,7 @@ export type TokenPath =
   | 'elevation.blur.md'
   | 'elevation.spread.none'
   | 'elevation.depth'
+  | 'elevation.none'
   | 'elevation.default'
   | 'elevation.surface.raised'
   | 'elevation.surface.floating'
@@ -495,6 +504,7 @@ export type TokenPath =
   | 'shape.border.width.thick'
   | 'shape.border.style.solid'
   | 'shape.border.style.dashed'
+  | 'shape.border.style.dotted'
   | 'shape.control.radius.default'
   | 'shape.control.radius.pill'
   | 'shape.control.border.defaultWidth'
@@ -532,6 +542,9 @@ export type TokenPath =
   | 'motion.duration.long1'
   | 'motion.duration.long2'
   | 'motion.duration.long3'
+  | 'motion.duration.medium0'
+  | 'motion.duration.long0'
+  | 'motion.duration.extraLong1'
   | 'motion.easing.standard'
   | 'motion.easing.emphasizedIn'
   | 'motion.easing.emphasizedOut'
@@ -553,6 +566,7 @@ export type TokenPath =
   | 'motion.delay.long'
   | 'motion.stagger.xs'
   | 'motion.stagger.sm'
+  | 'motion.stagger.slow'
   | 'motion.stagger.md'
   | 'motion.stagger.lg'
   | 'motion.stagger.list'
@@ -580,15 +594,23 @@ export type TokenPath =
   | 'motion.interaction.tooltip.exit.easing'
   | 'motion.interaction.duration'
   | 'motion.interaction.easing'
+  | 'motion.transition.scale.identity'
+  | 'motion.transition.scale.zoom'
+  | 'motion.transition.scale.shrink'
+  | 'motion.icon.scale.enter'
+  | 'motion.icon.scale.exit'
   | 'density.scale.compact'
   | 'density.scale.comfortable'
   | 'density.scale.spacious'
   | 'layer.base'
+  | 'layer.component'
+  | 'layer.above'
   | 'layer.dropdown'
   | 'layer.overlay'
   | 'layer.modal'
   | 'layer.toast'
   | 'layer.tooltip'
+  | 'layer.max'
   | 'layout.container.sm'
   | 'layout.container.md'
   | 'layout.container.lg'
@@ -779,7 +801,9 @@ export type TokenPath =
   | 'focus.ringOffset'
   | 'overlay.scrimWeak'
   | 'overlay.scrimMedium'
-  | 'overlay.scrimStrong';
+  | 'overlay.scrimStrong'
+  | 'overlay.scrimSheet'
+  | 'overlay.scrimDialog';
 
 /**
  * color token paths
@@ -1130,6 +1154,8 @@ export type TypographyTokenPath =
   | 'typography.caption.01'
   | 'typography.caption.02'
   | 'typography.caption.03'
+  | 'typography.fontStyle.italic'
+  | 'typography.fontStyle.normal'
   | 'typography.fontWeight.black'
   | 'typography.fontWeight.bold'
   | 'typography.fontWeight.light'
@@ -1160,6 +1186,7 @@ export type TypographyTokenPath =
  */
 export type ScaleTokenPath =
   | 'scale.100'
+  | 'scale.105'
   | 'scale.110'
   | 'scale.125'
   | 'scale.150'
@@ -1171,6 +1198,11 @@ export type ScaleTokenPath =
   | 'scale.300'
   | 'scale.base'
   | 'scale.050'
+  | 'scale.060'
+  | 'scale.070'
+  | 'scale.080'
+  | 'scale.090'
+  | 'scale.095'
   | 'scale.000';
 
 /**
@@ -1244,6 +1276,7 @@ export type ElevationTokenPath =
   | 'elevation.blur.md'
   | 'elevation.spread.none'
   | 'elevation.depth'
+  | 'elevation.none'
   | 'elevation.default'
   | 'elevation.surface.raised'
   | 'elevation.surface.floating';
@@ -1302,6 +1335,7 @@ export type ShapeTokenPath =
   | 'shape.border.width.thick'
   | 'shape.border.style.solid'
   | 'shape.border.style.dashed'
+  | 'shape.border.style.dotted'
   | 'shape.control.radius.default'
   | 'shape.control.radius.pill'
   | 'shape.control.border.defaultWidth'
@@ -1344,6 +1378,9 @@ export type MotionTokenPath =
   | 'motion.duration.long1'
   | 'motion.duration.long2'
   | 'motion.duration.long3'
+  | 'motion.duration.medium0'
+  | 'motion.duration.long0'
+  | 'motion.duration.extraLong1'
   | 'motion.easing.standard'
   | 'motion.easing.emphasizedIn'
   | 'motion.easing.emphasizedOut'
@@ -1365,6 +1402,7 @@ export type MotionTokenPath =
   | 'motion.delay.long'
   | 'motion.stagger.xs'
   | 'motion.stagger.sm'
+  | 'motion.stagger.slow'
   | 'motion.stagger.md'
   | 'motion.stagger.lg'
   | 'motion.stagger.list'
@@ -1391,7 +1429,12 @@ export type MotionTokenPath =
   | 'motion.interaction.tooltip.exit.duration'
   | 'motion.interaction.tooltip.exit.easing'
   | 'motion.interaction.duration'
-  | 'motion.interaction.easing';
+  | 'motion.interaction.easing'
+  | 'motion.transition.scale.identity'
+  | 'motion.transition.scale.zoom'
+  | 'motion.transition.scale.shrink'
+  | 'motion.icon.scale.enter'
+  | 'motion.icon.scale.exit';
 
 /**
  * density token paths
@@ -1406,11 +1449,14 @@ export type DensityTokenPath =
  */
 export type LayerTokenPath =
   | 'layer.base'
+  | 'layer.component'
+  | 'layer.above'
   | 'layer.dropdown'
   | 'layer.overlay'
   | 'layer.modal'
   | 'layer.toast'
-  | 'layer.tooltip';
+  | 'layer.tooltip'
+  | 'layer.max';
 
 /**
  * layout token paths
@@ -1666,7 +1712,9 @@ export type FocusTokenPath =
 export type OverlayTokenPath =
   | 'overlay.scrimWeak'
   | 'overlay.scrimMedium'
-  | 'overlay.scrimStrong';
+  | 'overlay.scrimStrong'
+  | 'overlay.scrimSheet'
+  | 'overlay.scrimDialog';
 
 /**
  * Token reference string (with curly braces)

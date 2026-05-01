@@ -21,52 +21,253 @@
     "apgPattern": null
   },
   "tokens": {
-    "root": [
-      "links.color.foreground.default",
-      "links.color.foreground.hover",
-      "links.color.foreground.active",
-      "links.color.foreground.visited",
-      "links.color.foreground.disabled",
-      "links.color.underline.default",
-      "links.color.underline.hover",
-      "links.color.underline.active",
-      "links.color.underline.disabled",
-      "links.spacing.gap.default",
-      "links.spacing.gap.small",
-      "links.spacing.gap.large",
-      "links.spacing.padding.default",
-      "links.spacing.padding.small",
-      "links.spacing.padding.large",
-      "links.spacing.margin.default",
-      "links.spacing.margin.small",
-      "links.spacing.margin.large",
-      "links.typography.fontSize.small",
-      "links.typography.fontSize.medium",
-      "links.typography.fontSize.large",
-      "links.typography.fontWeight.default",
-      "links.typography.fontWeight.medium",
-      "links.typography.fontWeight.semibold",
-      "links.typography.lineHeight.default",
-      "links.typography.lineHeight.tight",
-      "links.typography.lineHeight.relaxed",
-      "links.motion.duration.fast",
-      "links.motion.duration.normal",
-      "links.motion.duration.slow",
-      "links.motion.easing.standard",
-      "links.motion.easing.decelerate",
-      "links.motion.easing.accelerate",
-      "links.border.width.default",
-      "links.border.width.thick",
-      "links.border.style.default",
-      "links.border.style.dashed",
-      "links.border.style.dotted",
-      "links.animation.stagger.default",
-      "links.animation.stagger.fast",
-      "links.animation.stagger.slow",
-      "links.animation.duration.default",
-      "links.animation.duration.fast",
-      "links.animation.duration.slow"
-    ]
+    "root": {
+      "links.color.foreground.default": {
+        "resolvesTo": "semantic.color.foreground.primary",
+        "fallback": "#141414",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "links.color.foreground.hover": {
+        "resolvesTo": "semantic.interaction.text.hover",
+        "fallback": "#555555",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "links.color.foreground.active": {
+        "resolvesTo": "semantic.interaction.text.active",
+        "fallback": "#141414",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "links.color.foreground.visited": {
+        "resolvesTo": "semantic.color.foreground.secondary",
+        "fallback": "#555555",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "links.color.foreground.disabled": {
+        "resolvesTo": "semantic.color.foreground.disabled",
+        "fallback": "#aeaeae",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "links.color.underline.default": {
+        "resolvesTo": "semantic.color.border.light",
+        "fallback": "#fceaea",
+        "layer": "semantic"
+      },
+      "links.color.underline.hover": {
+        "resolvesTo": "semantic.interaction.border.hover",
+        "fallback": "#8f8f8f",
+        "layer": "semantic"
+      },
+      "links.color.underline.active": {
+        "resolvesTo": "semantic.interaction.border.active",
+        "fallback": "#8f8f8f",
+        "layer": "semantic"
+      },
+      "links.color.underline.disabled": {
+        "resolvesTo": "semantic.color.border.disabled",
+        "fallback": "#cecece",
+        "layer": "semantic"
+      },
+      "links.spacing.gap.default": {
+        "resolvesTo": "core.spacing.size.02",
+        "fallback": "2px",
+        "property": "gap",
+        "layer": "core"
+      },
+      "links.spacing.gap.small": {
+        "resolvesTo": "core.spacing.size.01",
+        "fallback": "1px",
+        "property": "gap",
+        "layer": "core"
+      },
+      "links.spacing.gap.large": {
+        "resolvesTo": "core.spacing.size.03",
+        "fallback": "4px",
+        "property": "gap",
+        "layer": "core"
+      },
+      "links.spacing.padding.default": {
+        "resolvesTo": "core.spacing.size.02",
+        "fallback": "2px",
+        "property": "padding",
+        "layer": "core"
+      },
+      "links.spacing.padding.small": {
+        "resolvesTo": "core.spacing.size.01",
+        "fallback": "1px",
+        "property": "padding",
+        "layer": "core"
+      },
+      "links.spacing.padding.large": {
+        "resolvesTo": "core.spacing.size.03",
+        "fallback": "4px",
+        "property": "padding",
+        "layer": "core"
+      },
+      "links.spacing.margin.default": {
+        "resolvesTo": "core.spacing.size.02",
+        "fallback": "2px",
+        "layer": "core"
+      },
+      "links.spacing.margin.small": {
+        "resolvesTo": "core.spacing.size.01",
+        "fallback": "1px",
+        "layer": "core"
+      },
+      "links.spacing.margin.large": {
+        "resolvesTo": "core.spacing.size.03",
+        "fallback": "4px",
+        "layer": "core"
+      },
+      "links.typography.fontSize.small": {
+        "resolvesTo": "semantic.typography.body.04",
+        "fallback": "12px",
+        "layer": "semantic"
+      },
+      "links.typography.fontSize.medium": {
+        "resolvesTo": "semantic.typography.body.04",
+        "fallback": "12px",
+        "layer": "semantic"
+      },
+      "links.typography.fontSize.large": {
+        "resolvesTo": "semantic.typography.body.03",
+        "fallback": "14px",
+        "layer": "semantic"
+      },
+      "links.typography.fontWeight.default": {
+        "resolvesTo": "semantic.typography.font.weight.regular",
+        "fallback": "400",
+        "layer": "semantic"
+      },
+      "links.typography.fontWeight.medium": {
+        "resolvesTo": "semantic.typography.font.weight.medium",
+        "fallback": "500",
+        "layer": "semantic"
+      },
+      "links.typography.fontWeight.semibold": {
+        "resolvesTo": "semantic.typography.font.weight.medium",
+        "fallback": "500",
+        "layer": "semantic"
+      },
+      "links.typography.lineHeight.default": {
+        "resolvesTo": "semantic.typography.line.height.normal",
+        "fallback": "1.5",
+        "property": "line-height",
+        "layer": "semantic"
+      },
+      "links.typography.lineHeight.tight": {
+        "resolvesTo": "semantic.typography.line.height.tight",
+        "fallback": "1.2",
+        "property": "line-height",
+        "layer": "semantic"
+      },
+      "links.typography.lineHeight.relaxed": {
+        "resolvesTo": "semantic.typography.line.height.loose",
+        "fallback": "1.8",
+        "property": "line-height",
+        "layer": "semantic"
+      },
+      "links.motion.duration.fast": {
+        "resolvesTo": "core.motion.duration.short",
+        "fallback": "150ms",
+        "property": "transition-duration",
+        "layer": "core"
+      },
+      "links.motion.duration.normal": {
+        "resolvesTo": "core.motion.duration.medium",
+        "fallback": "250ms",
+        "property": "transition-duration",
+        "layer": "core"
+      },
+      "links.motion.duration.slow": {
+        "resolvesTo": "core.motion.duration.long",
+        "fallback": "400ms",
+        "property": "transition-duration",
+        "layer": "core"
+      },
+      "links.motion.easing.standard": {
+        "resolvesTo": "core.motion.easing.standard",
+        "fallback": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "property": "transition-timing-function",
+        "layer": "core"
+      },
+      "links.motion.easing.decelerate": {
+        "resolvesTo": "core.motion.easing.emphasized.out",
+        "fallback": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "property": "transition-timing-function",
+        "layer": "core"
+      },
+      "links.motion.easing.accelerate": {
+        "resolvesTo": "core.motion.easing.emphasized.in",
+        "fallback": "cubic-bezier(0.2, 0, 0, 1)",
+        "property": "transition-timing-function",
+        "layer": "core"
+      },
+      "links.border.width.default": {
+        "resolvesTo": "core.shape.border.width.hairline",
+        "fallback": "1px",
+        "property": "border-width",
+        "layer": "core"
+      },
+      "links.border.width.thick": {
+        "resolvesTo": "core.shape.border.width.hairline",
+        "fallback": "1px",
+        "property": "border-width",
+        "layer": "core"
+      },
+      "links.border.style.default": {
+        "resolvesTo": "core.shape.border.style.solid",
+        "fallback": "solid",
+        "layer": "core"
+      },
+      "links.border.style.dashed": {
+        "resolvesTo": "core.shape.border.style.dashed",
+        "fallback": "dashed",
+        "layer": "core"
+      },
+      "links.border.style.dotted": {
+        "resolvesTo": "core.shape.border.style.dotted",
+        "fallback": "dotted",
+        "layer": "core"
+      },
+      "links.animation.stagger.default": {
+        "resolvesTo": "core.motion.stagger.sm",
+        "fallback": "30ms",
+        "layer": "core"
+      },
+      "links.animation.stagger.fast": {
+        "resolvesTo": "core.motion.stagger.xs",
+        "fallback": "17ms",
+        "layer": "core"
+      },
+      "links.animation.stagger.slow": {
+        "resolvesTo": "core.motion.stagger.slow",
+        "fallback": "40ms",
+        "layer": "core"
+      },
+      "links.animation.duration.default": {
+        "resolvesTo": "core.motion.duration.long",
+        "fallback": "400ms",
+        "property": "transition-duration",
+        "layer": "core"
+      },
+      "links.animation.duration.fast": {
+        "resolvesTo": "core.motion.duration.medium0",
+        "fallback": "300ms",
+        "property": "transition-duration",
+        "layer": "core"
+      },
+      "links.animation.duration.slow": {
+        "resolvesTo": "core.motion.duration.long0",
+        "fallback": "600ms",
+        "property": "transition-duration",
+        "layer": "core"
+      }
+    }
   },
   "ssr": {
     "hydrateOn": "interaction"

@@ -563,8 +563,7 @@
           "name": "size",
           "type": "SwitchSize | undefined",
           "description": "Size variant using design tokens",
-          "required": false,
-          "default": "md"
+          "required": false
         },
         {
           "name": "checked",
@@ -582,8 +581,7 @@
           "name": "disabled",
           "type": "boolean | undefined",
           "description": "Whether the switch is disabled",
-          "required": false,
-          "default": "false"
+          "required": false
         },
         {
           "name": "accept",
@@ -811,8 +809,7 @@
           "name": "hidden",
           "type": "boolean | undefined",
           "description": "",
-          "required": false,
-          "default": "true"
+          "required": false
         },
         {
           "name": "lang",
@@ -830,8 +827,7 @@
           "name": "slot",
           "type": "string | undefined",
           "description": "",
-          "required": false,
-          "default": "switch"
+          "required": false
         },
         {
           "name": "spellCheck",

@@ -58,103 +58,568 @@
     "apgPattern": "button"
   },
   "tokens": {
-    "root": [
-      "button.color.background.default",
-      "button.color.background.hover",
-      "button.color.background.active",
-      "button.color.background.focus",
-      "button.color.background.focusVisible",
-      "button.color.background.disabled",
-      "button.color.background.primary",
-      "button.color.background.primaryHover",
-      "button.color.background.primaryActive",
-      "button.color.background.secondary",
-      "button.color.background.secondaryHover",
-      "button.color.background.secondaryActive",
-      "button.color.background.tertiary",
-      "button.color.background.tertiaryHover",
-      "button.color.background.tertiaryActive",
-      "button.color.background.destructive",
-      "button.color.background.destructiveHover",
-      "button.color.background.destructiveActive",
-      "button.color.foreground.default",
-      "button.color.foreground.hover",
-      "button.color.foreground.active",
-      "button.color.foreground.focus",
-      "button.color.foreground.focusVisible",
-      "button.color.foreground.disabled",
-      "button.color.foreground.primary",
-      "button.color.foreground.primaryHover",
-      "button.color.foreground.primaryActive",
-      "button.color.foreground.secondary",
-      "button.color.foreground.secondaryHover",
-      "button.color.foreground.secondaryActive",
-      "button.color.foreground.tertiary",
-      "button.color.foreground.tertiaryHover",
-      "button.color.foreground.tertiaryActive",
-      "button.color.foreground.ghost",
-      "button.color.foreground.ghostHover",
-      "button.color.foreground.ghostActive",
-      "button.color.foreground.destructive",
-      "button.color.foreground.destructiveHover",
-      "button.color.foreground.destructiveActive",
-      "button.color.foreground.outline",
-      "button.color.foreground.outlineHover",
-      "button.color.foreground.outlineActive",
-      "button.color.border.default",
-      "button.color.border.hover",
-      "button.color.border.active",
-      "button.color.border.focus",
-      "button.color.border.focusVisible",
-      "button.color.border.disabled",
-      "button.color.border.primary",
-      "button.color.border.primaryHover",
-      "button.color.border.primaryActive",
-      "button.color.border.secondary",
-      "button.color.border.secondaryHover",
-      "button.color.border.secondaryActive",
-      "button.color.border.tertiary",
-      "button.color.border.tertiaryHover",
-      "button.color.border.tertiaryActive",
-      "button.color.border.ghost",
-      "button.color.border.ghostHover",
-      "button.color.border.ghostActive",
-      "button.color.border.destructive",
-      "button.color.border.destructiveHover",
-      "button.color.border.destructiveActive",
-      "button.color.border.outline",
-      "button.color.border.outlineHover",
-      "button.color.border.outlineActive",
-      "button.color.spinner.border",
-      "button.color.spinner.borderAccent",
-      "button.size.gap.default",
-      "button.size.gap.small",
-      "button.size.gap.large",
-      "button.size.padding.small",
-      "button.size.padding.large",
-      "button.size.min.small",
-      "button.size.min.medium",
-      "button.size.min.large",
-      "button.size.radius",
-      "button.size.border",
-      "button.size.spinner.width",
-      "button.size.spinner.height",
-      "button.size.spinner.borderWidth",
-      "button.size.spinner.borderRadius",
-      "button.size.margin",
-      "button.text.weight",
-      "button.text.size.small",
-      "button.text.size.medium",
-      "button.text.size.large",
-      "button.text.lineHeight.collapse",
-      "button.motion.duration.fast",
-      "button.motion.duration.spinner",
-      "button.motion.easing.standard",
-      "button.motion.scale.pressed",
-      "button.focus.outlineWidth",
-      "button.focus.outlineOffset",
-      "button.focus.outlineColor"
-    ],
+    "root": {
+      "button.color.background.default": {
+        "resolvesTo": "semantic.color.action.background.primary.default",
+        "fallback": "#d9292b",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "button.color.background.hover": {
+        "resolvesTo": "semantic.interaction.background.hover",
+        "fallback": "#efefef",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "button.color.background.active": {
+        "resolvesTo": "semantic.interaction.background.active",
+        "fallback": "#cecece",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "button.color.background.focus": {
+        "resolvesTo": "semantic.color.action.border.primary.focus",
+        "fallback": "#ea6465",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "button.color.background.focusVisible": {
+        "resolvesTo": "semantic.color.action.border.primary.focus",
+        "fallback": "#ea6465",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "button.color.background.disabled": {
+        "resolvesTo": "semantic.color.action.background.primary.disabled",
+        "fallback": "#cecece",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "button.color.background.primary": {
+        "resolvesTo": "semantic.color.background.primary",
+        "fallback": "#ffffff",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "button.color.background.primaryHover": {
+        "resolvesTo": "semantic.interaction.background.hover",
+        "fallback": "#efefef",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "button.color.background.primaryActive": {
+        "resolvesTo": "semantic.interaction.background.active",
+        "fallback": "#cecece",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "button.color.background.secondary": {
+        "resolvesTo": "semantic.color.background.secondary",
+        "fallback": "#efefef",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "button.color.background.secondaryHover": {
+        "resolvesTo": "semantic.interaction.background.hover",
+        "fallback": "#efefef",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "button.color.background.secondaryActive": {
+        "resolvesTo": "semantic.interaction.background.active",
+        "fallback": "#cecece",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "button.color.background.tertiary": {
+        "resolvesTo": "core.color.mode.transparent",
+        "fallback": "#00000000",
+        "property": "background-color",
+        "layer": "core"
+      },
+      "button.color.background.tertiaryHover": {
+        "resolvesTo": "semantic.interaction.background.hover",
+        "fallback": "#efefef",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "button.color.background.tertiaryActive": {
+        "resolvesTo": "semantic.interaction.background.active",
+        "fallback": "#cecece",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "button.color.background.destructive": {
+        "resolvesTo": "semantic.color.background.danger.subtle",
+        "fallback": "#fceaea",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "button.color.background.destructiveHover": {
+        "resolvesTo": "semantic.color.background.hover",
+        "fallback": "#cecece",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "button.color.background.destructiveActive": {
+        "resolvesTo": "semantic.color.background.active",
+        "fallback": "#aeaeae",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "button.color.foreground.default": {
+        "resolvesTo": "semantic.color.foreground.inverse",
+        "fallback": "#fafafa",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "button.color.foreground.hover": {
+        "resolvesTo": "semantic.interaction.text.hover",
+        "fallback": "#555555",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "button.color.foreground.active": {
+        "resolvesTo": "semantic.interaction.text.active",
+        "fallback": "#141414",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "button.color.foreground.focus": {
+        "resolvesTo": "semantic.color.foreground.inverse",
+        "fallback": "#fafafa",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "button.color.foreground.focusVisible": {
+        "resolvesTo": "semantic.color.foreground.inverse",
+        "fallback": "#fafafa",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "button.color.foreground.disabled": {
+        "resolvesTo": "semantic.color.foreground.disabled",
+        "fallback": "#aeaeae",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "button.color.foreground.primary": {
+        "resolvesTo": "semantic.color.foreground.primary",
+        "fallback": "#141414",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "button.color.foreground.primaryHover": {
+        "resolvesTo": "semantic.color.foreground.on.brand",
+        "fallback": "#ffffff",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "button.color.foreground.primaryActive": {
+        "resolvesTo": "semantic.color.foreground.on.brand",
+        "fallback": "#ffffff",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "button.color.foreground.secondary": {
+        "resolvesTo": "semantic.color.foreground.primary",
+        "fallback": "#141414",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "button.color.foreground.secondaryHover": {
+        "resolvesTo": "semantic.interaction.text.hover",
+        "fallback": "#555555",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "button.color.foreground.secondaryActive": {
+        "resolvesTo": "semantic.interaction.text.active",
+        "fallback": "#141414",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "button.color.foreground.tertiary": {
+        "resolvesTo": "semantic.color.foreground.primary",
+        "fallback": "#141414",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "button.color.foreground.tertiaryHover": {
+        "resolvesTo": "semantic.interaction.text.hover",
+        "fallback": "#555555",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "button.color.foreground.tertiaryActive": {
+        "resolvesTo": "semantic.interaction.text.active",
+        "fallback": "#141414",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "button.color.foreground.ghost": {
+        "resolvesTo": "semantic.color.foreground.primary",
+        "fallback": "#141414",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "button.color.foreground.ghostHover": {
+        "resolvesTo": "semantic.interaction.text.hover",
+        "fallback": "#555555",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "button.color.foreground.ghostActive": {
+        "resolvesTo": "semantic.interaction.text.active",
+        "fallback": "#141414",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "button.color.foreground.destructive": {
+        "resolvesTo": "semantic.color.foreground.danger",
+        "fallback": "#d9292b",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "button.color.foreground.destructiveHover": {
+        "resolvesTo": "semantic.color.foreground.danger",
+        "fallback": "#d9292b",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "button.color.foreground.destructiveActive": {
+        "resolvesTo": "semantic.color.foreground.danger",
+        "fallback": "#d9292b",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "button.color.foreground.outline": {
+        "resolvesTo": "semantic.color.foreground.secondary",
+        "fallback": "#555555",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "button.color.foreground.outlineHover": {
+        "resolvesTo": "semantic.interaction.text.hover",
+        "fallback": "#555555",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "button.color.foreground.outlineActive": {
+        "resolvesTo": "semantic.interaction.text.active",
+        "fallback": "#141414",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "button.color.border.default": {
+        "resolvesTo": "semantic.color.border.light",
+        "fallback": "#fceaea",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "button.color.border.hover": {
+        "resolvesTo": "semantic.interaction.border.hover",
+        "fallback": "#8f8f8f",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "button.color.border.active": {
+        "resolvesTo": "semantic.interaction.border.active",
+        "fallback": "#8f8f8f",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "button.color.border.focus": {
+        "resolvesTo": "semantic.color.border.accent",
+        "fallback": "#d9292b",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "button.color.border.focusVisible": {
+        "resolvesTo": "semantic.color.border.accent",
+        "fallback": "#d9292b",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "button.color.border.disabled": {
+        "resolvesTo": "semantic.color.border.disabled",
+        "fallback": "#cecece",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "button.color.border.primary": {
+        "resolvesTo": "semantic.color.border.accent",
+        "fallback": "#d9292b",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "button.color.border.primaryHover": {
+        "resolvesTo": "semantic.color.border.accent",
+        "fallback": "#d9292b",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "button.color.border.primaryActive": {
+        "resolvesTo": "semantic.color.border.accent",
+        "fallback": "#d9292b",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "button.color.border.secondary": {
+        "resolvesTo": "semantic.color.border.light",
+        "fallback": "#fceaea",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "button.color.border.secondaryHover": {
+        "resolvesTo": "semantic.interaction.border.hover",
+        "fallback": "#8f8f8f",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "button.color.border.secondaryActive": {
+        "resolvesTo": "semantic.interaction.border.active",
+        "fallback": "#8f8f8f",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "button.color.border.tertiary": {
+        "resolvesTo": "semantic.color.border.light",
+        "fallback": "#fceaea",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "button.color.border.tertiaryHover": {
+        "resolvesTo": "semantic.interaction.border.hover",
+        "fallback": "#8f8f8f",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "button.color.border.tertiaryActive": {
+        "resolvesTo": "semantic.interaction.border.active",
+        "fallback": "#8f8f8f",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "button.color.border.ghost": {
+        "resolvesTo": "core.color.mode.transparent",
+        "fallback": "#00000000",
+        "property": "border-color",
+        "layer": "core"
+      },
+      "button.color.border.ghostHover": {
+        "resolvesTo": "semantic.interaction.border.hover",
+        "fallback": "#8f8f8f",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "button.color.border.ghostActive": {
+        "resolvesTo": "semantic.interaction.border.active",
+        "fallback": "#8f8f8f",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "button.color.border.destructive": {
+        "resolvesTo": "semantic.color.feedback.border.danger",
+        "fallback": "#ae0001",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "button.color.border.destructiveHover": {
+        "resolvesTo": "semantic.color.feedback.border.danger",
+        "fallback": "#ae0001",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "button.color.border.destructiveActive": {
+        "resolvesTo": "semantic.color.feedback.border.danger",
+        "fallback": "#ae0001",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "button.color.border.outline": {
+        "resolvesTo": "semantic.color.border.subtle",
+        "fallback": "#cecece",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "button.color.border.outlineHover": {
+        "resolvesTo": "semantic.interaction.border.hover",
+        "fallback": "#8f8f8f",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "button.color.border.outlineActive": {
+        "resolvesTo": "semantic.interaction.border.active",
+        "fallback": "#8f8f8f",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "button.color.spinner.border": {
+        "resolvesTo": "semantic.color.border.light",
+        "fallback": "#fceaea",
+        "layer": "semantic"
+      },
+      "button.color.spinner.borderAccent": {
+        "resolvesTo": "semantic.color.border.accent",
+        "fallback": "#d9292b",
+        "layer": "semantic"
+      },
+      "button.size.gap.default": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "property": "gap",
+        "layer": "core"
+      },
+      "button.size.gap.small": {
+        "resolvesTo": "core.spacing.size.03",
+        "fallback": "4px",
+        "property": "gap",
+        "layer": "core"
+      },
+      "button.size.gap.large": {
+        "resolvesTo": "core.spacing.size.05",
+        "fallback": "12px",
+        "property": "gap",
+        "layer": "core"
+      },
+      "button.size.padding.small": {
+        "resolvesTo": "core.spacing.size.03",
+        "fallback": "4px",
+        "property": "padding",
+        "layer": "core"
+      },
+      "button.size.padding.large": {
+        "resolvesTo": "core.spacing.size.05",
+        "fallback": "12px",
+        "property": "padding",
+        "layer": "core"
+      },
+      "button.size.min.small": {
+        "resolvesTo": "semantic.control.size.sm.height",
+        "fallback": "24px",
+        "property": "min-height",
+        "layer": "semantic"
+      },
+      "button.size.min.medium": {
+        "resolvesTo": "semantic.control.size.md.height",
+        "fallback": "32px",
+        "property": "min-height",
+        "layer": "semantic"
+      },
+      "button.size.min.large": {
+        "resolvesTo": "semantic.control.size.lg.height",
+        "fallback": "48px",
+        "property": "min-height",
+        "layer": "semantic"
+      },
+      "button.size.radius": {
+        "resolvesTo": "core.shape.radius.full",
+        "fallback": "9999px",
+        "property": "border-radius",
+        "layer": "core"
+      },
+      "button.size.border": {
+        "resolvesTo": "core.shape.border.width.hairline",
+        "fallback": "1px",
+        "layer": "core"
+      },
+      "button.size.spinner.width": {
+        "resolvesTo": "core.spacing.size.06",
+        "fallback": "16px",
+        "layer": "core"
+      },
+      "button.size.spinner.height": {
+        "resolvesTo": "core.spacing.size.06",
+        "fallback": "16px",
+        "layer": "core"
+      },
+      "button.size.spinner.borderWidth": {
+        "resolvesTo": "core.shape.border.width.hairline",
+        "fallback": "1px",
+        "property": "border-width",
+        "layer": "core"
+      },
+      "button.size.spinner.borderRadius": {
+        "resolvesTo": "core.shape.radius.full",
+        "fallback": "9999px",
+        "property": "border-radius",
+        "layer": "core"
+      },
+      "button.size.margin": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "layer": "core"
+      },
+      "button.text.weight": {
+        "resolvesTo": "semantic.typography.font.weight.medium",
+        "fallback": "500",
+        "property": "font-weight",
+        "layer": "semantic"
+      },
+      "button.text.size.small": {
+        "resolvesTo": "semantic.typography.body.04",
+        "fallback": "12px",
+        "property": "font-size",
+        "layer": "semantic"
+      },
+      "button.text.size.medium": {
+        "resolvesTo": "semantic.typography.body.01",
+        "fallback": "18px",
+        "property": "font-size",
+        "layer": "semantic"
+      },
+      "button.text.size.large": {
+        "resolvesTo": "semantic.typography.body.01",
+        "fallback": "18px",
+        "property": "font-size",
+        "layer": "semantic"
+      },
+      "button.text.lineHeight.collapse": {
+        "resolvesTo": "semantic.typography.line.height.collapse",
+        "fallback": "1",
+        "property": "line-height",
+        "layer": "semantic"
+      },
+      "button.motion.duration.fast": {
+        "resolvesTo": "core.motion.duration.short",
+        "fallback": "150ms",
+        "property": "transition-duration",
+        "layer": "core"
+      },
+      "button.motion.duration.spinner": {
+        "resolvesTo": "core.motion.duration.short",
+        "fallback": "150ms",
+        "property": "transition-duration",
+        "layer": "core"
+      },
+      "button.motion.easing.standard": {
+        "resolvesTo": "core.motion.easing.standard",
+        "fallback": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "property": "transition-timing-function",
+        "layer": "core"
+      },
+      "button.motion.scale.pressed": {
+        "resolvesTo": "semantic.motion.interaction.press.scale",
+        "fallback": "0.98",
+        "layer": "semantic"
+      },
+      "button.focus.outlineWidth": {
+        "resolvesTo": "core.shape.border.width.thick",
+        "fallback": "2px",
+        "layer": "core"
+      },
+      "button.focus.outlineOffset": {
+        "resolvesTo": "core.spacing.size.02",
+        "fallback": "2px",
+        "layer": "core"
+      },
+      "button.focus.outlineColor": {
+        "resolvesTo": "semantic.color.border.accent",
+        "fallback": "#d9292b",
+        "layer": "semantic"
+      }
+    },
     "spinner": {
       "button.color.spinner.border": {
         "resolvesTo": "semantic.color.border.light",
@@ -197,8 +662,7 @@
           "name": "as",
           "type": "\"button\" | undefined",
           "description": "",
-          "required": false,
-          "default": "button"
+          "required": false
         },
         {
           "name": "type",
@@ -216,29 +680,25 @@
           "name": "size",
           "type": "ButtonSize | undefined",
           "description": "",
-          "required": false,
-          "default": "medium"
+          "required": false
         },
         {
           "name": "variant",
           "type": "ButtonVariant | undefined",
           "description": "",
-          "required": false,
-          "default": "primary"
+          "required": false
         },
         {
           "name": "loading",
           "type": "boolean | undefined",
           "description": "",
-          "required": false,
-          "default": "false"
+          "required": false
         },
         {
           "name": "disabled",
           "type": "boolean | undefined",
           "description": "",
-          "required": false,
-          "default": "false"
+          "required": false
         },
         {
           "name": "title",
@@ -274,8 +734,7 @@
           "name": "asChild",
           "type": "boolean | undefined",
           "description": "",
-          "required": false,
-          "default": "false"
+          "required": false
         },
         {
           "name": "defaultChecked",
@@ -347,8 +806,7 @@
           "name": "hidden",
           "type": "boolean | undefined",
           "description": "",
-          "required": false,
-          "default": "true"
+          "required": false
         },
         {
           "name": "lang",
@@ -366,8 +824,7 @@
           "name": "slot",
           "type": "string | undefined",
           "description": "",
-          "required": false,
-          "default": "button"
+          "required": false
         },
         {
           "name": "spellCheck",

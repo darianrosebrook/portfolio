@@ -75,43 +75,37 @@
           "name": "objectFit",
           "type": "\"cover\" | \"contain\" | \"fill\" | \"scale-down\" | \"none\" | undefined",
           "description": "Object fit behavior",
-          "required": false,
-          "default": "cover"
+          "required": false
         },
         {
           "name": "objectPosition",
           "type": "string | undefined",
           "description": "Object position",
-          "required": false,
-          "default": "center"
+          "required": false
         },
         {
           "name": "loading",
           "type": "\"lazy\" | \"eager\" | undefined",
           "description": "Loading behavior",
-          "required": false,
-          "default": "lazy"
+          "required": false
         },
         {
           "name": "size",
           "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\" | \"full\" | undefined",
           "description": "Size variant",
-          "required": false,
-          "default": "full"
+          "required": false
         },
         {
           "name": "radius",
           "type": "\"none\" | \"sm\" | \"md\" | \"lg\" | \"full\" | undefined",
           "description": "Border radius variant",
-          "required": false,
-          "default": "none"
+          "required": false
         },
         {
           "name": "showPlaceholder",
           "type": "boolean | undefined",
           "description": "Whether to show a placeholder while loading",
-          "required": false,
-          "default": "true"
+          "required": false
         },
         {
           "name": "fallbackSrc",
@@ -261,8 +255,7 @@
           "name": "hidden",
           "type": "boolean | undefined",
           "description": "",
-          "required": false,
-          "default": "true"
+          "required": false
         },
         {
           "name": "lang",
@@ -310,8 +303,7 @@
           "name": "role",
           "type": "AriaRole | undefined",
           "description": "",
-          "required": false,
-          "default": "img"
+          "required": false
         },
         {
           "name": "about",

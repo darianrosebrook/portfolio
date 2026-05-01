@@ -35,8 +35,8 @@
     "disabled": {
       "opacity": {
         "$type": "number",
-        "$value": 0.4,
-        "$description": "Opacity for disabled elements"
+        "$value": 0.5,
+        "$description": "Opacity for disabled interactive elements"
       }
     }
   }

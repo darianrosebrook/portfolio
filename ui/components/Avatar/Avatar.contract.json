@@ -171,8 +171,7 @@
           "name": "priority",
           "type": "boolean | undefined",
           "description": "",
-          "required": false,
-          "default": "false"
+          "required": false
         },
         {
           "name": "defaultChecked",

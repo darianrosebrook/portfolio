@@ -27,23 +27,92 @@
     "apgPattern": null
   },
   "tokens": {
-    "root": [
-      "blockquote.color.foreground.primary",
-      "blockquote.color.background.default",
-      "blockquote.color.border.default",
-      "blockquote.color.border.accent",
-      "blockquote.typography.fontStyle",
-      "blockquote.typography.fontWeight",
-      "blockquote.typography.sm.fontSize",
-      "blockquote.typography.sm.lineHeight",
-      "blockquote.typography.md.fontSize",
-      "blockquote.typography.md.lineHeight",
-      "blockquote.typography.lg.fontSize",
-      "blockquote.typography.lg.lineHeight",
-      "blockquote.size.padding.default",
-      "blockquote.size.radius.default",
-      "blockquote.size.border.thick"
-    ]
+    "root": {
+      "blockquote.color.foreground.primary": {
+        "resolvesTo": "semantic.color.foreground.secondary",
+        "fallback": "#555555",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "blockquote.color.background.default": {
+        "resolvesTo": "semantic.color.background.secondary",
+        "fallback": "#efefef",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "blockquote.color.border.default": {
+        "resolvesTo": "semantic.color.border.accent",
+        "fallback": "#d9292b",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "blockquote.color.border.accent": {
+        "resolvesTo": "semantic.color.border.accent",
+        "fallback": "#d9292b",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "blockquote.typography.fontStyle": {
+        "resolvesTo": "semantic.typography.font.style.italic",
+        "fallback": "italic",
+        "layer": "semantic"
+      },
+      "blockquote.typography.fontWeight": {
+        "resolvesTo": "semantic.typography.font.weight.medium",
+        "fallback": "500",
+        "layer": "semantic"
+      },
+      "blockquote.typography.sm.fontSize": {
+        "resolvesTo": "semantic.typography.body.03",
+        "fallback": "14px",
+        "layer": "semantic"
+      },
+      "blockquote.typography.sm.lineHeight": {
+        "resolvesTo": "semantic.typography.line.height.body",
+        "fallback": "1.5",
+        "property": "line-height",
+        "layer": "semantic"
+      },
+      "blockquote.typography.md.fontSize": {
+        "resolvesTo": "semantic.typography.body.02",
+        "fallback": "16px",
+        "layer": "semantic"
+      },
+      "blockquote.typography.md.lineHeight": {
+        "resolvesTo": "semantic.typography.line.height.body",
+        "fallback": "1.5",
+        "property": "line-height",
+        "layer": "semantic"
+      },
+      "blockquote.typography.lg.fontSize": {
+        "resolvesTo": "semantic.typography.body.01",
+        "fallback": "18px",
+        "layer": "semantic"
+      },
+      "blockquote.typography.lg.lineHeight": {
+        "resolvesTo": "semantic.typography.line.height.body",
+        "fallback": "1.5",
+        "property": "line-height",
+        "layer": "semantic"
+      },
+      "blockquote.size.padding.default": {
+        "resolvesTo": "core.spacing.size.05",
+        "fallback": "12px",
+        "property": "padding",
+        "layer": "core"
+      },
+      "blockquote.size.radius.default": {
+        "resolvesTo": "core.shape.radius.medium",
+        "fallback": "8px",
+        "property": "border-radius",
+        "layer": "core"
+      },
+      "blockquote.size.border.thick": {
+        "resolvesTo": "core.shape.border.width.thick",
+        "fallback": "2px",
+        "layer": "core"
+      }
+    }
   },
   "props": {
     "styled": {
@@ -58,15 +127,13 @@
           "name": "variant",
           "type": "\"default\" | \"bordered\" | \"highlighted\" | undefined",
           "description": "Visual variant of the blockquote",
-          "required": false,
-          "default": "default"
+          "required": false
         },
         {
           "name": "size",
           "type": "\"sm\" | \"md\" | \"lg\" | undefined",
           "description": "Size variant",
-          "required": false,
-          "default": "md"
+          "required": false
         },
         {
           "name": "defaultChecked",

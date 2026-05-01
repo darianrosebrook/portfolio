@@ -175,29 +175,25 @@
           "name": "variant",
           "type": "\"default\" | \"unstyled\" | \"inline\" | \"divided\" | \"spaced\" | undefined",
           "description": "Visual variant",
-          "required": false,
-          "default": "default"
+          "required": false
         },
         {
           "name": "size",
           "type": "\"sm\" | \"md\" | \"lg\" | undefined",
           "description": "Size variant",
-          "required": false,
-          "default": "md"
+          "required": false
         },
         {
           "name": "marker",
           "type": "\"default\" | \"none\" | \"disc\" | \"circle\" | \"square\" | \"decimal\" | \"alpha\" | \"roman\" | undefined",
           "description": "Marker style for ordered/unordered lists",
-          "required": false,
-          "default": "default"
+          "required": false
         },
         {
           "name": "spacing",
           "type": "\"sm\" | \"md\" | \"lg\" | \"none\" | undefined",
           "description": "Spacing between items",
-          "required": false,
-          "default": "md"
+          "required": false
         },
         {
           "name": "defaultChecked",

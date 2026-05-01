@@ -39,6 +39,32 @@
         "design.paths.dark": "rgba(0,0,0,0.80)"
       },
       "$description": "Strong overlay scrim"
+    },
+    "scrimSheet": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [0, 0, 0],
+        "alpha": 0.5
+      },
+      "$extensions": {
+        "design.paths.light": "rgba(0,0,0,0.50)",
+        "design.paths.dark": "rgba(0,0,0,0.70)"
+      },
+      "$description": "Backdrop scrim for sheet and drawer components"
+    },
+    "scrimDialog": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [0, 0, 0],
+        "alpha": 0.6
+      },
+      "$extensions": {
+        "design.paths.light": "rgba(0,0,0,0.60)",
+        "design.paths.dark": "rgba(0,0,0,0.80)"
+      },
+      "$description": "Backdrop scrim for dialog and command palette overlays"
     }
   }
 }

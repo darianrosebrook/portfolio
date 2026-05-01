@@ -61,9 +61,9 @@
   --chip-motion-easing-standard: var(--core-motion-easing-standard);
   --chip-motion-easing-in: var(--core-motion-easing-emphasized-in);
   --chip-motion-easing-out: var(--core-motion-easing-emphasized-out);
-  --chip-motion-scale-pressed: 0.98;
-  --chip-motion-scale-icon-enter: 0.8;
-  --chip-motion-scale-icon-exit: 0.8;
+  --chip-motion-scale-pressed: var(--semantic-motion-interaction-press-scale);
+  --chip-motion-scale-icon-enter: var(--semantic-motion-icon-scale-enter);
+  --chip-motion-scale-icon-exit: var(--semantic-motion-icon-scale-exit);
 
   /* === Focus Tokens === */
   --chip-focus-outline-width: var(--core-shape-border-width-thick);

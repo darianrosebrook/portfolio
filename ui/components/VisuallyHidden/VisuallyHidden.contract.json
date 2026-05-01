@@ -32,8 +32,7 @@
           "name": "focusable",
           "type": "boolean | undefined",
           "description": "Whether to show content when focused (for skip links)",
-          "required": false,
-          "default": "false"
+          "required": false
         },
         {
           "name": "defaultChecked",

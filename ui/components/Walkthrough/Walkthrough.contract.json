@@ -45,36 +45,159 @@
     "apgPattern": "status"
   },
   "tokens": {
-    "root": [
-      "walkthrough.surface.bg",
-      "walkthrough.surface.border",
-      "walkthrough.surface.radius",
-      "walkthrough.surface.shadow",
-      "walkthrough.surface.padding",
-      "walkthrough.title.fontSize",
-      "walkthrough.title.fontWeight",
-      "walkthrough.title.color",
-      "walkthrough.description.fontSize",
-      "walkthrough.description.color",
-      "walkthrough.description.marginTop",
-      "walkthrough.controls.gap",
-      "walkthrough.controls.marginTop",
-      "walkthrough.dots.size",
-      "walkthrough.dots.gap",
-      "walkthrough.dots.active",
-      "walkthrough.dots.idle",
-      "walkthrough.button.primary.bg",
-      "walkthrough.button.primary.color",
-      "walkthrough.button.primary.radius",
-      "walkthrough.button.primary.paddingY",
-      "walkthrough.button.primary.paddingX",
-      "walkthrough.button.secondary.bg",
-      "walkthrough.button.secondary.color",
-      "walkthrough.button.secondary.border",
-      "walkthrough.button.secondary.radius",
-      "walkthrough.button.secondary.paddingY",
-      "walkthrough.button.secondary.paddingX"
-    ],
+    "root": {
+      "walkthrough.surface.bg": {
+        "resolvesTo": "semantic.color.background.secondary",
+        "fallback": "#efefef",
+        "layer": "semantic"
+      },
+      "walkthrough.surface.border": {
+        "resolvesTo": "semantic.color.border.subtle",
+        "fallback": "#cecece",
+        "layer": "semantic"
+      },
+      "walkthrough.surface.radius": {
+        "resolvesTo": "core.shape.radius.04",
+        "fallback": "16px",
+        "property": "border-radius",
+        "layer": "core"
+      },
+      "walkthrough.surface.shadow": {
+        "resolvesTo": "semantic.elevation.surface.floating",
+        "fallback": "[object Object]",
+        "property": "box-shadow",
+        "layer": "semantic"
+      },
+      "walkthrough.surface.padding": {
+        "resolvesTo": "core.spacing.size.08",
+        "fallback": "32px",
+        "property": "padding",
+        "layer": "core"
+      },
+      "walkthrough.title.fontSize": {
+        "resolvesTo": "semantic.typography.heading.03",
+        "fallback": "20px",
+        "layer": "semantic"
+      },
+      "walkthrough.title.fontWeight": {
+        "resolvesTo": "semantic.typography.font.weight.bold",
+        "fallback": "700",
+        "layer": "semantic"
+      },
+      "walkthrough.title.color": {
+        "resolvesTo": "semantic.color.foreground.primary",
+        "fallback": "#141414",
+        "layer": "semantic"
+      },
+      "walkthrough.description.fontSize": {
+        "resolvesTo": "semantic.typography.body.02",
+        "fallback": "16px",
+        "layer": "semantic"
+      },
+      "walkthrough.description.color": {
+        "resolvesTo": "semantic.color.foreground.secondary",
+        "fallback": "#555555",
+        "layer": "semantic"
+      },
+      "walkthrough.description.marginTop": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "layer": "core"
+      },
+      "walkthrough.controls.gap": {
+        "resolvesTo": "core.spacing.size.05",
+        "fallback": "12px",
+        "property": "gap",
+        "layer": "core"
+      },
+      "walkthrough.controls.marginTop": {
+        "resolvesTo": "core.spacing.size.06",
+        "fallback": "16px",
+        "layer": "core"
+      },
+      "walkthrough.dots.size": {
+        "resolvesTo": "core.spacing.size.02",
+        "fallback": "2px",
+        "layer": "core"
+      },
+      "walkthrough.dots.gap": {
+        "resolvesTo": "core.spacing.size.03",
+        "fallback": "4px",
+        "property": "gap",
+        "layer": "core"
+      },
+      "walkthrough.dots.active": {
+        "resolvesTo": "semantic.color.action.background.primary.default",
+        "fallback": "#d9292b",
+        "layer": "semantic"
+      },
+      "walkthrough.dots.idle": {
+        "resolvesTo": "semantic.color.border.subtle",
+        "fallback": "#cecece",
+        "layer": "semantic"
+      },
+      "walkthrough.button.primary.bg": {
+        "resolvesTo": "semantic.color.action.background.primary.default",
+        "fallback": "#d9292b",
+        "layer": "semantic"
+      },
+      "walkthrough.button.primary.color": {
+        "resolvesTo": "semantic.color.action.foreground.primary.default",
+        "fallback": "#ffffff",
+        "layer": "semantic"
+      },
+      "walkthrough.button.primary.radius": {
+        "resolvesTo": "core.shape.radius.medium",
+        "fallback": "8px",
+        "property": "border-radius",
+        "layer": "core"
+      },
+      "walkthrough.button.primary.paddingY": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "property": "padding",
+        "layer": "core"
+      },
+      "walkthrough.button.primary.paddingX": {
+        "resolvesTo": "core.spacing.size.06",
+        "fallback": "16px",
+        "property": "padding",
+        "layer": "core"
+      },
+      "walkthrough.button.secondary.bg": {
+        "resolvesTo": "core.color.mode.transparent",
+        "fallback": "#00000000",
+        "layer": "core"
+      },
+      "walkthrough.button.secondary.color": {
+        "resolvesTo": "semantic.color.foreground.secondary",
+        "fallback": "#555555",
+        "layer": "semantic"
+      },
+      "walkthrough.button.secondary.border": {
+        "resolvesTo": "semantic.color.border.subtle",
+        "fallback": "#cecece",
+        "layer": "semantic"
+      },
+      "walkthrough.button.secondary.radius": {
+        "resolvesTo": "core.shape.radius.medium",
+        "fallback": "8px",
+        "property": "border-radius",
+        "layer": "core"
+      },
+      "walkthrough.button.secondary.paddingY": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "property": "padding",
+        "layer": "core"
+      },
+      "walkthrough.button.secondary.paddingX": {
+        "resolvesTo": "core.spacing.size.06",
+        "fallback": "16px",
+        "property": "padding",
+        "layer": "core"
+      }
+    },
     "title": {
       "walkthrough.title.fontSize": {
         "resolvesTo": "semantic.typography.heading.03",

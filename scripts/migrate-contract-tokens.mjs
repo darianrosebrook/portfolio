@@ -70,8 +70,11 @@ function parseBridgeScss(scssPath) {
   if (!fs.existsSync(scssPath)) return bridge;
 
   const content = fs.readFileSync(scssPath, 'utf8');
-  for (const [, localVar, refVar] of content.matchAll(/--([a-z][a-z0-9-]+):\s*var\(--([a-z][a-z0-9-]+)\)/g)) {
-    bridge.set(localVar, refVar);
+  for (const [, localVar, refVar] of content.matchAll(/--([a-zA-Z][a-zA-Z0-9-]+):\s*var\(--([a-zA-Z][a-zA-Z0-9-]+)\)/g)) {
+    // Normalize camelCase prefixes (e.g. brandSwitcher → brand-switcher)
+    const normalizedLocal = localVar.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+    const normalizedRef = refVar.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+    bridge.set(normalizedLocal, normalizedRef);
   }
   return bridge;
 }

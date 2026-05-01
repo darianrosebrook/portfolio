@@ -207,15 +207,13 @@
           "name": "variant",
           "type": "\"default\" | \"inline\" | \"compact\" | undefined",
           "description": "Visual variant - replaces boolean props",
-          "required": false,
-          "default": "default"
+          "required": false
         },
         {
           "name": "icon",
           "type": "\"left\" | \"right\" | \"none\" | undefined",
           "description": "Icon configuration - replaces showIcon + iconPosition booleans",
-          "required": false,
-          "default": "left"
+          "required": false
         },
         {
           "name": "open",

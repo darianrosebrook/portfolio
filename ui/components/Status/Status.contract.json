@@ -201,8 +201,7 @@
           "name": "hidden",
           "type": "boolean | undefined",
           "description": "",
-          "required": false,
-          "default": "true"
+          "required": false
         },
         {
           "name": "lang",

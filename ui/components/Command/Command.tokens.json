@@ -2,15 +2,7 @@
   "prefix": "command",
   "tokens": {
     "color": {
-      "overlay": {
-        "colorSpace": "srgb",
-        "components": [
-          0,
-          0,
-          0
-        ],
-        "alpha": 0.6
-      },
+      "overlay": "{semantic.overlay.scrimDialog}",
       "background": "{semantic.color.background.primary}",
       "backgroundHover": "{semantic.interaction.background.hover}",
       "border": "{semantic.color.border.light}",
@@ -69,11 +61,11 @@
       "easing": "{core.motion.easing.standard}"
     },
     "zIndex": {
-      "overlay": 50
+      "overlay": "{core.layer.component}"
     },
     "shadow": "{semantic.elevation.surface.floating}",
     "opacity": {
-      "disabled": 0.5
+      "disabled": "{interaction.disabled.opacity}"
     }
   }
 }

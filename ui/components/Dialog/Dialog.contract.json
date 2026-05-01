@@ -245,29 +245,25 @@
           "name": "modal",
           "type": "boolean | undefined",
           "description": "Whether dialog is modal (blocks interaction with background)",
-          "required": false,
-          "default": "true"
+          "required": false
         },
         {
           "name": "size",
           "type": "DialogSize | undefined",
           "description": "Dialog size",
-          "required": false,
-          "default": "md"
+          "required": false
         },
         {
           "name": "closeOnBackdropClick",
           "type": "boolean | undefined",
           "description": "Whether to close on backdrop click (modal only)",
-          "required": false,
-          "default": "true"
+          "required": false
         },
         {
           "name": "closeOnEscape",
           "type": "boolean | undefined",
           "description": "Whether to close on escape key",
-          "required": false,
-          "default": "true"
+          "required": false
         },
         {
           "name": "initialFocus",
@@ -285,22 +281,19 @@
           "name": "open",
           "type": "boolean | undefined",
           "description": "",
-          "required": false,
-          "default": "false"
+          "required": false
         },
         {
           "name": "defaultOpen",
           "type": "boolean | undefined",
           "description": "",
-          "required": false,
-          "default": "false"
+          "required": false
         },
         {
           "name": "dismissible",
           "type": "boolean | undefined",
           "description": "",
-          "required": false,
-          "default": "true"
+          "required": false
         }
       ]
     },

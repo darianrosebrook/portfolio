@@ -78,6 +78,10 @@
         "dashed": {
           "$type": "borderStyle",
           "$value": "dashed"
+        },
+        "dotted": {
+          "$type": "borderStyle",
+          "$value": "dotted"
         }
       }
     }

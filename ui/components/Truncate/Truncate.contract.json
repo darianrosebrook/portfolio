@@ -72,15 +72,13 @@
           "name": "lines",
           "type": "number | undefined",
           "description": "Number of lines to show before truncating",
-          "required": false,
-          "default": 1
+          "required": false
         },
         {
           "name": "expandable",
           "type": "boolean | undefined",
           "description": "Whether to show expand/collapse functionality",
-          "required": false,
-          "default": "false"
+          "required": false
         },
         {
           "name": "expandText",

@@ -2,15 +2,7 @@
   "prefix": "sheet",
   "tokens": {
     "color": {
-      "overlay": {
-        "colorSpace": "srgb",
-        "components": [
-          0,
-          0,
-          0
-        ],
-        "alpha": 0.5
-      },
+      "overlay": "{semantic.overlay.scrimSheet}",
       "background": "{semantic.color.background.primary}",
       "backgroundHover": "{semantic.interaction.background.hover}",
       "border": "{semantic.color.border.light}",
@@ -58,8 +50,8 @@
       "easing": "{core.motion.easing.standard}"
     },
     "zIndex": {
-      "overlay": 50,
-      "content": 51
+      "overlay": "{core.layer.component}",
+      "content": "{core.layer.above}"
     },
     "shadow": "{semantic.elevation.surface.floating}",
     "focus": {

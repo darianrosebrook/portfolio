@@ -55,7 +55,7 @@
     },
     "elevation": {
       "default": "{semantic.elevation.surface.raised}",
-      "status": "none"
+      "status": "{semantic.elevation.none}"
     },
     "spacing": {
       "gap": "{core.spacing.size.02}"

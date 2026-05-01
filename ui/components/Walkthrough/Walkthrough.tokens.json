@@ -37,7 +37,7 @@
         "paddingX": "{core.spacing.size.06}"
       },
       "secondary": {
-        "bg": "transparent",
+        "bg": "{core.color.mode.transparent}",
         "color": "{semantic.color.foreground.secondary}",
         "border": "{semantic.color.border.subtle}",
         "radius": "{core.shape.radius.medium}",

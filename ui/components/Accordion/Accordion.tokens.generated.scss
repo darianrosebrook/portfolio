@@ -40,5 +40,5 @@
   --accordion-focus-offset: var(--core-spacing-size-01);
 
   /* === Opacity Tokens === */
-  --accordion-opacity-disabled: 0.5;
+  --accordion-opacity-disabled: var(--semantic-interaction-disabled-opacity);
 }

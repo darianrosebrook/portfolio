@@ -60,22 +60,19 @@
           "name": "size",
           "type": "number | \"xs\" | \"sm\" | \"md\" | \"lg\" | undefined",
           "description": "Size token key or explicit px (e.g., 16). Default: 'md'",
-          "required": false,
-          "default": "md"
+          "required": false
         },
         {
           "name": "thickness",
           "type": "number | \"hairline\" | \"regular\" | \"bold\" | undefined",
           "description": "Stroke thickness token or px. Default: 'regular'",
-          "required": false,
-          "default": "regular"
+          "required": false
         },
         {
           "name": "variant",
           "type": "SpinnerVariant | undefined",
           "description": "Visual variant",
-          "required": false,
-          "default": "ring"
+          "required": false
         },
         {
           "name": "ariaHidden",
@@ -87,22 +84,19 @@
           "name": "label",
           "type": "string | undefined",
           "description": "Localized label for SR users; ignored if ariaHidden",
-          "required": false,
-          "default": "Loading"
+          "required": false
         },
         {
           "name": "inline",
           "type": "boolean | undefined",
           "description": "Inline layout (align with baseline)",
-          "required": false,
-          "default": "false"
+          "required": false
         },
         {
           "name": "showAfterMs",
           "type": "number | undefined",
           "description": "Delay before showing (ms) to avoid spinner flash",
-          "required": false,
-          "default": 150
+          "required": false
         },
         {
           "name": "defaultChecked",

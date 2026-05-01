@@ -49,6 +49,30 @@
       "$type": "number",
       "$value": 0.5
     },
+    "060": {
+      "$type": "number",
+      "$value": 0.6
+    },
+    "070": {
+      "$type": "number",
+      "$value": 0.7
+    },
+    "080": {
+      "$type": "number",
+      "$value": 0.8
+    },
+    "090": {
+      "$type": "number",
+      "$value": 0.9
+    },
+    "095": {
+      "$type": "number",
+      "$value": 0.95
+    },
+    "105": {
+      "$type": "number",
+      "$value": 1.05
+    },
     "000": {
       "$type": "number",
       "$value": 0

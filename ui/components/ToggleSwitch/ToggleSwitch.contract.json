@@ -151,8 +151,7 @@
           "name": "disabled",
           "type": "boolean | undefined",
           "description": "",
-          "required": false,
-          "default": "false"
+          "required": false
         },
         {
           "name": "formAction",
@@ -386,8 +385,7 @@
           "name": "role",
           "type": "AriaRole | undefined",
           "description": "",
-          "required": false,
-          "default": "switch"
+          "required": false
         },
         {
           "name": "about",
@@ -591,8 +589,7 @@
           "name": "size",
           "type": "\"small\" | \"medium\" | \"large\" | undefined",
           "description": "",
-          "required": false,
-          "default": "medium"
+          "required": false
         }
       ]
     }

@@ -196,8 +196,7 @@
           "name": "size",
           "type": "CheckboxSize | undefined",
           "description": "Size variant using design tokens",
-          "required": false,
-          "default": "md"
+          "required": false
         },
         {
           "name": "checked",
@@ -215,15 +214,13 @@
           "name": "indeterminate",
           "type": "boolean | undefined",
           "description": "Indeterminate state (for partial selections)",
-          "required": false,
-          "default": "false"
+          "required": false
         },
         {
           "name": "disabled",
           "type": "boolean | undefined",
           "description": "Disabled state",
-          "required": false,
-          "default": "false"
+          "required": false
         },
         {
           "name": "accept",
@@ -451,8 +448,7 @@
           "name": "hidden",
           "type": "boolean | undefined",
           "description": "",
-          "required": false,
-          "default": "true"
+          "required": false
         },
         {
           "name": "lang",

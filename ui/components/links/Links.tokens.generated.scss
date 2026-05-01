@@ -46,15 +46,15 @@
   /* === Border Tokens === */
   --links-border-width-default: var(--core-shape-border-width-hairline);
   --links-border-width-thick: var(--core-shape-border-width-hairline);
-  --links-border-style-default: solid;
-  --links-border-style-dashed: dashed;
-  --links-border-style-dotted: dotted;
+  --links-border-style-default: var(--core-shape-border-style-solid);
+  --links-border-style-dashed: var(--core-shape-border-style-dashed);
+  --links-border-style-dotted: var(--core-shape-border-style-dotted);
 
   /* === Animation Tokens === */
-  --links-animation-stagger-default: 28;
-  --links-animation-stagger-fast: 20;
-  --links-animation-stagger-slow: 40;
-  --links-animation-duration-default: 400;
-  --links-animation-duration-fast: 300;
-  --links-animation-duration-slow: 600;
+  --links-animation-stagger-default: var(--core-motion-stagger-sm);
+  --links-animation-stagger-fast: var(--core-motion-stagger-xs);
+  --links-animation-stagger-slow: var(--core-motion-stagger-slow);
+  --links-animation-duration-default: var(--core-motion-duration-long);
+  --links-animation-duration-fast: var(--core-motion-duration-medium0);
+  --links-animation-duration-slow: var(--core-motion-duration-long0);
 }

@@ -38,8 +38,7 @@
           "name": "icon",
           "type": "IconDefinition",
           "description": "",
-          "required": true,
-          "default": "true"
+          "required": true
         },
         {
           "name": "width",

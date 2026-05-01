@@ -2270,6 +2270,21 @@
         "$type": "duration",
         "$value": "1000ms",
         "$description": "Full second - very slow transitions"
+      },
+      "medium0": {
+        "$type": "duration",
+        "$value": "300ms",
+        "$description": "Pre-long - common transition speed between medium and long"
+      },
+      "long0": {
+        "$type": "duration",
+        "$value": "600ms",
+        "$description": "Post-long - common transition speed between long and long1"
+      },
+      "extraLong1": {
+        "$type": "duration",
+        "$value": "1500ms",
+        "$description": "Extra long - indeterminate loaders, complex entrance sequences"
       }
     },
     "easing": {
@@ -2387,6 +2402,11 @@
         "$type": "duration",
         "$value": "30ms",
         "$description": "Small stagger for list items"
+      },
+      "slow": {
+        "$type": "duration",
+        "$value": "40ms",
+        "$description": "Slow stagger — between sm and md, for deliberate sequencing"
       },
       "md": {
         "$type": "duration",
@@ -2628,8 +2648,8 @@
     "disabled": {
       "opacity": {
         "$type": "number",
-        "$value": 0.4,
-        "$description": "Opacity for disabled elements"
+        "$value": 0.5,
+        "$description": "Opacity for disabled interactive elements"
       }
     }
   },

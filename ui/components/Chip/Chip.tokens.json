@@ -78,9 +78,9 @@
         "out": "{core.motion.easing.emphasizedOut}"
       },
       "scale": {
-        "pressed": 0.98,
-        "iconEnter": 0.8,
-        "iconExit": 0.8
+        "pressed": "{semantic.motion.interaction.press.scale}",
+        "iconEnter": "{semantic.motion.icon.scale.enter}",
+        "iconExit": "{semantic.motion.icon.scale.exit}"
       }
     },
     "focus": {

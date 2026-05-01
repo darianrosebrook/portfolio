@@ -3,7 +3,7 @@
  */
 @mixin vars {
   /* === Color Tokens === */
-  --command-color-overlay: #00000099;
+  --command-color-overlay: var(--semantic-overlay-scrim-dialog);
   --command-color-background: var(--semantic-color-background-primary);
   --command-color-background-hover: var(--semantic-interaction-background-hover);
   --command-color-border: var(--semantic-color-border-light);
@@ -53,10 +53,10 @@
   --command-motion-easing: var(--core-motion-easing-standard);
 
   /* === ZIndex Tokens === */
-  --command-z-index-overlay: 50;
+  --command-z-index-overlay: var(--core-layer-component);
 
   /* === Opacity Tokens === */
-  --command-opacity-disabled: 0.5;
+  --command-opacity-disabled: var(--semantic-interaction-disabled-opacity);
 
   /* === Other Tokens === */
   --command-shadow: var(--semantic-elevation-surface-floating);
