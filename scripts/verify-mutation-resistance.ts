@@ -278,18 +278,98 @@ const PROBES: Probe[] = [
   {
     id: 'C3',
     description:
-      'circleToPolygon returns 0 vertices → tittle region region polygon empty',
+      'extractContourPolygon returns [] → tittle region polygon empty',
     targetFile: 'utils/typeAnatomy/evidence/regionFromShape.ts',
     mutation: {
-      // Force the loop bound to 0; result is a 0-vertex polygon, which fails
-      // the `points.length >= 3` assertion in the tittle region test.
-      search: /  for \(let i = 0; i < sides; i\+\+\) \{/,
-      replace: '  for (let i = 0; i < 0; i++) {',
+      // Tittle now prefers the actual mark contour over the circle
+      // approximation (PR1 v2). The mutation must hit the contour walker,
+      // not the unused circle helper. Setting startIndex > endIndex slices
+      // to empty so cmds.slice() returns []; the function then early-returns
+      // with the contour-too-short branch.
+      search:
+        /  const cmds = \(glyph as PathLikeGlyph\)\.path\?\.commands;\n  if \(!cmds\) return \[\];/,
+      replace:
+        '  const cmds = (glyph as PathLikeGlyph).path?.commands;\n  if (!cmds) return []; void startIndex; void endIndex; return [];',
     },
     expectedFlips: [
       {
         fullName:
-          'feature region polygons emits a stroke region for the Nohemi i tittle',
+          'feature region polygons traces the actual Nohemi tittle contour, not a circle approximation',
+        testFile: 'test/typeAnatomy/feature-accuracy.test.ts',
+      },
+    ],
+  },
+  {
+    id: 'D1',
+    description:
+      'buildCorridorPolygon returns [] → spine, tail, loop region tests fail',
+    targetFile: 'utils/typeAnatomy/evidence/corridorRegion.ts',
+    mutation: {
+      // Force the helper to return an empty polygon. Phase 4 detectors
+      // gate on `corridor.length >= N` before attaching `region`, so an
+      // empty result drops every centerline region. The Newsreader S
+      // spine assertion (which requires region.kind === "stroke") fails.
+      search: /export function buildCorridorPolygon\(opts: CorridorOptions\): Point2D\[\] \{\n/,
+      replace:
+        'export function buildCorridorPolygon(opts: CorridorOptions): Point2D[] {\n  void opts; return [];\n',
+    },
+    expectedFlips: [
+      {
+        fullName:
+          'phase 4 + 5 region polygons (centerline corridors and projections) emits a stroke corridor region for the Newsreader S spine',
+        testFile: 'test/typeAnatomy/feature-accuracy.test.ts',
+      },
+      {
+        fullName:
+          'phase 4 + 5 region polygons (centerline corridors and projections) emits a closed stroke corridor for the Newsreader g loop',
+        testFile: 'test/typeAnatomy/feature-accuracy.test.ts',
+      },
+    ],
+  },
+  {
+    id: 'D2',
+    description:
+      'buildProjectionPolygon returns [] → ear, finial projection regions empty',
+    targetFile: 'utils/typeAnatomy/evidence/projectionRegion.ts',
+    mutation: {
+      // Force the helper to return []. Phase 5 detectors gate on
+      // polygon.length >= 3 before attaching `region`, so an empty result
+      // means ear / finial / spur instances stop carrying regions.
+      search:
+        /export function buildProjectionPolygon\(opts: ProjectionOptions\): Point2D\[\] \{\n/,
+      replace:
+        'export function buildProjectionPolygon(opts: ProjectionOptions): Point2D[] {\n  void opts; return [];\n',
+    },
+    expectedFlips: [
+      {
+        fullName:
+          'phase 4 + 5 region polygons (centerline corridors and projections) emits a stroke projection region for the Newsreader g ear',
+        testFile: 'test/typeAnatomy/feature-accuracy.test.ts',
+      },
+      {
+        fullName:
+          'phase 4 + 5 region polygons (centerline corridors and projections) produces a stroke projection region whenever finial fires on Newsreader s',
+        testFile: 'test/typeAnatomy/feature-accuracy.test.ts',
+      },
+    ],
+  },
+  {
+    id: 'D3',
+    description:
+      'detectAperture omits region → enclosed gap rectangle test fails',
+    targetFile: 'utils/typeAnatomy/detectors/aperture.ts',
+    mutation: {
+      // Drop the `region: { ... }` block from the right-aperture push so
+      // the aperture instance lacks the enclosed polygon. This catches a
+      // refactor that accidentally removes the region wiring on one of
+      // the two emit sites (left and right are independent code paths).
+      search: /      region: \{\n        \/\/ Aperture is the negative space[\s\S]+?      \},\n      confidence: Math\.min\(0\.9, 0\.4 \+ rightCandidates\.length \* 0\.1\),/,
+      replace: '      confidence: Math.min(0.9, 0.4 + rightCandidates.length * 0.1),',
+    },
+    expectedFlips: [
+      {
+        fullName:
+          'phase 4 + 5 region polygons (centerline corridors and projections) emits an enclosed gap rectangle for the Nohemi e aperture',
         testFile: 'test/typeAnatomy/feature-accuracy.test.ts',
       },
     ],
