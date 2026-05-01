@@ -8,14 +8,15 @@
  *   1. The token name appears as a CSS var in the generated SCSS mixin.
  *   2. The semantic token (resolvesTo) is referenced in that CSS var.
  *
- * Legacy flat string arrays are skipped with a warning (no fidelity check possible).
+ * Legacy flat string arrays are skipped unless --warn-legacy is passed,
+ * in which case they are reported and counted as failures.
  *
  * Usage:
  *   node scripts/check-contract-tokens.mjs              # all components
  *   node scripts/check-contract-tokens.mjs --component Button
- *   node scripts/check-contract-tokens.mjs --warn-legacy  # fail on legacy tokens too
+ *   node scripts/check-contract-tokens.mjs --warn-legacy  # exit 1 on legacy tokens
  *
- * Exit codes: 0 = pass, 1 = any hard failure
+ * Exit codes: 0 = pass, 1 = any failure
  */
 
 import fs from 'fs';
@@ -39,14 +40,8 @@ const GREEN  = '\x1b[32m';
 const YELLOW = '\x1b[33m';
 const BOLD   = '\x1b[1m';
 
-function tokenNameToVar(prefix, tokenName) {
-  // button.color.background.default → --button-color-background-default
-  return '--' + tokenName.replace(/\./g, '-');
-}
-
-function semanticPathToVar(resolvesTo) {
-  // semantic.color.action.background.primary.default → --semantic-color-action-background-primary-default
-  return '--' + resolvesTo.replace(/\./g, '-');
+function dotPathToCssVar(dotPath) {
+  return '--' + dotPath.replace(/\./g, '-');
 }
 
 function contractFiles() {
@@ -78,16 +73,13 @@ for (const { name, contractPath, scssPath } of contractFiles()) {
 
   if (!contract.tokens || Object.keys(contract.tokens).length === 0) continue;
 
-  const scssContent = fs.existsSync(scssPath) ? fs.readFileSync(scssPath, 'utf8') : '';
-  const hasScss = scssContent.length > 0;
-
-  const prefix = name.toLowerCase();
+  let scssContent = null; // loaded lazily on first structured token
   let componentFailed = 0;
   let componentSkipped = 0;
   const errors = [];
 
   for (const [part, tokenValue] of Object.entries(contract.tokens)) {
-    // Legacy: flat string array — skip or warn
+    // Legacy: flat string array
     if (Array.isArray(tokenValue)) {
       if (WARN_LEGACY && tokenValue.length > 0) {
         errors.push(`  [${part}] ${tokenValue.length} legacy flat token(s) — migrate to structured form`);
@@ -109,23 +101,26 @@ for (const { name, contractPath, scssPath } of contractFiles()) {
         continue;
       }
 
-      if (!hasScss) {
+      // Load SCSS on demand (only when we have structured tokens to verify)
+      if (scssContent === null) {
+        scssContent = fs.existsSync(scssPath) ? fs.readFileSync(scssPath, 'utf8') : '';
+      }
+
+      if (scssContent === '') {
         errors.push(`  [${part}.${tokenName}] no .tokens.generated.scss found — run tokens:scss`);
         componentFailed++;
         continue;
       }
 
-      const cssVar = tokenNameToVar(prefix, tokenName);
-      const semanticVar = semanticPathToVar(resolvesTo);
+      const cssVar = dotPathToCssVar(tokenName);
+      const semanticVar = dotPathToCssVar(resolvesTo);
 
-      // Check the CSS var declaration exists in the SCSS mixin
       if (!scssContent.includes(`${cssVar}:`)) {
         errors.push(`  [${part}.${tokenName}] CSS var ${cssVar} not found in generated SCSS`);
         componentFailed++;
         continue;
       }
 
-      // Check the semantic token is referenced as the value
       if (!scssContent.includes(semanticVar)) {
         errors.push(`  [${part}.${tokenName}] ${cssVar} does not reference ${semanticVar}`);
         componentFailed++;
@@ -137,12 +132,12 @@ for (const { name, contractPath, scssPath } of contractFiles()) {
   }
 
   if (errors.length > 0) {
-    const hasHardErrors = componentFailed > 0;
+    const hasHardErrors = componentFailed > 0 || (WARN_LEGACY && componentSkipped > 0);
     const label = hasHardErrors ? `${RED}FAIL${RESET}` : `${YELLOW}WARN${RESET}`;
     console.log(`${label}: ${name}`);
     for (const err of errors) console.log(err);
     if (hasHardErrors) totalFailed++;
-    if (componentSkipped > 0) totalSkipped += componentSkipped;
+    totalSkipped += componentSkipped;
   }
 }
 

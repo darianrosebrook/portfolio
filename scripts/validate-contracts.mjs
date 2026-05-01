@@ -83,9 +83,7 @@ for (const filePath of files) {
       const raw = fs.readFileSync(filePath, 'utf8');
       const contract = JSON.parse(raw);
       if (contract.$schema !== SCHEMA_REL) {
-        contract.$schema = SCHEMA_REL;
-        // preserve key order: $schema first
-        const reordered = { $schema: contract.$schema, ...contract };
+        const reordered = { $schema: SCHEMA_REL, ...contract };
         fs.writeFileSync(filePath, JSON.stringify(reordered, null, 2) + '\n');
         console.log(`${YELLOW}Fixed $schema: ${rel}${RESET}`);
       }

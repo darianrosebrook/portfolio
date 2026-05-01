@@ -571,26 +571,41 @@ function simplifyType(typeStr) {
     .trim();
 }
 
-async function extractPropsViaTs(componentName, componentPath) {
+// Shared ts-morph Project — created once, reused across all components.
+let _tsProject = null;
+let _tsMorphUnavailable = false;
+
+async function getOrCreateProject() {
+  if (_tsMorphUnavailable) return null;
+  if (_tsProject) return _tsProject;
+
   let Project;
   try {
     ({ Project } = await import('ts-morph'));
   } catch {
-    return null; // ts-morph not available
+    _tsMorphUnavailable = true;
+    return null;
   }
 
   const tsconfigPath = path.join(__dirname, '..', 'tsconfig.json');
-  const project = new Project({
+  _tsProject = new Project({
     tsConfigFilePath: tsconfigPath,
     skipAddingFilesFromTsConfig: true,
   });
+  return _tsProject;
+}
+
+async function extractPropsViaTs(componentName, componentPath) {
+  const project = await getOrCreateProject();
+  if (!project) return null;
 
   const mainFile = path.join(componentPath, `${componentName}.tsx`);
   const hookFile = path.join(componentPath, `use${componentName}.ts`);
   if (!fs.existsSync(mainFile)) return null;
 
   project.addSourceFileAtPath(mainFile);
-  if (fs.existsSync(hookFile)) project.addSourceFileAtPath(hookFile);
+  const hasHook = fs.existsSync(hookFile);
+  if (hasHook) project.addSourceFileAtPath(hookFile);
 
   const result = {};
 
@@ -600,6 +615,27 @@ async function extractPropsViaTs(componentName, componentPath) {
       sourceFile.getInterface(declName);
     if (!propsDecl) return [];
 
+    // Build defaults map from the component's destructuring signature.
+    // Using ts-morph's ObjectBindingPattern avoids false matches from
+    // assignments elsewhere in the function body.
+    const defaults = new Map();
+    const funcVar = sourceFile.getVariableDeclaration(componentName);
+    if (funcVar) {
+      const initNode = funcVar.getInitializer();
+      const params = initNode?.getParameters?.() ?? [];
+      const nameNode = params[0]?.getNameNode?.();
+      if (nameNode?.getKindName?.() === 'ObjectBindingPattern') {
+        for (const element of nameNode.getElements()) {
+          const initializer = element.getInitializer();
+          if (initializer) {
+            const raw = initializer.getText().replace(/^['"`]|['"`]$/g, '');
+            const asNum = Number(raw);
+            defaults.set(element.getName(), isNaN(asNum) ? raw : asNum);
+          }
+        }
+      }
+    }
+
     // getType().getProperties() works for both interfaces and union type aliases
     const type = propsDecl.getType();
     const members = [];
@@ -608,11 +644,9 @@ async function extractPropsViaTs(componentName, componentPath) {
       const name = sym.getName();
       if (isExcludedProp(name)) continue;
 
-      // Get the declaring node (first declaration found)
       const decls = sym.getDeclarations();
       const firstDecl = decls[0];
 
-      // Resolve the property type at its declaration site
       const propType = firstDecl ? firstDecl.getType() : sym.getDeclaredType();
       const typeStr = simplifyType(propType ? propType.getText(firstDecl) : 'unknown');
 
@@ -630,19 +664,7 @@ async function extractPropsViaTs(componentName, componentPath) {
       }
 
       const member = { name, type: typeStr, description, required };
-
-      // Infer default from function body destructuring: { foo = 'bar' }
-      const funcVar = sourceFile.getVariableDeclaration(componentName);
-      if (funcVar) {
-        const bodyText = funcVar.getText();
-        const m = new RegExp(`\\b${name}\\s*=\\s*(['"]?)([\\w.]+)\\1`).exec(bodyText);
-        if (m) {
-          const raw = m[2];
-          const asNum = Number(raw);
-          member.default = isNaN(asNum) ? raw : asNum;
-        }
-      }
-
+      if (defaults.has(name)) member.default = defaults.get(name);
       members.push(member);
     }
 
@@ -655,12 +677,10 @@ async function extractPropsViaTs(componentName, componentPath) {
     if (members.length > 0) result.styled = { members };
   }
 
-  if (fs.existsSync(hookFile)) {
-    const hookSource = project.getSourceFile(hookFile);
-    if (hookSource) {
-      const members = extractMembers(hookSource, `Use${componentName}Options`);
-      if (members.length > 0) result.hook = { members };
-    }
+  const hookSource = hasHook ? project.getSourceFile(hookFile) : null;
+  if (hookSource) {
+    const members = extractMembers(hookSource, `Use${componentName}Options`);
+    if (members.length > 0) result.hook = { members };
   }
 
   return Object.keys(result).length > 0 ? result : null;

@@ -146,7 +146,7 @@ export function parseAnatomy(anatomy: string[]): AnatomyPart[] {
 
   // Map to AnatomyPart objects
   // For now, assume single level - could be enhanced with DOM parsing
-  return structuralParts.map((part, index) => ({
+  return structuralParts.map((part) => ({
     name: part,
     level: part === 'root' ? 0 : 1,
     parent: part === 'root' ? undefined : 'root',
