@@ -1,0 +1,9 @@
+# Marks this directory as its own pnpm workspace root, so pnpm doesn't
+# walk up the directory tree and find a parent workspace (e.g., one in
+# the user's home directory) and treat THIS project as a workspace
+# member of that. Without this file, `pnpm install` would read the
+# parent workspace's package.json and ignore this project's
+# `pnpm.overrides` field, breaking transitive-dependency security
+# pins.
+packages:
+  - .
