@@ -301,13 +301,13 @@ describe('known type anatomy accuracy gaps', () => {
     expect(vertices.length).toBeGreaterThanOrEqual(2);
   });
 
-  it.fails(
-    'detects serifs on Newsreader I (serif font, currently 0 found)',
-    () => {
-      const serifs = detect(newsreader, 'I', 'serif');
-      expect(serifs.length).toBeGreaterThanOrEqual(2);
-    }
-  );
+  it('detects serifs on Newsreader I (foot + cap, both sides)', () => {
+    // Track 1.3 closed this gap. The widening-detection algorithm in
+    // detectSerif now picks up the two foot serifs and the two cap
+    // serifs of I as four separate FeatureInstances.
+    const serifs = detect(newsreader, 'I', 'serif');
+    expect(serifs.length).toBeGreaterThanOrEqual(2);
+  });
 
   it.fails('detects the spur on Nohemi G (currently 0 found)', () => {
     const spurs = detect(nohemi, 'G', 'spur');

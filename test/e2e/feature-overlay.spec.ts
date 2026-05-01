@@ -224,15 +224,16 @@ test.describe('Feature highlight overlay (Track 1: re-enabled UX gates)', () => 
   // Glyphs and instance counts here are verified at the inspector's
   // default axis values; see preflight-track1.ts.
 
-  test('Newsreader E + Serif: bracket-foot projections', async ({ page }) => {
-    // Serif fires 3 instances on Newsreader E at default axes (foot, mid
-    // bar, top). E is the most reliable Newsreader uppercase serif case —
-    // I/T/H/L/F/M/N return count=0 due to a known detector limitation
-    // (see TODO in detectors/serif.ts).
+  test('Newsreader H + Serif: 4 foot + 4 cap projections', async ({ page }) => {
+    // After the Track 1.3 detector rewrite, serif fires 8 instances on
+    // Newsreader H — 4 foot serifs (one at each outer corner of the two
+    // stems at baseline) and 4 cap serifs (same at capHeight). H is the
+    // canonical regression case: any change to the widening-detection
+    // algorithm shows up clearly here.
     await loadInspector(page);
     await selectFont(page, 'Newsreader');
-    await enableFeature(page, 'E', 'Serif');
-    await screenshotCanvas(page, 'newsreader-E-serif.png');
+    await enableFeature(page, 'H', 'Serif');
+    await screenshotCanvas(page, 'newsreader-H-serif.png');
   });
 
   test('Newsreader s + Finial: terminal curl projection', async ({ page }) => {

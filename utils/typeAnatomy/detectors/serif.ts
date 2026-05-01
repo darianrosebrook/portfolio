@@ -3,38 +3,27 @@
  *
  * A serif is a small terminal projection at the end of a stroke.
  *
- * Fixed in v1:
- * - Uses scale.stemWidth for nudge distances instead of huge EPS multipliers
- * - Focus on terminal positions (baseline, cap height) not mid-body
- * - Horizontal outward probe is more diagnostic than vertical
+ * Strategy (rewritten in Track 1.3):
+ *   For each terminal Y (baseline / xHeight / capHeight), scan a horizontal
+ *   ray at the terminal Y AND at an inner Y stepped one stemWidth toward
+ *   the glyph center. The inner scan returns the bare stem(s); the
+ *   terminal scan returns the stem PLUS any foot/cap serif extensions.
  *
- * TODO(serif/Newsreader detection gap):
- * Per Track 1 preflight (2026-04-30) at the inspector's default axis values
- * (wght=400, opsz=32), this detector misses most of Newsreader's
- * canonically-serifed glyphs:
- *   working:  E (3), B (1), P (1), R (1), b (1), p (1)
- *   empty:    I, T, H, L, D, F, M, N, l, d, h
- * Notably, results are AXIS-DEPENDENT: at opsz=6 the working set differs
- * (L/D/P fire instead of E/B/P/R) — the contour topology changes with
- * optical-size variant.
+ *   - Center-aligned span pair (inner stem center matches terminal span
+ *     center within ±stemWidth): the terminal span's left/right edges
+ *     beyond the inner span's edges are foot/cap serifs.
+ *   - Non-aligned terminal span (a wide crossbar with no stem directly
+ *     above/below its center, e.g. T's top crossbar): inner spans whose
+ *     centers fall near the terminal span's left or right end indicate
+ *     spur serifs at those ends.
  *
- * Hypothesis: at metrics.baseline / capHeight, the horizontal scan returns a
- * single wide span covering the full serif foot. detectSerifAtEdge() then
- * probes outward from the foot's outermost extent and finds nothing because
- * the serif IS the outermost extent at that Y. Glyphs that fire have
- * asymmetric / multi-stem feet so the inward probe lands inside the body
- * and trips the distance filter at line 127.
- *
- * Likely fixes (defer to PR 4):
- *   1. Probe at metrics.baseline + stemWidth*0.5 (slightly above the foot,
- *      where the stem narrows). The foot serif then appears as a wider
- *      span at baseline than the span at baseline + stemWidth*0.5.
- *   2. Compare adjacent Y levels to detect stem→foot widening directly.
- *   3. Use the projection polygon contour walk (already used for region
- *      output) as primary detection instead of a horizontal-probe gate.
- *
- * Tuning here is open-ended; the E Playwright baseline added in Track 1.4
- * documents the working case so a future tuning pass can compare diffs.
+ *   Sans-serif fonts naturally produce no detections because their
+ *   terminal spans don't widen relative to the inner stem (no extra
+ *   geometry to detect). Earlier versions of this detector probed
+ *   horizontally OUTWARD from the terminal span's edges and found
+ *   nothing on canonical serif glyphs (I/T/H/L/D/F/M/N) because the
+ *   serif IS the outermost extent at that Y — only asymmetric-foot
+ *   cases (L/D/P at opsz=6, E/B/P/R at opsz=32) fired by accident.
  */
 
 import { rayHits } from '@/utils/geometry/geometryCore';
@@ -47,149 +36,184 @@ import type { FeatureInstance, GeometryCache, Point2D } from '../types';
 // polygons and the renderer drops back to the point marker.
 const SERIF_ARC_BUDGET_FRACTION = 0.1;
 
+interface Span {
+  left: number;
+  right: number;
+  width: number;
+  center: number;
+}
+
+function pairsToSpans(points: Point2D[]): Span[] {
+  const spans: Span[] = [];
+  for (let i = 0; i + 1 < points.length; i += 2) {
+    const left = points[i].x;
+    const right = points[i + 1].x;
+    spans.push({
+      left,
+      right,
+      width: right - left,
+      center: (left + right) / 2,
+    });
+  }
+  return spans;
+}
+
+function emitSerifAtCorner(
+  geo: GeometryCache,
+  anchor: Point2D,
+  side: 'left' | 'right',
+  type: 'foot' | 'top' | 'cap',
+  debug: Record<string, unknown>
+): FeatureInstance {
+  const budget = geo.metrics.capHeight * SERIF_ARC_BUDGET_FRACTION;
+  const polygon = buildProjectionPolygon({
+    glyph: geo.glyph,
+    anchor,
+    arcLengthBudget: budget,
+  });
+  return {
+    id: 'serif',
+    shape: {
+      type: 'point',
+      x: anchor.x,
+      y: anchor.y,
+      label: `${type} serif`,
+    },
+    region:
+      polygon.length >= 3 ? { kind: 'stroke', points: polygon } : undefined,
+    confidence: 0.7,
+    anchors: { position: anchor },
+    debug: { side, type, ...debug },
+  };
+}
+
 /**
  * Detects serif features on a glyph.
  * Focuses on terminal projections at baseline and cap/x-height.
  */
 export function detectSerif(geo: GeometryCache): FeatureInstance[] {
-  const { glyph, metrics, svgShape, scale } = geo;
+  const { glyph, metrics, svgShape, scale, context } = geo;
 
   if (!glyph?.path?.commands || !glyph.bbox) {
     return [];
   }
+  // The widening-detection algorithm fires on any glyph where a terminal
+  // span is wider than the inner stem reference. Sans-serif fonts produce
+  // false positives on letters with crossbars (T, F, E) or arms (B, P, R)
+  // because the crossbar/arm widens the terminal span just like a real
+  // serif foot would. Gate on the font's isSerif flag (computed from
+  // geometry by `detectSerifFromFont` in geometryCache.ts) so we only
+  // emit serif instances on actual serif typefaces.
+  if (!context.isSerif) return [];
 
   const instances: FeatureInstance[] = [];
-  const { eps, bboxW, bboxH, stemWidth, overshoot } = scale;
+  const { stemWidth, overshoot, bboxH } = scale;
 
-  // Serifs are terminal features - check at baseline and top
-  // Use stemWidth-based nudge, not UPEM*0.01
-  const nudge = stemWidth * 0.25;
+  // Step inward from the terminal by ONE stemWidth — far enough that
+  // the foot/cap serif (typically thinner than stemWidth) has narrowed
+  // to the bare stem, but close enough that we're still on the same
+  // vertical structure. The +0.05 floor on widening below filters out
+  // sub-pixel noise.
+  const innerStep = stemWidth;
+  const widenFloor = stemWidth * 0.05;
+  const centerTolerance = stemWidth;
 
-  // Terminal Y positions to check
-  const terminals = [
-    { y: metrics.baseline, type: 'foot' as const },
-    { y: metrics.xHeight, type: 'top' as const },
-    { y: metrics.capHeight, type: 'cap' as const },
+  const terminals: Array<{
+    y: number;
+    type: 'foot' | 'top' | 'cap';
+    sign: 1 | -1;
+  }> = [
+    { y: metrics.baseline, type: 'foot', sign: +1 },
+    { y: metrics.xHeight, type: 'top', sign: -1 },
+    { y: metrics.capHeight, type: 'cap', sign: -1 },
   ];
 
+  const scanAt = (y: number): Span[] => {
+    const origin = { x: glyph.bbox.minX - overshoot * 0.1, y };
+    const { points } = rayHits(svgShape, origin, 0, overshoot);
+    return pairsToSpans(points);
+  };
+
   for (const terminal of terminals) {
-    // Skip if terminal is outside glyph bbox
     if (
       terminal.y < glyph.bbox.minY - bboxH * 0.1 ||
       terminal.y > glyph.bbox.maxY + bboxH * 0.1
     ) {
       continue;
     }
+    const innerY = terminal.y + terminal.sign * innerStep;
+    if (innerY < glyph.bbox.minY || innerY > glyph.bbox.maxY) {
+      continue;
+    }
 
-    // Scan at terminal level
-    const origin = { x: glyph.bbox.minX - overshoot * 0.1, y: terminal.y };
-    const { points } = rayHits(svgShape, origin, 0, overshoot);
+    const tSpans = scanAt(terminal.y);
+    const iSpans = scanAt(innerY);
+    if (tSpans.length === 0 || iSpans.length === 0) continue;
 
-    if (points.length < 2) continue;
+    for (const ts of tSpans) {
+      if (ts.width < stemWidth * 0.5) continue;
 
-    // For each stem edge, check for horizontal widening (serif)
-    for (let j = 0; j < points.length - 1; j += 2) {
-      const leftEdge = points[j].x;
-      const rightEdge = points[j + 1].x;
-      const spanWidth = rightEdge - leftEdge;
-
-      // Skip if span is too thin (not a stem)
-      if (spanWidth < stemWidth * 0.5) continue;
-
-      // Check for left serif: horizontal probe outward from left edge
-      const leftSerif = detectSerifAtEdge(
-        geo,
-        { x: leftEdge, y: terminal.y },
-        'left',
-        terminal.type
-      );
-      if (leftSerif) {
-        instances.push(leftSerif);
+      let stemAligned: Span | null = null;
+      let bestDist = Infinity;
+      for (const is of iSpans) {
+        const d = Math.abs(is.center - ts.center);
+        if (d < bestDist) {
+          bestDist = d;
+          stemAligned = is;
+        }
       }
 
-      // Check for right serif: horizontal probe outward from right edge
-      const rightSerif = detectSerifAtEdge(
-        geo,
-        { x: rightEdge, y: terminal.y },
-        'right',
-        terminal.type
-      );
-      if (rightSerif) {
-        instances.push(rightSerif);
+      const stemLikeInner =
+        stemAligned !== null &&
+        Math.abs(stemAligned.width - stemWidth) < stemWidth * 0.3;
+
+      if (
+        stemAligned === null ||
+        bestDist >= centerTolerance ||
+        !stemLikeInner
+      ) {
+        // No stem-like inner reference for this terminal span. Common
+        // case: the inner Y cuts through a crossbar / arm / counter that
+        // splits the stem ray into narrow phantom spans. Without a real
+        // stem to compare against, we can't tell foot widening from
+        // unrelated geometry — skip and let other terminals catch the
+        // serifs from a different angle.
+        continue;
+      }
+
+      // Foot/cap serifs are the leftward and rightward extensions of
+      // the terminal span beyond the inner stem. T's top crossbar fits
+      // this pattern too: at innerY=cap-stemWidth, T narrows to just
+      // its stem, and the crossbar's left/right ends widen well past
+      // it on both sides.
+      const widensLeft = stemAligned.left - ts.left > widenFloor;
+      const widensRight = ts.right - stemAligned.right > widenFloor;
+      if (widensLeft) {
+        instances.push(
+          emitSerifAtCorner(
+            geo,
+            { x: ts.left, y: terminal.y },
+            'left',
+            terminal.type,
+            { extensionDistance: stemAligned.left - ts.left }
+          )
+        );
+      }
+      if (widensRight) {
+        instances.push(
+          emitSerifAtCorner(
+            geo,
+            { x: ts.right, y: terminal.y },
+            'right',
+            terminal.type,
+            { extensionDistance: ts.right - stemAligned.right }
+          )
+        );
       }
     }
   }
 
-  // Deduplicate nearby serifs
   return deduplicateSerifs(instances, stemWidth * 0.5);
-}
-
-/**
- * Detects a serif at a specific edge position by probing horizontally.
- */
-function detectSerifAtEdge(
-  geo: GeometryCache,
-  edge: Point2D,
-  side: 'left' | 'right',
-  type: 'foot' | 'top' | 'cap'
-): FeatureInstance | null {
-  const { svgShape, scale } = geo;
-  const { stemWidth, bboxH } = scale;
-
-  // Probe direction: outward from edge
-  const angle = side === 'left' ? Math.PI : 0; // Left = 180°, Right = 0°
-  const probeLen = stemWidth * 2;
-
-  // Probe at terminal level
-  const { points } = rayHits(svgShape, edge, angle, probeLen);
-
-  // For a serif, we should hit geometry close to the edge
-  // (the serif bracket/extension)
-  if (points.length === 0) return null;
-
-  const firstHit = points[0];
-  const distance = Math.abs(firstHit.x - edge.x);
-
-  // Serif should be close to the edge (within stemWidth)
-  // but not at zero (that would just be the edge itself)
-  if (distance < stemWidth * 0.1 || distance > stemWidth * 1.5) {
-    return null;
-  }
-
-  // Verify with vertical probe: serif extends vertically too
-  const verticalAngle = type === 'foot' ? -Math.PI / 2 : Math.PI / 2;
-  const vertProbe = rayHits(svgShape, edge, verticalAngle, bboxH * 0.1);
-
-  if (vertProbe.points.length === 0) return null;
-
-  const budget = geo.metrics.capHeight * SERIF_ARC_BUDGET_FRACTION;
-  const polygon = buildProjectionPolygon({
-    glyph: geo.glyph,
-    anchor: edge,
-    arcLengthBudget: budget,
-  });
-
-  return {
-    id: 'serif',
-    shape: {
-      type: 'point',
-      x: edge.x,
-      y: edge.y,
-      label: `${type} serif`,
-    },
-    region:
-      polygon.length >= 3 ? { kind: 'stroke', points: polygon } : undefined,
-    confidence: 0.7,
-    anchors: {
-      position: edge,
-      extension: firstHit,
-    },
-    debug: {
-      side,
-      type,
-      extensionDistance: distance,
-    },
-  };
 }
 
 /**
