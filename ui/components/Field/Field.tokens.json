@@ -2,17 +2,17 @@
   "prefix": "field",
   "tokens": {
     "gap": {
-      "y": "{semantic.form.density.regular.gapY}",
+      "y": "{semantic.spacing.density.compact.sm}",
       "meta": "{core.spacing.size.03}"
     },
     "label": {
-      "fontSize": "{semantic.form.density.regular.labelFontSize}",
+      "fontSize": "{semantic.typography.body.small.fontSize}",
       "color": "{semantic.color.foreground.secondary}"
     },
     "radius": "{semantic.shape.control.radius.default}",
     "pad": {
-      "x": "{semantic.form.density.regular.padX}",
-      "y": "{semantic.form.density.regular.padY}"
+      "x": "{semantic.spacing.density.compact.md}",
+      "y": "{semantic.spacing.density.compact.sm}"
     },
     "color": {
       "bg": "{semantic.color.background.elevated}",
@@ -20,10 +20,10 @@
       "border": "{semantic.color.border.subtle}",
       "borderBold": "{semantic.color.border.bold}",
       "focus-border": "{semantic.color.border.focus}",
-      "focus-text": "{semantic.color.interactive.primary}",
+      "focus-text": "{semantic.color.border.accent}",
       "invalid-border": "{semantic.color.border.danger}",
       "invalid-text": "{semantic.color.foreground.danger}",
-      "valid-border": "{semantic.color.feedback.success.border}"
+      "valid-border": "{semantic.color.feedback.border.success}"
     },
     "spacing": {
       "indicator": "{core.spacing.size.03}"

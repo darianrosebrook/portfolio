@@ -59,6 +59,6 @@
   --switch-motion-easing: var(--semantic-motion-interaction-press-easing);
 
   /* === Focus Tokens === */
-  --switch-focus-ring: var(--semantic-focus-ring);
-  --switch-focus-offset: var(--semantic-focus-ring-offset);
+  --switch-focus-ring: var(--semantic-interaction-focus-ring-width);
+  --switch-focus-offset: var(--semantic-interaction-focus-ring-offset);
 }

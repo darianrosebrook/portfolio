@@ -62,7 +62,7 @@
     },
     "elevation": {
       "default": "{semantic.elevation.default}",
-      "hover": "{semantic.elevation.hover}"
+      "hover": "{semantic.elevation.default}"
     },
     "motion": {
       "duration": "{semantic.motion.interaction.press.duration}",

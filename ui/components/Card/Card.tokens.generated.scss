@@ -37,7 +37,7 @@
 
   /* === Elevation Tokens === */
   --card-elevation-default: var(--semantic-elevation-default);
-  --card-elevation-hover: var(--semantic-elevation-hover);
+  --card-elevation-hover: var(--semantic-elevation-default);
 
   /* === Motion Tokens === */
   --card-motion-duration: var(--semantic-motion-interaction-press-duration);

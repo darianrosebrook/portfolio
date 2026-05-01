@@ -4,7 +4,11 @@
     "color": {
       "overlay": {
         "colorSpace": "srgb",
-        "components": [0, 0, 0],
+        "components": [
+          0,
+          0,
+          0
+        ],
         "alpha": 0.5
       },
       "background": "{semantic.color.background.primary}",
@@ -42,12 +46,12 @@
     },
     "text": {
       "size": "{semantic.typography.body.02}",
-      "lineHeight": "{semantic.typography.lineHeight.default}",
+      "lineHeight": "{semantic.typography.lineHeight.normal}",
       "sizeTitle": "{semantic.typography.heading.06}",
       "lineHeightTitle": "{semantic.typography.lineHeight.tight}",
-      "weightTitle": "{semantic.typography.fontWeight.semibold}",
+      "weightTitle": "{semantic.typography.fontWeight.medium}",
       "sizeDescription": "{semantic.typography.body.03}",
-      "lineHeightDescription": "{semantic.typography.lineHeight.relaxed}"
+      "lineHeightDescription": "{semantic.typography.lineHeight.loose}"
     },
     "motion": {
       "duration": "{core.motion.duration.medium}",

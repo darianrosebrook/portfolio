@@ -18,20 +18,78 @@
     "apgPattern": null
   },
   "tokens": {
-    "root": [
-      "calendar.color.background.default",
-      "calendar.color.background.imageOverlay",
-      "calendar.color.foreground.primary",
-      "calendar.color.foreground.secondary",
-      "calendar.color.border.default",
-      "calendar.color.border.accent",
-      "calendar.size.padding.default",
-      "calendar.size.radius.default",
-      "calendar.elevation.default",
-      "calendar.elevation.hover",
-      "calendar.motion.duration",
-      "calendar.motion.easing"
-    ]
+    "root": {
+      "calendar.color.background.default": {
+        "resolvesTo": "semantic.color.background.secondary",
+        "fallback": "#efefef",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "calendar.color.background.imageOverlay": {
+        "resolvesTo": "semantic.color.background.image.overlay",
+        "fallback": "rgba(0, 0, 0, 0.5)",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "calendar.color.foreground.primary": {
+        "resolvesTo": "semantic.color.foreground.primary",
+        "fallback": "#141414",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "calendar.color.foreground.secondary": {
+        "resolvesTo": "semantic.color.foreground.secondary",
+        "fallback": "#555555",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "calendar.color.border.default": {
+        "resolvesTo": "semantic.color.border.light",
+        "fallback": "#fceaea",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "calendar.color.border.accent": {
+        "resolvesTo": "semantic.color.border.accent",
+        "fallback": "#d9292b",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "calendar.size.padding.default": {
+        "resolvesTo": "core.spacing.size.07",
+        "fallback": "24px",
+        "property": "padding",
+        "layer": "core"
+      },
+      "calendar.size.radius.default": {
+        "resolvesTo": "core.shape.radius.medium",
+        "fallback": "8px",
+        "property": "border-radius",
+        "layer": "core"
+      },
+      "calendar.elevation.default": {
+        "resolvesTo": "semantic.elevation.default",
+        "fallback": "[object Object]",
+        "layer": "semantic"
+      },
+      "calendar.elevation.hover": {
+        "resolvesTo": "semantic.elevation.surface.floating",
+        "fallback": "[object Object]",
+        "layer": "semantic"
+      },
+      "calendar.motion.duration": {
+        "resolvesTo": "core.motion.duration.short",
+        "fallback": "150ms",
+        "property": "transition-duration",
+        "layer": "core"
+      },
+      "calendar.motion.easing": {
+        "resolvesTo": "core.motion.easing.standard",
+        "fallback": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "property": "transition-timing-function",
+        "layer": "core"
+      }
+    }
   },
   "props": {
     "styled": {

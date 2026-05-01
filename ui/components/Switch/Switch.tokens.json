@@ -90,8 +90,8 @@
       "easing": "{semantic.motion.interaction.press.easing}"
     },
     "focus": {
-      "ring": "{semantic.focus.ring}",
-      "offset": "{semantic.focus.ringOffset}"
+      "ring": "{interaction.focus.ringWidth}",
+      "offset": "{interaction.focus.ringOffset}"
     }
   }
 }

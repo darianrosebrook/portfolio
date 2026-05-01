@@ -33,12 +33,12 @@
 
   /* === Text Tokens === */
   --sheet-text-size: var(--semantic-typography-body-02);
-  --sheet-text-line-height: var(--semantic-typography-line-height-default);
+  --sheet-text-line-height: var(--semantic-typography-line-height-normal);
   --sheet-text-size-title: var(--semantic-typography-heading-06);
   --sheet-text-line-height-title: var(--semantic-typography-line-height-tight);
-  --sheet-text-weight-title: var(--semantic-typography-font-weight-semibold);
+  --sheet-text-weight-title: var(--semantic-typography-font-weight-medium);
   --sheet-text-size-description: var(--semantic-typography-body-03);
-  --sheet-text-line-height-description: var(--semantic-typography-line-height-relaxed);
+  --sheet-text-line-height-description: var(--semantic-typography-line-height-loose);
 
   /* === Motion Tokens === */
   --sheet-motion-duration: var(--core-motion-duration-medium);

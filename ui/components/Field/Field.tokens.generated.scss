@@ -3,16 +3,16 @@
  */
 @mixin vars {
   /* === Gap Tokens === */
-  --field-gap-y: var(--semantic-form-density-regular-gap-y);
+  --field-gap-y: var(--semantic-spacing-density-compact-sm);
   --field-gap-meta: var(--core-spacing-size-03);
 
   /* === Label Tokens === */
-  --field-label-font-size: var(--semantic-form-density-regular-label-font-size);
+  --field-label-font-size: var(--semantic-typography-body-small-font-size);
   --field-label-color: var(--semantic-color-foreground-secondary);
 
   /* === Pad Tokens === */
-  --field-pad-x: var(--semantic-form-density-regular-pad-x);
-  --field-pad-y: var(--semantic-form-density-regular-pad-y);
+  --field-pad-x: var(--semantic-spacing-density-compact-md);
+  --field-pad-y: var(--semantic-spacing-density-compact-sm);
 
   /* === Color Tokens === */
   --field-color-bg: var(--semantic-color-background-elevated);
@@ -20,10 +20,10 @@
   --field-color-border: var(--semantic-color-border-subtle);
   --field-color-border-bold: var(--semantic-color-border-bold);
   --field-color-focus-border: var(--semantic-color-border-focus);
-  --field-color-focus-text: var(--semantic-color-interactive-primary);
+  --field-color-focus-text: var(--semantic-color-border-accent);
   --field-color-invalid-border: var(--semantic-color-border-danger);
   --field-color-invalid-text: var(--semantic-color-foreground-danger);
-  --field-color-valid-border: var(--semantic-color-feedback-success-border);
+  --field-color-valid-border: var(--semantic-color-feedback-border-success);
 
   /* === Spacing Tokens === */
   --field-spacing-indicator: var(--core-spacing-size-03);

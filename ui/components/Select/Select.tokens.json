@@ -13,7 +13,7 @@
         "checked": "{semantic.color.background.primary}",
         "error": "{semantic.color.background.dangerSubtle}",
         "success": "{semantic.color.background.successSubtle}",
-        "selected": "{semantic.color.background.accentSubtle}"
+        "selected": "{semantic.color.background.highlight}"
       },
       "foreground": {
         "default": "{semantic.color.foreground.primary}",
@@ -34,7 +34,7 @@
         "isOpen": "{semantic.color.border.accent}",
         "focus": "{semantic.color.border.primary}",
         "focusVisible": "{semantic.color.border.accent}",
-        "focusRing": "{semantic.color.border.focusRing}",
+        "focusRing": "{semantic.color.border.focus}",
         "disabled": "{semantic.color.border.disabled}",
         "readOnly": "{semantic.color.border.light}",
         "checked": "{semantic.color.border.accent}",
@@ -98,7 +98,7 @@
     "font": {
       "size": {
         "default": "{semantic.typography.body.02}",
-        "sm": "{semantic.typography.body.small}",
+        "sm": "{semantic.typography.body.small.fontSize}",
         "md": "{semantic.typography.body.02}",
         "lg": "{semantic.typography.body.02}"
       },

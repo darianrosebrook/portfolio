@@ -13,8 +13,8 @@
         "full": "{core.shape.radius.full}"
       },
       "border": {
-        "default": "{semantic.size.border.default}",
-        "offset": "{semantic.size.border.offset}"
+        "default": "{core.shape.border.width.hairline}",
+        "offset": "{core.shape.border.width.thick}"
       }
     },
     "color": {
@@ -35,7 +35,7 @@
     },
     "typography": {
       "fontWeight": {
-        "medium": "{core.typography.fontWeight.medium}"
+        "medium": "{core.typography.weight.medium}"
       },
       "fontFamily": {
         "sans": "{core.typography.fontFamily.sans}"

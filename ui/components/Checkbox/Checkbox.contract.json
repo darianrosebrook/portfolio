@@ -32,36 +32,162 @@
     "apgPattern": null
   },
   "tokens": {
-    "root": [
-      "checkbox.size.sm.width",
-      "checkbox.size.sm.height",
-      "checkbox.size.sm.iconSize",
-      "checkbox.size.md.width",
-      "checkbox.size.md.height",
-      "checkbox.size.md.iconSize",
-      "checkbox.size.lg.width",
-      "checkbox.size.lg.height",
-      "checkbox.size.lg.iconSize",
-      "checkbox.color.background.default",
-      "checkbox.color.background.checked",
-      "checkbox.color.background.indeterminate",
-      "checkbox.color.background.disabled",
-      "checkbox.color.border.default",
-      "checkbox.color.border.hover",
-      "checkbox.color.border.focus",
-      "checkbox.color.border.checked",
-      "checkbox.color.border.disabled",
-      "checkbox.color.icon.default",
-      "checkbox.color.icon.disabled",
-      "checkbox.border.width",
-      "checkbox.border.radius",
-      "checkbox.spacing.gap",
-      "checkbox.transition.duration",
-      "checkbox.transition.easing",
-      "checkbox.focus.ring.width",
-      "checkbox.focus.ring.color",
-      "checkbox.focus.ring.offset"
-    ]
+    "root": {
+      "checkbox.size.sm.width": {
+        "resolvesTo": "core.spacing.size.06",
+        "fallback": "16px",
+        "layer": "core"
+      },
+      "checkbox.size.sm.height": {
+        "resolvesTo": "core.spacing.size.06",
+        "fallback": "16px",
+        "layer": "core"
+      },
+      "checkbox.size.sm.iconSize": {
+        "resolvesTo": "core.spacing.size.05",
+        "fallback": "12px",
+        "layer": "core"
+      },
+      "checkbox.size.md.width": {
+        "resolvesTo": "core.spacing.size.07",
+        "fallback": "24px",
+        "layer": "core"
+      },
+      "checkbox.size.md.height": {
+        "resolvesTo": "core.spacing.size.07",
+        "fallback": "24px",
+        "layer": "core"
+      },
+      "checkbox.size.md.iconSize": {
+        "resolvesTo": "core.spacing.size.06",
+        "fallback": "16px",
+        "layer": "core"
+      },
+      "checkbox.size.lg.width": {
+        "resolvesTo": "core.spacing.size.07",
+        "fallback": "24px",
+        "layer": "core"
+      },
+      "checkbox.size.lg.height": {
+        "resolvesTo": "core.spacing.size.07",
+        "fallback": "24px",
+        "layer": "core"
+      },
+      "checkbox.size.lg.iconSize": {
+        "resolvesTo": "core.spacing.size.07",
+        "fallback": "24px",
+        "layer": "core"
+      },
+      "checkbox.color.background.default": {
+        "resolvesTo": "semantic.color.background.primary",
+        "fallback": "#ffffff",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "checkbox.color.background.checked": {
+        "resolvesTo": "semantic.color.action.background.primary.default",
+        "fallback": "#d9292b",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "checkbox.color.background.indeterminate": {
+        "resolvesTo": "semantic.color.action.background.primary.default",
+        "fallback": "#d9292b",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "checkbox.color.background.disabled": {
+        "resolvesTo": "semantic.color.background.disabled",
+        "fallback": "#cecece",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "checkbox.color.border.default": {
+        "resolvesTo": "semantic.color.border.default",
+        "fallback": "#aeaeae",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "checkbox.color.border.hover": {
+        "resolvesTo": "semantic.color.border.hover",
+        "fallback": "#f29495",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "checkbox.color.border.focus": {
+        "resolvesTo": "semantic.color.border.focus",
+        "fallback": "#d9292b",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "checkbox.color.border.checked": {
+        "resolvesTo": "semantic.color.action.background.primary.default",
+        "fallback": "#d9292b",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "checkbox.color.border.disabled": {
+        "resolvesTo": "semantic.color.border.disabled",
+        "fallback": "#cecece",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "checkbox.color.icon.default": {
+        "resolvesTo": "semantic.color.foreground.on.brand",
+        "fallback": "#ffffff",
+        "layer": "semantic"
+      },
+      "checkbox.color.icon.disabled": {
+        "resolvesTo": "semantic.color.foreground.disabled",
+        "fallback": "#aeaeae",
+        "layer": "semantic"
+      },
+      "checkbox.border.width": {
+        "resolvesTo": "core.shape.border.width.hairline",
+        "fallback": "1px",
+        "property": "border-width",
+        "layer": "core"
+      },
+      "checkbox.border.radius": {
+        "resolvesTo": "core.shape.radius.small",
+        "fallback": "4px",
+        "property": "border-radius",
+        "layer": "core"
+      },
+      "checkbox.spacing.gap": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "property": "gap",
+        "layer": "core"
+      },
+      "checkbox.transition.duration": {
+        "resolvesTo": "core.motion.duration.short",
+        "fallback": "150ms",
+        "property": "transition-duration",
+        "layer": "core"
+      },
+      "checkbox.transition.easing": {
+        "resolvesTo": "core.motion.easing.standard",
+        "fallback": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "property": "transition-timing-function",
+        "layer": "core"
+      },
+      "checkbox.focus.ring.width": {
+        "resolvesTo": "semantic.interaction.focus.ring.width",
+        "fallback": "2px",
+        "layer": "semantic"
+      },
+      "checkbox.focus.ring.color": {
+        "resolvesTo": "semantic.color.border.focus",
+        "fallback": "#d9292b",
+        "layer": "semantic"
+      },
+      "checkbox.focus.ring.offset": {
+        "resolvesTo": "semantic.interaction.focus.ring.offset",
+        "fallback": "2px",
+        "layer": "semantic"
+      }
+    }
   },
   "props": {
     "styled": {

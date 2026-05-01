@@ -19,7 +19,7 @@
         "light": "{semantic.typography.fontWeight.light}",
         "regular": "{semantic.typography.fontWeight.regular}",
         "medium": "{semantic.typography.fontWeight.medium}",
-        "semibold": "{semantic.typography.fontWeight.semibold}",
+        "semibold": "{semantic.typography.fontWeight.medium}",
         "bold": "{semantic.typography.fontWeight.bold}"
       },
       "lineHeight": {
@@ -30,19 +30,19 @@
         "xs": "{semantic.typography.heading.03}",
         "sm": "{semantic.typography.heading.02}",
         "md": "{semantic.typography.heading.01}",
-        "lg": "{semantic.typography.display.01}",
-        "xl": "{semantic.typography.display.02}",
-        "2xl": "{semantic.typography.display.03}",
-        "3xl": "{semantic.typography.display.04}"
+        "lg": "{semantic.typography.oversize.01}",
+        "xl": "{semantic.typography.oversize.02}",
+        "2xl": "{semantic.typography.oversize.03}",
+        "3xl": "{semantic.typography.oversize.04}"
       },
       "headline": {
         "xs": "{semantic.typography.heading.04}",
         "sm": "{semantic.typography.heading.03}",
         "md": "{semantic.typography.heading.02}",
         "lg": "{semantic.typography.heading.01}",
-        "xl": "{semantic.typography.display.01}",
-        "2xl": "{semantic.typography.display.02}",
-        "3xl": "{semantic.typography.display.03}"
+        "xl": "{semantic.typography.oversize.01}",
+        "2xl": "{semantic.typography.oversize.02}",
+        "3xl": "{semantic.typography.oversize.03}"
       },
       "title": {
         "xs": "{semantic.typography.body.03}",
@@ -54,7 +54,7 @@
         "3xl": "{semantic.typography.heading.01}"
       },
       "body": {
-        "xs": "{semantic.typography.body.05}",
+        "xs": "{semantic.typography.body.04}",
         "sm": "{semantic.typography.body.04}",
         "md": "{semantic.typography.body.03}",
         "lg": "{semantic.typography.body.02}",
@@ -65,7 +65,7 @@
       "caption": {
         "xs": "{semantic.typography.caption.02}",
         "sm": "{semantic.typography.caption.01}",
-        "md": "{semantic.typography.body.05}",
+        "md": "{semantic.typography.body.04}",
         "lg": "{semantic.typography.body.04}",
         "xl": "{semantic.typography.body.03}",
         "2xl": "{semantic.typography.body.02}",
@@ -74,14 +74,14 @@
       "overline": {
         "xs": "{semantic.typography.caption.02}",
         "sm": "{semantic.typography.caption.01}",
-        "md": "{semantic.typography.body.05}",
+        "md": "{semantic.typography.body.04}",
         "lg": "{semantic.typography.body.04}",
         "xl": "{semantic.typography.body.03}",
         "2xl": "{semantic.typography.body.02}",
         "3xl": "{semantic.typography.body.01}"
       },
       "code": {
-        "xs": "{semantic.typography.body.05}",
+        "xs": "{semantic.typography.body.04}",
         "sm": "{semantic.typography.body.04}",
         "md": "{semantic.typography.body.03}",
         "lg": "{semantic.typography.body.02}",

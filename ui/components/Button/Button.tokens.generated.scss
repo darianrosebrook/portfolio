@@ -18,9 +18,9 @@
   --button-color-background-tertiary: var(--core-color-mode-transparent);
   --button-color-background-tertiary-hover: var(--semantic-interaction-background-hover);
   --button-color-background-tertiary-active: var(--semantic-interaction-background-active);
-  --button-color-background-destructive: var(--semantic-color-feedback-error-background);
-  --button-color-background-destructive-hover: var(--semantic-color-feedback-error-background-hover);
-  --button-color-background-destructive-active: var(--semantic-color-feedback-error-background-active);
+  --button-color-background-destructive: var(--semantic-color-background-danger-subtle);
+  --button-color-background-destructive-hover: var(--semantic-color-background-hover);
+  --button-color-background-destructive-active: var(--semantic-color-background-active);
   --button-color-foreground-default: var(--semantic-color-foreground-inverse);
   --button-color-foreground-hover: var(--semantic-interaction-text-hover);
   --button-color-foreground-active: var(--semantic-interaction-text-active);
@@ -39,9 +39,9 @@
   --button-color-foreground-ghost: var(--semantic-color-foreground-primary);
   --button-color-foreground-ghost-hover: var(--semantic-interaction-text-hover);
   --button-color-foreground-ghost-active: var(--semantic-interaction-text-active);
-  --button-color-foreground-destructive: var(--semantic-color-feedback-danger-default);
-  --button-color-foreground-destructive-hover: var(--semantic-color-feedback-danger-default);
-  --button-color-foreground-destructive-active: var(--semantic-color-feedback-danger-default);
+  --button-color-foreground-destructive: var(--semantic-color-foreground-danger);
+  --button-color-foreground-destructive-hover: var(--semantic-color-foreground-danger);
+  --button-color-foreground-destructive-active: var(--semantic-color-foreground-danger);
   --button-color-foreground-outline: var(--semantic-color-foreground-secondary);
   --button-color-foreground-outline-hover: var(--semantic-interaction-text-hover);
   --button-color-foreground-outline-active: var(--semantic-interaction-text-active);
@@ -63,10 +63,10 @@
   --button-color-border-ghost: var(--core-color-mode-transparent);
   --button-color-border-ghost-hover: var(--semantic-interaction-border-hover);
   --button-color-border-ghost-active: var(--semantic-interaction-border-active);
-  --button-color-border-destructive: var(--semantic-color-feedback-danger);
-  --button-color-border-destructive-hover: var(--semantic-color-feedback-danger);
-  --button-color-border-destructive-active: var(--semantic-color-feedback-danger);
-  --button-color-border-outline: var(--semantic-color-border-secondary);
+  --button-color-border-destructive: var(--semantic-color-feedback-border-danger);
+  --button-color-border-destructive-hover: var(--semantic-color-feedback-border-danger);
+  --button-color-border-destructive-active: var(--semantic-color-feedback-border-danger);
+  --button-color-border-outline: var(--semantic-color-border-subtle);
   --button-color-border-outline-hover: var(--semantic-interaction-border-hover);
   --button-color-border-outline-active: var(--semantic-interaction-border-active);
   --button-color-spinner-border: var(--semantic-color-border-light);
@@ -85,7 +85,7 @@
   --button-size-border: var(--core-shape-border-width-hairline);
   --button-size-spinner-width: var(--core-spacing-size-06);
   --button-size-spinner-height: var(--core-spacing-size-06);
-  --button-size-spinner-border-width: var(--core-shape-border-width-thin);
+  --button-size-spinner-border-width: var(--core-shape-border-width-hairline);
   --button-size-spinner-border-radius: var(--core-shape-radius-full);
   --button-size-margin: var(--core-spacing-size-04);
 

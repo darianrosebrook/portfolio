@@ -24,7 +24,7 @@
       },
       "radius": {
         "default": "{semantic.shape.control.radius.default}",
-        "medium": "{semantic.shape.radius.medium}",
+        "medium": "{core.shape.radius.medium}",
         "full": "{core.shape.radius.full}"
       },
       "margin": {
@@ -42,7 +42,7 @@
     "typography": {
       "displayName": {
         "fontSize": "{semantic.typography.body.02}",
-        "fontWeight": "{semantic.typography.fontWeight.semibold}"
+        "fontWeight": "{semantic.typography.fontWeight.medium}"
       },
       "handle": {
         "fontSize": "{semantic.typography.body.03}"

@@ -34,7 +34,7 @@
       }
     },
     "color": {
-      "accent": "{semantic.color.accent.brand}",
+      "accent": "{semantic.color.background.accent}",
       "track": "{semantic.color.border.subtle}"
     },
     "dots": {

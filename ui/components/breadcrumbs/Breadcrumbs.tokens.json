@@ -19,13 +19,13 @@
     },
     "typography": {
       "lineHeight": {
-        "collapse": "{core.typography.lineHeight.collapse}"
+        "collapse": "{semantic.typography.lineHeight.collapse}"
       }
     },
     "shape": {
       "radius": {
-        "medium": "{semantic.shape.radius.medium}",
-        "small": "{semantic.shape.radius.small}"
+        "medium": "{core.shape.radius.medium}",
+        "small": "{core.shape.radius.small}"
       }
     },
     "elevation": {

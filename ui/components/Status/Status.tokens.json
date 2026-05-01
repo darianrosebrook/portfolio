@@ -33,7 +33,7 @@
       }
     },
     "typography": {
-      "lineHeight": "{core.typography.lineHeight.collapse}"
+      "lineHeight": "{semantic.typography.lineHeight.collapse}"
     }
   }
 }

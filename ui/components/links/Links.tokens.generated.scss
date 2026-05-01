@@ -1,5 +1,5 @@
 /* AUTO-GENERATED: Do not edit directly.
- * Source: ui/components/Links/Links.tokens.json
+ * Source: ui/components/links/Links.tokens.json
  */
 @mixin vars {
   /* === Color Tokens === */
@@ -25,27 +25,27 @@
   --links-spacing-margin-large: var(--core-spacing-size-03);
 
   /* === Typography Tokens === */
-  --links-typography-font-size-small: var(--semantic-typography-body-05);
+  --links-typography-font-size-small: var(--semantic-typography-body-04);
   --links-typography-font-size-medium: var(--semantic-typography-body-04);
   --links-typography-font-size-large: var(--semantic-typography-body-03);
-  --links-typography-font-weight-default: var(--semantic-typography-font-weight-normal);
+  --links-typography-font-weight-default: var(--semantic-typography-font-weight-regular);
   --links-typography-font-weight-medium: var(--semantic-typography-font-weight-medium);
-  --links-typography-font-weight-semibold: var(--semantic-typography-font-weight-semibold);
+  --links-typography-font-weight-semibold: var(--semantic-typography-font-weight-medium);
   --links-typography-line-height-default: var(--semantic-typography-line-height-normal);
   --links-typography-line-height-tight: var(--semantic-typography-line-height-tight);
-  --links-typography-line-height-relaxed: var(--semantic-typography-line-height-relaxed);
+  --links-typography-line-height-relaxed: var(--semantic-typography-line-height-loose);
 
   /* === Motion Tokens === */
   --links-motion-duration-fast: var(--core-motion-duration-short);
   --links-motion-duration-normal: var(--core-motion-duration-medium);
   --links-motion-duration-slow: var(--core-motion-duration-long);
   --links-motion-easing-standard: var(--core-motion-easing-standard);
-  --links-motion-easing-decelerate: var(--core-motion-easing-decelerate);
-  --links-motion-easing-accelerate: var(--core-motion-easing-accelerate);
+  --links-motion-easing-decelerate: var(--core-motion-easing-emphasized-out);
+  --links-motion-easing-accelerate: var(--core-motion-easing-emphasized-in);
 
   /* === Border Tokens === */
   --links-border-width-default: var(--core-shape-border-width-hairline);
-  --links-border-width-thick: var(--core-shape-border-width-thin);
+  --links-border-width-thick: var(--core-shape-border-width-hairline);
   --links-border-style-default: solid;
   --links-border-style-dashed: dashed;
   --links-border-style-dotted: dotted;

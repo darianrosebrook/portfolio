@@ -1,5 +1,5 @@
 /* AUTO-GENERATED: Do not edit directly.
- * Source: ui/components/Breadcrumbs/Breadcrumbs.tokens.json
+ * Source: ui/components/breadcrumbs/Breadcrumbs.tokens.json
  */
 @mixin vars {
   /* === Color Tokens === */
@@ -12,11 +12,11 @@
   --breadcrumbs-color-focus: var(--semantic-color-border-accent);
 
   /* === Typography Tokens === */
-  --breadcrumbs-typography-line-height-collapse: var(--core-typography-line-height-collapse);
+  --breadcrumbs-typography-line-height-collapse: var(--semantic-typography-line-height-collapse);
 
   /* === Shape Tokens === */
-  --breadcrumbs-shape-radius-medium: var(--semantic-shape-radius-medium);
-  --breadcrumbs-shape-radius-small: var(--semantic-shape-radius-small);
+  --breadcrumbs-shape-radius-medium: var(--core-shape-radius-medium);
+  --breadcrumbs-shape-radius-small: var(--core-shape-radius-small);
 
   /* === Elevation Tokens === */
   --breadcrumbs-elevation-surface-raised: var(--semantic-elevation-surface-raised);

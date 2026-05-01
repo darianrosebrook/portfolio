@@ -13,7 +13,7 @@
   --select-color-background-checked: var(--semantic-color-background-primary);
   --select-color-background-error: var(--semantic-color-background-danger-subtle);
   --select-color-background-success: var(--semantic-color-background-success-subtle);
-  --select-color-background-selected: var(--semantic-color-background-accent-subtle);
+  --select-color-background-selected: var(--semantic-color-background-highlight);
   --select-color-foreground-default: var(--semantic-color-foreground-primary);
   --select-color-foreground-hover: var(--semantic-color-foreground-hover);
   --select-color-foreground-is-open: var(--semantic-color-foreground-primary);
@@ -30,7 +30,7 @@
   --select-color-border-is-open: var(--semantic-color-border-accent);
   --select-color-border-focus: var(--semantic-color-border-primary);
   --select-color-border-focus-visible: var(--semantic-color-border-accent);
-  --select-color-border-focus-ring: var(--semantic-color-border-focus-ring);
+  --select-color-border-focus-ring: var(--semantic-color-border-focus);
   --select-color-border-disabled: var(--semantic-color-border-disabled);
   --select-color-border-read-only: var(--semantic-color-border-light);
   --select-color-border-checked: var(--semantic-color-border-accent);
@@ -76,7 +76,7 @@
 
   /* === Font Tokens === */
   --select-font-size-default: var(--semantic-typography-body-02);
-  --select-font-size-sm: var(--semantic-typography-body-small);
+  --select-font-size-sm: var(--semantic-typography-body-small-font-size);
   --select-font-size-md: var(--semantic-typography-body-02);
   --select-font-size-lg: var(--semantic-typography-body-02);
   --select-font-weight-default: var(--semantic-typography-font-weight-regular);

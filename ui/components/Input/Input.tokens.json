@@ -3,7 +3,7 @@
   "tokens": {
     "color": {
       "bg": {
-        "default": "{semantic.color.background.surface}"
+        "default": "{semantic.color.background.primary}"
       },
       "text": {
         "default": "{semantic.color.foreground.primary}"
@@ -20,15 +20,15 @@
     },
     "size": {
       "height": {
-        "default": "{size.12}"
+        "default": "{semantic.control.size.lg.height}"
       },
       "radius": {
-        "default": "{radius.md}"
+        "default": "{core.shape.radius.medium}"
       }
     },
     "space": {
       "inline": {
-        "default": "{space.300}"
+        "default": "{core.spacing.size.05}"
       }
     }
   }

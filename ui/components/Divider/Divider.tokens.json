@@ -8,7 +8,7 @@
     },
     "size": {
       "thickness": "{core.shape.border.width.hairline}",
-      "thicknessThick": "{core.shape.border.width.thin}"
+      "thicknessThick": "{core.shape.border.width.hairline}"
     },
     "spacing": {
       "margin": "{core.spacing.size.04}"

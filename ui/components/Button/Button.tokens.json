@@ -19,9 +19,9 @@
         "tertiary": "{core.color.mode.transparent}",
         "tertiaryHover": "{semantic.interaction.background.hover}",
         "tertiaryActive": "{semantic.interaction.background.active}",
-        "destructive": "{semantic.color.feedback.error.background}",
-        "destructiveHover": "{semantic.color.feedback.error.background.hover}",
-        "destructiveActive": "{semantic.color.feedback.error.background.active}"
+        "destructive": "{semantic.color.background.dangerSubtle}",
+        "destructiveHover": "{semantic.color.background.hover}",
+        "destructiveActive": "{semantic.color.background.active}"
       },
       "foreground": {
         "default": "{semantic.color.foreground.inverse}",
@@ -42,9 +42,9 @@
         "ghost": "{semantic.color.foreground.primary}",
         "ghostHover": "{semantic.interaction.text.hover}",
         "ghostActive": "{semantic.interaction.text.active}",
-        "destructive": "{semantic.color.feedback.danger.default}",
-        "destructiveHover": "{semantic.color.feedback.danger.default}",
-        "destructiveActive": "{semantic.color.feedback.danger.default}",
+        "destructive": "{semantic.color.foreground.danger}",
+        "destructiveHover": "{semantic.color.foreground.danger}",
+        "destructiveActive": "{semantic.color.foreground.danger}",
         "outline": "{semantic.color.foreground.secondary}",
         "outlineHover": "{semantic.interaction.text.hover}",
         "outlineActive": "{semantic.interaction.text.active}"
@@ -68,10 +68,10 @@
         "ghost": "{core.color.mode.transparent}",
         "ghostHover": "{semantic.interaction.border.hover}",
         "ghostActive": "{semantic.interaction.border.active}",
-        "destructive": "{semantic.color.feedback.danger}",
-        "destructiveHover": "{semantic.color.feedback.danger}",
-        "destructiveActive": "{semantic.color.feedback.danger}",
-        "outline": "{semantic.color.border.secondary}",
+        "destructive": "{semantic.color.feedback.border.danger}",
+        "destructiveHover": "{semantic.color.feedback.border.danger}",
+        "destructiveActive": "{semantic.color.feedback.border.danger}",
+        "outline": "{semantic.color.border.subtle}",
         "outlineHover": "{semantic.interaction.border.hover}",
         "outlineActive": "{semantic.interaction.border.active}"
       },
@@ -100,7 +100,7 @@
       "spinner": {
         "width": "{core.spacing.size.06}",
         "height": "{core.spacing.size.06}",
-        "borderWidth": "{core.shape.border.width.thin}",
+        "borderWidth": "{core.shape.border.width.hairline}",
         "borderRadius": "{core.shape.radius.full}"
       },
       "margin": "{core.spacing.size.04}"

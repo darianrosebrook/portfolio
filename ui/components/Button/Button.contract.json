@@ -155,14 +155,40 @@
       "button.focus.outlineOffset",
       "button.focus.outlineColor"
     ],
-    "spinner": [
-      "button.color.spinner.border",
-      "button.color.spinner.borderAccent",
-      "button.size.spinner.width",
-      "button.size.spinner.height",
-      "button.size.spinner.borderWidth",
-      "button.size.spinner.borderRadius"
-    ]
+    "spinner": {
+      "button.color.spinner.border": {
+        "resolvesTo": "semantic.color.border.light",
+        "fallback": "#fceaea",
+        "layer": "semantic"
+      },
+      "button.color.spinner.borderAccent": {
+        "resolvesTo": "semantic.color.border.accent",
+        "fallback": "#d9292b",
+        "layer": "semantic"
+      },
+      "button.size.spinner.width": {
+        "resolvesTo": "core.spacing.size.06",
+        "fallback": "16px",
+        "layer": "core"
+      },
+      "button.size.spinner.height": {
+        "resolvesTo": "core.spacing.size.06",
+        "fallback": "16px",
+        "layer": "core"
+      },
+      "button.size.spinner.borderWidth": {
+        "resolvesTo": "core.shape.border.width.hairline",
+        "fallback": "1px",
+        "property": "border-width",
+        "layer": "core"
+      },
+      "button.size.spinner.borderRadius": {
+        "resolvesTo": "core.shape.radius.full",
+        "fallback": "9999px",
+        "property": "border-radius",
+        "layer": "core"
+      }
+    }
   },
   "props": {
     "styled": {

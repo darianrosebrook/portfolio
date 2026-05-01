@@ -2,13 +2,13 @@
   "component": {
     "aspectRatio": {
       "surface": {
-        "bg": "{color.background.subtle}",
+        "bg": "{semantic.color.background.secondary}",
         "border": "{color.border.subtle}",
-        "radius": "{radius.md}"
+        "radius": "{core.shape.radius.medium}"
       },
       "placeholder": {
-        "color": "{color.foreground.muted}",
-        "bg": "{color.background.muted}"
+        "color": "{semantic.color.foreground.secondary}",
+        "bg": "{semantic.color.background.secondary}"
       }
     }
   }

@@ -4,33 +4,33 @@
   "tokens": {
     "size": {
       "sm": {
-        "width": "{size.4}",
-        "height": "{size.4}",
-        "iconSize": "{size.3}"
+        "width": "{core.spacing.size.06}",
+        "height": "{core.spacing.size.06}",
+        "iconSize": "{core.spacing.size.05}"
       },
       "md": {
-        "width": "{size.5}",
-        "height": "{size.5}",
-        "iconSize": "{size.4}"
+        "width": "{core.spacing.size.07}",
+        "height": "{core.spacing.size.07}",
+        "iconSize": "{core.spacing.size.06}"
       },
       "lg": {
-        "width": "{size.6}",
-        "height": "{size.6}",
-        "iconSize": "{size.5}"
+        "width": "{core.spacing.size.07}",
+        "height": "{core.spacing.size.07}",
+        "iconSize": "{core.spacing.size.07}"
       }
     },
     "color": {
       "background": {
-        "default": "{color.background.surface}",
-        "checked": "{color.brand.500}",
-        "indeterminate": "{color.brand.500}",
+        "default": "{semantic.color.background.primary}",
+        "checked": "{semantic.color.action.background.primary.default}",
+        "indeterminate": "{semantic.color.action.background.primary.default}",
         "disabled": "{color.background.disabled}"
       },
       "border": {
         "default": "{color.border.default}",
         "hover": "{color.border.hover}",
         "focus": "{color.border.focus}",
-        "checked": "{color.brand.500}",
+        "checked": "{semantic.color.action.background.primary.default}",
         "disabled": "{color.border.disabled}"
       },
       "icon": {
@@ -39,11 +39,11 @@
       }
     },
     "border": {
-      "width": "{border.width.1}",
-      "radius": "{radius.sm}"
+      "width": "{core.shape.border.width.hairline}",
+      "radius": "{core.shape.radius.small}"
     },
     "spacing": {
-      "gap": "{space.200}"
+      "gap": "{core.spacing.size.04}"
     },
     "transition": {
       "duration": "{core.motion.duration.short}",
@@ -51,9 +51,9 @@
     },
     "focus": {
       "ring": {
-        "width": "{focus.ring.width}",
-        "color": "{focus.ring.color}",
-        "offset": "{focus.ring.offset}"
+        "width": "{interaction.focus.ringWidth}",
+        "color": "{semantic.color.border.focus}",
+        "offset": "{interaction.focus.ringOffset}"
       }
     }
   }

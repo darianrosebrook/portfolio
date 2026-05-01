@@ -24,7 +24,7 @@
 
   /* === Spacing Tokens === */
   --command-spacing-dialog-padding: var(--core-spacing-size-04);
-  --command-spacing-dialog-margin-top: var(--core-spacing-size-12);
+  --command-spacing-dialog-margin-top: var(--core-spacing-size-09);
   --command-spacing-input-padding: var(--core-spacing-size-04);
   --command-spacing-input-padding-x: var(--core-spacing-size-03);
   --command-spacing-input-padding-left: var(--core-spacing-size-10);
@@ -42,8 +42,8 @@
 
   /* === Text Tokens === */
   --command-text-size: var(--semantic-typography-body-02);
-  --command-text-line-height: var(--semantic-typography-line-height-default);
-  --command-text-weight: var(--semantic-typography-font-weight-normal);
+  --command-text-line-height: var(--semantic-typography-line-height-normal);
+  --command-text-weight: var(--semantic-typography-font-weight-regular);
   --command-text-weight-medium: var(--semantic-typography-font-weight-medium);
   --command-text-size-small: var(--semantic-typography-body-04);
   --command-text-line-height-tight: var(--semantic-typography-line-height-tight);

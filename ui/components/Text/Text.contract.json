@@ -71,84 +71,392 @@
     "apgPattern": null
   },
   "tokens": {
-    "root": [
-      "text.color.foreground.primary",
-      "text.color.foreground.secondary",
-      "text.color.foreground.accent",
-      "text.color.foreground.success",
-      "text.color.foreground.warning",
-      "text.color.foreground.danger",
-      "text.color.background.default",
-      "text.typography.fontWeight.light",
-      "text.typography.fontWeight.regular",
-      "text.typography.fontWeight.medium",
-      "text.typography.fontWeight.semibold",
-      "text.typography.fontWeight.bold",
-      "text.typography.lineHeight.heading",
-      "text.typography.lineHeight.body",
-      "text.typography.display.xs",
-      "text.typography.display.sm",
-      "text.typography.display.md",
-      "text.typography.display.lg",
-      "text.typography.display.xl",
-      "text.typography.display.2xl",
-      "text.typography.display.3xl",
-      "text.typography.headline.xs",
-      "text.typography.headline.sm",
-      "text.typography.headline.md",
-      "text.typography.headline.lg",
-      "text.typography.headline.xl",
-      "text.typography.headline.2xl",
-      "text.typography.headline.3xl",
-      "text.typography.title.xs",
-      "text.typography.title.sm",
-      "text.typography.title.md",
-      "text.typography.title.lg",
-      "text.typography.title.xl",
-      "text.typography.title.2xl",
-      "text.typography.title.3xl",
-      "text.typography.body.xs",
-      "text.typography.body.sm",
-      "text.typography.body.md",
-      "text.typography.body.lg",
-      "text.typography.body.xl",
-      "text.typography.body.2xl",
-      "text.typography.body.3xl",
-      "text.typography.caption.xs",
-      "text.typography.caption.sm",
-      "text.typography.caption.md",
-      "text.typography.caption.lg",
-      "text.typography.caption.xl",
-      "text.typography.caption.2xl",
-      "text.typography.caption.3xl",
-      "text.typography.overline.xs",
-      "text.typography.overline.sm",
-      "text.typography.overline.md",
-      "text.typography.overline.lg",
-      "text.typography.overline.xl",
-      "text.typography.overline.2xl",
-      "text.typography.overline.3xl",
-      "text.typography.code.xs",
-      "text.typography.code.sm",
-      "text.typography.code.md",
-      "text.typography.code.lg",
-      "text.typography.code.xl",
-      "text.typography.code.2xl",
-      "text.typography.code.3xl",
-      "text.code.fontFamily",
-      "text.code.padding.y",
-      "text.code.padding.x",
-      "text.code.radius"
-    ],
-    "headline": [
-      "text.typography.headline.xs",
-      "text.typography.headline.sm",
-      "text.typography.headline.md",
-      "text.typography.headline.lg",
-      "text.typography.headline.xl",
-      "text.typography.headline.2xl",
-      "text.typography.headline.3xl"
-    ],
+    "root": {
+      "text.color.foreground.primary": {
+        "resolvesTo": "semantic.color.foreground.primary",
+        "fallback": "#141414",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "text.color.foreground.secondary": {
+        "resolvesTo": "semantic.color.foreground.secondary",
+        "fallback": "#555555",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "text.color.foreground.accent": {
+        "resolvesTo": "semantic.color.foreground.accent",
+        "fallback": "#d9292b",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "text.color.foreground.success": {
+        "resolvesTo": "semantic.color.foreground.success",
+        "fallback": "#487e1e",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "text.color.foreground.warning": {
+        "resolvesTo": "semantic.color.foreground.warning",
+        "fallback": "#ac5c00",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "text.color.foreground.danger": {
+        "resolvesTo": "semantic.color.foreground.danger",
+        "fallback": "#d9292b",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "text.color.background.default": {
+        "resolvesTo": "semantic.color.background.secondary",
+        "fallback": "#efefef",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "text.typography.fontWeight.light": {
+        "resolvesTo": "semantic.typography.font.weight.light",
+        "fallback": "300",
+        "layer": "semantic"
+      },
+      "text.typography.fontWeight.regular": {
+        "resolvesTo": "semantic.typography.font.weight.regular",
+        "fallback": "400",
+        "layer": "semantic"
+      },
+      "text.typography.fontWeight.medium": {
+        "resolvesTo": "semantic.typography.font.weight.medium",
+        "fallback": "500",
+        "layer": "semantic"
+      },
+      "text.typography.fontWeight.semibold": {
+        "resolvesTo": "semantic.typography.font.weight.medium",
+        "fallback": "500",
+        "layer": "semantic"
+      },
+      "text.typography.fontWeight.bold": {
+        "resolvesTo": "semantic.typography.font.weight.bold",
+        "fallback": "700",
+        "layer": "semantic"
+      },
+      "text.typography.lineHeight.heading": {
+        "resolvesTo": "semantic.typography.line.height.heading",
+        "fallback": "1",
+        "property": "line-height",
+        "layer": "semantic"
+      },
+      "text.typography.lineHeight.body": {
+        "resolvesTo": "semantic.typography.line.height.body",
+        "fallback": "1.5",
+        "property": "line-height",
+        "layer": "semantic"
+      },
+      "text.typography.display.xs": {
+        "resolvesTo": "semantic.typography.heading.03",
+        "fallback": "20px",
+        "layer": "semantic"
+      },
+      "text.typography.display.sm": {
+        "resolvesTo": "semantic.typography.heading.02",
+        "fallback": "24px",
+        "layer": "semantic"
+      },
+      "text.typography.display.md": {
+        "resolvesTo": "semantic.typography.heading.01",
+        "fallback": "32px",
+        "layer": "semantic"
+      },
+      "text.typography.display.lg": {
+        "resolvesTo": "semantic.typography.oversize.01",
+        "fallback": "192px",
+        "layer": "semantic"
+      },
+      "text.typography.display.xl": {
+        "resolvesTo": "semantic.typography.oversize.02",
+        "fallback": "160px",
+        "layer": "semantic"
+      },
+      "text.typography.display.2xl": {
+        "resolvesTo": "semantic.typography.oversize.03",
+        "fallback": "128px",
+        "layer": "semantic"
+      },
+      "text.typography.display.3xl": {
+        "resolvesTo": "semantic.typography.oversize.04",
+        "fallback": "96px",
+        "layer": "semantic"
+      },
+      "text.typography.headline.xs": {
+        "resolvesTo": "semantic.typography.heading.04",
+        "fallback": "18px",
+        "layer": "semantic"
+      },
+      "text.typography.headline.sm": {
+        "resolvesTo": "semantic.typography.heading.03",
+        "fallback": "20px",
+        "layer": "semantic"
+      },
+      "text.typography.headline.md": {
+        "resolvesTo": "semantic.typography.heading.02",
+        "fallback": "24px",
+        "layer": "semantic"
+      },
+      "text.typography.headline.lg": {
+        "resolvesTo": "semantic.typography.heading.01",
+        "fallback": "32px",
+        "layer": "semantic"
+      },
+      "text.typography.headline.xl": {
+        "resolvesTo": "semantic.typography.oversize.01",
+        "fallback": "192px",
+        "layer": "semantic"
+      },
+      "text.typography.headline.2xl": {
+        "resolvesTo": "semantic.typography.oversize.02",
+        "fallback": "160px",
+        "layer": "semantic"
+      },
+      "text.typography.headline.3xl": {
+        "resolvesTo": "semantic.typography.oversize.03",
+        "fallback": "128px",
+        "layer": "semantic"
+      },
+      "text.typography.title.xs": {
+        "resolvesTo": "semantic.typography.body.03",
+        "fallback": "14px",
+        "layer": "semantic"
+      },
+      "text.typography.title.sm": {
+        "resolvesTo": "semantic.typography.body.02",
+        "fallback": "16px",
+        "layer": "semantic"
+      },
+      "text.typography.title.md": {
+        "resolvesTo": "semantic.typography.body.01",
+        "fallback": "18px",
+        "layer": "semantic"
+      },
+      "text.typography.title.lg": {
+        "resolvesTo": "semantic.typography.heading.04",
+        "fallback": "18px",
+        "layer": "semantic"
+      },
+      "text.typography.title.xl": {
+        "resolvesTo": "semantic.typography.heading.03",
+        "fallback": "20px",
+        "layer": "semantic"
+      },
+      "text.typography.title.2xl": {
+        "resolvesTo": "semantic.typography.heading.02",
+        "fallback": "24px",
+        "layer": "semantic"
+      },
+      "text.typography.title.3xl": {
+        "resolvesTo": "semantic.typography.heading.01",
+        "fallback": "32px",
+        "layer": "semantic"
+      },
+      "text.typography.body.xs": {
+        "resolvesTo": "semantic.typography.body.04",
+        "fallback": "12px",
+        "layer": "semantic"
+      },
+      "text.typography.body.sm": {
+        "resolvesTo": "semantic.typography.body.04",
+        "fallback": "12px",
+        "layer": "semantic"
+      },
+      "text.typography.body.md": {
+        "resolvesTo": "semantic.typography.body.03",
+        "fallback": "14px",
+        "layer": "semantic"
+      },
+      "text.typography.body.lg": {
+        "resolvesTo": "semantic.typography.body.02",
+        "fallback": "16px",
+        "layer": "semantic"
+      },
+      "text.typography.body.xl": {
+        "resolvesTo": "semantic.typography.body.01",
+        "fallback": "18px",
+        "layer": "semantic"
+      },
+      "text.typography.body.2xl": {
+        "resolvesTo": "semantic.typography.heading.04",
+        "fallback": "18px",
+        "layer": "semantic"
+      },
+      "text.typography.body.3xl": {
+        "resolvesTo": "semantic.typography.heading.03",
+        "fallback": "20px",
+        "layer": "semantic"
+      },
+      "text.typography.caption.xs": {
+        "resolvesTo": "semantic.typography.caption.02",
+        "fallback": "12px",
+        "layer": "semantic"
+      },
+      "text.typography.caption.sm": {
+        "resolvesTo": "semantic.typography.caption.01",
+        "fallback": "14px",
+        "layer": "semantic"
+      },
+      "text.typography.caption.md": {
+        "resolvesTo": "semantic.typography.body.04",
+        "fallback": "12px",
+        "layer": "semantic"
+      },
+      "text.typography.caption.lg": {
+        "resolvesTo": "semantic.typography.body.04",
+        "fallback": "12px",
+        "layer": "semantic"
+      },
+      "text.typography.caption.xl": {
+        "resolvesTo": "semantic.typography.body.03",
+        "fallback": "14px",
+        "layer": "semantic"
+      },
+      "text.typography.caption.2xl": {
+        "resolvesTo": "semantic.typography.body.02",
+        "fallback": "16px",
+        "layer": "semantic"
+      },
+      "text.typography.caption.3xl": {
+        "resolvesTo": "semantic.typography.body.01",
+        "fallback": "18px",
+        "layer": "semantic"
+      },
+      "text.typography.overline.xs": {
+        "resolvesTo": "semantic.typography.caption.02",
+        "fallback": "12px",
+        "layer": "semantic"
+      },
+      "text.typography.overline.sm": {
+        "resolvesTo": "semantic.typography.caption.01",
+        "fallback": "14px",
+        "layer": "semantic"
+      },
+      "text.typography.overline.md": {
+        "resolvesTo": "semantic.typography.body.04",
+        "fallback": "12px",
+        "layer": "semantic"
+      },
+      "text.typography.overline.lg": {
+        "resolvesTo": "semantic.typography.body.04",
+        "fallback": "12px",
+        "layer": "semantic"
+      },
+      "text.typography.overline.xl": {
+        "resolvesTo": "semantic.typography.body.03",
+        "fallback": "14px",
+        "layer": "semantic"
+      },
+      "text.typography.overline.2xl": {
+        "resolvesTo": "semantic.typography.body.02",
+        "fallback": "16px",
+        "layer": "semantic"
+      },
+      "text.typography.overline.3xl": {
+        "resolvesTo": "semantic.typography.body.01",
+        "fallback": "18px",
+        "layer": "semantic"
+      },
+      "text.typography.code.xs": {
+        "resolvesTo": "semantic.typography.body.04",
+        "fallback": "12px",
+        "layer": "semantic"
+      },
+      "text.typography.code.sm": {
+        "resolvesTo": "semantic.typography.body.04",
+        "fallback": "12px",
+        "layer": "semantic"
+      },
+      "text.typography.code.md": {
+        "resolvesTo": "semantic.typography.body.03",
+        "fallback": "14px",
+        "layer": "semantic"
+      },
+      "text.typography.code.lg": {
+        "resolvesTo": "semantic.typography.body.02",
+        "fallback": "16px",
+        "layer": "semantic"
+      },
+      "text.typography.code.xl": {
+        "resolvesTo": "semantic.typography.body.01",
+        "fallback": "18px",
+        "layer": "semantic"
+      },
+      "text.typography.code.2xl": {
+        "resolvesTo": "semantic.typography.heading.04",
+        "fallback": "18px",
+        "layer": "semantic"
+      },
+      "text.typography.code.3xl": {
+        "resolvesTo": "semantic.typography.heading.03",
+        "fallback": "20px",
+        "layer": "semantic"
+      },
+      "text.code.fontFamily": {
+        "resolvesTo": "core.typography.font.family.mono",
+        "fallback": "\"Menlo\", monospace",
+        "layer": "core"
+      },
+      "text.code.padding.y": {
+        "resolvesTo": "core.spacing.size.02",
+        "fallback": "2px",
+        "property": "padding",
+        "layer": "core"
+      },
+      "text.code.padding.x": {
+        "resolvesTo": "core.spacing.size.03",
+        "fallback": "4px",
+        "property": "padding",
+        "layer": "core"
+      },
+      "text.code.radius": {
+        "resolvesTo": "core.shape.radius.small",
+        "fallback": "4px",
+        "property": "border-radius",
+        "layer": "core"
+      }
+    },
+    "headline": {
+      "text.typography.headline.xs": {
+        "resolvesTo": "semantic.typography.heading.04",
+        "fallback": "18px",
+        "layer": "semantic"
+      },
+      "text.typography.headline.sm": {
+        "resolvesTo": "semantic.typography.heading.03",
+        "fallback": "20px",
+        "layer": "semantic"
+      },
+      "text.typography.headline.md": {
+        "resolvesTo": "semantic.typography.heading.02",
+        "fallback": "24px",
+        "layer": "semantic"
+      },
+      "text.typography.headline.lg": {
+        "resolvesTo": "semantic.typography.heading.01",
+        "fallback": "32px",
+        "layer": "semantic"
+      },
+      "text.typography.headline.xl": {
+        "resolvesTo": "semantic.typography.oversize.01",
+        "fallback": "192px",
+        "layer": "semantic"
+      },
+      "text.typography.headline.2xl": {
+        "resolvesTo": "semantic.typography.oversize.02",
+        "fallback": "160px",
+        "layer": "semantic"
+      },
+      "text.typography.headline.3xl": {
+        "resolvesTo": "semantic.typography.oversize.03",
+        "fallback": "128px",
+        "layer": "semantic"
+      }
+    },
     "title": {
       "text.typography.title.xs": {
         "resolvesTo": "semantic.typography.body.03",
@@ -186,46 +494,177 @@
         "layer": "semantic"
       }
     },
-    "body": [
-      "text.typography.body.xs",
-      "text.typography.body.sm",
-      "text.typography.body.md",
-      "text.typography.body.lg",
-      "text.typography.body.xl",
-      "text.typography.body.2xl",
-      "text.typography.body.3xl"
-    ],
-    "caption": [
-      "text.typography.caption.xs",
-      "text.typography.caption.sm",
-      "text.typography.caption.md",
-      "text.typography.caption.lg",
-      "text.typography.caption.xl",
-      "text.typography.caption.2xl",
-      "text.typography.caption.3xl"
-    ],
-    "overline": [
-      "text.typography.overline.xs",
-      "text.typography.overline.sm",
-      "text.typography.overline.md",
-      "text.typography.overline.lg",
-      "text.typography.overline.xl",
-      "text.typography.overline.2xl",
-      "text.typography.overline.3xl"
-    ],
-    "code": [
-      "text.typography.code.xs",
-      "text.typography.code.sm",
-      "text.typography.code.md",
-      "text.typography.code.lg",
-      "text.typography.code.xl",
-      "text.typography.code.2xl",
-      "text.typography.code.3xl",
-      "text.code.fontFamily",
-      "text.code.padding.y",
-      "text.code.padding.x",
-      "text.code.radius"
-    ]
+    "body": {
+      "text.typography.body.xs": {
+        "resolvesTo": "semantic.typography.body.04",
+        "fallback": "12px",
+        "layer": "semantic"
+      },
+      "text.typography.body.sm": {
+        "resolvesTo": "semantic.typography.body.04",
+        "fallback": "12px",
+        "layer": "semantic"
+      },
+      "text.typography.body.md": {
+        "resolvesTo": "semantic.typography.body.03",
+        "fallback": "14px",
+        "layer": "semantic"
+      },
+      "text.typography.body.lg": {
+        "resolvesTo": "semantic.typography.body.02",
+        "fallback": "16px",
+        "layer": "semantic"
+      },
+      "text.typography.body.xl": {
+        "resolvesTo": "semantic.typography.body.01",
+        "fallback": "18px",
+        "layer": "semantic"
+      },
+      "text.typography.body.2xl": {
+        "resolvesTo": "semantic.typography.heading.04",
+        "fallback": "18px",
+        "layer": "semantic"
+      },
+      "text.typography.body.3xl": {
+        "resolvesTo": "semantic.typography.heading.03",
+        "fallback": "20px",
+        "layer": "semantic"
+      }
+    },
+    "caption": {
+      "text.typography.caption.xs": {
+        "resolvesTo": "semantic.typography.caption.02",
+        "fallback": "12px",
+        "layer": "semantic"
+      },
+      "text.typography.caption.sm": {
+        "resolvesTo": "semantic.typography.caption.01",
+        "fallback": "14px",
+        "layer": "semantic"
+      },
+      "text.typography.caption.md": {
+        "resolvesTo": "semantic.typography.body.04",
+        "fallback": "12px",
+        "layer": "semantic"
+      },
+      "text.typography.caption.lg": {
+        "resolvesTo": "semantic.typography.body.04",
+        "fallback": "12px",
+        "layer": "semantic"
+      },
+      "text.typography.caption.xl": {
+        "resolvesTo": "semantic.typography.body.03",
+        "fallback": "14px",
+        "layer": "semantic"
+      },
+      "text.typography.caption.2xl": {
+        "resolvesTo": "semantic.typography.body.02",
+        "fallback": "16px",
+        "layer": "semantic"
+      },
+      "text.typography.caption.3xl": {
+        "resolvesTo": "semantic.typography.body.01",
+        "fallback": "18px",
+        "layer": "semantic"
+      }
+    },
+    "overline": {
+      "text.typography.overline.xs": {
+        "resolvesTo": "semantic.typography.caption.02",
+        "fallback": "12px",
+        "layer": "semantic"
+      },
+      "text.typography.overline.sm": {
+        "resolvesTo": "semantic.typography.caption.01",
+        "fallback": "14px",
+        "layer": "semantic"
+      },
+      "text.typography.overline.md": {
+        "resolvesTo": "semantic.typography.body.04",
+        "fallback": "12px",
+        "layer": "semantic"
+      },
+      "text.typography.overline.lg": {
+        "resolvesTo": "semantic.typography.body.04",
+        "fallback": "12px",
+        "layer": "semantic"
+      },
+      "text.typography.overline.xl": {
+        "resolvesTo": "semantic.typography.body.03",
+        "fallback": "14px",
+        "layer": "semantic"
+      },
+      "text.typography.overline.2xl": {
+        "resolvesTo": "semantic.typography.body.02",
+        "fallback": "16px",
+        "layer": "semantic"
+      },
+      "text.typography.overline.3xl": {
+        "resolvesTo": "semantic.typography.body.01",
+        "fallback": "18px",
+        "layer": "semantic"
+      }
+    },
+    "code": {
+      "text.typography.code.xs": {
+        "resolvesTo": "semantic.typography.body.04",
+        "fallback": "12px",
+        "layer": "semantic"
+      },
+      "text.typography.code.sm": {
+        "resolvesTo": "semantic.typography.body.04",
+        "fallback": "12px",
+        "layer": "semantic"
+      },
+      "text.typography.code.md": {
+        "resolvesTo": "semantic.typography.body.03",
+        "fallback": "14px",
+        "layer": "semantic"
+      },
+      "text.typography.code.lg": {
+        "resolvesTo": "semantic.typography.body.02",
+        "fallback": "16px",
+        "layer": "semantic"
+      },
+      "text.typography.code.xl": {
+        "resolvesTo": "semantic.typography.body.01",
+        "fallback": "18px",
+        "layer": "semantic"
+      },
+      "text.typography.code.2xl": {
+        "resolvesTo": "semantic.typography.heading.04",
+        "fallback": "18px",
+        "layer": "semantic"
+      },
+      "text.typography.code.3xl": {
+        "resolvesTo": "semantic.typography.heading.03",
+        "fallback": "20px",
+        "layer": "semantic"
+      },
+      "text.code.fontFamily": {
+        "resolvesTo": "core.typography.font.family.mono",
+        "fallback": "\"Menlo\", monospace",
+        "layer": "core"
+      },
+      "text.code.padding.y": {
+        "resolvesTo": "core.spacing.size.02",
+        "fallback": "2px",
+        "property": "padding",
+        "layer": "core"
+      },
+      "text.code.padding.x": {
+        "resolvesTo": "core.spacing.size.03",
+        "fallback": "4px",
+        "property": "padding",
+        "layer": "core"
+      },
+      "text.code.radius": {
+        "resolvesTo": "core.shape.radius.small",
+        "fallback": "4px",
+        "property": "border-radius",
+        "layer": "core"
+      }
+    }
   },
   "props": {
     "styled": {

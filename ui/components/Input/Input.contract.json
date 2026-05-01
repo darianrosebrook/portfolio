@@ -20,16 +20,52 @@
     "apgPattern": null
   },
   "tokens": {
-    "root": [
-      "input.color.bg.default",
-      "input.color.text.default",
-      "input.color.border.default",
-      "input.color.focus.default",
-      "input.color.invalid.default",
-      "input.size.height.default",
-      "input.size.radius.default",
-      "input.space.inline.default"
-    ]
+    "root": {
+      "input.color.bg.default": {
+        "resolvesTo": "semantic.color.background.primary",
+        "fallback": "#ffffff",
+        "layer": "semantic"
+      },
+      "input.color.text.default": {
+        "resolvesTo": "semantic.color.foreground.primary",
+        "fallback": "#141414",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "input.color.border.default": {
+        "resolvesTo": "semantic.color.border.default",
+        "fallback": "#aeaeae",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "input.color.focus.default": {
+        "resolvesTo": "semantic.color.border.focus",
+        "fallback": "#d9292b",
+        "layer": "semantic"
+      },
+      "input.color.invalid.default": {
+        "resolvesTo": "semantic.color.border.danger",
+        "fallback": "#ae0001",
+        "layer": "semantic"
+      },
+      "input.size.height.default": {
+        "resolvesTo": "semantic.control.size.lg.height",
+        "fallback": "48px",
+        "property": "min-height",
+        "layer": "semantic"
+      },
+      "input.size.radius.default": {
+        "resolvesTo": "core.shape.radius.medium",
+        "fallback": "8px",
+        "property": "border-radius",
+        "layer": "core"
+      },
+      "input.space.inline.default": {
+        "resolvesTo": "core.spacing.size.05",
+        "fallback": "12px",
+        "layer": "core"
+      }
+    }
   },
   "props": {
     "styled": {

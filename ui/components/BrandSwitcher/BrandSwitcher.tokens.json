@@ -43,16 +43,16 @@
     },
     "typography": {
       "fontSize": {
-        "xs": "{semantic.typography.fontSize.body.xs}",
-        "sm": "{semantic.typography.fontSize.body.sm}",
-        "default": "{semantic.typography.fontSize.body.default}"
+        "xs": "{semantic.typography.meta.caption.fontSize}",
+        "sm": "{semantic.typography.body.small.fontSize}",
+        "default": "{semantic.typography.body.default.fontSize}"
       },
       "fontWeight": {
-        "default": "{semantic.typography.fontWeight.body.default}",
-        "strong": "{semantic.typography.fontWeight.body.strong}"
+        "default": "{semantic.typography.fontWeight.regular}",
+        "strong": "{semantic.typography.fontWeight.bold}"
       },
       "lineHeight": {
-        "default": "{semantic.typography.lineHeight.body.default}"
+        "default": "{semantic.typography.body.default.lineHeight}"
       }
     }
   }

@@ -79,8 +79,8 @@
         "padding": "{core.spacing.size.08}"
       },
       "radius": {
-        "default": "{semantic.shape.radius.large}",
-        "small": "{semantic.shape.radius.small}"
+        "default": "{core.shape.radius.large}",
+        "small": "{core.shape.radius.small}"
       },
       "closeButton": {
         "size": "{core.spacing.size.08}",

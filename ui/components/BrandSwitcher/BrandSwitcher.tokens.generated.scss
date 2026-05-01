@@ -31,10 +31,10 @@
   --brandSwitcher-size-radius-03: var(--core-shape-radius-03);
 
   /* === Typography Tokens === */
-  --brandSwitcher-typography-font-size-xs: var(--semantic-typography-font-size-body-xs);
-  --brandSwitcher-typography-font-size-sm: var(--semantic-typography-font-size-body-sm);
-  --brandSwitcher-typography-font-size-default: var(--semantic-typography-font-size-body-default);
-  --brandSwitcher-typography-font-weight-default: var(--semantic-typography-font-weight-body-default);
-  --brandSwitcher-typography-font-weight-strong: var(--semantic-typography-font-weight-body-strong);
-  --brandSwitcher-typography-line-height-default: var(--semantic-typography-line-height-body-default);
+  --brandSwitcher-typography-font-size-xs: var(--semantic-typography-meta-caption-font-size);
+  --brandSwitcher-typography-font-size-sm: var(--semantic-typography-body-small-font-size);
+  --brandSwitcher-typography-font-size-default: var(--semantic-typography-body-default-font-size);
+  --brandSwitcher-typography-font-weight-default: var(--semantic-typography-font-weight-regular);
+  --brandSwitcher-typography-font-weight-strong: var(--semantic-typography-font-weight-bold);
+  --brandSwitcher-typography-line-height-default: var(--semantic-typography-body-default-line-height);
 }

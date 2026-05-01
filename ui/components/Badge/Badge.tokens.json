@@ -35,21 +35,21 @@
         "paddingY": "{core.spacing.size.02}",
         "paddingX": "{core.spacing.size.03}",
         "fontSize": "{semantic.typography.caption.01}",
-        "radius": "{semantic.shape.radius.small}",
+        "radius": "{core.shape.radius.small}",
         "iconSize": "{core.icon.size.sm}"
       },
       "md": {
         "paddingY": "{core.spacing.size.03}",
         "paddingX": "{core.spacing.size.04}",
         "fontSize": "{semantic.typography.body.small.fontSize}",
-        "radius": "{semantic.shape.radius.default}",
+        "radius": "{core.shape.radius.default}",
         "iconSize": "{core.icon.size.md}"
       },
       "lg": {
         "paddingY": "{core.spacing.size.04}",
         "paddingX": "{core.spacing.size.05}",
         "fontSize": "{semantic.typography.body.default.fontSize}",
-        "radius": "{semantic.shape.radius.medium}",
+        "radius": "{core.shape.radius.medium}",
         "iconSize": "{core.icon.size.lg}"
       }
     },

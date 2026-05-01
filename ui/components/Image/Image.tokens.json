@@ -15,9 +15,9 @@
     "size": {
       "xs": "{core.spacing.size.08}",
       "sm": "{core.spacing.size.10}",
-      "md": "{core.spacing.size.12}",
-      "lg": "{core.spacing.size.14}",
-      "xl": "{core.spacing.size.16}",
+      "md": "{core.spacing.size.09}",
+      "lg": "{core.spacing.size.09}",
+      "xl": "{core.spacing.size.10}",
       "icon": "{core.spacing.size.08}"
     },
     "radius": {

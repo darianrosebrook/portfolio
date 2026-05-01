@@ -16,7 +16,7 @@
   /* === Size Tokens === */
   --postcard-size-padding-default: var(--core-spacing-size-06);
   --postcard-size-radius-default: var(--semantic-shape-control-radius-default);
-  --postcard-size-radius-medium: var(--semantic-shape-radius-medium);
+  --postcard-size-radius-medium: var(--core-shape-radius-medium);
   --postcard-size-radius-full: var(--core-shape-radius-full);
   --postcard-size-margin-bottom: var(--core-spacing-size-06);
   --postcard-size-gap-default: var(--core-spacing-size-05);
@@ -26,7 +26,7 @@
 
   /* === Typography Tokens === */
   --postcard-typography-display-name-font-size: var(--semantic-typography-body-02);
-  --postcard-typography-display-name-font-weight: var(--semantic-typography-font-weight-semibold);
+  --postcard-typography-display-name-font-weight: var(--semantic-typography-font-weight-medium);
   --postcard-typography-handle-font-size: var(--semantic-typography-body-03);
   --postcard-typography-content-font-size: var(--semantic-typography-body-02);
   --postcard-typography-content-line-height: var(--semantic-typography-line-height-body);

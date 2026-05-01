@@ -18,7 +18,7 @@
         "x": "{core.spacing.size.04}"
       },
       "radius": {
-        "default": "{semantic.shape.radius.small}"
+        "default": "{core.shape.radius.small}"
       },
       "maxWidth": {
         "value": 200,
