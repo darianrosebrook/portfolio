@@ -100,9 +100,13 @@
       "alert.spacing.gap.small",
       "alert.radius.medium"
     ],
-    "icon": [
-      "alert.icon.size"
-    ]
+    "icon": {
+      "alert.icon.size": {
+        "resolvesTo": "core.spacing.size.06",
+        "fallback": "16px",
+        "layer": "core"
+      }
+    }
   },
   "props": {
     "styled": {

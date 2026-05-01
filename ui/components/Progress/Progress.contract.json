@@ -72,19 +72,48 @@
       "progress.motion.easing.indeterminate",
       "progress.spacing.gap"
     ],
-    "track": [
-      "progress.color.track.background"
-    ],
-    "fill": [
-      "progress.color.fill.info",
-      "progress.color.fill.success",
-      "progress.color.fill.warning",
-      "progress.color.fill.danger"
-    ],
-    "value": [
-      "progress.typography.value.fontSize",
-      "progress.typography.value.fontWeight"
-    ]
+    "track": {
+      "progress.color.track.background": {
+        "resolvesTo": "semantic.color.background.secondary",
+        "fallback": "#efefef",
+        "property": "background-color",
+        "layer": "semantic"
+      }
+    },
+    "fill": {
+      "progress.color.fill.info": {
+        "resolvesTo": "semantic.color.status.info",
+        "fallback": "#0a65fe",
+        "layer": "semantic"
+      },
+      "progress.color.fill.success": {
+        "resolvesTo": "semantic.color.status.success",
+        "fallback": "#487e1e",
+        "layer": "semantic"
+      },
+      "progress.color.fill.warning": {
+        "resolvesTo": "semantic.color.status.warning",
+        "fallback": "#ac5c00",
+        "layer": "semantic"
+      },
+      "progress.color.fill.danger": {
+        "resolvesTo": "semantic.color.status.danger",
+        "fallback": "#d9292b",
+        "layer": "semantic"
+      }
+    },
+    "value": {
+      "progress.typography.value.fontSize": {
+        "resolvesTo": "semantic.typography.caption.01",
+        "fallback": "14px",
+        "layer": "semantic"
+      },
+      "progress.typography.value.fontWeight": {
+        "resolvesTo": "semantic.typography.font.weight.medium",
+        "fallback": "500",
+        "layer": "semantic"
+      }
+    }
   },
   "props": {
     "styled": {

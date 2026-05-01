@@ -18,11 +18,26 @@
     "apgPattern": null
   },
   "tokens": {
-    "root": [
-      "slinkycursor.color.border.primary",
-      "slinkycursor.color.border.hover",
-      "slinkycursor.shape.radius.full"
-    ]
+    "root": {
+      "slinkycursor.color.border.primary": {
+        "resolvesTo": "semantic.color.border.primary",
+        "fallback": "#f29495",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "slinkycursor.color.border.hover": {
+        "resolvesTo": "semantic.color.border.hover",
+        "fallback": "#f29495",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "slinkycursor.shape.radius.full": {
+        "resolvesTo": "core.shape.radius.full",
+        "fallback": "9999px",
+        "property": "border-radius",
+        "layer": "core"
+      }
+    }
   },
   "ssr": {
     "hydrateOn": "interaction"

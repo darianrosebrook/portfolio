@@ -149,15 +149,43 @@
       "text.typography.headline.2xl",
       "text.typography.headline.3xl"
     ],
-    "title": [
-      "text.typography.title.xs",
-      "text.typography.title.sm",
-      "text.typography.title.md",
-      "text.typography.title.lg",
-      "text.typography.title.xl",
-      "text.typography.title.2xl",
-      "text.typography.title.3xl"
-    ],
+    "title": {
+      "text.typography.title.xs": {
+        "resolvesTo": "semantic.typography.body.03",
+        "fallback": "14px",
+        "layer": "semantic"
+      },
+      "text.typography.title.sm": {
+        "resolvesTo": "semantic.typography.body.02",
+        "fallback": "16px",
+        "layer": "semantic"
+      },
+      "text.typography.title.md": {
+        "resolvesTo": "semantic.typography.body.01",
+        "fallback": "18px",
+        "layer": "semantic"
+      },
+      "text.typography.title.lg": {
+        "resolvesTo": "semantic.typography.heading.04",
+        "fallback": "18px",
+        "layer": "semantic"
+      },
+      "text.typography.title.xl": {
+        "resolvesTo": "semantic.typography.heading.03",
+        "fallback": "20px",
+        "layer": "semantic"
+      },
+      "text.typography.title.2xl": {
+        "resolvesTo": "semantic.typography.heading.02",
+        "fallback": "24px",
+        "layer": "semantic"
+      },
+      "text.typography.title.3xl": {
+        "resolvesTo": "semantic.typography.heading.01",
+        "fallback": "32px",
+        "layer": "semantic"
+      }
+    },
     "body": [
       "text.typography.body.xs",
       "text.typography.body.sm",

@@ -39,17 +39,60 @@
     "apgPattern": null
   },
   "tokens": {
-    "root": [
-      "otp.color.background.default",
-      "otp.color.foreground.primary",
-      "otp.color.foreground.secondary",
-      "otp.color.border.default",
-      "otp.color.border.accent",
-      "otp.size.padding.default",
-      "otp.size.radius.default",
-      "otp.elevation.default",
-      "otp.overlay.imageOverlay"
-    ]
+    "root": {
+      "otp.color.background.default": {
+        "resolvesTo": "semantic.color.background.secondary",
+        "fallback": "#efefef",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "otp.color.foreground.primary": {
+        "resolvesTo": "semantic.color.foreground.primary",
+        "fallback": "#141414",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "otp.color.foreground.secondary": {
+        "resolvesTo": "semantic.color.foreground.secondary",
+        "fallback": "#555555",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "otp.color.border.default": {
+        "resolvesTo": "semantic.color.border.light",
+        "fallback": "#fceaea",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "otp.color.border.accent": {
+        "resolvesTo": "semantic.color.border.accent",
+        "fallback": "#d9292b",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "otp.size.padding.default": {
+        "resolvesTo": "core.spacing.size.07",
+        "fallback": "24px",
+        "property": "padding",
+        "layer": "core"
+      },
+      "otp.size.radius.default": {
+        "resolvesTo": "core.shape.radius.medium",
+        "fallback": "8px",
+        "property": "border-radius",
+        "layer": "core"
+      },
+      "otp.elevation.default": {
+        "resolvesTo": "semantic.elevation.default",
+        "fallback": "[object Object]",
+        "layer": "semantic"
+      },
+      "otp.overlay.imageOverlay": {
+        "resolvesTo": "semantic.color.background.image.overlay",
+        "fallback": "rgba(0, 0, 0, 0.5)",
+        "layer": "semantic"
+      }
+    }
   },
   "props": {
     "styled": {

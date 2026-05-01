@@ -150,10 +150,18 @@
       "dialog.spacing.body.paddingYMobile",
       "dialog.spacing.body.paddingXMobile"
     ],
-    "closeButton": [
-      "dialog.size.closeButton.size",
-      "dialog.size.closeButton.offset"
-    ],
+    "closeButton": {
+      "dialog.size.closeButton.size": {
+        "resolvesTo": "core.spacing.size.08",
+        "fallback": "32px",
+        "layer": "core"
+      },
+      "dialog.size.closeButton.offset": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "layer": "core"
+      }
+    },
     "footer": [
       "dialog.spacing.footer.paddingTop",
       "dialog.spacing.footer.paddingRight",
@@ -165,22 +173,70 @@
       "dialog.spacing.footer.paddingXMobile",
       "dialog.spacing.footer.paddingBottomMobile"
     ],
-    "header": [
-      "dialog.spacing.header.paddingTop",
-      "dialog.spacing.header.paddingRight",
-      "dialog.spacing.header.paddingBottom",
-      "dialog.spacing.header.paddingLeft",
-      "dialog.spacing.header.paddingMobile"
-    ],
-    "title": [
-      "dialog.typography.title.fontSize",
-      "dialog.typography.title.fontWeight",
-      "dialog.typography.title.lineHeight"
-    ],
-    "backdrop": [
-      "dialog.spacing.backdrop.padding",
-      "dialog.spacing.backdrop.paddingMobile"
-    ]
+    "header": {
+      "dialog.spacing.header.paddingTop": {
+        "resolvesTo": "core.spacing.size.06",
+        "fallback": "16px",
+        "property": "padding",
+        "layer": "core"
+      },
+      "dialog.spacing.header.paddingRight": {
+        "resolvesTo": "core.spacing.size.07",
+        "fallback": "24px",
+        "property": "padding",
+        "layer": "core"
+      },
+      "dialog.spacing.header.paddingBottom": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "property": "padding",
+        "layer": "core"
+      },
+      "dialog.spacing.header.paddingLeft": {
+        "resolvesTo": "core.spacing.size.07",
+        "fallback": "24px",
+        "property": "padding",
+        "layer": "core"
+      },
+      "dialog.spacing.header.paddingMobile": {
+        "resolvesTo": "core.spacing.size.05",
+        "fallback": "12px",
+        "property": "padding",
+        "layer": "core"
+      }
+    },
+    "title": {
+      "dialog.typography.title.fontSize": {
+        "resolvesTo": "semantic.typography.heading.04",
+        "fallback": "18px",
+        "layer": "semantic"
+      },
+      "dialog.typography.title.fontWeight": {
+        "resolvesTo": "semantic.typography.font.weight.bold",
+        "fallback": "700",
+        "layer": "semantic"
+      },
+      "dialog.typography.title.lineHeight": {
+        "resolvesTo": "semantic.typography.line.height.heading",
+        "fallback": "1",
+        "property": "line-height",
+        "layer": "semantic"
+      }
+    },
+    "backdrop": {
+      "dialog.spacing.backdrop.padding": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "property": "padding",
+        "layer": "core"
+      },
+      "dialog.spacing.backdrop.paddingMobile": {
+        "resolvesTo": "core.spacing.size.02",
+        "fallback": "2px",
+        "property": "padding",
+        "layer": "core"
+      }
+    }
   },
   "props": {
     "styled": {

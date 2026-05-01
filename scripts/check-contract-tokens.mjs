@@ -41,7 +41,10 @@ const YELLOW = '\x1b[33m';
 const BOLD   = '\x1b[1m';
 
 function dotPathToCssVar(dotPath) {
-  return '--' + dotPath.replace(/\./g, '-');
+  return '--' + dotPath
+    .replace(/\./g, '-')
+    .replace(/([a-z])([A-Z])/g, '$1-$2')
+    .toLowerCase();
 }
 
 function contractFiles() {

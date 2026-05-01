@@ -69,16 +69,33 @@
       "postcard.typography.displayName.fontSize",
       "postcard.typography.displayName.fontWeight"
     ],
-    "handle": [
-      "postcard.typography.handle.fontSize"
-    ],
-    "content": [
-      "postcard.typography.content.fontSize",
-      "postcard.typography.content.lineHeight"
-    ],
-    "footer": [
-      "postcard.typography.footer.fontSize"
-    ]
+    "handle": {
+      "postcard.typography.handle.fontSize": {
+        "resolvesTo": "semantic.typography.body.03",
+        "fallback": "14px",
+        "layer": "semantic"
+      }
+    },
+    "content": {
+      "postcard.typography.content.fontSize": {
+        "resolvesTo": "semantic.typography.body.02",
+        "fallback": "16px",
+        "layer": "semantic"
+      },
+      "postcard.typography.content.lineHeight": {
+        "resolvesTo": "semantic.typography.line.height.body",
+        "fallback": "1.5",
+        "property": "line-height",
+        "layer": "semantic"
+      }
+    },
+    "footer": {
+      "postcard.typography.footer.fontSize": {
+        "resolvesTo": "semantic.typography.body.03",
+        "fallback": "14px",
+        "layer": "semantic"
+      }
+    }
   },
   "props": {
     "styled": {

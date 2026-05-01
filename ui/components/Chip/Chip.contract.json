@@ -115,21 +115,68 @@
       "chip.focus.outlineOffset",
       "chip.focus.outlineColor"
     ],
-    "icon": [
-      "chip.color.icon.default",
-      "chip.color.icon.hover",
-      "chip.color.icon.active",
-      "chip.color.icon.selected",
-      "chip.color.icon.dismissible",
-      "chip.color.icon.dismissibleHover",
-      "chip.size.icon.size",
-      "chip.size.icon.margin"
-    ],
-    "text": [
-      "chip.text.size",
-      "chip.text.weight",
-      "chip.text.lineHeight"
-    ]
+    "icon": {
+      "chip.color.icon.default": {
+        "resolvesTo": "semantic.color.action.foreground.secondary.default",
+        "fallback": "#141414",
+        "layer": "semantic"
+      },
+      "chip.color.icon.hover": {
+        "resolvesTo": "semantic.color.action.foreground.secondary.default",
+        "fallback": "#141414",
+        "layer": "semantic"
+      },
+      "chip.color.icon.active": {
+        "resolvesTo": "semantic.color.action.foreground.secondary.default",
+        "fallback": "#141414",
+        "layer": "semantic"
+      },
+      "chip.color.icon.selected": {
+        "resolvesTo": "semantic.color.action.foreground.primary.default",
+        "fallback": "#ffffff",
+        "layer": "semantic"
+      },
+      "chip.color.icon.dismissible": {
+        "resolvesTo": "semantic.color.action.foreground.secondary.default",
+        "fallback": "#141414",
+        "layer": "semantic"
+      },
+      "chip.color.icon.dismissibleHover": {
+        "resolvesTo": "semantic.color.action.foreground.secondary.default",
+        "fallback": "#141414",
+        "layer": "semantic"
+      },
+      "chip.size.icon.size": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "layer": "core"
+      },
+      "chip.size.icon.margin": {
+        "resolvesTo": "core.spacing.size.01",
+        "fallback": "1px",
+        "layer": "core"
+      }
+    },
+    "text": {
+      "chip.text.size": {
+        "resolvesTo": "semantic.typography.body.04",
+        "fallback": "12px",
+        "property": "font-size",
+        "layer": "semantic"
+      },
+      "chip.text.weight": {
+        "resolvesTo": "semantic.typography.font.weight.medium",
+        "fallback": "500",
+        "property": "font-weight",
+        "layer": "semantic"
+      },
+      "chip.text.lineHeight": {
+        "resolvesTo": "semantic.typography.line.height.tight",
+        "fallback": "1.2",
+        "property": "line-height",
+        "layer": "semantic"
+      }
+    }
   },
   "props": {
     "styled": {

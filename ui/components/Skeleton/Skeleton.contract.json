@@ -32,23 +32,93 @@
     "apgPattern": null
   },
   "tokens": {
-    "root": [
-      "skeleton.color.base",
-      "skeleton.color.highlight",
-      "skeleton.color.highlight-2",
-      "skeleton.color.static",
-      "skeleton.color.contrast-base",
-      "skeleton.radius.sm",
-      "skeleton.radius.md",
-      "skeleton.radius.lg",
-      "skeleton.gap.sm",
-      "skeleton.gap.md",
-      "skeleton.gap.lg",
-      "skeleton.anim.duration",
-      "skeleton.anim.duration-alt",
-      "skeleton.anim.duration-pulse",
-      "skeleton.anim.easing"
-    ]
+    "root": {
+      "skeleton.color.base": {
+        "resolvesTo": "semantic.color.background.secondary",
+        "fallback": "#efefef",
+        "layer": "semantic"
+      },
+      "skeleton.color.highlight": {
+        "resolvesTo": "semantic.color.background.highlight",
+        "fallback": "#f7c1c2",
+        "layer": "semantic"
+      },
+      "skeleton.color.highlight-2": {
+        "resolvesTo": "semantic.color.status.info",
+        "fallback": "#0a65fe",
+        "layer": "semantic"
+      },
+      "skeleton.color.static": {
+        "resolvesTo": "semantic.color.background.secondary",
+        "fallback": "#efefef",
+        "layer": "semantic"
+      },
+      "skeleton.color.contrast-base": {
+        "resolvesTo": "semantic.color.border.primary",
+        "fallback": "#f29495",
+        "layer": "semantic"
+      },
+      "skeleton.radius.sm": {
+        "resolvesTo": "core.shape.radius.02",
+        "fallback": "4px",
+        "property": "border-radius",
+        "layer": "core"
+      },
+      "skeleton.radius.md": {
+        "resolvesTo": "core.shape.radius.03",
+        "fallback": "8px",
+        "property": "border-radius",
+        "layer": "core"
+      },
+      "skeleton.radius.lg": {
+        "resolvesTo": "core.shape.radius.04",
+        "fallback": "16px",
+        "property": "border-radius",
+        "layer": "core"
+      },
+      "skeleton.gap.sm": {
+        "resolvesTo": "core.spacing.size.03",
+        "fallback": "4px",
+        "property": "gap",
+        "layer": "core"
+      },
+      "skeleton.gap.md": {
+        "resolvesTo": "core.spacing.size.05",
+        "fallback": "12px",
+        "property": "gap",
+        "layer": "core"
+      },
+      "skeleton.gap.lg": {
+        "resolvesTo": "core.spacing.size.07",
+        "fallback": "24px",
+        "property": "gap",
+        "layer": "core"
+      },
+      "skeleton.anim.duration": {
+        "resolvesTo": "core.motion.duration.long",
+        "fallback": "400ms",
+        "property": "transition-duration",
+        "layer": "core"
+      },
+      "skeleton.anim.duration-alt": {
+        "resolvesTo": "core.motion.duration.long",
+        "fallback": "400ms",
+        "property": "transition-duration",
+        "layer": "core"
+      },
+      "skeleton.anim.duration-pulse": {
+        "resolvesTo": "core.motion.duration.medium",
+        "fallback": "250ms",
+        "property": "transition-duration",
+        "layer": "core"
+      },
+      "skeleton.anim.easing": {
+        "resolvesTo": "core.motion.easing.standard",
+        "fallback": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "property": "transition-timing-function",
+        "layer": "core"
+      }
+    }
   },
   "props": {
     "styled": {

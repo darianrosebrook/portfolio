@@ -45,29 +45,122 @@
     "apgPattern": null
   },
   "tokens": {
-    "root": [
-      "list.color.foreground.primary",
-      "list.color.foreground.secondary",
-      "list.color.border.default",
-      "list.typography.sm.fontSize",
-      "list.typography.sm.lineHeight",
-      "list.typography.md.fontSize",
-      "list.typography.md.lineHeight",
-      "list.typography.lg.fontSize",
-      "list.typography.lg.lineHeight",
-      "list.size.padding.default",
-      "list.size.border.default",
-      "list.spacing.inline",
-      "list.spacing.divided",
-      "list.spacing.spaced",
-      "list.spacing.sm",
-      "list.spacing.md",
-      "list.spacing.lg",
-      "list.spacing.dl.dt",
-      "list.spacing.dl.dd",
-      "list.spacing.dl.gap",
-      "list.spacing.dl.gapX"
-    ]
+    "root": {
+      "list.color.foreground.primary": {
+        "resolvesTo": "semantic.color.foreground.primary",
+        "fallback": "#141414",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "list.color.foreground.secondary": {
+        "resolvesTo": "semantic.color.foreground.secondary",
+        "fallback": "#555555",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "list.color.border.default": {
+        "resolvesTo": "semantic.color.border.subtle",
+        "fallback": "#cecece",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "list.typography.sm.fontSize": {
+        "resolvesTo": "semantic.typography.body.04",
+        "fallback": "12px",
+        "layer": "semantic"
+      },
+      "list.typography.sm.lineHeight": {
+        "resolvesTo": "semantic.typography.line.height.body",
+        "fallback": "1.5",
+        "property": "line-height",
+        "layer": "semantic"
+      },
+      "list.typography.md.fontSize": {
+        "resolvesTo": "semantic.typography.body.03",
+        "fallback": "14px",
+        "layer": "semantic"
+      },
+      "list.typography.md.lineHeight": {
+        "resolvesTo": "semantic.typography.line.height.body",
+        "fallback": "1.5",
+        "property": "line-height",
+        "layer": "semantic"
+      },
+      "list.typography.lg.fontSize": {
+        "resolvesTo": "semantic.typography.body.02",
+        "fallback": "16px",
+        "layer": "semantic"
+      },
+      "list.typography.lg.lineHeight": {
+        "resolvesTo": "semantic.typography.line.height.body",
+        "fallback": "1.5",
+        "property": "line-height",
+        "layer": "semantic"
+      },
+      "list.size.padding.default": {
+        "resolvesTo": "core.spacing.size.06",
+        "fallback": "16px",
+        "property": "padding",
+        "layer": "core"
+      },
+      "list.size.border.default": {
+        "resolvesTo": "core.shape.border.width.hairline",
+        "fallback": "1px",
+        "layer": "core"
+      },
+      "list.spacing.inline": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "layer": "core"
+      },
+      "list.spacing.divided": {
+        "resolvesTo": "core.spacing.size.05",
+        "fallback": "12px",
+        "layer": "core"
+      },
+      "list.spacing.spaced": {
+        "resolvesTo": "core.spacing.size.06",
+        "fallback": "16px",
+        "layer": "core"
+      },
+      "list.spacing.sm": {
+        "resolvesTo": "core.spacing.size.03",
+        "fallback": "4px",
+        "layer": "core"
+      },
+      "list.spacing.md": {
+        "resolvesTo": "core.spacing.size.05",
+        "fallback": "12px",
+        "layer": "core"
+      },
+      "list.spacing.lg": {
+        "resolvesTo": "core.spacing.size.06",
+        "fallback": "16px",
+        "layer": "core"
+      },
+      "list.spacing.dl.dt": {
+        "resolvesTo": "core.spacing.size.03",
+        "fallback": "4px",
+        "layer": "core"
+      },
+      "list.spacing.dl.dd": {
+        "resolvesTo": "core.spacing.size.05",
+        "fallback": "12px",
+        "layer": "core"
+      },
+      "list.spacing.dl.gap": {
+        "resolvesTo": "core.spacing.size.03",
+        "fallback": "4px",
+        "property": "gap",
+        "layer": "core"
+      },
+      "list.spacing.dl.gapX": {
+        "resolvesTo": "core.spacing.size.05",
+        "fallback": "12px",
+        "property": "gap",
+        "layer": "core"
+      }
+    }
   },
   "props": {
     "styled": {

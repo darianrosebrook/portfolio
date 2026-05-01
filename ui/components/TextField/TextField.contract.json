@@ -22,49 +22,221 @@
     "apgPattern": "alert"
   },
   "tokens": {
-    "root": [
-      "textfield.spacing.gap",
-      "textfield.spacing.padding.input",
-      "textfield.spacing.padding.label",
-      "textfield.color.label.default",
-      "textfield.color.label.required",
-      "textfield.color.label.disabled",
-      "textfield.color.input.background",
-      "textfield.color.input.border",
-      "textfield.color.input.borderHover",
-      "textfield.color.input.borderFocus",
-      "textfield.color.input.borderError",
-      "textfield.color.input.text",
-      "textfield.color.input.placeholder",
-      "textfield.color.input.disabled",
-      "textfield.color.helper.default",
-      "textfield.color.helper.error",
-      "textfield.color.error",
-      "textfield.typography.label.fontSize",
-      "textfield.typography.label.fontWeight",
-      "textfield.typography.label.lineHeight",
-      "textfield.typography.input.fontSize",
-      "textfield.typography.input.fontWeight",
-      "textfield.typography.input.lineHeight",
-      "textfield.typography.helper.fontSize",
-      "textfield.typography.helper.fontWeight",
-      "textfield.typography.helper.lineHeight",
-      "textfield.border.width",
-      "textfield.border.radius",
-      "textfield.focus.ring.width",
-      "textfield.focus.ring.color",
-      "textfield.focus.ring.offset",
-      "textfield.transition.duration",
-      "textfield.transition.easing"
-    ],
-    "label": [
-      "textfield.color.label.default",
-      "textfield.color.label.required",
-      "textfield.color.label.disabled",
-      "textfield.typography.label.fontSize",
-      "textfield.typography.label.fontWeight",
-      "textfield.typography.label.lineHeight"
-    ]
+    "root": {
+      "textfield.spacing.gap": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "property": "gap",
+        "layer": "core"
+      },
+      "textfield.spacing.padding.input": {
+        "resolvesTo": "core.spacing.size.05",
+        "fallback": "12px",
+        "property": "padding",
+        "layer": "core"
+      },
+      "textfield.spacing.padding.label": {
+        "resolvesTo": "core.spacing.size.02",
+        "fallback": "2px",
+        "property": "padding",
+        "layer": "core"
+      },
+      "textfield.color.label.default": {
+        "resolvesTo": "semantic.color.foreground.primary",
+        "fallback": "#141414",
+        "layer": "semantic"
+      },
+      "textfield.color.label.required": {
+        "resolvesTo": "semantic.color.status.danger",
+        "fallback": "#d9292b",
+        "layer": "semantic"
+      },
+      "textfield.color.label.disabled": {
+        "resolvesTo": "semantic.color.foreground.disabled",
+        "fallback": "#aeaeae",
+        "layer": "semantic"
+      },
+      "textfield.color.input.background": {
+        "resolvesTo": "semantic.color.background.primary",
+        "fallback": "#ffffff",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "textfield.color.input.border": {
+        "resolvesTo": "semantic.color.border.light",
+        "fallback": "#fceaea",
+        "layer": "semantic"
+      },
+      "textfield.color.input.borderHover": {
+        "resolvesTo": "semantic.color.border.primary",
+        "fallback": "#f29495",
+        "layer": "semantic"
+      },
+      "textfield.color.input.borderFocus": {
+        "resolvesTo": "semantic.color.border.accent",
+        "fallback": "#d9292b",
+        "layer": "semantic"
+      },
+      "textfield.color.input.borderError": {
+        "resolvesTo": "semantic.color.status.danger",
+        "fallback": "#d9292b",
+        "layer": "semantic"
+      },
+      "textfield.color.input.text": {
+        "resolvesTo": "semantic.color.foreground.primary",
+        "fallback": "#141414",
+        "layer": "semantic"
+      },
+      "textfield.color.input.placeholder": {
+        "resolvesTo": "semantic.color.foreground.tertiary",
+        "fallback": "#717171",
+        "layer": "semantic"
+      },
+      "textfield.color.input.disabled": {
+        "resolvesTo": "semantic.color.background.disabled",
+        "fallback": "#cecece",
+        "layer": "semantic"
+      },
+      "textfield.color.helper.default": {
+        "resolvesTo": "semantic.color.foreground.tertiary",
+        "fallback": "#717171",
+        "layer": "semantic"
+      },
+      "textfield.color.helper.error": {
+        "resolvesTo": "semantic.color.status.danger",
+        "fallback": "#d9292b",
+        "layer": "semantic"
+      },
+      "textfield.color.error": {
+        "resolvesTo": "semantic.color.foreground.danger",
+        "fallback": "#d9292b",
+        "layer": "semantic"
+      },
+      "textfield.typography.label.fontSize": {
+        "resolvesTo": "semantic.typography.body.04",
+        "fallback": "12px",
+        "property": "font-size",
+        "layer": "semantic"
+      },
+      "textfield.typography.label.fontWeight": {
+        "resolvesTo": "semantic.typography.font.weight.medium",
+        "fallback": "500",
+        "layer": "semantic"
+      },
+      "textfield.typography.label.lineHeight": {
+        "resolvesTo": "semantic.typography.line.height.tight",
+        "fallback": "1.2",
+        "property": "line-height",
+        "layer": "semantic"
+      },
+      "textfield.typography.input.fontSize": {
+        "resolvesTo": "semantic.typography.body.01",
+        "fallback": "18px",
+        "property": "font-size",
+        "layer": "semantic"
+      },
+      "textfield.typography.input.fontWeight": {
+        "resolvesTo": "semantic.typography.font.weight.regular",
+        "fallback": "400",
+        "layer": "semantic"
+      },
+      "textfield.typography.input.lineHeight": {
+        "resolvesTo": "semantic.typography.line.height.normal",
+        "fallback": "1.5",
+        "property": "line-height",
+        "layer": "semantic"
+      },
+      "textfield.typography.helper.fontSize": {
+        "resolvesTo": "semantic.typography.body.04",
+        "fallback": "12px",
+        "property": "font-size",
+        "layer": "semantic"
+      },
+      "textfield.typography.helper.fontWeight": {
+        "resolvesTo": "semantic.typography.font.weight.regular",
+        "fallback": "400",
+        "layer": "semantic"
+      },
+      "textfield.typography.helper.lineHeight": {
+        "resolvesTo": "semantic.typography.line.height.tight",
+        "fallback": "1.2",
+        "property": "line-height",
+        "layer": "semantic"
+      },
+      "textfield.border.width": {
+        "resolvesTo": "core.shape.border.width.hairline",
+        "fallback": "1px",
+        "property": "border-width",
+        "layer": "core"
+      },
+      "textfield.border.radius": {
+        "resolvesTo": "core.shape.radius.medium",
+        "fallback": "8px",
+        "property": "border-radius",
+        "layer": "core"
+      },
+      "textfield.focus.ring.width": {
+        "resolvesTo": "core.shape.border.width.thick",
+        "fallback": "2px",
+        "layer": "core"
+      },
+      "textfield.focus.ring.color": {
+        "resolvesTo": "semantic.color.border.accent",
+        "fallback": "#d9292b",
+        "layer": "semantic"
+      },
+      "textfield.focus.ring.offset": {
+        "resolvesTo": "core.spacing.size.02",
+        "fallback": "2px",
+        "layer": "core"
+      },
+      "textfield.transition.duration": {
+        "resolvesTo": "core.motion.duration.short",
+        "fallback": "150ms",
+        "property": "transition-duration",
+        "layer": "core"
+      },
+      "textfield.transition.easing": {
+        "resolvesTo": "core.motion.easing.standard",
+        "fallback": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "property": "transition-timing-function",
+        "layer": "core"
+      }
+    },
+    "label": {
+      "textfield.color.label.default": {
+        "resolvesTo": "semantic.color.foreground.primary",
+        "fallback": "#141414",
+        "layer": "semantic"
+      },
+      "textfield.color.label.required": {
+        "resolvesTo": "semantic.color.status.danger",
+        "fallback": "#d9292b",
+        "layer": "semantic"
+      },
+      "textfield.color.label.disabled": {
+        "resolvesTo": "semantic.color.foreground.disabled",
+        "fallback": "#aeaeae",
+        "layer": "semantic"
+      },
+      "textfield.typography.label.fontSize": {
+        "resolvesTo": "semantic.typography.body.04",
+        "fallback": "12px",
+        "property": "font-size",
+        "layer": "semantic"
+      },
+      "textfield.typography.label.fontWeight": {
+        "resolvesTo": "semantic.typography.font.weight.medium",
+        "fallback": "500",
+        "layer": "semantic"
+      },
+      "textfield.typography.label.lineHeight": {
+        "resolvesTo": "semantic.typography.line.height.tight",
+        "fallback": "1.2",
+        "property": "line-height",
+        "layer": "semantic"
+      }
+    }
   },
   "props": {
     "styled": {

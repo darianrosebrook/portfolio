@@ -39,16 +39,54 @@
     "apgPattern": null
   },
   "tokens": {
-    "root": [
-      "popover.size.padding.default",
-      "popover.size.radius.default",
-      "popover.size.radius.full",
-      "popover.size.gap.default",
-      "popover.size.maxWidth.default",
-      "popover.color.background.content",
-      "popover.color.border.accent",
-      "popover.elevation.default"
-    ]
+    "root": {
+      "popover.size.padding.default": {
+        "resolvesTo": "core.spacing.size.06",
+        "fallback": "16px",
+        "property": "padding",
+        "layer": "core"
+      },
+      "popover.size.radius.default": {
+        "resolvesTo": "semantic.shape.control.radius.default",
+        "fallback": "8px",
+        "property": "border-radius",
+        "layer": "semantic"
+      },
+      "popover.size.radius.full": {
+        "resolvesTo": "core.shape.radius.full",
+        "fallback": "9999px",
+        "property": "border-radius",
+        "layer": "core"
+      },
+      "popover.size.gap.default": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "property": "gap",
+        "layer": "core"
+      },
+      "popover.size.maxWidth.default": {
+        "resolvesTo": "core.spacing.size.06",
+        "fallback": "16px",
+        "layer": "core"
+      },
+      "popover.color.background.content": {
+        "resolvesTo": "semantic.color.background.secondary",
+        "fallback": "#efefef",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "popover.color.border.accent": {
+        "resolvesTo": "semantic.color.border.accent",
+        "fallback": "#d9292b",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "popover.elevation.default": {
+        "resolvesTo": "semantic.elevation.default",
+        "fallback": "[object Object]",
+        "layer": "semantic"
+      }
+    }
   },
   "props": {
     "styled": {

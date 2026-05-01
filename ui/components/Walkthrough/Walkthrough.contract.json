@@ -75,26 +75,76 @@
       "walkthrough.button.secondary.paddingY",
       "walkthrough.button.secondary.paddingX"
     ],
-    "title": [
-      "walkthrough.title.fontSize",
-      "walkthrough.title.fontWeight",
-      "walkthrough.title.color"
-    ],
-    "description": [
-      "walkthrough.description.fontSize",
-      "walkthrough.description.color",
-      "walkthrough.description.marginTop"
-    ],
-    "controls": [
-      "walkthrough.controls.gap",
-      "walkthrough.controls.marginTop"
-    ],
-    "dots": [
-      "walkthrough.dots.size",
-      "walkthrough.dots.gap",
-      "walkthrough.dots.active",
-      "walkthrough.dots.idle"
-    ]
+    "title": {
+      "walkthrough.title.fontSize": {
+        "resolvesTo": "semantic.typography.heading.03",
+        "fallback": "20px",
+        "layer": "semantic"
+      },
+      "walkthrough.title.fontWeight": {
+        "resolvesTo": "semantic.typography.font.weight.bold",
+        "fallback": "700",
+        "layer": "semantic"
+      },
+      "walkthrough.title.color": {
+        "resolvesTo": "semantic.color.foreground.primary",
+        "fallback": "#141414",
+        "layer": "semantic"
+      }
+    },
+    "description": {
+      "walkthrough.description.fontSize": {
+        "resolvesTo": "semantic.typography.body.02",
+        "fallback": "16px",
+        "layer": "semantic"
+      },
+      "walkthrough.description.color": {
+        "resolvesTo": "semantic.color.foreground.secondary",
+        "fallback": "#555555",
+        "layer": "semantic"
+      },
+      "walkthrough.description.marginTop": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "layer": "core"
+      }
+    },
+    "controls": {
+      "walkthrough.controls.gap": {
+        "resolvesTo": "core.spacing.size.05",
+        "fallback": "12px",
+        "property": "gap",
+        "layer": "core"
+      },
+      "walkthrough.controls.marginTop": {
+        "resolvesTo": "core.spacing.size.06",
+        "fallback": "16px",
+        "layer": "core"
+      }
+    },
+    "dots": {
+      "walkthrough.dots.size": {
+        "resolvesTo": "core.spacing.size.02",
+        "fallback": "2px",
+        "layer": "core"
+      },
+      "walkthrough.dots.gap": {
+        "resolvesTo": "core.spacing.size.03",
+        "fallback": "4px",
+        "property": "gap",
+        "layer": "core"
+      },
+      "walkthrough.dots.active": {
+        "resolvesTo": "semantic.color.action.background.primary.default",
+        "fallback": "#d9292b",
+        "layer": "semantic"
+      },
+      "walkthrough.dots.idle": {
+        "resolvesTo": "semantic.color.border.subtle",
+        "fallback": "#cecece",
+        "layer": "semantic"
+      }
+    }
   },
   "props": {
     "hook": {

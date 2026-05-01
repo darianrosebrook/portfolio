@@ -52,21 +52,77 @@
     "apgPattern": null
   },
   "tokens": {
-    "root": [
-      "tabs.spacing.gap",
-      "tabs.spacing.padding",
-      "tabs.spacing.panelGap",
-      "tabs.color.fg",
-      "tabs.color.active-fg",
-      "tabs.color.active-bg",
-      "tabs.color.disabled-fg",
-      "tabs.color.indicator",
-      "tabs.color.focus",
-      "tabs.color.hover.bg",
-      "tabs.color.hover.fg",
-      "tabs.shape.radius",
-      "tabs.motion.indicator"
-    ]
+    "root": {
+      "tabs.spacing.gap": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "property": "gap",
+        "layer": "core"
+      },
+      "tabs.spacing.padding": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "property": "padding",
+        "layer": "core"
+      },
+      "tabs.spacing.panelGap": {
+        "resolvesTo": "core.spacing.size.06",
+        "fallback": "16px",
+        "property": "gap",
+        "layer": "core"
+      },
+      "tabs.color.fg": {
+        "resolvesTo": "semantic.color.foreground.primary",
+        "fallback": "#141414",
+        "layer": "semantic"
+      },
+      "tabs.color.active-fg": {
+        "resolvesTo": "semantic.color.foreground.primary",
+        "fallback": "#141414",
+        "layer": "semantic"
+      },
+      "tabs.color.active-bg": {
+        "resolvesTo": "semantic.color.background.secondary",
+        "fallback": "#efefef",
+        "layer": "semantic"
+      },
+      "tabs.color.disabled-fg": {
+        "resolvesTo": "semantic.color.foreground.disabled",
+        "fallback": "#aeaeae",
+        "layer": "semantic"
+      },
+      "tabs.color.indicator": {
+        "resolvesTo": "semantic.color.border.accent",
+        "fallback": "#d9292b",
+        "layer": "semantic"
+      },
+      "tabs.color.focus": {
+        "resolvesTo": "semantic.color.border.accent",
+        "fallback": "#d9292b",
+        "layer": "semantic"
+      },
+      "tabs.color.hover.bg": {
+        "resolvesTo": "semantic.color.background.hover",
+        "fallback": "#cecece",
+        "layer": "semantic"
+      },
+      "tabs.color.hover.fg": {
+        "resolvesTo": "semantic.color.foreground.primary",
+        "fallback": "#141414",
+        "layer": "semantic"
+      },
+      "tabs.shape.radius": {
+        "resolvesTo": "core.shape.radius.medium",
+        "fallback": "8px",
+        "property": "border-radius",
+        "layer": "core"
+      },
+      "tabs.motion.indicator": {
+        "resolvesTo": "core.motion.duration.short",
+        "fallback": "150ms",
+        "layer": "core"
+      }
+    }
   },
   "props": {
     "styled": {

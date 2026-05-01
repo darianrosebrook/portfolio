@@ -112,48 +112,216 @@
       "switch.focus.ring",
       "switch.focus.offset"
     ],
-    "track": [
-      "switch.color.track.background.default",
-      "switch.color.track.background.hover",
-      "switch.color.track.background.focus",
-      "switch.color.track.background.disabled",
-      "switch.color.track.background.checked",
-      "switch.color.track.background.error",
-      "switch.color.track.border.default",
-      "switch.color.track.border.hover",
-      "switch.color.track.border.focus",
-      "switch.color.track.border.disabled",
-      "switch.color.track.border.error",
-      "switch.size.sm.track.width",
-      "switch.size.sm.track.height",
-      "switch.size.sm.track.radius",
-      "switch.size.md.track.width",
-      "switch.size.md.track.height",
-      "switch.size.md.track.radius",
-      "switch.size.lg.track.width",
-      "switch.size.lg.track.height",
-      "switch.size.lg.track.radius"
-    ],
-    "thumb": [
-      "switch.color.thumb.background.default",
-      "switch.color.thumb.background.hover",
-      "switch.color.thumb.background.focus",
-      "switch.color.thumb.background.disabled",
-      "switch.color.thumb.background.checked",
-      "switch.color.thumb.background.error",
-      "switch.color.thumb.border.default",
-      "switch.color.thumb.border.hover",
-      "switch.color.thumb.border.focus",
-      "switch.color.thumb.border.disabled",
-      "switch.color.thumb.border.error",
-      "switch.color.thumb.shadow",
-      "switch.size.sm.thumb.size",
-      "switch.size.sm.thumb.offset",
-      "switch.size.md.thumb.size",
-      "switch.size.md.thumb.offset",
-      "switch.size.lg.thumb.size",
-      "switch.size.lg.thumb.offset"
-    ]
+    "track": {
+      "switch.color.track.background.default": {
+        "resolvesTo": "semantic.color.background.tertiary",
+        "fallback": "#cecece",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "switch.color.track.background.hover": {
+        "resolvesTo": "semantic.color.background.hover",
+        "fallback": "#cecece",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "switch.color.track.background.focus": {
+        "resolvesTo": "semantic.color.background.secondary",
+        "fallback": "#efefef",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "switch.color.track.background.disabled": {
+        "resolvesTo": "semantic.color.background.disabled",
+        "fallback": "#cecece",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "switch.color.track.background.checked": {
+        "resolvesTo": "semantic.color.foreground.accent",
+        "fallback": "#d9292b",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "switch.color.track.background.error": {
+        "resolvesTo": "semantic.color.background.danger.subtle",
+        "fallback": "#fceaea",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "switch.color.track.border.default": {
+        "resolvesTo": "semantic.color.border.primary",
+        "fallback": "#f29495",
+        "layer": "semantic"
+      },
+      "switch.color.track.border.hover": {
+        "resolvesTo": "semantic.color.border.bold",
+        "fallback": "#8f8f8f",
+        "layer": "semantic"
+      },
+      "switch.color.track.border.focus": {
+        "resolvesTo": "semantic.color.border.accent",
+        "fallback": "#d9292b",
+        "layer": "semantic"
+      },
+      "switch.color.track.border.disabled": {
+        "resolvesTo": "semantic.color.border.disabled",
+        "fallback": "#cecece",
+        "layer": "semantic"
+      },
+      "switch.color.track.border.error": {
+        "resolvesTo": "semantic.color.border.danger",
+        "fallback": "#ae0001",
+        "layer": "semantic"
+      },
+      "switch.size.sm.track.width": {
+        "resolvesTo": "core.spacing.size.08",
+        "fallback": "32px",
+        "layer": "core"
+      },
+      "switch.size.sm.track.height": {
+        "resolvesTo": "core.spacing.size.06",
+        "fallback": "16px",
+        "layer": "core"
+      },
+      "switch.size.sm.track.radius": {
+        "resolvesTo": "core.shape.radius.full",
+        "fallback": "9999px",
+        "property": "border-radius",
+        "layer": "core"
+      },
+      "switch.size.md.track.width": {
+        "resolvesTo": "core.spacing.size.09",
+        "fallback": "48px",
+        "layer": "core"
+      },
+      "switch.size.md.track.height": {
+        "resolvesTo": "core.spacing.size.07",
+        "fallback": "24px",
+        "layer": "core"
+      },
+      "switch.size.md.track.radius": {
+        "resolvesTo": "core.shape.radius.full",
+        "fallback": "9999px",
+        "property": "border-radius",
+        "layer": "core"
+      },
+      "switch.size.lg.track.width": {
+        "resolvesTo": "core.spacing.size.10",
+        "fallback": "64px",
+        "layer": "core"
+      },
+      "switch.size.lg.track.height": {
+        "resolvesTo": "core.spacing.size.08",
+        "fallback": "32px",
+        "layer": "core"
+      },
+      "switch.size.lg.track.radius": {
+        "resolvesTo": "core.shape.radius.full",
+        "fallback": "9999px",
+        "property": "border-radius",
+        "layer": "core"
+      }
+    },
+    "thumb": {
+      "switch.color.thumb.background.default": {
+        "resolvesTo": "semantic.color.background.primary",
+        "fallback": "#ffffff",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "switch.color.thumb.background.hover": {
+        "resolvesTo": "semantic.color.background.hover",
+        "fallback": "#cecece",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "switch.color.thumb.background.focus": {
+        "resolvesTo": "semantic.color.background.primary",
+        "fallback": "#ffffff",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "switch.color.thumb.background.disabled": {
+        "resolvesTo": "semantic.color.background.disabled",
+        "fallback": "#cecece",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "switch.color.thumb.background.checked": {
+        "resolvesTo": "semantic.color.foreground.on.brand",
+        "fallback": "#ffffff",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "switch.color.thumb.background.error": {
+        "resolvesTo": "semantic.color.background.danger.strong",
+        "fallback": "#ae0001",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "switch.color.thumb.border.default": {
+        "resolvesTo": "semantic.color.border.primary",
+        "fallback": "#f29495",
+        "layer": "semantic"
+      },
+      "switch.color.thumb.border.hover": {
+        "resolvesTo": "semantic.color.border.bold",
+        "fallback": "#8f8f8f",
+        "layer": "semantic"
+      },
+      "switch.color.thumb.border.focus": {
+        "resolvesTo": "semantic.color.border.accent",
+        "fallback": "#d9292b",
+        "layer": "semantic"
+      },
+      "switch.color.thumb.border.disabled": {
+        "resolvesTo": "semantic.color.border.disabled",
+        "fallback": "#cecece",
+        "layer": "semantic"
+      },
+      "switch.color.thumb.border.error": {
+        "resolvesTo": "semantic.color.border.danger",
+        "fallback": "#ae0001",
+        "layer": "semantic"
+      },
+      "switch.color.thumb.shadow": {
+        "resolvesTo": "semantic.elevation.surface.raised",
+        "fallback": "[object Object]",
+        "property": "box-shadow",
+        "layer": "semantic"
+      },
+      "switch.size.sm.thumb.size": {
+        "resolvesTo": "core.spacing.size.05",
+        "fallback": "12px",
+        "layer": "core"
+      },
+      "switch.size.sm.thumb.offset": {
+        "resolvesTo": "core.spacing.size.02",
+        "fallback": "2px",
+        "layer": "core"
+      },
+      "switch.size.md.thumb.size": {
+        "resolvesTo": "core.spacing.size.06",
+        "fallback": "16px",
+        "layer": "core"
+      },
+      "switch.size.md.thumb.offset": {
+        "resolvesTo": "core.spacing.size.02",
+        "fallback": "2px",
+        "layer": "core"
+      },
+      "switch.size.lg.thumb.size": {
+        "resolvesTo": "core.spacing.size.07",
+        "fallback": "24px",
+        "layer": "core"
+      },
+      "switch.size.lg.thumb.offset": {
+        "resolvesTo": "core.spacing.size.02",
+        "fallback": "2px",
+        "layer": "core"
+      }
+    }
   },
   "props": {
     "styled": {
