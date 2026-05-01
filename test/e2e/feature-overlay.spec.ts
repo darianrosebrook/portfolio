@@ -74,11 +74,11 @@ async function pickGlyph(page: Page, char: string) {
 
 async function toggleSwitch(page: Page, name: string) {
   // The Switch component renders `<input role="switch">` with the visible
-  // label as its accessible name (via `<label htmlFor>`). Playwright's
-  // getByRole walks the accessibility tree, so this is far more reliable
-  // than text-matching — it ignores wrapping `<span>`s, label position,
-  // and DOM nesting variations.
-  const sw = page.getByRole('switch', { name });
+  // label as its accessible name. Use exact: true because Playwright's
+  // default substring match collides on toggle names that share a token
+  // (e.g. 'Tail' was matching both 'Tail' and 'Show Details' on at least
+  // one render path — likely an aria-describedby cross-reference).
+  const sw = page.getByRole('switch', { name, exact: true });
   await sw.click();
   await page.waitForTimeout(300);
 }
@@ -91,6 +91,19 @@ async function enableFeature(page: Page, char: string, feature: string) {
   // requestAnimationFrame cadence, and the detection pipeline runs
   // asynchronously when selectedAnatomy changes.
   await page.waitForTimeout(500);
+}
+
+async function selectFont(page: Page, name: string) {
+  // The font picker is a native `<select>` whose options are rendered
+  // from FontInspector's `fonts` state. Switching by visible text is
+  // robust against re-ordering. After the switch, fontkit reloads the
+  // glyph cache AND the per-glyph hint system recomputes available
+  // toggles; 1500ms is the empirically-stable wait in the trace viewer.
+  // Shorter waits race the toggle re-render and produce flaky
+  // "switch with name 'X' not found" errors.
+  const select = page.locator('select').first();
+  await select.selectOption({ label: name });
+  await page.waitForTimeout(1500);
 }
 
 async function screenshotCanvas(page: Page, name: string) {
@@ -156,4 +169,62 @@ test.describe('Feature highlight overlay (Nohemi)', () => {
     await enableFeature(page, 'e', 'Counter');
     await screenshotCanvas(page, 'nohemi-e-counter.png');
   });
+
+  test('e + Aperture: enclosed gap rectangle', async ({ page }) => {
+    await loadInspector(page);
+    await enableFeature(page, 'e', 'Aperture');
+    await screenshotCanvas(page, 'nohemi-e-aperture.png');
+  });
 });
+
+test.describe('Feature highlight overlay (Newsreader corridors and projections)', () => {
+  // Newsreader has serifs and curving strokes, exercising the corridor
+  // and projection region builders. Each test switches font first.
+
+  test('S + Spine: stroke corridor along the S-curve', async ({ page }) => {
+    await loadInspector(page);
+    await selectFont(page, 'Newsreader');
+    await enableFeature(page, 'S', 'Spine');
+    await screenshotCanvas(page, 'newsreader-S-spine.png');
+  });
+
+  test('Q + Tail: descending stroke corridor', async ({ page }) => {
+    await loadInspector(page);
+    await selectFont(page, 'Newsreader');
+    await enableFeature(page, 'Q', 'Tail');
+    await screenshotCanvas(page, 'newsreader-Q-tail.png');
+  });
+
+  test('g + Loop: closed corridor around lower bowl', async ({ page }) => {
+    await loadInspector(page);
+    await selectFont(page, 'Newsreader');
+    await enableFeature(page, 'g', 'Loop');
+    await screenshotCanvas(page, 'newsreader-g-loop.png');
+  });
+
+  test('g + Ear: top-right projection region', async ({ page }) => {
+    await loadInspector(page);
+    await selectFont(page, 'Newsreader');
+    await enableFeature(page, 'g', 'Ear');
+    await screenshotCanvas(page, 'newsreader-g-ear.png');
+  });
+});
+
+// Serif / finial / spur visual baselines deferred:
+// - Serif: the inspector gates the toggle behind ctx.isSerif, which
+//   uses a "fontName contains 'serif'" heuristic. Newsreader's name
+//   doesn't contain that substring so the toggle is hidden even on a
+//   visibly-serifed font. Fixing the heuristic is a separate change.
+// - Finial: glyphFeatureHints.ts has no `finial` entry on any glyph,
+//   so the toggle never renders.
+// - Spur: hints exist only for G/S; detection never fires on those
+//   in the loaded fonts. Inter b detects but has no spur hint.
+//
+// Region wiring for these three is exercised by:
+//   1. unit tests against buildProjectionPolygon (utils/.../projectionRegion.test.ts),
+//   2. region polygon assertions in feature-accuracy.test.ts ("attaches a
+//      polygon to every Newsreader L serif instance, when one fires" and
+//      "produces a stroke projection region whenever finial fires on Newsreader s"),
+//   3. mutation probe D2 (buildProjectionPolygon → []).
+// When the hint system or isSerif heuristic is broadened, add visual
+// baselines for the relevant letter-feature pairs.
