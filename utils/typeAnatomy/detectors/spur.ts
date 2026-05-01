@@ -10,7 +10,10 @@
  */
 
 import { rayHits } from '@/utils/geometry/geometryCore';
+import { buildProjectionPolygon } from '../evidence/projectionRegion';
 import type { FeatureInstance, GeometryCache, Point2D } from '../types';
+
+const SPUR_ARC_BUDGET_FRACTION = 0.1;
 
 /**
  * Detects spur features on a glyph.
@@ -115,6 +118,13 @@ function detectSpurAtEdge(
   // Spur should be localized (not extend far vertically)
   if (verticalExtent < 1) return null;
 
+  const budget = geo.metrics.capHeight * SPUR_ARC_BUDGET_FRACTION;
+  const polygon = buildProjectionPolygon({
+    glyph: geo.glyph,
+    anchor: edge,
+    arcLengthBudget: budget,
+  });
+
   return {
     id: 'spur',
     shape: {
@@ -123,6 +133,8 @@ function detectSpurAtEdge(
       y: edge.y,
       label: 'Spur',
     },
+    region:
+      polygon.length >= 3 ? { kind: 'stroke', points: polygon } : undefined,
     confidence: 0.6,
     anchors: {
       position: edge,

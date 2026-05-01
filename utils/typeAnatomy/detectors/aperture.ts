@@ -141,21 +141,39 @@ export function detectAperture(geo: GeometryCache): FeatureInstance[] {
     const avgGapStart =
       rightCandidates.reduce((s, c) => s + c.gapStart, 0) /
       rightCandidates.length;
+    const avgGapEnd =
+      rightCandidates.reduce((s, c) => s + c.gapEnd, 0) /
+      rightCandidates.length;
     const sortedByY = rightCandidates.sort((a, b) => a.y - b.y);
+    const yTop = sortedByY[sortedByY.length - 1].y;
+    const yBottom = sortedByY[0].y;
 
     instances.push({
       id: 'aperture',
       shape: {
         type: 'line',
         x1: avgGapStart,
-        y1: sortedByY[0].y,
+        y1: yBottom,
         x2: avgGapStart,
-        y2: sortedByY[sortedByY.length - 1].y,
+        y2: yTop,
+      },
+      region: {
+        // Aperture is the negative space between counter and exterior. We
+        // fill the polygon directly (no clip against glyph fill) so the
+        // gap itself reads red, matching the Coles diagram's treatment of
+        // open counters in `e`, `a`, `c`.
+        kind: 'enclosed',
+        points: [
+          { x: avgGapStart, y: yTop },
+          { x: avgGapEnd, y: yTop },
+          { x: avgGapEnd, y: yBottom },
+          { x: avgGapStart, y: yBottom },
+        ],
       },
       confidence: Math.min(0.9, 0.4 + rightCandidates.length * 0.1),
       anchors: {
-        top: { x: avgGapStart, y: sortedByY[0].y },
-        bottom: { x: avgGapStart, y: sortedByY[sortedByY.length - 1].y },
+        top: { x: avgGapStart, y: yTop },
+        bottom: { x: avgGapStart, y: yBottom },
       },
       debug: {
         side: 'right',
@@ -169,23 +187,37 @@ export function detectAperture(geo: GeometryCache): FeatureInstance[] {
 
   // Emit left aperture if consistent across levels
   if (leftCandidates.length >= 2) {
+    const avgGapStart =
+      leftCandidates.reduce((s, c) => s + c.gapStart, 0) /
+      leftCandidates.length;
     const avgGapEnd =
       leftCandidates.reduce((s, c) => s + c.gapEnd, 0) / leftCandidates.length;
     const sortedByY = leftCandidates.sort((a, b) => a.y - b.y);
+    const yTop = sortedByY[sortedByY.length - 1].y;
+    const yBottom = sortedByY[0].y;
 
     instances.push({
       id: 'aperture',
       shape: {
         type: 'line',
         x1: avgGapEnd,
-        y1: sortedByY[0].y,
+        y1: yBottom,
         x2: avgGapEnd,
-        y2: sortedByY[sortedByY.length - 1].y,
+        y2: yTop,
+      },
+      region: {
+        kind: 'enclosed',
+        points: [
+          { x: avgGapStart, y: yTop },
+          { x: avgGapEnd, y: yTop },
+          { x: avgGapEnd, y: yBottom },
+          { x: avgGapStart, y: yBottom },
+        ],
       },
       confidence: Math.min(0.85, 0.4 + leftCandidates.length * 0.1),
       anchors: {
-        top: { x: avgGapEnd, y: sortedByY[0].y },
-        bottom: { x: avgGapEnd, y: sortedByY[sortedByY.length - 1].y },
+        top: { x: avgGapEnd, y: yTop },
+        bottom: { x: avgGapEnd, y: yBottom },
       },
       debug: {
         side: 'left',

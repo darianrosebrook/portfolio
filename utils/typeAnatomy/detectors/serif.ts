@@ -10,7 +10,14 @@
  */
 
 import { rayHits } from '@/utils/geometry/geometryCore';
+import { buildProjectionPolygon } from '../evidence/projectionRegion';
 import type { FeatureInstance, GeometryCache, Point2D } from '../types';
+
+// Arc-length budget per side, as a fraction of capHeight. 0.10 covers
+// roughly one full Bézier endpoint hop on Newsreader's serif contours
+// (median segment ≈ 0.05 × capHeight); a smaller budget produces empty
+// polygons and the renderer drops back to the point marker.
+const SERIF_ARC_BUDGET_FRACTION = 0.1;
 
 /**
  * Detects serif features on a glyph.
@@ -127,6 +134,13 @@ function detectSerifAtEdge(
 
   if (vertProbe.points.length === 0) return null;
 
+  const budget = geo.metrics.capHeight * SERIF_ARC_BUDGET_FRACTION;
+  const polygon = buildProjectionPolygon({
+    glyph: geo.glyph,
+    anchor: edge,
+    arcLengthBudget: budget,
+  });
+
   return {
     id: 'serif',
     shape: {
@@ -135,6 +149,8 @@ function detectSerifAtEdge(
       y: edge.y,
       label: `${type} serif`,
     },
+    region:
+      polygon.length >= 3 ? { kind: 'stroke', points: polygon } : undefined,
     confidence: 0.7,
     anchors: {
       position: edge,

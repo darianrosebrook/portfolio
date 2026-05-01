@@ -10,6 +10,7 @@
  */
 
 import { rayHits } from '@/utils/geometry/geometryCore';
+import { buildCorridorPolygon } from '../evidence/corridorRegion';
 import type { FeatureInstance, GeometryCache, Point2D } from '../types';
 
 /**
@@ -42,9 +43,22 @@ export function detectTail(geo: GeometryCache): FeatureInstance[] {
   const tailPoints = collectTailPointsFromCenter(geo, glyphCenterX);
 
   if (tailPoints.length >= 3) {
+    // Polyline tail: build a corridor at constant stem width along the
+    // descending stroke. Tail points are on the extremum side of the
+    // stroke, so the corridor offset by ±half-stem still sits inside the
+    // glyph fill once the renderer clips it.
+    const corridor = buildCorridorPolygon({
+      midpoints: tailPoints,
+      thickness: stemWidth,
+    });
+
     instances.push({
       id: 'tail',
       shape: { type: 'polyline', points: tailPoints },
+      region:
+        corridor.length >= 4
+          ? { kind: 'stroke', points: corridor }
+          : undefined,
       confidence: 0.8,
       anchors: {
         start: tailPoints[0],
@@ -166,6 +180,13 @@ function detectQStyleTail(geo: GeometryCache): FeatureInstance | null {
   const isDiagonal = end.x > start.x;
 
   if (extendsBelow && isDownward && isDiagonal) {
+    // Diagonal corridor for the Q-style tail. Two points (start/end) means
+    // the corridor is a 4-vertex parallelogram offset by ±half-stem
+    // perpendicular to the diagonal direction.
+    const corridor = buildCorridorPolygon({
+      midpoints: [start, end],
+      thickness: scale.stemWidth,
+    });
     return {
       id: 'tail',
       shape: {
@@ -175,6 +196,10 @@ function detectQStyleTail(geo: GeometryCache): FeatureInstance | null {
         x2: end.x,
         y2: end.y,
       },
+      region:
+        corridor.length >= 4
+          ? { kind: 'stroke', points: corridor }
+          : undefined,
       confidence: 0.7,
       anchors: {
         start,

@@ -281,13 +281,17 @@ export const FEATURE_DISPLAY_NAMES: Record<string, FeatureID> = {
   Aperture: 'aperture',
   Arc: 'arc',
   Arm: 'arm',
-  Bar: 'bar',
+  // 'Bar' is the canonical anatomy.json term for the horizontal connector
+  // in H/A/E/F; the existing detector is named 'crossbar'. Both display
+  // names map to the same FeatureID so the JSON-driven generator and the
+  // legacy 'Crossbar' label produce the same toggle/detector wiring.
+  Bar: 'crossbar',
   Beak: 'beak',
   Bowl: 'bowl',
   Bracket: 'bracket',
   Counter: 'counter',
   Crossbar: 'crossbar',
-  'Cross stroke': 'cross-stroke',
+  'Cross-stroke': 'cross-stroke',
   Crotch: 'crotch',
   Ear: 'ear',
   Eye: 'eye',

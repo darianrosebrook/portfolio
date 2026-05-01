@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "file-formats",
+  "label": "File formats and standards",
+  "description": "Font file formats, wrappers, and character encoding standards.",
+  "terms": [
+    {
+      "id": "truetype",
+      "term": "TrueType",
+      "aliases": ["TTF"],
+      "definition": "Outline format using quadratic Béziers; hinting-rich.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["Apple TT Spec"]
+    },
+    {
+      "id": "unicode",
+      "term": "Unicode",
+      "aliases": [],
+      "definition": "Universal character encoding standard.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["Unicode"]
+    },
+    {
+      "id": "woff",
+      "term": "WOFF",
+      "aliases": ["WOFF2"],
+      "definition": "Compressed web-font wrapper for OT/TTF data.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["W3C WOFF"]
+    }
+  ]
+}

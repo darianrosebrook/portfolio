@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 1,
+  "id": "font-technology",
+  "label": "Font technology",
+  "description": "Rendering, encoding, packaging, and implementation concepts around digital fonts.",
+  "terms": [
+    {
+      "id": "anti-aliasing",
+      "term": "Anti-aliasing",
+      "aliases": [],
+      "definition": "Smoothing the edges of type on screen using semi-transparent pixels.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["Monotype"]
+    },
+    {
+      "id": "character",
+      "term": "Character",
+      "aliases": [],
+      "definition": "Any letter, numeral, punctuation, or symbol in a font.",
+      "letterforms": ["A", "1", "!"],
+      "otTags": [],
+      "sources": ["Wikipedia"]
+    },
+    {
+      "id": "diacritic",
+      "term": "Diacritic",
+      "aliases": [],
+      "definition": "Marks added to a base letter to change sound or meaning.",
+      "letterforms": ["á", "é", "ç", "ǒ"],
+      "otTags": [],
+      "sources": ["Adobe Glossary", "Bringhurst"]
+    },
+    {
+      "id": "ductus",
+      "term": "Ductus",
+      "aliases": [],
+      "definition": "Formal stroke order or direction underlying the written model.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["Scribe Principles"]
+    },
+    {
+      "id": "embedding",
+      "term": "Embedding",
+      "aliases": [],
+      "definition": "Including font data in a document for portability.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["Monotype"]
+    },
+    {
+      "id": "glyph",
+      "term": "Glyph",
+      "aliases": [],
+      "definition": "Concrete shape that renders a character codepoint.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["Unicode Glossary"]
+    },
+    {
+      "id": "hinting",
+      "term": "Hinting",
+      "aliases": [],
+      "definition": "Instructions to improve rasterisation at small sizes.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "ink-trap",
+      "term": "Ink trap",
+      "aliases": [],
+      "definition": "Deliberate notch that avoids ink gain in small sizes.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["Monotype"]
+    },
+    {
+      "id": "opentype-features",
+      "term": "OpenType features",
+      "aliases": [],
+      "definition": "Font instructions that enable alternate glyph behaviour.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "rasterisation",
+      "term": "Rasterisation",
+      "aliases": [],
+      "definition": "Conversion of vector outlines to pixel bitmaps.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["FreeType docs"]
+    },
+    {
+      "id": "skeleton",
+      "term": "Skeleton",
+      "aliases": [],
+      "definition": "Imaginary centerline from which a glyph's weight is built.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["TypeCooker"]
+    },
+    {
+      "id": "vector",
+      "term": "Vector",
+      "aliases": [],
+      "definition": "Mathematical description of glyph outlines.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["Wikipedia"]
+    },
+    {
+      "id": "visual-compensations",
+      "term": "Visual compensations",
+      "aliases": [],
+      "definition": "Adjustments to glyphs for optical balance.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["TypeType"]
+    }
+  ]
+}

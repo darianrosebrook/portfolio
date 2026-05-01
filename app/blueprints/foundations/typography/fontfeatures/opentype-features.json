@@ -1,0 +1,594 @@
+{
+  "schemaVersion": 1,
+  "id": "opentype-features",
+  "label": "OpenType features",
+  "description": "Registered OpenType layout features and feature-driven glyph substitutions or positioning.",
+  "terms": [
+    {
+      "id": "aalt",
+      "term": "aalt",
+      "aliases": [],
+      "definition": "Access All Alternates; presents all alternate forms of a character.",
+      "letterforms": [],
+      "otTags": ["aalt"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "afrc",
+      "term": "afrc",
+      "aliases": [],
+      "definition": "Alternative Fractions; stacked fraction form.",
+      "letterforms": ["1/2", "3/4"],
+      "otTags": ["afrc"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "alternate",
+      "term": "Alternate",
+      "aliases": ["Stylistic Alternate"],
+      "definition": "Designer-supplied substitute glyph; accessed via stylistic set.",
+      "letterforms": [],
+      "otTags": [
+        "salt",
+        "ss01",
+        "ss02",
+        "ss03",
+        "ss04",
+        "ss05",
+        "ss06",
+        "ss07",
+        "ss08",
+        "ss09",
+        "ss10",
+        "ss11",
+        "ss12",
+        "ss13",
+        "ss14",
+        "ss15",
+        "ss16",
+        "ss17",
+        "ss18",
+        "ss19",
+        "ss20"
+      ],
+      "sources": ["OpenType spec", "MS Typography"]
+    },
+    {
+      "id": "c2pc",
+      "term": "c2pc",
+      "aliases": [],
+      "definition": "Capitals to Petite Caps; substitutes capitals with petite caps.",
+      "letterforms": ["A", "B", "C"],
+      "otTags": ["c2pc"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "calt",
+      "term": "calt",
+      "aliases": [],
+      "definition": "Contextual Alternates; applies alternates based on context.",
+      "letterforms": [],
+      "otTags": ["calt"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "caps-to-small-caps",
+      "term": "Caps-to-small-caps",
+      "aliases": [],
+      "definition": "Substitutes capitals with small-capital forms.",
+      "letterforms": [],
+      "otTags": ["c2sc"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "case-sensitive-forms",
+      "term": "Case-sensitive forms",
+      "aliases": [],
+      "definition": "Shifts punctuation & symbols to align with capitals.",
+      "letterforms": [],
+      "otTags": ["case"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "ccmp",
+      "term": "ccmp",
+      "aliases": [],
+      "definition": "Glyph Composition/Decomposition; ligature or decomposition logic.",
+      "letterforms": [],
+      "otTags": ["ccmp"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "clig",
+      "term": "clig",
+      "aliases": [],
+      "definition": "Contextual Ligatures; ligatures based on context.",
+      "letterforms": ["fi", "fl"],
+      "otTags": ["clig"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "cpsp",
+      "term": "cpsp",
+      "aliases": [],
+      "definition": "Capital Spacing; adjusts spacing in all-caps text.",
+      "letterforms": ["A", "B", "C"],
+      "otTags": ["cpsp"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "cswh",
+      "term": "cswh",
+      "aliases": [],
+      "definition": "Contextual Swash; swash alternates based on context.",
+      "letterforms": [],
+      "otTags": ["cswh"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "cv01-cv99",
+      "term": "cv01–cv99",
+      "aliases": [],
+      "definition": "Character Variants; multiple variants of a single character.",
+      "letterforms": [],
+      "otTags": ["cv01–cv99"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "denominator",
+      "term": "Denominator",
+      "aliases": [],
+      "definition": "Numerals used as the bottom part of a fraction.",
+      "letterforms": ["1", "2"],
+      "otTags": ["dnom"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "expert-set",
+      "term": "Expert set",
+      "aliases": [],
+      "definition": "A font with extra glyphs (fractions, small caps, etc.).",
+      "letterforms": [],
+      "otTags": ["expt"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "expt",
+      "term": "expt",
+      "aliases": [],
+      "definition": "Expert Forms; typographic alternatives for some scripts.",
+      "letterforms": [],
+      "otTags": ["expt"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "falt",
+      "term": "falt",
+      "aliases": [],
+      "definition": "Final Glyph on Line Alternates; alternate for final glyph on a line.",
+      "letterforms": [],
+      "otTags": ["falt"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "fwid",
+      "term": "fwid",
+      "aliases": [],
+      "definition": "Full Widths; replaces with full-width versions.",
+      "letterforms": ["A", "1", "!"],
+      "otTags": ["fwid"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "hist",
+      "term": "hist",
+      "aliases": [],
+      "definition": "Historical Forms; obsolete forms of characters.",
+      "letterforms": [],
+      "otTags": ["hist"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "hlig",
+      "term": "hlig",
+      "aliases": [],
+      "definition": "Historical Ligatures; obsolete ligatures.",
+      "letterforms": ["ct", "st"],
+      "otTags": ["hlig"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "hwid",
+      "term": "hwid",
+      "aliases": [],
+      "definition": "Half Widths; replaces with half-width versions.",
+      "letterforms": ["A", "1", "!"],
+      "otTags": ["hwid"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "init",
+      "term": "init",
+      "aliases": [],
+      "definition": "Initial Forms; special form at word start (Arabic, Syriac).",
+      "letterforms": [],
+      "otTags": ["init"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "isol",
+      "term": "isol",
+      "aliases": [],
+      "definition": "Isolated Forms; special form outside a word (Arabic, Syriac).",
+      "letterforms": [],
+      "otTags": ["isol"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "ital",
+      "term": "ital",
+      "aliases": [],
+      "definition": "Italics; replaces with italic glyph (boolean).",
+      "letterforms": ["A", "a"],
+      "otTags": ["ital"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "jalt",
+      "term": "jalt",
+      "aliases": [],
+      "definition": "Justification Alternates; alternates for justification.",
+      "letterforms": [],
+      "otTags": ["jalt"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "lining-figures",
+      "term": "Lining figures",
+      "aliases": [],
+      "definition": "Cap-height numerals.",
+      "letterforms": ["0‒9", "0123456789"],
+      "otTags": ["lnum"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "locl",
+      "term": "locl",
+      "aliases": [],
+      "definition": "Localized Forms; preferred form for a script/language.",
+      "letterforms": [],
+      "otTags": ["locl"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "mark",
+      "term": "mark",
+      "aliases": [],
+      "definition": "Mark Positioning; fine positioning of marks.",
+      "letterforms": [],
+      "otTags": ["mark"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "med2",
+      "term": "med2",
+      "aliases": [],
+      "definition": "Medial Form #2; Syriac.",
+      "letterforms": [],
+      "otTags": ["med2"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "medi",
+      "term": "medi",
+      "aliases": [],
+      "definition": "Medial Forms; special form in word middle (Arabic, Syriac).",
+      "letterforms": [],
+      "otTags": ["medi"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "mkmk",
+      "term": "mkmk",
+      "aliases": [],
+      "definition": "Mark-to-mark Positioning; position mark to another mark.",
+      "letterforms": [],
+      "otTags": ["mkmk"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "nalt",
+      "term": "nalt",
+      "aliases": [],
+      "definition": "Alternate Annotation Forms; circled digits, inverse letters, etc.",
+      "letterforms": [],
+      "otTags": ["nalt"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "numr",
+      "term": "numr",
+      "aliases": [],
+      "definition": "Numerators; numerals for the top part of a fraction.",
+      "letterforms": ["1", "2"],
+      "otTags": ["numr"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "old-style-figures",
+      "term": "Old-style figures",
+      "aliases": [],
+      "definition": "Lowercase-like numerals with ascenders/descenders.",
+      "letterforms": ["0‒9", "0123456789"],
+      "otTags": ["onum"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "ordn",
+      "term": "ordn",
+      "aliases": [],
+      "definition": "Ordinals; replaces with ordinal forms.",
+      "letterforms": ["1st", "2nd"],
+      "otTags": ["ordn"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "ornm",
+      "term": "ornm",
+      "aliases": [],
+      "definition": "Ornaments; decorative alternates for bullet, etc.",
+      "letterforms": ["•"],
+      "otTags": ["ornm"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "palt",
+      "term": "palt",
+      "aliases": [],
+      "definition": "Proportional Alternates; repositions monospace chars by width.",
+      "letterforms": ["A", "1", "!"],
+      "otTags": ["palt"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "pcap",
+      "term": "pcap",
+      "aliases": [],
+      "definition": "Petite Caps; replaces lowercase with petite caps.",
+      "letterforms": ["a", "b", "c"],
+      "otTags": ["pcap"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "petite-caps",
+      "term": "Petite caps",
+      "aliases": [],
+      "definition": "Small caps that are the height of lowercase letters.",
+      "letterforms": ["A", "B", "C"],
+      "otTags": ["pcap", "c2pc"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "pkna",
+      "term": "pkna",
+      "aliases": [],
+      "definition": "Proportional Kana; kana for use with alphabets.",
+      "letterforms": [],
+      "otTags": ["pkna"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "proportional-figures",
+      "term": "Proportional figures",
+      "aliases": [],
+      "definition": "Variable-width digits for running text.",
+      "letterforms": ["0‒9", "0123456789"],
+      "otTags": ["pnum"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "qwid",
+      "term": "qwid",
+      "aliases": [],
+      "definition": "Quarter Widths; replaces with quarter-width versions.",
+      "letterforms": ["A", "1", "!"],
+      "otTags": ["qwid"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "rand",
+      "term": "rand",
+      "aliases": [],
+      "definition": "Randomize; replaces with random forms.",
+      "letterforms": [],
+      "otTags": ["rand"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "rlig",
+      "term": "rlig",
+      "aliases": [],
+      "definition": "Required Ligatures; ligatures required for correct display.",
+      "letterforms": ["fi", "fl"],
+      "otTags": ["rlig"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "rvrn",
+      "term": "rvrn",
+      "aliases": [],
+      "definition": "Required Variation Alternates; special variants for variable fonts.",
+      "letterforms": [],
+      "otTags": ["rvrn"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "salt",
+      "term": "salt",
+      "aliases": [],
+      "definition": "Stylistic Alternates; alternate forms for a character.",
+      "letterforms": [],
+      "otTags": ["salt"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "sinf",
+      "term": "sinf",
+      "aliases": [],
+      "definition": "Scientific Inferiors; small numerals for formulas.",
+      "letterforms": ["1", "2"],
+      "otTags": ["sinf"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "size",
+      "term": "size",
+      "aliases": [],
+      "definition": "Optical Size; font variant for specific point-size range.",
+      "letterforms": [],
+      "otTags": ["size"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "small-caps",
+      "term": "Small caps",
+      "aliases": [],
+      "definition": "Purpose-drawn capitals at x-height.",
+      "letterforms": ["A", "B", "C"],
+      "otTags": ["smcp"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "ss01-ss20",
+      "term": "ss01–ss20",
+      "aliases": [],
+      "definition": "Stylistic Sets 1–20; font-specific alternate sets.",
+      "letterforms": [],
+      "otTags": [
+        "ss01",
+        "ss02",
+        "ss03",
+        "ss04",
+        "ss05",
+        "ss06",
+        "ss07",
+        "ss08",
+        "ss09",
+        "ss10",
+        "ss11",
+        "ss12",
+        "ss13",
+        "ss14",
+        "ss15",
+        "ss16",
+        "ss17",
+        "ss18",
+        "ss19",
+        "ss20"
+      ],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "stylistic-set",
+      "term": "Stylistic set",
+      "aliases": [],
+      "definition": "Designer-defined bundle of alternates.",
+      "letterforms": [],
+      "otTags": [
+        "ss01",
+        "ss02",
+        "ss03",
+        "ss04",
+        "ss05",
+        "ss06",
+        "ss07",
+        "ss08",
+        "ss09",
+        "ss10",
+        "ss11",
+        "ss12",
+        "ss13",
+        "ss14",
+        "ss15",
+        "ss16",
+        "ss17",
+        "ss18",
+        "ss19",
+        "ss20"
+      ],
+      "sources": []
+    },
+    {
+      "id": "subscript",
+      "term": "Subscript",
+      "aliases": [],
+      "definition": "Lowered small numerals / letters.",
+      "letterforms": ["1", "2", "x"],
+      "otTags": ["subs"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "superscript",
+      "term": "Superscript",
+      "aliases": [],
+      "definition": "Raised small numerals / letters.",
+      "letterforms": ["1", "2", "x"],
+      "otTags": ["sups"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "supr",
+      "term": "supr",
+      "aliases": [],
+      "definition": "Superiors; small raised glyphs for footnotes, etc.",
+      "letterforms": ["1", "2"],
+      "otTags": ["supr"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "tabular-figures",
+      "term": "Tabular figures",
+      "aliases": [],
+      "definition": "Monospaced digits for tables.",
+      "letterforms": ["0‒9", "0123456789"],
+      "otTags": ["tnum"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "titl",
+      "term": "titl",
+      "aliases": [],
+      "definition": "Titling Alternates; forms suited for large type.",
+      "letterforms": ["A", "B", "C"],
+      "otTags": ["titl"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "unic",
+      "term": "unic",
+      "aliases": [],
+      "definition": "Unicase; single case glyphs for upper/lowercase.",
+      "letterforms": ["A", "a"],
+      "otTags": ["unic"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "vert",
+      "term": "vert",
+      "aliases": [],
+      "definition": "Vertical Alternates; forms for vertical writing.",
+      "letterforms": [],
+      "otTags": ["vert"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "zero",
+      "term": "Zero",
+      "aliases": ["slashed"],
+      "definition": "Alternate zero glyph with diagonal slash.",
+      "letterforms": ["0"],
+      "otTags": ["zero"],
+      "sources": ["OpenType spec"]
+    }
+  ]
+}

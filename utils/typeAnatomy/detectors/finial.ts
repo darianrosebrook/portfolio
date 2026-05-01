@@ -12,7 +12,10 @@
 
 import { rayHits } from '@/utils/geometry/geometryCore';
 import { analyzeTerminalCurvature } from '../curvatureAnalysis';
+import { buildProjectionPolygon } from '../evidence/projectionRegion';
 import type { FeatureInstance, GeometryCache, Point2D } from '../types';
+
+const FINIAL_ARC_BUDGET_FRACTION = 0.12;
 
 /**
  * Detects finial features on a glyph.
@@ -152,6 +155,13 @@ function detectFinialAtEdge(
     }
   }
 
+  const budget = geo.metrics.capHeight * FINIAL_ARC_BUDGET_FRACTION;
+  const polygon = buildProjectionPolygon({
+    glyph: geo.glyph,
+    anchor: edge,
+    arcLengthBudget: budget,
+  });
+
   // Finial: terminal without serif projection
   return {
     id: 'finial',
@@ -161,6 +171,8 @@ function detectFinialAtEdge(
       y: edge.y,
       label: 'Finial',
     },
+    region:
+      polygon.length >= 3 ? { kind: 'stroke', points: polygon } : undefined,
     confidence,
     anchors: {
       position: edge,

@@ -1,0 +1,260 @@
+{
+  "schemaVersion": 1,
+  "id": "type-styles-and-classification",
+  "label": "Type styles and classification",
+  "description": "Typeface styles, classifications, families, and market or production groupings.",
+  "terms": [
+    {
+      "id": "antiqua",
+      "term": "Antiqua",
+      "aliases": ["Antikva"],
+      "definition": "Serif typefaces designed between 16th–17th century or in that style.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["Monotype"]
+    },
+    {
+      "id": "backslant",
+      "term": "Backslant",
+      "aliases": [],
+      "definition": "Letters slanted to the left, opposite of italic.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["Monotype"]
+    },
+    {
+      "id": "condensed",
+      "term": "Condensed",
+      "aliases": [],
+      "definition": "Style with narrower than normal widths.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["FontLab docs"]
+    },
+    {
+      "id": "cursive",
+      "term": "Cursive",
+      "aliases": [],
+      "definition": "Script or handwriting-like type, or a font feature for cursive connection.",
+      "letterforms": [],
+      "otTags": ["curs"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "dingbat",
+      "term": "Dingbat",
+      "aliases": [],
+      "definition": "Decorative symbols or ornaments in a font.",
+      "letterforms": [],
+      "otTags": ["ornm"],
+      "sources": ["Wikipedia"]
+    },
+    {
+      "id": "display-font",
+      "term": "Display font",
+      "aliases": [],
+      "definition": "Design intended for large point sizes.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["Adobe Fonts FAQ"]
+    },
+    {
+      "id": "family",
+      "term": "Family",
+      "aliases": [],
+      "definition": "A group of related typefaces.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["Monotype"]
+    },
+    {
+      "id": "foundry",
+      "term": "Foundry",
+      "aliases": [],
+      "definition": "A company that designs/distributes fonts.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["Monotype"]
+    },
+    {
+      "id": "grotesk",
+      "term": "Grotesk",
+      "aliases": [],
+      "definition": "Sans-serif classification (German).",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["Typedia"]
+    },
+    {
+      "id": "hybrid-figures",
+      "term": "Hybrid figures",
+      "aliases": [],
+      "definition": "Numerals between lining and oldstyle in form.",
+      "letterforms": ["0-9"],
+      "otTags": [],
+      "sources": ["Monotype"]
+    },
+    {
+      "id": "inline",
+      "term": "Inline",
+      "aliases": [],
+      "definition": "A type style with a white line inside the strokes.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["Monotype"]
+    },
+    {
+      "id": "italic",
+      "term": "Italic",
+      "aliases": [],
+      "definition": "True cursive companion style, not mechanically sloped.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["Adobe Glossary"]
+    },
+    {
+      "id": "lettering",
+      "term": "Lettering",
+      "aliases": [],
+      "definition": "Hand-drawn letterforms, distinct from type.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["Monotype"]
+    },
+    {
+      "id": "master-size",
+      "term": "Master size",
+      "aliases": [],
+      "definition": "The base size from which other sizes are derived.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["Monotype"]
+    },
+    {
+      "id": "monospaced",
+      "term": "Monospaced",
+      "aliases": ["Fixed-width"],
+      "definition": "Font whose glyphs share identical advance widths.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["W3C CSS Fonts"]
+    },
+    {
+      "id": "oblique",
+      "term": "Oblique",
+      "aliases": [],
+      "definition": "Mechanically sloped Roman (esp. in sans).",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["Adobe Glossary"]
+    },
+    {
+      "id": "optical-size-master",
+      "term": "Optical size master",
+      "aliases": [],
+      "definition": "Font variant tuned for specific point-size range.",
+      "letterforms": [],
+      "otTags": ["opsz axis"],
+      "sources": ["Variable-Font spec"]
+    },
+    {
+      "id": "pro",
+      "term": "Pro",
+      "aliases": [],
+      "definition": "OpenType Pro fonts with extended language support.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["Monotype"]
+    },
+    {
+      "id": "roman",
+      "term": "Roman",
+      "aliases": [],
+      "definition": "Upright (non-italic) style.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["Adobe Glossary"]
+    },
+    {
+      "id": "slab-serif",
+      "term": "Slab serif",
+      "aliases": [],
+      "definition": "A type of serif with thick, block-like serifs.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["Monotype"]
+    },
+    {
+      "id": "static-fonts",
+      "term": "Static fonts",
+      "aliases": [],
+      "definition": "Fonts with little or no width/weight variation.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["TypeType"]
+    },
+    {
+      "id": "style-linking",
+      "term": "Style-linking",
+      "aliases": [],
+      "definition": "Grouping font styles for easy switching in software.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["Monotype"]
+    },
+    {
+      "id": "super-family",
+      "term": "Super family",
+      "aliases": ["Type system"],
+      "definition": "A coordinated group of type families.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["Monotype"]
+    },
+    {
+      "id": "three-quarter-caps",
+      "term": "Three-quarter caps",
+      "aliases": [],
+      "definition": "Capitals that are 3/4 the height of full caps.",
+      "letterforms": ["A", "B", "C"],
+      "otTags": [],
+      "sources": ["Monotype"]
+    },
+    {
+      "id": "three-quarter-figures",
+      "term": "Three-quarter figures",
+      "aliases": [],
+      "definition": "Numerals that are 3/4 the height of full figures.",
+      "letterforms": ["0-9"],
+      "otTags": [],
+      "sources": ["Monotype"]
+    },
+    {
+      "id": "unicase",
+      "term": "Unicase",
+      "aliases": [],
+      "definition": "Mixed-case design where all letters share one height.",
+      "letterforms": ["Alphabet"],
+      "otTags": ["unic", "unic*"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "volume",
+      "term": "Volume",
+      "aliases": [],
+      "definition": "A collection of fonts sold as a unit.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["Monotype"]
+    },
+    {
+      "id": "weight",
+      "term": "Weight",
+      "aliases": [],
+      "definition": "Relative darkness of strokes (Thin → Black).",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["Adobe Glossary"]
+    }
+  ]
+}

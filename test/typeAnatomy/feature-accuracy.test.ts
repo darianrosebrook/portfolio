@@ -661,3 +661,146 @@ describe('feature region polygons', () => {
   });
 });
 
+describe('phase 4 + 5 region polygons (centerline corridors and projections)', () => {
+  let newsreader: Font;
+  let nohemiP: Font;
+
+  beforeAll(() => {
+    newsreader = loadFont('Newsreader-VF.ttf');
+    nohemiP = loadFont('Nohemi-VF.ttf');
+  });
+
+  function expectRegionInsideGlyph(
+    region: { points: Array<{ x: number; y: number }> },
+    glyphBBox: { minX: number; minY: number; maxX: number; maxY: number }
+  ) {
+    expect(region.points.length).toBeGreaterThanOrEqual(3);
+    const bbox = regionBBox(
+      region as unknown as Parameters<typeof regionBBox>[0]
+    );
+    const w = glyphBBox.maxX - glyphBBox.minX;
+    const h = glyphBBox.maxY - glyphBBox.minY;
+    const marginX = w * 0.1;
+    const marginY = h * 0.1;
+    expect(bbox.minX).toBeGreaterThanOrEqual(glyphBBox.minX - marginX);
+    expect(bbox.maxX).toBeLessThanOrEqual(glyphBBox.maxX + marginX);
+    expect(bbox.minY).toBeGreaterThanOrEqual(glyphBBox.minY - marginY);
+    expect(bbox.maxY).toBeLessThanOrEqual(glyphBBox.maxY + marginY);
+  }
+
+  it('emits a stroke corridor region for the Newsreader S spine', () => {
+    const glyph = glyphFor(newsreader, 'S');
+    const spines = detect(newsreader, 'S', 'spine');
+    expect(spines.length).toBeGreaterThan(0);
+    const spine = spines[0];
+    expect(spine.region?.kind).toBe('stroke');
+    // Corridor must wrap the centerline on BOTH sides → at minimum 6 vertices
+    // (3-sample centerline → 6-vertex offset polygon). Catches a regression
+    // where the corridor collapses to a 1-pixel polyline.
+    expect(spine.region!.points.length).toBeGreaterThanOrEqual(6);
+    expectRegionInsideGlyph(spine.region!, glyph.bbox);
+  });
+
+  it('emits a stroke corridor region for the Newsreader Q tail', () => {
+    const glyph = glyphFor(newsreader, 'Q');
+    const tails = detect(newsreader, 'Q', 'tail');
+    expect(tails.length).toBeGreaterThan(0);
+    const withRegion = tails.filter((t) => t.region);
+    expect(withRegion.length).toBeGreaterThan(0);
+    for (const tail of withRegion) {
+      expect(tail.region?.kind).toBe('stroke');
+      expect(tail.region!.points.length).toBeGreaterThanOrEqual(4);
+      expectRegionInsideGlyph(tail.region!, glyph.bbox);
+    }
+    // Q tail must extend below baseline — corridor bbox must include
+    // descent territory or it's pointing at the wrong stroke.
+    const tailRegion = withRegion[0].region!;
+    const bbox = regionBBox(
+      tailRegion as unknown as Parameters<typeof regionBBox>[0]
+    );
+    expect(bbox.minY).toBeLessThan(0);
+  });
+
+  it('emits a closed stroke corridor for the Newsreader g loop', () => {
+    const glyph = glyphFor(newsreader, 'g');
+    const loops = detect(newsreader, 'g', 'loop');
+    expect(loops.length).toBeGreaterThan(0);
+    const loop = loops[0];
+    expect(loop.region?.kind).toBe('stroke');
+    // Closed corridor on a ring of N samples produces 2N vertices.
+    // 8 ring samples → 16; we already see 48 in real data, so 12 is a
+    // safe lower bound.
+    expect(loop.region!.points.length).toBeGreaterThanOrEqual(12);
+    expectRegionInsideGlyph(loop.region!, glyph.bbox);
+  });
+
+  it('emits an enclosed gap rectangle for the Nohemi e aperture', () => {
+    const glyph = glyphFor(nohemiP, 'e');
+    const apertures = detect(nohemiP, 'e', 'aperture');
+    expect(apertures.length).toBeGreaterThan(0);
+    const ap = apertures[0];
+    expect(ap.region?.kind).toBe('enclosed');
+    expect(ap.region!.points.length).toBe(4);
+    // Aperture is the negative space; the rectangle must align with one
+    // of the glyph's exterior edges (within 5% of glyph width). This
+    // catches a coordinate-space bug where the gap is centered in the
+    // middle of the glyph instead of attached to an edge.
+    const bbox = regionBBox(
+      ap.region! as unknown as Parameters<typeof regionBBox>[0]
+    );
+    const glyphW = glyph.bbox.maxX - glyph.bbox.minX;
+    const tol = glyphW * 0.05;
+    const touchesLeftOrRight =
+      Math.abs(bbox.minX - glyph.bbox.minX) < tol ||
+      Math.abs(bbox.maxX - glyph.bbox.maxX) < tol;
+    expect(touchesLeftOrRight).toBe(true);
+  });
+
+  it('emits a stroke projection region for the Newsreader g ear', () => {
+    const glyph = glyphFor(newsreader, 'g');
+    const ears = detect(newsreader, 'g', 'ear');
+    expect(ears.length).toBeGreaterThan(0);
+    const withRegion = ears.filter((e) => e.region);
+    // The projection helper requires ≥ 3 vertices; ear contours on
+    // Newsreader g produce that. If a future detector change produces a
+    // sparser contour the helper may return [] and this test will catch
+    // the regression rather than silently dropping the highlight.
+    expect(withRegion.length).toBeGreaterThan(0);
+    expect(withRegion[0].region?.kind).toBe('stroke');
+    expectRegionInsideGlyph(withRegion[0].region!, glyph.bbox);
+  });
+
+  it('produces a stroke projection region whenever finial fires on Newsreader s', () => {
+    // Newsreader s reliably fires multiple finial instances. At least one
+    // must carry a polygon; a regression that drops every region would
+    // fail this even though the detector keeps returning instances.
+    const finials = detect(newsreader, 's', 'finial');
+    expect(finials.length).toBeGreaterThan(0);
+    const withRegion = finials.filter((f) => f.region);
+    expect(withRegion.length).toBeGreaterThan(0);
+    const glyph = glyphFor(newsreader, 's');
+    for (const f of withRegion) {
+      expect(f.region?.kind).toBe('stroke');
+      expectRegionInsideGlyph(f.region!, glyph.bbox);
+    }
+  });
+
+  it('attaches a polygon to every Newsreader L serif instance, when one fires', () => {
+    // L is the smallest serif example we observed: 1 instance fires but
+    // the polygon depends on the projectionRegion walker's "always step
+    // once" floor. If that floor regresses, withRegion drops to 0 even
+    // while count stays at 1 — exactly the bug we're guarding against.
+    const serifs = detect(newsreader, 'L', 'serif');
+    if (serifs.length > 0) {
+      const withRegion = serifs.filter((s) => s.region);
+      expect(withRegion.length).toBe(serifs.length);
+      const glyph = glyphFor(newsreader, 'L');
+      for (const s of withRegion) {
+        expect(s.region?.kind).toBe('stroke');
+        expect(s.region!.points.length).toBeGreaterThanOrEqual(3);
+        expectRegionInsideGlyph(s.region!, glyph.bbox);
+      }
+    }
+  });
+});
+

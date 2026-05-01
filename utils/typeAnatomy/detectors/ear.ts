@@ -11,7 +11,28 @@
  */
 
 import { rayHits } from '@/utils/geometry/geometryCore';
+import { buildProjectionPolygon } from '../evidence/projectionRegion';
 import type { FeatureInstance, GeometryCache, Point2D } from '../types';
+
+const EAR_ARC_BUDGET_FRACTION = 0.12;
+
+function attachProjectionRegion(
+  inst: FeatureInstance,
+  geo: GeometryCache,
+  anchor: Point2D
+): FeatureInstance {
+  const budget = geo.metrics.capHeight * EAR_ARC_BUDGET_FRACTION;
+  const polygon = buildProjectionPolygon({
+    glyph: geo.glyph,
+    anchor,
+    arcLengthBudget: budget,
+  });
+  if (polygon.length < 3) return inst;
+  return {
+    ...inst,
+    region: { kind: 'stroke', points: polygon },
+  };
+}
 
 /**
  * Detects ear features on a glyph.
@@ -73,7 +94,7 @@ export function detectEar(geo: GeometryCache): FeatureInstance[] {
         curr.x > glyph.bbox.minX + bboxW * 0.5;
 
       if (nearTopRight) {
-        instances.push({
+        const inst: FeatureInstance = {
           id: 'ear',
           shape: {
             type: 'point',
@@ -88,7 +109,10 @@ export function detectEar(geo: GeometryCache): FeatureInstance[] {
           debug: {
             peakHeight: curr.x - Math.min(prev.x, next.x),
           },
-        });
+        };
+        instances.push(
+          attachProjectionRegion(inst, geo, { x: curr.x, y: curr.y })
+        );
       }
     }
   }
@@ -113,7 +137,7 @@ export function detectEar(geo: GeometryCache): FeatureInstance[] {
 
       // Ear extends further right than the body
       if (topExtension.x > lowerRight + stemWidth * 0.3) {
-        instances.push({
+        const inst: FeatureInstance = {
           id: 'ear',
           shape: {
             type: 'point',
@@ -128,7 +152,13 @@ export function detectEar(geo: GeometryCache): FeatureInstance[] {
           debug: {
             extension: topExtension.x - lowerRight,
           },
-        });
+        };
+        instances.push(
+          attachProjectionRegion(inst, geo, {
+            x: topExtension.x,
+            y: topExtension.y,
+          })
+        );
       }
     }
   }

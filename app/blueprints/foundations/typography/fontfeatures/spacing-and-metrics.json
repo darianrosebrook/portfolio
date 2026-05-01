@@ -1,0 +1,224 @@
+{
+  "schemaVersion": 1,
+  "id": "spacing-and-metrics",
+  "label": "Spacing and metrics",
+  "description": "Measurements, guides, spacing behavior, and layout metrics used to position type.",
+  "terms": [
+    {
+      "id": "ascender",
+      "term": "Ascender",
+      "aliases": [],
+      "definition": "Portion of lowercase that rises above the x-height.",
+      "letterforms": ["b", "d", "h", "k", "l", "t"],
+      "otTags": [],
+      "sources": ["Adobe Glossary"]
+    },
+    {
+      "id": "baseline",
+      "term": "Baseline",
+      "aliases": [],
+      "definition": "Imaginary line on which most letters sit.",
+      "letterforms": ["n", "H"],
+      "otTags": [],
+      "sources": ["Adobe Glossary"]
+    },
+    {
+      "id": "beard-line",
+      "term": "Beard line",
+      "aliases": [],
+      "definition": "Guideline touching the lowest serif points on old-style faces.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["Oxford DNB", "Letraset"]
+    },
+    {
+      "id": "bearing",
+      "term": "Bearing",
+      "aliases": ["Side bearing"],
+      "definition": "Space between glyph outline and advance box edge.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "body",
+      "term": "Body",
+      "aliases": ["em-square"],
+      "definition": "Full em box a digital glyph occupies; equals point size.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["Typography Deconstructed"]
+    },
+    {
+      "id": "body-height",
+      "term": "Body height",
+      "aliases": [],
+      "definition": "The full vertical extent of a glyph, including ascenders/descenders.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["Wikipedia"]
+    },
+    {
+      "id": "bounding-box",
+      "term": "Bounding box",
+      "aliases": ["EM box"],
+      "definition": "Total X and Y dimensions including bearings.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "cap-height",
+      "term": "Cap height",
+      "aliases": [],
+      "definition": "Distance from baseline to flat capital tops.",
+      "letterforms": ["H", "E"],
+      "otTags": [],
+      "sources": ["Adobe Glossary"]
+    },
+    {
+      "id": "center-space",
+      "term": "Center space",
+      "aliases": ["Optical core"],
+      "definition": "Center of visual mass in a glyph.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["CJK Type Guide (Adobe)"]
+    },
+    {
+      "id": "descender",
+      "term": "Descender",
+      "aliases": [],
+      "definition": "Portion that falls below the baseline.",
+      "letterforms": ["p", "q", "y", "g", "j"],
+      "otTags": [],
+      "sources": ["Adobe Glossary"]
+    },
+    {
+      "id": "descender-line",
+      "term": "Descender line",
+      "aliases": [],
+      "definition": "Guideline touching bottoms of descenders.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["Adobe Glossary"]
+    },
+    {
+      "id": "gravity-center",
+      "term": "Gravity center",
+      "aliases": ["CJK"],
+      "definition": "Optical centroid that balances CJK glyphs.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["Adobe CJK Guide"]
+    },
+    {
+      "id": "kerning",
+      "term": "Kerning",
+      "aliases": [],
+      "definition": "Pair-specific spacing adjustment.",
+      "letterforms": [],
+      "otTags": ["kern"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "leading",
+      "term": "Leading",
+      "aliases": ["Line spacing"],
+      "definition": "Baseline-to-baseline vertical distance.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["Adobe Glossary"]
+    },
+    {
+      "id": "linespacing",
+      "term": "Linespacing",
+      "aliases": [],
+      "definition": "Another term for leading; vertical space between lines.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["Monotype"]
+    },
+    {
+      "id": "mean-line",
+      "term": "Mean line",
+      "aliases": ["Midline"],
+      "definition": "Guideline marking the top of x-height.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["Oxford DNB"]
+    },
+    {
+      "id": "metrics",
+      "term": "Metrics",
+      "aliases": [],
+      "definition": "The spacing and sizing data in a font.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "overhang",
+      "term": "Overhang",
+      "aliases": [],
+      "definition": "Part of a glyph that extends beyond the baseline or cap height.",
+      "letterforms": ["O", "C", "S"],
+      "otTags": [],
+      "sources": ["Monotype"]
+    },
+    {
+      "id": "overshoot",
+      "term": "Overshoot",
+      "aliases": [],
+      "definition": "Curves extend beyond flat guides for optical balance.",
+      "letterforms": ["O", "C", "S"],
+      "otTags": [],
+      "sources": ["Adobe Glossary"]
+    },
+    {
+      "id": "side-bearing",
+      "term": "Side bearing",
+      "aliases": [],
+      "definition": "Left/right space between glyph and its advance width.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": []
+    },
+    {
+      "id": "tracking",
+      "term": "Tracking",
+      "aliases": [],
+      "definition": "Uniform letter-spacing over a text range.",
+      "letterforms": [],
+      "otTags": ["letter-spacing CSS"],
+      "sources": ["W3C"]
+    },
+    {
+      "id": "white-space",
+      "term": "White space",
+      "aliases": [],
+      "definition": "Area between and inside glyph strokes or between glyphs.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["CSS Fonts"]
+    },
+    {
+      "id": "width",
+      "term": "Width",
+      "aliases": [],
+      "definition": "The horizontal extent of a glyph.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["Monotype"]
+    },
+    {
+      "id": "x-height",
+      "term": "X-height",
+      "aliases": [],
+      "definition": "Height of lowercase x; baseline → mean line.",
+      "letterforms": ["x"],
+      "otTags": [],
+      "sources": ["Adobe Glossary"]
+    }
+  ]
+}

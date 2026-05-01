@@ -55,8 +55,14 @@ describe('Feature Detection System', () => {
         await import('@/utils/typeAnatomy/types');
 
       expect(toFeatureID('Apex')).toBe('apex');
-      expect(toFeatureID('Cross stroke')).toBe('cross-stroke');
+      // Display key matches the canonical anatomy.json term 'Cross-stroke'
+      // (was 'Cross stroke' before the JSON-driven toggle migration).
+      expect(toFeatureID('Cross-stroke')).toBe('cross-stroke');
       expect(toDisplayName('apex')).toBe('Apex');
+      // 'Bar' is a back-compat alias for the same FeatureID as 'Crossbar';
+      // both map to the registered crossbar detector.
+      expect(toFeatureID('Bar')).toBe('crossbar');
+      expect(toFeatureID('Crossbar')).toBe('crossbar');
     });
   });
 

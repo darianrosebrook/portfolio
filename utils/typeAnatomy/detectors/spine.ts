@@ -10,6 +10,7 @@
  */
 
 import { rayHits } from '@/utils/geometry/geometryCore';
+import { buildCorridorPolygon } from '../evidence/corridorRegion';
 import type { FeatureInstance, GeometryCache, Point2D } from '../types';
 
 /**
@@ -34,7 +35,7 @@ export function detectSpine(geo: GeometryCache): FeatureInstance[] {
   }
 
   const instances: FeatureInstance[] = [];
-  const { eps, bboxW, bboxH, overshoot } = scale;
+  const { eps, bboxW, bboxH, stemWidth, overshoot } = scale;
 
   // Determine height zone (uppercase S uses capHeight, lowercase s uses xHeight)
   const glyphTop = glyph.bbox.maxY;
@@ -44,6 +45,7 @@ export function detectSpine(geo: GeometryCache): FeatureInstance[] {
   // Scan at multiple Y levels to detect S-curve
   const levels = 7;
   const midpoints: Point2D[] = [];
+  const widths: number[] = [];
   const directions: number[] = [];
 
   for (let i = 0; i <= levels; i++) {
@@ -70,6 +72,7 @@ export function detectSpine(geo: GeometryCache): FeatureInstance[] {
     );
 
     midpoints.push({ x: largestSpan.midX, y });
+    widths.push(largestSpan.width);
   }
 
   if (midpoints.length < 3) {
@@ -95,9 +98,22 @@ export function detectSpine(geo: GeometryCache): FeatureInstance[] {
   // S-curve should have at least one direction change
   // Typically 1 for S/s (curves left then right, or vice versa)
   if (curveDirectionChanges >= 1) {
+    // Corridor uses the per-level filled-span width as local thickness so the
+    // highlight fattens at the bowls of the S and pinches in the waist.
+    // Falls back to stemWidth when a level has no width (shouldn't happen
+    // since we filter by spans.length, but keep the corridor robust).
+    const corridor = buildCorridorPolygon({
+      midpoints,
+      thickness: (_pt, _t, idx) => widths[idx] ?? stemWidth,
+    });
+
     instances.push({
       id: 'spine',
       shape: { type: 'polyline', points: midpoints },
+      region:
+        corridor.length >= 4
+          ? { kind: 'stroke', points: corridor }
+          : undefined,
       confidence: Math.min(0.9, 0.5 + curveDirectionChanges * 0.2),
       anchors: {
         top: midpoints[midpoints.length - 1],

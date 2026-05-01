@@ -123,9 +123,13 @@ test.describe('Feature highlight overlay (Nohemi)', () => {
     await screenshotCanvas(page, 'nohemi-H-stem.png');
   });
 
-  test('H + Crossbar: horizontal bar between stems', async ({ page }) => {
+  test('H + Bar: horizontal bar between stems', async ({ page }) => {
+    // Toggle label moved from 'Crossbar' to 'Bar' when the inspector
+    // switched to JSON-driven toggles (anatomy.json names the feature
+    // 'Bar'). Detector and rendered output are unchanged so the baseline
+    // filename stays nohemi-H-crossbar.png.
     await loadInspector(page);
-    await enableFeature(page, 'H', 'Crossbar');
+    await enableFeature(page, 'H', 'Bar');
     await screenshotCanvas(page, 'nohemi-H-crossbar.png');
   });
 

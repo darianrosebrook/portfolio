@@ -1,0 +1,548 @@
+{
+  "schemaVersion": 1,
+  "id": "anatomy",
+  "label": "Glyph anatomy",
+  "description": "Named parts of glyph construction and visible letterform structure.",
+  "terms": [
+    {
+      "id": "ankle",
+      "term": "Ankle",
+      "aliases": [],
+      "definition": "Small curved juncture where a stem meets a leg.",
+      "letterforms": ["R", "k"],
+      "otTags": [],
+      "sources": ["Blackwell"]
+    },
+    {
+      "id": "aperture",
+      "term": "Aperture",
+      "aliases": [],
+      "definition": "Opening between counter and outside space in partially closed glyphs.",
+      "letterforms": ["e", "a", "c"],
+      "otTags": [],
+      "sources": ["Bringhurst"]
+    },
+    {
+      "id": "apex",
+      "term": "Apex",
+      "aliases": ["Vertex-top"],
+      "definition": "Point where two diagonals meet at the top of a glyph.",
+      "letterforms": ["A", "W"],
+      "otTags": [],
+      "sources": ["Type Terminology (Adobe)"]
+    },
+    {
+      "id": "arc",
+      "term": "Arc",
+      "aliases": ["Arch"],
+      "definition": "Curved transition stroke joining stems.",
+      "letterforms": ["n", "m", "h", "a"],
+      "otTags": [],
+      "sources": ["Blackwell"]
+    },
+    {
+      "id": "arm",
+      "term": "Arm",
+      "aliases": [],
+      "definition": "Horizontal or angled stroke free at one or both ends.",
+      "letterforms": ["T", "K", "r"],
+      "otTags": [],
+      "sources": ["Adobe Glossary"]
+    },
+    {
+      "id": "axis",
+      "term": "Axis",
+      "aliases": ["Calligraphic stress"],
+      "definition": "Imaginary line through thinnest parts of a curved stroke; shows thick-to-thin angle.",
+      "letterforms": ["o", "e"],
+      "otTags": [],
+      "sources": ["Bringhurst"]
+    },
+    {
+      "id": "ball-terminal",
+      "term": "Ball terminal",
+      "aliases": [],
+      "definition": "Rounded circular stroke ending.",
+      "letterforms": ["a", "c", "f", "j", "r"],
+      "otTags": [],
+      "sources": ["Blackwell"]
+    },
+    {
+      "id": "bar",
+      "term": "Bar",
+      "aliases": ["horizontal bar"],
+      "definition": "Horizontal stroke that connects or divides forms.",
+      "letterforms": ["H", "t", "4"],
+      "otTags": [],
+      "sources": ["Adobe Glossary"]
+    },
+    {
+      "id": "beak",
+      "term": "Beak",
+      "aliases": ["Beak serif"],
+      "definition": "Sharp triangular serif or stroke ending.",
+      "letterforms": ["T", "E"],
+      "otTags": [],
+      "sources": ["Blackwell"]
+    },
+    {
+      "id": "belly",
+      "term": "Belly",
+      "aliases": [],
+      "definition": "Bulging outward curve that is not fully closed.",
+      "letterforms": ["P", "R"],
+      "otTags": [],
+      "sources": ["Type Terminology (Linotype)"]
+    },
+    {
+      "id": "bilateral-serif",
+      "term": "Bilateral serif",
+      "aliases": [],
+      "definition": "Serif extending equally left and right from a stem.",
+      "letterforms": ["I", "H"],
+      "otTags": [],
+      "sources": ["Blackwell"]
+    },
+    {
+      "id": "bowl",
+      "term": "Bowl",
+      "aliases": [],
+      "definition": "Fully enclosed curved counter.",
+      "letterforms": ["o", "b", "d", "p", "q", "D", "B", "P", "R"],
+      "otTags": [],
+      "sources": ["Adobe Glossary"]
+    },
+    {
+      "id": "bracket",
+      "term": "Bracket",
+      "aliases": [],
+      "definition": "Curved transition between serif and main stroke.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["Adobe Glossary"]
+    },
+    {
+      "id": "connecting-stroke",
+      "term": "Connecting stroke",
+      "aliases": [],
+      "definition": "A stroke that joins two parts of a glyph.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["TypeType"]
+    },
+    {
+      "id": "counter",
+      "term": "Counter",
+      "aliases": ["Counter-form", "Window"],
+      "definition": "Negative space inside (closed) or partly inside (open) a glyph.",
+      "letterforms": ["b", "d", "o", "p", "q", "a", "e", "n"],
+      "otTags": [],
+      "sources": ["Heckdon", "Adobe"]
+    },
+    {
+      "id": "cross-stroke",
+      "term": "Cross-stroke",
+      "aliases": ["Cross-bar"],
+      "definition": "Short horizontal crossing a single stem.",
+      "letterforms": ["t", "f"],
+      "otTags": [],
+      "sources": ["Adobe Glossary"]
+    },
+    {
+      "id": "crotch",
+      "term": "Crotch",
+      "aliases": [],
+      "definition": "Interior angle where two strokes meet.",
+      "letterforms": ["V", "Y"],
+      "otTags": [],
+      "sources": ["Blackwell"]
+    },
+    {
+      "id": "diagonal-stress",
+      "term": "Diagonal stress",
+      "aliases": [],
+      "definition": "Stroke contrast where thinnest axis is diagonal.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["Bringhurst"]
+    },
+    {
+      "id": "downstroke",
+      "term": "Downstroke",
+      "aliases": [],
+      "definition": "Descending diagonal stroke.",
+      "letterforms": ["A"],
+      "otTags": [],
+      "sources": ["TypeType"]
+    },
+    {
+      "id": "drop",
+      "term": "Drop",
+      "aliases": ["Teardrop terminal"],
+      "definition": "Teardrop-shaped terminal on serif *r* or *a*.",
+      "letterforms": ["r", "a"],
+      "otTags": [],
+      "sources": ["PangramPangram"]
+    },
+    {
+      "id": "ear",
+      "term": "Ear",
+      "aliases": [],
+      "definition": "Small projecting stroke on double-storey *g* or *r*.",
+      "letterforms": ["g", "r", "f"],
+      "otTags": [],
+      "sources": ["Type Anatomy (Adobe)"]
+    },
+    {
+      "id": "eye",
+      "term": "Eye",
+      "aliases": [],
+      "definition": "Enclosed counter of lowercase *e*.",
+      "letterforms": ["e"],
+      "otTags": [],
+      "sources": ["Typedia"]
+    },
+    {
+      "id": "finial",
+      "term": "Finial",
+      "aliases": ["flat", "tapered"],
+      "definition": "Terminal ending that is neither serif nor ball.",
+      "letterforms": ["e", "c"],
+      "otTags": [],
+      "sources": ["Blackwell"]
+    },
+    {
+      "id": "flag",
+      "term": "Flag",
+      "aliases": [],
+      "definition": "Horizontal stroke atop numeral 5.",
+      "letterforms": ["5"],
+      "otTags": [],
+      "sources": ["Blackwell"]
+    },
+    {
+      "id": "flourish",
+      "term": "Flourish",
+      "aliases": [],
+      "definition": "Ornamental extension or stroke.",
+      "letterforms": [],
+      "otTags": ["swsh"],
+      "sources": ["Monotype"]
+    },
+    {
+      "id": "foot",
+      "term": "Foot",
+      "aliases": [],
+      "definition": "Bottom serif or end of vertical stroke on baseline.",
+      "letterforms": ["E", "L"],
+      "otTags": [],
+      "sources": ["Blackwell"]
+    },
+    {
+      "id": "foot-serif",
+      "term": "Foot serif",
+      "aliases": [],
+      "definition": "Bottom serif of a vertical stroke.",
+      "letterforms": ["S", "I"],
+      "otTags": [],
+      "sources": ["Blackwell"]
+    },
+    {
+      "id": "gadzook",
+      "term": "Gadzook",
+      "aliases": [],
+      "definition": "Decorative flourish linking letters inside a discretionary ligature.",
+      "letterforms": ["ct", "st"],
+      "otTags": ["dlig"],
+      "sources": ["MS Typography"]
+    },
+    {
+      "id": "hairline",
+      "term": "Hairline",
+      "aliases": [],
+      "definition": "Thinnest stroke in glyph or thinnest weight name.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["Adobe Glossary"]
+    },
+    {
+      "id": "head-serif",
+      "term": "Head serif",
+      "aliases": [],
+      "definition": "Serif at top of a vertical stroke.",
+      "letterforms": ["I", "H"],
+      "otTags": [],
+      "sources": ["Blackwell"]
+    },
+    {
+      "id": "hook",
+      "term": "Hook",
+      "aliases": [],
+      "definition": "Downward-curving terminal.",
+      "letterforms": ["f", "j", "s", "r"],
+      "otTags": [],
+      "sources": ["Blackwell"]
+    },
+    {
+      "id": "joint",
+      "term": "Joint",
+      "aliases": ["Junction"],
+      "definition": "Point where a secondary stroke meets a stem.",
+      "letterforms": ["k", "v", "w", "y"],
+      "otTags": [],
+      "sources": ["Type Anatomy (Adobe)"]
+    },
+    {
+      "id": "leg",
+      "term": "Leg",
+      "aliases": [],
+      "definition": "Downward diagonal stroke.",
+      "letterforms": ["R", "K", "k"],
+      "otTags": [],
+      "sources": ["Adobe Glossary"]
+    },
+    {
+      "id": "ligature",
+      "term": "Ligature",
+      "aliases": [],
+      "definition": "Single glyph representing two or more joined letters.",
+      "letterforms": ["fi", "fl", "ct", "st"],
+      "otTags": ["liga", "dlig"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "link",
+      "term": "Link",
+      "aliases": ["Neck", "double-storey g"],
+      "definition": "Connector between upper bowl and lower loop.",
+      "letterforms": ["g"],
+      "otTags": [],
+      "sources": ["Adobe Glossary"]
+    },
+    {
+      "id": "loop",
+      "term": "Loop",
+      "aliases": ["Lobe"],
+      "definition": "Lower closed counter of double-storey g.",
+      "letterforms": ["g"],
+      "otTags": [],
+      "sources": ["Adobe Glossary"]
+    },
+    {
+      "id": "lower-bowl",
+      "term": "Lower bowl",
+      "aliases": [],
+      "definition": "Bottom bowl in two-storey glyphs.",
+      "letterforms": ["g"],
+      "otTags": [],
+      "sources": []
+    },
+    {
+      "id": "neck",
+      "term": "Neck",
+      "aliases": ["R", "K"],
+      "definition": "Narrow connection between bowl and leg.",
+      "letterforms": ["R", "K"],
+      "otTags": [],
+      "sources": []
+    },
+    {
+      "id": "serif",
+      "term": "Serif",
+      "aliases": [],
+      "definition": "Small finishing stroke at ends of main strokes.",
+      "letterforms": ["T", "I", "E", "F"],
+      "otTags": [],
+      "sources": ["Adobe Glossary"]
+    },
+    {
+      "id": "shoulder",
+      "term": "Shoulder",
+      "aliases": [],
+      "definition": "Curved stroke projecting from a stem.",
+      "letterforms": ["h", "n", "m"],
+      "otTags": [],
+      "sources": ["Adobe Glossary"]
+    },
+    {
+      "id": "single-storey",
+      "term": "Single-storey",
+      "aliases": ["Double-storey"],
+      "definition": "Differentiates one-bowl vs. two-bowl a or g.",
+      "letterforms": ["a", "g"],
+      "otTags": [],
+      "sources": ["Blackwell"]
+    },
+    {
+      "id": "spine",
+      "term": "Spine",
+      "aliases": [],
+      "definition": "Central curved stroke of S.",
+      "letterforms": ["S", "s"],
+      "otTags": [],
+      "sources": ["Adobe Glossary"]
+    },
+    {
+      "id": "spur",
+      "term": "Spur",
+      "aliases": [],
+      "definition": "Short projection off a main stroke (not a serif).",
+      "letterforms": ["G", "b", "a", "c", "e"],
+      "otTags": [],
+      "sources": ["Blackwell"]
+    },
+    {
+      "id": "spurless",
+      "term": "Spurless",
+      "aliases": [],
+      "definition": "A design where curves transition into stems without a spur.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["Monotype"]
+    },
+    {
+      "id": "stem",
+      "term": "Stem",
+      "aliases": [],
+      "definition": "The main vertical (or near-vertical) backbone stroke of a glyph.",
+      "letterforms": ["I", "T", "l", "h", "b", "n", "H", "B", "D"],
+      "otTags": [],
+      "sources": ["Adobe Glossary", "Blackwell"]
+    },
+    {
+      "id": "stress-contrast",
+      "term": "Stress contrast",
+      "aliases": ["degree"],
+      "definition": "Ratio between thick and thin strokes.",
+      "letterforms": ["o", "e"],
+      "otTags": [],
+      "sources": ["Bringhurst"]
+    },
+    {
+      "id": "stroke-modulation",
+      "term": "Stroke modulation",
+      "aliases": [],
+      "definition": "Pattern of thickness variation along a stroke.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": ["Bringhurst"]
+    },
+    {
+      "id": "swash",
+      "term": "Swash",
+      "aliases": [],
+      "definition": "Decorative, extended flourish on glyphs.",
+      "letterforms": ["A", "Q", "k", "R", "h", "f"],
+      "otTags": ["swsh"],
+      "sources": ["OpenType spec"]
+    },
+    {
+      "id": "tail",
+      "term": "Tail",
+      "aliases": [],
+      "definition": "Descending diagonal or curved stroke.",
+      "letterforms": ["Q", "y", "t"],
+      "otTags": [],
+      "sources": ["Adobe Glossary"]
+    },
+    {
+      "id": "taper",
+      "term": "Taper",
+      "aliases": [],
+      "definition": "Gradual thinning at the end of a stroke.",
+      "letterforms": [],
+      "otTags": [],
+      "sources": []
+    },
+    {
+      "id": "teardrop-terminal",
+      "term": "Teardrop terminal",
+      "aliases": [],
+      "definition": "Terminal ending in teardrop shape.",
+      "letterforms": ["a", "r"],
+      "otTags": [],
+      "sources": []
+    },
+    {
+      "id": "terminal",
+      "term": "Terminal",
+      "aliases": [],
+      "definition": "Any stroke ending lacking a serif (ball, flat, teardrop, etc.).",
+      "letterforms": ["a", "c", "f", "j", "r"],
+      "otTags": [],
+      "sources": ["Adobe Glossary"]
+    },
+    {
+      "id": "tie",
+      "term": "Tie",
+      "aliases": [],
+      "definition": "Curved connecting stroke in discretionary ligatures.",
+      "letterforms": ["ct", "st"],
+      "otTags": ["dlig"],
+      "sources": ["Blackwell"]
+    },
+    {
+      "id": "tittle",
+      "term": "Tittle",
+      "aliases": [],
+      "definition": "Dot above i or j.",
+      "letterforms": ["i", "j"],
+      "otTags": [],
+      "sources": ["Adobe Glossary"]
+    },
+    {
+      "id": "upper-bowl",
+      "term": "Upper bowl",
+      "aliases": [],
+      "definition": "Top bowl in two-storey glyphs.",
+      "letterforms": ["B"],
+      "otTags": [],
+      "sources": []
+    },
+    {
+      "id": "uppercase",
+      "term": "Uppercase",
+      "aliases": ["Lowercase"],
+      "definition": "Caps and small letters; names from metal-type cases.",
+      "letterforms": ["A", "a"],
+      "otTags": [],
+      "sources": ["Typedia"]
+    },
+    {
+      "id": "upstroke",
+      "term": "Upstroke",
+      "aliases": [],
+      "definition": "Ascending diagonal stroke.",
+      "letterforms": ["A"],
+      "otTags": [],
+      "sources": ["TypeType"]
+    },
+    {
+      "id": "vertex",
+      "term": "Vertex",
+      "aliases": ["bottom"],
+      "definition": "Point where two diagonals meet at bottom.",
+      "letterforms": ["V", "W"],
+      "otTags": [],
+      "sources": ["Blackwell"]
+    },
+    {
+      "id": "waist",
+      "term": "Waist",
+      "aliases": [],
+      "definition": "Narrow middle section of B, E, S.",
+      "letterforms": ["B", "E", "S"],
+      "otTags": [],
+      "sources": ["Blackwell"]
+    },
+    {
+      "id": "window",
+      "term": "Window",
+      "aliases": [],
+      "definition": "Large, often rectangular counterform in some sans-serifs.",
+      "letterforms": ["A", "DIN-style a", "Euro-style a"],
+      "otTags": [],
+      "sources": ["Heckdon"]
+    }
+  ]
+}

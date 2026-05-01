@@ -10,6 +10,7 @@
  */
 
 import { rayHits } from '@/utils/geometry/geometryCore';
+import { buildCorridorPolygon } from '../evidence/corridorRegion';
 import type { FeatureInstance, GeometryCache, Point2D } from '../types';
 
 /**
@@ -84,9 +85,24 @@ export function detectLoop(geo: GeometryCache): FeatureInstance[] {
       );
 
       if (belowBaseline.length >= 6) {
+        // Closed corridor around the loop's outer boundary. The traced
+        // points form a ring; the corridor builder offsets ±half-stemWidth
+        // along the local normal at each ring vertex. The renderer then
+        // clips against the glyph fill so only the actual stroke pixels
+        // light up — the inside of the loop stays transparent.
+        const corridor = buildCorridorPolygon({
+          midpoints: belowBaseline,
+          thickness: stemWidth,
+          closed: true,
+        });
+
         instances.push({
           id: 'loop',
           shape: { type: 'polyline', points: belowBaseline },
+          region:
+            corridor.length >= 6
+              ? { kind: 'stroke', points: corridor }
+              : undefined,
           confidence: 0.8,
           anchors: {
             center: calculateCentroid(belowBaseline),
