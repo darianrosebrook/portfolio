@@ -210,21 +210,37 @@ test.describe('Feature highlight overlay (Newsreader corridors and projections)'
   });
 });
 
-// Serif / finial / spur visual baselines deferred:
-// - Serif: the inspector gates the toggle behind ctx.isSerif, which
-//   uses a "fontName contains 'serif'" heuristic. Newsreader's name
-//   doesn't contain that substring so the toggle is hidden even on a
-//   visibly-serifed font. Fixing the heuristic is a separate change.
-// - Finial: glyphFeatureHints.ts has no `finial` entry on any glyph,
-//   so the toggle never renders.
-// - Spur: hints exist only for G/S; detection never fires on those
-//   in the loaded fonts. Inter b detects but has no spur hint.
-//
-// Region wiring for these three is exercised by:
-//   1. unit tests against buildProjectionPolygon (utils/.../projectionRegion.test.ts),
-//   2. region polygon assertions in feature-accuracy.test.ts ("attaches a
-//      polygon to every Newsreader L serif instance, when one fires" and
-//      "produces a stroke projection region whenever finial fires on Newsreader s"),
-//   3. mutation probe D2 (buildProjectionPolygon → []).
-// When the hint system or isSerif heuristic is broadened, add visual
-// baselines for the relevant letter-feature pairs.
+test.describe('Feature highlight overlay (Track 1: re-enabled UX gates)', () => {
+  // Track 1 closed two UX gates that previously hid working detector output:
+  //   1. isSerifFont() now allowlists Newsreader → Serif toggle visible.
+  //   2. glyphFeatureHints adds `finial` to common terminal-bearing glyphs.
+  // The third UX gate (spur on Inter b) was deferred: detection at the
+  // inspector's default axes (wght=400, opsz=32) returns count=0 across
+  // every loaded font, so adding a Playwright baseline would just lock in
+  // an empty render. The hint is still added so a user who tweaks the axes
+  // can see the toggle when detection fires.
+  //
+  // Detection firing is axis-dependent for Newsreader (variable opsz axis).
+  // Glyphs and instance counts here are verified at the inspector's
+  // default axis values; see preflight-track1.ts.
+
+  test('Newsreader E + Serif: bracket-foot projections', async ({ page }) => {
+    // Serif fires 3 instances on Newsreader E at default axes (foot, mid
+    // bar, top). E is the most reliable Newsreader uppercase serif case —
+    // I/T/H/L/F/M/N return count=0 due to a known detector limitation
+    // (see TODO in detectors/serif.ts).
+    await loadInspector(page);
+    await selectFont(page, 'Newsreader');
+    await enableFeature(page, 'E', 'Serif');
+    await screenshotCanvas(page, 'newsreader-E-serif.png');
+  });
+
+  test('Newsreader s + Finial: terminal curl projection', async ({ page }) => {
+    // Finial fires 1 instance on Newsreader s at default axes (lower-left
+    // terminal). The projection polygon highlights the terminal curl.
+    await loadInspector(page);
+    await selectFont(page, 'Newsreader');
+    await enableFeature(page, 's', 'Finial');
+    await screenshotCanvas(page, 'newsreader-s-finial.png');
+  });
+});

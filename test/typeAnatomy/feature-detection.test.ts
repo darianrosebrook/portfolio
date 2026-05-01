@@ -66,6 +66,57 @@ describe('Feature Detection System', () => {
     });
   });
 
+  describe('isSerifFont heuristic', () => {
+    // The inspector's `DetectionContext.isSerif` flag drives which feature
+    // toggles are visible (every `serif`-gated hint disappears when the
+    // flag is false). The heuristic must therefore correctly classify
+    // bundled serif fonts whose name doesn't contain the literal
+    // substring "serif" (Newsreader is the canonical case).
+    //
+    // See ui/modules/FontInspector/fontHeuristics.ts.
+
+    it('flags Newsreader as a serif despite the name not containing "serif"', async () => {
+      const { isSerifFont } = await import(
+        '@/ui/modules/FontInspector/fontHeuristics'
+      );
+      // Real fontkit value for public/fonts/Newsreader-VF.ttf.
+      expect(isSerifFont('Newsreader 16pt Regular')).toBe(true);
+      // Family-name fallback path.
+      expect(isSerifFont('Newsreader 16pt')).toBe(true);
+    });
+
+    it('flags Inter Variable as sans-serif', async () => {
+      const { isSerifFont } = await import(
+        '@/ui/modules/FontInspector/fontHeuristics'
+      );
+      expect(isSerifFont('Inter Variable')).toBe(false);
+    });
+
+    it('flags Nohemi as sans-serif', async () => {
+      const { isSerifFont } = await import(
+        '@/ui/modules/FontInspector/fontHeuristics'
+      );
+      expect(isSerifFont('Nohemi Regular')).toBe(false);
+    });
+
+    it('flags fonts whose name contains "Serif" via substring fallback', async () => {
+      const { isSerifFont } = await import(
+        '@/ui/modules/FontInspector/fontHeuristics'
+      );
+      expect(isSerifFont('PT Serif')).toBe(true);
+      expect(isSerifFont('Crimson Text Serif')).toBe(true);
+    });
+
+    it('rejects sans-serif and grotesk variants that incidentally contain "serif"', async () => {
+      const { isSerifFont } = await import(
+        '@/ui/modules/FontInspector/fontHeuristics'
+      );
+      // The substring fallback explicitly excludes sans / grotesk.
+      expect(isSerifFont('PT Sans Serif')).toBe(false);
+      expect(isSerifFont('Roboto Serif Grotesk')).toBe(false);
+    });
+  });
+
   describe('Geometry Cache', () => {
     it('should build geometry cache from mock glyph', () => {
       const mockGlyph = {

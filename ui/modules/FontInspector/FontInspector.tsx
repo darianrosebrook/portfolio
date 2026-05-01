@@ -13,6 +13,7 @@ import React, {
 } from 'react';
 import { AnatomyControls } from './AnatomyControls';
 import { ANATOMY_FEATURES } from './anatomyToggles';
+import { isSerifFont } from './fontHeuristics';
 import styles from './FontInspector.module.scss';
 import { InspectorControls } from './InspectorControls';
 import { SymbolCanvas } from './SymbolCanvas';
@@ -477,15 +478,9 @@ export const InspectorProvider: React.FC<{
       'OS/2'?: { usWeightClass?: number };
     };
 
-    const fontName = (
-      fontInstance.fullName ||
-      fontInstance.familyName ||
-      ''
-    ).toLowerCase();
-    const isSerif =
-      fontName.includes('serif') &&
-      !fontName.includes('sans') &&
-      !fontName.includes('grotesk');
+    const isSerif = isSerifFont(
+      fontInstance.fullName || fontInstance.familyName || ''
+    );
 
     const italicAngle = fontAny.post?.italicAngle || 0;
 

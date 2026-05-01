@@ -7,6 +7,34 @@
  * - Uses scale.stemWidth for nudge distances instead of huge EPS multipliers
  * - Focus on terminal positions (baseline, cap height) not mid-body
  * - Horizontal outward probe is more diagnostic than vertical
+ *
+ * TODO(serif/Newsreader detection gap):
+ * Per Track 1 preflight (2026-04-30) at the inspector's default axis values
+ * (wght=400, opsz=32), this detector misses most of Newsreader's
+ * canonically-serifed glyphs:
+ *   working:  E (3), B (1), P (1), R (1), b (1), p (1)
+ *   empty:    I, T, H, L, D, F, M, N, l, d, h
+ * Notably, results are AXIS-DEPENDENT: at opsz=6 the working set differs
+ * (L/D/P fire instead of E/B/P/R) — the contour topology changes with
+ * optical-size variant.
+ *
+ * Hypothesis: at metrics.baseline / capHeight, the horizontal scan returns a
+ * single wide span covering the full serif foot. detectSerifAtEdge() then
+ * probes outward from the foot's outermost extent and finds nothing because
+ * the serif IS the outermost extent at that Y. Glyphs that fire have
+ * asymmetric / multi-stem feet so the inward probe lands inside the body
+ * and trips the distance filter at line 127.
+ *
+ * Likely fixes (defer to PR 4):
+ *   1. Probe at metrics.baseline + stemWidth*0.5 (slightly above the foot,
+ *      where the stem narrows). The foot serif then appears as a wider
+ *      span at baseline than the span at baseline + stemWidth*0.5.
+ *   2. Compare adjacent Y levels to detect stem→foot widening directly.
+ *   3. Use the projection polygon contour walk (already used for region
+ *      output) as primary detection instead of a horizontal-probe gate.
+ *
+ * Tuning here is open-ended; the E Playwright baseline added in Track 1.4
+ * documents the working case so a future tuning pass can compare diffs.
  */
 
 import { rayHits } from '@/utils/geometry/geometryCore';
