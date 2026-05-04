@@ -71,25 +71,53 @@ class ComponentValidator {
 
   logError(message) {
     this.errors.push(message);
-    this.log(`❌ ${message}`, 'red');
+    this.log(`ERROR ${message}`, 'red');
   }
 
   logWarning(message) {
     this.warnings.push(message);
-    this.log(`⚠️  ${message}`, 'yellow');
+    this.log(`WARN ${message}`, 'yellow');
   }
 
   logSuccess(message) {
     this.successes.push(message);
-    this.log(`✅ ${message}`, 'green');
+    this.log(`OK ${message}`, 'green');
   }
 
   logInfo(message) {
-    this.log(`ℹ️  ${message}`, 'blue');
+    this.log(`INFO ${message}`, 'blue');
+  }
+
+  readContract(componentPath, componentName) {
+    const exactPath = path.join(componentPath, `${componentName}.contract.json`);
+    const fallbackFile = fs
+      .readdirSync(componentPath)
+      .find((file) => file.endsWith('.contract.json'));
+    const contractPath = fs.existsSync(exactPath)
+      ? exactPath
+      : fallbackFile
+        ? path.join(componentPath, fallbackFile)
+        : null;
+
+    if (!contractPath || !fs.existsSync(contractPath)) {
+      return null;
+    }
+
+    try {
+      return JSON.parse(fs.readFileSync(contractPath, 'utf8'));
+    } catch {
+      return null;
+    }
   }
 
   validateComponentStructure(componentPath, componentName, type = 'component') {
     this.log(`\n${colors.bold}Validating ${componentName}${colors.reset}`);
+    const contract =
+      type === 'component' ? this.readContract(componentPath, componentName) : null;
+    const contractComponentName =
+      typeof contract?.name === 'string' ? contract.name : componentName;
+    const contractLayer =
+      typeof contract?.layer === 'string' ? contract.layer : null;
 
     const requiredFiles =
       type === 'component' ? COMPONENT_REQUIRED_FILES : MODULE_REQUIRED_FILES;
@@ -100,10 +128,18 @@ class ComponentValidator {
 
     // Check required files
     requiredFiles.forEach((filePattern) => {
-      const fileName = filePattern.replace('{ComponentName}', componentName);
+      const replacementName = filePattern.endsWith('.contract.json')
+        ? componentName
+        : contractComponentName;
+      const fileName = filePattern.replace('{ComponentName}', replacementName);
       const filePath = path.join(componentPath, fileName);
+      const exists = filePattern.endsWith('.contract.json')
+        ? fs
+            .readdirSync(componentPath)
+            .some((file) => file.endsWith('.contract.json'))
+        : fs.existsSync(filePath);
 
-      if (!fs.existsSync(filePath)) {
+      if (!exists) {
         this.logError(`Missing required file: ${fileName}`);
         hasErrors = true;
       } else {
@@ -131,17 +167,26 @@ class ComponentValidator {
     });
 
     // Validate file naming conventions
-    this.validateNamingConventions(componentPath, componentName, type);
+    this.validateNamingConventions(
+      componentPath,
+      contractComponentName,
+      type
+    );
 
     // Validate index file (.tsx or .ts)
-    this.validateIndexFile(componentPath, componentName, type);
+    this.validateIndexFile(componentPath, contractComponentName, type);
 
     // Validate main component file
-    this.validateMainComponentFile(componentPath, componentName, type);
+    this.validateMainComponentFile(
+      componentPath,
+      contractComponentName,
+      type,
+      contractLayer
+    );
 
     // Check for composer-specific files (only for components)
-    if (type === 'component') {
-      this.validateComposerPattern(componentPath, componentName);
+    if (type === 'component' && contractLayer === 'composer') {
+      this.validateComposerPattern(componentPath, contractComponentName);
     }
 
     // Validate README.md file (only for components)
@@ -151,7 +196,7 @@ class ComponentValidator {
 
     // Validate SCSS module file (only for components)
     if (type === 'component') {
-      this.validateScssFile(componentPath, componentName);
+      this.validateScssFile(componentPath, contractComponentName);
     }
 
     return !hasErrors;
@@ -159,6 +204,12 @@ class ComponentValidator {
 
   validateNamingConventions(componentPath, componentName, type = 'component') {
     const files = fs.readdirSync(componentPath);
+    const allowedLowercaseFiles = new Set([
+      'index.tsx',
+      'types.ts',
+      'constants.ts',
+      'styles.ts',
+    ]);
 
     files.forEach((file) => {
       // Check for PascalCase in component name
@@ -180,7 +231,7 @@ class ComponentValidator {
       // Check for lowercase files that should be PascalCase
       if (file.match(/^[a-z].*\.tsx?$/)) {
         if (
-          file !== 'index.tsx' &&
+          !allowedLowercaseFiles.has(file) &&
           !file.includes('utils') &&
           !file.startsWith('use')
         ) {
@@ -209,9 +260,29 @@ class ComponentValidator {
     try {
       const content = fs.readFileSync(indexPath, 'utf8');
 
-      // Accept any of: export default X, export { default } from '...', export { X, default } from '...'
+      // Check for default export by resolving the local target on disk. This
+      // supports lowercase folders with PascalCase implementation files.
+      const resolvesToModule = (target) => {
+        const targetPath = path.join(componentPath, target);
+        return (
+          fs.existsSync(`${targetPath}.tsx`) ||
+          fs.existsSync(`${targetPath}.ts`) ||
+          fs.existsSync(path.join(targetPath, 'index.tsx')) ||
+          fs.existsSync(path.join(targetPath, 'index.ts'))
+        );
+      };
+      const defaultExportTargets = [
+        ...content.matchAll(
+          /export\s*\{\s*default(?:\s+as\s+\w+)?\s*\}\s*from\s*['"]([^'"]+)['"]/g
+        ),
+      ].map((match) => match[1]);
+      const defaultImportTargets = [
+        ...content.matchAll(/import\s+\w+(?:\s*,[^'"]*)?\s+from\s*['"]([^'"]+)['"]/g),
+      ].map((match) => match[1]);
+      const hasExportDefaultIdentifier = /export\s+default\s+\w+/.test(content);
       const hasValidDefaultExport =
-        /export\s+default\s+/.test(content) ||
+        defaultExportTargets.some(resolvesToModule) ||
+        (hasExportDefaultIdentifier && defaultImportTargets.some(resolvesToModule)) ||
         /export\s*\{[^}]*\bdefault\b[^}]*\}/.test(content);
 
       if (hasValidDefaultExport) {
@@ -220,7 +291,7 @@ class ComponentValidator {
         this.logInfo('Module uses named exports (no default export required)');
       } else {
         this.logError(
-          `Index file should export a default: 'export default X' or 'export { default } from \"./X\"'`
+          `Index file should export default from a local ${componentName} module`
         );
       }
 
@@ -253,7 +324,12 @@ class ComponentValidator {
     }
   }
 
-  validateMainComponentFile(componentPath, componentName, type = 'component') {
+  validateMainComponentFile(
+    componentPath,
+    componentName,
+    type = 'component',
+    contractLayer = null
+  ) {
     // For modules, be flexible with naming (allow lowercase)
     const possibleMainFiles =
       type === 'module'
@@ -356,7 +432,7 @@ class ComponentValidator {
           (contractLayer === null &&
             (content.includes('Provider') || content.includes('Context')));
 
-        if (isComposer) {
+        if (isComposer && (content.includes('Provider') || content.includes('Context'))) {
           this.logInfo(
             'Component uses Provider/Context pattern (composer-level)'
           );
@@ -522,12 +598,17 @@ class ComponentValidator {
   }
 
   validateContractFile(componentPath, componentName) {
-    const contractPath = path.join(
-      componentPath,
-      `${componentName}.contract.json`
-    );
+    const exactPath = path.join(componentPath, `${componentName}.contract.json`);
+    const fallbackFile = fs
+      .readdirSync(componentPath)
+      .find((file) => file.endsWith('.contract.json'));
+    const contractPath = fs.existsSync(exactPath)
+      ? exactPath
+      : fallbackFile
+        ? path.join(componentPath, fallbackFile)
+        : null;
 
-    if (!fs.existsSync(contractPath)) {
+    if (!contractPath || !fs.existsSync(contractPath)) {
       this.logError('Missing required file: contract.json');
       return;
     }
@@ -631,12 +712,12 @@ class ComponentValidator {
 
     if (this.errors.length === 0) {
       this.log(
-        `\n${colors.bold}${colors.green}🎉 All validations passed!${colors.reset}`
+        `\n${colors.bold}${colors.green}All validations passed.${colors.reset}`
       );
       return true;
     } else {
       this.log(
-        `\n${colors.bold}${colors.red}❌ Validation failed with ${this.errors.length} errors${colors.reset}`
+        `\n${colors.bold}${colors.red}Validation failed with ${this.errors.length} errors${colors.reset}`
       );
       return false;
     }

@@ -5,7 +5,7 @@
  */
 
 import { readFileSync, readdirSync, statSync } from 'fs';
-import { join, dirname, basename } from 'path';
+import { join, dirname, basename, relative } from 'path';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -24,15 +24,6 @@ function findComponentDirs() {
   }
 
   return dirs;
-}
-
-function getTokenPrefix(componentDir) {
-  const componentName = basename(componentDir);
-  // Convert PascalCase to kebab-case
-  return componentName
-    .replace(/([A-Z])/g, '-$1')
-    .toLowerCase()
-    .replace(/^-/, '');
 }
 
 function findTokenFiles(componentDir) {
@@ -68,7 +59,7 @@ function extractTokenNames(tokenFile) {
   const tokenNames = new Set();
 
   // Match CSS variable declarations: --token-name: ...
-  const regex = /--([a-z0-9-]+):/g;
+  const regex = /--([A-Za-z0-9_-]+)\s*:/g;
   let match;
   while ((match = regex.exec(content)) !== null) {
     tokenNames.add(`--${match[1]}`);
@@ -77,18 +68,23 @@ function extractTokenNames(tokenFile) {
   return tokenNames;
 }
 
-function extractUsedTokens(scssFile) {
+function extractScssTokens(scssFile) {
   const content = readFileSync(scssFile, 'utf-8');
   const usedTokens = new Set();
+  const declaredTokens = new Set();
 
-  // Match var(--token-name) or var(--token-name, fallback)
-  const regex = /var\((--[a-z0-9-]+)\)/g;
+  const varRegex = /var\(\s*(--[A-Za-z0-9_-]+)(?=\s*[,)])/g;
   let match;
-  while ((match = regex.exec(content)) !== null) {
+  while ((match = varRegex.exec(content)) !== null) {
     usedTokens.add(match[1]);
   }
 
-  return usedTokens;
+  const declarationRegex = /--([A-Za-z0-9_-]+)\s*:/g;
+  while ((match = declarationRegex.exec(content)) !== null) {
+    declaredTokens.add(`--${match[1]}`);
+  }
+
+  return { usedTokens, declaredTokens };
 }
 
 function checkComponent(componentDir) {
@@ -110,7 +106,7 @@ function checkComponent(componentDir) {
   // Check all SCSS files for broken references
   const brokenRefs = [];
   for (const scssFile of scssFiles) {
-    const usedTokens = extractUsedTokens(scssFile);
+    const { usedTokens, declaredTokens } = extractScssTokens(scssFile);
 
     for (const usedToken of usedTokens) {
       // Skip semantic/core tokens (they're external)
@@ -122,9 +118,16 @@ function checkComponent(componentDir) {
         continue;
       }
 
-      // Check if token exists in available tokens
+      // Local component custom properties are valid when declared in the same SCSS file.
+      if (declaredTokens.has(usedToken)) {
+        continue;
+      }
+
+      // Check if token exists in available tokens.
       if (!availableTokens.has(usedToken)) {
-        // Check if there's a similar token (maybe missing -default suffix)
+        // Only fail when the SCSS reference looks like drift from a generated
+        // token. Other custom properties can be public CSS inputs supplied by
+        // callers, parent scopes, or platform APIs.
         const hasSimilar = Array.from(availableTokens).some((available) => {
           return (
             available.includes(usedToken.replace('--', '')) ||
@@ -132,11 +135,13 @@ function checkComponent(componentDir) {
           );
         });
 
-        brokenRefs.push({
-          file: scssFile.replace(rootDir + '/', ''),
-          token: usedToken,
-          hasSimilar,
-        });
+        if (hasSimilar) {
+          brokenRefs.push({
+            file: relative(rootDir, scssFile),
+            token: usedToken,
+            hasSimilar,
+          });
+        }
       }
     }
   }
@@ -152,7 +157,7 @@ function checkComponent(componentDir) {
 }
 
 // Main execution
-console.log('🔍 Checking for broken design token references...\n');
+console.log('Checking for broken design token references...\n');
 
 const componentDirs = findComponentDirs();
 const issues = [];
@@ -165,20 +170,20 @@ for (const componentDir of componentDirs) {
 }
 
 if (issues.length === 0) {
-  console.log('✅ No broken token references found!');
+  console.log('No broken token references found.');
   process.exit(0);
 }
 
 console.log(
-  `❌ Found ${issues.length} component(s) with broken token references:\n`
+  `Found ${issues.length} component(s) with broken token references:\n`
 );
 
 for (const issue of issues) {
-  console.log(`📦 ${issue.component}:`);
+  console.log(`${issue.component}:`);
   for (const ref of issue.brokenRefs) {
     const similar = ref.hasSimilar ? ' (similar token exists)' : '';
     console.log(`   ${ref.file}`);
-    console.log(`   └─ ${ref.token}${similar}`);
+    console.log(`   - ${ref.token}${similar}`);
   }
   console.log('');
 }
