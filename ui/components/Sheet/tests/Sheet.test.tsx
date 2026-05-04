@@ -124,4 +124,17 @@ describe('Sheet', () => {
 
     expect(screen.queryByText('Sheet content')).not.toBeInTheDocument();
   });
+
+  contractTest('Sheet', 'a11y.apgPattern', 'dialog-modal', () => {
+    render(
+      <Sheet defaultOpen>
+        <Sheet.Content>
+          <Sheet.Body>Sheet content</Sheet.Body>
+        </Sheet.Content>
+      </Sheet>
+    );
+
+    const dialog = screen.getByRole('dialog');
+    expect(dialog).toBeInTheDocument();
+  });
 });

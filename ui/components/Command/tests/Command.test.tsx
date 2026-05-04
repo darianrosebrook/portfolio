@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Command } from '../Command';
+import { contractTest } from '@/test/utils/contractTest';
 
 const mockItems = [
   {
@@ -140,5 +141,21 @@ describe('Command', () => {
     fireEvent.change(input, { target: { value: 'nonexistent' } });
 
     expect(screen.getByText('No commands found')).toBeInTheDocument();
+  });
+
+  describe('Contract behavioral obligations', () => {
+    contractTest('Command', 'a11y.apgPattern', 'dialog-modal', () => {
+      render(
+        <Command open items={[]}>
+          <Command.Dialog items={[]} modal>
+            <Command.Input placeholder="Search..." />
+          </Command.Dialog>
+        </Command>
+      );
+
+      const dialog = screen.getByRole('dialog');
+      expect(dialog).toBeInTheDocument();
+      expect(dialog).toHaveAttribute('aria-modal', 'true');
+    });
   });
 });

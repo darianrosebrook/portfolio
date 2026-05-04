@@ -3,6 +3,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { vi } from 'vitest';
 
 import Switch from '../Switch';
+import { contractTest } from '@/test/utils/contractTest';
 
 // Extend Jest matchers
 
@@ -125,6 +126,19 @@ describe('Switch', () => {
 
       // Verify CSS custom properties are being used
       expect(switchElement.parentElement?.className).toContain('switch');
+    });
+  });
+
+  describe('Contract behavioral obligations', () => {
+    contractTest('Switch', 'a11y.apgPattern', 'switch', () => {
+      const handleChange = vi.fn();
+      render(
+        <Switch checked={false} onChange={handleChange}>
+          Switch
+        </Switch>
+      );
+
+      expect(screen.getByRole('switch')).toBeInTheDocument();
     });
   });
 });

@@ -7,6 +7,7 @@ import { Field } from '../Field';
 import { TextInputAdapter } from '../TextInputAdapter';
 import { TextareaAdapter } from '../TextareaAdapter';
 import { CheckboxAdapter } from '../CheckboxAdapter';
+import { contractTest } from '@/test/utils/contractTest';
 
 // Extend Jest matchers
 
@@ -203,6 +204,25 @@ describe('Field Composer', () => {
       const field = screen.getByRole('textbox').closest('[class*="field"]');
       expect(field).toBeInTheDocument();
       // In a real test, you'd check for specific CSS custom properties
+    });
+  });
+
+  describe('Contract behavioral obligations', () => {
+    contractTest('Field', 'a11y.apgPattern', 'alert', async () => {
+      const validate = (v: unknown) => (!v ? 'Required' : null);
+      wrap(
+        <FieldProvider name="apg-field" label="APG Field" validate={validate}>
+          <Field>
+            <TextInputAdapter />
+          </Field>
+        </FieldProvider>
+      );
+
+      const input = screen.getByRole('textbox');
+      fireEvent.blur(input);
+
+      const alert = await screen.findByRole('alert');
+      expect(alert).toBeInTheDocument();
     });
   });
 });

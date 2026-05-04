@@ -284,5 +284,11 @@ describe('Toast Composer', () => {
       await screen.findByRole('status');
       fireEvent.keyDown(document, { key: 'Escape' });
     });
+
+    contractTest('Toast', 'a11y.apgPattern', 'alert', async () => {
+      render(<ToastProvider><ToastHelper /></ToastProvider>);
+      const toast = await screen.findByRole('status');
+      expect(toast).toBeInTheDocument();
+    });
   });
 });
