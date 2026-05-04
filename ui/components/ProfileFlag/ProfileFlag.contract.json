@@ -11,7 +11,10 @@
     "hover"
   ],
   "slots": {
-    "root": { "required": true, "selector": "[data-slot=\"profile-flag\"]" }
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"profile-flag\"]"
+    }
   },
   "a11y": {
     "role": "generic",
@@ -77,12 +80,12 @@
     }
   },
   "props": {
-    "styled": {
+    "designed": {
       "members": [
         {
           "name": "profile",
           "type": "{ account_status: string; avatar_url: string | null; bio: string; created_at: string; first_name: string | null; full_name: string; id: string; images: string[] | null; last_name: string | null; metrics: string; occupation: string | null; privacy: string; settings: string; social_media: string[] | null; spacial_location: string | null; updated_at: string | null; username: string; } | null",
-          "description": "",
+          "description": "profile prop for ProfileFlag.",
           "required": true
         }
       ]

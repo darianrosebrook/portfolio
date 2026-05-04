@@ -24,7 +24,10 @@
     "focus"
   ],
   "slots": {
-    "root": { "required": true, "selector": "[data-slot=\"animated-card\"]" }
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"animated-card\"]"
+    }
   },
   "a11y": {
     "role": "generic",
@@ -34,7 +37,7 @@
   },
   "tokens": {},
   "props": {
-    "styled": {
+    "designed": {
       "members": [
         {
           "name": "as",
@@ -93,7 +96,7 @@
     "transitions": [
       {
         "name": "enter",
-        "trigger": "visibility=offscreen→visible",
+        "trigger": "visibility=offscreen\u2192visible",
         "phase": "enter",
         "properties": [
           "opacity",
@@ -109,7 +112,7 @@
     "category": "animation",
     "usageHints": [
       "Wrap any card content inside AnimatedCard to apply the scroll-triggered entrance animation",
-      "Respects prefers-reduced-motion — animation is disabled for users who prefer reduced motion",
+      "Respects prefers-reduced-motion \u2014 animation is disabled for users who prefer reduced motion",
       "Use delay to stagger multiple AnimatedCards in a grid"
     ],
     "children": {

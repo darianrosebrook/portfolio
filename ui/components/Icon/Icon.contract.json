@@ -37,25 +37,25 @@
     }
   },
   "props": {
-    "styled": {
+    "designed": {
       "members": [
         {
           "name": "icon",
           "type": "IconDefinition",
-          "description": "",
+          "description": "icon prop for Icon.",
           "required": true
         },
         {
           "name": "width",
           "type": "number | undefined",
-          "description": "",
+          "description": "width prop for Icon.",
           "required": false,
           "default": 20
         },
         {
           "name": "height",
           "type": "number | undefined",
-          "description": "",
+          "description": "height prop for Icon.",
           "required": false,
           "default": 20
         }

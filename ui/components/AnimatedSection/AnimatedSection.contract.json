@@ -27,7 +27,10 @@
     "default"
   ],
   "slots": {
-    "root": { "required": true, "selector": "[data-slot=\"animated-section\"]" }
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"animated-section\"]"
+    }
   },
   "a11y": {
     "role": "generic",
@@ -37,7 +40,7 @@
   },
   "tokens": {},
   "props": {
-    "styled": {
+    "designed": {
       "members": [
         {
           "name": "as",
@@ -96,7 +99,7 @@
     "transitions": [
       {
         "name": "enter",
-        "trigger": "visibility=offscreen→visible",
+        "trigger": "visibility=offscreen\u2192visible",
         "phase": "enter",
         "properties": [
           "opacity",

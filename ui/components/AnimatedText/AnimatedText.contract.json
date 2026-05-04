@@ -28,7 +28,10 @@
     "default"
   ],
   "slots": {
-    "root": { "required": true, "selector": "[data-slot=\"animated-text\"]" }
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"animated-text\"]"
+    }
   },
   "a11y": {
     "role": "generic",
@@ -38,7 +41,7 @@
   },
   "tokens": {},
   "props": {
-    "styled": {
+    "designed": {
       "members": [
         {
           "name": "text",
@@ -103,7 +106,7 @@
     "transitions": [
       {
         "name": "enter",
-        "trigger": "visibility=offscreen→visible",
+        "trigger": "visibility=offscreen\u2192visible",
         "phase": "enter",
         "properties": [
           "opacity",
@@ -119,7 +122,7 @@
     "category": "animation",
     "usageHints": [
       "Use for hero headings or pull-quotes where character animation adds visual impact",
-      "Avoid on body text — animation per-character is distracting at scale",
+      "Avoid on body text \u2014 animation per-character is distracting at scale",
       "Respects prefers-reduced-motion"
     ],
     "children": {

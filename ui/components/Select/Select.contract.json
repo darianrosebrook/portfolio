@@ -545,7 +545,7 @@
     }
   },
   "props": {
-    "hook": {
+    "designed": {
       "members": [
         {
           "name": "options",
@@ -584,6 +584,9 @@
           "required": false
         }
       ]
+    },
+    "passthrough": {
+      "extends": "div"
     }
   },
   "ssr": {
@@ -597,7 +600,7 @@
     "transitions": [
       {
         "name": "open",
-        "trigger": "openness=closed→open",
+        "trigger": "openness=closed\u2192open",
         "phase": "enter",
         "properties": [
           "opacity",
@@ -608,7 +611,7 @@
       },
       {
         "name": "close",
-        "trigger": "openness=open→closed",
+        "trigger": "openness=open\u2192closed",
         "phase": "exit",
         "properties": [
           "opacity",

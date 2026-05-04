@@ -36,7 +36,10 @@
     "selected"
   ],
   "slots": {
-    "root": { "required": true, "selector": "[data-slot=\"brand-switcher\"]" }
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"brand-switcher\"]"
+    }
   },
   "a11y": {
     "role": "generic",
@@ -221,7 +224,7 @@
     }
   },
   "props": {
-    "styled": {
+    "designed": {
       "members": [
         {
           "name": "showAutoCycle",
@@ -279,7 +282,7 @@
     "category": "navigation",
     "usageHints": [
       "Render in global navigation; one instance per page",
-      "Drives brand context — surrounding components should respond to the active brand"
+      "Drives brand context \u2014 surrounding components should respond to the active brand"
     ],
     "children": {
       "allowed": false
