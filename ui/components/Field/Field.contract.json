@@ -35,6 +35,23 @@
       "required": false
     }
   },
+  "props": {
+    "designed": {
+      "members": [
+        { "name": "name", "type": "string", "description": "Form field name used for form submission and as the base for auto-generated element IDs.", "required": true },
+        { "name": "id", "type": "string | undefined", "description": "Explicit input element ID. Auto-generated from name if omitted.", "required": false },
+        { "name": "required", "type": "boolean | undefined", "description": "Marks the field as required. Surfaces as aria-required on the control element.", "required": false },
+        { "name": "disabled", "type": "boolean | undefined", "description": "Disables the field and all of its child controls.", "required": false },
+        { "name": "readOnly", "type": "boolean | undefined", "description": "Puts the field into read-only mode. The value is visible but not editable.", "required": false },
+        { "name": "value", "type": "unknown", "description": "Controlled value passed through to the control adapter.", "required": false },
+        { "name": "defaultValue", "type": "unknown", "description": "Uncontrolled initial value.", "required": false },
+        { "name": "onChange", "type": "((value: unknown) => void) | undefined", "description": "Change handler called with the new value when the control changes.", "required": false },
+        { "name": "validate", "type": "((value: unknown, context: { name: string; touched: boolean; dirty: boolean }) => string | string[] | null | Promise<string | string[] | null>) | undefined", "description": "Async-capable validation function. Return null for valid, or error string(s) for invalid.", "required": false },
+        { "name": "label", "type": "ReactNode", "description": "Label content rendered by the FieldLabel slot.", "required": false },
+        { "name": "helpText", "type": "ReactNode", "description": "Supplementary help text rendered in the help slot below the control.", "required": false }
+      ]
+    }
+  },
   "a11y": {
     "role": "alert",
     "roles": [
