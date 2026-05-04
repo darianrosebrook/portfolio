@@ -1,7 +1,7 @@
 id: CONTRACTS-002
 type: chore
 title: Close enforcement gaps from CONTRACTS-001 audit
-status: draft
+status: closed
 risk_tier: 3
 mode: chore
 created_at: '2026-05-04T18:47:02.787Z'
@@ -98,6 +98,12 @@ acceptance_criteria:
       - node scripts/validateComponents.mjs --component breadcrumbs produces no errors.
       - node scripts/validateComponents.mjs --component links produces no errors.
       - node scripts/validateComponents.mjs --component BrandSwitcher produces no index errors.
+    test_command: >-
+      node scripts/validateComponents.mjs AlertNotice 2>&1 | grep -q "All validations passed" &&
+      node scripts/validateComponents.mjs ToggleSwitch 2>&1 | grep -q "All validations passed" &&
+      node scripts/validateComponents.mjs breadcrumbs 2>&1 | grep -q "All validations passed" &&
+      node scripts/validateComponents.mjs links 2>&1 | grep -q "All validations passed" &&
+      node scripts/validateComponents.mjs BrandSwitcher 2>&1 | grep -qv "index"
 
   - id: A2
     title: Module-layer components in ui/modules/ are validated with module-appropriate rules
@@ -121,6 +127,10 @@ acceptance_criteria:
       - node scripts/validateComponents.mjs --component FontInspector produces no errors.
       - node scripts/validateComponents.mjs --component Tiptap produces no errors.
       - The fix does not change pass/fail for components (only modules).
+    test_command: >-
+      node scripts/validateComponents.mjs ErrorBoundary 2>&1 | grep -q "All validations passed" &&
+      node scripts/validateComponents.mjs FontInspector 2>&1 | grep -q "All validations passed" &&
+      node scripts/validateComponents.mjs Tiptap 2>&1 | grep -q "All validations passed"
 
   - id: A3
     title: Structural stubs added for AnimatedCard, AnimatedSection, AnimatedText, BrandSwitcher, Chip
@@ -144,6 +154,8 @@ acceptance_criteria:
         least one passing test.
       - node scripts/validateComponents.mjs exits with 0 errors (warnings are
         acceptable).
+    test_command: >-
+      node scripts/validateComponents.mjs 2>&1 | grep -q "All validations passed"
 
   - id: A4
     title: validateComponents.mjs uses contract.layer for layer-specific structural rules
@@ -174,8 +186,26 @@ acceptance_criteria:
       - The string-match heuristic still applies when contract.json is absent.
       - node scripts/validateComponents.mjs produces no regressions on components
         that currently pass.
+    test_command: >-
+      node scripts/validateComponents.mjs 2>&1 | grep -q "All validations passed"
 
-acceptance: []
+acceptance:
+  - id: A1
+    given: validateComponents.mjs is run against AlertNotice, ToggleSwitch, breadcrumbs, links, BrandSwitcher
+    when: each component has a .ts or .tsx index file with any valid default-export pattern
+    then: each component reports 0 errors
+  - id: A2
+    given: validateComponents.mjs is run against ErrorBoundary, FontInspector, Tiptap
+    when: those modules use named re-exports instead of export-default shape
+    then: each module reports 0 errors
+  - id: A3
+    given: validateComponents.mjs is run against the full components and modules directories
+    when: AnimatedCard, AnimatedSection, AnimatedText, BrandSwitcher, and Chip have README.md and tests/ stubs
+    then: the validator exits with 0 errors
+  - id: A4
+    given: validateComponents.mjs is run against components that have contract.json with a non-composer layer
+    when: those components import from a Context module
+    then: they are not classified as composers and pass with 0 errors
 
 non_functional:
   a11y: []
