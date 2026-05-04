@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 
 import Popover from '../Popover';
+import { contractTest } from '@/test/utils/contractTest';
 
 // Extend Jest matchers
 
@@ -91,6 +92,27 @@ describe('Popover', () => {
 
       // Verify CSS custom properties are being used
       expect(trigger).toHaveClass('popover');
+    });
+  });
+
+  describe('Contract obligations', () => {
+    contractTest('Popover', 'dismissal.triggers', 'escape', async () => {
+      render(
+        <Popover>
+          <Popover.Trigger>Open</Popover.Trigger>
+          <Popover.Content>Popover content</Popover.Content>
+        </Popover>
+      );
+
+      fireEvent.click(screen.getByText('Open'));
+      expect(screen.getByText('Popover content')).toBeInTheDocument();
+
+      fireEvent.keyDown(document, { key: 'Escape' });
+
+      await waitFor(
+        () => expect(screen.queryByText('Popover content')).not.toBeInTheDocument(),
+        { timeout: 500 }
+      );
     });
   });
 });
