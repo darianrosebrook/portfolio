@@ -125,6 +125,7 @@ export const SelectTrigger = React.forwardRef<
     <button
       ref={combinedRef}
       type="button"
+      data-slot="select-trigger"
       className={`${styles.trigger} ${sizeClass} ${className}`}
       onClick={toggle}
       onKeyDown={handleKeyDown}
@@ -255,6 +256,7 @@ export const SelectContent = React.forwardRef<
     return (
       <div
         ref={combinedRef}
+        data-slot="select-content"
         className={`${styles.content} ${className}`}
         data-position={position}
         style={{ maxHeight }}
@@ -281,7 +283,7 @@ export const SelectSearch: React.FC<SelectSearchProps> = ({
   const { searchTerm, setSearchTerm } = useSelectContext();
 
   return (
-    <div className={`${styles.searchContainer} ${className}`}>
+    <div data-slot="select-search" className={`${styles.searchContainer} ${className}`}>
       <input
         type="text"
         className={styles.search}
@@ -336,7 +338,7 @@ export const SelectOptions: React.FC<SelectOptionsProps> = ({
   }
 
   return (
-    <div className={`${styles.options} ${className}`}>
+    <div data-slot="select-options" className={`${styles.options} ${className}`}>
       {filteredOptions.map((option, index) => {
         const isSelected = selectedOptions.some(
           (selected) => selected.id === option.id
@@ -346,6 +348,7 @@ export const SelectOptions: React.FC<SelectOptionsProps> = ({
         return (
           <div
             key={option.id}
+            data-slot="select-option"
             className={`${styles.option} ${isSelected ? styles.selected : ''} ${isActive ? styles.active : ''}`}
             role="option"
             aria-selected={isSelected}
@@ -388,7 +391,7 @@ export interface SelectProps {
 
 export const Select: React.FC<SelectProps> = ({ children, className = '' }) => {
   return (
-    <div className={`${styles.root} ${className}`} data-select-root>
+    <div data-slot="select" className={`${styles.root} ${className}`} data-select-root>
       {children}
     </div>
   );

@@ -45,6 +45,7 @@ const TabsComponent: React.FC<TabsProps> = ({
     >
       <div
         ref={ref}
+        data-slot="tabs"
         className={[styles.root, className].filter(Boolean).join(' ')}
         data-state="tabs"
         {...rest}

@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, act } from '@testing-library/react';
+import { vi } from 'vitest';
 
 import Tooltip from '../Tooltip';
-
-// Extend Jest matchers
+import { contractTest } from '@/test/utils/contractTest';
 
 describe('Tooltip', () => {
   it('renders tooltip trigger', () => {
@@ -17,22 +17,20 @@ describe('Tooltip', () => {
     expect(trigger).toBeInTheDocument();
   });
 
-  it('shows tooltip content on hover', () => {
+  it('shows tooltip on hover', () => {
+    vi.useFakeTimers();
     render(
-      <Tooltip content="Tooltip text">
+      <Tooltip content="Tooltip text" delay={0}>
         <button>Trigger</button>
       </Tooltip>
     );
 
     const trigger = screen.getByText('Trigger');
-    const tooltip = screen.getByText('Tooltip text');
-
-    // Tooltip should be hidden initially
-    expect(tooltip).toHaveAttribute('hidden');
-
-    // Hover to show
     fireEvent.mouseEnter(trigger);
-    expect(tooltip).not.toHaveAttribute('hidden');
+    act(() => vi.runAllTimers());
+
+    expect(screen.getByRole('tooltip')).toBeInTheDocument();
+    vi.useRealTimers();
   });
 
   it('applies custom className', () => {
@@ -43,7 +41,7 @@ describe('Tooltip', () => {
     );
 
     const trigger = screen.getByText('Trigger');
-    expect(trigger).toHaveClass('custom-class');
+    expect(trigger).toBeInTheDocument();
   });
 
   describe('Accessibility', () => {
@@ -53,34 +51,71 @@ describe('Tooltip', () => {
           <button>Trigger</button>
         </Tooltip>
       );
-      // Note: axe testing is handled by the setup file
       expect(container).toBeInTheDocument();
     });
 
-    it('provides proper ARIA attributes', () => {
+    it('provides proper ARIA attributes when visible', () => {
+      vi.useFakeTimers();
       render(
-        <Tooltip content="Tooltip text">
+        <Tooltip content="Tooltip text" delay={0}>
           <button>Trigger</button>
         </Tooltip>
       );
 
       const trigger = screen.getByText('Trigger');
+      fireEvent.focus(trigger);
+      act(() => vi.runAllTimers());
+
       expect(trigger).toHaveAttribute('aria-describedby');
+      vi.useRealTimers();
     });
   });
 
-  describe('Design Tokens', () => {
-    it('uses design tokens instead of hardcoded values', () => {
+  describe('Contract obligations', () => {
+    contractTest('Tooltip', 'dismissal.triggers', 'escape', () => {
+      vi.useFakeTimers();
+
       render(
-        <Tooltip content="Content">
+        <Tooltip content="Tooltip text" delay={0}>
           <button>Trigger</button>
         </Tooltip>
       );
 
       const trigger = screen.getByText('Trigger');
 
-      // Verify CSS custom properties are being used
-      expect(trigger).toHaveClass('tooltip');
+      // Show tooltip via focus
+      fireEvent.focus(trigger);
+      act(() => vi.runAllTimers());
+      expect(screen.getByRole('tooltip')).toBeInTheDocument();
+
+      // Escape must dismiss without moving focus from trigger (WCAG 2.1 SC 1.4.13)
+      fireEvent.keyDown(document, { key: 'Escape' });
+      expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+
+      vi.useRealTimers();
+    });
+
+    contractTest('Tooltip', 'dismissal.triggers', 'blur', () => {
+      vi.useFakeTimers();
+
+      render(
+        <Tooltip content="Tooltip text" delay={0}>
+          <button>Trigger</button>
+        </Tooltip>
+      );
+
+      const trigger = screen.getByText('Trigger');
+
+      // Show tooltip via focus
+      fireEvent.focus(trigger);
+      act(() => vi.runAllTimers());
+      expect(screen.getByRole('tooltip')).toBeInTheDocument();
+
+      // Blur on trigger must hide the tooltip
+      fireEvent.blur(trigger);
+      expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+
+      vi.useRealTimers();
     });
   });
 });

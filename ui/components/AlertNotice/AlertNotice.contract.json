@@ -388,30 +388,30 @@
     }
   },
   "props": {
-    "styled": {
+    "designed": {
       "members": [
         {
           "name": "status",
           "type": "StatusIntent | undefined",
-          "description": "",
+          "description": "status prop for AlertNotice.",
           "required": false
         },
         {
           "name": "level",
           "type": "\"page\" | \"section\" | \"inline\" | undefined",
-          "description": "",
+          "description": "level prop for AlertNotice.",
           "required": false
         },
         {
           "name": "index",
           "type": "number",
-          "description": "",
+          "description": "index prop for AlertNotice.",
           "required": true
         },
         {
           "name": "dismissible",
           "type": "boolean | undefined",
-          "description": "",
+          "description": "dismissible prop for AlertNotice.",
           "required": false
         }
       ]
@@ -422,5 +422,23 @@
   },
   "rtl": {
     "flipIcon": true
+  },
+  "description": "Inline alert message communicating status, errors, warnings, or success. Always visible (not triggered by user interaction).",
+  "a2ui": {
+    "category": "display",
+    "usageHints": [
+      "Use variant=error when a form submission or action failed",
+      "Use variant=warning for recoverable issues that need attention",
+      "Use variant=success after a positive outcome",
+      "Avoid using for transient notifications \u2014 use Toast instead"
+    ],
+    "children": {
+      "allowed": true,
+      "slot": "children",
+      "accepts": [
+        "string",
+        "ReactNode"
+      ]
+    }
   }
 }

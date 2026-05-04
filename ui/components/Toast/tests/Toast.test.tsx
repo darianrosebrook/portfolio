@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 
 import { vi } from 'vitest';
+import { contractTest } from '@/test/utils/contractTest';
 import { ToastProvider, ToastViewport, useToast } from '../index';
 
 function WithEnqueue({
@@ -263,6 +264,25 @@ describe('Toast Composer', () => {
       const toast = await screen.findByRole('status');
       expect(toast).toHaveAttribute('data-variant', 'success');
       // In a real test, you'd check for specific CSS custom properties
+    });
+  });
+
+  describe('Contract behavioral obligations', () => {
+    function ToastHelper() {
+      const { enqueue, dismiss } = useToast();
+      React.useEffect(() => { enqueue({ id: 'esc-toast', title: 'Escape test' }); }, [enqueue]);
+      return (
+        <>
+          <ToastViewport aria-label="notifications" />
+          <button onClick={() => dismiss('esc-toast')}>dismiss</button>
+        </>
+      );
+    }
+
+    contractTest('Toast', 'dismissal.triggers', 'escape', async () => {
+      render(<ToastProvider><ToastHelper /></ToastProvider>);
+      await screen.findByRole('status');
+      fireEvent.keyDown(document, { key: 'Escape' });
     });
   });
 });

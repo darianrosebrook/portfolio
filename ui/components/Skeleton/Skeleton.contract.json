@@ -137,52 +137,52 @@
     }
   },
   "props": {
-    "styled": {
+    "designed": {
       "members": [
         {
           "name": "variant",
           "type": "SkeletonVariant | undefined",
-          "description": "",
+          "description": "variant prop for Skeleton.",
           "required": false,
           "default": "block"
         },
         {
           "name": "animate",
           "type": "\"shimmer\" | \"wipe\" | \"pulse\" | \"none\" | undefined",
-          "description": "",
+          "description": "animate prop for Skeleton.",
           "required": false,
           "default": "shimmer"
         },
         {
           "name": "density",
           "type": "\"compact\" | \"regular\" | \"spacious\" | undefined",
-          "description": "",
+          "description": "density prop for Skeleton.",
           "required": false,
           "default": "regular"
         },
         {
           "name": "aspectRatio",
           "type": "string | undefined",
-          "description": "",
+          "description": "aspectRatio prop for Skeleton.",
           "required": false
         },
         {
           "name": "lines",
           "type": "number | { min: number; max: number; } | undefined",
-          "description": "",
+          "description": "lines prop for Skeleton.",
           "required": false,
           "default": "{ min: 2, max: 3 }"
         },
         {
           "name": "radius",
           "type": "\"sm\" | \"md\" | \"lg\" | undefined",
-          "description": "",
+          "description": "radius prop for Skeleton.",
           "required": false
         },
         {
           "name": "decorative",
           "type": "boolean | undefined",
-          "description": "",
+          "description": "decorative prop for Skeleton.",
           "required": false,
           "default": "true"
         }

@@ -102,58 +102,7 @@
     }
   },
   "props": {
-    "styled": {
-      "members": [
-        {
-          "name": "offset",
-          "type": "number | undefined",
-          "description": "",
-          "required": false,
-          "default": 8
-        },
-        {
-          "name": "placement",
-          "type": "\"top\" | \"bottom\" | \"left\" | \"right\" | \"auto\" | undefined",
-          "description": "",
-          "required": false,
-          "default": "auto"
-        },
-        {
-          "name": "triggerStrategy",
-          "type": "\"click\" | \"hover\" | undefined",
-          "description": "",
-          "required": false,
-          "default": "click"
-        },
-        {
-          "name": "closeOnOutsideClick",
-          "type": "boolean | undefined",
-          "description": "",
-          "required": false,
-          "default": "true"
-        },
-        {
-          "name": "closeOnEscape",
-          "type": "boolean | undefined",
-          "description": "",
-          "required": false,
-          "default": "true"
-        },
-        {
-          "name": "open",
-          "type": "boolean | undefined",
-          "description": "Controlled open state",
-          "required": false
-        },
-        {
-          "name": "anchor",
-          "type": "HTMLElement | null | undefined",
-          "description": "External anchor element to position against (bypasses Trigger)",
-          "required": false
-        }
-      ]
-    },
-    "hook": {
+    "designed": {
       "members": [
         {
           "name": "defaultOpen",
@@ -172,6 +121,39 @@
           "type": "boolean | undefined",
           "description": "Close when pressing Escape",
           "required": false
+        },
+        {
+          "name": "offset",
+          "type": "number | undefined",
+          "description": "offset prop for Popover.",
+          "required": false,
+          "default": 8
+        },
+        {
+          "name": "placement",
+          "type": "\"top\" | \"bottom\" | \"left\" | \"right\" | \"auto\" | undefined",
+          "description": "placement prop for Popover.",
+          "required": false,
+          "default": "auto"
+        },
+        {
+          "name": "triggerStrategy",
+          "type": "\"click\" | \"hover\" | undefined",
+          "description": "triggerStrategy prop for Popover.",
+          "required": false,
+          "default": "click"
+        },
+        {
+          "name": "open",
+          "type": "boolean | undefined",
+          "description": "Controlled open state",
+          "required": false
+        },
+        {
+          "name": "anchor",
+          "type": "HTMLElement | null | undefined",
+          "description": "External anchor element to position against (bypasses Trigger)",
+          "required": false
         }
       ]
     }
@@ -188,7 +170,7 @@
     "transitions": [
       {
         "name": "open",
-        "trigger": "openness=closed→open",
+        "trigger": "openness=closed\u2192open",
         "phase": "enter",
         "properties": [
           "opacity",
@@ -199,7 +181,7 @@
       },
       {
         "name": "close",
-        "trigger": "openness=open→closed",
+        "trigger": "openness=open\u2192closed",
         "phase": "exit",
         "properties": [
           "opacity",

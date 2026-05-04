@@ -31,6 +31,7 @@ const CardRoot = React.forwardRef<HTMLDivElement, CardProps>(
     return (
       <div
         ref={ref}
+        data-slot="card"
         className={[
           styles.card,
           interactive ? styles.interactive : '',
@@ -53,6 +54,7 @@ const CardHeader: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
   ...rest
 }) => (
   <div
+    data-slot="card-header"
     className={[styles.header, className].filter(Boolean).join(' ')}
     {...rest}
   >
@@ -66,6 +68,7 @@ const CardBadge = React.forwardRef<HTMLSpanElement, CardBadgeProps>(
     return (
       <span
         ref={ref}
+        data-slot="card-badge"
         className={[
           styles.badge,
           status ? styles[status.replace(/\s+/g, '-')] : '',
@@ -88,6 +91,7 @@ const CardContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
   ...rest
 }) => (
   <div
+    data-slot="card-content"
     className={[styles.content, className].filter(Boolean).join(' ')}
     {...rest}
   >
@@ -101,7 +105,7 @@ const CardTitle: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = ({
   children,
   ...rest
 }) => (
-  <h3 className={[styles.title, className].filter(Boolean).join(' ')} {...rest}>
+  <h3 data-slot="card-title" className={[styles.title, className].filter(Boolean).join(' ')} {...rest}>
     {children}
   </h3>
 );
@@ -113,6 +117,7 @@ const CardDescription: React.FC<React.HTMLAttributes<HTMLParagraphElement>> = ({
   ...rest
 }) => (
   <p
+    data-slot="card-description"
     className={[styles.description, className].filter(Boolean).join(' ')}
     {...rest}
   >
@@ -127,6 +132,7 @@ const CardMedia: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
   ...rest
 }) => (
   <div
+    data-slot="card-media"
     className={[styles.media, className].filter(Boolean).join(' ')}
     {...rest}
   >
@@ -141,6 +147,7 @@ const CardFooter: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
   ...rest
 }) => (
   <div
+    data-slot="card-footer"
     className={[styles.footer, className].filter(Boolean).join(' ')}
     {...rest}
   >
@@ -155,6 +162,7 @@ const CardActions: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
   ...rest
 }) => (
   <div
+    data-slot="card-actions"
     className={[styles.actions, className].filter(Boolean).join(' ')}
     {...rest}
   >
@@ -167,6 +175,7 @@ const CardLink = React.forwardRef<HTMLAnchorElement, CardLinkProps>(
   ({ className = '', children, ...rest }, ref) => (
     <a
       ref={ref}
+      data-slot="card-link"
       className={[styles.link, className].filter(Boolean).join(' ')}
       {...rest}
     >
@@ -182,6 +191,7 @@ const CardNote: React.FC<React.HTMLAttributes<HTMLElement>> = ({
   ...rest
 }) => (
   <blockquote
+    data-slot="card-note"
     className={[styles.note, className].filter(Boolean).join(' ')}
     {...rest}
   >

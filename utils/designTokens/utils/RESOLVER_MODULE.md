@@ -1,10 +1,18 @@
-# Design Tokens Resolver Module Implementation
+# Design Tokens Resolver Module
 
-This directory contains the implementation of the W3C Design Tokens Community Group (DTCG) Resolver Module 2025.10 specification.
+This module is DTCG-inspired and currently tested for local resolver behavior: set resolution,
+modifier cascades, JSON Pointer references, alias resolution, modifier precedence, and
+strict/non-strict invalid input handling. It does not yet claim full DTCG Resolver Module
+conformance. Conformance tests are in `test/utils/designTokens/resolver/`.
 
 ## Overview
 
-The Resolver Module provides a standardized way to manage design tokens across multiple contexts (themes, platforms, brands, etc.) while avoiding combinatorial explosion. It follows the [official specification](https://www.designtokens.org/tr/2025.10/resolver/).
+The Resolver Module provides a way to manage design tokens across multiple contexts (themes,
+platforms, brands, etc.) while avoiding combinatorial explosion. The implementation is modeled
+on the DTCG Resolver Module concept; see the [specification](https://www.designtokens.org/tr/2025.10/resolver/)
+for the authoritative definition. Where this implementation diverges or falls short of the
+spec, the tests in `test/utils/designTokens/resolver/resolver-module.test.ts` document what
+is actually proven.
 
 ## Files
 
@@ -172,25 +180,21 @@ The resolver module supports JSON Pointer syntax for references:
 - `core/color.tokens.json` - Reference to an external file
 - `#/$defs/colors` - Reference to bundled definitions
 
-## Benefits
+## What is proven
 
-1. **Standardized**: Follows W3C specification for interoperability
-2. **Composable**: Sets can be reused across multiple contexts
-3. **Maintainable**: Clear separation of concerns (sets vs modifiers)
-4. **Extensible**: Easy to add new contexts without duplication
-5. **Tool-Compatible**: Works with any DTCG 1.0 compliant tooling
+The following behaviors are covered by passing tests in `test/utils/designTokens/resolver/resolver-module.test.ts`:
 
-## Compliance
+- Set resolution: inline token sources are merged into a flat token tree
+- Modifier cascades: later modifiers in resolutionOrder override earlier values
+- Alias resolution: `{a.b}` syntax resolves to the target token value
+- Modifier precedence: the last matching context wins
+- Strict/non-strict invalid input: strict throws, non-strict warns and falls back to default
+- Circular alias detection: detected and warned; does not loop
+- Missing file: emits a diagnostic and continues with available tokens
+- Cross-file references: external token files are loaded and merged correctly
 
-This implementation follows the DTCG 1.0 Resolver Module specification:
-
-- ✅ Input validation
-- ✅ Resolution ordering
-- ✅ Set and modifier resolution
-- ✅ JSON Pointer reference support
-- ✅ Alias resolution
-- ✅ Conflict resolution (later values override earlier ones)
-- ✅ Error handling and diagnostics
+Full DTCG Resolver Module conformance is not claimed. Edge cases in the spec (bundling, `$defs`
+resolution, multi-context modifiers) are not yet covered by tests.
 
 ## See Also
 

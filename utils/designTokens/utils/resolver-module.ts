@@ -1,8 +1,9 @@
 /**
- * Design Tokens Resolver Module 2025.10
+ * Design Tokens Resolver Module
  *
- * Implementation of the W3C Design Tokens Community Group Resolver Module specification.
- * @see https://www.designtokens.org/tr/2025.10/resolver/
+ * DTCG-inspired resolver for set resolution, modifier cascades, alias resolution,
+ * and JSON Pointer references. Does not claim full DTCG Resolver Module conformance.
+ * See test/utils/designTokens/resolver/ for what is proven.
  *
  * @author @darianrosebrook
  */
@@ -138,6 +139,10 @@ export class Resolver {
 
     // Validate document
     this.validateDocument();
+
+    if (this.options.strict && this.hasErrors()) {
+      throw new Error('Invalid resolver document');
+    }
   }
 
   /**
@@ -325,7 +330,11 @@ export class Resolver {
         if (modifierName && modifierName.startsWith('/modifiers/')) {
           const name = modifierName.replace('/modifiers/', '');
           const modifier = this.document.modifiers[name];
-          const contextValue = input[name] ?? modifier.default;
+          const providedValue = input[name];
+          const contextValue =
+            providedValue !== undefined && modifier.contexts[providedValue]
+              ? providedValue
+              : modifier.default;
 
           if (contextValue && modifier.contexts[contextValue]) {
             const context = modifier.contexts[contextValue];

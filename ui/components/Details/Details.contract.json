@@ -32,6 +32,18 @@
     },
     "inline": {
       "required": false
+    },
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"details\"]"
+    },
+    "summary": {
+      "required": true,
+      "selector": "[data-slot=\"details-summary\"]"
+    },
+    "content": {
+      "required": true,
+      "selector": "[data-slot=\"details-content\"]"
     }
   },
   "a11y": {
@@ -195,8 +207,26 @@
     }
   },
   "props": {
-    "styled": {
+    "designed": {
       "members": [
+        {
+          "name": "open",
+          "type": "boolean | undefined",
+          "description": "Controlled open state",
+          "required": false
+        },
+        {
+          "name": "defaultOpen",
+          "type": "boolean | undefined",
+          "description": "Default open state for uncontrolled",
+          "required": false
+        },
+        {
+          "name": "disabled",
+          "type": "boolean | undefined",
+          "description": "Disabled state",
+          "required": false
+        },
         {
           "name": "summary",
           "type": "string",
@@ -214,46 +244,6 @@
           "type": "\"left\" | \"right\" | \"none\" | undefined",
           "description": "Icon configuration - replaces showIcon + iconPosition booleans",
           "required": false
-        },
-        {
-          "name": "open",
-          "type": "boolean | undefined",
-          "description": "Controlled open state",
-          "required": false
-        },
-        {
-          "name": "defaultOpen",
-          "type": "boolean | undefined",
-          "description": "Default open state for uncontrolled",
-          "required": false
-        },
-        {
-          "name": "disabled",
-          "type": "boolean | undefined",
-          "description": "Disabled state",
-          "required": false
-        }
-      ]
-    },
-    "hook": {
-      "members": [
-        {
-          "name": "open",
-          "type": "boolean | undefined",
-          "description": "Controlled open state",
-          "required": false
-        },
-        {
-          "name": "defaultOpen",
-          "type": "boolean | undefined",
-          "description": "Default open state for uncontrolled",
-          "required": false
-        },
-        {
-          "name": "disabled",
-          "type": "boolean | undefined",
-          "description": "Disabled state",
-          "required": false
         }
       ]
     }
@@ -263,5 +253,21 @@
   },
   "rtl": {
     "flipIcon": true
+  },
+  "description": "Disclosure widget revealing additional content on demand. Semantically equivalent to <details>/<summary>.",
+  "a2ui": {
+    "category": "content",
+    "usageHints": [
+      "Use for progressive disclosure of non-critical detail",
+      "Not for navigation \u2014 use Accordion for a multi-section expand/collapse list",
+      "The summary is always visible; the content is hidden until expanded"
+    ],
+    "children": {
+      "allowed": true,
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ]
+    }
   }
 }

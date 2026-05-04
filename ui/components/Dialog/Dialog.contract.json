@@ -560,72 +560,17 @@
     }
   },
   "props": {
-    "styled": {
+    "designed": {
       "members": [
-        {
-          "name": "modal",
-          "type": "boolean | undefined",
-          "description": "Whether dialog is modal (blocks interaction with background)",
-          "required": false
-        },
-        {
-          "name": "size",
-          "type": "DialogSize | undefined",
-          "description": "Dialog size",
-          "required": false
-        },
-        {
-          "name": "closeOnBackdropClick",
-          "type": "boolean | undefined",
-          "description": "Whether to close on backdrop click (modal only)",
-          "required": false
-        },
-        {
-          "name": "closeOnEscape",
-          "type": "boolean | undefined",
-          "description": "Whether to close on escape key",
-          "required": false
-        },
-        {
-          "name": "initialFocus",
-          "type": "string | undefined",
-          "description": "Initial focus element selector",
-          "required": false
-        },
-        {
-          "name": "returnFocus",
-          "type": "string | undefined",
-          "description": "Return focus element selector",
-          "required": false
-        },
-        {
-          "name": "open",
-          "type": "boolean | undefined",
-          "description": "",
-          "required": false
-        },
-        {
-          "name": "defaultOpen",
-          "type": "boolean | undefined",
-          "description": "",
-          "required": false
-        },
-        {
-          "name": "dismissible",
-          "type": "boolean | undefined",
-          "description": "",
-          "required": false
-        }
-      ]
-    },
-    "hook": {
-      "members": [
-        {
-          "name": "defaultOpen",
-          "type": "boolean | undefined",
-          "description": "",
-          "required": false
-        }
+        { "name": "open", "type": "boolean | undefined", "description": "Controlled open state. Pair with defaultOpen for uncontrolled mode.", "required": false },
+        { "name": "defaultOpen", "type": "boolean | undefined", "description": "Uncontrolled initial open state.", "required": false },
+        { "name": "modal", "type": "boolean | undefined", "description": "When true (default), renders a modal dialog with backdrop and focus trap. When false, renders a non-modal dialog.", "required": false, "default": "true" },
+        { "name": "size", "type": "DialogSize | undefined", "description": "Controls the maximum width of the dialog content panel.", "required": false },
+        { "name": "dismissible", "type": "boolean | undefined", "description": "When false, removes the close button and disables backdrop-click dismissal.", "required": false, "default": "true" },
+        { "name": "closeOnEscape", "type": "boolean | undefined", "description": "When false, pressing Escape does not close the dialog.", "required": false, "default": "true" },
+        { "name": "closeOnBackdropClick", "type": "boolean | undefined", "description": "When false, clicking the backdrop overlay does not close the dialog.", "required": false, "default": "true" },
+        { "name": "initialFocus", "type": "string | undefined", "description": "CSS selector or element ID to receive initial focus when the dialog opens. Defaults to the first focusable child.", "required": false },
+        { "name": "returnFocus", "type": "string | undefined", "description": "CSS selector or element ID to return focus to on close. Defaults to the trigger that opened the dialog.", "required": false }
       ]
     }
   },

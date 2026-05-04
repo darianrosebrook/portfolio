@@ -326,51 +326,54 @@
     }
   },
   "props": {
-    "hook": {
+    "designed": {
       "members": [
         {
           "name": "stepsProp",
           "type": "WalkthroughStepSpec[] | undefined",
-          "description": "",
+          "description": "stepsProp prop for Walkthrough.",
           "required": false
         },
         {
           "name": "defaultIndex",
           "type": "number | undefined",
-          "description": "",
+          "description": "defaultIndex prop for Walkthrough.",
           "required": false
         },
         {
           "name": "index",
           "type": "number | undefined",
-          "description": "",
+          "description": "index prop for Walkthrough.",
           "required": false
         },
         {
           "name": "storageKey",
           "type": "string | undefined",
-          "description": "",
+          "description": "storageKey prop for Walkthrough.",
           "required": false
         },
         {
           "name": "autoStart",
           "type": "boolean | undefined",
-          "description": "",
+          "description": "autoStart prop for Walkthrough.",
           "required": false
         },
         {
           "name": "allowConcurrent",
           "type": "boolean | undefined",
-          "description": "",
+          "description": "allowConcurrent prop for Walkthrough.",
           "required": false
         },
         {
           "name": "closeOnOutsideClick",
           "type": "boolean | undefined",
-          "description": "",
+          "description": "closeOnOutsideClick prop for Walkthrough.",
           "required": false
         }
       ]
+    },
+    "passthrough": {
+      "extends": "div"
     }
   },
   "ssr": {
@@ -387,7 +390,7 @@
       "WalkthroughAnchor wraps the element each step points to",
       "Use WalkthroughControls and WalkthroughProgress for navigation UI",
       "Keyboard: ArrowRight/ArrowLeft navigate steps; Escape closes the tour",
-      "The walkthrough is non-blocking — it does not trap focus to the panel"
+      "The walkthrough is non-blocking \u2014 it does not trap focus to the panel"
     ],
     "children": {
       "allowed": true,
@@ -396,6 +399,77 @@
         "WalkthroughStep",
         "WalkthroughAnchor"
       ]
+    }
+  },
+  "motion": {
+    "reducedMotion": "respect",
+    "transitions": [
+      {
+        "name": "open",
+        "trigger": "openness=hidden\u2192visible",
+        "phase": "enter",
+        "properties": [
+          "opacity",
+          "transform"
+        ],
+        "duration": "core.motion.duration.short",
+        "easing": "core.motion.easing.emphasizedDecelerate"
+      },
+      {
+        "name": "close",
+        "trigger": "openness=visible\u2192hidden",
+        "phase": "exit",
+        "properties": [
+          "opacity"
+        ],
+        "duration": "core.motion.duration.short",
+        "easing": "core.motion.easing.emphasizedAccelerate"
+      }
+    ]
+  },
+  "focus": {
+    "strategy": "none",
+    "description": "Walkthrough panels are non-blocking. Focus remains on the anchored element while the panel is visible."
+  },
+  "portal": {
+    "enabled": true,
+    "defaultTarget": "body",
+    "positioning": "anchored",
+    "layering": "popover",
+    "collision": "flip-shift"
+  },
+  "dismissal": {
+    "triggers": [
+      {
+        "event": "escape",
+        "defaultEnabled": true
+      },
+      {
+        "event": "outsideClick",
+        "defaultEnabled": false,
+        "description": "Disabled by default to avoid accidental tour exit."
+      }
+    ]
+  },
+  "relationships": [
+    {
+      "from": "panel",
+      "to": "title",
+      "attribute": "aria-labelledby"
+    },
+    {
+      "from": "panel",
+      "to": "description",
+      "attribute": "aria-describedby"
+    }
+  ],
+  "channels": {
+    "step": {
+      "description": "Active step index.",
+      "value": "index",
+      "defaultValue": "defaultIndex",
+      "onChange": "onStepChange",
+      "valueType": "number"
     }
   }
 }
