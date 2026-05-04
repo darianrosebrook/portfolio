@@ -629,6 +629,72 @@
       ]
     }
   },
+  "motion": {
+    "reducedMotion": "respect",
+    "reducedMotionStrategy": "Duration set to 0 and animationend fires synchronously so opening/closing states collapse to open/closed immediately.",
+    "transitions": [
+      {
+        "name": "open",
+        "trigger": "openness=closed→opening",
+        "phase": "enter",
+        "properties": ["opacity", "transform"],
+        "duration": "dialog.motion.duration.enter",
+        "easing": "dialog.motion.easing.enter"
+      },
+      {
+        "name": "close",
+        "trigger": "openness=open→closing",
+        "phase": "exit",
+        "properties": ["opacity", "transform"],
+        "duration": "dialog.motion.duration.exit",
+        "easing": "dialog.motion.easing.exit"
+      }
+    ]
+  },
+  "focus": {
+    "strategy": "trap",
+    "initialFocus": "prop:initialFocusRef",
+    "returnFocus": "trigger",
+    "scrollLock": true,
+    "wrap": true
+  },
+  "portal": {
+    "enabled": true,
+    "defaultTarget": "body",
+    "positioning": "centered",
+    "layering": "modal",
+    "backdrop": true
+  },
+  "dismissal": {
+    "triggers": [
+      {
+        "event": "escape",
+        "enabledBy": "closeOnEscape",
+        "defaultEnabled": true,
+        "description": "Closes the dialog and returns focus to the trigger element."
+      },
+      {
+        "event": "overlayClick",
+        "enabledBy": "closeOnOverlayClick",
+        "defaultEnabled": true,
+        "description": "Clicking the backdrop overlay closes the dialog."
+      }
+    ]
+  },
+  "relationships": [
+    {
+      "from": "root",
+      "to": "title",
+      "attribute": "aria-labelledby",
+      "description": "Dialog takes its accessible name from the title element's id when no aria-label is provided."
+    },
+    {
+      "from": "root",
+      "to": "description",
+      "attribute": "aria-describedby",
+      "description": "Optional — links the description region so screen readers announce it when the dialog opens."
+    }
+  ],
   "ssr": {
     "hydrateOn": "interaction"
   },

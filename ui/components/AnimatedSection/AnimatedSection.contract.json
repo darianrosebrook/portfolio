@@ -87,5 +87,19 @@
   },
   "rtl": {
     "flipIcon": false
+  },
+  "motion": {
+    "reducedMotion": "respect",
+    "reducedMotionStrategy": "All transitions are disabled and the section appears at its final state immediately when prefers-reduced-motion is set.",
+    "transitions": [
+      {
+        "name": "enter",
+        "trigger": "visibility=offscreen→visible",
+        "phase": "enter",
+        "properties": ["opacity", "transform"],
+        "duration": "core.motion.duration.medium",
+        "easing": "core.motion.easing.emphasizedOut"
+      }
+    ]
   }
 }

@@ -554,6 +554,55 @@
       ]
     }
   },
+  "motion": {
+    "reducedMotion": "respect",
+    "reducedMotionStrategy": "Duration set to 0; panels snap between collapsed and expanded states without height animation.",
+    "transitions": [
+      {
+        "name": "expand",
+        "trigger": "openness=collapsed→expanded",
+        "phase": "enter",
+        "properties": ["height", "opacity"],
+        "duration": "accordion.motion.duration",
+        "easing": "accordion.motion.easing"
+      },
+      {
+        "name": "collapse",
+        "trigger": "openness=expanded→collapsed",
+        "phase": "exit",
+        "properties": ["height", "opacity"],
+        "duration": "accordion.motion.duration",
+        "easing": "accordion.motion.easing"
+      }
+    ]
+  },
+  "focus": {
+    "strategy": "manual",
+    "orientation": "vertical",
+    "initialFocus": "trigger",
+    "wrap": true,
+    "description": "Arrow keys navigate between accordion triggers; Space/Enter toggles the focused panel."
+  },
+  "portal": {
+    "enabled": false
+  },
+  "dismissal": {
+    "triggers": []
+  },
+  "relationships": [
+    {
+      "from": "trigger",
+      "to": "panel",
+      "attribute": "aria-controls",
+      "description": "Each accordion trigger controls its associated panel region."
+    },
+    {
+      "from": "panel",
+      "to": "trigger",
+      "attribute": "aria-labelledby",
+      "description": "Each panel is labelled by its corresponding trigger heading."
+    }
+  ],
   "ssr": {
     "hydrateOn": "interaction"
   },

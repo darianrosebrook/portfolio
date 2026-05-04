@@ -664,6 +664,64 @@
       ]
     }
   },
+  "motion": {
+    "reducedMotion": "respect",
+    "reducedMotionStrategy": "Duration set to 0; panel appears/disappears instantly without slide animation.",
+    "transitions": [
+      {
+        "name": "open",
+        "trigger": "openness=closed→opening",
+        "phase": "enter",
+        "properties": ["transform"],
+        "duration": "sheet.motion.duration",
+        "easing": "sheet.motion.easing"
+      },
+      {
+        "name": "close",
+        "trigger": "openness=open→closing",
+        "phase": "exit",
+        "properties": ["transform"],
+        "duration": "sheet.motion.duration",
+        "easing": "sheet.motion.easing"
+      }
+    ]
+  },
+  "focus": {
+    "strategy": "trap",
+    "initialFocus": "content",
+    "returnFocus": "trigger",
+    "scrollLock": true,
+    "wrap": true
+  },
+  "portal": {
+    "enabled": true,
+    "defaultTarget": "body",
+    "positioning": "anchored",
+    "layering": "modal",
+    "backdrop": true
+  },
+  "dismissal": {
+    "triggers": [
+      {
+        "event": "escape",
+        "defaultEnabled": true,
+        "description": "Closes the sheet and returns focus to the trigger element."
+      },
+      {
+        "event": "overlayClick",
+        "defaultEnabled": true,
+        "description": "Clicking outside the sheet panel closes it."
+      }
+    ]
+  },
+  "relationships": [
+    {
+      "from": "root",
+      "to": "title",
+      "attribute": "aria-labelledby",
+      "description": "Sheet dialog takes its accessible name from its title element."
+    }
+  ],
   "ssr": {
     "hydrateOn": "interaction"
   },

@@ -757,5 +757,32 @@
   },
   "rtl": {
     "flipIcon": false
-  }
+  },
+  "focus": {
+    "strategy": "auto",
+    "initialFocus": "input",
+    "description": "Focus moves to the native input via Tab. Label, description, and error are non-interactive and not in the tab sequence."
+  },
+  "relationships": [
+    {
+      "from": "input",
+      "to": "label",
+      "attribute": "aria-labelledby",
+      "description": "Input's htmlFor/id pair associates it with the label for accessible naming."
+    },
+    {
+      "from": "input",
+      "to": "description",
+      "attribute": "aria-describedby",
+      "when": "description=present",
+      "description": "When a description is provided, the input references its id via aria-describedby."
+    },
+    {
+      "from": "input",
+      "to": "error",
+      "attribute": "aria-describedby",
+      "when": "validity=invalid",
+      "description": "When in an error state, the input's aria-describedby includes the error message element's id."
+    }
+  ]
 }

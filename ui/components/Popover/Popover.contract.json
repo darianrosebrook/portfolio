@@ -172,5 +172,67 @@
   },
   "rtl": {
     "flipIcon": false
-  }
+  },
+  "motion": {
+    "reducedMotion": "respect",
+    "reducedMotionStrategy": "Duration set to 0; popover appears/disappears instantly without animation.",
+    "transitions": [
+      {
+        "name": "open",
+        "trigger": "openness=closed→open",
+        "phase": "enter",
+        "properties": ["opacity", "transform"],
+        "duration": "core.motion.duration.short",
+        "easing": "core.motion.easing.emphasizedOut"
+      },
+      {
+        "name": "close",
+        "trigger": "openness=open→closed",
+        "phase": "exit",
+        "properties": ["opacity", "transform"],
+        "duration": "core.motion.duration.short",
+        "easing": "core.motion.easing.emphasizedIn"
+      }
+    ]
+  },
+  "focus": {
+    "strategy": "none",
+    "description": "Popover does not trap focus. Focus remains on the trigger or moves into the content if interactive children are present."
+  },
+  "portal": {
+    "enabled": true,
+    "defaultTarget": "body",
+    "positioning": "anchored",
+    "layering": "popover",
+    "collision": "flip-shift"
+  },
+  "dismissal": {
+    "triggers": [
+      {
+        "event": "escape",
+        "defaultEnabled": true,
+        "description": "Closes the popover and returns focus to the trigger."
+      },
+      {
+        "event": "outsideClick",
+        "defaultEnabled": true,
+        "description": "Clicking outside the popover content or trigger closes the popover."
+      }
+    ]
+  },
+  "relationships": [
+    {
+      "from": "trigger",
+      "to": "content",
+      "attribute": "aria-controls",
+      "when": "openness=open"
+    },
+    {
+      "from": "trigger",
+      "to": "content",
+      "attribute": "aria-expanded",
+      "when": "openness=open",
+      "description": "aria-expanded is true when the popover is open, false when closed."
+    }
+  ]
 }

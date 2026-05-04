@@ -12,8 +12,9 @@ blast_radius:
 operational_rollback_slo: 5m
 scope:
   in:
-    - src/
-    - tests/
+    - ui/components/
+    - scripts/
+    - utils/designTokens/
   out:
     - node_modules/
     - dist/

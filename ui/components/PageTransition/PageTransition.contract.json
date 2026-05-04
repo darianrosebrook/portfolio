@@ -242,5 +242,27 @@
   },
   "rtl": {
     "flipIcon": false
+  },
+  "motion": {
+    "reducedMotion": "respect",
+    "reducedMotionStrategy": "Page transitions are skipped; the incoming page renders at full opacity immediately when prefers-reduced-motion is set.",
+    "transitions": [
+      {
+        "name": "exit",
+        "trigger": "navigation=start",
+        "phase": "exit",
+        "properties": ["opacity", "transform"],
+        "duration": "pageTransition.duration.normal",
+        "easing": "pageTransition.easing.accelerate"
+      },
+      {
+        "name": "enter",
+        "trigger": "navigation=complete",
+        "phase": "enter",
+        "properties": ["opacity", "transform"],
+        "duration": "pageTransition.duration.normal",
+        "easing": "pageTransition.easing.decelerate"
+      }
+    ]
   }
 }

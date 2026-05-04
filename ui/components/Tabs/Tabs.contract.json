@@ -500,6 +500,47 @@
       ]
     }
   },
+  "motion": {
+    "reducedMotion": "respect",
+    "reducedMotionStrategy": "Active indicator moves instantly without animation when prefers-reduced-motion is set.",
+    "transitions": [
+      {
+        "name": "indicator",
+        "trigger": "activeTab=changed",
+        "phase": "enter",
+        "properties": ["transform", "width"],
+        "duration": "tabs.motion.indicator",
+        "easing": null
+      }
+    ]
+  },
+  "focus": {
+    "strategy": "roving",
+    "orientation": "horizontal",
+    "initialFocus": "activeTab",
+    "wrap": true,
+    "description": "Arrow keys move focus between tabs; focus follows the active indicator. Tab panels are reached with Tab key."
+  },
+  "portal": {
+    "enabled": false
+  },
+  "dismissal": {
+    "triggers": []
+  },
+  "relationships": [
+    {
+      "from": "tab",
+      "to": "panel",
+      "attribute": "aria-controls",
+      "description": "Each tab controls its associated tab panel."
+    },
+    {
+      "from": "panel",
+      "to": "tab",
+      "attribute": "aria-labelledby",
+      "description": "Each tab panel is labelled by its corresponding tab."
+    }
+  ],
   "ssr": {
     "hydrateOn": "interaction"
   },

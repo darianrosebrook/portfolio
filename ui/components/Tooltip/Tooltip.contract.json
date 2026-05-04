@@ -162,5 +162,61 @@
   },
   "rtl": {
     "flipIcon": false
-  }
+  },
+  "motion": {
+    "reducedMotion": "respect",
+    "reducedMotionStrategy": "Duration set to 0; tooltip appears/disappears instantly without opacity transition.",
+    "transitions": [
+      {
+        "name": "show",
+        "trigger": "visibility=hidden→visible",
+        "phase": "enter",
+        "properties": ["opacity"],
+        "duration": "tooltip.motion.duration.enter",
+        "easing": "tooltip.motion.easing.enter"
+      },
+      {
+        "name": "hide",
+        "trigger": "visibility=visible→hidden",
+        "phase": "exit",
+        "properties": ["opacity"],
+        "duration": "tooltip.motion.duration.exit",
+        "easing": "tooltip.motion.easing.exit"
+      }
+    ]
+  },
+  "focus": {
+    "strategy": "none",
+    "description": "Tooltip never takes focus — it is non-interactive. The trigger element retains focus throughout the tooltip's lifecycle."
+  },
+  "portal": {
+    "enabled": true,
+    "defaultTarget": "body",
+    "positioning": "anchored",
+    "layering": "tooltip",
+    "collision": "flip-shift"
+  },
+  "dismissal": {
+    "triggers": [
+      {
+        "event": "escape",
+        "defaultEnabled": true,
+        "description": "WCAG 2.1 SC 1.4.13 — Escape dismisses tooltip without moving focus from the trigger."
+      },
+      {
+        "event": "blur",
+        "defaultEnabled": true,
+        "description": "Tooltip hides when the trigger loses hover or keyboard focus."
+      }
+    ]
+  },
+  "relationships": [
+    {
+      "from": "trigger",
+      "to": "root",
+      "attribute": "aria-describedby",
+      "when": "visibility=visible",
+      "description": "Trigger's aria-describedby points to the tooltip content's id when visible, providing supplemental screen-reader description."
+    }
+  ]
 }

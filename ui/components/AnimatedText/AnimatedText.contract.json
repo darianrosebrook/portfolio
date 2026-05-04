@@ -94,5 +94,19 @@
   },
   "rtl": {
     "flipIcon": false
+  },
+  "motion": {
+    "reducedMotion": "respect",
+    "reducedMotionStrategy": "Character/line animation is skipped and text is shown fully visible immediately when prefers-reduced-motion is set.",
+    "transitions": [
+      {
+        "name": "enter",
+        "trigger": "visibility=offscreen→visible",
+        "phase": "enter",
+        "properties": ["opacity", "transform"],
+        "duration": "core.motion.duration.short",
+        "easing": "core.motion.easing.emphasizedOut"
+      }
+    ]
   }
 }

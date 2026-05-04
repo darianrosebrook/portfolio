@@ -458,5 +458,33 @@
   },
   "rtl": {
     "flipIcon": false
-  }
+  },
+  "focus": {
+    "strategy": "manual",
+    "orientation": "horizontal",
+    "initialFocus": "field",
+    "wrap": false,
+    "description": "Focus moves automatically to the next OTPField after a digit is entered, and to the previous field on Backspace. Arrow keys can also navigate between fields."
+  },
+  "relationships": [
+    {
+      "from": "root",
+      "to": "label",
+      "attribute": "aria-labelledby",
+      "description": "The OTP group region is labelled by the OTPLabel element when present."
+    },
+    {
+      "from": "root",
+      "to": "error",
+      "attribute": "aria-describedby",
+      "when": "validity=invalid",
+      "description": "The group references the error message region when in an invalid state."
+    },
+    {
+      "from": "field",
+      "to": "group",
+      "attribute": "aria-label",
+      "description": "Each individual input field carries an aria-label like 'Digit N of M' for screen reader enumeration."
+    }
+  ]
 }
