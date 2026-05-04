@@ -396,5 +396,16 @@
   },
   "rtl": {
     "flipIcon": false
+  },
+  "description": "Visual separator between content sections. Renders as an hr or div depending on orientation.",
+  "a2ui": {
+    "category": "layout",
+    "usageHints": [
+      "Use orientation=horizontal for horizontal rules; orientation=vertical for column separators",
+      "Do not place Divider inside flex-row containers unless you set an explicit height"
+    ],
+    "children": {
+      "allowed": false
+    }
   }
 }

@@ -38,7 +38,10 @@
     "default"
   ],
   "slots": {
-    "root": { "required": true, "selector": "[data-slot=\"list\"]" }
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"list\"]"
+    }
   },
   "a11y": {
     "role": "generic",
@@ -511,5 +514,22 @@
   },
   "rtl": {
     "flipIcon": false
+  },
+  "description": "Semantic list element (ul, ol, or dl) with consistent spacing and marker styles.",
+  "a2ui": {
+    "category": "layout",
+    "usageHints": [
+      "Use as=\"ul\" for unordered lists, \"ol\" for ordered, \"dl\" for description lists",
+      "Set variant to control bullet style (disc, decimal, none)",
+      "Nest lists by placing a List inside a list item"
+    ],
+    "children": {
+      "allowed": true,
+      "slot": "children",
+      "accepts": [
+        "li",
+        "node-ref"
+      ]
+    }
   }
 }

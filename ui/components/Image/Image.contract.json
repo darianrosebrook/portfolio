@@ -32,8 +32,14 @@
     "error"
   ],
   "slots": {
-    "root": { "required": true, "selector": "[data-slot=\"image\"]" },
-    "img":  { "required": true, "selector": "[data-slot=\"image-img\"]" }
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"image\"]"
+    },
+    "img": {
+      "required": true,
+      "selector": "[data-slot=\"image-img\"]"
+    }
   },
   "a11y": {
     "role": "img",
@@ -571,5 +577,17 @@
   },
   "rtl": {
     "flipIcon": false
+  },
+  "description": "Responsive image component wrapping Next.js Image with layout and aspect-ratio helpers.",
+  "a2ui": {
+    "category": "display",
+    "usageHints": [
+      "Always provide a meaningful alt string; use alt=\"\" for decorative images",
+      "Set fill for images that should cover their container; use width/height otherwise",
+      "Use priority on above-the-fold images to avoid layout shift"
+    ],
+    "children": {
+      "allowed": false
+    }
   }
 }

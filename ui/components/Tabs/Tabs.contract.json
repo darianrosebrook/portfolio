@@ -508,7 +508,10 @@
         "name": "indicator",
         "trigger": "activeTab=changed",
         "phase": "enter",
-        "properties": ["transform", "width"],
+        "properties": [
+          "transform",
+          "width"
+        ],
         "duration": "tabs.motion.indicator",
         "easing": null
       }
@@ -546,5 +549,33 @@
   },
   "rtl": {
     "flipIcon": false
+  },
+  "channels": {
+    "activeTab": {
+      "description": "The value of the currently active tab.",
+      "value": "value",
+      "defaultValue": "defaultValue",
+      "onChange": "onValueChange",
+      "valueType": "string"
+    }
+  },
+  "description": "Tabbed navigation for switching between related content panels within the same page context.",
+  "a2ui": {
+    "category": "navigation",
+    "usageHints": [
+      "Bind value and onValueChange for controlled tabs; use defaultValue for uncontrolled",
+      "Use activationMode=\"manual\" when tab panels are expensive to render (focus without selecting)",
+      "Each Tab must have a corresponding TabsContent with a matching value string",
+      "Use orientation=\"vertical\" for sidebar-style tab lists"
+    ],
+    "children": {
+      "allowed": true,
+      "slot": "children",
+      "accepts": [
+        "TabsList",
+        "TabsTrigger",
+        "TabsContent"
+      ]
+    }
   }
 }

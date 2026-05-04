@@ -93,10 +93,29 @@
         "name": "enter",
         "trigger": "visibility=offscreen→visible",
         "phase": "enter",
-        "properties": ["opacity", "transform"],
+        "properties": [
+          "opacity",
+          "transform"
+        ],
         "duration": "core.motion.duration.medium",
         "easing": "core.motion.easing.emphasizedOut"
       }
     ]
+  },
+  "description": "A card component that animates into view when it enters the viewport.",
+  "a2ui": {
+    "category": "animation",
+    "usageHints": [
+      "Wrap any card content inside AnimatedCard to apply the scroll-triggered entrance animation",
+      "Respects prefers-reduced-motion — animation is disabled for users who prefer reduced motion",
+      "Use delay to stagger multiple AnimatedCards in a grid"
+    ],
+    "children": {
+      "allowed": true,
+      "slot": "children",
+      "accepts": [
+        "node-ref"
+      ]
+    }
   }
 }

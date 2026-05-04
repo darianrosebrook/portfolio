@@ -64,7 +64,10 @@
     "success"
   ],
   "slots": {
-    "root": { "required": true, "selector": "[data-slot=\"text\"]" }
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"text\"]"
+    }
   },
   "a11y": {
     "role": "generic",
@@ -1027,5 +1030,22 @@
   },
   "rtl": {
     "flipIcon": false
+  },
+  "description": "Polymorphic text element with design-system typography variants and semantic element control.",
+  "a2ui": {
+    "category": "display",
+    "usageHints": [
+      "Use as to control the rendered element (p, span, h1–h6, label, etc.)",
+      "Use variant to apply typography scale (body, caption, heading, etc.)",
+      "Do not nest block-level Text elements inside inline ones"
+    ],
+    "children": {
+      "allowed": true,
+      "slot": "children",
+      "accepts": [
+        "string",
+        "node-ref"
+      ]
+    }
   }
 }

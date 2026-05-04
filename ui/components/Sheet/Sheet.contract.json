@@ -672,7 +672,9 @@
         "name": "open",
         "trigger": "openness=closed→opening",
         "phase": "enter",
-        "properties": ["transform"],
+        "properties": [
+          "transform"
+        ],
         "duration": "sheet.motion.duration",
         "easing": "sheet.motion.easing"
       },
@@ -680,7 +682,9 @@
         "name": "close",
         "trigger": "openness=open→closing",
         "phase": "exit",
-        "properties": ["transform"],
+        "properties": [
+          "transform"
+        ],
         "duration": "sheet.motion.duration",
         "easing": "sheet.motion.easing"
       }
@@ -727,5 +731,31 @@
   },
   "rtl": {
     "flipIcon": false
+  },
+  "channels": {
+    "openness": {
+      "description": "Whether the sheet panel is open.",
+      "value": "open",
+      "defaultValue": "defaultOpen",
+      "onChange": "onOpenChange",
+      "valueType": "boolean"
+    }
+  },
+  "description": "Slide-in panel (drawer) that overlays the page from an edge. Traps focus until dismissed.",
+  "a2ui": {
+    "category": "overlay",
+    "usageHints": [
+      "Use side to control which edge the sheet slides in from (left, right, top, bottom)",
+      "Bind open and onOpenChange to control visibility",
+      "Sheet traps focus while open; Escape or clicking the overlay closes it by default",
+      "Prefer Dialog for centered confirmations; use Sheet for detail panels, filters, or nav drawers"
+    ],
+    "children": {
+      "allowed": true,
+      "slot": "children",
+      "accepts": [
+        "node-ref"
+      ]
+    }
   }
 }

@@ -34,7 +34,10 @@
     "default"
   ],
   "slots": {
-    "root": { "required": true, "selector": "[data-slot=\"skeleton\"]" }
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"skeleton\"]"
+    }
   },
   "a11y": {
     "role": "generic",
@@ -191,5 +194,18 @@
   },
   "rtl": {
     "flipIcon": false
+  },
+  "description": "Loading placeholder that mimics the shape of content before data is available.",
+  "a2ui": {
+    "category": "display",
+    "usageHints": [
+      "Match the width and height to the content it replaces to minimize layout shift",
+      "Use animate to select the loading animation (shimmer, pulse, wipe, or none)",
+      "Use density to match the spacing of the surrounding content",
+      "Remove Skeleton and render real content once data is loaded"
+    ],
+    "children": {
+      "allowed": false
+    }
   }
 }

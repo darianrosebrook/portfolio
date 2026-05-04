@@ -370,5 +370,20 @@
   },
   "rtl": {
     "flipIcon": false
+  },
+  "description": "Accessible form label associated with a control via htmlFor.",
+  "a2ui": {
+    "category": "form-field",
+    "usageHints": [
+      "Always pair with an input via htmlFor; do not use as decorative text",
+      "TextField automatically wires Label to its Input — use Label directly only when composing custom forms"
+    ],
+    "children": {
+      "allowed": true,
+      "slot": "children",
+      "accepts": [
+        "string"
+      ]
+    }
   }
 }

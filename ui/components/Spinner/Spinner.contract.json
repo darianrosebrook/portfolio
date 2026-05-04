@@ -28,8 +28,14 @@
     "default"
   ],
   "slots": {
-    "root":   { "required": true, "selector": "[data-slot=\"spinner\"]" },
-    "visual": { "required": true, "selector": "[data-slot=\"spinner-visual\"]" }
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"spinner\"]"
+    },
+    "visual": {
+      "required": true,
+      "selector": "[data-slot=\"spinner-visual\"]"
+    }
   },
   "a11y": {
     "role": "generic",
@@ -443,5 +449,18 @@
   },
   "rtl": {
     "flipIcon": false
+  },
+  "description": "Rotating indicator for indeterminate loading states.",
+  "a2ui": {
+    "category": "display",
+    "usageHints": [
+      "Add aria-label when the spinner is the only loading indicator visible",
+      "Use size to match the spinner to its surrounding context",
+      "Use thickness to adjust visual weight (hairline for subtle, bold for prominent)",
+      "Prefer Skeleton for content areas; use Spinner for button or icon loading states"
+    ],
+    "children": {
+      "allowed": false
+    }
   }
 }

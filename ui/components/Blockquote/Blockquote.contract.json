@@ -454,5 +454,21 @@
   },
   "rtl": {
     "flipIcon": false
+  },
+  "description": "Styled blockquote for displaying cited passages or testimonials.",
+  "a2ui": {
+    "category": "content",
+    "usageHints": [
+      "Set the cite prop to the URL of the source document (not the visible citation text)",
+      "Pair with a figcaption sibling for the attribution text"
+    ],
+    "children": {
+      "allowed": true,
+      "slot": "children",
+      "accepts": [
+        "string",
+        "node-ref"
+      ]
+    }
   }
 }

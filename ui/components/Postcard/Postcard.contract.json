@@ -26,16 +26,46 @@
     "hover"
   ],
   "slots": {
-    "root": { "required": true, "selector": "[data-slot=\"postcard\"]" },
-    "header": { "required": false, "selector": "[data-slot=\"postcard-header\"]" },
-    "body": { "required": false, "selector": "[data-slot=\"postcard-body\"]" },
-    "footer": { "required": false, "selector": "[data-slot=\"postcard-footer\"]" },
-    "stats": { "required": false, "selector": "[data-slot=\"postcard-stats\"]" },
-    "author": { "required": false, "selector": "[data-slot=\"postcard-author\"]" },
-    "timestamp": { "required": false, "selector": "[data-slot=\"postcard-timestamp\"]" },
-    "content": { "required": false, "selector": "[data-slot=\"postcard-content\"]" },
-    "embed": { "required": false, "selector": "[data-slot=\"postcard-embed\"]" },
-    "stat": { "required": false, "selector": "[data-slot=\"postcard-stat\"]" }
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"postcard\"]"
+    },
+    "header": {
+      "required": false,
+      "selector": "[data-slot=\"postcard-header\"]"
+    },
+    "body": {
+      "required": false,
+      "selector": "[data-slot=\"postcard-body\"]"
+    },
+    "footer": {
+      "required": false,
+      "selector": "[data-slot=\"postcard-footer\"]"
+    },
+    "stats": {
+      "required": false,
+      "selector": "[data-slot=\"postcard-stats\"]"
+    },
+    "author": {
+      "required": false,
+      "selector": "[data-slot=\"postcard-author\"]"
+    },
+    "timestamp": {
+      "required": false,
+      "selector": "[data-slot=\"postcard-timestamp\"]"
+    },
+    "content": {
+      "required": false,
+      "selector": "[data-slot=\"postcard-content\"]"
+    },
+    "embed": {
+      "required": false,
+      "selector": "[data-slot=\"postcard-embed\"]"
+    },
+    "stat": {
+      "required": false,
+      "selector": "[data-slot=\"postcard-stat\"]"
+    }
   },
   "a11y": {
     "role": "region",
@@ -276,5 +306,24 @@
   },
   "rtl": {
     "flipIcon": false
+  },
+  "description": "Social-media-style post card with author, content, media embed, and engagement stat slots.",
+  "a2ui": {
+    "category": "content",
+    "usageHints": [
+      "Compose with Postcard.Header, .Body, .Footer, .Stats, .Author, .Timestamp, .Content, .Embed",
+      "Like, Reply, Repost, and ExternalLink sub-components render the engagement action buttons",
+      "Postcard.Embed auto-selects image/video/audio renderer based on embed.type"
+    ],
+    "children": {
+      "allowed": true,
+      "slot": "children",
+      "accepts": [
+        "Postcard.Header",
+        "Postcard.Body",
+        "Postcard.Footer",
+        "Postcard.Stats"
+      ]
+    }
   }
 }

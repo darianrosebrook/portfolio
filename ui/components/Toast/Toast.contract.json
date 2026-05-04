@@ -32,13 +32,34 @@
     "leaving"
   ],
   "slots": {
-    "viewport": { "required": true, "selector": "[data-slot=\"toast-viewport\"]" },
-    "root": { "required": true, "selector": "[data-slot=\"toast\"]" },
-    "title": { "required": false, "selector": "[data-slot=\"toast-title\"]" },
-    "description": { "required": false, "selector": "[data-slot=\"toast-description\"]" },
-    "row": { "required": false, "selector": "[data-slot=\"toast-row\"]" },
-    "action": { "required": false, "selector": "[data-slot=\"toast-action\"]" },
-    "close": { "required": false, "selector": "[data-slot=\"toast-close\"]" }
+    "viewport": {
+      "required": true,
+      "selector": "[data-slot=\"toast-viewport\"]"
+    },
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"toast\"]"
+    },
+    "title": {
+      "required": false,
+      "selector": "[data-slot=\"toast-title\"]"
+    },
+    "description": {
+      "required": false,
+      "selector": "[data-slot=\"toast-description\"]"
+    },
+    "row": {
+      "required": false,
+      "selector": "[data-slot=\"toast-row\"]"
+    },
+    "action": {
+      "required": false,
+      "selector": "[data-slot=\"toast-action\"]"
+    },
+    "close": {
+      "required": false,
+      "selector": "[data-slot=\"toast-close\"]"
+    }
   },
   "a11y": {
     "role": "alert",
@@ -478,5 +499,25 @@
   },
   "rtl": {
     "flipIcon": false
+  },
+  "description": "Transient notification message appearing briefly at the edge of the viewport.",
+  "a2ui": {
+    "category": "overlay",
+    "usageHints": [
+      "Trigger toasts via the useToast hook or ToastProvider API — do not render Toast directly",
+      "Use variant to set the visual style (default, success, warning, error)",
+      "Toasts are live regions — screen readers announce them without requiring focus",
+      "Keep toast messages brief; use an action button only for critical reversible operations"
+    ],
+    "children": {
+      "allowed": true,
+      "slot": "children",
+      "accepts": [
+        "ToastTitle",
+        "ToastDescription",
+        "ToastAction",
+        "ToastClose"
+      ]
+    }
   }
 }

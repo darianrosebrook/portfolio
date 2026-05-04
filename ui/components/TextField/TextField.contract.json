@@ -13,9 +13,18 @@
     "error"
   ],
   "slots": {
-    "root": { "required": true, "selector": "[data-slot=\"text-field\"]" },
-    "description": { "required": false, "selector": "[data-slot=\"text-field-description\"]" },
-    "error": { "required": false, "selector": "[data-slot=\"text-field-error\"]" }
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"text-field\"]"
+    },
+    "description": {
+      "required": false,
+      "selector": "[data-slot=\"text-field-description\"]"
+    },
+    "error": {
+      "required": false,
+      "selector": "[data-slot=\"text-field-error\"]"
+    }
   },
   "a11y": {
     "role": "alert",
@@ -784,5 +793,64 @@
       "when": "validity=invalid",
       "description": "When in an error state, the input's aria-describedby includes the error message element's id."
     }
-  ]
+  ],
+  "channels": {
+    "value": {
+      "description": "The text value of the underlying input element.",
+      "value": "value",
+      "defaultValue": "defaultValue",
+      "onChange": "onChange",
+      "valueType": "string"
+    }
+  },
+  "form": {
+    "participates": true,
+    "inputType": "text",
+    "name": {
+      "prop": "name"
+    },
+    "required": {
+      "prop": "required",
+      "constraintValidation": true
+    },
+    "serialization": {
+      "valueType": "string",
+      "valueSource": "channel:value",
+      "omitWhen": "never"
+    },
+    "validity": {
+      "model": "hybrid",
+      "invalidProp": "invalid",
+      "errorMessageProp": "error",
+      "errorSurface": "aria-describedby",
+      "ariaAttributes": [
+        "aria-invalid",
+        "aria-required",
+        "aria-describedby"
+      ]
+    },
+    "labeling": {
+      "strategy": "associated-label",
+      "required": true,
+      "via": [
+        "prop:label",
+        "aria-labelledby",
+        "aria-label"
+      ]
+    }
+  },
+  "description": "Full-featured form field composing Label, Input, description, and error message with ARIA wiring.",
+  "a2ui": {
+    "category": "form-field",
+    "usageHints": [
+      "Use label prop to attach a visible label (wired via aria automatically)",
+      "Use description for supplemental instructions below the input",
+      "Use error to display a validation error message (sets aria-invalid on the input)",
+      "Bind value and onChange for controlled inputs; use defaultValue for uncontrolled",
+      "Use name for native form submission"
+    ],
+    "children": {
+      "allowed": false
+    }
+  }
 }

@@ -30,9 +30,18 @@
     "hover"
   ],
   "slots": {
-    "root": { "required": true, "selector": "[data-slot=\"badge\"]" },
-    "icon": { "required": false, "selector": "[data-slot=\"badge-icon\"]" },
-    "content": { "required": false, "selector": "[data-slot=\"badge-content\"]" }
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"badge\"]"
+    },
+    "icon": {
+      "required": false,
+      "selector": "[data-slot=\"badge-icon\"]"
+    },
+    "content": {
+      "required": false,
+      "selector": "[data-slot=\"badge-content\"]"
+    }
   },
   "a11y": {
     "role": "generic",
@@ -617,5 +626,22 @@
   },
   "rtl": {
     "flipIcon": true
+  },
+  "description": "Small label conveying status, category, or count. Typically paired with other content.",
+  "a2ui": {
+    "category": "display",
+    "usageHints": [
+      "Use intent to apply semantic color (info, success, warning, danger, neutral)",
+      "Use variant to switch between filled, outlined, or subtle styles",
+      "Keep badge text short — ideally a single word or number",
+      "Pair with an icon using the icon prop to reinforce meaning"
+    ],
+    "children": {
+      "allowed": true,
+      "slot": "children",
+      "accepts": [
+        "string"
+      ]
+    }
   }
 }

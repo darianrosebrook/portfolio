@@ -1032,5 +1032,24 @@
   },
   "rtl": {
     "flipIcon": false
+  },
+  "description": "Clickable element for triggering actions. Supports multiple visual variants and semantic intents.",
+  "a2ui": {
+    "category": "action",
+    "usageHints": [
+      "Use variant=primary for the single most important action in a view",
+      "Use variant=danger for irreversible or destructive actions",
+      "Use variant=ghost for tertiary actions that should not compete visually",
+      "Set disabled to prevent interaction when the action is unavailable",
+      "Use as=\"a\" with href for navigation-style buttons"
+    ],
+    "children": {
+      "allowed": true,
+      "slot": "children",
+      "accepts": [
+        "string",
+        "icon-ref"
+      ]
+    }
   }
 }

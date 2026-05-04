@@ -24,9 +24,18 @@
     "leaving"
   ],
   "slots": {
-    "root": { "required": true, "selector": "[data-slot=\"popover\"]" },
-    "trigger": { "required": true, "selector": "[data-slot=\"popover-trigger\"]" },
-    "content": { "required": true, "selector": "[data-slot=\"popover-content\"]" }
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"popover\"]"
+    },
+    "trigger": {
+      "required": true,
+      "selector": "[data-slot=\"popover-trigger\"]"
+    },
+    "content": {
+      "required": true,
+      "selector": "[data-slot=\"popover-content\"]"
+    }
   },
   "a11y": {
     "role": "region",
@@ -181,7 +190,10 @@
         "name": "open",
         "trigger": "openness=closed→open",
         "phase": "enter",
-        "properties": ["opacity", "transform"],
+        "properties": [
+          "opacity",
+          "transform"
+        ],
         "duration": "core.motion.duration.short",
         "easing": "core.motion.easing.emphasizedOut"
       },
@@ -189,7 +201,10 @@
         "name": "close",
         "trigger": "openness=open→closed",
         "phase": "exit",
-        "properties": ["opacity", "transform"],
+        "properties": [
+          "opacity",
+          "transform"
+        ],
         "duration": "core.motion.duration.short",
         "easing": "core.motion.easing.emphasizedIn"
       }
@@ -234,5 +249,31 @@
       "when": "openness=open",
       "description": "aria-expanded is true when the popover is open, false when closed."
     }
-  ]
+  ],
+  "channels": {
+    "openness": {
+      "description": "Whether the popover content is visible.",
+      "value": "open",
+      "onChange": "onOpenChange",
+      "valueType": "boolean"
+    }
+  },
+  "description": "Non-modal floating panel anchored to a trigger element. Does not trap focus.",
+  "a2ui": {
+    "category": "overlay",
+    "usageHints": [
+      "Use for supplemental, non-blocking information that does not require a decision",
+      "Popover.Trigger wraps the element that opens the panel; Popover.Content is the floating panel",
+      "Bind open and onOpenChange for controlled mode",
+      "Prefer Tooltip for simple text-only hints; use Popover when content is interactive"
+    ],
+    "children": {
+      "allowed": true,
+      "slot": "children",
+      "accepts": [
+        "Popover.Trigger",
+        "Popover.Content"
+      ]
+    }
+  }
 }

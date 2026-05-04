@@ -32,10 +32,22 @@
     "default"
   ],
   "slots": {
-    "root": { "required": true, "selector": "[data-slot=\"progress\"]" },
-    "track": { "required": false, "selector": "[data-slot=\"progress-track\"]" },
-    "fill": { "required": false, "selector": "[data-slot=\"progress-fill\"]" },
-    "value": { "required": false, "selector": "[data-slot=\"progress-value\"]" }
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"progress\"]"
+    },
+    "track": {
+      "required": false,
+      "selector": "[data-slot=\"progress-track\"]"
+    },
+    "fill": {
+      "required": false,
+      "selector": "[data-slot=\"progress-fill\"]"
+    },
+    "value": {
+      "required": false,
+      "selector": "[data-slot=\"progress-value\"]"
+    }
   },
   "a11y": {
     "role": "generic",
@@ -565,5 +577,18 @@
   },
   "rtl": {
     "flipIcon": false
+  },
+  "description": "Visual indicator for task completion. Supports linear bar and circular ring variants.",
+  "a2ui": {
+    "category": "display",
+    "usageHints": [
+      "Use variant=linear for step-by-step progress; variant=circular for compact space-constrained contexts",
+      "Set value (0–100) for determinate progress; omit for indeterminate animation",
+      "Set showValue to display the percentage label inside the component",
+      "Always provide aria-label when the progress bar has no adjacent visible label"
+    ],
+    "children": {
+      "allowed": false
+    }
   }
 }

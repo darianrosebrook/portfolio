@@ -127,5 +127,17 @@
   },
   "rtl": {
     "flipIcon": false
+  },
+  "description": "Navigation landmark showing the current page location within a site hierarchy.",
+  "a2ui": {
+    "category": "navigation",
+    "usageHints": [
+      "Provide items as an array of { label, href } objects; the last item is the current page (no href)",
+      "The component automatically renders a nav[aria-label=\"Breadcrumb\"] and marks the current item with aria-current=\"page\"",
+      "Use separator to customize the divider character"
+    ],
+    "children": {
+      "allowed": false
+    }
   }
 }

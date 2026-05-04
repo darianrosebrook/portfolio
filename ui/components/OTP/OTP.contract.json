@@ -18,12 +18,30 @@
     "disabled"
   ],
   "slots": {
-    "root": { "required": true, "selector": "[data-slot=\"otp\"]" },
-    "group": { "required": false, "selector": "[data-slot=\"otp-group\"]" },
-    "field": { "required": true, "selector": "[data-slot=\"otp-field\"]" },
-    "label": { "required": false, "selector": "[data-slot=\"otp-label\"]" },
-    "error": { "required": false, "selector": "[data-slot=\"otp-error\"]" },
-    "separator": { "required": false, "selector": "[data-slot=\"otp-separator\"]" }
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"otp\"]"
+    },
+    "group": {
+      "required": false,
+      "selector": "[data-slot=\"otp-group\"]"
+    },
+    "field": {
+      "required": true,
+      "selector": "[data-slot=\"otp-field\"]"
+    },
+    "label": {
+      "required": false,
+      "selector": "[data-slot=\"otp-label\"]"
+    },
+    "error": {
+      "required": false,
+      "selector": "[data-slot=\"otp-error\"]"
+    },
+    "separator": {
+      "required": false,
+      "selector": "[data-slot=\"otp-separator\"]"
+    }
   },
   "a11y": {
     "role": "group",
@@ -486,5 +504,25 @@
       "attribute": "aria-label",
       "description": "Each individual input field carries an aria-label like 'Digit N of M' for screen reader enumeration."
     }
-  ]
+  ],
+  "description": "One-time password input composed of individual single-character digit fields.",
+  "a2ui": {
+    "category": "form-field",
+    "usageHints": [
+      "Set length to control the number of digit fields",
+      "Focus advances automatically after each digit is entered",
+      "Compose with OTPLabel for the field label and OTPError for validation feedback",
+      "Use OTPSeparator between fields for visual grouping (e.g., 3+3 pattern)"
+    ],
+    "children": {
+      "allowed": true,
+      "slot": "children",
+      "accepts": [
+        "OTPInput",
+        "OTPLabel",
+        "OTPError",
+        "OTPSeparator"
+      ]
+    }
+  }
 }

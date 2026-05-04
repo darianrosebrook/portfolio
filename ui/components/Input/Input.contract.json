@@ -569,5 +569,60 @@
   },
   "rtl": {
     "flipIcon": false
+  },
+  "channels": {
+    "value": {
+      "description": "The current text value of the input.",
+      "value": "value",
+      "defaultValue": "defaultValue",
+      "onChange": "onChange",
+      "valueType": "string"
+    }
+  },
+  "form": {
+    "participates": true,
+    "inputType": "text",
+    "name": {
+      "prop": "name"
+    },
+    "required": {
+      "prop": "required",
+      "constraintValidation": true
+    },
+    "serialization": {
+      "valueType": "string",
+      "valueSource": "channel:value",
+      "omitWhen": "never"
+    },
+    "validity": {
+      "model": "hybrid",
+      "invalidProp": "invalid",
+      "ariaAttributes": [
+        "aria-invalid",
+        "aria-required",
+        "aria-describedby"
+      ]
+    },
+    "labeling": {
+      "strategy": "associated-label",
+      "required": true,
+      "via": [
+        "aria-labelledby",
+        "aria-label"
+      ]
+    }
+  },
+  "description": "Native text input with portfolio-specific styling. Use inside TextField for label and error support.",
+  "a2ui": {
+    "category": "form-field",
+    "usageHints": [
+      "Prefer TextField over Input when you need a label, description, or error message",
+      "Use type to change the input mode (text, email, password, number, search, etc.)",
+      "Set invalid for error state styling without a form validation message",
+      "Use name for native form submission"
+    ],
+    "children": {
+      "allowed": false
+    }
   }
 }

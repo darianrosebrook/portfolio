@@ -96,10 +96,29 @@
         "name": "enter",
         "trigger": "visibility=offscreen→visible",
         "phase": "enter",
-        "properties": ["opacity", "transform"],
+        "properties": [
+          "opacity",
+          "transform"
+        ],
         "duration": "core.motion.duration.medium",
         "easing": "core.motion.easing.emphasizedOut"
       }
     ]
+  },
+  "description": "A page section that fades and slides into view when it enters the viewport.",
+  "a2ui": {
+    "category": "animation",
+    "usageHints": [
+      "Wrap page sections in AnimatedSection for a scroll-reveal effect",
+      "Respects prefers-reduced-motion",
+      "Combine with AnimatedCard children for layered entrance effects"
+    ],
+    "children": {
+      "allowed": true,
+      "slot": "children",
+      "accepts": [
+        "node-ref"
+      ]
+    }
   }
 }

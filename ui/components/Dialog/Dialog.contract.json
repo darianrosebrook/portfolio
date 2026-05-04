@@ -637,7 +637,10 @@
         "name": "open",
         "trigger": "openness=closed→opening",
         "phase": "enter",
-        "properties": ["opacity", "transform"],
+        "properties": [
+          "opacity",
+          "transform"
+        ],
         "duration": "dialog.motion.duration.enter",
         "easing": "dialog.motion.easing.enter"
       },
@@ -645,7 +648,10 @@
         "name": "close",
         "trigger": "openness=open→closing",
         "phase": "exit",
-        "properties": ["opacity", "transform"],
+        "properties": [
+          "opacity",
+          "transform"
+        ],
         "duration": "dialog.motion.duration.exit",
         "easing": "dialog.motion.easing.exit"
       }
@@ -700,5 +706,32 @@
   },
   "rtl": {
     "flipIcon": false
+  },
+  "channels": {
+    "openness": {
+      "description": "Whether the dialog is open.",
+      "value": "open",
+      "defaultValue": "defaultOpen",
+      "onChange": "onOpenChange",
+      "valueType": "boolean",
+      "notes": "onClose is a callback-only alias fired on close; it does not participate in the channel."
+    }
+  },
+  "description": "Modal overlay requiring user attention before returning to the page. Traps focus until dismissed.",
+  "a2ui": {
+    "category": "overlay",
+    "usageHints": [
+      "Bind open and onOpenChange (or defaultOpen) to control visibility",
+      "Compose children from a title, body content, and action buttons",
+      "Set closeOnEscape=false and closeOnOverlayClick=false for destructive confirmations",
+      "The dialog title is automatically linked to the dialog via aria-labelledby"
+    ],
+    "children": {
+      "allowed": true,
+      "slot": "children",
+      "accepts": [
+        "node-ref"
+      ]
+    }
   }
 }

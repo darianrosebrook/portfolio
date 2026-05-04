@@ -67,5 +67,17 @@
   },
   "rtl": {
     "flipIcon": false
+  },
+  "description": "Renders a named SVG icon from the design system icon set.",
+  "a2ui": {
+    "category": "display",
+    "usageHints": [
+      "Set aria-hidden=\"true\" when the icon is decorative (has adjacent visible text)",
+      "Set aria-label when the icon stands alone without visible text",
+      "Use size to scale the icon to match surrounding text"
+    ],
+    "children": {
+      "allowed": false
+    }
   }
 }

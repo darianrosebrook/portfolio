@@ -251,7 +251,10 @@
         "name": "exit",
         "trigger": "navigation=start",
         "phase": "exit",
-        "properties": ["opacity", "transform"],
+        "properties": [
+          "opacity",
+          "transform"
+        ],
         "duration": "pageTransition.duration.normal",
         "easing": "pageTransition.easing.accelerate"
       },
@@ -259,10 +262,30 @@
         "name": "enter",
         "trigger": "navigation=complete",
         "phase": "enter",
-        "properties": ["opacity", "transform"],
+        "properties": [
+          "opacity",
+          "transform"
+        ],
         "duration": "pageTransition.duration.normal",
         "easing": "pageTransition.easing.decelerate"
       }
     ]
+  },
+  "description": "Wraps page content to apply route-change fade/slide animations between Next.js pages.",
+  "a2ui": {
+    "category": "animation",
+    "usageHints": [
+      "Wrap each page layout with PageTransition to get consistent enter/exit animations",
+      "Use variant to select the transition style (fade, slide, scale)",
+      "Respects prefers-reduced-motion — transitions are disabled for users who prefer reduced motion",
+      "Do not nest PageTransition components"
+    ],
+    "children": {
+      "allowed": true,
+      "slot": "children",
+      "accepts": [
+        "node-ref"
+      ]
+    }
   }
 }

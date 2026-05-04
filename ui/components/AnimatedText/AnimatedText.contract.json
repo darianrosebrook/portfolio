@@ -103,10 +103,29 @@
         "name": "enter",
         "trigger": "visibility=offscreen→visible",
         "phase": "enter",
-        "properties": ["opacity", "transform"],
+        "properties": [
+          "opacity",
+          "transform"
+        ],
         "duration": "core.motion.duration.short",
         "easing": "core.motion.easing.emphasizedOut"
       }
     ]
+  },
+  "description": "Text that animates character-by-character or line-by-line into view on scroll.",
+  "a2ui": {
+    "category": "animation",
+    "usageHints": [
+      "Use for hero headings or pull-quotes where character animation adds visual impact",
+      "Avoid on body text — animation per-character is distracting at scale",
+      "Respects prefers-reduced-motion"
+    ],
+    "children": {
+      "allowed": true,
+      "slot": "children",
+      "accepts": [
+        "string"
+      ]
+    }
   }
 }

@@ -30,16 +30,46 @@
     "disabled"
   ],
   "slots": {
-    "root": { "required": true, "selector": "[data-slot=\"walkthrough\"]" },
-    "title": { "required": false, "selector": "[data-slot=\"walkthrough-title\"]" },
-    "description": { "required": false, "selector": "[data-slot=\"walkthrough-description\"]" },
-    "controls": { "required": false, "selector": "[data-slot=\"walkthrough-controls\"]" },
-    "skip": { "required": false, "selector": "[data-slot=\"walkthrough-skip\"]" },
-    "prev": { "required": false, "selector": "[data-slot=\"walkthrough-prev\"]" },
-    "next": { "required": false, "selector": "[data-slot=\"walkthrough-next\"]" },
-    "progress": { "required": false, "selector": "[data-slot=\"walkthrough-progress\"]" },
-    "dot": { "required": false, "selector": "[data-slot=\"walkthrough-dot\"]" },
-    "counter": { "required": false, "selector": "[data-slot=\"walkthrough-counter\"]" }
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"walkthrough\"]"
+    },
+    "title": {
+      "required": false,
+      "selector": "[data-slot=\"walkthrough-title\"]"
+    },
+    "description": {
+      "required": false,
+      "selector": "[data-slot=\"walkthrough-description\"]"
+    },
+    "controls": {
+      "required": false,
+      "selector": "[data-slot=\"walkthrough-controls\"]"
+    },
+    "skip": {
+      "required": false,
+      "selector": "[data-slot=\"walkthrough-skip\"]"
+    },
+    "prev": {
+      "required": false,
+      "selector": "[data-slot=\"walkthrough-prev\"]"
+    },
+    "next": {
+      "required": false,
+      "selector": "[data-slot=\"walkthrough-next\"]"
+    },
+    "progress": {
+      "required": false,
+      "selector": "[data-slot=\"walkthrough-progress\"]"
+    },
+    "dot": {
+      "required": false,
+      "selector": "[data-slot=\"walkthrough-dot\"]"
+    },
+    "counter": {
+      "required": false,
+      "selector": "[data-slot=\"walkthrough-counter\"]"
+    }
   },
   "a11y": {
     "role": "status",
@@ -348,5 +378,24 @@
   },
   "rtl": {
     "flipIcon": false
+  },
+  "description": "Step-by-step guided tour overlay anchored to page elements. Manages step progression and keyboard navigation.",
+  "a2ui": {
+    "category": "overlay",
+    "usageHints": [
+      "Define each step as a WalkthroughStep with an anchor ref and content",
+      "WalkthroughAnchor wraps the element each step points to",
+      "Use WalkthroughControls and WalkthroughProgress for navigation UI",
+      "Keyboard: ArrowRight/ArrowLeft navigate steps; Escape closes the tour",
+      "The walkthrough is non-blocking — it does not trap focus to the panel"
+    ],
+    "children": {
+      "allowed": true,
+      "slot": "children",
+      "accepts": [
+        "WalkthroughStep",
+        "WalkthroughAnchor"
+      ]
+    }
   }
 }
