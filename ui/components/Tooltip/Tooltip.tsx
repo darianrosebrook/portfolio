@@ -265,6 +265,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
         }}
         id={tooltipId}
         role="tooltip"
+        data-slot="tooltip"
         className={`${styles.tooltip} ${className}`}
         style={{
           position: 'fixed',

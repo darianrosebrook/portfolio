@@ -56,6 +56,7 @@ export const Text = React.forwardRef<HTMLElement, TextProps>(
       Component,
       {
         ref,
+        'data-slot': 'text',
         className: [
           styles.text,
           styles[variant],

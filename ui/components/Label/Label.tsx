@@ -8,6 +8,7 @@ export const Label = React.forwardRef<HTMLLabelElement, LabelProps>(
   ({ className = '', children, ...rest }, ref) => (
     <label
       ref={ref}
+      data-slot="label"
       className={[styles.label, className].filter(Boolean).join(' ')}
       {...rest}
     >

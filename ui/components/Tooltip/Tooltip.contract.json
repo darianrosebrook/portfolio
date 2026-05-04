@@ -19,7 +19,12 @@
     "entering",
     "leaving"
   ],
-  "slots": {},
+  "slots": {
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"tooltip\"]"
+    }
+  },
   "a11y": {
     "role": "tooltip",
     "labeling": [

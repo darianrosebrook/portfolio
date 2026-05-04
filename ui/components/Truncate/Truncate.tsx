@@ -70,6 +70,7 @@ export const Truncate = React.forwardRef<HTMLElement, TruncateProps>(
     return React.createElement(
       Component,
       {
+        'data-slot': 'truncate',
         ref: (node: HTMLElement | null) => {
           (contentRef as React.MutableRefObject<HTMLElement | null>).current =
             node;
@@ -90,9 +91,10 @@ export const Truncate = React.forwardRef<HTMLElement, TruncateProps>(
         ...rest,
       },
       <>
-        <span className={styles.content}>{children}</span>
+        <span data-slot="truncate-content" className={styles.content}>{children}</span>
         {expandable && shouldShowToggle && (
           <button
+            data-slot="truncate-toggle"
             type="button"
             className={styles.toggle}
             onClick={handleToggle}

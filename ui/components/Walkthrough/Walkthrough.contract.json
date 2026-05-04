@@ -40,6 +40,21 @@
         "key": "Enter|Space",
         "when": "trigger",
         "then": "activate"
+      },
+      {
+        "key": "Escape",
+        "when": "open",
+        "then": "close"
+      },
+      {
+        "key": "ArrowLeft",
+        "when": "active",
+        "then": "prev"
+      },
+      {
+        "key": "ArrowRight",
+        "when": "active",
+        "then": "next"
       }
     ],
     "apgPattern": "status"

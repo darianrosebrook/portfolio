@@ -17,12 +17,25 @@
       "media",
       "dataviz",
       "actions"
+    ],
+    "animate": [
+      "shimmer",
+      "wipe",
+      "pulse",
+      "none"
+    ],
+    "density": [
+      "compact",
+      "regular",
+      "spacious"
     ]
   },
   "states": [
     "default"
   ],
-  "slots": {},
+  "slots": {
+    "root": { "required": true, "selector": "[data-slot=\"skeleton\"]" }
+  },
   "a11y": {
     "role": "generic",
     "labeling": [

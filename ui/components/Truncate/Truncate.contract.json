@@ -14,7 +14,11 @@
     "focus",
     "expanded"
   ],
-  "slots": {},
+  "slots": {
+    "root":    { "required": true,  "selector": "[data-slot=\"truncate\"]" },
+    "content": { "required": true,  "selector": "[data-slot=\"truncate-content\"]" },
+    "toggle":  { "required": false, "selector": "[data-slot=\"truncate-toggle\"]" }
+  },
   "a11y": {
     "role": "generic",
     "labeling": [],

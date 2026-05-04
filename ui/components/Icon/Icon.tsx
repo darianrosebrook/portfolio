@@ -15,6 +15,7 @@ const Icon = ({ icon, width = 20, height = 20 }: IconProps) => {
     <span
       className={styles.icon}
       style={{ width, height }}
+      data-slot="icon"
       data-icon="true"
       suppressHydrationWarning
     >

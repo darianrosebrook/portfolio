@@ -63,7 +63,9 @@
     "error",
     "success"
   ],
-  "slots": {},
+  "slots": {
+    "root": { "required": true, "selector": "[data-slot=\"text\"]" }
+  },
   "a11y": {
     "role": "generic",
     "labeling": [],

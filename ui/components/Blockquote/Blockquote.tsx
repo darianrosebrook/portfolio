@@ -26,6 +26,7 @@ export const Blockquote = React.forwardRef<HTMLQuoteElement, BlockquoteProps>(
     return (
       <blockquote
         ref={ref}
+        data-slot="blockquote"
         className={[styles.blockquote, styles[variant], styles[size], className]
           .filter(Boolean)
           .join(' ')}

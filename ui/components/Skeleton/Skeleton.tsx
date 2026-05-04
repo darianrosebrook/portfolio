@@ -179,7 +179,7 @@ export const Skeleton: React.FC<SkeletonProps> = ({
   }, [variant, aspectRatio, lines, radius, children]);
 
   return (
-    <div {...a11y} {...attrs}>
+    <div data-slot="skeleton" {...a11y} {...attrs}>
       {content}
     </div>
   );

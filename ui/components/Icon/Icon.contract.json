@@ -8,7 +8,12 @@
   "states": [
     "default"
   ],
-  "slots": {},
+  "slots": {
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"icon\"]"
+    }
+  },
   "a11y": {
     "role": "generic",
     "labeling": [],

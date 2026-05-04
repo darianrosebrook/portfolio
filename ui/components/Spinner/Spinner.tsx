@@ -78,13 +78,14 @@ export const Spinner = React.forwardRef<HTMLSpanElement, SpinnerProps>(
     return (
       <span
         ref={ref}
+        data-slot="spinner"
         className={rootClassName}
         style={styleVars}
         data-variant={variant}
         {...a11yProps}
         {...rest}
       >
-        <span className={styles.visual} />
+        <span data-slot="spinner-visual" className={styles.visual} />
       </span>
     );
   }

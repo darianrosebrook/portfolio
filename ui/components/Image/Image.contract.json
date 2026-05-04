@@ -31,7 +31,10 @@
     "loading",
     "error"
   ],
-  "slots": {},
+  "slots": {
+    "root": { "required": true, "selector": "[data-slot=\"image\"]" },
+    "img":  { "required": true, "selector": "[data-slot=\"image-img\"]" }
+  },
   "a11y": {
     "role": "img",
     "labeling": [

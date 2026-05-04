@@ -123,7 +123,7 @@ export const Image = React.forwardRef<HTMLImageElement, ImageProps>(
       .join(' ');
 
     return (
-      <div className={containerClasses}>
+      <div data-slot="image" className={containerClasses}>
         {showPlaceholder && isLoading && (
           <div className={styles.placeholder} aria-hidden="true">
             <div className={styles.placeholderIcon} />
@@ -132,6 +132,7 @@ export const Image = React.forwardRef<HTMLImageElement, ImageProps>(
 
         {currentSrc && (
           <img
+            data-slot="image-img"
             ref={ref}
             src={currentSrc}
             alt={alt}

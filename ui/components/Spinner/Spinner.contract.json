@@ -17,12 +17,20 @@
       "ring",
       "dots",
       "bars"
+    ],
+    "thickness": [
+      "hairline",
+      "regular",
+      "bold"
     ]
   },
   "states": [
     "default"
   ],
-  "slots": {},
+  "slots": {
+    "root":   { "required": true, "selector": "[data-slot=\"spinner\"]" },
+    "visual": { "required": true, "selector": "[data-slot=\"spinner-visual\"]" }
+  },
   "a11y": {
     "role": "generic",
     "labeling": [

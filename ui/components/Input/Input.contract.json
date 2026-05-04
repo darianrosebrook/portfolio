@@ -12,7 +12,12 @@
     "disabled",
     "invalid"
   ],
-  "slots": {},
+  "slots": {
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"input\"]"
+    }
+  },
   "a11y": {
     "role": "generic",
     "labeling": [],

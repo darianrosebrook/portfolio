@@ -33,6 +33,7 @@ export const Divider = React.forwardRef<HTMLHRElement, DividerProps>(
     return (
       <hr
         ref={ref}
+        data-slot="divider"
         className={[styles.divider, styles[orientation], className]
           .filter(Boolean)
           .join(' ')}

@@ -18,12 +18,12 @@
   ],
   "slots": {},
   "a11y": {
-    "role": "menu",
+    "role": "navigation",
     "labeling": [
       "aria-label"
     ],
     "keyboard": [],
-    "apgPattern": null
+    "apgPattern": "breadcrumb"
   },
   "tokens": {
     "root": {

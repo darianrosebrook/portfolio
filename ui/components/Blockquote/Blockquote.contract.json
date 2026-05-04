@@ -19,7 +19,12 @@
   "states": [
     "default"
   ],
-  "slots": {},
+  "slots": {
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"blockquote\"]"
+    }
+  },
   "a11y": {
     "role": "generic",
     "labeling": [],

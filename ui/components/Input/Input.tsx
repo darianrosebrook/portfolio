@@ -15,6 +15,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     return (
       <input
         ref={ref}
+        data-slot="input"
         className={[styles.input, invalid ? styles.invalid : '', className]
           .filter(Boolean)
           .join(' ')}
