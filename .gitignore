@@ -91,6 +91,7 @@ caws.local.*
 .caws/sessions.json
 .caws/sessions/
 .caws/events.jsonl
+.caws/specs/registry.json
 
 # Claude Code local overlays
 .claude/logs/
