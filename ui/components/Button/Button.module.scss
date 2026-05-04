@@ -58,10 +58,10 @@
     display: none;
     width: var(--button-size-spinner-width);
     height: var(--button-size-spinner-height);
-    border: var(--button-size-spinner-borderWidth) solid
+    border: var(--button-size-spinner-border-width) solid
       var(--button-color-spinner-border);
-    border-top-color: var(--button-color-spinner-borderAccent);
-    border-radius: var(--button-size-spinner-borderRadius);
+    border-top-color: var(--button-color-spinner-border-accent);
+    border-radius: var(--button-size-spinner-border-radius);
     animation: button-spinner-rotate var(--button-motion-duration-spinner)
       linear infinite;
   }
@@ -87,9 +87,9 @@
   }
 
   &:is(:focus-visible, :focus) {
-    outline: var(--button-focus-outlineWidth) solid
-      var(--button-focus-outlineColor);
-    outline-offset: var(--button-focus-outlineOffset);
+    outline: var(--button-focus-outline-width) solid
+      var(--button-focus-outline-color);
+    outline-offset: var(--button-focus-outline-offset);
   }
 
   // Remove adjacent sibling selector - let parent containers handle spacing
@@ -136,7 +136,7 @@
         var(--button-color-border-primary) 85%,
         white
       );
-      color: var(--button-color-foreground-primaryHover);
+      color: var(--button-color-foreground-primary-hover);
     }
 
     &:active {
@@ -151,7 +151,7 @@
         var(--button-color-border-primary) 85%,
         black
       );
-      color: var(--button-color-foreground-primaryActive);
+      color: var(--button-color-foreground-primary-active);
     }
   }
 
@@ -161,15 +161,15 @@
     color: var(--button-color-foreground-secondary);
 
     &:hover {
-      background-color: var(--button-color-background-secondaryHover);
-      border-color: var(--button-color-border-secondaryHover);
-      color: var(--button-color-foreground-secondaryHover);
+      background-color: var(--button-color-background-secondary-hover);
+      border-color: var(--button-color-border-secondary-hover);
+      color: var(--button-color-foreground-secondary-hover);
     }
 
     &:active {
-      background-color: var(--button-color-background-secondaryActive);
-      border-color: var(--button-color-border-secondaryActive);
-      color: var(--button-color-foreground-secondaryActive);
+      background-color: var(--button-color-background-secondary-active);
+      border-color: var(--button-color-border-secondary-active);
+      color: var(--button-color-foreground-secondary-active);
     }
   }
 
@@ -179,15 +179,15 @@
     color: var(--button-color-foreground-tertiary);
 
     &:hover {
-      background-color: var(--button-color-background-tertiaryHover);
-      border-color: var(--button-color-border-tertiaryHover);
-      color: var(--button-color-foreground-tertiaryHover);
+      background-color: var(--button-color-background-tertiary-hover);
+      border-color: var(--button-color-border-tertiary-hover);
+      color: var(--button-color-foreground-tertiary-hover);
     }
 
     &:active {
-      background-color: var(--button-color-background-tertiaryActive);
-      border-color: var(--button-color-border-tertiaryActive);
-      color: var(--button-color-foreground-tertiaryActive);
+      background-color: var(--button-color-background-tertiary-active);
+      border-color: var(--button-color-border-tertiary-active);
+      color: var(--button-color-foreground-tertiary-active);
     }
   }
 
@@ -214,13 +214,13 @@
     color: var(--button-color-foreground-destructive);
 
     &:hover {
-      background-color: var(--button-color-background-destructiveHover);
-      border-color: var(--button-color-border-destructiveHover);
+      background-color: var(--button-color-background-destructive-hover);
+      border-color: var(--button-color-border-destructive-hover);
     }
 
     &:active {
-      background-color: var(--button-color-background-destructiveActive);
-      border-color: var(--button-color-border-destructiveActive);
+      background-color: var(--button-color-background-destructive-active);
+      border-color: var(--button-color-border-destructive-active);
     }
   }
 

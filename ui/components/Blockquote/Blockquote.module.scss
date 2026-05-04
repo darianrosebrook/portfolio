@@ -6,23 +6,23 @@
   margin: var(--blockquote-size-padding-default) 0;
   padding: var(--blockquote-size-padding-default);
   color: var(--blockquote-color-foreground-primary);
-  font-weight: var(--blockquote-typography-fontWeight);
-  font-style: var(--blockquote-typography-fontStyle);
+  font-weight: var(--blockquote-typography-font-weight);
+  font-style: var(--blockquote-typography-font-style);
 }
 
 .sm {
-  font-size: var(--blockquote-typography-sm-fontSize);
-  line-height: var(--blockquote-typography-sm-lineHeight);
+  font-size: var(--blockquote-typography-sm-font-size);
+  line-height: var(--blockquote-typography-sm-line-height);
 }
 
 .md {
-  font-size: var(--blockquote-typography-md-fontSize);
-  line-height: var(--blockquote-typography-md-lineHeight);
+  font-size: var(--blockquote-typography-md-font-size);
+  line-height: var(--blockquote-typography-md-line-height);
 }
 
 .lg {
-  font-size: var(--blockquote-typography-lg-fontSize);
-  line-height: var(--blockquote-typography-lg-lineHeight);
+  font-size: var(--blockquote-typography-lg-font-size);
+  line-height: var(--blockquote-typography-lg-line-height);
 }
 
 .default {

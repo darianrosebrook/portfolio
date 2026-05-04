@@ -53,52 +53,52 @@
     }
 
     &.info {
-      background: var(--alert-color-background-infoSubtle);
-      color: var(--alert-color-foreground-onInfoSubtle);
+      background: var(--alert-color-background-info-subtle);
+      color: var(--alert-color-foreground-on-info-subtle);
 
       &:hover {
         background: color-mix(
           in srgb,
-          var(--alert-color-background-infoSubtle) 95%,
+          var(--alert-color-background-info-subtle) 95%,
           white 5%
         );
       }
     }
 
     &.warning {
-      background: var(--alert-color-background-warningSubtle);
-      color: var(--alert-color-foreground-onWarningSubtle);
+      background: var(--alert-color-background-warning-subtle);
+      color: var(--alert-color-foreground-on-warning-subtle);
 
       &:hover {
         background: color-mix(
           in srgb,
-          var(--alert-color-background-warningSubtle) 95%,
+          var(--alert-color-background-warning-subtle) 95%,
           white 5%
         );
       }
     }
 
     &.danger {
-      background: var(--alert-color-background-dangerSubtle);
-      color: var(--alert-color-foreground-onDangerSubtle);
+      background: var(--alert-color-background-danger-subtle);
+      color: var(--alert-color-foreground-on-danger-subtle);
 
       &:hover {
         background: color-mix(
           in srgb,
-          var(--alert-color-background-dangerSubtle) 95%,
+          var(--alert-color-background-danger-subtle) 95%,
           white 5%
         );
       }
     }
 
     &.success {
-      background: var(--alert-color-background-successSubtle);
-      color: var(--alert-color-foreground-onSuccessSubtle);
+      background: var(--alert-color-background-success-subtle);
+      color: var(--alert-color-foreground-on-success-subtle);
 
       &:hover {
         background: color-mix(
           in srgb,
-          var(--alert-color-background-successSubtle) 95%,
+          var(--alert-color-background-success-subtle) 95%,
           white 5%
         );
       }
@@ -112,60 +112,60 @@
     gap: var(--alert-spacing-padding-default)
       var(--alert-spacing-padding-horizontal);
     align-items: baseline;
-    min-height: var(--alert-spacing-minHeight-default);
+    min-height: var(--alert-spacing-min-height-default);
     margin: 0 -1rem;
     padding: var(--alert-size-page-padding);
     border-radius: var(--alert-size-page-radius);
     transition: background-color 0.2s ease;
 
     &.info {
-      background: var(--alert-color-background-infoStrong);
-      color: var(--alert-color-foreground-onColor);
+      background: var(--alert-color-background-info-strong);
+      color: var(--alert-color-foreground-on-color);
 
       &:hover {
         // Use color-mix() for dynamic hover effect
         background: color-mix(
           in srgb,
-          var(--alert-color-background-infoStrong) 90%,
+          var(--alert-color-background-info-strong) 90%,
           white 10%
         );
       }
     }
 
     &.warning {
-      background: var(--alert-color-background-warningStrong);
-      color: var(--alert-color-foreground-onColor);
+      background: var(--alert-color-background-warning-strong);
+      color: var(--alert-color-foreground-on-color);
 
       &:hover {
         background: color-mix(
           in srgb,
-          var(--alert-color-background-warningStrong) 90%,
+          var(--alert-color-background-warning-strong) 90%,
           white 10%
         );
       }
     }
 
     &.danger {
-      background: var(--alert-color-background-dangerStrong);
-      color: var(--alert-color-foreground-onColor);
+      background: var(--alert-color-background-danger-strong);
+      color: var(--alert-color-foreground-on-color);
 
       &:hover {
         background: color-mix(
           in srgb,
-          var(--alert-color-background-dangerStrong) 90%,
+          var(--alert-color-background-danger-strong) 90%,
           white 10%
         );
       }
     }
 
     &.success {
-      background: var(--alert-color-background-successStrong);
-      color: var(--alert-color-foreground-onColor);
+      background: var(--alert-color-background-success-strong);
+      color: var(--alert-color-foreground-on-color);
 
       &:hover {
         background: color-mix(
           in srgb,
-          var(--alert-color-background-successStrong) 90%,
+          var(--alert-color-background-success-strong) 90%,
           white 10%
         );
       }

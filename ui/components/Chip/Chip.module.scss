@@ -36,8 +36,8 @@
   }
 
   &:focus-visible {
-    outline: var(--chip-focus-outlineWidth) solid var(--chip-focus-outlineColor);
-    outline-offset: var(--chip-focus-outlineOffset);
+    outline: var(--chip-focus-outline-width) solid var(--chip-focus-outline-color);
+    outline-offset: var(--chip-focus-outline-offset);
   }
 
   // Hover and active states
@@ -91,7 +91,7 @@
         var(--chip-color-border-selected) 85%,
         white 15%
       );
-      color: var(--chip-color-foreground-selectedHover);
+      color: var(--chip-color-foreground-selected-hover);
     }
 
     &:active {
@@ -105,7 +105,7 @@
         var(--chip-color-border-selected) 85%,
         black 15%
       );
-      color: var(--chip-color-foreground-selectedActive);
+      color: var(--chip-color-foreground-selected-active);
     }
   }
 
@@ -116,15 +116,15 @@
     color: var(--chip-color-foreground-dismissible);
 
     &:hover {
-      background-color: var(--chip-color-background-dismissibleHover);
-      border-color: var(--chip-color-border-dismissibleHover);
-      color: var(--chip-color-foreground-dismissibleHover);
+      background-color: var(--chip-color-background-dismissible-hover);
+      border-color: var(--chip-color-border-dismissible-hover);
+      color: var(--chip-color-foreground-dismissible-hover);
     }
 
     &:active {
-      background-color: var(--chip-color-background-dismissibleActive);
-      border-color: var(--chip-color-border-dismissibleActive);
-      color: var(--chip-color-foreground-dismissibleActive);
+      background-color: var(--chip-color-background-dismissible-active);
+      border-color: var(--chip-color-border-dismissible-active);
+      color: var(--chip-color-foreground-dismissible-active);
     }
   }
 
@@ -161,7 +161,7 @@
   }
 
   &.dismissible:hover .icon {
-    color: var(--chip-color-icon-dismissibleHover);
+    color: var(--chip-color-icon-dismissible-hover);
   }
 
   // Text content
@@ -190,7 +190,7 @@
 @keyframes chip-icon-enter {
   from {
     opacity: 0;
-    transform: scale(var(--chip-motion-scale-iconEnter));
+    transform: scale(var(--chip-motion-scale-icon-enter));
   }
 
   to {
@@ -207,7 +207,7 @@
 
   to {
     opacity: 0;
-    transform: scale(var(--chip-motion-scale-iconExit));
+    transform: scale(var(--chip-motion-scale-icon-exit));
   }
 }
 
