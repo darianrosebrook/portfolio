@@ -13,7 +13,9 @@
     "hover",
     "focus"
   ],
-  "slots": {},
+  "slots": {
+    "root": { "required": true, "selector": "[data-slot=\"links\"]" }
+  },
   "a11y": {
     "role": "generic",
     "labeling": [],
