@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 
 import Alert from '../Alert';
+import { contractTest } from '@/test/utils/contractTest';
 
 // Extend Jest matchers
 
@@ -37,5 +38,12 @@ describe('Alert', () => {
     );
     // Note: axe testing is handled by the setup file
     expect(container).toBeInTheDocument();
+  });
+});
+
+describe('Contract behavioral obligations', () => {
+  contractTest('Alert', 'a11y.apgPattern', 'alert', () => {
+    render(<Alert>Test alert message</Alert>);
+    expect(screen.getByRole('alert')).toBeInTheDocument();
   });
 });

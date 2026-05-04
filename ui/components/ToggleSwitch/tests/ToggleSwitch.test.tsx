@@ -3,6 +3,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { vi } from 'vitest';
 
 import ToggleSwitch from '../ToggleSwitch';
+import { contractTest } from '@/test/utils/contractTest';
 
 // Extend Jest matchers
 
@@ -145,5 +146,16 @@ describe('ToggleSwitch', () => {
       // Verify CSS custom properties are being used
       expect(switchElement.parentElement?.className).toContain('toggleSwitch');
     });
+  });
+});
+
+describe('Contract behavioral obligations', () => {
+  contractTest('ToggleSwitch', 'a11y.apgPattern', 'switch', () => {
+    render(
+      <ToggleSwitch checked={false} onChange={vi.fn()}>
+        Toggle
+      </ToggleSwitch>
+    );
+    expect(screen.getByRole('switch')).toBeInTheDocument();
   });
 });

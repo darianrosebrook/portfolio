@@ -2,6 +2,7 @@ import * as React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 
 import TextField from '../TextField';
+import { contractTest } from '@/test/utils/contractTest';
 
 // Extend Jest matchers
 
@@ -99,5 +100,12 @@ describe('TextField', () => {
       // Verify CSS custom properties are being used
       expect(input).toHaveClass('input');
     });
+  });
+});
+
+describe('Contract behavioral obligations', () => {
+  contractTest('TextField', 'a11y.apgPattern', 'alert', () => {
+    render(<TextField label="Test" error="This field is required" />);
+    expect(screen.getByRole('alert')).toBeInTheDocument();
   });
 });

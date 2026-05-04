@@ -2,6 +2,7 @@ import * as React from 'react';
 import { render, screen } from '@testing-library/react';
 
 import Breadcrumbs from '../Breadcrumbs';
+import { contractTest } from '@/test/utils/contractTest';
 
 // Extend Jest matchers
 
@@ -92,5 +93,14 @@ describe('Breadcrumbs', () => {
       // Verify CSS custom properties are being used
       expect(nav).toHaveClass('breadcrumbs');
     });
+  });
+});
+
+describe('Contract behavioral obligations', () => {
+  contractTest('breadcrumbs', 'a11y.apgPattern', 'breadcrumb', () => {
+    const base = { label: 'Home', href: '/' };
+    const crumbs = [{ label: 'Category', href: '/category' }];
+    render(<Breadcrumbs base={base} crumbs={crumbs} />);
+    expect(screen.getByRole('navigation', { name: /breadcrumb/i })).toBeInTheDocument();
   });
 });
