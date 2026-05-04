@@ -43,6 +43,16 @@ scope:
     # A3: minimal fixes to components exposed by contractTest behavioral assertions
     - ui/components/Dialog/Dialog.tsx    # add aria-labelledby + title id wiring
     - ui/components/Tooltip/Tooltip.tsx  # add Escape key dismissal handler
+    # Phase 7: data-slot anatomy additions (TSX edits scoped by component)
+    - ui/components/Tabs/Tabs.tsx
+    - ui/components/Tabs/slots/TabList.tsx
+    - ui/components/Tabs/slots/Tab.tsx
+    - ui/components/Tabs/slots/TabPanel.tsx
+    - ui/components/breadcrumbs/Breadcrumbs.tsx
+    - ui/components/Card/Card.tsx
+    - ui/components/Select/Select.tsx
+    - ui/components/Details/Details.tsx
+    - ui/components/Walkthrough/Walkthrough.tsx
   out:
     - node_modules/
     - dist/
