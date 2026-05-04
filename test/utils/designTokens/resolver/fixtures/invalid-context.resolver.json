@@ -1,0 +1,28 @@
+{
+  "version": "2025-10-01",
+  "sets": {
+    "base": {
+      "sources": [
+        {
+          "color": { "$value": "white", "$type": "color" }
+        }
+      ]
+    }
+  },
+  "modifiers": {
+    "theme": {
+      "contexts": {
+        "light": {
+          "sources": [
+            { "color": { "$value": "lightgray", "$type": "color" } }
+          ]
+        }
+      },
+      "default": "light"
+    }
+  },
+  "resolutionOrder": [
+    { "$ref": "#/sets/base" },
+    { "$ref": "#/modifiers/theme" }
+  ]
+}

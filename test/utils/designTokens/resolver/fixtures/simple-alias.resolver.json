@@ -1,0 +1,19 @@
+{
+  "version": "2025-10-01",
+  "sets": {
+    "base": {
+      "sources": [
+        {
+          "a": {
+            "b": { "$value": "blue", "$type": "color" }
+          },
+          "alias": {
+            "token": { "$value": "{a.b}", "$type": "color" }
+          }
+        }
+      ]
+    }
+  },
+  "modifiers": {},
+  "resolutionOrder": [{ "$ref": "#/sets/base" }]
+}

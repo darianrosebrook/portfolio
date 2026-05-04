@@ -1,0 +1,5 @@
+{
+  "base": {
+    "color": { "$value": "cornflowerblue", "$type": "color" }
+  }
+}
