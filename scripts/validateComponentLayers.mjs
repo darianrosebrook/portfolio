@@ -1,13 +1,15 @@
 #!/usr/bin/env node
-
 /**
- * Component Layer Validation Script
+ * validateComponentLayers.mjs
  *
- * Validates that components follow the 4-layer framework:
- * - Primitives: Boring, minimal props, token-driven
- * - Compounds: Bundle primitives, avoid mega-props
- * - Composers: Provider + context, slots not props
- * - Assemblies: App-specific, should live in app layer
+ * Diagnostic aid for the four-layer component framework.
+ * NOT a quality gate — conclusions are heuristics based on prop counts,
+ * string matches, and a hardcoded classification registry.
+ * Run `caws validate` for gate status.
+ *
+ * Usage:
+ *   node scripts/validateComponentLayers.mjs           # human-readable summary
+ *   node scripts/validateComponentLayers.mjs --json    # JSON array, one object per component
  */
 
 import fs from 'fs';
@@ -16,6 +18,8 @@ import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+const JSON_MODE = process.argv.includes('--json');
 
 // Component layer definitions
 const LAYER_DEFINITIONS = {
@@ -114,11 +118,6 @@ const COMPONENT_CLASSIFICATIONS = {
   Toast: 'composer',
   Tooltip: 'compound',
 
-  // Assemblies (moved to ui/modules/ - no longer in components)
-  // DocLayout: 'assembly', // Now in ui/modules/
-  // SideNavigation: 'assembly', // Now in ui/modules/
-  // Sidebar: 'assembly', // Now in ui/modules/
-
   // Special cases
   AspectRatio: 'primitive', // utility primitive
   Image: 'primitive', // enhanced primitive
@@ -126,28 +125,27 @@ const COMPONENT_CLASSIFICATIONS = {
   SlinkyCursor: 'primitive', // interaction primitive
 };
 
+/**
+ * Each signal has:
+ *   id          — stable identifier for the check
+ *   status      — "pass" | "flag"
+ *   confidence  — "structural" (file-system observable) | "heuristic" (regex/count)
+ *   required    — internal only; true = flag → result escalates to review_required
+ */
+
 class ComponentValidator {
   constructor() {
     this.componentsDir = path.join(__dirname, '../ui/components');
-    this.results = {
-      aligned: [],
-      misaligned: [],
-      unclassified: [],
-      warnings: [],
-    };
+    // Each entry: { component, expectedLayer, result, signals }
+    this.records = [];
   }
 
   async validate() {
-    console.log('🔍 Validating Component Layer Alignment...\n');
-
     const components = await this.getComponents();
-
     for (const component of components) {
-      await this.validateComponent(component);
+      this.records.push(await this.validateComponent(component));
     }
-
-    this.printResults();
-    return this.results;
+    return this.records;
   }
 
   async getComponents() {
@@ -162,42 +160,46 @@ class ComponentValidator {
     const expectedLayer = COMPONENT_CLASSIFICATIONS[componentName];
 
     if (!expectedLayer) {
-      this.results.unclassified.push({
-        name: componentName,
-        reason: 'Not classified in framework',
-      });
-      return;
+      return {
+        component: componentName,
+        expectedLayer: null,
+        result: 'unclassified',
+        signals: [],
+      };
+    }
+
+    if (expectedLayer === 'assembly') {
+      return {
+        component: componentName,
+        expectedLayer: 'assembly',
+        result: 'assembly',
+        signals: [
+          { id: 'assembly-placement', status: 'flag', confidence: 'structural' },
+        ],
+      };
     }
 
     const componentPath = path.join(this.componentsDir, componentName);
     const analysis = await this.analyzeComponent(componentPath, componentName);
+    const rawSignals = this.buildSignals(analysis, expectedLayer);
 
-    const validation = this.validateAgainstLayer(analysis, expectedLayer);
+    // Derive result from signals
+    const hasRequiredFlag = rawSignals.some((s) => s.required && s.status === 'flag');
+    const hasAnyFlag = rawSignals.some((s) => s.status === 'flag');
+    const result = hasRequiredFlag
+      ? 'review_required'
+      : hasAnyFlag
+        ? 'flag'
+        : 'pass';
 
-    if (validation.aligned) {
-      this.results.aligned.push({
-        name: componentName,
-        layer: expectedLayer,
-        score: validation.score,
-        strengths: validation.strengths,
-      });
-    } else {
-      this.results.misaligned.push({
-        name: componentName,
-        layer: expectedLayer,
-        score: validation.score,
-        issues: validation.issues,
-        suggestions: validation.suggestions,
-      });
-    }
+    // Strip the internal `required` field from output
+    const signals = rawSignals.map(({ id, status, confidence }) => ({
+      id,
+      status,
+      confidence,
+    }));
 
-    // Add warnings for any issues
-    if (validation.warnings?.length > 0) {
-      this.results.warnings.push({
-        name: componentName,
-        warnings: validation.warnings,
-      });
-    }
+    return { component: componentName, expectedLayer, result, signals };
   }
 
   async analyzeComponent(componentPath, componentName) {
@@ -210,24 +212,19 @@ class ComponentValidator {
       propCount: 0,
       booleanPropCount: 0,
       hasTokens: false,
-      hasReadme: false,
-      complexity: 'unknown',
     };
 
     try {
-      // Check for main component file
       const mainFile = path.join(componentPath, `${componentName}.tsx`);
       if (fs.existsSync(mainFile)) {
         const content = fs.readFileSync(mainFile, 'utf8');
 
-        // Analyze props interface - prioritize base props interface
         const basePropsMatch = content.match(
           /interface\s+\w*BaseProps[^{]*\{([^}]+)\}/s
         );
         const fallbackPropsMatch = content.match(
           /interface\s+\w*Props[^{]*\{([^}]+)\}/s
         );
-
         const propsMatch = basePropsMatch || fallbackPropsMatch;
         if (propsMatch) {
           const propsContent = propsMatch[1];
@@ -243,7 +240,6 @@ class ComponentValidator {
             )
             .filter((line) => line.includes(':') || line.includes('?'))
             .filter((line) => {
-              // Exclude standard accessibility props that are essential for primitives
               const accessibilityProps = [
                 'ariaLabel',
                 'ariaExpanded',
@@ -263,7 +259,7 @@ class ComponentValidator {
           ).length;
         }
 
-        // Check for composer patterns
+        // String-based detection — all heuristic
         analysis.hasProvider =
           content.includes('Provider') || content.includes('Context');
         analysis.hasContext =
@@ -275,7 +271,6 @@ class ComponentValidator {
           fs.existsSync(path.join(componentPath, `use${componentName}.ts`));
       }
 
-      // Check for provider file
       const providerFile = path.join(
         componentPath,
         `${componentName}Provider.tsx`
@@ -285,307 +280,188 @@ class ComponentValidator {
         analysis.hasContext = true;
       }
 
-      // Check for tokens (either source or generated)
-      const tokensFile = path.join(
-        componentPath,
-        `${componentName}.tokens.json`
-      );
+      // File-existence checks are structural
+      const tokensFile = path.join(componentPath, `${componentName}.tokens.json`);
       const generatedTokensFile = path.join(
         componentPath,
         `${componentName}.tokens.generated.scss`
       );
       analysis.hasTokens =
         fs.existsSync(tokensFile) || fs.existsSync(generatedTokensFile);
-
-      // Check for README
-      const readmeFile = path.join(componentPath, 'README.md');
-      analysis.hasReadme = fs.existsSync(readmeFile);
-    } catch (error) {
-      console.warn(
-        `Warning: Could not analyze ${componentName}:`,
-        error.message
-      );
+    } catch {
+      // analysis stays at defaults
     }
 
     return analysis;
   }
 
-  validateAgainstLayer(analysis, expectedLayer) {
-    const validation = {
-      aligned: false,
-      score: 0,
-      strengths: [],
-      issues: [],
-      suggestions: [],
-      warnings: [],
-    };
-
+  buildSignals(analysis, expectedLayer) {
     switch (expectedLayer) {
       case 'primitive':
-        return this.validatePrimitive(analysis, validation);
+        return this.primitiveSignals(analysis);
       case 'compound':
-        return this.validateCompound(analysis, validation);
+        return this.compoundSignals(analysis);
       case 'composer':
-        return this.validateComposer(analysis, validation);
-      case 'assembly':
-        return this.validateAssembly(analysis, validation);
+        return this.composerSignals(analysis);
       default:
-        validation.issues.push('Unknown layer classification');
-        return validation;
+        return [];
     }
   }
 
-  validatePrimitive(analysis, validation) {
-    let score = 0;
-
-    // Primitives should be boring and minimal
-    if (analysis.propCount <= 8) {
-      score += 25;
-      validation.strengths.push('Minimal prop count');
-    } else {
-      validation.issues.push(
-        `Too many props (${analysis.propCount}), primitives should have ≤8`
-      );
-    }
-
-    if (analysis.booleanPropCount <= 3) {
-      score += 25;
-      validation.strengths.push('Reasonable boolean props');
-    } else {
-      validation.issues.push(
-        `Too many boolean props (${analysis.booleanPropCount}), suggests compound/composer`
-      );
-    }
-
-    if (analysis.hasTokens) {
-      score += 25;
-      validation.strengths.push('Uses design tokens');
-    } else {
-      validation.issues.push('Missing design tokens');
-      validation.suggestions.push(
-        'Add .tokens.json file with design token references'
-      );
-    }
-
-    // Primitives should NOT have complex patterns
-    if (!analysis.hasProvider && !analysis.hasContext) {
-      score += 25;
-      validation.strengths.push(
-        'No complex orchestration (good for primitive)'
-      );
-    } else {
-      validation.issues.push(
-        'Has provider/context patterns (suggests composer layer)'
-      );
-    }
-
-    validation.score = score;
-    validation.aligned = score >= 75;
-
-    return validation;
+  primitiveSignals(analysis) {
+    return [
+      {
+        id: 'prop-count',
+        status: analysis.propCount <= 8 ? 'pass' : 'flag',
+        confidence: 'heuristic',
+        required: true,
+      },
+      {
+        id: 'boolean-prop-count',
+        status: analysis.booleanPropCount <= 3 ? 'pass' : 'flag',
+        confidence: 'heuristic',
+        required: true,
+      },
+      {
+        id: 'token-files',
+        status: analysis.hasTokens ? 'pass' : 'flag',
+        confidence: 'structural',
+        required: false,
+      },
+      {
+        id: 'no-orchestration',
+        status: !analysis.hasProvider && !analysis.hasContext ? 'pass' : 'flag',
+        confidence: 'heuristic',
+        required: true,
+      },
+    ];
   }
 
-  validateCompound(analysis, validation) {
-    let score = 0;
-
-    // Compounds should bundle primitives without explosion
-    if (analysis.propCount >= 3 && analysis.propCount <= 12) {
-      score += 30;
-      validation.strengths.push('Appropriate prop count for bundling');
-    } else if (analysis.propCount < 3) {
-      validation.issues.push('Too few props, might be better as primitive');
-    } else {
-      validation.issues.push(
-        `Too many props (${analysis.propCount}), suggests composer layer`
-      );
-    }
-
-    if (analysis.booleanPropCount <= 3) {
-      score += 30;
-      validation.strengths.push('Avoids boolean prop explosion');
-    } else {
-      validation.issues.push(
-        `Boolean prop explosion (${analysis.booleanPropCount}), should refactor to composer`
-      );
-    }
-
-    if (analysis.hasTokens) {
-      score += 20;
-      validation.strengths.push('Uses design tokens');
-    } else {
-      validation.warnings.push('Consider adding design tokens');
-    }
-
-    // Compounds should not have complex orchestration
-    if (!analysis.hasProvider) {
-      score += 20;
-      validation.strengths.push(
-        'No provider pattern (appropriate for compound)'
-      );
-    } else {
-      validation.issues.push('Has provider pattern (suggests composer layer)');
-    }
-
-    validation.score = score;
-    validation.aligned = score >= 70;
-
-    return validation;
+  compoundSignals(analysis) {
+    const propInRange = analysis.propCount >= 3 && analysis.propCount <= 12;
+    return [
+      {
+        id: 'prop-count',
+        status: propInRange ? 'pass' : 'flag',
+        confidence: 'heuristic',
+        required: true,
+      },
+      {
+        id: 'boolean-prop-count',
+        status: analysis.booleanPropCount <= 3 ? 'pass' : 'flag',
+        confidence: 'heuristic',
+        required: true,
+      },
+      {
+        id: 'token-files',
+        status: analysis.hasTokens ? 'pass' : 'flag',
+        confidence: 'structural',
+        required: false,
+      },
+      {
+        id: 'no-provider',
+        status: !analysis.hasProvider ? 'pass' : 'flag',
+        confidence: 'heuristic',
+        required: true,
+      },
+    ];
   }
 
-  validateComposer(analysis, validation) {
-    let score = 0;
-
-    // Composers MUST have provider + context
-    if (analysis.hasProvider && analysis.hasContext) {
-      score += 40;
-      validation.strengths.push('Has provider + context pattern');
-    } else {
-      validation.issues.push(
-        'Missing provider + context pattern (required for composers)'
-      );
-      validation.suggestions.push('Add Provider component with React Context');
-    }
-
-    // Should have slots for composition
-    if (analysis.hasSlots) {
-      score += 30;
-      validation.strengths.push('Uses slot-based composition');
-    } else {
-      validation.issues.push('Missing slot components');
-      validation.suggestions.push(
-        'Add slot components (e.g., Component.Trigger, Component.Content)'
-      );
-    }
-
-    // Should have headless logic
-    if (analysis.hasHeadlessHook) {
-      score += 20;
-      validation.strengths.push('Has headless logic hook');
-    } else {
-      validation.warnings.push(
-        'Consider extracting headless logic to custom hook'
-      );
-    }
-
-    if (analysis.hasTokens) {
-      score += 10;
-      validation.strengths.push('Uses design tokens');
-    }
-
-    validation.score = score;
-    validation.aligned = score >= 80;
-
-    return validation;
+  composerSignals(analysis) {
+    return [
+      {
+        id: 'provider-context',
+        status: analysis.hasProvider && analysis.hasContext ? 'pass' : 'flag',
+        confidence: 'heuristic',
+        required: true,
+      },
+      {
+        id: 'slot-detection',
+        status: analysis.hasSlots ? 'pass' : 'flag',
+        confidence: 'heuristic',
+        required: true,
+      },
+      {
+        id: 'headless-hook',
+        status: analysis.hasHeadlessHook ? 'pass' : 'flag',
+        confidence: 'heuristic',
+        required: false,
+      },
+      {
+        id: 'token-files',
+        status: analysis.hasTokens ? 'pass' : 'flag',
+        confidence: 'structural',
+        required: false,
+      },
+    ];
   }
 
-  validateAssembly(analysis, validation) {
-    // Assemblies should ideally not be in the design system
-    validation.warnings.push(
-      'Assembly components should live in app layer, not design system'
-    );
-    validation.suggestions.push(
-      'Consider moving to app/components or similar app-specific location'
-    );
-
-    validation.score = 50; // Neutral score since they shouldn't be here
-    validation.aligned = true; // Don't fail them, just warn
-
-    return validation;
-  }
-
-  printResults() {
-    console.log('📊 Component Layer Validation Results\n');
-
-    // Summary
-    const total =
-      this.results.aligned.length +
-      this.results.misaligned.length +
-      this.results.unclassified.length;
-    const alignmentPercentage = Math.round(
-      (this.results.aligned.length / total) * 100
-    );
+  printResults(records) {
+    const pass = records.filter((r) => r.result === 'pass');
+    const flags = records.filter((r) => r.result === 'flag');
+    const reviewRequired = records.filter((r) => r.result === 'review_required');
+    const unclassified = records.filter((r) => r.result === 'unclassified');
+    const assembly = records.filter((r) => r.result === 'assembly');
 
     console.log(
-      `🎯 Overall Alignment: ${alignmentPercentage}% (${this.results.aligned.length}/${total} components)`
+      `${pass.length} pass, ${flags.length} flags, ${reviewRequired.length} review-required, ` +
+        `${unclassified.length} unclassified — run caws validate for gate status.\n`
     );
-    console.log('');
 
-    // Aligned components
-    if (this.results.aligned.length > 0) {
-      console.log('✅ Well-Aligned Components:');
-      this.results.aligned.forEach((comp) => {
-        console.log(`  ${comp.name} (${comp.layer}) - Score: ${comp.score}%`);
-        if (comp.strengths.length > 0) {
-          console.log(`    Strengths: ${comp.strengths.join(', ')}`);
-        }
+    if (pass.length > 0) {
+      console.log('pass:');
+      pass.forEach((r) => console.log(`  ${r.component} (${r.expectedLayer})`));
+      console.log('');
+    }
+
+    if (flags.length > 0) {
+      console.log('flags:');
+      flags.forEach((r) => {
+        console.log(`  ${r.component} (${r.expectedLayer})`);
+        r.signals
+          .filter((s) => s.status === 'flag')
+          .forEach((s) =>
+            console.log(`    ${s.id} [${s.confidence}]`)
+          );
       });
       console.log('');
     }
 
-    // Misaligned components
-    if (this.results.misaligned.length > 0) {
-      console.log('❌ Misaligned Components:');
-      this.results.misaligned.forEach((comp) => {
-        console.log(`  ${comp.name} (${comp.layer}) - Score: ${comp.score}%`);
-        if (comp.issues.length > 0) {
-          console.log(`    Issues: ${comp.issues.join(', ')}`);
-        }
-        if (comp.suggestions.length > 0) {
-          console.log(`    Suggestions: ${comp.suggestions.join(', ')}`);
-        }
+    if (reviewRequired.length > 0) {
+      console.log('review-required:');
+      reviewRequired.forEach((r) => {
+        console.log(`  ${r.component} (${r.expectedLayer})`);
+        r.signals
+          .filter((s) => s.status === 'flag')
+          .forEach((s) =>
+            console.log(`    ${s.id} [${s.confidence}]`)
+          );
       });
       console.log('');
     }
 
-    // Unclassified components
-    if (this.results.unclassified.length > 0) {
-      console.log('❓ Unclassified Components:');
-      this.results.unclassified.forEach((comp) => {
-        console.log(`  ${comp.name} - ${comp.reason}`);
-      });
+    if (unclassified.length > 0) {
+      console.log('unclassified:');
+      unclassified.forEach((r) => console.log(`  ${r.component}`));
       console.log('');
     }
 
-    // Warnings
-    if (this.results.warnings.length > 0) {
-      console.log('⚠️  Warnings:');
-      this.results.warnings.forEach((warning) => {
-        console.log(`  ${warning.name}:`);
-        warning.warnings.forEach((w) => console.log(`    - ${w}`));
-      });
+    if (assembly.length > 0) {
+      console.log('assembly (not counted in totals):');
+      assembly.forEach((r) => console.log(`  ${r.component}`));
       console.log('');
-    }
-
-    // Recommendations
-    console.log('🚀 Next Steps:');
-    if (this.results.misaligned.length > 0) {
-      console.log(
-        '  1. Address misaligned components by following layer-specific patterns'
-      );
-    }
-    if (this.results.unclassified.length > 0) {
-      console.log('  2. Classify unclassified components in the framework');
-    }
-    if (alignmentPercentage >= 90) {
-      console.log(
-        '  🎉 Excellent framework alignment! Consider this a model system.'
-      );
-    } else if (alignmentPercentage >= 80) {
-      console.log(
-        '  👍 Good framework alignment. A few tweaks will get you to excellence.'
-      );
-    } else {
-      console.log(
-        '  📈 Framework alignment needs improvement. Focus on layer-specific patterns.'
-      );
     }
   }
 }
 
-// Run validation if called directly
+// Run if called directly
 if (import.meta.url === `file://${process.argv[1]}`) {
   const validator = new ComponentValidator();
-  validator.validate().catch(console.error);
+  validator.validate().then((records) => {
+    if (JSON_MODE) {
+      console.log(JSON.stringify(records, null, 2));
+    } else {
+      validator.printResults(records);
+    }
+  }).catch(console.error);
 }
-
-export { ComponentValidator };
