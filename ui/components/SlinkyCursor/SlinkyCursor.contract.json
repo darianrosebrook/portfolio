@@ -10,7 +10,9 @@
     "default",
     "active"
   ],
-  "slots": {},
+  "slots": {
+    "root": { "required": true, "selector": "[data-slot=\"slinky-cursor\"]" }
+  },
   "a11y": {
     "role": "generic",
     "labeling": [],

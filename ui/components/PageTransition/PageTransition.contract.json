@@ -20,7 +20,12 @@
     "active",
     "loading"
   ],
-  "slots": {},
+  "slots": {
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"page-transition\"]"
+    }
+  },
   "a11y": {
     "role": "generic",
     "labeling": [
@@ -214,7 +219,7 @@
     }
   },
   "props": {
-    "styled": {
+    "designed": {
       "members": [
         {
           "name": "transitionName",
@@ -277,7 +282,7 @@
     "usageHints": [
       "Wrap each page layout with PageTransition to get consistent enter/exit animations",
       "Use variant to select the transition style (fade, slide, scale)",
-      "Respects prefers-reduced-motion — transitions are disabled for users who prefer reduced motion",
+      "Respects prefers-reduced-motion \u2014 transitions are disabled for users who prefer reduced motion",
       "Do not nest PageTransition components"
     ],
     "children": {

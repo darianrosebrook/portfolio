@@ -260,45 +260,42 @@
     }
   },
   "props": {
-    "styled": {
+    "designed": {
       "members": [
         {
           "name": "postId",
           "type": "string",
-          "description": "",
+          "description": "postId prop for Postcard.",
           "required": true
         },
         {
           "name": "author",
           "type": "{ name: string; handle: string; avatar: string; }",
-          "description": "",
+          "description": "author prop for Postcard.",
           "required": true
         },
         {
           "name": "timestamp",
           "type": "string",
-          "description": "",
-          "required": true
-        },
-        {
-          "name": "content",
-          "type": "string",
-          "description": "",
+          "description": "timestamp prop for Postcard.",
           "required": true
         },
         {
           "name": "embed",
           "type": "{ type: \"image\" | \"video\" | \"audio\"; url: string; aspectRatio: { width: number; height: number; }; } | undefined",
-          "description": "",
+          "description": "embed prop for Postcard.",
           "required": false
         },
         {
           "name": "stats",
           "type": "{ likes: number; replies: number; reposts: number; }",
-          "description": "",
+          "description": "stats prop for Postcard.",
           "required": true
         }
       ]
+    },
+    "passthrough": {
+      "extends": "div"
     }
   },
   "ssr": {
