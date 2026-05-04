@@ -348,5 +348,21 @@
   },
   "rtl": {
     "flipIcon": false
+  },
+  "description": "Renders children invisibly for sighted users but accessible to screen readers. Equivalent to .sr-only.",
+  "a2ui": {
+    "category": "layout",
+    "usageHints": [
+      "Use to add accessible labels to icon-only buttons or controls without visual labels",
+      "Do not use as a lazy alternative to proper visible labeling"
+    ],
+    "children": {
+      "allowed": true,
+      "slot": "children",
+      "accepts": [
+        "string",
+        "ReactNode"
+      ]
+    }
   }
 }

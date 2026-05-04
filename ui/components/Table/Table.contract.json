@@ -567,5 +567,17 @@
   },
   "rtl": {
     "flipIcon": false
+  },
+  "description": "Data table with sortable columns, row selection, and pagination support.",
+  "a2ui": {
+    "category": "display",
+    "usageHints": [
+      "Use for structured data that benefits from sorting or comparison across rows",
+      "Enable row selection for bulk actions; pair with a toolbar for the action bar",
+      "Keep column count to 6–8 max; use column visibility controls for wider datasets"
+    ],
+    "children": {
+      "allowed": false
+    }
   }
 }

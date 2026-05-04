@@ -271,5 +271,16 @@
   },
   "rtl": {
     "flipIcon": false
+  },
+  "description": "Navigation control for switching between Qualtrics brands or product lines.",
+  "a2ui": {
+    "category": "navigation",
+    "usageHints": [
+      "Render in global navigation; one instance per page",
+      "Drives brand context — surrounding components should respond to the active brand"
+    ],
+    "children": {
+      "allowed": false
+    }
   }
 }

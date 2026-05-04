@@ -274,5 +274,22 @@
   },
   "rtl": {
     "flipIcon": false
+  },
+  "description": "Styled anchor links with design-system typography and color variants.",
+  "a2ui": {
+    "category": "navigation",
+    "usageHints": [
+      "Use for inline hyperlinks within body copy",
+      "Use variant=standalone for a link that stands alone, not within a sentence",
+      "Prefer Button for actions — Links are for navigation"
+    ],
+    "children": {
+      "allowed": true,
+      "slot": "children",
+      "accepts": [
+        "string",
+        "ReactNode"
+      ]
+    }
   }
 }

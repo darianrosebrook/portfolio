@@ -124,11 +124,36 @@
   "props": {
     "designed": {
       "members": [
-        { "name": "content", "type": "ReactNode", "description": "The tooltip text or rich content shown in the floating panel.", "required": true },
-        { "name": "placement", "type": "Placement | undefined", "description": "Preferred placement of the tooltip relative to its trigger. May be overridden by collision detection.", "required": false },
-        { "name": "trigger", "type": "TriggerStrategy | undefined", "description": "Interaction that activates the tooltip: hover (default), focus, or manual control.", "required": false },
-        { "name": "delay", "type": "number | undefined", "description": "Milliseconds to wait before showing the tooltip on hover. Reduces unintentional activation during pointer travel.", "required": false },
-        { "name": "disabled", "type": "boolean | undefined", "description": "Suppresses the tooltip entirely without removing the trigger child from the DOM.", "required": false }
+        {
+          "name": "content",
+          "type": "ReactNode",
+          "description": "The tooltip text or rich content shown in the floating panel.",
+          "required": true
+        },
+        {
+          "name": "placement",
+          "type": "Placement | undefined",
+          "description": "Preferred placement of the tooltip relative to its trigger. May be overridden by collision detection.",
+          "required": false
+        },
+        {
+          "name": "trigger",
+          "type": "TriggerStrategy | undefined",
+          "description": "Interaction that activates the tooltip: hover (default), focus, or manual control.",
+          "required": false
+        },
+        {
+          "name": "delay",
+          "type": "number | undefined",
+          "description": "Milliseconds to wait before showing the tooltip on hover. Reduces unintentional activation during pointer travel.",
+          "required": false
+        },
+        {
+          "name": "disabled",
+          "type": "boolean | undefined",
+          "description": "Suppresses the tooltip entirely without removing the trigger child from the DOM.",
+          "required": false
+        }
       ]
     }
   },
@@ -213,6 +238,15 @@
       "accepts": [
         "node-ref"
       ]
+    }
+  },
+  "channels": {
+    "visibility": {
+      "description": "Whether the tooltip is visible.",
+      "value": "open",
+      "defaultValue": "defaultOpen",
+      "onChange": "onOpenChange",
+      "valueType": "boolean"
     }
   }
 }

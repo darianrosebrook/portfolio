@@ -1041,5 +1041,62 @@
   },
   "rtl": {
     "flipIcon": false
+  },
+  "motion": {
+    "reducedMotion": "respect",
+    "transitions": [
+      {
+        "name": "toggle",
+        "trigger": "checked=false→true",
+        "phase": "enter",
+        "properties": [
+          "transform"
+        ],
+        "duration": "core.motion.duration.short",
+        "easing": "core.motion.easing.standard"
+      }
+    ]
+  },
+  "focus": {
+    "strategy": "auto"
+  },
+  "relationships": [
+    {
+      "from": "input",
+      "to": "label",
+      "attribute": "aria-labelledby"
+    }
+  ],
+  "channels": {
+    "checked": {
+      "description": "Whether the switch is on.",
+      "value": "checked",
+      "defaultValue": "defaultChecked",
+      "onChange": "onChange",
+      "valueType": "boolean"
+    }
+  },
+  "form": {
+    "participates": true,
+    "inputType": "checkbox",
+    "serialization": {
+      "valueSource": "static:on",
+      "omitWhen": "unchecked"
+    },
+    "validity": {
+      "model": "native"
+    }
+  },
+  "description": "Boolean toggle for enabling or disabling a setting. Semantically equivalent to a checkbox but with a sliding thumb affordance.",
+  "a2ui": {
+    "category": "form-field",
+    "usageHints": [
+      "Use for settings that take effect immediately on toggle (no save needed)",
+      "Pair with a visible label — the Switch has no intrinsic label text",
+      "Use a Checkbox instead when the toggle requires a form submit to take effect"
+    ],
+    "children": {
+      "allowed": false
+    }
   }
 }

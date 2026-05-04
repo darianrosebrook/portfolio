@@ -583,5 +583,103 @@
   },
   "rtl": {
     "flipIcon": false
+  },
+  "motion": {
+    "reducedMotion": "respect",
+    "transitions": [
+      {
+        "name": "open",
+        "trigger": "openness=closed→open",
+        "phase": "enter",
+        "properties": [
+          "opacity",
+          "transform"
+        ],
+        "duration": "core.motion.duration.short",
+        "easing": "core.motion.easing.emphasizedDecelerate"
+      },
+      {
+        "name": "close",
+        "trigger": "openness=open→closed",
+        "phase": "exit",
+        "properties": [
+          "opacity",
+          "transform"
+        ],
+        "duration": "core.motion.duration.short",
+        "easing": "core.motion.easing.emphasizedAccelerate"
+      }
+    ]
+  },
+  "focus": {
+    "strategy": "roving",
+    "orientation": "vertical",
+    "initialFocus": "search",
+    "returnFocus": "trigger",
+    "wrap": true
+  },
+  "portal": {
+    "enabled": true,
+    "defaultTarget": "body",
+    "positioning": "anchored",
+    "layering": "popover",
+    "collision": "flip-shift"
+  },
+  "dismissal": {
+    "triggers": [
+      {
+        "event": "escape",
+        "defaultEnabled": true
+      },
+      {
+        "event": "outsideClick",
+        "defaultEnabled": true
+      },
+      {
+        "event": "selection",
+        "defaultEnabled": true
+      }
+    ]
+  },
+  "relationships": [
+    {
+      "from": "trigger",
+      "to": "listbox",
+      "attribute": "aria-controls"
+    },
+    {
+      "from": "trigger",
+      "to": "listbox",
+      "attribute": "aria-expanded"
+    }
+  ],
+  "channels": {
+    "selection": {
+      "description": "Currently selected value(s).",
+      "value": "value",
+      "defaultValue": "defaultValue",
+      "onChange": "onChange",
+      "valueType": "string | string[]"
+    },
+    "openness": {
+      "description": "Whether the dropdown is open.",
+      "value": "open",
+      "defaultValue": "defaultOpen",
+      "onChange": "onOpenChange",
+      "valueType": "boolean"
+    }
+  },
+  "description": "Dropdown selector with optional search, single or multi-select, and keyboard navigation. Renders a floating listbox anchored to the trigger.",
+  "a2ui": {
+    "category": "form-field",
+    "usageHints": [
+      "Use when the option list is too long for a radio group (> 5 items)",
+      "Enable search for lists with 10+ items",
+      "Use multi-select mode with chips for selecting multiple values",
+      "Prefer native <select> inside a plain form when JS is unavailable"
+    ],
+    "children": {
+      "allowed": false
+    }
   }
 }

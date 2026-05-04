@@ -715,5 +715,17 @@
   },
   "rtl": {
     "flipIcon": false
+  },
+  "description": "Command palette modal for keyboard-driven search and action execution.",
+  "a2ui": {
+    "category": "action",
+    "usageHints": [
+      "Trigger with ⌘K or a toolbar button",
+      "Register commands with a label and handler — they appear in the search results",
+      "Group commands with Command.Group for visual separation"
+    ],
+    "children": {
+      "allowed": false
+    }
   }
 }

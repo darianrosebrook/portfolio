@@ -403,5 +403,21 @@
   },
   "rtl": {
     "flipIcon": false
+  },
+  "description": "Expandable container that truncates long content with a \"show more\" affordance.",
+  "a2ui": {
+    "category": "content",
+    "usageHints": [
+      "Use when content could be long but brevity is preferred by default",
+      "Configure maxLines to control how many lines are shown before truncation",
+      "Avoid if the full content is always needed — prefer Details instead"
+    ],
+    "children": {
+      "allowed": true,
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ]
+    }
   }
 }

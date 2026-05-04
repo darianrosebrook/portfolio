@@ -91,5 +91,17 @@
   },
   "rtl": {
     "flipIcon": false
+  },
+  "description": "Avatar-style display of a user or entity identity with name and optional status badge.",
+  "a2ui": {
+    "category": "display",
+    "usageHints": [
+      "Use in comment threads, tables, or nav bars to identify the actor",
+      "size=compact for dense layouts like table rows",
+      "Pairs with StatusDot to indicate presence or role"
+    ],
+    "children": {
+      "allowed": false
+    }
   }
 }

@@ -524,5 +524,25 @@
         "OTPSeparator"
       ]
     }
+  },
+  "channels": {
+    "value": {
+      "description": "The full OTP string assembled from individual digit inputs.",
+      "value": "value",
+      "defaultValue": "defaultValue",
+      "onChange": "onChange",
+      "valueType": "string"
+    }
+  },
+  "form": {
+    "participates": true,
+    "inputType": "text",
+    "serialization": {
+      "valueSource": "prop:value"
+    },
+    "validity": {
+      "model": "native",
+      "completionRequired": true
+    }
   }
 }
