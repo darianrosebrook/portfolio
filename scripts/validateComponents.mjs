@@ -89,7 +89,10 @@ class ComponentValidator {
   }
 
   readContract(componentPath, componentName) {
-    const exactPath = path.join(componentPath, `${componentName}.contract.json`);
+    const exactPath = path.join(
+      componentPath,
+      `${componentName}.contract.json`
+    );
     const fallbackFile = fs
       .readdirSync(componentPath)
       .find((file) => file.endsWith('.contract.json'));
@@ -113,7 +116,9 @@ class ComponentValidator {
   validateComponentStructure(componentPath, componentName, type = 'component') {
     this.log(`\n${colors.bold}Validating ${componentName}${colors.reset}`);
     const contract =
-      type === 'component' ? this.readContract(componentPath, componentName) : null;
+      type === 'component'
+        ? this.readContract(componentPath, componentName)
+        : null;
     const contractComponentName =
       typeof contract?.name === 'string' ? contract.name : componentName;
     const contractLayer =
@@ -167,11 +172,7 @@ class ComponentValidator {
     });
 
     // Validate file naming conventions
-    this.validateNamingConventions(
-      componentPath,
-      contractComponentName,
-      type
-    );
+    this.validateNamingConventions(componentPath, contractComponentName, type);
 
     // Validate index file (.tsx or .ts)
     this.validateIndexFile(componentPath, contractComponentName, type);
@@ -277,12 +278,15 @@ class ComponentValidator {
         ),
       ].map((match) => match[1]);
       const defaultImportTargets = [
-        ...content.matchAll(/import\s+\w+(?:\s*,[^'"]*)?\s+from\s*['"]([^'"]+)['"]/g),
+        ...content.matchAll(
+          /import\s+\w+(?:\s*,[^'"]*)?\s+from\s*['"]([^'"]+)['"]/g
+        ),
       ].map((match) => match[1]);
       const hasExportDefaultIdentifier = /export\s+default\s+\w+/.test(content);
       const hasValidDefaultExport =
         defaultExportTargets.some(resolvesToModule) ||
-        (hasExportDefaultIdentifier && defaultImportTargets.some(resolvesToModule)) ||
+        (hasExportDefaultIdentifier &&
+          defaultImportTargets.some(resolvesToModule)) ||
         /export\s*\{[^}]*\bdefault\b[^}]*\}/.test(content);
 
       if (hasValidDefaultExport) {
@@ -348,7 +352,9 @@ class ComponentValidator {
     if (!mainPath) {
       const expectedFiles = possibleMainFiles.join(' or ');
       if (type === 'module') {
-        this.logWarning(`Module has no single main file (${expectedFiles}) — multi-file structure assumed`);
+        this.logWarning(
+          `Module has no single main file (${expectedFiles}) — multi-file structure assumed`
+        );
       } else {
         this.logError(`Missing required file: ${expectedFiles}`);
       }
@@ -426,13 +432,19 @@ class ComponentValidator {
       // Check for composer patterns (only for components).
       // Use contract.layer as authoritative source; fall back to string-match when no contract.
       if (type === 'component') {
-        const contractLayer = this.readContractLayer(componentPath, componentName);
+        const contractLayer = this.readContractLayer(
+          componentPath,
+          componentName
+        );
         const isComposer =
           contractLayer === 'composer' ||
           (contractLayer === null &&
             (content.includes('Provider') || content.includes('Context')));
 
-        if (isComposer && (content.includes('Provider') || content.includes('Context'))) {
+        if (
+          isComposer &&
+          (content.includes('Provider') || content.includes('Context'))
+        ) {
           this.logInfo(
             'Component uses Provider/Context pattern (composer-level)'
           );
@@ -462,7 +474,10 @@ class ComponentValidator {
       const content = fs.readFileSync(mainPath, 'utf8');
 
       // Use contract.layer as authoritative source; fall back to string-match when no contract.
-      const contractLayer = this.readContractLayer(componentPath, componentName);
+      const contractLayer = this.readContractLayer(
+        componentPath,
+        componentName
+      );
       const isComposer =
         contractLayer === 'composer' ||
         (contractLayer === null &&
@@ -598,7 +613,10 @@ class ComponentValidator {
   }
 
   validateContractFile(componentPath, componentName) {
-    const exactPath = path.join(componentPath, `${componentName}.contract.json`);
+    const exactPath = path.join(
+      componentPath,
+      `${componentName}.contract.json`
+    );
     const fallbackFile = fs
       .readdirSync(componentPath)
       .find((file) => file.endsWith('.contract.json'));
@@ -661,7 +679,10 @@ class ComponentValidator {
   }
 
   readContractLayer(componentPath, componentName) {
-    const contractPath = path.join(componentPath, `${componentName}.contract.json`);
+    const contractPath = path.join(
+      componentPath,
+      `${componentName}.contract.json`
+    );
     if (!fs.existsSync(contractPath)) return null;
     try {
       const contract = JSON.parse(fs.readFileSync(contractPath, 'utf8'));
