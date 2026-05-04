@@ -1,30 +1,315 @@
 id: CONTRACTS-001
 type: feature
 title: Port component-converter contract authority to portfolio
-status: draft
-risk_tier: 3
-mode: development
+status: active
+risk_tier: 2
+mode: feature
+worktree: contracts-001
 created_at: '2026-05-01T18:59:04.567Z'
-updated_at: '2026-05-01T18:59:04.568Z'
+updated_at: '2026-05-04T00:00:00.000Z'
 blast_radius:
-  modules: []
-  data_migration: false
-operational_rollback_slo: 5m
-scope:
-  in:
+  modules:
     - ui/components/
     - scripts/
     - utils/designTokens/
+    - test/
+  data_migration: false
+operational_rollback_slo: 30m
+
+scope:
+  in:
+    # Contract files and their schema/generator
+    - ui/components/**/*.contract.json
+    - ui/designTokens/component.contract.schema.json
+    - scripts/generateContracts.mjs
+    - scripts/validate-contracts.mjs
+    # Co-located component tests (not production component code)
+    - ui/components/**/tests/**/*.tsx
+    # Existing validation scripts being modified
+    - scripts/validateComponentLayers.mjs
+    - scripts/validateTokenReferences.mjs
+    - scripts/check-contract-tokens.mjs
+    # New scripts introduced by this spec
+    - scripts/check-contract-traceability.mjs
+    - scripts/check-kebab-token-vars.mjs
+    # Resolver module and its tests
+    - utils/designTokens/resolver/resolver-module.ts
+    - utils/designTokens/resolver/resolver-integration.ts
+    - utils/designTokens/resolver/resolver.ts
+    - test/
+    # Lint config and build wiring
+    - .stylelintrc
+    - package.json
   out:
     - node_modules/
     - dist/
     - build/
+    # Production component source is off-limits by default.
+    # If a contract-backed test in A3 exposes an implementation bug,
+    # add the affected file to scope.in with a comment before editing.
+    - ui/components/**/*.tsx
+    - utils/designTokens/generators/
+    - utils/designTokens/core/
+
 invariants:
-  - System maintains data consistency
-acceptance: []
-acceptance_criteria: []
+  - Production component behavior is not intentionally redesigned in this slice.
+    If a contract-backed test exposes an implementation bug, only the smallest
+    fix needed to satisfy the existing contract may be admitted, and the affected
+    component path must be added to scope.in before editing.
+  - All existing passing tests remain passing after each AC is implemented.
+  - The camelCase nameCase option in generator.ts remains a valid build-time config
+    and is NOT removed. The kebab-case guard (A5) belongs at the component SCSS
+    consumption layer, not the generator.
+
+# --- Acceptance Criteria ---
+#
+# Implementation order: A1 → A3 → A5 → A2 → A4
+# A1 first: props stratification makes contracts readable before adding test coverage.
+# A3 next: gives the contract system behavioral teeth — highest leverage.
+# A5 next: closes the silent runtime token drift that exists today.
+# A2 after: diagnostic reframe is useful but not foundational.
+# A4 last: resolver claim scoping can land once component contracts are no longer overclaiming.
+#
+acceptance_criteria:
+
+  - id: A1
+    title: Contract props section stratifies intentional API into four buckets
+    description: |
+      All component contracts store both designed props and the full React
+      HTMLAttributes surface in a single props.styled.members array. The
+      description field is blank on every entry. This makes contracts unreadable
+      as design artifacts and unusable as governance boundaries.
+
+      The replacement structure uses four buckets:
+
+        props:
+          designed:        # props the component intentionally exposes
+            members: [...]
+          passthrough:     # HTML attribute surface deliberately forwarded
+            extends: "button"   # the HTML element type being extended
+            allowed: [...]      # explicit allowlist; omit = all attributes allowed
+          constrained:     # props allowed only under specific conditions
+            members: [{ name, type, description, constraint }]
+          restricted:      # props that MUST NOT be passed
+            members: [{ name, type, description }]  # description explains why
+
+      Rules:
+      - Every designed member MUST have a non-empty description.
+      - passthrough.extends identifies the HTML element being extended.
+        passthrough.allowed is optional; if absent, all attributes of that element
+        are forwarded. If present, only the listed names are forwarded.
+      - constrained members carry a constraint field explaining when the prop is
+        valid (e.g. "only when asChild=true").
+      - restricted members carry a description explaining why (e.g. "style is
+        forbidden — use token props to control appearance").
+      - The contract schema is updated to require description on designed members
+        and enforce the four-bucket structure.
+      - generateContracts.mjs is updated so that subsequent generation passes
+        emit the new structure; hand-migrated contracts are not rewritten back
+        to the old shape.
+    done_when:
+      - Button.contract.json uses the four-bucket structure; all designed members
+        have non-empty descriptions.
+      - Dialog, Tooltip, Input, Field, and Checkbox contracts are migrated.
+      - component.contract.schema.json requires non-empty description on all
+        designed members and validates the four-bucket shape.
+      - Running validate-contracts exits non-zero on any contract whose designed
+        member has an empty description.
+      - generateContracts.mjs emits the new structure for a freshly generated
+        contract (verified by running the generator against one component and
+        inspecting output).
+
+  - id: A2
+    title: validateComponentLayers.mjs emits machine-readable diagnostics, not authority
+    description: |
+      The script emits "aligned/misaligned" labels and an "Overall Alignment: N%"
+      metric as if they are system health gates. They are not — they are heuristics
+      based on prop count thresholds, regex string matches, and a hardcoded
+      classification registry. A consumer cannot tell which conclusions require
+      human review vs. which are directly observable.
+
+      After this AC, the script has two output modes:
+
+      1. --json flag: emits a structured JSON array, one object per component:
+        {
+          "component": "Dialog",
+          "expectedLayer": "composer",
+          "result": "review_required",
+          "signals": [
+            { "id": "has-provider-context", "status": "pass", "confidence": "structural" },
+            { "id": "slot-detection",        "status": "flag", "confidence": "heuristic" }
+          ]
+        }
+        result values: "pass" | "flag" | "review_required" | "unclassified" | "assembly"
+        confidence values: "structural" | "heuristic"
+        A signal is "structural" only if it is directly observable (e.g., Provider
+        import present in AST/source). Regex/count-based signals are always "heuristic".
+
+      2. Default (console) mode: human-friendly summary using the new taxonomy.
+        Categories: pass / flags / review-required / unclassified / assembly.
+        Assemblies appear in their own section; they are not counted in any total.
+        The counts line replaces the percentage: "N pass, N flags, N review-required,
+        N unclassified — run caws validate for gate status."
+        The threshold messages ("Excellent framework alignment!" etc.) are removed.
+
+      The script's top-level comment is updated to document that it is a diagnostic
+      aid, not a quality gate.
+    done_when:
+      - Running validateComponentLayers.mjs --json produces parseable JSON matching
+        the schema above; each signal entry has a confidence field.
+      - Default console output uses the new taxonomy and has no percentage summary.
+      - Assembly components appear only in the assembly section.
+      - No signal in the JSON output is labeled "structural" unless it is based on
+        a directly observable source property (not a regex or count threshold).
+
+  - id: A3
+    title: Behavioral contract fields are proven by contractTest assertions
+    description: |
+      53 contract.json files declare behavioral obligations (focus.strategy,
+      dismissal.triggers, a11y.apgPattern, motion.reducedMotion, relationships)
+      that are entirely untested. The test files exist — one per component — but
+      they check rendering shape and slot presence, not behavior.
+
+      Traceability mechanism: a contractTest() helper exported from a shared test
+      utility (e.g. test/utils/contractTest.ts). Each behavioral obligation MUST
+      be proven using this helper rather than a plain it() or test() call:
+
+        contractTest('Dialog', 'focus.wrap', 'true', async () => {
+          // real Tab / Shift+Tab assertion here
+        })
+
+      The helper signature: contractTest(componentName, contractField, contractValue, fn).
+      It wraps the underlying test runner's it() call. The key property is that the
+      checker can verify both (a) the declared contract field and (b) the presence
+      of an actual test case — not just a comment. A contractTest with no assertions
+      inside it fails the same way any empty test does.
+
+      Comment-only annotations (// @contract) are insufficient and MUST NOT be used
+      as the sole traceability surface. They are too cheap to satisfy and cannot be
+      mechanically associated with an assertion.
+
+      Dialog is the reference implementation. The Dialog contract declares:
+        focus.strategy = "trap", focus.wrap = true, focus.returnFocus = "trigger"
+        dismissal.triggers = [escape, overlayClick]
+        a11y.apgPattern = "dialog-modal"
+        relationships: aria-labelledby + aria-describedby
+
+      Dialog.test.tsx must be extended to cover all of the following using contractTest:
+        - Tab moves focus to the next focusable element within the dialog
+        - Tab from the last focusable element wraps to the first (focus.wrap)
+        - Shift+Tab from the first element wraps to the last (focus.wrap)
+        - Escape triggers the onClose callback (dismissal.triggers: escape)
+        - Clicking the overlay triggers onClose (dismissal.triggers: overlayClick)
+        - closeOnEscape=false disables Escape dismissal
+        - closeOnOverlayClick=false disables backdrop click dismissal
+        - aria-modal is present on the dialog element
+        - aria-labelledby points to the title element id
+
+      Tooltip.test.tsx must cover using contractTest:
+        - Escape dismisses a visible tooltip (WCAG 2.1 SC 1.4.13)
+        - Blur on the trigger hides the tooltip
+
+      Sheet already has Escape coverage; migrate it to contractTest.
+
+      scripts/check-contract-traceability.mjs reads all *.contract.json files,
+      extracts behavioral field obligations (focus.strategy, dismissal.triggers,
+      a11y.apgPattern), and for each obligation checks whether a contractTest()
+      call for that component + field exists in the matching test file. It reports
+      any uncovered obligation and exits non-zero if any high-risk obligation
+      (focus.strategy=trap or dismissal.triggers containing escape) is uncovered.
+    done_when:
+      - contractTest() helper exists and is exported from a shared test utility.
+      - Dialog.test.tsx has all 9 behavioral assertions above using contractTest.
+      - Tooltip.test.tsx has Escape and blur dismissal assertions using contractTest.
+      - Sheet.test.tsx Escape test migrated to contractTest.
+      - check-contract-traceability exits 0 for Dialog, Tooltip, and Sheet.
+      - check-contract-traceability exits non-zero when given a contract with
+        focus.strategy=trap that has no matching contractTest in its test file.
+
+  - id: A4
+    title: Resolver documentation is evidence-scoped, not compliance-claiming
+    description: |
+      resolver-module.ts and RESOLVER_MODULE.md claim to implement "W3C Design
+      Tokens Community Group Resolver Module specification, version 2025-10-01."
+      Zero unit tests target resolver-module.ts, resolver-integration.ts, or
+      resolver.ts directly. There are no test fixtures. A claim of spec conformance
+      without a conformance test suite is an overclaim.
+
+      The goal is not to retreat from eventual compliance — it is to scope the
+      claim to what is actually proven. RESOLVER_MODULE.md is updated to distinguish
+      implemented local behavior from spec-compliance:
+
+        "This module is DTCG-inspired and currently tested for local resolver
+        behavior: set resolution, modifier cascades, JSON Pointer references,
+        alias resolution, modifier precedence, and strict/non-strict invalid
+        input handling. It does not yet claim full DTCG Resolver Module
+        conformance. Conformance tests are in test/utils/designTokens/resolver/."
+
+      Six fixture documents are added to test/utils/designTokens/resolver/fixtures/:
+        - simple-alias.resolver.json       — single set, single alias
+        - modifier-override.resolver.json  — two modifiers, precedence check
+        - circular-alias.resolver.json     — A references B references A
+        - missing-file.resolver.json       — set sources a non-existent file
+        - invalid-context.resolver.json    — modifier with unknown context value
+        - cross-file-ref.resolver.json     — set sources another fixture file
+
+      test/utils/designTokens/resolver/resolver-module.test.ts covers:
+        - Alias: {a.b} in a token value resolves to the target value
+        - Modifier precedence: later modifier in resolutionOrder overrides earlier
+        - Circular ref: detected and warned, does not throw or loop
+        - Missing file: resolves without the missing set, emits a diagnostic
+        - Invalid context, strict=false: warning emitted, default context used
+        - Invalid context, strict=true: throws
+        - Version mismatch: throws for a wrong version string
+        - Cross-file reference: resolves correctly across the two fixture files
+    done_when:
+      - All 8 test cases are present and passing in resolver-module.test.ts.
+      - RESOLVER_MODULE.md uses the evidence-scoped language above; the phrase
+        "implements the W3C DTCG Resolver Module specification" is removed.
+      - Running npm test picks up the new test file without configuration changes.
+
+  - id: A5
+    title: Kebab-case CSS token variables are enforced at the component SCSS layer
+    description: |
+      39 component SCSS files reference camelCase CSS custom property names
+      (e.g. --animatedLink-typography-fontWeight-regular) while the generator
+      emits kebab-case (--animatedLink-typography-font-weight-regular). This is
+      silent breakage: the custom property resolves to its initial value with no
+      error. No existing gate catches it — validateTokenReferences.mjs silently
+      normalizes both directions, the stylelint rule explicitly permits camelCase,
+      and no pre-commit hook runs token naming checks.
+
+      scripts/check-kebab-token-vars.mjs is the authoritative gate. It reads all
+      ui/components/**/*.scss and ui/components/**/*.module.scss files and fails
+      (exit 1) for any var(--X) call where X contains a camelCase segment
+      (a lowercase letter immediately followed by an uppercase letter). The script
+      must be wired into npm run validate via a new npm run tokens:lint step.
+
+      Stylelint is secondary enforcement and MUST NOT break supported non-component
+      uses of camelCase custom properties. If tightening the custom-property-pattern
+      rule would affect non-ui/components paths (e.g. global styles, app-layer CSS),
+      scope the rule to ui/components/ only via an overrides block. If scoping is
+      not feasible without broader breakage, document the limitation and rely solely
+      on check-kebab-token-vars.mjs as the gate.
+
+      All 39 currently-broken SCSS files are fixed to reference the kebab-case
+      names actually emitted by the generator. The nameCase: 'camel' option in
+      generator.ts is unchanged; its existing test must continue to pass.
+    done_when:
+      - check-kebab-token-vars.mjs exits 1 for var(--foo-fontWeight) and exits 0
+        for var(--foo-font-weight).
+      - Running npm run validate fails before the SCSS fixes and passes after.
+      - Zero camelCase CSS var references remain in ui/components/ SCSS files
+        (verified by running check-kebab-token-vars.mjs against the tree).
+      - The nameCase camel test in test/designTokens.test.ts still passes.
+      - If stylelint is tightened, it is either scoped to ui/components/ or the
+        limitation is documented in a comment in .stylelintrc.
+
 non_functional:
-  a11y: []
+  a11y:
+    - A3 contractTest coverage must include all apgPattern obligations and all
+      focus.strategy=trap obligations across Dialog, Tooltip, and Sheet.
   perf: {}
   security: []
+
 contracts: []
