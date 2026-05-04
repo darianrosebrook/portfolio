@@ -602,7 +602,52 @@ async function getOrCreateProject() {
   return _tsProject;
 }
 
-async function extractPropsViaTs(componentName, componentPath) {
+// HTML attribute interface names → HTML element names for passthrough.extends
+const HTML_ATTR_TO_ELEMENT = {
+  ButtonHTMLAttributes: 'button',
+  AnchorHTMLAttributes: 'a',
+  InputHTMLAttributes: 'input',
+  TextareaHTMLAttributes: 'textarea',
+  SelectHTMLAttributes: 'select',
+  FormHTMLAttributes: 'form',
+  HTMLAttributes: 'div',
+  LiHTMLAttributes: 'li',
+  OlHTMLAttributes: 'ol',
+  TableHTMLAttributes: 'table',
+  TdHTMLAttributes: 'td',
+  ThHTMLAttributes: 'th',
+  VideoHTMLAttributes: 'video',
+  AudioHTMLAttributes: 'audio',
+  ImgHTMLAttributes: 'img',
+  SVGAttributes: 'svg',
+};
+
+// Detect which HTML element a props interface extends, if any.
+// Returns element name string (e.g. 'button') or null.
+function detectHtmlElement(propsDecl) {
+  if (!propsDecl?.getExtends) return null;
+  for (const ext of propsDecl.getExtends?.() ?? []) {
+    const text = ext.getText();
+    for (const [attrName, elem] of Object.entries(HTML_ATTR_TO_ELEMENT)) {
+      if (text.includes(attrName)) return elem;
+    }
+    // Handle ComponentPropsWithoutRef<'button'> / ComponentProps<'input'> patterns
+    const literalMatch = text.match(/ComponentProps(?:WithoutRef)?<['"](\w+)['"]/);
+    if (literalMatch) return literalMatch[1];
+  }
+  return null;
+}
+
+// Extract own (directly declared) properties from an InterfaceDeclaration.
+// Falls back to all type properties for TypeAliasDeclaration.
+function getOwnMembers(propsDecl) {
+  if (propsDecl.getKindName?.() === 'InterfaceDeclaration') {
+    return propsDecl.getProperties();
+  }
+  return null; // caller will use type.getProperties() fallback
+}
+
+async function extractPropsViaTs(componentName, componentPath, existingProps) {
   const project = await getOrCreateProject();
   if (!project) return null;
 
@@ -614,17 +659,37 @@ async function extractPropsViaTs(componentName, componentPath) {
   const hasHook = fs.existsSync(hookFile);
   if (hasHook) project.addSourceFileAtPath(hookFile);
 
+  // Build a map of existing hand-authored designed descriptions so they survive
+  // regeneration. Only descriptions with actual content are preserved.
+  const preservedDescriptions = new Map();
+  for (const member of existingProps?.designed?.members ?? []) {
+    if (member.description?.trim()) {
+      preservedDescriptions.set(member.name, member.description.trim());
+    }
+  }
+
   const result = {};
 
-  function extractMembers(sourceFile, declName) {
-    const propsDecl =
-      sourceFile.getTypeAlias(declName) ||
-      sourceFile.getInterface(declName);
-    if (!propsDecl) return [];
+  function buildMember(name, sym, firstDecl, defaults) {
+    const propType = firstDecl ? firstDecl.getType() : sym?.getDeclaredType?.();
+    const typeStr = simplifyType(propType ? propType.getText(firstDecl) : 'unknown');
+    const required = firstDecl?.hasQuestionToken
+      ? !firstDecl.hasQuestionToken()
+      : false;
+    let description = preservedDescriptions.get(name) ?? '';
+    if (!description && firstDecl?.getJsDocs) {
+      description = firstDecl
+        .getJsDocs()
+        .map((j) => j.getDescription().trim())
+        .join(' ')
+        .trim();
+    }
+    const member = { name, type: typeStr, description, required };
+    if (defaults.has(name)) member.default = defaults.get(name);
+    return member;
+  }
 
-    // Build defaults map from the component's destructuring signature.
-    // Using ts-morph's ObjectBindingPattern avoids false matches from
-    // assignments elsewhere in the function body.
+  function buildDefaultsMap(sourceFile) {
     const defaults = new Map();
     const funcVar = sourceFile.getVariableDeclaration(componentName);
     if (funcVar) {
@@ -642,52 +707,64 @@ async function extractPropsViaTs(componentName, componentPath) {
         }
       }
     }
-
-    // getType().getProperties() works for both interfaces and union type aliases
-    const type = propsDecl.getType();
-    const members = [];
-
-    for (const sym of type.getProperties()) {
-      const name = sym.getName();
-      if (isExcludedProp(name)) continue;
-
-      const decls = sym.getDeclarations();
-      const firstDecl = decls[0];
-
-      const propType = firstDecl ? firstDecl.getType() : sym.getDeclaredType();
-      const typeStr = simplifyType(propType ? propType.getText(firstDecl) : 'unknown');
-
-      const required = firstDecl?.hasQuestionToken
-        ? !firstDecl.hasQuestionToken()
-        : false;
-
-      let description = '';
-      if (firstDecl?.getJsDocs) {
-        description = firstDecl
-          .getJsDocs()
-          .map((j) => j.getDescription().trim())
-          .join(' ')
-          .trim();
-      }
-
-      const member = { name, type: typeStr, description, required };
-      if (defaults.has(name)) member.default = defaults.get(name);
-      members.push(member);
-    }
-
-    return members;
+    return defaults;
   }
 
   const sourceFile = project.getSourceFile(mainFile);
   if (sourceFile) {
-    const members = extractMembers(sourceFile, `${componentName}Props`);
-    if (members.length > 0) result.styled = { members };
+    const propsDecl =
+      sourceFile.getTypeAlias(`${componentName}Props`) ||
+      sourceFile.getInterface(`${componentName}Props`);
+
+    if (propsDecl) {
+      const defaults = buildDefaultsMap(sourceFile);
+      const htmlElement = detectHtmlElement(propsDecl);
+      const ownSymbols = getOwnMembers(propsDecl);
+
+      if (ownSymbols !== null) {
+        // Interface with own/inherited split: put own props in designed
+        const members = ownSymbols
+          .filter((p) => !isExcludedProp(p.getName()))
+          .map((p) => {
+            const decls = p.getDeclarations?.() ?? [];
+            return buildMember(p.getName(), p, decls[0], defaults);
+          });
+        if (members.length > 0) result.designed = { members };
+        if (htmlElement) result.passthrough = { extends: htmlElement };
+      } else {
+        // Type alias (union / intersection): use full property set as designed
+        const type = propsDecl.getType();
+        const members = [];
+        for (const sym of type.getProperties()) {
+          const name = sym.getName();
+          if (isExcludedProp(name)) continue;
+          const decls = sym.getDeclarations();
+          members.push(buildMember(name, sym, decls[0], defaults));
+        }
+        if (members.length > 0) result.designed = { members };
+        if (htmlElement) result.passthrough = { extends: htmlElement };
+      }
+    }
   }
 
   const hookSource = hasHook ? project.getSourceFile(hookFile) : null;
   if (hookSource) {
-    const members = extractMembers(hookSource, `Use${componentName}Options`);
-    if (members.length > 0) result.hook = { members };
+    const hookDecl =
+      hookSource.getInterface(`Use${componentName}Options`) ||
+      hookSource.getTypeAlias(`Use${componentName}Options`);
+    if (hookDecl) {
+      const defaults = buildDefaultsMap(hookSource);
+      const ownSymbols = getOwnMembers(hookDecl);
+      const syms = ownSymbols ?? hookDecl.getType().getProperties();
+      const members = syms
+        .filter((p) => !isExcludedProp(p.getName?.() ?? p.name))
+        .map((p) => {
+          const name = p.getName?.() ?? p.name;
+          const decls = p.getDeclarations?.() ?? [];
+          return buildMember(name, p, decls[0], defaults);
+        });
+      if (members.length > 0) result.hook = { members };
+    }
   }
 
   return Object.keys(result).length > 0 ? result : null;
@@ -717,6 +794,11 @@ function generateTokenReferences(componentName, componentPath, anatomy) {
 }
 
 async function generateContract(componentName, componentPath) {
+  // Read existing contract first so we can preserve hand-authored descriptions
+  // in props.designed and hand-authored sections (focus, dismissal, etc.)
+  const contractPath = path.join(componentPath, `${componentName}.contract.json`);
+  const existing = readJson(contractPath);
+
   const source = allSource(componentPath);
   const scssSource = componentFiles(componentPath)
     .filter((file) => file.endsWith('.module.scss'))
@@ -735,7 +817,7 @@ async function generateContract(componentName, componentPath) {
   const states = extractStates(source, scssSource, variants);
   const a11y = generateA11yInfo(componentName, layer, source);
   const tokens = generateTokenReferences(componentName, componentPath, anatomy);
-  const props = await extractPropsViaTs(componentName, componentPath);
+  const props = await extractPropsViaTs(componentName, componentPath, existing?.props);
 
   const generated = {
     name: componentName,
@@ -759,8 +841,6 @@ async function generateContract(componentName, componentPath) {
   };
 
   // Preserve hand-authored sections from the existing contract
-  const contractPath = path.join(componentPath, `${componentName}.contract.json`);
-  const existing = readJson(contractPath);
   if (existing) {
     for (const key of PRESERVED_KEYS) {
       if (existing[key] !== undefined && generated[key] === undefined) {

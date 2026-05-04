@@ -18,6 +18,10 @@
       "enum": ["primitive", "compound", "composer"],
       "description": "Component abstraction layer"
     },
+    "description": {
+      "type": "string",
+      "description": "Human-readable summary of what this component is and when to use it"
+    },
     "anatomy": {
       "type": "array",
       "items": { "type": "string", "minLength": 1 },
@@ -124,15 +128,83 @@
     },
     "props": {
       "type": "object",
-      "description": "Prop API surfaces extracted from TypeScript source",
-      "additionalProperties": {
-        "type": "object",
-        "required": ["members"],
-        "additionalProperties": false,
-        "properties": {
-          "members": {
-            "type": "array",
-            "items": { "$ref": "#/definitions/propMember" }
+      "description": "Component prop API. Use the four-bucket structure for new contracts; legacy 'styled'/'hook' surfaces are accepted during migration.",
+      "additionalProperties": false,
+      "properties": {
+        "designed": {
+          "type": "object",
+          "description": "Props the component intentionally exposes as part of its designed API. Every member must have a non-empty description.",
+          "required": ["members"],
+          "additionalProperties": false,
+          "properties": {
+            "members": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/designedPropMember" }
+            }
+          }
+        },
+        "passthrough": {
+          "type": "object",
+          "description": "HTML attribute surface the component deliberately forwards to its root element. extends names the HTML element type.",
+          "additionalProperties": false,
+          "properties": {
+            "extends": {
+              "type": "string",
+              "description": "HTML element whose attribute surface is forwarded, e.g. 'button', 'input', 'div'"
+            },
+            "allowed": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Explicit allowlist of forwarded attribute names. If absent, all attributes of the extended element are forwarded."
+            }
+          }
+        },
+        "constrained": {
+          "type": "object",
+          "description": "Props that are valid only under specific conditions. Each member must describe its constraint.",
+          "required": ["members"],
+          "additionalProperties": false,
+          "properties": {
+            "members": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/constrainedPropMember" }
+            }
+          }
+        },
+        "restricted": {
+          "type": "object",
+          "description": "Props that must not be passed by consumers. Each member must describe why.",
+          "required": ["members"],
+          "additionalProperties": false,
+          "properties": {
+            "members": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/designedPropMember" }
+            }
+          }
+        },
+        "styled": {
+          "description": "Legacy surface — migrate to 'designed' + 'passthrough' when updating this contract.",
+          "type": "object",
+          "required": ["members"],
+          "additionalProperties": false,
+          "properties": {
+            "members": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/propMember" }
+            }
+          }
+        },
+        "hook": {
+          "description": "Props surfaced via a companion hook (e.g. useDialog). Migrate to 'designed' when updating this contract.",
+          "type": "object",
+          "required": ["members"],
+          "additionalProperties": false,
+          "properties": {
+            "members": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/propMember" }
+            }
           }
         }
       }
@@ -201,18 +273,58 @@
           "enum": ["horizontal", "vertical", "both"]
         },
         "initialFocus": { "type": "string" },
-        "returnFocus": { "type": "boolean" },
+        "returnFocus": {
+          "oneOf": [{ "type": "boolean" }, { "type": "string" }]
+        },
         "wrap": { "type": "boolean" },
-        "scrollLock": { "type": "boolean" }
+        "scrollLock": { "type": "boolean" },
+        "description": { "type": "string", "description": "Human-readable focus management notes" }
       }
     },
     "dismissal": {
-      "type": "array",
-      "items": {
-        "type": "string",
-        "enum": ["escape", "outsideClick", "blur", "routeChange", "triggerReclick", "userDismiss", "selection"]
-      },
-      "description": "Triggers that close or dismiss this component"
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["escape", "outsideClick", "blur", "routeChange", "triggerReclick", "userDismiss", "selection"]
+          },
+          "description": "Triggers that close or dismiss this component (flat array, legacy)"
+        },
+        {
+          "type": "object",
+          "description": "Structured dismissal contract with per-trigger configuration",
+          "additionalProperties": false,
+          "properties": {
+            "triggers": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["event"],
+                "additionalProperties": false,
+                "properties": {
+                  "event": {
+                    "type": "string",
+                    "enum": ["escape", "outsideClick", "overlayClick", "blur", "routeChange", "triggerReclick", "userDismiss", "selection"]
+                  },
+                  "enabledBy": {
+                    "type": "string",
+                    "description": "Prop name that enables or disables this trigger, e.g. 'closeOnEscape'"
+                  },
+                  "defaultEnabled": {
+                    "type": "boolean",
+                    "description": "Whether this trigger is enabled by default"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Human-readable description of this trigger's behavior"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
     },
     "motion": {
       "type": "object",
@@ -223,13 +335,20 @@
           "type": "array",
           "items": {
             "type": "object",
-            "required": ["name", "duration", "easing"],
+            "required": ["name"],
             "additionalProperties": false,
             "properties": {
               "name": { "type": "string" },
+              "trigger": { "type": "string", "description": "State transition that fires this animation, e.g. 'openness=closed→opening'" },
+              "phase": { "type": "string", "description": "Animation phase: enter, leave, etc." },
               "duration": { "type": "string" },
-              "easing": { "type": "string" },
-              "property": { "type": "string" }
+              "easing": { "oneOf": [{ "type": "string" }, { "type": "null" }] },
+              "property": { "type": "string" },
+              "properties": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "CSS properties animated by this transition"
+              }
             }
           }
         },
@@ -250,11 +369,11 @@
         "defaultTarget": { "type": "string" },
         "positioning": {
           "type": "string",
-          "enum": ["anchored", "fixed", "absolute"]
+          "enum": ["anchored", "centered", "fixed", "absolute"]
         },
         "layering": {
           "type": "string",
-          "enum": ["popover", "dialog", "tooltip", "auto"]
+          "enum": ["popover", "dialog", "modal", "tooltip", "auto"]
         },
         "collision": { "type": "string" },
         "backdrop": { "type": "boolean" }
@@ -271,7 +390,8 @@
           "from": { "type": "string" },
           "to": { "type": "string" },
           "attribute": { "type": "string" },
-          "when": { "type": "string" }
+          "when": { "type": "string" },
+          "description": { "type": "string" }
         }
       }
     },
@@ -293,13 +413,32 @@
       "properties": {
         "flipIcon": { "type": "boolean" }
       }
+    },
+    "a2ui": {
+      "type": "object",
+      "description": "Agent-to-UI metadata: usage hints, composition guidance, and category information for AI-assisted tooling",
+      "additionalProperties": true
+    },
+    "form": {
+      "type": "object",
+      "description": "Form participation contract",
+      "additionalProperties": true
     }
   },
   "definitions": {
     "tokenResolution": {
       "type": "object",
-      "required": ["resolvesTo", "fallback"],
       "additionalProperties": false,
+      "oneOf": [
+        {
+          "required": ["resolvesTo", "fallback"],
+          "description": "Token reference — resolves via the token graph"
+        },
+        {
+          "required": ["literal"],
+          "description": "Literal value — not a token reference, a hardcoded CSS value"
+        }
+      ],
       "properties": {
         "resolvesTo": {
           "type": "string",
@@ -308,6 +447,10 @@
         "fallback": {
           "type": "string",
           "description": "Literal CSS fallback value when token sheet is not loaded"
+        },
+        "literal": {
+          "type": "string",
+          "description": "Hardcoded CSS value not backed by a token, e.g. '0px', 'auto'. Use sparingly."
         },
         "property": {
           "type": "string",
@@ -320,7 +463,61 @@
         }
       }
     },
+    "designedPropMember": {
+      "type": "object",
+      "required": ["name", "type", "description"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "type": { "type": "string" },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Non-empty description is required for all designed props"
+        },
+        "required": { "type": "boolean", "default": false },
+        "default": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "number" },
+            { "type": "boolean" }
+          ]
+        },
+        "nodeKind": {
+          "type": "string",
+          "enum": ["node-ref", "icon-ref"],
+          "description": "Disambiguates ReactNode: a composed subtree vs a named icon"
+        }
+      }
+    },
+    "constrainedPropMember": {
+      "type": "object",
+      "required": ["name", "type", "description", "constraint"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "type": { "type": "string" },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "constraint": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Condition under which this prop is valid, e.g. 'only when asChild=true'"
+        },
+        "required": { "type": "boolean", "default": false },
+        "default": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "number" },
+            { "type": "boolean" }
+          ]
+        }
+      }
+    },
     "propMember": {
+      "description": "Legacy prop member — used for 'styled' and 'hook' surfaces. description is optional for backward compatibility.",
       "type": "object",
       "required": ["name", "type", "description"],
       "additionalProperties": false,
@@ -353,7 +550,9 @@
         "defaultValue": { "type": "string", "description": "Uncontrolled default prop name" },
         "enabledBy": { "type": "string", "description": "Prop that enables this channel" },
         "valueType": { "type": "string", "description": "TypeScript type string for the value" },
-        "notes": { "type": "string" }
+        "notes": { "type": "string" },
+        "description": { "type": "string", "description": "Human-readable description of what this channel controls" },
+        "omitWhen": { "type": "string", "description": "Condition under which this channel's value is omitted from form submission" }
       }
     }
   }

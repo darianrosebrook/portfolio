@@ -8,6 +8,12 @@
  *   node scripts/validate-contracts.mjs --fix-schema        # rewrite $schema pointer in-place
  *
  * Exit codes: 0 = all pass, 1 = any failure
+ *
+ * Semantic checks (beyond JSON Schema):
+ *   - props.designed members must all have non-empty descriptions
+ *   - props.constrained members must have non-empty description AND constraint
+ *   - props.restricted members must have non-empty descriptions
+ *   - props.styled or props.hook triggers a migration warning (not a failure)
  */
 
 import fs from 'fs';
@@ -48,11 +54,75 @@ function relPath(absPath) {
   return path.relative(ROOT, absPath);
 }
 
-const RESET = '\x1b[0m';
-const RED   = '\x1b[31m';
-const GREEN = '\x1b[32m';
+const RESET  = '\x1b[0m';
+const RED    = '\x1b[31m';
+const GREEN  = '\x1b[32m';
 const YELLOW = '\x1b[33m';
-const BOLD  = '\x1b[1m';
+const BOLD   = '\x1b[1m';
+
+// ── semantic checks ──────────────────────────────────────────────────────────
+
+/**
+ * Returns an array of { level: 'error'|'warn', message } findings for prop
+ * bucket conventions that AJV schema cannot fully enforce.
+ */
+function checkPropBuckets(contract, rel) {
+  const findings = [];
+  const props = contract.props;
+  if (!props) return findings;
+
+  // designed members must all have non-empty descriptions
+  for (const member of props.designed?.members ?? []) {
+    if (!member.description?.trim()) {
+      findings.push({
+        level: 'error',
+        message: `props.designed member '${member.name}' has an empty description — all designed props must be documented`,
+      });
+    }
+  }
+
+  // constrained members must have non-empty description AND constraint
+  for (const member of props.constrained?.members ?? []) {
+    if (!member.description?.trim()) {
+      findings.push({
+        level: 'error',
+        message: `props.constrained member '${member.name}' has an empty description`,
+      });
+    }
+    if (!member.constraint?.trim()) {
+      findings.push({
+        level: 'error',
+        message: `props.constrained member '${member.name}' is missing a constraint field`,
+      });
+    }
+  }
+
+  // restricted members must have non-empty descriptions
+  for (const member of props.restricted?.members ?? []) {
+    if (!member.description?.trim()) {
+      findings.push({
+        level: 'error',
+        message: `props.restricted member '${member.name}' has an empty description — explain why it is forbidden`,
+      });
+    }
+  }
+
+  // warn on legacy surfaces (not a failure — migration is incremental)
+  if (props.styled) {
+    findings.push({
+      level: 'warn',
+      message: `props.styled is a legacy surface — migrate to props.designed + props.passthrough`,
+    });
+  }
+  if (props.hook) {
+    findings.push({
+      level: 'warn',
+      message: `props.hook is a legacy surface — migrate hook-accessible props to props.designed`,
+    });
+  }
+
+  return findings;
+}
 
 // ── main ────────────────────────────────────────────────────────────────────
 
@@ -74,6 +144,7 @@ if (files.length === 0) {
 
 let passed = 0;
 let failed = 0;
+let warned = 0;
 
 for (const filePath of files) {
   const rel = relPath(filePath);
@@ -103,27 +174,45 @@ for (const filePath of files) {
     continue;
   }
 
-  const valid = validate(contract);
-  if (valid) {
+  const schemaValid = validate(contract);
+  const propFindings = checkPropBuckets(contract, rel);
+  const propErrors = propFindings.filter((f) => f.level === 'error');
+  const propWarns  = propFindings.filter((f) => f.level === 'warn');
+
+  if (schemaValid && propErrors.length === 0) {
     passed++;
+    if (propWarns.length > 0) {
+      warned++;
+      console.log(`${YELLOW}WARN: ${rel}${RESET}`);
+      for (const w of propWarns) console.log(`  ⚠  ${w.message}`);
+    }
   } else {
     failed++;
     console.error(`${RED}FAIL: ${rel}${RESET}`);
-    for (const error of validate.errors) {
-      const loc = error.instancePath || '(root)';
-      console.error(`  ${loc}: ${error.message}`);
-      if (error.params?.allowedValues) {
-        console.error(`    allowed: ${error.params.allowedValues.join(', ')}`);
+    if (!schemaValid) {
+      for (const error of validate.errors) {
+        const loc = error.instancePath || '(root)';
+        console.error(`  ${loc}: ${error.message}`);
+        if (error.params?.allowedValues) {
+          console.error(`    allowed: ${error.params.allowedValues.join(', ')}`);
+        }
       }
+    }
+    for (const e of propErrors) {
+      console.error(`  props: ${e.message}`);
+    }
+    for (const w of propWarns) {
+      console.log(`  ⚠  ${w.message}`);
     }
   }
 }
 
 if (!FIX_SCHEMA) {
   const total = passed + failed;
+  const warnSuffix = warned > 0 ? `, ${warned} with migration warnings` : '';
   const status = failed === 0
-    ? `${GREEN}${BOLD}Contract schema validation: ${passed}/${total} passed${RESET}`
-    : `${RED}${BOLD}Contract schema validation: ${passed} passed, ${failed} failed (${total} total)${RESET}`;
+    ? `${GREEN}${BOLD}Contract validation: ${passed}/${total} passed${warnSuffix}${RESET}`
+    : `${RED}${BOLD}Contract validation: ${passed} passed, ${failed} failed (${total} total)${warnSuffix}${RESET}`;
   console.log(`\n${status}`);
 }
 
