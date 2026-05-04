@@ -1,33 +1,29 @@
 # BrandSwitcher
 
-A control panel for selecting and cycling between brand themes. Renders swatches, auto-cycle controls, density controls, and font family options.
+BrandSwitcher exposes controls for selecting the active brand theme, density, and typography settings.
 
 ## Usage
 
 ```tsx
 import { BrandSwitcher } from '@/ui/components/BrandSwitcher';
 
-// Must be rendered inside a BrandProvider
-<BrandSwitcher showAutoCycle showDensity showFonts />
+<BrandSwitcher showDensity showFonts />;
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `showAutoCycle` | `boolean` | `false` | Show auto-cycle interval controls |
-| `showDensity` | `boolean` | `false` | Show density (spacing) controls |
-| `showFonts` | `boolean` | `false` | Show font family controls |
-| `compact` | `boolean` | `false` | Compact mode — swatches only, no labels |
-| `sticky` | `boolean` | `false` | Enable sticky positioning |
-| `enableKeyboard` | `boolean` | `false` | Arrow-key navigation between brands |
-| `className` | `string` | — | Additional CSS class |
+- `showAutoCycle`: Shows controls for cycling through available brands.
+- `showDensity`: Shows density controls.
+- `showFonts`: Shows heading and body font controls.
+- `compact`: Renders swatches only.
+- `sticky`: Applies sticky positioning.
+- `enableKeyboard`: Enables arrow-key theme switching while the switcher has focus.
+- `className`: Additional class name.
 
 ## Accessibility
 
-- Keyboard navigation is opt-in via `enableKeyboard`.
-- Each swatch is a button with an accessible label describing the brand mood.
+Theme swatches are buttons with `aria-label` and `aria-pressed`. Keyboard shortcuts are scoped to the switcher so page-level arrow key behavior is preserved.
 
 ## Design Tokens
 
-Styles are defined in `BrandSwitcher.module.scss`. The component reads the active brand from `data-brand` on `document.documentElement`.
+Styles should use semantic, component, or local public CSS custom properties for spacing, color, and typography.

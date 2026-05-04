@@ -1,34 +1,29 @@
 # AnimatedCard
 
-A card component with scroll-triggered entry animations and optional hover effects.
+AnimatedCard renders a card-like element with optional GSAP entrance motion and hover styling.
 
 ## Usage
 
 ```tsx
-import { AnimatedCard, AnimatedCardImage, AnimatedCardTitle } from '@/ui/components/AnimatedCard';
+import { AnimatedCard } from '@/ui/components/AnimatedCard';
 
-<AnimatedCard>
-  <AnimatedCardImage src="..." alt="..." />
-  <AnimatedCardTitle>Card title</AnimatedCardTitle>
-</AnimatedCard>
+<AnimatedCard triggerOnScroll={false}>Project summary</AnimatedCard>;
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `ReactNode` | — | Card content |
-| `as` | `'article' \| 'div' \| 'li' \| 'a'` | `'article'` | Rendered element type |
-| `duration` | `number` | — | Entry animation duration in seconds |
-| `delay` | `number` | — | Delay before animation starts |
-| `triggerOnScroll` | `boolean` | `true` | Trigger animation on scroll into view |
-| `enableHover` | `boolean` | `false` | Enable hover effects |
+- `children`: Content rendered inside the card.
+- `as`: Element to render. Defaults to `article`.
+- `duration`, `delay`, `scrollStart`: Motion timing controls.
+- `triggerOnScroll`: Uses ScrollTrigger when true.
+- `enableHover`: Enables hover class styling.
+- `href`: Required when rendering as an anchor.
+- `onAnimationComplete`: Called after the configured animation completes.
 
 ## Accessibility
 
-- Respects `prefers-reduced-motion` — animations are skipped when the user has requested reduced motion.
-- Use semantic `as` prop to match document outline (e.g. `as="article"` inside a list).
+Use the `as` prop to choose the semantic element for the content. Pass link text or labelled content when rendering as an anchor.
 
 ## Design Tokens
 
-Styles are defined in `AnimatedCard.module.scss` and inherit layout tokens from the parent context.
+Styles consume component and semantic CSS custom properties from `AnimatedCard.module.scss`.

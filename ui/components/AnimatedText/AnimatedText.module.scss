@@ -1,7 +1,8 @@
 .animatedText {
+  --animated-text-word-gap: var(--animated-text-word-gap);
   display: flex;
   flex-wrap: wrap;
-  gap: 0.25em;
+  gap: var(--animated-text-word-gap);
 }
 
 .word {

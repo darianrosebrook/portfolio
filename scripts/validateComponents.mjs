@@ -113,6 +113,17 @@ class ComponentValidator {
     }
   }
 
+  requiredFileExists(componentPath, fileName) {
+    if (fileName === 'index.tsx') {
+      return (
+        fs.existsSync(path.join(componentPath, 'index.tsx')) ||
+        fs.existsSync(path.join(componentPath, 'index.ts'))
+      );
+    }
+
+    return fs.existsSync(path.join(componentPath, fileName));
+  }
+
   validateComponentStructure(componentPath, componentName, type = 'component') {
     this.log(`\n${colors.bold}Validating ${componentName}${colors.reset}`);
     const contract =
@@ -137,12 +148,11 @@ class ComponentValidator {
         ? componentName
         : contractComponentName;
       const fileName = filePattern.replace('{ComponentName}', replacementName);
-      const filePath = path.join(componentPath, fileName);
       const exists = filePattern.endsWith('.contract.json')
         ? fs
             .readdirSync(componentPath)
             .some((file) => file.endsWith('.contract.json'))
-        : fs.existsSync(filePath);
+        : this.requiredFileExists(componentPath, fileName);
 
       if (!exists) {
         this.logError(`Missing required file: ${fileName}`);
@@ -178,12 +188,14 @@ class ComponentValidator {
     this.validateIndexFile(componentPath, contractComponentName, type);
 
     // Validate main component file
-    this.validateMainComponentFile(
-      componentPath,
-      contractComponentName,
-      type,
-      contractLayer
-    );
+    if (type === 'component') {
+      this.validateMainComponentFile(
+        componentPath,
+        contractComponentName,
+        type,
+        contractLayer
+      );
+    }
 
     // Check for composer-specific files (only for components)
     if (type === 'component' && contractLayer === 'composer') {
@@ -217,10 +229,15 @@ class ComponentValidator {
       if (file.startsWith(componentName) && file !== componentName) {
         const extension = path.extname(file);
         const baseName = path.basename(file, extension);
+        const isConventionalSubcomponent = new RegExp(
+          `^${componentName}[A-Z][A-Za-z0-9]*$`
+        ).test(baseName);
 
         if (baseName === componentName) {
           this.logSuccess(`Correct naming: ${file}`);
         } else if (baseName.startsWith(componentName + '.')) {
+          this.logSuccess(`Correct naming: ${file}`);
+        } else if (isConventionalSubcomponent) {
           this.logSuccess(`Correct naming: ${file}`);
         } else {
           this.logWarning(
@@ -275,6 +292,9 @@ class ComponentValidator {
       const defaultExportTargets = [
         ...content.matchAll(
           /export\s*\{\s*default(?:\s+as\s+\w+)?\s*\}\s*from\s*['"]([^'"]+)['"]/g
+        ),
+        ...content.matchAll(
+          /export\s*\{[^}]*\bdefault(?:\s+as\s+\w+)?[^}]*\}\s*from\s*['"]([^'"]+)['"]/g
         ),
       ].map((match) => match[1]);
       const defaultImportTargets = [

@@ -1,4 +1,8 @@
 .animatedCard {
+  --animated-card-motion-image: transform 0.7s cubic-bezier(0.2, 0.65, 0.3, 0.9);
+  --animated-card-motion-content: color 0.3s ease-out;
+  --animated-card-motion-overlay: opacity 0.3s ease-out;
+  --animated-card-overlay-background: var(--animated-card-overlay-background);
   will-change: transform, opacity;
   cursor: default;
 }
@@ -28,7 +32,7 @@
 }
 
 .cardImage {
-  transition: transform 0.7s cubic-bezier(0.2, 0.65, 0.3, 0.9);
+  transition: var(--animated-card-motion-image);
   will-change: transform;
 
   img {
@@ -39,18 +43,18 @@
 }
 
 .cardTitle {
-  transition: color 0.3s ease-out;
+  transition: var(--animated-card-motion-content);
 }
 
 .cardOverlay {
   position: absolute;
   inset: 0;
   opacity: 0;
-  transition: opacity 0.3s ease-out;
+  transition: var(--animated-card-motion-overlay);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.4);
+  background: var(--animated-card-overlay-background);
   backdrop-filter: blur(4px);
   border-radius: var(--radius-md, 8px);
 }

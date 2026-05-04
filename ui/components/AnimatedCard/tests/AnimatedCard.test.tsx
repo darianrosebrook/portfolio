@@ -1,24 +1,36 @@
 import React from 'react';
-import { describe, it, expect, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { describe, expect, it, vi } from 'vitest';
+import { render, screen } from '../../../../test/test-utils';
 import { AnimatedCard } from '../AnimatedCard';
 
-vi.mock('gsap', () => {
-  const mock = { registerPlugin: vi.fn(), set: vi.fn(), to: vi.fn(), context: vi.fn(() => ({ revert: vi.fn() })) };
-  return { default: mock, gsap: mock };
-});
-vi.mock('gsap/ScrollTrigger', () => ({ ScrollTrigger: { refresh: vi.fn() } }));
+vi.mock('gsap', () => ({
+  gsap: {
+    context: vi.fn((callback: () => void) => {
+      callback();
+      return { revert: vi.fn() };
+    }),
+    registerPlugin: vi.fn(),
+    set: vi.fn(),
+    to: vi.fn(),
+  },
+}));
+
+vi.mock('gsap/ScrollTrigger', () => ({
+  ScrollTrigger: {},
+}));
+
 vi.mock('@/context/ReducedMotionContext', () => ({
-  useReducedMotion: () => ({ prefersReducedMotion: false }),
+  useReducedMotion: () => ({ prefersReducedMotion: true }),
 }));
 
 describe('AnimatedCard', () => {
-  it('renders children without throwing', () => {
-    render(<AnimatedCard>Card content</AnimatedCard>);
-    expect(screen.getByText('Card content')).toBeInTheDocument();
-  });
+  it('renders children in the requested semantic element', () => {
+    render(
+      <AnimatedCard as="article" triggerOnScroll={false}>
+        Portfolio project
+      </AnimatedCard>
+    );
 
-  it.todo('contract: anatomy slots (image, title, overlay) render correctly');
-  it.todo('contract: hover effects are disabled when prefersReducedMotion is true');
-  it.todo('contract: scroll trigger animation fires on viewport entry');
+    expect(screen.getByText('Portfolio project').tagName).toBe('ARTICLE');
+  });
 });

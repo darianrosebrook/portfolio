@@ -1,26 +1,34 @@
 import React from 'react';
-import { describe, it, expect, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { describe, expect, it, vi } from 'vitest';
+import { render, screen } from '../../../../test/test-utils';
 import { AnimatedText } from '../AnimatedText';
 
-vi.mock('gsap', () => {
-  const mock = { registerPlugin: vi.fn(), set: vi.fn(), to: vi.fn(), context: vi.fn(() => ({ revert: vi.fn() })) };
-  return { default: mock, gsap: mock };
-});
-vi.mock('gsap/ScrollTrigger', () => ({ ScrollTrigger: { refresh: vi.fn() } }));
+vi.mock('gsap', () => ({
+  gsap: {
+    context: vi.fn((callback: () => void) => {
+      callback();
+      return { revert: vi.fn() };
+    }),
+    registerPlugin: vi.fn(),
+    set: vi.fn(),
+    to: vi.fn(),
+  },
+}));
+
+vi.mock('gsap/ScrollTrigger', () => ({
+  ScrollTrigger: {},
+}));
+
 vi.mock('@/context/ReducedMotionContext', () => ({
-  useReducedMotion: () => ({ prefersReducedMotion: false }),
+  useReducedMotion: () => ({ prefersReducedMotion: true }),
 }));
 
 describe('AnimatedText', () => {
-  it('renders text content without throwing', () => {
-    const { container } = render(<AnimatedText text="Hello world" />);
-    // AnimatedText splits text into per-word spans; check container text content
-    expect(container.textContent).toContain('Hello');
-    expect(container.textContent).toContain('world');
-  });
+  it('renders text words inside the requested element', () => {
+    render(<AnimatedText as="h2" text="Hello world" />);
 
-  it.todo('contract: renders correct element type when "as" prop is provided');
-  it.todo('contract: blur-in variant splits text into word spans');
-  it.todo('contract: animations skip when prefersReducedMotion is true');
+    expect(screen.getByRole('heading', { level: 2 })).toHaveTextContent(
+      'Hello world'
+    );
+  });
 });

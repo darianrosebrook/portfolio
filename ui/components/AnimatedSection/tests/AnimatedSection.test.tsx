@@ -1,24 +1,32 @@
 import React from 'react';
-import { describe, it, expect, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { describe, expect, it, vi } from 'vitest';
+import { render, screen } from '../../../../test/test-utils';
 import { AnimatedSection } from '../AnimatedSection';
 
-vi.mock('gsap', () => {
-  const mock = { registerPlugin: vi.fn(), set: vi.fn(), to: vi.fn(), context: vi.fn(() => ({ revert: vi.fn() })) };
-  return { default: mock, gsap: mock };
-});
-vi.mock('gsap/ScrollTrigger', () => ({ ScrollTrigger: { refresh: vi.fn() } }));
+vi.mock('gsap', () => ({
+  gsap: {
+    context: vi.fn((callback: () => void) => {
+      callback();
+      return { revert: vi.fn() };
+    }),
+    registerPlugin: vi.fn(),
+    set: vi.fn(),
+    to: vi.fn(),
+  },
+}));
+
+vi.mock('gsap/ScrollTrigger', () => ({
+  ScrollTrigger: {},
+}));
+
 vi.mock('@/context/ReducedMotionContext', () => ({
-  useReducedMotion: () => ({ prefersReducedMotion: false }),
+  useReducedMotion: () => ({ prefersReducedMotion: true }),
 }));
 
 describe('AnimatedSection', () => {
-  it('renders children without throwing', () => {
+  it('preserves content and section semantics', () => {
     render(<AnimatedSection>Section content</AnimatedSection>);
-    expect(screen.getByText('Section content')).toBeInTheDocument();
-  });
 
-  it.todo('contract: renders correct semantic element when "as" prop is provided');
-  it.todo('contract: stagger-children variant animates direct children individually');
-  it.todo('contract: animations skip when prefersReducedMotion is true');
+    expect(screen.getByText('Section content').tagName).toBe('SECTION');
+  });
 });

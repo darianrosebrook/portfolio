@@ -1,32 +1,28 @@
 # AnimatedSection
 
-A section wrapper that animates its children on scroll entry. Supports staggered child animation.
+AnimatedSection wraps page sections and applies optional entrance motion to the section or its children.
 
 ## Usage
 
 ```tsx
 import { AnimatedSection } from '@/ui/components/AnimatedSection';
 
-<AnimatedSection variant="stagger-children">
-  <p>First paragraph</p>
-  <p>Second paragraph</p>
-</AnimatedSection>
+<AnimatedSection variant="fade-up">Section content</AnimatedSection>;
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `ReactNode` | — | Content to animate |
-| `as` | `'section' \| 'div' \| 'article' \| ...` | `'section'` | Rendered element type |
-| `variant` | `'fade-up' \| 'fade-in' \| 'slide-in' \| 'stagger-children'` | `'fade-up'` | Animation style |
-| `duration` | `number` | — | Animation duration in seconds |
+- `children`: Content rendered inside the section.
+- `as`: Element to render. Defaults to `section`.
+- `variant`: Motion pattern, including `fade-up`, `fade-in`, `slide-in`, and `stagger-children`.
+- `duration`, `stagger`, `delay`, `scrollStart`: Motion timing controls.
+- `triggerOnScroll`: Uses ScrollTrigger when true.
+- `onAnimationComplete`: Called after the configured animation completes.
 
 ## Accessibility
 
-- Respects `prefers-reduced-motion` — all animations are skipped when the system preference is set.
-- Use the `as` prop to preserve correct landmark semantics.
+Choose the `as` value that matches the document structure. The component preserves children and does not add interactive behavior.
 
 ## Design Tokens
 
-Styles are defined in `AnimatedSection.module.scss`.
+Styles consume component and semantic CSS custom properties from `AnimatedSection.module.scss`.
