@@ -1,7 +1,7 @@
 id: CONTRACTS-001
 type: feature
 title: Port component-converter contract authority to portfolio
-status: active
+status: closed
 risk_tier: 2
 mode: feature
 worktree: contracts-001
