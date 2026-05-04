@@ -81,17 +81,17 @@
     .header {
       position: relative;
       flex-shrink: 0;
-      padding: var(--dialog-spacing-header-paddingTop)
-        var(--dialog-spacing-header-paddingRight)
-        var(--dialog-spacing-header-paddingBottom)
-        var(--dialog-spacing-header-paddingLeft);
+      padding: var(--dialog-spacing-header-padding-top)
+        var(--dialog-spacing-header-padding-right)
+        var(--dialog-spacing-header-padding-bottom)
+        var(--dialog-spacing-header-padding-left);
       border-block-end: 1px solid var(--dialog-color-border-default);
     }
 
     .title {
       margin: 0;
       color: var(--dialog-color-foreground-title);
-      font-weight: var(--dialog-typography-title-fontWeight);
+      font-weight: var(--dialog-typography-title-font-weight);
       font-size: var(--dialog-typography-title-font-size);
       line-height: var(--dialog-typography-title-line-height);
     }
@@ -99,10 +99,10 @@
     .body {
       flex: 1;
       overflow-y: auto;
-      padding: var(--dialog-spacing-body-paddingTop)
-        var(--dialog-spacing-body-paddingRight)
-        var(--dialog-spacing-body-paddingBottom)
-        var(--dialog-spacing-body-paddingLeft);
+      padding: var(--dialog-spacing-body-padding-top)
+        var(--dialog-spacing-body-padding-right)
+        var(--dialog-spacing-body-padding-bottom)
+        var(--dialog-spacing-body-padding-left);
       color: var(--dialog-color-foreground-default);
     }
 
@@ -112,10 +112,10 @@
       gap: var(--dialog-spacing-footer-gap);
       justify-content: flex-end;
       align-items: center;
-      padding: var(--dialog-spacing-footer-paddingTop)
-        var(--dialog-spacing-footer-paddingRight)
-        var(--dialog-spacing-footer-paddingBottom)
-        var(--dialog-spacing-footer-paddingLeft);
+      padding: var(--dialog-spacing-footer-padding-top)
+        var(--dialog-spacing-footer-padding-right)
+        var(--dialog-spacing-footer-padding-bottom)
+        var(--dialog-spacing-footer-padding-left);
       border-block-start: 1px solid var(--dialog-color-border-default);
     }
 
@@ -124,8 +124,8 @@
       display: inline-flex;
       justify-content: center;
       align-items: center;
-      width: var(--dialog-size-closeButton-size);
-      height: var(--dialog-size-closeButton-size);
+      width: var(--dialog-size-close-button-size);
+      height: var(--dialog-size-close-button-size);
       padding: 0;
       background: transparent;
       border: none;
@@ -139,8 +139,8 @@
         color var(--dialog-motion-duration-enter)
           var(--dialog-motion-easing-enter);
       cursor: pointer;
-      inset-block-start: var(--dialog-size-closeButton-offset);
-      inset-inline-end: var(--dialog-size-closeButton-offset);
+      inset-block-start: var(--dialog-size-close-button-offset);
+      inset-inline-end: var(--dialog-size-close-button-offset);
 
       &:hover {
         background: var(--dialog-color-background-hover);
@@ -164,17 +164,17 @@
   .header {
     position: relative;
     flex-shrink: 0;
-    padding: var(--dialog-spacing-header-paddingTop)
-      var(--dialog-spacing-header-paddingRight)
-      var(--dialog-spacing-header-paddingBottom)
-      var(--dialog-spacing-header-paddingLeft);
+    padding: var(--dialog-spacing-header-padding-top)
+      var(--dialog-spacing-header-padding-right)
+      var(--dialog-spacing-header-padding-bottom)
+      var(--dialog-spacing-header-padding-left);
     border-block-end: 1px solid var(--dialog-color-border-default);
   }
 
   .title {
     margin: 0;
     color: var(--dialog-color-foreground-title);
-    font-weight: var(--dialog-typography-title-fontWeight);
+    font-weight: var(--dialog-typography-title-font-weight);
     font-size: var(--dialog-typography-title-font-size);
     line-height: var(--dialog-typography-title-line-height);
   }
@@ -182,10 +182,10 @@
   .body {
     flex: 1;
     overflow-y: auto;
-    padding: var(--dialog-spacing-body-paddingTop)
-      var(--dialog-spacing-body-paddingRight)
-      var(--dialog-spacing-body-paddingBottom)
-      var(--dialog-spacing-body-paddingLeft);
+    padding: var(--dialog-spacing-body-padding-top)
+      var(--dialog-spacing-body-padding-right)
+      var(--dialog-spacing-body-padding-bottom)
+      var(--dialog-spacing-body-padding-left);
     color: var(--dialog-color-foreground-default);
   }
 
@@ -195,10 +195,10 @@
     gap: var(--dialog-spacing-footer-gap);
     justify-content: flex-end;
     align-items: center;
-    padding: var(--dialog-spacing-footer-paddingTop)
-      var(--dialog-spacing-footer-paddingRight)
-      var(--dialog-spacing-footer-paddingBottom)
-      var(--dialog-spacing-footer-paddingLeft);
+    padding: var(--dialog-spacing-footer-padding-top)
+      var(--dialog-spacing-footer-padding-right)
+      var(--dialog-spacing-footer-padding-bottom)
+      var(--dialog-spacing-footer-padding-left);
     border-block-start: 1px solid var(--dialog-color-border-default);
   }
 
@@ -207,8 +207,8 @@
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    width: var(--dialog-size-closeButton-size);
-    height: var(--dialog-size-closeButton-size);
+    width: var(--dialog-size-close-button-size);
+    height: var(--dialog-size-close-button-size);
     padding: 0;
     background: transparent;
     border: none;
@@ -222,8 +222,8 @@
       color var(--dialog-motion-duration-enter)
         var(--dialog-motion-easing-enter);
     cursor: pointer;
-    inset-block-start: var(--dialog-size-closeButton-offset);
-    inset-inline-end: var(--dialog-size-closeButton-offset);
+    inset-block-start: var(--dialog-size-close-button-offset);
+    inset-inline-end: var(--dialog-size-close-button-offset);
 
     &:hover {
       background: var(--dialog-color-background-hover);
@@ -305,7 +305,7 @@
 // Mobile responsive adjustments
 @media (width <= 640px) {
   .backdrop {
-    padding: var(--dialog-spacing-backdrop-paddingMobile);
+    padding: var(--dialog-spacing-backdrop-padding-mobile);
   }
 
   .dialog {
@@ -320,20 +320,20 @@
   }
 
   .header {
-    padding: var(--dialog-spacing-header-paddingMobile);
+    padding: var(--dialog-spacing-header-padding-mobile);
   }
 
   .body {
-    padding: var(--dialog-spacing-body-paddingYMobile)
-      var(--dialog-spacing-body-paddingXMobile);
+    padding: var(--dialog-spacing-body-padding-y-mobile)
+      var(--dialog-spacing-body-padding-x-mobile);
   }
 
   .footer {
     flex-direction: column-reverse;
-    gap: var(--dialog-spacing-footer-gapMobile);
-    padding: var(--dialog-spacing-footer-paddingYMobile)
-      var(--dialog-spacing-footer-paddingXMobile)
-      var(--dialog-spacing-footer-paddingBottomMobile);
+    gap: var(--dialog-spacing-footer-gap-mobile);
+    padding: var(--dialog-spacing-footer-padding-y-mobile)
+      var(--dialog-spacing-footer-padding-x-mobile)
+      var(--dialog-spacing-footer-padding-bottom-mobile);
 
     > * {
       width: 100%;

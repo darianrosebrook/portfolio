@@ -7,7 +7,7 @@
   z-index: 1000;
   display: flex;
   flex-direction: column-reverse;
-  gap: var(--toast-spacing-stackGap);
+  gap: var(--toast-spacing-stack-gap);
   inset-block-end: 1rem;
   inset-inline-end: 1rem;
 }

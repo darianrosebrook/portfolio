@@ -34,7 +34,7 @@
 .content {
   padding: var(--details-size-padding-default);
   color: var(--details-color-foreground-secondary);
-  line-height: var(--details-typography-lineHeight-body);
+  line-height: var(--details-typography-line-height-body);
 
   // Animation for opening/closing
   animation: details-content-show var(--details-motion-duration-fast)
@@ -109,8 +109,8 @@
   gap: var(--details-spacing-gap-default);
   align-items: center;
   color: var(--details-color-foreground-primary);
-  font-weight: var(--details-typography-fontWeight-medium);
-  line-height: var(--details-typography-lineHeight-tight);
+  font-weight: var(--details-typography-font-weight-medium);
+  line-height: var(--details-typography-line-height-tight);
 }
 
 .summaryText {

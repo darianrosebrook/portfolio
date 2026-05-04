@@ -9,7 +9,7 @@
   background: var(--calendar-color-background-default);
   border-radius: var(--calendar-size-radius-default);
   box-shadow: var(--calendar-elevation-default)
-    var(--calendar-color-background-imageOverlay);
+    var(--calendar-color-background-image-overlay);
   transition:
     box-shadow var(--calendar-motion-duration) var(--calendar-motion-easing),
     transform var(--calendar-motion-duration) var(--calendar-motion-easing);
@@ -20,7 +20,7 @@
 
   &:hover {
     box-shadow: var(--calendar-elevation-hover)
-      var(--calendar-color-background-imageOverlay);
+      var(--calendar-color-background-image-overlay);
     transform: translateY(-2px);
   }
 

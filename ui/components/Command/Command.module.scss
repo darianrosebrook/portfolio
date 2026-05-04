@@ -19,7 +19,7 @@
 .overlay {
   position: fixed;
   inset: 0;
-  z-index: var(--command-zIndex-overlay);
+  z-index: var(--command-z-index-overlay);
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -59,7 +59,7 @@
   align-items: center;
   padding: var(--command-spacing-input-padding);
   border-block-end: var(--command-border-width) solid
-    var(--command-color-borderLight);
+    var(--command-color-border-light);
 
   .searchIcon {
     position: absolute;
@@ -190,7 +190,7 @@
 .separator {
   height: var(--command-border-width);
   margin: var(--command-spacing-separator-margin) 0;
-  background-color: var(--command-color-borderLight);
+  background-color: var(--command-color-border-light);
 }
 
 // Responsive adjustments

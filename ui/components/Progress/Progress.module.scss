@@ -83,7 +83,7 @@
 
       .circleBackground,
       .circleForeground {
-        stroke-width: var(--progress-size-circular-sm-strokeWidth);
+        stroke-width: var(--progress-size-circular-sm-stroke-width);
       }
     }
 
@@ -95,7 +95,7 @@
 
       .circleBackground,
       .circleForeground {
-        stroke-width: var(--progress-size-circular-md-strokeWidth);
+        stroke-width: var(--progress-size-circular-md-stroke-width);
       }
     }
 
@@ -107,7 +107,7 @@
 
       .circleBackground,
       .circleForeground {
-        stroke-width: var(--progress-size-circular-lg-strokeWidth);
+        stroke-width: var(--progress-size-circular-lg-stroke-width);
       }
     }
 
@@ -156,7 +156,7 @@
 .value {
   flex-shrink: 0;
   color: var(--progress-color-text-default);
-  font-weight: var(--progress-typography-value-fontWeight);
+  font-weight: var(--progress-typography-value-font-weight);
   font-size: var(--progress-typography-value-font-size);
   white-space: nowrap;
 }

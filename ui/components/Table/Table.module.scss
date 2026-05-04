@@ -25,7 +25,7 @@
 
     .caption {
       color: var(--table-color-text-muted);
-      font-size: var(--table-text-sizeCaption);
+      font-size: var(--table-text-size-caption);
       text-align: start;
       margin-block-start: var(--table-spacing-caption);
     }
@@ -60,7 +60,7 @@
 
     .footer {
       background-color: var(--table-color-background-footer);
-      font-weight: var(--table-text-weightFooter);
+      font-weight: var(--table-text-weight-footer);
       border-block-start: var(--table-border-width) solid
         var(--table-color-border);
 
@@ -71,10 +71,10 @@
 
     .head {
       vertical-align: middle;
-      height: var(--table-size-cellHeight);
-      padding: var(--table-spacing-cellY) var(--table-spacing-cellX);
-      color: var(--table-color-textHead);
-      font-weight: var(--table-text-weightHead);
+      height: var(--table-size-cell-height);
+      padding: var(--table-spacing-cell-y) var(--table-spacing-cell-x);
+      color: var(--table-color-text-head);
+      font-weight: var(--table-text-weight-head);
       text-align: start;
       white-space: nowrap;
 
@@ -97,7 +97,7 @@
 
       .headContent {
         display: flex;
-        gap: var(--table-spacing-sortGap);
+        gap: var(--table-spacing-sort-gap);
         justify-content: space-between;
         align-items: center;
 
@@ -105,20 +105,20 @@
           flex-shrink: 0;
           opacity: 0.7;
           color: var(--table-color-text-muted);
-          font-size: var(--table-text-sizeSort);
+          font-size: var(--table-text-size-sort);
         }
       }
 
       &[data-sort-direction='asc'] .sortIcon,
       &[data-sort-direction='desc'] .sortIcon {
         opacity: 1;
-        color: var(--table-color-textHead);
+        color: var(--table-color-text-head);
       }
     }
 
     .cell {
       vertical-align: middle;
-      padding: var(--table-spacing-cellY) var(--table-spacing-cellX);
+      padding: var(--table-spacing-cell-y) var(--table-spacing-cell-x);
       white-space: nowrap;
 
       &.truncate {
@@ -132,13 +132,13 @@
     // Checkbox column adjustments
     .head:has([role='checkbox']),
     .cell:has([role='checkbox']) {
-      width: var(--table-size-checkboxColumn);
+      width: var(--table-size-checkbox-column);
       padding-inline-end: 0;
     }
 
     .head [role='checkbox'],
     .cell [role='checkbox'] {
-      transform: translateY(var(--table-spacing-checkboxOffset));
+      transform: translateY(var(--table-spacing-checkbox-offset));
     }
   }
 }
@@ -156,7 +156,7 @@
 
       .caption {
         color: var(--table-color-text-muted);
-        font-size: var(--table-text-sizeCaption);
+        font-size: var(--table-text-size-caption);
         text-align: start;
         margin-block-start: var(--table-spacing-caption);
       }
@@ -191,7 +191,7 @@
 
       .footer {
         background-color: var(--table-color-background-footer);
-        font-weight: var(--table-text-weightFooter);
+        font-weight: var(--table-text-weight-footer);
         border-block-start: var(--table-border-width) solid
           var(--table-color-border);
 
@@ -202,10 +202,10 @@
 
       .head {
         vertical-align: middle;
-        height: var(--table-size-cellHeight);
-        padding: var(--table-spacing-cellY) var(--table-spacing-cellX);
-        color: var(--table-color-textHead);
-        font-weight: var(--table-text-weightHead);
+        height: var(--table-size-cell-height);
+        padding: var(--table-spacing-cell-y) var(--table-spacing-cell-x);
+        color: var(--table-color-text-head);
+        font-weight: var(--table-text-weight-head);
         text-align: start;
         white-space: nowrap;
 
@@ -228,7 +228,7 @@
 
         .headContent {
           display: flex;
-          gap: var(--table-spacing-sortGap);
+          gap: var(--table-spacing-sort-gap);
           justify-content: space-between;
           align-items: center;
 
@@ -236,20 +236,20 @@
             flex-shrink: 0;
             opacity: 0.7;
             color: var(--table-color-text-muted);
-            font-size: var(--table-text-sizeSort);
+            font-size: var(--table-text-size-sort);
           }
         }
 
         &[data-sort-direction='asc'] .sortIcon,
         &[data-sort-direction='desc'] .sortIcon {
           opacity: 1;
-          color: var(--table-color-textHead);
+          color: var(--table-color-text-head);
         }
       }
 
       .cell {
         vertical-align: middle;
-        padding: var(--table-spacing-cellY) var(--table-spacing-cellX);
+        padding: var(--table-spacing-cell-y) var(--table-spacing-cell-x);
         white-space: nowrap;
 
         &.truncate {
@@ -263,13 +263,13 @@
       // Checkbox column adjustments
       .head:has([role='checkbox']),
       .cell:has([role='checkbox']) {
-        width: var(--table-size-checkboxColumn);
+        width: var(--table-size-checkbox-column);
         padding-inline-end: 0;
       }
 
       .head [role='checkbox'],
       .cell [role='checkbox'] {
-        transform: translateY(var(--table-spacing-checkboxOffset));
+        transform: translateY(var(--table-spacing-checkbox-offset));
       }
     }
   }
@@ -344,14 +344,14 @@
           .head,
           .data {
             display: block;
-            padding: var(--table-spacing-cellY) var(--table-spacing-cellX);
+            padding: var(--table-spacing-cell-y) var(--table-spacing-cell-x);
             border: none;
 
             &::before {
               display: inline-block;
               min-width: 6rem;
-              color: var(--table-color-textHead);
-              font-weight: var(--table-text-weightHead);
+              color: var(--table-color-text-head);
+              font-weight: var(--table-text-weight-head);
               content: attr(data-label) ': ';
             }
           }
@@ -364,14 +364,14 @@
       .table {
         .head {
           // Show all columns with enhanced spacing
-          padding: var(--table-spacing-cellY)
-            calc(var(--table-spacing-cellX) * 1.5);
+          padding: var(--table-spacing-cell-y)
+            calc(var(--table-spacing-cell-x) * 1.5);
         }
 
         .data {
           // Enhanced data cell spacing
-          padding: var(--table-spacing-cellY)
-            calc(var(--table-spacing-cellX) * 1.5);
+          padding: var(--table-spacing-cell-y)
+            calc(var(--table-spacing-cell-x) * 1.5);
         }
 
         // Add hover effects for large screens
