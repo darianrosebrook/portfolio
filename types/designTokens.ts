@@ -572,6 +572,9 @@ export type TokenPath =
   | 'motion.stagger.list'
   | 'motion.stagger.card'
   | 'motion.stagger.section'
+  | 'motion.translate.none'
+  | 'motion.translate.sm'
+  | 'motion.translate.md'
   | 'motion.interaction.press.duration'
   | 'motion.interaction.press.easing'
   | 'motion.interaction.press.scale'
@@ -599,6 +602,10 @@ export type TokenPath =
   | 'motion.transition.scale.shrink'
   | 'motion.icon.scale.enter'
   | 'motion.icon.scale.exit'
+  | 'motion.opacity.overlay.light'
+  | 'motion.opacity.overlay.heavy'
+  | 'motion.opacity.content.default'
+  | 'motion.opacity.content.fade'
   | 'density.scale.compact'
   | 'density.scale.comfortable'
   | 'density.scale.spacious'
@@ -606,6 +613,7 @@ export type TokenPath =
   | 'layer.component'
   | 'layer.above'
   | 'layer.dropdown'
+  | 'layer.aboveDropdown'
   | 'layer.overlay'
   | 'layer.modal'
   | 'layer.toast'
@@ -782,6 +790,12 @@ export type TokenPath =
   | 'control.size.lg.height'
   | 'control.size.lg.paddingX'
   | 'control.size.lg.paddingY'
+  | 'control.toggle.width.sm'
+  | 'control.toggle.width.md'
+  | 'control.toggle.width.lg'
+  | 'control.toggle.thumb.sm'
+  | 'control.toggle.thumb.md'
+  | 'control.toggle.thumb.lg'
   | 'link.text'
   | 'link.decorationColor'
   | 'link.decorationThickness'
@@ -1408,6 +1422,9 @@ export type MotionTokenPath =
   | 'motion.stagger.list'
   | 'motion.stagger.card'
   | 'motion.stagger.section'
+  | 'motion.translate.none'
+  | 'motion.translate.sm'
+  | 'motion.translate.md'
   | 'motion.interaction.press.duration'
   | 'motion.interaction.press.easing'
   | 'motion.interaction.press.scale'
@@ -1434,7 +1451,11 @@ export type MotionTokenPath =
   | 'motion.transition.scale.zoom'
   | 'motion.transition.scale.shrink'
   | 'motion.icon.scale.enter'
-  | 'motion.icon.scale.exit';
+  | 'motion.icon.scale.exit'
+  | 'motion.opacity.overlay.light'
+  | 'motion.opacity.overlay.heavy'
+  | 'motion.opacity.content.default'
+  | 'motion.opacity.content.fade';
 
 /**
  * density token paths
@@ -1452,6 +1473,7 @@ export type LayerTokenPath =
   | 'layer.component'
   | 'layer.above'
   | 'layer.dropdown'
+  | 'layer.aboveDropdown'
   | 'layer.overlay'
   | 'layer.modal'
   | 'layer.toast'
@@ -1667,7 +1689,13 @@ export type ControlTokenPath =
   | 'control.size.md.paddingY'
   | 'control.size.lg.height'
   | 'control.size.lg.paddingX'
-  | 'control.size.lg.paddingY';
+  | 'control.size.lg.paddingY'
+  | 'control.toggle.width.sm'
+  | 'control.toggle.width.md'
+  | 'control.toggle.width.lg'
+  | 'control.toggle.thumb.sm'
+  | 'control.toggle.thumb.md'
+  | 'control.toggle.thumb.lg';
 
 /**
  * link token paths

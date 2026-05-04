@@ -23,15 +23,15 @@
   --toggleSwitch-color-border-disabled: var(--semantic-color-border-disabled);
 
   /* === Size Tokens === */
-  --toggleSwitch-size-width-small: calc({semantic.control.size.sm.height} + {semantic.control.size.sm.paddingX} * 2);
-  --toggleSwitch-size-width-medium: calc({semantic.control.size.md.height} + {semantic.control.size.md.paddingX} * 2);
-  --toggleSwitch-size-width-large: calc({semantic.control.size.lg.height} + {semantic.control.size.lg.paddingX} * 2);
+  --toggleSwitch-size-width-small: var(--semantic-control-toggle-width-sm);
+  --toggleSwitch-size-width-medium: var(--semantic-control-toggle-width-md);
+  --toggleSwitch-size-width-large: var(--semantic-control-toggle-width-lg);
   --toggleSwitch-size-height-small: var(--semantic-control-size-sm-height);
   --toggleSwitch-size-height-medium: var(--semantic-control-size-md-height);
   --toggleSwitch-size-height-large: var(--semantic-control-size-lg-height);
-  --toggleSwitch-size-thumb-small: calc({semantic.control.size.sm.height} - {semantic.control.size.sm.paddingY} * 2);
-  --toggleSwitch-size-thumb-medium: calc({semantic.control.size.md.height} - {semantic.control.size.md.paddingY} * 2);
-  --toggleSwitch-size-thumb-large: calc({semantic.control.size.lg.height} - {semantic.control.size.lg.paddingY} * 2);
+  --toggleSwitch-size-thumb-small: var(--semantic-control-toggle-thumb-sm);
+  --toggleSwitch-size-thumb-medium: var(--semantic-control-toggle-thumb-md);
+  --toggleSwitch-size-thumb-large: var(--semantic-control-toggle-thumb-lg);
   --toggleSwitch-size-padding-small: var(--core-spacing-size-01);
   --toggleSwitch-size-padding-medium: var(--core-spacing-size-02);
   --toggleSwitch-size-padding-large: var(--core-spacing-size-03);

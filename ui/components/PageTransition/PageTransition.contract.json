@@ -30,40 +30,188 @@
     "apgPattern": null
   },
   "tokens": {
-    "root": [
-      "pageTransition.duration.fast",
-      "pageTransition.duration.normal",
-      "pageTransition.duration.slow",
-      "pageTransition.duration.default",
-      "pageTransition.easing.standard",
-      "pageTransition.easing.decelerate",
-      "pageTransition.easing.accelerate",
-      "pageTransition.easing.default",
-      "pageTransition.spacing.padding.default",
-      "pageTransition.spacing.padding.small",
-      "pageTransition.spacing.padding.large",
-      "pageTransition.spacing.margin.default",
-      "pageTransition.spacing.margin.small",
-      "pageTransition.spacing.margin.large",
-      "pageTransition.color.background.default",
-      "pageTransition.color.background.overlay",
-      "pageTransition.color.foreground.default",
-      "pageTransition.color.foreground.secondary",
-      "pageTransition.opacity.overlay.default",
-      "pageTransition.opacity.overlay.light",
-      "pageTransition.opacity.overlay.heavy",
-      "pageTransition.opacity.content.default",
-      "pageTransition.opacity.content.fade",
-      "pageTransition.transform.scale.default",
-      "pageTransition.transform.scale.zoom",
-      "pageTransition.transform.scale.shrink",
-      "pageTransition.transform.translate.default",
-      "pageTransition.transform.translate.slide",
-      "pageTransition.transform.translate.bounce",
-      "pageTransition.zIndex.overlay",
-      "pageTransition.zIndex.content",
-      "pageTransition.zIndex.max"
-    ]
+    "root": {
+      "pageTransition.duration.fast": {
+        "resolvesTo": "core.motion.duration.short",
+        "fallback": "150ms",
+        "property": "transition-duration",
+        "layer": "core"
+      },
+      "pageTransition.duration.normal": {
+        "resolvesTo": "core.motion.duration.medium",
+        "fallback": "250ms",
+        "property": "transition-duration",
+        "layer": "core"
+      },
+      "pageTransition.duration.slow": {
+        "resolvesTo": "core.motion.duration.long",
+        "fallback": "400ms",
+        "property": "transition-duration",
+        "layer": "core"
+      },
+      "pageTransition.duration.default": {
+        "resolvesTo": "core.motion.duration.medium",
+        "fallback": "250ms",
+        "property": "transition-duration",
+        "layer": "core"
+      },
+      "pageTransition.easing.standard": {
+        "resolvesTo": "core.motion.easing.standard",
+        "fallback": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "property": "transition-timing-function",
+        "layer": "core"
+      },
+      "pageTransition.easing.decelerate": {
+        "resolvesTo": "core.motion.easing.emphasized.out",
+        "fallback": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "property": "transition-timing-function",
+        "layer": "core"
+      },
+      "pageTransition.easing.accelerate": {
+        "resolvesTo": "core.motion.easing.emphasized.in",
+        "fallback": "cubic-bezier(0.2, 0, 0, 1)",
+        "property": "transition-timing-function",
+        "layer": "core"
+      },
+      "pageTransition.easing.default": {
+        "resolvesTo": "core.motion.easing.standard",
+        "fallback": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "property": "transition-timing-function",
+        "layer": "core"
+      },
+      "pageTransition.spacing.padding.default": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "property": "padding",
+        "layer": "core"
+      },
+      "pageTransition.spacing.padding.small": {
+        "resolvesTo": "core.spacing.size.03",
+        "fallback": "4px",
+        "property": "padding",
+        "layer": "core"
+      },
+      "pageTransition.spacing.padding.large": {
+        "resolvesTo": "core.spacing.size.05",
+        "fallback": "12px",
+        "property": "padding",
+        "layer": "core"
+      },
+      "pageTransition.spacing.margin.default": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "layer": "core"
+      },
+      "pageTransition.spacing.margin.small": {
+        "resolvesTo": "core.spacing.size.03",
+        "fallback": "4px",
+        "layer": "core"
+      },
+      "pageTransition.spacing.margin.large": {
+        "resolvesTo": "core.spacing.size.05",
+        "fallback": "12px",
+        "layer": "core"
+      },
+      "pageTransition.color.background.default": {
+        "resolvesTo": "semantic.color.background.primary",
+        "fallback": "#ffffff",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "pageTransition.color.background.overlay": {
+        "resolvesTo": "semantic.color.background.image.overlay",
+        "fallback": "rgba(0, 0, 0, 0.5)",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "pageTransition.color.foreground.default": {
+        "resolvesTo": "semantic.color.foreground.primary",
+        "fallback": "#141414",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "pageTransition.color.foreground.secondary": {
+        "resolvesTo": "semantic.color.foreground.secondary",
+        "fallback": "#555555",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "pageTransition.opacity.overlay.default": {
+        "resolvesTo": "core.opacity.800",
+        "fallback": "0.8",
+        "property": "opacity",
+        "layer": "core"
+      },
+      "pageTransition.opacity.overlay.light": {
+        "resolvesTo": "semantic.motion.opacity.overlay.light",
+        "fallback": "0.6",
+        "property": "opacity",
+        "layer": "semantic"
+      },
+      "pageTransition.opacity.overlay.heavy": {
+        "resolvesTo": "semantic.motion.opacity.overlay.heavy",
+        "fallback": "0.9",
+        "property": "opacity",
+        "layer": "semantic"
+      },
+      "pageTransition.opacity.content.default": {
+        "resolvesTo": "semantic.motion.opacity.content.default",
+        "fallback": "1",
+        "property": "opacity",
+        "layer": "semantic"
+      },
+      "pageTransition.opacity.content.fade": {
+        "resolvesTo": "semantic.motion.opacity.content.fade",
+        "fallback": "0.7",
+        "property": "opacity",
+        "layer": "semantic"
+      },
+      "pageTransition.transform.scale.default": {
+        "resolvesTo": "semantic.motion.transition.scale.identity",
+        "fallback": "1",
+        "layer": "semantic"
+      },
+      "pageTransition.transform.scale.zoom": {
+        "resolvesTo": "semantic.motion.transition.scale.zoom",
+        "fallback": "1.05",
+        "layer": "semantic"
+      },
+      "pageTransition.transform.scale.shrink": {
+        "resolvesTo": "semantic.motion.transition.scale.shrink",
+        "fallback": "0.95",
+        "layer": "semantic"
+      },
+      "pageTransition.transform.translate.default": {
+        "resolvesTo": "core.motion.translate.none",
+        "fallback": "0px",
+        "layer": "core"
+      },
+      "pageTransition.transform.translate.slide": {
+        "resolvesTo": "core.motion.translate.md",
+        "fallback": "20px",
+        "layer": "core"
+      },
+      "pageTransition.transform.translate.bounce": {
+        "resolvesTo": "core.motion.translate.sm",
+        "fallback": "10px",
+        "layer": "core"
+      },
+      "pageTransition.zIndex.overlay": {
+        "resolvesTo": "core.layer.dropdown",
+        "fallback": "1000",
+        "layer": "core"
+      },
+      "pageTransition.zIndex.content": {
+        "resolvesTo": "core.layer.above.dropdown",
+        "fallback": "1001",
+        "layer": "core"
+      },
+      "pageTransition.zIndex.max": {
+        "resolvesTo": "core.layer.max",
+        "fallback": "9999",
+        "layer": "core"
+      }
+    }
   },
   "props": {
     "styled": {

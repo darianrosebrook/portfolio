@@ -41,26 +41,101 @@
     "apgPattern": "image"
   },
   "tokens": {
-    "root": [
-      "image.color.background.default",
-      "image.color.background.error",
-      "image.color.foreground.primary",
-      "image.color.foreground.secondary",
-      "image.color.foreground.error",
-      "image.size.xs",
-      "image.size.sm",
-      "image.size.md",
-      "image.size.lg",
-      "image.size.xl",
-      "image.size.icon",
-      "image.radius.none.value",
-      "image.radius.none.unit",
-      "image.radius.sm",
-      "image.radius.md",
-      "image.radius.lg",
-      "image.radius.full",
-      "image.typography.error.fontSize"
-    ]
+    "root": {
+      "image.color.background.default": {
+        "resolvesTo": "semantic.color.background.secondary",
+        "fallback": "#efefef",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "image.color.background.error": {
+        "resolvesTo": "semantic.color.background.danger.subtle",
+        "fallback": "#fceaea",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "image.color.foreground.primary": {
+        "resolvesTo": "semantic.color.foreground.primary",
+        "fallback": "#141414",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "image.color.foreground.secondary": {
+        "resolvesTo": "semantic.color.foreground.secondary",
+        "fallback": "#555555",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "image.color.foreground.error": {
+        "resolvesTo": "semantic.color.foreground.danger",
+        "fallback": "#d9292b",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "image.size.xs": {
+        "resolvesTo": "core.spacing.size.08",
+        "fallback": "32px",
+        "layer": "core"
+      },
+      "image.size.sm": {
+        "resolvesTo": "core.spacing.size.10",
+        "fallback": "64px",
+        "layer": "core"
+      },
+      "image.size.md": {
+        "resolvesTo": "core.spacing.size.09",
+        "fallback": "48px",
+        "layer": "core"
+      },
+      "image.size.lg": {
+        "resolvesTo": "core.spacing.size.09",
+        "fallback": "48px",
+        "layer": "core"
+      },
+      "image.size.xl": {
+        "resolvesTo": "core.spacing.size.10",
+        "fallback": "64px",
+        "layer": "core"
+      },
+      "image.size.icon": {
+        "resolvesTo": "core.spacing.size.08",
+        "fallback": "32px",
+        "layer": "core"
+      },
+      "image.radius.none": {
+        "literal": "0px",
+        "property": "border-radius"
+      },
+      "image.radius.sm": {
+        "resolvesTo": "core.shape.radius.small",
+        "fallback": "4px",
+        "property": "border-radius",
+        "layer": "core"
+      },
+      "image.radius.md": {
+        "resolvesTo": "core.shape.radius.medium",
+        "fallback": "8px",
+        "property": "border-radius",
+        "layer": "core"
+      },
+      "image.radius.lg": {
+        "resolvesTo": "core.shape.radius.large",
+        "fallback": "16px",
+        "property": "border-radius",
+        "layer": "core"
+      },
+      "image.radius.full": {
+        "resolvesTo": "core.shape.radius.full",
+        "fallback": "9999px",
+        "property": "border-radius",
+        "layer": "core"
+      },
+      "image.typography.error.fontSize": {
+        "resolvesTo": "semantic.typography.body.04",
+        "fallback": "12px",
+        "layer": "semantic"
+      }
+    }
   },
   "props": {
     "styled": {

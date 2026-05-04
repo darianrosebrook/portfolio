@@ -100,46 +100,211 @@
     "apgPattern": "dialog-modal"
   },
   "tokens": {
-    "root": [
-      "sheet.color.overlay",
-      "sheet.color.background",
-      "sheet.color.backgroundHover",
-      "sheet.color.border",
-      "sheet.color.borderLight",
-      "sheet.color.text",
-      "sheet.color.textTitle",
-      "sheet.color.textDescription",
-      "sheet.color.textMuted",
-      "sheet.border.width",
-      "sheet.border.radius",
-      "sheet.border.radiusClose",
-      "sheet.size.width.value",
-      "sheet.size.width.unit",
-      "sheet.size.height.value",
-      "sheet.size.height.unit",
-      "sheet.size.close",
-      "sheet.spacing.padding",
-      "sheet.spacing.gap",
-      "sheet.spacing.section",
-      "sheet.spacing.headerGap",
-      "sheet.spacing.footerGap",
-      "sheet.spacing.closeOffset",
-      "sheet.text.size",
-      "sheet.text.lineHeight",
-      "sheet.text.sizeTitle",
-      "sheet.text.lineHeightTitle",
-      "sheet.text.weightTitle",
-      "sheet.text.sizeDescription",
-      "sheet.text.lineHeightDescription",
-      "sheet.motion.duration",
-      "sheet.motion.easing",
-      "sheet.zIndex.overlay",
-      "sheet.zIndex.content",
-      "sheet.shadow",
-      "sheet.focus.width",
-      "sheet.focus.color",
-      "sheet.focus.offset"
-    ]
+    "root": {
+      "sheet.color.overlay": {
+        "resolvesTo": "semantic.overlay.scrim.sheet",
+        "fallback": "rgba(0,0,0,0.50)",
+        "layer": "semantic"
+      },
+      "sheet.color.background": {
+        "resolvesTo": "semantic.color.background.primary",
+        "fallback": "#ffffff",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "sheet.color.backgroundHover": {
+        "resolvesTo": "semantic.interaction.background.hover",
+        "fallback": "#efefef",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "sheet.color.border": {
+        "resolvesTo": "semantic.color.border.light",
+        "fallback": "#fceaea",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "sheet.color.borderLight": {
+        "resolvesTo": "semantic.color.border.subtle",
+        "fallback": "#cecece",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "sheet.color.text": {
+        "resolvesTo": "semantic.color.foreground.primary",
+        "fallback": "#141414",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "sheet.color.textTitle": {
+        "resolvesTo": "semantic.color.foreground.primary",
+        "fallback": "#141414",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "sheet.color.textDescription": {
+        "resolvesTo": "semantic.color.foreground.secondary",
+        "fallback": "#555555",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "sheet.color.textMuted": {
+        "resolvesTo": "semantic.color.foreground.tertiary",
+        "fallback": "#717171",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "sheet.border.width": {
+        "resolvesTo": "core.shape.border.width.hairline",
+        "fallback": "1px",
+        "property": "border-width",
+        "layer": "core"
+      },
+      "sheet.border.radius": {
+        "resolvesTo": "core.shape.radius.medium",
+        "fallback": "8px",
+        "property": "border-radius",
+        "layer": "core"
+      },
+      "sheet.border.radiusClose": {
+        "resolvesTo": "core.shape.radius.small",
+        "fallback": "4px",
+        "property": "border-radius",
+        "layer": "core"
+      },
+      "sheet.size.width": {
+        "literal": "400px",
+        "property": "min-width"
+      },
+      "sheet.size.height": {
+        "literal": "300px",
+        "property": "min-height"
+      },
+      "sheet.size.close": {
+        "resolvesTo": "core.spacing.size.06",
+        "fallback": "16px",
+        "layer": "core"
+      },
+      "sheet.spacing.padding": {
+        "resolvesTo": "core.spacing.size.06",
+        "fallback": "16px",
+        "property": "padding",
+        "layer": "core"
+      },
+      "sheet.spacing.gap": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "property": "gap",
+        "layer": "core"
+      },
+      "sheet.spacing.section": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "layer": "core"
+      },
+      "sheet.spacing.headerGap": {
+        "resolvesTo": "core.spacing.size.02",
+        "fallback": "2px",
+        "property": "gap",
+        "layer": "core"
+      },
+      "sheet.spacing.footerGap": {
+        "resolvesTo": "core.spacing.size.03",
+        "fallback": "4px",
+        "property": "gap",
+        "layer": "core"
+      },
+      "sheet.spacing.closeOffset": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "layer": "core"
+      },
+      "sheet.text.size": {
+        "resolvesTo": "semantic.typography.body.02",
+        "fallback": "16px",
+        "property": "font-size",
+        "layer": "semantic"
+      },
+      "sheet.text.lineHeight": {
+        "resolvesTo": "semantic.typography.line.height.normal",
+        "fallback": "1.5",
+        "property": "line-height",
+        "layer": "semantic"
+      },
+      "sheet.text.sizeTitle": {
+        "resolvesTo": "semantic.typography.heading.06",
+        "fallback": "14px",
+        "property": "font-size",
+        "layer": "semantic"
+      },
+      "sheet.text.lineHeightTitle": {
+        "resolvesTo": "semantic.typography.line.height.tight",
+        "fallback": "1.2",
+        "property": "line-height",
+        "layer": "semantic"
+      },
+      "sheet.text.weightTitle": {
+        "resolvesTo": "semantic.typography.font.weight.medium",
+        "fallback": "500",
+        "property": "font-weight",
+        "layer": "semantic"
+      },
+      "sheet.text.sizeDescription": {
+        "resolvesTo": "semantic.typography.body.03",
+        "fallback": "14px",
+        "property": "font-size",
+        "layer": "semantic"
+      },
+      "sheet.text.lineHeightDescription": {
+        "resolvesTo": "semantic.typography.line.height.loose",
+        "fallback": "1.8",
+        "property": "line-height",
+        "layer": "semantic"
+      },
+      "sheet.motion.duration": {
+        "resolvesTo": "core.motion.duration.medium",
+        "fallback": "250ms",
+        "property": "transition-duration",
+        "layer": "core"
+      },
+      "sheet.motion.easing": {
+        "resolvesTo": "core.motion.easing.standard",
+        "fallback": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "property": "transition-timing-function",
+        "layer": "core"
+      },
+      "sheet.zIndex.overlay": {
+        "resolvesTo": "core.layer.component",
+        "fallback": "50",
+        "layer": "core"
+      },
+      "sheet.zIndex.content": {
+        "resolvesTo": "core.layer.above",
+        "fallback": "51",
+        "layer": "core"
+      },
+      "sheet.shadow": {
+        "resolvesTo": "semantic.elevation.surface.floating",
+        "fallback": "[object Object]",
+        "property": "box-shadow",
+        "layer": "semantic"
+      },
+      "sheet.focus.width": {
+        "resolvesTo": "core.shape.border.width.thick",
+        "fallback": "2px",
+        "layer": "core"
+      },
+      "sheet.focus.color": {
+        "resolvesTo": "semantic.color.border.accent",
+        "fallback": "#d9292b",
+        "layer": "semantic"
+      },
+      "sheet.focus.offset": {
+        "resolvesTo": "core.spacing.size.01",
+        "fallback": "1px",
+        "layer": "core"
+      }
+    }
   },
   "props": {
     "styled": {

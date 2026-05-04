@@ -535,6 +535,13 @@ function flattenTokenPaths(node, prefix = []) {
       paths.push([...prefix, key].join('.'));
       continue;
     }
+    // Raw DTCG dimension objects {value: N, unit: "px"} — treat as a single leaf token,
+    // not two sub-paths (.value and .unit), because the bridge SCSS emits one combined var.
+    if (value && typeof value === 'object' && 'value' in value && 'unit' in value &&
+        typeof value.value === 'number' && typeof value.unit === 'string') {
+      paths.push([...prefix, key].join('.'));
+      continue;
+    }
     if (value && typeof value === 'object') {
       const childPaths = flattenTokenPaths(value, [...prefix, key]);
       if (childPaths.length === 0 && typeof value !== 'string') continue;

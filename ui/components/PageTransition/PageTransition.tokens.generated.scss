@@ -30,21 +30,21 @@
 
   /* === Opacity Tokens === */
   --pageTransition-opacity-overlay-default: var(--core-opacity-800);
-  --pageTransition-opacity-overlay-light: 0.6;
-  --pageTransition-opacity-overlay-heavy: 0.9;
-  --pageTransition-opacity-content-default: 1;
-  --pageTransition-opacity-content-fade: 0.7;
+  --pageTransition-opacity-overlay-light: var(--semantic-motion-opacity-overlay-light);
+  --pageTransition-opacity-overlay-heavy: var(--semantic-motion-opacity-overlay-heavy);
+  --pageTransition-opacity-content-default: var(--semantic-motion-opacity-content-default);
+  --pageTransition-opacity-content-fade: var(--semantic-motion-opacity-content-fade);
 
   /* === Transform Tokens === */
   --pageTransition-transform-scale-default: var(--semantic-motion-transition-scale-identity);
   --pageTransition-transform-scale-zoom: var(--semantic-motion-transition-scale-zoom);
   --pageTransition-transform-scale-shrink: var(--semantic-motion-transition-scale-shrink);
-  --pageTransition-transform-translate-default: 0;
-  --pageTransition-transform-translate-slide: 20;
-  --pageTransition-transform-translate-bounce: 10;
+  --pageTransition-transform-translate-default: var(--core-motion-translate-none);
+  --pageTransition-transform-translate-slide: var(--core-motion-translate-md);
+  --pageTransition-transform-translate-bounce: var(--core-motion-translate-sm);
 
   /* === ZIndex Tokens === */
   --pageTransition-z-index-overlay: var(--core-layer-dropdown);
-  --pageTransition-z-index-content: 1001;
+  --pageTransition-z-index-content: var(--core-layer-above-dropdown);
   --pageTransition-z-index-max: var(--core-layer-max);
 }

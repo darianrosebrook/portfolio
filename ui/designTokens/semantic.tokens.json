@@ -1862,6 +1862,32 @@
           "$description": "Icon final scale when exiting (shrinks from full size)"
         }
       }
+    },
+    "opacity": {
+      "overlay": {
+        "light": {
+          "$type": "number",
+          "$value": 0.6,
+          "$description": "Light page-transition overlay opacity"
+        },
+        "heavy": {
+          "$type": "number",
+          "$value": 0.9,
+          "$description": "Heavy page-transition overlay opacity"
+        }
+      },
+      "content": {
+        "default": {
+          "$type": "number",
+          "$value": 1,
+          "$description": "Fully visible content"
+        },
+        "fade": {
+          "$type": "number",
+          "$value": 0.7,
+          "$description": "Faded content during page transition"
+        }
+      }
     }
   },
   "components": {
@@ -2393,6 +2419,18 @@
           "$type": "dimension",
           "$value": "{spacing.size.04}"
         }
+      }
+    },
+    "toggle": {
+      "width": {
+        "sm": { "$type": "string", "$value": "calc(var(--semantic-control-size-sm-height) + var(--semantic-control-size-sm-paddingX) * 2)", "$description": "ToggleSwitch track width sm (= 32px)" },
+        "md": { "$type": "string", "$value": "calc(var(--semantic-control-size-md-height) + var(--semantic-control-size-md-paddingX) * 2)", "$description": "ToggleSwitch track width md (= 48px)" },
+        "lg": { "$type": "string", "$value": "calc(var(--semantic-control-size-lg-height) + var(--semantic-control-size-lg-paddingX) * 2)", "$description": "ToggleSwitch track width lg (= 80px)" }
+      },
+      "thumb": {
+        "sm": { "$type": "string", "$value": "calc(var(--semantic-control-size-sm-height) - var(--semantic-control-size-sm-paddingY) * 2)", "$description": "ToggleSwitch thumb size sm (= 20px)" },
+        "md": { "$type": "string", "$value": "calc(var(--semantic-control-size-md-height) - var(--semantic-control-size-md-paddingY) * 2)", "$description": "ToggleSwitch thumb size md (= 24px)" },
+        "lg": { "$type": "string", "$value": "calc(var(--semantic-control-size-lg-height) - var(--semantic-control-size-lg-paddingY) * 2)", "$description": "ToggleSwitch thumb size lg (= 32px)" }
       }
     }
   },

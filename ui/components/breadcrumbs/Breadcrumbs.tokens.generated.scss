@@ -22,9 +22,9 @@
   --breadcrumbs-elevation-surface-raised: var(--semantic-elevation-surface-raised);
 
   /* === Spacing Tokens === */
-  --breadcrumbs-spacing-gap-default: 0.5rem;
-  --breadcrumbs-spacing-gap-small: 0.25rem;
-  --breadcrumbs-spacing-padding-default: 0.5rem;
-  --breadcrumbs-spacing-padding-small: 0.25rem;
-  --breadcrumbs-spacing-margin-top: 0.25rem;
+  --breadcrumbs-spacing-gap-default: var(--core-spacing-size-04);
+  --breadcrumbs-spacing-gap-small: var(--core-spacing-size-03);
+  --breadcrumbs-spacing-padding-default: var(--core-spacing-size-04);
+  --breadcrumbs-spacing-padding-small: var(--core-spacing-size-03);
+  --breadcrumbs-spacing-margin-top: var(--core-spacing-size-03);
 }

@@ -2418,6 +2418,12 @@
         "$value": "100ms",
         "$description": "Large stagger for sections"
       }
+    },
+    "translate": {
+      "$type": "string",
+      "none": { "$type": "string", "$value": "0px", "$description": "No translation" },
+      "sm":   { "$type": "string", "$value": "10px", "$description": "Small translate offset" },
+      "md":   { "$type": "string", "$value": "20px", "$description": "Medium translate offset" }
     }
   },
   "density": {
@@ -2444,6 +2450,11 @@
     "dropdown": {
       "$type": "number",
       "$value": 1000
+    },
+    "aboveDropdown": {
+      "$type": "number",
+      "$value": 1001,
+      "$description": "One layer above dropdowns, below overlay"
     },
     "overlay": {
       "$type": "number",

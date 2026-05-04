@@ -26,29 +26,101 @@
     "apgPattern": null
   },
   "tokens": {
-    "root": [
-      "breadcrumbs.color.foreground.secondary",
-      "breadcrumbs.color.foreground.link",
-      "breadcrumbs.color.foreground.primary",
-      "breadcrumbs.color.foreground.tertiary",
-      "breadcrumbs.color.background.elevated",
-      "breadcrumbs.color.border.subtle",
-      "breadcrumbs.color.focus",
-      "breadcrumbs.typography.lineHeight.collapse",
-      "breadcrumbs.shape.radius.medium",
-      "breadcrumbs.shape.radius.small",
-      "breadcrumbs.elevation.surface.raised",
-      "breadcrumbs.spacing.gap.default.value",
-      "breadcrumbs.spacing.gap.default.unit",
-      "breadcrumbs.spacing.gap.small.value",
-      "breadcrumbs.spacing.gap.small.unit",
-      "breadcrumbs.spacing.padding.default.value",
-      "breadcrumbs.spacing.padding.default.unit",
-      "breadcrumbs.spacing.padding.small.value",
-      "breadcrumbs.spacing.padding.small.unit",
-      "breadcrumbs.spacing.margin.top.value",
-      "breadcrumbs.spacing.margin.top.unit"
-    ]
+    "root": {
+      "breadcrumbs.color.foreground.secondary": {
+        "resolvesTo": "semantic.color.foreground.secondary",
+        "fallback": "#555555",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "breadcrumbs.color.foreground.link": {
+        "resolvesTo": "semantic.color.foreground.link",
+        "fallback": "#d9292b",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "breadcrumbs.color.foreground.primary": {
+        "resolvesTo": "semantic.color.foreground.primary",
+        "fallback": "#141414",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "breadcrumbs.color.foreground.tertiary": {
+        "resolvesTo": "semantic.color.foreground.tertiary",
+        "fallback": "#717171",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "breadcrumbs.color.background.elevated": {
+        "resolvesTo": "semantic.color.background.elevated",
+        "fallback": "#ffffff",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "breadcrumbs.color.border.subtle": {
+        "resolvesTo": "semantic.color.border.subtle",
+        "fallback": "#cecece",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "breadcrumbs.color.focus": {
+        "resolvesTo": "semantic.color.border.accent",
+        "fallback": "#d9292b",
+        "layer": "semantic"
+      },
+      "breadcrumbs.typography.lineHeight.collapse": {
+        "resolvesTo": "semantic.typography.line.height.collapse",
+        "fallback": "1",
+        "property": "line-height",
+        "layer": "semantic"
+      },
+      "breadcrumbs.shape.radius.medium": {
+        "resolvesTo": "core.shape.radius.medium",
+        "fallback": "8px",
+        "property": "border-radius",
+        "layer": "core"
+      },
+      "breadcrumbs.shape.radius.small": {
+        "resolvesTo": "core.shape.radius.small",
+        "fallback": "4px",
+        "property": "border-radius",
+        "layer": "core"
+      },
+      "breadcrumbs.elevation.surface.raised": {
+        "resolvesTo": "semantic.elevation.surface.raised",
+        "fallback": "[object Object]",
+        "layer": "semantic"
+      },
+      "breadcrumbs.spacing.gap.default": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "property": "gap",
+        "layer": "core"
+      },
+      "breadcrumbs.spacing.gap.small": {
+        "resolvesTo": "core.spacing.size.03",
+        "fallback": "4px",
+        "property": "gap",
+        "layer": "core"
+      },
+      "breadcrumbs.spacing.padding.default": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "property": "padding",
+        "layer": "core"
+      },
+      "breadcrumbs.spacing.padding.small": {
+        "resolvesTo": "core.spacing.size.03",
+        "fallback": "4px",
+        "property": "padding",
+        "layer": "core"
+      },
+      "breadcrumbs.spacing.margin.top": {
+        "resolvesTo": "core.spacing.size.03",
+        "fallback": "4px",
+        "layer": "core"
+      }
+    }
   },
   "ssr": {
     "hydrateOn": "none"

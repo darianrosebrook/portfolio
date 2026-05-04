@@ -29,24 +29,92 @@
     "apgPattern": "tooltip"
   },
   "tokens": {
-    "root": [
-      "tooltip.color.background.default",
-      "tooltip.color.foreground.default",
-      "tooltip.color.border.default",
-      "tooltip.size.padding.y",
-      "tooltip.size.padding.x",
-      "tooltip.size.radius.default",
-      "tooltip.size.maxWidth.value",
-      "tooltip.size.maxWidth.unit",
-      "tooltip.elevation.default",
-      "tooltip.typography.fontSize",
-      "tooltip.typography.fontWeight",
-      "tooltip.typography.lineHeight",
-      "tooltip.motion.duration.enter",
-      "tooltip.motion.duration.exit",
-      "tooltip.motion.easing.enter",
-      "tooltip.motion.easing.exit"
-    ]
+    "root": {
+      "tooltip.color.background.default": {
+        "resolvesTo": "semantic.color.background.inverse",
+        "fallback": "#141414",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "tooltip.color.foreground.default": {
+        "resolvesTo": "semantic.color.foreground.inverse",
+        "fallback": "#fafafa",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "tooltip.color.border.default": {
+        "resolvesTo": "semantic.color.border.subtle",
+        "fallback": "#cecece",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "tooltip.size.padding.y": {
+        "resolvesTo": "core.spacing.size.03",
+        "fallback": "4px",
+        "property": "padding",
+        "layer": "core"
+      },
+      "tooltip.size.padding.x": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "property": "padding",
+        "layer": "core"
+      },
+      "tooltip.size.radius.default": {
+        "resolvesTo": "core.shape.radius.small",
+        "fallback": "4px",
+        "property": "border-radius",
+        "layer": "core"
+      },
+      "tooltip.size.maxWidth": {
+        "literal": "200px"
+      },
+      "tooltip.elevation.default": {
+        "resolvesTo": "semantic.elevation.surface.floating",
+        "fallback": "[object Object]",
+        "layer": "semantic"
+      },
+      "tooltip.typography.fontSize": {
+        "resolvesTo": "semantic.typography.caption.01",
+        "fallback": "14px",
+        "layer": "semantic"
+      },
+      "tooltip.typography.fontWeight": {
+        "resolvesTo": "semantic.typography.font.weight.medium",
+        "fallback": "500",
+        "layer": "semantic"
+      },
+      "tooltip.typography.lineHeight": {
+        "resolvesTo": "semantic.typography.line.height.tight",
+        "fallback": "1.2",
+        "property": "line-height",
+        "layer": "semantic"
+      },
+      "tooltip.motion.duration.enter": {
+        "resolvesTo": "semantic.motion.interaction.enter.duration",
+        "fallback": "250ms",
+        "property": "transition-duration",
+        "layer": "semantic"
+      },
+      "tooltip.motion.duration.exit": {
+        "resolvesTo": "semantic.motion.interaction.exit.duration",
+        "fallback": "167ms",
+        "property": "transition-duration",
+        "layer": "semantic"
+      },
+      "tooltip.motion.easing.enter": {
+        "resolvesTo": "semantic.motion.interaction.enter.easing",
+        "fallback": "cubic-bezier(0, 0, 0.7, 1)",
+        "property": "transition-timing-function",
+        "layer": "semantic"
+      },
+      "tooltip.motion.easing.exit": {
+        "resolvesTo": "semantic.motion.interaction.exit.easing",
+        "fallback": "cubic-bezier(1, 0, 1, 1)",
+        "property": "transition-timing-function",
+        "layer": "semantic"
+      }
+    }
   },
   "props": {
     "styled": {

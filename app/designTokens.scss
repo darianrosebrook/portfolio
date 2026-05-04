@@ -294,6 +294,9 @@
   --core-motion-stagger-list: 30ms;
   --core-motion-stagger-card: 60ms;
   --core-motion-stagger-section: 100ms;
+  --core-motion-translate-none: 0px;
+  --core-motion-translate-sm: 10px;
+  --core-motion-translate-md: 20px;
   --core-density-scale-compact: 0.875;
   --core-density-scale-comfortable: 1;
   --core-density-scale-spacious: 1.125;
@@ -301,6 +304,7 @@
   --core-layer-component: 50;
   --core-layer-above: 51;
   --core-layer-dropdown: 1000;
+  --core-layer-above-dropdown: 1001;
   --core-layer-overlay: 1300;
   --core-layer-modal: 1500;
   --core-layer-toast: 1700;
@@ -507,6 +511,10 @@
   --semantic-motion-transition-scale-shrink: 0.95;
   --semantic-motion-icon-scale-enter: 0.8;
   --semantic-motion-icon-scale-exit: 0.8;
+  --semantic-motion-opacity-overlay-light: 0.6;
+  --semantic-motion-opacity-overlay-heavy: 0.9;
+  --semantic-motion-opacity-content-default: 1;
+  --semantic-motion-opacity-content-fade: 0.7;
   --semantic-content-max-width-prose: 520px;
   --semantic-content-max-width-narrow: 360px;
   --semantic-content-max-width-wide: 600px;
@@ -645,6 +653,12 @@
   --semantic-control-size-lg-height: 48px;
   --semantic-control-size-lg-padding-x: 16px;
   --semantic-control-size-lg-padding-y: 8px;
+  --semantic-control-toggle-width-sm: calc(var(--semantic-control-size-sm-height) + var(--semantic-control-size-sm-paddingX) * 2);
+  --semantic-control-toggle-width-md: calc(var(--semantic-control-size-md-height) + var(--semantic-control-size-md-paddingX) * 2);
+  --semantic-control-toggle-width-lg: calc(var(--semantic-control-size-lg-height) + var(--semantic-control-size-lg-paddingX) * 2);
+  --semantic-control-toggle-thumb-sm: calc(var(--semantic-control-size-sm-height) - var(--semantic-control-size-sm-paddingY) * 2);
+  --semantic-control-toggle-thumb-md: calc(var(--semantic-control-size-md-height) - var(--semantic-control-size-md-paddingY) * 2);
+  --semantic-control-toggle-thumb-lg: calc(var(--semantic-control-size-lg-height) - var(--semantic-control-size-lg-paddingY) * 2);
   --semantic-link-text: #0a65fe;
   --semantic-link-decoration-color: #0a65fe;
   --semantic-link-decoration-thickness: 1px;

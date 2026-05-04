@@ -61,6 +61,25 @@ function buildSemanticMap(scssPath) {
   return map;
 }
 
+// ── Resolve the generated SCSS path for a component ─────────────────────────
+// The bridge SCSS file is named using capitalize(prefix) from tokens.json,
+// NOT necessarily the folder name. E.g. AlertNotice/ with prefix "alert" → Alert.tokens.generated.scss
+
+function resolveScssPath(componentDir, componentName) {
+  const tokensJsonPath = path.join(componentDir, `${componentName}.tokens.json`);
+  let prefix = componentName;
+  if (fs.existsSync(tokensJsonPath)) {
+    try {
+      const tj = JSON.parse(fs.readFileSync(tokensJsonPath, 'utf8'));
+      if (tj.prefix) {
+        const p = String(tj.prefix);
+        prefix = p.charAt(0).toUpperCase() + p.slice(1);
+      }
+    } catch {}
+  }
+  return path.join(componentDir, `${prefix}.tokens.generated.scss`);
+}
+
 // ── Parse component bridge SCSS ───────────────────────────────────────────────
 // Returns Map<cssVarName, semanticVarName> e.g.
 //   "button-color-background-default" → "semantic-color-action-background-primary-default"
@@ -77,6 +96,25 @@ function parseBridgeScss(scssPath) {
     bridge.set(normalizedLocal, normalizedRef);
   }
   return bridge;
+}
+
+// ── Parse bridge SCSS for literal (non-var) values ───────────────────────────
+// Returns Map<cssVarName, literalValue> e.g.
+//   "dialog-size-sm-width" → "400px"
+
+function parseBridgeLiterals(scssPath) {
+  const literals = new Map();
+  if (!fs.existsSync(scssPath)) return literals;
+  const content = fs.readFileSync(scssPath, 'utf8');
+  // Match --var: <literal-value>; where value is NOT a var() reference
+  for (const [, localVar, value] of content.matchAll(/--([a-zA-Z][a-zA-Z0-9-]+):\s*((?!var\()[^;]+);/g)) {
+    const v = value.trim();
+    if (v && !v.startsWith('var(') && !v.startsWith('/*')) {
+      const normalizedLocal = localVar.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+      literals.set(normalizedLocal, v);
+    }
+  }
+  return literals;
 }
 
 // ── CSS property inference from token path ────────────────────────────────────
@@ -116,7 +154,8 @@ function inferLayer(resolvesTo) {
 function dotToCssVar(dotPath) {
   return dotPath
     .replace(/\./g, '-')
-    .replace(/([a-z])([A-Z])/g, '$1-$2')
+    .replace(/[A-Z]/g, (m) => '-' + m.toLowerCase())
+    .replace(/-+/g, '-')
     .toLowerCase();
 }
 
@@ -124,7 +163,8 @@ function dotToCssVar(dotPath) {
 
 function migrateComponent(name, semanticMap) {
   const contractPath = path.join(COMPONENTS_DIR, name, `${name}.contract.json`);
-  const scssPath = path.join(COMPONENTS_DIR, name, `${name}.tokens.generated.scss`);
+  const componentDir = path.join(COMPONENTS_DIR, name);
+  const scssPath = resolveScssPath(componentDir, name);
 
   let contract;
   try {
@@ -147,6 +187,7 @@ function migrateComponent(name, semanticMap) {
   }
 
   const bridge = parseBridgeScss(scssPath);
+  const literals = parseBridgeLiterals(scssPath);
 
   const newTokens = {};
   let migrated = 0;
@@ -170,6 +211,15 @@ function migrateComponent(name, semanticMap) {
       const semanticVarName = bridge.get(localVarName);
 
       if (!semanticVarName) {
+        // Try literal value fallback
+        const literalValue = literals.get(localVarName);
+        if (literalValue) {
+          const property = inferProperty(tokenName);
+          const entry = { literal: literalValue };
+          if (property) entry.property = property;
+          resolved.push([tokenName, entry]);
+          continue; // don't set canConvert=false
+        }
         canConvert = false;
         break;
       }

@@ -32,26 +32,49 @@
     "apgPattern": null
   },
   "tokens": {
-    "root": [
-      "spinner.size.xs.value",
-      "spinner.size.xs.unit",
-      "spinner.size.sm.value",
-      "spinner.size.sm.unit",
-      "spinner.size.md.value",
-      "spinner.size.md.unit",
-      "spinner.size.lg.value",
-      "spinner.size.lg.unit",
-      "spinner.thickness.hairline.value",
-      "spinner.thickness.hairline.unit",
-      "spinner.thickness.regular.value",
-      "spinner.thickness.regular.unit",
-      "spinner.thickness.bold.value",
-      "spinner.thickness.bold.unit",
-      "spinner.color.accent",
-      "spinner.color.track",
-      "spinner.dots.gap",
-      "spinner.anim.duration"
-    ]
+    "root": {
+      "spinner.size.xs": {
+        "literal": "12px"
+      },
+      "spinner.size.sm": {
+        "literal": "16px"
+      },
+      "spinner.size.md": {
+        "literal": "20px"
+      },
+      "spinner.size.lg": {
+        "literal": "28px"
+      },
+      "spinner.thickness.hairline": {
+        "literal": "2px"
+      },
+      "spinner.thickness.regular": {
+        "literal": "3px"
+      },
+      "spinner.thickness.bold": {
+        "literal": "4px"
+      },
+      "spinner.color.accent": {
+        "resolvesTo": "semantic.color.background.accent",
+        "fallback": "#d9292b",
+        "layer": "semantic"
+      },
+      "spinner.color.track": {
+        "resolvesTo": "semantic.color.border.subtle",
+        "fallback": "#cecece",
+        "layer": "semantic"
+      },
+      "spinner.dots.gap": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "property": "gap",
+        "layer": "core"
+      },
+      "spinner.anim.duration": {
+        "literal": "800ms",
+        "property": "transition-duration"
+      }
+    }
   },
   "props": {
     "styled": {

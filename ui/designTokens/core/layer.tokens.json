@@ -19,6 +19,11 @@
       "$type": "number",
       "$value": 1000
     },
+    "aboveDropdown": {
+      "$type": "number",
+      "$value": 1001,
+      "$description": "One layer above dropdowns, below overlay"
+    },
     "overlay": {
       "$type": "number",
       "$value": 1300

@@ -40,10 +40,30 @@ const GREEN  = '\x1b[32m';
 const YELLOW = '\x1b[33m';
 const BOLD   = '\x1b[1m';
 
+// ── Resolve the generated SCSS path for a component ─────────────────────────
+// The bridge SCSS file is named using capitalize(prefix) from tokens.json,
+// NOT necessarily the folder name. E.g. AlertNotice/ with prefix "alert" → Alert.tokens.generated.scss
+
+function resolveScssPath(componentDir, componentName) {
+  const tokensJsonPath = path.join(componentDir, `${componentName}.tokens.json`);
+  let prefix = componentName;
+  if (fs.existsSync(tokensJsonPath)) {
+    try {
+      const tj = JSON.parse(fs.readFileSync(tokensJsonPath, 'utf8'));
+      if (tj.prefix) {
+        const p = String(tj.prefix);
+        prefix = p.charAt(0).toUpperCase() + p.slice(1);
+      }
+    } catch {}
+  }
+  return path.join(componentDir, `${prefix}.tokens.generated.scss`);
+}
+
 function dotPathToCssVar(dotPath) {
   return '--' + dotPath
     .replace(/\./g, '-')
-    .replace(/([a-z])([A-Z])/g, '$1-$2')
+    .replace(/[A-Z]/g, (m) => '-' + m.toLowerCase())
+    .replace(/-+/g, '-')
     .toLowerCase();
 }
 
@@ -55,7 +75,7 @@ function contractFiles() {
     .map(e => ({
       name: e.name,
       contractPath: path.join(COMPONENTS_DIR, e.name, `${e.name}.contract.json`),
-      scssPath: path.join(COMPONENTS_DIR, e.name, `${e.name}.tokens.generated.scss`),
+      scssPath: resolveScssPath(path.join(COMPONENTS_DIR, e.name), e.name),
     }))
     .filter(c => fs.existsSync(c.contractPath));
 }
@@ -93,9 +113,30 @@ for (const { name, contractPath, scssPath } of contractFiles()) {
       continue;
     }
 
-    // Structured: object mapping token-name → { resolvesTo, fallback, ... }
+    // Structured: object mapping token-name → { resolvesTo, fallback, ... } or { literal, property? }
     for (const [tokenName, resolution] of Object.entries(tokenValue)) {
       if (!resolution || typeof resolution !== 'object') continue;
+
+      // Literal form: {literal, property?} — no resolvesTo/fallback expected
+      if ('literal' in resolution) {
+        // Load SCSS on demand
+        if (scssContent === null) {
+          const raw = fs.existsSync(scssPath) ? fs.readFileSync(scssPath, 'utf8') : '';
+          scssContent = raw === '' ? '' : raw.replace(/--([a-zA-Z][a-zA-Z0-9-]+)/g, (_, v) =>
+            '--' + v.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()
+          );
+        }
+
+        const cssVar = dotPathToCssVar(tokenName);
+        if (scssContent === '' || !scssContent.includes(`${cssVar}:`)) {
+          errors.push(`  [${part}.${tokenName}] CSS var ${cssVar} not found in generated SCSS`);
+          componentFailed++;
+        } else {
+          totalPassed++;
+        }
+        continue;
+      }
+
       const { resolvesTo, fallback } = resolution;
 
       if (!resolvesTo || !fallback) {

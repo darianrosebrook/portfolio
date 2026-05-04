@@ -35,30 +35,15 @@
     },
     "spacing": {
       "gap": {
-        "default": {
-          "value": 0.5,
-          "unit": "rem"
-        },
-        "small": {
-          "value": 0.25,
-          "unit": "rem"
-        }
+        "default": "{core.spacing.size.04}",
+        "small": "{core.spacing.size.03}"
       },
       "padding": {
-        "default": {
-          "value": 0.5,
-          "unit": "rem"
-        },
-        "small": {
-          "value": 0.25,
-          "unit": "rem"
-        }
+        "default": "{core.spacing.size.04}",
+        "small": "{core.spacing.size.03}"
       },
       "margin": {
-        "top": {
-          "value": 0.25,
-          "unit": "rem"
-        }
+        "top": "{core.spacing.size.03}"
       }
     }
   }

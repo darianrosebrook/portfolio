@@ -39,12 +39,12 @@
     "opacity": {
       "overlay": {
         "default": "{core.opacity.800}",
-        "light": 0.6,
-        "heavy": 0.9
+        "light": "{semantic.motion.opacity.overlay.light}",
+        "heavy": "{semantic.motion.opacity.overlay.heavy}"
       },
       "content": {
-        "default": 1,
-        "fade": 0.7
+        "default": "{semantic.motion.opacity.content.default}",
+        "fade": "{semantic.motion.opacity.content.fade}"
       }
     },
     "transform": {
@@ -54,14 +54,14 @@
         "shrink": "{semantic.motion.transition.scale.shrink}"
       },
       "translate": {
-        "default": 0,
-        "slide": 20,
-        "bounce": 10
+        "default": "{core.motion.translate.none}",
+        "slide": "{core.motion.translate.md}",
+        "bounce": "{core.motion.translate.sm}"
       }
     },
     "zIndex": {
       "overlay": "{core.layer.dropdown}",
-      "content": 1001,
+      "content": "{core.layer.aboveDropdown}",
       "max": "{core.layer.max}"
     }
   }

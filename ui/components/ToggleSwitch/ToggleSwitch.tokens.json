@@ -32,9 +32,9 @@
     },
     "size": {
       "width": {
-        "small": "calc({semantic.control.size.sm.height} + {semantic.control.size.sm.paddingX} * 2)",
-        "medium": "calc({semantic.control.size.md.height} + {semantic.control.size.md.paddingX} * 2)",
-        "large": "calc({semantic.control.size.lg.height} + {semantic.control.size.lg.paddingX} * 2)"
+        "small": "{semantic.control.toggle.width.sm}",
+        "medium": "{semantic.control.toggle.width.md}",
+        "large": "{semantic.control.toggle.width.lg}"
       },
       "height": {
         "small": "{semantic.control.size.sm.height}",
@@ -42,9 +42,9 @@
         "large": "{semantic.control.size.lg.height}"
       },
       "thumb": {
-        "small": "calc({semantic.control.size.sm.height} - {semantic.control.size.sm.paddingY} * 2)",
-        "medium": "calc({semantic.control.size.md.height} - {semantic.control.size.md.paddingY} * 2)",
-        "large": "calc({semantic.control.size.lg.height} - {semantic.control.size.lg.paddingY} * 2)"
+        "small": "{semantic.control.toggle.thumb.sm}",
+        "medium": "{semantic.control.toggle.thumb.md}",
+        "large": "{semantic.control.toggle.thumb.lg}"
       },
       "padding": {
         "small": "{core.spacing.size.01}",
