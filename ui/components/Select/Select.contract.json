@@ -60,6 +60,14 @@
     },
     "trigger": {
       "required": false
+    },
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"select\"]"
+    },
+    "option": {
+      "required": true,
+      "selector": "[data-slot=\"select-option\"]"
     }
   },
   "a11y": {

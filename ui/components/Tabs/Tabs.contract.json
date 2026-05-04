@@ -23,7 +23,28 @@
     "hover",
     "focus"
   ],
-  "slots": {},
+  "slots": {
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"tabs\"]"
+    },
+    "list": {
+      "required": true,
+      "selector": "[data-slot=\"tabs-list\"]"
+    },
+    "indicator": {
+      "required": false,
+      "selector": "[data-slot=\"tabs-indicator\"]"
+    },
+    "tab": {
+      "required": true,
+      "selector": "[data-slot=\"tabs-tab\"]"
+    },
+    "panel": {
+      "required": true,
+      "selector": "[data-slot=\"tabs-panel\"]"
+    }
+  },
   "a11y": {
     "role": "tablist",
     "roles": [

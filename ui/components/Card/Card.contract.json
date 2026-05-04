@@ -63,6 +63,10 @@
     },
     "title": {
       "required": false
+    },
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"card\"]"
     }
   },
   "a11y": {

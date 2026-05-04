@@ -39,11 +39,12 @@ export const Breadcrumbs = React.forwardRef<HTMLElement, BreadcrumbsProps>(
       return (
         <nav
           ref={ref}
+          data-slot="breadcrumbs"
           className={`${styles.root} ${className}`}
           aria-label="Breadcrumb"
           {...rest}
         >
-          <ul className={styles.list}>
+          <ul data-slot="breadcrumbs-list" className={styles.list}>
             <li>
               <BreadcrumbNavigationLink href={base.href}>
                 {base.label}
@@ -64,17 +65,18 @@ export const Breadcrumbs = React.forwardRef<HTMLElement, BreadcrumbsProps>(
     return (
       <nav
         ref={ref}
+        data-slot="breadcrumbs"
         className={`${styles.root} ${className}`}
         aria-label="Breadcrumb"
         {...rest}
       >
-        <ul className={styles.list}>
+        <ul data-slot="breadcrumbs-list" className={styles.list}>
           <li>
             <BreadcrumbNavigationLink href={base.href}>
               {base.label}
             </BreadcrumbNavigationLink>
           </li>
-          <li className={styles.separator}>/</li>
+          <li data-slot="breadcrumbs-separator" className={styles.separator}>/</li>
 
           {showOverflow ? (
             <li className={styles.overflow}>
@@ -103,7 +105,7 @@ export const Breadcrumbs = React.forwardRef<HTMLElement, BreadcrumbsProps>(
                     {c.label}
                   </BreadcrumbNavigationLink>
                 </li>
-                <li className={styles.separator}>/</li>
+                <li data-slot="breadcrumbs-separator" className={styles.separator}>/</li>
               </React.Fragment>
             ))
           )}
@@ -115,11 +117,11 @@ export const Breadcrumbs = React.forwardRef<HTMLElement, BreadcrumbsProps>(
                   {prev.label}
                 </BreadcrumbNavigationLink>
               </li>
-              <li className={styles.separator}>/</li>
+              <li data-slot="breadcrumbs-separator" className={styles.separator}>/</li>
             </>
           )}
 
-          <li className={styles.current} aria-current="page">
+          <li data-slot="breadcrumbs-current" className={styles.current} aria-current="page">
             {current.label}
           </li>
         </ul>

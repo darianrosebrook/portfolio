@@ -160,6 +160,7 @@ export const Tab = React.forwardRef<HTMLButtonElement, TabProps>(
       <button
         ref={ref}
         role="tab"
+        data-slot="tabs-tab"
         data-value={tabValue}
         aria-selected={isSelected}
         aria-disabled={disabled || undefined}

@@ -99,6 +99,7 @@ const Details = React.forwardRef<HTMLDetailsElement, DetailsProps>(
         ref={ref}
         id={id}
         open={isOpen}
+        data-slot="details"
         className={[styles.details, className].filter(Boolean).join(' ')}
         data-variant={variant}
         data-icon={icon}
@@ -106,14 +107,14 @@ const Details = React.forwardRef<HTMLDetailsElement, DetailsProps>(
         data-disabled={disabled || undefined}
         {...ariaAttributes}
       >
-        <summary className={styles.summary} onKeyDown={handleKeyDown}>
+        <summary data-slot="details-summary" className={styles.summary} onKeyDown={handleKeyDown}>
           <span className={styles.summaryContent}>
             {icon === 'left' ? iconElement : null}
             <span className={styles.summaryText}>{summary}</span>
             {icon === 'right' ? iconElement : null}
           </span>
         </summary>
-        <div className={styles.content}>{children}</div>
+        <div data-slot="details-content" className={styles.content}>{children}</div>
       </details>
     );
   }

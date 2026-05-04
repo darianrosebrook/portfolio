@@ -32,6 +32,18 @@
     },
     "inline": {
       "required": false
+    },
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"details\"]"
+    },
+    "summary": {
+      "required": true,
+      "selector": "[data-slot=\"details-summary\"]"
+    },
+    "content": {
+      "required": true,
+      "selector": "[data-slot=\"details-content\"]"
     }
   },
   "a11y": {
