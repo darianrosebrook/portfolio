@@ -72,6 +72,19 @@ describe('Tooltip', () => {
   });
 
   describe('Contract obligations', () => {
+    contractTest('Tooltip', 'a11y.apgPattern', 'tooltip', () => {
+      vi.useFakeTimers();
+      render(
+        <Tooltip content="Helpful tip" delay={0}>
+          <button>Trigger</button>
+        </Tooltip>
+      );
+      fireEvent.mouseEnter(screen.getByText('Trigger'));
+      act(() => vi.runAllTimers());
+      expect(screen.getByRole('tooltip')).toBeInTheDocument();
+      vi.useRealTimers();
+    });
+
     contractTest('Tooltip', 'dismissal.triggers', 'escape', () => {
       vi.useFakeTimers();
 

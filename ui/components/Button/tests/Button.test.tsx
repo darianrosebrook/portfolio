@@ -2,6 +2,7 @@ import * as React from 'react';
 import { render, screen } from '@testing-library/react';
 
 import Button from '../Button';
+import { contractTest } from '@/test/utils/contractTest';
 
 // Extend Jest matchers
 
@@ -79,5 +80,12 @@ describe('Button', () => {
       const button = screen.getByRole('button');
       expect(button).toHaveAttribute('data-size', 'large');
     });
+  });
+});
+
+describe('Contract behavioral obligations', () => {
+  contractTest('Button', 'a11y.apgPattern', 'button', () => {
+    render(<Button>Label</Button>);
+    expect(screen.getByRole('button')).toBeInTheDocument();
   });
 });

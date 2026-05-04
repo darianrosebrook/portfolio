@@ -2,6 +2,7 @@ import * as React from 'react';
 import { render, screen } from '@testing-library/react';
 
 import Image from '../Image';
+import { contractTest } from '@/test/utils/contractTest';
 
 // Extend Jest matchers
 
@@ -68,5 +69,12 @@ describe('Image', () => {
       // Verify CSS custom properties are being used
       expect(image).toHaveClass('image');
     });
+  });
+});
+
+describe('Contract behavioral obligations', () => {
+  contractTest('Image', 'a11y.apgPattern', 'image', () => {
+    render(<Image src="/test-image.jpg" alt="Test image" />);
+    expect(screen.getByRole('img')).toBeInTheDocument();
   });
 });

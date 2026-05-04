@@ -2,6 +2,7 @@ import * as React from 'react';
 import { render, screen } from '@testing-library/react';
 
 import { Container as AlertNotice } from '../AlertNotice';
+import { contractTest } from '@/test/utils/contractTest';
 
 // Extend Jest matchers
 
@@ -72,5 +73,12 @@ describe('AlertNotice', () => {
       // Verify CSS custom properties are being used
       expect(alert).toHaveClass('alertNotice');
     });
+  });
+});
+
+describe('Contract behavioral obligations', () => {
+  contractTest('AlertNotice', 'a11y.apgPattern', 'alert', () => {
+    render(<AlertNotice index={0}>Alert message</AlertNotice>);
+    expect(screen.getByRole('alert')).toBeInTheDocument();
   });
 });
