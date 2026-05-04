@@ -102,3 +102,4 @@ tmp/
 playwright-report
 
 test-results
+.caws/specs/registry.json
