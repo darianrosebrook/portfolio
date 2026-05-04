@@ -20,18 +20,18 @@
 
 /* Size variants */
 .sm {
-  font-size: var(--list-typography-sm-fontSize);
-  line-height: var(--list-typography-sm-lineHeight);
+  font-size: var(--list-typography-sm-font-size);
+  line-height: var(--list-typography-sm-line-height);
 }
 
 .md {
-  font-size: var(--list-typography-md-fontSize);
-  line-height: var(--list-typography-md-lineHeight);
+  font-size: var(--list-typography-md-font-size);
+  line-height: var(--list-typography-md-line-height);
 }
 
 .lg {
-  font-size: var(--list-typography-lg-fontSize);
-  line-height: var(--list-typography-lg-lineHeight);
+  font-size: var(--list-typography-lg-font-size);
+  line-height: var(--list-typography-lg-line-height);
 }
 
 /* Variant styles */
@@ -143,7 +143,7 @@
 .dl.inline {
   display: grid;
   grid-template-columns: max-content 1fr;
-  gap: var(--list-spacing-dl-gap) var(--list-spacing-dl-gapX);
+  gap: var(--list-spacing-dl-gap) var(--list-spacing-dl-gap-x);
 
   dt {
     font-weight: 600;

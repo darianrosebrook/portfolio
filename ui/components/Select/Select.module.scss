@@ -38,19 +38,19 @@
 
   &--sm {
     height: var(--select-size-sm-height);
-    padding: var(--select-size-sm-paddingY) var(--select-size-sm-paddingX);
+    padding: var(--select-size-sm-padding-y) var(--select-size-sm-padding-x);
     font-size: var(--select-font-size-sm);
   }
 
   &--md {
     height: var(--select-size-md-height);
-    padding: var(--select-size-md-paddingY) var(--select-size-md-paddingX);
+    padding: var(--select-size-md-padding-y) var(--select-size-md-padding-x);
     font-size: var(--select-font-size-md);
   }
 
   &--lg {
     height: var(--select-size-lg-height);
-    padding: var(--select-size-lg-paddingY) var(--select-size-lg-paddingX);
+    padding: var(--select-size-lg-padding-y) var(--select-size-lg-padding-x);
     font-size: var(--select-font-size-lg);
   }
 
@@ -99,18 +99,18 @@
   }
 
   &:focus-visible {
-    background-color: var(--select-color-background-focusVisible, #fafafa);
-    border-color: var(--select-color-border-focusVisible, #d9292b);
+    background-color: var(--select-color-background-focus-visible, #fafafa);
+    border-color: var(--select-color-border-focus-visible, #d9292b);
 
     // Use color-mix() for focus ring
     outline: 2px solid
       color-mix(
         in oklab,
-        var(--select-color-border-focusVisible, #d9292b) 40%,
+        var(--select-color-border-focus-visible, #d9292b) 40%,
         transparent
       );
     outline-offset: -1px;
-    color: var(--select-color-foreground-focusVisible, #141414);
+    color: var(--select-color-foreground-focus-visible, #141414);
   }
 
   &:disabled {
@@ -272,25 +272,25 @@
 
   &--sm {
     height: var(--select-size-sm-height);
-    padding: var(--select-size-sm-paddingY) var(--select-size-sm-paddingX);
+    padding: var(--select-size-sm-padding-y) var(--select-size-sm-padding-x);
     font-size: var(--select-font-size-sm);
   }
 
   &--md {
     height: var(--select-size-md-height);
-    padding: var(--select-size-md-paddingY) var(--select-size-md-paddingX);
+    padding: var(--select-size-md-padding-y) var(--select-size-md-padding-x);
     font-size: var(--select-font-size-md);
   }
 
   &--lg {
     height: var(--select-size-lg-height);
-    padding: var(--select-size-lg-paddingY) var(--select-size-lg-paddingX);
+    padding: var(--select-size-lg-padding-y) var(--select-size-lg-padding-x);
     font-size: var(--select-font-size-lg);
   }
 
   &:focus {
     border-color: var(--select-color-border-focus, #0066cc);
-    box-shadow: 0 0 0 2px var(--select-color-border-focusRing, rgb(0 102 204 / 20%));
+    box-shadow: 0 0 0 2px var(--select-color-border-focus-ring, rgb(0 102 204 / 20%));
     outline: none;
   }
 
@@ -373,18 +373,18 @@
         font-size: calc(var(--select-font-size-default, 16px) * 0.9);
 
         &--sm {
-          padding: calc(var(--select-size-sm-paddingY) * 0.75)
-            calc(var(--select-size-sm-paddingX) * 0.75);
+          padding: calc(var(--select-size-sm-padding-y) * 0.75)
+            calc(var(--select-size-sm-padding-x) * 0.75);
         }
 
         &--md {
-          padding: calc(var(--select-size-md-paddingY) * 0.75)
-            calc(var(--select-size-md-paddingX) * 0.75);
+          padding: calc(var(--select-size-md-padding-y) * 0.75)
+            calc(var(--select-size-md-padding-x) * 0.75);
         }
 
         &--lg {
-          padding: calc(var(--select-size-lg-paddingY) * 0.75)
-            calc(var(--select-size-lg-paddingX) * 0.75);
+          padding: calc(var(--select-size-lg-padding-y) * 0.75)
+            calc(var(--select-size-lg-padding-x) * 0.75);
         }
       }
     }
@@ -398,8 +398,8 @@
         &--sm,
         &--md,
         &--lg {
-          padding: calc(var(--select-size-sm-paddingY) * 0.5)
-            calc(var(--select-size-sm-paddingX) * 0.5);
+          padding: calc(var(--select-size-sm-padding-y) * 0.5)
+            calc(var(--select-size-sm-padding-x) * 0.5);
           font-size: calc(var(--select-font-size-sm) * 0.85);
         }
       }

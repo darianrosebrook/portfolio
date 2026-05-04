@@ -9,29 +9,29 @@
 
 /* Typography variants */
 .display {
-  font-weight: var(--text-typography-fontWeight-bold);
+  font-weight: var(--text-typography-font-weight-bold);
   letter-spacing: -0.02em;
 }
 
 .headline {
-  font-weight: var(--text-typography-fontWeight-semibold);
+  font-weight: var(--text-typography-font-weight-semibold);
   letter-spacing: -0.01em;
 }
 
 .title {
-  font-weight: var(--text-typography-fontWeight-medium);
+  font-weight: var(--text-typography-font-weight-medium);
 }
 
 .body {
-  font-weight: var(--text-typography-fontWeight-regular);
+  font-weight: var(--text-typography-font-weight-regular);
 }
 
 .caption {
-  font-weight: var(--text-typography-fontWeight-regular);
+  font-weight: var(--text-typography-font-weight-regular);
 }
 
 .overline {
-  font-weight: var(--text-typography-fontWeight-medium);
+  font-weight: var(--text-typography-font-weight-medium);
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -40,274 +40,274 @@
   padding: var(--text-code-padding-y) var(--text-code-padding-x);
   background: var(--text-color-background-default);
   border-radius: var(--text-code-radius);
-  font-family: var(--text-code-fontFamily);
+  font-family: var(--text-code-font-family);
 }
 
 /* Size variants for each typography variant */
 .display.xs {
   font-size: var(--text-typography-display-xs);
-  line-height: var(--text-typography-lineHeight-heading);
+  line-height: var(--text-typography-line-height-heading);
 }
 
 .display.sm {
   font-size: var(--text-typography-display-sm);
-  line-height: var(--text-typography-lineHeight-heading);
+  line-height: var(--text-typography-line-height-heading);
 }
 
 .display.md {
   font-size: var(--text-typography-display-md);
-  line-height: var(--text-typography-lineHeight-heading);
+  line-height: var(--text-typography-line-height-heading);
 }
 
 .display.lg {
   font-size: var(--text-typography-display-lg);
-  line-height: var(--text-typography-lineHeight-heading);
+  line-height: var(--text-typography-line-height-heading);
 }
 
 .display.xl {
   font-size: var(--text-typography-display-xl);
-  line-height: var(--text-typography-lineHeight-heading);
+  line-height: var(--text-typography-line-height-heading);
 }
 
 .display.\32 xl {
   font-size: var(--text-typography-display-2xl);
-  line-height: var(--text-typography-lineHeight-heading);
+  line-height: var(--text-typography-line-height-heading);
 }
 
 .display.\33 xl {
   font-size: var(--text-typography-display-3xl);
-  line-height: var(--text-typography-lineHeight-heading);
+  line-height: var(--text-typography-line-height-heading);
 }
 
 .headline.xs {
   font-size: var(--text-typography-headline-xs);
-  line-height: var(--text-typography-lineHeight-heading);
+  line-height: var(--text-typography-line-height-heading);
 }
 
 .headline.sm {
   font-size: var(--text-typography-headline-sm);
-  line-height: var(--text-typography-lineHeight-heading);
+  line-height: var(--text-typography-line-height-heading);
 }
 
 .headline.md {
   font-size: var(--text-typography-headline-md);
-  line-height: var(--text-typography-lineHeight-heading);
+  line-height: var(--text-typography-line-height-heading);
 }
 
 .headline.lg {
   font-size: var(--text-typography-headline-lg);
-  line-height: var(--text-typography-lineHeight-heading);
+  line-height: var(--text-typography-line-height-heading);
 }
 
 .headline.xl {
   font-size: var(--text-typography-headline-xl);
-  line-height: var(--text-typography-lineHeight-heading);
+  line-height: var(--text-typography-line-height-heading);
 }
 
 .headline.\32 xl {
   font-size: var(--text-typography-headline-2xl);
-  line-height: var(--text-typography-lineHeight-heading);
+  line-height: var(--text-typography-line-height-heading);
 }
 
 .headline.\33 xl {
   font-size: var(--text-typography-headline-3xl);
-  line-height: var(--text-typography-lineHeight-heading);
+  line-height: var(--text-typography-line-height-heading);
 }
 
 .title.xs {
   font-size: var(--text-typography-title-xs);
-  line-height: var(--text-typography-lineHeight-body);
+  line-height: var(--text-typography-line-height-body);
 }
 
 .title.sm {
   font-size: var(--text-typography-title-sm);
-  line-height: var(--text-typography-lineHeight-body);
+  line-height: var(--text-typography-line-height-body);
 }
 
 .title.md {
   font-size: var(--text-typography-title-md);
-  line-height: var(--text-typography-lineHeight-body);
+  line-height: var(--text-typography-line-height-body);
 }
 
 .title.lg {
   font-size: var(--text-typography-title-lg);
-  line-height: var(--text-typography-lineHeight-heading);
+  line-height: var(--text-typography-line-height-heading);
 }
 
 .title.xl {
   font-size: var(--text-typography-title-xl);
-  line-height: var(--text-typography-lineHeight-heading);
+  line-height: var(--text-typography-line-height-heading);
 }
 
 .title.\32 xl {
   font-size: var(--text-typography-title-2xl);
-  line-height: var(--text-typography-lineHeight-heading);
+  line-height: var(--text-typography-line-height-heading);
 }
 
 .title.\33 xl {
   font-size: var(--text-typography-title-3xl);
-  line-height: var(--text-typography-lineHeight-heading);
+  line-height: var(--text-typography-line-height-heading);
 }
 
 .body.xs {
   font-size: var(--text-typography-body-xs);
-  line-height: var(--text-typography-lineHeight-body);
+  line-height: var(--text-typography-line-height-body);
 }
 
 .body.sm {
   font-size: var(--text-typography-body-sm);
-  line-height: var(--text-typography-lineHeight-body);
+  line-height: var(--text-typography-line-height-body);
 }
 
 .body.md {
   font-size: var(--text-typography-body-md);
-  line-height: var(--text-typography-lineHeight-body);
+  line-height: var(--text-typography-line-height-body);
 }
 
 .body.lg {
   font-size: var(--text-typography-body-lg);
-  line-height: var(--text-typography-lineHeight-body);
+  line-height: var(--text-typography-line-height-body);
 }
 
 .body.xl {
   font-size: var(--text-typography-body-xl);
-  line-height: var(--text-typography-lineHeight-body);
+  line-height: var(--text-typography-line-height-body);
 }
 
 .body.\32 xl {
   font-size: var(--text-typography-body-2xl);
-  line-height: var(--text-typography-lineHeight-heading);
+  line-height: var(--text-typography-line-height-heading);
 }
 
 .body.\33 xl {
   font-size: var(--text-typography-body-3xl);
-  line-height: var(--text-typography-lineHeight-heading);
+  line-height: var(--text-typography-line-height-heading);
 }
 
 .caption.xs {
   font-size: var(--text-typography-caption-xs);
-  line-height: var(--text-typography-lineHeight-body);
+  line-height: var(--text-typography-line-height-body);
 }
 
 .caption.sm {
   font-size: var(--text-typography-caption-sm);
-  line-height: var(--text-typography-lineHeight-body);
+  line-height: var(--text-typography-line-height-body);
 }
 
 .caption.md {
   font-size: var(--text-typography-caption-md);
-  line-height: var(--text-typography-lineHeight-body);
+  line-height: var(--text-typography-line-height-body);
 }
 
 .caption.lg {
   font-size: var(--text-typography-caption-lg);
-  line-height: var(--text-typography-lineHeight-body);
+  line-height: var(--text-typography-line-height-body);
 }
 
 .caption.xl {
   font-size: var(--text-typography-caption-xl);
-  line-height: var(--text-typography-lineHeight-body);
+  line-height: var(--text-typography-line-height-body);
 }
 
 .caption.\32 xl {
   font-size: var(--text-typography-caption-2xl);
-  line-height: var(--text-typography-lineHeight-body);
+  line-height: var(--text-typography-line-height-body);
 }
 
 .caption.\33 xl {
   font-size: var(--text-typography-caption-3xl);
-  line-height: var(--text-typography-lineHeight-body);
+  line-height: var(--text-typography-line-height-body);
 }
 
 .overline.xs {
   font-size: var(--text-typography-overline-xs);
-  line-height: var(--text-typography-lineHeight-body);
+  line-height: var(--text-typography-line-height-body);
 }
 
 .overline.sm {
   font-size: var(--text-typography-overline-sm);
-  line-height: var(--text-typography-lineHeight-body);
+  line-height: var(--text-typography-line-height-body);
 }
 
 .overline.md {
   font-size: var(--text-typography-overline-md);
-  line-height: var(--text-typography-lineHeight-body);
+  line-height: var(--text-typography-line-height-body);
 }
 
 .overline.lg {
   font-size: var(--text-typography-overline-lg);
-  line-height: var(--text-typography-lineHeight-body);
+  line-height: var(--text-typography-line-height-body);
 }
 
 .overline.xl {
   font-size: var(--text-typography-overline-xl);
-  line-height: var(--text-typography-lineHeight-body);
+  line-height: var(--text-typography-line-height-body);
 }
 
 .overline.\32 xl {
   font-size: var(--text-typography-overline-2xl);
-  line-height: var(--text-typography-lineHeight-body);
+  line-height: var(--text-typography-line-height-body);
 }
 
 .overline.\33 xl {
   font-size: var(--text-typography-overline-3xl);
-  line-height: var(--text-typography-lineHeight-body);
+  line-height: var(--text-typography-line-height-body);
 }
 
 .code.xs {
   font-size: var(--text-typography-code-xs);
-  line-height: var(--text-typography-lineHeight-body);
+  line-height: var(--text-typography-line-height-body);
 }
 
 .code.sm {
   font-size: var(--text-typography-code-sm);
-  line-height: var(--text-typography-lineHeight-body);
+  line-height: var(--text-typography-line-height-body);
 }
 
 .code.md {
   font-size: var(--text-typography-code-md);
-  line-height: var(--text-typography-lineHeight-body);
+  line-height: var(--text-typography-line-height-body);
 }
 
 .code.lg {
   font-size: var(--text-typography-code-lg);
-  line-height: var(--text-typography-lineHeight-body);
+  line-height: var(--text-typography-line-height-body);
 }
 
 .code.xl {
   font-size: var(--text-typography-code-xl);
-  line-height: var(--text-typography-lineHeight-body);
+  line-height: var(--text-typography-line-height-body);
 }
 
 .code.\32 xl {
   font-size: var(--text-typography-code-2xl);
-  line-height: var(--text-typography-lineHeight-heading);
+  line-height: var(--text-typography-line-height-heading);
 }
 
 .code.\33 xl {
   font-size: var(--text-typography-code-3xl);
-  line-height: var(--text-typography-lineHeight-heading);
+  line-height: var(--text-typography-line-height-heading);
 }
 
 /* Weight variants */
 .weight-light {
-  font-weight: var(--text-typography-fontWeight-light);
+  font-weight: var(--text-typography-font-weight-light);
 }
 
 .weight-normal {
-  font-weight: var(--text-typography-fontWeight-regular);
+  font-weight: var(--text-typography-font-weight-regular);
 }
 
 .weight-medium {
-  font-weight: var(--text-typography-fontWeight-medium);
+  font-weight: var(--text-typography-font-weight-medium);
 }
 
 .weight-semibold {
-  font-weight: var(--text-typography-fontWeight-semibold);
+  font-weight: var(--text-typography-font-weight-semibold);
 }
 
 .weight-bold {
-  font-weight: var(--text-typography-fontWeight-bold);
+  font-weight: var(--text-typography-font-weight-bold);
 }
 
 /* Alignment variants */

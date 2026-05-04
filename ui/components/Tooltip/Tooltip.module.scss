@@ -11,14 +11,15 @@
   border-radius: var(--tooltip-size-radius-default);
   box-shadow: var(--tooltip-elevation-default);
   color: var(--tooltip-color-foreground-default);
-  font-weight: var(--tooltip-typography-fontWeight);
+  font-weight: var(--tooltip-typography-font-weight);
   font-size: var(--tooltip-typography-font-size);
   line-height: var(--tooltip-typography-line-height);
   text-align: center;
   word-wrap: break-word;
 
   // Animation
-  animation: tooltip-enter 150ms var(--tooltip-motion-easing, ease-out) forwards;
+  animation: tooltip-enter 150ms var(--tooltip-motion-easing-enter, ease-out)
+    forwards;
 
   // Ensure tooltip appears above other content
   pointer-events: none;
@@ -30,12 +31,14 @@
 
 // Entering state
 .entering {
-  animation: tooltip-enter 150ms var(--tooltip-motion-easing, ease-out) forwards;
+  animation: tooltip-enter 150ms var(--tooltip-motion-easing-enter, ease-out)
+    forwards;
 }
 
 // Leaving state
 .leaving {
-  animation: tooltip-exit 100ms var(--tooltip-motion-easing, ease-in) forwards;
+  animation: tooltip-exit 100ms var(--tooltip-motion-easing-exit, ease-in)
+    forwards;
 }
 
 // Animation keyframes

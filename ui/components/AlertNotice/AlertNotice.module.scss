@@ -38,23 +38,23 @@
     border-radius: var(--alert-size-section-radius);
 
     &.info {
-      background: var(--alert-color-background-infoSubtle);
-      color: var(--alert-color-foreground-onInfoSubtle);
+      background: var(--alert-color-background-info-subtle);
+      color: var(--alert-color-foreground-on-info-subtle);
     }
 
     &.warning {
-      background: var(--alert-color-background-warningSubtle);
-      color: var(--alert-color-foreground-onWarningSubtle);
+      background: var(--alert-color-background-warning-subtle);
+      color: var(--alert-color-foreground-on-warning-subtle);
     }
 
     &.danger {
-      background: var(--alert-color-background-dangerSubtle);
-      color: var(--alert-color-foreground-onDangerSubtle);
+      background: var(--alert-color-background-danger-subtle);
+      color: var(--alert-color-foreground-on-danger-subtle);
     }
 
     &.success {
-      background: var(--alert-color-background-successSubtle);
-      color: var(--alert-color-foreground-onSuccessSubtle);
+      background: var(--alert-color-background-success-subtle);
+      color: var(--alert-color-foreground-on-success-subtle);
     }
   }
 
@@ -64,28 +64,28 @@
     grid-template-columns: auto 1fr auto;
     gap: var(--alert-spacing-gap-small) var(--alert-spacing-gap-medium);
     align-items: baseline;
-    min-height: var(--alert-spacing-minHeight-default);
+    min-height: var(--alert-spacing-min-height-default);
     margin: 0 -1rem;
     padding: var(--alert-size-page-padding);
 
     &.info {
-      background: var(--alert-color-background-infoStrong);
-      color: var(--alert-color-foreground-onColor);
+      background: var(--alert-color-background-info-strong);
+      color: var(--alert-color-foreground-on-color);
     }
 
     &.warning {
-      background: var(--alert-color-background-warningStrong);
-      color: var(--alert-color-foreground-onColor);
+      background: var(--alert-color-background-warning-strong);
+      color: var(--alert-color-foreground-on-color);
     }
 
     &.danger {
-      background: var(--alert-color-background-dangerStrong);
-      color: var(--alert-color-foreground-onColor);
+      background: var(--alert-color-background-danger-strong);
+      color: var(--alert-color-foreground-on-color);
     }
 
     &.success {
-      background: var(--alert-color-background-successStrong);
-      color: var(--alert-color-foreground-onColor);
+      background: var(--alert-color-background-success-strong);
+      color: var(--alert-color-foreground-on-color);
     }
   }
 
@@ -108,8 +108,8 @@
   grid-row: span 1;
   grid-column: span 1;
   grid-column-end: -2;
-  font-weight: var(--alert-typography-title-fontWeight);
-  font-size: var(--alert-typography-title-fontSize);
+  font-weight: var(--alert-typography-title-font-weight);
+  font-size: var(--alert-typography-title-font-size);
 }
 
 .body {
@@ -117,7 +117,7 @@
   grid-row: span 1;
   grid-column: span 1;
   grid-column-start: 2;
-  font-size: var(--alert-typography-body-fontSize);
+  font-size: var(--alert-typography-body-font-size);
 }
 
 .dismiss {

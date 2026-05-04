@@ -101,14 +101,14 @@
     color: var(--card-color-foreground-primary);
     font-weight: var(--font-weight-semibold);
     font-size: var(--font-size-heading-4);
-    line-height: var(--card-typography-lineHeight-heading);
+    line-height: var(--card-typography-line-height-heading);
   }
 
   .description {
     margin: 0;
     color: var(--card-color-foreground-secondary);
     font-size: var(--font-size-body-2);
-    line-height: var(--card-typography-lineHeight-normal);
+    line-height: var(--card-typography-line-height-normal);
   }
 
   .media {
@@ -170,7 +170,7 @@
   .badge {
     display: inline-flex;
     align-items: center;
-    padding: var(--card-size-padding-badgeY) var(--card-size-padding-badgeX);
+    padding: var(--card-size-padding-badge-y) var(--card-size-padding-badge-x);
     border-radius: var(--card-size-radius-full);
     font-weight: var(--font-weight-medium);
     font-size: var(--font-size-body-3);

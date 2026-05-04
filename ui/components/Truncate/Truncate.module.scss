@@ -37,14 +37,14 @@
   background: none;
   border: none;
   color: var(--truncate-color-foreground-link);
-  font-weight: var(--truncate-typography-fontWeight);
+  font-weight: var(--truncate-typography-font-weight);
   font-size: inherit;
   text-decoration: underline;
   cursor: pointer;
   margin-inline-start: var(--truncate-spacing-toggle);
 
   &:hover {
-    color: var(--truncate-color-foreground-linkHover);
+    color: var(--truncate-color-foreground-link-hover);
   }
 
   &:focus-visible {

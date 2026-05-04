@@ -177,6 +177,6 @@
 
 @media (prefers-contrast: more) {
   .control :is(input, select, textarea) {
-    border-color: var(--field-color-borderBold);
+    border-color: var(--field-color-border-bold);
   }
 }
