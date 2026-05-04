@@ -1,6 +1,3 @@
-#!/usr/bin/env sh
-. "$(dirname "$0")/_/h"
-
 echo "Validating component contracts..."
 node scripts/validate-contracts.mjs
 if [ $? -ne 0 ]; then

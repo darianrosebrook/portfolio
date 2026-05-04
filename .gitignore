@@ -104,3 +104,4 @@ playwright-report
 
 test-results
 .caws/specs/registry.json
+.claude/worktrees
