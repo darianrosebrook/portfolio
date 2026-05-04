@@ -20,7 +20,9 @@
     "active",
     "loading"
   ],
-  "slots": {},
+  "slots": {
+    "root": { "required": true, "selector": "[data-slot=\"page-transition\"]" }
+  },
   "a11y": {
     "role": "generic",
     "labeling": [

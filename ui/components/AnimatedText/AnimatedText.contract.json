@@ -27,7 +27,9 @@
   "states": [
     "default"
   ],
-  "slots": {},
+  "slots": {
+    "root": { "required": true, "selector": "[data-slot=\"animated-text\"]" }
+  },
   "a11y": {
     "role": "generic",
     "labeling": [],

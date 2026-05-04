@@ -9,7 +9,9 @@
   "states": [
     "default"
   ],
-  "slots": {},
+  "slots": {
+    "root": { "required": true, "selector": "[data-slot=\"aspect-ratio\"]" }
+  },
   "a11y": {
     "role": "generic",
     "labeling": [],

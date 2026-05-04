@@ -23,7 +23,9 @@
     "hover",
     "focus"
   ],
-  "slots": {},
+  "slots": {
+    "root": { "required": true, "selector": "[data-slot=\"animated-card\"]" }
+  },
   "a11y": {
     "role": "generic",
     "labeling": [],

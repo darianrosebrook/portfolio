@@ -10,7 +10,9 @@
     "default",
     "hover"
   ],
-  "slots": {},
+  "slots": {
+    "root": { "required": true, "selector": "[data-slot=\"profile-flag\"]" }
+  },
   "a11y": {
     "role": "generic",
     "labeling": [],

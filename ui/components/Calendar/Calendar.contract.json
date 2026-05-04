@@ -10,7 +10,9 @@
     "hover",
     "focus"
   ],
-  "slots": {},
+  "slots": {
+    "root": { "required": true, "selector": "[data-slot=\"calendar\"]" }
+  },
   "a11y": {
     "role": "region",
     "labeling": [],

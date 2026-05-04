@@ -35,7 +35,9 @@
     "active",
     "selected"
   ],
-  "slots": {},
+  "slots": {
+    "root": { "required": true, "selector": "[data-slot=\"brand-switcher\"]" }
+  },
   "a11y": {
     "role": "generic",
     "labeling": [

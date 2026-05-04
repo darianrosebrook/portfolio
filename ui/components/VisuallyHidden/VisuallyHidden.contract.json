@@ -11,7 +11,9 @@
     "default",
     "focus"
   ],
-  "slots": {},
+  "slots": {
+    "root": { "required": true, "selector": "[data-slot=\"visually-hidden\"]" }
+  },
   "a11y": {
     "role": "generic",
     "labeling": [],
