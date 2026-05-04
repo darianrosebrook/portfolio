@@ -32,19 +32,20 @@ export const WalkthroughControls: React.FC<WalkthroughControlsProps> = ({
   }, [onSkip, cancel]);
 
   return (
-    <div className={[styles.controls, className].filter(Boolean).join(' ')}>
-      <button type="button" onClick={handleSkip} className={styles.skip}>
+    <div data-slot="walkthrough-controls" className={[styles.controls, className].filter(Boolean).join(' ')}>
+      <button type="button" onClick={handleSkip} data-slot="walkthrough-skip" className={styles.skip}>
         Skip
       </button>
       <button
         type="button"
         onClick={handlePrev}
         disabled={index === 0}
+        data-slot="walkthrough-prev"
         className={styles.prev}
       >
         Back
       </button>
-      <button type="button" onClick={handleNext} className={styles.next}>
+      <button type="button" onClick={handleNext} data-slot="walkthrough-next" className={styles.next}>
         {index === count - 1 ? 'Done' : 'Next'}
       </button>
     </div>

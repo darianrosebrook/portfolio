@@ -19,6 +19,7 @@ export const WalkthroughProgress: React.FC<WalkthroughProgressProps> = ({
     return (
       <div
         className={[styles.dots, className].filter(Boolean).join(' ')}
+        data-slot="walkthrough-progress"
         role="status"
         aria-live="polite"
         aria-label={`Step ${index + 1} of ${count}`}
@@ -26,6 +27,7 @@ export const WalkthroughProgress: React.FC<WalkthroughProgressProps> = ({
         {Array.from({ length: count }).map((_, i) => (
           <span
             key={i}
+            data-slot="walkthrough-dot"
             className={i === index ? styles.dotActive : styles.dot}
           />
         ))}
@@ -36,6 +38,7 @@ export const WalkthroughProgress: React.FC<WalkthroughProgressProps> = ({
   return (
     <div
       className={[styles.counter, className].filter(Boolean).join(' ')}
+      data-slot="walkthrough-counter"
       aria-live="polite"
     >
       {index + 1} / {count}

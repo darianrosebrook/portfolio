@@ -16,6 +16,7 @@ export const OTP = React.forwardRef<HTMLDivElement, OTPProps>(
       <div
         ref={ref}
         role="group"
+        data-slot="otp"
         id={ctx.id}
         aria-describedby={ctx.describedBy}
         aria-disabled={ctx.disabled || undefined}

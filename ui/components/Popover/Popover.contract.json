@@ -23,7 +23,11 @@
     "focus",
     "leaving"
   ],
-  "slots": {},
+  "slots": {
+    "root": { "required": true, "selector": "[data-slot=\"popover\"]" },
+    "trigger": { "required": true, "selector": "[data-slot=\"popover-trigger\"]" },
+    "content": { "required": true, "selector": "[data-slot=\"popover-content\"]" }
+  },
   "a11y": {
     "role": "region",
     "labeling": [

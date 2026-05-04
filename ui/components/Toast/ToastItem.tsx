@@ -36,6 +36,7 @@ export const ToastItem = React.forwardRef<HTMLDivElement, ToastItemProps>(
         role={rec.variant === 'error' ? 'alert' : 'status'}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
+        data-slot="toast"
         data-state={rec.state}
         {...rest}
       >
@@ -45,7 +46,7 @@ export const ToastItem = React.forwardRef<HTMLDivElement, ToastItemProps>(
             {rec.description && (
               <ToastDescription>{rec.description}</ToastDescription>
             )}
-            <div className={styles.row}>
+            <div data-slot="toast-row" className={styles.row}>
               {rec.action && <ToastAction action={rec.action} />}
               {rec.dismissible && <ToastClose onClick={() => dismiss(id)} />}
             </div>

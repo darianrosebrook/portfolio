@@ -6,7 +6,7 @@ export interface OTPErrorProps extends React.HTMLAttributes<HTMLDivElement> {}
 export const OTPError: React.FC<OTPErrorProps> = ({ children, ...rest }) => {
   if (!children) return null;
   return (
-    <div role="alert" {...rest}>
+    <div role="alert" data-slot="otp-error" {...rest}>
       {children}
     </div>
   );

@@ -13,6 +13,7 @@ export const ToastClose: React.FC<ToastCloseProps> = ({
     <button
       type="button"
       className={[styles.close, className].filter(Boolean).join(' ')}
+      data-slot="toast-close"
       aria-label="Dismiss notification"
       {...rest}
     >

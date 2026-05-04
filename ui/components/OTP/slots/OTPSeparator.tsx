@@ -10,5 +10,5 @@ export const OTPSeparator: React.FC<OTPSeparatorProps> = ({
   children = ' ',
   className,
 }) => {
-  return <span className={className}>{children}</span>;
+  return <span data-slot="otp-separator" className={className}>{children}</span>;
 };

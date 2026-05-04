@@ -99,12 +99,13 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>(
         : circumference - (percentage / 100) * circumference;
 
       return (
-        <div ref={ref} className={progressClassName} {...ariaProps} {...rest}>
+        <div ref={ref} className={progressClassName} {...ariaProps} {...rest} data-slot="progress">
           <svg
             className={styles.circle}
             width="40"
             height="40"
             viewBox="0 0 40 40"
+            data-slot="progress-track"
           >
             {/* Background circle */}
             <circle
@@ -127,10 +128,11 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>(
               strokeDasharray={circumference}
               strokeDashoffset={strokeDashoffset}
               transform="rotate(-90 20 20)"
+              data-slot="progress-fill"
             />
           </svg>
           {showValue && !isIndeterminate && (
-            <span className={styles.value}>{formattedValue}</span>
+            <span className={styles.value} data-slot="progress-value">{formattedValue}</span>
           )}
         </div>
       );
@@ -138,17 +140,18 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>(
 
     // Linear variant
     return (
-      <div ref={ref} className={progressClassName} {...ariaProps} {...rest}>
-        <div className={styles.track}>
+      <div ref={ref} className={progressClassName} {...ariaProps} {...rest} data-slot="progress">
+        <div className={styles.track} data-slot="progress-track">
           <div
             className={styles.fill}
             style={{
               width: isIndeterminate ? undefined : `${percentage}%`,
             }}
+            data-slot="progress-fill"
           />
         </div>
         {showValue && !isIndeterminate && (
-          <span className={styles.value}>{formattedValue}</span>
+          <span className={styles.value} data-slot="progress-value">{formattedValue}</span>
         )}
       </div>
     );

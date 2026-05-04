@@ -27,7 +27,11 @@
     "disabled",
     "checked"
   ],
-  "slots": {},
+  "slots": {
+    "root": { "required": true, "selector": "[data-slot=\"toggle-switch\"]" },
+    "input": { "required": true, "selector": "[data-slot=\"toggle-switch-input\"]" },
+    "label": { "required": false, "selector": "[data-slot=\"toggle-switch-label\"]" }
+  },
   "a11y": {
     "role": "switch",
     "labeling": [

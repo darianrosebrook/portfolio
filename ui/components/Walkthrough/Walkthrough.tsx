@@ -83,10 +83,10 @@ export const Walkthrough: React.FC<WalkthroughUIProps> = ({
             {children ?? (
               <>
                 {step?.title && (
-                  <div className={styles.title}>{step.title}</div>
+                  <div data-slot="walkthrough-title" className={styles.title}>{step.title}</div>
                 )}
                 {step?.description && (
-                  <div className={styles.description}>{step.description}</div>
+                  <div data-slot="walkthrough-description" className={styles.description}>{step.description}</div>
                 )}
                 <WalkthroughProgress />
                 <WalkthroughControls />
@@ -115,6 +115,7 @@ export const Walkthrough: React.FC<WalkthroughUIProps> = ({
       <Popover.Content>
         <div
           className={[styles.content, className].filter(Boolean).join(' ')}
+          data-slot="walkthrough"
           tabIndex={-1}
           onKeyDown={handleKeyDown}
         >

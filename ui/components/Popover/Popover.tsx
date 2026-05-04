@@ -283,7 +283,7 @@ const Popover: React.FC<PopoverProps> & {
 
   return (
     <PopoverContext.Provider value={contextValue}>
-      <div className={`${styles.popoverContainer} ${className || ''}`}>
+      <div className={`${styles.popoverContainer} ${className || ''}`} data-slot="popover">
         {children}
       </div>
     </PopoverContext.Provider>
@@ -346,6 +346,7 @@ const Trigger = forwardRef<HTMLElement, TriggerProps>(
         tabIndex={isNonButtonElement ? 0 : undefined}
         aria-haspopup="true"
         aria-expanded={isOpen}
+        data-slot="popover-trigger"
       >
         {children}
       </Component>
@@ -434,6 +435,7 @@ const Content: React.FC<ContentProps> = ({
         left: `${position.left}px`,
         ...style,
       }}
+      data-slot="popover-content"
     >
       {children}
     </div>

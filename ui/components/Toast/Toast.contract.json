@@ -32,18 +32,13 @@
     "leaving"
   ],
   "slots": {
-    "action": {
-      "required": false
-    },
-    "close": {
-      "required": false
-    },
-    "description": {
-      "required": false
-    },
-    "title": {
-      "required": false
-    }
+    "viewport": { "required": true, "selector": "[data-slot=\"toast-viewport\"]" },
+    "root": { "required": true, "selector": "[data-slot=\"toast\"]" },
+    "title": { "required": false, "selector": "[data-slot=\"toast-title\"]" },
+    "description": { "required": false, "selector": "[data-slot=\"toast-description\"]" },
+    "row": { "required": false, "selector": "[data-slot=\"toast-row\"]" },
+    "action": { "required": false, "selector": "[data-slot=\"toast-action\"]" },
+    "close": { "required": false, "selector": "[data-slot=\"toast-close\"]" }
   },
   "a11y": {
     "role": "alert",

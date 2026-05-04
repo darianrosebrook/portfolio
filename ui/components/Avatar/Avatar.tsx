@@ -33,6 +33,7 @@ const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
       <div
         ref={ref}
         className={`${styles.avatar} ${styles[size]} ${className}`}
+        data-slot="avatar"
         {...rest}
       >
         {src ? (
@@ -44,9 +45,10 @@ const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
             sizes={dimensions.sizes}
             priority={priority}
             className={styles.avatar_image}
+            data-slot="avatar-image"
           />
         ) : (
-          <span>{displayInitials}</span>
+          <span data-slot="avatar-initials">{displayInitials}</span>
         )}
       </div>
     );

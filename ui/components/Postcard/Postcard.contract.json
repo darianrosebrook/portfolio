@@ -25,7 +25,18 @@
     "default",
     "hover"
   ],
-  "slots": {},
+  "slots": {
+    "root": { "required": true, "selector": "[data-slot=\"postcard\"]" },
+    "header": { "required": false, "selector": "[data-slot=\"postcard-header\"]" },
+    "body": { "required": false, "selector": "[data-slot=\"postcard-body\"]" },
+    "footer": { "required": false, "selector": "[data-slot=\"postcard-footer\"]" },
+    "stats": { "required": false, "selector": "[data-slot=\"postcard-stats\"]" },
+    "author": { "required": false, "selector": "[data-slot=\"postcard-author\"]" },
+    "timestamp": { "required": false, "selector": "[data-slot=\"postcard-timestamp\"]" },
+    "content": { "required": false, "selector": "[data-slot=\"postcard-content\"]" },
+    "embed": { "required": false, "selector": "[data-slot=\"postcard-embed\"]" },
+    "stat": { "required": false, "selector": "[data-slot=\"postcard-stat\"]" }
+  },
   "a11y": {
     "role": "region",
     "labeling": [],

@@ -12,7 +12,11 @@
     "default",
     "error"
   ],
-  "slots": {},
+  "slots": {
+    "root": { "required": true, "selector": "[data-slot=\"text-field\"]" },
+    "description": { "required": false, "selector": "[data-slot=\"text-field-description\"]" },
+    "error": { "required": false, "selector": "[data-slot=\"text-field-error\"]" }
+  },
   "a11y": {
     "role": "alert",
     "labeling": [

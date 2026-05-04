@@ -31,7 +31,12 @@
   "states": [
     "default"
   ],
-  "slots": {},
+  "slots": {
+    "root": { "required": true, "selector": "[data-slot=\"progress\"]" },
+    "track": { "required": false, "selector": "[data-slot=\"progress-track\"]" },
+    "fill": { "required": false, "selector": "[data-slot=\"progress-fill\"]" },
+    "value": { "required": false, "selector": "[data-slot=\"progress-value\"]" }
+  },
   "a11y": {
     "role": "generic",
     "labeling": [

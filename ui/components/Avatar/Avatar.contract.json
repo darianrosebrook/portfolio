@@ -24,7 +24,11 @@
     "default",
     "focus"
   ],
-  "slots": {},
+  "slots": {
+    "root": { "required": true, "selector": "[data-slot=\"avatar\"]" },
+    "image": { "required": false, "selector": "[data-slot=\"avatar-image\"]" },
+    "initials": { "required": false, "selector": "[data-slot=\"avatar-initials\"]" }
+  },
   "a11y": {
     "role": "generic",
     "labeling": [],

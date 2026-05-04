@@ -34,10 +34,9 @@
     "disabled"
   ],
   "slots": {
-    "root": {
-      "required": true,
-      "selector": "[data-slot=\"chip\"]"
-    }
+    "root": { "required": true, "selector": "[data-slot=\"chip\"]" },
+    "text": { "required": false, "selector": "[data-slot=\"chip-text\"]" },
+    "icon": { "required": false, "selector": "[data-slot=\"chip-icon\"]" }
   },
   "a11y": {
     "role": "generic",

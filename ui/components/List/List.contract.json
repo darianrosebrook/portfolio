@@ -37,7 +37,9 @@
   "states": [
     "default"
   ],
-  "slots": {},
+  "slots": {
+    "root": { "required": true, "selector": "[data-slot=\"list\"]" }
+  },
   "a11y": {
     "role": "generic",
     "labeling": [],

@@ -17,6 +17,7 @@ export const ToastViewport = React.forwardRef<
     <div
       ref={ref}
       className={[styles.viewport, className].filter(Boolean).join(' ')}
+      data-slot="toast-viewport"
       aria-live={politeness}
       {...rest}
     >

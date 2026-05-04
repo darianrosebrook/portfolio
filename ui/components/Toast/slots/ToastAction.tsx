@@ -16,6 +16,7 @@ export const ToastAction: React.FC<ToastActionProps> = ({
     <button
       type="button"
       className={[styles.action, className].filter(Boolean).join(' ')}
+      data-slot="toast-action"
       onClick={action.onClick}
     >
       {action.label}

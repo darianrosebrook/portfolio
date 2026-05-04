@@ -29,7 +29,18 @@
     "hover",
     "disabled"
   ],
-  "slots": {},
+  "slots": {
+    "root": { "required": true, "selector": "[data-slot=\"walkthrough\"]" },
+    "title": { "required": false, "selector": "[data-slot=\"walkthrough-title\"]" },
+    "description": { "required": false, "selector": "[data-slot=\"walkthrough-description\"]" },
+    "controls": { "required": false, "selector": "[data-slot=\"walkthrough-controls\"]" },
+    "skip": { "required": false, "selector": "[data-slot=\"walkthrough-skip\"]" },
+    "prev": { "required": false, "selector": "[data-slot=\"walkthrough-prev\"]" },
+    "next": { "required": false, "selector": "[data-slot=\"walkthrough-next\"]" },
+    "progress": { "required": false, "selector": "[data-slot=\"walkthrough-progress\"]" },
+    "dot": { "required": false, "selector": "[data-slot=\"walkthrough-dot\"]" },
+    "counter": { "required": false, "selector": "[data-slot=\"walkthrough-counter\"]" }
+  },
   "a11y": {
     "role": "status",
     "labeling": [

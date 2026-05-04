@@ -17,7 +17,14 @@
     "focus",
     "disabled"
   ],
-  "slots": {},
+  "slots": {
+    "root": { "required": true, "selector": "[data-slot=\"otp\"]" },
+    "group": { "required": false, "selector": "[data-slot=\"otp-group\"]" },
+    "field": { "required": true, "selector": "[data-slot=\"otp-field\"]" },
+    "label": { "required": false, "selector": "[data-slot=\"otp-label\"]" },
+    "error": { "required": false, "selector": "[data-slot=\"otp-error\"]" },
+    "separator": { "required": false, "selector": "[data-slot=\"otp-separator\"]" }
+  },
   "a11y": {
     "role": "group",
     "roles": [

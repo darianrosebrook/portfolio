@@ -102,6 +102,7 @@ export const OTPField = React.forwardRef<HTMLInputElement, OTPFieldProps>(
               el;
         }}
         className={[styles.field, className].filter(Boolean).join(' ')}
+        data-slot="otp-field"
         value={mask && chars[index] ? '•' : chars[index] || ''}
         inputMode={inputMode}
         autoComplete={autocomplete}

@@ -52,6 +52,7 @@ export const List = React.forwardRef<HTMLElement, ListProps>(
         ]
           .filter(Boolean)
           .join(' '),
+        'data-slot': 'list',
         ...rest,
       },
       children

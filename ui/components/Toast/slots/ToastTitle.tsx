@@ -12,6 +12,7 @@ export const ToastTitle: React.FC<ToastTitleProps> = ({
   return (
     <div
       className={[styles.title, className].filter(Boolean).join(' ')}
+      data-slot="toast-title"
       {...rest}
     >
       {children}

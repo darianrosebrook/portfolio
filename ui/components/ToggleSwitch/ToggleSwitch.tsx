@@ -70,7 +70,7 @@ const ToggleSwitch = React.forwardRef<HTMLInputElement, ToggleSwitchProps>(
           : styles.medium;
 
     return (
-      <div className={`${styles.toggleSwitch} ${sizeClass} ${className}`}>
+      <div className={`${styles.toggleSwitch} ${sizeClass} ${className}`} data-slot="toggle-switch">
         <input
           ref={ref}
           type="checkbox"
@@ -87,11 +87,13 @@ const ToggleSwitch = React.forwardRef<HTMLInputElement, ToggleSwitchProps>(
           aria-describedby={
             ariaDescription ? `${safeId}-description` : undefined
           }
+          data-slot="toggle-switch-input"
           {...rest}
         />
         <label
           className={`${styles.label} ${checked ? styles.checked : ''} ${disabled ? styles.disabled : ''}`}
           htmlFor={safeId}
+          data-slot="toggle-switch-label"
         >
           {children}
           {ariaDescription && (

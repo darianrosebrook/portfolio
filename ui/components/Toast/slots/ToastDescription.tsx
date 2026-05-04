@@ -12,6 +12,7 @@ export const ToastDescription: React.FC<ToastDescriptionProps> = ({
   return (
     <div
       className={[styles.description, className].filter(Boolean).join(' ')}
+      data-slot="toast-description"
       {...rest}
     >
       {children}

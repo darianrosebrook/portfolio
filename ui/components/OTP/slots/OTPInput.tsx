@@ -12,6 +12,7 @@ export const OTPInput = React.forwardRef<HTMLDivElement, OTPInputProps>(
       <div
         ref={ref}
         role="group"
+        data-slot="otp-group"
         id={id}
         aria-describedby={describedBy}
         aria-disabled={disabled || undefined}

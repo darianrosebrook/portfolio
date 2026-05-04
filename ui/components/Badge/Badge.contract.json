@@ -29,7 +29,11 @@
     "default",
     "hover"
   ],
-  "slots": {},
+  "slots": {
+    "root": { "required": true, "selector": "[data-slot=\"badge\"]" },
+    "icon": { "required": false, "selector": "[data-slot=\"badge-icon\"]" },
+    "content": { "required": false, "selector": "[data-slot=\"badge-content\"]" }
+  },
   "a11y": {
     "role": "generic",
     "labeling": [],

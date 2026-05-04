@@ -22,7 +22,11 @@
     "focus",
     "disabled"
   ],
-  "slots": {},
+  "slots": {
+    "root": { "required": true, "selector": "[data-slot=\"checkbox\"]" },
+    "input": { "required": true, "selector": "[data-slot=\"checkbox-input\"]" },
+    "indicator": { "required": true, "selector": "[data-slot=\"checkbox-indicator\"]" }
+  },
   "a11y": {
     "role": "generic",
     "labeling": [
