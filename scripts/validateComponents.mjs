@@ -16,8 +16,8 @@ const TRANSFORMED_JSON = path.join(
 );
 
 // Required files for components (strict design system standards)
+// Note: index.tsx / index.ts presence is checked in validateIndexFile, not here.
 const COMPONENT_REQUIRED_FILES = [
-  'index.tsx',
   '{ComponentName}.tsx',
   '{ComponentName}.module.scss',
   '{ComponentName}.contract.json',
@@ -26,7 +26,8 @@ const COMPONENT_REQUIRED_FILES = [
 ];
 
 // Required files for modules (more flexible, application-specific)
-const MODULE_REQUIRED_FILES = ['index.tsx', '{ComponentName}.tsx'];
+// Note: index file checked in validateIndexFile; main file checked in validateMainComponentFile.
+const MODULE_REQUIRED_FILES = [];
 
 // Optional files for components
 const COMPONENT_OPTIONAL_FILES = [
@@ -132,8 +133,8 @@ class ComponentValidator {
     // Validate file naming conventions
     this.validateNamingConventions(componentPath, componentName, type);
 
-    // Validate index.tsx file
-    this.validateIndexFile(componentPath, componentName);
+    // Validate index file (.tsx or .ts)
+    this.validateIndexFile(componentPath, componentName, type);
 
     // Validate main component file
     this.validateMainComponentFile(componentPath, componentName, type);
@@ -189,28 +190,37 @@ class ComponentValidator {
     });
   }
 
-  validateIndexFile(componentPath, componentName) {
-    const indexPath = path.join(componentPath, 'index.tsx');
+  validateIndexFile(componentPath, componentName, type = 'component') {
+    const indexTsx = path.join(componentPath, 'index.tsx');
+    const indexTs = path.join(componentPath, 'index.ts');
+    const indexPath = fs.existsSync(indexTsx)
+      ? indexTsx
+      : fs.existsSync(indexTs)
+        ? indexTs
+        : null;
 
-    if (!fs.existsSync(indexPath)) {
-      this.logError('Missing required file: index.tsx');
+    if (!indexPath) {
+      this.logError('Missing required file: index.tsx or index.ts');
       return;
     }
+
+    this.logSuccess(`Required file exists: ${path.basename(indexPath)}`);
 
     try {
       const content = fs.readFileSync(indexPath, 'utf8');
 
-      // Check for default export - be flexible with naming for modules
-      const possibleNames = [componentName, componentName.toLowerCase()];
-      const hasValidDefaultExport = possibleNames.some((name) =>
-        content.includes(`export { default } from './${name}'`)
-      );
+      // Accept any of: export default X, export { default } from '...', export { X, default } from '...'
+      const hasValidDefaultExport =
+        /export\s+default\s+/.test(content) ||
+        /export\s*\{[^}]*\bdefault\b[^}]*\}/.test(content);
 
       if (hasValidDefaultExport) {
         this.logSuccess('Index file exports default correctly');
+      } else if (type === 'module') {
+        this.logInfo('Module uses named exports (no default export required)');
       } else {
         this.logError(
-          `Index file should export default from './${componentName}' or './${componentName.toLowerCase()}'`
+          `Index file should export a default: 'export default X' or 'export { default } from \"./X\"'`
         );
       }
 
@@ -261,7 +271,11 @@ class ComponentValidator {
 
     if (!mainPath) {
       const expectedFiles = possibleMainFiles.join(' or ');
-      this.logError(`Missing required file: ${expectedFiles}`);
+      if (type === 'module') {
+        this.logWarning(`Module has no single main file (${expectedFiles}) — multi-file structure assumed`);
+      } else {
+        this.logError(`Missing required file: ${expectedFiles}`);
+      }
       return;
     }
 
@@ -333,14 +347,20 @@ class ComponentValidator {
         );
       }
 
-      // Check for composer patterns (only for components)
+      // Check for composer patterns (only for components).
+      // Use contract.layer as authoritative source; fall back to string-match when no contract.
       if (type === 'component') {
-        if (content.includes('Provider') || content.includes('Context')) {
+        const contractLayer = this.readContractLayer(componentPath, componentName);
+        const isComposer =
+          contractLayer === 'composer' ||
+          (contractLayer === null &&
+            (content.includes('Provider') || content.includes('Context')));
+
+        if (isComposer) {
           this.logInfo(
             'Component uses Provider/Context pattern (composer-level)'
           );
 
-          // Check for logic separation in composers
           const hookImport = content.includes(`use${componentName}`);
           if (hookImport) {
             this.logSuccess('Composer separates logic with custom hook');
@@ -365,12 +385,16 @@ class ComponentValidator {
     try {
       const content = fs.readFileSync(mainPath, 'utf8');
 
-      // If component uses Provider/Context patterns, it should be a composer
-      if (
-        content.includes('Provider') ||
-        content.includes('Context') ||
-        content.includes('createContext')
-      ) {
+      // Use contract.layer as authoritative source; fall back to string-match when no contract.
+      const contractLayer = this.readContractLayer(componentPath, componentName);
+      const isComposer =
+        contractLayer === 'composer' ||
+        (contractLayer === null &&
+          (content.includes('Provider') ||
+            content.includes('Context') ||
+            content.includes('createContext')));
+
+      if (isComposer) {
         // Check for custom hook file
         const hookPath = path.join(componentPath, `use${componentName}.ts`);
         if (fs.existsSync(hookPath)) {
@@ -552,6 +576,17 @@ class ComponentValidator {
       }
     } catch (error) {
       this.logError(`Error reading contract file: ${error.message}`);
+    }
+  }
+
+  readContractLayer(componentPath, componentName) {
+    const contractPath = path.join(componentPath, `${componentName}.contract.json`);
+    if (!fs.existsSync(contractPath)) return null;
+    try {
+      const contract = JSON.parse(fs.readFileSync(contractPath, 'utf8'));
+      return contract.layer || null;
+    } catch {
+      return null;
     }
   }
 
