@@ -1,0 +1,15 @@
+{
+  "version": "2025-10-01",
+  "sets": {
+    "base": {
+      "sources": [
+        { "$ref": "base-tokens.json" },
+        {
+          "extra": { "$value": "extra-value", "$type": "color" }
+        }
+      ]
+    }
+  },
+  "modifiers": {},
+  "resolutionOrder": [{ "$ref": "#/sets/base" }]
+}

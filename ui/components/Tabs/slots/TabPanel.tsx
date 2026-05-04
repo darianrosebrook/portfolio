@@ -21,6 +21,7 @@ export const TabPanel = React.forwardRef<HTMLDivElement, TabPanelProps>(
       <div
         ref={ref}
         role="tabpanel"
+        data-slot="tabs-panel"
         hidden={!isActive}
         className={[
           styles.panel,

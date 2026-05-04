@@ -346,5 +346,20 @@
   },
   "rtl": {
     "flipIcon": false
+  },
+  "description": "Constrains its child to a fixed aspect ratio (e.g. 16:9) regardless of container width.",
+  "a2ui": {
+    "category": "layout",
+    "usageHints": [
+      "Use for images, videos, or iframes that must maintain a consistent ratio",
+      "Set ratio as a decimal: 16/9, 4/3, 1/1"
+    ],
+    "children": {
+      "allowed": true,
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ]
+    }
   }
 }

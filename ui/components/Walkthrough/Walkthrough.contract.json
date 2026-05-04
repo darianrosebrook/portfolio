@@ -397,5 +397,76 @@
         "WalkthroughAnchor"
       ]
     }
+  },
+  "motion": {
+    "reducedMotion": "respect",
+    "transitions": [
+      {
+        "name": "open",
+        "trigger": "openness=hidden→visible",
+        "phase": "enter",
+        "properties": [
+          "opacity",
+          "transform"
+        ],
+        "duration": "core.motion.duration.short",
+        "easing": "core.motion.easing.emphasizedDecelerate"
+      },
+      {
+        "name": "close",
+        "trigger": "openness=visible→hidden",
+        "phase": "exit",
+        "properties": [
+          "opacity"
+        ],
+        "duration": "core.motion.duration.short",
+        "easing": "core.motion.easing.emphasizedAccelerate"
+      }
+    ]
+  },
+  "focus": {
+    "strategy": "none",
+    "description": "Walkthrough panels are non-blocking. Focus remains on the anchored element while the panel is visible."
+  },
+  "portal": {
+    "enabled": true,
+    "defaultTarget": "body",
+    "positioning": "anchored",
+    "layering": "popover",
+    "collision": "flip-shift"
+  },
+  "dismissal": {
+    "triggers": [
+      {
+        "event": "escape",
+        "defaultEnabled": true
+      },
+      {
+        "event": "outsideClick",
+        "defaultEnabled": false,
+        "description": "Disabled by default to avoid accidental tour exit."
+      }
+    ]
+  },
+  "relationships": [
+    {
+      "from": "panel",
+      "to": "title",
+      "attribute": "aria-labelledby"
+    },
+    {
+      "from": "panel",
+      "to": "description",
+      "attribute": "aria-describedby"
+    }
+  ],
+  "channels": {
+    "step": {
+      "description": "Active step index.",
+      "value": "index",
+      "defaultValue": "defaultIndex",
+      "onChange": "onStepChange",
+      "valueType": "number"
+    }
   }
 }

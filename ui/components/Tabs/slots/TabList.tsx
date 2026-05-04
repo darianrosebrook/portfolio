@@ -15,10 +15,12 @@ export const TabList: React.FC<TabListProps> = ({
   return (
     <div
       role="tablist"
+      data-slot="tabs-list"
       className={[styles.list, className].filter(Boolean).join(' ')}
       {...rest}
     >
       <div
+        data-slot="tabs-indicator"
         className={styles.indicator}
         style={{
           transform: `translateX(${Math.max(0, activeIndex) * 100}%)`,

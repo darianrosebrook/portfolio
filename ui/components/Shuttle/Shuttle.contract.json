@@ -393,5 +393,17 @@
   },
   "rtl": {
     "flipIcon": false
+  },
+  "description": "Dual-listbox transfer widget for moving items between two ordered collections.",
+  "a2ui": {
+    "category": "action",
+    "usageHints": [
+      "Use for permission assignment, column selection, or playlist management",
+      "Support keyboard: Space to select/deselect, arrow keys to navigate, Enter to transfer",
+      "Show item counts in the listbox headers to communicate selection progress"
+    ],
+    "children": {
+      "allowed": false
+    }
   }
 }

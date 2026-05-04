@@ -63,6 +63,10 @@
     },
     "title": {
       "required": false
+    },
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"card\"]"
     }
   },
   "a11y": {
@@ -683,5 +687,21 @@
   },
   "rtl": {
     "flipIcon": false
+  },
+  "description": "Surface container grouping related content with optional header, media, and action areas.",
+  "a2ui": {
+    "category": "display",
+    "usageHints": [
+      "Use Card.Link to make the entire card clickable",
+      "Keep Card.Actions to 1–2 actions; move secondary actions to an overflow menu",
+      "Card.Media expects a fixed-aspect image or media slot"
+    ],
+    "children": {
+      "allowed": true,
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ]
+    }
   }
 }

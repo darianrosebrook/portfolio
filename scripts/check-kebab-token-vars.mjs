@@ -1,11 +1,20 @@
 #!/usr/bin/env node
 /**
- * Fail component SCSS when generated-token references use camelCase segments.
+ * check-kebab-token-vars.mjs
  *
- * Component token generators may preserve a historical camelCase component
- * prefix, such as `--profileFlag-*`. The generated token path segments after
- * that prefix are kebab-case. This guard catches drift such as
- * `--button-focus-outlineWidth`, which does not resolve against generated SCSS.
+ * Fails (exit 1) if any var(--X) call in ui/components SCSS files has a
+ * camelCase segment — a lowercase letter immediately followed by an uppercase
+ * letter — in the custom property name.
+ *
+ * The generator emits kebab-case names (--foo-font-weight). camelCase references
+ * (--foo-fontWeight) resolve to their initial (empty) value with no browser error,
+ * causing silent runtime breakage.
+ *
+ * Usage:
+ *   node scripts/check-kebab-token-vars.mjs              # check all
+ *   node scripts/check-kebab-token-vars.mjs --fix        # also list matches
+ *
+ * Exit codes: 0 = no camelCase var refs found, 1 = violations found
  */
 
 import fs from 'fs';
@@ -13,72 +22,85 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const rootDir = path.join(__dirname, '..');
-const componentsDir = path.join(rootDir, 'ui', 'components');
-const varCallPattern = /var\(\s*(--[A-Za-z0-9_-]+)(?=\s*[,)]|\s*$)/g;
+const ROOT = path.join(__dirname, '..');
+const COMPONENTS_DIR = path.join(ROOT, 'ui', 'components');
+
+const RESET  = '\x1b[0m';
+const RED    = '\x1b[31m';
+const GREEN  = '\x1b[32m';
+const YELLOW = '\x1b[33m';
+const BOLD   = '\x1b[1m';
+
+// Detect a camelCase segment: lowercase letter immediately followed by uppercase.
+// Tested on each captured property name (not the full line) for precision.
+const CAMEL_SEGMENT = /[a-z][A-Z]/;
+
+// Match: var(--propertyName)
+// Captures the full property name after --
+const VAR_PATTERN = /var\(--([^)\s,]+)/g;
 
 function findScssFiles(dir) {
-  const files = [];
-  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    const entryPath = path.join(dir, entry.name);
+  const results = [];
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  for (const entry of entries) {
+    const full = path.join(dir, entry.name);
     if (entry.isDirectory()) {
-      files.push(...findScssFiles(entryPath));
-      continue;
-    }
-    if (
-      entry.isFile() &&
-      entry.name.endsWith('.scss') &&
-      !entry.name.endsWith('.tokens.generated.scss')
-    ) {
-      files.push(entryPath);
+      results.push(...findScssFiles(full));
+    } else if (entry.isFile() && entry.name.endsWith('.scss')) {
+      results.push(full);
     }
   }
-  return files;
+  return results;
 }
 
-function hasCamelCaseAfterPrefix(tokenName) {
-  const parts = tokenName.replace(/^--/, '').split('-');
-  if (parts.length <= 1) {
-    return false;
-  }
-
-  return parts.slice(1).some((part) => /[a-z0-9][A-Z]/.test(part));
+function relPath(absPath) {
+  return path.relative(ROOT, absPath);
 }
 
-const failures = [];
+// ── main ─────────────────────────────────────────────────────────────────────
 
-for (const scssFile of findScssFiles(componentsDir)) {
-  const content = fs.readFileSync(scssFile, 'utf8');
-  const lines = content.split(/\r?\n/);
+const scssFiles = findScssFiles(COMPONENTS_DIR);
+const violations = [];
 
-  lines.forEach((line, index) => {
+for (const filePath of scssFiles) {
+  const content = fs.readFileSync(filePath, 'utf8');
+  const lines = content.split('\n');
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
     let match;
-    while ((match = varCallPattern.exec(line)) !== null) {
-      const tokenName = match[1];
-      if (hasCamelCaseAfterPrefix(tokenName)) {
-        failures.push({
-          file: path.relative(rootDir, scssFile),
-          line: index + 1,
-          tokenName,
+    VAR_PATTERN.lastIndex = 0;
+    while ((match = VAR_PATTERN.exec(line)) !== null) {
+      const propName = match[1];
+      if (CAMEL_SEGMENT.test(propName)) {
+        violations.push({
+          file: relPath(filePath),
+          line: i + 1,
+          prop: `--${propName}`,
+          text: line.trim(),
         });
       }
     }
-    varCallPattern.lastIndex = 0;
-  });
+  }
 }
 
-if (failures.length === 0) {
-  console.log('Component token variables use kebab-case path segments.');
+if (violations.length === 0) {
+  console.log(`${GREEN}${BOLD}tokens:lint: 0 camelCase CSS var references — all clear${RESET}`);
   process.exit(0);
 }
 
-console.error(
-  `Found ${failures.length} camelCase component token reference(s):`
-);
-for (const failure of failures) {
-  console.error(
-    `  ${failure.file}:${failure.line} - ${failure.tokenName}`
-  );
+console.error(`\n${RED}${BOLD}tokens:lint: ${violations.length} camelCase CSS var reference(s) found${RESET}`);
+console.error(`${YELLOW}The generator emits kebab-case; camelCase names resolve silently to empty.${RESET}\n`);
+
+let currentFile = '';
+for (const v of violations) {
+  if (v.file !== currentFile) {
+    currentFile = v.file;
+    console.error(`${BOLD}${v.file}${RESET}`);
+  }
+  console.error(`  ${RED}line ${v.line}:${RESET} ${v.prop}`);
+  console.error(`    ${YELLOW}${v.text}${RESET}`);
 }
 
+console.error(`\n${RED}${BOLD}Fix: convert camelCase segments to kebab-case (e.g. fontWeight → font-weight)${RESET}`);
 process.exit(1);

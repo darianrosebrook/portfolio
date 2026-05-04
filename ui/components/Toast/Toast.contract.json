@@ -519,5 +519,74 @@
         "ToastClose"
       ]
     }
+  },
+  "motion": {
+    "reducedMotion": "respect",
+    "reducedMotionStrategy": "Duration set to 0 so enter/exit collapses to immediate show/hide.",
+    "transitions": [
+      {
+        "name": "open",
+        "trigger": "openness=hidden→visible",
+        "phase": "enter",
+        "properties": [
+          "opacity",
+          "transform"
+        ],
+        "duration": "core.motion.duration.short",
+        "easing": "core.motion.easing.emphasizedDecelerate"
+      },
+      {
+        "name": "close",
+        "trigger": "openness=visible→hidden",
+        "phase": "exit",
+        "properties": [
+          "opacity",
+          "transform"
+        ],
+        "duration": "core.motion.duration.short",
+        "easing": "core.motion.easing.emphasizedAccelerate"
+      }
+    ]
+  },
+  "focus": {
+    "strategy": "none",
+    "description": "ToastViewport is an ARIA live region. Toasts appear without moving keyboard focus."
+  },
+  "portal": {
+    "enabled": true,
+    "defaultTarget": "body",
+    "positioning": "fixed",
+    "layering": "popover"
+  },
+  "dismissal": {
+    "triggers": [
+      {
+        "event": "escape",
+        "defaultEnabled": true,
+        "description": "Dismisses the focused toast."
+      },
+      {
+        "event": "userDismiss",
+        "defaultEnabled": true,
+        "description": "Clicking the close button on a toast."
+      }
+    ]
+  },
+  "relationships": [
+    {
+      "from": "toast",
+      "to": "title",
+      "attribute": "aria-labelledby",
+      "description": "Each toast has an implicit aria-live region; the title provides accessible labeling."
+    }
+  ],
+  "channels": {
+    "openness": {
+      "description": "Per-toast visibility managed by ToastProvider.",
+      "value": "open",
+      "defaultValue": "open",
+      "onChange": "onOpenChange",
+      "valueType": "boolean"
+    }
   }
 }

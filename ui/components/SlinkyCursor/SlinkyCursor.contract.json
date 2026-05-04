@@ -44,5 +44,16 @@
   },
   "rtl": {
     "flipIcon": false
+  },
+  "description": "Animated custom cursor indicator following the pointer with a spring-physics trail.",
+  "a2ui": {
+    "category": "display",
+    "usageHints": [
+      "Use only for interactive showcase or demo surfaces — not in functional forms",
+      "Disable via system preference (prefers-reduced-motion) automatically"
+    ],
+    "children": {
+      "allowed": false
+    }
   }
 }

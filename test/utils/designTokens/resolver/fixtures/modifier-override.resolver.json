@@ -1,0 +1,43 @@
+{
+  "version": "2025-10-01",
+  "sets": {
+    "base": {
+      "sources": [
+        {
+          "color": {
+            "bg": { "$value": "white", "$type": "color" }
+          }
+        }
+      ]
+    }
+  },
+  "modifiers": {
+    "theme": {
+      "contexts": {
+        "light": {
+          "sources": [
+            {
+              "color": {
+                "bg": { "$value": "lightgray", "$type": "color" }
+              }
+            }
+          ]
+        },
+        "dark": {
+          "sources": [
+            {
+              "color": {
+                "bg": { "$value": "black", "$type": "color" }
+              }
+            }
+          ]
+        }
+      },
+      "default": "light"
+    }
+  },
+  "resolutionOrder": [
+    { "$ref": "#/sets/base" },
+    { "$ref": "#/modifiers/theme" }
+  ]
+}

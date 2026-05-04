@@ -10,6 +10,7 @@ import { Placement, TriggerStrategy } from '@/types/ui';
 import React, {
   forwardRef,
   useCallback,
+  useEffect,
   useId,
   useLayoutEffect,
   useRef,
@@ -204,6 +205,16 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
         }
       };
     }, []);
+
+    // WCAG 2.1 SC 1.4.13: Escape dismisses a visible tooltip
+    useEffect(() => {
+      if (!isVisible) return;
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') hideTooltip();
+      };
+      document.addEventListener('keydown', handleKeyDown);
+      return () => document.removeEventListener('keydown', handleKeyDown);
+    }, [isVisible, hideTooltip]);
 
     // Clone child with event handlers
     type ChildProps = React.HTMLAttributes<HTMLElement> & {

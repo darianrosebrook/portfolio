@@ -16,7 +16,24 @@
     "hover",
     "focus"
   ],
-  "slots": {},
+  "slots": {
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"breadcrumbs\"]"
+    },
+    "list": {
+      "required": true,
+      "selector": "[data-slot=\"breadcrumbs-list\"]"
+    },
+    "separator": {
+      "required": false,
+      "selector": "[data-slot=\"breadcrumbs-separator\"]"
+    },
+    "current": {
+      "required": true,
+      "selector": "[data-slot=\"breadcrumbs-current\"]"
+    }
+  },
   "a11y": {
     "role": "navigation",
     "labeling": [

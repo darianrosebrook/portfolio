@@ -63,6 +63,7 @@ export interface DialogProps extends OpenStateProps, DismissibleProps {
 
 interface DialogContextType {
   dialogId: string;
+  titleId: string;
   close: () => void;
 }
 
@@ -89,6 +90,7 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
     forwardedRef
   ) => {
     const dialogId = `dialog-${useId()}`;
+    const titleId = `${dialogId}-title`;
     const dialogRef = useRef<HTMLDivElement | null>(null);
     const backdropRef = useRef<HTMLDivElement | null>(null);
     const previousActiveElement = useRef<HTMLElement | null>(null);
@@ -252,11 +254,12 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
           id={dialogId}
           role="dialog"
           aria-modal={modal}
+          aria-labelledby={titleId}
           className={dialogClassName}
           onClick={(e) => e.stopPropagation()}
         >
           <DialogContext.Provider
-            value={useMemo(() => ({ dialogId, close }), [dialogId, close])}
+            value={useMemo(() => ({ dialogId, titleId, close }), [dialogId, titleId, close])}
           >
             {children}
           </DialogContext.Provider>
@@ -288,7 +291,14 @@ const Title = ({
 }: {
   children: React.ReactNode;
   className?: string;
-}) => <h2 className={`${styles.title} ${className}`}>{children}</h2>;
+}) => {
+  const context = useContext(DialogContext);
+  return (
+    <h2 id={context?.titleId} className={`${styles.title} ${className}`}>
+      {children}
+    </h2>
+  );
+};
 Title.displayName = 'Dialog.Title';
 
 const Body = ({

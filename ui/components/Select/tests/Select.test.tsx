@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
+import { contractTest } from '@/test/utils/contractTest';
 
 import Select from '../Select';
 import { SelectProvider } from '../SelectProvider';
@@ -116,6 +117,23 @@ describe('Select', () => {
 
       // Verify CSS custom properties are being used
       expect(select).toHaveClass('select');
+    });
+  });
+
+  describe('Contract behavioral obligations', () => {
+    contractTest('Select', 'dismissal.triggers', 'escape', () => {
+      const options = [{ id: 'a', value: 'a', title: 'Option A' }];
+      render(
+        <SelectProvider options={options}>
+          <Select>
+            <div />
+          </Select>
+        </SelectProvider>
+      );
+      const trigger = screen.getByRole('combobox');
+      fireEvent.click(trigger);
+      fireEvent.keyDown(document, { key: 'Escape' });
+      expect(trigger).toHaveAttribute('data-state', 'closed');
     });
   });
 });

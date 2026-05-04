@@ -422,5 +422,23 @@
   },
   "rtl": {
     "flipIcon": true
+  },
+  "description": "Inline alert message communicating status, errors, warnings, or success. Always visible (not triggered by user interaction).",
+  "a2ui": {
+    "category": "display",
+    "usageHints": [
+      "Use variant=error when a form submission or action failed",
+      "Use variant=warning for recoverable issues that need attention",
+      "Use variant=success after a positive outcome",
+      "Avoid using for transient notifications — use Toast instead"
+    ],
+    "children": {
+      "allowed": true,
+      "slot": "children",
+      "accepts": [
+        "string",
+        "ReactNode"
+      ]
+    }
   }
 }

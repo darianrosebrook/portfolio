@@ -32,6 +32,18 @@
     },
     "inline": {
       "required": false
+    },
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"details\"]"
+    },
+    "summary": {
+      "required": true,
+      "selector": "[data-slot=\"details-summary\"]"
+    },
+    "content": {
+      "required": true,
+      "selector": "[data-slot=\"details-content\"]"
     }
   },
   "a11y": {
@@ -263,5 +275,21 @@
   },
   "rtl": {
     "flipIcon": true
+  },
+  "description": "Disclosure widget revealing additional content on demand. Semantically equivalent to <details>/<summary>.",
+  "a2ui": {
+    "category": "content",
+    "usageHints": [
+      "Use for progressive disclosure of non-critical detail",
+      "Not for navigation — use Accordion for a multi-section expand/collapse list",
+      "The summary is always visible; the content is hidden until expanded"
+    ],
+    "children": {
+      "allowed": true,
+      "slot": "children",
+      "accepts": [
+        "ReactNode"
+      ]
+    }
   }
 }
