@@ -1,7 +1,7 @@
 id: CONTRACT-GATES-001
 type: chore
 title: Repair portfolio contract validation gates
-status: active
+status: closed
 risk_tier: 2
 mode: chore
 created_at: '2026-05-04T16:39:09.998Z'
