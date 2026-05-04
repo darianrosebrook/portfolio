@@ -2,6 +2,9 @@
 
 .pest {
   --cursor-size: 40px;
+  --cursor-active-size: 32px;
+  --cursor-background-idle: rgb(0 0 0 / 10%);
+  --cursor-background-active: rgb(0 0 0 / 20%);
   --cursor-laziness: 0.5s;
   --cursor-stretch: calc(
     max(var(--mouse-delta-x, 0px), var(--mouse-delta-y, 0px))
@@ -16,10 +19,10 @@
 
   /* Stretching for slinky effect */
   width: calc(var(--cursor-stretch, 1) * var(--cursor-size));
-  min-width: 32px;
+  min-width: var(--cursor-active-size);
   height: var(--cursor-size, 40px);
-  min-height: 32px;
-  background: rgb(0 0 0 / 10%);
+  min-height: var(--cursor-active-size);
+  background: var(--cursor-background-idle);
   border: 2px solid var(--slinkycursor-color-border-primary);
   border-radius: var(--slinkycursor-shape-radius-full);
   line-height: 0;
@@ -28,10 +31,10 @@
 }
 
 .pest.active {
-  width: 32px !important;
-  height: 32px;
+  width: var(--cursor-active-size) !important;
+  height: var(--cursor-active-size);
   aspect-ratio: 1/1;
-  background: rgb(0 0 0 / 20%);
+  background: var(--cursor-background-active);
 
   /* Style changes on mouse down */
   border: 2px dashed var(--slinkycursor-color-border-hover, #cccccc);

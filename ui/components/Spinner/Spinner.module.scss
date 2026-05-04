@@ -3,6 +3,9 @@
 .root {
   @include sp.vars;
 
+  --spinner-dots-delay-leading: -0.2s;
+  --spinner-dots-delay-trailing: 0.2s;
+
   display: inline-block;
   vertical-align: middle;
   block-size: var(--spinner-size-value, var(--spinner-size-md));
@@ -59,12 +62,12 @@
 
 [data-variant='dots'] .visual::before {
   transform: translate(calc(-50% - var(--spinner-dots-gap-local)), -50%);
-  animation-delay: -0.2s;
+  animation-delay: var(--spinner-dots-delay-leading);
 }
 
 [data-variant='dots'] .visual::after {
   transform: translate(calc(-50% + var(--spinner-dots-gap-local)), -50%);
-  animation-delay: 0.2s;
+  animation-delay: var(--spinner-dots-delay-trailing);
 }
 
 /* Variant: bars */

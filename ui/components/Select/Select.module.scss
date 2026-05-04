@@ -12,6 +12,12 @@
 .select {
   @include selectTokens.vars;
 
+  --select-focus-outline-width: 2px;
+  --select-focus-outline-offset: -1px;
+  --select-focus-ring-shadow: 0 0 0 2px;
+  --select-picker-offset: 0.25rem;
+  --select-picker-shadow: 0 4px 6px rgb(0 0 0 / 10%);
+
   box-sizing: border-box;
   width: 100%;
   padding: var(--select-size-padding-default, 8px);
@@ -103,13 +109,13 @@
     border-color: var(--select-color-border-focus-visible, #d9292b);
 
     // Use color-mix() for focus ring
-    outline: 2px solid
+    outline: var(--select-focus-outline-width) solid
       color-mix(
         in oklab,
         var(--select-color-border-focus-visible, #d9292b) 40%,
         transparent
       );
-    outline-offset: -1px;
+    outline-offset: var(--select-focus-outline-offset);
     color: var(--select-color-foreground-focus-visible, #141414);
   }
 
@@ -145,7 +151,7 @@
     transform-origin: top;
     cursor: default;
     appearance: base-select;
-    margin-block-start: 0.25rem;
+    margin-block-start: var(--select-picker-offset);
 
     @starting-style {
       opacity: 0;
@@ -220,7 +226,7 @@
 
 .clearButton {
   position: absolute;
-  padding: 0.25rem;
+  padding: var(--select-picker-offset);
   background: none;
   border: none;
   border-radius: 50%;
@@ -251,6 +257,12 @@
 
 .comboboxInput {
   @include selectTokens.vars;
+
+  --select-focus-outline-width: 2px;
+  --select-focus-outline-offset: -1px;
+  --select-focus-ring-shadow: 0 0 0 2px;
+  --select-picker-offset: 0.25rem;
+  --select-picker-shadow: 0 4px 6px rgb(0 0 0 / 10%);
 
   box-sizing: border-box;
   width: 100%;
@@ -290,7 +302,8 @@
 
   &:focus {
     border-color: var(--select-color-border-focus, #0066cc);
-    box-shadow: 0 0 0 2px var(--select-color-border-focus-ring, rgb(0 102 204 / 20%));
+    box-shadow: var(--select-focus-ring-shadow)
+      var(--select-color-border-focus-ring, rgb(0 102 204 / 20%));
     outline: none;
   }
 
@@ -315,7 +328,7 @@
     var(--select-color-border-default, #aeaeae);
   border-radius: 0 0 var(--select-size-radius-default, 8px)
     var(--select-size-radius-default, 8px);
-  box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
+  box-shadow: var(--select-picker-shadow);
   list-style: none;
   border-block-start: none;
   inset-block-start: 100%;

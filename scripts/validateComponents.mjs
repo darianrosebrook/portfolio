@@ -26,7 +26,7 @@ const COMPONENT_REQUIRED_FILES = [
 ];
 
 // Required files for modules (more flexible, application-specific)
-const MODULE_REQUIRED_FILES = ['index.tsx', '{ComponentName}.tsx'];
+const MODULE_REQUIRED_FILES = ['index.tsx'];
 
 // Optional files for components
 const COMPONENT_OPTIONAL_FILES = [
@@ -88,7 +88,10 @@ class ComponentValidator {
   }
 
   readContract(componentPath, componentName) {
-    const exactPath = path.join(componentPath, `${componentName}.contract.json`);
+    const exactPath = path.join(
+      componentPath,
+      `${componentName}.contract.json`
+    );
     const fallbackFile = fs
       .readdirSync(componentPath)
       .find((file) => file.endsWith('.contract.json'));
@@ -109,10 +112,23 @@ class ComponentValidator {
     }
   }
 
+  requiredFileExists(componentPath, fileName) {
+    if (fileName === 'index.tsx') {
+      return (
+        fs.existsSync(path.join(componentPath, 'index.tsx')) ||
+        fs.existsSync(path.join(componentPath, 'index.ts'))
+      );
+    }
+
+    return fs.existsSync(path.join(componentPath, fileName));
+  }
+
   validateComponentStructure(componentPath, componentName, type = 'component') {
     this.log(`\n${colors.bold}Validating ${componentName}${colors.reset}`);
     const contract =
-      type === 'component' ? this.readContract(componentPath, componentName) : null;
+      type === 'component'
+        ? this.readContract(componentPath, componentName)
+        : null;
     const contractComponentName =
       typeof contract?.name === 'string' ? contract.name : componentName;
     const contractLayer =
@@ -131,12 +147,11 @@ class ComponentValidator {
         ? componentName
         : contractComponentName;
       const fileName = filePattern.replace('{ComponentName}', replacementName);
-      const filePath = path.join(componentPath, fileName);
       const exists = filePattern.endsWith('.contract.json')
         ? fs
             .readdirSync(componentPath)
             .some((file) => file.endsWith('.contract.json'))
-        : fs.existsSync(filePath);
+        : this.requiredFileExists(componentPath, fileName);
 
       if (!exists) {
         this.logError(`Missing required file: ${fileName}`);
@@ -166,22 +181,20 @@ class ComponentValidator {
     });
 
     // Validate file naming conventions
-    this.validateNamingConventions(
-      componentPath,
-      contractComponentName,
-      type
-    );
+    this.validateNamingConventions(componentPath, contractComponentName, type);
 
     // Validate index.tsx file
     this.validateIndexFile(componentPath, contractComponentName, type);
 
     // Validate main component file
-    this.validateMainComponentFile(
-      componentPath,
-      contractComponentName,
-      type,
-      contractLayer
-    );
+    if (type === 'component') {
+      this.validateMainComponentFile(
+        componentPath,
+        contractComponentName,
+        type,
+        contractLayer
+      );
+    }
 
     // Check for composer-specific files (only for components)
     if (type === 'component' && contractLayer === 'composer') {
@@ -215,10 +228,15 @@ class ComponentValidator {
       if (file.startsWith(componentName) && file !== componentName) {
         const extension = path.extname(file);
         const baseName = path.basename(file, extension);
+        const isConventionalSubcomponent = new RegExp(
+          `^${componentName}[A-Z][A-Za-z0-9]*$`
+        ).test(baseName);
 
         if (baseName === componentName) {
           this.logSuccess(`Correct naming: ${file}`);
         } else if (baseName.startsWith(componentName + '.')) {
+          this.logSuccess(`Correct naming: ${file}`);
+        } else if (isConventionalSubcomponent) {
           this.logSuccess(`Correct naming: ${file}`);
         } else {
           this.logWarning(
@@ -241,10 +259,12 @@ class ComponentValidator {
   }
 
   validateIndexFile(componentPath, componentName, type = 'component') {
-    const indexPath = path.join(componentPath, 'index.tsx');
+    const tsxIndexPath = path.join(componentPath, 'index.tsx');
+    const tsIndexPath = path.join(componentPath, 'index.ts');
+    const indexPath = fs.existsSync(tsxIndexPath) ? tsxIndexPath : tsIndexPath;
 
     if (!fs.existsSync(indexPath)) {
-      this.logError('Missing required file: index.tsx');
+      this.logError('Missing required file: index.tsx or index.ts');
       return;
     }
 
@@ -266,14 +286,20 @@ class ComponentValidator {
         ...content.matchAll(
           /export\s*\{\s*default(?:\s+as\s+\w+)?\s*\}\s*from\s*['"]([^'"]+)['"]/g
         ),
+        ...content.matchAll(
+          /export\s*\{[^}]*\bdefault(?:\s+as\s+\w+)?[^}]*\}\s*from\s*['"]([^'"]+)['"]/g
+        ),
       ].map((match) => match[1]);
       const defaultImportTargets = [
-        ...content.matchAll(/import\s+\w+(?:\s*,[^'"]*)?\s+from\s*['"]([^'"]+)['"]/g),
+        ...content.matchAll(
+          /import\s+\w+(?:\s*,[^'"]*)?\s+from\s*['"]([^'"]+)['"]/g
+        ),
       ].map((match) => match[1]);
       const hasExportDefaultIdentifier = /export\s+default\s+\w+/.test(content);
       const hasValidDefaultExport =
         defaultExportTargets.some(resolvesToModule) ||
-        (hasExportDefaultIdentifier && defaultImportTargets.some(resolvesToModule));
+        (hasExportDefaultIdentifier &&
+          defaultImportTargets.some(resolvesToModule));
 
       if (hasValidDefaultExport) {
         this.logSuccess('Index file exports default correctly');
@@ -576,7 +602,10 @@ class ComponentValidator {
   }
 
   validateContractFile(componentPath, componentName) {
-    const exactPath = path.join(componentPath, `${componentName}.contract.json`);
+    const exactPath = path.join(
+      componentPath,
+      `${componentName}.contract.json`
+    );
     const fallbackFile = fs
       .readdirSync(componentPath)
       .find((file) => file.endsWith('.contract.json'));
