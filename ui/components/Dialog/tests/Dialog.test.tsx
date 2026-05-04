@@ -226,5 +226,13 @@ describe('Dialog', () => {
       expect(titleEl).toBeInTheDocument();
       expect(titleEl).toHaveTextContent('Accessible Title');
     });
+
+    contractTest('Dialog', 'a11y.apgPattern', 'dialog-modal', () => {
+      render(<Dialog open modal>Content</Dialog>);
+
+      const dialog = screen.getByRole('dialog');
+      expect(dialog).toBeInTheDocument();
+      expect(dialog).toHaveAttribute('aria-modal', 'true');
+    });
   });
 });

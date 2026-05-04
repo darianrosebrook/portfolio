@@ -149,5 +149,17 @@ describe('Select', () => {
       fireEvent.keyDown(document, { key: 'Escape' });
       expect(trigger).toHaveAttribute('data-state', 'closed');
     });
+
+    contractTest('Select', 'a11y.apgPattern', 'combobox', () => {
+      const options = [{ id: 'a', value: 'a', title: 'Option A' }];
+      render(
+        <SelectProvider options={options}>
+          <Select>
+            <div />
+          </Select>
+        </SelectProvider>
+      );
+      expect(screen.getByRole('combobox')).toBeInTheDocument();
+    });
   });
 });

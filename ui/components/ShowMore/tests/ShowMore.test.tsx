@@ -2,6 +2,7 @@ import * as React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 
 import ShowMore from '../ShowMore';
+import { contractTest } from '@/test/utils/contractTest';
 
 // Extend Jest matchers
 
@@ -94,6 +95,19 @@ describe('ShowMore', () => {
 
       // Verify CSS custom properties are being used
       expect(trigger).toHaveClass('showMore');
+    });
+  });
+
+  describe('Contract behavioral obligations', () => {
+    contractTest('ShowMore', 'a11y.apgPattern', 'button', () => {
+      render(
+        <ShowMore>
+          <ShowMore.Trigger>Show more</ShowMore.Trigger>
+          <ShowMore.Content>Content</ShowMore.Content>
+        </ShowMore>
+      );
+
+      expect(screen.getByRole('button')).toBeInTheDocument();
     });
   });
 });
