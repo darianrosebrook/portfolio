@@ -73,9 +73,10 @@ function endpointOf(c: PathCommand): Point2D | null {
  * walker can step around the contour ring (`closePath` jumps back to the
  * last `moveTo`) without re-deriving structure mid-walk.
  */
-function collectContours(
-  cmds: PathCommand[]
-): { contours: ContourVertex[][]; flat: ContourVertex[] } {
+function collectContours(cmds: PathCommand[]): {
+  contours: ContourVertex[][];
+  flat: ContourVertex[];
+} {
   const contours: ContourVertex[][] = [];
   const flat: ContourVertex[] = [];
   let contourIndex = -1;

@@ -15,7 +15,7 @@ export type SwitchSize = 'sm' | 'md' | 'lg';
 
 export interface SwitchProps extends Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
-  'size' | 'type' | 'role'
+  'children' | 'size' | 'type' | 'role'
 > {
   /** Size variant using design tokens */
   size?: SwitchSize;
@@ -31,6 +31,8 @@ export interface SwitchProps extends Omit<
   className?: string;
   /** Custom id (auto-generated if not provided) */
   id?: string;
+  /** Legacy label content, used as an accessible label when it is plain text */
+  children?: React.ReactNode;
 }
 
 export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
@@ -42,6 +44,7 @@ export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
       disabled = false,
       onChange,
       className = '',
+      children,
       id: providedId,
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
@@ -78,7 +81,9 @@ export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
           disabled={disabled}
           onChange={onChange}
           aria-checked={checked}
-          aria-label={ariaLabel}
+          aria-label={
+            ariaLabel || (typeof children === 'string' ? children : undefined)
+          }
           aria-labelledby={ariaLabelledBy}
           aria-describedby={ariaDescribedBy}
           {...rest}

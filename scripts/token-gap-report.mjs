@@ -39,13 +39,18 @@ const unresolvedToComponents = new Map();
 // Map: component name → Set of unresolved vars it references
 const componentToUnresolved = new Map();
 
-const componentDirs = fs.readdirSync(COMPONENTS_DIR, { withFileTypes: true })
-  .filter(e => e.isDirectory())
-  .map(e => e.name)
+const componentDirs = fs
+  .readdirSync(COMPONENTS_DIR, { withFileTypes: true })
+  .filter((e) => e.isDirectory())
+  .map((e) => e.name)
   .sort();
 
 for (const name of componentDirs) {
-  const scssPath = path.join(COMPONENTS_DIR, name, `${name}.tokens.generated.scss`);
+  const scssPath = path.join(
+    COMPONENTS_DIR,
+    name,
+    `${name}.tokens.generated.scss`
+  );
   if (!fs.existsSync(scssPath)) continue;
 
   const scss = fs.readFileSync(scssPath, 'utf8');
@@ -54,7 +59,8 @@ for (const name of componentDirs) {
   for (const [, refVar] of scss.matchAll(/var\(--([a-z][a-z0-9-]+)\)/g)) {
     if (!definedVars.has(refVar)) {
       componentUnresolved.add(refVar);
-      if (!unresolvedToComponents.has(refVar)) unresolvedToComponents.set(refVar, new Set());
+      if (!unresolvedToComponents.has(refVar))
+        unresolvedToComponents.set(refVar, new Set());
       unresolvedToComponents.get(refVar).add(name);
     }
   }
@@ -72,18 +78,22 @@ function candidates(unresolvedVar, top = 3) {
   const scored = [];
   for (const defVar of definedVars) {
     const defParts = defVar.split('-');
-    const overlap = parts.filter(p => p.length > 2 && defParts.includes(p)).length;
+    const overlap = parts.filter(
+      (p) => p.length > 2 && defParts.includes(p)
+    ).length;
     if (overlap > 0) scored.push({ var: defVar, score: overlap });
   }
   scored.sort((a, b) => b.score - a.score || a.var.length - b.var.length);
-  return scored.slice(0, top).map(s => s.var);
+  return scored.slice(0, top).map((s) => s.var);
 }
 
 // ── Output ────────────────────────────────────────────────────────────────────
 
 if (JSON_OUTPUT) {
   const out = {};
-  for (const [varName, components] of [...unresolvedToComponents.entries()].sort()) {
+  for (const [varName, components] of [
+    ...unresolvedToComponents.entries(),
+  ].sort()) {
     out[varName] = {
       usedBy: [...components].sort(),
       candidates: candidates(varName),
@@ -93,29 +103,39 @@ if (JSON_OUTPUT) {
   process.exit(0);
 }
 
-const RESET  = '\x1b[0m';
-const RED    = '\x1b[31m';
+const RESET = '\x1b[0m';
+const RED = '\x1b[31m';
 const YELLOW = '\x1b[33m';
-const GREEN  = '\x1b[32m';
-const BOLD   = '\x1b[1m';
-const DIM    = '\x1b[2m';
+const GREEN = '\x1b[32m';
+const BOLD = '\x1b[1m';
+const DIM = '\x1b[2m';
 
 if (COMPACT) {
-  for (const [varName, components] of [...unresolvedToComponents.entries()].sort()) {
+  for (const [varName, components] of [
+    ...unresolvedToComponents.entries(),
+  ].sort()) {
     const suggest = candidates(varName, 1)[0] ?? '(no match)';
-    console.log(`${RED}--${varName}${RESET} → ${YELLOW}--${suggest}${RESET}  [${[...components].join(', ')}]`);
+    console.log(
+      `${RED}--${varName}${RESET} → ${YELLOW}--${suggest}${RESET}  [${[...components].join(', ')}]`
+    );
   }
 } else {
   console.log(`\n${BOLD}Token Gap Report${RESET}`);
-  console.log(`${DIM}Scanned ${componentDirs.length} components, found ${unresolvedToComponents.size} unresolved references${RESET}\n`);
+  console.log(
+    `${DIM}Scanned ${componentDirs.length} components, found ${unresolvedToComponents.size} unresolved references${RESET}\n`
+  );
 
-  for (const [varName, components] of [...unresolvedToComponents.entries()].sort()) {
+  for (const [varName, components] of [
+    ...unresolvedToComponents.entries(),
+  ].sort()) {
     const usedBy = [...components].sort().join(', ');
     const suggest = candidates(varName);
     console.log(`${RED}${BOLD}--${varName}${RESET}`);
     console.log(`  Used by:    ${usedBy}`);
     if (suggest.length > 0) {
-      console.log(`  Candidates: ${suggest.map(v => `--${v}`).join('\n              ')}`);
+      console.log(
+        `  Candidates: ${suggest.map((v) => `--${v}`).join('\n              ')}`
+      );
     } else {
       console.log(`  Candidates: ${DIM}(none found)${RESET}`);
     }
@@ -124,12 +144,16 @@ if (COMPACT) {
 
   // Per-component summary
   console.log(`\n${BOLD}Per-component unresolved count:${RESET}`);
-  for (const [name, unresolved] of [...componentToUnresolved.entries()].sort()) {
+  for (const [name, unresolved] of [
+    ...componentToUnresolved.entries(),
+  ].sort()) {
     console.log(`  ${name.padEnd(18)} ${unresolved.size} unresolved`);
   }
 
   const total = unresolvedToComponents.size;
-  console.log(`\n${total === 0 ? GREEN : RED}${BOLD}Total distinct unresolved CSS vars: ${total}${RESET}`);
+  console.log(
+    `\n${total === 0 ? GREEN : RED}${BOLD}Total distinct unresolved CSS vars: ${total}${RESET}`
+  );
 }
 
 process.exit(unresolvedToComponents.size > 0 ? 1 : 0);

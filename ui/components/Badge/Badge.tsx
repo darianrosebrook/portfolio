@@ -79,7 +79,12 @@ export const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
       // If icon is explicitly null, show nothing
       if (icon === null) return null;
       // If icon is provided, use it
-      if (icon) return <span className={styles.icon} data-slot="badge-icon">{icon}</span>;
+      if (icon)
+        return (
+          <span className={styles.icon} data-slot="badge-icon">
+            {icon}
+          </span>
+        );
       // For status variant with showStatusIcon, use default star
       if (variant === 'status' && showStatusIcon) {
         return (
@@ -94,7 +99,11 @@ export const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
     return (
       <div ref={ref} className={badgeClassName} data-slot="badge" {...rest}>
         {renderIcon()}
-        {children && <span className={styles.content} data-slot="badge-content">{children}</span>}
+        {children && (
+          <span className={styles.content} data-slot="badge-content">
+            {children}
+          </span>
+        )}
       </div>
     );
   }

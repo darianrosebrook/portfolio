@@ -34,25 +34,34 @@ const componentArg = (() => {
   return idx !== -1 ? args[idx + 1] : null;
 })();
 
-const RESET  = '\x1b[0m';
-const RED    = '\x1b[31m';
-const GREEN  = '\x1b[32m';
+const RESET = '\x1b[0m';
+const RED = '\x1b[31m';
+const GREEN = '\x1b[32m';
 const YELLOW = '\x1b[33m';
-const BOLD   = '\x1b[1m';
+const BOLD = '\x1b[1m';
 
 // ── helpers ──────────────────────────────────────────────────────────────────
 
 function contractFiles() {
   const entries = fs.readdirSync(COMPONENTS_DIR, { withFileTypes: true });
   return entries
-    .filter(e => e.isDirectory())
-    .filter(e => !componentArg || e.name === componentArg)
-    .map(e => ({
+    .filter((e) => e.isDirectory())
+    .filter((e) => !componentArg || e.name === componentArg)
+    .map((e) => ({
       name: e.name,
-      contractPath: path.join(COMPONENTS_DIR, e.name, `${e.name}.contract.json`),
-      testPath: path.join(COMPONENTS_DIR, e.name, 'tests', `${e.name}.test.tsx`),
+      contractPath: path.join(
+        COMPONENTS_DIR,
+        e.name,
+        `${e.name}.contract.json`
+      ),
+      testPath: path.join(
+        COMPONENTS_DIR,
+        e.name,
+        'tests',
+        `${e.name}.test.tsx`
+      ),
     }))
-    .filter(c => fs.existsSync(c.contractPath));
+    .filter((c) => fs.existsSync(c.contractPath));
 }
 
 /**
@@ -70,9 +79,15 @@ function extractObligations(contract) {
   }
 
   if (Array.isArray(contract.dismissal?.triggers)) {
-    const hasEscape = contract.dismissal.triggers.some(t => t.event === 'escape');
+    const hasEscape = contract.dismissal.triggers.some(
+      (t) => t.event === 'escape'
+    );
     if (hasEscape) {
-      obligations.push({ field: 'dismissal.triggers', value: 'escape', risk: 'high' });
+      obligations.push({
+        field: 'dismissal.triggers',
+        value: 'escape',
+        risk: 'high',
+      });
     }
   }
 
@@ -152,11 +167,15 @@ for (const { name, contractPath, testPath } of files) {
 
 // ── report ────────────────────────────────────────────────────────────────────
 
-const coveredResults   = results.filter(r => r.covered);
-const uncoveredHigh    = results.filter(r => !r.covered && r.risk === 'high');
-const uncoveredMedium  = results.filter(r => !r.covered && r.risk === 'medium');
+const coveredResults = results.filter((r) => r.covered);
+const uncoveredHigh = results.filter((r) => !r.covered && r.risk === 'high');
+const uncoveredMedium = results.filter(
+  (r) => !r.covered && r.risk === 'medium'
+);
 
-console.log(`\nContract traceability: ${coveredResults.length} covered, ${uncoveredHigh.length + uncoveredMedium.length} uncovered\n`);
+console.log(
+  `\nContract traceability: ${coveredResults.length} covered, ${uncoveredHigh.length + uncoveredMedium.length} uncovered\n`
+);
 
 if (coveredResults.length > 0) {
   for (const r of coveredResults) {
@@ -167,13 +186,19 @@ if (coveredResults.length > 0) {
 if (uncoveredHigh.length > 0 || uncoveredMedium.length > 0) {
   console.log('');
   for (const r of uncoveredHigh) {
-    console.error(`${RED}  ✗ ${r.component}: ${r.field} = ${r.value}  [high-risk — must be covered]${RESET}`);
+    console.error(
+      `${RED}  ✗ ${r.component}: ${r.field} = ${r.value}  [high-risk — must be covered]${RESET}`
+    );
     if (!r.hasTestFile) {
-      console.error(`${RED}    (no test file found at ui/components/${r.component}/tests/${r.component}.test.tsx)${RESET}`);
+      console.error(
+        `${RED}    (no test file found at ui/components/${r.component}/tests/${r.component}.test.tsx)${RESET}`
+      );
     }
   }
   for (const r of uncoveredMedium) {
-    console.log(`${YELLOW}  ⚠  ${r.component}: ${r.field} = ${r.value}  [medium — recommended]${RESET}`);
+    console.log(
+      `${YELLOW}  ⚠  ${r.component}: ${r.field} = ${r.value}  [medium — recommended]${RESET}`
+    );
   }
 }
 

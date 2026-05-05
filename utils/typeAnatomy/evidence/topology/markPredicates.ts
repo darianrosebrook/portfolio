@@ -111,9 +111,8 @@ export function isCompactContour(
   // Height ceiling uses x-height as the natural scale. If x-height is
   // missing (xHeight == 0), fall back to glyph bbox height as a safety net
   // so the predicate doesn't always reject.
-  const heightScale = metrics.xHeight > 0
-    ? metrics.xHeight
-    : glyphBBox.maxY - glyphBBox.minY;
+  const heightScale =
+    metrics.xHeight > 0 ? metrics.xHeight : glyphBBox.maxY - glyphBBox.minY;
   if (heightScale > 0 && height / heightScale > maxHeightFractionOfXHeight) {
     return false;
   }

@@ -25,11 +25,11 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, '..');
 const COMPONENTS_DIR = path.join(ROOT, 'ui', 'components');
 
-const RESET  = '\x1b[0m';
-const RED    = '\x1b[31m';
-const GREEN  = '\x1b[32m';
+const RESET = '\x1b[0m';
+const RED = '\x1b[31m';
+const GREEN = '\x1b[32m';
 const YELLOW = '\x1b[33m';
-const BOLD   = '\x1b[1m';
+const BOLD = '\x1b[1m';
 
 // Detect a camelCase segment: lowercase letter immediately followed by uppercase.
 // Tested on each captured property name (not the full line) for precision.
@@ -85,12 +85,18 @@ for (const filePath of scssFiles) {
 }
 
 if (violations.length === 0) {
-  console.log(`${GREEN}${BOLD}tokens:lint: 0 camelCase CSS var references — all clear${RESET}`);
+  console.log(
+    `${GREEN}${BOLD}tokens:lint: 0 camelCase CSS var references — all clear${RESET}`
+  );
   process.exit(0);
 }
 
-console.error(`\n${RED}${BOLD}tokens:lint: ${violations.length} camelCase CSS var reference(s) found${RESET}`);
-console.error(`${YELLOW}The generator emits kebab-case; camelCase names resolve silently to empty.${RESET}\n`);
+console.error(
+  `\n${RED}${BOLD}tokens:lint: ${violations.length} camelCase CSS var reference(s) found${RESET}`
+);
+console.error(
+  `${YELLOW}The generator emits kebab-case; camelCase names resolve silently to empty.${RESET}\n`
+);
 
 let currentFile = '';
 for (const v of violations) {
@@ -102,5 +108,7 @@ for (const v of violations) {
   console.error(`    ${YELLOW}${v.text}${RESET}`);
 }
 
-console.error(`\n${RED}${BOLD}Fix: convert camelCase segments to kebab-case (e.g. fontWeight → font-weight)${RESET}`);
+console.error(
+  `\n${RED}${BOLD}Fix: convert camelCase segments to kebab-case (e.g. fontWeight → font-weight)${RESET}`
+);
 process.exit(1);

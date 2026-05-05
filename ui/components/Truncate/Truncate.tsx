@@ -91,7 +91,9 @@ export const Truncate = React.forwardRef<HTMLElement, TruncateProps>(
         ...rest,
       },
       <>
-        <span data-slot="truncate-content" className={styles.content}>{children}</span>
+        <span data-slot="truncate-content" className={styles.content}>
+          {children}
+        </span>
         {expandable && shouldShowToggle && (
           <button
             data-slot="truncate-toggle"

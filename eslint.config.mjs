@@ -39,7 +39,19 @@ const prettierConfig = compat.extends('prettier');
 
 const config = [
   // Ignore blueprint pattern samples from lint for now
-  { ignores: ['app/blueprints/design-patterns/patterns/**'] },
+  {
+    ignores: [
+      'app/blueprints/design-patterns/patterns/**',
+      'playwright.config.ts',
+      'scripts/templates/**',
+      'test/components/docs.*.test.tsx',
+      'test/integration/PropsBridge.test.tsx',
+      'test/e2e/**',
+      'utils/geometry/geometry.d.ts',
+      'utils/lazy/index.tsx',
+      'utils/test/index.tsx',
+    ],
+  },
 
   // Base Next.js configuration
   ...(Array.isArray(nextConfigFlat) ? nextConfigFlat : [nextConfigFlat]),

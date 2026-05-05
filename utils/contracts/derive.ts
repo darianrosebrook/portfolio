@@ -98,8 +98,14 @@ export interface ComponentContract {
 // ── Prop exclusion rules ────────────────────────────────────────────────────
 
 const EXCLUDED_PROP_NAMES = new Set([
-  'className', 'style', 'id', 'key', 'ref', 'children',
-  'data-testid', 'tabIndex',
+  'className',
+  'style',
+  'id',
+  'key',
+  'ref',
+  'children',
+  'data-testid',
+  'tabIndex',
 ]);
 const EXCLUDED_PROP_PATTERNS = [/^aria-/, /^data-/, /^on[A-Z]/, /Ref$/];
 
@@ -113,7 +119,7 @@ function isExcluded(name: string): boolean {
 function parseTypeString(
   typeStr: string,
   typeAliases: Record<string, TypeDef>,
-  nodeKind?: 'node-ref' | 'icon-ref',
+  nodeKind?: 'node-ref' | 'icon-ref'
 ): { accepts: A2UIValueKind[]; enumValues?: string[] } {
   if (nodeKind === 'node-ref') return { accepts: ['node-ref'] };
   if (nodeKind === 'icon-ref') return { accepts: ['icon-ref'] };
@@ -135,9 +141,18 @@ function parseTypeString(
       continue;
     }
     // Primitive keywords
-    if (part === 'string') { accepts.add('string'); continue; }
-    if (part === 'number') { accepts.add('number'); continue; }
-    if (part === 'boolean') { accepts.add('boolean'); continue; }
+    if (part === 'string') {
+      accepts.add('string');
+      continue;
+    }
+    if (part === 'number') {
+      accepts.add('number');
+      continue;
+    }
+    if (part === 'boolean') {
+      accepts.add('boolean');
+      continue;
+    }
     // React node / element
     if (/^React(Node|Element)|^ReactNode/.test(part)) {
       accepts.add('node-ref');
@@ -155,7 +170,10 @@ function parseTypeString(
         accepts.add('enum');
         enumValues.push(...(alias.values ?? []));
       } else if (alias.alias) {
-        const { accepts: inner, enumValues: innerEnum } = parseTypeString(alias.alias, typeAliases);
+        const { accepts: inner, enumValues: innerEnum } = parseTypeString(
+          alias.alias,
+          typeAliases
+        );
         inner.forEach((k) => accepts.add(k));
         if (innerEnum) enumValues.push(...innerEnum);
       }
@@ -197,7 +215,7 @@ export function deriveDescriptor(contract: ComponentContract): A2UIDescriptor {
     const { accepts, enumValues } = parseTypeString(
       member.type,
       typeAliases,
-      member.nodeKind,
+      member.nodeKind
     );
 
     const descriptor: A2UIPropDescriptor = {
@@ -216,7 +234,9 @@ export function deriveDescriptor(contract: ComponentContract): A2UIDescriptor {
   // --- Events (channels + named events merged) ---
   const events: Record<string, A2UIEventDescriptor> = {};
 
-  for (const [channelName, channel] of Object.entries(contract.channels ?? {})) {
+  for (const [channelName, channel] of Object.entries(
+    contract.channels ?? {}
+  )) {
     events[channelName] = {
       source: 'channel',
       ...(channel.valueType ? { valueType: channel.valueType } : {}),
@@ -237,9 +257,9 @@ export function deriveDescriptor(contract: ComponentContract): A2UIDescriptor {
  * Derive descriptors for all contracts and key them by component name.
  */
 export function deriveRegistry(
-  contracts: ComponentContract[],
+  contracts: ComponentContract[]
 ): Record<string, A2UIDescriptor> {
   return Object.fromEntries(
-    contracts.map((c) => [c.name, deriveDescriptor(c)]),
+    contracts.map((c) => [c.name, deriveDescriptor(c)])
   );
 }

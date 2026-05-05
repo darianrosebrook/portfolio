@@ -56,9 +56,7 @@ export function detectTail(geo: GeometryCache): FeatureInstance[] {
       id: 'tail',
       shape: { type: 'polyline', points: tailPoints },
       region:
-        corridor.length >= 4
-          ? { kind: 'stroke', points: corridor }
-          : undefined,
+        corridor.length >= 4 ? { kind: 'stroke', points: corridor } : undefined,
       confidence: 0.8,
       anchors: {
         start: tailPoints[0],
@@ -197,9 +195,7 @@ function detectQStyleTail(geo: GeometryCache): FeatureInstance | null {
         y2: end.y,
       },
       region:
-        corridor.length >= 4
-          ? { kind: 'stroke', points: corridor }
-          : undefined,
+        corridor.length >= 4 ? { kind: 'stroke', points: corridor } : undefined,
       confidence: 0.7,
       anchors: {
         start,

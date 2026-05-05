@@ -174,7 +174,11 @@ class ComponentValidator {
         expectedLayer: 'assembly',
         result: 'assembly',
         signals: [
-          { id: 'assembly-placement', status: 'flag', confidence: 'structural' },
+          {
+            id: 'assembly-placement',
+            status: 'flag',
+            confidence: 'structural',
+          },
         ],
       };
     }
@@ -184,7 +188,9 @@ class ComponentValidator {
     const rawSignals = this.buildSignals(analysis, expectedLayer);
 
     // Derive result from signals
-    const hasRequiredFlag = rawSignals.some((s) => s.required && s.status === 'flag');
+    const hasRequiredFlag = rawSignals.some(
+      (s) => s.required && s.status === 'flag'
+    );
     const hasAnyFlag = rawSignals.some((s) => s.status === 'flag');
     const result = hasRequiredFlag
       ? 'review_required'
@@ -281,7 +287,10 @@ class ComponentValidator {
       }
 
       // File-existence checks are structural
-      const tokensFile = path.join(componentPath, `${componentName}.tokens.json`);
+      const tokensFile = path.join(
+        componentPath,
+        `${componentName}.tokens.json`
+      );
       const generatedTokensFile = path.join(
         componentPath,
         `${componentName}.tokens.generated.scss`
@@ -399,7 +408,9 @@ class ComponentValidator {
   printResults(records) {
     const pass = records.filter((r) => r.result === 'pass');
     const flags = records.filter((r) => r.result === 'flag');
-    const reviewRequired = records.filter((r) => r.result === 'review_required');
+    const reviewRequired = records.filter(
+      (r) => r.result === 'review_required'
+    );
     const unclassified = records.filter((r) => r.result === 'unclassified');
     const assembly = records.filter((r) => r.result === 'assembly');
 
@@ -420,9 +431,7 @@ class ComponentValidator {
         console.log(`  ${r.component} (${r.expectedLayer})`);
         r.signals
           .filter((s) => s.status === 'flag')
-          .forEach((s) =>
-            console.log(`    ${s.id} [${s.confidence}]`)
-          );
+          .forEach((s) => console.log(`    ${s.id} [${s.confidence}]`));
       });
       console.log('');
     }
@@ -433,9 +442,7 @@ class ComponentValidator {
         console.log(`  ${r.component} (${r.expectedLayer})`);
         r.signals
           .filter((s) => s.status === 'flag')
-          .forEach((s) =>
-            console.log(`    ${s.id} [${s.confidence}]`)
-          );
+          .forEach((s) => console.log(`    ${s.id} [${s.confidence}]`));
       });
       console.log('');
     }
@@ -457,11 +464,14 @@ class ComponentValidator {
 // Run if called directly
 if (import.meta.url === `file://${process.argv[1]}`) {
   const validator = new ComponentValidator();
-  validator.validate().then((records) => {
-    if (JSON_MODE) {
-      console.log(JSON.stringify(records, null, 2));
-    } else {
-      validator.printResults(records);
-    }
-  }).catch(console.error);
+  validator
+    .validate()
+    .then((records) => {
+      if (JSON_MODE) {
+        console.log(JSON.stringify(records, null, 2));
+      } else {
+        validator.printResults(records);
+      }
+    })
+    .catch(console.error);
 }

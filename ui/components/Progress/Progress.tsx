@@ -99,7 +99,13 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>(
         : circumference - (percentage / 100) * circumference;
 
       return (
-        <div ref={ref} className={progressClassName} {...ariaProps} {...rest} data-slot="progress">
+        <div
+          ref={ref}
+          className={progressClassName}
+          {...ariaProps}
+          {...rest}
+          data-slot="progress"
+        >
           <svg
             className={styles.circle}
             width="40"
@@ -132,7 +138,9 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>(
             />
           </svg>
           {showValue && !isIndeterminate && (
-            <span className={styles.value} data-slot="progress-value">{formattedValue}</span>
+            <span className={styles.value} data-slot="progress-value">
+              {formattedValue}
+            </span>
           )}
         </div>
       );
@@ -140,7 +148,13 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>(
 
     // Linear variant
     return (
-      <div ref={ref} className={progressClassName} {...ariaProps} {...rest} data-slot="progress">
+      <div
+        ref={ref}
+        className={progressClassName}
+        {...ariaProps}
+        {...rest}
+        data-slot="progress"
+      >
         <div className={styles.track} data-slot="progress-track">
           <div
             className={styles.fill}
@@ -151,7 +165,9 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>(
           />
         </div>
         {showValue && !isIndeterminate && (
-          <span className={styles.value} data-slot="progress-value">{formattedValue}</span>
+          <span className={styles.value} data-slot="progress-value">
+            {formattedValue}
+          </span>
         )}
       </div>
     );

@@ -259,7 +259,10 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
           onClick={(e) => e.stopPropagation()}
         >
           <DialogContext.Provider
-            value={useMemo(() => ({ dialogId, titleId, close }), [dialogId, titleId, close])}
+            value={useMemo(
+              () => ({ dialogId, titleId, close }),
+              [dialogId, titleId, close]
+            )}
           >
             {children}
           </DialogContext.Provider>

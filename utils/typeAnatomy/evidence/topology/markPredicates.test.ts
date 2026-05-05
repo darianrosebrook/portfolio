@@ -157,21 +157,51 @@ describe('isCompactContour', () => {
 
 describe('isAboveMainBody', () => {
   it('returns true when candidate sits clearly above main body', () => {
-    const main = singleContourGroup({ minX: 100, minY: 0, maxX: 140, maxY: 500 });
-    const dot = singleContourGroup({ minX: 100, minY: 600, maxX: 140, maxY: 660 });
+    const main = singleContourGroup({
+      minX: 100,
+      minY: 0,
+      maxX: 140,
+      maxY: 500,
+    });
+    const dot = singleContourGroup({
+      minX: 100,
+      minY: 600,
+      maxX: 140,
+      maxY: 660,
+    });
     expect(isAboveMainBody(dot, main, 5)).toBe(true);
   });
 
   it('returns false when candidate overlaps the main body vertically', () => {
-    const main = singleContourGroup({ minX: 100, minY: 0, maxX: 140, maxY: 500 });
-    const overlap = singleContourGroup({ minX: 200, minY: 400, maxX: 240, maxY: 600 });
+    const main = singleContourGroup({
+      minX: 100,
+      minY: 0,
+      maxX: 140,
+      maxY: 500,
+    });
+    const overlap = singleContourGroup({
+      minX: 200,
+      minY: 400,
+      maxX: 240,
+      maxY: 600,
+    });
     expect(isAboveMainBody(overlap, main, 5)).toBe(false);
   });
 
   it('returns false when candidate touches main body within epsilon', () => {
-    const main = singleContourGroup({ minX: 100, minY: 0, maxX: 140, maxY: 500 });
+    const main = singleContourGroup({
+      minX: 100,
+      minY: 0,
+      maxX: 140,
+      maxY: 500,
+    });
     // Candidate's minY is exactly main body's maxY.
-    const touching = singleContourGroup({ minX: 100, minY: 500, maxX: 140, maxY: 560 });
+    const touching = singleContourGroup({
+      minX: 100,
+      minY: 500,
+      maxX: 140,
+      maxY: 560,
+    });
     expect(isAboveMainBody(touching, main, 5)).toBe(false);
   });
 });
@@ -179,30 +209,54 @@ describe('isAboveMainBody', () => {
 describe('isAlignedWithLowerStem', () => {
   it('returns true when candidate is centered over a stem in the main body', () => {
     // Main body is one stem at x=100..140, center 120.
-    const main = singleContourGroup({ minX: 100, minY: 0, maxX: 140, maxY: 500 });
+    const main = singleContourGroup({
+      minX: 100,
+      minY: 0,
+      maxX: 140,
+      maxY: 500,
+    });
     // Dot at x=100..140 → center 120, perfectly aligned.
-    const dot = singleContourGroup({ minX: 100, minY: 600, maxX: 140, maxY: 660 });
-    expect(
-      isAlignedWithLowerStem(dot, main, { stemWidth: 40 })
-    ).toBe(true);
+    const dot = singleContourGroup({
+      minX: 100,
+      minY: 600,
+      maxX: 140,
+      maxY: 660,
+    });
+    expect(isAlignedWithLowerStem(dot, main, { stemWidth: 40 })).toBe(true);
   });
 
   it('returns true when candidate is within ±stemWidth of stem center', () => {
-    const main = singleContourGroup({ minX: 100, minY: 0, maxX: 140, maxY: 500 });
+    const main = singleContourGroup({
+      minX: 100,
+      minY: 0,
+      maxX: 140,
+      maxY: 500,
+    });
     // Dot offset by 30 design units (stemWidth=40, tolerance=40).
-    const dot = singleContourGroup({ minX: 130, minY: 600, maxX: 170, maxY: 660 });
-    expect(
-      isAlignedWithLowerStem(dot, main, { stemWidth: 40 })
-    ).toBe(true);
+    const dot = singleContourGroup({
+      minX: 130,
+      minY: 600,
+      maxX: 170,
+      maxY: 660,
+    });
+    expect(isAlignedWithLowerStem(dot, main, { stemWidth: 40 })).toBe(true);
   });
 
   it('returns false when candidate is too far from any stem', () => {
-    const main = singleContourGroup({ minX: 100, minY: 0, maxX: 140, maxY: 500 });
+    const main = singleContourGroup({
+      minX: 100,
+      minY: 0,
+      maxX: 140,
+      maxY: 500,
+    });
     // Dot center at x=300, stem center at 120. Distance 180 >> stemWidth=40.
-    const dot = singleContourGroup({ minX: 280, minY: 600, maxX: 320, maxY: 660 });
-    expect(
-      isAlignedWithLowerStem(dot, main, { stemWidth: 40 })
-    ).toBe(false);
+    const dot = singleContourGroup({
+      minX: 280,
+      minY: 600,
+      maxX: 320,
+      maxY: 660,
+    });
+    expect(isAlignedWithLowerStem(dot, main, { stemWidth: 40 })).toBe(false);
   });
 
   it('selects the closest of multiple stems in the main body group', () => {
@@ -216,10 +270,13 @@ describe('isAlignedWithLowerStem', () => {
     const main = groups[0];
 
     // Dot aligned with right stem (center x≈280).
-    const dot = singleContourGroup({ minX: 260, minY: 600, maxX: 300, maxY: 660 });
-    expect(
-      isAlignedWithLowerStem(dot, main, { stemWidth: 40 })
-    ).toBe(true);
+    const dot = singleContourGroup({
+      minX: 260,
+      minY: 600,
+      maxX: 300,
+      maxY: 660,
+    });
+    expect(isAlignedWithLowerStem(dot, main, { stemWidth: 40 })).toBe(true);
   });
 });
 

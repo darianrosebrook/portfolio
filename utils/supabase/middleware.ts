@@ -39,9 +39,7 @@ export async function updateSession(request: NextRequest) {
 
   // IMPORTANT: This call refreshes the session if needed and updates cookies.
   // Use verified claims for route protection; request cookies can be spoofed.
-  const {
-    data: claimsData,
-  } = await supabase.auth.getClaims();
+  const { data: claimsData } = await supabase.auth.getClaims();
 
   // Protect /dashboard routes
   if (request.nextUrl.pathname.startsWith('/dashboard')) {

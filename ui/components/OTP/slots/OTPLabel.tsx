@@ -4,5 +4,9 @@ import * as React from 'react';
 export interface OTPLabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {}
 
 export const OTPLabel: React.FC<OTPLabelProps> = ({ children, ...rest }) => {
-  return <label data-slot="otp-label" {...rest}>{children}</label>;
+  return (
+    <label data-slot="otp-label" {...rest}>
+      {children}
+    </label>
+  );
 };

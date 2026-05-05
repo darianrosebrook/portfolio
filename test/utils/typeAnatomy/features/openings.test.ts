@@ -65,7 +65,6 @@ describe('opening features', () => {
 
       expect(hasAperture(glyph, metrics)).toBe(false);
     });
-
   });
 
   describe('hasLink', () => {
@@ -92,7 +91,6 @@ describe('opening features', () => {
 
       expect(hasLink(glyph, metrics)).toBe(false);
     });
-
   });
 
   describe('hasNeck', () => {

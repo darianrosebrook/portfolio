@@ -16,9 +16,9 @@ describe('Breadcrumbs', () => {
 
     render(<Breadcrumbs base={base} crumbs={crumbs} />);
 
-    const nav = screen.getByRole('navigation', { name: 'breadcrumb' });
-    const homeLink = screen.getByText('Home');
-    const categoryLink = screen.getByText('Category');
+    const nav = screen.getByRole('navigation', { name: /breadcrumb/i });
+    const homeLink = screen.getByRole('link', { name: 'Home' });
+    const categoryLink = screen.getByRole('link', { name: 'Category' });
     const currentPage = screen.getByText('Current Page');
 
     expect(nav).toBeInTheDocument();
@@ -31,7 +31,9 @@ describe('Breadcrumbs', () => {
     const base = { label: 'Home', href: '/' };
     const crumbs: Array<{ label: string; href: string }> = [];
 
-    render(<Breadcrumbs base={base} crumbs={crumbs} />);
+    render(
+      <Breadcrumbs base={base} crumbs={crumbs} className="custom-class" />
+    );
 
     const nav = screen.getByRole('navigation');
     expect(nav).toHaveClass('custom-class');
@@ -39,12 +41,15 @@ describe('Breadcrumbs', () => {
 
   it('renders links correctly', () => {
     const base = { label: 'Home', href: '/home' };
-    const crumbs = [{ label: 'About', href: '/about' }];
+    const crumbs = [
+      { label: 'About', href: '/about' },
+      { label: 'Team', href: '/about/team' },
+    ];
 
     render(<Breadcrumbs base={base} crumbs={crumbs} />);
 
-    const homeLink = screen.getByText('Home');
-    const aboutLink = screen.getByText('About');
+    const homeLink = screen.getByRole('link', { name: 'Home' });
+    const aboutLink = screen.getByRole('link', { name: 'About' });
 
     expect(homeLink).toHaveAttribute('href', '/home');
     expect(aboutLink).toHaveAttribute('href', '/about');
@@ -57,7 +62,7 @@ describe('Breadcrumbs', () => {
     render(<Breadcrumbs base={base} crumbs={crumbs} />);
 
     const currentItem = screen.getByText('Current');
-    expect(currentItem.tagName).toBe('SPAN');
+    expect(currentItem).toHaveAttribute('aria-current', 'page');
   });
 
   describe('Accessibility', () => {
@@ -77,7 +82,7 @@ describe('Breadcrumbs', () => {
       render(<Breadcrumbs base={base} crumbs={crumbs} />);
 
       const nav = screen.getByRole('navigation');
-      expect(nav).toHaveAttribute('aria-label', 'breadcrumb');
+      expect(nav).toHaveAttribute('aria-label', 'Breadcrumb');
     });
   });
 
@@ -90,8 +95,7 @@ describe('Breadcrumbs', () => {
 
       const nav = screen.getByRole('navigation');
 
-      // Verify CSS custom properties are being used
-      expect(nav).toHaveClass('breadcrumbs');
+      expect(nav).toHaveAttribute('data-slot', 'breadcrumbs');
     });
   });
 });
@@ -101,6 +105,8 @@ describe('Contract behavioral obligations', () => {
     const base = { label: 'Home', href: '/' };
     const crumbs = [{ label: 'Category', href: '/category' }];
     render(<Breadcrumbs base={base} crumbs={crumbs} />);
-    expect(screen.getByRole('navigation', { name: /breadcrumb/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole('navigation', { name: /breadcrumb/i })
+    ).toBeInTheDocument();
   });
 });

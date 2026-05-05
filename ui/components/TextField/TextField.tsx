@@ -33,7 +33,10 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
       [ariaDescribedBy, descId, errId].filter(Boolean).join(' ') || undefined;
 
     return (
-      <div data-slot="text-field" className={[styles.field, className].filter(Boolean).join(' ')}>
+      <div
+        data-slot="text-field"
+        className={[styles.field, className].filter(Boolean).join(' ')}
+      >
         {label ? (
           <Label htmlFor={resolvedId} className={styles.label}>
             {label}
@@ -47,12 +50,21 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
           {...inputProps}
         />
         {description ? (
-          <div id={descId} data-slot="text-field-description" className={styles.description}>
+          <div
+            id={descId}
+            data-slot="text-field-description"
+            className={styles.description}
+          >
             {description}
           </div>
         ) : null}
         {error ? (
-          <div id={errId} role="alert" data-slot="text-field-error" className={styles.error}>
+          <div
+            id={errId}
+            role="alert"
+            data-slot="text-field-error"
+            className={styles.error}
+          >
             {error}
           </div>
         ) : null}

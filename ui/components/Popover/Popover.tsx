@@ -283,7 +283,10 @@ const Popover: React.FC<PopoverProps> & {
 
   return (
     <PopoverContext.Provider value={contextValue}>
-      <div className={`${styles.popoverContainer} ${className || ''}`} data-slot="popover">
+      <div
+        className={`${styles.popoverContainer} ${className || ''}`}
+        data-slot="popover"
+      >
         {children}
       </div>
     </PopoverContext.Provider>

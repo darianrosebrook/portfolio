@@ -153,10 +153,7 @@ describe('curve features (synthetic geometry)', () => {
 
     it('rejects a vertical stem', () => {
       expect(
-        hasHook(
-          mockGlyphFromPath(VERTICAL_STEM.d, VERTICAL_STEM.bbox),
-          metrics
-        )
+        hasHook(mockGlyphFromPath(VERTICAL_STEM.d, VERTICAL_STEM.bbox), metrics)
       ).toBe(false);
     });
 
@@ -174,10 +171,7 @@ describe('curve features (synthetic geometry)', () => {
   describe('hasTail', () => {
     it('rejects a vertical stem', () => {
       expect(
-        hasTail(
-          mockGlyphFromPath(VERTICAL_STEM.d, VERTICAL_STEM.bbox),
-          metrics
-        )
+        hasTail(mockGlyphFromPath(VERTICAL_STEM.d, VERTICAL_STEM.bbox), metrics)
       ).toBe(false);
     });
 

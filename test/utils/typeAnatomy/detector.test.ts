@@ -14,10 +14,7 @@ import {
   mockFont,
   standardMetrics,
 } from '../fixtures/mockGlyph';
-import {
-  DONUT,
-  CIRCLE,
-} from '../fixtures/svgPaths';
+import { DONUT, CIRCLE } from '../fixtures/svgPaths';
 
 describe('detector orchestration', () => {
   const metrics = standardMetrics;
@@ -183,7 +180,6 @@ describe('detector orchestration', () => {
 
       expect(results.get('UnknownFeature')?.found).toBe(false);
     });
-
   });
 
   describe('getAvailableFeatures', () => {

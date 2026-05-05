@@ -66,7 +66,10 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
     }, [indeterminate]);
 
     return (
-      <div className={`${styles.checkboxWrapper} ${className}`} data-slot="checkbox">
+      <div
+        className={`${styles.checkboxWrapper} ${className}`}
+        data-slot="checkbox"
+      >
         <input
           ref={inputRef}
           type="checkbox"
@@ -82,7 +85,11 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
           data-slot="checkbox-input"
           {...rest}
         />
-        <div className={styles.checkboxIndicator} aria-hidden="true" data-slot="checkbox-indicator">
+        <div
+          className={styles.checkboxIndicator}
+          aria-hidden="true"
+          data-slot="checkbox-indicator"
+        >
           {indeterminate ? (
             <svg
               className={styles.indeterminateIcon}

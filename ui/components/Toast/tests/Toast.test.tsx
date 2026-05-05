@@ -270,7 +270,9 @@ describe('Toast Composer', () => {
   describe('Contract behavioral obligations', () => {
     function ToastHelper() {
       const { enqueue, dismiss } = useToast();
-      React.useEffect(() => { enqueue({ id: 'esc-toast', title: 'Escape test' }); }, [enqueue]);
+      React.useEffect(() => {
+        enqueue({ id: 'esc-toast', title: 'Escape test' });
+      }, [enqueue]);
       return (
         <>
           <ToastViewport aria-label="notifications" />
@@ -280,13 +282,21 @@ describe('Toast Composer', () => {
     }
 
     contractTest('Toast', 'dismissal.triggers', 'escape', async () => {
-      render(<ToastProvider><ToastHelper /></ToastProvider>);
+      render(
+        <ToastProvider>
+          <ToastHelper />
+        </ToastProvider>
+      );
       await screen.findByRole('status');
       fireEvent.keyDown(document, { key: 'Escape' });
     });
 
     contractTest('Toast', 'a11y.apgPattern', 'alert', async () => {
-      render(<ToastProvider><ToastHelper /></ToastProvider>);
+      render(
+        <ToastProvider>
+          <ToastHelper />
+        </ToastProvider>
+      );
       const toast = await screen.findByRole('status');
       expect(toast).toBeInTheDocument();
     });

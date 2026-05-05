@@ -110,7 +110,8 @@ describe('Popover', () => {
       fireEvent.keyDown(document, { key: 'Escape' });
 
       await waitFor(
-        () => expect(screen.queryByText('Popover content')).not.toBeInTheDocument(),
+        () =>
+          expect(screen.queryByText('Popover content')).not.toBeInTheDocument(),
         { timeout: 500 }
       );
     });

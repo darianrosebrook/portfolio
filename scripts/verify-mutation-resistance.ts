@@ -61,7 +61,8 @@ const PROBES: Probe[] = [
       // Inject an early-return on the line after the function open brace.
       // Single-line replacement preserves brace balance — the original `}`
       // at end of function still closes the function, not an injected block.
-      search: /(export function detectTittle\(geo: GeometryCache\): FeatureInstance\[\] \{\n)/,
+      search:
+        /(export function detectTittle\(geo: GeometryCache\): FeatureInstance\[\] \{\n)/,
       replace: '$1  return []; void geo;\n',
     },
     expectedFlips: [
@@ -82,9 +83,10 @@ const PROBES: Probe[] = [
     description: 'getMarkContours returns [] → i and j tittle tests fail',
     targetFile: 'utils/typeAnatomy/geometryCache.ts',
     mutation: {
-      search: /export function getMarkContours\(cache: GeometryCache\): ContourClassification\[\] \{\n  return cache\.contours\.filter\(\(c\) => c\.type === 'mark'\);\n\}/,
+      search:
+        /export function getMarkContours\(cache: GeometryCache\): ContourClassification\[\] \{\n  return cache\.contours\.filter\(\(c\) => c\.type === 'mark'\);\n\}/,
       replace:
-        "export function getMarkContours(cache: GeometryCache): ContourClassification[] {\n  void cache;\n  return [];\n}",
+        'export function getMarkContours(cache: GeometryCache): ContourClassification[] {\n  void cache;\n  return [];\n}',
     },
     expectedFlips: [
       {
@@ -114,9 +116,9 @@ const PROBES: Probe[] = [
     // which IS load-bearing for the i/j positive cases — disabling it
     // makes detectTittle skip every mark candidate.
     mutation: {
-      search: /(export function isAboveMainBody\([\s\S]*?\): boolean \{\n)  return candidate\.bbox\.minY - mainBody\.bbox\.maxY >= epsilon;/,
-      replace:
-        '$1  void candidate; void mainBody; void epsilon; return false;',
+      search:
+        /(export function isAboveMainBody\([\s\S]*?\): boolean \{\n)  return candidate\.bbox\.minY - mainBody\.bbox\.maxY >= epsilon;/,
+      replace: '$1  void candidate; void mainBody; void epsilon; return false;',
     },
     expectedFlips: [
       {
@@ -136,7 +138,8 @@ const PROBES: Probe[] = [
     description: 'detectCrossbar returns [] → H and A crossbar tests fail',
     targetFile: 'utils/typeAnatomy/detectors/crossbar.ts',
     mutation: {
-      search: /(export function detectCrossbar\(geo: GeometryCache\): FeatureInstance\[\] \{\n)/,
+      search:
+        /(export function detectCrossbar\(geo: GeometryCache\): FeatureInstance\[\] \{\n)/,
       replace: '$1  return []; void geo;\n',
     },
     expectedFlips: [
@@ -159,7 +162,8 @@ const PROBES: Probe[] = [
       'findOutlineCorners returns [] → A apex and V crotch tests fail',
     targetFile: 'utils/typeAnatomy/evidence/corners/findOutlineCorners.ts',
     mutation: {
-      search: /(export function findOutlineCorners\(points: Point2D\[\]\): CornerSample\[\] \{\n)/,
+      search:
+        /(export function findOutlineCorners\(points: Point2D\[\]\): CornerSample\[\] \{\n)/,
       replace: '$1  void points; return [];\n',
     },
     expectedFlips: [
@@ -181,7 +185,8 @@ const PROBES: Probe[] = [
       'inJunctionCluster is a passthrough → V apex negative test fails (V top corners pass through)',
     targetFile: 'utils/typeAnatomy/evidence/corners/clustering.ts',
     mutation: {
-      search: /(export function inJunctionCluster\(\n  corners: CornerSample\[\],\n  options\?: SharpnessOptions\n\): CornerSample\[\] \{\n)/,
+      search:
+        /(export function inJunctionCluster\(\n  corners: CornerSample\[\],\n  options\?: SharpnessOptions\n\): CornerSample\[\] \{\n)/,
       replace: '$1  void options; return corners;\n',
     },
     expectedFlips: [
@@ -198,7 +203,8 @@ const PROBES: Probe[] = [
       'interiorPointsDown always returns false → A apex and A crotch tests fail',
     targetFile: 'utils/typeAnatomy/evidence/corners/cornerPredicates.ts',
     mutation: {
-      search: /(export function interiorPointsDown\(\n  corner: CornerSample,\n  eps: number = 0\.05\n\): boolean \{\n)  return corner\.interiorDirection\.y < -eps;/,
+      search:
+        /(export function interiorPointsDown\(\n  corner: CornerSample,\n  eps: number = 0\.05\n\): boolean \{\n)  return corner\.interiorDirection\.y < -eps;/,
       replace: '$1  void corner; void eps; return false;',
     },
     expectedFlips: [
@@ -220,7 +226,8 @@ const PROBES: Probe[] = [
       'dedupeNearbyCorners is a passthrough → A apex count becomes 2 instead of 1',
     targetFile: 'utils/typeAnatomy/evidence/corners/dedupe.ts',
     mutation: {
-      search: /(export function dedupeNearbyCorners\(\n  corners: CornerSample\[\],\n  threshold: number\n\): CornerSample\[\] \{\n)  if \(threshold <= 0\) return \[\.\.\.corners\];/,
+      search:
+        /(export function dedupeNearbyCorners\(\n  corners: CornerSample\[\],\n  threshold: number\n\): CornerSample\[\] \{\n)  if \(threshold <= 0\) return \[\.\.\.corners\];/,
       replace: '$1  void threshold; return [...corners];',
     },
     expectedFlips: [
@@ -309,7 +316,8 @@ const PROBES: Probe[] = [
       // gate on `corridor.length >= N` before attaching `region`, so an
       // empty result drops every centerline region. The Newsreader S
       // spine assertion (which requires region.kind === "stroke") fails.
-      search: /export function buildCorridorPolygon\(opts: CorridorOptions\): Point2D\[\] \{\n/,
+      search:
+        /export function buildCorridorPolygon\(opts: CorridorOptions\): Point2D\[\] \{\n/,
       replace:
         'export function buildCorridorPolygon(opts: CorridorOptions): Point2D[] {\n  void opts; return [];\n',
     },
@@ -363,8 +371,10 @@ const PROBES: Probe[] = [
       // the aperture instance lacks the enclosed polygon. This catches a
       // refactor that accidentally removes the region wiring on one of
       // the two emit sites (left and right are independent code paths).
-      search: /      region: \{\n        \/\/ Aperture is the negative space[\s\S]+?      \},\n      confidence: Math\.min\(0\.9, 0\.4 \+ rightCandidates\.length \* 0\.1\),/,
-      replace: '      confidence: Math.min(0.9, 0.4 + rightCandidates.length * 0.1),',
+      search:
+        /      region: \{\n        \/\/ Aperture is the negative space[\s\S]+?      \},\n      confidence: Math\.min\(0\.9, 0\.4 \+ rightCandidates\.length \* 0\.1\),/,
+      replace:
+        '      confidence: Math.min(0.9, 0.4 + rightCandidates.length * 0.1),',
     },
     expectedFlips: [
       {
@@ -433,7 +443,10 @@ function applyMutation(probe: Probe): void {
       `Mutation regex did not match in ${probe.targetFile}. The harness probe ${probe.id} is stale — re-anchor the regex to the current source.`
     );
   }
-  const mutated = original.replace(probe.mutation.search, probe.mutation.replace);
+  const mutated = original.replace(
+    probe.mutation.search,
+    probe.mutation.replace
+  );
   if (mutated === original) {
     throw new Error(
       `Mutation produced no change in ${probe.targetFile} (probe ${probe.id}).`
@@ -446,7 +459,10 @@ function revertMutation(probe: Probe): void {
   exec(`git restore -- "${probe.targetFile}"`);
 }
 
-function runVitest(testPaths: string, jsonOutPath: string): {
+function runVitest(
+  testPaths: string,
+  jsonOutPath: string
+): {
   exitCode: number;
   report: VitestJsonReport;
 } {
@@ -474,7 +490,9 @@ function runVitest(testPaths: string, jsonOutPath: string): {
       `vitest did not produce ${jsonOutPath}. Cannot evaluate probe results.`
     );
   }
-  const report: VitestJsonReport = JSON.parse(fs.readFileSync(jsonOutPath, 'utf8'));
+  const report: VitestJsonReport = JSON.parse(
+    fs.readFileSync(jsonOutPath, 'utf8')
+  );
   return { exitCode, report };
 }
 

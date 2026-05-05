@@ -202,8 +202,7 @@ export function detectCrossbar(geo: GeometryCache): FeatureInstance[] {
     // design units high). Falls back to avgY when the predicate did not
     // produce a measurement (defensive — the failure-reason guards above
     // already short-circuit the no-pair cases).
-    const centerY =
-      thicknessMeasurement.selectedPairCenterOnProbeAxis ?? avgY;
+    const centerY = thicknessMeasurement.selectedPairCenterOnProbeAxis ?? avgY;
 
     const rect = {
       type: 'rect' as const,

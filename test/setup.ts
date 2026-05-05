@@ -2,6 +2,21 @@ import '@testing-library/jest-dom';
 import { vi } from 'vitest';
 import { toHaveNoViolations } from 'jest-axe';
 
+vi.mock('next/navigation', () => ({
+  usePathname: () => '/',
+  useRouter: () => ({
+    back: vi.fn(),
+    forward: vi.fn(),
+    prefetch: vi.fn(),
+    push: vi.fn(),
+    refresh: vi.fn(),
+    replace: vi.fn(),
+  }),
+  useSearchParams: () => new URLSearchParams(),
+  notFound: vi.fn(),
+  redirect: vi.fn(),
+}));
+
 // Extend Vitest's expect with jest-axe matchers
 expect.extend(toHaveNoViolations);
 
@@ -9,7 +24,7 @@ expect.extend(toHaveNoViolations);
 if (typeof globalThis.requestIdleCallback === 'undefined') {
   globalThis.requestIdleCallback = function (
     cb: IdleRequestCallback,
-    options?: IdleRequestOptions
+    _options?: IdleRequestOptions
   ): number {
     const start = Date.now();
     return setTimeout(() => {

@@ -76,7 +76,9 @@ export const Breadcrumbs = React.forwardRef<HTMLElement, BreadcrumbsProps>(
               {base.label}
             </BreadcrumbNavigationLink>
           </li>
-          <li data-slot="breadcrumbs-separator" className={styles.separator}>/</li>
+          <li data-slot="breadcrumbs-separator" className={styles.separator}>
+            /
+          </li>
 
           {showOverflow ? (
             <li className={styles.overflow}>
@@ -105,7 +107,12 @@ export const Breadcrumbs = React.forwardRef<HTMLElement, BreadcrumbsProps>(
                     {c.label}
                   </BreadcrumbNavigationLink>
                 </li>
-                <li data-slot="breadcrumbs-separator" className={styles.separator}>/</li>
+                <li
+                  data-slot="breadcrumbs-separator"
+                  className={styles.separator}
+                >
+                  /
+                </li>
               </React.Fragment>
             ))
           )}
@@ -117,11 +124,20 @@ export const Breadcrumbs = React.forwardRef<HTMLElement, BreadcrumbsProps>(
                   {prev.label}
                 </BreadcrumbNavigationLink>
               </li>
-              <li data-slot="breadcrumbs-separator" className={styles.separator}>/</li>
+              <li
+                data-slot="breadcrumbs-separator"
+                className={styles.separator}
+              >
+                /
+              </li>
             </>
           )}
 
-          <li data-slot="breadcrumbs-current" className={styles.current} aria-current="page">
+          <li
+            data-slot="breadcrumbs-current"
+            className={styles.current}
+            aria-current="page"
+          >
             {current.label}
           </li>
         </ul>

@@ -34,50 +34,78 @@ const componentArg = (() => {
   return idx !== -1 ? args[idx + 1] : null;
 })();
 
-const RESET  = '\x1b[0m';
-const RED    = '\x1b[31m';
-const GREEN  = '\x1b[32m';
+const RESET = '\x1b[0m';
+const RED = '\x1b[31m';
+const GREEN = '\x1b[32m';
 const YELLOW = '\x1b[33m';
-const BOLD   = '\x1b[1m';
+const BOLD = '\x1b[1m';
 
 // ── Resolve the generated SCSS path for a component ─────────────────────────
-// The bridge SCSS file is named using capitalize(prefix) from tokens.json,
-// NOT necessarily the folder name. E.g. AlertNotice/ with prefix "alert" → Alert.tokens.generated.scss
+// The bridge SCSS file is usually named after the component folder, but a few
+// legacy/shared-prefix components use the token prefix instead. E.g.
+// AlertNotice/ with prefix "alert" → Alert.tokens.generated.scss.
 
 function resolveScssPath(componentDir, componentName) {
-  const tokensJsonPath = path.join(componentDir, `${componentName}.tokens.json`);
-  let prefix = componentName;
+  const tokensJsonPath = path.join(
+    componentDir,
+    `${componentName}.tokens.json`
+  );
+  const candidates = [`${componentName}.tokens.generated.scss`];
+
   if (fs.existsSync(tokensJsonPath)) {
     try {
       const tj = JSON.parse(fs.readFileSync(tokensJsonPath, 'utf8'));
       if (tj.prefix) {
         const p = String(tj.prefix);
-        prefix = p.charAt(0).toUpperCase() + p.slice(1);
+        const capitalizedPrefix = p.charAt(0).toUpperCase() + p.slice(1);
+        const pascalPrefix = p
+          .split(/[-_\s]+/)
+          .filter(Boolean)
+          .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+          .join('');
+
+        candidates.push(
+          `${capitalizedPrefix}.tokens.generated.scss`,
+          `${pascalPrefix}.tokens.generated.scss`
+        );
       }
     } catch {}
   }
-  return path.join(componentDir, `${prefix}.tokens.generated.scss`);
+
+  for (const fileName of [...new Set(candidates)]) {
+    const candidate = path.join(componentDir, fileName);
+    if (fs.existsSync(candidate)) return candidate;
+  }
+
+  return path.join(componentDir, candidates[0]);
 }
 
 function dotPathToCssVar(dotPath) {
-  return '--' + dotPath
-    .replace(/\./g, '-')
-    .replace(/[A-Z]/g, (m) => '-' + m.toLowerCase())
-    .replace(/-+/g, '-')
-    .toLowerCase();
+  return (
+    '--' +
+    dotPath
+      .replace(/\./g, '-')
+      .replace(/[A-Z]/g, (m) => '-' + m.toLowerCase())
+      .replace(/-+/g, '-')
+      .toLowerCase()
+  );
 }
 
 function contractFiles() {
   const entries = fs.readdirSync(COMPONENTS_DIR, { withFileTypes: true });
   return entries
-    .filter(e => e.isDirectory())
-    .filter(e => !componentArg || e.name === componentArg)
-    .map(e => ({
+    .filter((e) => e.isDirectory())
+    .filter((e) => !componentArg || e.name === componentArg)
+    .map((e) => ({
       name: e.name,
-      contractPath: path.join(COMPONENTS_DIR, e.name, `${e.name}.contract.json`),
+      contractPath: path.join(
+        COMPONENTS_DIR,
+        e.name,
+        `${e.name}.contract.json`
+      ),
       scssPath: resolveScssPath(path.join(COMPONENTS_DIR, e.name), e.name),
     }))
-    .filter(c => fs.existsSync(c.contractPath));
+    .filter((c) => fs.existsSync(c.contractPath));
 }
 
 let totalPassed = 0;
@@ -105,7 +133,9 @@ for (const { name, contractPath, scssPath } of contractFiles()) {
     // Legacy: flat string array
     if (Array.isArray(tokenValue)) {
       if (WARN_LEGACY && tokenValue.length > 0) {
-        errors.push(`  [${part}] ${tokenValue.length} legacy flat token(s) — migrate to structured form`);
+        errors.push(
+          `  [${part}] ${tokenValue.length} legacy flat token(s) — migrate to structured form`
+        );
         componentSkipped += tokenValue.length;
       } else {
         totalSkipped += tokenValue.length;
@@ -121,15 +151,24 @@ for (const { name, contractPath, scssPath } of contractFiles()) {
       if ('literal' in resolution) {
         // Load SCSS on demand
         if (scssContent === null) {
-          const raw = fs.existsSync(scssPath) ? fs.readFileSync(scssPath, 'utf8') : '';
-          scssContent = raw === '' ? '' : raw.replace(/--([a-zA-Z][a-zA-Z0-9-]+)/g, (_, v) =>
-            '--' + v.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()
-          );
+          const raw = fs.existsSync(scssPath)
+            ? fs.readFileSync(scssPath, 'utf8')
+            : '';
+          scssContent =
+            raw === ''
+              ? ''
+              : raw.replace(
+                  /--([a-zA-Z][a-zA-Z0-9-]+)/g,
+                  (_, v) =>
+                    '--' + v.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()
+                );
         }
 
         const cssVar = dotPathToCssVar(tokenName);
         if (scssContent === '' || !scssContent.includes(`${cssVar}:`)) {
-          errors.push(`  [${part}.${tokenName}] CSS var ${cssVar} not found in generated SCSS`);
+          errors.push(
+            `  [${part}.${tokenName}] CSS var ${cssVar} not found in generated SCSS`
+          );
           componentFailed++;
         } else {
           totalPassed++;
@@ -147,15 +186,24 @@ for (const { name, contractPath, scssPath } of contractFiles()) {
 
       // Load SCSS on demand (only when we have structured tokens to verify)
       if (scssContent === null) {
-        const raw = fs.existsSync(scssPath) ? fs.readFileSync(scssPath, 'utf8') : '';
+        const raw = fs.existsSync(scssPath)
+          ? fs.readFileSync(scssPath, 'utf8')
+          : '';
         // Normalize camelCase CSS var names to kebab-case for consistent lookup
-        scssContent = raw === '' ? '' : raw.replace(/--([a-zA-Z][a-zA-Z0-9-]+)/g, (_, v) =>
-          '--' + v.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()
-        );
+        scssContent =
+          raw === ''
+            ? ''
+            : raw.replace(
+                /--([a-zA-Z][a-zA-Z0-9-]+)/g,
+                (_, v) =>
+                  '--' + v.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()
+              );
       }
 
       if (scssContent === '') {
-        errors.push(`  [${part}.${tokenName}] no .tokens.generated.scss found — run tokens:scss`);
+        errors.push(
+          `  [${part}.${tokenName}] no .tokens.generated.scss found — run tokens:scss`
+        );
         componentFailed++;
         continue;
       }
@@ -164,13 +212,17 @@ for (const { name, contractPath, scssPath } of contractFiles()) {
       const semanticVar = dotPathToCssVar(resolvesTo);
 
       if (!scssContent.includes(`${cssVar}:`)) {
-        errors.push(`  [${part}.${tokenName}] CSS var ${cssVar} not found in generated SCSS`);
+        errors.push(
+          `  [${part}.${tokenName}] CSS var ${cssVar} not found in generated SCSS`
+        );
         componentFailed++;
         continue;
       }
 
       if (!scssContent.includes(semanticVar)) {
-        errors.push(`  [${part}.${tokenName}] ${cssVar} does not reference ${semanticVar}`);
+        errors.push(
+          `  [${part}.${tokenName}] ${cssVar} does not reference ${semanticVar}`
+        );
         componentFailed++;
         continue;
       }
@@ -180,8 +232,11 @@ for (const { name, contractPath, scssPath } of contractFiles()) {
   }
 
   if (errors.length > 0) {
-    const hasHardErrors = componentFailed > 0 || (WARN_LEGACY && componentSkipped > 0);
-    const label = hasHardErrors ? `${RED}FAIL${RESET}` : `${YELLOW}WARN${RESET}`;
+    const hasHardErrors =
+      componentFailed > 0 || (WARN_LEGACY && componentSkipped > 0);
+    const label = hasHardErrors
+      ? `${RED}FAIL${RESET}`
+      : `${YELLOW}WARN${RESET}`;
     console.log(`${label}: ${name}`);
     for (const err of errors) console.log(err);
     if (hasHardErrors) totalFailed++;
@@ -189,12 +244,12 @@ for (const { name, contractPath, scssPath } of contractFiles()) {
   }
 }
 
-const skippedNote = totalSkipped > 0
-  ? ` (${totalSkipped} legacy flat tokens skipped)`
-  : '';
-const summary = totalFailed === 0
-  ? `${GREEN}${BOLD}Token fidelity: ${totalPassed} structured tokens verified${RESET}${skippedNote}`
-  : `${RED}${BOLD}Token fidelity: ${totalPassed} passed, ${totalFailed} failed${RESET}${skippedNote}`;
+const skippedNote =
+  totalSkipped > 0 ? ` (${totalSkipped} legacy flat tokens skipped)` : '';
+const summary =
+  totalFailed === 0
+    ? `${GREEN}${BOLD}Token fidelity: ${totalPassed} structured tokens verified${RESET}${skippedNote}`
+    : `${RED}${BOLD}Token fidelity: ${totalPassed} passed, ${totalFailed} failed${RESET}${skippedNote}`;
 
 console.log(`\n${summary}`);
 process.exit(totalFailed > 0 ? 1 : 0);

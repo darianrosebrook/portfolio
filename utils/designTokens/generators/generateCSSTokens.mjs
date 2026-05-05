@@ -367,10 +367,10 @@ function run() {
         tokenData: tokenData,
       });
 
-      const outPath = path.join(
-        folder,
-        `${capitalize(prefix)}.tokens.generated.scss`
-      );
+      const pascalPrefix = toPascalCase(prefix);
+      const filePrefix =
+        pascalPrefix === folderName ? folderName : capitalize(prefix);
+      const outPath = path.join(folder, `${filePrefix}.tokens.generated.scss`);
       const banner = `/* AUTO-GENERATED: Do not edit directly.\n * Source: ${path.relative(projectRoot, filePath)}\n */\n`;
       fs.writeFileSync(outPath, banner + scss + '\n', 'utf8');
       generatedCount += 1;
@@ -386,6 +386,14 @@ function run() {
 function capitalize(str) {
   if (!str) return str;
   return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+function toPascalCase(str) {
+  return String(str)
+    .split(/[-_\s]+/)
+    .filter(Boolean)
+    .map((part) => capitalize(part))
+    .join('');
 }
 
 run();

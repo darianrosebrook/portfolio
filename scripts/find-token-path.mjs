@@ -5,7 +5,9 @@ import path from 'path';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, '..');
-const data = JSON.parse(readFileSync(path.join(ROOT, 'ui/designTokens.json'), 'utf8'));
+const data = JSON.parse(
+  readFileSync(path.join(ROOT, 'ui/designTokens.json'), 'utf8')
+);
 
 const keyword = process.argv[2] ?? 'ring';
 

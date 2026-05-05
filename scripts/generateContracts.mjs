@@ -537,8 +537,14 @@ function flattenTokenPaths(node, prefix = []) {
     }
     // Raw DTCG dimension objects {value: N, unit: "px"} — treat as a single leaf token,
     // not two sub-paths (.value and .unit), because the bridge SCSS emits one combined var.
-    if (value && typeof value === 'object' && 'value' in value && 'unit' in value &&
-        typeof value.value === 'number' && typeof value.unit === 'string') {
+    if (
+      value &&
+      typeof value === 'object' &&
+      'value' in value &&
+      'unit' in value &&
+      typeof value.value === 'number' &&
+      typeof value.unit === 'string'
+    ) {
       paths.push([...prefix, key].join('.'));
       continue;
     }
@@ -558,8 +564,14 @@ function flattenTokenPaths(node, prefix = []) {
 
 // Prop names excluded from the agent-facing descriptor (infrastructure, not API)
 const EXCLUDED_PROP_NAMES = new Set([
-  'className', 'style', 'id', 'key', 'ref', 'children',
-  'data-testid', 'tabIndex',
+  'className',
+  'style',
+  'id',
+  'key',
+  'ref',
+  'children',
+  'data-testid',
+  'tabIndex',
 ]);
 const EXCLUDED_PROP_PATTERNS = [/^aria-/, /^data-/, /^on[A-Z]/, /Ref$/];
 
@@ -572,7 +584,10 @@ function simplifyType(typeStr) {
   return typeStr
     .replace(/React\.(ReactNode|ReactElement|FC[^,)>]*)/g, 'ReactNode')
     .replace(/React\.CSSProperties/g, 'CSSProperties')
-    .replace(/React\.(MouseEvent|KeyboardEvent|FocusEvent|ChangeEvent)<[^>]+>/g, (_, e) => e)
+    .replace(
+      /React\.(MouseEvent|KeyboardEvent|FocusEvent|ChangeEvent)<[^>]+>/g,
+      (_, e) => e
+    )
     .replace(/import\([^)]+\)\./g, '')
     .replace(/\s+/g, ' ')
     .trim();
@@ -632,7 +647,9 @@ function detectHtmlElement(propsDecl) {
       if (text.includes(attrName)) return elem;
     }
     // Handle ComponentPropsWithoutRef<'button'> / ComponentProps<'input'> patterns
-    const literalMatch = text.match(/ComponentProps(?:WithoutRef)?<['"](\w+)['"]/);
+    const literalMatch = text.match(
+      /ComponentProps(?:WithoutRef)?<['"](\w+)['"]/
+    );
     if (literalMatch) return literalMatch[1];
   }
   return null;
@@ -672,7 +689,9 @@ async function extractPropsViaTs(componentName, componentPath, existingProps) {
 
   function buildMember(name, sym, firstDecl, defaults) {
     const propType = firstDecl ? firstDecl.getType() : sym?.getDeclaredType?.();
-    const typeStr = simplifyType(propType ? propType.getText(firstDecl) : 'unknown');
+    const typeStr = simplifyType(
+      propType ? propType.getText(firstDecl) : 'unknown'
+    );
     const required = firstDecl?.hasQuestionToken
       ? !firstDecl.hasQuestionToken()
       : false;
@@ -796,7 +815,10 @@ function generateTokenReferences(componentName, componentPath, anatomy) {
 async function generateContract(componentName, componentPath) {
   // Read existing contract first so we can preserve hand-authored descriptions
   // in props.designed and hand-authored sections (focus, dismissal, etc.)
-  const contractPath = path.join(componentPath, `${componentName}.contract.json`);
+  const contractPath = path.join(
+    componentPath,
+    `${componentName}.contract.json`
+  );
   const existing = readJson(contractPath);
 
   const source = allSource(componentPath);
@@ -817,7 +839,11 @@ async function generateContract(componentName, componentPath) {
   const states = extractStates(source, scssSource, variants);
   const a11y = generateA11yInfo(componentName, layer, source);
   const tokens = generateTokenReferences(componentName, componentPath, anatomy);
-  const props = await extractPropsViaTs(componentName, componentPath, existing?.props);
+  const props = await extractPropsViaTs(
+    componentName,
+    componentPath,
+    existing?.props
+  );
 
   const generated = {
     name: componentName,

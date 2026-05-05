@@ -39,7 +39,7 @@ function determineNamespace(tokenPath) {
     /^icon\./,
     /^effect\./,
   ];
-  if (corePatterns.some(p => p.test(tokenPath))) return 'core';
+  if (corePatterns.some((p) => p.test(tokenPath))) return 'core';
   return 'semantic';
 }
 
@@ -48,7 +48,7 @@ function tokenPathToCSSVar(tokenPath) {
   const pathWithoutNamespace = tokenPath.replace(/^(core|semantic)\./, '');
   const cssVarName = pathWithoutNamespace
     .replace(/\./g, '-')
-    .replace(/[A-Z]/g, m => '-' + m.toLowerCase())
+    .replace(/[A-Z]/g, (m) => '-' + m.toLowerCase())
     .replace(/[\s_]/g, '-')
     .replace(/[^a-z0-9-]/g, '')
     .replace(/-+/g, '-');
@@ -73,8 +73,8 @@ function collectRefs(val, refs = new Set()) {
 const badRefToComponents = new Map();
 
 const componentDirs = readdirSync(COMPONENTS_DIR, { withFileTypes: true })
-  .filter(e => e.isDirectory())
-  .map(e => e.name)
+  .filter((e) => e.isDirectory())
+  .map((e) => e.name)
   .sort();
 
 for (const name of componentDirs) {

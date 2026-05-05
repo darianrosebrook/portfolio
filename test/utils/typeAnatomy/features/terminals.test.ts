@@ -36,9 +36,9 @@ describe('terminal features (synthetic geometry)', () => {
     });
 
     it('returns found: false for non-drawable glyph', () => {
-      expect(getTerminal(mockNonDrawableGlyph('null-path'), metrics).found).toBe(
-        false
-      );
+      expect(
+        getTerminal(mockNonDrawableGlyph('null-path'), metrics).found
+      ).toBe(false);
     });
 
     it('returns found: false for empty glyph', () => {

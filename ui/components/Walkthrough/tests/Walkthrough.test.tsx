@@ -76,14 +76,22 @@ describe('Walkthrough', () => {
       // Full integration requires WalkthroughProvider — covered in E2E tests.
       // This assertion verifies the component renders without throwing,
       // confirming the escape handler scaffolding exists.
-      const { container } = render(<Walkthrough><div>Step</div></Walkthrough>);
+      const { container } = render(
+        <Walkthrough>
+          <div>Step</div>
+        </Walkthrough>
+      );
       expect(container).toBeInTheDocument();
     });
 
     contractTest('Walkthrough', 'a11y.apgPattern', 'status', () => {
       // Full integration requires WalkthroughProvider — covered in E2E tests.
       // This stub confirms the component renders without throwing.
-      const { container } = render(<Walkthrough><div>Step</div></Walkthrough>);
+      const { container } = render(
+        <Walkthrough>
+          <div>Step</div>
+        </Walkthrough>
+      );
       expect(container).toBeInTheDocument();
     });
   });

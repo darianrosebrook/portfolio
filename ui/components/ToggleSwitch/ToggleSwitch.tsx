@@ -17,7 +17,7 @@
  * ```
  */
 'use client';
-import React, { ReactNode, useMemo } from 'react';
+import React, { ReactNode, useId, useMemo } from 'react';
 import styles from './ToggleSwitch.module.scss';
 
 type NativeInputProps = React.ComponentProps<'input'>;
@@ -54,13 +54,14 @@ const ToggleSwitch = React.forwardRef<HTMLInputElement, ToggleSwitchProps>(
     },
     ref
   ) => {
+    const generatedId = useId();
     const safeId = useMemo(() => {
       if (id) return id;
       if (typeof children === 'string') {
         return `toggleSwitch-${children.replace(/[^\w-]/g, '-')}`;
       }
-      return `toggleSwitch-${Math.random().toString(36).substring(2, 9)}`;
-    }, [id, children]);
+      return generatedId;
+    }, [id, children, generatedId]);
 
     const sizeClass =
       size === 'small'
@@ -70,7 +71,10 @@ const ToggleSwitch = React.forwardRef<HTMLInputElement, ToggleSwitchProps>(
           : styles.medium;
 
     return (
-      <div className={`${styles.toggleSwitch} ${sizeClass} ${className}`} data-slot="toggle-switch">
+      <div
+        className={`${styles.toggleSwitch} ${sizeClass} ${className}`}
+        data-slot="toggle-switch"
+      >
         <input
           ref={ref}
           type="checkbox"

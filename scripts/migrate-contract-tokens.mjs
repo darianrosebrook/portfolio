@@ -38,11 +38,11 @@ const componentArg = (() => {
   return idx !== -1 ? args[idx + 1] : null;
 })();
 
-const RESET  = '\x1b[0m';
-const RED    = '\x1b[31m';
-const GREEN  = '\x1b[32m';
+const RESET = '\x1b[0m';
+const RED = '\x1b[31m';
+const GREEN = '\x1b[32m';
 const YELLOW = '\x1b[33m';
-const BOLD   = '\x1b[1m';
+const BOLD = '\x1b[1m';
 
 // ── Build global semantic CSS var → resolved value map ───────────────────────
 
@@ -51,7 +51,9 @@ function buildSemanticMap(scssPath) {
   const map = new Map();
   // Matches: --var-name: #hex; or --var-name: rgba(...); or bare values
   // We only want literal values (not var() references)
-  for (const [, varName, value] of content.matchAll(/--([a-z][a-z0-9-]+):\s*([^;v][^;]*);/g)) {
+  for (const [, varName, value] of content.matchAll(
+    /--([a-z][a-z0-9-]+):\s*([^;v][^;]*);/g
+  )) {
     const v = value.trim();
     // Skip lines that are var() references (CSS var chains)
     if (!v.startsWith('var(')) {
@@ -66,7 +68,10 @@ function buildSemanticMap(scssPath) {
 // NOT necessarily the folder name. E.g. AlertNotice/ with prefix "alert" → Alert.tokens.generated.scss
 
 function resolveScssPath(componentDir, componentName) {
-  const tokensJsonPath = path.join(componentDir, `${componentName}.tokens.json`);
+  const tokensJsonPath = path.join(
+    componentDir,
+    `${componentName}.tokens.json`
+  );
   let prefix = componentName;
   if (fs.existsSync(tokensJsonPath)) {
     try {
@@ -89,10 +94,16 @@ function parseBridgeScss(scssPath) {
   if (!fs.existsSync(scssPath)) return bridge;
 
   const content = fs.readFileSync(scssPath, 'utf8');
-  for (const [, localVar, refVar] of content.matchAll(/--([a-zA-Z][a-zA-Z0-9-]+):\s*var\(--([a-zA-Z][a-zA-Z0-9-]+)\)/g)) {
+  for (const [, localVar, refVar] of content.matchAll(
+    /--([a-zA-Z][a-zA-Z0-9-]+):\s*var\(--([a-zA-Z][a-zA-Z0-9-]+)\)/g
+  )) {
     // Normalize camelCase prefixes (e.g. brandSwitcher → brand-switcher)
-    const normalizedLocal = localVar.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
-    const normalizedRef = refVar.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+    const normalizedLocal = localVar
+      .replace(/([a-z])([A-Z])/g, '$1-$2')
+      .toLowerCase();
+    const normalizedRef = refVar
+      .replace(/([a-z])([A-Z])/g, '$1-$2')
+      .toLowerCase();
     bridge.set(normalizedLocal, normalizedRef);
   }
   return bridge;
@@ -107,10 +118,14 @@ function parseBridgeLiterals(scssPath) {
   if (!fs.existsSync(scssPath)) return literals;
   const content = fs.readFileSync(scssPath, 'utf8');
   // Match --var: <literal-value>; where value is NOT a var() reference
-  for (const [, localVar, value] of content.matchAll(/--([a-zA-Z][a-zA-Z0-9-]+):\s*((?!var\()[^;]+);/g)) {
+  for (const [, localVar, value] of content.matchAll(
+    /--([a-zA-Z][a-zA-Z0-9-]+):\s*((?!var\()[^;]+);/g
+  )) {
     const v = value.trim();
     if (v && !v.startsWith('var(') && !v.startsWith('/*')) {
-      const normalizedLocal = localVar.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+      const normalizedLocal = localVar
+        .replace(/([a-z])([A-Z])/g, '$1-$2')
+        .toLowerCase();
       literals.set(normalizedLocal, v);
     }
   }
@@ -123,20 +138,39 @@ function inferProperty(tokenPath) {
   const p = tokenPath.toLowerCase();
 
   if (p.includes('background')) return 'background-color';
-  if (p.includes('foreground') || p.includes('text.color') || p.includes('color.text')) return 'color';
-  if (p.includes('color.border') || p.includes('border.color')) return 'border-color';
-  if (p.includes('border.width') || (p.includes('border') && p.includes('width'))) return 'border-width';
+  if (
+    p.includes('foreground') ||
+    p.includes('text.color') ||
+    p.includes('color.text')
+  )
+    return 'color';
+  if (p.includes('color.border') || p.includes('border.color'))
+    return 'border-color';
+  if (
+    p.includes('border.width') ||
+    (p.includes('border') && p.includes('width'))
+  )
+    return 'border-width';
   if (p.includes('radius')) return 'border-radius';
   if (p.includes('shadow')) return 'box-shadow';
   if (p.includes('opacity')) return 'opacity';
   if (p.includes('duration')) return 'transition-duration';
-  if (p.includes('easing') || p.includes('timing')) return 'transition-timing-function';
-  if (p.includes('font.size') || (p.includes('text') && p.includes('size'))) return 'font-size';
-  if (p.includes('font.weight') || p.includes('text.weight')) return 'font-weight';
-  if (p.includes('line.height') || p.includes('lineheight')) return 'line-height';
+  if (p.includes('easing') || p.includes('timing'))
+    return 'transition-timing-function';
+  if (p.includes('font.size') || (p.includes('text') && p.includes('size')))
+    return 'font-size';
+  if (p.includes('font.weight') || p.includes('text.weight'))
+    return 'font-weight';
+  if (p.includes('line.height') || p.includes('lineheight'))
+    return 'line-height';
   if (p.includes('gap')) return 'gap';
   if (p.includes('padding')) return 'padding';
-  if (p.includes('size.min') || p.includes('min.height') || p.includes('size.height')) return 'min-height';
+  if (
+    p.includes('size.min') ||
+    p.includes('min.height') ||
+    p.includes('size.height')
+  )
+    return 'min-height';
   if (p.includes('size.width') || p.includes('min.width')) return 'min-width';
 
   return null; // omit property when it cannot be inferred
@@ -252,7 +286,9 @@ function migrateComponent(name, semanticMap) {
   if (migrated === 0) return true; // nothing changed
 
   if (skippedParts.length > 0) {
-    console.log(`${YELLOW}  ${name}: kept ${skippedParts.length} part(s) as legacy (${skippedParts.join(', ')})${RESET}`);
+    console.log(
+      `${YELLOW}  ${name}: kept ${skippedParts.length} part(s) as legacy (${skippedParts.join(', ')})${RESET}`
+    );
   }
 
   const updated = { ...contract, tokens: newTokens };
@@ -271,11 +307,14 @@ function migrateComponent(name, semanticMap) {
 // ── Main ─────────────────────────────────────────────────────────────────────
 
 function components() {
-  return fs.readdirSync(COMPONENTS_DIR, { withFileTypes: true })
+  return fs
+    .readdirSync(COMPONENTS_DIR, { withFileTypes: true })
     .filter((e) => e.isDirectory())
     .filter((e) => !componentArg || e.name === componentArg)
     .map((e) => e.name)
-    .filter((name) => fs.existsSync(path.join(COMPONENTS_DIR, name, `${name}.contract.json`)))
+    .filter((name) =>
+      fs.existsSync(path.join(COMPONENTS_DIR, name, `${name}.contract.json`))
+    )
     .sort((a, b) => a.localeCompare(b));
 }
 
@@ -285,7 +324,9 @@ if (!fs.existsSync(DESIGN_TOKENS_SCSS)) {
 }
 
 const semanticMap = buildSemanticMap(DESIGN_TOKENS_SCSS);
-console.log(`Loaded ${semanticMap.size} resolved CSS vars from designTokens.scss`);
+console.log(
+  `Loaded ${semanticMap.size} resolved CSS vars from designTokens.scss`
+);
 
 const names = components();
 if (names.length === 0) {
@@ -299,5 +340,7 @@ for (const name of names) {
 }
 
 const verb = DRY_RUN ? 'Would migrate' : 'Migrated';
-console.log(`\n${failed === 0 ? GREEN : RED}${BOLD}${verb} ${names.length - failed}/${names.length} components${RESET}`);
+console.log(
+  `\n${failed === 0 ? GREEN : RED}${BOLD}${verb} ${names.length - failed}/${names.length} components${RESET}`
+);
 process.exit(failed > 0 ? 1 : 0);

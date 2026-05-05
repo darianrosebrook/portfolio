@@ -283,7 +283,10 @@ export const SelectSearch: React.FC<SelectSearchProps> = ({
   const { searchTerm, setSearchTerm } = useSelectContext();
 
   return (
-    <div data-slot="select-search" className={`${styles.searchContainer} ${className}`}>
+    <div
+      data-slot="select-search"
+      className={`${styles.searchContainer} ${className}`}
+    >
       <input
         type="text"
         className={styles.search}
@@ -338,7 +341,10 @@ export const SelectOptions: React.FC<SelectOptionsProps> = ({
   }
 
   return (
-    <div data-slot="select-options" className={`${styles.options} ${className}`}>
+    <div
+      data-slot="select-options"
+      className={`${styles.options} ${className}`}
+    >
       {filteredOptions.map((option, index) => {
         const isSelected = selectedOptions.some(
           (selected) => selected.id === option.id
@@ -391,7 +397,11 @@ export interface SelectProps {
 
 export const Select: React.FC<SelectProps> = ({ children, className = '' }) => {
   return (
-    <div data-slot="select" className={`${styles.root} ${className}`} data-select-root>
+    <div
+      data-slot="select"
+      className={`${styles.root} ${className}`}
+      data-select-root
+    >
       {children}
     </div>
   );

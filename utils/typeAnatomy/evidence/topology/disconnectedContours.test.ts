@@ -119,7 +119,7 @@ describe('getConnectedGroups', () => {
     expect(groups[0].bbox).toEqual({ minX: 0, minY: 0, maxX: 300, maxY: 100 });
   });
 
-  it("respects epsilon when grouping nearly-touching contours", () => {
+  it('respects epsilon when grouping nearly-touching contours', () => {
     // Tiny gap of 2 design units between the two contours.
     const a = contour(0, { minX: 0, minY: 0, maxX: 100, maxY: 100 });
     const b = contour(1, { minX: 102, minY: 0, maxX: 200, maxY: 100 });
@@ -133,12 +133,7 @@ describe('getConnectedGroups', () => {
 
   it('aggregates area across the contours in a group', () => {
     const a = contour(0, { minX: 0, minY: 0, maxX: 10, maxY: 10 }, 'base', 100);
-    const b = contour(
-      1,
-      { minX: 5, minY: 5, maxX: 15, maxY: 15 },
-      'base',
-      50
-    );
+    const b = contour(1, { minX: 5, minY: 5, maxX: 15, maxY: 15 }, 'base', 50);
     const groups = getConnectedGroups([a, b]);
     expect(groups).toHaveLength(1);
     expect(groups[0].area).toBe(150);

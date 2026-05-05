@@ -20,7 +20,10 @@ describe('Resolver local behavior', () => {
     const resolver = new Resolver(doc, { basePath: FIXTURES });
     const result = resolver.resolve();
 
-    const tokens = result.tokens as Record<string, Record<string, Record<string, unknown>>>;
+    const tokens = result.tokens as Record<
+      string,
+      Record<string, Record<string, unknown>>
+    >;
     expect(tokens.alias.token.$value).toBe('blue');
     expect(result.diagnostics).toHaveLength(0);
   });
@@ -30,11 +33,17 @@ describe('Resolver local behavior', () => {
     const resolver = new Resolver(doc, { basePath: FIXTURES });
 
     const dark = resolver.resolve({ theme: 'dark' });
-    const darkTokens = dark.tokens as Record<string, Record<string, Record<string, unknown>>>;
+    const darkTokens = dark.tokens as Record<
+      string,
+      Record<string, Record<string, unknown>>
+    >;
     expect(darkTokens.color.bg.$value).toBe('black');
 
     const light = resolver.resolve({ theme: 'light' });
-    const lightTokens = light.tokens as Record<string, Record<string, Record<string, unknown>>>;
+    const lightTokens = light.tokens as Record<
+      string,
+      Record<string, Record<string, unknown>>
+    >;
     expect(lightTokens.color.bg.$value).toBe('lightgray');
   });
 
@@ -68,7 +77,9 @@ describe('Resolver local behavior', () => {
 
     const result = resolver.resolve({ theme: 'nonexistent-context' });
 
-    const typeMismatch = result.diagnostics.find((d) => d.code === 'TYPE_MISMATCH');
+    const typeMismatch = result.diagnostics.find(
+      (d) => d.code === 'TYPE_MISMATCH'
+    );
     expect(typeMismatch).toBeDefined();
 
     // default context "light" is used → lightgray overrides white
@@ -85,11 +96,16 @@ describe('Resolver local behavior', () => {
       // Re-run with strict resolver to test throw path
     }).not.toThrow();
 
-    const strictResolver = new Resolver(loadFixture('invalid-context.resolver.json'), {
-      basePath: FIXTURES,
-      strict: true,
-    });
-    expect(() => strictResolver.resolve({ theme: 'nonexistent-context' })).toThrow();
+    const strictResolver = new Resolver(
+      loadFixture('invalid-context.resolver.json'),
+      {
+        basePath: FIXTURES,
+        strict: true,
+      }
+    );
+    expect(() =>
+      strictResolver.resolve({ theme: 'nonexistent-context' })
+    ).toThrow();
   });
 
   it('version mismatch: throws for a wrong version string', () => {
@@ -108,11 +124,15 @@ describe('Resolver local behavior', () => {
     const resolver = new Resolver(doc, { basePath: FIXTURES });
     const result = resolver.resolve();
 
-    const tokens = result.tokens as Record<string, Record<string, Record<string, unknown>>>;
+    const tokens = result.tokens as Record<
+      string,
+      Record<string, Record<string, unknown>>
+    >;
     // From base-tokens.json
     expect(tokens.base.color.$value).toBe('cornflowerblue');
     // From inline source in cross-file-ref
-    const extra = (result.tokens as Record<string, Record<string, unknown>>).extra;
+    const extra = (result.tokens as Record<string, Record<string, unknown>>)
+      .extra;
     expect(extra.$value).toBe('extra-value');
   });
 });

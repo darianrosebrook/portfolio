@@ -15,10 +15,8 @@ describe('ToggleSwitch', () => {
   it('renders with children correctly', () => {
     render(<ToggleSwitch {...defaultProps}>Test Toggle</ToggleSwitch>);
 
-    // The component renders a checkbox, not a switch
-    const toggle = screen.getByRole('checkbox');
+    const toggle = screen.getByRole('switch', { name: 'Test Toggle' });
     expect(toggle).toBeInTheDocument();
-    expect(toggle).toHaveAttribute('id', expect.stringContaining('switch'));
   });
 
   it('renders checked state correctly', () => {
@@ -28,7 +26,7 @@ describe('ToggleSwitch', () => {
       </ToggleSwitch>
     );
 
-    const toggle = screen.getByRole('checkbox');
+    const toggle = screen.getByRole('switch', { name: 'Test Toggle' });
     expect(toggle).toBeChecked();
   });
 });

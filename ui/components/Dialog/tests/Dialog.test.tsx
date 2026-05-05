@@ -142,10 +142,9 @@ describe('Dialog', () => {
       fireEvent.keyDown(document, { key: 'Escape' });
 
       // close() waits 200ms animation before calling onOpenChange
-      await waitFor(
-        () => expect(onOpenChange).toHaveBeenCalledWith(false),
-        { timeout: 500 }
-      );
+      await waitFor(() => expect(onOpenChange).toHaveBeenCalledWith(false), {
+        timeout: 500,
+      });
     });
 
     contractTest('Dialog', 'dismissal.triggers', 'overlayClick', async () => {
@@ -160,27 +159,31 @@ describe('Dialog', () => {
       const backdrop = screen.getByRole('dialog').parentElement!;
       fireEvent.click(backdrop);
 
-      await waitFor(
-        () => expect(onOpenChange).toHaveBeenCalledWith(false),
-        { timeout: 500 }
-      );
+      await waitFor(() => expect(onOpenChange).toHaveBeenCalledWith(false), {
+        timeout: 500,
+      });
     });
 
-    contractTest('Dialog', 'dismissal.triggers', 'escape/disabled-by-closeOnEscape', () => {
-      // closeOnEscape=false: close() is never called, so no async needed
-      const onOpenChange = vi.fn();
+    contractTest(
+      'Dialog',
+      'dismissal.triggers',
+      'escape/disabled-by-closeOnEscape',
+      () => {
+        // closeOnEscape=false: close() is never called, so no async needed
+        const onOpenChange = vi.fn();
 
-      render(
-        <Dialog open closeOnEscape={false} onOpenChange={onOpenChange}>
-          <Dialog.Body>Content</Dialog.Body>
-        </Dialog>
-      );
+        render(
+          <Dialog open closeOnEscape={false} onOpenChange={onOpenChange}>
+            <Dialog.Body>Content</Dialog.Body>
+          </Dialog>
+        );
 
-      fireEvent.keyDown(document, { key: 'Escape' });
+        fireEvent.keyDown(document, { key: 'Escape' });
 
-      expect(onOpenChange).not.toHaveBeenCalled();
-      expect(screen.getByRole('dialog')).toBeInTheDocument();
-    });
+        expect(onOpenChange).not.toHaveBeenCalled();
+        expect(screen.getByRole('dialog')).toBeInTheDocument();
+      }
+    );
 
     contractTest(
       'Dialog',
@@ -190,7 +193,12 @@ describe('Dialog', () => {
         const onOpenChange = vi.fn();
 
         render(
-          <Dialog open modal closeOnBackdropClick={false} onOpenChange={onOpenChange}>
+          <Dialog
+            open
+            modal
+            closeOnBackdropClick={false}
+            onOpenChange={onOpenChange}
+          >
             <Dialog.Body>Content</Dialog.Body>
           </Dialog>
         );
@@ -204,7 +212,11 @@ describe('Dialog', () => {
     );
 
     contractTest('Dialog', 'a11y.role', 'dialog/aria-modal', () => {
-      render(<Dialog open modal>Content</Dialog>);
+      render(
+        <Dialog open modal>
+          Content
+        </Dialog>
+      );
 
       const dialog = screen.getByRole('dialog');
       expect(dialog).toHaveAttribute('aria-modal', 'true');
@@ -228,7 +240,11 @@ describe('Dialog', () => {
     });
 
     contractTest('Dialog', 'a11y.apgPattern', 'dialog-modal', () => {
-      render(<Dialog open modal>Content</Dialog>);
+      render(
+        <Dialog open modal>
+          Content
+        </Dialog>
+      );
 
       const dialog = screen.getByRole('dialog');
       expect(dialog).toBeInTheDocument();

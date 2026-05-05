@@ -24,9 +24,15 @@ import Ajv from 'ajv';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, '..');
 const COMPONENTS_DIR = path.join(ROOT, 'ui', 'components');
-const SCHEMA_PATH = path.join(ROOT, 'ui', 'designTokens', 'component.contract.schema.json');
+const SCHEMA_PATH = path.join(
+  ROOT,
+  'ui',
+  'designTokens',
+  'component.contract.schema.json'
+);
 
-const SCHEMA_REL = path.relative(path.join(ROOT, 'ui', 'components'), SCHEMA_PATH)
+const SCHEMA_REL = path
+  .relative(path.join(ROOT, 'ui', 'components'), SCHEMA_PATH)
   .replace(/\\/g, '/');
 
 const args = process.argv.slice(2);
@@ -44,7 +50,11 @@ function contractFiles() {
   for (const entry of entries) {
     if (!entry.isDirectory()) continue;
     if (componentArg && entry.name !== componentArg) continue;
-    const contractPath = path.join(COMPONENTS_DIR, entry.name, `${entry.name}.contract.json`);
+    const contractPath = path.join(
+      COMPONENTS_DIR,
+      entry.name,
+      `${entry.name}.contract.json`
+    );
     if (fs.existsSync(contractPath)) files.push(contractPath);
   }
   return files;
@@ -54,11 +64,11 @@ function relPath(absPath) {
   return path.relative(ROOT, absPath);
 }
 
-const RESET  = '\x1b[0m';
-const RED    = '\x1b[31m';
-const GREEN  = '\x1b[32m';
+const RESET = '\x1b[0m';
+const RED = '\x1b[31m';
+const GREEN = '\x1b[32m';
 const YELLOW = '\x1b[33m';
-const BOLD   = '\x1b[1m';
+const BOLD = '\x1b[1m';
 
 // ── semantic checks ──────────────────────────────────────────────────────────
 
@@ -159,7 +169,9 @@ for (const filePath of files) {
         console.log(`${YELLOW}Fixed $schema: ${rel}${RESET}`);
       }
     } catch (err) {
-      console.error(`${RED}FAIL: ${rel}\n  Invalid JSON: ${err.message}${RESET}`);
+      console.error(
+        `${RED}FAIL: ${rel}\n  Invalid JSON: ${err.message}${RESET}`
+      );
       failed++;
     }
     continue;
@@ -177,7 +189,7 @@ for (const filePath of files) {
   const schemaValid = validate(contract);
   const propFindings = checkPropBuckets(contract, rel);
   const propErrors = propFindings.filter((f) => f.level === 'error');
-  const propWarns  = propFindings.filter((f) => f.level === 'warn');
+  const propWarns = propFindings.filter((f) => f.level === 'warn');
 
   if (schemaValid && propErrors.length === 0) {
     passed++;
@@ -194,7 +206,9 @@ for (const filePath of files) {
         const loc = error.instancePath || '(root)';
         console.error(`  ${loc}: ${error.message}`);
         if (error.params?.allowedValues) {
-          console.error(`    allowed: ${error.params.allowedValues.join(', ')}`);
+          console.error(
+            `    allowed: ${error.params.allowedValues.join(', ')}`
+          );
         }
       }
     }
@@ -210,9 +224,10 @@ for (const filePath of files) {
 if (!FIX_SCHEMA) {
   const total = passed + failed;
   const warnSuffix = warned > 0 ? `, ${warned} with migration warnings` : '';
-  const status = failed === 0
-    ? `${GREEN}${BOLD}Contract validation: ${passed}/${total} passed${warnSuffix}${RESET}`
-    : `${RED}${BOLD}Contract validation: ${passed} passed, ${failed} failed (${total} total)${warnSuffix}${RESET}`;
+  const status =
+    failed === 0
+      ? `${GREEN}${BOLD}Contract validation: ${passed}/${total} passed${warnSuffix}${RESET}`
+      : `${RED}${BOLD}Contract validation: ${passed} passed, ${failed} failed (${total} total)${warnSuffix}${RESET}`;
   console.log(`\n${status}`);
 }
 

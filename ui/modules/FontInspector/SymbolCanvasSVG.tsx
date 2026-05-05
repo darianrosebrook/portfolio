@@ -727,9 +727,7 @@ export const SymbolCanvasSVG: React.FC = () => {
          * only resolve when the matching clipPath element is mounted in
          * the document. They go at the root, NOT inside the highlights
          * layer where the layer filter would discard them. */}
-        {featureElements.filter((el) =>
-          el.key?.toString().startsWith('defs-')
-        )}
+        {featureElements.filter((el) => el.key?.toString().startsWith('defs-'))}
 
         {/* Layer 1: Background */}
         <g id="bg" aria-hidden="true">

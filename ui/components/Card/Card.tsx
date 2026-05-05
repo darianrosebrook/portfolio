@@ -105,7 +105,11 @@ const CardTitle: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = ({
   children,
   ...rest
 }) => (
-  <h3 data-slot="card-title" className={[styles.title, className].filter(Boolean).join(' ')} {...rest}>
+  <h3
+    data-slot="card-title"
+    className={[styles.title, className].filter(Boolean).join(' ')}
+    {...rest}
+  >
     {children}
   </h3>
 );

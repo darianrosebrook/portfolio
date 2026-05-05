@@ -84,10 +84,17 @@ export const Walkthrough: React.FC<WalkthroughUIProps> = ({
             {children ?? (
               <>
                 {step?.title && (
-                  <div data-slot="walkthrough-title" className={styles.title}>{step.title}</div>
+                  <div data-slot="walkthrough-title" className={styles.title}>
+                    {step.title}
+                  </div>
                 )}
                 {step?.description && (
-                  <div data-slot="walkthrough-description" className={styles.description}>{step.description}</div>
+                  <div
+                    data-slot="walkthrough-description"
+                    className={styles.description}
+                  >
+                    {step.description}
+                  </div>
                 )}
                 <WalkthroughProgress />
                 <WalkthroughControls />
@@ -122,9 +129,18 @@ export const Walkthrough: React.FC<WalkthroughUIProps> = ({
         >
           {children ?? (
             <>
-              {step?.title && <div data-slot="walkthrough-title" className={styles.title}>{step.title}</div>}
+              {step?.title && (
+                <div data-slot="walkthrough-title" className={styles.title}>
+                  {step.title}
+                </div>
+              )}
               {step?.description && (
-                <div data-slot="walkthrough-description" className={styles.description}>{step.description}</div>
+                <div
+                  data-slot="walkthrough-description"
+                  className={styles.description}
+                >
+                  {step.description}
+                </div>
               )}
               <WalkthroughProgress />
               <WalkthroughControls />

@@ -175,12 +175,10 @@ describe('structural features (synthetic geometry)', () => {
     });
 
     it('detectCrossbar emits at least one rect-typed FeatureInstance for an H', async () => {
-      const { detectCrossbar } = await import(
-        '@/utils/typeAnatomy/detectors/crossbar'
-      );
-      const { buildGeometryCache } = await import(
-        '@/utils/typeAnatomy/geometryCache'
-      );
+      const { detectCrossbar } =
+        await import('@/utils/typeAnatomy/detectors/crossbar');
+      const { buildGeometryCache } =
+        await import('@/utils/typeAnatomy/geometryCache');
 
       const hGlyph = {
         id: 0,

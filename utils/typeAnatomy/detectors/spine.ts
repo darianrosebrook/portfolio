@@ -111,9 +111,7 @@ export function detectSpine(geo: GeometryCache): FeatureInstance[] {
       id: 'spine',
       shape: { type: 'polyline', points: midpoints },
       region:
-        corridor.length >= 4
-          ? { kind: 'stroke', points: corridor }
-          : undefined,
+        corridor.length >= 4 ? { kind: 'stroke', points: corridor } : undefined,
       confidence: Math.min(0.9, 0.5 + curveDirectionChanges * 0.2),
       anchors: {
         top: midpoints[midpoints.length - 1],

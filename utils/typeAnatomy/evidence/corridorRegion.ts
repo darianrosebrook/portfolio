@@ -45,11 +45,7 @@ export interface CorridorOptions {
 
 const DEFAULT_MIN_SEGMENT = 1; // 1 design unit; smaller than any real stroke.
 
-function tangentAt(
-  pts: Point2D[],
-  i: number,
-  closed: boolean
-): Point2D | null {
+function tangentAt(pts: Point2D[], i: number, closed: boolean): Point2D | null {
   const n = pts.length;
   if (n < 2) return null;
 

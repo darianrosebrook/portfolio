@@ -1042,11 +1042,7 @@ export function drawFeatureInstance(
   colors: DrawColors,
   options?: DrawFeatureOptions
 ): void {
-  if (
-    instance.region &&
-    instance.region.points.length >= 3 &&
-    options?.glyph
-  ) {
+  if (instance.region && instance.region.points.length >= 3 && options?.glyph) {
     const transformedPoints = instance.region.points.map((p) =>
       transformPoint(p, params)
     );
