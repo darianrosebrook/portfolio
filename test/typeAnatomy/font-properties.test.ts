@@ -4,7 +4,7 @@
  * Tests the geometry-based serif detection and other font-level properties.
  */
 
-import { describe, it, expect, beforeAll } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as fontkit from 'fontkit';

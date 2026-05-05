@@ -5,7 +5,7 @@
  * focusing on color contrast ratios and other accessibility requirements.
  */
 
-import { contrastRatioHex, hexToRgb, type RGB } from '../helpers/colorHelpers';
+import { contrastRatioHex } from '../helpers/colorHelpers';
 import fs from 'fs';
 import path from 'path';
 

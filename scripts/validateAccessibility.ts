@@ -9,18 +9,14 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { createRequire } from 'node:module';
 import type { TokenValidationReport } from '../utils/accessibility/tokenValidator';
 import {
   validateDesignTokens,
   generateAccessibilityReport,
-  runAccessibilityValidation,
 } from '../utils/accessibility/tokenValidator';
 
-const require = createRequire(import.meta.url);
 const PROJECT_ROOT = process.cwd();
 const TOKENS_DIR = path.join(PROJECT_ROOT, 'ui', 'designTokens');
-const COMPONENTS_DIR = path.join(PROJECT_ROOT, 'ui', 'components');
 const GLOBAL_TOKENS_FILE = path.join(TOKENS_DIR, 'designTokens.json');
 
 // Color codes for console output

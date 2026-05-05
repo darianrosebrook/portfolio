@@ -3,7 +3,6 @@ import { render, screen, fireEvent, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 
-import { vi } from 'vitest';
 import { ToastProvider, ToastViewport, useToast } from '@/ui/components/Toast';
 
 function WithEnqueue({
@@ -121,7 +120,7 @@ describe('Toast Composer', () => {
       </ToastProvider>
     );
     await userEvent.click(screen.getByLabelText('enqueue'));
-    const results = await axe(container);
+    const _results = await axe(container);
     expect(container).toBeInTheDocument();
   });
 });

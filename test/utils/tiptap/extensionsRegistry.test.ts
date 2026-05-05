@@ -8,7 +8,6 @@ import {
   createServerExtensions,
   createPreviewExtensions,
 } from '@/ui/modules/Tiptap/extensionsRegistry';
-import type { Extension } from '@tiptap/core';
 
 describe('TipTap Extension Registry', () => {
   beforeEach(() => {

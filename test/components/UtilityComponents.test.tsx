@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { Blockquote } from '@/ui/components/Blockquote';
@@ -139,7 +139,7 @@ describe('Truncate', () => {
 
   it('calls onToggle when expand button is clicked', async () => {
     const onToggle = vi.fn();
-    const user = userEvent.setup();
+    const _user = userEvent.setup();
 
     // Mock scrollHeight to trigger the toggle button
     Object.defineProperty(HTMLElement.prototype, 'scrollHeight', {

@@ -19,7 +19,7 @@ import { generateHTML } from '@tiptap/html';
 
 // Mock TipTap HTML generation
 vi.mock('@tiptap/html', () => ({
-  generateHTML: vi.fn((doc: JSONContent, extensions: unknown[]) => {
+  generateHTML: vi.fn((doc: JSONContent, _extensions: unknown[]) => {
     if (!doc.content || !Array.isArray(doc.content)) {
       return '';
     }
