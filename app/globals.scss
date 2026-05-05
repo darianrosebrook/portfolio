@@ -359,6 +359,7 @@ h3 {
 }
 
 /* Enhanced selection styling for gooey effect */
+
 /* CSS Custom Highlight API - removed for Next.js 16 compatibility
    TODO: Re-enable when CSS parser supports ::highlight() pseudo-element
    Original code:
@@ -532,7 +533,7 @@ main {
   display: flex;
   flex-grow: 1;
   flex-direction: column;
-  overflow-x: hidden;
+  overflow: clip visible;
   width: 100%;
   margin: auto;
   padding-top: 5vh;

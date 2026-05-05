@@ -113,12 +113,12 @@
       },
       "primary": {
         "$type": "color",
-        "$value": "{color.palette.red.300}",
+        "$value": "{color.palette.neutral.300}",
         "$extensions": {
-          "design.paths.light": "{color.palette.red.300}",
-          "design.paths.dark": "{color.palette.red.500}"
+          "design.paths.light": "{color.palette.neutral.300}",
+          "design.paths.dark": "{color.palette.neutral.500}"
         },
-        "$description": "Primary input border - medium red"
+        "$description": "Primary input border - neutral"
       }
     },
     "navigation": {

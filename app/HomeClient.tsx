@@ -108,7 +108,7 @@ export default function HomeClient({ ldJson }: HomeClientProps) {
             className="gooey"
             style={{ opacity: prefersReducedMotion ? 1 : 0 }}
           >
-            <Status status="error">Not looking for work</Status>
+            <Status status="error">Building AI-ready design systems</Status>
           </div>
           <h1 className="gooey">
             <span>
@@ -126,7 +126,8 @@ export default function HomeClient({ ldJson }: HomeClientProps) {
               className={styles.secondLine}
               style={{ opacity: prefersReducedMotion ? 1 : 0 }}
             >
-              Connecting Design → Code with Design Systems & Custom Plugins
+              Connecting Design → Code through Better Design Systems &amp;
+              Tooling
             </span>
           </h1>
         </div>
@@ -309,17 +310,17 @@ export default function HomeClient({ ldJson }: HomeClientProps) {
           <p>Design</p>
           <ul>
             <li>Design Management</li>
-            <li>Design Systems</li>
-            <li>Design Tokens</li>
-            <li>User Research</li>
-            <li>UX Design</li>
+            <li>Building Design Systems</li>
+            <li>Architecting Design Tokens</li>
+            <li>Conducitng User Research</li>
+            <li>UX Design & Workshops</li>
             <li>UX Engineering</li>
-            <li>Figma Component Libraries</li>
+            <li>Figma Components and Variables</li>
           </ul>
           <p>Development</p>
           <ul>
             <li>Figma Plugin Development</li>
-            <li>Figma API</li>
+            <li>Figma API Development</li>
             <li>React</li>
             <li>Vue</li>
             <li>Angular</li>
@@ -365,7 +366,7 @@ export default function HomeClient({ ldJson }: HomeClientProps) {
           </p>
           <p className="body-01">
             You can see some of the places where I have worked to make their
-            brand excel through my work with design systems{' '}
+            brand excel through my work with design systems
           </p>
           <p>
             p.s. A lot of this site is still a work in progress, as is the folly
