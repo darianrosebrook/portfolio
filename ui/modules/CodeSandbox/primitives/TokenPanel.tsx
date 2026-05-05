@@ -22,6 +22,45 @@ type TokenInfo = {
   description?: string;
 };
 
+const categorizeToken = (name: string): string => {
+  if (name.includes('color')) return 'Color';
+  if (name.includes('spacing') || name.includes('size')) return 'Spacing';
+  if (name.includes('typography') || name.includes('font')) return 'Typography';
+  if (name.includes('elevation') || name.includes('shadow')) return 'Elevation';
+  if (name.includes('radius') || name.includes('border')) return 'Shape';
+  if (name.includes('motion') || name.includes('duration')) return 'Motion';
+  if (name.includes('opacity')) return 'Opacity';
+  return 'Other';
+};
+
+const resolveTokenValue = (
+  value: string,
+  computedStyle: CSSStyleDeclaration
+): string => {
+  // If the value references another CSS custom property, try to resolve it
+  const varMatch = value.match(/var\(([^,)]+)/);
+  if (varMatch) {
+    const referencedVar = varMatch[1].trim();
+    const resolvedValue = computedStyle.getPropertyValue(referencedVar).trim();
+    return resolvedValue || value;
+  }
+  return value;
+};
+
+const generateTokenDescription = (name: string, value: string): string => {
+  if (name.includes('semantic-color-foreground-primary')) {
+    return 'Primary text color';
+  }
+  if (name.includes('semantic-color-background-primary')) {
+    return 'Primary background color';
+  }
+  if (name.includes('core-spacing-size')) return 'Spacing scale value';
+  if (name.includes('core-typography-ramp')) return 'Typography size scale';
+  if (name.includes('semantic-color-border')) return 'Border color';
+  if (name.includes('core-shape-radius')) return 'Border radius value';
+  return `Design token: ${value}`;
+};
+
 export function TokenPanel({
   tokens: providedTokens,
   targetWindow,
@@ -60,47 +99,6 @@ export function TokenPanel({
     },
     []
   );
-
-  const categorizeToken = (name: string): string => {
-    if (name.includes('color')) return 'Color';
-    if (name.includes('spacing') || name.includes('size')) return 'Spacing';
-    if (name.includes('typography') || name.includes('font'))
-      return 'Typography';
-    if (name.includes('elevation') || name.includes('shadow'))
-      return 'Elevation';
-    if (name.includes('radius') || name.includes('border')) return 'Shape';
-    if (name.includes('motion') || name.includes('duration')) return 'Motion';
-    if (name.includes('opacity')) return 'Opacity';
-    return 'Other';
-  };
-
-  const resolveTokenValue = (
-    value: string,
-    computedStyle: CSSStyleDeclaration
-  ): string => {
-    // If the value references another CSS custom property, try to resolve it
-    const varMatch = value.match(/var\(([^,)]+)/);
-    if (varMatch) {
-      const referencedVar = varMatch[1].trim();
-      const resolvedValue = computedStyle
-        .getPropertyValue(referencedVar)
-        .trim();
-      return resolvedValue || value;
-    }
-    return value;
-  };
-
-  const generateTokenDescription = (name: string, value: string): string => {
-    if (name.includes('semantic-color-foreground-primary'))
-      return 'Primary text color';
-    if (name.includes('semantic-color-background-primary'))
-      return 'Primary background color';
-    if (name.includes('core-spacing-size')) return 'Spacing scale value';
-    if (name.includes('core-typography-ramp')) return 'Typography size scale';
-    if (name.includes('semantic-color-border')) return 'Border color';
-    if (name.includes('core-shape-radius')) return 'Border radius value';
-    return `Design token: ${value}`;
-  };
 
   React.useEffect(() => {
     if (providedTokens) {

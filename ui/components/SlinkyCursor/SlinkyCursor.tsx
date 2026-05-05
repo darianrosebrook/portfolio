@@ -20,6 +20,7 @@ const SlinkyCursor: React.FC = () => {
   // Refs for position tracking
   const pos = useRef({ x: 0, y: 0 });
   const deltaPos = useRef({ x: 0, y: 0 });
+  const animationFrameRef = useRef<number | null>(null);
 
   const diff = (x1: number, y1: number, x2: number, y2: number) => {
     return Math.hypot(x2 - x1, y2 - y1);
@@ -31,7 +32,7 @@ const SlinkyCursor: React.FC = () => {
   const { x, y } = mouse;
   const scrollY = scroll?.y ?? 0;
 
-  const animate = useCallback(() => {
+  const animateFrame = useCallback(() => {
     if (!pestRef.current) return;
     const { x: xMouse, y: yMouse } = { x, y: y + scrollY };
     const { x: xPos, y: yPos } = pos.current;
@@ -63,8 +64,6 @@ const SlinkyCursor: React.FC = () => {
       pest.style.setProperty('width', `${stretchWidth}px`);
       pest.style.setProperty('transform', `rotate(${angleDeg}deg)`);
     }
-
-    requestAnimationFrame(animate);
   }, [x, y, scrollY]);
 
   // Update active state based on mouse.isPressed from context
@@ -83,8 +82,19 @@ const SlinkyCursor: React.FC = () => {
 
   useEffect(() => {
     // Start the animation loop once component mounts
-    requestAnimationFrame(animate);
-  }, [animate]);
+    const animate = () => {
+      animateFrame();
+      animationFrameRef.current = requestAnimationFrame(animate);
+    };
+
+    animationFrameRef.current = requestAnimationFrame(animate);
+
+    return () => {
+      if (animationFrameRef.current !== null) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, [animateFrame]);
 
   return (
     <div

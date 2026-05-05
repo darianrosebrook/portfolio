@@ -51,11 +51,7 @@ export function useForwardedRef<T>(
 ): React.RefCallback<T> {
   return React.useCallback(
     (node: T | null) => {
-      if (typeof forwardedRef === 'function') {
-        forwardedRef(node);
-      } else if (forwardedRef != null) {
-        (forwardedRef as React.MutableRefObject<T | null>).current = node;
-      }
+      setRef(forwardedRef, node);
     },
     [forwardedRef]
   );

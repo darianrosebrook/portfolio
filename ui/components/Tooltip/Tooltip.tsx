@@ -7,6 +7,7 @@
  */
 'use client';
 import { Placement, TriggerStrategy } from '@/types/ui';
+import { setRef } from '@/utils/refs';
 import React, {
   forwardRef,
   useCallback,
@@ -230,12 +231,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
         const childRef = (
           children as React.ReactElement & { ref?: React.Ref<HTMLElement> }
         ).ref;
-        if (typeof childRef === 'function') {
-          childRef(node);
-        } else if (childRef) {
-          (childRef as React.MutableRefObject<HTMLElement | null>).current =
-            node;
-        }
+        setRef(childRef, node);
       },
       onMouseEnter: (e: React.MouseEvent<HTMLElement>) => {
         childProps.onMouseEnter?.(e);

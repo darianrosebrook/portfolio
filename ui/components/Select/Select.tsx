@@ -11,6 +11,7 @@
 import React, { useCallback, useRef, useEffect } from 'react';
 import { useSelectContext } from './SelectProvider';
 import { ControlSize } from '@/types/ui';
+import { setRef } from '@/utils/refs';
 import styles from './Select.module.scss';
 
 // Trigger component - what the user clicks to open the select
@@ -66,17 +67,8 @@ export const SelectTrigger = React.forwardRef<
   // Combine refs
   const combinedRef = useCallback(
     (node: HTMLButtonElement) => {
-      if (triggerRef) {
-        (triggerRef as React.MutableRefObject<HTMLButtonElement>).current =
-          node;
-      }
-      if (ref) {
-        if (typeof ref === 'function') {
-          ref(node);
-        } else {
-          ref.current = node;
-        }
-      }
+      triggerRef.current = node;
+      setRef(ref, node);
     },
     [triggerRef, ref]
   );
