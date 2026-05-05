@@ -15,7 +15,8 @@ type FieldControlAriaProps = Readonly<{
 }>;
 
 export function useFieldControl<
-  T extends HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement,
+  _T extends HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement =
+    HTMLInputElement,
 >() {
   const f = useFieldCtx();
   return useMemo(

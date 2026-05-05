@@ -45,7 +45,7 @@ describe('Tabs', () => {
       </Tabs>
     );
 
-    const tab1 = screen.getByText('Tab 1');
+    const _tab1 = screen.getByText('Tab 1');
     const tab2 = screen.getByText('Tab 2');
     const panel1 = screen.getByText('Panel 1');
     const panel2 = screen.getByText('Panel 2');

@@ -5,7 +5,7 @@ import { byPrefixAndName } from '@awesome.me/kit-0ba7f5fefb/icons';
 import { Editor } from '@tiptap/react';
 import { useEffect, useRef, useState } from 'react';
 
-const faLink = byPrefixAndName['far']['link'];
+const _faLink = byPrefixAndName['far']['link'];
 const faXmark = byPrefixAndName['far']['xmark'];
 const faCheck = byPrefixAndName['far']['check'];
 

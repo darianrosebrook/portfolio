@@ -6,7 +6,6 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useReducedMotion } from '@/context/ReducedMotionContext';
 import {
-  EDITORIAL_STAGGER,
   EASING_PRESETS,
   ANIMATION_DURATIONS,
 } from '@/utils/animation';

@@ -84,7 +84,7 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
       closeOnEscape = true,
       initialFocus,
       returnFocus,
-      dismissible = true,
+      dismissible: _dismissible = true,
       onDismiss,
     },
     forwardedRef

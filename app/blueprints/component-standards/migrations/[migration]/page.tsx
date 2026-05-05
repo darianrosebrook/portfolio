@@ -12,8 +12,7 @@ export async function generateStaticParams() {
   return [{ migration: 'button-v1-v2' }];
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { migration } = await params;
+export async function generateMetadata(_: Props): Promise<Metadata> {
   const migrationData = getMigrationData('Button');
 
   if (!migrationData) {
@@ -33,9 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function MigrationPage({ params }: Props) {
-  const { migration } = await params;
-
+export default async function MigrationPage(_: Props) {
   // For now, use Button migration as example
   // In the future, this could parse the migration slug to get component name
   const migrationData = getMigrationData('Button');

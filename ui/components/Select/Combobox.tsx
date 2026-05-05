@@ -35,7 +35,7 @@ export const Combobox: React.FC<ComboboxProps> = ({
   onChange,
   placeholder,
   className,
-  disabled,
+  disabled: _disabled,
 }) => {
   const handleChange = (selected: Option[] | Option | null) => {
     // For combobox (single selection), extract the single option

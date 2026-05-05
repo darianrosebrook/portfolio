@@ -13,7 +13,7 @@ interface LearningPathProps {
 }
 
 export function LearningPath({
-  track,
+  track: _track,
   learningPath,
   completedPages,
 }: LearningPathProps) {

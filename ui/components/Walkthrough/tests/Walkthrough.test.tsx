@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { contractTest } from '@/test/utils/contractTest';
 
 import Walkthrough from '../Walkthrough';

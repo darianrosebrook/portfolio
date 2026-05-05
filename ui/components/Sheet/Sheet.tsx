@@ -150,7 +150,7 @@ const SheetContent = React.forwardRef<HTMLDivElement, SheetContentProps>(
       children,
       side: propSide,
       closeOnEscape = true,
-      closeOnOverlayClick = true,
+      closeOnOverlayClick: _closeOnOverlayClick = true,
       ...rest
     },
     ref

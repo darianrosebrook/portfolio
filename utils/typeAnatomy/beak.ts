@@ -20,14 +20,14 @@ export function hasBeak(g: Glyph, m: Metrics): boolean {
   if (!isDrawable(g)) return false;
 
   const gs = shapeForV2(g);
-  const overshoot = getOvershoot(g);
+  const _overshoot = getOvershoot(g);
   const bboxW = g.bbox.maxX - g.bbox.minX;
-  const bboxH = g.bbox.maxY - g.bbox.minY;
+  const _bboxH = g.bbox.maxY - g.bbox.minY;
   const EPS = FeatureDetectionConfig.global.defaultEps;
 
   // Beak is typically at the end of arms (top of S, F, T)
   // Scan near the top and edges of the glyph
-  const topRegion = m.capHeight + (m.ascent - m.capHeight) * 0.2;
+  const _topRegion = m.capHeight + (m.ascent - m.capHeight) * 0.2;
   const scanBands = 3;
 
   for (let i = 0; i < scanBands; i++) {

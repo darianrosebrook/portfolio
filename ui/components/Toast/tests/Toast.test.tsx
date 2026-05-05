@@ -3,7 +3,6 @@ import { render, screen, fireEvent, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 
-import { vi } from 'vitest';
 import { contractTest } from '@/test/utils/contractTest';
 import { ToastProvider, ToastViewport, useToast } from '../index';
 
@@ -203,7 +202,7 @@ describe('Toast Composer', () => {
         </ToastProvider>
       );
       await userEvent.click(screen.getByLabelText('enqueue'));
-      const results = await axe(container);
+      const _results = await axe(container);
       expect(container).toBeInTheDocument();
     });
 
@@ -245,7 +244,7 @@ describe('Toast Composer', () => {
 
   describe('Design Tokens', () => {
     it('uses design tokens for styling variants', async () => {
-      const user = userEvent.setup();
+      const _user = userEvent.setup();
 
       function VariantHelper() {
         const { enqueue } = useToast();

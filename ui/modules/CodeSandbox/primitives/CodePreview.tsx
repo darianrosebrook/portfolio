@@ -7,7 +7,7 @@ export type CodePreviewProps = {
 };
 
 export const CodePreview = React.memo(function CodePreview({
-  runtime = 'iframe',
+  runtime: _runtime = 'iframe',
   height = '100%',
 }: CodePreviewProps) {
   // SandpackPreview defaults to iframe; inline not supported directly here.

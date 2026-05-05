@@ -91,7 +91,11 @@ export function DocLayout({
   codeFiles,
   sandpackOptions = {},
 }: DocLayoutProps) {
-  const { activeSection, sections, setActiveSection } = useDocLayout();
+  const {
+    activeSection: _activeSection,
+    sections,
+    setActiveSection,
+  } = useDocLayout();
   const contentRef = useRef<HTMLDivElement>(null);
 
   // Local theme override for the Sandpack preview: 'system' | 'light' | 'dark'

@@ -80,7 +80,7 @@ export const FloatingBlockMenu: React.FC<FloatingBlockMenuProps> = ({
     const node = $pos.parent;
 
     // Get the content
-    const content = node.content.toJSON();
+    const _content = node.content.toJSON();
 
     // Turn into different types
     switch (type) {

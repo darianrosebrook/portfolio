@@ -121,7 +121,7 @@ export const TableOfContentsExtension = Node.create<TableOfContentsOptions>({
         },
       updateTableOfContents:
         () =>
-        ({ commands, editor }) => {
+        ({ commands: _commands, editor }) => {
           // Find all TOC nodes and update them
           const { doc } = editor.state;
           const tocNodes: number[] = [];

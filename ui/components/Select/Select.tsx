@@ -8,7 +8,7 @@
  * After: Provider pattern with context orchestration and slots
  */
 'use client';
-import React, { useCallback, useRef, useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useSelectContext } from './SelectProvider';
 import { ControlSize } from '@/types/ui';
 import { setRef } from '@/utils/refs';
@@ -55,11 +55,11 @@ export const SelectTrigger = React.forwardRef<
   const {
     isOpen,
     selectedOptions,
-    selectedOption,
+    selectedOption: _selectedOption,
     isEmpty,
     toggle,
     clearSelection,
-    id,
+    id: _id,
     ariaAttributes,
     triggerRef,
   } = useSelectContext();

@@ -1,5 +1,5 @@
-import { vi } from 'vitest';
+import type { vi as ViType } from 'vitest';
 
 declare global {
-  const vi: typeof vi;
+  const vi: typeof ViType;
 }

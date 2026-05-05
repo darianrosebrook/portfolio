@@ -5,7 +5,6 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useReducedMotion } from '@/context/ReducedMotionContext';
 import { AnimatedText } from '@/ui/components/AnimatedText';
-import { AnimatedSection } from '@/ui/components/AnimatedSection';
 import Link from 'next/link';
 import { EASING_PRESETS, EDITORIAL_STAGGER } from '@/utils/animation';
 
@@ -31,7 +30,7 @@ function TimelineItem({
   role,
   outcomes,
   children,
-  index,
+  index: _index,
 }: TimelineItemProps) {
   const itemRef = useRef<HTMLLIElement>(null);
   const { prefersReducedMotion } = useReducedMotion();

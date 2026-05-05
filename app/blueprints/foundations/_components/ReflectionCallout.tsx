@@ -1,6 +1,5 @@
 'use client';
 
-import { useReducedMotion } from '@/context/ReducedMotionContext';
 import React from 'react';
 import styles from './ReflectionCallout.module.css';
 
@@ -15,8 +14,6 @@ export function ReflectionCallout({
   type = 'reflection',
   children,
 }: ReflectionCalloutProps) {
-  const { prefersReducedMotion } = useReducedMotion();
-
   return (
     <div
       className={styles.callout}

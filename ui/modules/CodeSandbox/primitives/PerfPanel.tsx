@@ -53,7 +53,7 @@ export function PerfPanel({ targetWindow, sampleMs = 5000 }: PerfPanelProps) {
     lastFrameTime.current = now;
   }, []);
 
-  const measureRender = React.useCallback((renderTime: number) => {
+  const _measureRender = React.useCallback((renderTime: number) => {
     renderTimes.current.push(renderTime);
     if (renderTimes.current.length > 100) {
       renderTimes.current.shift(); // Keep only last 100 measurements
@@ -96,7 +96,7 @@ export function PerfPanel({ targetWindow, sampleMs = 5000 }: PerfPanelProps) {
             memoryEstimate: Math.round(memory.usedJSHeapSize / 1024 / 1024), // MB
           }));
         }
-      } catch (e) {
+      } catch {
         // Memory API not available or blocked
       }
     };

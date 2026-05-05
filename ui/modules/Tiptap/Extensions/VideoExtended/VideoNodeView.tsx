@@ -23,7 +23,7 @@ const VideoNodeView: React.FC<VideoNodeViewProps> = ({
 
   const {
     src,
-    alt,
+    alt: _alt,
     title,
     width,
     height,

@@ -13,6 +13,7 @@ interface ViewTransition {
   skipTransition: () => void;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface Document {
   startViewTransition?: (callback: () => void) => ViewTransition;
 }
