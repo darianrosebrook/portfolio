@@ -2,11 +2,19 @@ import fs from 'fs';
 import path from 'path';
 import type { ComponentItem } from './componentsData';
 
+export type AnatomyPartType =
+  | { kind: 'slot'; required?: boolean }
+  | { kind: 'prop'; propName: string; propType: string }
+  | { kind: 'part' }
+  | { kind: 'root' };
+
 export interface AnatomyPart {
   name: string;
   description?: string;
   level: number; // nesting level
   parent?: string;
+  /** Derived classification used by the docs UI to label each row. */
+  type?: AnatomyPartType;
 }
 
 export interface ContractPropMember {
@@ -92,13 +100,25 @@ export function getComponentContract(
   }
 
   try {
-    const componentDir = path.dirname(component.paths.component);
-    const componentName = path.basename(component.paths.component, '.tsx');
-    const contractPath = path.join(
-      process.cwd(),
-      componentDir,
-      `${componentName}.contract.json`
-    );
+    const rawPath = component.paths.component;
+    const absoluteRaw = path.isAbsolute(rawPath)
+      ? rawPath
+      : path.join(process.cwd(), rawPath);
+
+    let contractPath: string;
+    if (
+      fs.existsSync(absoluteRaw) &&
+      fs.statSync(absoluteRaw).isDirectory()
+    ) {
+      // paths.component points at a directory (e.g. ui/components/Dialog).
+      const componentName = path.basename(absoluteRaw);
+      contractPath = path.join(absoluteRaw, `${componentName}.contract.json`);
+    } else {
+      // paths.component points at a .tsx file.
+      const componentDir = path.dirname(absoluteRaw);
+      const componentName = path.basename(absoluteRaw, '.tsx');
+      contractPath = path.join(componentDir, `${componentName}.contract.json`);
+    }
 
     if (!fs.existsSync(contractPath)) {
       return null;
@@ -117,40 +137,104 @@ export function getComponentContract(
   }
 }
 
+const STATE_PATTERNS = [
+  'hover',
+  'focus',
+  'active',
+  'disabled',
+  'loading',
+  'isLoading',
+  'selected',
+  'checked',
+  'open',
+  'closed',
+];
+
+const SIZE_PATTERNS = ['small', 'medium', 'large', 'xsmall', 'xlarge'];
+
+function isStructuralPart(part: string): boolean {
+  const lower = part.toLowerCase();
+  return (
+    !STATE_PATTERNS.some((pattern) => lower.includes(pattern)) &&
+    !SIZE_PATTERNS.includes(lower)
+  );
+}
+
+function humanizePartName(name: string): string {
+  return name
+    .replace(/([A-Z])/g, ' $1')
+    .replace(/[-_]/g, ' ')
+    .trim()
+    .replace(/\s+/g, ' ')
+    .toLowerCase()
+    .replace(/^./, (c) => c.toUpperCase());
+}
+
+function defaultPartDescription(name: string): string {
+  if (name === 'root') return 'Outermost container that hosts the component.';
+  return `${humanizePartName(name)} region of the component.`;
+}
+
+function classifyPart(
+  partName: string,
+  contract: ComponentContract | null
+): AnatomyPartType {
+  if (partName === 'root') return { kind: 'root' };
+
+  if (contract?.slots && partName in contract.slots) {
+    return { kind: 'slot', required: contract.slots[partName].required };
+  }
+
+  if (contract?.props) {
+    for (const propGroup of Object.values(contract.props)) {
+      const member = propGroup.members?.find((m) => m.name === partName);
+      if (member) {
+        return { kind: 'prop', propName: member.name, propType: member.type };
+      }
+    }
+  }
+
+  return { kind: 'part' };
+}
+
+function describePart(
+  partName: string,
+  contract: ComponentContract | null
+): string {
+  if (contract?.slots?.[partName]?.selector) {
+    return `Slot rendered into ${contract.slots[partName].selector}.`;
+  }
+  if (contract?.props) {
+    for (const propGroup of Object.values(contract.props)) {
+      const member = propGroup.members?.find((m) => m.name === partName);
+      if (member?.description) return member.description;
+    }
+  }
+  return defaultPartDescription(partName);
+}
+
 /**
  * Parse anatomy array into structured parts with hierarchy.
  * Filters out state/variant names and focuses on structural parts.
+ * When a contract is provided, each part is enriched with a description
+ * and a derived type classification (slot / prop / part).
  */
-export function parseAnatomy(anatomy: string[]): AnatomyPart[] {
-  const statePatterns = [
-    'hover',
-    'focus',
-    'active',
-    'disabled',
-    'loading',
-    'isLoading',
-    'selected',
-    'checked',
-    'open',
-    'closed',
-  ];
+export function parseAnatomy(
+  anatomy: string[],
+  contract: ComponentContract | null = null
+): AnatomyPart[] {
+  const structuralParts = anatomy.filter(isStructuralPart);
 
-  const sizePatterns = ['small', 'medium', 'large', 'xsmall', 'xlarge'];
-
-  // Filter out states, variants, and size modifiers
-  const structuralParts = anatomy.filter(
-    (part) =>
-      !statePatterns.some((pattern) => part.toLowerCase().includes(pattern)) &&
-      !sizePatterns.includes(part.toLowerCase())
-  );
-
-  // Map to AnatomyPart objects
-  // For now, assume single level - could be enhanced with DOM parsing
-  return structuralParts.map((part) => ({
-    name: part,
-    level: part === 'root' ? 0 : 1,
-    parent: part === 'root' ? undefined : 'root',
-  }));
+  return structuralParts.map((part) => {
+    const isRoot = part === 'root';
+    return {
+      name: part,
+      level: isRoot ? 0 : 1,
+      parent: isRoot ? undefined : 'root',
+      description: describePart(part, contract),
+      type: classifyPart(part, contract),
+    };
+  });
 }
 
 /**
@@ -162,5 +246,5 @@ export function getAnatomyData(component: ComponentItem): AnatomyPart[] | null {
     return null;
   }
 
-  return parseAnatomy(contract.anatomy);
+  return parseAnatomy(contract.anatomy, contract);
 }

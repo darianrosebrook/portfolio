@@ -1,0 +1,59 @@
+id: FEAT-201
+type: feature
+title: Procedural isometric anatomy visualization for component docs
+status: active
+risk_tier: 3
+mode: development
+created_at: '2026-05-15T02:19:08.430Z'
+updated_at: '2026-05-15T02:19:08.430Z'
+blast_radius:
+  modules:
+    - app/blueprints/component-standards
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - app/blueprints/component-standards/_components/
+    - app/blueprints/component-standards/_lib/generateAnatomy.ts
+    - app/blueprints/component-standards/[slug]/page.tsx
+  out:
+    - node_modules/
+    - dist/
+    - build/
+    - ui/
+    - app/blueprints/svgs.tsx
+    - app/blueprints/page.tsx
+invariants:
+  - Existing anatomy fallback messaging preserved when contract data is missing
+  - No changes to component contract files
+  - Server-rendered doc pages continue to build without runtime errors
+acceptance: []
+acceptance_criteria:
+  - id: A1
+    given: a built component with anatomy in its contract.json
+    when: visiting /blueprints/component-standards/[slug]
+    then: an AnatomyTable renders one row per anatomy part with Property, Description, and Type columns
+  - id: A2
+    given: a built component with slots and/or props defined in its contract
+    when: the AnatomyTable derives the Type column
+    then: anatomy parts matching a slot name are labeled "Slot"; parts matching a prop name show the prop type; remaining parts show "Part"
+  - id: A3
+    given: a built component with N anatomy parts
+    when: the IsometricAnatomy renders
+    then: N stacked extruded layers are drawn, with one prop-pin label per layer using the part name
+  - id: A4
+    given: a user hovers the IsometricAnatomy
+    when: the explode animation fires
+    then: layers translate vertically to reveal separation and prop-pin labels become visible
+  - id: A5
+    given: a component without contract anatomy data
+    when: visiting its doc page
+    then: the existing planned/not-defined fallback messaging is preserved
+non_functional:
+  a11y:
+    - Anatomy table uses semantic <table> markup with column headers
+    - Isometric SVG is decorative and uses aria-hidden; the table is the canonical source of anatomy info
+  perf: {}
+  security: []
+contracts: []
+worktree: anatomy-visualization

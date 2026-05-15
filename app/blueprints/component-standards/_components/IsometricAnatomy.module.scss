@@ -1,0 +1,69 @@
+.isometric {
+  --explode-progress: 0;
+
+  position: relative;
+  width: 100%;
+  padding: 16px;
+  background-color: var(
+    --semantic-color-background-secondary,
+    #f9fafb
+  );
+  border: 1px solid var(--semantic-color-border-primary, #e5e7eb);
+  border-radius: var(--semantic-border-radius-md, 8px);
+  cursor: zoom-in;
+
+  &:hover,
+  &:focus-within {
+    --explode-progress: 1;
+  }
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 520px;
+}
+
+.stack {
+  /* The stack itself does not move; each layer translates individually. */
+}
+
+.layer {
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateY(0);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.isometric:hover .layer,
+.isometric:focus-within .layer {
+  transform: translateY(var(--explode-y, 0));
+}
+
+.layerLabel {
+  pointer-events: none;
+  user-select: none;
+}
+
+.pins {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out 0.1s;
+}
+
+.isometric:hover .pins,
+.isometric:focus-within .pins {
+  opacity: 1;
+}
+
+.pin {
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .layer,
+  .pins,
+  .pin {
+    transition: none;
+  }
+}
