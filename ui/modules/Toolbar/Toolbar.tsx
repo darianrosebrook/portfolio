@@ -53,79 +53,110 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
   };
 
   return (
-    <div className={styles.toolbar}>
+    <div
+      className={styles.toolbar}
+      role="toolbar"
+      aria-label="Editor formatting tools"
+      data-slot="toolbar"
+    >
       {/* Text style selector */}
-      <select value={getActiveTextStyle()} onChange={handleTextStyleChange}>
+      <select
+        value={getActiveTextStyle()}
+        onChange={handleTextStyleChange}
+        aria-label="Text style"
+        data-slot="text-style"
+      >
         <option value="0">Paragraph</option>
         <option value="1">Heading 1</option>
         <option value="2">Heading 2</option>
         <option value="3">Heading 3</option>
       </select>
 
-      <div className={styles.separator} />
+      <div className={styles.separator} data-slot="separator" />
 
       {/* Text formatting */}
       <button
+        type="button"
         onClick={() => editor.chain().focus().toggleBold().run()}
         className={editor.isActive('bold') ? styles.isActive : ''}
+        aria-pressed={editor.isActive('bold')}
         title="Bold"
+        data-slot="action"
       >
         <Icon icon={faBold} />
       </button>
       <button
+        type="button"
         onClick={() => editor.chain().focus().toggleItalic().run()}
         className={editor.isActive('italic') ? styles.isActive : ''}
+        aria-pressed={editor.isActive('italic')}
         title="Italic"
+        data-slot="action"
       >
         <Icon icon={faItalic} />
       </button>
       <button
+        type="button"
         onClick={() => editor.chain().focus().toggleUnderline().run()}
         className={editor.isActive('underline') ? styles.isActive : ''}
+        aria-pressed={editor.isActive('underline')}
         title="Underline"
+        data-slot="action"
       >
         <Icon icon={faUnderline} />
       </button>
       <button
+        type="button"
         onClick={() => editor.chain().focus().toggleStrike().run()}
         className={editor.isActive('strike') ? styles.isActive : ''}
+        aria-pressed={editor.isActive('strike')}
         title="Strikethrough"
+        data-slot="action"
       >
         <Icon icon={faStrikethrough} />
       </button>
 
-      <div className={styles.separator} />
+      <div className={styles.separator} data-slot="separator" />
 
       {/* Alignment */}
       <button
+        type="button"
         onClick={() => editor.chain().focus().setTextAlign('left').run()}
         className={
           editor.isActive({ textAlign: 'left' }) ? styles.isActive : ''
         }
+        aria-pressed={editor.isActive({ textAlign: 'left' })}
         title="Align left"
+        data-slot="action"
       >
         <Icon icon={faAlignLeft} />
       </button>
       <button
+        type="button"
         onClick={() => editor.chain().focus().setTextAlign('center').run()}
         className={
           editor.isActive({ textAlign: 'center' }) ? styles.isActive : ''
         }
+        aria-pressed={editor.isActive({ textAlign: 'center' })}
         title="Align center"
+        data-slot="action"
       >
         <Icon icon={faAlignCenter} />
       </button>
       <button
+        type="button"
         onClick={() => editor.chain().focus().setTextAlign('right').run()}
         className={
           editor.isActive({ textAlign: 'right' }) ? styles.isActive : ''
         }
+        aria-pressed={editor.isActive({ textAlign: 'right' })}
         title="Align right"
+        data-slot="action"
       >
         <Icon icon={faAlignRight} />
       </button>
 
-      <div className={styles.separator} />
+      <div className={styles.separator} data-slot="separator" />
 
       {/* Color picker */}
       <input
@@ -134,31 +165,40 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
           editor.chain().focus().setColor(event.target.value).run()
         }
         value={editor.getAttributes('textStyle').color || '#000000'}
+        aria-label="Text color"
         title="Text color"
+        data-slot="color-input"
       />
 
-      <div className={styles.separator} />
+      <div className={styles.separator} data-slot="separator" />
 
       {/* Lists */}
       <button
+        type="button"
         onClick={() => editor.chain().focus().toggleBulletList().run()}
         className={editor.isActive('bulletList') ? styles.isActive : ''}
+        aria-pressed={editor.isActive('bulletList')}
         title="Bullet list"
+        data-slot="action"
       >
         <Icon icon={faListUl} />
       </button>
       <button
+        type="button"
         onClick={() => editor.chain().focus().toggleOrderedList().run()}
         className={editor.isActive('orderedList') ? styles.isActive : ''}
+        aria-pressed={editor.isActive('orderedList')}
         title="Numbered list"
+        data-slot="action"
       >
         <Icon icon={faListOl} />
       </button>
 
-      <div className={styles.separator} />
+      <div className={styles.separator} data-slot="separator" />
 
       {/* Blocks */}
       <button
+        type="button"
         onClick={() =>
           editor
             .chain()
@@ -167,42 +207,62 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
             .run()
         }
         title="Insert table"
+        data-slot="action"
       >
         <Icon icon={faTable} />
       </button>
       <button
+        type="button"
         onClick={() => editor.chain().focus().toggleBlockquote().run()}
         className={editor.isActive('blockquote') ? styles.isActive : ''}
+        aria-pressed={editor.isActive('blockquote')}
         title="Quote"
+        data-slot="action"
       >
         <Icon icon={faQuoteLeft} />
       </button>
       <button
+        type="button"
         onClick={() => editor.chain().focus().setHorizontalRule().run()}
         title="Horizontal rule"
+        data-slot="action"
       >
         <Icon icon={faMinus} />
       </button>
       <button
+        type="button"
         onClick={() => editor.chain().focus().setDetails('Details').run()}
         title="Insert Details Section"
+        data-slot="action"
       >
         <Icon icon={faChevronDown} />
       </button>
       <button
+        type="button"
         onClick={() => editor.chain().focus().setTableOfContents().run()}
         title="Insert Table of Contents"
+        data-slot="action"
       >
         <Icon icon={faList} />
       </button>
 
-      <div className={styles.separator} />
+      <div className={styles.separator} data-slot="separator" />
 
       {/* History */}
-      <button onClick={() => editor.chain().focus().undo().run()} title="Undo">
+      <button
+        type="button"
+        onClick={() => editor.chain().focus().undo().run()}
+        title="Undo"
+        data-slot="action"
+      >
         <Icon icon={faUndo} />
       </button>
-      <button onClick={() => editor.chain().focus().redo().run()} title="Redo">
+      <button
+        type="button"
+        onClick={() => editor.chain().focus().redo().run()}
+        title="Redo"
+        data-slot="action"
+      >
         <Icon icon={faRedo} />
       </button>
     </div>

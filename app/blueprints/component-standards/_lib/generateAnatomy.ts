@@ -41,7 +41,7 @@ export interface ComponentContract {
     screenReader?: string[];
   };
   tokens?: Record<string, string[] | Record<string, ContractTokenResolution>>;
-  props?: Record<string, { members: ContractPropMember[] }>;
+  props?: Record<string, { members?: ContractPropMember[]; extends?: string }>;
   channels?: Record<string, {
     value: string;
     onChange: string;
@@ -81,6 +81,79 @@ export interface ComponentContract {
   rtl?: { flipIcon: boolean };
 }
 
+function componentNameToPathSegment(name: string): string {
+  return name.replace(/[^a-zA-Z0-9]/g, '');
+}
+
+function resolveUiPath(candidate: string): string | null {
+  const normalized = candidate.replace(/\\/g, '/');
+  const componentPrefix = 'ui/components/';
+  const modulePrefix = 'ui/modules/';
+
+  if (normalized.startsWith(componentPrefix)) {
+    return path.join(
+      /* turbopackIgnore: true */ process.cwd(),
+      'ui',
+      'components',
+      normalized.slice(componentPrefix.length)
+    );
+  }
+
+  if (normalized.startsWith(modulePrefix)) {
+    return path.join(
+      /* turbopackIgnore: true */ process.cwd(),
+      'ui',
+      'modules',
+      normalized.slice(modulePrefix.length)
+    );
+  }
+
+  return null;
+}
+
+export function resolveComponentPath(component: ComponentItem): string | null {
+  const candidates = [
+    component.paths?.component,
+    path.join('ui/components', component.component),
+    path.join('ui/components', componentNameToPathSegment(component.component)),
+    path.join('ui/modules', component.component),
+    path.join('ui/modules', componentNameToPathSegment(component.component)),
+  ].filter(Boolean) as string[];
+
+  for (const candidate of candidates) {
+    const absolutePath = resolveUiPath(candidate);
+    if (!absolutePath) {
+      continue;
+    }
+
+    if (fs.existsSync(absolutePath)) {
+      return absolutePath;
+    }
+  }
+
+  return component.paths?.component
+    ? resolveUiPath(component.paths.component)
+    : null;
+}
+
+export function resolveComponentContractPath(
+  component: ComponentItem
+): string | null {
+  const componentPath = resolveComponentPath(component);
+  if (!componentPath) {
+    return null;
+  }
+
+  if (fs.existsSync(componentPath) && fs.statSync(componentPath).isDirectory()) {
+    const componentName = path.basename(componentPath);
+    return path.join(componentPath, `${componentName}.contract.json`);
+  }
+
+  const componentDir = path.dirname(componentPath);
+  const componentName = path.basename(componentPath, path.extname(componentPath));
+  return path.join(componentDir, `${componentName}.contract.json`);
+}
+
 /**
  * Get the component contract file data.
  */
@@ -92,15 +165,9 @@ export function getComponentContract(
   }
 
   try {
-    const componentDir = path.dirname(component.paths.component);
-    const componentName = path.basename(component.paths.component, '.tsx');
-    const contractPath = path.join(
-      process.cwd(),
-      componentDir,
-      `${componentName}.contract.json`
-    );
+    const contractPath = resolveComponentContractPath(component);
 
-    if (!fs.existsSync(contractPath)) {
+    if (!contractPath || !fs.existsSync(contractPath)) {
       return null;
     }
 

@@ -1,0 +1,204 @@
+{
+  "$schema": "../../designTokens/component.contract.schema.json",
+  "name": "Toolbar",
+  "layer": "composer",
+  "description": "Editor command surface that groups formatting, alignment, color, insertion, and history actions for a TipTap editor instance.",
+  "anatomy": [
+    "root",
+    "textStyle",
+    "action",
+    "colorInput",
+    "separator"
+  ],
+  "variants": {
+    "density": [
+      "compact"
+    ],
+    "wrap": [
+      "wrap"
+    ]
+  },
+  "states": [
+    "default",
+    "hover",
+    "focus",
+    "active",
+    "disabled",
+    "pressed"
+  ],
+  "slots": {
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"toolbar\"]"
+    },
+    "textStyle": {
+      "required": true,
+      "selector": "[data-slot=\"text-style\"]"
+    },
+    "action": {
+      "required": true,
+      "selector": "[data-slot=\"action\"]"
+    },
+    "colorInput": {
+      "required": true,
+      "selector": "[data-slot=\"color-input\"]"
+    },
+    "separator": {
+      "required": false,
+      "selector": "[data-slot=\"separator\"]"
+    }
+  },
+  "a11y": {
+    "role": "toolbar",
+    "roles": [
+      "toolbar",
+      "button",
+      "combobox"
+    ],
+    "labeling": [
+      "aria-label",
+      "title",
+      "aria-pressed"
+    ],
+    "keyboard": [
+      {
+        "key": "Tab",
+        "when": "moving through toolbar controls",
+        "then": "move focus to the next native control"
+      },
+      {
+        "key": "Enter|Space",
+        "when": "focused on an action button",
+        "then": "run the associated editor command"
+      }
+    ],
+    "apgPattern": "toolbar",
+    "screenReader": [
+      "Toolbar root is announced as Editor formatting tools",
+      "Toggle actions expose pressed state with aria-pressed"
+    ]
+  },
+  "tokens": {
+    "root": {
+      "toolbar.color.background.default": {
+        "resolvesTo": "semantic.color.background.primary",
+        "fallback": "#ffffff",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "toolbar.color.border.default": {
+        "resolvesTo": "semantic.color.border.primary",
+        "fallback": "#f29495",
+        "property": "border-color",
+        "layer": "semantic"
+      },
+      "toolbar.radius.default": {
+        "resolvesTo": "core.shape.radius.small",
+        "fallback": "4px",
+        "property": "border-radius",
+        "layer": "core"
+      },
+      "toolbar.gap.default": {
+        "resolvesTo": "core.spacing.size.01",
+        "fallback": "2px",
+        "property": "gap",
+        "layer": "core"
+      },
+      "toolbar.padding.default": {
+        "resolvesTo": "core.spacing.size.02",
+        "fallback": "4px",
+        "property": "padding",
+        "layer": "core"
+      }
+    },
+    "action": {
+      "toolbar.action.color.foreground.default": {
+        "resolvesTo": "semantic.color.foreground.secondary",
+        "fallback": "#555555",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "toolbar.action.color.foreground.hover": {
+        "resolvesTo": "semantic.color.foreground.primary",
+        "fallback": "#141414",
+        "property": "color",
+        "layer": "semantic"
+      },
+      "toolbar.action.color.background.hover": {
+        "resolvesTo": "semantic.interaction.background.hover",
+        "fallback": "#efefef",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "toolbar.action.color.background.pressed": {
+        "resolvesTo": "semantic.interaction.background.active",
+        "fallback": "#cecece",
+        "property": "background-color",
+        "layer": "semantic"
+      },
+      "toolbar.action.radius.default": {
+        "resolvesTo": "core.shape.radius.small",
+        "fallback": "4px",
+        "property": "border-radius",
+        "layer": "core"
+      }
+    },
+    "separator": {
+      "toolbar.separator.color.background.default": {
+        "resolvesTo": "semantic.color.border.primary",
+        "fallback": "#f29495",
+        "property": "background-color",
+        "layer": "semantic"
+      }
+    }
+  },
+  "props": {
+    "designed": {
+      "members": [
+        {
+          "name": "editor",
+          "type": "Editor | null",
+          "description": "TipTap editor instance used to read active formatting state and dispatch editor commands. The toolbar renders null until an editor is available.",
+          "required": true
+        }
+      ]
+    }
+  },
+  "focus": {
+    "strategy": "none",
+    "orientation": "horizontal",
+    "wrap": false,
+    "description": "Toolbar uses native focus order across select, color input, and button controls."
+  },
+  "motion": {
+    "transitions": [
+      {
+        "name": "controlFeedback",
+        "trigger": "hover|active|pressed",
+        "duration": "150ms",
+        "easing": "ease",
+        "properties": [
+          "background-color",
+          "color"
+        ]
+      }
+    ],
+    "reducedMotion": "respect",
+    "reducedMotionStrategy": "State changes remain visible through color changes without relying on motion."
+  },
+  "ssr": {
+    "hydrateOn": "interaction"
+  },
+  "rtl": {
+    "flipIcon": true
+  },
+  "a2ui": {
+    "category": "action",
+    "usageHints": [
+      "Use when an editor or canvas needs a persistent command surface",
+      "Group related commands with separators",
+      "Expose toggle state with aria-pressed for formatting controls",
+      "Keep labels available through title or aria-label when icon-only actions are used"
+    ]
+  }
+}

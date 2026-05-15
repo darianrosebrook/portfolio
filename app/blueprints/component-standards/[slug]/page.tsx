@@ -7,7 +7,7 @@ import {
   getRelatedComponents,
 } from '../_lib/componentsData';
 import { getComponentAPI } from '../_lib/extractProps';
-import { getAnatomyData } from '../_lib/generateAnatomy';
+import { getAnatomyData, getComponentContract } from '../_lib/generateAnatomy';
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -60,6 +60,7 @@ export default async function ComponentPage({ params }: Props) {
       : { props: [], methods: [] };
 
   // Get anatomy data from component contract
+  const componentContract = getComponentContract(component);
   const anatomyParts = getAnatomyData(component);
 
   return (
@@ -67,6 +68,7 @@ export default async function ComponentPage({ params }: Props) {
       component={component}
       relatedComponents={relatedComponents}
       componentAPI={componentAPI}
+      componentContract={componentContract}
       anatomyParts={anatomyParts}
     />
   );
