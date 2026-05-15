@@ -23,6 +23,8 @@ import {
   PerfPanel,
   TokenPanel,
 } from '@/ui/modules/CodeSandbox/primitives';
+import { AnatomyTable } from './AnatomyTable';
+import { IsometricAnatomy } from './IsometricAnatomy';
 import styles from './ComprehensiveComponentDoc.module.scss';
 
 interface ComponentAPIData {
@@ -287,23 +289,12 @@ export function ComprehensiveComponentDoc({
           </p>
 
           {anatomyParts && anatomyParts.length > 0 ? (
-            <div className={styles.anatomyDiagram}>
-              <div className={styles.anatomyList}>
-                {anatomyParts.map((part, index) => (
-                  <div
-                    key={part.name}
-                    className={styles.anatomyPart}
-                    style={{ marginLeft: `${part.level * 1.5}rem` }}
-                  >
-                    <span className={styles.anatomyNumber}>{index + 1}</span>
-                    <span className={styles.anatomyName}>{part.name}</span>
-                    {part.description && (
-                      <span className={styles.anatomyDescription}>
-                        {part.description}
-                      </span>
-                    )}
-                  </div>
-                ))}
+            <div className={styles.anatomyVisualization}>
+              <div className={styles.anatomyTableCol}>
+                <AnatomyTable parts={anatomyParts} componentName={name} />
+              </div>
+              <div className={styles.anatomyIsometricCol}>
+                <IsometricAnatomy parts={anatomyParts} componentName={name} />
               </div>
             </div>
           ) : isBuilt ? (

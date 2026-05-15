@@ -1,0 +1,131 @@
+.tableWrapper {
+  overflow-x: auto;
+  width: 100%;
+  border: 1px solid var(--semantic-color-border-primary, #e5e7eb);
+  border-radius: var(--semantic-border-radius-md, 8px);
+  background-color: var(--semantic-color-background-primary, #ffffff);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--core-typography-font-family-sans, Inter, sans-serif);
+
+  thead tr {
+    border-bottom: 1px solid var(--semantic-color-border-primary, #e5e7eb);
+  }
+
+  tbody tr {
+    border-bottom: 1px solid var(--semantic-color-border-primary, #e5e7eb);
+
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+
+  th,
+  td {
+    padding: 12px 20px;
+    text-align: left;
+    font-size: 14px;
+    line-height: 1.5;
+    vertical-align: middle;
+  }
+
+  thead th {
+    color: var(--semantic-color-foreground-primary, #111827);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    background-color: var(
+      --semantic-color-background-secondary,
+      #f9fafb
+    );
+  }
+}
+
+.colProperty {
+  width: 24%;
+  min-width: 180px;
+}
+
+.colDescription {
+  width: 56%;
+}
+
+.colType {
+  width: 20%;
+  min-width: 120px;
+  text-align: right !important;
+}
+
+.partName {
+  color: var(--semantic-color-foreground-primary, #111827);
+  font-weight: 600;
+  text-transform: none;
+  white-space: nowrap;
+}
+
+.glyph {
+  display: inline-block;
+  margin-right: 6px;
+  color: var(--semantic-color-foreground-secondary, #6b7280);
+}
+
+.partDescription {
+  color: var(--semantic-color-foreground-secondary, #6b7280);
+}
+
+.partType {
+  text-align: right;
+}
+
+.typePill {
+  display: inline-block;
+  padding: 4px 12px;
+  background-color: var(--semantic-color-background-tertiary, #e5e7eb);
+  border: 1px solid var(--semantic-color-border-subtle, transparent);
+  border-radius: 999px;
+  color: var(--semantic-color-foreground-secondary, #4b5563);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.tone-slot {
+  background-color: var(--semantic-color-background-info-subtle, #eef2ff);
+  color: var(--semantic-color-foreground-info, #4f46e5);
+  border-color: transparent;
+}
+
+.tone-prop {
+  background-color: var(--semantic-color-background-secondary, #f3f4f6);
+  color: var(--semantic-color-foreground-primary, #111827);
+  border-color: var(--semantic-color-border-subtle, transparent);
+  font-family: var(--core-typography-font-family-mono, monospace);
+  font-size: 12px;
+}
+
+.tone-part {
+  background-color: var(--semantic-color-background-tertiary, #e5e7eb);
+  color: var(--semantic-color-foreground-secondary, #6b7280);
+  border-color: transparent;
+}
+
+.tone-root {
+  background-color: var(--semantic-color-background-info-subtle, #eef2ff);
+  color: var(--semantic-color-foreground-info, #4f46e5);
+  border-color: transparent;
+  font-weight: 600;
+}
+
+@media (max-width: 720px) {
+  .table {
+    th,
+    td {
+      padding: 10px 12px;
+      font-size: 13px;
+    }
+  }
+}
