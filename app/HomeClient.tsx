@@ -109,7 +109,7 @@ export default function HomeClient({ ldJson }: HomeClientProps) {
             className="gooey"
             style={{ opacity: prefersReducedMotion ? 1 : 0 }}
           >
-            <Status status="error">AI-ready design systems</Status>
+            <Status status="error">Building AI-ready systems</Status>
           </div>
           <h1 className="gooey">
             <span>
@@ -127,9 +127,7 @@ export default function HomeClient({ ldJson }: HomeClientProps) {
               className={styles.secondLine}
               style={{ opacity: prefersReducedMotion ? 1 : 0 }}
             >
-              Building the tooling, standards, and design-to-code workflows that
-              make product systems inspectable, governable, and easier for teams
-              — and AI tools — to work with safely.
+              Connecting Design → Code through Better Design Systems & Tooling
             </span>
           </h1>
         </div>
