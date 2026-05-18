@@ -262,7 +262,7 @@
   max-width: 320px;
 }
 
-// Delete confirmation dialog
+/* Delete confirmation dialog */
 .dialogOverlay {
   position: fixed;
   inset: 0;
@@ -324,7 +324,7 @@
   }
 }
 
-// Responsive adjustments
+/* Responsive adjustments */
 @media (max-width: 640px) {
   .articleCard {
     grid-template-columns: 1fr;

@@ -57,7 +57,7 @@
   right: 12px;
   color: var(--semantic-color-foreground-primary);
 
-  // color: orange;
+/* color: orange; */
   font-size: clamp(
     var(--semantic-typography-caption-03),
     1.5vw,

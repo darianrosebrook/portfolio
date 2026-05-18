@@ -317,7 +317,7 @@
 }
 
 .assessmentPrompt {
-  // ReflectionCallout handles its own styling
+/* ReflectionCallout handles its own styling */
 }
 
 .formalAssessment {
@@ -396,7 +396,7 @@
   }
 }
 
-// Responsive adjustments
+/* Responsive adjustments */
 @media (width <= 768px) {
   .title {
     font-size: 2rem;

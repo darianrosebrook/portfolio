@@ -10,7 +10,7 @@ import {
   createAssessmentResult,
   saveAssessmentResult,
 } from '../_lib/assessment';
-import styles from './Assessment.module.scss';
+import styles from './Assessment.module.css';
 import { AssessmentResults } from './AssessmentResults';
 
 interface AssessmentProps {

@@ -1,5 +1,5 @@
 import { byPrefixAndName } from '@awesome.me/kit-0ba7f5fefb/icons';
-import styles from './page.module.scss';
+import styles from './page.module.css';
 
 /**
  * Metadata for the /tools page.

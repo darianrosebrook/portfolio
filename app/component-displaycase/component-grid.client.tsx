@@ -1,6 +1,6 @@
 'use client';
 import * as React from 'react';
-import styles from './page.module.scss';
+import styles from './page.module.css';
 
 // Import all components at the top to avoid require() issues during SSR
 import Text from '@/ui/components/Text';

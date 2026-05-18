@@ -144,7 +144,7 @@
   }
 }
 
-// Responsive adjustments
+/* Responsive adjustments */
 @media (width <= 1024px) {
   .table {
     thead {

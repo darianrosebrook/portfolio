@@ -1,60 +1,60 @@
-.animatedCard {
+[data-ds-component="AnimatedCard"] {
   --animated-card-motion-image: transform 0.7s cubic-bezier(0.2, 0.65, 0.3, 0.9);
   --animated-card-motion-content: color 0.3s ease-out;
   --animated-card-motion-overlay: opacity 0.3s ease-out;
   --animated-card-overlay-background: var(--animated-card-overlay-background);
   will-change: transform, opacity;
   cursor: default;
-}
 
-.hoverable {
-  cursor: pointer;
+  &.hoverable {
+    cursor: pointer;
 
-  &:hover,
-  &:focus-within {
-    .cardImage {
-      transform: scale(1.05);
-    }
+    &:hover,
+    &:focus-within {
+      .cardImage {
+        transform: scale(1.05);
+      }
 
-    .cardTitle {
-      color: var(--color-brand-primary, #3b82f6);
-    }
+      .cardTitle {
+        color: var(--color-brand-primary, #3b82f6);
+      }
 
-    .cardOverlay {
-      opacity: 1;
+      .cardOverlay {
+        opacity: 1;
+      }
     }
   }
-}
 
-.cardImageWrapper {
-  overflow: hidden;
-  border-radius: var(--radius-md, 8px);
-}
-
-.cardImage {
-  transition: var(--animated-card-motion-image);
-  will-change: transform;
-
-  img {
-    display: block;
-    width: 100%;
-    height: auto;
+  .cardImageWrapper {
+    overflow: hidden;
+    border-radius: var(--radius-md, 8px);
   }
-}
 
-.cardTitle {
-  transition: var(--animated-card-motion-content);
-}
+  .cardImage {
+    transition: var(--animated-card-motion-image);
+    will-change: transform;
 
-.cardOverlay {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: var(--animated-card-motion-overlay);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--animated-card-overlay-background);
-  backdrop-filter: blur(4px);
-  border-radius: var(--radius-md, 8px);
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .cardTitle {
+    transition: var(--animated-card-motion-content);
+  }
+
+  .cardOverlay {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: var(--animated-card-motion-overlay);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--animated-card-overlay-background);
+    backdrop-filter: blur(4px);
+    border-radius: var(--radius-md, 8px);
+  }
 }

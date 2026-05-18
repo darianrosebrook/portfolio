@@ -2,7 +2,7 @@
 
 import type { Article } from '@/types';
 import { slugify } from '@/utils/slugify';
-import styles from './ArticleMetadataForm.module.scss';
+import styles from './ArticleMetadataForm.module.css';
 import { EditorActions } from './EditorActions';
 
 interface ArticleMetadataFormProps {

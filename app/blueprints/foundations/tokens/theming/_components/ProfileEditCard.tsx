@@ -1,6 +1,6 @@
 'use client';
 
-import styles from './DashboardDemo.module.scss';
+import styles from './DashboardDemo.module.css';
 
 export function ProfileEditCard() {
   return (

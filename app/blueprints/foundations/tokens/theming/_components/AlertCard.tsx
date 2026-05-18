@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import styles from './DashboardDemo.module.scss';
+import styles from './DashboardDemo.module.css';
 
 export const AlertCard: React.FC = () => {
   return (

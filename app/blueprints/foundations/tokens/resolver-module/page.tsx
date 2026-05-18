@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import styles from '../page.module.scss';
+import styles from '../page.module.css';
 
 export const metadata = {
   title: 'Resolver Module | Darian Rosebrook',

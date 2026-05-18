@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import styles from './FeedbackForm.module.scss';
+import styles from './FeedbackForm.module.css';
 
 export type FeedbackType =
   | 'content'

@@ -1,5 +1,5 @@
 import { DashboardNav } from './_components/DashboardNav';
-import styles from './page.module.scss';
+import styles from './page.module.css';
 import { ToastProvider, ToastViewport } from '@/ui/components/Toast';
 
 export default function DashboardLayout({

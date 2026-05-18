@@ -10,7 +10,7 @@ import {
   EASING_PRESETS,
   ANIMATION_DURATIONS,
 } from '@/utils/animation';
-import styles from './AnimatedCard.module.scss';
+import './AnimatedCard.css';
 
 // Register ScrollTrigger plugin
 if (typeof window !== 'undefined') {
@@ -134,8 +134,8 @@ export const AnimatedCard = React.forwardRef<HTMLElement, AnimatedCardProps>(
     };
 
     const cardClasses = [
-      styles.animatedCard,
-      enableHover ? styles.hoverable : '',
+      'animatedCard',
+      enableHover ? 'hoverable' : '',
       className,
     ]
       .filter(Boolean)
@@ -143,6 +143,7 @@ export const AnimatedCard = React.forwardRef<HTMLElement, AnimatedCardProps>(
 
     const props = {
       ref: setRefs,
+      'data-ds-component': 'AnimatedCard',
       className: cardClasses,
       style: {
         // Set initial state for SSR/hydration
@@ -175,9 +176,9 @@ export const AnimatedCardImage: React.FC<AnimatedCardImageProps> = ({
 }) => {
   return (
     <div
-      className={[styles.cardImageWrapper, className].filter(Boolean).join(' ')}
+      className={['cardImageWrapper', className].filter(Boolean).join(' ')}
     >
-      <div className={styles.cardImage}>{children}</div>
+      <div className='cardImage'>{children}</div>
     </div>
   );
 };
@@ -203,7 +204,7 @@ export const AnimatedCardTitle: React.FC<AnimatedCardTitleProps> = ({
   return React.createElement(
     Component,
     {
-      className: [styles.cardTitle, className].filter(Boolean).join(' '),
+      className: ['cardTitle', className].filter(Boolean).join(' '),
     },
     children
   );
@@ -226,7 +227,7 @@ export const AnimatedCardOverlay: React.FC<AnimatedCardOverlayProps> = ({
   className = '',
 }) => {
   return (
-    <div className={[styles.cardOverlay, className].filter(Boolean).join(' ')}>
+    <div className={['cardOverlay', className].filter(Boolean).join(' ')}>
       {children}
     </div>
   );

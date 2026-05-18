@@ -25,7 +25,7 @@ import {
 } from '@/ui/modules/CodeSandbox/primitives';
 import { AnatomyTable } from './AnatomyTable';
 import { IsometricAnatomy } from './IsometricAnatomy';
-import styles from './ComprehensiveComponentDoc.module.scss';
+import styles from './ComprehensiveComponentDoc.module.css';
 
 interface ComponentAPIData {
   props: ExtractedProp[];

@@ -3,7 +3,7 @@ import type {
   AnatomyPart,
   AnatomyPartType,
 } from '../_lib/generateAnatomy';
-import styles from './AnatomyTable.module.scss';
+import styles from './AnatomyTable.module.css';
 
 interface AnatomyTableProps {
   parts: AnatomyPart[];

@@ -1,4 +1,4 @@
-// Lead paragraph styling
+/* Lead paragraph styling */
 .lead {
   margin-bottom: var(--core-spacing-size-06);
   color: var(--semantic-color-foreground-secondary);
@@ -6,7 +6,7 @@
   line-height: 1.5;
 }
 
-// Layer grid - responsive layout
+/* Layer grid - responsive layout */
 .layerGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -146,7 +146,7 @@
   }
 }
 
-// Navigation grid at bottom
+/* Navigation grid at bottom */
 .layerNav {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -213,7 +213,7 @@
   font-size: var(--semantic-typography-body-03);
 }
 
-// Code block styling
+/* Code block styling */
 .codeBlock {
   overflow-x: auto;
   margin: var(--core-spacing-size-05) 0;
@@ -229,7 +229,7 @@
   }
 }
 
-// File tree styling
+/* File tree styling */
 .fileTree {
   overflow-x: auto;
   margin: var(--core-spacing-size-05) 0;
@@ -249,7 +249,7 @@
   }
 }
 
-// Highlight box for important callouts
+/* Highlight box for important callouts */
 .highlight {
   margin: var(--core-spacing-size-06) 0;
   padding: var(--core-spacing-size-05);
@@ -260,7 +260,7 @@
   color: var(--semantic-color-foreground-on-warning-subtle);
 }
 
-// Table styling
+/* Table styling */
 .table {
   overflow: hidden;
   width: 100%;
@@ -313,7 +313,7 @@
   }
 }
 
-// Placeholder for sub-pages
+/* Placeholder for sub-pages */
 .placeholder {
   margin: 2rem 0;
   padding: 2rem;
@@ -322,7 +322,7 @@
   color: var(--semantic-color-foreground-on-info-subtle);
 }
 
-// Deep dives grid
+/* Deep dives grid */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));

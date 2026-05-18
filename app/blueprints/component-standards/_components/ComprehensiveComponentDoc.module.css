@@ -1,4 +1,4 @@
-// Design tokens are available as CSS custom properties
+/* Design tokens are available as CSS custom properties */
 
 .componentDoc {
   max-width: 1200px;
@@ -140,8 +140,8 @@
   position: relative;
   z-index: 1;
   margin-bottom: 3rem;
-  contain: layout style; // Prevent layout interference
-  isolation: isolate; // Create new stacking context
+  contain: layout style; /* Prevent layout interference */
+  isolation: isolate; /* Create new stacking context */
 
   h2 {
     margin: 0 0 1.5rem;
@@ -159,10 +159,10 @@
     font-size: 1.25rem;
   }
 
-  // CodeSandbox components will be styled via CSS custom properties
-  // Layout containment handled by component structure
+/* CodeSandbox components will be styled via CSS custom properties */
+/* Layout containment handled by component structure */
 
-  // Ensure proper spacing between sections
+/* Ensure proper spacing between sections */
   & + .section {
     margin-top: 4rem;
   }
@@ -191,7 +191,7 @@
 
 .liveExample {
   contain: layout;
-  isolation: isolate; // Create new stacking context
+  isolation: isolate; /* Create new stacking context */
 
   .exampleContainer {
     position: relative;
@@ -332,7 +332,7 @@
   }
 }
 
-// Related card h3 styling (moved here to fix specificity order)
+/* Related card h3 styling (moved here to fix specificity order) */
 .relatedCard > h3 {
   margin: 0 0 0.5rem;
   color: var(--semantic-color-foreground-primary);
@@ -396,7 +396,7 @@
 
 .examplesContent {
   contain: layout;
-  isolation: isolate; // Create new stacking context
+  isolation: isolate; /* Create new stacking context */
 
   .exampleGrid {
     display: grid;
@@ -474,7 +474,7 @@
   }
 }
 
-// Last Updated
+/* Last Updated */
 .lastUpdated {
   color: var(--semantic-color-foreground-tertiary);
   font-size: 0.875rem;
@@ -484,7 +484,7 @@
   }
 }
 
-// Panel sections (for A11y, Perf, Token panels)
+/* Panel sections (for A11y, Perf, Token panels) */
 .panelSection {
   margin-top: 1.5rem;
   border: 1px solid var(--semantic-color-border-subtle);
@@ -528,7 +528,7 @@
   line-height: 1.5;
 }
 
-// Development Tools Section
+/* Development Tools Section */
 .devToolsSection {
   margin-top: 2rem;
   padding: 1.5rem;
@@ -555,7 +555,7 @@
   gap: 1rem;
 }
 
-// Content Guidelines Section
+/* Content Guidelines Section */
 .contentGuidelinesSection {
   display: flex;
   flex-direction: column;
@@ -683,7 +683,7 @@
   }
 }
 
-// Changelog Section
+/* Changelog Section */
 .changelogSection {
   display: flex;
   flex-direction: column;
@@ -802,7 +802,7 @@
   }
 }
 
-// Contribution Section
+/* Contribution Section */
 .contributeSection {
   padding: 1.5rem;
   background: var(--semantic-color-background-secondary);
@@ -842,7 +842,7 @@
   }
 }
 
-// Accessibility checklist status states
+/* Accessibility checklist status states */
 .accessibilityChecklist ul li {
   &[data-status='pass'] {
     color: var(--semantic-color-foreground-success);
@@ -857,7 +857,7 @@
   }
 }
 
-// CodeSandbox component theming will be handled via CSS custom properties
-// These styles are applied at the component level instead of global selectors
+/* CodeSandbox component theming will be handled via CSS custom properties */
+/* These styles are applied at the component level instead of global selectors */
 
-// Ensure proper containment and prevent overlapping - moved to main .section rule above
+/* Ensure proper containment and prevent overlapping - moved to main .section rule above */

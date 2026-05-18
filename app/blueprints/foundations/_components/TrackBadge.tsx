@@ -3,7 +3,7 @@
 import React from 'react';
 import type { TrackId } from '@/types/tracks';
 import { getTrack } from '../_lib/tracks';
-import styles from './TrackBadge.module.scss';
+import styles from './TrackBadge.module.css';
 
 interface TrackBadgeProps {
   track: TrackId;

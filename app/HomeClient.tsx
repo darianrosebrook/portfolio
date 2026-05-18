@@ -12,7 +12,7 @@ import Status from '@/ui/components/Status';
 import LogoMaruqee from '@/ui/modules/LogoMarquee';
 import Image from 'next/image';
 import BlueprintsWrapper from './BlueprintsWrapper';
-import styles from './page.module.scss';
+import styles from './page.module.css';
 import { EASING_PRESETS, EDITORIAL_STAGGER } from '@/utils/animation';
 
 // Register ScrollTrigger plugin

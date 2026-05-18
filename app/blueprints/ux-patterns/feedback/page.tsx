@@ -1,4 +1,4 @@
-import styles from './page.module.scss';
+import styles from './page.module.css';
 
 const FeedbackPage: React.FC = () => {
   return (

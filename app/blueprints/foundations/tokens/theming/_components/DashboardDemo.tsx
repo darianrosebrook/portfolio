@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import styles from './DashboardDemo.module.scss';
+import styles from './DashboardDemo.module.css';
 import { SearchCard } from './SearchCard';
 import { TeamCard } from './TeamCard';
 import { NotificationCard } from './NotificationCard';

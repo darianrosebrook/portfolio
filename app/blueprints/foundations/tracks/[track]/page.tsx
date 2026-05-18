@@ -10,7 +10,7 @@ import {
   getTrackLearningPath,
   getTrackProgress,
 } from '../../_lib/tracks';
-import styles from './track.module.scss';
+import styles from './track.module.css';
 
 interface TrackPageProps {
   params: Promise<{ track: string }>;

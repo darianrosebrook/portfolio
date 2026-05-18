@@ -6,7 +6,7 @@ import {
   DocLayoutProvider,
   type DocSection as DocSectionType,
 } from '@/ui/modules/DocLayout';
-import styles from './page.module.scss';
+import styles from './page.module.css';
 
 const sections: DocSectionType[] = [
   {

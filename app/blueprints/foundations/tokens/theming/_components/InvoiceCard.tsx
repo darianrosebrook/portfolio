@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import styles from './DashboardDemo.module.scss';
+import styles from './DashboardDemo.module.css';
 
 /**
  * Formal invoice card inspired by Radix UI's "Invoice #3463" example.

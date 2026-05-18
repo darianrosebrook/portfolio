@@ -5,7 +5,7 @@ import { getChangelog } from '../_lib/changelogData';
 import { trackSearchNoResult } from '../_lib/analytics';
 import Link from 'next/link';
 import { useMemo, useState, useEffect } from 'react';
-import styles from './StatusMatrix.module.scss';
+import styles from './StatusMatrix.module.css';
 
 interface StatusMatrixProps {
   components: ComponentItem[];

@@ -39,7 +39,7 @@ export const metadata: Metadata = {
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import BlueprintsWrapper from '../BlueprintsWrapper';
-import styles from './page.module.scss';
+import styles from './page.module.css';
 import { Bottom, Faceplate, Middle, Props, Table, Top } from './svgs';
 
 // Use dynamic imports to avoid webpack module loading issues

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { getAllTracks } from '../_lib/tracks';
-import styles from './tracks.module.scss';
+import styles from './tracks.module.css';
 
 export default function TracksPage() {
   const tracks = getAllTracks();

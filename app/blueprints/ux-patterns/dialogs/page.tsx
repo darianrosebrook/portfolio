@@ -1,4 +1,4 @@
-import styles from './page.module.scss';
+import styles from './page.module.css';
 
 const DialogsPage: React.FC = () => {
   return (

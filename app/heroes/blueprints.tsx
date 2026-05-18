@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
-import Styles from './blueprints.module.scss';
+import Styles from './blueprints.module.css';
 import gsap from 'gsap';
 import SvgIllustration from './svgIllustration';
 import { useInteraction } from '@/context';

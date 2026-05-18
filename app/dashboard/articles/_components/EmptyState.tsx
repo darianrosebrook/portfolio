@@ -1,5 +1,5 @@
 import Button from '@/ui/components/Button';
-import styles from '../articles.module.scss';
+import styles from '../articles.module.css';
 
 interface EmptyStateProps {
   filter?: 'all' | 'published' | 'draft';

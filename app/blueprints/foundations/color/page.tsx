@@ -21,7 +21,7 @@ export const metadata = {
   },
 };
 
-import styles from './page.module.scss';
+import styles from './page.module.css';
 
 const ColorPage: React.FC = () => {
   return (

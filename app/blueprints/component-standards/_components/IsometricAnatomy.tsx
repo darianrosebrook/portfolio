@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import type { AnatomyPart } from '../_lib/generateAnatomy';
-import styles from './IsometricAnatomy.module.scss';
+import styles from './IsometricAnatomy.module.css';
 
 interface IsometricAnatomyProps {
   parts: AnatomyPart[];

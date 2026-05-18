@@ -4,7 +4,7 @@ import type { TrackId } from '@/types/tracks';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { getAllTracks, getTrack } from '../_lib/tracks';
-import styles from './TrackSelector.module.scss';
+import styles from './TrackSelector.module.css';
 
 interface TrackSelectorProps {
   currentPageSlug: string;

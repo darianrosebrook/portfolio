@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import type { AnatomyPart } from '../_lib/generateAnatomy';
-import styles from './AnatomyDiagram.module.scss';
+import styles from './AnatomyDiagram.module.css';
 
 interface AnatomyDiagramProps {
   parts: AnatomyPart[];
