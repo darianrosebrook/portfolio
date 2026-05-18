@@ -1,7 +1,7 @@
 id: FIX-HERO-LENGTH-001
 type: fix
 title: Restore short hero supporting line, move premise to bio
-status: active
+status: closed
 risk_tier: 3
 mode: fix
 created_at: '2026-05-18T20:47:51.852Z'
