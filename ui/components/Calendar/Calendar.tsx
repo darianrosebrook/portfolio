@@ -17,7 +17,7 @@
  */
 'use client';
 import * as React from 'react';
-import styles from './Calendar.module.scss';
+import './Calendar.css';
 
 export interface CalendarProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -29,7 +29,8 @@ export const Calendar: React.FC<CalendarProps> = ({
 }) => {
   return (
     <div
-      className={[styles.calendar, className].filter(Boolean).join(' ')}
+      data-ds-component="Calendar"
+      className={['calendar', className].filter(Boolean).join(' ')}
       {...rest}
     >
       {children}
