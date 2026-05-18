@@ -12,7 +12,7 @@ import React, {
   forwardRef,
   MutableRefObject,
 } from 'react';
-import styles from './Popover.module.scss';
+import './Popover.css';
 import { createPortal } from 'react-dom';
 
 interface PopoverProps {
@@ -284,7 +284,8 @@ const Popover: React.FC<PopoverProps> & {
   return (
     <PopoverContext.Provider value={contextValue}>
       <div
-        className={`${styles.popoverContainer} ${className || ''}`}
+        data-ds-component="Popover"
+        className={`popoverContainer ${className || ''}`}
         data-slot="popover"
       >
         {children}
@@ -341,7 +342,7 @@ const Trigger = forwardRef<HTMLElement, TriggerProps>(
     return (
       <Component
         ref={handleRefs}
-        className={`${styles.popoverTrigger} ${isOpen ? styles.activeTrigger : ''} ${className || ''}`}
+        className={`popoverTrigger ${isOpen ? 'activeTrigger' : ''} ${className || ''}`}
         onClick={handleClick}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -420,8 +421,8 @@ const Content: React.FC<ContentProps> = ({
   if (!isOpen && !isLeaving) return null;
 
   const contentClassName = [
-    styles.popoverContent,
-    isLeaving && styles.leaving,
+    'popoverContent',
+    isLeaving && 'leaving',
     className,
   ]
     .filter(Boolean)

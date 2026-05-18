@@ -1,52 +1,66 @@
-@use './Popover.tokens.generated.scss' as popoverTokens;
+@import "./Popover.tokens.css";
 
-.popoverContainer {
-  display: inline-block;
+/*
+ * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Scoped to [data-ds-component="Popover"] on the root element.
+ * NOTE: .popoverContent is portaled to document.body, so it cannot be
+ * scoped under the root selector. It uses a top-level rule but inherits
+ * --ds-popover-* vars declared on the root via the tokens file.
+ * Intentionally unlayered — see Button.css for the cascade rationale.
+ */
+[data-ds-component="Popover"] {
+  &.popoverContainer {
+    display: inline-block;
+  }
+
+  .popoverTrigger {
+    margin: 0;
+    padding: 0;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+  }
+
+  .activeTrigger {
+    outline: 2px solid var(--ds-popover-color-border-accent);
+    outline-offset: 2px;
+    transition: outline ease-out 2s;
+
+    & > div:hover {
+      transform: rotate(1080deg);
+    }
+  }
 }
 
-.popoverTrigger {
-  // Only reset what's necessary, preserve Button's flexbox and border-radius
-  // Don't use 'all: unset' as it removes Button's important styles
-  margin: 0;
-  padding: 0;
-  color: inherit;
-  font: inherit;
-
-  // Don't override background/border as Button handles these
-  cursor: pointer;
-
-  // Preserve Button's display and alignment - Button uses inline-flex
-  // Don't override display, align-items, justify-content, or border-radius
-}
-
+/* Portaled content: lives in document.body, not inside the root element */
 .popoverContent {
-  @include popoverTokens.vars;
+  /* Declare tokens locally since parent scope is unavailable */
+  --ds-popover-size-gap-default: var(--core-spacing-size-04);
+  --ds-popover-size-max-width-default: var(--core-spacing-size-06);
+  --ds-popover-size-padding-default: var(--core-spacing-size-06);
+  --ds-popover-size-radius-default: var(--semantic-shape-control-radius-default);
+  --ds-popover-color-background-content: var(--semantic-color-background-secondary);
+  --ds-popover-color-border-accent: var(--semantic-color-border-accent);
+  --ds-popover-elevation-default: var(--semantic-elevation-default);
 
   z-index: 1000;
   display: flex;
   flex-direction: column;
-  gap: var(--popover-size-gap-default);
+  gap: var(--ds-popover-size-gap-default);
   min-width: 256px;
-  max-width: calc(100vw - var(--popover-size-max-width-default));
-  padding: var(--popover-size-padding-default);
-  background: var(--popover-color-background-content);
-  border-radius: var(--popover-size-radius-default);
-  box-shadow: var(--popover-elevation-default);
-
-  // Animation
-  animation: popover-enter var(--popover-motion-duration, 200ms)
-    var(--popover-motion-easing, cubic-bezier(0.34, 1.56, 0.64, 1)) forwards;
-
-  // CSS Containment - layout paint style (not size) to allow intrinsic sizing
+  max-width: calc(100vw - var(--ds-popover-size-max-width-default));
+  padding: var(--ds-popover-size-padding-default);
+  background: var(--ds-popover-color-background-content);
+  border-radius: var(--ds-popover-size-radius-default);
+  box-shadow: var(--ds-popover-elevation-default);
+  animation: popover-enter 200ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
   contain: layout paint style;
 
   &.leaving {
-    animation: popover-exit var(--popover-motion-duration-exit, 150ms)
-      var(--popover-motion-easing-exit, ease-in) forwards;
+    animation: popover-exit 150ms ease-in forwards;
   }
 }
 
-// Animation keyframes
 @keyframes popover-enter {
   from {
     opacity: 0;
@@ -72,23 +86,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .popoverContent {
-    animation: none;
-  }
-
+  .popoverContent,
   .popoverContent.leaving {
     animation: none;
-  }
-}
-
-.activeTrigger {
-  // Don't override Button's display, alignment, or border-radius
-  // Only add the active state outline
-  outline: 2px solid var(--popover-color-border-accent);
-  outline-offset: 2px;
-  transition: outline ease-out 2s;
-
-  & > div:hover {
-    transform: rotate(1080deg);
   }
 }
