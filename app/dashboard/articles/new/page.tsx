@@ -34,45 +34,53 @@ export default function NewArticlePage() {
   const tempSlugRef = useRef<string>(generateTempSlug());
   const { enqueue } = useToast();
 
-  const [article, setArticle] = useState<Partial<Article>>(() => {
-    // Try to restore from localStorage on initial load
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
-      if (saved) {
-        try {
-          const parsed = JSON.parse(saved);
-          // Restore the saved draft
-          return {
-            ...parsed,
-            // Use saved slug or generate new temp slug
-            slug: parsed.slug || tempSlugRef.current,
-          };
-        } catch {
-          // Invalid JSON, ignore
-        }
-      }
-    }
-
-    return {
-      slug: tempSlugRef.current,
-      headline: '',
-      articleBody: {
-        type: 'doc',
-        content: [
-          {
-            type: 'paragraph',
-            content: [],
-          },
-        ],
-      },
-      status: 'draft',
-      wordCount: 0,
-    };
-  });
+  // First render must match the server: use the empty default. We load any
+  // localStorage-saved draft in a useEffect below, after hydration. Reading
+  // localStorage in the useState initializer would diverge from SSR and
+  // trigger a hydration mismatch (the server always renders the empty state).
+  const [article, setArticle] = useState<Partial<Article>>(() => ({
+    slug: tempSlugRef.current,
+    headline: '',
+    articleBody: {
+      type: 'doc',
+      content: [
+        {
+          type: 'paragraph',
+          content: [],
+        },
+      ],
+    },
+    status: 'draft',
+    wordCount: 0,
+  }));
   const [articleId, setArticleId] = useState<number | undefined>();
   const [showPreview, setShowPreview] = useState(false);
   const [isManualSaving, setIsManualSaving] = useState(false);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+  const [hasHydrated, setHasHydrated] = useState(false);
+
+  // Restore localStorage-saved draft after first paint. This guarantees the
+  // server-rendered HTML and the initial client render are identical; the
+  // draft fills in on the next commit.
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        setArticle((prev) => ({
+          ...prev,
+          ...parsed,
+          slug: parsed.slug || prev.slug,
+        }));
+      } catch {
+        // Invalid JSON, drop it so it doesn't keep failing on every mount.
+        localStorage.removeItem(LOCAL_STORAGE_KEY);
+      }
+    }
+    setHasHydrated(true);
+    // Run once on mount; setArticle is stable.
+  }, []);
 
   // Extract metadata from content
   const extractedMetadata = useMetadataExtraction(
@@ -224,7 +232,9 @@ export default function NewArticlePage() {
     [articleId, clearLocalDraft, enqueue]
   );
 
-  // Auto-save hook - always enabled since we have a temp slug
+  // Auto-save hook. We disable it until the localStorage-restore effect has
+  // run, so we don't fire a POST with the empty initial state moments before
+  // the saved draft replaces it.
   const {
     saveStatus,
     lastSaved,
@@ -234,7 +244,7 @@ export default function NewArticlePage() {
     article,
     onSave: handleSave,
     debounceMs: 2000,
-    enabled: true, // Always enabled - we always have a slug (temp or real)
+    enabled: hasHydrated,
   });
 
   // Manual save handler with better error handling
