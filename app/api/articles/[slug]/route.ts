@@ -63,6 +63,13 @@ export async function PUT(
   const validation = updateArticleSchema.safeParse(body);
 
   if (!validation.success) {
+    // Log on the server so a developer can see which field failed without
+    // having to inspect the network response in the browser. The client
+    // still gets the full issue list in the response body.
+    console.error(
+      `Article PUT validation failed for slug "${slug}":`,
+      JSON.stringify(validation.error.issues, null, 2)
+    );
     return new NextResponse(JSON.stringify({ error: validation.error }), {
       status: 400,
       headers: { 'Content-Type': 'application/json' },
