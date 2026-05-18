@@ -1,6 +1,6 @@
 'use client';
 import * as React from 'react';
-import styles from './VisuallyHidden.module.scss';
+import './VisuallyHidden.css';
 
 export interface VisuallyHiddenProps extends React.HTMLAttributes<HTMLSpanElement> {
   /** Element type to render */
@@ -26,10 +26,11 @@ export const VisuallyHidden = React.forwardRef<
     return React.createElement(
       Component,
       {
+        'data-ds-component': 'VisuallyHidden',
         ref,
         className: [
-          styles.visuallyHidden,
-          focusable ? styles.focusable : '',
+          'visuallyHidden',
+          focusable ? 'focusable' : '',
           className,
         ]
           .filter(Boolean)
