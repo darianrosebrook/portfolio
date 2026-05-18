@@ -64,11 +64,7 @@ const ToggleSwitch = React.forwardRef<HTMLInputElement, ToggleSwitchProps>(
     }, [id, children, generatedId]);
 
     const sizeClass =
-      size === 'small'
-        ? 'small'
-        : size === 'large'
-          ? 'large'
-          : 'medium';
+      size === 'small' ? 'small' : size === 'large' ? 'large' : 'medium';
 
     return (
       <div

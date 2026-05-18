@@ -166,9 +166,7 @@ const Button = React.forwardRef<
         return (
           <>
             <span className="spinner" aria-hidden="true" />
-            {children ? (
-              <span className="loadingText">{children}</span>
-            ) : null}
+            {children ? <span className="loadingText">{children}</span> : null}
           </>
         );
       }

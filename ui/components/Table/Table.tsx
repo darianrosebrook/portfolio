@@ -18,11 +18,7 @@ const TableRoot = React.forwardRef<HTMLDivElement, TableProps>(
       <div
         ref={ref}
         data-ds-component="Table"
-        className={[
-          'container',
-          responsive ? 'responsive' : '',
-          className,
-        ]
+        className={['container', responsive ? 'responsive' : '', className]
           .filter(Boolean)
           .join(' ')}
         data-slot="table-container"

@@ -166,7 +166,12 @@ export const BrandSwitcher: React.FC<BrandSwitcherProps> = ({
 
   if (compact) {
     return (
-      <div ref={containerRef} data-ds-component="BrandSwitcher" className={containerClasses} tabIndex={-1}>
+      <div
+        ref={containerRef}
+        data-ds-component="BrandSwitcher"
+        className={containerClasses}
+        tabIndex={-1}
+      >
         <div className="swatchRow">
           {availableBrands.map((brandInfo) => (
             <button
@@ -226,7 +231,7 @@ export const BrandSwitcher: React.FC<BrandSwitcherProps> = ({
             <button
               key={brandInfo.id}
               type="button"
-              className={`swatchBtn${brand === brandInfo.id ? " selected" : ""}`}
+              className={`swatchBtn${brand === brandInfo.id ? ' selected' : ''}`}
               onClick={() => setBrand(brandInfo.id)}
               aria-pressed={brand === brandInfo.id}
               aria-label={`Switch to ${brandInfo.name} theme`}
@@ -255,10 +260,7 @@ export const BrandSwitcher: React.FC<BrandSwitcherProps> = ({
             </label>
             {isAutoCycling && (
               <div className="intervalControl">
-                <label
-                  htmlFor="cycle-interval"
-                  className="intervalLabel"
-                >
+                <label htmlFor="cycle-interval" className="intervalLabel">
                   Interval:
                 </label>
                 <input
@@ -325,7 +327,7 @@ export const BrandSwitcher: React.FC<BrandSwitcherProps> = ({
                 <button
                   key={fontOption}
                   type="button"
-                  className={`segment${headingFont === fontOption ? " segmentActive" : ""}`}
+                  className={`segment${headingFont === fontOption ? ' segmentActive' : ''}`}
                   onClick={() => setHeadingFont(fontOption)}
                   aria-pressed={headingFont === fontOption}
                   aria-label={`Set heading font to ${fontOption}`}
@@ -344,7 +346,7 @@ export const BrandSwitcher: React.FC<BrandSwitcherProps> = ({
                 <button
                   key={fontOption}
                   type="button"
-                  className={`segment${bodyFont === fontOption ? " segmentActive" : ""}`}
+                  className={`segment${bodyFont === fontOption ? ' segmentActive' : ''}`}
                   onClick={() => setBodyFont(fontOption)}
                   aria-pressed={bodyFont === fontOption}
                   aria-label={`Set body font to ${fontOption}`}

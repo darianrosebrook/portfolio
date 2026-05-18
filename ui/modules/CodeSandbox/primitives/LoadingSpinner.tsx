@@ -33,7 +33,7 @@ export function LoadingSpinner({
     >
       <div
         data-ds-component="LoadingSpinner"
-        className='spinner'
+        className="spinner"
         style={{
           width: spinnerSize,
           height: spinnerSize,

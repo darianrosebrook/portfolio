@@ -67,10 +67,7 @@ export const Spinner = React.forwardRef<HTMLSpanElement, SpinnerProps>(
           'aria-label': label,
         } as const);
 
-    const rootClassName = [
-      inline ? 'inline' : '',
-      className || '',
-    ]
+    const rootClassName = [inline ? 'inline' : '', className || '']
       .filter(Boolean)
       .join(' ');
 

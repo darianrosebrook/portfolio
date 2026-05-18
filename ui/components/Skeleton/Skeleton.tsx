@@ -114,10 +114,7 @@ export const Skeleton: React.FC<SkeletonProps> = ({
       }
       case 'media': {
         return (
-          <div
-            className="media"
-            style={{ aspectRatio: aspectRatio ?? '16/9' }}
-          >
+          <div className="media" style={{ aspectRatio: aspectRatio ?? '16/9' }}>
             <SkeletonShape
               kind="rect"
               width="100%"

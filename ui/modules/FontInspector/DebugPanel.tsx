@@ -83,7 +83,7 @@ export function DebugPanel() {
       </dl>
 
       {!hasColors && (
-        <div className='warningBox'>
+        <div className="warningBox">
           <strong>Warning:</strong> Colors not initialized. This will cause
           rendering issues.
         </div>

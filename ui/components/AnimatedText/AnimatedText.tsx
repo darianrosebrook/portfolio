@@ -187,7 +187,7 @@ export const AnimatedText = React.forwardRef<HTMLElement, AnimatedTextProps>(
           ref={(el) => {
             if (el) wordsRef.current[index] = el;
           }}
-          className='word'
+          className="word"
           style={{
             // Set initial state for SSR/hydration
             opacity: prefersReducedMotion ? 1 : 0,

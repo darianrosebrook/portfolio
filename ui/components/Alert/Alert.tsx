@@ -41,17 +41,18 @@ const Container = React.forwardRef<HTMLDivElement, AlertProps>(
     },
     ref
   ) => {
-    const alertClassName = [
-      'alert',
-      level,
-      intent,
-      className,
-    ]
+    const alertClassName = ['alert', level, intent, className]
       .filter(Boolean)
       .join(' ');
 
     return (
-      <div ref={ref} role="alert" data-ds-component="Alert" className={alertClassName} {...rest}>
+      <div
+        ref={ref}
+        role="alert"
+        data-ds-component="Alert"
+        className={alertClassName}
+        {...rest}
+      >
         {children}
         {dismissible && onDismiss && (
           <div className="dismiss">

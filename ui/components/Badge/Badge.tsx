@@ -97,7 +97,13 @@ export const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
     };
 
     return (
-      <div ref={ref} data-ds-component="Badge" className={badgeClassName} data-slot="badge" {...rest}>
+      <div
+        ref={ref}
+        data-ds-component="Badge"
+        className={badgeClassName}
+        data-slot="badge"
+        {...rest}
+      >
         {renderIcon()}
         {children && (
           <span className="content" data-slot="badge-content">

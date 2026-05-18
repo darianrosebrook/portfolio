@@ -38,11 +38,7 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
         data-slot="text-field"
         className={['field', className].filter(Boolean).join(' ')}
       >
-        {label ? (
-          <Label htmlFor={resolvedId}>
-            {label}
-          </Label>
-        ) : null}
+        {label ? <Label htmlFor={resolvedId}>{label}</Label> : null}
         <Input
           id={resolvedId}
           ref={ref}

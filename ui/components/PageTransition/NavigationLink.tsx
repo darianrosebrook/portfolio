@@ -189,11 +189,11 @@ export function NavigationLink({
 
   // If we're using text animation, wrap the children in the animation structure
   const linkContent = shouldAnimateText ? (
-    <span className='maskLine'>
-      <span ref={textRef} className='text'>
+    <span className="maskLine">
+      <span ref={textRef} className="text">
         {children}
       </span>
-      <span ref={cloneRef} className='clone' aria-hidden="true">
+      <span ref={cloneRef} className="clone" aria-hidden="true">
         {children}
       </span>
     </span>

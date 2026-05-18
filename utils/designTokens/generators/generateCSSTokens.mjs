@@ -309,11 +309,9 @@ function buildCssForComponent({ cssVarPrefix, pascalComponent, tokenData }) {
     body.pop();
   }
 
-  return [
-    `[data-ds-component="${pascalComponent}"] {`,
-    ...body,
-    `}`,
-  ].join('\n');
+  return [`[data-ds-component="${pascalComponent}"] {`, ...body, `}`].join(
+    '\n'
+  );
 }
 
 /**

@@ -147,11 +147,7 @@ const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
     const renderIcon = () => {
       if (variant === 'selected') {
         return (
-          <span
-            className="icon"
-            aria-hidden="true"
-            data-slot="chip-icon"
-          >
+          <span className="icon" aria-hidden="true" data-slot="chip-icon">
             <CheckIcon />
           </span>
         );
@@ -159,11 +155,7 @@ const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
 
       if (variant === 'dismissible') {
         return (
-          <span
-            className="icon"
-            aria-hidden="true"
-            data-slot="chip-icon"
-          >
+          <span className="icon" aria-hidden="true" data-slot="chip-icon">
             <XIcon />
           </span>
         );

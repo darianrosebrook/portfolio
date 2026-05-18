@@ -63,9 +63,9 @@ const VideoNodeView: React.FC<VideoNodeViewProps> = ({
 
   if (!src) {
     return (
-      <NodeViewWrapper data-ds-component="VideoNodeView" className='empty'>
-        <div className='placeholder'>
-          <div className='icon'>🎥</div>
+      <NodeViewWrapper data-ds-component="VideoNodeView" className="empty">
+        <div className="placeholder">
+          <div className="icon">🎥</div>
           <p>No video source provided</p>
         </div>
       </NodeViewWrapper>
@@ -79,7 +79,7 @@ const VideoNodeView: React.FC<VideoNodeViewProps> = ({
       data-align={align}
     >
       {selected && (
-        <div className='toolbar'>
+        <div className="toolbar">
           <button
             onClick={() => handleAlignChange('left')}
             className={align === 'left' ? 'active' : ''}
@@ -104,17 +104,17 @@ const VideoNodeView: React.FC<VideoNodeViewProps> = ({
         </div>
       )}
 
-      <div className='videoContainer'>
+      <div className="videoContainer">
         {isLoading && (
-          <div className='loading'>
-            <div className='spinner'></div>
+          <div className="loading">
+            <div className="spinner"></div>
             <p>Loading video...</p>
           </div>
         )}
 
         {error && (
-          <div className='error'>
-            <div className='icon'>⚠️</div>
+          <div className="error">
+            <div className="icon">⚠️</div>
             <p>{error}</p>
             <small>{src}</small>
           </div>
@@ -131,7 +131,7 @@ const VideoNodeView: React.FC<VideoNodeViewProps> = ({
           loop={loop}
           muted={muted}
           poster={poster}
-          className='video'
+          className="video"
           preload="metadata"
           onError={() => setError('Failed to load video')}
           onLoadStart={() => setIsLoading(true)}
@@ -139,7 +139,7 @@ const VideoNodeView: React.FC<VideoNodeViewProps> = ({
         />
       </div>
 
-      {title && <div className='caption'>{title}</div>}
+      {title && <div className="caption">{title}</div>}
     </NodeViewWrapper>
   );
 };

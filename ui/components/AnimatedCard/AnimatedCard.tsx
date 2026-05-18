@@ -5,10 +5,7 @@ import { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useReducedMotion } from '@/context/ReducedMotionContext';
-import {
-  EASING_PRESETS,
-  ANIMATION_DURATIONS,
-} from '@/utils/animation';
+import { EASING_PRESETS, ANIMATION_DURATIONS } from '@/utils/animation';
 import './AnimatedCard.css';
 
 // Register ScrollTrigger plugin
@@ -174,10 +171,8 @@ export const AnimatedCardImage: React.FC<AnimatedCardImageProps> = ({
   className = '',
 }) => {
   return (
-    <div
-      className={['cardImageWrapper', className].filter(Boolean).join(' ')}
-    >
-      <div className='cardImage'>{children}</div>
+    <div className={['cardImageWrapper', className].filter(Boolean).join(' ')}>
+      <div className="cardImage">{children}</div>
     </div>
   );
 };

@@ -83,7 +83,11 @@ const Postcard: React.FC<PostcardProps> & {
   const contextValue = useMemo(() => props, [props]);
   return (
     <PostcardContext.Provider value={contextValue}>
-      <article data-ds-component="Postcard" data-slot="postcard" className="post">
+      <article
+        data-ds-component="Postcard"
+        data-slot="postcard"
+        className="post"
+      >
         {children}
       </article>
     </PostcardContext.Provider>

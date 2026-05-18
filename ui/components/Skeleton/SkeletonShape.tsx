@@ -30,11 +30,7 @@ export const SkeletonShape: React.FC<SkeletonShapeProps> = ({
 
   return (
     <span
-      className={[
-        'shape',
-        `kind-${kind}`,
-        className || '',
-      ]
+      className={['shape', `kind-${kind}`, className || '']
         .filter(Boolean)
         .join(' ')}
       style={style}

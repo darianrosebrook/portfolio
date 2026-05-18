@@ -51,27 +51,27 @@ export const GooeyHighlight: React.FC<GooeyHighlightProps> = ({
 
   return (
     <div data-ds-component="GooeyHighlight">
-      <div className='controls'>
+      <div className="controls">
         <button
           onClick={createDemoHighlight}
-          className='demoButton'
+          className="demoButton"
           disabled={!isSupported}
         >
           Demo Highlight
         </button>
         <button
           onClick={clearHighlights}
-          className='clearButton'
+          className="clearButton"
           disabled={!isSupported}
         >
           Clear Highlights
         </button>
       </div>
 
-      <div className='textContainer'>
+      <div className="textContainer">
         <div
           ref={textRef}
-          className='highlightableText gooeyHighlightWrapper'
+          className="highlightableText gooeyHighlightWrapper"
           onMouseUp={handleClick}
           onClick={handleClick}
           onSelect={handleSelection}
@@ -89,7 +89,7 @@ export const GooeyHighlight: React.FC<GooeyHighlightProps> = ({
       </div>
 
       {!isSupported && (
-        <div className='fallbackMessage'>
+        <div className="fallbackMessage">
           <p>CSS Custom Highlight API not supported in this browser.</p>
           <p>
             Try selecting text manually or use the demo button for a fallback
@@ -98,7 +98,7 @@ export const GooeyHighlight: React.FC<GooeyHighlightProps> = ({
         </div>
       )}
 
-      <div className='instructions'>
+      <div className="instructions">
         <h4>How to use:</h4>
         <ul>
           <li>Click and drag to select text for gooey highlighting</li>
