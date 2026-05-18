@@ -1,4 +1,9 @@
 import withBundleAnalyzer from '@next/bundle-analyzer';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+// __dirname isn't defined in ESM; resolve it from import.meta.url.
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -63,9 +68,14 @@ const nextConfig = {
     // Enable View Transitions API support for page transitions
     viewTransition: true,
   },
-  // Turbopack configuration (Next.js 16+)
-  // Empty config to silence error - we're using webpack config for now
-  turbopack: {},
+  // Turbopack configuration (Next.js 16+).
+  // Pin the workspace root explicitly. Without this, Next infers the root
+  // by walking up looking for a lockfile and may pick up a stray
+  // `~/pnpm-workspace.yaml` in the user's home directory, warning at
+  // every dev startup about "multiple lockfiles detected".
+  turbopack: {
+    root: __dirname,
+  },
   // Webpack optimizations
   webpack: (config, { dev, isServer, isEdge }) => {
     // Disable webpack cache in development if issues occur
