@@ -7,12 +7,13 @@ const Bio = () => {
   return (
     <>
       <p>
-        I&apos;m a Staff Design Technologist working across design systems, UX
-        engineering, workflow automation, and equipping my design org with
-        AI-enabled product best practices. My work focuses on the parts of
-        design systems that usually remain implicit: how components are named,
-        versioned, adopted, measured, documented, synchronized with code, and
-        understood by the teams that depend on them.
+        AI-ready design systems need more than components — they need explicit
+        structure. I&apos;m a Staff Design Technologist working across design
+        systems, UX engineering, workflow automation, and equipping my design
+        org with AI-enabled product best practices. My work focuses on the parts
+        of design systems that usually remain implicit: how components are
+        named, versioned, adopted, measured, documented, synchronized with code,
+        and understood by the teams that depend on them.
       </p>
       <p>
         I build tools and operating models that reduce the distance between
