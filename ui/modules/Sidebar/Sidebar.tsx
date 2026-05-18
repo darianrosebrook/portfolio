@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import styles from './Sidebar.module.scss';
+import './Sidebar.css';
 
 export interface SidebarSection {
   title: string;
@@ -12,13 +12,13 @@ export interface SidebarProps {
 
 export function Sidebar({ sections }: SidebarProps) {
   return (
-    <aside className={styles.root} aria-label="Section navigation">
+    <aside data-ds-component="Sidebar" className="root" aria-label="Section navigation">
       {sections.map((section) => (
-        <div key={section.title} className={styles.group}>
+        <div key={section.title} className="group">
           <h4>{section.title}</h4>
-          <nav className={styles.nav}>
+          <nav className="nav">
             {section.items.map((item) => (
-              <Link key={item.href} className={styles.link} href={item.href}>
+              <Link key={item.href} className="link" href={item.href}>
                 {item.label}
               </Link>
             ))}

@@ -1,0 +1,35 @@
+@import "./Sidebar.tokens.css";
+
+/*
+ * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Scoped to [data-ds-component="Sidebar"] on the root element.
+ * Intentionally unlayered — see Button.css for the cascade rationale.
+ */
+[data-ds-component="Sidebar"] {
+  &.root {
+    position: sticky;
+    top: 1rem;
+    align-self: start;
+    padding-right: var(--ds-sidebar-spacing-padding-right);
+    border-right: 1px solid var(--ds-sidebar-color-border-subtle);
+  }
+
+  .group {
+    margin-bottom: var(--ds-sidebar-spacing-margin-bottom-default);
+
+    h4 {
+      margin: 0 0 var(--ds-sidebar-spacing-margin-bottom-small);
+      color: var(--ds-sidebar-color-foreground-secondary);
+    }
+  }
+
+  .nav {
+    display: grid;
+    gap: var(--ds-sidebar-spacing-gap-default);
+  }
+
+  .link {
+    color: var(--ds-sidebar-color-foreground-link);
+    text-decoration: none;
+  }
+}
