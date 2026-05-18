@@ -1,6 +1,6 @@
 'use client';
 import * as React from 'react';
-import styles from './Image.module.scss';
+import './Image.css';
 
 export interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   /** Aspect ratio preset */
@@ -105,28 +105,28 @@ export const Image = React.forwardRef<HTMLImageElement, ImageProps>(
     };
 
     const containerClasses = [
-      styles.container,
-      styles[size],
-      styles[`radius-${radius}`],
-      aspectRatio ? styles.aspectRatio : '',
+      'container',
+      size,
+      `radius-${radius}`,
+      aspectRatio ? 'aspectRatio' : '',
       className,
     ]
       .filter(Boolean)
       .join(' ');
 
     const imageClasses = [
-      styles.image,
-      isLoading ? styles.loading : '',
-      hasError ? styles.error : '',
+      'image',
+      isLoading ? 'loading' : '',
+      hasError ? 'error' : '',
     ]
       .filter(Boolean)
       .join(' ');
 
     return (
-      <div data-slot="image" className={containerClasses}>
+      <div data-ds-component="Image" data-slot="image" className={containerClasses}>
         {showPlaceholder && isLoading && (
-          <div className={styles.placeholder} aria-hidden="true">
-            <div className={styles.placeholderIcon} />
+          <div className="placeholder" aria-hidden="true">
+            <div className="placeholderIcon" />
           </div>
         )}
 
@@ -147,12 +147,12 @@ export const Image = React.forwardRef<HTMLImageElement, ImageProps>(
 
         {hasError && !fallbackSrc && (
           <div
-            className={styles.errorState}
+            className="errorState"
             role="img"
             aria-label={alt || 'Failed to load image'}
           >
-            <div className={styles.errorIcon} />
-            <span className={styles.errorText}>Image failed to load</span>
+            <div className="errorIcon" />
+            <span className="errorText">Image failed to load</span>
           </div>
         )}
       </div>
