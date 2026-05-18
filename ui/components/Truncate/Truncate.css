@@ -1,0 +1,75 @@
+@import "./Truncate.tokens.css";
+
+/*
+ * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Scoped to [data-ds-component="Truncate"] on the root element.
+ * Intentionally unlayered — see Button.css for the cascade rationale.
+ */
+[data-ds-component="Truncate"] {
+  &.truncate {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .content {
+    display: block;
+  }
+
+  /* Single line truncation */
+  &.truncate:not(.expandable) {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Expanded state shows all content */
+  &.expanded .content {
+    display: block;
+    overflow: visible;
+  }
+
+  /* Multi-line truncation */
+  &.expandable:not(.expanded) .content {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: var(--ds-truncate-lines, 1);
+  }
+
+  .toggle {
+    display: inline;
+    padding: 0;
+    background: none;
+    border: none;
+    color: var(--ds-truncate-color-foreground-link);
+    font-weight: var(--ds-truncate-typography-font-weight);
+    font-size: inherit;
+    text-decoration: underline;
+    cursor: pointer;
+    margin-inline-start: var(--ds-truncate-spacing-toggle);
+
+    &:hover {
+      color: var(--ds-truncate-color-foreground-link-hover);
+    }
+
+    &:focus-visible {
+      outline: 2px solid currentcolor;
+      outline-offset: 2px;
+    }
+  }
+
+  /* Fade effect for single line (optional enhancement) */
+  &.truncate:not(.expandable, .expanded)::after {
+    position: absolute;
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      var(--ds-truncate-color-background-primary) 100%
+    );
+    pointer-events: none;
+    block-size: 1.2em;
+    content: '';
+    inline-size: 2rem;
+    inset-block-end: 0;
+    inset-inline-end: 0;
+  }
+}
