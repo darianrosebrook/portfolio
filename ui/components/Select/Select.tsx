@@ -12,7 +12,7 @@ import React, { useCallback, useRef, useEffect } from 'react';
 import { useSelectContext } from './SelectProvider';
 import { ControlSize } from '@/types/ui';
 import { setRef } from '@/utils/refs';
-import styles from './Select.module.scss';
+import './Select.css';
 
 // Trigger component - what the user clicks to open the select
 export interface SelectTriggerProps {
@@ -111,14 +111,14 @@ export const SelectTrigger = React.forwardRef<
     ? placeholder
     : selectedOptions.map((option) => option.title).join(', ');
 
-  const sizeClass = styles[size] || styles.md;
+  const sizeClass = size || 'md';
 
   return (
     <button
       ref={combinedRef}
       type="button"
       data-slot="select-trigger"
-      className={`${styles.trigger} ${sizeClass} ${className}`}
+      className={`trigger ${sizeClass} ${className}`}
       onClick={toggle}
       onKeyDown={handleKeyDown}
       onBlur={onBlur}
@@ -127,21 +127,21 @@ export const SelectTrigger = React.forwardRef<
       {...ariaAttributes}
       {...ariaProps}
     >
-      <span className={styles.text}>
+      <span className="text">
         {loading ? 'Loading...' : displayText}
       </span>
 
-      <div className={styles.icons}>
+      <div className="icons">
         {clearable && !isEmpty && !loading && (
           <button
             type="button"
-            className={styles.clear}
+            className="clear"
             onClick={handleClear}
             aria-label="Clear selection"
             tabIndex={-1}
           >
             <svg
-              className={styles.clearIcon}
+              className="clearIcon"
               width="16"
               height="16"
               viewBox="0 0 24 24"
@@ -158,7 +158,7 @@ export const SelectTrigger = React.forwardRef<
         )}
 
         <svg
-          className={styles.chevronIcon}
+          className="chevronIcon"
           width="16"
           height="16"
           viewBox="0 0 24 24"
@@ -249,7 +249,7 @@ export const SelectContent = React.forwardRef<
       <div
         ref={combinedRef}
         data-slot="select-content"
-        className={`${styles.content} ${className}`}
+        className={`content ${className}`}
         data-position={position}
         style={{ maxHeight }}
         role="listbox"
@@ -277,11 +277,11 @@ export const SelectSearch: React.FC<SelectSearchProps> = ({
   return (
     <div
       data-slot="select-search"
-      className={`${styles.searchContainer} ${className}`}
+      className={`searchContainer ${className}`}
     >
       <input
         type="text"
-        className={styles.search}
+        className="search"
         placeholder={placeholder}
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
@@ -328,14 +328,14 @@ export const SelectOptions: React.FC<SelectOptionsProps> = ({
 
   if (filteredOptions.length === 0) {
     return (
-      <div className={`${styles.emptyState} ${className}`}>{emptyState}</div>
+      <div className={`emptyState ${className}`}>{emptyState}</div>
     );
   }
 
   return (
     <div
       data-slot="select-options"
-      className={`${styles.options} ${className}`}
+      className={`options ${className}`}
     >
       {filteredOptions.map((option, index) => {
         const isSelected = selectedOptions.some(
@@ -347,17 +347,17 @@ export const SelectOptions: React.FC<SelectOptionsProps> = ({
           <div
             key={option.id}
             data-slot="select-option"
-            className={`${styles.option} ${isSelected ? styles.selected : ''} ${isActive ? styles.active : ''}`}
+            className={`option ${isSelected ? 'selected' : ''} ${isActive ? 'active' : ''}`}
             role="option"
             aria-selected={isSelected}
             data-disabled={option.disabled || undefined}
             onMouseEnter={() => handleMouseEnter(index)}
             onClick={() => !option.disabled && handleClick(option)}
           >
-            <span className={styles.text}>{option.title}</span>
+            <span className="text">{option.title}</span>
             {isSelected && (
               <svg
-                className={styles.check}
+                className="check"
                 width="16"
                 height="16"
                 viewBox="0 0 24 24"
@@ -390,8 +390,9 @@ export interface SelectProps {
 export const Select: React.FC<SelectProps> = ({ children, className = '' }) => {
   return (
     <div
+      data-ds-component="Select"
       data-slot="select"
-      className={`${styles.root} ${className}`}
+      className={`root ${className}`}
       data-select-root
     >
       {children}

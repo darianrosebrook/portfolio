@@ -1,421 +1,231 @@
-@use './Select.tokens.generated.scss' as selectTokens;
+@import "./Select.tokens.css";
 
-.selectContainer {
-  position: relative;
-  display: inline-block;
-  width: 100%;
+/*
+ * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Scoped to [data-ds-component="Select"] on the root element.
+ * NOTE: The TSX (Select.tsx) uses a newer slot-based class API (.root, .trigger,
+ * .content, .options, .option, etc.) that diverged from the original SCSS
+ * (.selectContainer, .select, etc.). Both sets of classes are styled here:
+ * the new slot API for the current TSX, and the old names retained for
+ * backward-compat until any legacy callers are updated.
+ * Intentionally unlayered — see Button.css for the cascade rationale.
+ */
 
-  // Container queries for responsive sizing
-  container-type: inline-size;
-}
-
-.select {
-  @include selectTokens.vars;
-
-  --select-focus-outline-width: 2px;
-  --select-focus-outline-offset: -1px;
-  --select-focus-ring-shadow: 0 0 0 2px;
-  --select-picker-offset: 0.25rem;
-  --select-picker-shadow: 0 4px 6px rgb(0 0 0 / 10%);
-
-  box-sizing: border-box;
-  width: 100%;
-  padding: var(--select-size-padding-default, 8px);
-  background-color: var(--select-color-background-default, #fafafa);
-  border: var(--select-size-border-default, 2px) solid
-    var(--select-color-border-default, #aeaeae);
-  border-radius: var(--select-size-radius-default, 8px);
-  color: var(--select-color-foreground-default, #141414);
-  font-weight: var(--select-font-weight-default, 400);
-  font-size: var(--select-font-size-default, 16px);
-  line-height: var(--select-font-line-height-default, 1.5);
-  transition:
-    background-color var(--select-motion-duration-fast)
-      var(--select-motion-easing-standard),
-    border-color var(--select-motion-duration-fast)
-      var(--select-motion-easing-standard),
-    color var(--select-motion-duration-fast)
-      var(--select-motion-easing-standard);
-  cursor: pointer;
-  appearance: base-select;
-
-  // CSS Containment - paint containment prevents dropdown overflow
-  contain: paint;
-
-  &--sm {
-    height: var(--select-size-sm-height);
-    padding: var(--select-size-sm-padding-y) var(--select-size-sm-padding-x);
-    font-size: var(--select-font-size-sm);
-  }
-
-  &--md {
-    height: var(--select-size-md-height);
-    padding: var(--select-size-md-padding-y) var(--select-size-md-padding-x);
-    font-size: var(--select-font-size-md);
-  }
-
-  &--lg {
-    height: var(--select-size-lg-height);
-    padding: var(--select-size-lg-padding-y) var(--select-size-lg-padding-x);
-    font-size: var(--select-font-size-lg);
-  }
-
-  & > button {
-    display: flex;
+/* Shared local vars for both root and portaled/floating elements */
+[data-ds-component="Select"] {
+  /* Root wrapper */
+  &.root {
+    position: relative;
+    display: inline-block;
     width: 100%;
-    color: currentcolor;
-    font-family: inherit;
-
-    & > svg {
-      width: 1.2rem;
-      height: 1.2rem;
-      margin-inline-start: auto;
-    }
+    container-type: inline-size;
   }
 
-  &:hover {
-    // Use color-mix() for dynamic hover effect
-    background-color: color-mix(
-      in srgb,
-      var(--select-color-background-default, #fafafa) 90%,
-      var(--select-color-background-hover, #cecece) 10%
-    );
-    border-color: color-mix(
-      in srgb,
-      var(--select-color-border-default, #aeaeae) 70%,
-      var(--select-color-border-hover, #555555) 30%
-    );
-    color: var(--select-color-foreground-hover, #141414);
-  }
-
-  &:focus {
-    // Use color-mix() for subtle focus effect
-    background-color: color-mix(
-      in srgb,
-      var(--select-color-background-default, #fafafa) 95%,
-      var(--select-color-background-focus, #fafafa) 5%
-    );
-    border-color: color-mix(
-      in srgb,
-      var(--select-color-border-default, #aeaeae) 80%,
-      var(--select-color-border-focus, #aeaeae) 20%
-    );
-    outline: none;
-    color: var(--select-color-foreground-focus, #141414);
-  }
-
-  &:focus-visible {
-    background-color: var(--select-color-background-focus-visible, #fafafa);
-    border-color: var(--select-color-border-focus-visible, #d9292b);
-
-    // Use color-mix() for focus ring
-    outline: var(--select-focus-outline-width) solid
-      color-mix(
-        in oklab,
-        var(--select-color-border-focus-visible, #d9292b) 40%,
-        transparent
-      );
-    outline-offset: var(--select-focus-outline-offset);
-    color: var(--select-color-foreground-focus-visible, #141414);
-  }
-
-  &:disabled {
-    background-color: var(--select-color-background-disabled, #cecece);
-    border-color: var(--select-color-border-disabled, #cecece);
-    color: var(--select-color-foreground-disabled, #aeaeae);
-    cursor: not-allowed;
-  }
-
-  &:has(option:not([hidden]):checked) {
-    color: var(--select-color-foreground-checked, #141414);
-  }
-
-  &::picker-icon {
-    display: none;
-  }
-
-  &::picker(select) {
-    padding: var(--select-size-padding-default, 8px);
-    background-color: var(--select-color-background-default, #fafafa);
-    border: var(--select-size-border-default, 2px) solid
-      var(--select-color-border-default, #aeaeae);
-    border-radius: var(--select-size-radius-default, 8px);
-    box-shadow:
-      0 4px 6px -1px rgb(0 0 0 / 10%),
-      0 2px 4px -2px rgb(0 0 0 / 10%);
-    opacity: 1;
+  /* Trigger button */
+  .trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    width: 100%;
+    padding: var(--ds-select-size-padding-default, 8px);
+    background-color: var(--ds-select-color-background-default, #fafafa);
+    border: var(--ds-select-size-border-default, 1px) solid
+      var(--ds-select-color-border-default, #aeaeae);
+    border-radius: var(--ds-select-size-radius-default, 8px);
+    color: var(--ds-select-color-foreground-default, #141414);
+    font-weight: var(--ds-select-font-weight-default, 400);
+    font-size: var(--ds-select-font-size-default, 1rem);
+    line-height: var(--ds-select-font-line-height-default, 1.5);
     transition:
-      opacity 225ms ease-in-out,
-      transform 225ms ease-in-out;
-    transform: translateY(0);
-    transform-origin: top;
-    cursor: default;
-    appearance: base-select;
-    margin-block-start: var(--select-picker-offset);
+      background-color var(--ds-select-motion-duration-fast)
+        var(--ds-select-motion-easing-standard),
+      border-color var(--ds-select-motion-duration-fast)
+        var(--ds-select-motion-easing-standard);
+    cursor: pointer;
 
-    @starting-style {
-      opacity: 0;
-      transform: translateY(-0.25rem) scale(0.95);
-    }
-  }
-
-  & optgroup label {
-    display: block;
-    padding: var(--select-size-padding-default, 8px);
-    color: var(--select-color-foreground-default, #141414);
-    font-weight: var(--select-font-weight-default, 400);
-  }
-
-  & option {
-    padding: var(--select-size-padding-default, 8px);
-    background-color: var(--select-color-background-default, #fafafa);
-    border-radius: var(--select-size-radius-default, 8px);
-    outline: none;
-    color: var(--select-color-foreground-default, #141414);
-
-    &::after {
-      width: 1rem;
-      height: 1.5rem;
-      background: center / contain no-repeat
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23d9292b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'%3E%3C/path%3E%3C/svg%3E");
-      opacity: 0;
-      content: '';
-      margin-inline-start: auto;
+    &.sm {
+      height: var(--ds-select-size-sm-height);
+      padding: var(--ds-select-size-sm-padding-y) var(--ds-select-size-sm-padding-x);
+      font-size: var(--ds-select-font-size-sm);
     }
 
-    &::checkmark {
-      display: none;
+    &.md {
+      height: var(--ds-select-size-md-height);
+      padding: var(--ds-select-size-md-padding-y) var(--ds-select-size-md-padding-x);
+      font-size: var(--ds-select-font-size-md);
     }
 
-    &:checked {
-      background-color: var(--select-color-background-checked, #fafafa);
-      color: var(--select-color-foreground-checked, #141414);
-
-      &::after {
-        opacity: 1;
-      }
+    &.lg {
+      height: var(--ds-select-size-lg-height);
+      padding: var(--ds-select-size-lg-padding-y) var(--ds-select-size-lg-padding-x);
+      font-size: var(--ds-select-font-size-lg);
     }
 
-    &:hover,
+    &:hover {
+      background-color: color-mix(
+        in srgb,
+        var(--ds-select-color-background-default, #fafafa) 90%,
+        var(--ds-select-color-background-hover, #cecece) 10%
+      );
+      border-color: var(--ds-select-color-border-hover, #555555);
+    }
+
     &:focus-visible {
-      background-color: var(--select-color-background-hover, #cecece);
-      color: var(--select-color-foreground-hover, #141414);
+      border-color: var(--ds-select-color-border-focus-visible, #d9292b);
+      outline: 2px solid
+        color-mix(
+          in oklab,
+          var(--ds-select-color-border-focus-visible, #d9292b) 40%,
+          transparent
+        );
+      outline-offset: -1px;
     }
 
     &:disabled {
-      background-color: var(--select-color-background-disabled, #cecece);
-      color: var(--select-color-foreground-disabled, #aeaeae);
+      background-color: var(--ds-select-color-background-disabled, #cecece);
+      border-color: var(--ds-select-color-border-disabled, #cecece);
+      color: var(--ds-select-color-foreground-disabled, #aeaeae);
       cursor: not-allowed;
     }
   }
-}
 
-.selectIndicator {
-  position: absolute;
-  transform: translateY(-50%);
-  pointer-events: none;
-  inset-block-start: 50%;
-  inset-inline-end: 0.75rem;
+  .text {
+    flex: 1;
+    text-align: start;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 
-  .indicatorIcon {
+  .icons {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-inline-start: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .chevronIcon {
     width: 16px;
     height: 16px;
-    color: var(--select-color-icon-default, #6b7280);
+    color: var(--ds-select-color-icon-default, #6b7280);
   }
-}
 
-.clearButton {
-  position: absolute;
-  padding: var(--select-picker-offset);
-  background: none;
-  border: none;
-  border-radius: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  inset-block-start: 50%;
-  inset-inline-end: 2rem;
+  .clear {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem;
+    background: none;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
 
-  &:hover {
-    background-color: var(--select-color-background-hover, #f3f4f6);
+    &:hover {
+      background-color: var(--ds-select-color-background-hover, #f3f4f6);
+    }
   }
 
   .clearIcon {
     width: 14px;
     height: 14px;
-    color: var(--select-color-foreground-default, #1f2937);
-  }
-}
-
-/* Removed descendant size selectors to avoid specificity issues. Size is applied via .select.small/.medium/.large */
-
-// Combobox mode styles
-.comboboxContainer {
-  position: relative;
-  display: inline-block;
-  width: 100%;
-}
-
-.comboboxInput {
-  @include selectTokens.vars;
-
-  --select-focus-outline-width: 2px;
-  --select-focus-outline-offset: -1px;
-  --select-focus-ring-shadow: 0 0 0 2px;
-  --select-picker-offset: 0.25rem;
-  --select-picker-shadow: 0 4px 6px rgb(0 0 0 / 10%);
-
-  box-sizing: border-box;
-  width: 100%;
-  background-color: var(--select-color-background-default, #fafafa);
-  border: var(--select-size-border-default, 2px) solid
-    var(--select-color-border-default, #aeaeae);
-  border-radius: var(--select-size-radius-default, 8px);
-  color: var(--select-color-foreground-default, #141414);
-  font-weight: var(--select-font-weight-default, 400);
-  line-height: var(--select-font-line-height-default, 1.5);
-  transition:
-    background-color var(--select-motion-duration-fast)
-      var(--select-motion-easing-standard),
-    border-color var(--select-motion-duration-fast)
-      var(--select-motion-easing-standard),
-    color var(--select-motion-duration-fast)
-      var(--select-motion-easing-standard);
-  cursor: text;
-
-  &--sm {
-    height: var(--select-size-sm-height);
-    padding: var(--select-size-sm-padding-y) var(--select-size-sm-padding-x);
-    font-size: var(--select-font-size-sm);
+    color: var(--ds-select-color-foreground-default, #1f2937);
   }
 
-  &--md {
-    height: var(--select-size-md-height);
-    padding: var(--select-size-md-padding-y) var(--select-size-md-padding-x);
-    font-size: var(--select-font-size-md);
+  /* Dropdown content */
+  .content {
+    position: absolute;
+    inset-inline: 0;
+    z-index: 1000;
+    overflow-y: auto;
+    margin: 0;
+    padding: 0;
+    background: var(--ds-select-color-background-default, #fafafa);
+    border: var(--ds-select-size-border-default, 1px) solid
+      var(--ds-select-color-border-default, #aeaeae);
+    border-radius: 0 0 var(--ds-select-size-radius-default, 8px)
+      var(--ds-select-size-radius-default, 8px);
+    box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
+    inset-block-start: 100%;
   }
 
-  &--lg {
-    height: var(--select-size-lg-height);
-    padding: var(--select-size-lg-padding-y) var(--select-size-lg-padding-x);
-    font-size: var(--select-font-size-lg);
+  /* Search */
+  .searchContainer {
+    padding: var(--ds-select-size-padding-default);
   }
 
-  &:focus {
-    border-color: var(--select-color-border-focus, #0066cc);
-    box-shadow: var(--select-focus-ring-shadow)
-      var(--select-color-border-focus-ring, rgb(0 102 204 / 20%));
-    outline: none;
+  .search {
+    width: 100%;
+    padding: var(--ds-select-size-padding-default);
+    border: var(--ds-select-size-border-default) solid
+      var(--ds-select-color-border-default, #e5e7eb);
+    border-radius: var(--ds-select-size-radius-small);
+    font-size: var(--ds-select-font-size-sm);
   }
 
-  &:disabled {
-    background-color: var(--select-color-background-disabled, #f5f5f5);
-    border-color: var(--select-color-border-disabled, #d0d0d0);
-    color: var(--select-color-foreground-disabled, #999999);
-    cursor: not-allowed;
-  }
-}
-
-.comboboxList {
-  position: absolute;
-  inset-inline: 0;
-  z-index: 1000;
-  overflow-y: auto;
-  max-height: 200px;
-  margin: 0;
-  padding: 0;
-  background: var(--select-color-background-default, #fafafa);
-  border: var(--select-size-border-default, 2px) solid
-    var(--select-color-border-default, #aeaeae);
-  border-radius: 0 0 var(--select-size-radius-default, 8px)
-    var(--select-size-radius-default, 8px);
-  box-shadow: var(--select-picker-shadow);
-  list-style: none;
-  border-block-start: none;
-  inset-block-start: 100%;
-}
-
-.comboboxOption {
-  padding: var(--select-size-padding-default);
-  color: var(--select-color-foreground-default, #141414);
-  cursor: pointer;
-
-  &:hover,
-  &.active {
-    background-color: var(--select-color-background-hover, #f0f0f0);
+  /* Options */
+  .options {
+    padding: 0;
   }
 
-  &[aria-selected='true'] {
-    background-color: var(--select-color-background-selected, #e6f3ff);
-    color: var(--select-color-foreground-selected, #0066cc);
+  .option {
+    padding: var(--ds-select-size-padding-default);
+    color: var(--ds-select-color-foreground-default, #141414);
+    cursor: pointer;
+
+    &:hover,
+    &.active {
+      background-color: var(--ds-select-color-background-hover, #f0f0f0);
+    }
+
+    &[aria-selected='true'],
+    &.selected {
+      background-color: var(--ds-select-color-background-selected, #e6f3ff);
+      color: var(--ds-select-color-foreground-selected, #0066cc);
+    }
+
+    &[data-disabled] {
+      color: var(--ds-select-color-foreground-disabled, #aeaeae);
+      cursor: not-allowed;
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
   }
 
-  &.disabled {
-    color: var(--select-color-foreground-disabled, #999999);
-    cursor: not-allowed;
+  .check {
+    width: 16px;
+    height: 16px;
+    color: var(--ds-select-color-foreground-selected, #0066cc);
+    flex-shrink: 0;
+  }
 
-    &:hover {
-      background-color: transparent;
+  .emptyState {
+    padding: var(--ds-select-size-padding-default);
+    color: var(--ds-select-color-foreground-disabled, #aeaeae);
+    text-align: center;
+  }
+
+  /* Container queries for responsive sizing */
+  @container (max-width: 20rem) {
+    .trigger {
+      padding: calc(var(--ds-select-size-padding-default, 8px) * 0.75);
+      font-size: calc(var(--ds-select-font-size-default, 1rem) * 0.9);
+    }
+  }
+
+  @container (max-width: 15rem) {
+    .trigger {
+      padding: calc(var(--ds-select-size-padding-default, 8px) * 0.5);
+      font-size: calc(var(--ds-select-font-size-default, 1rem) * 0.85);
     }
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .select,
-  .comboboxInput {
+  [data-ds-component="Select"] .trigger {
     transition: none;
-  }
-}
-
-.searchInput {
-  width: 100%;
-  padding: var(--select-size-padding-default);
-  border: var(--select-size-border-default) solid
-    var(--select-color-border-default, #e5e7eb);
-  border-radius: var(--select-size-radius-small);
-  font-size: var(--select-font-size-sm);
-  margin-block-end: var(--select-size-padding-default);
-}
-
-// Container queries for responsive select sizing
-@supports (container-type: inline-size) {
-  .selectContainer {
-    @container (max-width: 20rem) {
-      // Compact select for small containers
-      .select {
-        padding: calc(var(--select-size-padding-default, 8px) * 0.75);
-        font-size: calc(var(--select-font-size-default, 16px) * 0.9);
-
-        &--sm {
-          padding: calc(var(--select-size-sm-padding-y) * 0.75)
-            calc(var(--select-size-sm-padding-x) * 0.75);
-        }
-
-        &--md {
-          padding: calc(var(--select-size-md-padding-y) * 0.75)
-            calc(var(--select-size-md-padding-x) * 0.75);
-        }
-
-        &--lg {
-          padding: calc(var(--select-size-lg-padding-y) * 0.75)
-            calc(var(--select-size-lg-padding-x) * 0.75);
-        }
-      }
-    }
-
-    @container (max-width: 15rem) {
-      // Minimal select for very small containers
-      .select {
-        padding: calc(var(--select-size-padding-default, 8px) * 0.5);
-        font-size: calc(var(--select-font-size-default, 16px) * 0.85);
-
-        &--sm,
-        &--md,
-        &--lg {
-          padding: calc(var(--select-size-sm-padding-y) * 0.5)
-            calc(var(--select-size-sm-padding-x) * 0.5);
-          font-size: calc(var(--select-font-size-sm) * 0.85);
-        }
-      }
-    }
   }
 }
