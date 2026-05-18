@@ -127,10 +127,8 @@ export default function HomeClient({ ldJson }: HomeClientProps) {
               className={styles.secondLine}
               style={{ opacity: prefersReducedMotion ? 1 : 0 }}
             >
-              AI-ready design systems need more than components — they need
-              explicit structure. I build the tooling, standards, and
-              design-to-code workflows that make product systems inspectable,
-              governable, and usable by people and AI tools alike.
+              Design systems infrastructure: tooling, standards, analytics, and
+              AI-enabled practice.
             </span>
           </h1>
         </div>
