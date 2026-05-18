@@ -1,7 +1,7 @@
 id: FIX-PUB-002
 type: fix
 title: 'New article page: hydration, autosave 400, script-in-render'
-status: active
+status: closed
 risk_tier: 3
 mode: development
 created_at: '2026-05-18T07:31:42.611Z'
