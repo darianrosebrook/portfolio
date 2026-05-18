@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { NodeViewWrapper, NodeViewProps } from '@tiptap/react';
-import styles from './VideoNodeView.module.scss';
+import './VideoNodeView.css';
 
 interface VideoNodeViewProps extends NodeViewProps {
   // Additional props can be added here
@@ -63,7 +63,7 @@ const VideoNodeView: React.FC<VideoNodeViewProps> = ({
 
   if (!src) {
     return (
-      <NodeViewWrapper className={`${styles.videoWrapper} ${styles.empty}`}>
+      <NodeViewWrapper data-ds-component="VideoNodeView" className='empty'>
         <div className={styles.placeholder}>
           <div className={styles.icon}>🎥</div>
           <p>No video source provided</p>
