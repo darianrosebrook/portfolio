@@ -12,7 +12,7 @@ import React from 'react';
 import { Profile } from '@/types';
 import Avatar from '../Avatar';
 import Link from 'next/link';
-import styles from './ProfileFlag.module.scss';
+import './ProfileFlag.css';
 
 /** @deprecated Move to app-level components */
 export interface ProfileFlagProps {
@@ -30,7 +30,7 @@ const ProfileFlag: React.FC<ProfileFlagProps> = ({ profile }) => {
     username: username || '404',
   };
   return (
-    <div className={styles.profileFlag}>
+    <div data-ds-component="ProfileFlag" className="profileFlag">
       <Link href={`/${insert.username}`}>
         <Avatar
           size="medium"
