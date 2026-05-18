@@ -39,7 +39,7 @@ const Marquee: React.FC<MarqueeProps> = ({ title, icon, url }) => {
       });
       return loop;
     },
-    marqueeRef.current ? { scope: marqueeRef.current } : undefined
+    { scope: marqueeRef }
   );
   return (
     <>
@@ -48,7 +48,7 @@ const Marquee: React.FC<MarqueeProps> = ({ title, icon, url }) => {
           {title.toUpperCase()}
           <Icon width={48} height={48} icon={faArrowUpRight} />
         </h4>
-        <div className={Styles.marquee} ref={marqueeRef}>
+        <div className={Styles.marquee} ref={marqueeRef} aria-hidden="true">
           {clones && clones.map((clone, index) => clone(index))}
         </div>
       </Link>
