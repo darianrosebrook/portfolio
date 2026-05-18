@@ -4,7 +4,7 @@
  */
 'use client';
 import * as React from 'react';
-import styles from './Accordion.module.scss';
+import './Accordion.css';
 import {
   AccordionProvider,
   AccordionProviderProps,
@@ -53,8 +53,9 @@ const AccordionRoot: React.FC<AccordionProps> = ({
       collapsible={collapsible}
     >
       <div
-        className={[styles.accordion, className].filter(Boolean).join(' ')}
+        className={className}
         data-slot="accordion"
+        data-ds-component="Accordion"
         {...rest}
       >
         {children}
@@ -79,7 +80,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
 
   return (
     <div
-      className={[styles.item, className].filter(Boolean).join(' ')}
+      className={['item', className].filter(Boolean).join(' ')}
       data-slot="accordion-item"
       data-state={isOpen ? 'open' : 'closed'}
       {...rest}
@@ -109,9 +110,9 @@ const AccordionTrigger: React.FC<AccordionTriggerProps> = ({
   };
 
   return (
-    <div className={styles.header}>
+    <div className="header">
       <button
-        className={[styles.trigger, className].filter(Boolean).join(' ')}
+        className={['trigger', className].filter(Boolean).join(' ')}
         data-slot="accordion-trigger"
         data-state={isOpen ? 'open' : 'closed'}
         aria-expanded={isOpen}
@@ -119,7 +120,7 @@ const AccordionTrigger: React.FC<AccordionTriggerProps> = ({
         {...rest}
       >
         {children}
-        <ChevronDownIcon className={styles.chevron} aria-hidden="true" />
+        <ChevronDownIcon className="chevron" aria-hidden="true" />
       </button>
     </div>
   );
@@ -143,19 +144,19 @@ const AccordionContent: React.FC<AccordionContentProps> = ({
   return (
     <div
       ref={contentRef}
-      className={[styles.content, className].filter(Boolean).join(' ')}
+      className={['content', className].filter(Boolean).join(' ')}
       data-slot="accordion-content"
       data-state={isOpen ? 'open' : 'closed'}
       style={
         {
-          '--accordion-content-height': isOpen
+          '--ds-accordion-content-height': isOpen
             ? `${contentRef.current?.scrollHeight}px`
             : '0px',
         } as React.CSSProperties
       }
       {...rest}
     >
-      <div className={styles.contentInner}>{children}</div>
+      <div className="contentInner">{children}</div>
     </div>
   );
 };
