@@ -6,6 +6,9 @@ export const Table = () => (
     fill="none"
     viewBox="0 0 790 248"
     xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+    focusable="false"
+    role="presentation"
   >
     <path
       d="M182 0H183V248H182V0Z"
@@ -212,6 +215,9 @@ export const Props = () => (
     viewBox="0 0 341 249"
     xmlns="http://www.w3.org/2000/svg"
     className={styles.propsvg}
+    aria-hidden="true"
+    focusable="false"
+    role="presentation"
   >
     <line
       stroke="var(--semantic-color-border-bold)"
@@ -335,6 +341,9 @@ export const Top = () => (
     viewBox="0 0 341 249"
     xmlns="http://www.w3.org/2000/svg"
     className={styles.top}
+    aria-hidden="true"
+    focusable="false"
+    role="presentation"
   >
     <path
       d="M330.736 216.73C330.776 217.483 330.299 218.243 329.304 218.817V222.817C330.299 222.243 330.776 221.483 330.736 220.73V216.73Z"
@@ -528,6 +537,9 @@ export const Middle = () => (
     viewBox="0 0 341 249"
     xmlns="http://www.w3.org/2000/svg"
     className={styles.middle}
+    aria-hidden="true"
+    focusable="false"
+    role="presentation"
   >
     <path
       d="M323.871 216.207C324.33 216.472 324.569 216.816 324.588 217.163V221.163C324.569 220.816 324.33 220.472 323.871 220.207V216.207Z"
@@ -597,6 +609,9 @@ export const Bottom = () => (
     viewBox="0 0 341 249"
     xmlns="http://www.w3.org/2000/svg"
     className={styles.bottom}
+    aria-hidden="true"
+    focusable="false"
+    role="presentation"
   >
     <path
       d="M330.5 217.586C330.54 216.834 330.062 216.074 329.067 215.5V219.5C330.062 220.074 330.54 220.834 330.5 221.586V217.586Z"
@@ -655,6 +670,9 @@ export const Faceplate = () => (
     viewBox="0 0 341 249"
     xmlns="http://www.w3.org/2000/svg"
     className={styles.faceplate}
+    aria-hidden="true"
+    focusable="false"
+    role="presentation"
   >
     <rect
       height="56"

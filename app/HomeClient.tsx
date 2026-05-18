@@ -13,7 +13,7 @@ import LogoMaruqee from '@/ui/modules/LogoMarquee';
 import Image from 'next/image';
 import BlueprintsWrapper from './BlueprintsWrapper';
 import styles from './page.module.css';
-import { EASING_PRESETS, EDITORIAL_STAGGER } from '@/utils/animation';
+import { EASING_PRESETS } from '@/utils/animation';
 
 // Register ScrollTrigger plugin
 if (typeof window !== 'undefined') {
@@ -312,7 +312,7 @@ export default function HomeClient({ ldJson }: HomeClientProps) {
             <li>Design Management</li>
             <li>Building Design Systems</li>
             <li>Architecting Design Tokens</li>
-            <li>Conducitng User Research</li>
+            <li>Conducting User Research</li>
             <li>UX Design & Workshops</li>
             <li>UX Engineering</li>
             <li>Figma Components and Variables</li>
