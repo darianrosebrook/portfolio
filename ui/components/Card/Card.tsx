@@ -1,6 +1,6 @@
 'use client';
 import * as React from 'react';
-import styles from './Card.module.scss';
+import './Card.css';
 
 export type CardStatus =
   | 'completed'
@@ -32,11 +32,8 @@ const CardRoot = React.forwardRef<HTMLDivElement, CardProps>(
       <div
         ref={ref}
         data-slot="card"
-        className={[
-          styles.card,
-          interactive ? styles.interactive : '',
-          className,
-        ]
+        data-ds-component="Card"
+        className={[interactive ? 'interactive' : '', className]
           .filter(Boolean)
           .join(' ')}
         {...rest}
@@ -55,7 +52,7 @@ const CardHeader: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
 }) => (
   <div
     data-slot="card-header"
-    className={[styles.header, className].filter(Boolean).join(' ')}
+    className={['header', className].filter(Boolean).join(' ')}
     {...rest}
   >
     {children}
@@ -70,8 +67,8 @@ const CardBadge = React.forwardRef<HTMLSpanElement, CardBadgeProps>(
         ref={ref}
         data-slot="card-badge"
         className={[
-          styles.badge,
-          status ? styles[status.replace(/\s+/g, '-')] : '',
+          'badge',
+          status ? status.replace(/\s+/g, '-') : '',
           className,
         ]
           .filter(Boolean)
@@ -92,7 +89,7 @@ const CardContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
 }) => (
   <div
     data-slot="card-content"
-    className={[styles.content, className].filter(Boolean).join(' ')}
+    className={['content', className].filter(Boolean).join(' ')}
     {...rest}
   >
     {children}
@@ -107,7 +104,7 @@ const CardTitle: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = ({
 }) => (
   <h3
     data-slot="card-title"
-    className={[styles.title, className].filter(Boolean).join(' ')}
+    className={['title', className].filter(Boolean).join(' ')}
     {...rest}
   >
     {children}
@@ -122,7 +119,7 @@ const CardDescription: React.FC<React.HTMLAttributes<HTMLParagraphElement>> = ({
 }) => (
   <p
     data-slot="card-description"
-    className={[styles.description, className].filter(Boolean).join(' ')}
+    className={['description', className].filter(Boolean).join(' ')}
     {...rest}
   >
     {children}
@@ -137,7 +134,7 @@ const CardMedia: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
 }) => (
   <div
     data-slot="card-media"
-    className={[styles.media, className].filter(Boolean).join(' ')}
+    className={['media', className].filter(Boolean).join(' ')}
     {...rest}
   >
     {children}
@@ -152,7 +149,7 @@ const CardFooter: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
 }) => (
   <div
     data-slot="card-footer"
-    className={[styles.footer, className].filter(Boolean).join(' ')}
+    className={['footer', className].filter(Boolean).join(' ')}
     {...rest}
   >
     {children}
@@ -167,7 +164,7 @@ const CardActions: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
 }) => (
   <div
     data-slot="card-actions"
-    className={[styles.actions, className].filter(Boolean).join(' ')}
+    className={['actions', className].filter(Boolean).join(' ')}
     {...rest}
   >
     {children}
@@ -180,7 +177,7 @@ const CardLink = React.forwardRef<HTMLAnchorElement, CardLinkProps>(
     <a
       ref={ref}
       data-slot="card-link"
-      className={[styles.link, className].filter(Boolean).join(' ')}
+      className={['link', className].filter(Boolean).join(' ')}
       {...rest}
     >
       {children}
@@ -196,7 +193,7 @@ const CardNote: React.FC<React.HTMLAttributes<HTMLElement>> = ({
 }) => (
   <blockquote
     data-slot="card-note"
-    className={[styles.note, className].filter(Boolean).join(' ')}
+    className={['note', className].filter(Boolean).join(' ')}
     {...rest}
   >
     {children}
