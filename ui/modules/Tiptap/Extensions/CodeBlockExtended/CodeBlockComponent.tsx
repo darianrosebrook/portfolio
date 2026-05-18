@@ -1,6 +1,6 @@
 import React from 'react';
 import { NodeViewContent, NodeViewWrapper } from '@tiptap/react';
-import styles from './CodeBlockComponent.module.scss';
+import './CodeBlockComponent.css';
 
 interface CodeBlockProps {
   node: {
@@ -23,7 +23,7 @@ const codeBlock: React.FC<CodeBlockProps> = ({
   updateAttributes,
   extension,
 }) => (
-  <NodeViewWrapper className={styles.codeBlock}>
+  <NodeViewWrapper className='codeBlock' data-ds-component="CodeBlockComponent">
     <select
       contentEditable={false}
       defaultValue={defaultLanguage}

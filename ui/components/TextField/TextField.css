@@ -1,0 +1,23 @@
+@import "./Textfield.tokens.css";
+
+/*
+ * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Note: tokens file is Textfield.tokens.css (lowercase 'f').
+ * Intentionally unlayered — see Button.css for the cascade rationale.
+ */
+[data-ds-component="Textfield"] {
+  &.field {
+    display: grid;
+    gap: 0.375rem;
+  }
+
+  .description {
+    opacity: 0.8;
+    font-size: 0.875rem;
+  }
+
+  .error {
+    color: var(--ds-textfield-color-error);
+    font-size: 0.875rem;
+  }
+}

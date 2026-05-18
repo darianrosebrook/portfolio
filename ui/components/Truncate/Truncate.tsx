@@ -1,6 +1,6 @@
 'use client';
 import * as React from 'react';
-import styles from './Truncate.module.scss';
+import './Truncate.css';
 
 export interface TruncateProps extends Omit<
   React.HTMLAttributes<HTMLDivElement>,
@@ -64,12 +64,13 @@ export const Truncate = React.forwardRef<HTMLElement, TruncateProps>(
 
     const customStyle: React.CSSProperties = {
       ...style,
-      ['--truncate-lines' as any]: lines,
+      ['--ds-truncate-lines' as any]: lines,
     };
 
     return React.createElement(
       Component,
       {
+        'data-ds-component': 'Truncate',
         'data-slot': 'truncate',
         ref: (node: HTMLElement | null) => {
           (contentRef as React.MutableRefObject<HTMLElement | null>).current =
@@ -80,9 +81,9 @@ export const Truncate = React.forwardRef<HTMLElement, TruncateProps>(
           }
         },
         className: [
-          styles.truncate,
-          isExpanded ? styles.expanded : '',
-          expandable && shouldShowToggle ? styles.expandable : '',
+          'truncate',
+          isExpanded ? 'expanded' : '',
+          expandable && shouldShowToggle ? 'expandable' : '',
           className,
         ]
           .filter(Boolean)
@@ -91,14 +92,14 @@ export const Truncate = React.forwardRef<HTMLElement, TruncateProps>(
         ...rest,
       },
       <>
-        <span data-slot="truncate-content" className={styles.content}>
+        <span data-slot="truncate-content" className="content">
           {children}
         </span>
         {expandable && shouldShowToggle && (
           <button
             data-slot="truncate-toggle"
             type="button"
-            className={styles.toggle}
+            className="toggle"
             onClick={handleToggle}
             aria-expanded={isExpanded}
           >

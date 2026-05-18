@@ -1,0 +1,18 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Input/Input.tokens.json
+ */
+[data-ds-component="Input"] {
+  /* === Color Tokens === */
+  --ds-input-color-bg-default: var(--semantic-color-background-primary);
+  --ds-input-color-text-default: var(--semantic-color-foreground-primary);
+  --ds-input-color-border-default: var(--semantic-color-border-default);
+  --ds-input-color-focus-default: var(--semantic-color-border-focus);
+  --ds-input-color-invalid-default: var(--semantic-color-border-danger);
+
+  /* === Size Tokens === */
+  --ds-input-size-height-default: var(--semantic-control-size-lg-height);
+  --ds-input-size-radius-default: var(--core-shape-radius-medium);
+
+  /* === Space Tokens === */
+  --ds-input-space-inline-default: var(--core-spacing-size-05);
+}

@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import type { TrackId } from '@/types/tracks';
 import { getFoundationPageBySlug } from '../_lib/pageRegistry';
-import styles from './LearningPath.module.scss';
+import styles from './LearningPath.module.css';
 
 interface LearningPathProps {
   track: TrackId;

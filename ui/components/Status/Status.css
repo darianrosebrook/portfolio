@@ -1,0 +1,27 @@
+@import "./Status.tokens.css";
+
+/*
+ * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Intentionally unlayered — see Button.css for the cascade rationale.
+ */
+[data-ds-component="Status"] {
+  &.status {
+    display: inline-grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--ds-status-size-padding-default);
+    justify-content: center;
+    align-items: center;
+    padding: var(--ds-status-size-padding-default);
+    background: var(--ds-status-color-background-default);
+    border: var(--ds-status-size-border-default) solid
+      var(--ds-status-color-border-default);
+    border-radius: var(--ds-status-size-radius-default);
+    color: var(--ds-status-color-foreground-primary);
+    line-height: var(--ds-status-typography-line-height, 1);
+    fill: var(--ds-status-color-foreground-accent);
+  }
+
+  svg {
+    fill: var(--ds-status-color-foreground-accent);
+  }
+}

@@ -3,7 +3,7 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-import styles from './glossaryCards.module.scss';
+import styles from './glossaryCards.module.css';
 import { useInteraction } from '@/context';
 import { glossaryItems as terms } from './glossaryItems';
 import Icon from '@/ui/components/Icon';

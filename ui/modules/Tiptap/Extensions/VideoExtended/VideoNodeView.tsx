@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { NodeViewWrapper, NodeViewProps } from '@tiptap/react';
-import styles from './VideoNodeView.module.scss';
+import './VideoNodeView.css';
 
 interface VideoNodeViewProps extends NodeViewProps {
   // Additional props can be added here
@@ -63,9 +63,9 @@ const VideoNodeView: React.FC<VideoNodeViewProps> = ({
 
   if (!src) {
     return (
-      <NodeViewWrapper className={`${styles.videoWrapper} ${styles.empty}`}>
-        <div className={styles.placeholder}>
-          <div className={styles.icon}>🎥</div>
+      <NodeViewWrapper data-ds-component="VideoNodeView" className='empty'>
+        <div className='placeholder'>
+          <div className='icon'>🎥</div>
           <p>No video source provided</p>
         </div>
       </NodeViewWrapper>
@@ -74,28 +74,29 @@ const VideoNodeView: React.FC<VideoNodeViewProps> = ({
 
   return (
     <NodeViewWrapper
-      className={`${styles.videoWrapper} ${selected ? styles.selected : ''}`}
+      data-ds-component="VideoNodeView"
+      className={`${selected ? 'selected' : ''}`}
       data-align={align}
     >
       {selected && (
-        <div className={styles.toolbar}>
+        <div className='toolbar'>
           <button
             onClick={() => handleAlignChange('left')}
-            className={align === 'left' ? styles.active : ''}
+            className={align === 'left' ? 'active' : ''}
             title="Align left"
           >
             ←
           </button>
           <button
             onClick={() => handleAlignChange('center')}
-            className={align === 'center' ? styles.active : ''}
+            className={align === 'center' ? 'active' : ''}
             title="Align center"
           >
             ↔
           </button>
           <button
             onClick={() => handleAlignChange('right')}
-            className={align === 'right' ? styles.active : ''}
+            className={align === 'right' ? 'active' : ''}
             title="Align right"
           >
             →
@@ -103,17 +104,17 @@ const VideoNodeView: React.FC<VideoNodeViewProps> = ({
         </div>
       )}
 
-      <div className={styles.videoContainer}>
+      <div className='videoContainer'>
         {isLoading && (
-          <div className={styles.loading}>
-            <div className={styles.spinner}></div>
+          <div className='loading'>
+            <div className='spinner'></div>
             <p>Loading video...</p>
           </div>
         )}
 
         {error && (
-          <div className={styles.error}>
-            <div className={styles.icon}>⚠️</div>
+          <div className='error'>
+            <div className='icon'>⚠️</div>
             <p>{error}</p>
             <small>{src}</small>
           </div>
@@ -130,7 +131,7 @@ const VideoNodeView: React.FC<VideoNodeViewProps> = ({
           loop={loop}
           muted={muted}
           poster={poster}
-          className={styles.video}
+          className='video'
           preload="metadata"
           onError={() => setError('Failed to load video')}
           onLoadStart={() => setIsLoading(true)}
@@ -138,7 +139,7 @@ const VideoNodeView: React.FC<VideoNodeViewProps> = ({
         />
       </div>
 
-      {title && <div className={styles.caption}>{title}</div>}
+      {title && <div className='caption'>{title}</div>}
     </NodeViewWrapper>
   );
 };

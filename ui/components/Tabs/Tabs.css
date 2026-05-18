@@ -1,0 +1,68 @@
+@import "./Tabs.tokens.css";
+
+/*
+ * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Scoped to [data-ds-component="Tabs"] on the root element.
+ * @supports @scope block dropped — native nesting gives equivalent scoping.
+ * Intentionally unlayered — see Button.css for the cascade rationale.
+ */
+[data-ds-component="Tabs"] {
+  contain: layout;
+
+  .list {
+    position: relative;
+    display: inline-flex;
+    gap: var(--ds-tabs-spacing-gap);
+  }
+
+  .indicator {
+    position: absolute;
+    height: 2px;
+    background: var(--ds-tabs-color-indicator);
+    transition: transform var(--ds-tabs-motion-indicator);
+    transform: translateX(0%);
+    inline-size: 100px;
+    inset-block-end: 0;
+  }
+
+  .tab {
+    padding: var(--ds-tabs-spacing-padding);
+    background: transparent;
+    border: none;
+    color: var(--ds-tabs-color-fg);
+    cursor: pointer;
+
+    &:focus-visible {
+      border-radius: var(--ds-tabs-shape-radius, 0.25rem);
+      outline: 2px solid var(--ds-tabs-color-focus);
+      outline-offset: 2px;
+    }
+
+    &:hover:not(.tabDisabled) {
+      background: var(--ds-tabs-color-hover-bg, oklch(0% 0 0deg / 5%));
+      color: var(--ds-tabs-color-hover-fg, var(--ds-tabs-color-active-fg));
+    }
+  }
+
+  .tabActive {
+    background: var(--ds-tabs-color-active-bg);
+    color: var(--ds-tabs-color-active-fg);
+  }
+
+  .tabDisabled {
+    color: var(--ds-tabs-color-disabled-fg);
+    cursor: not-allowed;
+  }
+
+  .panel {
+    margin-block-start: var(--ds-tabs-spacing-panel-gap);
+  }
+
+  .panelActive {
+    opacity: 1;
+  }
+
+  .panelInactive {
+    opacity: 0;
+  }
+}

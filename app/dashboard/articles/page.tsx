@@ -2,7 +2,7 @@ import Button from '@/ui/components/Button';
 import { createClient } from '@/utils/supabase/server';
 import { Suspense } from 'react';
 import { ArticleCard, ArticleFilters, EmptyState } from './_components';
-import styles from './articles.module.scss';
+import styles from './articles.module.css';
 
 interface ArticlesPageProps {
   searchParams: Promise<{ status?: string }>;

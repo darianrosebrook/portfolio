@@ -6,7 +6,7 @@
 'use client';
 import * as React from 'react';
 import { createPortal } from 'react-dom';
-import styles from './Sheet.module.scss';
+import './Sheet.css';
 import {
   SheetProvider,
   SheetProviderProps,
@@ -47,7 +47,8 @@ const SheetRoot: React.FC<SheetProps> = ({
   return (
     <SheetProvider {...sheetOptions}>
       <div
-        className={[styles.root, className].filter(Boolean).join(' ')}
+        data-ds-component="Sheet"
+        className={['root', className].filter(Boolean).join(' ')}
         data-slot="sheet"
       >
         {children}
@@ -83,7 +84,7 @@ const SheetTrigger = React.forwardRef<HTMLButtonElement, SheetTriggerProps>(
       <button
         ref={combinedRef}
         type="button"
-        className={[styles.trigger, className].filter(Boolean).join(' ')}
+        className={['trigger', className].filter(Boolean).join(' ')}
         data-slot="sheet-trigger"
         onClick={open}
         {...rest}
@@ -124,7 +125,7 @@ const SheetOverlay = React.forwardRef<HTMLDivElement, SheetOverlayProps>(
     return (
       <div
         ref={ref}
-        className={[styles.overlay, modal ? styles.modal : '', className]
+        className={['overlay', modal ? 'modal' : '', className]
           .filter(Boolean)
           .join(' ')}
         data-slot="sheet-overlay"
@@ -284,7 +285,7 @@ const SheetContent = React.forwardRef<HTMLDivElement, SheetContentProps>(
         <SheetOverlay />
         <div
           ref={combinedRef}
-          className={[styles.content, styles[side], className]
+          className={['content', side, className]
             .filter(Boolean)
             .join(' ')}
           data-slot="sheet-content"
@@ -310,7 +311,7 @@ const SheetHeader: React.FC<SheetHeaderProps> = ({
   ...rest
 }) => (
   <div
-    className={[styles.header, className].filter(Boolean).join(' ')}
+    className={['header', className].filter(Boolean).join(' ')}
     data-slot="sheet-header"
     {...rest}
   >
@@ -327,7 +328,7 @@ const SheetTitle: React.FC<SheetTitleProps> = ({
   ...rest
 }) => (
   <h2
-    className={[styles.title, className].filter(Boolean).join(' ')}
+    className={['title', className].filter(Boolean).join(' ')}
     data-slot="sheet-title"
     {...rest}
   >
@@ -344,7 +345,7 @@ const SheetDescription: React.FC<SheetDescriptionProps> = ({
   ...rest
 }) => (
   <p
-    className={[styles.description, className].filter(Boolean).join(' ')}
+    className={['description', className].filter(Boolean).join(' ')}
     data-slot="sheet-description"
     {...rest}
   >
@@ -361,7 +362,7 @@ const SheetBody: React.FC<SheetBodyProps> = ({
   ...rest
 }) => (
   <div
-    className={[styles.body, className].filter(Boolean).join(' ')}
+    className={['body', className].filter(Boolean).join(' ')}
     data-slot="sheet-body"
     {...rest}
   >
@@ -378,7 +379,7 @@ const SheetFooter: React.FC<SheetFooterProps> = ({
   ...rest
 }) => (
   <div
-    className={[styles.footer, className].filter(Boolean).join(' ')}
+    className={['footer', className].filter(Boolean).join(' ')}
     data-slot="sheet-footer"
     {...rest}
   >
@@ -397,7 +398,7 @@ const SheetClose = React.forwardRef<HTMLButtonElement, SheetCloseProps>(
       <button
         ref={ref}
         type="button"
-        className={[styles.close, className].filter(Boolean).join(' ')}
+        className={['close', className].filter(Boolean).join(' ')}
         data-slot="sheet-close"
         onClick={close}
         aria-label="Close sheet"

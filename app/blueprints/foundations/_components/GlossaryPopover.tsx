@@ -2,7 +2,7 @@
 
 import { glossaryItems, type GlossaryItem } from '@/app/heroes/glossaryItems';
 import React, { useEffect, useRef, useState } from 'react';
-import styles from './GlossaryPopover.module.scss';
+import styles from './GlossaryPopover.module.css';
 
 interface GlossaryPopoverProps {
   termId: string;

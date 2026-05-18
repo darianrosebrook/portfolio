@@ -1,0 +1,60 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/links/Links.tokens.json
+ */
+[data-ds-component="Links"] {
+  /* === Color Tokens === */
+  --ds-links-color-foreground-default: var(--semantic-color-foreground-primary);
+  --ds-links-color-foreground-hover: var(--semantic-interaction-text-hover);
+  --ds-links-color-foreground-active: var(--semantic-interaction-text-active);
+  --ds-links-color-foreground-visited: var(--semantic-color-foreground-secondary);
+  --ds-links-color-foreground-disabled: var(--semantic-color-foreground-disabled);
+  --ds-links-color-underline-default: var(--semantic-color-border-light);
+  --ds-links-color-underline-hover: var(--semantic-interaction-border-hover);
+  --ds-links-color-underline-active: var(--semantic-interaction-border-active);
+  --ds-links-color-underline-disabled: var(--semantic-color-border-disabled);
+
+  /* === Spacing Tokens === */
+  --ds-links-spacing-gap-default: var(--core-spacing-size-02);
+  --ds-links-spacing-gap-small: var(--core-spacing-size-01);
+  --ds-links-spacing-gap-large: var(--core-spacing-size-03);
+  --ds-links-spacing-padding-default: var(--core-spacing-size-02);
+  --ds-links-spacing-padding-small: var(--core-spacing-size-01);
+  --ds-links-spacing-padding-large: var(--core-spacing-size-03);
+  --ds-links-spacing-margin-default: var(--core-spacing-size-02);
+  --ds-links-spacing-margin-small: var(--core-spacing-size-01);
+  --ds-links-spacing-margin-large: var(--core-spacing-size-03);
+
+  /* === Typography Tokens === */
+  --ds-links-typography-font-size-small: var(--semantic-typography-body-04);
+  --ds-links-typography-font-size-medium: var(--semantic-typography-body-04);
+  --ds-links-typography-font-size-large: var(--semantic-typography-body-03);
+  --ds-links-typography-font-weight-default: var(--semantic-typography-font-weight-regular);
+  --ds-links-typography-font-weight-medium: var(--semantic-typography-font-weight-medium);
+  --ds-links-typography-font-weight-semibold: var(--semantic-typography-font-weight-medium);
+  --ds-links-typography-line-height-default: var(--semantic-typography-line-height-normal);
+  --ds-links-typography-line-height-tight: var(--semantic-typography-line-height-tight);
+  --ds-links-typography-line-height-relaxed: var(--semantic-typography-line-height-loose);
+
+  /* === Motion Tokens === */
+  --ds-links-motion-duration-fast: var(--core-motion-duration-short);
+  --ds-links-motion-duration-normal: var(--core-motion-duration-medium);
+  --ds-links-motion-duration-slow: var(--core-motion-duration-long);
+  --ds-links-motion-easing-standard: var(--core-motion-easing-standard);
+  --ds-links-motion-easing-decelerate: var(--core-motion-easing-emphasized-out);
+  --ds-links-motion-easing-accelerate: var(--core-motion-easing-emphasized-in);
+
+  /* === Border Tokens === */
+  --ds-links-border-width-default: var(--core-shape-border-width-hairline);
+  --ds-links-border-width-thick: var(--core-shape-border-width-hairline);
+  --ds-links-border-style-default: var(--core-shape-border-style-solid);
+  --ds-links-border-style-dashed: var(--core-shape-border-style-dashed);
+  --ds-links-border-style-dotted: var(--core-shape-border-style-dotted);
+
+  /* === Animation Tokens === */
+  --ds-links-animation-stagger-default: var(--core-motion-stagger-sm);
+  --ds-links-animation-stagger-fast: var(--core-motion-stagger-xs);
+  --ds-links-animation-stagger-slow: var(--core-motion-stagger-slow);
+  --ds-links-animation-duration-default: var(--core-motion-duration-long);
+  --ds-links-animation-duration-fast: var(--core-motion-duration-medium0);
+  --ds-links-animation-duration-slow: var(--core-motion-duration-long0);
+}

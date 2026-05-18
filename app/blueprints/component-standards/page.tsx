@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import components from './components-transformed.json';
-import styles from './page.module.scss';
+import styles from './page.module.css';
 
 const ComponentStandardsPage: React.FC = () => {
   return (

@@ -2,7 +2,7 @@
 
 import React, { ReactNode, useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import styles from './PageTransition.module.scss';
+import './PageTransition.css';
 
 interface PageTransitionProps {
   children: ReactNode;
@@ -96,10 +96,10 @@ export function PageTransition({
   }
 
   const transitionClasses = [
-    styles.pageTransition,
-    shouldAnimate && styles.enabled,
-    isTransitioning && styles.transitioning,
-    !supportsViewTransitions && shouldAnimate && styles.fallback,
+    'pageTransition',
+    shouldAnimate && 'enabled',
+    isTransitioning && 'transitioning',
+    !supportsViewTransitions && shouldAnimate && 'fallback',
     className,
   ]
     .filter(Boolean)
@@ -107,6 +107,7 @@ export function PageTransition({
 
   return (
     <div
+      data-ds-component="PageTransition"
       className={transitionClasses}
       data-transition-name={transitionName || 'main-content'}
       data-transition-duration={duration}

@@ -1,6 +1,6 @@
 'use client';
 import * as React from 'react';
-import styles from './Divider.module.scss';
+import './Divider.css';
 
 export interface DividerProps extends React.HTMLAttributes<HTMLHRElement> {
   /** Visual orientation of the divider */
@@ -33,8 +33,9 @@ export const Divider = React.forwardRef<HTMLHRElement, DividerProps>(
     return (
       <hr
         ref={ref}
+        data-ds-component="Divider"
         data-slot="divider"
-        className={[styles.divider, styles[orientation], className]
+        className={['divider', orientation, className]
           .filter(Boolean)
           .join(' ')}
         role={decorative ? 'presentation' : 'separator'}

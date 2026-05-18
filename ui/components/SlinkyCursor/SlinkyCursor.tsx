@@ -1,7 +1,7 @@
 'use client';
 import { useInteraction } from '@/context';
 import React, { useCallback, useEffect, useRef } from 'react';
-import styles from './SlinkyCursor.module.scss';
+import './SlinkyCursor.css';
 
 export interface CursorSettings {
   size: number;
@@ -71,10 +71,10 @@ const SlinkyCursor: React.FC = () => {
     const pest = pestRef.current;
     if (pest) {
       if (mouse.isPressed) {
-        pest.classList.add(styles.active);
+        pest.classList.add('active');
         settings.current.size = 32;
       } else {
-        pest.classList.remove(styles.active);
+        pest.classList.remove('active');
         settings.current.size = 40;
       }
     }
@@ -99,7 +99,8 @@ const SlinkyCursor: React.FC = () => {
   return (
     <div
       ref={pestRef}
-      className={styles.pest}
+      data-ds-component="Slinkycursor"
+      className="pest"
       style={{ position: 'absolute', pointerEvents: 'none' }}
     ></div>
   );

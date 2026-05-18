@@ -6,7 +6,7 @@ import { ToastTitle } from './slots/ToastTitle';
 import { ToastDescription } from './slots/ToastDescription';
 import { ToastAction } from './slots/ToastAction';
 import { ToastClose } from './slots/ToastClose';
-import styles from './Toast.module.scss';
+import './Toast.css';
 
 export interface ToastItemProps extends React.HTMLAttributes<HTMLDivElement> {
   id: ToastId;
@@ -25,10 +25,10 @@ export const ToastItem = React.forwardRef<HTMLDivElement, ToastItemProps>(
       <div
         ref={ref}
         className={[
-          styles.item,
-          styles[`variant-${rec.variant}` as const] ?? '',
-          rec.state === 'entering' ? styles.entering : '',
-          rec.state === 'leaving' ? styles.leaving : '',
+          'item',
+          `variant-${rec.variant}`,
+          rec.state === 'entering' ? 'entering' : '',
+          rec.state === 'leaving' ? 'leaving' : '',
           className,
         ]
           .filter(Boolean)
@@ -46,7 +46,7 @@ export const ToastItem = React.forwardRef<HTMLDivElement, ToastItemProps>(
             {rec.description && (
               <ToastDescription>{rec.description}</ToastDescription>
             )}
-            <div data-slot="toast-row" className={styles.row}>
+            <div data-slot="toast-row" className="row">
               {rec.action && <ToastAction action={rec.action} />}
               {rec.dismissible && <ToastClose onClick={() => dismiss(id)} />}
             </div>

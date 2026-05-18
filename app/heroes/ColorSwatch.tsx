@@ -1,5 +1,5 @@
 import { calculateContrast } from '@/utils/helpers/colorHelpers';
-import Style from './swatches.module.scss';
+import Style from './swatches.module.css';
 type ColorSwatchProps = {
   token: string;
   value: string;

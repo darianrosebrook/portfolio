@@ -1,0 +1,26 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Status/Status.tokens.json
+ */
+[data-ds-component="Status"] {
+  /* === Color Tokens === */
+  --ds-status-color-background-default: var(--semantic-color-background-primary);
+  --ds-status-color-background-hover: var(--semantic-color-background-hover);
+  --ds-status-color-background-active: var(--semantic-color-background-active);
+  --ds-status-color-background-disabled: var(--semantic-color-background-disabled);
+  --ds-status-color-foreground-primary: var(--semantic-color-foreground-primary);
+  --ds-status-color-foreground-secondary: var(--semantic-color-foreground-secondary);
+  --ds-status-color-foreground-accent: var(--semantic-color-foreground-accent);
+  --ds-status-color-foreground-disabled: var(--semantic-color-foreground-disabled);
+  --ds-status-color-border-default: var(--semantic-color-border-primary);
+  --ds-status-color-border-hover: var(--semantic-color-border-bold);
+  --ds-status-color-border-accent: var(--semantic-color-border-accent);
+  --ds-status-color-border-disabled: var(--semantic-color-border-disabled);
+
+  /* === Size Tokens === */
+  --ds-status-size-radius-default: var(--core-shape-radius-full);
+  --ds-status-size-padding-default: var(--core-spacing-size-04);
+  --ds-status-size-border-default: var(--core-shape-border-width-hairline);
+
+  /* === Typography Tokens === */
+  --ds-status-typography-line-height: var(--semantic-typography-line-height-collapse);
+}

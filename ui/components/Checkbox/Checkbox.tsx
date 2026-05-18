@@ -10,7 +10,7 @@
  */
 'use client';
 import React, { useId } from 'react';
-import styles from './Checkbox.module.scss';
+import './Checkbox.css';
 
 export type CheckboxSize = 'sm' | 'md' | 'lg';
 
@@ -67,14 +67,15 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
 
     return (
       <div
-        className={`${styles.checkboxWrapper} ${className}`}
+        data-ds-component="Checkbox"
+        className={`checkboxWrapper ${size} ${className}`}
         data-slot="checkbox"
       >
         <input
           ref={inputRef}
           type="checkbox"
           id={id}
-          className={`${styles.checkbox} ${styles[`checkbox--${size}`]}`}
+          className="checkbox"
           checked={checked}
           defaultChecked={defaultChecked}
           disabled={disabled}
@@ -86,13 +87,13 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
           {...rest}
         />
         <div
-          className={styles.checkboxIndicator}
+          className="indicator"
           aria-hidden="true"
           data-slot="checkbox-indicator"
         >
           {indeterminate ? (
             <svg
-              className={styles.indeterminateIcon}
+              className="indeterminateIcon"
               viewBox="0 0 16 16"
               fill="none"
             >
@@ -104,7 +105,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
               />
             </svg>
           ) : (
-            <svg className={styles.checkIcon} viewBox="0 0 16 16" fill="none">
+            <svg className="checkIcon" viewBox="0 0 16 16" fill="none">
               <path
                 d="M3 8l3 3 7-7"
                 stroke="currentColor"

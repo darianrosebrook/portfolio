@@ -1,0 +1,21 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Shuttle/Shuttle.tokens.json
+ */
+[data-ds-component="Shuttle"] {
+  /* === Color Tokens === */
+  --ds-shuttle-color-background-default: var(--semantic-color-background-secondary);
+  --ds-shuttle-color-foreground-primary: var(--semantic-color-foreground-primary);
+  --ds-shuttle-color-foreground-secondary: var(--semantic-color-foreground-secondary);
+  --ds-shuttle-color-border-default: var(--semantic-color-border-light);
+  --ds-shuttle-color-border-accent: var(--semantic-color-border-accent);
+
+  /* === Size Tokens === */
+  --ds-shuttle-size-padding-default: var(--core-spacing-size-07);
+  --ds-shuttle-size-radius-default: var(--core-shape-radius-medium);
+
+  /* === Elevation Tokens === */
+  --ds-shuttle-elevation-default: var(--semantic-elevation-default);
+
+  /* === Overlay Tokens === */
+  --ds-shuttle-overlay-image-overlay: var(--semantic-color-background-image-overlay);
+}

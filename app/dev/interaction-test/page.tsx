@@ -17,7 +17,7 @@ import {
 } from '@/ui/modules/FontInspector/FontInspector';
 import { SymbolCanvasSVG } from '@/ui/modules/FontInspector/SymbolCanvasSVG';
 import { useCallback, useEffect, useState } from 'react';
-import styles from './page.module.scss';
+import styles from './page.module.css';
 
 export const dynamic = 'force-dynamic';
 

@@ -16,7 +16,7 @@ import {
   EASING_PRESETS,
   ANIMATION_DURATIONS,
 } from '@/utils/animation';
-import styles from './AnimatedSection.module.scss';
+import './AnimatedSection.css';
 
 // Register ScrollTrigger plugin
 if (typeof window !== 'undefined') {
@@ -223,7 +223,7 @@ export const AnimatedSection = React.forwardRef<
                   ref: (el: HTMLElement | null) => {
                     if (el) childrenRef.current[index] = el;
                   },
-                  className: [childProps.className, styles.animatedChild]
+                  className: [childProps.className, 'animatedChild']
                     .filter(Boolean)
                     .join(' '),
                   style: {
@@ -242,7 +242,8 @@ export const AnimatedSection = React.forwardRef<
       Component,
       {
         ref: setRefs,
-        className: [styles.animatedSection, className]
+        'data-ds-component': 'AnimatedSection',
+        className: ['animatedSection', className]
           .filter(Boolean)
           .join(' '),
         style: {

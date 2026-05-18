@@ -1,0 +1,140 @@
+@import "./Image.tokens.css";
+
+/*
+ * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Scoped to [data-ds-component="Image"] on the root element.
+ * Intentionally unlayered — see Button.css for the cascade rationale.
+ */
+[data-ds-component="Image"] {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+
+  /* Size variants — applied to root */
+  &.xs {
+    block-size: var(--ds-image-size-xs);
+    inline-size: var(--ds-image-size-xs);
+  }
+
+  &.sm {
+    block-size: var(--ds-image-size-sm);
+    inline-size: var(--ds-image-size-sm);
+  }
+
+  &.md {
+    block-size: var(--ds-image-size-md);
+    inline-size: var(--ds-image-size-md);
+  }
+
+  &.lg {
+    block-size: var(--ds-image-size-lg);
+    inline-size: var(--ds-image-size-lg);
+  }
+
+  &.xl {
+    block-size: var(--ds-image-size-xl);
+    inline-size: var(--ds-image-size-xl);
+  }
+
+  &.full {
+    inline-size: 100%;
+  }
+
+  /* Radius variants — applied to root */
+  &.radius-none {
+    border-radius: var(--ds-image-radius-none);
+  }
+
+  &.radius-sm {
+    border-radius: var(--ds-image-radius-sm);
+  }
+
+  &.radius-md {
+    border-radius: var(--ds-image-radius-md);
+  }
+
+  &.radius-lg {
+    border-radius: var(--ds-image-radius-lg);
+  }
+
+  &.radius-full {
+    border-radius: var(--ds-image-radius-full);
+  }
+
+  /* aspectRatio modifier changes child image behavior */
+  &.aspectRatio .image {
+    block-size: 100%;
+    inline-size: 100%;
+  }
+
+  /* Child elements */
+  .image {
+    display: block;
+    transition: opacity 0.2s ease;
+    block-size: auto;
+    max-inline-size: 100%;
+
+    &.loading {
+      opacity: 0.6;
+    }
+
+    /* Hide error state when image is present */
+    &:not(.error) ~ .errorState {
+      display: none;
+    }
+
+    /* Hide placeholder when image is loaded */
+    &:not(.loading) ~ .placeholder {
+      display: none;
+    }
+  }
+
+  .placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--ds-image-color-background-default);
+    color: var(--ds-image-color-foreground-secondary);
+  }
+
+  .placeholderIcon {
+    background: currentcolor;
+    opacity: 0.5;
+    block-size: var(--ds-image-size-icon);
+    inline-size: var(--ds-image-size-icon);
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'%3E%3Cpath stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m15 8 5 5-5 5M21 13H3'/%3E%3C/svg%3E")
+      no-repeat center;
+    mask-size: contain;
+  }
+
+  .errorState {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    background: var(--ds-image-color-background-error);
+    color: var(--ds-image-color-foreground-error);
+    text-align: center;
+  }
+
+  .errorIcon {
+    background: currentcolor;
+    opacity: 0.7;
+    block-size: var(--ds-image-size-icon);
+    inline-size: var(--ds-image-size-icon);
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'%3E%3Cpath stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z'/%3E%3C/svg%3E")
+      no-repeat center;
+    mask-size: contain;
+  }
+
+  .errorText {
+    opacity: 0.8;
+    font-size: var(--ds-image-typography-error-font-size);
+  }
+}

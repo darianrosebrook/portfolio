@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
-import Style from './swatches.module.scss';
+import Style from './swatches.module.css';
 import { useInteraction } from '@/context';
 import { gsap } from 'gsap';
 import { linearInterpolation } from '@/utils/helpers';

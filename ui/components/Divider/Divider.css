@@ -1,0 +1,22 @@
+@import "./Divider.tokens.css";
+
+[data-ds-component="Divider"] {
+  &.divider {
+    flex-shrink: 0;
+    margin: 0;
+    background-color: var(--ds-divider-color-default);
+    border: none;
+  }
+
+  &.horizontal {
+    margin-block: var(--ds-divider-spacing-margin);
+    block-size: var(--ds-divider-size-thickness);
+    inline-size: 100%;
+  }
+
+  &.vertical {
+    margin-inline: var(--ds-divider-spacing-margin);
+    block-size: 100%;
+    inline-size: var(--ds-divider-size-thickness);
+  }
+}

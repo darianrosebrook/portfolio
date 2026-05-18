@@ -1,0 +1,219 @@
+@import "./Command.tokens.css";
+
+[data-ds-component="Command"] {
+  &.root {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    width: 100%;
+    max-width: var(--ds-command-size-max-width);
+    background-color: var(--ds-command-color-background);
+    border: var(--ds-command-border-width) solid var(--ds-command-color-border);
+    border-radius: var(--ds-command-border-radius);
+    box-shadow: var(--ds-command-shadow);
+  }
+
+  .overlay {
+    position: fixed;
+    inset: 0;
+    z-index: var(--ds-command-z-index-overlay);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: var(--ds-command-spacing-dialog-padding);
+    background-color: var(--ds-command-color-overlay);
+  }
+
+  .dialog {
+    overflow: hidden;
+    width: 100%;
+    max-width: var(--ds-command-size-max-width);
+    background-color: var(--ds-command-color-background);
+    border: var(--ds-command-border-width) solid var(--ds-command-color-border);
+    border-radius: var(--ds-command-border-radius);
+    box-shadow: var(--ds-command-shadow);
+    animation: commandDialogIn var(--ds-command-motion-duration)
+      var(--ds-command-motion-easing);
+    margin-block-start: var(--ds-command-spacing-dialog-margin-top);
+  }
+
+  .inputWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: var(--ds-command-spacing-input-padding);
+    border-block-end: var(--ds-command-border-width) solid
+      var(--ds-command-color-border-light);
+
+    .searchIcon {
+      position: absolute;
+      width: var(--ds-command-size-icon);
+      height: var(--ds-command-size-icon);
+      color: var(--ds-command-color-text-muted);
+      pointer-events: none;
+      inset-inline-start: var(--ds-command-spacing-input-icon-offset);
+    }
+
+    .input {
+      width: 100%;
+      padding: 0 var(--ds-command-spacing-input-padding-x);
+      background: none;
+      border: none;
+      outline: none;
+      color: var(--ds-command-color-text);
+      font-size: var(--ds-command-text-size);
+      line-height: var(--ds-command-text-line-height);
+      padding-inline-start: var(--ds-command-spacing-input-padding-left);
+
+      &::placeholder {
+        color: var(--ds-command-color-text-muted);
+      }
+    }
+  }
+
+  .list {
+    overflow-y: auto;
+    max-height: var(--ds-command-size-max-height);
+    padding: var(--ds-command-spacing-list-padding);
+
+    .empty {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: var(--ds-command-spacing-empty-padding);
+      color: var(--ds-command-color-text-muted);
+      font-size: var(--ds-command-text-size-small);
+      text-align: center;
+    }
+  }
+
+  .items {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .group {
+    &:not(:first-child) {
+      margin-block-start: var(--ds-command-spacing-group-gap);
+    }
+
+    .groupHeading {
+      padding: var(--ds-command-spacing-group-heading-padding);
+      color: var(--ds-command-color-text-muted);
+      font-weight: var(--ds-command-text-weight-medium);
+      font-size: var(--ds-command-text-size-small);
+      line-height: var(--ds-command-text-line-height-tight);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .groupItems {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .item {
+    display: flex;
+    gap: var(--ds-command-spacing-item-gap);
+    align-items: center;
+    padding: var(--ds-command-spacing-item-padding);
+    border-radius: var(--ds-command-border-radius-item);
+    outline: none;
+    color: var(--ds-command-color-text);
+    transition: background-color var(--ds-command-motion-duration)
+      var(--ds-command-motion-easing);
+    cursor: pointer;
+
+    &:hover,
+    &.selected {
+      background-color: var(--ds-command-color-background-hover);
+    }
+
+    &.disabled {
+      opacity: var(--ds-command-opacity-disabled);
+      cursor: not-allowed;
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+
+    .itemIcon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: var(--ds-command-size-icon);
+      height: var(--ds-command-size-icon);
+      color: var(--ds-command-color-text-muted);
+    }
+
+    .itemContent {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      min-width: 0;
+
+      .itemLabel {
+        color: inherit;
+        font-weight: var(--ds-command-text-weight);
+        font-size: var(--ds-command-text-size);
+        line-height: var(--ds-command-text-line-height);
+      }
+
+      .itemDescription {
+        color: var(--ds-command-color-text-muted);
+        font-size: var(--ds-command-text-size-small);
+        line-height: var(--ds-command-text-line-height-tight);
+        margin-block-start: var(--ds-command-spacing-description-gap);
+      }
+    }
+  }
+
+  .separator {
+    height: var(--ds-command-border-width);
+    margin: var(--ds-command-spacing-separator-margin) 0;
+    background-color: var(--ds-command-color-border-light);
+  }
+}
+
+@keyframes commandDialogIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@media (width <= 640px) {
+  [data-ds-component="Command"] {
+    .overlay {
+      align-items: flex-start;
+      padding: var(--ds-command-spacing-mobile-padding);
+    }
+
+    .dialog {
+      margin-block-start: var(--ds-command-spacing-mobile-margin-top);
+    }
+
+    .list {
+      max-height: var(--ds-command-size-max-height-mobile);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-ds-component="Command"] {
+    .dialog {
+      animation: none;
+    }
+
+    .item {
+      transition: none;
+    }
+  }
+}

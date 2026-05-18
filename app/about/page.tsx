@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Avatar from '@/ui/components/Avatar';
 import Button from '@/ui/components/Button';
-import styles from './page.module.scss';
+import styles from './page.module.css';
 
 export const metadata: Metadata = {
   title: 'About | Darian Rosebrook',

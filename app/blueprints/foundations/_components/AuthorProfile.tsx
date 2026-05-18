@@ -2,7 +2,7 @@
 
 import type { AuthorMetadata } from '@/types/foundationContent';
 import Link from 'next/link';
-import styles from './AuthorProfile.module.scss';
+import styles from './AuthorProfile.module.css';
 
 interface AuthorProfileProps {
   author: AuthorMetadata;

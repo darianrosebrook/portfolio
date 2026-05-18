@@ -1,0 +1,319 @@
+@import "./Button.tokens.css";
+
+/*
+ * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Scoped to [data-ds-component="Button"] on the root element. Class names
+ * inside are plain semantic names (.button, .primary, .small, .spinner)
+ * — no CSS Modules hashing. The data-attribute + class composite selector
+ * keeps consuming app styles from accidentally overriding.
+ *
+ * Intentionally NOT wrapped in @layer components. Unlayered rules beat
+ * the unlayered CSS reset (* { padding: 0; min-height: 0; }) via
+ * specificity. A layered rule loses against unlayered ones regardless
+ * of selector weight, so layering here would let the reset zero out
+ * the button's padding/min-height.
+ */
+[data-ds-component="Button"] {
+  &.button {
+    display: inline-flex;
+    gap: var(--ds-button-size-gap-default);
+    justify-content: center;
+    align-items: center;
+
+    width: fit-content;
+    min-width: var(--ds-button-size-min-medium);
+    min-height: var(--ds-button-size-min-medium);
+    margin: 0;
+    padding: var(--ds-button-size-padding-small) var(--ds-button-size-padding-small);
+
+    background: none;
+    background-color: var(--ds-button-color-background-default);
+    border: none;
+    border-radius: var(--ds-button-size-radius);
+    color: var(--ds-button-color-foreground-default);
+
+    font: inherit;
+    font-weight: var(--ds-button-text-weight, 500);
+    font-size: var(--ds-button-text-size-medium);
+    line-height: normal;
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+      transform var(--ds-button-motion-duration-fast)
+        var(--ds-button-motion-easing-standard),
+      background-color var(--ds-button-motion-duration-fast)
+        var(--ds-button-motion-easing-standard),
+      border-color var(--ds-button-motion-duration-fast)
+        var(--ds-button-motion-easing-standard),
+      color var(--ds-button-motion-duration-fast)
+        var(--ds-button-motion-easing-standard);
+
+    cursor: pointer;
+    contain: layout style paint;
+
+    &:active {
+      transform: scale(var(--ds-button-motion-scale-pressed));
+    }
+
+    &.isLoading {
+      pointer-events: none;
+    }
+
+    &:disabled {
+      background-color: var(--ds-button-color-background-disabled);
+      color: var(--ds-button-color-foreground-disabled);
+      cursor: not-allowed;
+    }
+
+    &:hover {
+      background-color: var(--ds-button-color-background-hover);
+      text-decoration: none;
+    }
+
+    &:focus {
+      border-radius: var(--ds-button-size-radius);
+      outline: none;
+    }
+
+    &:is(:focus-visible, :focus) {
+      outline: var(--ds-button-focus-outline-width) solid
+        var(--ds-button-focus-outline-color);
+      outline-offset: var(--ds-button-focus-outline-offset);
+    }
+
+    &.small {
+      gap: var(--ds-button-size-gap-small, 0.5rem);
+      min-width: var(--ds-button-size-min-small);
+      min-height: var(--ds-button-size-min-small);
+      padding: var(--ds-button-size-padding-small, var(--ds-button-size-gap-small));
+      font-size: var(--ds-button-text-size-small);
+    }
+
+    &.medium {
+      gap: var(--ds-button-size-gap-default);
+      min-width: var(--ds-button-size-min-medium);
+      min-height: var(--ds-button-size-min-medium);
+      padding: var(--ds-button-size-padding-small) var(--ds-button-size-padding-large);
+      font-size: var(--ds-button-text-size-medium);
+    }
+
+    &.large {
+      gap: var(--ds-button-size-gap-large, 0.75rem);
+      min-width: var(--ds-button-size-min-large);
+      min-height: var(--ds-button-size-min-large);
+      padding: var(--ds-button-size-padding-large, var(--ds-button-size-gap-large));
+      font-size: var(--ds-button-text-size-large);
+    }
+
+    &.primary {
+      background-color: var(--ds-button-color-background-primary);
+      border: var(--ds-button-size-border) solid var(--ds-button-color-border-primary);
+      color: var(--ds-button-color-foreground-primary);
+
+      &:hover {
+        background-color: color-mix(
+          in srgb,
+          var(--ds-button-color-background-primary) 85%,
+          white
+        );
+        border-color: color-mix(
+          in srgb,
+          var(--ds-button-color-border-primary) 85%,
+          white
+        );
+        color: var(--ds-button-color-foreground-primary-hover);
+      }
+
+      &:active {
+        background-color: color-mix(
+          in srgb,
+          var(--ds-button-color-background-primary) 85%,
+          black
+        );
+        border-color: color-mix(
+          in srgb,
+          var(--ds-button-color-border-primary) 85%,
+          black
+        );
+        color: var(--ds-button-color-foreground-primary-active);
+      }
+    }
+
+    &.secondary {
+      background-color: var(--ds-button-color-background-secondary);
+      border: var(--ds-button-size-border) solid var(--ds-button-color-border-secondary);
+      color: var(--ds-button-color-foreground-secondary);
+
+      &:hover {
+        background-color: var(--ds-button-color-background-secondary-hover);
+        border-color: var(--ds-button-color-border-secondary-hover);
+        color: var(--ds-button-color-foreground-secondary-hover);
+      }
+
+      &:active {
+        background-color: var(--ds-button-color-background-secondary-active);
+        border-color: var(--ds-button-color-border-secondary-active);
+        color: var(--ds-button-color-foreground-secondary-active);
+      }
+    }
+
+    &.tertiary {
+      background-color: var(--ds-button-color-background-tertiary);
+      border: var(--ds-button-size-border) solid var(--ds-button-color-border-tertiary);
+      color: var(--ds-button-color-foreground-tertiary);
+
+      &:hover {
+        background-color: var(--ds-button-color-background-tertiary-hover);
+        border-color: var(--ds-button-color-border-tertiary-hover);
+        color: var(--ds-button-color-foreground-tertiary-hover);
+      }
+
+      &:active {
+        background-color: var(--ds-button-color-background-tertiary-active);
+        border-color: var(--ds-button-color-border-tertiary-active);
+        color: var(--ds-button-color-foreground-tertiary-active);
+      }
+    }
+
+    &.ghost {
+      background-color: transparent;
+      border: var(--ds-button-size-border) solid transparent;
+      color: var(--ds-button-color-foreground-primary);
+
+      &:hover {
+        background-color: var(--ds-button-color-background-hover);
+        color: var(--ds-button-color-foreground-hover);
+      }
+
+      &:active {
+        background-color: var(--ds-button-color-background-active);
+        color: var(--ds-button-color-foreground-active);
+      }
+    }
+
+    &.destructive {
+      background-color: var(--ds-button-color-background-destructive);
+      border: var(--ds-button-size-border) solid
+        var(--ds-button-color-border-destructive);
+      color: var(--ds-button-color-foreground-destructive);
+
+      &:hover {
+        background-color: var(--ds-button-color-background-destructive-hover);
+        border-color: var(--ds-button-color-border-destructive-hover);
+      }
+
+      &:active {
+        background-color: var(--ds-button-color-background-destructive-active);
+        border-color: var(--ds-button-color-border-destructive-active);
+      }
+    }
+
+    &.outline {
+      background-color: transparent;
+      border: var(--ds-button-size-border) solid var(--ds-button-color-border-secondary);
+      color: var(--ds-button-color-foreground-secondary);
+
+      &:hover {
+        background-color: var(--ds-button-color-background-hover);
+        border-color: var(--ds-button-color-border-hover);
+        color: var(--ds-button-color-foreground-hover);
+      }
+
+      &:active {
+        background-color: var(--ds-button-color-background-active);
+        border-color: var(--ds-button-color-border-active);
+        color: var(--ds-button-color-foreground-active);
+      }
+    }
+
+    .spinner {
+      display: none;
+      width: var(--ds-button-size-spinner-width);
+      height: var(--ds-button-size-spinner-height);
+      border: var(--ds-button-size-spinner-border-width) solid
+        var(--ds-button-color-spinner-border);
+      border-top-color: var(--ds-button-color-spinner-border-accent);
+      border-radius: var(--ds-button-size-spinner-border-radius);
+      animation: button-spinner-rotate var(--ds-button-motion-duration-spinner)
+        linear infinite;
+    }
+
+    .loadingText {
+      opacity: 0.8;
+    }
+  }
+}
+
+/* Container queries for responsive button sizing */
+@supports (container-type: inline-size) {
+  [data-ds-component="Button"] {
+    &.button {
+      @container (max-width: 12rem) {
+        gap: calc(var(--ds-button-size-gap-default) * 0.75);
+        min-width: calc(var(--ds-button-size-min-medium) * 0.9);
+        min-height: calc(var(--ds-button-size-min-medium) * 0.9);
+        padding: calc(var(--ds-button-size-padding-small) * 0.75);
+        font-size: calc(var(--ds-button-text-size-medium) * 0.9);
+
+        &.small {
+          min-width: calc(var(--ds-button-size-min-small) * 0.9);
+          min-height: calc(var(--ds-button-size-min-small) * 0.9);
+          padding: calc(
+            var(--ds-button-size-padding-small, var(--ds-button-size-gap-small)) * 0.75
+          );
+          font-size: calc(var(--ds-button-text-size-small) * 0.9);
+        }
+
+        &.large {
+          min-width: calc(var(--ds-button-size-min-large) * 0.9);
+          min-height: calc(var(--ds-button-size-min-large) * 0.9);
+          padding: calc(
+            var(--ds-button-size-padding-large, var(--ds-button-size-gap-large)) * 0.75
+          );
+          font-size: calc(var(--ds-button-text-size-large) * 0.9);
+        }
+      }
+
+      @container (max-width: 8rem) {
+        gap: calc(var(--ds-button-size-gap-default) * 0.5);
+        min-width: calc(var(--ds-button-size-min-medium) * 0.8);
+        min-height: calc(var(--ds-button-size-min-medium) * 0.8);
+        padding: calc(var(--ds-button-size-padding-small) * 0.5);
+        font-size: calc(var(--ds-button-text-size-medium) * 0.85);
+
+        &.small,
+        &.medium,
+        &.large {
+          min-width: calc(var(--ds-button-size-min-small) * 0.8);
+          min-height: calc(var(--ds-button-size-min-small) * 0.8);
+          padding: calc(
+            var(--ds-button-size-padding-small, var(--ds-button-size-gap-small)) * 0.5
+          );
+          font-size: calc(var(--ds-button-text-size-small) * 0.85);
+        }
+      }
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-ds-component="Button"] {
+    &.button {
+      transition: none;
+
+      &:active {
+        transform: none;
+      }
+
+      .spinner {
+        animation: none;
+      }
+    }
+  }
+}
+
+@keyframes button-spinner-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,209 @@
+@import "./Card.tokens.css";
+
+/*
+ * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Note: a handful of references (--font-weight-*, --font-size-*) are
+ * global semantic typography tokens and intentionally not prefixed
+ * with --ds-card-. Only component-local vars use the new prefix.
+ */
+[data-ds-component="Card"] {
+  display: flex;
+  flex-direction: column;
+  padding: var(--ds-card-size-padding-default);
+  background-color: var(--ds-card-color-background-default);
+  border-radius: var(--ds-card-size-radius-default);
+  color: var(--ds-card-color-foreground-primary);
+  transition: all var(--ds-card-motion-duration)
+    var(--ds-card-motion-easing);
+
+  contain: layout style paint;
+  container-type: inline-size;
+
+  @container (max-width: 20rem) {
+    padding: calc(var(--ds-card-size-padding-default) * 0.75);
+  }
+
+  @container (min-width: 40rem) {
+    .actions {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+
+    &.interactive:hover {
+      transform: none;
+    }
+
+    &.interactive:active {
+      transform: none;
+    }
+  }
+
+  &.default {
+    border: 1px solid var(--ds-card-color-border-default);
+  }
+
+  &.elevated {
+    border: none;
+    box-shadow: var(--ds-card-elevation-default);
+  }
+
+  &.outlined {
+    background-color: transparent;
+    border: 2px solid var(--ds-card-color-border-default);
+  }
+
+  &.interactive {
+    cursor: pointer;
+
+    &:hover {
+      background-color: color-mix(
+        in srgb,
+        var(--ds-card-color-background-default) 90%,
+        var(--ds-card-color-background-hover) 10%
+      );
+      box-shadow: var(--ds-card-elevation-hover);
+      transform: translateY(var(--ds-card-motion-hover-offset, -0.125rem));
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--ds-card-color-border-accent);
+      outline-offset: 2px;
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  .header {
+    color: var(--ds-card-color-foreground-primary);
+    margin-block-end: var(--ds-card-size-padding-default);
+
+    &:has(.badge) {
+      display: flex;
+      gap: var(--ds-card-size-gap-default);
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  .content {
+    color: var(--ds-card-color-foreground-primary);
+    line-height: 1.5;
+  }
+
+  .title {
+    margin: 0;
+    color: var(--ds-card-color-foreground-primary);
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-heading-4);
+    line-height: var(--ds-card-typography-line-height-heading);
+  }
+
+  .description {
+    margin: 0;
+    color: var(--ds-card-color-foreground-secondary);
+    font-size: var(--font-size-body-2);
+    line-height: var(--ds-card-typography-line-height-normal);
+  }
+
+  .media {
+    margin-block-end: var(--ds-card-size-padding-default);
+
+    img,
+    video {
+      width: 100%;
+      height: auto;
+      border-radius: var(--ds-card-size-radius-medium, 0.5rem);
+    }
+  }
+
+  .footer {
+    color: var(--ds-card-color-foreground-secondary);
+    border-block-start: 1px solid var(--ds-card-color-border-default);
+    margin-block-start: var(--ds-card-size-padding-default);
+    padding-block-start: var(--ds-card-size-padding-default);
+  }
+
+  .actions {
+    display: flex;
+    gap: var(--ds-card-size-gap-default);
+    justify-content: flex-end;
+    align-items: center;
+    margin-block-start: var(--ds-card-size-padding-default);
+  }
+
+  .link {
+    display: inline-flex;
+    gap: var(--ds-card-size-gap-small);
+    align-items: center;
+    color: var(--ds-card-color-foreground-link);
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--ds-card-color-border-accent);
+      outline-offset: 2px;
+    }
+  }
+
+  .note {
+    padding: var(--ds-card-size-padding-note);
+    background-color: var(--ds-card-color-background-secondary);
+    border: 1px solid var(--ds-card-color-border-default);
+    border-radius: var(--ds-card-size-radius-medium);
+    color: var(--ds-card-color-foreground-primary);
+    font-style: italic;
+    font-size: var(--font-size-body-3);
+    margin-block-start: var(--ds-card-size-padding-default);
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--ds-card-size-padding-badge-y) var(--ds-card-size-padding-badge-x);
+    border-radius: var(--ds-card-size-radius-full);
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-body-3);
+    letter-spacing: 0.025em;
+    text-transform: uppercase;
+
+    &.completed {
+      background-color: var(--ds-card-color-badge-success-background);
+      color: var(--ds-card-color-badge-success-foreground);
+    }
+
+    &.in-progress {
+      background-color: var(--ds-card-color-badge-warning-background);
+      color: var(--ds-card-color-badge-warning-foreground);
+    }
+
+    &.planned {
+      background-color: var(--ds-card-color-badge-info-background);
+      color: var(--ds-card-color-badge-info-foreground);
+    }
+
+    &.deprecated {
+      background-color: var(--ds-card-color-badge-error-background);
+      color: var(--ds-card-color-badge-error-foreground);
+    }
+
+    &.category {
+      background-color: var(--ds-card-color-badge-neutral-background);
+      color: var(--ds-card-color-badge-neutral-foreground);
+    }
+
+    &.complexity {
+      background-color: var(--ds-card-color-badge-accent-background);
+      color: var(--ds-card-color-badge-accent-foreground);
+    }
+  }
+}

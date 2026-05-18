@@ -6,7 +6,7 @@ import { gsap } from 'gsap';
 import { SplitText } from 'gsap/SplitText';
 import { useGSAP } from '@gsap/react';
 import { useFontsLoaded } from '@/hooks/useFontsLoaded';
-import styles from './Links.module.scss';
+import './Links.css';
 
 gsap.registerPlugin(useGSAP, SplitText);
 
@@ -105,15 +105,16 @@ export function AnimatedLink({
     <Link
       ref={rootRef}
       href={href}
-      className={`${styles.root} ${className || ''}`}
+      data-ds-component="Links"
+      className={`root ${className || ''}`}
       onClick={onClick}
       {...props}
     >
-      <span className={styles.maskLine}>
-        <span ref={textRef} className={styles.text}>
+      <span className="maskLine">
+        <span ref={textRef} className="text">
           {children}
         </span>
-        <span ref={cloneRef} className={styles.clone} aria-hidden="true">
+        <span ref={cloneRef} className="clone" aria-hidden="true">
           {children}
         </span>
       </span>

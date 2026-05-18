@@ -1,0 +1,144 @@
+@import "./Spinner.tokens.css";
+
+/*
+ * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Scoped to [data-ds-component="Spinner"] on the root element.
+ * Intentionally unlayered — see Button.css for the cascade rationale.
+ */
+[data-ds-component="Spinner"] {
+  --spinner-dots-delay-leading: -0.2s;
+  --spinner-dots-delay-trailing: 0.2s;
+
+  display: inline-block;
+  vertical-align: middle;
+  block-size: var(--ds-spinner-size-value, var(--ds-spinner-size-md));
+  inline-size: var(--ds-spinner-size-value, var(--ds-spinner-size-md));
+
+  &.inline {
+    vertical-align: baseline;
+  }
+
+  .visual {
+    display: block;
+    block-size: 100%;
+    inline-size: 100%;
+  }
+
+  /* Variant: ring */
+  &[data-variant='ring'] .visual {
+    background: conic-gradient(
+      from 0turn,
+      var(--ds-spinner-color-accent) 0turn 0.25turn,
+      var(--ds-spinner-color-track) 0.25turn 1turn
+    );
+    border-radius: 999px;
+    animation: spin var(--ds-spinner-anim-duration, 800ms) linear infinite;
+    mask: radial-gradient(
+      farthest-side,
+      #00000000 calc(100% - var(--ds-spinner-thickness-value, 3px)),
+      #000000 calc(100% - var(--ds-spinner-thickness-value, 3px))
+    );
+  }
+
+  /* Variant: dots */
+  &[data-variant='dots'] .visual {
+    --spinner-dots-gap-local: var(--ds-spinner-dots-gap, 0.375rem);
+
+    position: relative;
+  }
+
+  &[data-variant='dots'] .visual,
+  &[data-variant='dots'] .visual::before,
+  &[data-variant='dots'] .visual::after {
+    position: absolute;
+    background: var(--ds-spinner-color-accent);
+    border-radius: 999px;
+    transform: translate(-50%, -50%);
+    animation: pulse var(--ds-spinner-anim-duration, 800ms) ease-in-out infinite;
+    block-size: calc(var(--ds-spinner-size-value, 20px) / 6);
+    content: '';
+    inline-size: calc(var(--ds-spinner-size-value, 20px) / 6);
+    inset-block-start: 50%;
+    inset-inline-start: 50%;
+  }
+
+  &[data-variant='dots'] .visual::before {
+    transform: translate(calc(-50% - var(--spinner-dots-gap-local)), -50%);
+    animation-delay: var(--spinner-dots-delay-leading);
+  }
+
+  &[data-variant='dots'] .visual::after {
+    transform: translate(calc(-50% + var(--spinner-dots-gap-local)), -50%);
+    animation-delay: var(--spinner-dots-delay-trailing);
+  }
+
+  /* Variant: bars */
+  &[data-variant='bars'] .visual {
+    position: relative;
+  }
+
+  &[data-variant='bars'] .visual::before {
+    position: absolute;
+    inset: 0;
+    background: conic-gradient(
+      from 0turn,
+      var(--ds-spinner-color-accent) 0 10deg,
+      #00000000 10deg 30deg
+    );
+    animation: spin var(--ds-spinner-anim-duration, 800ms) linear infinite;
+    content: '';
+    mask: radial-gradient(
+      farthest-side,
+      #000000 calc(100% - var(--ds-spinner-thickness-value, 3px)),
+      #00000000
+    );
+  }
+}
+
+@media (prefers-contrast: more) {
+  [data-ds-component="Spinner"][data-variant='ring'] .visual {
+    background: conic-gradient(
+      from 0turn,
+      var(--ds-spinner-color-accent) 0turn 0.25turn,
+      var(--ds-spinner-color-track) 0.25turn 1turn
+    );
+    filter: contrast(1.1) saturate(1.05);
+  }
+
+  [data-ds-component="Spinner"][data-variant='dots'] .visual,
+  [data-ds-component="Spinner"][data-variant='dots'] .visual::before,
+  [data-ds-component="Spinner"][data-variant='dots'] .visual::after {
+    filter: contrast(1.1) saturate(1.05);
+  }
+
+  [data-ds-component="Spinner"][data-variant='bars'] .visual::before {
+    filter: contrast(1.1) saturate(1.05);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-ds-component="Spinner"] .visual,
+  [data-ds-component="Spinner"][data-variant='bars'] .visual::before,
+  [data-ds-component="Spinner"][data-variant='dots'] .visual,
+  [data-ds-component="Spinner"][data-variant='dots'] .visual::before,
+  [data-ds-component="Spinner"][data-variant='dots'] .visual::after {
+    animation: none !important;
+  }
+}

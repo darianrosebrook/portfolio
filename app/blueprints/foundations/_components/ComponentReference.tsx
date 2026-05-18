@@ -3,7 +3,7 @@
 import type { ComponentReference } from '@/types/foundationContent';
 import Link from 'next/link';
 import React from 'react';
-import styles from './ComponentReference.module.scss';
+import styles from './ComponentReference.module.css';
 
 interface ComponentReferenceProps {
   reference: ComponentReference;

@@ -1,0 +1,226 @@
+@import "./Alert.tokens.css";
+
+[data-ds-component="Alert"] {
+  &.alert {
+    & + .alert {
+      margin-block-start: var(--ds-alert-spacing-margin-top);
+    }
+
+    &.inline {
+      display: inline-flex;
+      gap: var(--ds-alert-spacing-gap-small);
+      align-items: baseline;
+      padding: var(--ds-alert-size-inline-padding);
+      background-color: var(--ds-alert-color-background-primary);
+      border-radius: var(--ds-alert-size-inline-radius);
+
+      &.info {
+        color: var(--ds-alert-color-foreground-info);
+      }
+
+      &.warning {
+        color: var(--ds-alert-color-foreground-warning);
+      }
+
+      &.danger {
+        color: var(--ds-alert-color-foreground-danger);
+      }
+
+      &.success {
+        color: var(--ds-alert-color-foreground-success);
+      }
+    }
+
+    &.section {
+      display: grid;
+      grid-template-areas: 'icon title body dismiss';
+      grid-template-columns: auto auto 1fr auto;
+      gap: var(--ds-alert-spacing-padding-default)
+        var(--ds-alert-spacing-padding-horizontal);
+      align-items: baseline;
+      padding: var(--ds-alert-size-section-padding);
+      background-color: var(--ds-alert-color-background-primary);
+      border-radius: var(--ds-alert-size-section-radius);
+      box-shadow: var(--ds-alert-shadow-default);
+      transition:
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
+
+      &:hover {
+        box-shadow: color-mix(
+          in srgb,
+          var(--ds-alert-shadow-default) 80%,
+          transparent 20%
+        );
+      }
+
+      &.info {
+        background: var(--ds-alert-color-background-info-subtle);
+        color: var(--ds-alert-color-foreground-on-info-subtle);
+
+        &:hover {
+          background: color-mix(
+            in srgb,
+            var(--ds-alert-color-background-info-subtle) 95%,
+            white 5%
+          );
+        }
+      }
+
+      &.warning {
+        background: var(--ds-alert-color-background-warning-subtle);
+        color: var(--ds-alert-color-foreground-on-warning-subtle);
+
+        &:hover {
+          background: color-mix(
+            in srgb,
+            var(--ds-alert-color-background-warning-subtle) 95%,
+            white 5%
+          );
+        }
+      }
+
+      &.danger {
+        background: var(--ds-alert-color-background-danger-subtle);
+        color: var(--ds-alert-color-foreground-on-danger-subtle);
+
+        &:hover {
+          background: color-mix(
+            in srgb,
+            var(--ds-alert-color-background-danger-subtle) 95%,
+            white 5%
+          );
+        }
+      }
+
+      &.success {
+        background: var(--ds-alert-color-background-success-subtle);
+        color: var(--ds-alert-color-foreground-on-success-subtle);
+
+        &:hover {
+          background: color-mix(
+            in srgb,
+            var(--ds-alert-color-background-success-subtle) 95%,
+            white 5%
+          );
+        }
+      }
+    }
+
+    &.page {
+      display: grid;
+      grid-template-areas: 'icon title dismiss' 'icon body dismiss';
+      grid-template-columns: auto 1fr auto;
+      gap: var(--ds-alert-spacing-padding-default)
+        var(--ds-alert-spacing-padding-horizontal);
+      align-items: baseline;
+      min-height: var(--ds-alert-spacing-min-height-default);
+      margin: 0 -1rem;
+      padding: var(--ds-alert-size-page-padding);
+      border-radius: var(--ds-alert-size-page-radius);
+      transition: background-color 0.2s ease;
+
+      &.info {
+        background: var(--ds-alert-color-background-info-strong);
+        color: var(--ds-alert-color-foreground-on-color);
+
+        &:hover {
+          background: color-mix(
+            in srgb,
+            var(--ds-alert-color-background-info-strong) 90%,
+            white 10%
+          );
+        }
+      }
+
+      &.warning {
+        background: var(--ds-alert-color-background-warning-strong);
+        color: var(--ds-alert-color-foreground-on-color);
+
+        &:hover {
+          background: color-mix(
+            in srgb,
+            var(--ds-alert-color-background-warning-strong) 90%,
+            white 10%
+          );
+        }
+      }
+
+      &.danger {
+        background: var(--ds-alert-color-background-danger-strong);
+        color: var(--ds-alert-color-foreground-on-color);
+
+        &:hover {
+          background: color-mix(
+            in srgb,
+            var(--ds-alert-color-background-danger-strong) 90%,
+            white 10%
+          );
+        }
+      }
+
+      &.success {
+        background: var(--ds-alert-color-background-success-strong);
+        color: var(--ds-alert-color-foreground-on-color);
+
+        &:hover {
+          background: color-mix(
+            in srgb,
+            var(--ds-alert-color-background-success-strong) 90%,
+            white 10%
+          );
+        }
+      }
+    }
+
+    .icon {
+      display: inline-block;
+      grid-row: span 2;
+      grid-column: span 1;
+      grid-column-start: 1;
+      width: var(--ds-alert-icon-size);
+      height: var(--ds-alert-icon-size);
+    }
+
+    .title {
+      grid-area: title;
+      grid-row: span 1;
+      grid-column: span 1;
+      grid-column-end: -2;
+      font-weight: var(--font-weight-bold);
+      font-size: var(--font-size-06);
+    }
+
+    .body {
+      grid-area: body;
+      grid-row: span 1;
+      grid-column: span 1;
+      grid-column-start: 2;
+      font-size: var(--font-size-05);
+    }
+
+    .dismiss {
+      display: inline-block;
+      grid-area: dismiss;
+      grid-row: span 2;
+      grid-column: span 1;
+      grid-column-end: -1;
+      cursor: pointer;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-ds-component="Alert"] {
+    &.alert {
+      transition: none;
+
+      .icon,
+      .title,
+      .body,
+      .dismiss {
+        transition: none;
+      }
+    }
+  }
+}

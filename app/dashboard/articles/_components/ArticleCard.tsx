@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import styles from '../articles.module.scss';
+import styles from '../articles.module.css';
 
 interface ArticleCardProps {
   article: {

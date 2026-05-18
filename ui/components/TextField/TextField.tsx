@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Input, type InputProps } from '../Input';
 import { Label } from '../Label';
-import styles from './TextField.module.scss';
+import './TextField.css';
 
 export interface TextFieldProps extends Omit<InputProps, 'id'> {
   id?: string;
@@ -34,11 +34,12 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
 
     return (
       <div
+        data-ds-component="Textfield"
         data-slot="text-field"
-        className={[styles.field, className].filter(Boolean).join(' ')}
+        className={['field', className].filter(Boolean).join(' ')}
       >
         {label ? (
-          <Label htmlFor={resolvedId} className={styles.label}>
+          <Label htmlFor={resolvedId}>
             {label}
           </Label>
         ) : null}
@@ -53,7 +54,7 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
           <div
             id={descId}
             data-slot="text-field-description"
-            className={styles.description}
+            className="description"
           >
             {description}
           </div>
@@ -63,7 +64,7 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
             id={errId}
             role="alert"
             data-slot="text-field-error"
-            className={styles.error}
+            className="error"
           >
             {error}
           </div>

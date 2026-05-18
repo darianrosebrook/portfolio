@@ -2,7 +2,7 @@
 
 import React, { useEffect, useCallback, useRef, useState } from 'react';
 import { useBrand, type BrandId } from '@/context/BrandContext';
-import styles from './BrandSwitcher.module.scss';
+import './BrandSwitcher.css';
 
 const MIN_AUTO_CYCLE_INTERVAL_MS = 1000;
 
@@ -156,9 +156,9 @@ export const BrandSwitcher: React.FC<BrandSwitcherProps> = ({
   const densityIndex = densityOptions.indexOf(density);
 
   const containerClasses = [
-    styles.brandSwitcher,
-    compact && styles.compact,
-    sticky && styles.sticky,
+    'brandSwitcher',
+    compact && 'compact',
+    sticky && 'sticky',
     className,
   ]
     .filter(Boolean)
@@ -166,13 +166,13 @@ export const BrandSwitcher: React.FC<BrandSwitcherProps> = ({
 
   if (compact) {
     return (
-      <div ref={containerRef} className={containerClasses} tabIndex={-1}>
-        <div className={styles.swatchRow}>
+      <div ref={containerRef} data-ds-component="BrandSwitcher" className={containerClasses} tabIndex={-1}>
+        <div className="swatchRow">
           {availableBrands.map((brandInfo) => (
             <button
               key={brandInfo.id}
               type="button"
-              className={`${styles.swatch} ${brand === brandInfo.id ? styles.active : ''}`}
+              className={`swatch${brand === brandInfo.id ? ' active' : ''}`}
               style={
                 {
                   '--swatch-color': brandInfo.accentColor,
@@ -186,7 +186,7 @@ export const BrandSwitcher: React.FC<BrandSwitcherProps> = ({
           ))}
         </div>
         {enableKeyboard && (
-          <span className={styles.keyboardHint}>Use arrow keys to switch</span>
+          <span className="keyboardHint">Use arrow keys to switch</span>
         )}
       </div>
     );
@@ -195,6 +195,7 @@ export const BrandSwitcher: React.FC<BrandSwitcherProps> = ({
   return (
     <div
       ref={containerRef}
+      data-ds-component="BrandSwitcher"
       className={containerClasses}
       tabIndex={-1}
       style={
@@ -204,35 +205,35 @@ export const BrandSwitcher: React.FC<BrandSwitcherProps> = ({
       }
     >
       {/* Brand Theme Section */}
-      <div className={styles.sectionCard}>
-        <h2 className={styles.sectionTitle}>Brand Theme</h2>
+      <div className="sectionCard">
+        <h2 className="sectionTitle">Brand Theme</h2>
 
         {/* Selected brand info */}
-        <div className={styles.selectedBrandInfo}>
+        <div className="selectedBrandInfo">
           <div
-            className={styles.selectedBrandDot}
+            className="selectedBrandDot"
             style={{ background: currentBrand?.accentColor }}
           />
           <div>
-            <div className={styles.selectedBrandName}>{currentBrand?.name}</div>
-            <div className={styles.selectedBrandMood}>{currentMood}</div>
+            <div className="selectedBrandName">{currentBrand?.name}</div>
+            <div className="selectedBrandMood">{currentMood}</div>
           </div>
         </div>
 
         {/* Swatch dot grid */}
-        <div className={styles.swatchGrid}>
+        <div className="swatchGrid">
           {availableBrands.map((brandInfo) => (
             <button
               key={brandInfo.id}
               type="button"
-              className={`${styles.swatchBtn} ${brand === brandInfo.id ? styles.selected : ''}`}
+              className={`swatchBtn${brand === brandInfo.id ? " selected" : ""}`}
               onClick={() => setBrand(brandInfo.id)}
               aria-pressed={brand === brandInfo.id}
               aria-label={`Switch to ${brandInfo.name} theme`}
               title={brandInfo.name}
             >
               <span
-                className={styles.swatchDot}
+                className="swatchDot"
                 style={{ background: brandInfo.accentColor }}
               />
             </button>
@@ -241,22 +242,22 @@ export const BrandSwitcher: React.FC<BrandSwitcherProps> = ({
       </div>
 
       {showAutoCycle && (
-        <div className={styles.sectionCard}>
-          <div className={styles.autoCycle}>
-            <label className={styles.autoCycleLabel}>
+        <div className="sectionCard">
+          <div className="autoCycle">
+            <label className="autoCycleLabel">
               <input
                 type="checkbox"
                 checked={isAutoCycling}
                 onChange={(e) => setAutoCycling(e.target.checked)}
-                className={styles.checkbox}
+                className="checkbox"
               />
               <span>Auto-cycle brands</span>
             </label>
             {isAutoCycling && (
-              <div className={styles.intervalControl}>
+              <div className="intervalControl">
                 <label
                   htmlFor="cycle-interval"
-                  className={styles.intervalLabel}
+                  className="intervalLabel"
                 >
                   Interval:
                 </label>
@@ -269,9 +270,9 @@ export const BrandSwitcher: React.FC<BrandSwitcherProps> = ({
                   onChange={(e) => setIntervalDraft(e.target.value)}
                   onBlur={commitInterval}
                   onKeyDown={handleIntervalKeyDown}
-                  className={styles.intervalInput}
+                  className="intervalInput"
                 />
-                <span className={styles.intervalUnit}>ms</span>
+                <span className="intervalUnit">ms</span>
               </div>
             )}
           </div>
@@ -280,15 +281,15 @@ export const BrandSwitcher: React.FC<BrandSwitcherProps> = ({
 
       {/* Spacing Density Section */}
       {showDensity && (
-        <div className={styles.sectionCard}>
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>Density</h2>
-            <span className={styles.densityLabel}>
+        <div className="sectionCard">
+          <div className="sectionHeader">
+            <h2 className="sectionTitle">Density</h2>
+            <span className="densityLabel">
               {density.charAt(0).toUpperCase() + density.slice(1)}
             </span>
           </div>
 
-          <div className={styles.densitySlider}>
+          <div className="densitySlider">
             <input
               type="range"
               min={0}
@@ -298,12 +299,12 @@ export const BrandSwitcher: React.FC<BrandSwitcherProps> = ({
               onChange={(e) =>
                 setDensity(densityOptions[Number(e.target.value)])
               }
-              className={styles.rangeInput}
+              className="rangeInput"
               aria-label="Spacing density"
             />
-            <div className={styles.densityTicks}>
+            <div className="densityTicks">
               {densityOptions.map((opt) => (
-                <span key={opt} className={styles.densityTick}>
+                <span key={opt} className="densityTick">
                   {opt.charAt(0).toUpperCase() + opt.slice(1)}
                 </span>
               ))}
@@ -314,17 +315,17 @@ export const BrandSwitcher: React.FC<BrandSwitcherProps> = ({
 
       {/* Typography Section */}
       {showFonts && (
-        <div className={styles.sectionCard}>
-          <h2 className={styles.sectionTitle}>Typography</h2>
+        <div className="sectionCard">
+          <h2 className="sectionTitle">Typography</h2>
 
-          <div className={styles.subsection}>
-            <div className={styles.subsectionLabel}>Heading</div>
-            <div className={styles.segmentedControl}>
+          <div className="subsection">
+            <div className="subsectionLabel">Heading</div>
+            <div className="segmentedControl">
               {fontOptions.map((fontOption) => (
                 <button
                   key={fontOption}
                   type="button"
-                  className={`${styles.segment} ${headingFont === fontOption ? styles.segmentActive : ''}`}
+                  className={`segment${headingFont === fontOption ? " segmentActive" : ""}`}
                   onClick={() => setHeadingFont(fontOption)}
                   aria-pressed={headingFont === fontOption}
                   aria-label={`Set heading font to ${fontOption}`}
@@ -336,14 +337,14 @@ export const BrandSwitcher: React.FC<BrandSwitcherProps> = ({
             </div>
           </div>
 
-          <div className={styles.subsection}>
-            <div className={styles.subsectionLabel}>Body</div>
-            <div className={styles.segmentedControl}>
+          <div className="subsection">
+            <div className="subsectionLabel">Body</div>
+            <div className="segmentedControl">
               {fontOptions.map((fontOption) => (
                 <button
                   key={fontOption}
                   type="button"
-                  className={`${styles.segment} ${bodyFont === fontOption ? styles.segmentActive : ''}`}
+                  className={`segment${bodyFont === fontOption ? " segmentActive" : ""}`}
                   onClick={() => setBodyFont(fontOption)}
                   aria-pressed={bodyFont === fontOption}
                   aria-label={`Set body font to ${fontOption}`}
@@ -359,11 +360,11 @@ export const BrandSwitcher: React.FC<BrandSwitcherProps> = ({
 
       {/* Keyboard hints */}
       {enableKeyboard && (
-        <div className={styles.keyboardHint}>
-          <kbd className={styles.kbd}>←</kbd>
-          <kbd className={styles.kbd}>→</kbd> switch theme
-          <span className={styles.kbdSeparator}>•</span>
-          <kbd className={styles.kbd}>R</kbd> random
+        <div className="keyboardHint">
+          <kbd className="kbd">←</kbd>
+          <kbd className="kbd">→</kbd> switch theme
+          <span className="kbdSeparator">•</span>
+          <kbd className="kbd">R</kbd> random
         </div>
       )}
     </div>

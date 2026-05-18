@@ -4,7 +4,7 @@
  */
 'use client';
 import * as React from 'react';
-import styles from './OTP.module.scss';
+import './OTP.css';
 import { useOTPContext } from './OTPProvider';
 
 export interface OTPProps extends React.HTMLAttributes<HTMLDivElement> {}
@@ -16,13 +16,14 @@ export const OTP = React.forwardRef<HTMLDivElement, OTPProps>(
       <div
         ref={ref}
         role="group"
+        data-ds-component="Otp"
         data-slot="otp"
         id={ctx.id}
         aria-describedby={ctx.describedBy}
         aria-disabled={ctx.disabled || undefined}
         aria-readonly={ctx.readOnly || undefined}
         data-length={ctx.length}
-        className={[styles.otp, className].filter(Boolean).join(' ')}
+        className={['otp', className].filter(Boolean).join(' ')}
         {...rest}
       >
         {children}

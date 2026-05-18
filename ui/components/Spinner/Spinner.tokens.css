@@ -1,0 +1,25 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Spinner/Spinner.tokens.json
+ */
+[data-ds-component="Spinner"] {
+  /* === Size Tokens === */
+  --ds-spinner-size-xs: 12px;
+  --ds-spinner-size-sm: 16px;
+  --ds-spinner-size-md: 20px;
+  --ds-spinner-size-lg: 28px;
+
+  /* === Thickness Tokens === */
+  --ds-spinner-thickness-hairline: 2px;
+  --ds-spinner-thickness-regular: 3px;
+  --ds-spinner-thickness-bold: 4px;
+
+  /* === Color Tokens === */
+  --ds-spinner-color-accent: var(--semantic-color-background-accent);
+  --ds-spinner-color-track: var(--semantic-color-border-subtle);
+
+  /* === Dots Tokens === */
+  --ds-spinner-dots-gap: var(--core-spacing-size-04);
+
+  /* === Anim Tokens === */
+  --ds-spinner-anim-duration: 800ms;
+}

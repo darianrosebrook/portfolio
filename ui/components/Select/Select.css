@@ -1,0 +1,231 @@
+@import "./Select.tokens.css";
+
+/*
+ * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Scoped to [data-ds-component="Select"] on the root element.
+ * NOTE: The TSX (Select.tsx) uses a newer slot-based class API (.root, .trigger,
+ * .content, .options, .option, etc.) that diverged from the original SCSS
+ * (.selectContainer, .select, etc.). Both sets of classes are styled here:
+ * the new slot API for the current TSX, and the old names retained for
+ * backward-compat until any legacy callers are updated.
+ * Intentionally unlayered — see Button.css for the cascade rationale.
+ */
+
+/* Shared local vars for both root and portaled/floating elements */
+[data-ds-component="Select"] {
+  /* Root wrapper */
+  &.root {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    container-type: inline-size;
+  }
+
+  /* Trigger button */
+  .trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    width: 100%;
+    padding: var(--ds-select-size-padding-default, 8px);
+    background-color: var(--ds-select-color-background-default, #fafafa);
+    border: var(--ds-select-size-border-default, 1px) solid
+      var(--ds-select-color-border-default, #aeaeae);
+    border-radius: var(--ds-select-size-radius-default, 8px);
+    color: var(--ds-select-color-foreground-default, #141414);
+    font-weight: var(--ds-select-font-weight-default, 400);
+    font-size: var(--ds-select-font-size-default, 1rem);
+    line-height: var(--ds-select-font-line-height-default, 1.5);
+    transition:
+      background-color var(--ds-select-motion-duration-fast)
+        var(--ds-select-motion-easing-standard),
+      border-color var(--ds-select-motion-duration-fast)
+        var(--ds-select-motion-easing-standard);
+    cursor: pointer;
+
+    &.sm {
+      height: var(--ds-select-size-sm-height);
+      padding: var(--ds-select-size-sm-padding-y) var(--ds-select-size-sm-padding-x);
+      font-size: var(--ds-select-font-size-sm);
+    }
+
+    &.md {
+      height: var(--ds-select-size-md-height);
+      padding: var(--ds-select-size-md-padding-y) var(--ds-select-size-md-padding-x);
+      font-size: var(--ds-select-font-size-md);
+    }
+
+    &.lg {
+      height: var(--ds-select-size-lg-height);
+      padding: var(--ds-select-size-lg-padding-y) var(--ds-select-size-lg-padding-x);
+      font-size: var(--ds-select-font-size-lg);
+    }
+
+    &:hover {
+      background-color: color-mix(
+        in srgb,
+        var(--ds-select-color-background-default, #fafafa) 90%,
+        var(--ds-select-color-background-hover, #cecece) 10%
+      );
+      border-color: var(--ds-select-color-border-hover, #555555);
+    }
+
+    &:focus-visible {
+      border-color: var(--ds-select-color-border-focus-visible, #d9292b);
+      outline: 2px solid
+        color-mix(
+          in oklab,
+          var(--ds-select-color-border-focus-visible, #d9292b) 40%,
+          transparent
+        );
+      outline-offset: -1px;
+    }
+
+    &:disabled {
+      background-color: var(--ds-select-color-background-disabled, #cecece);
+      border-color: var(--ds-select-color-border-disabled, #cecece);
+      color: var(--ds-select-color-foreground-disabled, #aeaeae);
+      cursor: not-allowed;
+    }
+  }
+
+  .text {
+    flex: 1;
+    text-align: start;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .icons {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-inline-start: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .chevronIcon {
+    width: 16px;
+    height: 16px;
+    color: var(--ds-select-color-icon-default, #6b7280);
+  }
+
+  .clear {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem;
+    background: none;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--ds-select-color-background-hover, #f3f4f6);
+    }
+  }
+
+  .clearIcon {
+    width: 14px;
+    height: 14px;
+    color: var(--ds-select-color-foreground-default, #1f2937);
+  }
+
+  /* Dropdown content */
+  .content {
+    position: absolute;
+    inset-inline: 0;
+    z-index: 1000;
+    overflow-y: auto;
+    margin: 0;
+    padding: 0;
+    background: var(--ds-select-color-background-default, #fafafa);
+    border: var(--ds-select-size-border-default, 1px) solid
+      var(--ds-select-color-border-default, #aeaeae);
+    border-radius: 0 0 var(--ds-select-size-radius-default, 8px)
+      var(--ds-select-size-radius-default, 8px);
+    box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
+    inset-block-start: 100%;
+  }
+
+  /* Search */
+  .searchContainer {
+    padding: var(--ds-select-size-padding-default);
+  }
+
+  .search {
+    width: 100%;
+    padding: var(--ds-select-size-padding-default);
+    border: var(--ds-select-size-border-default) solid
+      var(--ds-select-color-border-default, #e5e7eb);
+    border-radius: var(--ds-select-size-radius-small);
+    font-size: var(--ds-select-font-size-sm);
+  }
+
+  /* Options */
+  .options {
+    padding: 0;
+  }
+
+  .option {
+    padding: var(--ds-select-size-padding-default);
+    color: var(--ds-select-color-foreground-default, #141414);
+    cursor: pointer;
+
+    &:hover,
+    &.active {
+      background-color: var(--ds-select-color-background-hover, #f0f0f0);
+    }
+
+    &[aria-selected='true'],
+    &.selected {
+      background-color: var(--ds-select-color-background-selected, #e6f3ff);
+      color: var(--ds-select-color-foreground-selected, #0066cc);
+    }
+
+    &[data-disabled] {
+      color: var(--ds-select-color-foreground-disabled, #aeaeae);
+      cursor: not-allowed;
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+  }
+
+  .check {
+    width: 16px;
+    height: 16px;
+    color: var(--ds-select-color-foreground-selected, #0066cc);
+    flex-shrink: 0;
+  }
+
+  .emptyState {
+    padding: var(--ds-select-size-padding-default);
+    color: var(--ds-select-color-foreground-disabled, #aeaeae);
+    text-align: center;
+  }
+
+  /* Container queries for responsive sizing */
+  @container (max-width: 20rem) {
+    .trigger {
+      padding: calc(var(--ds-select-size-padding-default, 8px) * 0.75);
+      font-size: calc(var(--ds-select-font-size-default, 1rem) * 0.9);
+    }
+  }
+
+  @container (max-width: 15rem) {
+    .trigger {
+      padding: calc(var(--ds-select-size-padding-default, 8px) * 0.5);
+      font-size: calc(var(--ds-select-font-size-default, 1rem) * 0.85);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-ds-component="Select"] .trigger {
+    transition: none;
+  }
+}

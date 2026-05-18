@@ -8,7 +8,7 @@
 'use client';
 import React from 'react';
 import { Intent, ControlSize } from '@/types/ui';
-import styles from './Badge.module.scss';
+import './Badge.css';
 
 export type BadgeVariant = 'default' | 'status' | 'counter' | 'tag';
 
@@ -65,10 +65,10 @@ export const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
     ref
   ) => {
     const badgeClassName = [
-      styles.badge,
-      styles[variant],
-      variant === 'status' && styles[intent],
-      styles[size],
+      'badge',
+      variant,
+      variant === 'status' && intent,
+      size,
       className,
     ]
       .filter(Boolean)
@@ -81,14 +81,14 @@ export const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
       // If icon is provided, use it
       if (icon)
         return (
-          <span className={styles.icon} data-slot="badge-icon">
+          <span className="icon" data-slot="badge-icon">
             {icon}
           </span>
         );
       // For status variant with showStatusIcon, use default star
       if (variant === 'status' && showStatusIcon) {
         return (
-          <span className={styles.icon} data-slot="badge-icon">
+          <span className="icon" data-slot="badge-icon">
             <StatusStarIcon />
           </span>
         );
@@ -97,10 +97,10 @@ export const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
     };
 
     return (
-      <div ref={ref} className={badgeClassName} data-slot="badge" {...rest}>
+      <div ref={ref} data-ds-component="Badge" className={badgeClassName} data-slot="badge" {...rest}>
         {renderIcon()}
         {children && (
-          <span className={styles.content} data-slot="badge-content">
+          <span className="content" data-slot="badge-content">
             {children}
           </span>
         )}

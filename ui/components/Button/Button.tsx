@@ -1,6 +1,6 @@
 'use client';
 import React, { useMemo } from 'react';
-import styles from './Button.module.scss';
+import './Button.css';
 
 // Simple Slot implementation to avoid Radix dependency
 const Slot = React.forwardRef<
@@ -116,11 +116,11 @@ const Button = React.forwardRef<
     },
     ref
   ) => {
-    const baseClassName = styles.button;
-    const sizeClassName = styles[size];
-    const variantClassName = styles[variant];
-    const isLoadingClassName = loading ? styles.isLoading : '';
-    const isDisabledClassName = disabled ? styles.disabled : '';
+    const baseClassName = 'button';
+    const sizeClassName = size;
+    const variantClassName = variant;
+    const isLoadingClassName = loading ? 'isLoading' : '';
+    const isDisabledClassName = disabled ? 'disabled' : '';
 
     const childCount = React.Children.count(children);
     const isSingleChild = childCount === 1;
@@ -165,9 +165,9 @@ const Button = React.forwardRef<
       if (loading) {
         return (
           <>
-            <span className={styles.spinner} aria-hidden="true" />
+            <span className="spinner" aria-hidden="true" />
             {children ? (
-              <span className={styles.loadingText}>{children}</span>
+              <span className="loadingText">{children}</span>
             ) : null}
           </>
         );
@@ -191,6 +191,7 @@ const Button = React.forwardRef<
           title={title}
           {...ariaProps}
           data-slot="button"
+          data-ds-component="Button"
         >
           {React.cloneElement(childElement, {
             ref,
@@ -210,6 +211,7 @@ const Button = React.forwardRef<
           {...ariaProps}
           {...anchorRest}
           data-slot="button"
+          data-ds-component="Button"
         >
           {renderChildren()}
         </a>
@@ -225,6 +227,7 @@ const Button = React.forwardRef<
         {...(rest as ButtonAsButton)}
         {...ariaProps}
         data-slot="button"
+        data-ds-component="Button"
       >
         {renderChildren()}
       </button>

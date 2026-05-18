@@ -8,7 +8,7 @@ import { useWalkthrough } from './WalkthroughProvider';
 import { WalkthroughControls } from './slots/WalkthroughControls';
 import { WalkthroughProgress } from './slots/WalkthroughProgress';
 import type { WalkthroughUIProps } from './types';
-import styles from './Walkthrough.module.scss';
+import './Walkthrough.css';
 import Popover from '../Popover';
 
 export const Walkthrough: React.FC<WalkthroughUIProps> = ({
@@ -76,22 +76,23 @@ export const Walkthrough: React.FC<WalkthroughUIProps> = ({
       >
         <Popover.Content>
           <div
+            data-ds-component="Walkthrough"
             data-slot="walkthrough"
-            className={[styles.content, className].filter(Boolean).join(' ')}
+            className={['content', className].filter(Boolean).join(' ')}
             tabIndex={-1}
             onKeyDown={handleKeyDown}
           >
             {children ?? (
               <>
                 {step?.title && (
-                  <div data-slot="walkthrough-title" className={styles.title}>
+                  <div data-slot="walkthrough-title" className="title">
                     {step.title}
                   </div>
                 )}
                 {step?.description && (
                   <div
                     data-slot="walkthrough-description"
-                    className={styles.description}
+                    className="description"
                   >
                     {step.description}
                   </div>
@@ -122,7 +123,8 @@ export const Walkthrough: React.FC<WalkthroughUIProps> = ({
     >
       <Popover.Content>
         <div
-          className={[styles.content, className].filter(Boolean).join(' ')}
+          data-ds-component="Walkthrough"
+          className={['content', className].filter(Boolean).join(' ')}
           data-slot="walkthrough"
           tabIndex={-1}
           onKeyDown={handleKeyDown}
@@ -130,14 +132,14 @@ export const Walkthrough: React.FC<WalkthroughUIProps> = ({
           {children ?? (
             <>
               {step?.title && (
-                <div data-slot="walkthrough-title" className={styles.title}>
+                <div data-slot="walkthrough-title" className="title">
                   {step.title}
                 </div>
               )}
               {step?.description && (
                 <div
                   data-slot="walkthrough-description"
-                  className={styles.description}
+                  className="description"
                 >
                   {step.description}
                 </div>

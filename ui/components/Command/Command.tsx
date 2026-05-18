@@ -6,7 +6,7 @@
 'use client';
 import * as React from 'react';
 import { createPortal } from 'react-dom';
-import styles from './Command.module.scss';
+import './Command.css';
 import {
   CommandProvider,
   CommandProviderProps,
@@ -46,7 +46,8 @@ const CommandRoot: React.FC<CommandProps> = ({
   return (
     <CommandProvider {...commandOptions}>
       <div
-        className={[styles.root, className].filter(Boolean).join(' ')}
+        data-ds-component="Command"
+        className={['root', className].filter(Boolean).join(' ')}
         data-slot="command"
       >
         {children}
@@ -116,9 +117,9 @@ const CommandDialog: React.FC<CommandDialogProps> = ({
 
   const content = (
     <CommandProvider {...commandOptions}>
-      <div className={styles.overlay} onClick={modal ? close : undefined}>
+      <div className="overlay" onClick={modal ? close : undefined}>
         <div
-          className={[styles.dialog, className].filter(Boolean).join(' ')}
+          className={["dialog", className].filter(Boolean).join(' ')}
           data-slot="command-dialog"
           onClick={(e) => e.stopPropagation()}
           role="dialog"
@@ -159,12 +160,12 @@ const CommandInput = React.forwardRef<HTMLInputElement, CommandInputProps>(
     );
 
     return (
-      <div className={styles.inputWrapper}>
-        <SearchIcon className={styles.searchIcon} aria-hidden="true" />
+      <div className="inputWrapper">
+        <SearchIcon className="searchIcon" aria-hidden="true" />
         <input
           ref={combinedRef}
           type="text"
-          className={[styles.input, className].filter(Boolean).join(' ')}
+          className={["input", className].filter(Boolean).join(' ')}
           data-slot="command-input"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -210,13 +211,13 @@ const CommandList = React.forwardRef<HTMLDivElement, CommandListProps>(
     return (
       <div
         ref={combinedRef}
-        className={[styles.list, className].filter(Boolean).join(' ')}
+        className={["list", className].filter(Boolean).join(' ')}
         data-slot="command-list"
         role="listbox"
         {...rest}
       >
         {filteredItems.length === 0 ? (
-          <div className={styles.empty} role="option">
+          <div className="empty" role="option">
             {emptyMessage}
           </div>
         ) : (
@@ -239,16 +240,16 @@ const CommandGroup: React.FC<CommandGroupProps> = ({
   ...rest
 }) => (
   <div
-    className={[styles.group, className].filter(Boolean).join(' ')}
+    className={["group", className].filter(Boolean).join(' ')}
     data-slot="command-group"
     {...rest}
   >
     {heading && (
-      <div className={styles.groupHeading} role="presentation">
+      <div className="groupHeading" role="presentation">
         {heading}
       </div>
     )}
-    <div className={styles.groupItems}>{children}</div>
+    <div className="groupItems">{children}</div>
   </div>
 );
 
@@ -275,9 +276,9 @@ const CommandItemComponent = React.forwardRef<HTMLDivElement, CommandItemProps>(
       <div
         ref={ref}
         className={[
-          styles.item,
-          isSelected ? styles.selected : '',
-          item.disabled ? styles.disabled : '',
+          "item",
+          isSelected ? "selected" : '',
+          item.disabled ? "disabled" : '',
           className,
         ]
           .filter(Boolean)
@@ -292,11 +293,11 @@ const CommandItemComponent = React.forwardRef<HTMLDivElement, CommandItemProps>(
         onMouseEnter={handleMouseEnter}
         {...rest}
       >
-        {item.icon && <div className={styles.itemIcon}>{item.icon}</div>}
-        <div className={styles.itemContent}>
-          <div className={styles.itemLabel}>{item.label}</div>
+        {item.icon && <div className="itemIcon">{item.icon}</div>}
+        <div className="itemContent">
+          <div className="itemLabel">{item.label}</div>
           {item.description && (
-            <div className={styles.itemDescription}>{item.description}</div>
+            <div className="itemDescription">{item.description}</div>
           )}
         </div>
       </div>
@@ -332,7 +333,7 @@ const CommandItems: React.FC<CommandItemsProps> = ({
 
   return (
     <div
-      className={[styles.items, className].filter(Boolean).join(' ')}
+      className={['items', className].filter(Boolean).join(' ')}
       data-slot="command-items"
       {...rest}
     >
@@ -359,7 +360,7 @@ const CommandSeparator: React.FC<CommandSeparatorProps> = ({
   ...rest
 }) => (
   <div
-    className={[styles.separator, className].filter(Boolean).join(' ')}
+    className={["separator", className].filter(Boolean).join(' ')}
     data-slot="command-separator"
     role="separator"
     {...rest}

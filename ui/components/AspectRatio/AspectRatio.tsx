@@ -1,6 +1,6 @@
 'use client';
 import * as React from 'react';
-import styles from './AspectRatio.module.scss';
+import './AspectRatio.css';
 
 export interface AspectRatioProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Aspect ratio as width/height (e.g., 16/9, 4/3, 1) */
@@ -29,7 +29,8 @@ export const AspectRatio = React.forwardRef<HTMLDivElement, AspectRatioProps>(
     return (
       <div
         ref={ref}
-        className={[styles.container, className].filter(Boolean).join(' ')}
+        data-ds-component="AspectRatio"
+        className={['container', className].filter(Boolean).join(' ')}
         style={customStyle}
         {...rest}
       >

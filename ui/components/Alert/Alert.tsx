@@ -7,7 +7,7 @@ import * as React from 'react';
 import Button from '../Button';
 import { TimesIcon, LocalIcons } from '@/ui/components/Icon/LocalIcons';
 import { Intent, DismissibleProps } from '@/types/ui';
-import styles from './Alert.module.scss';
+import './Alert.css';
 
 export type AlertLevel = 'inline' | 'section' | 'page';
 
@@ -42,19 +42,19 @@ const Container = React.forwardRef<HTMLDivElement, AlertProps>(
     ref
   ) => {
     const alertClassName = [
-      styles.alert,
-      styles[level],
-      styles[intent],
+      'alert',
+      level,
+      intent,
       className,
     ]
       .filter(Boolean)
       .join(' ');
 
     return (
-      <div ref={ref} role="alert" className={alertClassName} {...rest}>
+      <div ref={ref} role="alert" data-ds-component="Alert" className={alertClassName} {...rest}>
         {children}
         {dismissible && onDismiss && (
-          <div className={styles.dismiss}>
+          <div className="dismiss">
             <Button
               variant="tertiary"
               onClick={onDismiss}
@@ -73,12 +73,12 @@ const Container = React.forwardRef<HTMLDivElement, AlertProps>(
 Container.displayName = 'Alert.Container';
 
 const Title = ({ children }: { children: React.ReactNode }) => (
-  <h6 className={styles.title}>{children}</h6>
+  <h6 className="title">{children}</h6>
 );
 Title.displayName = 'Alert.Title';
 
 const Body = ({ children }: { children: React.ReactNode }) => (
-  <div className={styles.body}>{children}</div>
+  <div className="body">{children}</div>
 );
 Body.displayName = 'Alert.Body';
 
@@ -93,7 +93,7 @@ const Icon = ({ intent }: { intent: Intent }) => {
   const IconComponent = LocalIcons[icons[intent]];
 
   return (
-    <div className={styles.icon}>
+    <div className="icon">
       <IconComponent aria-hidden={true} />
     </div>
   );

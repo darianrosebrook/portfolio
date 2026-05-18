@@ -12,7 +12,7 @@ import {
 import ProfileFlag from '@/ui/components/ProfileFlag';
 import Image from 'next/image';
 import Link from 'next/link';
-import Styles from './styles.module.scss';
+import Styles from './styles.module.css';
 import { Profile } from '@/types';
 import { EDITORIAL_STAGGER, EASING_PRESETS } from '@/utils/animation';
 

@@ -1,0 +1,15 @@
+@import "./Label.tokens.css";
+
+/*
+ * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Scoped to [data-ds-component="Label"] on the root element.
+ * Intentionally unlayered — see Button.css for the cascade rationale.
+ */
+[data-ds-component="Label"] {
+  &.label {
+    color: var(--ds-label-color-text-default);
+    font: inherit;
+    font-weight: var(--ds-label-typo-weight-default);
+    line-height: var(--ds-label-typo-line-height-default);
+  }
+}

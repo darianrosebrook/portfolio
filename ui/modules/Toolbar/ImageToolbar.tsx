@@ -1,6 +1,6 @@
 import React from 'react';
 import { Editor } from '@tiptap/react';
-import styles from './ImageToolbar.module.scss';
+import './ImageToolbar.css';
 import Icon from '../../components/Icon';
 import { byPrefixAndName } from '@awesome.me/kit-0ba7f5fefb/icons';
 const faAlignLeft = byPrefixAndName['far']['align-left'];
@@ -21,12 +21,12 @@ const ImageToolbar: React.FC<ImageToolbarProps> = ({ editor }) => {
   };
 
   return (
-    <div className={styles.toolbar}>
+    <div data-ds-component="ImageToolbar">
       <button
         onClick={() => setAlignment('left')}
         className={
           editor.isActive('image', { 'data-align': 'left' })
-            ? styles.isActive
+            ? 'isActive'
             : ''
         }
       >
@@ -36,7 +36,7 @@ const ImageToolbar: React.FC<ImageToolbarProps> = ({ editor }) => {
         onClick={() => setAlignment('center')}
         className={
           editor.isActive('image', { 'data-align': 'center' })
-            ? styles.isActive
+            ? 'isActive'
             : ''
         }
       >
@@ -46,7 +46,7 @@ const ImageToolbar: React.FC<ImageToolbarProps> = ({ editor }) => {
         onClick={() => setAlignment('right')}
         className={
           editor.isActive('image', { 'data-align': 'right' })
-            ? styles.isActive
+            ? 'isActive'
             : ''
         }
       >

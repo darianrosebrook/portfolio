@@ -18,7 +18,7 @@
  */
 'use client';
 import React, { ReactNode, useId, useMemo } from 'react';
-import styles from './ToggleSwitch.module.scss';
+import './ToggleSwitch.css';
 
 type NativeInputProps = React.ComponentProps<'input'>;
 
@@ -65,14 +65,15 @@ const ToggleSwitch = React.forwardRef<HTMLInputElement, ToggleSwitchProps>(
 
     const sizeClass =
       size === 'small'
-        ? styles.small
+        ? 'small'
         : size === 'large'
-          ? styles.large
-          : styles.medium;
+          ? 'large'
+          : 'medium';
 
     return (
       <div
-        className={`${styles.toggleSwitch} ${sizeClass} ${className}`}
+        data-ds-component="ToggleSwitch"
+        className={`toggleSwitch ${sizeClass} ${className}`}
         data-slot="toggle-switch"
       >
         <input
@@ -83,7 +84,7 @@ const ToggleSwitch = React.forwardRef<HTMLInputElement, ToggleSwitchProps>(
           onChange={onChange}
           disabled={disabled}
           id={safeId}
-          className={`${styles.input} ${checked ? styles.checked : ''}`}
+          className={`input ${checked ? 'checked' : ''}`}
           aria-label={
             ariaLabel || (typeof children === 'string' ? children : undefined)
           }
@@ -95,13 +96,13 @@ const ToggleSwitch = React.forwardRef<HTMLInputElement, ToggleSwitchProps>(
           {...rest}
         />
         <label
-          className={`${styles.label} ${checked ? styles.checked : ''} ${disabled ? styles.disabled : ''}`}
+          className={`label ${checked ? 'checked' : ''} ${disabled ? 'disabled' : ''}`}
           htmlFor={safeId}
           data-slot="toggle-switch-label"
         >
           {children}
           {ariaDescription && (
-            <span id={`${safeId}-description`} className={styles.srOnly}>
+            <span id={`${safeId}-description`} className="srOnly">
               {ariaDescription}
             </span>
           )}
@@ -125,10 +126,11 @@ export const ToggleSwitchGroup = ({
   orientation?: 'vertical' | 'horizontal';
 }) => {
   const orientationClass =
-    orientation === 'horizontal' ? styles.horizontal : styles.vertical;
+    orientation === 'horizontal' ? 'horizontal' : 'vertical';
   return (
     <div
-      className={`${styles.toggleSwitchGroup} ${className} ${orientationClass}`}
+      data-ds-component="ToggleSwitch"
+      className={`toggleSwitchGroup ${className} ${orientationClass}`}
     >
       {children}
     </div>

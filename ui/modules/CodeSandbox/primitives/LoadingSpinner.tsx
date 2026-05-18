@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styles from './LoadingSpinner.module.scss';
+import './LoadingSpinner.css';
 
 export type LoadingSpinnerProps = {
   size?: 'small' | 'medium' | 'large';
@@ -32,7 +32,8 @@ export function LoadingSpinner({
       }}
     >
       <div
-        className={styles.spinner}
+        data-ds-component="LoadingSpinner"
+        className='spinner'
         style={{
           width: spinnerSize,
           height: spinnerSize,

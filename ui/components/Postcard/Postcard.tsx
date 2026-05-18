@@ -7,7 +7,7 @@ import React, {
   useRef,
   useMemo,
 } from 'react';
-import styles from './Postcard.module.scss';
+import './Postcard.css';
 import Image from 'next/image';
 import Icon from '../Icon';
 import {
@@ -83,7 +83,7 @@ const Postcard: React.FC<PostcardProps> & {
   const contextValue = useMemo(() => props, [props]);
   return (
     <PostcardContext.Provider value={contextValue}>
-      <article data-slot="postcard" className={styles.post}>
+      <article data-ds-component="Postcard" data-slot="postcard" className="post">
         {children}
       </article>
     </PostcardContext.Provider>
@@ -92,7 +92,7 @@ const Postcard: React.FC<PostcardProps> & {
 
 const Header: React.FC<{ children: ReactNode }> = ({ children }) => {
   return (
-    <header data-slot="postcard-header" className={styles.header}>
+    <header data-slot="postcard-header" className="header">
       {children}
     </header>
   );
@@ -100,7 +100,7 @@ const Header: React.FC<{ children: ReactNode }> = ({ children }) => {
 
 const Body: React.FC<{ children: ReactNode }> = ({ children }) => {
   return (
-    <div data-slot="postcard-body" className={styles.content}>
+    <div data-slot="postcard-body" className="content">
       {children}
     </div>
   );
@@ -108,7 +108,7 @@ const Body: React.FC<{ children: ReactNode }> = ({ children }) => {
 
 const Footer: React.FC<{ children: ReactNode }> = ({ children }) => {
   return (
-    <footer data-slot="postcard-footer" className={styles.footer}>
+    <footer data-slot="postcard-footer" className="footer">
       {children}
     </footer>
   );
@@ -116,7 +116,7 @@ const Footer: React.FC<{ children: ReactNode }> = ({ children }) => {
 
 const Stats: React.FC<{ children: ReactNode }> = ({ children }) => {
   return (
-    <div data-slot="postcard-stats" className={styles.stats}>
+    <div data-slot="postcard-stats" className="stats">
       {children}
     </div>
   );
@@ -125,11 +125,11 @@ const Stats: React.FC<{ children: ReactNode }> = ({ children }) => {
 const Author: React.FC = () => {
   const { author } = usePostcard();
   return (
-    <div data-slot="postcard-author" className={styles.userInfo}>
-      <p data-slot="postcard-display-name" className={styles.displayName}>
+    <div data-slot="postcard-author" className="userInfo">
+      <p data-slot="postcard-display-name" className="displayName">
         {author.name}
       </p>
-      <p data-slot="postcard-handle" className={styles.handle}>
+      <p data-slot="postcard-handle" className="handle">
         @{author.handle}
       </p>
     </div>
@@ -163,7 +163,7 @@ const Timestamp: React.FC = () => {
   const time = new Date(timestamp);
   const relativeTimestamp = getRelativeTimeString(time);
   return (
-    <time data-slot="postcard-timestamp" className={styles.timestamp}>
+    <time data-slot="postcard-timestamp" className="timestamp">
       {relativeTimestamp}
     </time>
   );
@@ -172,7 +172,7 @@ const Timestamp: React.FC = () => {
 const Content: React.FC = () => {
   const { content } = usePostcard();
   return (
-    <div data-slot="postcard-content" className={styles.content}>
+    <div data-slot="postcard-content" className="content">
       {content}
     </div>
   );
@@ -236,7 +236,7 @@ const Embed: React.FC = () => {
           width={embed.aspectRatio.width}
           height={embed.aspectRatio.height}
           alt=""
-          className={styles.image}
+          className="image"
         />
       );
     case 'video':
@@ -245,7 +245,7 @@ const Embed: React.FC = () => {
           data-slot="postcard-embed"
           ref={videoRef}
           controls
-          className={styles.video}
+          className="video"
           width={embed.aspectRatio.width}
           height={embed.aspectRatio.height}
           preload="metadata"
@@ -257,7 +257,7 @@ const Embed: React.FC = () => {
           data-slot="postcard-embed"
           src={embed.url}
           controls
-          className={styles.audio}
+          className="audio"
         />
       );
     default:
@@ -267,7 +267,7 @@ const Embed: React.FC = () => {
 const Like: React.FC = () => {
   const { stats } = usePostcard();
   return (
-    <button data-slot="postcard-stat" className={styles.stat}>
+    <button data-slot="postcard-stat" className="stat">
       <span>
         <Icon icon={faHeart} />
       </span>
@@ -279,7 +279,7 @@ const Like: React.FC = () => {
 const Reply: React.FC = () => {
   const { stats } = usePostcard();
   return (
-    <button data-slot="postcard-stat" className={styles.stat}>
+    <button data-slot="postcard-stat" className="stat">
       <span>
         <Icon icon={faComments} />
       </span>
@@ -291,7 +291,7 @@ const Reply: React.FC = () => {
 const Repost: React.FC = () => {
   const { stats } = usePostcard();
   return (
-    <button data-slot="postcard-stat" className={styles.stat}>
+    <button data-slot="postcard-stat" className="stat">
       <span>
         <Icon icon={faRetweet} />
       </span>
@@ -306,7 +306,7 @@ const ExternalLink: React.FC<{ link: string }> = ({ link }) => {
       href={link}
       target="_blank"
       data-slot="postcard-link"
-      className={styles.stat}
+      className="stat"
     >
       <Icon icon={faExternalLink} />
       <span>View on Bluesky</span>

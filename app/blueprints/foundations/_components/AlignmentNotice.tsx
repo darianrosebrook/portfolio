@@ -2,7 +2,7 @@
 
 import type { GovernanceMetadata } from '@/types/foundationContent';
 import { needsReview } from '@/utils/governance/reviewTracker';
-import styles from './AlignmentNotice.module.scss';
+import styles from './AlignmentNotice.module.css';
 
 interface AlignmentNoticeProps {
   governance: GovernanceMetadata;

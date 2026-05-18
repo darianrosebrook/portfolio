@@ -18,7 +18,7 @@ import React, {
   useState,
 } from 'react';
 import { createPortal } from 'react-dom';
-import styles from './Tooltip.module.scss';
+import './Tooltip.css';
 
 export interface TooltipProps {
   /**
@@ -270,10 +270,11 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
             }
           }
         }}
+        data-ds-component="Tooltip"
         id={tooltipId}
         role="tooltip"
         data-slot="tooltip"
-        className={`${styles.tooltip} ${className}`}
+        className={`tooltip ${className}`}
         style={{
           position: 'fixed',
           top: `${position.top}px`,

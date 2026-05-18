@@ -1,6 +1,6 @@
 import React from 'react';
 import { useFieldCtx } from './FieldProvider';
-import styles from './Field.module.scss';
+import './Field.css';
 import { Label } from './Label';
 import { HelpText } from './HelpText';
 import { ErrorText } from './ErrorText';
@@ -14,28 +14,29 @@ export function Field({
   className?: string;
 }) {
   const f = useFieldCtx();
-  const cls = [styles.root, f.status === 'invalid' && styles.invalid, className]
+  const cls = ['root', f.status === 'invalid' && 'invalid', className]
     .filter(Boolean)
     .join(' ');
   return (
     <div
+      data-ds-component="Field"
       className={cls}
       role="group"
       aria-labelledby={f.labelId}
       data-status={f.status}
     >
-      <div className={styles.header}>
+      <div className="header">
         <Label />
       </div>
-      <div className={styles.control}>
+      <div className="control">
         {children}
         {f.status === 'validating' ? (
-          <span aria-live="polite" className={styles.validatingIndicator}>
+          <span aria-live="polite" className="validatingIndicator">
             <Spinner size="sm" ariaHidden />
           </span>
         ) : null}
       </div>
-      <div className={styles.meta}>
+      <div className="meta">
         <ErrorText />
         <HelpText />
       </div>

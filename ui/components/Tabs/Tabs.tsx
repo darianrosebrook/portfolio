@@ -4,7 +4,7 @@ import { TabsProvider } from './TabsProvider';
 import { Tab } from './slots/Tab';
 import { TabPanel } from './slots/TabPanel';
 import { TabList } from './slots/TabList';
-import styles from './Tabs.module.scss';
+import './Tabs.css';
 
 export interface TabsProps extends React.HTMLAttributes<HTMLDivElement> {
   defaultValue?: string;
@@ -45,8 +45,9 @@ const TabsComponent: React.FC<TabsProps> = ({
     >
       <div
         ref={ref}
+        data-ds-component="Tabs"
         data-slot="tabs"
-        className={[styles.root, className].filter(Boolean).join(' ')}
+        className={className || undefined}
         data-state="tabs"
         {...rest}
       >

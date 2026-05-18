@@ -1,0 +1,21 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/ShowMore/ShowMore.tokens.json
+ */
+[data-ds-component="Showmore"] {
+  /* === Color Tokens === */
+  --ds-showmore-color-background-default: var(--semantic-color-background-secondary);
+  --ds-showmore-color-foreground-primary: var(--semantic-color-foreground-primary);
+  --ds-showmore-color-foreground-secondary: var(--semantic-color-foreground-secondary);
+  --ds-showmore-color-border-default: var(--semantic-color-border-light);
+  --ds-showmore-color-border-accent: var(--semantic-color-border-accent);
+
+  /* === Size Tokens === */
+  --ds-showmore-size-padding-default: var(--core-spacing-size-07);
+  --ds-showmore-size-radius-default: var(--core-shape-radius-medium);
+
+  /* === Elevation Tokens === */
+  --ds-showmore-elevation-default: var(--semantic-elevation-default);
+
+  /* === Overlay Tokens === */
+  --ds-showmore-overlay-image-overlay: var(--semantic-color-background-image-overlay);
+}

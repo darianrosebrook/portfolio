@@ -1,0 +1,247 @@
+@import "./Sheet.tokens.css";
+
+/*
+ * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Scoped to [data-ds-component="Sheet"] on the root element.
+ * NOTE: .overlay, .content and their children are portaled to document.body.
+ * Those classes are defined at top-level with inline token fallbacks.
+ * The dead @import '../../designTokens/index' is dropped.
+ * Intentionally unlayered — see Button.css for the cascade rationale.
+ */
+[data-ds-component="Sheet"] {
+  &.root {
+    /* Root wrapper: no visual styles needed; tokens cascade from here */
+  }
+
+  .trigger {
+    /* Inherits from parent button styles */
+  }
+}
+
+/* Portaled overlay — not inside the root element */
+.overlay {
+  /* Declare tokens locally since parent scope is unavailable */
+  --ds-sheet-color-overlay: var(--semantic-overlay-scrim-sheet);
+  --ds-sheet-motion-duration: var(--core-motion-duration-medium);
+  --ds-sheet-motion-easing: var(--core-motion-easing-standard);
+
+  position: fixed;
+  inset: 0;
+  z-index: var(--ds-sheet-z-index-overlay, 100);
+  background-color: var(--ds-sheet-color-overlay);
+  opacity: 0;
+  transition: opacity var(--ds-sheet-motion-duration) var(--ds-sheet-motion-easing);
+
+  &.modal {
+    opacity: 1;
+  }
+}
+
+/* Portaled sheet content panel */
+.content {
+  /* Inline token declarations so portal element gets values */
+  --ds-sheet-color-background: var(--semantic-color-background-primary);
+  --ds-sheet-color-background-hover: var(--semantic-interaction-background-hover);
+  --ds-sheet-color-border: var(--semantic-color-border-light);
+  --ds-sheet-color-border-light: var(--semantic-color-border-subtle);
+  --ds-sheet-color-text: var(--semantic-color-foreground-primary);
+  --ds-sheet-color-text-title: var(--semantic-color-foreground-primary);
+  --ds-sheet-color-text-description: var(--semantic-color-foreground-secondary);
+  --ds-sheet-color-text-muted: var(--semantic-color-foreground-tertiary);
+  --ds-sheet-border-width: var(--core-shape-border-width-hairline);
+  --ds-sheet-border-radius: var(--core-shape-radius-medium);
+  --ds-sheet-border-radius-close: var(--core-shape-radius-small);
+  --ds-sheet-size-width: 400px;
+  --ds-sheet-size-height: 300px;
+  --ds-sheet-size-close: var(--core-spacing-size-06);
+  --ds-sheet-spacing-padding: var(--core-spacing-size-06);
+  --ds-sheet-spacing-gap: var(--core-spacing-size-04);
+  --ds-sheet-spacing-section: var(--core-spacing-size-04);
+  --ds-sheet-spacing-header-gap: var(--core-spacing-size-02);
+  --ds-sheet-spacing-footer-gap: var(--core-spacing-size-03);
+  --ds-sheet-spacing-close-offset: var(--core-spacing-size-04);
+  --ds-sheet-text-size: var(--semantic-typography-body-02);
+  --ds-sheet-text-line-height: var(--semantic-typography-line-height-normal);
+  --ds-sheet-text-size-title: var(--semantic-typography-heading-06);
+  --ds-sheet-text-line-height-title: var(--semantic-typography-line-height-tight);
+  --ds-sheet-text-weight-title: var(--semantic-typography-font-weight-medium);
+  --ds-sheet-text-size-description: var(--semantic-typography-body-03);
+  --ds-sheet-text-line-height-description: var(--semantic-typography-line-height-loose);
+  --ds-sheet-motion-duration: var(--core-motion-duration-medium);
+  --ds-sheet-motion-easing: var(--core-motion-easing-standard);
+  --ds-sheet-z-index-overlay: var(--core-layer-component);
+  --ds-sheet-z-index-content: var(--core-layer-above);
+  --ds-sheet-focus-width: var(--core-shape-border-width-thick);
+  --ds-sheet-focus-color: var(--semantic-color-border-accent);
+  --ds-sheet-focus-offset: var(--core-spacing-size-01);
+  --ds-sheet-shadow: var(--semantic-elevation-surface-floating);
+
+  position: fixed;
+  z-index: var(--ds-sheet-z-index-content);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-sheet-spacing-gap);
+  max-width: 100vw;
+  max-height: 100vh;
+  padding: var(--ds-sheet-spacing-padding);
+  background-color: var(--ds-sheet-color-background);
+  border: var(--ds-sheet-border-width) solid var(--ds-sheet-color-border);
+  box-shadow: var(--ds-sheet-shadow);
+  transition: transform var(--ds-sheet-motion-duration) var(--ds-sheet-motion-easing);
+  contain: strict;
+
+  &.top {
+    inset-inline: 0;
+    height: var(--ds-sheet-size-height);
+    border-radius: 0 0 var(--ds-sheet-border-radius) var(--ds-sheet-border-radius);
+    transform: translateY(-100%);
+    border-block-end: var(--ds-sheet-border-width) solid var(--ds-sheet-color-border);
+    border-block-start: none;
+    inset-block-start: 0;
+
+    &[data-state='open'] {
+      transform: translateY(0);
+    }
+  }
+
+  &.right {
+    inset-block: 0;
+    width: var(--ds-sheet-size-width);
+    border-radius: var(--ds-sheet-border-radius) 0 0 var(--ds-sheet-border-radius);
+    transform: translateX(100%);
+    border-inline-end: none;
+    border-inline-start: var(--ds-sheet-border-width) solid var(--ds-sheet-color-border);
+    inset-inline-end: 0;
+
+    &[data-state='open'] {
+      transform: translateX(0);
+    }
+  }
+
+  &.bottom {
+    inset-inline: 0;
+    height: var(--ds-sheet-size-height);
+    border-radius: var(--ds-sheet-border-radius) var(--ds-sheet-border-radius) 0 0;
+    transform: translateY(100%);
+    border-block-end: none;
+    border-block-start: var(--ds-sheet-border-width) solid var(--ds-sheet-color-border);
+    inset-block-end: 0;
+
+    &[data-state='open'] {
+      transform: translateY(0);
+    }
+  }
+
+  &.left {
+    inset-block: 0;
+    width: var(--ds-sheet-size-width);
+    border-radius: 0 var(--ds-sheet-border-radius) var(--ds-sheet-border-radius) 0;
+    transform: translateX(-100%);
+    border-inline-end: var(--ds-sheet-border-width) solid var(--ds-sheet-color-border);
+    border-inline-start: none;
+    inset-inline-start: 0;
+
+    &[data-state='open'] {
+      transform: translateX(0);
+    }
+  }
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ds-sheet-spacing-header-gap);
+    border-block-end: var(--ds-sheet-border-width) solid var(--ds-sheet-color-border-light);
+    padding-block-end: var(--ds-sheet-spacing-section);
+
+    .title {
+      margin: 0;
+      color: var(--ds-sheet-color-text-title);
+      font-weight: var(--ds-sheet-text-weight-title);
+      font-size: var(--ds-sheet-text-size-title);
+      line-height: var(--ds-sheet-text-line-height-title);
+    }
+
+    .description {
+      margin: 0;
+      color: var(--ds-sheet-color-text-description);
+      font-size: var(--ds-sheet-text-size-description);
+      line-height: var(--ds-sheet-text-line-height-description);
+    }
+  }
+
+  .body {
+    flex: 1;
+    overflow-y: auto;
+    color: var(--ds-sheet-color-text);
+    font-size: var(--ds-sheet-text-size);
+    line-height: var(--ds-sheet-text-line-height);
+  }
+
+  .footer {
+    display: flex;
+    gap: var(--ds-sheet-spacing-footer-gap);
+    justify-content: flex-end;
+    border-block-start: var(--ds-sheet-border-width) solid var(--ds-sheet-color-border-light);
+    padding-block-start: var(--ds-sheet-spacing-section);
+  }
+
+  .close {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: var(--ds-sheet-size-close);
+    height: var(--ds-sheet-size-close);
+    padding: 0;
+    background: none;
+    border: none;
+    border-radius: var(--ds-sheet-border-radius-close);
+    outline: none;
+    color: var(--ds-sheet-color-text-muted);
+    transition:
+      background-color var(--ds-sheet-motion-duration) var(--ds-sheet-motion-easing),
+      color var(--ds-sheet-motion-duration) var(--ds-sheet-motion-easing);
+    cursor: pointer;
+    inset-block-start: var(--ds-sheet-spacing-close-offset);
+    inset-inline-end: var(--ds-sheet-spacing-close-offset);
+
+    &:hover {
+      background-color: var(--ds-sheet-color-background-hover);
+      color: var(--ds-sheet-color-text);
+    }
+
+    &:focus-visible {
+      outline: var(--ds-sheet-focus-width) solid var(--ds-sheet-focus-color);
+      outline-offset: var(--ds-sheet-focus-offset);
+    }
+  }
+}
+
+@media (width <= 768px) {
+  .content {
+    &.left,
+    &.right {
+      width: 100vw;
+      border: none;
+      border-radius: 0;
+    }
+
+    &.top,
+    &.bottom {
+      height: 100vh;
+      border: none;
+      border-radius: 0;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay,
+  .content {
+    transition: none;
+  }
+
+  .content .close {
+    transition: none;
+  }
+}

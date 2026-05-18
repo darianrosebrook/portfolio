@@ -2,7 +2,7 @@
 
 import { DocDiff } from '@/ui/modules/CodeSandbox';
 import type { MigrationData } from '../_lib/migrationData';
-import styles from './MigrationDoc.module.scss';
+import styles from './MigrationDoc.module.css';
 
 interface MigrationDocProps {
   migration: MigrationData;

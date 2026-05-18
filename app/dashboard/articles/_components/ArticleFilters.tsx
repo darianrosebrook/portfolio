@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter, useSearchParams } from 'next/navigation';
-import styles from '../articles.module.scss';
+import styles from '../articles.module.css';
 
 type FilterStatus = 'all' | 'published' | 'draft';
 

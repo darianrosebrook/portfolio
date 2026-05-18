@@ -1,0 +1,33 @@
+@import "./Showmore.tokens.css";
+
+/*
+ * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Scoped to [data-ds-component="Showmore"] on the root element.
+ * Intentionally unlayered — see Button.css for the cascade rationale.
+ */
+[data-ds-component="Showmore"] {
+  &.showmore {
+    display: block;
+    padding: var(--ds-showmore-size-padding-default);
+    background: var(--ds-showmore-color-background-default);
+    border-radius: var(--ds-showmore-size-radius-default);
+    box-shadow: var(--ds-showmore-elevation-default)
+      var(--ds-showmore-overlay-image-overlay);
+  }
+
+  .trigger {
+    /* Inherits from parent button styles */
+  }
+
+  .content {
+    /* Content shown/hidden via hidden attribute */
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-ds-component="Showmore"] {
+    &.showmore {
+      transition: none;
+    }
+  }
+}

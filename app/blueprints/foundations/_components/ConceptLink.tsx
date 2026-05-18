@@ -2,7 +2,7 @@
 
 import type { ConceptLink } from '@/types/foundationContent';
 import Link from 'next/link';
-import styles from './ConceptLink.module.scss';
+import styles from './ConceptLink.module.css';
 
 interface ConceptLinkProps {
   concept: ConceptLink;

@@ -1,0 +1,18 @@
+[data-ds-component="CodeBlockComponent"] {
+  select {
+    margin-bottom: 8px;
+    padding: 4px 6px;
+    border: 1px solid var(--semantic-color-border-primary);
+    border-radius: var(--core-shape-radius-medium);
+    background: var(--semantic-color-background-secondary);
+    color: var(--color-text-primary);
+  }
+
+  pre {
+    background: var(--semantic-color-background-tertiary);
+    border: 1px solid var(--semantic-color-border-primary);
+    border-radius: var(--core-shape-radius-medium);
+    padding: var(--core-spacing-size-04);
+    overflow-x: auto;
+  }
+}

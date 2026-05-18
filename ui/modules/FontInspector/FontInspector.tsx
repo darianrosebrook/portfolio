@@ -14,7 +14,7 @@ import React, {
 import { AnatomyControls } from './AnatomyControls';
 import { ANATOMY_FEATURES } from './anatomyToggles';
 import { isSerifFont } from './fontHeuristics';
-import styles from './FontInspector.module.scss';
+import './FontInspector.css';
 import { InspectorControls } from './InspectorControls';
 import { SymbolCanvas } from './SymbolCanvas';
 import { SymbolGrid } from './SymbolGrid';
@@ -663,13 +663,13 @@ export const FontInspector: React.FC = () => (
         real design decisions, performance trade‑offs, and system architecture.
       </p>
     </section>
-    <section className={styles.symbolInspector}>
-      <div className={styles.inspectorContainer}>
+    <section data-ds-component="FontInspector" className='symbolInspector'>
+      <div className='inspectorContainer'>
         <InspectorControls />
-        <div className={styles.canvasContainer}>
+        <div className='canvasContainer'>
           <SymbolCanvas />
         </div>
-        <details className={styles.accordion} open>
+        <details className='accordion' open>
           <summary>Anatomy Details</summary>
           <AnatomyControls />
           <p className="caption" style={{ margin: '1rem' }}>
@@ -681,7 +681,7 @@ export const FontInspector: React.FC = () => (
           </p>
         </details>
       </div>
-      <div className={styles.symbolContainer}>
+      <div className='symbolContainer'>
         <SymbolGrid />
         {TypographyArticleContent}
       </div>

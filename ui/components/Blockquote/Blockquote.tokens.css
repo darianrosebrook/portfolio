@@ -1,0 +1,25 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Blockquote/Blockquote.tokens.json
+ */
+[data-ds-component="Blockquote"] {
+  /* === Color Tokens === */
+  --ds-blockquote-color-foreground-primary: var(--semantic-color-foreground-secondary);
+  --ds-blockquote-color-background-default: var(--semantic-color-background-secondary);
+  --ds-blockquote-color-border-default: var(--semantic-color-border-accent);
+  --ds-blockquote-color-border-accent: var(--semantic-color-border-accent);
+
+  /* === Typography Tokens === */
+  --ds-blockquote-typography-font-style: var(--semantic-typography-font-style-italic);
+  --ds-blockquote-typography-font-weight: var(--semantic-typography-font-weight-medium);
+  --ds-blockquote-typography-sm-font-size: var(--semantic-typography-body-03);
+  --ds-blockquote-typography-sm-line-height: var(--semantic-typography-line-height-body);
+  --ds-blockquote-typography-md-font-size: var(--semantic-typography-body-02);
+  --ds-blockquote-typography-md-line-height: var(--semantic-typography-line-height-body);
+  --ds-blockquote-typography-lg-font-size: var(--semantic-typography-body-01);
+  --ds-blockquote-typography-lg-line-height: var(--semantic-typography-line-height-body);
+
+  /* === Size Tokens === */
+  --ds-blockquote-size-padding-default: var(--core-spacing-size-05);
+  --ds-blockquote-size-radius-default: var(--core-shape-radius-medium);
+  --ds-blockquote-size-border-thick: var(--core-shape-border-width-thick);
+}

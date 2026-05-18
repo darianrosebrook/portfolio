@@ -14,7 +14,7 @@ import {
 } from '@/ui/components/AnimatedCard';
 import ProfileFlag from '@/ui/components/ProfileFlag';
 import ShareLinks from './ShareLinks';
-import styles from './styles.module.scss';
+import styles from './styles.module.css';
 import { EASING_PRESETS, EDITORIAL_STAGGER } from '@/utils/animation';
 import { Profile } from '@/types';
 

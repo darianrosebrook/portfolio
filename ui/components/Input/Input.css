@@ -1,0 +1,68 @@
+@import "./Input.tokens.css";
+
+/*
+ * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Scoped to [data-ds-component="Input"] on the root element.
+ * Input is a single-element component; all modifier classes use &.foo.
+ * Intentionally unlayered — see Button.css for the cascade rationale.
+ */
+[data-ds-component="Input"] {
+  &.input {
+    padding-inline: var(--ds-input-space-inline-default);
+    padding-block: 0;
+    background: var(--ds-input-color-bg-default);
+    border: 1px solid var(--ds-input-color-border-default);
+    border-radius: var(--ds-input-size-radius-default);
+    color: var(--ds-input-color-text-default);
+    transition:
+      border-color 0.2s ease,
+      background-color 0.2s ease;
+    appearance: none;
+    block-size: var(--ds-input-size-height-default);
+
+    container-type: inline-size;
+    inline-size: 100%;
+
+    &:focus-visible {
+      border-color: var(--ds-input-color-focus-default);
+      box-shadow: 0 0 0 3px
+        color-mix(in oklab, var(--ds-input-color-focus-default) 25%, transparent);
+      outline: none;
+    }
+
+    &:hover:not(:disabled, :read-only) {
+      background-color: color-mix(
+        in srgb,
+        var(--ds-input-color-bg-default) 95%,
+        var(--ds-input-color-focus-default) 5%
+      );
+      border-color: color-mix(
+        in srgb,
+        var(--ds-input-color-border-default) 80%,
+        var(--ds-input-color-focus-default) 20%
+      );
+    }
+
+    &.invalid {
+      border-color: var(--ds-input-color-invalid-default);
+
+      &:focus-visible {
+        box-shadow: 0 0 0 3px
+          color-mix(in oklab, var(--ds-input-color-invalid-default) 25%, transparent);
+      }
+    }
+
+    @container (max-width: 20rem) {
+      padding-inline: calc(var(--ds-input-space-inline-default) * 0.75);
+      font-size: calc(1rem * 0.9);
+      block-size: calc(var(--ds-input-size-height-default) * 0.95);
+    }
+
+    @container (max-width: 15rem) {
+      padding-inline: calc(var(--ds-input-space-inline-default) * 0.5);
+      font-size: calc(1rem * 0.85);
+      block-size: calc(var(--ds-input-size-height-default) * 0.9);
+    }
+  }
+}
+

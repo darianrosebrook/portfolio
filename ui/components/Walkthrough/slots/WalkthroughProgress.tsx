@@ -2,7 +2,7 @@
 'use client';
 import * as React from 'react';
 import { useWalkthrough } from '../WalkthroughProvider';
-import styles from '../Walkthrough.module.scss';
+import '../Walkthrough.css';
 
 export interface WalkthroughProgressProps {
   dots?: boolean;
@@ -18,7 +18,7 @@ export const WalkthroughProgress: React.FC<WalkthroughProgressProps> = ({
   if (dots) {
     return (
       <div
-        className={[styles.dots, className].filter(Boolean).join(' ')}
+        className={['dots', className].filter(Boolean).join(' ')}
         data-slot="walkthrough-progress"
         role="status"
         aria-live="polite"
@@ -28,7 +28,7 @@ export const WalkthroughProgress: React.FC<WalkthroughProgressProps> = ({
           <span
             key={i}
             data-slot="walkthrough-dot"
-            className={i === index ? styles.dotActive : styles.dot}
+            className={i === index ? 'dotActive' : 'dot'}
           />
         ))}
       </div>
@@ -37,7 +37,7 @@ export const WalkthroughProgress: React.FC<WalkthroughProgressProps> = ({
 
   return (
     <div
-      className={[styles.counter, className].filter(Boolean).join(' ')}
+      className={['counter', className].filter(Boolean).join(' ')}
       data-slot="walkthrough-counter"
       aria-live="polite"
     >

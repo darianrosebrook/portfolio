@@ -1,0 +1,35 @@
+@import "./ProfileFlag.tokens.css";
+
+/*
+ * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Scoped to [data-ds-component="ProfileFlag"] on the root element.
+ * Intentionally unlayered — see Button.css for the cascade rationale.
+ */
+[data-ds-component="ProfileFlag"] {
+  &.profileFlag {
+    a {
+      display: grid;
+      grid-template-columns: auto auto;
+      gap: var(--ds-profileFlag-spacing-gap-default);
+      align-items: center;
+      width: fit-content;
+      padding: var(--ds-profileFlag-spacing-padding-default);
+      background-color: var(--ds-profileFlag-color-background-default);
+      border: 1px solid var(--ds-profileFlag-color-border-default);
+      border-radius: var(--ds-profileFlag-size-radius-default);
+      color: var(--ds-profileFlag-color-foreground-primary);
+      line-height: 1;
+      text-decoration: none;
+      transition: border-color 0.2s ease;
+      padding-inline-end: var(--ds-profileFlag-spacing-padding-right);
+
+      small {
+        margin-block-start: var(--ds-profileFlag-spacing-margin-top);
+      }
+
+      &:hover {
+        border: 1px solid var(--ds-profileFlag-color-border-hover);
+      }
+    }
+  }
+}

@@ -1,7 +1,7 @@
 'use client';
 import * as React from 'react';
 import { useOTPContext } from '../OTPProvider';
-import styles from '../OTP.module.scss';
+import '../OTP.css';
 
 export interface OTPInputProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -18,7 +18,7 @@ export const OTPInput = React.forwardRef<HTMLDivElement, OTPInputProps>(
         aria-disabled={disabled || undefined}
         aria-readonly={readOnly || undefined}
         data-length={length}
-        className={[styles.group, className].filter(Boolean).join(' ')}
+        className={['group', className].filter(Boolean).join(' ')}
         {...rest}
       >
         {children}

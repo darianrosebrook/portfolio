@@ -1,0 +1,126 @@
+@import "./Accordion.tokens.css";
+
+/*
+ * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Scoped to [data-ds-component="Accordion"] on the root; child elements
+ * (item, header, trigger, content, etc.) use bare semantic class names
+ * within native nesting.
+ *
+ * Intentionally unlayered — see Button.css for the cascade rationale.
+ */
+[data-ds-component="Accordion"] {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+  contain: layout;
+
+  .item {
+    border-block-end: var(--ds-accordion-border-width) solid
+      var(--ds-accordion-border-color);
+
+    &:last-child {
+      border-block-end: none;
+    }
+
+    .header {
+      display: flex;
+    }
+
+    .trigger {
+      display: flex;
+      flex: 1;
+      gap: var(--ds-accordion-spacing-gap);
+      justify-content: space-between;
+      align-items: flex-start;
+      width: 100%;
+      padding: var(--ds-accordion-spacing-padding-y)
+        var(--ds-accordion-spacing-padding-x);
+      background: none;
+      border: none;
+      border-radius: var(--ds-accordion-border-radius);
+      outline: none;
+      color: var(--ds-accordion-color-text);
+      font: inherit;
+      font-weight: var(--ds-accordion-text-weight);
+      font-size: var(--ds-accordion-text-size);
+      line-height: var(--ds-accordion-text-line-height);
+      text-align: start;
+      transition:
+        background-color var(--ds-accordion-motion-duration)
+          var(--ds-accordion-motion-easing),
+        color var(--ds-accordion-motion-duration)
+          var(--ds-accordion-motion-easing);
+      cursor: pointer;
+
+      &:hover {
+        background-color: var(--ds-accordion-color-background-hover);
+        color: var(--ds-accordion-color-text-hover);
+        text-decoration: underline;
+      }
+
+      &:focus-visible {
+        outline: var(--ds-accordion-focus-width) solid
+          var(--ds-accordion-focus-color);
+        outline-offset: var(--ds-accordion-focus-offset);
+      }
+
+      &:disabled {
+        opacity: var(--ds-accordion-opacity-disabled);
+        cursor: not-allowed;
+        pointer-events: none;
+      }
+
+      .chevron {
+        flex-shrink: 0;
+        width: var(--ds-accordion-icon-size);
+        height: var(--ds-accordion-icon-size);
+        color: var(--ds-accordion-color-icon);
+        transition: transform var(--ds-accordion-motion-duration)
+          var(--ds-accordion-motion-easing);
+        transform: translateY(var(--ds-accordion-icon-offset));
+      }
+
+      &[data-state='open'] .chevron {
+        transform: translateY(var(--ds-accordion-icon-offset)) rotate(180deg);
+      }
+    }
+
+    .content {
+      overflow: hidden;
+      height: 0;
+      transition: height var(--ds-accordion-motion-duration)
+        var(--ds-accordion-motion-easing);
+
+      &[data-state='open'] {
+        height: auto;
+      }
+
+      .contentInner {
+        padding: 0 var(--ds-accordion-spacing-padding-x)
+          var(--ds-accordion-spacing-padding-y);
+        color: var(--ds-accordion-color-text-secondary);
+        font-size: var(--ds-accordion-text-size-content);
+        line-height: var(--ds-accordion-text-line-height-content);
+      }
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-ds-component="Accordion"] {
+    .item {
+      .trigger {
+        transition: none;
+
+        .chevron {
+          transition: none;
+        }
+      }
+
+      .content {
+        transition: none;
+      }
+    }
+  }
+}

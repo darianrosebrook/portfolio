@@ -1,0 +1,89 @@
+@import "./Breadcrumbs.tokens.css";
+
+[data-ds-component="Breadcrumbs"] {
+  &.root {
+    display: flex;
+    gap: var(--ds-breadcrumbs-spacing-gap-default);
+    align-items: center;
+    padding: var(--ds-breadcrumbs-spacing-padding-default) 0;
+    color: var(--ds-breadcrumbs-color-foreground-secondary);
+  }
+
+  .list {
+    display: inline-flex;
+    gap: var(--ds-breadcrumbs-spacing-gap-small);
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .link {
+    color: var(--ds-breadcrumbs-color-foreground-link);
+    line-height: var(--ds-breadcrumbs-typography-line-height-collapse);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--ds-breadcrumbs-color-foreground-primary);
+      text-decoration: underline;
+    }
+
+    &:focus-visible {
+      border-radius: var(--ds-breadcrumbs-shape-radius-small, 0.125rem);
+      outline: 2px solid var(--ds-breadcrumbs-color-focus);
+      outline-offset: 2px;
+    }
+  }
+
+  .current {
+    color: var(--ds-breadcrumbs-color-foreground-primary);
+    font-weight: 500;
+  }
+
+  .separator {
+    color: var(--ds-breadcrumbs-color-foreground-tertiary);
+  }
+
+  .overflow {
+    position: relative;
+  }
+
+  details.overflow summary {
+    list-style: none;
+    cursor: pointer;
+
+    &:focus-visible {
+      border-radius: var(--ds-breadcrumbs-shape-radius-small, 0.125rem);
+      outline: 2px solid var(--ds-breadcrumbs-color-focus);
+      outline-offset: 2px;
+    }
+  }
+
+  details.overflow[open] summary::after {
+    content: '';
+  }
+
+  .popover {
+    position: absolute;
+    z-index: 10;
+    min-width: 200px;
+    padding: var(--ds-breadcrumbs-spacing-padding-default);
+    background: var(--ds-breadcrumbs-color-background-elevated);
+    border: 1px solid var(--ds-breadcrumbs-color-border-subtle);
+    border-radius: var(--ds-breadcrumbs-shape-radius-medium);
+    box-shadow: var(--ds-breadcrumbs-elevation-surface-raised);
+    inset-block-start: 100%;
+    inset-inline-start: 0;
+    margin-block-start: var(--ds-breadcrumbs-spacing-margin-top);
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    li {
+      padding: var(--ds-breadcrumbs-spacing-padding-small) 0;
+    }
+  }
+}

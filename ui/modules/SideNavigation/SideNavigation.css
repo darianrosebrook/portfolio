@@ -1,0 +1,26 @@
+@import "./Sidenavigation.tokens.css";
+
+/*
+ * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Scoped to [data-ds-component="Sidenavigation"] on the root element.
+ * Note: tokens file uses "Sidenavigation" (lowercase 'n') — must match.
+ * Intentionally unlayered — see Button.css for the cascade rationale.
+ */
+[data-ds-component="Sidenavigation"] {
+  &.sidenavigation {
+    display: block;
+    padding: var(--ds-sidenavigation-size-padding-default);
+    background: var(--ds-sidenavigation-color-background-default);
+    border-radius: var(--ds-sidenavigation-size-radius-default);
+    box-shadow: var(--ds-sidenavigation-elevation-default)
+      var(--semantic-color-background-imageOverlay);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-ds-component="Sidenavigation"] {
+    &.sidenavigation {
+      transition: none;
+    }
+  }
+}

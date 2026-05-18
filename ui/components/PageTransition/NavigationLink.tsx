@@ -7,7 +7,7 @@ import { gsap } from 'gsap';
 import { SplitText } from 'gsap/SplitText';
 import { useGSAP } from '@gsap/react';
 import { useFontsLoaded } from '@/hooks/useFontsLoaded';
-import styles from './PageTransition.module.scss';
+import './PageTransition.css';
 
 // Register GSAP plugins
 gsap.registerPlugin(useGSAP, SplitText);
@@ -183,17 +183,17 @@ export function NavigationLink({
     }
   };
 
-  const linkClasses = [styles.transitionLink, className, isActive && 'active']
+  const linkClasses = ['transitionLink', className, isActive && 'active']
     .filter(Boolean)
     .join(' ');
 
   // If we're using text animation, wrap the children in the animation structure
   const linkContent = shouldAnimateText ? (
-    <span className={styles.maskLine}>
-      <span ref={textRef} className={styles.text}>
+    <span className='maskLine'>
+      <span ref={textRef} className='text'>
         {children}
       </span>
-      <span ref={cloneRef} className={styles.clone} aria-hidden="true">
+      <span ref={cloneRef} className='clone' aria-hidden="true">
         {children}
       </span>
     </span>

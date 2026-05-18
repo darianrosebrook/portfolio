@@ -1,0 +1,156 @@
+@import "./List.tokens.css";
+
+/*
+ * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Scoped to [data-ds-component="List"] on the root element.
+ * All modifier classes apply to root; li is a descendant.
+ * Intentionally unlayered — see Button.css for the cascade rationale.
+ */
+[data-ds-component="List"] {
+  &.list {
+    margin: 0;
+    padding: 0;
+    color: var(--ds-list-color-foreground-primary);
+
+    /* Custom marker colors */
+    ::marker {
+      color: var(--ds-list-color-foreground-secondary);
+    }
+  }
+
+  /* List type styles */
+  &.ul,
+  &.ol {
+    padding-inline-start: var(--ds-list-size-padding-default);
+  }
+
+  &.dl {
+    padding-inline-start: 0;
+  }
+
+  /* Size variants */
+  &.sm {
+    font-size: var(--ds-list-typography-sm-font-size);
+    line-height: var(--ds-list-typography-sm-line-height);
+  }
+
+  &.md {
+    font-size: var(--ds-list-typography-md-font-size);
+    line-height: var(--ds-list-typography-md-line-height);
+  }
+
+  &.lg {
+    font-size: var(--ds-list-typography-lg-font-size);
+    line-height: var(--ds-list-typography-lg-line-height);
+  }
+
+  /* Variant styles */
+  &.unstyled {
+    list-style: none;
+    padding-inline-start: 0;
+  }
+
+  &.inline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ds-list-spacing-inline);
+    list-style: none;
+    padding-inline-start: 0;
+  }
+
+  &.divided {
+    list-style: none;
+    padding-inline-start: 0;
+
+    li:not(:last-child) {
+      border-block-end: var(--ds-list-size-border-default) solid
+        var(--ds-list-color-border-default);
+      margin-block-end: var(--ds-list-spacing-divided);
+      padding-block-end: var(--ds-list-spacing-divided);
+    }
+  }
+
+  &.spaced {
+    li:not(:last-child) {
+      margin-block-end: var(--ds-list-spacing-spaced);
+    }
+  }
+
+  /* Marker styles */
+  &.marker-none {
+    list-style: none;
+    padding-inline-start: 0;
+  }
+
+  &.marker-disc {
+    list-style-type: disc;
+  }
+
+  &.marker-circle {
+    list-style-type: circle;
+  }
+
+  &.marker-square {
+    list-style-type: square;
+  }
+
+  &.marker-decimal {
+    list-style-type: decimal;
+  }
+
+  &.marker-alpha {
+    list-style-type: lower-alpha;
+  }
+
+  &.marker-roman {
+    list-style-type: lower-roman;
+  }
+
+  /* Spacing variants */
+  &.spacing-none li:not(:last-child) {
+    margin-block-end: 0;
+  }
+
+  &.spacing-sm li:not(:last-child) {
+    margin-block-end: var(--ds-list-spacing-sm);
+  }
+
+  &.spacing-md li:not(:last-child) {
+    margin-block-end: var(--ds-list-spacing-md);
+  }
+
+  &.spacing-lg li:not(:last-child) {
+    margin-block-end: var(--ds-list-spacing-lg);
+  }
+
+  /* Definition list specific styles */
+  &.dl.default {
+    dt {
+      font-weight: 600;
+      margin-block-end: var(--ds-list-spacing-dl-dt);
+    }
+
+    dd {
+      margin-block-end: var(--ds-list-spacing-dl-dd);
+      margin-inline-start: var(--ds-list-size-padding-default);
+    }
+
+    dd:first-child {
+      margin: 0;
+    }
+
+    dd:last-child {
+      margin-block-end: 0;
+    }
+  }
+
+  &.dl.inline {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: var(--ds-list-spacing-dl-gap) var(--ds-list-spacing-dl-gap-x);
+
+    dt {
+      font-weight: 600;
+    }
+  }
+}

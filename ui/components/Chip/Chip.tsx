@@ -1,6 +1,6 @@
 'use client';
 import React, { useMemo } from 'react';
-import styles from './Chip.module.scss';
+import './Chip.css';
 
 // Simple Slot implementation to avoid Radix dependency
 const Slot = React.forwardRef<
@@ -119,10 +119,10 @@ const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
     },
     ref
   ) => {
-    const baseClassName = styles.chip;
-    const variantClassName = styles[variant];
-    const sizeClassName = styles[size];
-    const isDisabledClassName = disabled ? styles.disabled : '';
+    const baseClassName = 'chip';
+    const variantClassName = variant;
+    const sizeClassName = size;
+    const isDisabledClassName = disabled ? 'disabled' : '';
 
     const combinedClassName = useMemo(
       () =>
@@ -148,7 +148,7 @@ const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
       if (variant === 'selected') {
         return (
           <span
-            className={styles.icon}
+            className="icon"
             aria-hidden="true"
             data-slot="chip-icon"
           >
@@ -160,7 +160,7 @@ const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
       if (variant === 'dismissible') {
         return (
           <span
-            className={styles.icon}
+            className="icon"
             aria-hidden="true"
             data-slot="chip-icon"
           >
@@ -181,7 +181,7 @@ const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
 
         return (
           <>
-            <span className={styles.text} data-slot="chip-text">
+            <span className="text" data-slot="chip-text">
               {children}
             </span>
             {renderIcon()}
@@ -211,6 +211,7 @@ const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
           className={combinedClassName}
           title={title}
           {...ariaProps}
+          data-ds-component="Chip"
           data-slot="chip"
         >
           {children as React.ReactElement}
@@ -227,6 +228,7 @@ const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
           title={title}
           {...ariaProps}
           {...anchorRest}
+          data-ds-component="Chip"
           data-slot="chip"
           data-variant={variant}
           data-size={size}
@@ -244,6 +246,7 @@ const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
         title={title}
         {...(rest as ChipAsButton)}
         {...ariaProps}
+        data-ds-component="Chip"
         data-slot="chip"
         data-variant={variant}
         data-size={size}

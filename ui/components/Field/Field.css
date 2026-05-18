@@ -1,0 +1,179 @@
+@import "./Field.tokens.css";
+
+[data-ds-component="Field"] {
+  &.root {
+    display: grid;
+    gap: var(--ds-field-gap-y);
+    container-type: inline-size;
+  }
+
+  .header {
+    color: var(--ds-field-label-color);
+    font-size: var(--ds-field-label-font-size);
+  }
+
+  .control :is(input, select, textarea) {
+    padding: var(--ds-field-pad-y) var(--ds-field-pad-x);
+    background: var(--ds-field-color-bg);
+    border: 1px solid var(--ds-field-color-border);
+    border-radius: var(--ds-field-radius);
+    outline: none;
+    color: var(--ds-field-color-fg);
+  }
+
+  .control :is(input, select, textarea):focus-visible {
+    border-color: var(--ds-field-color-focus-border);
+    box-shadow: 0 0 0 3px
+      color-mix(in oklab, var(--ds-field-color-focus-border) 30%, transparent);
+  }
+
+  .meta {
+    display: grid;
+    gap: var(--ds-field-gap-meta);
+  }
+
+  .meta [role='alert'] {
+    color: var(--ds-field-color-invalid-text);
+  }
+
+  .validatingIndicator {
+    display: inline-flex;
+    align-items: center;
+    margin-inline-start: var(--ds-field-spacing-indicator);
+  }
+}
+
+@supports selector(:scope) {
+  [data-ds-component="Field"] {
+    @scope (&.root) {
+      .header {
+        color: var(--ds-field-label-color);
+        font-size: var(--ds-field-label-font-size);
+      }
+
+      .control :is(input, select, textarea) {
+        padding: var(--ds-field-pad-y) var(--ds-field-pad-x);
+        background: var(--ds-field-color-bg);
+        border: 1px solid var(--ds-field-color-border);
+        border-radius: var(--ds-field-radius);
+        outline: none;
+        color: var(--ds-field-color-fg);
+      }
+
+      .control :is(input, select, textarea):focus-visible {
+        border-color: var(--ds-field-color-focus-border);
+        box-shadow: 0 0 0 3px
+          color-mix(in oklab, var(--ds-field-color-focus-border) 30%, transparent);
+      }
+
+      .meta {
+        display: grid;
+        gap: var(--ds-field-gap-meta);
+      }
+
+      .meta [role='alert'] {
+        color: var(--ds-field-color-invalid-text);
+      }
+
+      .validatingIndicator {
+        display: inline-flex;
+        align-items: center;
+        margin-inline-start: var(--ds-field-spacing-indicator);
+      }
+    }
+  }
+}
+
+@supports selector(:has(*)) {
+  [data-ds-component="Field"] {
+    &.root:has([data-status='invalid']) {
+      .header {
+        color: var(--ds-field-color-invalid-text);
+      }
+
+      .control :is(input, select, textarea) {
+        border-color: var(--ds-field-color-invalid-border);
+        box-shadow: 0 0 0 2px
+          color-mix(in oklab, var(--ds-field-color-invalid-border) 20%, transparent);
+      }
+    }
+
+    &.root:has([data-status='valid']) {
+      .control :is(input, select, textarea) {
+        border-color: var(--ds-field-color-valid-border);
+        box-shadow: 0 0 0 2px
+          color-mix(in oklab, var(--ds-field-color-valid-border) 20%, transparent);
+      }
+    }
+
+    &.root:has(.control :is(input, select, textarea):focus-visible) {
+      .header {
+        color: var(--ds-field-color-focus-text);
+      }
+    }
+
+    &.root:has(.validatingIndicator) {
+      .control :is(input, select, textarea) {
+        padding-inline-end: calc(var(--ds-field-pad-x) + 2rem);
+      }
+    }
+  }
+}
+
+@supports (container-type: inline-size) {
+  [data-ds-component="Field"] {
+    &.root {
+      @container (max-width: 25rem) {
+        gap: calc(var(--ds-field-gap-y) * 0.75);
+
+        .header {
+          font-size: calc(var(--ds-field-label-font-size) * 0.9);
+        }
+
+        .control :is(input, select, textarea) {
+          padding: calc(var(--ds-field-pad-y) * 0.75) calc(var(--ds-field-pad-x) * 0.75);
+        }
+
+        .meta {
+          gap: calc(var(--ds-field-gap-meta) * 0.75);
+          font-size: calc(var(--ds-field-meta-font-size, 0.875rem) * 0.9);
+        }
+      }
+
+      @container (max-width: 20rem) {
+        gap: calc(var(--ds-field-gap-y) * 0.5);
+
+        .header {
+          font-size: calc(var(--ds-field-label-font-size) * 0.85);
+        }
+
+        .control :is(input, select, textarea) {
+          padding: calc(var(--ds-field-pad-y) * 0.5) calc(var(--ds-field-pad-x) * 0.5);
+          font-size: calc(var(--ds-field-input-font-size, 1rem) * 0.9);
+        }
+
+        .meta {
+          font-size: calc(var(--ds-field-meta-font-size, 0.875rem) * 0.85);
+        }
+      }
+
+      @container (min-width: 40rem) {
+        .control :is(input, select, textarea) {
+          padding: calc(var(--ds-field-pad-y) * 1.25) calc(var(--ds-field-pad-x) * 1.25);
+        }
+
+        .validatingIndicator {
+          margin-inline-start: calc(var(--ds-field-spacing-indicator) * 1.25);
+        }
+      }
+    }
+  }
+}
+
+@media (prefers-contrast: more) {
+  [data-ds-component="Field"] {
+    .control :is(input, select, textarea) {
+      border-color: var(--ds-field-color-border-bold);
+    }
+  }
+}

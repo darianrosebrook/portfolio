@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import styles from './DashboardDemo.module.scss';
+import styles from './DashboardDemo.module.css';
 
 const members = [
   { initials: 'EL', name: 'Emmeline Labrie', email: 'emmeline.labrie@example.com' },

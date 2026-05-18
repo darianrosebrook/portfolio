@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import styles from './page.module.scss';
+import styles from './page.module.css';
 import { DashboardDemo } from './_components';
 import { PlaygroundWrapper } from './_components/PlaygroundWrapper';
 import { BrandSwitcher } from '@/ui/components/BrandSwitcher';

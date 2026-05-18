@@ -1,0 +1,50 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/PageTransition/PageTransition.tokens.json
+ */
+[data-ds-component="PageTransition"] {
+  /* === Duration Tokens === */
+  --ds-pageTransition-duration-fast: var(--core-motion-duration-short);
+  --ds-pageTransition-duration-normal: var(--core-motion-duration-medium);
+  --ds-pageTransition-duration-slow: var(--core-motion-duration-long);
+  --ds-pageTransition-duration-default: var(--core-motion-duration-medium);
+
+  /* === Easing Tokens === */
+  --ds-pageTransition-easing-standard: var(--core-motion-easing-standard);
+  --ds-pageTransition-easing-decelerate: var(--core-motion-easing-emphasized-out);
+  --ds-pageTransition-easing-accelerate: var(--core-motion-easing-emphasized-in);
+  --ds-pageTransition-easing-default: var(--core-motion-easing-standard);
+
+  /* === Spacing Tokens === */
+  --ds-pageTransition-spacing-padding-default: var(--core-spacing-size-04);
+  --ds-pageTransition-spacing-padding-small: var(--core-spacing-size-03);
+  --ds-pageTransition-spacing-padding-large: var(--core-spacing-size-05);
+  --ds-pageTransition-spacing-margin-default: var(--core-spacing-size-04);
+  --ds-pageTransition-spacing-margin-small: var(--core-spacing-size-03);
+  --ds-pageTransition-spacing-margin-large: var(--core-spacing-size-05);
+
+  /* === Color Tokens === */
+  --ds-pageTransition-color-background-default: var(--semantic-color-background-primary);
+  --ds-pageTransition-color-background-overlay: var(--semantic-color-background-image-overlay);
+  --ds-pageTransition-color-foreground-default: var(--semantic-color-foreground-primary);
+  --ds-pageTransition-color-foreground-secondary: var(--semantic-color-foreground-secondary);
+
+  /* === Opacity Tokens === */
+  --ds-pageTransition-opacity-overlay-default: var(--core-opacity-800);
+  --ds-pageTransition-opacity-overlay-light: var(--semantic-motion-opacity-overlay-light);
+  --ds-pageTransition-opacity-overlay-heavy: var(--semantic-motion-opacity-overlay-heavy);
+  --ds-pageTransition-opacity-content-default: var(--semantic-motion-opacity-content-default);
+  --ds-pageTransition-opacity-content-fade: var(--semantic-motion-opacity-content-fade);
+
+  /* === Transform Tokens === */
+  --ds-pageTransition-transform-scale-default: var(--semantic-motion-transition-scale-identity);
+  --ds-pageTransition-transform-scale-zoom: var(--semantic-motion-transition-scale-zoom);
+  --ds-pageTransition-transform-scale-shrink: var(--semantic-motion-transition-scale-shrink);
+  --ds-pageTransition-transform-translate-default: var(--core-motion-translate-none);
+  --ds-pageTransition-transform-translate-slide: var(--core-motion-translate-md);
+  --ds-pageTransition-transform-translate-bounce: var(--core-motion-translate-sm);
+
+  /* === ZIndex Tokens === */
+  --ds-pageTransition-z-index-overlay: var(--core-layer-dropdown);
+  --ds-pageTransition-z-index-content: var(--core-layer-above-dropdown);
+  --ds-pageTransition-z-index-max: var(--core-layer-max);
+}

@@ -1,0 +1,44 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Checkbox/Checkbox.tokens.json
+ */
+[data-ds-component="Checkbox"] {
+  /* === Size Tokens === */
+  --ds-checkbox-size-sm-width: var(--core-spacing-size-06);
+  --ds-checkbox-size-sm-height: var(--core-spacing-size-06);
+  --ds-checkbox-size-sm-icon-size: var(--core-spacing-size-05);
+  --ds-checkbox-size-md-width: var(--core-spacing-size-07);
+  --ds-checkbox-size-md-height: var(--core-spacing-size-07);
+  --ds-checkbox-size-md-icon-size: var(--core-spacing-size-06);
+  --ds-checkbox-size-lg-width: var(--core-spacing-size-07);
+  --ds-checkbox-size-lg-height: var(--core-spacing-size-07);
+  --ds-checkbox-size-lg-icon-size: var(--core-spacing-size-07);
+
+  /* === Color Tokens === */
+  --ds-checkbox-color-background-default: var(--semantic-color-background-primary);
+  --ds-checkbox-color-background-checked: var(--semantic-color-action-background-primary-default);
+  --ds-checkbox-color-background-indeterminate: var(--semantic-color-action-background-primary-default);
+  --ds-checkbox-color-background-disabled: var(--semantic-color-background-disabled);
+  --ds-checkbox-color-border-default: var(--semantic-color-border-default);
+  --ds-checkbox-color-border-hover: var(--semantic-color-border-hover);
+  --ds-checkbox-color-border-focus: var(--semantic-color-border-focus);
+  --ds-checkbox-color-border-checked: var(--semantic-color-action-background-primary-default);
+  --ds-checkbox-color-border-disabled: var(--semantic-color-border-disabled);
+  --ds-checkbox-color-icon-default: var(--semantic-color-foreground-on-brand);
+  --ds-checkbox-color-icon-disabled: var(--semantic-color-foreground-disabled);
+
+  /* === Border Tokens === */
+  --ds-checkbox-border-width: var(--core-shape-border-width-hairline);
+  --ds-checkbox-border-radius: var(--core-shape-radius-small);
+
+  /* === Spacing Tokens === */
+  --ds-checkbox-spacing-gap: var(--core-spacing-size-04);
+
+  /* === Transition Tokens === */
+  --ds-checkbox-transition-duration: var(--core-motion-duration-short);
+  --ds-checkbox-transition-easing: var(--core-motion-easing-standard);
+
+  /* === Focus Tokens === */
+  --ds-checkbox-focus-ring-width: var(--semantic-interaction-focus-ring-width);
+  --ds-checkbox-focus-ring-color: var(--semantic-color-border-focus);
+  --ds-checkbox-focus-ring-offset: var(--semantic-interaction-focus-ring-offset);
+}

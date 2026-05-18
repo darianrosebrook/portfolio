@@ -13,7 +13,7 @@ import { SymbolCanvas } from '@/ui/modules/FontInspector/SymbolCanvas';
 import { SymbolCanvasSVG } from '@/ui/modules/FontInspector/SymbolCanvasSVG';
 import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
-import styles from './page.module.scss';
+import styles from './page.module.css';
 
 export const dynamic = 'force-dynamic';
 

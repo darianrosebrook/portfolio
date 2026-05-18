@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import styles from './DashboardDemo.module.scss';
+import styles from './DashboardDemo.module.css';
 
 export const SizeSelectorCard: React.FC = () => {
   const [selectedSize, setSelectedSize] = useState('9');

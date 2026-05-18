@@ -4,7 +4,7 @@ import type { AssessmentRubric } from '@/types/assessment';
 import { useState } from 'react';
 import { getAssessmentProgress } from '../_lib/assessment';
 import { Assessment } from './Assessment';
-import styles from './AssessmentRubric.module.scss';
+import styles from './AssessmentRubric.module.css';
 
 interface AssessmentRubricComponentProps {
   rubric: AssessmentRubric;

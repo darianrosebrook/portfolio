@@ -1,0 +1,30 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Avatar/Avatar.tokens.json
+ */
+[data-ds-component="Avatar"] {
+  /* === Size Tokens === */
+  --ds-avatar-size-small: var(--core-spacing-size-05);
+  --ds-avatar-size-default: var(--core-spacing-size-06);
+  --ds-avatar-size-medium: var(--core-spacing-size-08);
+  --ds-avatar-size-large: var(--core-spacing-size-10);
+  --ds-avatar-size-status: var(--core-spacing-size-03);
+  --ds-avatar-size-radius-default: var(--core-shape-radius-full);
+  --ds-avatar-size-radius-small: var(--core-shape-radius-small);
+  --ds-avatar-size-radius-full: var(--core-shape-radius-full);
+  --ds-avatar-size-border-default: var(--core-shape-border-width-hairline);
+  --ds-avatar-size-border-offset: var(--core-shape-border-width-thick);
+
+  /* === Color Tokens === */
+  --ds-avatar-color-background-default: var(--semantic-color-background-secondary);
+  --ds-avatar-color-background-inverse: var(--semantic-color-background-inverse);
+  --ds-avatar-color-background-success: var(--semantic-color-background-success-strong);
+  --ds-avatar-color-background-warning: var(--semantic-color-background-warning-strong);
+  --ds-avatar-color-background-disabled: var(--semantic-color-border-disabled);
+  --ds-avatar-color-foreground-primary: var(--semantic-color-foreground-primary);
+  --ds-avatar-color-border-default: var(--semantic-color-border-light);
+  --ds-avatar-color-border-info: var(--semantic-color-border-info);
+
+  /* === Typography Tokens === */
+  --ds-avatar-typography-font-weight-medium: var(--core-typography-weight-medium);
+  --ds-avatar-typography-font-family-sans: var(--core-typography-font-family-sans);
+}

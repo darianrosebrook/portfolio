@@ -2,7 +2,7 @@
 
 import Postcard from '@/ui/components/Postcard';
 import Avatar from '@/ui/components/Avatar';
-import styles from './page.module.scss';
+import styles from './page.module.css';
 import type {
   BlueskyEmbed,
   BlueskyVideoEmbed,

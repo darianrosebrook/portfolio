@@ -1,0 +1,29 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Tooltip/Tooltip.tokens.json
+ */
+[data-ds-component="Tooltip"] {
+  /* === Color Tokens === */
+  --ds-tooltip-color-background-default: var(--semantic-color-background-inverse);
+  --ds-tooltip-color-foreground-default: var(--semantic-color-foreground-inverse);
+  --ds-tooltip-color-border-default: var(--semantic-color-border-subtle);
+
+  /* === Size Tokens === */
+  --ds-tooltip-size-padding-y: var(--core-spacing-size-03);
+  --ds-tooltip-size-padding-x: var(--core-spacing-size-04);
+  --ds-tooltip-size-radius-default: var(--core-shape-radius-small);
+  --ds-tooltip-size-max-width: 200px;
+
+  /* === Elevation Tokens === */
+  --ds-tooltip-elevation-default: var(--semantic-elevation-surface-floating);
+
+  /* === Typography Tokens === */
+  --ds-tooltip-typography-font-size: var(--semantic-typography-caption-01);
+  --ds-tooltip-typography-font-weight: var(--semantic-typography-font-weight-medium);
+  --ds-tooltip-typography-line-height: var(--semantic-typography-line-height-tight);
+
+  /* === Motion Tokens === */
+  --ds-tooltip-motion-duration-enter: var(--semantic-motion-interaction-enter-duration);
+  --ds-tooltip-motion-duration-exit: var(--semantic-motion-interaction-exit-duration);
+  --ds-tooltip-motion-easing-enter: var(--semantic-motion-interaction-enter-easing);
+  --ds-tooltip-motion-easing-exit: var(--semantic-motion-interaction-exit-easing);
+}

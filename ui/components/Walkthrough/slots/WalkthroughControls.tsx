@@ -2,7 +2,7 @@
 'use client';
 import * as React from 'react';
 import { useWalkthrough } from '../WalkthroughProvider';
-import styles from '../Walkthrough.module.scss';
+import '../Walkthrough.css';
 
 export interface WalkthroughControlsProps {
   onNext?: () => void;
@@ -34,13 +34,13 @@ export const WalkthroughControls: React.FC<WalkthroughControlsProps> = ({
   return (
     <div
       data-slot="walkthrough-controls"
-      className={[styles.controls, className].filter(Boolean).join(' ')}
+      className={['controls', className].filter(Boolean).join(' ')}
     >
       <button
         type="button"
         onClick={handleSkip}
         data-slot="walkthrough-skip"
-        className={styles.skip}
+        className="skip"
       >
         Skip
       </button>
@@ -49,7 +49,7 @@ export const WalkthroughControls: React.FC<WalkthroughControlsProps> = ({
         onClick={handlePrev}
         disabled={index === 0}
         data-slot="walkthrough-prev"
-        className={styles.prev}
+        className="prev"
       >
         Back
       </button>
@@ -57,7 +57,7 @@ export const WalkthroughControls: React.FC<WalkthroughControlsProps> = ({
         type="button"
         onClick={handleNext}
         data-slot="walkthrough-next"
-        className={styles.next}
+        className="next"
       >
         {index === count - 1 ? 'Done' : 'Next'}
       </button>

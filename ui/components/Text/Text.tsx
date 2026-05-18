@@ -1,6 +1,6 @@
 'use client';
 import * as React from 'react';
-import styles from './Text.module.scss';
+import './Text.css';
 
 export interface TextProps extends React.HTMLAttributes<HTMLElement> {
   /** Element type to render */
@@ -56,16 +56,16 @@ export const Text = React.forwardRef<HTMLElement, TextProps>(
       Component,
       {
         ref,
+        'data-ds-component': 'Text',
         'data-slot': 'text',
         className: [
-          styles.text,
-          styles[variant],
-          styles[size],
-          styles[`weight-${weight}`],
-          styles[`align-${align}`],
-          styles[`color-${color}`],
-          truncate ? styles.truncate : '',
-          transform !== 'none' ? styles[`transform-${transform}`] : '',
+          variant,
+          size,
+          `weight-${weight}`,
+          `align-${align}`,
+          `color-${color}`,
+          truncate ? 'truncate' : '',
+          transform !== 'none' ? `transform-${transform}` : '',
           className,
         ]
           .filter(Boolean)

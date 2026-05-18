@@ -1,0 +1,78 @@
+@import "./Tooltip.tokens.css";
+
+/*
+ * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Scoped to [data-ds-component="Tooltip"] on the root element.
+ * Intentionally unlayered — see Button.css for the cascade rationale.
+ */
+[data-ds-component="Tooltip"] {
+  &.tooltip {
+    z-index: 9999;
+    max-width: var(--ds-tooltip-size-max-width);
+    padding: var(--ds-tooltip-size-padding-y) var(--ds-tooltip-size-padding-x);
+    background: var(--ds-tooltip-color-background-default);
+    border: 1px solid var(--ds-tooltip-color-border-default);
+    border-radius: var(--ds-tooltip-size-radius-default);
+    box-shadow: var(--ds-tooltip-elevation-default);
+    color: var(--ds-tooltip-color-foreground-default);
+    font-weight: var(--ds-tooltip-typography-font-weight);
+    font-size: var(--ds-tooltip-typography-font-size);
+    line-height: var(--ds-tooltip-typography-line-height);
+    text-align: center;
+    word-wrap: break-word;
+    animation: tooltip-enter 150ms var(--ds-tooltip-motion-easing-enter, ease-out)
+      forwards;
+    pointer-events: none;
+    user-select: none;
+    contain: paint;
+  }
+
+  &.entering {
+    animation: tooltip-enter 150ms var(--ds-tooltip-motion-easing-enter, ease-out)
+      forwards;
+  }
+
+  &.leaving {
+    animation: tooltip-exit 100ms var(--ds-tooltip-motion-easing-exit, ease-in)
+      forwards;
+  }
+}
+
+@keyframes tooltip-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes tooltip-exit {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.95);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-ds-component="Tooltip"] {
+    &.tooltip {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+
+    &.entering,
+    &.leaving {
+      animation: none;
+    }
+  }
+}

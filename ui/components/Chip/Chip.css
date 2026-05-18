@@ -1,0 +1,207 @@
+@import "./Chip.tokens.css";
+
+[data-ds-component="Chip"] {
+  &.chip {
+    display: inline-flex;
+    gap: var(--ds-chip-size-gap);
+    align-items: center;
+    padding: var(--ds-chip-size-padding-vertical) var(--ds-chip-size-padding-horizontal);
+    background-color: var(--ds-chip-color-background-default);
+    border: var(--ds-chip-size-border) solid var(--ds-chip-color-border-default);
+    border-radius: var(--ds-chip-size-radius);
+    color: var(--ds-chip-color-foreground-default);
+    font-weight: var(--ds-chip-text-weight);
+    font-size: var(--ds-chip-text-size);
+    line-height: var(--ds-chip-text-line-height);
+    transition:
+      background-color var(--ds-chip-motion-duration-fast)
+        var(--ds-chip-motion-easing-standard),
+      border-color var(--ds-chip-motion-duration-fast)
+        var(--ds-chip-motion-easing-standard),
+      color var(--ds-chip-motion-duration-fast) var(--ds-chip-motion-easing-standard),
+      transform var(--ds-chip-motion-duration-fast)
+        var(--ds-chip-motion-easing-standard);
+    cursor: pointer;
+    user-select: none;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: var(--ds-chip-focus-outline-width) solid var(--ds-chip-focus-outline-color);
+      outline-offset: var(--ds-chip-focus-outline-offset);
+    }
+
+    &:hover {
+      background-color: color-mix(
+        in srgb,
+        var(--ds-chip-color-background-default) 90%,
+        var(--ds-chip-color-background-hover) 10%
+      );
+      border-color: color-mix(
+        in srgb,
+        var(--ds-chip-color-border-default) 80%,
+        var(--ds-chip-color-border-hover) 20%
+      );
+      color: var(--ds-chip-color-foreground-hover);
+      text-decoration: none;
+    }
+
+    &:active {
+      background-color: color-mix(
+        in srgb,
+        var(--ds-chip-color-background-default) 85%,
+        black 15%
+      );
+      border-color: color-mix(
+        in srgb,
+        var(--ds-chip-color-border-default) 85%,
+        black 15%
+      );
+      color: var(--ds-chip-color-foreground-active);
+      transform: scale(var(--ds-chip-motion-scale-pressed));
+    }
+
+    &.selected {
+      background-color: var(--ds-chip-color-background-selected);
+      border-color: var(--ds-chip-color-border-selected);
+      color: var(--ds-chip-color-foreground-selected);
+
+      &:hover {
+        background-color: color-mix(
+          in srgb,
+          var(--ds-chip-color-background-selected) 90%,
+          white 10%
+        );
+        border-color: color-mix(
+          in srgb,
+          var(--ds-chip-color-border-selected) 85%,
+          white 15%
+        );
+        color: var(--ds-chip-color-foreground-selected-hover);
+      }
+
+      &:active {
+        background-color: color-mix(
+          in srgb,
+          var(--ds-chip-color-background-selected) 85%,
+          black 15%
+        );
+        border-color: color-mix(
+          in srgb,
+          var(--ds-chip-color-border-selected) 85%,
+          black 15%
+        );
+        color: var(--ds-chip-color-foreground-selected-active);
+      }
+    }
+
+    &.dismissible {
+      background-color: var(--ds-chip-color-background-dismissible);
+      border-color: var(--ds-chip-color-border-dismissible);
+      color: var(--ds-chip-color-foreground-dismissible);
+
+      &:hover {
+        background-color: var(--ds-chip-color-background-dismissible-hover);
+        border-color: var(--ds-chip-color-border-dismissible-hover);
+        color: var(--ds-chip-color-foreground-dismissible-hover);
+      }
+
+      &:active {
+        background-color: var(--ds-chip-color-background-dismissible-active);
+        border-color: var(--ds-chip-color-border-dismissible-active);
+        color: var(--ds-chip-color-foreground-dismissible-active);
+      }
+    }
+
+    .icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: var(--ds-chip-size-icon-size);
+      height: var(--ds-chip-size-icon-size);
+      color: var(--ds-chip-color-icon-default);
+      transition: color var(--ds-chip-motion-duration-fast)
+        var(--ds-chip-motion-easing-standard);
+      animation: chip-icon-enter var(--ds-chip-motion-duration-fast)
+        var(--ds-chip-motion-easing-out) forwards;
+      margin-inline-start: var(--ds-chip-size-icon-margin);
+
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    &.selected .icon {
+      color: var(--ds-chip-color-icon-selected);
+    }
+
+    &.dismissible .icon {
+      color: var(--ds-chip-color-icon-dismissible);
+    }
+
+    &.dismissible:hover .icon {
+      color: var(--ds-chip-color-icon-dismissible-hover);
+    }
+
+    .text {
+      flex: 1;
+      overflow: hidden;
+      min-width: 0;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      pointer-events: none;
+
+      .icon {
+        opacity: 0.6;
+      }
+    }
+  }
+}
+
+@keyframes chip-icon-enter {
+  from {
+    opacity: 0;
+    transform: scale(var(--ds-chip-motion-scale-icon-enter));
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes chip-icon-exit {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(var(--ds-chip-motion-scale-icon-exit));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-ds-component="Chip"] {
+    &.chip {
+      transition: none;
+
+      &:active {
+        transform: none;
+      }
+    }
+
+    .icon {
+      animation: none;
+    }
+  }
+}

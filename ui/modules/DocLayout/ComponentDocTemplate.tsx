@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { DocSection } from './DocLayout';
-import styles from './ComponentDocTemplate.module.scss';
+import './ComponentDocTemplate.css';
 
 export interface ComponentDocTemplateProps {
   component: {
@@ -70,30 +70,30 @@ export function ComponentDocTemplate({
     component.layer.charAt(0).toUpperCase() + component.layer.slice(1);
 
   return (
-    <article className={styles.componentDoc}>
+    <article data-ds-component="ComponentDocTemplate" className='componentDoc'>
       {/* Overview Section */}
       <DocSection id="overview">
-        <header className={styles.componentHeader}>
-          <div className={styles.componentMeta}>
-            <span className={styles.layerBadge} data-layer={component.layer}>
+        <header className='componentHeader'>
+          <div className='componentMeta'>
+            <span className='layerBadge' data-layer={component.layer}>
               {layerLabel}
             </span>
             {component.metaPatterns && (
-              <div className={styles.metaPatterns}>
+              <div className='metaPatterns'>
                 {component.metaPatterns.map((pattern) => (
-                  <span key={pattern} className={styles.metaPattern}>
+                  <span key={pattern} className='metaPattern'>
                     {pattern}
                   </span>
                 ))}
               </div>
             )}
           </div>
-          <h1 className={styles.componentTitle}>{component.name}</h1>
-          <p className={styles.componentDescription}>{component.description}</p>
+          <h1 className='componentTitle'>{component.name}</h1>
+          <p className='componentDescription'>{component.description}</p>
         </header>
 
-        <div className={styles.overviewGrid}>
-          <div className={styles.overviewSection}>
+        <div className='overviewGrid'>
+          <div className='overviewSection'>
             <h3>When to use</h3>
             <ul>
               {sections.overview.whenToUse.map((item, index) => (
@@ -102,7 +102,7 @@ export function ComponentDocTemplate({
             </ul>
           </div>
 
-          <div className={styles.overviewSection}>
+          <div className='overviewSection'>
             <h3>Key ideas</h3>
             <ul>
               {sections.overview.keyIdeas.map((item, index) => (
@@ -116,26 +116,26 @@ export function ComponentDocTemplate({
       {/* API Section */}
       <DocSection id="api">
         <h2>API</h2>
-        <div className={styles.apiSection}>
+        <div className='apiSection'>
           <h3>Props</h3>
-          <div className={styles.propsTable}>
-            <div className={styles.propsHeader}>
+          <div className='propsTable'>
+            <div className='propsHeader'>
               <span>Name</span>
               <span>Type</span>
               <span>Description</span>
               <span>Default</span>
             </div>
             {sections.api.props.map((prop) => (
-              <div key={prop.name} className={styles.propRow}>
-                <code className={styles.propName}>
+              <div key={prop.name} className='propRow'>
+                <code className='propName'>
                   {prop.name}
-                  {prop.required && <span className={styles.required}>*</span>}
+                  {prop.required && <span className='required'>*</span>}
                 </code>
-                <code className={styles.propType}>{prop.type}</code>
-                <span className={styles.propDescription}>
+                <code className='propType'>{prop.type}</code>
+                <span className='propDescription'>
                   {prop.description}
                 </span>
-                <code className={styles.propDefault}>
+                <code className='propDefault'>
                   {prop.default || '—'}
                 </code>
               </div>
@@ -147,18 +147,18 @@ export function ComponentDocTemplate({
       {/* Structure Section */}
       <DocSection id="structure">
         <h2>Structure</h2>
-        <div className={styles.structureSection}>
-          <div className={styles.folderStructure}>
+        <div className='structureSection'>
+          <div className='folderStructure'>
             <h3>
               Folder: <code>{component.folder}</code>
             </h3>
-            <div className={styles.fileTree}>
+            <div className='fileTree'>
               {sections.structure.files.map((file) => (
-                <div key={file.name} className={styles.fileItem}>
-                  <span className={styles.fileName} data-type={file.type}>
+                <div key={file.name} className='fileItem'>
+                  <span className='fileName' data-type={file.type}>
                     {file.name}
                   </span>
-                  <span className={styles.fileDescription}>
+                  <span className='fileDescription'>
                     {file.description}
                   </span>
                 </div>
@@ -171,9 +171,9 @@ export function ComponentDocTemplate({
       {/* Accessibility Section */}
       <DocSection id="accessibility">
         <h2>Accessibility</h2>
-        <div className={styles.accessibilitySection}>
-          <div className={styles.a11yGrid}>
-            <div className={styles.a11ySection}>
+        <div className='accessibilitySection'>
+          <div className='a11yGrid'>
+            <div className='a11ySection'>
               <h3>Key considerations</h3>
               <ul>
                 {sections.accessibility.notes.map((note, index) => (
@@ -182,7 +182,7 @@ export function ComponentDocTemplate({
               </ul>
             </div>
 
-            <div className={styles.a11ySection}>
+            <div className='a11ySection'>
               <h3>Patterns implemented</h3>
               <ul>
                 {sections.accessibility.patterns.map((pattern, index) => (
@@ -197,20 +197,20 @@ export function ComponentDocTemplate({
       {/* Usage Section */}
       <DocSection id="usage">
         <h2>Usage</h2>
-        <div className={styles.usageSection}>
+        <div className='usageSection'>
           <h3>Basic example</h3>
-          <pre className={styles.codeBlock}>
+          <pre className='codeBlock'>
             <code>{sections.usage.basic}</code>
           </pre>
 
           {sections.usage.variations && (
-            <div className={styles.variations}>
+            <div className='variations'>
               <h3>Variations</h3>
               {sections.usage.variations.map((variation, index) => (
-                <div key={index} className={styles.variation}>
+                <div key={index} className='variation'>
                   <h4>{variation.title}</h4>
                   <p>{variation.description}</p>
-                  <pre className={styles.codeBlock}>
+                  <pre className='codeBlock'>
                     <code>{variation.code}</code>
                   </pre>
                 </div>
@@ -223,19 +223,19 @@ export function ComponentDocTemplate({
       {/* Tokens Section */}
       <DocSection id="tokens">
         <h2>Design Tokens</h2>
-        <div className={styles.tokensSection}>
+        <div className='tokensSection'>
           <p>{sections.tokens.description}</p>
 
           {sections.tokens.categories.map((category) => (
-            <div key={category.name} className={styles.tokenCategory}>
+            <div key={category.name} className='tokenCategory'>
               <h3>{category.name}</h3>
-              <div className={styles.tokenGrid}>
+              <div className='tokenGrid'>
                 {category.tokens.map((token) => (
-                  <div key={token.name} className={styles.tokenItem}>
-                    <code className={styles.tokenName}>{token.name}</code>
-                    <code className={styles.tokenValue}>{token.value}</code>
+                  <div key={token.name} className='tokenItem'>
+                    <code className='tokenName'>{token.name}</code>
+                    <code className='tokenValue'>{token.value}</code>
                     {token.description && (
-                      <span className={styles.tokenDescription}>
+                      <span className='tokenDescription'>
                         {token.description}
                       </span>
                     )}

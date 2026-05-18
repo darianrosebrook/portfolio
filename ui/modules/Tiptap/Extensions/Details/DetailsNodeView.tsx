@@ -4,7 +4,7 @@ import { NodeViewWrapper, NodeViewContent } from '@tiptap/react';
 import { NodeViewProps } from '@tiptap/core';
 import { Details } from '@/ui/components/Details';
 import { useState } from 'react';
-import styles from './DetailsNodeView.module.scss';
+import './DetailsNodeView.css';
 
 /**
  * Node view component for the Details extension
@@ -33,18 +33,19 @@ export const DetailsNodeView: React.FC<NodeViewProps> = ({
   return (
     <NodeViewWrapper
       as="div"
-      className={`${styles.detailsNodeView} ${selected ? styles.selected : ''}`}
+      data-ds-component="DetailsNodeView"
+      className={`${selected ? 'selected' : ''}`}
       data-drag-handle
     >
-      <div className={styles.detailsEditor}>
+      <div className='detailsEditor'>
         {/* Summary input for editing */}
-        <div className={styles.summaryEditor}>
+        <div className='summaryEditor'>
           <input
             type="text"
             value={summary}
             onChange={handleSummaryChange}
             placeholder="Enter summary text..."
-            className={styles.summaryInput}
+            className='summaryInput'
             onClick={(e) => e.stopPropagation()}
           />
         </div>
@@ -54,7 +55,7 @@ export const DetailsNodeView: React.FC<NodeViewProps> = ({
           open={isOpen}
           summary={summary}
           onToggle={handleToggle}
-          className={styles.detailsContent}
+          className='detailsContent'
         >
           <NodeViewContent />
         </Details>

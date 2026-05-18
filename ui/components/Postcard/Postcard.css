@@ -1,0 +1,120 @@
+@import "./Postcard.tokens.css";
+
+/*
+ * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Scoped to [data-ds-component="Postcard"] on the root element (article.post).
+ * Intentionally unlayered — see Button.css for the cascade rationale.
+ */
+
+/* Global link reset for postcards wrapped in anchors */
+a:has([data-ds-component="Postcard"]) {
+  text-decoration: none !important;
+}
+
+[data-ds-component="Postcard"] {
+  &.post {
+    padding: var(--ds-postcard-size-padding-default);
+    background-color: var(--ds-postcard-color-background-default);
+    border: var(--ds-postcard-size-border-default) solid
+      var(--ds-postcard-color-border-default);
+    border-radius: var(--ds-postcard-size-radius-default);
+    transition: background-color 0.2s ease;
+    margin-block-end: var(--ds-postcard-size-margin-bottom);
+
+    &:hover {
+      background-color: var(--ds-postcard-color-background-hover);
+      border-color: var(--ds-postcard-color-border-accent);
+    }
+  }
+
+  .header {
+    display: flex;
+    gap: var(--ds-postcard-size-gap-default);
+    align-items: center;
+    margin-block-end: var(--ds-postcard-size-gap-default);
+  }
+
+  .userInfo {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ds-postcard-size-gap-small);
+
+    & > p,
+    & > p + p {
+      margin: 0;
+      line-height: 1;
+    }
+  }
+
+  .displayName {
+    margin: 0;
+    color: var(--ds-postcard-color-foreground-primary);
+    font-weight: var(--ds-postcard-typography-display-name-font-weight);
+    font-size: var(--ds-postcard-typography-display-name-font-size);
+  }
+
+  .handle {
+    margin: 0;
+    color: var(--ds-postcard-color-foreground-secondary);
+    font-size: var(--ds-postcard-typography-handle-font-size);
+  }
+
+  .timestamp {
+    color: var(--ds-postcard-color-foreground-secondary);
+    font-size: var(--ds-postcard-typography-handle-font-size);
+    margin-inline-start: auto;
+  }
+
+  .content {
+    color: var(--ds-postcard-color-foreground-primary);
+    font-size: var(--ds-postcard-typography-content-font-size);
+    line-height: var(--ds-postcard-typography-content-line-height);
+    white-space: pre-wrap;
+    margin-block-end: var(--ds-postcard-size-gap-default);
+  }
+
+  .video,
+  .image,
+  .audio {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--ds-postcard-size-radius-medium);
+    margin-block-start: var(--ds-postcard-size-gap-default);
+  }
+
+  .footer {
+    display: flex;
+    gap: var(--ds-postcard-size-gap-large);
+    color: var(--ds-postcard-color-foreground-secondary);
+    font-size: var(--ds-postcard-typography-footer-font-size);
+  }
+
+  .stats {
+    display: flex;
+    gap: var(--ds-postcard-size-gap-large);
+  }
+
+  .stat {
+    display: flex;
+    gap: var(--ds-postcard-size-gap-small);
+    align-items: center;
+    padding: var(--ds-postcard-size-gap-small) var(--ds-postcard-size-gap-small);
+    background: none;
+    border: 2px solid var(--ds-postcard-color-border-default);
+    border-radius: var(--ds-postcard-size-radius-full);
+    color: var(--ds-postcard-color-foreground-secondary);
+    font-size: var(--ds-postcard-typography-footer-font-size);
+    transition: color 0.2s ease;
+    cursor: pointer;
+
+    svg {
+      width: var(--ds-postcard-size-gap-default);
+      height: var(--ds-postcard-size-gap-default);
+    }
+
+    &:hover {
+      color: var(--ds-postcard-color-foreground-primary);
+    }
+  }
+}

@@ -1,6 +1,6 @@
 'use client';
 import * as React from 'react';
-import styles from './Spinner.module.scss';
+import './Spinner.css';
 
 export type SpinnerVariant = 'ring' | 'dots' | 'bars';
 
@@ -52,8 +52,8 @@ export const Spinner = React.forwardRef<HTMLSpanElement, SpinnerProps>(
           ? `${thickness}px`
           : `var(--spinner-thickness-${thickness})`;
       return {
-        ['--spinner-size-value' as any]: resolvedSize,
-        ['--spinner-thickness-value' as any]: resolvedThickness,
+        ['--ds-spinner-size-value' as any]: resolvedSize,
+        ['--ds-spinner-thickness-value' as any]: resolvedThickness,
       } as React.CSSProperties;
     }, [size, thickness]);
 
@@ -68,8 +68,7 @@ export const Spinner = React.forwardRef<HTMLSpanElement, SpinnerProps>(
         } as const);
 
     const rootClassName = [
-      styles.root,
-      inline ? styles.inline : '',
+      inline ? 'inline' : '',
       className || '',
     ]
       .filter(Boolean)
@@ -78,6 +77,7 @@ export const Spinner = React.forwardRef<HTMLSpanElement, SpinnerProps>(
     return (
       <span
         ref={ref}
+        data-ds-component="Spinner"
         data-slot="spinner"
         className={rootClassName}
         style={styleVars}
@@ -85,7 +85,7 @@ export const Spinner = React.forwardRef<HTMLSpanElement, SpinnerProps>(
         {...a11yProps}
         {...rest}
       >
-        <span data-slot="spinner-visual" className={styles.visual} />
+        <span data-slot="spinner-visual" className="visual" />
       </span>
     );
   }

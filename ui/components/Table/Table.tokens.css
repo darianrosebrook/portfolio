@@ -1,0 +1,48 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Table/Table.tokens.json
+ */
+[data-ds-component="Table"] {
+  /* === Color Tokens === */
+  --ds-table-color-text: var(--semantic-color-foreground-primary);
+  --ds-table-color-text-head: var(--semantic-color-foreground-primary);
+  --ds-table-color-text-muted: var(--semantic-color-foreground-secondary);
+  --ds-table-color-border: var(--semantic-color-border-light);
+  --ds-table-color-background-hover: var(--semantic-interaction-background-hover);
+  --ds-table-color-background-selected: var(--semantic-color-background-accent);
+  --ds-table-color-background-footer: var(--semantic-color-background-secondary);
+
+  /* === Border Tokens === */
+  --ds-table-border-width: var(--core-shape-border-width-hairline);
+
+  /* === Spacing Tokens === */
+  --ds-table-spacing-cell-x: var(--core-spacing-size-03);
+  --ds-table-spacing-cell-y: var(--core-spacing-size-02);
+  --ds-table-spacing-caption: var(--core-spacing-size-04);
+  --ds-table-spacing-sort-gap: var(--core-spacing-size-02);
+  --ds-table-spacing-checkbox-offset: var(--core-spacing-size-01);
+
+  /* === Size Tokens === */
+  --ds-table-size-cell-height: var(--semantic-control-size-md-height);
+  --ds-table-size-checkbox-column: var(--core-spacing-size-09);
+  --ds-table-size-radius: var(--semantic-shape-control-radius-default);
+
+  /* === Text Tokens === */
+  --ds-table-text-size: var(--semantic-typography-body-03);
+  --ds-table-text-line-height: var(--semantic-typography-line-height-normal);
+  --ds-table-text-size-caption: var(--semantic-typography-body-04);
+  --ds-table-text-size-sort: var(--semantic-typography-body-04);
+  --ds-table-text-weight-head: var(--semantic-typography-font-weight-bold);
+  --ds-table-text-weight-footer: var(--semantic-typography-font-weight-medium);
+
+  /* === Motion Tokens === */
+  --ds-table-motion-duration: var(--core-motion-duration-short);
+  --ds-table-motion-easing: var(--core-motion-easing-standard);
+
+  /* === Focus Tokens === */
+  --ds-table-focus-width: var(--core-shape-border-width-thick);
+  --ds-table-focus-color: var(--semantic-color-border-accent);
+  --ds-table-focus-offset: var(--core-spacing-size-01);
+
+  /* === Elevation Tokens === */
+  --ds-table-elevation-raised: var(--semantic-elevation-surface-raised);
+}

@@ -5,7 +5,7 @@ import type {
   AssessmentRubric,
   ProficiencyLevel,
 } from '@/types/assessment';
-import styles from './AssessmentResults.module.scss';
+import styles from './AssessmentResults.module.css';
 
 interface AssessmentResultsProps {
   result: AssessmentResult;

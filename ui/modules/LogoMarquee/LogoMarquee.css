@@ -1,0 +1,62 @@
+[data-ds-component="LogoMarquee"] {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  min-height: 20vh;
+}
+
+[data-ds-component="LogoMarquee"] .marquee {
+  --logo-marquee-gap: var(--core-spacing-size-10);
+  --logo-marquee-height: var(--core-spacing-size-10);
+
+  position: absolute;
+  top: 50%;
+  left: 0;
+  display: flex;
+  gap: var(--logo-marquee-gap);
+  align-items: center;
+  overflow: visible;
+  width: fit-content;
+  padding-right: var(--core-spacing-size-09);
+  padding-left: var(--core-spacing-size-09);
+  color: var(--semantic-color-foreground-primary);
+  white-space: nowrap;
+  transition: all 0.5s ease-in-out;
+  transform: translateY(-50%);
+  will-change: transform;
+}
+
+[data-ds-component="LogoMarquee"] .box {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+}
+
+[data-ds-component="LogoMarquee"] .logo {
+  display: block;
+  width: auto;
+  height: var(--logo-marquee-height);
+  aspect-ratio: var(--logo-aspect-ratio);
+}
+
+[data-ds-component="LogoMarquee"] .cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--semantic-color-background-primary) 0%,
+    var(--semantic-color-background-transparent) 20% 80%,
+    var(--semantic-color-background-primary) 100%
+  );
+  pointer-events: none;
+}
+
+@media (width <= 768px) {
+  [data-ds-component="LogoMarquee"] .marquee {
+    --logo-marquee-gap: var(--core-spacing-size-04);
+    --logo-marquee-height: var(--core-spacing-size-08);
+  }
+}

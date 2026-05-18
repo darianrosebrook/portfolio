@@ -1,0 +1,378 @@
+@import "./BrandSwitcher.tokens.css";
+
+[data-ds-component="BrandSwitcher"] {
+  &.brandSwitcher {
+    --brand-switcher-gap-control: 10px;
+    --brand-switcher-border-width-strong: 2px;
+    --brand-switcher-radius-control: 10px;
+    --brand-switcher-radius-slider: 3px;
+    --brand-switcher-shadow-swatch: 0 1px 4px rgba(0, 0, 0, 0.12);
+    --brand-switcher-shadow-slider: 0 1px 4px rgba(0, 0, 0, 0.2);
+    --brand-switcher-shadow-segment: 0 1px 3px rgba(0, 0, 0, 0.08);
+    --brand-switcher-shadow-compact: 0 1px 2px rgba(0, 0, 0, 0.1);
+    --brand-switcher-shadow-compact-hover: 0 2px 4px rgba(0, 0, 0, 0.15);
+    --brand-switcher-transition-control: all 0.15s ease;
+    --brand-switcher-transition-slider-thumb: transform 0.1s ease;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--ds-brand-switcher-spacing-gap-md);
+    padding: 0;
+    background: transparent;
+    border: none;
+
+    &.compact {
+      padding: var(--semantic-spacing-padding-sm);
+      background: transparent;
+      border: none;
+    }
+
+    &.sticky {
+      position: sticky;
+      top: 12px;
+      z-index: 100;
+    }
+  }
+
+  .sectionCard {
+    background: var(--semantic-color-background-primary);
+    border-radius: var(--ds-brand-switcher-size-radius-03);
+    padding: var(--ds-brand-switcher-spacing-padding-sm);
+    border: 1px solid var(--semantic-color-border-default);
+  }
+
+  .sectionHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--ds-brand-switcher-spacing-gap-md);
+  }
+
+  .sectionTitle {
+    font-size: var(--ds-brand-switcher-typography-font-size-sm);
+    font-weight: var(--ds-brand-switcher-typography-font-weight-strong);
+    text-transform: uppercase;
+    letter-spacing: var(--ds-brand-switcher-letter-spacing-tight, 0.05em);
+    color: var(--semantic-color-foreground-primary);
+    margin: 0 0 var(--ds-brand-switcher-spacing-gap-md);
+
+    .sectionHeader & {
+      margin-bottom: 0;
+    }
+  }
+
+  .selectedBrandInfo {
+    display: flex;
+    align-items: center;
+    gap: var(--brand-switcher-gap-control);
+    margin-bottom: var(--ds-brand-switcher-spacing-gap-md);
+  }
+
+  .selectedBrandDot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .selectedBrandName {
+    font-size: var(--ds-brand-switcher-typography-font-size-sm);
+    font-weight: var(--ds-brand-switcher-typography-font-weight-strong);
+    color: var(--semantic-color-foreground-primary);
+    line-height: 1.2;
+  }
+
+  .selectedBrandMood {
+    font-size: var(--ds-brand-switcher-typography-font-size-xs);
+    color: var(--semantic-color-foreground-tertiary);
+    line-height: 1.3;
+  }
+
+  .swatchGrid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--ds-brand-switcher-spacing-gap-xs);
+  }
+
+  .swatchBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: var(--brand-switcher-border-width-strong) solid transparent;
+    border-radius: var(--brand-switcher-radius-control);
+    background: var(--semantic-color-background-secondary);
+    cursor: pointer;
+    transition: var(--brand-switcher-transition-control);
+
+    &:hover {
+      background: var(--semantic-color-background-tertiary);
+      transform: scale(1.05);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: var(--semantic-color-border-focus);
+    }
+
+    &.selected {
+      border-color: var(--semantic-color-foreground-primary);
+      background: var(--semantic-color-background-secondary);
+    }
+  }
+
+  .swatchDot {
+    display: block;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    box-shadow: var(--brand-switcher-shadow-swatch);
+  }
+
+  .densitySlider {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ds-brand-switcher-spacing-gap-xs);
+  }
+
+  .densityLabel {
+    font-size: var(--ds-brand-switcher-typography-font-size-xs);
+    font-weight: var(--ds-brand-switcher-typography-font-weight-default);
+    color: var(--semantic-color-foreground-secondary);
+  }
+
+  .rangeInput {
+    width: 100%;
+    height: 6px;
+    appearance: none;
+    background: var(--semantic-color-background-tertiary);
+    border-radius: var(--brand-switcher-radius-slider);
+    outline: none;
+    cursor: pointer;
+
+    &::-webkit-slider-thumb {
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--semantic-color-foreground-accent);
+      border: 2px solid var(--semantic-color-background-primary);
+      box-shadow: var(--brand-switcher-shadow-slider);
+      cursor: pointer;
+      transition: var(--brand-switcher-transition-slider-thumb);
+    }
+
+    &::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+    }
+
+    &::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--semantic-color-foreground-accent);
+      border: 2px solid var(--semantic-color-background-primary);
+      box-shadow: var(--brand-switcher-shadow-slider);
+      cursor: pointer;
+    }
+  }
+
+  .densityTicks {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .densityTick {
+    font-size: var(--ds-brand-switcher-typography-font-size-xs);
+    color: var(--semantic-color-foreground-tertiary);
+  }
+
+  .segmentedControl {
+    display: flex;
+    padding: var(--ds-brand-switcher-spacing-gap-xs);
+    border-radius: var(--ds-brand-switcher-size-radius-02);
+    background: var(--semantic-color-background-tertiary);
+    gap: var(--ds-brand-switcher-spacing-gap-xs);
+  }
+
+  .segment {
+    flex: 1;
+    padding: var(--ds-brand-switcher-spacing-gap-xs)
+      var(--ds-brand-switcher-spacing-padding-xs);
+    border: none;
+    border-radius: var(--ds-brand-switcher-size-radius-02);
+    background: transparent;
+    font-size: var(--ds-brand-switcher-typography-font-size-xs);
+    font-weight: var(--ds-brand-switcher-typography-font-weight-default);
+    color: var(--semantic-color-foreground-secondary);
+    cursor: pointer;
+    transition: var(--brand-switcher-transition-control);
+    text-align: center;
+
+    &:hover {
+      color: var(--semantic-color-foreground-primary);
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .segmentActive {
+    background: var(--semantic-color-background-primary);
+    color: var(--semantic-color-foreground-primary);
+    box-shadow: var(--brand-switcher-shadow-segment);
+  }
+
+  .subsection {
+    margin-bottom: var(--ds-brand-switcher-spacing-gap-md);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .subsectionLabel {
+    font-size: var(--ds-brand-switcher-typography-font-size-xs);
+    font-weight: var(--ds-brand-switcher-typography-font-weight-strong);
+    text-transform: uppercase;
+    letter-spacing: var(--ds-brand-switcher-letter-spacing-wide, 0.06em);
+    color: var(--semantic-color-foreground-tertiary);
+    margin-bottom: var(--ds-brand-switcher-spacing-gap-xs);
+  }
+
+  .keyboardHint {
+    text-align: center;
+    padding: var(--ds-brand-switcher-spacing-padding-xs);
+    color: var(--semantic-color-foreground-tertiary);
+    font-size: var(--ds-brand-switcher-typography-font-size-xs);
+  }
+
+  .kbd {
+    display: inline-block;
+    padding: var(--ds-brand-switcher-spacing-gap-xs)
+      var(--ds-brand-switcher-spacing-padding-xs);
+    background: var(--semantic-color-background-secondary);
+    border-radius: var(--ds-brand-switcher-size-radius-01);
+    font-family: 'SF Mono', 'Monaco', monospace;
+    font-size: var(--ds-brand-switcher-typography-font-size-xs);
+    margin: 0 var(--ds-brand-switcher-kbd-gap, 1px);
+    color: var(--semantic-color-foreground-primary);
+  }
+
+  .kbdSeparator {
+    margin: 0 var(--ds-brand-switcher-spacing-padding-xs);
+    color: var(--semantic-color-border-default);
+  }
+
+  .swatchRow {
+    display: flex;
+    gap: var(--semantic-spacing-gap-xs);
+  }
+
+  .swatch {
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0;
+    border: var(--brand-switcher-border-width-strong) solid transparent;
+    border-radius: var(--core-shape-radius-01);
+    background-color: var(--swatch-color);
+    cursor: pointer;
+    transition:
+      transform 0.1s ease,
+      border-color 0.15s ease,
+      box-shadow 0.15s ease;
+    box-shadow: var(--brand-switcher-shadow-compact);
+
+    &:hover {
+      transform: scale(1.1);
+      box-shadow: var(--brand-switcher-shadow-compact-hover);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: var(--semantic-color-border-focus);
+    }
+
+    &.active {
+      border-color: var(--semantic-color-foreground-primary);
+      box-shadow:
+        0 0 0 2px var(--semantic-color-background-primary),
+        0 0 0 4px var(--swatch-color);
+    }
+  }
+
+  .autoCycle {
+    display: flex;
+    flex-direction: column;
+    gap: var(--semantic-spacing-gap-sm);
+  }
+
+  .autoCycleLabel {
+    display: flex;
+    align-items: center;
+    gap: var(--semantic-spacing-gap-sm);
+    font-size: var(--semantic-typography-font-size-body-sm);
+    color: var(--semantic-color-foreground-primary);
+    cursor: pointer;
+  }
+
+  .intervalControl {
+    display: flex;
+    align-items: center;
+    gap: var(--semantic-spacing-gap-sm);
+    padding-left: var(--ds-brand-switcher-compact-indent, 1.5rem);
+  }
+
+  .intervalLabel {
+    font-size: var(--semantic-typography-font-size-body-xs);
+    color: var(--semantic-color-foreground-secondary);
+  }
+
+  .intervalInput {
+    width: 5rem;
+    padding: var(--semantic-spacing-padding-xs) var(--semantic-spacing-padding-sm);
+    font-size: var(--semantic-typography-font-size-body-sm);
+    border: 1px solid var(--semantic-color-border-default);
+    border-radius: var(--core-shape-radius-01);
+    background: var(--semantic-color-background-primary);
+    color: var(--semantic-color-foreground-primary);
+
+    &:focus {
+      outline: none;
+      border-color: var(--semantic-color-border-focus);
+    }
+  }
+
+  .intervalUnit {
+    font-size: var(--semantic-typography-font-size-body-xs);
+    color: var(--semantic-color-foreground-tertiary);
+  }
+
+  .checkbox {
+    width: 18px;
+    height: 18px;
+    border-radius: var(--ds-brand-switcher-size-radius-01);
+    border: 2px solid var(--semantic-color-border-default);
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+      border-color: var(--semantic-color-border-focus);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  [data-ds-component="BrandSwitcher"] {
+    .swatchGrid {
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    .sectionCard {
+      padding: var(--ds-brand-switcher-responsive-padding, 14px);
+    }
+  }
+}

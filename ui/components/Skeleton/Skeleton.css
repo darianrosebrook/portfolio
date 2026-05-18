@@ -1,0 +1,156 @@
+@import "./Skeleton.tokens.css";
+
+/*
+ * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Scoped to [data-ds-component="Skeleton"] on the root element.
+ * Internal alias vars (--skeleton-bg, etc.) bridge the token namespace to
+ * reduce diff noise in deeply inherited selectors.
+ * Intentionally unlayered — see Button.css for the cascade rationale.
+ */
+[data-ds-component="Skeleton"] {
+  /* Bridge internal alias vars to --ds-skeleton-* tokens */
+  --skeleton-bg: var(--ds-skeleton-color-base);
+  --skeleton-hi: var(--ds-skeleton-color-highlight);
+  --skeleton-hi2: var(--ds-skeleton-color-highlight-2);
+  --skeleton-radius-cur: var(--ds-skeleton-radius-md);
+  --skeleton-gap-cur: var(--ds-skeleton-gap-md);
+  --skeleton-anim-duration: var(--ds-skeleton-anim-duration);
+  --skeleton-anim-duration-alt: var(--ds-skeleton-anim-duration-alt);
+  --skeleton-anim-duration-pulse: var(--ds-skeleton-anim-duration-pulse);
+  --skeleton-anim-easing: var(--ds-skeleton-anim-easing);
+
+  &.root {
+    display: block;
+    color: transparent;
+    container-type: inline-size;
+  }
+
+  .stack {
+    display: grid;
+    gap: var(--skeleton-gap-cur);
+  }
+
+  .row {
+    display: flex;
+    gap: var(--skeleton-gap-cur);
+    align-items: center;
+    min-width: 0;
+  }
+
+  .media {
+    inline-size: 100%;
+  }
+
+  .shape {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    background: var(--skeleton-bg);
+    border-radius: var(--skeleton-radius-override, var(--skeleton-radius-cur));
+  }
+
+  .kind-circle {
+    border-radius: 999px;
+  }
+
+  .kind-line {
+    block-size: 1em;
+  }
+
+  &[data-animate='shimmer'] .shape::after {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      #00000000 0%,
+      var(--skeleton-hi) 50%,
+      #00000000 100%
+    );
+    transform: translateX(-100%);
+    animation: skeleton-shimmer var(--skeleton-anim-duration, 1200ms)
+      var(--skeleton-anim-easing, cubic-bezier(0.4, 0, 0.2, 1)) infinite;
+    content: '';
+  }
+
+  &[data-animate='wipe'] .shape::after {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      var(--skeleton-hi) 0%,
+      var(--skeleton-hi2) 50%,
+      var(--skeleton-hi) 100%
+    );
+    transform: translateX(-120%);
+    animation: skeleton-wipe var(--skeleton-anim-duration-alt, 1600ms)
+      var(--skeleton-anim-easing, cubic-bezier(0.4, 0, 0.2, 1)) infinite;
+    animation-delay: var(--skeleton-wipe-delay, 0ms);
+    content: '';
+    mask: linear-gradient(
+      90deg,
+      #00000000 0%,
+      #000000 10%,
+      #000000 90%,
+      #00000000 100%
+    );
+  }
+
+  &[data-animate='pulse'] .shape {
+    animation: skeleton-pulse var(--skeleton-anim-duration-pulse, 900ms) ease-in-out
+      infinite;
+  }
+}
+
+@container (min-width: 480px) {
+  [data-ds-component="Skeleton"][data-variant='text'][data-density='compact'] .kind-line {
+    block-size: 0.85em;
+  }
+
+  [data-ds-component="Skeleton"][data-variant='text'][data-density='spacious'] .kind-line {
+    block-size: 1.1em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-ds-component="Skeleton"] {
+    .shape,
+    .shape::after {
+      animation: none !important;
+    }
+  }
+}
+
+@media (prefers-contrast: more) {
+  [data-ds-component="Skeleton"] {
+    .shape {
+      background: var(--ds-skeleton-color-contrast-base, var(--skeleton-bg));
+    }
+  }
+}
+
+@keyframes skeleton-shimmer {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes skeleton-wipe {
+  50% {
+    transform: translateX(120%);
+  }
+
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 0.65;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}

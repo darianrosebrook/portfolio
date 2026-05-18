@@ -1,0 +1,43 @@
+/* No tokens.css — AspectRatio has no tokens.json. */
+
+[data-ds-component="AspectRatio"] {
+  &.container {
+    position: relative;
+    overflow: hidden;
+  }
+}
+
+/* Fallback for browsers without aspect-ratio support */
+@supports not (aspect-ratio: 1) {
+  [data-ds-component="AspectRatio"] {
+    &.container::before {
+      display: block;
+      content: '';
+      padding-block-end: calc(100% / var(--aspect-ratio, 1));
+    }
+
+    &.container > * {
+      position: absolute;
+      inset: 0;
+    }
+  }
+}
+
+/* Optional placeholder styling when empty */
+[data-ds-component="AspectRatio"] {
+  &.container:empty {
+    background: var(--aspect-ratio-placeholder-bg);
+    border: 1px dashed var(--aspect-ratio-surface-border);
+    border-radius: var(--aspect-ratio-surface-radius);
+
+    &::after {
+      position: absolute;
+      inset: 50%;
+      color: var(--aspect-ratio-placeholder-color);
+      font-size: 0.875rem;
+      white-space: nowrap;
+      transform: translate(-50%, -50%);
+      content: 'Aspect Ratio Container';
+    }
+  }
+}

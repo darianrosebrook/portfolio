@@ -2,7 +2,7 @@
 
 import { useReducedMotion } from '@/context/ReducedMotionContext';
 import React from 'react';
-import styles from './ReflectionCallout.module.scss';
+import styles from './ReflectionCallout.module.css';
 
 interface ReflectionCalloutProps {
   question: string;

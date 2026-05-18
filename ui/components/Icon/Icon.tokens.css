@@ -1,0 +1,10 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Icon/Icon.tokens.json
+ */
+[data-ds-component="Icon"] {
+  /* === Color Tokens === */
+  --ds-icon-color-foreground-default: var(--semantic-color-foreground-primary);
+
+  /* === Size Tokens === */
+  --ds-icon-size-padding-default: var(--core-spacing-size-01);
+}

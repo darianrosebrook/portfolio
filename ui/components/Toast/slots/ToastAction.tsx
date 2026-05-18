@@ -1,7 +1,7 @@
 'use client';
 import * as React from 'react';
 import type { ToastAction as ToastActionType } from '../types';
-import styles from '../Toast.module.scss';
+import '../Toast.css';
 
 export interface ToastActionProps {
   action: ToastActionType;
@@ -15,7 +15,7 @@ export const ToastAction: React.FC<ToastActionProps> = ({
   return (
     <button
       type="button"
-      className={[styles.action, className].filter(Boolean).join(' ')}
+      className={['action', className].filter(Boolean).join(' ')}
       data-slot="toast-action"
       onClick={action.onClick}
     >

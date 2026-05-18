@@ -1,6 +1,6 @@
 import React from 'react';
 import { Editor } from '@tiptap/react';
-import styles from './Toolbar.module.scss';
+import './Toolbar.css';
 import Icon from '../../components/Icon';
 import { byPrefixAndName } from '@awesome.me/kit-0ba7f5fefb/icons';
 const faBold = byPrefixAndName['far']['bold'];
@@ -54,7 +54,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
 
   return (
     <div
-      className={styles.toolbar}
+      data-ds-component="Toolbar"
       role="toolbar"
       aria-label="Editor formatting tools"
       data-slot="toolbar"
@@ -72,13 +72,13 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
         <option value="3">Heading 3</option>
       </select>
 
-      <div className={styles.separator} data-slot="separator" />
+      <div className='separator' data-slot="separator" />
 
       {/* Text formatting */}
       <button
         type="button"
         onClick={() => editor.chain().focus().toggleBold().run()}
-        className={editor.isActive('bold') ? styles.isActive : ''}
+        className={editor.isActive('bold') ? 'isActive' : ''}
         aria-pressed={editor.isActive('bold')}
         title="Bold"
         data-slot="action"
@@ -88,7 +88,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
       <button
         type="button"
         onClick={() => editor.chain().focus().toggleItalic().run()}
-        className={editor.isActive('italic') ? styles.isActive : ''}
+        className={editor.isActive('italic') ? 'isActive' : ''}
         aria-pressed={editor.isActive('italic')}
         title="Italic"
         data-slot="action"
@@ -98,7 +98,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
       <button
         type="button"
         onClick={() => editor.chain().focus().toggleUnderline().run()}
-        className={editor.isActive('underline') ? styles.isActive : ''}
+        className={editor.isActive('underline') ? 'isActive' : ''}
         aria-pressed={editor.isActive('underline')}
         title="Underline"
         data-slot="action"
@@ -108,7 +108,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
       <button
         type="button"
         onClick={() => editor.chain().focus().toggleStrike().run()}
-        className={editor.isActive('strike') ? styles.isActive : ''}
+        className={editor.isActive('strike') ? 'isActive' : ''}
         aria-pressed={editor.isActive('strike')}
         title="Strikethrough"
         data-slot="action"
@@ -116,14 +116,14 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
         <Icon icon={faStrikethrough} />
       </button>
 
-      <div className={styles.separator} data-slot="separator" />
+      <div className='separator' data-slot="separator" />
 
       {/* Alignment */}
       <button
         type="button"
         onClick={() => editor.chain().focus().setTextAlign('left').run()}
         className={
-          editor.isActive({ textAlign: 'left' }) ? styles.isActive : ''
+          editor.isActive({ textAlign: 'left' }) ? 'isActive' : ''
         }
         aria-pressed={editor.isActive({ textAlign: 'left' })}
         title="Align left"
@@ -135,7 +135,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
         type="button"
         onClick={() => editor.chain().focus().setTextAlign('center').run()}
         className={
-          editor.isActive({ textAlign: 'center' }) ? styles.isActive : ''
+          editor.isActive({ textAlign: 'center' }) ? 'isActive' : ''
         }
         aria-pressed={editor.isActive({ textAlign: 'center' })}
         title="Align center"
@@ -147,7 +147,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
         type="button"
         onClick={() => editor.chain().focus().setTextAlign('right').run()}
         className={
-          editor.isActive({ textAlign: 'right' }) ? styles.isActive : ''
+          editor.isActive({ textAlign: 'right' }) ? 'isActive' : ''
         }
         aria-pressed={editor.isActive({ textAlign: 'right' })}
         title="Align right"
@@ -156,7 +156,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
         <Icon icon={faAlignRight} />
       </button>
 
-      <div className={styles.separator} data-slot="separator" />
+      <div className='separator' data-slot="separator" />
 
       {/* Color picker */}
       <input
@@ -170,13 +170,13 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
         data-slot="color-input"
       />
 
-      <div className={styles.separator} data-slot="separator" />
+      <div className='separator' data-slot="separator" />
 
       {/* Lists */}
       <button
         type="button"
         onClick={() => editor.chain().focus().toggleBulletList().run()}
-        className={editor.isActive('bulletList') ? styles.isActive : ''}
+        className={editor.isActive('bulletList') ? 'isActive' : ''}
         aria-pressed={editor.isActive('bulletList')}
         title="Bullet list"
         data-slot="action"
@@ -186,7 +186,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
       <button
         type="button"
         onClick={() => editor.chain().focus().toggleOrderedList().run()}
-        className={editor.isActive('orderedList') ? styles.isActive : ''}
+        className={editor.isActive('orderedList') ? 'isActive' : ''}
         aria-pressed={editor.isActive('orderedList')}
         title="Numbered list"
         data-slot="action"
@@ -194,7 +194,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
         <Icon icon={faListOl} />
       </button>
 
-      <div className={styles.separator} data-slot="separator" />
+      <div className='separator' data-slot="separator" />
 
       {/* Blocks */}
       <button
@@ -214,7 +214,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
       <button
         type="button"
         onClick={() => editor.chain().focus().toggleBlockquote().run()}
-        className={editor.isActive('blockquote') ? styles.isActive : ''}
+        className={editor.isActive('blockquote') ? 'isActive' : ''}
         aria-pressed={editor.isActive('blockquote')}
         title="Quote"
         data-slot="action"
@@ -246,7 +246,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
         <Icon icon={faList} />
       </button>
 
-      <div className={styles.separator} data-slot="separator" />
+      <div className='separator' data-slot="separator" />
 
       {/* History */}
       <button

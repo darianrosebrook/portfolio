@@ -1,0 +1,29 @@
+@import "./Shuttle.tokens.css";
+
+/*
+ * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Scoped to [data-ds-component="Shuttle"] on the root element.
+ * Intentionally unlayered — see Button.css for the cascade rationale.
+ */
+[data-ds-component="Shuttle"] {
+  &.shuttle {
+    display: block;
+    padding: var(--ds-shuttle-size-padding-default);
+    background: var(--ds-shuttle-color-background-default);
+    border-radius: var(--ds-shuttle-size-radius-default);
+    box-shadow: var(--ds-shuttle-elevation-default)
+      var(--ds-shuttle-overlay-image-overlay);
+  }
+
+  .item {
+    /* Inherits from parent context */
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-ds-component="Shuttle"] {
+    &.shuttle {
+      transition: none;
+    }
+  }
+}

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import styles from './DashboardDemo.module.scss';
+import styles from './DashboardDemo.module.css';
 
 const accentSpan = (text: string) => (
   <span style={{ color: 'var(--semantic-color-foreground-accent)' }}>{text}</span>

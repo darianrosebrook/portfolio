@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import styles from './DashboardDemo.module.scss';
+import styles from './DashboardDemo.module.css';
 
 /**
  * Editorial / marketing feature card inspired by Radix UI's "Dare to stand out" example.

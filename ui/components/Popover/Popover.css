@@ -1,0 +1,93 @@
+@import "./Popover.tokens.css";
+
+/*
+ * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Scoped to [data-ds-component="Popover"] on the root element.
+ * NOTE: .popoverContent is portaled to document.body, so it cannot be
+ * scoped under the root selector. It uses a top-level rule but inherits
+ * --ds-popover-* vars declared on the root via the tokens file.
+ * Intentionally unlayered — see Button.css for the cascade rationale.
+ */
+[data-ds-component="Popover"] {
+  &.popoverContainer {
+    display: inline-block;
+  }
+
+  .popoverTrigger {
+    margin: 0;
+    padding: 0;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+  }
+
+  .activeTrigger {
+    outline: 2px solid var(--ds-popover-color-border-accent);
+    outline-offset: 2px;
+    transition: outline ease-out 2s;
+
+    & > div:hover {
+      transform: rotate(1080deg);
+    }
+  }
+}
+
+/* Portaled content: lives in document.body, not inside the root element */
+.popoverContent {
+  /* Declare tokens locally since parent scope is unavailable */
+  --ds-popover-size-gap-default: var(--core-spacing-size-04);
+  --ds-popover-size-max-width-default: var(--core-spacing-size-06);
+  --ds-popover-size-padding-default: var(--core-spacing-size-06);
+  --ds-popover-size-radius-default: var(--semantic-shape-control-radius-default);
+  --ds-popover-color-background-content: var(--semantic-color-background-secondary);
+  --ds-popover-color-border-accent: var(--semantic-color-border-accent);
+  --ds-popover-elevation-default: var(--semantic-elevation-default);
+
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-popover-size-gap-default);
+  min-width: 256px;
+  max-width: calc(100vw - var(--ds-popover-size-max-width-default));
+  padding: var(--ds-popover-size-padding-default);
+  background: var(--ds-popover-color-background-content);
+  border-radius: var(--ds-popover-size-radius-default);
+  box-shadow: var(--ds-popover-elevation-default);
+  animation: popover-enter 200ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  contain: layout paint style;
+
+  &.leaving {
+    animation: popover-exit 150ms ease-in forwards;
+  }
+}
+
+@keyframes popover-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes popover-exit {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .popoverContent,
+  .popoverContent.leaving {
+    animation: none;
+  }
+}

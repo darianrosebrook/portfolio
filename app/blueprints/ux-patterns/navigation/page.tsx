@@ -1,4 +1,4 @@
-import styles from './page.module.scss';
+import styles from './page.module.css';
 
 const NavigationPage: React.FC = () => {
   return (

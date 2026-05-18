@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { useTabs } from '../TabsProvider';
 import type { TabsValue } from '../types';
-import styles from '../Tabs.module.scss';
+import '../Tabs.css';
 
 export interface TabProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   value?: TabsValue;
@@ -166,9 +166,9 @@ export const Tab = React.forwardRef<HTMLButtonElement, TabProps>(
         aria-disabled={disabled || undefined}
         tabIndex={tabIndex}
         className={[
-          styles.tab,
-          isSelected ? styles.tabActive : '',
-          disabled ? styles.tabDisabled : '',
+          'tab',
+          isSelected ? 'tabActive' : '',
+          disabled ? 'tabDisabled' : '',
           className,
         ]
           .filter(Boolean)

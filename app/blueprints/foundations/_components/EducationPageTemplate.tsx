@@ -17,7 +17,7 @@ import { AssessmentRubricComponent } from './AssessmentRubric';
 import { AuthorProfile } from './AuthorProfile';
 import { ComponentReference } from './ComponentReference';
 import { ConceptLinkComponent } from './ConceptLink';
-import styles from './EducationPageTemplate.module.scss';
+import styles from './EducationPageTemplate.module.css';
 import { FeedbackForm } from './FeedbackForm';
 import { GlossaryPopover } from './GlossaryPopover';
 import { ReflectionCallout } from './ReflectionCallout';

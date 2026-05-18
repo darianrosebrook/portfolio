@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import styles from './page.module.scss';
+import styles from './page.module.css';
 
 /**
  * Metadata for the /blueprints/foundations page.

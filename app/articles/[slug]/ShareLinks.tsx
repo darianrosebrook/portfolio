@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import styles from './styles.module.scss';
+import styles from './styles.module.css';
 import Button from '@/ui/components/Button';
 import Icon from '@/ui/components/Icon';
 import { byPrefixAndName } from '@awesome.me/kit-0ba7f5fefb/icons';

@@ -1,0 +1,11 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Label/Label.tokens.json
+ */
+[data-ds-component="Label"] {
+  /* === Color Tokens === */
+  --ds-label-color-text-default: var(--semantic-color-foreground-primary);
+
+  /* === Typo Tokens === */
+  --ds-label-typo-weight-default: var(--semantic-typography-font-weight-medium);
+  --ds-label-typo-line-height-default: var(--semantic-typography-line-height-tight);
+}
