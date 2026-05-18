@@ -7,7 +7,7 @@
 'use client';
 
 import { useInspector } from '@/ui/modules/FontInspector/FontInspector';
-import styles from './DebugPanel.module.scss';
+import './DebugPanel.css';
 
 export function DebugPanel() {
   const {
@@ -25,23 +25,23 @@ export function DebugPanel() {
   ).length;
 
   return (
-    <div className={styles.debugPanel}>
+    <div data-ds-component="DebugPanel">
       <h3>Debug Information</h3>
       <dl>
         <dt>Font Instance:</dt>
-        <dd className={fontInstance ? styles.ok : styles.error}>
+        <dd className={fontInstance ? 'ok' : 'error'}>
           {fontInstance ? '✓ Loaded' : '✗ Not loaded'}
         </dd>
 
         <dt>Glyph:</dt>
-        <dd className={glyph ? styles.ok : styles.error}>
+        <dd className={glyph ? 'ok' : 'error'}>
           {glyph
             ? `✓ ${glyph.name} (U+${glyph.codePoints?.[0]?.toString(16).toUpperCase().padStart(4, '0') || 'N/A'})`
             : '✗ Not selected'}
         </dd>
 
         <dt>Colors Initialized:</dt>
-        <dd className={hasColors ? styles.ok : styles.warning}>
+        <dd className={hasColors ? 'ok' : 'warning'}>
           {hasColors ? '✓ Yes' : '⚠ No (empty strings)'}
         </dd>
 
@@ -83,7 +83,7 @@ export function DebugPanel() {
       </dl>
 
       {!hasColors && (
-        <div className={styles.warningBox}>
+        <div className='warningBox'>
           <strong>Warning:</strong> Colors not initialized. This will cause
           rendering issues.
         </div>
