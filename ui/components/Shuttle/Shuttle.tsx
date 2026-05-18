@@ -4,7 +4,7 @@
  */
 'use client';
 import * as React from 'react';
-import styles from './Shuttle.module.scss';
+import './Shuttle.css';
 
 export interface ShuttleProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -16,7 +16,7 @@ export const ShuttleItem = React.forwardRef<HTMLDivElement, ShuttleItemProps>(
     return (
       <div
         ref={ref}
-        className={[styles.item, className].filter(Boolean).join(' ')}
+        className={['item', className].filter(Boolean).join(' ')}
         {...rest}
       >
         {children}
@@ -30,7 +30,8 @@ const ShuttleComponent = React.forwardRef<HTMLDivElement, ShuttleProps>(
     return (
       <div
         ref={ref}
-        className={[styles.shuttle, className].filter(Boolean).join(' ')}
+        data-ds-component="Shuttle"
+        className={['shuttle', className].filter(Boolean).join(' ')}
         {...rest}
       >
         {children}
