@@ -30,6 +30,14 @@ export function useDetailsContext() {
   return context;
 }
 
+/**
+ * Like useDetailsContext, but returns null when no provider is present
+ * instead of throwing. Use this when group coordination is optional.
+ */
+export function useDetailsContextOptional() {
+  return useContext(DetailsContext);
+}
+
 export interface DetailsProviderProps {
   children: React.ReactNode;
   /** Allow multiple details to be open simultaneously (default: false for accordion behavior) */

@@ -16,13 +16,14 @@ export interface UseTabsOptions {
 }
 
 export function useTabs(options: UseTabsOptions = {}): TabsContextValue {
+  const generatedId = React.useId();
   const {
     defaultValue = null as unknown as TabsValue,
     value,
     onValueChange,
     activationMode = 'manual',
     unmountInactive = false,
-    idBase = React.useId(),
+    idBase = generatedId,
   } = options;
 
   const isControlled = typeof value === 'string';

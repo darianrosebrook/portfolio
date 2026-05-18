@@ -20,7 +20,7 @@ export const usePopoverContext = () => {
 export const PopoverProvider: React.FC<
   { children: React.ReactNode } & UsePopoverOptions
 > = ({ children, ...options }) => {
-  const value = React.useMemo(() => usePopover(options), [options]);
+  const value = usePopover(options);
   return (
     <PopoverContext.Provider value={value}>{children}</PopoverContext.Provider>
   );

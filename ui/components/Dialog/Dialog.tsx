@@ -214,6 +214,11 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
       };
     }, [modal, isOpen]);
 
+    const dialogContextValue = useMemo(
+      () => ({ dialogId, titleId, close }),
+      [dialogId, titleId, close]
+    );
+
     if (!shouldRender) return null;
 
     const backdropClassName = [
@@ -259,12 +264,7 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
           className={dialogClassName}
           onClick={(e) => e.stopPropagation()}
         >
-          <DialogContext.Provider
-            value={useMemo(
-              () => ({ dialogId, titleId, close }),
-              [dialogId, titleId, close]
-            )}
-          >
+          <DialogContext.Provider value={dialogContextValue}>
             {children}
           </DialogContext.Provider>
         </div>

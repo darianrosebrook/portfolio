@@ -13,7 +13,7 @@
 import React, { useEffect, useCallback } from 'react';
 import { ChevronDownIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import { useDetails, type UseDetailsOptions } from './useDetails';
-import { useDetailsContext } from './DetailsProvider';
+import { useDetailsContextOptional } from './DetailsProvider';
 import './Details.css';
 
 export interface DetailsProps extends UseDetailsOptions {
@@ -46,14 +46,8 @@ const Details = React.forwardRef<HTMLDetailsElement, DetailsProps>(
     const detailsApi = useDetails(detailsOptions);
     const { isOpen, id, toggle, disabled, ariaAttributes } = detailsApi;
 
-    // Try to get group context (optional)
-    let groupContext;
-    try {
-      groupContext = useDetailsContext();
-    } catch {
-      // Not in a provider, that's fine
-      groupContext = null;
-    }
+    // Group coordination is optional; null when no provider above us
+    const groupContext = useDetailsContextOptional();
 
     // Register with group if in a provider
     useEffect(() => {

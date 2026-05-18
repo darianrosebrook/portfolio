@@ -15,11 +15,10 @@ export interface ToastItemProps extends React.HTMLAttributes<HTMLDivElement> {
 export const ToastItem = React.forwardRef<HTMLDivElement, ToastItemProps>(
   ({ id, className = '', children, ...rest }, ref) => {
     const { toasts, dismiss, pause, resume } = useToast();
-    const rec = toasts.get(id);
-    if (!rec) return null;
-
     const onMouseEnter = React.useCallback(() => pause(id), [pause, id]);
     const onMouseLeave = React.useCallback(() => resume(id), [resume, id]);
+    const rec = toasts.get(id);
+    if (!rec) return null;
 
     return (
       <div
