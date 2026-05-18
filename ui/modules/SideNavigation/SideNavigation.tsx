@@ -4,7 +4,7 @@
  */
 'use client';
 import * as React from 'react';
-import styles from './SideNavigation.module.scss';
+import './SideNavigation.css';
 
 export interface SideNavigationProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -15,7 +15,8 @@ export const SideNavigation = React.forwardRef<
   return (
     <div
       ref={ref}
-      className={[styles.sidenavigation, className].filter(Boolean).join(' ')}
+      data-ds-component="Sidenavigation"
+      className={['sidenavigation', className].filter(Boolean).join(' ')}
       {...rest}
     >
       {children}
