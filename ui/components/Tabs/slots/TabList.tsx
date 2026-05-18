@@ -1,7 +1,7 @@
 'use client';
 import * as React from 'react';
 import { useTabs } from '../TabsProvider';
-import styles from '../Tabs.module.scss';
+import '../Tabs.css';
 
 export interface TabListProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -16,12 +16,12 @@ export const TabList: React.FC<TabListProps> = ({
     <div
       role="tablist"
       data-slot="tabs-list"
-      className={[styles.list, className].filter(Boolean).join(' ')}
+      className={['list', className].filter(Boolean).join(' ')}
       {...rest}
     >
       <div
         data-slot="tabs-indicator"
-        className={styles.indicator}
+        className="indicator"
         style={{
           transform: `translateX(${Math.max(0, activeIndex) * 100}%)`,
         }}

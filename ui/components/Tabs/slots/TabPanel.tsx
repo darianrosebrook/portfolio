@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { useTabs } from '../TabsProvider';
 import type { TabsValue } from '../types';
-import styles from '../Tabs.module.scss';
+import '../Tabs.css';
 
 export interface TabPanelProps extends React.HTMLAttributes<HTMLDivElement> {
   value?: TabsValue;
@@ -24,8 +24,8 @@ export const TabPanel = React.forwardRef<HTMLDivElement, TabPanelProps>(
         data-slot="tabs-panel"
         hidden={!isActive}
         className={[
-          styles.panel,
-          isActive ? styles.panelActive : styles.panelInactive,
+          'panel',
+          isActive ? 'panelActive' : 'panelInactive',
           className,
         ]
           .filter(Boolean)
