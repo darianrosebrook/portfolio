@@ -1,29 +1,9 @@
+import { notFound } from 'next/navigation';
 import { createClient } from '@/utils/supabase/server';
-
-// TipTap
-import StarterKit from '@tiptap/starter-kit';
-import CharacterCount from '@tiptap/extension-character-count';
-import Image from '@tiptap/extension-image';
-
-import { generateHTML } from '@tiptap/html';
-import { JSONContent } from '@tiptap/react';
 import { generateLDJson } from '@/utils/ldjson';
+import { processArticleContent } from '@/utils/tiptap/htmlGeneration';
 
 import ArticleDetailClient from './ArticleDetailClient';
-
-function getArticleContent(data: JSONContent) {
-  let html: string = generateHTML(data, [CharacterCount, Image, StarterKit]);
-  const h1FromHTML = html.match(/<h1>(.*?)<\/h1>/);
-  const imageFromHTML = html.match(/<img(.*?)>/);
-  if (h1FromHTML) {
-    html = html.replace(h1FromHTML[0], '');
-  }
-  if (imageFromHTML) {
-    html = html.replace(imageFromHTML[0], '');
-  }
-  const content = { h1FromHTML, imageFromHTML, html };
-  return content;
-}
 
 async function getData(slug: string) {
   const supabase = await createClient();
@@ -32,39 +12,41 @@ async function getData(slug: string) {
     .select('*, author(full_name, username, avatar_url)')
     .eq('slug', slug)
     .single();
-  const published_at = article?.published_at || new Date().toISOString();
+
+  if (!article) return null;
+
+  const published_at = article.published_at || new Date().toISOString();
   const { data: beforeArticle } = await supabase
     .from('articles')
     .select(
       'author(full_name, username, avatar_url), slug, published_at, headline, image, description'
     )
-    //  the article is published and the published date is less than the current date, limit to 1
-    .eq('draft', false)
+    .eq('status', 'published')
     .lt('published_at', published_at)
     .order('published_at', { ascending: false })
     .limit(1)
-    .single();
+    .maybeSingle();
   const { data: afterArticle } = await supabase
     .from('articles')
     .select(
       'author(full_name, username, avatar_url), slug, published_at, headline, image, description'
     )
-    //  the article is published and the published date is greater than the current date, limit to 1
-    .eq('draft', false)
+    .eq('status', 'published')
     .gt('published_at', published_at)
     .order('published_at', { ascending: true })
     .limit(1)
-    .single();
+    .maybeSingle();
 
-  const contents = getArticleContent(article.articleBody);
-  const { h1FromHTML, imageFromHTML, html } = contents;
+  // processArticleContent uses the full createServerExtensions() registry,
+  // strips the first h1 and first image, and catches any generateHTML errors
+  // (returning an empty string rather than 500ing the page).
+  const { html } = processArticleContent(article.articleBody);
+
   return {
     ...article,
     html,
     beforeArticle,
     afterArticle,
-    h1FromHTML,
-    imageFromHTML,
   };
 }
 
@@ -80,6 +62,9 @@ export async function generateMetadata(props: { params: Params }) {
   const params = await props.params;
   const { slug } = params;
   const article = await getData(slug);
+  if (!article) {
+    return { title: 'Article Not Found | Darian Rosebrook' };
+  }
   const canonical = `https://darianrosebrook.com/articles/${slug}`;
   const openGraph = {
     title: article.headline,
@@ -121,6 +106,7 @@ export default async function Page(props: { params: Params }) {
   const { slug } = params;
   const canonical = `https://darianrosebrook.com/articles/${slug}`;
   const article = await getData(slug);
+  if (!article) notFound();
   const ldJson = generateLDJson({
     article,
     canonical,
