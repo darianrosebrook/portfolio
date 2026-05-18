@@ -1,6 +1,6 @@
 'use client';
 import * as React from 'react';
-import styles from './Blockquote.module.scss';
+import './Blockquote.css';
 
 export interface BlockquoteProps extends React.HTMLAttributes<HTMLQuoteElement> {
   /** Citation or source of the quote */
@@ -26,8 +26,9 @@ export const Blockquote = React.forwardRef<HTMLQuoteElement, BlockquoteProps>(
     return (
       <blockquote
         ref={ref}
+        data-ds-component="Blockquote"
         data-slot="blockquote"
-        className={[styles.blockquote, styles[variant], styles[size], className]
+        className={['blockquote', variant, size, className]
           .filter(Boolean)
           .join(' ')}
         cite={cite}

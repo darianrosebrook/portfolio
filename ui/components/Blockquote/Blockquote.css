@@ -1,46 +1,46 @@
-@use './Blockquote.tokens.generated.scss' as blockquoteTokens;
+@import "./Blockquote.tokens.css";
 
-.blockquote {
-  @include blockquoteTokens.vars;
+[data-ds-component="Blockquote"] {
+  &.blockquote {
+    margin: var(--ds-blockquote-size-padding-default) 0;
+    padding: var(--ds-blockquote-size-padding-default);
+    color: var(--ds-blockquote-color-foreground-primary);
+    font-weight: var(--ds-blockquote-typography-font-weight);
+    font-style: var(--ds-blockquote-typography-font-style);
+  }
 
-  margin: var(--blockquote-size-padding-default) 0;
-  padding: var(--blockquote-size-padding-default);
-  color: var(--blockquote-color-foreground-primary);
-  font-weight: var(--blockquote-typography-font-weight);
-  font-style: var(--blockquote-typography-font-style);
-}
+  &.sm {
+    font-size: var(--ds-blockquote-typography-sm-font-size);
+    line-height: var(--ds-blockquote-typography-sm-line-height);
+  }
 
-.sm {
-  font-size: var(--blockquote-typography-sm-font-size);
-  line-height: var(--blockquote-typography-sm-line-height);
-}
+  &.md {
+    font-size: var(--ds-blockquote-typography-md-font-size);
+    line-height: var(--ds-blockquote-typography-md-line-height);
+  }
 
-.md {
-  font-size: var(--blockquote-typography-md-font-size);
-  line-height: var(--blockquote-typography-md-line-height);
-}
+  &.lg {
+    font-size: var(--ds-blockquote-typography-lg-font-size);
+    line-height: var(--ds-blockquote-typography-lg-line-height);
+  }
 
-.lg {
-  font-size: var(--blockquote-typography-lg-font-size);
-  line-height: var(--blockquote-typography-lg-line-height);
-}
+  &.default {
+    border-inline-start: var(--ds-blockquote-size-border-thick) solid
+      var(--ds-blockquote-color-border-default);
+    padding-inline-start: var(--ds-blockquote-size-padding-default);
+  }
 
-.default {
-  border-inline-start: var(--blockquote-size-border-thick) solid
-    var(--blockquote-color-border-default);
-  padding-inline-start: var(--blockquote-size-padding-default);
-}
+  &.bordered {
+    background: var(--ds-blockquote-color-background-default);
+    border: 1px solid var(--ds-blockquote-color-border-default);
+    border-radius: var(--ds-blockquote-size-radius-default);
+    border-inline-start-width: var(--ds-blockquote-size-border-thick);
+  }
 
-.bordered {
-  background: var(--blockquote-color-background-default);
-  border: 1px solid var(--blockquote-color-border-default);
-  border-radius: var(--blockquote-size-radius-default);
-  border-inline-start-width: var(--blockquote-size-border-thick);
-}
-
-.highlighted {
-  background: var(--blockquote-color-background-default);
-  border-radius: var(--blockquote-size-radius-default);
-  border-inline-start: var(--blockquote-size-border-thick) solid
-    var(--blockquote-color-border-accent);
+  &.highlighted {
+    background: var(--ds-blockquote-color-background-default);
+    border-radius: var(--ds-blockquote-size-radius-default);
+    border-inline-start: var(--ds-blockquote-size-border-thick) solid
+      var(--ds-blockquote-color-border-accent);
+  }
 }
