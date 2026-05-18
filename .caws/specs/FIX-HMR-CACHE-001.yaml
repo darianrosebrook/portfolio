@@ -1,7 +1,7 @@
 id: FIX-HMR-CACHE-001
 type: fix
 title: Gate Next-managed Cache-Control headers to production only
-status: active
+status: closed
 risk_tier: 3
 mode: fix
 created_at: '2026-05-18T16:50:42.831Z'
