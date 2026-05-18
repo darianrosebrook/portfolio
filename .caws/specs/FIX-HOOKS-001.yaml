@@ -1,0 +1,46 @@
+id: FIX-HOOKS-001
+type: fix
+title: Fix react-hooks/rules-of-hooks violations across components
+status: active
+risk_tier: 3
+mode: development
+created_at: '2026-05-18T17:54:45.864Z'
+updated_at: '2026-05-18T17:55:00.000Z'
+worktree: fix-hooks
+blast_radius:
+  modules:
+    - ui/components/Details
+    - ui/components/Dialog
+    - ui/components/Popover
+    - ui/components/Tabs
+    - ui/components/Toast
+    - ui/modules/CodeSandbox
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - ui/components/Details/Details.tsx
+    - ui/components/Details/DetailsProvider.tsx
+    - ui/components/Dialog/Dialog.tsx
+    - ui/components/Popover/PopoverProvider.tsx
+    - ui/components/Tabs/useTabs.ts
+    - ui/components/Toast/ToastItem.tsx
+    - ui/modules/CodeSandbox/primitives/CodeWorkbench.tsx
+  out:
+    - node_modules/
+    - dist/
+    - build/
+invariants:
+  - Components render without throwing on first paint
+  - Hook order is identical across all renders of every component
+acceptance:
+  - id: A1
+    description: All 10 react-hooks/rules-of-hooks errors are gone from `npm run lint`
+  - id: A2
+    description: Components that previously violated the rules still render and behave the same in dev mode
+acceptance_criteria: []
+non_functional:
+  a11y: []
+  perf: {}
+  security: []
+contracts: []
