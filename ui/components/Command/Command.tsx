@@ -333,7 +333,7 @@ const CommandItems: React.FC<CommandItemsProps> = ({
 
   return (
     <div
-      className={["item"s, className].filter(Boolean).join(' ')}
+      className={['items', className].filter(Boolean).join(' ')}
       data-slot="command-items"
       {...rest}
     >
