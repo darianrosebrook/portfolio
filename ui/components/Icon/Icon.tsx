@@ -1,5 +1,5 @@
 import { IconDefinition } from '@awesome.me/kit-0ba7f5fefb/icons';
-import styles from './Icon.module.scss';
+import './Icon.css';
 
 export type IconProps = {
   icon: IconDefinition;
@@ -13,7 +13,8 @@ const Icon = ({ icon, width = 20, height = 20 }: IconProps) => {
   // client-side which don't exist during SSR, causing hydration mismatches
   return (
     <span
-      className={styles.icon}
+      data-ds-component="Icon"
+      className="icon"
       style={{ width, height }}
       data-slot="icon"
       data-icon="true"
