@@ -1,6 +1,6 @@
 import { BreadcrumbNavigationLink } from '@/ui/components/PageTransition';
 import React from 'react';
-import styles from './Breadcrumbs.module.scss';
+import './Breadcrumbs.css';
 
 export type Crumb = {
   /**
@@ -39,12 +39,13 @@ export const Breadcrumbs = React.forwardRef<HTMLElement, BreadcrumbsProps>(
       return (
         <nav
           ref={ref}
+          data-ds-component="Breadcrumbs"
           data-slot="breadcrumbs"
-          className={`${styles.root} ${className}`}
+          className={['root', className].filter(Boolean).join(' ')}
           aria-label="Breadcrumb"
           {...rest}
         >
-          <ul data-slot="breadcrumbs-list" className={styles.list}>
+          <ul data-slot="breadcrumbs-list" className="list">
             <li>
               <BreadcrumbNavigationLink href={base.href}>
                 {base.label}
@@ -65,28 +66,29 @@ export const Breadcrumbs = React.forwardRef<HTMLElement, BreadcrumbsProps>(
     return (
       <nav
         ref={ref}
+        data-ds-component="Breadcrumbs"
         data-slot="breadcrumbs"
-        className={`${styles.root} ${className}`}
+        className={['root', className].filter(Boolean).join(' ')}
         aria-label="Breadcrumb"
         {...rest}
       >
-        <ul data-slot="breadcrumbs-list" className={styles.list}>
+        <ul data-slot="breadcrumbs-list" className="list">
           <li>
             <BreadcrumbNavigationLink href={base.href}>
               {base.label}
             </BreadcrumbNavigationLink>
           </li>
-          <li data-slot="breadcrumbs-separator" className={styles.separator}>
+          <li data-slot="breadcrumbs-separator" className="separator">
             /
           </li>
 
           {showOverflow ? (
-            <li className={styles.overflow}>
-              <details className={styles.overflow}>
+            <li className="overflow">
+              <details className="overflow">
                 <summary aria-label="More">
                   <span>…</span>
                 </summary>
-                <div className={styles.popover} role="menu">
+                <div className="popover" role="menu">
                   <ul>
                     {overflowItems.map((c) => (
                       <li key={c.href}>
@@ -109,7 +111,7 @@ export const Breadcrumbs = React.forwardRef<HTMLElement, BreadcrumbsProps>(
                 </li>
                 <li
                   data-slot="breadcrumbs-separator"
-                  className={styles.separator}
+                  className="separator"
                 >
                   /
                 </li>
@@ -126,7 +128,7 @@ export const Breadcrumbs = React.forwardRef<HTMLElement, BreadcrumbsProps>(
               </li>
               <li
                 data-slot="breadcrumbs-separator"
-                className={styles.separator}
+                className="separator"
               >
                 /
               </li>
@@ -135,7 +137,7 @@ export const Breadcrumbs = React.forwardRef<HTMLElement, BreadcrumbsProps>(
 
           <li
             data-slot="breadcrumbs-current"
-            className={styles.current}
+            className="current"
             aria-current="page"
           >
             {current.label}
