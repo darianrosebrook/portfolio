@@ -1,0 +1,109 @@
+[data-ds-component="PageTransition"] {
+  --transition-duration: 300ms;
+  --transition-easing: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  position: relative;
+  width: 100%;
+  min-height: 0;
+
+  &.enabled {
+    view-transition-name: var(--view-transition-name, main-content);
+  }
+
+  &.fallback {
+    &.transitioning {
+      opacity: 0;
+      transition:
+        opacity var(--transition-duration) var(--transition-easing),
+        transform var(--transition-duration) var(--transition-easing);
+      transform: translateY(8px);
+    }
+
+    &:not(.transitioning) {
+      opacity: 1;
+      transition:
+        opacity var(--transition-duration) var(--transition-easing),
+        transform var(--transition-duration) var(--transition-easing);
+      transform: translateY(0);
+    }
+  }
+
+  &.loading {
+    position: relative;
+
+    &::after {
+      position: absolute;
+      inset: 0;
+      background: rgb(255 255 255 / 80%);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      pointer-events: none;
+      backdrop-filter: blur(2px);
+      content: '';
+    }
+
+    &.transitioning::after {
+      opacity: 1;
+    }
+  }
+
+  .transitionLink {
+    position: relative;
+    display: inline-flex;
+    vertical-align: baseline;
+    align-items: center;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+
+    &:hover,
+    &:focus-visible {
+      opacity: 0.8;
+    }
+
+    &:focus-visible {
+      border-radius: 0.125rem;
+      outline: 2px solid currentcolor;
+      outline-offset: 2px;
+    }
+  }
+
+  .maskLine {
+    position: relative;
+    display: inline-block;
+    vertical-align: baseline;
+    overflow: hidden;
+    width: 100%;
+    line-height: 1;
+  }
+
+  .text {
+    display: block;
+    will-change: transform;
+  }
+
+  .clone {
+    position: absolute;
+    display: block;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    will-change: transform;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-ds-component="PageTransition"] {
+    &.fallback {
+      &.transitioning,
+      &:not(.transitioning) {
+        transition: none;
+        transform: none;
+      }
+    }
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  [data-ds-component="PageTransition"].loading.transitioning::after {
+    background: rgb(0 0 0 / 80%);
+  }
+}
