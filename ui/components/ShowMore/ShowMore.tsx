@@ -4,7 +4,7 @@
  */
 'use client';
 import * as React from 'react';
-import styles from './ShowMore.module.scss';
+import './ShowMore.css';
 
 export interface ShowMoreProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -47,7 +47,8 @@ const ShowMoreComponent = React.forwardRef<HTMLDivElement, ShowMoreProps>(
       <ShowMoreContext.Provider value={contextValue}>
         <div
           ref={ref}
-          className={[styles.showmore, className].filter(Boolean).join(' ')}
+          data-ds-component="Showmore"
+          className={['showmore', className].filter(Boolean).join(' ')}
           {...rest}
         >
           {children}
@@ -77,7 +78,7 @@ export const ShowMoreTrigger = React.forwardRef<
       ref={ref}
       type="button"
       role="button"
-      className={[styles.trigger, className].filter(Boolean).join(' ')}
+      className={['trigger', className].filter(Boolean).join(' ')}
       onClick={toggle}
       {...rest}
     >
@@ -98,7 +99,7 @@ export const ShowMoreContent = React.forwardRef<
   return (
     <div
       ref={ref}
-      className={[styles.content, className].filter(Boolean).join(' ')}
+      className={['content', className].filter(Boolean).join(' ')}
       hidden={!isOpen}
       {...rest}
     >
