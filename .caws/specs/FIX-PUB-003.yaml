@@ -1,7 +1,7 @@
 id: FIX-PUB-003
 type: fix
 title: PUT /api/articles 400 on publish
-status: active
+status: closed
 risk_tier: 3
 mode: development
 created_at: '2026-05-18T08:02:41.756Z'
