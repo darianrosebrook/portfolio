@@ -1,0 +1,39 @@
+id: FIX-BLUEPRINTS-001
+type: fix
+title: Remove dead componentContract prop in component-standards page
+status: active
+risk_tier: 3
+mode: development
+created_at: '2026-05-18T07:55:24.445Z'
+updated_at: '2026-05-18T07:55:24.446Z'
+blast_radius:
+  modules:
+    - app/blueprints/component-standards
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - app/blueprints/component-standards/[slug]/page.tsx
+  out:
+    - node_modules/
+    - dist/
+    - build/
+invariants:
+  - The component-standards page typechecks cleanly
+  - getAnatomyData still runs and anatomy is still rendered (no functional regression)
+acceptance:
+  - id: A1
+    given: A clean checkout with this fix applied
+    when: tsc --noEmit runs over the component-standards page
+    then: It reports zero errors in the page module
+  - id: A2
+    given: A user visits /blueprints/component-standards/[slug]
+    when: The page renders for a component with anatomy data
+    then: The anatomy section continues to render with its parts
+acceptance_criteria: []
+non_functional:
+  a11y: []
+  perf: {}
+  security: []
+contracts: []
+worktree: fix-blueprints-prop
