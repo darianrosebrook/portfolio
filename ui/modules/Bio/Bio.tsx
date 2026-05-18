@@ -23,6 +23,16 @@ const Bio = () => {
         without relying on tribal knowledge.
       </p>
       <p>
+        That work has lived inside teams at Qualtrics, Venmo, Verizon, eBay,
+        Nike, Salesforce, and Microsoft — usually focused on asset
+        synchronization, multi-brand theming, system adoption, handoff quality,
+        design system analytics, or design-to-code collaboration. Concretely:
+        same-day icon releases at eBay (down from six-to-eight weeks), token
+        sync and global library upgrades at Nike, a design system analytics
+        platform connecting Figma + GitLab at Verizon, and AI-enabled design
+        tooling and evaluation frameworks at Qualtrics.
+      </p>
+      <p>
         I&apos;m most useful in environments where the system is large enough
         that taste alone no longer scales. I help teams turn ambiguity into
         structure: clear artifacts, measurable workflows, shared language, and

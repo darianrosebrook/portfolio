@@ -1,7 +1,7 @@
 /**
- * Four-pillar capability frame for the home page. The reviewer's "Where I'm
- * most useful" / "How I create leverage" section — the page-level argument
- * that turns the bio's claims into evaluable criteria.
+ * Capability frame for the home page — the page-level argument that turns
+ * the bio's claims into evaluable criteria. Five pillars, named after
+ * capabilities the work produces rather than actions I take.
  */
 const LeveragePillars = () => {
   return (
@@ -39,6 +39,12 @@ const LeveragePillars = () => {
         <dd>
           I help designers, engineers, PMs, and leaders share a more precise
           model of how the system works.
+        </dd>
+        <dt>AI-enabled practice</dt>
+        <dd>
+          I help teams adopt AI in design without weakening standards,
+          accountability, or system consistency — through evaluation frameworks,
+          training, and tooling that keeps human judgment in the loop.
         </dd>
       </dl>
     </>
