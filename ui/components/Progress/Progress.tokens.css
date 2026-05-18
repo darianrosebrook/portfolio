@@ -1,0 +1,39 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Progress/Progress.tokens.json
+ */
+@layer components {
+  [data-ds-component="Progress"] {
+    /* === Color Tokens === */
+    --ds-progress-color-track-background: var(--semantic-color-background-secondary);
+    --ds-progress-color-fill-info: var(--semantic-color-status-info);
+    --ds-progress-color-fill-success: var(--semantic-color-status-success);
+    --ds-progress-color-fill-warning: var(--semantic-color-status-warning);
+    --ds-progress-color-fill-danger: var(--semantic-color-status-danger);
+    --ds-progress-color-text-default: var(--semantic-color-foreground-secondary);
+
+    /* === Size Tokens === */
+    --ds-progress-size-linear-sm-height: var(--core-spacing-size-02);
+    --ds-progress-size-linear-sm-radius: var(--core-shape-radius-full);
+    --ds-progress-size-linear-md-height: var(--core-spacing-size-03);
+    --ds-progress-size-linear-md-radius: var(--core-shape-radius-full);
+    --ds-progress-size-linear-lg-height: var(--core-spacing-size-04);
+    --ds-progress-size-linear-lg-radius: var(--core-shape-radius-full);
+    --ds-progress-size-circular-sm-size: 32px;
+    --ds-progress-size-circular-sm-stroke-width: 2px;
+    --ds-progress-size-circular-md-size: 40px;
+    --ds-progress-size-circular-md-stroke-width: 3px;
+    --ds-progress-size-circular-lg-size: 48px;
+    --ds-progress-size-circular-lg-stroke-width: 4px;
+
+    /* === Typography Tokens === */
+    --ds-progress-typography-value-font-size: var(--semantic-typography-caption-01);
+    --ds-progress-typography-value-font-weight: var(--semantic-typography-font-weight-medium);
+
+    /* === Motion Tokens === */
+    --ds-progress-motion-duration-indeterminate: var(--core-motion-duration-extra-long1);
+    --ds-progress-motion-easing-indeterminate: ease-in-out;
+
+    /* === Spacing Tokens === */
+    --ds-progress-spacing-gap: var(--core-spacing-size-02);
+  }
+}

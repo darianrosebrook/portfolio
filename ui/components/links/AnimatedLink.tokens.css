@@ -1,0 +1,21 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/links/AnimatedLink.tokens.json
+ */
+@layer components {
+  [data-ds-component="AnimatedLink"] {
+    /* === Color Tokens === */
+    --ds-animatedLink-color-default: var(--semantic-color-foreground-accent);
+    --ds-animatedLink-color-hover: var(--semantic-color-foreground-accent);
+    --ds-animatedLink-color-focus: var(--semantic-color-border-accent);
+
+    /* === Spacing Tokens === */
+    --ds-animatedLink-spacing-gap-default: var(--core-spacing-size-02);
+
+    /* === Shape Tokens === */
+    --ds-animatedLink-shape-radius: var(--core-shape-radius-small);
+
+    /* === Typography Tokens === */
+    --ds-animatedLink-typography-font-weight-regular: var(--semantic-typography-font-weight-regular);
+    --ds-animatedLink-typography-line-height-collapse: var(--core-typography-line-height-collapse);
+  }
+}

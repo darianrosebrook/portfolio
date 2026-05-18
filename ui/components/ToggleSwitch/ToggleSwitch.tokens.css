@@ -1,0 +1,72 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/ToggleSwitch/ToggleSwitch.tokens.json
+ */
+@layer components {
+  [data-ds-component="ToggleSwitch"] {
+    /* === Color Tokens === */
+    --ds-toggleSwitch-color-background-default: var(--semantic-color-background-secondary);
+    --ds-toggleSwitch-color-background-hover: var(--semantic-interaction-background-hover);
+    --ds-toggleSwitch-color-background-active: var(--semantic-interaction-background-active);
+    --ds-toggleSwitch-color-background-checked: var(--semantic-color-action-background-primary-default);
+    --ds-toggleSwitch-color-background-checked-hover: var(--semantic-interaction-background-hover);
+    --ds-toggleSwitch-color-background-disabled: var(--semantic-color-background-disabled);
+    --ds-toggleSwitch-color-foreground-default: var(--semantic-color-foreground-primary);
+    --ds-toggleSwitch-color-foreground-hover: var(--semantic-interaction-text-hover);
+    --ds-toggleSwitch-color-foreground-active: var(--semantic-interaction-text-active);
+    --ds-toggleSwitch-color-foreground-disabled: var(--semantic-color-foreground-disabled);
+    --ds-toggleSwitch-color-thumb-default: var(--semantic-color-foreground-inverse);
+    --ds-toggleSwitch-color-thumb-hover: var(--semantic-interaction-text-hover);
+    --ds-toggleSwitch-color-thumb-active: var(--semantic-interaction-text-active);
+    --ds-toggleSwitch-color-thumb-disabled: var(--semantic-color-foreground-disabled);
+    --ds-toggleSwitch-color-border-default: var(--semantic-color-border-light);
+    --ds-toggleSwitch-color-border-hover: var(--semantic-interaction-border-hover);
+    --ds-toggleSwitch-color-border-active: var(--semantic-interaction-border-active);
+    --ds-toggleSwitch-color-border-disabled: var(--semantic-color-border-disabled);
+
+    /* === Size Tokens === */
+    --ds-toggleSwitch-size-width-small: var(--semantic-control-toggle-width-sm);
+    --ds-toggleSwitch-size-width-medium: var(--semantic-control-toggle-width-md);
+    --ds-toggleSwitch-size-width-large: var(--semantic-control-toggle-width-lg);
+    --ds-toggleSwitch-size-height-small: var(--semantic-control-size-sm-height);
+    --ds-toggleSwitch-size-height-medium: var(--semantic-control-size-md-height);
+    --ds-toggleSwitch-size-height-large: var(--semantic-control-size-lg-height);
+    --ds-toggleSwitch-size-thumb-small: var(--semantic-control-toggle-thumb-sm);
+    --ds-toggleSwitch-size-thumb-medium: var(--semantic-control-toggle-thumb-md);
+    --ds-toggleSwitch-size-thumb-large: var(--semantic-control-toggle-thumb-lg);
+    --ds-toggleSwitch-size-padding-small: var(--core-spacing-size-01);
+    --ds-toggleSwitch-size-padding-medium: var(--core-spacing-size-02);
+    --ds-toggleSwitch-size-padding-large: var(--core-spacing-size-03);
+    --ds-toggleSwitch-size-radius-full: var(--core-shape-radius-full);
+
+    /* === Spacing Tokens === */
+    --ds-toggleSwitch-spacing-gap-default: var(--core-spacing-size-02);
+    --ds-toggleSwitch-spacing-gap-small: var(--core-spacing-size-01);
+    --ds-toggleSwitch-spacing-gap-large: var(--core-spacing-size-03);
+    --ds-toggleSwitch-spacing-margin-default: var(--core-spacing-size-02);
+    --ds-toggleSwitch-spacing-margin-small: var(--core-spacing-size-01);
+    --ds-toggleSwitch-spacing-margin-large: var(--core-spacing-size-03);
+
+    /* === Border Tokens === */
+    --ds-toggleSwitch-border-width-default: var(--core-shape-border-width-hairline);
+    --ds-toggleSwitch-border-width-thick: var(--core-shape-border-width-thick);
+    --ds-toggleSwitch-border-radius-default: var(--core-shape-radius-full);
+    --ds-toggleSwitch-border-radius-thumb: var(--core-shape-radius-full);
+
+    /* === Motion Tokens === */
+    --ds-toggleSwitch-motion-duration-fast: var(--core-motion-duration-short);
+    --ds-toggleSwitch-motion-duration-normal: var(--core-motion-duration-medium);
+    --ds-toggleSwitch-motion-duration-slow: var(--core-motion-duration-long);
+    --ds-toggleSwitch-motion-easing-standard: var(--core-motion-easing-standard);
+    --ds-toggleSwitch-motion-easing-decelerate: var(--core-motion-easing-emphasized-out);
+    --ds-toggleSwitch-motion-easing-accelerate: var(--core-motion-easing-emphasized-in);
+
+    /* === Typography Tokens === */
+    --ds-toggleSwitch-typography-font-size-small: var(--semantic-typography-body-04);
+    --ds-toggleSwitch-typography-font-size-medium: var(--semantic-typography-body-03);
+    --ds-toggleSwitch-typography-font-size-large: var(--semantic-typography-body-02);
+    --ds-toggleSwitch-typography-font-weight-default: var(--semantic-typography-font-weight-regular);
+    --ds-toggleSwitch-typography-font-weight-medium: var(--semantic-typography-font-weight-medium);
+    --ds-toggleSwitch-typography-line-height-default: var(--semantic-typography-line-height-normal);
+    --ds-toggleSwitch-typography-line-height-tight: var(--semantic-typography-line-height-tight);
+  }
+}

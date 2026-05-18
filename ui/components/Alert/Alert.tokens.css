@@ -1,0 +1,69 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Alert/Alert.tokens.json
+ */
+@layer components {
+  [data-ds-component="Alert"] {
+    /* === Color Tokens === */
+    --ds-alert-color-background-primary: var(--semantic-color-background-primary);
+    --ds-alert-color-background-info: var(--semantic-color-background-info-strong);
+    --ds-alert-color-background-success: var(--semantic-color-background-success-strong);
+    --ds-alert-color-background-warning: var(--semantic-color-background-warning-strong);
+    --ds-alert-color-background-danger: var(--semantic-color-background-danger-strong);
+    --ds-alert-color-background-info-subtle: var(--semantic-color-background-info-subtle);
+    --ds-alert-color-background-warning-subtle: var(--semantic-color-background-warning-subtle);
+    --ds-alert-color-background-danger-subtle: var(--semantic-color-background-danger-subtle);
+    --ds-alert-color-background-success-subtle: var(--semantic-color-background-success-subtle);
+    --ds-alert-color-background-info-strong: var(--semantic-color-background-info-strong);
+    --ds-alert-color-background-warning-strong: var(--semantic-color-background-warning-strong);
+    --ds-alert-color-background-danger-strong: var(--semantic-color-background-danger-strong);
+    --ds-alert-color-background-success-strong: var(--semantic-color-background-success-strong);
+    --ds-alert-color-foreground-primary: var(--semantic-color-foreground-primary);
+    --ds-alert-color-foreground-info: var(--semantic-color-foreground-info);
+    --ds-alert-color-foreground-success: var(--semantic-color-foreground-success);
+    --ds-alert-color-foreground-warning: var(--semantic-color-foreground-warning);
+    --ds-alert-color-foreground-danger: var(--semantic-color-foreground-danger);
+    --ds-alert-color-foreground-on-info-subtle: var(--semantic-color-foreground-on-info-subtle);
+    --ds-alert-color-foreground-on-warning-subtle: var(--semantic-color-foreground-on-warning-subtle);
+    --ds-alert-color-foreground-on-danger-subtle: var(--semantic-color-foreground-on-danger-subtle);
+    --ds-alert-color-foreground-on-success-subtle: var(--semantic-color-foreground-on-success-subtle);
+    --ds-alert-color-foreground-on-color: var(--semantic-color-foreground-on-color);
+    --ds-alert-color-border-primary: var(--semantic-color-border-primary);
+    --ds-alert-color-border-info: var(--semantic-color-border-info);
+    --ds-alert-color-border-success: var(--semantic-color-border-success);
+    --ds-alert-color-border-warning: var(--semantic-color-border-warning);
+    --ds-alert-color-border-danger: var(--semantic-color-border-danger);
+
+    /* === Size Tokens === */
+    --ds-alert-size-inline-padding: var(--core-spacing-size-06);
+    --ds-alert-size-inline-radius: var(--semantic-shape-control-radius-default);
+    --ds-alert-size-inline-icon-size: var(--core-spacing-size-06);
+    --ds-alert-size-section-padding: var(--core-spacing-size-06);
+    --ds-alert-size-section-radius: var(--semantic-shape-control-radius-default);
+    --ds-alert-size-section-icon-size: var(--core-spacing-size-06);
+    --ds-alert-size-page-padding: var(--core-spacing-size-06);
+    --ds-alert-size-page-radius: var(--semantic-shape-control-radius-default);
+    --ds-alert-size-page-icon-size: var(--core-spacing-size-06);
+
+    /* === Shadow Tokens === */
+    --ds-alert-shadow-default: var(--semantic-elevation-surface-raised);
+
+    /* === Text Tokens === */
+    --ds-alert-text-font: var(--semantic-typography-body-default-font-size);
+    --ds-alert-text-size: var(--core-spacing-size-06);
+    --ds-alert-text-weight: var(--semantic-typography-font-weight-regular);
+
+    /* === Icon Tokens === */
+    --ds-alert-icon-size: var(--core-spacing-size-06);
+
+    /* === Spacing Tokens === */
+    --ds-alert-spacing-padding-default: var(--core-spacing-size-06);
+    --ds-alert-spacing-padding-horizontal: var(--core-spacing-size-06);
+    --ds-alert-spacing-padding-vertical: var(--core-spacing-size-08);
+    --ds-alert-spacing-margin-top: var(--core-spacing-size-04);
+    --ds-alert-spacing-min-height-default: var(--core-spacing-size-09);
+    --ds-alert-spacing-gap-small: var(--semantic-spacing-gap-grid-small);
+
+    /* === Radius Tokens === */
+    --ds-alert-radius-medium: var(--core-shape-radius-medium);
+  }
+}

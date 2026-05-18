@@ -1,0 +1,20 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Popover/Popover.tokens.json
+ */
+@layer components {
+  [data-ds-component="Popover"] {
+    /* === Size Tokens === */
+    --ds-popover-size-padding-default: var(--core-spacing-size-06);
+    --ds-popover-size-radius-default: var(--semantic-shape-control-radius-default);
+    --ds-popover-size-radius-full: var(--core-shape-radius-full);
+    --ds-popover-size-gap-default: var(--core-spacing-size-04);
+    --ds-popover-size-max-width-default: var(--core-spacing-size-06);
+
+    /* === Color Tokens === */
+    --ds-popover-color-background-content: var(--semantic-color-background-secondary);
+    --ds-popover-color-border-accent: var(--semantic-color-border-accent);
+
+    /* === Elevation Tokens === */
+    --ds-popover-elevation-default: var(--semantic-elevation-default);
+  }
+}

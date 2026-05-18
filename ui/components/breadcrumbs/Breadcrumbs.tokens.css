@@ -1,0 +1,32 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/breadcrumbs/Breadcrumbs.tokens.json
+ */
+@layer components {
+  [data-ds-component="Breadcrumbs"] {
+    /* === Color Tokens === */
+    --ds-breadcrumbs-color-foreground-secondary: var(--semantic-color-foreground-secondary);
+    --ds-breadcrumbs-color-foreground-link: var(--semantic-color-foreground-link);
+    --ds-breadcrumbs-color-foreground-primary: var(--semantic-color-foreground-primary);
+    --ds-breadcrumbs-color-foreground-tertiary: var(--semantic-color-foreground-tertiary);
+    --ds-breadcrumbs-color-background-elevated: var(--semantic-color-background-elevated);
+    --ds-breadcrumbs-color-border-subtle: var(--semantic-color-border-subtle);
+    --ds-breadcrumbs-color-focus: var(--semantic-color-border-accent);
+
+    /* === Typography Tokens === */
+    --ds-breadcrumbs-typography-line-height-collapse: var(--semantic-typography-line-height-collapse);
+
+    /* === Shape Tokens === */
+    --ds-breadcrumbs-shape-radius-medium: var(--core-shape-radius-medium);
+    --ds-breadcrumbs-shape-radius-small: var(--core-shape-radius-small);
+
+    /* === Elevation Tokens === */
+    --ds-breadcrumbs-elevation-surface-raised: var(--semantic-elevation-surface-raised);
+
+    /* === Spacing Tokens === */
+    --ds-breadcrumbs-spacing-gap-default: var(--core-spacing-size-04);
+    --ds-breadcrumbs-spacing-gap-small: var(--core-spacing-size-03);
+    --ds-breadcrumbs-spacing-padding-default: var(--core-spacing-size-04);
+    --ds-breadcrumbs-spacing-padding-small: var(--core-spacing-size-03);
+    --ds-breadcrumbs-spacing-margin-top: var(--core-spacing-size-03);
+  }
+}

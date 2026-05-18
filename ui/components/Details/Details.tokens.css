@@ -1,0 +1,43 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Details/Details.tokens.json
+ */
+@layer components {
+  [data-ds-component="Details"] {
+    /* === Size Tokens === */
+    --ds-details-size-padding-default: var(--core-spacing-size-06);
+    --ds-details-size-radius-default: var(--semantic-shape-control-radius-default);
+    --ds-details-size-icon: var(--core-spacing-size-05);
+
+    /* === Color Tokens === */
+    --ds-details-color-background-default: var(--semantic-color-background-primary);
+    --ds-details-color-background-subtle: var(--semantic-color-background-secondary);
+    --ds-details-color-background-hover: var(--semantic-color-background-hover);
+    --ds-details-color-background-code: var(--semantic-color-background-secondary);
+    --ds-details-color-foreground-primary: var(--semantic-color-foreground-primary);
+    --ds-details-color-foreground-secondary: var(--semantic-color-foreground-secondary);
+    --ds-details-color-border-default: var(--semantic-color-border-primary);
+    --ds-details-color-border-hover: var(--semantic-color-border-bold);
+    --ds-details-color-border-accent: var(--semantic-color-border-accent);
+
+    /* === Focus Tokens === */
+    --ds-details-focus-ring-width: var(--core-shape-border-width-thick);
+    --ds-details-focus-ring-color: var(--semantic-color-border-accent);
+    --ds-details-focus-ring-offset: var(--core-spacing-size-02);
+
+    /* === Motion Tokens === */
+    --ds-details-motion-duration-fast: var(--core-motion-duration-short);
+    --ds-details-motion-easing-standard: var(--core-motion-easing-standard);
+
+    /* === Spacing Tokens === */
+    --ds-details-spacing-gap-default: var(--core-spacing-size-02);
+    --ds-details-spacing-padding-left: var(--core-spacing-size-06);
+    --ds-details-spacing-margin-bottom: var(--core-spacing-size-02);
+    --ds-details-spacing-margin-top: var(--core-spacing-size-01);
+    --ds-details-spacing-margin-compact: var(--core-spacing-size-04);
+
+    /* === Typography Tokens === */
+    --ds-details-typography-line-height-body: var(--semantic-typography-line-height-body);
+    --ds-details-typography-line-height-tight: var(--semantic-typography-line-height-tight);
+    --ds-details-typography-font-weight-medium: var(--semantic-typography-font-weight-medium);
+  }
+}

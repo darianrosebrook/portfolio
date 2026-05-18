@@ -1,0 +1,29 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Skeleton/Skeleton.tokens.json
+ */
+@layer components {
+  [data-ds-component="Skeleton"] {
+    /* === Color Tokens === */
+    --ds-skeleton-color-base: var(--semantic-color-background-secondary);
+    --ds-skeleton-color-highlight: var(--semantic-color-background-highlight);
+    --ds-skeleton-color-highlight-2: var(--semantic-color-status-info);
+    --ds-skeleton-color-static: var(--semantic-color-background-secondary);
+    --ds-skeleton-color-contrast-base: var(--semantic-color-border-primary);
+
+    /* === Radius Tokens === */
+    --ds-skeleton-radius-sm: var(--core-shape-radius-02);
+    --ds-skeleton-radius-md: var(--core-shape-radius-03);
+    --ds-skeleton-radius-lg: var(--core-shape-radius-04);
+
+    /* === Gap Tokens === */
+    --ds-skeleton-gap-sm: var(--core-spacing-size-03);
+    --ds-skeleton-gap-md: var(--core-spacing-size-05);
+    --ds-skeleton-gap-lg: var(--core-spacing-size-07);
+
+    /* === Anim Tokens === */
+    --ds-skeleton-anim-duration: var(--core-motion-duration-long);
+    --ds-skeleton-anim-duration-alt: var(--core-motion-duration-long);
+    --ds-skeleton-anim-duration-pulse: var(--core-motion-duration-medium);
+    --ds-skeleton-anim-easing: var(--core-motion-easing-standard);
+  }
+}

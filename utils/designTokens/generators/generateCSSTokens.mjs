@@ -244,34 +244,35 @@ function flattenTokens(obj, prefixSegments) {
 }
 
 /**
- * Generate SCSS content with component-scoped variables grouped by category
+ * Build CSS content for a component's tokens — emits a `@layer components`
+ * block scoped to `[data-ds-component="Pascal"]`. Custom properties are
+ * prefixed with `--ds-<component>-` per the migration playbook.
+ *
+ * Per docs/CSS-MIGRATION-PLAYBOOK.md.
  */
-function buildScssForComponent({ cssVarPrefix, tokenData }) {
+function buildCssForComponent({ cssVarPrefix, pascalComponent, tokenData }) {
   const { groups, flat } = tokenData;
-  const lines = [];
+  // Body lines live at column 4 (inside @layer + selector). We add the
+  // surrounding wrapper at the end.
+  const body = [];
 
   // Process groups first
   if (Object.keys(groups).length > 0) {
     Object.entries(groups).forEach(([groupName, groupData]) => {
-      // Add group documentation header
       const groupTitle = groupName.charAt(0).toUpperCase() + groupName.slice(1);
-      lines.push(`  /* === ${groupTitle} Tokens === */`);
+      body.push(`    /* === ${groupTitle} Tokens === */`);
 
-      // Add tokens for this group
       Object.entries(groupData.tokens).forEach(([name, raw]) => {
-        lines.push(`  --${cssVarPrefix}-${name}: ${refToCssVar(raw)};`);
+        body.push(`    --ds-${cssVarPrefix}-${name}: ${refToCssVar(raw)};`);
       });
 
-      // Add spacing between groups
-      lines.push('');
+      body.push('');
     });
   }
 
-  // Also process top-level tokens that aren't in groups (e.g., "shadow", "opacity")
-  // These are tokens at the root level of the tokens object
+  // Top-level tokens that aren't in any group
   const topLevelTokens = {};
   for (const [key, val] of Object.entries(flat)) {
-    // Check if this token is NOT already in any group
     let inGroup = false;
     for (const groupData of Object.values(groups)) {
       if (key in groupData.tokens) {
@@ -285,26 +286,30 @@ function buildScssForComponent({ cssVarPrefix, tokenData }) {
   }
 
   if (Object.keys(topLevelTokens).length > 0) {
-    // Add a section for top-level tokens if we have groups
     if (Object.keys(groups).length > 0) {
-      lines.push('  /* === Other Tokens === */');
+      body.push('    /* === Other Tokens === */');
     }
     Object.entries(topLevelTokens).forEach(([name, raw]) => {
-      lines.push(`  --${cssVarPrefix}-${name}: ${refToCssVar(raw)};`);
+      body.push(`    --ds-${cssVarPrefix}-${name}: ${refToCssVar(raw)};`);
     });
   } else if (Object.keys(groups).length === 0) {
-    // Fallback to flat structure if no groups detected
     Object.entries(flat).forEach(([name, raw]) => {
-      lines.push(`  --${cssVarPrefix}-${name}: ${refToCssVar(raw)};`);
+      body.push(`    --ds-${cssVarPrefix}-${name}: ${refToCssVar(raw)};`);
     });
   }
 
-  // Remove trailing empty line
-  if (lines[lines.length - 1] === '') {
-    lines.pop();
+  // Trim trailing blank
+  if (body[body.length - 1] === '') {
+    body.pop();
   }
 
-  return `@mixin vars {\n${lines.join('\n')}\n}`;
+  return [
+    `@layer components {`,
+    `  [data-ds-component="${pascalComponent}"] {`,
+    ...body,
+    `  }`,
+    `}`,
+  ].join('\n');
 }
 
 /**
@@ -362,17 +367,18 @@ function run() {
       }
 
       const tokenData = flattenTokens(tokens, []);
-      const scss = buildScssForComponent({
+      const pascalComponent = toPascalCase(prefix);
+      const css = buildCssForComponent({
         cssVarPrefix: prefix,
-        tokenData: tokenData,
+        pascalComponent,
+        tokenData,
       });
 
-      const pascalPrefix = toPascalCase(prefix);
       const filePrefix =
-        pascalPrefix === folderName ? folderName : capitalize(prefix);
-      const outPath = path.join(folder, `${filePrefix}.tokens.generated.scss`);
+        pascalComponent === folderName ? folderName : capitalize(prefix);
+      const outPath = path.join(folder, `${filePrefix}.tokens.css`);
       const banner = `/* AUTO-GENERATED: Do not edit directly.\n * Source: ${path.relative(projectRoot, filePath)}\n */\n`;
-      fs.writeFileSync(outPath, banner + scss + '\n', 'utf8');
+      fs.writeFileSync(outPath, banner + css + '\n', 'utf8');
       generatedCount += 1;
       console.log(`[tokens] Generated ${path.relative(projectRoot, outPath)}`);
     } catch (err) {

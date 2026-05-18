@@ -1,0 +1,17 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/modules/Sidebar/Sidebar.tokens.json
+ */
+@layer components {
+  [data-ds-component="Sidebar"] {
+    /* === Color Tokens === */
+    --ds-sidebar-color-border-subtle: var(--semantic-color-border-subtle);
+    --ds-sidebar-color-foreground-secondary: var(--semantic-color-foreground-secondary);
+    --ds-sidebar-color-foreground-link: var(--semantic-color-foreground-link);
+
+    /* === Spacing Tokens === */
+    --ds-sidebar-spacing-padding-right: 1rem;
+    --ds-sidebar-spacing-margin-bottom-default: 1rem;
+    --ds-sidebar-spacing-margin-bottom-small: 0.5rem;
+    --ds-sidebar-spacing-gap-default: 0.25rem;
+  }
+}

@@ -1,0 +1,79 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Text/Text.tokens.json
+ */
+@layer components {
+  [data-ds-component="Text"] {
+    /* === Color Tokens === */
+    --ds-text-color-foreground-primary: var(--semantic-color-foreground-primary);
+    --ds-text-color-foreground-secondary: var(--semantic-color-foreground-secondary);
+    --ds-text-color-foreground-accent: var(--semantic-color-foreground-accent);
+    --ds-text-color-foreground-success: var(--semantic-color-foreground-success);
+    --ds-text-color-foreground-warning: var(--semantic-color-foreground-warning);
+    --ds-text-color-foreground-danger: var(--semantic-color-foreground-danger);
+    --ds-text-color-background-default: var(--semantic-color-background-secondary);
+
+    /* === Typography Tokens === */
+    --ds-text-typography-font-weight-light: var(--semantic-typography-font-weight-light);
+    --ds-text-typography-font-weight-regular: var(--semantic-typography-font-weight-regular);
+    --ds-text-typography-font-weight-medium: var(--semantic-typography-font-weight-medium);
+    --ds-text-typography-font-weight-semibold: var(--semantic-typography-font-weight-medium);
+    --ds-text-typography-font-weight-bold: var(--semantic-typography-font-weight-bold);
+    --ds-text-typography-line-height-heading: var(--semantic-typography-line-height-heading);
+    --ds-text-typography-line-height-body: var(--semantic-typography-line-height-body);
+    --ds-text-typography-display-xs: var(--semantic-typography-heading-03);
+    --ds-text-typography-display-sm: var(--semantic-typography-heading-02);
+    --ds-text-typography-display-md: var(--semantic-typography-heading-01);
+    --ds-text-typography-display-lg: var(--semantic-typography-oversize-01);
+    --ds-text-typography-display-xl: var(--semantic-typography-oversize-02);
+    --ds-text-typography-display-2xl: var(--semantic-typography-oversize-03);
+    --ds-text-typography-display-3xl: var(--semantic-typography-oversize-04);
+    --ds-text-typography-headline-xs: var(--semantic-typography-heading-04);
+    --ds-text-typography-headline-sm: var(--semantic-typography-heading-03);
+    --ds-text-typography-headline-md: var(--semantic-typography-heading-02);
+    --ds-text-typography-headline-lg: var(--semantic-typography-heading-01);
+    --ds-text-typography-headline-xl: var(--semantic-typography-oversize-01);
+    --ds-text-typography-headline-2xl: var(--semantic-typography-oversize-02);
+    --ds-text-typography-headline-3xl: var(--semantic-typography-oversize-03);
+    --ds-text-typography-title-xs: var(--semantic-typography-body-03);
+    --ds-text-typography-title-sm: var(--semantic-typography-body-02);
+    --ds-text-typography-title-md: var(--semantic-typography-body-01);
+    --ds-text-typography-title-lg: var(--semantic-typography-heading-04);
+    --ds-text-typography-title-xl: var(--semantic-typography-heading-03);
+    --ds-text-typography-title-2xl: var(--semantic-typography-heading-02);
+    --ds-text-typography-title-3xl: var(--semantic-typography-heading-01);
+    --ds-text-typography-body-xs: var(--semantic-typography-body-04);
+    --ds-text-typography-body-sm: var(--semantic-typography-body-04);
+    --ds-text-typography-body-md: var(--semantic-typography-body-03);
+    --ds-text-typography-body-lg: var(--semantic-typography-body-02);
+    --ds-text-typography-body-xl: var(--semantic-typography-body-01);
+    --ds-text-typography-body-2xl: var(--semantic-typography-heading-04);
+    --ds-text-typography-body-3xl: var(--semantic-typography-heading-03);
+    --ds-text-typography-caption-xs: var(--semantic-typography-caption-02);
+    --ds-text-typography-caption-sm: var(--semantic-typography-caption-01);
+    --ds-text-typography-caption-md: var(--semantic-typography-body-04);
+    --ds-text-typography-caption-lg: var(--semantic-typography-body-04);
+    --ds-text-typography-caption-xl: var(--semantic-typography-body-03);
+    --ds-text-typography-caption-2xl: var(--semantic-typography-body-02);
+    --ds-text-typography-caption-3xl: var(--semantic-typography-body-01);
+    --ds-text-typography-overline-xs: var(--semantic-typography-caption-02);
+    --ds-text-typography-overline-sm: var(--semantic-typography-caption-01);
+    --ds-text-typography-overline-md: var(--semantic-typography-body-04);
+    --ds-text-typography-overline-lg: var(--semantic-typography-body-04);
+    --ds-text-typography-overline-xl: var(--semantic-typography-body-03);
+    --ds-text-typography-overline-2xl: var(--semantic-typography-body-02);
+    --ds-text-typography-overline-3xl: var(--semantic-typography-body-01);
+    --ds-text-typography-code-xs: var(--semantic-typography-body-04);
+    --ds-text-typography-code-sm: var(--semantic-typography-body-04);
+    --ds-text-typography-code-md: var(--semantic-typography-body-03);
+    --ds-text-typography-code-lg: var(--semantic-typography-body-02);
+    --ds-text-typography-code-xl: var(--semantic-typography-body-01);
+    --ds-text-typography-code-2xl: var(--semantic-typography-heading-04);
+    --ds-text-typography-code-3xl: var(--semantic-typography-heading-03);
+
+    /* === Code Tokens === */
+    --ds-text-code-font-family: var(--core-typography-font-family-mono);
+    --ds-text-code-padding-y: var(--core-spacing-size-02);
+    --ds-text-code-padding-x: var(--core-spacing-size-03);
+    --ds-text-code-radius: var(--core-shape-radius-small);
+  }
+}

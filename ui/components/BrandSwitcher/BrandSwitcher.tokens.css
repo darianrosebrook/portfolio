@@ -1,0 +1,42 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/BrandSwitcher/BrandSwitcher.tokens.json
+ */
+@layer components {
+  [data-ds-component="BrandSwitcher"] {
+    /* === Color Tokens === */
+    --ds-brand-switcher-color-background-primary: var(--semantic-color-background-primary);
+    --ds-brand-switcher-color-background-secondary: var(--semantic-color-background-secondary);
+    --ds-brand-switcher-color-background-tertiary: var(--semantic-color-background-tertiary);
+    --ds-brand-switcher-color-background-accent: var(--semantic-color-background-accent);
+    --ds-brand-switcher-color-background-highlight: var(--semantic-color-background-highlight);
+    --ds-brand-switcher-color-foreground-primary: var(--semantic-color-foreground-primary);
+    --ds-brand-switcher-color-foreground-secondary: var(--semantic-color-foreground-secondary);
+    --ds-brand-switcher-color-foreground-tertiary: var(--semantic-color-foreground-tertiary);
+    --ds-brand-switcher-color-border-default: var(--semantic-color-border-default);
+    --ds-brand-switcher-color-border-hover: var(--semantic-color-border-hover);
+    --ds-brand-switcher-color-border-focus: var(--semantic-color-border-focus);
+    --ds-brand-switcher-color-border-accent: var(--semantic-color-border-accent);
+
+    /* === Spacing Tokens === */
+    --ds-brand-switcher-spacing-gap-xs: var(--semantic-spacing-gap-component);
+    --ds-brand-switcher-spacing-gap-sm: var(--semantic-spacing-gap-grid);
+    --ds-brand-switcher-spacing-gap-md: var(--semantic-spacing-gap-grid-medium);
+    --ds-brand-switcher-spacing-padding-xs: var(--semantic-spacing-padding-component);
+    --ds-brand-switcher-spacing-padding-sm: var(--semantic-spacing-padding-card);
+    --ds-brand-switcher-spacing-padding-md: var(--semantic-spacing-padding-component);
+    --ds-brand-switcher-spacing-padding-lg: var(--semantic-spacing-padding-section);
+
+    /* === Size Tokens === */
+    --ds-brand-switcher-size-radius-01: var(--core-shape-radius-01);
+    --ds-brand-switcher-size-radius-02: var(--core-shape-radius-02);
+    --ds-brand-switcher-size-radius-03: var(--core-shape-radius-03);
+
+    /* === Typography Tokens === */
+    --ds-brand-switcher-typography-font-size-xs: var(--semantic-typography-meta-caption-font-size);
+    --ds-brand-switcher-typography-font-size-sm: var(--semantic-typography-body-small-font-size);
+    --ds-brand-switcher-typography-font-size-default: var(--semantic-typography-body-default-font-size);
+    --ds-brand-switcher-typography-font-weight-default: var(--semantic-typography-font-weight-regular);
+    --ds-brand-switcher-typography-font-weight-strong: var(--semantic-typography-font-weight-bold);
+    --ds-brand-switcher-typography-line-height-default: var(--semantic-typography-body-default-line-height);
+  }
+}

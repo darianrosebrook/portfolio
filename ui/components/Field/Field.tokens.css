@@ -1,0 +1,35 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Field/Field.tokens.json
+ */
+@layer components {
+  [data-ds-component="Field"] {
+    /* === Gap Tokens === */
+    --ds-field-gap-y: var(--semantic-spacing-density-compact-sm);
+    --ds-field-gap-meta: var(--core-spacing-size-03);
+
+    /* === Label Tokens === */
+    --ds-field-label-font-size: var(--semantic-typography-body-small-font-size);
+    --ds-field-label-color: var(--semantic-color-foreground-secondary);
+
+    /* === Pad Tokens === */
+    --ds-field-pad-x: var(--semantic-spacing-density-compact-md);
+    --ds-field-pad-y: var(--semantic-spacing-density-compact-sm);
+
+    /* === Color Tokens === */
+    --ds-field-color-bg: var(--semantic-color-background-elevated);
+    --ds-field-color-fg: var(--semantic-color-foreground-primary);
+    --ds-field-color-border: var(--semantic-color-border-subtle);
+    --ds-field-color-border-bold: var(--semantic-color-border-bold);
+    --ds-field-color-focus-border: var(--semantic-color-border-focus);
+    --ds-field-color-focus-text: var(--semantic-color-border-accent);
+    --ds-field-color-invalid-border: var(--semantic-color-border-danger);
+    --ds-field-color-invalid-text: var(--semantic-color-foreground-danger);
+    --ds-field-color-valid-border: var(--semantic-color-feedback-border-success);
+
+    /* === Spacing Tokens === */
+    --ds-field-spacing-indicator: var(--core-spacing-size-03);
+
+    /* === Other Tokens === */
+    --ds-field-radius: var(--semantic-shape-control-radius-default);
+  }
+}

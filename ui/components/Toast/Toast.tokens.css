@@ -1,0 +1,36 @@
+/* AUTO-GENERATED: Do not edit directly.
+ * Source: ui/components/Toast/Toast.tokens.json
+ */
+@layer components {
+  [data-ds-component="Toast"] {
+    /* === Surface Tokens === */
+    --ds-toast-surface-bg: var(--semantic-color-background-secondary);
+    --ds-toast-surface-border: var(--semantic-color-border-subtle);
+    --ds-toast-surface-radius: var(--core-shape-radius-medium);
+    --ds-toast-surface-shadow: var(--semantic-elevation-surface-raised);
+
+    /* === Color Tokens === */
+    --ds-toast-color-info: var(--semantic-color-foreground-primary);
+    --ds-toast-color-success: var(--semantic-color-foreground-success);
+    --ds-toast-color-warning: var(--semantic-color-foreground-warning);
+    --ds-toast-color-error: var(--semantic-color-foreground-danger);
+
+    /* === Accent Tokens === */
+    --ds-toast-accent-info: var(--semantic-color-status-info);
+    --ds-toast-accent-success: var(--semantic-color-status-success);
+    --ds-toast-accent-warning: var(--semantic-color-status-warning);
+    --ds-toast-accent-error: var(--semantic-color-status-danger);
+
+    /* === Spacing Tokens === */
+    --ds-toast-spacing-padding: var(--core-spacing-size-05);
+    --ds-toast-spacing-gap: var(--core-spacing-size-04);
+    --ds-toast-spacing-stack-gap: var(--core-spacing-size-04);
+
+    /* === Size Tokens === */
+    --ds-toast-size-max-width: 400px;
+
+    /* === Motion Tokens === */
+    --ds-toast-motion-enter: var(--core-motion-duration-short);
+    --ds-toast-motion-leave: var(--core-motion-duration-short);
+  }
+}
