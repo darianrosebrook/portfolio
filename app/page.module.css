@@ -15,6 +15,9 @@
 
 .headingHero {
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--core-spacing-size-05);
   max-width: 90vw;
   margin: 0 auto;
 }
@@ -22,16 +25,26 @@
 .headingHero h1 {
   max-width: 16em;
   line-height: 1.3;
-  letter-spacing: var(--core-typography-letterSpacing-tight);
+  letter-spacing: var(--core-typography-letter-spacing-tight);
 }
 
-.headingHero h1 span:first-of-type {
+.headingHero h1 > span:first-of-type {
   z-index: 1;
   display: inline-block;
-  margin-bottom: var(--core-spacing-size-02);
+  margin-bottom: 0;
+}
+
+/* First line styling - small red text */
+.headingHero h1 > span:first-of-type .firstLine {
   color: var(--semantic-color-foreground-accent);
   font-size: var(--semantic-typography-heading-06);
-  letter-spacing: var(--core-typography-letterSpacing-normal);
+  letter-spacing: var(--core-typography-letter-spacing-normal);
+  gap: 0.15em;
+}
+
+/* Second line styling - normal spacing */
+.headingHero h1 .secondLine {
+  gap: 0.05em;
 }
 
 .heroImage {
@@ -56,7 +69,7 @@
   background: linear-gradient(
     180deg,
     var(--semantic-color-background-primary) 0%,
-    var(--color-core-transparent) 10% 90%,
+    var(--core-color-mode-transparent) 10% 90%,
     var(--semantic-color-background-primary) 100%
   );
   pointer-events: none;

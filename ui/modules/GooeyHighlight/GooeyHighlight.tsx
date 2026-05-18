@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useGooeyHighlight } from '@/utils/gooeyHighlight';
-import styles from './GooeyHighlight.module.scss';
+import './GooeyHighlight.css';
 
 /**
  * GooeyHighlight component that demonstrates gooey text highlighting
@@ -50,28 +50,28 @@ export const GooeyHighlight: React.FC<GooeyHighlightProps> = ({
   };
 
   return (
-    <div className={styles.gooeyHighlightContainer}>
-      <div className={styles.controls}>
+    <div data-ds-component="GooeyHighlight">
+      <div className='controls'>
         <button
           onClick={createDemoHighlight}
-          className={styles.demoButton}
+          className='demoButton'
           disabled={!isSupported}
         >
           Demo Highlight
         </button>
         <button
           onClick={clearHighlights}
-          className={styles.clearButton}
+          className='clearButton'
           disabled={!isSupported}
         >
           Clear Highlights
         </button>
       </div>
 
-      <div className={styles.textContainer}>
+      <div className='textContainer'>
         <div
           ref={textRef}
-          className={`${styles.highlightableText} ${styles.gooeyHighlightWrapper}`}
+          className='highlightableText gooeyHighlightWrapper'
           onMouseUp={handleClick}
           onClick={handleClick}
           onSelect={handleSelection}
@@ -89,7 +89,7 @@ export const GooeyHighlight: React.FC<GooeyHighlightProps> = ({
       </div>
 
       {!isSupported && (
-        <div className={styles.fallbackMessage}>
+        <div className='fallbackMessage'>
           <p>CSS Custom Highlight API not supported in this browser.</p>
           <p>
             Try selecting text manually or use the demo button for a fallback
@@ -98,7 +98,7 @@ export const GooeyHighlight: React.FC<GooeyHighlightProps> = ({
         </div>
       )}
 
-      <div className={styles.instructions}>
+      <div className='instructions'>
         <h4>How to use:</h4>
         <ul>
           <li>Click and drag to select text for gooey highlighting</li>

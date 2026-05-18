@@ -1,4 +1,4 @@
-.gooeyHighlightContainer {
+[data-ds-component="GooeyHighlight"] {
   display: flex;
   flex-direction: column;
   gap: var(--core-spacing-size-06);
@@ -9,14 +9,14 @@
   border-radius: var(--semantic-shape-control-radius-default);
 }
 
-.controls {
+[data-ds-component="GooeyHighlight"] .controls {
   display: flex;
   flex-wrap: wrap;
   gap: var(--core-spacing-size-03);
 }
 
-.demoButton,
-.clearButton {
+[data-ds-component="GooeyHighlight"] .demoButton,
+[data-ds-component="GooeyHighlight"] .clearButton {
   padding: var(--core-spacing-size-02) var(--core-spacing-size-04);
   background: var(--semantic-color-background-primary);
   border: 1px solid var(--semantic-color-border-primary);
@@ -37,7 +37,7 @@
   }
 }
 
-.textContainer {
+[data-ds-component="GooeyHighlight"] .textContainer {
   position: relative;
   min-height: 120px;
   padding: var(--core-spacing-size-04);
@@ -46,7 +46,7 @@
   border-radius: var(--core-shape-radius-small);
 }
 
-.highlightableText {
+[data-ds-component="GooeyHighlight"] .highlightableText {
   /* Custom properties for dynamic colors */
   --highlight-color: var(--semantic-color-background-highlight);
   --text-color: var(--semantic-color-foreground-highlight);
@@ -71,7 +71,7 @@
   }
 }
 
-.gooeyHighlightWrapper {
+[data-ds-component="GooeyHighlight"] .gooeyHighlightWrapper {
   /* Custom properties for dynamic colors */
   --highlight-color: var(--semantic-color-background-highlight);
   --text-color: var(--semantic-color-foreground-highlight);
@@ -81,7 +81,7 @@
   filter: url('#goo-text');
 }
 
-.fallbackMessage {
+[data-ds-component="GooeyHighlight"] .fallbackMessage {
   padding: var(--core-spacing-size-04);
   background: var(--semantic-color-background-tertiary);
   border: 1px solid transparent;
@@ -99,7 +99,7 @@
   }
 }
 
-.instructions {
+[data-ds-component="GooeyHighlight"] .instructions {
   h4 {
     margin: 0 0 var(--core-spacing-size-03) 0;
     color: var(--semantic-color-foreground-primary);
@@ -125,20 +125,20 @@
 
 /* Responsive adjustments */
 @media (width <= 768px) {
-  .gooeyHighlightContainer {
+  [data-ds-component="GooeyHighlight"] {
     padding: var(--core-spacing-size-04);
   }
 
-  .controls {
+  [data-ds-component="GooeyHighlight"] .controls {
     flex-direction: column;
   }
 
-  .demoButton,
-  .clearButton {
+  [data-ds-component="GooeyHighlight"] .demoButton,
+  [data-ds-component="GooeyHighlight"] .clearButton {
     width: 100%;
   }
 
-  .highlightableText {
+  [data-ds-component="GooeyHighlight"] .highlightableText {
     font-size: var(--text-md);
   }
 }
