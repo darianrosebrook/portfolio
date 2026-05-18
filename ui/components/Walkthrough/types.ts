@@ -68,7 +68,7 @@ export interface WalkthroughContextValue {
   closeOnOutsideClick?: boolean;
 }
 
-export interface WalkthroughUIProps {
+export interface WalkthroughUIProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
   /** Custom content render; default uses step.title/description */
   children?: React.ReactNode;

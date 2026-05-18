@@ -4,14 +4,7 @@
  * Handles state management, option filtering, keyboard navigation,
  * and selection logic separated from presentation concerns
  */
-import {
-  useCallback,
-  useState,
-  useId,
-  useMemo,
-  useRef,
-  useEffect,
-} from 'react';
+import { useCallback, useState, useId, useMemo, useRef } from 'react';
 import type { Option } from '@/types/ui';
 
 export interface UseSelectOptions {
@@ -44,6 +37,7 @@ export interface UseSelectReturn {
   filteredOptions: Option[];
   selectedOption: Option | null; // For single select
   isEmpty: boolean;
+  disabled: boolean;
 
   // Actions
   open: () => void;
@@ -63,7 +57,6 @@ export interface UseSelectReturn {
   // Accessibility
   id: string;
   ariaAttributes: {
-    'aria-expanded': boolean;
     'aria-disabled'?: boolean;
     'aria-multiselectable'?: boolean;
   };
@@ -110,13 +103,11 @@ export function useSelect(options: UseSelectOptions): UseSelectReturn {
     return [];
   });
 
-  const selectedIds = isControlled
-    ? Array.isArray(value)
-      ? value
-      : value
-        ? [value]
-        : []
-    : internalSelection;
+  const selectedIds = useMemo(() => {
+    if (!isControlled) return internalSelection;
+    if (Array.isArray(value)) return value;
+    return value ? [value] : [];
+  }, [internalSelection, isControlled, value]);
 
   const selectedOptions = useMemo(() => {
     return allOptions.filter((option) => selectedIds.includes(option.id));
@@ -230,13 +221,7 @@ export function useSelect(options: UseSelectOptions): UseSelectReturn {
     }
   }, [activeIndex, filteredOptions, selectOption]);
 
-  // Reset active index when options change
-  useEffect(() => {
-    setActiveIndex(-1);
-  }, [filteredOptions]);
-
   const ariaAttributes = {
-    'aria-expanded': isOpen,
     ...(disabled && { 'aria-disabled': true }),
     ...(multiple && { 'aria-multiselectable': true }),
   };
@@ -252,6 +237,7 @@ export function useSelect(options: UseSelectOptions): UseSelectReturn {
     filteredOptions,
     selectedOption,
     isEmpty: selectedOptions.length === 0,
+    disabled,
 
     // Actions
     open,

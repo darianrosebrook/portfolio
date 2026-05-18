@@ -27,7 +27,7 @@ export function PerfPanel({ targetWindow, sampleMs = 5000 }: PerfPanelProps) {
 
   const renderTimes = React.useRef<number[]>([]);
   const frameCount = React.useRef(0);
-  const lastFrameTime = React.useRef(performance.now());
+  const lastFrameTime = React.useRef(0);
   const animationFrameId = React.useRef<number | null>(null);
   const intervalId = React.useRef<NodeJS.Timeout | null>(null);
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '../test-utils';
+import { render, fireEvent } from '../test-utils';
 import { WalkthroughProvider, Walkthrough } from '@/ui/components/Walkthrough';
 
 describe('Walkthrough composer', () => {
