@@ -1,7 +1,7 @@
-.animatedSection {
+[data-ds-component="AnimatedSection"] {
   will-change: transform, opacity;
-}
 
-.animatedChild {
-  will-change: transform, opacity;
+  .animatedChild {
+    will-change: transform, opacity;
+  }
 }
