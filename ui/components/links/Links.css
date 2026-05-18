@@ -1,53 +1,58 @@
-@use './AnimatedLink.tokens.generated.scss' as animatedLinkTokens;
+@import "./Links.tokens.css";
 
-.root {
-  @include animatedLinkTokens.vars;
+/*
+ * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Scoped to [data-ds-component="Links"] on the root element (the Link anchor).
+ * Old --animated-link-* vars mapped to --ds-links-* equivalents.
+ * Intentionally unlayered — see Button.css for the cascade rationale.
+ */
+[data-ds-component="Links"] {
+  &.root {
+    display: inline-flex;
+    vertical-align: baseline;
+    gap: var(--ds-links-spacing-gap-default);
+    align-items: center;
+    color: var(--ds-links-color-foreground-default);
+    font-weight: var(--ds-links-typography-font-weight-default);
+    line-height: var(--ds-links-typography-line-height-tight);
+    text-decoration: none;
+    transition: color 0.2s ease;
 
-  display: inline-flex;
-  vertical-align: baseline;
-  gap: var(--animated-link-spacing-gap-default);
-  align-items: center;
-  color: var(--animated-link-color-default);
-  font-weight: var(--animated-link-typography-font-weight-regular);
-  line-height: var(--animated-link-typography-line-height-collapse);
-  text-decoration: none;
-  transition: color 0.2s ease;
+    &:hover {
+      color: color-mix(
+        in srgb,
+        var(--ds-links-color-foreground-default) 80%,
+        var(--ds-links-color-foreground-hover) 20%
+      );
+    }
 
-  &:hover {
-    // Use color-mix() for dynamic hover effect
-    color: color-mix(
-      in srgb,
-      var(--animated-link-color-default) 80%,
-      var(--animated-link-color-hover) 20%
-    );
+    &:focus-visible {
+      border-radius: 0.125rem;
+      outline: 2px solid
+        color-mix(in oklab, var(--ds-links-color-foreground-hover) 40%, transparent);
+      outline-offset: 2px;
+    }
   }
 
-  &:focus-visible {
-    border-radius: var(--animated-link-shape-radius, 0.125rem);
-    outline: 2px solid
-      color-mix(in oklab, var(--animated-link-color-focus) 40%, transparent);
-    outline-offset: 2px;
+  .maskLine {
+    position: relative;
+    display: inline-block;
+    vertical-align: baseline;
+    overflow: hidden;
+    width: 100%;
+    line-height: var(--ds-links-typography-line-height-tight);
   }
-}
 
-.maskLine {
-  position: relative;
-  display: inline-block;
-  vertical-align: baseline;
-  overflow: hidden;
-  width: 100%;
-  line-height: var(--animated-link-typography-line-height-collapse);
-}
+  .text {
+    display: block;
+    will-change: transform;
+  }
 
-.text {
-  display: block;
-  will-change: transform;
-}
-
-.clone {
-  position: absolute;
-  display: block;
-  inset-block-start: 0;
-  inset-inline-start: 0;
-  will-change: transform;
+  .clone {
+    position: absolute;
+    display: block;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    will-change: transform;
+  }
 }
