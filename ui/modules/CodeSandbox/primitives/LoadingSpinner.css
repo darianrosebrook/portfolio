@@ -8,6 +8,8 @@
   }
 }
 
-.spinner {
-  animation: spinnerRotate 1s linear infinite;
+[data-ds-component="LoadingSpinner"] {
+  &.spinner {
+    animation: spinnerRotate 1s linear infinite;
+  }
 }
