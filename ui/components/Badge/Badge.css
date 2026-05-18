@@ -1,260 +1,252 @@
-@use './Badge.tokens.generated.scss' as badgeTokens;
+@import "./Badge.tokens.css";
 
-.badge {
-  @include badgeTokens.vars;
+[data-ds-component="Badge"] {
+  &.badge {
+    display: inline-flex;
+    vertical-align: baseline;
+    gap: var(--ds-badge-spacing-gap);
+    align-items: center;
+    font-weight: 500;
+    line-height: 1;
+    white-space: nowrap;
+    container-type: inline-size;
 
-  display: inline-flex;
-  vertical-align: baseline;
-  gap: var(--badge-spacing-gap);
-  align-items: center;
-  font-weight: 500;
-  line-height: 1;
-  white-space: nowrap;
+    &.default {
+      padding: var(--ds-badge-size-md-padding-y) var(--ds-badge-size-md-padding-x);
+      background: var(--ds-badge-color-background-default);
+      border: 1px solid var(--ds-badge-color-border-default);
+      border-radius: 12px;
+      box-shadow: var(--ds-badge-elevation-default);
+      color: var(--ds-badge-color-foreground-primary);
+      font-size: var(--ds-badge-size-md-font-size);
+      transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease;
 
-  // Container queries for responsive sizing
-  container-type: inline-size;
+      &:hover {
+        background-color: color-mix(
+          in srgb,
+          var(--ds-badge-color-background-default) 90%,
+          var(--ds-badge-color-foreground-primary) 10%
+        );
+        border-color: color-mix(
+          in srgb,
+          var(--ds-badge-color-border-default) 80%,
+          var(--ds-badge-color-foreground-primary) 20%
+        );
+      }
+    }
 
-  // Default variant
-  &.default {
-    padding: var(--badge-size-md-padding-y) var(--badge-size-md-padding-x);
-    background: var(--badge-color-background-default);
-    border: 1px solid var(--badge-color-border-default);
-    border-radius: 12px;
-    box-shadow: var(--badge-elevation-default);
-    color: var(--badge-color-foreground-primary);
-    font-size: var(--badge-size-md-font-size);
-    transition:
-      background-color 0.2s ease,
-      border-color 0.2s ease;
+    &.status {
+      padding: var(--ds-badge-size-md-padding-y) var(--ds-badge-size-md-padding-x);
+      border: 1px solid transparent;
+      border-radius: var(--ds-badge-size-md-radius);
+      box-shadow: var(--ds-badge-elevation-status);
+      font-size: var(--ds-badge-size-md-font-size);
+      transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease;
 
-    &:hover {
-      // Use color-mix() for dynamic hover effect
-      background-color: color-mix(
-        in srgb,
-        var(--badge-color-background-default) 90%,
-        var(--badge-color-foreground-primary) 10%
-      );
-      border-color: color-mix(
-        in srgb,
-        var(--badge-color-border-default) 80%,
-        var(--badge-color-foreground-primary) 20%
-      );
+      &.info {
+        background: var(--ds-badge-color-background-info);
+        border-color: var(--ds-badge-color-border-info);
+        color: var(--ds-badge-color-foreground-info);
+
+        &:hover {
+          background-color: color-mix(
+            in srgb,
+            var(--ds-badge-color-background-info) 85%,
+            white 15%
+          );
+          border-color: color-mix(
+            in srgb,
+            var(--ds-badge-color-border-info) 80%,
+            white 20%
+          );
+        }
+      }
+
+      &.success {
+        background: var(--ds-badge-color-background-success);
+        border-color: var(--ds-badge-color-border-success);
+        color: var(--ds-badge-color-foreground-success);
+
+        &:hover {
+          background-color: color-mix(
+            in srgb,
+            var(--ds-badge-color-background-success) 85%,
+            white 15%
+          );
+          border-color: color-mix(
+            in srgb,
+            var(--ds-badge-color-border-success) 80%,
+            white 20%
+          );
+        }
+      }
+
+      &.warning {
+        background: var(--ds-badge-color-background-warning);
+        border-color: var(--ds-badge-color-border-warning);
+        color: var(--ds-badge-color-foreground-warning);
+
+        &:hover {
+          background-color: color-mix(
+            in srgb,
+            var(--ds-badge-color-background-warning) 85%,
+            white 15%
+          );
+          border-color: color-mix(
+            in srgb,
+            var(--ds-badge-color-border-warning) 80%,
+            white 20%
+          );
+        }
+      }
+
+      &.danger {
+        background: var(--ds-badge-color-background-danger);
+        border-color: var(--ds-badge-color-border-danger);
+        color: var(--ds-badge-color-foreground-danger);
+
+        &:hover {
+          background-color: color-mix(
+            in srgb,
+            var(--ds-badge-color-background-danger) 85%,
+            white 15%
+          );
+          border-color: color-mix(
+            in srgb,
+            var(--ds-badge-color-border-danger) 80%,
+            white 20%
+          );
+        }
+      }
+    }
+
+    &.counter {
+      justify-content: center;
+      min-width: var(--ds-badge-size-sm-icon-size);
+      padding: var(--ds-badge-size-sm-padding-y) var(--ds-badge-size-sm-padding-x);
+      background: var(--ds-badge-color-background-counter);
+      border-radius: var(--ds-badge-size-sm-radius);
+      color: var(--ds-badge-color-foreground-on-color);
+      font-size: var(--ds-badge-size-sm-font-size);
+    }
+
+    &.tag {
+      padding: var(--ds-badge-size-sm-padding-y) var(--ds-badge-size-sm-padding-x);
+      background: var(--ds-badge-color-background-tag);
+      border: 1px solid var(--ds-badge-color-border-default);
+      border-radius: var(--ds-badge-size-sm-radius);
+      color: var(--ds-badge-color-foreground-secondary);
+      font-size: var(--ds-badge-size-sm-font-size);
+    }
+
+    &.sm {
+      padding: var(--ds-badge-size-sm-padding-y) var(--ds-badge-size-sm-padding-x);
+      border-radius: var(--ds-badge-size-sm-radius);
+      font-size: var(--ds-badge-size-sm-font-size);
+    }
+
+    &.md {
+      padding: var(--ds-badge-size-md-padding-y) var(--ds-badge-size-md-padding-x);
+      border-radius: var(--ds-badge-size-md-radius);
+      font-size: var(--ds-badge-size-md-font-size);
+    }
+
+    &.lg {
+      padding: var(--ds-badge-size-lg-padding-y) var(--ds-badge-size-lg-padding-x);
+      border-radius: var(--ds-badge-size-lg-radius);
+      font-size: var(--ds-badge-size-lg-font-size);
+    }
+
+    /* Size-specific icon sizing */
+    &.sm .icon {
+      width: var(--ds-badge-size-sm-icon-size);
+      height: var(--ds-badge-size-sm-icon-size);
+    }
+
+    &.md .icon {
+      width: var(--ds-badge-size-md-icon-size);
+      height: var(--ds-badge-size-md-icon-size);
+    }
+
+    &.lg .icon {
+      width: var(--ds-badge-size-lg-icon-size);
+      height: var(--ds-badge-size-lg-icon-size);
     }
   }
 
-  // Status variant (replaces Status component)
-  &.status {
-    padding: var(--badge-size-md-padding-y) var(--badge-size-md-padding-x);
-    border: 1px solid transparent;
-    border-radius: var(--badge-size-md-radius);
-    box-shadow: var(--badge-elevation-status);
-    font-size: var(--badge-size-md-font-size);
-    transition:
-      background-color 0.2s ease,
-      border-color 0.2s ease;
-
-    &.info {
-      background: var(--badge-color-background-info);
-      border-color: var(--badge-color-border-info);
-      color: var(--badge-color-foreground-info);
-
-      &:hover {
-        // Use color-mix() for dynamic hover effect
-        background-color: color-mix(
-          in srgb,
-          var(--badge-color-background-info) 85%,
-          white 15%
-        );
-        border-color: color-mix(
-          in srgb,
-          var(--badge-color-border-info) 80%,
-          white 20%
-        );
-      }
-    }
-
-    &.success {
-      background: var(--badge-color-background-success);
-      border-color: var(--badge-color-border-success);
-      color: var(--badge-color-foreground-success);
-
-      &:hover {
-        background-color: color-mix(
-          in srgb,
-          var(--badge-color-background-success) 85%,
-          white 15%
-        );
-        border-color: color-mix(
-          in srgb,
-          var(--badge-color-border-success) 80%,
-          white 20%
-        );
-      }
-    }
-
-    &.warning {
-      background: var(--badge-color-background-warning);
-      border-color: var(--badge-color-border-warning);
-      color: var(--badge-color-foreground-warning);
-
-      &:hover {
-        background-color: color-mix(
-          in srgb,
-          var(--badge-color-background-warning) 85%,
-          white 15%
-        );
-        border-color: color-mix(
-          in srgb,
-          var(--badge-color-border-warning) 80%,
-          white 20%
-        );
-      }
-    }
-
-    &.danger {
-      background: var(--badge-color-background-danger);
-      border-color: var(--badge-color-border-danger);
-      color: var(--badge-color-foreground-danger);
-
-      &:hover {
-        background-color: color-mix(
-          in srgb,
-          var(--badge-color-background-danger) 85%,
-          white 15%
-        );
-        border-color: color-mix(
-          in srgb,
-          var(--badge-color-border-danger) 80%,
-          white 20%
-        );
-      }
-    }
-  }
-
-  // Counter variant
-  &.counter {
+  .icon {
+    display: inline-flex;
+    flex-shrink: 0;
     justify-content: center;
-    min-width: var(--badge-size-sm-icon-size);
-    padding: var(--badge-size-sm-padding-y) var(--badge-size-sm-padding-x);
-    background: var(--badge-color-background-counter);
-    border-radius: var(--badge-size-sm-radius);
-    color: var(--badge-color-foreground-on-color);
-    font-size: var(--badge-size-sm-font-size);
-  }
+    align-items: center;
 
-  // Tag variant
-  &.tag {
-    padding: var(--badge-size-sm-padding-y) var(--badge-size-sm-padding-x);
-    background: var(--badge-color-background-tag);
-    border: 1px solid var(--badge-color-border-default);
-    border-radius: var(--badge-size-sm-radius);
-    color: var(--badge-color-foreground-secondary);
-    font-size: var(--badge-size-sm-font-size);
-  }
-
-  // Size variants
-  &.sm {
-    padding: var(--badge-size-sm-padding-y) var(--badge-size-sm-padding-x);
-    border-radius: var(--badge-size-sm-radius);
-    font-size: var(--badge-size-sm-font-size);
-  }
-
-  &.md {
-    padding: var(--badge-size-md-padding-y) var(--badge-size-md-padding-x);
-    border-radius: var(--badge-size-md-radius);
-    font-size: var(--badge-size-md-font-size);
-  }
-
-  &.lg {
-    padding: var(--badge-size-lg-padding-y) var(--badge-size-lg-padding-x);
-    border-radius: var(--badge-size-lg-radius);
-    font-size: var(--badge-size-lg-font-size);
-  }
-}
-
-.icon {
-  display: inline-flex;
-  flex-shrink: 0;
-  justify-content: center;
-  align-items: center;
-
-  svg {
-    width: 100%;
-    height: 100%;
-    fill: currentcolor;
-  }
-}
-
-.content {
-  display: inline-block;
-}
-
-// Size-specific icon sizing
-.badge.sm .icon {
-  width: var(--badge-size-sm-icon-size);
-  height: var(--badge-size-sm-icon-size);
-}
-
-.badge.md .icon {
-  width: var(--badge-size-md-icon-size);
-  height: var(--badge-size-md-icon-size);
-}
-
-.badge.lg .icon {
-  width: var(--badge-size-lg-icon-size);
-  height: var(--badge-size-lg-icon-size);
-}
-
-// Container queries for responsive badge sizing
-@supports (container-type: inline-size) {
-  .badge {
-    @container (max-width: 10rem) {
-      // Compact badge for small containers
-      gap: calc(var(--badge-spacing-gap) * 0.75);
-      font-size: calc(var(--badge-size-md-font-size) * 0.9);
-
-      &.sm {
-        padding: calc(var(--badge-size-sm-padding-y) * 0.75)
-          calc(var(--badge-size-sm-padding-x) * 0.75);
-        font-size: calc(var(--badge-size-sm-font-size) * 0.9);
-      }
-
-      &.md {
-        padding: calc(var(--badge-size-md-padding-y) * 0.75)
-          calc(var(--badge-size-md-padding-x) * 0.75);
-        font-size: calc(var(--badge-size-md-font-size) * 0.9);
-      }
-
-      &.lg {
-        padding: calc(var(--badge-size-lg-padding-y) * 0.75)
-          calc(var(--badge-size-lg-padding-x) * 0.75);
-        font-size: calc(var(--badge-size-lg-font-size) * 0.9);
-      }
+    svg {
+      width: 100%;
+      height: 100%;
+      fill: currentcolor;
     }
+  }
 
-    @container (max-width: 6rem) {
-      // Minimal badge for very small containers
-      gap: calc(var(--badge-spacing-gap) * 0.5);
-      font-size: calc(var(--badge-size-md-font-size) * 0.8);
+  .content {
+    display: inline-block;
+  }
+}
 
-      &.sm,
-      &.md,
-      &.lg {
-        padding: calc(var(--badge-size-sm-padding-y) * 0.5)
-          calc(var(--badge-size-sm-padding-x) * 0.5);
-        font-size: calc(var(--badge-size-sm-font-size) * 0.8);
+@supports (container-type: inline-size) {
+  [data-ds-component="Badge"] {
+    &.badge {
+      @container (max-width: 10rem) {
+        gap: calc(var(--ds-badge-spacing-gap) * 0.75);
+        font-size: calc(var(--ds-badge-size-md-font-size) * 0.9);
+
+        &.sm {
+          padding: calc(var(--ds-badge-size-sm-padding-y) * 0.75)
+            calc(var(--ds-badge-size-sm-padding-x) * 0.75);
+          font-size: calc(var(--ds-badge-size-sm-font-size) * 0.9);
+        }
+
+        &.md {
+          padding: calc(var(--ds-badge-size-md-padding-y) * 0.75)
+            calc(var(--ds-badge-size-md-padding-x) * 0.75);
+          font-size: calc(var(--ds-badge-size-md-font-size) * 0.9);
+        }
+
+        &.lg {
+          padding: calc(var(--ds-badge-size-lg-padding-y) * 0.75)
+            calc(var(--ds-badge-size-lg-padding-x) * 0.75);
+          font-size: calc(var(--ds-badge-size-lg-font-size) * 0.9);
+        }
       }
 
-      .icon {
-        width: calc(var(--badge-size-sm-icon-size) * 0.8);
-        height: calc(var(--badge-size-sm-icon-size) * 0.8);
+      @container (max-width: 6rem) {
+        gap: calc(var(--ds-badge-spacing-gap) * 0.5);
+        font-size: calc(var(--ds-badge-size-md-font-size) * 0.8);
+
+        &.sm,
+        &.md,
+        &.lg {
+          padding: calc(var(--ds-badge-size-sm-padding-y) * 0.5)
+            calc(var(--ds-badge-size-sm-padding-x) * 0.5);
+          font-size: calc(var(--ds-badge-size-sm-font-size) * 0.8);
+        }
+
+        .icon {
+          width: calc(var(--ds-badge-size-sm-icon-size) * 0.8);
+          height: calc(var(--ds-badge-size-sm-icon-size) * 0.8);
+        }
       }
     }
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .badge {
-    transition: none;
+  [data-ds-component="Badge"] {
+    &.badge {
+      transition: none;
+    }
   }
 }
