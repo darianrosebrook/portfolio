@@ -9,7 +9,7 @@
  */
 'use client';
 import React, { useId } from 'react';
-import styles from './Switch.module.scss';
+import './Switch.css';
 
 export type SwitchSize = 'sm' | 'md' | 'lg';
 
@@ -60,22 +60,22 @@ export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
     const isControlled = checked !== undefined;
 
     const switchClassName = [
-      styles.switchPrimitive,
-      styles[size],
-      disabled && styles.disabled,
+      'switchPrimitive',
+      size,
+      disabled && 'disabled',
       className,
     ]
       .filter(Boolean)
       .join(' ');
 
     return (
-      <span className={switchClassName} data-slot="switch">
+      <span data-ds-component="Switch" className={switchClassName} data-slot="switch">
         <input
           ref={ref}
           type="checkbox"
           role="switch"
           id={id}
-          className={styles.input}
+          className="input"
           checked={isControlled ? checked : undefined}
           defaultChecked={!isControlled ? defaultChecked : undefined}
           disabled={disabled}
@@ -88,8 +88,8 @@ export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
           aria-describedby={ariaDescribedBy}
           {...rest}
         />
-        <span className={styles.track} aria-hidden="true">
-          <span className={styles.thumb} />
+        <span className="track" aria-hidden="true">
+          <span className="thumb" />
         </span>
       </span>
     );
@@ -113,12 +113,12 @@ export const SwitchGroup: React.FC<SwitchGroupProps> = ({
   className = '',
   orientation = 'vertical',
 }) => {
-  const groupClassName = [styles.switchGroup, styles[orientation], className]
+  const groupClassName = ['switchGroup', orientation, className]
     .filter(Boolean)
     .join(' ');
 
   return (
-    <div className={groupClassName} role="group">
+    <div data-ds-component="Switch" className={groupClassName} role="group">
       {children}
     </div>
   );

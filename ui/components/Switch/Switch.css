@@ -1,279 +1,262 @@
-@use './Switch.tokens.generated.scss' as switchTokens;
+@import "./Switch.tokens.css";
 
-// =============================================================================
-// Switch Primitive - Pure toggle control
-// =============================================================================
+/*
+ * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Scoped to [data-ds-component="Switch"] on the root element.
+ * Covers Switch primitive, SwitchField compound, and SwitchGroup.
+ * Intentionally unlayered — see Button.css for the cascade rationale.
+ */
 
-.switchPrimitive {
-  @include switchTokens.vars;
-
-  position: relative;
-  display: inline-flex;
-  vertical-align: middle;
-  align-items: center;
-
-  // Explicit dimensions ensure absolutely positioned .input can inherit correctly
-  width: var(--switch-size-md-track-width, 3rem);
-  height: var(--switch-size-md-track-height, 1.5rem);
-}
-
-// Hidden native input
-.input {
-  position: absolute;
-  z-index: 1; // Ensure input is on top of track for click events
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  opacity: 0;
-  cursor: pointer;
-
-  &:disabled {
-    cursor: not-allowed;
-  }
-}
-
-// Track (the background pill)
-.track {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  width: var(--switch-size-md-track-width, 3rem);
-  height: var(--switch-size-md-track-height, 1.5rem);
-  min-height: var(--switch-size-md-track-height, 1.5rem);
-  background-color: var(--switch-color-track-background-default);
-  border: 1px solid var(--switch-color-track-border-default);
-  border-radius: var(--switch-size-md-track-radius, 9999px);
-  transition:
-    background-color var(--switch-motion-duration, 150ms)
-      var(--switch-motion-easing, ease-out),
-    border-color var(--switch-motion-duration, 150ms)
-      var(--switch-motion-easing, ease-out);
-
-  // Focus visible state (one pseudo-class)
-  .input:focus-visible + & {
-    outline: var(--switch-focus-ring);
-    outline-offset: var(--switch-focus-offset);
+/* Switch Primitive */
+[data-ds-component="Switch"] {
+  &.switchPrimitive {
+    position: relative;
+    display: inline-flex;
+    vertical-align: middle;
+    align-items: center;
+    width: var(--ds-switch-size-md-track-width, 3rem);
+    height: var(--ds-switch-size-md-track-height, 1.5rem);
   }
 
-  // Disabled state (lowest specificity - one pseudo-class)
-  .input:disabled + & {
+  /* Hidden native input */
+  .input {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    cursor: pointer;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  /* Track (the background pill) */
+  .track {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    width: var(--ds-switch-size-md-track-width, 3rem);
+    height: var(--ds-switch-size-md-track-height, 1.5rem);
+    min-height: var(--ds-switch-size-md-track-height, 1.5rem);
+    background-color: var(--ds-switch-color-track-background-default);
+    border: 1px solid var(--ds-switch-color-track-border-default);
+    border-radius: var(--ds-switch-size-md-track-radius, 9999px);
+    transition:
+      background-color var(--ds-switch-motion-duration, 150ms)
+        var(--ds-switch-motion-easing, ease-out),
+      border-color var(--ds-switch-motion-duration, 150ms)
+        var(--ds-switch-motion-easing, ease-out);
+  }
+
+  .input:focus-visible + .track {
+    outline: var(--ds-switch-focus-ring);
+    outline-offset: var(--ds-switch-focus-offset);
+  }
+
+  .input:disabled + .track {
     opacity: 0.5;
     cursor: not-allowed;
   }
 
-  // Checked state (one pseudo-class)
-  .input:checked + & {
-    background-color: var(--switch-color-track-background-checked);
-    border-color: var(--switch-color-track-border-default);
+  .input:checked + .track {
+    background-color: var(--ds-switch-color-track-background-checked);
+    border-color: var(--ds-switch-color-track-border-default);
   }
 
-  // Hover state (higher specificity - two pseudo-classes)
-  .input:not(:disabled):hover + & {
-    background-color: var(--switch-color-track-background-hover);
+  .input:not(:disabled):hover + .track {
+    background-color: var(--ds-switch-color-track-background-hover);
   }
 
-  // Checked + hover state (highest specificity - three pseudo-classes, overrides hover)
-  .input:checked:not(:disabled):hover + & {
-    background-color: var(--switch-color-track-background-checked);
-    border-color: var(--switch-color-track-background-checked);
+  .input:checked:not(:disabled):hover + .track {
+    background-color: var(--ds-switch-color-track-background-checked);
+    border-color: var(--ds-switch-color-track-background-checked);
   }
-}
 
-// Thumb (the circle that moves)
-.thumb {
-  position: absolute;
-  width: var(--switch-size-md-thumb-size, 1rem);
-  height: var(--switch-size-md-thumb-size, 1rem);
-  min-height: var(--switch-size-md-thumb-size, 1rem);
-  background-color: var(--switch-color-thumb-background-default);
-  border: 1px solid var(--switch-color-thumb-border-default);
-  border-radius: 50%;
-  box-shadow: 0 1px 3px rgb(0 0 0 / 10%);
-  transition: transform var(--switch-motion-duration, 150ms)
-    var(--switch-motion-easing, ease-out);
-  inset-inline-start: var(--switch-size-md-thumb-offset, 4px);
+  /* Thumb (the circle that moves) */
+  .thumb {
+    position: absolute;
+    width: var(--ds-switch-size-md-thumb-size, 1rem);
+    height: var(--ds-switch-size-md-thumb-size, 1rem);
+    min-height: var(--ds-switch-size-md-thumb-size, 1rem);
+    background-color: var(--ds-switch-color-thumb-background-default);
+    border: 1px solid var(--ds-switch-color-thumb-border-default);
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 10%);
+    transition: transform var(--ds-switch-motion-duration, 150ms)
+      var(--ds-switch-motion-easing, ease-out);
+    inset-inline-start: var(--ds-switch-size-md-thumb-offset, 4px);
+  }
 
-  // Checked state - move to the right
-  .input:checked ~ .track & {
-    background-color: var(--switch-color-thumb-background-checked);
+  .input:checked ~ .track .thumb {
+    background-color: var(--ds-switch-color-thumb-background-checked);
     transform: translateX(
       calc(
-        var(--switch-size-md-track-width, 3rem) - var(
-            --switch-size-md-thumb-size,
+        var(--ds-switch-size-md-track-width, 3rem) - var(
+            --ds-switch-size-md-thumb-size,
             1rem
-          ) - var(--switch-size-md-thumb-offset, 4px) *
+          ) - var(--ds-switch-size-md-thumb-offset, 4px) *
           2
       )
     );
   }
-}
 
-// Size variants
-.switchPrimitive.sm {
-  width: var(--switch-size-sm-track-width, 2rem);
-  height: var(--switch-size-sm-track-height, 1rem);
+  /* Size variants */
+  &.switchPrimitive.sm {
+    width: var(--ds-switch-size-sm-track-width, 2rem);
+    height: var(--ds-switch-size-sm-track-height, 1rem);
 
-  .track {
-    width: var(--switch-size-sm-track-width, 2rem);
-    height: var(--switch-size-sm-track-height, 1rem);
-    min-height: var(--switch-size-sm-track-height, 1rem);
+    .track {
+      width: var(--ds-switch-size-sm-track-width, 2rem);
+      height: var(--ds-switch-size-sm-track-height, 1rem);
+      min-height: var(--ds-switch-size-sm-track-height, 1rem);
+    }
+
+    .thumb {
+      width: var(--ds-switch-size-sm-thumb-size, 0.75rem);
+      height: var(--ds-switch-size-sm-thumb-size, 0.75rem);
+      min-height: var(--ds-switch-size-sm-thumb-size, 0.75rem);
+      inset-inline-start: var(--ds-switch-size-sm-thumb-offset, 2px);
+    }
+
+    .input:checked ~ .track .thumb {
+      transform: translateX(
+        calc(
+          var(--ds-switch-size-sm-track-width, 2rem) - var(
+              --ds-switch-size-sm-thumb-size,
+              0.75rem
+            ) - var(--ds-switch-size-sm-thumb-offset, 2px) *
+            2
+        )
+      );
+    }
   }
 
-  .thumb {
-    width: var(--switch-size-sm-thumb-size, 0.75rem);
-    height: var(--switch-size-sm-thumb-size, 0.75rem);
-    min-height: var(--switch-size-sm-thumb-size, 0.75rem);
-    inset-inline-start: var(--switch-size-sm-thumb-offset, 2px);
+  &.switchPrimitive.lg {
+    width: var(--ds-switch-size-lg-track-width, 4rem);
+    height: var(--ds-switch-size-lg-track-height, 2rem);
+
+    .track {
+      width: var(--ds-switch-size-lg-track-width, 4rem);
+      height: var(--ds-switch-size-lg-track-height, 2rem);
+      min-height: var(--ds-switch-size-lg-track-height, 2rem);
+    }
+
+    .thumb {
+      width: var(--ds-switch-size-lg-thumb-size, 1.5rem);
+      height: var(--ds-switch-size-lg-thumb-size, 1.5rem);
+      min-height: var(--ds-switch-size-lg-thumb-size, 1.5rem);
+      inset-inline-start: var(--ds-switch-size-lg-thumb-offset, 4px);
+    }
+
+    .input:checked ~ .track .thumb {
+      transform: translateX(
+        calc(
+          var(--ds-switch-size-lg-track-width, 4rem) - var(
+              --ds-switch-size-lg-thumb-size,
+              1.5rem
+            ) - var(--ds-switch-size-lg-thumb-offset, 4px) *
+            2
+        )
+      );
+    }
   }
 
-  .input:checked ~ .track .thumb {
-    transform: translateX(
-      calc(
-        var(--switch-size-sm-track-width, 2rem) - var(
-            --switch-size-sm-thumb-size,
-            0.75rem
-          ) - var(--switch-size-sm-thumb-offset, 2px) *
-          2
-      )
-    );
-  }
-}
-
-.switchPrimitive.lg {
-  width: var(--switch-size-lg-track-width, 4rem);
-  height: var(--switch-size-lg-track-height, 2rem);
-
-  .track {
-    width: var(--switch-size-lg-track-width, 4rem);
-    height: var(--switch-size-lg-track-height, 2rem);
-    min-height: var(--switch-size-lg-track-height, 2rem);
-  }
-
-  .thumb {
-    width: var(--switch-size-lg-thumb-size, 1.5rem);
-    height: var(--switch-size-lg-thumb-size, 1.5rem);
-    min-height: var(--switch-size-lg-thumb-size, 1.5rem);
-    inset-inline-start: var(--switch-size-lg-thumb-offset, 4px);
-  }
-
-  .input:checked ~ .track .thumb {
-    transform: translateX(
-      calc(
-        var(--switch-size-lg-track-width, 4rem) - var(
-            --switch-size-lg-thumb-size,
-            1.5rem
-          ) - var(--switch-size-lg-thumb-offset, 4px) *
-          2
-      )
-    );
-  }
-}
-
-// Disabled state for primitive wrapper
-.switchPrimitive.disabled {
-  opacity: 0.5;
-  pointer-events: none;
-}
-
-// =============================================================================
-// SwitchField Compound - Switch + Label + Description
-// =============================================================================
-
-.switchField {
-  display: inline-flex;
-  gap: 0.75rem;
-  align-items: flex-start;
-  cursor: pointer;
-
-  &.disabled {
+  &.switchPrimitive.disabled {
     opacity: 0.5;
-    cursor: not-allowed;
+    pointer-events: none;
   }
 
-  // Label before switch
-  &.labelStart {
-    flex-direction: row-reverse;
+  /* SwitchField Compound */
+  &.switchField {
+    display: inline-flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    cursor: pointer;
+
+    &.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &.labelStart {
+      flex-direction: row-reverse;
+    }
   }
-}
 
-.labelWrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 0.125rem;
-  padding-block-start: 0.125rem;
-}
-
-.label {
-  color: var(--switch-color-text-default);
-  font-weight: var(--switch-text-label-weight, 500);
-  font-size: var(--switch-text-label-size, 0.875rem);
-  line-height: var(--switch-text-label-line-height, 1.4);
-  cursor: pointer;
-
-  .switchField.disabled & {
-    color: var(--switch-color-text-disabled);
-    cursor: not-allowed;
+  .labelWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    padding-block-start: 0.125rem;
   }
-}
 
-.description {
-  color: var(--switch-color-text-default);
-  font-size: var(--switch-text-description-size, 0.8125rem);
-  line-height: var(--switch-text-description-line-height, 1.4);
-
-  .switchField.disabled & {
-    color: var(--switch-color-text-disabled);
-  }
-}
-
-// Size variants for compound
-.switchField.sm {
   .label {
-    font-size: 0.8125rem;
+    color: var(--ds-switch-color-text-default);
+    font-weight: var(--ds-switch-text-label-weight, 500);
+    font-size: var(--ds-switch-text-label-size, 0.875rem);
+    line-height: var(--ds-switch-text-label-line-height, 1.4);
+    cursor: pointer;
+
+    .switchField.disabled & {
+      color: var(--ds-switch-color-text-disabled);
+      cursor: not-allowed;
+    }
   }
 
   .description {
-    font-size: 0.75rem;
+    color: var(--ds-switch-color-text-default);
+    font-size: var(--ds-switch-text-description-size, 0.8125rem);
+    line-height: var(--ds-switch-text-description-line-height, 1.4);
+
+    .switchField.disabled & {
+      color: var(--ds-switch-color-text-disabled);
+    }
+  }
+
+  &.switchField.sm {
+    .label {
+      font-size: 0.8125rem;
+    }
+
+    .description {
+      font-size: 0.75rem;
+    }
+  }
+
+  &.switchField.lg {
+    .label {
+      font-size: 1rem;
+    }
+
+    .description {
+      font-size: 0.875rem;
+    }
+  }
+
+  /* SwitchGroup */
+  &.switchGroup {
+    display: inline-flex;
+    gap: var(--ds-switch-size-md-gap, 1rem);
+  }
+
+  &.vertical {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  &.horizontal {
+    flex-direction: row;
+    align-items: center;
   }
 }
-
-.switchField.lg {
-  .label {
-    font-size: 1rem;
-  }
-
-  .description {
-    font-size: 0.875rem;
-  }
-}
-
-// =============================================================================
-// SwitchGroup - Multiple switches
-// =============================================================================
-
-.switchGroup {
-  display: inline-flex;
-  gap: var(--switch-size-md-gap, 1rem);
-}
-
-.vertical {
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.horizontal {
-  flex-direction: row;
-  align-items: center;
-}
-
-// =============================================================================
-// Reduced motion
-// =============================================================================
 
 @media (prefers-reduced-motion: reduce) {
-  .track,
-  .thumb {
+  [data-ds-component="Switch"] .track,
+  [data-ds-component="Switch"] .thumb {
     transition: none;
   }
 }

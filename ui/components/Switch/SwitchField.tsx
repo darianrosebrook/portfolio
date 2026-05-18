@@ -10,7 +10,7 @@
 'use client';
 import React, { useId } from 'react';
 import { Switch, SwitchSize } from './Switch';
-import styles from './Switch.module.scss';
+import './Switch.css';
 
 export interface SwitchFieldProps {
   /** Unique identifier - auto-generated if not provided */
@@ -56,17 +56,17 @@ export const SwitchField = React.forwardRef<HTMLInputElement, SwitchFieldProps>(
     const descriptionId = description ? `${id}-description` : undefined;
 
     const fieldClassName = [
-      styles.switchField,
-      styles[size],
-      disabled && styles.disabled,
-      labelPosition === 'start' && styles.labelStart,
+      'switchField',
+      size,
+      disabled && 'disabled',
+      labelPosition === 'start' && 'labelStart',
       className,
     ]
       .filter(Boolean)
       .join(' ');
 
     return (
-      <div className={fieldClassName} data-slot="switch-field">
+      <div data-ds-component="Switch" className={fieldClassName} data-slot="switch-field">
         <Switch
           ref={ref}
           id={id}
@@ -77,12 +77,12 @@ export const SwitchField = React.forwardRef<HTMLInputElement, SwitchFieldProps>(
           onChange={onChange}
           aria-describedby={descriptionId}
         />
-        <div className={styles.labelWrapper}>
-          <label htmlFor={id} className={styles.label}>
+        <div className="labelWrapper">
+          <label htmlFor={id} className="label">
             {label}
           </label>
           {description && (
-            <span id={descriptionId} className={styles.description}>
+            <span id={descriptionId} className="description">
               {description}
             </span>
           )}
