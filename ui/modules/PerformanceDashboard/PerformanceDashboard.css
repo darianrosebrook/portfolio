@@ -1,4 +1,4 @@
-.dashboard {
+[data-ds-component="PerformanceDashboard"] {
   position: fixed;
   top: var(--core-spacing-size-04);
   right: var(--core-spacing-size-04);
@@ -16,7 +16,7 @@
   backdrop-filter: var(--core-effect-backdropBlur-medium);
 }
 
-.header {
+[data-ds-component="PerformanceDashboard"] .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -26,14 +26,14 @@
     var(--semantic-color-border-light);
 }
 
-.header h3 {
+[data-ds-component="PerformanceDashboard"] .header h3 {
   margin: 0;
   color: var(--semantic-color-foreground-primary);
   font-weight: var(--core-typography-fontWeight-semibold);
   font-size: var(--core-typography-fontSize-sm);
 }
 
-.closeButton {
+[data-ds-component="PerformanceDashboard"] .closeButton {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -48,30 +48,30 @@
   transition: background-color var(--core-motion-duration-short)
     var(--core-motion-easing-standard);
   cursor: pointer;
+
+  &:hover {
+    background-color: var(--semantic-interaction-background-hover);
+  }
 }
 
-.closeButton:hover {
-  background-color: var(--semantic-interaction-background-hover);
-}
-
-.metrics {
+[data-ds-component="PerformanceDashboard"] .metrics {
   display: flex;
   flex-direction: column;
   gap: var(--core-spacing-size-01);
 }
 
-.metric {
+[data-ds-component="PerformanceDashboard"] .metric {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.label {
+[data-ds-component="PerformanceDashboard"] .label {
   color: var(--semantic-color-foreground-secondary);
   font-weight: var(--core-typography-fontWeight-medium);
 }
 
-.value {
+[data-ds-component="PerformanceDashboard"] .value {
   color: var(--semantic-color-foreground-primary);
   font-weight: var(--core-typography-fontWeight-semibold);
   font-variant-numeric: tabular-nums;
