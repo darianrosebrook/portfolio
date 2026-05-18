@@ -1,6 +1,6 @@
 'use client';
 import * as React from 'react';
-import styles from './List.module.scss';
+import './List.css';
 
 export interface ListProps extends React.HTMLAttributes<HTMLElement> {
   /** List type */
@@ -41,13 +41,14 @@ export const List = React.forwardRef<HTMLElement, ListProps>(
       Component,
       {
         ref,
+        'data-ds-component': 'List',
         className: [
-          styles.list,
-          styles[Component],
-          styles[variant],
-          styles[size],
-          marker !== 'default' ? styles[`marker-${marker}`] : '',
-          spacing !== 'md' ? styles[`spacing-${spacing}`] : '',
+          'list',
+          Component,
+          variant,
+          size,
+          marker !== 'default' ? `marker-${marker}` : '',
+          spacing !== 'md' ? `spacing-${spacing}` : '',
           className,
         ]
           .filter(Boolean)
