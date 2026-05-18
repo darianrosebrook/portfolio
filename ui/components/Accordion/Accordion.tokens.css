@@ -1,46 +1,44 @@
 /* AUTO-GENERATED: Do not edit directly.
  * Source: ui/components/Accordion/Accordion.tokens.json
  */
-@layer components {
-  [data-ds-component="Accordion"] {
-    /* === Color Tokens === */
-    --ds-accordion-color-background-hover: var(--semantic-interaction-background-hover);
-    --ds-accordion-color-text: var(--semantic-color-foreground-primary);
-    --ds-accordion-color-text-hover: var(--semantic-interaction-text-hover);
-    --ds-accordion-color-text-secondary: var(--semantic-color-foreground-secondary);
-    --ds-accordion-color-icon: var(--semantic-color-foreground-tertiary);
+[data-ds-component="Accordion"] {
+  /* === Color Tokens === */
+  --ds-accordion-color-background-hover: var(--semantic-interaction-background-hover);
+  --ds-accordion-color-text: var(--semantic-color-foreground-primary);
+  --ds-accordion-color-text-hover: var(--semantic-interaction-text-hover);
+  --ds-accordion-color-text-secondary: var(--semantic-color-foreground-secondary);
+  --ds-accordion-color-icon: var(--semantic-color-foreground-tertiary);
 
-    /* === Border Tokens === */
-    --ds-accordion-border-width: var(--core-shape-border-width-hairline);
-    --ds-accordion-border-color: var(--semantic-color-border-light);
-    --ds-accordion-border-radius: var(--core-shape-radius-small);
+  /* === Border Tokens === */
+  --ds-accordion-border-width: var(--core-shape-border-width-hairline);
+  --ds-accordion-border-color: var(--semantic-color-border-light);
+  --ds-accordion-border-radius: var(--core-shape-radius-small);
 
-    /* === Spacing Tokens === */
-    --ds-accordion-spacing-gap: var(--core-spacing-size-07);
-    --ds-accordion-spacing-padding-x: var(--core-spacing-size-00);
-    --ds-accordion-spacing-padding-y: var(--core-spacing-size-04);
+  /* === Spacing Tokens === */
+  --ds-accordion-spacing-gap: var(--core-spacing-size-07);
+  --ds-accordion-spacing-padding-x: var(--core-spacing-size-00);
+  --ds-accordion-spacing-padding-y: var(--core-spacing-size-04);
 
-    /* === Text Tokens === */
-    --ds-accordion-text-weight: var(--semantic-typography-font-weight-medium);
-    --ds-accordion-text-size: var(--semantic-typography-body-02);
-    --ds-accordion-text-line-height: var(--semantic-typography-line-height-normal);
-    --ds-accordion-text-size-content: var(--semantic-typography-body-03);
-    --ds-accordion-text-line-height-content: var(--semantic-typography-line-height-loose);
+  /* === Text Tokens === */
+  --ds-accordion-text-weight: var(--semantic-typography-font-weight-medium);
+  --ds-accordion-text-size: var(--semantic-typography-body-02);
+  --ds-accordion-text-line-height: var(--semantic-typography-line-height-normal);
+  --ds-accordion-text-size-content: var(--semantic-typography-body-03);
+  --ds-accordion-text-line-height-content: var(--semantic-typography-line-height-loose);
 
-    /* === Icon Tokens === */
-    --ds-accordion-icon-size: var(--core-spacing-size-04);
-    --ds-accordion-icon-offset: var(--core-spacing-size-01);
+  /* === Icon Tokens === */
+  --ds-accordion-icon-size: var(--core-spacing-size-04);
+  --ds-accordion-icon-offset: var(--core-spacing-size-01);
 
-    /* === Motion Tokens === */
-    --ds-accordion-motion-duration: var(--core-motion-duration-medium);
-    --ds-accordion-motion-easing: var(--core-motion-easing-standard);
+  /* === Motion Tokens === */
+  --ds-accordion-motion-duration: var(--core-motion-duration-medium);
+  --ds-accordion-motion-easing: var(--core-motion-easing-standard);
 
-    /* === Focus Tokens === */
-    --ds-accordion-focus-width: var(--core-shape-border-width-thick);
-    --ds-accordion-focus-color: var(--semantic-color-border-accent);
-    --ds-accordion-focus-offset: var(--core-spacing-size-01);
+  /* === Focus Tokens === */
+  --ds-accordion-focus-width: var(--core-shape-border-width-thick);
+  --ds-accordion-focus-color: var(--semantic-color-border-accent);
+  --ds-accordion-focus-offset: var(--core-spacing-size-01);
 
-    /* === Opacity Tokens === */
-    --ds-accordion-opacity-disabled: var(--semantic-interaction-disabled-opacity);
-  }
+  /* === Opacity Tokens === */
+  --ds-accordion-opacity-disabled: var(--semantic-interaction-disabled-opacity);
 }

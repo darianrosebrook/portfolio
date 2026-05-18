@@ -1,23 +1,21 @@
 /* AUTO-GENERATED: Do not edit directly.
  * Source: ui/components/OTP/OTP.tokens.json
  */
-@layer components {
-  [data-ds-component="Otp"] {
-    /* === Color Tokens === */
-    --ds-otp-color-background-default: var(--semantic-color-background-secondary);
-    --ds-otp-color-foreground-primary: var(--semantic-color-foreground-primary);
-    --ds-otp-color-foreground-secondary: var(--semantic-color-foreground-secondary);
-    --ds-otp-color-border-default: var(--semantic-color-border-light);
-    --ds-otp-color-border-accent: var(--semantic-color-border-accent);
+[data-ds-component="Otp"] {
+  /* === Color Tokens === */
+  --ds-otp-color-background-default: var(--semantic-color-background-secondary);
+  --ds-otp-color-foreground-primary: var(--semantic-color-foreground-primary);
+  --ds-otp-color-foreground-secondary: var(--semantic-color-foreground-secondary);
+  --ds-otp-color-border-default: var(--semantic-color-border-light);
+  --ds-otp-color-border-accent: var(--semantic-color-border-accent);
 
-    /* === Size Tokens === */
-    --ds-otp-size-padding-default: var(--core-spacing-size-07);
-    --ds-otp-size-radius-default: var(--core-shape-radius-medium);
+  /* === Size Tokens === */
+  --ds-otp-size-padding-default: var(--core-spacing-size-07);
+  --ds-otp-size-radius-default: var(--core-shape-radius-medium);
 
-    /* === Elevation Tokens === */
-    --ds-otp-elevation-default: var(--semantic-elevation-default);
+  /* === Elevation Tokens === */
+  --ds-otp-elevation-default: var(--semantic-elevation-default);
 
-    /* === Overlay Tokens === */
-    --ds-otp-overlay-image-overlay: var(--semantic-color-background-image-overlay);
-  }
+  /* === Overlay Tokens === */
+  --ds-otp-overlay-image-overlay: var(--semantic-color-background-image-overlay);
 }

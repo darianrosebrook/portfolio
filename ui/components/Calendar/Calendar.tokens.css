@@ -1,26 +1,24 @@
 /* AUTO-GENERATED: Do not edit directly.
  * Source: ui/components/Calendar/Calendar.tokens.json
  */
-@layer components {
-  [data-ds-component="Calendar"] {
-    /* === Color Tokens === */
-    --ds-calendar-color-background-default: var(--semantic-color-background-secondary);
-    --ds-calendar-color-background-image-overlay: var(--semantic-color-background-image-overlay);
-    --ds-calendar-color-foreground-primary: var(--semantic-color-foreground-primary);
-    --ds-calendar-color-foreground-secondary: var(--semantic-color-foreground-secondary);
-    --ds-calendar-color-border-default: var(--semantic-color-border-light);
-    --ds-calendar-color-border-accent: var(--semantic-color-border-accent);
+[data-ds-component="Calendar"] {
+  /* === Color Tokens === */
+  --ds-calendar-color-background-default: var(--semantic-color-background-secondary);
+  --ds-calendar-color-background-image-overlay: var(--semantic-color-background-image-overlay);
+  --ds-calendar-color-foreground-primary: var(--semantic-color-foreground-primary);
+  --ds-calendar-color-foreground-secondary: var(--semantic-color-foreground-secondary);
+  --ds-calendar-color-border-default: var(--semantic-color-border-light);
+  --ds-calendar-color-border-accent: var(--semantic-color-border-accent);
 
-    /* === Size Tokens === */
-    --ds-calendar-size-padding-default: var(--core-spacing-size-07);
-    --ds-calendar-size-radius-default: var(--core-shape-radius-medium);
+  /* === Size Tokens === */
+  --ds-calendar-size-padding-default: var(--core-spacing-size-07);
+  --ds-calendar-size-radius-default: var(--core-shape-radius-medium);
 
-    /* === Elevation Tokens === */
-    --ds-calendar-elevation-default: var(--semantic-elevation-default);
-    --ds-calendar-elevation-hover: var(--semantic-elevation-surface-floating);
+  /* === Elevation Tokens === */
+  --ds-calendar-elevation-default: var(--semantic-elevation-default);
+  --ds-calendar-elevation-hover: var(--semantic-elevation-surface-floating);
 
-    /* === Motion Tokens === */
-    --ds-calendar-motion-duration: var(--core-motion-duration-short);
-    --ds-calendar-motion-easing: var(--core-motion-easing-standard);
-  }
+  /* === Motion Tokens === */
+  --ds-calendar-motion-duration: var(--core-motion-duration-short);
+  --ds-calendar-motion-easing: var(--core-motion-easing-standard);
 }

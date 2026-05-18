@@ -1,13 +1,11 @@
 /* AUTO-GENERATED: Do not edit directly.
  * Source: ui/components/SlinkyCursor/SlinkyCursor.tokens.json
  */
-@layer components {
-  [data-ds-component="Slinkycursor"] {
-    /* === Color Tokens === */
-    --ds-slinkycursor-color-border-primary: var(--semantic-color-border-primary);
-    --ds-slinkycursor-color-border-hover: var(--semantic-color-border-hover);
+[data-ds-component="Slinkycursor"] {
+  /* === Color Tokens === */
+  --ds-slinkycursor-color-border-primary: var(--semantic-color-border-primary);
+  --ds-slinkycursor-color-border-hover: var(--semantic-color-border-hover);
 
-    /* === Shape Tokens === */
-    --ds-slinkycursor-shape-radius-full: var(--core-shape-radius-full);
-  }
+  /* === Shape Tokens === */
+  --ds-slinkycursor-shape-radius-full: var(--core-shape-radius-full);
 }

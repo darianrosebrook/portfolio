@@ -1,65 +1,63 @@
 /* AUTO-GENERATED: Do not edit directly.
  * Source: ui/components/Command/Command.tokens.json
  */
-@layer components {
-  [data-ds-component="Command"] {
-    /* === Color Tokens === */
-    --ds-command-color-overlay: var(--semantic-overlay-scrim-dialog);
-    --ds-command-color-background: var(--semantic-color-background-primary);
-    --ds-command-color-background-hover: var(--semantic-interaction-background-hover);
-    --ds-command-color-border: var(--semantic-color-border-light);
-    --ds-command-color-border-light: var(--semantic-color-border-subtle);
-    --ds-command-color-text: var(--semantic-color-foreground-primary);
-    --ds-command-color-text-muted: var(--semantic-color-foreground-tertiary);
+[data-ds-component="Command"] {
+  /* === Color Tokens === */
+  --ds-command-color-overlay: var(--semantic-overlay-scrim-dialog);
+  --ds-command-color-background: var(--semantic-color-background-primary);
+  --ds-command-color-background-hover: var(--semantic-interaction-background-hover);
+  --ds-command-color-border: var(--semantic-color-border-light);
+  --ds-command-color-border-light: var(--semantic-color-border-subtle);
+  --ds-command-color-text: var(--semantic-color-foreground-primary);
+  --ds-command-color-text-muted: var(--semantic-color-foreground-tertiary);
 
-    /* === Border Tokens === */
-    --ds-command-border-width: var(--core-shape-border-width-hairline);
-    --ds-command-border-radius: var(--core-shape-radius-medium);
-    --ds-command-border-radius-item: var(--core-shape-radius-small);
+  /* === Border Tokens === */
+  --ds-command-border-width: var(--core-shape-border-width-hairline);
+  --ds-command-border-radius: var(--core-shape-radius-medium);
+  --ds-command-border-radius-item: var(--core-shape-radius-small);
 
-    /* === Size Tokens === */
-    --ds-command-size-max-width: 640px;
-    --ds-command-size-max-height: 400px;
-    --ds-command-size-max-height-mobile: 300px;
-    --ds-command-size-icon: var(--core-spacing-size-04);
+  /* === Size Tokens === */
+  --ds-command-size-max-width: 640px;
+  --ds-command-size-max-height: 400px;
+  --ds-command-size-max-height-mobile: 300px;
+  --ds-command-size-icon: var(--core-spacing-size-04);
 
-    /* === Spacing Tokens === */
-    --ds-command-spacing-dialog-padding: var(--core-spacing-size-04);
-    --ds-command-spacing-dialog-margin-top: var(--core-spacing-size-09);
-    --ds-command-spacing-input-padding: var(--core-spacing-size-04);
-    --ds-command-spacing-input-padding-x: var(--core-spacing-size-03);
-    --ds-command-spacing-input-padding-left: var(--core-spacing-size-10);
-    --ds-command-spacing-input-icon-offset: var(--core-spacing-size-04);
-    --ds-command-spacing-list-padding: var(--core-spacing-size-02);
-    --ds-command-spacing-empty-padding: var(--core-spacing-size-08);
-    --ds-command-spacing-group-gap: var(--core-spacing-size-04);
-    --ds-command-spacing-group-heading-padding: {core.spacing.size.02} {core.spacing.size.03};
-    --ds-command-spacing-item-gap: var(--core-spacing-size-03);
-    --ds-command-spacing-item-padding: {core.spacing.size.02} {core.spacing.size.03};
-    --ds-command-spacing-description-gap: var(--core-spacing-size-01);
-    --ds-command-spacing-separator-margin: var(--core-spacing-size-02);
-    --ds-command-spacing-mobile-padding: var(--core-spacing-size-02);
-    --ds-command-spacing-mobile-margin-top: var(--core-spacing-size-04);
+  /* === Spacing Tokens === */
+  --ds-command-spacing-dialog-padding: var(--core-spacing-size-04);
+  --ds-command-spacing-dialog-margin-top: var(--core-spacing-size-09);
+  --ds-command-spacing-input-padding: var(--core-spacing-size-04);
+  --ds-command-spacing-input-padding-x: var(--core-spacing-size-03);
+  --ds-command-spacing-input-padding-left: var(--core-spacing-size-10);
+  --ds-command-spacing-input-icon-offset: var(--core-spacing-size-04);
+  --ds-command-spacing-list-padding: var(--core-spacing-size-02);
+  --ds-command-spacing-empty-padding: var(--core-spacing-size-08);
+  --ds-command-spacing-group-gap: var(--core-spacing-size-04);
+  --ds-command-spacing-group-heading-padding: {core.spacing.size.02} {core.spacing.size.03};
+  --ds-command-spacing-item-gap: var(--core-spacing-size-03);
+  --ds-command-spacing-item-padding: {core.spacing.size.02} {core.spacing.size.03};
+  --ds-command-spacing-description-gap: var(--core-spacing-size-01);
+  --ds-command-spacing-separator-margin: var(--core-spacing-size-02);
+  --ds-command-spacing-mobile-padding: var(--core-spacing-size-02);
+  --ds-command-spacing-mobile-margin-top: var(--core-spacing-size-04);
 
-    /* === Text Tokens === */
-    --ds-command-text-size: var(--semantic-typography-body-02);
-    --ds-command-text-line-height: var(--semantic-typography-line-height-normal);
-    --ds-command-text-weight: var(--semantic-typography-font-weight-regular);
-    --ds-command-text-weight-medium: var(--semantic-typography-font-weight-medium);
-    --ds-command-text-size-small: var(--semantic-typography-body-04);
-    --ds-command-text-line-height-tight: var(--semantic-typography-line-height-tight);
+  /* === Text Tokens === */
+  --ds-command-text-size: var(--semantic-typography-body-02);
+  --ds-command-text-line-height: var(--semantic-typography-line-height-normal);
+  --ds-command-text-weight: var(--semantic-typography-font-weight-regular);
+  --ds-command-text-weight-medium: var(--semantic-typography-font-weight-medium);
+  --ds-command-text-size-small: var(--semantic-typography-body-04);
+  --ds-command-text-line-height-tight: var(--semantic-typography-line-height-tight);
 
-    /* === Motion Tokens === */
-    --ds-command-motion-duration: var(--core-motion-duration-medium);
-    --ds-command-motion-easing: var(--core-motion-easing-standard);
+  /* === Motion Tokens === */
+  --ds-command-motion-duration: var(--core-motion-duration-medium);
+  --ds-command-motion-easing: var(--core-motion-easing-standard);
 
-    /* === ZIndex Tokens === */
-    --ds-command-z-index-overlay: var(--core-layer-component);
+  /* === ZIndex Tokens === */
+  --ds-command-z-index-overlay: var(--core-layer-component);
 
-    /* === Opacity Tokens === */
-    --ds-command-opacity-disabled: var(--semantic-interaction-disabled-opacity);
+  /* === Opacity Tokens === */
+  --ds-command-opacity-disabled: var(--semantic-interaction-disabled-opacity);
 
-    /* === Other Tokens === */
-    --ds-command-shadow: var(--semantic-elevation-surface-floating);
-  }
+  /* === Other Tokens === */
+  --ds-command-shadow: var(--semantic-elevation-surface-floating);
 }

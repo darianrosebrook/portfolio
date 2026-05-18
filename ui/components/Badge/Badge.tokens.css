@@ -1,53 +1,51 @@
 /* AUTO-GENERATED: Do not edit directly.
  * Source: ui/components/Badge/Badge.tokens.json
  */
-@layer components {
-  [data-ds-component="Badge"] {
-    /* === Color Tokens === */
-    --ds-badge-color-background-default: var(--semantic-color-background-secondary);
-    --ds-badge-color-background-info: var(--semantic-color-background-info-subtle);
-    --ds-badge-color-background-success: var(--semantic-color-background-success-subtle);
-    --ds-badge-color-background-warning: var(--semantic-color-background-warning-subtle);
-    --ds-badge-color-background-danger: var(--semantic-color-background-danger-subtle);
-    --ds-badge-color-background-counter: var(--semantic-color-background-accent);
-    --ds-badge-color-background-tag: var(--semantic-color-background-tertiary);
-    --ds-badge-color-foreground-primary: var(--semantic-color-foreground-primary);
-    --ds-badge-color-foreground-secondary: var(--semantic-color-foreground-secondary);
-    --ds-badge-color-foreground-info: var(--semantic-color-foreground-on-info-subtle);
-    --ds-badge-color-foreground-success: var(--semantic-color-foreground-on-success-subtle);
-    --ds-badge-color-foreground-warning: var(--semantic-color-foreground-on-warning-subtle);
-    --ds-badge-color-foreground-danger: var(--semantic-color-foreground-on-danger-subtle);
-    --ds-badge-color-foreground-accent: var(--semantic-color-foreground-accent);
-    --ds-badge-color-foreground-on-color: var(--semantic-color-foreground-on-color);
-    --ds-badge-color-border-default: var(--semantic-color-border-light);
-    --ds-badge-color-border-accent: var(--semantic-color-border-accent);
-    --ds-badge-color-border-info: var(--semantic-color-border-info);
-    --ds-badge-color-border-success: var(--semantic-color-border-success);
-    --ds-badge-color-border-warning: var(--semantic-color-border-warning);
-    --ds-badge-color-border-danger: var(--semantic-color-border-danger);
+[data-ds-component="Badge"] {
+  /* === Color Tokens === */
+  --ds-badge-color-background-default: var(--semantic-color-background-secondary);
+  --ds-badge-color-background-info: var(--semantic-color-background-info-subtle);
+  --ds-badge-color-background-success: var(--semantic-color-background-success-subtle);
+  --ds-badge-color-background-warning: var(--semantic-color-background-warning-subtle);
+  --ds-badge-color-background-danger: var(--semantic-color-background-danger-subtle);
+  --ds-badge-color-background-counter: var(--semantic-color-background-accent);
+  --ds-badge-color-background-tag: var(--semantic-color-background-tertiary);
+  --ds-badge-color-foreground-primary: var(--semantic-color-foreground-primary);
+  --ds-badge-color-foreground-secondary: var(--semantic-color-foreground-secondary);
+  --ds-badge-color-foreground-info: var(--semantic-color-foreground-on-info-subtle);
+  --ds-badge-color-foreground-success: var(--semantic-color-foreground-on-success-subtle);
+  --ds-badge-color-foreground-warning: var(--semantic-color-foreground-on-warning-subtle);
+  --ds-badge-color-foreground-danger: var(--semantic-color-foreground-on-danger-subtle);
+  --ds-badge-color-foreground-accent: var(--semantic-color-foreground-accent);
+  --ds-badge-color-foreground-on-color: var(--semantic-color-foreground-on-color);
+  --ds-badge-color-border-default: var(--semantic-color-border-light);
+  --ds-badge-color-border-accent: var(--semantic-color-border-accent);
+  --ds-badge-color-border-info: var(--semantic-color-border-info);
+  --ds-badge-color-border-success: var(--semantic-color-border-success);
+  --ds-badge-color-border-warning: var(--semantic-color-border-warning);
+  --ds-badge-color-border-danger: var(--semantic-color-border-danger);
 
-    /* === Size Tokens === */
-    --ds-badge-size-sm-padding-y: var(--core-spacing-size-02);
-    --ds-badge-size-sm-padding-x: var(--core-spacing-size-03);
-    --ds-badge-size-sm-font-size: var(--semantic-typography-caption-01);
-    --ds-badge-size-sm-radius: var(--core-shape-radius-small);
-    --ds-badge-size-sm-icon-size: var(--core-icon-size-sm);
-    --ds-badge-size-md-padding-y: var(--core-spacing-size-03);
-    --ds-badge-size-md-padding-x: var(--core-spacing-size-04);
-    --ds-badge-size-md-font-size: var(--semantic-typography-body-small-font-size);
-    --ds-badge-size-md-radius: var(--core-shape-radius-default);
-    --ds-badge-size-md-icon-size: var(--core-icon-size-md);
-    --ds-badge-size-lg-padding-y: var(--core-spacing-size-04);
-    --ds-badge-size-lg-padding-x: var(--core-spacing-size-05);
-    --ds-badge-size-lg-font-size: var(--semantic-typography-body-default-font-size);
-    --ds-badge-size-lg-radius: var(--core-shape-radius-medium);
-    --ds-badge-size-lg-icon-size: var(--core-icon-size-lg);
+  /* === Size Tokens === */
+  --ds-badge-size-sm-padding-y: var(--core-spacing-size-02);
+  --ds-badge-size-sm-padding-x: var(--core-spacing-size-03);
+  --ds-badge-size-sm-font-size: var(--semantic-typography-caption-01);
+  --ds-badge-size-sm-radius: var(--core-shape-radius-small);
+  --ds-badge-size-sm-icon-size: var(--core-icon-size-sm);
+  --ds-badge-size-md-padding-y: var(--core-spacing-size-03);
+  --ds-badge-size-md-padding-x: var(--core-spacing-size-04);
+  --ds-badge-size-md-font-size: var(--semantic-typography-body-small-font-size);
+  --ds-badge-size-md-radius: var(--core-shape-radius-default);
+  --ds-badge-size-md-icon-size: var(--core-icon-size-md);
+  --ds-badge-size-lg-padding-y: var(--core-spacing-size-04);
+  --ds-badge-size-lg-padding-x: var(--core-spacing-size-05);
+  --ds-badge-size-lg-font-size: var(--semantic-typography-body-default-font-size);
+  --ds-badge-size-lg-radius: var(--core-shape-radius-medium);
+  --ds-badge-size-lg-icon-size: var(--core-icon-size-lg);
 
-    /* === Elevation Tokens === */
-    --ds-badge-elevation-default: var(--semantic-elevation-surface-raised);
-    --ds-badge-elevation-status: var(--semantic-elevation-none);
+  /* === Elevation Tokens === */
+  --ds-badge-elevation-default: var(--semantic-elevation-surface-raised);
+  --ds-badge-elevation-status: var(--semantic-elevation-none);
 
-    /* === Spacing Tokens === */
-    --ds-badge-spacing-gap: var(--core-spacing-size-02);
-  }
+  /* === Spacing Tokens === */
+  --ds-badge-spacing-gap: var(--core-spacing-size-02);
 }

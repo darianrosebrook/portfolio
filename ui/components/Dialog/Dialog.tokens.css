@@ -1,77 +1,75 @@
 /* AUTO-GENERATED: Do not edit directly.
  * Source: ui/components/Dialog/Dialog.tokens.json
  */
-@layer components {
-  [data-ds-component="Dialog"] {
-    /* === Color Tokens === */
-    --ds-dialog-color-background-default: var(--semantic-color-background-primary);
-    --ds-dialog-color-background-backdrop: var(--semantic-color-overlay-scrim);
-    --ds-dialog-color-background-hover: var(--semantic-color-background-hover);
-    --ds-dialog-color-background-active: var(--semantic-color-background-active);
-    --ds-dialog-color-foreground-default: var(--semantic-color-foreground-primary);
-    --ds-dialog-color-foreground-title: var(--semantic-color-foreground-primary);
-    --ds-dialog-color-foreground-secondary: var(--semantic-color-foreground-secondary);
-    --ds-dialog-color-border-default: var(--semantic-color-border-subtle);
-    --ds-dialog-color-border-focus: var(--semantic-color-border-focus);
+[data-ds-component="Dialog"] {
+  /* === Color Tokens === */
+  --ds-dialog-color-background-default: var(--semantic-color-background-primary);
+  --ds-dialog-color-background-backdrop: var(--semantic-color-overlay-scrim);
+  --ds-dialog-color-background-hover: var(--semantic-color-background-hover);
+  --ds-dialog-color-background-active: var(--semantic-color-background-active);
+  --ds-dialog-color-foreground-default: var(--semantic-color-foreground-primary);
+  --ds-dialog-color-foreground-title: var(--semantic-color-foreground-primary);
+  --ds-dialog-color-foreground-secondary: var(--semantic-color-foreground-secondary);
+  --ds-dialog-color-border-default: var(--semantic-color-border-subtle);
+  --ds-dialog-color-border-focus: var(--semantic-color-border-focus);
 
-    /* === Size Tokens === */
-    --ds-dialog-size-sm-width: 400px;
-    --ds-dialog-size-sm-max-width: 90vw;
-    --ds-dialog-size-sm-padding: var(--core-spacing-size-06);
-    --ds-dialog-size-md-width: 500px;
-    --ds-dialog-size-md-max-width: 90vw;
-    --ds-dialog-size-md-padding: var(--core-spacing-size-07);
-    --ds-dialog-size-lg-width: 700px;
-    --ds-dialog-size-lg-max-width: 90vw;
-    --ds-dialog-size-lg-padding: var(--core-spacing-size-08);
-    --ds-dialog-size-xl-width: 900px;
-    --ds-dialog-size-xl-max-width: 95vw;
-    --ds-dialog-size-xl-padding: var(--core-spacing-size-09);
-    --ds-dialog-size-full-width: 100vw;
-    --ds-dialog-size-full-height: 100vh;
-    --ds-dialog-size-full-max-width: 100vw;
-    --ds-dialog-size-full-padding: var(--core-spacing-size-08);
-    --ds-dialog-size-radius-default: var(--core-shape-radius-large);
-    --ds-dialog-size-radius-small: var(--core-shape-radius-small);
-    --ds-dialog-size-close-button-size: var(--core-spacing-size-08);
-    --ds-dialog-size-close-button-offset: var(--core-spacing-size-04);
+  /* === Size Tokens === */
+  --ds-dialog-size-sm-width: 400px;
+  --ds-dialog-size-sm-max-width: 90vw;
+  --ds-dialog-size-sm-padding: var(--core-spacing-size-06);
+  --ds-dialog-size-md-width: 500px;
+  --ds-dialog-size-md-max-width: 90vw;
+  --ds-dialog-size-md-padding: var(--core-spacing-size-07);
+  --ds-dialog-size-lg-width: 700px;
+  --ds-dialog-size-lg-max-width: 90vw;
+  --ds-dialog-size-lg-padding: var(--core-spacing-size-08);
+  --ds-dialog-size-xl-width: 900px;
+  --ds-dialog-size-xl-max-width: 95vw;
+  --ds-dialog-size-xl-padding: var(--core-spacing-size-09);
+  --ds-dialog-size-full-width: 100vw;
+  --ds-dialog-size-full-height: 100vh;
+  --ds-dialog-size-full-max-width: 100vw;
+  --ds-dialog-size-full-padding: var(--core-spacing-size-08);
+  --ds-dialog-size-radius-default: var(--core-shape-radius-large);
+  --ds-dialog-size-radius-small: var(--core-shape-radius-small);
+  --ds-dialog-size-close-button-size: var(--core-spacing-size-08);
+  --ds-dialog-size-close-button-offset: var(--core-spacing-size-04);
 
-    /* === Elevation Tokens === */
-    --ds-dialog-elevation-default: var(--semantic-elevation-surface-floating);
+  /* === Elevation Tokens === */
+  --ds-dialog-elevation-default: var(--semantic-elevation-surface-floating);
 
-    /* === Spacing Tokens === */
-    --ds-dialog-spacing-backdrop-padding: var(--core-spacing-size-04);
-    --ds-dialog-spacing-backdrop-padding-mobile: var(--core-spacing-size-02);
-    --ds-dialog-spacing-header-padding-top: var(--core-spacing-size-06);
-    --ds-dialog-spacing-header-padding-right: var(--core-spacing-size-07);
-    --ds-dialog-spacing-header-padding-bottom: var(--core-spacing-size-04);
-    --ds-dialog-spacing-header-padding-left: var(--core-spacing-size-07);
-    --ds-dialog-spacing-header-padding-mobile: var(--core-spacing-size-05);
-    --ds-dialog-spacing-body-padding-top: var(--core-spacing-size-04);
-    --ds-dialog-spacing-body-padding-right: var(--core-spacing-size-07);
-    --ds-dialog-spacing-body-padding-bottom: var(--core-spacing-size-04);
-    --ds-dialog-spacing-body-padding-left: var(--core-spacing-size-07);
-    --ds-dialog-spacing-body-padding-y-mobile: var(--core-spacing-size-03);
-    --ds-dialog-spacing-body-padding-x-mobile: var(--core-spacing-size-05);
-    --ds-dialog-spacing-footer-padding-top: var(--core-spacing-size-04);
-    --ds-dialog-spacing-footer-padding-right: var(--core-spacing-size-07);
-    --ds-dialog-spacing-footer-padding-bottom: var(--core-spacing-size-06);
-    --ds-dialog-spacing-footer-padding-left: var(--core-spacing-size-07);
-    --ds-dialog-spacing-footer-gap: var(--core-spacing-size-03);
-    --ds-dialog-spacing-footer-gap-mobile: var(--core-spacing-size-02);
-    --ds-dialog-spacing-footer-padding-y-mobile: var(--core-spacing-size-03);
-    --ds-dialog-spacing-footer-padding-x-mobile: var(--core-spacing-size-05);
-    --ds-dialog-spacing-footer-padding-bottom-mobile: var(--core-spacing-size-05);
+  /* === Spacing Tokens === */
+  --ds-dialog-spacing-backdrop-padding: var(--core-spacing-size-04);
+  --ds-dialog-spacing-backdrop-padding-mobile: var(--core-spacing-size-02);
+  --ds-dialog-spacing-header-padding-top: var(--core-spacing-size-06);
+  --ds-dialog-spacing-header-padding-right: var(--core-spacing-size-07);
+  --ds-dialog-spacing-header-padding-bottom: var(--core-spacing-size-04);
+  --ds-dialog-spacing-header-padding-left: var(--core-spacing-size-07);
+  --ds-dialog-spacing-header-padding-mobile: var(--core-spacing-size-05);
+  --ds-dialog-spacing-body-padding-top: var(--core-spacing-size-04);
+  --ds-dialog-spacing-body-padding-right: var(--core-spacing-size-07);
+  --ds-dialog-spacing-body-padding-bottom: var(--core-spacing-size-04);
+  --ds-dialog-spacing-body-padding-left: var(--core-spacing-size-07);
+  --ds-dialog-spacing-body-padding-y-mobile: var(--core-spacing-size-03);
+  --ds-dialog-spacing-body-padding-x-mobile: var(--core-spacing-size-05);
+  --ds-dialog-spacing-footer-padding-top: var(--core-spacing-size-04);
+  --ds-dialog-spacing-footer-padding-right: var(--core-spacing-size-07);
+  --ds-dialog-spacing-footer-padding-bottom: var(--core-spacing-size-06);
+  --ds-dialog-spacing-footer-padding-left: var(--core-spacing-size-07);
+  --ds-dialog-spacing-footer-gap: var(--core-spacing-size-03);
+  --ds-dialog-spacing-footer-gap-mobile: var(--core-spacing-size-02);
+  --ds-dialog-spacing-footer-padding-y-mobile: var(--core-spacing-size-03);
+  --ds-dialog-spacing-footer-padding-x-mobile: var(--core-spacing-size-05);
+  --ds-dialog-spacing-footer-padding-bottom-mobile: var(--core-spacing-size-05);
 
-    /* === Typography Tokens === */
-    --ds-dialog-typography-title-font-size: var(--semantic-typography-heading-04);
-    --ds-dialog-typography-title-font-weight: var(--semantic-typography-font-weight-bold);
-    --ds-dialog-typography-title-line-height: var(--semantic-typography-line-height-heading);
+  /* === Typography Tokens === */
+  --ds-dialog-typography-title-font-size: var(--semantic-typography-heading-04);
+  --ds-dialog-typography-title-font-weight: var(--semantic-typography-font-weight-bold);
+  --ds-dialog-typography-title-line-height: var(--semantic-typography-line-height-heading);
 
-    /* === Motion Tokens === */
-    --ds-dialog-motion-duration-enter: var(--semantic-motion-interaction-enter-duration);
-    --ds-dialog-motion-duration-exit: var(--semantic-motion-interaction-exit-duration);
-    --ds-dialog-motion-easing-enter: var(--semantic-motion-interaction-enter-easing);
-    --ds-dialog-motion-easing-exit: var(--semantic-motion-interaction-exit-easing);
-  }
+  /* === Motion Tokens === */
+  --ds-dialog-motion-duration-enter: var(--semantic-motion-interaction-enter-duration);
+  --ds-dialog-motion-duration-exit: var(--semantic-motion-interaction-exit-duration);
+  --ds-dialog-motion-easing-enter: var(--semantic-motion-interaction-enter-easing);
+  --ds-dialog-motion-easing-exit: var(--semantic-motion-interaction-exit-easing);
 }

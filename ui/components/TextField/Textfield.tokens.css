@@ -1,51 +1,49 @@
 /* AUTO-GENERATED: Do not edit directly.
  * Source: ui/components/TextField/TextField.tokens.json
  */
-@layer components {
-  [data-ds-component="Textfield"] {
-    /* === Spacing Tokens === */
-    --ds-textfield-spacing-gap: var(--core-spacing-size-04);
-    --ds-textfield-spacing-padding-input: var(--core-spacing-size-05);
-    --ds-textfield-spacing-padding-label: var(--core-spacing-size-02);
+[data-ds-component="Textfield"] {
+  /* === Spacing Tokens === */
+  --ds-textfield-spacing-gap: var(--core-spacing-size-04);
+  --ds-textfield-spacing-padding-input: var(--core-spacing-size-05);
+  --ds-textfield-spacing-padding-label: var(--core-spacing-size-02);
 
-    /* === Color Tokens === */
-    --ds-textfield-color-label-default: var(--semantic-color-foreground-primary);
-    --ds-textfield-color-label-required: var(--semantic-color-status-danger);
-    --ds-textfield-color-label-disabled: var(--semantic-color-foreground-disabled);
-    --ds-textfield-color-input-background: var(--semantic-color-background-primary);
-    --ds-textfield-color-input-border: var(--semantic-color-border-light);
-    --ds-textfield-color-input-border-hover: var(--semantic-color-border-primary);
-    --ds-textfield-color-input-border-focus: var(--semantic-color-border-accent);
-    --ds-textfield-color-input-border-error: var(--semantic-color-status-danger);
-    --ds-textfield-color-input-text: var(--semantic-color-foreground-primary);
-    --ds-textfield-color-input-placeholder: var(--semantic-color-foreground-tertiary);
-    --ds-textfield-color-input-disabled: var(--semantic-color-background-disabled);
-    --ds-textfield-color-helper-default: var(--semantic-color-foreground-tertiary);
-    --ds-textfield-color-helper-error: var(--semantic-color-status-danger);
-    --ds-textfield-color-error: var(--semantic-color-foreground-danger);
+  /* === Color Tokens === */
+  --ds-textfield-color-label-default: var(--semantic-color-foreground-primary);
+  --ds-textfield-color-label-required: var(--semantic-color-status-danger);
+  --ds-textfield-color-label-disabled: var(--semantic-color-foreground-disabled);
+  --ds-textfield-color-input-background: var(--semantic-color-background-primary);
+  --ds-textfield-color-input-border: var(--semantic-color-border-light);
+  --ds-textfield-color-input-border-hover: var(--semantic-color-border-primary);
+  --ds-textfield-color-input-border-focus: var(--semantic-color-border-accent);
+  --ds-textfield-color-input-border-error: var(--semantic-color-status-danger);
+  --ds-textfield-color-input-text: var(--semantic-color-foreground-primary);
+  --ds-textfield-color-input-placeholder: var(--semantic-color-foreground-tertiary);
+  --ds-textfield-color-input-disabled: var(--semantic-color-background-disabled);
+  --ds-textfield-color-helper-default: var(--semantic-color-foreground-tertiary);
+  --ds-textfield-color-helper-error: var(--semantic-color-status-danger);
+  --ds-textfield-color-error: var(--semantic-color-foreground-danger);
 
-    /* === Typography Tokens === */
-    --ds-textfield-typography-label-font-size: var(--semantic-typography-body-04);
-    --ds-textfield-typography-label-font-weight: var(--semantic-typography-font-weight-medium);
-    --ds-textfield-typography-label-line-height: var(--semantic-typography-line-height-tight);
-    --ds-textfield-typography-input-font-size: var(--semantic-typography-body-01);
-    --ds-textfield-typography-input-font-weight: var(--semantic-typography-font-weight-regular);
-    --ds-textfield-typography-input-line-height: var(--semantic-typography-line-height-normal);
-    --ds-textfield-typography-helper-font-size: var(--semantic-typography-body-04);
-    --ds-textfield-typography-helper-font-weight: var(--semantic-typography-font-weight-regular);
-    --ds-textfield-typography-helper-line-height: var(--semantic-typography-line-height-tight);
+  /* === Typography Tokens === */
+  --ds-textfield-typography-label-font-size: var(--semantic-typography-body-04);
+  --ds-textfield-typography-label-font-weight: var(--semantic-typography-font-weight-medium);
+  --ds-textfield-typography-label-line-height: var(--semantic-typography-line-height-tight);
+  --ds-textfield-typography-input-font-size: var(--semantic-typography-body-01);
+  --ds-textfield-typography-input-font-weight: var(--semantic-typography-font-weight-regular);
+  --ds-textfield-typography-input-line-height: var(--semantic-typography-line-height-normal);
+  --ds-textfield-typography-helper-font-size: var(--semantic-typography-body-04);
+  --ds-textfield-typography-helper-font-weight: var(--semantic-typography-font-weight-regular);
+  --ds-textfield-typography-helper-line-height: var(--semantic-typography-line-height-tight);
 
-    /* === Border Tokens === */
-    --ds-textfield-border-width: var(--core-shape-border-width-hairline);
-    --ds-textfield-border-radius: var(--core-shape-radius-medium);
+  /* === Border Tokens === */
+  --ds-textfield-border-width: var(--core-shape-border-width-hairline);
+  --ds-textfield-border-radius: var(--core-shape-radius-medium);
 
-    /* === Focus Tokens === */
-    --ds-textfield-focus-ring-width: var(--core-shape-border-width-thick);
-    --ds-textfield-focus-ring-color: var(--semantic-color-border-accent);
-    --ds-textfield-focus-ring-offset: var(--core-spacing-size-02);
+  /* === Focus Tokens === */
+  --ds-textfield-focus-ring-width: var(--core-shape-border-width-thick);
+  --ds-textfield-focus-ring-color: var(--semantic-color-border-accent);
+  --ds-textfield-focus-ring-offset: var(--core-spacing-size-02);
 
-    /* === Transition Tokens === */
-    --ds-textfield-transition-duration: var(--core-motion-duration-short);
-    --ds-textfield-transition-easing: var(--core-motion-easing-standard);
-  }
+  /* === Transition Tokens === */
+  --ds-textfield-transition-duration: var(--core-motion-duration-short);
+  --ds-textfield-transition-easing: var(--core-motion-easing-standard);
 }

@@ -1,60 +1,58 @@
 /* AUTO-GENERATED: Do not edit directly.
  * Source: ui/components/Sheet/Sheet.tokens.json
  */
-@layer components {
-  [data-ds-component="Sheet"] {
-    /* === Color Tokens === */
-    --ds-sheet-color-overlay: var(--semantic-overlay-scrim-sheet);
-    --ds-sheet-color-background: var(--semantic-color-background-primary);
-    --ds-sheet-color-background-hover: var(--semantic-interaction-background-hover);
-    --ds-sheet-color-border: var(--semantic-color-border-light);
-    --ds-sheet-color-border-light: var(--semantic-color-border-subtle);
-    --ds-sheet-color-text: var(--semantic-color-foreground-primary);
-    --ds-sheet-color-text-title: var(--semantic-color-foreground-primary);
-    --ds-sheet-color-text-description: var(--semantic-color-foreground-secondary);
-    --ds-sheet-color-text-muted: var(--semantic-color-foreground-tertiary);
+[data-ds-component="Sheet"] {
+  /* === Color Tokens === */
+  --ds-sheet-color-overlay: var(--semantic-overlay-scrim-sheet);
+  --ds-sheet-color-background: var(--semantic-color-background-primary);
+  --ds-sheet-color-background-hover: var(--semantic-interaction-background-hover);
+  --ds-sheet-color-border: var(--semantic-color-border-light);
+  --ds-sheet-color-border-light: var(--semantic-color-border-subtle);
+  --ds-sheet-color-text: var(--semantic-color-foreground-primary);
+  --ds-sheet-color-text-title: var(--semantic-color-foreground-primary);
+  --ds-sheet-color-text-description: var(--semantic-color-foreground-secondary);
+  --ds-sheet-color-text-muted: var(--semantic-color-foreground-tertiary);
 
-    /* === Border Tokens === */
-    --ds-sheet-border-width: var(--core-shape-border-width-hairline);
-    --ds-sheet-border-radius: var(--core-shape-radius-medium);
-    --ds-sheet-border-radius-close: var(--core-shape-radius-small);
+  /* === Border Tokens === */
+  --ds-sheet-border-width: var(--core-shape-border-width-hairline);
+  --ds-sheet-border-radius: var(--core-shape-radius-medium);
+  --ds-sheet-border-radius-close: var(--core-shape-radius-small);
 
-    /* === Size Tokens === */
-    --ds-sheet-size-width: 400px;
-    --ds-sheet-size-height: 300px;
-    --ds-sheet-size-close: var(--core-spacing-size-06);
+  /* === Size Tokens === */
+  --ds-sheet-size-width: 400px;
+  --ds-sheet-size-height: 300px;
+  --ds-sheet-size-close: var(--core-spacing-size-06);
 
-    /* === Spacing Tokens === */
-    --ds-sheet-spacing-padding: var(--core-spacing-size-06);
-    --ds-sheet-spacing-gap: var(--core-spacing-size-04);
-    --ds-sheet-spacing-section: var(--core-spacing-size-04);
-    --ds-sheet-spacing-header-gap: var(--core-spacing-size-02);
-    --ds-sheet-spacing-footer-gap: var(--core-spacing-size-03);
-    --ds-sheet-spacing-close-offset: var(--core-spacing-size-04);
+  /* === Spacing Tokens === */
+  --ds-sheet-spacing-padding: var(--core-spacing-size-06);
+  --ds-sheet-spacing-gap: var(--core-spacing-size-04);
+  --ds-sheet-spacing-section: var(--core-spacing-size-04);
+  --ds-sheet-spacing-header-gap: var(--core-spacing-size-02);
+  --ds-sheet-spacing-footer-gap: var(--core-spacing-size-03);
+  --ds-sheet-spacing-close-offset: var(--core-spacing-size-04);
 
-    /* === Text Tokens === */
-    --ds-sheet-text-size: var(--semantic-typography-body-02);
-    --ds-sheet-text-line-height: var(--semantic-typography-line-height-normal);
-    --ds-sheet-text-size-title: var(--semantic-typography-heading-06);
-    --ds-sheet-text-line-height-title: var(--semantic-typography-line-height-tight);
-    --ds-sheet-text-weight-title: var(--semantic-typography-font-weight-medium);
-    --ds-sheet-text-size-description: var(--semantic-typography-body-03);
-    --ds-sheet-text-line-height-description: var(--semantic-typography-line-height-loose);
+  /* === Text Tokens === */
+  --ds-sheet-text-size: var(--semantic-typography-body-02);
+  --ds-sheet-text-line-height: var(--semantic-typography-line-height-normal);
+  --ds-sheet-text-size-title: var(--semantic-typography-heading-06);
+  --ds-sheet-text-line-height-title: var(--semantic-typography-line-height-tight);
+  --ds-sheet-text-weight-title: var(--semantic-typography-font-weight-medium);
+  --ds-sheet-text-size-description: var(--semantic-typography-body-03);
+  --ds-sheet-text-line-height-description: var(--semantic-typography-line-height-loose);
 
-    /* === Motion Tokens === */
-    --ds-sheet-motion-duration: var(--core-motion-duration-medium);
-    --ds-sheet-motion-easing: var(--core-motion-easing-standard);
+  /* === Motion Tokens === */
+  --ds-sheet-motion-duration: var(--core-motion-duration-medium);
+  --ds-sheet-motion-easing: var(--core-motion-easing-standard);
 
-    /* === ZIndex Tokens === */
-    --ds-sheet-z-index-overlay: var(--core-layer-component);
-    --ds-sheet-z-index-content: var(--core-layer-above);
+  /* === ZIndex Tokens === */
+  --ds-sheet-z-index-overlay: var(--core-layer-component);
+  --ds-sheet-z-index-content: var(--core-layer-above);
 
-    /* === Focus Tokens === */
-    --ds-sheet-focus-width: var(--core-shape-border-width-thick);
-    --ds-sheet-focus-color: var(--semantic-color-border-accent);
-    --ds-sheet-focus-offset: var(--core-spacing-size-01);
+  /* === Focus Tokens === */
+  --ds-sheet-focus-width: var(--core-shape-border-width-thick);
+  --ds-sheet-focus-color: var(--semantic-color-border-accent);
+  --ds-sheet-focus-offset: var(--core-spacing-size-01);
 
-    /* === Other Tokens === */
-    --ds-sheet-shadow: var(--semantic-elevation-surface-floating);
-  }
+  /* === Other Tokens === */
+  --ds-sheet-shadow: var(--semantic-elevation-surface-floating);
 }

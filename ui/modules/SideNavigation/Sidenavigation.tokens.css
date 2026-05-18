@@ -1,20 +1,18 @@
 /* AUTO-GENERATED: Do not edit directly.
  * Source: ui/modules/SideNavigation/SideNavigation.tokens.json
  */
-@layer components {
-  [data-ds-component="Sidenavigation"] {
-    /* === Color Tokens === */
-    --ds-sidenavigation-color-background-default: var(--semantic-color-background-secondary);
-    --ds-sidenavigation-color-foreground-primary: var(--semantic-color-foreground-primary);
-    --ds-sidenavigation-color-foreground-secondary: var(--semantic-color-foreground-secondary);
-    --ds-sidenavigation-color-border-default: var(--semantic-color-border-light);
-    --ds-sidenavigation-color-border-accent: var(--semantic-color-border-accent);
+[data-ds-component="Sidenavigation"] {
+  /* === Color Tokens === */
+  --ds-sidenavigation-color-background-default: var(--semantic-color-background-secondary);
+  --ds-sidenavigation-color-foreground-primary: var(--semantic-color-foreground-primary);
+  --ds-sidenavigation-color-foreground-secondary: var(--semantic-color-foreground-secondary);
+  --ds-sidenavigation-color-border-default: var(--semantic-color-border-light);
+  --ds-sidenavigation-color-border-accent: var(--semantic-color-border-accent);
 
-    /* === Size Tokens === */
-    --ds-sidenavigation-size-padding-default: var(--core-spacing-size-07);
-    --ds-sidenavigation-size-radius-default: var(--core-shape-radius-medium);
+  /* === Size Tokens === */
+  --ds-sidenavigation-size-padding-default: var(--core-spacing-size-07);
+  --ds-sidenavigation-size-radius-default: var(--core-shape-radius-medium);
 
-    /* === Elevation Tokens === */
-    --ds-sidenavigation-elevation-default: var(--semantic-elevation-default);
-  }
+  /* === Elevation Tokens === */
+  --ds-sidenavigation-elevation-default: var(--semantic-elevation-default);
 }

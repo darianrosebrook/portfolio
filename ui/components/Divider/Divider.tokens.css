@@ -1,18 +1,16 @@
 /* AUTO-GENERATED: Do not edit directly.
  * Source: ui/components/Divider/Divider.tokens.json
  */
-@layer components {
-  [data-ds-component="Divider"] {
-    /* === Color Tokens === */
-    --ds-divider-color-default: var(--semantic-color-border-light);
-    --ds-divider-color-subtle: var(--semantic-color-border-subtle);
-    --ds-divider-color-muted: var(--semantic-color-border-light);
+[data-ds-component="Divider"] {
+  /* === Color Tokens === */
+  --ds-divider-color-default: var(--semantic-color-border-light);
+  --ds-divider-color-subtle: var(--semantic-color-border-subtle);
+  --ds-divider-color-muted: var(--semantic-color-border-light);
 
-    /* === Size Tokens === */
-    --ds-divider-size-thickness: var(--core-shape-border-width-hairline);
-    --ds-divider-size-thickness-thick: var(--core-shape-border-width-hairline);
+  /* === Size Tokens === */
+  --ds-divider-size-thickness: var(--core-shape-border-width-hairline);
+  --ds-divider-size-thickness-thick: var(--core-shape-border-width-hairline);
 
-    /* === Spacing Tokens === */
-    --ds-divider-spacing-margin: var(--core-spacing-size-04);
-  }
+  /* === Spacing Tokens === */
+  --ds-divider-spacing-margin: var(--core-spacing-size-04);
 }

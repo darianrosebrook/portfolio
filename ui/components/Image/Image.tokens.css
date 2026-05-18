@@ -1,31 +1,29 @@
 /* AUTO-GENERATED: Do not edit directly.
  * Source: ui/components/Image/Image.tokens.json
  */
-@layer components {
-  [data-ds-component="Image"] {
-    /* === Color Tokens === */
-    --ds-image-color-background-default: var(--semantic-color-background-secondary);
-    --ds-image-color-background-error: var(--semantic-color-background-danger-subtle);
-    --ds-image-color-foreground-primary: var(--semantic-color-foreground-primary);
-    --ds-image-color-foreground-secondary: var(--semantic-color-foreground-secondary);
-    --ds-image-color-foreground-error: var(--semantic-color-foreground-danger);
+[data-ds-component="Image"] {
+  /* === Color Tokens === */
+  --ds-image-color-background-default: var(--semantic-color-background-secondary);
+  --ds-image-color-background-error: var(--semantic-color-background-danger-subtle);
+  --ds-image-color-foreground-primary: var(--semantic-color-foreground-primary);
+  --ds-image-color-foreground-secondary: var(--semantic-color-foreground-secondary);
+  --ds-image-color-foreground-error: var(--semantic-color-foreground-danger);
 
-    /* === Size Tokens === */
-    --ds-image-size-xs: var(--core-spacing-size-08);
-    --ds-image-size-sm: var(--core-spacing-size-10);
-    --ds-image-size-md: var(--core-spacing-size-09);
-    --ds-image-size-lg: var(--core-spacing-size-09);
-    --ds-image-size-xl: var(--core-spacing-size-10);
-    --ds-image-size-icon: var(--core-spacing-size-08);
+  /* === Size Tokens === */
+  --ds-image-size-xs: var(--core-spacing-size-08);
+  --ds-image-size-sm: var(--core-spacing-size-10);
+  --ds-image-size-md: var(--core-spacing-size-09);
+  --ds-image-size-lg: var(--core-spacing-size-09);
+  --ds-image-size-xl: var(--core-spacing-size-10);
+  --ds-image-size-icon: var(--core-spacing-size-08);
 
-    /* === Radius Tokens === */
-    --ds-image-radius-none: 0px;
-    --ds-image-radius-sm: var(--core-shape-radius-small);
-    --ds-image-radius-md: var(--core-shape-radius-medium);
-    --ds-image-radius-lg: var(--core-shape-radius-large);
-    --ds-image-radius-full: var(--core-shape-radius-full);
+  /* === Radius Tokens === */
+  --ds-image-radius-none: 0px;
+  --ds-image-radius-sm: var(--core-shape-radius-small);
+  --ds-image-radius-md: var(--core-shape-radius-medium);
+  --ds-image-radius-lg: var(--core-shape-radius-large);
+  --ds-image-radius-full: var(--core-shape-radius-full);
 
-    /* === Typography Tokens === */
-    --ds-image-typography-error-font-size: var(--semantic-typography-body-04);
-  }
+  /* === Typography Tokens === */
+  --ds-image-typography-error-font-size: var(--semantic-typography-body-04);
 }

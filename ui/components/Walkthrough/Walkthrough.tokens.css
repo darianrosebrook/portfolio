@@ -1,46 +1,44 @@
 /* AUTO-GENERATED: Do not edit directly.
  * Source: ui/components/Walkthrough/Walkthrough.tokens.json
  */
-@layer components {
-  [data-ds-component="Walkthrough"] {
-    /* === Surface Tokens === */
-    --ds-walkthrough-surface-bg: var(--semantic-color-background-secondary);
-    --ds-walkthrough-surface-border: var(--semantic-color-border-subtle);
-    --ds-walkthrough-surface-radius: var(--core-shape-radius-04);
-    --ds-walkthrough-surface-shadow: var(--semantic-elevation-surface-floating);
-    --ds-walkthrough-surface-padding: var(--core-spacing-size-08);
+[data-ds-component="Walkthrough"] {
+  /* === Surface Tokens === */
+  --ds-walkthrough-surface-bg: var(--semantic-color-background-secondary);
+  --ds-walkthrough-surface-border: var(--semantic-color-border-subtle);
+  --ds-walkthrough-surface-radius: var(--core-shape-radius-04);
+  --ds-walkthrough-surface-shadow: var(--semantic-elevation-surface-floating);
+  --ds-walkthrough-surface-padding: var(--core-spacing-size-08);
 
-    /* === Title Tokens === */
-    --ds-walkthrough-title-font-size: var(--semantic-typography-heading-03);
-    --ds-walkthrough-title-font-weight: var(--semantic-typography-font-weight-bold);
-    --ds-walkthrough-title-color: var(--semantic-color-foreground-primary);
+  /* === Title Tokens === */
+  --ds-walkthrough-title-font-size: var(--semantic-typography-heading-03);
+  --ds-walkthrough-title-font-weight: var(--semantic-typography-font-weight-bold);
+  --ds-walkthrough-title-color: var(--semantic-color-foreground-primary);
 
-    /* === Description Tokens === */
-    --ds-walkthrough-description-font-size: var(--semantic-typography-body-02);
-    --ds-walkthrough-description-color: var(--semantic-color-foreground-secondary);
-    --ds-walkthrough-description-margin-top: var(--core-spacing-size-04);
+  /* === Description Tokens === */
+  --ds-walkthrough-description-font-size: var(--semantic-typography-body-02);
+  --ds-walkthrough-description-color: var(--semantic-color-foreground-secondary);
+  --ds-walkthrough-description-margin-top: var(--core-spacing-size-04);
 
-    /* === Controls Tokens === */
-    --ds-walkthrough-controls-gap: var(--core-spacing-size-05);
-    --ds-walkthrough-controls-margin-top: var(--core-spacing-size-06);
+  /* === Controls Tokens === */
+  --ds-walkthrough-controls-gap: var(--core-spacing-size-05);
+  --ds-walkthrough-controls-margin-top: var(--core-spacing-size-06);
 
-    /* === Dots Tokens === */
-    --ds-walkthrough-dots-size: var(--core-spacing-size-02);
-    --ds-walkthrough-dots-gap: var(--core-spacing-size-03);
-    --ds-walkthrough-dots-active: var(--semantic-color-action-background-primary-default);
-    --ds-walkthrough-dots-idle: var(--semantic-color-border-subtle);
+  /* === Dots Tokens === */
+  --ds-walkthrough-dots-size: var(--core-spacing-size-02);
+  --ds-walkthrough-dots-gap: var(--core-spacing-size-03);
+  --ds-walkthrough-dots-active: var(--semantic-color-action-background-primary-default);
+  --ds-walkthrough-dots-idle: var(--semantic-color-border-subtle);
 
-    /* === Button Tokens === */
-    --ds-walkthrough-button-primary-bg: var(--semantic-color-action-background-primary-default);
-    --ds-walkthrough-button-primary-color: var(--semantic-color-action-foreground-primary-default);
-    --ds-walkthrough-button-primary-radius: var(--core-shape-radius-medium);
-    --ds-walkthrough-button-primary-padding-y: var(--core-spacing-size-04);
-    --ds-walkthrough-button-primary-padding-x: var(--core-spacing-size-06);
-    --ds-walkthrough-button-secondary-bg: var(--core-color-mode-transparent);
-    --ds-walkthrough-button-secondary-color: var(--semantic-color-foreground-secondary);
-    --ds-walkthrough-button-secondary-border: var(--semantic-color-border-subtle);
-    --ds-walkthrough-button-secondary-radius: var(--core-shape-radius-medium);
-    --ds-walkthrough-button-secondary-padding-y: var(--core-spacing-size-04);
-    --ds-walkthrough-button-secondary-padding-x: var(--core-spacing-size-06);
-  }
+  /* === Button Tokens === */
+  --ds-walkthrough-button-primary-bg: var(--semantic-color-action-background-primary-default);
+  --ds-walkthrough-button-primary-color: var(--semantic-color-action-foreground-primary-default);
+  --ds-walkthrough-button-primary-radius: var(--core-shape-radius-medium);
+  --ds-walkthrough-button-primary-padding-y: var(--core-spacing-size-04);
+  --ds-walkthrough-button-primary-padding-x: var(--core-spacing-size-06);
+  --ds-walkthrough-button-secondary-bg: var(--core-color-mode-transparent);
+  --ds-walkthrough-button-secondary-color: var(--semantic-color-foreground-secondary);
+  --ds-walkthrough-button-secondary-border: var(--semantic-color-border-subtle);
+  --ds-walkthrough-button-secondary-radius: var(--core-shape-radius-medium);
+  --ds-walkthrough-button-secondary-padding-y: var(--core-spacing-size-04);
+  --ds-walkthrough-button-secondary-padding-x: var(--core-spacing-size-06);
 }

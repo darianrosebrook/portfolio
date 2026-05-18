@@ -1,27 +1,25 @@
 /* AUTO-GENERATED: Do not edit directly.
  * Source: ui/components/Tabs/Tabs.tokens.json
  */
-@layer components {
-  [data-ds-component="Tabs"] {
-    /* === Spacing Tokens === */
-    --ds-tabs-spacing-gap: var(--core-spacing-size-04);
-    --ds-tabs-spacing-padding: var(--core-spacing-size-04);
-    --ds-tabs-spacing-panel-gap: var(--core-spacing-size-06);
+[data-ds-component="Tabs"] {
+  /* === Spacing Tokens === */
+  --ds-tabs-spacing-gap: var(--core-spacing-size-04);
+  --ds-tabs-spacing-padding: var(--core-spacing-size-04);
+  --ds-tabs-spacing-panel-gap: var(--core-spacing-size-06);
 
-    /* === Color Tokens === */
-    --ds-tabs-color-fg: var(--semantic-color-foreground-primary);
-    --ds-tabs-color-active-fg: var(--semantic-color-foreground-primary);
-    --ds-tabs-color-active-bg: var(--semantic-color-background-secondary);
-    --ds-tabs-color-disabled-fg: var(--semantic-color-foreground-disabled);
-    --ds-tabs-color-indicator: var(--semantic-color-border-accent);
-    --ds-tabs-color-focus: var(--semantic-color-border-accent);
-    --ds-tabs-color-hover-bg: var(--semantic-color-background-hover);
-    --ds-tabs-color-hover-fg: var(--semantic-color-foreground-primary);
+  /* === Color Tokens === */
+  --ds-tabs-color-fg: var(--semantic-color-foreground-primary);
+  --ds-tabs-color-active-fg: var(--semantic-color-foreground-primary);
+  --ds-tabs-color-active-bg: var(--semantic-color-background-secondary);
+  --ds-tabs-color-disabled-fg: var(--semantic-color-foreground-disabled);
+  --ds-tabs-color-indicator: var(--semantic-color-border-accent);
+  --ds-tabs-color-focus: var(--semantic-color-border-accent);
+  --ds-tabs-color-hover-bg: var(--semantic-color-background-hover);
+  --ds-tabs-color-hover-fg: var(--semantic-color-foreground-primary);
 
-    /* === Shape Tokens === */
-    --ds-tabs-shape-radius: var(--core-shape-radius-medium);
+  /* === Shape Tokens === */
+  --ds-tabs-shape-radius: var(--core-shape-radius-medium);
 
-    /* === Motion Tokens === */
-    --ds-tabs-motion-indicator: var(--core-motion-duration-short);
-  }
+  /* === Motion Tokens === */
+  --ds-tabs-motion-indicator: var(--core-motion-duration-short);
 }

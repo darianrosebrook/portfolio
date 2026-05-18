@@ -244,26 +244,32 @@ function flattenTokens(obj, prefixSegments) {
 }
 
 /**
- * Build CSS content for a component's tokens — emits a `@layer components`
- * block scoped to `[data-ds-component="Pascal"]`. Custom properties are
+ * Build CSS content for a component's tokens — emits an unlayered rule
+ * scoped to `[data-ds-component="Pascal"]`. Custom properties are
  * prefixed with `--ds-<component>-` per the migration playbook.
+ *
+ * Intentionally NOT wrapped in `@layer components`. Unlayered rules
+ * beat the unlayered CSS reset (`* { padding: 0; min-height: 0; }`)
+ * via specificity, where `[data-ds-component="X"].class` (0,2,1)
+ * out-specifies the universal selector (0,0,0). Putting the component
+ * rules in a layer would lose that specificity battle because layered
+ * rules always lose to unlayered ones, regardless of selector weight.
  *
  * Per docs/CSS-MIGRATION-PLAYBOOK.md.
  */
 function buildCssForComponent({ cssVarPrefix, pascalComponent, tokenData }) {
   const { groups, flat } = tokenData;
-  // Body lines live at column 4 (inside @layer + selector). We add the
-  // surrounding wrapper at the end.
+  // Body lines live at column 2 (one level inside the selector).
   const body = [];
 
   // Process groups first
   if (Object.keys(groups).length > 0) {
     Object.entries(groups).forEach(([groupName, groupData]) => {
       const groupTitle = groupName.charAt(0).toUpperCase() + groupName.slice(1);
-      body.push(`    /* === ${groupTitle} Tokens === */`);
+      body.push(`  /* === ${groupTitle} Tokens === */`);
 
       Object.entries(groupData.tokens).forEach(([name, raw]) => {
-        body.push(`    --ds-${cssVarPrefix}-${name}: ${refToCssVar(raw)};`);
+        body.push(`  --ds-${cssVarPrefix}-${name}: ${refToCssVar(raw)};`);
       });
 
       body.push('');
@@ -287,14 +293,14 @@ function buildCssForComponent({ cssVarPrefix, pascalComponent, tokenData }) {
 
   if (Object.keys(topLevelTokens).length > 0) {
     if (Object.keys(groups).length > 0) {
-      body.push('    /* === Other Tokens === */');
+      body.push('  /* === Other Tokens === */');
     }
     Object.entries(topLevelTokens).forEach(([name, raw]) => {
-      body.push(`    --ds-${cssVarPrefix}-${name}: ${refToCssVar(raw)};`);
+      body.push(`  --ds-${cssVarPrefix}-${name}: ${refToCssVar(raw)};`);
     });
   } else if (Object.keys(groups).length === 0) {
     Object.entries(flat).forEach(([name, raw]) => {
-      body.push(`    --ds-${cssVarPrefix}-${name}: ${refToCssVar(raw)};`);
+      body.push(`  --ds-${cssVarPrefix}-${name}: ${refToCssVar(raw)};`);
     });
   }
 
@@ -304,10 +310,8 @@ function buildCssForComponent({ cssVarPrefix, pascalComponent, tokenData }) {
   }
 
   return [
-    `@layer components {`,
-    `  [data-ds-component="${pascalComponent}"] {`,
+    `[data-ds-component="${pascalComponent}"] {`,
     ...body,
-    `  }`,
     `}`,
   ].join('\n');
 }

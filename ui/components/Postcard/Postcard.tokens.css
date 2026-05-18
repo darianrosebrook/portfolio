@@ -1,36 +1,34 @@
 /* AUTO-GENERATED: Do not edit directly.
  * Source: ui/components/Postcard/Postcard.tokens.json
  */
-@layer components {
-  [data-ds-component="Postcard"] {
-    /* === Color Tokens === */
-    --ds-postcard-color-background-default: var(--semantic-color-background-primary);
-    --ds-postcard-color-background-hover: var(--semantic-color-background-secondary);
-    --ds-postcard-color-background-active: var(--semantic-color-background-active);
-    --ds-postcard-color-border-default: var(--semantic-color-border-light);
-    --ds-postcard-color-border-accent: var(--semantic-color-border-accent);
-    --ds-postcard-color-border-hover: var(--semantic-color-border-bold);
-    --ds-postcard-color-foreground-primary: var(--semantic-color-foreground-primary);
-    --ds-postcard-color-foreground-secondary: var(--semantic-color-foreground-secondary);
-    --ds-postcard-color-foreground-muted: var(--semantic-color-foreground-secondary);
+[data-ds-component="Postcard"] {
+  /* === Color Tokens === */
+  --ds-postcard-color-background-default: var(--semantic-color-background-primary);
+  --ds-postcard-color-background-hover: var(--semantic-color-background-secondary);
+  --ds-postcard-color-background-active: var(--semantic-color-background-active);
+  --ds-postcard-color-border-default: var(--semantic-color-border-light);
+  --ds-postcard-color-border-accent: var(--semantic-color-border-accent);
+  --ds-postcard-color-border-hover: var(--semantic-color-border-bold);
+  --ds-postcard-color-foreground-primary: var(--semantic-color-foreground-primary);
+  --ds-postcard-color-foreground-secondary: var(--semantic-color-foreground-secondary);
+  --ds-postcard-color-foreground-muted: var(--semantic-color-foreground-secondary);
 
-    /* === Size Tokens === */
-    --ds-postcard-size-padding-default: var(--core-spacing-size-06);
-    --ds-postcard-size-radius-default: var(--semantic-shape-control-radius-default);
-    --ds-postcard-size-radius-medium: var(--core-shape-radius-medium);
-    --ds-postcard-size-radius-full: var(--core-shape-radius-full);
-    --ds-postcard-size-margin-bottom: var(--core-spacing-size-06);
-    --ds-postcard-size-gap-default: var(--core-spacing-size-05);
-    --ds-postcard-size-gap-small: var(--core-spacing-size-03);
-    --ds-postcard-size-gap-large: var(--core-spacing-size-07);
-    --ds-postcard-size-border-default: var(--core-shape-border-width-hairline);
+  /* === Size Tokens === */
+  --ds-postcard-size-padding-default: var(--core-spacing-size-06);
+  --ds-postcard-size-radius-default: var(--semantic-shape-control-radius-default);
+  --ds-postcard-size-radius-medium: var(--core-shape-radius-medium);
+  --ds-postcard-size-radius-full: var(--core-shape-radius-full);
+  --ds-postcard-size-margin-bottom: var(--core-spacing-size-06);
+  --ds-postcard-size-gap-default: var(--core-spacing-size-05);
+  --ds-postcard-size-gap-small: var(--core-spacing-size-03);
+  --ds-postcard-size-gap-large: var(--core-spacing-size-07);
+  --ds-postcard-size-border-default: var(--core-shape-border-width-hairline);
 
-    /* === Typography Tokens === */
-    --ds-postcard-typography-display-name-font-size: var(--semantic-typography-body-02);
-    --ds-postcard-typography-display-name-font-weight: var(--semantic-typography-font-weight-medium);
-    --ds-postcard-typography-handle-font-size: var(--semantic-typography-body-03);
-    --ds-postcard-typography-content-font-size: var(--semantic-typography-body-02);
-    --ds-postcard-typography-content-line-height: var(--semantic-typography-line-height-body);
-    --ds-postcard-typography-footer-font-size: var(--semantic-typography-body-03);
-  }
+  /* === Typography Tokens === */
+  --ds-postcard-typography-display-name-font-size: var(--semantic-typography-body-02);
+  --ds-postcard-typography-display-name-font-weight: var(--semantic-typography-font-weight-medium);
+  --ds-postcard-typography-handle-font-size: var(--semantic-typography-body-03);
+  --ds-postcard-typography-content-font-size: var(--semantic-typography-body-02);
+  --ds-postcard-typography-content-line-height: var(--semantic-typography-line-height-body);
+  --ds-postcard-typography-footer-font-size: var(--semantic-typography-body-03);
 }
