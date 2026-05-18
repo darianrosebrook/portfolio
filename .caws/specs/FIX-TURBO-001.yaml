@@ -1,0 +1,30 @@
+id: FIX-TURBO-001
+type: chore
+title: Pin turbopack.root to silence multi-lockfile warning
+status: active
+risk_tier: 3
+mode: development
+created_at: '2026-05-18T08:15:18.275Z'
+updated_at: '2026-05-18T08:15:18.276Z'
+blast_radius:
+  modules: []
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - src/
+    - tests/
+  out:
+    - node_modules/
+    - dist/
+    - build/
+invariants:
+  - System maintains data consistency
+acceptance: []
+acceptance_criteria: []
+non_functional:
+  a11y: []
+  perf: {}
+  security: []
+contracts: []
+worktree: fix-turbopack-root
