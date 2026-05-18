@@ -1,6 +1,6 @@
 'use client';
 import * as React from 'react';
-import styles from '../Toast.module.scss';
+import '../Toast.css';
 
 export interface ToastTitleProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -11,7 +11,7 @@ export const ToastTitle: React.FC<ToastTitleProps> = ({
 }) => {
   return (
     <div
-      className={[styles.title, className].filter(Boolean).join(' ')}
+      className={['title', className].filter(Boolean).join(' ')}
       data-slot="toast-title"
       {...rest}
     >

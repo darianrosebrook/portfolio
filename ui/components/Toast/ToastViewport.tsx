@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { useToast } from './ToastProvider';
 import { ToastItem } from './ToastItem';
-import styles from './Toast.module.scss';
+import './Toast.css';
 
 export interface ToastViewportProps extends React.HTMLAttributes<HTMLDivElement> {
   politeness?: 'polite' | 'assertive';
@@ -16,7 +16,8 @@ export const ToastViewport = React.forwardRef<
   return (
     <div
       ref={ref}
-      className={[styles.viewport, className].filter(Boolean).join(' ')}
+      data-ds-component="Toast"
+      className={['viewport', className].filter(Boolean).join(' ')}
       data-slot="toast-viewport"
       aria-live={politeness}
       {...rest}

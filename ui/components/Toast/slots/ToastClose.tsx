@@ -1,6 +1,6 @@
 'use client';
 import * as React from 'react';
-import styles from '../Toast.module.scss';
+import '../Toast.css';
 
 export interface ToastCloseProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
@@ -12,7 +12,7 @@ export const ToastClose: React.FC<ToastCloseProps> = ({
   return (
     <button
       type="button"
-      className={[styles.close, className].filter(Boolean).join(' ')}
+      className={['close', className].filter(Boolean).join(' ')}
       data-slot="toast-close"
       aria-label="Dismiss notification"
       {...rest}
