@@ -61,11 +61,22 @@ export const createArticleSchema = articleSchema
     published_at: true,
   })
   .partial({
-    // These fields are optional when creating - they have sensible defaults
+    // These fields are optional when creating - the server fills them in.
     author: true,
     editor: true,
     alternativeHeadline: true,
     index: true,
+    // The working_* draft mirror is initialized server-side from the main
+    // fields on insert (see POST /api/articles). Clients should not be
+    // required to send these on first save.
+    workingbody: true,
+    workingheadline: true,
+    workingdescription: true,
+    workingimage: true,
+    workingkeywords: true,
+    workingarticlesection: true,
+    working_modified_at: true,
+    is_dirty: true,
   });
 
 export const updateArticleSchema = createArticleSchema.partial();

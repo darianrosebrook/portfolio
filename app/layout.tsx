@@ -1,6 +1,7 @@
 import { Analytics } from '@vercel/analytics/react';
 import localFont from 'next/font/local';
 import { SVGSprites } from './SVGSprites/SVGSprites';
+import { ServiceWorkerCleanup } from './ServiceWorkerCleanup';
 import './globals.scss';
 
 import PerformanceDashboard from '@/ui/modules/PerformanceDashboard/PerformanceDashboard';
@@ -43,53 +44,7 @@ export default async function RootLayout({
         {children}
         <Analytics />
         <PerformanceDashboard />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-                // Cleanup: Unregister any existing service workers (one-time migration)
-                if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
-                  navigator.serviceWorker.getRegistrations().then(function(registrations) {
-                    if (registrations.length > 0) {
-                      Promise.all(
-                        registrations.map(function(registration) {
-                          return registration.unregister();
-                        })
-                      ).then(function() {
-                        // Clear all caches after unregistering
-                        if ('caches' in window) {
-                          caches.keys().then(function(cacheNames) {
-                            return Promise.all(
-                              cacheNames.map(function(cacheName) {
-                                return caches.delete(cacheName);
-                              })
-                            );
-                          });
-                        }
-                      });
-                    }
-                  });
-                }
-                
-                // Initialize performance monitoring
-                if (typeof window !== 'undefined') {
-                  window.addEventListener('load', function() {
-                    // Track page load performance
-                    const loadTime = performance.now();
-                    
-                    // Track bundle size (approximate)
-                    const scripts = document.querySelectorAll('script[src]');
-                    let totalSize = 0;
-                    scripts.forEach(script => {
-                      const src = script.getAttribute('src');
-                      if (src && src.includes('chunks')) {
-                        totalSize += 100; // Approximate size per chunk
-                      }
-                    });
-                  });
-                }
-              `,
-          }}
-        />
+        <ServiceWorkerCleanup />
       </body>
     </html>
   );
