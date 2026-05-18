@@ -1,4 +1,4 @@
-.tableOfContentsNode {
+[data-ds-component="TableOfContentsNodeView"] {
   margin: 24px 0;
   border: 2px solid transparent;
   border-radius: var(--core-shape-radius-medium);
@@ -9,14 +9,14 @@
   }
 }
 
-.tocContainer {
+[data-ds-component="TableOfContentsNodeView"] .tocContainer {
   background: var(--semantic-color-background-secondary);
   border: 1px solid var(--semantic-color-border-primary);
   border-radius: var(--core-shape-radius-medium);
   padding: var(--core-spacing-size-05);
 }
 
-.tocHeader {
+[data-ds-component="TableOfContentsNodeView"] .tocHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -32,12 +32,12 @@
   }
 }
 
-.tocList {
+[data-ds-component="TableOfContentsNodeView"] .tocList {
   max-height: 300px;
   overflow-y: auto;
 }
 
-.tocItem {
+[data-ds-component="TableOfContentsNodeView"] .tocItem {
   display: block;
   width: 100%;
   text-align: left;
@@ -59,22 +59,22 @@
   }
 }
 
-.tocText {
+[data-ds-component="TableOfContentsNodeView"] .tocText {
   font-size: var(--font-size-02);
   color: var(--color-text-secondary);
   line-height: 1.4;
 }
 
-.tocLevel1 .tocText {
+[data-ds-component="TableOfContentsNodeView"] .tocLevel1 .tocText {
   font-weight: 600;
   color: var(--color-text-primary);
 }
 
-.tocLevel2 .tocText {
+[data-ds-component="TableOfContentsNodeView"] .tocLevel2 .tocText {
   font-weight: 500;
 }
 
-.tocEmpty {
+[data-ds-component="TableOfContentsNodeView"] .tocEmpty {
   text-align: center;
   padding: var(--core-spacing-size-05);
   color: var(--color-text-secondary);

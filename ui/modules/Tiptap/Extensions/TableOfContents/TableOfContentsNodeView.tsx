@@ -3,7 +3,7 @@
 import { NodeViewWrapper } from '@tiptap/react';
 import { NodeViewProps, Editor } from '@tiptap/core';
 import { useCallback, useRef, useSyncExternalStore } from 'react';
-import styles from './TableOfContentsNodeView.module.scss';
+import './TableOfContentsNodeView.css';
 
 interface TocItem {
   id: string;
@@ -120,20 +120,20 @@ export const TableOfContentsNodeView: React.FC<NodeViewProps> = ({
     const number = showNumbers ? `${index + 1}. ` : '';
     const levelClass =
       item.level === 1
-        ? styles.tocLevel1
+        ? 'tocLevel1'
         : item.level === 2
-          ? styles.tocLevel2
+          ? 'tocLevel2'
           : '';
 
     return (
       <button
         key={`${item.id}-${item.position}`}
         type="button"
-        className={`${styles.tocItem} ${levelClass}`}
+        className={`tocItem ${levelClass}`}
         style={{ paddingLeft: `${indent}px` }}
         onClick={() => scrollToHeading(item.position)}
       >
-        <span className={styles.tocText}>
+        <span className='tocText'>
           {number}
           {item.text}
         </span>
@@ -144,18 +144,19 @@ export const TableOfContentsNodeView: React.FC<NodeViewProps> = ({
   return (
     <NodeViewWrapper
       as="div"
-      className={`${styles.tableOfContentsNode} ${selected ? styles.selected : ''}`}
+      data-ds-component="TableOfContentsNodeView"
+      className={`${selected ? 'selected' : ''}`}
       data-drag-handle
     >
-      <div className={styles.tocContainer}>
-        <div className={styles.tocHeader}>
+      <div className='tocContainer'>
+        <div className='tocHeader'>
           <h3>Table of Contents</h3>
         </div>
 
         {tocItems.length > 0 ? (
-          <div className={styles.tocList}>{tocItems.map(renderTocItem)}</div>
+          <div className='tocList'>{tocItems.map(renderTocItem)}</div>
         ) : (
-          <div className={styles.tocEmpty}>
+          <div className='tocEmpty'>
             <p>
               No headings found. Add some headings to generate a table of
               contents.
