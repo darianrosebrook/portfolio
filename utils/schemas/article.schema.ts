@@ -2,11 +2,54 @@ import { z } from 'zod';
 
 const articleStatusEnum = z.enum(['draft', 'published', 'archived']);
 
+/**
+ * Accepts a value as either a full URL, a relative path (starts with `/`),
+ * or null/empty. Empty strings coerce to null. The DB stores both forms
+ * (uploads start with `/`, external assets are full URLs), so a strict
+ * `.url()` rejects valid persisted state on every subsequent update.
+ */
+const imageField = z
+  .union([
+    z.literal(''),
+    z.null(),
+    z.string().refine(
+      (val) => {
+        if (val.startsWith('/')) return true;
+        try {
+          new URL(val);
+          return true;
+        } catch {
+          return false;
+        }
+      },
+      { message: 'Must be a full URL or a relative path starting with /' }
+    ),
+  ])
+  .nullable()
+  .transform((val) => (val === '' ? null : val));
+
+/**
+ * Accepts either a strict ISO 8601 datetime or a Postgres-style timestamp
+ * (e.g. "2026-05-18 01:00:00+00"). Supabase returns the latter from some
+ * queries, and rejecting it makes round-trip update payloads fail.
+ */
+const timestampField = z
+  .union([
+    z.string().datetime(),
+    z
+      .string()
+      .regex(
+        /^\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}:\d{2}(\.\d+)?([+-]\d{2}(:?\d{2})?|Z)?$/,
+        { message: 'Must be an ISO 8601 or Postgres timestamp' }
+      ),
+  ])
+  .nullable();
+
 export const articleSchema = z.object({
   id: z.number(),
-  created_at: z.string().datetime().nullable(),
-  modified_at: z.string().datetime().nullable(),
-  published_at: z.string().datetime().nullable(),
+  created_at: timestampField,
+  modified_at: timestampField,
+  published_at: timestampField,
   status: articleStatusEnum.default('draft'),
   slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, {
     message: 'Slug must be url-safe and contain no spaces',
@@ -34,12 +77,7 @@ export const articleSchema = z.object({
     .string()
     .nullable()
     .transform((val) => (val === '' ? null : val)),
-  image: z
-    .string()
-    .url()
-    .nullable()
-    .or(z.literal(''))
-    .transform((val) => (val === '' ? null : val)),
+  image: imageField,
   wordCount: z.number().nullable(),
   index: z.number().nullable(),
   // Working draft columns (lowercase per DB)
@@ -49,7 +87,7 @@ export const articleSchema = z.object({
   workingimage: z.string().nullable(),
   workingkeywords: z.string().nullable(),
   workingarticlesection: z.string().nullable(),
-  working_modified_at: z.string().datetime().nullable(),
+  working_modified_at: timestampField,
   is_dirty: z.boolean().nullable().default(false),
 });
 

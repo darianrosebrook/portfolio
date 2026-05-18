@@ -309,12 +309,17 @@ export default function NewArticlePage() {
       // new to persist, it's a no-op against the server.
       await manualSave();
 
-      // Use PUT to publish (moves working draft to published)
+      // Send only the fields actually being modified for publish. The PUT
+      // handler's publish branch reads the existing row's working_* fields
+      // and copies them into the canonical columns — it doesn't need (and
+      // shouldn't be re-validating) the entire server-shaped article object.
+      // Spreading the full row meant any stale or loose field (e.g. a
+      // relative image path) would 400 the request before it ever ran.
       const response = await fetch(`/api/articles/${article.slug}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          ...article,
+          slug: article.slug,
           status: 'published',
           published_at: article.published_at || new Date().toISOString(),
         }),
@@ -363,11 +368,13 @@ export default function NewArticlePage() {
 
     setIsManualSaving(true);
     try {
+      // Same rationale as handlePublish: send only the fields that change.
+      // The PUT handler doesn't need the whole article echoed back.
       const response = await fetch(`/api/articles/${article.slug}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          ...article,
+          slug: article.slug,
           status: 'draft',
           published_at: null,
         }),
