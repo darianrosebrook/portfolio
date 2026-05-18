@@ -1,6 +1,6 @@
 'use client';
 import * as React from 'react';
-import styles from './Input.module.scss';
+import './Input.css';
 
 export interface InputProps extends Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
@@ -15,8 +15,9 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     return (
       <input
         ref={ref}
+        data-ds-component="Input"
         data-slot="input"
-        className={[styles.input, invalid ? styles.invalid : '', className]
+        className={['input', invalid ? 'invalid' : '', className]
           .filter(Boolean)
           .join(' ')}
         aria-invalid={aria}
