@@ -1,4 +1,4 @@
-.codeBlock {
+[data-ds-component="CodeBlockComponent"] {
   select {
     margin-bottom: 8px;
     padding: 4px 6px;
