@@ -1,7 +1,7 @@
 id: FEAT-HOME-POSITIONING-001
 type: feature
 title: Home page positioning rewrite around operational infrastructure thesis
-status: active
+status: closed
 risk_tier: 3
 mode: feature
 created_at: '2026-05-18T17:08:17.522Z'
