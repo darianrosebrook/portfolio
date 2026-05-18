@@ -508,6 +508,62 @@ describe('Articles API Integration Tests', () => {
       );
     });
 
+    it('returns 404 with a clean message when publishing a slug that has no row (PGRST116)', async () => {
+      mockSupabase.auth.getUser.mockResolvedValue({
+        data: { user: mockUser },
+        error: null,
+      });
+
+      (updateArticleSchema.safeParse as any).mockReturnValue({
+        success: true,
+        data: { status: 'published' },
+      });
+
+      const mockSelect = vi.fn().mockReturnValue({
+        eq: vi.fn().mockReturnValue({
+          eq: vi.fn().mockReturnValue({
+            single: vi.fn().mockResolvedValue({
+              data: null,
+              error: {
+                code: 'PGRST116',
+                message:
+                  'JSON object requested, multiple (or no) rows returned',
+              },
+            }),
+          }),
+        }),
+      });
+
+      const mockUpdate = vi.fn();
+
+      mockSupabase.from.mockReturnValue({
+        select: mockSelect,
+        update: mockUpdate,
+        delete: vi.fn(),
+        insert: vi.fn(),
+      });
+
+      const request = new Request(
+        'http://localhost:3000/api/articles/never-saved',
+        {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status: 'published' }),
+        }
+      );
+
+      const response = await ArticleSlugAPI.PUT(request, mockContext);
+      const responseData = await response.json();
+
+      expect(response.status).toBe(404);
+      // The raw PostgREST message must not leak through.
+      expect(responseData.error).not.toMatch(/PGRST116/i);
+      expect(responseData.error).not.toMatch(/JSON object requested/i);
+      expect(responseData.error).toMatch(/not found/i);
+      // The publish path must not attempt the update when the row is missing.
+      expect(mockUpdate).not.toHaveBeenCalled();
+    });
+
     it('should return 401 for unauthenticated requests', async () => {
       mockSupabase.auth.getUser.mockResolvedValue({
         data: { user: null },
