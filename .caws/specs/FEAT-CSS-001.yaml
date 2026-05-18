@@ -1,7 +1,7 @@
 id: FEAT-CSS-001
 type: refactor
 title: Migrate from SCSS modules to plain CSS modules
-status: active
+status: closed
 risk_tier: 3
 mode: development
 created_at: '2026-05-18T08:59:22.636Z'
