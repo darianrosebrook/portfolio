@@ -14,7 +14,7 @@ import React, { useEffect, useCallback } from 'react';
 import { ChevronDownIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import { useDetails, type UseDetailsOptions } from './useDetails';
 import { useDetailsContext } from './DetailsProvider';
-import styles from './Details.module.scss';
+import './Details.css';
 
 export interface DetailsProps extends UseDetailsOptions {
   /** The summary text displayed in the toggle button */
@@ -89,9 +89,9 @@ const Details = React.forwardRef<HTMLDetailsElement, DetailsProps>(
     );
 
     const iconElement = isOpen ? (
-      <ChevronDownIcon className={styles.icon} />
+      <ChevronDownIcon className="icon" />
     ) : (
-      <ChevronRightIcon className={styles.icon} />
+      <ChevronRightIcon className="icon" />
     );
 
     return (
@@ -99,8 +99,9 @@ const Details = React.forwardRef<HTMLDetailsElement, DetailsProps>(
         ref={ref}
         id={id}
         open={isOpen}
+        data-ds-component="Details"
         data-slot="details"
-        className={[styles.details, className].filter(Boolean).join(' ')}
+        className={['details', className].filter(Boolean).join(' ')}
         data-variant={variant}
         data-icon={icon}
         data-state={isOpen ? 'open' : 'closed'}
@@ -109,16 +110,16 @@ const Details = React.forwardRef<HTMLDetailsElement, DetailsProps>(
       >
         <summary
           data-slot="details-summary"
-          className={styles.summary}
+          className="summary"
           onKeyDown={handleKeyDown}
         >
-          <span className={styles.summaryContent}>
+          <span className="summaryContent">
             {icon === 'left' ? iconElement : null}
-            <span className={styles.summaryText}>{summary}</span>
+            <span className="summaryText">{summary}</span>
             {icon === 'right' ? iconElement : null}
           </span>
         </summary>
-        <div data-slot="details-content" className={styles.content}>
+        <div data-slot="details-content" className="content">
           {children}
         </div>
       </details>

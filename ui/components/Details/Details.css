@@ -1,101 +1,96 @@
-/**
- * Details component styles
- * Collapsible content sections for case studies and articles
- *
- * @author @darianrosebrook
- */
+@import "./Details.tokens.css";
 
-@use './Details.tokens.generated.scss' as detailsTokens;
+[data-ds-component="Details"] {
+  &.details {
+    overflow: hidden;
+    margin: var(--ds-details-size-padding-default) 0;
+    background: var(--ds-details-color-background-default);
+    border: 1px solid var(--ds-details-color-border-default);
+    border-radius: var(--ds-details-size-radius-default);
+    transition:
+      border-color var(--ds-details-motion-duration-fast)
+        var(--ds-details-motion-easing-standard),
+      box-shadow var(--ds-details-motion-duration-fast)
+        var(--ds-details-motion-easing-standard);
 
-.details {
-  @include detailsTokens.vars;
+    &:hover {
+      border-color: var(--ds-details-color-border-hover);
+      box-shadow: 0 1px 3px rgb(0 0 0 / 10%);
+    }
 
-  overflow: hidden;
-  margin: var(--details-size-padding-default) 0;
-  background: var(--details-color-background-default);
-  border: 1px solid var(--details-color-border-default);
-  border-radius: var(--details-size-radius-default);
-  transition:
-    border-color var(--details-motion-duration-fast)
-      var(--details-motion-easing-standard),
-    box-shadow var(--details-motion-duration-fast)
-      var(--details-motion-easing-standard);
+    &[open] {
+      border-color: var(--ds-details-color-border-accent);
+      box-shadow: 0 2px 8px rgb(59 130 246 / 15%);
+    }
 
-  &:hover {
-    border-color: var(--details-color-border-hover);
-    box-shadow: 0 1px 3px rgb(0 0 0 / 10%);
+    &[open] .icon {
+      color: var(--ds-details-color-border-accent);
+      transform: rotate(90deg);
+    }
   }
 
-  &[open] {
-    border-color: var(--details-color-border-accent);
-    box-shadow: 0 2px 8px rgb(59 130 246 / 15%);
+  .summary {
+    padding: var(--ds-details-size-padding-default);
+    background: var(--ds-details-color-background-subtle);
+    list-style: none;
+    transition: background-color var(--ds-details-motion-duration-fast)
+      var(--ds-details-motion-easing-standard);
+    cursor: pointer;
+    user-select: none;
+    border-block-end: 1px solid var(--ds-details-color-border-default);
+
+    &:hover {
+      background: var(--ds-details-color-background-hover);
+    }
+
+    &:focus {
+      outline: var(--ds-details-focus-ring-width) solid
+        var(--ds-details-focus-ring-color);
+      outline-offset: var(--ds-details-focus-ring-offset);
+    }
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &::-moz-list-bullet {
+      display: none;
+    }
   }
-}
 
-.summary {
-  padding: var(--details-size-padding-default);
-  background: var(--details-color-background-subtle);
-  list-style: none;
-  transition: background-color var(--details-motion-duration-fast)
-    var(--details-motion-easing-standard);
-  cursor: pointer;
-  user-select: none;
-  border-block-end: 1px solid var(--details-color-border-default);
-
-  &:hover {
-    background: var(--details-color-background-hover);
+  .summaryContent {
+    display: flex;
+    gap: var(--ds-details-spacing-gap-default);
+    align-items: center;
+    color: var(--ds-details-color-foreground-primary);
+    font-weight: 600;
   }
 
-  &:focus {
-    outline: var(--details-focus-ring-width) solid
-      var(--details-focus-ring-color);
-    outline-offset: var(--details-focus-ring-offset);
+  .icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    color: var(--ds-details-color-foreground-secondary);
+    transition:
+      transform var(--ds-details-motion-duration-fast)
+        var(--ds-details-motion-easing-standard),
+      color var(--ds-details-motion-duration-fast)
+        var(--ds-details-motion-easing-standard);
   }
 
-  &::-webkit-details-marker {
-    display: none;
+  .summaryText {
+    flex: 1;
+    line-height: 1.5;
   }
 
-  &::-moz-list-bullet {
-    display: none;
-  }
-}
+  .content {
+    padding: var(--ds-details-size-padding-default);
+    background: var(--ds-details-color-background-default);
+    color: var(--ds-details-color-foreground-primary);
+    line-height: 1.6;
 
-.summaryContent {
-  display: flex;
-  gap: var(--details-spacing-gap-default);
-  align-items: center;
-  color: var(--details-color-foreground-primary);
-  font-weight: 600;
-}
-
-.icon {
-  flex-shrink: 0;
-  width: 20px;
-  height: 20px;
-  color: var(--details-color-foreground-secondary);
-  transition:
-    transform var(--details-motion-duration-fast)
-      var(--details-motion-easing-standard),
-    color var(--details-motion-duration-fast)
-      var(--details-motion-easing-standard);
-}
-
-.summaryText {
-  flex: 1;
-  line-height: 1.5;
-}
-
-.content {
-  padding: var(--details-size-padding-default);
-  background: var(--details-color-background-default);
-  color: var(--details-color-foreground-primary);
-  line-height: 1.6;
-
-  // Nested content styling
-  :root {
     p {
-      margin: 0 0 var(--details-spacing-margin-bottom) 0;
+      margin: 0 0 var(--ds-details-spacing-margin-bottom) 0;
 
       &:last-child {
         margin-block-end: 0;
@@ -108,9 +103,9 @@
     h4,
     h5,
     h6 {
-      margin: var(--details-size-padding-default) 0
-        var(--details-spacing-margin-bottom) 0;
-      color: var(--details-color-foreground-primary);
+      margin: var(--ds-details-size-padding-default) 0
+        var(--ds-details-spacing-margin-bottom) 0;
+      color: var(--ds-details-color-foreground-primary);
 
       &:first-child {
         margin-block-start: 0;
@@ -119,79 +114,74 @@
 
     ul,
     ol {
-      margin: var(--details-spacing-margin-bottom) 0;
-      padding-inline-start: var(--details-spacing-padding-left);
+      margin: var(--ds-details-spacing-margin-bottom) 0;
+      padding-inline-start: var(--ds-details-spacing-padding-left);
     }
 
     li {
-      margin: var(--details-spacing-margin-top) 0;
+      margin: var(--ds-details-spacing-margin-top) 0;
     }
 
     blockquote {
-      margin: var(--details-size-padding-default) 0;
-      padding: var(--details-spacing-gap-default)
-        var(--details-size-padding-default);
-      background: var(--details-color-background-subtle);
+      margin: var(--ds-details-size-padding-default) 0;
+      padding: var(--ds-details-spacing-gap-default)
+        var(--ds-details-size-padding-default);
+      background: var(--ds-details-color-background-subtle);
       font-style: italic;
-      border-inline-start: 4px solid var(--details-color-border-accent);
+      border-inline-start: 4px solid var(--ds-details-color-border-accent);
     }
 
     code {
       padding: 2px 6px;
-      background: var(--details-color-background-code);
-      border-radius: var(--details-spacing-gap-default);
+      background: var(--ds-details-color-background-code);
+      border-radius: var(--ds-details-spacing-gap-default);
       font-size: 0.9em;
       font-family: var(--font-mono, 'Monaco', 'Menlo', monospace);
     }
 
     pre {
       overflow-x: auto;
-      margin: var(--details-size-padding-default) 0;
-      padding: var(--details-size-padding-default);
-      background: var(--details-color-background-code);
-      border-radius: var(--details-size-radius-default);
+      margin: var(--ds-details-size-padding-default) 0;
+      padding: var(--ds-details-size-padding-default);
+      background: var(--ds-details-color-background-code);
+      border-radius: var(--ds-details-size-radius-default);
+    }
+  }
+
+  &.inline {
+    .summary {
+      display: inline-flex;
+      align-items: center;
+      padding: var(--ds-details-size-padding-default);
+    }
+
+    .content {
+      display: inline-block;
+      width: auto;
+    }
+  }
+
+  &.inline {
+    display: inline-block;
+    width: auto;
+  }
+
+  &.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+
+    .summary {
+      cursor: not-allowed;
     }
   }
 }
 
-.inline {
-  display: inline-block;
-  width: auto;
-
-  .summary {
-    display: inline-flex;
-    align-items: center;
-    padding: var(--details-size-padding-default);
-  }
-
-  .content {
-    display: inline-block;
-    width: auto;
-  }
-}
-
-// Animation for opening/closing
-.details[open] .icon {
-  color: var(--details-color-border-accent);
-  transform: rotate(90deg);
-}
-
-.disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-
-  .summary {
-    cursor: not-allowed;
-  }
-}
-
-// Note: Dark mode support is handled automatically by design tokens
-
-// Reduced motion support
 @media (prefers-reduced-motion: reduce) {
-  .details,
-  .summary,
-  .icon {
-    transition: none;
+  [data-ds-component="Details"] {
+    &.details,
+    .summary,
+    .icon {
+      transition: none;
+    }
   }
 }
