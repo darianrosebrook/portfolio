@@ -18,7 +18,7 @@ import React, {
 } from 'react';
 import { createPortal } from 'react-dom';
 import { OpenStateProps, DismissibleProps } from '@/types/ui';
-import styles from './Dialog.module.scss';
+import './Dialog.css';
 
 export type DialogSize = 'sm' | 'md' | 'lg' | 'xl' | 'full';
 
@@ -217,18 +217,18 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
     if (!shouldRender) return null;
 
     const backdropClassName = [
-      styles.backdrop,
-      modal && styles.modal,
-      isLeaving && styles.leaving,
+      'backdrop',
+      modal && 'modal',
+      isLeaving && 'leaving',
     ]
       .filter(Boolean)
       .join(' ');
 
     const dialogClassName = [
-      styles.dialog,
-      styles[size],
-      modal && styles.modal,
-      isLeaving && styles.leaving,
+      'dialog',
+      size,
+      modal && 'modal',
+      isLeaving && 'leaving',
       className,
     ]
       .filter(Boolean)
@@ -237,6 +237,7 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
     const dialogNode = (
       <div
         ref={backdropRef}
+        data-ds-component="Dialog"
         className={backdropClassName}
         onClick={handleBackdropClick}
       >
@@ -285,7 +286,7 @@ const Header = ({
 }: {
   children: React.ReactNode;
   className?: string;
-}) => <div className={`${styles.header} ${className}`}>{children}</div>;
+}) => <div className={['header', className].filter(Boolean).join(' ')}>{children}</div>;
 Header.displayName = 'Dialog.Header';
 
 const Title = ({
@@ -297,7 +298,7 @@ const Title = ({
 }) => {
   const context = useContext(DialogContext);
   return (
-    <h2 id={context?.titleId} className={`${styles.title} ${className}`}>
+    <h2 id={context?.titleId} className={['title', className].filter(Boolean).join(' ')}>
       {children}
     </h2>
   );
@@ -310,7 +311,7 @@ const Body = ({
 }: {
   children: React.ReactNode;
   className?: string;
-}) => <div className={`${styles.body} ${className}`}>{children}</div>;
+}) => <div className={['body', className].filter(Boolean).join(' ')}>{children}</div>;
 Body.displayName = 'Dialog.Body';
 
 const Footer = ({
@@ -319,7 +320,7 @@ const Footer = ({
 }: {
   children: React.ReactNode;
   className?: string;
-}) => <div className={`${styles.footer} ${className}`}>{children}</div>;
+}) => <div className={['footer', className].filter(Boolean).join(' ')}>{children}</div>;
 Footer.displayName = 'Dialog.Footer';
 
 const CloseButton = ({
@@ -332,7 +333,7 @@ const CloseButton = ({
   return (
     <button
       type="button"
-      className={`${styles.close} ${className}`}
+      className={['close', className].filter(Boolean).join(' ')}
       onClick={context?.close}
       aria-label="Close dialog"
       {...props}
