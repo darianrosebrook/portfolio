@@ -4,7 +4,7 @@
  */
 'use client';
 import * as React from 'react';
-import styles from './Table.module.scss';
+import './Table.css';
 
 // Root Table Container Component
 export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -17,9 +17,10 @@ const TableRoot = React.forwardRef<HTMLDivElement, TableProps>(
     return (
       <div
         ref={ref}
+        data-ds-component="Table"
         className={[
-          styles.container,
-          responsive ? styles.responsive : '',
+          'container',
+          responsive ? 'responsive' : '',
           className,
         ]
           .filter(Boolean)
@@ -41,7 +42,7 @@ const TableElement = React.forwardRef<HTMLTableElement, TableElementProps>(
     return (
       <table
         ref={ref}
-        className={[styles.table, className].filter(Boolean).join(' ')}
+        className={['table', className].filter(Boolean).join(' ')}
         data-slot="table"
         {...rest}
       >
@@ -59,7 +60,7 @@ const TableHeader = React.forwardRef<HTMLTableSectionElement, TableHeaderProps>(
     return (
       <thead
         ref={ref}
-        className={[styles.header, className].filter(Boolean).join(' ')}
+        className={['header', className].filter(Boolean).join(' ')}
         data-slot="table-header"
         {...rest}
       >
@@ -77,7 +78,7 @@ const TableBody = React.forwardRef<HTMLTableSectionElement, TableBodyProps>(
     return (
       <tbody
         ref={ref}
-        className={[styles.body, className].filter(Boolean).join(' ')}
+        className={['body', className].filter(Boolean).join(' ')}
         data-slot="table-body"
         {...rest}
       >
@@ -95,7 +96,7 @@ const TableFooter = React.forwardRef<HTMLTableSectionElement, TableFooterProps>(
     return (
       <tfoot
         ref={ref}
-        className={[styles.footer, className].filter(Boolean).join(' ')}
+        className={['footer', className].filter(Boolean).join(' ')}
         data-slot="table-footer"
         {...rest}
       >
@@ -122,9 +123,9 @@ const TableRow = React.forwardRef<HTMLTableRowElement, TableRowProps>(
       <tr
         ref={ref}
         className={[
-          styles.row,
-          interactive ? styles.interactive : '',
-          selected ? styles.selected : '',
+          'row',
+          interactive ? 'interactive' : '',
+          selected ? 'selected' : '',
           className,
         ]
           .filter(Boolean)
@@ -177,7 +178,7 @@ const TableHead = React.forwardRef<HTMLTableCellElement, TableHeadProps>(
     return (
       <th
         ref={ref}
-        className={[styles.head, sortable ? styles.sortable : '', className]
+        className={['head', sortable ? 'sortable' : '', className]
           .filter(Boolean)
           .join(' ')}
         data-slot="table-head"
@@ -198,10 +199,10 @@ const TableHead = React.forwardRef<HTMLTableCellElement, TableHeadProps>(
         }
         {...rest}
       >
-        <div className={styles.headContent}>
+        <div className="headContent">
           {children}
           {sortable && (
-            <span className={styles.sortIcon} aria-hidden="true">
+            <span className="sortIcon" aria-hidden="true">
               {sortDirection === 'asc'
                 ? '↑'
                 : sortDirection === 'desc'
@@ -226,7 +227,7 @@ const TableCell = React.forwardRef<HTMLTableCellElement, TableCellProps>(
     return (
       <td
         ref={ref}
-        className={[styles.cell, truncate ? styles.truncate : '', className]
+        className={['cell', truncate ? 'truncate' : '', className]
           .filter(Boolean)
           .join(' ')}
         data-slot="table-cell"
@@ -248,7 +249,7 @@ const TableCaption = React.forwardRef<
   return (
     <caption
       ref={ref}
-      className={[styles.caption, className].filter(Boolean).join(' ')}
+      className={['caption', className].filter(Boolean).join(' ')}
       data-slot="table-caption"
       {...rest}
     >
