@@ -1,4 +1,4 @@
-.toolbar {
+[data-ds-component="ImageToolbar"] {
   display: flex;
   align-items: center;
   padding: var(--core-spacing-size-03);
