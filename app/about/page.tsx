@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Avatar from '@/ui/components/Avatar';
 import Button from '@/ui/components/Button';
+import Bio from '@/ui/modules/Bio';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
@@ -122,55 +123,22 @@ export default function AboutPage() {
             I&apos;m Darian Rosebrook, a Staff Design Technologist with a
             background that bridges branding, UX, and system-level design
             engineering across some of the world&apos;s largest product
-            ecosystems. My work focuses on improving the workflows between
-            design and code—developing tooling, scalable design systems, and
-            AI-augmented processes that enhance quality, accessibility, and
-            consistency.
+            ecosystems. I&apos;ve led work at Microsoft, Salesforce, Nike, eBay,
+            Verizon, Venmo, and Qualtrics — usually on the parts of design
+            systems that don&apos;t ship as components.
           </p>
-          <p>
-            I&apos;ve led high-impact initiatives at companies like Microsoft,
-            Salesforce, Nike, eBay, Verizon, Venmo, and now Qualtrics, where
-            I&apos;m defining how technology, design, and automation converge to
-            elevate product development. I care deeply about aligning internal
-            values with external systems, and my current focus is on building
-            intelligent, inclusive systems that empower cross-functional teams
-            to do their best work.
-          </p>
-          <p>
-            As a seasoned Product Designer with a strong background in UX
-            engineering, I specialize in crafting robust design systems and
-            developing custom design tooling for Figma that revolutionizes
-            product development workflows. Based in Seattle, Washington, I
-            thrive at the intersection of design and development, where I
-            dedicate my efforts to streamlining collaboration and optimizing
-            product development cycles.
-          </p>
-          <p>
-            With a unique blend of design and development expertise, I excel at
-            bridging the gap between design and engineering teams, enhancing the
-            user experience for both when interacting with design systems. By
-            creating custom tooling that integrates Figma with GitHub, I enable
-            seamless workflows that drive innovation and foster a collaborative
-            environment, ultimately accelerating the delivery of exceptional
-            designs to customers.
-          </p>
+          <Bio />
         </div>
         <div className="content">
           <h2>Experience</h2>
           <p>
-            Throughout my career, I have successfully led cross-functional teams
-            through highly technical projects, collaborating with project
-            managers and development leads to break down complex initiatives
-            into manageable arcs of work. By effectively managing and delegating
-            resources, I ensure the smooth execution of projects, delivering
-            results that exceed expectations.
-          </p>
-          <p>
-            Over the last ten years, I have spent my career building up skills
-            at creating, maintaining, and scaling design systems across
-            different sized initiatives. For large and small brands alike,
-            throughout my career, I have successfully led cross-functional teams
-            through highly technical projects.
+            Across ten years of design system work, I&apos;ve led
+            cross-functional initiatives that span design, engineering, product,
+            accessibility, content, and research. The pattern is usually the
+            same: identify where the system is losing precision, build the
+            tooling or standards that re-encode that precision into the
+            team&apos;s daily workflow, and leave the org with a clearer
+            operating model than it had before.
           </p>
         </div>
         <div className="content">
@@ -258,7 +226,7 @@ export default function AboutPage() {
         <div className="content">
           <p>
             <a
-              href="https://drive.google.com/file/d/1h2QH7K7153QGbW59CHWWt07Dzhgzst3a/view?usp=sharingue"
+              href="https://drive.google.com/file/d/1h2QH7K7153QGbW59CHWWt07Dzhgzst3a/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
             >

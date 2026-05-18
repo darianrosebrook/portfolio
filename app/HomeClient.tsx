@@ -10,6 +10,7 @@ import Avatar from '@/ui/components/Avatar';
 import Button from '@/ui/components/Button';
 import Status from '@/ui/components/Status';
 import LogoMaruqee from '@/ui/modules/LogoMarquee';
+import { Bio, LeveragePillars } from '@/ui/modules/Bio';
 import Image from 'next/image';
 import BlueprintsWrapper from './BlueprintsWrapper';
 import styles from './page.module.css';
@@ -108,7 +109,7 @@ export default function HomeClient({ ldJson }: HomeClientProps) {
             className="gooey"
             style={{ opacity: prefersReducedMotion ? 1 : 0 }}
           >
-            <Status status="error">Building AI-ready design systems</Status>
+            <Status status="error">AI-ready design systems</Status>
           </div>
           <h1 className="gooey">
             <span>
@@ -126,8 +127,9 @@ export default function HomeClient({ ldJson }: HomeClientProps) {
               className={styles.secondLine}
               style={{ opacity: prefersReducedMotion ? 1 : 0 }}
             >
-              Connecting Design → Code through Better Design Systems &amp;
-              Tooling
+              Building the tooling, standards, and design-to-code workflows that
+              make product systems inspectable, governable, and easier for teams
+              — and AI tools — to work with safely.
             </span>
           </h1>
         </div>
@@ -195,49 +197,24 @@ export default function HomeClient({ ldJson }: HomeClientProps) {
               </p>
             </div>
           </div>
-          <p>
-            As a seasoned Product Designer with a strong background in UX
-            engineering, I specialize in crafting robust design systems and
-            developing custom design tooling for Figma that revolutionizes
-            product development workflows. Based in Seattle, Washington, I
-            thrive at the intersection of design and development, where I
-            dedicate my efforts to streamlining collaboration and optimizing
-            product development cycles.
-          </p>
-
-          <p>
-            With a unique blend of design and development expertise, I excel at
-            bridging the gap between design and engineering teams, enhancing the
-            user experience for both when interacting with design systems. By
-            creating custom tooling that integrates Figma with GitHub, I enable
-            seamless workflows that drive innovation and foster a collaborative
-            environment, ultimately accelerating the delivery of exceptional
-            designs to customers.
-          </p>
-
-          <p>
-            Throughout my career, I have successfully led cross-functional teams
-            through highly technical projects, collaborating with project
-            managers and development leads to break down complex initiatives
-            into manageable arcs of work. By effectively managing and delegating
-            resources, I ensure the smooth execution of projects, delivering
-            results that exceed expectations.
-          </p>
-          <p>
-            If you&apos;re passionate about design and want to discuss how we
-            can collaborate to create innovative solutions, feel free to reach
-            out! I&apos;m always eager to connect with like-minded professionals
-            and explore new opportunities in UX and Product Design.
-          </p>
+          <Bio />
           <p>
             <a
-              href="https://drive.google.com/file/d/1h2QH7K7153QGbW59CHWWt07Dzhgzst3a/view?usp=sharingue"
+              href="https://drive.google.com/file/d/1h2QH7K7153QGbW59CHWWt07Dzhgzst3a/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
             >
               My resume
             </a>
           </p>
+        </AnimatedSection>
+        <AnimatedSection
+          as="div"
+          className="content"
+          variant="fade-up"
+          triggerOnScroll={true}
+        >
+          <LeveragePillars />
         </AnimatedSection>
         <AnimatedSection
           as="div"
@@ -347,31 +324,18 @@ export default function HomeClient({ ldJson }: HomeClientProps) {
         <div className="content">
           <h3>Where I&#8217;ve been</h3>
           <p className="body-01">
-            Over the last ten years, I have spent my career building up skills
-            at creating, maintaining, and scaling design systems across
-            different sized initiatives.
+            Over the last ten years I&apos;ve built, maintained, and scaled
+            design systems across organizations of very different shapes — from
+            enterprise platforms with thousands of contributors to small product
+            teams trying to make their first system stick.
           </p>
           <p className="body-01">
-            For large and small brands alike, throughout my career, I have
-            successfully led cross-functional teams through highly technical
-            projects, collaborating with project managers and development leads
-            to break down complex initiatives into manageable arcs of work. By
-            effectively managing and delegating resources, I ensure the smooth
-            execution of projects, delivering results that exceed expectations.
+            The throughline: I make things that make it easier for people to
+            make things. Tools, standards, pipelines, and the operating surfaces
+            that let design and engineering stay aligned without relying on
+            heroics.
           </p>
-          <p className="body-01">
-            I am passionate about making things that make it easier for people
-            to make things, and love a challenge when it comes to interesting
-            problems to solve for.
-          </p>
-          <p className="body-01">
-            You can see some of the places where I have worked to make their
-            brand excel through my work with design systems
-          </p>
-          <p>
-            p.s. A lot of this site is still a work in progress, as is the folly
-            of all portfolio sites. haha
-          </p>
+          <p className="body-01">A few of the places that work has lived:</p>
           <Button href="/work" as="a" variant="secondary">
             View my work &#8594;
           </Button>
