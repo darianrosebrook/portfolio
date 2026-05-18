@@ -1,0 +1,50 @@
+id: FIX-A11Y-DECOR-001
+type: fix
+title: Hide decorative marquee/SVG text from a11y tree
+status: active
+risk_tier: 3
+mode: fix
+created_at: '2026-05-18T16:33:46.609Z'
+updated_at: '2026-05-18T16:33:46.610Z'
+blast_radius:
+  modules:
+    - ui/modules/Footer
+    - app/blueprints
+    - app/HomeClient
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - ui/modules/Footer/Marquee.tsx
+    - app/blueprints/svgs.tsx
+    - app/HomeClient.tsx
+    - scripts/setup-worktree.sh
+  out:
+    - node_modules/
+    - dist/
+    - build/
+    - .next/
+invariants:
+  - Visible footer marquee animation and Blueprints Table ornament remain visually unchanged
+  - No new dependencies introduced
+acceptance:
+  - id: A1
+    given: A screen reader or text scraper traverses the page DOM
+    when: It reaches the Footer Elsewhere social links
+    then: It announces each link title once (e.g. "Resume"), not 21 times
+  - id: A2
+    given: A screen reader or text scraper traverses the /blueprints page
+    when: It reaches the Authoring Blueprints hero ornament
+    then: The decorative Table SVG's text glyphs ("❖ Property", "¶ Description", "δ Type", "◇ Head", etc.) are not surfaced as flat text
+  - id: A3
+    given: The /about or home skills list is rendered
+    when: A reader reaches the skills enumeration
+    then: The list reads "Conducting User Research", not "Conducitng User Research"
+non_functional:
+  a11y:
+    - WCAG 2.1 SC 1.3.1 Info and Relationships (decorative content not exposed as content)
+    - WCAG 2.1 SC 4.1.2 Name, Role, Value (link names are not polluted by decoration)
+  perf: {}
+  security: []
+contracts: []
+worktree: a11y-decoration-aria
