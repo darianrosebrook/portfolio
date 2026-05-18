@@ -1,6 +1,6 @@
 'use client';
 import { useRef, type CSSProperties } from 'react';
-import Styles from './LogoMarquee.module.scss';
+import './LogoMarquee.css';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { horizontalLoop } from '@/utils/helpers';
@@ -60,7 +60,7 @@ const LogoMarquee: React.FC = () => {
       if (!logoMarqueeRef.current) return;
 
       const boxElements = logoMarqueeRef.current.querySelectorAll(
-        `.${Styles.box}`
+        '.box'
       );
       const marqueeStyles = window.getComputedStyle(logoMarqueeRef.current);
 
@@ -83,15 +83,15 @@ const LogoMarquee: React.FC = () => {
   );
 
   return (
-    <div className={Styles.marqueeContainer}>
+    <div data-ds-component="LogoMarquee">
       <LogoSprite />
-      <div className={Styles.marquee} ref={logoMarqueeRef}>
+      <div className='marquee' ref={logoMarqueeRef}>
         {Array.from({ length: LOGO_REPEAT_COUNT }, (_, repeatIndex) =>
           LOGOS.map((logo) => (
-            <div className={Styles.box} key={`${repeatIndex}-${logo.id}`}>
+            <div className='box' key={`${repeatIndex}-${logo.id}`}>
               <svg
                 aria-hidden="true"
-                className={Styles.logo}
+                className='logo'
                 focusable="false"
                 style={
                   {
@@ -106,7 +106,7 @@ const LogoMarquee: React.FC = () => {
           ))
         )}
       </div>
-      <div className={Styles.cover}></div>
+      <div className='cover'></div>
     </div>
   );
 };
