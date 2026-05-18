@@ -12,7 +12,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import styles from './DocLayout.module.scss';
+import './DocLayout.css';
 
 export interface DocSection {
   id: string;
@@ -157,16 +157,16 @@ export function DocLayout({
   } = sandpackOptions;
 
   return (
-    <div className={styles.docLayout}>
-      <div className={styles.content} ref={contentRef}>
+    <div data-ds-component="DocLayout" className='docLayout'>
+      <div className='content' ref={contentRef}>
         {children}
       </div>
 
-      <div className={styles.codePanel} data-doc-codepanel>
-        <div className={styles.codePanelSticky} data-sticky>
-          <div className={styles.codeToolbar}>
+      <div className='codePanel' data-doc-codepanel>
+        <div className='codePanelSticky' data-sticky>
+          <div className='codeToolbar'>
             <div
-              className={styles.themeControls}
+              className='themeControls'
               role="radiogroup"
               aria-label="Preview theme"
             >
@@ -233,7 +233,7 @@ export function DocSection({ id, children, className = '' }: DocSectionProps) {
     <section
       data-section-id={id}
       data-highlighted={activeSection === id ? 'true' : 'false'}
-      className={`${styles.docSection} ${className}`}
+      className={`docSection ${className}`}
       id={id}
     >
       {children}
@@ -253,13 +253,13 @@ export function DocNavigation({
   onSectionClick,
 }: DocNavigationProps) {
   return (
-    <nav className={styles.docNavigation}>
+    <nav className='docNavigation'>
       <ul>
         {sections.map((section) => (
           <li key={section.id}>
             <button
-              className={`${styles.navItem} ${
-                activeSection === section.id ? styles.active : ''
+              className={`navItem ${
+                activeSection === section.id ? 'active' : ''
               }`}
               onClick={() => onSectionClick(section.id)}
               aria-current={activeSection === section.id ? 'true' : undefined}
