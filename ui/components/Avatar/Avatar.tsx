@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import styles from './Avatar.module.scss';
+import './Avatar.css';
 
 export interface AvatarProps extends React.HTMLAttributes<HTMLDivElement> {
   src?: string;
@@ -32,7 +32,8 @@ const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
     return (
       <div
         ref={ref}
-        className={`${styles.avatar} ${styles[size]} ${className}`}
+        data-ds-component="Avatar"
+        className={['avatar', size, className].filter(Boolean).join(' ')}
         data-slot="avatar"
         {...rest}
       >
@@ -44,7 +45,7 @@ const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
             height={dimensions.height}
             sizes={dimensions.sizes}
             priority={priority}
-            className={styles.avatar_image}
+            className="avatar_image"
             data-slot="avatar-image"
           />
         ) : (
