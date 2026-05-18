@@ -1,4 +1,4 @@
-.detailsNodeView {
+[data-ds-component="DetailsNodeView"] {
   margin: 16px 0;
   border: 2px solid transparent;
   border-radius: var(--core-shape-radius-medium);
@@ -9,15 +9,15 @@
   }
 }
 
-.detailsEditor {
+[data-ds-component="DetailsNodeView"] .detailsEditor {
   position: relative;
 }
 
-.summaryEditor {
+[data-ds-component="DetailsNodeView"] .summaryEditor {
   margin-bottom: 8px;
 }
 
-.summaryInput {
+[data-ds-component="DetailsNodeView"] .summaryInput {
   width: 100%;
   padding: 8px 12px;
   border: 1px solid var(--semantic-color-border-primary);
@@ -36,18 +36,18 @@
   }
 }
 
-.detailsContent {
+[data-ds-component="DetailsNodeView"] .detailsContent {
   border: 1px solid var(--semantic-color-border-primary);
   border-radius: var(--core-shape-radius-medium);
   overflow: hidden;
+}
 
-  // Inner classes come from the Details component itself; reach in with :global.
-  :global(.summary) {
-    background: var(--semantic-color-background-tertiary);
-    border-bottom: 1px solid var(--semantic-color-border-primary);
-  }
+/* Inner classes come from the Details component itself */
+[data-ds-component="DetailsNodeView"] .detailsContent .summary {
+  background: var(--semantic-color-background-tertiary);
+  border-bottom: 1px solid var(--semantic-color-border-primary);
+}
 
-  :global(.content) {
-    background: var(--semantic-color-background-primary);
-  }
+[data-ds-component="DetailsNodeView"] .detailsContent .content {
+  background: var(--semantic-color-background-primary);
 }
