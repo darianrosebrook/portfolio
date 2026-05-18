@@ -1,0 +1,58 @@
+id: FEAT-HOME-POSITIONING-001
+type: feature
+title: Home page positioning rewrite around operational infrastructure thesis
+status: active
+risk_tier: 3
+mode: feature
+created_at: '2026-05-18T17:08:17.522Z'
+updated_at: '2026-05-18T17:10:00.000Z'
+blast_radius:
+  modules:
+    - app/HomeClient
+    - app/about
+    - ui/modules/Bio
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - app/HomeClient.tsx
+    - app/about/page.tsx
+    - ui/modules/Bio/**
+  out:
+    - node_modules/
+    - dist/
+    - build/
+    - .next/
+invariants:
+  - The visible hero h1 still includes "Staff Design Technologist"
+  - The page still links to the resume PDF
+  - The accessible footer marquee fix from FIX-A11Y-DECOR-001 remains intact (do not touch Footer/Marquee)
+  - No new dependencies introduced
+acceptance:
+  - id: A1
+    given: A visitor lands on the home page
+    when: They read the hero
+    then: It states "AI-ready design systems" as the status badge AND defines what AI-ready means in the supporting line (explicit structure, inspectable, governable systems), not generic adjectives
+  - id: A2
+    given: The home and about pages both render the personal bio
+    when: A reader compares the two pages
+    then: The bio content is sourced from a single shared component (no duplicated paragraphs across HomeClient.tsx and about/page.tsx)
+  - id: A3
+    given: The home page renders below the bio
+    when: A reader reaches the "How I create leverage" section
+    then: Four labelled pillars are visible (system diagnosis, toolmaking, governance and standards, team enablement), each with a 1-line capability claim
+  - id: A4
+    given: The home page renders
+    when: A reader scrolls to the closing paragraph
+    then: There is no "work in progress, as is the folly of all portfolio sites" caveat
+  - id: A5
+    given: A reader clicks the "My resume" link
+    when: The browser opens the URL
+    then: The URL ends in "sharing", not "sharingue"
+non_functional:
+  a11y:
+    - All new copy passes the existing axe rules (no new violations introduced)
+  perf: {}
+  security: []
+contracts: []
+worktree: home-positioning
