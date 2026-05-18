@@ -1,7 +1,7 @@
 'use client';
 import * as React from 'react';
 import { useOTPContext } from '../OTPProvider';
-import styles from '../OTP.module.scss';
+import '../OTP.css';
 
 export interface OTPFieldProps extends Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
@@ -101,7 +101,7 @@ export const OTPField = React.forwardRef<HTMLInputElement, OTPFieldProps>(
             (ref as React.MutableRefObject<HTMLInputElement | null>).current =
               el;
         }}
-        className={[styles.field, className].filter(Boolean).join(' ')}
+        className={['field', className].filter(Boolean).join(' ')}
         data-slot="otp-field"
         value={mask && chars[index] ? '•' : chars[index] || ''}
         inputMode={inputMode}

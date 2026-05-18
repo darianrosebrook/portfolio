@@ -1,41 +1,48 @@
-@use './OTP.tokens.generated.scss' as otpTokens;
+@import "./Otp.tokens.css";
 
-.otp {
-  @include otpTokens.vars;
+/*
+ * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Scoped to [data-ds-component="Otp"] on the root element.
+ * Intentionally unlayered — see Button.css for the cascade rationale.
+ */
+[data-ds-component="Otp"] {
+  &.otp {
+    display: block;
+    padding: var(--ds-otp-size-padding-default);
+    background: var(--ds-otp-color-background-default);
+    border-radius: var(--ds-otp-size-radius-default);
+    box-shadow: var(--ds-otp-elevation-default)
+      var(--ds-otp-overlay-image-overlay);
+  }
 
-  display: block;
-  padding: var(--otp-size-padding-default);
-  background: var(--otp-color-background-default);
-  border-radius: var(--otp-size-radius-default);
-  box-shadow: var(--otp-elevation-default)
-    var(--otp-overlay-image-overlay);
-}
+  .group {
+    display: inline-flex;
+    gap: var(--ds-otp-size-padding-default);
+    align-items: center;
+  }
 
-.group {
-  display: inline-flex;
-  gap: var(--otp-size-padding-default);
-  align-items: center;
-}
+  .field {
+    background: var(--ds-otp-color-background-default);
+    border: 1px solid var(--ds-otp-color-border-default);
+    border-radius: var(--ds-otp-size-radius-default);
+    color: var(--ds-otp-color-foreground-primary);
+    text-align: center;
+    block-size: 2.75rem;
+    inline-size: 2.25rem;
 
-.field {
-  background: var(--otp-color-background-default);
-  border: 1px solid var(--otp-color-border-default);
-  border-radius: var(--otp-size-radius-default);
-  color: var(--otp-color-foreground-primary);
-  text-align: center;
-  block-size: 2.75rem;
-  inline-size: 2.25rem;
-}
-
-.field:focus-visible {
-  border-color: var(--otp-color-border-accent);
-  box-shadow: 0 0 0 3px
-    color-mix(in oklab, var(--otp-color-border-accent) 25%, transparent);
-  outline: none;
+    &:focus-visible {
+      border-color: var(--ds-otp-color-border-accent);
+      box-shadow: 0 0 0 3px
+        color-mix(in oklab, var(--ds-otp-color-border-accent) 25%, transparent);
+      outline: none;
+    }
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .otp {
-    transition: none;
+  [data-ds-component="Otp"] {
+    &.otp {
+      transition: none;
+    }
   }
 }
