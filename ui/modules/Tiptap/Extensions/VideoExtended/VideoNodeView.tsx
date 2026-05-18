@@ -104,17 +104,17 @@ const VideoNodeView: React.FC<VideoNodeViewProps> = ({
         </div>
       )}
 
-      <div className={styles.videoContainer}>
+      <div className='videoContainer'>
         {isLoading && (
-          <div className={styles.loading}>
-            <div className={styles.spinner}></div>
+          <div className='loading'>
+            <div className='spinner'></div>
             <p>Loading video...</p>
           </div>
         )}
 
         {error && (
-          <div className={styles.error}>
-            <div className={styles.icon}>⚠️</div>
+          <div className='error'>
+            <div className='icon'>⚠️</div>
             <p>{error}</p>
             <small>{src}</small>
           </div>
@@ -131,7 +131,7 @@ const VideoNodeView: React.FC<VideoNodeViewProps> = ({
           loop={loop}
           muted={muted}
           poster={poster}
-          className={styles.video}
+          className='video'
           preload="metadata"
           onError={() => setError('Failed to load video')}
           onLoadStart={() => setIsLoading(true)}
@@ -139,7 +139,7 @@ const VideoNodeView: React.FC<VideoNodeViewProps> = ({
         />
       </div>
 
-      {title && <div className={styles.caption}>{title}</div>}
+      {title && <div className='caption'>{title}</div>}
     </NodeViewWrapper>
   );
 };
