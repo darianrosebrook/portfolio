@@ -1,6 +1,6 @@
 'use client';
 import * as React from 'react';
-import styles from './Skeleton.module.scss';
+import './Skeleton.css';
 
 export interface SkeletonShapeProps {
   kind?: 'rect' | 'circle' | 'line';
@@ -31,8 +31,8 @@ export const SkeletonShape: React.FC<SkeletonShapeProps> = ({
   return (
     <span
       className={[
-        styles.shape,
-        styles[`kind-${kind}` as 'kind-rect'],
+        'shape',
+        `kind-${kind}`,
         className || '',
       ]
         .filter(Boolean)
