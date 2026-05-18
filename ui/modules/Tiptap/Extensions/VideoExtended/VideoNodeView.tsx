@@ -64,8 +64,8 @@ const VideoNodeView: React.FC<VideoNodeViewProps> = ({
   if (!src) {
     return (
       <NodeViewWrapper data-ds-component="VideoNodeView" className='empty'>
-        <div className={styles.placeholder}>
-          <div className={styles.icon}>🎥</div>
+        <div className='placeholder'>
+          <div className='icon'>🎥</div>
           <p>No video source provided</p>
         </div>
       </NodeViewWrapper>
@@ -74,28 +74,29 @@ const VideoNodeView: React.FC<VideoNodeViewProps> = ({
 
   return (
     <NodeViewWrapper
-      className={`${styles.videoWrapper} ${selected ? styles.selected : ''}`}
+      data-ds-component="VideoNodeView"
+      className={`${selected ? 'selected' : ''}`}
       data-align={align}
     >
       {selected && (
-        <div className={styles.toolbar}>
+        <div className='toolbar'>
           <button
             onClick={() => handleAlignChange('left')}
-            className={align === 'left' ? styles.active : ''}
+            className={align === 'left' ? 'active' : ''}
             title="Align left"
           >
             ←
           </button>
           <button
             onClick={() => handleAlignChange('center')}
-            className={align === 'center' ? styles.active : ''}
+            className={align === 'center' ? 'active' : ''}
             title="Align center"
           >
             ↔
           </button>
           <button
             onClick={() => handleAlignChange('right')}
-            className={align === 'right' ? styles.active : ''}
+            className={align === 'right' ? 'active' : ''}
             title="Align right"
           >
             →
