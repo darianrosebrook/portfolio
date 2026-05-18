@@ -5,7 +5,7 @@
 'use client';
 import React, { forwardRef } from 'react';
 import { ControlSize, Intent } from '@/types/ui';
-import styles from './Progress.module.scss';
+import './Progress.css';
 
 export type ProgressVariant = 'linear' | 'circular';
 
@@ -67,11 +67,11 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>(
     const percentage = isIndeterminate ? 0 : (normalizedValue / max) * 100;
 
     const progressClassName = [
-      styles.progress,
-      styles[variant],
-      styles[size],
-      styles[intent],
-      isIndeterminate && styles.indeterminate,
+      'progress',
+      variant,
+      size,
+      intent,
+      isIndeterminate && 'indeterminate',
       className,
     ]
       .filter(Boolean)
@@ -101,13 +101,14 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>(
       return (
         <div
           ref={ref}
+          data-ds-component="Progress"
           className={progressClassName}
           {...ariaProps}
           {...rest}
           data-slot="progress"
         >
           <svg
-            className={styles.circle}
+            className="circle"
             width="40"
             height="40"
             viewBox="0 0 40 40"
@@ -115,7 +116,7 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>(
           >
             {/* Background circle */}
             <circle
-              className={styles.circleBackground}
+              className="circleBackground"
               cx="20"
               cy="20"
               r={radius}
@@ -124,7 +125,7 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>(
             />
             {/* Progress circle */}
             <circle
-              className={styles.circleForeground}
+              className="circleForeground"
               cx="20"
               cy="20"
               r={radius}
@@ -138,7 +139,7 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>(
             />
           </svg>
           {showValue && !isIndeterminate && (
-            <span className={styles.value} data-slot="progress-value">
+            <span className="value" data-slot="progress-value">
               {formattedValue}
             </span>
           )}
@@ -150,14 +151,15 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>(
     return (
       <div
         ref={ref}
+        data-ds-component="Progress"
         className={progressClassName}
         {...ariaProps}
         {...rest}
         data-slot="progress"
       >
-        <div className={styles.track} data-slot="progress-track">
+        <div className="track" data-slot="progress-track">
           <div
-            className={styles.fill}
+            className="fill"
             style={{
               width: isIndeterminate ? undefined : `${percentage}%`,
             }}
@@ -165,7 +167,7 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>(
           />
         </div>
         {showValue && !isIndeterminate && (
-          <span className={styles.value} data-slot="progress-value">
+          <span className="value" data-slot="progress-value">
             {formattedValue}
           </span>
         )}
