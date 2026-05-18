@@ -1,6 +1,6 @@
 import { Editor, Extension, Range } from '@tiptap/core';
 import { PluginKey } from '@tiptap/pm/state';
-import Suggestion, { SuggestionOptions } from '@tiptap/suggestion';
+import Suggestion from '@tiptap/suggestion';
 
 type CommandAction = (editor: Editor) => boolean;
 
@@ -55,7 +55,10 @@ const positionPopup = (
   }
 
   if (left + popupWidth > viewportWidth - VIEWPORT_MARGIN) {
-    left = Math.max(VIEWPORT_MARGIN, viewportWidth - popupWidth - VIEWPORT_MARGIN);
+    left = Math.max(
+      VIEWPORT_MARGIN,
+      viewportWidth - popupWidth - VIEWPORT_MARGIN
+    );
   }
   if (left < VIEWPORT_MARGIN) left = VIEWPORT_MARGIN;
 
@@ -157,7 +160,8 @@ const renderItems = () => {
 
       const title = document.createElement('div');
       title.textContent = item.title;
-      title.style.cssText = 'font-weight: 600; font-size: 14px; line-height: 1.4;';
+      title.style.cssText =
+        'font-weight: 600; font-size: 14px; line-height: 1.4;';
       el.appendChild(title);
 
       if (item.subtitle) {
@@ -365,24 +369,21 @@ export const SlashCommand = Extension.create<SlashCommandOptions>({
   },
 
   addProseMirrorPlugins() {
-    type SlashSuggestion = SuggestionOptions<RenderItem> & {
-      command: (props: {
-        editor: Editor;
-        range: Range;
-        props: RenderItem;
-      }) => void;
-    };
-
     return [
-      Suggestion<RenderItem, SlashSuggestion>({
+      Suggestion<RenderItem>({
         editor: this.editor,
         pluginKey: slashCommandPluginKey,
         char: '/',
         startOfLine: false,
         allowSpaces: false,
+        // Suggestion fires this when an item is picked. The selected item
+        // already carries its own `.command` (set in `items` below) which
+        // does deleteRange + action — just delegate to it. Keeping the
+        // commit logic on the item means the renderer (which calls
+        // `item.command` on mousedown/Enter) and Suggestion's own pick
+        // path go through the same code.
         command: ({ editor, range, props }) => {
-          editor.chain().focus().deleteRange(range).run();
-          props.action(editor);
+          props.command({ editor, range });
         },
         items: ({ query, editor }) => {
           const all = this.options.items(editor);
