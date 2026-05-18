@@ -1,113 +1,119 @@
-@use './Walkthrough.tokens.generated.scss' as walkthroughTokens;
+@import "./Walkthrough.tokens.css";
 
-.content {
-  @include walkthroughTokens.vars;
+/*
+ * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Scoped to [data-ds-component="Walkthrough"] on the root element.
+ * Intentionally unlayered — see Button.css for the cascade rationale.
+ */
+[data-ds-component="Walkthrough"] {
+  &.content {
+    max-width: 28rem;
+    padding: var(--ds-walkthrough-surface-padding);
+    background: var(--ds-walkthrough-surface-bg);
+    border: 1px solid var(--ds-walkthrough-surface-border);
+    border-radius: var(--ds-walkthrough-surface-radius);
+    box-shadow: var(--ds-walkthrough-surface-shadow);
+  }
 
-  max-width: 28rem;
-  padding: var(--walkthrough-surface-padding);
-  background: var(--walkthrough-surface-bg);
-  border: 1px solid var(--walkthrough-surface-border);
-  border-radius: var(--walkthrough-surface-radius);
-  box-shadow: var(--walkthrough-surface-shadow);
-}
+  .title {
+    margin: 0;
+    color: var(--ds-walkthrough-title-color);
+    font-weight: var(--ds-walkthrough-title-font-weight);
+    font-size: var(--ds-walkthrough-title-font-size);
+  }
 
-.title {
-  margin: 0;
-  color: var(--walkthrough-title-color);
-  font-weight: var(--walkthrough-title-font-weight);
-  font-size: var(--walkthrough-title-font-size);
-}
+  .description {
+    margin-block: var(--ds-walkthrough-description-margin-top) 0;
+    color: var(--ds-walkthrough-description-color);
+    font-size: var(--ds-walkthrough-description-font-size);
+  }
 
-.description {
-  margin-block: var(--walkthrough-description-margin-top) 0;
-  color: var(--walkthrough-description-color);
-  font-size: var(--walkthrough-description-font-size);
-}
+  .controls {
+    display: flex;
+    gap: var(--ds-walkthrough-controls-gap);
+    justify-content: flex-end;
+    margin-block-start: var(--ds-walkthrough-controls-margin-top);
+  }
 
-.controls {
-  display: flex;
-  gap: var(--walkthrough-controls-gap);
-  justify-content: flex-end;
-  margin-block-start: var(--walkthrough-controls-margin-top);
-}
+  .skip,
+  .prev {
+    padding: var(--ds-walkthrough-button-secondary-padding-y)
+      var(--ds-walkthrough-button-secondary-padding-x);
+    background: var(--ds-walkthrough-button-secondary-bg);
+    border: 1px solid var(--ds-walkthrough-button-secondary-border);
+    border-radius: var(--ds-walkthrough-button-secondary-radius);
+    color: var(--ds-walkthrough-button-secondary-color);
+    font-size: inherit;
+    font-family: inherit;
+    transition: opacity 0.2s ease;
+    cursor: pointer;
 
-.skip,
-.prev {
-  padding: var(--walkthrough-button-secondary-padding-y)
-    var(--walkthrough-button-secondary-padding-x);
-  background: var(--walkthrough-button-secondary-bg);
-  border: 1px solid var(--walkthrough-button-secondary-border);
-  border-radius: var(--walkthrough-button-secondary-radius);
-  color: var(--walkthrough-button-secondary-color);
-  font-size: inherit;
-  font-family: inherit;
-  transition: opacity 0.2s ease;
-  cursor: pointer;
-}
+    &:hover {
+      opacity: 0.8;
+    }
+  }
 
-.skip:hover,
-.prev:hover {
-  opacity: 0.8;
-}
+  .prev:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 
-.prev:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
+  .next {
+    padding: var(--ds-walkthrough-button-primary-padding-y)
+      var(--ds-walkthrough-button-primary-padding-x);
+    background: var(--ds-walkthrough-button-primary-bg);
+    border: none;
+    border-radius: var(--ds-walkthrough-button-primary-radius);
+    color: var(--ds-walkthrough-button-primary-color);
+    font-weight: 500;
+    font-size: inherit;
+    font-family: inherit;
+    transition: opacity 0.2s ease;
+    cursor: pointer;
 
-.next {
-  padding: var(--walkthrough-button-primary-padding-y)
-    var(--walkthrough-button-primary-padding-x);
-  background: var(--walkthrough-button-primary-bg);
-  border: none;
-  border-radius: var(--walkthrough-button-primary-radius);
-  color: var(--walkthrough-button-primary-color);
-  font-weight: 500;
-  font-size: inherit;
-  font-family: inherit;
-  transition: opacity 0.2s ease;
-  cursor: pointer;
-}
+    &:hover {
+      opacity: 0.9;
+    }
+  }
 
-.next:hover {
-  opacity: 0.9;
-}
+  .dots {
+    display: inline-flex;
+    gap: var(--ds-walkthrough-dots-gap);
+    justify-content: center;
+    margin-block-end: var(--ds-walkthrough-controls-margin-top);
+  }
 
-.dots {
-  display: inline-flex;
-  gap: var(--walkthrough-dots-gap);
-  justify-content: center;
-  margin-block-end: var(--walkthrough-controls-margin-top);
-}
+  .dot,
+  .dotActive {
+    display: inline-block;
+    width: var(--ds-walkthrough-dots-size);
+    height: var(--ds-walkthrough-dots-size);
+    background: var(--ds-walkthrough-dots-idle);
+    border-radius: 999px;
+    transition: background-color 0.2s ease;
+  }
 
-.dot,
-.dotActive {
-  display: inline-block;
-  width: var(--walkthrough-dots-size);
-  height: var(--walkthrough-dots-size);
-  background: var(--walkthrough-dots-idle);
-  border-radius: 999px;
-  transition: background-color 0.2s ease;
-}
+  .dotActive {
+    background: var(--ds-walkthrough-dots-active);
+  }
 
-.dotActive {
-  background: var(--walkthrough-dots-active);
-}
-
-.counter {
-  color: var(--walkthrough-description-color);
-  font-size: var(--walkthrough-description-font-size);
-  text-align: center;
-  font-variant-numeric: tabular-nums;
-  margin-block-end: var(--walkthrough-controls-margin-top);
+  .counter {
+    color: var(--ds-walkthrough-description-color);
+    font-size: var(--ds-walkthrough-description-font-size);
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+    margin-block-end: var(--ds-walkthrough-controls-margin-top);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .dot,
-  .dotActive,
-  .skip,
-  .prev,
-  .next {
-    transition: none;
+  [data-ds-component="Walkthrough"] {
+    .dot,
+    .dotActive,
+    .skip,
+    .prev,
+    .next {
+      transition: none;
+    }
   }
 }
