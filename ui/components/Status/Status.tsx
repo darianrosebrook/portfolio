@@ -10,7 +10,7 @@
  */
 'use client';
 import React from 'react';
-import Styles from './Status.module.scss';
+import './Status.css';
 import { Intent, StatusIntent, normalizeStatusIntent } from '@/types';
 
 type StatusProps = React.HTMLAttributes<HTMLDivElement> & {
@@ -24,8 +24,9 @@ const Status = React.forwardRef<HTMLDivElement, StatusProps>(
     return (
       <div
         ref={ref}
+        data-ds-component="Status"
         data-slot="status"
-        className={`${Styles.status} ${Styles[intent]} ${className}`}
+        className={`status ${intent} ${className}`}
         {...rest}
       >
         <svg
