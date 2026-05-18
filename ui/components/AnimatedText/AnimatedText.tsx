@@ -10,7 +10,7 @@ import {
   EASING_PRESETS,
   ANIMATION_DURATIONS,
 } from '@/utils/animation';
-import styles from './AnimatedText.module.scss';
+import './AnimatedText.css';
 
 // Register ScrollTrigger plugin
 if (typeof window !== 'undefined') {
@@ -178,7 +178,8 @@ export const AnimatedText = React.forwardRef<HTMLElement, AnimatedTextProps>(
       Component,
       {
         ref: setRefs,
-        className: [styles.animatedText, className].filter(Boolean).join(' '),
+        'data-ds-component': 'AnimatedText',
+        className: ['animatedText', className].filter(Boolean).join(' '),
       },
       words.map((word, index) => (
         <span
@@ -186,7 +187,7 @@ export const AnimatedText = React.forwardRef<HTMLElement, AnimatedTextProps>(
           ref={(el) => {
             if (el) wordsRef.current[index] = el;
           }}
-          className={styles.word}
+          className='word'
           style={{
             // Set initial state for SSR/hydration
             opacity: prefersReducedMotion ? 1 : 0,

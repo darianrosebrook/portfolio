@@ -1,11 +1,11 @@
-.animatedText {
+[data-ds-component="AnimatedText"] {
   --animated-text-word-gap: var(--animated-text-word-gap);
   display: flex;
   flex-wrap: wrap;
   gap: var(--animated-text-word-gap);
-}
 
-.word {
-  display: inline-block;
-  will-change: transform, opacity, filter;
+  .word {
+    display: inline-block;
+    will-change: transform, opacity, filter;
+  }
 }
