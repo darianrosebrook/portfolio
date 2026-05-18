@@ -117,6 +117,22 @@ export async function PUT(
       .eq('author', user.id)
       .single<ArticleWorkingFields>();
 
+    // PGRST116 = "no rows" from .single(). Treat as not-found with a clean
+    // message rather than surfacing the raw PostgREST error text to clients.
+    if (existingError?.code === 'PGRST116') {
+      return new NextResponse(
+        JSON.stringify({
+          error:
+            'Article not found. Save a draft before publishing, or check that the slug exists.',
+        }),
+        {
+          status: 404,
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
+    }
+
+    // Any other PostgREST error is a server problem, not a missing row.
     if (
       existingError &&
       (existingError.message ||
@@ -127,20 +143,17 @@ export async function PUT(
         'Article publish fetch error:',
         JSON.stringify(existingError, null, 2)
       );
-      return new NextResponse(
-        JSON.stringify({
-          error: existingError.message || 'Database error',
-        }),
-        {
-          status: existingError.code === 'PGRST116' ? 404 : 500,
-          headers: { 'Content-Type': 'application/json' },
-        }
-      );
+      return new NextResponse(JSON.stringify({ error: 'Database error' }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' },
+      });
     }
 
     if (!existing) {
       return new NextResponse(
-        JSON.stringify({ error: 'Article not found or unauthorized' }),
+        JSON.stringify({
+          error: 'Article not found. Save a draft before publishing.',
+        }),
         {
           status: 404,
           headers: { 'Content-Type': 'application/json' },

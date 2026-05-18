@@ -1,0 +1,46 @@
+id: FIX-PUB-001
+type: fix
+title: Publish flow for new articles
+status: active
+risk_tier: 3
+mode: development
+created_at: '2026-05-18T07:26:36.335Z'
+updated_at: '2026-05-18T07:26:36.336Z'
+blast_radius:
+  modules:
+    - app/dashboard/articles/new
+    - app/api/articles/[slug]
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - app/dashboard/articles/new/**
+    - app/api/articles/[slug]/route.ts
+    - test/api/articles**
+    - test/components/NewArticle**
+  out:
+    - node_modules/
+    - dist/
+    - build/
+invariants:
+  - Publishing a brand-new article from the New Article page must not throw "no rows returned"
+  - The PUT publish endpoint returns a structured 404 when no row exists, not raw Postgrest error text
+acceptance:
+  - id: A1
+    given: A user opens the New Article page and types a headline and body
+    when: They click Publish before the 2s autosave debounce has fired
+    then: The client first persists the article (POST or PATCH), then publishes via PUT, and the user sees the success toast
+  - id: A2
+    given: A user changes the slug to a value that does not exist in the database
+    when: They click Publish
+    then: The server returns 404 with a clear "Article not found" message, and the toast shows that message (not the raw PostgREST error)
+  - id: A3
+    given: PUT publish handler receives a slug with no matching (slug, author) row
+    when: The existence check runs
+    then: It returns a 404 response rather than surfacing the PGRST116 error string
+non_functional:
+  a11y: []
+  perf: {}
+  security: []
+contracts: []
+worktree: fix-publish-flow

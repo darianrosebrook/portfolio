@@ -276,8 +276,29 @@ export default function NewArticlePage() {
       return;
     }
 
+    // The publish slug must look like a real one — refuse to publish a
+    // generated `draft-<timestamp>` slug, since that signals the user never
+    // gave the article a real URL. The metadata form normally enforces this,
+    // but Publish is the last line of defense.
+    const isPlaceholderSlug = /^draft-\d+$/.test(article.slug);
+    if (isPlaceholderSlug) {
+      enqueue({
+        title: 'Set a slug first',
+        description:
+          'Please set a permanent slug (lowercase letters, numbers, hyphens) before publishing.',
+      });
+      return;
+    }
+
     setIsManualSaving(true);
     try {
+      // Force a save before publishing. PUT's publish branch reads the
+      // existing row's working_* fields, so the row must exist. Without this,
+      // a user who clicks Publish before the 2s autosave debounce fires gets
+      // a 404 from PostgREST. manualSave() is idempotent — if there's nothing
+      // new to persist, it's a no-op against the server.
+      await manualSave();
+
       // Use PUT to publish (moves working draft to published)
       const response = await fetch(`/api/articles/${article.slug}`, {
         method: 'PUT',
@@ -322,7 +343,7 @@ export default function NewArticlePage() {
     } finally {
       setIsManualSaving(false);
     }
-  }, [article, enqueue]);
+  }, [article, enqueue, manualSave]);
 
   // Unpublish handler
   const handleUnpublish = useCallback(async () => {
