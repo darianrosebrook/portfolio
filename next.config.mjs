@@ -155,33 +155,42 @@ const nextConfig = {
   compress: true,
   // Power by header removal
   poweredByHeader: false,
-  // Cache headers for production
+  // Cache headers. The /_next/* entries are gated to production: in dev,
+  // Next.js manages those paths itself and an immutable Cache-Control here
+  // breaks HMR by causing the browser to serve stale assets. The /:all*
+  // image-extension and /fonts/:path* entries target user-owned paths and
+  // are safe in both modes.
   async headers() {
+    const isProd = process.env.NODE_ENV === 'production';
     return [
-      {
-        source: '/_next/static/:path*',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
+      ...(isProd
+        ? [
+            {
+              source: '/_next/static/:path*',
+              headers: [
+                {
+                  key: 'Cache-Control',
+                  value: 'public, max-age=31536000, immutable',
+                },
+              ],
+            },
+            {
+              source: '/_next/image',
+              headers: [
+                {
+                  key: 'Cache-Control',
+                  value: 'public, max-age=31536000, immutable',
+                },
+              ],
+            },
+          ]
+        : []),
       {
         source: '/:all*(svg|jpg|jpeg|png|webp|avif|gif|ico)',
         headers: [
           {
             key: 'Cache-Control',
             value: 'public, max-age=86400, stale-while-revalidate=604800',
-          },
-        ],
-      },
-      {
-        source: '/_next/image',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
           },
         ],
       },
