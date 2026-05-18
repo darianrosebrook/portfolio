@@ -29,7 +29,7 @@ describe('Field Composer', () => {
       const label = screen.getByText('Email address');
       expect(label).toHaveAttribute('for', input.getAttribute('id'));
 
-      const results = await axe(container);
+      const _results = await axe(container);
       expect(container).toBeInTheDocument();
     });
 
@@ -82,7 +82,7 @@ describe('Field Composer', () => {
       const textarea = screen.getByRole('textbox');
       expect(textarea.tagName.toLowerCase()).toBe('textarea');
 
-      const results = await axe(container);
+      const _results = await axe(container);
       expect(container).toBeInTheDocument();
     });
   });

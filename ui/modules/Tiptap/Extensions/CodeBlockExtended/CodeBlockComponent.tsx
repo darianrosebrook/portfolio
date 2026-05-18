@@ -23,7 +23,7 @@ const codeBlock: React.FC<CodeBlockProps> = ({
   updateAttributes,
   extension,
 }) => (
-  <NodeViewWrapper className='codeBlock' data-ds-component="CodeBlockComponent">
+  <NodeViewWrapper className="codeBlock" data-ds-component="CodeBlockComponent">
     <select
       contentEditable={false}
       defaultValue={defaultLanguage}

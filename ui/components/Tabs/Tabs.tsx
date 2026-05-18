@@ -17,7 +17,7 @@ export interface TabsProps extends React.HTMLAttributes<HTMLDivElement> {
   unmountInactive?: boolean;
 }
 
-const canViewTransition = () =>
+const _canViewTransition = () =>
   typeof document !== 'undefined' && 'startViewTransition' in document;
 
 const TabsComponent: React.FC<TabsProps> = ({
@@ -27,9 +27,9 @@ const TabsComponent: React.FC<TabsProps> = ({
   value,
   onValueChange,
   activationMode = 'auto',
-  orientation = 'horizontal',
-  dir = 'ltr',
-  loop = true,
+  orientation: _orientation = 'horizontal',
+  dir: _dir = 'ltr',
+  loop: _loop = true,
   unmountInactive = false,
   ...rest
 }) => {

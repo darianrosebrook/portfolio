@@ -109,10 +109,7 @@ export const Breadcrumbs = React.forwardRef<HTMLElement, BreadcrumbsProps>(
                     {c.label}
                   </BreadcrumbNavigationLink>
                 </li>
-                <li
-                  data-slot="breadcrumbs-separator"
-                  className="separator"
-                >
+                <li data-slot="breadcrumbs-separator" className="separator">
                   /
                 </li>
               </React.Fragment>
@@ -126,10 +123,7 @@ export const Breadcrumbs = React.forwardRef<HTMLElement, BreadcrumbsProps>(
                   {prev.label}
                 </BreadcrumbNavigationLink>
               </li>
-              <li
-                data-slot="breadcrumbs-separator"
-                className="separator"
-              >
+              <li data-slot="breadcrumbs-separator" className="separator">
                 /
               </li>
             </>

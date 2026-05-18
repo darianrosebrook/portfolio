@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 export type TabsValue = string;
 export type TabsActivationMode = 'manual' | 'auto';
 

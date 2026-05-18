@@ -37,7 +37,7 @@
 import * as React from 'react';
 import { ToastProvider } from './ToastProvider';
 import { ToastViewport, ToastViewportProps } from './ToastViewport';
-import { ToastItem, ToastItemProps } from './ToastItem';
+import { ToastItem } from './ToastItem';
 import { ToastTitle } from './slots/ToastTitle';
 import { ToastDescription } from './slots/ToastDescription';
 import { ToastAction } from './slots/ToastAction';

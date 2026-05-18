@@ -135,12 +135,12 @@ export function TokenPanel({
   }, [providedTokens, targetWindow, filter, limit, extractTokensFromElement]);
 
   const copyToClipboard = React.useCallback(
-    async (tokenName: string, value: string) => {
+    async (tokenName: string, _value: string) => {
       try {
         await navigator.clipboard.writeText(`var(${tokenName})`);
         setCopiedToken(tokenName);
         setTimeout(() => setCopiedToken(null), 2000);
-      } catch (error) {
+      } catch {
         // Fallback for browsers without clipboard API
         const textArea = document.createElement('textarea');
         textArea.value = `var(${tokenName})`;

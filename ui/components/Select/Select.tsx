@@ -8,7 +8,7 @@
  * After: Provider pattern with context orchestration and slots
  */
 'use client';
-import React, { useCallback, useRef, useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useSelectContext } from './SelectProvider';
 import { ControlSize } from '@/types/ui';
 import { setRef } from '@/utils/refs';
@@ -55,13 +55,13 @@ export const SelectTrigger = React.forwardRef<
   const {
     isOpen,
     selectedOptions,
-    selectedOption,
     isEmpty,
     toggle,
     clearSelection,
     id,
     ariaAttributes,
     triggerRef,
+    disabled,
   } = useSelectContext();
 
   // Combine refs
@@ -117,6 +117,7 @@ export const SelectTrigger = React.forwardRef<
     <button
       ref={combinedRef}
       type="button"
+      role="combobox"
       data-slot="select-trigger"
       className={`trigger ${sizeClass} ${className}`}
       onClick={toggle}
@@ -124,12 +125,14 @@ export const SelectTrigger = React.forwardRef<
       onBlur={onBlur}
       data-state={isOpen ? 'open' : 'closed'}
       data-loading={loading || undefined}
+      disabled={disabled}
+      aria-haspopup="listbox"
+      aria-expanded={isOpen}
+      aria-controls={`${id}-listbox`}
       {...ariaAttributes}
       {...ariaProps}
     >
-      <span className="text">
-        {loading ? 'Loading...' : displayText}
-      </span>
+      <span className="text">{loading ? 'Loading...' : displayText}</span>
 
       <div className="icons">
         {clearable && !isEmpty && !loading && (
@@ -198,7 +201,7 @@ export const SelectContent = React.forwardRef<
     { children, className = '', maxHeight = '200px', position = 'bottom' },
     ref
   ) => {
-    const { isOpen, close, listboxRef } = useSelectContext();
+    const { isOpen, close, id, listboxRef } = useSelectContext();
 
     // Combine refs
     const combinedRef = useCallback(
@@ -253,6 +256,7 @@ export const SelectContent = React.forwardRef<
         data-position={position}
         style={{ maxHeight }}
         role="listbox"
+        id={`${id}-listbox`}
       >
         {children}
       </div>
@@ -275,10 +279,7 @@ export const SelectSearch: React.FC<SelectSearchProps> = ({
   const { searchTerm, setSearchTerm } = useSelectContext();
 
   return (
-    <div
-      data-slot="select-search"
-      className={`searchContainer ${className}`}
-    >
+    <div data-slot="select-search" className={`searchContainer ${className}`}>
       <input
         type="text"
         className="search"
@@ -327,16 +328,11 @@ export const SelectOptions: React.FC<SelectOptionsProps> = ({
   );
 
   if (filteredOptions.length === 0) {
-    return (
-      <div className={`emptyState ${className}`}>{emptyState}</div>
-    );
+    return <div className={`emptyState ${className}`}>{emptyState}</div>;
   }
 
   return (
-    <div
-      data-slot="select-options"
-      className={`options ${className}`}
-    >
+    <div data-slot="select-options" className={`options ${className}`}>
       {filteredOptions.map((option, index) => {
         const isSelected = selectedOptions.some(
           (selected) => selected.id === option.id
@@ -350,8 +346,15 @@ export const SelectOptions: React.FC<SelectOptionsProps> = ({
             className={`option ${isSelected ? 'selected' : ''} ${isActive ? 'active' : ''}`}
             role="option"
             aria-selected={isSelected}
+            tabIndex={-1}
             data-disabled={option.disabled || undefined}
             onMouseEnter={() => handleMouseEnter(index)}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                if (!option.disabled) handleClick(option);
+              }
+            }}
             onClick={() => !option.disabled && handleClick(option)}
           >
             <span className="text">{option.title}</span>
@@ -382,18 +385,22 @@ export const SelectOptions: React.FC<SelectOptionsProps> = ({
 SelectOptions.displayName = 'Select.Options';
 
 // Main Select component (for backward compatibility)
-export interface SelectProps {
+export interface SelectProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
-  className?: string;
 }
 
-export const Select: React.FC<SelectProps> = ({ children, className = '' }) => {
+export const Select: React.FC<SelectProps> = ({
+  children,
+  className = '',
+  ...rest
+}) => {
   return (
     <div
       data-ds-component="Select"
       data-slot="select"
       className={`root ${className}`}
       data-select-root
+      {...rest}
     >
       {children}
     </div>

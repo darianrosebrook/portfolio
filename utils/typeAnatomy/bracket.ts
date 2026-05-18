@@ -24,10 +24,10 @@ export function hasBracket(g: Glyph, m: Metrics): boolean {
   if (!hasSerif(g, m)) return false;
 
   const gs = shapeForV2(g);
-  const overshoot = getOvershoot(g);
+  const _overshoot = getOvershoot(g);
   const bboxW = g.bbox.maxX - g.bbox.minX;
-  const bboxH = g.bbox.maxY - g.bbox.minY;
-  const EPS = FeatureDetectionConfig.global.defaultEps;
+  const _bboxH = g.bbox.maxY - g.bbox.minY;
+  const _EPS = FeatureDetectionConfig.global.defaultEps;
   const bands = 4;
 
   // Bracket is typically near edges where serifs connect to stems

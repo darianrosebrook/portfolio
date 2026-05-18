@@ -386,12 +386,6 @@ const PROBES: Probe[] = [
   },
 ];
 
-interface VitestTaskResult {
-  name: string;
-  result?: { state: 'pass' | 'fail' };
-  tasks?: VitestTaskResult[];
-}
-
 interface VitestJsonReport {
   success?: boolean;
   numTotalTests?: number;

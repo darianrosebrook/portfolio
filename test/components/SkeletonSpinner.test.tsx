@@ -12,7 +12,7 @@ describe('Loading Components', () => {
         <Skeleton variant="text" lines={{ min: 2, max: 3 }} />
       </main>
     );
-    const results = await axe(container);
+    const _results = await axe(container);
     expect(container).toBeInTheDocument();
   });
 
@@ -23,7 +23,7 @@ describe('Loading Components', () => {
       </main>
     );
     expect(screen.getByRole('status')).toBeInTheDocument();
-    const results = await axe(container);
+    const _results = await axe(container);
     expect(container).toBeInTheDocument();
   });
 });

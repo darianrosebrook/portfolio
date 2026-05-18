@@ -83,47 +83,41 @@ const PerformanceDashboard: React.FC = () => {
 
   return (
     <div data-ds-component="PerformanceDashboard">
-      <div className='header'>
+      <div className="header">
         <h3>Performance Monitor</h3>
         <button
           onClick={() => {
             localStorage.setItem('showPerformanceDashboard', 'false');
             setIsVisible(false);
           }}
-          className='closeButton'
+          className="closeButton"
         >
           ×
         </button>
       </div>
-      <div className='metrics'>
+      <div className="metrics">
         {performanceData.fcp && (
-          <div className='metric'>
-            <span className='label'>FCP:</span>
-            <span className='value'>
-              {performanceData.fcp.toFixed(0)}ms
-            </span>
+          <div className="metric">
+            <span className="label">FCP:</span>
+            <span className="value">{performanceData.fcp.toFixed(0)}ms</span>
           </div>
         )}
         {performanceData.lcp && (
-          <div className='metric'>
-            <span className='label'>LCP:</span>
-            <span className='value'>
-              {performanceData.lcp.toFixed(0)}ms
-            </span>
+          <div className="metric">
+            <span className="label">LCP:</span>
+            <span className="value">{performanceData.lcp.toFixed(0)}ms</span>
           </div>
         )}
         {performanceData.cls !== undefined && (
-          <div className='metric'>
-            <span className='label'>CLS:</span>
-            <span className='value'>
-              {performanceData.cls.toFixed(3)}
-            </span>
+          <div className="metric">
+            <span className="label">CLS:</span>
+            <span className="value">{performanceData.cls.toFixed(3)}</span>
           </div>
         )}
         {performanceData.cacheHitRate !== undefined && (
-          <div className='metric'>
-            <span className='label'>Cache:</span>
-            <span className='value'>
+          <div className="metric">
+            <span className="label">Cache:</span>
+            <span className="value">
               {(performanceData.cacheHitRate * 100).toFixed(1)}%
             </span>
           </div>

@@ -15,6 +15,7 @@ export const Walkthrough: React.FC<WalkthroughUIProps> = ({
   className,
   children,
   onMissingTarget = 'skip',
+  ...rest
 }) => {
   const { steps, index, anchorEl, open, cancel, closeOnOutsideClick } =
     useWalkthrough();
@@ -81,6 +82,7 @@ export const Walkthrough: React.FC<WalkthroughUIProps> = ({
             className={['content', className].filter(Boolean).join(' ')}
             tabIndex={-1}
             onKeyDown={handleKeyDown}
+            {...rest}
           >
             {children ?? (
               <>
@@ -128,6 +130,7 @@ export const Walkthrough: React.FC<WalkthroughUIProps> = ({
           data-slot="walkthrough"
           tabIndex={-1}
           onKeyDown={handleKeyDown}
+          {...rest}
         >
           {children ?? (
             <>

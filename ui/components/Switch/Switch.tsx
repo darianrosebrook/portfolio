@@ -69,7 +69,11 @@ export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
       .join(' ');
 
     return (
-      <span data-ds-component="Switch" className={switchClassName} data-slot="switch">
+      <span
+        data-ds-component="Switch"
+        className={switchClassName}
+        data-slot="switch"
+      >
         <input
           ref={ref}
           type="checkbox"

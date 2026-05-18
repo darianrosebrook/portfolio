@@ -9,7 +9,7 @@ export interface TextInputAdapterProps {
 }
 
 export function TextInputAdapter({
-  placeholder,
+  placeholder: _placeholder,
   className,
   type = 'text',
 }: TextInputAdapterProps) {

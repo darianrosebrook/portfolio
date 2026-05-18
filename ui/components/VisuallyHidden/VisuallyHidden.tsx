@@ -28,11 +28,7 @@ export const VisuallyHidden = React.forwardRef<
       {
         'data-ds-component': 'VisuallyHidden',
         ref,
-        className: [
-          'visuallyHidden',
-          focusable ? 'focusable' : '',
-          className,
-        ]
+        className: ['visuallyHidden', focusable ? 'focusable' : '', className]
           .filter(Boolean)
           .join(' '),
         ...rest,

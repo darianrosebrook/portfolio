@@ -150,7 +150,7 @@ const SheetContent = React.forwardRef<HTMLDivElement, SheetContentProps>(
       children,
       side: propSide,
       closeOnEscape = true,
-      closeOnOverlayClick = true,
+      closeOnOverlayClick: _closeOnOverlayClick = true,
       ...rest
     },
     ref
@@ -285,9 +285,7 @@ const SheetContent = React.forwardRef<HTMLDivElement, SheetContentProps>(
         <SheetOverlay />
         <div
           ref={combinedRef}
-          className={['content', side, className]
-            .filter(Boolean)
-            .join(' ')}
+          className={['content', side, className].filter(Boolean).join(' ')}
           data-slot="sheet-content"
           data-side={side}
           data-state={isOpen ? 'open' : 'closed'}

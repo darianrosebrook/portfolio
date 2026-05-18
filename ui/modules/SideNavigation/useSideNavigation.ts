@@ -30,7 +30,7 @@ export function useSideNavigation(
       if (stored != null) {
         setIsExpanded(stored === 'true');
       }
-    } catch (_) {
+    } catch {
       // ignore storage errors
     }
   }, [storageKey]);
@@ -40,7 +40,7 @@ export function useSideNavigation(
     if (!storageKey) return;
     try {
       window.localStorage.setItem(storageKey, String(isExpanded));
-    } catch (_) {
+    } catch {
       // ignore storage errors
     }
   }, [isExpanded, storageKey]);

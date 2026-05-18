@@ -663,13 +663,13 @@ export const FontInspector: React.FC = () => (
         real design decisions, performance trade‑offs, and system architecture.
       </p>
     </section>
-    <section data-ds-component="FontInspector" className='symbolInspector'>
-      <div className='inspectorContainer'>
+    <section data-ds-component="FontInspector" className="symbolInspector">
+      <div className="inspectorContainer">
         <InspectorControls />
-        <div className='canvasContainer'>
+        <div className="canvasContainer">
           <SymbolCanvas />
         </div>
-        <details className='accordion' open>
+        <details className="accordion" open>
           <summary>Anatomy Details</summary>
           <AnatomyControls />
           <p className="caption" style={{ margin: '1rem' }}>
@@ -681,7 +681,7 @@ export const FontInspector: React.FC = () => (
           </p>
         </details>
       </div>
-      <div className='symbolContainer'>
+      <div className="symbolContainer">
         <SymbolGrid />
         {TypographyArticleContent}
       </div>

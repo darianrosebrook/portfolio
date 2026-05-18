@@ -7,7 +7,7 @@ import { useReducedMotion } from '@/context/ReducedMotionContext';
 import { AnimatedText } from '@/ui/components/AnimatedText';
 import { AnimatedSection } from '@/ui/components/AnimatedSection';
 import CaseStudyContent from './CaseStudyContent';
-import { EASING_PRESETS, EDITORIAL_STAGGER } from '@/utils/animation';
+import { EASING_PRESETS } from '@/utils/animation';
 
 // Register ScrollTrigger plugin
 if (typeof window !== 'undefined') {

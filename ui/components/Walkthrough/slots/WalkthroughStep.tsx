@@ -9,8 +9,8 @@ export interface WalkthroughStepProps extends WalkthroughStepSpec {
 }
 
 export const WalkthroughStep: React.FC<WalkthroughStepProps> = (props) => {
-  const { index, ...spec } = props;
-  const { index: active } = useWalkthrough();
+  const { index: _index, ..._spec } = props;
+  const { index: _active } = useWalkthrough();
 
   // No rendering; declarative wrapper can be used for editor tooling later
   React.useEffect(() => {

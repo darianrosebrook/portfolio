@@ -15,7 +15,6 @@ import { getContentDesign } from '../_lib/contentGuidelines';
 import { getMigrationData } from '../_lib/migrationData';
 import {
   trackPanelToggle,
-  trackThemeChange,
   useComponentTimeTracking,
 } from '../_lib/analytics';
 import {
@@ -90,7 +89,7 @@ export function ComprehensiveComponentDoc({
   const [isTokenPanelOpen, setIsTokenPanelOpen] = React.useState(false);
 
   // A11y checklist state with dynamic results from A11yPanel
-  const [a11yChecklist, setA11yChecklist] = React.useState<A11yChecklistItem[]>([
+  const [a11yChecklist, _setA11yChecklist] = React.useState<A11yChecklistItem[]>([
     { id: 'keyboard-nav', label: 'Keyboard navigation support', status: 'pending' },
     { id: 'screen-reader', label: 'Screen reader compatibility', status: 'pending' },
     { id: 'color-contrast', label: 'Color contrast compliance', status: 'pending' },
@@ -98,9 +97,6 @@ export function ComprehensiveComponentDoc({
     { id: 'aria-attributes', label: 'ARIA attributes', status: 'pending' },
     { id: 'reduced-motion', label: 'Reduced motion support', status: 'pending' },
   ]);
-
-  // Preview iframe ref for panels
-  const previewRef = React.useRef<HTMLIFrameElement | null>(null);
 
   // Get preview window for panels
   const getPreviewWindow = React.useCallback((): Window | null => {

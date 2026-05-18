@@ -243,9 +243,7 @@ export const AnimatedSection = React.forwardRef<
       {
         ref: setRefs,
         'data-ds-component': 'AnimatedSection',
-        className: ['animatedSection', className]
-          .filter(Boolean)
-          .join(' '),
+        className: ['animatedSection', className].filter(Boolean).join(' '),
         style: {
           // Set initial state for SSR/hydration (non-stagger variants)
           opacity:

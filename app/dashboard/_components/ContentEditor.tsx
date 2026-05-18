@@ -3,7 +3,6 @@ import type { Article, CaseStudy } from '@/types';
 import Button from '@/ui/components/Button';
 import Checkbox from '@/ui/components/Checkbox';
 import { SwitchField } from '@/ui/components/Switch';
-import { VideoExtended } from '@/ui/modules/Tiptap/Extensions/VideoExtended';
 import { extractMetadata } from '@/utils/metadata';
 import { generateHTML } from '@tiptap/html';
 import { JSONContent } from '@tiptap/react';

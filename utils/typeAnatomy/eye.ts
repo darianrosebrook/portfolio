@@ -77,7 +77,7 @@ function counterSeed(g: Glyph, m: Metrics): { x: number; y: number } | null {
   const gs = shapeForV2(g);
   const overshoot = getOvershoot(g);
   const bands = FeatureDetectionConfig.counter.scanBands;
-  const delta = (g.bbox.maxX - g.bbox.minX) * 0.01; // 1% of width
+  const _delta = (g.bbox.maxX - g.bbox.minX) * 0.01; // 1% of width
 
   for (let i = 1; i < bands; i++) {
     const y = m.baseline + (i * (m.xHeight - m.baseline)) / bands;
@@ -130,7 +130,7 @@ function windingNumber(gs: SvgShape, probe: SvgShape): number {
     points: { segment1?: number }[];
   };
   let wn = 0;
-  for (const p of result.points) {
+  for (const _p of result.points) {
     wn += 1; // Simplified: each intersection contributes to winding
   }
   return wn;

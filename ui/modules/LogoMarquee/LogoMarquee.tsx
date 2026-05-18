@@ -59,9 +59,7 @@ const LogoMarquee: React.FC = () => {
     () => {
       if (!logoMarqueeRef.current) return;
 
-      const boxElements = logoMarqueeRef.current.querySelectorAll(
-        '.box'
-      );
+      const boxElements = logoMarqueeRef.current.querySelectorAll('.box');
       const marqueeStyles = window.getComputedStyle(logoMarqueeRef.current);
 
       gsap.set(logoMarqueeRef.current, { perspective: 500 });
@@ -85,13 +83,13 @@ const LogoMarquee: React.FC = () => {
   return (
     <div data-ds-component="LogoMarquee">
       <LogoSprite />
-      <div className='marquee' ref={logoMarqueeRef}>
+      <div className="marquee" ref={logoMarqueeRef}>
         {Array.from({ length: LOGO_REPEAT_COUNT }, (_, repeatIndex) =>
           LOGOS.map((logo) => (
-            <div className='box' key={`${repeatIndex}-${logo.id}`}>
+            <div className="box" key={`${repeatIndex}-${logo.id}`}>
               <svg
                 aria-hidden="true"
-                className='logo'
+                className="logo"
                 focusable="false"
                 style={
                   {
@@ -106,7 +104,7 @@ const LogoMarquee: React.FC = () => {
           ))
         )}
       </div>
-      <div className='cover'></div>
+      <div className="cover"></div>
     </div>
   );
 };

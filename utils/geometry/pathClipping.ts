@@ -74,7 +74,7 @@ export function clipGlyphPathHorizontal(
  */
 function createClippedPathData(
   pathData: string,
-  boundary: ClipBoundary
+  _boundary: ClipBoundary
 ): string | null {
   // For now, return the original path data
   // Full implementation would require a more sophisticated path manipulation library

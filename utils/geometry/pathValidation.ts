@@ -29,7 +29,7 @@ export function validatePathCommands(
   // Maximum reasonable values
   const MAX_COORDINATE = 1e6; // 1 million font units
   const MAX_COMMANDS = 10000; // Reasonable limit for complex glyphs
-  const MAX_PATH_LENGTH = 1e7; // 10 million characters
+  const _MAX_PATH_LENGTH = 1e7; // 10 million characters
 
   if (commands.length > MAX_COMMANDS) {
     errors.push(

@@ -12,7 +12,7 @@ interface TrackSelectorProps {
 }
 
 export function TrackSelector({
-  currentPageSlug,
+  currentPageSlug: _currentPageSlug,
   onTrackChange,
 }: TrackSelectorProps) {
   const [selectedTrack, setSelectedTrack] = useState<TrackId | null>(null);

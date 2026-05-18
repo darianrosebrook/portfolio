@@ -29,7 +29,7 @@ describe('Walkthrough composer', () => {
   });
 
   test('keyboard shortcuts: Esc cancels, Enter advances', () => {
-    const { getByText } = render(<Setup />);
+    const { getByText: _getByText } = render(<Setup />);
     // Esc should close
     fireEvent.keyDown(document, { key: 'Escape' });
     // Re-render to open again

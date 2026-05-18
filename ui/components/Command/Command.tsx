@@ -119,7 +119,7 @@ const CommandDialog: React.FC<CommandDialogProps> = ({
     <CommandProvider {...commandOptions}>
       <div className="overlay" onClick={modal ? close : undefined}>
         <div
-          className={["dialog", className].filter(Boolean).join(' ')}
+          className={['dialog', className].filter(Boolean).join(' ')}
           data-slot="command-dialog"
           onClick={(e) => e.stopPropagation()}
           role="dialog"
@@ -165,7 +165,7 @@ const CommandInput = React.forwardRef<HTMLInputElement, CommandInputProps>(
         <input
           ref={combinedRef}
           type="text"
-          className={["input", className].filter(Boolean).join(' ')}
+          className={['input', className].filter(Boolean).join(' ')}
           data-slot="command-input"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -211,7 +211,7 @@ const CommandList = React.forwardRef<HTMLDivElement, CommandListProps>(
     return (
       <div
         ref={combinedRef}
-        className={["list", className].filter(Boolean).join(' ')}
+        className={['list', className].filter(Boolean).join(' ')}
         data-slot="command-list"
         role="listbox"
         {...rest}
@@ -240,7 +240,7 @@ const CommandGroup: React.FC<CommandGroupProps> = ({
   ...rest
 }) => (
   <div
-    className={["group", className].filter(Boolean).join(' ')}
+    className={['group', className].filter(Boolean).join(' ')}
     data-slot="command-group"
     {...rest}
   >
@@ -276,9 +276,9 @@ const CommandItemComponent = React.forwardRef<HTMLDivElement, CommandItemProps>(
       <div
         ref={ref}
         className={[
-          "item",
-          isSelected ? "selected" : '',
-          item.disabled ? "disabled" : '',
+          'item',
+          isSelected ? 'selected' : '',
+          item.disabled ? 'disabled' : '',
           className,
         ]
           .filter(Boolean)
@@ -360,7 +360,7 @@ const CommandSeparator: React.FC<CommandSeparatorProps> = ({
   ...rest
 }) => (
   <div
-    className={["separator", className].filter(Boolean).join(' ')}
+    className={['separator', className].filter(Boolean).join(' ')}
     data-slot="command-separator"
     role="separator"
     {...rest}

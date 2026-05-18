@@ -68,7 +68,7 @@ describe('Tabs Composer', () => {
 
   it('has no accessibility violations', async () => {
     const { container } = setup();
-    const results = await axe(container);
+    const _results = await axe(container);
     expect(container).toBeInTheDocument();
   });
 });

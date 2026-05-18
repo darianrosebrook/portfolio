@@ -25,9 +25,7 @@ const ImageToolbar: React.FC<ImageToolbarProps> = ({ editor }) => {
       <button
         onClick={() => setAlignment('left')}
         className={
-          editor.isActive('image', { 'data-align': 'left' })
-            ? 'isActive'
-            : ''
+          editor.isActive('image', { 'data-align': 'left' }) ? 'isActive' : ''
         }
       >
         <Icon icon={faAlignLeft} />
@@ -35,9 +33,7 @@ const ImageToolbar: React.FC<ImageToolbarProps> = ({ editor }) => {
       <button
         onClick={() => setAlignment('center')}
         className={
-          editor.isActive('image', { 'data-align': 'center' })
-            ? 'isActive'
-            : ''
+          editor.isActive('image', { 'data-align': 'center' }) ? 'isActive' : ''
         }
       >
         <Icon icon={faAlignCenter} />
@@ -45,9 +41,7 @@ const ImageToolbar: React.FC<ImageToolbarProps> = ({ editor }) => {
       <button
         onClick={() => setAlignment('right')}
         className={
-          editor.isActive('image', { 'data-align': 'right' })
-            ? 'isActive'
-            : ''
+          editor.isActive('image', { 'data-align': 'right' }) ? 'isActive' : ''
         }
       >
         <Icon icon={faAlignRight} />

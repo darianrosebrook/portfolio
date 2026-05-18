@@ -220,7 +220,7 @@ function generatePolygon(
  * @param sides - Number of sides
  * @param reverse - If true, wind counter-clockwise (for holes)
  */
-function generateEllipse(
+function _generateEllipse(
   cx: number,
   cy: number,
   rx: number,

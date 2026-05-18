@@ -123,7 +123,11 @@ export const Image = React.forwardRef<HTMLImageElement, ImageProps>(
       .join(' ');
 
     return (
-      <div data-ds-component="Image" data-slot="image" className={containerClasses}>
+      <div
+        data-ds-component="Image"
+        data-slot="image"
+        className={containerClasses}
+      >
         {showPlaceholder && isLoading && (
           <div className="placeholder" aria-hidden="true">
             <div className="placeholderIcon" />

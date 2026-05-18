@@ -84,7 +84,7 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
       closeOnEscape = true,
       initialFocus,
       returnFocus,
-      dismissible = true,
+      dismissible: _dismissible = true,
       onDismiss,
     },
     forwardedRef
@@ -286,7 +286,11 @@ const Header = ({
 }: {
   children: React.ReactNode;
   className?: string;
-}) => <div className={['header', className].filter(Boolean).join(' ')}>{children}</div>;
+}) => (
+  <div className={['header', className].filter(Boolean).join(' ')}>
+    {children}
+  </div>
+);
 Header.displayName = 'Dialog.Header';
 
 const Title = ({
@@ -298,7 +302,10 @@ const Title = ({
 }) => {
   const context = useContext(DialogContext);
   return (
-    <h2 id={context?.titleId} className={['title', className].filter(Boolean).join(' ')}>
+    <h2
+      id={context?.titleId}
+      className={['title', className].filter(Boolean).join(' ')}
+    >
       {children}
     </h2>
   );
@@ -311,7 +318,11 @@ const Body = ({
 }: {
   children: React.ReactNode;
   className?: string;
-}) => <div className={['body', className].filter(Boolean).join(' ')}>{children}</div>;
+}) => (
+  <div className={['body', className].filter(Boolean).join(' ')}>
+    {children}
+  </div>
+);
 Body.displayName = 'Dialog.Body';
 
 const Footer = ({
@@ -320,7 +331,11 @@ const Footer = ({
 }: {
   children: React.ReactNode;
   className?: string;
-}) => <div className={['footer', className].filter(Boolean).join(' ')}>{children}</div>;
+}) => (
+  <div className={['footer', className].filter(Boolean).join(' ')}>
+    {children}
+  </div>
+);
 Footer.displayName = 'Dialog.Footer';
 
 const CloseButton = ({

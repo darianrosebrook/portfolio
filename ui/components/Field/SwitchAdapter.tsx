@@ -17,7 +17,7 @@ export function SwitchAdapter({
   const descriptionId = ariaDescription
     ? `${controlProps.id}-description`
     : undefined;
-  const ariaDescribedBy =
+  const _ariaDescribedBy =
     [controlProps['aria-describedby'] as string | undefined, descriptionId]
       .filter(Boolean)
       .join(' ') || undefined;

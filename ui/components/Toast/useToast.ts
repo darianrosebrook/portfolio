@@ -4,8 +4,6 @@ import type {
   ToastId,
   ToastOptions,
   ToastRecord,
-  ToastState,
-  ToastVariant,
 } from './types';
 
 const DEFAULT_DURATION = 5000;

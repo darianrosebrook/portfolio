@@ -26,7 +26,6 @@ import {
   type HSL,
   type LAB,
   type LCH,
-  type XYZ,
 } from '../utils/helpers/colorHelpers';
 
 // Known test cases with reference values
@@ -441,8 +440,8 @@ describe('Color Helper Functions', () => {
       const start = performance.now();
       for (let i = 0; i < 1000; i++) {
         const rgb = hexToRgb('#ff0000');
-        const hsl = rgbToHsl(rgb!);
-        const lab = rgbToLab(rgb!);
+        const _hsl = rgbToHsl(rgb!);
+        const _lab = rgbToLab(rgb!);
       }
       const end = performance.now();
       expect(end - start).toBeLessThan(100);

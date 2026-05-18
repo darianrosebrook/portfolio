@@ -8,7 +8,6 @@ import {
   validateColorPair,
   type ColorPair,
   type ValidationResult,
-  WCAG_LEVELS,
   type WCAGLevel,
 } from './tokenValidator';
 import { getNestedValue } from '../designTokens/utils/pathUtils';
@@ -195,7 +194,7 @@ function extractComponentColorPairs(
  */
 function inferComponentType(
   componentName: string,
-  tokens: any
+  _tokens: any
 ): keyof typeof COMPONENT_COLOR_PATTERNS {
   const name = componentName.toLowerCase();
 

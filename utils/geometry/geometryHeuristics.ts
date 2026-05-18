@@ -11,12 +11,11 @@ import {
   isDrawable,
   dFor,
   rayHits,
-  windingNumber,
   isInside,
 } from './geometryCore';
 
 // Declare IntersectionQuery as global (for kld >= 0.4 point-in-path support)
-declare const IntersectionQuery: unknown;
+declare const _IntersectionQuery: unknown;
 
 /**
  * Font metric lines for feature heuristics (canvas Y: up is negative).

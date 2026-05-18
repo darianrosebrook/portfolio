@@ -213,7 +213,7 @@ export function DocInteractive({
 }
 
 function SectionDriver({
-  rootRef,
+  rootRef: _rootRef,
   activeFile,
 }: {
   rootRef: React.RefObject<HTMLDivElement | null>;

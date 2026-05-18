@@ -70,7 +70,7 @@ export const OTPField = React.forwardRef<HTMLInputElement, OTPFieldProps>(
         }
         // Extract last character to handle multi-char input
         const lastChar = v.slice(-1);
-        const prevValue = chars[index] || '';
+        const _prevValue = chars[index] || '';
         setChar(index, lastChar);
         // If the character was rejected, the input field will be reset by the controlled value
         onChange?.(e);

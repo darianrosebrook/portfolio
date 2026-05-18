@@ -4,7 +4,6 @@ import { CodeWorkbench } from '../primitives/CodeWorkbench';
 import { ErrorBoundary } from '../primitives/ErrorBoundary';
 import { PropControls } from '../primitives/PropControls';
 import { PropsBridge } from '../primitives/PropsBridge';
-import { VariantMatrix } from '../primitives/VariantMatrix';
 import type { ControlDef, VariantGrid, VirtualProject } from '../types';
 
 export type DocVariantsProps = {

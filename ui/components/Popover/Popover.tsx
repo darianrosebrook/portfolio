@@ -420,11 +420,7 @@ const Content: React.FC<ContentProps> = ({
 
   if (!isOpen && !isLeaving) return null;
 
-  const contentClassName = [
-    'popoverContent',
-    isLeaving && 'leaving',
-    className,
-  ]
+  const contentClassName = ['popoverContent', isLeaving && 'leaving', className]
     .filter(Boolean)
     .join(' ');
 

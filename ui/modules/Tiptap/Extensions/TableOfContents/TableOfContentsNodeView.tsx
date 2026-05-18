@@ -119,11 +119,7 @@ export const TableOfContentsNodeView: React.FC<NodeViewProps> = ({
     const indent = (item.level - 1) * 16;
     const number = showNumbers ? `${index + 1}. ` : '';
     const levelClass =
-      item.level === 1
-        ? 'tocLevel1'
-        : item.level === 2
-          ? 'tocLevel2'
-          : '';
+      item.level === 1 ? 'tocLevel1' : item.level === 2 ? 'tocLevel2' : '';
 
     return (
       <button
@@ -133,7 +129,7 @@ export const TableOfContentsNodeView: React.FC<NodeViewProps> = ({
         style={{ paddingLeft: `${indent}px` }}
         onClick={() => scrollToHeading(item.position)}
       >
-        <span className='tocText'>
+        <span className="tocText">
           {number}
           {item.text}
         </span>
@@ -148,15 +144,15 @@ export const TableOfContentsNodeView: React.FC<NodeViewProps> = ({
       className={`${selected ? 'selected' : ''}`}
       data-drag-handle
     >
-      <div className='tocContainer'>
-        <div className='tocHeader'>
+      <div className="tocContainer">
+        <div className="tocHeader">
           <h3>Table of Contents</h3>
         </div>
 
         {tocItems.length > 0 ? (
-          <div className='tocList'>{tocItems.map(renderTocItem)}</div>
+          <div className="tocList">{tocItems.map(renderTocItem)}</div>
         ) : (
-          <div className='tocEmpty'>
+          <div className="tocEmpty">
             <p>
               No headings found. Add some headings to generate a table of
               contents.

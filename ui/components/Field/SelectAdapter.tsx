@@ -20,7 +20,7 @@ export function SelectAdapter({
   options,
   placeholder,
   className,
-  disabled,
+  disabled: _disabled,
 }: SelectAdapterProps) {
   const { controlProps, field } = useFieldControl<HTMLSelectElement>();
 

@@ -37,15 +37,15 @@ export const DetailsNodeView: React.FC<NodeViewProps> = ({
       className={`${selected ? 'selected' : ''}`}
       data-drag-handle
     >
-      <div className='detailsEditor'>
+      <div className="detailsEditor">
         {/* Summary input for editing */}
-        <div className='summaryEditor'>
+        <div className="summaryEditor">
           <input
             type="text"
             value={summary}
             onChange={handleSummaryChange}
             placeholder="Enter summary text..."
-            className='summaryInput'
+            className="summaryInput"
             onClick={(e) => e.stopPropagation()}
           />
         </div>
@@ -55,7 +55,7 @@ export const DetailsNodeView: React.FC<NodeViewProps> = ({
           open={isOpen}
           summary={summary}
           onToggle={handleToggle}
-          className='detailsContent'
+          className="detailsContent"
         >
           <NodeViewContent />
         </Details>

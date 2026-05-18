@@ -182,7 +182,7 @@ export function extractGlossaryTerms(text: string): string[] {
 export function buildCrossReferences(
   currentSlug: string,
   allPages: FoundationPageMetadata[],
-  components: ComponentItem[] = [],
+  _components: ComponentItem[] = [],
   contentText?: string
 ): CrossReference {
   const concepts = findRelatedFoundationPages(currentSlug, allPages);

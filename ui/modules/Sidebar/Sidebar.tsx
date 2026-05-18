@@ -12,7 +12,11 @@ export interface SidebarProps {
 
 export function Sidebar({ sections }: SidebarProps) {
   return (
-    <aside data-ds-component="Sidebar" className="root" aria-label="Section navigation">
+    <aside
+      data-ds-component="Sidebar"
+      className="root"
+      aria-label="Section navigation"
+    >
       {sections.map((section) => (
         <div key={section.title} className="group">
           <h4>{section.title}</h4>

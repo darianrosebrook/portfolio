@@ -91,7 +91,11 @@ export function DocLayout({
   codeFiles,
   sandpackOptions = {},
 }: DocLayoutProps) {
-  const { activeSection, sections, setActiveSection } = useDocLayout();
+  const {
+    activeSection: _activeSection,
+    sections,
+    setActiveSection,
+  } = useDocLayout();
   const contentRef = useRef<HTMLDivElement>(null);
 
   // Local theme override for the Sandpack preview: 'system' | 'light' | 'dark'
@@ -157,16 +161,16 @@ export function DocLayout({
   } = sandpackOptions;
 
   return (
-    <div data-ds-component="DocLayout" className='docLayout'>
-      <div className='content' ref={contentRef}>
+    <div data-ds-component="DocLayout" className="docLayout">
+      <div className="content" ref={contentRef}>
         {children}
       </div>
 
-      <div className='codePanel' data-doc-codepanel>
-        <div className='codePanelSticky' data-sticky>
-          <div className='codeToolbar'>
+      <div className="codePanel" data-doc-codepanel>
+        <div className="codePanelSticky" data-sticky>
+          <div className="codeToolbar">
             <div
-              className='themeControls'
+              className="themeControls"
               role="radiogroup"
               aria-label="Preview theme"
             >
@@ -253,7 +257,7 @@ export function DocNavigation({
   onSectionClick,
 }: DocNavigationProps) {
   return (
-    <nav className='docNavigation'>
+    <nav className="docNavigation">
       <ul>
         {sections.map((section) => (
           <li key={section.id}>

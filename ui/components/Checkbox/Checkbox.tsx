@@ -92,11 +92,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
           data-slot="checkbox-indicator"
         >
           {indeterminate ? (
-            <svg
-              className="indeterminateIcon"
-              viewBox="0 0 16 16"
-              fill="none"
-            >
+            <svg className="indeterminateIcon" viewBox="0 0 16 16" fill="none">
               <path
                 d="M4 8h8"
                 stroke="currentColor"

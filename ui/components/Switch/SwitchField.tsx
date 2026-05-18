@@ -66,7 +66,11 @@ export const SwitchField = React.forwardRef<HTMLInputElement, SwitchFieldProps>(
       .join(' ');
 
     return (
-      <div data-ds-component="Switch" className={fieldClassName} data-slot="switch-field">
+      <div
+        data-ds-component="Switch"
+        className={fieldClassName}
+        data-slot="switch-field"
+      >
         <Switch
           ref={ref}
           id={id}
