@@ -1,7 +1,7 @@
 id: CSS-FIX-001
 type: fix
 title: Repair broken .module.scss imports after QDS migration
-status: active
+status: closed
 risk_tier: 3
 mode: development
 created_at: '2026-05-19T15:48:38.161Z'
