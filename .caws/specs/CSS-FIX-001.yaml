@@ -1,0 +1,47 @@
+id: CSS-FIX-001
+type: fix
+title: Repair broken .module.scss imports after QDS migration
+status: active
+risk_tier: 3
+mode: development
+created_at: '2026-05-19T15:48:38.161Z'
+updated_at: '2026-05-19T15:48:38.162Z'
+blast_radius:
+  modules:
+    - ui/modules/FontInspector
+    - app/dashboard/articles/new/components
+  data_migration: false
+operational_rollback_slo: 10m
+scope:
+  in:
+    - ui/modules/FontInspector/
+    - app/dashboard/articles/new/components/ArticlePreview.tsx
+  out:
+    - node_modules/
+    - dist/
+    - build/
+invariants:
+  - Production build resolves all module imports
+  - FontInspector rendering is unchanged in places where CSS classes exist in FontInspector.css
+  - ArticlePreview continues to use the CSS-module contract (styles.* member access)
+acceptance:
+  - id: A1
+    given: a Next.js production build
+    when: the build runs against main after the fix
+    then: it completes without "Module not found" errors for FontInspector.module.scss or styles.module.scss
+  - id: A2
+    given: a FontInspector subcomponent that previously imported styles from FontInspector.module.scss
+    when: the import is rewritten
+    then: >-
+      it uses a side-effect import of './FontInspector.css' and references classes via bare string literals (matching
+      FontInspector.tsx)
+  - id: A3
+    given: ArticlePreview imports styles from app/articles/[slug]/styles.module.scss
+    when: the import is rewritten
+    then: the extension changes to .css while preserving the styles.* member access (the target is still a CSS module)
+non_functional:
+  a11y: []
+  perf: {}
+  security: []
+contracts: []
+worktree: css-fix
