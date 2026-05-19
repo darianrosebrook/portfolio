@@ -1,7 +1,7 @@
 import { SwitchField } from '../../components/Switch';
 import { useInspector } from './FontInspector';
 import { toFeatureID } from '@/utils/typeAnatomy/types';
-import styles from './FontInspector.module.scss';
+import './FontInspector.css';
 /*
   AnatomyControls
   allows for a user to toggle the anatomy features based on features created in the InspectorProvider
@@ -38,7 +38,7 @@ export const AnatomyControls: React.FC = () => {
   });
 
   return (
-    <div className={styles.anatomyControls}>
+    <div className="anatomyControls">
       <h4>Anatomy Details</h4>
       <div>
         <ul>

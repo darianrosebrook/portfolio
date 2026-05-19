@@ -1,7 +1,7 @@
-import styles from './FontInspector.module.scss';
+import './FontInspector.css';
 
 export const TypographyArticleContent = (
-  <article className={styles.articleContent}>
+  <article className="articleContent">
     <>
       <h2>Exploring the Anatomy of a Typeface</h2>
       <h2> Foundational Structure: Setting the Stage for Readability</h2>

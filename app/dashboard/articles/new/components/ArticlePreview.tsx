@@ -1,6 +1,6 @@
 'use client';
 
-import styles from '@/app/articles/[slug]/styles.module.scss';
+import styles from '@/app/articles/[slug]/styles.module.css';
 import type { Article } from '@/types';
 import { processArticleContent } from '@/utils/tiptap/htmlGeneration';
 

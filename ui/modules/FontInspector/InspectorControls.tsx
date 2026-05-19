@@ -1,5 +1,5 @@
 import { useInspector } from './FontInspector';
-import styles from './FontInspector.module.scss';
+import './FontInspector.css';
 function toTitleCase(str: string) {
   return str.replace(/\b\w/g, (char) => char.toUpperCase());
 }
@@ -28,9 +28,9 @@ export const InspectorControls: React.FC = () => {
     navigator.clipboard.writeText(text);
   };
   return (
-    <div className={styles.inspectorControls}>
+    <div className="inspectorControls">
       <select
-        className={styles.fontSelector}
+        className="fontSelector"
         value={currentFontIndex}
         onChange={(e) => setCurrentFont(Number(e.target.value))}
       >
@@ -41,21 +41,21 @@ export const InspectorControls: React.FC = () => {
         ))}
       </select>
       <button
-        className={styles.idUnicode}
+        className="idUnicode"
         onClick={() => handleCopy(unicode)}
         title="Copy Unicode"
       >
         {unicode}
       </button>
       <button
-        className={styles.idName}
+        className="idName"
         onClick={() => handleCopy(name)}
         title="Copy Name"
       >
         {name}
       </button>
       <button
-        className={styles.preview}
+        className="preview"
         onClick={() => handleCopy(glyphPreview)}
         title="Copy Glyph"
       >

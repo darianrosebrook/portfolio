@@ -6,7 +6,7 @@ import {
   useState,
 } from 'react';
 import { useInspector, AxisValues } from './FontInspector';
-import styles from './FontInspector.module.scss';
+import './FontInspector.css';
 import {
   drawAnatomyOverlay,
   drawAxisValues,
@@ -390,7 +390,7 @@ export const SymbolCanvas: React.FC = () => {
 
   return (
     <canvas
-      className={styles.canvas}
+      className="canvas"
       ref={canvasRef}
       data-testid="symbol-canvas"
       style={{ width: '100%', height: '50vh' }}
