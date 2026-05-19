@@ -231,7 +231,7 @@ export default function HomeClient({ ldJson }: HomeClientProps) {
           </p>
           <p>
             <a
-              href="https://drive.google.com/file/d/1h2QH7K7153QGbW59CHWWt07Dzhgzst3a/view?usp=sharingue"
+              href="https://drive.google.com/file/d/1h2QH7K7153QGbW59CHWWt07Dzhgzst3a/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
             >
