@@ -1,5 +1,5 @@
 import { useInspector } from './FontInspector';
-import styles from './FontInspector.module.scss';
+import './FontInspector.css';
 import { useMemo } from 'react';
 /*
   SymbolGrid
@@ -17,12 +17,12 @@ export const SymbolGrid: React.FC = () => {
 
   if (!font) return null;
   return (
-    <section className={styles.symbolGrid}>
+    <section className="symbolGrid">
       {codepoints.map((u) => (
         <button
           key={u}
-          className={`${styles.symbolSelectorButton} ${
-            u === glyphUnicode ? styles.selected : ''
+          className={`symbolSelectorButton ${
+            u === glyphUnicode ? 'selected' : ''
           }`}
           onClick={() => setGlyphUnicode(u)}
         >

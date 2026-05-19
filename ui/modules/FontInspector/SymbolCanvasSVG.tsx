@@ -38,7 +38,7 @@ import type { FeatureZone } from './FeatureCoachmark';
 import { FeatureCoachmark } from './FeatureCoachmark';
 import type { AxisValues } from './FontInspector';
 import { useInspector } from './FontInspector';
-import styles from './FontInspector.module.scss';
+import './FontInspector.css';
 import { SVGGlyphBounds } from './SVGGlyphBounds';
 import { SVGPathDetails } from './SVGPathDetails';
 
@@ -265,7 +265,7 @@ export const SymbolCanvasSVG: React.FC = () => {
             <g
               key={`metric-${featureName}`}
               id={`metric-${featureName}`}
-              className={styles.metricLine}
+              className="metricLine"
               aria-label={feature.label}
               aria-hidden={!feature.selected}
               vectorEffect="non-scaling-stroke"
@@ -637,7 +637,7 @@ export const SymbolCanvasSVG: React.FC = () => {
       >
         <svg
           ref={svgRef}
-          className={styles.canvas}
+          className="canvas"
           style={{ width: '100%', height: '100%' }}
           role="img"
           aria-label="Font inspector canvas"
@@ -696,7 +696,7 @@ export const SymbolCanvasSVG: React.FC = () => {
     >
       <svg
         ref={svgRef}
-        className={`${styles.canvas} ${styles.interactiveSvg}`}
+        className="canvas interactiveSvg"
         width={metrics.width}
         height={metrics.height}
         style={{ width: '100%', height: '100%' }}
@@ -940,11 +940,11 @@ export const SymbolCanvasSVG: React.FC = () => {
       </svg>
 
       {/* Export controls */}
-      <div className={styles.exportControls}>
+      <div className="exportControls">
         <button
           type="button"
           onClick={handleCopySVG}
-          className={styles.exportButton}
+          className="exportButton"
           aria-label="Copy SVG to clipboard"
           title="Copy SVG to clipboard"
         >
@@ -953,7 +953,7 @@ export const SymbolCanvasSVG: React.FC = () => {
         <button
           type="button"
           onClick={() => handleExportPNG(1)}
-          className={styles.exportButton}
+          className="exportButton"
           disabled={exporting}
           aria-label="Export PNG at 1x scale"
           title="Export PNG at 1x scale"
@@ -963,7 +963,7 @@ export const SymbolCanvasSVG: React.FC = () => {
         <button
           type="button"
           onClick={() => handleExportPNG(2)}
-          className={styles.exportButton}
+          className="exportButton"
           disabled={exporting}
           aria-label="Export PNG at 2x scale"
           title="Export PNG at 2x scale"
@@ -973,7 +973,7 @@ export const SymbolCanvasSVG: React.FC = () => {
         <button
           type="button"
           onClick={() => handleExportPNG(4)}
-          className={styles.exportButton}
+          className="exportButton"
           disabled={exporting}
           aria-label="Export PNG at 4x scale"
           title="Export PNG at 4x scale"

@@ -2,7 +2,7 @@
 
 import Popover from '@/ui/components/Popover';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import styles from './FontInspector.module.scss';
+import './FontInspector.css';
 
 export interface FeatureZone {
   featureName: string;
@@ -94,7 +94,7 @@ export function FeatureCoachmark({
                 if (el) zoneRefs.current.set(zone.featureName, el);
                 else zoneRefs.current.delete(zone.featureName);
               }}
-              className={styles.featureZone}
+              className="featureZone"
               style={{
                 position: 'fixed',
                 left: `${canvasPos.x}px`,
@@ -130,17 +130,17 @@ export function FeatureCoachmark({
                 triggerStrategy="hover"
                 closeOnEscape
               >
-                <Popover.Content className={styles.coachmarkCard}>
+                <Popover.Content className="coachmarkCard">
                   <div id={`coachmark-${zone.featureName}`}>
-                    <div className={styles.coachmarkHeader}>
-                      <h5 className={styles.coachmarkTitle}>{zone.label}</h5>
+                    <div className="coachmarkHeader">
+                      <h5 className="coachmarkTitle">{zone.label}</h5>
                     </div>
                     {zone.description && (
-                      <p className={styles.coachmarkDescription}>
+                      <p className="coachmarkDescription">
                         {zone.description}
                       </p>
                     )}
-                    <div className={styles.coachmarkHint}>
+                    <div className="coachmarkHint">
                       Press Tab to navigate between features
                     </div>
                   </div>
