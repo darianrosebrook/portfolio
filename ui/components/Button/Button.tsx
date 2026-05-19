@@ -122,16 +122,6 @@ const Button = React.forwardRef<
     const isLoadingClassName = loading ? 'isLoading' : '';
     const isDisabledClassName = disabled ? 'disabled' : '';
 
-    const childCount = React.Children.count(children);
-    const isSingleChild = childCount === 1;
-    const hasOnlyIcon =
-      isSingleChild &&
-      React.isValidElement(children) &&
-      (children.type === 'svg' ||
-        (children.props &&
-          ((children.props as any)['aria-label'] ||
-            (children.props as any)['data-icon'])));
-
     const combinedClassName = useMemo(
       () =>
         [
@@ -155,7 +145,7 @@ const Button = React.forwardRef<
     );
 
     const ariaProps = {
-      ...(hasOnlyIcon && { 'aria-label': title || ariaLabel }),
+      ...(ariaLabel && { 'aria-label': ariaLabel }),
       ...(ariaExpanded !== undefined && { 'aria-expanded': ariaExpanded }),
       ...(ariaPressed !== undefined && { 'aria-pressed': ariaPressed }),
       ...(role && { role }),
@@ -166,14 +156,16 @@ const Button = React.forwardRef<
         return (
           <>
             <span className="spinner" aria-hidden="true" />
-            {children ? <span className="loadingText">{children}</span> : null}
+            {children ? (
+              <span className="label loadingText">{children}</span>
+            ) : null}
           </>
         );
       }
 
       if (children == null) return null;
       if (typeof children === 'string' || typeof children === 'number') {
-        return <span>{children}</span>;
+        return <span className="label">{children}</span>;
       }
       return children;
     };

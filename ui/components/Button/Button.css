@@ -105,6 +105,30 @@
       font-size: var(--ds-button-text-size-large);
     }
 
+    /*
+     * Icon-only branch.
+     * A button is icon-only when it has element children but none of them is
+     * a .label (text wrapper) or .spinner. The renderChildren() helper wraps
+     * all string/number children in <span class="label">, so the absence of
+     * .label is a reliable structural signal that this button contains only
+     * non-text content (icon, avatar, asChild trigger, etc.).
+     */
+    &:has(> *):not(:has(> .label)):not(:has(> .spinner)) {
+      aspect-ratio: 1;
+      min-width: var(--ds-button-size-min-medium);
+      padding: var(--ds-button-size-padding-small);
+    }
+
+    &.small:has(> *):not(:has(> .label)):not(:has(> .spinner)) {
+      min-width: var(--ds-button-size-min-small);
+      padding: var(--ds-button-size-padding-small, var(--ds-button-size-gap-small));
+    }
+
+    &.large:has(> *):not(:has(> .label)):not(:has(> .spinner)) {
+      min-width: var(--ds-button-size-min-large);
+      padding: var(--ds-button-size-padding-large, var(--ds-button-size-gap-large));
+    }
+
     &.primary {
       background-color: var(--ds-button-color-background-primary);
       border: var(--ds-button-size-border) solid var(--ds-button-color-border-primary);
