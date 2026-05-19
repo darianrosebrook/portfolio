@@ -79,7 +79,7 @@ export function DetailsExamples() {
               <code>disabled?: boolean</code>
             </li>
             <li>
-              <code>iconPosition: 'left' | 'right'</code>
+              <code>{`iconPosition: 'left' | 'right'`}</code>
             </li>
           </ul>
         </div>
@@ -87,10 +87,10 @@ export function DetailsExamples() {
           <h4>✅ After (Cleaner API)</h4>
           <ul>
             <li>
-              <code>variant: 'default' | 'inline' | 'compact'</code>
+              <code>{`variant: 'default' | 'inline' | 'compact'`}</code>
             </li>
             <li>
-              <code>icon: 'left' | 'right' | 'none'</code>
+              <code>{`icon: 'left' | 'right' | 'none'`}</code>
             </li>
             <li>
               <code>disabled?: boolean</code> (essential only)
