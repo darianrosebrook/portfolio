@@ -83,6 +83,44 @@ describe('Button', () => {
   });
 });
 
+describe('Icon-only detection', () => {
+  it('wraps string children in a span.label so text buttons are detectable', () => {
+    render(<Button>Save</Button>);
+    const button = screen.getByRole('button', { name: 'Save' });
+    const label = button.querySelector('.label');
+    expect(label).not.toBeNull();
+    expect(label).toHaveTextContent('Save');
+  });
+
+  it('does not add a .label wrapper around non-text children (icon-only path)', () => {
+    render(
+      <Button ariaLabel="Close">
+        <svg data-testid="icon" aria-hidden="true" />
+      </Button>
+    );
+    const button = screen.getByRole('button', { name: 'Close' });
+    expect(button.querySelector('.label')).toBeNull();
+    expect(button.querySelector('[data-testid="icon"]')).not.toBeNull();
+  });
+
+  it('exposes ariaLabel as the accessible name when set', () => {
+    render(
+      <Button ariaLabel="Open menu">
+        <svg aria-hidden="true" />
+      </Button>
+    );
+    expect(screen.getByRole('button', { name: 'Open menu' })).toBeInTheDocument();
+  });
+
+  it('wraps text in span.label even during the loading state', () => {
+    render(<Button loading>Saving</Button>);
+    const button = screen.getByRole('button');
+    const label = button.querySelector('.label.loadingText');
+    expect(label).not.toBeNull();
+    expect(label).toHaveTextContent('Saving');
+  });
+});
+
 describe('Contract behavioral obligations', () => {
   contractTest('Button', 'a11y.apgPattern', 'button', () => {
     render(<Button>Label</Button>);
