@@ -53,9 +53,9 @@ describe('Image', () => {
       expect(image).toHaveAttribute('alt', 'Descriptive alt text');
     });
 
-    it('handles missing alt text gracefully', () => {
-      // This should still render but may show accessibility warnings
-      render(<Image src="/test-image.jpg" />);
+    it('handles empty alt text gracefully', () => {
+      // alt="" is the correct way to mark a decorative image with no meaningful description
+      render(<Image src="/test-image.jpg" alt="" />);
       const image = screen.getByRole('img');
       expect(image).toBeInTheDocument();
     });

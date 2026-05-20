@@ -73,6 +73,7 @@ describe('AspectRatio', () => {
   it('renders children correctly', () => {
     render(
       <AspectRatio preset="video">
+        {/* eslint-disable-next-line @next/next/no-img-element -- test fixture; next/image is not appropriate in unit test markup */}
         <img src="test.jpg" alt="Test" />
       </AspectRatio>
     );
@@ -88,7 +89,8 @@ describe('AspectRatio', () => {
   it('has no accessibility violations', async () => {
     const { container } = render(
       <AspectRatio preset="video">
-        <img src="test.jpg" alt="Test image" />
+        {/* eslint-disable-next-line @next/next/no-img-element -- test fixture; next/image is not appropriate in unit test markup */}
+        <img src="test.jpg" alt="Test" />
       </AspectRatio>
     );
     // Note: axe testing is handled by the setup file
