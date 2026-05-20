@@ -19,16 +19,13 @@ interface PerformanceData {
  */
 const PerformanceDashboard: React.FC = () => {
   const [performanceData, setPerformanceData] = useState<PerformanceData>({});
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(
+    () =>
+      typeof window !== 'undefined' &&
+      localStorage.getItem('showPerformanceDashboard') === 'true'
+  );
 
   useEffect(() => {
-    // Only show when explicitly enabled via localStorage
-    // Disabled by default even in development to avoid clutter
-    const shouldShow =
-      localStorage.getItem('showPerformanceDashboard') === 'true';
-
-    setIsVisible(shouldShow);
-
     // Listen for toggle events from the navigation menu
     const handleToggle = (event: CustomEvent) => {
       setIsVisible(event.detail.enabled);
@@ -39,7 +36,7 @@ const PerformanceDashboard: React.FC = () => {
       handleToggle as EventListener
     );
 
-    if (shouldShow) {
+    if (isVisible) {
       // Collect performance metrics
       const observer = new PerformanceObserver((list) => {
         for (const entry of list.getEntries()) {
