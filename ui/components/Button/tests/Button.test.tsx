@@ -109,7 +109,9 @@ describe('Icon-only detection', () => {
         <svg aria-hidden="true" />
       </Button>
     );
-    expect(screen.getByRole('button', { name: 'Open menu' })).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: 'Open menu' })
+    ).toBeInTheDocument();
   });
 
   it('wraps text in span.label even during the loading state', () => {
