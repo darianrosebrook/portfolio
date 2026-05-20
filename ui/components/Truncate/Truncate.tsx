@@ -43,6 +43,9 @@ export const Truncate = React.forwardRef<HTMLElement, TruncateProps>(
     const [shouldShowToggle, setShouldShowToggle] = React.useState(false);
     const contentRef = React.useRef<HTMLElement | null>(null);
 
+    // Forward contentRef to the parent ref via the React-blessed primitive.
+    React.useImperativeHandle(ref, () => contentRef.current as HTMLElement, []);
+
     React.useEffect(() => {
       if (!expandable || !contentRef.current) return;
 
@@ -67,31 +70,23 @@ export const Truncate = React.forwardRef<HTMLElement, TruncateProps>(
       ['--ds-truncate-lines' as any]: lines,
     };
 
-    return React.createElement(
-      Component,
-      {
-        'data-ds-component': 'Truncate',
-        'data-slot': 'truncate',
-        ref: (node: HTMLElement | null) => {
-          (contentRef as React.MutableRefObject<HTMLElement | null>).current =
-            node;
-          if (typeof ref === 'function') ref(node);
-          else if (ref && 'current' in (ref as any)) {
-            (ref as React.MutableRefObject<HTMLElement | null>).current = node;
-          }
-        },
-        className: [
+    const ElementType = Component as React.ElementType;
+    return (
+      <ElementType
+        ref={contentRef}
+        data-ds-component="Truncate"
+        data-slot="truncate"
+        className={[
           'truncate',
           isExpanded ? 'expanded' : '',
           expandable && shouldShowToggle ? 'expandable' : '',
           className,
         ]
           .filter(Boolean)
-          .join(' '),
-        style: customStyle,
-        ...rest,
-      },
-      <>
+          .join(' ')}
+        style={customStyle}
+        {...rest}
+      >
         <span data-slot="truncate-content" className="content">
           {children}
         </span>
@@ -106,7 +101,7 @@ export const Truncate = React.forwardRef<HTMLElement, TruncateProps>(
             {isExpanded ? collapseText : expandText}
           </button>
         )}
-      </>
+      </ElementType>
     );
   }
 );
