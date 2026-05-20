@@ -15,21 +15,20 @@ export function TrackSelector({
   currentPageSlug: _currentPageSlug,
   onTrackChange,
 }: TrackSelectorProps) {
-  const [selectedTrack, setSelectedTrack] = useState<TrackId | null>(null);
-
-  // Load saved track preference from localStorage
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('foundation_selected_track');
-      if (
-        saved &&
-        ['designer', 'developer', 'cross-functional'].includes(saved)
-      ) {
-        setSelectedTrack(saved as TrackId);
-        onTrackChange?.(saved as TrackId);
-      }
+  const [selectedTrack, setSelectedTrack] = useState<TrackId | null>(() => {
+    if (typeof window === 'undefined') return null;
+    const saved = localStorage.getItem('foundation_selected_track');
+    if (saved && ['designer', 'developer', 'cross-functional'].includes(saved)) {
+      return saved as TrackId;
     }
-  }, [onTrackChange]);
+    return null;
+  });
+
+  // Notify parent once on mount if we hydrated a track from storage
+  useEffect(() => {
+    if (selectedTrack) onTrackChange?.(selectedTrack);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- intentional mount-only callback; we want this to fire once with the hydrated value, not on every onTrackChange identity change
+  }, []);
 
   const handleTrackSelect = (trackId: TrackId | null) => {
     setSelectedTrack(trackId);
