@@ -117,11 +117,21 @@ const CommandDialog: React.FC<CommandDialogProps> = ({
 
   const content = (
     <CommandProvider {...commandOptions}>
-      <div className="overlay" onClick={modal ? close : undefined}>
+      <div
+        className="overlay"
+        onClick={modal ? close : undefined}
+        onKeyDown={
+          modal
+            ? (e) => {
+                if (e.key === 'Escape') close();
+              }
+            : undefined
+        }
+        role="presentation"
+      >
         <div
           className={['dialog', className].filter(Boolean).join(' ')}
           data-slot="command-dialog"
-          onClick={(e) => e.stopPropagation()}
           role="dialog"
           aria-modal={modal}
         >
@@ -217,7 +227,7 @@ const CommandList = React.forwardRef<HTMLDivElement, CommandListProps>(
         {...rest}
       >
         {filteredItems.length === 0 ? (
-          <div className="empty" role="option">
+          <div className="empty" role="option" aria-selected={false}>
             {emptyMessage}
           </div>
         ) : (
@@ -272,6 +282,14 @@ const CommandItemComponent = React.forwardRef<HTMLDivElement, CommandItemProps>(
       setSelectedIndex(index);
     };
 
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+      if (item.disabled) return;
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        selectItem(item);
+      }
+    };
+
     return (
       <div
         ref={ref}
@@ -289,7 +307,9 @@ const CommandItemComponent = React.forwardRef<HTMLDivElement, CommandItemProps>(
         role="option"
         aria-selected={isSelected}
         aria-disabled={item.disabled}
+        tabIndex={item.disabled ? -1 : 0}
         onClick={item.disabled ? undefined : handleClick}
+        onKeyDown={handleKeyDown}
         onMouseEnter={handleMouseEnter}
         {...rest}
       >
