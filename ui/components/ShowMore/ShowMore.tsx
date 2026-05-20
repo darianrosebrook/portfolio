@@ -58,6 +58,8 @@ const ShowMoreComponent = React.forwardRef<HTMLDivElement, ShowMoreProps>(
   }
 );
 
+ShowMoreComponent.displayName = 'ShowMore';
+
 // Create compound component type
 export const ShowMore = ShowMoreComponent as typeof ShowMoreComponent & {
   Trigger: typeof ShowMoreTrigger;
@@ -111,7 +113,6 @@ export const ShowMoreContent = React.forwardRef<
 ShowMore.Trigger = ShowMoreTrigger;
 ShowMore.Content = ShowMoreContent;
 
-ShowMore.displayName = 'ShowMore';
 ShowMoreTrigger.displayName = 'ShowMore.Trigger';
 ShowMoreContent.displayName = 'ShowMore.Content';
 

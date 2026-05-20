@@ -40,6 +40,8 @@ const ShuttleComponent = React.forwardRef<HTMLDivElement, ShuttleProps>(
   }
 );
 
+ShuttleComponent.displayName = 'Shuttle';
+
 // Create compound component type
 export const Shuttle = ShuttleComponent as typeof ShuttleComponent & {
   Item: typeof ShuttleItem;
@@ -48,7 +50,6 @@ export const Shuttle = ShuttleComponent as typeof ShuttleComponent & {
 // Add compound component properties
 Shuttle.Item = ShuttleItem;
 
-Shuttle.displayName = 'Shuttle';
 ShuttleItem.displayName = 'Shuttle.Item';
 
 export default Shuttle;

@@ -29,24 +29,23 @@ export const SheetProvider: React.FC<SheetProviderProps> = ({
   const contentRef = React.useRef<HTMLDivElement>(null);
   const triggerRef = React.useRef<HTMLButtonElement>(null);
 
-  // Memoize context value with proper dependencies
-  // Functions from useSheet are already stable (useCallback), but the object reference changes
-  // Track the actual changing values: isOpen, side, modal
-  // Refs are stable and don't need to be in dependencies
+  // Memoize context value. Pick the keys explicitly so the closure's reads
+  // match the dep array exactly. (useSheet returns a fresh object each
+  // render, so depending on `sheet` itself would never deduplicate; we
+  // depend on its useCallback-stable functions and primitive state.)
+  const { isOpen, side, modal, open, close, toggle } = sheet;
   const value = React.useMemo<SheetContextValue>(
     () => ({
-      ...sheet,
+      isOpen,
+      side,
+      modal,
+      open,
+      close,
+      toggle,
       contentRef,
       triggerRef,
     }),
-    [
-      sheet.isOpen,
-      sheet.side,
-      sheet.modal,
-      sheet.open,
-      sheet.close,
-      sheet.toggle,
-    ]
+    [isOpen, side, modal, open, close, toggle]
   );
 
   return (
