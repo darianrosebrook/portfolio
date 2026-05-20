@@ -1,0 +1,48 @@
+id: FIX-SETSTATE-D-001
+type: fix
+title: Eliminate set-state-in-effect via derive-at-render and lazy initializers
+status: active
+risk_tier: 3
+mode: development
+created_at: '2026-05-20T22:15:34.796Z'
+updated_at: '2026-05-20T22:15:34.796Z'
+worktree: fix-setstate-d
+blast_radius:
+  modules:
+    - app/blueprints/foundations/_components
+    - ui/modules/DocLayout
+    - ui/modules/PerformanceDashboard
+    - ui/modules/Tiptap
+    - utils
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - app/blueprints/foundations/_components/GlossaryPopover.tsx
+    - app/blueprints/foundations/_components/TrackSelector.tsx
+    - ui/modules/DocLayout/DocLayout.tsx
+    - ui/modules/PerformanceDashboard/PerformanceDashboard.tsx
+    - ui/modules/Tiptap/LinkEditor.tsx
+    - utils/gooeyHighlight.ts
+  out:
+    - node_modules/
+    - dist/
+    - build/
+invariants:
+  - User-visible behavior is unchanged
+  - localStorage reads still happen client-side only
+  - DocLayout still resets activeSection when sections prop changes
+  - GlossaryPopover still resolves the term to the correct glossary item
+acceptance:
+  - id: A1
+    description: 0 react-hooks/set-state-in-effect findings in the 6 in-scope files
+  - id: A2
+    description: tsc --noEmit clean
+  - id: A3
+    description: No regressions in tests that exercise the 6 files
+acceptance_criteria: []
+non_functional:
+  a11y: []
+  perf: {}
+  security: []
+contracts: []
