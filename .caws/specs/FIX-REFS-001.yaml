@@ -1,7 +1,7 @@
 id: FIX-REFS-001
 type: fix
 title: Eliminate ref-access-during-render across components and utilities
-status: active
+status: closed
 risk_tier: 3
 mode: development
 created_at: '2026-05-19T17:23:23.558Z'
