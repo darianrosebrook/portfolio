@@ -48,6 +48,7 @@ export const FileTabs = React.memo(function FileTabs({
       role="tablist"
       aria-label="Files"
       onKeyDown={handleKeyDown}
+      tabIndex={-1}
       style={{
         display: 'flex',
         gap: 8,
