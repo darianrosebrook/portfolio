@@ -350,11 +350,15 @@ export function useModalFocus(
     };
   }, [active, restoreFocus]);
 
-  return {
-    focusableElements: modalRef.current
-      ? getFocusableElements(modalRef.current)
-      : [],
-  };
+  // Return a query function instead of a snapshot. Callers invoke this
+  // when they actually need a current list (e.g. on Tab, on focus events),
+  // which avoids both render-time ref reads and effect-triggered re-renders.
+  const getFocusable = useCallback(
+    () => (modalRef.current ? getFocusableElements(modalRef.current) : []),
+    [modalRef]
+  );
+
+  return { getFocusableElements: getFocusable };
 }
 
 /**

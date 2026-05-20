@@ -12,15 +12,19 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function GlossaryCards() {
   const containerRef = useRef<HTMLDivElement>(null);
+  // Container width drives item count. Track as state so a resize re-renders.
+  const [isNarrow, setIsNarrow] = useState(false);
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const update = () => setIsNarrow(el.clientWidth < 800);
+    update();
+    const observer = new ResizeObserver(update);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
-  let glossaryItems = terms.slice(0, 14);
-  //if container is less than 800px wide, slice the glossaryItems to 10
-  if (
-    containerRef.current?.clientWidth &&
-    containerRef.current.clientWidth < 800
-  ) {
-    glossaryItems = glossaryItems.slice(0, 10);
-  }
+  const glossaryItems = isNarrow ? terms.slice(0, 10) : terms.slice(0, 14);
   const cardsRef = useRef<HTMLDivElement[]>([]);
   /**
    * Each card's transform and center, cached after entrance animation.

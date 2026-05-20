@@ -31,7 +31,25 @@ export function FeatureCoachmark({
 }: FeatureCoachmarkProps) {
   const [hoveredZone, setHoveredZone] = useState<string | null>(null);
   const [focusedZone, setFocusedZone] = useState<string | null>(null);
+  // Track the active zone's DOM element in state so Popover's anchor prop
+  // doesn't require dereferencing a ref Map during render.
+  const [activeAnchor, setActiveAnchor] = useState<HTMLDivElement | null>(null);
   const zoneRefs = useRef<Map<string, HTMLDivElement>>(new Map());
+
+  // Stable callback ref. Reads data-zone-feature off the element to slot
+  // it into the Map; uses React 19's cleanup-callback-ref form so the same
+  // key is deleted on unmount without needing a per-key closure (which is
+  // what previously made the rule fire). Runs at mount/unmount time, not
+  // during render.
+  const setZoneRef = useCallback((el: HTMLDivElement | null) => {
+    if (!el) return;
+    const key = el.dataset.zoneFeature;
+    if (!key) return;
+    zoneRefs.current.set(key, el);
+    return () => {
+      zoneRefs.current.delete(key);
+    };
+  }, []);
 
   // Convert font coordinates to canvas coordinates
   const toCanvasCoords = useCallback(
@@ -90,10 +108,8 @@ export function FeatureCoachmark({
           <React.Fragment key={zone.featureName}>
             {/* Invisible hover zone */}
             <div
-              ref={(el) => {
-                if (el) zoneRefs.current.set(zone.featureName, el);
-                else zoneRefs.current.delete(zone.featureName);
-              }}
+              ref={setZoneRef}
+              data-zone-feature={zone.featureName}
               className="featureZone"
               style={{
                 position: 'fixed',
@@ -104,9 +120,15 @@ export function FeatureCoachmark({
                 cursor: 'pointer',
                 zIndex: 10,
               }}
-              onMouseEnter={() => setHoveredZone(zone.featureName)}
+              onMouseEnter={(e) => {
+                setHoveredZone(zone.featureName);
+                setActiveAnchor(e.currentTarget);
+              }}
               onMouseLeave={() => setHoveredZone(null)}
-              onFocus={() => setFocusedZone(zone.featureName)}
+              onFocus={(e) => {
+                setFocusedZone(zone.featureName);
+                setActiveAnchor(e.currentTarget);
+              }}
               onBlur={() => setFocusedZone(null)}
               tabIndex={0}
               role="button"
@@ -117,7 +139,7 @@ export function FeatureCoachmark({
             {/* Coachmark card */}
             {isActive && (
               <Popover
-                anchor={zoneRefs.current.get(zone.featureName) || undefined}
+                anchor={activeAnchor ?? undefined}
                 open={isActive}
                 onOpenChange={(open) => {
                   if (!open) {
@@ -136,9 +158,7 @@ export function FeatureCoachmark({
                       <h5 className="coachmarkTitle">{zone.label}</h5>
                     </div>
                     {zone.description && (
-                      <p className="coachmarkDescription">
-                        {zone.description}
-                      </p>
+                      <p className="coachmarkDescription">{zone.description}</p>
                     )}
                     <div className="coachmarkHint">
                       Press Tab to navigate between features

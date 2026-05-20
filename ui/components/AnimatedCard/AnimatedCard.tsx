@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useImperativeHandle } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useReducedMotion } from '@/context/ReducedMotionContext';
@@ -119,15 +119,10 @@ export const AnimatedCard = React.forwardRef<HTMLElement, AnimatedCardProps>(
       onAnimationComplete,
     ]);
 
-    // Combine refs
-    const setRefs = (el: HTMLElement | null) => {
-      cardRef.current = el;
-      if (typeof ref === 'function') {
-        ref(el);
-      } else if (ref) {
-        ref.current = el;
-      }
-    };
+    // Forward the internal cardRef to the parent's ref via React's blessed
+    // primitive instead of a manual ref-merging callback. React invokes the
+    // factory after layout, so no ref write happens during render.
+    useImperativeHandle(ref, () => cardRef.current as HTMLElement, []);
 
     const cardClasses = [
       'animatedCard',
@@ -137,20 +132,26 @@ export const AnimatedCard = React.forwardRef<HTMLElement, AnimatedCardProps>(
       .filter(Boolean)
       .join(' ');
 
-    const props = {
-      ref: setRefs,
-      'data-ds-component': 'AnimatedCard',
-      className: cardClasses,
-      style: {
-        // Set initial state for SSR/hydration
-        opacity: prefersReducedMotion ? 1 : 0,
-      },
-      onClick,
-      ...(Component === 'a' ? { href } : {}),
-      ...rest,
-    };
-
-    return React.createElement(Component, props, children);
+    // Component is a dynamic intrinsic tag (article | div | li | a). Each
+    // tag accepts a different ref type, and their intersection is empty,
+    // so widen via unknown to satisfy TS without losing JSX safety.
+    const ElementType = Component as React.ElementType;
+    return (
+      <ElementType
+        ref={cardRef}
+        data-ds-component="AnimatedCard"
+        className={cardClasses}
+        style={{
+          // Set initial state for SSR/hydration
+          opacity: prefersReducedMotion ? 1 : 0,
+        }}
+        onClick={onClick}
+        {...(Component === 'a' ? { href } : {})}
+        {...rest}
+      >
+        {children}
+      </ElementType>
+    );
   }
 );
 

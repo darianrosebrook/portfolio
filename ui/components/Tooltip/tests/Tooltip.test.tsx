@@ -5,6 +5,13 @@ import { vi } from 'vitest';
 import Tooltip from '../Tooltip';
 import { contractTest } from '@/test/utils/contractTest';
 
+// Tooltip now wraps children in a span that owns the hover/focus/click
+// handlers and the aria-describedby relationship (the wrapper pattern
+// mirrors Popover.Trigger). Tests target the wrapper via the
+// `data-slot="tooltip-trigger"` selector.
+const getTrigger = (container: HTMLElement) =>
+  container.querySelector('[data-slot="tooltip-trigger"]') as HTMLElement;
+
 describe('Tooltip', () => {
   it('renders tooltip trigger', () => {
     render(
@@ -13,20 +20,19 @@ describe('Tooltip', () => {
       </Tooltip>
     );
 
-    const trigger = screen.getByText('Trigger');
-    expect(trigger).toBeInTheDocument();
+    // Children are still rendered inside the wrapper.
+    expect(screen.getByText('Trigger')).toBeInTheDocument();
   });
 
   it('shows tooltip on hover', () => {
     vi.useFakeTimers();
-    render(
+    const { container } = render(
       <Tooltip content="Tooltip text" delay={0}>
         <button>Trigger</button>
       </Tooltip>
     );
 
-    const trigger = screen.getByText('Trigger');
-    fireEvent.mouseEnter(trigger);
+    fireEvent.mouseEnter(getTrigger(container));
     act(() => vi.runAllTimers());
 
     expect(screen.getByRole('tooltip')).toBeInTheDocument();
@@ -40,8 +46,7 @@ describe('Tooltip', () => {
       </Tooltip>
     );
 
-    const trigger = screen.getByText('Trigger');
-    expect(trigger).toBeInTheDocument();
+    expect(screen.getByText('Trigger')).toBeInTheDocument();
   });
 
   describe('Accessibility', () => {
@@ -56,13 +61,13 @@ describe('Tooltip', () => {
 
     it('provides proper ARIA attributes when visible', () => {
       vi.useFakeTimers();
-      render(
+      const { container } = render(
         <Tooltip content="Tooltip text" delay={0}>
           <button>Trigger</button>
         </Tooltip>
       );
 
-      const trigger = screen.getByText('Trigger');
+      const trigger = getTrigger(container);
       fireEvent.focus(trigger);
       act(() => vi.runAllTimers());
 
@@ -74,12 +79,12 @@ describe('Tooltip', () => {
   describe('Contract obligations', () => {
     contractTest('Tooltip', 'a11y.apgPattern', 'tooltip', () => {
       vi.useFakeTimers();
-      render(
+      const { container } = render(
         <Tooltip content="Helpful tip" delay={0}>
           <button>Trigger</button>
         </Tooltip>
       );
-      fireEvent.mouseEnter(screen.getByText('Trigger'));
+      fireEvent.mouseEnter(getTrigger(container));
       act(() => vi.runAllTimers());
       expect(screen.getByRole('tooltip')).toBeInTheDocument();
       vi.useRealTimers();
@@ -88,13 +93,13 @@ describe('Tooltip', () => {
     contractTest('Tooltip', 'dismissal.triggers', 'escape', () => {
       vi.useFakeTimers();
 
-      render(
+      const { container } = render(
         <Tooltip content="Tooltip text" delay={0}>
           <button>Trigger</button>
         </Tooltip>
       );
 
-      const trigger = screen.getByText('Trigger');
+      const trigger = getTrigger(container);
 
       // Show tooltip via focus
       fireEvent.focus(trigger);
@@ -111,13 +116,13 @@ describe('Tooltip', () => {
     contractTest('Tooltip', 'dismissal.triggers', 'blur', () => {
       vi.useFakeTimers();
 
-      render(
+      const { container } = render(
         <Tooltip content="Tooltip text" delay={0}>
           <button>Trigger</button>
         </Tooltip>
       );
 
-      const trigger = screen.getByText('Trigger');
+      const trigger = getTrigger(container);
 
       // Show tooltip via focus
       fireEvent.focus(trigger);
