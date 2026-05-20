@@ -16,7 +16,7 @@ export const OTPInput = React.forwardRef<HTMLDivElement, OTPInputProps>(
         id={id}
         aria-describedby={describedBy}
         aria-disabled={disabled || undefined}
-        aria-readonly={readOnly || undefined}
+        data-readonly={readOnly || undefined}
         data-length={length}
         className={['group', className].filter(Boolean).join(' ')}
         {...rest}

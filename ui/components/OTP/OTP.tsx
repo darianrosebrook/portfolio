@@ -21,7 +21,7 @@ export const OTP = React.forwardRef<HTMLDivElement, OTPProps>(
         id={ctx.id}
         aria-describedby={ctx.describedBy}
         aria-disabled={ctx.disabled || undefined}
-        aria-readonly={ctx.readOnly || undefined}
+        data-readonly={ctx.readOnly || undefined}
         data-length={ctx.length}
         className={['otp', className].filter(Boolean).join(' ')}
         {...rest}
