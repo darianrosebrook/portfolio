@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Blueprints from '@/app/heroes/blueprints';
+import { useIsMounted } from '@/utils/hooks';
 
 const LoadingPlaceholder = () => (
   <div
@@ -18,11 +19,7 @@ const LoadingPlaceholder = () => (
  * The mounted state ensures we only render on the client to prevent hydration mismatch
  */
 const BlueprintsWrapper: React.FC = () => {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useIsMounted();
 
   // Only render Blueprints on the client to avoid hydration mismatch
   if (!mounted) {

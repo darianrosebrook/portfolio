@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Swatches } from './swatches';
+import { useIsMounted } from '@/utils/hooks';
 
 const LoadingPlaceholder = () => (
   <div
@@ -18,11 +19,7 @@ const LoadingPlaceholder = () => (
  * and prevent hydration mismatch
  */
 const SwatchesWrapper: React.FC = () => {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useIsMounted();
 
   if (!mounted) {
     return <LoadingPlaceholder />;
