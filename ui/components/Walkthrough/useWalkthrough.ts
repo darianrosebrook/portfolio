@@ -1,5 +1,5 @@
 /** Headless logic hook for Walkthrough */
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { WalkthroughStepSpec } from './types';
 
 type PersistedState = { index?: number; completed?: boolean };
@@ -174,8 +174,16 @@ export function useWalkthrough(opts: UseWalkthroughOptions) {
     goTo(prevIdx);
   }, [currentIndex, goTo]);
 
-  // Resolve anchor whenever step changes or layout possibly changed
+  // Resolve anchor whenever step changes or layout possibly changed.
+  // The setAnchorEl inside resolver() is the entire purpose of this effect:
+  // we need to re-query the DOM for the current step's target whenever the
+  // step changes or the viewport reflows. There's no derive-at-render
+  // alternative because toElement() does document.querySelector — a DOM
+  // read during render would be its own anti-pattern. React 19's
+  // useEffectEvent would let us mark this intentional; until that's stable
+  // the rule disagrees with the load-bearing pattern.
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional DOM-to-state sync on step/layout change
     resolver();
     if (typeof window === 'undefined') return;
 
@@ -208,8 +216,17 @@ export function useWalkthrough(opts: UseWalkthroughOptions) {
     }
   }, [anchorEl, currentIndex]);
 
+  // Auto-start once on mount when conditions are met. The setState chain
+  // inside start() (setOpen / setInternalIndex / setCompleted) plus the
+  // onStart?.() callback need to fire after mount, not during render, so
+  // an effect is the right shape — the lint rule still flags it. Guard
+  // with a ref so we fire at most once even if deps change.
+  const hasAutoStartedRef = useRef(false);
   useEffect(() => {
+    if (hasAutoStartedRef.current) return;
     if (autoStart && currentIndex < 0 && !completed && count > 0) {
+      hasAutoStartedRef.current = true;
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional once-on-mount auto-start
       start();
     }
   }, [autoStart, completed, count, currentIndex, start]);
