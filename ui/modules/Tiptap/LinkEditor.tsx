@@ -24,22 +24,25 @@ export const LinkEditor: React.FC<LinkEditorProps> = ({
   onClose,
   initialUrl = '',
 }) => {
-  const [url, setUrl] = useState(initialUrl);
-  const [title, setTitle] = useState('');
+  const [url, setUrl] = useState<string>(() => {
+    if (editor.isActive('link')) {
+      return (editor.getAttributes('link').href as string) || '';
+    }
+    return initialUrl;
+  });
+  const [title, setTitle] = useState<string>(() => {
+    if (editor.isActive('link')) {
+      return (editor.getAttributes('link').title as string) || '';
+    }
+    return '';
+  });
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     // Focus input on mount
     inputRef.current?.focus();
     inputRef.current?.select();
-
-    // Get existing link attributes if editing
-    if (editor.isActive('link')) {
-      const attrs = editor.getAttributes('link');
-      setUrl(attrs.href || '');
-      setTitle(attrs.title || '');
-    }
-  }, [editor]);
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

@@ -11,14 +11,10 @@ interface GlossaryPopoverProps {
 
 export function GlossaryPopover({ termId, children }: GlossaryPopoverProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [glossaryItem, setGlossaryItem] = useState<GlossaryItem | null>(null);
+  const glossaryItem: GlossaryItem | null =
+    glossaryItems.find((item) => item.id === termId) ?? null;
   const popoverRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLSpanElement>(null);
-
-  useEffect(() => {
-    const item = glossaryItems.find((item) => item.id === termId);
-    setGlossaryItem(item || null);
-  }, [termId]);
 
   useEffect(() => {
     if (!isOpen) return;
