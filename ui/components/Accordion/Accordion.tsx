@@ -140,6 +140,19 @@ const AccordionContent: React.FC<AccordionContentProps> = ({
   const { isItemOpen } = useAccordionContext();
   const isOpen = isItemOpen(value);
   const contentRef = React.useRef<HTMLDivElement>(null);
+  // Measure scrollHeight after mount / children change. Tracked as state
+  // so the CSS variable updates and the transition has a target height.
+  const [contentHeight, setContentHeight] = React.useState(0);
+
+  React.useLayoutEffect(() => {
+    const el = contentRef.current;
+    if (!el) return;
+    const measure = () => setContentHeight(el.scrollHeight);
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [children]);
 
   return (
     <div
@@ -150,7 +163,7 @@ const AccordionContent: React.FC<AccordionContentProps> = ({
       style={
         {
           '--ds-accordion-content-height': isOpen
-            ? `${contentRef.current?.scrollHeight}px`
+            ? `${contentHeight}px`
             : '0px',
         } as React.CSSProperties
       }
