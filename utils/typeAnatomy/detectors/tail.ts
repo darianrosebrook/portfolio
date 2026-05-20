@@ -18,14 +18,14 @@ import type { FeatureInstance, GeometryCache, Point2D } from '../types';
  * Returns polyline or line shapes at detected tail locations.
  */
 export function detectTail(geo: GeometryCache): FeatureInstance[] {
-  const { glyph, metrics, svgShape, scale } = geo;
+  const { glyph, metrics, scale } = geo;
 
   if (!glyph?.path?.commands || !glyph.bbox) {
     return [];
   }
 
   const instances: FeatureInstance[] = [];
-  const { eps, bboxW, bboxH, stemWidth, overshoot } = scale;
+  const { stemWidth } = scale;
 
   // Gate: glyph must extend below baseline
   const minDescentThreshold = (metrics.baseline - metrics.descent) * 0.15;
@@ -37,7 +37,6 @@ export function detectTail(geo: GeometryCache): FeatureInstance[] {
 
   // Calculate glyph center of mass (approximation using bbox center)
   const glyphCenterX = (glyph.bbox.minX + glyph.bbox.maxX) / 2;
-  const glyphCenterY = (glyph.bbox.minY + glyph.bbox.maxY) / 2;
 
   // Collect tail points using extremum-from-center approach
   const tailPoints = collectTailPointsFromCenter(geo, glyphCenterX);

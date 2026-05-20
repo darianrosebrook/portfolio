@@ -11,7 +11,7 @@
  */
 
 import { rayHits } from '@/utils/geometry/geometryCore';
-import type { FeatureInstance, GeometryCache, Point2D } from '../types';
+import type { FeatureInstance, GeometryCache } from '../types';
 
 /**
  * Represents a filled span on a scanline.
@@ -45,7 +45,7 @@ export function detectAperture(geo: GeometryCache): FeatureInstance[] {
   }
 
   const instances: FeatureInstance[] = [];
-  const { eps, bboxW, bboxH, stemWidth, overshoot } = scale;
+  const { bboxW, stemWidth, overshoot } = scale;
 
   // Minimum gap width to be considered an aperture
   const minGapWidth = Math.max(stemWidth * 0.3, bboxW * 0.05);

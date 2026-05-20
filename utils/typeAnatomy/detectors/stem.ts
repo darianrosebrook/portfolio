@@ -11,7 +11,7 @@
  */
 
 import { rayHits } from '@/utils/geometry/geometryCore';
-import type { FeatureInstance, GeometryCache, Point2D } from '../types';
+import type { FeatureInstance, GeometryCache } from '../types';
 import { rectToPolygon } from '../evidence/regionFromShape';
 
 /**
@@ -37,7 +37,7 @@ export function detectStem(geo: GeometryCache): FeatureInstance[] {
   }
 
   const instances: FeatureInstance[] = [];
-  const { eps, bboxW, bboxH, stemWidth, overshoot } = scale;
+  const { bboxW, bboxH, stemWidth, overshoot } = scale;
 
   // Italic angle compensation (convert degrees to radians)
   const italicRad = (italicAngle * Math.PI) / 180;

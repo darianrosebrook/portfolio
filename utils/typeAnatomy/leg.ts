@@ -3,7 +3,7 @@
  * Detects diagonal stroke extending downward (e.g., R, K).
  */
 
-import { getOvershoot, shapeForV2 } from '@/utils/caching/caching';
+import { shapeForV2 } from '@/utils/caching/caching';
 import { isDrawable, rayHits } from '@/utils/geometry/geometryCore';
 import type { Glyph } from 'fontkit';
 import type { Metrics } from './index';
@@ -19,7 +19,6 @@ export function hasLeg(g: Glyph, m: Metrics): boolean {
   if (!isDrawable(g)) return false;
 
   const gs = shapeForV2(g);
-  const overshoot = getOvershoot(g);
   const bboxW = g.bbox.maxX - g.bbox.minX;
 
   // Leg typically starts around x-height or cap-height and extends downward
@@ -46,7 +45,6 @@ export function hasLeg(g: Glyph, m: Metrics): boolean {
 
     // Leg should have intersections that span from upper to lower region
     if (points.length >= 2) {
-      const minY = Math.min(...points.map((p) => p.y));
       const maxY = Math.max(...points.map((p) => p.y));
       const span = legStartY - maxY; // How far down it extends
 

@@ -153,7 +153,6 @@ export async function analyzeTokenUsage(): Promise<UsageReport> {
   }
 
   // Scan files
-  let scannedFiles = 0;
   for (const filePath of filesToScan) {
     try {
       const foundTokens = scanFileForTokens(filePath);
@@ -188,8 +187,7 @@ export async function analyzeTokenUsage(): Promise<UsageReport> {
           }
         }
       }
-      scannedFiles++;
-    } catch (error) {
+    } catch {
       // Skip files that can't be read
       continue;
     }

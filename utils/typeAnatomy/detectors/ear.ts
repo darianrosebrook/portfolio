@@ -46,7 +46,7 @@ export function detectEar(geo: GeometryCache): FeatureInstance[] {
   }
 
   const instances: FeatureInstance[] = [];
-  const { eps, bboxW, bboxH, stemWidth, overshoot } = scale;
+  const { eps, bboxW, stemWidth, overshoot } = scale;
 
   // Ears are typically found at the top of the bowl, projecting right
   // Check in the x-height zone

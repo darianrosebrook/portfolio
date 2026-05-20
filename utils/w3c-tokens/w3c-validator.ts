@@ -84,7 +84,7 @@ export async function loadDefaultSchema(): Promise<object | null> {
     const schemaModule = await import('./w3c-schema-strict.json');
     defaultSchema = schemaModule.default || schemaModule;
     return defaultSchema;
-  } catch (error) {
+  } catch {
     // Schema not found or not importable
     // User should call setDefaultSchema() manually
     return null;
@@ -141,7 +141,6 @@ export interface ValidationOptions {
   customSchema?: object;
 }
 
-let ajvInstance: Ajv | null = null;
 let schemaValidator: ValidateFunction | null = null;
 
 /**
@@ -176,7 +175,6 @@ function initializeValidator(
 
   try {
     schemaValidator = ajv.compile(schemaToUse);
-    ajvInstance = ajv;
     return schemaValidator;
   } catch (error) {
     console.error('[validator] Failed to compile schema:', error);
@@ -256,7 +254,6 @@ function performCustomValidations(tokens: unknown): {
 
   // Track token references for circular dependency detection
   const tokenRefs = new Map<string, string>();
-  const visited = new Set<string>();
 
   function validateNode(node: unknown, path = ''): void {
     if (!node || typeof node !== 'object' || Array.isArray(node)) {

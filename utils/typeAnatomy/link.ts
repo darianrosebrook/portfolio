@@ -6,7 +6,6 @@
 import { getOvershoot, shapeForV2 } from '@/utils/caching/caching';
 import { isDrawable, isInside, rayHits } from '@/utils/geometry/geometryCore';
 import type { Glyph } from 'fontkit';
-import { FeatureDetectionConfig } from './featureConfig';
 import type { Metrics } from './index';
 
 /**
@@ -40,7 +39,6 @@ export function hasLink(g: Glyph, m: Metrics): boolean {
   }
 
   // Now look for narrow vertical connection in the link region
-  const EPS = FeatureDetectionConfig.global.defaultEps;
   const narrowThreshold = bboxW * 0.2; // Link is typically narrow
   let narrowVerticalCount = 0;
 

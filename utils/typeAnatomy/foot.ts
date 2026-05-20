@@ -3,7 +3,7 @@
  * Detects the part of a stem that rests on the baseline.
  */
 
-import { getOvershoot, shapeForV2 } from '@/utils/caching/caching';
+import { shapeForV2 } from '@/utils/caching/caching';
 import { isDrawable, rayHits } from '@/utils/geometry/geometryCore';
 import type { Glyph } from 'fontkit';
 import { FeatureDetectionConfig } from './featureConfig';
@@ -20,7 +20,6 @@ export function hasFoot(g: Glyph, m: Metrics): boolean {
   if (!isDrawable(g)) return false;
 
   const gs = shapeForV2(g);
-  const overshoot = getOvershoot(g);
   const bboxW = g.bbox.maxX - g.bbox.minX;
   const EPS = FeatureDetectionConfig.global.defaultEps;
 

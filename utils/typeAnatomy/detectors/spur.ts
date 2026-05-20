@@ -27,7 +27,7 @@ export function detectSpur(geo: GeometryCache): FeatureInstance[] {
   }
 
   const instances: FeatureInstance[] = [];
-  const { eps, bboxW, bboxH, stemWidth, overshoot } = scale;
+  const { bboxH, stemWidth, overshoot } = scale;
 
   // Spur is a small horizontal projection at terminal positions
   // Check near baseline and at glyph terminations

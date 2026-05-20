@@ -9,12 +9,7 @@ import type {
   ResolverConfig,
   ResolveContext,
 } from './types';
-import {
-  resolvePath,
-  DEFAULT_REF,
-  resolveInterpolated,
-  applyTransforms,
-} from './resolver';
+import { DEFAULT_REF, resolveInterpolated, applyTransforms } from './resolver';
 import { builtInTransforms } from './transforms';
 import { Logger } from '../../helpers/logger';
 import { getNestedValue } from './pathUtils';
