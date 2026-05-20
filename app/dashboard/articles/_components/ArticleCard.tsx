@@ -250,13 +250,23 @@ export function ArticleCard({ article, onDelete }: ArticleCardProps) {
       {isDeleting && (
         <div
           className={styles.dialogOverlay}
-          onClick={() => setIsDeleting(false)}
+          role="presentation"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setIsDeleting(false);
+          }}
+          onKeyDown={(e) => {
+            if (e.key === 'Escape') setIsDeleting(false);
+          }}
         >
           <div
             className={styles.dialogContent}
-            onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal
+            aria-labelledby="delete-dialog-title"
           >
-            <h2 className={styles.dialogTitle}>Delete Article</h2>
+            <h2 id="delete-dialog-title" className={styles.dialogTitle}>
+              Delete Article
+            </h2>
             <p className={styles.dialogDescription}>
               Are you sure you want to delete &ldquo;{displayTitle}&rdquo;? This
               action cannot be undone.
