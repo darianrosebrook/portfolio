@@ -88,10 +88,18 @@ export default function Navbar({ pages = [] }: NavbarProps) {
     [theme]
   );
 
-  useEffect(() => {
-    const html = document.documentElement;
-    html.classList.remove('light', 'dark');
+  // When the OS theme preference changes, reset any user override:
+  // - State part (slider): adjust during render via the "previous-value"
+  //   pattern (https://react.dev/learn/you-might-not-need-an-effect#adjusting-state-when-a-prop-changes).
+  // - DOM part (classList): keep in an effect since it's a side effect,
+  //   not state derivation.
+  const [prevPrefersDark, setPrevPrefersDark] = useState(prefersDark);
+  if (prevPrefersDark !== prefersDark) {
+    setPrevPrefersDark(prefersDark);
     setSlider(false);
+  }
+  useEffect(() => {
+    document.documentElement.classList.remove('light', 'dark');
   }, [prefersDark]);
 
   return (
