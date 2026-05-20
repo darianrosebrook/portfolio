@@ -7,12 +7,12 @@
  */
 'use client';
 import { Placement, TriggerStrategy } from '@/types/ui';
-import { setRef } from '@/utils/refs';
 import React, {
   forwardRef,
   useCallback,
   useEffect,
   useId,
+  useImperativeHandle,
   useLayoutEffect,
   useRef,
   useState,
@@ -46,9 +46,11 @@ export interface TooltipProps {
    */
   className?: string;
   /**
-   * Children to wrap (trigger element)
+   * Trigger content. Rendered inside a span wrapper that owns the hover/
+   * focus/click handlers and the aria-describedby relationship. The wrapper
+   * pattern mirrors Popover.Trigger and avoids cloning the user's element.
    */
-  children: React.ReactElement;
+  children: React.ReactNode;
 }
 
 interface Position {
@@ -70,9 +72,18 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     forwardedRef
   ) => {
     const tooltipId = `tooltip-${useId()}`;
-    const triggerRef = useRef<HTMLElement | null>(null);
+    const triggerRef = useRef<HTMLSpanElement | null>(null);
     const tooltipRef = useRef<HTMLDivElement | null>(null);
     const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+    // Forward the tooltip element's ref to consumers via the documented
+    // React 19 primitive. Tooltip's forwardedRef historically referred to
+    // the tooltip overlay (not the trigger), so keep that semantic.
+    useImperativeHandle(
+      forwardedRef,
+      () => tooltipRef.current as HTMLDivElement,
+      []
+    );
 
     const [isVisible, setIsVisible] = useState(false);
     const [position, setPosition] = useState<Position>({ top: 0, left: 0 });
@@ -217,59 +228,45 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       return () => document.removeEventListener('keydown', handleKeyDown);
     }, [isVisible, hideTooltip]);
 
-    // Clone child with event handlers
-    type ChildProps = React.HTMLAttributes<HTMLElement> & {
-      ref?: React.Ref<HTMLElement>;
-    };
-    const childProps = (children.props || {}) as ChildProps;
+    // Wrapper span owns the ref, event handlers, and aria-describedby
+    // relationship. display:contents keeps it layout-transparent so the
+    // user's child element remains the visible/positionable thing.
+    // onFocus/onBlur bubble, so focus events on inner focusable children
+    // (button, link, etc.) reach this wrapper and trigger the tooltip.
+    // Mirror onClick for keyboard-activated children (Enter/Space on a
+    // <button> dispatches a click that bubbles here, but Space-then-keyup
+    // doesn't synthesize click on non-button focusables, so listen for the
+    // key directly).
+    const handleKeyDown = useCallback(
+      (e: React.KeyboardEvent<HTMLSpanElement>) => {
+        if (trigger === 'click' && (e.key === 'Enter' || e.key === ' ')) {
+          handleClick();
+        }
+      },
+      [trigger, handleClick]
+    );
 
-    const triggerElement = React.cloneElement(children, {
-      ref: (node: HTMLElement | null) => {
-        triggerRef.current = node;
-
-        // Handle forwarded ref from child
-        const childRef = (
-          children as React.ReactElement & { ref?: React.Ref<HTMLElement> }
-        ).ref;
-        setRef(childRef, node);
-      },
-      onMouseEnter: (e: React.MouseEvent<HTMLElement>) => {
-        childProps.onMouseEnter?.(e);
-        handleMouseEnter();
-      },
-      onMouseLeave: (e: React.MouseEvent<HTMLElement>) => {
-        childProps.onMouseLeave?.(e);
-        handleMouseLeave();
-      },
-      onFocus: (e: React.FocusEvent<HTMLElement>) => {
-        childProps.onFocus?.(e);
-        handleFocus();
-      },
-      onBlur: (e: React.FocusEvent<HTMLElement>) => {
-        childProps.onBlur?.(e);
-        handleBlur();
-      },
-      onClick: (e: React.MouseEvent<HTMLElement>) => {
-        childProps.onClick?.(e);
-        handleClick();
-      },
-      'aria-describedby': isVisible
-        ? tooltipId
-        : childProps['aria-describedby'],
-    } as ChildProps);
+    const triggerElement = (
+      <span
+        ref={triggerRef}
+        className="tooltipTrigger"
+        style={{ display: 'contents' }}
+        data-slot="tooltip-trigger"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        onClick={handleClick}
+        onKeyDown={handleKeyDown}
+        aria-describedby={isVisible ? tooltipId : undefined}
+      >
+        {children}
+      </span>
+    );
 
     const tooltipNode = isVisible && (
       <div
-        ref={(node) => {
-          tooltipRef.current = node;
-          if (forwardedRef) {
-            if (typeof forwardedRef === 'function') {
-              forwardedRef(node);
-            } else {
-              forwardedRef.current = node;
-            }
-          }
-        }}
+        ref={tooltipRef}
         data-ds-component="Tooltip"
         id={tooltipId}
         role="tooltip"
