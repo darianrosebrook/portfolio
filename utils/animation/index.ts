@@ -351,19 +351,16 @@ export class AnimationController {
 
 // Hook for using animation controller
 export function useAnimationController() {
-  const controllerRef = React.useRef<AnimationController | null>(null);
-
-  if (!controllerRef.current) {
-    controllerRef.current = new AnimationController();
-  }
+  // useState's lazy initializer guarantees the controller is built exactly
+  // once per component instance without reading or writing a ref during
+  // render. The state setter is never called, so React never re-renders.
+  const [controller] = React.useState(() => new AnimationController());
 
   React.useEffect(() => {
-    return () => {
-      controllerRef.current?.destroy();
-    };
-  }, []);
+    return () => controller.destroy();
+  }, [controller]);
 
-  return controllerRef.current;
+  return controller;
 }
 
 // Utility functions for common animation patterns
