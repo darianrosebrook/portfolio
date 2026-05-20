@@ -70,12 +70,9 @@ function InteractionTestContent() {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [showDetails, addLog]);
 
-  // Monitor axis value changes (drag interactions)
-  useEffect(() => {
-    addLog(
-      `Axis values changed: Weight=${axisValues.wght.toFixed(2)}, Opsz=${axisValues.opsz.toFixed(2)}`
-    );
-  }, [axisValues]);
+  // Axis values are already shown live in the State Display panel below
+  // (Weight + Optical Size rows), so a separate change log would duplicate
+  // that information. Drag interactions are visible there in real time.
 
   return (
     <div className={styles.container}>
