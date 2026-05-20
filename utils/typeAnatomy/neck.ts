@@ -6,7 +6,6 @@
 import { getOvershoot, shapeForV2 } from '@/utils/caching/caching';
 import { isDrawable, rayHits } from '@/utils/geometry/geometryCore';
 import type { Glyph } from 'fontkit';
-import { FeatureDetectionConfig } from './featureConfig';
 import type { Metrics } from './index';
 
 /**
@@ -32,7 +31,6 @@ export function hasNeck(g: Glyph, m: Metrics): boolean {
   const neckX = g.bbox.maxX - bboxW * 0.3; // Right 30% of glyph
 
   let narrowRegionCount = 0;
-  const EPS = FeatureDetectionConfig.global.defaultEps;
   const narrowThreshold = bboxW * 0.15; // Narrow if less than 15% of width
 
   // Scan vertically through the neck region

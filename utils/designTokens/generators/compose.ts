@@ -140,10 +140,11 @@ function loadModularTokens(baseDir: string): TokenGroup | null {
       if (moduleTokens) {
         console.log(`[tokens] Loaded: ${baseDir}/${dirent.name}`);
         // Remove $schema and meta from modules
-        const { $schema, meta, ...tokenData } = moduleTokens as Record<
-          string,
-          unknown
-        >;
+        const {
+          $schema: _$schema,
+          meta: _meta,
+          ...tokenData
+        } = moduleTokens as Record<string, unknown>;
         deepMerge(merged, tokenData as TokenGroup);
       }
     } else if (dirent.isDirectory()) {

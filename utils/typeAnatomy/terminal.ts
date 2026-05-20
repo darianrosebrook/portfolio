@@ -160,7 +160,7 @@ function detectStraightTerminal(
   gs: ReturnType<typeof shapeForV2>,
   overshoot: number,
   bboxW: number,
-  EPS: number
+  _EPS: number
 ): boolean {
   // Check edges for non-serif stroke endings
   const edgeRegions = [

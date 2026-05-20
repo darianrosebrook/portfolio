@@ -12,7 +12,6 @@ import {
   type ResolutionInput,
 } from './resolver-module';
 import type { ResolverConfig } from './types';
-import { getNestedValue } from './pathUtils';
 
 /**
  * Check if a resolver document exists and use it, otherwise fall back to legacy resolution

@@ -256,7 +256,7 @@ function detectSerifFromFont(font: Font): boolean {
  * Analyzes a glyph's terminals for serif characteristics.
  * Returns true if serifs detected, false if no serifs, null if inconclusive.
  */
-function analyzeGlyphTerminals(glyph: Glyph, font: Font): boolean | null {
+function analyzeGlyphTerminals(glyph: Glyph, _font: Font): boolean | null {
   const svgShape = glyphToShape(glyph);
   const bbox = glyph.bbox;
 

@@ -193,7 +193,7 @@ export function resolvePath(
           hint: 'Verify the token path exists in your resolver document',
         });
       }
-    } catch (error) {
+    } catch {
       ctx.config.onWarn?.({
         code: 'UNRESOLVED_FALLBACK',
         path,

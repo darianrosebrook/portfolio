@@ -29,7 +29,7 @@ export function detectFinial(geo: GeometryCache): FeatureInstance[] {
   }
 
   const instances: FeatureInstance[] = [];
-  const { eps, bboxW, bboxH, stemWidth, overshoot } = scale;
+  const { bboxH, stemWidth, overshoot } = scale;
 
   // Finials are at terminal positions - check near baseline and cap/x-height
   const terminals = [
@@ -96,7 +96,7 @@ function detectFinialAtEdge(
   zone: string
 ): FeatureInstance | null {
   const { svgShape, scale } = geo;
-  const { eps, stemWidth, bboxH } = scale;
+  const { stemWidth, bboxH } = scale;
 
   // Check for tapering by probing slightly above/below
   const probeOffsets = [bboxH * 0.03, -bboxH * 0.03];

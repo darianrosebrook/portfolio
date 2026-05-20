@@ -138,7 +138,7 @@ export function detectLoop(geo: GeometryCache): FeatureInstance[] {
  */
 function traceLoopRegion(geo: GeometryCache): Point2D[] | null {
   const { glyph, metrics, svgShape, scale } = geo;
-  const { eps, stemWidth, overshoot } = scale;
+  const { overshoot } = scale;
   const points: Point2D[] = [];
 
   // Find loop center by scanning at mid-descender height

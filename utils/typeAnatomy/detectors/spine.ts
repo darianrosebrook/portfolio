@@ -35,7 +35,7 @@ export function detectSpine(geo: GeometryCache): FeatureInstance[] {
   }
 
   const instances: FeatureInstance[] = [];
-  const { eps, bboxW, bboxH, stemWidth, overshoot } = scale;
+  const { bboxH, stemWidth, overshoot } = scale;
 
   // Determine height zone (uppercase S uses capHeight, lowercase s uses xHeight)
   const glyphTop = glyph.bbox.maxY;

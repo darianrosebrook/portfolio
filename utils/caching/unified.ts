@@ -5,8 +5,6 @@
  * caching strategies for optimal performance across different use cases.
  */
 
-import { performanceMonitor } from '../performance/monitor';
-
 // Cache entry with metadata
 interface CacheEntry<T = any> {
   data: T;
@@ -328,7 +326,7 @@ class FileCache<T = any> implements CacheBackend<T> {
     };
   }
 
-  async get(key: string): Promise<T | undefined> {
+  async get(_key: string): Promise<T | undefined> {
     // FileCache is not implemented - always return undefined
     // TODO: Implement file-based caching using IndexedDB or filesystem API
     this.stats.misses++;
@@ -336,13 +334,13 @@ class FileCache<T = any> implements CacheBackend<T> {
     return undefined;
   }
 
-  async set(key: string, value: T, ttl?: number): Promise<void> {
+  async set(_key: string, _value: T, _ttl?: number): Promise<void> {
     // FileCache is not implemented - no-op
     // TODO: Implement file-based caching using IndexedDB or filesystem API
     this.stats.entries++;
   }
 
-  async delete(key: string): Promise<boolean> {
+  async delete(_key: string): Promise<boolean> {
     this.stats.entries = Math.max(0, this.stats.entries - 1);
     return true;
   }
@@ -352,7 +350,7 @@ class FileCache<T = any> implements CacheBackend<T> {
     this.stats.totalSize = 0;
   }
 
-  async has(key: string): Promise<boolean> {
+  async has(_key: string): Promise<boolean> {
     return false;
   }
 

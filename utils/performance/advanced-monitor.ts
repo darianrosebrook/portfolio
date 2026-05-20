@@ -224,7 +224,7 @@ export const runtimePerformanceObserver = {
           'layout-shift',
           layoutShiftObserver
         );
-      } catch (e) {
+      } catch {
         console.warn('Layout shift observation not supported');
       }
 
@@ -245,7 +245,7 @@ export const runtimePerformanceObserver = {
       try {
         longTaskObserver.observe({ entryTypes: ['longtask'] });
         runtimePerformanceObserver.observers.set('longtask', longTaskObserver);
-      } catch (e) {
+      } catch {
         console.warn('Long task observation not supported');
       }
     }
@@ -328,7 +328,7 @@ if (typeof window !== 'undefined') {
 
 // Helper function for dependency analysis (simplified)
 function getComponentDependencies(
-  componentName: string
+  _componentName: string
 ): Array<{ name: string; size: number }> {
   // This would integrate with your build tool to get actual dependency sizes
   // For now, return mock data

@@ -30,7 +30,7 @@ export function detectEye(geo: GeometryCache): FeatureInstance[] {
   }
 
   const instances: FeatureInstance[] = [];
-  const { eps, bboxW, bboxH, stemWidth } = scale;
+  const { bboxH } = scale;
 
   // Primary method: use hole contours in the lowercase zone
   const holeContours = getHoleContours(geo);
@@ -130,7 +130,6 @@ function findEyeSeed(geo: GeometryCache): Point2D | null {
   const { bboxW, overshoot } = scale;
 
   const bands = 5;
-  const delta = bboxW * 0.01;
 
   for (let i = 2; i < bands; i++) {
     // Focus on upper half of x-height (where eye typically is in 'e')
@@ -167,11 +166,10 @@ function findEyeSeed(geo: GeometryCache): Point2D | null {
  * Uses scale-aware step sizes and picks inner boundary.
  */
 function traceEyeRegion(geo: GeometryCache, seed: Point2D): Point2D[] | null {
-  const { glyph, svgShape, scale } = geo;
-  const { eps, stemWidth, overshoot } = scale;
+  const { svgShape, scale } = geo;
+  const { overshoot } = scale;
 
   const angularStep = 12; // degrees
-  const radialStep = Math.max(eps * 4, stemWidth * 0.1);
   const maxRadius = overshoot;
 
   const outline: Point2D[] = [];
