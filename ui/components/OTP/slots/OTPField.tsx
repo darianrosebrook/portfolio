@@ -54,7 +54,7 @@ export const OTPField = React.forwardRef<HTMLInputElement, OTPFieldProps>(
         }
         onKeyDown?.(e);
       },
-      [chars, index, clearChar, onKeyDown]
+      [chars, index, clearChar, refs, onKeyDown]
     );
 
     const handleChange = React.useCallback<
