@@ -264,8 +264,9 @@ export function TokenPanel({
               {categoryTokens
                 .slice(0, isExpanded ? undefined : 5)
                 .map((token) => (
-                  <div
+                  <button
                     key={token.name}
+                    type="button"
                     style={{
                       display: 'grid',
                       gridTemplateColumns: '1fr auto',
@@ -276,9 +277,15 @@ export function TokenPanel({
                       borderRadius: '4px',
                       gap: '8px',
                       cursor: 'pointer',
+                      appearance: 'none',
+                      border: 'none',
+                      width: '100%',
+                      textAlign: 'left',
+                      fontFamily: 'inherit',
                     }}
                     onClick={() => copyToClipboard(token.name, token.value)}
                     title={`Click to copy: var(${token.name})`}
+                    aria-label={`Copy ${token.name}`}
                   >
                     <div style={{ minWidth: 0 }}>
                       <div
@@ -343,7 +350,7 @@ export function TokenPanel({
                         {copiedToken === token.name ? '✓' : '📋'}
                       </div>
                     </div>
-                  </div>
+                  </button>
                 ))}
             </div>
           ))}

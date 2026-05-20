@@ -245,6 +245,10 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
         data-ds-component="Dialog"
         className={backdropClassName}
         onClick={handleBackdropClick}
+        onKeyDown={(e) => {
+          if (e.key === 'Escape' && closeOnEscape) close();
+        }}
+        role="presentation"
       >
         <div
           ref={(node) => {
@@ -262,7 +266,6 @@ const Dialog = forwardRef<HTMLDivElement, DialogProps>(
           aria-modal={modal}
           aria-labelledby={titleId}
           className={dialogClassName}
-          onClick={(e) => e.stopPropagation()}
         >
           <DialogContext.Provider value={dialogContextValue}>
             {children}

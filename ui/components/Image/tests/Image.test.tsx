@@ -53,11 +53,13 @@ describe('Image', () => {
       expect(image).toHaveAttribute('alt', 'Descriptive alt text');
     });
 
-    it('handles missing alt text gracefully', () => {
-      // This should still render but may show accessibility warnings
-      render(<Image src="/test-image.jpg" />);
-      const image = screen.getByRole('img');
+    it('handles empty alt text gracefully', () => {
+      // alt="" marks a decorative image; the browser assigns role="presentation" which
+      // hides it from the accessible name tree. Query by data-slot instead.
+      render(<Image src="/test-image.jpg" alt="" />);
+      const image = document.querySelector('[data-slot="image-img"]');
       expect(image).toBeInTheDocument();
+      expect(image).toHaveAttribute('alt', '');
     });
   });
 

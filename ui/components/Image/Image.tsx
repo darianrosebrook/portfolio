@@ -135,6 +135,7 @@ export const Image = React.forwardRef<HTMLImageElement, ImageProps>(
         )}
 
         {currentSrc && (
+          // eslint-disable-next-line @next/next/no-img-element -- This component IS the custom image wrapper; it manages its own loading state, error fallback, and placeholder. Wrapping next/image here would create a circular dependency and break the fallbackSrc/onError contract.
           <img
             data-slot="image-img"
             ref={ref}

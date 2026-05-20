@@ -122,6 +122,12 @@ const SheetOverlay = React.forwardRef<HTMLDivElement, SheetOverlayProps>(
       }
     };
 
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        close();
+      }
+    };
+
     return (
       <div
         ref={ref}
@@ -129,7 +135,9 @@ const SheetOverlay = React.forwardRef<HTMLDivElement, SheetOverlayProps>(
           .filter(Boolean)
           .join(' ')}
         data-slot="sheet-overlay"
+        role="presentation"
         onClick={modal ? handleClick : undefined}
+        onKeyDown={modal ? handleKeyDown : undefined}
         {...rest}
       />
     );

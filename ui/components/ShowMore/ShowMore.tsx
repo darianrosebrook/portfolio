@@ -77,7 +77,6 @@ export const ShowMoreTrigger = React.forwardRef<
     <button
       ref={ref}
       type="button"
-      role="button"
       className={['trigger', className].filter(Boolean).join(' ')}
       onClick={toggle}
       {...rest}
