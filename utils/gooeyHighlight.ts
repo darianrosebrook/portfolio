@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import React from 'react';
 
 /**
@@ -38,13 +38,10 @@ export const useGooeyHighlight = (options: GooeyHighlightOptions = {}) => {
   } = options;
 
   const [highlights, setHighlights] = useState<HighlightRange[]>([]);
-  const [isSupported, setIsSupported] = useState(false);
+  const [isSupported] = useState(
+    () => typeof CSS !== 'undefined' && 'highlights' in CSS && !!CSS.highlights
+  );
   const textRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    // Check if CSS Custom Highlight API is supported
-    setIsSupported(!!CSS.highlights);
-  }, []);
 
   /**
    * Creates a highlight for the given text range
