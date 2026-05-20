@@ -9,13 +9,21 @@ import { useInteraction } from '@/context';
 const Blueprints: React.FC = () => {
   const { window: winsize, scroll, mouse } = useInteraction();
   const gridRef = useRef<HTMLDivElement>(null);
-  const spriteRef = useRef<HTMLDivElement | null>(null);
 
   const numRows = 9;
   const numCols = 12;
   const middleRowIndex = Math.floor(numRows / 2);
 
-  const [svgs, setSvgs] = useState<string[]>([]);
+  // DSSPRITE is server-rendered into the document (see SVGSprites/SVGComponentIllo).
+  // By the time this component mounts (it's gated behind BlueprintsWrapper's
+  // useIsMounted), the sprite is in the DOM. Read the symbol ids in a lazy
+  // initializer instead of via an effect-driven setState.
+  const [svgs] = useState<string[]>(() => {
+    if (typeof document === 'undefined') return [];
+    const dsSprite = document.getElementById('DSSPRITE');
+    if (!dsSprite) return [];
+    return Array.from(dsSprite.querySelectorAll('symbol')).map((s) => s.id);
+  });
 
   // Hold our quickTo functions in refs so they survive re-renders
   const toX = useRef<((x: number) => void)[]>([]);
@@ -61,15 +69,6 @@ const Blueprints: React.FC = () => {
       cancelAnimationFrame(frameId);
     };
   }, [mouse, winsize.width, gridRef, middleRowIndex, scroll.y, svgs.length]);
-
-  useEffect(() => {
-    const dsSprite = document.getElementById('DSSPRITE') as HTMLDivElement;
-    if (dsSprite) {
-      spriteRef.current = dsSprite;
-      const symbols = Array.from(dsSprite.querySelectorAll('symbol'));
-      setSvgs(symbols.map((symbol) => symbol.id));
-    }
-  }, []);
 
   return (
     <div className={Styles.gridContainer}>
