@@ -1,7 +1,7 @@
 id: FIX-PRETTIER-001
 type: fix
 title: Fix prettier formatting errors
-status: active
+status: closed
 risk_tier: 3
 mode: development
 created_at: '2026-05-20T01:12:00.978Z'
@@ -15,17 +15,19 @@ blast_radius:
 operational_rollback_slo: 5m
 scope:
   in:
-    - types/designTokens.ts
     - ui/components/Button/tests/Button.test.tsx
   out:
     - node_modules/
     - dist/
     - build/
+    - types/designTokens.ts
 invariants:
   - No semantic change to any source file
 acceptance:
   - id: A1
-    description: All prettier/prettier errors are gone from lint output
+    description: prettier/prettier error in ui/components/Button/tests/Button.test.tsx is gone
+  - id: A2
+    description: types/designTokens.ts is documented as a follow-up (auto-generated file; fix belongs in utils/designTokens/generators/types.ts)
 acceptance_criteria: []
 non_functional:
   a11y: []
