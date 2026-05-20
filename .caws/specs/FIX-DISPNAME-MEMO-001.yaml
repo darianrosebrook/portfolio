@@ -1,0 +1,44 @@
+id: FIX-DISPNAME-MEMO-001
+type: fix
+title: Add missing displayName + fix preserve-manual-memoization
+status: active
+risk_tier: 3
+mode: development
+created_at: '2026-05-20T06:25:24.919Z'
+updated_at: '2026-05-20T06:25:24.920Z'
+worktree: fix-dispname-memo
+blast_radius:
+  modules:
+    - ui/components/ShowMore
+    - ui/components/Shuttle
+    - ui/components/OTP
+    - ui/components/Sheet
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - ui/components/ShowMore/ShowMore.tsx
+    - ui/components/Shuttle/Shuttle.tsx
+    - ui/components/OTP/slots/OTPField.tsx
+    - ui/components/Sheet/SheetProvider.tsx
+  out:
+    - node_modules/
+    - dist/
+    - build/
+invariants:
+  - No behavior change
+  - DevTools displays meaningful component names for ShowMore and Shuttle
+  - OTPField and SheetProvider memoization dependencies match what their closures actually read
+acceptance:
+  - id: A1
+    description: 0 react/display-name errors in ShowMore.tsx and Shuttle.tsx
+  - id: A2
+    description: 0 react-hooks/preserve-manual-memoization errors in OTPField.tsx and SheetProvider.tsx
+  - id: A3
+    description: tsc --noEmit clean; tests for ShowMore, Shuttle, OTP, Sheet still pass
+acceptance_criteria: []
+non_functional:
+  a11y: []
+  perf: {}
+  security: []
+contracts: []
