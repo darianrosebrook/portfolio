@@ -47,14 +47,15 @@ describe('ShowMore', () => {
 
   it('applies custom className', () => {
     render(
-      <ShowMore className="custom-class">
+      <ShowMore className="custom-class" data-testid="showmore-root">
         <ShowMore.Trigger>Trigger</ShowMore.Trigger>
         <ShowMore.Content>Content</ShowMore.Content>
       </ShowMore>
     );
 
-    const trigger = screen.getByText('Trigger');
-    expect(trigger).toHaveClass('custom-class');
+    // className is applied to the root ShowMore div, not the inner trigger button
+    const root = screen.getByTestId('showmore-root');
+    expect(root).toHaveClass('custom-class');
   });
 
   describe('Accessibility', () => {
@@ -77,24 +78,26 @@ describe('ShowMore', () => {
         </ShowMore>
       );
 
-      const trigger = screen.getByText('Show more');
-      expect(trigger).toHaveAttribute('role', 'button');
+      // <button> has an implicit role of "button" — no explicit role attribute needed.
+      // Use getByRole to confirm the element is accessible as a button.
+      const trigger = screen.getByRole('button', { name: 'Show more' });
+      expect(trigger).toBeInTheDocument();
+      expect(trigger.tagName).toBe('BUTTON');
     });
   });
 
   describe('Design Tokens', () => {
     it('uses design tokens instead of hardcoded values', () => {
       render(
-        <ShowMore>
+        <ShowMore data-testid="showmore-root">
           <ShowMore.Trigger>Trigger</ShowMore.Trigger>
           <ShowMore.Content>Content</ShowMore.Content>
         </ShowMore>
       );
 
-      const trigger = screen.getByText('Trigger');
-
-      // Verify CSS custom properties are being used
-      expect(trigger).toHaveClass('showMore');
+      // The root container carries the 'showmore' class (CSS module class name)
+      const root = screen.getByTestId('showmore-root');
+      expect(root).toHaveClass('showmore');
     });
   });
 

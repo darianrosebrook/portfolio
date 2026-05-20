@@ -54,10 +54,12 @@ describe('Image', () => {
     });
 
     it('handles empty alt text gracefully', () => {
-      // alt="" is the correct way to mark a decorative image with no meaningful description
+      // alt="" marks a decorative image; the browser assigns role="presentation" which
+      // hides it from the accessible name tree. Query by data-slot instead.
       render(<Image src="/test-image.jpg" alt="" />);
-      const image = screen.getByRole('img');
+      const image = document.querySelector('[data-slot="image-img"]');
       expect(image).toBeInTheDocument();
+      expect(image).toHaveAttribute('alt', '');
     });
   });
 
