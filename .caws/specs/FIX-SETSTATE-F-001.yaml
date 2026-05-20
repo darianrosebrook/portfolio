@@ -1,7 +1,7 @@
 id: FIX-SETSTATE-F-001
 type: fix
 title: Restructure set-state-in-effect callers (5 sites)
-status: active
+status: closed
 risk_tier: 3
 mode: development
 created_at: '2026-05-20T22:15:46.846Z'
