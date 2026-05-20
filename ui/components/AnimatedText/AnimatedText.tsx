@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useImperativeHandle } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useReducedMotion } from '@/context/ReducedMotionContext';
@@ -69,25 +69,32 @@ export const AnimatedText = React.forwardRef<HTMLElement, AnimatedTextProps>(
     ref
   ) => {
     const containerRef = useRef<HTMLElement>(null);
-    const wordsRef = useRef<HTMLSpanElement[]>([]);
     const { prefersReducedMotion } = useReducedMotion();
 
     // Split text into words
     const words = text.split(' ').filter((word) => word.length > 0);
 
     useEffect(() => {
+      const container = containerRef.current;
+      if (!container) return;
+
+      // Word elements are queried from the DOM under our container so we don't
+      // need a per-render ref-collection callback on each word.
+      const getWords = () =>
+        Array.from(
+          container.querySelectorAll<HTMLSpanElement>(':scope > .word')
+        );
+
       // Skip animation if reduced motion is preferred
       if (prefersReducedMotion) {
-        wordsRef.current.forEach((word) => {
-          if (word) {
-            gsap.set(word, { opacity: 1, y: 0, filter: 'blur(0px)' });
-          }
+        getWords().forEach((word) => {
+          gsap.set(word, { opacity: 1, y: 0, filter: 'blur(0px)' });
         });
         return;
       }
 
       const ctx = gsap.context(() => {
-        const validWords = wordsRef.current.filter(Boolean);
+        const validWords = getWords();
 
         if (validWords.length === 0) return;
 
@@ -164,39 +171,30 @@ export const AnimatedText = React.forwardRef<HTMLElement, AnimatedTextProps>(
       onAnimationComplete,
     ]);
 
-    // Combine refs
-    const setRefs = (el: HTMLElement | null) => {
-      containerRef.current = el;
-      if (typeof ref === 'function') {
-        ref(el);
-      } else if (ref) {
-        ref.current = el;
-      }
-    };
+    // Forward containerRef to the parent ref without a render-time callback.
+    useImperativeHandle(ref, () => containerRef.current as HTMLElement, []);
 
-    return React.createElement(
-      Component,
-      {
-        ref: setRefs,
-        'data-ds-component': 'AnimatedText',
-        className: ['animatedText', className].filter(Boolean).join(' '),
-      },
-      words.map((word, index) => (
-        <span
-          key={`${word}-${index}`}
-          ref={(el) => {
-            if (el) wordsRef.current[index] = el;
-          }}
-          className="word"
-          style={{
-            // Set initial state for SSR/hydration
-            opacity: prefersReducedMotion ? 1 : 0,
-          }}
-        >
-          {word}
-          {index < words.length - 1 && '\u00A0'}
-        </span>
-      ))
+    const ElementType = Component as React.ElementType;
+    return (
+      <ElementType
+        ref={containerRef}
+        data-ds-component="AnimatedText"
+        className={['animatedText', className].filter(Boolean).join(' ')}
+      >
+        {words.map((word, index) => (
+          <span
+            key={`${word}-${index}`}
+            className="word"
+            style={{
+              // Set initial state for SSR/hydration
+              opacity: prefersReducedMotion ? 1 : 0,
+            }}
+          >
+            {word}
+            {index < words.length - 1 && '\u00A0'}
+          </span>
+        ))}
+      </ElementType>
     );
   }
 );
