@@ -49,18 +49,16 @@ export function DocLayoutProvider({
   sections,
 }: DocLayoutProviderProps) {
   const [activeSection, setActiveSection] = useState(sections[0]?.id || '');
-  // Keep activeSection valid when sections prop changes
-  useEffect(() => {
-    if (!sections.length) return;
-    if (!sections.some((s) => s.id === activeSection)) {
-      setActiveSection(sections[0].id);
-    }
-  }, [sections, activeSection]);
+  // Resolve at render: if activeSection is no longer in sections, fall back to first
+  const resolvedActiveSection =
+    sections.some((s) => s.id === activeSection)
+      ? activeSection
+      : (sections[0]?.id ?? '');
 
   return (
     <DocLayoutContext.Provider
       value={{
-        activeSection,
+        activeSection: resolvedActiveSection,
         setActiveSection,
         sections,
       }}
