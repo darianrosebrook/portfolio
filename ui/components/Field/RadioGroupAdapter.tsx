@@ -21,6 +21,9 @@ export function RadioGroupAdapter({
     <div
       role="radiogroup"
       aria-labelledby={controlProps['aria-labelledby'] as string}
+      aria-describedby={controlProps['aria-describedby'] as string}
+      aria-errormessage={controlProps['aria-errormessage'] as string}
+      aria-invalid={field.errors.length ? true : undefined}
       className={className}
     >
       {options.map((opt, i) => {
@@ -36,9 +39,6 @@ export function RadioGroupAdapter({
               onChange={(e) =>
                 field.setValue((e.currentTarget as HTMLInputElement).value)
               }
-              aria-describedby={controlProps['aria-describedby'] as string}
-              aria-errormessage={controlProps['aria-errormessage'] as string}
-              aria-invalid={field.errors.length ? true : undefined}
               disabled={opt.disabled || !!controlProps.disabled}
             />
             <label htmlFor={id}>{opt.label}</label>
