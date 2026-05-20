@@ -1,7 +1,7 @@
 id: FIX-UNUSED-001
 type: fix
 title: Clean no-unused-vars in utils/typeAnatomy and utils/designTokens
-status: active
+status: closed
 risk_tier: 3
 mode: development
 created_at: '2026-05-20T01:11:24.503Z'
