@@ -2,6 +2,7 @@
 
 import React, { ReactNode, useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { useIsMounted } from '@/utils/hooks';
 import './PageTransition.css';
 
 interface PageTransitionProps {
@@ -44,7 +45,7 @@ export function PageTransition({
 }: PageTransitionProps) {
   const pathname = usePathname();
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const mounted = useIsMounted();
 
   // Check if View Transitions API is supported
   const supportsViewTransitions =
@@ -56,10 +57,6 @@ export function PageTransition({
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const shouldAnimate = enabled && !prefersReducedMotion;
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   useEffect(() => {
     if (!shouldAnimate) return;
@@ -81,6 +78,12 @@ export function PageTransition({
   useEffect(() => {
     if (!mounted || !shouldAnimate) return;
 
+    // External event (route change) -> state sync. The setIsTransitioning
+    // is what we want to fire; deriving from pathname during render would
+    // require comparing previous-vs-current pathname via refs or external
+    // store, which is more complex than the warning is worth here. See
+    // FIX-SETSTATE-E-001 spec note.
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional event-to-state sync
     setIsTransitioning(true);
 
     const timer = setTimeout(() => {
