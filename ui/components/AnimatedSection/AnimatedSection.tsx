@@ -4,6 +4,7 @@ import * as React from 'react';
 import {
   useRef,
   useEffect,
+  useImperativeHandle,
   Children,
   cloneElement,
   isValidElement,
@@ -78,20 +79,24 @@ export const AnimatedSection = React.forwardRef<
     ref
   ) => {
     const containerRef = useRef<HTMLElement>(null);
-    const childrenRef = useRef<HTMLElement[]>([]);
     const { prefersReducedMotion } = useReducedMotion();
 
     useEffect(() => {
       const container = containerRef.current;
       if (!container) return;
 
+      // Stagger targets are queried from the DOM under our container so we
+      // don't need a per-render ref-collection callback on each child.
+      const getStaggerTargets = () =>
+        Array.from(
+          container.querySelectorAll<HTMLElement>(':scope > .animatedChild')
+        );
+
       // Skip animation if reduced motion is preferred
       if (prefersReducedMotion) {
         if (variant === 'stagger-children') {
-          childrenRef.current.forEach((child) => {
-            if (child) {
-              gsap.set(child, { opacity: 1, y: 0, x: 0 });
-            }
+          getStaggerTargets().forEach((child) => {
+            gsap.set(child, { opacity: 1, y: 0, x: 0 });
           });
         } else {
           gsap.set(container, { opacity: 1, y: 0, x: 0 });
@@ -149,7 +154,7 @@ export const AnimatedSection = React.forwardRef<
 
         if (variant === 'stagger-children') {
           // Animate children with stagger
-          const validChildren = childrenRef.current.filter(Boolean);
+          const validChildren = getStaggerTargets();
           if (validChildren.length === 0) return;
 
           gsap.set(validChildren, initialState);
@@ -197,32 +202,24 @@ export const AnimatedSection = React.forwardRef<
       onAnimationComplete,
     ]);
 
-    // Combine refs
-    const setRefs = (el: HTMLElement | null) => {
-      containerRef.current = el;
-      if (typeof ref === 'function') {
-        ref(el);
-      } else if (ref) {
-        ref.current = el;
-      }
-    };
+    // Forward containerRef to the parent ref without a render-time callback.
+    useImperativeHandle(ref, () => containerRef.current as HTMLElement, []);
 
-    // Process children for stagger-children variant
+    // Process children for stagger-children variant. We only tag each child
+    // with the 'animatedChild' class; the effect queries them from the DOM
+    // instead of registering each via a ref callback (which the lint rule
+    // treats as a render-time ref read).
     const processedChildren =
       variant === 'stagger-children'
-        ? Children.map(children, (child, index) => {
+        ? Children.map(children, (child) => {
             if (isValidElement(child)) {
               const childProps = child.props as Record<string, unknown>;
               return cloneElement(
                 child as React.ReactElement<{
-                  ref?: React.Ref<HTMLElement>;
                   className?: string;
                   style?: React.CSSProperties;
                 }>,
                 {
-                  ref: (el: HTMLElement | null) => {
-                    if (el) childrenRef.current[index] = el;
-                  },
                   className: [childProps.className, 'animatedChild']
                     .filter(Boolean)
                     .join(' '),
@@ -238,19 +235,20 @@ export const AnimatedSection = React.forwardRef<
           })
         : children;
 
-    return React.createElement(
-      Component,
-      {
-        ref: setRefs,
-        'data-ds-component': 'AnimatedSection',
-        className: ['animatedSection', className].filter(Boolean).join(' '),
-        style: {
+    const ElementType = Component as React.ElementType;
+    return (
+      <ElementType
+        ref={containerRef}
+        data-ds-component="AnimatedSection"
+        className={['animatedSection', className].filter(Boolean).join(' ')}
+        style={{
           // Set initial state for SSR/hydration (non-stagger variants)
           opacity:
             variant !== 'stagger-children' && !prefersReducedMotion ? 0 : 1,
-        },
-      },
-      processedChildren
+        }}
+      >
+        {processedChildren}
+      </ElementType>
     );
   }
 );
