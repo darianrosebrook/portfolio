@@ -1,6 +1,6 @@
 import type { Article } from '@/types';
 import type { JSONContent } from '@tiptap/react';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 export type SaveStatus = 'idle' | 'saving' | 'saved' | 'error' | 'local';
 
@@ -36,7 +36,7 @@ export function useAutoSave({
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const previousContentRef = useRef<string | null>(null);
 
-  const performSave = async () => {
+  const performSave = useCallback(async () => {
     if (!enabled) {
       return;
     }
@@ -78,7 +78,7 @@ export function useAutoSave({
         setError(errorMessage);
       }
     }
-  };
+  }, [enabled, article, onSave]);
 
   const manualSave = async () => {
     if (timeoutRef.current) {
@@ -126,7 +126,7 @@ export function useAutoSave({
         clearTimeout(timeoutRef.current);
       }
     };
-  }, [article, enabled, debounceMs]);
+  }, [article, enabled, debounceMs, performSave]);
 
   return {
     saveStatus,
