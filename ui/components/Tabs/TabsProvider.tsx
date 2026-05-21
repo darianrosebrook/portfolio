@@ -10,6 +10,12 @@ export function useTabsContext(): TabsContextValue {
   return ctx;
 }
 
+// Non-throwing lookup — returns null when not inside a provider. Used by
+// <Tabs> to detect a wrapping consumer provider and skip creating its own.
+export function useTabsContextOptional(): TabsContextValue | null {
+  return React.useContext(TabsContext);
+}
+
 // Alias for consumers
 export function useTabs(): TabsContextValue {
   return useTabsContext();

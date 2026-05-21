@@ -10,6 +10,13 @@ export interface TabRegistration {
 export interface TabsContextValue {
   value: TabsValue | null;
   focusedIndex: number;
+  /**
+   * Monotonic counter incremented on every focusByIndex call. Slot effects
+   * depend on this so they re-fire even when focusedIndex is set to its
+   * current value (e.g. programmatic focus on tab[1] followed by ArrowRight
+   * wrapping back to focusedIndex=0, which was already 0 at mount).
+   */
+  focusTick: number;
   tabs: TabRegistration[];
   activationMode: TabsActivationMode;
   unmountInactive: boolean;

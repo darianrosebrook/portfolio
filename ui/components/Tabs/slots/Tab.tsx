@@ -21,6 +21,7 @@ export const Tab = React.forwardRef<HTMLButtonElement, TabProps>(
       selectByValue,
       focusByIndex,
       focusedIndex,
+      focusTick,
       value: active,
       activationMode,
     } = useTabs();
@@ -53,12 +54,16 @@ export const Tab = React.forwardRef<HTMLButtonElement, TabProps>(
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id, tabValue, disabled]);
 
-    // Move DOM focus when focusedIndex points to this tab
+    // Move DOM focus when focusedIndex points to this tab. focusTick is in
+    // the dependency list so this re-fires even when focusedIndex was
+    // already pointing at us (e.g. ArrowRight wrap to the originally-focused
+    // tab) — without it, React would skip the re-run and DOM focus would
+    // stay where the user previously placed it.
     React.useEffect(() => {
       if (!disabled && index === focusedIndex) {
         localRef.current?.focus();
       }
-    }, [disabled, index, focusedIndex]);
+    }, [disabled, index, focusedIndex, focusTick]);
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
       if (disabled) return;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 
@@ -61,9 +61,11 @@ describe('Tabs Composer', () => {
     setup();
     const tabs = screen.getAllByRole('tab');
     tabs[1].focus();
-    await user.keyboard('{ArrowRight}{ArrowRight}');
-    // from two -> three(disabled) -> wrap to one
-    expect(tabs[0]).toHaveFocus();
+    // ArrowRight from "Two": next is "Three" (disabled, skipped), wraps to
+    // "One". One keystroke moves one logical step — disabled tabs are
+    // skipped silently within the same press.
+    await user.keyboard('{ArrowRight}');
+    await waitFor(() => expect(tabs[0]).toHaveFocus());
   });
 
   it('has no accessibility violations', async () => {

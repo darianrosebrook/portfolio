@@ -1,6 +1,6 @@
 'use client';
 import * as React from 'react';
-import { TabsProvider } from './TabsProvider';
+import { TabsProvider, useTabsContextOptional } from './TabsProvider';
 import { Tab } from './slots/Tab';
 import { TabPanel } from './slots/TabPanel';
 import { TabList } from './slots/TabList';
@@ -23,7 +23,7 @@ const _canViewTransition = () =>
 const TabsComponent: React.FC<TabsProps> = ({
   className = '',
   children,
-  defaultValue = 'tab1',
+  defaultValue,
   value,
   onValueChange,
   activationMode = 'auto',
@@ -35,24 +35,40 @@ const TabsComponent: React.FC<TabsProps> = ({
 }) => {
   const ref = React.useRef<HTMLDivElement>(null);
 
+  // If a consumer-supplied <TabsProvider> already wraps us, defer to it
+  // instead of creating an inner one. Two providers in the same subtree
+  // would shadow the outer values (the inner one's defaults would win),
+  // silently overriding controlled prop wiring from the parent.
+  const ancestor = useTabsContextOptional();
+
+  const root = (
+    <div
+      ref={ref}
+      data-ds-component="Tabs"
+      data-slot="tabs"
+      className={className || undefined}
+      data-state="tabs"
+      {...rest}
+    >
+      {children}
+    </div>
+  );
+
+  if (ancestor) {
+    // The wrapping provider owns selection state; <Tabs> here is just the
+    // root element + slot host. Defer entirely.
+    return root;
+  }
+
   return (
     <TabsProvider
-      defaultValue={defaultValue}
+      defaultValue={defaultValue ?? 'tab1'}
       value={value}
       onValueChange={onValueChange}
       activationMode={activationMode}
       unmountInactive={unmountInactive}
     >
-      <div
-        ref={ref}
-        data-ds-component="Tabs"
-        data-slot="tabs"
-        className={className || undefined}
-        data-state="tabs"
-        {...rest}
-      >
-        {children}
-      </div>
+      {root}
     </TabsProvider>
   );
 };

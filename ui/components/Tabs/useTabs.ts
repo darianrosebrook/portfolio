@@ -36,6 +36,7 @@ export function useTabs(options: UseTabsOptions = {}): TabsContextValue {
 
   const [tabs, setTabs] = React.useState<TabRegistration[]>([]);
   const [focusedIndex, setFocusedIndex] = React.useState(0);
+  const [focusTick, setFocusTick] = React.useState(0);
 
   const performSelect = React.useCallback(
     (nextVal: TabsValue) => {
@@ -91,6 +92,10 @@ export function useTabs(options: UseTabsOptions = {}): TabsContextValue {
     (index: number) => {
       if (index < 0 || index >= tabs.length) return;
       setFocusedIndex(index);
+      // Bump the tick so slot focus effects fire even when index didn't change
+      // from its previous value (e.g. user manually focuses tab[1] then
+      // wraps back to tab[0], which was already focusedIndex at mount).
+      setFocusTick((t) => t + 1);
       if (activationMode === 'auto') {
         const v = tabs[index]?.value;
         if (v) performSelect(v);
@@ -102,6 +107,7 @@ export function useTabs(options: UseTabsOptions = {}): TabsContextValue {
   return {
     value: internalValue,
     focusedIndex,
+    focusTick,
     tabs,
     activationMode,
     unmountInactive,
