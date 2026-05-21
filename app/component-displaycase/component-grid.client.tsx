@@ -27,7 +27,7 @@ import {
   SelectOptions,
   SelectSearch,
 } from '@/ui/components/Select';
-import Tabs from '@/ui/components/Tabs';
+import Tabs, { Tab, TabList, TabPanel } from '@/ui/components/Tabs';
 import Tooltip from '@/ui/components/Tooltip';
 import Skeleton from '@/ui/components/Skeleton';
 import Details from '@/ui/components/Details';
@@ -405,53 +405,15 @@ function Demo({ demo }: { demo: DemoKey }) {
 
   if (demo === 'Tabs') {
     return (
-      <Tabs>
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 'var(--core-spacing-size-03)',
-          }}
-        >
-          <div style={{ display: 'flex', gap: 'var(--core-spacing-size-02)' }}>
-            <button
-              style={{
-                padding: 'var(--core-spacing-size-02)',
-                border: '1px solid var(--semantic-color-border-primary)',
-                background: 'var(--semantic-color-background-primary)',
-              }}
-            >
-              Tab 1
-            </button>
-            <button
-              style={{
-                padding: 'var(--core-spacing-size-02)',
-                border: '1px solid var(--semantic-color-border-primary)',
-                background: 'var(--semantic-color-background-primary)',
-              }}
-            >
-              Tab 2
-            </button>
-            <button
-              style={{
-                padding: 'var(--core-spacing-size-02)',
-                border: '1px solid var(--semantic-color-border-primary)',
-                background: 'var(--semantic-color-background-primary)',
-              }}
-            >
-              Tab 3
-            </button>
-          </div>
-          <div
-            style={{
-              padding: 'var(--core-spacing-size-04)',
-              border: '1px solid var(--semantic-color-border-primary)',
-              borderRadius: 'var(--core-shape-radius-medium)',
-            }}
-          >
-            Tab content goes here
-          </div>
-        </div>
+      <Tabs defaultValue="one">
+        <TabList aria-label="Demo tabs">
+          <Tab value="one">Tab 1</Tab>
+          <Tab value="two">Tab 2</Tab>
+          <Tab value="three">Tab 3</Tab>
+        </TabList>
+        <TabPanel value="one">Tab 1 content</TabPanel>
+        <TabPanel value="two">Tab 2 content</TabPanel>
+        <TabPanel value="three">Tab 3 content</TabPanel>
       </Tabs>
     );
   }

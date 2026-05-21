@@ -5,8 +5,9 @@
     position: relative;
     display: inline-block;
     overflow: hidden;
-    width: var(--ds-avatar-size-default);
-    height: var(--ds-avatar-size-default);
+    /* Defaults to medium when no size class is applied. */
+    width: var(--ds-avatar-size-medium);
+    height: var(--ds-avatar-size-medium);
     border: var(--ds-avatar-size-border-default) solid
       var(--ds-avatar-color-border-default);
     border-radius: var(--ds-avatar-size-radius-default);
@@ -23,18 +24,18 @@
     }
 
     &.medium {
-      width: var(--ds-avatar-size-default);
-      height: var(--ds-avatar-size-default);
-    }
-
-    &.large {
       width: var(--ds-avatar-size-medium);
       height: var(--ds-avatar-size-medium);
     }
 
-    &.extra-large {
+    &.large {
       width: var(--ds-avatar-size-large);
       height: var(--ds-avatar-size-large);
+    }
+
+    &.extra-large {
+      width: var(--ds-avatar-size-extra-large);
+      height: var(--ds-avatar-size-extra-large);
     }
 
     &.rounded {
@@ -60,9 +61,29 @@
     height: 100%;
     background: var(--ds-avatar-color-background-default);
     color: var(--ds-avatar-color-foreground-primary);
+    /* Initials scale with the avatar box. 40% of the height keeps the
+       two-letter monogram visually centered without crowding the edges. */
+    font-size: calc(var(--ds-avatar-size-medium) * 0.4);
     font-weight: var(--ds-avatar-typography-font-weight-medium);
     font-family: var(--ds-avatar-typography-font-family-sans);
+    line-height: 1;
     user-select: none;
+  }
+
+  &.small .avatar_initials {
+    font-size: calc(var(--ds-avatar-size-small) * 0.4);
+  }
+
+  &.medium .avatar_initials {
+    font-size: calc(var(--ds-avatar-size-medium) * 0.4);
+  }
+
+  &.large .avatar_initials {
+    font-size: calc(var(--ds-avatar-size-large) * 0.4);
+  }
+
+  &.extra-large .avatar_initials {
+    font-size: calc(var(--ds-avatar-size-extra-large) * 0.4);
   }
 
   .status {

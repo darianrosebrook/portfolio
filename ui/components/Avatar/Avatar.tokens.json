@@ -2,10 +2,10 @@
   "prefix": "avatar",
   "tokens": {
     "size": {
-      "small": "{core.spacing.size.05}",
-      "default": "{core.spacing.size.06}",
-      "medium": "{core.spacing.size.08}",
+      "small": "{core.spacing.size.08}",
+      "medium": "{core.spacing.size.09}",
       "large": "{core.spacing.size.10}",
+      "extra-large": "{core.spacing.size.10}",
       "status": "{core.spacing.size.03}",
       "radius": {
         "default": "{core.shape.radius.full}",

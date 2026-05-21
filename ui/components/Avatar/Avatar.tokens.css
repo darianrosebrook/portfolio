@@ -3,10 +3,10 @@
  */
 [data-ds-component="Avatar"] {
   /* === Size Tokens === */
-  --ds-avatar-size-small: var(--core-spacing-size-05);
-  --ds-avatar-size-default: var(--core-spacing-size-06);
-  --ds-avatar-size-medium: var(--core-spacing-size-08);
+  --ds-avatar-size-small: var(--core-spacing-size-08);
+  --ds-avatar-size-medium: var(--core-spacing-size-09);
   --ds-avatar-size-large: var(--core-spacing-size-10);
+  --ds-avatar-size-extra-large: var(--core-spacing-size-10);
   --ds-avatar-size-status: var(--core-spacing-size-03);
   --ds-avatar-size-radius-default: var(--core-shape-radius-full);
   --ds-avatar-size-radius-small: var(--core-shape-radius-small);

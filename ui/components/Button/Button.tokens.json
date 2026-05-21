@@ -109,7 +109,7 @@
       "weight": "{semantic.typography.fontWeight.medium}",
       "size": {
         "small": "{semantic.typography.body.04}",
-        "medium": "{semantic.typography.body.01}",
+        "medium": "{semantic.typography.body.02}",
         "large": "{semantic.typography.body.01}"
       },
       "lineHeight": {

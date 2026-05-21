@@ -256,7 +256,6 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       <span
         ref={triggerRef}
         className="tooltipTrigger"
-        style={{ display: 'contents' }}
         data-slot="tooltip-trigger"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
