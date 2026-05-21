@@ -1,0 +1,47 @@
+id: FIX-SEC-001
+type: fix
+title: 'Resolve 16 Dependabot alerts: Next.js + ws + fast-uri'
+status: closed
+risk_tier: 3
+mode: fix
+created_at: '2026-05-21T02:37:13.495Z'
+updated_at: '2026-05-21T02:37:13.496Z'
+blast_radius:
+  modules:
+    - package.json
+    - pnpm-lock.yaml
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - package.json
+    - pnpm-lock.yaml
+  out:
+    - src/
+    - tests/
+    - node_modules/
+invariants:
+  - Build succeeds (next build)
+  - Typecheck passes (tsc --noEmit)
+  - No new test regressions vs. baseline (89 known failures)
+acceptance:
+  - id: A1
+    given: package.json on next ^16.2.4 with 16 open Dependabot alerts
+    when: I upgrade next to ^16.2.6 and add pnpm overrides for ws@^8.20.1 and fast-uri@^3.1.2
+    then: npm run typecheck, npm run build, and npm test all pass with no new regressions
+  - id: A2
+    given: a clean pnpm install from the updated lockfile
+    when: I inspect the resolved tree
+    then: all next, ws, and fast-uri instances resolve to patched versions
+  - id: A3
+    given: the PR is merged and Dependabot re-scans the default branch
+    when: alerts are re-evaluated
+    then: all 16 listed alerts (numbers 192-208) are auto-closed
+acceptance_criteria: []
+non_functional:
+  a11y: []
+  perf: {}
+  security:
+    - No high or medium severity Dependabot alerts remain on default branch after merge
+contracts: []
+worktree: fix-sec-deps
