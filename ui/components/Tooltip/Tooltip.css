@@ -5,6 +5,17 @@
  * Scoped to [data-ds-component="Tooltip"] on the root element.
  * Intentionally unlayered — see Button.css for the cascade rationale.
  */
+/*
+ * The trigger wrapper hosts the hover/focus handlers and the
+ * aria-describedby relationship. It must have a measurable layout box for
+ * getBoundingClientRect to return non-zero values — otherwise the tooltip
+ * positions at the viewport origin. inline-block keeps the wrapper flowing
+ * with surrounding text without breaking line layout.
+ */
+.tooltipTrigger {
+  display: inline-block;
+}
+
 [data-ds-component="Tooltip"] {
   &.tooltip {
     z-index: 9999;
