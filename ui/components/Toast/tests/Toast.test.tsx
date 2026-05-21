@@ -189,8 +189,13 @@ describe('Toast Composer', () => {
       await user.click(screen.getByText('Success'));
       await user.click(screen.getByText('Error'));
 
-      const toasts = screen.getAllByRole('status');
-      expect(toasts).toHaveLength(2);
+      // Error variant uses role="alert", non-error uses role="status".
+      // Query both, since they're semantically distinct live regions.
+      const statusToasts = screen.queryAllByRole('status');
+      const alertToasts = screen.queryAllByRole('alert');
+      expect(statusToasts.length + alertToasts.length).toBe(2);
+      expect(statusToasts).toHaveLength(1);
+      expect(alertToasts).toHaveLength(1);
     });
   });
 
