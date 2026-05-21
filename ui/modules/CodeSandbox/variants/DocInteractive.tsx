@@ -105,7 +105,7 @@ export function DocInteractive({
     () => sections.map((s) => s.id).join(','),
     [sections]
   );
-  const stableSections = React.useMemo(() => sections, [sectionsKey]);
+  const stableSections = React.useMemo(() => sections, [sections]);
 
   // Stable project reference to prevent CodeWorkbench re-renders
   // Compare by serializing file paths and contents hash
@@ -119,7 +119,7 @@ export function DocInteractive({
       ),
     [project.files]
   );
-  const stableProject = React.useMemo(() => project, [projectFilesKey]);
+  const stableProject = React.useMemo(() => project, [project]);
 
   const decorators = React.useMemo(() => {
     if (!activeFile || !highlight) return undefined;
