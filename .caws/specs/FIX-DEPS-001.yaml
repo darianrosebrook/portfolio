@@ -1,0 +1,49 @@
+id: FIX-DEPS-001
+type: fix
+title: Resolve react-hooks/exhaustive-deps warnings
+status: active
+risk_tier: 3
+mode: development
+created_at: '2026-05-21T00:16:05.359Z'
+updated_at: '2026-05-21T00:16:05.360Z'
+worktree: fix-deps
+blast_radius:
+  modules:
+    - app/dashboard/articles
+    - ui/components/Popover
+    - ui/components/Sheet
+    - ui/components/Tabs
+    - ui/modules/CodeSandbox
+    - ui/modules/PerformanceDashboard
+    - utils/focus
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - app/dashboard/articles/new/hooks/useAutoSave.ts
+    - ui/components/Popover/Popover.tsx
+    - ui/components/Sheet/Sheet.tsx
+    - ui/components/Tabs/useTabs.ts
+    - ui/modules/CodeSandbox/primitives/SectionSync.tsx
+    - ui/modules/CodeSandbox/variants/DocInteractive.tsx
+    - ui/modules/CodeSandbox/variants/DocVariants.tsx
+    - ui/modules/PerformanceDashboard/PerformanceDashboard.tsx
+    - utils/focus/index.ts
+  out:
+    - node_modules/
+    - dist/
+    - build/
+invariants:
+  - No effect/memo body changes behavior; only dep arrays are corrected
+  - No new infinite-loop risks introduced (every added dep must be checked for stability)
+acceptance:
+  - id: A1
+    description: 0 react-hooks/exhaustive-deps warnings in the in-scope files
+  - id: A2
+    description: tsc --noEmit clean; tests for the touched components still pass
+acceptance_criteria: []
+non_functional:
+  a11y: []
+  perf: {}
+  security: []
+contracts: []
