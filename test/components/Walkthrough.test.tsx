@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent } from '../test-utils';
+import { render, fireEvent, waitFor } from '../test-utils';
 import { WalkthroughProvider, Walkthrough } from '@/ui/components/Walkthrough';
 
 describe('Walkthrough composer', () => {
@@ -18,14 +18,14 @@ describe('Walkthrough composer', () => {
     );
   }
 
-  test('closes on outside click when open', () => {
+  test('closes on outside click when open', async () => {
     const { container, queryByText } = render(<Setup />);
     // content should render
     expect(queryByText('Step 1')).toBeTruthy();
-    // click outside
+    // click outside — Popover has 150ms leave animation before unmounting
     fireEvent.mouseDown(container);
-    // should close
-    expect(queryByText('Step 1')).toBeFalsy();
+    // wait for the animation timer to fire and the content to leave the DOM
+    await waitFor(() => expect(queryByText('Step 1')).toBeFalsy());
   });
 
   test('keyboard shortcuts: Esc cancels, Enter advances', () => {

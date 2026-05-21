@@ -99,7 +99,9 @@ describe('Error Boundary Components', () => {
       );
     });
 
-    it('should reset error state when Try Again is clicked', () => {
+    it('should reset error state when Try Again is clicked', async () => {
+      vi.useFakeTimers();
+
       let shouldThrow = true;
       const ConditionalErrorComponent = () => {
         if (shouldThrow) {
@@ -119,10 +121,13 @@ describe('Error Boundary Components', () => {
       // Now stop throwing errors
       shouldThrow = false;
 
-      // Click Try Again button
+      // Click Try Again — resetErrorWithDelay uses window.setTimeout(fn, 100)
       fireEvent.click(screen.getByRole('button', { name: /try again/i }));
 
-      // Re-render the same component but now it won't throw
+      // Advance past the 100ms delay so resetError() fires
+      await vi.runAllTimersAsync();
+
+      // Re-render now that error state is cleared
       rerender(
         <ErrorBoundary>
           <ConditionalErrorComponent />
@@ -133,6 +138,8 @@ describe('Error Boundary Components', () => {
       expect(
         screen.queryByText('Something went wrong')
       ).not.toBeInTheDocument();
+
+      vi.useRealTimers();
     });
 
     it('should show error details in development mode', () => {

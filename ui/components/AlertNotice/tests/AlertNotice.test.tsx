@@ -44,7 +44,7 @@ describe('AlertNotice', () => {
     );
 
     const alert = screen.getByRole('alert');
-    expect(alert).toHaveAttribute('data-level', 'inline');
+    expect(alert).toHaveClass('inline');
   });
 
   describe('Accessibility', () => {
@@ -71,7 +71,7 @@ describe('AlertNotice', () => {
       const alert = screen.getByRole('alert');
 
       // Verify CSS custom properties are being used
-      expect(alert).toHaveClass('alertNotice');
+      expect(alert).toHaveClass('alert');
     });
   });
 });
