@@ -92,7 +92,7 @@
   /* === Text Tokens === */
   --ds-button-text-weight: var(--semantic-typography-font-weight-medium);
   --ds-button-text-size-small: var(--semantic-typography-body-04);
-  --ds-button-text-size-medium: var(--semantic-typography-body-01);
+  --ds-button-text-size-medium: var(--semantic-typography-body-02);
   --ds-button-text-size-large: var(--semantic-typography-body-01);
   --ds-button-text-line-height-collapse: var(--semantic-typography-line-height-collapse);
 

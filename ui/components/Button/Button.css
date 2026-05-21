@@ -19,6 +19,10 @@
     gap: var(--ds-button-size-gap-default);
     justify-content: center;
     align-items: center;
+    /* Prevent stretching when placed inside a flex container with the
+       default align-items: stretch — buttons should size to their own
+       min-height / content, not grow to match a taller sibling. */
+    align-self: center;
 
     width: fit-content;
     min-width: var(--ds-button-size-min-medium);
