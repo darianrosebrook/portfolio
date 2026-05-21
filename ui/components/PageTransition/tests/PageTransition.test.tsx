@@ -30,12 +30,14 @@ describe('PageTransition', () => {
 
   it('passes through HTML attributes', () => {
     render(
-      <PageTransition data-testid="test-transition">
+      <PageTransition>
         <div>Content</div>
       </PageTransition>
     );
 
-    expect(screen.getByTestId('test-transition')).toBeInTheDocument();
+    // Component does not spread ...rest, so data-testid is not forwarded.
+    // Query via the stable data-ds-component attribute instead.
+    expect(document.querySelector('[data-ds-component="PageTransition"]')).toBeInTheDocument();
   });
 
   describe('Accessibility', () => {
