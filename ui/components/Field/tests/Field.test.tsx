@@ -131,7 +131,12 @@ describe('Field Composer', () => {
 
       const errorMessage = await screen.findByRole('alert');
       expect(errorMessage).toHaveTextContent('This field is required');
-      expect(errorMessage).toHaveAttribute('aria-live', 'polite');
+      // role="alert" implies aria-live="assertive" — we don't set the
+      // attribute explicitly to avoid the semantic conflict the audit
+      // previously introduced. aria-atomic is still required so the
+      // full error is re-announced as a unit on every change.
+      expect(errorMessage).toHaveAttribute('aria-atomic', 'true');
+      expect(errorMessage).not.toHaveAttribute('aria-live');
     });
   });
 

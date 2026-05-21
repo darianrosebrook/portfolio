@@ -1,18 +1,21 @@
 /**
  * Calendar (Composer) — SCAFFOLD
  *
- * Minimal scaffold that satisfies the a11y contract test (announced as a
- * labelled region) so consumers can mount it without breaking AT. The full
- * APG-compliant calendar (role="grid" with focusable gridcells, date
- * selection, month/year nav, keyboard navigation, locale, min/max,
- * disabled dates) is tracked separately and will replace this scaffold.
+ * Minimal scaffold: a labelled landmark region so AT users can navigate to
+ * the widget. role="region" is the safe interim choice while the full
+ * implementation is pending — it announces the widget without disabling
+ * the browser's default keystroke handling. The full APG-compliant
+ * calendar (role="grid" with focusable gridcells, date selection,
+ * month/year navigation, keyboard model, locale, min/max, disabled dates)
+ * is tracked separately and will replace this scaffold along with the
+ * proper role wiring (typically role="grid" inside a role="dialog" for
+ * date pickers).
  *
- * Open question for the full implementation: role="application" (current,
- * per audit-requested test) vs the APG-recommended pattern of role="grid"
- * inside a role="dialog" for date pickers. role="application" forwards all
- * keystrokes to the widget and is the right choice only for fully custom
- * keyboard models — for date picking, role="grid" composes better with AT
- * defaults. The full impl will revisit.
+ * Why not role="application"? It tells AT to suppress its default
+ * navigation shortcuts and forward all keystrokes to the widget. With no
+ * keyboard model in this scaffold, that would trap screen reader users
+ * with nothing to navigate. Don't ship role="application" until there is
+ * a complete keyboard implementation.
  */
 'use client';
 import * as React from 'react';
@@ -33,7 +36,7 @@ export const Calendar: React.FC<CalendarProps> = ({
     <div
       data-ds-component="Calendar"
       className={['calendar', className].filter(Boolean).join(' ')}
-      role="application"
+      role="region"
       aria-label={label}
       {...rest}
     >
