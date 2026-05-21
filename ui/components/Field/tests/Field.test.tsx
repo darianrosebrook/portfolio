@@ -153,11 +153,9 @@ describe('Field Composer', () => {
       expect(screen.getByTestId('context-consumer')).toBeInTheDocument();
     });
 
-    it('handles controlled and uncontrolled modes', () => {
+    it('renders the controlled value when value prop is supplied', () => {
       const handleChange = vi.fn();
-
-      // Controlled mode
-      const { rerender } = wrap(
+      wrap(
         <FieldProvider
           name="controlled"
           label="Controlled"
@@ -170,11 +168,15 @@ describe('Field Composer', () => {
         </FieldProvider>
       );
 
-      const controlledInput = screen.getByRole('textbox');
-      expect(controlledInput).toHaveValue('initial');
+      const input = screen.getByRole('textbox');
+      expect(input).toHaveValue('initial');
+    });
 
-      // Uncontrolled mode
-      rerender(
+    it('initializes from defaultValue when uncontrolled', () => {
+      // Separate render call — switching modes mid-tree via rerender does
+      // not re-initialize useState (React identity preserved), which is a
+      // React reconciliation quirk, not a Field bug.
+      wrap(
         <FieldProvider
           name="uncontrolled"
           label="Uncontrolled"
@@ -186,8 +188,8 @@ describe('Field Composer', () => {
         </FieldProvider>
       );
 
-      const uncontrolledInput = screen.getByRole('textbox');
-      expect(uncontrolledInput).toHaveValue('default');
+      const input = screen.getByRole('textbox');
+      expect(input).toHaveValue('default');
     });
   });
 
@@ -201,9 +203,11 @@ describe('Field Composer', () => {
         </FieldProvider>
       );
 
-      const field = screen.getByRole('textbox').closest('[class*="field"]');
+      const field = screen
+        .getByRole('textbox')
+        .closest('[data-ds-component="Field"]');
       expect(field).toBeInTheDocument();
-      // In a real test, you'd check for specific CSS custom properties
+      expect(field).toHaveClass('root');
     });
   });
 
