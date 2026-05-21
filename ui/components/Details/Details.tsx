@@ -82,6 +82,18 @@ const Details = React.forwardRef<HTMLDetailsElement, DetailsProps>(
       [handleToggle, onKeyDown]
     );
 
+    // Intercept the native <summary> click and route it through React state.
+    // The browser would otherwise toggle <details open> on its own, but we
+    // drive openness via React (so handleToggle can coordinate with a parent
+    // group provider). preventDefault stops the native toggle from racing.
+    const handleSummaryClick = useCallback(
+      (e: React.MouseEvent) => {
+        e.preventDefault();
+        handleToggle();
+      },
+      [handleToggle]
+    );
+
     const iconElement = isOpen ? (
       <ChevronDownIcon className="icon" />
     ) : (
@@ -105,6 +117,7 @@ const Details = React.forwardRef<HTMLDetailsElement, DetailsProps>(
         <summary
           data-slot="details-summary"
           className="summary"
+          onClick={handleSummaryClick}
           onKeyDown={handleKeyDown}
         >
           <span className="summaryContent">
@@ -113,7 +126,11 @@ const Details = React.forwardRef<HTMLDetailsElement, DetailsProps>(
             {icon === 'right' ? iconElement : null}
           </span>
         </summary>
-        <div data-slot="details-content" className="content">
+        <div
+          data-slot="details-content"
+          className="content"
+          hidden={!isOpen}
+        >
           {children}
         </div>
       </details>
