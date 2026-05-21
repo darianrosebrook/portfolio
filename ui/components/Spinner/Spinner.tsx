@@ -50,12 +50,17 @@ export const Spinner = React.forwardRef<HTMLSpanElement, SpinnerProps>(
     }, [showAfterMs]);
 
     const styleVars = React.useMemo(() => {
+      // Token names live under the --ds- namespace (see Spinner.tokens.css).
+      // Without the prefix, every size silently fell back to --ds-spinner-size-md
+      // — so sm/lg looked identical to md in the browser.
       const resolvedSize =
-        typeof size === 'number' ? `${size}px` : `var(--spinner-size-${size})`;
+        typeof size === 'number'
+          ? `${size}px`
+          : `var(--ds-spinner-size-${size})`;
       const resolvedThickness =
         typeof thickness === 'number'
           ? `${thickness}px`
-          : `var(--spinner-thickness-${thickness})`;
+          : `var(--ds-spinner-thickness-${thickness})`;
       return {
         ['--ds-spinner-size-value' as any]: resolvedSize,
         ['--ds-spinner-thickness-value' as any]: resolvedThickness,
