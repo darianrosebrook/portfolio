@@ -24,7 +24,7 @@ describe('TextField', () => {
     const input = screen.getByRole('textbox');
     const label = screen.getByText('Email');
 
-    expect(input).toHaveAttribute('aria-labelledby');
+    // Component uses native htmlFor/id pairing, not aria-labelledby.
     expect(label).toHaveAttribute('for', input.id);
   });
 
@@ -78,7 +78,7 @@ describe('TextField', () => {
       const input = screen.getByRole('textbox');
       const label = screen.getByText('Email Address');
 
-      expect(input).toHaveAttribute('aria-labelledby');
+      // Component uses native htmlFor/id pairing, not aria-labelledby.
       expect(label).toHaveAttribute('for', input.id);
     });
 

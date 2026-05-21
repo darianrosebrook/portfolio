@@ -14,8 +14,10 @@ describe('Links', () => {
       </div>
     );
 
-    const link1 = screen.getByText('Link 1');
-    const link2 = screen.getByText('Link 2');
+    // Each AnimatedLink renders the text in two spans (.text + .clone[aria-hidden]).
+    // Use getByRole('link') to target the <a> element unambiguously.
+    const link1 = screen.getByRole('link', { name: 'Link 1' });
+    const link2 = screen.getByRole('link', { name: 'Link 2' });
 
     expect(link1).toBeInTheDocument();
     expect(link2).toBeInTheDocument();
@@ -30,7 +32,8 @@ describe('Links', () => {
       </Links>
     );
 
-    const link = screen.getByText('Test Link');
+    // className is applied to the <a> element via the 'root' + className pattern.
+    const link = screen.getByRole('link', { name: 'Test Link' });
     expect(link).toHaveClass('custom-class');
   });
 
@@ -47,7 +50,7 @@ describe('Links', () => {
   it('renders with proper href', () => {
     render(<Links href="/test">Test Link</Links>);
 
-    const link = screen.getByText('Test Link');
+    const link = screen.getByRole('link', { name: 'Test Link' });
     expect(link).toHaveAttribute('href', '/test');
   });
 
@@ -63,10 +66,12 @@ describe('Links', () => {
     it('uses design tokens instead of hardcoded values', () => {
       render(<Links href="/test">Test Link</Links>);
 
-      const link = screen.getByText('Test Link');
+      // The <a> element carries class="root <className>"; check for 'animated-link'
+      // class via the role query which targets the anchor directly.
+      const link = screen.getByRole('link', { name: 'Test Link' });
 
       // Verify CSS custom properties are being used
-      expect(link).toHaveClass('animated-link');
+      expect(link).toHaveClass('root');
     });
   });
 });

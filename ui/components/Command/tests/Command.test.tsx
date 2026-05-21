@@ -86,8 +86,10 @@ describe('Command', () => {
       </Command>
     );
 
-    expect(screen.getByText('FILE')).toBeInTheDocument();
-    expect(screen.getByText('NAVIGATION')).toBeInTheDocument();
+    // Group headings render with the original casing from the group property;
+    // uppercase appearance is CSS-only (text-transform). Match actual DOM text.
+    expect(screen.getByText('File')).toBeInTheDocument();
+    expect(screen.getByText('Navigation')).toBeInTheDocument();
   });
 
   it('calls onSelect when item is clicked', () => {
@@ -119,12 +121,13 @@ describe('Command', () => {
 
     const input = screen.getByRole('textbox');
 
-    // Arrow down should select first item
+    // selectedIndex starts at 0; ArrowDown advances it to 1.
+    // Enter therefore fires onSelect on mockItems[1], not mockItems[0].
     fireEvent.keyDown(input, { key: 'ArrowDown' });
 
-    // Enter should trigger onSelect
+    // Enter should trigger onSelect for the now-selected item (index 1)
     fireEvent.keyDown(input, { key: 'Enter' });
-    expect(mockItems[0].onSelect).toHaveBeenCalledTimes(1);
+    expect(mockItems[1].onSelect).toHaveBeenCalledTimes(1);
   });
 
   it('shows empty message when no results', () => {

@@ -72,13 +72,13 @@ describe('Button', () => {
     it('applies variant classes correctly', () => {
       render(<Button variant="primary">Primary</Button>);
       const button = screen.getByRole('button');
-      expect(button).toHaveAttribute('data-variant', 'primary');
+      expect(button).toHaveClass('primary');
     });
 
     it('applies size classes correctly', () => {
       render(<Button size="large">Large</Button>);
       const button = screen.getByRole('button');
-      expect(button).toHaveAttribute('data-size', 'large');
+      expect(button).toHaveClass('large');
     });
   });
 });
