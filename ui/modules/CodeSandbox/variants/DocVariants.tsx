@@ -47,7 +47,7 @@ export function DocVariants({
     if (Object.keys(defaults).length > 0) {
       setValues((prev) => ({ ...prev, ...defaults }));
     }
-  }, [controls]);
+  }, [controls, values]);
 
   // Initialize from URL query if enabled
   React.useEffect(() => {
