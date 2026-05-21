@@ -53,18 +53,20 @@ export function SectionSync({
   threshold,
   rootMargin = '0px',
 }: SectionSyncProps) {
-  // Stabilize thresholds to avoid effect churn from array identity changes
-  // Serialize the caller-provided array by value so useMemo only re-runs when
-  // the contents actually change, not just when the array reference changes.
-  const thresholdKey = threshold ? JSON.stringify(threshold) : 'default';
-  const thresholds = React.useMemo(
-    () => threshold ?? [...DEFAULT_THRESHOLDS],
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [thresholdKey]
-  );
-  const stableThresholdKey = React.useMemo(
+  // Stabilize thresholds to avoid effect churn from array identity changes.
+  // The key serializes the caller-provided array by value so memos/effects
+  // only re-run when the contents actually change, not just when the array
+  // reference changes.
+  const thresholdKey = React.useMemo(
     () => (threshold ? JSON.stringify(threshold) : 'default'),
     [threshold]
+  );
+  const thresholds = React.useMemo(
+    () => threshold ?? [...DEFAULT_THRESHOLDS],
+    // Tracking thresholdKey (memoized by value above) instead of threshold
+    // itself so a new array literal with identical contents doesn't churn.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [thresholdKey]
   );
   const lastDecoKeyRef = React.useRef<string>('');
   React.useEffect(() => {
@@ -125,7 +127,15 @@ export function SectionSync({
     );
     nodeList.forEach((n) => observer.observe(n));
     return () => observer.disconnect();
-  }, [sections, root, onActiveSection, onDecorate, thresholds, stableThresholdKey, rootMargin]);
+  }, [
+    sections,
+    root,
+    onActiveSection,
+    onDecorate,
+    thresholds,
+    thresholdKey,
+    rootMargin,
+  ]);
 
   // Also emit initial decorators from the first section for non-observed mounts
   React.useEffect(() => {
