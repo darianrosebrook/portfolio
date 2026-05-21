@@ -2,6 +2,7 @@
 
 import styles from '@/app/articles/[slug]/styles.module.css';
 import type { Article } from '@/types';
+import { Image } from '@/ui/components/Image';
 import { processArticleContent } from '@/utils/tiptap/htmlGeneration';
 
 interface ArticlePreviewProps {
@@ -120,7 +121,7 @@ export function ArticlePreview({ article, onClose }: ArticlePreviewProps) {
           </div>
           {(article.image || imageSrc) && (
             <>
-              <img
+              <Image
                 src={article.image || imageSrc || ''}
                 alt={article.headline || 'Article cover'}
                 style={{
