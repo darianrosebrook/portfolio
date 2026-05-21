@@ -187,9 +187,15 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       }
     }, [trigger, isVisible, showTooltip, hideTooltip]);
 
-    // Update position when visible
+    // Update position when visible. This is the canonical useLayoutEffect
+    // pattern: after layout, measure DOM rects (trigger + tooltip) and
+    // setPosition. The setState is exactly the goal of the effect and runs
+    // synchronously before paint, so it doesn't cascade visible renders.
+    // React Compiler still flags the synchronous setState; suppress with
+    // rationale (no cleaner React 18/19 primitive without useEffectEvent).
     useLayoutEffect(() => {
       if (isVisible) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- canonical measure-DOM-then-setPosition in useLayoutEffect
         updatePosition();
       }
     }, [isVisible, updatePosition]);
