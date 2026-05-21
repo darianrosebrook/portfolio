@@ -11,7 +11,9 @@ describe('Avatar', () => {
 
     const avatar = screen.getByRole('img', { name: 'Test Avatar' });
     expect(avatar).toBeInTheDocument();
-    expect(avatar).toHaveAttribute('src', '/test-image.jpg');
+    // Next/Image rewrites src to its own CDN URL; verify the original path is
+    // encoded somewhere in the resolved src rather than doing a literal match.
+    expect(avatar.getAttribute('src')).toContain('test-image');
   });
 
   it('renders avatar with fallback text', () => {
@@ -50,18 +52,19 @@ describe('Avatar', () => {
   describe('Design Tokens', () => {
     it('uses design tokens instead of hardcoded values', () => {
       render(<Avatar name="John Doe" size="medium" />);
-      const avatar = screen.getByText('JD');
-
-      // Verify CSS custom properties are being used
-      expect(avatar).toHaveClass('avatar');
+      // getByText('JD') returns the inner span.avatar_initials; walk up to the
+      // container div which carries the 'avatar' class.
+      const container = screen.getByText('JD').closest('[data-ds-component="Avatar"]');
+      expect(container).toHaveClass('avatar');
     });
   });
 
   describe('Variants', () => {
     it('applies size classes correctly', () => {
       render(<Avatar name="John Doe" size="large" />);
-      const avatar = screen.getByText('JD');
-      expect(avatar).toHaveAttribute('data-size', 'large');
+      // Size is applied as a CSS class on the container div, not a data-size attribute.
+      const container = screen.getByText('JD').closest('[data-ds-component="Avatar"]');
+      expect(container).toHaveClass('large');
     });
   });
 });

@@ -17,8 +17,9 @@ describe('Image', () => {
 
   it('applies custom className', () => {
     render(<Image src="/test-image.jpg" alt="Test" className="custom-class" />);
-    const image = screen.getByRole('img');
-    expect(image).toHaveClass('custom-class');
+    // className is applied to the wrapper <div>, not the <img> element.
+    const wrapper = document.querySelector('[data-ds-component="Image"]');
+    expect(wrapper).toHaveClass('custom-class');
   });
 
   it('passes through HTML attributes', () => {
@@ -28,8 +29,10 @@ describe('Image', () => {
 
   it('applies aspect ratio correctly', () => {
     render(<Image src="/test-image.jpg" alt="Test" aspectRatio="video" />);
-    const image = screen.getByRole('img');
-    expect(image).toHaveAttribute('data-aspect-ratio', 'video');
+    // aspectRatio is represented as the 'aspectRatio' CSS class on the wrapper div
+    // and as an inline style on the img; there is no data-aspect-ratio attribute.
+    const wrapper = document.querySelector('[data-ds-component="Image"]');
+    expect(wrapper).toHaveClass('aspectRatio');
   });
 
   it('applies loading behavior correctly', () => {

@@ -28,8 +28,10 @@ describe('Shuttle', () => {
       </Shuttle>
     );
 
-    const item = screen.getByText('Item');
-    expect(item).toHaveClass('custom-class');
+    // getByText('Item') returns the inner ShuttleItem div (class="item"), not the
+    // outer Shuttle wrapper. Query the container via its data-ds-component attribute.
+    const container = document.querySelector('[data-ds-component="Shuttle"]');
+    expect(container).toHaveClass('custom-class');
   });
 
   it('passes through HTML attributes', () => {
@@ -62,10 +64,12 @@ describe('Shuttle', () => {
         </Shuttle>
       );
 
-      const item = screen.getByText('Item');
+      // getByText('Item') returns the inner ShuttleItem div (class="item"), not the
+      // outer Shuttle wrapper. Query the container via its data-ds-component attribute.
+      const container = document.querySelector('[data-ds-component="Shuttle"]');
 
       // Verify CSS custom properties are being used
-      expect(item).toHaveClass('shuttle');
+      expect(container).toHaveClass('shuttle');
     });
   });
 });

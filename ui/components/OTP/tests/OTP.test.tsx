@@ -3,6 +3,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 
 import OTP from '../OTP';
 import { OTPProvider } from '../OTPProvider';
+import { OTPField } from '../slots/OTPField';
 
 // Extend Jest matchers
 
@@ -44,36 +45,44 @@ describe('OTP', () => {
     const handleChange = vi.fn();
 
     render(
-      <OTPProvider length={4}>
-        <OTP onChange={handleChange} />
+      <OTPProvider length={4} onChange={handleChange}>
+        <OTP>
+          {Array.from({ length: 4 }, (_, i) => (
+            <OTPField key={i} index={i} />
+          ))}
+        </OTP>
       </OTPProvider>
     );
 
     const inputs = screen.getAllByRole('textbox');
 
-    // Type in first input
+    // Type in first input — OTPProvider.onChange receives full code string
     fireEvent.change(inputs[0], { target: { value: '1' } });
-    expect(handleChange).toHaveBeenCalledWith('1', 0);
+    expect(handleChange).toHaveBeenCalledWith('1');
 
-    // Type in second input
+    // Type in second input — code is now '12'
     fireEvent.change(inputs[1], { target: { value: '2' } });
-    expect(handleChange).toHaveBeenCalledWith('12', 1);
+    expect(handleChange).toHaveBeenCalledWith('12');
   });
 
   it('handles paste events', () => {
     const handleChange = vi.fn();
 
     render(
-      <OTPProvider length={4}>
-        <OTP onChange={handleChange} />
+      <OTPProvider length={4} onChange={handleChange}>
+        <OTP>
+          {Array.from({ length: 4 }, (_, i) => (
+            <OTPField key={i} index={i} />
+          ))}
+        </OTP>
       </OTPProvider>
     );
 
     const inputs = screen.getAllByRole('textbox');
 
-    // Paste into first input
+    // Paste into first input — OTPProvider.onChange receives full code string
     fireEvent.paste(inputs[0], { clipboardData: { getData: () => '1234' } });
-    expect(handleChange).toHaveBeenCalledWith('1234', 3);
+    expect(handleChange).toHaveBeenCalledWith('1234');
   });
 
   describe('Accessibility', () => {

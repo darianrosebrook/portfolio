@@ -15,7 +15,8 @@ describe('AspectRatio', () => {
 
     const container = screen.getByText('Test content').parentElement;
     expect(container).toBeInTheDocument();
-    expect(container).toHaveAttribute('data-ratio', '16/9');
+    // Component sets aspectRatio via inline style, not a data-ratio attribute
+    expect(container).toHaveStyle({ aspectRatio: (16 / 9).toString() });
   });
 
   it('applies custom className', () => {
@@ -47,7 +48,8 @@ describe('AspectRatio', () => {
     );
 
     const container = screen.getByText('Content').parentElement;
-    expect(container).toHaveAttribute('data-ratio', '3/2');
+    // Component sets aspectRatio via inline style, not a data-ratio attribute
+    expect(container).toHaveStyle({ aspectRatio: (3 / 2).toString() });
   });
 
   describe('Accessibility', () => {
@@ -72,8 +74,8 @@ describe('AspectRatio', () => {
 
       const container = screen.getByText('Content').parentElement;
 
-      // Verify CSS custom properties are being used
-      expect(container).toHaveClass('aspectRatio');
+      // Component root class is 'container', not 'aspectRatio'
+      expect(container).toHaveClass('container');
     });
   });
 });

@@ -32,14 +32,16 @@ describe('Progress', () => {
     render(<Progress value={30} variant="circular" />);
 
     const progress = screen.getByRole('progressbar');
-    expect(progress).toHaveAttribute('data-variant', 'circular');
+    // Component encodes variant as a CSS class, not a data-variant attribute
+    expect(progress).toHaveClass('circular');
   });
 
   it('applies size correctly', () => {
     render(<Progress value={40} size="lg" />);
 
     const progress = screen.getByRole('progressbar');
-    expect(progress).toHaveAttribute('data-size', 'lg');
+    // Component encodes size as a CSS class, not a data-size attribute
+    expect(progress).toHaveClass('lg');
   });
 
   it('shows correct percentage when max is 100', () => {

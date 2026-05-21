@@ -30,8 +30,10 @@ describe('Truncate', () => {
       </Truncate>
     );
 
-    const truncated = screen.getByText('Very long text');
-    expect(truncated).toHaveClass('custom-class');
+    // getByText finds the inner <span class="content">; the outer wrapper carries
+    // className. Query via data-ds-component to reach the wrapper element.
+    const wrapper = screen.getByText('Very long text').closest('[data-ds-component="Truncate"]');
+    expect(wrapper).toHaveClass('custom-class');
   });
 
   it('passes through HTML attributes', () => {
@@ -73,10 +75,10 @@ describe('Truncate', () => {
     it('uses design tokens instead of hardcoded values', () => {
       render(<Truncate lines={1}>Long text</Truncate>);
 
-      const truncated = screen.getByText('Long text');
-
-      // Verify CSS custom properties are being used
-      expect(truncated).toHaveClass('truncate');
+      // getByText finds the inner <span class="content">; the 'truncate' class
+      // lives on the outer wrapper. Query via data-ds-component to reach it.
+      const wrapper = screen.getByText('Long text').closest('[data-ds-component="Truncate"]');
+      expect(wrapper).toHaveClass('truncate');
     });
   });
 });

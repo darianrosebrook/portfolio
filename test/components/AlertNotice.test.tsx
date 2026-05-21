@@ -30,10 +30,10 @@ describe('AlertNotice Components', () => {
       );
 
       const alert = screen.getByRole('alert');
-      // CSS modules generate hashed class names, so we check for the pattern
-      expect(alert.className).toMatch(/alert/);
-      expect(alert.className).toMatch(/alert__page/);
-      expect(alert.className).toMatch(/alert__page--warning/);
+      // Component emits flat classes: 'alert', 'page', 'warning'
+      expect(alert).toHaveClass('alert');
+      expect(alert).toHaveClass('page');
+      expect(alert).toHaveClass('warning');
     });
 
     it('renders dismiss button when dismissible', () => {

@@ -85,8 +85,8 @@ describe('Postcard', () => {
 
       const postcard = screen.getByText('Content').closest('article');
 
-      // Verify CSS custom properties are being used
-      expect(postcard).toHaveClass('postcard');
+      // Component root class is 'post', not 'postcard'
+      expect(postcard).toHaveClass('post');
     });
   });
 });

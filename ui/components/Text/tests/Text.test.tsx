@@ -27,19 +27,22 @@ describe('Text', () => {
   it('applies variant correctly', () => {
     render(<Text variant="title">Heading Text</Text>);
     const text = screen.getByText('Heading Text');
-    expect(text).toHaveAttribute('data-variant', 'title');
+    // Component encodes variant as a CSS class, not a data-variant attribute
+    expect(text).toHaveClass('title');
   });
 
   it('applies size correctly', () => {
     render(<Text size="lg">Large Text</Text>);
     const text = screen.getByText('Large Text');
-    expect(text).toHaveAttribute('data-size', 'lg');
+    // Component encodes size as a CSS class, not a data-size attribute
+    expect(text).toHaveClass('lg');
   });
 
   it('applies color correctly', () => {
     render(<Text color="accent">Primary Text</Text>);
     const text = screen.getByText('Primary Text');
-    expect(text).toHaveAttribute('data-color', 'accent');
+    // Component encodes color as a CSS class (color-<value>), not a data-color attribute
+    expect(text).toHaveClass('color-accent');
   });
 
   describe('Accessibility', () => {
@@ -55,8 +58,8 @@ describe('Text', () => {
       render(<Text>Test content</Text>);
       const text = screen.getByText('Test content');
 
-      // Verify CSS custom properties are being used
-      expect(text).toHaveClass('text');
+      // Component root classes are variant+size+weight, not a single 'text' class
+      expect(text).toHaveClass('body', 'md', 'weight-normal');
     });
   });
 });
