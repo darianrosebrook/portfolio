@@ -1,6 +1,7 @@
 'use client';
 
 import type { AuthorMetadata } from '@/types/foundationContent';
+import { Image } from '@/ui/components/Image';
 import Link from 'next/link';
 import styles from './AuthorProfile.module.css';
 
@@ -27,7 +28,7 @@ export function AuthorProfile({
     <div className={styles.authorProfile}>
       <div className={styles.authorInfo}>
         {author.imageUrl && (
-          <img
+          <Image
             src={author.imageUrl}
             alt={author.name}
             className={styles.avatar}
