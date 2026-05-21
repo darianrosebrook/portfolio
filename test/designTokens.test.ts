@@ -251,7 +251,7 @@ describe('Enhanced Design Token Resolution', () => {
   });
 
   it('should provide built-in transforms', () => {
-    expect(builtInTransforms).toHaveLength(5);
+    expect(builtInTransforms).toHaveLength(6);
 
     const dimensionTransform = builtInTransforms.find((t: any) =>
       t.match({ type: 'dimension' })
@@ -424,7 +424,7 @@ describe('Enhanced Design Token Resolution', () => {
     const result = generate(componentTokens, mockTokens, config);
 
     expect(result['--button-background']).toBe(
-      'var(--component-test-ds-semantic-color-bg-primary)'
+      'var(--ds-semantic-color-bg-primary)'
     );
   });
 
@@ -443,7 +443,7 @@ describe('Enhanced Design Token Resolution', () => {
     const result = generate(componentTokens, mockTokens, config);
 
     expect(result['--button-background']).toBe(
-      'var(--component-test-custom-semantic-color-bg-primary)'
+      'var(--custom-semantic-color-bg-primary)'
     );
   });
 

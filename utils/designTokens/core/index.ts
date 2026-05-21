@@ -181,8 +181,11 @@ function determineNamespace(tokenPath: string): 'core' | 'semantic' | null {
     return 'core';
   }
 
-  // Everything else is semantic (foreground, background, border, action, feedback, etc.)
-  return 'semantic';
+  // Unknown namespace — emit without prefix rather than guessing 'semantic'.
+  // Tokens not under core.* / semantic.* / a recognized core pattern (e.g. brand.*,
+  // custom application namespaces) should appear as their own --<path> var. The
+  // previous default-to-semantic produced misleading --semantic-brand-* names.
+  return null;
 }
 
 /**
