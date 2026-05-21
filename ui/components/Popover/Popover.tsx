@@ -349,8 +349,9 @@ const Trigger = forwardRef<HTMLElement, TriggerProps>(
         onMouseLeave={handleMouseLeave}
         role={isNonButtonElement ? 'button' : undefined}
         tabIndex={isNonButtonElement ? 0 : undefined}
-        aria-haspopup="true"
+        aria-haspopup="dialog"
         aria-expanded={isOpen}
+        aria-controls={isOpen ? context.popoverId : undefined}
         data-slot="popover-trigger"
       >
         {children}
@@ -429,6 +430,7 @@ const Content: React.FC<ContentProps> = ({
     <div
       ref={combinedRef}
       id={popoverId}
+      role="dialog"
       className={contentClassName}
       style={{
         position: 'fixed',

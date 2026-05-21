@@ -4,94 +4,152 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import Popover from '../Popover';
 import { contractTest } from '@/test/utils/contractTest';
 
-// Extend Jest matchers
-
 describe('Popover', () => {
-  it('renders popover trigger', () => {
-    render(
-      <Popover>
-        <Popover.Trigger>Click me</Popover.Trigger>
-        <Popover.Content>Popover content</Popover.Content>
-      </Popover>
-    );
+  describe('rendering', () => {
+    it('renders the trigger child', () => {
+      render(
+        <Popover>
+          <Popover.Trigger>Click me</Popover.Trigger>
+          <Popover.Content>Popover content</Popover.Content>
+        </Popover>
+      );
 
-    const trigger = screen.getByText('Click me');
-    expect(trigger).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: 'Click me' })
+      ).toBeInTheDocument();
+    });
+
+    it('does not render content until the trigger is activated', () => {
+      render(
+        <Popover>
+          <Popover.Trigger>Click me</Popover.Trigger>
+          <Popover.Content>Popover content</Popover.Content>
+        </Popover>
+      );
+
+      expect(screen.queryByText('Popover content')).not.toBeInTheDocument();
+    });
+
+    it('shows content when trigger is clicked and hides on second click', async () => {
+      render(
+        <Popover>
+          <Popover.Trigger>Click me</Popover.Trigger>
+          <Popover.Content>Popover content</Popover.Content>
+        </Popover>
+      );
+
+      const trigger = screen.getByRole('button', { name: 'Click me' });
+      fireEvent.click(trigger);
+      expect(screen.getByText('Popover content')).toBeInTheDocument();
+
+      fireEvent.click(trigger);
+      await waitFor(
+        () =>
+          expect(screen.queryByText('Popover content')).not.toBeInTheDocument(),
+        { timeout: 500 }
+      );
+    });
   });
 
-  it('shows content when trigger is clicked', () => {
-    render(
-      <Popover>
-        <Popover.Trigger>Click me</Popover.Trigger>
-        <Popover.Content>Popover content</Popover.Content>
-      </Popover>
-    );
+  describe('className routing', () => {
+    it('applies custom className to the popover container, not the trigger', () => {
+      const { container } = render(
+        <Popover className="custom-class">
+          <Popover.Trigger>Click me</Popover.Trigger>
+          <Popover.Content>Content</Popover.Content>
+        </Popover>
+      );
 
-    const trigger = screen.getByText('Click me');
-    const content = screen.getByText('Popover content');
+      const root = container.querySelector('[data-ds-component="Popover"]');
+      expect(root).toHaveClass('custom-class');
 
-    // Content should be hidden initially
-    expect(content).toHaveAttribute('hidden');
-
-    // Click to show
-    fireEvent.click(trigger);
-    expect(content).not.toHaveAttribute('hidden');
-
-    // Click again to hide
-    fireEvent.click(trigger);
-    expect(content).toHaveAttribute('hidden');
-  });
-
-  it('applies custom className', () => {
-    render(
-      <Popover className="custom-class">
-        <Popover.Trigger>Click me</Popover.Trigger>
-        <Popover.Content>Content</Popover.Content>
-      </Popover>
-    );
-
-    const trigger = screen.getByText('Click me');
-    expect(trigger).toHaveClass('custom-class');
+      const trigger = screen.getByRole('button', { name: 'Click me' });
+      expect(trigger).not.toHaveClass('custom-class');
+    });
   });
 
   describe('Accessibility', () => {
-    it('should not have accessibility violations', async () => {
+    it('sets aria-haspopup="dialog" on the trigger (not the literal "true")', () => {
+      render(
+        <Popover>
+          <Popover.Trigger>Click me</Popover.Trigger>
+          <Popover.Content>Content</Popover.Content>
+        </Popover>
+      );
+
+      const trigger = screen.getByRole('button', { name: 'Click me' });
+      expect(trigger).toHaveAttribute('aria-haspopup', 'dialog');
+    });
+
+    it('reflects open state via aria-expanded', () => {
+      render(
+        <Popover>
+          <Popover.Trigger>Click me</Popover.Trigger>
+          <Popover.Content>Content</Popover.Content>
+        </Popover>
+      );
+
+      const trigger = screen.getByRole('button', { name: 'Click me' });
+      expect(trigger).toHaveAttribute('aria-expanded', 'false');
+
+      fireEvent.click(trigger);
+      expect(trigger).toHaveAttribute('aria-expanded', 'true');
+    });
+
+    it('wires aria-controls to the content id when open', () => {
+      render(
+        <Popover>
+          <Popover.Trigger>Click me</Popover.Trigger>
+          <Popover.Content>Content</Popover.Content>
+        </Popover>
+      );
+
+      const trigger = screen.getByRole('button', { name: 'Click me' });
+      fireEvent.click(trigger);
+
+      const controlsId = trigger.getAttribute('aria-controls');
+      expect(controlsId).toBeTruthy();
+
+      const dialog = screen.getByRole('dialog');
+      expect(dialog.id).toBe(controlsId);
+    });
+
+    it('exposes the content as role="dialog"', () => {
+      render(
+        <Popover>
+          <Popover.Trigger>Click me</Popover.Trigger>
+          <Popover.Content>Content</Popover.Content>
+        </Popover>
+      );
+
+      fireEvent.click(screen.getByRole('button', { name: 'Click me' }));
+      expect(screen.getByRole('dialog')).toBeInTheDocument();
+    });
+  });
+
+  describe('Design Tokens', () => {
+    it('marks the trigger with the popoverTrigger class', () => {
+      render(
+        <Popover>
+          <Popover.Trigger>Click me</Popover.Trigger>
+          <Popover.Content>Content</Popover.Content>
+        </Popover>
+      );
+
+      const trigger = screen.getByRole('button', { name: 'Click me' });
+      expect(trigger).toHaveClass('popoverTrigger');
+    });
+
+    it('marks the container with the popoverContainer class and data-ds-component', () => {
       const { container } = render(
         <Popover>
           <Popover.Trigger>Click me</Popover.Trigger>
           <Popover.Content>Content</Popover.Content>
         </Popover>
       );
-      // Note: axe testing is handled by the setup file
-      expect(container).toBeInTheDocument();
-    });
 
-    it('provides proper ARIA attributes', () => {
-      render(
-        <Popover>
-          <Popover.Trigger>Click me</Popover.Trigger>
-          <Popover.Content>Content</Popover.Content>
-        </Popover>
-      );
-
-      const trigger = screen.getByText('Click me');
-      expect(trigger).toHaveAttribute('aria-haspopup', 'dialog');
-    });
-  });
-
-  describe('Design Tokens', () => {
-    it('uses design tokens instead of hardcoded values', () => {
-      render(
-        <Popover>
-          <Popover.Trigger>Click me</Popover.Trigger>
-          <Popover.Content>Content</Popover.Content>
-        </Popover>
-      );
-
-      const trigger = screen.getByText('Click me');
-
-      // Verify CSS custom properties are being used
-      expect(trigger).toHaveClass('popover');
+      const root = container.querySelector('[data-ds-component="Popover"]');
+      expect(root).toHaveClass('popoverContainer');
     });
   });
 
@@ -104,7 +162,7 @@ describe('Popover', () => {
         </Popover>
       );
 
-      fireEvent.click(screen.getByText('Open'));
+      fireEvent.click(screen.getByRole('button', { name: 'Open' }));
       expect(screen.getByText('Popover content')).toBeInTheDocument();
 
       fireEvent.keyDown(document, { key: 'Escape' });
