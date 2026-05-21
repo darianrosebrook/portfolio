@@ -1,29 +1,31 @@
 /**
- * Calendar (Composer)
+ * Calendar (Composer) — SCAFFOLD
  *
- * @status SCAFFOLD - This is a placeholder component that needs full implementation.
+ * Minimal scaffold that satisfies the a11y contract test (announced as a
+ * labelled region) so consumers can mount it without breaking AT. The full
+ * APG-compliant calendar (role="grid" with focusable gridcells, date
+ * selection, month/year nav, keyboard navigation, locale, min/max,
+ * disabled dates) is tracked separately and will replace this scaffold.
  *
- * TODO: Implement full calendar composer with:
- * - Date selection (single, range, multiple)
- * - Month/year navigation
- * - Keyboard navigation (Arrow keys, Home, End, Page Up/Down)
- * - ARIA attributes (role="grid", role="gridcell", aria-selected, etc.)
- * - Locale support
- * - Min/max date constraints
- * - Disabled dates
- * - Custom day rendering
- *
- * The hook (useCalendar) and provider (CalendarProvider) also need implementation.
+ * Open question for the full implementation: role="application" (current,
+ * per audit-requested test) vs the APG-recommended pattern of role="grid"
+ * inside a role="dialog" for date pickers. role="application" forwards all
+ * keystrokes to the widget and is the right choice only for fully custom
+ * keyboard models — for date picking, role="grid" composes better with AT
+ * defaults. The full impl will revisit.
  */
 'use client';
 import * as React from 'react';
 import './Calendar.css';
 
-export interface CalendarProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface CalendarProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Accessible name for the calendar widget. Default: 'Calendar' */
+  label?: string;
+}
 
-/** @status SCAFFOLD - Needs full implementation */
 export const Calendar: React.FC<CalendarProps> = ({
   className = '',
+  label = 'Calendar',
   children,
   ...rest
 }) => {
@@ -31,6 +33,8 @@ export const Calendar: React.FC<CalendarProps> = ({
     <div
       data-ds-component="Calendar"
       className={['calendar', className].filter(Boolean).join(' ')}
+      role="application"
+      aria-label={label}
       {...rest}
     >
       {children}
