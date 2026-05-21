@@ -1,7 +1,7 @@
 id: FIX-TOOLTIP-POS-001
 type: fix
 title: Document Tooltip updatePosition setState in useLayoutEffect
-status: active
+status: closed
 risk_tier: 3
 mode: development
 created_at: '2026-05-21T00:17:57.214Z'
