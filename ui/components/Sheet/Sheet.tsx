@@ -258,13 +258,14 @@ const SheetContent = React.forwardRef<HTMLDivElement, SheetContentProps>(
           document.removeEventListener('keydown', handleKeyDown);
       }
 
+      const trigger = triggerRef?.current ?? null;
       return () => {
         // Cleanup focus trap
         focusTrapCleanup?.();
 
         // Return focus to trigger when sheet closes
-        if (triggerRef?.current && document.contains(triggerRef.current)) {
-          triggerRef.current.focus();
+        if (trigger && document.contains(trigger)) {
+          trigger.focus();
         } else if (
           previousFocusedElement &&
           document.contains(previousFocusedElement)
