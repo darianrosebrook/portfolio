@@ -3,21 +3,26 @@ import * as React from 'react';
 import './Spinner.css';
 
 export type SpinnerVariant = 'ring' | 'dots' | 'bars';
+export type SpinnerSize = 'xs' | 'sm' | 'md' | 'lg';
 
 export interface SpinnerProps extends React.HTMLAttributes<HTMLSpanElement> {
   /** Size token key or explicit px (e.g., 16). Default: 'md' */
-  size?: 'xs' | 'sm' | 'md' | 'lg' | number;
+  size?: SpinnerSize | number;
   /** Stroke thickness token or px. Default: 'regular' */
   thickness?: 'hairline' | 'regular' | 'bold' | number;
   /** Visual variant */
   variant?: SpinnerVariant;
   /** If decorative only, set ariaHidden; else provide label */
   ariaHidden?: boolean;
-  /** Localized label for SR users; ignored if ariaHidden */
+  /** Localized label for SR users; ignored if ariaHidden. Default: 'Loading' */
   label?: string;
   /** Inline layout (align with baseline) */
   inline?: boolean;
-  /** Delay before showing (ms) to avoid spinner flash */
+  /**
+   * Delay before showing (ms) to avoid spinner flash on near-instant work.
+   * Default: 0 (show immediately). Set e.g. 150 to suppress flash when wrapping
+   * an async boundary that usually resolves under one frame.
+   */
   showAfterMs?: number;
 }
 
@@ -30,7 +35,7 @@ export const Spinner = React.forwardRef<HTMLSpanElement, SpinnerProps>(
       ariaHidden,
       label = 'Loading',
       inline = false,
-      showAfterMs = 150,
+      showAfterMs = 0,
       className,
       ...rest
     },
@@ -64,12 +69,15 @@ export const Spinner = React.forwardRef<HTMLSpanElement, SpinnerProps>(
       : ({
           role: 'status',
           'aria-live': 'polite',
+          'aria-busy': true as const,
           'aria-label': label,
         } as const);
 
-    const rootClassName = [inline ? 'inline' : '', className || '']
+    const rootClassName = ['spinner', inline ? 'inline' : '', className || '']
       .filter(Boolean)
       .join(' ');
+
+    const sizeAttr = typeof size === 'string' ? size : undefined;
 
     return (
       <span
@@ -79,6 +87,7 @@ export const Spinner = React.forwardRef<HTMLSpanElement, SpinnerProps>(
         className={rootClassName}
         style={styleVars}
         data-variant={variant}
+        data-size={sizeAttr}
         {...a11yProps}
         {...rest}
       >
