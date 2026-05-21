@@ -71,13 +71,16 @@ export function useOTP(options: UseOTPOptions = {}): UseOTPResult {
 
   const code = isControlled ? value! : internal.join('');
   const chars = React.useMemo(() => {
-    const codeChars = code.slice(0, length).split('');
-    // Pad with empty strings to reach desired length
-    while (codeChars.length < length) {
-      codeChars.push('');
+    if (!isControlled) {
+      // Preserve positional empties (cleared mid-array) by reading state directly
+      const next = internal.slice(0, length);
+      while (next.length < length) next.push('');
+      return next;
     }
+    const codeChars = code.slice(0, length).split('');
+    while (codeChars.length < length) codeChars.push('');
     return codeChars;
-  }, [code, length]);
+  }, [isControlled, internal, code, length]);
   const isComplete = React.useMemo(
     () => chars.every((c) => c && c.length === 1),
     [chars]
