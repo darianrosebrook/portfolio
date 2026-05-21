@@ -6,10 +6,20 @@
     vertical-align: baseline;
     gap: var(--ds-badge-spacing-gap);
     align-items: center;
+    /* Prevent the badge from stretching to its parent's cross axis when
+       placed inside a flex container with default align-items: stretch.
+       A badge is a labelled chip — it should always size to its content. */
+    align-self: center;
     font-weight: 500;
     line-height: 1;
     white-space: nowrap;
-    container-type: inline-size;
+    /* Note: a previous revision set `container-type: inline-size` here to
+       drive @container queries below. That collapses the flex item's
+       inline size to its minimum content size inside a flex parent,
+       which squished the badge to a single character wide. The container
+       queries also matched on the badge's own width vs 10rem/6rem —
+       cargo-cult: a badge is essentially never that wide, so the rules
+       never fired in practice. Removed both. */
 
     &.default {
       padding: var(--ds-badge-size-md-padding-y) var(--ds-badge-size-md-padding-x);
@@ -193,53 +203,6 @@
 
   .content {
     display: inline-block;
-  }
-}
-
-@supports (container-type: inline-size) {
-  [data-ds-component="Badge"] {
-    &.badge {
-      @container (max-width: 10rem) {
-        gap: calc(var(--ds-badge-spacing-gap) * 0.75);
-        font-size: calc(var(--ds-badge-size-md-font-size) * 0.9);
-
-        &.sm {
-          padding: calc(var(--ds-badge-size-sm-padding-y) * 0.75)
-            calc(var(--ds-badge-size-sm-padding-x) * 0.75);
-          font-size: calc(var(--ds-badge-size-sm-font-size) * 0.9);
-        }
-
-        &.md {
-          padding: calc(var(--ds-badge-size-md-padding-y) * 0.75)
-            calc(var(--ds-badge-size-md-padding-x) * 0.75);
-          font-size: calc(var(--ds-badge-size-md-font-size) * 0.9);
-        }
-
-        &.lg {
-          padding: calc(var(--ds-badge-size-lg-padding-y) * 0.75)
-            calc(var(--ds-badge-size-lg-padding-x) * 0.75);
-          font-size: calc(var(--ds-badge-size-lg-font-size) * 0.9);
-        }
-      }
-
-      @container (max-width: 6rem) {
-        gap: calc(var(--ds-badge-spacing-gap) * 0.5);
-        font-size: calc(var(--ds-badge-size-md-font-size) * 0.8);
-
-        &.sm,
-        &.md,
-        &.lg {
-          padding: calc(var(--ds-badge-size-sm-padding-y) * 0.5)
-            calc(var(--ds-badge-size-sm-padding-x) * 0.5);
-          font-size: calc(var(--ds-badge-size-sm-font-size) * 0.8);
-        }
-
-        .icon {
-          width: calc(var(--ds-badge-size-sm-icon-size) * 0.8);
-          height: calc(var(--ds-badge-size-sm-icon-size) * 0.8);
-        }
-      }
-    }
   }
 }
 
