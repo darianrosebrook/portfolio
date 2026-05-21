@@ -8,6 +8,10 @@
   "additionalProperties": false,
   "properties": {
     "$schema": { "type": "string" },
+    "schemaVersion": {
+      "type": "string",
+      "description": "Contract schema version. Allows downstream tooling to opt into format-specific behavior."
+    },
     "name": {
       "type": "string",
       "pattern": "^[A-Za-z][A-Za-z0-9]*$",
@@ -108,7 +112,7 @@
     },
     "tokens": {
       "type": "object",
-      "description": "Design tokens per anatomy part. Values are a flat string array (legacy) or a map of token-name to structured resolution.",
+      "description": "Design tokens per anatomy part. Values are a flat string array (legacy) or a recursive map mixing token resolutions and named subgroups.",
       "additionalProperties": {
         "oneOf": [
           {
@@ -117,11 +121,7 @@
             "description": "Legacy flat list of token dot-paths"
           },
           {
-            "type": "object",
-            "description": "Structured resolution map: token-name → resolution",
-            "additionalProperties": {
-              "$ref": "#/definitions/tokenResolution"
-            }
+            "$ref": "#/definitions/tokenGroup"
           }
         ]
       }
@@ -331,6 +331,10 @@
       "additionalProperties": false,
       "description": "Animation contract",
       "properties": {
+        "description": {
+          "type": "string",
+          "description": "Human-readable summary of the motion contract"
+        },
         "transitions": {
           "type": "array",
           "items": {
@@ -426,6 +430,16 @@
     }
   },
   "definitions": {
+    "tokenGroup": {
+      "type": "object",
+      "description": "Recursive token map: each key is either a token name resolving to a tokenResolution, or a named subgroup containing nested tokens.",
+      "additionalProperties": {
+        "oneOf": [
+          { "$ref": "#/definitions/tokenResolution" },
+          { "$ref": "#/definitions/tokenGroup" }
+        ]
+      }
+    },
     "tokenResolution": {
       "type": "object",
       "additionalProperties": false,
