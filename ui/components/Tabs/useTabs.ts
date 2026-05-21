@@ -96,7 +96,7 @@ export function useTabs(options: UseTabsOptions = {}): TabsContextValue {
         if (v) performSelect(v);
       }
     },
-    [tabs.length, tabs, activationMode, performSelect]
+    [tabs, activationMode, performSelect]
   );
 
   return {

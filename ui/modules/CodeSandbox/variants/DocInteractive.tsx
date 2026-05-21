@@ -99,27 +99,11 @@ export function DocInteractive({
     [onEvent]
   );
 
-  // Stable sections reference to prevent unnecessary re-renders
-  // Compare by serializing IDs to detect actual changes
-  const sectionsKey = React.useMemo(
-    () => sections.map((s) => s.id).join(','),
-    [sections]
-  );
-  const stableSections = React.useMemo(() => sections, [sectionsKey]);
+  // Stable sections reference (memo on sections identity)
+  const stableSections = React.useMemo(() => sections, [sections]);
 
-  // Stable project reference to prevent CodeWorkbench re-renders
-  // Compare by serializing file paths and contents hash
-  const projectFilesKey = React.useMemo(
-    () =>
-      JSON.stringify(
-        project.files.map((f) => ({
-          path: f.path,
-          hash: String(f.contents).slice(0, 50),
-        }))
-      ),
-    [project.files]
-  );
-  const stableProject = React.useMemo(() => project, [projectFilesKey]);
+  // Stable project reference (memo on project identity)
+  const stableProject = React.useMemo(() => project, [project]);
 
   const decorators = React.useMemo(() => {
     if (!activeFile || !highlight) return undefined;

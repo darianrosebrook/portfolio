@@ -348,7 +348,7 @@ export function useModalFocus(
         }, 10);
       }
     };
-  }, [active, restoreFocus]);
+  }, [active, restoreFocus, modalRef]);
 
   // Return a query function instead of a snapshot. Callers invoke this
   // when they actually need a current list (e.g. on Tab, on focus events),

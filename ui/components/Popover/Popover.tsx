@@ -271,10 +271,11 @@ const Popover: React.FC<PopoverProps> & {
       (focusElement as HTMLElement).focus();
     }
 
+    const trigger = triggerRef.current;
     return () => {
       // Return focus to trigger or previous element
-      if (triggerRef.current && document.contains(triggerRef.current)) {
-        triggerRef.current.focus();
+      if (trigger && document.contains(trigger)) {
+        trigger.focus();
       } else if (previousFocus && document.contains(previousFocus)) {
         previousFocus.focus();
       }
