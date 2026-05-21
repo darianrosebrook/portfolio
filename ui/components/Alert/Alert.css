@@ -173,29 +173,30 @@
       }
     }
 
+    /* Grid-area assignments map to grid-template-areas declared on each
+       level variant (inline / section / page). Previous revisions added
+       grid-column-start / grid-column-end overrides that conflicted with
+       grid-area, leaving the title column at auto-sized 0 (since no item
+       declared itself in column 2) and the title text squished to a
+       per-character vertical column. Sticking to grid-area only keeps
+       each part in its named cell. */
+
     .icon {
       display: inline-block;
+      grid-area: icon;
       grid-row: span 2;
-      grid-column: span 1;
-      grid-column-start: 1;
       width: var(--ds-alert-icon-size);
       height: var(--ds-alert-icon-size);
     }
 
     .title {
       grid-area: title;
-      grid-row: span 1;
-      grid-column: span 1;
-      grid-column-end: -2;
       font-weight: var(--font-weight-bold);
       font-size: var(--font-size-06);
     }
 
     .body {
       grid-area: body;
-      grid-row: span 1;
-      grid-column: span 1;
-      grid-column-start: 2;
       font-size: var(--font-size-05);
     }
 
@@ -203,8 +204,6 @@
       display: inline-block;
       grid-area: dismiss;
       grid-row: span 2;
-      grid-column: span 1;
-      grid-column-end: -1;
       cursor: pointer;
     }
   }
