@@ -65,24 +65,27 @@ describe('Details', () => {
       expect(container).toBeInTheDocument();
     });
 
-    it('provides proper keyboard navigation', () => {
+    it('exposes the summary as the focusable element and toggles on Enter/Space', () => {
       render(<Details summary="Summary">Content</Details>);
 
-      const summary = screen.getByText('Summary');
-      const details = summary.closest('details');
+      const summaryText = screen.getByText('Summary');
+      const summary = summaryText.closest('summary');
+      const content = screen.getByText('Content');
 
-      // Should be focusable
-      if (details) {
-        details.focus();
-        expect(details).toHaveFocus();
+      expect(summary).not.toBeNull();
+      // Per HTML spec, <summary> is the focusable element of <details>, not
+      // the <details> itself (which has no tabindex by default).
+      summary!.focus();
+      expect(summary).toHaveFocus();
 
-        // Should respond to Enter and Space
-        fireEvent.keyDown(details, { key: 'Enter', code: 'Enter' });
-        fireEvent.keyUp(details, { key: 'Enter', code: 'Enter' });
+      // Enter toggles open
+      expect(content).toHaveAttribute('hidden');
+      fireEvent.keyDown(summary!, { key: 'Enter', code: 'Enter' });
+      expect(content).not.toHaveAttribute('hidden');
 
-        fireEvent.keyDown(details, { key: ' ', code: 'Space' });
-        fireEvent.keyUp(details, { key: ' ', code: 'Space' });
-      }
+      // Space toggles closed
+      fireEvent.keyDown(summary!, { key: ' ', code: 'Space' });
+      expect(content).toHaveAttribute('hidden');
     });
   });
 

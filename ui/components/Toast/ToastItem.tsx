@@ -33,10 +33,13 @@ export const ToastItem = React.forwardRef<HTMLDivElement, ToastItemProps>(
           .filter(Boolean)
           .join(' ')}
         role={rec.variant === 'error' ? 'alert' : 'status'}
+        aria-live={rec.variant === 'error' ? 'assertive' : 'polite'}
+        aria-atomic="true"
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
         data-slot="toast"
         data-state={rec.state}
+        data-variant={rec.variant}
         {...rest}
       >
         {children ?? (

@@ -5,7 +5,7 @@ export const ErrorText: React.FC = () => {
   const f = useFieldCtx();
   if (!f.errors.length) return null;
   return (
-    <div id={f.errId} role="alert">
+    <div id={f.errId} role="alert" aria-atomic="true">
       {f.errors.map((e: string, i: number) => (
         <div key={i}>{e}</div>
       ))}

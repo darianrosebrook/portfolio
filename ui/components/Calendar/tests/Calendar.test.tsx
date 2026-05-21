@@ -9,14 +9,14 @@ describe('Calendar', () => {
   it('renders calendar correctly', () => {
     render(<Calendar />);
 
-    const calendar = screen.getByRole('application');
+    const calendar = screen.getByRole('region');
     expect(calendar).toBeInTheDocument();
     expect(calendar).toHaveAttribute('aria-label', 'Calendar');
   });
 
   it('applies custom className', () => {
     render(<Calendar className="custom-class" />);
-    const calendar = screen.getByRole('application');
+    const calendar = screen.getByRole('region');
     expect(calendar).toHaveClass('custom-class');
   });
 
@@ -34,7 +34,7 @@ describe('Calendar', () => {
 
     it('provides proper ARIA labels', () => {
       render(<Calendar />);
-      const calendar = screen.getByRole('application');
+      const calendar = screen.getByRole('region');
       expect(calendar).toHaveAttribute('aria-label', 'Calendar');
     });
   });
@@ -42,7 +42,7 @@ describe('Calendar', () => {
   describe('Design Tokens', () => {
     it('uses design tokens instead of hardcoded values', () => {
       render(<Calendar />);
-      const calendar = screen.getByRole('application');
+      const calendar = screen.getByRole('region');
 
       // Verify CSS custom properties are being used
       expect(calendar).toHaveClass('calendar');

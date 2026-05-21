@@ -11,16 +11,23 @@ export type SkeletonVariant =
   | 'dataviz'
   | 'actions';
 
-export interface SkeletonProps {
+export interface SkeletonProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'children'> {
   variant?: SkeletonVariant;
   animate?: 'shimmer' | 'wipe' | 'pulse' | 'none';
   density?: 'compact' | 'regular' | 'spacious';
   aspectRatio?: string;
   lines?: number | { min: number; max: number };
   radius?: 'sm' | 'md' | 'lg';
+  /**
+   * When true, the placeholder is hidden from assistive tech (aria-hidden).
+   * Useful when wrapping multiple skeletons inside a single composer that
+   * already announces loading state. Default: false (announce as status).
+   */
   decorative?: boolean;
+  /** Localized label for SR users when not decorative. Default: 'Loading…' */
+  label?: string;
   children?: React.ReactNode;
-  className?: string;
 }
 
 export const Skeleton: React.FC<SkeletonProps> = ({
@@ -30,20 +37,23 @@ export const Skeleton: React.FC<SkeletonProps> = ({
   aspectRatio,
   lines = { min: 2, max: 3 },
   radius,
-  decorative = true,
+  decorative = false,
+  label = 'Loading…',
   children,
   className,
+  ...rest
 }) => {
   const a11y = decorative
     ? { 'aria-hidden': true as const }
     : ({
         role: 'status',
         'aria-live': 'polite',
-        'aria-label': 'Loading…',
+        'aria-busy': true as const,
+        'aria-label': label,
       } as const);
 
   const attrs = {
-    className: ['root', className || ''].filter(Boolean).join(' '),
+    className: ['skeleton', 'root', className || ''].filter(Boolean).join(' '),
     'data-animate': animate as string,
     'data-density': density as string,
     'data-variant': variant as string,
@@ -176,7 +186,13 @@ export const Skeleton: React.FC<SkeletonProps> = ({
   }, [variant, aspectRatio, lines, radius, children]);
 
   return (
-    <div data-ds-component="Skeleton" data-slot="skeleton" {...a11y} {...attrs}>
+    <div
+      data-ds-component="Skeleton"
+      data-slot="skeleton"
+      {...a11y}
+      {...attrs}
+      {...rest}
+    >
       {content}
     </div>
   );
