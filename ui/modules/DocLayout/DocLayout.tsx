@@ -50,10 +50,9 @@ export function DocLayoutProvider({
 }: DocLayoutProviderProps) {
   const [activeSection, setActiveSection] = useState(sections[0]?.id || '');
   // Resolve at render: if activeSection is no longer in sections, fall back to first
-  const resolvedActiveSection =
-    sections.some((s) => s.id === activeSection)
-      ? activeSection
-      : (sections[0]?.id ?? '');
+  const resolvedActiveSection = sections.some((s) => s.id === activeSection)
+    ? activeSection
+    : (sections[0]?.id ?? '');
 
   return (
     <DocLayoutContext.Provider

@@ -1,5 +1,11 @@
 /** Headless logic hook for Walkthrough */
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import type { WalkthroughStepSpec } from './types';
 
 type PersistedState = { index?: number; completed?: boolean };
