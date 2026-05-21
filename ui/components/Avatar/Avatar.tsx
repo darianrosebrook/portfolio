@@ -49,7 +49,9 @@ const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
             data-slot="avatar-image"
           />
         ) : (
-          <span data-slot="avatar-initials">{displayInitials}</span>
+          <span className="avatar_initials" data-slot="avatar-initials">
+            {displayInitials}
+          </span>
         )}
       </div>
     );
