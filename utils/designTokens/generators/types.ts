@@ -6,6 +6,7 @@
  * IntelliSense and type safety in token usage.
  */
 
+import prettier from 'prettier';
 import {
   PATHS,
   readTokenFile,
@@ -16,9 +17,13 @@ import {
 } from '../core/index';
 
 /**
- * Generate TypeScript types for token paths
+ * Generate TypeScript types for token paths.
+ * Output is piped through Prettier so the emitted file always satisfies
+ * the project's lint config; previously the generator produced trailing
+ * spaces in doc comments and over-long unions that drifted from
+ * prettier's expected format on every regeneration.
  */
-export function generateTokenTypes(): boolean {
+export async function generateTokenTypes(): Promise<boolean> {
   console.log('[tokens] Generating TypeScript types...');
 
   // Read composed tokens
@@ -152,8 +157,17 @@ export function generateTokenTypes(): boolean {
     ''
   );
 
-  // Combine and write
-  const content = typeDefinitions.join('\n');
+  // Combine and format. Resolving the project's prettier config picks up
+  // the same rules the lint rule enforces, so the output is byte-equal to
+  // what `eslint --fix` would produce on the same string.
+  const rawContent = typeDefinitions.join('\n');
+  const prettierConfig = await prettier.resolveConfig(PATHS.outputTypes);
+  const content = await prettier.format(rawContent, {
+    ...prettierConfig,
+    filepath: PATHS.outputTypes,
+    parser: 'typescript',
+  });
+
   writeOutputFile(PATHS.outputTypes, content, 'TypeScript token types');
 
   // Log summary
@@ -167,6 +181,10 @@ export function generateTokenTypes(): boolean {
 
 // CLI execution
 if (import.meta.url === `file://${process.argv[1]}`) {
-  const success = generateTokenTypes();
-  process.exit(success ? 0 : 1);
+  generateTokenTypes()
+    .then((success) => process.exit(success ? 0 : 1))
+    .catch((err) => {
+      console.error('[tokens] Type generation failed:', err);
+      process.exit(1);
+    });
 }
