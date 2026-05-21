@@ -72,7 +72,7 @@ const PerformanceDashboard: React.FC = () => {
         handleToggle as EventListener
       );
     };
-  }, []);
+  }, [isVisible]);
 
   if (!isVisible) {
     return null;
