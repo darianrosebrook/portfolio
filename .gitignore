@@ -106,6 +106,10 @@ test-results
 .caws/specs/registry.json
 .claude/worktrees
 
+# CAWS local-runtime artifacts (rotated event logs + migration reports)
+.caws/events.jsonl.archive-*
+.caws/migrations/
+
 # >>> caws gitignore (managed, v2) >>>
 # Ephemeral CAWS runtime/local state — never tracked. Authority state
 # (.caws/specs/, .caws/policy.yaml, .caws/waivers/) is intentionally NOT
