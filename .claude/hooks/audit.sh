@@ -1,22 +1,41 @@
 #!/bin/bash
+# CAWS-MANAGED-HOOK
+# hook_pack: claude-code
+# hook_pack_version: 11
+# caws_min_major: 11
+# lineage_refs: 9
+# do_not_edit_directly: update via `caws init --agent-surface claude-code`
 # CAWS Audit Hook for Claude Code
 # Logs agent actions for compliance and debugging
 # @author @darianrosebrook
 
 set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=lib/parse-input.sh
+source "$SCRIPT_DIR/lib/parse-input.sh"
+
+# --- CWD resilience ---
+# PostToolUse hooks fire AFTER the command runs. If the command destroyed
+# the working directory (e.g., caws worktree merge deletes the worktree),
+# the hook process inherits a nonexistent CWD and most commands will fail.
+# Recover to a safe directory before doing anything else.
+if ! pwd >/dev/null 2>&1 || [ ! -d "$(pwd 2>/dev/null || echo __gone__)" ]; then
+  cd "${CLAUDE_PROJECT_DIR:-$HOME}" 2>/dev/null || cd "$HOME"
+fi
+
+parse_hook_input
+
 # Get event type from argument or input
 EVENT_TYPE="${1:-tool-use}"
 
-# Read JSON input from stdin
-INPUT=$(cat)
-
-# Parse common fields from Claude Code hook input
-SESSION_ID=$(echo "$INPUT" | jq -r '.session_id // "unknown"')
-CWD=$(echo "$INPUT" | jq -r '.cwd // "."')
-HOOK_EVENT=$(echo "$INPUT" | jq -r '.hook_event_name // "unknown"')
-TOOL_NAME=$(echo "$INPUT" | jq -r '.tool_name // ""')
-PERMISSION_MODE=$(echo "$INPUT" | jq -r '.permission_mode // "default"')
+# Back-compat aliases. HOOK_CWD can be "" when stdin lacks a cwd field;
+# audit.sh always wants a non-empty placeholder so jq --arg stays happy.
+SESSION_ID="$HOOK_SESSION_ID"
+CWD="${HOOK_CWD:-.}"
+HOOK_EVENT="${HOOK_EVENT_NAME:-unknown}"
+TOOL_NAME="$HOOK_TOOL_NAME"
+PERMISSION_MODE="$HOOK_PERMISSION_MODE"
 
 # Ensure log directory exists
 LOG_DIR="${CLAUDE_PROJECT_DIR:-.}/.claude/logs"
@@ -32,8 +51,8 @@ TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 # Build log entry based on event type
 case "$EVENT_TYPE" in
   session-start)
-    SOURCE=$(echo "$INPUT" | jq -r '.source // "unknown"')
-    MODEL=$(echo "$INPUT" | jq -r '.model // "unknown"')
+    SOURCE="${HOOK_SOURCE:-unknown}"
+    MODEL="${HOOK_MODEL:-unknown}"
     LOG_ENTRY=$(jq -n \
       --arg ts "$TIMESTAMP" \
       --arg sid "$SESSION_ID" \
@@ -45,7 +64,12 @@ case "$EVENT_TYPE" in
     ;;
 
   stop)
-    STOP_HOOK_ACTIVE=$(echo "$INPUT" | jq -r '.stop_hook_active // false')
+    # HOOK_STOP_HOOK_ACTIVE is "0" or "1"; jq --argjson needs true/false.
+    if [[ "$HOOK_STOP_HOOK_ACTIVE" == "1" ]]; then
+      STOP_HOOK_ACTIVE="true"
+    else
+      STOP_HOOK_ACTIVE="false"
+    fi
     LOG_ENTRY=$(jq -n \
       --arg ts "$TIMESTAMP" \
       --arg sid "$SESSION_ID" \
@@ -56,14 +80,15 @@ case "$EVENT_TYPE" in
     ;;
 
   tool-use)
-    # Extract tool-specific info
-    TOOL_INPUT=$(echo "$INPUT" | jq -c '.tool_input // {}')
-    TOOL_RESPONSE=$(echo "$INPUT" | jq -c '.tool_response // {}')
-    TOOL_USE_ID=$(echo "$INPUT" | jq -r '.tool_use_id // ""')
-
-    # For file operations, extract the path
-    FILE_PATH=$(echo "$TOOL_INPUT" | jq -r '.file_path // ""')
-    COMMAND=$(echo "$TOOL_INPUT" | jq -r '.command // ""')
+    # Tool-specific info lifted from HOOK_* env vars set by parse_hook_input.
+    # HOOK_TOOL_INPUT_JSON and HOOK_TOOL_RESPONSE_JSON are pre-serialized
+    # JSON strings, always valid (empty "{}" at minimum), so jq --argjson
+    # below never trips on missing fields.
+    TOOL_INPUT="$HOOK_TOOL_INPUT_JSON"
+    TOOL_RESPONSE="$HOOK_TOOL_RESPONSE_JSON"
+    TOOL_USE_ID="$HOOK_TOOL_USE_ID"
+    FILE_PATH="$HOOK_FILE_PATH"
+    COMMAND="$HOOK_COMMAND"
 
     LOG_ENTRY=$(jq -n \
       --arg ts "$TIMESTAMP" \
@@ -87,31 +112,6 @@ case "$EVENT_TYPE" in
       '{timestamp: $ts, session_id: $sid, event: $event, hook_event: $hook, cwd: $cwd}')
     ;;
 esac
-
-# --- Log rotation ---
-# Keep main audit.log under 10MB; keep date-logs for 30 days
-rotate_logs() {
-  # Rotate main audit.log at 10MB
-  if [[ -f "$LOG_FILE" ]]; then
-    local size
-    size=$(wc -c < "$LOG_FILE" 2>/dev/null | tr -d ' ')
-    if [[ "$size" -gt 10485760 ]]; then
-      # Keep last rotated copy, discard older
-      [[ -f "${LOG_FILE}.1" ]] && rm -f "${LOG_FILE}.1"
-      mv "$LOG_FILE" "${LOG_FILE}.1"
-    fi
-  fi
-
-  # Prune date-based logs older than 30 days
-  if [[ -d "$LOG_DIR" ]]; then
-    find "$LOG_DIR" -name 'audit-*.log' -type f -mtime +30 -delete 2>/dev/null || true
-  fi
-}
-
-# Run rotation check ~1% of the time (avoid stat overhead on every tool call)
-if [[ $(( RANDOM % 100 )) -eq 0 ]]; then
-  rotate_logs
-fi
 
 # Append to log files
 echo "$LOG_ENTRY" >> "$LOG_FILE"

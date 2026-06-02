@@ -105,3 +105,21 @@ playwright-report
 test-results
 .caws/specs/registry.json
 .claude/worktrees
+
+# >>> caws gitignore (managed, v2) >>>
+# Ephemeral CAWS runtime/local state — never tracked. Authority state
+# (.caws/specs/, .caws/policy.yaml, .caws/waivers/) is intentionally NOT
+# listed here so it stays versioned. Managed by `caws init`; edits inside
+# these markers are overwritten on the next init.
+.caws/worktrees/
+.caws/worktrees.json
+.caws/agents.json
+.caws/leases/
+.caws/cache/
+.caws/sessions/
+.caws/state/
+.caws/duplication-cache.json
+.caws/events.jsonl
+.caws/events.jsonl.lock
+tmp/guard-strikes-*.json
+# <<< caws gitignore <<<
