@@ -17,57 +17,67 @@ npm run lint
 # Type check (if TypeScript)
 npm run typecheck
 
-# Run all quality gates
-caws validate
+# Drift check + quality gates (replaces the removed `caws validate`)
+caws doctor && caws gates run --spec <id>
 ```
 
-## CAWS Workflow
+## CAWS Workflow (v11)
+
+This project is on **CAWS v11**. The v10 commands `caws validate`, `caws iterate`,
+`caws evaluate`, `caws verify-acs`, `caws burnup`, and `caws sidecar *` were
+removed or renamed — see `../caws/docs/migration-v10-to-v11.md` for the full
+bucket map. Use the v11 surface below.
 
 Before writing code, check the canonical spec for the current feature:
 
 ```bash
-# Create a feature spec for isolated work
-caws specs create FEAT-001 --type feature --title "description"
+# Create a feature spec for isolated work. Use --mode (not the removed
+# v10 --type). Tier 1/2 require at least one --contract; tier 3 / --mode
+# chore do not.
+caws specs create FEAT-001 --mode feature --risk-tier 2 \
+  --title "description" --contract "core-api:behavior"
 
-# If you're in a CAWS worktree, the created spec should record it:
-# worktree: <worktree-name>
+# If you're in a CAWS worktree, the created spec records it: worktree: <name>
 
-# Validate the feature spec
-caws validate --spec-id FEAT-001
+# Drift detection over .caws/ state (replaces `caws validate`/`caws diagnose`).
+# Exit: 0 clean, 1 findings, 2 composition failure.
+caws doctor
 
-# Run quality gates v2 pipeline
-caws gates run
+# Policy-driven quality gates for the bound spec (replaces `caws validate`)
+caws gates run --spec FEAT-201
 
-# Get iteration guidance
-caws iterate --current-state "describe what you're about to do"
+# Inspect a spec (loads + schema-checks it; use before committing an authored spec)
+caws specs show FEAT-201
 
-# After implementation, evaluate quality
-caws evaluate
-
-# Verify acceptance criteria have evidence
-caws verify-acs --spec-id FEAT-001
-
-# Check budget burn-up
-caws burnup --spec-id FEAT-001
-
-# Check status for the same feature
-caws status --spec-id FEAT-001
+# Read-only dashboard: project, current context, claim, doctor findings
+caws status
 ```
 
-### Advisory Sidecars
+There is no v11 replacement for `caws iterate`, `caws evaluate`,
+`caws verify-acs`, or `caws burnup`. Use the spec's acceptance criteria as
+guidance, `caws gates run` for policy gates, and encode AC-evidence assertions
+in the test suite directly.
 
-Sidecar commands are diagnostic analysis tools. They don't enforce anything -- they help you understand what's happening and what to do next.
+### Provenance & history (replaces `caws sidecar`)
+
+The v11 audit surface is the hash-chained `.caws/events.jsonl`. Read it directly
+instead of the removed `caws sidecar` / `caws provenance` commands:
 
 ```bash
-caws sidecar drift       # Compare spec intent vs current implementation
-caws sidecar gaps        # Diagnose quality gaps blocking gate passage
-caws sidecar waiver-draft  # Generate pre-filled waiver template for a failing gate
-caws sidecar provenance  # Summarize work history for merge readiness review
+# Work history / merge-readiness review (was: caws sidecar provenance)
+jq -r 'select(.event=="spec_closed" or .event=="spec_archived" or .event=="worktree_merged")
+  | "\(.ts) \(.event) \(.spec_id // .data)"' .caws/events.jsonl
+
+# Record typed evidence (test | gate | ac)
+caws evidence record --type gate --spec FEAT-201 --data '{...}'
 ```
 
 ### Working Spec
 
-Canonical feature specs live at `.caws/specs/<ID>.yaml` (create with `caws specs create <id> --type feature --title "description"`). `.caws/working-spec.yaml` is a compatibility mirror for older tooling and legacy single-spec flows. The active spec defines:
+Canonical feature specs live at `.caws/specs/<ID>.yaml` (create with
+`caws specs create <id> --mode <feature|refactor|fix|doc|chore> --risk-tier <1|2|3> --title "description"`).
+There is **no** `.caws/working-spec.yaml` singleton in v11 — every spec is
+per-feature. The active spec defines:
 
 - **Risk tier**: Quality requirements (T1: critical, T2: standard, T3: low risk)
 - **Mode**: The type of change (`feature`, `refactor`, `fix`, `doc`, `chore`) -- required
@@ -126,15 +136,27 @@ Each session gets registered in `.caws/agents.json` automatically (via the sessi
 
 `--takeover` writes a durable `prior_owners` audit on the worktree entry (sessionId, platform, lastSeen-at-takeover, takenOver_at) so handoffs are traceable in `worktrees.json`, not just in agent memory.
 
-### Spec lifecycle: archive
+### Spec lifecycle: archive (v11 tombstone)
 
-Use `caws specs archive <id>` to move a closed spec to the canonical `.caws/specs/.archive/` directory. The directory is filesystem-authoritative — `caws specs list` reports any file under `.archive/` as `status: archived` regardless of the YAML literal. This means manually-moved legacy specs (no registry entry) are correctly classified.
+`caws specs archive <id>` requires the spec be `closed` first. In v11, archive is a
+**tombstone, not a directory move**: it *deletes* the spec YAML from `.caws/specs/`
+and appends a recoverable `spec_archived` event to the hash-chained
+`.caws/events.jsonl` carrying the body's `blob_sha`. There is **no**
+`.caws/specs/.archive/` directory in v11 (that was the v10 behavior).
 
-If you try to `caws specs create <id>` for an id that already exists in `.archive/`, the command refuses without `--force`. With `--force`, the archived YAML is removed and a fresh draft is created — useful for resurrecting an old id with new intent.
+Recover an archived body with `caws specs show <id> --archived` or
+`caws specs recover <id>` (resolves via `git show <blob_sha>`). The archive
+operation makes its own audit commit, so run it from a clean working tree —
+it refuses to auto-commit over uncommitted changes.
+
+For a never-activated draft, use `caws specs retire-draft <id>` (same tombstone
+shape) rather than archive. Never use `mv`/`git rm` to relocate or remove specs —
+that bypasses the comment-preserving patch, the `updated_at` bump, and the
+hash-chained audit record.
 
 > **Budget note**: `change_budget:` in a spec is informational documentation only. CAWS
 > derives the enforced budget from `policy.yaml` keyed on `risk_tier`. The field in the
-> spec is not used by `caws validate` for enforcement.
+> spec is not used by `caws gates run` for enforcement.
 
 ### Quality Gates
 
@@ -162,10 +184,12 @@ Quality requirements are tiered:
 
 ### Waivers
 
-If you need to bypass a quality gate, create a waiver with justification:
+If you need to bypass a quality gate, create a waiver with justification.
+Note the v11 command is singular `caws waiver` (v10's plural `caws waivers`
+was renamed):
 
 ```bash
-caws waivers create --reason emergency_hotfix --gates coverage_threshold
+caws waiver create --reason emergency_hotfix --gates coverage_threshold
 ```
 
 Valid reasons: `emergency_hotfix`, `legacy_integration`, `experimental_feature`, `performance_critical`, `infrastructure_limitation`
@@ -174,11 +198,12 @@ Valid reasons: `emergency_hotfix`, `legacy_integration`, `experimental_feature`,
 
 ```
 .caws/
-  working-spec.yaml   # Compatibility mirror for legacy commands
-  specs/              # Canonical feature specs
-  policy.yaml         # Quality policy overrides (optional)
-  waivers.yml         # Active waivers
-  state/              # Runtime working state (auto-managed)
+  specs/              # Canonical feature specs (one YAML per feature; no singleton)
+  policy.yaml         # Quality policy + tiers + gates
+  waivers/            # Active waivers (one file per waiver)
+  events.jsonl        # Hash-chained audit log (gitignored; local-runtime)
+  state/              # Runtime working state (auto-managed; gitignored)
+  worktrees.json      # Worktree registry (gitignored; local-runtime)
 ```
 
 > **Working state**: `.caws/state/<spec-id>.json` tracks runtime progress -- current phase,
