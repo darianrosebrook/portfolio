@@ -1,9 +1,7 @@
 id: FEAT-CSS-001
-type: refactor
 title: Migrate from SCSS modules to plain CSS modules
-status: closed
 risk_tier: 3
-mode: development
+mode: refactor
 created_at: '2026-05-18T08:59:22.636Z'
 updated_at: '2026-05-18T08:59:22.637Z'
 blast_radius:
@@ -23,7 +21,6 @@ scope:
     - node_modules/
     - dist/
     - build/
-    - app/**
 invariants:
   - All components still render with their token-driven custom properties applied
   - Build succeeds with no Sass deprecation warnings from migrated files
@@ -41,10 +38,11 @@ acceptance:
     given: The full token+next build runs
     when: It completes
     then: Zero Sass @import deprecation warnings come from ui/components migrated modules
-acceptance_criteria: []
 non_functional:
-  a11y: []
-  perf: {}
   security: []
+  accessibility: []
+  performance: []
 contracts: []
 worktree: scss-to-css
+lifecycle_state: closed
+resolution: completed

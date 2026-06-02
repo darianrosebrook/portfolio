@@ -1,9 +1,7 @@
 id: FIX-PRETTIER-001
-type: fix
 title: Fix prettier formatting errors
-status: closed
 risk_tier: 3
-mode: development
+mode: fix
 created_at: '2026-05-20T01:12:00.978Z'
 updated_at: '2026-05-20T01:12:00.979Z'
 worktree: fix-prettier
@@ -25,12 +23,19 @@ invariants:
   - No semantic change to any source file
 acceptance:
   - id: A1
-    description: prettier/prettier error in ui/components/Button/tests/Button.test.tsx is gone
+    given: the closed historical change
+    when: the work was completed
+    then: prettier/prettier error in ui/components/Button/tests/Button.test.tsx is gone
   - id: A2
-    description: types/designTokens.ts is documented as a follow-up (auto-generated file; fix belongs in utils/designTokens/generators/types.ts)
-acceptance_criteria: []
+    given: the closed historical change
+    when: the work was completed
+    then: >-
+      types/designTokens.ts is documented as a follow-up (auto-generated file; fix belongs in
+      utils/designTokens/generators/types.ts)
 non_functional:
-  a11y: []
-  perf: {}
   security: []
+  accessibility: []
+  performance: []
 contracts: []
+lifecycle_state: closed
+resolution: completed

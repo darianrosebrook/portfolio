@@ -1,9 +1,7 @@
 id: FEAT-SLASH-001
-type: fix
 title: Rewrite tiptap slash command for usability
-status: closed
 risk_tier: 3
-mode: development
+mode: fix
 created_at: '2026-05-18T07:04:29.359Z'
 updated_at: '2026-05-18T07:04:29.360Z'
 blast_radius:
@@ -44,10 +42,11 @@ acceptance:
     given: Slash menu open
     when: User presses Escape or clicks outside
     then: Menu closes without inserting anything
-acceptance_criteria: []
 non_functional:
-  a11y: []
-  perf: {}
   security: []
+  accessibility: []
+  performance: []
 contracts: []
 worktree: fix-slash-command
+lifecycle_state: closed
+resolution: completed

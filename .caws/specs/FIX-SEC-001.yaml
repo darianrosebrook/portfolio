@@ -1,7 +1,5 @@
 id: FIX-SEC-001
-type: fix
 title: 'Resolve 16 Dependabot alerts: Next.js + ws + fast-uri'
-status: closed
 risk_tier: 3
 mode: fix
 created_at: '2026-05-21T02:37:13.495Z'
@@ -37,11 +35,12 @@ acceptance:
     given: the PR is merged and Dependabot re-scans the default branch
     when: alerts are re-evaluated
     then: all 16 listed alerts (numbers 192-208) are auto-closed
-acceptance_criteria: []
 non_functional:
-  a11y: []
-  perf: {}
   security:
     - No high or medium severity Dependabot alerts remain on default branch after merge
+  accessibility: []
+  performance: []
 contracts: []
 worktree: fix-sec-deps
+lifecycle_state: closed
+resolution: completed

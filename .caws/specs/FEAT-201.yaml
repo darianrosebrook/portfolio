@@ -1,9 +1,8 @@
 id: FEAT-201
-type: feature
 title: Procedural isometric anatomy visualization for component docs
-status: active
+lifecycle_state: active
 risk_tier: 3
-mode: development
+mode: feature
 created_at: '2026-05-15T02:19:08.430Z'
 updated_at: '2026-05-15T02:19:08.430Z'
 blast_radius:
@@ -27,8 +26,7 @@ invariants:
   - Existing anatomy fallback messaging preserved when contract data is missing
   - No changes to component contract files
   - Server-rendered doc pages continue to build without runtime errors
-acceptance: []
-acceptance_criteria:
+acceptance:
   - id: A1
     given: a built component with anatomy in its contract.json
     when: visiting /blueprints/component-standards/[slug]
@@ -50,10 +48,9 @@ acceptance_criteria:
     when: visiting its doc page
     then: the existing planned/not-defined fallback messaging is preserved
 non_functional:
-  a11y:
+  accessibility:
     - Anatomy table uses semantic <table> markup with column headers
     - Isometric SVG is decorative and uses aria-hidden; the table is the canonical source of anatomy info
-  perf: {}
+  performance: []
   security: []
 contracts: []
-worktree: anatomy-visualization

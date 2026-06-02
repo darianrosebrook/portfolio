@@ -1,7 +1,5 @@
 id: CAWS-INIT-001
-type: chore
 title: Establish CAWS baseline for portfolio governance
-status: closed
 risk_tier: 3
 mode: chore
 created_at: '2026-04-28T18:06:50.447Z'
@@ -34,45 +32,54 @@ scope:
     - dist/
     - build/
 invariants:
-  - The .caws/ governance layer (policy.yaml, specs/, working-spec.yaml, registry.json) remains the source of truth for project-level CAWS configuration
-  - The .claude/hooks/ scripts stay executable and their settings.json wiring stays valid JSON so Claude Code sessions continue to receive boundary signals
-  - The git hooks installed by caws init (pre-commit, post-commit, pre-push, commit-msg) stay active; --no-verify is blocked on push
+  - >-
+    The .caws/ governance layer (policy.yaml, specs/, working-spec.yaml, registry.json) remains the
+    source of truth for project-level CAWS configuration
+  - >-
+    The .claude/hooks/ scripts stay executable and their settings.json wiring stays valid JSON so
+    Claude Code sessions continue to receive boundary signals
+  - >-
+    The git hooks installed by caws init (pre-commit, post-commit, pre-push, commit-msg) stay
+    active; --no-verify is blocked on push
 acceptance:
   - id: A1
     given: an empty .caws/ directory and no project-level .claude/ directory
     when: caws init runs in non-interactive mode
-    then: .caws/policy.yaml, .caws/working-spec.yaml, .caws/specs/registry.json, .claude/settings.json with 13 hook scripts, .claude/rules/{git-safety,worktree-isolation}.md, and root CLAUDE.md all exist and caws status reports "Detected standard CAWS setup"
+    then: >-
+      .caws/policy.yaml, .caws/working-spec.yaml, .caws/specs/registry.json, .claude/settings.json
+      with 13 hook scripts, .claude/rules/{git-safety,worktree-isolation}.md, and root CLAUDE.md all
+      exist and caws status reports "Detected standard CAWS setup"
   - id: A2
     given: a fresh caws init install over a non-empty repo
     when: git diff vs the pre-init HEAD is inspected
-    then: only .gitignore is modified as an append, and .caws/ .claude/ CLAUDE.md appear as untracked additions with no pre-existing tracked files clobbered
+    then: >-
+      only .gitignore is modified as an append, and .caws/ .claude/ CLAUDE.md appear as untracked
+      additions with no pre-existing tracked files clobbered
   - id: A3
     given: the auto-generated PROJ-637 stub spec
     when: CAWS-INIT-001 replaces it as the active spec
-    then: PROJ-637.yaml is removed via caws specs delete, registry.json contains only CAWS-INIT-001, and working-spec.yaml mirrors CAWS-INIT-001 content
+    then: >-
+      PROJ-637.yaml is removed via caws specs delete, registry.json contains only CAWS-INIT-001, and
+      working-spec.yaml mirrors CAWS-INIT-001 content
   - id: A4
     given: the prior ARTICLE-PUBLISH-AUDIT spec content from before this session
     when: the wip checkpoint commit at HEAD records the deletions
-    then: the previous spec is recoverable from HEAD~1 via git show 181d7a51:.caws/working-spec.yaml so future work can fold it back if still active
+    then: >-
+      the previous spec is recoverable from HEAD~1 via git show 181d7a51:.caws/working-spec.yaml so
+      future work can fold it back if still active
   - id: A5
     given: this spec CAWS-INIT-001
     when: caws validate --spec-id CAWS-INIT-001 runs
     then: the spec passes schema validation with zero errors
 non_functional:
-  a11y: []
-  perf: {}
   security:
-    - The .claude/hooks/scan-secrets.sh runs on Read tool calls so secret-shaped strings are flagged before reaching the model
+    - >-
+      The .claude/hooks/scan-secrets.sh runs on Read tool calls so secret-shaped strings are flagged
+      before reaching the model
+  accessibility: []
+  performance: []
 contracts: []
-observability:
-  logs: []
-  metrics: []
-  traces: []
-migrations: []
 rollback:
   - rm -rf .caws/ .claude/ CLAUDE.md and run `git checkout HEAD~1 -- .gitignore` to revert
-ai_assessment:
-  confidence_level: 9
-  uncertainty_areas:
-    - Whether all 13 .claude/hooks/ scripts add value for solo work today; several (worktree-write-guard, stop-worktree-check, worktree-guard) are scaffolding for the CAWSFIX-31 claim/heartbeat surface that has not yet shipped. Acceptable to keep as install-default until that lands.
-  recommended_pairing: false
+lifecycle_state: closed
+resolution: completed

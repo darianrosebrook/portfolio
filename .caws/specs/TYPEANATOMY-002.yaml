@@ -1,7 +1,5 @@
 id: TYPEANATOMY-002
-type: chore
 title: Reconcile overlay-script labels for tittle cases (Slice 2R)
-status: closed
 risk_tier: 3
 mode: chore
 created_at: '2026-04-29T02:16:19.692Z'
@@ -21,8 +19,12 @@ scope:
     - public/fonts/
     - utils/geometry/
 invariants:
-  - The renderer's CASES list reflects the actual current detector behavior, not a historical bug state — visual-evidence accounting must not lag the test suite.
-  - This slice does not change detector, geometry, topology, or accuracy-test files. Verification surfaces stay frozen; only the visual-overlay manifest is updated.
+  - >-
+    The renderer's CASES list reflects the actual current detector behavior, not a historical bug
+    state — visual-evidence accounting must not lag the test suite.
+  - >-
+    This slice does not change detector, geometry, topology, or accuracy-test files. Verification
+    surfaces stay frozen; only the visual-overlay manifest is updated.
 acceptance:
   - id: A1
     given: scripts/render-type-anatomy-overlays.ts after Slice 2 closed
@@ -49,23 +51,14 @@ acceptance:
       test/utils/typeAnatomy/, public/fonts/, or utils/geometry/ appears
       in the diff.
 non_functional:
-  a11y: []
-  perf: {}
   security: []
+  accessibility: []
+  performance: []
 contracts: []
-observability:
-  logs: []
-  metrics: []
-  traces: []
-migrations: []
 rollback:
-  - Revert the slice's commit; the overlay script returns to the post-Slice-2
-    label state where i and H tittle cases are tagged "known-gap" despite
-    the detector passing them. Documentation drift returns; runtime behavior
-    is unaffected.
-ai_assessment:
-  confidence_level: 9
-  uncertainty_areas:
-    - None substantive. The renderer is presentation-only and has no test
-      gate beyond manual eyeballing of the manifest table after the rerun.
-  recommended_pairing: false
+  - >-
+    Revert the slice's commit; the overlay script returns to the post-Slice-2 label state where i
+    and H tittle cases are tagged "known-gap" despite the detector passing them. Documentation drift
+    returns; runtime behavior is unaffected.
+lifecycle_state: closed
+resolution: completed

@@ -1,9 +1,7 @@
 id: FIX-UNUSED-001
-type: fix
 title: Clean no-unused-vars in utils/typeAnatomy and utils/designTokens
-status: closed
 risk_tier: 3
-mode: development
+mode: fix
 created_at: '2026-05-20T01:11:24.503Z'
 updated_at: '2026-05-20T01:11:24.504Z'
 worktree: fix-unused
@@ -30,17 +28,28 @@ scope:
 invariants:
   - All exported symbols still exported
   - No public function signatures changed
-  - Token generation, type-anatomy detection, and caching modules produce identical output for identical inputs
+  - >-
+    Token generation, type-anatomy detection, and caching modules produce identical output for
+    identical inputs
 acceptance:
   - id: A1
-    description: All @typescript-eslint/no-unused-vars warnings and errors are gone from utils/typeAnatomy, utils/designTokens, utils/caching, utils/performance, utils/w3c-tokens
+    given: the closed historical change
+    when: the work was completed
+    then: >-
+      All @typescript-eslint/no-unused-vars warnings and errors are gone from utils/typeAnatomy,
+      utils/designTokens, utils/caching, utils/performance, utils/w3c-tokens
   - id: A2
-    description: tsc --noEmit still passes
+    given: the closed historical change
+    when: the work was completed
+    then: tsc --noEmit still passes
   - id: A3
-    description: Any tests that exercise the touched modules still pass
-acceptance_criteria: []
+    given: the closed historical change
+    when: the work was completed
+    then: Any tests that exercise the touched modules still pass
 non_functional:
-  a11y: []
-  perf: {}
   security: []
+  accessibility: []
+  performance: []
 contracts: []
+lifecycle_state: closed
+resolution: completed

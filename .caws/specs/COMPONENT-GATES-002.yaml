@@ -1,8 +1,6 @@
 id: COMPONENT-GATES-002
-type: chore
 title: Reduce portfolio component validation and style-token drift
-status: closed
-risk_tier: 2
+risk_tier: 3
 mode: chore
 created_at: '2026-05-04T17:19:51.111Z'
 updated_at: '2026-05-04T17:19:51.112Z'
@@ -68,7 +66,6 @@ acceptance:
       provider and conventional subcomponent files no longer produce generic
       ComponentName-pattern warnings, while real missing catalog files remain
       reported as errors.
-    test_command: npm run validate:components
   - id: A2
     given: current component catalog entries with missing required files
     when: actionable missing README/test/index/main-file errors are addressed
@@ -76,7 +73,6 @@ acceptance:
       AnimatedCard, AnimatedSection, AnimatedText, BrandSwitcher, Chip,
       CodeSandbox, DocLayout, and Editor no longer contribute missing-file
       errors to component validation.
-    test_command: npm run validate:components
   - id: A3
     given: component SCSS contains both intentional primitives and token bypasses
     when: style-token value validation runs
@@ -85,7 +81,6 @@ acceptance:
       0, 100%, and visually-hidden recipes are not failures; raw colors, spacing,
       typography sizes, and durations in component styles are flagged unless
       expressed through tokens or explicitly local public CSS variables.
-    test_command: npm run styles:tokens
   - id: A4
     given: the follow-up validation and style-token gates have been updated
     when: final verification is performed
@@ -93,14 +88,11 @@ acceptance:
       component validation, style-token validation, contract validation, token
       linting, and focused tests have been run; any residual failures are
       documented with current counts and examples.
-    test_command: npm run contracts:validate && npm run tokens:lint
-acceptance_criteria: []
 non_functional:
-  a11y: []
-  perf: {}
   security: []
-contracts:
-  - type: project_setup
-    path: .caws/specs/COMPONENT-GATES-002.yaml
-    description: Scope and acceptance contract for component validation/style-token follow-up.
+  accessibility: []
+  performance: []
+contracts: []
 worktree: component-gates-002
+lifecycle_state: closed
+resolution: completed

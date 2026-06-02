@@ -1,9 +1,7 @@
 id: FIX-TOOLTIP-POS-001
-type: fix
 title: Document Tooltip updatePosition setState in useLayoutEffect
-status: closed
 risk_tier: 3
-mode: development
+mode: fix
 created_at: '2026-05-21T00:17:57.214Z'
 updated_at: '2026-05-21T00:17:57.214Z'
 worktree: fix-tooltip-pos
@@ -24,10 +22,13 @@ invariants:
   - No new lint findings introduced
 acceptance:
   - id: A1
-    description: 0 react-hooks/set-state-in-effect errors in Tooltip.tsx (suppressed inline with rationale)
-acceptance_criteria: []
+    given: the closed historical change
+    when: the work was completed
+    then: 0 react-hooks/set-state-in-effect errors in Tooltip.tsx (suppressed inline with rationale)
 non_functional:
-  a11y: []
-  perf: {}
   security: []
+  accessibility: []
+  performance: []
 contracts: []
+lifecycle_state: closed
+resolution: completed

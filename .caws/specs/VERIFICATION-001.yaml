@@ -1,8 +1,6 @@
 id: VERIFICATION-001
-type: chore
 title: Harden type-anatomy evidence trust via mutation + missing-font probes
-status: closed
-risk_tier: 2
+risk_tier: 3
 mode: chore
 created_at: '2026-04-29T02:19:23.950Z'
 updated_at: '2026-04-29T02:31:46.401Z'
@@ -22,10 +20,19 @@ scope:
     - utils/geometry/
     - public/fonts/
 invariants:
-  - The mutation harness leaves the working tree clean. After every probe the mutated file is restored via `git restore`; the harness exits non-zero rather than committing partial mutations.
-  - Each probe asserts both presence (the expected test ran) and direction (it switched from passing to failing under mutation). A vitest pattern that matches zero tests must not be counted as a pass.
-  - Mutation probes target real source files via in-place patches, not test-runner mocks. The point is to prove that the actual code path is load-bearing for the accuracy claim.
-  - The harness is idempotent. Running it twice in succession produces the same result; the second run does not see any leftover state from the first.
+  - >-
+    The mutation harness leaves the working tree clean. After every probe the mutated file is
+    restored via `git restore`; the harness exits non-zero rather than committing partial mutations.
+  - >-
+    Each probe asserts both presence (the expected test ran) and direction (it switched from passing
+    to failing under mutation). A vitest pattern that matches zero tests must not be counted as a
+    pass.
+  - >-
+    Mutation probes target real source files via in-place patches, not test-runner mocks. The point
+    is to prove that the actual code path is load-bearing for the accuracy claim.
+  - >-
+    The harness is idempotent. Running it twice in succession produces the same result; the second
+    run does not see any leftover state from the first.
 acceptance:
   - id: A1
     given: utils/typeAnatomy/detectors/tittle.ts is mutated to make detectTittle return []
@@ -35,16 +42,16 @@ acceptance:
       post-mutation run. The harness proves the transition by parsing
       vitest's JSON reporter output (not just exit code), and reverts the
       mutation before the next probe begins.
-    test_command: pnpm exec tsx scripts/verify-mutation-resistance.ts --probe A1
   - id: A2
     given: utils/typeAnatomy/geometryCache.ts is mutated to make getMarkContours return []
     when: the i and j tittle accuracy tests are re-run via the mutation harness
     then: |
       both tests transition from PASS to FAIL. Confirms the i/j accuracy
       claim depends on real mark classification, not coincidental geometry.
-    test_command: pnpm exec tsx scripts/verify-mutation-resistance.ts --probe A2
   - id: A3
-    given: utils/typeAnatomy/evidence/topology/markPredicates.ts is mutated to make isAboveMainBody always return false
+    given: >-
+      utils/typeAnatomy/evidence/topology/markPredicates.ts is mutated to make isAboveMainBody
+      always return false
     when: the i and j tittle positive accuracy tests are re-run via the mutation harness
     then: |
       both i and j tests transition from PASS to FAIL. Confirms the
@@ -60,7 +67,6 @@ acceptance:
       defense-in-depth; pressure-testing it would require a synthetic
       glyph fixture with multiple non-hole contours where one falsely
       passes the positional check, which is out of scope for this slice.
-    test_command: pnpm exec tsx scripts/verify-mutation-resistance.ts --probe A3
   - id: A4
     given: utils/typeAnatomy/detectors/crossbar.ts is mutated to make detectCrossbar return []
     when: the H and A crossbar accuracy tests are re-run via the mutation harness
@@ -68,7 +74,6 @@ acceptance:
       both tests transition from PASS to FAIL. Confirms Slice 1's
       load-bearing claim that the crossbar detector — not the orchestrator
       shape forwarding — produces the rect geometry the accuracy tests verify.
-    test_command: pnpm exec tsx scripts/verify-mutation-resistance.ts --probe A4
   - id: A5
     given: public/fonts/Nohemi-VF.ttf is renamed to a temporary path
     when: the real-font accuracy suite (test/typeAnatomy/feature-accuracy.test.ts) is re-run
@@ -77,7 +82,6 @@ acceptance:
       (not a silent skip; not a generic "cannot read property of undefined").
       The harness restores the font file before exiting regardless of probe
       outcome.
-    test_command: bash scripts/verify-missing-font.sh
   - id: A6
     given: all five mutation/missing-font probes have completed
     when: the harness exits
@@ -86,26 +90,14 @@ acceptance:
       type-anatomy suite (test/typeAnatomy + test/utils/typeAnatomy +
       utils/typeAnatomy/evidence) returns 334 passed / 0 failed. Confirms
       the harness leaves no probe residue.
-    test_command: pnpm exec tsx scripts/verify-mutation-resistance.ts --post-check
 non_functional:
-  a11y: []
-  perf: {}
   security: []
-contracts:
-  - type: project_setup
-    path: scripts/verify-mutation-resistance.ts
-    description: TypeScript-internal contract — the mutation harness's CLI surface (--probe <id>, --post-check) and per-probe registry. Probes are addressable by AC ID (A1–A4 for mutations, A6 for the post-check). The harness exits 0 only when all probes assert the expected PASS-to-FAIL transition AND restores the working tree to clean. CAWS schema's API-contract types do not apply to internal verification tooling; project_setup is used per CAWSFIX-06 schema permissiveness with this rationale recorded.
-observability:
-  logs:
-    - The harness writes per-probe results to stdout in a structured table (probe id, mutation target, pre-mutation test status, post-mutation test status, transition verdict). On failure it also writes the raw vitest JSON output to /tmp/verify-mutation-<probe>.json for inspection.
-  metrics: []
-  traces: []
-migrations: []
+  accessibility: []
+  performance: []
+contracts: []
 rollback:
-  - Revert the slice's commits. The harness scripts are removed; no detector behavior changes since the harness only runs probes, never commits mutations. Rollback is purely cosmetic.
-ai_assessment:
-  confidence_level: 8
-  uncertainty_areas:
-    - The vitest JSON reporter format may change across versions. The harness pins to a specific shape (test results array with name + status) and will need updating if the reporter schema shifts.
-    - The mutation patches use regex-based search/replace. If detector source files are reformatted (e.g., a prettier pass that breaks the regex anchor), the harness fails to apply the mutation cleanly. The harness must detect this and exit non-zero, not silently skip.
-  recommended_pairing: false
+  - >-
+    Revert the slice's commits. The harness scripts are removed; no detector behavior changes since
+    the harness only runs probes, never commits mutations. Rollback is purely cosmetic.
+lifecycle_state: closed
+resolution: completed

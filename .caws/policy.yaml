@@ -14,8 +14,12 @@ risk_tiers:
     description: Low-risk changes with minimal oversight
 edit_rules:
   policy_and_code_same_pr: false
-  min_approvers_for_budget_raise: 2
   require_signed_commits: true
+# Waiver-related policy rules. Individual waivers live in .caws/waivers/.
+# min_approvers_for_budget_raise migrated here from edit_rules — the v11
+# schema places waiver controls on the waivers surface, not edit_rules.
+waivers:
+  min_approvers_for_budget_raise: 2
 gates:
   budget_limit:
     enabled: true

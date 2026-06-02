@@ -1,9 +1,7 @@
 id: FIX-ERRBND-001
-type: fix
 title: Narrow try/catch in darianrosebrook page to data fetch only
-status: closed
 risk_tier: 3
-mode: development
+mode: fix
 created_at: '2026-05-19T16:16:22.728Z'
 updated_at: '2026-05-19T16:16:22.729Z'
 worktree: fix-errbnd
@@ -20,18 +18,31 @@ scope:
     - dist/
     - build/
 invariants:
-  - Error path still renders the fallback "Unable to load Bluesky profile" UI when fetchBlueskyData() throws
+  - >-
+    Error path still renders the fallback "Unable to load Bluesky profile" UI when
+    fetchBlueskyData() throws
   - Happy path renders identical DOM structure to before
 acceptance:
   - id: A1
-    description: All 22 react-hooks/error-boundaries errors are gone from `npm run lint`
+    given: the closed historical change
+    when: the work was completed
+    then: All 22 react-hooks/error-boundaries errors are gone from `npm run lint`
   - id: A2
-    description: When fetchBlueskyData() throws, the page renders the error fallback (h1 + p in styles.errorContainer)
+    given: the closed historical change
+    when: the work was completed
+    then: >-
+      When fetchBlueskyData() throws, the page renders the error fallback (h1 + p in
+      styles.errorContainer)
   - id: A3
-    description: When fetchBlueskyData() resolves successfully, the page renders the same profile header, description, and posts section as before
-acceptance_criteria: []
+    given: the closed historical change
+    when: the work was completed
+    then: >-
+      When fetchBlueskyData() resolves successfully, the page renders the same profile header,
+      description, and posts section as before
 non_functional:
-  a11y: []
-  perf: {}
   security: []
+  accessibility: []
+  performance: []
 contracts: []
+lifecycle_state: closed
+resolution: completed

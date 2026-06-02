@@ -1,7 +1,5 @@
 id: FEAT-BIO-REFINE-001
-type: feature
 title: Tighten Bio + LeveragePillars with proof points and AI pillar
-status: closed
 risk_tier: 3
 mode: feature
 created_at: '2026-05-18T20:17:08.291Z'
@@ -29,19 +27,30 @@ acceptance:
   - id: A1
     given: A visitor reads the home page bio
     when: They scroll the bio paragraphs
-    then: They see a concrete list of past organizations (Qualtrics, Venmo, Verizon, eBay, Nike, Salesforce, Microsoft) tied to specific impact areas (asset synchronization, multi-brand theming, system adoption, etc.)
+    then: >-
+      They see a concrete list of past organizations (Qualtrics, Venmo, Verizon, eBay, Nike,
+      Salesforce, Microsoft) tied to specific impact areas (asset synchronization, multi-brand
+      theming, system adoption, etc.)
   - id: A2
     given: A visitor reads the "How I create leverage" section on the home page
     when: They scroll through the pillars
-    then: Five labelled pillars are visible, the fifth being "AI-enabled practice" with a 1-line capability claim aligned to the current Qualtrics role
+    then: >-
+      Five labelled pillars are visible, the fifth being "AI-enabled practice" with a 1-line
+      capability claim aligned to the current Qualtrics role
   - id: A3
     given: The hero supporting line renders on the home page
     when: A reader reads it
-    then: It leads with the AI-readiness premise (e.g. "AI-ready design systems need more than components — they need explicit structure") rather than the generic infrastructure framing
+    then: >-
+      It leads with the AI-readiness premise (e.g. "AI-ready design systems need more than
+      components — they need explicit structure") rather than the generic infrastructure framing
 non_functional:
-  a11y:
-    - The new dt/dd term added for the 5th pillar follows the same structural pattern as the existing four
-  perf: {}
   security: []
+  accessibility:
+    - >-
+      The new dt/dd term added for the 5th pillar follows the same structural pattern as the
+      existing four
+  performance: []
 contracts: []
 worktree: bio-refine
+lifecycle_state: closed
+resolution: completed

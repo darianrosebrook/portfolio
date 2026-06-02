@@ -1,12 +1,9 @@
 id: CONTRACTS-002
-type: chore
 title: Close enforcement gaps from CONTRACTS-001 audit
-status: closed
 risk_tier: 3
 mode: chore
 created_at: '2026-05-04T18:47:02.787Z'
 updated_at: '2026-05-04T18:47:02.788Z'
-
 blast_radius:
   modules:
     - scripts/validateComponents.mjs
@@ -14,9 +11,7 @@ blast_radius:
     - ui/components/
     - ui/modules/
   data_migration: false
-
 operational_rollback_slo: 30m
-
 scope:
   in:
     - scripts/validateComponents.mjs
@@ -42,156 +37,16 @@ scope:
     - scripts/check-contract-traceability.mjs
     - test/utils/contractTest.ts
     - utils/designTokens/
-
 invariants:
   - npm run contracts:validate exits 0 (53/53 pass) — must not regress
   - npm run tokens:lint exits 0 — must not regress
   - npm run contracts:traceability exits 0 — must not regress
   - All existing passing tests continue to pass
-
-description: |
-  CONTRACTS-001 audit left three categories of open findings:
-
-  1. validateComponents.mjs fails with 30 errors / 260 warnings.
-     Three sub-problems:
-     a. False-positive file checks: BrandSwitcher has index.ts (not .tsx);
-        validateComponents requires index.tsx. Validator doesn't accept .ts.
-        AlertNotice, ToggleSwitch, breadcrumbs, links have intentional
-        re-export or aliased index files that the validator misclassifies.
-     b. App-layer modules (CodeSandbox, Editor, ErrorBoundary, FontInspector,
-        Tiptap) live in ui/modules/ but the validator applies component-layer
-        rules to them. Their index files use named re-exports, not the
-        `export default from './<ComponentName>'` pattern.
-     c. Structural gaps: AnimatedCard, AnimatedSection, AnimatedText, BrandSwitcher,
-        Chip are missing README.md and/or test stubs. Chip and BrandSwitcher have
-        no test file at all.
-
-  2. validateComponents.mjs uses string-match composer detection.
-     At validateComponents.mjs:338, any file containing 'Provider' or 'Context'
-     (including import statements and comments) is flagged as composer-like.
-     This produces false positives. The fix is to read contract.layer and apply
-     layer-specific structural rules from there, falling back to the string-match
-     heuristic only when no contract exists.
-
-  3. (Deferred) Hardcoded values in component SCSS (BrandSwitcher, Spinner,
-     Skeleton, Select) remain. These are token-migration work that requires
-     authoring new token files and plumbing them through the build. Scoped out
-     of this spec — tracked here for visibility.
-
-acceptance_criteria:
-  - id: A1
-    title: validateComponents.mjs accepts .ts index files and intentional re-export patterns
-    description: |
-      The validator currently requires 'index.tsx' for components. BrandSwitcher
-      uses 'index.ts' (no JSX). AlertNotice, ToggleSwitch, breadcrumbs, and links
-      use intentional re-export/alias patterns that the validator flags as malformed.
-
-      After this AC:
-        - 'index.ts' is accepted alongside 'index.tsx' for components that have
-          no JSX in their index file.
-        - The default-export check recognises `export { default } from './X'` as
-          a valid default re-export pattern (in addition to `export default`).
-        - AlertNotice, ToggleSwitch, breadcrumbs, and links are no longer errors.
-    done_when:
-      - node scripts/validateComponents.mjs --component AlertNotice produces no errors.
-      - node scripts/validateComponents.mjs --component ToggleSwitch produces no errors.
-      - node scripts/validateComponents.mjs --component breadcrumbs produces no errors.
-      - node scripts/validateComponents.mjs --component links produces no errors.
-      - node scripts/validateComponents.mjs --component BrandSwitcher produces no index errors.
-    test_command: >-
-      node scripts/validateComponents.mjs AlertNotice 2>&1 | grep -q "All validations passed" &&
-      node scripts/validateComponents.mjs ToggleSwitch 2>&1 | grep -q "All validations passed" &&
-      node scripts/validateComponents.mjs breadcrumbs 2>&1 | grep -q "All validations passed" &&
-      node scripts/validateComponents.mjs links 2>&1 | grep -q "All validations passed" &&
-      node scripts/validateComponents.mjs BrandSwitcher 2>&1 | grep -qv "index"
-
-  - id: A2
-    title: Module-layer components in ui/modules/ are validated with module-appropriate rules
-    description: |
-      CodeSandbox, Editor, ErrorBoundary, FontInspector, and Tiptap live in
-      ui/modules/ and are app-layer modules, not design-system components.
-      The validator currently applies component-layer rules to them (expects
-      `export default from './<ComponentName>'`), producing 10 false-positive
-      errors.
-
-      The module-validation path at validateComponents.mjs already has looser
-      rules (MODULE_REQUIRED_FILES, flexible naming) but does not accept named
-      re-exports as valid default-export alternatives.
-
-      After this AC, modules may export via named re-exports or re-export
-      patterns and not be flagged for default-export shape. Their remaining
-      errors (missing index.tsx in CodeSandbox, ComponentSVG — which are not in
-      scope) are separate and pre-existing.
-    done_when:
-      - node scripts/validateComponents.mjs --component ErrorBoundary produces no errors.
-      - node scripts/validateComponents.mjs --component FontInspector produces no errors.
-      - node scripts/validateComponents.mjs --component Tiptap produces no errors.
-      - The fix does not change pass/fail for components (only modules).
-    test_command: >-
-      node scripts/validateComponents.mjs ErrorBoundary 2>&1 | grep -q "All validations passed" &&
-      node scripts/validateComponents.mjs FontInspector 2>&1 | grep -q "All validations passed" &&
-      node scripts/validateComponents.mjs Tiptap 2>&1 | grep -q "All validations passed"
-
-  - id: A3
-    title: Structural stubs added for AnimatedCard, AnimatedSection, AnimatedText, BrandSwitcher, Chip
-    description: |
-      Five components are missing README.md and/or a test file, causing hard errors
-      in validateComponents.mjs. These are stub files — they exist to satisfy the
-      validator's presence check, not to provide full documentation or test coverage.
-
-      README stubs: AnimatedCard, AnimatedSection, AnimatedText, BrandSwitcher (all
-      missing README.md), Chip (has README.md — no action needed).
-
-      Test stubs: AnimatedCard, AnimatedSection, AnimatedText (no test file at all);
-      BrandSwitcher (no test file); Chip (no test file).
-
-      Each test stub must have at minimum one test that verifies the component
-      renders without throwing. It may use `it.todo` for any contract obligations
-      not yet ready to implement.
-    done_when:
-      - All five components have a README.md file.
-      - All five components have a tests/<ComponentName>.test.tsx file with at
-        least one passing test.
-      - node scripts/validateComponents.mjs exits with 0 errors (warnings are
-        acceptable).
-    test_command: >-
-      node scripts/validateComponents.mjs 2>&1 | grep -q "All validations passed"
-
-  - id: A4
-    title: validateComponents.mjs uses contract.layer for layer-specific structural rules
-    description: |
-      validateComponents.mjs:338 classifies a component as composer-like if its
-      source contains the string 'Provider' or 'Context'. This matches import
-      statements, comments, and unrelated variables. The result: components that
-      import from a context module get flagged as composers and checked for
-      Provider file separation.
-
-      After this AC, the validator reads the component's contract.json (if
-      present) and uses contract.layer as the authoritative classification.
-      The string-match heuristic is retained only as a fallback when no contract
-      exists (for components not yet in the contract system).
-
-      Layer-specific rules applied from contract.layer:
-        - composer: must have a Provider file OR a useComponentName hook file OR
-          a Context import (any one of the three suffices — not all three required)
-        - primitive / compound: must NOT require Provider file
-        - assembly: no structural rules (assemblies are app-layer)
-
-      The fix is in the layer-classification branch at validateComponents.mjs:336-402.
-    done_when:
-      - A component with contract.layer="primitive" that imports a Context is not
-        flagged as a false-positive composer.
-      - A component with contract.layer="composer" that lacks a Provider file but
-        has useComponentName hook is not flagged as missing separation.
-      - The string-match heuristic still applies when contract.json is absent.
-      - node scripts/validateComponents.mjs produces no regressions on components
-        that currently pass.
-    test_command: >-
-      node scripts/validateComponents.mjs 2>&1 | grep -q "All validations passed"
-
 acceptance:
   - id: A1
-    given: validateComponents.mjs is run against AlertNotice, ToggleSwitch, breadcrumbs, links, BrandSwitcher
+    given: >-
+      validateComponents.mjs is run against AlertNotice, ToggleSwitch, breadcrumbs, links,
+      BrandSwitcher
     when: each component has a .ts or .tsx index file with any valid default-export pattern
     then: each component reports 0 errors
   - id: A2
@@ -200,17 +55,21 @@ acceptance:
     then: each module reports 0 errors
   - id: A3
     given: validateComponents.mjs is run against the full components and modules directories
-    when: AnimatedCard, AnimatedSection, AnimatedText, BrandSwitcher, and Chip have README.md and tests/ stubs
+    when: >-
+      AnimatedCard, AnimatedSection, AnimatedText, BrandSwitcher, and Chip have README.md and tests/
+      stubs
     then: the validator exits with 0 errors
   - id: A4
-    given: validateComponents.mjs is run against components that have contract.json with a non-composer layer
+    given: >-
+      validateComponents.mjs is run against components that have contract.json with a non-composer
+      layer
     when: those components import from a Context module
     then: they are not classified as composers and pass with 0 errors
-
 non_functional:
-  a11y: []
-  perf: {}
   security: []
-
+  accessibility: []
+  performance: []
 contracts: []
 worktree: contracts-001
+lifecycle_state: closed
+resolution: completed

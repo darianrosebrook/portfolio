@@ -1,9 +1,7 @@
 id: BUTTON-001
-type: refactor
 title: Icon-only Button detection via :has()
-status: closed
 risk_tier: 3
-mode: development
+mode: refactor
 created_at: '2026-05-19T15:29:20.955Z'
 updated_at: '2026-05-19T15:29:20.956Z'
 blast_radius:
@@ -35,9 +33,11 @@ acceptance:
     when: rendered
     then: the trigger receives the button class and renders with icon-only styling
 non_functional:
-  a11y:
-    - Icon-only buttons must have an accessible name via ariaLabel
-  perf: {}
   security: []
+  accessibility:
+    - Icon-only buttons must have an accessible name via ariaLabel
+  performance: []
 contracts: []
 worktree: button-icon-only
+lifecycle_state: closed
+resolution: completed

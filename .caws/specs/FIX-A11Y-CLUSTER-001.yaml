@@ -1,9 +1,7 @@
 id: FIX-A11Y-CLUSTER-001
-type: fix
 title: Resolve jsx-a11y errors and warnings across components
-status: closed
 risk_tier: 3
-mode: development
+mode: fix
 created_at: '2026-05-20T01:13:08.540Z'
 updated_at: '2026-05-20T01:13:08.541Z'
 worktree: fix-a11y-cluster
@@ -43,17 +41,28 @@ scope:
 invariants:
   - Component behavior is preserved (click handlers still fire, focus is still managed)
   - Visual appearance is unchanged
-  - No semantic regressions in keyboard accessibility (anything that worked with a mouse still works with keyboard)
+  - >-
+    No semantic regressions in keyboard accessibility (anything that worked with a mouse still works
+    with keyboard)
 acceptance:
   - id: A1
-    description: All jsx-a11y errors are gone from lint output in the in-scope files
+    given: the closed historical change
+    when: the work was completed
+    then: All jsx-a11y errors are gone from lint output in the in-scope files
   - id: A2
-    description: jsx-a11y warnings reduced as much as is reasonable (some may stay if the fix would break design intent)
+    given: the closed historical change
+    when: the work was completed
+    then: >-
+      jsx-a11y warnings reduced as much as is reasonable (some may stay if the fix would break
+      design intent)
   - id: A3
-    description: tsc --noEmit and the affected component tests still pass
-acceptance_criteria: []
+    given: the closed historical change
+    when: the work was completed
+    then: tsc --noEmit and the affected component tests still pass
 non_functional:
-  a11y: []
-  perf: {}
   security: []
+  accessibility: []
+  performance: []
 contracts: []
+lifecycle_state: closed
+resolution: completed

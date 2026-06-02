@@ -1,7 +1,5 @@
 id: FIX-HERO-LENGTH-001
-type: fix
 title: Restore short hero supporting line, move premise to bio
-status: closed
 risk_tier: 3
 mode: fix
 created_at: '2026-05-18T20:47:51.852Z'
@@ -23,7 +21,9 @@ scope:
     - .next/
 invariants:
   - The Bio component remains the single source of truth used by home AND about pages
-  - All proof points (Qualtrics/Venmo/Verizon/eBay/Nike/Salesforce/Microsoft + concrete metrics) remain in the bio
+  - >-
+    All proof points (Qualtrics/Venmo/Verizon/eBay/Nike/Salesforce/Microsoft + concrete metrics)
+    remain in the bio
   - The 5th LeveragePillars pillar (AI-enabled practice) remains
   - The hero h1 still includes "Staff Design Technologist"
   - The AI-ready premise sentence is preserved somewhere on the page (moved, not deleted)
@@ -31,7 +31,9 @@ acceptance:
   - id: A1
     given: The home page renders the hero
     when: The hero is read top-to-bottom
-    then: The supporting line under the h1 is one sentence and fits within ~2 visual lines at desktop widths
+    then: >-
+      The supporting line under the h1 is one sentence and fits within ~2 visual lines at desktop
+      widths
   - id: A2
     given: A reader scrolls to the bio
     when: They read the opening paragraph
@@ -41,8 +43,10 @@ acceptance:
     when: A reader compares them
     then: Both surface the new premise-led opening paragraph (still single source of truth)
 non_functional:
-  a11y: []
-  perf: {}
   security: []
+  accessibility: []
+  performance: []
 contracts: []
 worktree: hero-shorten
+lifecycle_state: closed
+resolution: completed

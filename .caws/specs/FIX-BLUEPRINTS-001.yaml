@@ -1,9 +1,7 @@
 id: FIX-BLUEPRINTS-001
-type: fix
 title: Remove dead componentContract prop in component-standards page
-status: closed
 risk_tier: 3
-mode: development
+mode: fix
 created_at: '2026-05-18T07:55:24.445Z'
 updated_at: '2026-05-18T07:55:24.446Z'
 blast_radius:
@@ -30,10 +28,11 @@ acceptance:
     given: A user visits /blueprints/component-standards/[slug]
     when: The page renders for a component with anatomy data
     then: The anatomy section continues to render with its parts
-acceptance_criteria: []
 non_functional:
-  a11y: []
-  perf: {}
   security: []
+  accessibility: []
+  performance: []
 contracts: []
 worktree: fix-blueprints-prop
+lifecycle_state: closed
+resolution: completed
