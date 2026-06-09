@@ -196,7 +196,7 @@ export default function HomeClient({ ldJson }: HomeClientProps) {
             </div>
           </div>
           <p>
-            As a seasoned Product Designer with a strong background in UX
+            As a Staff Design Technologist with a strong background in UX
             engineering, I specialize in crafting robust design systems and
             developing custom design tooling for Figma that revolutionizes
             product development workflows. Based in Seattle, Washington, I

@@ -25,7 +25,7 @@ export default function page() {
         </Link>
         <div className={Styles.flag}>
           <h5>Darian Rosebrook</h5>
-          <p className={Styles.flagText}>Product Designer</p>
+          <p className={Styles.flagText}>Staff Design Technologist</p>
           <p>Design Systems</p>
         </div>
       </div>

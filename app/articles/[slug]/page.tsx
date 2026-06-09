@@ -70,7 +70,7 @@ export async function generateMetadata(props: { params: Params }) {
     title: article.headline,
     description: article.description,
     url: canonical,
-    siteName: 'Darian Rosebrook | Product Designer',
+    siteName: 'Darian Rosebrook | Staff Design Technologist',
     images: [
       {
         url: article.image,

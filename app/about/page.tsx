@@ -137,7 +137,7 @@ export default function AboutPage() {
             to do their best work.
           </p>
           <p>
-            As a seasoned Product Designer with a strong background in UX
+            As a Staff Design Technologist with a strong background in UX
             engineering, I specialize in crafting robust design systems and
             developing custom design tooling for Figma that revolutionizes
             product development workflows. Based in Seattle, Washington, I

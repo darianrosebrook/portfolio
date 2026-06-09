@@ -47,6 +47,7 @@
     "test/components/docs.*.test.tsx",
     "test/integration/PropsBridge.test.tsx",
     "test/e2e/**",
+    "tmp/**",
     "playwright.config.ts",
     "utils/lazy/index.tsx",
     "utils/test/index.tsx"

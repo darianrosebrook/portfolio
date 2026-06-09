@@ -44,7 +44,7 @@ export async function generateMetadata(props: { params: Params }) {
     title: data.headline,
     description: data.description,
     url: canonical,
-    siteName: 'Darian Rosebrook | Product Designer',
+    siteName: 'Darian Rosebrook | Staff Design Technologist',
     images: data.image
       ? [
           {

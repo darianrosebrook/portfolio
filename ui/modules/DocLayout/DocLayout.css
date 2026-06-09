@@ -29,30 +29,30 @@
     overflow: hidden;
     height: 100vh;
 
-    :global(.sp-wrapper) {
+    .sp-wrapper {
       height: 100% !important;
       border: none !important;
       border-radius: 0 !important;
     }
 
-    :global(.sp-layout) {
+    .sp-layout {
       height: 100% !important;
       border-radius: 0 !important;
     }
 
-    :global(.sp-editor) {
+    .sp-editor {
       height: 100% !important;
     }
 
-    :global(.sp-code-editor) {
+    .sp-code-editor {
       height: 100% !important;
     }
 
-    :global(.sp-cm) {
+    .sp-cm {
       height: 100% !important;
     }
 
-    :global(.highlighted-line) {
+    .highlighted-line {
       position: relative;
       background-color: linear-gradient(
         var(--semantic-color-background-highlight)
@@ -87,15 +87,15 @@
       }
     }
 
-    :global(.highlight-fade-in) {
+    .highlight-fade-in {
       animation: highlightFadeIn 0.3s ease-out forwards;
     }
 
-    :global(.highlight-fade-out) {
+    .highlight-fade-out {
       animation: highlightFadeOut 0.15s ease-in forwards;
     }
 
-    :global(.sp-tabs) {
+    .sp-tabs {
       display: flex !important;
       overflow: auto;
       scrollbar-color: var(--semantic-color-border-subtle) transparent !important;
@@ -115,7 +115,7 @@
       }
     }
 
-    :global(.sp-tab) {
+    .sp-tab {
       flex-shrink: 0 !important;
       overflow: hidden !important;
       min-width: 0 !important;
@@ -127,7 +127,7 @@
       white-space: nowrap !important;
     }
 
-    :global(.sp-tab-button) {
+    .sp-tab-button {
       display: block !important;
       overflow: hidden !important;
       width: 100% !important;
@@ -293,8 +293,8 @@
     }
 
     .codePanel {
-      :global(.highlight-fade-in),
-      :global(.highlight-fade-out) {
+      .highlight-fade-in,
+      .highlight-fade-out {
         animation: none !important;
       }
     }
@@ -352,7 +352,7 @@
       height: 40vh;
       min-height: 250px;
 
-      :global(.sp-tab) {
+      .sp-tab {
         max-width: 120px !important;
         padding: var(--space-1) var(--space-2) !important;
         background: yellow !important;
