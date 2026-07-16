@@ -1,7 +1,15 @@
 import { describe, it, expect, vi } from 'vitest';
 import * as React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import { DocVariants } from '@/ui/modules/CodeSandbox/variants/DocVariants';
+import type {
+  VariantGrid,
+  VirtualProject,
+} from '@/ui/modules/CodeSandbox/types';
+
+const { updateFileMock } = vi.hoisted(() => ({
+  updateFileMock: vi.fn(),
+}));
 
 // DocVariants renders a real SandpackProvider (via CodeWorkbench), which
 // spins up @codesandbox/sandpack-client's bundler iframe. That client is
@@ -24,18 +32,55 @@ vi.mock('@codesandbox/sandpack-react', () => ({
   SandpackPreview: () => <a href="https://codesandbox.io">Open sandbox</a>,
   SandpackCodeEditor: () => null,
   useSandpack: () => ({
-    sandpack: { files: { '/App.tsx': {} }, openFile: vi.fn() },
+    sandpack: {
+      files: { '/App.tsx': {} },
+      openFile: vi.fn(),
+      updateFile: updateFileMock,
+    },
   }),
 }));
 
-describe('DocVariants URL sync', () => {
-  it('reads initial selection from URL and updates query on selection', () => {
-    window.history.replaceState(null, '', '/docs?size=md&tone=brand#x');
+/** Set the document URL so location.search is populated before mount. */
+function setDocumentUrl(url: string): void {
+  window.history.replaceState(null, '', url);
+  // jsdom 26+ syncs location from replaceState. Older jsdom left it stale;
+  // force-sync so DocVariants can still read initial query params.
+  if (!window.location.search) {
+    const resolved = new URL(url, window.location.origin || 'http://localhost');
+    Object.defineProperty(window, 'location', {
+      configurable: true,
+      value: {
+        ancestorOrigins: [] as unknown as DOMStringList,
+        href: resolved.href,
+        origin: resolved.origin,
+        protocol: resolved.protocol,
+        host: resolved.host,
+        hostname: resolved.hostname,
+        port: resolved.port,
+        pathname: resolved.pathname,
+        search: resolved.search,
+        hash: resolved.hash,
+        assign: vi.fn(),
+        replace: vi.fn(),
+        reload: vi.fn(),
+        toString: () => resolved.href,
+      } satisfies Location,
+    });
+  }
+}
 
-    const project = {
+describe('DocVariants URL sync', () => {
+  it('reads initial selection from URL and updates query on selection', async () => {
+    updateFileMock.mockClear();
+    setDocumentUrl('/docs?size=md&tone=brand#x');
+
+    expect(window.location.search).toContain('size=md');
+    expect(window.location.search).toContain('tone=brand');
+
+    const project: VirtualProject = {
       files: [{ path: '/App.tsx', contents: 'export default null' }],
-    } as any;
-    const grid = {
+    };
+    const grid: VariantGrid = {
       rows: {
         id: 'size',
         label: 'Size',
@@ -48,7 +93,7 @@ describe('DocVariants URL sync', () => {
         values: ['neutral', 'brand'],
         defaultValue: 'neutral',
       },
-    } as any;
+    };
 
     const { getAllByRole } = render(
       <DocVariants
@@ -60,9 +105,19 @@ describe('DocVariants URL sync', () => {
       />
     );
 
-    // Component reads initial values from URL params on mount
-    expect(window.location.search).toContain('size=md');
-    expect(window.location.search).toContain('tone=brand');
+    // PropsBridge writes selection into the Sandpack FS; that proves DocVariants
+    // initialized values from the URL query (not only that location.search is set).
+    await waitFor(() => {
+      const propsWrites = updateFileMock.mock.calls.filter(
+        (call) => call[0] === '/props.json'
+      );
+      expect(propsWrites.length).toBeGreaterThan(0);
+      const latest = JSON.parse(String(propsWrites.at(-1)?.[1])) as Record<
+        string,
+        unknown
+      >;
+      expect(latest).toMatchObject({ size: 'md', tone: 'brand' });
+    });
 
     // The only interactive element rendered is the "Open in CodeSandbox" link;
     // variant tile selectors are not rendered when controls=[] and no grid tile

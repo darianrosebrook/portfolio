@@ -1,7 +1,8 @@
-import { describe, it, expect, vi } from 'vitest';
+import { afterEach, beforeEach, describe, it, expect, vi } from 'vitest';
 import * as React from 'react';
 import { render } from '@testing-library/react';
 import { DocInteractive } from '@/ui/modules/CodeSandbox/variants/DocInteractive';
+import type { SectionSpec, VirtualProject } from '@/ui/modules/CodeSandbox/types';
 
 // DocInteractive renders a real SandpackProvider (via CodeWorkbench), which
 // spins up @codesandbox/sandpack-client's bundler iframe. That client is
@@ -25,25 +26,32 @@ vi.mock('@codesandbox/sandpack-react', () => ({
   }),
 }));
 
-vi.useFakeTimers();
-
 describe('DocInteractive hash debounce', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+    vi.restoreAllMocks();
+  });
+
   it('debounces hash updates on rapid section changes', () => {
     const replaceSpy = vi.spyOn(window.history, 'replaceState');
-    const sections = [
+    const sections: SectionSpec[] = [
       { id: 'a', code: { file: '/A.tsx', lines: [1, 2] } },
       { id: 'b', code: { file: '/B.tsx', lines: [3, 4] } },
-    ] as any;
+    ];
+    const project: VirtualProject = {
+      files: [{ path: '/A.tsx', contents: '' }],
+    };
 
     // Render component (SectionSync will not run without nodes; simulate highlight changes via props bridge behavior)
     render(
       <div>
         <div data-section-id="a">A</div>
         <div data-section-id="b">B</div>
-        <DocInteractive
-          project={{ files: [{ path: '/A.tsx', contents: '' }] }}
-          sections={sections}
-        />
+        <DocInteractive project={project} sections={sections} />
       </div>
     );
 
