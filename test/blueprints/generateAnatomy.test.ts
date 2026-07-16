@@ -23,7 +23,7 @@ function dialogContract(): ComponentContract {
   return {
     name: 'Dialog',
     layer: 'compound',
-    anatomy: ['root', 'title', 'closeButton', 'size', 'decoration', 'hover'],
+    anatomy: ['root', 'title', 'closeButton', 'size', 'decoration'],
     slots: {
       title: { required: true, selector: '[data-dialog-title]' },
       closeButton: { required: false },
@@ -42,30 +42,39 @@ function dialogContract(): ComponentContract {
   };
 }
 
-describe('parseAnatomy — A1: one row per structural part', () => {
-  it('emits exactly one part per structural anatomy entry, in order', () => {
-    const parts = parseAnatomy(dialogContract().anatomy!, dialogContract());
-    // 'hover' is a state name and is dropped; the other five survive.
+describe('parseAnatomy — A1: one row per authored anatomy entry', () => {
+  it('emits one part per authored entry, in order, dropping nothing', () => {
+    const contract = dialogContract();
+    const parts = parseAnatomy(contract.anatomy!, contract);
+    expect(parts.map((p) => p.name)).toEqual(contract.anatomy);
+  });
+
+  it('keeps structural regions whose names contain a state word as a substring', () => {
+    // Regression: a prior substring-based filter silently dropped these real
+    // contract parts (interactive/focusable/hoverable/loadingText) because
+    // their names contain "active"/"focus"/"hover"/"loading". The anatomy
+    // array is authored source-of-truth, so every entry must survive.
+    const parts = parseAnatomy(
+      ['root', 'interactive', 'focusable', 'hoverable', 'loadingText'],
+      null
+    );
     expect(parts.map((p) => p.name)).toEqual([
       'root',
-      'title',
-      'closeButton',
-      'size',
-      'decoration',
+      'interactive',
+      'focusable',
+      'hoverable',
+      'loadingText',
     ]);
   });
 
-  it('drops exact state names from the anatomy', () => {
-    const parts = parseAnatomy(
-      ['root', 'hover', 'focus', 'active', 'disabled', 'selected'],
-      null
-    );
-    expect(parts.map((p) => p.name)).toEqual(['root']);
-  });
-
-  it('drops exact size names but keeps other structural parts', () => {
+  it('preserves a size-named entry rather than filtering it', () => {
     const parts = parseAnatomy(['track', 'small', 'large', 'thumb'], null);
-    expect(parts.map((p) => p.name)).toEqual(['track', 'thumb']);
+    expect(parts.map((p) => p.name)).toEqual([
+      'track',
+      'small',
+      'large',
+      'thumb',
+    ]);
   });
 
   it('assigns root level 0 with no parent and children level 1 parented to root', () => {
