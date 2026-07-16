@@ -136,21 +136,25 @@ Each session gets registered in `.caws/agents.json` automatically (via the sessi
 
 `--takeover` writes a durable `prior_owners` audit on the worktree entry (sessionId, platform, lastSeen-at-takeover, takenOver_at) so handoffs are traceable in `worktrees.json`, not just in agent memory.
 
-### Spec lifecycle: archive (v11 tombstone)
+### Spec lifecycle: archive
 
-`caws specs archive <id>` requires the spec be `closed` first. In v11, archive is a
-**tombstone, not a directory move**: it *deletes* the spec YAML from `.caws/specs/`
-and appends a recoverable `spec_archived` event to the hash-chained
-`.caws/events.jsonl` carrying the body's `blob_sha`. There is **no**
-`.caws/specs/.archive/` directory in v11 (that was the v10 behavior).
+`caws specs archive <id>` requires the spec be `closed` first. In v11 (verified
+against caws 11.6.0), archive is a **move-shaped** operation: it relocates the
+spec YAML from `.caws/specs/<id>.yaml` to `.caws/specs/.archive/<id>.yaml` and
+appends a `spec_archived` event to the hash-chained `.caws/events.jsonl`
+recording the `from_path`/`to_path` of the move. The `.caws/specs/.archive/`
+directory is real and tracked; `caws specs list` reports anything under it as
+`status: archived`.
 
 Recover an archived body with `caws specs show <id> --archived` or
-`caws specs recover <id>` (resolves via `git show <blob_sha>`). The archive
+`caws specs recover <id>` — recover reads the `spec_archived` event and the
+`.caws/specs/.archive/<id>.yaml` body for move-shaped archives, falling back to
+git-history/`blob_sha` recovery for older tombstone-shaped archives. The archive
 operation makes its own audit commit, so run it from a clean working tree —
 it refuses to auto-commit over uncommitted changes.
 
-For a never-activated draft, use `caws specs retire-draft <id>` (same tombstone
-shape) rather than archive. Never use `mv`/`git rm` to relocate or remove specs —
+For a never-activated draft, use `caws specs retire-draft <id>` (which deletes
+the draft) rather than archive. Never use `mv`/`git rm` to relocate or remove specs —
 that bypasses the comment-preserving patch, the `updated_at` bump, and the
 hash-chained audit record.
 
