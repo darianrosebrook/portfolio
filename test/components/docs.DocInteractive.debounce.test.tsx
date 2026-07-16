@@ -3,6 +3,28 @@ import * as React from 'react';
 import { render } from '@testing-library/react';
 import { DocInteractive } from '@/ui/modules/CodeSandbox/variants/DocInteractive';
 
+// DocInteractive renders a real SandpackProvider (via CodeWorkbench), which
+// spins up @codesandbox/sandpack-client's bundler iframe. That client is
+// meant for a browser, not jsdom: it keeps initializing asynchronously past
+// unmount and throws on a torn-down iframe, leaking an unhandled rejection
+// into the test run. Mock the package so only the render tree is exercised.
+vi.mock('@codesandbox/sandpack-react', () => ({
+  SandpackProvider: ({ children }: { children: React.ReactNode }) => (
+    <>{children}</>
+  ),
+  SandpackThemeProvider: ({ children }: { children: React.ReactNode }) => (
+    <>{children}</>
+  ),
+  SandpackLayout: ({ children }: { children: React.ReactNode }) => (
+    <>{children}</>
+  ),
+  SandpackPreview: () => null,
+  SandpackCodeEditor: () => null,
+  useSandpack: () => ({
+    sandpack: { files: { '/App.tsx': {} }, openFile: vi.fn() },
+  }),
+}));
+
 vi.useFakeTimers();
 
 describe('DocInteractive hash debounce', () => {

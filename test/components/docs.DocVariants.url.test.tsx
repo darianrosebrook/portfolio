@@ -1,7 +1,32 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import * as React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { DocVariants } from '@/ui/modules/CodeSandbox/variants/DocVariants';
+
+// DocVariants renders a real SandpackProvider (via CodeWorkbench), which
+// spins up @codesandbox/sandpack-client's bundler iframe. That client is
+// meant for a browser, not jsdom: it keeps initializing asynchronously past
+// unmount and throws on a torn-down iframe, leaking an unhandled rejection
+// into the test run. Mock the package so only the render tree is exercised.
+vi.mock('@codesandbox/sandpack-react', () => ({
+  SandpackProvider: ({ children }: { children: React.ReactNode }) => (
+    <>{children}</>
+  ),
+  SandpackThemeProvider: ({ children }: { children: React.ReactNode }) => (
+    <>{children}</>
+  ),
+  SandpackLayout: ({ children }: { children: React.ReactNode }) => (
+    <>{children}</>
+  ),
+  // Real SandpackPreview renders an "Open in CodeSandbox" link in its action
+  // bar; stand in with an anchor so the URL-sync test's role="link" check
+  // still exercises the same DOM shape it did against the real component.
+  SandpackPreview: () => <a href="https://codesandbox.io">Open sandbox</a>,
+  SandpackCodeEditor: () => null,
+  useSandpack: () => ({
+    sandpack: { files: { '/App.tsx': {} }, openFile: vi.fn() },
+  }),
+}));
 
 describe('DocVariants URL sync', () => {
   it('reads initial selection from URL and updates query on selection', () => {
