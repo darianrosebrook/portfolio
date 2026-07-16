@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import {
   parseAnatomy,
   getAnatomyData,
+  getComponentContract,
   type ComponentContract,
 } from '@/app/blueprints/component-standards/_lib/generateAnatomy';
 import type { ComponentItem } from '@/app/blueprints/component-standards/_lib/componentsData';
@@ -185,5 +186,50 @@ describe('getAnatomyData — A5: fallback when no contract anatomy', () => {
 
   it('returns null for a component with no resolvable contract path', () => {
     expect(getAnatomyData(componentWithoutContract())).toBeNull();
+  });
+});
+
+describe('getAnatomyData — end-to-end against the real Tabs contract on disk', () => {
+  const tabs: ComponentItem = {
+    component: 'Tabs',
+    id: 'tabs',
+    slug: 'tabs',
+    layer: 'composers',
+    alternativeNames: [],
+    normalizedAliases: [],
+    category: 'navigation',
+    description: '',
+    a11y: { pitfalls: [] },
+    status: 'Built',
+    paths: { component: 'ui/components/Tabs' },
+  };
+
+  it('surfaces every authored anatomy entry, dropping none', () => {
+    const contract = getComponentContract(tabs);
+    const parts = getAnatomyData(tabs);
+    expect(contract?.anatomy).toBeDefined();
+    expect(parts).not.toBeNull();
+    // Nothing is filtered: one row per authored entry, in order.
+    expect(parts!.map((p) => p.name)).toEqual(contract!.anatomy);
+  });
+
+  it('includes the state-decorated rows the old substring filter dropped', () => {
+    const names = getAnatomyData(tabs)!.map((p) => p.name);
+    // These live in ui/components/Tabs/Tabs.contract.json and were previously
+    // removed because their names contain "active"/"disabled".
+    expect(names).toEqual(
+      expect.arrayContaining([
+        'tabActive',
+        'tabDisabled',
+        'panelActive',
+        'panelInactive',
+      ])
+    );
+  });
+
+  it('classifies a base part that is a declared slot as a slot', () => {
+    const parts = getAnatomyData(tabs)!;
+    // 'tab' is declared in Tabs.contract.json slots.
+    expect(parts.find((p) => p.name === 'tab')?.type?.kind).toBe('slot');
   });
 });
