@@ -192,29 +192,6 @@ export function getComponentContract(
   }
 }
 
-const STATE_PATTERNS = [
-  'hover',
-  'focus',
-  'active',
-  'disabled',
-  'loading',
-  'isLoading',
-  'selected',
-  'checked',
-  'open',
-  'closed',
-];
-
-const SIZE_PATTERNS = ['small', 'medium', 'large', 'xsmall', 'xlarge'];
-
-function isStructuralPart(part: string): boolean {
-  const lower = part.toLowerCase();
-  return (
-    !STATE_PATTERNS.some((pattern) => lower.includes(pattern)) &&
-    !SIZE_PATTERNS.includes(lower)
-  );
-}
-
 function humanizePartName(name: string): string {
   return name
     .replace(/([A-Z])/g, ' $1')
@@ -270,17 +247,19 @@ function describePart(
 
 /**
  * Parse anatomy array into structured parts with hierarchy.
- * Filters out state/variant names and focuses on structural parts.
- * When a contract is provided, each part is enriched with a description
- * and a derived type classification (slot / prop / part).
+ *
+ * The anatomy array is authored contract data and is treated as the source of
+ * truth: every entry becomes a row. Each row's type (slot / prop / part / root)
+ * is derived from the contract rather than guessed from the part name — so a
+ * structural region whose name happens to contain a state word (e.g.
+ * `interactive`, `focusable`, `loadingText`) is never silently dropped.
+ * When a contract is provided, each part is also enriched with a description.
  */
 export function parseAnatomy(
   anatomy: string[],
   contract: ComponentContract | null = null
 ): AnatomyPart[] {
-  const structuralParts = anatomy.filter(isStructuralPart);
-
-  return structuralParts.map((part) => {
+  return anatomy.map((part) => {
     const isRoot = part === 'root';
     return {
       name: part,
