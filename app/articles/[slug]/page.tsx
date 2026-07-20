@@ -11,6 +11,7 @@ async function getData(slug: string) {
     .from('articles')
     .select('*, author(full_name, username, avatar_url)')
     .eq('slug', slug)
+    .eq('status', 'published')
     .single();
 
   if (!article) return null;

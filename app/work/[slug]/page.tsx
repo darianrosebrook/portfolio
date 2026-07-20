@@ -14,6 +14,7 @@ async function getData(slug: string) {
     .from('case_studies')
     .select('*')
     .eq('slug', slug)
+    .eq('status', 'published')
     .single();
 
   if (!caseStudy) {

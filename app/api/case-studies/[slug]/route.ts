@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/utils/supabase/server';
+import { projectContentForCaller } from '@/utils/supabase/contentAccess';
 import {
   updateCaseStudySchema,
   patchCaseStudyDraftSchema,
@@ -11,22 +12,51 @@ export async function GET(
 ) {
   const { slug } = await params;
   const supabase = await createClient();
-  const { data, error } = await supabase
-    .from('case_studies')
-    .select('*')
-    .eq('slug', slug)
-    .single();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  let query = supabase.from('case_studies').select('*').eq('slug', slug);
+
+  if (user) {
+    query = query.or(`status.eq.published,author.eq.${user.id}`);
+  } else {
+    query = query.eq('status', 'published');
+  }
+
+  const { data, error } = await query.single();
 
   if (error) {
     return new NextResponse(JSON.stringify({ error: error.message }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
+      status: error.code === 'PGRST116' ? 404 : 500,
+      headers: {
+        'Content-Type': 'application/json',
+        'Cache-Control': 'private, no-store',
+      },
     });
   }
 
-  return new NextResponse(JSON.stringify(data), {
+  if (!data) {
+    return new NextResponse(JSON.stringify({ error: 'Case study not found' }), {
+      status: 404,
+      headers: {
+        'Content-Type': 'application/json',
+        'Cache-Control': 'private, no-store',
+      },
+    });
+  }
+
+  const projected = projectContentForCaller(
+    data as Record<string, unknown>,
+    user?.id
+  );
+
+  return new NextResponse(JSON.stringify(projected), {
     status: 200,
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      'Cache-Control': 'private, no-store',
+    },
   });
 }
 
@@ -216,6 +246,16 @@ export async function PUT(
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });
+  }
+
+  if (!data || data.length === 0) {
+    return new NextResponse(
+      JSON.stringify({ error: 'Case study not found or unauthorized' }),
+      {
+        status: 404,
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
   }
 
   return new NextResponse(JSON.stringify(data), {

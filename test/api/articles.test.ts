@@ -322,15 +322,25 @@ describe('Articles API Integration Tests', () => {
       params: Promise.resolve({ slug: 'test-article' }),
     };
 
-    it('should return article by slug successfully', async () => {
-      const mockSelect = vi.fn().mockReturnValue({
-        eq: vi.fn().mockReturnValue({
-          single: vi.fn().mockResolvedValue({
-            data: mockArticle,
-            error: null,
-          }),
-        }),
+    it('should return published article by slug for anonymous callers', async () => {
+      mockSupabase.auth.getUser.mockResolvedValue({
+        data: { user: null },
+        error: null,
       });
+
+      const publishedArticle = {
+        ...mockArticle,
+        status: 'published',
+        workingheadline: 'secret draft',
+      };
+
+      const mockSingle = vi.fn().mockResolvedValue({
+        data: publishedArticle,
+        error: null,
+      });
+      const mockStatusEq = vi.fn().mockReturnValue({ single: mockSingle });
+      const mockSlugEq = vi.fn().mockReturnValue({ eq: mockStatusEq });
+      const mockSelect = vi.fn().mockReturnValue({ eq: mockSlugEq });
 
       mockSupabase.from.mockReturnValue({
         select: mockSelect,
@@ -346,18 +356,24 @@ describe('Articles API Integration Tests', () => {
       const responseData = await response.json();
 
       expect(response.status).toBe(200);
-      expect(responseData).toEqual(mockArticle);
+      expect(responseData.slug).toBe('test-article');
+      expect(responseData).not.toHaveProperty('workingheadline');
+      expect(mockStatusEq).toHaveBeenCalledWith('status', 'published');
     });
 
     it('should handle non-existent articles', async () => {
-      const mockSelect = vi.fn().mockReturnValue({
-        eq: vi.fn().mockReturnValue({
-          single: vi.fn().mockResolvedValue({
-            data: null,
-            error: { message: 'No rows returned' },
-          }),
-        }),
+      mockSupabase.auth.getUser.mockResolvedValue({
+        data: { user: null },
+        error: null,
       });
+
+      const mockSingle = vi.fn().mockResolvedValue({
+        data: null,
+        error: { message: 'No rows returned', code: 'PGRST116' },
+      });
+      const mockStatusEq = vi.fn().mockReturnValue({ single: mockSingle });
+      const mockSlugEq = vi.fn().mockReturnValue({ eq: mockStatusEq });
+      const mockSelect = vi.fn().mockReturnValue({ eq: mockSlugEq });
 
       mockSupabase.from.mockReturnValue({
         select: mockSelect,
@@ -372,7 +388,7 @@ describe('Articles API Integration Tests', () => {
       const response = await ArticleSlugAPI.GET(request, mockContext);
       const responseData = await response.json();
 
-      expect(response.status).toBe(500);
+      expect(response.status).toBe(404);
       expect(responseData.error).toBe('No rows returned');
     });
   });

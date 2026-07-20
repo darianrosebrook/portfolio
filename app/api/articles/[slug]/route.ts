@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/utils/supabase/server';
+import { projectContentForCaller } from '@/utils/supabase/contentAccess';
 import {
   updateArticleSchema,
   patchArticleDraftSchema,
@@ -11,11 +12,20 @@ export async function GET(
 ) {
   const { slug } = await params;
   const supabase = await createClient();
-  const { data, error } = await supabase
-    .from('articles')
-    .select('*')
-    .eq('slug', slug)
-    .single();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  let query = supabase.from('articles').select('*').eq('slug', slug);
+
+  // Anonymous and non-authors only see published rows; authors also see drafts.
+  if (user) {
+    query = query.or(`status.eq.published,author.eq.${user.id}`);
+  } else {
+    query = query.eq('status', 'published');
+  }
+
+  const { data, error } = await query.single();
 
   if (error && (error.message || error.code || Object.keys(error).length > 0)) {
     console.error('Article fetch error:', JSON.stringify(error, null, 2));
@@ -23,7 +33,10 @@ export async function GET(
       JSON.stringify({ error: error.message || 'Database error' }),
       {
         status: error.code === 'PGRST116' ? 404 : 500,
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Cache-Control': 'private, no-store',
+        },
       }
     );
   }
@@ -31,13 +44,24 @@ export async function GET(
   if (!data) {
     return new NextResponse(JSON.stringify({ error: 'Article not found' }), {
       status: 404,
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Cache-Control': 'private, no-store',
+      },
     });
   }
 
-  return new NextResponse(JSON.stringify(data), {
+  const projected = projectContentForCaller(
+    data as Record<string, unknown>,
+    user?.id
+  );
+
+  return new NextResponse(JSON.stringify(projected), {
     status: 200,
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      'Cache-Control': 'private, no-store',
+    },
   });
 }
 
