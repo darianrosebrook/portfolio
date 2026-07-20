@@ -1,4 +1,5 @@
 import { createClient } from '@/utils/supabase/server';
+import { sanitizeIlikeQuery } from '@/utils/helpers/postgrestFilter';
 import { NextResponse } from 'next/server';
 
 /**
@@ -24,8 +25,9 @@ export async function GET(request: Request) {
   // Get search query from URL params
   const { searchParams } = new URL(request.url);
   const query = searchParams.get('q') || '';
+  const sanitized = sanitizeIlikeQuery(query);
 
-  if (!query || query.length < 1) {
+  if (!sanitized || sanitized.length < 1) {
     return NextResponse.json({ users: [] });
   }
 
@@ -34,7 +36,7 @@ export async function GET(request: Request) {
   const { data, error } = await supabase
     .from('profiles')
     .select('id, username, full_name, avatar_url')
-    .or(`username.ilike.%${query}%,full_name.ilike.%${query}%`)
+    .or(`username.ilike.%${sanitized}%,full_name.ilike.%${sanitized}%`)
     .eq('privacy', 'public')
     .limit(10);
 
