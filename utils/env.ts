@@ -21,6 +21,11 @@ interface Environment {
   NEXT_PUBLIC_SITE_URL?: string;
   /** Vercel deployment URL (optional, auto-set by Vercel) */
   NEXT_PUBLIC_VERCEL_URL?: string;
+  /**
+   * Comma-separated Supabase user IDs allowed to run privileged admin APIs
+   * (e.g. image cleanup). Fail closed when empty.
+   */
+  adminUserIds: string[];
 }
 
 /**
@@ -115,4 +120,21 @@ export const env: Environment = {
   nodeEnv: process.env.NODE_ENV || 'development',
   NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
   NEXT_PUBLIC_VERCEL_URL: process.env.NEXT_PUBLIC_VERCEL_URL,
+  adminUserIds: (process.env.ADMIN_USER_IDS ?? '')
+    .split(',')
+    .map((id) => id.trim())
+    .filter(Boolean),
 };
+
+/** True when the user id is listed in ADMIN_USER_IDS (fail closed if unset). */
+export function isAdminUserId(userId: string | undefined): boolean {
+  if (!userId) {
+    return false;
+  }
+  // Read process.env at call time so tests and runtime overrides apply.
+  const ids = (process.env.ADMIN_USER_IDS ?? '')
+    .split(',')
+    .map((id) => id.trim())
+    .filter(Boolean);
+  return ids.includes(userId);
+}

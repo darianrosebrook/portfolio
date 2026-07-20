@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
-import { env } from '@/utils/env';
 import { createClient } from '@/utils/supabase/server';
 import { getSafeRedirectPath } from '@/utils/supabase/redirect';
+import { getTrustedRedirectOrigin } from '@/utils/supabase/redirectOrigin';
 
 // Force Node.js runtime instead of Edge to avoid DNS resolution issues
 export const runtime = 'nodejs';
@@ -19,16 +19,8 @@ export async function GET(request: Request) {
       if (error) {
         console.error('[Auth Callback] Exchange error:', error.message);
       } else {
-        const forwardedHost = request.headers.get('x-forwarded-host'); // original origin before load balancer
-        const isLocalEnv = env.nodeEnv === 'development';
-        if (isLocalEnv) {
-          // we can be sure that there is no load balancer in between, so no need to watch for X-Forwarded-Host
-          return NextResponse.redirect(`${origin}${next}`);
-        } else if (forwardedHost) {
-          return NextResponse.redirect(`https://${forwardedHost}${next}`);
-        } else {
-          return NextResponse.redirect(`${origin}${next}`);
-        }
+        const redirectOrigin = getTrustedRedirectOrigin(request);
+        return NextResponse.redirect(`${redirectOrigin}${next}`);
       }
     } catch (err) {
       console.error(
