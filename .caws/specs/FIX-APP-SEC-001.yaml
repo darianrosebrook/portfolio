@@ -42,6 +42,8 @@ scope:
     - 'test/dashboard/'
     - 'test/articles/'
     - 'test/utils/'
+    - 'vitest.config.mjs'
+    - 'utils/caseStudy.ts'
   out:
     - 'app/blueprints/'
     - 'node_modules/'
@@ -68,7 +70,7 @@ acceptance:
     when: publish or save runs
     then: local status reflects failure and does not claim success
   - id: A5
-    given: CMS HTML containing a script tag or javascript: URL
+    given: 'CMS HTML containing a script tag or javascript URL'
     when: article or case study content is rendered
     then: the dangerous markup is stripped before injection
 non_functional:
@@ -76,6 +78,6 @@ non_functional:
     - Fail closed on privileged cleanup without ADMIN_USER_IDS allowlist
     - Auth callback redirects only to known site origins
 contracts:
-  - name: 'content-api'
+  - name: content-api
     type: behavior
-    description: 'Authenticated mutations; published-only public reads; retired /api/publish'
+    description: Authenticated mutations, published-only public reads, retired publish API
