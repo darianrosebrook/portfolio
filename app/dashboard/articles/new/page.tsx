@@ -54,6 +54,8 @@ export default function NewArticlePage() {
     wordCount: 0,
   }));
   const [articleId, setArticleId] = useState<number | undefined>();
+  /** Slug persisted on the server — PATCH must target this, not a renamed local slug. */
+  const serverSlugRef = useRef<string | null>(null);
   const [showPreview, setShowPreview] = useState(false);
   const [isManualSaving, setIsManualSaving] = useState(false);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
@@ -92,9 +94,15 @@ export default function NewArticlePage() {
     setArticle((prev) => {
       const newHeadline = prev.headline || extractedMetadata.headline || null;
 
-      // Generate a proper slug from headline if we still have a temp slug
+      // Only rewrite temp slugs before the first successful server create.
+      // Renaming after create would make PATCH target a non-existent slug.
       let newSlug = prev.slug;
-      if (extractedMetadata.headline && prev.slug?.startsWith('draft-')) {
+      if (
+        !serverSlugRef.current &&
+        !articleId &&
+        extractedMetadata.headline &&
+        prev.slug?.startsWith('draft-')
+      ) {
         const generatedSlug = slugify(extractedMetadata.headline);
         if (generatedSlug && generatedSlug.length > 0) {
           newSlug = generatedSlug;
@@ -110,7 +118,7 @@ export default function NewArticlePage() {
         slug: newSlug || prev.slug,
       };
     });
-  }, [extractedMetadata]);
+  }, [extractedMetadata, articleId]);
 
   // Save to localStorage as a fallback for unsaved work
   useEffect(() => {
@@ -144,8 +152,14 @@ export default function NewArticlePage() {
 
       // Check if article exists (has ID)
       if (articleId) {
+        const slugForRequest =
+          serverSlugRef.current || articleToSave.slug || '';
+        if (!slugForRequest) {
+          throw new Error('Slug is required');
+        }
+
         // Update existing article - use PATCH for working draft
-        const response = await fetch(`/api/articles/${articleToSave.slug}`, {
+        const response = await fetch(`/api/articles/${slugForRequest}`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -166,6 +180,9 @@ export default function NewArticlePage() {
         const saved = await response.json();
         if (saved && Array.isArray(saved) && saved.length > 0) {
           setArticleId(saved[0].id);
+          if (typeof saved[0].slug === 'string') {
+            serverSlugRef.current = saved[0].slug;
+          }
           // Sync with server state (this will include lowercase working* columns)
           setArticle((prev) => ({
             ...prev,
@@ -189,7 +206,7 @@ export default function NewArticlePage() {
 
         const isValidSlug = /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(cleanedData.slug);
         if (!cleanedData.slug || !isValidSlug) {
-          return;
+          throw new Error('Invalid slug');
         }
 
         const response = await fetch('/api/articles', {
@@ -217,6 +234,10 @@ export default function NewArticlePage() {
         const saved = JSON.parse(responseText);
         if (saved && Array.isArray(saved) && saved.length > 0) {
           setArticleId(saved[0].id);
+          serverSlugRef.current =
+            typeof saved[0].slug === 'string'
+              ? saved[0].slug
+              : cleanedData.slug;
           setArticle((prev) => ({
             ...prev,
             ...saved[0],
