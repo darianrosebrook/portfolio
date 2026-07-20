@@ -108,7 +108,10 @@ export default function ArticleDetailClient({
       <article className={styles.articleContent}>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }}
+          dangerouslySetInnerHTML={{
+            // Escape `<` so hostile CMS strings cannot break out of the script tag
+            __html: JSON.stringify(ldJson).replace(/</g, '\\u003c'),
+          }}
         />
         <div
           ref={ledeRef}

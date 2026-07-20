@@ -1,3 +1,8 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Disallow: /dashboard
+Disallow: /dev
+Disallow: /chip-demo
+Disallow: /component-displaycase
+Disallow: /ha
+Disallow: /api/

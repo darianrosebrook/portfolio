@@ -10,6 +10,7 @@
 import type { JSONContent } from '@tiptap/react';
 import { generateHTML } from '@tiptap/html';
 import { createServerExtensions } from '@/ui/modules/Tiptap/extensionsRegistry';
+import { sanitizeCmsHtml } from '@/utils/helpers/sanitizeHtml';
 
 /**
  * Validates JSONContent structure
@@ -160,7 +161,7 @@ export function generateArticleHTML(content: unknown): string {
   const extensions = createServerExtensions();
 
   try {
-    return generateHTML(normalized, extensions);
+    return sanitizeCmsHtml(generateHTML(normalized, extensions));
   } catch (error) {
     console.error('Failed to generate HTML from JSONContent:', error);
     return '';
