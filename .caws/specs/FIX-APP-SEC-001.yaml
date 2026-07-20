@@ -1,0 +1,50 @@
+id: FIX-APP-SEC-001
+title: 'Harden non-blueprints app auth and content APIs'
+risk_tier: 2
+mode: fix
+lifecycle_state: active
+created_at: '2026-07-20T22:34:30.645Z'
+updated_at: '2026-07-20T22:34:30.645Z'
+blast_radius:
+  modules:
+    - 'TODO: list one or more modules this spec touches.'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'app/api/'
+    - 'app/auth/'
+    - 'app/signout/'
+    - 'app/dashboard/'
+    - 'app/articles/'
+    - 'app/work/'
+    - 'app/links/'
+    - 'app/dev/'
+    - 'app/chip-demo/'
+    - 'app/component-displaycase/'
+    - 'app/ha/'
+    - 'app/tools/'
+    - 'app/global-error.tsx'
+    - 'app/error.tsx'
+    - 'app/template.tsx'
+    - 'public/robots.txt'
+    - 'utils/supabase/'
+    - 'utils/schemas/'
+    - 'utils/tiptap/'
+    - 'utils/helpers/'
+    - 'test/api/'
+    - 'test/dashboard/'
+    - 'test/articles/'
+    - 'test/utils/'
+  out: []
+invariants:
+  - 'TODO: describe one invariant this spec guarantees.'
+acceptance:
+  - id: A1
+    given: 'TODO'
+    when: 'TODO'
+    then: 'TODO'
+non_functional: {}
+contracts:
+  - name: 'content-api'
+    type: behavior
