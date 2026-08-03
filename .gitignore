@@ -27,7 +27,8 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
-.env* 
+.env*
+!.env.example
 
 # vercel
 .vercel
@@ -40,7 +41,7 @@ next-env.d.ts
 .cursorignore
 .cursorrules
 .cursor*
-/plans/ 
+/plans/
 .vscode/
 **/TODO.md
 docs/
