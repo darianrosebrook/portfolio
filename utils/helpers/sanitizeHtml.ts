@@ -16,11 +16,24 @@ const FORBIDDEN_VOID_TAGS =
 
 const EVENT_HANDLER_ATTR = /\s+on[a-z]+\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+)/gi;
 
-const DANGEROUS_URL_ATTR =
-  /(\s(?:href|src|xlink:href)\s*=\s*)(?:"\s*javascript:[^"]*"|'\s*javascript:[^']*'|[^\s>]*javascript:[^\s>]*)/gi;
+/** Matches href/src/xlink:href attributes so their value can be inspected as a whole. */
+const URL_ATTR =
+  /(\s(?:href|src|xlink:href)\s*=\s*)(?:"([^"]*)"|'([^']*)'|([^\s>]+))/gi;
 
-const DATA_SCRIPT_ATTR =
-  /(\s(?:href|src)\s*=\s*)(?:"\s*data:text\/html[^"]*"|'\s*data:text\/html[^']*')/gi;
+/**
+ * Browsers ignore tab/newline/carriage-return characters when parsing a URL
+ * scheme (e.g. `jav\tascript:` still runs as `javascript:`), so a naive
+ * substring check for "javascript:" can be bypassed by injecting one of
+ * these characters into the scheme. Strip them before the scheme check.
+ */
+function stripSchemeObfuscation(value: string): string {
+  return value.replace(/[\t\n\r]+/g, '').trim();
+}
+
+function isDangerousUrl(value: string): boolean {
+  const cleaned = stripSchemeObfuscation(value);
+  return /^javascript:/i.test(cleaned) || /^data:text\/html/i.test(cleaned);
+}
 
 /**
  * Sanitize HTML produced from TipTap before injecting into the DOM.
@@ -34,6 +47,8 @@ export function sanitizeCmsHtml(html: string): string {
     .replace(FORBIDDEN_BLOCKS, '')
     .replace(FORBIDDEN_VOID_TAGS, '')
     .replace(EVENT_HANDLER_ATTR, '')
-    .replace(DANGEROUS_URL_ATTR, '$1"#"')
-    .replace(DATA_SCRIPT_ATTR, '$1"#"');
+    .replace(URL_ATTR, (match, prefix, dq, sq, unquoted) => {
+      const value = dq ?? sq ?? unquoted ?? '';
+      return isDangerousUrl(value) ? `${prefix}"#"` : match;
+    });
 }

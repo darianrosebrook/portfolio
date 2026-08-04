@@ -3,50 +3,37 @@ import { env } from '@/utils/env';
 /**
  * Resolve a trusted redirect origin after OAuth code exchange.
  *
- * Prefers configured site / Vercel URLs. Only trusts `x-forwarded-host` when
- * it matches an allowlisted host (prevents open redirects via header spoofing).
+ * `NEXT_PUBLIC_SITE_URL`, when set, always wins — `x-forwarded-host` is never
+ * trusted in that case, since it's an unauthenticated, spoofable request
+ * header. Only the Vercel-preview-URL case falls back to checking
+ * `x-forwarded-host` against that one allowlisted host (prevents open
+ * redirects via header spoofing on preview deployments).
  */
 export function getTrustedRedirectOrigin(request: Request): string {
   const { origin } = new URL(request.url);
 
-  const configuredOrigins: string[] = [];
-
   if (env.NEXT_PUBLIC_SITE_URL) {
     try {
-      configuredOrigins.push(new URL(env.NEXT_PUBLIC_SITE_URL).origin);
+      return new URL(env.NEXT_PUBLIC_SITE_URL).origin;
     } catch {
-      // ignore invalid site URL
+      // invalid site URL config — fall through to Vercel/forwarded-host handling
     }
   }
 
   if (env.NEXT_PUBLIC_VERCEL_URL) {
-    const host = env.NEXT_PUBLIC_VERCEL_URL.replace(/^https?:\/\//, '');
-    configuredOrigins.push(`https://${host}`);
-  }
-
-  const allowedHosts = new Set(
-    configuredOrigins.map((o) => new URL(o).host.toLowerCase())
-  );
-
-  if (configuredOrigins.length > 0) {
-    // Prefer explicit site URL when present
-    if (env.NEXT_PUBLIC_SITE_URL) {
-      try {
-        return new URL(env.NEXT_PUBLIC_SITE_URL).origin;
-      } catch {
-        // fall through
-      }
-    }
+    const vercelHost = env.NEXT_PUBLIC_VERCEL_URL.replace(/^https?:\/\//, '');
+    const vercelOrigin = `https://${vercelHost}`;
+    const allowedHost = vercelHost.toLowerCase();
 
     const forwardedHost = request.headers.get('x-forwarded-host');
     if (forwardedHost) {
       const host = forwardedHost.split(',')[0]?.trim().toLowerCase();
-      if (host && allowedHosts.has(host)) {
+      if (host === allowedHost) {
         return `https://${host}`;
       }
     }
 
-    return configuredOrigins[0];
+    return vercelOrigin;
   }
 
   // Local / unset config: use the request origin only (ignore forwarded host)

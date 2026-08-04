@@ -18,6 +18,26 @@ describe('sanitizeCmsHtml', () => {
     expect(sanitizeCmsHtml(html)).not.toContain('javascript:');
   });
 
+  it('neutralizes javascript: URLs obfuscated with tabs/newlines in the scheme', () => {
+    const html = '<a href="jav\tascript:alert(1)">x</a>';
+    const result = sanitizeCmsHtml(html);
+    expect(result).toContain('href="#"');
+    expect(result).not.toMatch(/javascript:/i);
+
+    const withNewline = '<a href="java\nscript:alert(1)">x</a>';
+    expect(sanitizeCmsHtml(withNewline)).toContain('href="#"');
+  });
+
+  it('neutralizes data:text/html URLs', () => {
+    const html = '<a href="data:text/html,<script>alert(1)</script>">x</a>';
+    expect(sanitizeCmsHtml(html)).toContain('href="#"');
+  });
+
+  it('leaves safe URLs untouched', () => {
+    const html = '<a href="https://example.com/path?q=1">x</a>';
+    expect(sanitizeCmsHtml(html)).toBe(html);
+  });
+
   it('returns empty string for empty input', () => {
     expect(sanitizeCmsHtml('')).toBe('');
   });
