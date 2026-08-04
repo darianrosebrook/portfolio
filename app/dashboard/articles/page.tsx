@@ -15,13 +15,22 @@ export default async function ArticlesPage({
   const statusFilter = params.status as 'published' | 'draft' | undefined;
 
   const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  // Fetch all articles to get counts
+  if (!user) {
+    return null;
+  }
+
+  // Author-scoped list (matches GET /api/articles). RLS alone would also
+  // surface other authors' published rows to any signed-in user.
   const { data: allArticles } = await supabase
     .from('articles')
     .select(
       'id, slug, headline, description, status, modified_at, published_at, wordCount'
     )
+    .eq('author', user.id)
     .order('modified_at', { ascending: false });
 
   // Filter out articles with empty slugs (data integrity issue)

@@ -1,5 +1,3 @@
-'use server';
-
 import { createClient } from './server';
 
 /**
@@ -9,7 +7,7 @@ import { createClient } from './server';
  * storage without guaranteeing token revalidation. Verified claims validate
  * the JWT signature and are safe for auth checks.
  *
- * @returns {Promise<boolean>} Whether a verified authenticated user exists.
+ * Server-only helper (not a public server action).
  */
 export async function checkForAuth(): Promise<boolean> {
   const client = await createClient();

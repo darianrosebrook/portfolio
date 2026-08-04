@@ -1,3 +1,4 @@
+import { redirect } from 'next/navigation';
 import { getCurrentUserProfile } from '@/utils/supabase/profile';
 import { createClient } from '@/utils/supabase/server';
 import Avatar from '@/ui/components/Avatar';
@@ -8,16 +9,11 @@ export default async function ProfilePage() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const profile = await getCurrentUserProfile();
-
   if (!user) {
-    return (
-      <div>
-        <h2>Profile</h2>
-        <p>Not signed in</p>
-      </div>
-    );
+    redirect('/');
   }
+
+  const profile = await getCurrentUserProfile();
 
   return (
     <div>
@@ -87,30 +83,10 @@ export default async function ProfilePage() {
               </ul>
             </div>
           )}
-
-          <details>
-            <summary>Raw Profile Data</summary>
-            <pre style={{ fontSize: '0.8rem', overflow: 'auto' }}>
-              {JSON.stringify(profile, null, 2)}
-            </pre>
-          </details>
-
-          <details>
-            <summary>Raw User Data</summary>
-            <pre style={{ fontSize: '0.8rem', overflow: 'auto' }}>
-              {JSON.stringify(user, null, 2)}
-            </pre>
-          </details>
         </div>
       ) : (
         <div>
           <p>Profile not found. You may need to create a profile first.</p>
-          <details>
-            <summary>Raw User Data</summary>
-            <pre style={{ fontSize: '0.8rem', overflow: 'auto' }}>
-              {JSON.stringify(user, null, 2)}
-            </pre>
-          </details>
         </div>
       )}
     </div>
