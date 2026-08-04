@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/utils/supabase/server';
-import { getSafeRedirectPath } from '@/utils/supabase/redirect';
+import {
+  AUTH_RETURN_TO_COOKIE,
+  getSafeRedirectPath,
+} from '@/utils/supabase/redirect';
 import { getTrustedRedirectOrigin } from '@/utils/supabase/redirectOrigin';
 
 // Force Node.js runtime instead of Edge to avoid DNS resolution issues
@@ -20,7 +23,12 @@ export async function GET(request: Request) {
         console.error('[Auth Callback] Exchange error:', error.message);
       } else {
         const redirectOrigin = getTrustedRedirectOrigin(request);
-        return NextResponse.redirect(`${redirectOrigin}${next}`);
+        const response = NextResponse.redirect(`${redirectOrigin}${next}`);
+        response.cookies.set(AUTH_RETURN_TO_COOKIE, '', {
+          path: '/',
+          maxAge: 0,
+        });
+        return response;
       }
     } catch (err) {
       console.error(
