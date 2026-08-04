@@ -1,0 +1,43 @@
+id: FEAT-220
+title: 'Cache public Supabase reads with ISR and a cookieless read client'
+risk_tier: 2
+mode: feature
+lifecycle_state: active
+created_at: '2026-08-04T22:30:11.543Z'
+updated_at: '2026-08-04T22:30:11.543Z'
+blast_radius:
+  modules:
+    - 'TODO: list one or more modules this spec touches.'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'utils/supabase/readClient.ts'
+    - 'app/articles/page.tsx'
+    - 'app/articles/[slug]/page.tsx'
+    - 'app/work/[slug]/page.tsx'
+    - 'test/utils/readClient.test.ts'
+  out: []
+invariants:
+  - 'TODO: describe one invariant this spec guarantees.'
+acceptance:
+  - id: A1
+    given: 'A public article or case-study page request from an anonymous visitor'
+    when: 'The page is rendered'
+    then: 'It is served from the ISR cache without opening an authenticated cookie-bearing Supabase session'
+  - id: A2
+    given: 'The cookieless read client'
+    when: 'It queries any public table'
+    then: 'It selects only published rows and only public columns, preserving the restrictions added in 36eb7c0a and e21a8077'
+  - id: A3
+    given: 'An author publishes or updates an article via /api/articles or /api/case-studies'
+    when: 'The write succeeds'
+    then: 'The affected public routes are revalidated so the next request serves fresh content'
+  - id: A4
+    given: 'The retired /api/publish endpoint'
+    when: 'Any request hits it after this change'
+    then: 'It still returns 410 Gone and performs no database write'
+non_functional: {}
+contracts:
+  - name: 'public-read-cache'
+    type: behavior
