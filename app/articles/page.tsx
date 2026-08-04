@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { createClient } from '@/utils/supabase/server';
 import { Profile } from '@/types';
+import { PUBLIC_AUTHOR_COLUMNS } from '@/utils/supabase/contentAccess';
 import ArticlesListClient from './ArticlesListClient';
 
 export const metadata: Metadata = {
@@ -52,6 +53,9 @@ async function getData(): Promise<ArticleWithAuthor[]> {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from('articles')
+    // A wildcard author embed would ship the whole profiles row —
+    // account_status, privacy, settings, metrics, spacial_location — to
+    // anonymous visitors via ArticlesListClient. ProfileFlag renders three.
     .select(
       `
     id,
@@ -59,7 +63,7 @@ async function getData(): Promise<ArticleWithAuthor[]> {
     description,
     image,
     slug,
-    author(*),
+    author(${PUBLIC_AUTHOR_COLUMNS.join(', ')}),
     published_at
     `
     )

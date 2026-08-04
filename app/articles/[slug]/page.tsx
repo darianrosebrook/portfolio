@@ -1,15 +1,19 @@
 import { notFound } from 'next/navigation';
 import { createClient } from '@/utils/supabase/server';
 import { generateLDJson } from '@/utils/ldjson';
+import { PUBLIC_ARTICLE_SELECT } from '@/utils/supabase/contentAccess';
+import type { Profile } from '@/types';
 import { processArticleContent } from '@/utils/tiptap/htmlGeneration';
 
 import ArticleDetailClient from './ArticleDetailClient';
 
 async function getData(slug: string) {
   const supabase = await createClient();
+  // Narrowed select, not `*`: this row is spread into ArticleDetailClient
+  // props, so anything selected here reaches an anonymous visitor's browser.
   const { data: article } = await supabase
     .from('articles')
-    .select('*, author(full_name, username, avatar_url)')
+    .select(PUBLIC_ARTICLE_SELECT)
     .eq('slug', slug)
     .eq('status', 'published')
     .single();
@@ -45,6 +49,11 @@ async function getData(slug: string) {
 
   return {
     ...article,
+    // The generated types model the author embed as an array because
+    // articles_author_fkey is not unique, but PostgREST returns a single
+    // object for a to-one embed. ProfileFlag reads full_name, username and
+    // avatar_url — the three columns PUBLIC_ARTICLE_SELECT requests.
+    author: article.author as unknown as Profile,
     html,
     beforeArticle,
     afterArticle,

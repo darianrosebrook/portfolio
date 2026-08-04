@@ -1,5 +1,6 @@
 import { createClient } from '@/utils/supabase/server';
 import { getCaseStudyContent } from '@/utils/caseStudy';
+import { PUBLIC_CASE_STUDY_SELECT } from '@/utils/supabase/contentAccess';
 import CaseStudyPage from '../_components/CaseStudyPage';
 import type { JSONContent } from '@tiptap/react';
 import type { Metadata } from 'next';
@@ -10,9 +11,12 @@ type Params = Promise<{ slug: string }>;
 
 async function getData(slug: string) {
   const supabase = await createClient();
+  // Narrowed select, not `*`: this row is spread into CaseStudyPage props.
+  // The `as {...}` cast below is compile-time only — it does not remove
+  // working* keys from the object that reaches the client.
   const { data: caseStudy } = await supabase
     .from('case_studies')
-    .select('*')
+    .select(PUBLIC_CASE_STUDY_SELECT)
     .eq('slug', slug)
     .eq('status', 'published')
     .single();
