@@ -4,7 +4,7 @@ risk_tier: 2
 mode: feature
 lifecycle_state: active
 created_at: '2026-08-04T22:30:11.543Z'
-updated_at: '2026-08-04T22:30:11.543Z'
+updated_at: '2026-08-04T22:30:58.553Z'
 blast_radius:
   modules:
     - 'TODO: list one or more modules this spec touches.'
@@ -17,7 +17,9 @@ scope:
     - 'app/articles/[slug]/page.tsx'
     - 'app/work/[slug]/page.tsx'
     - 'test/utils/readClient.test.ts'
-  out: []
+  out:
+    - app/api/publish/route.ts
+    - test/api/publish.test.ts
 invariants:
   - 'TODO: describe one invariant this spec guarantees.'
 acceptance:
