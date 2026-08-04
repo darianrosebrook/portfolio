@@ -7,7 +7,9 @@ created_at: '2026-08-04T22:30:11.543Z'
 updated_at: '2026-08-04T22:30:58.553Z'
 blast_radius:
   modules:
-    - 'TODO: list one or more modules this spec touches.'
+    - 'public read path (cookieless Supabase read client)'
+    - 'public content routes (articles list, article detail, case-study detail)'
+    - 'cache revalidation on author writes'
   data_migration: false
 operational_rollback_slo: 5m
 scope:
@@ -21,7 +23,10 @@ scope:
     - app/api/publish/route.ts
     - test/api/publish.test.ts
 invariants:
-  - 'TODO: describe one invariant this spec guarantees.'
+  - 'Caching never widens data exposure: the cookieless read client can only reach published rows and public columns, so a cache hit reveals nothing an uncached anonymous request would not.'
+  - 'No authenticated, cookie-bearing Supabase session is opened while rendering a cacheable public page.'
+  - 'The retired /api/publish endpoint keeps returning 410 Gone and performs no database write.'
+  - 'A successful author write revalidates the affected public routes, so cached content is never stale past the write.'
 acceptance:
   - id: A1
     given: 'A public article or case-study page request from an anonymous visitor'
