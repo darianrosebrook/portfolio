@@ -1,0 +1,44 @@
+id: FIX-002
+title: 'Mount global providers in root layout, mark contexts as client modules, dev-gate PerformanceDashboard'
+risk_tier: 2
+mode: fix
+lifecycle_state: active
+created_at: '2026-08-04T22:24:21.528Z'
+updated_at: '2026-08-04T22:24:21.528Z'
+blast_radius:
+  modules:
+    - 'TODO: list one or more modules this spec touches.'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'app/layout.tsx'
+    - 'app/template.tsx'
+    - 'context/ReducedMotionContext.tsx'
+    - 'context/InteractionContext.tsx'
+    - 'test/app/layout.test.tsx'
+    - 'test/context/clientBoundary.test.ts'
+  out: []
+invariants:
+  - 'TODO: describe one invariant this spec guarantees.'
+acceptance:
+  - id: A1
+    given: 'The root layout (a server component) imports Brand/ReducedMotion/Interaction/User providers from @/context'
+    when: 'The application is type-checked and built'
+    then: 'Compilation succeeds with no ''createContext is not supported in Server Components'' error'
+  - id: A2
+    given: 'A user navigating between two client-side routes'
+    when: 'The navigation completes'
+    then: 'Provider state persists and UserProvider does not re-run auth.getUser() for the new route'
+  - id: A3
+    given: 'A production build (NODE_ENV=production)'
+    when: 'Any page renders'
+    then: 'PerformanceDashboard is neither rendered nor executed'
+  - id: A4
+    given: 'Every context module under context/ that calls createContext or a React hook'
+    when: 'The module source is inspected'
+    then: 'It carries a ''use client'' directive as its first statement'
+non_functional: {}
+contracts:
+  - name: 'app-shell'
+    type: behavior
