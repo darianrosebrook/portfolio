@@ -7,7 +7,8 @@ created_at: '2026-08-05T01:30:40.553Z'
 updated_at: '2026-08-05T01:30:40.553Z'
 blast_radius:
   modules:
-    - 'TODO: list one or more modules this spec touches.'
+    - 'shared animated primitives (AnimatedText, AnimatedSection, AnimatedCard)'
+    - 'page components with their own reveal guards (glossaryCards, CaseStudyPage)'
   data_migration: false
 operational_rollback_slo: 5m
 scope:
@@ -20,7 +21,10 @@ scope:
     - 'test/components/animatedPrimitives.foUC.test.tsx'
   out: []
 invariants:
-  - 'TODO: describe one invariant this spec guarantees.'
+  - 'Content is readable without JavaScript: no element is left at opacity 0 in server markup, because the hidden starting state is applied only by a client-side pre-paint effect.'
+  - 'Hiding happens before first paint, so enabling the animation never causes a visible flash of unstyled content.'
+  - 'Reduced-motion preference is respected: content is shown immediately with no animation.'
+  - 'The public props of each primitive are unchanged — this is an effect-timing fix, not an API change.'
 acceptance:
   - id: A1
     given: 'A page using AnimatedText, AnimatedSection or AnimatedCard rendered without JavaScript'
