@@ -2,10 +2,11 @@ id: FEAT-221
 title: 'Extract useScrollReveal hook and remove per-component FOUC opacity guards'
 risk_tier: 3
 mode: refactor
-lifecycle_state: active
-worktree: feat-221-scroll-reveal
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Auto-closed by caws worktree merge feat-221-scroll-reveal at cd48dcfe077653d48458cdaecf0384e9c201fa42'
 created_at: '2026-08-04T22:30:11.936Z'
-updated_at: '2026-08-04T22:30:11.936Z'
+updated_at: '2026-08-05T01:09:15.333Z'
 blast_radius:
   modules:
     - 'animation utilities (new useScrollReveal hook)'
