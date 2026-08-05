@@ -4,7 +4,7 @@ risk_tier: 2
 mode: feature
 lifecycle_state: active
 created_at: '2026-08-04T22:30:11.543Z'
-updated_at: '2026-08-04T22:30:58.553Z'
+updated_at: '2026-08-05T21:06:02.847Z'
 blast_radius:
   modules:
     - 'public read path (cookieless Supabase read client)'
@@ -19,6 +19,13 @@ scope:
     - 'app/articles/[slug]/page.tsx'
     - 'app/work/[slug]/page.tsx'
     - 'test/utils/readClient.test.ts'
+    - app/api/articles/route.ts
+    - app/api/articles/[slug]/route.ts
+    - app/api/case-studies/route.ts
+    - app/api/case-studies/[slug]/route.ts
+    - utils/supabase/revalidateContent.ts
+    - test/api/contentRevalidation.test.ts
+    - test/pages/publicReadPaths.test.ts
   out:
     - app/api/publish/route.ts
     - test/api/publish.test.ts
