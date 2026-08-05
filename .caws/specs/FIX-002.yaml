@@ -3,6 +3,7 @@ title: 'Mount global providers in root layout, mark contexts as client modules, 
 risk_tier: 2
 mode: fix
 lifecycle_state: active
+worktree: fix-002-app-shell
 created_at: '2026-08-04T22:24:21.528Z'
 updated_at: '2026-08-04T22:24:21.528Z'
 blast_radius:
