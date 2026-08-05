@@ -2,9 +2,11 @@ id: FIX-003
 title: 'Move reveal hide to pre-paint and drop inline FOUC guards from shared animated primitives'
 risk_tier: 2
 mode: fix
-lifecycle_state: active
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Work merged at b05f83cd. Reopened briefly only to re-establish the worktree binding so the orphaned registry entry could be destroyed through the CLI.'
 created_at: '2026-08-05T01:30:40.553Z'
-updated_at: '2026-08-05T18:59:00.543Z'
+updated_at: '2026-08-05T18:59:01.772Z'
 blast_radius:
   modules:
     - 'shared animated primitives (AnimatedText, AnimatedSection, AnimatedCard)'
