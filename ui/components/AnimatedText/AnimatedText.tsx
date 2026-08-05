@@ -1,8 +1,9 @@
 'use client';
 
 import * as React from 'react';
-import { useRef, useEffect, useImperativeHandle } from 'react';
+import { useRef, useImperativeHandle } from 'react';
 import { gsap } from 'gsap';
+import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useReducedMotion } from '@/context/ReducedMotionContext';
 import {
@@ -74,7 +75,10 @@ export const AnimatedText = React.forwardRef<HTMLElement, AnimatedTextProps>(
     // Split text into words
     const words = text.split(' ').filter((word) => word.length > 0);
 
-    useEffect(() => {
+    // useGSAP runs in a layout effect, i.e. before the browser paints. That is
+    // what lets the words start hidden without an inline opacity in the server
+    // markup — which would otherwise keep them invisible for no-JS visitors.
+    useGSAP(() => {
       const container = containerRef.current;
       if (!container) return;
 
@@ -159,17 +163,20 @@ export const AnimatedText = React.forwardRef<HTMLElement, AnimatedTextProps>(
       }, containerRef);
 
       return () => ctx.revert();
-    }, [
-      text,
-      variant,
-      duration,
-      stagger,
-      delay,
-      triggerOnScroll,
-      scrollStart,
-      prefersReducedMotion,
-      onAnimationComplete,
-    ]);
+    }, {
+      scope: containerRef,
+      dependencies: [
+        text,
+        variant,
+        duration,
+        stagger,
+        delay,
+        triggerOnScroll,
+        scrollStart,
+        prefersReducedMotion,
+        onAnimationComplete,
+      ],
+    });
 
     // Forward containerRef to the parent ref without a render-time callback.
     useImperativeHandle(ref, () => containerRef.current as HTMLElement, []);
@@ -182,14 +189,7 @@ export const AnimatedText = React.forwardRef<HTMLElement, AnimatedTextProps>(
         className={['animatedText', className].filter(Boolean).join(' ')}
       >
         {words.map((word, index) => (
-          <span
-            key={`${word}-${index}`}
-            className="word"
-            style={{
-              // Set initial state for SSR/hydration
-              opacity: prefersReducedMotion ? 1 : 0,
-            }}
-          >
+          <span key={`${word}-${index}`} className="word">
             {word}
             {index < words.length - 1 && '\u00A0'}
           </span>

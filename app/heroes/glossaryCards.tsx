@@ -2,6 +2,7 @@
 
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import styles from './glossaryCards.module.css';
 import { useInteraction } from '@/context';
@@ -61,8 +62,10 @@ export default function GlossaryCards() {
   const dragStartMouse = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
   const dragStartTransform = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
 
-  // 1) Entrance animation + compute each card's rest transform and center
-  useEffect(() => {
+  // 1) Entrance animation + compute each card's rest transform and center.
+  // useGSAP is a layout effect, so cards are hidden before first paint and no
+  // inline opacity is needed in the server markup.
+  useGSAP(() => {
     if (!containerRef.current || prefersReducedMotion) return;
 
     const ctx = gsap.context(() => {
@@ -128,7 +131,7 @@ export default function GlossaryCards() {
     }, containerRef);
 
     return () => ctx.revert();
-  }, [prefersReducedMotion]);
+  }, { dependencies: [prefersReducedMotion] });
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -357,7 +360,6 @@ export default function GlossaryCards() {
           }}
           className={styles.card}
           style={{
-            opacity: prefersReducedMotion ? 1 : 0,
             cursor: isDraggingState && draggedCard === i ? 'grabbing' : 'grab',
             zIndex: isDraggingState && draggedCard === i ? 1000 : 'auto',
           }}

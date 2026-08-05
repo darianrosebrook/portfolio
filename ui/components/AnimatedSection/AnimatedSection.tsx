@@ -3,13 +3,13 @@
 import * as React from 'react';
 import {
   useRef,
-  useEffect,
   useImperativeHandle,
   Children,
   cloneElement,
   isValidElement,
 } from 'react';
 import { gsap } from 'gsap';
+import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useReducedMotion } from '@/context/ReducedMotionContext';
 import {
@@ -81,7 +81,10 @@ export const AnimatedSection = React.forwardRef<
     const containerRef = useRef<HTMLElement>(null);
     const { prefersReducedMotion } = useReducedMotion();
 
-    useEffect(() => {
+    // useGSAP runs in a layout effect, before the browser paints. That is what
+    // lets children start hidden without an inline opacity in the server markup,
+    // which would otherwise keep them invisible for no-JS visitors.
+    useGSAP(() => {
       const container = containerRef.current;
       if (!container) return;
 
@@ -191,16 +194,19 @@ export const AnimatedSection = React.forwardRef<
       }, containerRef);
 
       return () => ctx.revert();
-    }, [
-      variant,
-      duration,
-      stagger,
-      delay,
-      triggerOnScroll,
-      scrollStart,
-      prefersReducedMotion,
-      onAnimationComplete,
-    ]);
+    }, {
+      scope: containerRef,
+      dependencies: [
+        variant,
+        duration,
+        stagger,
+        delay,
+        triggerOnScroll,
+        scrollStart,
+        prefersReducedMotion,
+        onAnimationComplete,
+      ],
+    });
 
     // Forward containerRef to the parent ref without a render-time callback.
     useImperativeHandle(ref, () => containerRef.current as HTMLElement, []);
@@ -223,11 +229,7 @@ export const AnimatedSection = React.forwardRef<
                   className: [childProps.className, 'animatedChild']
                     .filter(Boolean)
                     .join(' '),
-                  style: {
-                    ...(childProps.style as React.CSSProperties | undefined),
-                    // Set initial state for SSR/hydration
-                    opacity: prefersReducedMotion ? 1 : 0,
-                  },
+                  style: childProps.style as React.CSSProperties | undefined,
                 }
               );
             }
@@ -241,11 +243,6 @@ export const AnimatedSection = React.forwardRef<
         ref={containerRef}
         data-ds-component="AnimatedSection"
         className={['animatedSection', className].filter(Boolean).join(' ')}
-        style={{
-          // Set initial state for SSR/hydration (non-stagger variants)
-          opacity:
-            variant !== 'stagger-children' && !prefersReducedMotion ? 0 : 1,
-        }}
       >
         {processedChildren}
       </ElementType>
