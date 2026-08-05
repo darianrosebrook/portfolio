@@ -1,9 +1,5 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useReducedMotion } from '@/context/ReducedMotionContext';
 import { AnimatedText } from '@/ui/components/AnimatedText';
 import { AnimatedSection } from '@/ui/components/AnimatedSection';
 import Avatar from '@/ui/components/Avatar';
@@ -14,83 +10,35 @@ import Image from 'next/image';
 import BlueprintsWrapper from './BlueprintsWrapper';
 import styles from './page.module.css';
 import { EASING_PRESETS } from '@/utils/animation';
-
-// Register ScrollTrigger plugin
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
+import { useScrollReveal } from '@/utils/animation/useScrollReveal';
 
 interface HomeClientProps {
   ldJson: Record<string, unknown>;
 }
 
 export default function HomeClient({ ldJson }: HomeClientProps) {
-  const { prefersReducedMotion } = useReducedMotion();
-  const heroRef = useRef<HTMLDivElement>(null);
-  const heroImageRef = useRef<HTMLDivElement>(null);
-  const profileImageRef = useRef<HTMLDivElement>(null);
-  const secondLineRef = useRef<HTMLSpanElement>(null);
-
-  useEffect(() => {
-    if (prefersReducedMotion) return;
-
-    const ctx = gsap.context(() => {
-      // Animate hero section elements
-      if (heroRef.current) {
-        const statusBadge = heroRef.current.querySelector('.gooey');
-        if (statusBadge) {
-          gsap.fromTo(
-            statusBadge,
-            { opacity: 0, y: -20 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.6,
-              ease: EASING_PRESETS.smooth,
-              delay: 0.2,
-            }
-          );
-        }
-      }
-
-      // Animate second line of hero heading (blur-in without word wrapping)
-      if (secondLineRef.current) {
-        gsap.fromTo(
-          secondLineRef.current,
-          { opacity: 0, y: 20, filter: 'blur(4px)' },
-          {
-            opacity: 1,
-            y: 0,
-            filter: 'blur(0px)',
-            duration: 0.8,
-            ease: EASING_PRESETS.editorial,
-            delay: 0.5,
-          }
-        );
-      }
-
-      // Animate profile image with scale reveal
-      if (profileImageRef.current) {
-        gsap.fromTo(
-          profileImageRef.current,
-          { opacity: 0, scale: 1.02 },
-          {
-            opacity: 1,
-            scale: 1,
-            duration: 0.8,
-            ease: EASING_PRESETS.smooth,
-            scrollTrigger: {
-              trigger: profileImageRef.current,
-              start: 'top 80%',
-              once: true,
-            },
-          }
-        );
-      }
-    });
-
-    return () => ctx.revert();
-  }, [prefersReducedMotion]);
+  // Each hero element reveals independently. Resting state is visible, so the
+  // hero renders without JS; the hook applies the hidden start + reveal only
+  // when motion is allowed.
+  const badgeRef = useScrollReveal<HTMLDivElement>({
+    variant: 'fade-up',
+    y: -20,
+    delay: 0.2,
+    duration: 0.6,
+    ease: EASING_PRESETS.smooth,
+  });
+  const secondLineRef = useScrollReveal<HTMLSpanElement>({
+    variant: 'blur-in',
+    delay: 0.5,
+    duration: 0.8,
+  });
+  const profileImageRef = useScrollReveal<HTMLDivElement>({
+    variant: 'scale',
+    triggerOnScroll: true,
+    scrollStart: 'top 80%',
+    duration: 0.8,
+    ease: EASING_PRESETS.smooth,
+  });
 
   return (
     <>
@@ -99,15 +47,12 @@ export default function HomeClient({ ldJson }: HomeClientProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }}
       />
       <section className={styles.hero}>
-        <div ref={heroImageRef} className={styles.heroImage}>
+        <div className={styles.heroImage}>
           <BlueprintsWrapper />
           <div className={styles.cover}></div>
         </div>
-        <div ref={heroRef} className={styles.headingHero}>
-          <div
-            className="gooey"
-            style={{ opacity: prefersReducedMotion ? 1 : 0 }}
-          >
+        <div className={styles.headingHero}>
+          <div ref={badgeRef} className="gooey">
             <Status status="error">Building AI-ready design systems</Status>
           </div>
           <h1 className="gooey">
@@ -121,11 +66,7 @@ export default function HomeClient({ ldJson }: HomeClientProps) {
               />
             </span>
             <br />
-            <span
-              ref={secondLineRef}
-              className={styles.secondLine}
-              style={{ opacity: prefersReducedMotion ? 1 : 0 }}
-            >
+            <span ref={secondLineRef} className={styles.secondLine}>
               Connecting Design → Code through Better Design Systems &amp;
               Tooling
             </span>
@@ -142,10 +83,7 @@ export default function HomeClient({ ldJson }: HomeClientProps) {
           variant="fade-up"
           triggerOnScroll={true}
         >
-          <div
-            ref={profileImageRef}
-            style={{ opacity: prefersReducedMotion ? 1 : 0 }}
-          >
+          <div ref={profileImageRef}>
             <Image
               src="/darianrosebrook-optimized.webp"
               alt="Picture of Darian Rosebrook cropped close from the chest and shoulders, wearing a sweater. They are looking off to their right, a slight smile on their face. Curly dark hair about 3 inches long. They seem tired."
