@@ -2,10 +2,11 @@ id: FEAT-220
 title: 'Cache public Supabase reads with ISR and a cookieless read client'
 risk_tier: 2
 mode: feature
-lifecycle_state: active
-worktree: feat-220-isr-caching
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Auto-closed by caws worktree merge feat-220-isr-caching at 13e23901e98a225ea1b42df74f98cc5ba55e4bad'
 created_at: '2026-08-04T22:30:11.543Z'
-updated_at: '2026-08-05T21:06:02.847Z'
+updated_at: '2026-08-05T23:48:20.169Z'
 blast_radius:
   modules:
     - 'public read path (cookieless Supabase read client)'
