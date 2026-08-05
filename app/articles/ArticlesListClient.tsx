@@ -1,9 +1,5 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useReducedMotion } from '@/context/ReducedMotionContext';
 import {
   AnimatedCard,
   AnimatedCardImage,
@@ -14,12 +10,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Styles from './styles.module.css';
 import { Profile } from '@/types';
-import { EDITORIAL_STAGGER, EASING_PRESETS } from '@/utils/animation';
-
-// Register ScrollTrigger plugin
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
+import { EDITORIAL_STAGGER } from '@/utils/animation';
+import { useScrollReveal } from '@/utils/animation/useScrollReveal';
 
 type ArticleWithAuthor = {
   id: number;
@@ -92,35 +84,15 @@ function ArticleCard({
 export default function ArticlesListClient({
   articles,
 }: ArticlesListClientProps) {
-  const { prefersReducedMotion } = useReducedMotion();
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    if (prefersReducedMotion) return;
-
-    const ctx = gsap.context(() => {
-      // Page-level fade in
-      if (sectionRef.current) {
-        gsap.fromTo(
-          sectionRef.current,
-          { opacity: 0 },
-          {
-            opacity: 1,
-            duration: 0.5,
-            ease: EASING_PRESETS.smooth,
-          }
-        );
-      }
-    });
-
-    return () => ctx.revert();
-  }, [prefersReducedMotion]);
+  // Page-level fade in. Resting state is visible, so the list renders without
+  // JS; the hook applies the hidden start state and reveal only when motion is
+  // allowed.
+  const sectionRef = useScrollReveal<HTMLElement>({ variant: 'fade' });
 
   return (
     <section
       ref={sectionRef}
       className={`grid content ${Styles.articleGrid}`}
-      style={{ opacity: prefersReducedMotion ? 1 : 0 }}
     >
       {articles.length > 0 &&
         articles.map((article, index) => (
