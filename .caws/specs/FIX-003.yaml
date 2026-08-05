@@ -1,0 +1,44 @@
+id: FIX-003
+title: 'Move reveal hide to pre-paint and drop inline FOUC guards from shared animated primitives'
+risk_tier: 2
+mode: fix
+lifecycle_state: active
+created_at: '2026-08-05T01:30:40.553Z'
+updated_at: '2026-08-05T01:30:40.553Z'
+blast_radius:
+  modules:
+    - 'TODO: list one or more modules this spec touches.'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'ui/components/AnimatedText/AnimatedText.tsx'
+    - 'ui/components/AnimatedSection/AnimatedSection.tsx'
+    - 'ui/components/AnimatedCard/AnimatedCard.tsx'
+    - 'app/heroes/glossaryCards.tsx'
+    - 'app/work/_components/CaseStudyPage.tsx'
+    - 'test/components/animatedPrimitives.foUC.test.tsx'
+  out: []
+invariants:
+  - 'TODO: describe one invariant this spec guarantees.'
+acceptance:
+  - id: A1
+    given: 'A page using AnimatedText, AnimatedSection or AnimatedCard rendered without JavaScript'
+    when: 'The server markup is inspected'
+    then: 'No element carries an inline opacity:0, so all content is readable'
+  - id: A2
+    given: 'JavaScript enabled and motion allowed'
+    when: 'A page using these primitives paints'
+    then: 'The hidden starting state is applied before first paint, so content does not flash in before animating'
+  - id: A3
+    given: 'A user with prefers-reduced-motion set'
+    when: 'A page using these primitives loads'
+    then: 'Content is visible immediately with no animation'
+  - id: A4
+    given: 'The existing public props of each primitive (variant, stagger, delay, triggerOnScroll, scrollStart, onAnimationComplete)'
+    when: 'This change ships'
+    then: 'Each continues to behave as before — the change is effect timing plus removal of the inline guard, not an API change'
+non_functional: {}
+contracts:
+  - name: 'animated-primitives'
+    type: behavior
