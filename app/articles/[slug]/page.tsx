@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { createClient } from '@/utils/supabase/server';
+import { createReadClient } from '@/utils/supabase/readClient';
 import { generateLDJson } from '@/utils/ldjson';
 import { PUBLIC_ARTICLE_SELECT } from '@/utils/supabase/contentAccess';
 import type { Profile } from '@/types';
@@ -7,8 +7,49 @@ import { processArticleContent } from '@/utils/tiptap/htmlGeneration';
 
 import ArticleDetailClient from './ArticleDetailClient';
 
+/**
+ * Cached per slug and refreshed hourly. Author writes invalidate every instance
+ * of this route, not just the edited slug — the prev/next links below are derived
+ * from neighbouring published_at values, so publishing one article changes the
+ * footer links on other already-cached articles.
+ *
+ * Only holds while the queries use the cookieless read client; any cookies() read
+ * in this route would force dynamic rendering and silently disable caching.
+ */
+export const revalidate = 3600;
+
+/**
+ * Prerender the published slugs at build time.
+ *
+ * `revalidate` alone is not enough for a dynamic segment: without this the route
+ * stays "server-rendered on demand" and every request re-queries Supabase, so the
+ * caching above would have no effect. With it, known slugs are built as static
+ * HTML and refreshed on the revalidate window.
+ *
+ * Slugs added after the build are still served — `dynamicParams` defaults to true,
+ * so they render on first request and are cached from then on.
+ */
+export async function generateStaticParams() {
+  try {
+    const supabase = createReadClient();
+    const { data } = await supabase
+      .from('articles')
+      .select('slug')
+      .eq('status', 'published');
+
+    return (data ?? [])
+      .map(({ slug }) => slug)
+      .filter((slug): slug is string => typeof slug === 'string' && slug !== '')
+      .map((slug) => ({ slug }));
+  } catch {
+    // A build without database access should not fail; fall back to rendering
+    // every slug on demand.
+    return [];
+  }
+}
+
 async function getData(slug: string) {
-  const supabase = await createClient();
+  const supabase = createReadClient();
   // Narrowed select, not `*`: this row is spread into ArticleDetailClient
   // props, so anything selected here reaches an anonymous visitor's browser.
   const { data: article } = await supabase

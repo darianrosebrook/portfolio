@@ -1,8 +1,19 @@
 import type { Metadata } from 'next';
-import { createClient } from '@/utils/supabase/server';
+import { createReadClient } from '@/utils/supabase/readClient';
 import { Profile } from '@/types';
 import { PUBLIC_AUTHOR_COLUMNS } from '@/utils/supabase/contentAccess';
 import ArticlesListClient from './ArticlesListClient';
+
+/**
+ * Published articles change only when an author writes, so this list is cached
+ * and refreshed hourly. Writes call revalidatePath('/articles') for immediate
+ * updates (see utils/supabase/revalidateContent.ts); the window is the safety
+ * net if an invalidation is ever missed.
+ *
+ * This only holds while the query uses the cookieless read client — a single
+ * cookies() read anywhere in the route would silently force dynamic rendering.
+ */
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: 'Articles | Darian Rosebrook',
@@ -50,7 +61,7 @@ type ArticleWithAuthor = {
 };
 
 async function getData(): Promise<ArticleWithAuthor[]> {
-  const supabase = await createClient();
+  const supabase = createReadClient();
   const { data, error } = await supabase
     .from('articles')
     // A wildcard author embed would ship the whole profiles row —

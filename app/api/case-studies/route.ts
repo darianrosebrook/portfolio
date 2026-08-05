@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/utils/supabase/server';
 import { createCaseStudySchema } from '@/utils/schemas/case-study.schema';
+import { revalidatePublicCaseStudyPaths } from '@/utils/supabase/revalidateContent';
 
 export async function POST(request: Request) {
   const supabase = await createClient();
@@ -52,6 +53,9 @@ export async function POST(request: Request) {
       headers: { 'Content-Type': 'application/json' },
     });
   }
+
+  // A create can publish immediately, so invalidate rather than infer visibility.
+  revalidatePublicCaseStudyPaths();
 
   return new NextResponse(JSON.stringify(data), {
     status: 201,
