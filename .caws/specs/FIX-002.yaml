@@ -2,10 +2,11 @@ id: FIX-002
 title: 'Mount global providers in root layout, mark contexts as client modules, dev-gate PerformanceDashboard'
 risk_tier: 2
 mode: fix
-lifecycle_state: active
-worktree: fix-002-app-shell
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Auto-closed by caws worktree merge fix-002-app-shell at 55f2bab51770d1b81ebc6b7d665bb8c2cf85db06'
 created_at: '2026-08-04T22:24:21.528Z'
-updated_at: '2026-08-04T22:24:21.528Z'
+updated_at: '2026-08-05T00:51:25.110Z'
 blast_radius:
   modules:
     - 'app shell (root layout + per-navigation template)'
