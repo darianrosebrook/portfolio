@@ -1,7 +1,8 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import { gsap } from 'gsap';
+import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useReducedMotion } from '@/context/ReducedMotionContext';
 import { AnimatedText } from '@/ui/components/AnimatedText';
@@ -35,7 +36,9 @@ export default function CaseStudyPage({ data }: CaseStudyPageProps) {
   const { prefersReducedMotion } = useReducedMotion();
   const headerRef = useRef<HTMLElement>(null);
 
-  useEffect(() => {
+  // Pre-paint (layout) effect: hides before the browser paints, so no inline
+  // opacity is needed in the server markup and no-JS visitors see the content.
+  useGSAP(() => {
     if (prefersReducedMotion) return;
 
     const ctx = gsap.context(() => {
@@ -59,7 +62,7 @@ export default function CaseStudyPage({ data }: CaseStudyPageProps) {
     });
 
     return () => ctx.revert();
-  }, [prefersReducedMotion]);
+  }, { dependencies: [prefersReducedMotion] });
 
   return (
     <div className="case-study-page">
@@ -73,10 +76,7 @@ export default function CaseStudyPage({ data }: CaseStudyPageProps) {
           />
         )}
         {data.description && (
-          <p
-            className="description"
-            style={{ opacity: prefersReducedMotion ? 1 : 0 }}
-          >
+          <p className="description">
             {data.description}
           </p>
         )}
