@@ -3,6 +3,7 @@ title: 'Move reveal hide to pre-paint and drop inline FOUC guards from shared an
 risk_tier: 2
 mode: fix
 lifecycle_state: active
+worktree: fix-003-fouc
 created_at: '2026-08-05T01:30:40.553Z'
 updated_at: '2026-08-05T01:30:40.553Z'
 blast_radius:
