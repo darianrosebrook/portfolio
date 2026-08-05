@@ -5,6 +5,7 @@ import {
   updateArticleSchema,
   patchArticleDraftSchema,
 } from '@/utils/schemas/article.schema';
+import { revalidatePublicArticlePaths } from '@/utils/supabase/revalidateContent';
 
 export async function GET(
   _request: Request,
@@ -234,13 +235,26 @@ export async function PUT(
     );
   }
 
+  // PUT can move an article in either direction across the publish boundary.
+  // Unpublishing matters most: without this the article stays in the public cache
+  // and keeps being served for up to the revalidate window after being withdrawn.
+  revalidatePublicArticlePaths();
+
   return new NextResponse(JSON.stringify(data), {
     status: 200,
     headers: { 'Content-Type': 'application/json' },
   });
 }
 
-// Save working draft fields without overwriting published content
+/**
+ * Save working draft fields without overwriting published content.
+ *
+ * Deliberately does NOT revalidate the public cache. `patchArticleDraftSchema`
+ * admits only working* fields and `is_dirty`, so nothing a public page renders can
+ * change here — and this is the autosave path, so invalidating would thrash the
+ * cache on every keystroke batch. If this schema ever grows a field that appears
+ * on a public page, add revalidatePublicArticlePaths() below.
+ */
 export async function PATCH(
   request: Request,
   { params }: { params: Promise<{ slug: string }> }
@@ -344,6 +358,9 @@ export async function DELETE(
       }
     );
   }
+
+  // A deleted article must disappear from the cached list and detail routes.
+  revalidatePublicArticlePaths();
 
   return new NextResponse(null, {
     status: 204,
