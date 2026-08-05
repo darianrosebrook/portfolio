@@ -164,14 +164,43 @@ hash-chained audit record.
 
 ### Quality Gates
 
-Quality requirements are tiered:
+`caws gates run --spec <id>` evaluates exactly five gates. They are declared in
+`.caws/policy.yaml` and are the complete set the CLI knows about — its internal
+`KNOWN_GATE_IDS` tuple contains only these, so a gate absent from the list cannot
+be enabled by configuration:
 
-| Gate | T1 (Critical) | T2 (Standard) | T3 (Low Risk) |
-|------|---------------|----------------|----------------|
-| Test coverage | 90%+ | 80%+ | 70%+ |
-| Mutation score | 70%+ | 50%+ | 30%+ |
-| Contracts | Required | Required | Optional |
-| Manual review | Required | Optional | Optional |
+| Gate | Mode | What it enforces |
+|------|------|------------------|
+| `budget_limit` | block | `max_files` / `max_loc` for the spec's `risk_tier` |
+| `spec_completeness` | block | required spec fields are present |
+| `scope_boundary` | block | edits stay within `scope.in`, never `scope.out` |
+| `god_object` | warn | source files over 1750 / 2000 lines |
+| `todo_detection` | warn | `TODO` / `FIXME` / `HACK` / `XXX` markers |
+
+Only the change budget varies by tier:
+
+| Risk tier | max_files | max_loc |
+|-----------|-----------|---------|
+| 1 (critical) | 25 | 1000 |
+| 2 (standard) | 50 | 2000 |
+| 3 (low risk) | 100 | 5000 |
+
+**Coverage and mutation score are not gate-enforced.** The CLI ships no evaluator
+for either, so `Overall: OK` from `caws gates run` says nothing about them. Treat
+these as targets you verify yourself, not gates that will stop you:
+
+- **Coverage** — measure with `npm run test:coverage`. No thresholds are configured
+  in `vitest.config.mjs`, so the command reports and never fails. Repo-wide coverage
+  was **19.91% statements / 74.22% branch** when last measured (2026-08-05); judge a
+  change on the coverage of the files it touches, not the aggregate, which is
+  dominated by large untested utility trees.
+- **Mutation score** — no runner is installed (no Stryker). Not measurable today.
+  Kill mutants by hand when hardening safety-critical logic, and say so explicitly
+  rather than implying a score.
+
+Contracts are enforced only at spec creation: `caws specs create` requires at least
+one `--contract` for tier 1/2, and none for tier 3 or `--mode chore`. Nothing
+re-checks contracts afterwards. Manual review is a team convention, not a gate.
 
 ### Key Rules
 
