@@ -90,10 +90,7 @@ export default function ArticlesListClient({
   const sectionRef = useScrollReveal<HTMLElement>({ variant: 'fade' });
 
   return (
-    <section
-      ref={sectionRef}
-      className={`grid content ${Styles.articleGrid}`}
-    >
+    <section ref={sectionRef} className={`grid content ${Styles.articleGrid}`}>
       {articles.length > 0 &&
         articles.map((article, index) => (
           <ArticleCard key={article.id} data={article} index={index} />

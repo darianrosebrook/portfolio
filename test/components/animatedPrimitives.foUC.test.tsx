@@ -33,17 +33,19 @@ beforeEach(() => {
 /** Matches `opacity:0` / `opacity: 0` but not `opacity:0.5`. */
 const HIDDEN = /opacity\s*:\s*0(?!\.\d)/;
 
+// Each element is rendered on its own, never as a sibling list, but the array
+// literal still trips react/jsx-key — so give each a stable key.
 const cases: Array<[string, React.ReactElement]> = [
-  ['AnimatedText', <AnimatedText text="readable headline" />],
+  ['AnimatedText', <AnimatedText key="text" text="readable headline" />],
   [
     'AnimatedSection',
-    <AnimatedSection>
+    <AnimatedSection key="section">
       <p>readable section body</p>
     </AnimatedSection>,
   ],
   [
     'AnimatedCard',
-    <AnimatedCard>
+    <AnimatedCard key="card">
       <p>readable card body</p>
     </AnimatedCard>,
   ],
@@ -84,9 +86,7 @@ describe('animated primitives: no-JS readability', () => {
     // animation would just not happen. Rendering with effects active must still
     // produce the hidden start state, only now from gsap rather than from JSX.
     const { container } = render(<AnimatedText text="client headline" />);
-    const words = Array.from(
-      container.querySelectorAll<HTMLElement>('.word')
-    );
+    const words = Array.from(container.querySelectorAll<HTMLElement>('.word'));
 
     expect(words.length).toBeGreaterThan(0);
     expect(

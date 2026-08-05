@@ -85,9 +85,7 @@ export function useScrollReveal<T extends HTMLElement = HTMLDivElement>(
       if (!container) return;
 
       const targets: Element[] =
-        target === 'children'
-          ? Array.from(container.children)
-          : [container];
+        target === 'children' ? Array.from(container.children) : [container];
       if (targets.length === 0) return;
 
       // Reduced motion: leave the resting (visible) state untouched.

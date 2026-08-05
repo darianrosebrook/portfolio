@@ -65,73 +65,76 @@ export default function GlossaryCards() {
   // 1) Entrance animation + compute each card's rest transform and center.
   // useGSAP is a layout effect, so cards are hidden before first paint and no
   // inline opacity is needed in the server markup.
-  useGSAP(() => {
-    if (!containerRef.current || prefersReducedMotion) return;
+  useGSAP(
+    () => {
+      if (!containerRef.current || prefersReducedMotion) return;
 
-    const ctx = gsap.context(() => {
-      const {
-        width: cw,
-        height: ch,
-        left: cLeft,
-        top: cTop,
-      } = containerRef.current!.getBoundingClientRect();
+      const ctx = gsap.context(() => {
+        const {
+          width: cw,
+          height: ch,
+          left: cLeft,
+          top: cTop,
+        } = containerRef.current!.getBoundingClientRect();
 
-      cardsRef.current.forEach((card, i) => {
-        if (!card) return;
+        cardsRef.current.forEach((card, i) => {
+          if (!card) return;
 
-        // random start
-        const xStart = gsap.utils.random(-cw / 2, cw / 2);
-        const yStart = gsap.utils.random(-ch / 2, ch / 2);
-        const rotStart = gsap.utils.random(-45, 45);
+          // random start
+          const xStart = gsap.utils.random(-cw / 2, cw / 2);
+          const yStart = gsap.utils.random(-ch / 2, ch / 2);
+          const rotStart = gsap.utils.random(-45, 45);
 
-        // random rest
-        const xEnd = gsap.utils.random(-cw / 2, cw / 2, 12);
-        const yEnd = gsap.utils.random(-ch / 2, ch / 3, 24);
-        const rotEnd = gsap.utils.random(-10, 10);
+          // random rest
+          const xEnd = gsap.utils.random(-cw / 2, cw / 2, 12);
+          const yEnd = gsap.utils.random(-ch / 2, ch / 3, 24);
+          const rotEnd = gsap.utils.random(-10, 10);
 
-        // Set initial transform
-        gsap.set(card, { x: xEnd, y: yEnd, rotation: rotEnd, opacity: 1 });
-        // Compute center based on rest position
-        const cardRect = card.getBoundingClientRect();
-        const centerX = (cardRect.left + cardRect.right) / 2 - cLeft;
-        const centerY = (cardRect.top + cardRect.bottom) / 2 - cTop;
-        transformsRef.current[i] = { xEnd, yEnd, rotEnd, centerX, centerY };
+          // Set initial transform
+          gsap.set(card, { x: xEnd, y: yEnd, rotation: rotEnd, opacity: 1 });
+          // Compute center based on rest position
+          const cardRect = card.getBoundingClientRect();
+          const centerX = (cardRect.left + cardRect.right) / 2 - cLeft;
+          const centerY = (cardRect.top + cardRect.bottom) / 2 - cTop;
+          transformsRef.current[i] = { xEnd, yEnd, rotEnd, centerX, centerY };
 
-        gsap.fromTo(
-          card,
-          { x: xStart, y: yStart, rotation: rotStart, opacity: 0 },
-          {
-            x: xEnd,
-            y: yEnd,
-            rotation: rotEnd,
-            opacity: 1,
-            ease: 'power4.out',
-            duration: 2,
-            stagger: 0.08,
-            scrollTrigger: {
-              trigger: containerRef.current,
-              start: 'top 80%',
-            },
-            onComplete: () => {
-              // After animation, recalculate center in case layout changed
-              const cardRect2 = card.getBoundingClientRect();
-              const centerX2 = (cardRect2.left + cardRect2.right) / 2 - cLeft;
-              const centerY2 = (cardRect2.top + cardRect2.bottom) / 2 - cTop;
-              transformsRef.current[i] = {
-                xEnd,
-                yEnd,
-                rotEnd,
-                centerX: centerX2,
-                centerY: centerY2,
-              };
-            },
-          }
-        );
-      });
-    }, containerRef);
+          gsap.fromTo(
+            card,
+            { x: xStart, y: yStart, rotation: rotStart, opacity: 0 },
+            {
+              x: xEnd,
+              y: yEnd,
+              rotation: rotEnd,
+              opacity: 1,
+              ease: 'power4.out',
+              duration: 2,
+              stagger: 0.08,
+              scrollTrigger: {
+                trigger: containerRef.current,
+                start: 'top 80%',
+              },
+              onComplete: () => {
+                // After animation, recalculate center in case layout changed
+                const cardRect2 = card.getBoundingClientRect();
+                const centerX2 = (cardRect2.left + cardRect2.right) / 2 - cLeft;
+                const centerY2 = (cardRect2.top + cardRect2.bottom) / 2 - cTop;
+                transformsRef.current[i] = {
+                  xEnd,
+                  yEnd,
+                  rotEnd,
+                  centerX: centerX2,
+                  centerY: centerY2,
+                };
+              },
+            }
+          );
+        });
+      }, containerRef);
 
-    return () => ctx.revert();
-  }, { dependencies: [prefersReducedMotion] });
+      return () => ctx.revert();
+    },
+    { dependencies: [prefersReducedMotion] }
+  );
 
   useEffect(() => {
     if (!containerRef.current) return;

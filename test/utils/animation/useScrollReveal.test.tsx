@@ -21,16 +21,23 @@ const gsapMock = vi.hoisted(() => ({
 const reducedMotionMock = vi.hoisted(() => ({ prefersReducedMotion: false }));
 
 vi.mock('gsap', () => ({ gsap: gsapMock, default: gsapMock }));
-vi.mock('gsap/ScrollTrigger', () => ({ ScrollTrigger: { name: 'ScrollTrigger' } }));
+vi.mock('gsap/ScrollTrigger', () => ({
+  ScrollTrigger: { name: 'ScrollTrigger' },
+}));
 
 // Stand in for useGSAP with a layout effect so the callback runs on the client
 // but not during server rendering — matching the real hook's timing.
 vi.mock('@gsap/react', () => ({
   useGSAP: (cb: () => void, opts?: { dependencies?: unknown[] }) => {
+    // The real useGSAP takes its dependency list from the options object, so this
+    // stand-in must forward it verbatim rather than use a literal array. Omitting
+    // `cb` is likewise deliberate: re-running on every new closure identity would
+    // fire the effect on each render and break the call-count assertions.
     React.useLayoutEffect(
       () => {
         cb();
       },
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       opts?.dependencies ?? []
     );
   },
@@ -95,7 +102,10 @@ describe('useScrollReveal', () => {
     const useScrollReveal = await loadHook();
 
     function Section() {
-      const ref = useScrollReveal<HTMLDivElement>({ variant: 'fade-up', y: 20 });
+      const ref = useScrollReveal<HTMLDivElement>({
+        variant: 'fade-up',
+        y: 20,
+      });
       return <div ref={ref}>content</div>;
     }
 

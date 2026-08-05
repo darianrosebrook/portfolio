@@ -84,129 +84,132 @@ export const AnimatedSection = React.forwardRef<
     // useGSAP runs in a layout effect, before the browser paints. That is what
     // lets children start hidden without an inline opacity in the server markup,
     // which would otherwise keep them invisible for no-JS visitors.
-    useGSAP(() => {
-      const container = containerRef.current;
-      if (!container) return;
+    useGSAP(
+      () => {
+        const container = containerRef.current;
+        if (!container) return;
 
-      // Stagger targets are queried from the DOM under our container so we
-      // don't need a per-render ref-collection callback on each child.
-      const getStaggerTargets = () =>
-        Array.from(
-          container.querySelectorAll<HTMLElement>(':scope > .animatedChild')
-        );
+        // Stagger targets are queried from the DOM under our container so we
+        // don't need a per-render ref-collection callback on each child.
+        const getStaggerTargets = () =>
+          Array.from(
+            container.querySelectorAll<HTMLElement>(':scope > .animatedChild')
+          );
 
-      // Skip animation if reduced motion is preferred
-      if (prefersReducedMotion) {
-        if (variant === 'stagger-children') {
-          getStaggerTargets().forEach((child) => {
-            gsap.set(child, { opacity: 1, y: 0, x: 0 });
-          });
-        } else {
-          gsap.set(container, { opacity: 1, y: 0, x: 0 });
+        // Skip animation if reduced motion is preferred
+        if (prefersReducedMotion) {
+          if (variant === 'stagger-children') {
+            getStaggerTargets().forEach((child) => {
+              gsap.set(child, { opacity: 1, y: 0, x: 0 });
+            });
+          } else {
+            gsap.set(container, { opacity: 1, y: 0, x: 0 });
+          }
+          return;
         }
-        return;
+
+        const ctx = gsap.context(() => {
+          // Initial states based on variant
+          const initialStates = {
+            'fade-up': { opacity: 0, y: 30 },
+            'fade-in': { opacity: 0 },
+            'slide-in': { opacity: 0, x: -30 },
+            'stagger-children': { opacity: 0, y: 30 },
+          };
+
+          // Animation configurations
+          const animationConfigs = {
+            'fade-up': {
+              opacity: 1,
+              y: 0,
+              duration,
+              ease: EASING_PRESETS.smooth,
+              delay,
+              onComplete: onAnimationComplete,
+            },
+            'fade-in': {
+              opacity: 1,
+              duration,
+              ease: EASING_PRESETS.smooth,
+              delay,
+              onComplete: onAnimationComplete,
+            },
+            'slide-in': {
+              opacity: 1,
+              x: 0,
+              duration,
+              ease: EASING_PRESETS.smooth,
+              delay,
+              onComplete: onAnimationComplete,
+            },
+            'stagger-children': {
+              opacity: 1,
+              y: 0,
+              duration,
+              ease: EASING_PRESETS.smooth,
+              stagger,
+              delay,
+              onComplete: onAnimationComplete,
+            },
+          };
+
+          const initialState = initialStates[variant];
+          const config = animationConfigs[variant];
+
+          if (variant === 'stagger-children') {
+            // Animate children with stagger
+            const validChildren = getStaggerTargets();
+            if (validChildren.length === 0) return;
+
+            gsap.set(validChildren, initialState);
+
+            if (triggerOnScroll) {
+              gsap.to(validChildren, {
+                ...config,
+                scrollTrigger: {
+                  trigger: container,
+                  start: scrollStart,
+                  once: true,
+                },
+              });
+            } else {
+              gsap.to(validChildren, config);
+            }
+          } else {
+            // Animate container as a whole
+            gsap.set(container, initialState);
+
+            if (triggerOnScroll) {
+              gsap.to(container, {
+                ...config,
+                scrollTrigger: {
+                  trigger: container,
+                  start: scrollStart,
+                  once: true,
+                },
+              });
+            } else {
+              gsap.to(container, config);
+            }
+          }
+        }, containerRef);
+
+        return () => ctx.revert();
+      },
+      {
+        scope: containerRef,
+        dependencies: [
+          variant,
+          duration,
+          stagger,
+          delay,
+          triggerOnScroll,
+          scrollStart,
+          prefersReducedMotion,
+          onAnimationComplete,
+        ],
       }
-
-      const ctx = gsap.context(() => {
-        // Initial states based on variant
-        const initialStates = {
-          'fade-up': { opacity: 0, y: 30 },
-          'fade-in': { opacity: 0 },
-          'slide-in': { opacity: 0, x: -30 },
-          'stagger-children': { opacity: 0, y: 30 },
-        };
-
-        // Animation configurations
-        const animationConfigs = {
-          'fade-up': {
-            opacity: 1,
-            y: 0,
-            duration,
-            ease: EASING_PRESETS.smooth,
-            delay,
-            onComplete: onAnimationComplete,
-          },
-          'fade-in': {
-            opacity: 1,
-            duration,
-            ease: EASING_PRESETS.smooth,
-            delay,
-            onComplete: onAnimationComplete,
-          },
-          'slide-in': {
-            opacity: 1,
-            x: 0,
-            duration,
-            ease: EASING_PRESETS.smooth,
-            delay,
-            onComplete: onAnimationComplete,
-          },
-          'stagger-children': {
-            opacity: 1,
-            y: 0,
-            duration,
-            ease: EASING_PRESETS.smooth,
-            stagger,
-            delay,
-            onComplete: onAnimationComplete,
-          },
-        };
-
-        const initialState = initialStates[variant];
-        const config = animationConfigs[variant];
-
-        if (variant === 'stagger-children') {
-          // Animate children with stagger
-          const validChildren = getStaggerTargets();
-          if (validChildren.length === 0) return;
-
-          gsap.set(validChildren, initialState);
-
-          if (triggerOnScroll) {
-            gsap.to(validChildren, {
-              ...config,
-              scrollTrigger: {
-                trigger: container,
-                start: scrollStart,
-                once: true,
-              },
-            });
-          } else {
-            gsap.to(validChildren, config);
-          }
-        } else {
-          // Animate container as a whole
-          gsap.set(container, initialState);
-
-          if (triggerOnScroll) {
-            gsap.to(container, {
-              ...config,
-              scrollTrigger: {
-                trigger: container,
-                start: scrollStart,
-                once: true,
-              },
-            });
-          } else {
-            gsap.to(container, config);
-          }
-        }
-      }, containerRef);
-
-      return () => ctx.revert();
-    }, {
-      scope: containerRef,
-      dependencies: [
-        variant,
-        duration,
-        stagger,
-        delay,
-        triggerOnScroll,
-        scrollStart,
-        prefersReducedMotion,
-        onAnimationComplete,
-      ],
-    });
+    );
 
     // Forward containerRef to the parent ref without a render-time callback.
     useImperativeHandle(ref, () => containerRef.current as HTMLElement, []);
