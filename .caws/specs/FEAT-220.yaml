@@ -3,6 +3,7 @@ title: 'Cache public Supabase reads with ISR and a cookieless read client'
 risk_tier: 2
 mode: feature
 lifecycle_state: active
+worktree: feat-220-isr-caching
 created_at: '2026-08-04T22:30:11.543Z'
 updated_at: '2026-08-05T21:06:02.847Z'
 blast_radius:
