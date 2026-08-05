@@ -3,6 +3,7 @@ title: 'Extract useScrollReveal hook and remove per-component FOUC opacity guard
 risk_tier: 3
 mode: refactor
 lifecycle_state: active
+worktree: feat-221-scroll-reveal
 created_at: '2026-08-04T22:30:11.936Z'
 updated_at: '2026-08-04T22:30:11.936Z'
 blast_radius:
