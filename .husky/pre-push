@@ -7,6 +7,33 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
+echo "Running lint..."
+npm run lint 2>&1
+if [ $? -ne 0 ]; then
+  echo ""
+  echo "Lint failed. Push aborted."
+  echo "Fix the errors above, or run: npm run lint:fix"
+  exit 1
+fi
+
+echo "Running typecheck..."
+npm run typecheck 2>&1
+if [ $? -ne 0 ]; then
+  echo ""
+  echo "Typecheck failed. Push aborted."
+  echo "Fix the errors above before pushing."
+  exit 1
+fi
+
+echo "Running tests..."
+npm test 2>&1
+if [ $? -ne 0 ]; then
+  echo ""
+  echo "Tests failed. Push aborted."
+  echo "Fix the errors above before pushing."
+  exit 1
+fi
+
 echo "Running build check before push..."
 npm run build 2>&1
 if [ $? -ne 0 ]; then
@@ -16,4 +43,4 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-echo "Build passed!"
+echo "Lint, typecheck, tests, and build all passed!"
