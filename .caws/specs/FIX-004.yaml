@@ -1,0 +1,43 @@
+id: FIX-004
+title: 'Stop ISR caching failed reads as empty lists or 404s on public content'
+risk_tier: 2
+mode: fix
+lifecycle_state: active
+created_at: '2026-08-06T00:34:52.986Z'
+updated_at: '2026-08-06T00:34:52.986Z'
+blast_radius:
+  modules:
+    - 'TODO: list one or more modules this spec touches.'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'app/articles/page.tsx'
+    - 'app/articles/[slug]/page.tsx'
+    - 'app/work/[slug]/page.tsx'
+    - 'test/pages/publicReadErrors.test.ts'
+    - 'test/pages/publicReadPaths.test.ts'
+  out: []
+invariants:
+  - 'TODO: describe one invariant this spec guarantees.'
+acceptance:
+  - id: A1
+    given: 'A Supabase query error while rendering a cacheable public page'
+    when: 'The page renders'
+    then: 'The render fails rather than returning an empty or absent result, so ISR retains the last good cache entry instead of storing the failure'
+  - id: A2
+    given: 'A slug that is genuinely missing or unpublished'
+    when: 'The detail page renders'
+    then: 'It still returns 404 — a real absence must remain distinguishable from a query failure'
+  - id: A3
+    given: 'A query error inside generateStaticParams at build time'
+    when: 'The build runs'
+    then: 'The error is logged and the build still completes with on-demand rendering, rather than silently prerendering nothing'
+  - id: A4
+    given: 'A successful query that legitimately returns zero published rows'
+    when: 'The list page renders'
+    then: 'It renders an empty list normally and is cached — an empty result is not an error'
+non_functional: {}
+contracts:
+  - name: 'public-read-error-handling'
+    type: behavior
