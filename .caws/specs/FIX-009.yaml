@@ -17,20 +17,20 @@ scope:
     - '.env.example'
   out: []
 invariants:
-  - No literal credential is ever written to a tracked file; only ${ENV_VAR} references
-  - A clean install needs no per-machine ~/.npmrc edit when the documented env vars are set
+  - No credential, literal or indirected, is written to a tracked file
+  - The committed .npmrc records why auth is absent, so the gap is not rediscovered as a bug
 acceptance:
   - id: A1
-    given: commit 48ffdbd7 removed the ${FONTAWESOME_PACKAGE_TOKEN} and ${TIPTAP_PRO_PACKAGE_TOKEN} auth references from .npmrc, so pnpm install fails ERR_PNPM_FETCH_401
-    when: the two env-var reference lines are restored to the committed .npmrc
-    then: pnpm install completes without a 401 and without NPM_CONFIG_USERCONFIG layering
+    given: the intuitive fix is to restore the ${VAR} _authToken lines to the committed .npmrc
+    when: those lines are present and pnpm resolves a private-registry package
+    then: pnpm warns it ignored the project-level auth setting and fails ERR_PNPM_FETCH_401, proving the approach is unavailable on pnpm 11 and that commit 48ffdbd7 was correct to remove them
   - id: A2
-    given: the removal was motivated by keeping registry auth out of the committed .npmrc
-    when: the restored file is inspected
-    then: it contains only ${VAR} indirections and no literal token, so the stated hygiene goal still holds
+    given: pnpm expands ${VARS} only in configs it treats as trusted
+    when: the identical reference lines are supplied via a user-level npmrc
+    then: resolution succeeds, establishing user-level config (or pnpm config set) as the supported location
   - id: A3
-    given: the required tokens were undiscoverable, appearing in no .env.example entry or doc
-    when: a new contributor reads .env.example
-    then: both FONTAWESOME_PACKAGE_TOKEN and TIPTAP_PRO_PACKAGE_TOKEN are listed with their registry URLs
+    given: the required tokens appeared in no doc, making a clean install fail with no stated remedy
+    when: a contributor reads .env.example or the committed .npmrc
+    then: both token names, their registry URLs, and the two supported configuration recipes are documented, and neither file contains a credential
 non_functional: {}
 contracts: []
