@@ -3,6 +3,7 @@ title: 'Stop ISR caching failed reads as empty lists or 404s on public content'
 risk_tier: 2
 mode: fix
 lifecycle_state: active
+worktree: fix-004-isr-errors
 created_at: '2026-08-06T00:34:52.986Z'
 updated_at: '2026-08-06T00:34:52.986Z'
 blast_radius:
