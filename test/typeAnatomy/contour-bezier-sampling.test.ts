@@ -14,10 +14,7 @@
 
 import { describe, expect, it } from 'vitest';
 import { classifyContours } from '@/utils/typeAnatomy/geometryCache';
-import type {
-  Metrics,
-  SegmentWithMeta,
-} from '@/utils/typeAnatomy/types';
+import type { Metrics, SegmentWithMeta } from '@/utils/typeAnatomy/types';
 import type { Glyph } from '@/ui/modules/FontInspector/fontkit-types';
 
 /** Minimal glyph stub satisfying classifyContours' shape contract. */

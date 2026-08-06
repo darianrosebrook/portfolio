@@ -51,6 +51,11 @@ const config = [
       // Formatting it here would drift from the upstream baseline and be
       // clobbered on the next install.
       '.caws/hooks/**',
+      // Gitignored scratch space (.gitignore: tmp/) holding no tracked files.
+      // ESLint does not read .gitignore, so it scanned recovered snapshots
+      // here that are absent from tsconfig and fail to parse — 9 errors that
+      // blocked every push, including branch deletions.
+      'tmp/**',
       'app/blueprints/design-patterns/patterns/**',
       'playwright.config.ts',
       'scripts/templates/**',

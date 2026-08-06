@@ -41,14 +41,10 @@ describe('DetectionContext memoization (per-font)', () => {
   it('keeps isSerif classification stable across glyphs of the same font', () => {
     const newsreader = loadFont('Newsreader-VF.ttf');
 
-    const fromH = buildGeometryCache(
-      glyphFor(newsreader, 'H'),
-      newsreader
-    ).context.isSerif;
-    const fromO = buildGeometryCache(
-      glyphFor(newsreader, 'O'),
-      newsreader
-    ).context.isSerif;
+    const fromH = buildGeometryCache(glyphFor(newsreader, 'H'), newsreader)
+      .context.isSerif;
+    const fromO = buildGeometryCache(glyphFor(newsreader, 'O'), newsreader)
+      .context.isSerif;
 
     expect(fromH).toBe(fromO);
   });

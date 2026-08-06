@@ -166,10 +166,7 @@ describe('reconcileFeatures', () => {
       { x: 100, y: 100 },
       { x: 0, y: 100 },
     ];
-    const instance = (
-      id: FeatureID,
-      confidence: number
-    ): FeatureInstance => ({
+    const instance = (id: FeatureID, confidence: number): FeatureInstance => ({
       id,
       shape: { type: 'polyline', points: square },
       confidence,

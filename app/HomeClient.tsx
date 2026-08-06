@@ -135,9 +135,9 @@ export default function HomeClient({ ldJson }: HomeClientProps) {
           </div>
           <p>
             Keeping design and development aligned has been a primary focus of
-            mine that I've been able to exercise through creating custom design
-            systems and functional tooling. Based in Seattle, Washington, I
-            thrive at the intersection of design and development, where I
+            mine that I&apos;ve been able to exercise through creating custom
+            design systems and functional tooling. Based in Seattle, Washington,
+            I thrive at the intersection of design and development, where I
             dedicate my efforts to streamlining collaboration and optimizing
             product development cycles.
           </p>
