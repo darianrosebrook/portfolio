@@ -2,10 +2,11 @@ id: FIX-004
 title: 'Stop ISR caching failed reads as empty lists or 404s on public content'
 risk_tier: 2
 mode: fix
-lifecycle_state: active
-worktree: fix-004-isr-errors
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Auto-closed by caws worktree merge fix-004-isr-errors at c130870ef8205a8d88d50ed7b84cac4d0aa7f6d8'
 created_at: '2026-08-06T00:34:52.986Z'
-updated_at: '2026-08-06T00:34:52.986Z'
+updated_at: '2026-08-06T00:54:04.861Z'
 blast_radius:
   modules:
     - 'public content read paths (articles list, article detail, case-study detail)'
