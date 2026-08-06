@@ -41,6 +41,12 @@ const config = [
   // Ignore blueprint pattern samples from lint for now
   {
     ignores: [
+      // CAWS worktrees hold a full second checkout of the repo. Linting it
+      // double-reports every file, and the ignore patterns below are
+      // root-relative so they do not match inside it, so even deliberately
+      // ignored files resurface. vitest.config.mjs excludes it for the same
+      // reason. Without this, lint fails whenever a worktree is active.
+      '.caws/worktrees/**',
       // CAWS-managed hook core, installed and overwritten by `caws init`.
       // Formatting it here would drift from the upstream baseline and be
       // clobbered on the next install.
