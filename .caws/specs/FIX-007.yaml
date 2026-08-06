@@ -2,10 +2,11 @@ id: FIX-007
 title: 'Clear 28 dependency security advisories including Next.js runtime-path CVEs'
 risk_tier: 2
 mode: fix
-lifecycle_state: active
-worktree: fix-007-dep-security
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Cleared dependency advisories: next 16.3.0, vitest 3.2.7, sharp 0.35.3, raised pnpm-workspace override floors, js-yaml direct devDep; pnpm audit clean; typecheck/lint/1412 tests/build pass.'
 created_at: '2026-08-06T10:57:36.578Z'
-updated_at: '2026-08-06T11:59:22.633Z'
+updated_at: '2026-08-06T12:00:00.780Z'
 blast_radius:
   modules:
     - next-runtime
