@@ -28,13 +28,20 @@ describe('TableOfContentsExtension', () => {
       },
     });
 
-    editor.commands.setTableOfContents();
+    try {
+      editor.commands.setTableOfContents();
 
-    // Ensure the toc node exists
-    let hasToc = false;
-    editor.state.doc.descendants((node) => {
-      if (node.type.name === 'tableOfContents') hasToc = true;
-    });
-    expect(hasToc).toBe(true);
+      // Ensure the toc node exists
+      let hasToc = false;
+      editor.state.doc.descendants((node) => {
+        if (node.type.name === 'tableOfContents') hasToc = true;
+      });
+      expect(hasToc).toBe(true);
+    } finally {
+      // Releases prosemirror-view's DOMObserver flush timer. Without this it
+      // fires after the jsdom environment is torn down and throws an
+      // unhandled "document is not defined", which fails the whole run.
+      editor.destroy();
+    }
   });
 });
