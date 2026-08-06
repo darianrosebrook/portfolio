@@ -1,0 +1,29 @@
+id: TYPEANATOMY-004
+title: 'Harden cross-detector reconciliation: falsifiable assertions and untested registry exports'
+risk_tier: 2
+mode: fix
+lifecycle_state: active
+created_at: '2026-08-06T13:36:42.999Z'
+updated_at: '2026-08-06T13:36:42.999Z'
+blast_radius:
+  modules:
+    - 'TODO: list one or more modules this spec touches.'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'utils/typeAnatomy/detectorRegistry.ts'
+    - 'test/typeAnatomy/'
+    - 'utils/geometry/geometryCore.ts'
+  out: []
+invariants:
+  - 'TODO: describe one invariant this spec guarantees.'
+acceptance:
+  - id: A1
+    given: 'TODO'
+    when: 'TODO'
+    then: 'TODO'
+non_functional: {}
+contracts:
+  - name: 'feature-reconciliation'
+    type: behavior
