@@ -17,15 +17,23 @@
 import { describe, expect, it } from 'vitest';
 import {
   detectAllFeatures,
+  detectGlyphFeatures,
   reconcileFeatures,
 } from '@/utils/typeAnatomy/detectorRegistry';
 import { buildGeometryCache } from '@/utils/typeAnatomy/geometryCache';
+import { getFeatureHints } from '@/utils/typeAnatomy/glyphFeatureHints';
 import {
   glyphFor,
   loadFont,
   regionBBox,
 } from '@/test/utils/fixtures/fontFixtures';
-import type { FeatureInstance, RegionPolygon } from '@/utils/typeAnatomy/types';
+import type {
+  FeatureID,
+  FeatureInstance,
+  Point2D,
+  RegionKind,
+  RegionPolygon,
+} from '@/utils/typeAnatomy/types';
 
 type BBox = { minX: number; minY: number; maxX: number; maxY: number };
 
@@ -97,12 +105,85 @@ describe('reconcileFeatures', () => {
   it('preserves complementary stroke+enclosed pairs (bowl + counter)', () => {
     const font = loadFont('Nohemi-VF.ttf');
     const geo = buildGeometryCache(glyphFor(font, 'o'), font);
-    const reconciled = reconcileFeatures(detectAllFeatures(geo));
+
+    // Detect through the same hint-filtered path the FontInspector renders
+    // from, rather than detectAllFeatures. Only hinted detectors run for a
+    // glyph in the product, so 'o' yields bowl + counter and never spine.
+    // Using detectAllFeatures here would let a spurious spine (conf 0.9)
+    // out-rank the correct bowl (0.85) on a same-kind overlap and suppress
+    // it — a collision the product cannot produce.
+    const hintedIds = getFeatureHints('o', geo.context).map((h) => h.id);
+    const reconciled = reconcileFeatures(detectGlyphFeatures(geo, hintedIds));
 
     const ids = new Set(reconciled.keys());
-    // A glyph with a hole should keep BOTH the stroke around it and the
-    // enclosed hole — they are different kinds and must not be deduped.
-    expect(ids.has('bowl') || ids.has('counter')).toBe(true);
+    // Different kinds (stroke vs enclosed) must never dedupe against each
+    // other. Asserted separately so a failure names which one was lost.
+    expect(ids.has('bowl')).toBe(true);
+    expect(ids.has('counter')).toBe(true);
+  });
+
+  it('keeps fully-overlapping regions when their kinds differ', () => {
+    // The bowl/counter pair on a real 'o' only reaches IoU 0.43, below the
+    // 0.6 threshold, so it never becomes a suppression candidate and cannot
+    // exercise the different-kind guard. Feed identical bboxes (IoU 1.0) so
+    // the pair IS a candidate and only the kind check can spare it.
+    const square: Point2D[] = [
+      { x: 0, y: 0 },
+      { x: 100, y: 0 },
+      { x: 100, y: 100 },
+      { x: 0, y: 100 },
+    ];
+    const instance = (
+      id: FeatureID,
+      kind: RegionKind,
+      confidence: number
+    ): FeatureInstance => ({
+      id,
+      shape: { type: 'polyline', points: square },
+      confidence,
+      region: { points: square, kind },
+    });
+
+    const input = new Map<FeatureID, FeatureInstance[]>([
+      ['bowl', [instance('bowl', 'stroke', 0.5)]],
+      ['counter', [instance('counter', 'enclosed', 0.9)]],
+    ]);
+
+    const ids = new Set(reconcileFeatures(input).keys());
+    // Identical regions, so IoU is 1.0 and confidence differs — the ONLY
+    // reason the weaker 'bowl' survives is that the kinds differ.
+    expect(ids.has('bowl')).toBe(true);
+    expect(ids.has('counter')).toBe(true);
+  });
+
+  it('suppresses the weaker region when kinds match', () => {
+    // Same geometry as above but both 'stroke', so the guard does not apply
+    // and the lower-confidence claim must lose. This pins that the previous
+    // test passes because of kind, not because suppression is broken.
+    const square: Point2D[] = [
+      { x: 0, y: 0 },
+      { x: 100, y: 0 },
+      { x: 100, y: 100 },
+      { x: 0, y: 100 },
+    ];
+    const instance = (
+      id: FeatureID,
+      confidence: number
+    ): FeatureInstance => ({
+      id,
+      shape: { type: 'polyline', points: square },
+      confidence,
+      region: { points: square, kind: 'stroke' as RegionKind },
+    });
+
+    const input = new Map<FeatureID, FeatureInstance[]>([
+      ['bowl', [instance('bowl', 0.5)]],
+      ['spine', [instance('spine', 0.9)]],
+    ]);
+
+    const ids = new Set(reconcileFeatures(input).keys());
+    expect(ids.has('spine')).toBe(true);
+    expect(ids.has('bowl')).toBe(false);
   });
 
   it('does not drop features on a glyph where they do not overlap (s spine kept)', () => {
