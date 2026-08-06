@@ -2,10 +2,11 @@ id: FIX-005
 title: 'Gate pushes on lint/typecheck/test and clear pre-existing lint debt'
 risk_tier: 3
 mode: fix
-lifecycle_state: active
-worktree: fix-005-push-gates
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Auto-closed by caws worktree merge fix-005-push-gates at bdcc03b2381c23d6d37a964e66de45bbee28ca06'
 created_at: '2026-08-06T01:36:56.256Z'
-updated_at: '2026-08-06T01:36:56.256Z'
+updated_at: '2026-08-06T03:33:51.532Z'
 blast_radius:
   modules:
     - git-hooks
