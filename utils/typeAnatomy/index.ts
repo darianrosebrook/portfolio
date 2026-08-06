@@ -60,6 +60,8 @@ export {
   detectAllFeatures,
   filterDetectedFeatures,
   getBestInstances,
+  reconcileFeatures,
+  RECONCILE_IOU_THRESHOLD,
 } from './detectorRegistry';
 
 export {

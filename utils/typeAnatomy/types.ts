@@ -150,14 +150,20 @@ export interface ContourClassification {
 
 /**
  * Segment with metadata for geometric analysis.
- * Extends raw path segment with tangent/normal/direction info.
+ * Extends raw path segment with optional tangent/normal/direction info.
+ *
+ * These fields are optional because they are not currently consumed by any
+ * detector or renderer. They are retained on the type (and may be populated
+ * by enrichment helpers) so a future segment-opposition / medial-axis
+ * substrate (#1) can opt back into computing them without a type change.
+ * Populating them today is dead work — see flattenToSegments / segmentsFor.
  */
 export interface SegmentWithMeta {
   type: string;
   params: Point2D[];
-  _tangent: Point2D | null;
-  _normal: Point2D | null;
-  _segmentDir: number;
+  _tangent?: Point2D | null;
+  _normal?: Point2D | null;
+  _segmentDir?: number;
 }
 
 /**

@@ -189,3 +189,126 @@ export function getBestInstances(
 
   return best;
 }
+
+// ---------------------------------------------------------------------------
+// Cross-detector region reconciliation
+// ---------------------------------------------------------------------------
+
+/**
+ * IoU threshold above which two same-`kind` regions from different feature ids
+ * are treated as a duplicate claim on the same part of the glyph.
+ *
+ * Calibrated against measured overlaps: genuine duplicates (bowl↔spine both
+ * stroke, counter↔eye both enclosed) land at 0.7–0.93 IoU, while complementary
+ * pairs (bowl stroke ↔ counter enclosed) land at 0.3–0.5. The same-kind filter
+ * already excludes the complementary pairs, so 0.6 cleanly separates true
+ * duplicates from partial overlap of distinct features.
+ */
+export const RECONCILE_IOU_THRESHOLD = 0.6;
+
+interface BBox {
+  minX: number;
+  minY: number;
+  maxX: number;
+  maxY: number;
+}
+
+function regionBBox(points: Array<{ x: number; y: number }>): BBox {
+  let minX = Infinity;
+  let minY = Infinity;
+  let maxX = -Infinity;
+  let maxY = -Infinity;
+  for (const p of points) {
+    if (p.x < minX) minX = p.x;
+    if (p.x > maxX) maxX = p.x;
+    if (p.y < minY) minY = p.y;
+    if (p.y > maxY) maxY = p.y;
+  }
+  return { minX, minY, maxX, maxY };
+}
+
+function bboxIoU(a: BBox, b: BBox): number {
+  const ix = Math.max(0, Math.min(a.maxX, b.maxX) - Math.max(a.minX, b.minX));
+  const iy = Math.max(0, Math.min(a.maxY, b.maxY) - Math.max(a.minY, b.minY));
+  const inter = ix * iy;
+  const areaA = (a.maxX - a.minX) * (a.maxY - a.minY);
+  const areaB = (b.maxX - b.minX) * (b.maxY - b.minY);
+  const union = areaA + areaB - inter;
+  return union > 0 ? inter / union : 0;
+}
+
+/**
+ * Suppresses duplicate region claims across detectors.
+ *
+ * When two instances from DIFFERENT feature ids both carry a `region` of the
+ * SAME `kind` (`'stroke'` or `'enclosed'`) whose bbox IoU exceeds
+ * {@link RECONCILE_IOU_THRESHOLD}, the lower-confidence instance is dropped.
+ * This removes confusing double-highlights where, e.g., `bowl` and `spine`
+ * both flag the same curve on `o`, or `counter` and `eye` both flag the same
+ * hole on `a`.
+ *
+ * What it deliberately does NOT suppress:
+ *   - same-feature-id pairs (intra-feature dedup is the detector's job)
+ *   - different-`kind` pairs (a `stroke` bowl and an `enclosed` counter are
+ *     complementary — ink vs hole — even when their bboxes overlap heavily)
+ *   - instances without a `region` (point/marker-only features)
+ *
+ * Ties in confidence are broken deterministically by feature id (the
+ * lexicographically-later id is suppressed) so reconciliation is reproducible.
+ *
+ * @param results - Output of `detectGlyphFeatures` / `detectAllFeatures`.
+ * @returns A new Map with duplicate same-kind regions removed.
+ */
+export function reconcileFeatures(
+  results: Map<FeatureID, FeatureInstance[]>
+): Map<FeatureID, FeatureInstance[]> {
+  // Flatten to (id, instance, kind, bbox) for instances worth reconciling.
+  interface RegionEntry {
+    id: FeatureID;
+    instance: FeatureInstance;
+    kind: 'stroke' | 'enclosed';
+    bbox: BBox;
+  }
+  const entries: RegionEntry[] = [];
+  for (const [id, insts] of results) {
+    for (const inst of insts) {
+      if (inst.region && inst.region.points.length >= 3) {
+        entries.push({
+          id,
+          instance: inst,
+          kind: inst.region.kind,
+          bbox: regionBBox(inst.region.points),
+        });
+      }
+    }
+  }
+
+  // Mark instances to suppress. Compare every same-kind pair across ids once.
+  const suppress = new Set<FeatureInstance>();
+  for (let i = 0; i < entries.length; i++) {
+    const a = entries[i];
+    for (let j = i + 1; j < entries.length; j++) {
+      const b = entries[j];
+      if (a.id === b.id) continue; // same feature → detector's responsibility
+      if (a.kind !== b.kind) continue; // complementary kinds coexist
+
+      if (bboxIoU(a.bbox, b.bbox) > RECONCILE_IOU_THRESHOLD) {
+        // Suppress the weaker claim; break ties by id for determinism.
+        const aWins =
+          a.instance.confidence > b.instance.confidence ||
+          (a.instance.confidence === b.instance.confidence && a.id < b.id);
+        suppress.add(aWins ? b.instance : a.instance);
+      }
+    }
+  }
+
+  if (suppress.size === 0) return results;
+
+  // Rebuild the map without suppressed instances.
+  const reconciled = new Map<FeatureID, FeatureInstance[]>();
+  for (const [id, insts] of results) {
+    const kept = insts.filter((inst) => !suppress.has(inst));
+    if (kept.length > 0) reconciled.set(id, kept);
+  }
+  return reconciled;
+}

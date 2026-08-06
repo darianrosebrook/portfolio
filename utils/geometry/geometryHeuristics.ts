@@ -981,66 +981,19 @@ type Point = { x: number; y: number };
 type SegmentWithMeta = {
   type: string;
   params: Point[];
-  _tangent: Point | null;
-  _normal: Point | null;
-  _segmentDir: number;
+  _tangent?: Point | null;
+  _normal?: Point | null;
+  _segmentDir?: number;
 };
 
 /**
- * Enriches a cubic or quadratic Bezier segment with tangent, normal, and direction metadata using Bezier.js.
- * For high curvature curves, samples midpoint or endpoint for more robust direction calculation.
- * @param seg - The segment to enrich
- */
-function enrichBezier(seg: SegmentWithMeta) {
-  const ctrl = seg.params;
-  let bz: Bezier | null = null;
-
-  if (seg.type === 'C' && ctrl.length === 4) {
-    // Cubic: [P0, C1, C2, P1]
-    bz = new Bezier(ctrl[0], ctrl[1], ctrl[2], ctrl[3]);
-  } else if (seg.type === 'Q' && ctrl.length === 3) {
-    // Quadratic: [P0, C, P1]
-    bz = new Bezier(ctrl[0], ctrl[1], ctrl[2]);
-  }
-
-  if (bz) {
-    // Calculate curvature to determine best sampling point
-    // Use derivative magnitude as a proxy for curvature near the start
-    const startDeriv = bz.derivative(0);
-    const midDeriv = bz.derivative(0.5);
-    const startCurvature = Math.abs(
-      startDeriv.x * startDeriv.x + startDeriv.y * startDeriv.y
-    );
-    const midCurvature = Math.abs(
-      midDeriv.x * midDeriv.x + midDeriv.y * midDeriv.y
-    );
-    const isHighCurvature = startCurvature > midCurvature * 2; // start is much more curved than middle
-
-    let sampleT = 0; // default: start of curve
-
-    if (isHighCurvature) {
-      // For high curvature at start, sample midpoint for more stable direction
-      // This avoids issues with inflection points at t=0
-      sampleT = 0.5;
-
-      // If midpoint has lower curvature, it's more stable
-      if (midCurvature < startCurvature) {
-        sampleT = 0.5; // midpoint for more stable tangent
-      }
-    }
-
-    const tan = bz.derivative(sampleT);
-    const len = Math.hypot(tan.x, tan.y) || 1;
-    seg._tangent = { x: tan.x / len, y: tan.y / len };
-    seg._normal = { x: tan.y / len, y: -tan.x / len };
-    seg._segmentDir = Math.sign(seg._tangent.x);
-  }
-}
-
-/**
  * Returns cached path segments for a glyph, parsing if needed.
- * Injects _normal, _tangent, and _segmentDir metadata for each segment.
- * Handles lines and Béziers (C, Q) with tangent/normal estimation.
+ *
+ * Tangent / normal / direction metadata is intentionally NOT injected: no
+ * current reader consumes those fields (featureHighlight reads only `.type`
+ * and `.params`). Computing them was per-segment Bezier-derivative dead work.
+ * The fields remain optional on the type for a future segment-opposition /
+ * medial-axis substrate to repopulate.
  * @param g - The fontkit Glyph object
  * @returns SegmentWithMeta[]
  */
@@ -1049,23 +1002,6 @@ export function segmentsFor(g: Glyph): SegmentWithMeta[] {
     const d = dFor(g);
     const shapeResult = shape('path', { d }) as { params: unknown[] };
     const params = shapeResult.params[0] as SegmentWithMeta[];
-    for (const seg of params) {
-      if (seg.type === 'L' || seg.type === 'M') {
-        const [p0, p1] = seg.params;
-        const tx = p1.x - p0.x;
-        const ty = p1.y - p0.y;
-        const len = Math.hypot(tx, ty) || 1;
-        seg._tangent = { x: tx / len, y: ty / len };
-        seg._normal = { x: ty / len, y: -tx / len };
-        seg._segmentDir = Math.sign(seg._tangent.x);
-      } else if (seg.type === 'C' || seg.type === 'Q') {
-        enrichBezier(seg);
-      } else {
-        seg._tangent = null;
-        seg._normal = null;
-        seg._segmentDir = 1;
-      }
-    }
     segCache.set(g, params);
   }
   return segCache.get(g)!;

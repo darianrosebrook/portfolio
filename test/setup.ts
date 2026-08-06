@@ -17,6 +17,41 @@ vi.mock('next/navigation', () => ({
   redirect: vi.fn(),
 }));
 
+vi.mock('@codesandbox/sandpack-react', async () => {
+  const React = await import('react');
+  const passthrough = ({ children }: { children?: React.ReactNode }) =>
+    React.createElement(React.Fragment, null, children);
+  const sandpack = {
+    activeFile: '/App.tsx',
+    files: { '/App.tsx': { code: '' } },
+    openFile: vi.fn(),
+    updateFile: vi.fn(),
+  };
+
+  return {
+    SandpackCodeEditor: ({ style }: { style?: React.CSSProperties }) =>
+      React.createElement('div', {
+        'data-testid': 'sandpack-code-editor',
+        style,
+      }),
+    SandpackLayout: passthrough,
+    SandpackPreview: ({ style }: { style?: React.CSSProperties }) =>
+      React.createElement(
+        'div',
+        { 'data-testid': 'sandpack-preview', style },
+        React.createElement('iframe', { title: 'Sandpack preview' }),
+        React.createElement(
+          'a',
+          { href: 'https://codesandbox.io/', target: '_blank' },
+          'Open in CodeSandbox'
+        )
+      ),
+    SandpackProvider: passthrough,
+    SandpackThemeProvider: passthrough,
+    useSandpack: () => ({ sandpack }),
+  };
+});
+
 // Extend Vitest's expect with jest-axe matchers
 expect.extend(toHaveNoViolations);
 

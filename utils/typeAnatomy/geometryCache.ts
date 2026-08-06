@@ -11,7 +11,6 @@
  */
 
 import { rayHits as geometryRayHits } from '@/utils/geometry/geometryCore';
-import { Bezier } from 'bezier-js';
 import type { Font, Glyph } from '@/ui/modules/FontInspector/fontkit-types';
 import { shape } from 'svg-intersections';
 import type {
@@ -32,6 +31,17 @@ import { rejectsAsMainBodyFragment } from './evidence/topology';
  * Keyed by glyph object, then by variation key string.
  */
 const geometryCacheStorage = new WeakMap<Glyph, Map<string, GeometryCache>>();
+
+/**
+ * Per-font DetectionContext memo.
+ *
+ * `buildDetectionContext` runs geometry-based serif detection that casts rays
+ * against I/l/i/L test glyphs. That work is font-level (the answer does not
+ * change per glyph), so it is memoized on the font object. Without this,
+ * building a GeometryCache for every glyph in an alphabet re-runs the same
+ * four-glyph probe ~26 times.
+ */
+const detectionContextCache = new WeakMap<Font, DetectionContext>();
 
 /**
  * Builds or retrieves a cached GeometryCache for a glyph.
@@ -197,8 +207,15 @@ function getItalicAngle(font: Font): number {
 /**
  * Builds detection context with font-level flags.
  * Uses geometry-based serif detection for more accurate classification.
+ *
+ * Memoized per-font: the result is font-level (not glyph-level) and computing
+ * it requires ray-casting against several test glyphs, so it must not re-run
+ * on every GeometryCache build.
  */
 function buildDetectionContext(font: Font): DetectionContext {
+  const cached = detectionContextCache.get(font);
+  if (cached) return cached;
+
   const fontAny = font as Font & {
     post?: { italicAngle?: number; isFixedPitch?: boolean };
     'OS/2'?: { usWeightClass?: number };
@@ -213,7 +230,7 @@ function buildDetectionContext(font: Font): DetectionContext {
   // Use geometry-based serif detection with fallback to name heuristics
   const isSerif = detectSerifFromFont(font);
 
-  return {
+  const context: DetectionContext = {
     isSerif,
     isItalic,
     italicAngle,
@@ -221,6 +238,9 @@ function buildDetectionContext(font: Font): DetectionContext {
     weight,
     unitsPerEm,
   };
+
+  detectionContextCache.set(font, context);
+  return context;
 }
 
 /**
@@ -405,8 +425,13 @@ function dFor(glyph: Glyph): string {
 }
 
 /**
- * Flattens glyph path commands to segments with metadata.
- * Handles lines and Beziers (C, Q) with tangent/normal estimation.
+ * Flattens glyph path commands to segments.
+ *
+ * Each segment carries its `type` and control `params` (Point2D[]). Tangent /
+ * normal / direction metadata is intentionally NOT computed here: those fields
+ * are declared optional on SegmentWithMeta and no current detector or renderer
+ * reads them. Computing them was per-segment Bezier-derivative dead work.
+ * A future medial-axis / segment-opposition substrate can repopulate them.
  */
 export function flattenToSegments(glyph: Glyph): SegmentWithMeta[] {
   if (!glyph?.path?.commands) return [];
@@ -418,9 +443,6 @@ export function flattenToSegments(glyph: Glyph): SegmentWithMeta[] {
     const seg: SegmentWithMeta = {
       type: cmd.command,
       params: [],
-      _tangent: null,
-      _normal: null,
-      _segmentDir: 1,
     };
 
     switch (cmd.command) {
@@ -436,7 +458,6 @@ export function flattenToSegments(glyph: Glyph): SegmentWithMeta[] {
         const endPoint = { x, y };
         if (currentPoint) {
           seg.params = [currentPoint, endPoint];
-          enrichLine(seg, currentPoint, endPoint);
         }
         currentPoint = endPoint;
         break;
@@ -448,7 +469,6 @@ export function flattenToSegments(glyph: Glyph): SegmentWithMeta[] {
         const endPoint = { x, y };
         if (currentPoint) {
           seg.params = [currentPoint, controlPoint, endPoint];
-          enrichQuadratic(seg);
         }
         currentPoint = endPoint;
         break;
@@ -461,7 +481,6 @@ export function flattenToSegments(glyph: Glyph): SegmentWithMeta[] {
         const endPoint = { x, y };
         if (currentPoint) {
           seg.params = [currentPoint, c1, c2, endPoint];
-          enrichCubic(seg);
         }
         currentPoint = endPoint;
         break;
@@ -477,69 +496,6 @@ export function flattenToSegments(glyph: Glyph): SegmentWithMeta[] {
   }
 
   return segments;
-}
-
-/**
- * Enriches a line segment with tangent/normal/direction.
- */
-function enrichLine(seg: SegmentWithMeta, p0: Point2D, p1: Point2D): void {
-  const tx = p1.x - p0.x;
-  const ty = p1.y - p0.y;
-  const len = Math.hypot(tx, ty) || 1;
-  seg._tangent = { x: tx / len, y: ty / len };
-  seg._normal = { x: ty / len, y: -tx / len };
-  seg._segmentDir = Math.sign(seg._tangent.x) || 1;
-}
-
-/**
- * Enriches a quadratic Bezier segment with tangent/normal/direction.
- */
-function enrichQuadratic(seg: SegmentWithMeta): void {
-  if (seg.params.length < 3) return;
-  const [p0, c, p1] = seg.params;
-
-  try {
-    const bz = new Bezier(p0, c, p1);
-    const tan = bz.derivative(0);
-    const len = Math.hypot(tan.x, tan.y) || 1;
-    seg._tangent = { x: tan.x / len, y: tan.y / len };
-    seg._normal = { x: tan.y / len, y: -tan.x / len };
-    seg._segmentDir = Math.sign(seg._tangent.x) || 1;
-  } catch {
-    // Fallback to straight line tangent
-    enrichLine(seg, p0, p1);
-  }
-}
-
-/**
- * Enriches a cubic Bezier segment with tangent/normal/direction.
- * For high curvature curves, samples midpoint for stability.
- */
-function enrichCubic(seg: SegmentWithMeta): void {
-  if (seg.params.length < 4) return;
-  const [p0, c1, c2, p1] = seg.params;
-
-  try {
-    const bz = new Bezier(p0, c1, c2, p1);
-
-    // Sample at start by default, but use midpoint for high curvature
-    const startDeriv = bz.derivative(0);
-    const midDeriv = bz.derivative(0.5);
-    const startMag = startDeriv.x * startDeriv.x + startDeriv.y * startDeriv.y;
-    const midMag = midDeriv.x * midDeriv.x + midDeriv.y * midDeriv.y;
-    const isHighCurvature = startMag > midMag * 2;
-
-    const sampleT = isHighCurvature ? 0.5 : 0;
-    const tan = bz.derivative(sampleT);
-    const len = Math.hypot(tan.x, tan.y) || 1;
-
-    seg._tangent = { x: tan.x / len, y: tan.y / len };
-    seg._normal = { x: tan.y / len, y: -tan.x / len };
-    seg._segmentDir = Math.sign(seg._tangent.x) || 1;
-  } catch {
-    // Fallback to straight line tangent
-    enrichLine(seg, p0, p1);
-  }
 }
 
 /**
@@ -584,8 +540,11 @@ export function classifyContours(
   for (let i = 0; i < segments.length; i++) {
     const seg = segments[i];
 
-    // Collect only the endpoint of each segment for area/bbox calculation
-    // This avoids including Bezier control points which can extend bbox incorrectly
+    // Collect points along each segment for area/bbox calculation.
+    // Lines contribute their endpoint; Bezier curves are sampled at several
+    // t-values so the polygon follows the curve rather than chord-cutting
+    // across control points. Endpoint-only sampling underestimates signed
+    // area (can flip winding on tight bowls) and clips the bbox.
     if (seg.type === 'moveTo' && seg.params.length > 0) {
       // Start of a new sub-path - add the starting point
       currentContourPoints.push(seg.params[0]);
@@ -593,11 +552,15 @@ export function classifyContours(
       // For lines, params[1] is the endpoint
       currentContourPoints.push(seg.params[1]);
     } else if (seg.type === 'quadraticCurveTo' && seg.params.length >= 3) {
-      // For quadratic curves, params[2] is the endpoint
-      currentContourPoints.push(seg.params[2]);
+      const [p0, c, p1] = seg.params;
+      for (const t of CURVE_SAMPLE_TS) {
+        currentContourPoints.push(evalQuadratic(p0, c, p1, t));
+      }
     } else if (seg.type === 'bezierCurveTo' && seg.params.length >= 4) {
-      // For cubic curves, params[3] is the endpoint
-      currentContourPoints.push(seg.params[3]);
+      const [p0, c1, c2, p1] = seg.params;
+      for (const t of CURVE_SAMPLE_TS) {
+        currentContourPoints.push(evalCubic(p0, c1, c2, p1, t));
+      }
     }
 
     // End of contour
@@ -648,6 +611,53 @@ export function classifyContours(
       endIndex: r.endIndex,
     };
   });
+}
+
+/**
+ * Sample t-values for curve polygon approximation in classifyContours.
+ *
+ * t=0 is intentionally excluded: the curve's start point is already present in
+ * the contour point list (it is the previous segment's endpoint, or the
+ * moveTo). These four samples cover the curve interior plus its endpoint,
+ * which is enough for accurate shoelace area and bbox on typical font curves
+ * without the cost of dense tessellation.
+ */
+const CURVE_SAMPLE_TS = [0.25, 0.5, 0.75, 1];
+
+/** Evaluates a quadratic Bézier at t using the Bernstein form. */
+function evalQuadratic(
+  p0: Point2D,
+  c: Point2D,
+  p1: Point2D,
+  t: number
+): Point2D {
+  const u = 1 - t;
+  const a = u * u;
+  const b = 2 * u * t;
+  const cc = t * t;
+  return {
+    x: a * p0.x + b * c.x + cc * p1.x,
+    y: a * p0.y + b * c.y + cc * p1.y,
+  };
+}
+
+/** Evaluates a cubic Bézier at t using the Bernstein form. */
+function evalCubic(
+  p0: Point2D,
+  c1: Point2D,
+  c2: Point2D,
+  p1: Point2D,
+  t: number
+): Point2D {
+  const u = 1 - t;
+  const a = u * u * u;
+  const b = 3 * u * u * t;
+  const cc = 3 * u * t * t;
+  const d = t * t * t;
+  return {
+    x: a * p0.x + b * c1.x + cc * c2.x + d * p1.x,
+    y: a * p0.y + b * c1.y + cc * c2.y + d * p1.y,
+  };
 }
 
 /**

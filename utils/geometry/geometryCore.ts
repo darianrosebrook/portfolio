@@ -45,6 +45,78 @@ export function setPointInPath(
 const RAY_DEDUP_EPS = 0.5;
 
 /**
+ * Intersection cache for `rayHits`.
+ *
+ * Keyed by SvgShape (weakly, so it frees with the glyph) → Map of quantized
+ * ray-key → sorted/deduplicated intersection points. `rayHits` is the hot path
+ * for every detector; re-running detection on a cached glyph (UI toggles,
+ * re-renders, multi-feature sweeps) repeatedly casts the same scanlines, so
+ * memoizing the expensive `safeIntersect` call is a pure win.
+ *
+ * Quantization: coordinates are in font design units (UPM ≈ 1000–2048). We
+ * quantize origin/length to 0.1 units and angle to 1e-4 rad — well below the
+ * dedup epsilon (0.5) and below any visually significant threshold, so rays
+ * that differ only by float drift collapse to one cache entry.
+ *
+ * Returned point arrays are defensive shallow copies: callers may mutate their
+ * own reference without corrupting the cached result. The expensive part (the
+ * svg-intersections computation) is what the cache saves.
+ */
+const rayHitCache = new WeakMap<object, Map<string, Point2D[]>>();
+const QUANT_POS = 10; // 0.1 design units
+const QUANT_ANGLE = 1e4; // 1e-4 rad
+const QUANT_LEN = 10; // 0.1 design units
+const QUANT_DEDUP = 100; // 0.01 design units
+
+function rayHitKey(
+  origin: Point2D,
+  angle: number,
+  len: number,
+  dedupEps: number | undefined
+): string {
+  return [
+    Math.round(origin.x * QUANT_POS),
+    Math.round(origin.y * QUANT_POS),
+    Math.round(angle * QUANT_ANGLE),
+    Math.round(len * QUANT_LEN),
+    dedupEps === undefined ? 'd' : Math.round(dedupEps * QUANT_DEDUP),
+  ].join('|');
+}
+
+/**
+ * Clears the intersection cache. Intended for tests; production never needs it
+ * (the WeakMap self-cleans as shapes are GC'd).
+ */
+export function clearRayHitCache(): void {
+  // WeakMap has no clear(); resetting is per-shape via the stats map. For tests
+  // we track shapes strongly in a side set so they can be enumerated.
+  for (const shape of trackedShapes) {
+    rayHitCache.delete(shape);
+  }
+  trackedShapes.clear();
+}
+
+/**
+ * Observability of cache state for tests/diagnostics.
+ */
+export function getRayHitCacheStats(): {
+  entries: number;
+  shapes: number;
+} {
+  let entries = 0;
+  for (const shape of trackedShapes) {
+    const m = rayHitCache.get(shape);
+    if (m) entries += m.size;
+  }
+  return { entries, shapes: trackedShapes.size };
+}
+
+// Strong side-set of shapes that have cache entries, so tests can enumerate and
+// reset them. The cache itself stays weak; this only exists because WeakMap
+// has no iteration/clear.
+const trackedShapes = new Set<object>();
+
+/**
  * Sorts points along a ray direction and deduplicates near-equal points.
  * @param points - Array of intersection points
  * @param angle - Ray angle in radians
@@ -86,6 +158,10 @@ function sortAndDedupeAlongRay(
 /**
  * Casts a ray (line probe) at a glyph shape and returns intersection points.
  * Points are sorted along the ray direction and deduplicated.
+ *
+ * Results are memoized per (shape, ray): repeated identical rays skip the
+ * svg-intersections computation. Callers receive a defensive shallow copy of
+ * the cached points and may mutate it freely.
  * @param gs - SvgShape for the glyph
  * @param origin - Start point of the ray
  * @param angle - Angle in radians
@@ -100,6 +176,15 @@ export function rayHits(
   len: number,
   dedupEps?: number
 ): { points: Point2D[] } {
+  const key = rayHitKey(origin, angle, len, dedupEps);
+  let shapeMap = rayHitCache.get(gs as object);
+  if (shapeMap) {
+    const cached = shapeMap.get(key);
+    if (cached) {
+      return { points: cached.slice() };
+    }
+  }
+
   const dx = Math.cos(angle) * len;
   const dy = Math.sin(angle) * len;
   const probe = shape('line', {
@@ -129,7 +214,15 @@ export function rayHits(
   const eps = dedupEps ?? Math.max(RAY_DEDUP_EPS, len * 0.001);
   const sorted = sortAndDedupeAlongRay(result.points, angle, eps);
 
-  return { points: sorted };
+  // Store in cache (the sorted/deduplicated canonical form).
+  if (!shapeMap) {
+    shapeMap = new Map();
+    rayHitCache.set(gs as object, shapeMap);
+    trackedShapes.add(gs as object);
+  }
+  shapeMap.set(key, sorted);
+
+  return { points: sorted.slice() };
 }
 
 /**
@@ -167,7 +260,6 @@ export function windingNumber(
  */
 export function isInside(g: Glyph, pt: Point2D): boolean {
   const gs = shapeForV2(g);
-
   // Fast path: use registered pointInPath function
   if (pointInPathFn) {
     return pointInPathFn(gs, pt);

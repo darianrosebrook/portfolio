@@ -21,7 +21,10 @@ import { SymbolGrid } from './SymbolGrid';
 import { TypographyArticleContent } from './TypographyArticleContent';
 
 // New unified detection system imports
-import { detectGlyphFeatures } from '@/utils/typeAnatomy/detectorRegistry';
+import {
+  detectGlyphFeatures,
+  reconcileFeatures,
+} from '@/utils/typeAnatomy/detectorRegistry';
 import { buildGeometryCache } from '@/utils/typeAnatomy/geometryCache';
 import { getFeatureHints } from '@/utils/typeAnatomy/glyphFeatureHints';
 import type {
@@ -560,9 +563,8 @@ export const InspectorProvider: React.FC<{
     }
 
     try {
-      const result = detectGlyphFeatures(
-        geometryCache,
-        filteredSelectedFeatureIds
+      const result = reconcileFeatures(
+        detectGlyphFeatures(geometryCache, filteredSelectedFeatureIds)
       );
       console.log('[FontInspector] Detection result:', {
         size: result.size,
