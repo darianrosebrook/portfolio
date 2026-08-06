@@ -2,10 +2,11 @@ id: FIX-006
 title: 'Set metadataBase and prove the public author embed resolves under anon'
 risk_tier: 3
 mode: fix
-lifecycle_state: active
-worktree: fix-006-metadata
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Auto-closed by caws worktree merge fix-006-metadata at 6fbee95cf63f7de48f79b3337fbc9a4c38b23e30'
 created_at: '2026-08-06T10:18:40.853Z'
-updated_at: '2026-08-06T10:18:40.853Z'
+updated_at: '2026-08-06T10:38:27.875Z'
 blast_radius:
   modules:
     - app-metadata
