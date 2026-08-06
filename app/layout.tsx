@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { Analytics } from '@vercel/analytics/react';
 import localFont from 'next/font/local';
 import { SVGSprites } from './SVGSprites/SVGSprites';
@@ -14,6 +15,39 @@ import Navbar from '@/ui/modules/Navbar';
 import Footer from '@/ui/modules/Footer';
 import SlinkyCursor from '@/ui/components/SlinkyCursor';
 import PerformanceDashboard from '@/ui/modules/PerformanceDashboard/PerformanceDashboard';
+import { env } from '@/utils/env';
+
+/**
+ * Origin all pages' Open Graph / Twitter images resolve against.
+ * Mirrors the NEXT_PUBLIC_SITE_URL > NEXT_PUBLIC_VERCEL_URL precedence used
+ * by utils/supabase/redirectOrigin.ts, so preview deployments get their own
+ * social-image origin instead of falling through to production or localhost.
+ */
+function resolveMetadataBase(): URL {
+  if (env.NEXT_PUBLIC_SITE_URL) {
+    try {
+      return new URL(env.NEXT_PUBLIC_SITE_URL);
+    } catch {
+      // invalid site URL config — fall through to Vercel/production handling
+    }
+  }
+
+  if (env.NEXT_PUBLIC_VERCEL_URL) {
+    const vercelHost = env.NEXT_PUBLIC_VERCEL_URL.replace(/^https?:\/\//, '');
+    return new URL(`https://${vercelHost}`);
+  }
+
+  return new URL('https://darianrosebrook.com');
+}
+
+/**
+ * metadataBase anchors relative Open Graph / Twitter image URLs. Without it,
+ * Next.js falls back to http://localhost:PORT, which breaks social link
+ * previews for shared articles and case studies in production.
+ */
+export const metadata: Metadata = {
+  metadataBase: resolveMetadataBase(),
+};
 
 // If loading a variable font, you don't need to specify the font weight
 const nohemi = localFont({
