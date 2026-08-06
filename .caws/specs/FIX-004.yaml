@@ -1,0 +1,49 @@
+id: FIX-004
+title: 'Stop ISR caching failed reads as empty lists or 404s on public content'
+risk_tier: 2
+mode: fix
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Auto-closed by caws worktree merge fix-004-isr-errors at c130870ef8205a8d88d50ed7b84cac4d0aa7f6d8'
+created_at: '2026-08-06T00:34:52.986Z'
+updated_at: '2026-08-06T00:54:04.861Z'
+blast_radius:
+  modules:
+    - 'public content read paths (articles list, article detail, case-study detail)'
+    - 'build-time static param generation'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'app/articles/page.tsx'
+    - 'app/articles/[slug]/page.tsx'
+    - 'app/work/[slug]/page.tsx'
+    - 'test/pages/publicReadErrors.test.ts'
+    - 'test/pages/publicReadPaths.test.ts'
+  out: []
+invariants:
+  - 'A failed read is never written to the cache. Caching may only ever store the result of a successful query, so a transient fault costs one request rather than a full revalidate window.'
+  - 'A genuine absence (missing or unpublished slug) stays distinguishable from a query failure: the former 404s, the latter fails the render.'
+  - 'A legitimately empty result set is a success, not an error, and is cached normally.'
+  - 'Build-time query failures are logged, never silent; the build still completes with on-demand rendering.'
+acceptance:
+  - id: A1
+    given: 'A Supabase query error while rendering a cacheable public page'
+    when: 'The page renders'
+    then: 'The render fails rather than returning an empty or absent result, so ISR retains the last good cache entry instead of storing the failure'
+  - id: A2
+    given: 'A slug that is genuinely missing or unpublished'
+    when: 'The detail page renders'
+    then: 'It still returns 404 — a real absence must remain distinguishable from a query failure'
+  - id: A3
+    given: 'A query error inside generateStaticParams at build time'
+    when: 'The build runs'
+    then: 'The error is logged and the build still completes with on-demand rendering, rather than silently prerendering nothing'
+  - id: A4
+    given: 'A successful query that legitimately returns zero published rows'
+    when: 'The list page renders'
+    then: 'It renders an empty list normally and is cached — an empty result is not an error'
+non_functional: {}
+contracts:
+  - name: 'public-read-error-handling'
+    type: behavior

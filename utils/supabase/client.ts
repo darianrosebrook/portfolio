@@ -6,7 +6,7 @@ import { env } from '@/utils/env';
  *
  * Creates a Supabase client instance configured for browser-side usage
  * with server-side rendering (SSR) support. Uses environment variables
- * for URL and anonymous key configuration.
+ * for URL and publishable key configuration.
  *
  * @returns Supabase client instance for browser operations
  *

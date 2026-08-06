@@ -1,58 +1,63 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(caws --version*)",
+      "Bash(caws --help*)",
+      "Bash(caws help*)",
+      "Bash(caws status*)",
+      "Bash(caws doctor*)",
+      "Bash(caws scope *)",
+      "Bash(caws specs*)",
+      "Bash(caws worktree *)",
+      "Bash(caws claim*)",
+      "Bash(caws gates*)",
+      "Bash(caws evidence *)",
+      "Bash(caws prepush*)",
+      "Bash(caws agents *)",
+      "Bash(caws message *)",
+      "Bash(caws waiver *)",
+      "Bash(caws events list*)",
+      "Bash(caws events show *)",
+      "Bash(caws events verify-archive*)",
+      "Bash(caws events --help*)",
+      "Bash(caws reprieve show*)",
+      "Bash(caws reprieve list*)",
+      "Bash(caws reprieve --help*)",
+      "Bash(npm run typecheck)",
+      "Bash(npm run lint)"
+    ]
+  },
   "hooks": {
     "PreToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/block-dangerous.sh",
-            "timeout": 10
-          },
-          {
-            "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/worktree-guard.sh",
-            "timeout": 10
-          }
-        ]
-      },
-      {
-        "matcher": "Read",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/scan-secrets.sh",
-            "timeout": 10
-          }
-        ]
-      },
-      {
-        "matcher": "Write|Edit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/worktree-write-guard.sh",
-            "timeout": 10
-          }
-        ]
-      },
-      {
-        "matcher": "Write|Edit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/scope-guard.sh",
-            "timeout": 10
-          }
-        ]
-      },
       {
         "matcher": "Bash|Read|Write|Edit|Glob|Grep|NotebookEdit",
         "hooks": [
           {
             "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/caws_dispatch/pre_tool_use.sh",
+            "command": "export PATH=\"$HOME/.nvm/current/bin:$(npm prefix -g 2>/dev/null)/bin:/opt/homebrew/bin:/usr/local/bin:$PATH\"; CAWS_AGENT_SURFACE=claude-code CAWS_PROJECT_DIR=\"$CLAUDE_PROJECT_DIR\" \"$CLAUDE_PROJECT_DIR\"/.caws/hooks/dispatch/pre_tool_use.sh",
             "timeout": 45
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|Bash|ExitPlanMode",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "export PATH=\"$HOME/.nvm/current/bin:$(npm prefix -g 2>/dev/null)/bin:/opt/homebrew/bin:/usr/local/bin:$PATH\"; CAWS_AGENT_SURFACE=claude-code CAWS_PROJECT_DIR=\"$CLAUDE_PROJECT_DIR\" \"$CLAUDE_PROJECT_DIR\"/.caws/hooks/dispatch/post_tool_use.sh",
+            "timeout": 60
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/doc-frontmatter-check.sh",
+            "timeout": 10
           }
         ]
       }
@@ -62,30 +67,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/session-caws-status.sh session-start",
-            "timeout": 10
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/audit.sh session-start",
-            "timeout": 5
-          },
-          {
-            "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/session-log.sh",
-            "timeout": 10
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/caws_dispatch/session_start.sh",
+            "command": "export PATH=\"$HOME/.nvm/current/bin:$(npm prefix -g 2>/dev/null)/bin:/opt/homebrew/bin:/usr/local/bin:$PATH\"; CAWS_AGENT_SURFACE=claude-code CAWS_PROJECT_DIR=\"$CLAUDE_PROJECT_DIR\" \"$CLAUDE_PROJECT_DIR\"/.caws/hooks/dispatch/session_start.sh",
             "timeout": 30
           }
         ]
@@ -96,83 +78,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/stop-worktree-check.sh",
-            "timeout": 10
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/audit.sh stop",
-            "timeout": 5
-          },
-          {
-            "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/session-log.sh",
-            "timeout": 15
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/caws_dispatch/stop.sh",
+            "command": "export PATH=\"$HOME/.nvm/current/bin:$(npm prefix -g 2>/dev/null)/bin:/opt/homebrew/bin:/usr/local/bin:$PATH\"; CAWS_AGENT_SURFACE=claude-code CAWS_PROJECT_DIR=\"$CLAUDE_PROJECT_DIR\" \"$CLAUDE_PROJECT_DIR\"/.caws/hooks/dispatch/stop.sh",
             "timeout": 30
-          }
-        ]
-      }
-    ],
-    "PostToolUse": [
-      {
-        "matcher": "Write|Edit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/quality-check.sh",
-            "timeout": 30
-          },
-          {
-            "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/validate-spec.sh",
-            "timeout": 15
-          },
-          {
-            "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/doc-frontmatter-check.sh",
-            "timeout": 10
-          }
-        ]
-      },
-      {
-        "matcher": "Write|Edit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/naming-check.sh",
-            "timeout": 10
-          }
-        ]
-      },
-      {
-        "matcher": "Write|Edit|Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/audit.sh tool-use",
-            "timeout": 5
-          }
-        ]
-      },
-      {
-        "matcher": "Write|Edit|Bash|ExitPlanMode",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/caws_dispatch/post_tool_use.sh",
-            "timeout": 60
           }
         ]
       }
@@ -182,8 +89,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/session-log.sh",
-            "timeout": 15
+            "command": "export PATH=\"$HOME/.nvm/current/bin:$(npm prefix -g 2>/dev/null)/bin:/opt/homebrew/bin:/usr/local/bin:$PATH\"; CAWS_AGENT_SURFACE=claude-code CAWS_PROJECT_DIR=\"$CLAUDE_PROJECT_DIR\" \"$CLAUDE_PROJECT_DIR\"/.caws/hooks/dispatch/pre_compact.sh",
+            "timeout": 10
           }
         ]
       }

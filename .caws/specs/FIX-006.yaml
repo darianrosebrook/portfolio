@@ -1,0 +1,36 @@
+id: FIX-006
+title: 'Set metadataBase and prove the public author embed resolves under anon'
+risk_tier: 3
+mode: fix
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Auto-closed by caws worktree merge fix-006-metadata at 6fbee95cf63f7de48f79b3337fbc9a4c38b23e30'
+created_at: '2026-08-06T10:18:40.853Z'
+updated_at: '2026-08-06T10:38:27.875Z'
+blast_radius:
+  modules:
+    - app-metadata
+    - public-content-reads
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'app/layout.tsx'
+    - 'app/page.tsx'
+    - 'test/supabase/authorEmbed.test.ts'
+  out: []
+invariants:
+  - 'Open Graph and Twitter image URLs resolve against the deployed origin, never localhost.'
+  - 'The public author embed exposes only PUBLIC_AUTHOR_COLUMNS, never a wildcard profiles row.'
+acceptance:
+  - id: A1
+    given: 'a metadata export with a relative Open Graph image'
+    when: 'next build resolves social image URLs'
+    then: 'the absolute URL uses the deployed origin and the build emits no metadataBase warning'
+    test_command: 'npm run build'
+  - id: A2
+    given: 'a published article prerendered by generateStaticParams under the anon key'
+    when: 'the rendered output is inspected'
+    then: 'the author embed resolved to real profile values rather than null'
+non_functional: {}
+contracts: []

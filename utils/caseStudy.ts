@@ -5,6 +5,7 @@ import Image from '@tiptap/extension-image';
 import { generateHTML } from '@tiptap/html';
 import type { JSONContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
+import { sanitizeCmsHtml } from '@/utils/helpers/sanitizeHtml';
 
 /**
  * Process case study content by removing the first h1 and first image,
@@ -33,12 +34,14 @@ export function getCaseStudyContent(data: JSONContent): { html: string } {
   }
 
   // Generate HTML from the modified content using server-side extensions
-  const html = generateHTML(
-    {
-      type: 'doc',
-      content,
-    },
-    [StarterKit, Image, DetailsServer, TableOfContentsServer, VideoServer]
+  const html = sanitizeCmsHtml(
+    generateHTML(
+      {
+        type: 'doc',
+        content,
+      },
+      [StarterKit, Image, DetailsServer, TableOfContentsServer, VideoServer]
+    )
   );
 
   return { html };

@@ -15,12 +15,22 @@ interface Environment {
   nextPublicSupabaseUrl: string;
   /** Supabase publishable key (required; legacy anon key fallback supported) */
   nextPublicSupabasePublishableKey: string;
+  /**
+   * Supabase secret key (server-only). Prefer SUPABASE_SECRET_KEY;
+   * falls back to legacy SUPABASE_SERVICE_ROLE_KEY. Never expose to the client.
+   */
+  supabaseSecretKey?: string;
   /** Node.js environment (development/production/test) */
   nodeEnv: string;
   /** Custom site URL override (optional) */
   NEXT_PUBLIC_SITE_URL?: string;
   /** Vercel deployment URL (optional, auto-set by Vercel) */
   NEXT_PUBLIC_VERCEL_URL?: string;
+  /**
+   * Comma-separated Supabase user IDs allowed to run privileged admin APIs
+   * (e.g. image cleanup). Fail closed when empty.
+   */
+  adminUserIds: string[];
 }
 
 /**
@@ -66,21 +76,36 @@ const validateEnvVar = (
  * they MUST be accessed directly as process.env.NEXT_PUBLIC_XXX
  * (not dynamically via process.env[key]) because Next.js inlines
  * these values at build time through static analysis.
+ *
+ * Supabase's current key names:
+ * - NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY (sb_publishable_...) — client + RLS-bound server
+ * - SUPABASE_SECRET_KEY (sb_secret_...) — server-only, bypasses RLS
+ *
+ * Legacy aliases (anon / service_role JWT keys) remain accepted during migration.
  */
 
 // Access NEXT_PUBLIC_* variables directly for browser compatibility
 // These are inlined at build time by Next.js
 const supabaseUrl = validateEnvVar(
   'NEXT_PUBLIC_SUPABASE_URL',
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_URL ?? process.env.SUPABASE_URL,
   'https://placeholder.supabase.co'
 );
+
+// Prefer NEXT_PUBLIC_ so the browser bundle receives the key. Non-prefixed
+// SUPABASE_PUBLISHABLE_KEY works on the server only.
 const supabasePublishableKey = validateEnvVar(
   'NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY',
   process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ??
+    process.env.SUPABASE_PUBLISHABLE_KEY ??
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
   'placeholder_publishable_key'
 );
+
+const supabaseSecretKey =
+  process.env.SUPABASE_SECRET_KEY ??
+  process.env.SUPABASE_SERVICE_ROLE_KEY ??
+  undefined;
 
 // Warn if using placeholder values (server-side only)
 // Browser warnings aren't actionable - NEXT_PUBLIC_* vars must be embedded at build time
@@ -100,8 +125,9 @@ if (
     'Create a .env.local file with real credentials:\n' +
     '  NEXT_PUBLIC_SUPABASE_URL=your-project-url\n' +
     '  NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your-publishable-key\n' +
+    '  SUPABASE_SECRET_KEY=your-secret-key\n' +
     '\n' +
-    'See .env.local.example for template.\n' +
+    'See .env.example for template.\n' +
     '================================================\n';
 
   console.error(message);
@@ -111,8 +137,28 @@ export const env: Environment = {
   // Client-side variables (available in browser via NEXT_PUBLIC_ prefix)
   nextPublicSupabaseUrl: supabaseUrl,
   nextPublicSupabasePublishableKey: supabasePublishableKey,
+  // Server-only — undefined in the browser bundle by design
+  supabaseSecretKey:
+    typeof window === 'undefined' ? supabaseSecretKey : undefined,
 
   nodeEnv: process.env.NODE_ENV || 'development',
   NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
   NEXT_PUBLIC_VERCEL_URL: process.env.NEXT_PUBLIC_VERCEL_URL,
+  adminUserIds: (process.env.ADMIN_USER_IDS ?? '')
+    .split(',')
+    .map((id) => id.trim())
+    .filter(Boolean),
 };
+
+/** True when the user id is listed in ADMIN_USER_IDS (fail closed if unset). */
+export function isAdminUserId(userId: string | undefined): boolean {
+  if (!userId) {
+    return false;
+  }
+  // Read process.env at call time so tests and runtime overrides apply.
+  const ids = (process.env.ADMIN_USER_IDS ?? '')
+    .split(',')
+    .map((id) => id.trim())
+    .filter(Boolean);
+  return ids.includes(userId);
+}

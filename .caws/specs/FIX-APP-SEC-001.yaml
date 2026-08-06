@@ -1,0 +1,83 @@
+id: FIX-APP-SEC-001
+title: 'Harden non-blueprints app auth and content APIs'
+risk_tier: 2
+mode: fix
+lifecycle_state: active
+created_at: '2026-07-20T22:34:30.645Z'
+updated_at: '2026-07-20T22:35:00.000Z'
+blast_radius:
+  modules:
+    - app/api
+    - app/auth
+    - app/dashboard
+    - app/articles
+    - app/work
+    - utils/supabase
+  data_migration: true
+operational_rollback_slo: 30m
+scope:
+  in:
+    - 'app/api/'
+    - 'app/auth/'
+    - 'app/signout/'
+    - 'app/dashboard/'
+    - 'app/articles/'
+    - 'app/work/'
+    - 'app/links/'
+    - 'app/dev/'
+    - 'app/chip-demo/'
+    - 'app/component-displaycase/'
+    - 'app/ha/'
+    - 'app/tools/'
+    - 'app/global-error.tsx'
+    - 'app/error.tsx'
+    - 'app/template.tsx'
+    - 'public/robots.txt'
+    - 'utils/supabase/'
+    - 'utils/schemas/'
+    - 'utils/tiptap/'
+    - 'utils/helpers/'
+    - 'utils/env.ts'
+    - 'test/api/'
+    - 'test/dashboard/'
+    - 'test/articles/'
+    - 'test/utils/'
+    - 'vitest.config.mjs'
+    - 'utils/caseStudy.ts'
+  out:
+    - 'app/blueprints/'
+    - 'node_modules/'
+invariants:
+  - Legacy /api/publish does not accept unauthenticated reads or writes
+  - Public content routes and APIs never return draft or working* fields to anonymous callers
+  - User search query values cannot inject PostgREST filter operators
+  - CMS HTML is sanitized before dangerouslySetInnerHTML
+acceptance:
+  - id: A1
+    given: an unauthenticated caller
+    when: they GET or PUT /api/publish
+    then: the response is 410 Gone (endpoint retired) with no article data
+  - id: A2
+    given: a draft case study or article and an anonymous caller
+    when: they GET the public slug page or /api/*/slug
+    then: the response is 404 (or published-only projection) and working* fields are not exposed
+  - id: A3
+    given: an authenticated caller with q containing PostgREST metacharacters
+    when: they GET /api/users/search
+    then: the query is sanitized and does not alter the filter structure
+  - id: A4
+    given: ContentEditor save receives a non-OK response
+    when: publish or save runs
+    then: local status reflects failure and does not claim success
+  - id: A5
+    given: 'CMS HTML containing a script tag or javascript URL'
+    when: article or case study content is rendered
+    then: the dangerous markup is stripped before injection
+non_functional:
+  security:
+    - Fail closed on privileged cleanup without ADMIN_USER_IDS allowlist
+    - Auth callback redirects only to known site origins
+contracts:
+  - name: content-api
+    type: behavior
+    description: Authenticated mutations, published-only public reads, retired publish API

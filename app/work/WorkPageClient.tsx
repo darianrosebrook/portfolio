@@ -1,17 +1,9 @@
 'use client';
 
-import { useRef, useEffect, ReactNode } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useReducedMotion } from '@/context/ReducedMotionContext';
+import { ReactNode } from 'react';
 import { AnimatedText } from '@/ui/components/AnimatedText';
 import Link from 'next/link';
-import { EASING_PRESETS, EDITORIAL_STAGGER } from '@/utils/animation';
-
-// Register ScrollTrigger plugin
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
+import { useScrollReveal } from '@/utils/animation/useScrollReveal';
 
 interface TimelineItemProps {
   year: string;
@@ -32,35 +24,18 @@ function TimelineItem({
   children,
   index: _index,
 }: TimelineItemProps) {
-  const itemRef = useRef<HTMLLIElement>(null);
-  const { prefersReducedMotion } = useReducedMotion();
-
-  useEffect(() => {
-    if (prefersReducedMotion || !itemRef.current) return;
-
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        itemRef.current,
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.7,
-          ease: EASING_PRESETS.smooth,
-          scrollTrigger: {
-            trigger: itemRef.current,
-            start: 'top 85%',
-            once: true,
-          },
-        }
-      );
-    });
-
-    return () => ctx.revert();
-  }, [prefersReducedMotion]);
+  // Reveal each item as it scrolls into view. Resting state is visible, so
+  // items render without JS.
+  const itemRef = useScrollReveal<HTMLLIElement>({
+    variant: 'fade-up',
+    triggerOnScroll: true,
+    scrollStart: 'top 85%',
+    y: 30,
+    duration: 0.7,
+  });
 
   return (
-    <li ref={itemRef} style={{ opacity: prefersReducedMotion ? 1 : 0 }}>
+    <li ref={itemRef}>
       <h3 className="dateYear">
         <span>{year}</span>
       </h3>
@@ -90,44 +65,17 @@ function TimelineItem({
 }
 
 export default function WorkPageClient() {
-  const { prefersReducedMotion } = useReducedMotion();
-  const headerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (prefersReducedMotion) return;
-
-    const ctx = gsap.context(() => {
-      if (headerRef.current) {
-        // First, make the container visible
-        gsap.set(headerRef.current, { opacity: 1 });
-
-        // Then animate the children
-        const children = headerRef.current.children;
-        gsap.fromTo(
-          children,
-          { opacity: 0, y: 20 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            ease: EASING_PRESETS.smooth,
-            stagger: EDITORIAL_STAGGER.sections,
-          }
-        );
-      }
-    });
-
-    return () => ctx.revert();
-  }, [prefersReducedMotion]);
+  // Stagger the header's children in on mount. Resting state is visible.
+  const headerRef = useScrollReveal<HTMLDivElement>({
+    target: 'children',
+    variant: 'fade-up',
+    duration: 0.6,
+  });
 
   return (
     <>
       <section>
-        <div
-          ref={headerRef}
-          className="content"
-          style={{ opacity: prefersReducedMotion ? 1 : 0 }}
-        >
+        <div ref={headerRef} className="content">
           <AnimatedText
             text="Highlighted Projects"
             as="h2"

@@ -18,19 +18,22 @@ When multiple agents are working on this project, each agent MUST work in its ow
 
 ## Foreign-claim soft-block
 
-`caws worktree bind`, `merge`, and `claim` refuse to mutate a worktree whose `worktrees.json:owner` is a session id different from the current session — unless `--takeover` is supplied. The refusal prints a structured warning naming the claimer, the heartbeat age, any session-log pointer under `tmp/<sessionId>/`, and the exact `--takeover` command:
+`caws claim` and `caws worktree bind` refuse to mutate a worktree whose `worktrees.json:owner` is a session id different from the current session. The override flag differs per command, and `caws worktree merge` has no override at all:
+
+- `caws claim --takeover` — forcibly take ownership of a foreign-owned worktree
+- `caws worktree bind <name> --steal --reason "<text>"` — `--reason` is mandatory and is recorded in the audit log
+
+The refusal prints a structured warning naming the claimer, the heartbeat age, and any session-log pointer so you can read context before deciding:
 
 ```
 Worktree 'wt-foo' is claimed by 8be65780-...:claude-code
    Last heartbeat: 2026-04-27T17:04:00Z (23 min ago)
-   Session log:    tmp/8be65780-72e0-4fc7-a989-4ebac148c18d
-                   15 turns, last turn 2026-04-27T17:26:49Z
-   To proceed:     caws worktree claim wt-foo --takeover
+   To proceed:     caws claim --takeover
 ```
 
-**Decision-gating uses session-id equality only.** A stale heartbeat is NOT authorization to take over — paused sessions are not ended sessions. Read the session log under `tmp/<sessionId>/` for context first. Take over only when you have explicit user authorization.
+**Decision-gating uses session-id equality only.** A stale heartbeat is NOT authorization to take over — paused sessions are not ended sessions. Under Claude Code the recorded pid is an ephemeral per-invocation subshell, so recency, not PID liveness, is the signal. Read the claiming session's log for context first. Take over only when you have explicit user authorization.
 
-`--takeover` writes a durable `prior_owners` audit on the worktree entry (sessionId, platform, lastSeen-at-takeover, takenOver_at) so the handoff is traceable in `worktrees.json`, not just in agent memory.
+Stealing a bind appends a `worktree_ownership_seized` audit event; `--takeover` writes a durable `prior_owners` record on the worktree entry (sessionId, platform, lastSeen-at-takeover, takenOver_at) so the handoff is traceable in `worktrees.json`, not just in agent memory.
 
 ## Forbidden operations when worktrees are active
 

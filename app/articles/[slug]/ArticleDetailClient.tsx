@@ -1,10 +1,6 @@
 'use client';
 
 import NextImage from 'next/image';
-import { useRef, useEffect } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useReducedMotion } from '@/context/ReducedMotionContext';
 import { AnimatedText } from '@/ui/components/AnimatedText';
 import { AnimatedSection } from '@/ui/components/AnimatedSection';
 import {
@@ -15,13 +11,9 @@ import {
 import ProfileFlag from '@/ui/components/ProfileFlag';
 import ShareLinks from './ShareLinks';
 import styles from './styles.module.css';
-import { EASING_PRESETS, EDITORIAL_STAGGER } from '@/utils/animation';
+import { EASING_PRESETS } from '@/utils/animation';
 import { Profile } from '@/types';
-
-// Register ScrollTrigger plugin
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
+import { useScrollReveal } from '@/utils/animation/useScrollReveal';
 
 interface ArticleData {
   headline: string;
@@ -55,66 +47,33 @@ export default function ArticleDetailClient({
   canonical,
   ldJson,
 }: ArticleDetailClientProps) {
-  const { prefersReducedMotion } = useReducedMotion();
-  const imageRef = useRef<HTMLDivElement>(null);
-  const ledeRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (prefersReducedMotion) return;
-
-    const ctx = gsap.context(() => {
-      // Animate the hero image
-      if (imageRef.current) {
-        gsap.fromTo(
-          imageRef.current,
-          { opacity: 0, scale: 1.02 },
-          {
-            opacity: 1,
-            scale: 1,
-            duration: 0.8,
-            ease: EASING_PRESETS.smooth,
-            delay: 0.3,
-          }
-        );
-      }
-
-      // Animate the lede section children with stagger
-      if (ledeRef.current) {
-        // First, make the container visible
-        gsap.set(ledeRef.current, { opacity: 1 });
-
-        // Then animate the children
-        const children = ledeRef.current.children;
-        gsap.fromTo(
-          children,
-          { opacity: 0, y: 20 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            ease: EASING_PRESETS.smooth,
-            stagger: EDITORIAL_STAGGER.sections,
-            delay: 0.1,
-          }
-        );
-      }
-    });
-
-    return () => ctx.revert();
-  }, [prefersReducedMotion]);
+  // Lede children stagger in; the hero image scale-reveals. Resting state is
+  // visible, so the article renders without JS.
+  const ledeRef = useScrollReveal<HTMLDivElement>({
+    target: 'children',
+    variant: 'fade-up',
+    duration: 0.6,
+    delay: 0.1,
+    ease: EASING_PRESETS.smooth,
+  });
+  const imageRef = useScrollReveal<HTMLDivElement>({
+    variant: 'scale',
+    duration: 0.8,
+    delay: 0.3,
+    ease: EASING_PRESETS.smooth,
+  });
 
   return (
     <section className="content">
       <article className={styles.articleContent}>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }}
+          dangerouslySetInnerHTML={{
+            // Escape `<` so hostile CMS strings cannot break out of the script tag
+            __html: JSON.stringify(ldJson).replace(/</g, '\\u003c'),
+          }}
         />
-        <div
-          ref={ledeRef}
-          className={styles.articleLede}
-          style={{ opacity: prefersReducedMotion ? 1 : 0 }}
-        >
+        <div ref={ledeRef} className={styles.articleLede}>
           {article.articleSection && (
             <p className="small uppercase">
               {article.articleSection}
@@ -155,7 +114,7 @@ export default function ArticleDetailClient({
             <ShareLinks url={canonical} article={article} />
           </div>
         </div>
-        <div ref={imageRef} style={{ opacity: prefersReducedMotion ? 1 : 0 }}>
+        <div ref={imageRef}>
           <NextImage
             src={article.image}
             alt={article.headline}

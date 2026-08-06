@@ -1,0 +1,56 @@
+id: FIX-007
+title: 'Clear 28 dependency security advisories including Next.js runtime-path CVEs'
+risk_tier: 2
+mode: fix
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Cleared dependency advisories: next 16.3.0, vitest 3.2.7, sharp 0.35.3, raised pnpm-workspace override floors, js-yaml direct devDep; pnpm audit clean; typecheck/lint/1412 tests/build pass.'
+created_at: '2026-08-06T10:57:36.578Z'
+updated_at: '2026-08-06T12:00:00.780Z'
+blast_radius:
+  modules:
+    - next-runtime
+    - image-optimization
+    - middleware
+    - build-toolchain
+    - test-runner
+  data_migration: false
+operational_rollback_slo: 30m
+scope:
+  in:
+    - 'package.json'
+    - 'pnpm-lock.yaml'
+    - pnpm-workspace.yaml
+  out: []
+invariants:
+  - 'No dependency with a known advisory reachable from the production request path remains unpatched.'
+  - 'Upgrades stay within the existing major version unless the advisory has no in-major fix.'
+  - 'Public content reads keep exposing only PUBLIC_AUTHOR_COLUMNS after the upgrade.'
+acceptance:
+  - id: A1
+    given: 'next 16.2.6 with 8 advisories including an App Router middleware bypass and two SSRFs'
+    when: 'next is upgraded to >=16.2.11 and pnpm audit is re-run'
+    then: 'no next advisory is reported'
+    test_command: 'pnpm audit'
+  - id: A2
+    given: 'vitest 3.2.4 carrying the critical UI-server arbitrary-file-read advisory'
+    when: 'vitest is upgraded to >=3.2.6'
+    then: 'no critical advisory is reported'
+    test_command: 'pnpm audit'
+  - id: A3
+    given: 'sharp 0.34.5 inheriting libvips CVEs, with native bindings'
+    when: 'sharp is upgraded to >=0.35.0 and a production build runs'
+    then: 'the build succeeds and image optimization still resolves remote avatars'
+    test_command: 'npm run build'
+  - id: A4
+    given: 'the full suite and lint chain before the upgrade'
+    when: 'the pre-push gate chain runs after the upgrade'
+    then: 'contracts, lint, typecheck, tests, and build all pass with no new failures'
+non_functional:
+  security:
+    - 'Every advisory reachable from the production request path is patched, not waived.'
+contracts:
+  - name: 'public-content-reads'
+    type: behavior
+  - name: 'middleware-auth-boundary'
+    type: behavior

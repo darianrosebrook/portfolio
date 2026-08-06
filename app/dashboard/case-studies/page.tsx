@@ -3,9 +3,18 @@ import { createClient } from '@/utils/supabase/server';
 
 export default async function CaseStudiesPage() {
   const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return null;
+  }
+
   const { data } = await supabase
     .from('case_studies')
     .select('id, slug, headline, status, modified_at')
+    .eq('author', user.id)
     .order('modified_at', { ascending: false });
 
   return (

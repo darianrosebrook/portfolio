@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/utils/supabase/server';
 import { createArticleSchema } from '@/utils/schemas/article.schema';
+import { revalidatePublicArticlePaths } from '@/utils/supabase/revalidateContent';
 
 export async function POST(request: Request) {
   const supabase = await createClient();
@@ -63,6 +64,11 @@ export async function POST(request: Request) {
       headers: { 'Content-Type': 'application/json' },
     });
   }
+
+  // The row is committed at this point. `status` defaults to 'draft' but is
+  // settable, so a create can publish immediately — invalidate rather than try to
+  // infer visibility from the payload.
+  revalidatePublicArticlePaths();
 
   return new NextResponse(JSON.stringify(data), {
     status: 201,

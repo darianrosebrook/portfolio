@@ -1,9 +1,11 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/utils/supabase/server';
+import { projectContentForCaller } from '@/utils/supabase/contentAccess';
 import {
   updateCaseStudySchema,
   patchCaseStudyDraftSchema,
 } from '@/utils/schemas/case-study.schema';
+import { revalidatePublicCaseStudyPaths } from '@/utils/supabase/revalidateContent';
 
 export async function GET(
   _request: Request,
@@ -11,26 +13,63 @@ export async function GET(
 ) {
   const { slug } = await params;
   const supabase = await createClient();
-  const { data, error } = await supabase
-    .from('case_studies')
-    .select('*')
-    .eq('slug', slug)
-    .single();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  let query = supabase.from('case_studies').select('*').eq('slug', slug);
+
+  if (user) {
+    query = query.or(`status.eq.published,author.eq.${user.id}`);
+  } else {
+    query = query.eq('status', 'published');
+  }
+
+  const { data, error } = await query.single();
 
   if (error) {
     return new NextResponse(JSON.stringify({ error: error.message }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
+      status: error.code === 'PGRST116' ? 404 : 500,
+      headers: {
+        'Content-Type': 'application/json',
+        'Cache-Control': 'private, no-store',
+      },
     });
   }
 
-  return new NextResponse(JSON.stringify(data), {
+  if (!data) {
+    return new NextResponse(JSON.stringify({ error: 'Case study not found' }), {
+      status: 404,
+      headers: {
+        'Content-Type': 'application/json',
+        'Cache-Control': 'private, no-store',
+      },
+    });
+  }
+
+  const projected = projectContentForCaller(
+    data as Record<string, unknown>,
+    user?.id
+  );
+
+  return new NextResponse(JSON.stringify(projected), {
     status: 200,
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      'Cache-Control': 'private, no-store',
+    },
   });
 }
 
-// Save working draft fields without overwriting published content
+/**
+ * Save working draft fields without overwriting published content.
+ *
+ * Deliberately does NOT revalidate the public cache. `patchCaseStudyDraftSchema`
+ * admits only working* fields and `is_dirty`, so nothing a public page renders can
+ * change here — and this is the autosave path, so invalidating would thrash the
+ * cache on every keystroke batch. If this schema ever grows a field that appears
+ * on a public page, add revalidatePublicCaseStudyPaths() below.
+ */
 export async function PATCH(
   request: Request,
   { params }: { params: Promise<{ slug: string }> }
@@ -218,6 +257,20 @@ export async function PUT(
     });
   }
 
+  if (!data || data.length === 0) {
+    return new NextResponse(
+      JSON.stringify({ error: 'Case study not found or unauthorized' }),
+      {
+        status: 404,
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+  }
+
+  // PUT can cross the publish boundary either way. Unpublishing matters most:
+  // without this the case study stays in the public cache after being withdrawn.
+  revalidatePublicCaseStudyPaths();
+
   return new NextResponse(JSON.stringify(data), {
     status: 200,
     headers: { 'Content-Type': 'application/json' },
@@ -254,6 +307,9 @@ export async function DELETE(
       headers: { 'Content-Type': 'application/json' },
     });
   }
+
+  // A deleted case study must disappear from the cached detail route.
+  revalidatePublicCaseStudyPaths();
 
   return new NextResponse(null, {
     status: 204,

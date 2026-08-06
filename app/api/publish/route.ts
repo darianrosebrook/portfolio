@@ -1,29 +1,33 @@
-import { createClient } from '@/utils/supabase/server';
+/**
+ * Legacy publish API — retired.
+ *
+ * Use `/api/articles` and `/api/case-studies` instead. Kept as a stub so
+ * accidental callers get a clear 410 instead of an unauthenticated data path.
+ */
 
-const POST = async (req: Request) => {
-  const body = await req.json();
-  const supabase = await createClient();
-  const { data: userData } = await supabase.auth.getUser();
-  if (!userData.user) {
-    return Response.json({ error: 'Unauthorized' }, { status: 401 });
-  }
-  body.author = userData.user.id;
-  const { data, error } = await supabase.from('articles').insert(body);
-  return Response.json({ data, error });
+const GONE_BODY = {
+  error: 'Gone',
+  message:
+    'This endpoint has been retired. Use /api/articles or /api/case-studies.',
 };
-const GET = async () => {
-  const supabase = await createClient();
-  const { data, error } = await supabase.from('articles').select('*');
-  return Response.json({ data, error });
-};
-const PUT = async (req: Request) => {
-  const body = await req.json();
-  const supabase = await createClient();
-  const { ...rest } = body;
-  const { data, error } = await supabase
-    .from('articles')
-    .update(rest)
-    .eq('id', body.id);
-  return Response.json({ data, error });
-};
-export { POST, GET, PUT };
+
+function goneResponse(): Response {
+  return Response.json(GONE_BODY, {
+    status: 410,
+    headers: {
+      'Cache-Control': 'no-store',
+    },
+  });
+}
+
+export async function GET(): Promise<Response> {
+  return goneResponse();
+}
+
+export async function POST(_req: Request): Promise<Response> {
+  return goneResponse();
+}
+
+export async function PUT(_req: Request): Promise<Response> {
+  return goneResponse();
+}

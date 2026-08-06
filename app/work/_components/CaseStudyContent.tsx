@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { sanitizeCmsHtml } from '@/utils/helpers/sanitizeHtml';
 
 export interface CaseStudyContentProps {
   html: string;
@@ -7,7 +8,7 @@ export interface CaseStudyContentProps {
 }
 
 function enhanceHtml(html: string, siteOrigin?: string): string {
-  let output = html;
+  let output = sanitizeCmsHtml(html);
 
   // Add lazy-loading and async decoding to images that lack them
   output = output.replace(/<img\b([^>]*?)>/g, (_m, attrs: string) => {

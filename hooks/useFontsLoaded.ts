@@ -22,6 +22,12 @@ export function useFontsLoaded(): boolean {
     if ('fonts' in document) {
       // If fonts are already loaded
       if (document.fonts.status === 'loaded') {
+        // Set in the effect rather than via a lazy useState initializer on
+        // purpose. The server has no `document` and always renders false, so
+        // seeding initial state from font status would diverge from the server
+        // markup and break hydration. The effect runs post-hydration, which
+        // makes the extra render the correct trade.
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setFontsLoaded(true);
         return;
       }

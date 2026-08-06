@@ -1,8 +1,9 @@
 'use client';
 
 import * as React from 'react';
-import { useRef, useEffect, useImperativeHandle } from 'react';
+import { useRef, useImperativeHandle } from 'react';
 import { gsap } from 'gsap';
+import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useReducedMotion } from '@/context/ReducedMotionContext';
 import { EASING_PRESETS, ANIMATION_DURATIONS } from '@/utils/animation';
@@ -72,52 +73,61 @@ export const AnimatedCard = React.forwardRef<HTMLElement, AnimatedCardProps>(
     const cardRef = useRef<HTMLElement>(null);
     const { prefersReducedMotion } = useReducedMotion();
 
-    useEffect(() => {
-      const card = cardRef.current;
-      if (!card) return;
+    // useGSAP runs in a layout effect, before the browser paints. That is what
+    // lets the card start hidden without an inline opacity in the server markup,
+    // which would otherwise keep it invisible for no-JS visitors.
+    useGSAP(
+      () => {
+        const card = cardRef.current;
+        if (!card) return;
 
-      // Skip animation if reduced motion is preferred
-      if (prefersReducedMotion) {
-        gsap.set(card, { opacity: 1, y: 0 });
-        return;
-      }
-
-      const ctx = gsap.context(() => {
-        // Set initial state
-        gsap.set(card, { opacity: 0, y: 20 });
-
-        const config = {
-          opacity: 1,
-          y: 0,
-          duration,
-          ease: EASING_PRESETS.smooth,
-          delay,
-          onComplete: onAnimationComplete,
-        };
-
-        if (triggerOnScroll) {
-          gsap.to(card, {
-            ...config,
-            scrollTrigger: {
-              trigger: card,
-              start: scrollStart,
-              once: true,
-            },
-          });
-        } else {
-          gsap.to(card, config);
+        // Skip animation if reduced motion is preferred
+        if (prefersReducedMotion) {
+          gsap.set(card, { opacity: 1, y: 0 });
+          return;
         }
-      }, cardRef);
 
-      return () => ctx.revert();
-    }, [
-      duration,
-      delay,
-      triggerOnScroll,
-      scrollStart,
-      prefersReducedMotion,
-      onAnimationComplete,
-    ]);
+        const ctx = gsap.context(() => {
+          // Set initial state
+          gsap.set(card, { opacity: 0, y: 20 });
+
+          const config = {
+            opacity: 1,
+            y: 0,
+            duration,
+            ease: EASING_PRESETS.smooth,
+            delay,
+            onComplete: onAnimationComplete,
+          };
+
+          if (triggerOnScroll) {
+            gsap.to(card, {
+              ...config,
+              scrollTrigger: {
+                trigger: card,
+                start: scrollStart,
+                once: true,
+              },
+            });
+          } else {
+            gsap.to(card, config);
+          }
+        }, cardRef);
+
+        return () => ctx.revert();
+      },
+      {
+        scope: cardRef,
+        dependencies: [
+          duration,
+          delay,
+          triggerOnScroll,
+          scrollStart,
+          prefersReducedMotion,
+          onAnimationComplete,
+        ],
+      }
+    );
 
     // Forward the internal cardRef to the parent's ref via React's blessed
     // primitive instead of a manual ref-merging callback. React invokes the
@@ -141,10 +151,6 @@ export const AnimatedCard = React.forwardRef<HTMLElement, AnimatedCardProps>(
         ref={cardRef}
         data-ds-component="AnimatedCard"
         className={cardClasses}
-        style={{
-          // Set initial state for SSR/hydration
-          opacity: prefersReducedMotion ? 1 : 0,
-        }}
         onClick={onClick}
         {...(Component === 'a' ? { href } : {})}
         {...rest}

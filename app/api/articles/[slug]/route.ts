@@ -1,9 +1,11 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/utils/supabase/server';
+import { projectContentForCaller } from '@/utils/supabase/contentAccess';
 import {
   updateArticleSchema,
   patchArticleDraftSchema,
 } from '@/utils/schemas/article.schema';
+import { revalidatePublicArticlePaths } from '@/utils/supabase/revalidateContent';
 
 export async function GET(
   _request: Request,
@@ -11,11 +13,20 @@ export async function GET(
 ) {
   const { slug } = await params;
   const supabase = await createClient();
-  const { data, error } = await supabase
-    .from('articles')
-    .select('*')
-    .eq('slug', slug)
-    .single();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  let query = supabase.from('articles').select('*').eq('slug', slug);
+
+  // Anonymous and non-authors only see published rows; authors also see drafts.
+  if (user) {
+    query = query.or(`status.eq.published,author.eq.${user.id}`);
+  } else {
+    query = query.eq('status', 'published');
+  }
+
+  const { data, error } = await query.single();
 
   if (error && (error.message || error.code || Object.keys(error).length > 0)) {
     console.error('Article fetch error:', JSON.stringify(error, null, 2));
@@ -23,7 +34,10 @@ export async function GET(
       JSON.stringify({ error: error.message || 'Database error' }),
       {
         status: error.code === 'PGRST116' ? 404 : 500,
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Cache-Control': 'private, no-store',
+        },
       }
     );
   }
@@ -31,13 +45,24 @@ export async function GET(
   if (!data) {
     return new NextResponse(JSON.stringify({ error: 'Article not found' }), {
       status: 404,
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Cache-Control': 'private, no-store',
+      },
     });
   }
 
-  return new NextResponse(JSON.stringify(data), {
+  const projected = projectContentForCaller(
+    data as Record<string, unknown>,
+    user?.id
+  );
+
+  return new NextResponse(JSON.stringify(projected), {
     status: 200,
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      'Cache-Control': 'private, no-store',
+    },
   });
 }
 
@@ -210,13 +235,26 @@ export async function PUT(
     );
   }
 
+  // PUT can move an article in either direction across the publish boundary.
+  // Unpublishing matters most: without this the article stays in the public cache
+  // and keeps being served for up to the revalidate window after being withdrawn.
+  revalidatePublicArticlePaths();
+
   return new NextResponse(JSON.stringify(data), {
     status: 200,
     headers: { 'Content-Type': 'application/json' },
   });
 }
 
-// Save working draft fields without overwriting published content
+/**
+ * Save working draft fields without overwriting published content.
+ *
+ * Deliberately does NOT revalidate the public cache. `patchArticleDraftSchema`
+ * admits only working* fields and `is_dirty`, so nothing a public page renders can
+ * change here — and this is the autosave path, so invalidating would thrash the
+ * cache on every keystroke batch. If this schema ever grows a field that appears
+ * on a public page, add revalidatePublicArticlePaths() below.
+ */
 export async function PATCH(
   request: Request,
   { params }: { params: Promise<{ slug: string }> }
@@ -320,6 +358,9 @@ export async function DELETE(
       }
     );
   }
+
+  // A deleted article must disappear from the cached list and detail routes.
+  revalidatePublicArticlePaths();
 
   return new NextResponse(null, {
     status: 204,

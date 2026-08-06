@@ -4,6 +4,7 @@ import Button from '@/ui/components/Button';
 import Checkbox from '@/ui/components/Checkbox';
 import { SwitchField } from '@/ui/components/Switch';
 import { extractMetadata } from '@/utils/metadata';
+import { sanitizeCmsHtml } from '@/utils/helpers/sanitizeHtml';
 import { generateHTML } from '@tiptap/html';
 import { JSONContent } from '@tiptap/react';
 import { createPreviewExtensions } from '@/ui/modules/Tiptap/extensionsRegistry';
@@ -58,7 +59,7 @@ export default function ContentEditor({
       content: [],
     };
     // Use preview extensions from registry to ensure consistency
-    return generateHTML(doc, createPreviewExtensions());
+    return sanitizeCmsHtml(generateHTML(doc, createPreviewExtensions()));
   }, [record.articleBody]);
 
   const save = async (payload: Partial<RecordType>) => {
@@ -66,11 +67,16 @@ export default function ContentEditor({
       entity === 'articles' ? '/api/articles' : '/api/case-studies';
     const method = initial.id ? 'PUT' : 'POST';
     const url = initial.id ? `${urlBase}/${record.slug}` : urlBase;
-    await fetch(url, {
+    const response = await fetch(url, {
       method,
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
     });
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(errorText || `Save failed (${response.status})`);
+    }
+    return response.json();
   };
 
   const handleUpdateArticle = (updated: RecordType) => {
@@ -95,8 +101,6 @@ export default function ContentEditor({
     if (currentContent === previousContentRef.current) {
       return;
     }
-
-    previousContentRef.current = currentContent;
 
     const handle = setTimeout(async () => {
       setSaveStatus('saving');
@@ -123,6 +127,7 @@ export default function ContentEditor({
           throw new Error(errorText || 'Save failed');
         }
 
+        previousContentRef.current = currentContent;
         setSaveStatus('saved');
         setTimeout(() => setSaveStatus('idle'), 2000);
       } catch (err) {
@@ -145,8 +150,18 @@ export default function ContentEditor({
       image: next.image ?? meta.coverImage,
       wordCount: meta.wordCount as number,
     };
-    await save(calculated);
-    setRecord(calculated as RecordType);
+    setSaveStatus('saving');
+    setSaveError(null);
+    try {
+      await save(calculated);
+      setRecord(calculated as RecordType);
+      setSaveStatus('saved');
+      setTimeout(() => setSaveStatus('idle'), 2000);
+    } catch (err) {
+      setSaveStatus('error');
+      setSaveError(err instanceof Error ? err.message : 'Failed to save');
+      throw err;
+    }
   };
 
   const toggleDraft = async () => {

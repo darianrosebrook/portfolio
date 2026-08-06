@@ -14,11 +14,7 @@ export { checkForAuth } from './readSession';
 export { updateSession } from './middleware';
 
 // Profile management
-export {
-  getCurrentUserProfile,
-  getPublicProfile,
-  updateUserProfile,
-} from './profile';
+export { getCurrentUserProfile, getPublicProfile } from './profile';
 
 // Content utilities
 export { extractImageUrls, syncArticleImageUsage } from './article-cleanup';

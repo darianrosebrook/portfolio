@@ -1,0 +1,400 @@
+#!/bin/bash
+# CAWS-MANAGED-HOOK
+# hook_pack: shared
+# hook_pack_version: 31
+# caws_min_major: 11
+# lineage_refs: (new in shared-core-001)
+# edit_stance: YOURS TO EDIT. This is a starting hook, not a locked one — shape it
+#   to your repo: tune thresholds, add checks, remove what does not fit. Your edits
+#   are preserved: caws init treats a changed hook as intended growth and will not
+#   clobber it — it shows a diff and asks (--adopt keeps yours; --overwrite --force
+#   takes the upstream template). The CAWS-MANAGED-HOOK marker above is only how caws
+#   init finds hooks it can offer updates for; it is NOT a keep-out sign. CAWS owns the
+#   failure-class invariant (the why/what a guard protects); you own the how. The one
+#   edit to avoid: gutting a guard to dodge a block instead of fixing the cause. Grow
+#   everything else freely.
+# Surface resolver — derives harness-specific values from CAWS_AGENT_SURFACE.
+#
+# WHY THIS EXISTS. The shared core must not branch on a hardcoded harness name
+# or read a harness-specific env var directly (architecture invariant from
+# docs/architecture/hook-pack-shared-core.md §"Dependency-injection environment
+# contract"). All harness specifics reach shared scripts through an injected
+# environment set by the vendor wiring at hook-invocation time.
+#
+# This file is the single point that maps the injected CAWS_AGENT_SURFACE into
+# the derived values every shared hook needs:
+#
+#   CAWS_VENDOR_DIR     — the harness's dot-directory name (e.g. ".claude",
+#                         ".codex"). No trailing slash.
+#   CAWS_LOG_DIR        — absolute path to the harness's log directory
+#                         ($CAWS_PROJECT_DIR/<vendor>/logs). Requires
+#                         CAWS_PROJECT_DIR to be non-empty; otherwise empty.
+#   CAWS_PLATFORM_FLAG  — the value to pass as --platform to any CAWS CLI
+#                         invocations that accept it (e.g. "claude-code",
+#                         "codex").
+#   CAWS_PERMISSION_VOCAB — "ask" when the harness supports a PreToolUse "ask"
+#                         decision (Claude Code), "deny" when it does not
+#                         (Codex maps ask->deny). Used by emit.sh to select
+#                         the correct permission-decision vocabulary.
+#   CAWS_SUPPORTS_UPDATED_INPUT — "1" when the harness honors the PreToolUse
+#                         updatedInput contract (quiet-merge.sh rewrites the
+#                         command), "0" when it does not (kimi-code: no
+#                         documented updatedInput contract; qwen-code:
+#                         documented but not enforced in 0.21.x — quiet-merge
+#                         passes the command through unrewritten).
+#   CAWS_INSTRUCTION_FILES — space-separated root instruction filenames the
+#                         harness reads at the repo root (e.g. "CLAUDE.md" for
+#                         claude-code, "AGENTS.md" for codex/opencode/zcode).
+#                         Used by worktree-write-guard.sh's allowlist so a
+#                         session editing its harness's doctrine file does not
+#                         trip the base-branch write guard. The unknown-surface
+#                         fallback lists BOTH common files (fail-safe for
+#                         multi-surface repos).
+#
+# PROJECT ROOT RESOLUTION (back-compat fallback chain):
+#   CAWS_PROJECT_DIR is the canonical env var injected by the vendor wiring.
+#   If it is not set (not-yet-migrated wiring), this resolver falls back to:
+#     1. CLAUDE_PROJECT_DIR  (legacy Claude Code wiring)
+#     2. CODEX_PROJECT_DIR   (legacy Codex wiring)
+#     3. .  (cwd — last resort)
+#   The resolved value is re-exported as CAWS_PROJECT_DIR so all downstream
+#   scripts can use the single canonical name.
+#
+#   HOOK-PROJECT-DIR-ROOT-NOT-CWD-01: a vendor *_PROJECT_DIR may be the
+#   session's CWD rather than the repo root (zcode sets CLAUDE_PROJECT_DIR to
+#   the session cwd, which is often a package-bearing subdirectory). A
+#   subdirectory value would fragment every CAWS_PROJECT_DIR-derived path
+#   (CAWS_LOG_DIR, the heartbeat lease cache, the audit log) into a stray
+#   <subdir>/.caws or <subdir>/.zcode. So each candidate is NORMALIZED to its
+#   git repo root via `git rev-parse --show-toplevel` before adoption — the
+#   same invariant the codex dispatcher already binds (hook-install.ts
+#   codexCommand: CAWS_PROJECT_DIR=$REPO_ROOT). This is a no-op when the
+#   candidate is already the root (Claude Code, Codex). On git-absent or
+#   not-a-repo, the raw candidate is kept (fail-open — never downgrade a real
+#   vendor signal to "."); the bare "." fallback is reached ONLY when no
+#   vendor *_PROJECT_DIR is set at all.
+#
+# SURFACES:
+#   claude-code  — Claude Code (Anthropic CLI). Default when CAWS_AGENT_SURFACE
+#                  is unset, preserving back-compat for any existing wiring that
+#                  does not yet inject the surface identity.
+#   codex        — OpenAI Codex CLI.
+#   zcode        — ZCode CLI. Strict-JSON hook output contract; the vendor
+#                  wiring installs a bridge wrapper (caws-bridge.sh) that
+#                  re-wraps non-JSON shared-dispatcher output as valid
+#                  additionalContext envelopes. Supports PreToolUse ask.
+#   kimi-code    — Kimi Code CLI. Hooks live ONLY in the user-level
+#                  $KIMI_CODE_HOME/config.toml (no project-level config), so
+#                  the wiring is a repo-conditional shim (caws-kimi-hook.sh)
+#                  that resolves the git root at invocation time (codex
+#                  precedent) and no-ops outside CAWS repos. Deny-only PreToolUse
+#                  vocab (verified live: "ask" does not block); block reasons
+#                  go to stderr with exit 2.
+#   qwen-code    — Qwen Code CLI. Hooks live in the repo-local
+#                  .qwen/settings.json, but Qwen exports no env var that
+#                  reliably names the repo root (QWEN_CODE_PROJECT_DIR is the
+#                  per-project state dir under ~/.qwen/projects/<slug>, probed
+#                  live on 0.21.4), so the wiring is a repo-conditional shim
+#                  (caws-qwen-hook.sh) that resolves the git root at
+#                  invocation time (codex/kimi precedent) and no-ops outside
+#                  CAWS repos. Full allow/deny/ask PreToolUse vocab (ask
+#                  prompts interactively and degrades to deny in
+#                  headless/background); updatedInput is documented but NOT
+#                  enforced in 0.21.x, so quiet-merge passes the command
+#                  through unrewritten.
+#   (future)     — cursor, windsurf, vscode, idea, ... Add a case arm below.
+#
+# IDEMPOTENT: safe to source multiple times.
+#
+# FAIL-OPEN: unknown surface falls through to the claude-code defaults so a
+# misconfigured wiring does not become a hard block.
+
+if [[ -n "${_CAWS_AGENT_SURFACE_SH_LOADED:-}" ]]; then
+  return 0 2>/dev/null || exit 0
+fi
+_CAWS_AGENT_SURFACE_SH_LOADED=1
+
+# ---------------------------------------------------------------------------
+# 1. Resolve CAWS_PROJECT_DIR with the back-compat fallback chain.
+#
+#    HOOK-PROJECT-DIR-ROOT-NOT-CWD-01: normalize each vendor *_PROJECT_DIR
+#    candidate to its git repo root before adopting it, because some harnesses
+#    (zcode) inject the session CWD there, and a CWD that is a package-bearing
+#    subdirectory would fragment all CAWS_PROJECT_DIR-derived paths into a
+#    stray <subdir>/.caws / <subdir>/.zcode. `git rev-parse --show-toplevel`
+#    is cwd-independent and idempotent (a no-op when the candidate is already
+#    the root, so Claude Code / Codex are unaffected). On git-absent or a
+#    candidate that is not inside a repo, keep the raw candidate (fail-open —
+#    it is still the best available signal, and never silently downgrade a real
+#    vendor value to "."). The bare "." fallback is reached ONLY when no
+#    vendor *_PROJECT_DIR is set at all.
+# ---------------------------------------------------------------------------
+# Resolve a candidate directory to its git repo root, cwd-independent. Prints
+# the root on success, nothing on failure (not a repo / git missing). Never
+# exits non-zero: callers treat empty output as "no root available".
+_caws_to_git_root() {
+  local d="${1:-}"
+  [[ -z "$d" ]] && return 0
+  command -v git >/dev/null 2>&1 || return 0
+  local root
+  root="$(cd "$d" 2>/dev/null && git rev-parse --show-toplevel 2>/dev/null || true)"
+  [[ -n "$root" ]] && printf '%s\n' "$root"
+}
+
+if [[ -z "${CAWS_PROJECT_DIR:-}" ]]; then
+  _CAWS_VENDOR_DIR_CANDIDATE=""
+  if [[ -n "${CLAUDE_PROJECT_DIR:-}" ]]; then
+    _CAWS_VENDOR_DIR_CANDIDATE="$CLAUDE_PROJECT_DIR"
+  elif [[ -n "${CODEX_PROJECT_DIR:-}" ]]; then
+    _CAWS_VENDOR_DIR_CANDIDATE="$CODEX_PROJECT_DIR"
+  fi
+
+  if [[ -n "$_CAWS_VENDOR_DIR_CANDIDATE" ]]; then
+    # Normalize the candidate to its git repo root (HOOK-PROJECT-DIR-ROOT-
+    # NOT-CWD-01). On failure keep the raw candidate — fail-open.
+    _CAWS_NORMALIZED_ROOT="$(_caws_to_git_root "$_CAWS_VENDOR_DIR_CANDIDATE")"
+    if [[ -n "$_CAWS_NORMALIZED_ROOT" ]]; then
+      CAWS_PROJECT_DIR="$_CAWS_NORMALIZED_ROOT"
+    else
+      CAWS_PROJECT_DIR="$_CAWS_VENDOR_DIR_CANDIDATE"
+    fi
+  else
+    CAWS_PROJECT_DIR="."
+  fi
+
+  unset _CAWS_VENDOR_DIR_CANDIDATE _CAWS_NORMALIZED_ROOT
+fi
+unset -f _caws_to_git_root
+export CAWS_PROJECT_DIR
+
+# ---------------------------------------------------------------------------
+# 2. Default CAWS_AGENT_SURFACE when unset (back-compat: old wiring did not
+#    inject this variable; default to claude-code to preserve behavior).
+# ---------------------------------------------------------------------------
+: "${CAWS_AGENT_SURFACE:=claude-code}"
+export CAWS_AGENT_SURFACE
+
+# ---------------------------------------------------------------------------
+# 3. Derive per-surface values.
+# ---------------------------------------------------------------------------
+case "$CAWS_AGENT_SURFACE" in
+  claude-code)
+    CAWS_VENDOR_DIR=".claude"
+    CAWS_PLATFORM_FLAG="claude-code"
+    CAWS_PERMISSION_VOCAB="ask"
+    CAWS_INSTRUCTION_FILES="CLAUDE.md"
+    ;;
+  codex)
+    CAWS_VENDOR_DIR=".codex"
+    CAWS_PLATFORM_FLAG="codex"
+    # Codex has no PreToolUse "ask" decision; map ask -> deny.
+    CAWS_PERMISSION_VOCAB="deny"
+    CAWS_INSTRUCTION_FILES="AGENTS.md"
+    ;;
+  cursor)
+    CAWS_VENDOR_DIR=".cursor"
+    CAWS_PLATFORM_FLAG="cursor"
+    CAWS_PERMISSION_VOCAB="ask"
+    CAWS_INSTRUCTION_FILES="AGENTS.md"
+    ;;
+  windsurf)
+    CAWS_VENDOR_DIR=".windsurf"
+    CAWS_PLATFORM_FLAG="windsurf"
+    CAWS_PERMISSION_VOCAB="ask"
+    CAWS_INSTRUCTION_FILES="AGENTS.md"
+    ;;
+  opencode)
+    CAWS_VENDOR_DIR=".opencode"
+    CAWS_PLATFORM_FLAG="opencode"
+    # opencode has no PreToolUse "ask" — its only block primitive is throw
+    # inside tool.execute.before (see .opencode/plugins/caws.ts). Map ask ->
+    # deny, matching the codex adapter precedent.
+    CAWS_PERMISSION_VOCAB="deny"
+    CAWS_INSTRUCTION_FILES="AGENTS.md"
+    ;;
+  zcode)
+    CAWS_VENDOR_DIR=".zcode"
+    CAWS_PLATFORM_FLAG="zcode"
+    # ZCode supports allow/ask/deny for PreToolUse — same as Claude Code.
+    CAWS_PERMISSION_VOCAB="ask"
+    CAWS_INSTRUCTION_FILES="AGENTS.md"
+    ;;
+  kimi-code)
+    CAWS_VENDOR_DIR=".kimi-code"
+    CAWS_PLATFORM_FLAG="kimi-code"
+    # Kimi has no PreToolUse "ask" decision that blocks (verified live on
+    # 0.31.1: ask degrades to allow); map ask -> deny, matching the codex
+    # adapter precedent.
+    CAWS_PERMISSION_VOCAB="deny"
+    CAWS_INSTRUCTION_FILES="AGENTS.md"
+    # No documented updatedInput contract — quiet-merge passes the command
+    # through unrewritten on this surface.
+    CAWS_SUPPORTS_UPDATED_INPUT="0"
+    ;;
+  qwen-code)
+    CAWS_VENDOR_DIR=".qwen"
+    CAWS_PLATFORM_FLAG="qwen-code"
+    # Qwen Code supports allow/deny/ask natively (verified live on 0.21.4):
+    # interactive sessions prompt on ask; headless/background contexts
+    # degrade ask -> deny automatically. Same vocab as Claude Code.
+    CAWS_PERMISSION_VOCAB="ask"
+    CAWS_INSTRUCTION_FILES="QWEN.md"
+    # updatedInput is documented but NOT enforced in 0.21.x (probed
+    # 2026-08-03, tmp/qwen-hook-probe-findings.md) — quiet-merge passes the
+    # command through unrewritten on this surface.
+    CAWS_SUPPORTS_UPDATED_INPUT="0"
+    ;;
+  *)
+    # Unknown surface — fall through to claude-code defaults so a
+    # misconfigured wiring does not become a hard block. Emit a warning to
+    # stderr so the operator can investigate, but do NOT exit non-zero.
+    # CAWS_INSTRUCTION_FILES lists BOTH common root doctrine files so a
+    # multi-surface repo with an unrecognized surface still allowlists its
+    # instruction file(s) in the worktree-write-guard.
+    printf '[agent-surface.sh] WARNING: unknown CAWS_AGENT_SURFACE=%s; defaulting to claude-code values\n' \
+      "$CAWS_AGENT_SURFACE" >&2
+    CAWS_VENDOR_DIR=".claude"
+    CAWS_PLATFORM_FLAG="claude-code"
+    CAWS_PERMISSION_VOCAB="ask"
+    CAWS_INSTRUCTION_FILES="CLAUDE.md AGENTS.md"
+    ;;
+esac
+
+# ---------------------------------------------------------------------------
+# 4. Derive CAWS_LOG_DIR from the resolved project dir and vendor dir.
+# ---------------------------------------------------------------------------
+if [[ -n "${CAWS_PROJECT_DIR:-}" && "${CAWS_PROJECT_DIR}" != "." ]]; then
+  CAWS_LOG_DIR="${CAWS_PROJECT_DIR}/${CAWS_VENDOR_DIR}/logs"
+else
+  # Project dir is "." (relative fallback) or empty — use a relative path.
+  # Individual hooks that need an absolute log dir must resolve cwd themselves.
+  CAWS_LOG_DIR="${CAWS_VENDOR_DIR}/logs"
+fi
+
+# Default updatedInput support ON for every surface that has been emitting it
+# (all surfaces predating this flag); the kimi-code arm above opts out.
+: "${CAWS_SUPPORTS_UPDATED_INPUT:=1}"
+
+# ---------------------------------------------------------------------------
+# 4b. Derive CAWS_HOOKS_DIR — where the hook SCRIPTS live.
+#
+# This is NOT the vendor dir. Logs are vendor-scoped (.claude/logs,
+# .codex/logs, ...) because each harness writes its own; the hook scripts are
+# shared and live in the CAWS-vendored tree (.caws/hooks/) for EVERY surface.
+#
+# Remediation text that tells a human to run reset-strikes.sh /
+# reset-danger-latch.sh must interpolate THIS, not CAWS_VENDOR_DIR — a guard
+# that names a path which does not resolve turns a correct refusal into an
+# unrecoverable block, because the agent is (by design) barred from clearing
+# its own strike/latch state and can only hand the command to a human.
+#
+# A candidate only wins if it actually CONTAINS the reset scripts. Deriving the
+# path from this file's location alone is not enough: under `caws init` the
+# shared templates are read from a package directory that is NOT the installed
+# hooks tree, so a self-relative guess yields a real-looking path with no
+# scripts in it — the same "names a path that does not resolve" failure this
+# variable exists to prevent, just harder to spot. Validate, then fall back.
+#
+# BASH_SOURCE is referenced defensively: this lib is sourced by hooks that run
+# under `set -u`, where a bare ${BASH_SOURCE[0]} is a fatal unbound reference
+# in some invocation shapes.
+# ---------------------------------------------------------------------------
+if [[ -z "${CAWS_HOOKS_DIR:-}" ]]; then
+  _caws_hooks_candidates=()
+
+  _caws_self="${BASH_SOURCE[0]:-}"
+  if [[ -n "$_caws_self" ]]; then
+    _caws_lib_dir="$(cd "$(dirname "$_caws_self")" 2>/dev/null && pwd)"
+    [[ -n "$_caws_lib_dir" ]] && _caws_hooks_candidates+=("$(dirname "$_caws_lib_dir")")
+  fi
+
+  if [[ -n "${CAWS_PROJECT_DIR:-}" && "${CAWS_PROJECT_DIR}" != "." ]]; then
+    _caws_hooks_candidates+=("${CAWS_PROJECT_DIR}/.caws/hooks")
+  fi
+  _caws_hooks_candidates+=(".caws/hooks")
+
+  for _caws_cand in "${_caws_hooks_candidates[@]}"; do
+    if [[ -f "${_caws_cand}/reset-strikes.sh" ]]; then
+      CAWS_HOOKS_DIR="$_caws_cand"
+      break
+    fi
+  done
+
+  # Nothing validated — name the canonical location rather than a wrong guess.
+  if [[ -z "${CAWS_HOOKS_DIR:-}" ]]; then
+    if [[ -n "${CAWS_PROJECT_DIR:-}" && "${CAWS_PROJECT_DIR}" != "." ]]; then
+      CAWS_HOOKS_DIR="${CAWS_PROJECT_DIR}/.caws/hooks"
+    else
+      CAWS_HOOKS_DIR=".caws/hooks"
+    fi
+  fi
+
+  unset _caws_hooks_candidates _caws_self _caws_lib_dir _caws_cand
+fi
+
+export CAWS_VENDOR_DIR CAWS_PLATFORM_FLAG CAWS_PERMISSION_VOCAB CAWS_INSTRUCTION_FILES CAWS_LOG_DIR CAWS_HOOKS_DIR CAWS_SUPPORTS_UPDATED_INPUT
+
+# ---------------------------------------------------------------------------
+# 5. caws_source_lib <basename>
+#
+# Resolve and source a lib file with vendor-override-first priority:
+#
+#   1. Vendor override: ${CAWS_PROJECT_DIR}/${CAWS_VENDOR_DIR}/hooks/lib/<basename>
+#      This is where a per-vendor adapter places overriding lib files (e.g.
+#      codex/hooks/lib/emit.sh). The adapter is installed by `caws init` into
+#      the consumer's vendor dir; shared scripts source from here first.
+#
+#   2. Shared fallback: ${CAWS_SHARED_LIB_DIR}/<basename>
+#      CAWS_SHARED_LIB_DIR must be exported by the dispatcher (or any script
+#      that needs lib resolution) BEFORE sourcing this file, or set to the
+#      invoking script's own lib/ directory. Dispatchers set it as:
+#        CAWS_SHARED_LIB_DIR="$HOOKS_DIR/lib"   (HOOKS_DIR = .caws/hooks)
+#      Individual guard hooks (invoked via run_handlers) inherit
+#      CAWS_SHARED_LIB_DIR from the dispatcher's environment; if it is not
+#      set they fall back to resolving it from BASH_SOURCE[0].
+#
+# Semantics:
+#   - Sources the first candidate that exists as a regular file.
+#   - Returns 0 on success, non-zero if neither candidate exists.
+#   - Fail-open by design: callers should append `|| true` or `|| exit 0`
+#     as appropriate; this function does NOT exit non-zero fatally.
+#
+# IDEMPOTENT: guard files (.sh) typically carry their own
+# double-source guard (e.g. `_CAWS_EMIT_SH_LOADED`), so repeat
+# calls are cheap.
+# ---------------------------------------------------------------------------
+caws_source_lib() {
+  local basename="${1:-}"
+  [[ -z "$basename" ]] && return 1
+
+  # Determine shared lib dir: prefer the exported env var, fall back to
+  # locating it relative to this file (lib/ sibling).
+  local _shared_lib
+  if [[ -n "${CAWS_SHARED_LIB_DIR:-}" ]]; then
+    _shared_lib="$CAWS_SHARED_LIB_DIR"
+  else
+    _shared_lib="$(cd "$(dirname "${BASH_SOURCE[0]}")" 2>/dev/null && pwd)"
+  fi
+
+  # 1. Vendor override candidate
+  local _vendor_override=""
+  if [[ -n "${CAWS_PROJECT_DIR:-}" && -n "${CAWS_VENDOR_DIR:-}" ]]; then
+    _vendor_override="${CAWS_PROJECT_DIR}/${CAWS_VENDOR_DIR}/hooks/lib/${basename}"
+  fi
+
+  if [[ -n "$_vendor_override" && -f "$_vendor_override" ]]; then
+    # shellcheck disable=SC1090
+    source "$_vendor_override"
+    return $?
+  fi
+
+  # 2. Shared fallback
+  local _shared_candidate="${_shared_lib}/${basename}"
+  if [[ -f "$_shared_candidate" ]]; then
+    # shellcheck disable=SC1090
+    source "$_shared_candidate"
+    return $?
+  fi
+
+  return 1
+}

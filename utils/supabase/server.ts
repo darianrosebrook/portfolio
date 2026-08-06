@@ -7,7 +7,7 @@ import { env } from '@/utils/env';
  *
  * Creates a Supabase client instance configured for server-side usage
  * with automatic cookie handling for authentication state. Uses environment
- * variables for URL and anonymous key configuration.
+ * variables for URL and publishable key configuration.
  *
  * @returns Promise resolving to Supabase client instance for server operations
  *

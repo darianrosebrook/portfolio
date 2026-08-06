@@ -54,7 +54,9 @@ describe('Avatar', () => {
       render(<Avatar name="John Doe" size="medium" />);
       // getByText('JD') returns the inner span.avatar_initials; walk up to the
       // container div which carries the 'avatar' class.
-      const container = screen.getByText('JD').closest('[data-ds-component="Avatar"]');
+      const container = screen
+        .getByText('JD')
+        .closest('[data-ds-component="Avatar"]');
       expect(container).toHaveClass('avatar');
     });
   });
@@ -63,7 +65,9 @@ describe('Avatar', () => {
     it('applies size classes correctly', () => {
       render(<Avatar name="John Doe" size="large" />);
       // Size is applied as a CSS class on the container div, not a data-size attribute.
-      const container = screen.getByText('JD').closest('[data-ds-component="Avatar"]');
+      const container = screen
+        .getByText('JD')
+        .closest('[data-ds-component="Avatar"]');
       expect(container).toHaveClass('large');
     });
   });

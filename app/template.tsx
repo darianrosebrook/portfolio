@@ -3,33 +3,21 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import {
-  BrandProvider,
-  ReducedMotionProvider,
-  InteractionProvider,
-  UserProvider,
-} from '@/context';
-import Navbar from '@/ui/modules/Navbar';
-import Footer from '@/ui/modules/Footer';
-import SlinkyCursor from '@/ui/components/SlinkyCursor';
+
 type TemplateProps = {
   children: React.ReactNode;
 };
 
+/**
+ * Per-navigation wrapper. Next.js remounts this on every client navigation,
+ * so it holds only work that should re-run per route: the main-content fade
+ * and the selection-highlight listener. Persistent app chrome and context
+ * providers live in the root layout (app/layout.tsx) so they mount once.
+ */
 const Template: React.FC<TemplateProps> = ({ children }) => {
   const ref = useRef(null);
   const handleSelectionChange = useRef<(() => void) | null>(null);
 
-  /**
-   * Top-level navigation pages for the main Navbar.
-   * @type {{ name: string; path: string; admin: boolean }[]}
-   */
-  const pages = [
-    { name: 'Blueprints', path: 'blueprints', admin: false },
-    { name: 'Articles', path: 'articles', admin: false },
-    { name: 'Work', path: 'work', admin: false },
-    { name: 'Design Tools', path: 'tools', admin: false },
-  ];
   useEffect(() => {
     if (!handleSelectionChange.current) {
       // Fires on every selectionchange event. When selection text is empty,
@@ -101,20 +89,7 @@ const Template: React.FC<TemplateProps> = ({ children }) => {
     });
   }, []);
 
-  return (
-    <BrandProvider>
-      <ReducedMotionProvider>
-        <InteractionProvider>
-          <UserProvider>
-            <Navbar pages={pages} />
-            <main ref={ref}>{children}</main>
-            <Footer />
-            <SlinkyCursor />
-          </UserProvider>
-        </InteractionProvider>
-      </ReducedMotionProvider>
-    </BrandProvider>
-  );
+  return <main ref={ref}>{children}</main>;
 };
 
 export default Template;

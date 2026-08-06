@@ -37,7 +37,9 @@ describe('PageTransition', () => {
 
     // Component does not spread ...rest, so data-testid is not forwarded.
     // Query via the stable data-ds-component attribute instead.
-    expect(document.querySelector('[data-ds-component="PageTransition"]')).toBeInTheDocument();
+    expect(
+      document.querySelector('[data-ds-component="PageTransition"]')
+    ).toBeInTheDocument();
   });
 
   describe('Accessibility', () => {

@@ -107,50 +107,65 @@ If either side is missing, the guard falls back to union mode.
 
 **Quick commands:**
 ```bash
-# See your effective scope and binding health
-caws scope show
+# Explain the scope decision for a path (path is required)
+caws scope show <path>
 
-# Fix a broken binding
-caws worktree bind <spec-id>
+# Evaluate many paths at once, grouped by remediation
+caws scope plan
+
+# Fix a broken binding (worktree name, not spec id)
+caws worktree bind <name> --spec <spec-id>
 
 # Inspect the agent registry — who is currently working what
 caws agents list
 
-# Inspect a specific worktree's claim (read-only by default)
-caws worktree claim <name>
+# Surface ownership of the current worktree (read-only without --takeover)
+caws claim
 ```
 
 **Recovery checklist** (when the scope guard blocks you unexpectedly):
 1. Run `caws scope show` — check if you're in authoritative or union mode
-2. If union mode: bind your spec with `caws worktree bind <spec-id>`
+2. If union mode: bind your spec with `caws worktree bind <name> --spec <spec-id>`
 3. If authoritative but still blocked: the file is genuinely outside your spec's scope. Update your spec's `scope.in` if the file should be in scope, or request a waiver
 4. Do NOT modify another spec's `scope.out` to unblock yourself — that defeats the isolation
 
 ### Agent Claims & Multi-Agent Coordination
 
-Each session gets registered in `.caws/agents.json` automatically (via the session-log hook and on every CAWS lifecycle CLI invocation). Worktree session ownership is tracked in `.caws/worktrees.json:owner` as a session id.
+Each session gets registered as a lease file in `.caws/leases/<sessionId>.json`, written by `.caws/hooks/agent-register.sh` at SessionStart and refreshed by `caws agents heartbeat` at PreToolUse. Read leases with `caws agents list` / `caws agents show <id>`. Worktree session ownership is tracked in `.caws/worktrees.json:owner` as a session id.
 
-`caws worktree bind`, `merge`, and `claim` will refuse to mutate a worktree owned by a different session id without explicit `--takeover`. The refusal prints a structured warning naming the claimer as `<sessionId>:<platform>`, the heartbeat age, and any matching `tmp/<sessionId>/` session-log path so you can read context before deciding.
+Leases are an operational cache and never authority. Authority lives in `.caws/worktrees.json` (ownership) and `.caws/specs/<id>.yaml` (scope).
 
-**Decision-gating uses session-id equality only.** TTL pruning of `agents.json` is registry hygiene; it does NOT authorize takeover. A stale heartbeat doesn't mean the prior session is dead — it may be paused.
+Ownership overrides are per-command, and the flag differs:
+
+- `caws claim --takeover` — forcibly take ownership of a foreign-owned worktree
+- `caws worktree bind <name> --steal --reason "<text>"` — `--reason` is mandatory and appends a `worktree_ownership_seized` audit event
+- `caws worktree merge` has no ownership-override flag
+
+The refusal prints a structured warning naming the claimer as `<sessionId>:<platform>`, the heartbeat age, and any matching session-log path so you can read context before deciding.
+
+**Decision-gating uses session-id equality only.** `caws agents prune` is registry hygiene; it does NOT authorize takeover. A stale heartbeat doesn't mean the prior session is dead — it may be paused. Under Claude Code the recorded pid is an ephemeral per-invocation subshell, so recency, not PID liveness, is the signal.
 
 `--takeover` writes a durable `prior_owners` audit on the worktree entry (sessionId, platform, lastSeen-at-takeover, takenOver_at) so handoffs are traceable in `worktrees.json`, not just in agent memory.
 
-### Spec lifecycle: archive (v11 tombstone)
+### Spec lifecycle: archive
 
-`caws specs archive <id>` requires the spec be `closed` first. In v11, archive is a
-**tombstone, not a directory move**: it *deletes* the spec YAML from `.caws/specs/`
-and appends a recoverable `spec_archived` event to the hash-chained
-`.caws/events.jsonl` carrying the body's `blob_sha`. There is **no**
-`.caws/specs/.archive/` directory in v11 (that was the v10 behavior).
+`caws specs archive <id>` requires the spec be `closed` first. In v11 (verified
+against caws 11.6.0), archive is a **move-shaped** operation: it relocates the
+spec YAML from `.caws/specs/<id>.yaml` to `.caws/specs/.archive/<id>.yaml` and
+appends a `spec_archived` event to the hash-chained `.caws/events.jsonl`
+recording the `from_path`/`to_path` of the move. The `.caws/specs/.archive/`
+directory is real and tracked; `caws specs list` reports anything under it as
+`status: archived`.
 
 Recover an archived body with `caws specs show <id> --archived` or
-`caws specs recover <id>` (resolves via `git show <blob_sha>`). The archive
+`caws specs recover <id>` — recover reads the `spec_archived` event and the
+`.caws/specs/.archive/<id>.yaml` body for move-shaped archives, falling back to
+git-history/`blob_sha` recovery for older tombstone-shaped archives. The archive
 operation makes its own audit commit, so run it from a clean working tree —
 it refuses to auto-commit over uncommitted changes.
 
-For a never-activated draft, use `caws specs retire-draft <id>` (same tombstone
-shape) rather than archive. Never use `mv`/`git rm` to relocate or remove specs —
+For a never-activated draft, use `caws specs retire-draft <id>` (which deletes
+the draft) rather than archive. Never use `mv`/`git rm` to relocate or remove specs —
 that bypasses the comment-preserving patch, the `updated_at` bump, and the
 hash-chained audit record.
 
@@ -160,14 +175,43 @@ hash-chained audit record.
 
 ### Quality Gates
 
-Quality requirements are tiered:
+`caws gates run --spec <id>` evaluates exactly five gates. They are declared in
+`.caws/policy.yaml` and are the complete set the CLI knows about — its internal
+`KNOWN_GATE_IDS` tuple contains only these, so a gate absent from the list cannot
+be enabled by configuration:
 
-| Gate | T1 (Critical) | T2 (Standard) | T3 (Low Risk) |
-|------|---------------|----------------|----------------|
-| Test coverage | 90%+ | 80%+ | 70%+ |
-| Mutation score | 70%+ | 50%+ | 30%+ |
-| Contracts | Required | Required | Optional |
-| Manual review | Required | Optional | Optional |
+| Gate | Mode | What it enforces |
+|------|------|------------------|
+| `budget_limit` | block | `max_files` / `max_loc` for the spec's `risk_tier` |
+| `spec_completeness` | block | required spec fields are present |
+| `scope_boundary` | block | edits stay within `scope.in`, never `scope.out` |
+| `god_object` | warn | source files over 1750 / 2000 lines |
+| `todo_detection` | warn | `TODO` / `FIXME` / `HACK` / `XXX` markers |
+
+Only the change budget varies by tier:
+
+| Risk tier | max_files | max_loc |
+|-----------|-----------|---------|
+| 1 (critical) | 25 | 1000 |
+| 2 (standard) | 50 | 2000 |
+| 3 (low risk) | 100 | 5000 |
+
+**Coverage and mutation score are not gate-enforced.** The CLI ships no evaluator
+for either, so `Overall: OK` from `caws gates run` says nothing about them. Treat
+these as targets you verify yourself, not gates that will stop you:
+
+- **Coverage** — measure with `npm run test:coverage`. No thresholds are configured
+  in `vitest.config.mjs`, so the command reports and never fails. Repo-wide coverage
+  was **19.91% statements / 74.22% branch** when last measured (2026-08-05); judge a
+  change on the coverage of the files it touches, not the aggregate, which is
+  dominated by large untested utility trees.
+- **Mutation score** — no runner is installed (no Stryker). Not measurable today.
+  Kill mutants by hand when hardening safety-critical logic, and say so explicitly
+  rather than implying a score.
+
+Contracts are enforced only at spec creation: `caws specs create` requires at least
+one `--contract` for tier 1/2, and none for tier 3 or `--mode chore`. Nothing
+re-checks contracts afterwards. Manual review is a team convention, not a gate.
 
 ### Key Rules
 
@@ -201,9 +245,12 @@ Valid reasons: `emergency_hotfix`, `legacy_integration`, `experimental_feature`,
   specs/              # Canonical feature specs (one YAML per feature; no singleton)
   policy.yaml         # Quality policy + tiers + gates
   waivers/            # Active waivers (one file per waiver)
+  hooks/              # Shared hook core: dispatch/ + guards (v11.9)
   events.jsonl        # Hash-chained audit log (gitignored; local-runtime)
   state/              # Runtime working state (auto-managed; gitignored)
-  worktrees.json      # Worktree registry (gitignored; local-runtime)
+  worktrees.json      # Worktree registry -- ownership authority (gitignored)
+  leases/             # Agent liveness, one file per session (gitignored)
+  agents.json         # Legacy v10 agent registry; keep as `{}` (gitignored)
 ```
 
 > **Working state**: `.caws/state/<spec-id>.json` tracks runtime progress -- current phase,
@@ -212,10 +259,21 @@ Valid reasons: `emergency_hotfix`, `legacy_integration`, `experimental_feature`,
 
 ## Hooks
 
-This project has Claude Code hooks configured in `.claude/settings.json`:
+CAWS v11.9 installs a **shared hook core** under `.caws/hooks/` (dispatchers +
+guards). Claude Code is a vendor adapter: `.claude/settings.json` injects
+`CAWS_AGENT_SURFACE=claude-code` and routes lifecycle events to
+`.caws/hooks/dispatch/<event>.sh`.
 
-- **PreToolUse**: Blocks dangerous commands, scans for secrets, enforces scope
-- **PostToolUse**: Runs quality checks, validates spec, checks naming conventions
-- **Session**: Audit logging for provenance tracking
+- **PreToolUse** → `dispatch/pre_tool_use.sh` (danger latch, worktree/scope guards, secrets scan, …)
+- **PostToolUse** → `dispatch/post_tool_use.sh` (naming / god-object / todo / loc-delta checks, …)
+- **SessionStart / Stop / PreCompact** → matching dispatchers (status, agent lease, transcripts)
 
-See `.claude/README.md` for hook details.
+Update the pack with `caws init --agent-surface claude-code` (add
+`--overwrite --force` to take the upstream baseline for drifted managed files).
+Restart the agent session after install — hooks load only at session start.
+
+Cursor loads the same Claude wiring via third-party hooks (see
+`.cursor/README.md`). Official `caws init --agent-surface cursor` is not
+implemented in CAWS 11.9.0 yet.
+
+See `.claude/README.md` and `.claude/hooks/CLAUDE.md` for details.

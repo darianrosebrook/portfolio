@@ -126,11 +126,7 @@ const Details = React.forwardRef<HTMLDetailsElement, DetailsProps>(
             {icon === 'right' ? iconElement : null}
           </span>
         </summary>
-        <div
-          data-slot="details-content"
-          className="content"
-          hidden={!isOpen}
-        >
+        <div data-slot="details-content" className="content" hidden={!isOpen}>
           {children}
         </div>
       </details>
