@@ -3,6 +3,7 @@ title: 'Harden cross-detector reconciliation: falsifiable assertions and unteste
 risk_tier: 2
 mode: fix
 lifecycle_state: active
+worktree: typeanatomy-004-reconcile
 created_at: '2026-08-06T13:36:42.999Z'
 updated_at: '2026-08-06T13:36:42.999Z'
 blast_radius:
