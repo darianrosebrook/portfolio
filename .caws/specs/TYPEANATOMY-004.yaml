@@ -7,7 +7,8 @@ created_at: '2026-08-06T13:36:42.999Z'
 updated_at: '2026-08-06T13:36:42.999Z'
 blast_radius:
   modules:
-    - 'TODO: list one or more modules this spec touches.'
+    - utils/typeAnatomy
+    - utils/geometry
   data_migration: false
 operational_rollback_slo: 5m
 scope:
@@ -17,12 +18,22 @@ scope:
     - 'utils/geometry/geometryCore.ts'
   out: []
 invariants:
-  - 'TODO: describe one invariant this spec guarantees.'
+  - Reconciliation suppresses only same-kind regions from different feature ids; complementary kinds (stroke vs enclosed) always coexist
+  - Every assertion in test/typeAnatomy/ can fail for the behavior its comment names
+  - Detection output for a glyph with no competing regions is unchanged by reconciliation
 acceptance:
   - id: A1
-    given: 'TODO'
-    when: 'TODO'
-    then: 'TODO'
+    given: reconcile-features.test.ts asserts a glyph with a hole keeps both the surrounding stroke and the enclosed counter
+    when: the assertion is tightened from `ids.has('bowl') || ids.has('counter')` to require both
+    then: the test fails if either region is suppressed, and the current behavior of reconcileFeatures on 'o' is recorded as pass or fail
+  - id: A2
+    given: reconcileFeatures wrongly suppresses a complementary region, if A1 shows it does
+    when: the suppression rule is corrected to compare region kind before dropping an instance
+    then: A1's tightened assertion passes and the three existing reconciliation tests still pass unchanged
+  - id: A3
+    given: filterDetectedFeatures and getBestInstances are exported but uncovered (detectorRegistry.ts lines 159-170 and 176-191)
+    when: tests are added pinning their selection semantics on real font fixtures
+    then: both functions are exercised and detectorRegistry.ts function coverage exceeds its 63.63% baseline
 non_functional: {}
 contracts:
   - name: 'feature-reconciliation'
