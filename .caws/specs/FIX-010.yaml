@@ -3,6 +3,7 @@ title: 'Destroy the Tiptap editor in TableOfContentsExtension test so npm test e
 risk_tier: 3
 mode: fix
 lifecycle_state: active
+worktree: fix-010-editor-teardown
 created_at: '2026-08-06T14:02:01.084Z'
 updated_at: '2026-08-06T14:02:01.084Z'
 blast_radius:
