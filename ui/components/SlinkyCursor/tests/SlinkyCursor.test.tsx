@@ -36,7 +36,9 @@ describe('SlinkyCursor', () => {
       render(<SlinkyCursor />, { wrapper: Wrapper });
 
       // Component renders with class "pest" per SlinkyCursor.tsx
-      const cursor = document.querySelector('[data-ds-component="Slinkycursor"]');
+      const cursor = document.querySelector(
+        '[data-ds-component="Slinkycursor"]'
+      );
       expect(cursor).toHaveClass('pest');
     });
   });

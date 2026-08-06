@@ -41,6 +41,10 @@ const config = [
   // Ignore blueprint pattern samples from lint for now
   {
     ignores: [
+      // CAWS-managed hook core, installed and overwritten by `caws init`.
+      // Formatting it here would drift from the upstream baseline and be
+      // clobbered on the next install.
+      '.caws/hooks/**',
       'app/blueprints/design-patterns/patterns/**',
       'playwright.config.ts',
       'scripts/templates/**',

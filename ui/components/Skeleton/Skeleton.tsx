@@ -11,8 +11,10 @@ export type SkeletonVariant =
   | 'dataviz'
   | 'actions';
 
-export interface SkeletonProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'children'> {
+export interface SkeletonProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  'children'
+> {
   variant?: SkeletonVariant;
   animate?: 'shimmer' | 'wipe' | 'pulse' | 'none';
   density?: 'compact' | 'regular' | 'spacious';

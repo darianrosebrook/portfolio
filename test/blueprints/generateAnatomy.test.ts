@@ -80,7 +80,11 @@ describe('parseAnatomy — A1: one row per authored anatomy entry', () => {
 
   it('assigns root level 0 with no parent and children level 1 parented to root', () => {
     const parts = parseAnatomy(['root', 'body'], null);
-    expect(parts[0]).toMatchObject({ name: 'root', level: 0, parent: undefined });
+    expect(parts[0]).toMatchObject({
+      name: 'root',
+      level: 0,
+      parent: undefined,
+    });
     expect(parts[1]).toMatchObject({ name: 'body', level: 1, parent: 'root' });
   });
 });
@@ -136,8 +140,12 @@ describe('parseAnatomy — A2: Type column classification', () => {
 
   it('classifies every non-root part as a plain part when no contract is given', () => {
     const parts = parseAnatomy(['root', 'body', 'footer'], null);
-    expect(parts.find((p) => p.name === 'root')?.type).toEqual({ kind: 'root' });
-    expect(parts.find((p) => p.name === 'body')?.type).toEqual({ kind: 'part' });
+    expect(parts.find((p) => p.name === 'root')?.type).toEqual({
+      kind: 'root',
+    });
+    expect(parts.find((p) => p.name === 'body')?.type).toEqual({
+      kind: 'part',
+    });
     expect(parts.find((p) => p.name === 'footer')?.type).toEqual({
       kind: 'part',
     });
