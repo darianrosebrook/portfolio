@@ -3,6 +3,7 @@ title: 'Set metadataBase and prove the public author embed resolves under anon'
 risk_tier: 3
 mode: fix
 lifecycle_state: active
+worktree: fix-006-metadata
 created_at: '2026-08-06T10:18:40.853Z'
 updated_at: '2026-08-06T10:18:40.853Z'
 blast_radius:
