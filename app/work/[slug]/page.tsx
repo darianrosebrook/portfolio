@@ -25,18 +25,33 @@ export const revalidate = 3600;
 export async function generateStaticParams() {
   try {
     const supabase = createReadClient();
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from('case_studies')
       .select('slug')
       .eq('status', 'published');
+
+    // supabase-js reports query failures on `error` rather than throwing, so
+    // without this the catch below never sees them and the build quietly
+    // prerenders nothing — indistinguishable from "no case studies exist".
+    if (error) {
+      console.error(
+        'generateStaticParams: failed to list published case study slugs:',
+        JSON.stringify(error, null, 2)
+      );
+      return [];
+    }
 
     return (data ?? [])
       .map(({ slug }) => slug)
       .filter((slug): slug is string => typeof slug === 'string' && slug !== '')
       .map((slug) => ({ slug }));
-  } catch {
+  } catch (thrown) {
     // A build without database access should not fail; fall back to rendering
-    // every slug on demand.
+    // every slug on demand. Logged so it is a visible tradeoff, not a silence.
+    console.error(
+      'generateStaticParams: unable to reach the database; every case study slug will render on demand:',
+      thrown
+    );
     return [];
   }
 }
@@ -48,12 +63,25 @@ async function getData(slug: string) {
   // Narrowed select, not `*`: this row is spread into CaseStudyPage props.
   // The `as {...}` cast below is compile-time only — it does not remove
   // working* keys from the object that reaches the client.
-  const { data: caseStudy } = await supabase
+  const { data: caseStudy, error } = await supabase
     .from('case_studies')
     .select(PUBLIC_CASE_STUDY_SELECT)
     .eq('slug', slug)
     .eq('status', 'published')
     .single();
+
+  // A failed query must not become a 404. This route is cached, and a cached 404
+  // on a published case study has no subsequent write to invalidate it. PGRST116
+  // is "no rows" — a genuine absence, which falls through to notFound() below.
+  if (error && error.code !== 'PGRST116') {
+    console.error(
+      `Failed to load case study "${slug}":`,
+      JSON.stringify(error, null, 2)
+    );
+    throw new Error(
+      `Failed to load case study "${slug}": ${error.message || error.code}`
+    );
+  }
 
   if (!caseStudy) {
     notFound();
