@@ -3,6 +3,7 @@ title: 'Clear 28 dependency security advisories including Next.js runtime-path C
 risk_tier: 2
 mode: fix
 lifecycle_state: active
+worktree: fix-007-dep-security
 created_at: '2026-08-06T10:57:36.578Z'
 updated_at: '2026-08-06T10:57:36.578Z'
 blast_radius:
