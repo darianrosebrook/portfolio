@@ -7,7 +7,7 @@ created_at: '2026-08-06T15:12:47.269Z'
 updated_at: '2026-08-06T15:12:47.269Z'
 blast_radius:
   modules:
-    - 'TODO: list one or more modules this spec touches.'
+    - lint-config
   data_migration: false
 operational_rollback_slo: 5m
 scope:
@@ -17,11 +17,20 @@ scope:
     - 'eslint.config.mjs'
   out: []
 invariants:
-  - 'TODO: describe one invariant this spec guarantees.'
+  - ESLint does not scan gitignored scratch directories that hold no tracked files
+  - No rule is disabled or downgraded to make the run pass
 acceptance:
   - id: A1
-    given: 'TODO'
-    when: 'TODO'
-    then: 'TODO'
+    given: 9 of the 16 errors come from tmp/, which .gitignore line 111 ignores and which holds 0 tracked files, so its files are absent from tsconfig and fail to parse
+    when: tmp/ is added to the eslint ignores list alongside the existing scratch-path entries
+    then: those 9 errors disappear without suppressing any rule
+  - id: A2
+    given: 7 errors are prettier and react/no-unescaped-entities violations in code merged into main during this session
+    when: the prettier violations are auto-fixed and the bio apostrophe is escaped
+    then: npm run lint exits 0 with no remaining errors or warnings
+  - id: A3
+    given: the pre-push hook runs lint, so a failing lint blocks every push including branch deletions
+    when: lint passes
+    then: git push succeeds and the merged remote branches can be deleted
 non_functional: {}
 contracts: []
