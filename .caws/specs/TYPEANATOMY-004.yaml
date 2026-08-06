@@ -2,10 +2,11 @@ id: TYPEANATOMY-004
 title: 'Harden cross-detector reconciliation: falsifiable assertions and untested registry exports'
 risk_tier: 2
 mode: fix
-lifecycle_state: active
-worktree: typeanatomy-004-reconcile
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Auto-closed by caws worktree merge typeanatomy-004-reconcile at 009225225283c4aa6abd32da9dc625b67b9c46fe'
 created_at: '2026-08-06T13:36:42.999Z'
-updated_at: '2026-08-06T13:36:42.999Z'
+updated_at: '2026-08-06T14:28:01.509Z'
 blast_radius:
   modules:
     - utils/typeAnatomy
