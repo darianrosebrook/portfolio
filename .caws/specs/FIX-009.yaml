@@ -2,10 +2,11 @@ id: FIX-009
 title: 'Restore private registry auth references so a clean pnpm install succeeds'
 risk_tier: 3
 mode: fix
-lifecycle_state: active
-worktree: fix-009-registry-auth
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Auto-closed by caws worktree merge fix-009-registry-auth at 2818ce38af6edb8a9834f456b086132cbe287863'
 created_at: '2026-08-06T13:51:34.220Z'
-updated_at: '2026-08-06T13:51:34.220Z'
+updated_at: '2026-08-06T14:00:10.312Z'
 blast_radius:
   modules:
     - build-config
