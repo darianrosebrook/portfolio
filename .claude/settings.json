@@ -1,4 +1,20 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(caws status*)",
+      "Bash(caws doctor*)",
+      "Bash(caws specs*)",
+      "Bash(caws scope show *)",
+      "Bash(caws scope check *)",
+      "Bash(caws scope plan*)",
+      "Bash(caws scope contention *)",
+      "Bash(caws worktree list*)",
+      "Bash(caws agents list*)",
+      "Bash(caws --version*)",
+      "Bash(npm run typecheck)",
+      "Bash(npm run lint)"
+    ]
+  },
   "hooks": {
     "PreToolUse": [
       {
