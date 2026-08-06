@@ -107,32 +107,43 @@ If either side is missing, the guard falls back to union mode.
 
 **Quick commands:**
 ```bash
-# See your effective scope and binding health
-caws scope show
+# Explain the scope decision for a path (path is required)
+caws scope show <path>
 
-# Fix a broken binding
-caws worktree bind <spec-id>
+# Evaluate many paths at once, grouped by remediation
+caws scope plan
+
+# Fix a broken binding (worktree name, not spec id)
+caws worktree bind <name> --spec <spec-id>
 
 # Inspect the agent registry — who is currently working what
 caws agents list
 
-# Inspect a specific worktree's claim (read-only by default)
-caws worktree claim <name>
+# Surface ownership of the current worktree (read-only without --takeover)
+caws claim
 ```
 
 **Recovery checklist** (when the scope guard blocks you unexpectedly):
 1. Run `caws scope show` — check if you're in authoritative or union mode
-2. If union mode: bind your spec with `caws worktree bind <spec-id>`
+2. If union mode: bind your spec with `caws worktree bind <name> --spec <spec-id>`
 3. If authoritative but still blocked: the file is genuinely outside your spec's scope. Update your spec's `scope.in` if the file should be in scope, or request a waiver
 4. Do NOT modify another spec's `scope.out` to unblock yourself — that defeats the isolation
 
 ### Agent Claims & Multi-Agent Coordination
 
-Each session gets registered in `.caws/agents.json` automatically (via the session-log hook and on every CAWS lifecycle CLI invocation). Worktree session ownership is tracked in `.caws/worktrees.json:owner` as a session id.
+Each session gets registered as a lease file in `.caws/leases/<sessionId>.json`, written by `.caws/hooks/agent-register.sh` at SessionStart and refreshed by `caws agents heartbeat` at PreToolUse. Read leases with `caws agents list` / `caws agents show <id>`. Worktree session ownership is tracked in `.caws/worktrees.json:owner` as a session id.
 
-`caws worktree bind`, `merge`, and `claim` will refuse to mutate a worktree owned by a different session id without explicit `--takeover`. The refusal prints a structured warning naming the claimer as `<sessionId>:<platform>`, the heartbeat age, and any matching `tmp/<sessionId>/` session-log path so you can read context before deciding.
+Leases are an operational cache and never authority. Authority lives in `.caws/worktrees.json` (ownership) and `.caws/specs/<id>.yaml` (scope).
 
-**Decision-gating uses session-id equality only.** TTL pruning of `agents.json` is registry hygiene; it does NOT authorize takeover. A stale heartbeat doesn't mean the prior session is dead — it may be paused.
+Ownership overrides are per-command, and the flag differs:
+
+- `caws claim --takeover` — forcibly take ownership of a foreign-owned worktree
+- `caws worktree bind <name> --steal --reason "<text>"` — `--reason` is mandatory and appends a `worktree_ownership_seized` audit event
+- `caws worktree merge` has no ownership-override flag
+
+The refusal prints a structured warning naming the claimer as `<sessionId>:<platform>`, the heartbeat age, and any matching session-log path so you can read context before deciding.
+
+**Decision-gating uses session-id equality only.** `caws agents prune` is registry hygiene; it does NOT authorize takeover. A stale heartbeat doesn't mean the prior session is dead — it may be paused. Under Claude Code the recorded pid is an ephemeral per-invocation subshell, so recency, not PID liveness, is the signal.
 
 `--takeover` writes a durable `prior_owners` audit on the worktree entry (sessionId, platform, lastSeen-at-takeover, takenOver_at) so handoffs are traceable in `worktrees.json`, not just in agent memory.
 
@@ -234,9 +245,12 @@ Valid reasons: `emergency_hotfix`, `legacy_integration`, `experimental_feature`,
   specs/              # Canonical feature specs (one YAML per feature; no singleton)
   policy.yaml         # Quality policy + tiers + gates
   waivers/            # Active waivers (one file per waiver)
+  hooks/              # Shared hook core: dispatch/ + guards (v11.9)
   events.jsonl        # Hash-chained audit log (gitignored; local-runtime)
   state/              # Runtime working state (auto-managed; gitignored)
-  worktrees.json      # Worktree registry (gitignored; local-runtime)
+  worktrees.json      # Worktree registry -- ownership authority (gitignored)
+  leases/             # Agent liveness, one file per session (gitignored)
+  agents.json         # Legacy v10 agent registry; keep as `{}` (gitignored)
 ```
 
 > **Working state**: `.caws/state/<spec-id>.json` tracks runtime progress -- current phase,
