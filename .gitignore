@@ -40,7 +40,10 @@ next-env.d.ts
 # cursor/vscode related
 .cursorignore
 .cursorrules
-.cursor*
+# Track .cursor/README.md (and future official CAWS cursor pack files).
+# Ignore local Cursor plans / caches only.
+.cursor/plans/
+.cursor/**/cache/
 /plans/
 .vscode/
 **/TODO.md
@@ -134,3 +137,6 @@ test-results
 .caws/events.jsonl.lock
 tmp/guard-strikes-*.json
 # <<< caws gitignore <<<
+
+# Python bytecode from hook unit probes
+.caws/hooks/__pycache__/

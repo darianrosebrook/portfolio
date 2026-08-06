@@ -245,10 +245,21 @@ Valid reasons: `emergency_hotfix`, `legacy_integration`, `experimental_feature`,
 
 ## Hooks
 
-This project has Claude Code hooks configured in `.claude/settings.json`:
+CAWS v11.9 installs a **shared hook core** under `.caws/hooks/` (dispatchers +
+guards). Claude Code is a vendor adapter: `.claude/settings.json` injects
+`CAWS_AGENT_SURFACE=claude-code` and routes lifecycle events to
+`.caws/hooks/dispatch/<event>.sh`.
 
-- **PreToolUse**: Blocks dangerous commands, scans for secrets, enforces scope
-- **PostToolUse**: Runs quality checks, validates spec, checks naming conventions
-- **Session**: Audit logging for provenance tracking
+- **PreToolUse** → `dispatch/pre_tool_use.sh` (danger latch, worktree/scope guards, secrets scan, …)
+- **PostToolUse** → `dispatch/post_tool_use.sh` (naming / god-object / todo / loc-delta checks, …)
+- **SessionStart / Stop / PreCompact** → matching dispatchers (status, agent lease, transcripts)
 
-See `.claude/README.md` for hook details.
+Update the pack with `caws init --agent-surface claude-code` (add
+`--overwrite --force` to take the upstream baseline for drifted managed files).
+Restart the agent session after install — hooks load only at session start.
+
+Cursor loads the same Claude wiring via third-party hooks (see
+`.cursor/README.md`). Official `caws init --agent-surface cursor` is not
+implemented in CAWS 11.9.0 yet.
+
+See `.claude/README.md` and `.claude/hooks/CLAUDE.md` for details.
