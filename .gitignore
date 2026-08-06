@@ -140,3 +140,4 @@ tmp/guard-strikes-*.json
 
 # Python bytecode from hook unit probes
 .caws/hooks/__pycache__/
+.caws/messages.jsonl
