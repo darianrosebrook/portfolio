@@ -21,7 +21,7 @@ acceptance:
   - id: A1
     given: the test constructs a Tiptap Editor and never destroys it, so prosemirror-view's DOMObserver flush timer fires after jsdom teardown
     when: the full suite runs
-    then: vitest reports "ReferenceError: document is not defined" as an unhandled error and npm test exits 1 despite every test passing
+    then: 'vitest reports an unhandled "ReferenceError: document is not defined" and npm test exits 1 despite every test passing'
   - id: A2
     given: the editor is released once the assertion has been made
     when: the full suite is re-run
