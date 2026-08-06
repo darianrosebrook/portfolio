@@ -10,8 +10,13 @@ export function usePerformanceMonitor() {
   const [isEnabled, setIsEnabled] = useState(false);
 
   useEffect(() => {
-    // Check localStorage on mount
+    // Check localStorage on mount. Read here rather than in a lazy useState
+    // initializer because localStorage does not exist during SSR: seeding
+    // initial state from it would throw on the server and diverge from the
+    // server markup on the client. useSyncExternalStore is the principled
+    // alternative and is tracked as follow-up work.
     const stored = localStorage.getItem('showPerformanceDashboard');
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsEnabled(stored === 'true');
   }, []);
 

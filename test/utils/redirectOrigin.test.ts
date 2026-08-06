@@ -1,7 +1,9 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
-const mockEnv: { NEXT_PUBLIC_SITE_URL?: string; NEXT_PUBLIC_VERCEL_URL?: string } =
-  {};
+const mockEnv: {
+  NEXT_PUBLIC_SITE_URL?: string;
+  NEXT_PUBLIC_VERCEL_URL?: string;
+} = {};
 
 vi.mock('@/utils/env', () => ({
   get env() {

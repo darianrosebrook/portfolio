@@ -32,7 +32,9 @@ describe('Truncate', () => {
 
     // getByText finds the inner <span class="content">; the outer wrapper carries
     // className. Query via data-ds-component to reach the wrapper element.
-    const wrapper = screen.getByText('Very long text').closest('[data-ds-component="Truncate"]');
+    const wrapper = screen
+      .getByText('Very long text')
+      .closest('[data-ds-component="Truncate"]');
     expect(wrapper).toHaveClass('custom-class');
   });
 
@@ -77,7 +79,9 @@ describe('Truncate', () => {
 
       // getByText finds the inner <span class="content">; the 'truncate' class
       // lives on the outer wrapper. Query via data-ds-component to reach it.
-      const wrapper = screen.getByText('Long text').closest('[data-ds-component="Truncate"]');
+      const wrapper = screen
+        .getByText('Long text')
+        .closest('[data-ds-component="Truncate"]');
       expect(wrapper).toHaveClass('truncate');
     });
   });

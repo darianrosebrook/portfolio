@@ -1,0 +1,48 @@
+id: FIX-005
+title: 'Gate pushes on lint/typecheck/test and clear pre-existing lint debt'
+risk_tier: 3
+mode: fix
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Auto-closed by caws worktree merge fix-005-push-gates at bdcc03b2381c23d6d37a964e66de45bbee28ca06'
+created_at: '2026-08-06T01:36:56.256Z'
+updated_at: '2026-08-06T03:33:51.532Z'
+blast_radius:
+  modules:
+    - git-hooks
+    - lint-config
+    - client-hooks
+    - error-boundary
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - '.husky/pre-push'
+    - 'eslint.config.mjs'
+    - 'app/global-error.tsx'
+    - 'hooks/useFontsLoaded.ts'
+    - 'hooks/usePerformanceMonitor.ts'
+    - 'test/components/DocLayout.test.tsx'
+  out: []
+invariants:
+  - 'A push is refused unless lint, typecheck, tests, and build all pass.'
+  - 'The test suite exits deterministically: no unhandled rejection may survive environment teardown.'
+  - 'Suppressing a lint rule requires a written justification for why the rule''s suggested fix is wrong for that call site.'
+  - 'CAWS-managed files under .caws/hooks/ are never reformatted by this repo''s lint config.'
+acceptance:
+  - id: A1
+    given: 'a working tree with a lint, typecheck, or test failure'
+    when: 'git push runs the pre-push hook'
+    then: 'the push is aborted and the failing gate is named in the output'
+  - id: A2
+    given: 'the full vitest suite run repeatedly'
+    when: 'DocLayout mounts a Sandpack-backed tree in jsdom'
+    then: 'no unhandled rejection is reported and the run exits 0 every time'
+    test_command: 'npm test'
+  - id: A3
+    given: 'the repository at HEAD'
+    when: 'npm run lint runs'
+    then: 'it exits 0, with every remaining suppression carrying a justification comment'
+    test_command: 'npm run lint'
+non_functional: {}
+contracts: []
