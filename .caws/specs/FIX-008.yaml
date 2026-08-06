@@ -3,6 +3,7 @@ title: 'Record the unrecorded case-only rename of Links and Breadcrumbs componen
 risk_tier: 3
 mode: fix
 lifecycle_state: active
+worktree: fix-008-dir-case
 created_at: '2026-08-06T13:45:28.501Z'
 updated_at: '2026-08-06T13:45:28.501Z'
 blast_radius:
