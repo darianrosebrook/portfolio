@@ -196,10 +196,9 @@ export default function HomeClient({ ldJson }: HomeClientProps) {
             </div>
           </div>
           <p>
-            As a Staff Design Technologist with a strong background in UX
-            engineering, I specialize in crafting robust design systems and
-            developing custom design tooling for Figma that revolutionizes
-            product development workflows. Based in Seattle, Washington, I
+            Keeping design and development aligned has been a primary focus of
+            mine that I've been able to exercise through creating custom design
+            systems and functional tooling. Based in Seattle, Washington, I
             thrive at the intersection of design and development, where I
             dedicate my efforts to streamlining collaboration and optimizing
             product development cycles.
