@@ -5,7 +5,7 @@ mode: fix
 lifecycle_state: active
 worktree: fix-007-dep-security
 created_at: '2026-08-06T10:57:36.578Z'
-updated_at: '2026-08-06T10:57:36.578Z'
+updated_at: '2026-08-06T11:59:22.633Z'
 blast_radius:
   modules:
     - next-runtime
@@ -19,6 +19,7 @@ scope:
   in:
     - 'package.json'
     - 'pnpm-lock.yaml'
+    - pnpm-workspace.yaml
   out: []
 invariants:
   - 'No dependency with a known advisory reachable from the production request path remains unpatched.'
