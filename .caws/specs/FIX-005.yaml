@@ -3,6 +3,7 @@ title: 'Gate pushes on lint/typecheck/test and clear pre-existing lint debt'
 risk_tier: 3
 mode: fix
 lifecycle_state: active
+worktree: fix-005-push-gates
 created_at: '2026-08-06T01:36:56.256Z'
 updated_at: '2026-08-06T01:36:56.256Z'
 blast_radius:
