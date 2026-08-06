@@ -7,7 +7,8 @@ created_at: '2026-08-06T10:18:40.853Z'
 updated_at: '2026-08-06T10:18:40.853Z'
 blast_radius:
   modules:
-    - 'TODO: list one or more modules this spec touches.'
+    - app-metadata
+    - public-content-reads
   data_migration: false
 operational_rollback_slo: 5m
 scope:
@@ -17,11 +18,17 @@ scope:
     - 'test/supabase/authorEmbed.test.ts'
   out: []
 invariants:
-  - 'TODO: describe one invariant this spec guarantees.'
+  - 'Open Graph and Twitter image URLs resolve against the deployed origin, never localhost.'
+  - 'The public author embed exposes only PUBLIC_AUTHOR_COLUMNS, never a wildcard profiles row.'
 acceptance:
   - id: A1
-    given: 'TODO'
-    when: 'TODO'
-    then: 'TODO'
+    given: 'a metadata export with a relative Open Graph image'
+    when: 'next build resolves social image URLs'
+    then: 'the absolute URL uses the deployed origin and the build emits no metadataBase warning'
+    test_command: 'npm run build'
+  - id: A2
+    given: 'a published article prerendered by generateStaticParams under the anon key'
+    when: 'the rendered output is inspected'
+    then: 'the author embed resolved to real profile values rather than null'
 non_functional: {}
 contracts: []
