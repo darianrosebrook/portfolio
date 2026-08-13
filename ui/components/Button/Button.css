@@ -1,4 +1,4 @@
-@import "./Button.tokens.css";
+@import './Button.tokens.css';
 
 /*
  * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
@@ -13,29 +13,28 @@
  * of selector weight, so layering here would let the reset zero out
  * the button's padding/min-height.
  */
-[data-ds-component="Button"] {
+[data-ds-component='Button'] {
   &.button {
     display: inline-flex;
     gap: var(--ds-button-size-gap-default);
     justify-content: center;
     align-items: center;
+
     /* Prevent stretching when placed inside a flex container with the
        default align-items: stretch — buttons should size to their own
        min-height / content, not grow to match a taller sibling. */
     align-self: center;
-
     width: fit-content;
     min-width: var(--ds-button-size-min-medium);
     min-height: var(--ds-button-size-min-medium);
     margin: 0;
-    padding: var(--ds-button-size-padding-small) var(--ds-button-size-padding-small);
-
+    padding: var(--ds-button-size-padding-small)
+      var(--ds-button-size-padding-small);
     background: none;
     background-color: var(--ds-button-color-background-default);
     border: none;
     border-radius: var(--ds-button-size-radius);
     color: var(--ds-button-color-foreground-default);
-
     font: inherit;
     font-weight: var(--ds-button-text-weight, 500);
     font-size: var(--ds-button-text-size-medium);
@@ -51,7 +50,6 @@
         var(--ds-button-motion-easing-standard),
       color var(--ds-button-motion-duration-fast)
         var(--ds-button-motion-easing-standard);
-
     cursor: pointer;
     contain: layout style paint;
 
@@ -84,7 +82,10 @@
       gap: var(--ds-button-size-gap-small, 0.5rem);
       min-width: var(--ds-button-size-min-small);
       min-height: var(--ds-button-size-min-small);
-      padding: var(--ds-button-size-padding-small, var(--ds-button-size-gap-small));
+      padding: var(
+        --ds-button-size-padding-small,
+        var(--ds-button-size-gap-small)
+      );
       font-size: var(--ds-button-text-size-small);
     }
 
@@ -92,7 +93,8 @@
       gap: var(--ds-button-size-gap-default);
       min-width: var(--ds-button-size-min-medium);
       min-height: var(--ds-button-size-min-medium);
-      padding: var(--ds-button-size-padding-small) var(--ds-button-size-padding-large);
+      padding: var(--ds-button-size-padding-small)
+        var(--ds-button-size-padding-large);
       font-size: var(--ds-button-text-size-medium);
     }
 
@@ -100,7 +102,10 @@
       gap: var(--ds-button-size-gap-large, 0.75rem);
       min-width: var(--ds-button-size-min-large);
       min-height: var(--ds-button-size-min-large);
-      padding: var(--ds-button-size-padding-large, var(--ds-button-size-gap-large));
+      padding: var(
+        --ds-button-size-padding-large,
+        var(--ds-button-size-gap-large)
+      );
       font-size: var(--ds-button-text-size-large);
     }
 
@@ -112,25 +117,32 @@
      * .label is a reliable structural signal that this button contains only
      * non-text content (icon, avatar, asChild trigger, etc.).
      */
-    &:has(> *):not(:has(> .label)):not(:has(> .spinner)) {
-      aspect-ratio: 1;
+    &:has(> *):not(:has(> .label), :has(> .spinner)) {
       min-width: var(--ds-button-size-min-medium);
+      aspect-ratio: 1;
       padding: var(--ds-button-size-padding-small);
     }
 
-    &.small:has(> *):not(:has(> .label)):not(:has(> .spinner)) {
+    &.small:has(> *):not(:has(> .label), :has(> .spinner)) {
       min-width: var(--ds-button-size-min-small);
-      padding: var(--ds-button-size-padding-small, var(--ds-button-size-gap-small));
+      padding: var(
+        --ds-button-size-padding-small,
+        var(--ds-button-size-gap-small)
+      );
     }
 
-    &.large:has(> *):not(:has(> .label)):not(:has(> .spinner)) {
+    &.large:has(> *):not(:has(> .label), :has(> .spinner)) {
       min-width: var(--ds-button-size-min-large);
-      padding: var(--ds-button-size-padding-large, var(--ds-button-size-gap-large));
+      padding: var(
+        --ds-button-size-padding-large,
+        var(--ds-button-size-gap-large)
+      );
     }
 
     &.primary {
       background-color: var(--ds-button-color-background-primary);
-      border: var(--ds-button-size-border) solid var(--ds-button-color-border-primary);
+      border: var(--ds-button-size-border) solid
+        var(--ds-button-color-border-primary);
       color: var(--ds-button-color-foreground-primary);
 
       &:hover {
@@ -164,7 +176,8 @@
 
     &.secondary {
       background-color: var(--ds-button-color-background-secondary);
-      border: var(--ds-button-size-border) solid var(--ds-button-color-border-secondary);
+      border: var(--ds-button-size-border) solid
+        var(--ds-button-color-border-secondary);
       color: var(--ds-button-color-foreground-secondary);
 
       &:hover {
@@ -182,7 +195,8 @@
 
     &.tertiary {
       background-color: var(--ds-button-color-background-tertiary);
-      border: var(--ds-button-size-border) solid var(--ds-button-color-border-tertiary);
+      border: var(--ds-button-size-border) solid
+        var(--ds-button-color-border-tertiary);
       color: var(--ds-button-color-foreground-tertiary);
 
       &:hover {
@@ -233,7 +247,8 @@
 
     &.outline {
       background-color: transparent;
-      border: var(--ds-button-size-border) solid var(--ds-button-color-border-secondary);
+      border: var(--ds-button-size-border) solid
+        var(--ds-button-color-border-secondary);
       color: var(--ds-button-color-foreground-secondary);
 
       &:hover {
@@ -269,7 +284,7 @@
 
 /* Container queries for responsive button sizing */
 @supports (container-type: inline-size) {
-  [data-ds-component="Button"] {
+  [data-ds-component='Button'] {
     &.button {
       @container (max-width: 12rem) {
         gap: calc(var(--ds-button-size-gap-default) * 0.75);
@@ -282,7 +297,11 @@
           min-width: calc(var(--ds-button-size-min-small) * 0.9);
           min-height: calc(var(--ds-button-size-min-small) * 0.9);
           padding: calc(
-            var(--ds-button-size-padding-small, var(--ds-button-size-gap-small)) * 0.75
+            var(
+                --ds-button-size-padding-small,
+                var(--ds-button-size-gap-small)
+              ) *
+              0.75
           );
           font-size: calc(var(--ds-button-text-size-small) * 0.9);
         }
@@ -291,7 +310,11 @@
           min-width: calc(var(--ds-button-size-min-large) * 0.9);
           min-height: calc(var(--ds-button-size-min-large) * 0.9);
           padding: calc(
-            var(--ds-button-size-padding-large, var(--ds-button-size-gap-large)) * 0.75
+            var(
+                --ds-button-size-padding-large,
+                var(--ds-button-size-gap-large)
+              ) *
+              0.75
           );
           font-size: calc(var(--ds-button-text-size-large) * 0.9);
         }
@@ -310,7 +333,11 @@
           min-width: calc(var(--ds-button-size-min-small) * 0.8);
           min-height: calc(var(--ds-button-size-min-small) * 0.8);
           padding: calc(
-            var(--ds-button-size-padding-small, var(--ds-button-size-gap-small)) * 0.5
+            var(
+                --ds-button-size-padding-small,
+                var(--ds-button-size-gap-small)
+              ) *
+              0.5
           );
           font-size: calc(var(--ds-button-text-size-small) * 0.85);
         }
@@ -320,7 +347,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  [data-ds-component="Button"] {
+  [data-ds-component='Button'] {
     &.button {
       transition: none;
 
