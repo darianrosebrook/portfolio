@@ -4,7 +4,9 @@ import { useEditor, EditorContent, JSONContent } from '@tiptap/react';
 import { useEffect, useRef } from 'react';
 import styles from './tiptap.module.css';
 
-import { createExtensions } from './extensionsConfig';
+import { createEditorExtensions } from './extensionsRegistry';
+import { FloatingBubbleMenu } from './FloatingBubbleMenu';
+import { FloatingBlockMenu } from './FloatingBlockMenu';
 import ImageBubbleMenu from './ImageBubbleMenu';
 import VideoBubbleMenu from './VideoBubbleMenu';
 import ToolbarWrapper from './ToolbarWrapper';
@@ -16,11 +18,13 @@ const Tiptap = ({
   handleUpdate = () => {},
   editable = true,
   autofocus = false,
+  onMediaUploadRequiresSave,
 }: {
   article: Article;
   handleUpdate?: (article: Article) => void;
   editable?: boolean;
   autofocus?: boolean;
+  onMediaUploadRequiresSave?: () => void;
 }) => {
   const content = article.articleBody as JSONContent | undefined;
   const articleRef = useRef(article);
@@ -31,7 +35,10 @@ const Tiptap = ({
   }, [article]);
 
   const editor = useEditor({
-    extensions: createExtensions(article?.id as unknown as number),
+    extensions: createEditorExtensions({
+      getArticleId: () => article.id ?? undefined,
+      onMediaUploadRequiresSave,
+    }),
     immediatelyRender: false,
     content: content,
     editable,
@@ -62,6 +69,8 @@ const Tiptap = ({
   return (
     <>
       {editor && <ToolbarWrapper editor={editor} />}
+      {editor && <FloatingBubbleMenu editor={editor} />}
+      {editor && <FloatingBlockMenu editor={editor} />}
       {editor && <ImageBubbleMenu editor={editor} />}
       {editor && <VideoBubbleMenu editor={editor} />}
       <EditorContent editor={editor} className={styles.editor} />

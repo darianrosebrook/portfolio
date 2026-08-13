@@ -283,7 +283,7 @@ export async function PATCH(
     });
   }
 
-  const { data, error } = await supabase
+  let updateQuery = supabase
     .from('articles')
     .update({
       ...validation.data,
@@ -291,8 +291,16 @@ export async function PATCH(
       is_dirty: true,
     })
     .eq('slug', slug)
-    .eq('author', user.id)
-    .select();
+    .eq('author', user.id);
+
+  // Slug is editable metadata but also the current route key. Autosave may
+  // atomically rename a never-published draft; published URLs require the
+  // explicit PUT/publish path so cache invalidation remains authoritative.
+  if (validation.data.slug && validation.data.slug !== slug) {
+    updateQuery = updateQuery.eq('status', 'draft');
+  }
+
+  const { data, error } = await updateQuery.select();
 
   if (error && (error.message || error.code || Object.keys(error).length > 0)) {
     console.error(

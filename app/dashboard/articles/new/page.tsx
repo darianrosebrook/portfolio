@@ -40,7 +40,6 @@ export default function NewArticlePage() {
   // trigger a hydration mismatch (the server always renders the empty state).
   const [article, setArticle] = useState<Partial<Article>>(() => ({
     slug: tempSlugRef.current,
-    headline: '',
     articleBody: {
       type: 'doc',
       content: [
@@ -92,17 +91,15 @@ export default function NewArticlePage() {
   // Auto-update article with extracted metadata
   useEffect(() => {
     setArticle((prev) => {
-      const newHeadline = prev.headline || extractedMetadata.headline || null;
+      const newHeadline =
+        prev.headline === undefined
+          ? (extractedMetadata.headline ?? undefined)
+          : prev.headline;
 
-      // Only rewrite temp slugs before the first successful server create.
-      // Renaming after create would make PATCH target a non-existent slug.
+      // A server-created temporary slug is still mutable. PATCH addresses the
+      // row by serverSlugRef and renames it atomically to this local value.
       let newSlug = prev.slug;
-      if (
-        !serverSlugRef.current &&
-        !articleId &&
-        extractedMetadata.headline &&
-        prev.slug?.startsWith('draft-')
-      ) {
+      if (extractedMetadata.headline && prev.slug?.startsWith('draft-')) {
         const generatedSlug = slugify(extractedMetadata.headline);
         if (generatedSlug && generatedSlug.length > 0) {
           newSlug = generatedSlug;
@@ -112,13 +109,19 @@ export default function NewArticlePage() {
       return {
         ...prev,
         headline: newHeadline,
-        description: prev.description || extractedMetadata.description || null,
-        image: prev.image || extractedMetadata.coverImage || null,
+        description:
+          prev.description === undefined
+            ? (extractedMetadata.description ?? undefined)
+            : prev.description,
+        image:
+          prev.image === undefined
+            ? (extractedMetadata.coverImage ?? undefined)
+            : prev.image,
         wordCount: extractedMetadata.wordCount,
         slug: newSlug || prev.slug,
       };
     });
-  }, [extractedMetadata, articleId]);
+  }, [extractedMetadata]);
 
   // Save to localStorage as a fallback for unsaved work
   useEffect(() => {
@@ -163,12 +166,14 @@ export default function NewArticlePage() {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
+            slug: articleToSave.slug,
             workingbody: articleToSave.articleBody,
             workingheadline: articleToSave.headline,
             workingdescription: articleToSave.description,
             workingimage: articleToSave.image,
             workingkeywords: articleToSave.keywords,
             workingarticlesection: articleToSave.articleSection,
+            wordCount: articleToSave.wordCount ?? null,
           }),
         });
 
@@ -183,10 +188,17 @@ export default function NewArticlePage() {
           if (typeof saved[0].slug === 'string') {
             serverSlugRef.current = saved[0].slug;
           }
-          // Sync with server state (this will include lowercase working* columns)
+          // Keep the click-time/local editor content authoritative. The PATCH
+          // response contains canonical columns alongside working columns;
+          // spreading it here can replace a newer local revision with stale
+          // canonical content.
           setArticle((prev) => ({
             ...prev,
-            ...saved[0],
+            id: saved[0].id,
+            created_at: saved[0].created_at,
+            modified_at: saved[0].modified_at,
+            working_modified_at: saved[0].working_modified_at,
+            is_dirty: saved[0].is_dirty,
           }));
           clearLocalDraft();
         }
@@ -195,6 +207,7 @@ export default function NewArticlePage() {
         const cleanedData = {
           slug: articleToSave.slug || '',
           headline: articleToSave.headline || null,
+          alternativeHeadline: articleToSave.alternativeHeadline || null,
           description: articleToSave.description || null,
           articleBody: articleToSave.articleBody || null,
           articleSection: articleToSave.articleSection || null,
@@ -240,7 +253,11 @@ export default function NewArticlePage() {
               : cleanedData.slug;
           setArticle((prev) => ({
             ...prev,
-            ...saved[0],
+            id: saved[0].id,
+            created_at: saved[0].created_at,
+            modified_at: saved[0].modified_at,
+            working_modified_at: saved[0].working_modified_at,
+            is_dirty: saved[0].is_dirty,
           }));
           clearLocalDraft();
           enqueue({
@@ -336,7 +353,8 @@ export default function NewArticlePage() {
       // shouldn't be re-validating) the entire server-shaped article object.
       // Spreading the full row meant any stale or loose field (e.g. a
       // relative image path) would 400 the request before it ever ran.
-      const response = await fetch(`/api/articles/${article.slug}`, {
+      const routeSlug = serverSlugRef.current || article.slug;
+      const response = await fetch(`/api/articles/${routeSlug}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -360,9 +378,16 @@ export default function NewArticlePage() {
 
       const saved = await response.json();
       if (saved && Array.isArray(saved) && saved.length > 0) {
+        serverSlugRef.current = saved[0].slug;
         setArticle((prev) => ({
           ...prev,
-          ...saved[0],
+          id: saved[0].id,
+          slug: saved[0].slug,
+          status: saved[0].status,
+          created_at: saved[0].created_at,
+          modified_at: saved[0].modified_at,
+          published_at: saved[0].published_at,
+          is_dirty: saved[0].is_dirty,
         }));
         enqueue({
           title: 'Article Published',
@@ -391,7 +416,8 @@ export default function NewArticlePage() {
     try {
       // Same rationale as handlePublish: send only the fields that change.
       // The PUT handler doesn't need the whole article echoed back.
-      const response = await fetch(`/api/articles/${article.slug}`, {
+      const routeSlug = serverSlugRef.current || article.slug;
+      const response = await fetch(`/api/articles/${routeSlug}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -408,9 +434,15 @@ export default function NewArticlePage() {
 
       const saved = await response.json();
       if (saved && Array.isArray(saved) && saved.length > 0) {
+        serverSlugRef.current = saved[0].slug;
         setArticle((prev) => ({
           ...prev,
-          ...saved[0],
+          id: saved[0].id,
+          slug: saved[0].slug,
+          status: saved[0].status,
+          modified_at: saved[0].modified_at,
+          published_at: saved[0].published_at,
+          is_dirty: saved[0].is_dirty,
         }));
       }
     } catch (err) {
@@ -508,6 +540,13 @@ export default function NewArticlePage() {
           }}
           editable={true}
           autofocus={true}
+          onMediaUploadRequiresSave={() => {
+            enqueue({
+              title: 'Save before adding media',
+              description:
+                'Create the draft first so uploaded media can be associated with this article.',
+            });
+          }}
         />
       </div>
     </EditorLayout>

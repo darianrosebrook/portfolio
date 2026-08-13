@@ -40,7 +40,10 @@ export function ArticleMetadataForm({
   };
 
   const handleHeadlineChange = (value: string) => {
-    onChange({ headline: value || null });
+    // Empty string is an intentional override. `undefined` means the field is
+    // still managed by content extraction; collapsing both states to null made
+    // extracted values impossible to clear.
+    onChange({ headline: value });
     // Auto-generate slug if slug is empty or matches old headline
     if (!article.slug || article.slug === slugify(article.headline || '')) {
       onChange({ slug: slugify(value) });
@@ -71,25 +74,9 @@ export function ArticleMetadataForm({
           <input
             id="headline"
             type="text"
-            value={article.headline || extractedMetadata.headline || ''}
+            value={article.headline ?? extractedMetadata.headline ?? ''}
             onChange={(e) => handleHeadlineChange(e.target.value)}
             placeholder={extractedMetadata.headline || 'Enter headline...'}
-            className={styles.input}
-          />
-        </div>
-
-        <div className={styles.field}>
-          <label htmlFor="alternativeHeadline" className={styles.label}>
-            Alternative Headline
-          </label>
-          <input
-            id="alternativeHeadline"
-            type="text"
-            value={article.alternativeHeadline || ''}
-            onChange={(e) =>
-              onChange({ alternativeHeadline: e.target.value || null })
-            }
-            placeholder="Optional subtitle..."
             className={styles.input}
           />
         </div>
@@ -100,8 +87,8 @@ export function ArticleMetadataForm({
           </label>
           <textarea
             id="description"
-            value={article.description || extractedMetadata.description || ''}
-            onChange={(e) => onChange({ description: e.target.value || null })}
+            value={article.description ?? extractedMetadata.description ?? ''}
+            onChange={(e) => onChange({ description: e.target.value })}
             placeholder={
               extractedMetadata.description || 'Enter description...'
             }
@@ -161,8 +148,8 @@ export function ArticleMetadataForm({
           <input
             id="image"
             type="url"
-            value={article.image || extractedMetadata.coverImage || ''}
-            onChange={(e) => onChange({ image: e.target.value || null })}
+            value={article.image ?? extractedMetadata.coverImage ?? ''}
+            onChange={(e) => onChange({ image: e.target.value })}
             placeholder={
               extractedMetadata.coverImage || 'https://example.com/image.jpg'
             }

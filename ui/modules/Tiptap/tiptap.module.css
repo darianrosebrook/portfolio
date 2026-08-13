@@ -2,27 +2,51 @@
   margin-top: 1em;
 }
 
-.editor > div {
-  overflow-y: auto;
-  max-width: 900px;
+.editor > :global(.ProseMirror) {
+  max-width: 720px;
+  min-height: 70vh;
   margin: 0 auto;
-  padding: 0;
+  padding: var(--core-spacing-size-08) var(--core-spacing-size-05)
+    var(--core-spacing-size-12);
   background: transparent;
   border: none;
   border-radius: 0;
-  min-height: 400px;
 }
 
-.editor > div * + * {
+.editor :global(.editor-drag-handle) {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  border: 0;
+  border-radius: var(--core-shape-radius-small);
+  opacity: 0.7;
+  color: var(--semantic-color-foreground-tertiary);
+  cursor: grab;
+}
+
+.editor :global(.editor-drag-handle:hover),
+.editor :global(.editor-drag-handle:focus-visible) {
+  background: var(--semantic-color-background-secondary);
+  opacity: 1;
+  color: var(--semantic-color-foreground-primary);
+}
+
+.editor :global(.editor-drag-handle:active) {
+  cursor: grabbing;
+}
+
+.editor > :global(.ProseMirror) > * + * {
   margin-top: 0.75em;
 }
 
-.editor *:focus-visible {
-  border: 1px solid var(--semantic-color-border-accent);
-  outline: 0;
+.editor > :global(.ProseMirror:focus-visible) {
+  outline: 2px solid var(--semantic-color-border-accent);
+  outline-offset: 4px;
 }
 
-.editor .tiptap .is-empty::before {
+.editor :global(.tiptap .is-empty::before) {
   float: left;
   height: 0;
   color: var(--semantic-color-foreground-placeholder);

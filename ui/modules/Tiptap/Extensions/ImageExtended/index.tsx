@@ -6,6 +6,7 @@ import { Media, upload } from '@/utils/supabase/upload';
 export interface ImageExtendedOptions {
   bucket: string;
   getArticleId?: () => number | undefined;
+  onUploadRequiresArticle?: () => void;
 }
 
 function pasteDropPlugin(editor: Editor, options: ImageExtendedOptions) {
@@ -21,6 +22,10 @@ function pasteDropPlugin(editor: Editor, options: ImageExtendedOptions) {
 
         event.preventDefault();
         const articleId = options.getArticleId?.();
+        if (!articleId) {
+          options.onUploadRequiresArticle?.();
+          return true;
+        }
         void upload({
           file: {
             type: 'image',
@@ -42,6 +47,10 @@ function pasteDropPlugin(editor: Editor, options: ImageExtendedOptions) {
         if (!file || !file.type.startsWith('image/')) return false;
         event.preventDefault();
         const articleId = options.getArticleId?.();
+        if (!articleId) {
+          options.onUploadRequiresArticle?.();
+          return true;
+        }
         void upload({
           file: {
             type: 'image',
@@ -66,6 +75,7 @@ export const ImageExtended = Image.extend<ImageExtendedOptions>({
       ...this.parent?.(),
       bucket: 'article-images',
       getArticleId: undefined,
+      onUploadRequiresArticle: undefined,
     } as ImageExtendedOptions;
   },
   addAttributes() {

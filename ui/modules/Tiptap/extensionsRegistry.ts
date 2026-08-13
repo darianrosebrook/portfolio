@@ -26,11 +26,11 @@ import HorizontalRule from '@tiptap/extension-horizontal-rule';
 import TaskList from '@tiptap/extension-task-list';
 import TaskItem from '@tiptap/extension-task-item';
 import CharacterCount from '@tiptap/extension-character-count';
+import DragHandle from '@tiptap/extension-drag-handle';
 import Image from '@tiptap/extension-image';
 import { DetailsExtension } from './Extensions/Details/DetailsExtension';
 import { TableOfContentsExtension } from './Extensions/TableOfContents/TableOfContentsExtension';
 import { UniqueIdExtension } from './Extensions/UniqueId/UniqueIdExtension';
-import { DragHandleExtension } from './Extensions/DragHandle/DragHandleExtension';
 import { SlashCommand } from './Extensions/SlashCommand';
 import { CodeBlockExtended } from './Extensions/CodeBlockExtended';
 import { ImageExtended } from './Extensions/ImageExtended';
@@ -45,6 +45,8 @@ import type { Extension } from '@tiptap/core';
  */
 export interface EditorExtensionsConfig {
   articleId?: number;
+  getArticleId?: () => number | undefined;
+  onMediaUploadRequiresSave?: () => void;
 }
 
 /**
@@ -54,7 +56,8 @@ export interface EditorExtensionsConfig {
 export function createEditorExtensions(
   config: EditorExtensionsConfig = {}
 ): Extension[] {
-  const { articleId } = config;
+  const { articleId, getArticleId, onMediaUploadRequiresSave } = config;
+  const resolveArticleId = getArticleId ?? (() => articleId);
 
   return [
     // Cast to Extension[] to satisfy TypeScript
@@ -87,7 +90,8 @@ export function createEditorExtensions(
     TaskItem.configure({ nested: true }),
     ImageExtended.configure({
       bucket: 'article-images',
-      getArticleId: () => articleId,
+      getArticleId: resolveArticleId,
+      onUploadRequiresArticle: onMediaUploadRequiresSave,
     }),
     VideoExtended.configure({
       bucket: 'article-videos',
@@ -137,17 +141,18 @@ export function createEditorExtensions(
           .trim();
       },
     }),
-    DragHandleExtension.configure({
-      draggableTypes: [
-        'paragraph',
-        'heading',
-        'blockquote',
-        'details',
-        'tableOfContents',
-        'image',
-        'video',
-      ],
-      showDragHandles: true,
+    DragHandle.configure({
+      render: () => {
+        const element = document.createElement('button');
+        element.type = 'button';
+        element.classList.add('editor-drag-handle');
+        element.setAttribute('aria-label', 'Drag block to reorder');
+        element.title = 'Drag to reorder';
+        element.textContent = '⋮⋮';
+        element.style.visibility = 'hidden';
+        element.style.pointerEvents = 'none';
+        return element;
+      },
     }),
     CodeBlockExtended,
     SlashCommand,

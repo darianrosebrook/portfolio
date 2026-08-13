@@ -117,14 +117,27 @@ export const createArticleSchema = articleSchema
     is_dirty: true,
   });
 
-export const updateArticleSchema = createArticleSchema.partial();
+export const updateArticleSchema = createArticleSchema.partial().extend({
+  // Defaults belong to creation. Applying them to a sparse PUT silently
+  // unpublishes rows and clears dirty state when, for example, only the slug
+  // is being renamed.
+  status: articleStatusEnum.optional(),
+  is_dirty: z.boolean().nullable().optional(),
+});
 
 export const patchArticleDraftSchema = z.object({
+  slug: z
+    .string()
+    .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, {
+      message: 'Slug must be url-safe and contain no spaces',
+    })
+    .optional(),
   workingbody: z.any().optional(),
   workingheadline: z.string().nullable().optional(),
   workingdescription: z.string().nullable().optional(),
   workingimage: z.string().nullable().optional(),
   workingkeywords: z.string().nullable().optional(),
   workingarticlesection: z.string().nullable().optional(),
+  wordCount: z.number().int().nonnegative().nullable().optional(),
   is_dirty: z.boolean().optional(),
 });

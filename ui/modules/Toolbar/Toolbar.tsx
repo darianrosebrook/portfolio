@@ -64,6 +64,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
         value={getActiveTextStyle()}
         onChange={handleTextStyleChange}
         aria-label="Text style"
+        name="text-style"
         data-slot="text-style"
       >
         <option value="0">Paragraph</option>
@@ -160,6 +161,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
         }
         value={editor.getAttributes('textStyle').color || '#000000'}
         aria-label="Text color"
+        name="text-color"
         title="Text color"
         data-slot="color-input"
       />

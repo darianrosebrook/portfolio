@@ -1,48 +1,59 @@
-[data-ds-component="Toolbar"] {
+[data-ds-component='Toolbar'] {
+  position: sticky !important;
+  top: 56px !important;
+  z-index: 20 !important;
   display: flex !important;
-  align-items: center !important;
+  flex-wrap: nowrap !important;
   gap: 2px !important;
+  align-items: center !important;
+  overflow-x: auto !important;
+  margin-bottom: 16px !important;
   padding: 4px !important;
   background-color: var(--semantic-color-background-primary) !important;
-  border-radius: var(--core-shape-radius-small) !important;
   border: 1px solid var(--semantic-color-border-primary) !important;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
-  margin-bottom: 16px !important;
-  flex-wrap: wrap !important;
+  border-radius: var(--core-shape-radius-small) !important;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 5%) !important;
 
   /* Group separator */
   &::before {
-    content: '';
     display: none;
+    content: '';
   }
 
   button {
-    margin: 0;
-    padding: 6px 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     min-width: 28px;
     height: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    margin: 0;
+    padding: 6px 8px;
     background: none;
     border: none;
     border-radius: 4px;
-    transition: background-color 0.15s ease, color 0.15s ease;
-    cursor: pointer;
     color: var(--semantic-color-foreground-secondary);
     font-size: 14px;
+    transition:
+      background-color 0.15s ease,
+      color 0.15s ease;
+    cursor: pointer;
 
     &:hover {
-      background-color: rgba(0, 0, 0, 0.05);
+      background-color: rgb(0 0 0 / 5%);
       color: var(--semantic-color-foreground-primary);
     }
 
     &:active {
-      background-color: rgba(0, 0, 0, 0.08);
+      background-color: rgb(0 0 0 / 8%);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--semantic-color-border-accent);
+      outline-offset: 1px;
     }
 
     &.isActive {
-      background-color: rgba(0, 0, 0, 0.08);
+      background-color: rgb(0 0 0 / 8%);
       color: var(--semantic-color-foreground-primary);
     }
 
@@ -54,32 +65,33 @@
   }
 
   select {
+    min-width: 100px;
+    height: 28px;
     margin: 0;
     padding: 4px 8px;
-    height: 28px;
+    padding-right: 24px;
     background: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-position: right 6px center;
+    background-repeat: no-repeat;
     border: none;
     border-radius: 4px;
+    color: var(--semantic-color-foreground-primary);
+    font-weight: 500;
     font-size: 13px;
     font-family: inherit;
-    font-weight: 500;
-    color: var(--semantic-color-foreground-primary);
     transition: background-color 0.15s ease;
     cursor: pointer;
     appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 6px center;
-    padding-right: 24px;
-    min-width: 100px;
 
     &:hover {
-      background-color: rgba(0, 0, 0, 0.05);
+      background-color: rgb(0 0 0 / 5%);
     }
 
     &:focus {
-      outline: none;
-      background-color: rgba(0, 0, 0, 0.05);
+      background-color: rgb(0 0 0 / 5%);
+      outline: 2px solid var(--semantic-color-border-accent);
+      outline-offset: 1px;
     }
   }
 
@@ -88,12 +100,11 @@
     width: 28px;
     height: 28px;
     padding: 2px;
+    background: none;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    background: none;
     appearance: none;
-    -webkit-appearance: none;
 
     &::-webkit-color-swatch-wrapper {
       padding: 0;
@@ -118,7 +129,7 @@
   .separator {
     width: 1px;
     height: 20px;
-    background-color: var(--semantic-color-border-primary);
     margin: 0 4px;
+    background-color: var(--semantic-color-border-primary);
   }
 }

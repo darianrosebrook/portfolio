@@ -30,6 +30,7 @@ describe('TipTap Extension Registry', () => {
       expect(extensionNames.length).toBeGreaterThan(0);
       // Verify we have extensions configured
       expect(extensions.length).toBeGreaterThan(10);
+      expect(extensionNames).toContain('dragHandle');
     });
 
     it('should accept articleId config', () => {

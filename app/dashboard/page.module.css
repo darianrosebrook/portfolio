@@ -1,14 +1,16 @@
 .tabs {
   display: flex;
   gap: var(--core-spacing-size-04);
+  overflow-x: auto;
+  margin-bottom: var(--core-spacing-size-07);
   padding-block: var(--core-spacing-size-04);
   border-bottom: 1px solid var(--semantic-color-border-subtle);
-  margin-bottom: var(--core-spacing-size-07);
 }
 
 .tabs ul {
   display: flex;
   gap: var(--core-spacing-size-04);
+  width: max-content;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -17,24 +19,26 @@
 .tabLink {
   display: inline-block;
   padding: var(--core-spacing-size-03) var(--core-spacing-size-05);
-  font-size: var(--semantic-typography-body-03);
-  font-weight: var(--semantic-typography-font-weight-medium);
-  color: var(--semantic-color-foreground-secondary);
   background: transparent;
   border: none;
   border-radius: var(--core-shape-radius-full);
+  color: var(--semantic-color-foreground-secondary);
+  font-weight: var(--semantic-typography-font-weight-medium);
+  font-size: var(--semantic-typography-body-03);
   text-decoration: none;
+  white-space: nowrap;
+  transition: all var(--core-motion-duration-short)
+    var(--core-motion-easing-standard);
   cursor: pointer;
-  transition: all var(--core-motion-duration-short) var(--core-motion-easing-standard);
 
   &:hover {
-    color: var(--semantic-color-foreground-primary);
     background: var(--semantic-color-background-secondary);
+    color: var(--semantic-color-foreground-primary);
   }
 
   &[data-active='true'] {
-    color: var(--semantic-color-foreground-primary);
     background: var(--semantic-color-background-secondary);
+    color: var(--semantic-color-foreground-primary);
   }
 }
 

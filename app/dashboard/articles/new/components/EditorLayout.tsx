@@ -27,7 +27,7 @@ export function EditorLayout({
       style={{
         display: 'flex',
         flexDirection: 'column',
-        height: '100vh',
+        minHeight: 'calc(100dvh - 12rem)',
         background: 'var(--semantic-color-background-primary)',
       }}
     >
@@ -82,14 +82,14 @@ export function EditorLayout({
         style={{
           display: 'flex',
           flex: 1,
-          overflow: 'hidden',
+          alignItems: 'flex-start',
         }}
       >
         {/* Editor */}
         <div
           style={{
             flex: 1,
-            overflow: 'auto',
+            overflow: 'visible',
             display: 'flex',
             justifyContent: 'center',
             padding: '48px 24px',
@@ -111,7 +111,10 @@ export function EditorLayout({
             style={{
               width: '320px',
               borderLeft: '1px solid var(--semantic-color-border-primary)',
+              maxHeight: 'calc(100dvh - 7rem)',
               overflow: 'auto',
+              position: 'sticky',
+              top: 'var(--core-spacing-size-04)',
               background: 'var(--semantic-color-background-primary)',
               padding: '24px',
             }}

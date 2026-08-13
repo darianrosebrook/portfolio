@@ -22,9 +22,10 @@
 
 ### 3. Improved Drag Handles
 
-- **Location**: `ui/modules/Tiptap/Extensions/DragHandle/DragHandleExtension.tsx`
+- **Location**: `ui/modules/Tiptap/extensionsRegistry.ts` (official `@tiptap/extension-drag-handle`)
 - **Features**:
-  - 6-dot SVG icon (Notion-style)
+  - Native ProseMirror node-selection and drag transaction
+  - Compact double-grip control
   - Shows on block hover
   - Better positioning (left-aligned, vertically centered)
   - Smooth transitions
@@ -41,7 +42,7 @@
 
 - **Location**: `ui/modules/Tiptap/tiptap.module.css`
 - **Features**:
-  - Max-width: 900px (Notion-like)
+  - Max-width: 720px for a readable article measure
   - Removed borders for cleaner look
   - Better typography and spacing
   - Improved heading styles

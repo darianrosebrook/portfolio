@@ -39,6 +39,7 @@
   position: relative;
   display: flex;
   justify-content: space-between;
+  overflow: hidden;
   margin: 0;
   padding: var(--core-spacing-size-08);
   transition: all 0.5s ease-in-out;

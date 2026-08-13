@@ -1,5 +1,9 @@
 import { describe, it, expect } from 'vitest';
-import { createArticleSchema } from '@/utils/schemas/article.schema';
+import {
+  createArticleSchema,
+  patchArticleDraftSchema,
+  updateArticleSchema,
+} from '@/utils/schemas/article.schema';
 
 /**
  * The autosave path on /dashboard/articles/new POSTs a minimal payload —
@@ -65,5 +69,33 @@ describe('createArticleSchema — autosave payload', () => {
     if (result.success) {
       expect(result.data.image).toBeNull();
     }
+  });
+});
+
+describe('patchArticleDraftSchema', () => {
+  it('admits an atomic draft slug rename and derived word count', () => {
+    expect(
+      patchArticleDraftSchema.safeParse({
+        slug: 'permanent-article-slug',
+        wordCount: 321,
+        workingheadline: 'Draft headline',
+      }).success
+    ).toBe(true);
+  });
+
+  it('rejects an invalid draft slug', () => {
+    expect(
+      patchArticleDraftSchema.safeParse({ slug: 'Not A URL Slug' }).success
+    ).toBe(false);
+  });
+});
+
+describe('updateArticleSchema', () => {
+  it('does not apply create-time defaults to a sparse update', () => {
+    const result = updateArticleSchema.parse({ slug: 'renamed-article' });
+
+    expect(result).toEqual({ slug: 'renamed-article' });
+    expect(result).not.toHaveProperty('status');
+    expect(result).not.toHaveProperty('is_dirty');
   });
 });

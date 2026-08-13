@@ -60,7 +60,10 @@ export const createCaseStudySchema = caseStudySchema.omit({
   published_at: true,
 });
 
-export const updateCaseStudySchema = createCaseStudySchema.partial();
+export const updateCaseStudySchema = createCaseStudySchema.partial().extend({
+  status: caseStudyStatusEnum.optional(),
+  is_dirty: z.boolean().nullable().optional(),
+});
 
 export const patchCaseStudyDraftSchema = z.object({
   workingbody: z.any().optional(),
@@ -69,5 +72,6 @@ export const patchCaseStudyDraftSchema = z.object({
   workingimage: z.string().nullable().optional(),
   workingkeywords: z.string().nullable().optional(),
   workingarticlesection: z.string().nullable().optional(),
+  wordCount: z.number().int().nonnegative().nullable().optional(),
   is_dirty: z.boolean().optional(),
 });

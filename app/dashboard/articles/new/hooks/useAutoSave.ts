@@ -35,57 +35,81 @@ export function useAutoSave({
   const [error, setError] = useState<string | null>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const previousContentRef = useRef<string | null>(null);
+  const articleRef = useRef(article);
+  const saveQueueRef = useRef<Promise<void>>(Promise.resolve());
+  const requestRevisionRef = useRef(0);
 
-  const performSave = useCallback(async () => {
-    if (!enabled) {
-      return;
-    }
+  useEffect(() => {
+    articleRef.current = article;
+  }, [article]);
 
-    // If no slug, we can't save to server but content is saved locally
-    if (!article.slug) {
-      setSaveStatus('local');
-      setLastSaved(new Date());
-      setTimeout(() => {
-        setSaveStatus('idle');
-      }, 2000);
-      return;
-    }
+  const performSave = useCallback(
+    async (snapshot: typeof article, propagateError: boolean) => {
+      if (!enabled) {
+        return;
+      }
 
-    setSaveStatus('saving');
-    setError(null);
-
-    try {
-      await onSave(article);
-      setSaveStatus('saved');
-      setLastSaved(new Date());
-
-      // Reset to idle after 2 seconds
-      setTimeout(() => {
-        setSaveStatus('idle');
-      }, 2000);
-    } catch (err) {
-      // Check if this is a "skipped" save (waiting for valid slug)
-      const errorMessage =
-        err instanceof Error ? err.message : 'Failed to save';
-      if (errorMessage.includes('Skipping server save')) {
+      // If no slug, we can't save to server but content is saved locally
+      if (!snapshot.slug) {
         setSaveStatus('local');
         setLastSaved(new Date());
         setTimeout(() => {
           setSaveStatus('idle');
         }, 2000);
-      } else {
-        setSaveStatus('error');
-        setError(errorMessage);
+        return;
       }
-    }
-  }, [enabled, article, onSave]);
+
+      setSaveStatus('saving');
+      setError(null);
+      const revision = ++requestRevisionRef.current;
+
+      const queuedSave = saveQueueRef.current
+        .catch(() => undefined)
+        .then(() => onSave(snapshot));
+      saveQueueRef.current = queuedSave.catch(() => undefined);
+
+      try {
+        await queuedSave;
+        if (revision === requestRevisionRef.current) {
+          setSaveStatus('saved');
+          setLastSaved(new Date());
+
+          setTimeout(() => {
+            if (revision === requestRevisionRef.current) {
+              setSaveStatus('idle');
+            }
+          }, 2000);
+        }
+      } catch (err) {
+        // Check if this is a "skipped" save (waiting for valid slug)
+        const errorMessage =
+          err instanceof Error ? err.message : 'Failed to save';
+        if (errorMessage.includes('Skipping server save')) {
+          setSaveStatus('local');
+          setLastSaved(new Date());
+          setTimeout(() => {
+            setSaveStatus('idle');
+          }, 2000);
+        } else {
+          if (revision === requestRevisionRef.current) {
+            setSaveStatus('error');
+            setError(errorMessage);
+          }
+          if (propagateError) throw err;
+        }
+      }
+    },
+    [enabled, onSave]
+  );
 
   const manualSave = async () => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
       timeoutRef.current = null;
     }
-    await performSave();
+    const snapshot = articleRef.current;
+    previousContentRef.current = serializeArticle(snapshot);
+    await performSave(snapshot, true);
   };
 
   useEffect(() => {
@@ -94,14 +118,14 @@ export function useAutoSave({
     }
 
     // Serialize content for comparison
-    const currentContent = JSON.stringify({
-      articleBody: article.articleBody,
-      headline: article.headline,
-      description: article.description,
-      keywords: article.keywords,
-      articleSection: article.articleSection,
-      image: article.image,
-    });
+    const currentContent = serializeArticle(article);
+
+    // Establish the loaded/restored content as the baseline. Opening the
+    // editor must not create a server-side working draft by itself.
+    if (previousContentRef.current === null) {
+      previousContentRef.current = currentContent;
+      return;
+    }
 
     // Skip if content hasn't changed
     if (currentContent === previousContentRef.current) {
@@ -117,7 +141,7 @@ export function useAutoSave({
 
     // Set new timeout
     timeoutRef.current = setTimeout(() => {
-      performSave();
+      void performSave(article, false);
     }, debounceMs);
 
     // Cleanup
@@ -134,4 +158,17 @@ export function useAutoSave({
     error,
     manualSave,
   };
+}
+
+function serializeArticle(article: UseAutoSaveOptions['article']): string {
+  return JSON.stringify({
+    articleBody: article.articleBody,
+    headline: article.headline,
+    description: article.description,
+    keywords: article.keywords,
+    articleSection: article.articleSection,
+    image: article.image,
+    slug: article.slug,
+    wordCount: article.wordCount,
+  });
 }
