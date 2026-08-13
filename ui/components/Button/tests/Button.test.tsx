@@ -121,6 +121,20 @@ describe('Icon-only detection', () => {
     expect(label).not.toBeNull();
     expect(label).toHaveTextContent('Saving');
   });
+
+  it('wraps bare text in span.label when mixed with an icon child', () => {
+    render(
+      <Button>
+        <svg data-testid="icon" aria-hidden="true" />
+        New Article
+      </Button>
+    );
+    const button = screen.getByRole('button', { name: 'New Article' });
+    const label = button.querySelector('.label');
+    expect(label).not.toBeNull();
+    expect(label).toHaveTextContent('New Article');
+    expect(button.querySelector('[data-testid="icon"]')).not.toBeNull();
+  });
 });
 
 describe('Contract behavioral obligations', () => {

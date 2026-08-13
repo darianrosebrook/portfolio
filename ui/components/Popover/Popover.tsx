@@ -33,11 +33,11 @@ interface PopoverProps {
   className?: string;
 }
 
-interface TriggerProps {
-  children: React.ReactNode;
-  className?: string;
+interface TriggerProps extends React.HTMLAttributes<HTMLElement> {
+  /** Element type to render (defaults to 'button'). */
   as?: React.ElementType;
-  onClick?: (e: React.MouseEvent) => void;
+  /** Reserved for slotting parity with Button; Trigger always renders its own element. */
+  asChild?: boolean;
 }
 
 interface ContentProps {
@@ -297,7 +297,15 @@ const Popover: React.FC<PopoverProps> & {
 
 const Trigger = forwardRef<HTMLElement, TriggerProps>(
   (
-    { children, className, as: Component = 'button', onClick },
+    {
+      children,
+      className,
+      as: Component = 'button',
+      onClick,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      asChild,
+      ...rest
+    },
     forwardedRef
   ) => {
     const context = useContext(PopoverContext);
@@ -323,7 +331,7 @@ const Trigger = forwardRef<HTMLElement, TriggerProps>(
       }
     };
 
-    const handleClick = (e: React.MouseEvent) => {
+    const handleClick = (e: React.MouseEvent<HTMLElement>) => {
       if (triggerStrategy === 'click' && !isLeaving) {
         setIsOpen(!isOpen);
       }
@@ -342,6 +350,7 @@ const Trigger = forwardRef<HTMLElement, TriggerProps>(
 
     return (
       <Component
+        {...rest}
         ref={handleRefs}
         className={`popoverTrigger ${isOpen ? 'activeTrigger' : ''} ${className || ''}`}
         onClick={handleClick}

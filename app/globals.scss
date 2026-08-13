@@ -620,11 +620,6 @@ a {
   text-decoration: none;
 }
 
-a:focus-visible,
-a:focus {
-  border-radius: var(--core-shape-radius-small);
-}
-
 a:hover {
   text-decoration: underline;
 }
@@ -923,7 +918,7 @@ header + main {
   align-items: center;
   width: 100%;
   padding: var(--core-spacing-size-04);
-  border-radius: var(--core-spacing-size-04);
+  border-radius: var(--core-shape-radius-medium);
   box-shadow: 0 1px 3px rgb(0 0 0 / var(--core-opacity-100));
   transition: all 0.2s ease;
 

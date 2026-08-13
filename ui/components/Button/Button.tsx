@@ -167,7 +167,16 @@ const Button = React.forwardRef<
       if (typeof children === 'string' || typeof children === 'number') {
         return <span className="label">{children}</span>;
       }
-      return children;
+      // Mixed children (e.g. <Icon /> Label) arrive as an array. Wrap any
+      // bare text nodes so the :has(> .label) icon-only detection in
+      // Button.css can tell text buttons from icon-only ones.
+      return React.Children.map(children, (child) =>
+        typeof child === 'string' || typeof child === 'number' ? (
+          <span className="label">{child}</span>
+        ) : (
+          child
+        )
+      );
     };
 
     // Handle asChild pattern

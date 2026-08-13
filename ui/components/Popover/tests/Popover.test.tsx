@@ -2,6 +2,7 @@ import * as React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 
 import Popover from '../Popover';
+import Button from '../../Button';
 import { contractTest } from '@/test/utils/contractTest';
 
 describe('Popover', () => {
@@ -65,6 +66,48 @@ describe('Popover', () => {
 
       const trigger = screen.getByRole('button', { name: 'Click me' });
       expect(trigger).not.toHaveClass('custom-class');
+    });
+  });
+
+  describe('prop forwarding', () => {
+    it('forwards extra props (data attributes, title) onto the rendered trigger', () => {
+      render(
+        <Popover>
+          <Popover.Trigger data-ds-component="Button" title="User menu">
+            Open
+          </Popover.Trigger>
+          <Popover.Content>Content</Popover.Content>
+        </Popover>
+      );
+
+      const trigger = screen.getByRole('button', { name: 'Open' });
+      expect(trigger).toHaveAttribute('data-ds-component', 'Button');
+      expect(trigger).toHaveAttribute('title', 'User menu');
+      // Trigger-managed attributes still win over forwarded ones
+      expect(trigger).toHaveAttribute('data-slot', 'popover-trigger');
+    });
+
+    it('keeps Button identity when slotted via Button asChild (navbar pattern)', () => {
+      render(
+        <Popover>
+          <Button
+            asChild
+            variant="secondary"
+            size="small"
+            ariaLabel="User menu"
+          >
+            <Popover.Trigger>
+              <svg data-testid="avatar" aria-hidden="true" />
+            </Popover.Trigger>
+          </Button>
+          <Popover.Content>Content</Popover.Content>
+        </Popover>
+      );
+
+      const trigger = screen.getByRole('button', { name: 'User menu' });
+      expect(trigger).toHaveClass('button', 'small', 'secondary');
+      expect(trigger).toHaveClass('popoverTrigger');
+      expect(trigger).toHaveAttribute('data-ds-component', 'Button');
     });
   });
 
