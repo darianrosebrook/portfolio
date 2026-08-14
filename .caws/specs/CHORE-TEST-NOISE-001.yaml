@@ -2,9 +2,11 @@ id: CHORE-TEST-NOISE-001
 title: 'Triage vitest warnings/errors to zero'
 risk_tier: 3
 mode: chore
-lifecycle_state: active
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Full vitest suite triaged to 0 warnings/errors: 6 root causes fixed (unguarded token-generator side effect, React act() warnings, unmocked next/cache revalidatePath, and unspied intentional Logger.warn/console.error paths). 150/150 test files pass, 1445 passed / 2 skipped, unchanged from baseline.'
 created_at: '2026-08-14T02:21:46.867Z'
-updated_at: '2026-08-14T02:55:16.994Z'
+updated_at: '2026-08-14T02:55:42.250Z'
 blast_radius:
   modules:
     - 'test/**'
