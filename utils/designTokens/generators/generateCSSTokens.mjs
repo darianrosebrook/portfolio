@@ -404,4 +404,7 @@ function toPascalCase(str) {
     .join('');
 }
 
-run();
+// Run if called directly
+if (import.meta.url === `file://${process.argv[1]}`) {
+  run();
+}

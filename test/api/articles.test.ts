@@ -47,6 +47,15 @@ vi.mock('@/utils/supabase/server', () => ({
   createClient: vi.fn(() => mockSupabase),
 }));
 
+// Real revalidatePath throws outside a Next.js request context (no static
+// generation store in this test environment); mock it so route handlers
+// exercise their cache-invalidation call sites without that expected-but-
+// noisy failure being logged on every run.
+vi.mock('next/cache', () => ({
+  revalidatePath: vi.fn(),
+  revalidateTag: vi.fn(),
+}));
+
 // Mock schemas
 vi.mock('@/utils/schemas/article.schema', () => ({
   createArticleSchema: {
@@ -94,12 +103,18 @@ const mockArticle: Article = {
 };
 
 describe('Articles API Integration Tests', () => {
+  // Several tests below deliberately exercise route error-handling paths,
+  // which log via console.error by design; suppress that expected noise.
+  let consoleErrorSpy: ReturnType<typeof vi.spyOn>;
+
   beforeEach(() => {
     vi.clearAllMocks();
+    consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
   });
 
   afterEach(() => {
     vi.resetAllMocks();
+    consoleErrorSpy.mockRestore();
   });
 
   describe('POST /api/articles', () => {

@@ -92,11 +92,14 @@ describe('failure isolation', () => {
     revalidatePathMock.mockImplementationOnce(() => {
       throw new Error('cache backend unavailable');
     });
+    const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
 
     // The write already committed by the time we revalidate. Throwing here would
     // turn a successful save into a 500 and invite the author to retry a write
     // that already landed.
     expect(() => revalidatePublicArticlePaths()).not.toThrow();
+    expect(errorSpy).toHaveBeenCalled();
+    errorSpy.mockRestore();
   });
 });
 

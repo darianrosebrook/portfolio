@@ -8,10 +8,11 @@
  * detectors must NOT classify as bowls/eyes, plus pinned positive behavior
  * for fixtures that currently trigger detection.
  */
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { hasBowl } from '@/utils/typeAnatomy/bowl';
 import { getCounter } from '@/utils/typeAnatomy/counter';
 import { hasEye } from '@/utils/typeAnatomy/eye';
+import { Logger } from '@/utils/helpers/logger';
 import {
   mockGlyphFromPath,
   mockNonDrawableGlyph,
@@ -28,6 +29,17 @@ import {
 
 describe('counter features (synthetic geometry)', () => {
   const metrics = standardMetrics;
+
+  // These tests deliberately exercise degenerate-input paths (non-drawable
+  // glyphs, empty paths, sub-em-square geometry) that trigger Logger.warn by
+  // design; suppress the expected noise rather than let it print raw.
+  let warnSpy: ReturnType<typeof vi.spyOn>;
+  beforeEach(() => {
+    warnSpy = vi.spyOn(Logger, 'warn').mockImplementation(() => {});
+  });
+  afterEach(() => {
+    warnSpy.mockRestore();
+  });
 
   describe('hasBowl', () => {
     // The legacy hasBowl heuristic is calibrated for real typefaces and does

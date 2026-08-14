@@ -1,5 +1,12 @@
 import * as React from 'react';
-import { render, screen, fireEvent, within } from '@testing-library/react';
+import {
+  render,
+  screen,
+  fireEvent,
+  within,
+  waitFor,
+  act,
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 
@@ -64,9 +71,10 @@ describe('Toast Composer', () => {
       });
       if (closes[0]) await user.click(closes[0]);
       // after transition time, expect still up to 3
-      await new Promise((r) => setTimeout(r, 300));
-      const items = within(region).getAllByRole('status');
-      expect(items.length).toBeLessThanOrEqual(3);
+      await waitFor(() => {
+        const items = within(region).getAllByRole('status');
+        expect(items.length).toBeLessThanOrEqual(3);
+      });
     });
 
     it('auto-dismiss after duration', async () => {
@@ -85,9 +93,12 @@ describe('Toast Composer', () => {
       );
       // initially present
       expect(await screen.findByRole('status')).toBeInTheDocument();
-      await new Promise((r) => setTimeout(r, 800));
-      // should be gone
-      expect(screen.queryAllByRole('status').length).toBe(0);
+      await waitFor(
+        () => {
+          expect(screen.queryAllByRole('status').length).toBe(0);
+        },
+        { timeout: 1000 }
+      );
     });
   });
 
@@ -108,12 +119,18 @@ describe('Toast Composer', () => {
       );
       const item = await screen.findByRole('status');
       fireEvent.mouseEnter(item);
-      await new Promise((r) => setTimeout(r, 400));
+      await act(async () => {
+        await new Promise((r) => setTimeout(r, 400));
+      });
       // still present because paused
       expect(screen.getByRole('status')).toBeInTheDocument();
       fireEvent.mouseLeave(item);
-      await new Promise((r) => setTimeout(r, 1000));
-      expect(screen.queryByRole('status')).not.toBeInTheDocument();
+      await waitFor(
+        () => {
+          expect(screen.queryByRole('status')).not.toBeInTheDocument();
+        },
+        { timeout: 1500 }
+      );
     });
 
     it('supports keyboard dismissal', async () => {
@@ -134,8 +151,9 @@ describe('Toast Composer', () => {
       expect(dismissButton).toHaveFocus();
 
       await user.keyboard('{Enter}');
-      await new Promise((r) => setTimeout(r, 300));
-      expect(screen.queryByRole('status')).not.toBeInTheDocument();
+      await waitFor(() => {
+        expect(screen.queryByRole('status')).not.toBeInTheDocument();
+      });
     });
   });
 
@@ -207,7 +225,10 @@ describe('Toast Composer', () => {
         </ToastProvider>
       );
       await userEvent.click(screen.getByLabelText('enqueue'));
-      const _results = await axe(container);
+      // enqueue's entering->visible transition lands on the next animation
+      // frame; running axe (itself async) inside act flushes that update
+      // instead of letting it land outside any act scope.
+      const _results = await act(async () => axe(container));
       expect(container).toBeInTheDocument();
     });
 

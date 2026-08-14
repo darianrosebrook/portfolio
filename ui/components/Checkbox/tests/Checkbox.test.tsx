@@ -21,7 +21,7 @@ describe('Checkbox', () => {
   });
 
   it('handles checked state', () => {
-    render(<Checkbox checked />);
+    render(<Checkbox checked readOnly />);
     const checkbox = screen.getByRole('checkbox');
     expect(checkbox).toBeChecked();
   });
@@ -74,7 +74,7 @@ describe('Checkbox', () => {
   });
 
   it('should not have accessibility violations when checked', async () => {
-    const { container } = render(<Checkbox checked />);
+    const { container } = render(<Checkbox checked readOnly />);
     // Note: axe testing is handled by the setup file
     expect(container).toBeInTheDocument();
   });
