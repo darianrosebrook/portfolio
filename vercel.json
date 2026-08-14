@@ -1,0 +1,3 @@
+{
+  "installCommand": "printf '//npm.fontawesome.com/:_authToken=%s\\n//registry.tiptap.dev/:_authToken=%s\\n' \"$FONTAWESOME_PACKAGE_TOKEN\" \"$TIPTAP_PRO_PACKAGE_TOKEN\" > \"$HOME/.npmrc\" && pnpm install"
+}
