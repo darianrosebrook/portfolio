@@ -3,6 +3,7 @@ title: 'Triage vitest warnings/errors to zero'
 risk_tier: 3
 mode: chore
 lifecycle_state: active
+worktree: chore-test-noise
 created_at: '2026-08-14T02:21:46.867Z'
 updated_at: '2026-08-14T02:22:37.982Z'
 blast_radius:
