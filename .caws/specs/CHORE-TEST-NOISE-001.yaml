@@ -2,10 +2,11 @@ id: CHORE-TEST-NOISE-001
 title: 'Triage vitest warnings/errors to zero'
 risk_tier: 3
 mode: chore
-lifecycle_state: active
-worktree: chore-test-noise
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Auto-closed by caws worktree merge chore-test-noise at b4b5e86f70d316b14d509de9f9f93c82b2a45cb0'
 created_at: '2026-08-14T02:21:46.867Z'
-updated_at: '2026-08-14T02:52:40.562Z'
+updated_at: '2026-08-14T02:54:52.871Z'
 blast_radius:
   modules:
     - 'test/**'
