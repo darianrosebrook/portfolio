@@ -4,7 +4,7 @@ risk_tier: 3
 mode: chore
 lifecycle_state: active
 created_at: '2026-08-14T02:21:46.867Z'
-updated_at: '2026-08-14T02:21:46.867Z'
+updated_at: '2026-08-14T02:22:37.982Z'
 blast_radius:
   modules:
     - 'TODO: list one or more modules this spec touches.'
@@ -13,6 +13,21 @@ operational_rollback_slo: 5m
 scope:
   in:
     - 'TODO: list the file(s) or directories this spec authorizes.'
+    - utils/designTokens/generators/generateCSSTokens.mjs
+    - test/components/Toast.test.tsx
+    - ui/components/Toast/tests/Toast.test.tsx
+    - test/components/Field.test.tsx
+    - ui/components/Field/tests/Field.test.tsx
+    - ui/components/Field/useField.ts
+    - ui/components/Checkbox/tests/Checkbox.test.tsx
+    - test/utils/typeAnatomy/features/counters.test.ts
+    - test/utils/typeAnatomy/detector.test.ts
+    - test/designTokens.test.ts
+    - test/designTokens.colors.test.ts
+    - test/api/articles.test.ts
+    - test/api/contentRevalidation.test.ts
+    - test/pages/publicReadErrors.test.ts
+    - test/api/cleanup-images.test.ts
   out: []
 invariants:
   - 'TODO: describe one invariant this spec guarantees.'
