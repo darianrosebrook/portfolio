@@ -39,3 +39,8 @@ acceptance:
     then: 'TODO'
 non_functional: {}
 contracts: []
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "npx vitest run (post-merge, main HEAD): 150 test files passed, 1445 passed / 2 skipped, 0 stderr blocks, exit 0"
+    recorded_at: "2026-08-14T02:55:28.697Z"
