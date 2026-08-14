@@ -236,7 +236,9 @@ describe('Enhanced Design Token Resolution', () => {
       b: { $value: '{a}', $type: 'color' },
     };
 
-    const config = createDefaultConfig();
+    // Circular refs deliberately trigger the resolver's onWarn (CIRCULAR,
+    // UNRESOLVED_FALLBACK); suppress the expected noise for this assertion.
+    const config = createDefaultConfig({ onWarn: () => {} });
     const componentTokens = {
       prefix: 'test',
       tokens: {

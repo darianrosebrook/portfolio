@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, act } from '@testing-library/react';
 import { axe } from 'jest-axe';
 
 import { FieldProvider } from '../FieldProvider';
@@ -51,7 +51,7 @@ describe('Field Composer', () => {
   });
 
   describe('Adapters', () => {
-    it('checkbox adapter toggles boolean value', () => {
+    it('checkbox adapter toggles boolean value', async () => {
       const validate = () => null;
       wrap(
         <FieldProvider
@@ -67,7 +67,9 @@ describe('Field Composer', () => {
       );
       const checkbox = screen.getByRole('checkbox');
       expect(checkbox).not.toBeChecked();
-      fireEvent.click(checkbox);
+      await act(async () => {
+        fireEvent.click(checkbox);
+      });
       expect(checkbox).toBeChecked();
     });
 

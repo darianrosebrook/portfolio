@@ -28,14 +28,20 @@ const mockUser = {
 };
 
 describe('Cleanup Images API Integration Tests', () => {
+  // One test below deliberately exercises the route's cleanup-error path,
+  // which logs via console.error by design; suppress that expected noise.
+  let consoleErrorSpy: ReturnType<typeof vi.spyOn>;
+
   beforeEach(() => {
     vi.clearAllMocks();
     process.env.ADMIN_USER_IDS = 'admin-123';
+    consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
   });
 
   afterEach(() => {
     vi.resetAllMocks();
     delete process.env.ADMIN_USER_IDS;
+    consoleErrorSpy.mockRestore();
   });
 
   describe('POST /api/cleanup-images', () => {

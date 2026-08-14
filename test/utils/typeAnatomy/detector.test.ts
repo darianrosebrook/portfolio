@@ -2,7 +2,7 @@
  * Tests for the feature detection orchestration layer.
  * Covers detectFeature, detectFeatures, and getAvailableFeatures.
  */
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import {
   detectFeature,
   detectFeatures,
@@ -15,6 +15,7 @@ import {
   standardMetrics,
 } from '../fixtures/mockGlyph';
 import { DONUT, CIRCLE } from '../fixtures/svgPaths';
+import { Logger } from '@/utils/helpers/logger';
 
 describe('detector orchestration', () => {
   const metrics = standardMetrics;
@@ -239,6 +240,16 @@ describe('detector orchestration', () => {
   });
 
   describe('integration: full detection workflow', () => {
+    // A non-drawable glyph deliberately triggers getCounter's degenerate-input
+    // Logger.warn; suppress the expected noise rather than let it print raw.
+    let warnSpy: ReturnType<typeof vi.spyOn>;
+    beforeEach(() => {
+      warnSpy = vi.spyOn(Logger, 'warn').mockImplementation(() => {});
+    });
+    afterEach(() => {
+      warnSpy.mockRestore();
+    });
+
     it('non-drawable glyph returns false for all features', () => {
       const glyph = mockNonDrawableGlyph('null-path');
 

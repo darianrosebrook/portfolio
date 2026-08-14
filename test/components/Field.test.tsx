@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, act } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { FieldProvider } from '@/ui/components/Field';
 import { Field } from '@/ui/components/Field';
@@ -43,7 +43,7 @@ describe('Field composer', () => {
     expect(input).toHaveAttribute('aria-invalid', 'true');
   });
 
-  it('checkbox adapter toggles boolean value', () => {
+  it('checkbox adapter toggles boolean value', async () => {
     const validate = () => null;
     wrap(
       <FieldProvider
@@ -59,7 +59,9 @@ describe('Field composer', () => {
     );
     const checkbox = screen.getByRole('checkbox');
     expect(checkbox).not.toBeChecked();
-    fireEvent.click(checkbox);
+    await act(async () => {
+      fireEvent.click(checkbox);
+    });
     expect(checkbox).toBeChecked();
   });
 

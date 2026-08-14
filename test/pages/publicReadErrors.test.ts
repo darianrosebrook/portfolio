@@ -93,10 +93,12 @@ const DB_ERROR = {
 describe('articles list page', () => {
   it('A1: a query error fails the render instead of caching an empty list', async () => {
     queryResult.current = { data: null, error: DB_ERROR };
+    const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
     const { default: Page } = await import('@/app/articles/page');
 
     // Returning [] here would cache an empty /articles for the revalidate window.
     await expect(Page()).rejects.toThrow();
+    errorSpy.mockRestore();
   });
 
   it('A4: zero published articles is a success and renders', async () => {
@@ -111,6 +113,7 @@ describe('articles list page', () => {
 describe('article detail page', () => {
   it('A1: a query error fails the render rather than 404ing', async () => {
     queryResult.current = { data: null, error: DB_ERROR };
+    const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
     const { default: Page } = await import('@/app/articles/[slug]/page');
 
     // A cached 404 on a published article has no write to invalidate it.
@@ -120,6 +123,7 @@ describe('article detail page', () => {
     await expect(
       Page({ params: Promise.resolve({ slug: 'a-published-article' }) })
     ).rejects.not.toThrow(NOT_FOUND.message);
+    errorSpy.mockRestore();
   });
 
   it('A2: a genuinely absent slug still 404s', async () => {
@@ -135,11 +139,13 @@ describe('article detail page', () => {
 describe('case study detail page', () => {
   it('A1: a query error fails the render rather than 404ing', async () => {
     queryResult.current = { data: null, error: DB_ERROR };
+    const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
     const { default: Page } = await import('@/app/work/[slug]/page');
 
     await expect(
       Page({ params: Promise.resolve({ slug: 'a-published-case-study' }) })
     ).rejects.not.toThrow(NOT_FOUND.message);
+    errorSpy.mockRestore();
   });
 
   it('A2: a genuinely absent slug still 404s', async () => {
