@@ -8,7 +8,9 @@ created_at: '2026-08-14T02:21:46.867Z'
 updated_at: '2026-08-14T02:22:37.982Z'
 blast_radius:
   modules:
-    - 'TODO: list one or more modules this spec touches.'
+    - 'test/**'
+    - 'ui/components/**/tests/**'
+    - 'utils/designTokens/generators'
   data_migration: false
 operational_rollback_slo: 5m
 scope:
@@ -31,7 +33,7 @@ scope:
     - test/api/cleanup-images.test.ts
   out: []
 invariants:
-  - 'TODO: describe one invariant this spec guarantees.'
+  - 'Tests never mock away or silently swallow a genuine assertion failure — only expected-by-design console/warn noise is suppressed, and intentional-throw paths still assert the error was surfaced.'
 acceptance:
   - id: A1
     given: 'TODO'
