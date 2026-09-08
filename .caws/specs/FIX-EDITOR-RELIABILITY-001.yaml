@@ -85,3 +85,9 @@ evidence:
     recorded_at: "2026-09-08T05:39:27.436Z"
     exit_code: 0
     commit_sha: "68373f2b"
+  - criterion_id: A4
+    status: pass
+    evidence_ref: test/context/UserContext.test.tsx real installed SDK refresh-lock test with mocked transport; test/app/auth retry route and safe redirect tests
+    recorded_at: "2026-09-08T05:39:27.981Z"
+    exit_code: 0
+    commit_sha: "68373f2b"
