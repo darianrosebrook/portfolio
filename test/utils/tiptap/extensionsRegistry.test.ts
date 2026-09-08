@@ -8,6 +8,7 @@ import {
   createServerExtensions,
   createPreviewExtensions,
 } from '@/ui/modules/Tiptap/extensionsRegistry';
+import { createEditorOnlyExtensions } from '@/ui/modules/Tiptap/editorOnlyExtensions';
 
 describe('TipTap Extension Registry', () => {
   beforeEach(() => {
@@ -30,7 +31,9 @@ describe('TipTap Extension Registry', () => {
       expect(extensionNames.length).toBeGreaterThan(0);
       // Verify we have extensions configured
       expect(extensions.length).toBeGreaterThan(10);
-      expect(extensionNames).toContain('dragHandle');
+      // DragHandle lives in the editor-only extensions so the server-safe
+      // registry never imports its transitive yjs dependency.
+      expect(extensionNames).not.toContain('dragHandle');
     });
 
     it('should accept articleId config', () => {
@@ -110,6 +113,24 @@ describe('TipTap Extension Registry', () => {
       const extensions2 = createPreviewExtensions();
 
       expect(extensions1.length).toBe(extensions2.length);
+    });
+  });
+
+  describe('createEditorOnlyExtensions', () => {
+    it('should provide the drag handle extension', () => {
+      const extensions = createEditorOnlyExtensions();
+      const extensionNames = extensions.map((ext) => ext.name);
+
+      expect(extensions.length).toBeGreaterThan(0);
+      expect(extensionNames).toContain('dragHandle');
+    });
+
+    it('should stay out of the server-safe registry', () => {
+      const serverNames = createServerExtensions().map((ext) => ext.name);
+      const previewNames = createPreviewExtensions().map((ext) => ext.name);
+
+      expect(serverNames).not.toContain('dragHandle');
+      expect(previewNames).not.toContain('dragHandle');
     });
   });
 

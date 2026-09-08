@@ -5,6 +5,7 @@ import { useEffect, useRef } from 'react';
 import styles from './tiptap.module.css';
 
 import { createEditorExtensions } from './extensionsRegistry';
+import { createEditorOnlyExtensions } from './editorOnlyExtensions';
 import { FloatingBubbleMenu } from './FloatingBubbleMenu';
 import { FloatingBlockMenu } from './FloatingBlockMenu';
 import ImageBubbleMenu from './ImageBubbleMenu';
@@ -35,10 +36,15 @@ const Tiptap = ({
   }, [article]);
 
   const editor = useEditor({
-    extensions: createEditorExtensions({
-      getArticleId: () => article.id ?? undefined,
-      onMediaUploadRequiresSave,
-    }),
+    extensions: [
+      ...createEditorExtensions({
+        getArticleId: () => article.id ?? undefined,
+        onMediaUploadRequiresSave,
+      }),
+      // Client-only extensions (DragHandle et al.) stay out of the shared
+      // registry so server rendering never imports their yjs dependency.
+      ...createEditorOnlyExtensions(),
+    ],
     immediatelyRender: false,
     content: content,
     editable,
