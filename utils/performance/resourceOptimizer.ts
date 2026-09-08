@@ -184,7 +184,7 @@ class ResourceOptimizer {
    */
   optimizeNavigation() {
     // Prefetch likely next pages
-    const likelyPages = ['/articles', '/blueprints', '/work', '/tools'];
+    const likelyPages = ['/articles', '/blueprints', '/work'];
 
     // Prefetch on idle
     if ('requestIdleCallback' in window) {
