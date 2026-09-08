@@ -26,7 +26,6 @@ import HorizontalRule from '@tiptap/extension-horizontal-rule';
 import TaskList from '@tiptap/extension-task-list';
 import TaskItem from '@tiptap/extension-task-item';
 import CharacterCount from '@tiptap/extension-character-count';
-import DragHandle from '@tiptap/extension-drag-handle';
 import Image from '@tiptap/extension-image';
 import { DetailsExtension } from './Extensions/Details/DetailsExtension';
 import { TableOfContentsExtension } from './Extensions/TableOfContents/TableOfContentsExtension';
@@ -35,9 +34,11 @@ import { SlashCommand } from './Extensions/SlashCommand';
 import { CodeBlockExtended } from './Extensions/CodeBlockExtended';
 import { ImageExtended } from './Extensions/ImageExtended';
 import { VideoExtended } from './Extensions/VideoExtended';
+import { ContentLinkExtension } from './Extensions/ContentLink/ContentLinkExtension';
 import { DetailsServer } from './Extensions/Details/DetailsServer';
 import { TableOfContentsServer } from './Extensions/TableOfContents/TableOfContentsServer';
 import { VideoServer } from './Extensions/VideoExtended/VideoServer';
+import { ContentLinkServer } from './Extensions/ContentLink/ContentLinkServer';
 import type { Extension } from '@tiptap/core';
 
 /**
@@ -141,21 +142,9 @@ export function createEditorExtensions(
           .trim();
       },
     }),
-    DragHandle.configure({
-      render: () => {
-        const element = document.createElement('button');
-        element.type = 'button';
-        element.classList.add('editor-drag-handle');
-        element.setAttribute('aria-label', 'Drag block to reorder');
-        element.title = 'Drag to reorder';
-        element.textContent = '⋮⋮';
-        element.style.visibility = 'hidden';
-        element.style.pointerEvents = 'none';
-        return element;
-      },
-    }),
     CodeBlockExtended,
     SlashCommand,
+    ContentLinkExtension,
     CharacterCount,
   ] as Extension[];
 }
@@ -202,6 +191,7 @@ export function createServerExtensions(): Extension[] {
     TaskItem.configure({ nested: true }),
     DetailsServer,
     TableOfContentsServer,
+    ContentLinkServer,
   ] as Extension[];
 }
 

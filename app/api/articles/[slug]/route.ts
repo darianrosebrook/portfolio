@@ -6,6 +6,8 @@ import {
   patchArticleDraftSchema,
 } from '@/utils/schemas/article.schema';
 import { revalidatePublicArticlePaths } from '@/utils/supabase/revalidateContent';
+import { extractMetadata } from '@/utils/metadata';
+import type { JSONContent } from '@tiptap/react';
 
 export async function GET(
   _request: Request,
@@ -193,6 +195,9 @@ export async function PUT(
       );
     }
 
+    const promotedBody = (existing.workingbody ??
+      existing.articleBody) as unknown as JSONContent | null;
+
     updateData = {
       ...updateData,
       articleBody: existing.workingbody ?? existing.articleBody ?? null,
@@ -201,6 +206,10 @@ export async function PUT(
       image: existing.workingimage ?? existing.image,
       keywords: existing.workingkeywords ?? existing.keywords,
       articleSection: existing.workingarticlesection ?? existing.articleSection,
+      // Recompute from the promoted body; a client snapshot can lag the edit.
+      wordCount: promotedBody
+        ? extractMetadata(promotedBody).wordCount
+        : (updateData.wordCount ?? null),
       published_at: updateData.published_at ?? nowIso,
       working_modified_at: nowIso,
       is_dirty: false,

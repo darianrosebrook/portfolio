@@ -1,0 +1,181 @@
+.picker {
+  display: flex;
+  flex-direction: column;
+  gap: var(--core-spacing-size-03);
+  margin-top: var(--core-spacing-size-06);
+  padding-top: var(--core-spacing-size-05);
+  border-top: 1px solid var(--semantic-color-border-subtle);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.label {
+  color: var(--semantic-color-foreground-secondary);
+  font-weight: var(--semantic-typography-font-weight-medium);
+  font-size: var(--semantic-typography-body-03);
+}
+
+.syncState {
+  min-height: 1em;
+  color: var(--semantic-color-foreground-secondary);
+  font-size: var(--semantic-typography-body-04);
+}
+
+.syncState[data-status='error'] {
+  color: var(--semantic-color-foreground-danger);
+}
+
+.searchWrap {
+  position: relative;
+}
+
+.searchInput {
+  width: 100%;
+  padding: var(--core-spacing-size-02) var(--core-spacing-size-03);
+  background: var(--semantic-color-background-secondary);
+  border: 1px solid var(--semantic-color-border-subtle);
+  border-radius: var(--core-shape-radius-medium);
+  color: var(--semantic-color-foreground-primary);
+  font-size: var(--semantic-typography-body-03);
+}
+
+.searchInput:focus-visible {
+  border-color: var(--semantic-color-border-accent);
+  outline: none;
+}
+
+.results {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 40;
+  overflow-y: auto;
+  width: 100%;
+  max-height: 260px;
+  margin: 0;
+  padding: var(--core-spacing-size-01);
+  background: var(--semantic-color-background-primary);
+  border: 1px solid var(--semantic-color-border-primary);
+  border-radius: var(--core-shape-radius-medium);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 15%);
+  list-style: none;
+}
+
+.resultButton {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+  padding: var(--core-spacing-size-02) var(--core-spacing-size-03);
+  background: transparent;
+  border: none;
+  border-radius: var(--core-shape-radius-small);
+  text-align: left;
+  cursor: pointer;
+}
+
+.resultButton:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.resultButton:hover:not(:disabled) {
+  background: var(--semantic-color-background-secondary);
+}
+
+.resultTitle {
+  color: var(--semantic-color-foreground-primary);
+  font-weight: var(--semantic-typography-font-weight-medium);
+  font-size: var(--semantic-typography-body-03);
+}
+
+.resultBadge {
+  color: var(--semantic-color-foreground-secondary);
+  font-size: var(--semantic-typography-body-04);
+}
+
+.resultEmpty {
+  padding: var(--core-spacing-size-03);
+  color: var(--semantic-color-foreground-secondary);
+  font-size: var(--semantic-typography-body-03);
+  text-align: center;
+}
+
+.hint {
+  margin: 0;
+  color: var(--semantic-color-foreground-secondary);
+  font-size: var(--semantic-typography-body-04);
+}
+
+.selected {
+  display: flex;
+  flex-direction: column;
+  gap: var(--core-spacing-size-02);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.selectedItem {
+  display: flex;
+  flex-direction: column;
+  gap: var(--core-spacing-size-02);
+  padding: var(--core-spacing-size-02) var(--core-spacing-size-03);
+  background: var(--semantic-color-background-secondary);
+  border-radius: var(--core-shape-radius-medium);
+}
+
+.selectedMain {
+  display: flex;
+  gap: var(--core-spacing-size-02);
+  align-items: center;
+}
+
+.selectedTitle {
+  overflow: hidden;
+  color: var(--semantic-color-foreground-primary);
+  font-weight: var(--semantic-typography-font-weight-medium);
+  font-size: var(--semantic-typography-body-03);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.selectedControls {
+  display: flex;
+  gap: var(--core-spacing-size-02);
+  align-items: center;
+}
+
+.typeLabel {
+  flex: 1;
+}
+
+.typeSelect {
+  width: 100%;
+  padding: var(--core-spacing-size-01) var(--core-spacing-size-02);
+  background: var(--semantic-color-background-primary);
+  border: 1px solid var(--semantic-color-border-subtle);
+  border-radius: var(--core-shape-radius-small);
+  color: var(--semantic-color-foreground-primary);
+  font-size: var(--semantic-typography-body-04);
+}
+
+.removeButton {
+  padding: var(--core-spacing-size-01) var(--core-spacing-size-02);
+  background: transparent;
+  border: none;
+  border-radius: var(--core-shape-radius-small);
+  color: var(--semantic-color-foreground-secondary);
+  font-size: var(--semantic-typography-body-02);
+  line-height: 1;
+  cursor: pointer;
+}
+
+.removeButton:hover {
+  background: var(--semantic-color-background-active);
+  color: var(--semantic-color-foreground-danger);
+}

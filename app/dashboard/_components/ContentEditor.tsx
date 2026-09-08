@@ -2,6 +2,8 @@
 import type { Article, CaseStudy } from '@/types';
 import Button from '@/ui/components/Button';
 import Checkbox from '@/ui/components/Checkbox';
+import { ConfirmDialog } from './ConfirmDialog';
+import { RelatedContentPicker } from './RelatedContentPicker';
 import { sanitizeCmsHtml } from '@/utils/helpers/sanitizeHtml';
 import { generateHTML } from '@tiptap/html';
 import { JSONContent } from '@tiptap/react';
@@ -40,6 +42,15 @@ export default function ContentEditor({
   const [propertiesOpen, setPropertiesOpen] = useState(true);
   const [saveStatus, setSaveStatus] = useState<SaveStatus>('idle');
   const [saveError, setSaveError] = useState<string | null>(null);
+  const [dirty, setDirty] = useState<boolean>(() =>
+    Boolean((initial as { is_dirty?: boolean | null }).is_dirty)
+  );
+  const [confirm, setConfirm] = useState<
+    null | 'discard' | 'unpublish' | 'publish'
+  >(null);
+  // Latest known canonical (published) layer, used to summarize what a
+  // publish would change. Refreshed from every server row we receive.
+  const [canonical, setCanonical] = useState<RecordType>(initial);
   const previousContentRef = useRef<string | null>(null);
   const routeSlugRef = useRef(initial.slug);
   const recordRef = useRef(record);
@@ -57,6 +68,8 @@ export default function ContentEditor({
       ...initial,
       ...effective,
     });
+    setDirty(Boolean((initial as { is_dirty?: boolean | null }).is_dirty));
+    setCanonical(initial);
     routeSlugRef.current = initial.slug;
     previousContentRef.current = serializeWorkingRecord({
       ...initial,
@@ -73,6 +86,11 @@ export default function ContentEditor({
     return sanitizeCmsHtml(generateHTML(doc, createPreviewExtensions()));
   }, [record.articleBody]);
 
+  const changedFields = useMemo(
+    () => changedFieldLabels(record, canonical),
+    [record, canonical]
+  );
+
   const saveTransition = async (payload: Partial<RecordType>) => {
     const urlBase =
       entity === 'articles' ? '/api/articles' : '/api/case-studies';
@@ -88,6 +106,10 @@ export default function ContentEditor({
     const saved = await response.json();
     const row = Array.isArray(saved) ? saved[0] : null;
     if (row?.slug) routeSlugRef.current = row.slug;
+    if (row) {
+      setDirty(Boolean((row as { is_dirty?: boolean | null }).is_dirty));
+      setCanonical(row as RecordType);
+    }
     return row as RecordType | null;
   };
 
@@ -137,6 +159,7 @@ export default function ContentEditor({
       try {
         await queueWorkingSave(snapshot);
         previousContentRef.current = serializeWorkingRecord(snapshot);
+        setDirty(true);
         if (revision === saveRevisionRef.current) setSaveStatus('saved');
       } catch (err) {
         if (revision === saveRevisionRef.current) {
@@ -213,19 +236,25 @@ export default function ContentEditor({
     }
   };
 
-  const handlePrimaryAction = async () => {
+  const handleUnpublish = async () => {
+    setConfirm(null);
+    try {
+      await flushWorkingDraft(recordRef.current);
+      const saved = await saveTransition({
+        slug: record.slug,
+        status: 'draft' as RecordType['status'],
+      });
+      if (saved) setRecord(toEditableRecord(saved));
+    } catch (err) {
+      setSaveStatus('error');
+      setSaveError(err instanceof Error ? err.message : 'Failed to unpublish');
+    }
+  };
+
+  const handlePublish = async () => {
+    setConfirm(null);
     try {
       const nowIso = new Date().toISOString();
-      if ((record.status as RecordType['status']) === 'published') {
-        await flushWorkingDraft(recordRef.current);
-        const saved = await saveTransition({
-          slug: record.slug,
-          status: 'draft' as RecordType['status'],
-        });
-        if (saved) setRecord(toEditableRecord(saved));
-        return;
-      }
-
       // Publish only after the latest click-time editor state has reached the
       // working columns that the API promotes into canonical content.
       await flushWorkingDraft(recordRef.current);
@@ -246,10 +275,35 @@ export default function ContentEditor({
     }
   };
 
-  const primaryLabel =
-    (record.status as RecordType['status']) === 'published'
-      ? 'Unpublish'
-      : 'Publish';
+  const handleDiscard = async () => {
+    setConfirm(null);
+    try {
+      const urlBase =
+        entity === 'articles' ? '/api/articles' : '/api/case-studies';
+      const response = await fetch(
+        `${urlBase}/${routeSlugRef.current}/discard`,
+        { method: 'POST' }
+      );
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText || 'Discard failed');
+      }
+      const saved = await response.json();
+      const row = Array.isArray(saved) ? saved[0] : saved;
+      if (row) {
+        const next = toEditableRecord(row as RecordType);
+        setRecord(next);
+        previousContentRef.current = serializeWorkingRecord(next);
+        setDirty(false);
+        setCanonical(row as RecordType);
+      }
+    } catch (err) {
+      setSaveStatus('error');
+      setSaveError(
+        err instanceof Error ? err.message : 'Failed to discard changes'
+      );
+    }
+  };
 
   return (
     <section className={styles.suite}>
@@ -258,6 +312,19 @@ export default function ContentEditor({
           <span className={styles.statusBadge} data-status={record.status}>
             {record.status === 'published' ? 'Published' : 'Draft'}
           </span>
+          {dirty && (
+            <span
+              className={styles.pendingBadge}
+              title="Working draft differs from the published version"
+            >
+              unpublished changes
+            </span>
+          )}
+          {dirty && changedFields.length > 0 && (
+            <span className={styles.saveState}>
+              changed: {changedFields.join(', ')}
+            </span>
+          )}
           <span className={styles.saveState} data-status={saveStatus}>
             {saveStatus === 'saving' && 'Saving…'}
             {saveStatus === 'saved' && 'Saved'}
@@ -275,11 +342,25 @@ export default function ContentEditor({
           <Button variant="secondary" onClick={persist}>
             Save draft
           </Button>
+          {dirty && (
+            <Button variant="secondary" onClick={() => setConfirm('discard')}>
+              Discard changes
+            </Button>
+          )}
+          {record.status === 'published' && dirty && (
+            <Button variant="primary" onClick={() => setConfirm('publish')}>
+              Publish updates
+            </Button>
+          )}
           <Button
             variant={record.status === 'published' ? 'destructive' : 'primary'}
-            onClick={handlePrimaryAction}
+            onClick={
+              record.status === 'published'
+                ? () => setConfirm('unpublish')
+                : handlePublish
+            }
           >
-            {primaryLabel}
+            {record.status === 'published' ? 'Unpublish' : 'Publish'}
           </Button>
           <Button
             variant="secondary"
@@ -332,6 +413,18 @@ export default function ContentEditor({
                 onChange={handleField}
                 id="slug"
               />
+              {record.status === 'published' &&
+                record.slug !== canonical.slug && (
+                  <small
+                    style={{
+                      color:
+                        'var(--semantic-color-foreground-warning, #92400e)',
+                    }}
+                  >
+                    Renaming changes the public URL; /articles/{canonical.slug}{' '}
+                    will 404.
+                  </small>
+                )}
             </div>
             <div className={styles.field}>
               <label className="small" htmlFor="headline">
@@ -388,6 +481,11 @@ export default function ContentEditor({
                 id="keywords"
               />
             </div>
+            <RelatedContentPicker
+              slug={routeSlugRef.current}
+              contentType={entity === 'articles' ? 'article' : 'case-study'}
+              excludeId={record.id}
+            />
             <div className={styles.field}>
               <label className="small" htmlFor="published_at">
                 Published at
@@ -449,6 +547,60 @@ export default function ContentEditor({
           </aside>
         )}
       </div>
+
+      <ConfirmDialog
+        open={confirm === 'discard'}
+        title="Discard unpublished changes?"
+        description={
+          record.status === 'published'
+            ? 'The working draft will be reset to the live published version. The public article is not affected.'
+            : 'The working draft will be reset to the last saved version. This cannot be undone.'
+        }
+        confirmLabel="Discard changes"
+        danger
+        onConfirm={handleDiscard}
+        onCancel={() => setConfirm(null)}
+      />
+      <ConfirmDialog
+        open={confirm === 'publish'}
+        title="Publish updates?"
+        description={
+          <>
+            The live version will be replaced with your working draft.
+            <br />
+            Changed:{' '}
+            {changedFields.length > 0 ? changedFields.join(', ') : 'content'}.
+            <br />
+            Publish date:{' '}
+            {updatePublishDateOnPublish || !record.published_at
+              ? 'updates to now.'
+              : `stays ${new Date(record.published_at).toLocaleString()}.`}
+          </>
+        }
+        confirmLabel="Publish"
+        onConfirm={handlePublish}
+        onCancel={() => setConfirm(null)}
+      />
+      <ConfirmDialog
+        open={confirm === 'unpublish'}
+        title="Unpublish?"
+        description={
+          <>
+            The article will immediately disappear from the public site.
+            {dirty && (
+              <>
+                {' '}
+                Unpublished changes stay pending and will go live the next time
+                you publish.
+              </>
+            )}
+          </>
+        }
+        confirmLabel="Unpublish"
+        danger
+        onConfirm={handleUnpublish}
+        onCancel={() => setConfirm(null)}
+      />
     </section>
   );
 }
@@ -463,6 +615,30 @@ function serializeWorkingRecord(record: RecordType): string {
     articleSection: record.articleSection,
     wordCount: record.wordCount,
   });
+}
+
+function changedFieldLabels(
+  record: RecordType,
+  canonical: RecordType
+): string[] {
+  const changed: string[] = [];
+  const scalarFields: Array<[string, keyof RecordType]> = [
+    ['headline', 'headline'],
+    ['description', 'description'],
+    ['image', 'image'],
+    ['keywords', 'keywords'],
+    ['section', 'articleSection'],
+  ];
+  for (const [label, key] of scalarFields) {
+    if ((record[key] ?? null) !== (canonical[key] ?? null)) changed.push(label);
+  }
+  if (
+    JSON.stringify(record.articleBody ?? null) !==
+    JSON.stringify(canonical.articleBody ?? null)
+  ) {
+    changed.push('content');
+  }
+  return changed;
 }
 
 function toEditableRecord(record: RecordType): RecordType {

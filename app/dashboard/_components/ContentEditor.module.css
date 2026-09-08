@@ -51,6 +51,16 @@
   color: var(--semantic-color-foreground-success);
 }
 
+.pendingBadge {
+  padding: 3px 8px;
+  background: rgba(var(--semantic-color-foreground-accent-rgb), 0.12);
+  border: 1px solid var(--semantic-color-border-accent);
+  border-radius: var(--core-shape-radius-full);
+  color: var(--semantic-color-foreground-accent);
+  font-weight: var(--semantic-typography-font-weight-medium);
+  font-size: 12px;
+}
+
 .saveState,
 .wordCount {
   color: var(--semantic-color-foreground-tertiary);
