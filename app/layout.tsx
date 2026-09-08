@@ -76,7 +76,6 @@ const pages = [
   { name: 'Blueprints', path: 'blueprints', admin: false },
   { name: 'Articles', path: 'articles', admin: false },
   { name: 'Work', path: 'work', admin: false },
-  { name: 'Design Tools', path: 'tools', admin: false },
 ];
 
 export default async function RootLayout({

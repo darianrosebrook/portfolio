@@ -386,11 +386,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://darianrosebrook.com/tools</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://darianrosebrook.com/work</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
