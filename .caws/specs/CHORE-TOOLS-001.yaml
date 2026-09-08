@@ -2,9 +2,10 @@ id: CHORE-TOOLS-001
 title: 'Remove abandoned Design Tools page'
 risk_tier: 3
 mode: chore
-lifecycle_state: draft
+lifecycle_state: active
+worktree: remove-design-tools
 created_at: '2026-09-08T04:27:34.982Z'
-updated_at: '2026-09-08T04:27:34.982Z'
+updated_at: '2026-09-08T04:27:36.835Z'
 created_by_session: '01a07f29-765d-7471-b649-d3b07bd7d5ee'
 blast_radius:
   modules:
