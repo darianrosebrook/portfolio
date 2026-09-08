@@ -33,3 +33,11 @@ acceptance:
     then: 'the required source baseline is preserved without changing its behavior.'
 non_functional: {}
 contracts: []
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "03a7f4b3: copied source verified byte identical to canonical baseline; 35 targeted existing tests passed."
+    recorded_at: "2026-09-08T05:03:06.706Z"
+    command: vitest run test/utils/contentRelations.test.ts test/utils/tiptap/extensionsRegistry.test.ts ui/modules/Tiptap/Extensions/ContentLink/tests/ContentLink.test.ts
+    exit_code: 0
+    commit_sha: "03a7f4b3"
