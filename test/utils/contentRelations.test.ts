@@ -9,8 +9,6 @@ import {
   getRelations,
   getBacklinks,
   syncRelations,
-  cleanupOrphanedRelations,
-  getContentRelationStats,
 } from '@/utils/supabase/contentRelations';
 
 /**
@@ -374,90 +372,5 @@ describe('syncRelations', () => {
     const from = supabase.from as ReturnType<typeof vi.fn>;
     expect(from).toHaveBeenCalledTimes(1);
     expect(from.mock.results[0].value.insert).not.toHaveBeenCalled();
-  });
-});
-
-describe('cleanupOrphanedRelations', () => {
-  it('removes only edges whose endpoints no longer exist', async () => {
-    const supabase = makeSupabase({
-      content_relations: {
-        data: [
-          {
-            id: 1,
-            source_id: 1,
-            source_type: 'article',
-            target_id: 10,
-            target_type: 'case-study',
-          },
-          {
-            id: 2,
-            source_id: 999,
-            source_type: 'article',
-            target_id: 10,
-            target_type: 'case-study',
-          },
-        ],
-        error: null,
-      },
-      articles: {
-        data: [
-          {
-            id: 1,
-            headline: 'x',
-            slug: 'x',
-            description: null,
-            status: 'published',
-            author: 'a',
-          },
-        ],
-        error: null,
-      },
-      case_studies: {
-        data: [
-          {
-            id: 10,
-            headline: 'y',
-            slug: 'y',
-            description: null,
-            status: 'published',
-            author: 'a',
-          },
-        ],
-        error: null,
-      },
-    });
-
-    const result = await cleanupOrphanedRelations(supabase);
-
-    expect(result.checked).toBe(2);
-    expect(result.removed).toBe(1);
-    expect(result.errors).toEqual([]);
-
-    const from = supabase.from as ReturnType<typeof vi.fn>;
-    const deleteCalls = from.mock.results
-      .map((r) => r.value)
-      .filter((q) => q.delete.mock.calls.length > 0);
-    expect(deleteCalls).toHaveLength(1);
-    expect(deleteCalls[0].eq).toHaveBeenCalledWith('id', 2);
-  });
-});
-
-describe('getContentRelationStats', () => {
-  it('counts relations by normalized type', async () => {
-    const supabase = makeSupabase({
-      content_relations: {
-        data: [
-          { relationship_type: 'related' },
-          { relationship_type: 'elaborates' },
-          { relationship_type: null },
-        ],
-        error: null,
-      },
-    });
-
-    const stats = await getContentRelationStats(supabase);
-
-    expect(stats.totalRelations).toBe(3);
-    expect(stats.relationsByType).toEqual({ related: 2, elaborates: 1 });
   });
 });

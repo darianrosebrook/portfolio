@@ -51,7 +51,10 @@ describe('revalidatePublicArticlePaths', () => {
     const flat = revalidatePathMock.mock.calls.flat();
     expect(flat).not.toContain('/');
     expect(flat).not.toContain('/work');
-    expect(flat).not.toContain('/work/[slug]');
+    expect(revalidatePathMock.mock.calls).toContainEqual([
+      '/work/[slug]',
+      'page',
+    ]);
   });
 });
 
@@ -77,12 +80,16 @@ describe('revalidatePublicCaseStudyPaths', () => {
     expect(revalidatePathMock.mock.calls.flat()).not.toContain('/work');
   });
 
-  it('does not invalidate article routes', async () => {
+  it('invalidates article backlinks', async () => {
     const { revalidatePublicCaseStudyPaths } = await load();
 
     revalidatePublicCaseStudyPaths();
 
-    expect(revalidatePathMock.mock.calls.flat()).not.toContain('/articles');
+    expect(revalidatePathMock.mock.calls).toContainEqual(['/articles']);
+    expect(revalidatePathMock.mock.calls).toContainEqual([
+      '/articles/[slug]',
+      'page',
+    ]);
   });
 });
 
