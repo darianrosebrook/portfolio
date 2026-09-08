@@ -65,12 +65,12 @@ contracts:
 evidence:
   - criterion_id: A1
     status: pass
-    evidence_ref: test/dashboard/ContentEditor.test.tsx; test/dashboard/new-content/creation.test.tsx; test/dashboard/new-content/autosave.test.tsx
-    recorded_at: "2026-09-08T05:39:26.274Z"
+    evidence_ref: "188 selected regressions passed on merged main; editor navigation, stale acknowledgements, discard serialization, publishing, new-draft remount and account-switch recovery use mocked network boundaries"
+    recorded_at: "2026-09-08T05:49:54.744Z"
     command: vitest run test/dashboard test/context test/app/auth test/unit/tiptap-draft.test.ts test/api/articles.test.ts test/utils/contentAccess.test.ts
     exit_code: 0
-    artifact_path: /private/tmp/portfolio-final-tests.log
-    commit_sha: "68373f2b"
+    artifact_path: /private/tmp/portfolio-merged-tests.log
+    commit_sha: "1019403f"
   - criterion_id: A2
     status: pass
     evidence_ref: "test/dashboard/ContentEditor.test.tsx: local publication datetime and explicit save assertions"
