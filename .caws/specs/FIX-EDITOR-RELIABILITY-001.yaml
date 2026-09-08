@@ -63,3 +63,12 @@ non_functional: {}
 contracts:
   - name: 'editor-persistence'
     type: behavior
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: test/dashboard/ContentEditor.test.tsx; test/dashboard/new-content/creation.test.tsx; test/dashboard/new-content/autosave.test.tsx
+    recorded_at: "2026-09-08T05:39:26.274Z"
+    command: vitest run test/dashboard test/context test/app/auth test/unit/tiptap-draft.test.ts test/api/articles.test.ts test/utils/contentAccess.test.ts
+    exit_code: 0
+    artifact_path: /private/tmp/portfolio-final-tests.log
+    commit_sha: "68373f2b"
