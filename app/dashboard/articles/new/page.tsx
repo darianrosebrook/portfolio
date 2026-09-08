@@ -10,6 +10,7 @@ import { ArticlePreview } from './components/ArticlePreview';
 import { EditorActions } from './components/EditorActions';
 import { EditorLayout } from './components/EditorLayout';
 import { SaveStatus } from './components/SaveStatus';
+import { RelatedContentPicker } from '@/app/dashboard/_components/RelatedContentPicker';
 import { useAutoSave } from './hooks/useAutoSave';
 import { useMetadataExtraction } from './hooks/useMetadataExtraction';
 import { useToast } from '@/ui/components/Toast';
@@ -490,18 +491,26 @@ export default function NewArticlePage() {
   return (
     <EditorLayout
       sidebar={
-        <ArticleMetadataForm
-          article={article}
-          onChange={(updates) =>
-            setArticle((prev) => ({ ...prev, ...updates }))
-          }
-          extractedMetadata={extractedMetadata}
-          onSave={handleManualSave}
-          onPublish={handlePublish}
-          onUnpublish={handleUnpublish}
-          onPreview={() => setShowPreview(true)}
-          isSaving={isManualSaving || saveStatus === 'saving'}
-        />
+        <>
+          <ArticleMetadataForm
+            article={article}
+            onChange={(updates) =>
+              setArticle((prev) => ({ ...prev, ...updates }))
+            }
+            extractedMetadata={extractedMetadata}
+            onSave={handleManualSave}
+            onPublish={handlePublish}
+            onUnpublish={handleUnpublish}
+            onPreview={() => setShowPreview(true)}
+            isSaving={isManualSaving || saveStatus === 'saving'}
+          />
+          <RelatedContentPicker
+            slug={serverSlugRef.current ?? ''}
+            contentType="article"
+            excludeId={articleId}
+            disabled={!articleId}
+          />
+        </>
       }
       actions={
         <EditorActions

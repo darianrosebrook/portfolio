@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import type { Article } from '@/types';
 import Button from '@/ui/components/Button';
 
@@ -42,10 +43,12 @@ export function EditorActions({
     return null;
   };
 
+  const [publishError, setPublishError] = useState<string | null>(null);
+
   const handlePublishClick = () => {
     const error = getPublishErrorMessage();
+    setPublishError(error);
     if (error) {
-      alert(error);
       return;
     }
     onPublish();
@@ -100,6 +103,17 @@ export function EditorActions({
         >
           Publish
         </Button>
+      )}
+      {publishError && (
+        <span
+          role="alert"
+          style={{
+            color: 'var(--semantic-color-foreground-destructive)',
+            fontSize: '13px',
+          }}
+        >
+          {publishError}
+        </span>
       )}
     </div>
   );

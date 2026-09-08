@@ -13,7 +13,7 @@ export default async function CaseStudiesPage() {
 
   const { data } = await supabase
     .from('case_studies')
-    .select('id, slug, headline, status, modified_at')
+    .select('id, slug, headline, status, modified_at, is_dirty')
     .eq('author', user.id)
     .order('modified_at', { ascending: false });
 
@@ -30,6 +30,12 @@ export default async function CaseStudiesPage() {
               {c.headline ?? c.slug}
             </Link>{' '}
             - <small>{c.status}</small>
+            {c.is_dirty && (
+              <>
+                {' '}
+                - <small>unpublished changes</small>
+              </>
+            )}
           </li>
         ))}
       </ul>

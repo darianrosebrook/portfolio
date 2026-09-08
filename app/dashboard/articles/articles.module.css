@@ -145,18 +145,33 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  
+
   [data-status='published'] & {
     background: var(--semantic-color-status-success);
   }
-  
+
   [data-status='draft'] & {
     background: var(--semantic-color-status-warning);
   }
-  
+
   [data-status='archived'] & {
     background: var(--semantic-color-foreground-tertiary);
   }
+}
+
+.pendingBadge {
+  display: inline-flex;
+  gap: var(--core-spacing-size-02);
+  align-items: center;
+  padding: var(--core-spacing-size-02) var(--core-spacing-size-04);
+  background: rgba(var(--semantic-color-foreground-accent-rgb), 0.12);
+  border: 1px solid var(--semantic-color-border-accent);
+  border-radius: var(--core-shape-radius-full);
+  color: var(--semantic-color-foreground-accent);
+  font-weight: var(--semantic-typography-font-weight-medium);
+  font-size: var(--semantic-typography-caption-02);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
 .articleMeta {

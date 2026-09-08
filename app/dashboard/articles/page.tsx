@@ -28,7 +28,7 @@ export default async function ArticlesPage({
   const { data: allArticles } = await supabase
     .from('articles')
     .select(
-      'id, slug, headline, description, status, modified_at, published_at, wordCount'
+      'id, slug, headline, description, status, modified_at, published_at, wordCount, is_dirty'
     )
     .eq('author', user.id)
     .order('modified_at', { ascending: false });
@@ -118,6 +118,7 @@ export default async function ArticlesPage({
                 modified_at: article.modified_at,
                 published_at: article.published_at,
                 wordCount: article.wordCount,
+                is_dirty: article.is_dirty,
               }}
             />
           ))

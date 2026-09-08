@@ -15,6 +15,7 @@ interface ArticleCardProps {
     modified_at: string | null;
     published_at?: string | null;
     wordCount?: number | null;
+    is_dirty?: boolean | null;
   };
   onDelete?: (slug: string) => void;
 }
@@ -97,6 +98,14 @@ export function ArticleCard({ article, onDelete }: ArticleCardProps) {
               <span className={styles.statusDot} />
               {article.status}
             </span>
+            {article.is_dirty && (
+              <span
+                className={styles.pendingBadge}
+                title="Working draft differs from the published version"
+              >
+                unpublished changes
+              </span>
+            )}
           </div>
 
           {article.description && (
@@ -270,6 +279,13 @@ export function ArticleCard({ article, onDelete }: ArticleCardProps) {
             <p className={styles.dialogDescription}>
               Are you sure you want to delete &ldquo;{displayTitle}&rdquo;? This
               action cannot be undone.
+              {article.status === 'published' && (
+                <>
+                  {' '}
+                  The live article at /articles/{article.slug} will immediately
+                  return a 404.
+                </>
+              )}
             </p>
             <div className={styles.dialogActions}>
               <button

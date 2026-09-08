@@ -23,7 +23,13 @@ export function EmptyState({ filter = 'all' }: EmptyStateProps) {
     },
   };
 
-  const { title, description } = messages[filter];
+  // The filter arrives from search params; anything outside the known keys
+  // (typos, stale links) must fall back instead of crashing the list page.
+  const copy =
+    (messages as Record<string, { title: string; description: string }>)[
+      filter
+    ] ?? messages.all;
+  const { title, description } = copy;
 
   return (
     <div className={styles.emptyState}>
