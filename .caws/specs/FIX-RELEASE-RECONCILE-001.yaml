@@ -59,3 +59,10 @@ evidence:
     evidence_ref: "Reviewed source checkpoints 3f3e6058, 104a2c2b, 275981ca, 6c7439d7; merge dry-run ready; canonical source preimages retained in /private/tmp/portfolio-release-before; portrait retained locally and excluded."
     recorded_at: "2026-09-08T06:59:27.755Z"
     commit_sha: "6c7439d7"
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "Independent worktree node_modules from frozen offline lockfile install; full production build exit 0, 172 static pages; 260 tests in 25 files, TypeScript and targeted ESLint pass. Local private build environment loaded through Next; remote Vercel settings and uncached registry authentication not tested."
+    recorded_at: "2026-09-08T06:59:28.615Z"
+    command: node scripts/local-release-build.mjs /Users/darianrosebrook/Desktop/Projects/portfolio
+    exit_code: 0
+    artifact_path: /private/tmp/portfolio-release-build.log
