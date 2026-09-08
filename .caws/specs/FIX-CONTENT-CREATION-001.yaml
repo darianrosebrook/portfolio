@@ -2,9 +2,10 @@ id: FIX-CONTENT-CREATION-001
 title: 'Preserve new content revisions and enable case study creation'
 risk_tier: 2
 mode: fix
-lifecycle_state: draft
+lifecycle_state: active
+worktree: content-creation
 created_at: '2026-09-08T04:57:20.907Z'
-updated_at: '2026-09-08T04:57:20.907Z'
+updated_at: '2026-09-08T04:57:23.027Z'
 created_by_session: '01a07f5f-0b0c-7431-a4a8-d8f2ea603bf0'
 blast_radius:
   modules:
