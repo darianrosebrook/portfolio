@@ -53,3 +53,9 @@ non_functional: {}
 contracts:
   - name: 'portfolio-release'
     type: behavior
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "Reviewed source checkpoints 3f3e6058, 104a2c2b, 275981ca, 6c7439d7; merge dry-run ready; canonical source preimages retained in /private/tmp/portfolio-release-before; portrait retained locally and excluded."
+    recorded_at: "2026-09-08T06:59:27.755Z"
+    commit_sha: "6c7439d7"
