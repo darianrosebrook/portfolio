@@ -20,11 +20,13 @@ scope:
     - 'public/sitemap.xml'
   out: []
 invariants:
-  - 'TODO: describe one invariant this spec guarantees.'
+  - 'Existing portfolio pages remain available; the retired tools route is absent from navigation and prefetch targets.'
 acceptance:
   - id: A1
-    given: 'TODO'
-    when: 'TODO'
-    then: 'TODO'
+    given: 'The abandoned Design Tools page is still linked publicly'
+    when: 'The page is retired'
+    then: >-
+      Its page and styles are removed and navigation, prefetch targets, and sitemap
+      contain no tools route reference.
 non_functional: {}
 contracts: []
