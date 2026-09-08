@@ -7,6 +7,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useReducedMotion } from '@/context/ReducedMotionContext';
 import { AnimatedText } from '@/ui/components/AnimatedText';
 import { AnimatedSection } from '@/ui/components/AnimatedSection';
+import { RelatedContentSection } from '@/app/_components/RelatedContentSection';
+import type { RelatedContentItem } from '@/utils/supabase/contentRelations';
 import CaseStudyContent from './CaseStudyContent';
 import { EASING_PRESETS } from '@/utils/animation';
 
@@ -22,6 +24,8 @@ interface CaseStudyData {
   image: string | null;
   published_at: string | null;
   html: string;
+  relations?: RelatedContentItem[];
+  backlinks?: RelatedContentItem[];
 }
 
 interface CaseStudyPageProps {
@@ -91,6 +95,10 @@ export default function CaseStudyPage({ data }: CaseStudyPageProps) {
         >
           <CaseStudyContent html={data.html} />
         </AnimatedSection>
+        <RelatedContentSection
+          relations={data.relations ?? []}
+          backlinks={data.backlinks ?? []}
+        />
       </main>
     </div>
   );

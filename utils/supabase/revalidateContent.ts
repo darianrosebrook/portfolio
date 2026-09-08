@@ -43,14 +43,15 @@ function safeRevalidate(path: string, type?: 'page' | 'layout'): void {
 export function revalidatePublicArticlePaths(): void {
   safeRevalidate('/articles');
   safeRevalidate('/articles/[slug]', 'page');
+  safeRevalidate('/work/[slug]', 'page');
 }
 
 /**
  * Invalidate the routes a case-study change can be seen on.
  *
- * Only the detail route: `app/work/page.tsx` is static metadata plus a client
- * component and reads no Supabase data, so it has nothing to refresh.
+ * Both detail families render cross-content links and backlinks. The work index
+ * is static metadata and reads no Supabase data, so it has nothing to refresh.
  */
 export function revalidatePublicCaseStudyPaths(): void {
-  safeRevalidate('/work/[slug]', 'page');
+  revalidatePublicArticlePaths();
 }

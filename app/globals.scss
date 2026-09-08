@@ -117,7 +117,8 @@
   h5,
   h6 {
     font-weight: 300;
-    font-family: var(--font-family-heading, var(--semantic-font-nohemi)), sans-serif;
+    font-family:
+      var(--font-family-heading, var(--semantic-font-nohemi)), sans-serif;
     line-height: var(--semantic-typography-line-height-collapse);
     letter-spacing: var(--semantic-typography-letter-spacing-wide);
     text-wrap: balance;
@@ -622,6 +623,40 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+/* Inline content links (Tiptap contentLink node). Styled globally because
+   the same markup appears both in the editor and in generated reader HTML. */
+.content-link {
+  display: inline-flex;
+  align-items: baseline;
+  padding: 0 var(--core-spacing-size-02);
+  background: var(--semantic-color-background-secondary);
+  border: 1px solid var(--semantic-color-border-subtle);
+  border-radius: var(--core-shape-radius-small);
+  color: var(--semantic-color-foreground-accent);
+  font-size: 0.95em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.content-link:hover {
+  border-color: var(--semantic-color-border-accent);
+  text-decoration: none;
+}
+
+.content-link.invalid {
+  border-color: var(--semantic-color-feedback-border-danger);
+  color: var(--semantic-color-foreground-danger);
+}
+
+.content-link.pending {
+  color: var(--semantic-color-foreground-secondary);
+}
+
+.content-link.selected {
+  outline: 2px solid var(--semantic-color-border-accent);
+  outline-offset: 1px;
 }
 
 // FontAwesome styles removed - using local SVG icons instead

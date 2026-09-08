@@ -1,48 +1,18 @@
-import { DetailsServer } from '@/ui/modules/Tiptap/Extensions/Details/DetailsServer';
-import { TableOfContentsServer } from '@/ui/modules/Tiptap/Extensions/TableOfContents/TableOfContentsServer';
-import { VideoServer } from '@/ui/modules/Tiptap/Extensions/VideoExtended/VideoServer';
-import Image from '@tiptap/extension-image';
-import { generateHTML } from '@tiptap/html';
+import { processCaseStudyContent } from '@/utils/tiptap/htmlGeneration';
 import type { JSONContent } from '@tiptap/react';
-import StarterKit from '@tiptap/starter-kit';
-import { sanitizeCmsHtml } from '@/utils/helpers/sanitizeHtml';
 
 /**
  * Process case study content by removing the first h1 and first image,
- * then converting to HTML
+ * then converting to HTML.
+ *
+ * Delegates to the registry-based pipeline so case studies render with the
+ * same extension set as articles (including content links, tables, etc.)
+ * instead of a divergent local extension list.
  */
 export function getCaseStudyContent(data: JSONContent): { html: string } {
   if (!data || !data.content) {
     return { html: '' };
   }
 
-  // Create a copy of the content array
-  const content = [...data.content];
-
-  // Remove first h1 if it exists
-  const firstH1Index = content.findIndex(
-    (node) => node.type === 'heading' && node.attrs?.level === 1
-  );
-  if (firstH1Index !== -1) {
-    content.splice(firstH1Index, 1);
-  }
-
-  // Remove first image if it exists
-  const firstImageIndex = content.findIndex((node) => node.type === 'image');
-  if (firstImageIndex !== -1) {
-    content.splice(firstImageIndex, 1);
-  }
-
-  // Generate HTML from the modified content using server-side extensions
-  const html = sanitizeCmsHtml(
-    generateHTML(
-      {
-        type: 'doc',
-        content,
-      },
-      [StarterKit, Image, DetailsServer, TableOfContentsServer, VideoServer]
-    )
-  );
-
-  return { html };
+  return processCaseStudyContent(data);
 }

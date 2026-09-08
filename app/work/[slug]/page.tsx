@@ -1,6 +1,11 @@
 import { createReadClient } from '@/utils/supabase/readClient';
 import { getCaseStudyContent } from '@/utils/caseStudy';
 import { PUBLIC_CASE_STUDY_SELECT } from '@/utils/supabase/contentAccess';
+import {
+  getRelations,
+  getBacklinks,
+  type RelatedContentItem,
+} from '@/utils/supabase/contentRelations';
 import CaseStudyPage from '../_components/CaseStudyPage';
 import type { JSONContent } from '@tiptap/react';
 import type { Metadata } from 'next';
@@ -87,11 +92,31 @@ async function getData(slug: string) {
     notFound();
   }
 
+  // Relations are fetched via a separate id lookup: the public select list
+  // above deliberately excludes `id` from the client payload.
+  let relations: RelatedContentItem[] = [];
+  let backlinks: RelatedContentItem[] = [];
+  const { data: idRow } = await supabase
+    .from('case_studies')
+    .select('id')
+    .eq('slug', slug)
+    .eq('status', 'published')
+    .maybeSingle();
+
+  if (idRow) {
+    [relations, backlinks] = await Promise.all([
+      getRelations(supabase, idRow.id, 'case-study'),
+      getBacklinks(supabase, idRow.id, 'case-study'),
+    ]);
+  }
+
   const { html } = getCaseStudyContent(caseStudy?.articleBody as JSONContent);
 
   return {
     ...caseStudy,
     html,
+    relations,
+    backlinks,
   } as {
     headline: string | null;
     alternativeHeadline: string | null;
@@ -99,6 +124,8 @@ async function getData(slug: string) {
     image: string | null;
     published_at: string | null;
     html: string;
+    relations: RelatedContentItem[];
+    backlinks: RelatedContentItem[];
   };
 }
 

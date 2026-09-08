@@ -107,30 +107,41 @@ const supabaseSecretKey =
   process.env.SUPABASE_SERVICE_ROLE_KEY ??
   undefined;
 
-// Warn if using placeholder values (server-side only)
-// Browser warnings aren't actionable - NEXT_PUBLIC_* vars must be embedded at build time
+// Placeholder credentials are a hard error in production. Silently
+// substituting them once left the live site rendering empty pages for days
+// with no visible failure (2026-08 outage). Throwing at module init fails
+// the build (static generation) or the request (runtime) loudly instead.
+// Browser warnings aren't actionable - NEXT_PUBLIC_* vars must be embedded
+// at build time.
 // Note: File existence check removed in Next.js 16 to avoid Edge Runtime compatibility issues
 if (
-  typeof window === 'undefined' &&
-  process.env.NODE_ENV !== 'test' &&
-  (supabaseUrl.includes('placeholder') ||
-    supabasePublishableKey === 'placeholder_publishable_key')
+  supabaseUrl.includes('placeholder') ||
+  supabasePublishableKey === 'placeholder_publishable_key'
 ) {
-  const message =
-    '\n' +
-    '================================================\n' +
-    'WARNING: Using placeholder Supabase credentials!\n' +
-    'Database operations will fail.\n' +
-    '\n' +
-    'Create a .env.local file with real credentials:\n' +
-    '  NEXT_PUBLIC_SUPABASE_URL=your-project-url\n' +
-    '  NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your-publishable-key\n' +
-    '  SUPABASE_SECRET_KEY=your-secret-key\n' +
-    '\n' +
-    'See .env.example for template.\n' +
-    '================================================\n';
+  if (process.env.NODE_ENV === 'production') {
+    throw new Error(
+      'Placeholder Supabase credentials in use. Refusing to start in production — ' +
+        'set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ' +
+        '(see .env.example) and redeploy.'
+    );
+  }
+  if (typeof window === 'undefined' && process.env.NODE_ENV !== 'test') {
+    const message =
+      '\n' +
+      '================================================\n' +
+      'WARNING: Using placeholder Supabase credentials!\n' +
+      'Database operations will fail.\n' +
+      '\n' +
+      'Create a .env.local file with real credentials:\n' +
+      '  NEXT_PUBLIC_SUPABASE_URL=your-project-url\n' +
+      '  NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your-publishable-key\n' +
+      '  SUPABASE_SECRET_KEY=your-secret-key\n' +
+      '\n' +
+      'See .env.example for template.\n' +
+      '================================================\n';
 
-  console.error(message);
+    console.error(message);
+  }
 }
 
 export const env: Environment = {

@@ -2,6 +2,11 @@ import { notFound } from 'next/navigation';
 import { createReadClient } from '@/utils/supabase/readClient';
 import { generateLDJson } from '@/utils/ldjson';
 import { PUBLIC_ARTICLE_SELECT } from '@/utils/supabase/contentAccess';
+import {
+  getRelations,
+  getBacklinks,
+  type RelatedContentItem,
+} from '@/utils/supabase/contentRelations';
 import type { Profile } from '@/types';
 import { processArticleContent } from '@/utils/tiptap/htmlGeneration';
 
@@ -94,6 +99,26 @@ async function getData(slug: string) {
 
   if (!article) return null;
 
+  // Relations are fetched separately from the public select list: the row
+  // above is spread into client props, and `id` is not part of the public
+  // payload. This lookup is cheap (indexed) and runs at build/revalidate
+  // time, not per request.
+  let relations: RelatedContentItem[] = [];
+  let backlinks: RelatedContentItem[] = [];
+  const { data: idRow } = await supabase
+    .from('articles')
+    .select('id')
+    .eq('slug', slug)
+    .eq('status', 'published')
+    .maybeSingle();
+
+  if (idRow) {
+    [relations, backlinks] = await Promise.all([
+      getRelations(supabase, idRow.id, 'article'),
+      getBacklinks(supabase, idRow.id, 'article'),
+    ]);
+  }
+
   const published_at = article.published_at || new Date().toISOString();
   const { data: beforeArticle } = await supabase
     .from('articles')
@@ -131,6 +156,8 @@ async function getData(slug: string) {
     html,
     beforeArticle,
     afterArticle,
+    relations,
+    backlinks,
   };
 }
 

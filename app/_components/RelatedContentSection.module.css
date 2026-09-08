@@ -1,0 +1,61 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--core-spacing-size-06);
+  margin-top: var(--core-spacing-size-08);
+  padding-top: var(--core-spacing-size-06);
+  border-top: 1px solid var(--semantic-color-border-subtle);
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--core-spacing-size-03);
+}
+
+.heading {
+  margin: 0;
+  color: var(--semantic-color-foreground-primary);
+  font-weight: var(--semantic-typography-font-weight-semibold);
+  font-size: var(--semantic-typography-heading-05);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--core-spacing-size-02);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--core-spacing-size-02);
+  align-items: baseline;
+}
+
+.verb {
+  color: var(--semantic-color-foreground-secondary);
+  font-size: var(--semantic-typography-body-03);
+}
+
+.verb::after {
+  margin-left: var(--core-spacing-size-02);
+  content: '·';
+}
+
+.link {
+  color: var(--semantic-color-foreground-accent);
+  font-weight: var(--semantic-typography-font-weight-medium);
+  font-size: var(--semantic-typography-body-02);
+}
+
+.typeBadge {
+  padding: 1px 8px;
+  background: var(--semantic-color-background-secondary);
+  border-radius: var(--core-shape-radius-full);
+  color: var(--semantic-color-foreground-secondary);
+  font-size: var(--semantic-typography-body-04);
+}
