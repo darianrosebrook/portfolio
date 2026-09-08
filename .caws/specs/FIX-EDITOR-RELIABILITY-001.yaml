@@ -81,10 +81,10 @@ evidence:
     commit_sha: "68373f2b"
   - criterion_id: A3
     status: pass
-    evidence_ref: test/dashboard/contentLibrary.test.ts; test/dashboard/contentPages.test.tsx; test/dashboard/new-content/case-study-api.test.ts; mocked database and network boundaries
-    recorded_at: "2026-09-08T05:39:27.436Z"
+    evidence_ref: "24 library component/helper tests passed; logged-in browser verified 13 articles, 9 case studies, draft search matches, existing draft body, and New Case Study editor; creation timestamp fallback regression"
+    recorded_at: "2026-09-08T05:45:52.891Z"
     exit_code: 0
-    commit_sha: "68373f2b"
+    commit_sha: "447ba018"
   - criterion_id: A4
     status: pass
     evidence_ref: test/context/UserContext.test.tsx real installed SDK refresh-lock test with mocked transport; test/app/auth retry route and safe redirect tests
