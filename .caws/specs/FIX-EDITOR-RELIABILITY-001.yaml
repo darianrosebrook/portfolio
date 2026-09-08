@@ -79,3 +79,9 @@ evidence:
     test_nodeid: persists publication metadata explicitly without a timezone shift
     exit_code: 0
     commit_sha: "68373f2b"
+  - criterion_id: A3
+    status: pass
+    evidence_ref: test/dashboard/contentLibrary.test.ts; test/dashboard/contentPages.test.tsx; test/dashboard/new-content/case-study-api.test.ts; mocked database and network boundaries
+    recorded_at: "2026-09-08T05:39:27.436Z"
+    exit_code: 0
+    commit_sha: "68373f2b"
