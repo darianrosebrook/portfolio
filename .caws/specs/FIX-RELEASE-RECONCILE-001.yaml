@@ -1,0 +1,54 @@
+id: FIX-RELEASE-RECONCILE-001
+title: 'Reconcile local portfolio source and verify a production rebuild'
+risk_tier: 2
+mode: fix
+lifecycle_state: draft
+created_at: '2026-09-08T06:00:17.947Z'
+updated_at: '2026-09-08T06:00:17.947Z'
+created_by_session: '01a07f29-765d-7471-b649-d3b07bd7d5ee'
+blast_radius:
+  modules:
+    - 'Public content and build configuration'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - '.caws/hooks/'
+    - '.gitignore'
+    - 'app/articles/'
+    - 'app/work/'
+    - 'app/_components/'
+    - 'app/api/maintenance/'
+    - 'app/blueprints/component-standards/_lib/generateAnatomy.ts'
+    - 'app/globals.scss'
+    - 'next.config.mjs'
+    - 'utils/caseStudy.ts'
+    - 'utils/env.ts'
+    - 'utils/supabase/'
+    - 'test/'
+    - 'scripts/'
+    - 'package.json'
+    - 'pnpm-lock.yaml'
+    - 'vercel.json'
+    - '.env.example'
+    - 'public/'
+  out: []
+invariants:
+  - 'Only reviewed source is checkpointed; build output and credentials remain local.'
+acceptance:
+  - id: A1
+    given: 'the current local source changes'
+    when: 'reviewed and checkpointed'
+    then: 'intended source and assets are preserved in logical commits with a reconciled Git state.'
+  - id: A2
+    given: 'a fresh source checkout'
+    when: 'the production build and targeted validation run'
+    then: 'the site builds without relying on untracked source or developer caches.'
+  - id: A3
+    given: 'maintenance cleanup requests'
+    when: 'content existence cannot be authoritatively verified'
+    then: 'valid relations are never deleted.'
+non_functional: {}
+contracts:
+  - name: 'portfolio-release'
+    type: behavior
