@@ -49,6 +49,10 @@ acceptance:
     given: 'a local publication date'
     when: 'the editor displays and saves it'
     then: 'the intended instant is preserved across time zones.'
+  - id: A3
+    given: 'A creator uses the dashboard'
+    when: 'Finding or creating content'
+    then: 'Lists use draft metadata, query errors are explicit, and articles and case studies can be created.'
 non_functional: {}
 contracts:
   - name: 'editor-persistence'
