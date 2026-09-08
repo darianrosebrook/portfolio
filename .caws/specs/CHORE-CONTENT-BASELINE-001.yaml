@@ -2,10 +2,11 @@ id: CHORE-CONTENT-BASELINE-001
 title: 'Checkpoint existing content editor and relationship source'
 risk_tier: 3
 mode: chore
-lifecycle_state: active
-worktree: content-baseline
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Checkpointed existing content source byte-for-byte; 35 targeted tests and configured gates passed.'
 created_at: '2026-09-08T04:58:56.964Z'
-updated_at: '2026-09-08T04:58:57.953Z'
+updated_at: '2026-09-08T05:03:51.114Z'
 created_by_session: '01a07f29-765d-7471-b649-d3b07bd7d5ee'
 blast_radius:
   modules:
