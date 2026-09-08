@@ -66,3 +66,10 @@ evidence:
     command: node scripts/local-release-build.mjs /Users/darianrosebrook/Desktop/Projects/portfolio
     exit_code: 0
     artifact_path: /private/tmp/portfolio-release-build.log
+  - criterion_id: A3
+    status: pass
+    evidence_ref: "test/api/relationMaintenance.test.ts: 11 passing real Supabase SDK transport cases for authorization, privileged credentials, hidden drafts, capped pagination, read failure, unknown endpoint and delete failure; no live destructive maintenance executed."
+    recorded_at: "2026-09-08T06:59:29.421Z"
+    command: vitest run test/api/relationMaintenance.test.ts
+    exit_code: 0
+    commit_sha: "275981ca"
