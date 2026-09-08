@@ -66,11 +66,8 @@ export async function GET(
 /**
  * Save working draft fields without overwriting published content.
  *
- * Deliberately does NOT revalidate the public cache. `patchCaseStudyDraftSchema`
- * admits only working* fields and `is_dirty`, so nothing a public page renders can
- * change here — and this is the autosave path, so invalidating would thrash the
- * cache on every keystroke batch. If this schema ever grows a field that appears
- * on a public page, add revalidatePublicCaseStudyPaths() below.
+ * Working fields do not invalidate public caches. Renames are admitted only
+ * for drafts; published URLs require the explicit PUT/publish path.
  */
 export async function PATCH(
   request: Request,
@@ -100,7 +97,7 @@ export async function PATCH(
     });
   }
 
-  const { data, error } = await supabase
+  let updateQuery = supabase
     .from('case_studies')
     .update({
       ...validation.data,
@@ -108,14 +105,26 @@ export async function PATCH(
       is_dirty: true,
     })
     .eq('slug', slug)
-    .eq('author', user.id)
-    .select();
+    .eq('author', user.id);
+
+  if (validation.data.slug && validation.data.slug !== slug) {
+    updateQuery = updateQuery.eq('status', 'draft');
+  }
+
+  const { data, error } = await updateQuery.select();
 
   if (error) {
     return new NextResponse(JSON.stringify({ error: error.message }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });
+  }
+
+  if (!data?.length) {
+    return NextResponse.json(
+      { error: 'Case study not found or unavailable for draft editing' },
+      { status: 404 }
+    );
   }
 
   return new NextResponse(JSON.stringify(data), {

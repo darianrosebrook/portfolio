@@ -20,7 +20,7 @@ export function SaveStatus({ status, lastSaved, error }: SaveStatusProps) {
       case 'saved':
         return 'Saved to server';
       case 'local':
-        return 'Saved locally (add a title to sync)';
+        return 'Changes awaiting server save';
       case 'error':
         return error || 'Error saving';
       default:

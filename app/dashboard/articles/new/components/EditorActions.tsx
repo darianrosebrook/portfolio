@@ -67,7 +67,7 @@ export function EditorActions({
         onClick={onPreview}
         disabled={!article.articleBody}
         variant="secondary"
-        title="Preview article (Ctrl/Cmd + P)"
+        title="Preview content"
       >
         Preview
       </Button>
@@ -86,7 +86,7 @@ export function EditorActions({
           onClick={onUnpublish}
           disabled={isSaving}
           variant="destructive"
-          title="Unpublish article"
+          title="Unpublish content"
         >
           Unpublish
         </Button>
@@ -97,7 +97,7 @@ export function EditorActions({
           variant="primary"
           title={
             canPublish
-              ? 'Publish article'
+              ? 'Publish content'
               : getPublishErrorMessage() || 'Fill required fields to publish'
           }
         >

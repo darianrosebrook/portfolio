@@ -6,6 +6,7 @@ import { RedirectType, redirect } from 'next/navigation';
 
 import { createClient } from '@/utils/supabase/server';
 import { env } from '@/utils/env';
+import { getAuthErrorPath } from '@/app/auth/error-path';
 import {
   AUTH_RETURN_TO_COOKIE,
   getSafeRedirectPath,
@@ -23,7 +24,12 @@ const getSiteOrigin = (): string => {
   return new URL(withProtocol).origin;
 };
 
-async function resolvePostLoginPath(): Promise<string> {
+async function resolvePostLoginPath(formData?: FormData): Promise<string> {
+  const requestedPath = formData?.get('next');
+  if (typeof requestedPath === 'string') {
+    return getSafeRedirectPath(requestedPath);
+  }
+
   const cookieStore = await cookies();
   const fromCookie = getSafeRedirectPath(
     cookieStore.get(AUTH_RETURN_TO_COOKIE)?.value ?? null
@@ -61,27 +67,28 @@ export const signOutAction = async () => {
  * Initiates the OAuth login flow with Google.
  * Preserves a safe post-login path via the OAuth callback `next` param.
  */
-export async function login() {
-  const supabase = await createClient();
-  const provider = 'google';
-  const next = await resolvePostLoginPath();
-  const redirectUrl = new URL('/auth/callback', getSiteOrigin());
-  if (next !== '/') {
-    redirectUrl.searchParams.set('next', next);
-  }
+export async function login(formData?: FormData) {
+  const next = await resolvePostLoginPath(formData);
+  let providerUrl: string | null = null;
+  try {
+    const supabase = await createClient();
+    const redirectUrl = new URL('/auth/callback', getSiteOrigin());
+    if (next !== '/') redirectUrl.searchParams.set('next', next);
 
-  const { data, error } = await supabase.auth.signInWithOAuth({
-    provider,
-    options: {
-      redirectTo: redirectUrl.toString(),
-    },
-  });
-
-  if (data.url) {
-    redirect(data.url, RedirectType.replace);
-  } else if (error) {
-    console.error('Error logging in:', error);
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: { redirectTo: redirectUrl.toString() },
+    });
+    if (error) console.error('Error logging in:', error.message);
+    else providerUrl = data.url;
+  } catch (err) {
+    console.error(
+      'Error logging in:',
+      err instanceof Error ? err.message : 'Unknown error'
+    );
   }
+  // redirect() throws in Next.js; keep it outside the network-error handler.
+  redirect(providerUrl ?? getAuthErrorPath(next), RedirectType.replace);
 }
 
 /**

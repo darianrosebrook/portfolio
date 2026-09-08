@@ -7,8 +7,9 @@ import React, {
   useState,
   useMemo,
   useCallback,
+  useRef,
 } from 'react';
-import { User, AuthChangeEvent, Session } from '@supabase/supabase-js';
+import { type User } from '@supabase/supabase-js';
 import { createClient } from '@/utils/supabase/client';
 import { Profile } from '@/types';
 
@@ -25,131 +26,104 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [identity, setIdentity] = useState<{ user: User | null }>({
+    user: null,
+  });
+  const user = identity.user;
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
-  // Memoize the supabase client to ensure stability across renders
-  // Note: createBrowserClient is already a singleton, but this ensures
-  // we have a stable reference for the effect dependencies
+  const mounted = useRef(false);
+  const activeUserId = useRef<string | null>(null);
+  const profileRequest = useRef(0);
   const supabase = useMemo(() => createClient(), []);
 
-  // Memoize fetchProfile to avoid stale closures
-  const fetchProfile = useCallback(
-    async (userId: string): Promise<Profile | null> => {
-      try {
-        const { data, error: fetchError } = await supabase
-          .from('profiles')
-          .select('*')
-          .eq('id', userId)
-          .single();
-
-        if (fetchError) {
-          console.error('Error fetching profile:', fetchError);
-          return null;
-        }
-
-        return data;
-      } catch (err) {
-        console.error('Error in fetchProfile:', err);
-        return null;
-      }
-    },
-    [supabase]
-  );
-
   const refreshProfile = useCallback(async () => {
-    if (!user) return;
+    const userId = activeUserId.current;
+    if (!mounted.current || !userId) return;
+
+    const request = ++profileRequest.current;
+    const isCurrent = () =>
+      mounted.current &&
+      profileRequest.current === request &&
+      activeUserId.current === userId;
 
     setLoading(true);
     setError(null);
-
     try {
-      const profileData = await fetchProfile(user.id);
-      setProfile(profileData);
+      const { data, error: fetchError } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', userId)
+        .single();
+      if (fetchError) throw fetchError;
+      if (isCurrent()) setProfile(data);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to fetch profile');
+      if (isCurrent()) {
+        setError(
+          err instanceof Error ? err.message : 'Failed to fetch profile'
+        );
+      }
     } finally {
-      setLoading(false);
+      if (isCurrent()) setLoading(false);
     }
-  }, [user, fetchProfile]);
+  }, [supabase]);
 
   useEffect(() => {
-    let isMounted = true;
+    mounted.current = true;
+    let disposed = false;
+    let authRevision = 0;
 
-    // Get initial session
-    const getInitialSession = async () => {
-      try {
-        // First try getUser() which validates the session with the server
-        // This is more reliable than getSession() which only reads from storage
-        const {
-          data: { user: authUser },
-          error: userError,
-        } = await supabase.auth.getUser();
-
-        if (userError) {
-          if (process.env.NODE_ENV === 'development') {
-            console.warn('getUser failed:', userError.message);
-          }
-          if (isMounted) {
-            setUser(null);
-            setProfile(null);
-            setError(userError.message);
-          }
-        } else if (authUser && isMounted) {
-          setUser(authUser);
-          const profileData = await fetchProfile(authUser.id);
-          if (isMounted) {
-            setProfile(profileData);
-          }
-        }
-      } catch (err) {
-        console.error('Error in getInitialSession:', err);
-        if (isMounted) {
-          setError(
-            err instanceof Error ? err.message : 'Failed to get session'
-          );
-        }
-      } finally {
-        if (isMounted) {
-          setLoading(false);
-        }
-      }
+    const invalidateProfiles = () => {
+      ++profileRequest.current;
+    };
+    const applyUser = (authUser: User | null) => {
+      if (disposed) return;
+      // Invalidate reads immediately, before React processes the next effect.
+      invalidateProfiles();
+      if (activeUserId.current !== (authUser?.id ?? null)) setProfile(null);
+      activeUserId.current = authUser?.id ?? null;
+      setIdentity({ user: authUser });
+      setLoading(Boolean(authUser));
+      setError(null);
     };
 
-    getInitialSession();
-
-    // Listen for auth changes
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange(
-      async (event: AuthChangeEvent, session: Session | null) => {
-        if (!isMounted) return;
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      // INITIAL_SESSION is a storage snapshot; let getUser validate it.
+      if (event === 'INITIAL_SESSION') return;
+      ++authRevision;
+      // Supabase awaits subscribers while holding its auth lock. Keep this
+      // callback synchronous; the identity effect performs profile I/O later.
+      applyUser(session?.user ?? null);
+    });
 
-        if (session?.user) {
-          setUser(session.user);
-          setLoading(true);
-          const profileData = await fetchProfile(session.user.id);
-          if (isMounted) {
-            setProfile(profileData);
-            setLoading(false);
-          }
-        } else {
-          setUser(null);
-          setProfile(null);
-          setLoading(false);
-        }
-
-        setError(null);
-      }
-    );
+    const initialRevision = authRevision;
+    void supabase.auth
+      .getUser()
+      .then(({ data: { user: authUser }, error: userError }) => {
+        if (disposed || authRevision !== initialRevision) return;
+        applyUser(userError ? null : authUser);
+        if (userError) setError(userError.message);
+      })
+      .catch((err: unknown) => {
+        if (disposed || authRevision !== initialRevision) return;
+        applyUser(null);
+        setError(err instanceof Error ? err.message : 'Failed to get session');
+      });
 
     return () => {
-      isMounted = false;
+      disposed = true;
+      mounted.current = false;
+      invalidateProfiles();
       subscription.unsubscribe();
     };
-  }, [supabase, fetchProfile]);
+  }, [supabase]);
+
+  useEffect(() => {
+    if (identity.user) void refreshProfile();
+  }, [identity, refreshProfile]);
 
   const contextValue: UserContextType = useMemo(
     () => ({
