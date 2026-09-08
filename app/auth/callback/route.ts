@@ -5,24 +5,21 @@ import {
   getSafeRedirectPath,
 } from '@/utils/supabase/redirect';
 import { getTrustedRedirectOrigin } from '@/utils/supabase/redirectOrigin';
+import { getAuthErrorPath } from '@/app/auth/error-path';
 
-// Force Node.js runtime instead of Edge to avoid DNS resolution issues
 export const runtime = 'nodejs';
 
 export async function GET(request: Request) {
-  const { searchParams, origin } = new URL(request.url);
+  const { searchParams } = new URL(request.url);
   const code = searchParams.get('code');
   const next = getSafeRedirectPath(searchParams.get('next'));
+  const redirectOrigin = getTrustedRedirectOrigin(request);
 
   if (code) {
     try {
       const supabase = await createClient();
       const { error } = await supabase.auth.exchangeCodeForSession(code);
-
-      if (error) {
-        console.error('[Auth Callback] Exchange error:', error.message);
-      } else {
-        const redirectOrigin = getTrustedRedirectOrigin(request);
+      if (!error) {
         const response = NextResponse.redirect(`${redirectOrigin}${next}`);
         response.cookies.set(AUTH_RETURN_TO_COOKIE, '', {
           path: '/',
@@ -30,16 +27,14 @@ export async function GET(request: Request) {
         });
         return response;
       }
+      console.error('[Auth Callback] Exchange failed:', error.message);
     } catch (err) {
       console.error(
-        '[Auth Callback] Network error:',
-        err instanceof Error ? err.message : err
+        '[Auth Callback] Exchange failed:',
+        err instanceof Error ? err.message : 'Unknown error'
       );
     }
-  } else {
-    console.error('[Auth Callback] No code provided');
   }
 
-  // return the user to an error page with instructions
-  return NextResponse.redirect(`${origin}/auth/auth-code-error`);
+  return NextResponse.redirect(`${redirectOrigin}${getAuthErrorPath(next)}`);
 }
