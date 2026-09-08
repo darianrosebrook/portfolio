@@ -53,12 +53,27 @@ export const caseStudySchema = z.object({
   is_dirty: z.boolean().nullable().default(false),
 });
 
-export const createCaseStudySchema = caseStudySchema.omit({
-  id: true,
-  created_at: true,
-  modified_at: true,
-  published_at: true,
-});
+export const createCaseStudySchema = caseStudySchema
+  .omit({
+    id: true,
+    created_at: true,
+    modified_at: true,
+    published_at: true,
+  })
+  .partial({
+    author: true,
+    editor: true,
+    alternativeHeadline: true,
+    index: true,
+    workingbody: true,
+    workingheadline: true,
+    workingdescription: true,
+    workingimage: true,
+    workingkeywords: true,
+    workingarticlesection: true,
+    working_modified_at: true,
+    is_dirty: true,
+  });
 
 export const updateCaseStudySchema = createCaseStudySchema.partial().extend({
   status: caseStudyStatusEnum.optional(),
@@ -66,6 +81,7 @@ export const updateCaseStudySchema = createCaseStudySchema.partial().extend({
 });
 
 export const patchCaseStudyDraftSchema = z.object({
+  slug: caseStudySchema.shape.slug.optional(),
   workingbody: z.any().optional(),
   workingheadline: z.string().nullable().optional(),
   workingdescription: z.string().nullable().optional(),

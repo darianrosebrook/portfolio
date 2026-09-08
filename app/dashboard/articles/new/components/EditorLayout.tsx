@@ -8,6 +8,8 @@ interface EditorLayoutProps {
   sidebar: React.ReactNode;
   actions: React.ReactNode;
   saveStatus: React.ReactNode;
+  backHref?: string;
+  backLabel?: string;
 }
 
 /**
@@ -19,6 +21,8 @@ export function EditorLayout({
   sidebar,
   actions,
   saveStatus,
+  backHref = '/dashboard/articles',
+  backLabel = 'Articles',
 }: EditorLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
@@ -44,7 +48,7 @@ export function EditorLayout({
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
           <Link
-            href="/dashboard/articles"
+            href={backHref}
             style={{
               color: 'var(--semantic-color-foreground-secondary)',
               textDecoration: 'none',
@@ -54,7 +58,7 @@ export function EditorLayout({
               gap: '4px',
             }}
           >
-            ← Back to Articles
+            ← Back to {backLabel}
           </Link>
           {saveStatus}
         </div>
