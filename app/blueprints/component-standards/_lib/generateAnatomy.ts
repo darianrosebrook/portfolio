@@ -50,17 +50,29 @@ export interface ComponentContract {
   };
   tokens?: Record<string, string[] | Record<string, ContractTokenResolution>>;
   props?: Record<string, { members?: ContractPropMember[]; extends?: string }>;
-  channels?: Record<string, {
-    value: string;
-    onChange: string;
-    defaultValue?: string;
-    enabledBy?: string;
-    valueType?: string;
-    notes?: string;
-  }>;
-  types?: Record<string, { kind: 'union' | 'enum' | 'alias'; values?: string[]; alias?: string }>;
+  channels?: Record<
+    string,
+    {
+      value: string;
+      onChange: string;
+      defaultValue?: string;
+      enabledBy?: string;
+      valueType?: string;
+      notes?: string;
+    }
+  >;
+  types?: Record<
+    string,
+    { kind: 'union' | 'enum' | 'alias'; values?: string[]; alias?: string }
+  >;
   stateMachine?: {
-    transitions: Array<{ event: string; from?: string | string[]; to: string; guard?: string; effect?: string }>;
+    transitions: Array<{
+      event: string;
+      from?: string | string[];
+      to: string;
+      guard?: string;
+      effect?: string;
+    }>;
   };
   focus?: {
     strategy: 'trap' | 'roving' | 'auto' | 'manual' | 'none';
@@ -70,9 +82,22 @@ export interface ComponentContract {
     wrap?: boolean;
     scrollLock?: boolean;
   };
-  dismissal?: Array<'escape' | 'outsideClick' | 'blur' | 'routeChange' | 'triggerReclick' | 'userDismiss' | 'selection'>;
+  dismissal?: Array<
+    | 'escape'
+    | 'outsideClick'
+    | 'blur'
+    | 'routeChange'
+    | 'triggerReclick'
+    | 'userDismiss'
+    | 'selection'
+  >;
   motion?: {
-    transitions?: Array<{ name: string; duration: string; easing: string; property?: string }>;
+    transitions?: Array<{
+      name: string;
+      duration: string;
+      easing: string;
+      property?: string;
+    }>;
     reducedMotion?: 'respect' | 'ignore';
     reducedMotionStrategy?: string;
   };
@@ -84,7 +109,12 @@ export interface ComponentContract {
     collision?: string;
     backdrop?: boolean;
   };
-  relationships?: Array<{ from: string; to: string; attribute: string; when?: string }>;
+  relationships?: Array<{
+    from: string;
+    to: string;
+    attribute: string;
+    when?: string;
+  }>;
   ssr?: { hydrateOn: 'interaction' | 'none' | 'load' };
   rtl?: { flipIcon: boolean };
 }
@@ -134,7 +164,7 @@ export function resolveComponentPath(component: ComponentItem): string | null {
       continue;
     }
 
-    if (fs.existsSync(absolutePath)) {
+    if (fs.existsSync(/* turbopackIgnore: true */ absolutePath)) {
       return absolutePath;
     }
   }
@@ -152,13 +182,19 @@ export function resolveComponentContractPath(
     return null;
   }
 
-  if (fs.existsSync(componentPath) && fs.statSync(componentPath).isDirectory()) {
+  if (
+    fs.existsSync(/* turbopackIgnore: true */ componentPath) &&
+    fs.statSync(/* turbopackIgnore: true */ componentPath).isDirectory()
+  ) {
     const componentName = path.basename(componentPath);
     return path.join(componentPath, `${componentName}.contract.json`);
   }
 
   const componentDir = path.dirname(componentPath);
-  const componentName = path.basename(componentPath, path.extname(componentPath));
+  const componentName = path.basename(
+    componentPath,
+    path.extname(componentPath)
+  );
   return path.join(componentDir, `${componentName}.contract.json`);
 }
 
@@ -175,11 +211,17 @@ export function getComponentContract(
   try {
     const contractPath = resolveComponentContractPath(component);
 
-    if (!contractPath || !fs.existsSync(contractPath)) {
+    if (
+      !contractPath ||
+      !fs.existsSync(/* turbopackIgnore: true */ contractPath)
+    ) {
       return null;
     }
 
-    const content = fs.readFileSync(contractPath, 'utf8');
+    const content = fs.readFileSync(
+      /* turbopackIgnore: true */ contractPath,
+      'utf8'
+    );
     return JSON.parse(content) as ComponentContract;
   } catch (error) {
     if (process.env.NODE_ENV === 'development') {

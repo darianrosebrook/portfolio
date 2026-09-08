@@ -65,8 +65,6 @@ const nextConfig = {
       // 'gsap',
       // '@gsap/react',
     ],
-    // Enable View Transitions API support for page transitions
-    viewTransition: true,
   },
   // Turbopack configuration (Next.js 16+).
   // Pin the workspace root explicitly. Without this, Next infers the root
@@ -155,36 +153,12 @@ const nextConfig = {
   compress: true,
   // Power by header removal
   poweredByHeader: false,
-  // Cache headers. The /_next/* entries are gated to production: in dev,
-  // Next.js manages those paths itself and an immutable Cache-Control here
-  // breaks HMR by causing the browser to serve stale assets. The /:all*
-  // image-extension and /fonts/:path* entries target user-owned paths and
-  // are safe in both modes.
+  // Cache headers for user-owned paths only. /_next/static and /_next/image
+  // are deliberately NOT listed: Next.js/Vercel already serve those with
+  // immutable caching, and explicit Cache-Control entries there warn at build
+  // time and broke HMR in dev (browser served stale assets).
   async headers() {
-    const isProd = process.env.NODE_ENV === 'production';
     return [
-      ...(isProd
-        ? [
-            {
-              source: '/_next/static/:path*',
-              headers: [
-                {
-                  key: 'Cache-Control',
-                  value: 'public, max-age=31536000, immutable',
-                },
-              ],
-            },
-            {
-              source: '/_next/image',
-              headers: [
-                {
-                  key: 'Cache-Control',
-                  value: 'public, max-age=31536000, immutable',
-                },
-              ],
-            },
-          ]
-        : []),
       {
         source: '/:all*(svg|jpg|jpeg|png|webp|avif|gif|ico)',
         headers: [
