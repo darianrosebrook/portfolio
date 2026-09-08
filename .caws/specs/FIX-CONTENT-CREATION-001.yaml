@@ -3,9 +3,8 @@ title: 'Preserve new content revisions and enable case study creation'
 risk_tier: 2
 mode: fix
 lifecycle_state: active
-worktree: content-creation
 created_at: '2026-09-08T04:57:20.907Z'
-updated_at: '2026-09-08T04:57:23.027Z'
+updated_at: '2026-09-08T05:00:06.807Z'
 created_by_session: '01a07f5f-0b0c-7431-a4a8-d8f2ea603bf0'
 blast_radius:
   modules:
@@ -20,14 +19,22 @@ scope:
     - 'app/dashboard/_components/NewContentEditor.tsx'
     - 'utils/editor/newDraftRecovery.ts'
     - 'test/dashboard/new-content'
+    - utils/schemas/case-study.schema.ts
+    - app/api/case-studies/[slug]/route.ts
   out: []
 invariants:
-  - 'TODO: describe one invariant this spec guarantees.'
+  - 'A save acknowledgement cannot erase a newer local revision or its server identity.'
 acceptance:
   - id: A1
-    given: 'TODO'
-    when: 'TODO'
-    then: 'TODO'
+    given: 'A content draft changes while creation or autosave is pending'
+    when: 'saves settle and the page remounts'
+    then: 'the newest body and metadata remain recoverable and subsequent writes address the existing record.'
+  - id: A2
+    given: 'The author opens New Case Study or an unavailable case study'
+    when: 'the page loads'
+    then: >-
+      creation uses the case studies API and load failures show an actionable error
+      instead of an empty editor.
 non_functional: {}
 contracts:
   - name: 'content-creation'
