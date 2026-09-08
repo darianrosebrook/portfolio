@@ -9,6 +9,8 @@ import {
   AnimatedCardTitle,
 } from '@/ui/components/AnimatedCard';
 import ProfileFlag from '@/ui/components/ProfileFlag';
+import { RelatedContentSection } from '@/app/_components/RelatedContentSection';
+import type { RelatedContentItem } from '@/utils/supabase/contentRelations';
 import ShareLinks from './ShareLinks';
 import styles from './styles.module.css';
 import { EASING_PRESETS } from '@/utils/animation';
@@ -24,6 +26,8 @@ interface ArticleData {
   image: string;
   html: string;
   author: Profile;
+  relations?: RelatedContentItem[];
+  backlinks?: RelatedContentItem[];
   beforeArticle?: {
     slug: string;
     headline: string;
@@ -136,6 +140,10 @@ export default function ArticleDetailClient({
             dangerouslySetInnerHTML={{ __html: article.html }}
           />
         </AnimatedSection>
+        <RelatedContentSection
+          relations={article.relations ?? []}
+          backlinks={article.backlinks ?? []}
+        />
         <div className={styles.prev_next}>
           {article.beforeArticle ? (
             <AnimatedCard
