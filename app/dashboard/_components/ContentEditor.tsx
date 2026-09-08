@@ -11,6 +11,16 @@ import { createPreviewExtensions } from '@/ui/modules/Tiptap/extensionsRegistry'
 import dynamic from 'next/dynamic';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { getEffectiveContent } from '@/utils/editor/workingDraft';
+import {
+  acknowledgeRecovery,
+  draftFingerprint,
+  readRecovery,
+  recoveryKey,
+  toLocalDateTime,
+  writeRecovery,
+  contentFingerprint,
+  type DraftSnapshot,
+} from '@/utils/editor/draftRecovery';
 import styles from './ContentEditor.module.css';
 
 const Tiptap = dynamic(
@@ -20,9 +30,25 @@ const Tiptap = dynamic(
 
 type Entity = 'articles' | 'case-studies';
 type RecordType = Article | CaseStudy;
-type SaveStatus = 'idle' | 'saving' | 'saved' | 'error';
+type SaveStatus = 'idle' | 'pending' | 'saving' | 'saved' | 'error';
 
 export default function ContentEditor({
+  initial,
+  entity,
+}: {
+  initial: RecordType;
+  entity: Entity;
+}) {
+  return (
+    <ContentEditorSession
+      key={recoveryKey(entity, initial)}
+      initial={initial}
+      entity={entity}
+    />
+  );
+}
+
+function ContentEditorSession({
   initial,
   entity,
 }: {
@@ -57,12 +83,81 @@ export default function ContentEditor({
   const autosaveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const saveQueueRef = useRef<Promise<void>>(Promise.resolve());
   const saveRevisionRef = useRef(0);
+  const transitionRef = useRef(false);
+  const [busy, setBusy] = useState(false);
+  const [recovery, setRecovery] = useState<DraftSnapshot | null>(null);
+  const [recoveryError, setRecoveryError] = useState<string | null>(null);
+  const storageKey = recoveryKey(entity, initial);
+  const recoveryPendingRef = useRef(false);
+  const acknowledgedRef = useRef(draftFingerprint(record));
+  const canonicalRef = useRef(canonical);
+  canonicalRef.current = canonical;
+
+  const updateRecord = (next: RecordType) => {
+    if (transitionRef.current || recoveryPendingRef.current) return;
+    recordRef.current = next;
+    setRecord(next);
+    setSaveStatus('pending');
+    try {
+      writeRecovery(window.localStorage, storageKey, next);
+      setRecoveryError(null);
+    } catch {
+      setRecoveryError(
+        'Recovery storage is unavailable. Keep this page open until your changes are saved.'
+      );
+    }
+  };
+
+  const acknowledge = useCallback(
+    (saved: RecordType) => {
+      acknowledgedRef.current = draftFingerprint(saved);
+      try {
+        acknowledgeRecovery(window.localStorage, storageKey, saved);
+      } catch {
+        /* Keep any recovery copy when storage is unavailable. */
+      }
+    },
+    [storageKey]
+  );
+
+  useEffect(() => {
+    try {
+      const local = readRecovery(window.localStorage, storageKey);
+      if (
+        local &&
+        draftFingerprint(local) !== draftFingerprint(recordRef.current)
+      ) {
+        recoveryPendingRef.current = true;
+        setRecovery(local);
+      } else if (local)
+        acknowledgeRecovery(window.localStorage, storageKey, recordRef.current);
+    } catch {
+      setRecoveryError(
+        'Recovery storage is unavailable. Keep this page open until your changes are saved.'
+      );
+    }
+    const warnBeforeLeaving = (event: BeforeUnloadEvent) => {
+      if (draftFingerprint(recordRef.current) !== acknowledgedRef.current) {
+        event.preventDefault();
+        event.returnValue = '';
+      }
+    };
+    window.addEventListener('beforeunload', warnBeforeLeaving);
+    return () => window.removeEventListener('beforeunload', warnBeforeLeaving);
+  }, [storageKey]);
 
   useEffect(() => {
     recordRef.current = record;
   }, [record]);
 
   useEffect(() => {
+    // A same-document refresh cannot replace a revision still awaiting a save.
+    // Identity changes remount the session, keeping queues and recovery isolated.
+    if (
+      transitionRef.current ||
+      draftFingerprint(recordRef.current) !== acknowledgedRef.current
+    )
+      return;
     const effective = getEffectiveContent(initial);
     setRecord({
       ...initial,
@@ -70,6 +165,8 @@ export default function ContentEditor({
     });
     setDirty(Boolean((initial as { is_dirty?: boolean | null }).is_dirty));
     setCanonical(initial);
+    acknowledgedRef.current = draftFingerprint({ ...initial, ...effective });
+    recordRef.current = { ...initial, ...effective };
     routeSlugRef.current = initial.slug;
     previousContentRef.current = serializeWorkingRecord({
       ...initial,
@@ -105,7 +202,11 @@ export default function ContentEditor({
     }
     const saved = await response.json();
     const row = Array.isArray(saved) ? saved[0] : null;
-    if (row?.slug) routeSlugRef.current = row.slug;
+    if (!row?.slug)
+      throw new Error(
+        'Save returned no record; changes have not been confirmed.'
+      );
+    routeSlugRef.current = row.slug;
     if (row) {
       setDirty(Boolean((row as { is_dirty?: boolean | null }).is_dirty));
       setCanonical(row as RecordType);
@@ -114,7 +215,7 @@ export default function ContentEditor({
   };
 
   const handleUpdateArticle = (updated: RecordType) => {
-    setRecord(updated);
+    updateRecord(updated);
   };
 
   const queueWorkingSave = useCallback(
@@ -143,6 +244,23 @@ export default function ContentEditor({
             const errorText = await response.text();
             throw new Error(errorText || 'Save failed');
           }
+          const rows = await response.json();
+          if (!Array.isArray(rows) || !rows[0]?.id)
+            throw new Error(
+              'Save returned no record; changes have not been confirmed.'
+            );
+          const saved = rows[0] as RecordType;
+          if (
+            saved.id !== snapshot.id ||
+            saved.author !== snapshot.author ||
+            !saved.is_dirty ||
+            workingFingerprint(toEditableRecord(saved)) !==
+              workingFingerprint(snapshot)
+          ) {
+            throw new Error(
+              'The server did not confirm this draft revision. Your local recovery copy has been kept.'
+            );
+          }
         });
 
       saveQueueRef.current = task.catch(() => undefined);
@@ -160,7 +278,17 @@ export default function ContentEditor({
         await queueWorkingSave(snapshot);
         previousContentRef.current = serializeWorkingRecord(snapshot);
         setDirty(true);
-        if (revision === saveRevisionRef.current) setSaveStatus('saved');
+        acknowledge({
+          ...snapshot,
+          slug: routeSlugRef.current,
+          published_at: canonicalRef.current.published_at,
+        });
+        if (revision === saveRevisionRef.current)
+          setSaveStatus(
+            draftFingerprint(recordRef.current) === acknowledgedRef.current
+              ? 'saved'
+              : 'pending'
+          );
       } catch (err) {
         if (revision === saveRevisionRef.current) {
           setSaveStatus('error');
@@ -169,7 +297,7 @@ export default function ContentEditor({
         throw err;
       }
     },
-    [queueWorkingSave]
+    [queueWorkingSave, acknowledge]
   );
 
   const flushWorkingDraft = useCallback(
@@ -190,7 +318,8 @@ export default function ContentEditor({
 
   // Debounced autosave working draft without affecting published fields.
   useEffect(() => {
-    if (!record || !record.slug) return;
+    if (!record || !record.slug || busy || recovery || transitionRef.current)
+      return;
 
     // Serialize content for comparison to avoid unnecessary saves
     const currentContent = serializeWorkingRecord(record);
@@ -212,101 +341,165 @@ export default function ContentEditor({
         autosaveTimerRef.current = null;
       }
     };
-  }, [record, runWorkingSave]);
+  }, [record, runWorkingSave, busy, recovery]);
 
   const handleField = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
     const next = { ...record, [name]: value } as RecordType;
-    setRecord(next);
+    updateRecord(next);
   };
 
-  const persist = async () => {
+  const applySavedRecord = (saved: RecordType) => {
+    const next = toEditableRecord(saved);
+    recordRef.current = next;
+    setRecord(next);
+    previousContentRef.current = serializeWorkingRecord(next);
+    setCanonical(saved);
+    setDirty(Boolean(saved.is_dirty));
+    acknowledge(next);
+    setSaveStatus('saved');
+  };
+
+  const transition = async (operation: () => Promise<void>) => {
+    if (transitionRef.current || recoveryPendingRef.current) return;
+    transitionRef.current = true;
+    setBusy(true);
+    setConfirm(null);
+    setSaveError(null);
+    if (autosaveTimerRef.current) {
+      clearTimeout(autosaveTimerRef.current);
+      autosaveTimerRef.current = null;
+    }
     try {
+      // No transition may overtake a prior working save. Editing and new
+      // autosaves are paused until the transition has acknowledged its row.
+      await saveQueueRef.current;
+      await operation();
+    } catch (err) {
+      setSaveStatus('error');
+      setSaveError(
+        err instanceof Error ? err.message : 'Changes could not be saved'
+      );
+    } finally {
+      transitionRef.current = false;
+      setBusy(false);
+    }
+  };
+
+  const persist = () =>
+    transition(async () => {
       const snapshot = recordRef.current;
       await flushWorkingDraft(snapshot);
-      if (snapshot.slug !== routeSlugRef.current) {
-        const saved = await saveTransition({ slug: snapshot.slug });
-        if (saved) setRecord(toEditableRecord(saved));
+      if (
+        snapshot.slug !== routeSlugRef.current ||
+        snapshot.published_at !== canonicalRef.current.published_at
+      ) {
+        const saved = await saveTransition({
+          slug: snapshot.slug,
+          published_at: snapshot.published_at,
+        });
+        if (saved) applySavedRecord(saved);
+      } else {
+        acknowledge(snapshot);
+        setSaveStatus('saved');
       }
-    } catch (err) {
-      setSaveStatus('error');
-      setSaveError(err instanceof Error ? err.message : 'Failed to save');
-    }
-  };
+    });
 
-  const handleUnpublish = async () => {
-    setConfirm(null);
-    try {
-      await flushWorkingDraft(recordRef.current);
+  const handleUnpublish = () =>
+    transition(async () => {
+      const snapshot = recordRef.current;
+      await flushWorkingDraft(snapshot);
       const saved = await saveTransition({
-        slug: record.slug,
+        slug: snapshot.slug,
         status: 'draft' as RecordType['status'],
       });
-      if (saved) setRecord(toEditableRecord(saved));
-    } catch (err) {
-      setSaveStatus('error');
-      setSaveError(err instanceof Error ? err.message : 'Failed to unpublish');
-    }
-  };
+      if (saved) applySavedRecord(saved);
+    });
 
-  const handlePublish = async () => {
-    setConfirm(null);
-    try {
-      const nowIso = new Date().toISOString();
-      // Publish only after the latest click-time editor state has reached the
-      // working columns that the API promotes into canonical content.
-      await flushWorkingDraft(recordRef.current);
+  const handlePublish = () =>
+    transition(async () => {
       const snapshot = recordRef.current;
+      if (!snapshot.slug || !snapshot.headline?.trim())
+        throw new Error(
+          'A headline and permanent slug are required before publishing.'
+        );
+      if (/^draft-\d+$/.test(snapshot.slug))
+        throw new Error('Set a permanent slug before publishing.');
+      await flushWorkingDraft(snapshot);
       const saved = await saveTransition({
         slug: snapshot.slug,
         status: 'published' as RecordType['status'],
         wordCount: snapshot.wordCount,
         published_at:
           updatePublishDateOnPublish || !snapshot.published_at
-            ? (nowIso as RecordType['published_at'])
+            ? new Date().toISOString()
             : snapshot.published_at,
       });
-      if (saved) setRecord(toEditableRecord(saved));
-    } catch (err) {
-      setSaveStatus('error');
-      setSaveError(err instanceof Error ? err.message : 'Failed to publish');
-    }
-  };
+      if (saved) applySavedRecord(saved);
+    });
 
-  const handleDiscard = async () => {
-    setConfirm(null);
-    try {
+  const handleDiscard = () =>
+    transition(async () => {
+      const discarded = recordRef.current;
       const urlBase =
         entity === 'articles' ? '/api/articles' : '/api/case-studies';
       const response = await fetch(
         `${urlBase}/${routeSlugRef.current}/discard`,
         { method: 'POST' }
       );
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(errorText || 'Discard failed');
-      }
-      const saved = await response.json();
-      const row = Array.isArray(saved) ? saved[0] : saved;
-      if (row) {
-        const next = toEditableRecord(row as RecordType);
-        setRecord(next);
-        previousContentRef.current = serializeWorkingRecord(next);
-        setDirty(false);
-        setCanonical(row as RecordType);
-      }
-    } catch (err) {
-      setSaveStatus('error');
-      setSaveError(
-        err instanceof Error ? err.message : 'Failed to discard changes'
-      );
-    }
-  };
+      if (!response.ok)
+        throw new Error((await response.text()) || 'Discard failed');
+      const data = await response.json();
+      const row = Array.isArray(data) ? data[0] : data;
+      if (!row?.id || !row?.slug)
+        throw new Error(
+          'Discard returned no record; changes have not been confirmed.'
+        );
+      // Clear only the revision the user explicitly discarded, never another
+      // tab's newer recovery copy.
+      acknowledge(discarded);
+      applySavedRecord(row as RecordType);
+    });
 
   return (
-    <section className={styles.suite}>
+    <section className={styles.suite} aria-busy={busy}>
+      {recovery && (
+        <div role="status">
+          <p>
+            An unsaved local version is available. Restore it to continue
+            editing, or keep the server version.
+          </p>
+          <Button
+            onClick={() => {
+              recoveryPendingRef.current = false;
+              updateRecord({ ...recordRef.current, ...recovery });
+              setRecovery(null);
+            }}
+          >
+            Restore local draft
+          </Button>
+          <Button
+            variant="secondary"
+            onClick={() => {
+              try {
+                acknowledgeRecovery(window.localStorage, storageKey, {
+                  ...recordRef.current,
+                  ...recovery,
+                });
+                recoveryPendingRef.current = false;
+                setRecovery(null);
+              } catch {
+                setRecoveryError('Could not remove the local recovery copy.');
+              }
+            }}
+          >
+            Keep server version
+          </Button>
+        </div>
+      )}
+      {recoveryError && <p role="alert">{recoveryError}</p>}
       <header className={styles.commandBar}>
         <div className={styles.documentState}>
           <span className={styles.statusBadge} data-status={record.status}>
@@ -326,16 +519,22 @@ export default function ContentEditor({
             </span>
           )}
           <span className={styles.saveState} data-status={saveStatus}>
-            {saveStatus === 'saving' && 'Saving…'}
-            {saveStatus === 'saved' && 'Saved'}
+            {busy && 'Applying changes…'}
+            {!busy && saveStatus === 'pending' && 'Unsaved changes'}
+            {!busy && saveStatus === 'saving' && 'Saving…'}
+            {!busy && saveStatus === 'saved' && 'Saved'}
             {saveStatus === 'error' && (saveError || 'Save failed')}
-            {saveStatus === 'idle' && 'All changes autosave'}
+            {!busy && saveStatus === 'idle' && 'All changes saved'}
           </span>
           {record.wordCount !== null && (
             <span className={styles.wordCount}>{record.wordCount} words</span>
           )}
         </div>
-        <div className={styles.commandActions}>
+        <fieldset
+          className={styles.commandActions}
+          disabled={busy || Boolean(recovery)}
+          style={{ border: 0, margin: 0, padding: 0 }}
+        >
           <Button variant="secondary" onClick={() => setPreview((p) => !p)}>
             {preview ? 'Edit' : 'Preview'}
           </Button>
@@ -369,13 +568,18 @@ export default function ContentEditor({
           >
             {propertiesOpen ? 'Hide properties' : 'Properties'}
           </Button>
-        </div>
+        </fieldset>
       </header>
-      <div className={styles.workspace} data-properties-open={propertiesOpen}>
+      <div
+        className={styles.workspace}
+        data-properties-open={propertiesOpen}
+        inert={busy || Boolean(recovery) || undefined}
+      >
         <main className={styles.canvas}>
           {!preview ? (
             <Tiptap
               article={record as RecordType}
+              editable={!busy && !recovery}
               handleUpdate={
                 handleUpdateArticle as (article: RecordType) => void
               }
@@ -494,11 +698,11 @@ export default function ContentEditor({
                 type="datetime-local"
                 value={
                   record.published_at
-                    ? new Date(record.published_at).toISOString().slice(0, 16)
+                    ? toLocalDateTime(record.published_at)
                     : ''
                 }
                 onChange={(e) =>
-                  setRecord({
+                  updateRecord({
                     ...record,
                     published_at: e.target.value
                       ? (new Date(
@@ -605,8 +809,19 @@ export default function ContentEditor({
   );
 }
 
+function workingFingerprint(record: RecordType): string {
+  return contentFingerprint({
+    articleBody: record.articleBody ?? null,
+    headline: record.headline ?? null,
+    description: record.description ?? null,
+    image: record.image ?? null,
+    keywords: record.keywords ?? null,
+    articleSection: record.articleSection ?? null,
+  });
+}
+
 function serializeWorkingRecord(record: RecordType): string {
-  return JSON.stringify({
+  return contentFingerprint({
     articleBody: record.articleBody,
     headline: record.headline,
     description: record.description,
