@@ -30,3 +30,11 @@ acceptance:
       contain no tools route reference.
 non_functional: {}
 contracts: []
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "8581ae25: tools page and styles deleted; no tools route references in app, ui, utils, public, or scripts; targeted ESLint and git diff --check passed."
+    recorded_at: "2026-09-08T04:30:55.936Z"
+    command: ./node_modules/.bin/eslint app/layout.tsx utils/performance/resourceOptimizer.ts
+    exit_code: 0
+    commit_sha: "8581ae25"
