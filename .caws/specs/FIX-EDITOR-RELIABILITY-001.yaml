@@ -86,7 +86,7 @@ evidence:
     commit_sha: "447ba018"
   - criterion_id: A4
     status: pass
-    evidence_ref: test/context/UserContext.test.tsx real installed SDK refresh-lock test with mocked transport; test/app/auth retry route and safe redirect tests
-    recorded_at: "2026-09-08T05:39:27.981Z"
+    evidence_ref: Auth SDK/provider and retry-route tests passed; live logged-in profile and HTTP 200 Sign-in help page with retry button verified; no real OAuth exchange performed
+    recorded_at: "2026-09-08T05:49:55.386Z"
     exit_code: 0
-    commit_sha: "68373f2b"
+    commit_sha: "1019403f"
