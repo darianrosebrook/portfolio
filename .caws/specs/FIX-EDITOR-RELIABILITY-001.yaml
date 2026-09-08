@@ -3,7 +3,6 @@ title: 'Make existing content editing recoverable and serialize publishing trans
 risk_tier: 2
 mode: fix
 lifecycle_state: active
-worktree: editor-reliability
 created_at: '2026-09-08T04:55:56.624Z'
 updated_at: '2026-09-08T05:11:24.002Z'
 created_by_session: '01a07f29-765d-7471-b649-d3b07bd7d5ee'
