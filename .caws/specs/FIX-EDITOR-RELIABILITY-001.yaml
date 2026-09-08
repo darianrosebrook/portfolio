@@ -2,9 +2,11 @@ id: FIX-EDITOR-RELIABILITY-001
 title: 'Make existing content editing recoverable and serialize publishing transitions'
 risk_tier: 2
 mode: fix
-lifecycle_state: active
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Merged auth, existing-editor recovery, shared creation, and creator-library fixes in 8ccd7677 with timestamp follow-up in 1019403f. Final merged checkout: 188 selected tests, full TypeScript after regenerating stale route types, and targeted ESLint pass. CAWS gates pass. Live logged-in browser verified dashboard counts, filtered results, existing draft content, New Case Study, corrected creation-date order, and sign-in recovery page. Persistence/race evidence uses mocked service boundaries; live content was not published or deleted. Unrelated existing changes preserved; temporary worktrees removed.'
 created_at: '2026-09-08T04:55:56.624Z'
-updated_at: '2026-09-08T05:11:24.002Z'
+updated_at: '2026-09-08T05:49:56.125Z'
 created_by_session: '01a07f29-765d-7471-b649-d3b07bd7d5ee'
 blast_radius:
   modules:
