@@ -2,9 +2,9 @@ id: FIX-DASH-AUTH-001
 title: 'Reliable dashboard authentication and recoverable login failures'
 risk_tier: 2
 mode: fix
-lifecycle_state: active
+lifecycle_state: draft
 created_at: '2026-09-08T04:56:52.337Z'
-updated_at: '2026-09-08T04:56:53.735Z'
+updated_at: '2026-09-08T05:35:57.130Z'
 created_by_session: '01a07f5e-6bef-7423-99dc-c128c180d9a8'
 blast_radius:
   modules:
