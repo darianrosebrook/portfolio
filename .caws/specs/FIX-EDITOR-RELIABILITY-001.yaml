@@ -72,3 +72,10 @@ evidence:
     exit_code: 0
     artifact_path: /private/tmp/portfolio-final-tests.log
     commit_sha: "68373f2b"
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "test/dashboard/ContentEditor.test.tsx: local publication datetime and explicit save assertions"
+    recorded_at: "2026-09-08T05:39:26.898Z"
+    test_nodeid: persists publication metadata explicitly without a timezone shift
+    exit_code: 0
+    commit_sha: "68373f2b"
