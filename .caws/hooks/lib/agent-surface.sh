@@ -1,7 +1,7 @@
 #!/bin/bash
 # CAWS-MANAGED-HOOK
 # hook_pack: shared
-# hook_pack_version: 31
+# hook_pack_version: 44
 # caws_min_major: 11
 # lineage_refs: (new in shared-core-001)
 # edit_stance: YOURS TO EDIT. This is a starting hook, not a locked one — shape it
@@ -183,6 +183,7 @@ case "$CAWS_AGENT_SURFACE" in
     CAWS_PLATFORM_FLAG="claude-code"
     CAWS_PERMISSION_VOCAB="ask"
     CAWS_INSTRUCTION_FILES="CLAUDE.md"
+    CAWS_AGENT_PROCESS_NAMES="claude"
     ;;
   codex)
     CAWS_VENDOR_DIR=".codex"
@@ -190,18 +191,21 @@ case "$CAWS_AGENT_SURFACE" in
     # Codex has no PreToolUse "ask" decision; map ask -> deny.
     CAWS_PERMISSION_VOCAB="deny"
     CAWS_INSTRUCTION_FILES="AGENTS.md"
+    CAWS_AGENT_PROCESS_NAMES="codex"
     ;;
   cursor)
     CAWS_VENDOR_DIR=".cursor"
     CAWS_PLATFORM_FLAG="cursor"
     CAWS_PERMISSION_VOCAB="ask"
     CAWS_INSTRUCTION_FILES="AGENTS.md"
+    CAWS_AGENT_PROCESS_NAMES="cursor"
     ;;
   windsurf)
     CAWS_VENDOR_DIR=".windsurf"
     CAWS_PLATFORM_FLAG="windsurf"
     CAWS_PERMISSION_VOCAB="ask"
     CAWS_INSTRUCTION_FILES="AGENTS.md"
+    CAWS_AGENT_PROCESS_NAMES="windsurf"
     ;;
   opencode)
     CAWS_VENDOR_DIR=".opencode"
@@ -211,6 +215,7 @@ case "$CAWS_AGENT_SURFACE" in
     # deny, matching the codex adapter precedent.
     CAWS_PERMISSION_VOCAB="deny"
     CAWS_INSTRUCTION_FILES="AGENTS.md"
+    CAWS_AGENT_PROCESS_NAMES="opencode"
     ;;
   zcode)
     CAWS_VENDOR_DIR=".zcode"
@@ -218,6 +223,15 @@ case "$CAWS_AGENT_SURFACE" in
     # ZCode supports allow/ask/deny for PreToolUse — same as Claude Code.
     CAWS_PERMISSION_VOCAB="ask"
     CAWS_INSTRUCTION_FILES="AGENTS.md"
+    # CAWS-AGENT-PID-SESSION-CORRELATION-001: the agent process basename(s)
+    # whose PID identifies this session in the process tree. ZCode's agent
+    # runs as `zcode-cli` (a child of `zcode-host-local-N`, itself a child of
+    # the ZCode app); the host is also listed so the PID-walk can stop at the
+    # per-session agent even if the cli process is briefly absent during a
+    # tool-spawn race. Used by resolveAgentPid (lib/agent-pid.sh) to key the
+    # agent-pid-<pid>.json correlation record — the canonical-checkout
+    # identity bridge for harnesses that export no session-id env var.
+    CAWS_AGENT_PROCESS_NAMES="zcode-cli zcode-host-local-1 zcode-host-local-2 zcode-host-local-3"
     ;;
   kimi-code)
     CAWS_VENDOR_DIR=".kimi-code"
@@ -230,6 +244,7 @@ case "$CAWS_AGENT_SURFACE" in
     # No documented updatedInput contract — quiet-merge passes the command
     # through unrewritten on this surface.
     CAWS_SUPPORTS_UPDATED_INPUT="0"
+    CAWS_AGENT_PROCESS_NAMES="kimi-code kimi"
     ;;
   qwen-code)
     CAWS_VENDOR_DIR=".qwen"
@@ -242,7 +257,17 @@ case "$CAWS_AGENT_SURFACE" in
     # updatedInput is documented but NOT enforced in 0.21.x (probed
     # 2026-08-03, tmp/qwen-hook-probe-findings.md) — quiet-merge passes the
     # command through unrewritten on this surface.
+    CAWS_AGENT_PROCESS_NAMES="qwen qwen-code"
     CAWS_SUPPORTS_UPDATED_INPUT="0"
+    ;;
+  dsh)
+    CAWS_VENDOR_DIR=".dsh"
+    CAWS_PLATFORM_FLAG="dsh"
+    # DSH supports allow/ask/deny on tools/pre-execute via the typed
+    # PreToolDecision + the approval seam (ask prompts through ctx.approval).
+    CAWS_PERMISSION_VOCAB="ask"
+    CAWS_INSTRUCTION_FILES="AGENTS.md"
+    CAWS_AGENT_PROCESS_NAMES="dsh"
     ;;
   *)
     # Unknown surface — fall through to claude-code defaults so a
@@ -257,6 +282,10 @@ case "$CAWS_AGENT_SURFACE" in
     CAWS_PLATFORM_FLAG="claude-code"
     CAWS_PERMISSION_VOCAB="ask"
     CAWS_INSTRUCTION_FILES="CLAUDE.md AGENTS.md"
+    # Unknown surface: no process names -> the agent-PID tier fail-opens
+    # (returns no identity), falling through to the existing chain. This is
+    # the deliberate safe default for an unrecognized harness.
+    CAWS_AGENT_PROCESS_NAMES=""
     ;;
 esac
 
@@ -397,4 +426,40 @@ caws_source_lib() {
   fi
 
   return 1
+}
+
+# ---------------------------------------------------------------------------
+# 6. caws_run_cli <args...>
+#
+# CAWS-HOOKS-CLI-CWD-LEAK-001. Invoke the CAWS CLI binary ($CAWS_BIN, default
+# "caws") from CAWS_PROJECT_DIR rather than the hook process's inherited
+# ambient cwd. CAWS_PROJECT_DIR is the canonical "which repo" signal every
+# shared hook already resolves (§1 above); the CLI itself has NO knowledge of
+# it — command implementations resolve their repo root from process.cwd()
+# (see e.g. setupIO in src/shell/commands/agents.ts), not from this env var.
+# A hook that shells out to the CLI without first `cd`-ing into
+# CAWS_PROJECT_DIR silently resolves against whatever directory the process
+# happened to inherit.
+#
+# This is invisible in ordinary harness usage (the hook process's PWD
+# naturally sits inside the repo the harness is driving), but surfaces hard
+# the moment CAWS_PROJECT_DIR points somewhere the inherited cwd does not —
+# which is exactly what an isolated test fixture does (bats' `run env
+# CAWS_PROJECT_DIR=<tmp-repo> bash <hook>.sh` pattern, cwd left at the bats
+# runner's real location): agent-heartbeat.sh's `agents heartbeat` and
+# `message poll` calls, agent-register.sh's `agents register`, and
+# agent-stop.sh's `agents stop` all landed real leases/session records in
+# whatever repo the test process actually sat in, not the fixture.
+#
+# Prints the CLI's stdout, returns its exit code. A missing/unusable
+# CAWS_PROJECT_DIR (unset, ".", or not a directory) falls open to the plain
+# invocation — this must never turn a working hook into a broken one.
+# ---------------------------------------------------------------------------
+caws_run_cli() {
+  local _bin="${CAWS_BIN:-caws}"
+  if [[ -n "${CAWS_PROJECT_DIR:-}" && "${CAWS_PROJECT_DIR}" != "." && -d "${CAWS_PROJECT_DIR}" ]]; then
+    ( cd "${CAWS_PROJECT_DIR}" && "$_bin" "$@" )
+  else
+    "$_bin" "$@"
+  fi
 }

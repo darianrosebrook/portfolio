@@ -132,6 +132,7 @@ test-results
 .caws/cache/
 .caws/sessions/
 .caws/state/
+.caws/hooks/.pristine/
 .caws/duplication-cache.json
 .caws/events.jsonl
 .caws/events.jsonl.lock
@@ -141,3 +142,7 @@ tmp/guard-strikes-*.json
 # Python bytecode from hook unit probes
 .caws/hooks/__pycache__/
 .caws/messages.jsonl
+
+# Local Codex hook diagnostics and session safety state
+.codex/logs/
+.codex/hooks/state/
