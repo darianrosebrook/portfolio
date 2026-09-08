@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { formatLibraryDate } from '@/utils/editor/contentLibrary';
 import styles from '../articles.module.css';
 
 interface ArticleCardProps {
@@ -26,11 +27,7 @@ export function ArticleCard({ article, onDelete }: ArticleCardProps) {
 
   const displayTitle = article.headline || article.slug;
   const formattedDate = article.modified_at
-    ? new Date(article.modified_at).toLocaleDateString('en-US', {
-        month: 'short',
-        day: 'numeric',
-        year: 'numeric',
-      })
+    ? formatLibraryDate(article.modified_at)
     : null;
 
   const handleEdit = () => {

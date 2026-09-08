@@ -134,6 +134,42 @@ describe('author content library', () => {
     expect(formatLibraryDate('2026-08-01T00:30:00Z')).toBe('Aug 1, 2026');
   });
 
+  it('loads creation dates and ranks never-modified drafts by when they were created', async () => {
+    const db = database([
+      {
+        data: [
+          row({
+            id: 1,
+            status: 'draft',
+            modified_at: null,
+            created_at: '2026-08-13T07:44:27Z',
+          }),
+          row({
+            id: 2,
+            status: 'draft',
+            modified_at: 'invalid',
+            created_at: '2026-08-14T07:44:27Z',
+          }),
+        ],
+        error: null,
+      },
+    ]);
+    const result = await loadAuthorLibrary(db.client, 'creator', 'articles');
+    expect(
+      db.select.mock.calls[0][0].split(',').map((column) => column.trim())
+    ).toContain('created_at');
+    expect(result.ok).toBe(true);
+    if (!result.ok) throw new Error('Library did not load');
+    expect(
+      filterLibrary(result.items, { status: 'draft', sort: 'recent' }).map(
+        (item) => [item.id, formatLibraryDate(item.modified_at)]
+      )
+    ).toEqual([
+      [2, 'Aug 14, 2026'],
+      [1, 'Aug 13, 2026'],
+    ]);
+  });
+
   it('keeps draft and published-with-changes counts distinct and includes archived content', () => {
     const items = [
       row({ id: 1, status: 'draft', is_dirty: true }),

@@ -22,6 +22,7 @@ export interface ContentLibraryRow {
   description?: string | null;
   status: string | null;
   modified_at: string | null;
+  created_at?: string | null;
   published_at?: string | null;
   wordCount?: number | null;
   is_dirty?: boolean | null;
@@ -45,7 +46,7 @@ export type LibraryCounts = Record<LibraryStatus, number>;
 
 // Author-only metadata. Bodies are intentionally excluded from library reads.
 const LIBRARY_SELECT =
-  'id, slug, headline, description, status, modified_at, published_at, wordCount, is_dirty, workingheadline, workingdescription, working_modified_at' as const;
+  'id, slug, headline, description, status, modified_at, created_at, published_at, wordCount, is_dirty, workingheadline, workingdescription, working_modified_at' as const;
 
 function validDate(value: string | null | undefined): string | null {
   return value && Number.isFinite(Date.parse(value)) ? value : null;
@@ -56,7 +57,10 @@ export function projectLibraryItem(
   kind: ContentKind
 ): LibraryItem {
   const dirty = row.is_dirty === true;
-  const publishedDate = validDate(row.modified_at);
+  const publishedDate =
+    validDate(row.modified_at) ??
+    validDate(row.created_at) ??
+    validDate(row.published_at);
   const workingDate = dirty ? validDate(row.working_modified_at) : null;
   const modified_at =
     workingDate &&
