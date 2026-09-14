@@ -75,3 +75,7 @@ evidence:
     status: pass
     evidence_ref: "npx vitest run test/unit/designTokens/generateCSSTokens.test.mjs (brand reachability of committed component tokens: 3 assertions)"
     recorded_at: "2026-09-14T04:28:25.443Z"
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "npx vitest run test/unit/designTokens/generateCSSTokens.test.mjs (19 tests) + npm run tokens:components zero unresolved"
+    recorded_at: "2026-09-14T04:28:25.922Z"
