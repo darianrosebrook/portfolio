@@ -30,6 +30,10 @@ acceptance:
     given: 'contract box-model.* entries for the batch'
     when: 'node scripts/check-contract-tokens.mjs runs'
     then: 'token fidelity exits 0 with 1564 structured tokens verified'
+  - id: A3
+    given: 'the full battery'
+    when: 'npm test, typecheck, lint, contracts:validate, tokens:lint, styles:tokens run'
+    then: 'all exit 0 with no new failures'
 non_functional: {}
 contracts:
   - name: 'box-model-batch1-noop'
