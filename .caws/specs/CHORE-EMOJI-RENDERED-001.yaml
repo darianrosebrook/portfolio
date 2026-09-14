@@ -1,0 +1,30 @@
+id: CHORE-EMOJI-RENDERED-001
+title: 'Remove decorative emoji from rendered components and component docs'
+risk_tier: 3
+mode: chore
+lifecycle_state: draft
+created_at: '2026-09-14T19:09:41.394Z'
+updated_at: '2026-09-14T19:09:41.394Z'
+created_by_session: 'session-3a451c7b-52cd-4658-9621-529342b56ef7'
+blast_radius:
+  modules:
+    - 'app/blueprints rendered components and code samples'
+    - 'ui component documentation'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'app/blueprints'
+    - 'ui'
+  out: []
+invariants:
+  - 'Component behavior, props, and accessibility roles are unchanged; state remains conveyed by color, title, and label text'
+  - 'Typographic symbols and keyboard notation (⌘ ✓ ✗ ❖ ⎀ ⌫ ¶ arrows) are not emoji and are preserved'
+  - 'The Tiptap emoji picker dataset keeps its emoji data'
+acceptance:
+  - id: A1
+    given: 'the rendered blueprint components and ui component docs'
+    when: 'decorative emoji are removed from icons and copy'
+    then: 'no pictographic emoji remains in the touched files, lint typecheck and the vitest suite pass, and gates pass'
+non_functional: {}
+contracts: []
