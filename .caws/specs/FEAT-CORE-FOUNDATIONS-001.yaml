@@ -76,3 +76,7 @@ evidence:
     status: pass
     evidence_ref: "All 9 core-foundations pages (color, motion, spacing, layout, icons, elevation, radius, grid, borders) render via FoundationPage with full template sections, exported metadata, and zero coming-soon markup: 9 render contracts (63 assertions) in test/blueprints pass; full vitest 1734 passed / 2 skipped exit 0; e2e foundationNavigation all 12 pages pass page-load/JSON-LD/nav/SEO/a11y categories"
     recorded_at: "2026-09-14T07:04:12.362Z"
+  - criterion_id: A4
+    status: pass
+    evidence_ref: "Derived standard applied to 7 pages (spacing bcb27ed3, layout 41cc7775, icons b744501f, elevation 96a9be09, radius fec06fbc, grid 68bf7a56, borders f8ef6c86): each ships verificationChecklist + assessmentPrompts + crossReferences like the gold pages, tsc exit 0, eslint clean, prettier conforming, per-page render tests 7/7, gates Overall: OK"
+    recorded_at: "2026-09-14T07:04:13.017Z"
