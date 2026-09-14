@@ -20,7 +20,7 @@
         "regular": "{semantic.typography.fontWeight.regular}"
       },
       "lineHeight": {
-        "collapse": "{core.typography.lineHeight.collapse}"
+        "collapse": "{semantic.typography.lineHeight.collapse}"
       }
     }
   }
