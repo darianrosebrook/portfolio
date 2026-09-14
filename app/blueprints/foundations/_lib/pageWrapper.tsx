@@ -1,5 +1,3 @@
-'use client';
-
 import type { FoundationPageContent } from '@/types/foundationContent';
 import { generateFoundationLDJson } from '@/utils/ldjson';
 import { EducationPageTemplate } from '../_components/EducationPageTemplate';
@@ -9,9 +7,13 @@ interface FoundationPageProps {
 }
 
 /**
- * Client component wrapper for foundation pages
- * Handles JSON-LD generation
- * Note: JSON-LD schemas are returned as an array to support multiple schemas
+ * Server component wrapper for foundation pages.
+ *
+ * Renders the JSON-LD schema scripts here, in the server tree, so they are
+ * present in the initial HTML. Client-rendered inline <script> elements are
+ * not inserted into the DOM on hydration, so emitting them from the client
+ * template leaves pages without structured data. The interactive education
+ * template stays a client component beneath this wrapper.
  */
 export function FoundationPage({ content }: FoundationPageProps) {
   const canonical = content.metadata.canonicalUrl;
@@ -20,7 +22,16 @@ export function FoundationPage({ content }: FoundationPageProps) {
     canonical,
   });
 
-  // JSON-LD can be an array of schemas or a single schema
-  // EducationPageTemplate will handle rendering multiple schemas
-  return <EducationPageTemplate content={content} jsonLd={jsonLdSchemas} />;
+  return (
+    <>
+      {jsonLdSchemas.map((schema, index) => (
+        <script
+          key={index}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
+      <EducationPageTemplate content={content} />
+    </>
+  );
 }
