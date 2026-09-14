@@ -2,9 +2,10 @@ id: FEAT-BOXMODEL-002
 title: 'Box-model adoption batch 1: twenty highest-layout components'
 risk_tier: 3
 mode: refactor
-lifecycle_state: draft
+lifecycle_state: active
+worktree: feat-boxmodel-002
 created_at: '2026-09-14T05:09:57.409Z'
-updated_at: '2026-09-14T05:09:58.102Z'
+updated_at: '2026-09-14T05:09:59.327Z'
 created_by_session: 'session-e2bc87a4-6cfa-4ab7-a591-d5f2231c694f'
 blast_radius:
   modules:
