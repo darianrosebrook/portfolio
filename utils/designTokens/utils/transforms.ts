@@ -326,26 +326,38 @@ export const builtInTransforms: Transform[] = [
   {
     match: ({ type }) => type === 'shadow',
     apply: (value) => {
-      if (Array.isArray(value)) {
-        return value
-          .map((shadow) => {
-            if (typeof shadow === 'string') return shadow;
-            return shadowValueToCSS(shadow as Record<string, unknown>);
-          })
-          .join(', ');
-      }
-      if (typeof value === 'object' && value !== null) {
-        return shadowValueToCSS(value as Record<string, unknown>);
-      }
+      if (typeof value === 'string') return value;
+      if (value && typeof value === 'object') return shadowValueToCSS(value);
       return value;
     },
   },
 ];
 
 /**
- * Convert DTCG 1.0 structured shadow value to CSS string
+ * Detect a DTCG 1.0 structured shadow value: a single composite with
+ * dimension-typed offsetX/offsetY, or an array of such composites.
  */
-function shadowValueToCSS(shadow: Record<string, unknown>): string {
+export function isStructuredShadowValue(value: unknown): boolean {
+  if (Array.isArray(value)) {
+    return value.length > 0 && value.every((v) => isStructuredShadowValue(v));
+  }
+  if (!value || typeof value !== 'object') return false;
+  const shadow = value as Record<string, unknown>;
+  return (
+    isStructuredDimensionValue(shadow.offsetX) &&
+    isStructuredDimensionValue(shadow.offsetY)
+  );
+}
+
+/**
+ * Convert DTCG 1.0 structured shadow value to CSS string.
+ * Accepts a single shadow composite or an array (multi-shadow, comma-joined).
+ */
+export function shadowValueToCSS(shadowValue: unknown): string {
+  if (Array.isArray(shadowValue)) {
+    return shadowValue.map((s) => shadowValueToCSS(s)).join(', ');
+  }
+  const shadow = (shadowValue ?? {}) as Record<string, unknown>;
   const parts: string[] = [];
 
   // Handle offsetX and offsetY
