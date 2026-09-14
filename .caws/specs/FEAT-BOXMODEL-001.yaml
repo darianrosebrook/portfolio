@@ -73,3 +73,7 @@ evidence:
     status: pass
     evidence_ref: "node scripts/check-contract-tokens.mjs -> 1511 structured tokens verified, exit 0 (25 new box-model entries)"
     recorded_at: "2026-09-14T05:02:44.352Z"
+  - criterion_id: A4
+    status: pass
+    evidence_ref: "boxModel.artifacts.test.mjs per-component slot-default oracle: 26 declarations pinned to pre-adoption literals (visual no-op)"
+    recorded_at: "2026-09-14T05:02:44.848Z"
