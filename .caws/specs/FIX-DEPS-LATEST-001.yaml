@@ -87,5 +87,6 @@ evidence:
     evidence_ref: "npm run typecheck ==> exit 0 (TypeScript 7.0.2 native via node ./node_modules/typescript-7/lib/tsc.js); npm run lint ==> exit 0, 0 errors / 1 pre-existing warning (ESLint 10.10.0 + typescript-eslint on TS 6.0.3, via pnpm patched eslint-plugin-react); npm run lint:css loads the Stylelint 17 config with no unrecognised-rule/schema error and reports 13 errors, down from the 137 baseline"
     recorded_at: "2026-09-14T16:37:38.423Z"
   - criterion_id: A3
-    status: unchecked
-    recorded_at: "2026-09-14T16:41:10.531Z"
+    status: pass
+    evidence_ref: "npm test ==> exit 0, Test Files 201 passed, 2003 passed / 13 expected fail / 2 skipped (2018) after merging main; npm run build ==> exit 0, all static pages emitted; token artifacts restored to committed content with component.* retained (68 occurrences) and only Prettier 3.9 line wrapping applied to types/designTokens.ts (commit 0af5af1a); ui/designTokens/designTokens.json unmodified"
+    recorded_at: "2026-09-14T16:42:23.862Z"
