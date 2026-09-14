@@ -78,3 +78,7 @@ evidence:
     status: pass
     evidence_ref: "pnpm outdated: only 'typescript 6.0.3 -> 7.0.2' (the approved side-by-side hold; TS 7 native compiler supplied by the typescript-7 alias) and deprecated @types/hls.js stub remain; ls package-lock.json yarn.lock npm-shrinkwrap.json => No such file"
     recorded_at: "2026-09-14T16:37:37.935Z"
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "npm run typecheck ==> exit 0 (TypeScript 7.0.2 native via node ./node_modules/typescript-7/lib/tsc.js); npm run lint ==> exit 0, 0 errors / 1 pre-existing warning (ESLint 10.10.0 + typescript-eslint on TS 6.0.3, via pnpm patched eslint-plugin-react); npm run lint:css loads the Stylelint 17 config with no unrecognised-rule/schema error and reports 13 errors, down from the 137 baseline"
+    recorded_at: "2026-09-14T16:37:38.423Z"
