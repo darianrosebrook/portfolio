@@ -8,12 +8,15 @@ updated_at: '2026-09-14T04:47:34.545Z'
 created_by_session: 'session-e2bc87a4-6cfa-4ab7-a591-d5f2231c694f'
 blast_radius:
   modules:
-    - 'TODO: list one or more modules this spec touches.'
+    - 'ui/primitives: new hand-authored box-model slot primitive stylesheet'
+    - 'ui/components: reference adoption in Button/Card/Input/Field/Dialog (css consumers + variant slot re-declarations + tokens.json boxModel groups + contract box-model entries)'
+    - 'utils/designTokens/generators/generateCSSTokens.mjs: reserved boxModel group maps to shared --ds-box-model-* slot names'
+    - 'scripts/check-contract-tokens.mjs: box-model.* contract name mapping to shared slot vars'
+    - 'docs/CSS-MIGRATION-PLAYBOOK.md: box-model adoption pattern'
   data_migration: false
 operational_rollback_slo: 5m
 scope:
   in:
-    - 'TODO: list the file(s) or directories this spec authorizes.'
     - ui/components
     - ui/primitives
     - utils/designTokens
@@ -22,12 +25,32 @@ scope:
     - docs/CSS-MIGRATION-PLAYBOOK.md
   out: []
 invariants:
-  - 'TODO: describe one invariant this spec guarantees.'
+  - 'Default-theme rendered layout of migrated components is byte-equivalent at the computed-value level: every slot default chain terminates in the same final literal the component rendered before adoption.'
+  - 'Slot names are shared and component-agnostic (--ds-box-model-<longhand>); no component-prefixed box-model vars exist.'
+  - 'Only longhand slots exist (padding sides, gap, width/min/max, height/min/max); shorthand/axis slots are deliberately not defined, matching the FSDS auto-consumer set and avoiding the shorthand-vs-longhand cascade confusion FSDS documented.'
+  - 'Component CSS stays hand-authored; the generator only learns the reserved boxModel group naming rule (no forced consumer emission - no codegen rail).'
+  - 'Existing validation tooling keeps passing: contracts:tokens validates box-model entries against tokens.css declarations; tokens:lint sees slot usages declared.'
 acceptance:
   - id: A1
-    given: 'TODO'
-    when: 'TODO'
-    then: 'TODO'
+    given: 'a component tokens.json with a reserved boxModel group'
+    when: 'generateCSSTokens emits tokens.css'
+    then: 'boxModel entries emit shared --ds-box-model-<kebab-longhand> declarations scoped to the component attribute with resolved fallback literals, and no other group emits shared names'
+  - id: A2
+    given: 'the migrated components (Button, Card, Input, Field, Dialog)'
+    when: 'their css is read'
+    then: 'layout declarations consume the slots (var(--ds-box-model-*)), variant classes re-declare slots at higher specificity, and a consumer override of a slot on the component element wins over the component default'
+  - id: A3
+    given: 'contract box-model.* entries for migrated components'
+    when: 'node scripts/check-contract-tokens.mjs runs'
+    then: 'box-model names map to --ds-box-model-* declarations in tokens.css and fallback parity holds; exit 0'
+  - id: A4
+    given: 'the pre-adoption computed layout values captured for the five components'
+    when: 'tokens.css and component css are regenerated/edited'
+    then: 'every slot default chain terminates in the identical final literal (visual no-op by construction), asserted by test/unit/designTokens/boxModel.artifacts.test.mjs'
+  - id: A5
+    given: 'the full validation battery'
+    when: 'npm test, tokens:lint, styles:tokens, contracts:*, typecheck, lint run'
+    then: 'all exit 0 with no new failures'
 non_functional: {}
 contracts:
   - name: 'box-model-slot-api'
