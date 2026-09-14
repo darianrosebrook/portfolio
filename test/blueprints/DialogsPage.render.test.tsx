@@ -65,7 +65,7 @@ describe('Dialogs & Overlay Patterns page', () => {
     for (const s of [
       'Dialog.contract.json',
       '"role": "dialog"',
-      'focus returns to the trigger',
+      'focus returns to the invoking trigger',
       'medium2 + soft.enter',
       'delay.medium',
       'elevation.depth',
