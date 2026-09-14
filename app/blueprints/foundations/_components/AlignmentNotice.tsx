@@ -25,15 +25,6 @@ export function AlignmentNotice({ governance }: AlignmentNoticeProps) {
       role="alert"
       aria-live="polite"
     >
-      <div className={styles.icon}>
-        {isDeprecated ? (
-          <span aria-hidden="true">⚠️</span>
-        ) : needsReviewStatus ? (
-          <span aria-hidden="true">⏰</span>
-        ) : (
-          <span aria-hidden="true">✅</span>
-        )}
-      </div>
       <div className={styles.content}>
         <h3 className={styles.title}>
           {isDeprecated
