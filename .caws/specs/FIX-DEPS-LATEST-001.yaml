@@ -30,7 +30,9 @@ scope:
     - 'context/'
   out: []
 invariants:
-  - 'TODO: describe one invariant this spec guarantees.'
+  - 'No package-lock.json or yarn.lock is introduced; pnpm-lock.yaml remains the single lockfile authority'
+  - 'Every dependency version in package.json is an exact published release resolvable from the configured registries, with no git: or file: substitution'
+  - 'The design-token artifacts are produced by the build generator rather than hand-edited, so a fresh build reproduces the committed output'
 acceptance:
   - id: A1
     given: 'The spec implementation is complete.'
