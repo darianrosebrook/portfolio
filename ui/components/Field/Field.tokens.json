@@ -27,6 +27,13 @@
     },
     "spacing": {
       "indicator": "{core.spacing.size.03}"
+    },
+    "boxModel": {
+      "gap": "{semantic.spacing.density.compact.sm}",
+      "paddingBlockStart": "{semantic.spacing.density.compact.sm}",
+      "paddingBlockEnd": "{semantic.spacing.density.compact.sm}",
+      "paddingInlineStart": "{semantic.spacing.density.compact.md}",
+      "paddingInlineEnd": "{semantic.spacing.density.compact.md}"
     }
   }
 }

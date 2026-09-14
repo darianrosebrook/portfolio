@@ -138,6 +138,10 @@
         "enter": "{semantic.motion.interaction.enter.easing}",
         "exit": "{semantic.motion.interaction.exit.easing}"
       }
+    },
+    "boxModel": {
+      "width": "auto",
+      "maxWidth": "none"
     }
   }
 }

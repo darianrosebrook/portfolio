@@ -1,7 +1,8 @@
+@import '../../primitives/boxModel.css';
 @import './Button.tokens.css';
 
 /*
- * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Migrated to the QDS-style pattern per CSS-MIGRATION-PLAYBOOK.md.
  * Scoped to [data-ds-component="Button"] on the root element. Class names
  * inside are plain semantic names (.button, .primary, .small, .spinner)
  * — no CSS Modules hashing. The data-attribute + class composite selector
@@ -12,11 +13,16 @@
  * specificity. A layered rule loses against unlayered ones regardless
  * of selector weight, so layering here would let the reset zero out
  * the button's padding/min-height.
+ *
+ * Box-model adoption: layout declarations consume the shared
+ * --ds-box-model-* slot pool (defaults declared in Button.tokens.css from
+ * Button.tokens.json's boxModel group). Size variants re-declare slots;
+ * consumer overrides on the element win over everything.
  */
 [data-ds-component='Button'] {
   &.button {
     display: inline-flex;
-    gap: var(--ds-button-size-gap-default);
+    gap: var(--ds-box-model-gap);
     justify-content: center;
     align-items: center;
 
@@ -24,12 +30,14 @@
        default align-items: stretch — buttons should size to their own
        min-height / content, not grow to match a taller sibling. */
     align-self: center;
-    width: fit-content;
-    min-width: var(--ds-button-size-min-medium);
-    min-height: var(--ds-button-size-min-medium);
+    width: var(--ds-box-model-width);
+    min-width: var(--ds-box-model-min-width);
+    min-height: var(--ds-box-model-min-height);
     margin: 0;
-    padding: var(--ds-button-size-padding-small)
-      var(--ds-button-size-padding-small);
+    padding-inline: var(--ds-box-model-padding-inline-start)
+      var(--ds-box-model-padding-inline-end);
+    padding-block: var(--ds-box-model-padding-block-start)
+      var(--ds-box-model-padding-block-end);
     background: none;
     background-color: var(--ds-button-color-background-default);
     border: none;
@@ -79,33 +87,38 @@
     }
 
     &.small {
-      gap: var(--ds-button-size-gap-small, 0.5rem);
-      min-width: var(--ds-button-size-min-small);
-      min-height: var(--ds-button-size-min-small);
-      padding: var(
-        --ds-button-size-padding-small,
-        var(--ds-button-size-gap-small)
-      );
+      --ds-box-model-gap: var(--ds-button-size-gap-small);
+      --ds-box-model-min-width: var(--ds-button-size-min-small);
+      --ds-box-model-min-height: var(--ds-button-size-min-small);
+      --ds-box-model-padding-block-start: var(--ds-button-size-padding-small);
+      --ds-box-model-padding-block-end: var(--ds-button-size-padding-small);
+      --ds-box-model-padding-inline-start: var(--ds-button-size-padding-small);
+      --ds-box-model-padding-inline-end: var(--ds-button-size-padding-small);
+
       font-size: var(--ds-button-text-size-small);
     }
 
     &.medium {
-      gap: var(--ds-button-size-gap-default);
-      min-width: var(--ds-button-size-min-medium);
-      min-height: var(--ds-button-size-min-medium);
-      padding: var(--ds-button-size-padding-small)
-        var(--ds-button-size-padding-large);
+      --ds-box-model-gap: var(--ds-button-size-gap-default);
+      --ds-box-model-min-width: var(--ds-button-size-min-medium);
+      --ds-box-model-min-height: var(--ds-button-size-min-medium);
+      --ds-box-model-padding-block-start: var(--ds-button-size-padding-small);
+      --ds-box-model-padding-block-end: var(--ds-button-size-padding-small);
+      --ds-box-model-padding-inline-start: var(--ds-button-size-padding-large);
+      --ds-box-model-padding-inline-end: var(--ds-button-size-padding-large);
+
       font-size: var(--ds-button-text-size-medium);
     }
 
     &.large {
-      gap: var(--ds-button-size-gap-large, 0.75rem);
-      min-width: var(--ds-button-size-min-large);
-      min-height: var(--ds-button-size-min-large);
-      padding: var(
-        --ds-button-size-padding-large,
-        var(--ds-button-size-gap-large)
-      );
+      --ds-box-model-gap: var(--ds-button-size-gap-large);
+      --ds-box-model-min-width: var(--ds-button-size-min-large);
+      --ds-box-model-min-height: var(--ds-button-size-min-large);
+      --ds-box-model-padding-block-start: var(--ds-button-size-padding-large);
+      --ds-box-model-padding-block-end: var(--ds-button-size-padding-large);
+      --ds-box-model-padding-inline-start: var(--ds-button-size-padding-large);
+      --ds-box-model-padding-inline-end: var(--ds-button-size-padding-large);
+
       font-size: var(--ds-button-text-size-large);
     }
 
@@ -118,25 +131,26 @@
      * non-text content (icon, avatar, asChild trigger, etc.).
      */
     &:has(> *):not(:has(> .label), :has(> .spinner)) {
-      min-width: var(--ds-button-size-min-medium);
+      --ds-box-model-padding-block-start: var(--ds-button-size-padding-small);
+      --ds-box-model-padding-block-end: var(--ds-button-size-padding-small);
+      --ds-box-model-padding-inline-start: var(--ds-button-size-padding-small);
+      --ds-box-model-padding-inline-end: var(--ds-button-size-padding-small);
+
       aspect-ratio: 1;
-      padding: var(--ds-button-size-padding-small);
     }
 
     &.small:has(> *):not(:has(> .label), :has(> .spinner)) {
-      min-width: var(--ds-button-size-min-small);
-      padding: var(
-        --ds-button-size-padding-small,
-        var(--ds-button-size-gap-small)
-      );
+      --ds-box-model-padding-block-start: var(--ds-button-size-padding-small);
+      --ds-box-model-padding-block-end: var(--ds-button-size-padding-small);
+      --ds-box-model-padding-inline-start: var(--ds-button-size-padding-small);
+      --ds-box-model-padding-inline-end: var(--ds-button-size-padding-small);
     }
 
     &.large:has(> *):not(:has(> .label), :has(> .spinner)) {
-      min-width: var(--ds-button-size-min-large);
-      padding: var(
-        --ds-button-size-padding-large,
-        var(--ds-button-size-gap-large)
-      );
+      --ds-box-model-padding-block-start: var(--ds-button-size-padding-large);
+      --ds-box-model-padding-block-end: var(--ds-button-size-padding-large);
+      --ds-box-model-padding-inline-start: var(--ds-button-size-padding-large);
+      --ds-box-model-padding-inline-end: var(--ds-button-size-padding-large);
     }
 
     &.primary {

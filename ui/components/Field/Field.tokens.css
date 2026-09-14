@@ -28,6 +28,13 @@
   /* === Spacing Tokens === */
   --ds-field-spacing-indicator: var(--core-spacing-size-03, 4px);
 
+  /* === BoxModel Tokens === */
+  --ds-box-model-gap: var(--semantic-spacing-density-compact-sm, 8px);
+  --ds-box-model-padding-block-start: var(--semantic-spacing-density-compact-sm, 8px);
+  --ds-box-model-padding-block-end: var(--semantic-spacing-density-compact-sm, 8px);
+  --ds-box-model-padding-inline-start: var(--semantic-spacing-density-compact-md, 12px);
+  --ds-box-model-padding-inline-end: var(--semantic-spacing-density-compact-md, 12px);
+
   /* === Other Tokens === */
   --ds-field-radius: var(--semantic-shape-control-radius-default, 8px);
 }

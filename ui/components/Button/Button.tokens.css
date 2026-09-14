@@ -106,4 +106,14 @@
   --ds-button-focus-outline-width: var(--core-shape-border-width-thick, 2px);
   --ds-button-focus-outline-offset: var(--core-spacing-size-02, 2px);
   --ds-button-focus-outline-color: var(--semantic-color-border-accent, #d9292b);
+
+  /* === BoxModel Tokens === */
+  --ds-box-model-padding-block-start: var(--core-spacing-size-03, 4px);
+  --ds-box-model-padding-block-end: var(--core-spacing-size-03, 4px);
+  --ds-box-model-padding-inline-start: var(--core-spacing-size-03, 4px);
+  --ds-box-model-padding-inline-end: var(--core-spacing-size-03, 4px);
+  --ds-box-model-gap: var(--core-spacing-size-04, 8px);
+  --ds-box-model-width: fit-content;
+  --ds-box-model-min-width: var(--semantic-control-size-md-height, 32px);
+  --ds-box-model-min-height: var(--semantic-control-size-md-height, 32px);
 }

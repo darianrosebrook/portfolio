@@ -79,6 +79,12 @@
         "heading": "{semantic.typography.lineHeight.heading}",
         "normal": "{semantic.typography.lineHeight.normal}"
       }
+    },
+    "boxModel": {
+      "paddingBlockStart": "{core.spacing.size.06}",
+      "paddingBlockEnd": "{core.spacing.size.06}",
+      "paddingInlineStart": "{core.spacing.size.06}",
+      "paddingInlineEnd": "{core.spacing.size.06}"
     }
   }
 }

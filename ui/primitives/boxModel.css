@@ -1,0 +1,41 @@
+/**
+ * Box-model slot primitive — the shared layout override surface for
+ * portfolio components, adopted from the FSDS design system's box-model
+ * primitive (packages/ds-react/src/primitives/box-model.css) without its
+ * codegen rail.
+ *
+ * Every component that adopts the pattern declares defaults for these slots
+ * in its <Component>.tokens.json `boxModel` group (emitted into
+ * <Component>.tokens.css as --ds-box-model-<slot> declarations scoped to
+ * [data-ds-component="<Component>"]) and consumes them in its hand-written
+ * CSS. A consumer overrides layout by setting a slot on the component
+ * element (inline style or any same-element rule), which beats the
+ * scope-level default declaration; variant classes re-declare slots at
+ * higher specificity.
+ *
+ * The reset declares every slot as `initial` on the component hook so a slot
+ * with no component default resolves var() to its fallback instead of
+ * inheriting a stray value. `initial` on a custom property computes to the
+ * guaranteed-invalid value, which is exactly that.
+ *
+ * Longhand-only by design: no shorthand or axis slots (padding,
+ * padding-block, padding-inline), matching the FSDS auto-consumer set and
+ * avoiding the shorthand-vs-longhand cascade confusion documented there.
+ * This file is intentionally unlayered — see any component CSS header for
+ * the reset-specificity rationale. :where() keeps the reset at zero
+ * specificity so any same-element slot declaration wins.
+ */
+
+:where([data-ds-component]) {
+  --ds-box-model-padding-block-start: initial;
+  --ds-box-model-padding-block-end: initial;
+  --ds-box-model-padding-inline-start: initial;
+  --ds-box-model-padding-inline-end: initial;
+  --ds-box-model-gap: initial;
+  --ds-box-model-width: initial;
+  --ds-box-model-min-width: initial;
+  --ds-box-model-max-width: initial;
+  --ds-box-model-height: initial;
+  --ds-box-model-min-height: initial;
+  --ds-box-model-max-height: initial;
+}

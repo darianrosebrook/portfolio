@@ -12,18 +12,9 @@
     "validatingIndicator"
   ],
   "variants": {
-    "status": [
-      "idle",
-      "validating",
-      "valid",
-      "invalid"
-    ]
+    "status": ["idle", "validating", "valid", "invalid"]
   },
-  "states": [
-    "default",
-    "focus",
-    "disabled"
-  ],
+  "states": ["default", "focus", "disabled"],
   "slots": {
     "error": {
       "required": false
@@ -109,16 +100,8 @@
   },
   "a11y": {
     "role": "alert",
-    "roles": [
-      "alert",
-      "group",
-      "radiogroup"
-    ],
-    "labeling": [
-      "aria-labelledby",
-      "aria-describedby",
-      "aria-errormessage"
-    ],
+    "roles": ["alert", "group", "radiogroup"],
+    "labeling": ["aria-labelledby", "aria-describedby", "aria-errormessage"],
     "keyboard": [],
     "apgPattern": "alert"
   },
@@ -213,6 +196,36 @@
         "resolvesTo": "core.spacing.size.03",
         "fallback": "4px",
         "layer": "core"
+      },
+      "box-model.gap": {
+        "resolvesTo": "semantic.spacing.density.compact.sm",
+        "fallback": "8px",
+        "property": "gap",
+        "layer": "semantic"
+      },
+      "box-model.padding-block-start": {
+        "resolvesTo": "semantic.spacing.density.compact.sm",
+        "fallback": "8px",
+        "property": "padding-block-start",
+        "layer": "semantic"
+      },
+      "box-model.padding-block-end": {
+        "resolvesTo": "semantic.spacing.density.compact.sm",
+        "fallback": "8px",
+        "property": "padding-block-end",
+        "layer": "semantic"
+      },
+      "box-model.padding-inline-start": {
+        "resolvesTo": "semantic.spacing.density.compact.md",
+        "fallback": "12px",
+        "property": "padding-inline-start",
+        "layer": "semantic"
+      },
+      "box-model.padding-inline-end": {
+        "resolvesTo": "semantic.spacing.density.compact.md",
+        "fallback": "12px",
+        "property": "padding-inline-end",
+        "layer": "semantic"
       }
     },
     "label": {
@@ -245,9 +258,7 @@
     "children": {
       "allowed": true,
       "slot": "children",
-      "accepts": [
-        "ReactNode"
-      ]
+      "accepts": ["ReactNode"]
     }
   }
 }

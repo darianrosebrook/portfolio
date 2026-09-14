@@ -38,6 +38,15 @@ describe('contractTokenToCssVar', () => {
       '--shared-size-gap'
     );
   });
+
+  it('maps box-model.* names to the shared slot pool regardless of prefix', () => {
+    expect(
+      contractTokenToCssVar('box-model.padding-block-start', 'button')
+    ).toBe('--ds-box-model-padding-block-start');
+    expect(contractTokenToCssVar('box-model.min-height', 'dialog')).toBe(
+      '--ds-box-model-min-height'
+    );
+  });
 });
 
 describe('parseEmittedVars', () => {

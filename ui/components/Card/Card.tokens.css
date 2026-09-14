@@ -47,4 +47,10 @@
   /* === Typography Tokens === */
   --ds-card-typography-line-height-heading: var(--semantic-typography-line-height-heading, 1);
   --ds-card-typography-line-height-normal: var(--semantic-typography-line-height-normal, 1.5);
+
+  /* === BoxModel Tokens === */
+  --ds-box-model-padding-block-start: var(--core-spacing-size-06, 16px);
+  --ds-box-model-padding-block-end: var(--core-spacing-size-06, 16px);
+  --ds-box-model-padding-inline-start: var(--core-spacing-size-06, 16px);
+  --ds-box-model-padding-inline-end: var(--core-spacing-size-06, 16px);
 }

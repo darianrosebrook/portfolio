@@ -13,21 +13,9 @@
     "close"
   ],
   "variants": {
-    "size": [
-      "sm",
-      "md",
-      "lg",
-      "xl",
-      "full"
-    ]
+    "size": ["sm", "md", "lg", "xl", "full"]
   },
-  "states": [
-    "default",
-    "hover",
-    "focus",
-    "active",
-    "leaving"
-  ],
+  "states": ["default", "hover", "focus", "active", "leaving"],
   "slots": {
     "body": {
       "required": false
@@ -47,9 +35,7 @@
   },
   "a11y": {
     "role": "dialog",
-    "labeling": [
-      "aria-label"
-    ],
+    "labeling": ["aria-label"],
     "keyboard": [
       {
         "key": "Enter|Space",
@@ -386,6 +372,14 @@
         "fallback": "cubic-bezier(1, 0, 1, 1)",
         "property": "transition-timing-function",
         "layer": "semantic"
+      },
+      "box-model.width": {
+        "literal": "auto",
+        "property": "width"
+      },
+      "box-model.max-width": {
+        "literal": "none",
+        "property": "max-width"
       }
     },
     "body": {
@@ -629,23 +623,17 @@
     "transitions": [
       {
         "name": "open",
-        "trigger": "openness=closed→opening",
+        "trigger": "openness=closed\u2192opening",
         "phase": "enter",
-        "properties": [
-          "opacity",
-          "transform"
-        ],
+        "properties": ["opacity", "transform"],
         "duration": "dialog.motion.duration.enter",
         "easing": "dialog.motion.easing.enter"
       },
       {
         "name": "close",
-        "trigger": "openness=open→closing",
+        "trigger": "openness=open\u2192closing",
         "phase": "exit",
-        "properties": [
-          "opacity",
-          "transform"
-        ],
+        "properties": ["opacity", "transform"],
         "duration": "dialog.motion.duration.exit",
         "easing": "dialog.motion.easing.exit"
       }
@@ -692,7 +680,7 @@
       "from": "root",
       "to": "description",
       "attribute": "aria-describedby",
-      "description": "Optional — links the description region so screen readers announce it when the dialog opens."
+      "description": "Optional \u2014 links the description region so screen readers announce it when the dialog opens."
     }
   ],
   "ssr": {
@@ -723,9 +711,7 @@
     "children": {
       "allowed": true,
       "slot": "children",
-      "accepts": [
-        "node-ref"
-      ]
+      "accepts": ["node-ref"]
     }
   }
 }

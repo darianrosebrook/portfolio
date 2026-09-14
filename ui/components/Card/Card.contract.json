@@ -27,12 +27,7 @@
       "complexity"
     ]
   },
-  "states": [
-    "default",
-    "hover",
-    "focus",
-    "active"
-  ],
+  "states": ["default", "hover", "focus", "active"],
   "slots": {
     "actions": {
       "required": false
@@ -287,6 +282,30 @@
         "fallback": "1.5",
         "property": "line-height",
         "layer": "semantic"
+      },
+      "box-model.padding-block-start": {
+        "resolvesTo": "core.spacing.size.06",
+        "fallback": "16px",
+        "property": "padding-block-start",
+        "layer": "core"
+      },
+      "box-model.padding-block-end": {
+        "resolvesTo": "core.spacing.size.06",
+        "fallback": "16px",
+        "property": "padding-block-end",
+        "layer": "core"
+      },
+      "box-model.padding-inline-start": {
+        "resolvesTo": "core.spacing.size.06",
+        "fallback": "16px",
+        "property": "padding-inline-start",
+        "layer": "core"
+      },
+      "box-model.padding-inline-end": {
+        "resolvesTo": "core.spacing.size.06",
+        "fallback": "16px",
+        "property": "padding-inline-end",
+        "layer": "core"
       }
     },
     "badge": {
@@ -408,9 +427,7 @@
     "children": {
       "allowed": true,
       "slot": "children",
-      "accepts": [
-        "ReactNode"
-      ]
+      "accepts": ["ReactNode"]
     }
   }
 }
