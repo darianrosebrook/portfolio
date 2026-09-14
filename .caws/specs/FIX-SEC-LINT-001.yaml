@@ -2,9 +2,11 @@ id: FIX-SEC-LINT-001
 title: 'Clear the remaining browserslist advisories and stop ESLint scanning gitignored build outputs'
 risk_tier: 2
 mode: fix
-lifecycle_state: active
+lifecycle_state: closed
+resolution: completed
+closure_notes: 'Advisories cleared and ESLint build-output ignores landed; full gate passed and main pushed as 864a1562'
 created_at: '2026-09-14T17:53:25.031Z'
-updated_at: '2026-09-14T18:00:11.312Z'
+updated_at: '2026-09-14T18:00:20.890Z'
 created_by_session: 'session-8b0983e6-1c23-4ac6-b881-ba2df50b396e'
 blast_radius:
   modules:
