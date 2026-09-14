@@ -87,3 +87,7 @@ evidence:
     status: pass
     evidence_ref: "grep -c 'semantic-component-[a-z]' app/designTokens.scss -> 0; npm test 169 files 1622 passed"
     recorded_at: "2026-09-14T04:28:27.002Z"
+  - criterion_id: A5
+    status: pass
+    evidence_ref: "npm run validate: contracts 53/53 + traceability + contracts:tokens 1486 + tokens:lint + styles:tokens + typecheck + lint all exit 0; format:check failures pre-exist on base (223 files, 3 since formatted)"
+    recorded_at: "2026-09-14T04:28:27.524Z"
