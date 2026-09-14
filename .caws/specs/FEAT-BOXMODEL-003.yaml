@@ -25,6 +25,10 @@ acceptance:
     given: 'TODO'
     when: 'TODO'
     then: 'TODO'
+  - id: A2
+    given: 'contract box-model.* entries for the batch'
+    when: 'node scripts/check-contract-tokens.mjs runs'
+    then: 'token fidelity exits 0 with 1609 structured tokens verified'
 non_functional: {}
 contracts:
   - name: 'box-model-batch2-noop'
