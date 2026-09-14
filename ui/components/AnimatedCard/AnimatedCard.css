@@ -3,8 +3,9 @@
   --animated-card-motion-content: color 0.3s ease-out;
   --animated-card-motion-overlay: opacity 0.3s ease-out;
   --animated-card-overlay-background: var(--animated-card-overlay-background);
-  will-change: transform, opacity;
+
   cursor: default;
+  will-change: transform, opacity;
 
   &.hoverable {
     cursor: pointer;
@@ -48,13 +49,13 @@
   .cardOverlay {
     position: absolute;
     inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--animated-card-overlay-background);
+    border-radius: var(--radius-md, 8px);
     opacity: 0;
     transition: var(--animated-card-motion-overlay);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--animated-card-overlay-background);
     backdrop-filter: blur(4px);
-    border-radius: var(--radius-md, 8px);
   }
 }

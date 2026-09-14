@@ -40,12 +40,7 @@ Slot.displayName = 'Slot';
 
 export type ButtonSize = 'small' | 'medium' | 'large';
 export type ButtonVariant =
-  | 'primary'
-  | 'secondary'
-  | 'tertiary'
-  | 'ghost'
-  | 'destructive'
-  | 'outline';
+  'primary' | 'secondary' | 'tertiary' | 'ghost' | 'destructive' | 'outline';
 
 interface ButtonBaseProps {
   size?: ButtonSize;

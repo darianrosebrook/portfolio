@@ -84,9 +84,7 @@ export default async function ArticlesPage({
                   article={{
                     ...article,
                     status: article.status as
-                      | 'draft'
-                      | 'published'
-                      | 'archived',
+                      'draft' | 'published' | 'archived',
                   }}
                 />
               ))

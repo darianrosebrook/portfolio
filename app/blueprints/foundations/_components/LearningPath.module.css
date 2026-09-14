@@ -72,7 +72,7 @@
 .pathItem.current .stepNumber {
   background: var(--semantic-color-background-highlight);
   border-color: var(--semantic-color-border-focus);
-  box-shadow: 0 0 0 4px rgba(var(--semantic-color-border-focus-rgb), 0.1);
+  box-shadow: 0 0 0 4px rgb(var(--semantic-color-border-focus-rgb), 0.1);
   color: var(--semantic-color-foreground-primary);
 }
 

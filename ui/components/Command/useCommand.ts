@@ -126,10 +126,16 @@ export function useCommand(options: UseCommandOptions = {}): UseCommandReturn {
       .map(({ item }) => item);
   }, [items, search, shouldFilter, filter]);
 
-  // Reset selected index when filtered items change
-  React.useEffect(() => {
+  // Reset the highlighted item whenever the filtered list changes. Adjusting on
+  // the render that observes the change is the pattern react.dev documents for
+  // state derived from an input, and avoids the cascading render that
+  // react-hooks/set-state-in-effect warns about.
+  const [lastFilteredItems, setLastFilteredItems] =
+    React.useState(filteredItems);
+  if (lastFilteredItems !== filteredItems) {
+    setLastFilteredItems(filteredItems);
     setSelectedIndex(0);
-  }, [filteredItems]);
+  }
 
   const selectItem = React.useCallback(
     (item: CommandItem) => {

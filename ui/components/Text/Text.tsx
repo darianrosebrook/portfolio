@@ -7,13 +7,7 @@ export interface TextProps extends React.HTMLAttributes<HTMLElement> {
   as?: 'p' | 'span' | 'div' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
   /** Typography variant */
   variant?:
-    | 'display'
-    | 'headline'
-    | 'title'
-    | 'body'
-    | 'caption'
-    | 'overline'
-    | 'code';
+    'display' | 'headline' | 'title' | 'body' | 'caption' | 'overline' | 'code';
   /** Size within variant */
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
   /** Font weight */
@@ -22,13 +16,7 @@ export interface TextProps extends React.HTMLAttributes<HTMLElement> {
   align?: 'left' | 'center' | 'right' | 'justify';
   /** Text color variant */
   color?:
-    | 'default'
-    | 'muted'
-    | 'subtle'
-    | 'accent'
-    | 'success'
-    | 'warning'
-    | 'error';
+    'default' | 'muted' | 'subtle' | 'accent' | 'success' | 'warning' | 'error';
   /** Whether text should be truncated */
   truncate?: boolean;
   /** Transform text case */

@@ -149,8 +149,7 @@ function collectTokens(
 
         // Check for theme-specific values in $extensions
         const extensions = value.$extensions as
-          | Record<string, unknown>
-          | undefined;
+          Record<string, unknown> | undefined;
         const hasThemeExtensions =
           extensions &&
           ('design.paths.light' in extensions ||
@@ -637,8 +636,7 @@ export function processBrandTokens(
         // This is a token definition
         const tokenValue = valueObj.$value;
         const extensions = valueObj.$extensions as
-          | Record<string, unknown>
-          | undefined;
+          Record<string, unknown> | undefined;
 
         // Build semantic path (brand tokens override semantic layer)
         const semanticPath = `semantic.${currentPath.join('.')}`;
@@ -839,8 +837,7 @@ export function processDensityTokens(
         // This is a token definition
         const tokenValue = valueObj.$value;
         const extensions = valueObj.$extensions as
-          | Record<string, unknown>
-          | undefined;
+          Record<string, unknown> | undefined;
 
         // Build semantic path (density tokens override semantic layer)
         const semanticPath = `semantic.${currentPath.join('.')}`;

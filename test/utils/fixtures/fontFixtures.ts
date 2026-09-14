@@ -27,9 +27,7 @@ import type {
 } from '@/utils/typeAnatomy/types';
 
 export type FontName =
-  | 'Nohemi-VF.ttf'
-  | 'InterVariable.ttf'
-  | 'Newsreader-VF.ttf';
+  'Nohemi-VF.ttf' | 'InterVariable.ttf' | 'Newsreader-VF.ttf';
 
 export function loadFont(fontName: FontName): Font {
   const fontPath = path.join(process.cwd(), 'public', 'fonts', fontName);

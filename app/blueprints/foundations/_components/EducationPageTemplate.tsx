@@ -28,6 +28,23 @@ interface EducationPageTemplateProps {
   content: FoundationPageContent;
 }
 
+const TRACK_PREFERENCE_KEY = 'foundation_selected_track';
+const TRACK_IDS = ['designer', 'developer', 'cross-functional'];
+
+function subscribeToStoredTrack(onStoreChange: () => void) {
+  window.addEventListener('storage', onStoreChange);
+  return () => window.removeEventListener('storage', onStoreChange);
+}
+
+function readStoredTrack(): TrackId | null {
+  try {
+    const saved = window.localStorage.getItem(TRACK_PREFERENCE_KEY);
+    return saved && TRACK_IDS.includes(saved) ? (saved as TrackId) : null;
+  } catch {
+    return null;
+  }
+}
+
 export function EducationPageTemplate({ content }: EducationPageTemplateProps) {
   useReducedMotion(); // Respect reduced motion preferences
 
@@ -35,18 +52,18 @@ export function EducationPageTemplate({ content }: EducationPageTemplateProps) {
     null
   );
 
-  // Load saved track preference from localStorage
-  React.useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('foundation_selected_track');
-      if (
-        saved &&
-        ['designer', 'developer', 'cross-functional'].includes(saved)
-      ) {
-        setSelectedTrack(saved as TrackId);
-      }
-    }
-  }, []);
+  // The stored preference lives in an external store, so it is read through
+  // useSyncExternalStore with a server snapshot of null. That keeps it derived
+  // (no setState from an effect) and avoids the hydration mismatch a render-time
+  // localStorage read would cause.
+  const storedTrack = React.useSyncExternalStore(
+    subscribeToStoredTrack,
+    readStoredTrack,
+    () => null
+  );
+
+  // An explicit choice wins; otherwise fall back to the stored preference.
+  const activeTrack = selectedTrack ?? storedTrack;
 
   // Track page view on mount
   useEffect(() => {
@@ -121,12 +138,8 @@ export function EducationPageTemplate({ content }: EducationPageTemplateProps) {
       case 'constraints-tradeoffs':
       case 'additional-resources':
         // Get section relevance for selected track
-        const sectionRelevance = selectedTrack
-          ? getSectionRelevance(
-              content.metadata.slug,
-              section.id,
-              selectedTrack
-            )
+        const sectionRelevance = activeTrack
+          ? getSectionRelevance(content.metadata.slug, section.id, activeTrack)
           : null;
 
         return (
@@ -137,9 +150,9 @@ export function EducationPageTemplate({ content }: EducationPageTemplateProps) {
             {section.title && (
               <div className={styles.sectionHeader}>
                 <h2 className={styles.sectionTitle}>{section.title}</h2>
-                {sectionRelevance && selectedTrack && (
+                {sectionRelevance && activeTrack && (
                   <TrackBadge
-                    track={selectedTrack}
+                    track={activeTrack}
                     size="sm"
                     className={styles.sectionTrackBadge}
                   />

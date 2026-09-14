@@ -82,21 +82,22 @@ export function RelatedContentPicker({
     return () => controller.abort();
   }, [slug, contentType, disabled]);
 
-  // Debounced search while typing.
-  useEffect(() => {
-    if (disabled) return;
-    const trimmed = query.trim();
-    if (trimmed.length < 2) {
-      setResults([]);
-      setSearching(false);
-      return;
-    }
+  // Debounced search while typing. Whether a search is active is derived during
+  // render instead of being cleared from the effect body, and the pending flag is
+  // raised inside the timer, so the effect performs no synchronous state update.
+  const trimmedQuery = query.trim();
+  const searchActive = !disabled && trimmedQuery.length >= 2;
+  const shownResults = searchActive ? results : [];
+  const shownSearching = searchActive && searching;
 
-    setSearching(true);
+  useEffect(() => {
+    if (!searchActive) return;
+
     const timer = setTimeout(async () => {
+      setSearching(true);
       try {
         const params = new URLSearchParams({
-          q: trimmed,
+          q: trimmedQuery,
           excludeType: contentType,
           limit: '6',
         });
@@ -114,7 +115,7 @@ export function RelatedContentPicker({
     }, SEARCH_DEBOUNCE_MS);
 
     return () => clearTimeout(timer);
-  }, [query, contentType, excludeId, disabled]);
+  }, [searchActive, trimmedQuery, contentType, excludeId]);
 
   const scheduleSync = useCallback(
     (nextItems: RelatedContentItem[]) => {
@@ -225,19 +226,19 @@ export function RelatedContentPicker({
               type="search"
               value={query}
               placeholder="Search articles and case studies…"
-              aria-busy={searching}
+              aria-busy={shownSearching}
               onChange={(e) => setQuery(e.target.value)}
             />
             {query.trim().length >= 2 && (
               <ul className={styles.results} aria-label="Search results">
-                {searching && (
+                {shownSearching && (
                   <li className={styles.resultEmpty}>Searching…</li>
                 )}
-                {!searching && results.length === 0 && (
+                {!shownSearching && shownResults.length === 0 && (
                   <li className={styles.resultEmpty}>No matches</li>
                 )}
-                {!searching &&
-                  results.map((result) => {
+                {!shownSearching &&
+                  shownResults.map((result) => {
                     const alreadyAdded = items.some(
                       (item) =>
                         item.id === result.id && item.type === result.type

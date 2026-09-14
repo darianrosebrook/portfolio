@@ -284,7 +284,7 @@
   height: 12px;
   margin-top: -6px;
   margin-left: -6px;
-  background: rgba(var(--semantic-color-foreground-accent-rgb), 0.2);
+  background: rgb(var(--semantic-color-foreground-accent-rgb), 0.2);
   border: 2px solid var(--semantic-color-foreground-accent);
   border-radius: 50%;
   pointer-events: none;

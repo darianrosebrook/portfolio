@@ -2,11 +2,7 @@ import type { SupabaseClient } from '@supabase/supabase-js';
 
 export type ContentKind = 'articles' | 'case-studies';
 export type LibraryStatus =
-  | 'all'
-  | 'draft'
-  | 'published'
-  | 'changes'
-  | 'archived';
+  'all' | 'draft' | 'published' | 'changes' | 'archived';
 export type LibrarySort = 'recent' | 'title';
 export type LibrarySearchParams = Record<string, string | string[] | undefined>;
 export interface LibraryFilters {
@@ -39,8 +35,7 @@ export interface LibraryItem extends ContentLibraryRow {
 }
 
 export type LibraryResult =
-  | { ok: true; items: LibraryItem[]; invalidCount: number }
-  | { ok: false };
+  { ok: true; items: LibraryItem[]; invalidCount: number } | { ok: false };
 
 export type LibraryCounts = Record<LibraryStatus, number>;
 

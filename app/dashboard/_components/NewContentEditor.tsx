@@ -118,6 +118,10 @@ function CreationSession({
   const articleRef = useRef(article);
   const controllerRef = useRef<CreationController | null>(null);
   const identityRef = useRef<DraftIdentity | null>(null);
+  // Render-path mirror of identityRef. Refs may not be read while rendering, so
+  // the sidebar and action UI read this instead; the ref stays authoritative for
+  // the async save/publish paths that must not observe a stale render value.
+  const [identity, setIdentity] = useState<DraftIdentity | null>(null);
   const savedFingerprintRef = useRef<string | null>(null);
   const temporarySlugRef = useRef('');
   const mountedRef = useRef(true);
@@ -171,6 +175,13 @@ function CreationSession({
         const recovery = existing ?? parseNewDraftRecovery(raw!, ownerId);
         initial = { ...initial, ...recovery.article };
         identityRef.current = recovery.identity;
+        // Deliberate exception to react-hooks/set-state-in-effect. This effect is
+        // the post-mount reconciliation with browser storage and the draft
+        // controller registry: localStorage is unavailable during SSR, and the
+        // controller/router calls below are imperative, so the restored identity
+        // cannot be derived while rendering without breaking hydration.
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setIdentity(recovery.identity);
         savedFingerprintRef.current = recovery.savedFingerprint;
         const unsaved = draftFingerprint(initial) !== recovery.savedFingerprint;
         setDirty(unsaved);
@@ -208,6 +219,7 @@ function CreationSession({
     const synchronize = () => {
       articleRef.current = controller.article;
       identityRef.current = controller.identity;
+      setIdentity(controller.identity);
       savedFingerprintRef.current = controller.savedFingerprint;
       setArticle(controller.article);
       setDirty(
@@ -397,6 +409,7 @@ function CreationSession({
         })
       );
       identityRef.current = { id: saved.id, slug: saved.slug };
+      setIdentity(identityRef.current);
       articleRef.current = {
         ...articleRef.current,
         status: saved.status,
@@ -471,16 +484,16 @@ function CreationSession({
             />
           </fieldset>
           <RelatedContentPicker
-            slug={identityRef.current?.slug ?? ''}
+            slug={identity?.slug ?? ''}
             contentType={entity === 'articles' ? 'article' : 'case-study'}
-            excludeId={identityRef.current?.id}
-            disabled={!identityRef.current || busy}
+            excludeId={identity?.id}
+            disabled={!identity || busy}
           />
         </>
       }
       actions={
         <>
-          {identityRef.current && (
+          {identity && (
             <Button
               variant="secondary"
               disabled={dirty || busy || saveStatus === 'saving'}

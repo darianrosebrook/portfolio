@@ -30,13 +30,7 @@ export type Decoration = {
 };
 
 export type ControlKind =
-  | 'boolean'
-  | 'select'
-  | 'number'
-  | 'text'
-  | 'color'
-  | 'radio'
-  | 'json';
+  'boolean' | 'select' | 'number' | 'text' | 'color' | 'radio' | 'json';
 
 export type ControlDef<T = unknown> = {
   id: string;

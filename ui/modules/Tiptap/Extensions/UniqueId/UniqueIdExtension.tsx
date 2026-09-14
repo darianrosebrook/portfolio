@@ -91,8 +91,7 @@ export const UniqueIdExtension = Extension.create<UniqueIdOptions>({
           newState.doc.descendants((node, pos) => {
             if (this.options.types.includes(node.type.name)) {
               const currentId = node.attrs[this.options.attributeName] as
-                | string
-                | null;
+                string | null;
               const baseId = this.options.generateId(node);
               const nextCount = (idCounts[baseId] ?? 0) + 1;
               idCounts[baseId] = nextCount;
@@ -179,8 +178,7 @@ export const UniqueIdExtension = Extension.create<UniqueIdOptions>({
     state.doc.descendants((node, pos) => {
       if (this.options.types.includes(node.type.name)) {
         const currentId = node.attrs[this.options.attributeName] as
-          | string
-          | null;
+          string | null;
         const baseId = this.options.generateId(node);
         const nextCount = (idCounts[baseId] ?? 0) + 1;
         idCounts[baseId] = nextCount;

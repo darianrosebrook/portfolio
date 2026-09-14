@@ -93,9 +93,7 @@ export interface SingleShadowValue {
  * Shadow value (single or array)
  */
 export type ShadowValue =
-  | SingleShadowValue
-  | SingleShadowValue[]
-  | TokenReference;
+  SingleShadowValue | SingleShadowValue[] | TokenReference;
 
 /**
  * Typography composite value

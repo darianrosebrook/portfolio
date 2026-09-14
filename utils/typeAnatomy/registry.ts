@@ -1,11 +1,5 @@
 export type FeatureKey =
-  | 'bowl'
-  | 'tittle'
-  | 'eye'
-  | 'crossbar'
-  | 'ear'
-  | 'spur'
-  | 'tail';
+  'bowl' | 'tittle' | 'eye' | 'crossbar' | 'ear' | 'spur' | 'tail';
 
 export const LetterFeatureHints: Record<string, FeatureKey[]> = {
   a: ['bowl'],

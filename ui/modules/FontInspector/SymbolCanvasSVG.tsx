@@ -72,7 +72,6 @@ export const SymbolCanvasSVG: React.FC = () => {
     width: 0,
     height: 0,
   });
-  const [featureZones, setFeatureZones] = useState<FeatureZone[]>([]);
   const [svgRect, setSvgRect] = useState<DOMRect | null>(null);
   const [cursor, setCursor] = useState<{
     x: number;
@@ -231,8 +230,14 @@ export const SymbolCanvasSVG: React.FC = () => {
     }, glyph.id || glyph.name);
   }, [glyph]);
 
-  // Generate SVG elements for each selected feature
-  const featureElements = useMemo(() => {
+  // Generate SVG elements for each selected feature.
+  // Coachmark zones are returned from the same pass instead of being mirrored
+  // into state: the memo previously called setFeatureZones during render, which
+  // is setState-in-render, and the two values are always derived together.
+  const { elements: featureElements, zones: featureZones } = useMemo<{
+    elements: React.ReactElement[];
+    zones: FeatureZone[];
+  }>(() => {
     if (
       !glyph ||
       !fontMetrics ||
@@ -240,7 +245,7 @@ export const SymbolCanvasSVG: React.FC = () => {
       !canvasMetrics ||
       !viewportTransform
     )
-      return [];
+      return { elements: [], zones: [] };
 
     const metricFeatures = new Set([
       'Baseline',
@@ -303,6 +308,23 @@ export const SymbolCanvasSVG: React.FC = () => {
 
       if (instances.length === 0) continue;
 
+      // Geometry can throw for malformed regions, so compute a plain-data plan
+      // under try/catch and construct JSX only afterwards. Building JSX inside a
+      // try block is what react-hooks/error-boundaries rejects.
+      type FeatureRenderPlan =
+        | {
+            kind: 'stroke';
+            idSuffix: string;
+            clipPathId: string;
+            polygonPoints: string;
+          }
+        | { kind: 'enclosed'; idSuffix: string; polygonPoints: string }
+        | { kind: 'shape'; idSuffix: string; shape: FeatureInstance['shape'] }
+        | { kind: 'marker'; screenPos: { x: number; y: number } };
+
+      const plans: FeatureRenderPlan[] = [];
+      let markerLoc: { x: number; y: number } | null = null;
+
       try {
         if (showDetails) {
           // Region-based highlighting per FeatureInstance.
@@ -317,54 +339,21 @@ export const SymbolCanvasSVG: React.FC = () => {
               );
 
               if (inst.region.kind === 'stroke') {
-                // Clip the glyph fill against the polygon.
-                const clipPathId = `clip-${idSuffix}`;
-                elements.push(
-                  <defs key={`defs-${idSuffix}`}>
-                    <clipPath id={clipPathId}>
-                      <polygon points={polygonPoints} />
-                    </clipPath>
-                  </defs>
-                );
-                if (glyphPathData) {
-                  elements.push(
-                    <path
-                      key={`highlight-${idSuffix}`}
-                      d={glyphPathData}
-                      transform={viewportTransform.toSVGTransform()}
-                      fill={colors.highlightBackground}
-                      clipPath={`url(#${clipPathId})`}
-                      opacity={0.85}
-                      aria-label={`${feature.label} highlight`}
-                      aria-hidden={!feature.selected}
-                    />
-                  );
-                }
+                plans.push({
+                  kind: 'stroke',
+                  idSuffix,
+                  clipPathId: `clip-${idSuffix}`,
+                  polygonPoints,
+                });
               } else {
                 // 'enclosed': fill the polygon directly (counters, eyes).
-                elements.push(
-                  <polygon
-                    key={`highlight-${idSuffix}`}
-                    points={polygonPoints}
-                    fill={colors.highlightBackground}
-                    opacity={0.85}
-                    aria-label={`${feature.label} highlight`}
-                    aria-hidden={!feature.selected}
-                  />
-                );
+                plans.push({ kind: 'enclosed', idSuffix, polygonPoints });
               }
             } else {
               // No region — fall back to the existing shape renderer.
               // For point features (apex, vertex, crotch), this produces
               // a small marker recolored to the highlight palette.
-              elements.push(
-                <FeatureShapeRenderer
-                  key={`shape-${idSuffix}`}
-                  shape={inst.shape}
-                  scale={metrics.scale}
-                  colors={colors}
-                />
-              );
+              plans.push({ kind: 'shape', idSuffix, shape: inst.shape });
             }
           }
         } else {
@@ -373,28 +362,10 @@ export const SymbolCanvasSVG: React.FC = () => {
           const inst = instances[0];
           const loc = anchorPointFor(inst);
           if (loc) {
-            const screenPos = viewportTransform.toScreen(loc);
-            elements.push(
-              <circle
-                key={`marker-${featureName}`}
-                cx={screenPos.x}
-                cy={screenPos.y}
-                r={4}
-                fill={colors.anchorFill}
-                stroke={colors.anchorStroke}
-                strokeWidth={1}
-                aria-label={feature.label}
-                aria-hidden={!feature.selected}
-              />
-            );
-            zones.push({
-              featureName,
-              label: feature.label,
-              x: loc.x,
-              y: loc.y,
-              width: 30,
-              height: 30,
-              description: `The ${featureName.toLowerCase()} is a typographic feature of this glyph.`,
+            markerLoc = loc;
+            plans.push({
+              kind: 'marker',
+              screenPos: viewportTransform.toScreen(loc),
             });
           }
         }
@@ -403,11 +374,90 @@ export const SymbolCanvasSVG: React.FC = () => {
           `[SymbolCanvasSVG] Error rendering ${featureName}:`,
           error
         );
+        plans.length = 0;
+        markerLoc = null;
+      }
+
+      for (const plan of plans) {
+        switch (plan.kind) {
+          case 'stroke':
+            // Clip the glyph fill against the polygon.
+            elements.push(
+              <defs key={`defs-${plan.idSuffix}`}>
+                <clipPath id={plan.clipPathId}>
+                  <polygon points={plan.polygonPoints} />
+                </clipPath>
+              </defs>
+            );
+            if (glyphPathData) {
+              elements.push(
+                <path
+                  key={`highlight-${plan.idSuffix}`}
+                  d={glyphPathData}
+                  transform={viewportTransform.toSVGTransform()}
+                  fill={colors.highlightBackground}
+                  clipPath={`url(#${plan.clipPathId})`}
+                  opacity={0.85}
+                  aria-label={`${feature.label} highlight`}
+                  aria-hidden={!feature.selected}
+                />
+              );
+            }
+            break;
+          case 'enclosed':
+            elements.push(
+              <polygon
+                key={`highlight-${plan.idSuffix}`}
+                points={plan.polygonPoints}
+                fill={colors.highlightBackground}
+                opacity={0.85}
+                aria-label={`${feature.label} highlight`}
+                aria-hidden={!feature.selected}
+              />
+            );
+            break;
+          case 'shape':
+            elements.push(
+              <FeatureShapeRenderer
+                key={`shape-${plan.idSuffix}`}
+                shape={plan.shape}
+                scale={metrics.scale}
+                colors={colors}
+              />
+            );
+            break;
+          case 'marker':
+            elements.push(
+              <circle
+                key={`marker-${featureName}`}
+                cx={plan.screenPos.x}
+                cy={plan.screenPos.y}
+                r={4}
+                fill={colors.anchorFill}
+                stroke={colors.anchorStroke}
+                strokeWidth={1}
+                aria-label={feature.label}
+                aria-hidden={!feature.selected}
+              />
+            );
+            break;
+        }
+      }
+
+      if (markerLoc) {
+        zones.push({
+          featureName,
+          label: feature.label,
+          x: markerLoc.x,
+          y: markerLoc.y,
+          width: 30,
+          height: 30,
+          description: `The ${featureName.toLowerCase()} is a typographic feature of this glyph.`,
+        });
       }
     }
 
-    setFeatureZones(zones);
-    return elements;
+    return { elements, zones };
   }, [
     glyph,
     fontMetrics,

@@ -67,7 +67,6 @@ export function TokenPanel({
   filter = [],
   limit = 50,
 }: TokenPanelProps) {
-  const [tokens, setTokens] = React.useState<TokenInfo[]>([]);
   const [isExpanded, setIsExpanded] = React.useState(false);
   const [searchQuery, setSearchQuery] = React.useState('');
   const [copiedToken, setCopiedToken] = React.useState<string | null>(null);
@@ -100,39 +99,58 @@ export function TokenPanel({
     []
   );
 
+  // Tokens supplied as a prop are a pure function of that prop, so they are
+  // derived here rather than copied into state from an effect.
+  const providedTokenList = React.useMemo<TokenInfo[] | null>(() => {
+    if (!providedTokens) return null;
+    return Object.entries(providedTokens).map(([name, value]) => ({
+      name: name.startsWith('--') ? name : `--${name}`,
+      value,
+      category: categorizeToken(name),
+      description: generateTokenDescription(name, value),
+    }));
+  }, [providedTokens]);
+
+  const [domTokens, setDomTokens] = React.useState<TokenInfo[]>([]);
+
+  // Reading tokens out of a live document is an external-system read with no
+  // derive-safe equivalent (the DOM is unavailable during SSR and mutates outside
+  // React), so it stays in an effect. It is deferred past the effect body with a
+  // zero-delay task so the resulting state update is not a synchronous render
+  // inside the effect, which is what react-hooks/set-state-in-effect rejects.
   React.useEffect(() => {
-    if (providedTokens) {
-      const tokenList: TokenInfo[] = Object.entries(providedTokens).map(
-        ([name, value]) => ({
-          name: name.startsWith('--') ? name : `--${name}`,
-          value,
-          category: categorizeToken(name),
-          description: generateTokenDescription(name, value),
-        })
-      );
-      setTokens(tokenList);
-      return;
-    }
+    if (providedTokenList) return;
 
-    // Extract tokens from target window or current window
-    const win = targetWindow || window;
-    try {
-      const extractedTokens = extractTokensFromElement(win);
+    const id = setTimeout(() => {
+      const win = targetWindow || window;
+      try {
+        const extracted = extractTokensFromElement(win);
 
-      // Apply filters if provided
-      const filteredTokens =
-        filter.length > 0
-          ? extractedTokens.filter((token) =>
-              filter.some((f) => token.name.includes(f))
-            )
-          : extractedTokens;
+        // Apply filters if provided
+        const filtered =
+          filter.length > 0
+            ? extracted.filter((token) =>
+                filter.some((f) => token.name.includes(f))
+              )
+            : extracted;
 
-      setTokens(filteredTokens.slice(0, limit));
-    } catch (error) {
-      console.warn('Failed to extract design tokens:', error);
-      setTokens([]);
-    }
-  }, [providedTokens, targetWindow, filter, limit, extractTokensFromElement]);
+        setDomTokens(filtered.slice(0, limit));
+      } catch (error) {
+        console.warn('Failed to extract design tokens:', error);
+        setDomTokens([]);
+      }
+    }, 0);
+
+    return () => clearTimeout(id);
+  }, [
+    providedTokenList,
+    targetWindow,
+    filter,
+    limit,
+    extractTokensFromElement,
+  ]);
+
+  const tokens = providedTokenList ?? domTokens;
 
   const copyToClipboard = React.useCallback(
     async (tokenName: string, _value: string) => {

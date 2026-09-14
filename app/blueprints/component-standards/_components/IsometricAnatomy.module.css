@@ -32,8 +32,8 @@
 .layer {
   transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
   transform: translateY(0);
-  transform-box: fill-box;
   transform-origin: center;
+  transform-box: fill-box;
 }
 
 .isometric:hover .layer,
