@@ -424,6 +424,191 @@ spacious:  12  20  32  40  56  64`}</code>
     ),
   },
   {
+    type: 'constraints-tradeoffs',
+    id: 'spacing-health-metrics',
+    title: 'Spacing System Health Metrics',
+    order: 8.75,
+    content: (
+      <>
+        <p>
+          Spacing health is the most measurable foundation quality—the data is a
+          grep away—and three signals cover the risk:
+        </p>
+
+        <h3>Signal 1: Literal coverage</h3>
+        <ul>
+          <li>
+            <strong>Healthy:</strong> zero literal <code>px</code> paddings,
+            margins, or gaps in component rules; spacing appears only as token
+            references (and tracked fallbacks in scoped token contracts). A
+            regex sweep of <code>ui/components/**/*.css</code> returns nothing
+            but fallback literals.
+          </li>
+          <li>
+            <strong>Warning:</strong> literals cluster by area—usually a legacy
+            feature or an imported design—marking where a migration stalled. The
+            count trends down or the tracking is lying.
+          </li>
+          <li>
+            <strong>Critical:</strong> new components ship with literal spacing;
+            the scale has stopped being the path of least resistance, which is
+            the only property that made it work.
+          </li>
+        </ul>
+
+        <h3>Signal 2: Density reach</h3>
+        <ul>
+          <li>
+            <strong>Healthy:</strong> inter-component gaps resolve through
+            density-mapped semantic tokens, so the tight and spacious modes
+            measurably differ product-wide—a two-minute visual diff between
+            densities shows everything moved together.
+          </li>
+          <li>
+            <strong>Warning:</strong> some surfaces respond to density and some
+            do not; the mode switch produces a patchwork, and each unresponsive
+            island is a hardcoded gap.
+          </li>
+          <li>
+            <strong>Critical:</strong> density is decorative—a switch that
+            changes margins the product never references—meaning the second axis
+            exists in tokens but not in fact.
+          </li>
+        </ul>
+
+        <h3>Signal 3: Floor compliance</h3>
+        <ul>
+          <li>
+            <strong>Healthy:</strong> interactive targets clear{' '}
+            <code>tapTargetMin</code> (44px) at the smallest supported viewport,
+            verified by the e2e bounding-box walk, not by hope.
+          </li>
+          <li>
+            <strong>Warning:</strong> targets pass on primary surfaces but fail
+            in dense contexts (tables, toolbars) where the visual-size/hit-area
+            pattern was skipped.
+          </li>
+          <li>
+            <strong>Critical:</strong> any interactive element below the floor
+            anywhere—this is a shipping defect with a number attached, not a
+            style disagreement.
+          </li>
+        </ul>
+        <p>
+          The pattern across the three: healthy spacing is machine-checkable and
+          checked. When the answers require opening files and squinting, the
+          rhythm has started becoming a palette.
+        </p>
+      </>
+    ),
+  },
+  {
+    type: 'constraints-tradeoffs',
+    id: 'spacing-migration',
+    title: 'Migration Strategy: From Literal Spacing to the Scale',
+    order: 8.9,
+    content: (
+      <>
+        <p>
+          Spacing migrations are the friendliest kind—behavior shifts by a few
+          pixels, never by a category—so the strategy is mechanical and
+          unemotional:
+        </p>
+        <ol>
+          <li>
+            <strong>Inventory the literals:</strong> extract every spacing
+            declaration (padding, margin, gap) with file and line. Dedupe by
+            value; most surfaces discover they use six or seven distinct numbers
+            against an eleven-step scale.
+          </li>
+          <li>
+            <strong>Snap to nearest step:</strong> map each distinct value to
+            its nearest scale step (14px→12, 18px→16, 20px→24). The visual diff
+            of snapping is sub-perceptual by the JND floor—anything within 15%
+            of a step is that step wearing a rounding error.
+          </li>
+          <li>
+            <strong>Route inter-component gaps semantically:</strong> the gaps{' '}
+            <em>between</em> things become <code>semantic spacing</code>{' '}
+            references so density reaches them; the padding <em>inside</em>{' '}
+            things may reference scale tokens directly.
+          </li>
+          <li>
+            <strong>Migrate by surface, highest-traffic first:</strong> each
+            screen&apos;s conversion is an independently revertible commit with
+            a screenshot diff; the six-or-seven numbers make every diff
+            reviewable in minutes.
+          </li>
+          <li>
+            <strong>Turn the sweep on:</strong> add the literal pattern to the
+            per-directory lint as each area cleans, so regression is blocked
+            where cleanup happened rather than everywhere at once.
+          </li>
+        </ol>
+        <pre>
+          <code>{`// The snap map, built in step 2 — replace, keep literal as fallback
+const snap = {
+  '14px': '--core-spacing-size-05',  /* 12px, -14% snapped */
+  '18px': '--core-spacing-size-06',  /* 16px */
+  '20px': '--core-spacing-size-07',  /* 24px, +20% snapped */
+};
+
+for (const file of componentCssFiles) {
+  let css = read(file);
+  for (const [literal, token] of Object.entries(snap)) {
+    css = css.replaceAll(literal, \`var(\${token}, \${literal})\`);
+  }
+  write(file, css); // literals survive as fallbacks; behavior holds
+}`}</code>
+        </pre>
+        <p>
+          Note what the strategy never does: it never introduces new steps to
+          &quot;preserve pixel-perfection.&quot; The scale is the truth; the
+          literals were always approximations of it.
+        </p>
+      </>
+    ),
+  },
+  {
+    type: 'applied-example',
+    id: 'spacing-case-studies',
+    title: 'Real-World Case Studies',
+    order: 8.98,
+    content: (
+      <>
+        <h3>Case 1: The dashboard that wanted to be dense</h3>
+        <p>
+          A data product team requested &quot;20% tighter everything&quot; for
+          their console. The system answer was not a new scale but the existing
+          density axis: semantic gaps already resolved through{' '}
+          <code>spacing.density</code>, so applying <code>compact</code> to the
+          console shell tightened every gap that had gone semantic—and left
+          untouched the two screens that had hardcoded their margins, which is
+          how those screens were finally identified as migration debt. The fix
+          took a data attribute; the finding took the density switch working as
+          designed.
+        </p>
+        <h3>Case 2: The marketing page that broke the rhythm</h3>
+        <p>
+          A launch page shipped with 20px section gaps—off-scale, chosen in a
+          rush. Alone it looked fine; beside the rest of the site, its sections
+          felt subtly cheaper, and nobody could say why until the audit asked{' '}
+          &quot;which step is this?&quot; The repair (24px) took one line; the
+          lesson took the question—off-scale values are perceptible as disorder
+          even when unnameable.
+        </p>
+        <h3>Case 3: The touch-target regression</h3>
+        <p>
+          A redesign squeezed table-row actions to 28px for elegance. The e2e
+          target walk failed at the floor (<code>tapTargetMin</code> 44px), and
+          the &quot;visual 28, hit 44&quot; pseudo-element pattern restored the
+          look without the defect. The floor had been encoded precisely so this
+          argument would end at a number instead of a taste debate.
+        </p>
+      </>
+    ),
+  },
+  {
     type: 'verification-checklist',
     id: 'verification-checklist',
     title: 'Verification Checklist',
@@ -518,6 +703,11 @@ content.assessmentPrompts = [
   {
     question:
       'A designer complains the 11-step scale is limiting and requests a 20px step. What questions decide whether this is a scale gap, a density need, or drift?',
+    type: 'reflection',
+  },
+  {
+    question:
+      'Run the three health signals on a product you touch. Which signal is worst, and what does its worst entry predict users will complain about first?',
     type: 'reflection',
   },
 ];
