@@ -29,10 +29,6 @@
   }
 }
 
-.feedbackIcon {
-  font-size: 1.25rem;
-}
-
 .feedbackLabel {
   @media (width <= 768px) {
     display: none;

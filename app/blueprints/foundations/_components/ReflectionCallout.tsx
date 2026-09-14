@@ -21,9 +21,6 @@ export function ReflectionCallout({
       role="complementary"
       aria-label="Critical reflection prompt"
     >
-      <div className={styles.icon}>
-        {type === 'tradeoff' ? '⚖️' : type === 'application' ? '💡' : '🤔'}
-      </div>
       <div className={styles.content}>
         <h3 className={styles.title}>
           {type === 'tradeoff'

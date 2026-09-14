@@ -22,7 +22,7 @@ A composer for creating collapsible content sections with provider-based orchest
 - **Headless Logic:** Separated state management via `useDetails` hook
 - **Context Coordination:** Optional provider for group behavior (accordion mode)
 
-### 🎯 Eliminated Problems
+### Eliminated Problems
 
 - **Boolean Prop Explosion:** Reduced from 6 boolean props to variant-based API
 - **Scattered Logic:** Centralized orchestration through provider pattern

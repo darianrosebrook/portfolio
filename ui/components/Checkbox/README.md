@@ -23,7 +23,7 @@ A boring, stable, minimal checkbox component for binary state control.
 - **Accessible:** Built-in ARIA support and keyboard interaction
 - **Indeterminate Support:** Handles partial selection states
 
-### 🎯 What This Component Does NOT Do
+### What This Component Does NOT Do
 
 - **No Labels:** Labels belong to Field composer or external components
 - **No Validation:** Validation logic belongs to higher layers

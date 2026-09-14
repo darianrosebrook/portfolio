@@ -247,7 +247,7 @@ export default function SchemaValidationPage() {
         </p>
 
         <pre className={styles.codeBlock}>
-          <code>{`// ⚠️ WARNING: Suspicious number
+          <code>{`// WARNING: Suspicious number
 {
   "spacing": {
     "large": {

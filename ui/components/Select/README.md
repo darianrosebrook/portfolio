@@ -23,7 +23,7 @@ A composer for creating flexible select interfaces with provider-based orchestra
 - **Headless Logic:** Separated state management via `useSelect` hook
 - **Context Coordination:** Provider manages selection state, keyboard navigation, and filtering
 
-### 🎯 Eliminated Problems
+### Eliminated Problems
 
 - **Boolean Prop Explosion:** Reduced from 6+ boolean props to slot-based composition
 - **Monolithic Component:** Split into composable parts (trigger, content, search, options)

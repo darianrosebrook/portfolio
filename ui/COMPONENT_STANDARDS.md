@@ -155,7 +155,7 @@ Validating Modal
 PASS Required file exists: Modal.tsx
 PASS Found useModal.ts (logic separation)
 PASS Found ModalProvider.tsx (context orchestration)
-⚠️ README missing accessibility notes
+WARN README missing accessibility notes
 
 ⸻
 

@@ -21,7 +21,7 @@ function Example() {
         avatar: '/avatars/john.jpg',
       }}
       timestamp="2024-01-15T10:30:00Z"
-      content="Just shipped a new feature! 🚀"
+      content="Just shipped a new feature!"
       stats={{
         likes: 42,
         replies: 8,

@@ -74,7 +74,7 @@ function BasicSwitch() {
   onChange={(e) => setDarkMode(e.target.checked)}
   ariaLabel="Toggle dark mode"
 >
-  <span>🌙</span> Dark mode
+  Dark mode
 </Switch>
 ```
 
