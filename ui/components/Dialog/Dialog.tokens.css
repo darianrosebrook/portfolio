@@ -72,4 +72,8 @@
   --ds-dialog-motion-duration-exit: var(--semantic-motion-interaction-exit-duration, 167ms);
   --ds-dialog-motion-easing-enter: var(--semantic-motion-interaction-enter-easing, cubic-bezier(0, 0, 0.7, 1));
   --ds-dialog-motion-easing-exit: var(--semantic-motion-interaction-exit-easing, cubic-bezier(1, 0, 1, 1));
+
+  /* === BoxModel Tokens === */
+  --ds-box-model-width: auto;
+  --ds-box-model-max-width: none;
 }

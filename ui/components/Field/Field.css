@@ -1,9 +1,18 @@
-@import "./Field.tokens.css";
+@import '../../primitives/boxModel.css';
+@import './Field.tokens.css';
 
-[data-ds-component="Field"] {
+/*
+ * Box-model adoption: the root gap and the control's padding consume the
+ * shared --ds-box-model-* slot pool. Slot defaults are declared on the
+ * [data-ds-component="Field"] scope and inherit down to the native
+ * control element. Container-query and validation-state overrides stay
+ * as direct property declarations (they outrank the slot consumers by
+ * source order/specificity, which is correct for state-driven layout).
+ */
+[data-ds-component='Field'] {
   &.root {
     display: grid;
-    gap: var(--ds-field-gap-y);
+    gap: var(--ds-box-model-gap);
     container-type: inline-size;
   }
 
@@ -13,7 +22,10 @@
   }
 
   .control :is(input, select, textarea) {
-    padding: var(--ds-field-pad-y) var(--ds-field-pad-x);
+    padding-inline: var(--ds-box-model-padding-inline-start)
+      var(--ds-box-model-padding-inline-end);
+    padding-block: var(--ds-box-model-padding-block-start)
+      var(--ds-box-model-padding-block-end);
     background: var(--ds-field-color-bg);
     border: 1px solid var(--ds-field-color-border);
     border-radius: var(--ds-field-radius);
@@ -44,7 +56,7 @@
 }
 
 @supports selector(:scope) {
-  [data-ds-component="Field"] {
+  [data-ds-component='Field'] {
     @scope (&.root) {
       .header {
         color: var(--ds-field-label-color);
@@ -52,7 +64,10 @@
       }
 
       .control :is(input, select, textarea) {
-        padding: var(--ds-field-pad-y) var(--ds-field-pad-x);
+        padding-inline: var(--ds-box-model-padding-inline-start)
+          var(--ds-box-model-padding-inline-end);
+        padding-block: var(--ds-box-model-padding-block-start)
+          var(--ds-box-model-padding-block-end);
         background: var(--ds-field-color-bg);
         border: 1px solid var(--ds-field-color-border);
         border-radius: var(--ds-field-radius);
@@ -63,7 +78,11 @@
       .control :is(input, select, textarea):focus-visible {
         border-color: var(--ds-field-color-focus-border);
         box-shadow: 0 0 0 3px
-          color-mix(in oklab, var(--ds-field-color-focus-border) 30%, transparent);
+          color-mix(
+            in oklab,
+            var(--ds-field-color-focus-border) 30%,
+            transparent
+          );
       }
 
       .meta {
@@ -85,7 +104,7 @@
 }
 
 @supports selector(:has(*)) {
-  [data-ds-component="Field"] {
+  [data-ds-component='Field'] {
     &.root:has([data-status='invalid']) {
       .header {
         color: var(--ds-field-color-invalid-text);
@@ -94,7 +113,11 @@
       .control :is(input, select, textarea) {
         border-color: var(--ds-field-color-invalid-border);
         box-shadow: 0 0 0 2px
-          color-mix(in oklab, var(--ds-field-color-invalid-border) 20%, transparent);
+          color-mix(
+            in oklab,
+            var(--ds-field-color-invalid-border) 20%,
+            transparent
+          );
       }
     }
 
@@ -102,7 +125,11 @@
       .control :is(input, select, textarea) {
         border-color: var(--ds-field-color-valid-border);
         box-shadow: 0 0 0 2px
-          color-mix(in oklab, var(--ds-field-color-valid-border) 20%, transparent);
+          color-mix(
+            in oklab,
+            var(--ds-field-color-valid-border) 20%,
+            transparent
+          );
       }
     }
 
@@ -121,7 +148,7 @@
 }
 
 @supports (container-type: inline-size) {
-  [data-ds-component="Field"] {
+  [data-ds-component='Field'] {
     &.root {
       @container (max-width: 25rem) {
         gap: calc(var(--ds-field-gap-y) * 0.75);
@@ -131,7 +158,8 @@
         }
 
         .control :is(input, select, textarea) {
-          padding: calc(var(--ds-field-pad-y) * 0.75) calc(var(--ds-field-pad-x) * 0.75);
+          padding: calc(var(--ds-field-pad-y) * 0.75)
+            calc(var(--ds-field-pad-x) * 0.75);
         }
 
         .meta {
@@ -148,7 +176,8 @@
         }
 
         .control :is(input, select, textarea) {
-          padding: calc(var(--ds-field-pad-y) * 0.5) calc(var(--ds-field-pad-x) * 0.5);
+          padding: calc(var(--ds-field-pad-y) * 0.5)
+            calc(var(--ds-field-pad-x) * 0.5);
           font-size: calc(var(--ds-field-input-font-size, 1rem) * 0.9);
         }
 
@@ -159,7 +188,8 @@
 
       @container (min-width: 40rem) {
         .control :is(input, select, textarea) {
-          padding: calc(var(--ds-field-pad-y) * 1.25) calc(var(--ds-field-pad-x) * 1.25);
+          padding: calc(var(--ds-field-pad-y) * 1.25)
+            calc(var(--ds-field-pad-x) * 1.25);
         }
 
         .validatingIndicator {
@@ -171,7 +201,7 @@
 }
 
 @media (prefers-contrast: more) {
-  [data-ds-component="Field"] {
+  [data-ds-component='Field'] {
     .control :is(input, select, textarea) {
       border-color: var(--ds-field-color-border-bold);
     }

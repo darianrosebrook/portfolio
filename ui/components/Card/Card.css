@@ -1,26 +1,43 @@
-@import "./Card.tokens.css";
+@import '../../primitives/boxModel.css';
+@import './Card.tokens.css';
 
 /*
  * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
  * Note: a handful of references (--font-weight-*, --font-size-*) are
  * global semantic typography tokens and intentionally not prefixed
  * with --ds-card-. Only component-local vars use the new prefix.
+ *
+ * Box-model adoption: root padding consumes the shared --ds-box-model-*
+ * slot pool; the container query re-declares the slots so consumer
+ * overrides stay supreme over responsive scaling.
  */
-[data-ds-component="Card"] {
+[data-ds-component='Card'] {
   display: flex;
   flex-direction: column;
-  padding: var(--ds-card-size-padding-default);
+  padding-inline: var(--ds-box-model-padding-inline-start)
+    var(--ds-box-model-padding-inline-end);
+  padding-block: var(--ds-box-model-padding-block-start)
+    var(--ds-box-model-padding-block-end);
   background-color: var(--ds-card-color-background-default);
   border-radius: var(--ds-card-size-radius-default);
   color: var(--ds-card-color-foreground-primary);
-  transition: all var(--ds-card-motion-duration)
-    var(--ds-card-motion-easing);
-
+  transition: all var(--ds-card-motion-duration) var(--ds-card-motion-easing);
   contain: layout style paint;
   container-type: inline-size;
 
   @container (max-width: 20rem) {
-    padding: calc(var(--ds-card-size-padding-default) * 0.75);
+    --ds-box-model-padding-block-start: calc(
+      var(--ds-card-size-padding-default) * 0.75
+    );
+    --ds-box-model-padding-block-end: calc(
+      var(--ds-card-size-padding-default) * 0.75
+    );
+    --ds-box-model-padding-inline-start: calc(
+      var(--ds-card-size-padding-default) * 0.75
+    );
+    --ds-box-model-padding-inline-end: calc(
+      var(--ds-card-size-padding-default) * 0.75
+    );
   }
 
   @container (min-width: 40rem) {
@@ -169,7 +186,8 @@
   .badge {
     display: inline-flex;
     align-items: center;
-    padding: var(--ds-card-size-padding-badge-y) var(--ds-card-size-padding-badge-x);
+    padding: var(--ds-card-size-padding-badge-y)
+      var(--ds-card-size-padding-badge-x);
     border-radius: var(--ds-card-size-radius-full);
     font-weight: var(--font-weight-medium);
     font-size: var(--font-size-body-3);

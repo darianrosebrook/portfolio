@@ -15,4 +15,12 @@
 
   /* === Space Tokens === */
   --ds-input-space-inline-default: var(--core-spacing-size-05, 12px);
+
+  /* === BoxModel Tokens === */
+  --ds-box-model-padding-block-start: 0;
+  --ds-box-model-padding-block-end: 0;
+  --ds-box-model-padding-inline-start: var(--core-spacing-size-05, 12px);
+  --ds-box-model-padding-inline-end: var(--core-spacing-size-05, 12px);
+  --ds-box-model-height: var(--semantic-control-size-lg-height, 48px);
+  --ds-box-model-width: 100%;
 }

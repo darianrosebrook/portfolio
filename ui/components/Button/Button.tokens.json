@@ -132,6 +132,16 @@
       "outlineWidth": "{core.shape.border.width.thick}",
       "outlineOffset": "{core.spacing.size.02}",
       "outlineColor": "{semantic.color.border.accent}"
+    },
+    "boxModel": {
+      "paddingBlockStart": "{core.spacing.size.03}",
+      "paddingBlockEnd": "{core.spacing.size.03}",
+      "paddingInlineStart": "{core.spacing.size.03}",
+      "paddingInlineEnd": "{core.spacing.size.03}",
+      "gap": "{core.spacing.size.04}",
+      "width": "fit-content",
+      "minWidth": "{semantic.control.size.md.height}",
+      "minHeight": "{semantic.control.size.md.height}"
     }
   }
 }

@@ -30,6 +30,14 @@
       "inline": {
         "default": "{core.spacing.size.05}"
       }
+    },
+    "boxModel": {
+      "paddingBlockStart": "0",
+      "paddingBlockEnd": "0",
+      "paddingInlineStart": "{core.spacing.size.05}",
+      "paddingInlineEnd": "{core.spacing.size.05}",
+      "height": "{semantic.control.size.lg.height}",
+      "width": "100%"
     }
   }
 }

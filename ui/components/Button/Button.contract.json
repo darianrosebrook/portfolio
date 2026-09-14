@@ -1,17 +1,9 @@
 {
   "name": "Button",
   "layer": "primitive",
-  "anatomy": [
-    "root",
-    "spinner",
-    "loadingText"
-  ],
+  "anatomy": ["root", "spinner", "loadingText"],
   "variants": {
-    "size": [
-      "small",
-      "medium",
-      "large"
-    ],
+    "size": ["small", "medium", "large"],
     "variant": [
       "primary",
       "secondary",
@@ -20,22 +12,10 @@
       "destructive",
       "outline"
     ],
-    "as": [
-      "button"
-    ],
-    "type": [
-      "button",
-      "submit",
-      "reset"
-    ]
+    "as": ["button"],
+    "type": ["button", "submit", "reset"]
   },
-  "states": [
-    "default",
-    "hover",
-    "focus",
-    "active",
-    "disabled"
-  ],
+  "states": ["default", "hover", "focus", "active", "disabled"],
   "slots": {
     "root": {
       "required": true,
@@ -44,10 +24,7 @@
   },
   "a11y": {
     "role": "button",
-    "labeling": [
-      "aria-label",
-      "title"
-    ],
+    "labeling": ["aria-label", "title"],
     "keyboard": [
       {
         "key": "Enter|Space",
@@ -618,6 +595,52 @@
         "resolvesTo": "semantic.color.border.accent",
         "fallback": "#d9292b",
         "layer": "semantic"
+      },
+      "box-model.padding-block-start": {
+        "resolvesTo": "core.spacing.size.03",
+        "fallback": "4px",
+        "property": "padding-block-start",
+        "layer": "core"
+      },
+      "box-model.padding-block-end": {
+        "resolvesTo": "core.spacing.size.03",
+        "fallback": "4px",
+        "property": "padding-block-end",
+        "layer": "core"
+      },
+      "box-model.padding-inline-start": {
+        "resolvesTo": "core.spacing.size.03",
+        "fallback": "4px",
+        "property": "padding-inline-start",
+        "layer": "core"
+      },
+      "box-model.padding-inline-end": {
+        "resolvesTo": "core.spacing.size.03",
+        "fallback": "4px",
+        "property": "padding-inline-end",
+        "layer": "core"
+      },
+      "box-model.gap": {
+        "resolvesTo": "core.spacing.size.04",
+        "fallback": "8px",
+        "property": "gap",
+        "layer": "core"
+      },
+      "box-model.width": {
+        "literal": "fit-content",
+        "property": "width"
+      },
+      "box-model.min-width": {
+        "resolvesTo": "semantic.control.size.md.height",
+        "fallback": "32px",
+        "property": "min-width",
+        "layer": "semantic"
+      },
+      "box-model.min-height": {
+        "resolvesTo": "semantic.control.size.md.height",
+        "fallback": "32px",
+        "property": "min-height",
+        "layer": "semantic"
       }
     },
     "spinner": {
@@ -759,10 +782,7 @@
     "children": {
       "allowed": true,
       "slot": "children",
-      "accepts": [
-        "string",
-        "icon-ref"
-      ]
+      "accepts": ["string", "icon-ref"]
     }
   }
 }

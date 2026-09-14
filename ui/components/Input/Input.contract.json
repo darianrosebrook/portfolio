@@ -1,17 +1,9 @@
 {
   "name": "Input",
   "layer": "primitive",
-  "anatomy": [
-    "root"
-  ],
+  "anatomy": ["root"],
   "variants": {},
-  "states": [
-    "default",
-    "hover",
-    "focus",
-    "disabled",
-    "invalid"
-  ],
+  "states": ["default", "hover", "focus", "disabled", "invalid"],
   "slots": {
     "root": {
       "required": true,
@@ -69,6 +61,36 @@
         "resolvesTo": "core.spacing.size.05",
         "fallback": "12px",
         "layer": "core"
+      },
+      "box-model.padding-block-start": {
+        "literal": "0",
+        "property": "padding-block-start"
+      },
+      "box-model.padding-block-end": {
+        "literal": "0",
+        "property": "padding-block-end"
+      },
+      "box-model.padding-inline-start": {
+        "resolvesTo": "core.spacing.size.05",
+        "fallback": "12px",
+        "property": "padding-inline-start",
+        "layer": "core"
+      },
+      "box-model.padding-inline-end": {
+        "resolvesTo": "core.spacing.size.05",
+        "fallback": "12px",
+        "property": "padding-inline-end",
+        "layer": "core"
+      },
+      "box-model.height": {
+        "resolvesTo": "semantic.control.size.lg.height",
+        "fallback": "48px",
+        "property": "height",
+        "layer": "semantic"
+      },
+      "box-model.width": {
+        "literal": "100%",
+        "property": "width"
       }
     }
   },
@@ -120,19 +142,12 @@
     "validity": {
       "model": "hybrid",
       "invalidProp": "invalid",
-      "ariaAttributes": [
-        "aria-invalid",
-        "aria-required",
-        "aria-describedby"
-      ]
+      "ariaAttributes": ["aria-invalid", "aria-required", "aria-describedby"]
     },
     "labeling": {
       "strategy": "associated-label",
       "required": true,
-      "via": [
-        "aria-labelledby",
-        "aria-label"
-      ]
+      "via": ["aria-labelledby", "aria-label"]
     }
   },
   "description": "Native text input with portfolio-specific styling. Use inside TextField for label and error support.",
