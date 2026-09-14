@@ -8,7 +8,7 @@ updated_at: '2026-09-14T05:06:27.976Z'
 created_by_session: 'session-ee97c70e-5708-43ac-898e-efaca06c09be'
 blast_radius:
   modules:
-    - 'TODO: list one or more modules this spec touches.'
+    - 'app/blueprints/foundations (9 stub pages + shared education template)'
   data_migration: false
 operational_rollback_slo: 5m
 scope:
@@ -28,7 +28,9 @@ scope:
     - types/foundationContent.ts
   out: []
 invariants:
-  - 'TODO: describe one invariant this spec guarantees.'
+  - 'Every filled page renders through the FoundationPage education template with complete FoundationPageContent (metadata, sections, crossReferences, verificationChecklist, assessmentPrompts) — no placeholder ''coming soon'' markup remains on any core-foundations page'
+  - 'Token names, values, and contrasts cited in page content reference the repo''s real generated token system (tokens.css / design-token pipeline), not invented examples'
+  - 'Static export metadata (title, description, OG/Twitter) is preserved or improved via generateFoundationMetadata; every page stays a server component exporting metadata'
 acceptance:
   - id: A1
     given: 'TODO'
