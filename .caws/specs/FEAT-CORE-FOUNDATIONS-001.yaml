@@ -63,3 +63,8 @@ acceptance:
       assessment prompts + cross-references like the gold-standard pages
 non_functional: {}
 contracts: []
+evidence:
+  - criterion_id: A3
+    status: pass
+    evidence_ref: "Color (b77a5724) + Motion (31b29e60) gold pages: npx tsc --noEmit exit 0; eslint clean; vitest test/blueprints 39/39 incl. 16 new assertions; e2e foundationNavigation color+motion all categories pass (32-passed run) incl. JSON-LD via server-rendered scripts (60d6fc6a); every template section type exercised incl. verification-checklist and additional-resources"
+    recorded_at: "2026-09-14T05:46:39.544Z"
