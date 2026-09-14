@@ -28,3 +28,8 @@ acceptance:
     then: 'TODO'
 non_functional: {}
 contracts: []
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "grep -rln CSS-MIGRATION-PLAYBOOK -> 0 hits; npm test 173/1818 green; token fidelity 1609 exit 0; tokens.css regen diff 0"
+    recorded_at: "2026-09-14T05:35:18.249Z"
