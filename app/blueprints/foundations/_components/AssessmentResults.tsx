@@ -94,7 +94,7 @@ export function AssessmentResults({ result, rubric }: AssessmentResultsProps) {
 
         {result.feedback.improvements.length > 0 && (
           <div className={styles.improvements}>
-            <h3>📈 Areas for Improvement</h3>
+            <h3>Areas for Improvement</h3>
             <ul>
               {result.feedback.improvements.map((improvement, index) => (
                 <li key={index}>{improvement}</li>
@@ -104,7 +104,7 @@ export function AssessmentResults({ result, rubric }: AssessmentResultsProps) {
         )}
 
         <div className={styles.nextSteps}>
-          <h3>🎯 Next Steps</h3>
+          <h3>Next Steps</h3>
           <ul>
             {result.feedback.nextSteps.map((step, index) => (
               <li key={index}>{step}</li>

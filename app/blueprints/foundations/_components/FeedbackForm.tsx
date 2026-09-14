@@ -83,7 +83,6 @@ export function FeedbackForm({
         className={styles.feedbackButton}
         aria-label="Provide feedback on this page"
       >
-        <span className={styles.feedbackIcon}>💬</span>
         <span className={styles.feedbackLabel}>Feedback</span>
       </button>
     );

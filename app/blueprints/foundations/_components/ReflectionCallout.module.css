@@ -23,12 +23,6 @@
   }
 }
 
-.icon {
-  flex-shrink: 0;
-  font-size: 1.5rem;
-  line-height: 1;
-}
-
 .content {
   display: flex;
   flex: 1;
