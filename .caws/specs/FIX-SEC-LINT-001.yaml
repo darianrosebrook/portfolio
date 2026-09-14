@@ -45,3 +45,7 @@ evidence:
     status: pass
     evidence_ref: "pnpm audit ==> 'No known vulnerabilities found', exit 0 (was 2 high: GHSA-c83g-rgw3-j3cx, GHSA-73wf-gq98-2v4g on browserslist <=4.28.6); installed browserslist@4.28.9 via the new 'browserslist: ^4.28.7' workspace override; single copy in node_modules/.pnpm"
     recorded_at: "2026-09-14T17:57:12.406Z"
+  - criterion_id: A2
+    status: pass
+    evidence_ref: "With the real 63 MB / 80-chunk .vercel/output copied in from the main checkout, npm run lint ==> exit 0 in real 28.5s (previously the same directory pegged a core for 30+ minutes without completing). Decoy files planted in .vercel/output, coverage, playwright-report, test-results and .next are reported 'File ignored because of a matching ignore pattern'."
+    recorded_at: "2026-09-14T17:57:13.019Z"
