@@ -65,3 +65,7 @@ evidence:
     status: pass
     evidence_ref: "npx vitest run test/unit/designTokens/boxModel.emission.test.mjs (5 tests: shared names, no component prefix, whitelist rejection, eleven-slot pool)"
     recorded_at: "2026-09-14T05:02:43.296Z"
+  - criterion_id: A2
+    status: pass
+    evidence_ref: test/unit/designTokens/boxModel.artifacts.test.mjs consumer/variant assertions + ui/primitives/boxModel.css reset; five components migrated
+    recorded_at: "2026-09-14T05:02:43.822Z"
