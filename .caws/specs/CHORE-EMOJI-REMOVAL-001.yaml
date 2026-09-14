@@ -36,5 +36,6 @@ non_functional: {}
 contracts: []
 evidence:
   - criterion_id: A1
-    status: unchecked
-    recorded_at: "2026-09-14T18:59:24.931Z"
+    status: pass
+    evidence_ref: "commits f19784ca + 10c6096f on chore-emoji-removal-001; grep for check/cross emoji across app/blueprints+ui returns only EmojiExtension.tsx:80-81 (scope.out emoji-picker dataset); AlignmentNotice renders no icon block; tsc --noEmit exit 0; eslint app/blueprints ui exit 0; vitest run 2003 passed/13 expected fail/2 skipped exit 0; caws gates run Overall OK 5/5"
+    recorded_at: "2026-09-14T19:00:37.062Z"
