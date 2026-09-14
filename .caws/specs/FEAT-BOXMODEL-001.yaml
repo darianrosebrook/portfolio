@@ -4,7 +4,7 @@ risk_tier: 2
 mode: feature
 lifecycle_state: draft
 created_at: '2026-09-14T04:47:29.088Z'
-updated_at: '2026-09-14T04:47:29.088Z'
+updated_at: '2026-09-14T04:47:34.545Z'
 created_by_session: 'session-e2bc87a4-6cfa-4ab7-a591-d5f2231c694f'
 blast_radius:
   modules:
@@ -14,6 +14,12 @@ operational_rollback_slo: 5m
 scope:
   in:
     - 'TODO: list the file(s) or directories this spec authorizes.'
+    - ui/components
+    - ui/primitives
+    - utils/designTokens
+    - scripts/check-contract-tokens.mjs
+    - test/unit
+    - docs/CSS-MIGRATION-PLAYBOOK.md
   out: []
 invariants:
   - 'TODO: describe one invariant this spec guarantees.'
