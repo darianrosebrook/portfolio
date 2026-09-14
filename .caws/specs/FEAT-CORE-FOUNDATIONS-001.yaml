@@ -52,5 +52,11 @@ acceptance:
     then: >-
       typecheck, lint, and vitest pass with the pages included, and each page
       exercises the full section vocabulary of the education template
+  - id: A4
+    given: 'the remaining seven core-foundations pages'
+    when: 'filled to the derived standard'
+    then: >-
+      each passes typecheck/lint/test and provides verification checklist +
+      assessment prompts + cross-references like the gold-standard pages
 non_functional: {}
 contracts: []
