@@ -40,3 +40,8 @@ non_functional: {}
 contracts:
   - name: 'build-toolchain'
     type: behavior
+evidence:
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "pnpm audit ==> 'No known vulnerabilities found', exit 0 (was 2 high: GHSA-c83g-rgw3-j3cx, GHSA-73wf-gq98-2v4g on browserslist <=4.28.6); installed browserslist@4.28.9 via the new 'browserslist: ^4.28.7' workspace override; single copy in node_modules/.pnpm"
+    recorded_at: "2026-09-14T17:57:12.406Z"
