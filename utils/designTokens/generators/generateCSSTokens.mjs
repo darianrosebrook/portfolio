@@ -325,9 +325,58 @@ function flattenTokens(obj, prefixSegments) {
 }
 
 /**
+ * The box-model slot pool: the shared, component-agnostic layout override
+ * surface (adopted from the FSDS design system's box-model primitive).
+ * Component tokens.json files declare defaults for these slots under a
+ * reserved top-level `boxModel` group; the generator emits them as shared
+ * `--ds-box-model-<slot>` custom properties instead of component-prefixed
+ * ones, so consumers can override layout uniformly across components.
+ *
+ * Longhand-only by design: shorthand and axis slots (padding, padding-block,
+ * padding-inline) are deliberately excluded to avoid the
+ * shorthand-vs-longhand cascade confusion the FSDS implementation documents.
+ */
+const BOX_MODEL_SLOTS = [
+  'padding-block-start',
+  'padding-block-end',
+  'padding-inline-start',
+  'padding-inline-end',
+  'gap',
+  'width',
+  'min-width',
+  'max-width',
+  'height',
+  'min-height',
+  'max-height',
+];
+
+const BOX_MODEL_NAME_PREFIX = 'box-model-';
+
+/**
+ * Map a flattened token name to its emitted custom-property name.
+ * Component tokens get the `--ds-<component>-` prefix; names under the
+ * reserved `boxModel` group (flattened to `box-model-<slot>`) map to the
+ * shared slot pool. Unknown slot names fail loud.
+ */
+function cssVarNameFor(cssVarPrefix, name) {
+  if (name.startsWith(BOX_MODEL_NAME_PREFIX)) {
+    const slot = name.slice(BOX_MODEL_NAME_PREFIX.length);
+    if (!BOX_MODEL_SLOTS.includes(slot)) {
+      throw new Error(
+        `Unknown box-model slot "${slot}". Valid slots: ${BOX_MODEL_SLOTS.join(', ')}.`
+      );
+    }
+    return `--ds-box-model-${slot}`;
+  }
+  return `--ds-${cssVarPrefix}-${name}`;
+}
+
+/**
  * Build CSS content for a component's tokens — emits an unlayered rule
  * scoped to `[data-ds-component="Pascal"]`. Custom properties are
- * prefixed with `--ds-<component>-` per the migration playbook.
+ * prefixed with `--ds-<component>-` per the migration playbook, except
+ * the reserved boxModel group which emits shared `--ds-box-model-*`
+ * slot names.
  *
  * Intentionally NOT wrapped in `@layer components`. Unlayered rules
  * beat the unlayered CSS reset (`* { padding: 0; min-height: 0; }`)
@@ -356,7 +405,7 @@ function buildCssForComponent({
 
       Object.entries(groupData.tokens).forEach(([name, raw]) => {
         body.push(
-          `  --ds-${cssVarPrefix}-${name}: ${refToCssVar(raw, resolveFallback)};`
+          `  ${cssVarNameFor(cssVarPrefix, name)}: ${refToCssVar(raw, resolveFallback)};`
         );
       });
 
@@ -385,13 +434,13 @@ function buildCssForComponent({
     }
     Object.entries(topLevelTokens).forEach(([name, raw]) => {
       body.push(
-        `  --ds-${cssVarPrefix}-${name}: ${refToCssVar(raw, resolveFallback)};`
+        `  ${cssVarNameFor(cssVarPrefix, name)}: ${refToCssVar(raw, resolveFallback)};`
       );
     });
   } else if (Object.keys(groups).length === 0) {
     Object.entries(flat).forEach(([name, raw]) => {
       body.push(
-        `  --ds-${cssVarPrefix}-${name}: ${refToCssVar(raw, resolveFallback)};`
+        `  ${cssVarNameFor(cssVarPrefix, name)}: ${refToCssVar(raw, resolveFallback)};`
       );
     });
   }
@@ -520,6 +569,8 @@ export {
   buildFallbackResolver,
   buildCssForComponent,
   flattenTokens,
+  cssVarNameFor,
+  BOX_MODEL_SLOTS,
 };
 
 function capitalize(str) {

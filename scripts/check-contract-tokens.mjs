@@ -70,6 +70,9 @@ function dotPathToCssVar(dotPath) {
  */
 function contractTokenToCssVar(tokenName, prefix) {
   const kebab = kebabSegments(tokenName);
+  if (kebab.startsWith('box-model-')) {
+    return '--ds-' + kebab; // shared slot pool, component-agnostic
+  }
   const kebabPrefix = prefix ? kebabSegments(prefix) : null;
   if (kebabPrefix && kebab.startsWith(kebabPrefix + '-')) {
     return '--ds-' + kebab; // prefix is already part of the path
