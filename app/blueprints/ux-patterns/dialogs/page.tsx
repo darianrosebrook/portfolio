@@ -342,10 +342,10 @@ user's context does this surface need to take?`}</code>
         </p>
         <h3>4. Depth disagreement</h3>
         <pre>
-          <code>{`/* ❌ Level-3 shadow under a level-1 bar */
+          <code>{`/* Bad: Level-3 shadow under a level-1 bar */
 .modal { z-index: 10; box-shadow: var(--core-elevation-level-3); }
 .nav   { z-index: 100; }
-/* ✅ Depth numbers order with shadow levels */`}</code>
+/* Good: Depth numbers order with shadow levels */`}</code>
         </pre>
         <h3>5. Motion without exit</h3>
         <p>

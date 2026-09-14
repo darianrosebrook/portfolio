@@ -355,16 +355,16 @@ function Dialog({ onClose }) {
       <>
         <h3>1. Divs with event handlers</h3>
         <pre>
-          <code>{`// ❌ Invisible to the tree: no role, no name, no keys
+          <code>{`// Bad — Invisible to the tree: no role, no name, no keys
 <div onClick={submit}>Submit</div>
-// ✅
+// Good
 <button onClick={submit}>Submit</button>`}</code>
         </pre>
         <h3>2. Outline removed, nothing added</h3>
         <pre>
-          <code>{`/* ❌ Keyboard users lose their cursor */
+          <code>{`/* Bad: Keyboard users lose their cursor */
 .card:focus { outline: none; }
-/* ✅ Never remove without replacing — and the ring token exists */`}</code>
+/* Good: Never remove without replacing — and the ring token exists */`}</code>
         </pre>
         <h3>3. Visual order ≠ DOM order</h3>
         <p>

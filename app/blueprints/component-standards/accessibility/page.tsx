@@ -51,11 +51,11 @@ export default function AccessibilityStandardsPage() {
         <h3>1. Semantic HTML</h3>
         <p>Use semantic HTML elements that convey meaning:</p>
         <pre>
-          <code>{`// ❌ Bad: Generic elements
+          <code>{`// Bad: Generic elements
 <div onClick={handleClick}>Click me</div>
 <span role="button">Submit</span>
 
-// ✅ Good: Semantic elements
+// Good: Semantic elements
 <button onClick={handleClick}>Click me</button>
 <button type="submit">Submit</button>`}</code>
         </pre>
@@ -63,7 +63,7 @@ export default function AccessibilityStandardsPage() {
         <h3>2. Keyboard Navigation</h3>
         <p>All interactive elements must be keyboard accessible:</p>
         <pre>
-          <code>{`// ✅ Good: Keyboard accessible
+          <code>{`// Good: Keyboard accessible
 <button 
   onClick={handleClick}
   onKeyDown={(e) => {
@@ -82,7 +82,7 @@ export default function AccessibilityStandardsPage() {
         <h3>3. ARIA Attributes</h3>
         <p>Use ARIA when HTML semantics aren't sufficient:</p>
         <pre>
-          <code>{`// ✅ Good: ARIA for complex components
+          <code>{`// Good: ARIA for complex components
 <div 
   role="dialog"
   aria-labelledby="dialog-title"
@@ -92,7 +92,7 @@ export default function AccessibilityStandardsPage() {
   <p id="dialog-description">Are you sure you want to continue?</p>
 </div>
 
-// ✅ Good: ARIA for dynamic content
+// Good: ARIA for dynamic content
 <div aria-live="polite" aria-atomic="true">
   {loading ? 'Loading...' : 'Content loaded'}
 </div>`}</code>
@@ -115,13 +115,13 @@ export default function AccessibilityStandardsPage() {
         <h3>5. Focus Management</h3>
         <p>Ensure focus is visible and properly managed:</p>
         <pre>
-          <code>{`// ✅ Good: Visible focus indicator
+          <code>{`// Good: Visible focus indicator
 .button:focus-visible {
   outline: 2px solid var(--semantic-color-border-focus);
   outline-offset: 2px;
 }
 
-// ✅ Good: Focus trapping in modals
+// Good: Focus trapping in modals
 function Modal({ isOpen, onClose, children }) {
   useEffect(() => {
     if (isOpen) {
@@ -221,22 +221,22 @@ it('should have no accessibility violations', async () => {
 
         <h3>1. Missing Labels</h3>
         <pre>
-          <code>{`// ❌ Bad: No label
+          <code>{`// Bad: No label
 <input type="text" />
 
-// ✅ Good: Associated label
+// Good: Associated label
 <label htmlFor="email">Email</label>
 <input id="email" type="email" />`}</code>
         </pre>
 
         <h3>2. Keyboard Traps</h3>
         <pre>
-          <code>{`// ❌ Bad: Focus can't escape
+          <code>{`// Bad: Focus can't escape
 <div onKeyDown={(e) => e.preventDefault()}>
   {/* Focus trapped */}
 </div>
 
-// ✅ Good: Proper focus management
+// Good: Proper focus management
 <div 
   onKeyDown={(e) => {
     if (e.key === 'Escape') {
@@ -250,13 +250,13 @@ it('should have no accessibility violations', async () => {
 
         <h3>3. Insufficient Color Contrast</h3>
         <pre>
-          <code>{`// ❌ Bad: Low contrast
+          <code>{`// Bad: Low contrast
 .button {
   background: #ccc;
   color: #ddd; /* Contrast ratio: 1.2:1 */
 }
 
-// ✅ Good: Sufficient contrast
+// Good: Sufficient contrast
 .button {
   background: #0066cc;
   color: #ffffff; /* Contrast ratio: 4.5:1 */
@@ -265,12 +265,12 @@ it('should have no accessibility violations', async () => {
 
         <h3>4. Missing ARIA Labels</h3>
         <pre>
-          <code>{`// ❌ Bad: No indication of purpose
+          <code>{`// Bad: No indication of purpose
 <button onClick={handleClose}>
   <Icon name="close" />
 </button>
 
-// ✅ Good: Clear label
+// Good: Clear label
 <button 
   onClick={handleClose}
   aria-label="Close dialog"

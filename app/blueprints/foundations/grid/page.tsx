@@ -366,28 +366,28 @@ wide desktop     12        layout.container.xl 1280 >= xl 1440`}</code>
       <>
         <h3>1. Off-grid offsets</h3>
         <pre>
-          <code>{`/* ❌ Half-gutter drift breaks the alignment promise */
+          <code>{`/* Bad: Half-gutter drift breaks the alignment promise */
 .card { margin-left: 8px; }
-/* ✅ On the structure or in a named gutter */`}</code>
+/* Good: On the structure or in a named gutter */`}</code>
         </pre>
         <h3>2. Breakpoint-per-layout grids</h3>
         <pre>
-          <code>{`/* ❌ A new grid definition at every query */
+          <code>{`/* Bad: A new grid definition at every query */
 @media (width >= 900px) { .grid { grid-template-columns: repeat(10, 1fr); } }
-/* ✅ The tokenized steps only; fluid inside */`}</code>
+/* Good: The tokenized steps only; fluid inside */`}</code>
         </pre>
         <h3>3. Sliver columns on small screens</h3>
         <pre>
-          <code>{`/* ❌ 12 columns on a phone */
+          <code>{`/* Bad: 12 columns on a phone */
 .phoneGrid { grid-template-columns: repeat(12, 1fr); }
-/* ✅ Column count steps down with the viewport */
+/* Good: Column count steps down with the viewport */
 .phoneGrid { grid-template-columns: repeat(4, 1fr); }`}</code>
         </pre>
         <h3>4. DOM order diverging from visual order</h3>
         <pre>
-          <code>{`/* ❌ Pretty for eyes, scrambled for screen readers */
+          <code>{`/* Bad: Pretty for eyes, scrambled for screen readers */
 .results { order: 2; } .filters { order: 1; }
-/* ✅ DOM carries reading order; grid placement is styling */`}</code>
+/* Good: DOM carries reading order; grid placement is styling */`}</code>
         </pre>
       </>
     ),

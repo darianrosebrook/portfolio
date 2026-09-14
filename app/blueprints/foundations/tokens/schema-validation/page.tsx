@@ -173,7 +173,7 @@ export default function SchemaValidationPage() {
         </p>
 
         <pre className={styles.codeBlock}>
-          <code>{`// ❌ DETECTED: Circular reference
+          <code>{`// Bad — DETECTED: Circular reference
 {
   "color": {
     "primary": { "$value": "{color.secondary}" },
@@ -189,7 +189,7 @@ export default function SchemaValidationPage() {
         <p>References must point to tokens that exist:</p>
 
         <pre className={styles.codeBlock}>
-          <code>{`// ❌ DETECTED: Missing reference target
+          <code>{`// Bad — DETECTED: Missing reference target
 {
   "foreground": {
     "primary": { "$value": "{core.color.pallete.blue.500}" }
@@ -205,7 +205,7 @@ export default function SchemaValidationPage() {
         <p>References must resolve to compatible types:</p>
 
         <pre className={styles.codeBlock}>
-          <code>{`// ❌ DETECTED: Type mismatch
+          <code>{`// Bad — DETECTED: Type mismatch
 {
   "spacing": {
     "large": {
@@ -226,7 +226,7 @@ export default function SchemaValidationPage() {
         </p>
 
         <pre className={styles.codeBlock}>
-          <code>{`// ❌ DETECTED: Invalid unit
+          <code>{`// Bad — DETECTED: Invalid unit
 {
   "spacing": {
     "medium": {
@@ -277,7 +277,7 @@ export default function SchemaValidationPage() {
   }
 }
 
-// ❌ Invalid: paths must be references or values
+// Bad — Invalid: paths must be references or values
 {
   "$extensions": {
     "design.paths.light": null,  // Invalid
@@ -295,7 +295,7 @@ export default function SchemaValidationPage() {
   }
 }
 
-// ❌ Invalid: malformed calc
+// Bad — Invalid: malformed calc
 {
   "$extensions": {
     "design.calc": "calc({spacing.04} +"  // Unclosed expression
@@ -432,10 +432,10 @@ All validations passed.`}</code>
         </p>
 
         <pre className={styles.codeBlock}>
-          <code>{`// ❌ BAD: Bypassing validation
+          <code>{`// BAD: Bypassing validation
 npm run tokens:build --skip-validation
 
-// ✅ GOOD: Fix the underlying issue
+// GOOD: Fix the underlying issue
 // If validation fails, understand why and fix the token`}</code>
         </pre>
 
@@ -458,12 +458,12 @@ npm run tokens:validate  // Verify`}</code>
         </p>
 
         <pre className={styles.codeBlock}>
-          <code>{`// ❌ BAD: No schema reference
+          <code>{`// BAD: No schema reference
 {
   "color": { ... }
 }
 
-// ✅ GOOD: Schema reference included
+// GOOD: Schema reference included
 {
   "$schema": "./designTokens.schema.json",
   "color": { ... }
@@ -478,14 +478,14 @@ npm run tokens:validate  // Verify`}</code>
         </p>
 
         <pre className={styles.codeBlock}>
-          <code>{`// ❌ BAD: Weakening the schema
+          <code>{`// BAD: Weakening the schema
 {
   "dimension": {
     "pattern": ".*"  // Accepts anything!
   }
 }
 
-// ✅ GOOD: Fix the token value
+// GOOD: Fix the token value
 {
   "$type": "dimension",
   "$value": "16px"  // Correct format

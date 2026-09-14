@@ -449,7 +449,7 @@ core.color.palette.red.500
           breaks the reference chain and prevents systematic updates.
         </p>
         <pre className={styles.codeBlock}>
-          <code>{`// ❌ BAD: Raw value in semantic token
+          <code>{`// BAD: Raw value in semantic token
 {
   "foreground": {
     "primary": {
@@ -459,7 +459,7 @@ core.color.palette.red.500
   }
 }
 
-// ✅ GOOD: Reference to core token
+// GOOD: Reference to core token
 {
   "foreground": {
     "primary": {
@@ -476,13 +476,13 @@ core.color.palette.red.500
           cycles. The validator catches these at build time.
         </p>
         <pre className={styles.codeBlock}>
-          <code>{`// ❌ BAD: Circular reference
+          <code>{`// BAD: Circular reference
 {
   "accent": { "$value": "{semantic.color.link}" },
   "link": { "$value": "{semantic.color.accent}" }  // Cycle!
 }
 
-// ✅ GOOD: Linear chain
+// GOOD: Linear chain
 {
   "accent": { "$value": "{core.color.palette.red.500}" },
   "link": { "$value": "{semantic.color.accent}" }  // Derives from accent
@@ -495,12 +495,12 @@ core.color.palette.red.500
           theming works correctly and design decisions stay centralized.
         </p>
         <pre className={styles.codeBlock}>
-          <code>{`// ❌ BAD: Component using core token
+          <code>{`// BAD: Component using core token
 .button {
   background: var(--core-color-palette-blue-500);
 }
 
-// ✅ GOOD: Component using semantic token
+// GOOD: Component using semantic token
 .button {
   background: var(--semantic-color-background-brand);
 }`}</code>
@@ -512,7 +512,7 @@ core.color.palette.red.500
           shallow means more manual updates; too deep means less flexibility.
         </p>
         <pre className={styles.codeBlock}>
-          <code>{`// ❌ BAD: Too shallow - button directly references core
+          <code>{`// BAD: Too shallow - button directly references core
 {
   "button": {
     "danger": {
@@ -527,7 +527,7 @@ core.color.palette.red.500
 }
 // Changing "danger" color requires updating both tokens
 
-// ✅ GOOD: Appropriate depth - shared semantic role
+// GOOD: Appropriate depth - shared semantic role
 {
   "status": {
     "danger": { "$value": "{core.color.palette.red.500}" }

@@ -397,23 +397,23 @@ style:  solid | dashed | dotted`}</code>
       <>
         <h3>1. Invented widths</h3>
         <pre>
-          <code>{`/* ❌ A third width nobody approved */
+          <code>{`/* Bad: A third width nobody approved */
 .card { border: 1.5px solid #ddd; }
-/* ✅ The emphasis scale */
+/* Good: The emphasis scale */
 .card { border: var(--semantic-control-border-default-width) solid
               var(--semantic-color-border-default); }`}</code>
         </pre>
         <h3>2. Meaning carried by subtle borders</h3>
         <pre>
-          <code>{`/* ❌ An interactive control delineated below the 3:1 floor */
+          <code>{`/* Bad — An interactive control delineated below the 3:1 floor */
 .chip { border: 1px solid var(--semantic-color-border-subtle); }
-/* ✅ Signal borders use the default role or bolder */`}</code>
+/* Good: Signal borders use the default role or bolder */`}</code>
         </pre>
         <h3>3. Style as decoration</h3>
         <pre>
-          <code>{`/* ❌ Dashed because it looked nice */
+          <code>{`/* Bad: Dashed because it looked nice */
 .panel { border-style: dashed; }
-/* ✅ Dashed means something — provisional, droppable, placeholder */`}</code>
+/* Good: Dashed means something — provisional, droppable, placeholder */`}</code>
         </pre>
         <h3>4. Light-mode-only border checks</h3>
         <p>
@@ -422,9 +422,9 @@ style:  solid | dashed | dotted`}</code>
         </p>
         <h3>5. Border-color literals</h3>
         <pre>
-          <code>{`/* ❌ */
+          <code>{`/* Bad */
 .divider { border-top: 1px solid #e5e5e5; }
-/* ✅ */
+/* Good */
 .divider { border-top: var(--semantic-control-border-default-width)
            solid var(--semantic-color-border-subtle); }`}</code>
         </pre>

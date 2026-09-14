@@ -149,7 +149,7 @@ export default function Page() {
           template="react-ts"
           theme="light"
           files={{
-            '/Button.tsx': `// ✅ A properly boring Button primitive
+            '/Button.tsx': `// Good: A properly boring Button primitive
 export interface ButtonProps {
   /** Visual weight of the button */
   variant?: 'primary' | 'secondary' | 'danger';
@@ -216,7 +216,7 @@ export function Button({
     </button>
   );
 }`,
-            '/Input.tsx': `// ✅ A properly boring Input primitive (no labels/errors)
+            '/Input.tsx': `// Good: A properly boring Input primitive (no labels/errors)
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   /** Visual size */
   size?: 'sm' | 'md' | 'lg';
@@ -257,7 +257,7 @@ export function Input(props: InputProps) {
     />
   );
 }`,
-            '/Checkbox.tsx': `// ✅ A properly boring Checkbox primitive
+            '/Checkbox.tsx': `// Good: A properly boring Checkbox primitive
 import { useState } from 'react';
 
 export interface CheckboxProps {
@@ -483,7 +483,7 @@ export default function App() {
         borderRadius: '8px',
         border: '1px solid #e9ecef'
       }}>
-        <h3 style={{ margin: '0 0 12px 0' }}>✅ Primitive Benefits:</h3>
+        <h3 style={{ margin: '0 0 12px 0' }}>Primitive Benefits:</h3>
         <ul style={{ margin: 0, paddingLeft: '20px' }}>
           <li><strong>Boring & Predictable:</strong> No surprising behaviors or edge cases</li>
           <li><strong>Token-Driven:</strong> Colors, spacing, and typography use design tokens</li>

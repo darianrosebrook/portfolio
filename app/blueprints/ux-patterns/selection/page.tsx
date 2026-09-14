@@ -318,9 +318,9 @@ checkbox.indeterminate = selected.length > 0
         </p>
         <h3>2. The ungrouped group</h3>
         <pre>
-          <code>{`<!-- ❌ Five radios, no question -->
+          <code>{`<!-- Bad: Five radios, no question -->
 <input type="radio"> A <input type="radio"> B …
-<!-- ✅ -->
+<!-- Good -->
 <fieldset><legend>Plan</legend> …radios… </fieldset>`}</code>
         </pre>
         <h3>3. Indeterminate as a choice</h3>

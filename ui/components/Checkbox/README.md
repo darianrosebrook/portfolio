@@ -16,7 +16,7 @@ A boring, stable, minimal checkbox component for binary state control.
 
 ## Key Features
 
-### ✅ Primitive Benefits
+### Primitive Benefits
 
 - **Boring & Stable:** Minimal API that rarely changes
 - **Token-Driven:** All styling uses design tokens for consistency
@@ -194,12 +194,12 @@ The component uses design tokens for all styling:
 
 This component exemplifies the **Primitive** layer:
 
-- ✅ **Irreducible:** Cannot be broken down further without losing function
-- ✅ **Boring:** Stable API that rarely changes
-- ✅ **Token-Driven:** All styling uses design system tokens
-- ✅ **Accessible:** Built-in ARIA and keyboard support
-- ✅ **Minimal Props:** Only essential checkbox functionality
-- ✅ **No Complex Logic:** No validation, labels, or orchestration
+- **Irreducible:** Cannot be broken down further without losing function
+- **Boring:** Stable API that rarely changes
+- **Token-Driven:** All styling uses design system tokens
+- **Accessible:** Built-in ARIA and keyboard support
+- **Minimal Props:** Only essential checkbox functionality
+- **No Complex Logic:** No validation, labels, or orchestration
 
 ## Integration with Higher Layers
 

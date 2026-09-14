@@ -561,7 +561,7 @@ const FieldComponent = React.forwardRef<HTMLDivElement, FieldProps>(
         <h3>Step 1: Start with Primitives</h3>
         <p>Build stable, boring primitives first:</p>
         <pre>
-          <code>{`// ✅ Primitive: Input - stable, boring, predictable
+          <code>{`// Good — Primitive: Input - stable, boring, predictable
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, invalid, ...props }, ref) => {
     return (
@@ -581,7 +581,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
 // - Stable API (rarely changes)
 // - Composable (can be used anywhere)
 
-// ✅ Primitive: Label - also stable
+// Good — Primitive: Label - also stable
 export const Label = ({ htmlFor, children, ...props }) => {
   return (
     <label htmlFor={htmlFor} {...props}>
@@ -590,7 +590,7 @@ export const Label = ({ htmlFor, children, ...props }) => {
   );
 };
 
-// ✅ Primitive: ErrorText - stable
+// Good — Primitive: ErrorText - stable
 export const ErrorText = ({ id, children, ...props }) => {
   return (
     <span id={id} role="alert" {...props}>
@@ -603,7 +603,7 @@ export const ErrorText = ({ id, children, ...props }) => {
         <h3>Step 2: Create Compound Component</h3>
         <p>Compose primitives into a compound component:</p>
         <pre>
-          <code>{`// ✅ Compound: TextField - codifies convention
+          <code>{`// Good — Compound: TextField - codifies convention
 export const TextField = ({ 
   label, 
   error, 
@@ -643,7 +643,7 @@ export const TextField = ({
         <h3>Step 3: Build Composer for Complex Cases</h3>
         <p>Create composer for complex form orchestration:</p>
         <pre>
-          <code>{`// ✅ Composer: Field - orchestrates complexity
+          <code>{`// Good — Composer: Field - orchestrates complexity
 const FieldContext = createContext<FieldContextValue | null>(null);
 
 export const Field = ({ children, error, required, ...props }) => {
@@ -864,7 +864,7 @@ Field.Help = ({ children }) => {
           breaking architectural boundaries.
         </p>
         <pre>
-          <code>{`// ❌ Anti-pattern: Compound as Primitive
+          <code>{`// Anti-pattern: Compound as Primitive
 // Input primitive that includes label logic
 export const Input = ({ label, error, ...props }) => {
   return (
@@ -882,7 +882,7 @@ export const Input = ({ label, error, ...props }) => {
 // - Breaks layer boundaries
 // - Hard to compose flexibly
 
-// ✅ Correct: Layer separation
+// Correct: Layer separation
 // Primitive: just the input
 export const Input = ({ ...props }) => {
   return <input {...props} />;
@@ -912,7 +912,7 @@ export const TextField = ({ label, error, ...props }) => {
           indicating wrong layer or poor abstraction.
         </p>
         <pre>
-          <code>{`// ❌ Anti-pattern: prop explosion
+          <code>{`// Anti-pattern: prop explosion
 <UniversalComponent
   type="button"
   variant="primary"
@@ -935,7 +935,7 @@ export const TextField = ({ label, error, ...props }) => {
 // - Indicates wrong layer
 // - Tries to be everything
 
-// ✅ Correct: Composition over configuration
+// Correct: Composition over configuration
 <Button variant="primary" size="medium">
   <Icon name="arrow" />
   Click me
@@ -954,7 +954,7 @@ export const TextField = ({ label, error, ...props }) => {
           implementations, preventing reuse.
         </p>
         <pre>
-          <code>{`// ❌ Anti-pattern: tight coupling
+          <code>{`// Anti-pattern: tight coupling
 export const FormField = () => {
   const [value, setValue] = useState('');
   const [error, setError] = useState('');
@@ -980,7 +980,7 @@ export const FormField = () => {
 // - Tightly coupled to email
 // - Hard to test
 
-// ✅ Correct: Separation of concerns
+// Correct: Separation of concerns
 export const TextField = ({ value, onChange, error, ...props }) => {
   return (
     <div>
@@ -1010,7 +1010,7 @@ export const TextField = ({ value, onChange, error, ...props }) => {
           creating unnecessary complexity or constraints.
         </p>
         <pre>
-          <code>{`// ❌ Anti-pattern: Composer for simple problem
+          <code>{`// Anti-pattern: Composer for simple problem
 // Using Field composer for simple input
 <Field>
   <Field.Label>Email</Field.Label>
@@ -1024,7 +1024,7 @@ export const TextField = ({ value, onChange, error, ...props }) => {
 // - Harder than needed
 // - Wrong tool for job
 
-// ✅ Correct: Right layer for problem
+// Correct: Right layer for problem
 // Simple case: use Compound
 <TextField label="Email" />
 
@@ -1049,7 +1049,7 @@ export const TextField = ({ value, onChange, error, ...props }) => {
           reusable abstractions.
         </p>
         <pre>
-          <code>{`// ❌ Anti-pattern: repeating patterns
+          <code>{`// Anti-pattern: repeating patterns
 // Same pattern repeated everywhere
 function EmailField() {
   return (
@@ -1075,7 +1075,7 @@ function PasswordField() {
 // - Hard to maintain
 // - Missed abstraction opportunity
 
-// ✅ Correct: Abstract the pattern
+// Correct: Abstract the pattern
 export const TextField = ({ label, type, ...props }) => {
   return (
     <div>
@@ -1102,7 +1102,7 @@ export const TextField = ({ label, type, ...props }) => {
           solutions would work.
         </p>
         <pre>
-          <code>{`// ❌ Anti-pattern: unnecessary abstraction
+          <code>{`// Anti-pattern: unnecessary abstraction
 // Creating wrapper for simple case
 export const EmailInput = () => {
   return <TextField type="email" />;
@@ -1114,7 +1114,7 @@ export const EmailInput = () => {
 // - Extra layer to maintain
 // - Over-engineering
 
-// ✅ Correct: Use directly
+// Correct: Use directly
 <TextField type="email" label="Email" />
 
 // Benefits:

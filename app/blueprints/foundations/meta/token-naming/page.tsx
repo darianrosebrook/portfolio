@@ -374,18 +374,18 @@ npm run tokens:lint
       <>
         <h3>1. Values in names</h3>
         <pre>
-          <code>{`// ❌ The name expires when the value changes
+          <code>{`// Bad: The name expires when the value changes
 "spacing.size.16px"  /  --color-blue-600-text
 
-// ✅ Name the decision; let the value be data
+// Good: Name the decision; let the value be data
 "spacing.size.06"    /  --semantic-color-foreground-primary`}</code>
         </pre>
         <h3>2. Implementation names for semantic roles</h3>
         <pre>
-          <code>{`// ❌ Says where it renders, not what it decides
+          <code>{`// Bad: Says where it renders, not what it decides
 "sidebarAccentBevel"
 
-// ✅ Role → property → state
+// Good: Role → property → state
 "elevation.surface.dragging"`}</code>
         </pre>
         <h3>3. Synonym drift</h3>
@@ -397,9 +397,9 @@ npm run tokens:lint
         </p>
         <h3>4. Skipping the component tier</h3>
         <pre>
-          <code>{`/* ❌ Global semantics consumed raw by components */
+          <code>{`/* Bad: Global semantics consumed raw by components */
 .card { box-shadow: var(--semantic-elevation-surface-dragging); }
-/* ✅ The component names its own surface */
+/* Good: The component names its own surface */
 .card { box-shadow: var(--ds-card-elevation-dragging); }`}</code>
         </pre>
         <h3>5. Hand-written variable names</h3>

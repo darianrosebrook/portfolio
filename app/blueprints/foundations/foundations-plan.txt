@@ -390,7 +390,7 @@ These are the atomic materials used to build consistent, scalable interfaces.
 **Importance**: Accessibility is a core design system foundation --- not just a checklist item.\
 For large systems, accessible design ensures inclusive, compliant, and scalable experiences. It aligns usability with equity and enhances performance across devices, platforms, and user abilities.
 
-### ✅ What to Cover:
+### What to Cover:
 
 -   **Standards & Principles**:
 

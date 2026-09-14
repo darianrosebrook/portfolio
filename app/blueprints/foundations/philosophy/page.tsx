@@ -500,7 +500,7 @@ export const Field = Object.assign(FieldComponent, {
         <h3>Step 6: Implementation</h3>
         <p>Assuming we add the variant, implement with philosophy in mind:</p>
         <pre>
-          <code>{`// ✅ Systems thinking: reuse existing tokens
+          <code>{`// Good — Systems thinking: reuse existing tokens
 export const Button = ({ variant = 'primary', ...props }) => {
   const variantStyles = {
     primary: 'bg-primary text-white',
@@ -518,7 +518,7 @@ export const Button = ({ variant = 'primary', ...props }) => {
   );
 };
 
-// ✅ Socio-technical: clear documentation
+// Good — Socio-technical: clear documentation
 /**
  * Button variants:
  * - primary: Main actions
@@ -526,7 +526,7 @@ export const Button = ({ variant = 'primary', ...props }) => {
  * - ghost: Subtle actions, minimal emphasis
  */
 
-// ✅ Pragmatism: ship with limitations
+// Good — Pragmatism: ship with limitations
 // Note: Ghost variant may not meet contrast requirements on all backgrounds.
 // Use with caution and test accessibility.`}</code>
         </pre>
@@ -612,7 +612,7 @@ export const Button = ({ variant = 'primary', ...props }) => {
           considering system-wide effects.
         </p>
         <pre>
-          <code>{`// ❌ Local optimization: fastest button implementation
+          <code>{`// Bad — Local optimization: fastest button implementation
 const Button = ({ onClick, children }) => {
   return (
     <div onClick={onClick} className="button">
@@ -627,7 +627,7 @@ const Button = ({ onClick, children }) => {
 // - Breaks system consistency (no variant system)
 // - Forces every consumer to add accessibility themselves
 
-// ✅ Systems thinking: consider all consumers
+// Good — Systems thinking: consider all consumers
 const Button = ({ variant, size, onClick, children }) => {
   return (
     <button
@@ -651,7 +651,7 @@ const Button = ({ variant, size, onClick, children }) => {
           they propagate through the system.
         </p>
         <pre>
-          <code>{`// ❌ Changing Input API without considering TextField
+          <code>{`// Bad: Changing Input API without considering TextField
 // Input component changes from:
 <Input value={value} onChange={onChange} />
 
@@ -661,7 +661,7 @@ const Button = ({ variant, size, onClick, children }) => {
 // Impact: Every TextField breaks, every form breaks
 // Result: System-wide breaking change, mass migration required
 
-// ✅ Systems thinking: versioned API with deprecation
+// Good — Systems thinking: versioned API with deprecation
 <Input 
   value={value}
   onChange={onChange} // Deprecated, but still works
@@ -678,7 +678,7 @@ const Button = ({ variant, size, onClick, children }) => {
           ignoring social and governance aspects.
         </p>
         <pre>
-          <code>{`// ❌ Library mindset: "Just ship components"
+          <code>{`// Bad — Library mindset: "Just ship components"
 // - Components exist
 // - No usage guidelines
 // - No governance model
@@ -688,7 +688,7 @@ const Button = ({ variant, size, onClick, children }) => {
 // Result: Components exist but aren't used
 // Teams reinvent because they don't understand intent
 
-// ✅ Systems thinking: operational infrastructure
+// Good — Systems thinking: operational infrastructure
 // - Components with clear APIs
 // - Usage guidelines and examples
 // - Governance model (when to contribute vs. fork)
@@ -704,7 +704,7 @@ const Button = ({ variant, size, onClick, children }) => {
           important decisions.
         </p>
         <pre>
-          <code>{`// ❌ Over-abstraction: "universal" component
+          <code>{`// Bad — Over-abstraction: "universal" component
 <UniversalComponent
   type="button"
   appearance="primary"
@@ -719,7 +719,7 @@ const Button = ({ variant, size, onClick, children }) => {
 // - Breaks when new use cases appear
 // - System becomes rigid despite "flexibility"
 
-// ✅ Systems thinking: layered composition
+// Good — Systems thinking: layered composition
 <Button variant="primary">
   Click me
 </Button>
@@ -735,7 +735,7 @@ const Button = ({ variant, size, onClick, children }) => {
           frameworks leads to drift.
         </p>
         <pre>
-          <code>{`// ❌ No governance: "anything goes"
+          <code>{`// Bad — No governance: "anything goes"
 // - Teams create components ad-hoc
 // - No naming conventions
 // - Inconsistent APIs
@@ -745,7 +745,7 @@ const Button = ({ variant, size, onClick, children }) => {
 // Result: System becomes chaotic, inconsistent
 // Teams lose trust, fork their own solutions
 
-// ✅ Systems thinking: governance through structure
+// Good — Systems thinking: governance through structure
 // - Clear layer boundaries (primitive → compound → composer)
 // - Naming conventions enforced
 // - API standards documented
@@ -761,7 +761,7 @@ const Button = ({ variant, size, onClick, children }) => {
           shipping good-enough solutions that evolve.
         </p>
         <pre>
-          <code>{`// ❌ Perfectionism: "Can't ship until perfect"
+          <code>{`// Bad — Perfectionism: "Can't ship until perfect"
 // - Endless research phase
 // - No real-world usage data
 // - Over-engineered solutions
@@ -769,7 +769,7 @@ const Button = ({ variant, size, onClick, children }) => {
 
 // Result: System never ships, teams build their own
 
-// ✅ Systems thinking: iterative evolution
+// Good — Systems thinking: iterative evolution
 // - Ship MVP with clear limitations
 // - Gather usage data
 // - Evolve based on real needs

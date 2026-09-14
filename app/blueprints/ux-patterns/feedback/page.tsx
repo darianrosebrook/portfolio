@@ -317,9 +317,9 @@ toast.failure('Save failed',  { role: 'alert',        // assertive
       <>
         <h3>1. Assertive everything</h3>
         <pre>
-          <code>{`// ❌ Every announcement interrupts
+          <code>{`// Bad: Every announcement interrupts
 <div role="alert">Welcome back!</div>
-// ✅ Urgency is chosen; welcome is status or nothing`}</code>
+// Good: Urgency is chosen; welcome is status or nothing`}</code>
         </pre>
         <h3>2. The eternal spinner</h3>
         <p>

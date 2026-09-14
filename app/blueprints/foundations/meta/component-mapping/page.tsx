@@ -401,9 +401,9 @@ const sections: FoundationSection[] = [
       <>
         <h3>1. Unmapped parts</h3>
         <pre>
-          <code>{`// ❌ A styled region with no slot, no binding
+          <code>{`// Bad: A styled region with no slot, no binding
 .extraRow { background: #f5f5f5; }
-// ✅ Name it, bind it, and the question answers itself forever`}</code>
+// Good: Name it, bind it, and the question answers itself forever`}</code>
         </pre>
         <h3>2. Contracts drifting from CSS</h3>
         <p>
@@ -414,10 +414,10 @@ const sections: FoundationSection[] = [
         </p>
         <h3>3. Consuming past the map</h3>
         <pre>
-          <code>{`/* ❌ The chip bypasses Badge's decided pairing */
+          <code>{`/* Bad: The chip bypasses Badge's decided pairing */
 .chip { color: var(--semantic-color-foreground-success); }
 
-/* ✅ Consume the component, or bind a proper pair */`}</code>
+/* Good: Consume the component, or bind a proper pair */`}</code>
         </pre>
         <h3>4. Bindings without fallbacks</h3>
         <p>

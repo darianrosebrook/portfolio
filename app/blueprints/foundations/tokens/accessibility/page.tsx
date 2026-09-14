@@ -152,12 +152,12 @@ export default function AccessibilityTokensPage() {
         </p>
 
         <pre className={styles.codeBlock}>
-          <code>{`// ❌ BAD: Vibrant but inaccessible
+          <code>{`// BAD: Vibrant but inaccessible
 "status": {
   "success": { "$value": "#00ff00" }  // 1.4:1 contrast on white
 }
 
-// ✅ GOOD: Accessible and still recognizable
+// GOOD: Accessible and still recognizable
 "status": {
   "success": { "$value": "{core.color.palette.green.700}" }  // 4.5:1 contrast
 }`}</code>
@@ -451,12 +451,12 @@ export default function AccessibilityTokensPage() {
         </p>
 
         <pre className={styles.codeBlock}>
-          <code>{`// ❌ BAD: Color-only error indication
+          <code>{`// BAD: Color-only error indication
 .input--error {
   border-color: var(--status-danger);
 }
 
-// ✅ GOOD: Color + icon + text
+// GOOD: Color + icon + text
 .input--error {
   border-color: var(--status-danger);
 }
@@ -477,12 +477,12 @@ export default function AccessibilityTokensPage() {
         </p>
 
         <pre className={styles.codeBlock}>
-          <code>{`/* ❌ BAD: Removing focus indicators */
+          <code>{`/* BAD: Removing focus indicators */
 :focus {
   outline: none;
 }
 
-/* ✅ GOOD: Custom focus indicator */
+/* GOOD: Custom focus indicator */
 :focus {
   outline: none;
 }
@@ -499,12 +499,12 @@ export default function AccessibilityTokensPage() {
         </p>
 
         <pre className={styles.codeBlock}>
-          <code>{`/* ❌ BAD: Animation ignores preference */
+          <code>{`/* BAD: Animation ignores preference */
 .modal {
   animation: slideIn 300ms ease-out;
 }
 
-/* ✅ GOOD: Respects reduced motion */
+/* GOOD: Respects reduced motion */
 .modal {
   animation: slideIn var(--motion-duration-medium) var(--motion-easing-standard);
 }
@@ -523,7 +523,7 @@ export default function AccessibilityTokensPage() {
         </p>
 
         <pre className={styles.codeBlock}>
-          <code>{`/* ❌ BAD: Meets contrast but hard to read */
+          <code>{`/* BAD: Meets contrast but hard to read */
 .caption {
   color: var(--foreground-secondary); /* 4.5:1 contrast */
   font-size: 10px;
@@ -531,7 +531,7 @@ export default function AccessibilityTokensPage() {
   letter-spacing: -0.5px;
 }
 
-/* ✅ GOOD: Accessible and readable */
+/* GOOD: Accessible and readable */
 .caption {
   color: var(--foreground-secondary);
   font-size: var(--typography-size-minimum); /* 12px */

@@ -350,15 +350,15 @@ const sections: FoundationSection[] = [
       <>
         <h3>1. Unpaired foregrounds</h3>
         <pre>
-          <code>{`/* ❌ Legal over what, exactly? */
+          <code>{`/* Bad: Legal over what, exactly? */
 .muted { color: var(--semantic-color-foreground-secondary); }
-/* ✅ The pair list exists; new surfaces add pairs, not hope */`}</code>
+/* Good: The pair list exists; new surfaces add pairs, not hope */`}</code>
         </pre>
         <h3>2. Bespoke focus rings</h3>
         <pre>
-          <code>{`/* ❌ Component four's own opinion */
+          <code>{`/* Bad: Component four's own opinion */
 .card:focus { outline: 3px dashed rebeccapurple; }
-/* ✅ The composed ring */
+/* Good: The composed ring */
 .card:focus-visible { outline: var(--semantic-focus-ring); }`}</code>
         </pre>
         <h3>3. Shrinking below the floor &quot;just for density&quot;</h3>

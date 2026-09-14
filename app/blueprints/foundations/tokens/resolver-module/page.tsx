@@ -483,7 +483,7 @@ const primaryColor = resolver.getToken(
         </p>
 
         <pre className={styles.codeBlock}>
-          <code>{`// ❌ BAD: Circular reference
+          <code>{`// BAD: Circular reference
 {
   "sets": {
     "a": { "sources": [{ "$ref": "#/sets/b" }] },
@@ -491,7 +491,7 @@ const primaryColor = resolver.getToken(
   }
 }
 
-// ✅ GOOD: Linear dependency chain
+// GOOD: Linear dependency chain
 {
   "sets": {
     "foundation": { "sources": [{ "$ref": "core.tokens.json" }] },
@@ -510,7 +510,7 @@ const primaryColor = resolver.getToken(
         </p>
 
         <pre className={styles.codeBlock}>
-          <code>{`// ❌ BAD: No default
+          <code>{`// BAD: No default
 {
   "modifiers": {
     "theme": {
@@ -522,7 +522,7 @@ const primaryColor = resolver.getToken(
   }
 }
 
-// ✅ GOOD: Default specified
+// GOOD: Default specified
 {
   "modifiers": {
     "theme": {
@@ -543,7 +543,7 @@ const primaryColor = resolver.getToken(
         </p>
 
         <pre className={styles.codeBlock}>
-          <code>{`// ❌ BAD: Dark theme missing tokens
+          <code>{`// BAD: Dark theme missing tokens
 {
   "contexts": {
     "light": {
@@ -561,7 +561,7 @@ const primaryColor = resolver.getToken(
   }
 }
 
-// ✅ GOOD: Consistent coverage
+// GOOD: Consistent coverage
 {
   "contexts": {
     "light": {
@@ -588,7 +588,7 @@ const primaryColor = resolver.getToken(
         </p>
 
         <pre className={styles.codeBlock}>
-          <code>{`// ❌ BAD: Brand before semantic (brand values get overwritten)
+          <code>{`// BAD: Brand before semantic (brand values get overwritten)
 {
   "resolutionOrder": [
     { "$ref": "#/sets/foundation" },
@@ -597,7 +597,7 @@ const primaryColor = resolver.getToken(
   ]
 }
 
-// ✅ GOOD: Most specific last
+// GOOD: Most specific last
 {
   "resolutionOrder": [
     { "$ref": "#/sets/foundation" },

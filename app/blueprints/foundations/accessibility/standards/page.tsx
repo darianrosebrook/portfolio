@@ -369,9 +369,9 @@ SC 4.1.2  name/role/value → contract a11y fields + axe in tests
         </p>
         <h3>3. ARIA as absolution</h3>
         <pre>
-          <code>{`<!-- ❌ Roles stapled over broken semantics -->
+          <code>{`<!-- Bad: Roles stapled over broken semantics -->
 <div role="button" onclick="…">Sign up</div>
-<!-- ✅ The native element IS the semantics -->
+<!-- Good: The native element IS the semantics -->
 <button>Sign up</button>`}</code>
         </pre>
         <h3>4. Freezing on the current standard</h3>

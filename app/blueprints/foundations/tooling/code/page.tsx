@@ -351,8 +351,8 @@ git push                    # pre-push: contracts + lint + the heavy checks
       <>
         <h3>1. Editing generated artifacts</h3>
         <pre>
-          <code>{`/* ❌ app/designTokens.scss — AUTO-GENERATED, overwritten next build */
-/* ✅ Edit the JSON, run the build, review the generated diff */`}</code>
+          <code>{`/* Bad: app/designTokens.scss — AUTO-GENERATED, overwritten next build */
+/* Good: Edit the JSON, run the build, review the generated diff */`}</code>
         </pre>
         <h3>2. Disabling a lint to ship</h3>
         <p>

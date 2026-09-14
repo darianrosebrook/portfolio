@@ -179,14 +179,14 @@ const ComponentContext = createContext<ContextValue | null>(null);
 **Anti-pattern** (Hook in useMemo):
 
 ```typescript
-// ❌ WRONG - Cannot call hooks inside useMemo
+// WRONG - Cannot call hooks inside useMemo
 const value = useMemo(() => useSelect(options), [options]);
 ```
 
 **Correct Pattern** (Hook at top level):
 
 ```typescript
-// ✅ CORRECT - Hook called at top level
+// CORRECT - Hook called at top level
 const selectValue = useSelect(options);
 const value = useMemo(
   () => selectValue,
@@ -197,7 +197,7 @@ const value = useMemo(
 **Alternative Pattern** (If hook returns stable values):
 
 ```typescript
-// ✅ CORRECT - Hook already returns stable references
+// CORRECT - Hook already returns stable references
 const selectValue = useSelect(options);
 // useSelect uses useCallback for functions, so no memoization needed
 return <Context.Provider value={selectValue}>{children}</Context.Provider>;
@@ -396,10 +396,10 @@ useEffect(() => {
 **TypeScript Usage**:
 
 ```typescript
-// ❌ BEM
+// Bad: BEM
 <div className={styles['__title']}>
 
-// ✅ Modern
+// Good: Modern
 <div className={styles.title}>
 ```
 
@@ -429,14 +429,14 @@ useEffect(() => {
 **Pattern**:
 
 ```scss
-// ❌ Directional
+// Bad: Directional
 .status {
   position: absolute;
   right: 0;
   bottom: 0;
 }
 
-// ✅ Logical
+// Good: Logical
 .status {
   position: absolute;
   inset-inline-end: 0;
@@ -491,7 +491,7 @@ useEffect(() => {
 **Pattern**:
 
 ```typescript
-// ✅ Good - uses transform/opacity
+// Good - uses transform/opacity
 gsap.to(element, {
   opacity: 1,
   y: 0,
@@ -499,7 +499,7 @@ gsap.to(element, {
   ease: 'power2.out',
 });
 
-// ❌ Bad - triggers layout
+// Bad - triggers layout
 gsap.to(element, {
   width: '100%',
   height: '100%',
@@ -513,22 +513,22 @@ gsap.to(element, {
 ### 1. Calling Hooks Conditionally or Inside Other Hooks
 
 ```typescript
-// ❌ WRONG
+// WRONG
 const value = useMemo(() => useSelect(options), [options]);
 
-// ✅ CORRECT
+// CORRECT
 const selectValue = useSelect(options);
 ```
 
 ### 2. Missing Dependencies in useCallback/useMemo
 
 ```typescript
-// ❌ WRONG - missing dependencies
+// WRONG - missing dependencies
 const handler = useCallback(() => {
   doSomething(value, otherValue);
 }, []);
 
-// ✅ CORRECT
+// CORRECT
 const handler = useCallback(() => {
   doSomething(value, otherValue);
 }, [value, otherValue]);
@@ -537,10 +537,10 @@ const handler = useCallback(() => {
 ### 3. Creating New Context Values on Every Render
 
 ```typescript
-// ❌ WRONG - new object every render
+// WRONG - new object every render
 <Context.Provider value={{ id, isOpen, toggle }}>
 
-// ✅ CORRECT - memoized
+// CORRECT - memoized
 const contextValue = useMemo(() => ({ id, isOpen, toggle }), [id, isOpen, toggle]);
 <Context.Provider value={contextValue}>
 ```
@@ -548,12 +548,12 @@ const contextValue = useMemo(() => ({ id, isOpen, toggle }), [id, isOpen, toggle
 ### 4. Missing Cleanup in useEffect
 
 ```typescript
-// ❌ WRONG - no cleanup
+// WRONG - no cleanup
 useEffect(() => {
   document.addEventListener('click', handler);
 }, []);
 
-// ✅ CORRECT - with cleanup
+// CORRECT - with cleanup
 useEffect(() => {
   document.addEventListener('click', handler);
   return () => document.removeEventListener('click', handler);
@@ -563,11 +563,11 @@ useEffect(() => {
 ### 5. Using Directional Properties Instead of Logical
 
 ```scss
-// ❌ WRONG
+// WRONG
 margin-left: 1rem;
 padding-right: 1rem;
 
-// ✅ CORRECT
+// CORRECT
 margin-inline-start: 1rem;
 padding-inline-end: 1rem;
 ```

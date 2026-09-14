@@ -324,9 +324,9 @@ expect(await axe(container)).toHaveNoViolations();
         </p>
         <h3>2. Silent rule demotion</h3>
         <pre>
-          <code>{`// ❌ Per-file suppression, forever
+          <code>{`// Bad: Per-file suppression, forever
 /* eslint-disable jsx-a11y/... */
-// ✅ Config-level policy with a comment and an expiry review`}</code>
+// Good: Config-level policy with a comment and an expiry review`}</code>
         </pre>
         <h3>3. Testing the happy render only</h3>
         <p>
