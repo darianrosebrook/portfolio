@@ -1,0 +1,29 @@
+id: CHORE-EMOJI-REMOVAL-001
+title: 'Replace check/cross emoji glyphs in rendered content with word labels'
+risk_tier: 3
+mode: chore
+lifecycle_state: draft
+created_at: '2026-09-14T18:11:26.919Z'
+updated_at: '2026-09-14T18:11:26.919Z'
+created_by_session: 'session-3a451c7b-52cd-4658-9621-529342b56ef7'
+blast_radius:
+  modules:
+    - 'app/blueprints rendered content pages'
+    - 'ui component documentation and examples'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'app/blueprints'
+    - 'ui'
+  out: []
+invariants:
+  - 'Page copy, code-sample semantics, and heading structure are otherwise unchanged'
+  - 'The Tiptap emoji picker dataset keeps its emoji data'
+acceptance:
+  - id: A1
+    given: 'the rendered blueprints pages and ui component docs'
+    when: 'check/cross glyphs are replaced with word labels'
+    then: 'no check or cross emoji remains in app/blueprints or ui/ except the Tiptap emoji picker dataset, and lint plus typecheck pass'
+non_functional: {}
+contracts: []
