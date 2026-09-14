@@ -8,12 +8,15 @@ updated_at: '2026-09-14T03:52:56.216Z'
 created_by_session: 'session-e2bc87a4-6cfa-4ab7-a591-d5f2231c694f'
 blast_radius:
   modules:
-    - 'TODO: list one or more modules this spec touches.'
+    - 'ui/components: per-component tokens.json rewires, regenerated tokens.css, contract fallback sync'
+    - 'utils/designTokens: generateCSSTokens fallback emission + build orchestration'
+    - 'scripts/check-contract-tokens.mjs + scripts/check-token-references.mjs: validator artifact targets'
+    - 'app/designTokens.scss: regenerated global vars'
+    - 'ui/designTokens/semantic: dead singular component-token home removal'
   data_migration: false
 operational_rollback_slo: 5m
 scope:
   in:
-    - 'TODO: list the file(s) or directories this spec authorizes.'
     - ui/components
     - utils/designTokens
     - scripts/check-contract-tokens.mjs
@@ -25,12 +28,31 @@ scope:
     - ui/designTokens/semantic/_index.tokens.json
   out: []
 invariants:
-  - 'TODO: describe one invariant this spec guarantees.'
+  - 'Generated <Component>.tokens.css stays derivable solely from <Component>.tokens.json + app/designTokens.scss; the AUTO-GENERATED banner is preserved and no hand edits are required.'
+  - 'CSS custom-property NAMES in generated tokens.css are unchanged; only var() fallback literals are added and the three radius references are rewired.'
+  - 'Default-theme rendered values change only for the three intentional rewires (Button pill->8px, Card radius-medium 6px->16px, Input radius 6px->8px), each matching the authored default-brand token value.'
+  - 'check-contract-tokens and check-token-references validate the live .tokens.css/.css artifacts, not the removed .tokens.generated.scss era.'
 acceptance:
   - id: A1
-    given: 'TODO'
-    when: 'TODO'
-    then: 'TODO'
+    given: 'Button/Card/Input tokens.json reference semantic shape tokens (semantic.shape.button.radius, semantic.shape.card.radius, semantic.shape.input.radius.default)'
+    when: 'npm run tokens:components generates tokens.css'
+    then: 'the emitted vars reference --semantic-shape-button-radius/--semantic-shape-card-radius/--semantic-shape-input-radius-default so [data-brand] remaps reach the components'
+  - id: A2
+    given: 'app/designTokens.scss defines first-occurrence defaults for referenced vars'
+    when: 'generateCSSTokens processes a component tokens.json'
+    then: 'every {semantic.*}/{core.*} ref emits var(--x, <resolved literal>) and unresolvable refs emit without fallback plus a warning'
+  - id: A3
+    given: 'contracts with structured token entries and synced fallbacks'
+    when: 'node scripts/check-contract-tokens.mjs runs'
+    then: 'it validates var presence, resolvesTo reference, and fallback parity against .tokens.css and exits 0'
+  - id: A4
+    given: 'the dead singular ui/designTokens/semantic/components/component.tokens.json (zero consumers) is removed and _index registry updated'
+    when: 'global tokens regenerate'
+    then: '--semantic-component-* vars disappear from designTokens.scss and typecheck/lint/tests stay green'
+  - id: A5
+    given: 'the repaired validators'
+    when: 'npm run validate runs'
+    then: 'it includes contracts:tokens in the chain and passes'
 non_functional: {}
 contracts:
   - name: 'component-tokens-brand-reachability'
