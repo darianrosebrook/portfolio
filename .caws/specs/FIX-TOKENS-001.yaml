@@ -1,0 +1,33 @@
+id: FIX-TOKENS-001
+title: 'Component token pipeline: brand reachability, live fallbacks, validator artifact drift, dead token home'
+risk_tier: 3
+mode: fix
+lifecycle_state: draft
+created_at: '2026-09-14T03:52:46.775Z'
+updated_at: '2026-09-14T03:52:46.775Z'
+created_by_session: 'session-e2bc87a4-6cfa-4ab7-a591-d5f2231c694f'
+blast_radius:
+  modules:
+    - 'TODO: list one or more modules this spec touches.'
+  data_migration: false
+operational_rollback_slo: 5m
+scope:
+  in:
+    - 'TODO: list the file(s) or directories this spec authorizes.'
+  out: []
+invariants:
+  - 'TODO: describe one invariant this spec guarantees.'
+acceptance:
+  - id: A1
+    given: 'TODO'
+    when: 'TODO'
+    then: 'TODO'
+non_functional: {}
+contracts:
+  - name: 'component-tokens-brand-reachability'
+    type: contract-test
+    path: 'test/unit/designTokens/generateCSSTokens.test.mjs'
+  - name: 'tokens-css-generator-fallback-emission'
+    type: behavior
+  - name: 'contract-validators-artifact-parity'
+    type: contract-test
