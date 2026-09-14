@@ -1712,9 +1712,7 @@ export type LinkTokenPath =
  * skeleton token paths
  */
 export type SkeletonTokenPath =
-  | 'skeleton.background'
-  | 'skeleton.foreground'
-  | 'skeleton.shineDuration';
+  'skeleton.background' | 'skeleton.foreground' | 'skeleton.shineDuration';
 
 /**
  * datavis token paths
