@@ -41,6 +41,12 @@ overrides:
   brace-expansion@<1.1.18: ^1.1.18
   brace-expansion@>=2.0.0 <2.1.4: ^2.1.4
   brace-expansion@>=3.0.0 <5.0.9: ^5.0.9
+  # GHSA-c83g-rgw3-j3cx (unbounded memory growth) and GHSA-73wf-gq98-2v4g
+  # (unvalidated prototype write via custom stats). Patched in >=4.28.7;
+  # reachable through next > styled-jsx > @babel/core >
+  # @babel/helper-compilation-targets and through eslint-config-next >
+  # eslint-plugin-react-hooks > @babel/core.
+  browserslist: ^4.28.7
   fast-uri: ^3.1.5
   flatted: ^3.4.2
   # Direct + transitive (test-exclude via @vitest/coverage-v8) — v10/v11 are deprecated.
