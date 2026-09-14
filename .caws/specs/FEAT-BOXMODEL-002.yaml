@@ -4,7 +4,7 @@ risk_tier: 3
 mode: refactor
 lifecycle_state: draft
 created_at: '2026-09-14T05:09:57.409Z'
-updated_at: '2026-09-14T05:09:57.409Z'
+updated_at: '2026-09-14T05:09:58.102Z'
 created_by_session: 'session-e2bc87a4-6cfa-4ab7-a591-d5f2231c694f'
 blast_radius:
   modules:
@@ -14,6 +14,9 @@ operational_rollback_slo: 5m
 scope:
   in:
     - 'TODO: list the file(s) or directories this spec authorizes.'
+    - ui/components
+    - utils/designTokens
+    - test/unit
   out: []
 invariants:
   - 'TODO: describe one invariant this spec guarantees.'
