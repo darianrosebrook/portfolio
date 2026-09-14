@@ -34,10 +34,7 @@ export const SettingsCard: React.FC = () => {
         description="Receive updates via email"
         defaultChecked
       />
-      <SettingRow
-        label="Marketing emails"
-        description="Promotional content"
-      />
+      <SettingRow label="Marketing emails" description="Promotional content" />
       <SettingRow
         label="Dark mode"
         description="Use dark theme"

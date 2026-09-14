@@ -18,7 +18,10 @@ export function TrackSelector({
   const [selectedTrack, setSelectedTrack] = useState<TrackId | null>(() => {
     if (typeof window === 'undefined') return null;
     const saved = localStorage.getItem('foundation_selected_track');
-    if (saved && ['designer', 'developer', 'cross-functional'].includes(saved)) {
+    if (
+      saved &&
+      ['designer', 'developer', 'cross-functional'].includes(saved)
+    ) {
       return saved as TrackId;
     }
     return null;
