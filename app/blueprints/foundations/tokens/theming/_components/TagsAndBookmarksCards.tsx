@@ -36,8 +36,17 @@ export const TagsAndBookmarksCards: React.FC = () => {
           ].map((item) => (
             <div key={item.name} className={styles.bookmarkItem}>
               <div className={styles.bookmarkImage}>
-                <svg width="100%" height="100%" viewBox="0 0 100 100" fill="none">
-                  <rect width="100" height="100" fill="var(--semantic-color-background-secondary)" />
+                <svg
+                  width="100%"
+                  height="100%"
+                  viewBox="0 0 100 100"
+                  fill="none"
+                >
+                  <rect
+                    width="100"
+                    height="100"
+                    fill="var(--semantic-color-background-secondary)"
+                  />
                 </svg>
               </div>
               <p className={styles.bookmarkName}>{item.name}</p>

@@ -69,27 +69,25 @@ const sections: FoundationSection[] = [
     content: (
       <>
         <p>
-          Elevation is the most misused depth cue in interface design.
-          Shadows get added to make things &quot;pop&quot;, and within a
-          year every card floats, every button hovers, and users can no
-          longer read which surfaces are above which. Depth is a{' '}
-          <em>communication channel</em>: it tells users what overlays
-          what, what is attached to what, and what is interactive. Spent
-          everywhere, it says nothing anywhere.
+          Elevation is the most misused depth cue in interface design. Shadows
+          get added to make things &quot;pop&quot;, and within a year every card
+          floats, every button hovers, and users can no longer read which
+          surfaces are above which. Depth is a <em>communication channel</em>:
+          it tells users what overlays what, what is attached to what, and what
+          is interactive. Spent everywhere, it says nothing anywhere.
         </p>
         <p>
-          The system answer is the same as color&apos;s: a small,
-          calibrated ramp where each step means something, consumed
-          through semantic surface roles. Elevation has two extra
-          realities to manage that color does not—shadows are nearly
-          invisible on dark surfaces (dark modes need alternative depth
-          cues), and shadows are real render cost (blur radius is paint
-          area, and layered shadows stack).
+          The system answer is the same as color&apos;s: a small, calibrated
+          ramp where each step means something, consumed through semantic
+          surface roles. Elevation has two extra realities to manage that color
+          does not—shadows are nearly invisible on dark surfaces (dark modes
+          need alternative depth cues), and shadows are real render cost (blur
+          radius is paint area, and layered shadows stack).
         </p>
         <p>
           This page covers the elevation system as built here: the{' '}
-          <code>elevation.level</code> ramp in the core tokens, the
-          semantic <code>surface</code> roles above it, and the{' '}
+          <code>elevation.level</code> ramp in the core tokens, the semantic{' '}
+          <code>surface</code> roles above it, and the{' '}
           <code>effect.backdropBlur</code> companions.
         </p>
       </>
@@ -106,8 +104,8 @@ const sections: FoundationSection[] = [
         <p>
           The core ramp in{' '}
           <code>ui/designTokens/core/elevation.tokens.json</code> is four
-          steps—flat to floating—and each is a complete shadow, not a
-          number to scale:
+          steps—flat to floating—and each is a complete shadow, not a number to
+          scale:
         </p>
         <pre>
           <code>{`// elevation.level (values) — offsetX / offsetY / blur / color
@@ -117,26 +115,25 @@ level.2:  0px  3px   6px   rgba(0,0,0,0.14)  // raised/floating
 level.3:  0px  8px  16px   rgba(0,0,0,0.18)  // modal overlay`}</code>
         </pre>
         <p>
-          Read the ramp as a physics claim. Offset grows faster than
-          blur, and opacity edges up as blur widens—soft light sources
-          close to the surface. The consistency across steps is the
-          point: a level-3 dialog and a level-1 card look like the same
-          world at different heights, not like two design decisions.
+          Read the ramp as a physics claim. Offset grows faster than blur, and
+          opacity edges up as blur widens—soft light sources close to the
+          surface. The consistency across steps is the point: a level-3 dialog
+          and a level-1 card look like the same world at different heights, not
+          like two design decisions.
         </p>
         <p>
           Alongside the levels sit the parts they were built from—
           <code>elevation.offset.y1/y2</code> (1px, 3px),{' '}
           <code>elevation.blur.sm/md</code> (3px, 6px),{' '}
           <code>elevation.spread.none</code>—and a parallel{' '}
-          <code>elevation.depth.0–4</code> number scale for logical
-          layering, which is how z-index decisions stay off the shadow
-          ramp (more below).
+          <code>elevation.depth.0–4</code> number scale for logical layering,
+          which is how z-index decisions stay off the shadow ramp (more below).
         </p>
 
         <h3>Semantic Surfaces Name the Intent</h3>
         <p>
-          The semantic layer maps levels to roles, exactly as color maps
-          ramps to intent:
+          The semantic layer maps levels to roles, exactly as color maps ramps
+          to intent:
         </p>
         <pre>
           <code>{`// ui/designTokens/semantic/elevation.tokens.json (excerpt)
@@ -152,38 +149,40 @@ level.3:  0px  8px  16px   rgba(0,0,0,0.18)  // modal overlay`}</code>
         </pre>
         <p>
           Components consume <code>surface.raised</code> or{' '}
-          <code>surface.floating</code>, never <code>level.2</code>{' '}
-          directly. The payoff is the same as every semantic layer: when
-          the design decision changes—floating surfaces gain a hairline
-          border in dark mode, say—it changes in one place.
+          <code>surface.floating</code>, never <code>level.2</code> directly.
+          The payoff is the same as every semantic layer: when the design
+          decision changes—floating surfaces gain a hairline border in dark
+          mode, say—it changes in one place.
         </p>
 
         <h3>Elevation Is a Promise About the Z-Axis</h3>
         <p>
-          A shadow claims &quot;I am above my surroundings.&quot; That
-          claim has two halves that must agree: the visual shadow, and
-          the stacking order (<code>z-index</code>) that makes overlapped
-          rendering match. The system keeps them separate on purpose—
+          A shadow claims &quot;I am above my surroundings.&quot; That claim has
+          two halves that must agree: the visual shadow, and the stacking order
+          (<code>z-index</code>) that makes overlapped rendering match. The
+          system keeps them separate on purpose—
           <code>elevation.depth</code> numbers for stacking,{' '}
-          <code>elevation.level</code> shadows for appearance—because
-          they change at different rates, but the review rule is rigid:
-          <strong> a surface&apos;s depth number must order with its
-          shadow level</strong>. A level-3 modal shadow under a level-1
-          nav bar is a lie users can see.
+          <code>elevation.level</code> shadows for appearance—because they
+          change at different rates, but the review rule is rigid:
+          <strong>
+            {' '}
+            a surface&apos;s depth number must order with its shadow level
+          </strong>
+          . A level-3 modal shadow under a level-1 nav bar is a lie users can
+          see.
         </p>
 
         <h3>Dark Mode and the Shadow Problem</h3>
         <p>
           Shadows are a light-mode artifact: on near-black surfaces,
-          black-at-12% is invisible. The honest system response is not
-          heavier shadows but <em>alternative depth cues</em> that the
-          semantic layer can swap per mode—surface color steps (the{' '}
-          <code>background.primary → secondary</code> ramp from the
-          color system), hairline borders, and the{' '}
-          <code>effect.backdropBlur</code> companions (4/8/12px) for
-          surfaces that sit over content. Because components consume{' '}
-          <code>surface.floating</code> rather than a raw shadow value,
-          the dark-mode story can evolve without touching them.
+          black-at-12% is invisible. The honest system response is not heavier
+          shadows but <em>alternative depth cues</em> that the semantic layer
+          can swap per mode—surface color steps (the{' '}
+          <code>background.primary → secondary</code> ramp from the color
+          system), hairline borders, and the <code>effect.backdropBlur</code>{' '}
+          companions (4/8/12px) for surfaces that sit over content. Because
+          components consume <code>surface.floating</code> rather than a raw
+          shadow value, the dark-mode story can evolve without touching them.
         </p>
       </>
     ),
@@ -197,29 +196,27 @@ level.3:  0px  8px  16px   rgba(0,0,0,0.18)  // modal overlay`}</code>
       <>
         <h3>Design Impact</h3>
         <p>
-          Designers own the meaning table: which surfaces are flat, which
-          are raised, which float. The discipline that keeps it honest is
-          scarcity—elevation is for things that <em>must</em> read as
-          above: overlays, popovers, dragged elements. A marketing card
-          that wants a shadow for warmth wants a border or a surface
-          step, not elevation.
+          Designers own the meaning table: which surfaces are flat, which are
+          raised, which float. The discipline that keeps it honest is
+          scarcity—elevation is for things that <em>must</em> read as above:
+          overlays, popovers, dragged elements. A marketing card that wants a
+          shadow for warmth wants a border or a surface step, not elevation.
         </p>
         <h3>Engineering Impact</h3>
         <p>
-          Engineers own the z-axis agreement and the render cost:
-          depth numbers that order with shadow levels, shadows
-          referenced through scoped tokens, and awareness that blur
-          radius is paint area—a full-screen level-3 blur behind every
-          list row is a performance decision, not a style line.
+          Engineers own the z-axis agreement and the render cost: depth numbers
+          that order with shadow levels, shadows referenced through scoped
+          tokens, and awareness that blur radius is paint area—a full-screen
+          level-3 blur behind every list row is a performance decision, not a
+          style line.
         </p>
         <h3>Accessibility Impact</h3>
         <p>
-          Accessibility owns the rule that elevation never carries
-          information alone: depth supplements structure that semantics
-          already express (a dialog is a dialog because of roles and
-          focus trapping, not its shadow). Users with low vision or
-          high-contrast modes may see no shadows at all—the interface
-          must survive that.
+          Accessibility owns the rule that elevation never carries information
+          alone: depth supplements structure that semantics already express (a
+          dialog is a dialog because of roles and focus trapping, not its
+          shadow). Users with low vision or high-contrast modes may see no
+          shadows at all—the interface must survive that.
         </p>
       </>
     ),
@@ -233,27 +230,26 @@ level.3:  0px  8px  16px   rgba(0,0,0,0.18)  // modal overlay`}</code>
     designContent: (
       <>
         <p>
-          In the design tool, the elevation system appears as four named
-          effects matching the levels exactly—same offsets, blurs, and
-          opacities—with the surface roles as the styles components
-          actually apply. The comp review question is{' '}
-          &quot;which surface role is this?&quot; and the answer has to
-          come from the meaning table, not from which shadow looked
-          nice on the artboard.
+          In the design tool, the elevation system appears as four named effects
+          matching the levels exactly—same offsets, blurs, and opacities—with
+          the surface roles as the styles components actually apply. The comp
+          review question is &quot;which surface role is this?&quot; and the
+          answer has to come from the meaning table, not from which shadow
+          looked nice on the artboard.
         </p>
         <p>
-          Dark-mode design files carry the second half of the contract:
-          each elevated surface shown twice—once per mode—with its
-          alternative cue visible. A surface that only works with its
-          shadow is a dark-mode defect shipped in daylight.
+          Dark-mode design files carry the second half of the contract: each
+          elevated surface shown twice—once per mode—with its alternative cue
+          visible. A surface that only works with its shadow is a dark-mode
+          defect shipped in daylight.
         </p>
       </>
     ),
     codeContent: (
       <>
         <p>
-          In code, the levels emit as complete shadow values and
-          components consume their scoped aliases:
+          In code, the levels emit as complete shadow values and components
+          consume their scoped aliases:
         </p>
         <pre>
           <code>{`/* Generated: app/designTokens.scss */
@@ -303,47 +299,46 @@ level.3:  0px  8px  16px   rgba(0,0,0,0.18)  // modal overlay`}</code>
     content: (
       <>
         <p>
-          Ship the classic elevation component—a select menu that opens
-          over a form—using the whole stack:
+          Ship the classic elevation component—a select menu that opens over a
+          form—using the whole stack:
         </p>
         <ol>
           <li>
             <strong>Assign the surface role:</strong> the open menu is{' '}
-            <code>surface.floating</code> (level 2: 0/3/6 at 14%)—above
-            the page, below a modal. The trigger itself stays flat; the
-            control does not elevate, its <em>overlay</em> does.
+            <code>surface.floating</code> (level 2: 0/3/6 at 14%)—above the
+            page, below a modal. The trigger itself stays flat; the control does
+            not elevate, its <em>overlay</em> does.
           </li>
           <li>
-            <strong>Match the stacking:</strong> the popover layer gets
-            the <code>elevation.depth</code> number that orders above
-            content and below modals, so overlap rendering and the
-            shadow tell the same story.
+            <strong>Match the stacking:</strong> the popover layer gets the{' '}
+            <code>elevation.depth</code> number that orders above content and
+            below modals, so overlap rendering and the shadow tell the same
+            story.
           </li>
           <li>
             <strong>Dark mode alternative:</strong> in dark theme the
-            menu&apos;s panel uses a background step plus hairline
-            border as its primary cue; the level-2 shadow remains but
-            does not carry the meaning alone.
+            menu&apos;s panel uses a background step plus hairline border as its
+            primary cue; the level-2 shadow remains but does not carry the
+            meaning alone.
           </li>
           <li>
-            <strong>Enter with motion tokens, exit faster:</strong> the
-            menu enters on <code>motion.interaction.enter</code>{' '}
-            (medium1 + soft.enter) and exits on{' '}
-            <code>motion.interaction.exit</code> (short3 + quick.exit),
-            with the <code>prefers-reduced-motion</code> block fading
-            only—no scale, no travel.
+            <strong>Enter with motion tokens, exit faster:</strong> the menu
+            enters on <code>motion.interaction.enter</code> (medium1 +
+            soft.enter) and exits on <code>motion.interaction.exit</code>{' '}
+            (short3 + quick.exit), with the <code>prefers-reduced-motion</code>{' '}
+            block fading only—no scale, no travel.
           </li>
           <li>
-            <strong>Cost check:</strong> one blurred layer the size of
-            the menu, not the viewport. Blur is paint area; menus are
-            small; this is why the ramp tops out at 16px of blur.
+            <strong>Cost check:</strong> one blurred layer the size of the menu,
+            not the viewport. Blur is paint area; menus are small; this is why
+            the ramp tops out at 16px of blur.
           </li>
         </ol>
         <p>
-          Note how many foundations one component touches—elevation,
-          color surfaces, motion, depth—and how each contributed a named
-          token instead of a local decision. That is the compounding
-          return of tokenized foundations.
+          Note how many foundations one component touches—elevation, color
+          surfaces, motion, depth—and how each contributed a named token instead
+          of a local decision. That is the compounding return of tokenized
+          foundations.
         </p>
       </>
     ),
@@ -357,31 +352,28 @@ level.3:  0px  8px  16px   rgba(0,0,0,0.18)  // modal overlay`}</code>
       <>
         <ul>
           <li>
-            <strong>Four levels vs expressive depth:</strong> dramatic
-            hero moments may want shadows the ramp cannot say. The
-            system answer is a new level with review—ramps grow by
-            decision—never an ad-hoc <code>box-shadow</code> in a
-            feature file.
+            <strong>Four levels vs expressive depth:</strong> dramatic hero
+            moments may want shadows the ramp cannot say. The system answer is a
+            new level with review—ramps grow by decision—never an ad-hoc{' '}
+            <code>box-shadow</code> in a feature file.
           </li>
           <li>
-            <strong>Shadows vs dark-mode legibility:</strong> the
-            light-mode ramp is nearly invisible on dark surfaces;
-            alternative cues (surface steps, borders) must be designed
-            and audited per mode rather than assumed.
+            <strong>Shadows vs dark-mode legibility:</strong> the light-mode
+            ramp is nearly invisible on dark surfaces; alternative cues (surface
+            steps, borders) must be designed and audited per mode rather than
+            assumed.
           </li>
           <li>
-            <strong>Depth-as-numbers vs z-index literals:</strong>{' '}
-            maintaining a parallel depth scale costs a little indirection
-            and buys stack ordering that can be reviewed against shadow
-            levels; raw <code>z-index: 9999</code> buys nothing but
-            archaeology.
+            <strong>Depth-as-numbers vs z-index literals:</strong> maintaining a
+            parallel depth scale costs a little indirection and buys stack
+            ordering that can be reviewed against shadow levels; raw{' '}
+            <code>z-index: 9999</code> buys nothing but archaeology.
           </li>
           <li>
             <strong>Backdrop blur vs performance:</strong>{' '}
-            <code>effect.backdropBlur</code> (4/8/12px) is a beautiful
-            depth cue and one of the most expensive effects in the
-            paint pipeline—budgeted by scale and placement, not applied
-            as garnish.
+            <code>effect.backdropBlur</code> (4/8/12px) is a beautiful depth cue
+            and one of the most expensive effects in the paint pipeline—budgeted
+            by scale and placement, not applied as garnish.
           </li>
         </ul>
       </>
@@ -417,9 +409,8 @@ level.3:  0px  8px  16px   rgba(0,0,0,0.18)  // modal overlay`}</code>
         <h3>4. Depth as the only signal</h3>
         <p>
           If removing every shadow breaks the interface&apos;s meaning,
-          elevation was carrying semantics alone. Dialogs are dialogs
-          because of roles, focus, and interaction—shadows only
-          corroborate.
+          elevation was carrying semantics alone. Dialogs are dialogs because of
+          roles, focus, and interaction—shadows only corroborate.
         </p>
         <h3>5. Viewport-sized blur</h3>
         <pre>
@@ -446,9 +437,8 @@ level.3:  0px  8px  16px   rgba(0,0,0,0.18)  // modal overlay`}</code>
       <>
         <ul>
           <li>
-            <strong>Radius &amp; Shape</strong> — the other half of
-            surface identity (<code>/blueprints/foundations/radius</code>
-            )
+            <strong>Radius &amp; Shape</strong> — the other half of surface
+            identity (<code>/blueprints/foundations/radius</code>)
           </li>
           <li>
             <strong>Motion &amp; Duration</strong> — the tokens elevated
@@ -456,10 +446,9 @@ level.3:  0px  8px  16px   rgba(0,0,0,0.18)  // modal overlay`}</code>
             <code>/blueprints/foundations/motion</code>)
           </li>
           <li>
-            <strong>Material Design elevation guidance</strong> — the
-            reference articulation of elevation as a z-axis system (
-            <code>https://m3.material.io/styles/elevation/overview</code>
-            )
+            <strong>Material Design elevation guidance</strong> — the reference
+            articulation of elevation as a z-axis system (
+            <code>https://m3.material.io/styles/elevation/overview</code>)
           </li>
           <li>
             <strong>The sources</strong> —{' '}
@@ -534,7 +523,8 @@ content.crossReferences = {
     {
       slug: 'tokens',
       title: 'Design Tokens',
-      description: 'The architecture the elevation ramp and depth scales live in',
+      description:
+        'The architecture the elevation ramp and depth scales live in',
       type: 'foundation',
     },
     {

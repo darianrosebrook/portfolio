@@ -21,7 +21,9 @@ function renderPage() {
 
 describe('Radius & Shape Foundations page', () => {
   it('exports SEO metadata derived from the page content block', () => {
-    expect(metadata.title).toBe('Radius & Shape Foundations | Darian Rosebrook');
+    expect(metadata.title).toBe(
+      'Radius & Shape Foundations | Darian Rosebrook'
+    );
     expect(metadata.openGraph?.url).toBe(
       'https://darianrosebrook.com/blueprints/foundations/radius'
     );
@@ -30,7 +32,10 @@ describe('Radius & Shape Foundations page', () => {
   it('renders the education template header and no placeholder', () => {
     renderPage();
     expect(
-      screen.getByRole('heading', { level: 1, name: 'Radius & Shape Foundations' })
+      screen.getByRole('heading', {
+        level: 1,
+        name: 'Radius & Shape Foundations',
+      })
     ).toBeTruthy();
     expect(screen.queryByText(/coming soon/i)).toBeNull();
   });

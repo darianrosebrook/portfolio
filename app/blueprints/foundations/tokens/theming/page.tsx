@@ -344,7 +344,8 @@ setDensity('compact');`}</code>
                 The core layer contains primitives that all brands share. These
                 are the raw materials&mdash;color palettes, spacing scales,
                 typography ramps&mdash;that brands draw from. No brand defines
-                its own palette; each one references values from this shared set.
+                its own palette; each one references values from this shared
+                set.
               </p>
 
               <pre className={styles.codeBlock}>
@@ -481,11 +482,7 @@ setDensity('compact');`}</code>
             <PlaygroundWrapper>
               <div className={styles.playgroundLayout}>
                 <aside className={styles.playgroundAside}>
-                  <BrandSwitcher
-                    showDensity
-                    showFonts
-                    sticky
-                  />
+                  <BrandSwitcher showDensity showFonts sticky />
                 </aside>
                 <div className={styles.playgroundSection}>
                   <DashboardDemo />

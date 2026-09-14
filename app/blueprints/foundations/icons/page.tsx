@@ -69,28 +69,27 @@ const sections: FoundationSection[] = [
     content: (
       <>
         <p>
-          Icons are the highest-frequency visual element in any interface
-          and the fastest to decay. One designer ships 18px icons, another
-          20, a third 24—and within a quarter every screen uses all three.
-          None of them is wrong; the <em>inconsistency</em> is wrong,
-          because users read icon size, weight, and alignment as
-          systematic signals whether designers intend it or not.
+          Icons are the highest-frequency visual element in any interface and
+          the fastest to decay. One designer ships 18px icons, another 20, a
+          third 24—and within a quarter every screen uses all three. None of
+          them is wrong; the <em>inconsistency</em> is wrong, because users read
+          icon size, weight, and alignment as systematic signals whether
+          designers intend it or not.
         </p>
         <p>
-          Iconography also has an accessibility obligation that is
-          routinely botched: an icon is either <em>meaningful</em>—it
-          communicates something no adjacent text carries, and must be
-          labeled for assistive technology—or <em>decorative</em>, and
-          must be hidden from it. The failure modes are silent either
-          way: unlabeled meaningful icons vanish for screen reader users;
-          labeled decorative icons announce noise, reading a star glyph
-          aloud next to the word Favorite.
+          Iconography also has an accessibility obligation that is routinely
+          botched: an icon is either <em>meaningful</em>—it communicates
+          something no adjacent text carries, and must be labeled for assistive
+          technology—or <em>decorative</em>, and must be hidden from it. The
+          failure modes are silent either way: unlabeled meaningful icons vanish
+          for screen reader users; labeled decorative icons announce noise,
+          reading a star glyph aloud next to the word Favorite.
         </p>
         <p>
           This page covers the icon system as built here: the{' '}
-          <code>icon.size</code> scale and <code>icon.strokeWidth</code>{' '}
-          in the core tokens, and the labeling contract implemented by
-          the Icon component in <code>ui/components/Icon</code>.
+          <code>icon.size</code> scale and <code>icon.strokeWidth</code> in the
+          core tokens, and the labeling contract implemented by the Icon
+          component in <code>ui/components/Icon</code>.
         </p>
       </>
     ),
@@ -104,53 +103,49 @@ const sections: FoundationSection[] = [
       <>
         <h3>Four Sizes, No Exceptions</h3>
         <p>
-          The core scale in{' '}
-          <code>ui/designTokens/core/icon.tokens.json</code> is four
-          steps:
+          The core scale in <code>ui/designTokens/core/icon.tokens.json</code>{' '}
+          is four steps:
         </p>
         <pre>
           <code>{`// icon.size (values)
 sm: 16px   md: 20px   lg: 24px   xl: 32px`}</code>
         </pre>
         <p>
-          Four is enough and four is the point: <code>sm</code> is inline
-          with body text, <code>md</code> the default for buttons and
-          controls (the Icon component&apos;s 20px default),{' '}
-          <code>lg</code> for navigation and list affordances,{' '}
-          <code>xl</code> for feature moments. The values align with the
-          spacing scale&apos;s neighbors (16, 24, 32 are{' '}
-          <code>spacing.size.06/07/08</code>), which is why icons sit
-          correctly in padded containers without bespoke alignment CSS.
+          Four is enough and four is the point: <code>sm</code> is inline with
+          body text, <code>md</code> the default for buttons and controls (the
+          Icon component&apos;s 20px default), <code>lg</code> for navigation
+          and list affordances, <code>xl</code> for feature moments. The values
+          align with the spacing scale&apos;s neighbors (16, 24, 32 are{' '}
+          <code>spacing.size.06/07/08</code>), which is why icons sit correctly
+          in padded containers without bespoke alignment CSS.
         </p>
 
         <h3>One Stroke Weight</h3>
         <p>
-          <code>icon.strokeWidth.default</code> is <strong>1.5px</strong>,
-          and the word <em>default</em> in that name is doing honest work:
-          it is the weight every custom-drawn icon ships at. Stroke
-          consistency is what makes icons from different sources read as
-          one family—two icons at the same size but different weights
-          look like different typefaces. When an icon needs to feel
-          bolder, the system answer is a filled variant or a heavier
-          glyph from the set, not a locally bumped stroke.
+          <code>icon.strokeWidth.default</code> is <strong>1.5px</strong>, and
+          the word <em>default</em> in that name is doing honest work: it is the
+          weight every custom-drawn icon ships at. Stroke consistency is what
+          makes icons from different sources read as one family—two icons at the
+          same size but different weights look like different typefaces. When an
+          icon needs to feel bolder, the system answer is a filled variant or a
+          heavier glyph from the set, not a locally bumped stroke.
         </p>
 
         <h3>Optical Alignment Beats Mathematical Alignment</h3>
         <p>
-          Icons are drawn against their viewBox, but shapes read by their
-          visual mass. A circle and a square at the same 20px box do not
-          look the same size—the circle needs to overshoot slightly. The
-          system&apos;s convention: icons are drawn on a consistent grid
-          with a small safe area (roughly 10% padding inside the
-          viewBox), and container alignment uses the box, not the ink.
-          The payoff is that <code>align-items: center</code> just works
-          across the whole set.
+          Icons are drawn against their viewBox, but shapes read by their visual
+          mass. A circle and a square at the same 20px box do not look the same
+          size—the circle needs to overshoot slightly. The system&apos;s
+          convention: icons are drawn on a consistent grid with a small safe
+          area (roughly 10% padding inside the viewBox), and container alignment
+          uses the box, not the ink. The payoff is that{' '}
+          <code>align-items: center</code> just works across the whole set.
         </p>
 
         <h3>Meaningful or Decorative—Never Both</h3>
         <p>
-          The accessibility contract is binary, and this repository&apos;s
-          Icon component implements it directly:
+          The accessibility contract is binary, and this repository&apos;s Icon
+          component implements it directly:
         </p>
         <pre>
           <code>{`// ui/components/Icon/Icon.tsx (behavior)
@@ -166,14 +161,13 @@ const hasLabel = typeof label === 'string' && label.length > 0;
         </pre>
         <p>
           Pass <code>label</code> and the icon becomes{' '}
-          <code>role=&quot;img&quot;</code> with an accessible name—use
-          this when the icon is the only carrier of meaning, like a
-          stand-alone close button. Omit it and the icon is{' '}
-          <code>aria-hidden</code>—correct for icons beside text that
-          already says the thing. The important design of this API is
-          that <strong>decorative is the default</strong>: in a
-          well-composed interface most icons sit next to labels, and the
-          safe default is silence.
+          <code>role=&quot;img&quot;</code> with an accessible name—use this
+          when the icon is the only carrier of meaning, like a stand-alone close
+          button. Omit it and the icon is <code>aria-hidden</code>—correct for
+          icons beside text that already says the thing. The important design of
+          this API is that <strong>decorative is the default</strong>: in a
+          well-composed interface most icons sit next to labels, and the safe
+          default is silence.
         </p>
       </>
     ),
@@ -187,29 +181,28 @@ const hasLabel = typeof label === 'string' && label.length > 0;
       <>
         <h3>Design Impact</h3>
         <p>
-          Designers own the glyph vocabulary—what concepts get icons,
-          which style (this system uses a solid set via the FontAwesome
-          kit plus custom SVG sprites), and the grid conventions that
-          keep optical alignment. The review discipline is the same as
-          color&apos;s: an icon in a comp must be able to name its size
-          step and its meaning status.
+          Designers own the glyph vocabulary—what concepts get icons, which
+          style (this system uses a solid set via the FontAwesome kit plus
+          custom SVG sprites), and the grid conventions that keep optical
+          alignment. The review discipline is the same as color&apos;s: an icon
+          in a comp must be able to name its size step and its meaning status.
         </p>
         <h3>Engineering Impact</h3>
         <p>
-          Engineers own the contract: one Icon component, sizes passed
-          from the scale, never a raw <code>&lt;svg&gt;</code> inline in
-          product code where the labeling logic can be bypassed. The
-          component keeps the rules in one place—hydration quirks,
-          currentColor inheritance, and the ARIA branch included.
+          Engineers own the contract: one Icon component, sizes passed from the
+          scale, never a raw <code>&lt;svg&gt;</code> inline in product code
+          where the labeling logic can be bypassed. The component keeps the
+          rules in one place—hydration quirks, currentColor inheritance, and the
+          ARIA branch included.
         </p>
         <h3>Accessibility Impact</h3>
         <p>
           Accessibility owns the naming quality: a label is a name
-          (&quot;Close&quot;), not a description (&quot;gray x icon
-          top right&quot;). Screen reader output is the review surface—
-          hearing &quot;star, Favorite&quot; is a bug in the decorative
-          direction; hearing nothing on a label-only icon button is a
-          bug in the meaningful direction.
+          (&quot;Close&quot;), not a description (&quot;gray x icon top
+          right&quot;). Screen reader output is the review surface— hearing
+          &quot;star, Favorite&quot; is a bug in the decorative direction;
+          hearing nothing on a label-only icon button is a bug in the meaningful
+          direction.
         </p>
       </>
     ),
@@ -223,27 +216,26 @@ const hasLabel = typeof label === 'string' && label.length > 0;
     designContent: (
       <>
         <p>
-          In the design tool, the icon system appears as four named
-          component sizes with the same names as the tokens, drawn on a
-          shared grid with the 1.5px stroke as a library-wide style. The
-          meaning-status decision shows up in the comp itself: a
-          text-plus-icon pair is drawn knowing the icon will render
-          decorative; a solo icon button is annotated with its accessible
-          name, because in code that name is a required prop the
+          In the design tool, the icon system appears as four named component
+          sizes with the same names as the tokens, drawn on a shared grid with
+          the 1.5px stroke as a library-wide style. The meaning-status decision
+          shows up in the comp itself: a text-plus-icon pair is drawn knowing
+          the icon will render decorative; a solo icon button is annotated with
+          its accessible name, because in code that name is a required prop the
           designer is the only one qualified to write.
         </p>
         <p>
-          That last point is the quiet win of treating labeling as
-          design data: the accessible name never gets invented by
-          whoever implements the ticket.
+          That last point is the quiet win of treating labeling as design data:
+          the accessible name never gets invented by whoever implements the
+          ticket.
         </p>
       </>
     ),
     codeContent: (
       <>
         <p>
-          In code, sizes flow from the scale into the one Icon component,
-          and the ARIA contract is structural rather than per-usage:
+          In code, sizes flow from the scale into the one Icon component, and
+          the ARIA contract is structural rather than per-usage:
         </p>
         <pre>
           <code>{`/* Meaningful: the icon IS the affordance */
@@ -258,8 +250,8 @@ const hasLabel = typeof label === 'string' && label.length > 0;
 // → <span aria-hidden="true"> + readable "Favorite" button`}</code>
         </pre>
         <p>
-          Sizing from the scale in CSS-consuming contexts reads the
-          emitted custom properties:
+          Sizing from the scale in CSS-consuming contexts reads the emitted
+          custom properties:
         </p>
         <pre>
           <code>{`.inlineIcon {
@@ -271,11 +263,10 @@ const hasLabel = typeof label === 'string' && label.length > 0;
 .inlineIcon svg { fill: currentColor; }`}</code>
         </pre>
         <p>
-          Note what is <em>not</em> in the icon tokens: color. Icons
-          inherit <code>currentColor</code> so they follow the text
-          semantic of their context—an icon in a destructive button is
-          destructive-colored by construction, and dark mode needs no
-          icon-specific work at all.
+          Note what is <em>not</em> in the icon tokens: color. Icons inherit{' '}
+          <code>currentColor</code> so they follow the text semantic of their
+          context—an icon in a destructive button is destructive-colored by
+          construction, and dark mode needs no icon-specific work at all.
         </p>
       </>
     ),
@@ -288,42 +279,37 @@ const hasLabel = typeof label === 'string' && label.length > 0;
     content: (
       <>
         <p>
-          Ship the highest-risk icon pattern correctly: a toolbar of
-          icon-only buttons, where every icon is meaningful by
-          definition.
+          Ship the highest-risk icon pattern correctly: a toolbar of icon-only
+          buttons, where every icon is meaningful by definition.
         </p>
         <ol>
           <li>
-            <strong>Size from context:</strong> toolbar buttons are
-            controls; <code>icon.size.md</code> (20px) inside a{' '}
-            <code>control.size.sm</code> (24px) height, with the hit
-            area extended to the 44px floor.
+            <strong>Size from context:</strong> toolbar buttons are controls;{' '}
+            <code>icon.size.md</code> (20px) inside a{' '}
+            <code>control.size.sm</code> (24px) height, with the hit area
+            extended to the 44px floor.
           </li>
           <li>
-            <strong>Name every one:</strong> each Icon gets a{' '}
-            <code>label</code>—&quot;Bold&quot;, &quot;Italic&quot;,
-            &quot;Insert link&quot;. These names are also the{' '}
-            <code>aria-label</code> of the button, and the tooltip copy
-            is the same string: one name, three surfaces.
+            <strong>Name every one:</strong> each Icon gets a <code>label</code>
+            —&quot;Bold&quot;, &quot;Italic&quot;, &quot;Insert link&quot;.
+            These names are also the <code>aria-label</code> of the button, and
+            the tooltip copy is the same string: one name, three surfaces.
           </li>
           <li>
-            <strong>State, not glyph-swapping:</strong> disabled and
-            active states change color token and opacity, not the icon
-            file—weight and shape stay constant so the toolbar reads as
-            one system.
+            <strong>State, not glyph-swapping:</strong> disabled and active
+            states change color token and opacity, not the icon file—weight and
+            shape stay constant so the toolbar reads as one system.
           </li>
           <li>
-            <strong>Verify by ear:</strong> the acceptance test is a
-            screen reader pass: the toolbar announces five buttons with
-            five names and zero surprises. Visual review cannot catch
-            this category of defect.
+            <strong>Verify by ear:</strong> the acceptance test is a screen
+            reader pass: the toolbar announces five buttons with five names and
+            zero surprises. Visual review cannot catch this category of defect.
           </li>
         </ol>
         <p>
-          The pattern generalizes: wherever an icon stands alone, the
-          label is mandatory and the review is auditory; wherever an icon
-          accompanies text, silence is mandatory and the review is
-          visual.
+          The pattern generalizes: wherever an icon stands alone, the label is
+          mandatory and the review is auditory; wherever an icon accompanies
+          text, silence is mandatory and the review is visual.
         </p>
       </>
     ),
@@ -337,31 +323,29 @@ const hasLabel = typeof label === 'string' && label.length > 0;
       <>
         <ul>
           <li>
-            <strong>Four sizes vs free resizing:</strong> a locked scale
-            removes 18px and 28px, which will be requested. The answer is
-            either a real usage gap (add a step with review) or drift
-            (refuse)—and the scale&apos;s alignment with spacing steps is
-            the tiebreaker.
+            <strong>Four sizes vs free resizing:</strong> a locked scale removes
+            18px and 28px, which will be requested. The answer is either a real
+            usage gap (add a step with review) or drift (refuse)—and the
+            scale&apos;s alignment with spacing steps is the tiebreaker.
           </li>
           <li>
-            <strong>One stroke weight vs per-icon drama:</strong>{' '}
-            marketing moments want heavier marks; product UI needs
-            uniformity. The split here is set-based: product icons obey
-            strokeWidth 1.5, brand marks are their own asset class
-            outside the icon system.
+            <strong>One stroke weight vs per-icon drama:</strong> marketing
+            moments want heavier marks; product UI needs uniformity. The split
+            here is set-based: product icons obey strokeWidth 1.5, brand marks
+            are their own asset class outside the icon system.
           </li>
           <li>
-            <strong>currentColor vs colored icons:</strong> inheriting
-            color makes icons automatically theme-correct but cannot
-            express multi-tone marks. Multi-tone needs fall to dedicated
-            illustrations, not the icon set.
+            <strong>currentColor vs colored icons:</strong> inheriting color
+            makes icons automatically theme-correct but cannot express
+            multi-tone marks. Multi-tone needs fall to dedicated illustrations,
+            not the icon set.
           </li>
           <li>
             <strong>Decorative default vs explicit-everything:</strong>{' '}
-            defaulting to aria-hidden is safe for the common case and
-            risks silence when someone builds a meaningful icon without a
-            label. The mitigation is review discipline on icon-only
-            patterns, where the rule inverts: label required.
+            defaulting to aria-hidden is safe for the common case and risks
+            silence when someone builds a meaningful icon without a label. The
+            mitigation is review discipline on icon-only patterns, where the
+            rule inverts: label required.
           </li>
         </ul>
       </>
@@ -436,9 +420,11 @@ const hasLabel = typeof label === 'string' && label.length > 0;
             <code>/blueprints/foundations/radius</code>)
           </li>
           <li>
-            <strong>WCAG 1.1.1 non-text content</strong> — the normative
-            basis for icon labeling (
-            <code>https://www.w3.org/WAI/WCAG21/Understanding/non-text-content.html</code>
+            <strong>WCAG 1.1.1 non-text content</strong> — the normative basis
+            for icon labeling (
+            <code>
+              https://www.w3.org/WAI/WCAG21/Understanding/non-text-content.html
+            </code>
             )
           </li>
           <li>

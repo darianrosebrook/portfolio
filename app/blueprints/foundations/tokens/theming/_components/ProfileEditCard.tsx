@@ -6,7 +6,14 @@ export function ProfileEditCard() {
   return (
     <div className={styles.formCard}>
       {/* Header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginBottom: 16,
+        }}
+      >
         <h3 style={{ margin: 0 }}>Your profile</h3>
         <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
           <button className={styles.linkButton}>Cancel</button>
@@ -52,17 +59,26 @@ export function ProfileEditCard() {
 
       {/* Privacy section */}
       <div>
-        <p style={{
-          fontSize: 14,
-          fontWeight: 'bold',
-          color: 'var(--semantic-color-foreground-primary)',
-          marginTop: 16,
-          marginBottom: 8,
-        }}>
+        <p
+          style={{
+            fontSize: 14,
+            fontWeight: 'bold',
+            color: 'var(--semantic-color-foreground-primary)',
+            marginTop: 16,
+            marginBottom: 8,
+          }}
+        >
           Privacy
         </p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-          <label style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+          <label
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+              gap: 8,
+            }}
+          >
             <input
               type="checkbox"
               defaultChecked
@@ -72,11 +88,23 @@ export function ProfileEditCard() {
                 height: 16,
               }}
             />
-            <span style={{ fontSize: 13, color: 'var(--semantic-color-foreground-primary)' }}>
+            <span
+              style={{
+                fontSize: 13,
+                color: 'var(--semantic-color-foreground-primary)',
+              }}
+            >
               Display my listening history
             </span>
           </label>
-          <label style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+          <label
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+              gap: 8,
+            }}
+          >
             <input
               type="checkbox"
               style={{
@@ -85,11 +113,23 @@ export function ProfileEditCard() {
                 height: 16,
               }}
             />
-            <span style={{ fontSize: 13, color: 'var(--semantic-color-foreground-primary)' }}>
+            <span
+              style={{
+                fontSize: 13,
+                color: 'var(--semantic-color-foreground-primary)',
+              }}
+            >
               Everyone can follow my activity
             </span>
           </label>
-          <label style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+          <label
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+              gap: 8,
+            }}
+          >
             <input
               type="checkbox"
               defaultChecked
@@ -99,7 +139,12 @@ export function ProfileEditCard() {
                 height: 16,
               }}
             />
-            <span style={{ fontSize: 13, color: 'var(--semantic-color-foreground-primary)' }}>
+            <span
+              style={{
+                fontSize: 13,
+                color: 'var(--semantic-color-foreground-primary)',
+              }}
+            >
               Show my playlists in search
             </span>
           </label>
@@ -108,36 +153,42 @@ export function ProfileEditCard() {
 
       {/* Danger zone */}
       <div>
-        <p style={{
-          fontSize: 14,
-          fontWeight: 'bold',
-          color: 'var(--semantic-color-feedback-error-default)',
-          marginTop: 16,
-          marginBottom: 8,
-        }}>
+        <p
+          style={{
+            fontSize: 14,
+            fontWeight: 'bold',
+            color: 'var(--semantic-color-feedback-error-default)',
+            marginTop: 16,
+            marginBottom: 8,
+          }}
+        >
           Danger zone
         </p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-          <button style={{
-            fontSize: 13,
-            background: 'none',
-            border: 'none',
-            cursor: 'pointer',
-            color: 'var(--semantic-color-foreground-accent)',
-            padding: 0,
-            textAlign: 'left',
-          }}>
+          <button
+            style={{
+              fontSize: 13,
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              color: 'var(--semantic-color-foreground-accent)',
+              padding: 0,
+              textAlign: 'left',
+            }}
+          >
             Reset recommendations
           </button>
-          <button style={{
-            fontSize: 13,
-            background: 'none',
-            border: 'none',
-            cursor: 'pointer',
-            color: 'var(--semantic-color-feedback-error-default)',
-            padding: 0,
-            textAlign: 'left',
-          }}>
+          <button
+            style={{
+              fontSize: 13,
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              color: 'var(--semantic-color-feedback-error-default)',
+              padding: 0,
+              textAlign: 'left',
+            }}
+          >
             Delete profile
           </button>
         </div>

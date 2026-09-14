@@ -21,9 +21,23 @@ export const DeliveryCard: React.FC = () => {
       </div>
       <div className={styles.mapPlaceholder}>
         <svg width="100%" height="120" viewBox="0 0 200 120" fill="none">
-          <rect width="200" height="120" fill="var(--semantic-color-background-secondary)" />
-          <path d="M20 80 Q60 40 100 60 T180 50" stroke="var(--semantic-color-foreground-accent)" strokeWidth="2" fill="none" />
-          <circle cx="100" cy="60" r="4" fill="var(--semantic-color-foreground-accent)" />
+          <rect
+            width="200"
+            height="120"
+            fill="var(--semantic-color-background-secondary)"
+          />
+          <path
+            d="M20 80 Q60 40 100 60 T180 50"
+            stroke="var(--semantic-color-foreground-accent)"
+            strokeWidth="2"
+            fill="none"
+          />
+          <circle
+            cx="100"
+            cy="60"
+            r="4"
+            fill="var(--semantic-color-foreground-accent)"
+          />
         </svg>
       </div>
       <div className={styles.deliveryActions}>

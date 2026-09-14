@@ -322,25 +322,19 @@ const resolvedTokens = resolver.resolve(context);`}</code>
             <tr>
               <td>Web, light theme</td>
               <td>
-                <code>
-                  {'{ platform: "web", theme: "light" }'}
-                </code>
+                <code>{'{ platform: "web", theme: "light" }'}</code>
               </td>
             </tr>
             <tr>
               <td>iOS, dark theme</td>
               <td>
-                <code>
-                  {'{ platform: "ios", theme: "dark" }'}
-                </code>
+                <code>{'{ platform: "ios", theme: "dark" }'}</code>
               </td>
             </tr>
             <tr>
               <td>High contrast mode</td>
               <td>
-                <code>
-                  {'{ accessibility: "high-contrast" }'}
-                </code>
+                <code>{'{ accessibility: "high-contrast" }'}</code>
               </td>
             </tr>
             <tr>

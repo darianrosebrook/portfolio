@@ -69,26 +69,23 @@ const sections: FoundationSection[] = [
     content: (
       <>
         <p>
-          Shape is the foundation users perceive fastest and describe
-          worst. Nobody articulates &quot;the corner radii are
-          inconsistent&quot;; they say the product feels off, or cheap,
-          or like two teams built it. A 4px input inside a 12px card on
-          an 8px modal is exactly that—three shape languages in one
-          screen, each defensible, together incoherent.
+          Shape is the foundation users perceive fastest and describe worst.
+          Nobody articulates &quot;the corner radii are inconsistent&quot;; they
+          say the product feels off, or cheap, or like two teams built it. A 4px
+          input inside a 12px card on an 8px modal is exactly that—three shape
+          languages in one screen, each defensible, together incoherent.
         </p>
         <p>
-          Radius is also brand infrastructure. Sharp corners read
-          technical and serious; generous curves read friendly and
-          consumer. When shape lives in tokens, that personality dial is
-          a mapping change—swap the semantic roles onto different scale
-          steps and the whole product moves together. When shape lives
-          in per-component CSS, rebranding means archaeology.
+          Radius is also brand infrastructure. Sharp corners read technical and
+          serious; generous curves read friendly and consumer. When shape lives
+          in tokens, that personality dial is a mapping change—swap the semantic
+          roles onto different scale steps and the whole product moves together.
+          When shape lives in per-component CSS, rebranding means archaeology.
         </p>
         <p>
           This page covers the radius system as built here: the{' '}
-          <code>shape.radius</code> scale in the core tokens, the
-          semantic shape roles above it, and the control-level pill
-          contract.
+          <code>shape.radius</code> scale in the core tokens, the semantic shape
+          roles above it, and the control-level pill contract.
         </p>
       </>
     ),
@@ -102,8 +99,7 @@ const sections: FoundationSection[] = [
       <>
         <h3>An Eight-Step Scale with a Named Middle</h3>
         <p>
-          The core scale in{' '}
-          <code>ui/designTokens/core/shape.tokens.json</code>:
+          The core scale in <code>ui/designTokens/core/shape.tokens.json</code>:
         </p>
         <pre>
           <code>{`// shape.radius (values)
@@ -111,21 +107,20 @@ none: 0px     01: 2px     02: 4px     medium: 6px
 03: 8px       04: 16px    05: 32px    full: 9999px`}</code>
         </pre>
         <p>
-          The climb is roughly doubling with intent: hairline (2) for
-          chips and tags, control (4) for inputs and buttons, the named{' '}
-          <code>medium</code> (6) as the workhorse control corner, up
-          through 8 for cards and 16 for large surfaces, with{' '}
-          <code>full</code> as the pill. Note that <code>medium</code>{' '}
-          sits <em>between</em> 02 and 03 numerically—a named token
-          inserted where the scale had a gap. It is a wart worth knowing:
-          the scale&apos;s numbering is historical, the semantic names
-          are the interface.
+          The climb is roughly doubling with intent: hairline (2) for chips and
+          tags, control (4) for inputs and buttons, the named{' '}
+          <code>medium</code> (6) as the workhorse control corner, up through 8
+          for cards and 16 for large surfaces, with <code>full</code> as the
+          pill. Note that <code>medium</code> sits <em>between</em> 02 and 03
+          numerically—a named token inserted where the scale had a gap. It is a
+          wart worth knowing: the scale&apos;s numbering is historical, the
+          semantic names are the interface.
         </p>
 
         <h3>Semantic Roles Are the Interface</h3>
         <p>
-          Consumers never touch the numbered steps. The semantic layer
-          maps them to roles:
+          Consumers never touch the numbered steps. The semantic layer maps them
+          to roles:
         </p>
         <pre>
           <code>{`// ui/designTokens/semantic/shape.tokens.json (excerpt)
@@ -147,28 +142,27 @@ none: 0px     01: 2px     02: 4px     medium: 6px
 }`}</code>
         </pre>
         <p>
-          Read the two mappings as two different questions. Surface
-          roles (<code>small</code>…<code>extraLarge</code>) answer
-          &quot;how rounded is this container?&quot; and scale with the
-          container—a badge takes <code>extraSmall</code>, a card takes{' '}
-          <code>medium</code> or <code>large</code>. Control roles answer
-          &quot;how rounded is this interactive element?&quot; and hold{' '}
-          <em>constant</em> across sizes: every button is{' '}
-          <code>control.radius.default</code> (6px) regardless of its
-          width, which is why a row of differently-sized controls still
+          Read the two mappings as two different questions. Surface roles (
+          <code>small</code>…<code>extraLarge</code>) answer &quot;how rounded
+          is this container?&quot; and scale with the container—a badge takes{' '}
+          <code>extraSmall</code>, a card takes <code>medium</code> or{' '}
+          <code>large</code>. Control roles answer &quot;how rounded is this
+          interactive element?&quot; and hold <em>constant</em> across sizes:
+          every button is <code>control.radius.default</code> (6px) regardless
+          of its width, which is why a row of differently-sized controls still
           reads as one family.
         </p>
 
         <h3>The Pill Contract</h3>
         <p>
-          <code>full: 9999px</code> exists for one shape: the pill, where
-          corner radius equals half the height. Expressed as a huge
-          fixed value, it <em>always</em> equals half of any height up to
-          ~20000px—the browser clamps. The contract is that pills are a
-          deliberate variant (<code>control.radius.pill</code>) for
-          filter chips, toggle tracks, and avatar frames—not a slider
-          you tune. A 12px-radius button that &quot;looks sort of
-          pill&quot; is drift; it is either 6 or it is a pill.
+          <code>full: 9999px</code> exists for one shape: the pill, where corner
+          radius equals half the height. Expressed as a huge fixed value, it{' '}
+          <em>always</em> equals half of any height up to ~20000px—the browser
+          clamps. The contract is that pills are a deliberate variant (
+          <code>control.radius.pill</code>) for filter chips, toggle tracks, and
+          avatar frames—not a slider you tune. A 12px-radius button that
+          &quot;looks sort of pill&quot; is drift; it is either 6 or it is a
+          pill.
         </p>
 
         <h3>Shape Interacts With Everything</h3>
@@ -176,25 +170,24 @@ none: 0px     01: 2px     02: 4px     medium: 6px
           <li>
             <strong>Focus rings:</strong> the focus outline follows the
             element&apos;s radius—the semantic{' '}
-            <code>control.border.focusWidth</code> (the 2px{' '}
-            <code>thick</code> width) pairs with the same corner value,
-            so focused pills get pill-shaped rings for free.
+            <code>control.border.focusWidth</code> (the 2px <code>thick</code>{' '}
+            width) pairs with the same corner value, so focused pills get
+            pill-shaped rings for free.
           </li>
           <li>
-            <strong>Elevation:</strong> shadows take the element&apos;s
-            radius; a 16px card with an 8px shadow curve reads as
-            mismatched weight.
+            <strong>Elevation:</strong> shadows take the element&apos;s radius;
+            a 16px card with an 8px shadow curve reads as mismatched weight.
           </li>
           <li>
             <strong>Density:</strong> tight-density layouts keep the same
-            radii—shape is personality, not space, and rescaling it with
-            density muddies both systems.
+            radii—shape is personality, not space, and rescaling it with density
+            muddies both systems.
           </li>
           <li>
-            <strong>Nesting:</strong> inner corners step{' '}
-            <em>down</em> one role from their container (a 16px modal
-            hosts 8px cards hosts 6px controls). Equal or ascending
-            inner radii look like alignment errors.
+            <strong>Nesting:</strong> inner corners step <em>down</em> one role
+            from their container (a 16px modal hosts 8px cards hosts 6px
+            controls). Equal or ascending inner radii look like alignment
+            errors.
           </li>
         </ul>
       </>
@@ -209,26 +202,25 @@ none: 0px     01: 2px     02: 4px     medium: 6px
       <>
         <h3>Design Impact</h3>
         <p>
-          Designers own the personality dial—which semantic roles map to
-          which steps—and the nesting ladder. The review question is{' '}
-          &quot;which role is this corner?&quot; with the same discipline
-          as color and spacing: a radius that cannot name its role is a
-          radius the system cannot change.
+          Designers own the personality dial—which semantic roles map to which
+          steps—and the nesting ladder. The review question is &quot;which role
+          is this corner?&quot; with the same discipline as color and spacing: a
+          radius that cannot name its role is a radius the system cannot change.
         </p>
         <h3>Engineering Impact</h3>
         <p>
-          Engineers own consumption hygiene: scoped component tokens
-          resolving semantic roles (the Card contract ships{' '}
-          <code>--ds-card-size-radius-medium</code> resolving a semantic
-          shape value with a literal fallback), and the rule that radii
-          never appear as literals in rules.
+          Engineers own consumption hygiene: scoped component tokens resolving
+          semantic roles (the Card contract ships{' '}
+          <code>--ds-card-size-radius-medium</code> resolving a semantic shape
+          value with a literal fallback), and the rule that radii never appear
+          as literals in rules.
         </p>
         <h3>Brand Impact</h3>
         <p>
-          Brand owns the extremes. A rebrand toward sharpness moves the
-          semantic mapping down-scale in one file; toward softness, up.
-          That is the entire cost of a shape rebrand when shape is
-          tokenized—and a cross-codebase audit when it is not.
+          Brand owns the extremes. A rebrand toward sharpness moves the semantic
+          mapping down-scale in one file; toward softness, up. That is the
+          entire cost of a shape rebrand when shape is tokenized—and a
+          cross-codebase audit when it is not.
         </p>
       </>
     ),
@@ -242,27 +234,25 @@ none: 0px     01: 2px     02: 4px     medium: 6px
     designContent: (
       <>
         <p>
-          In the design tool, shape tokens appear as corner-radius
-          variables with the same role names, applied through component
-          styles rather than per-frame tweaking. The comp-side contract
-          that matters most: nested containers visibly step their radii
-          down, and pills are drawn as true pills—not as
-          approximately-round rectangles the implementer must guess
+          In the design tool, shape tokens appear as corner-radius variables
+          with the same role names, applied through component styles rather than
+          per-frame tweaking. The comp-side contract that matters most: nested
+          containers visibly step their radii down, and pills are drawn as true
+          pills—not as approximately-round rectangles the implementer must guess
           about.
         </p>
         <p>
-          Because radius is brand infrastructure, the design library
-          keeps one shape mode per brand—same structure as the color
-          brand layers—so previewing a softer brand is a mode switch,
-          not a re-draw.
+          Because radius is brand infrastructure, the design library keeps one
+          shape mode per brand—same structure as the color brand layers—so
+          previewing a softer brand is a mode switch, not a re-draw.
         </p>
       </>
     ),
     codeContent: (
       <>
         <p>
-          In code, semantic roles emit as custom properties and
-          components bind them through scoped contracts:
+          In code, semantic roles emit as custom properties and components bind
+          them through scoped contracts:
         </p>
         <pre>
           <code>{`/* Generated + component contract */
@@ -302,45 +292,42 @@ none: 0px     01: 2px     02: 4px     medium: 6px
     content: (
       <>
         <p>
-          Ship a shape-heavy pattern: a filter bar with pill chips inside
-          a card, above a data table.
+          Ship a shape-heavy pattern: a filter bar with pill chips inside a
+          card, above a data table.
         </p>
         <ol>
           <li>
-            <strong>Assign by role, top-down:</strong> the card is a
-            surface → <code>radius.medium</code> semantic (8px). The
-            chips inside are controls and pills →{' '}
-            <code>control.radius.pill</code>. The table below is
-            sharp-cornered data → <code>radius.none</code> with hairline
-            borders from the border system.
+            <strong>Assign by role, top-down:</strong> the card is a surface →{' '}
+            <code>radius.medium</code> semantic (8px). The chips inside are
+            controls and pills → <code>control.radius.pill</code>. The table
+            below is sharp-cornered data → <code>radius.none</code> with
+            hairline borders from the border system.
           </li>
           <li>
             <strong>Check the ladder:</strong> card 8 → chips pill (the
-            exception that reads correctly because pills are absolute),
-            and no nested element equals its container&apos;s radius.
+            exception that reads correctly because pills are absolute), and no
+            nested element equals its container&apos;s radius.
           </li>
           <li>
             <strong>Interactions keep their shape:</strong> chip removal
-            animates opacity and translate tokens, never the corner—a
-            radius that animates reads as morphing, and morphing is
-            motion-system vocabulary, not a filter chip&apos;s job.
+            animates opacity and translate tokens, never the corner—a radius
+            that animates reads as morphing, and morphing is motion-system
+            vocabulary, not a filter chip&apos;s job.
           </li>
           <li>
-            <strong>Focus shapes follow:</strong> tabbing through the
-            chips shows pill-shaped focus rings (2px{' '}
-            <code>focusWidth</code>) because the outline inherits the
-            radius.
+            <strong>Focus shapes follow:</strong> tabbing through the chips
+            shows pill-shaped focus rings (2px <code>focusWidth</code>) because
+            the outline inherits the radius.
           </li>
           <li>
-            <strong>Brand check:</strong> switching to a softer brand
-            moves the semantic mapping; the bar&apos;s relationships
-            survive because everything consumed roles.
+            <strong>Brand check:</strong> switching to a softer brand moves the
+            semantic mapping; the bar&apos;s relationships survive because
+            everything consumed roles.
           </li>
         </ol>
         <p>
-          Five checks, zero new numbers. The bar looks like the rest of
-          the product because it <em>is</em> the rest of the product,
-          shape-wise.
+          Five checks, zero new numbers. The bar looks like the rest of the
+          product because it <em>is</em> the rest of the product, shape-wise.
         </p>
       </>
     ),
@@ -354,28 +341,28 @@ none: 0px     01: 2px     02: 4px     medium: 6px
       <>
         <ul>
           <li>
-            <strong>Fixed steps vs optical radius:</strong> huge
-            surfaces technically want proportionally larger radii to look
-            equal; a stepped scale accepts slight optical variance for
-            predictability. Where it matters (hero cards), pick the next
-            role—do not compute per-element.
+            <strong>Fixed steps vs optical radius:</strong> huge surfaces
+            technically want proportionally larger radii to look equal; a
+            stepped scale accepts slight optical variance for predictability.
+            Where it matters (hero cards), pick the next role—do not compute
+            per-element.
           </li>
           <li>
-            <strong>One control radius vs per-variant:</strong> holding
-            6px for all controls costs expressiveness (no
-            extra-round secondary buttons) and buys the strongest
-            version of &quot;controls are one family.&quot;
+            <strong>One control radius vs per-variant:</strong> holding 6px for
+            all controls costs expressiveness (no extra-round secondary buttons)
+            and buys the strongest version of &quot;controls are one
+            family.&quot;
           </li>
           <li>
-            <strong>9999px trick vs explicit 50%:</strong> the huge-value
-            pill cannot express elliptical or asymmetric corners; those
-            rare cases fall to dedicated components, not the scale.
+            <strong>9999px trick vs explicit 50%:</strong> the huge-value pill
+            cannot express elliptical or asymmetric corners; those rare cases
+            fall to dedicated components, not the scale.
           </li>
           <li>
-            <strong>Shape vs density decoupling:</strong> keeping radii
-            constant across density modes preserves identity but means
-            dense layouts carry rounded corners into tight spaces—the
-            accepted cost, revisited only if clipping artifacts appear.
+            <strong>Shape vs density decoupling:</strong> keeping radii constant
+            across density modes preserves identity but means dense layouts
+            carry rounded corners into tight spaces—the accepted cost, revisited
+            only if clipping artifacts appear.
           </li>
         </ul>
       </>
@@ -411,9 +398,9 @@ none: 0px     01: 2px     02: 4px     medium: 6px
         </pre>
         <h3>4. Scaling radius with size</h3>
         <p>
-          Corner radius that grows with an element&apos;s width (5% of
-          width, say) destroys the constant-control contract and makes
-          sibling controls disagree. Shape is a role, not a ratio.
+          Corner radius that grows with an element&apos;s width (5% of width,
+          say) destroys the constant-control contract and makes sibling controls
+          disagree. Shape is a role, not a ratio.
         </p>
       </>
     ),
@@ -434,13 +421,12 @@ none: 0px     01: 2px     02: 4px     medium: 6px
       <>
         <ul>
           <li>
-            <strong>Borders &amp; Strokes</strong> — the lines that pair
-            with these corners (
-            <code>/blueprints/foundations/borders</code>)
+            <strong>Borders &amp; Strokes</strong> — the lines that pair with
+            these corners (<code>/blueprints/foundations/borders</code>)
           </li>
           <li>
-            <strong>Elevation &amp; Shadows</strong> — shadows follow
-            shape (<code>/blueprints/foundations/elevation</code>)
+            <strong>Elevation &amp; Shadows</strong> — shadows follow shape (
+            <code>/blueprints/foundations/elevation</code>)
           </li>
           <li>
             <strong>The sources</strong> —{' '}

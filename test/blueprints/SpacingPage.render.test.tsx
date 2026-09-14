@@ -2,7 +2,9 @@ import { describe, it, expect } from 'vitest';
 import * as React from 'react';
 import { render, screen } from '@testing-library/react';
 import { ReducedMotionProvider } from '@/context/ReducedMotionContext';
-import SpacingPage, { metadata } from '@/app/blueprints/foundations/spacing/page';
+import SpacingPage, {
+  metadata,
+} from '@/app/blueprints/foundations/spacing/page';
 
 /**
  * Render-level contract for the Spacing & Sizing Foundations page:
@@ -21,7 +23,9 @@ function renderPage() {
 
 describe('Spacing & Sizing Foundations page', () => {
   it('exports SEO metadata derived from the page content block', () => {
-    expect(metadata.title).toBe('Spacing & Sizing Foundations | Darian Rosebrook');
+    expect(metadata.title).toBe(
+      'Spacing & Sizing Foundations | Darian Rosebrook'
+    );
     expect(metadata.openGraph?.url).toBe(
       'https://darianrosebrook.com/blueprints/foundations/spacing'
     );

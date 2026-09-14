@@ -2,7 +2,9 @@ import { describe, it, expect } from 'vitest';
 import * as React from 'react';
 import { render, screen } from '@testing-library/react';
 import { ReducedMotionProvider } from '@/context/ReducedMotionContext';
-import BordersPage, { metadata } from '@/app/blueprints/foundations/borders/page';
+import BordersPage, {
+  metadata,
+} from '@/app/blueprints/foundations/borders/page';
 
 /**
  * Render-level contract for the Border & Stroke Foundations page:
@@ -21,7 +23,9 @@ function renderPage() {
 
 describe('Border & Stroke Foundations page', () => {
   it('exports SEO metadata derived from the page content block', () => {
-    expect(metadata.title).toBe('Border & Stroke Foundations | Darian Rosebrook');
+    expect(metadata.title).toBe(
+      'Border & Stroke Foundations | Darian Rosebrook'
+    );
     expect(metadata.openGraph?.url).toBe(
       'https://darianrosebrook.com/blueprints/foundations/borders'
     );
@@ -30,7 +34,10 @@ describe('Border & Stroke Foundations page', () => {
   it('renders the education template header and no placeholder', () => {
     renderPage();
     expect(
-      screen.getByRole('heading', { level: 1, name: 'Border & Stroke Foundations' })
+      screen.getByRole('heading', {
+        level: 1,
+        name: 'Border & Stroke Foundations',
+      })
     ).toBeTruthy();
     expect(screen.queryByText(/coming soon/i)).toBeNull();
   });

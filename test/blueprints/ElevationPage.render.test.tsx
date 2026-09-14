@@ -2,7 +2,9 @@ import { describe, it, expect } from 'vitest';
 import * as React from 'react';
 import { render, screen } from '@testing-library/react';
 import { ReducedMotionProvider } from '@/context/ReducedMotionContext';
-import ElevationPage, { metadata } from '@/app/blueprints/foundations/elevation/page';
+import ElevationPage, {
+  metadata,
+} from '@/app/blueprints/foundations/elevation/page';
 
 /**
  * Render-level contract for the Elevation & Shadow Foundations page:

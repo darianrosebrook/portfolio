@@ -68,27 +68,24 @@ const sections: FoundationSection[] = [
     content: (
       <>
         <p>
-          A grid is a promise about alignment: everything on this page
-          shares an invisible structure, so the eye can scan along lines
-          it never sees. Break the promise—columns that almost line up,
-          gutters that vary by a few pixels—and the cost is real:
-          scanning gets harder, density gets noisy, and users cannot
-          tell deliberate grouping from accident.
+          A grid is a promise about alignment: everything on this page shares an
+          invisible structure, so the eye can scan along lines it never sees.
+          Break the promise—columns that almost line up, gutters that vary by a
+          few pixels—and the cost is real: scanning gets harder, density gets
+          noisy, and users cannot tell deliberate grouping from accident.
         </p>
         <p>
-          Grids are also where design tools and code drift fastest,
-          because everyone agrees grids matter and everyone implements
-          them alone. The system answer is the same as every other
-          foundation: columns counted in a shared convention, gutters
-          and margins from the spacing scale, adaptation at the
-          tokenized breakpoints. The grid is not a scaffold you redraw
-          per screen; it is a rhythm you reference.
+          Grids are also where design tools and code drift fastest, because
+          everyone agrees grids matter and everyone implements them alone. The
+          system answer is the same as every other foundation: columns counted
+          in a shared convention, gutters and margins from the spacing scale,
+          adaptation at the tokenized breakpoints. The grid is not a scaffold
+          you redraw per screen; it is a rhythm you reference.
         </p>
         <p>
-          This page covers grid as composed here—there is no separate
-          grid token file, and that is the lesson: a good grid is{' '}
-          <em>composed</em> from the layout, dimension, and spacing
-          tokens you have already met.
+          This page covers grid as composed here—there is no separate grid token
+          file, and that is the lesson: a good grid is <em>composed</em> from
+          the layout, dimension, and spacing tokens you have already met.
         </p>
       </>
     ),
@@ -103,8 +100,8 @@ const sections: FoundationSection[] = [
         <h3>A Column Convention, Not a Column File</h3>
         <p>
           The system&apos;s grid is a <strong>12-column fluid grid</strong>{' '}
-          inside the tokenized containers, dropping to simpler counts on
-          small screens:
+          inside the tokenized containers, dropping to simpler counts on small
+          screens:
         </p>
         <pre>
           <code>{`// Column convention (composed, not stored)
@@ -115,57 +112,58 @@ desktop          12        layout.container.lg 1024 >= lg 1024
 wide desktop     12        layout.container.xl 1280 >= xl 1440`}</code>
         </pre>
         <p>
-          Twelve divides by 2, 3, 4, and 6, which is why it survived
-          every framework war: halves, thirds, quarters, and sixths all
-          land on column boundaries. The smaller counts exist because a
-          12-column grid on a phone produces slivers—columns narrower
-          than their gutters are structure with no meaning.
+          Twelve divides by 2, 3, 4, and 6, which is why it survived every
+          framework war: halves, thirds, quarters, and sixths all land on column
+          boundaries. The smaller counts exist because a 12-column grid on a
+          phone produces slivers—columns narrower than their gutters are
+          structure with no meaning.
         </p>
 
         <h3>Gutters and Margins Come from the Spacing Scale</h3>
         <p>
-          Gutters are spacing decisions and use the scale from the
-          spacing foundation: <code>spacing.size.04</code> (8px) on
-          phones, <code>size.06</code> (16px) from tablet up, stepping
-          to <code>size.07</code> (24px) for wide desktops. Page margins
-          use the same steps (16px mobile, 32px from{' '}
-          <code>lg</code>—the same two-value rule the layout foundation
-          set for page gutters). The consequence worth internalizing:
-          <strong> the grid&apos;s vertical rhythm and the
-          component&apos;s internal rhythm are the same scale</strong>,
-          so cards snap to gutters without translation arithmetic.
+          Gutters are spacing decisions and use the scale from the spacing
+          foundation: <code>spacing.size.04</code> (8px) on phones,{' '}
+          <code>size.06</code> (16px) from tablet up, stepping to{' '}
+          <code>size.07</code> (24px) for wide desktops. Page margins use the
+          same steps (16px mobile, 32px from <code>lg</code>—the same two-value
+          rule the layout foundation set for page gutters). The consequence
+          worth internalizing:
+          <strong>
+            {' '}
+            the grid&apos;s vertical rhythm and the component&apos;s internal
+            rhythm are the same scale
+          </strong>
+          , so cards snap to gutters without translation arithmetic.
         </p>
 
         <h3>Fluid Inside, Discrete At the Edges</h3>
         <p>
-          Columns are fluid—<code>1fr</code> all the way to their
-          container cap—while the structure changes only at the six
-          tokenized <code>dimension.breakpoint</code> steps (640, 768,
-          1024, 1440, 1536, 1920). This is the layout foundation&apos;s
-          rule applied to grids: continuous behavior between a small
-          number of named adaptation points. A grid that re-specifies
-          itself at every breakpoint is four layouts wearing one
-          class name.
+          Columns are fluid—<code>1fr</code> all the way to their container
+          cap—while the structure changes only at the six tokenized{' '}
+          <code>dimension.breakpoint</code> steps (640, 768, 1024, 1440, 1536,
+          1920). This is the layout foundation&apos;s rule applied to grids:
+          continuous behavior between a small number of named adaptation points.
+          A grid that re-specifies itself at every breakpoint is four layouts
+          wearing one class name.
         </p>
 
         <h3>Subgrids and the Alignment Promise</h3>
         <p>
-          Nested content keeps the promise with CSS subgrid: a card
-          whose internal rows align to the page grid&apos;s rows, so a
-          row of cards with different title lengths still aligns their
-          actions. Where subgrid support is unavailable, the fallback is
-          the old craft rule—equal-height flex items with pinned
-          footers—because the alignment promise predates the property
-          that makes it free.
+          Nested content keeps the promise with CSS subgrid: a card whose
+          internal rows align to the page grid&apos;s rows, so a row of cards
+          with different title lengths still aligns their actions. Where subgrid
+          support is unavailable, the fallback is the old craft
+          rule—equal-height flex items with pinned footers—because the alignment
+          promise predates the property that makes it free.
         </p>
 
         <h3>When Not to Grid</h3>
         <p>
-          Grids are for <em>regular</em> structure—repeated items,
-          tabular relationships, aligned regions. Editorial layouts,
-          reading flows, and exploratory spaces want the container and
-          flow discipline from the layout foundation instead. Forcing a
-          12-column grid onto an essay produces margins with no job.
+          Grids are for <em>regular</em> structure—repeated items, tabular
+          relationships, aligned regions. Editorial layouts, reading flows, and
+          exploratory spaces want the container and flow discipline from the
+          layout foundation instead. Forcing a 12-column grid onto an essay
+          produces margins with no job.
         </p>
       </>
     ),
@@ -179,28 +177,27 @@ wide desktop     12        layout.container.xl 1280 >= xl 1440`}</code>
       <>
         <h3>Design Impact</h3>
         <p>
-          Designers own the column spans and the density judgment: what
-          spans 12 vs 8 vs 6, when a 2-up becomes a 3-up, and how much
-          gutter a given content weight needs. The Figma counterpart is
-          layout grids with the same column counts and spacing-scale
-          gutters, applied to frames rather than drawn per screen.
+          Designers own the column spans and the density judgment: what spans 12
+          vs 8 vs 6, when a 2-up becomes a 3-up, and how much gutter a given
+          content weight needs. The Figma counterpart is layout grids with the
+          same column counts and spacing-scale gutters, applied to frames rather
+          than drawn per screen.
         </p>
         <h3>Engineering Impact</h3>
         <p>
           Engineers own the implementation contract: CSS Grid with{' '}
-          <code>repeat(12, 1fr)</code> and spacing-scale gaps, spans via
-          utility or scoped classes, subgrid where alignment demands
-          it—and no resurrected float or percentage-padding skeletons
-          from earlier CSS eras.
+          <code>repeat(12, 1fr)</code> and spacing-scale gaps, spans via utility
+          or scoped classes, subgrid where alignment demands it—and no
+          resurrected float or percentage-padding skeletons from earlier CSS
+          eras.
         </p>
         <h3>Accessibility Impact</h3>
         <p>
-          Accessibility owns reading order and reflow: DOM order equals
-          visual order (grids make re-ordering seductive and screen
-          readers follow the DOM), and the 320px single-column reflow
-          guarantee from the layout foundation applies to every grid
-          layout. A grid that only works at 12 columns is a zoom-mode
-          failure.
+          Accessibility owns reading order and reflow: DOM order equals visual
+          order (grids make re-ordering seductive and screen readers follow the
+          DOM), and the 320px single-column reflow guarantee from the layout
+          foundation applies to every grid layout. A grid that only works at 12
+          columns is a zoom-mode failure.
         </p>
       </>
     ),
@@ -215,18 +212,17 @@ wide desktop     12        layout.container.xl 1280 >= xl 1440`}</code>
       <>
         <p>
           In the design tool, the grid shows up as frame-level layout
-          grids—4/8/12 columns by breakpoint, gutters typed from the
-          spacing scale—and components drawn to snap. The comp-review
-          vocabulary is span-based: &quot;this is an 8-span with a 4-span
-          aside&quot; is a sentence both sides can implement, because
-          spans are arithmetic on shared structure.
+          grids—4/8/12 columns by breakpoint, gutters typed from the spacing
+          scale—and components drawn to snap. The comp-review vocabulary is
+          span-based: &quot;this is an 8-span with a 4-span aside&quot; is a
+          sentence both sides can implement, because spans are arithmetic on
+          shared structure.
         </p>
         <p>
           The design-side trap to name in review: elements that are{' '}
-          <em>almost</em> on the grid—offset by half a gutter, sized to
-          the wrong fraction. Either it is on the structure or it is
-          floating decoration; &quot;close&quot; is the drift that kills
-          the promise.
+          <em>almost</em> on the grid—offset by half a gutter, sized to the
+          wrong fraction. Either it is on the structure or it is floating
+          decoration; &quot;close&quot; is the drift that kills the promise.
         </p>
       </>
     ),
@@ -286,44 +282,42 @@ wide desktop     12        layout.container.xl 1280 >= xl 1440`}</code>
     content: (
       <>
         <p>
-          Compose a grid-heavy page—search results with filters—entirely
-          from shared structure:
+          Compose a grid-heavy page—search results with filters—entirely from
+          shared structure:
         </p>
         <ol>
           <li>
-            <strong>Structural grid:</strong> at <code>lg</code>, a
-            12-column grid with the filters as a 3-span and results as a
-            9-span, 16px gutter. Below <code>md</code>, filters collapse
-            into a disclosure above a 4-column result grid.
+            <strong>Structural grid:</strong> at <code>lg</code>, a 12-column
+            grid with the filters as a 3-span and results as a 9-span, 16px
+            gutter. Below <code>md</code>, filters collapse into a disclosure
+            above a 4-column result grid.
           </li>
           <li>
-            <strong>Card grid inside the 9-span:</strong>{' '}
-            <code>auto-fill</code> with <code>minmax(280px, 1fr)</code>{' '}
-            so card count follows available width without new
-            breakpoints—the card grid adapts continuously inside the
-            discrete structural one.
+            <strong>Card grid inside the 9-span:</strong> <code>auto-fill</code>{' '}
+            with <code>minmax(280px, 1fr)</code> so card count follows available
+            width without new breakpoints—the card grid adapts continuously
+            inside the discrete structural one.
           </li>
           <li>
-            <strong>Alignment via subgrid:</strong> three-row cards
-            (title, snippet, metadata) share rows, so actions align
-            regardless of snippet length.
+            <strong>Alignment via subgrid:</strong> three-row cards (title,
+            snippet, metadata) share rows, so actions align regardless of
+            snippet length.
           </li>
           <li>
-            <strong>Reading order:</strong> filters come after the
-            results in the DOM and are placed visually with grid
-            placement—screen reader users hit results first, which is
-            the correct priority, and the visual order is a styling
-            fact, not a DOM fact.
+            <strong>Reading order:</strong> filters come after the results in
+            the DOM and are placed visually with grid placement—screen reader
+            users hit results first, which is the correct priority, and the
+            visual order is a styling fact, not a DOM fact.
           </li>
           <li>
-            <strong>Reflow proof:</strong> at 320px everything is one
-            column, filters collapsed, cards full-width—the same
-            guarantee every layout in the system carries.
+            <strong>Reflow proof:</strong> at 320px everything is one column,
+            filters collapsed, cards full-width—the same guarantee every layout
+            in the system carries.
           </li>
         </ol>
         <p>
-          Zero new values; one convention; every number already named in
-          a token file. That is what composing a foundation means.
+          Zero new values; one convention; every number already named in a token
+          file. That is what composing a foundation means.
         </p>
       </>
     ),
@@ -337,28 +331,27 @@ wide desktop     12        layout.container.xl 1280 >= xl 1440`}</code>
       <>
         <ul>
           <li>
-            <strong>Fixed column counts vs fluid spans:</strong> 4/8/12
-            is coarse; fully fluid spans adapt more but stop being a
-            shared language—no one can say what spans what. The system
-            takes discrete structure with fluid inside.
+            <strong>Fixed column counts vs fluid spans:</strong> 4/8/12 is
+            coarse; fully fluid spans adapt more but stop being a shared
+            language—no one can say what spans what. The system takes discrete
+            structure with fluid inside.
           </li>
           <li>
-            <strong>Shared gutters vs per-context gutters:</strong> one
-            gutter scale keeps card gaps and page margins rhyming; teams
-            that want airier section spacing should step the spacing
-            token, not fork the grid.
+            <strong>Shared gutters vs per-context gutters:</strong> one gutter
+            scale keeps card gaps and page margins rhyming; teams that want
+            airier section spacing should step the spacing token, not fork the
+            grid.
           </li>
           <li>
-            <strong>Grid placement vs DOM order:</strong> visual
-            re-ordering is free with grid and costs accessibility if the
-            DOM disagrees; the rule (DOM = reading order) makes the
-            flexibility safe.
+            <strong>Grid placement vs DOM order:</strong> visual re-ordering is
+            free with grid and costs accessibility if the DOM disagrees; the
+            rule (DOM = reading order) makes the flexibility safe.
           </li>
           <li>
             <strong>Subgrid vs fallbacks:</strong> subgrid buys perfect
-            cross-card alignment where supported; the flex fallback is
-            more code for less guarantee. Choose per how much the
-            alignment promise matters to the pattern.
+            cross-card alignment where supported; the flex fallback is more code
+            for less guarantee. Choose per how much the alignment promise
+            matters to the pattern.
           </li>
         </ul>
       </>
@@ -415,18 +408,20 @@ wide desktop     12        layout.container.xl 1280 >= xl 1440`}</code>
       <>
         <ul>
           <li>
-            <strong>Layout</strong> — containers, measure, and the
-            breakpoint scale this grid composes (
+            <strong>Layout</strong> — containers, measure, and the breakpoint
+            scale this grid composes (
             <code>/blueprints/foundations/layout</code>)
           </li>
           <li>
-            <strong>Spacing &amp; Sizing</strong> — where the gutters
-            come from (<code>/blueprints/foundations/spacing</code>)
+            <strong>Spacing &amp; Sizing</strong> — where the gutters come from
+            (<code>/blueprints/foundations/spacing</code>)
           </li>
           <li>
-            <strong>CSS Grid Layout (MDN)</strong> — the platform
-            features this system uses (
-            <code>https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout</code>
+            <strong>CSS Grid Layout (MDN)</strong> — the platform features this
+            system uses (
+            <code>
+              https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout
+            </code>
             )
           </li>
           <li>

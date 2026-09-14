@@ -51,8 +51,11 @@
   overflow: hidden;
   border: 1px solid var(--semantic-color-border-default);
   height: fit-content;
-  transition: transform var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing),
-    box-shadow var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  transition:
+    transform var(--semantic-motion-interaction-hover-duration)
+      var(--semantic-motion-interaction-hover-easing),
+    box-shadow var(--semantic-motion-interaction-hover-duration)
+      var(--semantic-motion-interaction-hover-easing);
 
   &:hover {
     transform: translateY(-2px);
@@ -123,7 +126,8 @@
 }
 
 .cardButton {
-  padding: var(--semantic-spacing-padding-component) var(--semantic-spacing-padding-card);
+  padding: var(--semantic-spacing-padding-component)
+    var(--semantic-spacing-padding-card);
   background: var(--semantic-color-background-secondary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-button-radius, 8px);
@@ -131,7 +135,8 @@
   font-weight: var(--semantic-typography-body-font-weight);
   color: var(--semantic-color-foreground-primary);
   cursor: pointer;
-  transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  transition: all var(--semantic-motion-interaction-hover-duration)
+    var(--semantic-motion-interaction-hover-easing);
 
   &:hover {
     background: var(--semantic-color-background-tertiary);
@@ -139,14 +144,16 @@
 }
 
 .select {
-  padding: var(--semantic-spacing-padding-component) var(--semantic-spacing-padding-component);
+  padding: var(--semantic-spacing-padding-component)
+    var(--semantic-spacing-padding-component);
   background: var(--semantic-color-background-secondary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-control-radius-default, 6px);
   font-size: 14px;
   color: var(--semantic-color-foreground-primary);
   cursor: pointer;
-  transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  transition: all var(--semantic-motion-interaction-hover-duration)
+    var(--semantic-motion-interaction-hover-easing);
 
   &:hover {
     border-color: var(--semantic-color-border-hover);
@@ -160,7 +167,8 @@
 }
 
 .primaryButton {
-  padding: var(--semantic-spacing-padding-component) var(--semantic-spacing-padding-card);
+  padding: var(--semantic-spacing-padding-component)
+    var(--semantic-spacing-padding-card);
   background: var(--semantic-color-background-accent);
   border: none;
   border-radius: var(--semantic-shape-button-radius, 8px);
@@ -168,7 +176,8 @@
   font-weight: var(--semantic-typography-heading-font-weight);
   color: var(--semantic-color-foreground-inverse);
   cursor: pointer;
-  transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  transition: all var(--semantic-motion-interaction-hover-duration)
+    var(--semantic-motion-interaction-hover-easing);
 
   &:hover {
     filter: brightness(1.1);
@@ -226,13 +235,15 @@
 }
 
 .input {
-  padding: var(--semantic-spacing-padding-component) var(--semantic-spacing-padding-component);
+  padding: var(--semantic-spacing-padding-component)
+    var(--semantic-spacing-padding-component);
   background: var(--semantic-color-background-secondary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-control-radius-default, 6px);
   font-size: 14px;
   color: var(--semantic-color-foreground-primary);
-  transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  transition: all var(--semantic-motion-interaction-hover-duration)
+    var(--semantic-motion-interaction-hover-easing);
 
   &:focus {
     outline: none;
@@ -257,7 +268,8 @@
   justify-content: center;
   color: var(--semantic-color-foreground-tertiary);
   cursor: pointer;
-  transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  transition: all var(--semantic-motion-interaction-hover-duration)
+    var(--semantic-motion-interaction-hover-easing);
 
   &:hover {
     border-color: var(--semantic-color-border-hover);
@@ -289,7 +301,8 @@
   border-radius: 4px;
   color: var(--semantic-color-foreground-secondary);
   cursor: pointer;
-  transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  transition: all var(--semantic-motion-interaction-hover-duration)
+    var(--semantic-motion-interaction-hover-easing);
 
   &:hover {
     background: var(--semantic-color-background-tertiary);
@@ -318,14 +331,16 @@
 }
 
 .chip {
-  padding: var(--semantic-spacing-padding-component) var(--semantic-spacing-padding-component);
+  padding: var(--semantic-spacing-padding-component)
+    var(--semantic-spacing-padding-component);
   background: var(--semantic-color-background-secondary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-badge-radius, 16px);
   font-size: 13px;
   color: var(--semantic-color-foreground-primary);
   cursor: pointer;
-  transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  transition: all var(--semantic-motion-interaction-hover-duration)
+    var(--semantic-motion-interaction-hover-easing);
 
   &:hover {
     border-color: var(--semantic-color-border-hover);
@@ -350,21 +365,40 @@
   border: 2px solid var(--semantic-color-border-default);
   border-radius: 50%;
   cursor: pointer;
-  transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  transition: all var(--semantic-motion-interaction-hover-duration)
+    var(--semantic-motion-interaction-hover-easing);
 
   &:hover {
     transform: scale(1.1);
   }
 
-  &.white { background: #ffffff; }
-  &.gray { background: #9ca3af; }
-  &.black { background: #1f2937; }
-  &.red { background: #ef4444; }
-  &.pink { background: #ec4899; }
-  &.violet { background: #8b5cf6; }
-  &.blue { background: #3b82f6; }
-  &.green { background: #10b981; }
-  &.beige { background: #d4b896; }
+  &.white {
+    background: #ffffff;
+  }
+  &.gray {
+    background: #9ca3af;
+  }
+  &.black {
+    background: #1f2937;
+  }
+  &.red {
+    background: #ef4444;
+  }
+  &.pink {
+    background: #ec4899;
+  }
+  &.violet {
+    background: #8b5cf6;
+  }
+  &.blue {
+    background: #3b82f6;
+  }
+  &.green {
+    background: #10b981;
+  }
+  &.beige {
+    background: #d4b896;
+  }
 }
 
 .sizeGrid {
@@ -374,14 +408,16 @@
 }
 
 .sizeButton {
-  padding: var(--semantic-spacing-padding-component) var(--semantic-spacing-padding-card);
+  padding: var(--semantic-spacing-padding-component)
+    var(--semantic-spacing-padding-card);
   background: var(--semantic-color-background-secondary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-control-radius-default, 6px);
   font-size: 14px;
   color: var(--semantic-color-foreground-primary);
   cursor: pointer;
-  transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  transition: all var(--semantic-motion-interaction-hover-duration)
+    var(--semantic-motion-interaction-hover-easing);
 
   &:hover {
     border-color: var(--semantic-color-border-hover);
@@ -419,7 +455,8 @@
   font-size: 14px;
   color: var(--semantic-color-foreground-primary);
   cursor: pointer;
-  transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  transition: all var(--semantic-motion-interaction-hover-duration)
+    var(--semantic-motion-interaction-hover-easing);
 
   &:hover {
     border-color: var(--semantic-color-border-hover);
@@ -440,14 +477,16 @@
 }
 
 .materialButton {
-  padding: var(--semantic-spacing-padding-component) var(--semantic-spacing-padding-card);
+  padding: var(--semantic-spacing-padding-component)
+    var(--semantic-spacing-padding-card);
   background: var(--semantic-color-background-secondary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-control-radius-default, 6px);
   font-size: 14px;
   color: var(--semantic-color-foreground-primary);
   cursor: pointer;
-  transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  transition: all var(--semantic-motion-interaction-hover-duration)
+    var(--semantic-motion-interaction-hover-easing);
 
   &:hover {
     border-color: var(--semantic-color-border-hover);
@@ -461,29 +500,49 @@
 }
 
 .colorButton {
-  padding: var(--semantic-spacing-padding-component) var(--semantic-spacing-padding-component);
+  padding: var(--semantic-spacing-padding-component)
+    var(--semantic-spacing-padding-component);
   background: var(--semantic-color-background-secondary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-control-radius-default, 6px);
   font-size: 13px;
   color: var(--semantic-color-foreground-primary);
   cursor: pointer;
-  transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  transition: all var(--semantic-motion-interaction-hover-duration)
+    var(--semantic-motion-interaction-hover-easing);
   text-align: left;
 
   &:hover {
     border-color: var(--semantic-color-border-hover);
   }
 
-  &.white { border-left: 3px solid #ffffff; }
-  &.gray { border-left: 3px solid #9ca3af; }
-  &.black { border-left: 3px solid #1f2937; }
-  &.red { border-left: 3px solid #ef4444; }
-  &.pink { border-left: 3px solid #ec4899; }
-  &.violet { border-left: 3px solid #8b5cf6; }
-  &.blue { border-left: 3px solid #3b82f6; }
-  &.green { border-left: 3px solid #10b981; }
-  &.beige { border-left: 3px solid #d4b896; }
+  &.white {
+    border-left: 3px solid #ffffff;
+  }
+  &.gray {
+    border-left: 3px solid #9ca3af;
+  }
+  &.black {
+    border-left: 3px solid #1f2937;
+  }
+  &.red {
+    border-left: 3px solid #ef4444;
+  }
+  &.pink {
+    border-left: 3px solid #ec4899;
+  }
+  &.violet {
+    border-left: 3px solid #8b5cf6;
+  }
+  &.blue {
+    border-left: 3px solid #3b82f6;
+  }
+  &.green {
+    border-left: 3px solid #10b981;
+  }
+  &.beige {
+    border-left: 3px solid #d4b896;
+  }
 }
 
 /* Data Section - Individual cards in masonry */
@@ -525,7 +584,8 @@
 
   th,
   td {
-    padding: var(--semantic-spacing-padding-component) var(--semantic-spacing-padding-component);
+    padding: var(--semantic-spacing-padding-component)
+      var(--semantic-spacing-padding-component);
     text-align: left;
   }
 
@@ -542,7 +602,8 @@
   }
 
   tbody tr {
-    transition: background var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+    transition: background var(--semantic-motion-interaction-hover-duration)
+      var(--semantic-motion-interaction-hover-easing);
 
     &:hover {
       background: var(--semantic-color-background-secondary);
@@ -556,7 +617,8 @@
 
 .badge {
   display: inline-block;
-  padding: var(--semantic-spacing-padding-component) var(--semantic-spacing-padding-component);
+  padding: var(--semantic-spacing-padding-component)
+    var(--semantic-spacing-padding-component);
   font-size: 11px;
   font-weight: var(--semantic-typography-body-font-weight);
   border-radius: var(--semantic-shape-badge-radius, 12px);
@@ -592,7 +654,8 @@
   font-size: 14px;
   color: var(--semantic-color-foreground-primary);
   cursor: pointer;
-  transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  transition: all var(--semantic-motion-interaction-hover-duration)
+    var(--semantic-motion-interaction-hover-easing);
 
   &:hover {
     background: var(--semantic-color-background-secondary);
@@ -706,7 +769,8 @@
   font-weight: var(--semantic-typography-heading-font-weight);
   color: var(--semantic-color-foreground-inverse);
   cursor: pointer;
-  transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  transition: all var(--semantic-motion-interaction-hover-duration)
+    var(--semantic-motion-interaction-hover-easing);
 
   &:hover {
     filter: brightness(1.1);
@@ -744,14 +808,16 @@
 }
 
 .deliveryOption {
-  padding: var(--semantic-spacing-padding-component) var(--semantic-spacing-padding-card);
+  padding: var(--semantic-spacing-padding-component)
+    var(--semantic-spacing-padding-card);
   background: var(--semantic-color-background-secondary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-control-radius-default, 6px);
   font-size: 14px;
   color: var(--semantic-color-foreground-primary);
   cursor: pointer;
-  transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  transition: all var(--semantic-motion-interaction-hover-duration)
+    var(--semantic-motion-interaction-hover-easing);
 
   &:hover {
     border-color: var(--semantic-color-border-hover);
@@ -806,7 +872,8 @@
 
 .secondaryButton {
   flex: 1;
-  padding: var(--semantic-spacing-padding-component) var(--semantic-spacing-padding-card);
+  padding: var(--semantic-spacing-padding-component)
+    var(--semantic-spacing-padding-card);
   background: var(--semantic-color-background-secondary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-button-radius, 8px);
@@ -814,7 +881,8 @@
   font-weight: var(--semantic-typography-body-font-weight);
   color: var(--semantic-color-foreground-primary);
   cursor: pointer;
-  transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  transition: all var(--semantic-motion-interaction-hover-duration)
+    var(--semantic-motion-interaction-hover-easing);
 
   &:hover {
     background: var(--semantic-color-background-tertiary);
@@ -850,7 +918,8 @@
   font-size: 14px;
   color: var(--semantic-color-foreground-accent);
   cursor: pointer;
-  transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  transition: all var(--semantic-motion-interaction-hover-duration)
+    var(--semantic-motion-interaction-hover-easing);
 
   &:hover {
     text-decoration: underline;
@@ -941,14 +1010,16 @@
 }
 
 .filterTag {
-  padding: var(--semantic-spacing-padding-component) var(--semantic-spacing-padding-component);
+  padding: var(--semantic-spacing-padding-component)
+    var(--semantic-spacing-padding-component);
   background: var(--semantic-color-background-secondary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-badge-radius, 16px);
   font-size: 13px;
   color: var(--semantic-color-foreground-primary);
   cursor: pointer;
-  transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  transition: all var(--semantic-motion-interaction-hover-duration)
+    var(--semantic-motion-interaction-hover-easing);
 
   &:hover {
     border-color: var(--semantic-color-border-hover);
@@ -1016,7 +1087,8 @@
   border-radius: var(--semantic-shape-element-radius, 6px);
   color: var(--semantic-color-foreground-tertiary);
   cursor: pointer;
-  transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  transition: all var(--semantic-motion-interaction-hover-duration)
+    var(--semantic-motion-interaction-hover-easing);
 
   &:hover {
     background: var(--semantic-color-background-secondary);
@@ -1172,7 +1244,8 @@
   height: 100%;
   background: var(--semantic-color-background-accent);
   border-radius: var(--semantic-shape-badge-radius, 9999px);
-  transition: width var(--semantic-motion-interaction-enter-duration) var(--semantic-motion-interaction-enter-easing);
+  transition: width var(--semantic-motion-interaction-enter-duration)
+    var(--semantic-motion-interaction-enter-easing);
 }
 
 /* Activity Card */
@@ -1299,7 +1372,8 @@
   bottom: 0;
   background: var(--semantic-color-background-tertiary);
   border-radius: var(--semantic-shape-badge-radius, 9999px);
-  transition: all var(--semantic-motion-interaction-enter-duration) var(--semantic-motion-interaction-enter-easing);
+  transition: all var(--semantic-motion-interaction-enter-duration)
+    var(--semantic-motion-interaction-enter-easing);
 
   &::before {
     content: '';
@@ -1310,7 +1384,8 @@
     bottom: 3px;
     background: var(--semantic-color-background-primary);
     border-radius: 50%;
-    transition: all var(--semantic-motion-interaction-enter-duration) var(--semantic-motion-interaction-enter-easing);
+    transition: all var(--semantic-motion-interaction-enter-duration)
+      var(--semantic-motion-interaction-enter-easing);
   }
 }
 
@@ -1339,14 +1414,16 @@
 }
 
 .tab {
-  padding: var(--semantic-spacing-padding-component) var(--semantic-spacing-padding-card);
+  padding: var(--semantic-spacing-padding-component)
+    var(--semantic-spacing-padding-card);
   background: transparent;
   border: none;
   border-bottom: 2px solid transparent;
   font-size: 14px;
   color: var(--semantic-color-foreground-secondary);
   cursor: pointer;
-  transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  transition: all var(--semantic-motion-interaction-hover-duration)
+    var(--semantic-motion-interaction-hover-easing);
   margin-bottom: -1px;
 
   &:hover {
@@ -1455,7 +1532,8 @@
   height: 100%;
   background: var(--semantic-color-background-accent);
   border-radius: var(--semantic-shape-badge-radius, 9999px);
-  transition: width var(--semantic-motion-interaction-enter-duration) var(--semantic-motion-interaction-enter-easing);
+  transition: width var(--semantic-motion-interaction-enter-duration)
+    var(--semantic-motion-interaction-enter-easing);
 }
 
 /* Tags Card */
@@ -1483,7 +1561,8 @@
 
 .tag {
   display: inline-block;
-  padding: var(--semantic-spacing-padding-component) var(--semantic-spacing-padding-component);
+  padding: var(--semantic-spacing-padding-component)
+    var(--semantic-spacing-padding-component);
   background: var(--semantic-color-background-secondary);
   border: 1px solid var(--semantic-color-border-default);
   border-radius: var(--semantic-shape-badge-radius, 16px);
@@ -1538,7 +1617,8 @@
 }
 
 .alertAction {
-  padding: var(--semantic-spacing-padding-component) var(--semantic-spacing-padding-card);
+  padding: var(--semantic-spacing-padding-component)
+    var(--semantic-spacing-padding-card);
   background: var(--semantic-color-feedback-warning-default);
   border: none;
   border-radius: var(--semantic-shape-button-radius, 8px);
@@ -1546,7 +1626,8 @@
   font-weight: var(--semantic-typography-body-font-weight);
   color: var(--semantic-color-foreground-inverse);
   cursor: pointer;
-  transition: all var(--semantic-motion-interaction-hover-duration) var(--semantic-motion-interaction-hover-easing);
+  transition: all var(--semantic-motion-interaction-hover-duration)
+    var(--semantic-motion-interaction-hover-easing);
   align-self: flex-start;
 
   &:hover {
@@ -1649,21 +1730,26 @@
   .progressCard,
   .sliderCard,
   .tagsCard {
-    box-shadow: inset 0 0 0 1px hsl(from var(--semantic-color-foreground-primary) h s l / 8%);
+    box-shadow: inset 0 0 0 1px
+      hsl(from var(--semantic-color-foreground-primary) h s l / 8%);
 
     &:hover {
-      box-shadow: inset 0 0 0 1px hsl(from var(--semantic-color-foreground-primary) h s l / 12%),
+      box-shadow:
+        inset 0 0 0 1px
+          hsl(from var(--semantic-color-foreground-primary) h s l / 12%),
         0 4px 12px hsl(from var(--semantic-color-foreground-primary) h s l / 6%);
     }
 
-    h3, h4 {
+    h3,
+    h4 {
       letter-spacing: var(--semantic-typography-letter-spacing-wide, 0.05em);
       text-transform: uppercase;
     }
   }
 
   .alertCard {
-    box-shadow: inset 0 0 0 1px hsl(from var(--semantic-color-foreground-primary) h s l / 8%);
+    box-shadow: inset 0 0 0 1px
+      hsl(from var(--semantic-color-foreground-primary) h s l / 8%);
   }
 
   .table th {
@@ -1693,7 +1779,8 @@
     border-color: hsl(from var(--semantic-color-background-accent) h s l / 20%);
 
     &:hover {
-      box-shadow: 0 8px 32px hsl(from var(--semantic-color-background-accent) h s l / 12%);
+      box-shadow: 0 8px 32px
+        hsl(from var(--semantic-color-background-accent) h s l / 12%);
     }
   }
 
@@ -1703,10 +1790,12 @@
 
   .primaryButton,
   .checkoutButton {
-    box-shadow: 0 2px 8px hsl(from var(--semantic-color-background-accent) h s l / 25%);
+    box-shadow: 0 2px 8px
+      hsl(from var(--semantic-color-background-accent) h s l / 25%);
 
     &:hover {
-      box-shadow: 0 4px 12px hsl(from var(--semantic-color-background-accent) h s l / 35%);
+      box-shadow: 0 4px 12px
+        hsl(from var(--semantic-color-background-accent) h s l / 35%);
     }
   }
 
@@ -1741,17 +1830,21 @@
   .tagsCard {
     &:hover {
       transform: translateY(-4px);
-      box-shadow: 0 12px 40px hsl(from var(--semantic-color-background-accent) h s l / 15%);
+      box-shadow: 0 12px 40px
+        hsl(from var(--semantic-color-background-accent) h s l / 15%);
     }
   }
 
   .primaryButton,
   .checkoutButton {
-    box-shadow: 0 4px 16px hsl(from var(--semantic-color-background-accent) h s l / 40%);
-    text-shadow: 0 1px 2px hsl(from var(--semantic-color-foreground-primary) h s l / 20%);
+    box-shadow: 0 4px 16px
+      hsl(from var(--semantic-color-background-accent) h s l / 40%);
+    text-shadow: 0 1px 2px
+      hsl(from var(--semantic-color-foreground-primary) h s l / 20%);
 
     &:hover {
-      box-shadow: 0 6px 24px hsl(from var(--semantic-color-background-accent) h s l / 50%);
+      box-shadow: 0 6px 24px
+        hsl(from var(--semantic-color-background-accent) h s l / 50%);
     }
   }
 
@@ -1781,11 +1874,13 @@
   .progressCard,
   .sliderCard,
   .tagsCard {
-    box-shadow: 0 2px 12px hsl(from var(--semantic-color-foreground-primary) h s l / 20%);
+    box-shadow: 0 2px 12px
+      hsl(from var(--semantic-color-foreground-primary) h s l / 20%);
     border-left: 3px solid var(--semantic-color-background-accent);
 
     &:hover {
-      box-shadow: 0 8px 32px hsl(from var(--semantic-color-foreground-primary) h s l / 30%);
+      box-shadow: 0 8px 32px
+        hsl(from var(--semantic-color-foreground-primary) h s l / 30%);
     }
   }
 
@@ -1795,8 +1890,12 @@
 
   .primaryButton,
   .checkoutButton {
-    box-shadow: 0 2px 12px hsl(from var(--semantic-color-background-accent) h s l / 50%),
-      inset 0 1px 0 hsl(from var(--semantic-color-background-accent) h s calc(l + 20%) / 30%);
+    box-shadow:
+      0 2px 12px hsl(from var(--semantic-color-background-accent) h s l / 50%),
+      inset 0 1px 0
+        hsl(
+          from var(--semantic-color-background-accent) h s calc(l + 20%) / 30%
+        );
   }
 
   .toggleSlider {
@@ -1829,19 +1928,27 @@
   .tagsCard {
     background: hsl(from var(--semantic-color-background-primary) h s l / 80%);
     backdrop-filter: blur(12px);
-    border: 1px solid hsl(from var(--semantic-color-background-accent) h s l / 20%);
-    border-top: 2px solid hsl(from var(--semantic-color-background-accent) h s l / 30%);
+    border: 1px solid
+      hsl(from var(--semantic-color-background-accent) h s l / 20%);
+    border-top: 2px solid
+      hsl(from var(--semantic-color-background-accent) h s l / 30%);
 
     &:hover {
-      box-shadow: 0 8px 32px hsl(from var(--semantic-color-background-accent) h s l / 15%);
-      border-color: hsl(from var(--semantic-color-background-accent) h s l / 40%);
+      box-shadow: 0 8px 32px
+        hsl(from var(--semantic-color-background-accent) h s l / 15%);
+      border-color: hsl(
+        from var(--semantic-color-background-accent) h s l / 40%
+      );
     }
   }
 
   .alertCard {
-    background: hsl(from var(--semantic-color-feedback-warning-background) h s l / 80%);
+    background: hsl(
+      from var(--semantic-color-feedback-warning-background) h s l / 80%
+    );
     backdrop-filter: blur(12px);
-    border-top: 2px solid hsl(from var(--semantic-color-feedback-warning-default) h s l / 40%);
+    border-top: 2px solid
+      hsl(from var(--semantic-color-feedback-warning-default) h s l / 40%);
   }
 }
 
@@ -1958,13 +2065,23 @@
     border-radius: 0;
   }
 
-  .cardButton, .sizeOption, .materialButton, .input, .select,
-  .secondaryButton, .showMoreButton, .alertAction, .checkoutButton,
+  .cardButton,
+  .sizeOption,
+  .materialButton,
+  .input,
+  .select,
+  .secondaryButton,
+  .showMoreButton,
+  .alertAction,
+  .checkoutButton,
   .primaryButton {
     border-radius: 0;
   }
 
-  .tag, .filterTag, .chip, .badge {
+  .tag,
+  .filterTag,
+  .chip,
+  .badge {
     border-radius: 0;
   }
 
@@ -1976,7 +2093,10 @@
     }
   }
 
-  .progressTrack, .progressFill, .metricBar, .metricBarFill {
+  .progressTrack,
+  .progressFill,
+  .metricBar,
+  .metricBarFill {
     border-radius: 0;
   }
 }
@@ -2001,19 +2121,24 @@
   .sliderCard,
   .tagsCard {
     border: 1px solid transparent;
-    box-shadow: 0 4px 20px hsl(from var(--semantic-color-background-accent) h s l / 8%),
-                inset 0 0 0 1px hsl(from var(--semantic-color-background-accent) h s l / 20%);
+    box-shadow:
+      0 4px 20px hsl(from var(--semantic-color-background-accent) h s l / 8%),
+      inset 0 0 0 1px
+        hsl(from var(--semantic-color-background-accent) h s l / 20%);
 
     &:hover {
       transform: none;
-      box-shadow: 0 8px 30px hsl(from var(--semantic-color-background-accent) h s l / 12%),
-                  inset 0 0 0 1px hsl(from var(--semantic-color-background-accent) h s l / 30%);
+      box-shadow:
+        0 8px 30px hsl(from var(--semantic-color-background-accent) h s l / 12%),
+        inset 0 0 0 1px
+          hsl(from var(--semantic-color-background-accent) h s l / 30%);
       opacity: 0.95;
     }
   }
 
   .alertCard {
-    box-shadow: inset 0 0 0 1px hsl(from var(--semantic-color-feedback-warning-default) h s l / 20%);
+    box-shadow: inset 0 0 0 1px
+      hsl(from var(--semantic-color-feedback-warning-default) h s l / 20%);
   }
 }
 
@@ -2037,35 +2162,49 @@
   .sliderCard,
   .tagsCard {
     box-shadow:
-      inset 1px 1px 0 hsl(from var(--semantic-color-background-primary) h s l / 100%),
-      inset -1px -1px 0 hsl(from var(--semantic-color-foreground-primary) h s l / 10%),
+      inset 1px 1px 0
+        hsl(from var(--semantic-color-background-primary) h s l / 100%),
+      inset -1px -1px 0
+        hsl(from var(--semantic-color-foreground-primary) h s l / 10%),
       0 2px 4px hsl(from var(--semantic-color-foreground-primary) h s l / 5%);
 
     &:hover {
       transform: translateY(-1px);
       box-shadow:
-        inset 1px 1px 0 hsl(from var(--semantic-color-background-primary) h s l / 100%),
-        inset -1px -1px 0 hsl(from var(--semantic-color-foreground-primary) h s l / 10%),
+        inset 1px 1px 0
+          hsl(from var(--semantic-color-background-primary) h s l / 100%),
+        inset -1px -1px 0
+          hsl(from var(--semantic-color-foreground-primary) h s l / 10%),
         0 4px 8px hsl(from var(--semantic-color-foreground-primary) h s l / 10%);
     }
   }
 
-  .primaryButton, .checkoutButton {
-    background: linear-gradient(180deg,
+  .primaryButton,
+  .checkoutButton {
+    background: linear-gradient(
+      180deg,
       hsl(from var(--semantic-color-background-accent) h s l / 100%) 0%,
-      hsl(from var(--semantic-color-background-accent) h s l / 90%) 100%);
-    border: 1px solid hsl(from var(--semantic-color-background-accent) h s l / 80%);
-    box-shadow: inset 0 1px 0 hsl(from var(--semantic-color-background-primary) h s l / 20%);
+      hsl(from var(--semantic-color-background-accent) h s l / 90%) 100%
+    );
+    border: 1px solid
+      hsl(from var(--semantic-color-background-accent) h s l / 80%);
+    box-shadow: inset 0 1px 0
+      hsl(from var(--semantic-color-background-primary) h s l / 20%);
   }
 
   .secondaryButton {
-    background: linear-gradient(180deg,
+    background: linear-gradient(
+      180deg,
       var(--semantic-color-background-secondary) 0%,
-      var(--semantic-color-background-tertiary) 100%);
-    box-shadow: inset 0 1px 0 hsl(from var(--semantic-color-background-primary) h s l / 30%);
+      var(--semantic-color-background-tertiary) 100%
+    );
+    box-shadow: inset 0 1px 0
+      hsl(from var(--semantic-color-background-primary) h s l / 30%);
   }
 
   .table tbody tr:nth-child(even) {
-    background: hsl(from var(--semantic-color-background-secondary) h s l / 50%);
+    background: hsl(
+      from var(--semantic-color-background-secondary) h s l / 50%
+    );
   }
 }

@@ -21,9 +21,45 @@ const foundationPages = [
   },
   {
     slug: 'spacing',
-    title: 'Spacing & Layout Systems',
+    title: 'Spacing & Sizing Foundations',
     prerequisites: ['tokens'],
-    nextUnits: ['layout'],
+    nextUnits: ['layout', 'grid'],
+  },
+  {
+    slug: 'layout',
+    title: 'Layout Foundations',
+    prerequisites: ['tokens', 'spacing'],
+    nextUnits: ['grid', 'icons'],
+  },
+  {
+    slug: 'icons',
+    title: 'Icon Foundations',
+    prerequisites: ['tokens'],
+    nextUnits: ['elevation', 'radius'],
+  },
+  {
+    slug: 'elevation',
+    title: 'Elevation & Shadow Foundations',
+    prerequisites: ['tokens'],
+    nextUnits: ['radius', 'borders'],
+  },
+  {
+    slug: 'radius',
+    title: 'Radius & Shape Foundations',
+    prerequisites: ['tokens'],
+    nextUnits: ['borders', 'grid'],
+  },
+  {
+    slug: 'grid',
+    title: 'Grid System Foundations',
+    prerequisites: ['tokens', 'layout'],
+    nextUnits: ['motion', 'color'],
+  },
+  {
+    slug: 'borders',
+    title: 'Border & Stroke Foundations',
+    prerequisites: ['tokens'],
+    nextUnits: ['radius', 'elevation'],
   },
   {
     slug: 'component-architecture',
