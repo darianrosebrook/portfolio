@@ -1,7 +1,7 @@
 @import "./Slinkycursor.tokens.css";
 
 /*
- * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Migrated to the QDS-style pattern.
  * Scoped to [data-ds-component="Slinkycursor"] on the root element.
  * Internal cursor-* vars are kept as-is (not tokenized); only the
  * slinkycursor-* design token refs are updated to --ds-slinkycursor-*.
