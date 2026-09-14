@@ -1,7 +1,7 @@
 @import "./Skeleton.tokens.css";
 
 /*
- * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Migrated to the QDS-style pattern.
  * Scoped to [data-ds-component="Skeleton"] on the root element.
  * Internal alias vars (--skeleton-bg, etc.) bridge the token namespace to
  * reduce diff noise in deeply inherited selectors.

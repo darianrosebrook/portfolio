@@ -1,7 +1,7 @@
 @import "./Spinner.tokens.css";
 
 /*
- * Migrated to the QDS-style pattern per docs/CSS-MIGRATION-PLAYBOOK.md.
+ * Migrated to the QDS-style pattern.
  * Scoped to [data-ds-component="Spinner"] on the root element.
  * Intentionally unlayered — see Button.css for the cascade rationale.
  */
