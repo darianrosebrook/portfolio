@@ -396,6 +396,140 @@ const hasLabel = typeof label === 'string' && label.length > 0;
     ),
   },
   {
+    type: 'constraints-tradeoffs',
+    id: 'icons-health-metrics',
+    title: 'Icon System Health Metrics',
+    order: 8.75,
+    content: (
+      <>
+        <h3>Signal 1: Size discipline</h3>
+        <ul>
+          <li>
+            <strong>Healthy:</strong> icon width/height props carry only the
+            four scale steps (16/20/24/32); a grep for other numbers in icon
+            sizing returns nothing.
+          </li>
+          <li>
+            <strong>Warning:</strong> a fifth size circulates in one area—the
+            18px that &quot;looked better next to 16px text&quot;—and every
+            future icon decision in that area now negotiates against it.
+          </li>
+          <li>
+            <strong>Critical:</strong> arbitrary sizes are the norm; the scale
+            is decorative, and cross-screen consistency is gone.
+          </li>
+        </ul>
+
+        <h3>Signal 2: Labeling integrity</h3>
+        <ul>
+          <li>
+            <strong>Healthy:</strong> every icon-only control passes a label;
+            every text-adjacent icon omits one—the binary is applied, not
+            assumed.
+          </li>
+          <li>
+            <strong>Warning:</strong> label audits pass on new components but
+            legacy screens ship unlabeled icon-only buttons that everyone has
+            stopped seeing.
+          </li>
+          <li>
+            <strong>Critical:</strong> icon-only controls without accessible
+            names—silent for screen readers, and a WCAG 4.1.2 defect with every
+            click.
+          </li>
+        </ul>
+
+        <h3>Signal 3: Component fidelity</h3>
+        <ul>
+          <li>
+            <strong>Healthy:</strong> product code renders icons only through
+            the Icon component; raw <code>&lt;svg&gt;</code> appears in the
+            component itself and nowhere downstream.
+          </li>
+          <li>
+            <strong>Warning:</strong> a few inline SVGs bypass the ARIA
+            branch—each one a place the labeling contract no longer applies.
+          </li>
+          <li>
+            <strong>Critical:</strong> bypasses outnumber component usage; the
+            contract is folklore now.
+          </li>
+        </ul>
+      </>
+    ),
+  },
+  {
+    type: 'constraints-tradeoffs',
+    id: 'icons-migration',
+    title: 'Migration Strategy: Wrangling an Icon Zoo',
+    order: 8.9,
+    content: (
+      <>
+        <ol>
+          <li>
+            <strong>Inventory the glyphs:</strong> every icon source (kit
+            lookups, inline paths, sprite references), every size, every usage
+            site. The dedupe is the payoff—most zoos run 3–4× duplicate concepts
+            (&quot;close&quot; vs &quot;x&quot; vs &quot;dismiss&quot;).
+          </li>
+          <li>
+            <strong>Pick the canonical set:</strong> one glyph per concept,
+            chosen on grid fit and stroke consistency; the losers map to the
+            winners in a codemod table.
+          </li>
+          <li>
+            <strong>Snap sizes to the scale</strong> (16/20/24/32) with the
+            nearest-step tolerance—18px to 20 is +11%, inside the JND; nobody
+            will notice, which is the point.
+          </li>
+          <li>
+            <strong>Route through the component:</strong> replace inline SVGs
+            with <code>&lt;Icon&gt;</code> usages, labeling each by its new
+            context&apos;s meaningful/decorative status—never migrating labels
+            blindly.
+          </li>
+          <li>
+            <strong>Retire the zoo:</strong> delete unmapped glyphs; an icon
+            nobody migrated to was decoration wearing a name.
+          </li>
+        </ol>
+      </>
+    ),
+  },
+  {
+    type: 'applied-example',
+    id: 'icons-case-studies',
+    title: 'Real-World Case Studies',
+    order: 8.98,
+    content: (
+      <>
+        <h3>Case 1: The toolbar that failed by ear</h3>
+        <p>
+          Five icon-only buttons passed visual review; the VoiceOver pass
+          announced &quot;button… button… button…&quot;—the labels were never
+          passed because the API made silence the default and nobody was
+          listening. The fix was labels for all five; the prevention was the
+          review rule: icon-only patterns are verified auditorily, always.
+        </p>
+        <h3>Case 2: The three closes</h3>
+        <p>
+          An audit found three distinct close glyphs (x, chevron, outline-x) at
+          three sizes (18, 20, 22) across the product. The canonical-set
+          migration collapsed them to one glyph at two sizes; the codemod table
+          lives in the icon documentation so the fourth close never gets drawn.
+        </p>
+        <h3>Case 3: The icon that inherited color</h3>
+        <p>
+          A status icon was given its own fill token for a campaign—then broke
+          in dark mode, then in the teal brand, then again inside a destructive
+          button. Removing the fill and returning to <code>currentColor</code>{' '}
+          made it correct everywhere at once: the context&apos;s semantics were
+          always the right answer.
+        </p>
+      </>
+    ),
+  },
+  {
     type: 'verification-checklist',
     id: 'verification-checklist',
     title: 'Verification Checklist',
@@ -491,6 +625,11 @@ content.assessmentPrompts = [
   {
     question:
       'A team requests an 18px icon size because 20 looks too big next to 16px text. What questions decide whether the scale is wrong or the composition is wrong?',
+    type: 'reflection',
+  },
+  {
+    question:
+      'Run the labeling-integrity signal on one screen you own: list every icon, its meaningful/decorative status, and what a screen reader actually announces. Which entry surprised you?',
     type: 'reflection',
   },
 ];
