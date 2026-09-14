@@ -72,3 +72,7 @@ evidence:
     status: pass
     evidence_ref: "Color+motion citations verified against ui/designTokens core+semantic sources and generated designTokens.scss by direct grep at authoring time (durations 50-1500ms, easings, stagger 17ms, ramp hexes, cascade-layer order); render tests assert exact token strings; WCAG pair ratios hand-computed and labeled approximate"
     recorded_at: "2026-09-14T05:46:40.028Z"
+  - criterion_id: A1
+    status: pass
+    evidence_ref: "All 9 core-foundations pages (color, motion, spacing, layout, icons, elevation, radius, grid, borders) render via FoundationPage with full template sections, exported metadata, and zero coming-soon markup: 9 render contracts (63 assertions) in test/blueprints pass; full vitest 1734 passed / 2 skipped exit 0; e2e foundationNavigation all 12 pages pass page-load/JSON-LD/nav/SEO/a11y categories"
+    recorded_at: "2026-09-14T07:04:12.362Z"
