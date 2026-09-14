@@ -56,6 +56,15 @@ const config = [
       // here that are absent from tsconfig and fail to parse — 9 errors that
       // blocked every push, including branch deletions.
       'tmp/**',
+      // Gitignored build outputs. ESLint does not read .gitignore, so without
+      // these a local `vercel build` or `npm run test:coverage` leaves generated
+      // trees behind that ESLint walks. `.vercel/output` alone is ~63 MB of
+      // minified chunks and took lint from ~30s to over 30 minutes.
+      '.vercel/**',
+      '.next/**',
+      'coverage/**',
+      'playwright-report/**',
+      'test-results/**',
       'app/blueprints/design-patterns/patterns/**',
       'playwright.config.ts',
       'scripts/templates/**',
