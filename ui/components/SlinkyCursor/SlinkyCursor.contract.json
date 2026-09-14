@@ -11,7 +11,10 @@
     "active"
   ],
   "slots": {
-    "root": { "required": true, "selector": "[data-slot=\"slinky-cursor\"]" }
+    "root": {
+      "required": true,
+      "selector": "[data-slot=\"slinky-cursor\"]"
+    }
   },
   "a11y": {
     "role": "generic",
@@ -23,7 +26,7 @@
     "root": {
       "slinkycursor.color.border.primary": {
         "resolvesTo": "semantic.color.border.primary",
-        "fallback": "#f29495",
+        "fallback": "#aeaeae",
         "property": "border-color",
         "layer": "semantic"
       },

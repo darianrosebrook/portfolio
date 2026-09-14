@@ -3,9 +3,9 @@
  */
 [data-ds-component="Label"] {
   /* === Color Tokens === */
-  --ds-label-color-text-default: var(--semantic-color-foreground-primary);
+  --ds-label-color-text-default: var(--semantic-color-foreground-primary, #141414);
 
   /* === Typo Tokens === */
-  --ds-label-typo-weight-default: var(--semantic-typography-font-weight-medium);
-  --ds-label-typo-line-height-default: var(--semantic-typography-line-height-tight);
+  --ds-label-typo-weight-default: var(--semantic-typography-font-weight-medium, 500);
+  --ds-label-typo-line-height-default: var(--semantic-typography-line-height-tight, 1.2);
 }

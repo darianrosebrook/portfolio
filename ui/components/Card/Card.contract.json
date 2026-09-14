@@ -228,8 +228,8 @@
         "layer": "semantic"
       },
       "card.size.radius.medium": {
-        "resolvesTo": "core.shape.radius.medium",
-        "fallback": "8px",
+        "resolvesTo": "semantic.shape.card.radius",
+        "fallback": "16px",
         "property": "border-radius",
         "layer": "core"
       },
@@ -253,12 +253,12 @@
       },
       "card.elevation.default": {
         "resolvesTo": "semantic.elevation.default",
-        "fallback": "[object Object]",
+        "fallback": "0px 1px 3px #0000001f",
         "layer": "semantic"
       },
       "card.elevation.hover": {
         "resolvesTo": "semantic.elevation.default",
-        "fallback": "[object Object]",
+        "fallback": "0px 1px 3px #0000001f",
         "layer": "semantic"
       },
       "card.motion.duration": {

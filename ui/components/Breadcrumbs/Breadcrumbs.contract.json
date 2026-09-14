@@ -105,7 +105,7 @@
       },
       "breadcrumbs.elevation.surface.raised": {
         "resolvesTo": "semantic.elevation.surface.raised",
-        "fallback": "[object Object]",
+        "fallback": "0px 1px 3px #0000001f",
         "layer": "semantic"
       },
       "breadcrumbs.spacing.gap.default": {

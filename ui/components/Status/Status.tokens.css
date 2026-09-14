@@ -3,24 +3,24 @@
  */
 [data-ds-component="Status"] {
   /* === Color Tokens === */
-  --ds-status-color-background-default: var(--semantic-color-background-primary);
-  --ds-status-color-background-hover: var(--semantic-color-background-hover);
-  --ds-status-color-background-active: var(--semantic-color-background-active);
-  --ds-status-color-background-disabled: var(--semantic-color-background-disabled);
-  --ds-status-color-foreground-primary: var(--semantic-color-foreground-primary);
-  --ds-status-color-foreground-secondary: var(--semantic-color-foreground-secondary);
-  --ds-status-color-foreground-accent: var(--semantic-color-foreground-accent);
-  --ds-status-color-foreground-disabled: var(--semantic-color-foreground-disabled);
-  --ds-status-color-border-default: var(--semantic-color-border-primary);
-  --ds-status-color-border-hover: var(--semantic-color-border-bold);
-  --ds-status-color-border-accent: var(--semantic-color-border-accent);
-  --ds-status-color-border-disabled: var(--semantic-color-border-disabled);
+  --ds-status-color-background-default: var(--semantic-color-background-primary, #ffffff);
+  --ds-status-color-background-hover: var(--semantic-color-background-hover, #cecece);
+  --ds-status-color-background-active: var(--semantic-color-background-active, #aeaeae);
+  --ds-status-color-background-disabled: var(--semantic-color-background-disabled, #cecece);
+  --ds-status-color-foreground-primary: var(--semantic-color-foreground-primary, #141414);
+  --ds-status-color-foreground-secondary: var(--semantic-color-foreground-secondary, #555555);
+  --ds-status-color-foreground-accent: var(--semantic-color-foreground-accent, #d9292b);
+  --ds-status-color-foreground-disabled: var(--semantic-color-foreground-disabled, #aeaeae);
+  --ds-status-color-border-default: var(--semantic-color-border-primary, #aeaeae);
+  --ds-status-color-border-hover: var(--semantic-color-border-bold, #8f8f8f);
+  --ds-status-color-border-accent: var(--semantic-color-border-accent, #d9292b);
+  --ds-status-color-border-disabled: var(--semantic-color-border-disabled, #cecece);
 
   /* === Size Tokens === */
-  --ds-status-size-radius-default: var(--core-shape-radius-full);
-  --ds-status-size-padding-default: var(--core-spacing-size-04);
-  --ds-status-size-border-default: var(--core-shape-border-width-hairline);
+  --ds-status-size-radius-default: var(--core-shape-radius-full, 9999px);
+  --ds-status-size-padding-default: var(--core-spacing-size-04, 8px);
+  --ds-status-size-border-default: var(--core-shape-border-width-hairline, 1px);
 
   /* === Typography Tokens === */
-  --ds-status-typography-line-height: var(--semantic-typography-line-height-collapse);
+  --ds-status-typography-line-height: var(--semantic-typography-line-height-collapse, 1);
 }

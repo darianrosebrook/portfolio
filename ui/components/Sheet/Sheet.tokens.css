@@ -3,56 +3,56 @@
  */
 [data-ds-component="Sheet"] {
   /* === Color Tokens === */
-  --ds-sheet-color-overlay: var(--semantic-overlay-scrim-sheet);
-  --ds-sheet-color-background: var(--semantic-color-background-primary);
-  --ds-sheet-color-background-hover: var(--semantic-interaction-background-hover);
-  --ds-sheet-color-border: var(--semantic-color-border-light);
-  --ds-sheet-color-border-light: var(--semantic-color-border-subtle);
-  --ds-sheet-color-text: var(--semantic-color-foreground-primary);
-  --ds-sheet-color-text-title: var(--semantic-color-foreground-primary);
-  --ds-sheet-color-text-description: var(--semantic-color-foreground-secondary);
-  --ds-sheet-color-text-muted: var(--semantic-color-foreground-tertiary);
+  --ds-sheet-color-overlay: var(--semantic-overlay-scrim-sheet, rgba(0,0,0,0.50));
+  --ds-sheet-color-background: var(--semantic-color-background-primary, #ffffff);
+  --ds-sheet-color-background-hover: var(--semantic-interaction-background-hover, #efefef);
+  --ds-sheet-color-border: var(--semantic-color-border-light, #fceaea);
+  --ds-sheet-color-border-light: var(--semantic-color-border-subtle, #cecece);
+  --ds-sheet-color-text: var(--semantic-color-foreground-primary, #141414);
+  --ds-sheet-color-text-title: var(--semantic-color-foreground-primary, #141414);
+  --ds-sheet-color-text-description: var(--semantic-color-foreground-secondary, #555555);
+  --ds-sheet-color-text-muted: var(--semantic-color-foreground-tertiary, #717171);
 
   /* === Border Tokens === */
-  --ds-sheet-border-width: var(--core-shape-border-width-hairline);
-  --ds-sheet-border-radius: var(--core-shape-radius-medium);
-  --ds-sheet-border-radius-close: var(--core-shape-radius-small);
+  --ds-sheet-border-width: var(--core-shape-border-width-hairline, 1px);
+  --ds-sheet-border-radius: var(--core-shape-radius-medium, 8px);
+  --ds-sheet-border-radius-close: var(--core-shape-radius-small, 4px);
 
   /* === Size Tokens === */
   --ds-sheet-size-width: 400px;
   --ds-sheet-size-height: 300px;
-  --ds-sheet-size-close: var(--core-spacing-size-06);
+  --ds-sheet-size-close: var(--core-spacing-size-06, 16px);
 
   /* === Spacing Tokens === */
-  --ds-sheet-spacing-padding: var(--core-spacing-size-06);
-  --ds-sheet-spacing-gap: var(--core-spacing-size-04);
-  --ds-sheet-spacing-section: var(--core-spacing-size-04);
-  --ds-sheet-spacing-header-gap: var(--core-spacing-size-02);
-  --ds-sheet-spacing-footer-gap: var(--core-spacing-size-03);
-  --ds-sheet-spacing-close-offset: var(--core-spacing-size-04);
+  --ds-sheet-spacing-padding: var(--core-spacing-size-06, 16px);
+  --ds-sheet-spacing-gap: var(--core-spacing-size-04, 8px);
+  --ds-sheet-spacing-section: var(--core-spacing-size-04, 8px);
+  --ds-sheet-spacing-header-gap: var(--core-spacing-size-02, 2px);
+  --ds-sheet-spacing-footer-gap: var(--core-spacing-size-03, 4px);
+  --ds-sheet-spacing-close-offset: var(--core-spacing-size-04, 8px);
 
   /* === Text Tokens === */
-  --ds-sheet-text-size: var(--semantic-typography-body-02);
-  --ds-sheet-text-line-height: var(--semantic-typography-line-height-normal);
-  --ds-sheet-text-size-title: var(--semantic-typography-heading-06);
-  --ds-sheet-text-line-height-title: var(--semantic-typography-line-height-tight);
-  --ds-sheet-text-weight-title: var(--semantic-typography-font-weight-medium);
-  --ds-sheet-text-size-description: var(--semantic-typography-body-03);
-  --ds-sheet-text-line-height-description: var(--semantic-typography-line-height-loose);
+  --ds-sheet-text-size: var(--semantic-typography-body-02, 16px);
+  --ds-sheet-text-line-height: var(--semantic-typography-line-height-normal, 1.5);
+  --ds-sheet-text-size-title: var(--semantic-typography-heading-06, 14px);
+  --ds-sheet-text-line-height-title: var(--semantic-typography-line-height-tight, 1.2);
+  --ds-sheet-text-weight-title: var(--semantic-typography-font-weight-medium, 500);
+  --ds-sheet-text-size-description: var(--semantic-typography-body-03, 14px);
+  --ds-sheet-text-line-height-description: var(--semantic-typography-line-height-loose, 1.8);
 
   /* === Motion Tokens === */
-  --ds-sheet-motion-duration: var(--core-motion-duration-medium);
-  --ds-sheet-motion-easing: var(--core-motion-easing-standard);
+  --ds-sheet-motion-duration: var(--core-motion-duration-medium, 250ms);
+  --ds-sheet-motion-easing: var(--core-motion-easing-standard, cubic-bezier(0.4, 0, 0.2, 1));
 
   /* === ZIndex Tokens === */
-  --ds-sheet-z-index-overlay: var(--core-layer-component);
-  --ds-sheet-z-index-content: var(--core-layer-above);
+  --ds-sheet-z-index-overlay: var(--core-layer-component, 50);
+  --ds-sheet-z-index-content: var(--core-layer-above, 51);
 
   /* === Focus Tokens === */
-  --ds-sheet-focus-width: var(--core-shape-border-width-thick);
-  --ds-sheet-focus-color: var(--semantic-color-border-accent);
-  --ds-sheet-focus-offset: var(--core-spacing-size-01);
+  --ds-sheet-focus-width: var(--core-shape-border-width-thick, 2px);
+  --ds-sheet-focus-color: var(--semantic-color-border-accent, #d9292b);
+  --ds-sheet-focus-offset: var(--core-spacing-size-01, 1px);
 
   /* === Other Tokens === */
-  --ds-sheet-shadow: var(--semantic-elevation-surface-floating);
+  --ds-sheet-shadow: var(--semantic-elevation-surface-floating, 0px 3px 6px #00000024);
 }

@@ -263,7 +263,7 @@
       },
       "badge.elevation.default": {
         "resolvesTo": "semantic.elevation.surface.raised",
-        "fallback": "[object Object]",
+        "fallback": "0px 1px 3px #0000001f",
         "layer": "semantic"
       },
       "badge.elevation.status": {
@@ -336,7 +336,7 @@
     "usageHints": [
       "Use intent to apply semantic color (info, success, warning, danger, neutral)",
       "Use variant to switch between filled, outlined, or subtle styles",
-      "Keep badge text short \u2014 ideally a single word or number",
+      "Keep badge text short — ideally a single word or number",
       "Pair with an icon using the icon prop to reinforce meaning"
     ],
     "children": {

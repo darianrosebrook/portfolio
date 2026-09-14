@@ -240,7 +240,7 @@
       },
       "select.color.border.default": {
         "resolvesTo": "semantic.color.border.primary",
-        "fallback": "#f29495",
+        "fallback": "#aeaeae",
         "property": "border-color",
         "layer": "semantic"
       },
@@ -258,7 +258,7 @@
       },
       "select.color.border.focus": {
         "resolvesTo": "semantic.color.border.primary",
-        "fallback": "#f29495",
+        "fallback": "#aeaeae",
         "property": "border-color",
         "layer": "semantic"
       },
@@ -600,7 +600,7 @@
     "transitions": [
       {
         "name": "open",
-        "trigger": "openness=closed\u2192open",
+        "trigger": "openness=closed→open",
         "phase": "enter",
         "properties": [
           "opacity",
@@ -611,7 +611,7 @@
       },
       {
         "name": "close",
-        "trigger": "openness=open\u2192closed",
+        "trigger": "openness=open→closed",
         "phase": "exit",
         "properties": [
           "opacity",

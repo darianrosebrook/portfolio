@@ -66,7 +66,7 @@
       },
       "shuttle.elevation.default": {
         "resolvesTo": "semantic.elevation.default",
-        "fallback": "[object Object]",
+        "fallback": "0px 1px 3px #0000001f",
         "layer": "semantic"
       },
       "shuttle.overlay.imageOverlay": {

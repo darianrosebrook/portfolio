@@ -76,7 +76,7 @@
       },
       "showmore.elevation.default": {
         "resolvesTo": "semantic.elevation.default",
-        "fallback": "[object Object]",
+        "fallback": "0px 1px 3px #0000001f",
         "layer": "semantic"
       },
       "showmore.overlay.imageOverlay": {
@@ -119,7 +119,7 @@
     "usageHints": [
       "Use when content could be long but brevity is preferred by default",
       "Configure maxLines to control how many lines are shown before truncation",
-      "Avoid if the full content is always needed \u2014 prefer Details instead"
+      "Avoid if the full content is always needed — prefer Details instead"
     ],
     "children": {
       "allowed": true,

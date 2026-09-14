@@ -3,29 +3,12 @@
   "name": "Toolbar",
   "layer": "composer",
   "description": "Editor command surface that groups formatting, alignment, color, insertion, and history actions for a TipTap editor instance.",
-  "anatomy": [
-    "root",
-    "textStyle",
-    "action",
-    "colorInput",
-    "separator"
-  ],
+  "anatomy": ["root", "textStyle", "action", "colorInput", "separator"],
   "variants": {
-    "density": [
-      "compact"
-    ],
-    "wrap": [
-      "wrap"
-    ]
+    "density": ["compact"],
+    "wrap": ["wrap"]
   },
-  "states": [
-    "default",
-    "hover",
-    "focus",
-    "active",
-    "disabled",
-    "pressed"
-  ],
+  "states": ["default", "hover", "focus", "active", "disabled", "pressed"],
   "slots": {
     "root": {
       "required": true,
@@ -50,16 +33,8 @@
   },
   "a11y": {
     "role": "toolbar",
-    "roles": [
-      "toolbar",
-      "button",
-      "combobox"
-    ],
-    "labeling": [
-      "aria-label",
-      "title",
-      "aria-pressed"
-    ],
+    "roles": ["toolbar", "button", "combobox"],
+    "labeling": ["aria-label", "title", "aria-pressed"],
     "keyboard": [
       {
         "key": "Tab",
@@ -177,10 +152,7 @@
         "trigger": "hover|active|pressed",
         "duration": "150ms",
         "easing": "ease",
-        "properties": [
-          "background-color",
-          "color"
-        ]
+        "properties": ["background-color", "color"]
       }
     ],
     "reducedMotion": "respect",

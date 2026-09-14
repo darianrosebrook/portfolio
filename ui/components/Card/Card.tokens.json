@@ -52,7 +52,7 @@
       },
       "radius": {
         "default": "{semantic.shape.control.radius.default}",
-        "medium": "{core.shape.radius.medium}",
+        "medium": "{semantic.shape.card.radius}",
         "full": "{core.shape.radius.full}"
       },
       "gap": {

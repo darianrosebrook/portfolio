@@ -22,8 +22,7 @@
         { "$ref": "core/icon.tokens.json" },
         { "$ref": "core/effect.tokens.json" },
         { "$ref": "core/content.tokens.json" },
-        { "$ref": "core/interaction.tokens.json" },
-        { "$ref": "core/component.tokens.json" }
+        { "$ref": "core/interaction.tokens.json" }
       ]
     },
     "semantic": {

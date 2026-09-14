@@ -120,7 +120,7 @@
       },
       "walkthrough.surface.shadow": {
         "resolvesTo": "semantic.elevation.surface.floating",
-        "fallback": "[object Object]",
+        "fallback": "0px 3px 6px #00000024",
         "property": "box-shadow",
         "layer": "semantic"
       },
@@ -390,7 +390,7 @@
       "WalkthroughAnchor wraps the element each step points to",
       "Use WalkthroughControls and WalkthroughProgress for navigation UI",
       "Keyboard: ArrowRight/ArrowLeft navigate steps; Escape closes the tour",
-      "The walkthrough is non-blocking \u2014 it does not trap focus to the panel"
+      "The walkthrough is non-blocking — it does not trap focus to the panel"
     ],
     "children": {
       "allowed": true,
@@ -406,7 +406,7 @@
     "transitions": [
       {
         "name": "open",
-        "trigger": "openness=hidden\u2192visible",
+        "trigger": "openness=hidden→visible",
         "phase": "enter",
         "properties": [
           "opacity",
@@ -417,7 +417,7 @@
       },
       {
         "name": "close",
-        "trigger": "openness=visible\u2192hidden",
+        "trigger": "openness=visible→hidden",
         "phase": "exit",
         "properties": [
           "opacity"

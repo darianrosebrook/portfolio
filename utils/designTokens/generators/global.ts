@@ -19,6 +19,7 @@ import {
   readTokenFile,
   writeOutputFile,
   tokenPathToCSSVar,
+  referencePathToCSSVar,
   formatCSSBlock,
   generateBanner,
   logSummary,
@@ -37,8 +38,10 @@ import {
 import {
   isStructuredColorValue,
   isStructuredDimensionValue,
+  isStructuredShadowValue,
   colorValueToCSS,
   dimensionValueToCSS,
+  shadowValueToCSS,
 } from '../utils/transforms';
 
 /** Available brand identifiers */
@@ -486,6 +489,11 @@ function processTokenValue(
     return dimensionValueToCSS(value);
   }
 
+  // Handle DTCG 1.0 structured shadow values (single or multi-shadow arrays)
+  if (isStructuredShadowValue(value)) {
+    return shadowValueToCSS(value);
+  }
+
   // Handle composition type tokens (padding/margin composites) - check BEFORE $value check
   if (isCompositionValue(value)) {
     return compositionValueToCSS(value, context, tokens);
@@ -504,7 +512,7 @@ function processTokenValue(
           }
         }
 
-        const cssVar = tokenPathToCSSVar(refTokenPath);
+        const cssVar = referencePathToCSSVar(refTokenPath);
         context.referencedVars.add(cssVar);
         return `var(${cssVar})`;
       }
@@ -975,6 +983,31 @@ function generateCSSFromTokens(tokens: TokenGroup): boolean {
 
   // Collect all tokens into CSS variables
   collectTokens(tokens, [], context, maps, tokens);
+
+  // Namespace resolver output for the semantic layer.
+  //
+  // The resolver document merges the foundation (core) and semantic sets into
+  // one flat tree, so semantic token paths arrive without their `semantic.`
+  // root and determineNamespace() returns null for them (its null default
+  // exists to avoid guessing for brand.* / custom namespaces, which never
+  // reach this walk — brands are processed separately with explicit
+  // `semantic.` path building). Anything this walk produced that is neither
+  // core-patterned nor already namespaced is a semantic-layer token and must
+  // carry the --semantic- prefix: the theme/brand layers and every component
+  // tokens.css reference those names.
+  const namespaceAsSemantic = (vars: Record<string, string>) => {
+    for (const key of Object.keys(vars)) {
+      if (key.startsWith('--core-') || key.startsWith('--semantic-')) continue;
+      const renamed = '--semantic-' + key.replace(/^--/, '');
+      if (!(renamed in vars)) {
+        vars[renamed] = vars[key];
+      }
+      delete vars[key];
+    }
+  };
+  namespaceAsSemantic(maps.root);
+  namespaceAsSemantic(maps.lightColors);
+  namespaceAsSemantic(maps.darkColors);
 
   // Skip reference validation when using resolver module
   // The resolver module already validates references during resolution

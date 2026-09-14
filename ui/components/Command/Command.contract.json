@@ -304,7 +304,7 @@
       },
       "command.shadow": {
         "resolvesTo": "semantic.elevation.surface.floating",
-        "fallback": "[object Object]",
+        "fallback": "0px 3px 6px #00000024",
         "property": "box-shadow",
         "layer": "semantic"
       },
@@ -383,8 +383,8 @@
   "a2ui": {
     "category": "action",
     "usageHints": [
-      "Trigger with \u2318K or a toolbar button",
-      "Register commands with a label and handler \u2014 they appear in the search results",
+      "Trigger with ⌘K or a toolbar button",
+      "Register commands with a label and handler — they appear in the search results",
       "Group commands with Command.Group for visual separation"
     ],
     "children": {

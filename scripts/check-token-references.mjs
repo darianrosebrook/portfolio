@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /**
  * Script to find components with broken design token references
- * Checks for mismatches between SCSS variable usage and generated token names
+ * Checks for mismatches between CSS variable usage in component styles and
+ * the custom properties declared in the generated <Component>.tokens.css.
  */
 
 import { readFileSync, readdirSync, statSync } from 'fs';
@@ -30,7 +31,7 @@ function findTokenFiles(componentDir) {
   const files = [];
   try {
     for (const item of readdirSync(componentDir)) {
-      if (item.endsWith('.tokens.generated.scss')) {
+      if (item.endsWith('.tokens.css')) {
         files.push(join(componentDir, item));
       }
     }
@@ -44,7 +45,11 @@ function findScssFiles(componentDir) {
   const files = [];
   try {
     for (const item of readdirSync(componentDir)) {
-      if (item.endsWith('.module.scss') || item.endsWith('.scss')) {
+      if (
+        item.endsWith('.module.scss') ||
+        item.endsWith('.scss') ||
+        item.endsWith('.css')
+      ) {
         files.push(join(componentDir, item));
       }
     }

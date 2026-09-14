@@ -285,7 +285,7 @@
       },
       "sheet.shadow": {
         "resolvesTo": "semantic.elevation.surface.floating",
-        "fallback": "[object Object]",
+        "fallback": "0px 3px 6px #00000024",
         "property": "box-shadow",
         "layer": "semantic"
       },
@@ -351,7 +351,7 @@
     "transitions": [
       {
         "name": "open",
-        "trigger": "openness=closed\u2192opening",
+        "trigger": "openness=closed→opening",
         "phase": "enter",
         "properties": [
           "transform"
@@ -361,7 +361,7 @@
       },
       {
         "name": "close",
-        "trigger": "openness=open\u2192closing",
+        "trigger": "openness=open→closing",
         "phase": "exit",
         "properties": [
           "transform"

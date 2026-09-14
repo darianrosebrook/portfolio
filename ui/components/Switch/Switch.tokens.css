@@ -3,62 +3,62 @@
  */
 [data-ds-component="Switch"] {
   /* === Color Tokens === */
-  --ds-switch-color-track-background-default: var(--semantic-color-background-tertiary);
-  --ds-switch-color-track-background-hover: var(--semantic-color-background-hover);
-  --ds-switch-color-track-background-focus: var(--semantic-color-background-secondary);
-  --ds-switch-color-track-background-disabled: var(--semantic-color-background-disabled);
-  --ds-switch-color-track-background-checked: var(--semantic-color-foreground-accent);
-  --ds-switch-color-track-background-error: var(--semantic-color-background-danger-subtle);
-  --ds-switch-color-track-border-default: var(--semantic-color-border-primary);
-  --ds-switch-color-track-border-hover: var(--semantic-color-border-bold);
-  --ds-switch-color-track-border-focus: var(--semantic-color-border-accent);
-  --ds-switch-color-track-border-disabled: var(--semantic-color-border-disabled);
-  --ds-switch-color-track-border-error: var(--semantic-color-border-danger);
-  --ds-switch-color-thumb-background-default: var(--semantic-color-background-primary);
-  --ds-switch-color-thumb-background-hover: var(--semantic-color-background-hover);
-  --ds-switch-color-thumb-background-focus: var(--semantic-color-background-primary);
-  --ds-switch-color-thumb-background-disabled: var(--semantic-color-background-disabled);
-  --ds-switch-color-thumb-background-checked: var(--semantic-color-foreground-on-brand);
-  --ds-switch-color-thumb-background-error: var(--semantic-color-background-danger-strong);
-  --ds-switch-color-thumb-border-default: var(--semantic-color-border-primary);
-  --ds-switch-color-thumb-border-hover: var(--semantic-color-border-bold);
-  --ds-switch-color-thumb-border-focus: var(--semantic-color-border-accent);
-  --ds-switch-color-thumb-border-disabled: var(--semantic-color-border-disabled);
-  --ds-switch-color-thumb-border-error: var(--semantic-color-border-danger);
-  --ds-switch-color-thumb-shadow: var(--semantic-elevation-surface-raised);
-  --ds-switch-color-text-default: var(--semantic-color-foreground-secondary);
-  --ds-switch-color-text-hover: var(--semantic-color-foreground-primary);
-  --ds-switch-color-text-disabled: var(--semantic-color-foreground-disabled);
-  --ds-switch-color-text-error: var(--semantic-color-foreground-danger);
+  --ds-switch-color-track-background-default: var(--semantic-color-background-tertiary, #cecece);
+  --ds-switch-color-track-background-hover: var(--semantic-color-background-hover, #cecece);
+  --ds-switch-color-track-background-focus: var(--semantic-color-background-secondary, #efefef);
+  --ds-switch-color-track-background-disabled: var(--semantic-color-background-disabled, #cecece);
+  --ds-switch-color-track-background-checked: var(--semantic-color-foreground-accent, #d9292b);
+  --ds-switch-color-track-background-error: var(--semantic-color-background-danger-subtle, #fceaea);
+  --ds-switch-color-track-border-default: var(--semantic-color-border-primary, #aeaeae);
+  --ds-switch-color-track-border-hover: var(--semantic-color-border-bold, #8f8f8f);
+  --ds-switch-color-track-border-focus: var(--semantic-color-border-accent, #d9292b);
+  --ds-switch-color-track-border-disabled: var(--semantic-color-border-disabled, #cecece);
+  --ds-switch-color-track-border-error: var(--semantic-color-border-danger, #ae0001);
+  --ds-switch-color-thumb-background-default: var(--semantic-color-background-primary, #ffffff);
+  --ds-switch-color-thumb-background-hover: var(--semantic-color-background-hover, #cecece);
+  --ds-switch-color-thumb-background-focus: var(--semantic-color-background-primary, #ffffff);
+  --ds-switch-color-thumb-background-disabled: var(--semantic-color-background-disabled, #cecece);
+  --ds-switch-color-thumb-background-checked: var(--semantic-color-foreground-on-brand, #ffffff);
+  --ds-switch-color-thumb-background-error: var(--semantic-color-background-danger-strong, #ae0001);
+  --ds-switch-color-thumb-border-default: var(--semantic-color-border-primary, #aeaeae);
+  --ds-switch-color-thumb-border-hover: var(--semantic-color-border-bold, #8f8f8f);
+  --ds-switch-color-thumb-border-focus: var(--semantic-color-border-accent, #d9292b);
+  --ds-switch-color-thumb-border-disabled: var(--semantic-color-border-disabled, #cecece);
+  --ds-switch-color-thumb-border-error: var(--semantic-color-border-danger, #ae0001);
+  --ds-switch-color-thumb-shadow: var(--semantic-elevation-surface-raised, 0px 1px 3px #0000001f);
+  --ds-switch-color-text-default: var(--semantic-color-foreground-secondary, #555555);
+  --ds-switch-color-text-hover: var(--semantic-color-foreground-primary, #141414);
+  --ds-switch-color-text-disabled: var(--semantic-color-foreground-disabled, #aeaeae);
+  --ds-switch-color-text-error: var(--semantic-color-foreground-danger, #d9292b);
 
   /* === Size Tokens === */
-  --ds-switch-size-sm-track-width: var(--core-spacing-size-08);
-  --ds-switch-size-sm-track-height: var(--core-spacing-size-06);
-  --ds-switch-size-sm-track-radius: var(--core-shape-radius-full);
-  --ds-switch-size-sm-thumb-size: var(--core-spacing-size-05);
-  --ds-switch-size-sm-thumb-offset: var(--core-spacing-size-02);
-  --ds-switch-size-sm-gap: var(--core-spacing-size-04);
-  --ds-switch-size-sm-font-size: var(--semantic-typography-caption-01);
-  --ds-switch-size-md-track-width: var(--core-spacing-size-09);
-  --ds-switch-size-md-track-height: var(--core-spacing-size-07);
-  --ds-switch-size-md-track-radius: var(--core-shape-radius-full);
-  --ds-switch-size-md-thumb-size: var(--core-spacing-size-06);
-  --ds-switch-size-md-thumb-offset: var(--core-spacing-size-02);
-  --ds-switch-size-md-gap: var(--core-spacing-size-04);
-  --ds-switch-size-md-font-size: var(--semantic-typography-body-small-font-size);
-  --ds-switch-size-lg-track-width: var(--core-spacing-size-10);
-  --ds-switch-size-lg-track-height: var(--core-spacing-size-08);
-  --ds-switch-size-lg-track-radius: var(--core-shape-radius-full);
-  --ds-switch-size-lg-thumb-size: var(--core-spacing-size-07);
-  --ds-switch-size-lg-thumb-offset: var(--core-spacing-size-02);
-  --ds-switch-size-lg-gap: var(--core-spacing-size-04);
-  --ds-switch-size-lg-font-size: var(--semantic-typography-body-default-font-size);
+  --ds-switch-size-sm-track-width: var(--core-spacing-size-08, 32px);
+  --ds-switch-size-sm-track-height: var(--core-spacing-size-06, 16px);
+  --ds-switch-size-sm-track-radius: var(--core-shape-radius-full, 9999px);
+  --ds-switch-size-sm-thumb-size: var(--core-spacing-size-05, 12px);
+  --ds-switch-size-sm-thumb-offset: var(--core-spacing-size-02, 2px);
+  --ds-switch-size-sm-gap: var(--core-spacing-size-04, 8px);
+  --ds-switch-size-sm-font-size: var(--semantic-typography-caption-01, 14px);
+  --ds-switch-size-md-track-width: var(--core-spacing-size-09, 48px);
+  --ds-switch-size-md-track-height: var(--core-spacing-size-07, 24px);
+  --ds-switch-size-md-track-radius: var(--core-shape-radius-full, 9999px);
+  --ds-switch-size-md-thumb-size: var(--core-spacing-size-06, 16px);
+  --ds-switch-size-md-thumb-offset: var(--core-spacing-size-02, 2px);
+  --ds-switch-size-md-gap: var(--core-spacing-size-04, 8px);
+  --ds-switch-size-md-font-size: var(--semantic-typography-body-small-font-size, 14px);
+  --ds-switch-size-lg-track-width: var(--core-spacing-size-10, 64px);
+  --ds-switch-size-lg-track-height: var(--core-spacing-size-08, 32px);
+  --ds-switch-size-lg-track-radius: var(--core-shape-radius-full, 9999px);
+  --ds-switch-size-lg-thumb-size: var(--core-spacing-size-07, 24px);
+  --ds-switch-size-lg-thumb-offset: var(--core-spacing-size-02, 2px);
+  --ds-switch-size-lg-gap: var(--core-spacing-size-04, 8px);
+  --ds-switch-size-lg-font-size: var(--semantic-typography-body-default-font-size, 16px);
 
   /* === Motion Tokens === */
-  --ds-switch-motion-duration: var(--semantic-motion-interaction-press-duration);
-  --ds-switch-motion-easing: var(--semantic-motion-interaction-press-easing);
+  --ds-switch-motion-duration: var(--semantic-motion-interaction-press-duration, 100ms);
+  --ds-switch-motion-easing: var(--semantic-motion-interaction-press-easing, cubic-bezier(0.4, 0, 0.2, 1));
 
   /* === Focus Tokens === */
-  --ds-switch-focus-ring: var(--semantic-interaction-focus-ring-width);
-  --ds-switch-focus-offset: var(--semantic-interaction-focus-ring-offset);
+  --ds-switch-focus-ring: var(--semantic-interaction-focus-ring-width, 2px);
+  --ds-switch-focus-offset: var(--semantic-interaction-focus-ring-offset, 2px);
 }

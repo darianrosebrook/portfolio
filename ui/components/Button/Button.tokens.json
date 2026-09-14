@@ -95,7 +95,7 @@
         "medium": "{semantic.control.size.md.height}",
         "large": "{semantic.control.size.lg.height}"
       },
-      "radius": "{core.shape.radius.full}",
+      "radius": "{semantic.shape.button.radius}",
       "border": "{core.shape.border.width.hairline}",
       "spinner": {
         "width": "{core.spacing.size.06}",

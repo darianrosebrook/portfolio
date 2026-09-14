@@ -3,46 +3,46 @@
  */
 [data-ds-component="Table"] {
   /* === Color Tokens === */
-  --ds-table-color-text: var(--semantic-color-foreground-primary);
-  --ds-table-color-text-head: var(--semantic-color-foreground-primary);
-  --ds-table-color-text-muted: var(--semantic-color-foreground-secondary);
-  --ds-table-color-border: var(--semantic-color-border-light);
-  --ds-table-color-background-hover: var(--semantic-interaction-background-hover);
-  --ds-table-color-background-selected: var(--semantic-color-background-accent);
-  --ds-table-color-background-footer: var(--semantic-color-background-secondary);
+  --ds-table-color-text: var(--semantic-color-foreground-primary, #141414);
+  --ds-table-color-text-head: var(--semantic-color-foreground-primary, #141414);
+  --ds-table-color-text-muted: var(--semantic-color-foreground-secondary, #555555);
+  --ds-table-color-border: var(--semantic-color-border-light, #fceaea);
+  --ds-table-color-background-hover: var(--semantic-interaction-background-hover, #efefef);
+  --ds-table-color-background-selected: var(--semantic-color-background-accent, #d9292b);
+  --ds-table-color-background-footer: var(--semantic-color-background-secondary, #efefef);
 
   /* === Border Tokens === */
-  --ds-table-border-width: var(--core-shape-border-width-hairline);
+  --ds-table-border-width: var(--core-shape-border-width-hairline, 1px);
 
   /* === Spacing Tokens === */
-  --ds-table-spacing-cell-x: var(--core-spacing-size-03);
-  --ds-table-spacing-cell-y: var(--core-spacing-size-02);
-  --ds-table-spacing-caption: var(--core-spacing-size-04);
-  --ds-table-spacing-sort-gap: var(--core-spacing-size-02);
-  --ds-table-spacing-checkbox-offset: var(--core-spacing-size-01);
+  --ds-table-spacing-cell-x: var(--core-spacing-size-03, 4px);
+  --ds-table-spacing-cell-y: var(--core-spacing-size-02, 2px);
+  --ds-table-spacing-caption: var(--core-spacing-size-04, 8px);
+  --ds-table-spacing-sort-gap: var(--core-spacing-size-02, 2px);
+  --ds-table-spacing-checkbox-offset: var(--core-spacing-size-01, 1px);
 
   /* === Size Tokens === */
-  --ds-table-size-cell-height: var(--semantic-control-size-md-height);
-  --ds-table-size-checkbox-column: var(--core-spacing-size-09);
-  --ds-table-size-radius: var(--semantic-shape-control-radius-default);
+  --ds-table-size-cell-height: var(--semantic-control-size-md-height, 32px);
+  --ds-table-size-checkbox-column: var(--core-spacing-size-09, 48px);
+  --ds-table-size-radius: var(--semantic-shape-control-radius-default, 8px);
 
   /* === Text Tokens === */
-  --ds-table-text-size: var(--semantic-typography-body-03);
-  --ds-table-text-line-height: var(--semantic-typography-line-height-normal);
-  --ds-table-text-size-caption: var(--semantic-typography-body-04);
-  --ds-table-text-size-sort: var(--semantic-typography-body-04);
-  --ds-table-text-weight-head: var(--semantic-typography-font-weight-bold);
-  --ds-table-text-weight-footer: var(--semantic-typography-font-weight-medium);
+  --ds-table-text-size: var(--semantic-typography-body-03, 14px);
+  --ds-table-text-line-height: var(--semantic-typography-line-height-normal, 1.5);
+  --ds-table-text-size-caption: var(--semantic-typography-body-04, 12px);
+  --ds-table-text-size-sort: var(--semantic-typography-body-04, 12px);
+  --ds-table-text-weight-head: var(--semantic-typography-font-weight-bold, 700);
+  --ds-table-text-weight-footer: var(--semantic-typography-font-weight-medium, 500);
 
   /* === Motion Tokens === */
-  --ds-table-motion-duration: var(--core-motion-duration-short);
-  --ds-table-motion-easing: var(--core-motion-easing-standard);
+  --ds-table-motion-duration: var(--core-motion-duration-short, 150ms);
+  --ds-table-motion-easing: var(--core-motion-easing-standard, cubic-bezier(0.4, 0, 0.2, 1));
 
   /* === Focus Tokens === */
-  --ds-table-focus-width: var(--core-shape-border-width-thick);
-  --ds-table-focus-color: var(--semantic-color-border-accent);
-  --ds-table-focus-offset: var(--core-spacing-size-01);
+  --ds-table-focus-width: var(--core-shape-border-width-thick, 2px);
+  --ds-table-focus-color: var(--semantic-color-border-accent, #d9292b);
+  --ds-table-focus-offset: var(--core-spacing-size-01, 1px);
 
   /* === Elevation Tokens === */
-  --ds-table-elevation-raised: var(--semantic-elevation-surface-raised);
+  --ds-table-elevation-raised: var(--semantic-elevation-surface-raised, 0px 1px 3px #0000001f);
 }

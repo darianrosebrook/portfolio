@@ -1,4 +1,4 @@
-[data-ds-component="VideoNodeView"] {
+[data-ds-component='VideoNodeView'] {
   position: relative;
   margin: var(--core-spacing-size-04) 0;
 
@@ -29,31 +29,31 @@
   }
 }
 
-[data-ds-component="VideoNodeView"][data-align='left'] .videoContainer {
+[data-ds-component='VideoNodeView'][data-align='left'] .videoContainer {
   display: inline-block;
   max-width: 50%;
   margin-right: var(--core-spacing-size-04);
 }
 
-[data-ds-component="VideoNodeView"][data-align='center'] .videoContainer {
+[data-ds-component='VideoNodeView'][data-align='center'] .videoContainer {
   display: inline-block;
   max-width: 100%;
 }
 
-[data-ds-component="VideoNodeView"][data-align='right'] .videoContainer {
+[data-ds-component='VideoNodeView'][data-align='right'] .videoContainer {
   display: inline-block;
   max-width: 50%;
   margin-left: var(--core-spacing-size-04);
 }
 
-[data-ds-component="VideoNodeView"] .videoContainer {
+[data-ds-component='VideoNodeView'] .videoContainer {
   position: relative;
   overflow: hidden;
   background: var(--semantic-color-background-secondary);
   border-radius: var(--semantic-shape-control-radius-02);
 }
 
-[data-ds-component="VideoNodeView"] .toolbar {
+[data-ds-component='VideoNodeView'] .toolbar {
   position: absolute;
   top: -40px;
   left: 50%;
@@ -88,14 +88,14 @@
   }
 }
 
-[data-ds-component="VideoNodeView"] .video {
+[data-ds-component='VideoNodeView'] .video {
   display: block;
   width: 100%;
   height: auto;
   border-radius: var(--semantic-shape-control-radius-02);
 }
 
-[data-ds-component="VideoNodeView"] .loading {
+[data-ds-component='VideoNodeView'] .loading {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -105,7 +105,7 @@
   transform: translate(-50%, -50%);
 }
 
-[data-ds-component="VideoNodeView"] .loading .spinner {
+[data-ds-component='VideoNodeView'] .loading .spinner {
   width: 32px;
   height: 32px;
   margin: 0 auto var(--core-spacing-size-02);
@@ -115,7 +115,7 @@
   animation: spin 1s linear infinite;
 }
 
-[data-ds-component="VideoNodeView"] .error {
+[data-ds-component='VideoNodeView'] .error {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -125,12 +125,12 @@
   transform: translate(-50%, -50%);
 }
 
-[data-ds-component="VideoNodeView"] .error .icon {
+[data-ds-component='VideoNodeView'] .error .icon {
   margin-bottom: var(--core-spacing-size-02);
   font-size: var(--font-size-xl);
 }
 
-[data-ds-component="VideoNodeView"] .error small {
+[data-ds-component='VideoNodeView'] .error small {
   display: block;
   margin-top: var(--core-spacing-size-01);
   color: var(--color-text-tertiary);
@@ -138,17 +138,17 @@
   word-break: break-all;
 }
 
-[data-ds-component="VideoNodeView"] .placeholder .icon {
+[data-ds-component='VideoNodeView'] .placeholder .icon {
   margin-bottom: var(--core-spacing-size-02);
   font-size: var(--font-size-2xl);
 }
 
-[data-ds-component="VideoNodeView"] .placeholder p {
+[data-ds-component='VideoNodeView'] .placeholder p {
   margin: 0;
   color: var(--color-text-secondary);
 }
 
-[data-ds-component="VideoNodeView"] .caption {
+[data-ds-component='VideoNodeView'] .caption {
   margin-top: var(--core-spacing-size-02);
   color: var(--color-text-secondary);
   font-style: italic;
@@ -167,18 +167,18 @@
 }
 
 @media (width <= 768px) {
-  [data-ds-component="VideoNodeView"][data-align='left'] .videoContainer,
-  [data-ds-component="VideoNodeView"][data-align='right'] .videoContainer {
+  [data-ds-component='VideoNodeView'][data-align='left'] .videoContainer,
+  [data-ds-component='VideoNodeView'][data-align='right'] .videoContainer {
     max-width: 100%;
     margin: 0;
   }
 
-  [data-ds-component="VideoNodeView"][data-align='left'],
-  [data-ds-component="VideoNodeView"][data-align='right'] {
+  [data-ds-component='VideoNodeView'][data-align='left'],
+  [data-ds-component='VideoNodeView'][data-align='right'] {
     text-align: center;
   }
 
-  [data-ds-component="VideoNodeView"] .toolbar {
+  [data-ds-component='VideoNodeView'] .toolbar {
     position: static;
     justify-content: center;
     margin-bottom: var(--core-spacing-size-02);

@@ -97,7 +97,7 @@
       },
       "switch.color.track.border.default": {
         "resolvesTo": "semantic.color.border.primary",
-        "fallback": "#f29495",
+        "fallback": "#aeaeae",
         "layer": "semantic"
       },
       "switch.color.track.border.hover": {
@@ -158,7 +158,7 @@
       },
       "switch.color.thumb.border.default": {
         "resolvesTo": "semantic.color.border.primary",
-        "fallback": "#f29495",
+        "fallback": "#aeaeae",
         "layer": "semantic"
       },
       "switch.color.thumb.border.hover": {
@@ -183,7 +183,7 @@
       },
       "switch.color.thumb.shadow": {
         "resolvesTo": "semantic.elevation.surface.raised",
-        "fallback": "[object Object]",
+        "fallback": "0px 1px 3px #0000001f",
         "property": "box-shadow",
         "layer": "semantic"
       },
@@ -384,7 +384,7 @@
       },
       "switch.color.track.border.default": {
         "resolvesTo": "semantic.color.border.primary",
-        "fallback": "#f29495",
+        "fallback": "#aeaeae",
         "layer": "semantic"
       },
       "switch.color.track.border.hover": {
@@ -495,7 +495,7 @@
       },
       "switch.color.thumb.border.default": {
         "resolvesTo": "semantic.color.border.primary",
-        "fallback": "#f29495",
+        "fallback": "#aeaeae",
         "layer": "semantic"
       },
       "switch.color.thumb.border.hover": {
@@ -520,7 +520,7 @@
       },
       "switch.color.thumb.shadow": {
         "resolvesTo": "semantic.elevation.surface.raised",
-        "fallback": "[object Object]",
+        "fallback": "0px 1px 3px #0000001f",
         "property": "box-shadow",
         "layer": "semantic"
       },
@@ -666,7 +666,7 @@
     "transitions": [
       {
         "name": "toggle",
-        "trigger": "checked=false\u2192true",
+        "trigger": "checked=false→true",
         "phase": "enter",
         "properties": [
           "transform"
@@ -711,7 +711,7 @@
     "category": "form-field",
     "usageHints": [
       "Use for settings that take effect immediately on toggle (no save needed)",
-      "Pair with a visible label \u2014 the Switch has no intrinsic label text",
+      "Pair with a visible label — the Switch has no intrinsic label text",
       "Use a Checkbox instead when the toggle requires a form submit to take effect"
     ],
     "children": {

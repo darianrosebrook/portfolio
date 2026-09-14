@@ -23,7 +23,7 @@
         "default": "{semantic.control.size.lg.height}"
       },
       "radius": {
-        "default": "{core.shape.radius.medium}"
+        "default": "{semantic.shape.input.radius.default}"
       }
     },
     "space": {

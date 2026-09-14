@@ -3,9 +3,9 @@
  */
 [data-ds-component="Sidebar"] {
   /* === Color Tokens === */
-  --ds-sidebar-color-border-subtle: var(--semantic-color-border-subtle);
-  --ds-sidebar-color-foreground-secondary: var(--semantic-color-foreground-secondary);
-  --ds-sidebar-color-foreground-link: var(--semantic-color-foreground-link);
+  --ds-sidebar-color-border-subtle: var(--semantic-color-border-subtle, #cecece);
+  --ds-sidebar-color-foreground-secondary: var(--semantic-color-foreground-secondary, #555555);
+  --ds-sidebar-color-foreground-link: var(--semantic-color-foreground-link, #d9292b);
 
   /* === Spacing Tokens === */
   --ds-sidebar-spacing-padding-right: 1rem;

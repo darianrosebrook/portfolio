@@ -3,73 +3,73 @@
  */
 [data-ds-component="Dialog"] {
   /* === Color Tokens === */
-  --ds-dialog-color-background-default: var(--semantic-color-background-primary);
-  --ds-dialog-color-background-backdrop: var(--semantic-color-overlay-scrim);
-  --ds-dialog-color-background-hover: var(--semantic-color-background-hover);
-  --ds-dialog-color-background-active: var(--semantic-color-background-active);
-  --ds-dialog-color-foreground-default: var(--semantic-color-foreground-primary);
-  --ds-dialog-color-foreground-title: var(--semantic-color-foreground-primary);
-  --ds-dialog-color-foreground-secondary: var(--semantic-color-foreground-secondary);
-  --ds-dialog-color-border-default: var(--semantic-color-border-subtle);
-  --ds-dialog-color-border-focus: var(--semantic-color-border-focus);
+  --ds-dialog-color-background-default: var(--semantic-color-background-primary, #ffffff);
+  --ds-dialog-color-background-backdrop: var(--semantic-color-overlay-scrim, #00000066);
+  --ds-dialog-color-background-hover: var(--semantic-color-background-hover, #cecece);
+  --ds-dialog-color-background-active: var(--semantic-color-background-active, #aeaeae);
+  --ds-dialog-color-foreground-default: var(--semantic-color-foreground-primary, #141414);
+  --ds-dialog-color-foreground-title: var(--semantic-color-foreground-primary, #141414);
+  --ds-dialog-color-foreground-secondary: var(--semantic-color-foreground-secondary, #555555);
+  --ds-dialog-color-border-default: var(--semantic-color-border-subtle, #cecece);
+  --ds-dialog-color-border-focus: var(--semantic-color-border-focus, #d9292b);
 
   /* === Size Tokens === */
   --ds-dialog-size-sm-width: 400px;
   --ds-dialog-size-sm-max-width: 90vw;
-  --ds-dialog-size-sm-padding: var(--core-spacing-size-06);
+  --ds-dialog-size-sm-padding: var(--core-spacing-size-06, 16px);
   --ds-dialog-size-md-width: 500px;
   --ds-dialog-size-md-max-width: 90vw;
-  --ds-dialog-size-md-padding: var(--core-spacing-size-07);
+  --ds-dialog-size-md-padding: var(--core-spacing-size-07, 24px);
   --ds-dialog-size-lg-width: 700px;
   --ds-dialog-size-lg-max-width: 90vw;
-  --ds-dialog-size-lg-padding: var(--core-spacing-size-08);
+  --ds-dialog-size-lg-padding: var(--core-spacing-size-08, 32px);
   --ds-dialog-size-xl-width: 900px;
   --ds-dialog-size-xl-max-width: 95vw;
-  --ds-dialog-size-xl-padding: var(--core-spacing-size-09);
+  --ds-dialog-size-xl-padding: var(--core-spacing-size-09, 48px);
   --ds-dialog-size-full-width: 100vw;
   --ds-dialog-size-full-height: 100vh;
   --ds-dialog-size-full-max-width: 100vw;
-  --ds-dialog-size-full-padding: var(--core-spacing-size-08);
-  --ds-dialog-size-radius-default: var(--core-shape-radius-large);
-  --ds-dialog-size-radius-small: var(--core-shape-radius-small);
-  --ds-dialog-size-close-button-size: var(--core-spacing-size-08);
-  --ds-dialog-size-close-button-offset: var(--core-spacing-size-04);
+  --ds-dialog-size-full-padding: var(--core-spacing-size-08, 32px);
+  --ds-dialog-size-radius-default: var(--core-shape-radius-large, 16px);
+  --ds-dialog-size-radius-small: var(--core-shape-radius-small, 4px);
+  --ds-dialog-size-close-button-size: var(--core-spacing-size-08, 32px);
+  --ds-dialog-size-close-button-offset: var(--core-spacing-size-04, 8px);
 
   /* === Elevation Tokens === */
-  --ds-dialog-elevation-default: var(--semantic-elevation-surface-floating);
+  --ds-dialog-elevation-default: var(--semantic-elevation-surface-floating, 0px 3px 6px #00000024);
 
   /* === Spacing Tokens === */
-  --ds-dialog-spacing-backdrop-padding: var(--core-spacing-size-04);
-  --ds-dialog-spacing-backdrop-padding-mobile: var(--core-spacing-size-02);
-  --ds-dialog-spacing-header-padding-top: var(--core-spacing-size-06);
-  --ds-dialog-spacing-header-padding-right: var(--core-spacing-size-07);
-  --ds-dialog-spacing-header-padding-bottom: var(--core-spacing-size-04);
-  --ds-dialog-spacing-header-padding-left: var(--core-spacing-size-07);
-  --ds-dialog-spacing-header-padding-mobile: var(--core-spacing-size-05);
-  --ds-dialog-spacing-body-padding-top: var(--core-spacing-size-04);
-  --ds-dialog-spacing-body-padding-right: var(--core-spacing-size-07);
-  --ds-dialog-spacing-body-padding-bottom: var(--core-spacing-size-04);
-  --ds-dialog-spacing-body-padding-left: var(--core-spacing-size-07);
-  --ds-dialog-spacing-body-padding-y-mobile: var(--core-spacing-size-03);
-  --ds-dialog-spacing-body-padding-x-mobile: var(--core-spacing-size-05);
-  --ds-dialog-spacing-footer-padding-top: var(--core-spacing-size-04);
-  --ds-dialog-spacing-footer-padding-right: var(--core-spacing-size-07);
-  --ds-dialog-spacing-footer-padding-bottom: var(--core-spacing-size-06);
-  --ds-dialog-spacing-footer-padding-left: var(--core-spacing-size-07);
-  --ds-dialog-spacing-footer-gap: var(--core-spacing-size-03);
-  --ds-dialog-spacing-footer-gap-mobile: var(--core-spacing-size-02);
-  --ds-dialog-spacing-footer-padding-y-mobile: var(--core-spacing-size-03);
-  --ds-dialog-spacing-footer-padding-x-mobile: var(--core-spacing-size-05);
-  --ds-dialog-spacing-footer-padding-bottom-mobile: var(--core-spacing-size-05);
+  --ds-dialog-spacing-backdrop-padding: var(--core-spacing-size-04, 8px);
+  --ds-dialog-spacing-backdrop-padding-mobile: var(--core-spacing-size-02, 2px);
+  --ds-dialog-spacing-header-padding-top: var(--core-spacing-size-06, 16px);
+  --ds-dialog-spacing-header-padding-right: var(--core-spacing-size-07, 24px);
+  --ds-dialog-spacing-header-padding-bottom: var(--core-spacing-size-04, 8px);
+  --ds-dialog-spacing-header-padding-left: var(--core-spacing-size-07, 24px);
+  --ds-dialog-spacing-header-padding-mobile: var(--core-spacing-size-05, 12px);
+  --ds-dialog-spacing-body-padding-top: var(--core-spacing-size-04, 8px);
+  --ds-dialog-spacing-body-padding-right: var(--core-spacing-size-07, 24px);
+  --ds-dialog-spacing-body-padding-bottom: var(--core-spacing-size-04, 8px);
+  --ds-dialog-spacing-body-padding-left: var(--core-spacing-size-07, 24px);
+  --ds-dialog-spacing-body-padding-y-mobile: var(--core-spacing-size-03, 4px);
+  --ds-dialog-spacing-body-padding-x-mobile: var(--core-spacing-size-05, 12px);
+  --ds-dialog-spacing-footer-padding-top: var(--core-spacing-size-04, 8px);
+  --ds-dialog-spacing-footer-padding-right: var(--core-spacing-size-07, 24px);
+  --ds-dialog-spacing-footer-padding-bottom: var(--core-spacing-size-06, 16px);
+  --ds-dialog-spacing-footer-padding-left: var(--core-spacing-size-07, 24px);
+  --ds-dialog-spacing-footer-gap: var(--core-spacing-size-03, 4px);
+  --ds-dialog-spacing-footer-gap-mobile: var(--core-spacing-size-02, 2px);
+  --ds-dialog-spacing-footer-padding-y-mobile: var(--core-spacing-size-03, 4px);
+  --ds-dialog-spacing-footer-padding-x-mobile: var(--core-spacing-size-05, 12px);
+  --ds-dialog-spacing-footer-padding-bottom-mobile: var(--core-spacing-size-05, 12px);
 
   /* === Typography Tokens === */
-  --ds-dialog-typography-title-font-size: var(--semantic-typography-heading-04);
-  --ds-dialog-typography-title-font-weight: var(--semantic-typography-font-weight-bold);
-  --ds-dialog-typography-title-line-height: var(--semantic-typography-line-height-heading);
+  --ds-dialog-typography-title-font-size: var(--semantic-typography-heading-04, 18px);
+  --ds-dialog-typography-title-font-weight: var(--semantic-typography-font-weight-bold, 700);
+  --ds-dialog-typography-title-line-height: var(--semantic-typography-line-height-heading, 1);
 
   /* === Motion Tokens === */
-  --ds-dialog-motion-duration-enter: var(--semantic-motion-interaction-enter-duration);
-  --ds-dialog-motion-duration-exit: var(--semantic-motion-interaction-exit-duration);
-  --ds-dialog-motion-easing-enter: var(--semantic-motion-interaction-enter-easing);
-  --ds-dialog-motion-easing-exit: var(--semantic-motion-interaction-exit-easing);
+  --ds-dialog-motion-duration-enter: var(--semantic-motion-interaction-enter-duration, 250ms);
+  --ds-dialog-motion-duration-exit: var(--semantic-motion-interaction-exit-duration, 167ms);
+  --ds-dialog-motion-easing-enter: var(--semantic-motion-interaction-enter-easing, cubic-bezier(0, 0, 0.7, 1));
+  --ds-dialog-motion-easing-exit: var(--semantic-motion-interaction-exit-easing, cubic-bezier(1, 0, 1, 1));
 }

@@ -117,7 +117,7 @@
       },
       "details.color.border.default": {
         "resolvesTo": "semantic.color.border.primary",
-        "fallback": "#f29495",
+        "fallback": "#aeaeae",
         "property": "border-color",
         "layer": "semantic"
       },
@@ -259,7 +259,7 @@
     "category": "content",
     "usageHints": [
       "Use for progressive disclosure of non-critical detail",
-      "Not for navigation \u2014 use Accordion for a multi-section expand/collapse list",
+      "Not for navigation — use Accordion for a multi-section expand/collapse list",
       "The summary is always visible; the content is hidden until expanded"
     ],
     "children": {

@@ -88,7 +88,7 @@
       },
       "status.color.border.default": {
         "resolvesTo": "semantic.color.border.primary",
-        "fallback": "#f29495",
+        "fallback": "#aeaeae",
         "property": "border-color",
         "layer": "semantic"
       },

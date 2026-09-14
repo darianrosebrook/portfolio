@@ -3,22 +3,22 @@
  */
 [data-ds-component="Calendar"] {
   /* === Color Tokens === */
-  --ds-calendar-color-background-default: var(--semantic-color-background-secondary);
-  --ds-calendar-color-background-image-overlay: var(--semantic-color-background-image-overlay);
-  --ds-calendar-color-foreground-primary: var(--semantic-color-foreground-primary);
-  --ds-calendar-color-foreground-secondary: var(--semantic-color-foreground-secondary);
-  --ds-calendar-color-border-default: var(--semantic-color-border-light);
-  --ds-calendar-color-border-accent: var(--semantic-color-border-accent);
+  --ds-calendar-color-background-default: var(--semantic-color-background-secondary, #efefef);
+  --ds-calendar-color-background-image-overlay: var(--semantic-color-background-image-overlay, rgba(0, 0, 0, 0.5));
+  --ds-calendar-color-foreground-primary: var(--semantic-color-foreground-primary, #141414);
+  --ds-calendar-color-foreground-secondary: var(--semantic-color-foreground-secondary, #555555);
+  --ds-calendar-color-border-default: var(--semantic-color-border-light, #fceaea);
+  --ds-calendar-color-border-accent: var(--semantic-color-border-accent, #d9292b);
 
   /* === Size Tokens === */
-  --ds-calendar-size-padding-default: var(--core-spacing-size-07);
-  --ds-calendar-size-radius-default: var(--core-shape-radius-medium);
+  --ds-calendar-size-padding-default: var(--core-spacing-size-07, 24px);
+  --ds-calendar-size-radius-default: var(--core-shape-radius-medium, 8px);
 
   /* === Elevation Tokens === */
-  --ds-calendar-elevation-default: var(--semantic-elevation-default);
-  --ds-calendar-elevation-hover: var(--semantic-elevation-surface-floating);
+  --ds-calendar-elevation-default: var(--semantic-elevation-default, 0px 1px 3px #0000001f);
+  --ds-calendar-elevation-hover: var(--semantic-elevation-surface-floating, 0px 3px 6px #00000024);
 
   /* === Motion Tokens === */
-  --ds-calendar-motion-duration: var(--core-motion-duration-short);
-  --ds-calendar-motion-easing: var(--core-motion-easing-standard);
+  --ds-calendar-motion-duration: var(--core-motion-duration-short, 150ms);
+  --ds-calendar-motion-easing: var(--core-motion-easing-standard, cubic-bezier(0.4, 0, 0.2, 1));
 }

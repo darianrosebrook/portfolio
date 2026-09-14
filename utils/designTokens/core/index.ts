@@ -213,6 +213,26 @@ export function tokenPathToCSSVar(tokenPath: string, prefix = '--'): string {
 }
 
 /**
+ * Convert a token path in REFERENCE position (the target of a `{...}` alias
+ * or a var() chain) to a CSS custom property name.
+ *
+ * Reference resolution defaults unrecognized paths to the semantic namespace:
+ * every core primitive matches a corePattern, and brand overrides are
+ * processed separately with explicit `semantic.` path building, so an
+ * unprefixed non-core reference always points at a semantic-layer token.
+ * Declaration naming (tokenPathToCSSVar) keeps its null default so custom
+ * namespaces are emitted verbatim rather than guessed at.
+ */
+export function referencePathToCSSVar(
+  tokenPath: string,
+  prefix = '--'
+): string {
+  const namespace = determineNamespace(tokenPath);
+  if (namespace) return tokenPathToCSSVar(tokenPath, prefix);
+  return tokenPathToCSSVar(`semantic.${tokenPath}`, prefix);
+}
+
+/**
  * Extract all token paths from a token tree
  */
 export function extractTokenPaths(obj: TokenGroup, prefix = ''): string[] {

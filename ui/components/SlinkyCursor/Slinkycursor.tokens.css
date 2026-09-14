@@ -3,9 +3,9 @@
  */
 [data-ds-component="Slinkycursor"] {
   /* === Color Tokens === */
-  --ds-slinkycursor-color-border-primary: var(--semantic-color-border-primary);
-  --ds-slinkycursor-color-border-hover: var(--semantic-color-border-hover);
+  --ds-slinkycursor-color-border-primary: var(--semantic-color-border-primary, #aeaeae);
+  --ds-slinkycursor-color-border-hover: var(--semantic-color-border-hover, #f29495);
 
   /* === Shape Tokens === */
-  --ds-slinkycursor-shape-radius-full: var(--core-shape-radius-full);
+  --ds-slinkycursor-shape-radius-full: var(--core-shape-radius-full, 9999px);
 }
